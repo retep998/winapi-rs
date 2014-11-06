@@ -1318,7 +1318,7 @@ pub mod funcs {
             csidl: c_int,
             hToken: HANDLE,
             dwFlags: DWORD,
-            ppidl: PIDLIST_ABSOLUTE,
+            ppidl: *mut PIDLIST_ABSOLUTE,
         ) -> HRESULT;
         pub fn SHGetFolderPathA(
             hwnd: HWND,
@@ -1375,7 +1375,7 @@ pub mod funcs {
             rfid: REFKNOWNFOLDERID,
             dwFlags: DWORD,
             hToken: HANDLE,
-            pszPath: PWSTR,
+            pszPath: *mut PWSTR,
         ) -> HRESULT;
         pub fn SHGetPathFromIDListA(
             pidl: PCIDLIST_ABSOLUTE,
