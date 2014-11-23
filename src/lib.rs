@@ -225,7 +225,11 @@ pub type DWORD64 = __uint64;
 pub type PDWORD64 = *mut __uint64;
 pub type KAFFINITY = ULONG_PTR;
 pub type PKAFFINITY = *mut KAFFINITY;
+//-------------------------------------------------------------------------------------------------
 // winnt.h
+// This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed
+// through the Win32 API.
+//-------------------------------------------------------------------------------------------------
 pub type PVOID = *mut c_void;
 pub type PVOID64 = u64; // This is a 64-bit pointer, even when in 32-bit
 pub type VOID = c_void;
@@ -434,6 +438,50 @@ pub struct XSAVE_FORMAT { // FIXME align 16
     pub XmmRegisters: [M128A, ..16],
     pub Reserved4: [BYTE, ..96],
 }
+#[repr(C)]
+pub struct TOKEN_PRIVILEGES {
+    PrivilegeCount: DWORD,
+    Privileges: [LUID_AND_ATTRIBUTES, ..0],
+}
+pub type PTOKEN_PRIVILEGES = *mut TOKEN_PRIVILEGES;
+#[repr(C)]
+pub struct LUID_AND_ATTRIBUTES {
+    Luid: LUID,
+    Attributes: DWORD,
+}
+pub type PLUID_AND_ATTRIBUTES = *mut LUID_AND_ATTRIBUTES;
+pub const DELETE: DWORD = 0x00010000;
+pub const READ_CONTROL: DWORD = 0x00020000;
+pub const WRITE_DAC: DWORD = 0x00040000;
+pub const WRITE_OWNER: DWORD = 0x00080000;
+pub const SYNCHRONIZE: DWORD = 0x00100000;
+pub const STANDARD_RIGHTS_REQUIRED: DWORD = 0x000F0000;
+pub const STANDARD_RIGHTS_READ: DWORD = READ_CONTROL;
+pub const STANDARD_RIGHTS_WRITE: DWORD = READ_CONTROL;
+pub const STANDARD_RIGHTS_EXECUTE: DWORD = READ_CONTROL;
+pub const STANDARD_RIGHTS_ALL: DWORD = 0x001F0000;
+pub const SPECIFIC_RIGHTS_ALL: DWORD = 0x0000FFFF;
+pub const ACCESS_SYSTEM_SECURITY: DWORD = 0x01000000;
+pub const MAXIMUM_ALLOWED: DWORD = 0x02000000;
+pub const GENERIC_READ: DWORD = 0x80000000;
+pub const GENERIC_WRITE: DWORD = 0x40000000;
+pub const GENERIC_EXECUTE: DWORD = 0x20000000;
+pub const GENERIC_ALL: DWORD = 0x10000000;
+pub const PROCESS_TERMINATE: DWORD = 0x0001;
+pub const PROCESS_CREATE_THREAD: DWORD = 0x0002;
+pub const PROCESS_SET_SESSIONID: DWORD = 0x0004;
+pub const PROCESS_VM_OPERATION: DWORD = 0x0008;
+pub const PROCESS_VM_READ: DWORD = 0x0010;
+pub const PROCESS_VM_WRITE: DWORD = 0x0020;
+pub const PROCESS_DUP_HANDLE: DWORD = 0x0040;
+pub const PROCESS_CREATE_PROCESS: DWORD = 0x0080;
+pub const PROCESS_SET_QUOTA: DWORD = 0x0100;
+pub const PROCESS_SET_INFORMATION: DWORD = 0x0200;
+pub const PROCESS_QUERY_INFORMATION: DWORD = 0x0400;
+pub const PROCESS_SUSPEND_RESUME: DWORD = 0x0800;
+pub const PROCESS_QUERY_LIMITED_INFORMATION: DWORD = 0x1000;
+pub const PROCESS_SET_LIMITED_INFORMATION: DWORD = 0x2000;
+pub const PROCESS_ALL_ACCESS: DWORD = STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xFFFF;
 // guiddef.h
 #[repr(C)]
 pub struct GUID {
@@ -1467,7 +1515,6 @@ pub const FOLDERID_SearchHistory: GUID = GUID { Data1: 0x0d4c3db6, Data2: 0x03a3
 pub const FOLDERID_SearchTemplates: GUID = GUID { Data1: 0x7e636bfe, Data2: 0xdfa9, Data3: 0x4d5e, Data4: [0xb4, 0x56, 0xd7, 0xb3, 0x98, 0x51, 0xd8, 0xa9]};
 // constants
 pub static INVALID_HANDLE_VALUE: HANDLE = -1 as HANDLE;
-pub static PROCESS_QUERY_INFORMATION: DWORD = 0x400;
 // error codes
 pub static ERROR_INVALID_HANDLE: DWORD = 6;
 pub static ERROR_ILLEGAL_CHARACTER: DWORD = 582;
@@ -1489,7 +1536,7 @@ pub static ENABLE_WRAP_AT_EOL_OUTPUT: DWORD = 0x2;
 // Functions
 //-------------------------------------------------------------------------------------------------
 
-#[link(name = "Ole32")]
+#[link(name = "ole32")]
 extern "system" {
     pub fn CoAllowUnmarshalerCLSID(
         clsid: REFCLSID,
@@ -1712,7 +1759,6 @@ extern "system" {
     ) -> HRESULT;
 }
 #[link(name = "kernel32")]
-#[link(name = "psapi")]
 extern "system" {
     pub fn CloseHandle(
         hObject: HANDLE,
@@ -1728,11 +1774,6 @@ extern "system" {
         lpMode: LPDWORD,
     ) -> BOOL;
     pub fn GetLastError() -> DWORD;
-    pub fn GetProcessMemoryInfo(
-        Process: HANDLE,
-        ppsmemCounters: PPROCESS_MEMORY_COUNTERS,
-        cb: DWORD,
-    ) -> BOOL;
     pub fn GetProcessTimes(
         hProcess: HANDLE,
         lpCreationTime: LPFILETIME,
@@ -1757,6 +1798,13 @@ extern "system" {
         lpNumberOfCharsRead: LPDWORD,
         pInputControl: PCONSOLE_READCONSOLE_CONTROL,
     ) -> BOOL;
+    pub fn ReadProcessMemory(
+        hProcess: HANDLE,
+        lpBaseAddress: LPCVOID,
+        lpBuffer: LPVOID,
+        nSize: SIZE_T,
+        lpNumberOfBytesRead: *mut SIZE_T,
+    ) -> BOOL;
     pub fn SetConsoleMode(
         hConsoleHandle: HANDLE,
         lpMode: DWORD,
@@ -1767,5 +1815,23 @@ extern "system" {
         nNumberOfCharsToWrite: DWORD,
         lpNumberOfCharsWritten: LPDWORD,
         lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn WriteProcessMemory(
+        hProcess: HANDLE,
+        lpBaseAddress: LPVOID,
+        lpBuffer: LPCVOID,
+        nSize: SIZE_T,
+        lpNumberOfBytesWritten: *mut SIZE_T,
+    ) -> BOOL;
+}
+#[link(name = "advapi32")]
+extern "system" {
+    pub fn AdjustTokenPrivileges(
+        TokenHandle: HANDLE,
+        DisableAllPrivileges: BOOL,
+        NewState: PTOKEN_PRIVILEGES,
+        BufferLength: DWORD,
+        PreviousState: PTOKEN_PRIVILEGES,
+        ReturnLength: PDWORD,
     ) -> BOOL;
 }
