@@ -1654,13 +1654,6 @@ extern "system" {
         dwFlags: DWORD,
         pszPath: LPSTR,
     ) -> HRESULT;
-    pub fn SHGetFolderPathW(
-        hwnd: HWND,
-        csidl: c_int,
-        hToken: HANDLE,
-        dwFlags: DWORD,
-        pszPath: LPWSTR,
-    ) -> HRESULT;
     pub fn SHGetFolderPathAndSubDirA(
         hwnd: HWND,
         csidl: c_int,
@@ -1675,6 +1668,13 @@ extern "system" {
         hToken: HANDLE,
         dwFlags: DWORD,
         pszSubDir: LPCWSTR,
+        pszPath: LPWSTR,
+    ) -> HRESULT;
+    pub fn SHGetFolderPathW(
+        hwnd: HWND,
+        csidl: c_int,
+        hToken: HANDLE,
+        dwFlags: DWORD,
         pszPath: LPWSTR,
     ) -> HRESULT;
     pub fn SHGetIconOverlayIndexA(
@@ -1708,15 +1708,15 @@ extern "system" {
         pidl: PCIDLIST_ABSOLUTE,
         pszPath: LPSTR,
     ) -> BOOL;
-    pub fn SHGetPathFromIDListW(
-        pidl: PCIDLIST_ABSOLUTE,
-        pszPath: LPWSTR,
-    ) -> BOOL;
     pub fn SHGetPathFromIDListEx(
         pidl: PCIDLIST_ABSOLUTE,
         pszPath: PWSTR,
         cchPath: DWORD,
         uOpts: GPFIDL_FLAGS,
+    ) -> BOOL;
+    pub fn SHGetPathFromIDListW(
+        pidl: PCIDLIST_ABSOLUTE,
+        pszPath: LPWSTR,
     ) -> BOOL;
     pub fn SHGetSpecialFolderLocation(
         hwnd: HWND,
@@ -1837,5 +1837,19 @@ extern "system" {
         BufferLength: DWORD,
         PreviousState: PTOKEN_PRIVILEGES,
         ReturnLength: PDWORD,
+    ) -> BOOL;
+}
+#[cfg(feature = "winmm")]
+#[link(name = "winmm")]
+extern "system" {
+    pub fn PlaySoundA(
+        pszSound: LPCSTR,
+        hmod: HMODULE,
+        fdwSound: DWORD,
+    ) -> BOOL;
+    pub fn PlaySoundW(
+        pszSound: LPCWSTR,
+        hmod: HMODULE,
+        fdwSound: DWORD,
     ) -> BOOL;
 }
