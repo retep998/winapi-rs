@@ -1536,6 +1536,7 @@ pub static ENABLE_WRAP_AT_EOL_OUTPUT: DWORD = 0x2;
 // Functions
 //-------------------------------------------------------------------------------------------------
 
+#[cfg(feature = "ole32")]
 #[link(name = "ole32")]
 extern "system" {
     pub fn CoAllowUnmarshalerCLSID(
@@ -1610,6 +1611,7 @@ extern "system" {
         phglobal: *mut HGLOBAL,
     ) -> HRESULT;
 }
+#[cfg(feature = "shell32")]
 #[link(name = "shell32")]
 extern "system" {
     pub fn SHCloneSpecialIDList(
@@ -1758,6 +1760,7 @@ extern "system" {
         pszPath: PCWSTR,
     ) -> HRESULT;
 }
+#[cfg(feature = "kernel32")]
 #[link(name = "kernel32")]
 extern "system" {
     pub fn CloseHandle(
@@ -1824,6 +1827,7 @@ extern "system" {
         lpNumberOfBytesWritten: *mut SIZE_T,
     ) -> BOOL;
 }
+#[cfg(feature = "advapi32")]
 #[link(name = "advapi32")]
 extern "system" {
     pub fn AdjustTokenPrivileges(
