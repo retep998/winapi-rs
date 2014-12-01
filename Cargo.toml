@@ -11,7 +11,9 @@ license = "MIT"
 
 [features]
 advapi32 = []
+gdi32 = []
 kernel32 = []
 ole32 = []
 shell32 = []
+user32 = []
 winmm = []
