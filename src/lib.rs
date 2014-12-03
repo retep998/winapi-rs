@@ -2462,6 +2462,16 @@ extern "system" {
     ) -> HRESULT;
     pub fn CoRevokeClassObject(
     ) -> HRESULT;
+    pub fn CoTaskMemAlloc(
+        cb: SIZE_T,
+    ) -> LPVOID;
+    pub fn CoTaskMemFree(
+        pv: LPVOID,
+    );
+    pub fn CoTaskMemRealloc(
+        pv: LPVOID,
+        cb: SIZE_T,
+    ) -> LPVOID;
     pub fn CoUninitialize();
     pub fn CreateStreamOnHGlobal(
         hGlobal: HGLOBAL,
@@ -2472,16 +2482,6 @@ extern "system" {
         pstm: LPSTREAM,
         phglobal: *mut HGLOBAL,
     ) -> HRESULT;
-    pub fn CoTaskMemAlloc(
-        cb: SIZE_T,
-    ) -> LPVOID;
-    pub fn CoTaskMemRealloc(
-        pv: LPVOID,
-        cb: SIZE_T,
-    ) -> LPVOID;
-    pub fn CoTaskMemFree(
-        pv: LPVOID,
-    );
 }
 #[cfg(feature = "shell32")]
 #[link(name = "shell32")]
@@ -2551,11 +2551,11 @@ extern "system" {
     ) -> HRESULT;
     pub fn SHGetIconOverlayIndexA(
         pszIconPath: LPCSTR,
-        iIconIndex: c_int
+        iIconIndex: c_int,
     ) -> c_int;
     pub fn SHGetIconOverlayIndexW(
         pszIconPath: LPCWSTR,
-        iIconIndex: c_int
+        iIconIndex: c_int,
     ) -> c_int;
     pub fn SHGetKnownFolderIDList(
         rfid: REFKNOWNFOLDERID,
@@ -2611,7 +2611,7 @@ extern "system" {
         pidlFolder: PCIDLIST_ABSOLUTE,
         cidl: UINT,
         apidl: PCUITEMID_CHILD_ARRAY,
-        dwFlags: DWORD
+        dwFlags: DWORD,
     ) -> HRESULT;
     pub fn SHSetFolderPathA(
         csidl: c_int,
@@ -2890,7 +2890,7 @@ extern "system" {
 extern "system" {
     pub fn ChoosePixelFormat(
         hdc: HDC,
-        ppfd: *const PIXELFORMATDESCRIPTOR
+        ppfd: *const PIXELFORMATDESCRIPTOR,
     ) -> c_int;
     pub fn DescribePixelFormat(
         hdc: HDC,
@@ -2901,7 +2901,7 @@ extern "system" {
     pub fn SetPixelFormat(
         hdc: HDC,
         iPixelFormat: c_int,
-        ppfd: *const PIXELFORMATDESCRIPTOR
+        ppfd: *const PIXELFORMATDESCRIPTOR,
     ) -> BOOL;
     pub fn SwapBuffers(
         hdc: HDC,
