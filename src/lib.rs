@@ -2472,6 +2472,16 @@ extern "system" {
         pstm: LPSTREAM,
         phglobal: *mut HGLOBAL,
     ) -> HRESULT;
+    pub fn CoTaskMemAlloc(
+        cb: SIZE_T,
+    ) -> LPVOID;
+    pub fn CoTaskMemRealloc(
+        pv: LPVOID,
+        cb: SIZE_T,
+    ) -> LPVOID;
+    pub fn CoTaskMemFree(
+        pv: LPVOID,
+    );
 }
 #[cfg(feature = "shell32")]
 #[link(name = "shell32")]
