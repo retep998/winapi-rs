@@ -2711,6 +2711,11 @@ extern "system" {
         nSize: SIZE_T,
         lpNumberOfBytesWritten: *mut SIZE_T,
     ) -> BOOL;
+    // http://msdn.microsoft.com/library/windows/desktop/ms687393%28v=vs.85%29.aspx
+    pub fn WinExec (
+        lpCmdLine: LPCSTR,
+        uCmdShow: UINT
+    ) -> UINT;
 }
 #[cfg(feature = "advapi32")]
 #[link(name = "advapi32")]
