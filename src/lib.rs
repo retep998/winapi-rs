@@ -1192,6 +1192,352 @@ pub type OLECHAR = WCHAR;
 pub type LPOLESTR = *mut OLECHAR;
 
 //-------------------------------------------------------------------------------------------------
+// wtypes.h
+//-------------------------------------------------------------------------------------------------
+pub const CLSCTX_INPROC_SERVER: DWORD = 0x1;
+pub const CLSCTX_INPROC_HANDLER: DWORD = 0x2;
+pub const CLSCTX_LOCAL_SERVER: DWORD = 0x4;
+pub const CLSCTX_REMOTE_SERVER: DWORD = 0x10;
+pub const CLSCTX_SERVER: DWORD = CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER |
+                                 CLSCTX_REMOTE_SERVER;
+pub const CLSCTX_ALL: DWORD = CLSCTX_INPROC_HANDLER | CLSCTX_SERVER;
+
+pub type VARTYPE = c_ushort;
+
+//-------------------------------------------------------------------------------------------------
+// mmdeviceapi.h
+//-------------------------------------------------------------------------------------------------
+#[repr(C)]
+pub enum EDataFlow { 
+    eRender,
+    eCapture,
+    eAll,
+    EDataFlow_enum_count,
+}
+
+#[repr(C)]
+pub enum ERole { 
+    eConsole,
+    eMultimedia,
+    eCommunications,
+    ERole_enum_count,
+}
+
+pub const CLSID_MMDeviceEnumerator: CLSID = GUID {
+    Data1: 0xBCDE0395,
+    Data2: 0xE52F,
+    Data3: 0x467C,
+    Data4: [0x8E, 0x3D, 0xC4, 0x57, 0x92, 0x91, 0x69, 0x2E],
+};
+
+pub const IID_IMMDeviceEnumerator: IID = GUID {
+    Data1: 0xA95664D2,
+    Data2: 0x9614,
+    Data3: 0x4F35,
+    Data4: [0xA7, 0x46, 0xDE, 0x8D, 0xB6, 0x36, 0x17, 0xE6],
+};
+
+#[repr(C)]
+pub struct IMMDeviceVtbl {
+    pub QueryInterface: extern "system" fn(
+        This: *mut IMMDevice,
+        riid: REFIID,
+        ppvObject: *mut *mut c_void,
+    ) -> HRESULT,
+    pub AddRef: extern "system" fn(
+        This: *mut IMMDevice,
+    ) -> ULONG,
+    pub Release: extern "system" fn(
+        This: *mut IMMDevice,
+    ) -> ULONG,
+    pub Activate: extern "system" fn(
+        This: *mut IMMDevice,
+        iid: REFIID,
+        dwClsCtx: DWORD,
+        pActivationParams: *mut PROPVARIANT,
+        ppInterface: *mut LPVOID,
+    ) -> HRESULT,
+    pub OpenPropertyStore: extern "system" fn(
+        This: *mut IMMDevice,
+        stgmAccess: DWORD,
+        ppProperties: *mut *mut IPropertyStore,
+    ) -> HRESULT,
+    pub GetId: extern "system" fn(
+        This: *mut IMMDevice,
+        ppstrId: *mut LPWSTR,
+    ) -> HRESULT,
+    pub GetState: extern "system" fn(
+        This: *mut IMMDevice,
+        pdwState: *mut DWORD,
+    ) -> HRESULT,
+}
+#[repr(C)]
+pub struct IMMDevice {
+    pub lpVtbl: *const IMMDeviceVtbl,
+}
+#[repr(C)]
+pub struct IMMDeviceEnumeratorVtbl {
+    pub QueryInterface: extern "system" fn(
+        This: *mut IMMDeviceEnumerator,
+        riid: REFIID,
+        ppvObject: *mut *mut c_void,
+    ) -> HRESULT,
+    pub AddRef: extern "system" fn(
+        This: *mut IMMDeviceEnumerator,
+    ) -> ULONG,
+    pub Release: extern "system" fn(
+        This: *mut IMMDeviceEnumerator,
+    ) -> ULONG,
+    pub EnumAudioEndpoints: extern "system" fn(
+        This: *mut IMMDeviceEnumerator,
+        dataFlow: EDataFlow,
+        dwStateMask: DWORD,
+        ppDevices: *mut *mut IMMDeviceCollection,
+    ) -> HRESULT,
+    pub GetDefaultAudioEndpoint: extern "system" fn(
+        This: *mut IMMDeviceEnumerator,
+        dataFlow: EDataFlow,
+        role: ERole,
+        ppEndpoint: *mut *mut IMMDevice,
+    ) -> HRESULT,
+    pub GetDevice: extern "system" fn(
+        This: *mut IMMDeviceEnumerator,
+        pwstrId: LPCWSTR,
+        ppDevices: *mut *mut IMMDevice,
+    ) -> HRESULT,
+    pub RegisterEndpointNotificationCallback: extern "system" fn(
+        This: *mut IMMDeviceEnumerator,
+        pClient: *mut IMMNotificationClient,
+    ) -> HRESULT,
+    pub UnregisterEndpointNotificationCallback: extern "system" fn(
+        This: *mut IMMDeviceEnumerator,
+        pClient: *mut IMMNotificationClient,
+    ) -> HRESULT,
+}
+#[repr(C)]
+pub struct IMMDeviceEnumerator {
+    pub lpVtbl: *const IMMDeviceEnumeratorVtbl,
+}
+#[repr(C)]
+pub struct IMMDeviceCollection;
+#[repr(C)]
+pub struct IMMNotificationClient;
+
+//-------------------------------------------------------------------------------------------------
+// audioclient.h
+//-------------------------------------------------------------------------------------------------
+pub const IID_IAudioClient: IID = GUID {
+    Data1: 0x1CB9AD4C,
+    Data2: 0xDBFA,
+    Data3: 0x4c32,
+    Data4: [0xB1, 0x78, 0xC2, 0xF5, 0x68, 0xA7, 0x03, 0xB2],
+};
+
+pub const IID_IAudioRenderClient: IID = GUID {
+    Data1: 0xF294ACFC,
+    Data2: 0x3146,
+    Data3: 0x4483,
+    Data4: [0xA7, 0xBF, 0xAD, 0xDC, 0xA7, 0xC2, 0x60, 0xE2],
+};
+
+// TODO: check these values
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_NOT_INITIALIZED: HRESULT = 0x88890001;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_ALREADY_INITIALIZED: HRESULT = 0x88890002;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_WRONG_ENDPOINT_TYPE: HRESULT = 0x88890003;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_DEVICE_INVALIDATED: HRESULT = 0x88890004;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_NOT_STOPPED: HRESULT = 0x88890005;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_BUFFER_TOO_LARGE: HRESULT = 0x888900086;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_OUT_OF_ORDER: HRESULT = 0x88890007;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_UNSUPPORTED_FORMAT: HRESULT = 0x88890008;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_INVALID_SIZE: HRESULT = 0x88890009;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_DEVICE_IN_USE: HRESULT = 0x8889000a;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_BUFFER_OPERATION_PENDING: HRESULT = 0x8889000b;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_THREAD_NOT_REGISTERED: HRESULT = 0x8889000c;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_EXCLUSIVE_MODE_NOT_ALLOWED: HRESULT = 0x8889000e;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_ENDPOINT_CREATE_FAILED: HRESULT = 0x8889000f;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_SERVICE_NOT_RUNNING: HRESULT = 0x88890010;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_EVENTHANDLE_NOT_EXPECTED: HRESULT = 0x88890011;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_EXCLUSIVE_MODE_ONLY: HRESULT = 0x88890012;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_BUFDURATION_PERIOD_NOT_EQUAL: HRESULT = 0x88890013;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_EVENTHANDLE_NOT_SET: HRESULT = 0x88890014;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_INCORRECT_BUFFER_SIZE: HRESULT = 0x88890015;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_BUFFER_SIZE_ERROR: HRESULT = 0x88890016;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_CPUUSAGE_EXCEEDED: HRESULT = 0x88890017;
+// TODO: check these values even more
+pub const AUDCLNT_S_BUFFER_EMPTY: HRESULT = 0x8890001;
+pub const AUDCLNT_S_THREAD_ALREADY_REGISTERED: HRESULT = 0x8890002;
+pub const AUDCLNT_S_POSITION_STALLED: HRESULT = 0x8890003;
+
+#[repr(C)]
+pub struct IAudioClientVtbl {
+    pub QueryInterface: extern "system" fn(
+        This: *mut IAudioClient,
+        riid: REFIID,
+        ppvObject: *mut *mut c_void,
+    ) -> HRESULT,
+    pub AddRef: extern "system" fn(
+        This: *mut IAudioClient,
+    ) -> ULONG,
+    pub Release: extern "system" fn(
+        This: *mut IAudioClient,
+    ) -> ULONG,
+    pub Initialize: extern "system" fn(
+        This: *mut IAudioClient,
+        ShareMode: AUDCLNT_SHAREMODE,
+        StreamFlags: DWORD,
+        hnsBufferDuration: REFERENCE_TIME,
+        hnsPeriodicity: REFERENCE_TIME,
+        pFormat: *const WAVEFORMATEX,
+        AudioSessionGuid: LPCGUID,
+    ) -> HRESULT,
+    pub GetBufferSize: extern "system" fn(
+        This: *mut IAudioClient,
+        pNumBufferFrames: *mut UINT32,
+    ) -> HRESULT,
+    pub GetStreamLatency: extern "system" fn(
+        This: *mut IAudioClient,
+        phnsLatency: REFERENCE_TIME
+    ) -> HRESULT,
+    pub GetCurrentPadding: extern "system" fn(
+        This: *mut IAudioClient,
+        pNumPaddingFrames: *mut UINT32,
+    ) -> HRESULT,
+    pub IsFormatSupported: extern "system" fn(
+        This: *mut IAudioClient,
+        ShareMode: AUDCLNT_SHAREMODE,
+        pFormat: *const WAVEFORMATEX,
+        ppClosestMatch: *mut *mut WAVEFORMATEX,
+    ) -> HRESULT,
+    pub GetMixFormat: extern "system" fn(
+        This: *mut IAudioClient,
+        ppDeviceFormat: *mut *mut WAVEFORMATEX,
+    ) -> HRESULT,
+    pub GetDevicePeriod: extern "system" fn(
+        This: *mut IAudioClient,
+        phnsDefaultDevicePeriod: *mut REFERENCE_TIME,
+        phnsMinimumDevicePeriod: *mut REFERENCE_TIME,
+    ) -> HRESULT,
+    pub Start: extern "system" fn(
+        This: *mut IAudioClient,
+    ) -> HRESULT,
+    pub Stop: extern "system" fn(
+        This: *mut IAudioClient,
+    ) -> HRESULT,
+    pub Reset: extern "system" fn(
+        This: *mut IAudioClient,
+    ) -> HRESULT,
+    pub SetEventHandle: extern "system" fn(
+        This: *mut IAudioClient,
+        eventHandle: HANDLE,
+    ) -> HRESULT,
+    pub GetService: extern "system" fn(
+        This: *mut IAudioClient,
+        riid: REFIID,
+        ppv: *mut LPVOID,
+    ) -> HRESULT,
+}
+#[repr(C)]
+pub struct IAudioClient {
+    pub lpVtbl: *const IAudioClientVtbl,
+}
+#[repr(C)]
+pub struct IAudioRenderClientVtbl {
+    pub QueryInterface: extern "system" fn(
+        This: *mut IAudioRenderClient,
+        riid: REFIID,
+        ppvObject: *mut *mut c_void,
+    ) -> HRESULT,
+    pub AddRef: extern "system" fn(
+        This: *mut IAudioRenderClient,
+    ) -> ULONG,
+    pub Release: extern "system" fn(
+        This: *mut IAudioRenderClient,
+    ) -> ULONG,
+    pub GetBuffer: extern "system" fn(
+        This: *mut IAudioRenderClient,
+        NumFramesRequested: UINT32,
+        ppData: *mut *mut BYTE,
+    ) -> HRESULT,
+    pub ReleaseBuffer: extern "system" fn(
+        This: *mut IAudioRenderClient,
+        NumFramesWritten: UINT32,
+        dwFlags: DWORD,
+    ) -> HRESULT,
+}
+#[repr(C)]
+pub struct IAudioRenderClient {
+    pub lpVtbl: *const IAudioRenderClientVtbl,
+}
+
+//-------------------------------------------------------------------------------------------------
+// audiosessiontypes.h
+//-------------------------------------------------------------------------------------------------
+#[repr(C)]
+pub enum AUDCLNT_SHAREMODE {
+    AUDCLNT_SHAREMODE_SHARED,
+    AUDCLNT_SHAREMODE_EXCLUSIVE
+}
+
+//-------------------------------------------------------------------------------------------------
+// strmif.h
+//-------------------------------------------------------------------------------------------------
+pub type REFERENCE_TIME = LONGLONG;
+
+//-------------------------------------------------------------------------------------------------
+// mmreg.h
+//-------------------------------------------------------------------------------------------------
+#[repr(C)]
+pub struct WAVEFORMATEX {
+    pub wFormatTag: WORD,
+    pub nChannels: WORD,
+    pub nSamplesPerSec: DWORD,
+    pub nAvgBytesPerSec: DWORD,
+    pub nBlockAlign: WORD,
+    pub wBitsPerSample: WORD,
+    pub cbSize: WORD,
+}
+
+//-------------------------------------------------------------------------------------------------
+// propsys.h
+//-------------------------------------------------------------------------------------------------
+#[repr(C)]
+pub struct IPropertyStore;
+
+//-------------------------------------------------------------------------------------------------
+// propidl.h
+//-------------------------------------------------------------------------------------------------
+#[repr(C)]
+pub struct PROPVARIANT {
+    vt: VARTYPE,
+    wReserved1: WORD,
+    wReserved2: WORD,
+    wReserved3: WORD,
+    data: [u8, .. 16],
+}
+
+//-------------------------------------------------------------------------------------------------
 // objldlbase.h
 // this ALWAYS GENERATED file contains the definitions for the interfaces
 //-------------------------------------------------------------------------------------------------
@@ -2403,6 +2749,13 @@ pub static ENABLE_WRAP_AT_EOL_OUTPUT: DWORD = 0x2;
 extern "system" {
     pub fn CoAllowUnmarshalerCLSID(
         clsid: REFCLSID,
+    ) -> HRESULT;
+    pub fn CoCreateInstance(
+        rclsid: REFCLSID,
+        pUnkOuter: LPUNKNOWN,
+        dwClsContext: DWORD,
+        riid: REFIID,
+        ppv: *mut LPVOID,
     ) -> HRESULT;
     pub fn CoDecodeProxy(
         dwClientPid: DWORD,
