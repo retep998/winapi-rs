@@ -2822,6 +2822,12 @@ extern "system" {
         lprc: *const RECT,
         hbr: HBRUSH,
     ) -> c_int;
+    /// Retrieves a handle to the top-level window whose class name and window name match the specified strings.
+    /// cf. http://msdn.microsoft.com/library/windows/desktop/ms633499%28v=vs.85%29.aspx
+    pub fn FindWindowA (
+        lpClassName: LPCSTR,
+        lpWindowName: LPCSTR
+    ) -> HWND;
     pub fn GetClientRect(
         hWnd: HWND,
         lpRect: LPRECT,
