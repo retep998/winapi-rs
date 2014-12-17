@@ -2202,6 +2202,44 @@ pub const EDD_GET_DEVICE_INTERFACE_NAME: DWORD = 0x00000001;
 pub const ENUM_CURRENT_SETTINGS: DWORD = -1;
 pub const ENUM_REGISTRY_SETTINGS: DWORD = -2;
 
+pub const MB_OK: DWORD = 0x00000000;
+pub const MB_OKCANCEL: DWORD = 0x00000001;
+pub const MB_ABORTRETRYIGNORE: DWORD = 0x00000002;
+pub const MB_YESNOCANCEL: DWORD = 0x00000003;
+pub const MB_YESNO: DWORD = 0x00000004;
+pub const MB_RETRYCANCEL: DWORD = 0x00000005;
+pub const MB_CANCELTRYCONTINUE: DWORD = 0x00000006;
+pub const MB_ICONHAND: DWORD = 0x00000010;
+pub const MB_ICONQUESTION: DWORD = 0x00000020;
+pub const MB_ICONEXCLAMATION: DWORD = 0x00000030;
+pub const MB_ICONASTERISK: DWORD = 0x00000040;
+pub const MB_USERICON: DWORD = 0x00000080;
+pub const MB_ICONWARNING: DWORD = MB_ICONEXCLAMATION;
+pub const MB_ICONERROR: DWORD = MB_ICONHAND;
+pub const MB_ICONINFORMATION: DWORD = MB_ICONASTERISK;
+pub const MB_ICONSTOP: DWORD = MB_ICONHAND;
+pub const MB_DEFBUTTON1: DWORD = 0x00000000;
+pub const MB_DEFBUTTON2: DWORD = 0x00000100;
+pub const MB_DEFBUTTON3: DWORD = 0x00000200;
+pub const MB_DEFBUTTON4: DWORD = 0x00000300;
+pub const MB_APPLMODAL: DWORD = 0x00000000;
+pub const MB_SYSTEMMODAL: DWORD = 0x00001000;
+pub const MB_TASKMODAL: DWORD = 0x00002000;
+pub const MB_HELP: DWORD = 0x00004000;
+pub const MB_NOFOCUS: DWORD = 0x00008000;
+pub const MB_SETFOREGROUND: DWORD = 0x00010000;
+pub const MB_DEFAULT_DESKTOP_ONLY: DWORD = 0x00020000;
+pub const MB_TOPMOST: DWORD = 0x00040000;
+pub const MB_RIGHT: DWORD = 0x00080000;
+pub const MB_RTLREADING: DWORD = 0x00100000;
+pub const MB_SERVICE_NOTIFICATION: DWORD = 0x00200000;
+pub const MB_SERVICE_NOTIFICATION_NT3X: DWORD = 0x00040000;
+pub const MB_TYPEMASK: DWORD = 0x0000000F;
+pub const MB_ICONMASK: DWORD = 0x000000F0;
+pub const MB_DEFMASK: DWORD = 0x00000F00;
+pub const MB_MODEMASK: DWORD = 0x00003000;
+pub const MB_MISCMASK: DWORD = 0x0000C000;
+
 pub const SW_HIDE: c_int = 0;
 pub const SW_SHOWNORMAL: c_int = 1;
 pub const SW_NORMAL: c_int = 1;
@@ -3535,6 +3573,32 @@ extern "system" {
         hWnd: HWND,
         lpRect: LPRECT,
     ) -> BOOL;
+    pub fn MessageBoxA(
+        hWnd: HWND,
+        lpText: LPCSTR,
+        lpCaption: LPCSTR,
+        uType: UINT
+    ) -> c_int;
+    pub fn MessageBoxW(
+        hWnd: HWND,
+        lpText: LPCWSTR,
+        lpCaption: LPCWSTR,
+        uType: UINT
+    ) -> c_int;
+    pub fn MessageBoxExA(
+        hWnd: HWND,
+        lpText: LPCSTR,
+        lpCaption: LPCSTR,
+        uType: UINT,
+        wLanguageId: WORD
+    ) -> c_int;
+    pub fn MessageBoxExW(
+        hWnd: HWND,
+        lpText: LPCWSTR,
+        lpCaption: LPCWSTR,
+        uType: UINT,
+        wLanguageId: WORD
+    ) -> c_int;
     pub fn PeekMessageW(
         lpMsg: LPMSG,
         hWnd: HWND,
