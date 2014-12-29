@@ -3093,23 +3093,23 @@ pub const FOLDERID_SkyDriveCameraRoll: GUID = GUID { Data1: 0x767e6811, Data2: 0
 pub const FOLDERID_SearchHistory: GUID = GUID { Data1: 0x0d4c3db6, Data2: 0x03a3, Data3: 0x462f, Data4: [0xa0, 0xe6, 0x08, 0x92, 0x4c, 0x41, 0xb5, 0xd4]};
 pub const FOLDERID_SearchTemplates: GUID = GUID { Data1: 0x7e636bfe, Data2: 0xdfa9, Data3: 0x4d5e, Data4: [0xb4, 0x56, 0xd7, 0xb3, 0x98, 0x51, 0xd8, 0xa9]};
 // constants
-pub static INVALID_HANDLE_VALUE: HANDLE = -1 as HANDLE;
+pub const INVALID_HANDLE_VALUE: HANDLE = -1 as HANDLE;
 // error codes
-pub static ERROR_INVALID_HANDLE: DWORD = 6;
-pub static ERROR_ILLEGAL_CHARACTER: DWORD = 582;
+pub const ERROR_INVALID_HANDLE: DWORD = 6;
+pub const ERROR_ILLEGAL_CHARACTER: DWORD = 582;
 // console input flags
-pub static ENABLE_PROCESSED_INPUT: DWORD = 0x1;
-pub static ENABLE_LINE_INPUT: DWORD = 0x2;
-pub static ENABLE_ECHO_INPUT: DWORD = 0x4;
-pub static ENABLE_WINDOW_INPUT: DWORD = 0x8;
-pub static ENABLE_MOUSE_INPUT: DWORD = 0x10;
-pub static ENABLE_INSERT_MODE: DWORD = 0x20;
-pub static ENABLE_QUICK_EDIT_MODE: DWORD = 0x40;
-pub static ENABLE_EXTENDED_FLAGS: DWORD = 0x80;
-pub static ENABLE_AUTO_POSITION: DWORD = 0x100;
+pub const ENABLE_PROCESSED_INPUT: DWORD = 0x1;
+pub const ENABLE_LINE_INPUT: DWORD = 0x2;
+pub const ENABLE_ECHO_INPUT: DWORD = 0x4;
+pub const ENABLE_WINDOW_INPUT: DWORD = 0x8;
+pub const ENABLE_MOUSE_INPUT: DWORD = 0x10;
+pub const ENABLE_INSERT_MODE: DWORD = 0x20;
+pub const ENABLE_QUICK_EDIT_MODE: DWORD = 0x40;
+pub const ENABLE_EXTENDED_FLAGS: DWORD = 0x80;
+pub const ENABLE_AUTO_POSITION: DWORD = 0x100;
 //console output flags
-pub static ENABLE_PROCESSED_OUTPUT: DWORD = 0x1;
-pub static ENABLE_WRAP_AT_EOL_OUTPUT: DWORD = 0x2;
+pub const ENABLE_PROCESSED_OUTPUT: DWORD = 0x1;
+pub const ENABLE_WRAP_AT_EOL_OUTPUT: DWORD = 0x2;
 
 //-------------------------------------------------------------------------------------------------
 // Functions
