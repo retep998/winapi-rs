@@ -1751,7 +1751,7 @@ pub const AUDCLNT_E_DEVICE_INVALIDATED: HRESULT = 0x88890004;
 #[allow(overflowing_literals)]
 pub const AUDCLNT_E_NOT_STOPPED: HRESULT = 0x88890005;
 #[allow(overflowing_literals)]
-pub const AUDCLNT_E_BUFFER_TOO_LARGE: HRESULT = 0x888900086;
+pub const AUDCLNT_E_BUFFER_TOO_LARGE: HRESULT = 0x88890006;
 #[allow(overflowing_literals)]
 pub const AUDCLNT_E_OUT_OF_ORDER: HRESULT = 0x88890007;
 #[allow(overflowing_literals)]
