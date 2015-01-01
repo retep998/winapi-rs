@@ -1739,7 +1739,6 @@ pub const IID_IAudioRenderClient: IID = GUID {
     Data4: [0xA7, 0xBF, 0xAD, 0xDC, 0xA7, 0xC2, 0x60, 0xE2],
 };
 
-// TODO: check these values
 #[allow(overflowing_literals)]
 pub const AUDCLNT_E_NOT_INITIALIZED: HRESULT = 0x88890001;
 #[allow(overflowing_literals)]
@@ -1751,7 +1750,7 @@ pub const AUDCLNT_E_DEVICE_INVALIDATED: HRESULT = 0x88890004;
 #[allow(overflowing_literals)]
 pub const AUDCLNT_E_NOT_STOPPED: HRESULT = 0x88890005;
 #[allow(overflowing_literals)]
-pub const AUDCLNT_E_BUFFER_TOO_LARGE: HRESULT = 0x888900086;
+pub const AUDCLNT_E_BUFFER_TOO_LARGE: HRESULT = 0x88890006;
 #[allow(overflowing_literals)]
 pub const AUDCLNT_E_OUT_OF_ORDER: HRESULT = 0x88890007;
 #[allow(overflowing_literals)]
@@ -1784,7 +1783,12 @@ pub const AUDCLNT_E_INCORRECT_BUFFER_SIZE: HRESULT = 0x88890015;
 pub const AUDCLNT_E_BUFFER_SIZE_ERROR: HRESULT = 0x88890016;
 #[allow(overflowing_literals)]
 pub const AUDCLNT_E_CPUUSAGE_EXCEEDED: HRESULT = 0x88890017;
-// TODO: check these values even more
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_BUFFER_ERROR: HRESULT = 0x88890018;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_BUFFER_SIZE_NOT_ALIGNED: HRESULT = 0x88890019;
+#[allow(overflowing_literals)]
+pub const AUDCLNT_E_INVALID_DEVICE_PERIOD: HRESULT = 0x88890020;
 pub const AUDCLNT_S_BUFFER_EMPTY: HRESULT = 0x8890001;
 pub const AUDCLNT_S_THREAD_ALREADY_REGISTERED: HRESULT = 0x8890002;
 pub const AUDCLNT_S_POSITION_STALLED: HRESULT = 0x8890003;
