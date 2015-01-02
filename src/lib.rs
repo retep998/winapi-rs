@@ -1822,7 +1822,7 @@ pub struct IAudioClientVtbl {
     ) -> HRESULT,
     pub GetStreamLatency: extern "system" fn(
         This: *mut IAudioClient,
-        phnsLatency: REFERENCE_TIME,
+        phnsLatency: *mut REFERENCE_TIME,
     ) -> HRESULT,
     pub GetCurrentPadding: extern "system" fn(
         This: *mut IAudioClient,
