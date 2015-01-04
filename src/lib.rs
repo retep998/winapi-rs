@@ -2042,7 +2042,7 @@ pub struct IStreamVtbl {
         This: *mut IStream,
         dlibMove: LARGE_INTEGER,
         dwOrigin: DWORD,
-        plibNewPosition: ULARGE_INTEGER,
+        plibNewPosition: *mut ULARGE_INTEGER,
     ) -> HRESULT,
     pub SetSize: extern "system" fn(
         This: *mut IStream,
