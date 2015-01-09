@@ -6,8 +6,8 @@
 //-------------------------------------------------------------------------------------------------
 // Basic primitives
 //-------------------------------------------------------------------------------------------------
-extern crate core;
-extern crate libc;
+#[allow(unstable)] extern crate core;
+#[allow(unstable)] extern crate libc;
 pub use libc::{
     c_void,
     c_char,
@@ -1985,7 +1985,7 @@ pub struct IMallocVtbl {
     pub DidAlloc: extern "system" fn(
         This: *mut IMalloc,
         pv: *mut c_void,
-    ) -> isize,
+    ) -> c_int,
     pub HeapMinimize: extern "system" fn(
         This: *mut IMalloc,
     ),
