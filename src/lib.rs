@@ -1,8 +1,7 @@
 // Copyright © 2014, Peter Atashian
 
-#![feature(globs)]
 #![no_std]
-#![allow(non_camel_case_types, non_snake_case, non_upper_case_globals, raw_pointer_deriving)]
+#![allow(non_camel_case_types, non_snake_case, non_upper_case_globals, raw_pointer_derive)]
 
 //-------------------------------------------------------------------------------------------------
 // Basic primitives
@@ -28,8 +27,8 @@ pub use libc::{
 };
 // #[derive(Copy)] hack
 mod std {
-    pub mod kinds {
-        pub use core::kinds::Copy;
+    pub mod marker {
+        pub use core::marker::Copy;
     }
 }
 pub type __int64 = i64; // __int64, signed __int64
@@ -38,7 +37,7 @@ pub type __uint64 = u64; // unsigned __int64
 // minwindef.h
 // Basic Windows Type Definitions for minwin partition
 //-------------------------------------------------------------------------------------------------
-pub const MAX_PATH: uint = 260;
+pub const MAX_PATH: usize = 260;
 pub const FALSE: BOOL = 0;
 pub const TRUE: BOOL = 1;
 pub type ULONG = c_ulong;
@@ -1986,7 +1985,7 @@ pub struct IMallocVtbl {
     pub DidAlloc: extern "system" fn(
         This: *mut IMalloc,
         pv: *mut c_void,
-    ) -> int,
+    ) -> isize,
     pub HeapMinimize: extern "system" fn(
         This: *mut IMalloc,
     ),
@@ -3028,8 +3027,8 @@ pub const PFD_DEPTH_DONTCARE: DWORD = 0x20000000;
 pub const PFD_DOUBLEBUFFER_DONTCARE: DWORD = 0x40000000;
 pub const PFD_STEREO_DONTCARE: DWORD = 0x80000000;
 
-pub const CCHDEVICENAME: uint = 32;
-pub const CCHFORMNAME: uint = 32;
+pub const CCHDEVICENAME: usize = 32;
+pub const CCHFORMNAME: usize = 32;
 #[repr(C)]
 #[derive(Copy)]
 pub struct DEVMODEW {
