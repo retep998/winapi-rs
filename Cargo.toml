@@ -1,7 +1,7 @@
 [package]
 
 name = "winapi"
-version = "0.0.5"
+version = "0.0.6"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "WinAPI FFI bindings. Use this for building higher level abstractions."
 documentation = "https://retep998.github.io/winapi-rs/winapi/"
