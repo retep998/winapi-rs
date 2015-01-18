@@ -25,6 +25,10 @@ pub use libc::{
     c_float,
     c_double,
 };
+pub use synchapi::*;
+pub use winnt::*;
+pub mod synchapi;
+pub mod winnt;
 // #[derive(Copy)] hack
 mod std {
     pub mod marker {
@@ -3508,98 +3512,6 @@ extern "system" {
         hToken: HANDLE,
         pszPath: PCWSTR,
     ) -> HRESULT;
-}
-#[cfg(feature = "kernel32")]
-#[link(name = "kernel32")]
-extern "system" {
-    pub fn CloseHandle(
-        hObject: HANDLE,
-    ) -> BOOL;
-    pub fn CreateIoCompletionPort(
-        FileHandle: HANDLE,
-        ExistingCompletionPort: HANDLE,
-        CompletionKey: ULONG_PTR,
-        NumberOfConcurrentThreads: DWORD,
-    ) -> HANDLE;
-    pub fn GetConsoleMode(
-        hConsoleHandle: HANDLE,
-        lpMode: LPDWORD,
-    ) -> BOOL;
-    pub fn GetCurrentProcess() -> HANDLE;
-    pub fn GetLastError() -> DWORD;
-    pub fn GetModuleHandleA(
-        lpModuleName: LPCSTR,
-    ) -> HMODULE;
-    pub fn GetModuleHandleW(
-        lpModuleName: LPCWSTR,
-    ) -> HMODULE;
-    pub fn GetProcAddress(
-        hModule: HMODULE,
-        lpProcName: LPCSTR,
-    ) -> FARPROC;
-    pub fn GetProcessTimes(
-        hProcess: HANDLE,
-        lpCreationTime: LPFILETIME,
-        lpExitTime: LPFILETIME,
-        lpKernelTime: LPFILETIME,
-        lpUserTime: LPFILETIME,
-    ) -> BOOL;
-    pub fn GetSystemRegistryQuota(
-        pdwQuotaAllowed: PDWORD,
-        pdwQuotaUsed: PDWORD
-    ) -> BOOL;
-    pub fn K32GetProcessMemoryInfo(
-        Process: HANDLE,
-        ppsmemCounters: PPROCESS_MEMORY_COUNTERS,
-        cb: DWORD,
-    ) -> BOOL;
-    pub fn LoadLibraryW(
-        lpFileName: LPCWSTR,
-    ) -> HMODULE;
-    pub fn LocalFree(
-        hMem: HLOCAL,
-    ) -> HLOCAL;
-    pub fn OpenProcess(
-        dwDesiredAccess: DWORD,
-        bInheritHandle: BOOL,
-        dwProcessId: DWORD,
-    ) -> HANDLE;
-    pub fn ReadConsoleW(
-        hConsoleInput: HANDLE,
-        lpBuffer: LPVOID,
-        nNumberOfCharsToRead: DWORD,
-        lpNumberOfCharsRead: LPDWORD,
-        pInputControl: PCONSOLE_READCONSOLE_CONTROL,
-    ) -> BOOL;
-    pub fn ReadProcessMemory(
-        hProcess: HANDLE,
-        lpBaseAddress: LPCVOID,
-        lpBuffer: LPVOID,
-        nSize: SIZE_T,
-        lpNumberOfBytesRead: *mut SIZE_T,
-    ) -> BOOL;
-    pub fn SetConsoleMode(
-        hConsoleHandle: HANDLE,
-        lpMode: DWORD,
-    ) -> BOOL;
-    pub fn WinExec (
-        lpCmdLine: LPCSTR,
-        uCmdShow: UINT,
-    ) -> UINT;
-    pub fn WriteConsoleW(
-        hConsoleOutput: HANDLE,
-        lpBuffer: LPCVOID,
-        nNumberOfCharsToWrite: DWORD,
-        lpNumberOfCharsWritten: LPDWORD,
-        lpReserved: LPVOID,
-    ) -> BOOL;
-    pub fn WriteProcessMemory(
-        hProcess: HANDLE,
-        lpBaseAddress: LPVOID,
-        lpBuffer: LPCVOID,
-        nSize: SIZE_T,
-        lpNumberOfBytesWritten: *mut SIZE_T,
-    ) -> BOOL;
 }
 #[cfg(feature = "advapi32")]
 #[link(name = "advapi32")]
