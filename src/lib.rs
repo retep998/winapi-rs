@@ -1,6 +1,8 @@
-// Copyright © 2014, Peter Atashian
-
+// Copyright © 2015, Peter Atashian
+// Licensed under the MIT License <LICENSE.md>
+//! Types and constants for WinAPI bindings.
 #![no_std]
+#![experimental]
 #![allow(non_camel_case_types, non_snake_case, non_upper_case_globals, raw_pointer_derive)]
 
 //-------------------------------------------------------------------------------------------------
@@ -25,10 +27,14 @@ pub use libc::{
     c_float,
     c_double,
 };
+pub use libloaderapi::*;
 pub use synchapi::*;
 pub use winnt::*;
+pub use winuser::*;
+pub mod libloaderapi;
 pub mod synchapi;
 pub mod winnt;
+pub mod winuser;
 // #[derive(Copy)] hack
 mod std {
     pub mod marker {
