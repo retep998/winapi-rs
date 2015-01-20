@@ -1,7 +1,7 @@
 [package]
 
 name = "winapi"
-version = "0.0.8"
+version = "0.1.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "WinAPI FFI bindings. Use this for building higher level abstractions."
 documentation = "https://retep998.github.io/winapi-rs/winapi/"
@@ -9,10 +9,3 @@ repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["Windows", "win32", "WinAPI", "FFI"]
 license = "MIT"
-
-[features]
-gdi32 = []
-ole32 = []
-shell32 = []
-user32 = []
-winmm = []
