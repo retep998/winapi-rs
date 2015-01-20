@@ -30,11 +30,13 @@ pub use libc::{
 pub use libloaderapi::*;
 pub use synchapi::*;
 pub use wincon::*;
+pub use wincrypt::*;
 pub use winnt::*;
 pub use winuser::*;
 pub mod libloaderapi;
 pub mod synchapi;
 pub mod wincon;
+pub mod wincrypt;
 pub mod winnt;
 pub mod winuser;
 // #[derive(Copy)] hack
