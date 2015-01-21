@@ -2988,7 +2988,7 @@ pub type PMOUSEINPUT = *mut MOUSEINPUT;
 pub type LPMOUSEINPUT = *mut MOUSEINPUT;
 #[repr(C)]
 #[derive(Copy)]
-struct KEYBDINPUT {
+pub struct KEYBDINPUT {
     pub wVk: WORD,
     pub wScan: WORD,
     pub dwFlags: DWORD,
@@ -2999,7 +2999,7 @@ pub type PKEYBDINPUT = *mut KEYBDINPUT;
 pub type LPKEYBDINPUT = *mut KEYBDINPUT;
 #[repr(C)]
 #[derive(Copy)]
-struct HARDWAREINPUT {
+pub struct HARDWAREINPUT {
     pub uMsg: DWORD,
     pub wParamL: WORD,
     pub wParamH: WORD,
