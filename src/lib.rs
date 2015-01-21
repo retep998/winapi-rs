@@ -2369,6 +2369,10 @@ pub const EDD_GET_DEVICE_INTERFACE_NAME: DWORD = 0x00000001;
 pub const ENUM_CURRENT_SETTINGS: DWORD = -1;
 pub const ENUM_REGISTRY_SETTINGS: DWORD = -2;
 
+pub const INPUT_MOUSE: DWORD = 0;
+pub const INPUT_KEYBOARD: DWORD = 1;
+pub const INPUT_HARDWARE: DWORD = 2;
+
 pub const MB_OK: DWORD = 0x00000000;
 pub const MB_OKCANCEL: DWORD = 0x00000001;
 pub const MB_ABORTRETRYIGNORE: DWORD = 0x00000002;
@@ -2965,6 +2969,46 @@ pub struct WNDCLASSEXW {
 pub type PWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type NPWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type LPWNDCLASSEXW = *mut WNDCLASSEXW;
+#[repr(C)]
+#[derive(Copy)]
+pub struct MOUSEINPUT {
+    pub dx: LONG,
+    pub dy: LONG,
+    pub mouseData: DWORD,
+    pub dwFlags: DWORD,
+    pub time: DWORD,
+    pub dwExtraInfo: ULONG_PTR,
+}
+pub type PMOUSEINPUT = *mut MOUSEINPUT;
+pub type LPMOUSEINPUT = *mut MOUSEINPUT;
+#[repr(C)]
+#[derive(Copy)]
+struct KEYBDINPUT {
+    pub wVk: WORD,
+    pub wScan: WORD,
+    pub dwFlags: DWORD,
+    pub time: DWORD,
+    pub dwExtraInfo: ULONG_PTR,
+}
+pub type PKEYBDINPUT = *mut KEYBDINPUT;
+pub type LPKEYBDINPUT = *mut KEYBDINPUT;
+#[repr(C)]
+#[derive(Copy)]
+struct HARDWAREINPUT {
+    pub uMsg: DWORD,
+    pub wParamL: WORD,
+    pub wParamH: WORD,
+}
+pub type PHARDWAREINPUT = *mut HARDWAREINPUT;
+pub type LPHARDWAREINPUT = *mut HARDWAREINPUT;
+#[repr(C)]
+#[derive(Copy)]
+pub struct INPUT {
+    pub type_: DWORD,
+    pub union_: MOUSEINPUT,
+}
+pub type PINPUT = *mut INPUT;
+pub type LPINPUT = *mut INPUT;
 
 //-------------------------------------------------------------------------------------------------
 // wingdi.h
