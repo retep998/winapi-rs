@@ -2431,6 +2431,20 @@ pub const MOUSEEVENTF_WHEEL: DWORD = 0x0800;
 pub const MOUSEEVENTF_XDOWN: DWORD = 0x0080;
 pub const MOUSEEVENTF_XUP: DWORD = 0x0100;
 
+pub const SM_ARRANGE: c_int = 56;
+pub const SM_CLEANBOOT: c_int = 67;
+pub const SM_CMONITORS: c_int = 80;
+pub const SM_CMOUSEBUTTONS: c_int = 43;
+pub const SM_CONVERTIBLESLATEMODE: c_int = 0x2003;
+pub const SM_CXFULLSCREEN: c_int = 16;
+pub const SM_CXSCREEN: c_int = 0;
+pub const SM_CXVIRTUALSCREEN: c_int = 78;
+pub const SM_CYFULLSCREEN: c_int = 17;
+pub const SM_CYSCREEN: c_int = 1;
+pub const SM_CYVIRTUALSCREEN: c_int = 79;
+pub const SM_XVIRTUALSCREEN: c_int = 76;
+pub const SM_YVIRTUALSCREEN: c_int = 77;
+
 pub const SW_HIDE: c_int = 0;
 pub const SW_SHOWNORMAL: c_int = 1;
 pub const SW_NORMAL: c_int = 1;
