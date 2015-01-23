@@ -13,4 +13,4 @@ Bindings to library functions are available in separate crates:
 * [user32](https://github.com/retep998/user32-sys)
 * [winmm](https://github.com/retep998/winmm-sys)
 
-[Documentation](https://retep998.github.io/winapi-rs/winapi/)
+[Documentation](https://retep998.github.io/doc/winapi/)
