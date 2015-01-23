@@ -6,10 +6,13 @@
 #![allow(non_camel_case_types, non_snake_case, non_upper_case_globals, raw_pointer_derive)]
 
 //-------------------------------------------------------------------------------------------------
-// Basic primitives
+// External crates
 //-------------------------------------------------------------------------------------------------
 #[allow(unstable)] extern crate core;
 #[allow(unstable)] extern crate libc;
+//-------------------------------------------------------------------------------------------------
+// Imports
+//-------------------------------------------------------------------------------------------------
 pub use libc::{
     c_void,
     c_char,
@@ -28,12 +31,26 @@ pub use libc::{
     c_double,
 };
 pub use libloaderapi::*;
+pub use minwindef::*;
 pub use synchapi::*;
 pub use wincon::*;
 pub use wincrypt::*;
 pub use winnt::*;
 pub use winuser::*;
+//-------------------------------------------------------------------------------------------------
+// Macros
+//-------------------------------------------------------------------------------------------------
+macro_rules! DECLARE_HANDLE {
+    ($name:ident, $inner:ident) => {
+        #[repr(C)] #[allow(missing_copy_implementations)] struct $inner { unused: () }
+        pub type $name = *mut $inner;
+    };
+}
+//-------------------------------------------------------------------------------------------------
+// Modules
+//-------------------------------------------------------------------------------------------------
 pub mod libloaderapi;
+pub mod minwindef;
 pub mod synchapi;
 pub mod wincon;
 pub mod wincrypt;
@@ -45,127 +62,17 @@ mod std {
         pub use core::marker::Copy;
     }
 }
-pub type __int64 = i64; // __int64, signed __int64
-pub type __uint64 = u64; // unsigned __int64
 //-------------------------------------------------------------------------------------------------
-// minwindef.h
-// Basic Windows Type Definitions for minwin partition
+// Primitive types not defined by libc
 //-------------------------------------------------------------------------------------------------
-pub const MAX_PATH: usize = 260;
-pub const FALSE: BOOL = 0;
-pub const TRUE: BOOL = 1;
-pub type ULONG = c_ulong;
-pub type PULONG = *mut ULONG;
-pub type USHORT = c_ushort;
-pub type PUSHORT = *mut USHORT;
-pub type UCHAR = c_uchar;
-pub type PUCHAR = *mut UCHAR;
-pub type PSZ = *mut c_char;
-pub type DWORD = c_ulong;
-pub type BOOL = c_int;
-pub type BYTE = c_uchar;
-pub type WORD = c_ushort;
-pub type FLOAT = c_float;
-pub type PFLOAT = *mut FLOAT;
-pub type PBOOL = *mut BOOL;
-pub type LPBOOL = *mut BOOL;
-pub type PBYTE = *mut BYTE;
-pub type LPBYTE = *mut BYTE;
-pub type PINT = *mut c_int;
-pub type LPINT = *mut c_int;
-pub type PWORD = *mut WORD;
-pub type LPWORD = *mut WORD;
-pub type LPLONG = *mut c_long;
-pub type PDWORD = *mut DWORD;
-pub type LPDWORD = *mut DWORD;
-pub type LPVOID = *mut c_void;
-pub type LPCVOID = *const c_void;
-pub type INT = c_int;
-pub type UINT = c_uint;
-pub type PUINT = *mut c_uint;
-pub type WPARAM = UINT_PTR;
-pub type LPARAM = LONG_PTR;
-pub type LRESULT = LONG_PTR;
-pub fn LOWORD(l: DWORD) -> WORD {
-    (l & 0xFFFF) as WORD
-}
-pub fn HIWORD(l: DWORD) -> WORD {
-    (l >> 16) as WORD
-}
-pub type SPHANDLE = *mut HANDLE;
-pub type LPHANDLE = *mut HANDLE;
-pub type HGLOBAL = HANDLE;
-pub type HLOCAL = HANDLE;
-pub type GLOBALHANDLE = HANDLE;
-pub type LOCALHANDLE = HANDLE;
-#[cfg(target_arch = "x86")]
-pub type FARPROC = extern "system" fn() -> INT;
-#[cfg(target_arch = "x86_64")]
-pub type FARPROC = extern "system" fn() -> INT_PTR;
-#[cfg(target_arch = "x86")]
-pub type NEARPROC = extern "system" fn() -> INT;
-#[cfg(target_arch = "x86_64")]
-pub type NEARPROC = extern "system" fn() -> INT_PTR;
-#[cfg(target_arch = "x86")]
-pub type PROC = extern "system" fn() -> INT;
-#[cfg(target_arch = "x86_64")]
-pub type PROC = extern "system" fn() -> INT_PTR;
-pub type ATOM = WORD;
-#[repr(C)]
-#[derive(Copy)]
-pub struct HKEY__;
-pub type HKEY = *mut HKEY__;
-pub type PHKEY = *mut HKEY;
-#[repr(C)]
-#[derive(Copy)]
-pub struct HMETAFILE__;
-pub type HMETAFILE = *mut HMETAFILE__;
-#[repr(C)]
-#[derive(Copy)]
-pub struct HINSTANCE__;
-pub type HINSTANCE = *mut HINSTANCE__;
-pub type HMODULE = HINSTANCE;
-#[repr(C)]
-#[derive(Copy)]
-pub struct HRGN__;
-pub type HRGN = *mut HRGN__;
-#[repr(C)]
-#[derive(Copy)]
-pub struct HRSRC__;
-pub type HRSRC = *mut HRSRC__;
-#[repr(C)]
-#[derive(Copy)]
-pub struct HSPRITE__;
-pub type HSPRITE = *mut HSPRITE__;
-#[repr(C)]
-#[derive(Copy)]
-pub struct HLSURF__;
-pub type HLSURF = *mut HLSURF__;
-#[repr(C)]
-#[derive(Copy)]
-pub struct HSTR__;
-pub type HSTR = *mut HSTR__;
-#[repr(C)]
-#[derive(Copy)]
-pub struct HTASK__;
-pub type HTASK = *mut HTASK__;
-#[repr(C)]
-#[derive(Copy)]
-pub struct HWINSTA__;
-pub type HWINSTA = *mut HWINSTA__;
-#[repr(C)]
-#[derive(Copy)]
-pub struct HKL__;
-pub type HKL = *mut HKL__;
-pub type HFILE = c_int;
-#[repr(C)]
-#[derive(Copy)]
-pub struct FILETIME {
-    pub dwLowDateTime: DWORD,
-    pub dwHighDateTime: DWORD,
-}
-pub type PFILETIME = *mut FILETIME;
-pub type LPFILETIME = *mut FILETIME;
+pub type __int8 = i8;
+pub type __uint8 = u8;
+pub type __int16 = i16;
+pub type __uint16 = u16;
+pub type __int32 = i32;
+pub type __uint32 = u32;
+pub type __int64 = i64;
+pub type __uint64 = u64;
 //-------------------------------------------------------------------------------------------------
 // basetsd.h
 // Type definitions for the basic sized types.
@@ -3121,19 +3028,6 @@ pub struct PIXELFORMATDESCRIPTOR {
 }
 pub type PPIXELFORMATDESCRIPTOR = *mut PIXELFORMATDESCRIPTOR;
 pub type LPPIXELFORMATDESCRIPTOR = *mut PIXELFORMATDESCRIPTOR;
-
-//-------------------------------------------------------------------------------------------------
-// windowsx.h
-// Macro APIs, window message crackers, and control APIs
-//-------------------------------------------------------------------------------------------------
-// macros
-pub fn GET_X_LPARAM(lp: LONG_PTR) -> c_int {
-    LOWORD(lp as DWORD) as c_int
-}
-
-pub fn GET_Y_LPARAM(lp: LONG_PTR) -> c_int {
-    HIWORD(lp as DWORD) as c_int
-}
 
 //-------------------------------------------------------------------------------------------------
 // Constants
