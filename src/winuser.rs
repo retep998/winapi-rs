@@ -6,6 +6,37 @@ pub const WHEEL_DELTA: ::DWORD = 120;
 //2206
 pub const XBUTTON1: ::DWORD = 0x0001;
 pub const XBUTTON2: ::DWORD = 0x0002;
+//3082
+#[repr(C)] #[derive(Copy)] pub struct CREATESTRUCTA {
+    lpCreateParams: ::LPVOID,
+    hInstance: ::HINSTANCE,
+    hMenu: ::HMENU,
+    hwndParent: ::HWND,
+    cy: ::c_int,
+    cx: ::c_int,
+    y: ::c_int,
+    x: ::c_int,
+    style: ::LONG,
+    lpszName: ::LPCSTR,
+    lpszClass: ::LPCSTR,
+    dwExStyle: ::DWORD,
+}
+pub type LPCREATESTRUCTA = *mut CREATESTRUCTA;
+#[repr(C)] #[derive(Copy)] pub struct CREATESTRUCTW {
+    lpCreateParams: ::LPVOID,
+    hInstance: ::HINSTANCE,
+    hMenu: ::HMENU,
+    hwndParent: ::HWND,
+    cy: ::c_int,
+    cx: ::c_int,
+    y: ::c_int,
+    x: ::c_int,
+    style: ::LONG,
+    lpszName: ::LPCWSTR,
+    lpszClass: ::LPCWSTR,
+    dwExStyle: ::DWORD,
+}
+pub type LPCREATESTRUCTW = *mut CREATESTRUCTW;
 //3400
 pub const PM_NOREMOVE: ::UINT = 0x0000;
 pub const PM_REMOVE: ::UINT = 0x0001;
