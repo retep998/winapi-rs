@@ -2276,6 +2276,15 @@ pub const EDD_GET_DEVICE_INTERFACE_NAME: DWORD = 0x00000001;
 pub const ENUM_CURRENT_SETTINGS: DWORD = -1;
 pub const ENUM_REGISTRY_SETTINGS: DWORD = -2;
 
+pub const INPUT_MOUSE: DWORD = 0;
+pub const INPUT_KEYBOARD: DWORD = 1;
+pub const INPUT_HARDWARE: DWORD = 2;
+
+pub const KEYEVENTF_EXTENDEDKEY: DWORD = 0x0001;
+pub const KEYEVENTF_KEYUP: DWORD = 0x0002;
+pub const KEYEVENTF_SCANCODE: DWORD = 0x0008;
+pub const KEYEVENTF_UNICODE: DWORD = 0x0004;
+
 pub const MB_OK: DWORD = 0x00000000;
 pub const MB_OKCANCEL: DWORD = 0x00000001;
 pub const MB_ABORTRETRYIGNORE: DWORD = 0x00000002;
@@ -2313,6 +2322,35 @@ pub const MB_ICONMASK: DWORD = 0x000000F0;
 pub const MB_DEFMASK: DWORD = 0x00000F00;
 pub const MB_MODEMASK: DWORD = 0x00003000;
 pub const MB_MISCMASK: DWORD = 0x0000C000;
+
+pub const MOUSEEVENTF_ABSOLUTE: DWORD = 0x8000;
+pub const MOUSEEVENTF_HWHEEL: DWORD = 0x1000;
+pub const MOUSEEVENTF_MOVE: DWORD = 0x0001;
+pub const MOUSEEVENTF_MOVE_NOCOALESCE: DWORD = 0x2000;
+pub const MOUSEEVENTF_LEFTDOWN: DWORD = 0x0002;
+pub const MOUSEEVENTF_LEFTUP: DWORD = 0x0004;
+pub const MOUSEEVENTF_RIGHTDOWN: DWORD = 0x0008;
+pub const MOUSEEVENTF_RIGHTUP: DWORD = 0x0010;
+pub const MOUSEEVENTF_MIDDLEDOWN: DWORD = 0x0020;
+pub const MOUSEEVENTF_MIDDLEUP: DWORD = 0x0040;
+pub const MOUSEEVENTF_VIRTUALDESK: DWORD = 0x4000;
+pub const MOUSEEVENTF_WHEEL: DWORD = 0x0800;
+pub const MOUSEEVENTF_XDOWN: DWORD = 0x0080;
+pub const MOUSEEVENTF_XUP: DWORD = 0x0100;
+
+pub const SM_ARRANGE: c_int = 56;
+pub const SM_CLEANBOOT: c_int = 67;
+pub const SM_CMONITORS: c_int = 80;
+pub const SM_CMOUSEBUTTONS: c_int = 43;
+pub const SM_CONVERTIBLESLATEMODE: c_int = 0x2003;
+pub const SM_CXFULLSCREEN: c_int = 16;
+pub const SM_CXSCREEN: c_int = 0;
+pub const SM_CXVIRTUALSCREEN: c_int = 78;
+pub const SM_CYFULLSCREEN: c_int = 17;
+pub const SM_CYSCREEN: c_int = 1;
+pub const SM_CYVIRTUALSCREEN: c_int = 79;
+pub const SM_XVIRTUALSCREEN: c_int = 76;
+pub const SM_YVIRTUALSCREEN: c_int = 77;
 
 pub const SW_HIDE: c_int = 0;
 pub const SW_SHOWNORMAL: c_int = 1;
@@ -2506,6 +2544,8 @@ pub const VK_ZOOM: WPARAM = 0xFB;
 pub const VK_NONAME: WPARAM = 0xFC;
 pub const VK_PA1: WPARAM = 0xFD;
 pub const VK_OEM_CLEAR: WPARAM = 0xFE;
+
+pub const WHEEL_DELTA: DWORD = 120;
 
 pub const WM_NULL: UINT = 0x0000;
 pub const WM_CREATE: UINT = 0x0001;
@@ -2814,6 +2854,9 @@ pub const WS_EX_LAYOUTRTL: DWORD = 0x00400000;
 pub const WS_EX_COMPOSITED: DWORD = 0x02000000;
 pub const WS_EX_NOACTIVATE: DWORD = 0x08000000;
 
+pub const XBUTTON1: DWORD = 0x0001;
+pub const XBUTTON2: DWORD = 0x0002;
+
 pub type WNDPROC = extern "system" fn(HWND, UINT, WPARAM, LPARAM) -> LRESULT;
 #[repr(C)]
 #[derive(Copy)]
@@ -2872,6 +2915,46 @@ pub struct WNDCLASSEXW {
 pub type PWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type NPWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type LPWNDCLASSEXW = *mut WNDCLASSEXW;
+#[repr(C)]
+#[derive(Copy)]
+pub struct MOUSEINPUT {
+    pub dx: LONG,
+    pub dy: LONG,
+    pub mouseData: DWORD,
+    pub dwFlags: DWORD,
+    pub time: DWORD,
+    pub dwExtraInfo: ULONG_PTR,
+}
+pub type PMOUSEINPUT = *mut MOUSEINPUT;
+pub type LPMOUSEINPUT = *mut MOUSEINPUT;
+#[repr(C)]
+#[derive(Copy)]
+pub struct KEYBDINPUT {
+    pub wVk: WORD,
+    pub wScan: WORD,
+    pub dwFlags: DWORD,
+    pub time: DWORD,
+    pub dwExtraInfo: ULONG_PTR,
+}
+pub type PKEYBDINPUT = *mut KEYBDINPUT;
+pub type LPKEYBDINPUT = *mut KEYBDINPUT;
+#[repr(C)]
+#[derive(Copy)]
+pub struct HARDWAREINPUT {
+    pub uMsg: DWORD,
+    pub wParamL: WORD,
+    pub wParamH: WORD,
+}
+pub type PHARDWAREINPUT = *mut HARDWAREINPUT;
+pub type LPHARDWAREINPUT = *mut HARDWAREINPUT;
+#[repr(C)]
+#[derive(Copy)]
+pub struct INPUT {
+    pub type_: DWORD,
+    pub union_: MOUSEINPUT,
+}
+pub type PINPUT = *mut INPUT;
+pub type LPINPUT = *mut INPUT;
 
 //-------------------------------------------------------------------------------------------------
 // wingdi.h
