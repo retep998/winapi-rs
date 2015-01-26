@@ -1,0 +1,16 @@
+[package]
+
+name = "shell32-sys"
+version = "0.0.1"
+authors = ["Peter Atashian <retep998@gmail.com>"]
+description = "FFI bindings to shell32."
+documentation = "https://retep998.github.io/doc/shell32-sys/"
+repository = "https://github.com/retep998/winapi-rs"
+readme = "README.md"
+keywords = ["Windows", "FFI", "WinSDK"]
+license = "MIT"
+build = "build.rs"
+links = "shell32"
+
+[dependencies]
+winapi = "*"
