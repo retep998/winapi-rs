@@ -97,6 +97,11 @@ pub const INPUT_HARDWARE: ::DWORD = 2;
     pub type_: ::DWORD,
     pub union_: (), // FIXME - Use unions or unsafe enums here somehow
 }
+/// A highly experimental version of INPUT. You have been warned.
+#[repr(C)] #[derive(Copy)] pub struct INPUT_generic<T> {
+    pub type_: ::DWORD,
+    pub union_: T,
+}
 pub type PINPUT = *mut INPUT;
 pub type LPINPUT = *mut INPUT;
 //6573
