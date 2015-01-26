@@ -379,9 +379,9 @@ Bindings to library functions are in separate crates. The source to each crate i
 * ~~[wiaservc-sys](https://crates.io/crates/wiaservc-sys)~~
 * ~~[wiautil-sys](https://crates.io/crates/wiautil-sys)~~
 * ~~[winbio-sys](https://crates.io/crates/winbio-sys)~~
-* ~~[windows.data.pdf-sys](https://crates.io/crates/windows.data.pdf-sys)~~
-* ~~[windows.networking-sys](https://crates.io/crates/windows.networking-sys)~~
-* ~~[windows.ui-sys](https://crates.io/crates/windows.ui-sys)~~
+* ~~[windows-data-pdf-sys](https://crates.io/crates/windows-data-pdf-sys)~~
+* ~~[windows-networking-sys](https://crates.io/crates/windows-networking-sys)~~
+* ~~[windows-ui-sys](https://crates.io/crates/windows-ui-sys)~~
 * ~~[windowscodecs-sys](https://crates.io/crates/windowscodecs-sys)~~
 * ~~[windowssideshowguids-sys](https://crates.io/crates/windowssideshowguids-sys)~~
 * ~~[winfax-sys](https://crates.io/crates/winfax-sys)~~
