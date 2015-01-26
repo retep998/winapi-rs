@@ -1,0 +1,15 @@
+[package]
+name = "xaswitch-sys"
+version = "0.0.1"
+authors = ["Peter Atashian <retep998@gmail.com>"]
+description = "FFI bindings to xaswitch. This crate is a placeholder for the future. If you are interested in this library feel free to get in touch with me: http://www.rustaceans.org/retep998"
+documentation = "https://retep998.github.io/doc/xaswitch-sys/"
+repository = "https://github.com/retep998/winapi-rs"
+readme = "README.md"
+keywords = ["Windows", "FFI", "WinSDK"]
+license = "MIT"
+build = "build.rs"
+links = "xaswitch"
+
+[dependencies]
+winapi = "*"

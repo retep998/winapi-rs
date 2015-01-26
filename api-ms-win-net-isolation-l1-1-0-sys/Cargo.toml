@@ -1,0 +1,15 @@
+[package]
+name = "api-ms-win-net-isolation-l1-1-0-sys"
+version = "0.0.1"
+authors = ["Peter Atashian <retep998@gmail.com>"]
+description = "FFI bindings to api-ms-win-net-isolation-l1-1-0. This crate is a placeholder for the future. If you are interested in this library feel free to get in touch with me: http://www.rustaceans.org/retep998"
+documentation = "https://retep998.github.io/doc/api-ms-win-net-isolation-l1-1-0-sys/"
+repository = "https://github.com/retep998/winapi-rs"
+readme = "README.md"
+keywords = ["Windows", "FFI", "WinSDK"]
+license = "MIT"
+build = "build.rs"
+links = "api-ms-win-net-isolation-l1-1-0"
+
+[dependencies]
+winapi = "*"
