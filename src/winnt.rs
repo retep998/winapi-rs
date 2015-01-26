@@ -1,7 +1,17 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
-//! This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed through the Win32 API.
+//! This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed
+//! through the Win32 API.
+//33
 pub const ANYSIZE_ARRAY: usize = 1;
+//382
+pub type VOID = ::c_void;
+pub type CHAR = ::c_char;
+pub type SHORT = ::c_short;
+pub type LONG = ::c_long;
+// pub type INT = ::c_int; // Already defined by minwindef.h
+//3563
+// FIXME - Align 16
 #[repr(C)] #[derive(Copy)] pub struct CONTEXT {
     pub P1Home: ::DWORD64,
     pub P2Home: ::DWORD64,

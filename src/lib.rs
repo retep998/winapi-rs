@@ -35,6 +35,7 @@ pub use minwindef::*;
 pub use synchapi::*;
 pub use wincon::*;
 pub use wincrypt::*;
+pub use windowsx::*;
 pub use winnt::*;
 pub use winuser::*;
 //-------------------------------------------------------------------------------------------------
@@ -54,6 +55,7 @@ pub mod minwindef;
 pub mod synchapi;
 pub mod wincon;
 pub mod wincrypt;
+pub mod windowsx;
 pub mod winnt;
 pub mod winuser;
 // #[derive(Copy)] hack
@@ -193,11 +195,6 @@ pub type PPOINTL = *mut POINTL;
 //-------------------------------------------------------------------------------------------------
 pub type PVOID = *mut c_void;
 pub type PVOID64 = u64; // This is a 64-bit pointer, even when in 32-bit
-pub type VOID = c_void;
-pub type CHAR = c_char;
-pub type SHORT = c_short;
-pub type LONG = c_long;
-// pub type INT = c_int; // Already defined in minwindef.h
 pub type WCHAR = wchar_t;
 pub type PWCHAR = *mut WCHAR;
 pub type LPWCH = *mut WCHAR;

@@ -1,9 +1,9 @@
 [package]
 
 name = "winapi"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Peter Atashian <retep998@gmail.com>"]
-description = "WinAPI FFI bindings. Use this for building higher level abstractions."
+description = "Types and constants for WinAPI bindings. See README for list of crates providing function bindings."
 documentation = "https://retep998.github.io/winapi-rs/winapi/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
