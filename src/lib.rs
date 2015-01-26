@@ -353,7 +353,7 @@ pub struct OBJECTID {
     pub Lineage: GUID,
     pub Uniquifier: DWORD,
 }
-pub type EXCEPTION_ROUTINE = extern "system" fn(
+pub type EXCEPTION_ROUTINE = unsafe extern "system" fn(
     *mut _EXCEPTION_RECORD,
     PVOID,
     *mut _CONTEXT,
@@ -1550,34 +1550,34 @@ pub const IID_IMMDeviceEnumerator: IID = GUID {
 #[repr(C)]
 #[derive(Copy)]
 pub struct IMMDeviceVtbl {
-    pub QueryInterface: extern "system" fn(
+    pub QueryInterface: unsafe extern "system" fn(
         This: *mut IMMDevice,
         riid: REFIID,
         ppvObject: *mut *mut c_void,
     ) -> HRESULT,
-    pub AddRef: extern "system" fn(
+    pub AddRef: unsafe extern "system" fn(
         This: *mut IMMDevice,
     ) -> ULONG,
-    pub Release: extern "system" fn(
+    pub Release: unsafe extern "system" fn(
         This: *mut IMMDevice,
     ) -> ULONG,
-    pub Activate: extern "system" fn(
+    pub Activate: unsafe extern "system" fn(
         This: *mut IMMDevice,
         iid: REFIID,
         dwClsCtx: DWORD,
         pActivationParams: *mut PROPVARIANT,
         ppInterface: *mut LPVOID,
     ) -> HRESULT,
-    pub OpenPropertyStore: extern "system" fn(
+    pub OpenPropertyStore: unsafe extern "system" fn(
         This: *mut IMMDevice,
         stgmAccess: DWORD,
         ppProperties: *mut *mut IPropertyStore,
     ) -> HRESULT,
-    pub GetId: extern "system" fn(
+    pub GetId: unsafe extern "system" fn(
         This: *mut IMMDevice,
         ppstrId: *mut LPWSTR,
     ) -> HRESULT,
-    pub GetState: extern "system" fn(
+    pub GetState: unsafe extern "system" fn(
         This: *mut IMMDevice,
         pdwState: *mut DWORD,
     ) -> HRESULT,
@@ -1590,39 +1590,39 @@ pub struct IMMDevice {
 #[repr(C)]
 #[derive(Copy)]
 pub struct IMMDeviceEnumeratorVtbl {
-    pub QueryInterface: extern "system" fn(
+    pub QueryInterface: unsafe extern "system" fn(
         This: *mut IMMDeviceEnumerator,
         riid: REFIID,
         ppvObject: *mut *mut c_void,
     ) -> HRESULT,
-    pub AddRef: extern "system" fn(
+    pub AddRef: unsafe extern "system" fn(
         This: *mut IMMDeviceEnumerator,
     ) -> ULONG,
-    pub Release: extern "system" fn(
+    pub Release: unsafe extern "system" fn(
         This: *mut IMMDeviceEnumerator,
     ) -> ULONG,
-    pub EnumAudioEndpoints: extern "system" fn(
+    pub EnumAudioEndpoints: unsafe extern "system" fn(
         This: *mut IMMDeviceEnumerator,
         dataFlow: EDataFlow,
         dwStateMask: DWORD,
         ppDevices: *mut *mut IMMDeviceCollection,
     ) -> HRESULT,
-    pub GetDefaultAudioEndpoint: extern "system" fn(
+    pub GetDefaultAudioEndpoint: unsafe extern "system" fn(
         This: *mut IMMDeviceEnumerator,
         dataFlow: EDataFlow,
         role: ERole,
         ppEndpoint: *mut *mut IMMDevice,
     ) -> HRESULT,
-    pub GetDevice: extern "system" fn(
+    pub GetDevice: unsafe extern "system" fn(
         This: *mut IMMDeviceEnumerator,
         pwstrId: LPCWSTR,
         ppDevices: *mut *mut IMMDevice,
     ) -> HRESULT,
-    pub RegisterEndpointNotificationCallback: extern "system" fn(
+    pub RegisterEndpointNotificationCallback: unsafe extern "system" fn(
         This: *mut IMMDeviceEnumerator,
         pClient: *mut IMMNotificationClient,
     ) -> HRESULT,
-    pub UnregisterEndpointNotificationCallback: extern "system" fn(
+    pub UnregisterEndpointNotificationCallback: unsafe extern "system" fn(
         This: *mut IMMDeviceEnumerator,
         pClient: *mut IMMNotificationClient,
     ) -> HRESULT,
@@ -1713,18 +1713,18 @@ pub const AUDCLNT_S_POSITION_STALLED: HRESULT = 0x8890003;
 #[repr(C)]
 #[derive(Copy)]
 pub struct IAudioClientVtbl {
-    pub QueryInterface: extern "system" fn(
+    pub QueryInterface: unsafe extern "system" fn(
         This: *mut IAudioClient,
         riid: REFIID,
         ppvObject: *mut *mut c_void,
     ) -> HRESULT,
-    pub AddRef: extern "system" fn(
+    pub AddRef: unsafe extern "system" fn(
         This: *mut IAudioClient,
     ) -> ULONG,
-    pub Release: extern "system" fn(
+    pub Release: unsafe extern "system" fn(
         This: *mut IAudioClient,
     ) -> ULONG,
-    pub Initialize: extern "system" fn(
+    pub Initialize: unsafe extern "system" fn(
         This: *mut IAudioClient,
         ShareMode: AUDCLNT_SHAREMODE,
         StreamFlags: DWORD,
@@ -1733,47 +1733,47 @@ pub struct IAudioClientVtbl {
         pFormat: *const WAVEFORMATEX,
         AudioSessionGuid: LPCGUID,
     ) -> HRESULT,
-    pub GetBufferSize: extern "system" fn(
+    pub GetBufferSize: unsafe extern "system" fn(
         This: *mut IAudioClient,
         pNumBufferFrames: *mut UINT32,
     ) -> HRESULT,
-    pub GetStreamLatency: extern "system" fn(
+    pub GetStreamLatency: unsafe extern "system" fn(
         This: *mut IAudioClient,
         phnsLatency: *mut REFERENCE_TIME,
     ) -> HRESULT,
-    pub GetCurrentPadding: extern "system" fn(
+    pub GetCurrentPadding: unsafe extern "system" fn(
         This: *mut IAudioClient,
         pNumPaddingFrames: *mut UINT32,
     ) -> HRESULT,
-    pub IsFormatSupported: extern "system" fn(
+    pub IsFormatSupported: unsafe extern "system" fn(
         This: *mut IAudioClient,
         ShareMode: AUDCLNT_SHAREMODE,
         pFormat: *const WAVEFORMATEX,
         ppClosestMatch: *mut *mut WAVEFORMATEX,
     ) -> HRESULT,
-    pub GetMixFormat: extern "system" fn(
+    pub GetMixFormat: unsafe extern "system" fn(
         This: *mut IAudioClient,
         ppDeviceFormat: *mut *mut WAVEFORMATEX,
     ) -> HRESULT,
-    pub GetDevicePeriod: extern "system" fn(
+    pub GetDevicePeriod: unsafe extern "system" fn(
         This: *mut IAudioClient,
         phnsDefaultDevicePeriod: *mut REFERENCE_TIME,
         phnsMinimumDevicePeriod: *mut REFERENCE_TIME,
     ) -> HRESULT,
-    pub Start: extern "system" fn(
+    pub Start: unsafe extern "system" fn(
         This: *mut IAudioClient,
     ) -> HRESULT,
-    pub Stop: extern "system" fn(
+    pub Stop: unsafe extern "system" fn(
         This: *mut IAudioClient,
     ) -> HRESULT,
-    pub Reset: extern "system" fn(
+    pub Reset: unsafe extern "system" fn(
         This: *mut IAudioClient,
     ) -> HRESULT,
-    pub SetEventHandle: extern "system" fn(
+    pub SetEventHandle: unsafe extern "system" fn(
         This: *mut IAudioClient,
         eventHandle: HANDLE,
     ) -> HRESULT,
-    pub GetService: extern "system" fn(
+    pub GetService: unsafe extern "system" fn(
         This: *mut IAudioClient,
         riid: REFIID,
         ppv: *mut LPVOID,
@@ -1787,23 +1787,23 @@ pub struct IAudioClient {
 #[repr(C)]
 #[derive(Copy)]
 pub struct IAudioRenderClientVtbl {
-    pub QueryInterface: extern "system" fn(
+    pub QueryInterface: unsafe extern "system" fn(
         This: *mut IAudioRenderClient,
         riid: REFIID,
         ppvObject: *mut *mut c_void,
     ) -> HRESULT,
-    pub AddRef: extern "system" fn(
+    pub AddRef: unsafe extern "system" fn(
         This: *mut IAudioRenderClient,
     ) -> ULONG,
-    pub Release: extern "system" fn(
+    pub Release: unsafe extern "system" fn(
         This: *mut IAudioRenderClient,
     ) -> ULONG,
-    pub GetBuffer: extern "system" fn(
+    pub GetBuffer: unsafe extern "system" fn(
         This: *mut IAudioRenderClient,
         NumFramesRequested: UINT32,
         ppData: *mut *mut BYTE,
     ) -> HRESULT,
-    pub ReleaseBuffer: extern "system" fn(
+    pub ReleaseBuffer: unsafe extern "system" fn(
         This: *mut IAudioRenderClient,
         NumFramesWritten: UINT32,
         dwFlags: DWORD,
@@ -1872,39 +1872,39 @@ pub struct PROPVARIANT {
 #[repr(C)]
 #[derive(Copy)]
 pub struct IMallocVtbl {
-    pub QueryInterface: extern "system" fn(
+    pub QueryInterface: unsafe extern "system" fn(
         This: *mut IMalloc,
         riid: REFIID,
         ppvObject: *mut *mut c_void,
     ) -> HRESULT,
-    pub AddRef: extern "system" fn(
+    pub AddRef: unsafe extern "system" fn(
         This: *mut IMalloc,
     ) -> ULONG,
-    pub Release: extern "system" fn(
+    pub Release: unsafe extern "system" fn(
         This: *mut IMalloc,
     ) -> ULONG,
-    pub Alloc: extern "system" fn(
+    pub Alloc: unsafe extern "system" fn(
         This: *mut IMalloc,
         cb: SIZE_T,
     ) -> *mut c_void,
-    pub Realloc: extern "system" fn(
+    pub Realloc: unsafe extern "system" fn(
         This: *mut IMalloc,
         pv: *mut c_void,
         cb: SIZE_T,
     ) -> *mut c_void,
-    pub Free: extern "system" fn(
+    pub Free: unsafe extern "system" fn(
         This: *mut IMalloc,
         pv: *mut c_void,
     ),
-    pub GetSize: extern "system" fn(
+    pub GetSize: unsafe extern "system" fn(
         This: *mut IMalloc,
         pv: *mut c_void,
     ) -> SIZE_T,
-    pub DidAlloc: extern "system" fn(
+    pub DidAlloc: unsafe extern "system" fn(
         This: *mut IMalloc,
         pv: *mut c_void,
     ) -> c_int,
-    pub HeapMinimize: extern "system" fn(
+    pub HeapMinimize: unsafe extern "system" fn(
         This: *mut IMalloc,
     ),
 }
@@ -1932,70 +1932,70 @@ pub struct STATSTG {
 #[repr(C)]
 #[derive(Copy)]
 pub struct IStreamVtbl {
-    pub QueryInterface: extern "system" fn(
+    pub QueryInterface: unsafe extern "system" fn(
         This: *mut IStream,
         riid: REFIID,
         ppvObject: *mut *mut c_void,
     ) -> HRESULT,
-    pub AddRef: extern "system" fn(
+    pub AddRef: unsafe extern "system" fn(
         This: *mut IStream,
     ) -> ULONG,
-    pub Release: extern "system" fn(
+    pub Release: unsafe extern "system" fn(
         This: *mut IStream,
     ) -> ULONG,
-    pub Read: extern "system" fn(
+    pub Read: unsafe extern "system" fn(
         This: *mut IStream,
         pv: *mut c_void,
         cb: ULONG,
         pcbRead: *mut ULONG,
     ) -> HRESULT,
-    pub Write: extern "system" fn(
+    pub Write: unsafe extern "system" fn(
         This: *mut IStream,
         pv: *const c_void,
         cb: ULONG,
         pcbWritten: *mut ULONG,
     ) -> HRESULT,
-    pub Seek: extern "system" fn(
+    pub Seek: unsafe extern "system" fn(
         This: *mut IStream,
         dlibMove: LARGE_INTEGER,
         dwOrigin: DWORD,
         plibNewPosition: *mut ULARGE_INTEGER,
     ) -> HRESULT,
-    pub SetSize: extern "system" fn(
+    pub SetSize: unsafe extern "system" fn(
         This: *mut IStream,
         libNewSize: ULARGE_INTEGER,
     ) -> HRESULT,
-    pub CopyTo: extern "system" fn(
+    pub CopyTo: unsafe extern "system" fn(
         This: *mut IStream,
         cb: ULARGE_INTEGER,
         pcbRead: *mut ULARGE_INTEGER,
         pcbWritten: *mut ULARGE_INTEGER,
     ) -> HRESULT,
-    pub Commit: extern "system" fn(
+    pub Commit: unsafe extern "system" fn(
         This: *mut IStream,
         grfCommitFlags: DWORD,
     ) -> HRESULT,
-    pub Revert: extern "system" fn(
+    pub Revert: unsafe extern "system" fn(
         This: *mut IStream,
     ) -> HRESULT,
-    pub LockRegion: extern "system" fn(
-        This: *mut IStream,
-        libOffset: ULARGE_INTEGER,
-        cb: ULARGE_INTEGER,
-        dwLockType: DWORD,
-    ) -> HRESULT,
-    pub UnlockRegion: extern "system" fn(
+    pub LockRegion: unsafe extern "system" fn(
         This: *mut IStream,
         libOffset: ULARGE_INTEGER,
         cb: ULARGE_INTEGER,
         dwLockType: DWORD,
     ) -> HRESULT,
-    pub Stat: extern "system" fn(
+    pub UnlockRegion: unsafe extern "system" fn(
+        This: *mut IStream,
+        libOffset: ULARGE_INTEGER,
+        cb: ULARGE_INTEGER,
+        dwLockType: DWORD,
+    ) -> HRESULT,
+    pub Stat: unsafe extern "system" fn(
         This: *mut IStream,
         pstatstg: *mut STATSTG,
         grfStatFlag: DWORD,
     ) -> HRESULT,
-    pub Clone: extern "system" fn(
+    pub Clone: unsafe extern "system" fn(
         This: *mut IStream,
         ppstm: *mut *mut IStream,
     ) -> HRESULT,
@@ -2050,15 +2050,15 @@ pub type CO_MTA_USAGE_COOKIE = *mut CO_MTA_USAGE_COOKIE__;
 #[repr(C)]
 #[derive(Copy)]
 pub struct IUnknownVtbl {
-    pub QueryInterface: extern "system" fn(
+    pub QueryInterface: unsafe extern "system" fn(
         This: *mut IUnknown,
         riid: REFIID,
         ppvObject: *mut *mut c_void,
     ) -> HRESULT,
-    pub AddRef: extern "system" fn(
+    pub AddRef: unsafe extern "system" fn(
         This: *mut IUnknown,
     ) -> ULONG,
-    pub Release: extern "system" fn(
+    pub Release: unsafe extern "system" fn(
         This: *mut IUnknown,
     ) -> ULONG,
 }
@@ -2811,7 +2811,7 @@ pub const WS_EX_LAYOUTRTL: DWORD = 0x00400000;
 pub const WS_EX_COMPOSITED: DWORD = 0x02000000;
 pub const WS_EX_NOACTIVATE: DWORD = 0x08000000;
 
-pub type WNDPROC = extern "system" fn(HWND, UINT, WPARAM, LPARAM) -> LRESULT;
+pub type WNDPROC = unsafe extern "system" fn(HWND, UINT, WPARAM, LPARAM) -> LRESULT;
 #[repr(C)]
 #[derive(Copy)]
 pub struct MSG {

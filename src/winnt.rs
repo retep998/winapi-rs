@@ -171,8 +171,10 @@ pub const CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION: ::WORD =
     pub pAttributeV1: PCLAIM_SECURITY_ATTRIBUTE_V1,
 }
 pub type PCLAIM_SECURITY_ATTRIBUTES_INFORMATION = *mut CLAIM_SECURITY_ATTRIBUTES_INFORMATION;
-pub type PVECTORED_EXCEPTION_HANDLER = extern "system" fn(ExceptionInfo: *mut EXCEPTION_POINTERS) -> ::LONG;
-pub type PSECURE_MEMORY_CACHE_CALLBACK = extern "system" fn(
+pub type PVECTORED_EXCEPTION_HANDLER = unsafe extern "system" fn(
+    ExceptionInfo: *mut EXCEPTION_POINTERS,
+) -> ::LONG;
+pub type PSECURE_MEMORY_CACHE_CALLBACK = unsafe extern "system" fn(
     Addr: ::PVOID, Range: ::SIZE_T,
 ) -> ::BOOLEAN;
 #[repr(C)] #[derive(Copy)] pub struct RTL_SRWLOCK {
