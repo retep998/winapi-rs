@@ -95,12 +95,15 @@ pub const INPUT_KEYBOARD: ::DWORD = 1;
 pub const INPUT_HARDWARE: ::DWORD = 2;
 #[repr(C)] #[derive(Copy)] pub struct INPUT {
     pub type_: ::DWORD,
-    pub union_: (), // FIXME - Use unions or unsafe enums here somehow
+    pub union_: MOUSEINPUT, // FIXME - Use a proper untagged union here
 }
-/// A highly experimental version of INPUT. You have been warned.
-#[repr(C)] #[derive(Copy)] pub struct INPUT_generic<T> {
-    pub type_: ::DWORD,
-    pub union_: T,
+#[test]
+fn test_INPUT() {
+    use core::mem::{size_of, align_of};
+    assert!(size_of::<MOUSEINPUT>() >= size_of::<HARDWAREINPUT>());
+    assert!(size_of::<MOUSEINPUT>() >= size_of::<KEYBDINPUT>());
+    assert!(align_of::<MOUSEINPUT>() >= align_of::<HARDWAREINPUT>());
+    assert!(align_of::<MOUSEINPUT>() >= align_of::<KEYBDINPUT>());
 }
 pub type PINPUT = *mut INPUT;
 pub type LPINPUT = *mut INPUT;

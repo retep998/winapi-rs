@@ -9,8 +9,9 @@
 //-------------------------------------------------------------------------------------------------
 // External crates
 //-------------------------------------------------------------------------------------------------
-#[allow(unstable)] extern crate core;
+#[allow(unstable)] #[macro_use] extern crate core;
 #[allow(unstable)] extern crate libc;
+#[cfg(test)] extern crate std;
 //-------------------------------------------------------------------------------------------------
 // Imports
 //-------------------------------------------------------------------------------------------------
@@ -60,6 +61,7 @@ pub mod windowsx;
 pub mod winnt;
 pub mod winuser;
 // #[derive(Copy)] hack
+#[cfg(not(test))]
 mod std {
     pub mod marker {
         pub use core::marker::Copy;
