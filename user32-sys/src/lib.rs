@@ -6,8 +6,8 @@
 extern crate winapi;
 use winapi::*;
 extern "system" {
+    pub fn AddClipboardFormatListener(hWnd: HWND) -> BOOL;
     // pub fn ActivateKeyboardLayout();
-    // pub fn AddClipboardFormatListener();
     // pub fn AdjustWindowRect();
     pub fn AdjustWindowRectEx(
         lpRect: LPRECT, dwStyle: DWORD, bMenu: BOOL, dwExStyle: DWORD,
@@ -41,10 +41,15 @@ extern "system" {
     // pub fn ChangeClipboardChain();
     // pub fn ChangeDisplaySettingsA();
     // pub fn ChangeDisplaySettingsExA();
+    pub fn CloseClipboard() -> BOOL;
+    pub fn ChangeClipboardChain(hwndRemove: HWND, hwndNewNext: HWND) -> BOOL;
+    pub fn ChangeDisplaySettingsW(lpDevMode: *mut DEVMODEW, dwFlags: DWORD) -> LONG;
+    pub fn ChangeDisplaySettingsW(lpDevMode: *mut DEVMODEW, dwFlags: DWORD) -> LONG;
     pub fn ChangeDisplaySettingsExW(
         lpszDeviceName: LPCWSTR, lpDevMode: *mut DEVMODEW, hwnd: HWND, dwFlags: DWORD,
         lParam: LPVOID,
     ) -> LONG;
+    pub fn CountClipboardFormats() -> c_int;
     pub fn ChangeDisplaySettingsW(lpDevMode: *mut DEVMODEW, dwFlags: DWORD) -> LONG;
     // pub fn ChangeMenuA();
     // pub fn ChangeMenuW();
@@ -76,7 +81,6 @@ extern "system" {
     // pub fn ChildWindowFromPointEx();
     // pub fn ClientToScreen();
     // pub fn ClipCursor();
-    // pub fn CloseClipboard();
     // pub fn CloseDesktop();
     // pub fn CloseGestureInfoHandle();
     // pub fn CloseTouchInputHandle();
@@ -87,7 +91,6 @@ extern "system" {
     // pub fn CopyIcon();
     // pub fn CopyImage();
     // pub fn CopyRect();
-    // pub fn CountClipboardFormats();
     // pub fn CreateAcceleratorTableA();
     // pub fn CreateAcceleratorTableW();
     // pub fn CreateCaret();
@@ -213,11 +216,11 @@ extern "system" {
     pub fn EndPaint(hWnd: HWND, lpPaint: *const PAINTSTRUCT) -> BOOL;
     // pub fn EndTask();
     // pub fn EnumChildWindows();
-    // pub fn EnumClipboardFormats();
     // pub fn EnumDesktopWindows();
     // pub fn EnumDesktopsA();
     // pub fn EnumDesktopsW();
     // pub fn EnumDisplayDevicesA();
+    pub fn EnumClipboardFormats(format: UINT) -> UINT;
     pub fn EnumDisplayDevicesW(
         lpDevice: LPCWSTR, iDevNum: DWORD, lpDisplayDevice: PDISPLAY_DEVICEW, dwFlags: DWORD,
     ) -> BOOL;
@@ -275,13 +278,12 @@ extern "system" {
     // pub fn GetClassNameW();
     // pub fn GetClassWord();
     pub fn GetClientRect(hWnd: HWND, lpRect: LPRECT) -> BOOL;
+    pub fn GetClipboardOwner() -> HWND;
     // pub fn GetClipCursor();
     // pub fn GetClipboardData();
     // pub fn GetClipboardFormatNameA();
     // pub fn GetClipboardFormatNameW();
-    // pub fn GetClipboardOwner();
     // pub fn GetClipboardSequenceNumber();
-    // pub fn GetClipboardViewer();
     // pub fn GetComboBoxInfo();
     // pub fn GetCurrentInputMessageSource();
     // pub fn GetCursor();
@@ -345,12 +347,12 @@ extern "system" {
     // pub fn GetMessagePos();
     // pub fn GetMessageTime();
     pub fn GetMessageW(lpMsg: LPMSG, hWnd: HWND, wMsgFilterMin: UINT, wMsgFilterMax: UINT) -> BOOL;
+    pub fn GetOpenClipboardWindow() -> HWND;
     // pub fn GetMonitorInfoA();
     // pub fn GetMonitorInfoW();
     // pub fn GetMouseMovePointsEx();
     // pub fn GetNextDlgGroupItem();
     // pub fn GetNextDlgTabItem();
-    // pub fn GetOpenClipboardWindow();
     // pub fn GetParent();
     // pub fn GetPhysicalCursorPos();
     // pub fn GetPointerCursorId();
@@ -396,6 +398,7 @@ extern "system" {
     // pub fn GetSysColorBrush();
     // pub fn GetSystemMenu();
     pub fn GetSystemMetrics(nIndex: c_int) -> c_int;
+    pub fn GetClipboardViewer() -> HWND;
     // pub fn GetTabbedTextExtentA();
     // pub fn GetTabbedTextExtentW();
     // pub fn GetThreadDesktop();
@@ -457,6 +460,7 @@ extern "system" {
     // pub fn InternalGetWindowText();
     // pub fn IntersectRect();
     pub fn InvalidateRect(hWnd: HWND, lpRect: *const RECT, bErase: BOOL) -> BOOL;
+    pub fn IsClipboardFormatAvailable(format: UINT) -> BOOL;
     // pub fn InvalidateRgn();
     // pub fn InvertRect();
     // pub fn IsCharAlphaA();
@@ -468,7 +472,6 @@ extern "system" {
     // pub fn IsCharUpperA();
     // pub fn IsCharUpperW();
     // pub fn IsChild();
-    // pub fn IsClipboardFormatAvailable();
     // pub fn IsDialogMessage();
     // pub fn IsDialogMessageA();
     // pub fn IsDialogMessageW();
@@ -531,12 +534,14 @@ extern "system" {
     // pub fn MenuItemFromPoint();
     // pub fn MessageBeep();
     pub fn MessageBoxA(hWnd: HWND, lpText: LPCSTR, lpCaption: LPCSTR, uType: UINT) -> c_int;
+    pub fn MessageBoxW(hWnd: HWND, lpText: LPCWSTR, lpCaption: LPCWSTR, uType: UINT) -> c_int;
     pub fn MessageBoxExA(
         hWnd: HWND, lpText: LPCSTR, lpCaption: LPCSTR, uType: UINT, wLanguageId: WORD,
     ) -> c_int;
     pub fn MessageBoxExW(
         hWnd: HWND, lpText: LPCWSTR, lpCaption: LPCWSTR, uType: UINT, wLanguageId: WORD,
     ) -> c_int;
+    pub fn OpenClipboard(hWnd: HWND) -> BOOL;
     // pub fn MessageBoxIndirectA();
     // pub fn MessageBoxIndirectW();
     // pub fn MessageBoxTimeoutA();
@@ -557,7 +562,6 @@ extern "system" {
     // pub fn OemToCharBuffW();
     // pub fn OemToCharW();
     // pub fn OffsetRect();
-    // pub fn OpenClipboard();
     // pub fn OpenDesktopA();
     // pub fn OpenDesktopW();
     // pub fn OpenIcon();
@@ -630,6 +634,7 @@ extern "system" {
     // pub fn SendMessageTimeoutA();
     // pub fn SendMessageTimeoutW();
     pub fn SendMessageW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
+    pub fn SetClipboardViewer(hWndNewViewer: HWND) -> HWND;
     // pub fn SendNotifyMessageA();
     // pub fn SendNotifyMessageW();
     // pub fn SetActiveWindow();
@@ -644,7 +649,6 @@ extern "system" {
     pub fn SetClassLongW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
     // pub fn SetClassWord();
     // pub fn SetClipboardData();
-    // pub fn SetClipboardViewer();
     // pub fn SetCoalescableTimer();
     // pub fn SetCursor();
     // pub fn SetCursorPos();
