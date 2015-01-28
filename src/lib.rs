@@ -38,6 +38,7 @@ pub use synchapi::*;
 pub use wincon::*;
 pub use wincrypt::*;
 pub use windowsx::*;
+pub use wingdi::*;
 pub use winnt::*;
 pub use winuser::*;
 //-------------------------------------------------------------------------------------------------
@@ -58,6 +59,7 @@ pub mod synchapi;
 pub mod wincon;
 pub mod wincrypt;
 pub mod windowsx;
+pub mod wingdi;
 pub mod winnt;
 pub mod winuser;
 // #[derive(Copy)] hack
@@ -2093,16 +2095,6 @@ pub const SND_SENTRY: DWORD = 0x00080000;
 pub const SND_RING: DWORD = 0x00100000;
 pub const SND_SYSTEM: DWORD = 0x00200000;
 
-// old stuff
-#[repr(C)]
-#[derive(Copy)]
-pub struct CONSOLE_READCONSOLE_CONTROL {
-    pub nLength: ULONG,
-    pub nInitialChars: ULONG,
-    pub dwCtrlWakeupMask: ULONG,
-    pub dwControlKeyState: ULONG,
-}
-pub type PCONSOLE_READCONSOLE_CONTROL = *mut CONSOLE_READCONSOLE_CONTROL;
 #[repr(C)]
 #[derive(Copy)]
 pub struct PROCESS_MEMORY_COUNTERS {
@@ -3158,16 +3150,3 @@ pub const INVALID_HANDLE_VALUE: HANDLE = -1 as HANDLE;
 // error codes
 pub const ERROR_INVALID_HANDLE: DWORD = 6;
 pub const ERROR_ILLEGAL_CHARACTER: DWORD = 582;
-// console input flags
-pub const ENABLE_PROCESSED_INPUT: DWORD = 0x1;
-pub const ENABLE_LINE_INPUT: DWORD = 0x2;
-pub const ENABLE_ECHO_INPUT: DWORD = 0x4;
-pub const ENABLE_WINDOW_INPUT: DWORD = 0x8;
-pub const ENABLE_MOUSE_INPUT: DWORD = 0x10;
-pub const ENABLE_INSERT_MODE: DWORD = 0x20;
-pub const ENABLE_QUICK_EDIT_MODE: DWORD = 0x40;
-pub const ENABLE_EXTENDED_FLAGS: DWORD = 0x80;
-pub const ENABLE_AUTO_POSITION: DWORD = 0x100;
-//console output flags
-pub const ENABLE_PROCESSED_OUTPUT: DWORD = 0x1;
-pub const ENABLE_WRAP_AT_EOL_OUTPUT: DWORD = 0x2;
