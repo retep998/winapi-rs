@@ -4,21 +4,21 @@ This crate provides types and constants for WinAPI FFI bindings. They are gather
 
 If this crate is missing something you need, feel free to create an issue, open a pull request, or contact me via [other means](http://www.rustaceans.org/retep998).
 
----
-Example using a crate (in this case, winmm-sys). Cargo.toml:
-
-    [dependencies]
-    winapi = "*"
-    winmm-sys = "*"
-
-Source:
-
-    extern crate winapi;
-    extern crate "winmm-sys" as winmm;
-    fn func() {
-        winmm::PlaySoundA(...);
-    }
----
+## Example
+Cargo.toml:
+```toml
+[dependencies]
+winapi = "*"
+winmm-sys = "*"
+```
+example.rs:
+```Rust
+extern crate winapi;
+extern crate "winmm-sys" as winmm;
+fn func() {
+    winmm::PlaySoundA(...);
+}
+```
 
 Bindings to library functions are in separate crates. The source to each crate is in the relevant subdirectory. Crossed out crates are currently empty and reserved for future use. Feel free to get in touch with me if you are interested in any of these crates.
 * ~~[aclui-sys](https://crates.io/crates/aclui-sys)~~
