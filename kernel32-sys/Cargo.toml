@@ -1,7 +1,7 @@
 [package]
 
 name = "kernel32-sys"
-version = "0.0.3"
+version = "0.0.4"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to kernel32."
 documentation = "https://retep998.github.io/doc/kernel32-sys/"

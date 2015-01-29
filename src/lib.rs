@@ -3,8 +3,8 @@
 //! Types and constants for WinAPI bindings.
 #![no_std]
 #![experimental]
-#![allow(non_camel_case_types, non_snake_case, non_upper_case_globals, raw_pointer_derive)]
-#![warn(unused_qualifications)]
+#![allow(bad_style, raw_pointer_derive)]
+#![warn(unused_qualifications, unused, unused_typecasts)]
 
 //-------------------------------------------------------------------------------------------------
 // External crates
