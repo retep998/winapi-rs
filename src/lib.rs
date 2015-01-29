@@ -33,6 +33,7 @@ pub use libc::{
     c_double,
 };
 pub use libloaderapi::*;
+pub use minwinbase::*;
 pub use minwindef::*;
 pub use synchapi::*;
 pub use wincon::*;
@@ -54,6 +55,7 @@ macro_rules! DECLARE_HANDLE {
 // Modules
 //-------------------------------------------------------------------------------------------------
 pub mod libloaderapi;
+pub mod minwinbase;
 pub mod minwindef;
 pub mod synchapi;
 pub mod wincon;
@@ -430,23 +432,6 @@ pub struct LUID_AND_ATTRIBUTES {
     Attributes: DWORD,
 }
 pub type PLUID_AND_ATTRIBUTES = *mut LUID_AND_ATTRIBUTES;
-pub const DELETE: DWORD = 0x00010000;
-pub const READ_CONTROL: DWORD = 0x00020000;
-pub const WRITE_DAC: DWORD = 0x00040000;
-pub const WRITE_OWNER: DWORD = 0x00080000;
-pub const SYNCHRONIZE: DWORD = 0x00100000;
-pub const STANDARD_RIGHTS_REQUIRED: DWORD = 0x000F0000;
-pub const STANDARD_RIGHTS_READ: DWORD = READ_CONTROL;
-pub const STANDARD_RIGHTS_WRITE: DWORD = READ_CONTROL;
-pub const STANDARD_RIGHTS_EXECUTE: DWORD = READ_CONTROL;
-pub const STANDARD_RIGHTS_ALL: DWORD = 0x001F0000;
-pub const SPECIFIC_RIGHTS_ALL: DWORD = 0x0000FFFF;
-pub const ACCESS_SYSTEM_SECURITY: DWORD = 0x01000000;
-pub const MAXIMUM_ALLOWED: DWORD = 0x02000000;
-pub const GENERIC_READ: DWORD = 0x80000000;
-pub const GENERIC_WRITE: DWORD = 0x40000000;
-pub const GENERIC_EXECUTE: DWORD = 0x20000000;
-pub const GENERIC_ALL: DWORD = 0x10000000;
 pub const PROCESS_TERMINATE: DWORD = 0x0001;
 pub const PROCESS_CREATE_THREAD: DWORD = 0x0002;
 pub const PROCESS_SET_SESSIONID: DWORD = 0x0004;
@@ -720,49 +705,6 @@ pub struct POINT {
 pub type PPOINT = *mut POINT;
 pub type NPPOINT = *mut POINT;
 pub type LPPOINT = *mut POINT;
-// minwinbase.h
-#[repr(C)]
-#[derive(Copy)]
-pub struct SECURITY_ATTRIBUTES {
-    pub nLength: DWORD,
-    pub lpSecurityDescriptor: LPVOID,
-    pub bInheritHandle: BOOL,
-}
-pub type PSECURITY_ATTRIBUTES = *mut SECURITY_ATTRIBUTES;
-pub type LPSECURITY_ATTRIBUTES = *mut SECURITY_ATTRIBUTES;
-#[repr(C)]
-#[derive(Copy)]
-pub struct OVERLAPPED {
-    pub Internal: ULONG_PTR,
-    pub InternalHigh: ULONG_PTR,
-    pub Offset: DWORD,
-    pub OffsetHigh: DWORD,
-    pub hEvent: HANDLE,
-}
-pub type LPOVERLAPPED = *mut OVERLAPPED;
-#[repr(C)]
-#[derive(Copy)]
-pub struct OVERLAPPED_ENTRY {
-    pub lpCompletionKey: ULONG_PTR,
-    pub lpOverlapped: LPOVERLAPPED,
-    pub Internal: ULONG_PTR,
-    pub dwNumberOfBytesTransferred: DWORD,
-}
-pub type LPOVERLAPPED_ENTRY = *mut OVERLAPPED_ENTRY;
-#[repr(C)]
-#[derive(Copy)]
-pub struct SYSTEMTIME {
-    pub wYear: DWORD,
-    pub wMonth: DWORD,
-    pub wDayOfWeek: DWORD,
-    pub wDay: DWORD,
-    pub wHour: DWORD,
-    pub wMinute: DWORD,
-    pub wSecond: DWORD,
-    pub wMilliseconds: DWORD,
-}
-pub type PSYSTEMTIME = *mut SYSTEMTIME;
-pub type LPSYSTEMTIME = *mut SYSTEMTIME;
 
 //-------------------------------------------------------------------------------------------------
 // winbase.h

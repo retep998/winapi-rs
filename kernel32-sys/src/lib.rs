@@ -116,12 +116,22 @@ extern "system" {
         lpSecurityAttributes: *const SECURITY_ATTRIBUTES, dwFlags: DWORD,
         lpScreenBufferData: LPVOID,
     ) -> HANDLE;
-    // pub fn CreateDirectoryA();
-    // pub fn CreateDirectoryExA();
-    // pub fn CreateDirectoryExW();
+    pub fn CreateDirectoryA(
+        lpPathName: LPCSTR, lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+    ) -> BOOL;
+    pub fn CreateDirectoryExA(
+        lpTemplateDirectory: LPCSTR, lpNewDirectory: LPCSTR,
+        lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+    ) -> BOOL;
+    pub fn CreateDirectoryExW(
+        lpTemplateDirectory: LPCWSTR, lpNewDirectory: LPCWSTR,
+        lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+    ) -> BOOL;
     // pub fn CreateDirectoryTransactedA();
     // pub fn CreateDirectoryTransactedW();
-    // pub fn CreateDirectoryW();
+    pub fn CreateDirectoryW(
+        lpPathName: LPCWSTR, lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+    ) -> BOOL;
     // pub fn CreateEventA();
     // pub fn CreateEventExA();
     // pub fn CreateEventExW();
@@ -317,9 +327,13 @@ extern "system" {
     // pub fn FindAtomA();
     // pub fn FindAtomW();
     // pub fn FindClose();
-    // pub fn FindCloseChangeNotification();
-    // pub fn FindFirstChangeNotificationA();
-    // pub fn FindFirstChangeNotificationW();
+    pub fn FindCloseChangeNotification(hChangeHandle: HANDLE) -> BOOL;
+    pub fn FindFirstChangeNotificationA(
+        lpPathName: LPCSTR, bWatchSubtree: BOOL, dwNotifyFilter: DWORD,
+    ) -> HANDLE;
+    pub fn FindFirstChangeNotificationW(
+        lpPathName: LPCWSTR, bWatchSubtree: BOOL, dwNotifyFilter: DWORD,
+    ) -> HANDLE;
     // pub fn FindFirstFileA();
     // pub fn FindFirstFileExA();
     // pub fn FindFirstFileExW();
@@ -336,7 +350,7 @@ extern "system" {
     // pub fn FindFirstVolumeW();
     // pub fn FindNLSString();
     // pub fn FindNLSStringEx();
-    // pub fn FindNextChangeNotification();
+    pub fn FindNextChangeNotification(hChangeHandle: HANDLE) -> BOOL;
     // pub fn FindNextFileA();
     // pub fn FindNextFileNameW();
     // pub fn FindNextFileW();
@@ -463,8 +477,8 @@ extern "system" {
     pub fn GetCurrentConsoleFontEx(
         hConsoleOutput: HANDLE, bMaximumWindow: BOOL, lpConsoleCurrentFontEx: PCONSOLE_FONT_INFOEX,
     ) -> BOOL;
-    // pub fn GetCurrentDirectoryA();
-    // pub fn GetCurrentDirectoryW();
+    pub fn GetCurrentDirectoryA(nBufferLength: DWORD, lpBuffer: LPSTR) -> DWORD;
+    pub fn GetCurrentDirectoryW(nBufferLength: DWORD, lpBuffer: LPWSTR) -> DWORD;
     // pub fn GetCurrentPackageFamilyName();
     // pub fn GetCurrentPackageFullName();
     // pub fn GetCurrentPackageId();
@@ -1061,7 +1075,11 @@ extern "system" {
         hConsoleInput: HANDLE, lpBuffer: LPVOID, nNumberOfCharsToRead: DWORD,
         lpNumberOfCharsRead: LPDWORD, pInputControl: PCONSOLE_READCONSOLE_CONTROL,
     ) -> BOOL;
-    // pub fn ReadDirectoryChangesW();
+    pub fn ReadDirectoryChangesW(
+        hDirectory: HANDLE, lpBuffer: LPVOID, nBufferLength: DWORD, bWatchSubtree: BOOL,
+        dwNotifyFilter: DWORD, lpBytesReturned: LPDWORD, lpOverlapped: LPOVERLAPPED,
+        lpCompletionRoutine: LPOVERLAPPED_COMPLETION_ROUTINE,
+    );
     // pub fn ReadFile();
     // pub fn ReadFileEx();
     // pub fn ReadFileScatter();
@@ -1084,10 +1102,10 @@ extern "system" {
     // pub fn ReleaseSRWLockShared();
     // pub fn ReleaseSemaphore();
     // pub fn ReleaseSemaphoreWhenCallbackReturns();
-    // pub fn RemoveDirectoryA();
+    pub fn RemoveDirectoryA(lpPathName: LPCSTR) -> BOOL;
     // pub fn RemoveDirectoryTransactedA();
     // pub fn RemoveDirectoryTransactedW();
-    // pub fn RemoveDirectoryW();
+    pub fn RemoveDirectoryW(lpPathName: LPCWSTR) -> BOOL;
     // pub fn RemoveDllDirectory();
     // pub fn RemoveLocalAlternateComputerNameA();
     // pub fn RemoveLocalAlternateComputerNameW();
@@ -1184,8 +1202,8 @@ extern "system" {
     ) -> BOOL;
     // pub fn SetCriticalSectionSpinCount();
     // pub fn SetCurrentConsoleFontEx();
-    // pub fn SetCurrentDirectoryA();
-    // pub fn SetCurrentDirectoryW();
+    pub fn SetCurrentDirectoryA(lpPathName: LPCSTR) -> BOOL;
+    pub fn SetCurrentDirectoryW(lpPathName: LPCWSTR) -> BOOL;
     // pub fn SetDefaultCommConfigA();
     // pub fn SetDefaultCommConfigW();
     // pub fn SetDefaultDllDirectories();
