@@ -270,7 +270,7 @@ extern "system" {
     // pub fn GetClassLongPtrA();
     // #[cfg(target_arch = "x86_64")]
     // pub fn GetClassLongPtrW();
-    // pub fn GetClassLongW();
+    pub fn GetClassLongW(hWnd: HWND, nIndex: c_int) -> DWORD;
     // pub fn GetClassNameA();
     // pub fn GetClassNameW();
     // pub fn GetClassWord();
@@ -392,7 +392,7 @@ extern "system" {
     // pub fn GetScrollRange();
     // pub fn GetShellWindow();
     // pub fn GetSubMenu();
-    // pub fn GetSysColor();
+    pub fn GetSysColor(nIndex: c_int) -> DWORD;
     // pub fn GetSysColorBrush();
     // pub fn GetSystemMenu();
     pub fn GetSystemMetrics(nIndex: c_int) -> c_int;
@@ -641,7 +641,7 @@ extern "system" {
     // pub fn SetClassLongPtrA();
     // #[cfg(target_arch = "x86_64")]
     // pub fn SetClassLongPtrW();
-    // pub fn SetClassLongW();
+    pub fn SetClassLongW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
     // pub fn SetClassWord();
     // pub fn SetClipboardData();
     // pub fn SetClipboardViewer();
