@@ -32,6 +32,7 @@ pub use libc::{
     c_float,
     c_double,
 };
+pub use audioclient::*;
 pub use libloaderapi::*;
 pub use minwinbase::*;
 pub use minwindef::*;
@@ -39,6 +40,7 @@ pub use synchapi::*;
 pub use wincon::*;
 pub use wincrypt::*;
 pub use windowsx::*;
+pub use winerror::*;
 pub use wingdi::*;
 pub use winnt::*;
 pub use winuser::*;
@@ -51,9 +53,21 @@ macro_rules! DECLARE_HANDLE {
         pub type $name = *mut $inner;
     };
 }
+macro_rules! MAKE_HRESULT {
+    ($sev:expr, $fac:expr, $code:expr) => {
+        ($sev << 31) | ($fac << 16) | $code
+    }
+}
+macro_rules! MAKE_SCODE {
+    ($sev:expr, $fac:expr, $code:expr) => {
+        ($sev << 31) | ($fac << 16) | $code
+    }
+}
+
 //-------------------------------------------------------------------------------------------------
 // Modules
 //-------------------------------------------------------------------------------------------------
+pub mod audioclient;
 pub mod libloaderapi;
 pub mod minwinbase;
 pub mod minwindef;
@@ -61,6 +75,7 @@ pub mod synchapi;
 pub mod wincon;
 pub mod wincrypt;
 pub mod windowsx;
+pub mod winerror;
 pub mod wingdi;
 pub mod winnt;
 pub mod winuser;
@@ -182,6 +197,9 @@ pub type DWORD64 = __uint64;
 pub type PDWORD64 = *mut __uint64;
 pub type KAFFINITY = ULONG_PTR;
 pub type PKAFFINITY = *mut KAFFINITY;
+
+//lazy
+pub type SCODE = LONG;
 
 //-------------------------------------------------------------------------------------------------
 // windef.h
@@ -582,7 +600,7 @@ pub struct _CONTEXT;
 pub struct _DISPATCHER_CONTEXT;
 // shlobj.h
 pub type GPFIDL_FLAGS = c_int;
-#[repr(C)]
+#[repr(i32)]
 #[derive(Copy)]
 pub enum KNOWN_FOLDER_FLAG {
     KF_FLAG_DEFAULT = 0x00000000,
@@ -595,7 +613,7 @@ pub enum KNOWN_FOLDER_FLAG {
     KF_FLAG_DEFAULT_PATH = 0x00000400,
     KF_FLAG_NOT_PARENT_RELATIVE = 0x00000200,
     KF_FLAG_SIMPLE_IDLIST = 0x00000100,
-    KF_FLAG_ALIAS_ONLY = 0x80000000,
+    KF_FLAG_ALIAS_ONLY = 0x80000000u32 as i32,
 }
 pub const IDO_SHGIOI_SHARE: c_int = 0x0FFFFFFF;
 pub const IDO_SHGIOI_LINK: c_int = 0x0FFFFFFE;
@@ -1602,60 +1620,6 @@ pub const IID_IAudioRenderClient: IID = GUID {
     Data3: 0x4483,
     Data4: [0xA7, 0xBF, 0xAD, 0xDC, 0xA7, 0xC2, 0x60, 0xE2],
 };
-
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_NOT_INITIALIZED: HRESULT = 0x88890001;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_ALREADY_INITIALIZED: HRESULT = 0x88890002;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_WRONG_ENDPOINT_TYPE: HRESULT = 0x88890003;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_DEVICE_INVALIDATED: HRESULT = 0x88890004;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_NOT_STOPPED: HRESULT = 0x88890005;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_BUFFER_TOO_LARGE: HRESULT = 0x88890006;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_OUT_OF_ORDER: HRESULT = 0x88890007;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_UNSUPPORTED_FORMAT: HRESULT = 0x88890008;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_INVALID_SIZE: HRESULT = 0x88890009;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_DEVICE_IN_USE: HRESULT = 0x8889000a;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_BUFFER_OPERATION_PENDING: HRESULT = 0x8889000b;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_THREAD_NOT_REGISTERED: HRESULT = 0x8889000c;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_EXCLUSIVE_MODE_NOT_ALLOWED: HRESULT = 0x8889000e;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_ENDPOINT_CREATE_FAILED: HRESULT = 0x8889000f;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_SERVICE_NOT_RUNNING: HRESULT = 0x88890010;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_EVENTHANDLE_NOT_EXPECTED: HRESULT = 0x88890011;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_EXCLUSIVE_MODE_ONLY: HRESULT = 0x88890012;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_BUFDURATION_PERIOD_NOT_EQUAL: HRESULT = 0x88890013;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_EVENTHANDLE_NOT_SET: HRESULT = 0x88890014;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_INCORRECT_BUFFER_SIZE: HRESULT = 0x88890015;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_BUFFER_SIZE_ERROR: HRESULT = 0x88890016;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_CPUUSAGE_EXCEEDED: HRESULT = 0x88890017;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_BUFFER_ERROR: HRESULT = 0x88890018;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_BUFFER_SIZE_NOT_ALIGNED: HRESULT = 0x88890019;
-#[allow(overflowing_literals)]
-pub const AUDCLNT_E_INVALID_DEVICE_PERIOD: HRESULT = 0x88890020;
-pub const AUDCLNT_S_BUFFER_EMPTY: HRESULT = 0x8890001;
-pub const AUDCLNT_S_THREAD_ALREADY_REGISTERED: HRESULT = 0x8890002;
-pub const AUDCLNT_S_POSITION_STALLED: HRESULT = 0x8890003;
 
 #[repr(C)]
 #[derive(Copy)]
