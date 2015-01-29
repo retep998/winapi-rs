@@ -1,4 +1,4 @@
-// Copyright © 2015, Peter Atashian
+﻿// Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to user32.
 #![no_std]
@@ -43,8 +43,6 @@ extern "system" {
     // pub fn ChangeDisplaySettingsExA();
     pub fn CloseClipboard() -> BOOL;
     pub fn ChangeClipboardChain(hwndRemove: HWND, hwndNewNext: HWND) -> BOOL;
-    pub fn ChangeDisplaySettingsW(lpDevMode: *mut DEVMODEW, dwFlags: DWORD) -> LONG;
-    pub fn ChangeDisplaySettingsW(lpDevMode: *mut DEVMODEW, dwFlags: DWORD) -> LONG;
     pub fn ChangeDisplaySettingsExW(
         lpszDeviceName: LPCWSTR, lpDevMode: *mut DEVMODEW, hwnd: HWND, dwFlags: DWORD,
         lParam: LPVOID,
