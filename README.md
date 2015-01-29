@@ -1,10 +1,13 @@
 # winapi-rs [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/retep998/winapi-rs) #
 
+[Documentation](https://retep998.github.io/doc/winapi/)
+
 This crate provides types and constants for WinAPI FFI bindings. They are gathered by hand using the very latest official SDK from Microsoft. I aim to replace all existing Windows FFI in other crates with this set of crates through the "[Embrace, extend, and extinguish](http://en.wikipedia.org/wiki/Embrace,_extend_and_extinguish)" technique.
 
 If this crate is missing something you need, feel free to create an issue, open a pull request, or contact me via [other means](http://www.rustaceans.org/retep998).
 
-## Example
+## Example ##
+
 Cargo.toml:
 ```toml
 [dependencies]
@@ -19,6 +22,8 @@ fn func() {
     winmm::PlaySoundA(...);
 }
 ```
+
+## Functions ##
 
 Bindings to library functions are in separate crates. The source to each crate is in the relevant subdirectory. Crossed out crates are currently empty and reserved for future use. Feel free to get in touch with me if you are interested in any of these crates.
 * ~~[aclui-sys](https://crates.io/crates/aclui-sys)~~
@@ -441,5 +446,3 @@ Bindings to library functions are in separate crates. The source to each crate i
 * ~~[xmllite-sys](https://crates.io/crates/xmllite-sys)~~
 * ~~[xolehlp-sys](https://crates.io/crates/xolehlp-sys)~~
 * ~~[xpsprint-sys](https://crates.io/crates/xpsprint-sys)~~
-
-[Documentation](https://retep998.github.io/doc/winapi/)
