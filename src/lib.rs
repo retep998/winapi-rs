@@ -2770,6 +2770,23 @@ pub struct WNDCLASSEXW {
 pub type PWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type NPWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type LPWNDCLASSEXW = *mut WNDCLASSEXW;
+#[repr(C)]
+#[derive(Copy)]
+pub struct WNDCLASSW {
+    pub style: UINT,
+    pub lpfnWndProc: WNDPROC,
+    cbClsExtra: c_int,
+    cbWndExtra: c_int,
+    hInstance: HINSTANCE,
+    hIcon: HICON,
+    hCursor: HCURSOR,
+    hbrBackground: HBRUSH,
+    lpszMenuName: LPCWSTR,
+    lpszClassName: LPCWSTR
+}
+pub type PWNDCLASSW = *mut WNDCLASSW;
+pub type NPWNDCLASSW = *mut WNDCLASSW;
+pub type LPWNDCLASSW = *mut WNDCLASSW;
 
 //-------------------------------------------------------------------------------------------------
 // wingdi.h
