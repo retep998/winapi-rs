@@ -8,21 +8,21 @@ use winapi::*;
 extern "system" {
     // pub fn ActivateKeyboardLayout();
     pub fn AddClipboardFormatListener(hWnd: HWND) -> BOOL;
-    // pub fn AdjustWindowRect();
+    pub fn AdjustWindowRect(lpRect: LPRECT, dwStyle: DWORD, bMenu: BOOL) -> BOOL;
     pub fn AdjustWindowRectEx(
         lpRect: LPRECT, dwStyle: DWORD, bMenu: BOOL, dwExStyle: DWORD,
     ) -> BOOL;
-    // pub fn AllowSetForegroundWindow();
+    pub fn AllowSetForegroundWindow(dwProcessId: DWORD) -> BOOL;
     // pub fn AnimateWindow();
-    // pub fn AnyPopup();
+    pub fn AnyPopup() -> BOOL;
     // pub fn AppendMenuA();
     // pub fn AppendMenuW();
-    // pub fn ArrangeIconicWindows();
-    // pub fn AttachThreadInput();
+    pub fn ArrangeIconicWindows(hWnd: HWND) -> UINT;
+    pub fn AttachThreadInput(idAttach: DWORD, idAttachTo: DWORD, fAttach: BOOL) -> BOOL;
     // pub fn BeginDeferWindowPos();
     pub fn BeginPaint(hwnd: HWND, lpPaint: LPPAINTSTRUCT) -> HDC;
     // pub fn BlockInput();
-    // pub fn BringWindowToTop();
+    pub fn BringWindowToTop(hWnd: HWND) -> BOOL;
     // pub fn BroadcastSystemMessage();
     // pub fn BroadcastSystemMessageA();
     // pub fn BroadcastSystemMessageExA();
@@ -80,8 +80,8 @@ extern "system" {
     // pub fn CloseDesktop();
     // pub fn CloseGestureInfoHandle();
     // pub fn CloseTouchInputHandle();
-    // pub fn CloseWindow();
-    // pub fn CloseWindowStation();
+    pub fn CloseWindow(hWnd: HWND) -> BOOL;
+    pub fn CloseWindowStation(hWinSta: HWINSTA) -> BOOL;
     // pub fn CopyAcceleratorTableA();
     // pub fn CopyAcceleratorTableW();
     // pub fn CopyIcon();
@@ -90,7 +90,7 @@ extern "system" {
     pub fn CountClipboardFormats() -> c_int;
     // pub fn CreateAcceleratorTableA();
     // pub fn CreateAcceleratorTableW();
-    // pub fn CreateCaret();
+    pub fn CreateCaret(hWnd: HWND, hBitmap: HBITMAP, nWidth: c_int, nHeight: c_int) -> BOOL;
     // pub fn CreateCursor();
     // pub fn CreateDesktopA();
     // pub fn CreateDesktopExA();
@@ -158,13 +158,13 @@ extern "system" {
     // pub fn DefWindowProcA();
     pub fn DefWindowProcW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
     // pub fn DeferWindowPos();
-    // pub fn DeleteMenu();
+    pub fn DeleteMenu(hMenu: HMENU, uPosition: UINT, uFlags: UINT) -> BOOL;
     // pub fn DeregisterShellHookWindow();
-    // pub fn DestroyAcceleratorTable();
-    // pub fn DestroyCaret();
-    // pub fn DestroyCursor();
-    // pub fn DestroyIcon();
-    // pub fn DestroyMenu();
+    pub fn DestroyAcceleratorTable(hAccel: HACCEL) -> BOOL;
+    pub fn DestroyCaret() -> BOOL;
+    pub fn DestroyCursor(hCursor: HCURSOR) -> BOOL;
+    pub fn DestroyIcon(hIcon: HICON) -> BOOL;
+    pub fn DestroyMenu(hMenu: HMENU) -> HMENU;
     pub fn DestroyWindow(hWnd: HWND) -> BOOL;
     // pub fn DialogBoxIndirectParamA();
     // pub fn DialogBoxIndirectParamW();
@@ -201,12 +201,12 @@ extern "system" {
     // pub fn DrawTextExW();
     // pub fn DrawTextW();
     // pub fn EditWndProc();
-    // pub fn EmptyClipboard();
+    pub fn EmptyClipboard() -> BOOL;
     // pub fn EnableMenuItem();
     // pub fn EnableMouseInPointer();
     // pub fn EnableScrollBar();
     // pub fn EnableSessionForMMCSS();
-    // pub fn EnableWindow();
+    pub fn EnableWindow(hWnd: HWND, bEnable: BOOL) -> BOOL;
     // pub fn EndDeferWindowPos();
     // pub fn EndDialog();
     // pub fn EndMenu();
@@ -259,11 +259,13 @@ extern "system" {
     // pub fn GetAutoRotationState();
     // pub fn GetCIMSSM();
     // pub fn GetCapture();
-    // pub fn GetCaretBlinkTime();
-    // pub fn GetCaretPos();
+    pub fn GetCaretBlinkTime() -> UINT;
+    pub fn GetCaretPos(lpPoint: LPPOINT) -> BOOL;
     // pub fn GetClassInfoA();
     // pub fn GetClassInfoExA();
-    // pub fn GetClassInfoExW();
+    pub fn GetClassInfoExW(
+        hinst: HINSTANCE, lpszClass: LPCWSTR, lpwcx: LPWNDCLASSEXW
+    ) -> BOOL;
     // pub fn GetClassInfoW();
     // pub fn GetClassLongA();
     // #[cfg(target_arch = "x86_64")]
@@ -273,10 +275,10 @@ extern "system" {
     pub fn GetClassLongW(hWnd: HWND, nIndex: c_int) -> DWORD;
     // pub fn GetClassNameA();
     // pub fn GetClassNameW();
-    // pub fn GetClassWord();
+    pub fn GetClassWord(hWnd: HWND, nIndex: c_int) -> WORD;
     pub fn GetClientRect(hWnd: HWND, lpRect: LPRECT) -> BOOL;
     // pub fn GetClipCursor();
-    // pub fn GetClipboardData();
+    pub fn GetClipboardData(uFormat: UINT) -> HANDLE;
     // pub fn GetClipboardFormatNameA();
     // pub fn GetClipboardFormatNameW();
     pub fn GetClipboardOwner() -> HWND;
@@ -284,7 +286,7 @@ extern "system" {
     pub fn GetClipboardViewer() -> HWND;
     // pub fn GetComboBoxInfo();
     // pub fn GetCurrentInputMessageSource();
-    // pub fn GetCursor();
+    pub fn GetCursor() -> HCURSOR;
     // pub fn GetCursorInfo();
     // pub fn GetCursorPos();
     pub fn GetDC(hWnd: HWND) -> HDC;
@@ -300,7 +302,7 @@ extern "system" {
     // pub fn GetDlgItemTextW();
     // pub fn GetDoubleClickTime();
     // pub fn GetFocus();
-    // pub fn GetForegroundWindow();
+    pub fn GetForegroundWindow() -> HWND;
     // pub fn GetGUIThreadInfo();
     // pub fn GetGestureConfig();
     // pub fn GetGestureExtraArgs();
@@ -436,7 +438,7 @@ extern "system" {
     // pub fn GetWindowWord();
     // pub fn GrayStringA();
     // pub fn GrayStringW();
-    // pub fn HideCaret();
+    pub fn HideCaret(hWnd: HWND) -> BOOL;
     // pub fn HiliteMenuItem();
     // pub fn IMPGetIMEA();
     // pub fn IMPGetIMEW();
@@ -632,10 +634,10 @@ extern "system" {
     pub fn SendMessageW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
     // pub fn SendNotifyMessageA();
     // pub fn SendNotifyMessageW();
-    // pub fn SetActiveWindow();
+    pub fn SetActiveWindow(hWnd: HWND) -> HWND;
     // pub fn SetCapture();
-    // pub fn SetCaretBlinkTime();
-    // pub fn SetCaretPos();
+    pub fn SetCaretBlinkTime(uMSeconds: UINT) -> BOOL;
+    pub fn SetCaretPos(x: c_int, y: c_int) -> BOOL;
     // pub fn SetClassLongA();
     // #[cfg(target_arch = "x86_64")]
     // pub fn SetClassLongPtrA();
@@ -714,7 +716,7 @@ extern "system" {
     // pub fn SetWindowsHookExA();
     // pub fn SetWindowsHookExW();
     // pub fn SetWindowsHookW();
-    // pub fn ShowCaret();
+    pub fn ShowCaret(hWnd: HWND) -> BOOL;
     // pub fn ShowCursor();
     // pub fn ShowOwnedPopups();
     // pub fn ShowScrollBar();
