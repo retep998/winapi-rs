@@ -3,6 +3,7 @@
 //! FFI bindings to user32.
 #![no_std]
 #![experimental]
+#[cfg(test)] extern crate std;
 extern crate winapi;
 use winapi::*;
 extern "system" {
