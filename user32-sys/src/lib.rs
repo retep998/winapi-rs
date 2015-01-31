@@ -7,7 +7,7 @@
 extern crate winapi;
 use winapi::*;
 extern "system" {
-    // pub fn ActivateKeyboardLayout();
+    pub fn ActivateKeyboardLayout(hkl: HKL, flags: UINT) -> HKL;
     pub fn AddClipboardFormatListener(hWnd: HWND) -> BOOL;
     pub fn AdjustWindowRect(lpRect: LPRECT, dwStyle: DWORD, bMenu: BOOL) -> BOOL;
     pub fn AdjustWindowRectEx(
@@ -22,7 +22,7 @@ extern "system" {
     pub fn AttachThreadInput(idAttach: DWORD, idAttachTo: DWORD, fAttach: BOOL) -> BOOL;
     // pub fn BeginDeferWindowPos();
     pub fn BeginPaint(hwnd: HWND, lpPaint: LPPAINTSTRUCT) -> HDC;
-    // pub fn BlockInput();
+    pub fn BlockInput(fBlockIt: BOOL) -> BOOL;
     pub fn BringWindowToTop(hWnd: HWND) -> BOOL;
     // pub fn BroadcastSystemMessage();
     // pub fn BroadcastSystemMessageA();
@@ -255,12 +255,12 @@ extern "system" {
     // pub fn FlashWindowEx();
     // pub fn FrameRect();
     // pub fn FreeDDElParam();
-    // pub fn GetActiveWindow();
+    pub fn GetActiveWindow() -> HWND;
     // pub fn GetAltTabInfo();
     // pub fn GetAltTabInfoA();
     // pub fn GetAltTabInfoW();
     // pub fn GetAncestor();
-    // pub fn GetAsyncKeyState();
+    pub fn GetAsyncKeyState(vKey: c_int) -> SHORT;
     // pub fn GetAutoRotationState();
     // pub fn GetCIMSSM();
     // pub fn GetCapture();
@@ -306,7 +306,7 @@ extern "system" {
     // pub fn GetDlgItemTextA();
     // pub fn GetDlgItemTextW();
     // pub fn GetDoubleClickTime();
-    // pub fn GetFocus();
+    pub fn GetFocus() -> HWND;
     pub fn GetForegroundWindow() -> HWND;
     // pub fn GetGUIThreadInfo();
     // pub fn GetGestureConfig();
@@ -319,16 +319,16 @@ extern "system" {
     // pub fn GetInputDesktop();
     // pub fn GetInputLocaleInfo();
     // pub fn GetInputState();
-    // pub fn GetKBCodePage();
-    // pub fn GetKeyNameTextA();
-    // pub fn GetKeyNameTextW();
-    // pub fn GetKeyState();
-    // pub fn GetKeyboardLayout();
-    // pub fn GetKeyboardLayoutList();
-    // pub fn GetKeyboardLayoutNameA();
-    // pub fn GetKeyboardLayoutNameW();
-    // pub fn GetKeyboardState();
-    // pub fn GetKeyboardType();
+    pub fn GetKBCodePage() -> UINT;
+    pub fn GetKeyNameTextA(lparam: LONG, lpString: LPSTR, cchSize: c_int) -> c_int;
+    pub fn GetKeyNameTextW(lParam: LONG, lpString: LPWSTR, cchSize: c_int) -> c_int;
+    pub fn GetKeyState(nVirtKey: c_int) -> SHORT;
+    pub fn GetKeyboardLayout(idThread: DWORD) -> HKL;
+    pub fn GetKeyboardLayoutList(nBuff: c_int, lpList: *mut HKL) -> c_int;
+    pub fn GetKeyboardLayoutNameA(pwszKLID: LPSTR) -> BOOL;
+    pub fn GetKeyboardLayoutNameW(pwszKLID: LPWSTR) -> BOOL;
+    pub fn GetKeyboardState(lpKeyState: PBYTE) -> BOOL;
+    pub fn GetKeyboardType(nTypeFlag: c_int) -> c_int;
     // pub fn GetLastActivePopup();
     // pub fn GetLastInputInfo();
     // pub fn GetLayeredWindowAttributes();
@@ -492,7 +492,7 @@ extern "system" {
     // pub fn IsTouchWindow();
     // pub fn IsWinEventHookInstalled();
     // pub fn IsWindow();
-    // pub fn IsWindowEnabled();
+    pub fn IsWindowEnabled(hWnd: HWND) -> BOOL;
     // pub fn IsWindowUnicode();
     // pub fn IsWindowVisible();
     // pub fn IsWow64Message();
