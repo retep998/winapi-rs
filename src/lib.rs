@@ -2217,6 +2217,11 @@ pub const MB_DEFMASK: DWORD = 0x00000F00;
 pub const MB_MODEMASK: DWORD = 0x00003000;
 pub const MB_MISCMASK: DWORD = 0x0000C000;
 
+pub const SB_HORZ: c_int = 0;
+pub const SB_VERT: c_int = 1;
+pub const SB_CTL: c_int = 2;
+pub const SB_BOTH: c_int = 3;
+
 pub const SW_HIDE: c_int = 0;
 pub const SW_SHOWNORMAL: c_int = 1;
 pub const SW_NORMAL: c_int = 1;
