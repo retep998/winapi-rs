@@ -208,7 +208,7 @@ extern "system" {
     pub fn EmptyClipboard() -> BOOL;
     // pub fn EnableMenuItem();
     // pub fn EnableMouseInPointer();
-    // pub fn EnableScrollBar();
+    pub fn EnableScrollBar(hWnd: HWND, wSBflags: UINT, wArrows: UINT) -> BOOL;
     // pub fn EnableSessionForMMCSS();
     pub fn EnableWindow(hWnd: HWND, bEnable: BOOL) -> BOOL;
     // pub fn EndDeferWindowPos();
@@ -394,8 +394,8 @@ extern "system" {
     // pub fn GetRegisteredRawInputDevices();
     // pub fn GetScrollBarInfo();
     // pub fn GetScrollInfo();
-    // pub fn GetScrollPos();
-    // pub fn GetScrollRange();
+    pub fn GetScrollPos(hWnd: HWND, nBar: c_int) -> c_int;
+    pub fn GetScrollRange(hWnd: HWND, nBar: c_int, lpMinPos: LPINT, lpMaxPos: LPINT) -> BOOL;
     // pub fn GetShellWindow();
     // pub fn GetSubMenu();
     pub fn GetSysColor(nIndex: c_int) -> DWORD;
@@ -622,9 +622,17 @@ extern "system" {
     // pub fn ReplyMessage();
     // pub fn ReuseDDElParam();
     // pub fn ScreenToClient();
-    // pub fn ScrollDC();
-    // pub fn ScrollWindow();
-    // pub fn ScrollWindowEx();
+    pub fn ScrollDC(
+        hDC: HDC, dx: c_int, dy: c_int, lprcScroll: *const RECT, lprcClip: *const RECT,
+        hrgnUpdate: HRGN, lprcUpdate: LPRECT
+    ) -> BOOL;
+    pub fn ScrollWindow(
+        hWnd: HWND, xAmount: c_int, yAmount: c_int, lpRect: *const RECT, lpClipRect: *const RECT
+    ) -> BOOL;
+    pub fn ScrollWindowEx(
+        hWnd: HWND, dx: c_int, dy: c_int, prcScroll: *const RECT, prcClip *const RECT,
+        hrgnUpdate: HRGN, prcUpdate: LPRECT, flags: UINT
+    ) -> c_int;
     // pub fn SendDlgItemMessageA();
     // pub fn SendDlgItemMessageW();
     // pub fn SendIMEMessageExA();
@@ -688,8 +696,9 @@ extern "system" {
     // pub fn SetRect();
     // pub fn SetRectEmpty();
     // pub fn SetScrollInfo();
-    // pub fn SetScrollPos();
-    // pub fn SetScrollRange();
+    pub fn SetScrollPos(hWnd: HWND, nBar: c_int, nPos: c_int, bRedraw: BOOl) -> c_int;
+    pub fn SetScrollRange(
+        hWnd HWND, nBar: c_int, nMinPos: c_int, nMaxPos: c_int, bRedraw: BOOL) -> BOOL;
     // pub fn SetShellWindow();
     // pub fn SetSysColors();
     pub fn SetSystemCursor(hcur: HCURSOR, id: DWORD) -> BOOL;
