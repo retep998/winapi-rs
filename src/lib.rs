@@ -2805,6 +2805,19 @@ pub struct SCROLLBARINFO {
 }
 pub type PSCROLLBARINFO = *mut SCROLLBARINFO;
 pub type LPSCROLLBARINFO = *mut SCROLLBARINFO;
+#[repr(C)]
+#[derive(Copy)]
+pub struct SCROLLINFO {
+    pub cbSize: UINT,
+    pub fMask: UINT,
+    pub nMin: c_int,
+    pub nMax: c_int,
+    pub nPage: UINT,
+    pub nPos: c_int,
+    pub nTrackPos: c_int
+}
+pub type LPSCROLLINFO = *mut SCROLLINFO;
+pub type LPCSCROLLINFO = *const SCROLLINFO;
 
 //-------------------------------------------------------------------------------------------------
 // wingdi.h
