@@ -2,15 +2,16 @@
 // Licensed under the MIT License <LICENSE.md>
 //! Types and constants for WinAPI bindings.
 #![no_std]
-#![experimental]
+#![unstable]
+#![feature(core, libc)]
 #![allow(bad_style, raw_pointer_derive)]
 #![warn(unused_qualifications, unused, unused_typecasts)]
 
 //-------------------------------------------------------------------------------------------------
 // External crates
 //-------------------------------------------------------------------------------------------------
-#[allow(unstable)] #[macro_use] extern crate core;
-#[allow(unstable)] extern crate libc;
+#[macro_use] extern crate core;
+extern crate libc;
 #[cfg(test)] extern crate std;
 //-------------------------------------------------------------------------------------------------
 // Imports
@@ -33,6 +34,7 @@ pub use libc::{
     c_double,
 };
 pub use audioclient::*;
+pub use fileapi::*;
 pub use libloaderapi::*;
 pub use minwinbase::*;
 pub use minwindef::*;
@@ -68,6 +70,7 @@ macro_rules! MAKE_SCODE {
 // Modules
 //-------------------------------------------------------------------------------------------------
 pub mod audioclient;
+pub mod fileapi;
 pub mod libloaderapi;
 pub mod minwinbase;
 pub mod minwindef;

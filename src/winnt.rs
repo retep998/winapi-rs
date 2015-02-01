@@ -283,6 +283,11 @@ pub type PFILE_ID_128 = *mut FILE_ID_128;
     pub FileNameLength: ::DWORD,
     pub FileName: [::WCHAR; 1],
 }
+#[repr(C)] #[derive(Copy)] pub struct FILE_SEGMENT_ELEMENT {
+    pub Buffer: ::PVOID64,
+    pub Alignment: ::ULONGLONG,
+}
+pub type PFILE_SEGMENT_ELEMENT = *mut FILE_SEGMENT_ELEMENT;
 //18195
 #[repr(C)] #[derive(Copy)] pub struct RTL_SRWLOCK {
     pub Ptr: ::PVOID,
