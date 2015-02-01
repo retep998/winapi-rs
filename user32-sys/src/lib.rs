@@ -7,7 +7,7 @@
 extern crate winapi;
 use winapi::*;
 extern "system" {
-    // pub fn ActivateKeyboardLayout();
+    pub fn ActivateKeyboardLayout(hkl: HKL, flags: UINT) -> HKL;
     pub fn AddClipboardFormatListener(hWnd: HWND) -> BOOL;
     pub fn AdjustWindowRect(lpRect: LPRECT, dwStyle: DWORD, bMenu: BOOL) -> BOOL;
     pub fn AdjustWindowRectEx(
@@ -22,7 +22,7 @@ extern "system" {
     pub fn AttachThreadInput(idAttach: DWORD, idAttachTo: DWORD, fAttach: BOOL) -> BOOL;
     // pub fn BeginDeferWindowPos();
     pub fn BeginPaint(hwnd: HWND, lpPaint: LPPAINTSTRUCT) -> HDC;
-    // pub fn BlockInput();
+    pub fn BlockInput(fBlockIt: BOOL) -> BOOL;
     pub fn BringWindowToTop(hWnd: HWND) -> BOOL;
     // pub fn BroadcastSystemMessage();
     // pub fn BroadcastSystemMessageA();
@@ -76,7 +76,7 @@ extern "system" {
     // pub fn ChildWindowFromPoint();
     // pub fn ChildWindowFromPointEx();
     // pub fn ClientToScreen();
-    // pub fn ClipCursor();
+    pub fn ClipCursor(lpRect: *const RECT) -> BOOL;
     pub fn CloseClipboard() -> BOOL;
     // pub fn CloseDesktop();
     // pub fn CloseGestureInfoHandle();
@@ -85,6 +85,7 @@ extern "system" {
     pub fn CloseWindowStation(hWinSta: HWINSTA) -> BOOL;
     // pub fn CopyAcceleratorTableA();
     // pub fn CopyAcceleratorTableW();
+    pub fn CopyCursor(lpRect: *const RECT) -> BOOL;
     // pub fn CopyIcon();
     // pub fn CopyImage();
     // pub fn CopyRect();
@@ -92,7 +93,10 @@ extern "system" {
     // pub fn CreateAcceleratorTableA();
     // pub fn CreateAcceleratorTableW();
     pub fn CreateCaret(hWnd: HWND, hBitmap: HBITMAP, nWidth: c_int, nHeight: c_int) -> BOOL;
-    // pub fn CreateCursor();
+    pub fn CreateCursor(
+        hInst: HINSTANCE, xHotSpot: c_int, yHotSpot: c_int, nWidth: c_int, nHeight: c_int,
+        pvAndPlane: *const c_void, pvXORPlane: *const c_void
+    ) -> HCURSOR;
     // pub fn CreateDesktopA();
     // pub fn CreateDesktopExA();
     // pub fn CreateDesktopExW();
@@ -251,12 +255,12 @@ extern "system" {
     // pub fn FlashWindowEx();
     // pub fn FrameRect();
     // pub fn FreeDDElParam();
-    // pub fn GetActiveWindow();
+    pub fn GetActiveWindow() -> HWND;
     // pub fn GetAltTabInfo();
     // pub fn GetAltTabInfoA();
     // pub fn GetAltTabInfoW();
     // pub fn GetAncestor();
-    // pub fn GetAsyncKeyState();
+    pub fn GetAsyncKeyState(vKey: c_int) -> SHORT;
     // pub fn GetAutoRotationState();
     // pub fn GetCIMSSM();
     // pub fn GetCapture();
@@ -278,7 +282,7 @@ extern "system" {
     // pub fn GetClassNameW();
     pub fn GetClassWord(hWnd: HWND, nIndex: c_int) -> WORD;
     pub fn GetClientRect(hWnd: HWND, lpRect: LPRECT) -> BOOL;
-    // pub fn GetClipCursor();
+    pub fn GetClipCursor(lpRect: LPRECT) ->BOOL;
     pub fn GetClipboardData(uFormat: UINT) -> HANDLE;
     // pub fn GetClipboardFormatNameA();
     // pub fn GetClipboardFormatNameW();
@@ -289,7 +293,7 @@ extern "system" {
     // pub fn GetCurrentInputMessageSource();
     pub fn GetCursor() -> HCURSOR;
     // pub fn GetCursorInfo();
-    // pub fn GetCursorPos();
+    pub fn GetCursorPos(lpPoint: LPPOINT) -> BOOL;
     pub fn GetDC(hWnd: HWND) -> HDC;
     // pub fn GetDCEx();
     // pub fn GetDesktopWindow();
@@ -302,7 +306,7 @@ extern "system" {
     // pub fn GetDlgItemTextA();
     // pub fn GetDlgItemTextW();
     // pub fn GetDoubleClickTime();
-    // pub fn GetFocus();
+    pub fn GetFocus() -> HWND;
     pub fn GetForegroundWindow() -> HWND;
     // pub fn GetGUIThreadInfo();
     // pub fn GetGestureConfig();
@@ -315,16 +319,16 @@ extern "system" {
     // pub fn GetInputDesktop();
     // pub fn GetInputLocaleInfo();
     // pub fn GetInputState();
-    // pub fn GetKBCodePage();
-    // pub fn GetKeyNameTextA();
-    // pub fn GetKeyNameTextW();
-    // pub fn GetKeyState();
-    // pub fn GetKeyboardLayout();
-    // pub fn GetKeyboardLayoutList();
-    // pub fn GetKeyboardLayoutNameA();
-    // pub fn GetKeyboardLayoutNameW();
-    // pub fn GetKeyboardState();
-    // pub fn GetKeyboardType();
+    pub fn GetKBCodePage() -> UINT;
+    pub fn GetKeyNameTextA(lparam: LONG, lpString: LPSTR, cchSize: c_int) -> c_int;
+    pub fn GetKeyNameTextW(lParam: LONG, lpString: LPWSTR, cchSize: c_int) -> c_int;
+    pub fn GetKeyState(nVirtKey: c_int) -> SHORT;
+    pub fn GetKeyboardLayout(idThread: DWORD) -> HKL;
+    pub fn GetKeyboardLayoutList(nBuff: c_int, lpList: *mut HKL) -> c_int;
+    pub fn GetKeyboardLayoutNameA(pwszKLID: LPSTR) -> BOOL;
+    pub fn GetKeyboardLayoutNameW(pwszKLID: LPWSTR) -> BOOL;
+    pub fn GetKeyboardState(lpKeyState: PBYTE) -> BOOL;
+    pub fn GetKeyboardType(nTypeFlag: c_int) -> c_int;
     // pub fn GetLastActivePopup();
     // pub fn GetLastInputInfo();
     // pub fn GetLayeredWindowAttributes();
@@ -355,7 +359,7 @@ extern "system" {
     // pub fn GetNextDlgTabItem();
     pub fn GetOpenClipboardWindow() -> HWND;
     // pub fn GetParent();
-    // pub fn GetPhysicalCursorPos();
+    pub fn GetPhysicalCursorPos(lpPoint: LPPOINT) -> BOOL;
     // pub fn GetPointerCursorId();
     // pub fn GetPointerDevice();
     // pub fn GetPointerDeviceCursors();
@@ -488,7 +492,7 @@ extern "system" {
     // pub fn IsTouchWindow();
     // pub fn IsWinEventHookInstalled();
     // pub fn IsWindow();
-    // pub fn IsWindowEnabled();
+    pub fn IsWindowEnabled(hWnd: HWND) -> BOOL;
     // pub fn IsWindowUnicode();
     // pub fn IsWindowVisible();
     // pub fn IsWow64Message();
@@ -500,8 +504,8 @@ extern "system" {
     // pub fn LoadBitmapW();
     // pub fn LoadCursorA();
     // pub fn LoadCursorFromFileA();
-    // pub fn LoadCursorFromFileW();
-    // pub fn LoadCursorW();
+    pub fn LoadCursorFromFileW(lpFileName: LPCWSTR) -> HCURSOR;
+    pub fn LoadCursorW(hInstance: HINSTANCE, lpCursorName: LPCWSTR) -> HCURSOR;
     // pub fn LoadIconA();
     // pub fn LoadIconW();
     pub fn LoadImageA(
@@ -649,8 +653,8 @@ extern "system" {
     // pub fn SetClipboardData();
     pub fn SetClipboardViewer(hWndNewViewer: HWND) -> HWND;
     // pub fn SetCoalescableTimer();
-    // pub fn SetCursor();
-    // pub fn SetCursorPos();
+    pub fn SetCursor(hCursor: HCURSOR) -> HCURSOR;
+    pub fn SetCursorPos(x: c_int, y: c_int) -> BOOL;
     // pub fn SetDebugErrorLevel();
     // pub fn SetDeskWallpaper();
     // pub fn SetDisplayAutoRotationPreferences();
@@ -675,7 +679,7 @@ extern "system" {
     // pub fn SetMessageExtraInfo();
     // pub fn SetMessageQueue();
     // pub fn SetParent();
-    // pub fn SetPhysicalCursorPos();
+    pub fn SetPhysicalCursorPos(x: c_int, y: c_int) -> BOOL;
     // pub fn SetProcessDPIAware();
     // pub fn SetProcessDefaultLayout();
     // pub fn SetProcessRestrictionExemption();
@@ -689,7 +693,7 @@ extern "system" {
     // pub fn SetScrollRange();
     // pub fn SetShellWindow();
     // pub fn SetSysColors();
-    // pub fn SetSystemCursor();
+    pub fn SetSystemCursor(hcur: HCURSOR, id: DWORD) -> BOOL;
     // pub fn SetThreadDesktop();
     // pub fn SetTimer();
     // pub fn SetUserObjectInformationA();
@@ -718,7 +722,7 @@ extern "system" {
     // pub fn SetWindowsHookExW();
     // pub fn SetWindowsHookW();
     pub fn ShowCaret(hWnd: HWND) -> BOOL;
-    // pub fn ShowCursor();
+    pub fn ShowCursor(bShow: BOOL) -> c_int;
     // pub fn ShowOwnedPopups();
     // pub fn ShowScrollBar();
     // pub fn ShowSystemCursor();
