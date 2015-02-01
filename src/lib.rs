@@ -2778,14 +2778,14 @@ pub type LPWNDCLASSEXW = *mut WNDCLASSEXW;
 pub struct WNDCLASSW {
     pub style: UINT,
     pub lpfnWndProc: WNDPROC,
-    cbClsExtra: c_int,
-    cbWndExtra: c_int,
-    hInstance: HINSTANCE,
-    hIcon: HICON,
-    hCursor: HCURSOR,
-    hbrBackground: HBRUSH,
-    lpszMenuName: LPCWSTR,
-    lpszClassName: LPCWSTR
+    pub cbClsExtra: c_int,
+    pub cbWndExtra: c_int,
+    pub hInstance: HINSTANCE,
+    pub hIcon: HICON,
+    pub hCursor: HCURSOR,
+    pub hbrBackground: HBRUSH,
+    pub lpszMenuName: LPCWSTR,
+    pub lpszClassName: LPCWSTR
 }
 pub type PWNDCLASSW = *mut WNDCLASSW;
 pub type NPWNDCLASSW = *mut WNDCLASSW;
