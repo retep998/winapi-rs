@@ -2,7 +2,7 @@
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to user32.
 #![no_std]
-#![experimental]
+#![unstable]
 #[cfg(test)] extern crate std;
 extern crate winapi;
 use winapi::*;
@@ -85,7 +85,6 @@ extern "system" {
     pub fn CloseWindowStation(hWinSta: HWINSTA) -> BOOL;
     // pub fn CopyAcceleratorTableA();
     // pub fn CopyAcceleratorTableW();
-    pub fn CopyCursor(lpRect: *const RECT) -> BOOL;
     // pub fn CopyIcon();
     // pub fn CopyImage();
     // pub fn CopyRect();
@@ -95,7 +94,7 @@ extern "system" {
     pub fn CreateCaret(hWnd: HWND, hBitmap: HBITMAP, nWidth: c_int, nHeight: c_int) -> BOOL;
     pub fn CreateCursor(
         hInst: HINSTANCE, xHotSpot: c_int, yHotSpot: c_int, nWidth: c_int, nHeight: c_int,
-        pvAndPlane: *const c_void, pvXORPlane: *const c_void
+        pvAndPlane: *const VOID, pvXORPlane: *const VOID,
     ) -> HCURSOR;
     // pub fn CreateDesktopA();
     // pub fn CreateDesktopExA();
@@ -282,7 +281,7 @@ extern "system" {
     // pub fn GetClassNameW();
     pub fn GetClassWord(hWnd: HWND, nIndex: c_int) -> WORD;
     pub fn GetClientRect(hWnd: HWND, lpRect: LPRECT) -> BOOL;
-    pub fn GetClipCursor(lpRect: LPRECT) ->BOOL;
+    pub fn GetClipCursor(lpRect: LPRECT) -> BOOL;
     pub fn GetClipboardData(uFormat: UINT) -> HANDLE;
     // pub fn GetClipboardFormatNameA();
     // pub fn GetClipboardFormatNameW();
