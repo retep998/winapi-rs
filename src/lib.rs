@@ -2135,6 +2135,8 @@ pub const BS_NOTIFY: DWORD = 0x00004000;
 pub const BS_FLAT: DWORD = 0x00008000;
 pub const BS_RIGHTBUTTON: DWORD = BS_LEFTTEXT;
 
+pub const CCHILDREN_SCROLLBAR: usize = 5;
+
 pub const CDS_UPDATEREGISTRY: DWORD = 0x00000001;
 pub const CDS_TEST: DWORD = 0x00000002;
 pub const CDS_FULLSCREEN: DWORD = 0x00000004;
@@ -2790,6 +2792,19 @@ pub struct WNDCLASSW {
 pub type PWNDCLASSW = *mut WNDCLASSW;
 pub type NPWNDCLASSW = *mut WNDCLASSW;
 pub type LPWNDCLASSW = *mut WNDCLASSW;
+#[repr(C)]
+#[derive(Copy)]
+pub struct SCROLLBARINFO {
+    pub cbSize: DWORD,
+    pub rcScrollBar: RECT,
+    pub dxyLineButton: c_int,
+    pub xyThumbTop: c_int,
+    pub xyThumbBottom: c_int,
+    pub reserved: c_int,
+    pub rgstate: [DWORD; CCHILDREN_SCROLLBAR + 1]
+}
+pub type PSCROLLBARINFO = *mut SCROLLBARINFO;
+pub type LPSCROLLBARINFO = *mut SCROLLBARINFO;
 
 //-------------------------------------------------------------------------------------------------
 // wingdi.h
