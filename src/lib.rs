@@ -2823,6 +2823,13 @@ pub struct SCROLLINFO {
 }
 pub type LPSCROLLINFO = *mut SCROLLINFO;
 pub type LPCSCROLLINFO = *const SCROLLINFO;
+#[repr(C)]
+#[derive(Copy)]
+pub struct SIZE {
+    pub cx: LONG,
+    pub cy: LONG
+}
+pub type PSIZE = *mut SIZE;
 
 //-------------------------------------------------------------------------------------------------
 // wingdi.h
