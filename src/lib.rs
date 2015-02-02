@@ -2723,6 +2723,7 @@ pub const WS_EX_LAYOUTRTL: DWORD = 0x00400000;
 pub const WS_EX_COMPOSITED: DWORD = 0x02000000;
 pub const WS_EX_NOACTIVATE: DWORD = 0x08000000;
 
+pub type WNDENUMPROC = unsafe extern "system" fn(HWND, LPARAM) -> BOOL;
 pub type WNDPROC = unsafe extern "system" fn(HWND, UINT, WPARAM, LPARAM) -> LRESULT;
 #[repr(C)]
 #[derive(Copy)]
