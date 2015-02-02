@@ -301,6 +301,7 @@ pub struct GROUP_AFFINITY {
     pub Group: WORD,
     pub Reserved: [WORD; 3],
 }
+pub type HDWP = *mut HANDLE;
 pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
 pub type HANDLE = *mut c_void;
 pub type PHANDLE = *mut HANDLE;
