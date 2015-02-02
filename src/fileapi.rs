@@ -10,35 +10,35 @@ pub const INVALID_FILE_SIZE: ::DWORD = 0xFFFFFFFF;
 pub const INVALID_SET_FILE_POINTER: ::DWORD = -1;
 pub const INVALID_FILE_ATTRIBUTES: ::DWORD = -1;
 #[repr(C)] #[derive(Copy)] pub struct WIN32_FILE_ATTRIBUTE_DATA {
-    dwFileAttributes: ::DWORD,
-    ftCreationTime: ::FILETIME,
-    ftLastAccessTime: ::FILETIME,
-    ftLastWriteTime: ::FILETIME,
-    nFileSizeHigh: ::DWORD,
-    nFileSizeLow: ::DWORD,
+    pub dwFileAttributes: ::DWORD,
+    pub ftCreationTime: ::FILETIME,
+    pub ftLastAccessTime: ::FILETIME,
+    pub ftLastWriteTime: ::FILETIME,
+    pub nFileSizeHigh: ::DWORD,
+    pub nFileSizeLow: ::DWORD,
 }
 pub type LPWIN32_FILE_ATTRIBUTE_DATA = *mut WIN32_FILE_ATTRIBUTE_DATA;
 #[repr(C)] #[derive(Copy)] pub struct BY_HANDLE_FILE_INFORMATION {
-    dwFileAttributes: ::DWORD,
-    ftCreationTime: ::FILETIME,
-    ftLastAccessTime: ::FILETIME,
-    ftLastWriteTime: ::FILETIME,
-    dwVolumeSerialNumber: ::DWORD,
-    nFileSizeHigh: ::DWORD,
-    nFileSizeLow: ::DWORD,
-    nNumberOfLinks: ::DWORD,
-    nFileIndexHigh: ::DWORD,
-    nFileIndexLow: ::DWORD,
+    pub dwFileAttributes: ::DWORD,
+    pub ftCreationTime: ::FILETIME,
+    pub ftLastAccessTime: ::FILETIME,
+    pub ftLastWriteTime: ::FILETIME,
+    pub dwVolumeSerialNumber: ::DWORD,
+    pub nFileSizeHigh: ::DWORD,
+    pub nFileSizeLow: ::DWORD,
+    pub nNumberOfLinks: ::DWORD,
+    pub nFileIndexHigh: ::DWORD,
+    pub nFileIndexLow: ::DWORD,
 }
 pub type PBY_HANDLE_FILE_INFORMATION = *mut BY_HANDLE_FILE_INFORMATION;
 pub type LPBY_HANDLE_FILE_INFORMATION = *mut BY_HANDLE_FILE_INFORMATION;
 #[repr(C)] #[derive(Copy)] pub struct CREATEFILE2_EXTENDED_PARAMETERS {
-    dwSize: ::DWORD,
-    dwFileAttributes: ::DWORD,
-    dwFileFlags: ::DWORD,
-    dwSecurityQosFlags: ::DWORD,
-    lpSecurityAttributes: ::LPSECURITY_ATTRIBUTES,
-    hTemplateFile: ::HANDLE,
+    pub dwSize: ::DWORD,
+    pub dwFileAttributes: ::DWORD,
+    pub dwFileFlags: ::DWORD,
+    pub dwSecurityQosFlags: ::DWORD,
+    pub lpSecurityAttributes: ::LPSECURITY_ATTRIBUTES,
+    pub hTemplateFile: ::HANDLE,
 }
 pub type PCREATEFILE2_EXTENDED_PARAMETERS = *mut CREATEFILE2_EXTENDED_PARAMETERS;
 pub type LPCREATEFILE2_EXTENDED_PARAMETERS = *mut CREATEFILE2_EXTENDED_PARAMETERS;

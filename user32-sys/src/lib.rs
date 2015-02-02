@@ -268,7 +268,7 @@ extern "system" {
     // pub fn GetClassInfoA();
     // pub fn GetClassInfoExA();
     pub fn GetClassInfoExW(
-        hinst: HINSTANCE, lpszClass: LPCWSTR, lpwcx: LPWNDCLASSEXW
+        hinst: HINSTANCE, lpszClass: LPCWSTR, lpwcx: LPWNDCLASSEXW,
     ) -> BOOL;
     // pub fn GetClassInfoW();
     // pub fn GetClassLongA();
@@ -624,14 +624,14 @@ extern "system" {
     // pub fn ScreenToClient();
     pub fn ScrollDC(
         hDC: HDC, dx: c_int, dy: c_int, lprcScroll: *const RECT, lprcClip: *const RECT,
-        hrgnUpdate: HRGN, lprcUpdate: LPRECT
+        hrgnUpdate: HRGN, lprcUpdate: LPRECT,
     ) -> BOOL;
     pub fn ScrollWindow(
-        hWnd: HWND, xAmount: c_int, yAmount: c_int, lpRect: *const RECT, lpClipRect: *const RECT
+        hWnd: HWND, xAmount: c_int, yAmount: c_int, lpRect: *const RECT, lpClipRect: *const RECT,
     ) -> BOOL;
     pub fn ScrollWindowEx(
-        hWnd: HWND, dx: c_int, dy: c_int, prcScroll: *const RECT, prcClip *const RECT,
-        hrgnUpdate: HRGN, prcUpdate: LPRECT, flags: UINT
+        hWnd: HWND, dx: c_int, dy: c_int, prcScroll: *const RECT, prcClip: *const RECT,
+        hrgnUpdate: HRGN, prcUpdate: LPRECT, flags: UINT,
     ) -> c_int;
     // pub fn SendDlgItemMessageA();
     // pub fn SendDlgItemMessageW();
@@ -696,9 +696,10 @@ extern "system" {
     // pub fn SetRect();
     // pub fn SetRectEmpty();
     // pub fn SetScrollInfo();
-    pub fn SetScrollPos(hWnd: HWND, nBar: c_int, nPos: c_int, bRedraw: BOOl) -> c_int;
+    pub fn SetScrollPos(hWnd: HWND, nBar: c_int, nPos: c_int, bRedraw: BOOL) -> c_int;
     pub fn SetScrollRange(
-        hWnd HWND, nBar: c_int, nMinPos: c_int, nMaxPos: c_int, bRedraw: BOOL) -> BOOL;
+        hWnd: HWND, nBar: c_int, nMinPos: c_int, nMaxPos: c_int, bRedraw: BOOL,
+    ) -> BOOL;
     // pub fn SetShellWindow();
     // pub fn SetSysColors();
     pub fn SetSystemCursor(hcur: HCURSOR, id: DWORD) -> BOOL;
