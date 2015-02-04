@@ -153,4 +153,104 @@ extern "system" {
         hKey: HKEY, lpValueName: LPCWSTR, Reserved: DWORD, dwType: DWORD, lpData: *const BYTE,
         cbData: DWORD,
     ) -> LONG;
+    pub fn CloseServiceHandle(
+        hSCObject: SC_HANDLE,
+    ) -> BOOL;
+    pub fn ControlService(
+        hService: SC_HANDLE,
+        dwControl: DWORD,
+        lpServiceStatus: LPSERVICE_STATUS,
+    ) -> BOOL;
+    pub fn CreateServiceA(
+        hSCManager: SC_HANDLE,
+        lpServiceName: LPCSTR,
+        lpDisplayName: LPCSTR,
+        dwDesiredAccess: DWORD,
+        dwServiceType: DWORD,
+        dwStartType: DWORD,
+        dwErrorControl: DWORD,
+        lpBinaryPathName: LPCSTR,
+        lpLoadOrderGroup: LPCSTR,
+        lpdwTagId: LPDWORD,
+        lpDependencies: LPCSTR,
+        lpServiceStartName: LPCSTR,
+        lpPassword: LPCSTR,
+    ) -> SC_HANDLE;
+    pub fn CreateServiceW(
+        hSCManager: SC_HANDLE,
+        lpServiceName: LPCWSTR,
+        lpDisplayName: LPCWSTR,
+        dwDesiredAccess: DWORD,
+        dwServiceType: DWORD,
+        dwStartType: DWORD,
+        dwErrorControl: DWORD,
+        lpBinaryPathName: LPCWSTR,
+        lpLoadOrderGroup: LPCWSTR,
+        lpdwTagId: LPDWORD,
+        lpDependencies: LPCWSTR,
+        lpServiceStartName: LPCWSTR,
+        lpPassword: LPCWSTR,
+    ) -> SC_HANDLE;
+    pub fn DeleteService(
+        hService: SC_HANDLE,
+    ) -> BOOL;
+    pub fn OpenSCManagerA(
+        lpMachineName: LPCSTR,
+        lpDatabaseName: LPCSTR,
+        dwDesiredAccess: DWORD,
+    ) -> SC_HANDLE;
+    pub fn OpenSCManagerW(
+        lpMachineName: LPCWSTR,
+        lpDatabaseName: LPCWSTR,
+        dwDesiredAccess: DWORD,
+    ) -> SC_HANDLE;
+    pub fn OpenServiceA(
+        hSCManager: SC_HANDLE,
+        lpServiceName: LPCSTR,
+        dwDesiredAccess: DWORD,
+    ) -> SC_HANDLE;
+    pub fn OpenServiceW(
+        hSCManager: SC_HANDLE,
+        lpServiceName: LPCWSTR,
+        dwDesiredAccess: DWORD,
+    ) -> SC_HANDLE;
+    pub fn QueryServiceStatus(
+        hService: SC_HANDLE,
+        lpServiceStatus: LPSERVICE_STATUS,
+    ) -> BOOL;
+    pub fn QueryServiceStatusEx(
+        hService: SC_HANDLE,
+        InfoLevel: SC_STATUS_TYPE,
+        lpBuffer: LPBYTE,
+        cbBufSize: DWORD,
+        pcbBytesNeeded: LPDWORD,
+    ) -> BOOL;
+    pub fn RegisterServiceCtrlHandlerA(
+        lpServiceName: LPCSTR,
+        lpHandlerProc: LPHANDLER_FUNCTION,
+    ) -> SERVICE_STATUS_HANDLE;
+    pub fn RegisterServiceCtrlHandlerW(
+        lpServiceName: LPCWSTR,
+        lpHandlerProc: LPHANDLER_FUNCTION,
+    ) -> SERVICE_STATUS_HANDLE;
+    pub fn RegisterServiceCtrlHandlerExA(
+        lpServiceName: LPCSTR,
+        lpHandlerProc: LPHANDLER_FUNCTION_EX,
+        lpContext: LPVOID,
+    ) -> SERVICE_STATUS_HANDLE;
+    pub fn RegisterServiceCtrlHandlerExW(
+        lpServiceName: LPCWSTR,
+        lpHandlerProc: LPHANDLER_FUNCTION_EX,
+        lpContext: LPVOID,
+    ) -> SERVICE_STATUS_HANDLE;
+    pub fn SetServiceStatus(
+        hServiceStatus: SERVICE_STATUS_HANDLE,
+        lpServiceStatus: LPCSERVICE_STATUS,
+    ) -> BOOL;
+    pub fn StartServiceCtrlDispatcherA(
+        lpServiceStartTable: LPCSERVICE_TABLE_ENTRYA,
+    ) -> BOOL;
+    pub fn StartServiceCtrlDispatcherW(
+        lpServiceStartTable: LPCSERVICE_TABLE_ENTRYW,
+    ) -> BOOL;
 }
