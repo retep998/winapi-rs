@@ -46,6 +46,7 @@ pub use winerror::*;
 pub use wingdi::*;
 pub use winnt::*;
 pub use winuser::*;
+pub use winsvc::*;
 //-------------------------------------------------------------------------------------------------
 // Macros
 //-------------------------------------------------------------------------------------------------
@@ -82,6 +83,7 @@ pub mod winerror;
 pub mod wingdi;
 pub mod winnt;
 pub mod winuser;
+pub mod winsvc;
 // #[derive(Copy)] hack
 #[cfg(not(test))]
 mod std {
