@@ -283,7 +283,7 @@ extern "system" {
         hinst: HINSTANCE, lpszClass: LPCWSTR, lpwcx: LPWNDCLASSEXW,
     ) -> BOOL;
     pub fn GetClassInfoW(
-        hInstance: HINSTANCE, lpClassName: LPCWSTR, lpWndClass: LPWNDCLASS
+        hInstance: HINSTANCE, lpClassName: LPCWSTR, lpWndClass: LPWNDCLASSW
     ) -> BOOL;
     pub fn GetClassLongA(hWnd: HWND, nIndex: c_int) -> DWORD;
     // #[cfg(target_arch = "x86_64")]
