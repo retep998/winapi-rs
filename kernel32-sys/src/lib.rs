@@ -400,12 +400,18 @@ extern "system" {
     // pub fn FoldStringA();
     // pub fn FoldStringW();
     // pub fn FormatApplicationUserModelId();
-    // pub fn FormatMessageA();
-    // pub fn FormatMessageW();
+    pub fn FormatMessageA(
+        dwFlags: DWORD, lpSource: LPCVOID, dwMessageId: DWORD, dwLanguageId: DWORD,
+        lpBuffer: LPSTR, nSize: DWORD, Arguments: LPVOID // Arguments: *mut va_list
+    ) -> DWORD;
+    pub fn FormatMessageW(
+        dwFlags: DWORD, lpSource: LPCVOID, dwMessageId: DWORD, dwLanguageId: DWORD,
+        lpBuffer: LPWSTR, nSize: DWORD, Arguments: LPVOID // Arguments: *mut va_list
+    ) -> DWORD;
     pub fn FreeConsole() -> BOOL;
     // pub fn FreeEnvironmentStringsA();
     // pub fn FreeEnvironmentStringsW();
-    // pub fn FreeLibrary();
+    pub fn FreeLibrary(hModule: HMODULE) -> BOOL;
     // pub fn FreeLibraryAndExitThread();
     // pub fn FreeLibraryWhenCallbackReturns();
     // pub fn FreeResource();
@@ -1015,7 +1021,10 @@ extern "system" {
     // pub fn MoveFileWithProgressA();
     // pub fn MoveFileWithProgressW();
     // pub fn MulDiv();
-    // pub fn MultiByteToWideChar();
+    pub fn MultiByteToWideChar(
+        CodePage: UINT, dwFlags: DWORD, lpMultiByteStr: LPCSTR, cbMultiByte: c_int,
+        lpWideCharStr: LPWSTR, ccWideChar: c_int
+    ) -> c_int;
     // pub fn NeedCurrentDirectoryForExePathA();
     // pub fn NeedCurrentDirectoryForExePathW();
     // pub fn NormalizeString();
@@ -1340,7 +1349,7 @@ extern "system" {
     // pub fn SetHandleCount();
     // pub fn SetHandleInformation();
     // pub fn SetInformationJobObject();
-    // pub fn SetLastError();
+    pub fn SetLastError(dwErrCode: DWORD);
     // pub fn SetLocalPrimaryComputerNameA();
     // pub fn SetLocalPrimaryComputerNameW();
     // pub fn SetLocalTime();
@@ -1502,7 +1511,11 @@ extern "system" {
     // pub fn WerUnregisterMemoryBlock();
     // pub fn WerUnregisterRuntimeExceptionModule();
     // pub fn WerpInitiateRemoteRecovery();
-    // pub fn WideCharToMultiByte();
+    pub fn WideCharToMultiByte(
+      CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWSTR, ccWideChar: c_int,
+      lpMultiByteStr: LPSTR, cbMultiByte: c_int, lpDefaultChar: LPCSTR,
+      lpUsedDefaultChar: LPBOOL
+    ) -> c_int;
     pub fn WinExec(lpCmdLine: LPCSTR, uCmdShow: UINT) -> UINT;
     // pub fn Wow64DisableWow64FsRedirection();
     // pub fn Wow64EnableWow64FsRedirection();
