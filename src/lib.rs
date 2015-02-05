@@ -2182,6 +2182,18 @@ pub const EDD_GET_DEVICE_INTERFACE_NAME: DWORD = 0x00000001;
 pub const ENUM_CURRENT_SETTINGS: DWORD = -1;
 pub const ENUM_REGISTRY_SETTINGS: DWORD = -2;
 
+pub const GW_HWNDFIRST: UINT = 0;
+pub const GW_HWNDLAST: UINT = 1;
+pub const GW_HWNDNEXT: UINT = 2;
+pub const GW_HWNDPREV: UINT = 3;
+pub const GW_OWNER: UINT = 4;
+pub const GW_CHILD: UINT = 5;
+pub const GW_ENABLEDPOPUP: UINT = 6;
+pub const GW_MAX: UINT = 6;
+
+pub const LSFW_LOCK: UINT = 1;
+pub const LSFW_UNLOCK: UINT = 2;
+
 pub const MB_OK: DWORD = 0x00000000;
 pub const MB_OKCANCEL: DWORD = 0x00000001;
 pub const MB_ABORTRETRYIGNORE: DWORD = 0x00000002;
