@@ -435,12 +435,12 @@ extern "system" {
     // pub fn GetWindowDisplayAffinity();
     // pub fn GetWindowFeedbackSetting();
     // pub fn GetWindowInfo();
-    // pub fn GetWindowLongA();
-    // #[cfg(target_arch = "x86_64")]
-    // pub fn GetWindowLongPtrA();
-    // #[cfg(target_arch = "x86_64")]
-    // pub fn GetWindowLongPtrW();
-    // pub fn GetWindowLongW();
+    pub fn GetWindowLongA(hWnd: HWND, nIndex: c_int) -> LONG;
+    #[cfg(target_arch = "x86_64")]
+    pub fn GetWindowLongPtrA(hWnd: HWND, nIndex: c_int) -> LONG_PTR;
+    #[cfg(target_arch = "x86_64")]
+    pub fn GetWindowLongPtrW(hWnd: HWND, nIndex: c_int) -> LONG_PTR;
+    pub fn GetWindowLongW(hWnd: HWND, nIndex: c_int) -> LONG;
     // pub fn GetWindowModuleFileName();
     // pub fn GetWindowModuleFileNameA();
     // pub fn GetWindowModuleFileNameW();
@@ -448,10 +448,10 @@ extern "system" {
     pub fn GetWindowRect(hWnd: HWND, lpRect: LPRECT) -> BOOL;
     // pub fn GetWindowRgn();
     // pub fn GetWindowRgnBox();
-    // pub fn GetWindowTextA();
-    // pub fn GetWindowTextLengthA();
-    // pub fn GetWindowTextLengthW();
-    // pub fn GetWindowTextW();
+    pub fn GetWindowTextA(hWnd: HWND, lpString: LPSTR, nMaxCount: c_int) -> c_int;
+    pub fn GetWindowTextLengthA(hWnd: HWND) -> c_int;
+    pub fn GetWindowTextLengthW(hWnd: HWND) -> c_int;
+    pub fn GetWindowTextW(hWnd: HWND, lpString: LPWSTR, nMaxCount: c_int) -> c_int;
     // pub fn GetWindowThreadProcessId();
     // pub fn GetWindowWord();
     // pub fn GrayStringA();
@@ -507,7 +507,7 @@ extern "system" {
     // pub fn IsWindow();
     pub fn IsWindowEnabled(hWnd: HWND) -> BOOL;
     // pub fn IsWindowUnicode();
-    // pub fn IsWindowVisible();
+    pub fn IsWindowVisible(hWnd: HWND) -> BOOL;
     // pub fn IsWow64Message();
     // pub fn IsZoomed();
     // pub fn KillTimer();
@@ -726,12 +726,12 @@ extern "system" {
     // pub fn SetWindowContextHelpId();
     // pub fn SetWindowDisplayAffinity();
     // pub fn SetWindowFeedbackSetting();
-    // pub fn SetWindowLongA();
-    // #[cfg(target_arch = "x86_64")]
-    // pub fn SetWindowLongPtrA();
-    // #[cfg(target_arch = "x86_64")]
-    // pub fn SetWindowLongPtrW();
-    // pub fn SetWindowLongW();
+    pub fn SetWindowLongA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> LONG;
+    #[cfg(target_arch = "x86_64")]
+    pub fn SetWindowLongPtrA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> LONG_PTR;
+    #[cfg(target_arch = "x86_64")]
+    pub fn SetWindowLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> LONG_PTR;
+    pub fn SetWindowLongW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> LONG;
     // pub fn SetWindowPlacement();
     pub fn SetWindowPos(
         hWnd: HWND, hWndInsertAfter: HWND, X: c_int, Y: c_int, cx: c_int, cy: c_int, uFlags: UINT,

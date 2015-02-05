@@ -89,7 +89,7 @@ extern "system" {
     // pub fn CreateRoundRectRgn();
     // pub fn CreateScalableFontResourceA();
     // pub fn CreateScalableFontResourceW();
-    // pub fn CreateSolidBrush();
+    pub fn CreateSolidBrush(crColor: COLORREF) -> HBRUSH;
     // pub fn D3DKMTAcquireKeyedMutex();
     // pub fn D3DKMTAcquireKeyedMutex2();
     // pub fn D3DKMTCacheHybridQueryValue();
