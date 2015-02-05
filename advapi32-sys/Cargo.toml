@@ -1,7 +1,7 @@
 [package]
 
 name = "advapi32-sys"
-version = "0.0.2"
+version = "0.0.3"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to advapi32."
 documentation = "https://retep998.github.io/doc/advapi32-sys/"

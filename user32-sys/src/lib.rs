@@ -29,10 +29,10 @@ extern "system" {
     // pub fn BroadcastSystemMessageExA();
     // pub fn BroadcastSystemMessageExW();
     // pub fn BroadcastSystemMessageW();
-    // pub fn CalculatePopupWindowPosition(
-    //     anchorPoint: *const POINT, windowSize: *const SIZE, flags: UINT, excludeRect: *mut RECT,
-    //     popupWindowPosition: *mut RECT
-    // ) -> BOOL;
+    pub fn CalculatePopupWindowPosition(
+        anchorPoint: *const POINT, windowSize: *const SIZE, flags: UINT, excludeRect: *mut RECT,
+        popupWindowPosition: *mut RECT,
+    ) -> BOOL;
     // pub fn CallMsgFilter();
     // pub fn CallMsgFilterA();
     // pub fn CallMsgFilterW();
@@ -42,7 +42,7 @@ extern "system" {
     // pub fn CancelShutdown();
     // pub fn CascadeChildWindows();
     pub fn CascadeWindows(
-        hwndParent: HWND, wHow: UINT, lpRect: *const RECT, cKids: UINT, lpKids: *const HWND
+        hwndParent: HWND, wHow: UINT, lpRect: *const RECT, cKids: UINT, lpKids: *const HWND,
     ) -> WORD;
     pub fn ChangeClipboardChain(hwndRemove: HWND, hwndNewNext: HWND) -> BOOL;
     // pub fn ChangeDisplaySettingsA();
@@ -166,10 +166,10 @@ extern "system" {
     // pub fn DefRawInputProc();
     // pub fn DefWindowProcA();
     pub fn DefWindowProcW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
-    // pub fn DeferWindowPos(
-    //     hWinPosInfo: HDWP, hWnd: HWND, hWndInserAfter: HWND, x: c_int, y: c_int,
-    //     cx: c_int, cy: c_int, uFlags: UINT
-    // ) -> HDWP;
+    pub fn DeferWindowPos(
+        hWinPosInfo: HDWP, hWnd: HWND, hWndInserAfter: HWND, x: c_int, y: c_int, cx: c_int,
+        cy: c_int, uFlags: UINT,
+    ) -> HDWP;
     pub fn DeleteMenu(hMenu: HMENU, uPosition: UINT, uFlags: UINT) -> BOOL;
     // pub fn DeregisterShellHookWindow();
     pub fn DestroyAcceleratorTable(hAccel: HACCEL) -> BOOL;
@@ -247,7 +247,7 @@ extern "system" {
     // pub fn EnumThreadWindows();
     // pub fn EnumWindowStationsA();
     // pub fn EnumWindowStationsW();
-    // pub fn EnumWindows(lpEnumFunc: WNDENUMPROC, lParam: LPARAM) -> BOOL;
+    pub fn EnumWindows(lpEnumFunc: WNDENUMPROC, lParam: LPARAM) -> BOOL;
     // pub fn EqualRect();
     // pub fn EvaluateProximityToPolygon();
     // pub fn EvaluateProximityToRect();
@@ -291,8 +291,12 @@ extern "system" {
     pub fn GetClientRect(hWnd: HWND, lpRect: LPRECT) -> BOOL;
     pub fn GetClipCursor(lpRect: LPRECT) -> BOOL;
     pub fn GetClipboardData(uFormat: UINT) -> HANDLE;
-    pub fn GetClipboardFormatNameA(format: UINT, lpszFormatName: LPSTR, cchMaxCount: c_int) -> c_int;
-    pub fn GetClipboardFormatNameW(format: UINT, lpszFormatName: LPWSTR, cchMaxCount: c_int) -> c_int;
+    pub fn GetClipboardFormatNameA(
+        format: UINT, lpszFormatName: LPSTR, cchMaxCount: c_int,
+    ) -> c_int;
+    pub fn GetClipboardFormatNameW(
+        format: UINT, lpszFormatName: LPWSTR, cchMaxCount: c_int,
+    ) -> c_int;
     pub fn GetClipboardOwner() -> HWND;
     pub fn GetClipboardSequenceNumber() -> DWORD;
     pub fn GetClipboardViewer() -> HWND;
@@ -419,7 +423,9 @@ extern "system" {
     // pub fn GetUnpredictedMessagePos();
     // pub fn GetUpdateRect();
     // pub fn GetUpdateRgn();
-    pub fn GetUpdatedClipboardFormats(lpuiFormats: PUINT, cFormats: UINT, pcFormatsOUT: PUINT) -> BOOL;
+    pub fn GetUpdatedClipboardFormats(
+        lpuiFormats: PUINT, cFormats: UINT, pcFormatsOUT: PUINT,
+    ) -> BOOL;
     // pub fn GetUserObjectInformationA();
     // pub fn GetUserObjectInformationW();
     // pub fn GetUserObjectSecurity();

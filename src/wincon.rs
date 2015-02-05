@@ -73,15 +73,15 @@ pub type PFOCUS_EVENT_RECORD = *mut FOCUS_EVENT_RECORD;
 }
 #[test]
 fn test_INPUT_RECORD() {
-    use core::mem::{size_of, align_of};
+    use core::mem::{size_of, min_align_of};
     assert!(size_of::<MOUSE_EVENT_RECORD>() >= size_of::<KEY_EVENT_RECORD>());
     assert!(size_of::<MOUSE_EVENT_RECORD>() >= size_of::<WINDOW_BUFFER_SIZE_RECORD>());
     assert!(size_of::<MOUSE_EVENT_RECORD>() >= size_of::<MENU_EVENT_RECORD>());
     assert!(size_of::<MOUSE_EVENT_RECORD>() >= size_of::<FOCUS_EVENT_RECORD>());
-    assert!(align_of::<MOUSE_EVENT_RECORD>() >= align_of::<KEY_EVENT_RECORD>());
-    assert!(align_of::<MOUSE_EVENT_RECORD>() >= align_of::<WINDOW_BUFFER_SIZE_RECORD>());
-    assert!(align_of::<MOUSE_EVENT_RECORD>() >= align_of::<MENU_EVENT_RECORD>());
-    assert!(align_of::<MOUSE_EVENT_RECORD>() >= align_of::<FOCUS_EVENT_RECORD>());
+    assert!(min_align_of::<MOUSE_EVENT_RECORD>() >= min_align_of::<KEY_EVENT_RECORD>());
+    assert!(min_align_of::<MOUSE_EVENT_RECORD>() >= min_align_of::<WINDOW_BUFFER_SIZE_RECORD>());
+    assert!(min_align_of::<MOUSE_EVENT_RECORD>() >= min_align_of::<MENU_EVENT_RECORD>());
+    assert!(min_align_of::<MOUSE_EVENT_RECORD>() >= min_align_of::<FOCUS_EVENT_RECORD>());
 }
 pub type PINPUT_RECORD = *mut INPUT_RECORD;
 pub const KEY_EVENT: ::DWORD = 0x0001;
@@ -95,9 +95,9 @@ pub const FOCUS_EVENT: ::DWORD = 0x0010;
 }
 #[test]
 fn test_CHAR_INFO() {
-    use core::mem::{size_of, align_of};
+    use core::mem::{size_of, min_align_of};
     assert!(size_of::<::WCHAR>() >= size_of::<::CHAR>());
-    assert!(align_of::<::WCHAR>() >= align_of::<::CHAR>());
+    assert!(min_align_of::<::WCHAR>() >= min_align_of::<::CHAR>());
 }
 pub type PCHAR_INFO = *mut CHAR_INFO;
 pub const FOREGROUND_BLUE: ::DWORD = 0x0001;

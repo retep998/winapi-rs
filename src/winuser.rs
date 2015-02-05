@@ -99,11 +99,11 @@ pub const INPUT_HARDWARE: ::DWORD = 2;
 }
 #[test]
 fn test_INPUT() {
-    use core::mem::{size_of, align_of};
+    use core::mem::{size_of, min_align_of};
     assert!(size_of::<MOUSEINPUT>() >= size_of::<HARDWAREINPUT>());
     assert!(size_of::<MOUSEINPUT>() >= size_of::<KEYBDINPUT>());
-    assert!(align_of::<MOUSEINPUT>() >= align_of::<HARDWAREINPUT>());
-    assert!(align_of::<MOUSEINPUT>() >= align_of::<KEYBDINPUT>());
+    assert!(min_align_of::<MOUSEINPUT>() >= min_align_of::<HARDWAREINPUT>());
+    assert!(min_align_of::<MOUSEINPUT>() >= min_align_of::<KEYBDINPUT>());
 }
 pub type PINPUT = *mut INPUT;
 pub type LPINPUT = *mut INPUT;
