@@ -628,7 +628,7 @@ extern "system" {
     // pub fn RegisterWindowMessageA();
     // pub fn RegisterWindowMessageW();
     // pub fn ReleaseCapture();
-    // pub fn ReleaseDC();
+    pub fn ReleaseDC(hWnd: HWND, hDC: HDC) -> c_int;
     // pub fn RemoveClipboardFormatListener();
     // pub fn RemoveMenu();
     // pub fn RemovePropA();
