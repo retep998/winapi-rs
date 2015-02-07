@@ -938,7 +938,9 @@ extern "system" {
     // pub fn K32EnumPageFilesW();
     // pub fn K32EnumProcessModules();
     // pub fn K32EnumProcessModulesEx();
-    // pub fn K32EnumProcesses();
+    pub fn K32EnumProcesses(
+        pProcessIds: *mut DWORD, cb: DWORD, pBytesReturned: *mut DWORD
+    ) -> BOOL;
     // pub fn K32GetDeviceDriverBaseNameA();
     // pub fn K32GetDeviceDriverBaseNameW();
     // pub fn K32GetDeviceDriverFileNameA();
@@ -951,8 +953,12 @@ extern "system" {
     // pub fn K32GetModuleFileNameExW();
     // pub fn K32GetModuleInformation();
     // pub fn K32GetPerformanceInfo();
-    // pub fn K32GetProcessImageFileNameA();
-    // pub fn K32GetProcessImageFileNameW();
+    pub fn K32GetProcessImageFileNameA(
+        hProcess: HANDLE, lpImageFileName: LPSTR, nSize: DWORD
+    ) -> DWORD;
+    pub fn K32GetProcessImageFileNameW(
+        hProcess: HANDLE, lpImageFileName: LPWSTR, nSize: DWORD
+    ) -> DWORD;
     pub fn K32GetProcessMemoryInfo(
         Process: HANDLE, ppsmemCounters: PPROCESS_MEMORY_COUNTERS, cb: DWORD,
     ) -> BOOL;
