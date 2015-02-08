@@ -99,7 +99,7 @@ pub const INPUT_HARDWARE: ::DWORD = 2;
 }
 #[test]
 fn test_INPUT() {
-    use core::mem::{size_of, min_align_of};
+    use std::mem::{size_of, min_align_of};
     assert!(size_of::<MOUSEINPUT>() >= size_of::<HARDWAREINPUT>());
     assert!(size_of::<MOUSEINPUT>() >= size_of::<KEYBDINPUT>());
     assert!(min_align_of::<MOUSEINPUT>() >= min_align_of::<HARDWAREINPUT>());

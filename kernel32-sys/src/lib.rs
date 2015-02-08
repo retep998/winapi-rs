@@ -1,9 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to kernel32.
-#![no_std]
-#![unstable]
-#[cfg(test)] extern crate std;
+#![cfg(windows)]
 extern crate winapi;
 use winapi::*;
 extern "system" {
@@ -402,16 +400,16 @@ extern "system" {
     // pub fn FormatApplicationUserModelId();
     pub fn FormatMessageA(
         dwFlags: DWORD, lpSource: LPCVOID, dwMessageId: DWORD, dwLanguageId: DWORD,
-        lpBuffer: LPSTR, nSize: DWORD, Arguments: LPVOID // Arguments: *mut va_list
+        lpBuffer: LPSTR, nSize: DWORD, Arguments: *mut va_list,
     ) -> DWORD;
     pub fn FormatMessageW(
         dwFlags: DWORD, lpSource: LPCVOID, dwMessageId: DWORD, dwLanguageId: DWORD,
-        lpBuffer: LPWSTR, nSize: DWORD, Arguments: LPVOID // Arguments: *mut va_list
+        lpBuffer: LPWSTR, nSize: DWORD, Arguments: *mut va_list,
     ) -> DWORD;
     pub fn FreeConsole() -> BOOL;
     // pub fn FreeEnvironmentStringsA();
     // pub fn FreeEnvironmentStringsW();
-    pub fn FreeLibrary(hModule: HMODULE) -> BOOL;
+    pub fn FreeLibrary(hLibModule: HMODULE) -> BOOL;
     // pub fn FreeLibraryAndExitThread();
     // pub fn FreeLibraryWhenCallbackReturns();
     // pub fn FreeResource();
@@ -939,7 +937,7 @@ extern "system" {
     // pub fn K32EnumProcessModules();
     // pub fn K32EnumProcessModulesEx();
     pub fn K32EnumProcesses(
-        pProcessIds: *mut DWORD, cb: DWORD, pBytesReturned: *mut DWORD
+        lpidProcess: *mut DWORD, cb: DWORD, lpcbNeeded: LPDWORD,
     ) -> BOOL;
     // pub fn K32GetDeviceDriverBaseNameA();
     // pub fn K32GetDeviceDriverBaseNameW();
@@ -954,10 +952,10 @@ extern "system" {
     // pub fn K32GetModuleInformation();
     // pub fn K32GetPerformanceInfo();
     pub fn K32GetProcessImageFileNameA(
-        hProcess: HANDLE, lpImageFileName: LPSTR, nSize: DWORD
+        hProcess: HANDLE, lpImageFileName: LPSTR, nSize: DWORD,
     ) -> DWORD;
     pub fn K32GetProcessImageFileNameW(
-        hProcess: HANDLE, lpImageFileName: LPWSTR, nSize: DWORD
+        hProcess: HANDLE, lpImageFileName: LPWSTR, nSize: DWORD,
     ) -> DWORD;
     pub fn K32GetProcessMemoryInfo(
         Process: HANDLE, ppsmemCounters: PPROCESS_MEMORY_COUNTERS, cb: DWORD,
@@ -1028,8 +1026,8 @@ extern "system" {
     // pub fn MoveFileWithProgressW();
     // pub fn MulDiv();
     pub fn MultiByteToWideChar(
-        CodePage: UINT, dwFlags: DWORD, lpMultiByteStr: LPCSTR, cbMultiByte: c_int,
-        lpWideCharStr: LPWSTR, ccWideChar: c_int
+        CodePage: UINT, dwFlags: DWORD, lpMultiByteStr: LPCCH, cbMultiByte: c_int,
+        lpWideCharStr: LPWSTR, cchWideChar: c_int,
     ) -> c_int;
     // pub fn NeedCurrentDirectoryForExePathA();
     // pub fn NeedCurrentDirectoryForExePathW();
@@ -1518,9 +1516,8 @@ extern "system" {
     // pub fn WerUnregisterRuntimeExceptionModule();
     // pub fn WerpInitiateRemoteRecovery();
     pub fn WideCharToMultiByte(
-      CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWSTR, ccWideChar: c_int,
-      lpMultiByteStr: LPSTR, cbMultiByte: c_int, lpDefaultChar: LPCSTR,
-      lpUsedDefaultChar: LPBOOL
+      CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWCH, cchWideChar: c_int,
+      lpMultiByteStr: LPSTR, cbMultiByte: c_int, lpDefaultChar: LPCCH, lpUsedDefaultChar: LPBOOL,
     ) -> c_int;
     pub fn WinExec(lpCmdLine: LPCSTR, uCmdShow: UINT) -> UINT;
     // pub fn Wow64DisableWow64FsRedirection();

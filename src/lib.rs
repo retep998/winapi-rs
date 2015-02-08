@@ -1,18 +1,14 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! Types and constants for WinAPI bindings.
-#![no_std]
-#![unstable]
-#![feature(core, libc)]
+#![feature(libc)]
 #![allow(bad_style, raw_pointer_derive)]
 #![warn(unused_qualifications, unused, unused_typecasts)]
 
 //-------------------------------------------------------------------------------------------------
 // External crates
 //-------------------------------------------------------------------------------------------------
-#[macro_use] extern crate core;
 extern crate libc;
-#[cfg(test)] extern crate std;
 //-------------------------------------------------------------------------------------------------
 // Imports
 //-------------------------------------------------------------------------------------------------
@@ -39,14 +35,16 @@ pub use libloaderapi::*;
 pub use minwinbase::*;
 pub use minwindef::*;
 pub use synchapi::*;
+pub use vadefs::*;
+pub use winbase::*;
 pub use wincon::*;
 pub use wincrypt::*;
 pub use windowsx::*;
 pub use winerror::*;
 pub use wingdi::*;
 pub use winnt::*;
-pub use winuser::*;
 pub use winsvc::*;
+pub use winuser::*;
 //-------------------------------------------------------------------------------------------------
 // Macros
 //-------------------------------------------------------------------------------------------------
@@ -76,21 +74,16 @@ pub mod libloaderapi;
 pub mod minwinbase;
 pub mod minwindef;
 pub mod synchapi;
+pub mod vadefs;
+pub mod winbase;
 pub mod wincon;
 pub mod wincrypt;
 pub mod windowsx;
 pub mod winerror;
 pub mod wingdi;
 pub mod winnt;
-pub mod winuser;
 pub mod winsvc;
-// #[derive(Copy)] hack
-#[cfg(not(test))]
-mod std {
-    pub mod marker {
-        pub use core::marker::Copy;
-    }
-}
+pub mod winuser;
 //-------------------------------------------------------------------------------------------------
 // Primitive types not defined by libc
 //-------------------------------------------------------------------------------------------------

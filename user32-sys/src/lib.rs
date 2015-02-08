@@ -1,9 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to user32.
-#![no_std]
-#![unstable]
-#[cfg(test)] extern crate std;
+#![cfg(windows)]
 extern crate winapi;
 use winapi::*;
 extern "system" {
@@ -79,7 +77,7 @@ extern "system" {
     // pub fn CheckMenuRadioItem();
     // pub fn CheckRadioButton();
     pub fn ChildWindowFromPoint(hWndParent: HWND, point: POINT) -> HWND;
-    pub fn ChildWindowFromPointEx(hWndParent: HWND, pt: POINT, uFlags: UINT) -> HWND;
+    pub fn ChildWindowFromPointEx(hwnd: HWND, pt: POINT, flags: UINT) -> HWND;
     // pub fn ClientToScreen();
     pub fn ClipCursor(lpRect: *const RECT) -> BOOL;
     pub fn CloseClipboard() -> BOOL;
@@ -171,7 +169,7 @@ extern "system" {
         cy: c_int, uFlags: UINT,
     ) -> HDWP;
     pub fn DeleteMenu(hMenu: HMENU, uPosition: UINT, uFlags: UINT) -> BOOL;
-    pub fn DeregisterShellHookWindow(hWnd: HWND) -> BOOL;
+    pub fn DeregisterShellHookWindow(hwnd: HWND) -> BOOL;
     pub fn DestroyAcceleratorTable(hAccel: HACCEL) -> BOOL;
     pub fn DestroyCaret() -> BOOL;
     pub fn DestroyCursor(hCursor: HCURSOR) -> BOOL;
@@ -256,10 +254,10 @@ extern "system" {
     pub fn FillRect(hDC: HDC, lprc: *const RECT, hbr: HBRUSH) -> c_int;
     pub fn FindWindowA (lpClassName: LPCSTR, lpWindowName: LPCSTR) -> HWND;
     pub fn FindWindowExA(
-        hWndParent: HWND, hWndChildAfter: HWND, lpszClass: LPCSTR, lpszWindow: LPCSTR
+        hWndParent: HWND, hWndChildAfter: HWND, lpszClass: LPCSTR, lpszWindow: LPCSTR,
     ) -> HWND;
     pub fn FindWindowExW(
-        hWndParent: HWND, hWndChildAfter: HWND, lpszClass: LPCWSTR, lpszWindow: LPCWSTR
+        hWndParent: HWND, hWndChildAfter: HWND, lpszClass: LPCWSTR, lpszWindow: LPCWSTR,
     ) -> HWND;
     pub fn FindWindowW(lpClassName: LPCWSTR, lpWindowName: LPCWSTR) -> HWND;
     // pub fn FlashWindow();
@@ -283,16 +281,16 @@ extern "system" {
         hinst: HINSTANCE, lpszClass: LPCWSTR, lpwcx: LPWNDCLASSEXW,
     ) -> BOOL;
     pub fn GetClassInfoW(
-        hInstance: HINSTANCE, lpClassName: LPCWSTR, lpWndClass: LPWNDCLASSW
+        hInstance: HINSTANCE, lpClassName: LPCWSTR, lpWndClass: LPWNDCLASSW,
     ) -> BOOL;
     pub fn GetClassLongA(hWnd: HWND, nIndex: c_int) -> DWORD;
-    // #[cfg(target_arch = "x86_64")]
+    #[cfg(target_arch = "x86_64")]
     pub fn GetClassLongPtrA(hWnd: HWND, nIndex: c_int) -> ULONG_PTR;
-    // #[cfg(target_arch = "x86_64")]
+    #[cfg(target_arch = "x86_64")]
     pub fn GetClassLongPtrW(hWnd: HWND, nIndex: c_int) -> ULONG_PTR;
     pub fn GetClassLongW(hWnd: HWND, nIndex: c_int) -> DWORD;
     // pub fn GetClassNameA();
-    pub fn GetClassNameW();
+    // pub fn GetClassNameW();
     pub fn GetClassWord(hWnd: HWND, nIndex: c_int) -> WORD;
     pub fn GetClientRect(hWnd: HWND, lpRect: LPRECT) -> BOOL;
     pub fn GetClipCursor(lpRect: LPRECT) -> BOOL;

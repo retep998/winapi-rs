@@ -1,9 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to gdi32.
-#![no_std]
-#![experimental]
-#![cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+#![cfg(all(windows, any(target_arch = "x86", target_arch = "x86_64")))]
 extern crate winapi;
 use winapi::*;
 extern "system" {
@@ -89,7 +87,7 @@ extern "system" {
     // pub fn CreateRoundRectRgn();
     // pub fn CreateScalableFontResourceA();
     // pub fn CreateScalableFontResourceW();
-    pub fn CreateSolidBrush(crColor: COLORREF) -> HBRUSH;
+    pub fn CreateSolidBrush(color: COLORREF) -> HBRUSH;
     // pub fn D3DKMTAcquireKeyedMutex();
     // pub fn D3DKMTAcquireKeyedMutex2();
     // pub fn D3DKMTCacheHybridQueryValue();
