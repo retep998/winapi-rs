@@ -1,7 +1,6 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! Types and constants for WinAPI bindings.
-#![feature(libc)]
 #![allow(bad_style, raw_pointer_derive)]
 #![warn(unused_qualifications, unused, unused_typecasts)]
 
@@ -559,7 +558,7 @@ pub const REG_QWORD_LITTLE_ENDIAN: DWORD = 11;
 
 // guiddef.h
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Debug)]
 pub struct GUID {
     pub Data1: c_ulong,
     pub Data2: c_ushort,

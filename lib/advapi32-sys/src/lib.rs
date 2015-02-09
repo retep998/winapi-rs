@@ -1,9 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to advapi32.
-#![no_std]
-#![unstable]
-#[cfg(test)] extern crate std;
+#![cfg(windows)]
 extern crate winapi;
 use winapi::*;
 extern "system" {

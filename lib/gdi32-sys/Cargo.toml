@@ -1,5 +1,4 @@
 [package]
-
 name = "gdi32-sys"
 version = "0.0.4"
 authors = ["Peter Atashian <retep998@gmail.com>"]

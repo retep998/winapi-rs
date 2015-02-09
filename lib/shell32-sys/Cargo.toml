@@ -1,7 +1,6 @@
 [package]
-
 name = "shell32-sys"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to shell32."
 documentation = "https://retep998.github.io/doc/shell32-sys/"

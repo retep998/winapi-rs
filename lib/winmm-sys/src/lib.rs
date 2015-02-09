@@ -1,8 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to winmm.
-#![no_std]
-#![experimental]
+#![cfg(windows)]
 extern crate winapi;
 use winapi::*;
 extern "system" {
