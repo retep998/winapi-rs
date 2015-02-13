@@ -499,7 +499,7 @@ extern "system" {
     // pub fn IsDlgButtonChecked();
     // pub fn IsGUIThread();
     // pub fn IsHungAppWindow();
-    // pub fn IsIconic();
+    pub fn IsIconic(hWnd: HWND) -> BOOL;
     // pub fn IsImmersiveProcess();
     // pub fn IsInDesktopWindowBand();
     // pub fn IsMenu();
@@ -508,7 +508,7 @@ extern "system" {
     // pub fn IsRectEmpty();
     // pub fn IsTouchWindow();
     // pub fn IsWinEventHookInstalled();
-    // pub fn IsWindow();
+    pub fn IsWindow(hWnd: HWND) -> BOOL;
     pub fn IsWindowEnabled(hWnd: HWND) -> BOOL;
     // pub fn IsWindowUnicode();
     pub fn IsWindowVisible(hWnd: HWND) -> BOOL;
@@ -659,22 +659,28 @@ extern "system" {
     pub fn SendMessageA(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
     // pub fn SendMessageCallbackA();
     // pub fn SendMessageCallbackW();
-    // pub fn SendMessageTimeoutA();
-    // pub fn SendMessageTimeoutW();
+    pub fn SendMessageTimeoutA(
+        hWnd: HWND, msg: UINT, lParam: LPARAM, fuFlags: UINT, uTimeout: UINT,
+        lpdwResult: PDWORD_PTR
+    ) -> LRESULT;
+    pub fn SendMessageTimeoutW(
+        hWnd: HWND, msg: UINT, lParam: LPARAM, fuFlags: UINT, uTimeout: UINT,
+        lpdwResult: PDWORD_PTR
+    ) -> LRESULT;
     pub fn SendMessageW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
-    // pub fn SendNotifyMessageA();
-    // pub fn SendNotifyMessageW();
+    pub fn SendNotifyMessageA(hWnd: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
+    pub fn SendNotifyMessageW(hWnd: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
     pub fn SetActiveWindow(hWnd: HWND) -> HWND;
     // pub fn SetCapture();
     pub fn SetCaretBlinkTime(uMSeconds: UINT) -> BOOL;
     pub fn SetCaretPos(x: c_int, y: c_int) -> BOOL;
-    // pub fn SetClassLongA();
-    // #[cfg(target_arch = "x86_64")]
-    // pub fn SetClassLongPtrA();
-    // #[cfg(target_arch = "x86_64")]
-    // pub fn SetClassLongPtrW();
+    pub fn SetClassLongA();
+    #[cfg(target_arch = "x86_64")]
+    pub fn SetClassLongPtrA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
+    #[cfg(target_arch = "x86_64")]
+    pub fn SetClassLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
     pub fn SetClassLongW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
-    // pub fn SetClassWord();
+    pub fn SetClassWord(hWnd: HWND, nIndex: c_int, wNewWord: WORD) -> WORD;
     // pub fn SetClipboardData();
     pub fn SetClipboardViewer(hWndNewViewer: HWND) -> HWND;
     // pub fn SetCoalescableTimer();
@@ -788,8 +794,8 @@ extern "system" {
     // pub fn UnionRect();
     // pub fn UnloadKeyboardLayout();
     // pub fn UnpackDDElParam();
-    // pub fn UnregisterClassA();
-    // pub fn UnregisterClassW();
+    pub fn UnregisterClassA(lpClassName: LPCSTR, hInstance: HINSTANCE) -> BOOL;
+    pub fn UnregisterClassW(lpClassName: LPCWSTR, hInstance: HINSTANCE) -> BOOL;
     // pub fn UnregisterDeviceNotification();
     // pub fn UnregisterHotKey();
     // pub fn UnregisterPointerInputTarget();
