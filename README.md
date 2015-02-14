@@ -1,4 +1,4 @@
-# winapi-rs [![Build status](https://ci.appveyor.com/api/projects/status/i47oonf5e7qm5utq/branch/master?svg=true)](https://ci.appveyor.com/project/retep998/winapi-rs/branch/master) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/retep998/winapi-rs) #
+# winapi-rs [![Build status](https://ci.appveyor.com/api/projects/status/i47oonf5e7qm5utq/branch/master?svg=true)](https://ci.appveyor.com/project/retep998/winapi-rs/branch/master) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/retep998/winapi-rs) [![Crates.io](https://img.shields.io/crates/v/winapi.svg)](https://crates.io/crates/winapi) #
 
 [Documentation](https://retep998.github.io/doc/winapi/)
 
@@ -29,14 +29,14 @@ Bindings to library functions are in separate crates. The source to each crate i
 
 ### Usable crates ###
 These are the ones that actually have functions in them:
-* [advapi32-sys](https://crates.io/crates/advapi32-sys)
-* [gdi32-sys](https://crates.io/crates/gdi32-sys)
-* [kernel32-sys](https://crates.io/crates/kernel32-sys)
-* [ole32-sys](https://crates.io/crates/ole32-sys)
-* [opengl32-sys](https://crates.io/crates/opengl32-sys)
-* [shell32-sys](https://crates.io/crates/shell32-sys)
-* [user32-sys](https://crates.io/crates/user32-sys)
-* [winmm-sys](https://crates.io/crates/winmm-sys)
+* [advapi32-sys ![Crates.io](https://img.shields.io/crates/v/advapi32-sys.svg)](https://crates.io/crates/advapi32-sys)
+* [gdi32-sys ![Crates.io](https://img.shields.io/crates/v/gdi32-sys.svg)](https://crates.io/crates/gdi32-sys)
+* [kernel32-sys ![Crates.io](https://img.shields.io/crates/v/kernel32-sys.svg)](https://crates.io/crates/kernel32-sys)
+* [ole32-sys ![Crates.io](https://img.shields.io/crates/v/ole32-sys.svg)](https://crates.io/crates/ole32-sys)
+* [opengl32-sys ![Crates.io](https://img.shields.io/crates/v/opengl32-sys.svg)](https://crates.io/crates/opengl32-sys)
+* [shell32-sys ![Crates.io](https://img.shields.io/crates/v/shell32-sys.svg)](https://crates.io/crates/shell32-sys)
+* [user32-sys ![Crates.io](https://img.shields.io/crates/v/user32-sys.svg)](https://crates.io/crates/user32-sys)
+* [winmm-sys ![Crates.io](https://img.shields.io/crates/v/winmm-sys.svg)](https://crates.io/crates/winmm-sys)
 
 ### Reserved crates ###
 These are the ones that are reserved for future use:
