@@ -5,6 +5,18 @@ extern crate "user32-sys" as user32;
 extern crate test;
 use user32::*;
 use test::black_box as bb;
+#[cfg(target_arch = "x86_64")]
+#[test]
+fn functions_x64() {
+    bb(GetClassLongPtrA);
+    bb(GetClassLongPtrW);
+    bb(GetWindowLongPtrA);
+    bb(GetWindowLongPtrW);
+    bb(SetClassLongPtrA);
+    bb(SetClassLongPtrW);
+    bb(SetWindowLongPtrA);
+    bb(SetWindowLongPtrW);
+}
 #[test]
 fn functions() {
     bb(ActivateKeyboardLayout);
@@ -69,8 +81,6 @@ fn functions() {
     bb(GetClassInfoExW);
     bb(GetClassInfoW);
     bb(GetClassLongA);
-    bb(GetClassLongPtrA);
-    bb(GetClassLongPtrW);
     bb(GetClassLongW);
     bb(GetClassWord);
     bb(GetClientRect);
@@ -110,8 +120,6 @@ fn functions() {
     // bb(GetUpdatedClipboardFormats);
     bb(GetWindow);
     bb(GetWindowLongA);
-    bb(GetWindowLongPtrA);
-    bb(GetWindowLongPtrW);
     bb(GetWindowLongW);
     bb(GetWindowPlacement);
     bb(GetWindowRect);
@@ -156,8 +164,6 @@ fn functions() {
     bb(SetCaretBlinkTime);
     bb(SetCaretPos);
     bb(SetClassLongA);
-    bb(SetClassLongPtrA);
-    bb(SetClassLongPtrW);
     bb(SetClassLongW);
     bb(SetClassWord);
     bb(SetClipboardViewer);
@@ -170,8 +176,6 @@ fn functions() {
     bb(SetScrollRange);
     bb(SetSystemCursor);
     bb(SetWindowLongA);
-    bb(SetWindowLongPtrA);
-    bb(SetWindowLongPtrW);
     bb(SetWindowLongW);
     bb(SetWindowPos);
     bb(SetWindowTextW);
