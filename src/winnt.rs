@@ -293,7 +293,8 @@ pub type PFILE_SEGMENT_ELEMENT = *mut FILE_SEGMENT_ELEMENT;
     pub Ptr: ::PVOID,
 }
 pub type PRTL_SRWLOCK = *mut RTL_SRWLOCK;
-//18209
+//18204
+pub type PAPCFUNC = unsafe extern "system" fn(Parameter: ::ULONG_PTR);
 pub type PVECTORED_EXCEPTION_HANDLER = unsafe extern "system" fn(
     ExceptionInfo: *mut EXCEPTION_POINTERS,
 ) -> ::LONG;

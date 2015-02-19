@@ -36,6 +36,7 @@ These are the ones that actually have functions in them:
 * [opengl32-sys](https://crates.io/crates/opengl32-sys)
 * [shell32-sys](https://crates.io/crates/shell32-sys)
 * [user32-sys](https://crates.io/crates/user32-sys)
+* [uuid-sys](https://crates.io/crates/uuid-sys)
 * [winmm-sys](https://crates.io/crates/winmm-sys)
 
 ### Reserved crates ###
@@ -378,7 +379,6 @@ These are the ones that are reserved for future use:
 * [urlmon-sys](https://crates.io/crates/urlmon-sys)
 * [userenv-sys](https://crates.io/crates/userenv-sys)
 * [usp10-sys](https://crates.io/crates/usp10-sys)
-* [uuid-sys](https://crates.io/crates/uuid-sys)
 * [uxtheme-sys](https://crates.io/crates/uxtheme-sys)
 * [vccomsup-sys](https://crates.io/crates/vccomsup-sys)
 * [vdmdbg-sys](https://crates.io/crates/vdmdbg-sys)

@@ -1,6 +1,6 @@
 [package]
 name = "winapi"
-version = "0.1.11"
+version = "0.1.12"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "Types and constants for WinAPI bindings. See README for list of crates providing function bindings."
 documentation = "https://retep998.github.io/doc/winapi/"
@@ -11,3 +11,31 @@ license = "MIT"
 
 [dependencies]
 libc = "*"
+
+[dev-dependencies.advapi32-sys]
+version = "*"
+path = "lib/advapi32-sys"
+[dev-dependencies.gdi32-sys]
+version = "*"
+path = "lib/gdi32-sys"
+[dev-dependencies.kernel32-sys]
+version = "*"
+path = "lib/kernel32-sys"
+[dev-dependencies.ole32-sys]
+version = "*"
+path = "lib/ole32-sys"
+[dev-dependencies.opengl32-sys]
+version = "*"
+path = "lib/opengl32-sys"
+[dev-dependencies.shell32-sys]
+version = "*"
+path = "lib/shell32-sys"
+[dev-dependencies.user32-sys]
+version = "*"
+path = "lib/user32-sys"
+[dev-dependencies.uuid-sys]
+version = "*"
+path = "lib/uuid-sys"
+[dev-dependencies.winmm-sys]
+version = "*"
+path = "lib/winmm-sys"

@@ -660,12 +660,12 @@ extern "system" {
     // pub fn SendMessageCallbackA();
     // pub fn SendMessageCallbackW();
     pub fn SendMessageTimeoutA(
-        hWnd: HWND, msg: UINT, lParam: LPARAM, fuFlags: UINT, uTimeout: UINT,
-        lpdwResult: PDWORD_PTR
+        hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM, fuFlags: UINT, uTimeout: UINT,
+        lpdwResult: PDWORD_PTR,
     ) -> LRESULT;
     pub fn SendMessageTimeoutW(
-        hWnd: HWND, msg: UINT, lParam: LPARAM, fuFlags: UINT, uTimeout: UINT,
-        lpdwResult: PDWORD_PTR
+        hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM, fuFlags: UINT, uTimeout: UINT,
+        lpdwResult: PDWORD_PTR,
     ) -> LRESULT;
     pub fn SendMessageW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
     pub fn SendNotifyMessageA(hWnd: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
@@ -674,11 +674,11 @@ extern "system" {
     // pub fn SetCapture();
     pub fn SetCaretBlinkTime(uMSeconds: UINT) -> BOOL;
     pub fn SetCaretPos(x: c_int, y: c_int) -> BOOL;
-    pub fn SetClassLongA();
+    pub fn SetClassLongA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
     #[cfg(target_arch = "x86_64")]
-    pub fn SetClassLongPtrA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
+    pub fn SetClassLongPtrA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> ULONG_PTR;
     #[cfg(target_arch = "x86_64")]
-    pub fn SetClassLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
+    pub fn SetClassLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> ULONG_PTR;
     pub fn SetClassLongW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
     pub fn SetClassWord(hWnd: HWND, nIndex: c_int, wNewWord: WORD) -> WORD;
     // pub fn SetClipboardData();

@@ -175,9 +175,20 @@ extern "system" {
     // pub fn CreateMutexExA();
     // pub fn CreateMutexExW();
     // pub fn CreateMutexW();
-    // pub fn CreateNamedPipeA();
-    // pub fn CreateNamedPipeW();
-    // pub fn CreatePipe();
+    pub fn CreateNamedPipeA(
+        lpName: LPCSTR, dwOpenMode: DWORD, dwPipeMode: DWORD, nMaxInstances: DWORD,
+        nOutBufferSize: DWORD, nInBufferSize: DWORD, nDefaultTimeOut: DWORD,
+        lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+    ) -> HANDLE;
+    pub fn CreateNamedPipeW(
+        lpName: LPCWSTR, dwOpenMode: DWORD, dwPipeMode: DWORD, nMaxInstances: DWORD,
+        nOutBufferSize: DWORD, nInBufferSize: DWORD, nDefaultTimeOut: DWORD,
+        lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+    ) -> HANDLE;
+    pub fn CreatePipe(
+        hReadPipe: PHANDLE, hWritePipe: PHANDLE, lpPipeAttributes: LPSECURITY_ATTRIBUTES,
+        nSize: DWORD,
+    ) -> BOOL;
     // pub fn CreatePrivateNamespaceA();
     // pub fn CreatePrivateNamespaceW();
     // pub fn CreateProcessA();
@@ -513,7 +524,7 @@ extern "system" {
     // pub fn GetCurrentProcessId();
     // pub fn GetCurrentProcessorNumber();
     // pub fn GetCurrentProcessorNumberEx();
-    // pub fn GetCurrentThread();
+    pub fn GetCurrentThread() -> HANDLE;
     // pub fn GetCurrentThreadId();
     // pub fn GetCurrentThreadStackLimits();
     // #[cfg(target_arch = "x86_64")]
@@ -1124,7 +1135,7 @@ extern "system" {
     // #[cfg(target_arch = "x86_64")]
     // pub fn QueryUmsThreadInformation();
     // pub fn QueryUnbiasedInterruptTime();
-    // pub fn QueueUserAPC();
+    pub fn QueueUserAPC(pfnAPC: PAPCFUNC, hThread: HANDLE, dwData: ULONG_PTR) -> DWORD;
     // pub fn QueueUserWorkItem();
     // pub fn RaiseException();
     // pub fn RaiseFailFastException();
@@ -1425,7 +1436,7 @@ extern "system" {
     // pub fn Sleep();
     // pub fn SleepConditionVariableCS();
     // pub fn SleepConditionVariableSRW();
-    // pub fn SleepEx();
+    pub fn SleepEx(dwMilliseconds: DWORD, bAlertable: BOOL) -> DWORD;
     // pub fn StartThreadpoolIo();
     // pub fn SubmitThreadpoolWork();
     // pub fn SuspendThread();

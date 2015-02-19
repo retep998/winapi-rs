@@ -1,6 +1,6 @@
 [package]
 name = "user32-sys"
-version = "0.0.9"
+version = "0.0.10"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to user32."
 documentation = "https://retep998.github.io/doc/user32-sys/"
@@ -11,5 +11,6 @@ license = "MIT"
 build = "build.rs"
 links = "user32"
 
-[dependencies]
-winapi = "*"
+[dependencies.winapi]
+version = "*"
+path = "../.."
