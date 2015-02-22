@@ -56,7 +56,7 @@ extern "system" {
     // pub fn CallbackMayRunLong();
     // pub fn CalloutOnFiberStack();
     // pub fn CancelDeviceWakeupRequest();
-    // pub fn CancelIo();
+    pub fn CancelIo(hFile: HANDLE) -> BOOL;
     // pub fn CancelIoEx();
     // pub fn CancelSynchronousIo();
     // pub fn CancelThreadpoolIo();
