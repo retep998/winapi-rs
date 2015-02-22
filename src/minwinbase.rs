@@ -106,8 +106,8 @@ pub const FIND_FIRST_EX_LARGE_FETCH: ::DWORD = 0x00000002;
 }
 pub type PFILE_INFO_BY_HANDLE_CLASS = *mut FILE_INFO_BY_HANDLE_CLASS;
 //206
-pub type LPOVERLAPPED_COMPLETION_ROUTINE = unsafe extern "system" fn(
+pub type LPOVERLAPPED_COMPLETION_ROUTINE = Option<unsafe extern "system" fn(
     dwErrorCode: ::DWORD, dwNumberOfBytesTransfered: ::DWORD, lpOverlapped: LPOVERLAPPED,
-);
+)>;
 pub const LOCKFILE_FAIL_IMMEDIATELY: ::DWORD = 0x00000001;
 pub const LOCKFILE_EXCLUSIVE_LOCK: ::DWORD = 0x00000002;
