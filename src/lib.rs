@@ -3007,6 +3007,3 @@ pub type LPPIXELFORMATDESCRIPTOR = *mut PIXELFORMATDESCRIPTOR;
 // shlobj.h
 // constants
 pub const INVALID_HANDLE_VALUE: HANDLE = -1 as HANDLE;
-// error codes
-pub const ERROR_INVALID_HANDLE: DWORD = 6;
-pub const ERROR_ILLEGAL_CHARACTER: DWORD = 582;
