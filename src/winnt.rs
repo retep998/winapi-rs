@@ -193,6 +193,130 @@ pub const CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION: ::WORD =
     pub pAttributeV1: PCLAIM_SECURITY_ATTRIBUTE_V1,
 }
 pub type PCLAIM_SECURITY_ATTRIBUTES_INFORMATION = *mut CLAIM_SECURITY_ATTRIBUTES_INFORMATION;
+//11490
+#[repr(C)] #[derive(Copy)] pub struct IO_COUNTERS {
+    pub ReadOperationCount: ::ULONGLONG,
+    pub WriteOperationCount: ::ULONGLONG,
+    pub OtherOperationCount: ::ULONGLONG,
+    pub ReadTransferCount: ::ULONGLONG,
+    pub WriteTransferCount: ::ULONGLONG,
+    pub OtherTransferCount: ::ULONGLONG,
+}
+pub type PIO_COUNTERS = *mut IO_COUNTERS;
+//11607
+#[repr(C)] #[derive(Copy)] pub struct JOBOBJECT_BASIC_LIMIT_INFORMATION {
+    pub PerProcessUserTimeLimit: ::LARGE_INTEGER,
+    pub PerJobUserTimeLimit: ::LARGE_INTEGER,
+    pub LimitFlags: ::DWORD,
+    pub MinimumWorkingSetSize: ::SIZE_T,
+    pub MaximumWorkingSetSize: ::SIZE_T,
+    pub ActiveProcessLimit: ::DWORD,
+    pub Affinity: ::ULONG_PTR,
+    pub PriorityClass: ::DWORD,
+    pub SchedulingClass: ::DWORD,
+}
+pub type PJOBOBJECT_BASIC_LIMIT_INFORMATION = *mut JOBOBJECT_BASIC_LIMIT_INFORMATION;
+#[repr(C)] #[derive(Copy)] pub struct JOBOBJECT_EXTENDED_LIMIT_INFORMATION {
+    pub BasicLimitInformation: JOBOBJECT_BASIC_LIMIT_INFORMATION,
+    pub IoInfo: IO_COUNTERS,
+    pub ProcessMemoryLimit: ::SIZE_T,
+    pub JobMemoryLimit: ::SIZE_T,
+    pub PeakProcessMemoryUsed: ::SIZE_T,
+    pub PeakJobMemoryUsed: ::SIZE_T,
+}
+pub type PJOBOBJECT_EXTENDED_LIMIT_INFORMATION = *mut JOBOBJECT_EXTENDED_LIMIT_INFORMATION;
+//11712
+pub const JOB_OBJECT_TERMINATE_AT_END_OF_JOB: ::DWORD = 0;
+pub const JOB_OBJECT_POST_AT_END_OF_JOB: ::DWORD = 1;
+pub const JOB_OBJECT_MSG_END_OF_JOB_TIME: ::DWORD = 1;
+pub const JOB_OBJECT_MSG_END_OF_PROCESS_TIME: ::DWORD = 2;
+pub const JOB_OBJECT_MSG_ACTIVE_PROCESS_LIMIT: ::DWORD = 3;
+pub const JOB_OBJECT_MSG_ACTIVE_PROCESS_ZERO: ::DWORD = 4;
+pub const JOB_OBJECT_MSG_NEW_PROCESS: ::DWORD = 6;
+pub const JOB_OBJECT_MSG_EXIT_PROCESS: ::DWORD = 7;
+pub const JOB_OBJECT_MSG_ABNORMAL_EXIT_PROCESS: ::DWORD = 8;
+pub const JOB_OBJECT_MSG_PROCESS_MEMORY_LIMIT: ::DWORD = 9;
+pub const JOB_OBJECT_MSG_JOB_MEMORY_LIMIT: ::DWORD = 10;
+pub const JOB_OBJECT_MSG_NOTIFICATION_LIMIT: ::DWORD = 11;
+pub const JOB_OBJECT_MSG_JOB_CYCLE_TIME_LIMIT: ::DWORD = 12;
+pub const JOB_OBJECT_MSG_MINIMUM: ::DWORD = 1;
+pub const JOB_OBJECT_MSG_MAXIMUM: ::DWORD = 12;
+pub const JOB_OBJECT_VALID_COMPLETION_FILTER: ::DWORD = ((1 << (JOB_OBJECT_MSG_MAXIMUM + 1)) - 1)
+    - ((1 << JOB_OBJECT_MSG_MINIMUM) - 1);
+pub const JOB_OBJECT_LIMIT_WORKINGSET: ::DWORD = 0x00000001;
+pub const JOB_OBJECT_LIMIT_PROCESS_TIME: ::DWORD = 0x00000002;
+pub const JOB_OBJECT_LIMIT_JOB_TIME: ::DWORD = 0x00000004;
+pub const JOB_OBJECT_LIMIT_ACTIVE_PROCESS: ::DWORD = 0x00000008;
+pub const JOB_OBJECT_LIMIT_AFFINITY: ::DWORD = 0x00000010;
+pub const JOB_OBJECT_LIMIT_PRIORITY_CLASS: ::DWORD = 0x00000020;
+pub const JOB_OBJECT_LIMIT_PRESERVE_JOB_TIME: ::DWORD = 0x00000040;
+pub const JOB_OBJECT_LIMIT_SCHEDULING_CLASS: ::DWORD = 0x00000080;
+pub const JOB_OBJECT_LIMIT_PROCESS_MEMORY: ::DWORD = 0x00000100;
+pub const JOB_OBJECT_LIMIT_JOB_MEMORY: ::DWORD = 0x00000200;
+pub const JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION: ::DWORD = 0x00000400;
+pub const JOB_OBJECT_LIMIT_BREAKAWAY_OK: ::DWORD = 0x00000800;
+pub const JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK: ::DWORD = 0x00001000;
+pub const JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE: ::DWORD = 0x00002000;
+pub const JOB_OBJECT_LIMIT_SUBSET_AFFINITY: ::DWORD = 0x00004000;
+pub const JOB_OBJECT_LIMIT_JOB_READ_BYTES: ::DWORD = 0x00010000;
+pub const JOB_OBJECT_LIMIT_JOB_WRITE_BYTES: ::DWORD = 0x00020000;
+pub const JOB_OBJECT_LIMIT_RATE_CONTROL: ::DWORD = 0x00040000;
+pub const JOB_OBJECT_LIMIT_RESERVED3: ::DWORD = 0x00008000;
+pub const JOB_OBJECT_LIMIT_VALID_FLAGS: ::DWORD = 0x0007ffff;
+pub const JOB_OBJECT_BASIC_LIMIT_VALID_FLAGS: ::DWORD = 0x000000ff;
+pub const JOB_OBJECT_EXTENDED_LIMIT_VALID_FLAGS: ::DWORD = 0x00007fff;
+pub const JOB_OBJECT_NOTIFICATION_LIMIT_VALID_FLAGS: ::DWORD = 0x00070204;
+pub const JOB_OBJECT_RESERVED_LIMIT_VALID_FLAGS: ::DWORD = 0x0007ffff;
+pub const JOB_OBJECT_UILIMIT_NONE: ::DWORD = 0x00000000;
+pub const JOB_OBJECT_UILIMIT_HANDLES: ::DWORD = 0x00000001;
+pub const JOB_OBJECT_UILIMIT_READCLIPBOARD: ::DWORD = 0x00000002;
+pub const JOB_OBJECT_UILIMIT_WRITECLIPBOARD: ::DWORD = 0x00000004;
+pub const JOB_OBJECT_UILIMIT_SYSTEMPARAMETERS: ::DWORD = 0x00000008;
+pub const JOB_OBJECT_UILIMIT_DISPLAYSETTINGS: ::DWORD = 0x00000010;
+pub const JOB_OBJECT_UILIMIT_GLOBALATOMS: ::DWORD = 0x00000020;
+pub const JOB_OBJECT_UILIMIT_DESKTOP: ::DWORD = 0x00000040;
+pub const JOB_OBJECT_UILIMIT_EXITWINDOWS: ::DWORD = 0x00000080;
+pub const JOB_OBJECT_UILIMIT_ALL: ::DWORD = 0x000000FF;
+pub const JOB_OBJECT_UI_VALID_FLAGS: ::DWORD = 0x000000FF;
+pub const JOB_OBJECT_SECURITY_NO_ADMIN: ::DWORD = 0x00000001;
+pub const JOB_OBJECT_SECURITY_RESTRICTED_TOKEN: ::DWORD = 0x00000002;
+pub const JOB_OBJECT_SECURITY_ONLY_TOKEN: ::DWORD = 0x00000004;
+pub const JOB_OBJECT_SECURITY_FILTER_TOKENS: ::DWORD = 0x00000008;
+pub const JOB_OBJECT_SECURITY_VALID_FLAGS: ::DWORD = 0x0000000f;
+pub const JOB_OBJECT_CPU_RATE_CONTROL_ENABLE: ::DWORD = 0x1;
+pub const JOB_OBJECT_CPU_RATE_CONTROL_WEIGHT_BASED: ::DWORD = 0x2;
+pub const JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP: ::DWORD = 0x4;
+pub const JOB_OBJECT_CPU_RATE_CONTROL_NOTIFY: ::DWORD = 0x8;
+pub const JOB_OBJECT_CPU_RATE_CONTROL_VALID_FLAGS: ::DWORD = 0xf;
+#[repr(i32)] #[derive(Copy)] pub enum JOBOBJECTINFOCLASS {
+    JobObjectBasicAccountingInformation = 1,
+    JobObjectBasicLimitInformation,
+    JobObjectBasicProcessIdList,
+    JobObjectBasicUIRestrictions,
+    JobObjectSecurityLimitInformation,
+    JobObjectEndOfJobTimeInformation,
+    JobObjectAssociateCompletionPortInformation,
+    JobObjectBasicAndIoAccountingInformation,
+    JobObjectExtendedLimitInformation,
+    JobObjectJobSetInformation,
+    JobObjectGroupInformation,
+    JobObjectNotificationLimitInformation,
+    JobObjectLimitViolationInformation,
+    JobObjectGroupInformationEx,
+    JobObjectCpuRateControlInformation,
+    JobObjectCompletionFilter,
+    JobObjectCompletionCounter,
+    JobObjectReserved1Information = 18,
+    JobObjectReserved2Information,
+    JobObjectReserved3Information,
+    JobObjectReserved4Information,
+    JobObjectReserved5Information,
+    JobObjectReserved6Information,
+    JobObjectReserved7Information,
+    JobObjectReserved8Information,
+    JobObjectReserved9Information,
+    MaxJobObjectInfoClass,
+}
 //12217
 pub const FILE_READ_DATA: ::DWORD = 0x0001;
 pub const FILE_LIST_DIRECTORY: ::DWORD = 0x0001;
@@ -281,7 +405,7 @@ pub type PFILE_ID_128 = *mut FILE_ID_128;
     pub NextEntryOffset: ::DWORD,
     pub Action: ::DWORD,
     pub FileNameLength: ::DWORD,
-    pub FileName: [::WCHAR; 1],
+    pub FileName: [::WCHAR; 0],
 }
 #[repr(C)] #[derive(Copy)] pub struct FILE_SEGMENT_ELEMENT {
     pub Buffer: ::PVOID64,
@@ -294,14 +418,14 @@ pub type PFILE_SEGMENT_ELEMENT = *mut FILE_SEGMENT_ELEMENT;
 }
 pub type PRTL_SRWLOCK = *mut RTL_SRWLOCK;
 //18204
-pub type PAPCFUNC = unsafe extern "system" fn(Parameter: ::ULONG_PTR);
-pub type PVECTORED_EXCEPTION_HANDLER = unsafe extern "system" fn(
+pub type PAPCFUNC = Option<unsafe extern "system" fn(Parameter: ::ULONG_PTR)>;
+pub type PVECTORED_EXCEPTION_HANDLER = Option<unsafe extern "system" fn(
     ExceptionInfo: *mut EXCEPTION_POINTERS,
-) -> ::LONG;
+) -> ::LONG>;
 //18264
-pub type PSECURE_MEMORY_CACHE_CALLBACK = unsafe extern "system" fn(
+pub type PSECURE_MEMORY_CACHE_CALLBACK = Option<unsafe extern "system" fn(
     Addr: ::PVOID, Range: ::SIZE_T,
-) -> ::BOOLEAN;
+) -> ::BOOLEAN>;
 //18720
 pub const SERVICE_KERNEL_DRIVER: ::DWORD = 0x00000001;
 pub const SERVICE_FILE_SYSTEM_DRIVER: ::DWORD = 0x00000002;

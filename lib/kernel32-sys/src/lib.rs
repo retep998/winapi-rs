@@ -37,7 +37,7 @@ extern "system" {
     // pub fn ApplicationRecoveryFinished();
     // pub fn ApplicationRecoveryInProgress();
     // pub fn AreFileApisANSI();
-    // pub fn AssignProcessToJobObject();
+    pub fn AssignProcessToJobObject(hJob: HANDLE, hProcess: HANDLE) -> BOOL;
     pub fn AttachConsole(dwProcessId: DWORD) -> BOOL;
     // pub fn BackupRead();
     // pub fn BackupSeek();
@@ -56,8 +56,8 @@ extern "system" {
     // pub fn CallbackMayRunLong();
     // pub fn CalloutOnFiberStack();
     // pub fn CancelDeviceWakeupRequest();
-    // pub fn CancelIo();
-    // pub fn CancelIoEx();
+    pub fn CancelIo(hFile: HANDLE) -> BOOL;
+    pub fn CancelIoEx(hFile: HANDLE, lpOverlapped: LPOVERLAPPED) -> BOOL;
     // pub fn CancelSynchronousIo();
     // pub fn CancelThreadpoolIo();
     // pub fn CancelTimerQueueTimer();
@@ -166,7 +166,7 @@ extern "system" {
         NumberOfConcurrentThreads: DWORD,
     ) -> HANDLE;
     // pub fn CreateJobObjectA();
-    // pub fn CreateJobObjectW();
+    pub fn CreateJobObjectW(lpJobAttributes: LPSECURITY_ATTRIBUTES, lpName: LPCWSTR) -> HANDLE;
     // pub fn CreateJobSet();
     // pub fn CreateMailslotA();
     // pub fn CreateMailslotW();
@@ -1028,8 +1028,10 @@ extern "system" {
     // pub fn Module32Next();
     // pub fn Module32NextW();
     // pub fn MoveFileA();
-    // pub fn MoveFileExA();
-    // pub fn MoveFileExW();
+    pub fn MoveFileExA(lpExistingFileName: LPCSTR, lpNewFileName: LPCSTR, dwFlags: DWORD) -> BOOL;
+    pub fn MoveFileExW(
+        lpExistingFileName: LPCWSTR, lpNewFileName: LPCWSTR, dwFlags: DWORD,
+    ) -> BOOL;
     // pub fn MoveFileTransactedA();
     // pub fn MoveFileTransactedW();
     // pub fn MoveFileW();
@@ -1363,7 +1365,10 @@ extern "system" {
     // pub fn SetFirmwareEnvironmentVariableW();
     // pub fn SetHandleCount();
     // pub fn SetHandleInformation();
-    // pub fn SetInformationJobObject();
+    pub fn SetInformationJobObject(
+        hJob: HANDLE, JobObjectInformationClass: JOBOBJECTINFOCLASS,
+        lpJobObjectInformation: LPVOID, cbJobObjectInformationLength: DWORD,
+    ) -> BOOL;
     pub fn SetLastError(dwErrCode: DWORD);
     // pub fn SetLocalPrimaryComputerNameA();
     // pub fn SetLocalPrimaryComputerNameW();
@@ -1433,7 +1438,7 @@ extern "system" {
     // pub fn SetupComm();
     // pub fn SignalObjectAndWait();
     // pub fn SizeofResource();
-    // pub fn Sleep();
+    pub fn Sleep(dwMilliseconds: DWORD);
     // pub fn SleepConditionVariableCS();
     // pub fn SleepConditionVariableSRW();
     pub fn SleepEx(dwMilliseconds: DWORD, bAlertable: BOOL) -> DWORD;
@@ -1445,7 +1450,7 @@ extern "system" {
     // pub fn SystemTimeToFileTime();
     // pub fn SystemTimeToTzSpecificLocalTime();
     // pub fn SystemTimeToTzSpecificLocalTimeEx();
-    // pub fn TerminateJobObject();
+    pub fn TerminateJobObject(hJob: HANDLE, uExitCode: UINT) -> BOOL;
     // pub fn TerminateProcess();
     // pub fn TerminateThread();
     // pub fn Thread32First();

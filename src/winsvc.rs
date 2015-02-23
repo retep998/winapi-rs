@@ -179,14 +179,12 @@ DECLARE_HANDLE!(SERVICE_STATUS_HANDLE, SERVICE_STATUS_HANDLE__);
 }
 pub type LPSERVICE_STATUS = *mut SERVICE_STATUS;
 //848
-pub type LPSERVICE_MAIN_FUNCTIONW = unsafe extern "system" fn(
-    dwNumServicesArgs: ::DWORD,
-    lpServiceArgVectors: *mut ::LPWSTR,
-);
-pub type LPSERVICE_MAIN_FUNCTIONA = unsafe extern "system" fn(
-    dwNumServicesArgs: ::DWORD,
-    lpServiceArgVectors: *mut ::LPSTR,
-);
+pub type LPSERVICE_MAIN_FUNCTIONW = Option<unsafe extern "system" fn(
+    dwNumServicesArgs: ::DWORD, lpServiceArgVectors: *mut ::LPWSTR,
+)>;
+pub type LPSERVICE_MAIN_FUNCTIONA = Option<unsafe extern "system" fn(
+    dwNumServicesArgs: ::DWORD, lpServiceArgVectors: *mut ::LPSTR,
+)>;
 #[repr(C)] #[derive(Copy)] pub struct SERVICE_TABLE_ENTRYA {
     pub lpServiceName: ::LPCSTR,
     pub lpServiceProc: LPSERVICE_MAIN_FUNCTIONA,
@@ -198,12 +196,7 @@ pub type LPSERVICE_TABLE_ENTRYA = *mut SERVICE_TABLE_ENTRYA;
 }
 pub type LPSERVICE_TABLE_ENTRYW = *mut SERVICE_TABLE_ENTRYW;
 //900
-pub type LPHANDLER_FUNCTION = unsafe extern "system" fn(
-    dwControl: ::DWORD,
-);
-pub type LPHANDLER_FUNCTION_EX = unsafe extern "system" fn(
-    dwControl: ::DWORD,
-    dwEventType: ::DWORD,
-    lpEventData: ::LPVOID,
-    lpContext: ::LPVOID,
-) -> ::DWORD;
+pub type LPHANDLER_FUNCTION = Option<unsafe extern "system" fn(dwControl: ::DWORD)>;
+pub type LPHANDLER_FUNCTION_EX = Option<unsafe extern "system" fn(
+    dwControl: ::DWORD, dwEventType: ::DWORD, lpEventData: ::LPVOID, lpContext: ::LPVOID,
+) -> ::DWORD>;

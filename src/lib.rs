@@ -376,13 +376,10 @@ pub struct OBJECTID {
     pub Lineage: GUID,
     pub Uniquifier: DWORD,
 }
-pub type EXCEPTION_ROUTINE = unsafe extern "system" fn(
-    *mut _EXCEPTION_RECORD,
-    PVOID,
-    *mut _CONTEXT,
-    PVOID,
-) -> EXCEPTION_DISPOSITION;
-pub type PEXCEPTION_ROUTINE = *mut EXCEPTION_ROUTINE;
+pub type PEXCEPTION_ROUTINE = Option<unsafe extern "system" fn(
+    ExceptionRecord: *mut EXCEPTION_RECORD, EstablisherFrame: PVOID, ContextRecord: *mut CONTEXT,
+    DispatcherContext: PVOID,
+) -> EXCEPTION_DISPOSITION>;
 pub type KSPIN_LOCK = ULONG_PTR;
 pub type PKSPIN_LOCK = *mut KSPIN_LOCK;
 #[repr(C)]
@@ -1427,7 +1424,7 @@ pub struct IContactManagerInterop;
 #[derive(Copy)]
 pub struct SHITEMID {
     pub cb: USHORT,
-    pub abID: [BYTE; 1],
+    pub abID: [BYTE; 0],
 }
 pub type LPSHITEMID = *mut SHITEMID;
 pub type LPCSHITEMID = *const SHITEMID;
@@ -2734,8 +2731,8 @@ pub const WS_EX_LAYOUTRTL: DWORD = 0x00400000;
 pub const WS_EX_COMPOSITED: DWORD = 0x02000000;
 pub const WS_EX_NOACTIVATE: DWORD = 0x08000000;
 
-pub type WNDENUMPROC = unsafe extern "system" fn(HWND, LPARAM) -> BOOL;
-pub type WNDPROC = unsafe extern "system" fn(HWND, UINT, WPARAM, LPARAM) -> LRESULT;
+pub type WNDENUMPROC = Option<unsafe extern "system" fn(HWND, LPARAM) -> BOOL>;
+pub type WNDPROC = Option<unsafe extern "system" fn(HWND, UINT, WPARAM, LPARAM) -> LRESULT>;
 #[repr(C)]
 #[derive(Copy)]
 pub struct MSG {
@@ -3007,6 +3004,3 @@ pub type LPPIXELFORMATDESCRIPTOR = *mut PIXELFORMATDESCRIPTOR;
 // shlobj.h
 // constants
 pub const INVALID_HANDLE_VALUE: HANDLE = -1 as HANDLE;
-// error codes
-pub const ERROR_INVALID_HANDLE: DWORD = 6;
-pub const ERROR_ILLEGAL_CHARACTER: DWORD = 582;
