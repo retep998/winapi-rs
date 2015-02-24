@@ -91,7 +91,7 @@ extern "system" {
     // pub fn CompareStringEx();
     // pub fn CompareStringOrdinal();
     // pub fn CompareStringW();
-    // pub fn ConnectNamedPipe();
+    pub fn ConnectNamedPipe(hNamedPipe: HANDLE, lpOverlapped: LPOVERLAPPED) -> BOOL;
     // pub fn ContinueDebugEvent();
     // pub fn ConvertDefaultLocale();
     // pub fn ConvertFiberToThread();
@@ -1126,8 +1126,8 @@ extern "system" {
     // pub fn QueryIdleProcessorCycleTimeEx();
     // pub fn QueryInformationJobObject();
     // pub fn QueryMemoryResourceNotification();
-    // pub fn QueryPerformanceCounter();
-    // pub fn QueryPerformanceFrequency();
+    pub fn QueryPerformanceCounter(lpPerformanceCount: *mut LARGE_INTEGER) -> BOOL;
+    pub fn QueryPerformanceFrequency(lpFrequency: *mut LARGE_INTEGER) -> BOOL;
     // pub fn QueryProcessAffinityUpdateMode();
     // pub fn QueryProcessCycleTime();
     // pub fn QueryProtectedPolicy();
