@@ -159,16 +159,19 @@ pub const SERVICE_LAUNCH_PROTECTED_ANTIMALWARE_LIGHT: ::DWORD = 3;
 DECLARE_HANDLE!(SC_HANDLE, SC_HANDLE__);
 pub type LPSC_HANDLE = *mut SC_HANDLE;
 DECLARE_HANDLE!(SERVICE_STATUS_HANDLE, SERVICE_STATUS_HANDLE__);
-#[repr(i32)] #[derive(Copy)] pub enum SC_STATUS_TYPE {
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum SC_STATUS_TYPE {
     SC_STATUS_PROCESS_INFO = 0,
     __, // FIXME - Univariant enums
 }
-#[repr(i32)] #[derive(Copy)] pub enum _SC_ENUM_TYPE {
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum _SC_ENUM_TYPE {
     SC_ENUM_PROCESS_INFO = 0,
     __, // FIXME - Univariant enums
 }
 //700
-#[repr(C)] #[derive(Copy)] pub struct SERVICE_STATUS {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct SERVICE_STATUS {
     pub dwServiceType: ::DWORD,
     pub dwCurrentState: ::DWORD,
     pub dwControlsAccepted: ::DWORD,
@@ -185,12 +188,14 @@ pub type LPSERVICE_MAIN_FUNCTIONW = Option<unsafe extern "system" fn(
 pub type LPSERVICE_MAIN_FUNCTIONA = Option<unsafe extern "system" fn(
     dwNumServicesArgs: ::DWORD, lpServiceArgVectors: *mut ::LPSTR,
 )>;
-#[repr(C)] #[derive(Copy)] pub struct SERVICE_TABLE_ENTRYA {
+#[repr(C)] #[derive(Copy)]
+pub struct SERVICE_TABLE_ENTRYA {
     pub lpServiceName: ::LPCSTR,
     pub lpServiceProc: LPSERVICE_MAIN_FUNCTIONA,
 }
 pub type LPSERVICE_TABLE_ENTRYA = *mut SERVICE_TABLE_ENTRYA;
-#[repr(C)] #[derive(Copy)] pub struct SERVICE_TABLE_ENTRYW {
+#[repr(C)] #[derive(Copy)]
+pub struct SERVICE_TABLE_ENTRYW {
     pub lpServiceName: ::LPCWSTR,
     pub lpServiceProc: LPSERVICE_MAIN_FUNCTIONW,
 }

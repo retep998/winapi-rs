@@ -202,8 +202,7 @@ pub type SCODE = LONG;
 // windef.h
 // Basic Windows Type Definitions
 //-------------------------------------------------------------------------------------------------
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct POINTL {
     pub x: LONG,
     pub y: LONG,
@@ -280,16 +279,14 @@ pub type PSHORT = *mut SHORT;
 pub type PLONG = *mut LONG;
 pub type ACCESS_MASK = DWORD;
 pub type PACCESS_MASK = *mut ACCESS_MASK;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct PROCESSOR_NUMBER {
     pub Group: WORD,
     pub Number: BYTE,
     pub Reserved: BYTE,
 }
 pub type PPROCESSOR_NUMBER = *mut PROCESSOR_NUMBER;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GROUP_AFFINITY {
     pub Mask: KAFFINITY,
     pub Group: WORD,
@@ -307,15 +304,13 @@ pub type CCHAR = c_char;
 pub type LCID = DWORD;
 pub type PLCID = PDWORD;
 pub type LANGID = WORD;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub enum COMPARTMENT_ID {
     UNSPECIFIED_COMPARTMENT_ID = 0,
     DEFAULT_COMPARTMENT_ID = 1,
 }
 pub type PCOMPARTMENT_ID = *mut COMPARTMENT_ID;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct FLOAT128 {
     pub LowPart: __int64,
     pub HighPart: __int64,
@@ -332,8 +327,7 @@ pub type ULARGE_INTEGER = ULONGLONG;
 pub type PULARGE_INTEGER= *mut ULARGE_INTEGER;
 pub type RTL_REFERENCE_COUNT = LONG_PTR;
 pub type PRTL_REFERENCE_COUNT = *mut LONG_PTR;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct LUID {
     pub LowPart: DWORD,
     pub HighPart: LONG,
@@ -343,35 +337,30 @@ pub type DWORDLONG = ULONGLONG;
 pub type PDWORDLONG = *mut DWORDLONG;
 pub type BOOLEAN = BYTE;
 pub type PBOOLEAN = *mut BOOLEAN;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LIST_ENTRY {
     pub Flink: *mut LIST_ENTRY,
     pub Blink: *mut LIST_ENTRY,
 }
 pub type PLIST_ENTRY = *mut LIST_ENTRY;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SINGLE_LIST_ENTRY {
     pub Next: *mut SINGLE_LIST_ENTRY,
 }
 pub type PSINGLE_LIST_ENTRY = *mut SINGLE_LIST_ENTRY;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct LIST_ENTRY32 {
     pub Flink: DWORD,
     pub Blink: DWORD,
 }
 pub type PLIST_ENTRY32 = *mut LIST_ENTRY32;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct LIST_ENTRY64 {
     pub Flink: ULONGLONG,
     pub Blink: ULONGLONG,
 }
 pub type PLIST_ENTRY64 = *mut LIST_ENTRY64;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct OBJECTID {
     pub Lineage: GUID,
     pub Uniquifier: DWORD,
@@ -382,16 +371,13 @@ pub type PEXCEPTION_ROUTINE = Option<unsafe extern "system" fn(
 ) -> EXCEPTION_DISPOSITION>;
 pub type KSPIN_LOCK = ULONG_PTR;
 pub type PKSPIN_LOCK = *mut KSPIN_LOCK;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct M128A { // FIXME align 16
     pub Low: ULONGLONG,
     pub High: LONGLONG,
 }
 pub type PM128A = *mut M128A;
-#[cfg(target_arch = "x86")]
-#[repr(C)]
-#[derive(Copy)]
+#[cfg(target_arch = "x86")] #[repr(C)] #[derive(Copy)]
 pub struct XSAVE_FORMAT { // FIXME align 16
     pub ControlWord: WORD,
     pub StatusWord: WORD,
@@ -410,9 +396,7 @@ pub struct XSAVE_FORMAT { // FIXME align 16
     pub XmmRegisters: [M128A; 8],
     pub Reserved4: [BYTE; 224],
 }
-#[cfg(target_arch = "x86_64")]
-#[repr(C)]
-#[derive(Copy)]
+#[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Copy)]
 pub struct XSAVE_FORMAT { // FIXME align 16
     pub ControlWord: WORD,
     pub StatusWord: WORD,
@@ -431,18 +415,16 @@ pub struct XSAVE_FORMAT { // FIXME align 16
     pub XmmRegisters: [M128A; 16],
     pub Reserved4: [BYTE; 96],
 }
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TOKEN_PRIVILEGES {
-    PrivilegeCount: DWORD,
-    Privileges: [LUID_AND_ATTRIBUTES; 0],
+    pub PrivilegeCount: DWORD,
+    pub Privileges: [LUID_AND_ATTRIBUTES; 0],
 }
 pub type PTOKEN_PRIVILEGES = *mut TOKEN_PRIVILEGES;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct LUID_AND_ATTRIBUTES {
-    Luid: LUID,
-    Attributes: DWORD,
+    pub Luid: LUID,
+    pub Attributes: DWORD,
 }
 pub type PLUID_AND_ATTRIBUTES = *mut LUID_AND_ATTRIBUTES;
 pub const PROCESS_TERMINATE: DWORD = 0x0001;
@@ -554,8 +536,7 @@ pub const REG_QWORD: DWORD = 11;
 pub const REG_QWORD_LITTLE_ENDIAN: DWORD = 11;
 
 // guiddef.h
-#[repr(C)]
-#[derive(Copy, Debug)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GUID {
     pub Data1: c_ulong,
     pub Data2: c_ushort,
@@ -575,28 +556,22 @@ pub type REFIID = *const IID;
 pub type REFCLSID = *const IID;
 pub type REFFMTID = *const IID;
 // excpt.h
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub enum EXCEPTION_DISPOSITION {
     ExceptionContinueExecution = 0,
     ExceptionContinueSearch = 1,
     ExceptionNestedException = 2,
     ExceptionCollidedUnwind = 3,
 }
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct _EXCEPTION_RECORD;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct _CONTEXT;
-#[cfg(target_arch = "x86_64")]
-#[repr(C)]
-#[derive(Copy)]
+#[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct _DISPATCHER_CONTEXT;
 // shlobj.h
 pub type GPFIDL_FLAGS = c_int;
-#[repr(i32)]
-#[derive(Copy)]
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum KNOWN_FOLDER_FLAG {
     KF_FLAG_DEFAULT = 0x00000000,
     KF_FLAG_NO_APPCONTAINER_REDIRECTION = 0x00010000,
@@ -621,84 +596,65 @@ pub const GPFIDL_UNCPRINTER: GPFIDL_FLAGS = 0x0002;
 pub const OFASI_EDIT: DWORD = 0x0001;
 pub const OFASI_OPENDESKTOP: DWORD = 0x0002;
 // winddef.h
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HWND__;
 pub type HWND = *mut HWND__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HHOOK__;
 pub type HHOOK = *mut HHOOK__;
 pub type HGDIOBJ = *mut c_void;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HACCEL__;
 pub type HACCEL = *mut HACCEL__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HBITMAP__;
 pub type HBITMAP = *mut HBITMAP__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HBRUSH__;
 pub type HBRUSH = *mut HBRUSH__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HCOLORSPACE__;
 pub type HCOLORSPACE = *mut HCOLORSPACE__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HDC__;
 pub type HDC = *mut HDC__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HGLRC__;
 pub type HGLRC = *mut HGLRC__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HDESK__;
 pub type HDESK = *mut HDESK__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HENHMETAFILE__;
 pub type HENHMETAFILE = *mut HENHMETAFILE__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HFONT__;
 pub type HFONT = *mut HFONT__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HICON__;
 pub type HICON = *mut HICON__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HMENU__;
 pub type HMENU = *mut HMENU__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HPALETTE__;
 pub type HPALETTE = *mut HPALETTE__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HPEN__;
 pub type HPEN = *mut HPEN__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HWINEVENTHOOK__;
 pub type HWINEVENTHOOK = *mut HWINEVENTHOOK__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HMONITOR__;
 pub type HMONITOR = *mut HMONITOR__;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct HUMPD__;
 pub type HUMPD = *mut HUMPD__;
 pub type HCURSOR = HICON;
 pub type COLORREF = DWORD;
 pub type LPCOLORREF = *mut DWORD;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct RECT {
     pub left: LONG,
     pub top: LONG,
@@ -709,8 +665,7 @@ pub type PRECT = *mut RECT;
 pub type NPRECT = *mut RECT;
 pub type LPRECT = *mut RECT;
 pub type LPCRECT = *const RECT;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct POINT {
     pub x: LONG,
     pub y: LONG,
@@ -732,704 +687,473 @@ pub const FORMAT_MESSAGE_MAX_WIDTH_MASK: DWORD = 0x000000FF;
 pub const FORMAT_MESSAGE_ALLOCATE_BUFFER: DWORD = 0x00000100;
 
 // shlobjdl.h
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IContextMenu;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IContextMenu2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IContextMenu3;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IExecuteCommand;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPersistFolder;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IRunnableTask;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellTaskScheduler;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IQueryCodePage;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPersistFolder2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPersistFolder3;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPersistIDList;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IEnumIDList;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IEnumFullIDList;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFileSyncMergeHandler;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IObjectWithFolderEnumMode;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IParseAndCreateItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellFolder;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IEnumExtraSearch;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellFolder2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFolderViewOptions;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellView;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellView2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellView3;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFolderView;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ISearchBoxInfo;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFolderView2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFolderViewSettings;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPreviewHandlerVisuals;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IVisualProperties;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ICommDlgBrowser;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ICommDlgBrowser2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ICommDlgBrowser3;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IColumnManager;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFolderFilterSite;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFolderFilter;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IInputObjectSite;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IInputObject;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IInputObject2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellIcon;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellBrowser;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IProfferService;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellItem2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellItemImageFactory;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IUserAccountChangeCallback;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IEnumShellItems;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ITransferAdviseSink;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ITransferSource;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IEnumResources;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellItemResources;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ITransferDestination;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IStreamAsync;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IStreamUnbufferedInfo;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFileOperationProgressSink;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellItemArray;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IInitializeWithItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IObjectWithSelection;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IObjectWithBackReferences;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPropertyUI;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ICategoryProvider;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ICategorizer;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDropTargetHelper;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDragSourceHelper;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDragSourceHelper2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellLinkA;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellLinkW;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellLinkDataList;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IResolveShellLink;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IActionProgressDialog;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IHWEventHandler;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IHWEventHandler2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IQueryCancelAutoPlay;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDynamicHWHandler;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IActionProgress;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellExtInit;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellPropSheetExt;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IRemoteComputer;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IQueryContinue;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IObjectWithCancelEvent;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IUserNotification;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IUserNotificationCallback;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IUserNotification2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IItemNameLimits;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ISearchFolderItemFactory;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IExtractImage;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IExtractImage2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IThumbnailHandlerFactory;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IParentAndItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDockingWindow;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDeskBand;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDeskBandInfo;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDeskBand2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ITaskbarList;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ITaskbarList2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ITaskbarList3;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ITaskbarList4;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IStartMenuPinnedList;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ICDBurn;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IWizardSite;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IWizardExtension;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IWebWizardExtension;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPublishingWizard;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFolderViewHost;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IExplorerBrowserEvents;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IExplorerBrowser;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IAccessibleObject;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IResultsFolder;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IEnumObjects;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IOperationsProgressDialog;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IIOCancelInformation;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFileOperation;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IObjectProvider;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct INamespaceWalkCB;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct INamespaceWalkCB2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct INamespaceWalk;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IAutoCompleteDropDown;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IBandSite;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IModalWindow;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ICDBurnExt;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IContextMenuSite;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IEnumReadyCallback;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IEnumerableView;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IInsertItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IMenuBand;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFolderBandPriv;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IRegTreeItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IImageRecompress;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDeskBar;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IMenuPopup;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFileIsInUse;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFileDialogEvents;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFileDialog;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFileSaveDialog;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFileOpenDialog;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFileDialogCustomize;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFileDialogControlEvents;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFileDialog2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IApplicationAssociationRegistration;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IApplicationAssociationRegistrationUI;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDelegateFolder;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IBrowserFrameOptions;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct INewWindowManager;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IAttachmentExecute;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellMenuCallback;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellMenu;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellRunDll;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IKnownFolder;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IKnownFolderManager;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ISharingConfigurationManager;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPreviousVersionsInfo;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IRelatedItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IIdentityName;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDelegateItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ICurrentItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ITransferMediumItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IUseToBrowseItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDisplayItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IViewStateIdentityItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPreviewItem;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDestinationStreamFactory;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct INewMenuClient;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IInitializeWithBindCtx;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellItemFilter;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct INameSpaceTreeControl;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct INameSpaceTreeControl2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct INameSpaceTreeControlEvents;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct INameSpaceTreeControlDropHandler;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct INameSpaceTreeAccessible;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct INameSpaceTreeControlCustomDraw;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct INameSpaceTreeControlFolderCapabilities;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPreviewHandler;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPreviewHandlerFrame;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ITrayDeskBand;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IBandHost;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IExplorerPaneVisibility;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IContextMenuCB;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDefaultExtractIconInit;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IExplorerCommand;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IExplorerCommandState;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IInitializeCommand;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IEnumExplorerCommand;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IExplorerCommandProvider;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IMarkupCallback;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IControlMarkup;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IInitializeNetworkFolder;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IOpenControlPanel;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IComputerInfoChangeNotify;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFileSystemBindData;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFileSystemBindData2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ICustomDestinationList;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IApplicationDestinations;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IApplicationDocumentLists;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IObjectWithAppUserModelID;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IObjectWithProgID;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IUpdateIDList;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDesktopGadget;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDesktopWallpaper;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IHomeGroup;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IInitializeWithPropertyStore;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IOpenSearchSource;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IShellLibrary;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDefaultFolderMenuInitialize;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IApplicationActivationManager;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IAssocHandlerInvoker;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IAssocHandler;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IEnumAssocHandlers;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDataObjectProvider;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IDataTransferManagerInterop;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFrameworkInputPaneHandler;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IFrameworkInputPane;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IAccessibilityDockingServiceCallback;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IAccessibilityDockingService;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IAppVisibilityEvents;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IAppVisibility;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPackageExecutionStateChangeNotification;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPackageDebugSettings;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ISuspensionDependencyManager;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IExecuteCommandApplicationHostEnvironment;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IExecuteCommandHost;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IApplicationDesignModeSettings;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IApplicationDesignModeSettings2;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ILaunchTargetMonitor;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ILaunchSourceViewSizePreference;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ILaunchTargetViewSizePreference;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ILaunchSourceAppUserModelId;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IInitializeWithWindow;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IHandlerInfo;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IHandlerActivationHost;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IContactManagerInterop;
 // shtypes.h
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SHITEMID {
     pub cb: USHORT,
     pub abID: [BYTE; 0],
 }
 pub type LPSHITEMID = *mut SHITEMID;
 pub type LPCSHITEMID = *const SHITEMID;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ITEMIDLIST {
     pub mkid: SHITEMID,
 }
@@ -1475,8 +1199,7 @@ pub type VARTYPE = c_ushort;
 //-------------------------------------------------------------------------------------------------
 // mmdeviceapi.h
 //-------------------------------------------------------------------------------------------------
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub enum EDataFlow {
     eRender,
     eCapture,
@@ -1484,8 +1207,7 @@ pub enum EDataFlow {
     EDataFlow_enum_count,
 }
 
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub enum ERole {
     eConsole,
     eMultimedia,
@@ -1508,7 +1230,6 @@ pub const IID_IMMDeviceEnumerator: IID = GUID {
 };
 
 #[repr(C)]
-#[derive(Copy)]
 pub struct IMMDeviceVtbl {
     pub QueryInterface: unsafe extern "system" fn(
         This: *mut IMMDevice,
@@ -1542,13 +1263,11 @@ pub struct IMMDeviceVtbl {
         pdwState: *mut DWORD,
     ) -> HRESULT,
 }
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IMMDevice {
     pub lpVtbl: *const IMMDeviceVtbl,
 }
 #[repr(C)]
-#[derive(Copy)]
 pub struct IMMDeviceEnumeratorVtbl {
     pub QueryInterface: unsafe extern "system" fn(
         This: *mut IMMDeviceEnumerator,
@@ -1587,16 +1306,13 @@ pub struct IMMDeviceEnumeratorVtbl {
         pClient: *mut IMMNotificationClient,
     ) -> HRESULT,
 }
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IMMDeviceEnumerator {
     pub lpVtbl: *const IMMDeviceEnumeratorVtbl,
 }
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IMMDeviceCollection;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IMMNotificationClient;
 
 //-------------------------------------------------------------------------------------------------
@@ -1617,7 +1333,6 @@ pub const IID_IAudioRenderClient: IID = GUID {
 };
 
 #[repr(C)]
-#[derive(Copy)]
 pub struct IAudioClientVtbl {
     pub QueryInterface: unsafe extern "system" fn(
         This: *mut IAudioClient,
@@ -1685,13 +1400,11 @@ pub struct IAudioClientVtbl {
         ppv: *mut LPVOID,
     ) -> HRESULT,
 }
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IAudioClient {
     pub lpVtbl: *const IAudioClientVtbl,
 }
 #[repr(C)]
-#[derive(Copy)]
 pub struct IAudioRenderClientVtbl {
     pub QueryInterface: unsafe extern "system" fn(
         This: *mut IAudioRenderClient,
@@ -1715,8 +1428,7 @@ pub struct IAudioRenderClientVtbl {
         dwFlags: DWORD,
     ) -> HRESULT,
 }
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IAudioRenderClient {
     pub lpVtbl: *const IAudioRenderClientVtbl,
 }
@@ -1724,11 +1436,10 @@ pub struct IAudioRenderClient {
 //-------------------------------------------------------------------------------------------------
 // audiosessiontypes.h
 //-------------------------------------------------------------------------------------------------
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub enum AUDCLNT_SHAREMODE {
     AUDCLNT_SHAREMODE_SHARED,
-    AUDCLNT_SHAREMODE_EXCLUSIVE
+    AUDCLNT_SHAREMODE_EXCLUSIVE,
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -1739,8 +1450,7 @@ pub type REFERENCE_TIME = LONGLONG;
 //-------------------------------------------------------------------------------------------------
 // mmreg.h
 //-------------------------------------------------------------------------------------------------
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct WAVEFORMATEX {
     pub wFormatTag: WORD,
     pub nChannels: WORD,
@@ -1754,21 +1464,19 @@ pub struct WAVEFORMATEX {
 //-------------------------------------------------------------------------------------------------
 // propsys.h
 //-------------------------------------------------------------------------------------------------
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct IPropertyStore;
 
 //-------------------------------------------------------------------------------------------------
 // propidl.h
 //-------------------------------------------------------------------------------------------------
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PROPVARIANT {
-    vt: VARTYPE,
-    wReserved1: WORD,
-    wReserved2: WORD,
-    wReserved3: WORD,
-    data: [u8;  16],
+    pub vt: VARTYPE,
+    pub wReserved1: WORD,
+    pub wReserved2: WORD,
+    pub wReserved3: WORD,
+    pub data: [u8; 16],
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -1776,7 +1484,6 @@ pub struct PROPVARIANT {
 // this ALWAYS GENERATED file contains the definitions for the interfaces
 //-------------------------------------------------------------------------------------------------
 #[repr(C)]
-#[derive(Copy)]
 pub struct IMallocVtbl {
     pub QueryInterface: unsafe extern "system" fn(
         This: *mut IMalloc,
@@ -1814,29 +1521,26 @@ pub struct IMallocVtbl {
         This: *mut IMalloc,
     ),
 }
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IMalloc {
     pub lpVtbl: *const IMallocVtbl,
 }
 pub type LPMALLOC = *mut IMalloc;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct STATSTG {
-    pwcsName: LPOLESTR,
-    type_: DWORD,
-    cbSize: ULARGE_INTEGER,
-    mtime: FILETIME,
-    ctime: FILETIME,
-    atime: FILETIME,
-    grfMode: DWORD,
-    grfLocksSupported: DWORD,
-    clsid: CLSID,
-    grfStateBits: DWORD,
-    reserved: DWORD,
+    pub pwcsName: LPOLESTR,
+    pub type_: DWORD,
+    pub cbSize: ULARGE_INTEGER,
+    pub mtime: FILETIME,
+    pub ctime: FILETIME,
+    pub atime: FILETIME,
+    pub grfMode: DWORD,
+    pub grfLocksSupported: DWORD,
+    pub clsid: CLSID,
+    pub grfStateBits: DWORD,
+    pub reserved: DWORD,
 }
 #[repr(C)]
-#[derive(Copy)]
 pub struct IStreamVtbl {
     pub QueryInterface: unsafe extern "system" fn(
         This: *mut IStream,
@@ -1906,14 +1610,12 @@ pub struct IStreamVtbl {
         ppstm: *mut *mut IStream,
     ) -> HRESULT,
 }
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IStream {
     pub lpVtbl: *const IStreamVtbl,
 }
 pub type LPSTREAM = *mut IStream;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub enum APTTYPEQUALIFIER {
     APTTYPEQUALIFIER_NONE = 0,
     APTTYPEQUALIFIER_IMPLICIT_MTA = 1,
@@ -1923,8 +1625,7 @@ pub enum APTTYPEQUALIFIER {
     APTTYPEQUALIFIER_NA_ON_MAINSTA = 5,
     APTTYPEQUALIFIER_APPLICATION_STA= 6,
 }
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub enum APTTYPE {
     APTTYPE_CURRENT = -1,
     APTTYPE_STA = 0,
@@ -1936,16 +1637,14 @@ pub enum APTTYPE {
 // combaseapi.h
 // Base Component Object Model defintions.
 //-------------------------------------------------------------------------------------------------
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct ServerInformation {
-    dwServerPid: DWORD,
-    dwServerTid: DWORD,
-    ui64ServerAddress: UINT64,
+    pub dwServerPid: DWORD,
+    pub dwServerTid: DWORD,
+    pub ui64ServerAddress: UINT64,
 }
 pub type PServerInformation = *mut ServerInformation;
 #[repr(C)]
-#[derive(Copy)]
 pub struct CO_MTA_USAGE_COOKIE__;
 pub type CO_MTA_USAGE_COOKIE = *mut CO_MTA_USAGE_COOKIE__;
 
@@ -1954,7 +1653,6 @@ pub type CO_MTA_USAGE_COOKIE = *mut CO_MTA_USAGE_COOKIE__;
 // this ALWAYS GENERATED file contains the definitions for the interfaces
 //-------------------------------------------------------------------------------------------------
 #[repr(C)]
-#[derive(Copy)]
 pub struct IUnknownVtbl {
     pub QueryInterface: unsafe extern "system" fn(
         This: *mut IUnknown,
@@ -1968,8 +1666,7 @@ pub struct IUnknownVtbl {
         This: *mut IUnknown,
     ) -> ULONG,
 }
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Copy, Debug)]
 pub struct IUnknown {
     pub lpVtbl: *const IUnknownVtbl,
 }
@@ -1996,8 +1693,7 @@ pub const SND_SENTRY: DWORD = 0x00080000;
 pub const SND_RING: DWORD = 0x00100000;
 pub const SND_SYSTEM: DWORD = 0x00200000;
 
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct PROCESS_MEMORY_COUNTERS {
     pub cb: DWORD,
     pub PageFaultCount: DWORD,
@@ -2011,8 +1707,7 @@ pub struct PROCESS_MEMORY_COUNTERS {
     pub PeakPagefileUsage: SIZE_T,
 }
 pub type PPROCESS_MEMORY_COUNTERS = *mut PROCESS_MEMORY_COUNTERS;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct PROCESS_MEMORY_COUNTERS_EX {
     pub cb: DWORD,
     pub PageFaultCount: DWORD,
@@ -2034,8 +1729,7 @@ pub struct PROCESS_MEMORY_COUNTERS_EX {
 
 pub type REGSAM = ACCESS_MASK;
 
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct VALENTA {
     pub ve_valuename: LPSTR,
     pub ve_valuelen: DWORD,
@@ -2044,8 +1738,7 @@ pub struct VALENTA {
 }
 pub type PVALENTA = *mut VALENTA;
 
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct VALENTW {
     pub ve_valuename: LPWSTR,
     pub ve_valuelen: DWORD,
@@ -2733,8 +2426,7 @@ pub const WS_EX_NOACTIVATE: DWORD = 0x08000000;
 
 pub type WNDENUMPROC = Option<unsafe extern "system" fn(HWND, LPARAM) -> BOOL>;
 pub type WNDPROC = Option<unsafe extern "system" fn(HWND, UINT, WPARAM, LPARAM) -> LRESULT>;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MSG {
     pub hwnd: HWND,
     pub message: UINT,
@@ -2746,8 +2438,7 @@ pub struct MSG {
 pub type PMSG = *mut MSG;
 pub type NPMSG = *mut MSG;
 pub type LPMSG = *mut MSG;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PAINTSTRUCT {
     pub hdc: HDC,
     pub fErase: BOOL,
@@ -2759,8 +2450,7 @@ pub struct PAINTSTRUCT {
 pub type PPAINTSTRUCT = *mut PAINTSTRUCT;
 pub type NPPAINTSTRUCT = *mut PAINTSTRUCT;
 pub type LPPAINTSTRUCT = *mut PAINTSTRUCT;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct WINDOWPLACEMENT {
     pub length: UINT,
     pub flags: UINT,
@@ -2771,8 +2461,7 @@ pub struct WINDOWPLACEMENT {
 }
 pub type PWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
 pub type LPWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Copy)]
 pub struct WNDCLASSEXW {
     pub cbSize: UINT,
     pub style: UINT,
@@ -2790,8 +2479,7 @@ pub struct WNDCLASSEXW {
 pub type PWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type NPWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type LPWNDCLASSEXW = *mut WNDCLASSEXW;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Copy)]
 pub struct WNDCLASSW {
     pub style: UINT,
     pub lpfnWndProc: WNDPROC,
@@ -2807,8 +2495,7 @@ pub struct WNDCLASSW {
 pub type PWNDCLASSW = *mut WNDCLASSW;
 pub type NPWNDCLASSW = *mut WNDCLASSW;
 pub type LPWNDCLASSW = *mut WNDCLASSW;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SCROLLBARINFO {
     pub cbSize: DWORD,
     pub rcScrollBar: RECT,
@@ -2820,8 +2507,7 @@ pub struct SCROLLBARINFO {
 }
 pub type PSCROLLBARINFO = *mut SCROLLBARINFO;
 pub type LPSCROLLBARINFO = *mut SCROLLBARINFO;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct SCROLLINFO {
     pub cbSize: UINT,
     pub fMask: UINT,
@@ -2833,8 +2519,7 @@ pub struct SCROLLINFO {
 }
 pub type LPSCROLLINFO = *mut SCROLLINFO;
 pub type LPCSCROLLINFO = *const SCROLLINFO;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct SIZE {
     pub cx: LONG,
     pub cy: LONG
@@ -2918,8 +2603,7 @@ pub const PFD_STEREO_DONTCARE: DWORD = 0x80000000;
 
 pub const CCHDEVICENAME: usize = 32;
 pub const CCHFORMNAME: usize = 32;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DEVMODEW {
     pub dmDeviceName: [WCHAR; CCHDEVICENAME],
     pub dmSpecVersion: WORD,
@@ -2952,8 +2636,7 @@ pub struct DEVMODEW {
 pub type PDEVMODEW = *mut DEVMODEW;
 pub type NPDEVMODEW = *mut DEVMODEW;
 pub type LPDEVMODEW = *mut DEVMODEW;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Copy)]
 pub struct DISPLAY_DEVICEW {
     pub cb: DWORD,
     pub DeviceName: [WCHAR; 32],
@@ -2964,8 +2647,7 @@ pub struct DISPLAY_DEVICEW {
 }
 pub type PDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
 pub type LPDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct PIXELFORMATDESCRIPTOR {
     pub nSize: WORD,
     pub nVersion: WORD,

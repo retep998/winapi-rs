@@ -81,7 +81,8 @@ DECLARE_HANDLE!(HTASK, HTASK__);
 DECLARE_HANDLE!(HWINSTA, HWINSTA__);
 DECLARE_HANDLE!(HKL, HKL__);
 pub type HFILE = ::c_int;
-#[repr(C)] #[derive(Copy)] pub struct FILETIME {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct FILETIME {
     pub dwLowDateTime: DWORD,
     pub dwHighDateTime: DWORD,
 }

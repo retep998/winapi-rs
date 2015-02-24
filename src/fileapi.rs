@@ -9,7 +9,8 @@ pub const TRUNCATE_EXISTING: ::DWORD = 5;
 pub const INVALID_FILE_SIZE: ::DWORD = 0xFFFFFFFF;
 pub const INVALID_SET_FILE_POINTER: ::DWORD = -1;
 pub const INVALID_FILE_ATTRIBUTES: ::DWORD = -1;
-#[repr(C)] #[derive(Copy)] pub struct WIN32_FILE_ATTRIBUTE_DATA {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct WIN32_FILE_ATTRIBUTE_DATA {
     pub dwFileAttributes: ::DWORD,
     pub ftCreationTime: ::FILETIME,
     pub ftLastAccessTime: ::FILETIME,
@@ -18,7 +19,8 @@ pub const INVALID_FILE_ATTRIBUTES: ::DWORD = -1;
     pub nFileSizeLow: ::DWORD,
 }
 pub type LPWIN32_FILE_ATTRIBUTE_DATA = *mut WIN32_FILE_ATTRIBUTE_DATA;
-#[repr(C)] #[derive(Copy)] pub struct BY_HANDLE_FILE_INFORMATION {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct BY_HANDLE_FILE_INFORMATION {
     pub dwFileAttributes: ::DWORD,
     pub ftCreationTime: ::FILETIME,
     pub ftLastAccessTime: ::FILETIME,
@@ -32,7 +34,8 @@ pub type LPWIN32_FILE_ATTRIBUTE_DATA = *mut WIN32_FILE_ATTRIBUTE_DATA;
 }
 pub type PBY_HANDLE_FILE_INFORMATION = *mut BY_HANDLE_FILE_INFORMATION;
 pub type LPBY_HANDLE_FILE_INFORMATION = *mut BY_HANDLE_FILE_INFORMATION;
-#[repr(C)] #[derive(Copy)] pub struct CREATEFILE2_EXTENDED_PARAMETERS {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CREATEFILE2_EXTENDED_PARAMETERS {
     pub dwSize: ::DWORD,
     pub dwFileAttributes: ::DWORD,
     pub dwFileFlags: ::DWORD,

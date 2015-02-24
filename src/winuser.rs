@@ -7,7 +7,8 @@ pub const WHEEL_DELTA: ::DWORD = 120;
 pub const XBUTTON1: ::DWORD = 0x0001;
 pub const XBUTTON2: ::DWORD = 0x0002;
 //3082
-#[repr(C)] #[derive(Copy)] pub struct CREATESTRUCTA {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CREATESTRUCTA {
     pub lpCreateParams: ::LPVOID,
     pub hInstance: ::HINSTANCE,
     pub hMenu: ::HMENU,
@@ -22,7 +23,8 @@ pub const XBUTTON2: ::DWORD = 0x0002;
     pub dwExStyle: ::DWORD,
 }
 pub type LPCREATESTRUCTA = *mut CREATESTRUCTA;
-#[repr(C)] #[derive(Copy)] pub struct CREATESTRUCTW {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CREATESTRUCTW {
     pub lpCreateParams: ::LPVOID,
     pub hInstance: ::HINSTANCE,
     pub hMenu: ::HMENU,
@@ -64,7 +66,8 @@ pub const MOUSEEVENTF_HWHEEL: ::DWORD = 0x01000;
 pub const MOUSEEVENTF_MOVE_NOCOALESCE: ::DWORD = 0x2000;
 pub const MOUSEEVENTF_VIRTUALDESK: ::DWORD = 0x4000;
 pub const MOUSEEVENTF_ABSOLUTE: ::DWORD = 0x8000;
-#[repr(C)] #[derive(Copy)] pub struct MOUSEINPUT {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct MOUSEINPUT {
     pub dx: ::LONG,
     pub dy: ::LONG,
     pub mouseData: ::DWORD,
@@ -74,7 +77,8 @@ pub const MOUSEEVENTF_ABSOLUTE: ::DWORD = 0x8000;
 }
 pub type PMOUSEINPUT = *mut MOUSEINPUT;
 pub type LPMOUSEINPUT = *mut MOUSEINPUT;
-#[repr(C)] #[derive(Copy)] pub struct KEYBDINPUT {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct KEYBDINPUT {
     pub wVk: ::WORD,
     pub wScan: ::WORD,
     pub dwFlags: ::DWORD,
@@ -83,7 +87,8 @@ pub type LPMOUSEINPUT = *mut MOUSEINPUT;
 }
 pub type PKEYBDINPUT = *mut KEYBDINPUT;
 pub type LPKEYBDINPUT = *mut KEYBDINPUT;
-#[repr(C)] #[derive(Copy)] pub struct HARDWAREINPUT {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct HARDWAREINPUT {
     pub uMsg: ::DWORD,
     pub wParamL: ::WORD,
     pub wParamH: ::WORD,
@@ -93,7 +98,8 @@ pub type LPHARDWAREINPUT= *mut HARDWAREINPUT;
 pub const INPUT_MOUSE: ::DWORD = 0;
 pub const INPUT_KEYBOARD: ::DWORD = 1;
 pub const INPUT_HARDWARE: ::DWORD = 2;
-#[repr(C)] #[derive(Copy)] pub struct INPUT {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct INPUT {
     pub type_: ::DWORD,
     pub union_: MOUSEINPUT, // FIXME - Use a proper untagged union here
 }

@@ -12,7 +12,8 @@ pub type LONG = ::c_long;
 // pub type INT = ::c_int; // Already defined by minwindef.h
 //3563
 // FIXME - Align 16
-#[repr(C)] #[derive(Copy)] pub struct CONTEXT {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CONTEXT {
     pub P1Home: ::DWORD64,
     pub P2Home: ::DWORD64,
     pub P3Home: ::DWORD64,
@@ -80,7 +81,8 @@ pub type LONG = ::c_long;
 pub type PCONTEXT = *mut CONTEXT;
 //8983
 pub const EXCEPTION_MAXIMUM_PARAMETERS: usize = 15;
-#[repr(C)] #[derive(Copy)] pub struct EXCEPTION_RECORD {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct EXCEPTION_RECORD {
     pub ExceptionCode: ::DWORD,
     pub ExceptionFlags: ::DWORD,
     pub ExceptionRecord: *mut EXCEPTION_RECORD,
@@ -90,7 +92,8 @@ pub const EXCEPTION_MAXIMUM_PARAMETERS: usize = 15;
 }
 pub type PEXCEPTION_RECORD = *mut EXCEPTION_RECORD;
 //9023
-#[repr(C)] #[derive(Copy)] pub struct EXCEPTION_POINTERS {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct EXCEPTION_POINTERS {
     pub ExceptionRecord: PEXCEPTION_RECORD,
     pub ContextRecord: PCONTEXT,
 }
@@ -126,7 +129,8 @@ pub const ACL_REVISION2: ::BYTE = 2;
 pub const ACL_REVISION3: ::BYTE = 3;
 pub const ACL_REVISION4: ::BYTE = 4;
 pub const MAX_ACL_REVISION: ::BYTE = ACL_REVISION4;
-#[repr(C)] #[derive(Copy)] pub struct ACL {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct ACL {
     pub AclRevision: ::BYTE,
     pub Sbz1: ::BYTE,
     pub AclSize: ::WORD,
@@ -139,7 +143,8 @@ pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_INVALID: ::WORD = 0x00;
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_INT64: ::WORD = 0x01;
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_UINT64: ::WORD = 0x02;
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_STRING: ::WORD = 0x03;
-#[repr(C)] #[derive(Copy)] pub struct CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE {
     pub Version: ::DWORD64,
     pub Name: ::PWSTR,
 }
@@ -147,7 +152,8 @@ pub type PCLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE = *mut CLAIM_SECURITY_ATTRIBUTE_FQ
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_FQBN: ::WORD = 0x04;
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_SID: ::WORD = 0x05;
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_BOOLEAN: ::WORD = 0x06;
-#[repr(C)] #[derive(Copy)] pub struct CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE {
     pub pValue: ::PVOID,
     pub ValueLength: ::DWORD,
 }
@@ -165,7 +171,8 @@ pub const CLAIM_SECURITY_ATTRIBUTE_VALID_FLAGS: ::DWORD = CLAIM_SECURITY_ATTRIBU
     | CLAIM_SECURITY_ATTRIBUTE_DISABLED_BY_DEFAULT | CLAIM_SECURITY_ATTRIBUTE_DISABLED
     | CLAIM_SECURITY_ATTRIBUTE_MANDATORY;
 pub const CLAIM_SECURITY_ATTRIBUTE_CUSTOM_FLAGS: ::DWORD = 0xFFFF0000;
-#[repr(C)] #[derive(Copy)] pub struct CLAIM_SECURITY_ATTRIBUTE_V1 {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CLAIM_SECURITY_ATTRIBUTE_V1 {
     pub Name: ::PWSTR,
     pub ValueType: ::WORD,
     pub Reserved: ::WORD,
@@ -174,7 +181,8 @@ pub const CLAIM_SECURITY_ATTRIBUTE_CUSTOM_FLAGS: ::DWORD = 0xFFFF0000;
     // Put data here
 }
 pub type PCLAIM_SECURITY_ATTRIBUTE_V1 = *mut CLAIM_SECURITY_ATTRIBUTE_V1;
-#[repr(C)] #[derive(Copy)] pub struct CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 {
     pub Name: ::DWORD,
     pub ValueType: ::WORD,
     pub Reserved: ::WORD,
@@ -186,7 +194,8 @@ pub type PCLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 = *mut CLAIM_SECURITY_ATTRIBUTE_R
 pub const CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1: ::WORD = 1;
 pub const CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION: ::WORD =
     CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1;
-#[repr(C)] #[derive(Copy)] pub struct CLAIM_SECURITY_ATTRIBUTES_INFORMATION {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CLAIM_SECURITY_ATTRIBUTES_INFORMATION {
     pub Version: ::WORD,
     pub Reserved: ::WORD,
     pub AttributeCount: ::DWORD,
@@ -194,7 +203,8 @@ pub const CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION: ::WORD =
 }
 pub type PCLAIM_SECURITY_ATTRIBUTES_INFORMATION = *mut CLAIM_SECURITY_ATTRIBUTES_INFORMATION;
 //11490
-#[repr(C)] #[derive(Copy)] pub struct IO_COUNTERS {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct IO_COUNTERS {
     pub ReadOperationCount: ::ULONGLONG,
     pub WriteOperationCount: ::ULONGLONG,
     pub OtherOperationCount: ::ULONGLONG,
@@ -204,7 +214,8 @@ pub type PCLAIM_SECURITY_ATTRIBUTES_INFORMATION = *mut CLAIM_SECURITY_ATTRIBUTES
 }
 pub type PIO_COUNTERS = *mut IO_COUNTERS;
 //11607
-#[repr(C)] #[derive(Copy)] pub struct JOBOBJECT_BASIC_LIMIT_INFORMATION {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct JOBOBJECT_BASIC_LIMIT_INFORMATION {
     pub PerProcessUserTimeLimit: ::LARGE_INTEGER,
     pub PerJobUserTimeLimit: ::LARGE_INTEGER,
     pub LimitFlags: ::DWORD,
@@ -216,7 +227,8 @@ pub type PIO_COUNTERS = *mut IO_COUNTERS;
     pub SchedulingClass: ::DWORD,
 }
 pub type PJOBOBJECT_BASIC_LIMIT_INFORMATION = *mut JOBOBJECT_BASIC_LIMIT_INFORMATION;
-#[repr(C)] #[derive(Copy)] pub struct JOBOBJECT_EXTENDED_LIMIT_INFORMATION {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct JOBOBJECT_EXTENDED_LIMIT_INFORMATION {
     pub BasicLimitInformation: JOBOBJECT_BASIC_LIMIT_INFORMATION,
     pub IoInfo: IO_COUNTERS,
     pub ProcessMemoryLimit: ::SIZE_T,
@@ -225,6 +237,13 @@ pub type PJOBOBJECT_BASIC_LIMIT_INFORMATION = *mut JOBOBJECT_BASIC_LIMIT_INFORMA
     pub PeakJobMemoryUsed: ::SIZE_T,
 }
 pub type PJOBOBJECT_EXTENDED_LIMIT_INFORMATION = *mut JOBOBJECT_EXTENDED_LIMIT_INFORMATION;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct JOBOBJECT_BASIC_PROCESS_ID_LIST {
+    pub NumberOfAssignedProcesses: ::DWORD,
+    pub NumberOfProcessIdsInList: ::DWORD,
+    pub ProcessIdList: [::ULONG_PTR; 0],
+}
+pub type PJOBOBJECT_BASIC_PROCESS_ID_LIST = *mut JOBOBJECT_BASIC_PROCESS_ID_LIST;
 //11712
 pub const JOB_OBJECT_TERMINATE_AT_END_OF_JOB: ::DWORD = 0;
 pub const JOB_OBJECT_POST_AT_END_OF_JOB: ::DWORD = 1;
@@ -288,7 +307,8 @@ pub const JOB_OBJECT_CPU_RATE_CONTROL_WEIGHT_BASED: ::DWORD = 0x2;
 pub const JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP: ::DWORD = 0x4;
 pub const JOB_OBJECT_CPU_RATE_CONTROL_NOTIFY: ::DWORD = 0x8;
 pub const JOB_OBJECT_CPU_RATE_CONTROL_VALID_FLAGS: ::DWORD = 0xf;
-#[repr(i32)] #[derive(Copy)] pub enum JOBOBJECTINFOCLASS {
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum JOBOBJECTINFOCLASS {
     JobObjectBasicAccountingInformation = 1,
     JobObjectBasicLimitInformation,
     JobObjectBasicProcessIdList,
@@ -397,23 +417,27 @@ pub const FILE_SUPPORTS_OPEN_BY_FILE_ID: ::DWORD = 0x01000000;
 pub const FILE_SUPPORTS_USN_JOURNAL: ::DWORD = 0x02000000;
 pub const FILE_SUPPORTS_INTEGRITY_STREAMS: ::DWORD = 0x04000000;
 pub const FILE_INVALID_FILE_ID: ::LONGLONG = -1;
-#[repr(C)] #[derive(Copy)] pub struct FILE_ID_128 {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct FILE_ID_128 {
     pub Identifier: [::BYTE; 16],
 }
 pub type PFILE_ID_128 = *mut FILE_ID_128;
-#[repr(C)] #[derive(Copy)] pub struct FILE_NOTIFY_INFORMATION {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct FILE_NOTIFY_INFORMATION {
     pub NextEntryOffset: ::DWORD,
     pub Action: ::DWORD,
     pub FileNameLength: ::DWORD,
     pub FileName: [::WCHAR; 0],
 }
-#[repr(C)] #[derive(Copy)] pub struct FILE_SEGMENT_ELEMENT {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct FILE_SEGMENT_ELEMENT {
     pub Buffer: ::PVOID64,
     pub Alignment: ::ULONGLONG,
 }
 pub type PFILE_SEGMENT_ELEMENT = *mut FILE_SEGMENT_ELEMENT;
 //18195
-#[repr(C)] #[derive(Copy)] pub struct RTL_SRWLOCK {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RTL_SRWLOCK {
     pub Ptr: ::PVOID,
 }
 pub type PRTL_SRWLOCK = *mut RTL_SRWLOCK;

@@ -2,19 +2,22 @@
 // Licensed under the MIT License <LICENSE.md>
 //! This module contains the public data structures, data types, and procedures exported by the NT
 //! console subsystem.
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct COORD {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct COORD {
     pub X: ::SHORT,
     pub Y: ::SHORT,
 }
 pub type PCOORD = *mut COORD;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct SMALL_RECT {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct SMALL_RECT {
     pub Left: ::SHORT,
     pub Top: ::SHORT,
     pub Right: ::SHORT,
     pub Bottom: ::SHORT,
 }
 pub type PSMALL_RECT = *mut SMALL_RECT;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct KEY_EVENT_RECORD {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct KEY_EVENT_RECORD {
     pub bKeyDown: ::BOOL,
     pub wRepeatCount: ::WORD,
     pub wVirtualKeyCode: ::WORD,
@@ -39,7 +42,8 @@ pub const NLS_HIRAGANA: ::DWORD = 0x00040000;
 pub const NLS_ROMAN: ::DWORD = 0x00400000;
 pub const NLS_IME_CONVERSION: ::DWORD = 0x00800000;
 pub const NLS_IME_DISABLE: ::DWORD = 0x20000000;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct MOUSE_EVENT_RECORD {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct MOUSE_EVENT_RECORD {
     pub dwMousePosition: COORD,
     pub dwButtonState: ::DWORD,
     pub dwControlKeyState: ::DWORD,
@@ -55,19 +59,23 @@ pub const MOUSE_MOVED: ::DWORD = 0x0001;
 pub const DOUBLE_CLICK: ::DWORD = 0x0002;
 pub const MOUSE_WHEELED: ::DWORD = 0x0004;
 pub const MOUSE_HWHEELED: ::DWORD = 0x0008;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct WINDOW_BUFFER_SIZE_RECORD {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct WINDOW_BUFFER_SIZE_RECORD {
     pub dwSize: COORD,
 }
 pub type PWINDOW_BUFFER_SIZE_RECORD = *mut WINDOW_BUFFER_SIZE_RECORD;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct MENU_EVENT_RECORD {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct MENU_EVENT_RECORD {
     pub dwCommandId: ::UINT,
 }
 pub type PMENU_EVENT_RECORD = *mut MENU_EVENT_RECORD;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct FOCUS_EVENT_RECORD {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct FOCUS_EVENT_RECORD {
     pub bSetFocus: ::BOOL,
 }
 pub type PFOCUS_EVENT_RECORD = *mut FOCUS_EVENT_RECORD;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct INPUT_RECORD {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct INPUT_RECORD {
     pub EventType: ::WORD,
     pub Event: MOUSE_EVENT_RECORD, //FIXME - untagged union
 }
@@ -89,7 +97,8 @@ pub const MOUSE_EVENT: ::DWORD = 0x0002;
 pub const WINDOW_BUFFER_SIZE_EVENT: ::DWORD = 0x0004;
 pub const MENU_EVENT: ::DWORD = 0x0008;
 pub const FOCUS_EVENT: ::DWORD = 0x0010;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct CHAR_INFO {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct CHAR_INFO {
     pub Char: ::WCHAR, //FIXME - untagged union
     pub Attributes: ::WORD,
 }
@@ -116,7 +125,8 @@ pub const COMMON_LVB_GRID_RVERTICAL: ::DWORD = 0x1000;
 pub const COMMON_LVB_REVERSE_VIDEO: ::DWORD = 0x4000;
 pub const COMMON_LVB_UNDERSCORE: ::DWORD = 0x8000;
 pub const COMMON_LVB_SBCSDBCS: ::DWORD = 0x0300;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct CONSOLE_SCREEN_BUFFER_INFO {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct CONSOLE_SCREEN_BUFFER_INFO {
     pub dwSize: COORD,
     pub dwCursorPosition: COORD,
     pub wAttributes: ::WORD,
@@ -124,7 +134,8 @@ pub const COMMON_LVB_SBCSDBCS: ::DWORD = 0x0300;
     pub dwMaximumWindowSize: COORD,
 }
 pub type PCONSOLE_SCREEN_BUFFER_INFO = *mut CONSOLE_SCREEN_BUFFER_INFO;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct CONSOLE_SCREEN_BUFFER_INFOEX {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CONSOLE_SCREEN_BUFFER_INFOEX {
     pub cbSize: ::ULONG,
     pub dwSize: COORD,
     pub dwCursorPosition: COORD,
@@ -136,17 +147,20 @@ pub type PCONSOLE_SCREEN_BUFFER_INFO = *mut CONSOLE_SCREEN_BUFFER_INFO;
     pub ColorTable: [::COLORREF; 16],
 }
 pub type PCONSOLE_SCREEN_BUFFER_INFOEX = *mut CONSOLE_SCREEN_BUFFER_INFOEX;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct CONSOLE_CURSOR_INFO {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct CONSOLE_CURSOR_INFO {
     pub dwSize: ::DWORD,
     pub bVisible: ::BOOL,
 }
 pub type PCONSOLE_CURSOR_INFO = *mut CONSOLE_CURSOR_INFO;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct CONSOLE_FONT_INFO {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct CONSOLE_FONT_INFO {
     pub nFont: ::DWORD,
     pub dwFontSize: ::COORD,
 }
 pub type PCONSOLE_FONT_INFO = *mut CONSOLE_FONT_INFO;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct CONSOLE_FONT_INFOEX {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CONSOLE_FONT_INFOEX {
     pub cbSize: ::ULONG,
     pub nFont: ::DWORD,
     pub dwFontSize: COORD,
@@ -156,14 +170,16 @@ pub type PCONSOLE_FONT_INFO = *mut CONSOLE_FONT_INFO;
 }
 pub type PCONSOLE_FONT_INFOEX = *mut CONSOLE_FONT_INFOEX;
 pub const HISTORY_NO_DUP_FLAG: ::DWORD = 0x1;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct CONSOLE_HISTORY_INFO {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct CONSOLE_HISTORY_INFO {
     pub cbSize: ::UINT,
     pub HistoryBufferSize: ::UINT,
     pub NumberOfHistoryBuffers: ::UINT,
     pub dwFlags: ::DWORD,
 }
 pub type PCONSOLE_HISTORY_INFO = *mut CONSOLE_HISTORY_INFO;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct CONSOLE_SELECTION_INFO {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct CONSOLE_SELECTION_INFO {
     pub dwFlags: ::DWORD,
     pub dwSelectionAnchor: COORD,
     pub srSelection: SMALL_RECT,
@@ -194,7 +210,8 @@ pub const ENABLE_WRAP_AT_EOL_OUTPUT: ::DWORD = 0x0002;
 pub const CONSOLE_REAL_OUTPUT_HANDLE: *mut ::c_void = -2 as *mut ::c_void;
 pub const CONSOLE_REAL_INPUT_HANDLE: *mut ::c_void = -3 as *mut ::c_void;
 pub const ATTACH_PARENT_PROCESS: ::DWORD = -1;
-#[repr(C)] #[derive(Copy, Clone, Debug)] pub struct CONSOLE_READCONSOLE_CONTROL {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct CONSOLE_READCONSOLE_CONTROL {
     pub nLength: ::ULONG,
     pub nInitialChars: ::ULONG,
     pub dwCtrlWakeupMask: ::ULONG,

@@ -1,14 +1,16 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! This module defines the 32-Bit Windows Base APIs
-#[repr(C)] #[derive(Copy)] pub struct SECURITY_ATTRIBUTES {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SECURITY_ATTRIBUTES {
     pub nLength: ::DWORD,
     pub lpSecurityDescriptor: ::LPVOID,
     pub bInheritHandle: ::BOOL,
 }
 pub type PSECURITY_ATTRIBUTES = *mut SECURITY_ATTRIBUTES;
 pub type LPSECURITY_ATTRIBUTES = *mut SECURITY_ATTRIBUTES;
-#[repr(C)] #[derive(Copy)] pub struct OVERLAPPED {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct OVERLAPPED {
     pub Internal: ::ULONG_PTR,
     pub InternalHigh: ::ULONG_PTR,
     pub Offset: ::DWORD,
@@ -16,14 +18,16 @@ pub type LPSECURITY_ATTRIBUTES = *mut SECURITY_ATTRIBUTES;
     pub hEvent: ::HANDLE,
 }
 pub type LPOVERLAPPED = *mut OVERLAPPED;
-#[repr(C)] #[derive(Copy)] pub struct OVERLAPPED_ENTRY {
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct OVERLAPPED_ENTRY {
     pub lpCompletionKey: ::ULONG_PTR,
     pub lpOverlapped: LPOVERLAPPED,
     pub Internal: ::ULONG_PTR,
     pub dwNumberOfBytesTransferred: ::DWORD,
 }
 pub type LPOVERLAPPED_ENTRY = *mut OVERLAPPED_ENTRY;
-#[repr(C)] #[derive(Copy)] pub struct SYSTEMTIME {
+#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+pub struct SYSTEMTIME {
     pub wYear: ::DWORD,
     pub wMonth: ::DWORD,
     pub wDayOfWeek: ::DWORD,
@@ -35,7 +39,8 @@ pub type LPOVERLAPPED_ENTRY = *mut OVERLAPPED_ENTRY;
 }
 pub type PSYSTEMTIME = *mut SYSTEMTIME;
 pub type LPSYSTEMTIME = *mut SYSTEMTIME;
-#[repr(C)] #[derive(Copy)] pub struct WIN32_FIND_DATAA {
+#[repr(C)] #[derive(Copy)]
+pub struct WIN32_FIND_DATAA {
     pub dwFileAttributes: ::DWORD,
     pub ftCreationTime: ::FILETIME,
     pub ftLastAccessTime: ::FILETIME,
@@ -49,7 +54,8 @@ pub type LPSYSTEMTIME = *mut SYSTEMTIME;
 }
 pub type PWIN32_FIND_DATAA = *mut WIN32_FIND_DATAA;
 pub type LPWIN32_FIND_DATAA = *mut WIN32_FIND_DATAA;
-#[repr(C)] #[derive(Copy)] pub struct WIN32_FIND_DATAW {
+#[repr(C)] #[derive(Copy)]
+pub struct WIN32_FIND_DATAW {
     pub dwFileAttributes: ::DWORD,
     pub ftCreationTime: ::FILETIME,
     pub ftLastAccessTime: ::FILETIME,
@@ -63,24 +69,28 @@ pub type LPWIN32_FIND_DATAA = *mut WIN32_FIND_DATAA;
 }
 pub type PWIN32_FIND_DATAW = *mut WIN32_FIND_DATAW;
 pub type LPWIN32_FIND_DATAW = *mut WIN32_FIND_DATAW;
-#[repr(i32)] #[derive(Copy)] pub enum FINDEX_INFO_LEVELS {
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum FINDEX_INFO_LEVELS {
     FindExInfoStandard = 0,
     FindExInfoBasic = 1,
     FindExInfoMaxInfoLevel = 2,
 }
 pub const FIND_FIRST_EX_CASE_SENSITIVE: ::DWORD = 0x00000001;
 pub const FIND_FIRST_EX_LARGE_FETCH: ::DWORD = 0x00000002;
-#[repr(i32)] #[derive(Copy)] pub enum FINDEX_SEARCH_OPS {
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum FINDEX_SEARCH_OPS {
     FindExSearchNameMatch = 0,
     FindExSearchLimitToDirectories = 1,
     FindExSearchLimitToDevices = 2,
     FindExSearchMaxSearchOp = 3,
 }
-#[repr(i32)] #[derive(Copy)] pub enum GET_FILEEX_INFO_LEVELS {
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum GET_FILEEX_INFO_LEVELS {
     GetFileExInfoStandard = 0,
     GetFileExMaxInfoLevel = 1,
 }
-#[repr(i32)] #[derive(Copy)] pub enum FILE_INFO_BY_HANDLE_CLASS {
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum FILE_INFO_BY_HANDLE_CLASS {
     FileBasicInfo = 0,
     FileStandardInfo = 1,
     FileNameInfo = 2,

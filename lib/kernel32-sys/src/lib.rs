@@ -1124,7 +1124,11 @@ extern "system" {
     // pub fn QueryFullProcessImageNameW();
     // pub fn QueryIdleProcessorCycleTime();
     // pub fn QueryIdleProcessorCycleTimeEx();
-    // pub fn QueryInformationJobObject();
+    pub fn QueryInformationJobObject(
+        hJob: HANDLE, JobObjectInformationClass: JOBOBJECTINFOCLASS,
+        lpJobObjectInformation: LPVOID, cbJobObjectInformationLength: DWORD,
+        lpReturnLength: LPDWORD,
+    ) -> BOOL;
     // pub fn QueryMemoryResourceNotification();
     pub fn QueryPerformanceCounter(lpPerformanceCount: *mut LARGE_INTEGER) -> BOOL;
     pub fn QueryPerformanceFrequency(lpFrequency: *mut LARGE_INTEGER) -> BOOL;
