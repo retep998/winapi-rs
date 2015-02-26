@@ -231,7 +231,7 @@ extern "system" {
     pub fn EnumDisplayDevicesW(
         lpDevice: LPCWSTR, iDevNum: DWORD, lpDisplayDevice: PDISPLAY_DEVICEW, dwFlags: DWORD,
     ) -> BOOL;
-    // pub fn EnumDisplayMonitors();
+    pub fn EnumDisplayMonitors(hdc: HDC, lprcClip: LPCRECT, lpfnEnum: MONITORENUMPROC, dwData: LPARAM) -> BOOL;
     // pub fn EnumDisplaySettingsA();
     // pub fn EnumDisplaySettingsExA();
     pub fn EnumDisplaySettingsExW(
@@ -348,7 +348,7 @@ extern "system" {
     // pub fn GetLastInputInfo();
     // pub fn GetLayeredWindowAttributes();
     // pub fn GetListBoxInfo();
-    // pub fn GetMenu();
+    pub fn GetMenu(hWnd: HWND) -> HMENU;
     // pub fn GetMenuBarInfo();
     // pub fn GetMenuCheckMarkDimensions();
     // pub fn GetMenuContextHelpId();
