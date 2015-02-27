@@ -1,6 +1,6 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
-//! Types and constants for WinAPI bindings.
+//! Procedure declarations, constant definitions, and macros for the NLS component.
 pub const CP_ACP: ::DWORD = 0;
 pub const CP_OEMCP: ::DWORD = 1;
 pub const CP_MACCP: ::DWORD = 2;

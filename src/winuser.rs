@@ -101,7 +101,7 @@ pub const INPUT_HARDWARE: ::DWORD = 2;
 #[repr(C)] #[derive(Clone, Copy, Debug, Default)]
 pub struct INPUT {
     pub type_: ::DWORD,
-    pub union_: MOUSEINPUT, // FIXME - Use a proper untagged union here
+    pub union_: MOUSEINPUT, // FIXME - Untagged unions
 }
 #[test]
 fn test_INPUT() {
@@ -247,21 +247,23 @@ pub const SM_CARETBLINKINGENABLED: ::c_int = 0x2002;
 pub const SM_CONVERTIBLESLATEMODE: ::c_int = 0x2003;
 pub const SM_SYSTEMDOCKED: ::c_int = 0x2004;
 //10069
-pub const IDC_ARROW: ::LPCWSTR = 32512usize as ::LPCWSTR;
-pub const IDC_IBEAM: ::LPCWSTR = 32513usize as ::LPCWSTR;
-pub const IDC_WAIT: ::LPCWSTR = 32514usize as ::LPCWSTR;
-pub const IDC_CROSS: ::LPCWSTR = 32515usize as ::LPCWSTR;
-pub const IDC_UPARROW: ::LPCWSTR = 32516usize as ::LPCWSTR;
-pub const IDC_SIZE: ::LPCWSTR = 32640usize as ::LPCWSTR;
-pub const IDC_ICON: ::LPCWSTR = 32641usize as ::LPCWSTR;
-pub const IDC_SIZENWSE: ::LPCWSTR = 32642usize as ::LPCWSTR;
-pub const IDC_SIZENESW: ::LPCWSTR = 32643usize as ::LPCWSTR;
-pub const IDC_SIZEWE: ::LPCWSTR = 32644usize as ::LPCWSTR;
-pub const IDC_SIZENS: ::LPCWSTR = 32645usize as ::LPCWSTR;
-pub const IDC_SIZEALL: ::LPCWSTR = 32646usize as ::LPCWSTR;
-pub const IDC_NO: ::LPCWSTR = 32648usize as ::LPCWSTR;
-pub const IDC_HAND: ::LPCWSTR = 32649usize as ::LPCWSTR;
-pub const IDC_APPSTARTING: ::LPCWSTR = 32650usize as ::LPCWSTR;
-pub const IDC_HELP: ::LPCWSTR = 32651usize as ::LPCWSTR;
-//12969
-pub type MONITORENUMPROC = Option<unsafe extern "system" fn(::HMONITOR, ::HDC, ::LPRECT, ::LPARAM) -> ::BOOL>;
+pub const IDC_ARROW: ::LPCWSTR = 32512 as ::LPCWSTR;
+pub const IDC_IBEAM: ::LPCWSTR = 32513 as ::LPCWSTR;
+pub const IDC_WAIT: ::LPCWSTR = 32514 as ::LPCWSTR;
+pub const IDC_CROSS: ::LPCWSTR = 32515 as ::LPCWSTR;
+pub const IDC_UPARROW: ::LPCWSTR = 32516 as ::LPCWSTR;
+pub const IDC_SIZE: ::LPCWSTR = 32640 as ::LPCWSTR;
+pub const IDC_ICON: ::LPCWSTR = 32641 as ::LPCWSTR;
+pub const IDC_SIZENWSE: ::LPCWSTR = 32642 as ::LPCWSTR;
+pub const IDC_SIZENESW: ::LPCWSTR = 32643 as ::LPCWSTR;
+pub const IDC_SIZEWE: ::LPCWSTR = 32644 as ::LPCWSTR;
+pub const IDC_SIZENS: ::LPCWSTR = 32645 as ::LPCWSTR;
+pub const IDC_SIZEALL: ::LPCWSTR = 32646 as ::LPCWSTR;
+pub const IDC_NO: ::LPCWSTR = 32648 as ::LPCWSTR;
+pub const IDC_HAND: ::LPCWSTR = 32649 as ::LPCWSTR;
+pub const IDC_APPSTARTING: ::LPCWSTR = 32650 as ::LPCWSTR;
+pub const IDC_HELP: ::LPCWSTR = 32651 as ::LPCWSTR;
+//12971
+pub type MONITORENUMPROC = Option<unsafe extern "system" fn(
+    ::HMONITOR, ::HDC, ::LPRECT, ::LPARAM,
+) -> ::BOOL>;
