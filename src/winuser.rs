@@ -113,6 +113,19 @@ fn test_INPUT() {
 }
 pub type PINPUT = *mut INPUT;
 pub type LPINPUT = *mut INPUT;
+//Indices for GetWindowLong etc.
+pub const GWL_EXSTYLE: ::c_int = -20;
+pub const GWL_STYLE: ::c_int = -16;
+pub const GWL_WNDPROC: ::c_int = -4;
+pub const GWLP_WNDPROC: ::c_int = -4;
+pub const GWL_HINSTANCE: ::c_int = -6;
+pub const GWLP_HINSTANCE: ::c_int = -6;
+pub const GWL_HWNDPARENT: ::c_int = -8;
+pub const GWLP_HWNDPARENT: ::c_int = -8;
+pub const GWL_ID: ::c_int = -12;
+pub const GWLP_ID: ::c_int = -12;
+pub const GWL_USERDATA: ::c_int = -21;
+pub const GWLP_USERDATA: ::c_int = -21;
 //6573
 pub const QS_KEY: ::DWORD = 0x0001;
 pub const QS_MOUSEMOVE: ::DWORD = 0x0002;
@@ -233,3 +246,22 @@ pub const SM_REMOTECONTROL: ::c_int = 0x2001;
 pub const SM_CARETBLINKINGENABLED: ::c_int = 0x2002;
 pub const SM_CONVERTIBLESLATEMODE: ::c_int = 0x2003;
 pub const SM_SYSTEMDOCKED: ::c_int = 0x2004;
+//10069
+pub const IDC_ARROW: ::LPCWSTR = 32512usize as ::LPCWSTR;
+pub const IDC_IBEAM: ::LPCWSTR = 32513usize as ::LPCWSTR;
+pub const IDC_WAIT: ::LPCWSTR = 32514usize as ::LPCWSTR;
+pub const IDC_CROSS: ::LPCWSTR = 32515usize as ::LPCWSTR;
+pub const IDC_UPARROW: ::LPCWSTR = 32516usize as ::LPCWSTR;
+pub const IDC_SIZE: ::LPCWSTR = 32640usize as ::LPCWSTR;
+pub const IDC_ICON: ::LPCWSTR = 32641usize as ::LPCWSTR;
+pub const IDC_SIZENWSE: ::LPCWSTR = 32642usize as ::LPCWSTR;
+pub const IDC_SIZENESW: ::LPCWSTR = 32643usize as ::LPCWSTR;
+pub const IDC_SIZEWE: ::LPCWSTR = 32644usize as ::LPCWSTR;
+pub const IDC_SIZENS: ::LPCWSTR = 32645usize as ::LPCWSTR;
+pub const IDC_SIZEALL: ::LPCWSTR = 32646usize as ::LPCWSTR;
+pub const IDC_NO: ::LPCWSTR = 32648usize as ::LPCWSTR;
+pub const IDC_HAND: ::LPCWSTR = 32649usize as ::LPCWSTR;
+pub const IDC_APPSTARTING: ::LPCWSTR = 32650usize as ::LPCWSTR;
+pub const IDC_HELP: ::LPCWSTR = 32651usize as ::LPCWSTR;
+//12969
+pub type MONITORENUMPROC = Option<unsafe extern "system" fn(::HMONITOR, ::HDC, ::LPRECT, ::LPARAM) -> ::BOOL>;
