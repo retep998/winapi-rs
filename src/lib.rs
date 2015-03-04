@@ -2341,7 +2341,7 @@ pub struct FLASHWINFO {
     pub uCount: UINT,
     pub dwTimeout: DWORD,
 }
-pub type PFLASWINFO = *mut FLASHWINFO;
+pub type PFLASHWINFO = *mut FLASHWINFO;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MSG {
     pub hwnd: HWND,
