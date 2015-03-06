@@ -60,6 +60,16 @@ pub const SECURITY_VALID_SQOS_FLAGS: ::DWORD = 0x001F0000;
 pub const STD_INPUT_HANDLE: ::DWORD = -10;
 pub const STD_OUTPUT_HANDLE: ::DWORD = -11;
 pub const STD_ERROR_HANDLE: ::DWORD = -12;
+pub const NOPARITY: ::DWORD = 0;
+pub const ODDPARITY: ::DWORD = 1;
+pub const EVENPARITY: ::DWORD = 2;
+pub const MARKPARITY: ::DWORD = 3;
+pub const SPACEPARITY: ::DWORD = 4;
+pub const ONESTOPBIT: ::DWORD = 0;
+pub const ONE5STOPBITS: ::DWORD = 1;
+pub const TWOSTOPBITS: ::DWORD = 2;
+pub const IGNORE: ::DWORD = 0;
+pub const INFINITE: ::DWORD = 0xFFFFFFFF;
 //5454
 pub const MOVEFILE_REPLACE_EXISTING: ::DWORD = 0x00000001;
 pub const MOVEFILE_COPY_ALLOWED: ::DWORD = 0x00000002;

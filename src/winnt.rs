@@ -12,7 +12,7 @@ pub type LONG = ::c_long;
 // pub type INT = ::c_int; // Already defined by minwindef.h
 //3563
 // FIXME - Align 16
-#[repr(C)] #[derive(Clone, Copy, Debug)]
+#[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CONTEXT {
     pub P1Home: ::DWORD64,
     pub P2Home: ::DWORD64,

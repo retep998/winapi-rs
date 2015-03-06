@@ -29,7 +29,9 @@ extern "system" {
     ) -> BOOL;
     pub fn AddSecureMemoryCacheCallback(pfnCallBack: PSECURE_MEMORY_CACHE_CALLBACK) -> BOOL;
     pub fn AddVectoredContinueHandler(First: ULONG, Handler: PVECTORED_EXCEPTION_HANDLER) -> PVOID;
-    // pub fn AddVectoredExceptionHandler();
+    pub fn AddVectoredExceptionHandler(
+        First: ULONG, Handler: PVECTORED_EXCEPTION_HANDLER,
+    ) -> PVOID;
     pub fn AllocConsole() -> BOOL;
     // pub fn AllocateUserPhysicalPages();
     // pub fn AllocateUserPhysicalPagesNuma();
