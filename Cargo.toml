@@ -39,3 +39,6 @@ path = "lib/uuid-sys"
 [dev-dependencies.winmm-sys]
 version = "*"
 path = "lib/winmm-sys"
+[dev-dependencies.d3d9-sys]
+version = "*"
+path = "lib/d3d9-sys"
