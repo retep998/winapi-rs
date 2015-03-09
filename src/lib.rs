@@ -2330,6 +2330,18 @@ pub const WS_EX_NOACTIVATE: DWORD = 0x08000000;
 
 pub type WNDENUMPROC = Option<unsafe extern "system" fn(HWND, LPARAM) -> BOOL>;
 pub type WNDPROC = Option<unsafe extern "system" fn(HWND, UINT, WPARAM, LPARAM) -> LRESULT>;
+pub type HOOKPROC = Option<unsafe extern "system" fn(code: c_int, wParam: WPARAM, lParam: LPARAM) -> LRESULT>;
+pub type TimerProc = Option<unsafe extern "system" fn(hwnd: HWND, uMsg: UINT, idEvent: UINT_PTR, dwTime: DWORD)>;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct FLASHWINFO {
+    pub cbSize: UINT,
+    pub hwnd: HWND,
+    pub dwFlags: DWORD,
+    pub uCount: UINT,
+    pub dwTimeout: DWORD,
+}
+pub type PFLASHWINFO = *mut FLASHWINFO;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MSG {
     pub hwnd: HWND,

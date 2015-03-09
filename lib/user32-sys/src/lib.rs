@@ -14,8 +14,12 @@ extern "system" {
     pub fn AllowSetForegroundWindow(dwProcessId: DWORD) -> BOOL;
     pub fn AnimateWindow(hWnd: HWND, dwTime: DWORD, dwFlags: DWORD) -> BOOL;
     pub fn AnyPopup() -> BOOL;
-    // pub fn AppendMenuA();
-    // pub fn AppendMenuW();
+    pub fn AppendMenuA(
+        hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR
+    );
+    pub fn AppendMenuW(
+        hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCWSTR
+    ) -> BOOL;
     pub fn ArrangeIconicWindows(hWnd: HWND) -> UINT;
     pub fn AttachThreadInput(idAttach: DWORD, idAttachTo: DWORD, fAttach: BOOL) -> BOOL;
     // pub fn BeginDeferWindowPos();
@@ -23,21 +27,25 @@ extern "system" {
     pub fn BlockInput(fBlockIt: BOOL) -> BOOL;
     pub fn BringWindowToTop(hWnd: HWND) -> BOOL;
     // pub fn BroadcastSystemMessage();
-    // pub fn BroadcastSystemMessageA();
+    pub fn BroadcastSystemMessageA(
+        flags: DWORD, lpInfo: LPDWORD, Msg: UINT, wParam: WPARAM, lParam: LPARAM
+    ) -> LONG;
     // pub fn BroadcastSystemMessageExA();
     // pub fn BroadcastSystemMessageExW();
-    // pub fn BroadcastSystemMessageW();
+    pub fn BroadcastSystemMessageW(
+        flags: DWORD, lpInfo: LPDWORD, Msg: UINT, wParam: WPARAM, lParam: LPARAM
+    ) -> LONG;
     pub fn CalculatePopupWindowPosition(
         anchorPoint: *const POINT, windowSize: *const SIZE, flags: UINT, excludeRect: *mut RECT,
         popupWindowPosition: *mut RECT,
     ) -> BOOL;
     // pub fn CallMsgFilter();
-    // pub fn CallMsgFilterA();
-    // pub fn CallMsgFilterW();
+    pub fn CallMsgFilterA(lpMsg: LPMSG, nCode: c_int) -> BOOL;
+    pub fn CallMsgFilterW(lpMsg: LPMSG, nCode: c_int) -> BOOL;
     // pub fn CallNextHookEx();
     // pub fn CallWindowProcA();
     // pub fn CallWindowProcW();
-    // pub fn CancelShutdown();
+    pub fn CancelShutdown() -> BOOL;
     // pub fn CascadeChildWindows();
     pub fn CascadeWindows(
         hwndParent: HWND, wHow: UINT, lpRect: *const RECT, cKids: UINT, lpKids: *const HWND,
@@ -58,12 +66,12 @@ extern "system" {
     // pub fn CharLowerBuffA();
     // pub fn CharLowerBuffW();
     // pub fn CharLowerW();
-    // pub fn CharNextA();
+    pub fn CharNextA(lpsz: LPCSTR) -> LPSTR;
     // pub fn CharNextExA();
-    // pub fn CharNextW();
-    // pub fn CharPrevA();
+    pub fn CharNextW(lpsz: LPCWSTR) -> LPWSTR;
+    pub fn CharPrevA(lpszStart: LPCSTR, lpszCurrent: LPCSTR) -> LPSTR;
     // pub fn CharPrevExA();
-    // pub fn CharPrevW();
+    pub fn CharPrevW(lpszStart: LPCWSTR, lpszCurrent: LPCWSTR) -> LPWSTR;
     // pub fn CharToOemA();
     // pub fn CharToOemBuffA();
     // pub fn CharToOemBuffW();
@@ -88,8 +96,8 @@ extern "system" {
     pub fn CloseWindowStation(hWinSta: HWINSTA) -> BOOL;
     // pub fn CopyAcceleratorTableA();
     // pub fn CopyAcceleratorTableW();
-    // pub fn CopyIcon();
-    // pub fn CopyImage();
+    pub fn CopyIcon(hIcon: HICON) -> HICON;
+    pub fn CopyImage(h: HANDLE, type_: UINT, cx: c_int, cy: c_int, flags: UINT) -> HANDLE;
     // pub fn CopyRect();
     pub fn CountClipboardFormats() -> c_int;
     // pub fn CreateAcceleratorTableA();
@@ -107,7 +115,10 @@ extern "system" {
     // pub fn CreateDialogIndirectParamW();
     // pub fn CreateDialogParamA();
     // pub fn CreateDialogParamW();
-    // pub fn CreateIcon();
+    pub fn CreateIcon(
+        hInstance: HINSTANCE, nWidth: c_int, nHeight: c_int, cPlanes: BYTE,
+        cBitsPixel: BYTE, lpbANDbits: *const BYTE, lpbXORbits: *const BYTE
+    ) -> HICON;
     // pub fn CreateIconFromResource();
     // pub fn CreateIconFromResourceEx();
     // pub fn CreateIconIndirect();
@@ -193,17 +204,26 @@ extern "system" {
     // pub fn DlgDirSelectComboBoxExW();
     // pub fn DlgDirSelectExA();
     // pub fn DlgDirSelectExW();
-    // pub fn DragDetect();
-    // pub fn DragObject();
-    // pub fn DrawAnimatedRects();
-    // pub fn DrawCaption();
-    // pub fn DrawEdge();
-    // pub fn DrawFocusRect();
+    pub fn DragDetect(hwnd: HWND, pt: POINT) -> BOOL;
+    pub fn DragObject(
+        hwndParent: HWND, hwndFrom: HWND, fmt: UINT, data: ULONG_PTR, hcur: HCURSOR
+    ) -> DWORD;
+    pub fn DrawAnimatedRects(
+        hwnd: HWND, idAni: c_int, lprcFrom: *const RECT, lprcTo: *const RECT
+    ) -> BOOL;
+    pub fn DrawCaption(hwnd: HWND, hdc: HDC, lprect: *const RECT, flags: UINT) -> BOOL;
+    pub fn DrawEdge(hdc: HDC, qrc: LPRECT, edge: UINT, grfFlags: UINT) -> BOOL;
+    pub fn DrawFocusRect(hDC: HDC, lprc: *const RECT) -> BOOL;
     // pub fn DrawFrame();
-    // pub fn DrawFrameControl();
-    // pub fn DrawIcon();
-    // pub fn DrawIconEx();
-    // pub fn DrawMenuBar();
+    pub fn DrawFrameControl(
+        hdc: HDC, lprc: LPRECT, uType: UINT, uState: UINT
+    ) -> BOOL;
+    pub fn DrawIcon(hDC: HDC, x: c_int, y: c_int, hIcon: HICON) -> BOOL;
+    pub fn DrawIconEx(
+        hdc: HDC, xLeft: c_int, yTop: c_int, hIcon: HICON, cxWidth: c_int,
+        cyWidth: c_int, istepIfAniCur: UINT, hbrFlickerFreeDraw: HBRUSH, diFlags: UINT
+    ) -> BOOL;
+    pub fn DrawMenuBar(hwnd: HWND) -> BOOL;
     // pub fn DrawStateA();
     // pub fn DrawStateW();
     // pub fn DrawTextA();
@@ -213,18 +233,22 @@ extern "system" {
     // pub fn EditWndProc();
     pub fn EmptyClipboard() -> BOOL;
     // pub fn EnableMenuItem();
-    // pub fn EnableMouseInPointer();
+    pub fn EnableMouseInPointer(fEnable: BOOL) -> BOOL;
     pub fn EnableScrollBar(hWnd: HWND, wSBflags: UINT, wArrows: UINT) -> BOOL;
     // pub fn EnableSessionForMMCSS();
     pub fn EnableWindow(hWnd: HWND, bEnable: BOOL) -> BOOL;
     // pub fn EndDeferWindowPos();
     // pub fn EndDialog();
-    // pub fn EndMenu();
+    pub fn EndMenu(
+        hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR
+    ) -> BOOL;
     pub fn EndPaint(hWnd: HWND, lpPaint: *const PAINTSTRUCT) -> BOOL;
     pub fn EndTask(hWnd: HWND, fShutDown: BOOL, fForce: BOOL) -> BOOL;
     // pub fn EnumChildWindows();
     pub fn EnumClipboardFormats(format: UINT) -> UINT;
-    // pub fn EnumDesktopWindows();
+    pub fn EnumDesktopWindows(
+        hDesktop: HDESK, lpfn: WNDENUMPROC, lParam: LPARAM
+    ) -> BOOL;
     // pub fn EnumDesktopsA();
     // pub fn EnumDesktopsW();
     // pub fn EnumDisplayDevicesA();
@@ -260,7 +284,7 @@ extern "system" {
         hWndParent: HWND, hWndChildAfter: HWND, lpszClass: LPCWSTR, lpszWindow: LPCWSTR,
     ) -> HWND;
     pub fn FindWindowW(lpClassName: LPCWSTR, lpWindowName: LPCWSTR) -> HWND;
-    // pub fn FlashWindow();
+    pub fn FlashWindow(hwnd: HWND, bInvert: BOOL) -> BOOL;
     // pub fn FlashWindowEx();
     // pub fn FrameRect();
     // pub fn FreeDDElParam();
@@ -312,12 +336,14 @@ extern "system" {
     pub fn GetDC(hWnd: HWND) -> HDC;
     // pub fn GetDCEx();
     pub fn GetDesktopWindow() -> HWND;
-    // pub fn GetDialogBaseUnits();
+    pub fn GetDialogBaseUnits() -> LONG;
     // pub fn GetDisplayAutoRotationPreferences();
     // pub fn GetDisplayConfigBufferSizes();
-    // pub fn GetDlgCtrlID();
-    // pub fn GetDlgItem();
-    // pub fn GetDlgItemInt();
+    pub fn GetDlgCtrlID(hwnd: HWND) -> c_int;
+    pub fn GetDlgItem(hDlg: HWND, nIDDlgItem: c_int) -> HWND;
+    pub fn GetDlgItemInt(
+        hDlg: HWND, nIDDlgItem: c_int, lpTranslated: *mut BOOL, bSigned: BOOL
+    ) -> UINT;
     // pub fn GetDlgItemTextA();
     // pub fn GetDlgItemTextW();
     // pub fn GetDoubleClickTime();
@@ -365,7 +391,7 @@ extern "system" {
     // pub fn GetMessageA();
     // pub fn GetMessageExtraInfo();
     // pub fn GetMessagePos();
-    // pub fn GetMessageTime();
+    pub fn GetMessageTime() -> LONG;
     pub fn GetMessageW(lpMsg: LPMSG, hWnd: HWND, wMsgFilterMin: UINT, wMsgFilterMax: UINT) -> BOOL;
     // pub fn GetMonitorInfoA();
     // pub fn GetMonitorInfoW();
@@ -727,7 +753,7 @@ extern "system" {
     // pub fn SetShellWindow();
     // pub fn SetSysColors();
     pub fn SetSystemCursor(hcur: HCURSOR, id: DWORD) -> BOOL;
-    // pub fn SetThreadDesktop();
+    pub fn SetThreadDesktop(hDesktop: HDESK) -> BOOL;
     // pub fn SetTimer();
     // pub fn SetUserObjectInformationA();
     // pub fn SetUserObjectInformationW();
@@ -749,7 +775,7 @@ extern "system" {
     // pub fn SetWindowRgn();
     // pub fn SetWindowTextA();
     pub fn SetWindowTextW(hWnd: HWND, lpString: LPCWSTR) -> BOOL;
-    // pub fn SetWindowWord();
+    pub fn SetWindowWord(hwnd: HWND, nIndex: c_int, wNewWord: WORD) -> WORD;
     // pub fn SetWindowsHookA();
     // pub fn SetWindowsHookExA();
     // pub fn SetWindowsHookExW();
@@ -767,8 +793,8 @@ extern "system" {
     // pub fn SkipPointerFrameMessages();
     // pub fn SoundSentry();
     // pub fn SubtractRect();
-    // pub fn SwapMouseButton();
-    // pub fn SwitchDesktop();
+    pub fn SwapMouseButton(fSwap: BOOL) -> BOOL;
+    pub fn SwitchDesktop(hDesktop: HDESK) -> BOOL;
     // pub fn SwitchToThisWindow();
     // pub fn SystemParametersInfoA();
     // pub fn SystemParametersInfoW();
