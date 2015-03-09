@@ -523,7 +523,7 @@ extern "system" {
     // pub fn GetCurrentPackageInfo();
     // pub fn GetCurrentPackagePath();
     pub fn GetCurrentProcess() -> HANDLE;
-    // pub fn GetCurrentProcessId();
+    pub fn GetCurrentProcessId() -> DWORD;
     // pub fn GetCurrentProcessorNumber();
     // pub fn GetCurrentProcessorNumberEx();
     pub fn GetCurrentThread() -> HANDLE;
@@ -1457,7 +1457,7 @@ extern "system" {
     // pub fn SystemTimeToTzSpecificLocalTime();
     // pub fn SystemTimeToTzSpecificLocalTimeEx();
     pub fn TerminateJobObject(hJob: HANDLE, uExitCode: UINT) -> BOOL;
-    // pub fn TerminateProcess();
+    pub fn TerminateProcess(hProcess: HANDLE, uExitCode: UINT) -> BOOL;
     // pub fn TerminateThread();
     // pub fn Thread32First();
     // pub fn Thread32Next();

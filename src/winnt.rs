@@ -11,6 +11,34 @@ pub type SHORT = ::c_short;
 pub type LONG = ::c_long;
 // pub type INT = ::c_int; // Already defined by minwindef.h
 //3563
+#[cfg(target_arch = "x86")] #[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CONTEXT {
+    pub ContextFlags: ::DWORD,
+    pub Dr0: ::DWORD,
+    pub Dr1: ::DWORD,
+    pub Dr2: ::DWORD,
+    pub Dr3: ::DWORD,
+    pub Dr6: ::DWORD,
+    pub Dr7: ::DWORD,
+    pub FloatSave: FLOATING_SAVE_AREA,
+    pub SegGs: ::DWORD,
+    pub SegFs: ::DWORD,
+    pub SegEs: ::DWORD,
+    pub SegDs: ::DWORD,
+    pub Edi: ::DWORD,
+    pub Esi: ::DWORD,
+    pub Ebx: ::DWORD,
+    pub Edx: ::DWORD,
+    pub Ecx: ::DWORD,
+    pub Eax: ::DWORD,
+    pub Ebp: ::DWORD,
+    pub Eip: ::DWORD,
+    pub SegCs: ::DWORD,
+    pub EFlags: ::DWORD,
+    pub Esp: ::DWORD,
+    pub SegSs: ::DWORD,
+    pub ExtendedRegisters: [BYTE; MAXIMUM_SUPPORTED_EXTENSION],
+}
 // FIXME - Align 16
 #[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CONTEXT {
