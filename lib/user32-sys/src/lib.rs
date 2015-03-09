@@ -174,12 +174,24 @@ extern "system" {
     // pub fn DdeSetUserHandle();
     // pub fn DdeUnaccessData();
     // pub fn DdeUninitialize();
-    // pub fn DefDlgProcA();
-    // pub fn DefDlgProcW();
-    // pub fn DefFrameProcA();
-    // pub fn DefFrameProcW();
-    // pub fn DefMDIChildProcA();
-    // pub fn DefMDIChildProcW();
+    pub fn DefDlgProcA(
+        hDlg: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM
+    ) -> LRESULT;
+    pub fn DefDlgProcW(
+        hDlg: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM
+    ) -> LRESULT;
+    pub fn DefFrameProcA(
+        hwnd: HWND, hwndMDIClient: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM
+    ) -> LRESULT;
+    pub fn DefFrameProcW(
+        hwnd: HWND, hwndMDIClient: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM
+    ) -> LRESULT;
+    pub fn DefMDIChildProcA(
+        hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM
+    ) -> LRESULT;
+    pub fn DefMDIChildProcW(
+        hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM
+    ) -> LRESULT;
     // pub fn DefRawInputProc();
     // pub fn DefWindowProcA();
     pub fn DefWindowProcW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
@@ -294,7 +306,7 @@ extern "system" {
     pub fn FindWindowW(lpClassName: LPCWSTR, lpWindowName: LPCWSTR) -> HWND;
     pub fn FlashWindow(hwnd: HWND, bInvert: BOOL) -> BOOL;
     // pub fn FlashWindowEx();
-    // pub fn FrameRect();
+    pub fn FrameRect(hDC: HDC, lprc: *const RECT, hbr: HBRUSH) -> c_int;
     // pub fn FreeDDElParam();
     pub fn GetActiveWindow() -> HWND;
     // pub fn GetAltTabInfo();
@@ -352,8 +364,12 @@ extern "system" {
     pub fn GetDlgItemInt(
         hDlg: HWND, nIDDlgItem: c_int, lpTranslated: *mut BOOL, bSigned: BOOL
     ) -> UINT;
-    // pub fn GetDlgItemTextA();
-    // pub fn GetDlgItemTextW();
+    pub fn GetDlgItemTextA(
+        hDlg: HWND, nIDDlgItem: c_int, lpString: LPSTR, nMaxCount: c_int
+    ) -> UINT;
+    pub fn GetDlgItemTextW(
+        hDlg: HWND, nIDDlgItem: c_int, lpString: LPWSTR, nMaxCount: c_int
+    ) -> UINT;
     // pub fn GetDoubleClickTime();
     pub fn GetFocus() -> HWND;
     pub fn GetForegroundWindow() -> HWND;
@@ -522,49 +538,49 @@ extern "system" {
     ) -> BOOL;
     pub fn InvalidateRect(hWnd: HWND, lpRect: *const RECT, bErase: BOOL) -> BOOL;
     // pub fn InvalidateRgn();
-    // pub fn InvertRect();
-    // pub fn IsCharAlphaA();
-    // pub fn IsCharAlphaNumericA();
-    // pub fn IsCharAlphaNumericW();
-    // pub fn IsCharAlphaW();
+    pub fn InvertRect(hDC: HDC, lprc: *const RECT) -> BOOL;
+    pub fn IsCharAlphaA(ch: CHAR) -> BOOL;
+    pub fn IsCharAlphaNumericA(ch: CHAR) -> BOOL;
+    pub fn IsCharAlphaNumericW(ch: WCHAR) -> BOOL;
+    pub fn IsCharAlphaW(ch: WCHAR) -> BOOL;
     pub fn IsCharLowerA(ch: CHAR) -> BOOL;
     pub fn IsCharLowerW(ch: WCHAR) -> BOOL;
     pub fn IsCharUpperA(ch: CHAR) -> BOOL;
     pub fn IsCharUpperW(ch: WCHAR) -> BOOL;
     // pub fn IsChild();
     pub fn IsClipboardFormatAvailable(format: UINT) -> BOOL;
-    // pub fn IsDialogMessage();
-    // pub fn IsDialogMessageA();
-    // pub fn IsDialogMessageW();
-    // pub fn IsDlgButtonChecked();
-    // pub fn IsGUIThread();
-    // pub fn IsHungAppWindow();
+    pub fn IsDialogMessage(hDlg: HWND, lpMsg: LPMSG) -> BOOL;
+    pub fn IsDialogMessageA(hDlg: HWND, lpMsg: LPMSG) -> BOOL;
+    pub fn IsDialogMessageW(hDlg: HWND, lpMsg: LPMSG) -> BOOL;
+    pub fn IsDlgButtonChecked(hDlg: HWND, nIDButton: c_int) -> UINT;
+    pub fn IsGUIThread(bConvert: BOOL) -> BOOL;
+    pub fn IsHungAppWindow(hwnd: HWND) -> BOOL;
     pub fn IsIconic(hWnd: HWND) -> BOOL;
-    // pub fn IsImmersiveProcess();
+    pub fn IsImmersiveProcess(hProcess: HANDLE) -> BOOL;
     // pub fn IsInDesktopWindowBand();
-    // pub fn IsMenu();
-    // pub fn IsMouseInPointerEnabled();
-    // pub fn IsProcessDPIAware();
-    // pub fn IsRectEmpty();
+    pub fn IsMenu(hMenu: HMENU) -> BOOL;
+    pub fn IsMouseInPointerEnabled() -> BOOL;
+    pub fn IsProcessDPIAware() -> BOOL;
+    pub fn IsRectEmpty(lprc: *const RECT) -> BOOL;
     pub fn IsTouchWindow(hwnd: HWND, pulFlags: PULONG) -> BOOL;
     // pub fn IsWinEventHookInstalled();
     pub fn IsWindow(hWnd: HWND) -> BOOL;
     pub fn IsWindowEnabled(hWnd: HWND) -> BOOL;
     // pub fn IsWindowUnicode();
     pub fn IsWindowVisible(hWnd: HWND) -> BOOL;
-    // pub fn IsWow64Message();
-    // pub fn IsZoomed();
-    // pub fn KillTimer();
-    // pub fn LoadAcceleratorsA();
-    // pub fn LoadAcceleratorsW();
-    // pub fn LoadBitmapA();
-    // pub fn LoadBitmapW();
-    // pub fn LoadCursorA();
-    // pub fn LoadCursorFromFileA();
+    pub fn IsWow64Message() -> BOOL;
+    pub fn IsZoomed(hwnd: HWND) -> BOOL;
+    pub fn KillTimer(hwnd: HWND, uIDEvent: UINT_PTR) -> BOOL;
+    pub fn LoadAcceleratorsA(hInstance: HINSTANCE, lpTableName: LPCSTR) -> HACCEL;
+    pub fn LoadAcceleratorsW(hInstance: HINSTANCE, lpTableName: LPCWSTR) -> HACCEL;
+    pub fn LoadBitmapA(hInstance: HINSTANCE, lpBitmapName: LPCSTR) -> HBITMAP;
+    pub fn LoadBitmapW(hInstance: HINSTANCE, lpBitmapName: LPCWSTR) -> HBITMAP;
+    pub fn LoadCursorA(hInstance: HINSTANCE, lpCursorName: LPCSTR) -> HCURSOR;
+    pub fn LoadCursorFromFileA(lpFileName: LPCSTR) -> HCURSOR;
     pub fn LoadCursorFromFileW(lpFileName: LPCWSTR) -> HCURSOR;
     pub fn LoadCursorW(hInstance: HINSTANCE, lpCursorName: LPCWSTR) -> HCURSOR;
-    // pub fn LoadIconA();
-    // pub fn LoadIconW();
+    pub fn LoadIconA(hInstance: HINSTANCE, lpIconName: LPCSTR) -> HICON;
+    pub fn LoadIconW(hInstance: HINSTANCE, lpIconName: LPCWSTR) -> HICON;
     pub fn LoadImageA(
         hInst: HINSTANCE, name: LPCSTR, type_: UINT, cx: c_int, cy: c_int, fuLoad: UINT,
     ) -> HANDLE;
@@ -573,10 +589,10 @@ extern "system" {
     ) -> HANDLE;
     // pub fn LoadKeyboardLayoutA();
     // pub fn LoadKeyboardLayoutW();
-    // pub fn LoadMenuA();
+    pub fn LoadMenuA(hInstance: HINSTANCE, lpMenuName: LPCSTR) -> HMENU;
     // pub fn LoadMenuIndirectA();
     // pub fn LoadMenuIndirectW();
-    // pub fn LoadMenuW();
+    pub fn LoadMenuW(hInstance: HINSTANCE, lpMenuName: LPCWSTR) -> HMENU;
     // pub fn LoadStringA();
     // pub fn LoadStringW();
     // pub fn LockSetForegroundWindow();
