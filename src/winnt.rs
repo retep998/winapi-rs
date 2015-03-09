@@ -11,6 +11,24 @@ pub type SHORT = ::c_short;
 pub type LONG = ::c_long;
 // pub type INT = ::c_int; // Already defined by minwindef.h
 //3563
+#[cfg(target_arch = "x86")]
+pub const SIZE_OF_80387_REGISTERS: usize = 80;
+#[cfg(target_arch = "x86")] #[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct FLOATING_SAVE_AREA {
+    pub ControlWord: ::DWORD,
+    pub StatusWord: ::DWORD,
+    pub TagWord: ::DWORD,
+    pub ErrorOffset: ::DWORD,
+    pub ErrorSelector: ::DWORD,
+    pub DataOffset: ::DWORD,
+    pub DataSelector: ::DWORD,
+    pub RegisterArea: [::BYTE; SIZE_OF_80387_REGISTERS],
+    pub Spare0: ::DWORD,
+}
+#[cfg(target_arch = "x86")]
+pub type PFLOATING_SAVE_AREA = *mut FLOATING_SAVE_AREA;
+#[cfg(target_arch = "x86")]
+pub const MAXIMUM_SUPPORTED_EXTENSION: usize = 512;
 #[cfg(target_arch = "x86")] #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CONTEXT {
     pub ContextFlags: ::DWORD,
@@ -37,7 +55,7 @@ pub struct CONTEXT {
     pub EFlags: ::DWORD,
     pub Esp: ::DWORD,
     pub SegSs: ::DWORD,
-    pub ExtendedRegisters: [BYTE; MAXIMUM_SUPPORTED_EXTENSION],
+    pub ExtendedRegisters: [::BYTE; MAXIMUM_SUPPORTED_EXTENSION],
 }
 // FIXME - Align 16
 #[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Clone, Copy, Debug)]
