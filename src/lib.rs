@@ -30,6 +30,9 @@ pub use libc::{
 };
 pub use audioclient::*;
 pub use basetsd::*;
+pub use d3d9::*;
+pub use d3d9types::*;
+pub use d3d9caps::*;
 pub use fileapi::*;
 pub use libloaderapi::*;
 pub use minwinbase::*;
@@ -69,8 +72,12 @@ macro_rules! MAKE_SCODE {
 //-------------------------------------------------------------------------------------------------
 // Modules
 //-------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
 pub mod audioclient;
 pub mod basetsd;
+pub mod d3d9;
+pub mod d3d9types;
+pub mod d3d9caps;
 pub mod fileapi;
 pub mod libloaderapi;
 pub mod minwinbase;
@@ -87,7 +94,6 @@ pub mod winnls;
 pub mod winnt;
 pub mod winsvc;
 pub mod winuser;
-//-------------------------------------------------------------------------------------------------
 // Primitive types not defined by libc
 //-------------------------------------------------------------------------------------------------
 pub type __int8 = i8;

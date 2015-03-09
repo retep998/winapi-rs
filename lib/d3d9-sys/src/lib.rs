@@ -4,25 +4,16 @@
 #![cfg(windows)]
 extern crate winapi;
 use winapi::*;
-#[cfg(target_arch = "x86")]
-extern "cdecl" {
-    // pub fn DebugSetLevel();
-    // pub fn DebugSetMute();
-}
+
 #[cfg(any(target_arch = "x86", target_arch = "x86_64", target_arch = "arm"))]
 extern "system" {
-    // pub fn D3DPERF_BeginEvent();
-    // pub fn D3DPERF_EndEvent();
-    // pub fn D3DPERF_GetStatus();
-    // pub fn D3DPERF_QueryRepeatFrame();
-    // pub fn D3DPERF_SetMarker();
-    // pub fn D3DPERF_SetOptions();
-    // pub fn D3DPERF_SetRegion();
-    // pub fn Direct3DCreate9();
-    // pub fn Direct3DCreate9Ex();
-}
-#[cfg(any(target_arch = "x86_64", target_arch = "arm"))]
-extern "system" {
-    // pub fn DebugSetLevel();
-    // pub fn DebugSetMute();
+    pub fn D3DPERF_BeginEvent(col: D3DCOLOR, wszName: LPCWSTR) -> INT;
+    pub fn D3DPERF_EndEvent() -> INT;
+    pub fn D3DPERF_GetStatus() -> DWORD;
+    pub fn D3DPERF_QueryRepeatFrame() -> BOOL;
+    pub fn D3DPERF_SetMarker(col: D3DCOLOR, wszName: LPCWSTR) -> ();
+    pub fn D3DPERF_SetOptions(dwOptions: DWORD) -> ();
+    pub fn D3DPERF_SetRegion(col: D3DCOLOR, wszName: LPCWSTR) -> ();
+    pub fn Direct3DCreate9(SDKVersion: UINT) -> *mut IDirect3D9;
+    pub fn Direct3DCreate9Ex(SDKVersion: UINT, arg1: *mut *mut IDirect3D9Ex) -> HRESULT;
 }
