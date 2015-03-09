@@ -2327,12 +2327,14 @@ pub const WS_EX_NOREDIRECTIONBITMAP: DWORD = 0x00200000;
 pub const WS_EX_LAYOUTRTL: DWORD = 0x00400000;
 pub const WS_EX_COMPOSITED: DWORD = 0x02000000;
 pub const WS_EX_NOACTIVATE: DWORD = 0x08000000;
-
 pub type WNDENUMPROC = Option<unsafe extern "system" fn(HWND, LPARAM) -> BOOL>;
 pub type WNDPROC = Option<unsafe extern "system" fn(HWND, UINT, WPARAM, LPARAM) -> LRESULT>;
-pub type HOOKPROC = Option<unsafe extern "system" fn(code: c_int, wParam: WPARAM, lParam: LPARAM) -> LRESULT>;
-pub type TimerProc = Option<unsafe extern "system" fn(hwnd: HWND, uMsg: UINT, idEvent: UINT_PTR, dwTime: DWORD)>;
-
+pub type HOOKPROC = Option<unsafe extern "system" fn(
+    code: c_int, wParam: WPARAM, lParam: LPARAM,
+) -> LRESULT>;
+pub type TimerProc = Option<unsafe extern "system" fn(
+    hwnd: HWND, uMsg: UINT, idEvent: UINT_PTR, dwTime: DWORD,
+)>;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FLASHWINFO {
     pub cbSize: UINT,

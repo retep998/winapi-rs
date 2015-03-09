@@ -15,10 +15,10 @@ extern "system" {
     pub fn AnimateWindow(hWnd: HWND, dwTime: DWORD, dwFlags: DWORD) -> BOOL;
     pub fn AnyPopup() -> BOOL;
     pub fn AppendMenuA(
-        hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR
+        hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR,
     ) -> BOOL;
     pub fn AppendMenuW(
-        hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCWSTR
+        hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCWSTR,
     ) -> BOOL;
     pub fn ArrangeIconicWindows(hWnd: HWND) -> UINT;
     pub fn AttachThreadInput(idAttach: DWORD, idAttachTo: DWORD, fAttach: BOOL) -> BOOL;
@@ -28,12 +28,12 @@ extern "system" {
     pub fn BringWindowToTop(hWnd: HWND) -> BOOL;
     // pub fn BroadcastSystemMessage();
     pub fn BroadcastSystemMessageA(
-        flags: DWORD, lpInfo: LPDWORD, Msg: UINT, wParam: WPARAM, lParam: LPARAM
+        flags: DWORD, lpInfo: LPDWORD, Msg: UINT, wParam: WPARAM, lParam: LPARAM,
     ) -> LONG;
     // pub fn BroadcastSystemMessageExA();
     // pub fn BroadcastSystemMessageExW();
     pub fn BroadcastSystemMessageW(
-        flags: DWORD, lpInfo: LPDWORD, Msg: UINT, wParam: WPARAM, lParam: LPARAM
+        flags: DWORD, lpInfo: LPDWORD, Msg: UINT, wParam: WPARAM, lParam: LPARAM,
     ) -> LONG;
     pub fn CalculatePopupWindowPosition(
         anchorPoint: *const POINT, windowSize: *const SIZE, flags: UINT, excludeRect: *mut RECT,
@@ -59,10 +59,10 @@ extern "system" {
     ) -> LONG;
     pub fn ChangeDisplaySettingsW(lpDevMode: *mut DEVMODEW, dwFlags: DWORD) -> LONG;
     pub fn ChangeMenuA(
-        hMenu: HMENU, cmd: UINT, lpszNewItem: LPCSTR, cmdInsert: UINT, flags: UINT
+        hMenu: HMENU, cmd: UINT, lpszNewItem: LPCSTR, cmdInsert: UINT, flags: UINT,
     ) -> BOOL;
     pub fn ChangeMenuW(
-        hMenu: HMENU, cmd: UINT, lpszNewItem: LPCWSTR, cmdInsert: UINT, flags: UINT
+        hMenu: HMENU, cmd: UINT, lpszNewItem: LPCWSTR, cmdInsert: UINT, flags: UINT,
     ) -> BOOL;
     // pub fn ChangeWindowMessageFilter();
     // pub fn ChangeWindowMessageFilterEx();
@@ -87,10 +87,10 @@ extern "system" {
     // pub fn CheckDlgButton();
     pub fn CheckMenuItem(hMenu: HMENU, uIDCheckItem: UINT, uCheck: UINT) -> DWORD;
     pub fn CheckMenuRadioItem(
-        hMenu: HMENU, first: UINT, last: UINT, check: UINT, flags: UINT
+        hMenu: HMENU, first: UINT, last: UINT, check: UINT, flags: UINT,
     ) -> BOOL;
     pub fn CheckRadioButton(
-        hDlg: HWND, nIDFirstButton: c_int, nIDLasatButton: c_int, nIDCheckButton: c_int
+        hDlg: HWND, nIDFirstButton: c_int, nIDLasatButton: c_int, nIDCheckButton: c_int,
     ) -> BOOL;
     pub fn ChildWindowFromPoint(hWndParent: HWND, point: POINT) -> HWND;
     pub fn ChildWindowFromPointEx(hwnd: HWND, pt: POINT, flags: UINT) -> HWND;
@@ -124,8 +124,8 @@ extern "system" {
     // pub fn CreateDialogParamA();
     // pub fn CreateDialogParamW();
     pub fn CreateIcon(
-        hInstance: HINSTANCE, nWidth: c_int, nHeight: c_int, cPlanes: BYTE,
-        cBitsPixel: BYTE, lpbANDbits: *const BYTE, lpbXORbits: *const BYTE
+        hInstance: HINSTANCE, nWidth: c_int, nHeight: c_int, cPlanes: BYTE, cBitsPixel: BYTE,
+        lpbANDbits: *const BYTE, lpbXORbits: *const BYTE,
     ) -> HICON;
     // pub fn CreateIconFromResource();
     // pub fn CreateIconFromResourceEx();
@@ -175,22 +175,22 @@ extern "system" {
     // pub fn DdeUnaccessData();
     // pub fn DdeUninitialize();
     pub fn DefDlgProcA(
-        hDlg: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM
+        hDlg: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM,
     ) -> LRESULT;
     pub fn DefDlgProcW(
-        hDlg: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM
+        hDlg: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM,
     ) -> LRESULT;
     pub fn DefFrameProcA(
-        hwnd: HWND, hwndMDIClient: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM
+        hwnd: HWND, hwndMDIClient: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM,
     ) -> LRESULT;
     pub fn DefFrameProcW(
-        hwnd: HWND, hwndMDIClient: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM
+        hwnd: HWND, hwndMDIClient: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM,
     ) -> LRESULT;
     pub fn DefMDIChildProcA(
-        hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM
+        hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM,
     ) -> LRESULT;
     pub fn DefMDIChildProcW(
-        hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM
+        hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM,
     ) -> LRESULT;
     // pub fn DefRawInputProc();
     // pub fn DefWindowProcA();
@@ -226,22 +226,20 @@ extern "system" {
     // pub fn DlgDirSelectExW();
     pub fn DragDetect(hwnd: HWND, pt: POINT) -> BOOL;
     pub fn DragObject(
-        hwndParent: HWND, hwndFrom: HWND, fmt: UINT, data: ULONG_PTR, hcur: HCURSOR
+        hwndParent: HWND, hwndFrom: HWND, fmt: UINT, data: ULONG_PTR, hcur: HCURSOR,
     ) -> DWORD;
     pub fn DrawAnimatedRects(
-        hwnd: HWND, idAni: c_int, lprcFrom: *const RECT, lprcTo: *const RECT
+        hwnd: HWND, idAni: c_int, lprcFrom: *const RECT, lprcTo: *const RECT,
     ) -> BOOL;
     pub fn DrawCaption(hwnd: HWND, hdc: HDC, lprect: *const RECT, flags: UINT) -> BOOL;
     pub fn DrawEdge(hdc: HDC, qrc: LPRECT, edge: UINT, grfFlags: UINT) -> BOOL;
     pub fn DrawFocusRect(hDC: HDC, lprc: *const RECT) -> BOOL;
     // pub fn DrawFrame();
-    pub fn DrawFrameControl(
-        hdc: HDC, lprc: LPRECT, uType: UINT, uState: UINT
-    ) -> BOOL;
+    pub fn DrawFrameControl(hdc: HDC, lprc: LPRECT, uType: UINT, uState: UINT) -> BOOL;
     pub fn DrawIcon(hDC: HDC, x: c_int, y: c_int, hIcon: HICON) -> BOOL;
     pub fn DrawIconEx(
-        hdc: HDC, xLeft: c_int, yTop: c_int, hIcon: HICON, cxWidth: c_int,
-        cyWidth: c_int, istepIfAniCur: UINT, hbrFlickerFreeDraw: HBRUSH, diFlags: UINT
+        hdc: HDC, xLeft: c_int, yTop: c_int, hIcon: HICON, cxWidth: c_int, cyWidth: c_int,
+        istepIfAniCur: UINT, hbrFlickerFreeDraw: HBRUSH, diFlags: UINT,
     ) -> BOOL;
     pub fn DrawMenuBar(hwnd: HWND) -> BOOL;
     // pub fn DrawStateA();
@@ -259,23 +257,21 @@ extern "system" {
     pub fn EnableWindow(hWnd: HWND, bEnable: BOOL) -> BOOL;
     // pub fn EndDeferWindowPos();
     // pub fn EndDialog();
-    pub fn EndMenu(
-        hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR
-    ) -> BOOL;
+    pub fn EndMenu(hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR) -> BOOL;
     pub fn EndPaint(hWnd: HWND, lpPaint: *const PAINTSTRUCT) -> BOOL;
     pub fn EndTask(hWnd: HWND, fShutDown: BOOL, fForce: BOOL) -> BOOL;
     // pub fn EnumChildWindows();
     pub fn EnumClipboardFormats(format: UINT) -> UINT;
-    pub fn EnumDesktopWindows(
-        hDesktop: HDESK, lpfn: WNDENUMPROC, lParam: LPARAM
-    ) -> BOOL;
+    pub fn EnumDesktopWindows(hDesktop: HDESK, lpfn: WNDENUMPROC, lParam: LPARAM) -> BOOL;
     // pub fn EnumDesktopsA();
     // pub fn EnumDesktopsW();
     // pub fn EnumDisplayDevicesA();
     pub fn EnumDisplayDevicesW(
         lpDevice: LPCWSTR, iDevNum: DWORD, lpDisplayDevice: PDISPLAY_DEVICEW, dwFlags: DWORD,
     ) -> BOOL;
-    pub fn EnumDisplayMonitors(hdc: HDC, lprcClip: LPCRECT, lpfnEnum: MONITORENUMPROC, dwData: LPARAM) -> BOOL;
+    pub fn EnumDisplayMonitors(
+        hdc: HDC, lprcClip: LPCRECT, lpfnEnum: MONITORENUMPROC, dwData: LPARAM,
+    ) -> BOOL;
     // pub fn EnumDisplaySettingsA();
     // pub fn EnumDisplaySettingsExA();
     pub fn EnumDisplaySettingsExW(
@@ -362,13 +358,13 @@ extern "system" {
     pub fn GetDlgCtrlID(hwnd: HWND) -> c_int;
     pub fn GetDlgItem(hDlg: HWND, nIDDlgItem: c_int) -> HWND;
     pub fn GetDlgItemInt(
-        hDlg: HWND, nIDDlgItem: c_int, lpTranslated: *mut BOOL, bSigned: BOOL
+        hDlg: HWND, nIDDlgItem: c_int, lpTranslated: *mut BOOL, bSigned: BOOL,
     ) -> UINT;
     pub fn GetDlgItemTextA(
-        hDlg: HWND, nIDDlgItem: c_int, lpString: LPSTR, nMaxCount: c_int
+        hDlg: HWND, nIDDlgItem: c_int, lpString: LPSTR, nMaxCount: c_int,
     ) -> UINT;
     pub fn GetDlgItemTextW(
-        hDlg: HWND, nIDDlgItem: c_int, lpString: LPWSTR, nMaxCount: c_int
+        hDlg: HWND, nIDDlgItem: c_int, lpString: LPWSTR, nMaxCount: c_int,
     ) -> UINT;
     // pub fn GetDoubleClickTime();
     pub fn GetFocus() -> HWND;
@@ -525,16 +521,16 @@ extern "system" {
     // pub fn InitializeTouchInjection();
     // pub fn InjectTouchInput();
     pub fn InsertMenuA(
-        hMenu: HMENU, uPosition: UINT, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR
+        hMenu: HMENU, uPosition: UINT, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR,
     ) -> BOOL;
     // pub fn InsertMenuItemA();
     // pub fn InsertMenuItemW();
     pub fn InsertMenuW(
-        hMenu: HMENU, uPosition: UINT, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCWSTR
+        hMenu: HMENU, uPosition: UINT, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCWSTR,
     ) -> BOOL;
     // pub fn InternalGetWindowText();
     pub fn IntersectRect(
-        lprcDst: LPRECT, lprcSrc1: *const RECT, lprcSrc2: *const RECT
+        lprcDst: LPRECT, lprcSrc1: *const RECT, lprcSrc2: *const RECT,
     ) -> BOOL;
     pub fn InvalidateRect(hWnd: HWND, lpRect: *const RECT, bErase: BOOL) -> BOOL;
     // pub fn InvalidateRgn();
