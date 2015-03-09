@@ -1,148 +1,83 @@
 // Copyright © 2015, Corey Richardson
 // Licensed under the MIT License <LICENSE.md>
 //! Direct3D capabilities include file
-
-use std::mem::transmute;
-
 pub type D3DCOLOR = ::DWORD;
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DVECTOR {
-    pub x: ::FLOAT,
-    pub y: ::FLOAT,
-    pub z: ::FLOAT,
+    pub x: ::c_float,
+    pub y: ::c_float,
+    pub z: ::c_float,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DCOLORVALUE {
-    pub r: ::FLOAT,
-    pub g: ::FLOAT,
-    pub b: ::FLOAT,
-    pub a: ::FLOAT,
+    pub r: ::c_float,
+    pub g: ::c_float,
+    pub b: ::c_float,
+    pub a: ::c_float,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DRECT {
     pub x1: ::LONG,
     pub y1: ::LONG,
     pub x2: ::LONG,
     pub y2: ::LONG,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DMATRIX {
-    pub _bindgen_data_1_: [u32; 16usize],
+    pub m: [[::c_float; 4]; 4],
 }
-impl D3DMATRIX {
-    pub unsafe fn _11(&mut self) -> *mut ::FLOAT {
-        transmute(&self._bindgen_data_1_)
-    }
-    pub unsafe fn _12(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(4isize))
-    }
-    pub unsafe fn _13(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(8isize))
-    }
-    pub unsafe fn _14(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(12isize))
-    }
-    pub unsafe fn _21(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(16isize))
-    }
-    pub unsafe fn _22(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(20isize))
-    }
-    pub unsafe fn _23(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(24isize))
-    }
-    pub unsafe fn _24(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(28isize))
-    }
-    pub unsafe fn _31(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(32isize))
-    }
-    pub unsafe fn _32(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(36isize))
-    }
-    pub unsafe fn _33(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(40isize))
-    }
-    pub unsafe fn _34(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(44isize))
-    }
-    pub unsafe fn _41(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(48isize))
-    }
-    pub unsafe fn _42(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(52isize))
-    }
-    pub unsafe fn _43(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(56isize))
-    }
-    pub unsafe fn _44(&mut self) -> *mut ::FLOAT {
-        let raw: *mut u8 = transmute(&self._bindgen_data_1_);
-        transmute(raw.offset(60isize))
-    }
-    pub unsafe fn m(&mut self) -> *mut [[::libc::c_float; 4usize]; 4usize] {
-        transmute(&self._bindgen_data_1_)
-    }
-}
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DVIEWPORT9 {
     pub X: ::DWORD,
     pub Y: ::DWORD,
     pub Width: ::DWORD,
     pub Height: ::DWORD,
-    pub MinZ: ::FLOAT,
-    pub MaxZ: ::FLOAT,
+    pub MinZ: ::c_float,
+    pub MaxZ: ::c_float,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+pub const D3DMAXUSERCLIPPLANES: ::DWORD = 32;
+pub const D3DCLIPPLANE0: ::DWORD = (1 << 0);
+pub const D3DCLIPPLANE1: ::DWORD = (1 << 1);
+pub const D3DCLIPPLANE2: ::DWORD = (1 << 2);
+pub const D3DCLIPPLANE3: ::DWORD = (1 << 3);
+pub const D3DCLIPPLANE4: ::DWORD = (1 << 4);
+pub const D3DCLIPPLANE5: ::DWORD = (1 << 5);
+pub const D3DCS_LEFT: ::DWORD = 0x00000001;
+pub const D3DCS_RIGHT: ::DWORD = 0x00000002;
+pub const D3DCS_TOP: ::DWORD = 0x00000004;
+pub const D3DCS_BOTTOM: ::DWORD = 0x00000008;
+pub const D3DCS_FRONT: ::DWORD = 0x00000010;
+pub const D3DCS_BACK: ::DWORD = 0x00000020;
+pub const D3DCS_PLANE0: ::DWORD = 0x00000040;
+pub const D3DCS_PLANE1: ::DWORD = 0x00000080;
+pub const D3DCS_PLANE2: ::DWORD = 0x00000100;
+pub const D3DCS_PLANE3: ::DWORD = 0x00000200;
+pub const D3DCS_PLANE4: ::DWORD = 0x00000400;
+pub const D3DCS_PLANE5: ::DWORD = 0x00000800;
+pub const D3DCS_ALL: ::DWORD = D3DCS_LEFT | D3DCS_RIGHT | D3DCS_TOP | D3DCS_BOTTOM | D3DCS_FRONT
+    | D3DCS_BACK | D3DCS_PLANE0 | D3DCS_PLANE1 | D3DCS_PLANE2 | D3DCS_PLANE3 | D3DCS_PLANE4
+    | D3DCS_PLANE5;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DCLIPSTATUS9 {
     pub ClipUnion: ::DWORD,
     pub ClipIntersection: ::DWORD,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DMATERIAL9 {
     pub Diffuse: D3DCOLORVALUE,
     pub Ambient: D3DCOLORVALUE,
     pub Specular: D3DCOLORVALUE,
     pub Emissive: D3DCOLORVALUE,
-    pub Power: ::FLOAT,
+    pub Power: ::c_float,
 }
-
-pub const D3DLIGHT_POINT: ::UINT = 1;
-pub const D3DLIGHT_SPOT: ::UINT = 2;
-pub const D3DLIGHT_DIRECTIONAL: ::UINT = 3;
-pub const D3DLIGHT_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DLIGHTTYPE = ::UINT;
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DLIGHTTYPE {
+    D3DLIGHT_POINT = 1,
+    D3DLIGHT_SPOT = 2,
+    D3DLIGHT_DIRECTIONAL = 3,
+    D3DLIGHT_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DLIGHT9 {
     pub Type: D3DLIGHTTYPE,
     pub Diffuse: D3DCOLORVALUE,
@@ -150,361 +85,447 @@ pub struct D3DLIGHT9 {
     pub Ambient: D3DCOLORVALUE,
     pub Position: D3DVECTOR,
     pub Direction: D3DVECTOR,
-    pub Range: ::FLOAT,
-    pub Falloff: ::FLOAT,
-    pub Attenuation0: ::FLOAT,
-    pub Attenuation1: ::FLOAT,
-    pub Attenuation2: ::FLOAT,
-    pub Theta: ::FLOAT,
-    pub Phi: ::FLOAT,
+    pub Range: ::c_float,
+    pub Falloff: ::c_float,
+    pub Attenuation0: ::c_float,
+    pub Attenuation1: ::c_float,
+    pub Attenuation2: ::c_float,
+    pub Theta: ::c_float,
+    pub Phi: ::c_float,
 }
-
-pub type D3DSHADEMODE = ::UINT;
-pub const D3DSHADE_FLAT: ::UINT = 1;
-pub const D3DSHADE_GOURAUD: ::UINT = 2;
-pub const D3DSHADE_PHONG: ::UINT = 3;
-pub const D3DSHADE_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DFILLMODE = ::UINT;
-pub const D3DFILL_POINT: ::UINT = 1;
-pub const D3DFILL_WIREFRAME: ::UINT = 2;
-pub const D3DFILL_SOLID: ::UINT = 3;
-pub const D3DFILL_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DBLEND = ::UINT;
-pub const D3DBLEND_ZERO: ::UINT = 1;
-pub const D3DBLEND_ONE: ::UINT = 2;
-pub const D3DBLEND_SRCCOLOR: ::UINT = 3;
-pub const D3DBLEND_INVSRCCOLOR: ::UINT = 4;
-pub const D3DBLEND_SRCALPHA: ::UINT = 5;
-pub const D3DBLEND_INVSRCALPHA: ::UINT = 6;
-pub const D3DBLEND_DESTALPHA: ::UINT = 7;
-pub const D3DBLEND_INVDESTALPHA: ::UINT = 8;
-pub const D3DBLEND_DESTCOLOR: ::UINT = 9;
-pub const D3DBLEND_INVDESTCOLOR: ::UINT = 10;
-pub const D3DBLEND_SRCALPHASAT: ::UINT = 11;
-pub const D3DBLEND_BOTHSRCALPHA: ::UINT = 12;
-pub const D3DBLEND_BOTHINVSRCALPHA: ::UINT = 13;
-pub const D3DBLEND_BLENDFACTOR: ::UINT = 14;
-pub const D3DBLEND_INVBLENDFACTOR: ::UINT = 15;
-pub const D3DBLEND_SRCCOLOR2: ::UINT = 16;
-pub const D3DBLEND_INVSRCCOLOR2: ::UINT = 17;
-pub const D3DBLEND_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DBLENDOP = ::UINT;
-pub const D3DBLENDOP_ADD: ::UINT = 1;
-pub const D3DBLENDOP_SUBTRACT: ::UINT = 2;
-pub const D3DBLENDOP_REVSUBTRACT: ::UINT = 3;
-pub const D3DBLENDOP_MIN: ::UINT = 4;
-pub const D3DBLENDOP_MAX: ::UINT = 5;
-pub const D3DBLENDOP_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DTEXTUREADDRESS = ::UINT;
-pub const D3DTADDRESS_WRAP: ::UINT = 1;
-pub const D3DTADDRESS_MIRROR: ::UINT = 2;
-pub const D3DTADDRESS_CLAMP: ::UINT = 3;
-pub const D3DTADDRESS_BORDER: ::UINT = 4;
-pub const D3DTADDRESS_MIRRORONCE: ::UINT = 5;
-pub const D3DTADDRESS_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DCULL = ::UINT;
-pub const D3DCULL_NONE: ::UINT = 1;
-pub const D3DCULL_CW: ::UINT = 2;
-pub const D3DCULL_CCW: ::UINT = 3;
-pub const D3DCULL_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DCMPFUNC = ::UINT;
-pub const D3DCMP_NEVER: ::UINT = 1;
-pub const D3DCMP_LESS: ::UINT = 2;
-pub const D3DCMP_EQUAL: ::UINT = 3;
-pub const D3DCMP_LESSEQUAL: ::UINT = 4;
-pub const D3DCMP_GREATER: ::UINT = 5;
-pub const D3DCMP_NOTEQUAL: ::UINT = 6;
-pub const D3DCMP_GREATEREQUAL: ::UINT = 7;
-pub const D3DCMP_ALWAYS: ::UINT = 8;
-pub const D3DCMP_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DSTENCILOP = ::UINT;
-pub const D3DSTENCILOP_KEEP: ::UINT = 1;
-pub const D3DSTENCILOP_ZERO: ::UINT = 2;
-pub const D3DSTENCILOP_REPLACE: ::UINT = 3;
-pub const D3DSTENCILOP_INCRSAT: ::UINT = 4;
-pub const D3DSTENCILOP_DECRSAT: ::UINT = 5;
-pub const D3DSTENCILOP_INVERT: ::UINT = 6;
-pub const D3DSTENCILOP_INCR: ::UINT = 7;
-pub const D3DSTENCILOP_DECR: ::UINT = 8;
-pub const D3DSTENCILOP_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DFOGMODE = ::UINT;
-pub const D3DFOG_NONE: ::UINT = 0;
-pub const D3DFOG_EXP: ::UINT = 1;
-pub const D3DFOG_EXP2: ::UINT = 2;
-pub const D3DFOG_LINEAR: ::UINT = 3;
-pub const D3DFOG_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DZBUFFERTYPE = ::UINT;
-pub const D3DZB_FALSE: ::UINT = 0;
-pub const D3DZB_TRUE: ::UINT = 1;
-pub const D3DZB_USEW: ::UINT = 2;
-pub const D3DZB_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DPRIMITIVETYPE = ::UINT;
-pub const D3DPT_POINTLIST: ::UINT = 1;
-pub const D3DPT_LINELIST: ::UINT = 2;
-pub const D3DPT_LINESTRIP: ::UINT = 3;
-pub const D3DPT_TRIANGLELIST: ::UINT = 4;
-pub const D3DPT_TRIANGLESTRIP: ::UINT = 5;
-pub const D3DPT_TRIANGLEFAN: ::UINT = 6;
-pub const D3DPT_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DTRANSFORMSTATETYPE = ::UINT;
-pub const D3DTS_VIEW: ::UINT = 2;
-pub const D3DTS_PROJECTION: ::UINT = 3;
-pub const D3DTS_TEXTURE0: ::UINT = 16;
-pub const D3DTS_TEXTURE1: ::UINT = 17;
-pub const D3DTS_TEXTURE2: ::UINT = 18;
-pub const D3DTS_TEXTURE3: ::UINT = 19;
-pub const D3DTS_TEXTURE4: ::UINT = 20;
-pub const D3DTS_TEXTURE5: ::UINT = 21;
-pub const D3DTS_TEXTURE6: ::UINT = 22;
-pub const D3DTS_TEXTURE7: ::UINT = 23;
-pub const D3DTS_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DRENDERSTATETYPE = ::UINT;
-pub const D3DRS_ZENABLE: ::UINT = 7;
-pub const D3DRS_FILLMODE: ::UINT = 8;
-pub const D3DRS_SHADEMODE: ::UINT = 9;
-pub const D3DRS_ZWRITEENABLE: ::UINT = 14;
-pub const D3DRS_ALPHATESTENABLE: ::UINT = 15;
-pub const D3DRS_LASTPIXEL: ::UINT = 16;
-pub const D3DRS_SRCBLEND: ::UINT = 19;
-pub const D3DRS_DESTBLEND: ::UINT = 20;
-pub const D3DRS_CULLMODE: ::UINT = 22;
-pub const D3DRS_ZFUNC: ::UINT = 23;
-pub const D3DRS_ALPHAREF: ::UINT = 24;
-pub const D3DRS_ALPHAFUNC: ::UINT = 25;
-pub const D3DRS_DITHERENABLE: ::UINT = 26;
-pub const D3DRS_ALPHABLENDENABLE: ::UINT = 27;
-pub const D3DRS_FOGENABLE: ::UINT = 28;
-pub const D3DRS_SPECULARENABLE: ::UINT = 29;
-pub const D3DRS_FOGCOLOR: ::UINT = 34;
-pub const D3DRS_FOGTABLEMODE: ::UINT = 35;
-pub const D3DRS_FOGSTART: ::UINT = 36;
-pub const D3DRS_FOGEND: ::UINT = 37;
-pub const D3DRS_FOGDENSITY: ::UINT = 38;
-pub const D3DRS_RANGEFOGENABLE: ::UINT = 48;
-pub const D3DRS_STENCILENABLE: ::UINT = 52;
-pub const D3DRS_STENCILFAIL: ::UINT = 53;
-pub const D3DRS_STENCILZFAIL: ::UINT = 54;
-pub const D3DRS_STENCILPASS: ::UINT = 55;
-pub const D3DRS_STENCILFUNC: ::UINT = 56;
-pub const D3DRS_STENCILREF: ::UINT = 57;
-pub const D3DRS_STENCILMASK: ::UINT = 58;
-pub const D3DRS_STENCILWRITEMASK: ::UINT = 59;
-pub const D3DRS_TEXTUREFACTOR: ::UINT = 60;
-pub const D3DRS_WRAP0: ::UINT = 128;
-pub const D3DRS_WRAP1: ::UINT = 129;
-pub const D3DRS_WRAP2: ::UINT = 130;
-pub const D3DRS_WRAP3: ::UINT = 131;
-pub const D3DRS_WRAP4: ::UINT = 132;
-pub const D3DRS_WRAP5: ::UINT = 133;
-pub const D3DRS_WRAP6: ::UINT = 134;
-pub const D3DRS_WRAP7: ::UINT = 135;
-pub const D3DRS_CLIPPING: ::UINT = 136;
-pub const D3DRS_LIGHTING: ::UINT = 137;
-pub const D3DRS_AMBIENT: ::UINT = 139;
-pub const D3DRS_FOGVERTEXMODE: ::UINT = 140;
-pub const D3DRS_COLORVERTEX: ::UINT = 141;
-pub const D3DRS_LOCALVIEWER: ::UINT = 142;
-pub const D3DRS_NORMALIZENORMALS: ::UINT = 143;
-pub const D3DRS_DIFFUSEMATERIALSOURCE: ::UINT = 145;
-pub const D3DRS_SPECULARMATERIALSOURCE: ::UINT = 146;
-pub const D3DRS_AMBIENTMATERIALSOURCE: ::UINT = 147;
-pub const D3DRS_EMISSIVEMATERIALSOURCE: ::UINT = 148;
-pub const D3DRS_VERTEXBLEND: ::UINT = 151;
-pub const D3DRS_CLIPPLANEENABLE: ::UINT = 152;
-pub const D3DRS_POINTSIZE: ::UINT = 154;
-pub const D3DRS_POINTSIZE_MIN: ::UINT = 155;
-pub const D3DRS_POINTSPRITEENABLE: ::UINT = 156;
-pub const D3DRS_POINTSCALEENABLE: ::UINT = 157;
-pub const D3DRS_POINTSCALE_A: ::UINT = 158;
-pub const D3DRS_POINTSCALE_B: ::UINT = 159;
-pub const D3DRS_POINTSCALE_C: ::UINT = 160;
-pub const D3DRS_MULTISAMPLEANTIALIAS: ::UINT = 161;
-pub const D3DRS_MULTISAMPLEMASK: ::UINT = 162;
-pub const D3DRS_PATCHEDGESTYLE: ::UINT = 163;
-pub const D3DRS_DEBUGMONITORTOKEN: ::UINT = 165;
-pub const D3DRS_POINTSIZE_MAX: ::UINT = 166;
-pub const D3DRS_INDEXEDVERTEXBLENDENABLE: ::UINT = 167;
-pub const D3DRS_COLORWRITEENABLE: ::UINT = 168;
-pub const D3DRS_TWEENFACTOR: ::UINT = 170;
-pub const D3DRS_BLENDOP: ::UINT = 171;
-pub const D3DRS_POSITIONDEGREE: ::UINT = 172;
-pub const D3DRS_NORMALDEGREE: ::UINT = 173;
-pub const D3DRS_SCISSORTESTENABLE: ::UINT = 174;
-pub const D3DRS_SLOPESCALEDEPTHBIAS: ::UINT = 175;
-pub const D3DRS_ANTIALIASEDLINEENABLE: ::UINT = 176;
-pub const D3DRS_MINTESSELLATIONLEVEL: ::UINT = 178;
-pub const D3DRS_MAXTESSELLATIONLEVEL: ::UINT = 179;
-pub const D3DRS_ADAPTIVETESS_X: ::UINT = 180;
-pub const D3DRS_ADAPTIVETESS_Y: ::UINT = 181;
-pub const D3DRS_ADAPTIVETESS_Z: ::UINT = 182;
-pub const D3DRS_ADAPTIVETESS_W: ::UINT = 183;
-pub const D3DRS_ENABLEADAPTIVETESSELLATION: ::UINT = 184;
-pub const D3DRS_TWOSIDEDSTENCILMODE: ::UINT = 185;
-pub const D3DRS_CCW_STENCILFAIL: ::UINT = 186;
-pub const D3DRS_CCW_STENCILZFAIL: ::UINT = 187;
-pub const D3DRS_CCW_STENCILPASS: ::UINT = 188;
-pub const D3DRS_CCW_STENCILFUNC: ::UINT = 189;
-pub const D3DRS_COLORWRITEENABLE1: ::UINT = 190;
-pub const D3DRS_COLORWRITEENABLE2: ::UINT = 191;
-pub const D3DRS_COLORWRITEENABLE3: ::UINT = 192;
-pub const D3DRS_BLENDFACTOR: ::UINT = 193;
-pub const D3DRS_SRGBWRITEENABLE: ::UINT = 194;
-pub const D3DRS_DEPTHBIAS: ::UINT = 195;
-pub const D3DRS_WRAP8: ::UINT = 198;
-pub const D3DRS_WRAP9: ::UINT = 199;
-pub const D3DRS_WRAP10: ::UINT = 200;
-pub const D3DRS_WRAP11: ::UINT = 201;
-pub const D3DRS_WRAP12: ::UINT = 202;
-pub const D3DRS_WRAP13: ::UINT = 203;
-pub const D3DRS_WRAP14: ::UINT = 204;
-pub const D3DRS_WRAP15: ::UINT = 205;
-pub const D3DRS_SEPARATEALPHABLENDENABLE: ::UINT = 206;
-pub const D3DRS_SRCBLENDALPHA: ::UINT = 207;
-pub const D3DRS_DESTBLENDALPHA: ::UINT = 208;
-pub const D3DRS_BLENDOPALPHA: ::UINT = 209;
-pub const D3DRS_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DMATERIALCOLORSOURCE = ::UINT;
-pub const D3DMCS_MATERIAL: ::UINT = 0;
-pub const D3DMCS_COLOR1: ::UINT = 1;
-pub const D3DMCS_COLOR2: ::UINT = 2;
-pub const D3DMCS_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DTEXTURESTAGESTATETYPE = ::UINT;
-pub const D3DTSS_COLOROP: ::UINT = 1;
-pub const D3DTSS_COLORARG1: ::UINT = 2;
-pub const D3DTSS_COLORARG2: ::UINT = 3;
-pub const D3DTSS_ALPHAOP: ::UINT = 4;
-pub const D3DTSS_ALPHAARG1: ::UINT = 5;
-pub const D3DTSS_ALPHAARG2: ::UINT = 6;
-pub const D3DTSS_BUMPENVMAT00: ::UINT = 7;
-pub const D3DTSS_BUMPENVMAT01: ::UINT = 8;
-pub const D3DTSS_BUMPENVMAT10: ::UINT = 9;
-pub const D3DTSS_BUMPENVMAT11: ::UINT = 10;
-pub const D3DTSS_TEXCOORDINDEX: ::UINT = 11;
-pub const D3DTSS_BUMPENVLSCALE: ::UINT = 22;
-pub const D3DTSS_BUMPENVLOFFSET: ::UINT = 23;
-pub const D3DTSS_TEXTURETRANSFORMFLAGS: ::UINT = 24;
-pub const D3DTSS_COLORARG0: ::UINT = 26;
-pub const D3DTSS_ALPHAARG0: ::UINT = 27;
-pub const D3DTSS_RESULTARG: ::UINT = 28;
-pub const D3DTSS_CONSTANT: ::UINT = 32;
-pub const D3DTSS_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DSAMPLERSTATETYPE = ::UINT;
-pub const D3DSAMP_ADDRESSU: ::UINT = 1;
-pub const D3DSAMP_ADDRESSV: ::UINT = 2;
-pub const D3DSAMP_ADDRESSW: ::UINT = 3;
-pub const D3DSAMP_BORDERCOLOR: ::UINT = 4;
-pub const D3DSAMP_MAGFILTER: ::UINT = 5;
-pub const D3DSAMP_MINFILTER: ::UINT = 6;
-pub const D3DSAMP_MIPFILTER: ::UINT = 7;
-pub const D3DSAMP_MIPMAPLODBIAS: ::UINT = 8;
-pub const D3DSAMP_MAXMIPLEVEL: ::UINT = 9;
-pub const D3DSAMP_MAXANISOTROPY: ::UINT = 10;
-pub const D3DSAMP_SRGBTEXTURE: ::UINT = 11;
-pub const D3DSAMP_ELEMENTINDEX: ::UINT = 12;
-pub const D3DSAMP_DMAPOFFSET: ::UINT = 13;
-pub const D3DSAMP_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DTEXTUREOP = ::UINT;
-pub const D3DTOP_DISABLE: ::UINT = 1;
-pub const D3DTOP_SELECTARG1: ::UINT = 2;
-pub const D3DTOP_SELECTARG2: ::UINT = 3;
-pub const D3DTOP_MODULATE: ::UINT = 4;
-pub const D3DTOP_MODULATE2X: ::UINT = 5;
-pub const D3DTOP_MODULATE4X: ::UINT = 6;
-pub const D3DTOP_ADD: ::UINT = 7;
-pub const D3DTOP_ADDSIGNED: ::UINT = 8;
-pub const D3DTOP_ADDSIGNED2X: ::UINT = 9;
-pub const D3DTOP_SUBTRACT: ::UINT = 10;
-pub const D3DTOP_ADDSMOOTH: ::UINT = 11;
-pub const D3DTOP_BLENDDIFFUSEALPHA: ::UINT = 12;
-pub const D3DTOP_BLENDTEXTUREALPHA: ::UINT = 13;
-pub const D3DTOP_BLENDFACTORALPHA: ::UINT = 14;
-pub const D3DTOP_BLENDTEXTUREALPHAPM: ::UINT = 15;
-pub const D3DTOP_BLENDCURRENTALPHA: ::UINT = 16;
-pub const D3DTOP_PREMODULATE: ::UINT = 17;
-pub const D3DTOP_MODULATEALPHA_ADDCOLOR: ::UINT = 18;
-pub const D3DTOP_MODULATECOLOR_ADDALPHA: ::UINT = 19;
-pub const D3DTOP_MODULATEINVALPHA_ADDCOLOR: ::UINT = 20;
-pub const D3DTOP_MODULATEINVCOLOR_ADDALPHA: ::UINT = 21;
-pub const D3DTOP_BUMPENVMAP: ::UINT = 22;
-pub const D3DTOP_BUMPENVMAPLUMINANCE: ::UINT = 23;
-pub const D3DTOP_DOTPRODUCT3: ::UINT = 24;
-pub const D3DTOP_MULTIPLYADD: ::UINT = 25;
-pub const D3DTOP_LERP: ::UINT = 26;
-pub const D3DTOP_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DTEXTUREFILTERTYPE = ::UINT;
-pub const D3DTEXF_NONE: ::UINT = 0;
-pub const D3DTEXF_POINT: ::UINT = 1;
-pub const D3DTEXF_LINEAR: ::UINT = 2;
-pub const D3DTEXF_ANISOTROPIC: ::UINT = 3;
-pub const D3DTEXF_PYRAMIDALQUAD: ::UINT = 6;
-pub const D3DTEXF_GAUSSIANQUAD: ::UINT = 7;
-pub const D3DTEXF_CONVOLUTIONMONO: ::UINT = 8;
-pub const D3DTEXF_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DDECLUSAGE = ::UINT;
-pub const D3DDECLUSAGE_POSITION: ::UINT = 0;
-pub const D3DDECLUSAGE_BLENDWEIGHT: ::UINT = 1;
-pub const D3DDECLUSAGE_BLENDINDICES: ::UINT = 2;
-pub const D3DDECLUSAGE_NORMAL: ::UINT = 3;
-pub const D3DDECLUSAGE_PSIZE: ::UINT = 4;
-pub const D3DDECLUSAGE_TEXCOORD: ::UINT = 5;
-pub const D3DDECLUSAGE_TANGENT: ::UINT = 6;
-pub const D3DDECLUSAGE_BINORMAL: ::UINT = 7;
-pub const D3DDECLUSAGE_TESSFACTOR: ::UINT = 8;
-pub const D3DDECLUSAGE_POSITIONT: ::UINT = 9;
-pub const D3DDECLUSAGE_COLOR: ::UINT = 10;
-pub const D3DDECLUSAGE_FOG: ::UINT = 11;
-pub const D3DDECLUSAGE_DEPTH: ::UINT = 12;
-pub const D3DDECLUSAGE_SAMPLE: ::UINT = 13;
-
-pub type D3DDECLMETHOD = ::UINT;
-pub const D3DDECLMETHOD_DEFAULT: ::UINT = 0;
-pub const D3DDECLMETHOD_PARTIALU: ::UINT = 1;
-pub const D3DDECLMETHOD_PARTIALV: ::UINT = 2;
-pub const D3DDECLMETHOD_CROSSUV: ::UINT = 3;
-pub const D3DDECLMETHOD_UV: ::UINT = 4;
-pub const D3DDECLMETHOD_LOOKUP: ::UINT = 5;
-pub const D3DDECLMETHOD_LOOKUPPRESAMPLED: ::UINT = 6;
-
-pub type D3DDECLTYPE = ::UINT;
-pub const D3DDECLTYPE_FLOAT1: ::UINT = 0;
-pub const D3DDECLTYPE_FLOAT2: ::UINT = 1;
-pub const D3DDECLTYPE_FLOAT3: ::UINT = 2;
-pub const D3DDECLTYPE_FLOAT4: ::UINT = 3;
-pub const D3DDECLTYPE_D3DCOLOR: ::UINT = 4;
-pub const D3DDECLTYPE_UBYTE4: ::UINT = 5;
-pub const D3DDECLTYPE_SHORT2: ::UINT = 6;
-pub const D3DDECLTYPE_SHORT4: ::UINT = 7;
-pub const D3DDECLTYPE_UBYTE4N: ::UINT = 8;
-pub const D3DDECLTYPE_SHORT2N: ::UINT = 9;
-pub const D3DDECLTYPE_SHORT4N: ::UINT = 10;
-pub const D3DDECLTYPE_USHORT2N: ::UINT = 11;
-pub const D3DDECLTYPE_USHORT4N: ::UINT = 12;
-pub const D3DDECLTYPE_UDEC3: ::UINT = 13;
-pub const D3DDECLTYPE_DEC3N: ::UINT = 14;
-pub const D3DDECLTYPE_FLOAT16_2: ::UINT = 15;
-pub const D3DDECLTYPE_FLOAT16_4: ::UINT = 16;
-pub const D3DDECLTYPE_UNUSED: ::UINT = 17;
-
-#[repr(C)]
-#[derive(Copy)]
+pub const D3DCLEAR_TARGET: ::DWORD = 0;
+pub const D3DCLEAR_ZBUFFER: ::DWORD = 0;
+pub const D3DCLEAR_STENCIL: ::DWORD = 0;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSHADEMODE {
+    D3DSHADE_FLAT = 1,
+    D3DSHADE_GOURAUD = 2,
+    D3DSHADE_PHONG = 3,
+    D3DSHADE_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DFILLMODE {
+    D3DFILL_POINT = 1,
+    D3DFILL_WIREFRAME = 2,
+    D3DFILL_SOLID = 3,
+    D3DFILL_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DBLEND {
+    D3DBLEND_ZERO = 1,
+    D3DBLEND_ONE = 2,
+    D3DBLEND_SRCCOLOR = 3,
+    D3DBLEND_INVSRCCOLOR = 4,
+    D3DBLEND_SRCALPHA = 5,
+    D3DBLEND_INVSRCALPHA = 6,
+    D3DBLEND_DESTALPHA = 7,
+    D3DBLEND_INVDESTALPHA = 8,
+    D3DBLEND_DESTCOLOR = 9,
+    D3DBLEND_INVDESTCOLOR = 10,
+    D3DBLEND_SRCALPHASAT = 11,
+    D3DBLEND_BOTHSRCALPHA = 12,
+    D3DBLEND_BOTHINVSRCALPHA = 13,
+    D3DBLEND_BLENDFACTOR = 14,
+    D3DBLEND_INVBLENDFACTOR = 15,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DBLENDOP {
+    D3DBLENDOP_ADD = 1,
+    D3DBLENDOP_SUBTRACT = 2,
+    D3DBLENDOP_REVSUBTRACT = 3,
+    D3DBLENDOP_MIN = 4,
+    D3DBLENDOP_MAX = 5,
+    D3DBLENDOP_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DTEXTUREADDRESS {
+    D3DTADDRESS_WRAP = 1,
+    D3DTADDRESS_MIRROR = 2,
+    D3DTADDRESS_CLAMP = 3,
+    D3DTADDRESS_BORDER = 4,
+    D3DTADDRESS_MIRRORONCE = 5,
+    D3DTADDRESS_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DCULL {
+    D3DCULL_NONE = 1,
+    D3DCULL_CW = 2,
+    D3DCULL_CCW = 3,
+    D3DCULL_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DCMPFUNC {
+    D3DCMP_NEVER = 1,
+    D3DCMP_LESS = 2,
+    D3DCMP_EQUAL = 3,
+    D3DCMP_LESSEQUAL = 4,
+    D3DCMP_GREATER = 5,
+    D3DCMP_NOTEQUAL = 6,
+    D3DCMP_GREATEREQUAL = 7,
+    D3DCMP_ALWAYS = 8,
+    D3DCMP_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSTENCILOP {
+    D3DSTENCILOP_KEEP = 1,
+    D3DSTENCILOP_ZERO = 2,
+    D3DSTENCILOP_REPLACE = 3,
+    D3DSTENCILOP_INCRSAT = 4,
+    D3DSTENCILOP_DECRSAT = 5,
+    D3DSTENCILOP_INVERT = 6,
+    D3DSTENCILOP_INCR = 7,
+    D3DSTENCILOP_DECR = 8,
+    D3DSTENCILOP_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DFOGMODE {
+    D3DFOG_NONE = 0,
+    D3DFOG_EXP = 1,
+    D3DFOG_EXP2 = 2,
+    D3DFOG_LINEAR = 3,
+    D3DFOG_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DZBUFFERTYPE {
+    D3DZB_FALSE = 0,
+    D3DZB_TRUE = 1,
+    D3DZB_USEW = 2,
+    D3DZB_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DPRIMITIVETYPE {
+    D3DPT_POINTLIST = 1,
+    D3DPT_LINELIST = 2,
+    D3DPT_LINESTRIP = 3,
+    D3DPT_TRIANGLELIST = 4,
+    D3DPT_TRIANGLESTRIP = 5,
+    D3DPT_TRIANGLEFAN = 6,
+    D3DPT_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DTRANSFORMSTATETYPE {
+    D3DTS_VIEW = 2,
+    D3DTS_PROJECTION = 3,
+    D3DTS_TEXTURE0 = 16,
+    D3DTS_TEXTURE1 = 17,
+    D3DTS_TEXTURE2 = 18,
+    D3DTS_TEXTURE3 = 19,
+    D3DTS_TEXTURE4 = 20,
+    D3DTS_TEXTURE5 = 21,
+    D3DTS_TEXTURE6 = 22,
+    D3DTS_TEXTURE7 = 23,
+    D3DTS_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DRENDERSTATETYPE {
+    D3DRS_ZENABLE = 7,
+    D3DRS_FILLMODE = 8,
+    D3DRS_SHADEMODE = 9,
+    D3DRS_ZWRITEENABLE = 14,
+    D3DRS_ALPHATESTENABLE = 15,
+    D3DRS_LASTPIXEL = 16,
+    D3DRS_SRCBLEND = 19,
+    D3DRS_DESTBLEND = 20,
+    D3DRS_CULLMODE = 22,
+    D3DRS_ZFUNC = 23,
+    D3DRS_ALPHAREF = 24,
+    D3DRS_ALPHAFUNC = 25,
+    D3DRS_DITHERENABLE = 26,
+    D3DRS_ALPHABLENDENABLE = 27,
+    D3DRS_FOGENABLE = 28,
+    D3DRS_SPECULARENABLE = 29,
+    D3DRS_FOGCOLOR = 34,
+    D3DRS_FOGTABLEMODE = 35,
+    D3DRS_FOGSTART = 36,
+    D3DRS_FOGEND = 37,
+    D3DRS_FOGDENSITY = 38,
+    D3DRS_RANGEFOGENABLE = 48,
+    D3DRS_STENCILENABLE = 52,
+    D3DRS_STENCILFAIL = 53,
+    D3DRS_STENCILZFAIL = 54,
+    D3DRS_STENCILPASS = 55,
+    D3DRS_STENCILFUNC = 56,
+    D3DRS_STENCILREF = 57,
+    D3DRS_STENCILMASK = 58,
+    D3DRS_STENCILWRITEMASK = 59,
+    D3DRS_TEXTUREFACTOR = 60,
+    D3DRS_WRAP0 = 128,
+    D3DRS_WRAP1 = 129,
+    D3DRS_WRAP2 = 130,
+    D3DRS_WRAP3 = 131,
+    D3DRS_WRAP4 = 132,
+    D3DRS_WRAP5 = 133,
+    D3DRS_WRAP6 = 134,
+    D3DRS_WRAP7 = 135,
+    D3DRS_CLIPPING = 136,
+    D3DRS_LIGHTING = 137,
+    D3DRS_AMBIENT = 139,
+    D3DRS_FOGVERTEXMODE = 140,
+    D3DRS_COLORVERTEX = 141,
+    D3DRS_LOCALVIEWER = 142,
+    D3DRS_NORMALIZENORMALS = 143,
+    D3DRS_DIFFUSEMATERIALSOURCE = 145,
+    D3DRS_SPECULARMATERIALSOURCE = 146,
+    D3DRS_AMBIENTMATERIALSOURCE = 147,
+    D3DRS_EMISSIVEMATERIALSOURCE = 148,
+    D3DRS_VERTEXBLEND = 151,
+    D3DRS_CLIPPLANEENABLE = 152,
+    D3DRS_POINTSIZE = 154,
+    D3DRS_POINTSIZE_MIN = 155,
+    D3DRS_POINTSPRITEENABLE = 156,
+    D3DRS_POINTSCALEENABLE = 157,
+    D3DRS_POINTSCALE_A = 158,
+    D3DRS_POINTSCALE_B = 159,
+    D3DRS_POINTSCALE_C = 160,
+    D3DRS_MULTISAMPLEANTIALIAS = 161,
+    D3DRS_MULTISAMPLEMASK = 162,
+    D3DRS_PATCHEDGESTYLE = 163,
+    D3DRS_DEBUGMONITORTOKEN = 165,
+    D3DRS_POINTSIZE_MAX = 166,
+    D3DRS_INDEXEDVERTEXBLENDENABLE = 167,
+    D3DRS_COLORWRITEENABLE = 168,
+    D3DRS_TWEENFACTOR = 170,
+    D3DRS_BLENDOP = 171,
+    D3DRS_POSITIONDEGREE = 172,
+    D3DRS_NORMALDEGREE = 173,
+    D3DRS_SCISSORTESTENABLE = 174,
+    D3DRS_SLOPESCALEDEPTHBIAS = 175,
+    D3DRS_ANTIALIASEDLINEENABLE = 176,
+    D3DRS_MINTESSELLATIONLEVEL = 178,
+    D3DRS_MAXTESSELLATIONLEVEL = 179,
+    D3DRS_ADAPTIVETESS_X = 180,
+    D3DRS_ADAPTIVETESS_Y = 181,
+    D3DRS_ADAPTIVETESS_Z = 182,
+    D3DRS_ADAPTIVETESS_W = 183,
+    D3DRS_ENABLEADAPTIVETESSELLATION = 184,
+    D3DRS_TWOSIDEDSTENCILMODE = 185,
+    D3DRS_CCW_STENCILFAIL = 186,
+    D3DRS_CCW_STENCILZFAIL = 187,
+    D3DRS_CCW_STENCILPASS = 188,
+    D3DRS_CCW_STENCILFUNC = 189,
+    D3DRS_COLORWRITEENABLE1 = 190,
+    D3DRS_COLORWRITEENABLE2 = 191,
+    D3DRS_COLORWRITEENABLE3 = 192,
+    D3DRS_BLENDFACTOR = 193,
+    D3DRS_SRGBWRITEENABLE = 194,
+    D3DRS_DEPTHBIAS = 195,
+    D3DRS_WRAP8 = 198,
+    D3DRS_WRAP9 = 199,
+    D3DRS_WRAP10 = 200,
+    D3DRS_WRAP11 = 201,
+    D3DRS_WRAP12 = 202,
+    D3DRS_WRAP13 = 203,
+    D3DRS_WRAP14 = 204,
+    D3DRS_WRAP15 = 205,
+    D3DRS_SEPARATEALPHABLENDENABLE = 206,
+    D3DRS_SRCBLENDALPHA = 207,
+    D3DRS_DESTBLENDALPHA = 208,
+    D3DRS_BLENDOPALPHA = 209,
+    D3DRS_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3D_MAX_SIMULTANEOUS_RENDERTARGETS: ::DWORD = 4;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DMATERIALCOLORSOURCE {
+    D3DMCS_MATERIAL = 0,
+    D3DMCS_COLOR1 = 1,
+    D3DMCS_COLOR2 = 2,
+    D3DMCS_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DRENDERSTATE_WRAPBIAS: ::DWORD = 128;
+pub const D3DWRAP_U: ::DWORD = 0x00000001;
+pub const D3DWRAP_V: ::DWORD = 0x00000002;
+pub const D3DWRAP_W: ::DWORD = 0x00000004;
+pub const D3DWRAPCOORD_0: ::DWORD = 0x00000001;
+pub const D3DWRAPCOORD_1: ::DWORD = 0x00000002;
+pub const D3DWRAPCOORD_2: ::DWORD = 0x00000004;
+pub const D3DWRAPCOORD_3: ::DWORD = 0x00000008;
+pub const D3DCOLORWRITEENABLE_RED: ::DWORD = 1 << 0;
+pub const D3DCOLORWRITEENABLE_GREEN: ::DWORD = 1 << 1;
+pub const D3DCOLORWRITEENABLE_BLUE: ::DWORD = 1 << 2;
+pub const D3DCOLORWRITEENABLE_ALPHA: ::DWORD = 1 << 3;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DTEXTURESTAGESTATETYPE {
+    D3DTSS_COLOROP = 1,
+    D3DTSS_COLORARG1 = 2,
+    D3DTSS_COLORARG2 = 3,
+    D3DTSS_ALPHAOP = 4,
+    D3DTSS_ALPHAARG1 = 5,
+    D3DTSS_ALPHAARG2 = 6,
+    D3DTSS_BUMPENVMAT00 = 7,
+    D3DTSS_BUMPENVMAT01 = 8,
+    D3DTSS_BUMPENVMAT10 = 9,
+    D3DTSS_BUMPENVMAT11 = 10,
+    D3DTSS_TEXCOORDINDEX = 11,
+    D3DTSS_BUMPENVLSCALE = 22,
+    D3DTSS_BUMPENVLOFFSET = 23,
+    D3DTSS_TEXTURETRANSFORMFLAGS = 24,
+    D3DTSS_COLORARG0 = 26,
+    D3DTSS_ALPHAARG0 = 27,
+    D3DTSS_RESULTARG = 28,
+    D3DTSS_CONSTANT = 32,
+    D3DTSS_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSAMPLERSTATETYPE {
+    D3DSAMP_ADDRESSU = 1,
+    D3DSAMP_ADDRESSV = 2,
+    D3DSAMP_ADDRESSW = 3,
+    D3DSAMP_BORDERCOLOR = 4,
+    D3DSAMP_MAGFILTER = 5,
+    D3DSAMP_MINFILTER = 6,
+    D3DSAMP_MIPFILTER = 7,
+    D3DSAMP_MIPMAPLODBIAS = 8,
+    D3DSAMP_MAXMIPLEVEL = 9,
+    D3DSAMP_MAXANISOTROPY = 10,
+    D3DSAMP_SRGBTEXTURE = 11,
+    D3DSAMP_ELEMENTINDEX = 12,
+    D3DSAMP_DMAPOFFSET = 13,
+    D3DSAMP_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DDMAPSAMPLER: ::DWORD = 256;
+pub const D3DVERTEXTEXTURESAMPLER0: ::DWORD = D3DDMAPSAMPLER + 1;
+pub const D3DVERTEXTEXTURESAMPLER1: ::DWORD = D3DDMAPSAMPLER + 2;
+pub const D3DVERTEXTEXTURESAMPLER2: ::DWORD = D3DDMAPSAMPLER + 3;
+pub const D3DVERTEXTEXTURESAMPLER3: ::DWORD = D3DDMAPSAMPLER + 4;
+pub const D3DTSS_TCI_PASSTHRU: ::DWORD = 0x00000000;
+pub const D3DTSS_TCI_CAMERASPACENORMAL: ::DWORD = 0x00010000;
+pub const D3DTSS_TCI_CAMERASPACEPOSITION: ::DWORD = 0x00020000;
+pub const D3DTSS_TCI_CAMERASPACEREFLECTIONVECTOR: ::DWORD = 0x00030000;
+pub const D3DTSS_TCI_SPHEREMAP: ::DWORD = 0x00040000;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DTEXTUREOP {
+    D3DTOP_DISABLE = 1,
+    D3DTOP_SELECTARG1 = 2,
+    D3DTOP_SELECTARG2 = 3,
+    D3DTOP_MODULATE = 4,
+    D3DTOP_MODULATE2X = 5,
+    D3DTOP_MODULATE4X = 6,
+    D3DTOP_ADD = 7,
+    D3DTOP_ADDSIGNED = 8,
+    D3DTOP_ADDSIGNED2X = 9,
+    D3DTOP_SUBTRACT = 10,
+    D3DTOP_ADDSMOOTH = 11,
+    D3DTOP_BLENDDIFFUSEALPHA = 12,
+    D3DTOP_BLENDTEXTUREALPHA = 13,
+    D3DTOP_BLENDFACTORALPHA = 14,
+    D3DTOP_BLENDTEXTUREALPHAPM = 15,
+    D3DTOP_BLENDCURRENTALPHA = 16,
+    D3DTOP_PREMODULATE = 17,
+    D3DTOP_MODULATEALPHA_ADDCOLOR = 18,
+    D3DTOP_MODULATECOLOR_ADDALPHA = 19,
+    D3DTOP_MODULATEINVALPHA_ADDCOLOR = 20,
+    D3DTOP_MODULATEINVCOLOR_ADDALPHA = 21,
+    D3DTOP_BUMPENVMAP = 22,
+    D3DTOP_BUMPENVMAPLUMINANCE = 23,
+    D3DTOP_DOTPRODUCT3 = 24,
+    D3DTOP_MULTIPLYADD = 25,
+    D3DTOP_LERP = 26,
+    D3DTOP_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DTA_SELECTMASK: ::DWORD = 0x0000000f;
+pub const D3DTA_DIFFUSE: ::DWORD = 0x00000000;
+pub const D3DTA_CURRENT: ::DWORD = 0x00000001;
+pub const D3DTA_TEXTURE: ::DWORD = 0x00000002;
+pub const D3DTA_TFACTOR: ::DWORD = 0x00000003;
+pub const D3DTA_SPECULAR: ::DWORD = 0x00000004;
+pub const D3DTA_TEMP: ::DWORD = 0x00000005;
+pub const D3DTA_CONSTANT: ::DWORD = 0x00000006;
+pub const D3DTA_COMPLEMENT: ::DWORD = 0x00000010;
+pub const D3DTA_ALPHAREPLICATE: ::DWORD = 0x00000020;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DTEXTUREFILTERTYPE {
+    D3DTEXF_NONE = 0,
+    D3DTEXF_POINT = 1,
+    D3DTEXF_LINEAR = 2,
+    D3DTEXF_ANISOTROPIC = 3,
+    D3DTEXF_PYRAMIDALQUAD = 6,
+    D3DTEXF_GAUSSIANQUAD = 7,
+    D3DTEXF_CONVOLUTIONMONO = 8,
+    D3DTEXF_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DPV_DONOTCOPYDATA: ::DWORD = 1 << 0;
+pub const D3DFVF_RESERVED0: ::DWORD = 0x001;
+pub const D3DFVF_POSITION_MASK: ::DWORD = 0x400E;
+pub const D3DFVF_XYZ: ::DWORD = 0x002;
+pub const D3DFVF_XYZRHW: ::DWORD = 0x004;
+pub const D3DFVF_XYZB1: ::DWORD = 0x006;
+pub const D3DFVF_XYZB2: ::DWORD = 0x008;
+pub const D3DFVF_XYZB3: ::DWORD = 0x00a;
+pub const D3DFVF_XYZB4: ::DWORD = 0x00c;
+pub const D3DFVF_XYZB5: ::DWORD = 0x00e;
+pub const D3DFVF_XYZW: ::DWORD = 0x4002;
+pub const D3DFVF_NORMAL: ::DWORD = 0x010;
+pub const D3DFVF_PSIZE: ::DWORD = 0x020;
+pub const D3DFVF_DIFFUSE: ::DWORD = 0x040;
+pub const D3DFVF_SPECULAR: ::DWORD = 0x080;
+pub const D3DFVF_TEXCOUNT_MASK: ::DWORD = 0xf00;
+pub const D3DFVF_TEXCOUNT_SHIFT: ::DWORD = 8;
+pub const D3DFVF_TEX0: ::DWORD = 0x000;
+pub const D3DFVF_TEX1: ::DWORD = 0x100;
+pub const D3DFVF_TEX2: ::DWORD = 0x200;
+pub const D3DFVF_TEX3: ::DWORD = 0x300;
+pub const D3DFVF_TEX4: ::DWORD = 0x400;
+pub const D3DFVF_TEX5: ::DWORD = 0x500;
+pub const D3DFVF_TEX6: ::DWORD = 0x600;
+pub const D3DFVF_TEX7: ::DWORD = 0x700;
+pub const D3DFVF_TEX8: ::DWORD = 0x800;
+pub const D3DFVF_LASTBETA_UBYTE4: ::DWORD = 0x1000;
+pub const D3DFVF_LASTBETA_D3DCOLOR: ::DWORD = 0x8000;
+pub const D3DFVF_RESERVED2: ::DWORD = 0x6000;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DDECLUSAGE {
+    D3DDECLUSAGE_POSITION = 0,
+    D3DDECLUSAGE_BLENDWEIGHT,
+    D3DDECLUSAGE_BLENDINDICES,
+    D3DDECLUSAGE_NORMAL,
+    D3DDECLUSAGE_PSIZE,
+    D3DDECLUSAGE_TEXCOORD,
+    D3DDECLUSAGE_TANGENT,
+    D3DDECLUSAGE_BINORMAL,
+    D3DDECLUSAGE_TESSFACTOR,
+    D3DDECLUSAGE_POSITIONT,
+    D3DDECLUSAGE_COLOR,
+    D3DDECLUSAGE_FOG,
+    D3DDECLUSAGE_DEPTH,
+    D3DDECLUSAGE_SAMPLE,
+}
+pub const MAXD3DDECLUSAGE: D3DDECLUSAGE = D3DDECLUSAGE::D3DDECLUSAGE_SAMPLE;
+pub const MAXD3DDECLUSAGEINDEX: ::DWORD = 15;
+pub const MAXD3DDECLLENGTH: ::DWORD = 64;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DDECLMETHOD {
+    D3DDECLMETHOD_DEFAULT = 0,
+    D3DDECLMETHOD_PARTIALU,
+    D3DDECLMETHOD_PARTIALV,
+    D3DDECLMETHOD_CROSSUV,
+    D3DDECLMETHOD_UV,
+    D3DDECLMETHOD_LOOKUP,
+    D3DDECLMETHOD_LOOKUPPRESAMPLED,
+}
+pub const MAXD3DDECLMETHOD: D3DDECLMETHOD = D3DDECLMETHOD::D3DDECLMETHOD_LOOKUPPRESAMPLED;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DDECLTYPE {
+    D3DDECLTYPE_FLOAT1 = 0,
+    D3DDECLTYPE_FLOAT2 = 1,
+    D3DDECLTYPE_FLOAT3 = 2,
+    D3DDECLTYPE_FLOAT4 = 3,
+    D3DDECLTYPE_D3DCOLOR = 4,
+    D3DDECLTYPE_UBYTE4 = 5,
+    D3DDECLTYPE_SHORT2 = 6,
+    D3DDECLTYPE_SHORT4 = 7,
+    D3DDECLTYPE_UBYTE4N = 8,
+    D3DDECLTYPE_SHORT2N = 9,
+    D3DDECLTYPE_SHORT4N = 10,
+    D3DDECLTYPE_USHORT2N = 11,
+    D3DDECLTYPE_USHORT4N = 12,
+    D3DDECLTYPE_UDEC3 = 13,
+    D3DDECLTYPE_DEC3N = 14,
+    D3DDECLTYPE_FLOAT16_2 = 15,
+    D3DDECLTYPE_FLOAT16_4 = 16,
+    D3DDECLTYPE_UNUSED = 17,
+}
+pub const MAXD3DDECLTYPE: D3DDECLTYPE = D3DDECLTYPE::D3DDECLTYPE_UNUSED;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DVERTEXELEMENT9 {
     pub Stream: ::WORD,
     pub Offset: ::WORD,
@@ -513,347 +534,469 @@ pub struct D3DVERTEXELEMENT9 {
     pub Usage: ::BYTE,
     pub UsageIndex: ::BYTE,
 }
-
 pub type LPD3DVERTEXELEMENT9 = *mut D3DVERTEXELEMENT9;
-pub type D3DSHADER_INSTRUCTION_OPCODE_TYPE = ::UINT;
-pub const D3DSIO_NOP: ::UINT = 0;
-pub const D3DSIO_MOV: ::UINT = 1;
-pub const D3DSIO_ADD: ::UINT = 2;
-pub const D3DSIO_SUB: ::UINT = 3;
-pub const D3DSIO_MAD: ::UINT = 4;
-pub const D3DSIO_MUL: ::UINT = 5;
-pub const D3DSIO_RCP: ::UINT = 6;
-pub const D3DSIO_RSQ: ::UINT = 7;
-pub const D3DSIO_DP3: ::UINT = 8;
-pub const D3DSIO_DP4: ::UINT = 9;
-pub const D3DSIO_MIN: ::UINT = 10;
-pub const D3DSIO_MAX: ::UINT = 11;
-pub const D3DSIO_SLT: ::UINT = 12;
-pub const D3DSIO_SGE: ::UINT = 13;
-pub const D3DSIO_EXP: ::UINT = 14;
-pub const D3DSIO_LOG: ::UINT = 15;
-pub const D3DSIO_LIT: ::UINT = 16;
-pub const D3DSIO_DST: ::UINT = 17;
-pub const D3DSIO_LRP: ::UINT = 18;
-pub const D3DSIO_FRC: ::UINT = 19;
-pub const D3DSIO_M4x4: ::UINT = 20;
-pub const D3DSIO_M4x3: ::UINT = 21;
-pub const D3DSIO_M3x4: ::UINT = 22;
-pub const D3DSIO_M3x3: ::UINT = 23;
-pub const D3DSIO_M3x2: ::UINT = 24;
-pub const D3DSIO_CALL: ::UINT = 25;
-pub const D3DSIO_CALLNZ: ::UINT = 26;
-pub const D3DSIO_LOOP: ::UINT = 27;
-pub const D3DSIO_RET: ::UINT = 28;
-pub const D3DSIO_ENDLOOP: ::UINT = 29;
-pub const D3DSIO_LABEL: ::UINT = 30;
-pub const D3DSIO_DCL: ::UINT = 31;
-pub const D3DSIO_POW: ::UINT = 32;
-pub const D3DSIO_CRS: ::UINT = 33;
-pub const D3DSIO_SGN: ::UINT = 34;
-pub const D3DSIO_ABS: ::UINT = 35;
-pub const D3DSIO_NRM: ::UINT = 36;
-pub const D3DSIO_SINCOS: ::UINT = 37;
-pub const D3DSIO_REP: ::UINT = 38;
-pub const D3DSIO_ENDREP: ::UINT = 39;
-pub const D3DSIO_IF: ::UINT = 40;
-pub const D3DSIO_IFC: ::UINT = 41;
-pub const D3DSIO_ELSE: ::UINT = 42;
-pub const D3DSIO_ENDIF: ::UINT = 43;
-pub const D3DSIO_BREAK: ::UINT = 44;
-pub const D3DSIO_BREAKC: ::UINT = 45;
-pub const D3DSIO_MOVA: ::UINT = 46;
-pub const D3DSIO_DEFB: ::UINT = 47;
-pub const D3DSIO_DEFI: ::UINT = 48;
-pub const D3DSIO_TEXCOORD: ::UINT = 64;
-pub const D3DSIO_TEXKILL: ::UINT = 65;
-pub const D3DSIO_TEX: ::UINT = 66;
-pub const D3DSIO_TEXBEM: ::UINT = 67;
-pub const D3DSIO_TEXBEML: ::UINT = 68;
-pub const D3DSIO_TEXREG2AR: ::UINT = 69;
-pub const D3DSIO_TEXREG2GB: ::UINT = 70;
-pub const D3DSIO_TEXM3x2PAD: ::UINT = 71;
-pub const D3DSIO_TEXM3x2TEX: ::UINT = 72;
-pub const D3DSIO_TEXM3x3PAD: ::UINT = 73;
-pub const D3DSIO_TEXM3x3TEX: ::UINT = 74;
-pub const D3DSIO_RESERVED0: ::UINT = 75;
-pub const D3DSIO_TEXM3x3SPEC: ::UINT = 76;
-pub const D3DSIO_TEXM3x3VSPEC: ::UINT = 77;
-pub const D3DSIO_EXPP: ::UINT = 78;
-pub const D3DSIO_LOGP: ::UINT = 79;
-pub const D3DSIO_CND: ::UINT = 80;
-pub const D3DSIO_DEF: ::UINT = 81;
-pub const D3DSIO_TEXREG2RGB: ::UINT = 82;
-pub const D3DSIO_TEXDP3TEX: ::UINT = 83;
-pub const D3DSIO_TEXM3x2DEPTH: ::UINT = 84;
-pub const D3DSIO_TEXDP3: ::UINT = 85;
-pub const D3DSIO_TEXM3x3: ::UINT = 86;
-pub const D3DSIO_TEXDEPTH: ::UINT = 87;
-pub const D3DSIO_CMP: ::UINT = 88;
-pub const D3DSIO_BEM: ::UINT = 89;
-pub const D3DSIO_DP2ADD: ::UINT = 90;
-pub const D3DSIO_DSX: ::UINT = 91;
-pub const D3DSIO_DSY: ::UINT = 92;
-pub const D3DSIO_TEXLDD: ::UINT = 93;
-pub const D3DSIO_SETP: ::UINT = 94;
-pub const D3DSIO_TEXLDL: ::UINT = 95;
-pub const D3DSIO_BREAKP: ::UINT = 96;
-pub const D3DSIO_PHASE: ::UINT = 65533;
-pub const D3DSIO_COMMENT: ::UINT = 65534;
-pub const D3DSIO_END: ::UINT = 65535;
-pub const D3DSIO_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DSHADER_COMPARISON = ::UINT;
-pub const D3DSPC_RESERVED0: ::UINT = 0;
-pub const D3DSPC_GT: ::UINT = 1;
-pub const D3DSPC_EQ: ::UINT = 2;
-pub const D3DSPC_GE: ::UINT = 3;
-pub const D3DSPC_LT: ::UINT = 4;
-pub const D3DSPC_NE: ::UINT = 5;
-pub const D3DSPC_LE: ::UINT = 6;
-pub const D3DSPC_RESERVED1: ::UINT = 7;
-
-pub type D3DSAMPLER_TEXTURE_TYPE = ::UINT;
-pub const D3DSTT_UNKNOWN: ::UINT = 0;
-pub const D3DSTT_2D: ::UINT = 268435456;
-pub const D3DSTT_CUBE: ::UINT = 402653184;
-pub const D3DSTT_VOLUME: ::UINT = 536870912;
-pub const D3DSTT_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DSHADER_PARAM_REGISTER_TYPE = ::UINT;
-pub const D3DSPR_TEMP: ::UINT = 0;
-pub const D3DSPR_INPUT: ::UINT = 1;
-pub const D3DSPR_CONST: ::UINT = 2;
-pub const D3DSPR_ADDR: ::UINT = 3;
-pub const D3DSPR_TEXTURE: ::UINT = 3;
-pub const D3DSPR_RASTOUT: ::UINT = 4;
-pub const D3DSPR_ATTROUT: ::UINT = 5;
-pub const D3DSPR_TEXCRDOUT: ::UINT = 6;
-pub const D3DSPR_OUTPUT: ::UINT = 6;
-pub const D3DSPR_CONSTINT: ::UINT = 7;
-pub const D3DSPR_COLOROUT: ::UINT = 8;
-pub const D3DSPR_DEPTHOUT: ::UINT = 9;
-pub const D3DSPR_SAMPLER: ::UINT = 10;
-pub const D3DSPR_CONST2: ::UINT = 11;
-pub const D3DSPR_CONST3: ::UINT = 12;
-pub const D3DSPR_CONST4: ::UINT = 13;
-pub const D3DSPR_CONSTBOOL: ::UINT = 14;
-pub const D3DSPR_LOOP: ::UINT = 15;
-pub const D3DSPR_TEMPFLOAT16: ::UINT = 16;
-pub const D3DSPR_MISCTYPE: ::UINT = 17;
-pub const D3DSPR_LABEL: ::UINT = 18;
-pub const D3DSPR_PREDICATE: ::UINT = 19;
-pub const D3DSPR_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DSHADER_MISCTYPE_OFFSETS = ::UINT;
-pub const D3DSMO_POSITION: ::UINT = 0;
-pub const D3DSMO_FACE: ::UINT = 1;
-
-pub type D3DVS_RASTOUT_OFFSETS = ::UINT;
-pub const D3DSRO_POSITION: ::UINT = 0;
-pub const D3DSRO_FOG: ::UINT = 1;
-pub const D3DSRO_POINT_SIZE: ::UINT = 2;
-pub const D3DSRO_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DVS_ADDRESSMODE_TYPE = ::UINT;
-pub const D3DVS_ADDRMODE_ABSOLUTE: ::UINT = 0;
-pub const D3DVS_ADDRMODE_RELATIVE: ::UINT = 8192;
-pub const D3DVS_ADDRMODE_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DSHADER_ADDRESSMODE_TYPE = ::UINT;
-pub const D3DSHADER_ADDRMODE_ABSOLUTE: ::UINT = 0;
-pub const D3DSHADER_ADDRMODE_RELATIVE: ::UINT = 8192;
-pub const D3DSHADER_ADDRMODE_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DSHADER_PARAM_SRCMOD_TYPE = ::UINT;
-pub const D3DSPSM_NONE: ::UINT = 0;
-pub const D3DSPSM_NEG: ::UINT = 16777216;
-pub const D3DSPSM_BIAS: ::UINT = 33554432;
-pub const D3DSPSM_BIASNEG: ::UINT = 50331648;
-pub const D3DSPSM_SIGN: ::UINT = 67108864;
-pub const D3DSPSM_SIGNNEG: ::UINT = 83886080;
-pub const D3DSPSM_COMP: ::UINT = 100663296;
-pub const D3DSPSM_X2: ::UINT = 117440512;
-pub const D3DSPSM_X2NEG: ::UINT = 134217728;
-pub const D3DSPSM_DZ: ::UINT = 150994944;
-pub const D3DSPSM_DW: ::UINT = 167772160;
-pub const D3DSPSM_ABS: ::UINT = 184549376;
-pub const D3DSPSM_ABSNEG: ::UINT = 201326592;
-pub const D3DSPSM_NOT: ::UINT = 218103808;
-pub const D3DSPSM_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DBASISTYPE = ::UINT;
-pub const D3DBASIS_BEZIER: ::UINT = 0;
-pub const D3DBASIS_BSPLINE: ::UINT = 1;
-pub const D3DBASIS_CATMULL_ROM: ::UINT = 2;
-pub const D3DBASIS_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DDEGREETYPE = ::UINT;
-pub const D3DDEGREE_LINEAR: ::UINT = 1;
-pub const D3DDEGREE_QUADRATIC: ::UINT = 2;
-pub const D3DDEGREE_CUBIC: ::UINT = 3;
-pub const D3DDEGREE_QUINTIC: ::UINT = 5;
-pub const D3DDEGREE_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DPATCHEDGESTYLE = ::UINT;
-pub const D3DPATCHEDGE_DISCRETE: ::UINT = 0;
-pub const D3DPATCHEDGE_CONTINUOUS: ::UINT = 1;
-pub const D3DPATCHEDGE_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DSTATEBLOCKTYPE = ::UINT;
-pub const D3DSBT_ALL: ::UINT = 1;
-pub const D3DSBT_PIXELSTATE: ::UINT = 2;
-pub const D3DSBT_VERTEXSTATE: ::UINT = 3;
-pub const D3DSBT_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DVERTEXBLENDFLAGS = ::UINT;
-pub const D3DVBF_DISABLE: ::UINT = 0;
-pub const D3DVBF_1WEIGHTS: ::UINT = 1;
-pub const D3DVBF_2WEIGHTS: ::UINT = 2;
-pub const D3DVBF_3WEIGHTS: ::UINT = 3;
-pub const D3DVBF_TWEENING: ::UINT = 255;
-pub const D3DVBF_0WEIGHTS: ::UINT = 256;
-pub const D3DVBF_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DTEXTURETRANSFORMFLAGS = ::UINT;
-pub const D3DTTFF_DISABLE: ::UINT = 0;
-pub const D3DTTFF_COUNT1: ::UINT = 1;
-pub const D3DTTFF_COUNT2: ::UINT = 2;
-pub const D3DTTFF_COUNT3: ::UINT = 3;
-pub const D3DTTFF_COUNT4: ::UINT = 4;
-pub const D3DTTFF_PROJECTED: ::UINT = 256;
-pub const D3DTTFF_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DDEVTYPE = ::UINT;
-pub const D3DDEVTYPE_HAL: ::UINT = 1;
-pub const D3DDEVTYPE_REF: ::UINT = 2;
-pub const D3DDEVTYPE_SW: ::UINT = 3;
-pub const D3DDEVTYPE_NULLREF: ::UINT = 4;
-pub const D3DDEVTYPE_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DMULTISAMPLE_TYPE = ::UINT;
-pub const D3DMULTISAMPLE_NONE: ::UINT = 0;
-pub const D3DMULTISAMPLE_NONMASKABLE: ::UINT = 1;
-pub const D3DMULTISAMPLE_2_SAMPLES: ::UINT = 2;
-pub const D3DMULTISAMPLE_3_SAMPLES: ::UINT = 3;
-pub const D3DMULTISAMPLE_4_SAMPLES: ::UINT = 4;
-pub const D3DMULTISAMPLE_5_SAMPLES: ::UINT = 5;
-pub const D3DMULTISAMPLE_6_SAMPLES: ::UINT = 6;
-pub const D3DMULTISAMPLE_7_SAMPLES: ::UINT = 7;
-pub const D3DMULTISAMPLE_8_SAMPLES: ::UINT = 8;
-pub const D3DMULTISAMPLE_9_SAMPLES: ::UINT = 9;
-pub const D3DMULTISAMPLE_10_SAMPLES: ::UINT = 10;
-pub const D3DMULTISAMPLE_11_SAMPLES: ::UINT = 11;
-pub const D3DMULTISAMPLE_12_SAMPLES: ::UINT = 12;
-pub const D3DMULTISAMPLE_13_SAMPLES: ::UINT = 13;
-pub const D3DMULTISAMPLE_14_SAMPLES: ::UINT = 14;
-pub const D3DMULTISAMPLE_15_SAMPLES: ::UINT = 15;
-pub const D3DMULTISAMPLE_16_SAMPLES: ::UINT = 16;
-pub const D3DMULTISAMPLE_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DFORMAT = ::UINT;
-pub const D3DFMT_UNKNOWN: ::UINT = 0;
-pub const D3DFMT_R8G8B8: ::UINT = 20;
-pub const D3DFMT_A8R8G8B8: ::UINT = 21;
-pub const D3DFMT_X8R8G8B8: ::UINT = 22;
-pub const D3DFMT_R5G6B5: ::UINT = 23;
-pub const D3DFMT_X1R5G5B5: ::UINT = 24;
-pub const D3DFMT_A1R5G5B5: ::UINT = 25;
-pub const D3DFMT_A4R4G4B4: ::UINT = 26;
-pub const D3DFMT_R3G3B2: ::UINT = 27;
-pub const D3DFMT_A8: ::UINT = 28;
-pub const D3DFMT_A8R3G3B2: ::UINT = 29;
-pub const D3DFMT_X4R4G4B4: ::UINT = 30;
-pub const D3DFMT_A2B10G10R10: ::UINT = 31;
-pub const D3DFMT_A8B8G8R8: ::UINT = 32;
-pub const D3DFMT_X8B8G8R8: ::UINT = 33;
-pub const D3DFMT_G16R16: ::UINT = 34;
-pub const D3DFMT_A2R10G10B10: ::UINT = 35;
-pub const D3DFMT_A16B16G16R16: ::UINT = 36;
-pub const D3DFMT_A8P8: ::UINT = 40;
-pub const D3DFMT_P8: ::UINT = 41;
-pub const D3DFMT_L8: ::UINT = 50;
-pub const D3DFMT_A8L8: ::UINT = 51;
-pub const D3DFMT_A4L4: ::UINT = 52;
-pub const D3DFMT_V8U8: ::UINT = 60;
-pub const D3DFMT_L6V5U5: ::UINT = 61;
-pub const D3DFMT_X8L8V8U8: ::UINT = 62;
-pub const D3DFMT_Q8W8V8U8: ::UINT = 63;
-pub const D3DFMT_V16U16: ::UINT = 64;
-pub const D3DFMT_A2W10V10U10: ::UINT = 67;
-pub const D3DFMT_UYVY: ::UINT = 1498831189;
-pub const D3DFMT_R8G8_B8G8: ::UINT = 1195525970;
-pub const D3DFMT_YUY2: ::UINT = 844715353;
-pub const D3DFMT_G8R8_G8B8: ::UINT = 1111970375;
-pub const D3DFMT_DXT1: ::UINT = 827611204;
-pub const D3DFMT_DXT2: ::UINT = 844388420;
-pub const D3DFMT_DXT3: ::UINT = 861165636;
-pub const D3DFMT_DXT4: ::UINT = 877942852;
-pub const D3DFMT_DXT5: ::UINT = 894720068;
-pub const D3DFMT_D16_LOCKABLE: ::UINT = 70;
-pub const D3DFMT_D32: ::UINT = 71;
-pub const D3DFMT_D15S1: ::UINT = 73;
-pub const D3DFMT_D24S8: ::UINT = 75;
-pub const D3DFMT_D24X8: ::UINT = 77;
-pub const D3DFMT_D24X4S4: ::UINT = 79;
-pub const D3DFMT_D16: ::UINT = 80;
-pub const D3DFMT_D32F_LOCKABLE: ::UINT = 82;
-pub const D3DFMT_D24FS8: ::UINT = 83;
-pub const D3DFMT_D32_LOCKABLE: ::UINT = 84;
-pub const D3DFMT_S8_LOCKABLE: ::UINT = 85;
-pub const D3DFMT_L16: ::UINT = 81;
-pub const D3DFMT_VERTEXDATA: ::UINT = 100;
-pub const D3DFMT_INDEX16: ::UINT = 101;
-pub const D3DFMT_INDEX32: ::UINT = 102;
-pub const D3DFMT_Q16W16V16U16: ::UINT = 110;
-pub const D3DFMT_MULTI2_ARGB8: ::UINT = 827606349;
-pub const D3DFMT_R16F: ::UINT = 111;
-pub const D3DFMT_G16R16F: ::UINT = 112;
-pub const D3DFMT_A16B16G16R16F: ::UINT = 113;
-pub const D3DFMT_R32F: ::UINT = 114;
-pub const D3DFMT_G32R32F: ::UINT = 115;
-pub const D3DFMT_A32B32G32R32F: ::UINT = 116;
-pub const D3DFMT_CxV8U8: ::UINT = 117;
-pub const D3DFMT_A1: ::UINT = 118;
-pub const D3DFMT_A2B10G10R10_XR_BIAS: ::UINT = 119;
-pub const D3DFMT_BINARYBUFFER: ::UINT = 199;
-pub const D3DFMT_FORCE_DWORD: ::UINT = 2147483647;
-
+pub const D3DDECL_END: D3DVERTEXELEMENT9 = D3DVERTEXELEMENT9 {
+    Stream: 0xFF,
+    Offset: 0,
+    Type: D3DDECLTYPE::D3DDECLTYPE_UNUSED as ::BYTE,
+    Method: 0,
+    Usage: 0,
+    UsageIndex: 0,
+};
+pub const D3DDP_MAXTEXCOORD: ::DWORD = 8;
+pub const D3DSTREAMSOURCE_INDEXEDDATA: ::DWORD = 1 << 30;
+pub const D3DSTREAMSOURCE_INSTANCEDATA: ::DWORD = 2 << 30;
+pub const D3DSI_OPCODE_MASK: ::DWORD = 0x0000FFFF;
+pub const D3DSI_INSTLENGTH_MASK: ::DWORD = 0x0F000000;
+pub const D3DSI_INSTLENGTH_SHIFT: ::DWORD = 24;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSHADER_INSTRUCTION_OPCODE_TYPE {
+    D3DSIO_NOP = 0,
+    D3DSIO_MOV,
+    D3DSIO_ADD,
+    D3DSIO_SUB,
+    D3DSIO_MAD,
+    D3DSIO_MUL,
+    D3DSIO_RCP,
+    D3DSIO_RSQ,
+    D3DSIO_DP3,
+    D3DSIO_DP4,
+    D3DSIO_MIN,
+    D3DSIO_MAX,
+    D3DSIO_SLT,
+    D3DSIO_SGE,
+    D3DSIO_EXP,
+    D3DSIO_LOG,
+    D3DSIO_LIT,
+    D3DSIO_DST,
+    D3DSIO_LRP,
+    D3DSIO_FRC,
+    D3DSIO_M4x4,
+    D3DSIO_M4x3,
+    D3DSIO_M3x4,
+    D3DSIO_M3x3,
+    D3DSIO_M3x2,
+    D3DSIO_CALL,
+    D3DSIO_CALLNZ,
+    D3DSIO_LOOP,
+    D3DSIO_RET,
+    D3DSIO_ENDLOOP,
+    D3DSIO_LABEL,
+    D3DSIO_DCL,
+    D3DSIO_POW,
+    D3DSIO_CRS,
+    D3DSIO_SGN,
+    D3DSIO_ABS,
+    D3DSIO_NRM,
+    D3DSIO_SINCOS,
+    D3DSIO_REP,
+    D3DSIO_ENDREP,
+    D3DSIO_IF,
+    D3DSIO_IFC,
+    D3DSIO_ELSE,
+    D3DSIO_ENDIF,
+    D3DSIO_BREAK,
+    D3DSIO_BREAKC,
+    D3DSIO_MOVA,
+    D3DSIO_DEFB,
+    D3DSIO_DEFI,
+    D3DSIO_TEXCOORD = 64,
+    D3DSIO_TEXKILL,
+    D3DSIO_TEX,
+    D3DSIO_TEXBEM,
+    D3DSIO_TEXBEML,
+    D3DSIO_TEXREG2AR,
+    D3DSIO_TEXREG2GB,
+    D3DSIO_TEXM3x2PAD,
+    D3DSIO_TEXM3x2TEX,
+    D3DSIO_TEXM3x3PAD,
+    D3DSIO_TEXM3x3TEX,
+    D3DSIO_RESERVED0,
+    D3DSIO_TEXM3x3SPEC,
+    D3DSIO_TEXM3x3VSPEC,
+    D3DSIO_EXPP,
+    D3DSIO_LOGP,
+    D3DSIO_CND,
+    D3DSIO_DEF,
+    D3DSIO_TEXREG2RGB,
+    D3DSIO_TEXDP3TEX,
+    D3DSIO_TEXM3x2DEPTH,
+    D3DSIO_TEXDP3,
+    D3DSIO_TEXM3x3,
+    D3DSIO_TEXDEPTH,
+    D3DSIO_CMP,
+    D3DSIO_BEM,
+    D3DSIO_DP2ADD,
+    D3DSIO_DSX,
+    D3DSIO_DSY,
+    D3DSIO_TEXLDD,
+    D3DSIO_SETP,
+    D3DSIO_TEXLDL,
+    D3DSIO_BREAKP,
+    D3DSIO_PHASE = 0xFFFD,
+    D3DSIO_COMMENT = 0xFFFE,
+    D3DSIO_END = 0xFFFF,
+    D3DSIO_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DSI_COISSUE: ::DWORD = 0x40000000;
+pub const D3DSP_OPCODESPECIFICCONTROL_MASK: ::DWORD = 0x00ff0000;
+pub const D3DSP_OPCODESPECIFICCONTROL_SHIFT: ::DWORD = 16;
+pub const D3DSI_TEXLD_PROJECT: ::DWORD = 0x01 << D3DSP_OPCODESPECIFICCONTROL_SHIFT;
+pub const D3DSI_TEXLD_BIAS: ::DWORD = 0x02 << D3DSP_OPCODESPECIFICCONTROL_SHIFT;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSHADER_COMPARISON {
+    D3DSPC_RESERVED0 = 0,
+    D3DSPC_GT = 1,
+    D3DSPC_EQ = 2,
+    D3DSPC_GE = 3,
+    D3DSPC_LT = 4,
+    D3DSPC_NE = 5,
+    D3DSPC_LE = 6,
+    D3DSPC_RESERVED1 = 7,
+}
+pub const D3DSHADER_COMPARISON_SHIFT: ::DWORD = D3DSP_OPCODESPECIFICCONTROL_SHIFT;
+pub const D3DSHADER_COMPARISON_MASK: ::DWORD = 0x7 << D3DSHADER_COMPARISON_SHIFT;
+pub const D3DSHADER_INSTRUCTION_PREDICATED: ::DWORD = 0x1 << 28;
+pub const D3DSP_DCL_USAGE_SHIFT: ::DWORD = 0;
+pub const D3DSP_DCL_USAGE_MASK: ::DWORD = 0x0000000f;
+pub const D3DSP_DCL_USAGEINDEX_SHIFT: ::DWORD = 16;
+pub const D3DSP_DCL_USAGEINDEX_MASK: ::DWORD = 0x000f0000;
+pub const D3DSP_TEXTURETYPE_SHIFT: ::DWORD = 27;
+pub const D3DSP_TEXTURETYPE_MASK: ::DWORD = 0x78000000;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSAMPLER_TEXTURE_TYPE {
+    D3DSTT_UNKNOWN = 0 << D3DSP_TEXTURETYPE_SHIFT,
+    D3DSTT_2D = 2 << D3DSP_TEXTURETYPE_SHIFT,
+    D3DSTT_CUBE = 3 << D3DSP_TEXTURETYPE_SHIFT,
+    D3DSTT_VOLUME = 4 << D3DSP_TEXTURETYPE_SHIFT,
+    D3DSTT_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DSP_REGNUM_MASK: ::DWORD = 0x000007FF;
+pub const D3DSP_WRITEMASK_0: ::DWORD = 0x00010000;
+pub const D3DSP_WRITEMASK_1: ::DWORD = 0x00020000;
+pub const D3DSP_WRITEMASK_2: ::DWORD = 0x00040000;
+pub const D3DSP_WRITEMASK_3: ::DWORD = 0x00080000;
+pub const D3DSP_WRITEMASK_ALL: ::DWORD = 0x000F0000;
+pub const D3DSP_DSTMOD_SHIFT: ::DWORD = 20;
+pub const D3DSP_DSTMOD_MASK: ::DWORD = 0x00F00000;
+pub const D3DSPDM_NONE: ::DWORD = 0 << D3DSP_DSTMOD_SHIFT;
+pub const D3DSPDM_SATURATE: ::DWORD = 1 << D3DSP_DSTMOD_SHIFT;
+pub const D3DSPDM_PARTIALPRECISION: ::DWORD = 2 << D3DSP_DSTMOD_SHIFT;
+pub const D3DSPDM_MSAMPCENTROID: ::DWORD = 4 << D3DSP_DSTMOD_SHIFT;
+pub const D3DSP_DSTSHIFT_SHIFT: ::DWORD = 24;
+pub const D3DSP_DSTSHIFT_MASK: ::DWORD = 0x0F000000;
+pub const D3DSP_REGTYPE_SHIFT: ::DWORD = 28;
+pub const D3DSP_REGTYPE_SHIFT2: ::DWORD = 8;
+pub const D3DSP_REGTYPE_MASK: ::DWORD = 0x70000000;
+pub const D3DSP_REGTYPE_MASK2: ::DWORD = 0x00001800;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSHADER_PARAM_REGISTER_TYPE {
+    D3DSPR_TEMP = 0,
+    D3DSPR_INPUT = 1,
+    D3DSPR_CONST = 2,
+    D3DSPR_ADDR = 3,
+    // D3DSPR_TEXTURE = 3, // Why Rust?
+    D3DSPR_RASTOUT = 4,
+    D3DSPR_ATTROUT = 5,
+    D3DSPR_TEXCRDOUT = 6,
+    // D3DSPR_OUTPUT = 6, // Why are you doing this to me?
+    D3DSPR_CONSTINT = 7,
+    D3DSPR_COLOROUT = 8,
+    D3DSPR_DEPTHOUT = 9,
+    D3DSPR_SAMPLER = 10,
+    D3DSPR_CONST2 = 11,
+    D3DSPR_CONST3 = 12,
+    D3DSPR_CONST4 = 13,
+    D3DSPR_CONSTBOOL = 14,
+    D3DSPR_LOOP = 15,
+    D3DSPR_TEMPFLOAT16 = 16,
+    D3DSPR_MISCTYPE = 17,
+    D3DSPR_LABEL = 18,
+    D3DSPR_PREDICATE = 19,
+    D3DSPR_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSHADER_MISCTYPE_OFFSETS {
+    D3DSMO_POSITION = 0,
+    D3DSMO_FACE = 1,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DVS_RASTOUT_OFFSETS {
+    D3DSRO_POSITION = 0,
+    D3DSRO_FOG,
+    D3DSRO_POINT_SIZE,
+    D3DSRO_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DVS_ADDRESSMODE_SHIFT: ::DWORD = 13;
+pub const D3DVS_ADDRESSMODE_MASK: ::DWORD = 1 << D3DVS_ADDRESSMODE_SHIFT;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DVS_ADDRESSMODE_TYPE {
+    D3DVS_ADDRMODE_ABSOLUTE = 0 << D3DVS_ADDRESSMODE_SHIFT,
+    D3DVS_ADDRMODE_RELATIVE = 1 << D3DVS_ADDRESSMODE_SHIFT,
+    D3DVS_ADDRMODE_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DSHADER_ADDRESSMODE_SHIFT: ::DWORD = 13;
+pub const D3DSHADER_ADDRESSMODE_MASK: ::DWORD = 1 << D3DSHADER_ADDRESSMODE_SHIFT;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSHADER_ADDRESSMODE_TYPE {
+    D3DSHADER_ADDRMODE_ABSOLUTE = 0 << D3DSHADER_ADDRESSMODE_SHIFT,
+    D3DSHADER_ADDRMODE_RELATIVE = 1 << D3DSHADER_ADDRESSMODE_SHIFT,
+    D3DSHADER_ADDRMODE_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DVS_SWIZZLE_SHIFT: ::DWORD = 16;
+pub const D3DVS_SWIZZLE_MASK: ::DWORD = 0x00FF0000;
+pub const D3DVS_X_X: ::DWORD = 0 << D3DVS_SWIZZLE_SHIFT;
+pub const D3DVS_X_Y: ::DWORD = 1 << D3DVS_SWIZZLE_SHIFT;
+pub const D3DVS_X_Z: ::DWORD = 2 << D3DVS_SWIZZLE_SHIFT;
+pub const D3DVS_X_W: ::DWORD = 3 << D3DVS_SWIZZLE_SHIFT;
+pub const D3DVS_Y_X: ::DWORD = 0 << (D3DVS_SWIZZLE_SHIFT + 2);
+pub const D3DVS_Y_Y: ::DWORD = 1 << (D3DVS_SWIZZLE_SHIFT + 2);
+pub const D3DVS_Y_Z: ::DWORD = 2 << (D3DVS_SWIZZLE_SHIFT + 2);
+pub const D3DVS_Y_W: ::DWORD = 3 << (D3DVS_SWIZZLE_SHIFT + 2);
+pub const D3DVS_Z_X: ::DWORD = 0 << (D3DVS_SWIZZLE_SHIFT + 4);
+pub const D3DVS_Z_Y: ::DWORD = 1 << (D3DVS_SWIZZLE_SHIFT + 4);
+pub const D3DVS_Z_Z: ::DWORD = 2 << (D3DVS_SWIZZLE_SHIFT + 4);
+pub const D3DVS_Z_W: ::DWORD = 3 << (D3DVS_SWIZZLE_SHIFT + 4);
+pub const D3DVS_W_X: ::DWORD = 0 << (D3DVS_SWIZZLE_SHIFT + 6);
+pub const D3DVS_W_Y: ::DWORD = 1 << (D3DVS_SWIZZLE_SHIFT + 6);
+pub const D3DVS_W_Z: ::DWORD = 2 << (D3DVS_SWIZZLE_SHIFT + 6);
+pub const D3DVS_W_W: ::DWORD = 3 << (D3DVS_SWIZZLE_SHIFT + 6);
+pub const D3DVS_NOSWIZZLE: ::DWORD = D3DVS_X_X | D3DVS_Y_Y | D3DVS_Z_Z | D3DVS_W_W;
+pub const D3DSP_SWIZZLE_SHIFT: ::DWORD = 16;
+pub const D3DSP_SWIZZLE_MASK: ::DWORD = 0x00FF0000;
+pub const D3DSP_NOSWIZZLE: ::DWORD = (0 << (D3DSP_SWIZZLE_SHIFT + 0))
+    | (1 << (D3DSP_SWIZZLE_SHIFT + 2)) | (2 << (D3DSP_SWIZZLE_SHIFT + 4))
+    | (3 << (D3DSP_SWIZZLE_SHIFT + 6));
+pub const D3DSP_REPLICATERED: ::DWORD = (0 << (D3DSP_SWIZZLE_SHIFT + 0))
+    | (0 << (D3DSP_SWIZZLE_SHIFT + 2)) | (0 << (D3DSP_SWIZZLE_SHIFT + 4))
+    | (0 << (D3DSP_SWIZZLE_SHIFT + 6));
+pub const D3DSP_REPLICATEGREEN: ::DWORD = (1 << (D3DSP_SWIZZLE_SHIFT + 0))
+    | (1 << (D3DSP_SWIZZLE_SHIFT + 2)) | (1 << (D3DSP_SWIZZLE_SHIFT + 4))
+    | (1 << (D3DSP_SWIZZLE_SHIFT + 6));
+pub const D3DSP_REPLICATEBLUE: ::DWORD = (2 << (D3DSP_SWIZZLE_SHIFT + 0))
+    | (2 << (D3DSP_SWIZZLE_SHIFT + 2)) | (2 << (D3DSP_SWIZZLE_SHIFT + 4))
+    | (2 << (D3DSP_SWIZZLE_SHIFT + 6));
+pub const D3DSP_REPLICATEALPHA: ::DWORD = (3 << (D3DSP_SWIZZLE_SHIFT + 0))
+    | (3 << (D3DSP_SWIZZLE_SHIFT + 2)) | (3 << (D3DSP_SWIZZLE_SHIFT + 4))
+    | (3 << (D3DSP_SWIZZLE_SHIFT + 6));
+pub const D3DSP_SRCMOD_SHIFT: ::DWORD = 24;
+pub const D3DSP_SRCMOD_MASK: ::DWORD = 0x0F000000;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSHADER_PARAM_SRCMOD_TYPE {
+    D3DSPSM_NONE = 0 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_NEG = 1 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_BIAS = 2 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_BIASNEG = 3 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_SIGN = 4 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_SIGNNEG = 5 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_COMP = 6 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_X2 = 7 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_X2NEG = 8 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_DZ = 9 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_DW = 10 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_ABS = 11 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_ABSNEG = 12 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_NOT = 13 << D3DSP_SRCMOD_SHIFT,
+    D3DSPSM_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DSP_MIN_PRECISION_SHIFT: ::DWORD = 14;
+pub const D3DSP_MIN_PRECISION_MASK: ::DWORD = 0x0000C000;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSHADER_MIN_PRECISION {
+    D3DMP_DEFAULT = 0,
+    D3DMP_16 = 1,
+    D3DMP_2_8 = 2,
+}
+pub const D3DSI_COMMENTSIZE_SHIFT: ::DWORD = 16;
+pub const D3DSI_COMMENTSIZE_MASK: ::DWORD = 0x7FFF0000;
+pub const D3DPS_END: ::DWORD = 0x0000FFFF;
+pub const D3DVS_END: ::DWORD = 0x0000FFFF;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DBASISTYPE {
+    D3DBASIS_BEZIER = 0,
+    D3DBASIS_BSPLINE = 1,
+    D3DBASIS_CATMULL_ROM = 2,
+    D3DBASIS_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DDEGREETYPE {
+    D3DDEGREE_LINEAR = 1,
+    D3DDEGREE_QUADRATIC = 2,
+    D3DDEGREE_CUBIC = 3,
+    D3DDEGREE_QUINTIC = 5,
+    D3DDEGREE_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DPATCHEDGESTYLE {
+    D3DPATCHEDGE_DISCRETE = 0,
+    D3DPATCHEDGE_CONTINUOUS = 1,
+    D3DPATCHEDGE_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSTATEBLOCKTYPE {
+    D3DSBT_ALL = 1,
+    D3DSBT_PIXELSTATE = 2,
+    D3DSBT_VERTEXSTATE = 3,
+    D3DSBT_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DVERTEXBLENDFLAGS {
+    D3DVBF_DISABLE = 0,
+    D3DVBF_1WEIGHTS = 1,
+    D3DVBF_2WEIGHTS = 2,
+    D3DVBF_3WEIGHTS = 3,
+    D3DVBF_TWEENING = 255,
+    D3DVBF_0WEIGHTS = 256,
+    D3DVBF_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DTEXTURETRANSFORMFLAGS {
+    D3DTTFF_DISABLE = 0,
+    D3DTTFF_COUNT1 = 1,
+    D3DTTFF_COUNT2 = 2,
+    D3DTTFF_COUNT3 = 3,
+    D3DTTFF_COUNT4 = 4,
+    D3DTTFF_PROJECTED = 256,
+    D3DTTFF_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DFVF_TEXTUREFORMAT2: ::DWORD = 0;
+pub const D3DFVF_TEXTUREFORMAT1: ::DWORD = 3;
+pub const D3DFVF_TEXTUREFORMAT3: ::DWORD = 1;
+pub const D3DFVF_TEXTUREFORMAT4: ::DWORD = 2;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DDEVTYPE {
+    D3DDEVTYPE_HAL = 1,
+    D3DDEVTYPE_REF = 2,
+    D3DDEVTYPE_SW = 3,
+    D3DDEVTYPE_NULLREF = 4,
+    D3DDEVTYPE_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DMULTISAMPLE_TYPE {
+    D3DMULTISAMPLE_NONE = 0,
+    D3DMULTISAMPLE_NONMASKABLE = 1,
+    D3DMULTISAMPLE_2_SAMPLES = 2,
+    D3DMULTISAMPLE_3_SAMPLES = 3,
+    D3DMULTISAMPLE_4_SAMPLES = 4,
+    D3DMULTISAMPLE_5_SAMPLES = 5,
+    D3DMULTISAMPLE_6_SAMPLES = 6,
+    D3DMULTISAMPLE_7_SAMPLES = 7,
+    D3DMULTISAMPLE_8_SAMPLES = 8,
+    D3DMULTISAMPLE_9_SAMPLES = 9,
+    D3DMULTISAMPLE_10_SAMPLES = 10,
+    D3DMULTISAMPLE_11_SAMPLES = 11,
+    D3DMULTISAMPLE_12_SAMPLES = 12,
+    D3DMULTISAMPLE_13_SAMPLES = 13,
+    D3DMULTISAMPLE_14_SAMPLES = 14,
+    D3DMULTISAMPLE_15_SAMPLES = 15,
+    D3DMULTISAMPLE_16_SAMPLES = 16,
+    D3DMULTISAMPLE_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DFORMAT {
+    D3DFMT_UNKNOWN = 0,
+    D3DFMT_R8G8B8 = 20,
+    D3DFMT_A8R8G8B8 = 21,
+    D3DFMT_X8R8G8B8 = 22,
+    D3DFMT_R5G6B5 = 23,
+    D3DFMT_X1R5G5B5 = 24,
+    D3DFMT_A1R5G5B5 = 25,
+    D3DFMT_A4R4G4B4 = 26,
+    D3DFMT_R3G3B2 = 27,
+    D3DFMT_A8 = 28,
+    D3DFMT_A8R3G3B2 = 29,
+    D3DFMT_X4R4G4B4 = 30,
+    D3DFMT_A2B10G10R10 = 31,
+    D3DFMT_A8B8G8R8 = 32,
+    D3DFMT_X8B8G8R8 = 33,
+    D3DFMT_G16R16 = 34,
+    D3DFMT_A2R10G10B10 = 35,
+    D3DFMT_A16B16G16R16 = 36,
+    D3DFMT_A8P8 = 40,
+    D3DFMT_P8 = 41,
+    D3DFMT_L8 = 50,
+    D3DFMT_A8L8 = 51,
+    D3DFMT_A4L4 = 52,
+    D3DFMT_V8U8 = 60,
+    D3DFMT_L6V5U5 = 61,
+    D3DFMT_X8L8V8U8 = 62,
+    D3DFMT_Q8W8V8U8 = 63,
+    D3DFMT_V16U16 = 64,
+    D3DFMT_A2W10V10U10 = 67,
+    D3DFMT_UYVY = MAKEFOURCC!(b'U', b'Y', b'V', b'Y'),
+    D3DFMT_R8G8_B8G8 = MAKEFOURCC!(b'R', b'G', b'B', b'G'),
+    D3DFMT_YUY2 = MAKEFOURCC!(b'Y', b'U', b'Y', b'2'),
+    D3DFMT_G8R8_G8B8 = MAKEFOURCC!(b'G', b'R', b'G', b'B'),
+    D3DFMT_DXT1 = MAKEFOURCC!(b'D', b'X', b'T', b'1'),
+    D3DFMT_DXT2 = MAKEFOURCC!(b'D', b'X', b'T', b'2'),
+    D3DFMT_DXT3 = MAKEFOURCC!(b'D', b'X', b'T', b'3'),
+    D3DFMT_DXT4 = MAKEFOURCC!(b'D', b'X', b'T', b'4'),
+    D3DFMT_DXT5 = MAKEFOURCC!(b'D', b'X', b'T', b'5'),
+    D3DFMT_D16_LOCKABLE = 70,
+    D3DFMT_D32 = 71,
+    D3DFMT_D15S1 = 73,
+    D3DFMT_D24S8 = 75,
+    D3DFMT_D24X8 = 77,
+    D3DFMT_D24X4S4 = 79,
+    D3DFMT_D16 = 80,
+    D3DFMT_D32F_LOCKABLE = 82,
+    D3DFMT_D24FS8 = 83,
+    D3DFMT_D32_LOCKABLE = 84,
+    D3DFMT_S8_LOCKABLE = 85,
+    D3DFMT_L16 = 81,
+    D3DFMT_VERTEXDATA = 100,
+    D3DFMT_INDEX16 = 101,
+    D3DFMT_INDEX32 = 102,
+    D3DFMT_Q16W16V16U16 = 110,
+    D3DFMT_MULTI2_ARGB8 = MAKEFOURCC!(b'M', b'E', b'T', b'1'),
+    D3DFMT_R16F = 111,
+    D3DFMT_G16R16F = 112,
+    D3DFMT_A16B16G16R16F = 113,
+    D3DFMT_R32F = 114,
+    D3DFMT_G32R32F = 115,
+    D3DFMT_A32B32G32R32F = 116,
+    D3DFMT_CxV8U8 = 117,
+    D3DFMT_A1 = 118,
+    D3DFMT_A2B10G10R10_XR_BIAS = 119,
+    D3DFMT_BINARYBUFFER = 199,
+    D3DFMT_FORCE_DWORD = 0x7fffffff,
+}
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct D3DDISPLAYMODE {
     pub Width: ::UINT,
     pub Height: ::UINT,
     pub RefreshRate: ::UINT,
     pub Format: D3DFORMAT,
 }
-
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct D3DDEVICE_CREATION_PARAMETERS {
     pub AdapterOrdinal: ::UINT,
     pub DeviceType: D3DDEVTYPE,
     pub hFocusWindow: ::HWND,
     pub BehaviorFlags: ::DWORD,
 }
-pub type D3DSWAPEFFECT = ::UINT;
-pub const D3DSWAPEFFECT_DISCARD: ::UINT = 1;
-pub const D3DSWAPEFFECT_FLIP: ::UINT = 2;
-pub const D3DSWAPEFFECT_COPY: ::UINT = 3;
-pub const D3DSWAPEFFECT_OVERLAY: ::UINT = 4;
-pub const D3DSWAPEFFECT_FLIPEX: ::UINT = 5;
-pub const D3DSWAPEFFECT_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DPOOL = ::UINT;
-pub const D3DPOOL_DEFAULT: ::UINT = 0;
-pub const D3DPOOL_MANAGED: ::UINT = 1;
-pub const D3DPOOL_SYSTEMMEM: ::UINT = 2;
-pub const D3DPOOL_SCRATCH: ::UINT = 3;
-pub const D3DPOOL_FORCE_DWORD: ::UINT = 2147483647;
-
-#[repr(C)]
-#[derive(Copy)]
-pub struct D3DPRESENT_PARAMETERS_ {
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSWAPEFFECT {
+    D3DSWAPEFFECT_DISCARD = 1,
+    D3DSWAPEFFECT_FLIP = 2,
+    D3DSWAPEFFECT_COPY = 3,
+    D3DSWAPEFFECT_OVERLAY = 4,
+    D3DSWAPEFFECT_FLIPEX = 5,
+    D3DSWAPEFFECT_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DPOOL {
+    D3DPOOL_DEFAULT = 0,
+    D3DPOOL_MANAGED = 1,
+    D3DPOOL_SYSTEMMEM = 2,
+    D3DPOOL_SCRATCH = 3,
+    D3DPOOL_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DPRESENT_RATE_DEFAULT: ::DWORD = 0x00000000;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct D3DPRESENT_PARAMETERS {
     pub BackBufferWidth: ::UINT,
     pub BackBufferHeight: ::UINT,
     pub BackBufferFormat: D3DFORMAT,
@@ -869,42 +1012,81 @@ pub struct D3DPRESENT_PARAMETERS_ {
     pub FullScreen_RefreshRateInHz: ::UINT,
     pub PresentationInterval: ::UINT,
 }
-pub type D3DPRESENT_PARAMETERS = D3DPRESENT_PARAMETERS_;
-#[repr(C)]
-#[derive(Copy)]
+pub const D3DPRESENTFLAG_LOCKABLE_BACKBUFFER: ::DWORD = 0x00000001;
+pub const D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL: ::DWORD = 0x00000002;
+pub const D3DPRESENTFLAG_DEVICECLIP: ::DWORD = 0x00000004;
+pub const D3DPRESENTFLAG_VIDEO: ::DWORD = 0x00000010;
+pub const D3DPRESENTFLAG_NOAUTOROTATE: ::DWORD = 0x00000020;
+pub const D3DPRESENTFLAG_UNPRUNEDMODE: ::DWORD = 0x00000040;
+pub const D3DPRESENTFLAG_OVERLAY_LIMITEDRGB: ::DWORD = 0x00000080;
+pub const D3DPRESENTFLAG_OVERLAY_YCbCr_BT709: ::DWORD = 0x00000100;
+pub const D3DPRESENTFLAG_OVERLAY_YCbCr_xvYCC: ::DWORD = 0x00000200;
+pub const D3DPRESENTFLAG_RESTRICTED_CONTENT: ::DWORD = 0x00000400;
+pub const D3DPRESENTFLAG_RESTRICT_SHARED_RESOURCE_DRIVER: ::DWORD = 0x00000800;
+#[repr(C)] #[derive(Copy)]
 pub struct D3DGAMMARAMP {
-    pub red: [::WORD; 256usize],
-    pub green: [::WORD; 256usize],
-    pub blue: [::WORD; 256usize],
+    pub red: [::WORD; 256],
+    pub green: [::WORD; 256],
+    pub blue: [::WORD; 256],
 }
-
-pub type D3DBACKBUFFER_TYPE = ::UINT;
-pub const D3DBACKBUFFER_TYPE_MONO: ::UINT = 0;
-pub const D3DBACKBUFFER_TYPE_LEFT: ::UINT = 1;
-pub const D3DBACKBUFFER_TYPE_RIGHT: ::UINT = 2;
-pub const D3DBACKBUFFER_TYPE_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DRESOURCETYPE = ::UINT;
-pub const D3DRTYPE_SURFACE: ::UINT = 1;
-pub const D3DRTYPE_VOLUME: ::UINT = 2;
-pub const D3DRTYPE_TEXTURE: ::UINT = 3;
-pub const D3DRTYPE_VOLUMETEXTURE: ::UINT = 4;
-pub const D3DRTYPE_CUBETEXTURE: ::UINT = 5;
-pub const D3DRTYPE_VERTEXBUFFER: ::UINT = 6;
-pub const D3DRTYPE_INDEXBUFFER: ::UINT = 7;
-pub const D3DRTYPE_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DCUBEMAP_FACES = ::UINT;
-pub const D3DCUBEMAP_FACE_POSITIVE_X: ::UINT = 0;
-pub const D3DCUBEMAP_FACE_NEGATIVE_X: ::UINT = 1;
-pub const D3DCUBEMAP_FACE_POSITIVE_Y: ::UINT = 2;
-pub const D3DCUBEMAP_FACE_NEGATIVE_Y: ::UINT = 3;
-pub const D3DCUBEMAP_FACE_POSITIVE_Z: ::UINT = 4;
-pub const D3DCUBEMAP_FACE_NEGATIVE_Z: ::UINT = 5;
-pub const D3DCUBEMAP_FACE_FORCE_DWORD: ::UINT = 2147483647;
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DBACKBUFFER_TYPE {
+    D3DBACKBUFFER_TYPE_MONO = 0,
+    D3DBACKBUFFER_TYPE_LEFT = 1,
+    D3DBACKBUFFER_TYPE_RIGHT = 2,
+    D3DBACKBUFFER_TYPE_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DRESOURCETYPE {
+    D3DRTYPE_SURFACE = 1,
+    D3DRTYPE_VOLUME = 2,
+    D3DRTYPE_TEXTURE = 3,
+    D3DRTYPE_VOLUMETEXTURE = 4,
+    D3DRTYPE_CUBETEXTURE = 5,
+    D3DRTYPE_VERTEXBUFFER = 6,
+    D3DRTYPE_INDEXBUFFER = 7,
+    D3DRTYPE_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DUSAGE_RENDERTARGET: ::DWORD = 0x00000001;
+pub const D3DUSAGE_DEPTHSTENCIL: ::DWORD = 0x00000002;
+pub const D3DUSAGE_DYNAMIC: ::DWORD = 0x00000200;
+pub const D3DUSAGE_NONSECURE: ::DWORD = 0x00800000;
+pub const D3DUSAGE_AUTOGENMIPMAP: ::DWORD = 0x00000400;
+pub const D3DUSAGE_DMAP: ::DWORD = 0x00004000;
+pub const D3DUSAGE_QUERY_LEGACYBUMPMAP: ::DWORD = 0x00008000;
+pub const D3DUSAGE_QUERY_SRGBREAD: ::DWORD = 0x00010000;
+pub const D3DUSAGE_QUERY_FILTER: ::DWORD = 0x00020000;
+pub const D3DUSAGE_QUERY_SRGBWRITE: ::DWORD = 0x00040000;
+pub const D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING: ::DWORD = 0x00080000;
+pub const D3DUSAGE_QUERY_VERTEXTEXTURE: ::DWORD = 0x00100000;
+pub const D3DUSAGE_QUERY_WRAPANDMIP	: ::DWORD = 0x00200000;
+pub const D3DUSAGE_WRITEONLY: ::DWORD = 0x00000008;
+pub const D3DUSAGE_SOFTWAREPROCESSING: ::DWORD = 0x00000010;
+pub const D3DUSAGE_DONOTCLIP: ::DWORD = 0x00000020;
+pub const D3DUSAGE_POINTS: ::DWORD = 0x00000040;
+pub const D3DUSAGE_RTPATCHES: ::DWORD = 0x00000080;
+pub const D3DUSAGE_NPATCHES: ::DWORD = 0x00000100;
+pub const D3DUSAGE_TEXTAPI: ::DWORD = 0x10000000;
+pub const D3DUSAGE_RESTRICTED_CONTENT: ::DWORD = 0x00000800;
+pub const D3DUSAGE_RESTRICT_SHARED_RESOURCE: ::DWORD = 0x00002000;
+pub const D3DUSAGE_RESTRICT_SHARED_RESOURCE_DRIVER: ::DWORD = 0x00001000;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DCUBEMAP_FACES {
+    D3DCUBEMAP_FACE_POSITIVE_X = 0,
+    D3DCUBEMAP_FACE_NEGATIVE_X = 1,
+    D3DCUBEMAP_FACE_POSITIVE_Y = 2,
+    D3DCUBEMAP_FACE_NEGATIVE_Y = 3,
+    D3DCUBEMAP_FACE_POSITIVE_Z = 4,
+    D3DCUBEMAP_FACE_NEGATIVE_Z = 5,
+    D3DCUBEMAP_FACE_FORCE_DWORD = 0x7fffffff,
+}
+pub const D3DLOCK_READONLY: ::DWORD = 0x00000010;
+pub const D3DLOCK_DISCARD: ::DWORD = 0x00002000;
+pub const D3DLOCK_NOOVERWRITE: ::DWORD = 0x00001000;
+pub const D3DLOCK_NOSYSLOCK: ::DWORD = 0x00000800;
+pub const D3DLOCK_DONOTWAIT: ::DWORD = 0x00004000;
+pub const D3DLOCK_NO_DIRTY_UPDATE: ::DWORD = 0x00008000;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DVERTEXBUFFER_DESC {
     pub Format: D3DFORMAT,
     pub Type: D3DRESOURCETYPE,
@@ -913,9 +1095,7 @@ pub struct D3DVERTEXBUFFER_DESC {
     pub Size: ::UINT,
     pub FVF: ::DWORD,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DINDEXBUFFER_DESC {
     pub Format: D3DFORMAT,
     pub Type: D3DRESOURCETYPE,
@@ -923,9 +1103,7 @@ pub struct D3DINDEXBUFFER_DESC {
     pub Pool: D3DPOOL,
     pub Size: ::UINT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DSURFACE_DESC {
     pub Format: D3DFORMAT,
     pub Type: D3DRESOURCETYPE,
@@ -936,9 +1114,7 @@ pub struct D3DSURFACE_DESC {
     pub Width: ::UINT,
     pub Height: ::UINT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DVOLUME_DESC {
     pub Format: D3DFORMAT,
     pub Type: D3DRESOURCETYPE,
@@ -948,16 +1124,12 @@ pub struct D3DVOLUME_DESC {
     pub Height: ::UINT,
     pub Depth: ::UINT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DLOCKED_RECT {
     pub Pitch: ::INT,
     pub pBits: *mut ::libc::c_void,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DBOX {
     pub Left: ::UINT,
     pub Top: ::UINT,
@@ -966,24 +1138,18 @@ pub struct D3DBOX {
     pub Front: ::UINT,
     pub Back: ::UINT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DLOCKED_BOX {
     pub RowPitch: ::INT,
     pub SlicePitch: ::INT,
     pub pBits: *mut ::libc::c_void,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DRANGE {
     pub Offset: ::UINT,
     pub Size: ::UINT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DRECTPATCH_INFO {
     pub StartVertexOffsetWidth: ::UINT,
     pub StartVertexOffsetHeight: ::UINT,
@@ -993,22 +1159,19 @@ pub struct D3DRECTPATCH_INFO {
     pub Basis: D3DBASISTYPE,
     pub Degree: D3DDEGREETYPE,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DTRIPATCH_INFO {
     pub StartVertexOffset: ::UINT,
     pub NumVertices: ::UINT,
     pub Basis: D3DBASISTYPE,
     pub Degree: D3DDEGREETYPE,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+pub const MAX_DEVICE_IDENTIFIER_STRING: usize = 512;
+#[repr(C)] #[derive(Copy)]
 pub struct D3DADAPTER_IDENTIFIER9 {
-    pub Driver: [::libc::c_char; 512usize],
-    pub Description: [::libc::c_char; 512usize],
-    pub DeviceName: [::libc::c_char; 32usize],
+    pub Driver: [::c_char; MAX_DEVICE_IDENTIFIER_STRING],
+    pub Description: [::c_char; MAX_DEVICE_IDENTIFIER_STRING],
+    pub DeviceName: [::c_char; 32],
     pub DriverVersion: ::LARGE_INTEGER,
     pub VendorId: ::DWORD,
     pub DeviceId: ::DWORD,
@@ -1017,38 +1180,39 @@ pub struct D3DADAPTER_IDENTIFIER9 {
     pub DeviceIdentifier: ::GUID,
     pub WHQLLevel: ::DWORD,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DRASTER_STATUS {
     pub InVBlank: ::BOOL,
     pub ScanLine: ::UINT,
 }
-
-pub type D3DDEBUGMONITORTOKENS = ::UINT;
-pub const D3DDMT_ENABLE: ::UINT = 0;
-pub const D3DDMT_DISABLE: ::UINT = 1;
-pub const D3DDMT_FORCE_DWORD: ::UINT = 2147483647;
-
-pub type D3DQUERYTYPE = ::UINT;
-pub const D3DQUERYTYPE_VCACHE: ::UINT = 4;
-pub const D3DQUERYTYPE_RESOURCEMANAGER: ::UINT = 5;
-pub const D3DQUERYTYPE_VERTEXSTATS: ::UINT = 6;
-pub const D3DQUERYTYPE_EVENT: ::UINT = 8;
-pub const D3DQUERYTYPE_OCCLUSION: ::UINT = 9;
-pub const D3DQUERYTYPE_TIMESTAMP: ::UINT = 10;
-pub const D3DQUERYTYPE_TIMESTAMPDISJOINT: ::UINT = 11;
-pub const D3DQUERYTYPE_TIMESTAMPFREQ: ::UINT = 12;
-pub const D3DQUERYTYPE_PIPELINETIMINGS: ::UINT = 13;
-pub const D3DQUERYTYPE_INTERFACETIMINGS: ::UINT = 14;
-pub const D3DQUERYTYPE_VERTEXTIMINGS: ::UINT = 15;
-pub const D3DQUERYTYPE_PIXELTIMINGS: ::UINT = 16;
-pub const D3DQUERYTYPE_BANDWIDTHTIMINGS: ::UINT = 17;
-pub const D3DQUERYTYPE_CACHEUTILIZATION: ::UINT = 18;
-pub const D3DQUERYTYPE_MEMORYPRESSURE: ::UINT = 19;
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DDEBUGMONITORTOKENS {
+    D3DDMT_ENABLE = 0,
+    D3DDMT_DISABLE = 1,
+    D3DDMT_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DQUERYTYPE {
+    D3DQUERYTYPE_VCACHE = 4,
+    D3DQUERYTYPE_RESOURCEMANAGER = 5,
+    D3DQUERYTYPE_VERTEXSTATS = 6,
+    D3DQUERYTYPE_EVENT = 8,
+    D3DQUERYTYPE_OCCLUSION = 9,
+    D3DQUERYTYPE_TIMESTAMP = 10,
+    D3DQUERYTYPE_TIMESTAMPDISJOINT = 11,
+    D3DQUERYTYPE_TIMESTAMPFREQ = 12,
+    D3DQUERYTYPE_PIPELINETIMINGS = 13,
+    D3DQUERYTYPE_INTERFACETIMINGS = 14,
+    D3DQUERYTYPE_VERTEXTIMINGS = 15,
+    D3DQUERYTYPE_PIXELTIMINGS = 16,
+    D3DQUERYTYPE_BANDWIDTHTIMINGS = 17,
+    D3DQUERYTYPE_CACHEUTILIZATION = 18,
+    D3DQUERYTYPE_MEMORYPRESSURE = 19,
+}
+pub const D3DISSUE_END: ::DWORD = 1 << 0;
+pub const D3DISSUE_BEGIN: ::DWORD = 1 << 1;
+pub const D3DGETDATA_FLUSH: ::DWORD = 1 << 0;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DRESOURCESTATS {
     pub bThrashing: ::BOOL,
     pub ApproxBytesDownloaded: ::DWORD,
@@ -1062,44 +1226,34 @@ pub struct D3DRESOURCESTATS {
     pub TotalManaged: ::DWORD,
     pub TotalBytes: ::DWORD,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+pub const D3DRTYPECOUNT: usize = (D3DRESOURCETYPE::D3DRTYPE_INDEXBUFFER as usize) + 1;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DDEVINFO_RESOURCEMANAGER {
-    pub stats: [D3DRESOURCESTATS; 8usize],
+    pub stats: [D3DRESOURCESTATS; D3DRTYPECOUNT],
 }
-
 pub type LPD3DDEVINFO_RESOURCEMANAGER = *mut D3DDEVINFO_RESOURCEMANAGER;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DDEVINFO_D3DVERTEXSTATS {
     pub NumRenderedTriangles: ::DWORD,
     pub NumExtraClippingTriangles: ::DWORD,
 }
-
 pub type LPD3DDEVINFO_D3DVERTEXSTATS = *mut D3DDEVINFO_D3DVERTEXSTATS;
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DDEVINFO_VCACHE {
     pub Pattern: ::DWORD,
     pub OptMethod: ::DWORD,
     pub CacheSize: ::DWORD,
     pub MagicNumber: ::DWORD,
 }
-
 pub type LPD3DDEVINFO_VCACHE = *mut D3DDEVINFO_VCACHE;
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DDEVINFO_D3D9PIPELINETIMINGS {
     pub VertexProcessingTimePercent: ::FLOAT,
     pub PixelProcessingTimePercent: ::FLOAT,
     pub OtherGPUProcessingTimePercent: ::FLOAT,
     pub GPUIdleTimePercent: ::FLOAT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DDEVINFO_D3D9INTERFACETIMINGS {
     pub WaitingForGPUToUseApplicationResourceTimePercent: ::FLOAT,
     pub WaitingForGPUToAcceptMoreCommandsTimePercent: ::FLOAT,
@@ -1107,16 +1261,12 @@ pub struct D3DDEVINFO_D3D9INTERFACETIMINGS {
     pub WaitingForGPUExclusiveResourceTimePercent: ::FLOAT,
     pub WaitingForGPUOtherTimePercent: ::FLOAT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DDEVINFO_D3D9STAGETIMINGS {
     pub MemoryProcessingPercent: ::FLOAT,
     pub ComputationProcessingPercent: ::FLOAT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DDEVINFO_D3D9BANDWIDTHTIMINGS {
     pub MaxBandwidthUtilized: ::FLOAT,
     pub FrontEndUploadMemoryUtilizedPercent: ::FLOAT,
@@ -1124,49 +1274,45 @@ pub struct D3DDEVINFO_D3D9BANDWIDTHTIMINGS {
     pub TriangleSetupRateUtilizedPercent: ::FLOAT,
     pub FillRateUtilizedPercent: ::FLOAT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DDEVINFO_D3D9CACHEUTILIZATION {
     pub TextureCacheHitRate: ::FLOAT,
     pub PostTransformVertexCacheHitRate: ::FLOAT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DMEMORYPRESSURE {
     pub BytesEvictedFromProcess: ::UINT64,
     pub SizeOfInefficientAllocation: ::UINT64,
     pub LevelOfEfficiency: ::DWORD,
 }
-
-pub type D3DCOMPOSERECTSOP = ::UINT;
-pub const D3DCOMPOSERECTS_COPY: ::UINT = 1;
-pub const D3DCOMPOSERECTS_OR: ::UINT = 2;
-pub const D3DCOMPOSERECTS_AND: ::UINT = 3;
-pub const D3DCOMPOSERECTS_NEG: ::UINT = 4;
-pub const D3DCOMPOSERECTS_FORCE_DWORD: ::UINT = 2147483647;
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DCOMPOSERECTSOP {
+    D3DCOMPOSERECTS_COPY = 1,
+    D3DCOMPOSERECTS_OR = 2,
+    D3DCOMPOSERECTS_AND = 3,
+    D3DCOMPOSERECTS_NEG = 4,
+    D3DCOMPOSERECTS_FORCE_DWORD = 0x7fffffff,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DCOMPOSERECTDESC {
     pub X: ::USHORT,
     pub Y: ::USHORT,
     pub Width: ::USHORT,
     pub Height: ::USHORT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DCOMPOSERECTDESTINATION {
     pub SrcRectIndex: ::USHORT,
     pub Reserved: ::USHORT,
     pub X: ::SHORT,
     pub Y: ::SHORT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+pub const D3DCOMPOSERECTS_MAXNUMRECTS: ::DWORD = 0xFFFF;
+pub const D3DCONVOLUTIONMONO_MAXWIDTH: ::DWORD = 7;
+pub const D3DCONVOLUTIONMONO_MAXHEIGHT: ::DWORD = D3DCONVOLUTIONMONO_MAXWIDTH;
+pub const D3DFMT_A1_SURFACE_MAXWIDTH: ::DWORD = 8192;
+pub const D3DFMT_A1_SURFACE_MAXHEIGHT: ::DWORD = 2048;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DPRESENTSTATS {
     pub PresentCount: ::UINT,
     pub PresentRefreshCount: ::UINT,
@@ -1174,14 +1320,13 @@ pub struct D3DPRESENTSTATS {
     pub SyncQPCTime: ::LARGE_INTEGER,
     pub SyncGPUTime: ::LARGE_INTEGER,
 }
-
-pub type D3DSCANLINEORDERING = ::UINT;
-pub const D3DSCANLINEORDERING_UNKNOWN: ::UINT = 0;
-pub const D3DSCANLINEORDERING_PROGRESSIVE: ::UINT = 1;
-pub const D3DSCANLINEORDERING_INTERLACED: ::UINT = 2;
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DSCANLINEORDERING {
+    D3DSCANLINEORDERING_UNKNOWN = 0,
+    D3DSCANLINEORDERING_PROGRESSIVE = 1,
+    D3DSCANLINEORDERING_INTERLACED = 2,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DDISPLAYMODEEX {
     pub Size: ::UINT,
     pub Width: ::UINT,
@@ -1190,42 +1335,42 @@ pub struct D3DDISPLAYMODEEX {
     pub Format: D3DFORMAT,
     pub ScanLineOrdering: D3DSCANLINEORDERING,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DDISPLAYMODEFILTER {
     pub Size: ::UINT,
     pub Format: D3DFORMAT,
     pub ScanLineOrdering: D3DSCANLINEORDERING,
 }
-
-pub type D3DDISPLAYROTATION = ::UINT;
-pub const D3DDISPLAYROTATION_IDENTITY: ::UINT = 1;
-pub const D3DDISPLAYROTATION_90: ::UINT = 2;
-pub const D3DDISPLAYROTATION_180: ::UINT = 3;
-pub const D3DDISPLAYROTATION_270: ::UINT = 4;
-
-#[repr(C)]
-#[derive(Copy)]
-pub struct D3D_OMAC {
-    pub Omac: [::BYTE; 16usize],
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DDISPLAYROTATION {
+    D3DDISPLAYROTATION_IDENTITY = 1,
+    D3DDISPLAYROTATION_90 = 2,
+    D3DDISPLAYROTATION_180 = 3,
+    D3DDISPLAYROTATION_270 = 4,
 }
-
-pub type D3DAUTHENTICATEDCHANNELTYPE = ::UINT;
-pub const D3DAUTHENTICATEDCHANNEL_D3D9: ::UINT = 1;
-pub const D3DAUTHENTICATEDCHANNEL_DRIVER_SOFTWARE: ::UINT = 2;
-pub const D3DAUTHENTICATEDCHANNEL_DRIVER_HARDWARE: ::UINT = 3;
-
-#[repr(C)]
-#[derive(Copy)]
+pub const D3D9_RESOURCE_PRIORITY_MINIMUM: ::DWORD = 0x28000000;
+pub const D3D9_RESOURCE_PRIORITY_LOW: ::DWORD = 0x50000000;
+pub const D3D9_RESOURCE_PRIORITY_NORMAL: ::DWORD = 0x78000000;
+pub const D3D9_RESOURCE_PRIORITY_HIGH: ::DWORD = 0xa0000000;
+pub const D3D9_RESOURCE_PRIORITY_MAXIMUM: ::DWORD = 0xc8000000;
+pub const D3D_OMAC_SIZE: usize = 16;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct D3D_OMAC {
+    pub Omac: [::BYTE; D3D_OMAC_SIZE],
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DAUTHENTICATEDCHANNELTYPE {
+    D3DAUTHENTICATEDCHANNEL_D3D9 = 1,
+    D3DAUTHENTICATEDCHANNEL_DRIVER_SOFTWARE = 2,
+    D3DAUTHENTICATEDCHANNEL_DRIVER_HARDWARE = 3,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERY_INPUT {
     pub QueryType: ::GUID,
     pub hChannel: ::HANDLE,
     pub SequenceNumber: ::UINT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT {
     pub omac: D3D_OMAC,
     pub QueryType: ::GUID,
@@ -1233,125 +1378,104 @@ pub struct D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT {
     pub SequenceNumber: ::UINT,
     pub ReturnCode: ::HRESULT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDQUERY_PROTECTION, 0xa84eb584, 0xc495, 0x48aa,
+    0xb9, 0x4d, 0x8b, 0xd2, 0xd6, 0xfb, 0xce, 0x5);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS {
-    pub _bindgen_data_1_: [u32; 1usize],
+    pub Value: ::UINT,
 }
-impl D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS {
-    pub unsafe fn Value(&mut self) -> *mut ::UINT {
-        transmute(&self._bindgen_data_1_)
-    }
-}
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYPROTECTION_OUTPUT {
     pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
     pub ProtectionFlags: D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS,
 }
-
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDQUERY_CHANNELTYPE, 0xbc1b18a5, 0xb1fb, 0x42ab,
+    0xbd, 0x94, 0xb5, 0x82, 0x8b, 0x4b, 0xf7, 0xbe);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYCHANNELTYPE_OUTPUT {
     pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
     pub ChannelType: D3DAUTHENTICATEDCHANNELTYPE,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDQUERY_DEVICEHANDLE, 0xec1c539d, 0x8cff, 0x4e2a,
+    0xbc, 0xc4, 0xf5, 0x69, 0x2f, 0x99, 0xf4, 0x80);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYDEVICEHANDLE_OUTPUT {
     pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
     pub DeviceHandle: ::HANDLE,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDQUERY_CRYPTOSESSION, 0x2634499e, 0xd018, 0x4d74,
+    0xac, 0x17, 0x7f, 0x72, 0x40, 0x59, 0x52, 0x8d);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYCRYPTOSESSION_INPUT {
     pub Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
     pub DXVA2DecodeHandle: ::HANDLE,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYCRYPTOSESSION_OUTPUT {
     pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
     pub DXVA2DecodeHandle: ::HANDLE,
     pub CryptoSessionHandle: ::HANDLE,
     pub DeviceHandle: ::HANDLE,
 }
-
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDQUERY_RESTRICTEDSHAREDRESOURCEPROCESSCOUNT, 0xdb207b3, 0x9450, 0x46a6,
+    0x82, 0xde, 0x1b, 0x96, 0xd4, 0x4f, 0x9c, 0xf2);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESSCOUNT_OUTPUT {
     pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
     pub NumRestrictedSharedResourceProcesses: ::UINT,
 }
-
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDQUERY_RESTRICTEDSHAREDRESOURCEPROCESS, 0x649bbadb, 0xf0f4, 0x4639,
+    0xa1, 0x5b, 0x24, 0x39, 0x3f, 0xc3, 0xab, 0xac);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESS_INPUT {
     pub Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
     pub ProcessIndex: ::UINT,
 }
-
-
-pub type D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE = ::UINT;
-pub const PROCESSIDTYPE_UNKNOWN: ::UINT = 0;
-pub const PROCESSIDTYPE_DWM: ::UINT = 1;
-pub const PROCESSIDTYPE_HANDLE: ::UINT = 2;
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE {
+    PROCESSIDTYPE_UNKNOWN = 0,
+    PROCESSIDTYPE_DWM = 1,
+    PROCESSIDTYPE_HANDLE = 2,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESS_OUTPUT {
     pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
     pub ProcessIndex: ::UINT,
     pub ProcessIdentifer: D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE,
     pub ProcessHandle: ::HANDLE,
 }
-
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDQUERY_UNRESTRICTEDPROTECTEDSHAREDRESOURCECOUNT,
+    0x12f0bd6, 0xe662, 0x4474, 0xbe, 0xfd, 0xaa, 0x53, 0xe5, 0x14, 0x3c, 0x6d);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYUNRESTRICTEDPROTECTEDSHAREDRESOURCECOUNT_OUTPUT {
     pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
     pub NumUnrestrictedProtectedSharedResources: ::UINT,
 }
-
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDQUERY_OUTPUTIDCOUNT, 0x2c042b5e, 0x8c07, 0x46d5,
+    0xaa, 0xbe, 0x8f, 0x75, 0xcb, 0xad, 0x4c, 0x31);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTIDCOUNT_INPUT {
     pub Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
     pub DeviceHandle: ::HANDLE,
     pub CryptoSessionHandle: ::HANDLE,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTIDCOUNT_OUTPUT {
     pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
     pub DeviceHandle: ::HANDLE,
     pub CryptoSessionHandle: ::HANDLE,
     pub NumOutputIDs: ::UINT,
 }
-
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDQUERY_OUTPUTID, 0x839ddca3, 0x9b4e, 0x41e4,
+    0xb0, 0x53, 0x89, 0x2b, 0xd2, 0xa1, 0x1e, 0xe7);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTID_INPUT {
     pub Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
     pub DeviceHandle: ::HANDLE,
     pub CryptoSessionHandle: ::HANDLE,
     pub OutputIDIndex: ::UINT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTID_OUTPUT {
     pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
     pub DeviceHandle: ::HANDLE,
@@ -1359,73 +1483,64 @@ pub struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTID_OUTPUT {
     pub OutputIDIndex: ::UINT,
     pub OutputID: ::UINT64,
 }
-
-pub type D3DBUSTYPE = ::UINT;
-pub const D3DBUSTYPE_OTHER: ::UINT = 0;
-pub const D3DBUSTYPE_PCI: ::UINT = 1;
-pub const D3DBUSTYPE_PCIX: ::UINT = 2;
-pub const D3DBUSTYPE_PCIEXPRESS: ::UINT = 3;
-pub const D3DBUSTYPE_AGP: ::UINT = 4;
-pub const D3DBUSIMPL_MODIFIER_INSIDE_OF_CHIPSET: ::UINT = 65536;
-pub const D3DBUSIMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_CHIP: ::UINT = 131072;
-pub const D3DBUSIMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_SOCKET: ::UINT = 196608;
-pub const D3DBUSIMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR: ::UINT = 262144;
-pub const D3DBUSIMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR_INSIDE_OF_NUAE: ::UINT = 327680;
-pub const D3DBUSIMPL_MODIFIER_NON_STANDARD: ::UINT = -2147483648;
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDQUERY_ACCESSIBILITYATTRIBUTES, 0x6214d9d2, 0x432c, 0x4abb,
+    0x9f, 0xce, 0x21, 0x6e, 0xea, 0x26, 0x9e, 0x3b);
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum D3DBUSTYPE {
+    D3DBUSTYPE_OTHER = 0x00000000,
+    D3DBUSTYPE_PCI = 0x00000001,
+    D3DBUSTYPE_PCIX = 0x00000002,
+    D3DBUSTYPE_PCIEXPRESS = 0x00000003,
+    D3DBUSTYPE_AGP = 0x00000004,
+    D3DBUSIMPL_MODIFIER_INSIDE_OF_CHIPSET = 0x00010000,
+    D3DBUSIMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_CHIP = 0x00020000,
+    D3DBUSIMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_SOCKET = 0x00030000,
+    D3DBUSIMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR = 0x00040000,
+    D3DBUSIMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR_INSIDE_OF_NUAE = 0x00050000,
+    D3DBUSIMPL_MODIFIER_NON_STANDARD = 0x80000000u32 as i32,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYINFOBUSTYPE_OUTPUT {
     pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
     pub BusType: D3DBUSTYPE,
     pub bAccessibleInContiguousBlocks: ::BOOL,
     pub bAccessibleInNonContiguousBlocks: ::BOOL,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDQUERY_ENCRYPTIONWHENACCESSIBLEGUIDCOUNT, 0xb30f7066, 0x203c, 0x4b07,
+    0x93, 0xfc, 0xce, 0xaa, 0xfd, 0x61, 0x24, 0x1e);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUIDCOUNT_OUTPUT {
     pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
     pub NumEncryptionGuids: ::UINT,
 }
-
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDQUERY_ENCRYPTIONWHENACCESSIBLEGUID, 0xf83a5958, 0xe986, 0x4bda,
+    0xbe, 0xb0, 0x41, 0x1f, 0x6a, 0x7a, 0x1, 0xb7);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUID_INPUT {
     pub Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
     pub EncryptionGuidIndex: ::UINT,
 }
-
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUID_OUTPUT {
     pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
     pub EncryptionGuidIndex: ::UINT,
     pub EncryptionGuid: ::GUID,
 }
-
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDQUERY_CURRENTENCRYPTIONWHENACCESSIBLE, 0xec1791c7, 0xdad3, 0x4f15,
+    0x9e, 0xc3, 0xfa, 0xa9, 0x3d, 0x60, 0xd4, 0xf0);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_QUERYUNCOMPRESSEDENCRYPTIONLEVEL_OUTPUT {
     pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
     pub EncryptionGuid: ::GUID,
 }
-
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT {
     pub omac: D3D_OMAC,
     pub ConfigureType: ::GUID,
     pub hChannel: ::HANDLE,
     pub SequenceNumber: ::UINT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT {
     pub omac: D3D_OMAC,
     pub ConfigureType: ::GUID,
@@ -1433,82 +1548,54 @@ pub struct D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT {
     pub SequenceNumber: ::UINT,
     pub ReturnCode: ::HRESULT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDCONFIGURE_INITIALIZE, 0x6114bdb, 0x3523, 0x470a,
+    0x8d, 0xca, 0xfb, 0xc2, 0x84, 0x51, 0x54, 0xf0);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_CONFIGUREINITIALIZE {
     pub Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
     pub StartSequenceQuery: ::UINT,
     pub StartSequenceConfigure: ::UINT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDCONFIGURE_PROTECTION, 0x50455658, 0x3f47, 0x4362,
+    0xbf, 0x99, 0xbf, 0xdf, 0xcd, 0xe9, 0xed, 0x29);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_CONFIGUREPROTECTION {
     pub Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
     pub Protections: D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDCONFIGURE_CRYPTOSESSION, 0x6346cc54, 0x2cfc, 0x4ad4,
+    0x82, 0x24, 0xd1, 0x58, 0x37, 0xde, 0x77, 0x0);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_CONFIGURECRYPTOSESSION {
     pub Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
     pub DXVA2DecodeHandle: ::HANDLE,
     pub CryptoSessionHandle: ::HANDLE,
     pub DeviceHandle: ::HANDLE,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDCONFIGURE_SHAREDRESOURCE, 0x772d047, 0x1b40, 0x48e8,
+    0x9c, 0xa6, 0xb5, 0xf5, 0x10, 0xde, 0x9f, 0x1);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_CONFIGURESHAREDRESOURCE {
     pub Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
     pub ProcessIdentiferType: D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE,
     pub ProcessHandle: ::HANDLE,
     pub AllowAccess: ::BOOL,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+DEFINE_GUID!(D3DAUTHENTICATEDCONFIGURE_ENCRYPTIONWHENACCESSIBLE, 0x41fff286, 0x6ae0, 0x4d43,
+    0x9d, 0x55, 0xa4, 0x6e, 0x9e, 0xfd, 0x15, 0x8a);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAUTHENTICATEDCHANNEL_CONFIGUREUNCOMPRESSEDENCRYPTION {
     pub Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
     pub EncryptionGuid: ::GUID,
 }
-
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DENCRYPTED_BLOCK_INFO {
     pub NumEncryptedBytesAtBeginning: ::UINT,
     pub NumBytesInSkipPattern: ::UINT,
     pub NumBytesInEncryptPattern: ::UINT,
 }
-
-#[repr(C)]
-#[derive(Copy)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DAES_CTR_IV {
     pub IV: ::UINT64,
     pub Count: ::UINT64,
-}
-
-extern "C" {
-    pub static D3DAUTHENTICATEDQUERY_PROTECTION: ::GUID;
-    pub static D3DAUTHENTICATEDQUERY_CHANNELTYPE: ::GUID;
-    pub static D3DAUTHENTICATEDQUERY_DEVICEHANDLE: ::GUID;
-    pub static D3DAUTHENTICATEDQUERY_CRYPTOSESSION: ::GUID;
-    pub static D3DAUTHENTICATEDQUERY_RESTRICTEDSHAREDRESOURCEPROCESSCOUNT:
-               ::GUID;
-    pub static D3DAUTHENTICATEDQUERY_RESTRICTEDSHAREDRESOURCEPROCESS: ::GUID;
-    pub static D3DAUTHENTICATEDQUERY_UNRESTRICTEDPROTECTEDSHAREDRESOURCECOUNT:
-               ::GUID;
-    pub static D3DAUTHENTICATEDQUERY_OUTPUTIDCOUNT: ::GUID;
-    pub static D3DAUTHENTICATEDQUERY_OUTPUTID: ::GUID;
-    pub static D3DAUTHENTICATEDQUERY_ACCESSIBILITYATTRIBUTES: ::GUID;
-    pub static D3DAUTHENTICATEDQUERY_ENCRYPTIONWHENACCESSIBLEGUIDCOUNT: ::GUID;
-    pub static D3DAUTHENTICATEDQUERY_ENCRYPTIONWHENACCESSIBLEGUID: ::GUID;
-    pub static D3DAUTHENTICATEDQUERY_CURRENTENCRYPTIONWHENACCESSIBLE: ::GUID;
-    pub static D3DAUTHENTICATEDCONFIGURE_INITIALIZE: ::GUID;
-    pub static D3DAUTHENTICATEDCONFIGURE_PROTECTION: ::GUID;
-    pub static D3DAUTHENTICATEDCONFIGURE_CRYPTOSESSION: ::GUID;
-    pub static D3DAUTHENTICATEDCONFIGURE_SHAREDRESOURCE: ::GUID;
-    pub static D3DAUTHENTICATEDCONFIGURE_ENCRYPTIONWHENACCESSIBLE: ::GUID;
 }

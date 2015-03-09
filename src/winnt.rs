@@ -175,7 +175,7 @@ pub const ACL_REVISION2: ::BYTE = 2;
 pub const ACL_REVISION3: ::BYTE = 3;
 pub const ACL_REVISION4: ::BYTE = 4;
 pub const MAX_ACL_REVISION: ::BYTE = ACL_REVISION4;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ACL {
     pub AclRevision: ::BYTE,
     pub Sbz1: ::BYTE,
@@ -227,7 +227,7 @@ pub struct CLAIM_SECURITY_ATTRIBUTE_V1 {
     // Put data here
 }
 pub type PCLAIM_SECURITY_ATTRIBUTE_V1 = *mut CLAIM_SECURITY_ATTRIBUTE_V1;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 {
     pub Name: ::DWORD,
     pub ValueType: ::WORD,
@@ -249,7 +249,7 @@ pub struct CLAIM_SECURITY_ATTRIBUTES_INFORMATION {
 }
 pub type PCLAIM_SECURITY_ATTRIBUTES_INFORMATION = *mut CLAIM_SECURITY_ATTRIBUTES_INFORMATION;
 //11490
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IO_COUNTERS {
     pub ReadOperationCount: ::ULONGLONG,
     pub WriteOperationCount: ::ULONGLONG,
@@ -260,7 +260,7 @@ pub struct IO_COUNTERS {
 }
 pub type PIO_COUNTERS = *mut IO_COUNTERS;
 //11607
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct JOBOBJECT_BASIC_LIMIT_INFORMATION {
     pub PerProcessUserTimeLimit: ::LARGE_INTEGER,
     pub PerJobUserTimeLimit: ::LARGE_INTEGER,
@@ -273,7 +273,7 @@ pub struct JOBOBJECT_BASIC_LIMIT_INFORMATION {
     pub SchedulingClass: ::DWORD,
 }
 pub type PJOBOBJECT_BASIC_LIMIT_INFORMATION = *mut JOBOBJECT_BASIC_LIMIT_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct JOBOBJECT_EXTENDED_LIMIT_INFORMATION {
     pub BasicLimitInformation: JOBOBJECT_BASIC_LIMIT_INFORMATION,
     pub IoInfo: IO_COUNTERS,
@@ -475,7 +475,7 @@ pub struct FILE_NOTIFY_INFORMATION {
     pub FileNameLength: ::DWORD,
     pub FileName: [::WCHAR; 0],
 }
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FILE_SEGMENT_ELEMENT {
     pub Buffer: ::PVOID64,
     pub Alignment: ::ULONGLONG,

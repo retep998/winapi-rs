@@ -11,5 +11,6 @@ license = "MIT"
 build = "build.rs"
 links = "d3d9"
 
-[dependencies]
-winapi = "*"
+[dependencies.winapi]
+version = "*"
+path = "../.."

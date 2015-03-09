@@ -4,7 +4,6 @@
 #![cfg(windows)]
 extern crate winapi;
 use winapi::*;
-
 #[cfg(any(target_arch = "x86", target_arch = "x86_64", target_arch = "arm"))]
 extern "system" {
     pub fn D3DPERF_BeginEvent(col: D3DCOLOR, wszName: LPCWSTR) -> INT;

@@ -66,7 +66,7 @@ pub const MOUSEEVENTF_HWHEEL: ::DWORD = 0x01000;
 pub const MOUSEEVENTF_MOVE_NOCOALESCE: ::DWORD = 0x2000;
 pub const MOUSEEVENTF_VIRTUALDESK: ::DWORD = 0x4000;
 pub const MOUSEEVENTF_ABSOLUTE: ::DWORD = 0x8000;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MOUSEINPUT {
     pub dx: ::LONG,
     pub dy: ::LONG,
@@ -77,7 +77,7 @@ pub struct MOUSEINPUT {
 }
 pub type PMOUSEINPUT = *mut MOUSEINPUT;
 pub type LPMOUSEINPUT = *mut MOUSEINPUT;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct KEYBDINPUT {
     pub wVk: ::WORD,
     pub wScan: ::WORD,
@@ -87,7 +87,7 @@ pub struct KEYBDINPUT {
 }
 pub type PKEYBDINPUT = *mut KEYBDINPUT;
 pub type LPKEYBDINPUT = *mut KEYBDINPUT;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HARDWAREINPUT {
     pub uMsg: ::DWORD,
     pub wParamL: ::WORD,
@@ -98,7 +98,7 @@ pub type LPHARDWAREINPUT= *mut HARDWAREINPUT;
 pub const INPUT_MOUSE: ::DWORD = 0;
 pub const INPUT_KEYBOARD: ::DWORD = 1;
 pub const INPUT_HARDWARE: ::DWORD = 2;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct INPUT {
     pub type_: ::DWORD,
     pub union_: MOUSEINPUT, // FIXME - Untagged unions

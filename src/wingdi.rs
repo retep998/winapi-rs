@@ -9,7 +9,7 @@ pub const LF_FACESIZE: usize = 32;
 pub struct RGNDATA;
 
 #[repr(C)]
-#[derive(Copy, Default)]
+#[derive(Copy)]
 pub struct PALETTEENTRY {
     peRed: ::BYTE,
     peGreen: ::BYTE,
