@@ -16,7 +16,7 @@ extern "system" {
     pub fn AnyPopup() -> BOOL;
     pub fn AppendMenuA(
         hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR
-    );
+    ) -> BOOL;
     pub fn AppendMenuW(
         hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCWSTR
     ) -> BOOL;
@@ -58,8 +58,12 @@ extern "system" {
         lParam: LPVOID,
     ) -> LONG;
     pub fn ChangeDisplaySettingsW(lpDevMode: *mut DEVMODEW, dwFlags: DWORD) -> LONG;
-    // pub fn ChangeMenuA();
-    // pub fn ChangeMenuW();
+    pub fn ChangeMenuA(
+        hMenu: HMENU, cmd: UINT, lpszNewItem: LPCSTR, cmdInsert: UINT, flags: UINT
+    ) -> BOOL;
+    pub fn ChangeMenuW(
+        hMenu: HMENU, cmd: UINT, lpszNewItem: LPCWSTR, cmdInsert: UINT, flags: UINT
+    ) -> BOOL;
     // pub fn ChangeWindowMessageFilter();
     // pub fn ChangeWindowMessageFilterEx();
     // pub fn CharLowerA();
@@ -76,14 +80,18 @@ extern "system" {
     // pub fn CharToOemBuffA();
     // pub fn CharToOemBuffW();
     // pub fn CharToOemW();
-    // pub fn CharUpperA();
+    pub fn CharUpperA(lpsz: LPSTR) -> LPSTR;
     // pub fn CharUpperBuffA();
     // pub fn CharUpperBuffW();
-    // pub fn CharUpperW();
+    pub fn CharUpperW(lpsz: LPWSTR) -> LPWSTR;
     // pub fn CheckDlgButton();
-    // pub fn CheckMenuItem();
-    // pub fn CheckMenuRadioItem();
-    // pub fn CheckRadioButton();
+    pub fn CheckMenuItem(hMenu: HMENU, uIDCheckItem: UINT, uCheck: UINT) -> DWORD;
+    pub fn CheckMenuRadioItem(
+        hMenu: HMENU, first: UINT, last: UINT, check: UINT, flags: UINT
+    ) -> BOOL;
+    pub fn CheckRadioButton(
+        hDlg: HWND, nIDFirstButton: c_int, nIDLasatButton: c_int, nIDCheckButton: c_int
+    ) -> BOOL;
     pub fn ChildWindowFromPoint(hWndParent: HWND, point: POINT) -> HWND;
     pub fn ChildWindowFromPointEx(hwnd: HWND, pt: POINT, flags: UINT) -> HWND;
     // pub fn ClientToScreen();
@@ -121,11 +129,11 @@ extern "system" {
     ) -> HICON;
     // pub fn CreateIconFromResource();
     // pub fn CreateIconFromResourceEx();
-    // pub fn CreateIconIndirect();
+    // pub fn CreateIconIndirect(piconinfo: PICONINFO) -> HICON;
     // pub fn CreateMDIWindowA();
     // pub fn CreateMDIWindowW();
-    // pub fn CreateMenu();
-    // pub fn CreatePopupMenu();
+    pub fn CreateMenu() -> HMENU;
+    pub fn CreatePopupMenu() ->HMENU;
     // pub fn CreateWindowExA();
     pub fn CreateWindowExW(
         dwExStyle: DWORD, lpClassName: LPCWSTR, lpWindowName: LPCWSTR, dwStyle: DWORD, x: c_int,
@@ -424,8 +432,8 @@ extern "system" {
     // pub fn GetPriorityClipboardFormat();
     // pub fn GetProcessDefaultLayout();
     // pub fn GetProcessWindowStation();
-    // pub fn GetPropA();
-    // pub fn GetPropW();
+    pub fn GetPropA(hwnd: HWND, lpString: LPCSTR) -> HANDLE;
+    pub fn GetPropW(hwnd: HWND, lpString: LPCWSTR) -> HANDLE;
     // pub fn GetQueueStatus();
     // pub fn GetRawInputBuffer();
     // pub fn GetRawInputData();
@@ -497,15 +505,21 @@ extern "system" {
     // pub fn ImpersonateDdeClientWindow();
     // pub fn InSendMessage();
     // pub fn InSendMessageEx();
-    // pub fn InflateRect();
+    pub fn InflateRect(lprc: LPRECT, dx: c_int, dy: c_int) -> BOOL;
     // pub fn InitializeTouchInjection();
     // pub fn InjectTouchInput();
-    // pub fn InsertMenuA();
+    pub fn InsertMenuA(
+        hMenu: HMENU, uPosition: UINT, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR
+    ) -> BOOL;
     // pub fn InsertMenuItemA();
     // pub fn InsertMenuItemW();
-    // pub fn InsertMenuW();
+    pub fn InsertMenuW(
+        hMenu: HMENU, uPosition: UINT, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCWSTR
+    ) -> BOOL;
     // pub fn InternalGetWindowText();
-    // pub fn IntersectRect();
+    pub fn IntersectRect(
+        lprcDst: LPRECT, lprcSrc1: *const RECT, lprcSrc2: *const RECT
+    ) -> BOOL;
     pub fn InvalidateRect(hWnd: HWND, lpRect: *const RECT, bErase: BOOL) -> BOOL;
     // pub fn InvalidateRgn();
     // pub fn InvertRect();
@@ -513,10 +527,10 @@ extern "system" {
     // pub fn IsCharAlphaNumericA();
     // pub fn IsCharAlphaNumericW();
     // pub fn IsCharAlphaW();
-    // pub fn IsCharLowerA();
-    // pub fn IsCharLowerW();
-    // pub fn IsCharUpperA();
-    // pub fn IsCharUpperW();
+    pub fn IsCharLowerA(ch: CHAR) -> BOOL;
+    pub fn IsCharLowerW(ch: WCHAR) -> BOOL;
+    pub fn IsCharUpperA(ch: CHAR) -> BOOL;
+    pub fn IsCharUpperW(ch: WCHAR) -> BOOL;
     // pub fn IsChild();
     pub fn IsClipboardFormatAvailable(format: UINT) -> BOOL;
     // pub fn IsDialogMessage();
@@ -532,7 +546,7 @@ extern "system" {
     // pub fn IsMouseInPointerEnabled();
     // pub fn IsProcessDPIAware();
     // pub fn IsRectEmpty();
-    // pub fn IsTouchWindow();
+    pub fn IsTouchWindow(hwnd: HWND, pulFlags: PULONG) -> BOOL;
     // pub fn IsWinEventHookInstalled();
     pub fn IsWindow(hWnd: HWND) -> BOOL;
     pub fn IsWindowEnabled(hWnd: HWND) -> BOOL;
