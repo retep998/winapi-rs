@@ -13,7 +13,7 @@ pub type LONG = ::c_long;
 //3563
 #[cfg(target_arch = "x86")]
 pub const SIZE_OF_80387_REGISTERS: usize = 80;
-#[cfg(target_arch = "x86")] #[repr(C)] #[derive(Clone, Copy, Debug)]
+#[cfg(target_arch = "x86")] #[repr(C)] #[derive(Clone, Copy)]
 pub struct FLOATING_SAVE_AREA {
     pub ControlWord: ::DWORD,
     pub StatusWord: ::DWORD,
@@ -29,7 +29,7 @@ pub struct FLOATING_SAVE_AREA {
 pub type PFLOATING_SAVE_AREA = *mut FLOATING_SAVE_AREA;
 #[cfg(target_arch = "x86")]
 pub const MAXIMUM_SUPPORTED_EXTENSION: usize = 512;
-#[cfg(target_arch = "x86")] #[repr(C)] #[derive(Clone, Copy, Debug)]
+#[cfg(target_arch = "x86")] #[repr(C)] #[derive(Clone, Copy)]
 pub struct CONTEXT {
     pub ContextFlags: ::DWORD,
     pub Dr0: ::DWORD,
