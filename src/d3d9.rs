@@ -1,6 +1,10 @@
 // Copyright © 2015, Corey Richardson
 // Licensed under the MIT License <LICENSE.md>
 //! Direct3D include file
+
+pub const D3D_SDK_VERSION: ::DWORD = 32;
+pub const D3D9b_SDK_VERSION: ::DWORD = 31;
+
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IDirect3D9 {
     pub lpVtbl: *mut IDirect3D9Vtbl,
@@ -1221,6 +1225,8 @@ pub const D3DCREATE_DISABLE_PSGP_THREADING: ::DWORD = 0x2000;
 pub const D3DCREATE_ENABLE_PRESENTSTATS: ::DWORD = 0x4000;
 pub const D3DCREATE_DISABLE_PRESENTSTATS: ::DWORD = 0x8000;
 pub const D3DCREATE_SCREENSAVER: ::DWORD = 0x10000000;
+
+pub const D3DADAPTER_DEFAULT: ::DWORD = 0;
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IDirect3D9Ex {
