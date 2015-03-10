@@ -1,6 +1,10 @@
 // Copyright © 2015, Corey Richardson
 // Licensed under the MIT License <LICENSE.md>
 //! Direct3D include file
+
+pub const D3D_SDK_VERSION: ::DWORD = 32;
+pub const D3D9b_SDK_VERSION: ::DWORD = 31;
+
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IDirect3D9 {
     pub lpVtbl: *mut IDirect3D9Vtbl,
@@ -1206,6 +1210,24 @@ pub struct IDirect3DQuery9Vtbl {
 }
 pub type LPDIRECT3DQUERY9 = *mut IDirect3DQuery9;
 pub type PDIRECT3DQUERY9 = *mut IDirect3DQuery9;
+
+pub const D3DCREATE_FPU_PRESERVE: ::DWORD = 0x2;
+pub const D3DCREATE_MULTITHREADED: ::DWORD = 0x4;
+pub const D3DCREATE_PUREDEVICE: ::DWORD = 0x10;
+pub const D3DCREATE_SOFTWARE_VERTEXPROCESSING: ::DWORD = 0x20;
+pub const D3DCREATE_HARDWARE_VERTEXPROCESSING: ::DWORD = 0x40;
+pub const D3DCREATE_MIXED_VERTEXPROCESSING: ::DWORD = 0x80;
+pub const D3DCREATE_DISABLE_DRIVER_MANAGEMENT: ::DWORD = 0x100;
+pub const D3DCREATE_ADAPTERGROUP_DEVICE: ::DWORD = 0x200;
+pub const D3DCREATE_DISABLE_DRIVER_MANAGEMENT_EX: ::DWORD = 0x400;
+pub const D3DCREATE_NOWINDOWCHANGES: ::DWORD = 0x800;
+pub const D3DCREATE_DISABLE_PSGP_THREADING: ::DWORD = 0x2000;
+pub const D3DCREATE_ENABLE_PRESENTSTATS: ::DWORD = 0x4000;
+pub const D3DCREATE_DISABLE_PRESENTSTATS: ::DWORD = 0x8000;
+pub const D3DCREATE_SCREENSAVER: ::DWORD = 0x10000000;
+
+pub const D3DADAPTER_DEFAULT: ::DWORD = 0;
+
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IDirect3D9Ex {
     pub lpVtbl: *mut IDirect3D9ExVtbl,
