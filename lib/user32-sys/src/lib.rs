@@ -94,7 +94,7 @@ extern "system" {
     ) -> BOOL;
     pub fn ChildWindowFromPoint(hWndParent: HWND, point: POINT) -> HWND;
     pub fn ChildWindowFromPointEx(hwnd: HWND, pt: POINT, flags: UINT) -> HWND;
-    // pub fn ClientToScreen();
+    pub fn ClientToScreen(hWnd: HWND, lpPoint: LPPOINT) -> BOOL;
     pub fn ClipCursor(lpRect: *const RECT) -> BOOL;
     pub fn CloseClipboard() -> BOOL;
     pub fn CloseDesktop(hDesktop: HDESK) -> BOOL;
@@ -691,7 +691,7 @@ extern "system" {
     // pub fn RemovePropW();
     // pub fn ReplyMessage();
     // pub fn ReuseDDElParam();
-    // pub fn ScreenToClient();
+    pub fn ScreenToClient(hWnd: HWND, lpPoint: LPPOINT) -> BOOL;
     pub fn ScrollDC(
         hDC: HDC, dx: c_int, dy: c_int, lprcScroll: *const RECT, lprcClip: *const RECT,
         hrgnUpdate: HRGN, lprcUpdate: LPRECT,
