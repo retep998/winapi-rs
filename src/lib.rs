@@ -2351,6 +2351,10 @@ pub const WS_EX_NOREDIRECTIONBITMAP: DWORD = 0x00200000;
 pub const WS_EX_LAYOUTRTL: DWORD = 0x00400000;
 pub const WS_EX_COMPOSITED: DWORD = 0x02000000;
 pub const WS_EX_NOACTIVATE: DWORD = 0x08000000;
+pub type DESKTOPENUMPROCA = Option<unsafe extern "system" fn(LPSTR, LPARAM) -> BOOL>;
+pub type DESKTOPENUMPROCW = Option<unsafe extern "system" fn(LPWSTR, LPARAM) -> BOOL>;
+pub type NAMEENUMPROCA = DESKTOPENUMPROCA;
+pub type NAMEENUMPROCW = DESKTOPENUMPROCW;
 pub type WNDENUMPROC = Option<unsafe extern "system" fn(HWND, LPARAM) -> BOOL>;
 pub type WNDPROC = Option<unsafe extern "system" fn(HWND, UINT, WPARAM, LPARAM) -> LRESULT>;
 pub type HOOKPROC = Option<unsafe extern "system" fn(
@@ -2589,6 +2593,17 @@ pub struct DISPLAY_DEVICEW {
 }
 pub type PDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
 pub type LPDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
+#[repr(C)] #[derive(Copy)]
+pub struct DISPLAY_DEVICEA {
+    pub cb: DWORD,
+    pub DeviceName: [CHAR; 32],
+    pub DeviceString: [CHAR; 128],
+    pub StateFlags: DWORD,
+    pub DeviceID: [CHAR; 128],
+    pub DeviceKey: [CHAR; 128],
+}
+pub type PDISPLAY_DEVICEA = *mut DISPLAY_DEVICEA;
+pub type LPDISPLAY_DEVICEA = *mut DISPLAY_DEVICEA;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PIXELFORMATDESCRIPTOR {
     pub nSize: WORD,

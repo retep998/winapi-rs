@@ -66,15 +66,17 @@ extern "system" {
     ) -> BOOL;
     // pub fn ChangeWindowMessageFilter();
     // pub fn ChangeWindowMessageFilterEx();
-    // pub fn CharLowerA();
+    pub fn CharLowerA(lpsz: LPSTR) -> LPSTR;
     // pub fn CharLowerBuffA();
     // pub fn CharLowerBuffW();
-    // pub fn CharLowerW();
+    pub fn CharLowerW(lpsz: LPWSTR) -> LPWSTR;
     pub fn CharNextA(lpsz: LPCSTR) -> LPSTR;
-    // pub fn CharNextExA();
+    pub fn CharNextExA(codePage: WORD, lpCurrentChar: LPSTR, dwFlags: DWORD) -> LPSTR;
     pub fn CharNextW(lpsz: LPCWSTR) -> LPWSTR;
     pub fn CharPrevA(lpszStart: LPCSTR, lpszCurrent: LPCSTR) -> LPSTR;
-    // pub fn CharPrevExA();
+    pub fn CharPrevExA(
+        codePage: WORD, lpStart: LPCSTR, lpCurrentChar: LPCSTR, dwFlags: DWORD
+    ) -> LPSTR;
     pub fn CharPrevW(lpszStart: LPCWSTR, lpszCurrent: LPCWSTR) -> LPWSTR;
     // pub fn CharToOemA();
     // pub fn CharToOemBuffA();
@@ -260,24 +262,36 @@ extern "system" {
     pub fn EndMenu(hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR) -> BOOL;
     pub fn EndPaint(hWnd: HWND, lpPaint: *const PAINTSTRUCT) -> BOOL;
     pub fn EndTask(hWnd: HWND, fShutDown: BOOL, fForce: BOOL) -> BOOL;
-    // pub fn EnumChildWindows();
+    pub fn EnumChildWindows(
+        hwndParent: HWND, lpEnumFunc: WNDENUMPROC, lpParam: LPARAM
+    ) -> BOOL;
     pub fn EnumClipboardFormats(format: UINT) -> UINT;
     pub fn EnumDesktopWindows(hDesktop: HDESK, lpfn: WNDENUMPROC, lParam: LPARAM) -> BOOL;
-    // pub fn EnumDesktopsA();
-    // pub fn EnumDesktopsW();
-    // pub fn EnumDisplayDevicesA();
+    pub fn EnumDesktopsA(
+        hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCA, lParam: LPARAM
+    ) -> BOOL;
+    pub fn EnumDesktopsW(
+        hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCW, lParam: LPARAM
+    ) -> BOOL;
+    pub fn EnumDisplayDevicesA(
+        lpDevice: LPCSTR, iDevNum: DWORD, lpDisplayDevice: PDISPLAY_DEVICEA, dwFlags: DWORD
+    ) -> BOOL;
     pub fn EnumDisplayDevicesW(
         lpDevice: LPCWSTR, iDevNum: DWORD, lpDisplayDevice: PDISPLAY_DEVICEW, dwFlags: DWORD,
     ) -> BOOL;
     pub fn EnumDisplayMonitors(
         hdc: HDC, lprcClip: LPCRECT, lpfnEnum: MONITORENUMPROC, dwData: LPARAM,
     ) -> BOOL;
-    // pub fn EnumDisplaySettingsA();
+    // pub fn EnumDisplaySettingsA(
+    //     lpszDeviceName: LPCSTR, iModeNum: DWORD, lpDevMode: *mut DEVMODEA
+    // ) -> BOOL;
     // pub fn EnumDisplaySettingsExA();
     pub fn EnumDisplaySettingsExW(
         lpszDeviceName: LPCWSTR, iModeNum: DWORD, lpDevMode: *mut DEVMODEW, dwFlags: DWORD,
     ) -> BOOL;
-    // pub fn EnumDisplaySettingsW();
+    pub fn EnumDisplaySettingsW(
+        lpszDeviceName: LPCWSTR, iModeNum: DWORD, lpDevMode: *mut DEVMODEW
+    ) -> BOOL;
     // pub fn EnumPropsA();
     // pub fn EnumPropsExA();
     // pub fn EnumPropsExW();
