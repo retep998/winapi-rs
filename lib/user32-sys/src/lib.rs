@@ -666,27 +666,45 @@ extern "system" {
     // pub fn PostMessageA();
     pub fn PostMessageW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
     pub fn PostQuitMessage(nExitCode: c_int);
-    // pub fn PostThreadMessageA();
-    // pub fn PostThreadMessageW();
-    // pub fn PrintWindow();
+    pub fn PostThreadMessageA(
+        idThread: DWORD, msg: UINT, wParam: WPARAM, lParam: LPARAM
+    ) -> BOOL;
+    pub fn PostThreadMessageW(
+        idThread: DWORD, msg: UINT, wParam: WPARAM, lParam: LPARAM
+    ) -> BOOL;
+    pub fn PrintWindow(hwnd: HWND, hdcBlt: HDC, nFlags: UINT) -> BOOL;
     // pub fn PrivateExtractIconsA();
     // pub fn PrivateExtractIconsW();
-    // pub fn PtInRect();
+    pub fn PtInRect(lprc: *const RECT, pt: POINT) -> BOOL;
     // pub fn QueryDisplayConfig();
-    // pub fn RealChildWindowFromPoint();
-    // pub fn RealGetWindowClass();
-    // pub fn RealGetWindowClassA();
-    // pub fn RealGetWindowClassW();
-    // pub fn RedrawWindow();
+    pub fn RealChildWindowFromPoint(
+        hwndParent: HWND, ptParentClientCoords: POINT
+    ) -> HWND;
+    pub fn RealGetWindowClass(
+        hwnd: HWND, ptszClassName: LPSTR, cchClassNameMax: UINT
+    ) -> UINT;
+    pub fn RealGetWindowClassA(
+        hwnd: HWND, ptszClassName: LPSTR, cchClassNameMax: UINT
+    ) -> UINT;
+    pub fn RealGetWindowClassW(
+        hwnd: HWND, ptszClassName: LPWSTR, cchClassNameMax: UINT
+    ) -> UINT;
+    pub fn RedrawWindow(
+        hwnd: HWND, lprcUpdate: *const RECT, hrgnUpdate: HRGN, flags: UINT
+    ) -> BOOL;
     // pub fn RegisterClassA();
     // pub fn RegisterClassExA();
     pub fn RegisterClassExW(lpWndClass: *const WNDCLASSEXW) -> ATOM;
-    // pub fn RegisterClassW();
+    pub fn RegisterClassW(lpWndClass: *const WNDCLASSW) -> ATOM;
     pub fn RegisterClipboardFormatA(lpszFormat: LPCSTR) -> UINT;
     pub fn RegisterClipboardFormatW(lpszFormat: LPCWSTR) -> UINT;
-    // pub fn RegisterDeviceNotificationA();
-    // pub fn RegisterDeviceNotificationW();
-    // pub fn RegisterHotKey();
+    pub fn RegisterDeviceNotificationA(
+        hRecipient: HANDLE, notificationFilter: LPVOID, flags: DWORD
+    ) -> HDEVNOTIFY;
+    pub fn RegisterDeviceNotificationW(
+        hRecipient: HANDLE, notificationFilter: LPVOID, flags: DWORD
+    ) -> HDEVNOTIFY;
+    pub fn RegisterHotKey(hwnd: HWND, id: c_int, fsModifiers: UINT, vk: UINT) -> BOOL;
     // pub fn RegisterPointerDeviceNotifications();
     // pub fn RegisterPointerInputTarget();
     // pub fn RegisterPowerSettingNotification();

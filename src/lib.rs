@@ -2363,6 +2363,9 @@ pub type HOOKPROC = Option<unsafe extern "system" fn(
 pub type TimerProc = Option<unsafe extern "system" fn(
     hwnd: HWND, uMsg: UINT, idEvent: UINT_PTR, dwTime: DWORD,
 )>;
+
+pub type HDEVNOTIFY = PVOID;
+
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FLASHWINFO {
     pub cbSize: UINT,
