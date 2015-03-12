@@ -45,6 +45,7 @@ pub use wincrypt::*;
 pub use windowsx::*;
 pub use winerror::*;
 pub use wingdi::*;
+pub use winioctl::*;
 pub use winnls::*;
 pub use winnt::*;
 pub use winsvc::*;
@@ -86,6 +87,11 @@ macro_rules! DEFINE_GUID {
         };
     }
 }
+macro_rules! CTL_CODE {
+    ($DeviceType:expr, $Function:expr, $Method:expr, $Access:expr) => {
+        ($DeviceType << 16) | ($Access << 14) | ($Function << 2) | $Method
+    }
+}
 
 //-------------------------------------------------------------------------------------------------
 // Modules
@@ -108,6 +114,7 @@ pub mod wincrypt;
 pub mod windowsx;
 pub mod winerror;
 pub mod wingdi;
+pub mod winioctl;
 pub mod winnls;
 pub mod winnt;
 pub mod winsvc;

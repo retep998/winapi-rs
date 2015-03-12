@@ -257,7 +257,11 @@ extern "system" {
     pub fn DeleteVolumeMountPointW(lpszVolumeMountPoint: LPCWSTR) -> BOOL;
     // #[cfg(target_arch = "x86_64")]
     // pub fn DequeueUmsCompletionListItems();
-    // pub fn DeviceIoControl();
+    pub fn DeviceIoControl(
+        hDevice: HANDLE, dwIoControlCode: DWORD, lpInBuffer: LPVOID, nInBufferSize: DWORD,
+        lpOutBuffer: LPVOID, nOutBufferSize: DWORD, lpBytesReturned: LPDWORD,
+        lpOverlapped: LPOVERLAPPED,
+    ) -> BOOL;
     // pub fn DisableThreadLibraryCalls();
     // pub fn DisableThreadProfiling();
     // pub fn DisassociateCurrentThreadFromCallback();
