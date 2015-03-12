@@ -399,7 +399,7 @@ extern "system" {
     // pub fn GetProcessDefaultLayout();
     // pub fn GetProcessWindowStation();
     // pub fn GetPropA();
-    // pub fn GetPropW();
+    pub fn GetPropW(hWnd: HWND, lpString: LPCWSTR) -> HANDLE;
     // pub fn GetQueueStatus();
     // pub fn GetRawInputBuffer();
     // pub fn GetRawInputData();
@@ -636,7 +636,7 @@ extern "system" {
     // pub fn RemoveClipboardFormatListener();
     // pub fn RemoveMenu();
     // pub fn RemovePropA();
-    // pub fn RemovePropW();
+    pub fn RemovePropW(hWnd: HWND, lpStr: LPCWSTR) -> HANDLE;
     // pub fn ReplyMessage();
     // pub fn ReuseDDElParam();
     // pub fn ScreenToClient();
@@ -716,7 +716,7 @@ extern "system" {
     // pub fn SetProcessRestrictionExemption();
     // pub fn SetProcessWindowStation();
     // pub fn SetPropA();
-    // pub fn SetPropW();
+    pub fn SetPropW(hWnd: HWND, lpString: LPCWSTR, hData: HANDLE) -> BOOL;
     // pub fn SetRect();
     // pub fn SetRectEmpty();
     // pub fn SetScrollInfo();
