@@ -66,7 +66,7 @@ pub const MOUSEEVENTF_HWHEEL: ::DWORD = 0x01000;
 pub const MOUSEEVENTF_MOVE_NOCOALESCE: ::DWORD = 0x2000;
 pub const MOUSEEVENTF_VIRTUALDESK: ::DWORD = 0x4000;
 pub const MOUSEEVENTF_ABSOLUTE: ::DWORD = 0x8000;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MOUSEINPUT {
     pub dx: ::LONG,
     pub dy: ::LONG,
@@ -77,7 +77,7 @@ pub struct MOUSEINPUT {
 }
 pub type PMOUSEINPUT = *mut MOUSEINPUT;
 pub type LPMOUSEINPUT = *mut MOUSEINPUT;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct KEYBDINPUT {
     pub wVk: ::WORD,
     pub wScan: ::WORD,
@@ -87,7 +87,7 @@ pub struct KEYBDINPUT {
 }
 pub type PKEYBDINPUT = *mut KEYBDINPUT;
 pub type LPKEYBDINPUT = *mut KEYBDINPUT;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HARDWAREINPUT {
     pub uMsg: ::DWORD,
     pub wParamL: ::WORD,
@@ -98,10 +98,10 @@ pub type LPHARDWAREINPUT= *mut HARDWAREINPUT;
 pub const INPUT_MOUSE: ::DWORD = 0;
 pub const INPUT_KEYBOARD: ::DWORD = 1;
 pub const INPUT_HARDWARE: ::DWORD = 2;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct INPUT {
     pub type_: ::DWORD,
-    pub union_: MOUSEINPUT, // FIXME - Use a proper untagged union here
+    pub union_: MOUSEINPUT, // FIXME - Untagged unions
 }
 #[test]
 fn test_INPUT() {
@@ -113,6 +113,19 @@ fn test_INPUT() {
 }
 pub type PINPUT = *mut INPUT;
 pub type LPINPUT = *mut INPUT;
+//Indices for GetWindowLong etc.
+pub const GWL_EXSTYLE: ::c_int = -20;
+pub const GWL_STYLE: ::c_int = -16;
+pub const GWL_WNDPROC: ::c_int = -4;
+pub const GWLP_WNDPROC: ::c_int = -4;
+pub const GWL_HINSTANCE: ::c_int = -6;
+pub const GWLP_HINSTANCE: ::c_int = -6;
+pub const GWL_HWNDPARENT: ::c_int = -8;
+pub const GWLP_HWNDPARENT: ::c_int = -8;
+pub const GWL_ID: ::c_int = -12;
+pub const GWLP_ID: ::c_int = -12;
+pub const GWL_USERDATA: ::c_int = -21;
+pub const GWLP_USERDATA: ::c_int = -21;
 //6573
 pub const QS_KEY: ::DWORD = 0x0001;
 pub const QS_MOUSEMOVE: ::DWORD = 0x0002;
@@ -233,3 +246,24 @@ pub const SM_REMOTECONTROL: ::c_int = 0x2001;
 pub const SM_CARETBLINKINGENABLED: ::c_int = 0x2002;
 pub const SM_CONVERTIBLESLATEMODE: ::c_int = 0x2003;
 pub const SM_SYSTEMDOCKED: ::c_int = 0x2004;
+//10069
+pub const IDC_ARROW: ::LPCWSTR = 32512 as ::LPCWSTR;
+pub const IDC_IBEAM: ::LPCWSTR = 32513 as ::LPCWSTR;
+pub const IDC_WAIT: ::LPCWSTR = 32514 as ::LPCWSTR;
+pub const IDC_CROSS: ::LPCWSTR = 32515 as ::LPCWSTR;
+pub const IDC_UPARROW: ::LPCWSTR = 32516 as ::LPCWSTR;
+pub const IDC_SIZE: ::LPCWSTR = 32640 as ::LPCWSTR;
+pub const IDC_ICON: ::LPCWSTR = 32641 as ::LPCWSTR;
+pub const IDC_SIZENWSE: ::LPCWSTR = 32642 as ::LPCWSTR;
+pub const IDC_SIZENESW: ::LPCWSTR = 32643 as ::LPCWSTR;
+pub const IDC_SIZEWE: ::LPCWSTR = 32644 as ::LPCWSTR;
+pub const IDC_SIZENS: ::LPCWSTR = 32645 as ::LPCWSTR;
+pub const IDC_SIZEALL: ::LPCWSTR = 32646 as ::LPCWSTR;
+pub const IDC_NO: ::LPCWSTR = 32648 as ::LPCWSTR;
+pub const IDC_HAND: ::LPCWSTR = 32649 as ::LPCWSTR;
+pub const IDC_APPSTARTING: ::LPCWSTR = 32650 as ::LPCWSTR;
+pub const IDC_HELP: ::LPCWSTR = 32651 as ::LPCWSTR;
+//12971
+pub type MONITORENUMPROC = Option<unsafe extern "system" fn(
+    ::HMONITOR, ::HDC, ::LPRECT, ::LPARAM,
+) -> ::BOOL>;

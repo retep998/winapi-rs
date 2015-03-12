@@ -26,7 +26,7 @@ pub struct OVERLAPPED_ENTRY {
     pub dwNumberOfBytesTransferred: ::DWORD,
 }
 pub type LPOVERLAPPED_ENTRY = *mut OVERLAPPED_ENTRY;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SYSTEMTIME {
     pub wYear: ::DWORD,
     pub wMonth: ::DWORD,

@@ -170,7 +170,7 @@ pub enum _SC_ENUM_TYPE {
     __, // FIXME - Univariant enums
 }
 //700
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SERVICE_STATUS {
     pub dwServiceType: ::DWORD,
     pub dwCurrentState: ::DWORD,

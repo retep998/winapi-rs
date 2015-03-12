@@ -1,6 +1,6 @@
 [package]
 name = "winapi"
-version = "0.1.14"
+version = "0.1.15"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "Types and constants for WinAPI bindings. See README for list of crates providing function bindings."
 documentation = "https://retep998.github.io/doc/winapi/"
@@ -39,3 +39,6 @@ path = "lib/uuid-sys"
 [dev-dependencies.winmm-sys]
 version = "*"
 path = "lib/winmm-sys"
+[dev-dependencies.d3d9-sys]
+version = "*"
+path = "lib/d3d9-sys"

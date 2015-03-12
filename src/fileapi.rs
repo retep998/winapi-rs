@@ -9,7 +9,7 @@ pub const TRUNCATE_EXISTING: ::DWORD = 5;
 pub const INVALID_FILE_SIZE: ::DWORD = 0xFFFFFFFF;
 pub const INVALID_SET_FILE_POINTER: ::DWORD = -1;
 pub const INVALID_FILE_ATTRIBUTES: ::DWORD = -1;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WIN32_FILE_ATTRIBUTE_DATA {
     pub dwFileAttributes: ::DWORD,
     pub ftCreationTime: ::FILETIME,
@@ -19,7 +19,7 @@ pub struct WIN32_FILE_ATTRIBUTE_DATA {
     pub nFileSizeLow: ::DWORD,
 }
 pub type LPWIN32_FILE_ATTRIBUTE_DATA = *mut WIN32_FILE_ATTRIBUTE_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct BY_HANDLE_FILE_INFORMATION {
     pub dwFileAttributes: ::DWORD,
     pub ftCreationTime: ::FILETIME,
