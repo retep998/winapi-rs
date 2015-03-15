@@ -1,8 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to ntdll.
-#![no_std]
-#![experimental]
+#![cfg(windows)]
 extern crate winapi;
 use winapi::*;
 extern "system" {
@@ -275,7 +274,7 @@ extern "system" {
     // pub fn NtCurrentTeb();
     // pub fn NtDebugActiveProcess();
     // pub fn NtDebugContinue();
-    // pub fn NtDelayExecution();
+    pub fn NtDelayExecution(Alertable: BOOLEAN, DelayInterval: PLARGE_INTEGER) -> NTSTATUS;
     // pub fn NtDeleteAtom();
     // pub fn NtDeleteBootEntry();
     // pub fn NtDeleteDriverEntry();

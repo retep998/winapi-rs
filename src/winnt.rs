@@ -2,6 +2,7 @@
 // Licensed under the MIT License <LICENSE.md>
 //! This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed
 //! through the Win32 API.
+pub type NTSTATUS = ::LONG;
 //33
 pub const ANYSIZE_ARRAY: usize = 1;
 //382

@@ -75,7 +75,7 @@ extern "system" {
     pub fn CharNextW(lpsz: LPCWSTR) -> LPWSTR;
     pub fn CharPrevA(lpszStart: LPCSTR, lpszCurrent: LPCSTR) -> LPSTR;
     pub fn CharPrevExA(
-        codePage: WORD, lpStart: LPCSTR, lpCurrentChar: LPCSTR, dwFlags: DWORD
+        codePage: WORD, lpStart: LPCSTR, lpCurrentChar: LPCSTR, dwFlags: DWORD,
     ) -> LPSTR;
     pub fn CharPrevW(lpszStart: LPCWSTR, lpszCurrent: LPCWSTR) -> LPWSTR;
     // pub fn CharToOemA();
@@ -263,18 +263,18 @@ extern "system" {
     pub fn EndPaint(hWnd: HWND, lpPaint: *const PAINTSTRUCT) -> BOOL;
     pub fn EndTask(hWnd: HWND, fShutDown: BOOL, fForce: BOOL) -> BOOL;
     pub fn EnumChildWindows(
-        hwndParent: HWND, lpEnumFunc: WNDENUMPROC, lpParam: LPARAM
+        hwndParent: HWND, lpEnumFunc: WNDENUMPROC, lpParam: LPARAM,
     ) -> BOOL;
     pub fn EnumClipboardFormats(format: UINT) -> UINT;
     pub fn EnumDesktopWindows(hDesktop: HDESK, lpfn: WNDENUMPROC, lParam: LPARAM) -> BOOL;
     pub fn EnumDesktopsA(
-        hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCA, lParam: LPARAM
+        hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCA, lParam: LPARAM,
     ) -> BOOL;
     pub fn EnumDesktopsW(
-        hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCW, lParam: LPARAM
+        hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCW, lParam: LPARAM,
     ) -> BOOL;
     pub fn EnumDisplayDevicesA(
-        lpDevice: LPCSTR, iDevNum: DWORD, lpDisplayDevice: PDISPLAY_DEVICEA, dwFlags: DWORD
+        lpDevice: LPCSTR, iDevNum: DWORD, lpDisplayDevice: PDISPLAY_DEVICEA, dwFlags: DWORD,
     ) -> BOOL;
     pub fn EnumDisplayDevicesW(
         lpDevice: LPCWSTR, iDevNum: DWORD, lpDisplayDevice: PDISPLAY_DEVICEW, dwFlags: DWORD,
@@ -282,15 +282,15 @@ extern "system" {
     pub fn EnumDisplayMonitors(
         hdc: HDC, lprcClip: LPCRECT, lpfnEnum: MONITORENUMPROC, dwData: LPARAM,
     ) -> BOOL;
-    // pub fn EnumDisplaySettingsA(
-    //     lpszDeviceName: LPCSTR, iModeNum: DWORD, lpDevMode: *mut DEVMODEA
-    // ) -> BOOL;
+    pub fn EnumDisplaySettingsA(
+        lpszDeviceName: LPCSTR, iModeNum: DWORD, lpDevMode: *mut DEVMODEA,
+    ) -> BOOL;
     // pub fn EnumDisplaySettingsExA();
     pub fn EnumDisplaySettingsExW(
         lpszDeviceName: LPCWSTR, iModeNum: DWORD, lpDevMode: *mut DEVMODEW, dwFlags: DWORD,
     ) -> BOOL;
     pub fn EnumDisplaySettingsW(
-        lpszDeviceName: LPCWSTR, iModeNum: DWORD, lpDevMode: *mut DEVMODEW
+        lpszDeviceName: LPCWSTR, iModeNum: DWORD, lpDevMode: *mut DEVMODEW,
     ) -> BOOL;
     // pub fn EnumPropsA();
     // pub fn EnumPropsExA();
@@ -667,10 +667,10 @@ extern "system" {
     pub fn PostMessageW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
     pub fn PostQuitMessage(nExitCode: c_int);
     pub fn PostThreadMessageA(
-        idThread: DWORD, msg: UINT, wParam: WPARAM, lParam: LPARAM
+        idThread: DWORD, msg: UINT, wParam: WPARAM, lParam: LPARAM,
     ) -> BOOL;
     pub fn PostThreadMessageW(
-        idThread: DWORD, msg: UINT, wParam: WPARAM, lParam: LPARAM
+        idThread: DWORD, msg: UINT, wParam: WPARAM, lParam: LPARAM,
     ) -> BOOL;
     pub fn PrintWindow(hwnd: HWND, hdcBlt: HDC, nFlags: UINT) -> BOOL;
     // pub fn PrivateExtractIconsA();
@@ -678,19 +678,19 @@ extern "system" {
     pub fn PtInRect(lprc: *const RECT, pt: POINT) -> BOOL;
     // pub fn QueryDisplayConfig();
     pub fn RealChildWindowFromPoint(
-        hwndParent: HWND, ptParentClientCoords: POINT
+        hwndParent: HWND, ptParentClientCoords: POINT,
     ) -> HWND;
     pub fn RealGetWindowClass(
-        hwnd: HWND, ptszClassName: LPSTR, cchClassNameMax: UINT
+        hwnd: HWND, ptszClassName: LPSTR, cchClassNameMax: UINT,
     ) -> UINT;
     pub fn RealGetWindowClassA(
-        hwnd: HWND, ptszClassName: LPSTR, cchClassNameMax: UINT
+        hwnd: HWND, ptszClassName: LPSTR, cchClassNameMax: UINT,
     ) -> UINT;
     pub fn RealGetWindowClassW(
-        hwnd: HWND, ptszClassName: LPWSTR, cchClassNameMax: UINT
+        hwnd: HWND, ptszClassName: LPWSTR, cchClassNameMax: UINT,
     ) -> UINT;
     pub fn RedrawWindow(
-        hwnd: HWND, lprcUpdate: *const RECT, hrgnUpdate: HRGN, flags: UINT
+        hwnd: HWND, lprcUpdate: *const RECT, hrgnUpdate: HRGN, flags: UINT,
     ) -> BOOL;
     // pub fn RegisterClassA();
     // pub fn RegisterClassExA();
@@ -699,10 +699,10 @@ extern "system" {
     pub fn RegisterClipboardFormatA(lpszFormat: LPCSTR) -> UINT;
     pub fn RegisterClipboardFormatW(lpszFormat: LPCWSTR) -> UINT;
     pub fn RegisterDeviceNotificationA(
-        hRecipient: HANDLE, notificationFilter: LPVOID, flags: DWORD
+        hRecipient: HANDLE, notificationFilter: LPVOID, flags: DWORD,
     ) -> HDEVNOTIFY;
     pub fn RegisterDeviceNotificationW(
-        hRecipient: HANDLE, notificationFilter: LPVOID, flags: DWORD
+        hRecipient: HANDLE, notificationFilter: LPVOID, flags: DWORD,
     ) -> HDEVNOTIFY;
     pub fn RegisterHotKey(hwnd: HWND, id: c_int, fsModifiers: UINT, vk: UINT) -> BOOL;
     // pub fn RegisterPointerDeviceNotifications();
