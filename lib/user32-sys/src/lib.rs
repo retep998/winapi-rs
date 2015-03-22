@@ -765,7 +765,7 @@ extern "system" {
     pub fn SetClassLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> ULONG_PTR;
     pub fn SetClassLongW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
     pub fn SetClassWord(hWnd: HWND, nIndex: c_int, wNewWord: WORD) -> WORD;
-    // pub fn SetClipboardData();
+    pub fn SetClipboardData(uFormat: UINT, hMem: HANDLE) -> HANDLE;
     pub fn SetClipboardViewer(hWndNewViewer: HWND) -> HWND;
     // pub fn SetCoalescableTimer();
     pub fn SetCursor(hCursor: HCURSOR) -> HCURSOR;
