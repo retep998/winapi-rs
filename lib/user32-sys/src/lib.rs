@@ -427,8 +427,8 @@ extern "system" {
     // pub fn GetMessagePos();
     pub fn GetMessageTime() -> LONG;
     pub fn GetMessageW(lpMsg: LPMSG, hWnd: HWND, wMsgFilterMin: UINT, wMsgFilterMax: UINT) -> BOOL;
-    // pub fn GetMonitorInfoA();
-    // pub fn GetMonitorInfoW();
+    pub fn GetMonitorInfoA(hMonitor: HMONITOR, lpmi: LPMONITORINFO) -> BOOL;
+    pub fn GetMonitorInfoW(hMonitor: HMONITOR, lpmi: LPMONITORINFO) -> BOOL;
     // pub fn GetMouseMovePointsEx();
     // pub fn GetNextDlgGroupItem();
     // pub fn GetNextDlgTabItem();
