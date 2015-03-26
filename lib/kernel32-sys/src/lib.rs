@@ -852,7 +852,7 @@ extern "system" {
     // pub fn GlobalAddAtomExA();
     // pub fn GlobalAddAtomExW();
     // pub fn GlobalAddAtomW();
-    // pub fn GlobalAlloc();
+    pub fn GlobalAlloc(uFlags: UINT, dwBytes: SIZE_T) -> HGLOBAL;
     // pub fn GlobalCompact();
     // pub fn GlobalDeleteAtom();
     // pub fn GlobalFindAtomA();
@@ -863,14 +863,14 @@ extern "system" {
     // pub fn GlobalGetAtomNameA();
     // pub fn GlobalGetAtomNameW();
     // pub fn GlobalHandle();
-    // pub fn GlobalLock();
+    pub fn GlobalLock(hMem: HGLOBAL) -> LPVOID;
     // pub fn GlobalMemoryStatus();
     // pub fn GlobalMemoryStatusEx();
     // pub fn GlobalReAlloc();
     // pub fn GlobalSize();
     // pub fn GlobalUnWire();
     // pub fn GlobalUnfix();
-    // pub fn GlobalUnlock();
+    pub fn GlobalUnlock(hMem: HGLOBAL) -> BOOL;
     // pub fn GlobalWire();
     // pub fn Heap32First();
     // pub fn Heap32ListFirst();
