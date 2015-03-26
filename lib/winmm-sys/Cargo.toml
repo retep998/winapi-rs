@@ -11,6 +11,9 @@ license = "MIT"
 build = "build.rs"
 links = "winmm"
 
+[lib]
+name = "winmm"
+
 [dependencies.winapi]
 version = "*"
 path = "../.."

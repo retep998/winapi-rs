@@ -11,6 +11,9 @@ license = "MIT"
 build = "build.rs"
 links = "ole32"
 
+[lib]
+name = "ole32"
+
 [dependencies.winapi]
 version = "*"
 path = "../.."

@@ -11,6 +11,9 @@ license = "MIT"
 build = "build.rs"
 links = "gdi32"
 
+[lib]
+name = "gdi32"
+
 [dependencies.winapi]
 version = "*"
 path = "../.."

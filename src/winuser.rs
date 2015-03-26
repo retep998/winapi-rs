@@ -291,4 +291,6 @@ pub struct MONITORINFOEXW {
 }
 pub type LPMONITORINFOEXW = *mut MONITORINFOEXW;
 //12971
-pub type MONITORENUMPROC = Option<unsafe extern "system" fn (::HMONITOR, ::HDC, ::LPRECT, ::LPARAM) -> ::BOOL>;
+pub type MONITORENUMPROC = Option<unsafe extern "system" fn(
+    ::HMONITOR, ::HDC, ::LPRECT, ::LPARAM,
+) -> ::BOOL>;

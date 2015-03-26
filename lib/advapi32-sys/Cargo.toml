@@ -11,6 +11,9 @@ license = "MIT"
 build = "build.rs"
 links = "advapi32"
 
+[lib]
+name = "advapi32"
+
 [dependencies.winapi]
 version = "*"
 path = "../.."

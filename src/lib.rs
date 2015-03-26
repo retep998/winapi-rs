@@ -2,7 +2,7 @@
 // Licensed under the MIT License <LICENSE.md>
 //! Types and constants for WinAPI bindings.
 #![allow(bad_style, raw_pointer_derive)]
-#![warn(unused_qualifications, unused, unused_typecasts)]
+#![warn(unused_qualifications, unused)]
 
 //-------------------------------------------------------------------------------------------------
 // External crates

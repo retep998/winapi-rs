@@ -1,7 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 #![feature(test)]
-extern crate "shell32-sys" as shell32;
+extern crate shell32;
 extern crate test;
 use shell32::*;
 use test::black_box as bb;

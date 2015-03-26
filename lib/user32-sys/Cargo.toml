@@ -11,6 +11,9 @@ license = "MIT"
 build = "build.rs"
 links = "user32"
 
+[lib]
+name = "user32"
+
 [dependencies.winapi]
 version = "*"
 path = "../.."

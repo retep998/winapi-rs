@@ -11,6 +11,9 @@ license = "MIT"
 build = "build.rs"
 links = "opengl32"
 
+[lib]
+name = "opengl32"
+
 [dependencies.winapi]
 version = "*"
 path = "../.."

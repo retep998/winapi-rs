@@ -15,6 +15,9 @@ libc = "*"
 [dev-dependencies.advapi32-sys]
 version = "*"
 path = "lib/advapi32-sys"
+[dev-dependencies.d3d9-sys]
+version = "*"
+path = "lib/d3d9-sys"
 [dev-dependencies.gdi32-sys]
 version = "*"
 path = "lib/gdi32-sys"
@@ -39,6 +42,3 @@ path = "lib/uuid-sys"
 [dev-dependencies.winmm-sys]
 version = "*"
 path = "lib/winmm-sys"
-[dev-dependencies.d3d9-sys]
-version = "*"
-path = "lib/d3d9-sys"

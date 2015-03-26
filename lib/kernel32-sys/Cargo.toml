@@ -11,6 +11,9 @@ license = "MIT"
 build = "build.rs"
 links = "kernel32"
 
+[lib]
+name = "kernel32"
+
 [dependencies.winapi]
 version = "*"
 path = "../.."
