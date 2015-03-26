@@ -516,7 +516,7 @@ extern "system" {
     pub fn GetWindowTextLengthA(hWnd: HWND) -> c_int;
     pub fn GetWindowTextLengthW(hWnd: HWND) -> c_int;
     pub fn GetWindowTextW(hWnd: HWND, lpString: LPWSTR, nMaxCount: c_int) -> c_int;
-    // pub fn GetWindowThreadProcessId();
+    pub fn GetWindowThreadProcessId(hWnd: HWND, lpdwProcessId: LPDWORD) -> DWORD;
     // pub fn GetWindowWord();
     // pub fn GrayStringA();
     // pub fn GrayStringW();

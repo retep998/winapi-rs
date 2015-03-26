@@ -531,7 +531,7 @@ extern "system" {
     // pub fn GetCurrentProcessorNumber();
     // pub fn GetCurrentProcessorNumberEx();
     pub fn GetCurrentThread() -> HANDLE;
-    // pub fn GetCurrentThreadId();
+    pub fn GetCurrentThreadId() -> DWORD;
     // pub fn GetCurrentThreadStackLimits();
     // #[cfg(target_arch = "x86_64")]
     // pub fn GetCurrentUmsThread();

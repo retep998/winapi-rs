@@ -1867,7 +1867,10 @@ pub struct IDirect3D9ExOverlayExtensionVtbl {
         This: *mut IDirect3D9ExOverlayExtension,
     ) -> *mut IDirect3D9ExOverlayExtension>,
     pub CheckDeviceOverlayType: Option<unsafe extern "system" fn(
-        This: *mut IDirect3D9ExOverlayExtension, Adapter: ::UINT, DevType: ::D3DDEVTYPE, OverlayWidth: ::UINT, OverlayHeight: ::UINT, OverlayFormat: ::D3DFORMAT, pDisplayMode: *mut ::D3DDISPLAYMODEEX, DisplayRotation: ::D3DDISPLAYROTATION, pOverlayCaps: *mut ::D3DOVERLAYCAPS,
+        This: *mut IDirect3D9ExOverlayExtension, Adapter: ::UINT, DevType: ::D3DDEVTYPE,
+        OverlayWidth: ::UINT, OverlayHeight: ::UINT, OverlayFormat: ::D3DFORMAT,
+        pDisplayMode: *mut ::D3DDISPLAYMODEEX, DisplayRotation: ::D3DDISPLAYROTATION,
+        pOverlayCaps: *mut ::D3DOVERLAYCAPS,
     ) -> ::HRESULT>,
 }
 pub type LPDIRECT3D9EXOVERLAYEXTENSION = *mut IDirect3D9ExOverlayExtension;
