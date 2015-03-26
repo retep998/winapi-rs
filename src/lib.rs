@@ -2560,6 +2560,39 @@ pub const PFD_STEREO_DONTCARE: DWORD = 0x80000000;
 pub const CCHDEVICENAME: usize = 32;
 pub const CCHFORMNAME: usize = 32;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DEVMODEA {
+    pub dmDeviceName: [CHAR; CCHDEVICENAME],
+    pub dmSpecVersion: WORD,
+    pub dmDriverVersion: WORD,
+    pub dmSize: WORD,
+    pub dmDriverExtra: WORD,
+    pub dmFields: DWORD,
+    pub union1: [u8; 16],
+    pub dmColor: c_short,
+    pub dmDuplex: c_short,
+    pub dmYResolution: c_short,
+    pub dmTTOption: c_short,
+    pub dmCollate: c_short,
+    pub dmFormName: [CHAR; CCHFORMNAME],
+    pub dmLogPixels: WORD,
+    pub dmBitsPerPel: DWORD,
+    pub dmPelsWidth: DWORD,
+    pub dmPelsHeight: DWORD,
+    pub dmDisplayFlags: DWORD,
+    pub dmDisplayFrequency: DWORD,
+    pub dmICMMethod: DWORD,
+    pub dmICMIntent: DWORD,
+    pub dmMediaType: DWORD,
+    pub dmDitherType: DWORD,
+    pub dmReserved1: DWORD,
+    pub dmReserved2: DWORD,
+    pub dmPanningWidth: DWORD,
+    pub dmPanningHeight: DWORD,
+}
+pub type PDEVMODEA = *mut DEVMODEA;
+pub type NPDEVMODEA = *mut DEVMODEA;
+pub type LPDEVMODEA = *mut DEVMODEA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DEVMODEW {
     pub dmDeviceName: [WCHAR; CCHDEVICENAME],
     pub dmSpecVersion: WORD,

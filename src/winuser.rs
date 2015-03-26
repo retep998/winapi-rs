@@ -263,7 +263,32 @@ pub const IDC_NO: ::LPCWSTR = 32648 as ::LPCWSTR;
 pub const IDC_HAND: ::LPCWSTR = 32649 as ::LPCWSTR;
 pub const IDC_APPSTARTING: ::LPCWSTR = 32650 as ::LPCWSTR;
 pub const IDC_HELP: ::LPCWSTR = 32651 as ::LPCWSTR;
+//12909
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MONITORINFO {
+    pub cbSize: ::DWORD,
+    pub rcMonitor: ::RECT,
+    pub rcWork: ::RECT,
+    pub dwFlags: ::DWORD,
+}
+pub type LPMONITORINFO = *mut MONITORINFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MONITORINFOEXA {
+    pub cbSize: ::DWORD,
+    pub rcMonitor: ::RECT,
+    pub rcWork: ::RECT,
+    pub dwFlags: ::DWORD,
+    pub szDevice: [::CHAR; ::CCHDEVICENAME],
+}
+pub type LPMONITORINFOEXA = *mut MONITORINFOEXA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MONITORINFOEXW {
+    pub cbSize: ::DWORD,
+    pub rcMonitor: ::RECT,
+    pub rcWork: ::RECT,
+    pub dwFlags: ::DWORD,
+    pub szDevice: [::WCHAR; ::CCHDEVICENAME],
+}
+pub type LPMONITORINFOEXW = *mut MONITORINFOEXW;
 //12971
-pub type MONITORENUMPROC = Option<unsafe extern "system" fn(
-    ::HMONITOR, ::HDC, ::LPRECT, ::LPARAM,
-) -> ::BOOL>;
+pub type MONITORENUMPROC = Option<unsafe extern "system" fn (::HMONITOR, ::HDC, ::LPRECT, ::LPARAM) -> ::BOOL>;
