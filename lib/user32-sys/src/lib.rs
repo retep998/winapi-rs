@@ -719,8 +719,8 @@ extern "system" {
     pub fn ReleaseDC(hWnd: HWND, hDC: HDC) -> c_int;
     // pub fn RemoveClipboardFormatListener();
     // pub fn RemoveMenu();
-    // pub fn RemovePropA();
-    // pub fn RemovePropW();
+    pub fn RemovePropA(hWnd: HWND, lpStr: LPCSTR) -> HANDLE;
+    pub fn RemovePropW(hWnd: HWND, lpStr: LPCWSTR) -> HANDLE;
     // pub fn ReplyMessage();
     // pub fn ReuseDDElParam();
     pub fn ScreenToClient(hWnd: HWND, lpPoint: LPPOINT) -> BOOL;
@@ -799,8 +799,8 @@ extern "system" {
     // pub fn SetProcessDefaultLayout();
     // pub fn SetProcessRestrictionExemption();
     // pub fn SetProcessWindowStation();
-    // pub fn SetPropA();
-    // pub fn SetPropW();
+    pub fn SetPropA(hWnd: HWND, lpString: LPCSTR, hData: HANDLE) -> BOOL;
+    pub fn SetPropW(hWnd: HWND, lpString: LPCWSTR, hData: HANDLE) -> BOOL;
     // pub fn SetRect();
     // pub fn SetRectEmpty();
     // pub fn SetScrollInfo();
