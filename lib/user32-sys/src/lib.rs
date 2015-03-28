@@ -194,7 +194,7 @@ extern "system" {
     pub fn DefMDIChildProcW(
         hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM,
     ) -> LRESULT;
-    // pub fn DefRawInputProc();
+    pub fn DefRawInputProc(paRawInput: *mut PRAWINPUT, nInput: INT, cbSizeHeader: UINT) -> LRESULT;
     // pub fn DefWindowProcA();
     pub fn DefWindowProcW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
     pub fn DeferWindowPos(
@@ -461,13 +461,23 @@ extern "system" {
     pub fn GetPropA(hwnd: HWND, lpString: LPCSTR) -> HANDLE;
     pub fn GetPropW(hwnd: HWND, lpString: LPCWSTR) -> HANDLE;
     // pub fn GetQueueStatus();
-    // pub fn GetRawInputBuffer();
-    // pub fn GetRawInputData();
-    // pub fn GetRawInputDeviceInfoA();
-    // pub fn GetRawInputDeviceInfoW();
-    // pub fn GetRawInputDeviceList();
+    pub fn GetRawInputBuffer(pData: PRAWINPUT, pcbSize: PUINT, cbSizeHeader: UINT) -> UINT;
+    pub fn GetRawInputData(
+        hRawInput: HRAWINPUT, uiCommand: UINT, pData: LPVOID, pcbSize: PUINT, cbSizeHeader: UINT,
+    ) -> UINT;
+    pub fn GetRawInputDeviceInfoA(
+        hDevice: HANDLE, uiCommand: UINT, pData: LPVOID, pcbSize: PUINT,
+    ) -> UINT;
+    pub fn GetRawInputDeviceInfoW(
+        hDevice: HANDLE, uiCommand: UINT, pData: LPVOID, pcbSize: PUINT,
+    ) -> UINT;
+    pub fn GetRawInputDeviceList(
+        pRawInputDeviceList: PRAWINPUTDEVICELIST, puiNumDevices: PUINT, cbSize: UINT,
+    ) -> UINT;
     // pub fn GetRawPointerDeviceData();
-    // pub fn GetRegisteredRawInputDevices();
+    pub fn GetRegisteredRawInputDevices(
+        pRawInputDevices: PRAWINPUTDEVICE, puiNumDevices: PUINT, cbSize: UINT,
+    ) -> UINT;
     // pub fn GetScrollBarInfo();
     // pub fn GetScrollInfo();
     pub fn GetScrollPos(hWnd: HWND, nBar: c_int) -> c_int;
@@ -708,7 +718,9 @@ extern "system" {
     // pub fn RegisterPointerDeviceNotifications();
     // pub fn RegisterPointerInputTarget();
     // pub fn RegisterPowerSettingNotification();
-    // pub fn RegisterRawInputDevices();
+    pub fn RegisterRawInputDevices(
+        pRawInputDevices: PCRAWINPUTDEVICE, uiNumDevices: UINT, cbSize: UINT,
+    ) -> BOOL;
     // pub fn RegisterShellHookWindow();
     // pub fn RegisterSuspendResumeNotification();
     // pub fn RegisterTouchHitTestingWindow();

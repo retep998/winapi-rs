@@ -294,3 +294,177 @@ pub type LPMONITORINFOEXW = *mut MONITORINFOEXW;
 pub type MONITORENUMPROC = Option<unsafe extern "system" fn(
     ::HMONITOR, ::HDC, ::LPRECT, ::LPARAM,
 ) -> ::BOOL>;
+//14098
+DECLARE_HANDLE!(HRAWINPUT, HRAWINPUT__);
+pub fn GET_RAWINPUT_CODE_WPARAM(wParam: ::WPARAM) -> ::WPARAM { wParam & 0xff }
+pub const RIM_INPUT: ::WPARAM = 0;
+pub const RIM_INPUTSINK: ::WPARAM = 1;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RAWINPUTHEADER {
+    pub dwType: ::DWORD,
+    pub dwSize: ::DWORD,
+    pub hDevice: ::HANDLE,
+    pub wParam: ::WPARAM,
+}
+pub type PRAWINPUTHEADER = *mut RAWINPUTHEADER;
+pub type LPRAWINPUTHEADER = *mut RAWINPUTHEADER;
+pub const RIM_TYPEMOUSE: ::DWORD = 0;
+pub const RIM_TYPEKEYBOARD: ::DWORD = 1;
+pub const RIM_TYPEHID: ::DWORD = 2;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RAWMOUSE {
+    pub usFlags: ::USHORT,
+    pub usButtonFlags: ::USHORT,
+    pub usButtonData: ::USHORT,
+    pub ulRawButtons: ::ULONG,
+    pub lLastX: ::LONG,
+    pub lLastY: ::LONG,
+    pub ulExtraInformation: ::ULONG,
+}
+pub type PRAWMOUSE = *mut RAWMOUSE;
+pub type LPRAWMOUSE = *mut RAWMOUSE;
+pub const RI_MOUSE_LEFT_BUTTON_DOWN: ::DWORD = 0x0001;
+pub const RI_MOUSE_LEFT_BUTTON_UP: ::DWORD = 0x0002;
+pub const RI_MOUSE_RIGHT_BUTTON_DOWN: ::DWORD = 0x0004;
+pub const RI_MOUSE_RIGHT_BUTTON_UP: ::DWORD = 0x0008;
+pub const RI_MOUSE_MIDDLE_BUTTON_DOWN: ::DWORD = 0x0010;
+pub const RI_MOUSE_MIDDLE_BUTTON_UP: ::DWORD = 0x0020;
+pub const RI_MOUSE_BUTTON_1_DOWN: ::DWORD = RI_MOUSE_LEFT_BUTTON_DOWN;
+pub const RI_MOUSE_BUTTON_1_UP: ::DWORD = RI_MOUSE_LEFT_BUTTON_UP;
+pub const RI_MOUSE_BUTTON_2_DOWN: ::DWORD = RI_MOUSE_RIGHT_BUTTON_DOWN;
+pub const RI_MOUSE_BUTTON_2_UP: ::DWORD = RI_MOUSE_RIGHT_BUTTON_UP;
+pub const RI_MOUSE_BUTTON_3_DOWN: ::DWORD = RI_MOUSE_MIDDLE_BUTTON_DOWN;
+pub const RI_MOUSE_BUTTON_3_UP: ::DWORD = RI_MOUSE_MIDDLE_BUTTON_UP;
+pub const RI_MOUSE_BUTTON_4_DOWN: ::DWORD = 0x0040;
+pub const RI_MOUSE_BUTTON_4_UP: ::DWORD = 0x0080;
+pub const RI_MOUSE_BUTTON_5_DOWN: ::DWORD = 0x0100;
+pub const RI_MOUSE_BUTTON_5_UP: ::DWORD = 0x0200;
+pub const RI_MOUSE_WHEEL: ::DWORD = 0x0400;
+pub const MOUSE_MOVE_RELATIVE: ::DWORD = 0;
+pub const MOUSE_MOVE_ABSOLUTE: ::DWORD = 1;
+pub const MOUSE_VIRTUAL_DESKTOP: ::DWORD = 0x02;
+pub const MOUSE_ATTRIBUTES_CHANGED: ::DWORD = 0x04;
+pub const MOUSE_MOVE_NOCOALESCE: ::DWORD = 0x08;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RAWKEYBOARD {
+    pub MakeCode: ::USHORT,
+    pub Flags: ::USHORT,
+    pub Reserved: ::USHORT,
+    pub VKey: ::USHORT,
+    pub Message: ::UINT,
+    pub ExtraInformation: ::ULONG,
+}
+pub type PRAWKEYBOARD = *mut RAWKEYBOARD;
+pub type LPRAWKEYBOARD = *mut RAWKEYBOARD;
+pub const KEYBOARD_OVERRUN_MAKE_CODE: ::DWORD = 0xFF;
+pub const RI_KEY_MAKE: ::DWORD = 0;
+pub const RI_KEY_BREAK: ::DWORD = 1;
+pub const RI_KEY_E0: ::DWORD = 2;
+pub const RI_KEY_E1: ::DWORD = 4;
+pub const RI_KEY_TERMSRV_SET_LED: ::DWORD = 8;
+pub const RI_KEY_TERMSRV_SHADOW: ::DWORD = 0x10;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RAWHID {
+    pub dwSizeHid: ::DWORD,
+    pub dwCount: ::DWORD,
+    pub bRawData: [::BYTE; 0], // FIXME unsized array
+}
+pub type PRAWHID = *mut RAWHID;
+pub type LPRAWHID = *mut RAWHID;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RAWINPUT {
+    pub header: RAWINPUTHEADER,
+    pub mouse: RAWMOUSE, // FIXME untagged union
+}
+#[test]
+fn test_RAWINPUT() {
+    use std::mem::{size_of, min_align_of};
+    assert!(size_of::<RAWMOUSE>() >= size_of::<RAWMOUSE>());
+    assert!(size_of::<RAWMOUSE>() >= size_of::<RAWKEYBOARD>());
+    assert!(size_of::<RAWMOUSE>() >= size_of::<RAWHID>());
+    assert!(min_align_of::<RAWMOUSE>() >= min_align_of::<RAWMOUSE>());
+    assert!(min_align_of::<RAWMOUSE>() >= min_align_of::<RAWKEYBOARD>());
+    assert!(min_align_of::<RAWMOUSE>() >= min_align_of::<RAWHID>());
+}
+pub type PRAWINPUT = *mut RAWINPUT;
+pub type LPRAWINPUT = *mut RAWINPUT;
+pub const RID_INPUT: ::DWORD = 0x10000003;
+pub const RID_HEADER: ::DWORD = 0x10000005;
+pub const RIDI_PREPARSEDDATA: ::DWORD = 0x20000005;
+pub const RIDI_DEVICENAME: ::DWORD = 0x20000007;
+pub const RIDI_DEVICEINFO: ::DWORD = 0x2000000b;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RID_DEVICE_INFO_MOUSE {
+    pub dwId: ::DWORD,
+    pub dwNumberOfButtons: ::DWORD,
+    pub dwSampleRate: ::DWORD,
+    pub fHasHorizontalWheel: ::BOOL,
+}
+pub type PRID_DEVICE_INFO_MOUSE = *mut RID_DEVICE_INFO_MOUSE;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RID_DEVICE_INFO_KEYBOARD {
+    pub dwType: ::DWORD,
+    pub dwSubType: ::DWORD,
+    pub dwKeyboardMode: ::DWORD,
+    pub dwNumberOfFunctionKeys: ::DWORD,
+    pub dwNumberOfIndicators: ::DWORD,
+    pub dwNumberOfKeysTotal: ::DWORD,
+}
+pub type PRID_DEVICE_INFO_KEYBOARD = *mut RID_DEVICE_INFO_KEYBOARD;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RID_DEVICE_INFO_HID {
+    pub dwVendorId: ::DWORD,
+    pub dwProductId: ::DWORD,
+    pub dwVersionNumber: ::DWORD,
+    pub usUsagePage: ::USHORT,
+    pub usUsage: ::USHORT,
+}
+pub type PRID_DEVICE_INFO_HID = *mut RID_DEVICE_INFO_HID;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RID_DEVICE_INFO {
+    pub cbSize: ::DWORD,
+    pub dwType: ::DWORD,
+    pub keyboard: RID_DEVICE_INFO_KEYBOARD, // FIXME untagged union
+}
+#[test]
+fn test_RID_DEVICE_INFO() {
+    use std::mem::{size_of, min_align_of};
+    assert!(size_of::<RID_DEVICE_INFO_KEYBOARD>() >= size_of::<RID_DEVICE_INFO_MOUSE>());
+    assert!(size_of::<RID_DEVICE_INFO_KEYBOARD>() >= size_of::<RID_DEVICE_INFO_KEYBOARD>());
+    assert!(size_of::<RID_DEVICE_INFO_KEYBOARD>() >= size_of::<RID_DEVICE_INFO_HID>());
+    assert!(min_align_of::<RID_DEVICE_INFO_KEYBOARD>() >= min_align_of::<RID_DEVICE_INFO_MOUSE>());
+    assert!(min_align_of::<RID_DEVICE_INFO_KEYBOARD>()
+        >= min_align_of::<RID_DEVICE_INFO_KEYBOARD>());
+    assert!(min_align_of::<RID_DEVICE_INFO_KEYBOARD>() >= min_align_of::<RID_DEVICE_INFO_HID>());
+}
+pub type PRID_DEVICE_INFO = *mut RID_DEVICE_INFO;
+pub type LPRID_DEVICE_INFO = *mut RID_DEVICE_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RAWINPUTDEVICE {
+    pub usUsagePage: ::USHORT,
+    pub usUsage: ::USHORT,
+    pub dwFlags: ::DWORD,
+    pub hwndTarget: ::HWND,
+}
+pub type PRAWINPUTDEVICE = *mut RAWINPUTDEVICE;
+pub type LPRAWINPUTDEVICE = *mut RAWINPUTDEVICE;
+pub type PCRAWINPUTDEVICE = *const RAWINPUTDEVICE;
+pub const RIDEV_REMOVE: ::DWORD = 0x00000001;
+pub const RIDEV_EXCLUDE: ::DWORD = 0x00000010;
+pub const RIDEV_PAGEONLY: ::DWORD = 0x00000020;
+pub const RIDEV_NOLEGACY: ::DWORD = 0x00000030;
+pub const RIDEV_INPUTSINK: ::DWORD = 0x00000100;
+pub const RIDEV_CAPTUREMOUSE: ::DWORD = 0x00000200;
+pub const RIDEV_NOHOTKEYS: ::DWORD = 0x00000200;
+pub const RIDEV_APPKEYS: ::DWORD = 0x00000400;
+pub const RIDEV_EXINPUTSINK: ::DWORD = 0x00001000;
+pub const RIDEV_DEVNOTIFY: ::DWORD = 0x00002000;
+pub const RIDEV_EXMODEMASK: ::DWORD = 0x000000F0;
+pub const GIDC_ARRIVAL: ::DWORD = 1;
+pub const GIDC_REMOVAL: ::DWORD = 2;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RAWINPUTDEVICELIST {
+    pub hDevice: ::HANDLE,
+    pub dwType: ::DWORD,
+}
+pub type PRAWINPUTDEVICELIST = *mut RAWINPUTDEVICELIST;
