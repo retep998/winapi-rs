@@ -1,6 +1,6 @@
 [package]
 name = "uuid-sys"
-version = "0.0.2"
+version = "0.1.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to uuid."
 documentation = "https://retep998.github.io/doc/uuid-sys/"
