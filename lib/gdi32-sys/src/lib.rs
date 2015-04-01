@@ -43,8 +43,14 @@ extern "system" {
     // pub fn CreateColorSpaceW();
     pub fn CreateCompatibleBitmap(hdc: HDC, cx: c_int, cy: c_int) -> HBITMAP;
     pub fn CreateCompatibleDC(hdc: HDC) -> HDC;
-    // pub fn CreateDCA();
-    // pub fn CreateDCW();
+    pub fn CreateDCA(
+        lpszDriver: LPCSTR, lpszDevice: LPCSTR, lpszOutput: LPCSTR,
+        lpInitData: *const DEVMODEA
+    ) -> HDC;
+    pub fn CreateDCW(
+        lpszDriver: LPCWSTR, lpszDevice: LPCWSTR, lpszOutput: LPCWSTR,
+        lpInitData: *const DEVMODEW
+    ) -> HDC;
     // pub fn CreateDIBPatternBrush();
     // pub fn CreateDIBPatternBrushPt();
     // pub fn CreateDIBSection();
