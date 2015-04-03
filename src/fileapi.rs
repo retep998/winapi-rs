@@ -7,8 +7,8 @@ pub const OPEN_EXISTING: ::DWORD = 3;
 pub const OPEN_ALWAYS: ::DWORD = 4;
 pub const TRUNCATE_EXISTING: ::DWORD = 5;
 pub const INVALID_FILE_SIZE: ::DWORD = 0xFFFFFFFF;
-pub const INVALID_SET_FILE_POINTER: ::DWORD = -1;
-pub const INVALID_FILE_ATTRIBUTES: ::DWORD = -1;
+pub const INVALID_SET_FILE_POINTER: ::DWORD = 0xFFFFFFFF;
+pub const INVALID_FILE_ATTRIBUTES: ::DWORD = 0xFFFFFFFF;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WIN32_FILE_ATTRIBUTE_DATA {
     pub dwFileAttributes: ::DWORD,

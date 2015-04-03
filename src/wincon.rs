@@ -207,9 +207,15 @@ pub const ENABLE_EXTENDED_FLAGS: ::DWORD = 0x0080;
 pub const ENABLE_AUTO_POSITION: ::DWORD = 0x0100;
 pub const ENABLE_PROCESSED_OUTPUT: ::DWORD = 0x0001;
 pub const ENABLE_WRAP_AT_EOL_OUTPUT: ::DWORD = 0x0002;
-pub const CONSOLE_REAL_OUTPUT_HANDLE: *mut ::c_void = -2 as *mut ::c_void;
-pub const CONSOLE_REAL_INPUT_HANDLE: *mut ::c_void = -3 as *mut ::c_void;
-pub const ATTACH_PARENT_PROCESS: ::DWORD = -1;
+#[cfg(target_arch = "x86")]
+pub const CONSOLE_REAL_OUTPUT_HANDLE: *mut ::c_void = 0xFFFFFFFE as *mut ::c_void;
+#[cfg(target_arch = "x86_64")]
+pub const CONSOLE_REAL_OUTPUT_HANDLE: *mut ::c_void = 0xFFFFFFFFFFFFFFFE as *mut ::c_void;
+#[cfg(target_arch = "x86")]
+pub const CONSOLE_REAL_INPUT_HANDLE: *mut ::c_void = 0xFFFFFFFD as *mut ::c_void;
+#[cfg(target_arch = "x86_64")]
+pub const CONSOLE_REAL_INPUT_HANDLE: *mut ::c_void = 0xFFFFFFFFFFFFFFFD as *mut ::c_void;
+pub const ATTACH_PARENT_PROCESS: ::DWORD = 0xFFFFFFFF;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CONSOLE_READCONSOLE_CONTROL {
     pub nLength: ::ULONG,
