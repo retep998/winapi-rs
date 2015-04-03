@@ -193,12 +193,14 @@ pub struct SERVICE_TABLE_ENTRYA {
     pub lpServiceName: ::LPCSTR,
     pub lpServiceProc: LPSERVICE_MAIN_FUNCTIONA,
 }
+impl Clone for SERVICE_TABLE_ENTRYA { fn clone(&self) -> SERVICE_TABLE_ENTRYA { *self } }
 pub type LPSERVICE_TABLE_ENTRYA = *mut SERVICE_TABLE_ENTRYA;
 #[repr(C)] #[derive(Copy)]
 pub struct SERVICE_TABLE_ENTRYW {
     pub lpServiceName: ::LPCWSTR,
     pub lpServiceProc: LPSERVICE_MAIN_FUNCTIONW,
 }
+impl Clone for SERVICE_TABLE_ENTRYW { fn clone(&self) -> SERVICE_TABLE_ENTRYW { *self } }
 pub type LPSERVICE_TABLE_ENTRYW = *mut SERVICE_TABLE_ENTRYW;
 //900
 pub type LPHANDLER_FUNCTION = Option<unsafe extern "system" fn(dwControl: ::DWORD)>;

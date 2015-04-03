@@ -993,6 +993,7 @@ pub struct D3DGAMMARAMP {
     pub green: [::WORD; 256],
     pub blue: [::WORD; 256],
 }
+impl Clone for D3DGAMMARAMP { fn clone(&self) -> D3DGAMMARAMP { *self } }
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum D3DBACKBUFFER_TYPE {
     TYPE_MONO = 0,
@@ -1141,6 +1142,7 @@ pub struct D3DADAPTER_IDENTIFIER9 {
     pub DeviceIdentifier: ::GUID,
     pub WHQLLevel: ::DWORD,
 }
+impl Clone for D3DADAPTER_IDENTIFIER9 { fn clone(&self) -> D3DADAPTER_IDENTIFIER9 { *self } }
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DRASTER_STATUS {
     pub InVBlank: ::BOOL,

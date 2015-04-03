@@ -350,6 +350,7 @@ pub struct XSAVE_FORMAT { // FIXME align 16
     pub XmmRegisters: [M128A; 16],
     pub Reserved4: [BYTE; 96],
 }
+impl Clone for XSAVE_FORMAT { fn clone(&self) -> XSAVE_FORMAT { *self } }
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TOKEN_PRIVILEGES {
     pub PrivilegeCount: DWORD,
@@ -1601,7 +1602,7 @@ pub struct IUnknownVtbl {
         This: *mut IUnknown,
     ) -> ULONG,
 }
-#[repr(C)] #[derive(Copy, Debug)]
+#[repr(C)] #[derive(Copy, Clone, Debug)]
 pub struct IUnknown {
     pub lpVtbl: *const IUnknownVtbl,
 }
@@ -2432,6 +2433,7 @@ pub struct WNDCLASSEXW {
     pub lpszClassName: LPCWSTR,
     pub hIconSm: HICON,
 }
+impl Clone for WNDCLASSEXW { fn clone(&self) -> WNDCLASSEXW { *self } }
 pub type PWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type NPWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type LPWNDCLASSEXW = *mut WNDCLASSEXW;
@@ -2448,6 +2450,7 @@ pub struct WNDCLASSW {
     pub lpszMenuName: LPCWSTR,
     pub lpszClassName: LPCWSTR
 }
+impl Clone for WNDCLASSW { fn clone(&self) -> WNDCLASSW { *self } }
 pub type PWNDCLASSW = *mut WNDCLASSW;
 pub type NPWNDCLASSW = *mut WNDCLASSW;
 pub type LPWNDCLASSW = *mut WNDCLASSW;
@@ -2634,6 +2637,7 @@ pub struct DISPLAY_DEVICEW {
     pub DeviceID: [WCHAR; 128],
     pub DeviceKey: [WCHAR; 128],
 }
+impl Clone for DISPLAY_DEVICEW { fn clone(&self) -> DISPLAY_DEVICEW { *self } }
 pub type PDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
 pub type LPDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
 #[repr(C)] #[derive(Copy)]
@@ -2645,6 +2649,7 @@ pub struct DISPLAY_DEVICEA {
     pub DeviceID: [CHAR; 128],
     pub DeviceKey: [CHAR; 128],
 }
+impl Clone for DISPLAY_DEVICEA { fn clone(&self) -> DISPLAY_DEVICEA { *self } }
 pub type PDISPLAY_DEVICEA = *mut DISPLAY_DEVICEA;
 pub type LPDISPLAY_DEVICEA = *mut DISPLAY_DEVICEA;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
