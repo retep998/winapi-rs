@@ -2560,7 +2560,6 @@ pub const PFD_DEPTH_DONTCARE: DWORD = 0x20000000;
 pub const PFD_DOUBLEBUFFER_DONTCARE: DWORD = 0x40000000;
 pub const PFD_STEREO_DONTCARE: DWORD = 0x80000000;
 
-pub const CCHDEVICENAME: usize = 32;
 pub const CCHFORMNAME: usize = 32;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DEVMODEA {

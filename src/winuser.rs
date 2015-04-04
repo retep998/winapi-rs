@@ -263,7 +263,9 @@ pub const IDC_NO: ::LPCWSTR = 32648 as ::LPCWSTR;
 pub const IDC_HAND: ::LPCWSTR = 32649 as ::LPCWSTR;
 pub const IDC_APPSTARTING: ::LPCWSTR = 32650 as ::LPCWSTR;
 pub const IDC_HELP: ::LPCWSTR = 32651 as ::LPCWSTR;
-//12909
+//12900
+pub const MONITORINFOF_PRIMARY: ::DWORD = 1;
+pub const CCHDEVICENAME: usize = 32;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MONITORINFO {
     pub cbSize: ::DWORD,
