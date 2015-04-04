@@ -52,6 +52,7 @@ pub struct WIN32_FIND_DATAA {
     pub cFileName: [::CHAR; ::MAX_PATH],
     pub cAlternateFileName: [::CHAR; 14],
 }
+impl Clone for WIN32_FIND_DATAA { fn clone(&self) -> WIN32_FIND_DATAA { *self } }
 pub type PWIN32_FIND_DATAA = *mut WIN32_FIND_DATAA;
 pub type LPWIN32_FIND_DATAA = *mut WIN32_FIND_DATAA;
 #[repr(C)] #[derive(Copy)]
@@ -67,6 +68,7 @@ pub struct WIN32_FIND_DATAW {
     pub cFileName: [::WCHAR; ::MAX_PATH],
     pub cAlternateFileName: [::WCHAR; 14],
 }
+impl Clone for WIN32_FIND_DATAW { fn clone(&self) -> WIN32_FIND_DATAW { *self } }
 pub type PWIN32_FIND_DATAW = *mut WIN32_FIND_DATAW;
 pub type LPWIN32_FIND_DATAW = *mut WIN32_FIND_DATAW;
 #[repr(i32)] #[derive(Clone, Copy, Debug)]

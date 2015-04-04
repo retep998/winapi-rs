@@ -1,6 +1,6 @@
 [package]
 name = "winmm-sys"
-version = "0.0.2"
+version = "0.1.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to winmm."
 documentation = "https://retep998.github.io/doc/winmm-sys/"
@@ -10,6 +10,9 @@ keywords = ["Windows", "FFI", "WinSDK"]
 license = "MIT"
 build = "build.rs"
 links = "winmm"
+
+[lib]
+name = "winmm"
 
 [dependencies.winapi]
 version = "*"

@@ -1,7 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 #![feature(test)]
-extern crate "uuid-sys" as uuid;
+extern crate uuid;
 extern crate test;
 use uuid::*;
 use test::black_box as bb;

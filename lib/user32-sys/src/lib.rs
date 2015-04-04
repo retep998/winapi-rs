@@ -66,15 +66,17 @@ extern "system" {
     ) -> BOOL;
     // pub fn ChangeWindowMessageFilter();
     // pub fn ChangeWindowMessageFilterEx();
-    // pub fn CharLowerA();
+    pub fn CharLowerA(lpsz: LPSTR) -> LPSTR;
     // pub fn CharLowerBuffA();
     // pub fn CharLowerBuffW();
-    // pub fn CharLowerW();
+    pub fn CharLowerW(lpsz: LPWSTR) -> LPWSTR;
     pub fn CharNextA(lpsz: LPCSTR) -> LPSTR;
-    // pub fn CharNextExA();
+    pub fn CharNextExA(codePage: WORD, lpCurrentChar: LPSTR, dwFlags: DWORD) -> LPSTR;
     pub fn CharNextW(lpsz: LPCWSTR) -> LPWSTR;
     pub fn CharPrevA(lpszStart: LPCSTR, lpszCurrent: LPCSTR) -> LPSTR;
-    // pub fn CharPrevExA();
+    pub fn CharPrevExA(
+        codePage: WORD, lpStart: LPCSTR, lpCurrentChar: LPCSTR, dwFlags: DWORD,
+    ) -> LPSTR;
     pub fn CharPrevW(lpszStart: LPCWSTR, lpszCurrent: LPCWSTR) -> LPWSTR;
     // pub fn CharToOemA();
     // pub fn CharToOemBuffA();
@@ -192,7 +194,7 @@ extern "system" {
     pub fn DefMDIChildProcW(
         hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM,
     ) -> LRESULT;
-    // pub fn DefRawInputProc();
+    pub fn DefRawInputProc(paRawInput: *mut PRAWINPUT, nInput: INT, cbSizeHeader: UINT) -> LRESULT;
     // pub fn DefWindowProcA();
     pub fn DefWindowProcW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
     pub fn DeferWindowPos(
@@ -260,24 +262,36 @@ extern "system" {
     pub fn EndMenu(hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR) -> BOOL;
     pub fn EndPaint(hWnd: HWND, lpPaint: *const PAINTSTRUCT) -> BOOL;
     pub fn EndTask(hWnd: HWND, fShutDown: BOOL, fForce: BOOL) -> BOOL;
-    // pub fn EnumChildWindows();
+    pub fn EnumChildWindows(
+        hwndParent: HWND, lpEnumFunc: WNDENUMPROC, lpParam: LPARAM,
+    ) -> BOOL;
     pub fn EnumClipboardFormats(format: UINT) -> UINT;
     pub fn EnumDesktopWindows(hDesktop: HDESK, lpfn: WNDENUMPROC, lParam: LPARAM) -> BOOL;
-    // pub fn EnumDesktopsA();
-    // pub fn EnumDesktopsW();
-    // pub fn EnumDisplayDevicesA();
+    pub fn EnumDesktopsA(
+        hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCA, lParam: LPARAM,
+    ) -> BOOL;
+    pub fn EnumDesktopsW(
+        hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCW, lParam: LPARAM,
+    ) -> BOOL;
+    pub fn EnumDisplayDevicesA(
+        lpDevice: LPCSTR, iDevNum: DWORD, lpDisplayDevice: PDISPLAY_DEVICEA, dwFlags: DWORD,
+    ) -> BOOL;
     pub fn EnumDisplayDevicesW(
         lpDevice: LPCWSTR, iDevNum: DWORD, lpDisplayDevice: PDISPLAY_DEVICEW, dwFlags: DWORD,
     ) -> BOOL;
     pub fn EnumDisplayMonitors(
         hdc: HDC, lprcClip: LPCRECT, lpfnEnum: MONITORENUMPROC, dwData: LPARAM,
     ) -> BOOL;
-    // pub fn EnumDisplaySettingsA();
+    pub fn EnumDisplaySettingsA(
+        lpszDeviceName: LPCSTR, iModeNum: DWORD, lpDevMode: *mut DEVMODEA,
+    ) -> BOOL;
     // pub fn EnumDisplaySettingsExA();
     pub fn EnumDisplaySettingsExW(
         lpszDeviceName: LPCWSTR, iModeNum: DWORD, lpDevMode: *mut DEVMODEW, dwFlags: DWORD,
     ) -> BOOL;
-    // pub fn EnumDisplaySettingsW();
+    pub fn EnumDisplaySettingsW(
+        lpszDeviceName: LPCWSTR, iModeNum: DWORD, lpDevMode: *mut DEVMODEW,
+    ) -> BOOL;
     // pub fn EnumPropsA();
     // pub fn EnumPropsExA();
     // pub fn EnumPropsExW();
@@ -413,8 +427,8 @@ extern "system" {
     // pub fn GetMessagePos();
     pub fn GetMessageTime() -> LONG;
     pub fn GetMessageW(lpMsg: LPMSG, hWnd: HWND, wMsgFilterMin: UINT, wMsgFilterMax: UINT) -> BOOL;
-    // pub fn GetMonitorInfoA();
-    // pub fn GetMonitorInfoW();
+    pub fn GetMonitorInfoA(hMonitor: HMONITOR, lpmi: LPMONITORINFO) -> BOOL;
+    pub fn GetMonitorInfoW(hMonitor: HMONITOR, lpmi: LPMONITORINFO) -> BOOL;
     // pub fn GetMouseMovePointsEx();
     // pub fn GetNextDlgGroupItem();
     // pub fn GetNextDlgTabItem();
@@ -447,13 +461,23 @@ extern "system" {
     pub fn GetPropA(hwnd: HWND, lpString: LPCSTR) -> HANDLE;
     pub fn GetPropW(hwnd: HWND, lpString: LPCWSTR) -> HANDLE;
     // pub fn GetQueueStatus();
-    // pub fn GetRawInputBuffer();
-    // pub fn GetRawInputData();
-    // pub fn GetRawInputDeviceInfoA();
-    // pub fn GetRawInputDeviceInfoW();
-    // pub fn GetRawInputDeviceList();
+    pub fn GetRawInputBuffer(pData: PRAWINPUT, pcbSize: PUINT, cbSizeHeader: UINT) -> UINT;
+    pub fn GetRawInputData(
+        hRawInput: HRAWINPUT, uiCommand: UINT, pData: LPVOID, pcbSize: PUINT, cbSizeHeader: UINT,
+    ) -> UINT;
+    pub fn GetRawInputDeviceInfoA(
+        hDevice: HANDLE, uiCommand: UINT, pData: LPVOID, pcbSize: PUINT,
+    ) -> UINT;
+    pub fn GetRawInputDeviceInfoW(
+        hDevice: HANDLE, uiCommand: UINT, pData: LPVOID, pcbSize: PUINT,
+    ) -> UINT;
+    pub fn GetRawInputDeviceList(
+        pRawInputDeviceList: PRAWINPUTDEVICELIST, puiNumDevices: PUINT, cbSize: UINT,
+    ) -> UINT;
     // pub fn GetRawPointerDeviceData();
-    // pub fn GetRegisteredRawInputDevices();
+    pub fn GetRegisteredRawInputDevices(
+        pRawInputDevices: PRAWINPUTDEVICE, puiNumDevices: PUINT, cbSize: UINT,
+    ) -> UINT;
     // pub fn GetScrollBarInfo();
     // pub fn GetScrollInfo();
     pub fn GetScrollPos(hWnd: HWND, nBar: c_int) -> c_int;
@@ -502,7 +526,7 @@ extern "system" {
     pub fn GetWindowTextLengthA(hWnd: HWND) -> c_int;
     pub fn GetWindowTextLengthW(hWnd: HWND) -> c_int;
     pub fn GetWindowTextW(hWnd: HWND, lpString: LPWSTR, nMaxCount: c_int) -> c_int;
-    // pub fn GetWindowThreadProcessId();
+    pub fn GetWindowThreadProcessId(hWnd: HWND, lpdwProcessId: LPDWORD) -> DWORD;
     // pub fn GetWindowWord();
     // pub fn GrayStringA();
     // pub fn GrayStringW();
@@ -652,31 +676,51 @@ extern "system" {
     // pub fn PostMessageA();
     pub fn PostMessageW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
     pub fn PostQuitMessage(nExitCode: c_int);
-    // pub fn PostThreadMessageA();
-    // pub fn PostThreadMessageW();
-    // pub fn PrintWindow();
+    pub fn PostThreadMessageA(
+        idThread: DWORD, msg: UINT, wParam: WPARAM, lParam: LPARAM,
+    ) -> BOOL;
+    pub fn PostThreadMessageW(
+        idThread: DWORD, msg: UINT, wParam: WPARAM, lParam: LPARAM,
+    ) -> BOOL;
+    pub fn PrintWindow(hwnd: HWND, hdcBlt: HDC, nFlags: UINT) -> BOOL;
     // pub fn PrivateExtractIconsA();
     // pub fn PrivateExtractIconsW();
-    // pub fn PtInRect();
+    pub fn PtInRect(lprc: *const RECT, pt: POINT) -> BOOL;
     // pub fn QueryDisplayConfig();
-    // pub fn RealChildWindowFromPoint();
-    // pub fn RealGetWindowClass();
-    // pub fn RealGetWindowClassA();
-    // pub fn RealGetWindowClassW();
-    // pub fn RedrawWindow();
+    pub fn RealChildWindowFromPoint(
+        hwndParent: HWND, ptParentClientCoords: POINT,
+    ) -> HWND;
+    pub fn RealGetWindowClass(
+        hwnd: HWND, ptszClassName: LPSTR, cchClassNameMax: UINT,
+    ) -> UINT;
+    pub fn RealGetWindowClassA(
+        hwnd: HWND, ptszClassName: LPSTR, cchClassNameMax: UINT,
+    ) -> UINT;
+    pub fn RealGetWindowClassW(
+        hwnd: HWND, ptszClassName: LPWSTR, cchClassNameMax: UINT,
+    ) -> UINT;
+    pub fn RedrawWindow(
+        hwnd: HWND, lprcUpdate: *const RECT, hrgnUpdate: HRGN, flags: UINT,
+    ) -> BOOL;
     // pub fn RegisterClassA();
     // pub fn RegisterClassExA();
     pub fn RegisterClassExW(lpWndClass: *const WNDCLASSEXW) -> ATOM;
-    // pub fn RegisterClassW();
+    pub fn RegisterClassW(lpWndClass: *const WNDCLASSW) -> ATOM;
     pub fn RegisterClipboardFormatA(lpszFormat: LPCSTR) -> UINT;
     pub fn RegisterClipboardFormatW(lpszFormat: LPCWSTR) -> UINT;
-    // pub fn RegisterDeviceNotificationA();
-    // pub fn RegisterDeviceNotificationW();
-    // pub fn RegisterHotKey();
+    pub fn RegisterDeviceNotificationA(
+        hRecipient: HANDLE, notificationFilter: LPVOID, flags: DWORD,
+    ) -> HDEVNOTIFY;
+    pub fn RegisterDeviceNotificationW(
+        hRecipient: HANDLE, notificationFilter: LPVOID, flags: DWORD,
+    ) -> HDEVNOTIFY;
+    pub fn RegisterHotKey(hwnd: HWND, id: c_int, fsModifiers: UINT, vk: UINT) -> BOOL;
     // pub fn RegisterPointerDeviceNotifications();
     // pub fn RegisterPointerInputTarget();
     // pub fn RegisterPowerSettingNotification();
-    // pub fn RegisterRawInputDevices();
+    pub fn RegisterRawInputDevices(
+        pRawInputDevices: PCRAWINPUTDEVICE, uiNumDevices: UINT, cbSize: UINT,
+    ) -> BOOL;
     // pub fn RegisterShellHookWindow();
     // pub fn RegisterSuspendResumeNotification();
     // pub fn RegisterTouchHitTestingWindow();
@@ -733,7 +777,7 @@ extern "system" {
     pub fn SetClassLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> ULONG_PTR;
     pub fn SetClassLongW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
     pub fn SetClassWord(hWnd: HWND, nIndex: c_int, wNewWord: WORD) -> WORD;
-    // pub fn SetClipboardData();
+    pub fn SetClipboardData(uFormat: UINT, hMem: HANDLE) -> HANDLE;
     pub fn SetClipboardViewer(hWndNewViewer: HWND) -> HWND;
     // pub fn SetCoalescableTimer();
     pub fn SetCursor(hCursor: HCURSOR) -> HCURSOR;

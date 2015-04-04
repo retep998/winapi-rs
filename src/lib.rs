@@ -2,7 +2,7 @@
 // Licensed under the MIT License <LICENSE.md>
 //! Types and constants for WinAPI bindings.
 #![allow(bad_style, raw_pointer_derive)]
-#![warn(unused_qualifications, unused, unused_typecasts)]
+#![warn(unused_qualifications, unused)]
 
 //-------------------------------------------------------------------------------------------------
 // External crates
@@ -45,6 +45,7 @@ pub use wincrypt::*;
 pub use windowsx::*;
 pub use winerror::*;
 pub use wingdi::*;
+pub use winioctl::*;
 pub use winnls::*;
 pub use winnt::*;
 pub use winsvc::*;
@@ -86,6 +87,11 @@ macro_rules! DEFINE_GUID {
         };
     }
 }
+macro_rules! CTL_CODE {
+    ($DeviceType:expr, $Function:expr, $Method:expr, $Access:expr) => {
+        ($DeviceType << 16) | ($Access << 14) | ($Function << 2) | $Method
+    }
+}
 
 //-------------------------------------------------------------------------------------------------
 // Modules
@@ -108,6 +114,7 @@ pub mod wincrypt;
 pub mod windowsx;
 pub mod winerror;
 pub mod wingdi;
+pub mod winioctl;
 pub mod winnls;
 pub mod winnt;
 pub mod winsvc;
@@ -343,6 +350,7 @@ pub struct XSAVE_FORMAT { // FIXME align 16
     pub XmmRegisters: [M128A; 16],
     pub Reserved4: [BYTE; 96],
 }
+impl Clone for XSAVE_FORMAT { fn clone(&self) -> XSAVE_FORMAT { *self } }
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TOKEN_PRIVILEGES {
     pub PrivilegeCount: DWORD,
@@ -1594,7 +1602,7 @@ pub struct IUnknownVtbl {
         This: *mut IUnknown,
     ) -> ULONG,
 }
-#[repr(C)] #[derive(Copy, Debug)]
+#[repr(C)] #[derive(Copy, Clone, Debug)]
 pub struct IUnknown {
     pub lpVtbl: *const IUnknownVtbl,
 }
@@ -1789,8 +1797,8 @@ pub const DISP_CHANGE_BADDUALVIEW: LONG = -6;
 
 pub const EDD_GET_DEVICE_INTERFACE_NAME: DWORD = 0x00000001;
 
-pub const ENUM_CURRENT_SETTINGS: DWORD = -1;
-pub const ENUM_REGISTRY_SETTINGS: DWORD = -2;
+pub const ENUM_CURRENT_SETTINGS: DWORD = 0xFFFFFFFF;
+pub const ENUM_REGISTRY_SETTINGS: DWORD = 0xFFFFFFFE;
 
 pub const GW_HWNDFIRST: UINT = 0;
 pub const GW_HWNDLAST: UINT = 1;
@@ -2351,6 +2359,10 @@ pub const WS_EX_NOREDIRECTIONBITMAP: DWORD = 0x00200000;
 pub const WS_EX_LAYOUTRTL: DWORD = 0x00400000;
 pub const WS_EX_COMPOSITED: DWORD = 0x02000000;
 pub const WS_EX_NOACTIVATE: DWORD = 0x08000000;
+pub type DESKTOPENUMPROCA = Option<unsafe extern "system" fn(LPSTR, LPARAM) -> BOOL>;
+pub type DESKTOPENUMPROCW = Option<unsafe extern "system" fn(LPWSTR, LPARAM) -> BOOL>;
+pub type NAMEENUMPROCA = DESKTOPENUMPROCA;
+pub type NAMEENUMPROCW = DESKTOPENUMPROCW;
 pub type WNDENUMPROC = Option<unsafe extern "system" fn(HWND, LPARAM) -> BOOL>;
 pub type WNDPROC = Option<unsafe extern "system" fn(HWND, UINT, WPARAM, LPARAM) -> LRESULT>;
 pub type HOOKPROC = Option<unsafe extern "system" fn(
@@ -2359,6 +2371,9 @@ pub type HOOKPROC = Option<unsafe extern "system" fn(
 pub type TimerProc = Option<unsafe extern "system" fn(
     hwnd: HWND, uMsg: UINT, idEvent: UINT_PTR, dwTime: DWORD,
 )>;
+
+pub type HDEVNOTIFY = PVOID;
+
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FLASHWINFO {
     pub cbSize: UINT,
@@ -2418,6 +2433,7 @@ pub struct WNDCLASSEXW {
     pub lpszClassName: LPCWSTR,
     pub hIconSm: HICON,
 }
+impl Clone for WNDCLASSEXW { fn clone(&self) -> WNDCLASSEXW { *self } }
 pub type PWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type NPWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type LPWNDCLASSEXW = *mut WNDCLASSEXW;
@@ -2434,6 +2450,7 @@ pub struct WNDCLASSW {
     pub lpszMenuName: LPCWSTR,
     pub lpszClassName: LPCWSTR
 }
+impl Clone for WNDCLASSW { fn clone(&self) -> WNDCLASSW { *self } }
 pub type PWNDCLASSW = *mut WNDCLASSW;
 pub type NPWNDCLASSW = *mut WNDCLASSW;
 pub type LPWNDCLASSW = *mut WNDCLASSW;
@@ -2522,7 +2539,7 @@ pub const PFD_TYPE_RGBA: BYTE = 0;
 pub const PFD_TYPE_COLORINDEX: BYTE = 1;
 pub const PFD_MAIN_PLANE: BYTE = 0;
 pub const PFD_OVERLAY_PLANE: BYTE = 1;
-pub const PFD_UNDERLAY_PLANE: BYTE = -1;
+pub const PFD_UNDERLAY_PLANE: BYTE = 0xFF;
 pub const PFD_DOUBLEBUFFER: DWORD = 0x00000001;
 pub const PFD_STEREO: DWORD = 0x00000002;
 pub const PFD_DRAW_TO_WINDOW: DWORD = 0x00000004;
@@ -2543,8 +2560,40 @@ pub const PFD_DEPTH_DONTCARE: DWORD = 0x20000000;
 pub const PFD_DOUBLEBUFFER_DONTCARE: DWORD = 0x40000000;
 pub const PFD_STEREO_DONTCARE: DWORD = 0x80000000;
 
-pub const CCHDEVICENAME: usize = 32;
 pub const CCHFORMNAME: usize = 32;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DEVMODEA {
+    pub dmDeviceName: [CHAR; CCHDEVICENAME],
+    pub dmSpecVersion: WORD,
+    pub dmDriverVersion: WORD,
+    pub dmSize: WORD,
+    pub dmDriverExtra: WORD,
+    pub dmFields: DWORD,
+    pub union1: [u8; 16],
+    pub dmColor: c_short,
+    pub dmDuplex: c_short,
+    pub dmYResolution: c_short,
+    pub dmTTOption: c_short,
+    pub dmCollate: c_short,
+    pub dmFormName: [CHAR; CCHFORMNAME],
+    pub dmLogPixels: WORD,
+    pub dmBitsPerPel: DWORD,
+    pub dmPelsWidth: DWORD,
+    pub dmPelsHeight: DWORD,
+    pub dmDisplayFlags: DWORD,
+    pub dmDisplayFrequency: DWORD,
+    pub dmICMMethod: DWORD,
+    pub dmICMIntent: DWORD,
+    pub dmMediaType: DWORD,
+    pub dmDitherType: DWORD,
+    pub dmReserved1: DWORD,
+    pub dmReserved2: DWORD,
+    pub dmPanningWidth: DWORD,
+    pub dmPanningHeight: DWORD,
+}
+pub type PDEVMODEA = *mut DEVMODEA;
+pub type NPDEVMODEA = *mut DEVMODEA;
+pub type LPDEVMODEA = *mut DEVMODEA;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DEVMODEW {
     pub dmDeviceName: [WCHAR; CCHDEVICENAME],
@@ -2587,8 +2636,21 @@ pub struct DISPLAY_DEVICEW {
     pub DeviceID: [WCHAR; 128],
     pub DeviceKey: [WCHAR; 128],
 }
+impl Clone for DISPLAY_DEVICEW { fn clone(&self) -> DISPLAY_DEVICEW { *self } }
 pub type PDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
 pub type LPDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
+#[repr(C)] #[derive(Copy)]
+pub struct DISPLAY_DEVICEA {
+    pub cb: DWORD,
+    pub DeviceName: [CHAR; 32],
+    pub DeviceString: [CHAR; 128],
+    pub StateFlags: DWORD,
+    pub DeviceID: [CHAR; 128],
+    pub DeviceKey: [CHAR; 128],
+}
+impl Clone for DISPLAY_DEVICEA { fn clone(&self) -> DISPLAY_DEVICEA { *self } }
+pub type PDISPLAY_DEVICEA = *mut DISPLAY_DEVICEA;
+pub type LPDISPLAY_DEVICEA = *mut DISPLAY_DEVICEA;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PIXELFORMATDESCRIPTOR {
     pub nSize: WORD,
@@ -2627,4 +2689,7 @@ pub type LPPIXELFORMATDESCRIPTOR = *mut PIXELFORMATDESCRIPTOR;
 
 // shlobj.h
 // constants
-pub const INVALID_HANDLE_VALUE: HANDLE = -1 as HANDLE;
+#[cfg(target_arch = "x86")]
+pub const INVALID_HANDLE_VALUE: HANDLE = 0xFFFFFFFF as HANDLE;
+#[cfg(target_arch = "x86_64")]
+pub const INVALID_HANDLE_VALUE: HANDLE = 0xFFFFFFFFFFFFFFFF as HANDLE;

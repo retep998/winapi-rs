@@ -257,7 +257,11 @@ extern "system" {
     pub fn DeleteVolumeMountPointW(lpszVolumeMountPoint: LPCWSTR) -> BOOL;
     // #[cfg(target_arch = "x86_64")]
     // pub fn DequeueUmsCompletionListItems();
-    // pub fn DeviceIoControl();
+    pub fn DeviceIoControl(
+        hDevice: HANDLE, dwIoControlCode: DWORD, lpInBuffer: LPVOID, nInBufferSize: DWORD,
+        lpOutBuffer: LPVOID, nOutBufferSize: DWORD, lpBytesReturned: LPDWORD,
+        lpOverlapped: LPOVERLAPPED,
+    ) -> BOOL;
     // pub fn DisableThreadLibraryCalls();
     // pub fn DisableThreadProfiling();
     // pub fn DisassociateCurrentThreadFromCallback();
@@ -527,7 +531,7 @@ extern "system" {
     // pub fn GetCurrentProcessorNumber();
     // pub fn GetCurrentProcessorNumberEx();
     pub fn GetCurrentThread() -> HANDLE;
-    // pub fn GetCurrentThreadId();
+    pub fn GetCurrentThreadId() -> DWORD;
     // pub fn GetCurrentThreadStackLimits();
     // #[cfg(target_arch = "x86_64")]
     // pub fn GetCurrentUmsThread();
@@ -848,7 +852,7 @@ extern "system" {
     // pub fn GlobalAddAtomExA();
     // pub fn GlobalAddAtomExW();
     // pub fn GlobalAddAtomW();
-    // pub fn GlobalAlloc();
+    pub fn GlobalAlloc(uFlags: UINT, dwBytes: SIZE_T) -> HGLOBAL;
     // pub fn GlobalCompact();
     // pub fn GlobalDeleteAtom();
     // pub fn GlobalFindAtomA();
@@ -859,14 +863,14 @@ extern "system" {
     // pub fn GlobalGetAtomNameA();
     // pub fn GlobalGetAtomNameW();
     // pub fn GlobalHandle();
-    // pub fn GlobalLock();
+    pub fn GlobalLock(hMem: HGLOBAL) -> LPVOID;
     // pub fn GlobalMemoryStatus();
     // pub fn GlobalMemoryStatusEx();
     // pub fn GlobalReAlloc();
     // pub fn GlobalSize();
     // pub fn GlobalUnWire();
     // pub fn GlobalUnfix();
-    // pub fn GlobalUnlock();
+    pub fn GlobalUnlock(hMem: HGLOBAL) -> BOOL;
     // pub fn GlobalWire();
     // pub fn Heap32First();
     // pub fn Heap32ListFirst();

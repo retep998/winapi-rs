@@ -1,6 +1,6 @@
 [package]
 name = "d3d9-sys"
-version = "0.0.2"
+version = "0.1.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to d3d9."
 documentation = "https://retep998.github.io/doc/d3d9-sys/"
@@ -10,6 +10,9 @@ keywords = ["Windows", "FFI", "WinSDK", "DirectX"]
 license = "MIT"
 build = "build.rs"
 links = "d3d9"
+
+[lib]
+name = "d3d9"
 
 [dependencies.winapi]
 version = "*"

@@ -2,6 +2,7 @@
 // Licensed under the MIT License <LICENSE.md>
 //! This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed
 //! through the Win32 API.
+pub type NTSTATUS = ::LONG;
 //33
 pub const ANYSIZE_ARRAY: usize = 1;
 //382
@@ -25,6 +26,8 @@ pub struct FLOATING_SAVE_AREA {
     pub RegisterArea: [::BYTE; SIZE_OF_80387_REGISTERS],
     pub Spare0: ::DWORD,
 }
+#[cfg(target_arch = "x86")]
+impl Clone for FLOATING_SAVE_AREA { fn clone(&self) -> FLOATING_SAVE_AREA { *self } }
 #[cfg(target_arch = "x86")]
 pub type PFLOATING_SAVE_AREA = *mut FLOATING_SAVE_AREA;
 #[cfg(target_arch = "x86")]
@@ -57,6 +60,8 @@ pub struct CONTEXT {
     pub SegSs: ::DWORD,
     pub ExtendedRegisters: [::BYTE; MAXIMUM_SUPPORTED_EXTENSION],
 }
+#[cfg(target_arch = "x86")]
+impl Clone for CONTEXT { fn clone(&self) -> CONTEXT { *self } }
 // FIXME - Align 16
 #[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CONTEXT {
@@ -439,8 +444,8 @@ pub const FILE_ACTION_REMOVED: ::DWORD = 0x00000002;
 pub const FILE_ACTION_MODIFIED: ::DWORD = 0x00000003;
 pub const FILE_ACTION_RENAMED_OLD_NAME: ::DWORD = 0x00000004;
 pub const FILE_ACTION_RENAMED_NEW_NAME: ::DWORD = 0x00000005;
-pub const MAILSLOT_NO_MESSAGE: ::DWORD = -1;
-pub const MAILSLOT_WAIT_FOREVER: ::DWORD = -1;
+pub const MAILSLOT_NO_MESSAGE: ::DWORD = 0xFFFFFFFF;
+pub const MAILSLOT_WAIT_FOREVER: ::DWORD = 0xFFFFFFFF;
 pub const FILE_CASE_SENSITIVE_SEARCH: ::DWORD = 0x00000001;
 pub const FILE_CASE_PRESERVED_NAMES: ::DWORD = 0x00000002;
 pub const FILE_UNICODE_ON_DISK: ::DWORD = 0x00000004;
@@ -481,6 +486,20 @@ pub struct FILE_SEGMENT_ELEMENT {
     pub Alignment: ::ULONGLONG,
 }
 pub type PFILE_SEGMENT_ELEMENT = *mut FILE_SEGMENT_ELEMENT;
+//12475
+pub const IO_REPARSE_TAG_MOUNT_POINT: ::DWORD = 0xA0000003;
+pub const IO_REPARSE_TAG_HSM: ::DWORD = 0xC0000004;
+pub const IO_REPARSE_TAG_HSM2: ::DWORD = 0x80000006;
+pub const IO_REPARSE_TAG_SIS: ::DWORD = 0x80000007;
+pub const IO_REPARSE_TAG_WIM: ::DWORD = 0x80000008;
+pub const IO_REPARSE_TAG_CSV: ::DWORD = 0x80000009;
+pub const IO_REPARSE_TAG_DFS: ::DWORD = 0x8000000A;
+pub const IO_REPARSE_TAG_SYMLINK: ::DWORD = 0xA000000C;
+pub const IO_REPARSE_TAG_DFSR: ::DWORD = 0x80000012;
+pub const IO_REPARSE_TAG_DEDUP: ::DWORD = 0x80000013;
+pub const IO_REPARSE_TAG_NFS: ::DWORD = 0x80000014;
+pub const IO_REPARSE_TAG_FILE_PLACEHOLDER: ::DWORD = 0x80000015;
+pub const IO_REPARSE_TAG_WOF: ::DWORD = 0x80000017;
 //18195
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct RTL_SRWLOCK {

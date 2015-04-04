@@ -1,7 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 #![feature(test)]
-extern crate "user32-sys" as user32;
+extern crate user32;
 extern crate test;
 use user32::*;
 use test::black_box as bb;

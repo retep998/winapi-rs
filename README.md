@@ -17,7 +17,7 @@ winmm-sys = "*"
 example.rs:
 ```Rust
 extern crate winapi;
-extern crate "winmm-sys" as winmm;
+extern crate winmm;
 fn func() {
     winmm::PlaySoundA(...);
 }
