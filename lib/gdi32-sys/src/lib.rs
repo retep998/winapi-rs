@@ -44,12 +44,10 @@ extern "system" {
     pub fn CreateCompatibleBitmap(hdc: HDC, cx: c_int, cy: c_int) -> HBITMAP;
     pub fn CreateCompatibleDC(hdc: HDC) -> HDC;
     pub fn CreateDCA(
-        lpszDriver: LPCSTR, lpszDevice: LPCSTR, lpszOutput: LPCSTR,
-        lpInitData: *const DEVMODEA
+        lpszDriver: LPCSTR, lpszDevice: LPCSTR, lpszOutput: LPCSTR, lpInitData: *const DEVMODEA,
     ) -> HDC;
     pub fn CreateDCW(
-        lpszDriver: LPCWSTR, lpszDevice: LPCWSTR, lpszOutput: LPCWSTR,
-        lpInitData: *const DEVMODEW
+        lpszDriver: LPCWSTR, lpszDevice: LPCWSTR, lpszOutput: LPCWSTR, lpInitData: *const DEVMODEW,
     ) -> HDC;
     // pub fn CreateDIBPatternBrush();
     // pub fn CreateDIBPatternBrushPt();
