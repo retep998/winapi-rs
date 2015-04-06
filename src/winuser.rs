@@ -246,6 +246,49 @@ pub const SM_REMOTECONTROL: ::c_int = 0x2001;
 pub const SM_CARETBLINKINGENABLED: ::c_int = 0x2002;
 pub const SM_CONVERTIBLESLATEMODE: ::c_int = 0x2003;
 pub const SM_SYSTEMDOCKED: ::c_int = 0x2004;
+//9066
+// Color indexes for use in GetSysColor and SetSysColor
+// 0-18 (after incrementing) are also valid in RegisterClass's WNDCLASS
+pub const COLOR_SCROLLBAR: ::c_int = 0;
+pub const COLOR_BACKGROUND: ::c_int = 1;
+pub const COLOR_ACTIVECAPTION: ::c_int = 2;
+pub const COLOR_INACTIVECAPTION: ::c_int = 3;
+pub const COLOR_MENU: ::c_int = 4;
+pub const COLOR_WINDOW: ::c_int = 5;
+pub const COLOR_WINDOWFRAME: ::c_int = 6;
+pub const COLOR_MENUTEXT: ::c_int = 7;
+pub const COLOR_WINDOWTEXT: ::c_int = 8;
+pub const COLOR_CAPTIONTEXT: ::c_int = 9;
+pub const COLOR_ACTIVEBORDER: ::c_int = 10;
+pub const COLOR_INACTIVEBORDER: ::c_int = 11;
+pub const COLOR_APPWORKSPACE: ::c_int = 12;
+pub const COLOR_HIGHLIGHT: ::c_int = 13;
+pub const COLOR_HIGHLIGHTTEXT: ::c_int = 14;
+pub const COLOR_BTNFACE: ::c_int = 15;
+pub const COLOR_BTNSHADOW: ::c_int = 16;
+pub const COLOR_GRAYTEXT: ::c_int = 17;
+pub const COLOR_BTNTEXT: ::c_int = 18;
+pub const COLOR_INACTIVECAPTIONTEXT: ::c_int = 19;
+pub const COLOR_BTNHIGHLIGHT: ::c_int = 20;
+// Introduced in Windows 95 (winver 0x0400):
+pub const COLOR_3DDKSHADOW: ::c_int = 21;
+pub const COLOR_3DLIGHT: ::c_int = 22;
+pub const COLOR_INFOTEXT: ::c_int = 23;
+pub const COLOR_INFOBK: ::c_int = 24;
+pub const COLOR_DESKTOP: ::c_int = COLOR_BACKGROUND;
+pub const COLOR_3DFACE: ::c_int = COLOR_BTNFACE;
+pub const COLOR_3DSHADOW: ::c_int = COLOR_BTNSHADOW;
+pub const COLOR_3DHIGHLIGHT: ::c_int = COLOR_BTNHIGHLIGHT;
+pub const COLOR_3DHILIGHT: ::c_int = COLOR_BTNHIGHLIGHT;
+pub const COLOR_BTNHILIGHT: ::c_int = COLOR_BTNHIGHLIGHT;
+// Introduced in Windows 2000 (winver 0x0500)
+pub const COLOR_HOTLIGHT: ::c_int = 26;
+pub const COLOR_GRADIENTACTIVECAPTION: ::c_int = 27;
+pub const COLOR_GRADIENTINACTIVECAPTION: ::c_int = 28;
+// Introduced in Windows XP (winver 0x0501)
+pub const COLOR_MENUHILIGHT: ::c_int = 29;
+pub const COLOR_MENUBAR: ::c_int = 30;
+
 //10069
 pub const IDC_ARROW: ::LPCWSTR = 32512 as ::LPCWSTR;
 pub const IDC_IBEAM: ::LPCWSTR = 32513 as ::LPCWSTR;
