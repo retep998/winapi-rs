@@ -93,6 +93,248 @@ macro_rules! CTL_CODE {
     }
 }
 
+// Macros for representing C++ classes as C vtables and traits, and managing inheritance
+
+/// Construct C struct representing C++ method vtable
+#[macro_export]
+macro_rules! c_vtable_struct {
+    ( ) => { };
+
+    ( ($($tpub:ident)*), $tablename:ident, $parent:ty, ) => {
+        #[repr(C)] $($tpub)* struct $tablename;
+    };
+
+    ( ($($tpub:ident)*), $tablename:ident, $parent:ty,
+        $(fn $methodname:ident($($argname:ident: $argtype:ty),*) -> $rettype:ty,)+ ) =>
+    {
+        #[repr(C)] $($tpub)* struct $tablename {
+            $( pub $methodname: Option<unsafe extern "system" fn(
+                this: *mut $parent, $($argname: $argtype),*) -> $rettype>, )*
+        }
+    }
+}
+/// Construct a trait with the methods of the C++ interface. Removes the need to manually call the
+/// functions of a C vtable struct when forking with C++ class representations
+#[macro_export]
+macro_rules! c_vtable_methods_to_trait {
+    ( ($($tpub:ident)*), $traitname:ident, [ ],
+        [ $(fn $methodname:ident($($argname:ident: $argtype:ty),*) -> $rettype:ty,)* ] ) =>
+    {
+        $($tpub)* trait $traitname {
+            $(fn $methodname(&mut self, $($argname: $argtype),*) -> $rettype;)*
+        }
+    };
+
+    ( ($($tpub:ident)*), $traitname:ident, [ $parent_trait:ident ],
+        [ $(fn $methodname:ident($($argname:ident: $argtype:ty),*) -> $rettype:ty,)* ] ) =>
+    {
+        $($tpub)* trait $traitname: $parent_trait {
+            $(fn $methodname(&mut self, $($argname: $argtype),*) -> $rettype;)*
+        }
+    };
+
+    // Get rid of all excessive trait bounds. Only need direct parent trait
+    ( ($($tpub:ident)*), $traitname:ident, [ $parent_trait:ident, $($parent_traits:ident),+ ],
+        [ $($fns:tt)* ] ) =>
+    {
+        c_vtable_methods_to_trait!(($($tpub)*), $traitname, [ $($parent_traits),* ], [ $($fns)* ]);
+    };
+}
+/// Implement the trait representing the class methods for the C vtable
+#[macro_export]
+macro_rules! impl_c_vtable_trait {
+    ($traitname:ident, $parent:ty,
+        [ $(fn $methodname:ident($($argname:ident: $argtype:ty),*) -> $rettype:ty,)* ] ) =>
+    {
+        impl $traitname for $parent {
+            $(
+                fn $methodname(&mut self, $($argname: $argtype),*) -> $rettype {
+                    unsafe { (*self.vtable).$methodname.unwrap()(self, $($argname),*) }
+                }
+            )*
+        }
+    };
+}
+/// Deconstruct some syntax before actually doing anything.
+/// Handle the `pub` keyword for vtable and trait, and "with heirs" phrase
+#[macro_export]
+macro_rules! c_vtable_pre {
+    ([ $table:tt of $parent:ty, trait $traitname:ident { $($methods:tt)* }
+            with heirs [$($heirs:tt)*] $($siblings:tt)* ]; $($inheritance:tt)*) =>
+    {
+        c_vtable_main!((), (), $table, $parent, $traitname, { $($methods)* }, [$($heirs)*],
+            [ $($siblings)* ], $($inheritance)*);
+    };
+    ([ pub $table:tt of $parent:ty, trait $traitname:ident { $($methods:tt)* }
+            with heirs [$($heirs:tt)*] $($siblings:tt)* ]; $($inheritance:tt)*) =>
+    {
+        c_vtable_main!((pub), (), $table, $parent, $traitname, { $($methods)* }, [$($heirs)*],
+            [ $($siblings)* ], $($inheritance)*);
+    };
+    ([ $table:tt of $parent:ty, pub trait $traitname:ident { $($methods:tt)* }
+            with heirs [$($heirs:tt)*] $($siblings:tt)* ]; $($inheritance:tt)*) =>
+    {
+        c_vtable_main!((), (pub), $table, $parent, $traitname, { $($methods)* }, [$($heirs)*],
+            [ $($siblings)* ], $($inheritance)*);
+    };
+    ([ pub $table:tt of $parent:ty, pub trait $traitname:ident { $($methods:tt)* }
+            with heirs [$($heirs:tt)*] $($siblings:tt)* ]; $($inheritance:tt)*) =>
+    {
+        c_vtable_main!((pub), (pub), $table, $parent, $traitname, { $($methods)* }, [$($heirs)*],
+            [ $($siblings)* ], $($inheritance)*);
+    };
+
+    // No "with heirs"
+    ([ $table:tt of $parent:ty, trait $traitname:ident { $($methods:tt)* } $($siblings:tt)* ];
+        $($inheritance:tt)*) =>
+    {
+        c_vtable_main!((), (), $table, $parent, $traitname, { $($methods)* }, [ ],
+            [ $($siblings)* ], $($inheritance)*);
+    };
+    ([ pub $table:tt of $parent:ty, trait $traitname:ident { $($methods:tt)* }
+        $($siblings:tt)* ]; $($inheritance:tt)*) =>
+    {
+        c_vtable_main!((pub), (), $table, $parent, $traitname, { $($methods)* }, [ ],
+            [ $($siblings)* ], $($inheritance)*);
+    };
+    ([ $table:tt of $parent:ty, pub trait $traitname:ident { $($methods:tt)* }
+        $($siblings:tt)* ]; $($inheritance:tt)*) =>
+    {
+        c_vtable_main!((), (pub), $table, $parent, $traitname, { $($methods)* }, [ ],
+            [ $($siblings)* ], $($inheritance)*);
+    };
+    ([ pub $table:tt of $parent:ty, pub trait $traitname:ident { $($methods:tt)* }
+        $($siblings:tt)* ]; $($inheritance:tt)*) =>
+    {
+        c_vtable_main!((pub), (pub), $table, $parent, $traitname, { $($methods)* }, [ ],
+            [ $($siblings)* ], $($inheritance)*);
+    };
+
+    ([ ]; $($x:tt)*) => { }
+}
+/// Actually construct the traits, vtables, and manage the inheritance
+#[macro_export]
+macro_rules! c_vtable_main {
+    // No name (i.e _) given for vtable, and () given as parent type, so don't implement anything,
+    // just pass on methods to heirs.
+    // That no implementation is needed infers that no trait is needed as well, wherefore
+    // none is created. Instead, the trait must be declared separately, or imported.
+    (($($tablepub:tt)*), ($($traitpub:tt)*), _, $parent:ty, $traitname:ident,
+        { $($methods:tt)* }, [ $($heirs:tt)* ], [ $($siblings:tt)* ],
+        $(($inh_trait:ident, [ $($inh_methods:tt)* ]))*) =>
+    {
+        c_vtable_pre!([ $($heirs)* ];
+            $(($inh_trait, [ $($inh_methods)* ]))* ($traitname, [ $($methods)* ]));
+        c_vtable_pre!([ $($siblings)* ]; $(($inh_trait, [ $($inh_methods)* ]))*);
+    };
+
+    (($($tablepub:tt)*), ($($traitpub:tt)*), $table:ident, $parent:ty, $traitname:ident,
+        { $($methods:tt)* }, [ $($heirs:tt)* ], [ $($siblings:tt)* ],
+        $(($inh_trait:ident, [ $($inh_methods:tt)* ]))*) =>
+    {
+        c_vtable_struct!(($($tablepub)*), $table, $parent, $($($inh_methods)*)* $($methods)* );
+        c_vtable_methods_to_trait!(($($traitpub)*), $traitname, [ $($inh_trait),* ],
+            [ $($methods)* ]);
+
+        impl_c_vtable_trait!($traitname, $parent, [ $($methods)* ]);
+        $(
+            impl_c_vtable_trait!($inh_trait, $parent, [ $($inh_methods)* ]);
+        )*
+
+        c_vtable_pre!([ $($heirs)* ];
+            $(($inh_trait, [ $($inh_methods)* ]))* ($traitname, [ $($methods)* ]));
+        c_vtable_pre!([ $($siblings)* ]; $(($inh_trait, [ $($inh_methods)* ]))*);
+    };
+}
+/// Macro used to make making bindings for C representations of C++ classes more convenient.
+///
+/// This macro, through `c_vtable_main!`, `c_vtable_struct`, `c_vtable_methods_to_trait`,
+/// `impl_c_vtable_trait`, and `c_vtable_pre`, also provides traits to make interfacing with
+/// rust code easier.
+///
+/// This:
+///
+/// ```rust,ignore
+/// c_vtable!(
+/// IUnknownVtbl of IUnknown, trait IUnknownT { 
+///     fn QueryInterface(riid: REFIID, object: *mut *mut c_void) -> HRESULT,
+///     fn AddRef() -> ULONG,
+///     fn Release() -> ULONG,
+/// } with heirs [
+///     IDXGIDebugVtbl of IDXGIDebug, trait IDXGIDebugT {
+///         fn ReportLiveObjects(apiid: GUID, flags: DXGI_DEBUG_RLO_FLAGS) -> HRESULT,
+///     }
+/// ]);
+/// ```
+///
+/// Expands to this:
+///
+/// ```rust,ignore
+/// #[repr(C)]
+/// pub struct IUnknownVtbl {
+///     pub QueryInterface: Option<unsafe extern "system" fn(this: *mut IUnknown, riid: REFIID,
+///         object: *mut *mut c_void) -> HRESULT>,
+///     pub AddRef: Option<unsafe extern "system" fn(this: *mut IUnknown) -> ULONG>,
+///     pub Release: Option<unsafe extern "system" fn(this: *mut IUnknown) -> ULONG>,
+/// }
+/// trait IUnknownT {
+///     fn QueryInterface(&mut self, riid: REFIID, object: *mut *mut c_void) -> HRESULT;
+///     fn AddRef(&mut self) -> ULONG;
+///     fn Release(&mut self) -> ULONG;
+/// }
+/// impl IUnknownT for IUnknown {
+///     fn QueryInterface(&mut self, riid: REFIID, object: *mut *mut c_void) -> HRESULT {
+///         unsafe {
+///             (*(*self).vtable).QueryInterface.unwrap()(&mut *self, riid, object)
+///         }
+///     }
+///     fn AddRef(&mut self) -> ULONG {
+///         unsafe { (*(*self).vtable).AddRef.unwrap()(&mut *self) }
+///     }
+///     fn Release(&mut self) -> ULONG {
+///         unsafe { (*(*self).vtable).Release.unwrap()(&mut *self) }
+///     }
+/// }
+/// #[repr(C)]
+/// pub struct IDXGIDebugVtbl {
+///     pub QueryInterface: Option<unsafe extern "system" fn(this: *mut IDXGIDebug, riid: REFIID,
+///         object: *mut *mut c_void) -> HRESULT>,
+///     pub AddRef: Option<unsafe extern "system" fn(this: *mut IDXGIDebug) -> ULONG>,
+///     pub Release: Option<unsafe extern "system" fn(this: *mut IDXGIDebug) -> ULONG>,
+///     pub ReportLiveObjects: Option<unsafe extern "system" fn(this: *mut IDXGIDebug,
+///         apiid: GUID, flags: DXGI_DEBUG_RLO_FLAGS) -> HRESULT>,
+/// }
+/// trait IDXGIDebugT: IUnknownT {
+///     fn ReportLiveObjects(&mut self, apiid: GUID, flags: DXGI_DEBUG_RLO_FLAGS) -> HRESULT;
+/// }
+/// impl IDXGIDebugT for IDXGIDebug {
+///     fn ReportLiveObjects(&mut self, apiid: GUID, flags: DXGI_DEBUG_RLO_FLAGS) -> HRESULT {
+///         unsafe {
+///             (*(*self).vtable).ReportLiveObjects.unwrap()(&mut *self, apiid, flags)
+///         }
+///     }
+/// }
+/// impl IUnknownT for IDXGIDebug {
+///     fn QueryInterface(&mut self, riid: REFIID, object: *mut *mut c_void) -> HRESULT {
+///         unsafe {
+///             (*(*self).vtable).QueryInterface.unwrap()(&mut *self, riid, object)
+///         }
+///     }
+///     fn AddRef(&mut self) -> ULONG {
+///         unsafe { (*(*self).vtable).AddRef.unwrap()(&mut *self) }
+///     }
+///     fn Release(&mut self) -> ULONG {
+///         unsafe { (*(*self).vtable).Release.unwrap()(&mut *self) }
+///     }
+/// }
+/// ```
+#[macro_export]
+macro_rules! c_vtable {
+    ($($table:tt)*) => {
+        c_vtable_pre!([ $($table)* ];);
+    }
+}
+
 //-------------------------------------------------------------------------------------------------
 // Modules
 //-------------------------------------------------------------------------------------------------

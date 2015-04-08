@@ -75,7 +75,7 @@ use constants::*;
 #[repr(C)] pub struct IDXGISwapChain2 { pub vtable: *mut IDXGISwapChain2Vtbl }
 #[repr(C)] pub struct IDXGISwapChainMedia { pub vtable: *mut IDXGISwapChainMediaVtbl }
 
-c_vtable!(
+c_vtable!{
 pub IUnknownVtbl of IUnknown, pub trait IUnknownT { 
     fn QueryInterface(riid: REFIID, object: *mut *mut c_void) -> HRESULT,
     fn AddRef() -> ULONG,
@@ -328,4 +328,5 @@ pub IUnknownVtbl of IUnknown, pub trait IUnknownT {
         fn SetPresentDuration(duration: UINT) -> HRESULT,
         fn CheckPresentDurationSupport(desired_present_duration: UINT, closest_smaller_present_duration: *mut UINT, closest_larger_present_duration: *mut UINT) -> HRESULT,
     }
-]);
+]
+}

@@ -24,6 +24,7 @@
 
 #![cfg(windows)]
 
+#[macro_use]
 extern crate winapi;
 
 use winapi::{ REFIID, HRESULT, UINT, c_void };
