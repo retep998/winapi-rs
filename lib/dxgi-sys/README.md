@@ -1,4 +1,4 @@
 # dxgi-sys #
-FFI bindings to dxgi.
+FFI bindings to DXGI.
 
 [Documentation](https://retep998.github.io/doc/dxgi-sys/)

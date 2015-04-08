@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2015 Johan Johansson, Peter Atashian
+// Copyright (c) 2015 Johan Johansson
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,30 +20,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-//! FFI bindings to dxgi.
+//! Simplify interfacing to C vtable representation of C++ classes that make use of inheritance
 
-#![cfg(windows)]
+#![macro_use]
+#![allow(dead_code)]
 
-#[macro_use]
-extern crate winapi;
-
-use winapi::{ REFIID, HRESULT, UINT, c_void };
-pub use constants::*;
-pub use enumerations::*;
-pub use structures::*;
-pub use interfaces::*;
-
-mod macros;
-pub mod structures;
-pub mod enumerations;
-pub mod constants;
-pub mod interfaces;
-
-#[link(name = "dxgi")]
-extern "system" {
-    pub fn CreateDXGIFactory(riid: REFIID, ppFactory: *mut *mut c_void) -> HRESULT;
-    pub fn CreateDXGIFactory1(riid: REFIID, ppFactory: *mut *mut c_void) -> HRESULT;
-    pub fn CreateDXGIFactory2(Flags: UINT, riid: REFIID, ppFactory: *mut *mut c_void) -> HRESULT;
-    pub fn DXGIGetDebugInterface(riid: REFIID, ppDebug: *mut *mut c_void) -> HRESULT;
-    pub fn DXGIGetDebugInterface1(Flags: UINT, riid: REFIID, pDebug: *mut *mut c_void) -> HRESULT;
+/// Rust equivalent to windows C DEFINE_GUID macro
+#[macro_export]
+macro_rules! define_guid {
+    ($name:ident, $d1:expr, $d2:expr, $d3:expr,
+        $d4:expr, $d5:expr, $d6:expr, $d7:expr, $d8:expr, $d9:expr, $d10:expr, $d11:expr) =>
+    {
+        pub const $name: GUID = GUID{ Data1: $d1, Data2: $d2, Data3: $d3,
+            Data4: [$d4, $d5, $d6, $d7, $d8, $d9, $d10, $d11] };
+    }
 }
