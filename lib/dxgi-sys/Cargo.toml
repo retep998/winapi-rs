@@ -1,15 +1,14 @@
 [package]
 name = "dxgi-sys"
-version = "0.0.1"
-authors = ["Peter Atashian <retep998@gmail.com>"]
-description = "FFI bindings to dxgi. This crate is a placeholder for the future. If you are interested in this library feel free to get in touch with me: http://www.rustaceans.org/retep998"
+version = "0.1.0"
+authors = ["bryal <96.bryal@gmail.com>", "Peter Atashian <retep998@gmail.com>"]
+description = "FFI bindings to DXGI"
 documentation = "https://retep998.github.io/doc/dxgi-sys/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["Windows", "FFI", "WinSDK"]
+keywords = ["Windows", "DXGI", "Direct3D", "FFI", "WinSDK"]
 license = "MIT"
 build = "build.rs"
-links = "dxgi"
 
 [dependencies]
 winapi = "*"
