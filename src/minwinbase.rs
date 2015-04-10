@@ -28,14 +28,14 @@ pub struct OVERLAPPED_ENTRY {
 pub type LPOVERLAPPED_ENTRY = *mut OVERLAPPED_ENTRY;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SYSTEMTIME {
-    pub wYear: ::DWORD,
-    pub wMonth: ::DWORD,
-    pub wDayOfWeek: ::DWORD,
-    pub wDay: ::DWORD,
-    pub wHour: ::DWORD,
-    pub wMinute: ::DWORD,
-    pub wSecond: ::DWORD,
-    pub wMilliseconds: ::DWORD,
+    pub wYear: ::WORD,
+    pub wMonth: ::WORD,
+    pub wDayOfWeek: ::WORD,
+    pub wDay: ::WORD,
+    pub wHour: ::WORD,
+    pub wMinute: ::WORD,
+    pub wSecond: ::WORD,
+    pub wMilliseconds: ::WORD,
 }
 pub type PSYSTEMTIME = *mut SYSTEMTIME;
 pub type LPSYSTEMTIME = *mut SYSTEMTIME;
