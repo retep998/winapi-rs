@@ -979,7 +979,7 @@ extern "system" {
     // pub fn K32GetModuleBaseNameA();
     // pub fn K32GetModuleBaseNameW();
     // pub fn K32GetModuleFileNameExA();
-    // pub fn K32GetModuleFileNameExW();
+    pub fn K32GetModuleFileNameExW(hProcess: HANDLE, hModule: HMODULE, lpFilename: LPWSTR, nSize: DWORD) -> DWORD;
     // pub fn K32GetModuleInformation();
     // pub fn K32GetPerformanceInfo();
     pub fn K32GetProcessImageFileNameA(

@@ -516,8 +516,8 @@ extern "system" {
     pub fn GetWindowLongPtrW(hWnd: HWND, nIndex: c_int) -> LONG_PTR;
     pub fn GetWindowLongW(hWnd: HWND, nIndex: c_int) -> LONG;
     // pub fn GetWindowModuleFileName();
-    // pub fn GetWindowModuleFileNameA();
-    // pub fn GetWindowModuleFileNameW();
+    pub fn GetWindowModuleFileNameA(hWnd: HWND, lpszFileName: LPCSTR, cchFileNameMax: UINT) -> UINT;
+    pub fn GetWindowModuleFileNameW(hWnd: HWND, lpszFileName: LPWSTR, cchFileNameMax: UINT) -> UINT;
     pub fn GetWindowPlacement(hWnd: HWND, lpwndpl: *mut WINDOWPLACEMENT) -> BOOL;
     pub fn GetWindowRect(hWnd: HWND, lpRect: LPRECT) -> BOOL;
     // pub fn GetWindowRgn();

@@ -122,6 +122,8 @@ fn functions() {
     bb(GetWindow);
     bb(GetWindowLongA);
     bb(GetWindowLongW);
+    bb(GetWindowModuleFileNameA);
+    bb(GetWindowModuleFileNameW);
     bb(GetWindowPlacement);
     bb(GetWindowRect);
     bb(GetWindowTextA);
