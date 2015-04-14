@@ -127,22 +127,22 @@ pub const GWLP_ID: ::c_int = -12;
 pub const GWL_USERDATA: ::c_int = -21;
 pub const GWLP_USERDATA: ::c_int = -21;
 //6573
-pub const QS_KEY: ::DWORD = 0x0001;
-pub const QS_MOUSEMOVE: ::DWORD = 0x0002;
-pub const QS_MOUSEBUTTON: ::DWORD = 0x0004;
-pub const QS_POSTMESSAGE: ::DWORD = 0x0008;
-pub const QS_TIMER: ::DWORD = 0x0010;
-pub const QS_PAINT: ::DWORD = 0x0020;
-pub const QS_SENDMESSAGE: ::DWORD = 0x0040;
-pub const QS_HOTKEY: ::DWORD = 0x0080;
-pub const QS_ALLPOSTMESSAGE: ::DWORD = 0x0100;
-pub const QS_RAWINPUT: ::DWORD = 0x0400;
-pub const QS_TOUCH: ::DWORD = 0x0800;
-pub const QS_POINTER: ::DWORD = 0x1000;
-pub const QS_MOUSE: ::DWORD = QS_MOUSEMOVE | QS_MOUSEBUTTON;
-pub const QS_INPUT: ::DWORD = QS_MOUSE | QS_KEY | QS_RAWINPUT | QS_TOUCH | QS_POINTER;
-pub const QS_ALLEVENTS: ::DWORD = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
-pub const QS_ALLINPUT: ::DWORD = QS_INPUT | QS_POSTMESSAGE | QS_TIMER
+pub const QS_KEY: ::UINT = 0x0001;
+pub const QS_MOUSEMOVE: ::UINT = 0x0002;
+pub const QS_MOUSEBUTTON: ::UINT = 0x0004;
+pub const QS_POSTMESSAGE: ::UINT = 0x0008;
+pub const QS_TIMER: ::UINT = 0x0010;
+pub const QS_PAINT: ::UINT = 0x0020;
+pub const QS_SENDMESSAGE: ::UINT = 0x0040;
+pub const QS_HOTKEY: ::UINT = 0x0080;
+pub const QS_ALLPOSTMESSAGE: ::UINT = 0x0100;
+pub const QS_RAWINPUT: ::UINT = 0x0400;
+pub const QS_TOUCH: ::UINT = 0x0800;
+pub const QS_POINTER: ::UINT = 0x1000;
+pub const QS_MOUSE: ::UINT = QS_MOUSEMOVE | QS_MOUSEBUTTON;
+pub const QS_INPUT: ::UINT = QS_MOUSE | QS_KEY | QS_RAWINPUT | QS_TOUCH | QS_POINTER;
+pub const QS_ALLEVENTS: ::UINT = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
+pub const QS_ALLINPUT: ::UINT = QS_INPUT | QS_POSTMESSAGE | QS_TIMER
     | QS_PAINT | QS_HOTKEY | QS_SENDMESSAGE;
 //6789
 pub const SM_CXSCREEN: ::c_int = 0;
@@ -246,6 +246,49 @@ pub const SM_REMOTECONTROL: ::c_int = 0x2001;
 pub const SM_CARETBLINKINGENABLED: ::c_int = 0x2002;
 pub const SM_CONVERTIBLESLATEMODE: ::c_int = 0x2003;
 pub const SM_SYSTEMDOCKED: ::c_int = 0x2004;
+//9066
+// Color indexes for use in GetSysColor and SetSysColor
+// 0-18 (after incrementing) are also valid in RegisterClass's WNDCLASS
+pub const COLOR_SCROLLBAR: ::c_int = 0;
+pub const COLOR_BACKGROUND: ::c_int = 1;
+pub const COLOR_ACTIVECAPTION: ::c_int = 2;
+pub const COLOR_INACTIVECAPTION: ::c_int = 3;
+pub const COLOR_MENU: ::c_int = 4;
+pub const COLOR_WINDOW: ::c_int = 5;
+pub const COLOR_WINDOWFRAME: ::c_int = 6;
+pub const COLOR_MENUTEXT: ::c_int = 7;
+pub const COLOR_WINDOWTEXT: ::c_int = 8;
+pub const COLOR_CAPTIONTEXT: ::c_int = 9;
+pub const COLOR_ACTIVEBORDER: ::c_int = 10;
+pub const COLOR_INACTIVEBORDER: ::c_int = 11;
+pub const COLOR_APPWORKSPACE: ::c_int = 12;
+pub const COLOR_HIGHLIGHT: ::c_int = 13;
+pub const COLOR_HIGHLIGHTTEXT: ::c_int = 14;
+pub const COLOR_BTNFACE: ::c_int = 15;
+pub const COLOR_BTNSHADOW: ::c_int = 16;
+pub const COLOR_GRAYTEXT: ::c_int = 17;
+pub const COLOR_BTNTEXT: ::c_int = 18;
+pub const COLOR_INACTIVECAPTIONTEXT: ::c_int = 19;
+pub const COLOR_BTNHIGHLIGHT: ::c_int = 20;
+// Introduced in Windows 95 (winver 0x0400):
+pub const COLOR_3DDKSHADOW: ::c_int = 21;
+pub const COLOR_3DLIGHT: ::c_int = 22;
+pub const COLOR_INFOTEXT: ::c_int = 23;
+pub const COLOR_INFOBK: ::c_int = 24;
+pub const COLOR_DESKTOP: ::c_int = COLOR_BACKGROUND;
+pub const COLOR_3DFACE: ::c_int = COLOR_BTNFACE;
+pub const COLOR_3DSHADOW: ::c_int = COLOR_BTNSHADOW;
+pub const COLOR_3DHIGHLIGHT: ::c_int = COLOR_BTNHIGHLIGHT;
+pub const COLOR_3DHILIGHT: ::c_int = COLOR_BTNHIGHLIGHT;
+pub const COLOR_BTNHILIGHT: ::c_int = COLOR_BTNHIGHLIGHT;
+// Introduced in Windows 2000 (winver 0x0500)
+pub const COLOR_HOTLIGHT: ::c_int = 26;
+pub const COLOR_GRADIENTACTIVECAPTION: ::c_int = 27;
+pub const COLOR_GRADIENTINACTIVECAPTION: ::c_int = 28;
+// Introduced in Windows XP (winver 0x0501)
+pub const COLOR_MENUHILIGHT: ::c_int = 29;
+pub const COLOR_MENUBAR: ::c_int = 30;
+
 //10069
 pub const IDC_ARROW: ::LPCWSTR = 32512 as ::LPCWSTR;
 pub const IDC_IBEAM: ::LPCWSTR = 32513 as ::LPCWSTR;

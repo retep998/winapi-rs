@@ -1,6 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 #![feature(test)]
+#![cfg(windows)]
 extern crate uuid;
 extern crate test;
 use uuid::*;

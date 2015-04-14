@@ -147,11 +147,23 @@ extern "system" {
         lpSecurityAttributes: LPSECURITY_ATTRIBUTES, dwCreationDisposition: DWORD,
         dwFlagsAndAttributes: DWORD, hTemplateFile: HANDLE,
     ) -> HANDLE;
-    // pub fn CreateFileMappingA();
+    pub fn CreateFileMappingA(hFile: HANDLE,
+                              lpAttributes: LPSECURITY_ATTRIBUTES,
+                              flProtect: DWORD,
+                              dwMaximumSizeHigh: DWORD,
+                              dwMaximumSizeLow: DWORD,
+                              lpName: LPCSTR)
+                              -> HANDLE;
     // pub fn CreateFileMappingFromApp();
     // pub fn CreateFileMappingNumaA();
     // pub fn CreateFileMappingNumaW();
-    // pub fn CreateFileMappingW();
+    pub fn CreateFileMappingW(hFile: HANDLE,
+                              lpAttributes: LPSECURITY_ATTRIBUTES,
+                              flProtect: DWORD,
+                              dwMaximumSizeHigh: DWORD,
+                              dwMaximumSizeLow: DWORD,
+                              lpName: LPCWSTR)
+                              -> HANDLE;
     // pub fn CreateFileTransactedA();
     // pub fn CreateFileTransactedW();
     pub fn CreateFileW(
@@ -411,7 +423,9 @@ extern "system" {
     pub fn FlushFileBuffers(hFile: HANDLE) -> BOOL;
     // pub fn FlushInstructionCache();
     // pub fn FlushProcessWriteBuffers();
-    // pub fn FlushViewOfFile();
+     pub fn FlushViewOfFile(lpBaseAddress: LPCVOID,
+                            dwNumberOfBytesToFlush: SIZE_T)
+                            -> BOOL;
     // pub fn FoldStringA();
     // pub fn FoldStringW();
     // pub fn FormatApplicationUserModelId();
@@ -1025,8 +1039,19 @@ extern "system" {
     // pub fn LockResource();
     // pub fn MapUserPhysicalPages();
     // pub fn MapUserPhysicalPagesScatter();
-    // pub fn MapViewOfFile();
-    // pub fn MapViewOfFileEx();
+    pub fn MapViewOfFile(hFileMappingObject: HANDLE,
+                         dwDesiredAccess: DWORD,
+                         dwFileOffsetHigh: DWORD,
+                         dwFileOffsetLow: DWORD,
+                         dwNumberOfBytesToMap: SIZE_T)
+                         -> LPVOID;
+    pub fn MapViewOfFileEx(hFileMappingObject: HANDLE,
+                           dwDesiredAccess: DWORD,
+                           dwFileOffsetHigh: DWORD,
+                           dwFileOffsetLow: DWORD,
+                           dwNumberOfBytesToMap: SIZE_T,
+                           lpBaseAddress: LPVOID)
+                           -> LPVOID;
     // pub fn MapViewOfFileExNuma();
     // pub fn MapViewOfFileFromApp();
     // pub fn Module32First();
@@ -1489,8 +1514,7 @@ extern "system" {
         hFile: HANDLE, dwReserved: DWORD, nNumberOfBytesToUnlockLow: DWORD,
         nNumberOfBytesToUnlockHigh: DWORD, lpOverlapped: LPOVERLAPPED,
     ) -> BOOL;
-    // pub fn UnmapViewOfFile();
-    // pub fn UnmapViewOfFileEx();
+    pub fn UnmapViewOfFile(lpBaseAddress: LPCVOID) -> BOOL;
     // pub fn UnregisterApplicationRecoveryCallback();
     // pub fn UnregisterApplicationRestart();
     // pub fn UnregisterBadMemoryNotification();
