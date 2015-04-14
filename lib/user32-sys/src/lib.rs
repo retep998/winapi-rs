@@ -460,7 +460,7 @@ extern "system" {
     // pub fn GetProcessWindowStation();
     pub fn GetPropA(hwnd: HWND, lpString: LPCSTR) -> HANDLE;
     pub fn GetPropW(hwnd: HWND, lpString: LPCWSTR) -> HANDLE;
-    // pub fn GetQueueStatus();
+    pub fn GetQueueStatus(flags: UINT) -> DWORD;
     pub fn GetRawInputBuffer(pData: PRAWINPUT, pcbSize: PUINT, cbSizeHeader: UINT) -> UINT;
     pub fn GetRawInputData(
         hRawInput: HRAWINPUT, uiCommand: UINT, pData: LPVOID, pcbSize: PUINT, cbSizeHeader: UINT,
@@ -648,8 +648,9 @@ extern "system" {
     // pub fn MonitorFromRect();
     // pub fn MonitorFromWindow();
     // pub fn MoveWindow();
-    // pub fn MsgWaitForMultipleObjects();
-    // pub fn MsgWaitForMultipleObjectsEx();
+    // Use UINT instead of DWORD for dwWaitMask to be consistent with GetQueueStatus
+    pub fn MsgWaitForMultipleObjects(nCount: DWORD, pHandles: *const HANDLE, fWaitAll: BOOL, dwMilliseconds: DWORD, dwWakeMask: UINT) -> DWORD;
+    pub fn MsgWaitForMultipleObjectsEx(nCount: DWORD, pHandles: *const HANDLE, dwMilliseconds: DWORD, dwWakeMask: UINT, dwFlags: DWORD) -> DWORD;
     // pub fn NotifyWinEvent();
     // pub fn OemKeyScan();
     // pub fn OemToCharA();

@@ -126,6 +126,11 @@ pub const GWL_ID: ::c_int = -12;
 pub const GWLP_ID: ::c_int = -12;
 pub const GWL_USERDATA: ::c_int = -21;
 pub const GWLP_USERDATA: ::c_int = -21;
+//6566
+// flags for MsgWaitForMultipleObjectsEx
+pub const MWMO_WAITALL: ::DWORD = 0x0001;
+pub const MWMO_ALERTABLE: ::DWORD = 0x0002;
+pub const MWMO_INPUTAVAILABLE: ::DWORD = 0x0004;
 //6573
 pub const QS_KEY: ::UINT = 0x0001;
 pub const QS_MOUSEMOVE: ::UINT = 0x0002;

@@ -111,6 +111,7 @@ fn functions() {
     bb(GetMessageW);
     bb(GetOpenClipboardWindow);
     bb(GetParent);
+    bb(GetQueueStatus);
     // bb(GetPhysicalCursorPos);
     bb(GetScrollPos);
     bb(GetScrollRange);
@@ -145,6 +146,8 @@ fn functions() {
     bb(MessageBoxExA);
     bb(MessageBoxExW);
     bb(MessageBoxW);
+    bb(MsgWaitForMultipleObjects);
+    bb(MsgWaitForMultipleObjectsEx);
     bb(OpenClipboard);
     bb(PeekMessageW);
     bb(PostMessageW);
