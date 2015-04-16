@@ -3,6 +3,11 @@
 //! GDI procedure declarations, constant definitions and macros
 //1438
 pub const LF_FACESIZE: usize = 32;
+//1595
+#[inline]
+pub fn RGB (r: ::BYTE, g: ::BYTE, b: ::BYTE) -> ::COLORREF {
+  r as ::COLORREF | ((g as ::COLORREF) << 8) | ((b as ::COLORREF) << 16)
+}
 
 // this type is weird because it's a hacky "unsized type"
 #[repr(C)]
