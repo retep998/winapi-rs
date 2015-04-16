@@ -3,6 +3,7 @@
 //! Types and constants for WinAPI bindings.
 #![allow(bad_style, raw_pointer_derive)]
 #![warn(unused_qualifications, unused)]
+#![cfg(windows)]
 
 //-------------------------------------------------------------------------------------------------
 // External crates

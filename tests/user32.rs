@@ -1,6 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 #![feature(test)]
+#![cfg(windows)]
 extern crate user32;
 extern crate test;
 use user32::*;
