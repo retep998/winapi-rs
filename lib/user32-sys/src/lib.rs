@@ -485,7 +485,7 @@ extern "system" {
     pub fn GetShellWindow() -> HWND;
     // pub fn GetSubMenu();
     pub fn GetSysColor(nIndex: c_int) -> DWORD;
-    // pub fn GetSysColorBrush();
+    pub fn GetSysColorBrush(nIndex: c_int) -> HBRUSH;
     // pub fn GetSystemMenu();
     pub fn GetSystemMetrics(nIndex: c_int) -> c_int;
     // pub fn GetTabbedTextExtentA();

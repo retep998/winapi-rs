@@ -117,6 +117,7 @@ fn functions() {
     bb(GetScrollRange);
     bb(GetShellWindow);
     bb(GetSysColor);
+    bb(GetSysColorBrush);
     bb(GetSystemMetrics);
     bb(GetThreadDesktop);
     // bb(GetUpdatedClipboardFormats);
