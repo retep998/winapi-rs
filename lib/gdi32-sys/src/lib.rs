@@ -12,10 +12,10 @@ extern "system" {
     // pub fn AddFontResourceExA();
     // pub fn AddFontResourceExW();
     // pub fn AddFontResourceW();
-    // pub fn AngleArc();
+    pub fn AngleArc(hdc: HDC, X: c_int, Y: c_int, dwRadius: DWORD, eStartAngle: FLOAT, eSweepAngle: FLOAT) -> BOOL;
     // pub fn AnimatePalette();
-    // pub fn Arc();
-    // pub fn ArcTo();
+    pub fn Arc(hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int, nXStartArc: c_int, nYStartArc: c_int, nXEndArc: c_int, nYEndArc: c_int) -> BOOL;
+    pub fn ArcTo(hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int, nXRadial1: c_int, nYRadial1: c_int, nXRadial2: c_int, nYRadial2: c_int) -> BOOL;
     // pub fn BeginPath();
     pub fn BitBlt(
         hdc: HDC, x: c_int, y: c_int, cx: c_int, cy: c_int, hdcSrc: HDC, x1: c_int, y1: c_int,
@@ -275,7 +275,7 @@ extern "system" {
     // pub fn GdiStartDocEMF();
     // pub fn GdiStartPageEMF();
     // pub fn GdiTransparentBlt();
-    // pub fn GetArcDirection();
+    pub fn GetArcDirection(hdc: HDC) -> c_int;
     // pub fn GetAspectRatioFilterEx();
     // pub fn GetBitmapBits();
     // pub fn GetBitmapDimensionEx();
@@ -391,11 +391,11 @@ extern "system" {
     // pub fn IntersectClipRect();
     // pub fn InvertRgn();
     // pub fn LPtoDP();
-    // pub fn LineDDA();
-    // pub fn LineTo();
+    pub fn LineDDA(nXStart: c_int, nYStart: c_int, nXEnd: c_int, nYEnd: c_int, lpLineFunc: LINEDDAPROC, lpData: LPARAM) -> BOOL;
+    pub fn LineTo(hdc: HDC, nXEnd: c_int, nYEnd: c_int);
     // pub fn MaskBlt();
     // pub fn ModifyWorldTransform();
-    // pub fn MoveToEx();
+    pub fn MoveToEx(hdc: HDC, X: c_int, Y: c_int, lpPoint:LPPOINT) -> BOOL;
     // pub fn OffsetClipRgn();
     // pub fn OffsetRgn();
     // pub fn OffsetViewportOrgEx();
@@ -409,16 +409,16 @@ extern "system" {
     // pub fn PlayMetaFile();
     // pub fn PlayMetaFileRecord();
     // pub fn PlgBlt();
-    // pub fn PolyBezier();
-    // pub fn PolyBezierTo();
-    // pub fn PolyDraw();
-    pub fn PolyPolygon(hdc: HDC, lpPoints: *const POINT, lpPolyCounts: *const INT, nCount: c_int) -> BOOL;
-    // pub fn PolyPolyline();
+    pub fn PolyBezier(hdc: HDC, lppt: *const POINT, cPoints: DWORD) -> BOOL;
+    pub fn PolyBezierTo(hdc: HDC, lppt: *const POINT, cPoints: DWORD) -> BOOL;
+    pub fn PolyDraw(hdc: HDC, lppt: *const POINT, lpbTypes: *const BYTE, cCount: c_int) -> BOOL;
+    pub fn PolyPolygon(hdc: HDC, lpPoints: *const POINT, lpPolyCounts: *const INT, cCount: DWORD) -> BOOL;
+    pub fn PolyPolyline(hdc: HDC, lppt: *const POINT, lpdwPolyPoints: *const DWORD, cCount: DWORD) -> BOOL;
     // pub fn PolyTextOutA();
     // pub fn PolyTextOutW();
     pub fn Polygon(hdc: HDC, lpPoints: *const POINT, nCount: c_int) -> BOOL;
-    // pub fn Polyline();
-    // pub fn PolylineTo();
+    pub fn Polyline(hdc: HDC, lppt: *const POINT, cCount: c_int) -> BOOL;
+    pub fn PolylineTo(hdc: HDC, lppt: *const POINT, cCount: DWORD) -> BOOL;
     // pub fn PtInRegion();
     // pub fn PtVisible();
     // pub fn RealizePalette();
@@ -445,7 +445,7 @@ extern "system" {
     pub fn SelectObject(hdc: HDC, h: HGDIOBJ) -> HGDIOBJ;
     // pub fn SelectPalette();
     // pub fn SetAbortProc();
-    // pub fn SetArcDirection();
+    pub fn SetArcDirection(hdc: HDC, ArcDirection: c_int) -> c_int;
     // pub fn SetBitmapBits();
     // pub fn SetBitmapDimensionEx();
     pub fn SetBkColor(hdc: HDC, color: COLORREF) -> COLORREF;
