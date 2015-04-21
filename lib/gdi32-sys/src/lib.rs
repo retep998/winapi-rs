@@ -24,7 +24,7 @@ extern "system" {
     // pub fn CancelDC();
     // pub fn CheckColorsInGamut();
     pub fn ChoosePixelFormat(hdc: HDC, ppfd: *const PIXELFORMATDESCRIPTOR) -> c_int;
-    // pub fn Chord();
+    pub fn Chord(hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int, nXRadial1: c_int, nYRadial1: c_int, nXRadial2: c_int, nYRadial2: c_int) -> BOOL;
     // pub fn CloseEnhMetaFile();
     // pub fn CloseFigure();
     // pub fn CloseMetaFile();
@@ -215,7 +215,7 @@ extern "system" {
     // pub fn DeviceCapabilitiesExA();
     // pub fn DeviceCapabilitiesExW();
     // pub fn DrawEscape();
-    // pub fn Ellipse();
+    pub fn Ellipse(hdc: HDC, left: c_int, top: c_int, right: c_int, bottom: c_int) -> BOOL;
     // pub fn EnableEUDC();
     // pub fn EndDoc();
     // pub fn EndFormPage();
@@ -403,7 +403,7 @@ extern "system" {
     // pub fn PaintRgn();
     // pub fn PatBlt();
     // pub fn PathToRegion();
-    // pub fn Pie();
+    pub fn Pie(hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nBottomRect: c_int, nXRadial1: c_int, nYRadial1: c_int, nXRadial2: c_int, nYRadial2: c_int) -> BOOL;
     // pub fn PlayEnhMetaFile();
     // pub fn PlayEnhMetaFileRecord();
     // pub fn PlayMetaFile();
@@ -412,11 +412,11 @@ extern "system" {
     // pub fn PolyBezier();
     // pub fn PolyBezierTo();
     // pub fn PolyDraw();
-    // pub fn PolyPolygon();
+    pub fn PolyPolygon(hdc: HDC, lpPoints: *const POINT, lpPolyCounts: *const INT, nCount: c_int) -> BOOL;
     // pub fn PolyPolyline();
     // pub fn PolyTextOutA();
     // pub fn PolyTextOutW();
-    // pub fn Polygon();
+    pub fn Polygon(hdc: HDC, lpPoints: *const POINT, nCount: c_int) -> BOOL;
     // pub fn Polyline();
     // pub fn PolylineTo();
     // pub fn PtInRegion();
@@ -434,7 +434,7 @@ extern "system" {
     // pub fn ResetDCW();
     // pub fn ResizePalette();
     // pub fn RestoreDC();
-    // pub fn RoundRect();
+    pub fn RoundRect(hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int, nWidth: c_int, nHeight: c_int) -> BOOL;
     // pub fn SaveDC();
     // pub fn ScaleViewportExtEx();
     // pub fn ScaleWindowExtEx();
