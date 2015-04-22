@@ -13,6 +13,13 @@ fn functions() {
     bb(ControlService);
     bb(CreateServiceA);
     bb(CreateServiceW);
+    bb(CredDeleteA);
+    bb(CredDeleteW);
+    bb(CredFree);
+    bb(CredReadA);
+    bb(CredReadW);
+    bb(CredWriteA);
+    bb(CredWriteW);
     bb(CryptAcquireContextA);
     bb(CryptAcquireContextW);
     bb(CryptCreateHash);
