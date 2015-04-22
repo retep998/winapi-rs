@@ -326,7 +326,7 @@ extern "system" {
     pub fn GetAsyncKeyState(vKey: c_int) -> SHORT;
     // pub fn GetAutoRotationState();
     // pub fn GetCIMSSM();
-    // pub fn GetCapture();
+    pub fn GetCapture() -> HWND;
     pub fn GetCaretBlinkTime() -> UINT;
     pub fn GetCaretPos(lpPoint: LPPOINT) -> BOOL;
     // pub fn GetClassInfoA();
@@ -727,7 +727,7 @@ extern "system" {
     // pub fn RegisterTouchWindow();
     // pub fn RegisterWindowMessageA();
     // pub fn RegisterWindowMessageW();
-    // pub fn ReleaseCapture();
+    pub fn ReleaseCapture() -> BOOL;
     pub fn ReleaseDC(hWnd: HWND, hDC: HDC) -> c_int;
     // pub fn RemoveClipboardFormatListener();
     // pub fn RemoveMenu();
@@ -767,7 +767,7 @@ extern "system" {
     pub fn SendNotifyMessageA(hWnd: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
     pub fn SendNotifyMessageW(hWnd: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
     pub fn SetActiveWindow(hWnd: HWND) -> HWND;
-    // pub fn SetCapture();
+    pub fn SetCapture(hWnd: HWND) -> HWND;
     pub fn SetCaretBlinkTime(uMSeconds: UINT) -> BOOL;
     pub fn SetCaretPos(x: c_int, y: c_int) -> BOOL;
     pub fn SetClassLongA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
