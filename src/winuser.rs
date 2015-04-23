@@ -6,6 +6,14 @@ pub const WHEEL_DELTA: ::DWORD = 120;
 //2206
 pub const XBUTTON1: ::DWORD = 0x0001;
 pub const XBUTTON2: ::DWORD = 0x0002;
+//2392
+pub const MK_LBUTTON: ::WPARAM = 0x0001;
+pub const MK_RBUTTON: ::WPARAM = 0x0002;
+pub const MK_SHIFT: ::WPARAM = 0x0004;
+pub const MK_CONTROL: ::WPARAM = 0x0008;
+pub const MK_MBUTTON: ::WPARAM = 0x0010;
+pub const MK_XBUTTON1: ::WPARAM = 0x0020;
+pub const MK_XBUTTON2: ::WPARAM = 0x0040;
 //3082
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CREATESTRUCTA {
