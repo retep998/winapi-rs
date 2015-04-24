@@ -207,7 +207,7 @@ extern "system" {
     pub fn DestroyCaret() -> BOOL;
     pub fn DestroyCursor(hCursor: HCURSOR) -> BOOL;
     pub fn DestroyIcon(hIcon: HICON) -> BOOL;
-    pub fn DestroyMenu(hMenu: HMENU) -> HMENU;
+    pub fn DestroyMenu(hMenu: HMENU) -> BOOL;
     pub fn DestroyWindow(hWnd: HWND) -> BOOL;
     // pub fn DialogBoxIndirectParamA();
     // pub fn DialogBoxIndirectParamW();
