@@ -11,5 +11,8 @@ license = "MIT"
 build = "build.rs"
 links = "xinput"
 
+[lib]
+name = "xinput"
+
 [dependencies]
 winapi = "*"
