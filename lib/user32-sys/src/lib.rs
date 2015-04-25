@@ -876,7 +876,7 @@ extern "system" {
     // pub fn ToAsciiEx();
     // pub fn ToUnicode();
     // pub fn ToUnicodeEx();
-    // pub fn TrackMouseEvent();
+    pub fn TrackMouseEvent(lpEventTrack: LPTRACKMOUSEEVENT) -> BOOL;
     // pub fn TrackPopupMenu();
     // pub fn TrackPopupMenuEx();
     // pub fn TranslateAccelerator();
