@@ -835,7 +835,9 @@ extern "system" {
     // pub fn SetSysColors();
     pub fn SetSystemCursor(hcur: HCURSOR, id: DWORD) -> BOOL;
     pub fn SetThreadDesktop(hDesktop: HDESK) -> BOOL;
-    // pub fn SetTimer();
+    pub fn SetTimer(
+        hWnd: HWND, nIDEvent: UINT_PTR, uElapse: UINT, lpTimerFunc: TimerProc,
+    ) -> UINT_PTR;
     // pub fn SetUserObjectInformationA();
     // pub fn SetUserObjectInformationW();
     // pub fn SetUserObjectSecurity();
