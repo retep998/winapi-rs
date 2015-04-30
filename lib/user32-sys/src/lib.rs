@@ -651,7 +651,9 @@ extern "system" {
     // pub fn MonitorFromPoint();
     // pub fn MonitorFromRect();
     // pub fn MonitorFromWindow();
-    // pub fn MoveWindow();
+    pub fn MoveWindow(
+        hWnd: HWND, X: c_int, Y: c_int, nWidth: c_int, nHeight: c_int, bRepaint: BOOL,
+    ) -> BOOL;
     // Use UINT instead of DWORD for dwWaitMask to be consistent with GetQueueStatus
     pub fn MsgWaitForMultipleObjects(
         nCount: DWORD, pHandles: *const HANDLE, fWaitAll: BOOL, dwMilliseconds: DWORD,
