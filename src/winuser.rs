@@ -6,6 +6,28 @@ pub const WHEEL_DELTA: ::DWORD = 120;
 //2206
 pub const XBUTTON1: ::DWORD = 0x0001;
 pub const XBUTTON2: ::DWORD = 0x0002;
+//2392
+pub const MK_LBUTTON: ::WPARAM = 0x0001;
+pub const MK_RBUTTON: ::WPARAM = 0x0002;
+pub const MK_SHIFT: ::WPARAM = 0x0004;
+pub const MK_CONTROL: ::WPARAM = 0x0008;
+pub const MK_MBUTTON: ::WPARAM = 0x0010;
+pub const MK_XBUTTON1: ::WPARAM = 0x0020;
+pub const MK_XBUTTON2: ::WPARAM = 0x0040;
+//2408
+pub const TME_HOVER: ::DWORD = 0x0000_0001;
+pub const TME_LEAVE: ::DWORD = 0x0000_0002;
+pub const TME_NONCLIENT: ::DWORD = 0x0000_0010;
+pub const TME_QUERY: ::DWORD = 0x4000_0000;
+pub const TME_CANCEL: ::DWORD = 0x8000_0000;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TRACKMOUSEEVENT {
+    pub cbSize: ::DWORD,
+    pub dwFlags: ::DWORD,
+    pub hwndTrack: ::HWND,
+    pub dwHoverTime: ::DWORD,
+}
+pub type LPTRACKMOUSEEVENT = *mut TRACKMOUSEEVENT;
 //3082
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CREATESTRUCTA {
