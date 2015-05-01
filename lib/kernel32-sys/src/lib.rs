@@ -147,23 +147,17 @@ extern "system" {
         lpSecurityAttributes: LPSECURITY_ATTRIBUTES, dwCreationDisposition: DWORD,
         dwFlagsAndAttributes: DWORD, hTemplateFile: HANDLE,
     ) -> HANDLE;
-    pub fn CreateFileMappingA(hFile: HANDLE,
-                              lpAttributes: LPSECURITY_ATTRIBUTES,
-                              flProtect: DWORD,
-                              dwMaximumSizeHigh: DWORD,
-                              dwMaximumSizeLow: DWORD,
-                              lpName: LPCSTR)
-                              -> HANDLE;
+    pub fn CreateFileMappingA(
+        hFile: HANDLE, lpAttributes: LPSECURITY_ATTRIBUTES, flProtect: DWORD,
+        dwMaximumSizeHigh: DWORD, dwMaximumSizeLow: DWORD, lpName: LPCSTR,
+    ) -> HANDLE;
     // pub fn CreateFileMappingFromApp();
     // pub fn CreateFileMappingNumaA();
     // pub fn CreateFileMappingNumaW();
-    pub fn CreateFileMappingW(hFile: HANDLE,
-                              lpAttributes: LPSECURITY_ATTRIBUTES,
-                              flProtect: DWORD,
-                              dwMaximumSizeHigh: DWORD,
-                              dwMaximumSizeLow: DWORD,
-                              lpName: LPCWSTR)
-                              -> HANDLE;
+    pub fn CreateFileMappingW(
+        hFile: HANDLE, lpAttributes: LPSECURITY_ATTRIBUTES, flProtect: DWORD,
+        dwMaximumSizeHigh: DWORD, dwMaximumSizeLow: DWORD, lpName: LPCWSTR,
+    ) -> HANDLE;
     // pub fn CreateFileTransactedA();
     // pub fn CreateFileTransactedW();
     pub fn CreateFileW(
@@ -423,9 +417,7 @@ extern "system" {
     pub fn FlushFileBuffers(hFile: HANDLE) -> BOOL;
     // pub fn FlushInstructionCache();
     // pub fn FlushProcessWriteBuffers();
-     pub fn FlushViewOfFile(lpBaseAddress: LPCVOID,
-                            dwNumberOfBytesToFlush: SIZE_T)
-                            -> BOOL;
+     pub fn FlushViewOfFile(lpBaseAddress: LPCVOID, dwNumberOfBytesToFlush: SIZE_T) -> BOOL;
     // pub fn FoldStringA();
     // pub fn FoldStringW();
     // pub fn FormatApplicationUserModelId();
@@ -1039,19 +1031,14 @@ extern "system" {
     // pub fn LockResource();
     // pub fn MapUserPhysicalPages();
     // pub fn MapUserPhysicalPagesScatter();
-    pub fn MapViewOfFile(hFileMappingObject: HANDLE,
-                         dwDesiredAccess: DWORD,
-                         dwFileOffsetHigh: DWORD,
-                         dwFileOffsetLow: DWORD,
-                         dwNumberOfBytesToMap: SIZE_T)
-                         -> LPVOID;
-    pub fn MapViewOfFileEx(hFileMappingObject: HANDLE,
-                           dwDesiredAccess: DWORD,
-                           dwFileOffsetHigh: DWORD,
-                           dwFileOffsetLow: DWORD,
-                           dwNumberOfBytesToMap: SIZE_T,
-                           lpBaseAddress: LPVOID)
-                           -> LPVOID;
+    pub fn MapViewOfFile(
+        hFileMappingObject: HANDLE, dwDesiredAccess: DWORD, dwFileOffsetHigh: DWORD,
+        dwFileOffsetLow: DWORD, dwNumberOfBytesToMap: SIZE_T,
+    ) -> LPVOID;
+    pub fn MapViewOfFileEx(
+        hFileMappingObject: HANDLE, dwDesiredAccess: DWORD, dwFileOffsetHigh: DWORD,
+        dwFileOffsetLow: DWORD, dwNumberOfBytesToMap: SIZE_T, lpBaseAddress: LPVOID,
+    ) -> LPVOID;
     // pub fn MapViewOfFileExNuma();
     // pub fn MapViewOfFileFromApp();
     // pub fn Module32First();
@@ -1217,7 +1204,7 @@ extern "system" {
         hDirectory: HANDLE, lpBuffer: LPVOID, nBufferLength: DWORD, bWatchSubtree: BOOL,
         dwNotifyFilter: DWORD, lpBytesReturned: LPDWORD, lpOverlapped: LPOVERLAPPED,
         lpCompletionRoutine: LPOVERLAPPED_COMPLETION_ROUTINE,
-    );
+    ) -> BOOL;
     pub fn ReadFile(
         hFile: HANDLE, lpBuffer: LPVOID, nNumberOfBytesToRead: DWORD, lpNumberOfBytesRead: LPDWORD,
         lpOverlapped: LPOVERLAPPED,
