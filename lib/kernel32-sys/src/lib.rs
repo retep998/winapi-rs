@@ -1163,7 +1163,10 @@ extern "system" {
     // pub fn QueueUserWorkItem();
     // pub fn RaiseException();
     // pub fn RaiseFailFastException();
-    // pub fn ReOpenFile();
+    pub fn ReOpenFile(
+        hOriginalFile: HANDLE, dwDesiredAccess: DWORD, dwShareMode: DWORD,
+        dwFlags: DWORD
+    ) -> HANDLE;
     pub fn ReadConsoleA(
         hConsoleInput: HANDLE, lpBuffer: LPVOID, nNumberOfCharsToRead: DWORD,
         lpNumberOfCharsRead: LPDWORD, pInputControl: PCONSOLE_READCONSOLE_CONTROL,
