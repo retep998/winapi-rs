@@ -1164,8 +1164,7 @@ extern "system" {
     // pub fn RaiseException();
     // pub fn RaiseFailFastException();
     pub fn ReOpenFile(
-        hOriginalFile: HANDLE, dwDesiredAccess: DWORD, dwShareMode: DWORD,
-        dwFlags: DWORD
+        hOriginalFile: HANDLE, dwDesiredAccess: DWORD, dwShareMode: DWORD, dwFlags: DWORD,
     ) -> HANDLE;
     pub fn ReadConsoleA(
         hConsoleInput: HANDLE, lpBuffer: LPVOID, nNumberOfCharsToRead: DWORD,
