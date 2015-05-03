@@ -28,6 +28,22 @@ pub struct TRACKMOUSEEVENT {
     pub dwHoverTime: ::DWORD,
 }
 pub type LPTRACKMOUSEEVENT = *mut TRACKMOUSEEVENT;
+//2575
+/// lParam of WM_WINDOWPOSCHANGING, WM_WINDOWPOSCHANGED
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct WINDOWPOS {
+    pub hwnd: ::HWND,
+    /// hwnd or HWND_BOTTOM, HWND_NOTOPMOST, HWND_TOP, HWND_TOPMOST
+    pub hwndInsertAfter: ::HWND,
+    pub x: ::c_int,
+    pub y: ::c_int,
+    pub cx: ::c_int,
+    pub cy: ::c_int,
+    /// SWP_\*
+    pub flags: ::UINT,
+}
+pub type LPWINDOWPOS = *mut WINDOWPOS;
+pub type PWINDOWPOS = *mut WINDOWPOS;
 //3082
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CREATESTRUCTA {
