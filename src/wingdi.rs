@@ -21,3 +21,5 @@ pub struct PALETTEENTRY {
     peBlue: ::BYTE,
     peFlags: ::BYTE
 }
+//3581
+pub type LINEDDAPROC = Option<unsafe extern "system" fn(::c_int, ::c_int, ::LPARAM)>;

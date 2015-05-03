@@ -132,10 +132,10 @@ extern "system" {
     pub fn CreateDirectoryW(
         lpPathName: LPCWSTR, lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
     ) -> BOOL;
-    // pub fn CreateEventA();
-    // pub fn CreateEventExA();
-    // pub fn CreateEventExW();
-    // pub fn CreateEventW();
+    pub fn CreateEventA(lpEventAttributes: LPSECURITY_ATTRIBUTES, bManualReset: BOOL, bInitialState: BOOL, lpName: LPCSTR) -> HANDLE;
+    pub fn CreateEventW(lpEventAttributes: LPSECURITY_ATTRIBUTES, bManualReset: BOOL, bInitialState: BOOL, lpName: LPCWSTR) -> HANDLE;
+    pub fn CreateEventExA(lpEventAttributes: LPSECURITY_ATTRIBUTES, lpName: LPCSTR, dwFlags: DWORD, dwDesiredAccess: DWORD) -> HANDLE;
+    pub fn CreateEventExW(lpEventAttributes: LPSECURITY_ATTRIBUTES, lpName: LPWSTR, dwFlags: DWORD, dwDesiredAccess: DWORD) -> HANDLE;
     // pub fn CreateFiber();
     // pub fn CreateFiberEx();
     pub fn CreateFile2(
@@ -971,7 +971,7 @@ extern "system" {
     // pub fn K32GetModuleBaseNameA();
     // pub fn K32GetModuleBaseNameW();
     // pub fn K32GetModuleFileNameExA();
-    // pub fn K32GetModuleFileNameExW();
+    pub fn K32GetModuleFileNameExW(hProcess: HANDLE, hModule: HMODULE, lpFilename: LPWSTR, nSize: DWORD) -> DWORD;
     // pub fn K32GetModuleInformation();
     // pub fn K32GetPerformanceInfo();
     pub fn K32GetProcessImageFileNameA(
