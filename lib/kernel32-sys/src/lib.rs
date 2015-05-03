@@ -1533,10 +1533,12 @@ extern "system" {
     // pub fn VerifyScripts();
     // pub fn VerifyVersionInfoA();
     // pub fn VerifyVersionInfoW();
-    // pub fn VirtualAlloc();
+    pub fn VirtualAlloc(
+        lpAddress: LPVOID, dwSize: SIZE_T, flAllocationType: DWORD, flProtect: DWORD
+    ) -> LPVOID;
     // pub fn VirtualAllocEx();
     // pub fn VirtualAllocExNuma();
-    // pub fn VirtualFree();
+    pub fn VirtualFree(lpAddress: LPVOID, dwSize: SIZE_T, dwFreeType: DWORD) -> BOOL;
     // pub fn VirtualFreeEx();
     // pub fn VirtualLock();
     // pub fn VirtualProtect();
