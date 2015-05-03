@@ -77,6 +77,15 @@ pub struct CREATESTRUCTW {
     pub dwExStyle: ::DWORD,
 }
 pub type LPCREATESTRUCTW = *mut CREATESTRUCTW;
+//3145
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+/// The lParam of the WM_NOTIFY message is a pointer to this structure
+pub struct NMHDR {
+    pub hwndFrom: ::HWND,
+    pub idFrom: ::UINT_PTR,
+    pub code: ::UINT,  // NM_ code
+}
+
 //3400
 pub const PM_NOREMOVE: ::UINT = 0x0000;
 pub const PM_REMOVE: ::UINT = 0x0001;
