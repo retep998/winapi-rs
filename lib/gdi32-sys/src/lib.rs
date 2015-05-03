@@ -430,7 +430,9 @@ extern "system" {
     // pub fn OffsetViewportOrgEx();
     // pub fn OffsetWindowOrgEx();
     // pub fn PaintRgn();
-    // pub fn PatBlt();
+    pub fn PatBlt(
+        hdc: HDC, nXLeft: c_int, nYLeft: c_int, nWidth: c_int, nHeight: c_int, dwRop: DWORD
+    ) -> BOOL;
     // pub fn PathToRegion();
     pub fn Pie(
         hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nBottomRect: c_int, nXRadial1: c_int,

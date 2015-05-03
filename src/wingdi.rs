@@ -1,6 +1,22 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! GDI procedure declarations, constant definitions and macros
+//83
+pub const SRCCOPY: ::DWORD = 0x00CC0020;
+pub const SRCPAINT: ::DWORD = 0x00EE0086;
+pub const SRCAND: ::DWORD = 0x008800C6;
+pub const SRCINVERT: ::DWORD = 0x00660046;
+pub const SRCERASE: ::DWORD = 0x00440328;
+pub const NOTSRCCOPY: ::DWORD = 0x00330008;
+pub const NOTSRCERASE: ::DWORD = 0x001100A6;
+pub const MERGECOPY: ::DWORD = 0x00C000CA;
+pub const MERGEPAINT: ::DWORD = 0x00BB0226;
+pub const PATCOPY: ::DWORD = 0x00F00021;
+pub const PATPAINT: ::DWORD = 0x00FB0A09;
+pub const PATINVERT: ::DWORD = 0x005A0049;
+pub const DSTINVERT: ::DWORD = 0x00550009;
+pub const BLACKNESS: ::DWORD = 0x00000042;
+pub const WHITENESS: ::DWORD = 0x00FF0062;
 //121
 // fnCombineMode values for CombineRgn
 pub const RGN_AND: ::c_int = 1;
