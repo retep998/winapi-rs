@@ -541,7 +541,12 @@ extern "system" {
     // pub fn StartFormPage();
     // pub fn StartPage();
     // pub fn StretchBlt();
-    // pub fn StretchDIBits();
+    pub fn StretchDIBits(
+        hdc: HDC, XDest: c_int, YDest: c_int, nDestWidth: c_int,
+        nDestHeight: c_int, XSrc: c_int, YSrc: c_int, nSrcWidth: c_int,
+        nSrcHeight: c_int, lpBits: *const VOID, lpBitsInfo: *const BITMAPINFO,
+        iUsage: UINT, dwRop: DWORD
+    ) -> c_int;
     // pub fn StrokeAndFillPath();
     // pub fn StrokePath();
     pub fn SwapBuffers(hdc: HDC) -> BOOL;
