@@ -516,8 +516,12 @@ extern "system" {
     pub fn GetWindowLongPtrW(hWnd: HWND, nIndex: c_int) -> LONG_PTR;
     pub fn GetWindowLongW(hWnd: HWND, nIndex: c_int) -> LONG;
     // pub fn GetWindowModuleFileName();
-    pub fn GetWindowModuleFileNameA(hWnd: HWND, lpszFileName: LPCSTR, cchFileNameMax: UINT) -> UINT;
-    pub fn GetWindowModuleFileNameW(hWnd: HWND, lpszFileName: LPWSTR, cchFileNameMax: UINT) -> UINT;
+    pub fn GetWindowModuleFileNameA(
+        hWnd: HWND, lpszFileName: LPCSTR, cchFileNameMax: UINT,
+    ) -> UINT;
+    pub fn GetWindowModuleFileNameW(
+        hWnd: HWND, lpszFileName: LPWSTR, cchFileNameMax: UINT,
+    ) -> UINT;
     pub fn GetWindowPlacement(hWnd: HWND, lpwndpl: *mut WINDOWPLACEMENT) -> BOOL;
     pub fn GetWindowRect(hWnd: HWND, lpRect: LPRECT) -> BOOL;
     // pub fn GetWindowRgn();
@@ -649,8 +653,14 @@ extern "system" {
     // pub fn MonitorFromWindow();
     // pub fn MoveWindow();
     // Use UINT instead of DWORD for dwWaitMask to be consistent with GetQueueStatus
-    pub fn MsgWaitForMultipleObjects(nCount: DWORD, pHandles: *const HANDLE, fWaitAll: BOOL, dwMilliseconds: DWORD, dwWakeMask: UINT) -> DWORD;
-    pub fn MsgWaitForMultipleObjectsEx(nCount: DWORD, pHandles: *const HANDLE, dwMilliseconds: DWORD, dwWakeMask: UINT, dwFlags: DWORD) -> DWORD;
+    pub fn MsgWaitForMultipleObjects(
+        nCount: DWORD, pHandles: *const HANDLE, fWaitAll: BOOL, dwMilliseconds: DWORD,
+        dwWakeMask: UINT,
+    ) -> DWORD;
+    pub fn MsgWaitForMultipleObjectsEx(
+        nCount: DWORD, pHandles: *const HANDLE, dwMilliseconds: DWORD, dwWakeMask: UINT,
+        dwFlags: DWORD,
+    ) -> DWORD;
     // pub fn NotifyWinEvent();
     // pub fn OemKeyScan();
     // pub fn OemToCharA();

@@ -12,10 +12,18 @@ extern "system" {
     // pub fn AddFontResourceExA();
     // pub fn AddFontResourceExW();
     // pub fn AddFontResourceW();
-    pub fn AngleArc(hdc: HDC, X: c_int, Y: c_int, dwRadius: DWORD, eStartAngle: FLOAT, eSweepAngle: FLOAT) -> BOOL;
+    pub fn AngleArc(
+        hdc: HDC, X: c_int, Y: c_int, dwRadius: DWORD, eStartAngle: FLOAT, eSweepAngle: FLOAT,
+    ) -> BOOL;
     // pub fn AnimatePalette();
-    pub fn Arc(hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int, nXStartArc: c_int, nYStartArc: c_int, nXEndArc: c_int, nYEndArc: c_int) -> BOOL;
-    pub fn ArcTo(hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int, nXRadial1: c_int, nYRadial1: c_int, nXRadial2: c_int, nYRadial2: c_int) -> BOOL;
+    pub fn Arc(
+        hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int,
+        nXStartArc: c_int, nYStartArc: c_int, nXEndArc: c_int, nYEndArc: c_int,
+    ) -> BOOL;
+    pub fn ArcTo(
+        hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int,
+        nXRadial1: c_int, nYRadial1: c_int, nXRadial2: c_int, nYRadial2: c_int,
+    ) -> BOOL;
     // pub fn BeginPath();
     pub fn BitBlt(
         hdc: HDC, x: c_int, y: c_int, cx: c_int, cy: c_int, hdcSrc: HDC, x1: c_int, y1: c_int,
@@ -24,7 +32,10 @@ extern "system" {
     // pub fn CancelDC();
     // pub fn CheckColorsInGamut();
     pub fn ChoosePixelFormat(hdc: HDC, ppfd: *const PIXELFORMATDESCRIPTOR) -> c_int;
-    pub fn Chord(hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int, nXRadial1: c_int, nYRadial1: c_int, nXRadial2: c_int, nYRadial2: c_int) -> BOOL;
+    pub fn Chord(
+        hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int,
+        nXRadial1: c_int, nYRadial1: c_int, nXRadial2: c_int, nYRadial2: c_int,
+    ) -> BOOL;
     // pub fn CloseEnhMetaFile();
     // pub fn CloseFigure();
     // pub fn CloseMetaFile();
@@ -391,7 +402,10 @@ extern "system" {
     // pub fn IntersectClipRect();
     // pub fn InvertRgn();
     // pub fn LPtoDP();
-    pub fn LineDDA(nXStart: c_int, nYStart: c_int, nXEnd: c_int, nYEnd: c_int, lpLineFunc: LINEDDAPROC, lpData: LPARAM) -> BOOL;
+    pub fn LineDDA(
+        nXStart: c_int, nYStart: c_int, nXEnd: c_int, nYEnd: c_int, lpLineFunc: LINEDDAPROC,
+        lpData: LPARAM,
+    ) -> BOOL;
     pub fn LineTo(hdc: HDC, nXEnd: c_int, nYEnd: c_int);
     // pub fn MaskBlt();
     // pub fn ModifyWorldTransform();
@@ -403,7 +417,10 @@ extern "system" {
     // pub fn PaintRgn();
     // pub fn PatBlt();
     // pub fn PathToRegion();
-    pub fn Pie(hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nBottomRect: c_int, nXRadial1: c_int, nYRadial1: c_int, nXRadial2: c_int, nYRadial2: c_int) -> BOOL;
+    pub fn Pie(
+        hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nBottomRect: c_int, nXRadial1: c_int,
+        nYRadial1: c_int, nXRadial2: c_int, nYRadial2: c_int,
+    ) -> BOOL;
     // pub fn PlayEnhMetaFile();
     // pub fn PlayEnhMetaFileRecord();
     // pub fn PlayMetaFile();
@@ -412,8 +429,12 @@ extern "system" {
     pub fn PolyBezier(hdc: HDC, lppt: *const POINT, cPoints: DWORD) -> BOOL;
     pub fn PolyBezierTo(hdc: HDC, lppt: *const POINT, cPoints: DWORD) -> BOOL;
     pub fn PolyDraw(hdc: HDC, lppt: *const POINT, lpbTypes: *const BYTE, cCount: c_int) -> BOOL;
-    pub fn PolyPolygon(hdc: HDC, lpPoints: *const POINT, lpPolyCounts: *const INT, cCount: DWORD) -> BOOL;
-    pub fn PolyPolyline(hdc: HDC, lppt: *const POINT, lpdwPolyPoints: *const DWORD, cCount: DWORD) -> BOOL;
+    pub fn PolyPolygon(
+        hdc: HDC, lpPoints: *const POINT, lpPolyCounts: *const INT, cCount: DWORD,
+    ) -> BOOL;
+    pub fn PolyPolyline(
+        hdc: HDC, lppt: *const POINT, lpdwPolyPoints: *const DWORD, cCount: DWORD,
+    ) -> BOOL;
     // pub fn PolyTextOutA();
     // pub fn PolyTextOutW();
     pub fn Polygon(hdc: HDC, lpPoints: *const POINT, nCount: c_int) -> BOOL;
@@ -434,7 +455,10 @@ extern "system" {
     // pub fn ResetDCW();
     // pub fn ResizePalette();
     // pub fn RestoreDC();
-    pub fn RoundRect(hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int, nWidth: c_int, nHeight: c_int) -> BOOL;
+    pub fn RoundRect(
+        hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int,
+        nWidth: c_int, nHeight: c_int,
+    ) -> BOOL;
     // pub fn SaveDC();
     // pub fn ScaleViewportExtEx();
     // pub fn ScaleWindowExtEx();
