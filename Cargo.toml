@@ -31,3 +31,4 @@ user32-sys = { version = "*", path = "lib/user32-sys" }
 uuid-sys = { version = "*", path = "lib/uuid-sys" }
 winhttp-sys = { version = "*", path = "lib/winhttp-sys" }
 winmm-sys = { version = "*", path = "lib/winmm-sys" }
+xinput-sys = { version = "*", path = "lib/xinput-sys" }
