@@ -669,7 +669,7 @@ extern "system" {
     // pub fn OemToCharBuffA();
     // pub fn OemToCharBuffW();
     // pub fn OemToCharW();
-    // pub fn OffsetRect();
+    pub fn OffsetRect(lprc: LPRECT, dx: c_int, dy: c_int) -> BOOL;
     pub fn OpenClipboard(hWnd: HWND) -> BOOL;
     // pub fn OpenDesktopA();
     // pub fn OpenDesktopW();
