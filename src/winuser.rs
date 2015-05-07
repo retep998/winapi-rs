@@ -333,6 +333,66 @@ pub const IDC_NO: ::LPCWSTR = 32648 as ::LPCWSTR;
 pub const IDC_HAND: ::LPCWSTR = 32649 as ::LPCWSTR;
 pub const IDC_APPSTARTING: ::LPCWSTR = 32650 as ::LPCWSTR;
 pub const IDC_HELP: ::LPCWSTR = 32651 as ::LPCWSTR;
+
+//10492
+pub const IDI_APPLICATION: ::LPCWSTR = 32512 as ::LPCWSTR;
+pub const IDI_HAND: ::LPCWSTR = 32513 as ::LPCWSTR;
+pub const IDI_QUESTION: ::LPCWSTR = 32514 as ::LPCWSTR;
+pub const IDI_EXCLAMATION: ::LPCWSTR = 32515 as ::LPCWSTR;
+pub const IDI_ASTERISK: ::LPCWSTR = 32516 as ::LPCWSTR;
+pub const IDI_WINLOGO: ::LPCWSTR = 32517 as ::LPCWSTR;
+pub const IDI_SHIELD: ::LPCWSTR = 32518 as ::LPCWSTR;
+
+pub const IDI_WARNING: ::LPCWSTR = IDI_EXCLAMATION;
+pub const IDI_ERROR: ::LPCWSTR = IDI_HAND;
+pub const IDI_INFORMATION: ::LPCWSTR = IDI_ASTERISK;
+
+//11813
+pub const SPI_GETNONCLIENTMETRICS: ::UINT = 0x29;
+
+//12141
+#[repr(C)] #[derive(Clone, Copy)]
+pub struct NONCLIENTMETRICSA {
+    pub cbSize: ::UINT,
+    pub iBorderWidth: ::c_int,
+    pub iScrollWidth: ::c_int,
+    pub iScrollHeight: ::c_int,
+    pub iCaptionWidth: ::c_int,
+    pub iCaptionHeight: ::c_int,
+    pub lfCaptionFont: ::LOGFONTA,
+    pub iSmCaptionWidth: ::c_int,
+    pub iSmCaptionHeight: ::c_int,
+    pub lfSmCaptionFont: ::LOGFONTA,
+    pub iMenuWidth: ::c_int,
+    pub iMenuHeight: ::c_int,
+    pub lfMenuFont: ::LOGFONTA,
+    pub lfStatusFont: ::LOGFONTA,
+    pub lfMessageFont: ::LOGFONTA,
+    pub iPaddedBorderWidth: ::c_int,
+}
+pub type LPNONCLIENTMETRICSA = *mut NONCLIENTMETRICSA;
+
+#[repr(C)] #[derive(Clone, Copy)]
+pub struct NONCLIENTMETRICSW {
+    pub cbSize: ::UINT,
+    pub iBorderWidth: ::c_int,
+    pub iScrollWidth: ::c_int,
+    pub iScrollHeight: ::c_int,
+    pub iCaptionWidth: ::c_int,
+    pub iCaptionHeight: ::c_int,
+    pub lfCaptionFont: ::LOGFONTW,
+    pub iSmCaptionWidth: ::c_int,
+    pub iSmCaptionHeight: ::c_int,
+    pub lfSmCaptionFont: ::LOGFONTW,
+    pub iMenuWidth: ::c_int,
+    pub iMenuHeight: ::c_int,
+    pub lfMenuFont: ::LOGFONTW,
+    pub lfStatusFont: ::LOGFONTW,
+    pub lfMessageFont: ::LOGFONTW,
+    pub iPaddedBorderWidth: ::c_int,
+}
+pub type LPNONCLIENTMETRICSW = *mut NONCLIENTMETRICSW;
+
 //12900
 pub const MONITORINFOF_PRIMARY: ::DWORD = 1;
 pub const CCHDEVICENAME: usize = 32;
