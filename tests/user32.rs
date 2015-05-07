@@ -47,6 +47,7 @@ fn functions() {
     bb(CountClipboardFormats);
     bb(CreateCaret);
     bb(CreateCursor);
+    bb(CreateIconIndirect);
     bb(CreateWindowExW);
     bb(DefWindowProcW);
     bb(DeferWindowPos);
@@ -74,6 +75,7 @@ fn functions() {
     bb(FindWindowExA);
     bb(FindWindowExW);
     bb(FindWindowW);
+    bb(FlashWindowEx);
     bb(GetActiveWindow);
     bb(GetAncestor);
     bb(GetAsyncKeyState);
@@ -96,8 +98,10 @@ fn functions() {
     bb(GetCursorPos);
     bb(GetDC);
     bb(GetDesktopWindow);
+    bb(GetDoubleClickTime);
     bb(GetFocus);
     bb(GetForegroundWindow);
+    bb(GetIconInfo);
     bb(GetKBCodePage);
     bb(GetKeyNameTextA);
     bb(GetKeyNameTextW);

@@ -2376,15 +2376,6 @@ pub type TimerProc = Option<unsafe extern "system" fn(
 pub type HDEVNOTIFY = PVOID;
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FLASHWINFO {
-    pub cbSize: UINT,
-    pub hwnd: HWND,
-    pub dwFlags: DWORD,
-    pub uCount: UINT,
-    pub dwTimeout: DWORD,
-}
-pub type PFLASHWINFO = *mut FLASHWINFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MSG {
     pub hwnd: HWND,
     pub message: UINT,

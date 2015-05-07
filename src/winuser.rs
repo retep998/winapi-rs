@@ -69,6 +69,22 @@ pub const PM_QS_INPUT: ::UINT = QS_INPUT << 16;
 pub const PM_QS_POSTMESSAGE: ::UINT = (QS_POSTMESSAGE | QS_HOTKEY | QS_TIMER) << 16;
 pub const PM_QS_PAINT: ::UINT = QS_PAINT << 16;
 pub const PM_QS_SENDMESSAGE: ::UINT = QS_SENDMESSAGE << 16;
+//4054 (Win 7 SDK)
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct FLASHWINFO {
+    pub cbSize: ::UINT,
+    pub hwnd: ::HWND,
+    pub dwFlags: ::DWORD,
+    pub uCount: ::UINT,
+    pub dwTimeout: ::DWORD,
+}
+pub type PFLASHWINFO = *mut FLASHWINFO;
+pub const FLASHW_STOP: ::DWORD = 0;
+pub const FLASHW_CAPTION: ::DWORD = 0x00000001;
+pub const FLASHW_TRAY: ::DWORD = 0x00000002;
+pub const FLASHW_ALL: ::DWORD = FLASHW_CAPTION | FLASHW_TRAY;
+pub const FLASHW_TIMER: ::DWORD = 0x00000004;
+pub const FLASHW_TIMERNOFG: ::DWORD = 0x0000000C;
 //5741
 pub const KEYEVENTF_EXTENDEDKEY: ::DWORD = 0x0001;
 pub const KEYEVENTF_KEYUP: ::DWORD = 0x0002;
@@ -273,6 +289,16 @@ pub const SM_REMOTECONTROL: ::c_int = 0x2001;
 pub const SM_CARETBLINKINGENABLED: ::c_int = 0x2002;
 pub const SM_CONVERTIBLESLATEMODE: ::c_int = 0x2003;
 pub const SM_SYSTEMDOCKED: ::c_int = 0x2004;
+//8855 (Win 7 SDK)
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ICONINFO {
+    pub fIcon: ::BOOL,
+    pub xHotspot: ::DWORD,
+    pub yHotspot: ::DWORD,
+    pub hbmMask: ::HBITMAP,
+    pub hbmColor: ::HBITMAP,
+}
+pub type PICONINFO = *mut ICONINFO;
 //9066
 // Color indexes for use in GetSysColor and SetSysColor
 // 0-18 (after incrementing) are also valid in RegisterClass's WNDCLASS

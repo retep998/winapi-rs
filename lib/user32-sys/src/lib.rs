@@ -131,7 +131,7 @@ extern "system" {
     ) -> HICON;
     // pub fn CreateIconFromResource();
     // pub fn CreateIconFromResourceEx();
-    // pub fn CreateIconIndirect(piconinfo: PICONINFO) -> HICON;
+    pub fn CreateIconIndirect(piconinfo: PICONINFO) -> HICON;
     // pub fn CreateMDIWindowA();
     // pub fn CreateMDIWindowW();
     pub fn CreateMenu() -> HMENU;
@@ -315,7 +315,7 @@ extern "system" {
     ) -> HWND;
     pub fn FindWindowW(lpClassName: LPCWSTR, lpWindowName: LPCWSTR) -> HWND;
     pub fn FlashWindow(hwnd: HWND, bInvert: BOOL) -> BOOL;
-    // pub fn FlashWindowEx();
+    pub fn FlashWindowEx(pfwi: PFLASHWINFO) -> BOOL;
     pub fn FrameRect(hDC: HDC, lprc: *const RECT, hbr: HBRUSH) -> c_int;
     // pub fn FreeDDElParam();
     pub fn GetActiveWindow() -> HWND;
@@ -380,7 +380,7 @@ extern "system" {
     pub fn GetDlgItemTextW(
         hDlg: HWND, nIDDlgItem: c_int, lpString: LPWSTR, nMaxCount: c_int,
     ) -> UINT;
-    // pub fn GetDoubleClickTime();
+    pub fn GetDoubleClickTime() -> UINT;
     pub fn GetFocus() -> HWND;
     pub fn GetForegroundWindow() -> HWND;
     // pub fn GetGUIThreadInfo();
@@ -388,7 +388,7 @@ extern "system" {
     // pub fn GetGestureExtraArgs();
     // pub fn GetGestureInfo();
     // pub fn GetGuiResources();
-    // pub fn GetIconInfo();
+    pub fn GetIconInfo(hIcon: HICON, piconinfo: PICONINFO) -> BOOL;
     // pub fn GetIconInfoExA();
     // pub fn GetIconInfoExW();
     // pub fn GetInputDesktop();
