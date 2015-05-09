@@ -18,6 +18,7 @@ d3d9-sys = { version = "*", path = "lib/d3d9-sys" }
 dwmapi-sys = { version = "*", path = "lib/dwmapi-sys" }
 gdi32-sys = { version = "*", path = "lib/gdi32-sys" }
 kernel32-sys = { version = "*", path = "lib/kernel32-sys" }
+ktmw32-sys = { version = "*", path = "lib/ktmw32-sys" }
 ole32-sys = { version = "*", path = "lib/ole32-sys" }
 opengl32-sys = { version = "*", path = "lib/opengl32-sys" }
 shell32-sys = { version = "*", path = "lib/shell32-sys" }
