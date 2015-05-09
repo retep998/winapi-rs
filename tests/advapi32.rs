@@ -42,9 +42,13 @@ fn functions() {
     bb(RegCopyTreeW);
     bb(RegCreateKeyExA);
     bb(RegCreateKeyExW);
+    bb(RegCreateKeyTransactedA);
+    bb(RegCreateKeyTransactedW);
     bb(RegDeleteKeyA);
     bb(RegDeleteKeyExA);
     bb(RegDeleteKeyExW);
+    bb(RegDeleteKeyTransactedA);
+    bb(RegDeleteKeyTransactedW);
     bb(RegDeleteKeyValueA);
     bb(RegDeleteKeyValueW);
     bb(RegDeleteKeyW);
@@ -68,6 +72,8 @@ fn functions() {
     bb(RegOpenCurrentUser);
     bb(RegOpenKeyExA);
     bb(RegOpenKeyExW);
+    bb(RegOpenKeyTransactedA);
+    bb(RegOpenKeyTransactedW);
     bb(RegOpenUserClassesRoot);
     bb(RegOverridePredefKey);
     bb(RegQueryInfoKeyA);

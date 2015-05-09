@@ -622,17 +622,25 @@ extern "system" {
     pub fn RegCopyTreeW(hKeySrc: HKEY, lpSubKey: LPCWSTR, hKeyDest: HKEY) -> LONG;
     // pub fn RegCreateKeyA();
     pub fn RegCreateKeyExA(
-        hKey: HKEY, lpSubKey: LPCSTR, Reserved: DWORD, lpClass: LPCSTR, dwOptions: DWORD,
+        hKey: HKEY, lpSubKey: LPCSTR, Reserved: DWORD, lpClass: LPSTR, dwOptions: DWORD,
         samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY,
         lpdwDisposition: LPDWORD,
     ) -> LONG;
     pub fn RegCreateKeyExW(
-        hKey: HKEY, lpSubKey: LPCWSTR, Reserved: DWORD, lpClass: LPCWSTR, dwOptions: DWORD,
+        hKey: HKEY, lpSubKey: LPCWSTR, Reserved: DWORD, lpClass: LPWSTR, dwOptions: DWORD,
         samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY,
         lpdwDisposition: LPDWORD,
     ) -> LONG;
-    // pub fn RegCreateKeyTransactedA();
-    // pub fn RegCreateKeyTransactedW();
+    pub fn RegCreateKeyTransactedA(
+        hKey: HKEY, lpSubKey: LPCSTR, Reserved: DWORD, lpClass: LPSTR, dwOptions: DWORD,
+        samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY,
+        lpdwDisposition: LPDWORD, hTransaction: HANDLE, pExtendedParemeter: PVOID,
+    ) -> LONG;
+    pub fn RegCreateKeyTransactedW(
+        hKey: HKEY, lpSubKey: LPCWSTR, Reserved: DWORD, lpClass: LPWSTR, dwOptions: DWORD,
+        samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY,
+        lpdwDisposition: LPDWORD, hTransaction: HANDLE, pExtendedParemeter: PVOID,
+    ) -> LONG;
     // pub fn RegCreateKeyW();
     pub fn RegDeleteKeyA(hKey: HKEY, lpSubKey: LPCSTR) -> LONG;
     pub fn RegDeleteKeyExA(
@@ -641,8 +649,14 @@ extern "system" {
     pub fn RegDeleteKeyExW(
         hKey: HKEY, lpSubKey: LPCWSTR, samDesired: REGSAM, Reserved: DWORD,
     ) -> LONG;
-    // pub fn RegDeleteKeyTransactedA();
-    // pub fn RegDeleteKeyTransactedW();
+    pub fn RegDeleteKeyTransactedA(
+        hKey: HKEY, lpSubKey: LPCSTR, samDesired: REGSAM, Reserved: DWORD,
+        hTransaction: HANDLE, pExtendedParemeter: PVOID,
+    ) -> LONG;
+    pub fn RegDeleteKeyTransactedW(
+        hKey: HKEY, lpSubKey: LPCWSTR, samDesired: REGSAM, Reserved: DWORD,
+        hTransaction: HANDLE, pExtendedParemeter: PVOID,
+    ) -> LONG;
     pub fn RegDeleteKeyValueA(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR) -> LONG;
     pub fn RegDeleteKeyValueW(hKey: HKEY, lpSubKey: LPCWSTR, lpValueName: LPCWSTR) -> LONG;
     pub fn RegDeleteKeyW(hKey: HKEY, lpSubKey: LPCWSTR) -> LONG;
@@ -703,8 +717,14 @@ extern "system" {
     pub fn RegOpenKeyExW(
         hKey: HKEY, lpSubKey: LPCWSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY,
     ) -> LONG;
-    // pub fn RegOpenKeyTransactedA();
-    // pub fn RegOpenKeyTransactedW();
+    pub fn RegOpenKeyTransactedA(
+        hKey: HKEY, lpSubKey: LPCSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY,
+        hTransaction: HANDLE, pExtendedParemeter: PVOID,
+    ) -> LONG;
+    pub fn RegOpenKeyTransactedW(
+        hKey: HKEY, lpSubKey: LPCWSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY,
+        hTransaction: HANDLE, pExtendedParemeter: PVOID,
+    ) -> LONG;
     // pub fn RegOpenKeyW();
     pub fn RegOpenUserClassesRoot(
         hToken: HANDLE, dwOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY,
