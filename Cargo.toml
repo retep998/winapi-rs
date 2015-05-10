@@ -17,6 +17,7 @@ advapi32-sys = { version = "*", path = "lib/advapi32-sys" }
 crypt32-sys = { version = "*", path = "lib/crypt32-sys" }
 d3d9-sys = { version = "*", path = "lib/d3d9-sys" }
 dbghelp-sys = { version = "*", path = "lib/dbghelp-sys" }
+dsound-sys = { version = "*", path = "lib/dsound-sys" }
 dwmapi-sys = { version = "*", path = "lib/dwmapi-sys" }
 gdi32-sys = { version = "*", path = "lib/gdi32-sys" }
 kernel32-sys = { version = "*", path = "lib/kernel32-sys" }

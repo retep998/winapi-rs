@@ -1,6 +1,11 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! error code definitions for the Win32 API functions
+#[inline]
+pub fn SUCCEEDED(hr: HRESULT) -> bool {
+    hr >= 0
+}
+
 pub const FACILITY_XPS: HRESULT = 82;
 pub const FACILITY_XAML: HRESULT = 43;
 pub const FACILITY_USN: HRESULT = 129;
