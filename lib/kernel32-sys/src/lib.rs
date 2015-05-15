@@ -1009,7 +1009,7 @@ extern "system" {
     // pub fn LeaveCriticalSection();
     // pub fn LeaveCriticalSectionWhenCallbackReturns();
     // pub fn LoadAppInitDlls();
-    // pub fn LoadLibraryA();
+    pub fn LoadLibraryA(lpFileName: LPCSTR) -> HMODULE;
     // pub fn LoadLibraryExA();
     // pub fn LoadLibraryExW();
     pub fn LoadLibraryW(lpFileName: LPCWSTR) -> HMODULE;
