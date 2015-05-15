@@ -94,6 +94,30 @@ macro_rules! CTL_CODE {
         ($DeviceType << 16) | ($Access << 14) | ($Function << 2) | $Method
     }
 }
+macro_rules! DECLARE_INTERFACE {
+    ($interface:ident, $vtbl:ident
+        {$(
+            $method:ident(&mut self, $($p:ident : $t:ty),*) -> $rtr:ty
+        ),+}
+    ) => {
+        #[repr(C)]
+        pub struct $vtbl {
+            $(pub $method: unsafe extern "system" fn(
+                This: *mut $interface,
+                $($p: $t),*
+            ) -> $rtr),+
+        }
+        #[repr(C)] #[derive(Debug)]
+        pub struct $interface {
+            pub lpVtbl: *const $vtbl,
+        }
+        impl $interface {
+            $(pub unsafe fn $method(&mut self, $($p: $t),*) -> $rtr {
+                ((*self.lpVtbl).$method)(&mut *self, $($p),*)
+            })+
+        }
+    }
+}
 
 //-------------------------------------------------------------------------------------------------
 // Modules
