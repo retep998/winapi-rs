@@ -11,5 +11,9 @@ license = "MIT"
 build = "build.rs"
 links = "dwmapi"
 
-[dependencies]
-winapi = "*"
+[lib]
+name = "dwmapi"
+
+[dependencies.winapi]
+version = "*"
+path = "../.."
