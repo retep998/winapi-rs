@@ -40,6 +40,7 @@ pub use libloaderapi::*;
 pub use minwinbase::*;
 pub use minwindef::*;
 pub use synchapi::*;
+pub use unknwnbase::*;
 pub use vadefs::*;
 pub use winbase::*;
 pub use wincon::*;
@@ -95,10 +96,10 @@ macro_rules! CTL_CODE {
         ($DeviceType << 16) | ($Access << 14) | ($Function << 2) | $Method
     }
 }
-macro_rules! DECLARE_INTERFACE {
-    ($interface:ident, $vtbl:ident
+macro_rules! RIDL {
+    (interface $interface:ident $vtbl:ident
         {$(
-            $method:ident(&mut self, $($p:ident : $t:ty),*) -> $rtr:ty
+            fn $method:ident(&mut self, $($p:ident : $t:ty),*) -> $rtr:ty
         ),+}
     ) => {
         #[repr(C)]
@@ -114,10 +115,44 @@ macro_rules! DECLARE_INTERFACE {
         }
         impl $interface {
             $(pub unsafe fn $method(&mut self, $($p: $t),*) -> $rtr {
-                ((*self.lpVtbl).$method)(&mut *self, $($p),*)
+                ((*self.lpVtbl).$method)(self, $($p),*)
             })+
         }
-    }
+    };
+    (interface $interface:ident $vtbl:ident : $pinterface:ident $pvtbl:ident
+        {$(
+            fn $method:ident(&mut self, $($p:ident : $t:ty),*) -> $rtr:ty
+        ),+}
+    ) => {
+        #[repr(C)]
+        pub struct $vtbl {
+            _parent: $pvtbl,
+            $(pub $method: unsafe extern "system" fn(
+                This: *mut $interface,
+                $($p: $t),*
+            ) -> $rtr),+
+        }
+        #[repr(C)] #[derive(Debug)]
+        pub struct $interface {
+            pub lpVtbl: *const $vtbl,
+        }
+        impl $interface {
+            $(pub unsafe fn $method(&mut self, $($p: $t),*) -> $rtr {
+                ((*self.lpVtbl).$method)(self, $($p),*)
+            })+
+        }
+        impl ::std::ops::Deref for $interface {
+            type Target = $pinterface;
+            fn deref(&self) -> &$pinterface {
+                unsafe { ::std::mem::transmute(self) }
+            }
+        }
+        impl ::std::ops::DerefMut for $interface {
+            fn deref_mut(&mut self) -> &mut $pinterface {
+                unsafe { ::std::mem::transmute(self) }
+            }
+        }
+    };
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -135,6 +170,7 @@ pub mod libloaderapi;
 pub mod minwinbase;
 pub mod minwindef;
 pub mod synchapi;
+pub mod unknwnbase;
 pub mod vadefs;
 pub mod winbase;
 pub mod wincon;
@@ -1612,30 +1648,6 @@ pub type PServerInformation = *mut ServerInformation;
 #[repr(C)]
 pub struct CO_MTA_USAGE_COOKIE__;
 pub type CO_MTA_USAGE_COOKIE = *mut CO_MTA_USAGE_COOKIE__;
-
-//-------------------------------------------------------------------------------------------------
-// unknwnbase.h
-// this ALWAYS GENERATED file contains the definitions for the interfaces
-//-------------------------------------------------------------------------------------------------
-#[repr(C)]
-pub struct IUnknownVtbl {
-    pub QueryInterface: unsafe extern "system" fn(
-        This: *mut IUnknown,
-        riid: REFIID,
-        ppvObject: *mut *mut c_void,
-    ) -> HRESULT,
-    pub AddRef: unsafe extern "system" fn(
-        This: *mut IUnknown,
-    ) -> ULONG,
-    pub Release: unsafe extern "system" fn(
-        This: *mut IUnknown,
-    ) -> ULONG,
-}
-#[repr(C)] #[derive(Copy, Clone, Debug)]
-pub struct IUnknown {
-    pub lpVtbl: *const IUnknownVtbl,
-}
-pub type LPUNKNOWN = *mut IUnknown;
 
 //-------------------------------------------------------------------------------------------------
 // playsoundapi.h
