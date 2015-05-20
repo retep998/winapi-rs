@@ -9,7 +9,12 @@ use test::black_box as bb;
 #[test]
 fn functions() {
     bb(Chord);
+    bb(CreateBitmap);
+    bb(CreateBitmapIndirect);
+    bb(CreateDIBitmap);
+    bb(CreateDIBSection);
     bb(Ellipse);
+    bb(GetDIBits);
     // Not in MingGW yet
     // bb(Pie);
     bb(Polygon);

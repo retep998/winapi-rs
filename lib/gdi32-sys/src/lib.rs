@@ -49,8 +49,10 @@ extern "system" {
     // pub fn CopyEnhMetaFileW();
     // pub fn CopyMetaFileA();
     // pub fn CopyMetaFileW();
-    // pub fn CreateBitmap();
-    // pub fn CreateBitmapIndirect();
+    pub fn CreateBitmap(
+        nWidth: c_int, nHeight: c_int, nPlanes: UINT, nBitCount: UINT, lpBits: *const c_void,
+    ) -> HBITMAP;
+    pub fn CreateBitmapIndirect(pbm: *const BITMAP) -> HBITMAP;
     // pub fn CreateBrushIndirect();
     // pub fn CreateColorSpaceA();
     // pub fn CreateColorSpaceW();
@@ -64,8 +66,14 @@ extern "system" {
     ) -> HDC;
     // pub fn CreateDIBPatternBrush();
     // pub fn CreateDIBPatternBrushPt();
-    // pub fn CreateDIBSection();
-    // pub fn CreateDIBitmap();
+    pub fn CreateDIBSection(
+        hdc: HDC, lpbmi: *const BITMAPINFO, usage: UINT, ppvBits: *mut *mut c_void,
+        hSection: HANDLE, offset: DWORD,
+    ) -> HBITMAP;
+    pub fn CreateDIBitmap(
+        hdc: HDC, pbmih: *const BITMAPINFOHEADER, flInit: DWORD, pjBits: *const c_void,
+        pbmi: *const BITMAPINFO, iUsage: UINT,
+    ) -> HBITMAP;
     // pub fn CreateDiscardableBitmap();
     // pub fn CreateEllipticRgn();
     // pub fn CreateEllipticRgnIndirect();
@@ -322,7 +330,10 @@ extern "system" {
     // pub fn GetDCOrgEx();
     // pub fn GetDCPenColor();
     // pub fn GetDIBColorTable();
-    // pub fn GetDIBits();
+    pub fn GetDIBits(
+        hdc: HDC, hbm: HBITMAP, start: UINT, cLines: UINT, lpvBits: LPVOID, lpbmi: LPBITMAPINFO,
+        usage: UINT
+    ) -> c_int;
     // pub fn GetDeviceCaps();
     // pub fn GetDeviceGammaRamp();
     // pub fn GetEnhMetaFileA();
