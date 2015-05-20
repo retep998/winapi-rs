@@ -12,16 +12,16 @@ pub struct IDirect3D9 {
 #[repr(C)]
 pub struct IDirect3D9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3D9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3D9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> *mut IDirect3D9>,
-    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> *mut IDirect3D9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub RegisterSoftwareDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3D9, pInitializeFunction: *mut ::VOID,
     ) -> ::HRESULT>,
     pub GetAdapterCount: Option<unsafe extern "system" fn(
         This: *mut IDirect3D9,
-    ) -> *mut IDirect3D9>,
+    ) -> ::UINT>,
     pub GetAdapterIdentifier: Option<unsafe extern "system" fn(
         This: *mut IDirect3D9, Adapter: ::UINT, Flags: ::DWORD,
         pIdentifier: *mut ::D3DADAPTER_IDENTIFIER9,
@@ -80,23 +80,19 @@ pub struct IDirect3DDevice9 {
 #[repr(C)]
 pub struct IDirect3DDevice9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DDevice9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DDevice9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DDevice9,
-    ) -> *mut IDirect3DDevice9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DDevice9,
-    ) -> *mut IDirect3DDevice9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub TestCooperativeLevel: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9,
-    ) -> *mut IDirect3DDevice9>,
+    ) -> ::HRESULT>,
     pub GetAvailableTextureMem: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9,
-    ) -> *mut IDirect3DDevice9>,
+    ) -> ::UINT>,
     pub EvictManagedResources: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9,
-    ) -> *mut IDirect3DDevice9>,
+    ) -> ::HRESULT>,
     pub GetDirect3D: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9, ppD3D9: *mut *mut IDirect3D9,
     ) -> ::HRESULT>,
@@ -128,7 +124,7 @@ pub struct IDirect3DDevice9Vtbl {
     ) -> ::HRESULT>,
     pub GetNumberOfSwapChains: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9,
-    ) -> *mut IDirect3DDevice9>,
+    ) -> ::UINT>,
     pub Reset: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9, pPresentationParameters: *mut ::D3DPRESENT_PARAMETERS,
     ) -> ::HRESULT>,
@@ -232,10 +228,10 @@ pub struct IDirect3DDevice9Vtbl {
     ) -> ::HRESULT>,
     pub BeginScene: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9,
-    ) -> *mut IDirect3DDevice9>,
+    ) -> ::HRESULT>,
     pub EndScene: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9,
-    ) -> *mut IDirect3DDevice9>,
+    ) -> ::HRESULT>,
     pub Clear: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9, Count: ::DWORD, pRects: *const ::D3DRECT, Flags: ::DWORD,
         Color: ::D3DCOLOR, Z: ::FLOAT, Stencil: ::DWORD,
@@ -291,7 +287,7 @@ pub struct IDirect3DDevice9Vtbl {
     ) -> ::HRESULT>,
     pub BeginStateBlock: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9,
-    ) -> *mut IDirect3DDevice9>,
+    ) -> ::HRESULT>,
     pub EndStateBlock: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9, ppSB: *mut *mut IDirect3DStateBlock9,
     ) -> ::HRESULT>,
@@ -348,7 +344,7 @@ pub struct IDirect3DDevice9Vtbl {
     ) -> ::HRESULT>,
     pub GetSoftwareVertexProcessing: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9,
-    ) -> *mut IDirect3DDevice9>,
+    ) -> ::BOOL>,
     pub SetNPatchMode: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9, nSegments: ::FLOAT,
     ) -> ::HRESULT>,
@@ -505,20 +501,16 @@ pub struct IDirect3DStateBlock9 {
 #[repr(C)]
 pub struct IDirect3DStateBlock9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DStateBlock9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DStateBlock9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DStateBlock9,
-    ) -> *mut IDirect3DStateBlock9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DStateBlock9,
-    ) -> *mut IDirect3DStateBlock9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DStateBlock9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
     pub Capture: Option<unsafe extern "system" fn(
         This: *mut IDirect3DStateBlock9,
-    ) -> *mut IDirect3DStateBlock9>,
+    ) -> ::HRESULT>,
     pub Apply: Option<unsafe extern "system" fn(This: *mut IDirect3DStateBlock9) -> ::HRESULT>,
 }
 pub type LPDIRECT3DSTATEBLOCK9 = *mut IDirect3DStateBlock9;
@@ -530,14 +522,10 @@ pub struct IDirect3DSwapChain9 {
 #[repr(C)]
 pub struct IDirect3DSwapChain9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DSwapChain9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DSwapChain9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DSwapChain9,
-    ) -> *mut IDirect3DSwapChain9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DSwapChain9,
-    ) -> *mut IDirect3DSwapChain9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub Present: Option<unsafe extern "system" fn(
         This: *mut IDirect3DSwapChain9, pSourceRect: *const ::RECT, pDestRect: *const ::RECT,
         hDestWindowOverride: ::HWND, pDirtyRegion: *const ::RGNDATA, dwFlags: ::DWORD,
@@ -571,14 +559,10 @@ pub struct IDirect3DResource9 {
 #[repr(C)]
 pub struct IDirect3DResource9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DResource9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DResource9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DResource9,
-    ) -> *mut IDirect3DResource9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DResource9,
-    ) -> *mut IDirect3DResource9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DResource9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
@@ -598,7 +582,7 @@ pub struct IDirect3DResource9Vtbl {
     ) -> ::DWORD>,
     pub GetPriority: Option<unsafe extern "system" fn(
         This: *mut IDirect3DResource9,
-    ) -> *mut IDirect3DResource9>,
+    ) -> ::DWORD>,
     pub PreLoad: Option<unsafe extern "system" fn(
         This: *mut IDirect3DResource9,
     )>,
@@ -615,14 +599,10 @@ pub struct IDirect3DVertexDeclaration9 {
 #[repr(C)]
 pub struct IDirect3DVertexDeclaration9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVertexDeclaration9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DVertexDeclaration9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVertexDeclaration9,
-    ) -> *mut IDirect3DVertexDeclaration9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVertexDeclaration9,
-    ) -> *mut IDirect3DVertexDeclaration9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVertexDeclaration9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
@@ -640,14 +620,10 @@ pub struct IDirect3DVertexShader9 {
 #[repr(C)]
 pub struct IDirect3DVertexShader9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVertexShader9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DVertexShader9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVertexShader9,
-    ) -> *mut IDirect3DVertexShader9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVertexShader9,
-    ) -> *mut IDirect3DVertexShader9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVertexShader9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
@@ -664,14 +640,10 @@ pub struct IDirect3DPixelShader9 {
 #[repr(C)]
 pub struct IDirect3DPixelShader9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DPixelShader9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DPixelShader9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DPixelShader9,
-    ) -> *mut IDirect3DPixelShader9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DPixelShader9,
-    ) -> *mut IDirect3DPixelShader9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DPixelShader9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
@@ -688,14 +660,10 @@ pub struct IDirect3DBaseTexture9 {
 #[repr(C)]
 pub struct IDirect3DBaseTexture9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DBaseTexture9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DBaseTexture9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DBaseTexture9,
-    ) -> *mut IDirect3DBaseTexture9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DBaseTexture9,
-    ) -> *mut IDirect3DBaseTexture9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DBaseTexture9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
@@ -715,20 +683,20 @@ pub struct IDirect3DBaseTexture9Vtbl {
     ) -> ::DWORD>,
     pub GetPriority: Option<unsafe extern "system" fn(
         This: *mut IDirect3DBaseTexture9,
-    ) -> *mut IDirect3DBaseTexture9>,
+    ) -> ::DWORD>,
     pub PreLoad: Option<unsafe extern "system" fn(This: *mut IDirect3DBaseTexture9)>,
     pub GetType: Option<unsafe extern "system" fn(
         This: *mut IDirect3DBaseTexture9,
-    ) -> *mut IDirect3DBaseTexture9>,
+    ) -> ::D3DRESOURCETYPE>,
     pub SetLOD: Option<unsafe extern "system" fn(
         This: *mut IDirect3DBaseTexture9, LODNew: ::DWORD,
     ) -> ::DWORD>,
     pub GetLOD: Option<unsafe extern "system" fn(
         This: *mut IDirect3DBaseTexture9,
-    ) -> *mut IDirect3DBaseTexture9>,
+    ) -> ::DWORD>,
     pub GetLevelCount: Option<unsafe extern "system" fn(
         This: *mut IDirect3DBaseTexture9,
-    ) -> *mut IDirect3DBaseTexture9>,
+    ) -> ::DWORD>,
     pub SetAutoGenFilterType: Option<unsafe extern "system" fn(
         This: *mut IDirect3DBaseTexture9, FilterType: ::D3DTEXTUREFILTERTYPE,
     ) -> ::HRESULT>,
@@ -746,14 +714,10 @@ pub struct IDirect3DTexture9 {
 #[repr(C)]
 pub struct IDirect3DTexture9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DTexture9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DTexture9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DTexture9,
-    ) -> *mut IDirect3DTexture9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DTexture9,
-    ) -> *mut IDirect3DTexture9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DTexture9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
@@ -773,20 +737,20 @@ pub struct IDirect3DTexture9Vtbl {
     ) -> ::DWORD>,
     pub GetPriority: Option<unsafe extern "system" fn(
         This: *mut IDirect3DTexture9,
-    ) -> *mut IDirect3DTexture9>,
+    ) -> ::DWORD>,
     pub PreLoad: Option<unsafe extern "system" fn(This: *mut IDirect3DTexture9)>,
     pub GetType: Option<unsafe extern "system" fn(
         This: *mut IDirect3DTexture9,
-    ) -> *mut IDirect3DTexture9>,
+    ) -> ::D3DRESOURCETYPE>,
     pub SetLOD: Option<unsafe extern "system" fn(
         This: *mut IDirect3DTexture9, LODNew: ::DWORD,
     ) -> ::DWORD>,
     pub GetLOD: Option<unsafe extern "system" fn(
         This: *mut IDirect3DTexture9,
-    ) -> *mut IDirect3DTexture9>,
+    ) -> ::DWORD>,
     pub GetLevelCount: Option<unsafe extern "system" fn(
         This: *mut IDirect3DTexture9,
-    ) -> *mut IDirect3DTexture9>,
+    ) -> ::DWORD>,
     pub SetAutoGenFilterType: Option<unsafe extern "system" fn(
         This: *mut IDirect3DTexture9, FilterType: ::D3DTEXTUREFILTERTYPE,
     ) -> ::HRESULT>,
@@ -820,14 +784,10 @@ pub struct IDirect3DVolumeTexture9 {
 #[repr(C)]
 pub struct IDirect3DVolumeTexture9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVolumeTexture9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DVolumeTexture9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVolumeTexture9,
-    ) -> *mut IDirect3DVolumeTexture9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVolumeTexture9,
-    ) -> *mut IDirect3DVolumeTexture9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVolumeTexture9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
@@ -847,22 +807,22 @@ pub struct IDirect3DVolumeTexture9Vtbl {
     ) -> ::DWORD>,
     pub GetPriority: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVolumeTexture9,
-    ) -> *mut IDirect3DVolumeTexture9>,
+    ) -> ::DWORD>,
     pub PreLoad: Option<unsafe extern "system" fn(This: *mut IDirect3DVolumeTexture9)>,
     pub GetType: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVolumeTexture9,
-    ) -> *mut IDirect3DVolumeTexture9>,
+    ) -> ::D3DRESOURCETYPE>,
     pub SetLOD: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVolumeTexture9, LODNew: ::DWORD,
     ) -> ::DWORD>,
     pub GetLOD: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVolumeTexture9,
-    ) -> *mut IDirect3DVolumeTexture9>,
+    ) -> ::DWORD>,
     pub GetLevelCount: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVolumeTexture9,
-    ) -> *mut IDirect3DVolumeTexture9>,
+    ) -> ::DWORD>,
     pub SetAutoGenFilterType: Option<unsafe extern "system" fn(
-    This: *mut IDirect3DVolumeTexture9, FilterType: ::D3DTEXTUREFILTERTYPE,
+        This: *mut IDirect3DVolumeTexture9, FilterType: ::D3DTEXTUREFILTERTYPE,
     ) -> ::HRESULT>,
     pub GetAutoGenFilterType: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVolumeTexture9,
@@ -897,14 +857,10 @@ pub struct IDirect3DCubeTexture9 {
 #[repr(C)]
 pub struct IDirect3DCubeTexture9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DCubeTexture9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DCubeTexture9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DCubeTexture9,
-    ) -> *mut IDirect3DCubeTexture9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DCubeTexture9,
-    ) -> *mut IDirect3DCubeTexture9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DCubeTexture9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
@@ -924,20 +880,20 @@ pub struct IDirect3DCubeTexture9Vtbl {
     ) -> ::DWORD>,
     pub GetPriority: Option<unsafe extern "system" fn(
         This: *mut IDirect3DCubeTexture9,
-    ) -> *mut IDirect3DCubeTexture9>,
+    ) -> ::DWORD>,
     pub PreLoad: Option<unsafe extern "system" fn(This: *mut IDirect3DCubeTexture9)>,
     pub GetType: Option<unsafe extern "system" fn(
         This: *mut IDirect3DCubeTexture9,
-    ) -> *mut IDirect3DCubeTexture9>,
+    ) -> ::D3DRESOURCETYPE>,
     pub SetLOD: Option<unsafe extern "system" fn(
         This: *mut IDirect3DCubeTexture9, LODNew: ::DWORD,
     ) -> ::DWORD>,
     pub GetLOD: Option<unsafe extern "system" fn(
         This: *mut IDirect3DCubeTexture9,
-    ) -> *mut IDirect3DCubeTexture9>,
+    ) -> ::DWORD>,
     pub GetLevelCount: Option<unsafe extern "system" fn(
         This: *mut IDirect3DCubeTexture9,
-    ) -> *mut IDirect3DCubeTexture9>,
+    ) -> ::DWORD>,
     pub SetAutoGenFilterType: Option<unsafe extern "system" fn(
         This: *mut IDirect3DCubeTexture9, FilterType: ::D3DTEXTUREFILTERTYPE,
     ) -> ::HRESULT>,
@@ -974,14 +930,10 @@ pub struct IDirect3DVertexBuffer9 {
 #[repr(C)]
 pub struct IDirect3DVertexBuffer9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVertexBuffer9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DVertexBuffer9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVertexBuffer9,
-    ) -> *mut IDirect3DVertexBuffer9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVertexBuffer9,
-    ) -> *mut IDirect3DVertexBuffer9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVertexBuffer9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
@@ -1001,18 +953,18 @@ pub struct IDirect3DVertexBuffer9Vtbl {
     ) -> ::DWORD>,
     pub GetPriority: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVertexBuffer9,
-    ) -> *mut IDirect3DVertexBuffer9>,
+    ) -> ::DWORD>,
     pub PreLoad: Option<unsafe extern "system" fn(This: *mut IDirect3DVertexBuffer9)>,
     pub GetType: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVertexBuffer9,
-    ) -> *mut IDirect3DVertexBuffer9>,
+    ) -> ::D3DRESOURCETYPE>,
     pub Lock: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVertexBuffer9, OffsetToLock: ::UINT, SizeToLock: ::UINT,
         ppbData: *mut *mut ::VOID, Flags: ::DWORD,
     ) -> ::HRESULT>,
     pub Unlock: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVertexBuffer9,
-    ) -> *mut IDirect3DVertexBuffer9>,
+    ) -> ::HRESULT>,
     pub GetDesc: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVertexBuffer9, pDesc: *mut ::D3DVERTEXBUFFER_DESC,
     ) -> ::HRESULT>,
@@ -1026,14 +978,10 @@ pub struct IDirect3DIndexBuffer9 {
 #[repr(C)]
 pub struct IDirect3DIndexBuffer9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DIndexBuffer9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DIndexBuffer9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DIndexBuffer9,
-    ) -> *mut IDirect3DIndexBuffer9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DIndexBuffer9,
-    ) -> *mut IDirect3DIndexBuffer9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DIndexBuffer9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
@@ -1053,18 +1001,18 @@ pub struct IDirect3DIndexBuffer9Vtbl {
     ) -> ::DWORD>,
     pub GetPriority: Option<unsafe extern "system" fn(
         This: *mut IDirect3DIndexBuffer9,
-    ) -> *mut IDirect3DIndexBuffer9>,
+    ) -> ::DWORD>,
     pub PreLoad: Option<unsafe extern "system" fn(This: *mut IDirect3DIndexBuffer9)>,
     pub GetType: Option<unsafe extern "system" fn(
         This: *mut IDirect3DIndexBuffer9,
-    ) -> *mut IDirect3DIndexBuffer9>,
+    ) -> ::D3DRESOURCETYPE>,
     pub Lock: Option<unsafe extern "system" fn(
         This: *mut IDirect3DIndexBuffer9, OffsetToLock: ::UINT, SizeToLock: ::UINT,
         ppbData: *mut *mut ::VOID, Flags: ::DWORD,
     ) -> ::HRESULT>,
     pub Unlock: Option<unsafe extern "system" fn(
         This: *mut IDirect3DIndexBuffer9,
-    ) -> *mut IDirect3DIndexBuffer9>,
+    ) -> ::HRESULT>,
     pub GetDesc: Option<unsafe extern "system" fn(
         This: *mut IDirect3DIndexBuffer9, pDesc: *mut ::D3DINDEXBUFFER_DESC,
     ) -> ::HRESULT>,
@@ -1078,14 +1026,10 @@ pub struct IDirect3DSurface9 {
 #[repr(C)]
 pub struct IDirect3DSurface9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DSurface9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DSurface9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DSurface9,
-    ) -> *mut IDirect3DSurface9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DSurface9,
-    ) -> *mut IDirect3DSurface9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DSurface9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
@@ -1105,11 +1049,11 @@ pub struct IDirect3DSurface9Vtbl {
     ) -> ::DWORD>,
     pub GetPriority: Option<unsafe extern "system" fn(
         This: *mut IDirect3DSurface9,
-    ) -> *mut IDirect3DSurface9>,
+    ) -> ::DWORD>,
     pub PreLoad: Option<unsafe extern "system" fn(This: *mut IDirect3DSurface9)>,
     pub GetType: Option<unsafe extern "system" fn(
         This: *mut IDirect3DSurface9,
-    ) -> *mut IDirect3DSurface9>,
+    ) -> ::D3DRESOURCETYPE>,
     pub GetContainer: Option<unsafe extern "system" fn(
         This: *mut IDirect3DSurface9, riid: *const ::IID, ppContainer: *mut *mut ::VOID,
     ) -> ::HRESULT>,
@@ -1122,7 +1066,7 @@ pub struct IDirect3DSurface9Vtbl {
     ) -> ::HRESULT>,
     pub UnlockRect: Option<unsafe extern "system" fn(
         This: *mut IDirect3DSurface9,
-    ) -> *mut IDirect3DSurface9>,
+    ) -> ::HRESULT>,
     pub GetDC: Option<unsafe extern "system" fn(
         This: *mut IDirect3DSurface9, phdc: *mut ::HDC,
     ) -> ::HRESULT>,
@@ -1139,14 +1083,10 @@ pub struct IDirect3DVolume9 {
 #[repr(C)]
 pub struct IDirect3DVolume9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVolume9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DVolume9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVolume9,
-    ) -> *mut IDirect3DVolume9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DVolume9,
-    ) -> *mut IDirect3DVolume9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DVolume9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
@@ -1184,23 +1124,19 @@ pub struct IDirect3DQuery9 {
 #[repr(C)]
 pub struct IDirect3DQuery9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DQuery9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DQuery9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DQuery9,
-    ) -> *mut IDirect3DQuery9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DQuery9,
-    ) -> *mut IDirect3DQuery9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetDevice: Option<unsafe extern "system" fn(
         This: *mut IDirect3DQuery9, ppDevice: *mut *mut IDirect3DDevice9,
     ) -> ::HRESULT>,
     pub GetType: Option<unsafe extern "system" fn(
         This: *mut IDirect3DQuery9,
-    ) -> *mut IDirect3DQuery9>,
+    ) -> ::D3DRESOURCETYPE>,
     pub GetDataSize: Option<unsafe extern "system" fn(
         This: *mut IDirect3DQuery9,
-    ) -> *mut IDirect3DQuery9>,
+    ) -> ::DWORD>,
     pub Issue: Option<unsafe extern "system" fn(
         This: *mut IDirect3DQuery9, dwIssueFlags: ::DWORD,
     ) -> ::HRESULT>,
@@ -1235,13 +1171,13 @@ pub struct IDirect3D9Ex {
 #[repr(C)]
 pub struct IDirect3D9ExVtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3D9Ex, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3D9Ex, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9Ex) -> *mut IDirect3D9Ex>,
-    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9Ex) -> *mut IDirect3D9Ex>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetAdapterCount: Option<unsafe extern "system" fn(
         This: *mut IDirect3D9Ex,
-    ) -> *mut IDirect3D9Ex>,
+    ) -> ::UINT>,
     pub GetAdapterIdentifier: Option<unsafe extern "system" fn(
         This: *mut IDirect3D9Ex, Adapter: ::UINT, Flags: ::DWORD,
         pIdentifier: *mut ::D3DADAPTER_IDENTIFIER9,
@@ -1320,23 +1256,19 @@ pub struct IDirect3DDevice9Ex {
 #[repr(C)]
 pub struct IDirect3DDevice9ExVtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DDevice9Ex, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DDevice9Ex, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DDevice9Ex,
-    ) -> *mut IDirect3DDevice9Ex>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DDevice9Ex,
-    ) -> *mut IDirect3DDevice9Ex>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub TestCooperativeLevel: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Ex,
-    ) -> *mut IDirect3DDevice9Ex>,
+    ) -> ::HRESULT>,
     pub GetAvailableTextureMem: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Ex,
-    ) -> *mut IDirect3DDevice9Ex>,
+    ) -> ::UINT>,
     pub EvictManagedResources: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Ex,
-    ) -> *mut IDirect3DDevice9Ex>,
+    ) -> ::HRESULT>,
     pub GetDirect3D: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Ex, ppD3D9: *mut *mut IDirect3D9,
     ) -> ::HRESULT>,
@@ -1369,7 +1301,7 @@ pub struct IDirect3DDevice9ExVtbl {
     ) -> ::HRESULT>,
     pub GetNumberOfSwapChains: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Ex,
-    ) -> *mut IDirect3DDevice9Ex>,
+    ) -> ::UINT>,
     pub Reset: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Ex, pPresentationParameters: *mut ::D3DPRESENT_PARAMETERS,
     ) -> ::HRESULT>,
@@ -1474,10 +1406,10 @@ pub struct IDirect3DDevice9ExVtbl {
     ) -> ::HRESULT>,
     pub BeginScene: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Ex,
-    ) -> *mut IDirect3DDevice9Ex>,
+    ) -> ::HRESULT>,
     pub EndScene: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Ex,
-    ) -> *mut IDirect3DDevice9Ex>,
+    ) -> ::HRESULT>,
     pub Clear: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Ex, Count: ::DWORD, pRects: *const ::D3DRECT, Flags: ::DWORD,
         Color: ::D3DCOLOR, Z: ::FLOAT, Stencil: ::DWORD,
@@ -1533,7 +1465,7 @@ pub struct IDirect3DDevice9ExVtbl {
     ) -> ::HRESULT>,
     pub BeginStateBlock: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Ex,
-    ) -> *mut IDirect3DDevice9Ex>,
+    ) -> ::HRESULT>,
     pub EndStateBlock: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Ex, ppSB: *mut *mut IDirect3DStateBlock9,
     ) -> ::HRESULT>,
@@ -1591,7 +1523,7 @@ pub struct IDirect3DDevice9ExVtbl {
     ) -> ::HRESULT>,
     pub GetSoftwareVertexProcessing: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Ex,
-    ) -> *mut IDirect3DDevice9Ex>,
+    ) -> ::BOOL>,
     pub SetNPatchMode: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Ex, nSegments: ::FLOAT,
     ) -> ::HRESULT>,
@@ -1807,14 +1739,10 @@ pub struct IDirect3DSwapChain9Ex {
 #[repr(C)]
 pub struct IDirect3DSwapChain9ExVtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DSwapChain9Ex, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DSwapChain9Ex, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DSwapChain9Ex,
-    ) -> *mut IDirect3DSwapChain9Ex>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DSwapChain9Ex,
-    ) -> *mut IDirect3DSwapChain9Ex>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub Present: Option<unsafe extern "system" fn(
         This: *mut IDirect3DSwapChain9Ex, pSourceRect: *const ::RECT, pDestRect: *const ::RECT,
         hDestWindowOverride: ::HWND, pDirtyRegion: *const ::RGNDATA, dwFlags: ::DWORD,
@@ -1858,14 +1786,10 @@ pub struct IDirect3D9ExOverlayExtension {
 #[repr(C)]
 pub struct IDirect3D9ExOverlayExtensionVtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3D9ExOverlayExtension, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3D9ExOverlayExtension, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3D9ExOverlayExtension,
-    ) -> *mut IDirect3D9ExOverlayExtension>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3D9ExOverlayExtension,
-    ) -> *mut IDirect3D9ExOverlayExtension>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub CheckDeviceOverlayType: Option<unsafe extern "system" fn(
         This: *mut IDirect3D9ExOverlayExtension, Adapter: ::UINT, DevType: ::D3DDEVTYPE,
         OverlayWidth: ::UINT, OverlayHeight: ::UINT, OverlayFormat: ::D3DFORMAT,
@@ -1882,14 +1806,10 @@ pub struct IDirect3DDevice9Video {
 #[repr(C)]
 pub struct IDirect3DDevice9VideoVtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DDevice9Video, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DDevice9Video, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DDevice9Video,
-    ) -> *mut IDirect3DDevice9Video>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DDevice9Video,
-    ) -> *mut IDirect3DDevice9Video>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetContentProtectionCaps: Option<unsafe extern "system" fn(
         This: *mut IDirect3DDevice9Video, pCryptoType: *const ::GUID,
         pDecodeProfile: *const ::GUID, pCaps: *mut ::D3DCONTENTPROTECTIONCAPS,
@@ -1914,14 +1834,10 @@ pub struct IDirect3DAuthenticatedChannel9 {
 #[repr(C)]
 pub struct IDirect3DAuthenticatedChannel9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DAuthenticatedChannel9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DAuthenticatedChannel9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DAuthenticatedChannel9,
-    ) -> *mut IDirect3DAuthenticatedChannel9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DAuthenticatedChannel9,
-    ) -> *mut IDirect3DAuthenticatedChannel9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetCertificateSize: Option<unsafe extern "system" fn(
         This: *mut IDirect3DAuthenticatedChannel9, pCertificateSize: *mut ::UINT,
     ) -> ::HRESULT>,
@@ -1950,14 +1866,10 @@ pub struct IDirect3DCryptoSession9 {
 #[repr(C)]
 pub struct IDirect3DCryptoSession9Vtbl {
     pub QueryInterface: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DCryptoSession9, riid: *const ::IID, ppvObj: *mut *mut ::VOID,
+        This: *mut IDirect3DCryptoSession9, riid: ::REFIID, ppvObj: *mut *mut ::VOID,
     ) -> ::HRESULT>,
-    pub AddRef: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DCryptoSession9,
-    ) -> *mut IDirect3DCryptoSession9>,
-    pub Release: Option<unsafe extern "system" fn(
-        This: *mut IDirect3DCryptoSession9,
-    ) -> *mut IDirect3DCryptoSession9>,
+    pub AddRef: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
+    pub Release: Option<unsafe extern "system" fn(This: *mut IDirect3D9) -> ::ULONG>,
     pub GetCertificateSize: Option<unsafe extern "system" fn(
         This: *mut IDirect3DCryptoSession9, pCertificateSize: *mut ::UINT,
     ) -> ::HRESULT>,
@@ -1986,7 +1898,7 @@ pub struct IDirect3DCryptoSession9Vtbl {
     ) -> ::HRESULT>,
     pub FinishSessionKeyRefresh: Option<unsafe extern "system" fn(
         This: *mut IDirect3DCryptoSession9,
-    ) -> *mut IDirect3DCryptoSession9>,
+    ) -> ::HRESULT>,
     pub GetEncryptionBltKey: Option<unsafe extern "system" fn(
         This: *mut IDirect3DCryptoSession9, pReadbackKey: *mut ::VOID, KeySize: ::UINT,
     ) -> ::HRESULT>,
