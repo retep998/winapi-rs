@@ -651,7 +651,9 @@ extern "system" {
     // pub fn MonitorFromPoint();
     // pub fn MonitorFromRect();
     // pub fn MonitorFromWindow();
-    // pub fn MoveWindow();
+    pub fn MoveWindow(
+        hWnd: HWND, X: c_int, Y: c_int, nWidth: c_int, nHeight: c_int, bRepaint: BOOL,
+    ) -> BOOL;
     // Use UINT instead of DWORD for dwWaitMask to be consistent with GetQueueStatus
     pub fn MsgWaitForMultipleObjects(
         nCount: DWORD, pHandles: *const HANDLE, fWaitAll: BOOL, dwMilliseconds: DWORD,
@@ -667,7 +669,7 @@ extern "system" {
     // pub fn OemToCharBuffA();
     // pub fn OemToCharBuffW();
     // pub fn OemToCharW();
-    // pub fn OffsetRect();
+    pub fn OffsetRect(lprc: LPRECT, dx: c_int, dy: c_int) -> BOOL;
     pub fn OpenClipboard(hWnd: HWND) -> BOOL;
     // pub fn OpenDesktopA();
     // pub fn OpenDesktopW();
@@ -835,7 +837,9 @@ extern "system" {
     // pub fn SetSysColors();
     pub fn SetSystemCursor(hcur: HCURSOR, id: DWORD) -> BOOL;
     pub fn SetThreadDesktop(hDesktop: HDESK) -> BOOL;
-    // pub fn SetTimer();
+    pub fn SetTimer(
+        hWnd: HWND, nIDEvent: UINT_PTR, uElapse: UINT, lpTimerFunc: TimerProc,
+    ) -> UINT_PTR;
     // pub fn SetUserObjectInformationA();
     // pub fn SetUserObjectInformationW();
     // pub fn SetUserObjectSecurity();

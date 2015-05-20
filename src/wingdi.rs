@@ -1,6 +1,18 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! GDI procedure declarations, constant definitions and macros
+
+//121
+// fnCombineMode values for CombineRgn
+pub const RGN_AND: ::c_int = 1;
+pub const RGN_OR: ::c_int = 2;
+pub const RGN_XOR: ::c_int = 3;
+pub const RGN_DIFF: ::c_int = 4;
+pub const RGN_COPY: ::c_int = 5;
+pub const RGN_MIN: ::c_int = RGN_AND;
+pub const RGN_MAX: ::c_int = RGN_COPY;
+
+
 //1438
 pub const LF_FACESIZE: usize = 32;
 //1595

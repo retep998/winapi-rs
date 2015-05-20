@@ -41,7 +41,9 @@ extern "system" {
     // pub fn CloseMetaFile();
     // pub fn ColorCorrectPalette();
     // pub fn ColorMatchToTarget();
-    // pub fn CombineRgn();
+    pub fn CombineRgn(
+        hrgnDst: HRGN, hrgnSrc1: HRGN, hrgnSrc2: HRGN, fnCombineMode: c_int,
+    ) -> c_int;
     // pub fn CombineTransform();
     // pub fn CopyEnhMetaFileA();
     // pub fn CopyEnhMetaFileW();
@@ -97,7 +99,9 @@ extern "system" {
     // pub fn CreatePenIndirect();
     // pub fn CreatePolyPolygonRgn();
     // pub fn CreatePolygonRgn();
-    // pub fn CreateRectRgn();
+    pub fn CreateRectRgn(
+        nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int,
+    ) -> HRGN;
     // pub fn CreateRectRgnIndirect();
     // pub fn CreateRoundRectRgn();
     // pub fn CreateScalableFontResourceA();
@@ -252,7 +256,7 @@ extern "system" {
     // pub fn ExtCreateRegion();
     // pub fn ExtEscape();
     // pub fn ExtFloodFill();
-    // pub fn ExtSelectClipRgn();
+    pub fn ExtSelectClipRgn(hdc: HDC, hrgn: HRGN, mode: c_int) -> c_int;
     // pub fn ExtTextOutA();
     // pub fn ExtTextOutW();
     // pub fn FillPath();
@@ -464,7 +468,7 @@ extern "system" {
     // pub fn ScaleWindowExtEx();
     // pub fn SelectBrushLocal();
     // pub fn SelectClipPath();
-    // pub fn SelectClipRgn();
+    pub fn SelectClipRgn(hdc: HDC, hrgn: HRGN) -> c_int;
     // pub fn SelectFontLocal();
     pub fn SelectObject(hdc: HDC, h: HGDIOBJ) -> HGDIOBJ;
     // pub fn SelectPalette();
@@ -505,7 +509,7 @@ extern "system" {
     // pub fn SetPixelV();
     // pub fn SetPolyFillMode();
     // pub fn SetROP2();
-    // pub fn SetRectRgn();
+    pub fn SetRectRgn(hrgn: HRGN, left: c_int, top: c_int, right: c_int, bottom: c_int) -> BOOL;
     // pub fn SetRelAbs();
     // pub fn SetStretchBltMode();
     // pub fn SetSystemPaletteUse();

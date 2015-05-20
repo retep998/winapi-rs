@@ -28,6 +28,22 @@ pub struct TRACKMOUSEEVENT {
     pub dwHoverTime: ::DWORD,
 }
 pub type LPTRACKMOUSEEVENT = *mut TRACKMOUSEEVENT;
+//2575
+/// lParam of WM_WINDOWPOSCHANGING, WM_WINDOWPOSCHANGED
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct WINDOWPOS {
+    pub hwnd: ::HWND,
+    /// hwnd or HWND_BOTTOM, HWND_NOTOPMOST, HWND_TOP, HWND_TOPMOST
+    pub hwndInsertAfter: ::HWND,
+    pub x: ::c_int,
+    pub y: ::c_int,
+    pub cx: ::c_int,
+    pub cy: ::c_int,
+    /// SWP_\*
+    pub flags: ::UINT,
+}
+pub type LPWINDOWPOS = *mut WINDOWPOS;
+pub type PWINDOWPOS = *mut WINDOWPOS;
 //3082
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CREATESTRUCTA {
@@ -61,6 +77,15 @@ pub struct CREATESTRUCTW {
     pub dwExStyle: ::DWORD,
 }
 pub type LPCREATESTRUCTW = *mut CREATESTRUCTW;
+//3145
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+/// The lParam of the WM_NOTIFY message is a pointer to this structure
+pub struct NMHDR {
+    pub hwndFrom: ::HWND,
+    pub idFrom: ::UINT_PTR,
+    pub code: ::UINT,  // NM_ code
+}
+
 //3400
 pub const PM_NOREMOVE: ::UINT = 0x0000;
 pub const PM_REMOVE: ::UINT = 0x0001;
