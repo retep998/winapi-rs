@@ -1417,7 +1417,7 @@ extern "system" {
     // pub fn SetMessageWaitingIndicator();
     // pub fn SetNamedPipeAttribute();
     // pub fn SetNamedPipeHandleState();
-    // pub fn SetPriorityClass();
+    pub fn SetPriorityClass(hProcess: HANDLE, dwPriorityClass: DWORD);
     // pub fn SetProcessAffinityMask();
     // pub fn SetProcessAffinityUpdateMode();
     // pub fn SetProcessDEPPolicy();

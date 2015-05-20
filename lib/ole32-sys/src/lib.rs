@@ -87,7 +87,6 @@ extern "system" {
     // pub fn CoImpersonateClient();
     pub fn CoIncrementMTAUsage(pCookie: *mut CO_MTA_USAGE_COOKIE) -> HRESULT;
     pub fn CoInitializeEx(pvReserved: LPVOID, dwCoInit: DWORD) -> HRESULT;
-    // pub fn CoInitializeEx();
     // pub fn CoInitializeSecurity();
     // pub fn CoInitializeWOW();
     // pub fn CoInstall();
