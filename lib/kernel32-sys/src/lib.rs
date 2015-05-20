@@ -761,8 +761,8 @@ extern "system" {
         lpszLongPath: LPCWSTR, lpszShortPath: LPWSTR, cchBuffer: DWORD,
     ) -> DWORD;
     // pub fn GetStagedPackagePathByFullName();
-    // pub fn GetStartupInfoA();
-    // pub fn GetStartupInfoW();
+    pub fn GetStartupInfoA(lpStartupInfo: LPSTARTUPINFOA);
+    pub fn GetStartupInfoW(lpStartupInfo: LPSTARTUPINFOW);
     // pub fn GetStateFolder();
     pub fn GetStdHandle(nStdHandle: DWORD) -> HANDLE;
     // pub fn GetStringScripts();
