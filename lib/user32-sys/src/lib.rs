@@ -881,8 +881,12 @@ extern "system" {
     pub fn SwapMouseButton(fSwap: BOOL) -> BOOL;
     pub fn SwitchDesktop(hDesktop: HDESK) -> BOOL;
     // pub fn SwitchToThisWindow();
-    // pub fn SystemParametersInfoA();
-    // pub fn SystemParametersInfoW();
+    pub fn SystemParametersInfoA(
+        uiAction: UINT, uiParam: UINT, pvParam: PVOID, fWinIni: UINT
+    ) -> BOOL;
+    pub fn SystemParametersInfoW(
+        uiAction: UINT, uiParam: UINT, pvParam: PVOID, fWinIni: UINT
+    ) -> BOOL;
     // pub fn TabbedTextOutA();
     // pub fn TabbedTextOutW();
     // pub fn TileChildWindows();

@@ -77,10 +77,10 @@ extern "system" {
         iOutPrecision: DWORD, iClipPrecision: DWORD, iQuality: DWORD, iPitchAndFamily: DWORD,
         pszFaceName: LPCSTR,
     ) -> HFONT;
-    // pub fn CreateFontIndirectA();
+    pub fn CreateFontIndirectA(lplf: *const LOGFONTA) -> HFONT;
     // pub fn CreateFontIndirectExA();
     // pub fn CreateFontIndirectExW();
-    // pub fn CreateFontIndirectW();
+    pub fn CreateFontIndirectW(lplf: *const LOGFONTW) -> HFONT;
     pub fn CreateFontW(
         cHeight: c_int, cWidth: c_int, cEscapement: c_int, cOrientation: c_int, cWeight: c_int,
         bItalic: DWORD, bUnderline: DWORD, bStrikeOut: DWORD, iCharSet: DWORD,

@@ -11,5 +11,9 @@ license = "MIT"
 build = "build.rs"
 links = "comctl32"
 
-[dependencies]
-winapi = "*"
+[lib]
+name = "comctl32"
+
+[dependencies.winapi]
+version = "*"
+path = "../.."
