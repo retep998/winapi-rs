@@ -128,7 +128,7 @@ macro_rules! RIDL {
     ) => {
         #[repr(C)]
         pub struct $vtbl {
-            _parent: $pvtbl
+            pub parent: $pvtbl
             $(,pub $method: unsafe extern "system" fn(
                 This: *mut $interface
                 $(,$p: $t)*
