@@ -343,8 +343,8 @@ extern "system" {
     #[cfg(target_arch = "x86_64")]
     pub fn GetClassLongPtrW(hWnd: HWND, nIndex: c_int) -> ULONG_PTR;
     pub fn GetClassLongW(hWnd: HWND, nIndex: c_int) -> DWORD;
-    // pub fn GetClassNameA();
-    // pub fn GetClassNameW();
+    pub fn GetClassNameA(hWnd: HWND, lpClassName: LPCSTR, nMaxCount: c_int) -> c_int;
+    pub fn GetClassNameW(hWnd: HWND, lpClassName: LPCWSTR, nMaxCount: c_int) -> c_int;
     pub fn GetClassWord(hWnd: HWND, nIndex: c_int) -> WORD;
     pub fn GetClientRect(hWnd: HWND, lpRect: LPRECT) -> BOOL;
     pub fn GetClipCursor(lpRect: LPRECT) -> BOOL;
