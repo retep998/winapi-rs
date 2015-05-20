@@ -1,3 +1,5 @@
+// Copyright © 2015, Peter Atashian
+// Licensed under the MIT License <LICENSE.md>
 //138
 pub struct INITCOMMONCONTROLSEX {
 	pub dwSize: ::DWORD,

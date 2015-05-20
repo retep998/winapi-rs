@@ -99,48 +99,48 @@ macro_rules! CTL_CODE {
     }
 }
 macro_rules! RIDL {
-    (interface $interface:ident $vtbl:ident
+    (interface $interface:ident ($vtbl:ident)
         {$(
-            fn $method:ident(&mut self, $($p:ident : $t:ty),*) -> $rtr:ty
+            fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
         ),+}
     ) => {
         #[repr(C)]
         pub struct $vtbl {
             $(pub $method: unsafe extern "system" fn(
-                This: *mut $interface,
-                $($p: $t),*
+                This: *mut $interface
+                $(,$p: $t)*
             ) -> $rtr),+
         }
         #[repr(C)] #[derive(Debug)]
         pub struct $interface {
-            pub lpVtbl: *const $vtbl,
+            pub lpVtbl: *const $vtbl
         }
         impl $interface {
-            $(pub unsafe fn $method(&mut self, $($p: $t),*) -> $rtr {
-                ((*self.lpVtbl).$method)(self, $($p),*)
+            $(pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
+                ((*self.lpVtbl).$method)(self $(,$p)*)
             })+
         }
     };
-    (interface $interface:ident $vtbl:ident : $pinterface:ident $pvtbl:ident
+    (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident)
         {$(
-            fn $method:ident(&mut self, $($p:ident : $t:ty),*) -> $rtr:ty
+            fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
         ),+}
     ) => {
         #[repr(C)]
         pub struct $vtbl {
-            _parent: $pvtbl,
-            $(pub $method: unsafe extern "system" fn(
-                This: *mut $interface,
-                $($p: $t),*
-            ) -> $rtr),+
+            _parent: $pvtbl
+            $(,pub $method: unsafe extern "system" fn(
+                This: *mut $interface
+                $(,$p: $t)*
+            ) -> $rtr)+
         }
         #[repr(C)] #[derive(Debug)]
         pub struct $interface {
-            pub lpVtbl: *const $vtbl,
+            pub lpVtbl: *const $vtbl
         }
         impl $interface {
-            $(pub unsafe fn $method(&mut self, $($p: $t),*) -> $rtr {
-                ((*self.lpVtbl).$method)(self, $($p),*)
+            $(pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
+                ((*self.lpVtbl).$method)(self $(,$p)*)
             })+
         }
         impl ::std::ops::Deref for $interface {
