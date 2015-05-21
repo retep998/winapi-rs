@@ -1,6 +1,6 @@
 [package]
 name = "user32-sys"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to user32."
 documentation = "https://retep998.github.io/doc/user32-sys/"
@@ -14,6 +14,7 @@ links = "user32"
 [lib]
 name = "user32"
 
-[dependencies.winapi]
-version = "*"
-path = "../.."
+[dependencies]
+winapi = { version = "*", path = "../.." }
+[build-dependencies]
+winapi-build = { version = "*", path = "../../build" }

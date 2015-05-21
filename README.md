@@ -31,6 +31,7 @@ Bindings to library functions are in separate crates. The source to each crate i
 These are the ones that actually have functions in them:
 * [advapi32-sys ![Crates.io](https://img.shields.io/crates/v/advapi32-sys.svg)](https://crates.io/crates/advapi32-sys)
 * [d3d9-sys ![Crates.io](https://img.shields.io/crates/v/d3d9-sys.svg)](https://crates.io/crates/d3d9-sys)
+* [dwmapi-sys ![Crates.io](https://img.shields.io/crates/v/dwmapi-sys.svg)](https://crates.io/crates/dwmapi-sys)
 * [gdi32-sys ![Crates.io](https://img.shields.io/crates/v/gdi32-sys.svg)](https://crates.io/crates/gdi32-sys)
 * [kernel32-sys ![Crates.io](https://img.shields.io/crates/v/kernel32-sys.svg)](https://crates.io/crates/kernel32-sys)
 * [ole32-sys ![Crates.io](https://img.shields.io/crates/v/ole32-sys.svg)](https://crates.io/crates/ole32-sys)
@@ -134,7 +135,6 @@ These are the ones that are reserved for future use:
 * [dststlog-sys ![Crates.io](https://img.shields.io/crates/v/dststlog-sys.svg)](https://crates.io/crates/dststlog-sys)
 * [dsuiext-sys ![Crates.io](https://img.shields.io/crates/v/dsuiext-sys.svg)](https://crates.io/crates/dsuiext-sys)
 * [dtchelp-sys ![Crates.io](https://img.shields.io/crates/v/dtchelp-sys.svg)](https://crates.io/crates/dtchelp-sys)
-* [dwmapi-sys ![Crates.io](https://img.shields.io/crates/v/dwmapi-sys.svg)](https://crates.io/crates/dwmapi-sys)
 * [dwrite-sys ![Crates.io](https://img.shields.io/crates/v/dwrite-sys.svg)](https://crates.io/crates/dwrite-sys)
 * [dxgi-sys ![Crates.io](https://img.shields.io/crates/v/dxgi-sys.svg)](https://crates.io/crates/dxgi-sys)
 * [dxguid-sys ![Crates.io](https://img.shields.io/crates/v/dxguid-sys.svg)](https://crates.io/crates/dxguid-sys)
