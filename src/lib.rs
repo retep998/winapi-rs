@@ -1290,21 +1290,10 @@ pub const IID_IMMDeviceEnumerator: IID = GUID {
     Data4: [0xA7, 0x46, 0xDE, 0x8D, 0xB6, 0x36, 0x17, 0xE6],
 };
 
-#[repr(C)]
-pub struct IMMDeviceVtbl {
-    pub QueryInterface: unsafe extern "system" fn(
-        This: *mut IMMDevice,
-        riid: REFIID,
-        ppvObject: *mut *mut c_void,
-    ) -> HRESULT,
-    pub AddRef: unsafe extern "system" fn(
-        This: *mut IMMDevice,
-    ) -> ULONG,
-    pub Release: unsafe extern "system" fn(
-        This: *mut IMMDevice,
-    ) -> ULONG,
-    pub Activate: unsafe extern "system" fn(
-        This: *mut IMMDevice,
+RIDL!(
+interface IMMDevice(IMMDeviceVtbl): IUnknown(IUnknownVtbl) {
+    fn Activate(
+        &mut self,
         iid: REFIID,
         dwClsCtx: DWORD,
         pActivationParams: *mut PROPVARIANT,
@@ -1324,183 +1313,63 @@ pub struct IMMDeviceVtbl {
         pdwState: *mut DWORD,
     ) -> HRESULT,
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMMDevice {
-    pub lpVtbl: *const IMMDeviceVtbl,
-}
-impl IMMDevice {
-    /// Part of the IUnknown interface inherited by IMMDeviceEnumerator.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/ms682521.aspx
-    pub unsafe fn QueryInterface (
-        &mut self,
-        riid: REFIID,
-        ppvObject: *mut *mut c_void,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).QueryInterface)(self, riid, ppvObject)
-    }
-    /// Part of the IUnknown interface inherited by IMMDeviceEnumerator.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/ms691379.aspx
-    pub unsafe fn AddRef(&mut self) -> ULONG {
-        ((&*self.lpVtbl).AddRef)(self)
-    }
-    /// Part of the IUnknown interface inherited by IMMDeviceEnumerator.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/ms682317.aspx
-    pub unsafe fn Release(&mut self) -> ULONG {
-        ((&*self.lpVtbl).Release)(self)
-    }
-    /// Calls the vtable's Active() member.
-    pub unsafe fn Activate(
+);
+
+RIDL!(
+interface IMMDeviceEnumerator(IMMDeviceEnumeratorVtbl): IUnknown(IUnknownVtbl) {
+    fn EnumAudioEndpoints(
         &mut self,
         iid: REFIID,
         dwClsCtx: DWORD,
         pActivationParams: *mut PROPVARIANT,
-        ppInterface: *mut LPVOID,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).Activate)(self, iid, dwClsCtx, pActivationParams, ppInterface)
-    }
-    // pub OpenPropertyStore: unsafe extern "system" fn(
-    //     This: *mut IMMDevice,
-    //     stgmAccess: DWORD,
-    //     ppProperties: *mut *mut IPropertyStore,
-    // ) -> HRESULT,
-    // pub GetId: unsafe extern "system" fn(
-    //     This: *mut IMMDevice,
-    //     ppstrId: *mut LPWSTR,
-    // ) -> HRESULT,
-    // pub GetState: unsafe extern "system" fn(
-    //     This: *mut IMMDevice,
-    //     pdwState: *mut DWORD,
-    // ) -> HRESULT,
+        ppInterface: *mut LPVOID
+    ) -> HRESULT,
+    fn OpenPropertyStore(
+        &mut self,
+        stgmAccess: DWORD,
+        ppProperties: *mut *mut IPropertyStore
+    ) -> HRESULT,
+    fn GetId(&mut self, ppstrId: *mut LPWSTR) -> HRESULT,
+    fn GetState(&mut self, pdwState: *mut DWORD) -> HRESULT
 }
+);
 
-#[repr(C)]
-pub struct IMMDeviceEnumeratorVtbl {
-    pub QueryInterface: unsafe extern "system" fn(
-        This: *mut IMMDeviceEnumerator,
-        riid: REFIID,
-        ppvObject: *mut *mut c_void,
-    ) -> HRESULT,
-    pub AddRef: unsafe extern "system" fn(
-        This: *mut IMMDeviceEnumerator,
-    ) -> ULONG,
-    pub Release: unsafe extern "system" fn(
-        This: *mut IMMDeviceEnumerator,
-    ) -> ULONG,
-    pub EnumAudioEndpoints: unsafe extern "system" fn(
-        This: *mut IMMDeviceEnumerator,
-        dataFlow: EDataFlow,
-        dwStateMask: DWORD,
-        ppDevices: *mut *mut IMMDeviceCollection,
-    ) -> HRESULT,
-    pub GetDefaultAudioEndpoint: unsafe extern "system" fn(
-        This: *mut IMMDeviceEnumerator,
-        dataFlow: EDataFlow,
-        role: ERole,
-        ppEndpoint: *mut *mut IMMDevice,
-    ) -> HRESULT,
-    pub GetDevice: unsafe extern "system" fn(
-        This: *mut IMMDeviceEnumerator,
-        pwstrId: LPCWSTR,
-        ppDevices: *mut *mut IMMDevice,
-    ) -> HRESULT,
-    pub RegisterEndpointNotificationCallback: unsafe extern "system" fn(
-        This: *mut IMMDeviceEnumerator,
-        pClient: *mut IMMNotificationClient,
-    ) -> HRESULT,
-    pub UnregisterEndpointNotificationCallback: unsafe extern "system" fn(
-        This: *mut IMMDeviceEnumerator,
-        pClient: *mut IMMNotificationClient,
-    ) -> HRESULT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMMDeviceEnumerator {
-    pub lpVtbl: *const IMMDeviceEnumeratorVtbl,
-}
-
-impl IMMDeviceEnumerator {
-    /// Part of the IUnknown interface inherited by IMMDeviceEnumerator.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/ms682521.aspx
-    pub unsafe fn QueryInterface (
+RIDL!(
+interface IMMDeviceEnumerator(IMMDeviceEnumeratorVtbl) {
+    fn QueryInterface (
         &mut self,
         riid: REFIID,
-        ppvObject: *mut *mut c_void,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).QueryInterface)(self, riid, ppvObject)
-    }
-
-    /// Part of the IUnknown interface inherited by IMMDeviceEnumerator.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/ms691379.aspx
-    pub unsafe fn AddRef(&mut self) -> ULONG {
-        ((&*self.lpVtbl).AddRef)(self)
-    }
-
-    /// Part of the IUnknown interface inherited by IMMDeviceEnumerator.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/ms682317.aspx
-    pub unsafe fn Release(&mut self) -> ULONG {
-        ((&*self.lpVtbl).Release)(self)
-    }
-
-    /// Call the vtable's EnumAudioEndpoints() member.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/dd371400.aspx
-    pub unsafe fn EnumAudioEndpoints(
+        ppvObject: *mut *mut c_void
+    ) -> HRESULT,
+    fn AddRef(&mut self) -> ULONG,
+    fn Release(&mut self) -> ULONG,
+    fn EnumAudioEndpoints(
         &mut self,
         dataFlow: EDataFlow,
         dwStateMask: DWORD,
-        ppDevices: *mut *mut IMMDeviceCollection,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).EnumAudioEndpoints)(self, dataFlow, dwStateMask, ppDevices)
-    }
-
-    /// Call the vtable's GetDefaultAudioEndpoint() member.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/dd371401.aspx
-    pub unsafe fn GetDefaultAudioEndpoint(
+        ppDevices: *mut *mut IMMDeviceCollection
+    ) -> HRESULT,
+    fn GetDefaultAudioEndpoint(
         &mut self,
         dataFlow: EDataFlow,
         role: ERole,
-        ppEndpoint: *mut *mut IMMDevice,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).GetDefaultAudioEndpoint)(self, dataFlow, role, ppEndpoint)
-    }
-
-    /// Call the vtable's GetDevice() member.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/dd371402.aspx
-    pub unsafe fn GetDevice(
+        ppEndpoint: *mut *mut IMMDevice
+    ) -> HRESULT,
+    fn GetDevice(
         &mut self,
         pwstrId: LPCWSTR,
-        ppDevices: *mut *mut IMMDevice,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).GetDevice)(self, pwstrId, ppDevices)
-    }
-
-    /// Call the vtable's RegisterEndpointNotificationCallback() member.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/dd371403.aspx
-    pub unsafe fn RegisterEndpointNotificationCallback(
+        ppDevices: *mut *mut IMMDevice
+    ) -> HRESULT,
+    fn RegisterEndpointNotificationCallback(
         &mut self,
-        pClient: *mut IMMNotificationClient,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).RegisterEndpointNotificationCallback)(self, pClient)
-    }
-
-    /// Call the vtable's UnregisterEndpointNotificationCallback() member.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/dd371404.aspx
-    pub unsafe fn UnregisterEndpointNotificationCallback(
+        pClient: *mut IMMNotificationClient
+    ) -> HRESULT,
+    fn UnregisterEndpointNotificationCallback(
         &mut self,
-        pClient: *mut IMMNotificationClient,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).UnregisterEndpointNotificationCallback)(self, pClient)
-    }
+        pClient: *mut IMMNotificationClient
+    ) -> HRESULT
 }
+);
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IMMDeviceCollection;
@@ -1523,131 +1392,51 @@ pub const IID_IAudioRenderClient: IID = GUID {
     Data3: 0x4483,
     Data4: [0xA7, 0xBF, 0xAD, 0xDC, 0xA7, 0xC2, 0x60, 0xE2],
 };
-
-#[repr(C)]
-pub struct IAudioClientVtbl {
-    pub QueryInterface: unsafe extern "system" fn(
-        This: *mut IAudioClient,
-        riid: REFIID,
-        ppvObject: *mut *mut c_void,
-    ) -> HRESULT,
-    pub AddRef: unsafe extern "system" fn(
-        This: *mut IAudioClient,
-    ) -> ULONG,
-    pub Release: unsafe extern "system" fn(
-        This: *mut IAudioClient,
-    ) -> ULONG,
-    pub Initialize: unsafe extern "system" fn(
-        This: *mut IAudioClient,
+RIDL!(
+interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
+    fn Initialize(
+        &mut self,
         ShareMode: AUDCLNT_SHAREMODE,
         StreamFlags: DWORD,
         hnsBufferDuration: REFERENCE_TIME,
         hnsPeriodicity: REFERENCE_TIME,
         pFormat: *const WAVEFORMATEX,
-        AudioSessionGuid: LPCGUID,
+        AudioSessionGuid: LPCGUID
     ) -> HRESULT,
-    pub GetBufferSize: unsafe extern "system" fn(
-        This: *mut IAudioClient,
-        pNumBufferFrames: *mut UINT32,
+    fn GetBufferSize(
+        &mut self,
+        pNumBufferFrames: *mut UINT32
     ) -> HRESULT,
-    pub GetStreamLatency: unsafe extern "system" fn(
-        This: *mut IAudioClient,
-        phnsLatency: *mut REFERENCE_TIME,
+    fn GetStreamLatency(
+        &mut self,
+        phnsLatency: *mut REFERENCE_TIME
     ) -> HRESULT,
-    pub GetCurrentPadding: unsafe extern "system" fn(
-        This: *mut IAudioClient,
-        pNumPaddingFrames: *mut UINT32,
-    ) -> HRESULT,
-    pub IsFormatSupported: unsafe extern "system" fn(
-        This: *mut IAudioClient,
+    fn GetCurrentPadding(&mut self, pNumPaddingFrames: *mut UINT32) -> HRESULT,
+    fn IsFormatSupported(
+        &mut self,
         ShareMode: AUDCLNT_SHAREMODE,
         pFormat: *const WAVEFORMATEX,
-        ppClosestMatch: *mut *mut WAVEFORMATEX,
+        ppClosestMatch: *mut *mut WAVEFORMATEX
     ) -> HRESULT,
-    pub GetMixFormat: unsafe extern "system" fn(
-        This: *mut IAudioClient,
-        ppDeviceFormat: *mut *mut WAVEFORMATEX,
+    fn GetMixFormat(
+        &mut self,
+        ppDeviceFormat: *mut *mut WAVEFORMATEX
     ) -> HRESULT,
-    pub GetDevicePeriod: unsafe extern "system" fn(
-        This: *mut IAudioClient,
+    fn GetDevicePeriod(
+        &mut self,
         phnsDefaultDevicePeriod: *mut REFERENCE_TIME,
-        phnsMinimumDevicePeriod: *mut REFERENCE_TIME,
+        phnsMinimumDevicePeriod: *mut REFERENCE_TIME
     ) -> HRESULT,
-    pub Start: unsafe extern "system" fn(
-        This: *mut IAudioClient,
-    ) -> HRESULT,
-    pub Stop: unsafe extern "system" fn(
-        This: *mut IAudioClient,
-    ) -> HRESULT,
-    pub Reset: unsafe extern "system" fn(
-        This: *mut IAudioClient,
-    ) -> HRESULT,
-    pub SetEventHandle: unsafe extern "system" fn(
-        This: *mut IAudioClient,
-        eventHandle: HANDLE,
-    ) -> HRESULT,
-    pub GetService: unsafe extern "system" fn(
-        This: *mut IAudioClient,
-        riid: REFIID,
-        ppv: *mut LPVOID,
-    ) -> HRESULT,
+    fn Start(&mut self) -> HRESULT,
+    fn Stop(&mut self) -> HRESULT,
+    fn Reset(&mut self) -> HRESULT,
+    fn SetEventHandle(&mut self, eventHandle: HANDLE) -> HRESULT,
+    fn GetService(&mut self, riid: REFIID, ppv: *mut LPVOID) -> HRESULT
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IAudioClient {
-    pub lpVtbl: *const IAudioClientVtbl,
-}
-impl IAudioClient {
-    /// Part of the IUnknown interface inherited by IMMDeviceEnumerator.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/ms682521.aspx
-    pub unsafe fn QueryInterface (
-        &mut self,
-        riid: REFIID,
-        ppvObject: *mut *mut c_void,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).QueryInterface)(self, riid, ppvObject)
-    }
-    /// Part of the IUnknown interface inherited by IMMDeviceEnumerator.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/ms691379.aspx
-    pub unsafe fn AddRef(&mut self) -> ULONG {
-        ((&*self.lpVtbl).AddRef)(self)
-    }
-    /// Part of the IUnknown interface inherited by IMMDeviceEnumerator.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/ms682317.aspx
-    pub unsafe fn Release(&mut self) -> ULONG {
-        ((&*self.lpVtbl).Release)(self)
-    }
-    pub unsafe fn Initialize(
-        &mut self,
-        ShareMode: AUDCLNT_SHAREMODE,
-        StreamFlags: DWORD,
-        hnsBufferDuration: REFERENCE_TIME,
-        hnsPeriodicity: REFERENCE_TIME,
-        pFormat: *const WAVEFORMATEX,
-        AudioSessionGuid: LPCGUID,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).Initialize)(
-            self,
-            ShareMode,
-            StreamFlags,
-            hnsBufferDuration,
-            hnsPeriodicity,
-            pFormat,
-            AudioSessionGuid)
-    }
-    pub unsafe fn GetBufferSize(
-        &mut self,
-        pNumBufferFrames: *mut UINT32,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).GetBufferSize)(self, pNumBufferFrames)
-    }
-    // pub GetStreamLatency: unsafe extern "system" fn(
-    //     This: *mut IAudioClient,
-    //     phnsLatency: *mut REFERENCE_TIME,
-    // ) -> HRESULT,
-    pub unsafe fn GetCurrentPadding(
+);
+RIDL!(
+interface IAudioRenderClient(IAudioRenderClientVtbl): IUnknown(IUnknownVtbl) {
+    fn GetBuffer(
         &mut self,
         pNumPaddingFrames: *mut UINT32,
     ) -> HRESULT {
@@ -1690,77 +1479,22 @@ impl IAudioClient {
     pub unsafe fn GetService(
         &mut self,
         riid: REFIID,
-        ppv: *mut LPVOID,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).GetService)(self, riid, ppv)
-    }
-}
-#[repr(C)]
-pub struct IAudioRenderClientVtbl {
-    pub QueryInterface: unsafe extern "system" fn(
-        This: *mut IAudioRenderClient,
-        riid: REFIID,
-        ppvObject: *mut *mut c_void,
+        ppvObject: *mut *mut c_void
     ) -> HRESULT,
-    pub AddRef: unsafe extern "system" fn(
-        This: *mut IAudioRenderClient,
-    ) -> ULONG,
-    pub Release: unsafe extern "system" fn(
-        This: *mut IAudioRenderClient,
-    ) -> ULONG,
-    pub GetBuffer: unsafe extern "system" fn(
-        This: *mut IAudioRenderClient,
-        NumFramesRequested: UINT32,
-        ppData: *mut *mut BYTE,
-    ) -> HRESULT,
-    pub ReleaseBuffer: unsafe extern "system" fn(
-        This: *mut IAudioRenderClient,
-        NumFramesWritten: UINT32,
-        dwFlags: DWORD,
-    ) -> HRESULT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IAudioRenderClient {
-    pub lpVtbl: *const IAudioRenderClientVtbl,
-}
-impl IAudioRenderClient {
-    /// Part of the IUnknown interface inherited by IMMDeviceEnumerator.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/ms682521.aspx
-    pub unsafe fn QueryInterface (
-        &mut self,
-        riid: REFIID,
-        ppvObject: *mut *mut c_void,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).QueryInterface)(self, riid, ppvObject)
-    }
-    /// Part of the IUnknown interface inherited by IMMDeviceEnumerator.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/ms691379.aspx
-    pub unsafe fn AddRef(&mut self) -> ULONG {
-        ((&*self.lpVtbl).AddRef)(self)
-    }
-    /// Part of the IUnknown interface inherited by IMMDeviceEnumerator.
-    ///
-    /// https://msdn.microsoft.com/en-us/library/windows/desktop/ms682317.aspx
-    pub unsafe fn Release(&mut self) -> ULONG {
-        ((&*self.lpVtbl).Release)(self)
-    }
-    pub unsafe fn GetBuffer(
+    fn AddRef(&mut self) -> ULONG,
+    fn Release(&mut self) -> ULONG,
+    fn GetBuffer(
         &mut self,
         NumFramesRequested: UINT32,
-        ppData: *mut *mut BYTE,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).GetBuffer)(self, NumFramesRequested, ppData)
-    }
-    pub unsafe fn ReleaseBuffer(
+        ppData: *mut *mut BYTE
+    ) -> HRESULT,
+    fn ReleaseBuffer(
         &mut self,
         NumFramesWritten: UINT32,
-        dwFlags: DWORD,
-    ) -> HRESULT {
-        ((&*self.lpVtbl).ReleaseBuffer)(self, NumFramesWritten, dwFlags)
-    }
+        dwFlags: DWORD
+    ) -> HRESULT
 }
+);
 
 //-------------------------------------------------------------------------------------------------
 // audiosessiontypes.h
