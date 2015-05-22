@@ -2,8 +2,6 @@
 // Licensed under the MIT License <LICENSE.md>
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
 //1627
-use unknwnbase::*;
-
 macro_rules! AUDCLNT_ERR {
     ($n:expr) => {
         MAKE_HRESULT!(::SEVERITY_ERROR, ::FACILITY_AUDCLNT, $n)

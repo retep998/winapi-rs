@@ -131,7 +131,7 @@ macro_rules! RIDL {
     ) => {
         #[repr(C)]
         pub struct $vtbl {
-            pub parent: $pvtbl
+            pub parent: ::$pvtbl
             $(,pub $method: unsafe extern "system" fn(
                 This: *mut $interface
                 $(,$p: $t)*
@@ -147,13 +147,13 @@ macro_rules! RIDL {
             })+
         }
         impl ::std::ops::Deref for $interface {
-            type Target = $pinterface;
-            fn deref(&self) -> &$pinterface {
+            type Target = ::$pinterface;
+            fn deref(&self) -> &::$pinterface {
                 unsafe { ::std::mem::transmute(self) }
             }
         }
         impl ::std::ops::DerefMut for $interface {
-            fn deref_mut(&mut self) -> &mut $pinterface {
+            fn deref_mut(&mut self) -> &mut ::$pinterface {
                 unsafe { ::std::mem::transmute(self) }
             }
         }
