@@ -14,6 +14,7 @@ links = "ktmw32"
 [lib]
 name = "ktmw32"
 
-[dependencies.winapi]
-version = "*"
-path = "../.."
+[dependencies]
+winapi = { version = "*", path = "../.." }
+[build-dependencies]
+winapi-build = { version = "*", path = "../../build" }
