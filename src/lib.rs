@@ -43,6 +43,7 @@ pub use minwindef::*;
 pub use mmdeviceapi::*;
 pub use mmreg::*;
 pub use mmsystem::*;
+pub use objidlbase::*;
 pub use processthreadsapi::*;
 pub use synchapi::*;
 pub use unknwnbase::*;
@@ -179,6 +180,7 @@ pub mod minwindef;
 pub mod mmdeviceapi;
 pub mod mmreg;
 pub mod mmsystem;
+pub mod objidlbase;
 pub mod processthreadsapi;
 pub mod synchapi;
 pub mod unknwnbase;
@@ -1243,160 +1245,6 @@ pub struct PROPVARIANT {
     pub data: [u8; 16],
 }
 
-//-------------------------------------------------------------------------------------------------
-// objldlbase.h
-// this ALWAYS GENERATED file contains the definitions for the interfaces
-//-------------------------------------------------------------------------------------------------
-#[repr(C)]
-pub struct IMallocVtbl {
-    pub QueryInterface: unsafe extern "system" fn(
-        This: *mut IMalloc,
-        riid: REFIID,
-        ppvObject: *mut *mut c_void,
-    ) -> HRESULT,
-    pub AddRef: unsafe extern "system" fn(
-        This: *mut IMalloc,
-    ) -> ULONG,
-    pub Release: unsafe extern "system" fn(
-        This: *mut IMalloc,
-    ) -> ULONG,
-    pub Alloc: unsafe extern "system" fn(
-        This: *mut IMalloc,
-        cb: SIZE_T,
-    ) -> *mut c_void,
-    pub Realloc: unsafe extern "system" fn(
-        This: *mut IMalloc,
-        pv: *mut c_void,
-        cb: SIZE_T,
-    ) -> *mut c_void,
-    pub Free: unsafe extern "system" fn(
-        This: *mut IMalloc,
-        pv: *mut c_void,
-    ),
-    pub GetSize: unsafe extern "system" fn(
-        This: *mut IMalloc,
-        pv: *mut c_void,
-    ) -> SIZE_T,
-    pub DidAlloc: unsafe extern "system" fn(
-        This: *mut IMalloc,
-        pv: *mut c_void,
-    ) -> c_int,
-    pub HeapMinimize: unsafe extern "system" fn(
-        This: *mut IMalloc,
-    ),
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMalloc {
-    pub lpVtbl: *const IMallocVtbl,
-}
-pub type LPMALLOC = *mut IMalloc;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct STATSTG {
-    pub pwcsName: LPOLESTR,
-    pub type_: DWORD,
-    pub cbSize: ULARGE_INTEGER,
-    pub mtime: FILETIME,
-    pub ctime: FILETIME,
-    pub atime: FILETIME,
-    pub grfMode: DWORD,
-    pub grfLocksSupported: DWORD,
-    pub clsid: CLSID,
-    pub grfStateBits: DWORD,
-    pub reserved: DWORD,
-}
-#[repr(C)]
-pub struct IStreamVtbl {
-    pub QueryInterface: unsafe extern "system" fn(
-        This: *mut IStream,
-        riid: REFIID,
-        ppvObject: *mut *mut c_void,
-    ) -> HRESULT,
-    pub AddRef: unsafe extern "system" fn(
-        This: *mut IStream,
-    ) -> ULONG,
-    pub Release: unsafe extern "system" fn(
-        This: *mut IStream,
-    ) -> ULONG,
-    pub Read: unsafe extern "system" fn(
-        This: *mut IStream,
-        pv: *mut c_void,
-        cb: ULONG,
-        pcbRead: *mut ULONG,
-    ) -> HRESULT,
-    pub Write: unsafe extern "system" fn(
-        This: *mut IStream,
-        pv: *const c_void,
-        cb: ULONG,
-        pcbWritten: *mut ULONG,
-    ) -> HRESULT,
-    pub Seek: unsafe extern "system" fn(
-        This: *mut IStream,
-        dlibMove: LARGE_INTEGER,
-        dwOrigin: DWORD,
-        plibNewPosition: *mut ULARGE_INTEGER,
-    ) -> HRESULT,
-    pub SetSize: unsafe extern "system" fn(
-        This: *mut IStream,
-        libNewSize: ULARGE_INTEGER,
-    ) -> HRESULT,
-    pub CopyTo: unsafe extern "system" fn(
-        This: *mut IStream,
-        cb: ULARGE_INTEGER,
-        pcbRead: *mut ULARGE_INTEGER,
-        pcbWritten: *mut ULARGE_INTEGER,
-    ) -> HRESULT,
-    pub Commit: unsafe extern "system" fn(
-        This: *mut IStream,
-        grfCommitFlags: DWORD,
-    ) -> HRESULT,
-    pub Revert: unsafe extern "system" fn(
-        This: *mut IStream,
-    ) -> HRESULT,
-    pub LockRegion: unsafe extern "system" fn(
-        This: *mut IStream,
-        libOffset: ULARGE_INTEGER,
-        cb: ULARGE_INTEGER,
-        dwLockType: DWORD,
-    ) -> HRESULT,
-    pub UnlockRegion: unsafe extern "system" fn(
-        This: *mut IStream,
-        libOffset: ULARGE_INTEGER,
-        cb: ULARGE_INTEGER,
-        dwLockType: DWORD,
-    ) -> HRESULT,
-    pub Stat: unsafe extern "system" fn(
-        This: *mut IStream,
-        pstatstg: *mut STATSTG,
-        grfStatFlag: DWORD,
-    ) -> HRESULT,
-    pub Clone: unsafe extern "system" fn(
-        This: *mut IStream,
-        ppstm: *mut *mut IStream,
-    ) -> HRESULT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IStream {
-    pub lpVtbl: *const IStreamVtbl,
-}
-pub type LPSTREAM = *mut IStream;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub enum APTTYPEQUALIFIER {
-    APTTYPEQUALIFIER_NONE = 0,
-    APTTYPEQUALIFIER_IMPLICIT_MTA = 1,
-    APTTYPEQUALIFIER_NA_ON_MTA = 2,
-    APTTYPEQUALIFIER_NA_ON_STA = 3,
-    APTTYPEQUALIFIER_NA_ON_IMPLICIT_MTA = 4,
-    APTTYPEQUALIFIER_NA_ON_MAINSTA = 5,
-    APTTYPEQUALIFIER_APPLICATION_STA= 6,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub enum APTTYPE {
-    APTTYPE_CURRENT = -1,
-    APTTYPE_STA = 0,
-    APTTYPE_MTA = 1,
-    APTTYPE_NA = 2,
-    APTTYPE_MAINSTA = 3,
-}
 //-------------------------------------------------------------------------------------------------
 // combaseapi.h
 // Base Component Object Model defintions.
