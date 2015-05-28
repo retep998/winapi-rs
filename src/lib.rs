@@ -46,6 +46,7 @@ pub use mmsystem::*;
 pub use objidl::*;
 pub use objidlbase::*;
 pub use processthreadsapi::*;
+pub use propsys::*;
 pub use shobjidl::*;
 pub use shtypes::*;
 pub use synchapi::*;
@@ -187,6 +188,7 @@ pub mod mmsystem;
 pub mod objidl;
 pub mod objidlbase;
 pub mod processthreadsapi;
+pub mod propsys;
 pub mod shobjidl;
 pub mod shtypes;
 pub mod synchapi;
@@ -800,10 +802,6 @@ pub struct IStreamAsync;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IStreamUnbufferedInfo;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFileOperationProgressSink;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellItemArray;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IInitializeWithItem;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IObjectWithSelection;
@@ -951,16 +949,6 @@ pub struct IDeskBar;
 pub struct IMenuPopup;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IFileIsInUse;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFileSaveDialog;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFileOpenDialog;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFileDialogCustomize;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFileDialogControlEvents;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFileDialog2;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IApplicationAssociationRegistration;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
@@ -1184,12 +1172,6 @@ pub struct WAVEFORMATEX {
     pub wBitsPerSample: WORD,
     pub cbSize: WORD,
 }
-
-//-------------------------------------------------------------------------------------------------
-// propsys.h
-//-------------------------------------------------------------------------------------------------
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPropertyStore;
 
 //-------------------------------------------------------------------------------------------------
 // propidl.h
