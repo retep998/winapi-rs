@@ -43,8 +43,11 @@ pub use minwindef::*;
 pub use mmdeviceapi::*;
 pub use mmreg::*;
 pub use mmsystem::*;
+pub use objidl::*;
 pub use objidlbase::*;
 pub use processthreadsapi::*;
+pub use shobjidl::*;
+pub use shtypes::*;
 pub use synchapi::*;
 pub use unknwnbase::*;
 pub use vadefs::*;
@@ -61,6 +64,7 @@ pub use winnls::*;
 pub use winnt::*;
 pub use winsvc::*;
 pub use winuser::*;
+pub use wtypesbase::*;
 //-------------------------------------------------------------------------------------------------
 // Macros
 //-------------------------------------------------------------------------------------------------
@@ -180,8 +184,11 @@ pub mod minwindef;
 pub mod mmdeviceapi;
 pub mod mmreg;
 pub mod mmsystem;
+pub mod objidl;
 pub mod objidlbase;
 pub mod processthreadsapi;
+pub mod shobjidl;
+pub mod shtypes;
 pub mod synchapi;
 pub mod unknwnbase;
 pub mod vadefs;
@@ -198,6 +205,7 @@ pub mod winnls;
 pub mod winnt;
 pub mod winsvc;
 pub mod winuser;
+pub mod wtypesbase;
 // Primitive types not defined by libc
 //-------------------------------------------------------------------------------------------------
 pub type __int8 = i8;
@@ -208,9 +216,6 @@ pub type __int32 = i32;
 pub type __uint32 = u32;
 pub type __int64 = i64;
 pub type __uint64 = u64;
-
-//lazy
-pub type SCODE = LONG;
 
 //-------------------------------------------------------------------------------------------------
 // windef.h
@@ -773,8 +778,6 @@ pub struct IShellBrowser;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IProfferService;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IShellItem2;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IShellItemImageFactory;
@@ -925,8 +928,6 @@ pub struct IAutoCompleteDropDown;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IBandSite;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IModalWindow;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ICDBurnExt;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IContextMenuSite;
@@ -950,10 +951,6 @@ pub struct IDeskBar;
 pub struct IMenuPopup;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IFileIsInUse;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFileDialogEvents;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFileDialog;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IFileSaveDialog;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
@@ -1014,8 +1011,6 @@ pub struct IDestinationStreamFactory;
 pub struct INewMenuClient;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IInitializeWithBindCtx;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellItemFilter;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct INameSpaceTreeControl;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
@@ -1148,43 +1143,6 @@ pub struct IHandlerInfo;
 pub struct IHandlerActivationHost;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IContactManagerInterop;
-// shtypes.h
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SHITEMID {
-    pub cb: USHORT,
-    pub abID: [BYTE; 0],
-}
-pub type LPSHITEMID = *mut SHITEMID;
-pub type LPCSHITEMID = *const SHITEMID;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITEMIDLIST {
-    pub mkid: SHITEMID,
-}
-pub type ITEMIDLIST_RELATIVE = ITEMIDLIST;
-pub type ITEMID_CHILD = ITEMIDLIST;
-pub type ITEMIDLIST_ABSOLUTE = ITEMIDLIST;
-pub type LPITEMIDLIST = *mut ITEMIDLIST;
-pub type LPCITEMIDLIST = *const ITEMIDLIST;
-pub type PIDLIST_ABSOLUTE = *mut ITEMIDLIST_ABSOLUTE;
-pub type PCIDLIST_ABSOLUTE = *const ITEMIDLIST_ABSOLUTE;
-pub type PCUIDLIST_ABSOLUTE = *const ITEMIDLIST_ABSOLUTE;
-pub type PIDLIST_RELATIVE = *mut ITEMIDLIST_RELATIVE;
-pub type PCIDLIST_RELATIVE = *const ITEMIDLIST_RELATIVE;
-pub type PUIDLIST_RELATIVE = *mut ITEMIDLIST_RELATIVE;
-pub type PCUIDLIST_RELATIVE = *const ITEMIDLIST_RELATIVE;
-pub type PITEMID_CHILD = *mut ITEMID_CHILD;
-pub type PCITEMID_CHILD = *const ITEMID_CHILD;
-pub type PUITEMID_CHILD = *mut ITEMID_CHILD;
-pub type PCUITEMID_CHILD = *const ITEMID_CHILD;
-pub type PCUITEMID_CHILD_ARRAY = *const PCUITEMID_CHILD;
-pub type PCUIDLIST_RELATIVE_ARRAY = *const PCUIDLIST_RELATIVE;
-pub type PCIDLIST_ABSOLUTE_ARRAY = *const PCIDLIST_ABSOLUTE;
-pub type PCUIDLIST_ABSOLUTE_ARRAY = *const PCUIDLIST_ABSOLUTE;
-pub type KNOWNFOLDERID = GUID;
-pub type REFKNOWNFOLDERID = *const KNOWNFOLDERID;
-// wtypesbase.h
-pub type OLECHAR = WCHAR;
-pub type LPOLESTR = *mut OLECHAR;
 
 //-------------------------------------------------------------------------------------------------
 // wtypes.h

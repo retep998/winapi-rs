@@ -26,10 +26,18 @@ pub struct STATSTG {
     pub grfStateBits: ::DWORD,
     pub reserved: ::DWORD,
 }
+//1945
+pub type IEnumString = ::IUnknown; // TODO
+//2075
 RIDL!(
-interface IStream(IStreamVtbl): IUnknown(IUnknownVtbl) {
+interface ISequentialStream(ISequentialStreamVtbl): IUnknown(IUnknownVtbl) {
     fn Read(&mut self, pv: *mut ::c_void, cb: ::ULONG, pcbRead: *mut ::ULONG) -> ::HRESULT,
-    fn Write(&mut self, pv: *const ::c_void, cb: ::ULONG, pcbWritten: *mut ::ULONG) -> ::HRESULT,
+    fn Write(&mut self, pv: *const ::c_void, cb: ::ULONG, pcbWritten: *mut ::ULONG) -> ::HRESULT
+}
+);
+//2255
+RIDL!(
+interface IStream(IStreamVtbl): ISequentialStream(ISequentialStreamVtbl) {
     fn Seek(
         &mut self, dlibMove: ::LARGE_INTEGER, dwOrigin: ::DWORD,
         plibNewPosition: *mut ::ULARGE_INTEGER
