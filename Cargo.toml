@@ -1,6 +1,6 @@
 [package]
 name = "winapi"
-version = "0.1.19"
+version = "0.1.20"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "Types and constants for WinAPI bindings. See README for list of crates providing function bindings."
 documentation = "https://retep998.github.io/doc/winapi/"
