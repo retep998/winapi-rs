@@ -1,6 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! USER procedure declarations, constant definitions and macros
+pub type HDWP = *mut ::HANDLE;
 //2193
 pub const WHEEL_DELTA: ::DWORD = 120;
 //2206

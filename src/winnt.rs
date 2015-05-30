@@ -2,15 +2,216 @@
 // Licensed under the MIT License <LICENSE.md>
 //! This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed
 //! through the Win32 API.
-pub type NTSTATUS = ::LONG;
-//33
-pub const ANYSIZE_ARRAY: usize = 1;
+//341
+pub type PVOID = *mut ::c_void;
+pub type PVOID64 = u64; // This is a 64-bit pointer, even when in 32-bit
 //382
 pub type VOID = ::c_void;
 pub type CHAR = ::c_char;
 pub type SHORT = ::c_short;
 pub type LONG = ::c_long;
 // pub type INT = ::c_int; // Already defined by minwindef.h
+pub type WCHAR = ::wchar_t;
+pub type PWCHAR = *mut WCHAR;
+pub type LPWCH = *mut WCHAR;
+pub type PWCH = *mut WCHAR;
+pub type LPCWCH = *const WCHAR;
+pub type PCWCH = *const WCHAR;
+pub type NWPSTR = *mut WCHAR;
+pub type LPWSTR = *mut WCHAR;
+pub type PWSTR = *mut WCHAR;
+pub type PZPWSTR = *mut PWSTR;
+pub type PCZPWSTR = *const PWSTR;
+pub type LPUWSTR = *mut WCHAR;
+pub type PUWSTR = *mut WCHAR;
+pub type LPCWSTR = *const WCHAR;
+pub type PCWSTR = *const WCHAR;
+pub type PZPCWSTR= *mut PCWSTR;
+pub type PCZPCWSTR = *const PCWSTR;
+pub type LPCUWSTR = *const WCHAR;
+pub type PCUWSTR = *const WCHAR;
+pub type PZZWSTR= *mut WCHAR;
+pub type PCZZWSTR = *const WCHAR;
+pub type PUZZWSTR = *mut WCHAR;
+pub type PCUZZWSTR = *const WCHAR;
+pub type PNZWCH = *mut WCHAR;
+pub type PCNZWCH = *const WCHAR;
+pub type PUNZWCH = *mut WCHAR;
+pub type PCUNZWCH = *const WCHAR;
+pub type LPCWCHAR = *const WCHAR;
+pub type PCWCHAR = *const WCHAR;
+pub type LPCUWCHAR = *const WCHAR;
+pub type PCUWCHAR = *const WCHAR;
+pub type UCSCHAR = ::c_ulong;
+pub type PUCSCHAR = *mut UCSCHAR;
+pub type PCUCSCHAR = *const UCSCHAR;
+pub type PUCSSTR = *mut UCSCHAR;
+pub type PUUCSSTR = *mut UCSCHAR;
+pub type PCUCSSTR = *const UCSCHAR;
+pub type PCUUCSSTR = *const UCSCHAR;
+pub type PUUCSCHAR = *mut UCSCHAR;
+pub type PCUUCSCHAR = *const UCSCHAR;
+pub type PCHAR = *mut CHAR;
+pub type LPCH = *mut CHAR;
+pub type PCH = *mut CHAR;
+pub type LPCCH = *const CHAR;
+pub type PCCH = *const CHAR;
+pub type NPSTR = *mut CHAR;
+pub type LPSTR = *mut CHAR;
+pub type PSTR = *mut CHAR;
+pub type PZPSTR = *mut PSTR;
+pub type PCZPSTR = *const PSTR;
+pub type LPCSTR = *const CHAR;
+pub type PCSTR = *const CHAR;
+pub type PZPCSTR = *mut PCSTR;
+pub type PCZPCSTR = *const PCSTR;
+pub type PZZSTR = *mut CHAR;
+pub type PCZZSTR = *const CHAR;
+pub type PNZCH = *mut CHAR;
+pub type PCNZCH = *const CHAR;
+// Skipping TCHAR things
+pub type PSHORT = *mut SHORT;
+pub type PLONG = *mut LONG;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct PROCESSOR_NUMBER {
+    pub Group: ::WORD,
+    pub Number: ::BYTE,
+    pub Reserved: ::BYTE,
+}
+pub type PPROCESSOR_NUMBER = *mut PROCESSOR_NUMBER;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct GROUP_AFFINITY {
+    pub Mask: ::KAFFINITY,
+    pub Group: ::WORD,
+    pub Reserved: [::WORD; 3],
+}
+pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
+pub type HANDLE = *mut ::c_void;
+pub type PHANDLE = *mut HANDLE;
+pub type FCHAR = ::BYTE;
+pub type FSHORT = ::WORD;
+pub type FLONG = ::DWORD;
+//667
+pub type CCHAR = ::c_char;
+pub type LCID = ::DWORD;
+pub type PLCID = ::PDWORD;
+pub type LANGID = ::WORD;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub enum COMPARTMENT_ID {
+    UNSPECIFIED_COMPARTMENT_ID = 0,
+    DEFAULT_COMPARTMENT_ID = 1,
+}
+pub type PCOMPARTMENT_ID = *mut COMPARTMENT_ID;
+//710
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct FLOAT128 {
+    pub LowPart: ::__int64,
+    pub HighPart: ::__int64,
+}
+pub type PFLOAT128 = *mut FLOAT128;
+pub type LONGLONG = ::__int64;
+pub type ULONGLONG = ::__uint64;
+pub type PLONGLONG = *mut LONGLONG;
+pub type PULONGLONG = *mut ULONGLONG;
+pub type USN = LONGLONG;
+pub type LARGE_INTEGER = LONGLONG;
+pub type PLARGE_INTEGER = *mut LARGE_INTEGER;
+pub type ULARGE_INTEGER = ULONGLONG;
+pub type PULARGE_INTEGER= *mut ULARGE_INTEGER;
+pub type RTL_REFERENCE_COUNT = ::LONG_PTR;
+pub type PRTL_REFERENCE_COUNT = *mut ::LONG_PTR;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct LUID {
+    pub LowPart: ::DWORD,
+    pub HighPart: LONG,
+}
+pub type PLUID = *mut LUID;
+pub type DWORDLONG = ULONGLONG;
+pub type PDWORDLONG = *mut DWORDLONG;
+//1042
+pub type BOOLEAN = ::BYTE;
+pub type PBOOLEAN = *mut BOOLEAN;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct LIST_ENTRY {
+    pub Flink: *mut LIST_ENTRY,
+    pub Blink: *mut LIST_ENTRY,
+}
+pub type PLIST_ENTRY = *mut LIST_ENTRY;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SINGLE_LIST_ENTRY {
+    pub Next: *mut SINGLE_LIST_ENTRY,
+}
+pub type PSINGLE_LIST_ENTRY = *mut SINGLE_LIST_ENTRY;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct LIST_ENTRY32 {
+    pub Flink: ::DWORD,
+    pub Blink: ::DWORD,
+}
+pub type PLIST_ENTRY32 = *mut LIST_ENTRY32;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct LIST_ENTRY64 {
+    pub Flink: ULONGLONG,
+    pub Blink: ULONGLONG,
+}
+pub type PLIST_ENTRY64 = *mut LIST_ENTRY64;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct OBJECTID {
+    pub Lineage: ::GUID,
+    pub Uniquifier: ::DWORD,
+}
+//1300
+pub type PEXCEPTION_ROUTINE = Option<unsafe extern "system" fn(
+    ExceptionRecord: *mut EXCEPTION_RECORD, EstablisherFrame: PVOID, ContextRecord: *mut CONTEXT,
+    DispatcherContext: PVOID,
+) -> ::EXCEPTION_DISPOSITION>;
+//2277
+pub type KSPIN_LOCK = ::ULONG_PTR;
+pub type PKSPIN_LOCK = *mut KSPIN_LOCK;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct M128A { // FIXME align 16
+    pub Low: ULONGLONG,
+    pub High: LONGLONG,
+}
+pub type PM128A = *mut M128A;
+#[cfg(target_arch = "x86")] #[repr(C)] #[derive(Copy)]
+pub struct XSAVE_FORMAT { // FIXME align 16
+    pub ControlWord: ::WORD,
+    pub StatusWord: ::WORD,
+    pub TagWord: ::BYTE,
+    pub Reserved1: ::BYTE,
+    pub ErrorOpcode: ::WORD,
+    pub ErrorOffset: ::DWORD,
+    pub ErrorSelector: ::WORD,
+    pub Reserved2: ::WORD,
+    pub DataOffset: ::DWORD,
+    pub DataSelector: ::WORD,
+    pub Reserved3: ::WORD,
+    pub MxCsr: ::DWORD,
+    pub MxCsr_Mask: ::DWORD,
+    pub FloatRegisters: [M128A; 8],
+    pub XmmRegisters: [M128A; 8],
+    pub Reserved4: [::BYTE; 224],
+}
+#[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Copy)]
+pub struct XSAVE_FORMAT { // FIXME align 16
+    pub ControlWord: ::WORD,
+    pub StatusWord: ::WORD,
+    pub TagWord: ::BYTE,
+    pub Reserved1: ::BYTE,
+    pub ErrorOpcode: ::WORD,
+    pub ErrorOffset: ::DWORD,
+    pub ErrorSelector: ::WORD,
+    pub Reserved2: ::WORD,
+    pub DataOffset: ::DWORD,
+    pub DataSelector: ::WORD,
+    pub Reserved3: ::WORD,
+    pub MxCsr: ::DWORD,
+    pub MxCsr_Mask: ::DWORD,
+    pub FloatRegisters: [M128A; 8],
+    pub XmmRegisters: [M128A; 16],
+    pub Reserved4: [::BYTE; 96],
+}
+impl Clone for XSAVE_FORMAT { fn clone(&self) -> XSAVE_FORMAT { *self } }
 //3563
 #[cfg(target_arch = "x86")]
 pub const SIZE_OF_80387_REGISTERS: usize = 80;
@@ -153,7 +354,9 @@ pub type PACCESS_TOKEN = ::PVOID;
 pub type PSECURITY_DESCRIPTOR = ::PVOID;
 pub type PSID = ::PVOID;
 pub type PCLAIMS_BLOB = ::PVOID;
-//9100
+//9091
+pub type ACCESS_MASK = ::DWORD;
+pub type PACCESS_MASK = *mut ACCESS_MASK;
 pub const DELETE: ::DWORD = 0x00010000;
 pub const READ_CONTROL: ::DWORD = 0x00020000;
 pub const WRITE_DAC: ::DWORD = 0x00040000;
@@ -171,6 +374,13 @@ pub const GENERIC_READ: ::DWORD = 0x80000000;
 pub const GENERIC_WRITE: ::DWORD = 0x40000000;
 pub const GENERIC_EXECUTE: ::DWORD = 0x20000000;
 pub const GENERIC_ALL: ::DWORD = 0x10000000;
+//9170
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct LUID_AND_ATTRIBUTES {
+    pub Luid: LUID,
+    pub Attributes: ::DWORD,
+}
+pub type PLUID_AND_ATTRIBUTES = *mut LUID_AND_ATTRIBUTES;
 //9802
 pub const ACL_REVISION: ::BYTE = 2;
 pub const ACL_REVISION_DS: ::BYTE = 4;
@@ -189,6 +399,31 @@ pub struct ACL {
     pub Sbz2: ::WORD,
 }
 pub type PACL = *mut ACL;
+//10689
+pub const TOKEN_ASSIGN_PRIMARY: ::DWORD = 0x0001;
+pub const TOKEN_DUPLICATE: ::DWORD = 0x0002;
+pub const TOKEN_IMPERSONATE: ::DWORD = 0x0004;
+pub const TOKEN_QUERY: ::DWORD = 0x0008;
+pub const TOKEN_QUERY_SOURCE: ::DWORD = 0x0010;
+pub const TOKEN_ADJUST_PRIVILEGES: ::DWORD = 0x0020;
+pub const TOKEN_ADJUST_GROUPS: ::DWORD = 0x0040;
+pub const TOKEN_ADJUST_DEFAULT: ::DWORD = 0x0080;
+pub const TOKEN_ADJUST_SESSIONID: ::DWORD = 0x0100;
+pub const TOKEN_ALL_ACCESS_P: ::DWORD = STANDARD_RIGHTS_REQUIRED | TOKEN_ASSIGN_PRIMARY
+    | TOKEN_DUPLICATE | TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_QUERY_SOURCE
+    | TOKEN_ADJUST_PRIVILEGES | TOKEN_ADJUST_GROUPS | TOKEN_ADJUST_DEFAULT;
+pub const TOKEN_ALL_ACCESS: ::DWORD = TOKEN_ALL_ACCESS_P | TOKEN_ADJUST_SESSIONID;
+pub const TOKEN_READ: ::DWORD = STANDARD_RIGHTS_READ | TOKEN_QUERY;
+pub const TOKEN_WRITE: ::DWORD = STANDARD_RIGHTS_WRITE | TOKEN_ADJUST_PRIVILEGES
+    | TOKEN_ADJUST_GROUPS | TOKEN_ADJUST_DEFAULT;
+pub const TOKEN_EXECUTE: ::DWORD = STANDARD_RIGHTS_EXECUTE;
+//10823
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TOKEN_PRIVILEGES {
+    pub PrivilegeCount: ::DWORD,
+    pub Privileges: [LUID_AND_ATTRIBUTES; 0],
+}
+pub type PTOKEN_PRIVILEGES = *mut TOKEN_PRIVILEGES;
 //10965
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_INVALID: ::WORD = 0x00;
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_INT64: ::WORD = 0x01;
@@ -253,6 +488,22 @@ pub struct CLAIM_SECURITY_ATTRIBUTES_INFORMATION {
     pub pAttributeV1: PCLAIM_SECURITY_ATTRIBUTE_V1,
 }
 pub type PCLAIM_SECURITY_ATTRIBUTES_INFORMATION = *mut CLAIM_SECURITY_ATTRIBUTES_INFORMATION;
+//11294
+pub const PROCESS_TERMINATE: ::DWORD = 0x0001;
+pub const PROCESS_CREATE_THREAD: ::DWORD = 0x0002;
+pub const PROCESS_SET_SESSIONID: ::DWORD = 0x0004;
+pub const PROCESS_VM_OPERATION: ::DWORD = 0x0008;
+pub const PROCESS_VM_READ: ::DWORD = 0x0010;
+pub const PROCESS_VM_WRITE: ::DWORD = 0x0020;
+pub const PROCESS_DUP_HANDLE: ::DWORD = 0x0040;
+pub const PROCESS_CREATE_PROCESS: ::DWORD = 0x0080;
+pub const PROCESS_SET_QUOTA: ::DWORD = 0x0100;
+pub const PROCESS_SET_INFORMATION: ::DWORD = 0x0200;
+pub const PROCESS_QUERY_INFORMATION: ::DWORD = 0x0400;
+pub const PROCESS_SUSPEND_RESUME: ::DWORD = 0x0800;
+pub const PROCESS_QUERY_LIMITED_INFORMATION: ::DWORD = 0x1000;
+pub const PROCESS_SET_LIMITED_INFORMATION: ::DWORD = 0x2000;
+pub const PROCESS_ALL_ACCESS: ::DWORD = STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xFFFF;
 //11490
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IO_COUNTERS {
@@ -515,6 +766,71 @@ pub type PVECTORED_EXCEPTION_HANDLER = Option<unsafe extern "system" fn(
 pub type PSECURE_MEMORY_CACHE_CALLBACK = Option<unsafe extern "system" fn(
     Addr: ::PVOID, Range: ::SIZE_T,
 ) -> ::BOOLEAN>;
+//18570
+pub const KEY_QUERY_VALUE: ::REGSAM = 0x0001;
+pub const KEY_SET_VALUE: ::REGSAM = 0x0002;
+pub const KEY_CREATE_SUB_KEY: ::REGSAM = 0x0004;
+pub const KEY_ENUMERATE_SUB_KEYS: ::REGSAM = 0x0008;
+pub const KEY_NOTIFY: ::REGSAM = 0x0010;
+pub const KEY_CREATE_LINK: ::REGSAM = 0x0020;
+pub const KEY_WOW64_32KEY: ::REGSAM = 0x0200;
+pub const KEY_WOW64_64KEY: ::REGSAM = 0x0100;
+pub const KEY_WOW64_RES: ::REGSAM = 0x0300;
+
+pub const KEY_READ: ::REGSAM = (
+        STANDARD_RIGHTS_READ |
+        KEY_QUERY_VALUE |
+        KEY_ENUMERATE_SUB_KEYS |
+        KEY_NOTIFY
+    ) & (!SYNCHRONIZE);
+pub const KEY_WRITE: ::REGSAM = (STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY) & (!SYNCHRONIZE);
+pub const KEY_EXECUTE: ::REGSAM = KEY_READ & (!SYNCHRONIZE);
+pub const KEY_ALL_ACCESS: ::REGSAM = (
+        STANDARD_RIGHTS_ALL |
+        KEY_QUERY_VALUE |
+        KEY_SET_VALUE |
+        KEY_CREATE_SUB_KEY |
+        KEY_ENUMERATE_SUB_KEYS |
+        KEY_NOTIFY |
+        KEY_CREATE_LINK
+    ) & (!SYNCHRONIZE);
+
+pub const REG_CREATED_NEW_KEY: ::DWORD = 0x00000001;
+pub const REG_OPENED_EXISTING_KEY: ::DWORD = 0x00000002;
+
+pub const REG_NOTIFY_CHANGE_NAME: ::DWORD = 0x00000001;
+pub const REG_NOTIFY_CHANGE_ATTRIBUTES: ::DWORD = 0x00000002;
+pub const REG_NOTIFY_CHANGE_LAST_SET: ::DWORD = 0x00000004;
+pub const REG_NOTIFY_CHANGE_SECURITY: ::DWORD = 0x00000008;
+
+pub const REG_LEGAL_CHANGE_FILTER: ::DWORD = REG_NOTIFY_CHANGE_NAME |
+    REG_NOTIFY_CHANGE_ATTRIBUTES |
+    REG_NOTIFY_CHANGE_LAST_SET |
+    REG_NOTIFY_CHANGE_SECURITY;
+
+pub const REG_NOTIFY_THREAD_AGNOSTIC: ::DWORD = 0x10000000; //supported only on Windows 8 and later
+
+pub const REG_OPTION_RESERVED: ::DWORD = 0x00000000;
+pub const REG_OPTION_NON_VOLATILE: ::DWORD = 0x00000000;
+pub const REG_OPTION_VOLATILE: ::DWORD = 0x00000001;
+pub const REG_OPTION_CREATE_LINK: ::DWORD = 0x00000002;
+pub const REG_OPTION_BACKUP_RESTORE: ::DWORD = 0x00000004;
+pub const REG_OPTION_OPEN_LINK: ::DWORD = 0x00000008;
+
+pub const REG_NONE: ::DWORD = 0;
+pub const REG_SZ: ::DWORD = 1;
+pub const REG_EXPAND_SZ: ::DWORD = 2;
+pub const REG_BINARY: ::DWORD = 3;
+pub const REG_DWORD: ::DWORD = 4;
+pub const REG_DWORD_LITTLE_ENDIAN: ::DWORD = 4;
+pub const REG_DWORD_BIG_ENDIAN: ::DWORD = 5;
+pub const REG_LINK: ::DWORD = 6;
+pub const REG_MULTI_SZ: ::DWORD = 7;
+pub const REG_RESOURCE_LIST: ::DWORD = 8;
+pub const REG_FULL_RESOURCE_DESCRIPTOR: ::DWORD = 9;
+pub const REG_RESOURCE_REQUIREMENTS_LIST: ::DWORD = 10;
+pub const REG_QWORD: ::DWORD = 11;
+pub const REG_QWORD_LITTLE_ENDIAN: ::DWORD = 11;
 //18720
 pub const SERVICE_KERNEL_DRIVER: ::DWORD = 0x00000001;
 pub const SERVICE_FILE_SYSTEM_DRIVER: ::DWORD = 0x00000002;
