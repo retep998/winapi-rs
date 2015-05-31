@@ -126,6 +126,7 @@ macro_rules! RIDL {
             pub lpVtbl: *const $vtbl
         }
         impl $interface {
+            #[inline]
             $(pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
                 ((*self.lpVtbl).$method)(self $(,$p)*)
             })+
@@ -149,17 +150,20 @@ macro_rules! RIDL {
             pub lpVtbl: *const $vtbl
         }
         impl $interface {
+            #[inline]
             $(pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
                 ((*self.lpVtbl).$method)(self $(,$p)*)
             })+
         }
         impl ::std::ops::Deref for $interface {
             type Target = ::$pinterface;
+            #[inline]
             fn deref(&self) -> &::$pinterface {
                 unsafe { ::std::mem::transmute(self) }
             }
         }
         impl ::std::ops::DerefMut for $interface {
+            #[inline]
             fn deref_mut(&mut self) -> &mut ::$pinterface {
                 unsafe { ::std::mem::transmute(self) }
             }
