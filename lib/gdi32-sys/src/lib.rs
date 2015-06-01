@@ -430,7 +430,9 @@ extern "system" {
     // pub fn OffsetViewportOrgEx();
     // pub fn OffsetWindowOrgEx();
     // pub fn PaintRgn();
-    // pub fn PatBlt();
+    pub fn PatBlt(
+        hdc: HDC, nXLeft: c_int, nYLeft: c_int, nWidth: c_int, nHeight: c_int, dwRop: DWORD
+    ) -> BOOL;
     // pub fn PathToRegion();
     pub fn Pie(
         hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nBottomRect: c_int, nXRadial1: c_int,
@@ -539,7 +541,12 @@ extern "system" {
     // pub fn StartFormPage();
     // pub fn StartPage();
     // pub fn StretchBlt();
-    // pub fn StretchDIBits();
+    pub fn StretchDIBits(
+        hdc: HDC, XDest: c_int, YDest: c_int, nDestWidth: c_int,
+        nDestHeight: c_int, XSrc: c_int, YSrc: c_int, nSrcWidth: c_int,
+        nSrcHeight: c_int, lpBits: *const VOID, lpBitsInfo: *const BITMAPINFO,
+        iUsage: UINT, dwRop: DWORD
+    ) -> c_int;
     // pub fn StrokeAndFillPath();
     // pub fn StrokePath();
     pub fn SwapBuffers(hdc: HDC) -> BOOL;
