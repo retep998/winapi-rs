@@ -1,6 +1,6 @@
 [package]
 name = "ktmw32-sys"
-version = "0.0.1"
+version = "0.1.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to ktmw32."
 documentation = "https://retep998.github.io/doc/ktmw32-sys/"
