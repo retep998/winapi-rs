@@ -5,14 +5,27 @@
 extern crate winapi;
 use winapi::*;
 extern "system" {
-    // pub fn FreeAddrInfoEx();
-    // pub fn FreeAddrInfoExW();
-    // pub fn FreeAddrInfoW();
-    // pub fn GetAddrInfoExA();
-    // pub fn GetAddrInfoExCancel();
-    // pub fn GetAddrInfoExOverlappedResult();
-    // pub fn GetAddrInfoExW();
-    // pub fn GetAddrInfoW();
+    pub fn FreeAddrInfoEx(pAddrInfoEx: PADDRINFOEXA);
+    pub fn FreeAddrInfoExW(pAddrInfoEx: PADDRINFOEXW);
+    pub fn FreeAddrInfoW(pAddrInfo: PADDRINFOW);
+    pub fn GetAddrInfoExA(
+        pName: PCSTR, pServiceName: PCSTR, dwNameSpace: DWORD, lpNspId: LPGUID,
+        hints: *const ADDRINFOEXA, ppResult: *mut PADDRINFOEXA, timeout: *mut timeval,
+        lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE,
+        lpNameHandle: LPHANDLE,
+    ) -> INT;
+    pub fn GetAddrInfoExCancel(lpHandle: LPHANDLE) -> INT;
+    pub fn GetAddrInfoExOverlappedResult(lpOverlapped: LPOVERLAPPED) -> INT;
+    pub fn GetAddrInfoExW(
+        pName: PCWSTR, pServiceName: PCWSTR, dwNameSpace: DWORD, lpNspId: LPGUID,
+        hints: *const ADDRINFOEXW, ppResult: *mut PADDRINFOEXW, timeout: *mut timeval,
+        lpOverlapped: LPOVERLAPPED, lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE,
+        lpNameHandle: LPHANDLE,
+    ) -> INT;
+    pub fn GetAddrInfoW(
+        pNodeName: PCWSTR, pServiceName: PCWSTR, pHints: *const ADDRINFOW,
+        ppResult: *mut PADDRINFOW,
+    ) -> INT;
     // pub fn GetHostNameW();
     // pub fn GetNameInfoW();
     // pub fn InetNtopW();
@@ -147,13 +160,15 @@ extern "system" {
     // pub fn WahRemoveHandleContext();
     // pub fn WahWaitForNotification();
     // pub fn WahWriteLSPEvent();
-    // pub fn __WSAFDIsSet();
+    pub fn __WSAFDIsSet(fd: SOCKET, _: *mut fd_set) -> c_int;
     // pub fn accept();
     // pub fn bind();
     // pub fn closesocket();
     // pub fn connect();
-    // pub fn freeaddrinfo();
-    // pub fn getaddrinfo();
+    pub fn freeaddrinfo(pAddrInfo: PADDRINFOA);
+    pub fn getaddrinfo(
+        pNodeName: PCSTR, pServiceName: PCSTR, pHints: *const ADDRINFOA, ppResult: *mut PADDRINFOA,
+    ) -> INT;
     // pub fn gethostbyaddr();
     // pub fn gethostbyname();
     // pub fn gethostname();

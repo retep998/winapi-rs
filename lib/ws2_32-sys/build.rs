@@ -1,5 +1,6 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
+extern crate build;
 fn main() {
-    println!("cargo:rustc-link-lib=dylib=s2_32");
+    build::link("ws2_32", false)
 }

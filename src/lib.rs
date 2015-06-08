@@ -36,6 +36,7 @@ pub use d3d9caps::*;
 pub use d3d9types::*;
 pub use dwmapi::*;
 pub use fileapi::*;
+pub use inaddr::*;
 pub use libloaderapi::*;
 pub use minwinbase::*;
 pub use minwindef::*;
@@ -63,8 +64,10 @@ pub use winioctl::*;
 pub use winnetwk::*;
 pub use winnls::*;
 pub use winnt::*;
+pub use winsock2::*;
 pub use winsvc::*;
 pub use winuser::*;
+pub use ws2def::*;
 pub use wtypesbase::*;
 //-------------------------------------------------------------------------------------------------
 // Macros
@@ -181,6 +184,7 @@ pub mod d3d9caps;
 pub mod d3d9types;
 pub mod dwmapi;
 pub mod fileapi;
+pub mod inaddr;
 pub mod libloaderapi;
 pub mod minwinbase;
 pub mod minwindef;
@@ -208,8 +212,10 @@ pub mod winioctl;
 pub mod winnetwk;
 pub mod winnls;
 pub mod winnt;
+pub mod winsock2;
 pub mod winsvc;
 pub mod winuser;
+pub mod ws2def;
 pub mod wtypesbase;
 //-------------------------------------------------------------------------------------------------
 // Primitive types not defined by libc
