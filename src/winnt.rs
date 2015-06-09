@@ -159,11 +159,16 @@ pub struct OBJECTID {
     pub Lineage: ::GUID,
     pub Uniquifier: ::DWORD,
 }
+pub const MINCHAR: ::CHAR = 0x80u8 as ::CHAR;
+pub const MAXCHAR: ::CHAR = 0x7f;
 //1300
 pub type PEXCEPTION_ROUTINE = Option<unsafe extern "system" fn(
     ExceptionRecord: *mut EXCEPTION_RECORD, EstablisherFrame: PVOID, ContextRecord: *mut CONTEXT,
     DispatcherContext: PVOID,
 ) -> ::EXCEPTION_DISPOSITION>;
+//2273
+pub const MAXIMUM_WAIT_OBJECTS: ::DWORD = 64;
+pub const MAXIMUM_SUSPEND_COUNT: ::CHAR = MAXCHAR;
 //2277
 pub type KSPIN_LOCK = ::ULONG_PTR;
 pub type PKSPIN_LOCK = *mut KSPIN_LOCK;
@@ -804,10 +809,27 @@ pub type PAPCFUNC = Option<unsafe extern "system" fn(Parameter: ::ULONG_PTR)>;
 pub type PVECTORED_EXCEPTION_HANDLER = Option<unsafe extern "system" fn(
     ExceptionInfo: *mut EXCEPTION_POINTERS,
 ) -> ::LONG>;
-//18264
+//18243
+pub const WT_EXECUTEDEFAULT: ::ULONG = 0x00000000;
+pub const WT_EXECUTEINIOTHREAD: ::ULONG = 0x00000001;
+pub const WT_EXECUTEINUITHREAD: ::ULONG = 0x00000002;
+pub const WT_EXECUTEINWAITTHREAD: ::ULONG = 0x00000004;
+pub const WT_EXECUTEONLYONCE: ::ULONG = 0x00000008;
+pub const WT_EXECUTEINTIMERTHREAD: ::ULONG = 0x00000020;
+pub const WT_EXECUTELONGFUNCTION: ::ULONG = 0x00000010;
+pub const WT_EXECUTEINPERSISTENTIOTHREAD: ::ULONG = 0x00000040;
+pub const WT_EXECUTEINPERSISTENTTHREAD: ::ULONG = 0x00000080;
+pub const WT_TRANSFER_IMPERSONATION: ::ULONG = 0x00000100;
+pub type WAITORTIMERCALLBACKFUNC = Option<unsafe extern "system" fn(::PVOID, ::BOOLEAN)>;
+pub type WORKERCALLBACKFUNC = Option<unsafe extern "system" fn(::PVOID)>;
+pub type APC_CALLBACK_FUNCTION = Option<unsafe extern "system" fn(::DWORD, ::PVOID, ::PVOID)>;
+pub type WAITORTIMERCALLBACK = WAITORTIMERCALLBACKFUNC;
+pub type PFLS_CALLBACK_FUNCTION = Option<unsafe extern "system" fn(lpFlsData: ::PVOID)>;
 pub type PSECURE_MEMORY_CACHE_CALLBACK = Option<unsafe extern "system" fn(
     Addr: ::PVOID, Range: ::SIZE_T,
 ) -> ::BOOLEAN>;
+pub const WT_EXECUTEINLONGTHREAD: ::ULONG = 0x00000010;
+pub const WT_EXECUTEDELETEWAIT: ::ULONG = 0x00000008;
 //18570
 pub const KEY_QUERY_VALUE: ::REGSAM = 0x0001;
 pub const KEY_SET_VALUE: ::REGSAM = 0x0002;

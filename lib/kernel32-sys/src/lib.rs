@@ -215,10 +215,22 @@ extern "system" {
     // pub fn CreateProcessW();
     // pub fn CreateRemoteThread();
     // pub fn CreateRemoteThreadEx();
-    // pub fn CreateSemaphoreA();
-    // pub fn CreateSemaphoreExA();
-    // pub fn CreateSemaphoreExW();
-    // pub fn CreateSemaphoreW();
+    pub fn CreateSemaphoreA(
+        lpSemaphoreAttributes: LPSECURITY_ATTRIBUTES, lInitialCount: LONG, lMaximumCount: LONG,
+        lpName: LPCSTR,
+    ) -> HANDLE;
+    pub fn CreateSemaphoreExA(
+        lpSemaphoreAttributes: LPSECURITY_ATTRIBUTES, lInitialCount: LONG, lMaximumCount: LONG,
+        lpName: LPCSTR, dwFlags: DWORD, dwDesiredAccess: DWORD,
+    ) -> HANDLE;
+    pub fn CreateSemaphoreExW(
+        lpSemaphoreAttributes: LPSECURITY_ATTRIBUTES, lInitialCount: LONG, lMaximumCount: LONG,
+        lpName: LPCWSTR, dwFlags: DWORD, dwDesiredAccess: DWORD,
+    ) -> HANDLE;
+    pub fn CreateSemaphoreW(
+        lpSemaphoreAttributes: LPSECURITY_ATTRIBUTES, lInitialCount: LONG, lMaximumCount: LONG,
+        lpName: LPCWSTR,
+    ) -> HANDLE;
     // pub fn CreateSymbolicLinkA();
     // pub fn CreateSymbolicLinkTransactedA();
     // pub fn CreateSymbolicLinkTransactedW();
@@ -1094,8 +1106,8 @@ extern "system" {
     // pub fn OpenPrivateNamespaceA();
     // pub fn OpenPrivateNamespaceW();
     pub fn OpenProcess(dwDesiredAccess: DWORD, bInheritHandle: BOOL, dwProcessId: DWORD) -> HANDLE;
-    // pub fn OpenSemaphoreA();
-    // pub fn OpenSemaphoreW();
+    pub fn OpenSemaphoreA(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCSTR) -> HANDLE;
+    pub fn OpenSemaphoreW(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR) -> HANDLE;
     // pub fn OpenState();
     // pub fn OpenStateExplicit();
     // pub fn OpenThread();
@@ -1242,7 +1254,10 @@ extern "system" {
     // pub fn RegisterApplicationRestart();
     // pub fn RegisterBadMemoryNotification();
     // pub fn RegisterWaitForInputIdle();
-    // pub fn RegisterWaitForSingleObject();
+    pub fn RegisterWaitForSingleObject(
+        phNewWaitObject: PHANDLE, hObject: HANDLE, Callback: WAITORTIMERCALLBACK, Context: PVOID,
+        dwMilliseconds: ULONG, dwFlags: ULONG,
+    ) -> BOOL;
     // pub fn RegisterWaitForSingleObjectEx();
     // pub fn RegisterWaitUntilOOBECompleted();
     // pub fn ReleaseActCtx();
@@ -1250,7 +1265,9 @@ extern "system" {
     // pub fn ReleaseMutexWhenCallbackReturns();
     // pub fn ReleaseSRWLockExclusive();
     // pub fn ReleaseSRWLockShared();
-    // pub fn ReleaseSemaphore();
+    pub fn ReleaseSemaphore(
+        hSemaphore: HANDLE, lReleaseCount: LONG, lpPreviousCount: LPLONG,
+    ) -> BOOL;
     // pub fn ReleaseSemaphoreWhenCallbackReturns();
     pub fn RemoveDirectoryA(lpPathName: LPCSTR) -> BOOL;
     // pub fn RemoveDirectoryTransactedA();
@@ -1521,8 +1538,8 @@ extern "system" {
     // pub fn UnregisterApplicationRecoveryCallback();
     // pub fn UnregisterApplicationRestart();
     // pub fn UnregisterBadMemoryNotification();
-    // pub fn UnregisterWait();
-    // pub fn UnregisterWaitEx();
+    pub fn UnregisterWait(WaitHandle: HANDLE) -> BOOL;
+    pub fn UnregisterWaitEx(WaitHandle: HANDLE, CompletionEvent: HANDLE) -> BOOL;
     // pub fn UnregisterWaitUntilOOBECompleted();
     // pub fn UpdateProcThreadAttribute();
     // pub fn UpdateResourceA();
