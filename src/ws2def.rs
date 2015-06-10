@@ -90,7 +90,7 @@ pub struct SOCKET_ADDRESS {
 }
 pub type PSOCKET_ADDRESS = *mut SOCKET_ADDRESS;
 pub type LPSOCKET_ADDRESS = *mut SOCKET_ADDRESS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
+#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
 pub struct SOCKET_ADDRESS_LIST {
     pub iAddressCount: ::INT,
     pub Address: [SOCKET_ADDRESS; 0],

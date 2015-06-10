@@ -547,11 +547,11 @@ pub const RI_KEY_E0: ::DWORD = 2;
 pub const RI_KEY_E1: ::DWORD = 4;
 pub const RI_KEY_TERMSRV_SET_LED: ::DWORD = 8;
 pub const RI_KEY_TERMSRV_SHADOW: ::DWORD = 0x10;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
+#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
 pub struct RAWHID {
     pub dwSizeHid: ::DWORD,
     pub dwCount: ::DWORD,
-    pub bRawData: [::BYTE; 0], // FIXME unsized array
+    pub bRawData: [::BYTE; 0],
 }
 pub type PRAWHID = *mut RAWHID;
 pub type LPRAWHID = *mut RAWHID;

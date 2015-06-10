@@ -2,6 +2,7 @@
 // Licensed under the MIT License <LICENSE.md>
 //! Types and constants for WinAPI bindings.
 #![allow(bad_style, raw_pointer_derive)]
+#![warn(missing_copy_implementations, trivial_casts, trivial_numeric_casts)]
 #![warn(unused_qualifications, unused)]
 #![cfg(windows)]
 //-------------------------------------------------------------------------------------------------
@@ -117,14 +118,14 @@ macro_rules! RIDL {
             fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
         ),+}
     ) => {
-        #[repr(C)]
+        #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $vtbl {
             $(pub $method: unsafe extern "system" fn(
                 This: *mut $interface
                 $(,$p: $t)*
             ) -> $rtr),+
         }
-        #[repr(C)] #[derive(Debug)]
+        #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
@@ -140,7 +141,7 @@ macro_rules! RIDL {
             fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
         ),+}
     ) => {
-        #[repr(C)]
+        #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $vtbl {
             pub parent: ::$pvtbl
             $(,pub $method: unsafe extern "system" fn(
@@ -148,7 +149,7 @@ macro_rules! RIDL {
                 $(,$p: $t)*
             ) -> $rtr)+
         }
-        #[repr(C)] #[derive(Debug)]
+        #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
@@ -868,9 +869,7 @@ pub struct ServerInformation {
     pub ui64ServerAddress: UINT64,
 }
 pub type PServerInformation = *mut ServerInformation;
-#[repr(C)]
-pub struct CO_MTA_USAGE_COOKIE__;
-pub type CO_MTA_USAGE_COOKIE = *mut CO_MTA_USAGE_COOKIE__;
+DECLARE_HANDLE!(CO_MTA_USAGE_COOKIE, CO_MTA_USAGE_COOKIE__);
 
 //-------------------------------------------------------------------------------------------------
 // playsoundapi.h

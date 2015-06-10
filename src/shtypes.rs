@@ -1,14 +1,14 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
-#[repr(C)] #[derive(Clone, Copy, Debug)]
+#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
 pub struct SHITEMID {
     pub cb: ::USHORT,
     pub abID: [::BYTE; 0],
 }
 pub type LPSHITEMID = *mut SHITEMID;
 pub type LPCSHITEMID = *const SHITEMID;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
+#[repr(C)] #[derive(Debug)]
 pub struct ITEMIDLIST {
     pub mkid: SHITEMID,
 }

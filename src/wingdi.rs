@@ -142,10 +142,10 @@ pub const BI_RLE4: ::DWORD = 2;
 pub const BI_BITFIELDS: ::DWORD = 3;
 pub const BI_JPEG: ::DWORD = 4;
 pub const BI_PNG: ::DWORD = 5;
-#[repr(C)] // no Clone, Copy, or Debug because last field is special
+#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
 pub struct BITMAPINFO {
     pub bmiHeader: BITMAPINFOHEADER,
-    pub bmiColors: [RGBQUAD; 1usize],
+    pub bmiColors: [RGBQUAD; 0],
 }
 pub type LPBITMAPINFO = *mut BITMAPINFO;
 pub type PBITMAPINFO = *mut BITMAPINFO;
@@ -199,17 +199,29 @@ pub fn RGB (r: ::BYTE, g: ::BYTE, b: ::BYTE) -> ::COLORREF {
 pub const DIB_RGB_COLORS: ::UINT = 0;
 pub const DIB_PAL_COLORS: ::UINT = 1;
 
-// this type is weird because it's a hacky "unsized type"
-#[repr(C)]
-pub struct RGNDATA;
-
-#[repr(C)]
-#[derive(Copy, Clone)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RGNDATAHEADER {
+    pub dwSize: ::DWORD,
+    pub iType: ::DWORD,
+    pub nCount: ::DWORD,
+    pub nRgnSize: ::DWORD,
+    pub rcBound: ::RECT,
+}
+pub type PRGNDATAHEADER = *mut RGNDATAHEADER;
+#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
+pub struct RGNDATA {
+    pub rdh: RGNDATAHEADER,
+    pub Buffer: [::c_char; 0],
+}
+pub type PRGNDATA = *mut RGNDATA;
+pub type NPRGNDATA = *mut RGNDATA;
+pub type LPRGNDATA = *mut RGNDATA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PALETTEENTRY {
-    peRed: ::BYTE,
-    peGreen: ::BYTE,
-    peBlue: ::BYTE,
-    peFlags: ::BYTE
+    pub peRed: ::BYTE,
+    pub peGreen: ::BYTE,
+    pub peBlue: ::BYTE,
+    pub peFlags: ::BYTE
 }
 
 //3581

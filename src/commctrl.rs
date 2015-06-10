@@ -1,6 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //138
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct INITCOMMONCONTROLSEX {
 	pub dwSize: ::DWORD,
 	pub dwICC: ::DWORD,

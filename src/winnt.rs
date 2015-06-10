@@ -423,7 +423,7 @@ pub const TOKEN_WRITE: ::DWORD = STANDARD_RIGHTS_WRITE | TOKEN_ADJUST_PRIVILEGES
     | TOKEN_ADJUST_GROUPS | TOKEN_ADJUST_DEFAULT;
 pub const TOKEN_EXECUTE: ::DWORD = STANDARD_RIGHTS_EXECUTE;
 //10823
-#[repr(C)] #[derive(Clone, Copy, Debug)]
+#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
 pub struct TOKEN_PRIVILEGES {
     pub PrivilegeCount: ::DWORD,
     pub Privileges: [LUID_AND_ATTRIBUTES; 0],
@@ -544,7 +544,7 @@ pub struct JOBOBJECT_EXTENDED_LIMIT_INFORMATION {
     pub PeakJobMemoryUsed: ::SIZE_T,
 }
 pub type PJOBOBJECT_EXTENDED_LIMIT_INFORMATION = *mut JOBOBJECT_EXTENDED_LIMIT_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
+#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
 pub struct JOBOBJECT_BASIC_PROCESS_ID_LIST {
     pub NumberOfAssignedProcesses: ::DWORD,
     pub NumberOfProcessIdsInList: ::DWORD,
@@ -771,7 +771,7 @@ pub struct FILE_ID_128 {
     pub Identifier: [::BYTE; 16],
 }
 pub type PFILE_ID_128 = *mut FILE_ID_128;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
+#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
 pub struct FILE_NOTIFY_INFORMATION {
     pub NextEntryOffset: ::DWORD,
     pub Action: ::DWORD,
