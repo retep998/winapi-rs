@@ -16,9 +16,7 @@ pub struct fd_set {
     pub fd_count: u_int,
     pub fd_array: [SOCKET; FD_SETSIZE],
 }
-impl Clone for fd_set {
-    fn clone(&self) -> fd_set { *self }
-}
+impl Clone for fd_set { fn clone(&self) -> fd_set { *self } }
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct timeval {
     pub tv_sec: ::c_long,
