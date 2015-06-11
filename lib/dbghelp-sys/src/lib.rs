@@ -48,7 +48,15 @@ extern "system" {
     // pub fn SetCheckUserInterruptShared();
     // pub fn SetSymLoadError();
     // pub fn StackWalk();
-    // pub fn StackWalk64();
+    pub fn StackWalk64(MachineType: DWORD,
+                       hProcess: HANDLE,
+                       hThread: HANDLE,
+                       StackFrame: LPSTACKFRAME64,
+                       ContextRecord: PVOID,
+                       ReadMemoryRoutine: PREAD_PROCESS_MEMORY_ROUTINE64,
+                       FunctionTableAccessRoutine: PFUNCTION_TABLE_ACCESS_ROUTINE64,
+                       GetModuleBaseRoutine: PGET_MODULE_BASE_ROUTINE64,
+                       TranslateAddress: PTRANSLATE_ADDRESS_ROUTINE64) -> BOOL;
     // pub fn StackWalkEx();
     // pub fn SymAddSourceStream();
     // pub fn SymAddSourceStreamA();
@@ -56,7 +64,7 @@ extern "system" {
     // pub fn SymAddSymbol();
     // pub fn SymAddSymbolW();
     // pub fn SymAddrIncludeInlineTrace();
-    // pub fn SymCleanup();
+    pub fn SymCleanup(hProcess: HANDLE) -> BOOL;
     // pub fn SymCompareInlineTrace();
     // pub fn SymDeleteSymbol();
     // pub fn SymDeleteSymbolW();
@@ -93,7 +101,10 @@ extern "system" {
     // pub fn SymFindFileInPath();
     // pub fn SymFindFileInPathW();
     // pub fn SymFromAddr();
-    // pub fn SymFromAddrW();
+    pub fn SymFromAddrW(hProcess: HANDLE,
+                        Address: DWORD64,
+                        Displacement: PDWORD64,
+                        Symbol: PSYMBOL_INFOW) -> BOOL;
     // pub fn SymFromIndex();
     // pub fn SymFromIndexW();
     // pub fn SymFromInlineContext();
@@ -103,7 +114,7 @@ extern "system" {
     // pub fn SymFromToken();
     // pub fn SymFromTokenW();
     // pub fn SymFunctionTableAccess();
-    // pub fn SymFunctionTableAccess64();
+    pub fn SymFunctionTableAccess64(hProcess: HANDLE, AddrBase: DWORD64) -> PVOID;
     // pub fn SymFunctionTableAccess64AccessRoutines();
     // pub fn SymGetFileLineOffsets64();
     // pub fn SymGetHomeDirectory();
@@ -111,6 +122,10 @@ extern "system" {
     // pub fn SymGetLineFromAddr();
     // pub fn SymGetLineFromAddr64();
     // pub fn SymGetLineFromAddrW64();
+    pub fn SymGetLineFromAddrW64(hProcess: HANDLE,
+                                 dwAddr: DWORD64,
+                                 pdwDisplacement: PDWORD,
+                                 Line: PIMAGEHLP_LINEW64) -> BOOL;
     // pub fn SymGetLineFromInlineContext();
     // pub fn SymGetLineFromInlineContextW();
     // pub fn SymGetLineFromName();
@@ -122,7 +137,7 @@ extern "system" {
     // pub fn SymGetLinePrev();
     // pub fn SymGetLinePrev64();
     // pub fn SymGetLinePrevW64();
-    // pub fn SymGetModuleBase();
+    pub fn SymGetModuleBase64(hProcess: HANDLE, AddrBase: DWORD64) -> DWORD64;
     // pub fn SymGetModuleBase64();
     // pub fn SymGetModuleInfo();
     // pub fn SymGetModuleInfo64();
@@ -143,7 +158,10 @@ extern "system" {
     // pub fn SymGetSourceVarFromToken();
     // pub fn SymGetSourceVarFromTokenW();
     // pub fn SymGetSymFromAddr();
-    // pub fn SymGetSymFromAddr64();
+    pub fn SymGetSymFromAddr64(hProcess: HANDLE,
+                               Address: DWORD64,
+                               Displacement: PDWORD64,
+                               Symbol: PIMAGEHLP_SYMBOL64) -> BOOL;
     // pub fn SymGetSymFromName();
     // pub fn SymGetSymFromName64();
     // pub fn SymGetSymNext();
@@ -158,7 +176,9 @@ extern "system" {
     // pub fn SymGetTypeInfoEx();
     // pub fn SymGetUnwindInfo();
     // pub fn SymInitialize();
-    // pub fn SymInitializeW();
+    pub fn SymInitializeW(hProcess: HANDLE,
+                          UserSearchPath: PCWSTR,
+                          fInvadeProcess: BOOL) -> BOOL;
     // pub fn SymLoadModule();
     // pub fn SymLoadModule64();
     // pub fn SymLoadModuleEx();

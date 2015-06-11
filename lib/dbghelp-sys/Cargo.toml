@@ -16,5 +16,6 @@ name = "dbghelp"
 
 [dependencies]
 winapi = { version = "*", path = "../.." }
+
 [build-dependencies]
 winapi-build = { version = "*", path = "../../build" }
