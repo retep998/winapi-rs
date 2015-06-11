@@ -1294,7 +1294,7 @@ extern "system" {
     // pub fn ResumeThread();
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
     // pub fn RtlAddFunctionTable();
-    // pub fn RtlCaptureContext();
+    pub fn RtlCaptureContext(ContextRecord: PCONTEXT);
     // pub fn RtlCaptureStackBackTrace();
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
     // pub fn RtlCompareMemory();
