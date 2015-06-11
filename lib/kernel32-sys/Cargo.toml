@@ -1,6 +1,6 @@
 [package]
 name = "kernel32-sys"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to kernel32."
 documentation = "https://retep998.github.io/doc/kernel32-sys/"
@@ -14,6 +14,7 @@ links = "kernel32"
 [lib]
 name = "kernel32"
 
-[dependencies.winapi]
-version = "*"
-path = "../.."
+[dependencies]
+winapi = { version = "*", path = "../.." }
+[build-dependencies]
+winapi-build = { version = "*", path = "../../build" }
