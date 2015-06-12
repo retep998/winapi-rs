@@ -28,6 +28,7 @@ pub use libc::{
     wchar_t,
     c_float,
     c_double,
+    size_t,
 };
 pub use audioclient::*;
 pub use basetsd::*;

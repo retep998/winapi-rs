@@ -7,32 +7,55 @@ use winapi::*;
 extern "system" {
     // pub fn DbgHelpCreateUserDump();
     // pub fn DbgHelpCreateUserDumpW();
-    // pub fn EnumDirTree();
-    // pub fn EnumDirTreeW();
+    pub fn EnumDirTree(
+        hProcess: HANDLE, RootPath: PCSTR, InputPathName: PCSTR, OutputPathBuffer: PSTR,
+        cb: PENUMDIRTREE_CALLBACK, data: PVOID,
+    ) -> BOOL;
+    pub fn EnumDirTreeW(
+        hProcess: HANDLE, RootPath: PCWSTR, InputPathName: PCWSTR, OutputPathBuffer: PWSTR,
+        cb: PENUMDIRTREE_CALLBACKW, data: PVOID,
+    ) -> BOOL;
     // pub fn EnumerateLoadedModules();
     // pub fn EnumerateLoadedModules64();
     // pub fn EnumerateLoadedModulesEx();
     // pub fn EnumerateLoadedModulesExW();
     // pub fn EnumerateLoadedModulesW64();
     // pub fn ExtensionApiVersion();
-    // pub fn FindDebugInfoFile();
-    // pub fn FindDebugInfoFileEx();
-    // pub fn FindDebugInfoFileExW();
-    // pub fn FindExecutableImage();
-    // pub fn FindExecutableImageEx();
-    // pub fn FindExecutableImageExW();
+    pub fn FindDebugInfoFile(FileName: PCSTR, SymbolPath: PCSTR, DebugFilePath: PSTR) -> HANDLE;
+    pub fn FindDebugInfoFileEx(
+        FileName: PCSTR, SymbolPath: PCSTR, DebugFilePath: PSTR,
+        Callback: PFIND_DEBUG_FILE_CALLBACK, CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn FindDebugInfoFileExW(
+        FileName: PCWSTR, SymbolPath: PCWSTR, DebugFilePath: PWSTR,
+        Callback: PFIND_DEBUG_FILE_CALLBACKW, CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn FindExecutableImage(FileName: PCSTR, SymbolPath: PCSTR, ImageFilePath: PSTR) -> HANDLE;
+    pub fn FindExecutableImageEx(
+        FileName: PCSTR, SymbolPath: PCSTR, ImageFilePath: PSTR, Callback: PFIND_EXE_FILE_CALLBACK,
+        CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn FindExecutableImageExW(
+        FileName: PCWSTR, SymbolPath: PCWSTR, ImageFilePath: PWSTR,
+        Callback: PFIND_EXE_FILE_CALLBACKW, CallerData: PVOID,
+    ) -> HANDLE;
     // pub fn FindFileInPath();
     // pub fn FindFileInSearchPath();
     // pub fn GetSymLoadError();
-    // pub fn GetTimestampForLoadedLibrary();
-    // pub fn ImageDirectoryEntryToData();
-    // pub fn ImageDirectoryEntryToDataEx();
-    // pub fn ImageNtHeader();
+    pub fn GetTimestampForLoadedLibrary(Module: HMODULE) -> DWORD;
+    pub fn ImageDirectoryEntryToData(
+        Base: PVOID, MappedAsImage: BOOLEAN, DirectoryEntry: USHORT, Size: PULONG,
+    ) -> PVOID;
+    pub fn ImageDirectoryEntryToDataEx(
+        Base: PVOID, MappedAsImage: BOOLEAN, DirectoryEntry: USHORT, Size: PULONG,
+        FoundHeader: *mut PIMAGE_SECTION_HEADER,
+    ) -> PVOID;
+    pub fn ImageNtHeader(Base: PVOID) -> PIMAGE_NT_HEADERS;
     // pub fn ImageRvaToSection();
     // pub fn ImageRvaToVa();
-    // pub fn ImagehlpApiVersion();
-    // pub fn ImagehlpApiVersionEx();
-    // pub fn MakeSureDirectoryPathExists();
+    pub fn ImagehlpApiVersion() -> LPAPI_VERSION;
+    pub fn ImagehlpApiVersionEx(AppVersion: LPAPI_VERSION) -> LPAPI_VERSION;
+    pub fn MakeSureDirectoryPathExists(DirPath: PCSTR) -> BOOL;
     // pub fn MiniDumpReadDumpStream();
     // pub fn MiniDumpWriteDump();
     // pub fn RangeMapAddPeImageSections();
@@ -43,21 +66,28 @@ extern "system" {
     // pub fn RangeMapWrite();
     // pub fn RemoveInvalidModuleList();
     // pub fn ReportSymbolLoadSummary();
-    // pub fn SearchTreeForFile();
-    // pub fn SearchTreeForFileW();
+    pub fn SearchTreeForFile(
+        RootPath: PCSTR, InputPathName: PCSTR, OutputPathBuffer: PSTR,
+    ) -> BOOL;
+    pub fn SearchTreeForFileW(
+        RootPath: PCWSTR, InputPathName: PCWSTR, OutputPathBuffer: PWSTR,
+    ) -> BOOL;
     // pub fn SetCheckUserInterruptShared();
     // pub fn SetSymLoadError();
-    // pub fn StackWalk();
-    pub fn StackWalk64(MachineType: DWORD,
-                       hProcess: HANDLE,
-                       hThread: HANDLE,
-                       StackFrame: LPSTACKFRAME64,
-                       ContextRecord: PVOID,
-                       ReadMemoryRoutine: PREAD_PROCESS_MEMORY_ROUTINE64,
-                       FunctionTableAccessRoutine: PFUNCTION_TABLE_ACCESS_ROUTINE64,
-                       GetModuleBaseRoutine: PGET_MODULE_BASE_ROUTINE64,
-                       TranslateAddress: PTRANSLATE_ADDRESS_ROUTINE64) -> BOOL;
-    // pub fn StackWalkEx();
+    pub fn StackWalk64(
+        MachineType: DWORD, hProcess: HANDLE, hThread: HANDLE, StackFrame: LPSTACKFRAME64,
+        ContextRecord: PVOID, ReadMemoryRoutine: PREAD_PROCESS_MEMORY_ROUTINE64,
+        FunctionTableAccessRoutine: PFUNCTION_TABLE_ACCESS_ROUTINE64,
+        GetModuleBaseRoutine: PGET_MODULE_BASE_ROUTINE64,
+        TranslateAddress: PTRANSLATE_ADDRESS_ROUTINE64,
+    ) -> BOOL;
+    pub fn StackWalkEx(
+        MachineType: DWORD, hProcess: HANDLE, hThread: HANDLE, StackFrame: LPSTACKFRAME64,
+        ContextRecord: PVOID, ReadMemoryRoutine: PREAD_PROCESS_MEMORY_ROUTINE64,
+        FunctionTableAccessRoutine: PFUNCTION_TABLE_ACCESS_ROUTINE64,
+        GetModuleBaseRoutine: PGET_MODULE_BASE_ROUTINE64,
+        TranslateAddress: PTRANSLATE_ADDRESS_ROUTINE64, Flags: DWORD,
+    ) -> BOOL;
     // pub fn SymAddSourceStream();
     // pub fn SymAddSourceStreamA();
     // pub fn SymAddSourceStreamW();
@@ -94,17 +124,35 @@ extern "system" {
     // pub fn SymEnumerateSymbols64();
     // pub fn SymEnumerateSymbolsW();
     // pub fn SymEnumerateSymbolsW64();
-    // pub fn SymFindDebugInfoFile();
-    // pub fn SymFindDebugInfoFileW();
-    // pub fn SymFindExecutableImage();
-    // pub fn SymFindExecutableImageW();
-    // pub fn SymFindFileInPath();
-    // pub fn SymFindFileInPathW();
+    pub fn SymFindDebugInfoFile(
+        hProcess: HANDLE, FileName: PCSTR, DebugFilePath: PSTR,
+        Callback: PFIND_DEBUG_FILE_CALLBACK, CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn SymFindDebugInfoFileW(
+        hProcess: HANDLE, FileName: PCWSTR, DebugFilePath: PWSTR,
+        Callback: PFIND_DEBUG_FILE_CALLBACKW, CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn SymFindExecutableImage(
+        hProcess: HANDLE, FileName: PCSTR, ImageFilePath: PSTR, Callback: PFIND_EXE_FILE_CALLBACK,
+        CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn SymFindExecutableImageW(
+        hProcess: HANDLE, FileName: PCWSTR, ImageFilePath: PWSTR,
+        Callback: PFIND_EXE_FILE_CALLBACKW, CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn SymFindFileInPath(
+        hprocess: HANDLE, SearchPath: PCSTR, FileName: PCSTR, id: PVOID, two: DWORD, three: DWORD,
+        flags: DWORD, FoundFile: PSTR, callback: PFINDFILEINPATHCALLBACK, context: PVOID,
+    ) -> BOOL;
+    pub fn SymFindFileInPathW(
+        hprocess: HANDLE, SearchPath: PCWSTR, FileName: PCWSTR, id: PVOID, two: DWORD,
+        three: DWORD, flags: DWORD, FoundFile: PWSTR, callback: PFINDFILEINPATHCALLBACKW,
+        context: PVOID,
+    ) -> BOOL;
     // pub fn SymFromAddr();
-    pub fn SymFromAddrW(hProcess: HANDLE,
-                        Address: DWORD64,
-                        Displacement: PDWORD64,
-                        Symbol: PSYMBOL_INFOW) -> BOOL;
+    pub fn SymFromAddrW(
+        hProcess: HANDLE, Address: DWORD64, Displacement: PDWORD64, Symbol: PSYMBOL_INFOW,
+    ) -> BOOL;
     // pub fn SymFromIndex();
     // pub fn SymFromIndexW();
     // pub fn SymFromInlineContext();
@@ -121,11 +169,9 @@ extern "system" {
     // pub fn SymGetHomeDirectoryW();
     // pub fn SymGetLineFromAddr();
     // pub fn SymGetLineFromAddr64();
-    // pub fn SymGetLineFromAddrW64();
-    pub fn SymGetLineFromAddrW64(hProcess: HANDLE,
-                                 dwAddr: DWORD64,
-                                 pdwDisplacement: PDWORD,
-                                 Line: PIMAGEHLP_LINEW64) -> BOOL;
+    pub fn SymGetLineFromAddrW64(
+        hProcess: HANDLE, dwAddr: DWORD64, pdwDisplacement: PDWORD, Line: PIMAGEHLP_LINEW64,
+    ) -> BOOL;
     // pub fn SymGetLineFromInlineContext();
     // pub fn SymGetLineFromInlineContextW();
     // pub fn SymGetLineFromName();
@@ -137,8 +183,8 @@ extern "system" {
     // pub fn SymGetLinePrev();
     // pub fn SymGetLinePrev64();
     // pub fn SymGetLinePrevW64();
+    // pub fn SymGetModuleBase();
     pub fn SymGetModuleBase64(hProcess: HANDLE, AddrBase: DWORD64) -> DWORD64;
-    // pub fn SymGetModuleBase64();
     // pub fn SymGetModuleInfo();
     // pub fn SymGetModuleInfo64();
     // pub fn SymGetModuleInfoW();
@@ -158,10 +204,9 @@ extern "system" {
     // pub fn SymGetSourceVarFromToken();
     // pub fn SymGetSourceVarFromTokenW();
     // pub fn SymGetSymFromAddr();
-    pub fn SymGetSymFromAddr64(hProcess: HANDLE,
-                               Address: DWORD64,
-                               Displacement: PDWORD64,
-                               Symbol: PIMAGEHLP_SYMBOL64) -> BOOL;
+    pub fn SymGetSymFromAddr64(
+        hProcess: HANDLE, Address: DWORD64, Displacement: PDWORD64, Symbol: PIMAGEHLP_SYMBOL64,
+    ) -> BOOL;
     // pub fn SymGetSymFromName();
     // pub fn SymGetSymFromName64();
     // pub fn SymGetSymNext();
@@ -176,9 +221,7 @@ extern "system" {
     // pub fn SymGetTypeInfoEx();
     // pub fn SymGetUnwindInfo();
     // pub fn SymInitialize();
-    pub fn SymInitializeW(hProcess: HANDLE,
-                          UserSearchPath: PCWSTR,
-                          fInvadeProcess: BOOL) -> BOOL;
+    pub fn SymInitializeW(hProcess: HANDLE, UserSearchPath: PCWSTR, fInvadeProcess: BOOL) -> BOOL;
     // pub fn SymLoadModule();
     // pub fn SymLoadModule64();
     // pub fn SymLoadModuleEx();
@@ -231,8 +274,12 @@ extern "system" {
     // pub fn SymUnDName64();
     // pub fn SymUnloadModule();
     // pub fn SymUnloadModule64();
-    // pub fn UnDecorateSymbolName();
-    // pub fn UnDecorateSymbolNameW();
+    pub fn UnDecorateSymbolName(
+        name: PCSTR, outputString: PSTR, maxStringLength: DWORD, flags: DWORD,
+    ) -> DWORD;
+    pub fn UnDecorateSymbolNameW(
+        name: PCWSTR, outputString: PWSTR, maxStringLength: DWORD, flags: DWORD,
+    ) -> DWORD;
     // pub fn WinDbgExtensionDllInit();
     // pub fn block();
     // pub fn chksym();
@@ -254,8 +301,20 @@ extern "system" {
     // pub fn symsrv();
     // pub fn vc7fpo();
 }
+#[cfg(target_arch = "x86")]
+extern "system" {
+    pub fn StackWalk(
+        MachineType: DWORD, hProcess: HANDLE, hThread: HANDLE, StackFrame: LPSTACKFRAME,
+        ContextRecord: PVOID, ReadMemoryRoutine: PREAD_PROCESS_MEMORY_ROUTINE,
+        FunctionTableAccessRoutine: PFUNCTION_TABLE_ACCESS_ROUTINE,
+        GetModuleBaseRoutine: PGET_MODULE_BASE_ROUTINE,
+        TranslateAddress: PTRANSLATE_ADDRESS_ROUTINE,
+    ) -> BOOL;
+}
 #[cfg(any(target_arch = "x86", target_arch = "arm"))]
 extern "system" {
-    // pub fn MapDebugInformation();
-    // pub fn UnmapDebugInformation();
+    pub fn MapDebugInformation(
+        FileHandle: HANDLE, FileName: PCSTR, SymbolPath: PCSTR, ImageBase: ULONG,
+    ) -> PIMAGE_DEBUG_INFORMATION;
+    pub fn UnmapDebugInformation(DebugInfo: PIMAGE_DEBUG_INFORMATION) -> BOOL;
 }

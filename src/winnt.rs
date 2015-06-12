@@ -268,8 +268,11 @@ pub struct CONTEXT {
 }
 #[cfg(target_arch = "x86")]
 impl Clone for CONTEXT { fn clone(&self) -> CONTEXT { *self } }
+#[cfg(target_arch = "x86_64")]
+pub type XMM_SAVE_AREA32 = XSAVE_FORMAT;
+pub type PXMM_SAVE_AREA32 = *mut XSAVE_FORMAT;
 // FIXME - Align 16
-#[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Clone, Copy, Debug)]
+#[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Clone, Copy)]
 pub struct CONTEXT {
     pub P1Home: ::DWORD64,
     pub P2Home: ::DWORD64,
@@ -309,24 +312,7 @@ pub struct CONTEXT {
     pub R14: ::DWORD64,
     pub R15: ::DWORD64,
     pub Rip: ::DWORD64,
-    pub Header: [::M128A; 2],
-    pub Legacy: [::M128A; 8],
-    pub Xmm0: ::M128A,
-    pub Xmm1: ::M128A,
-    pub Xmm2: ::M128A,
-    pub Xmm3: ::M128A,
-    pub Xmm4: ::M128A,
-    pub Xmm5: ::M128A,
-    pub Xmm6: ::M128A,
-    pub Xmm7: ::M128A,
-    pub Xmm8: ::M128A,
-    pub Xmm9: ::M128A,
-    pub Xmm10: ::M128A,
-    pub Xmm11: ::M128A,
-    pub Xmm12: ::M128A,
-    pub Xmm13: ::M128A,
-    pub Xmm14: ::M128A,
-    pub Xmm15: ::M128A,
+    pub FltSave: XMM_SAVE_AREA32,
     pub VectorRegister: [::M128A; 26],
     pub VectorControl: ::DWORD64,
     pub DebugControl: ::DWORD64,
@@ -336,6 +322,15 @@ pub struct CONTEXT {
     pub LastExceptionFromRip: ::DWORD64,
 }
 pub type PCONTEXT = *mut CONTEXT;
+#[test]
+fn test_CONTEXT_size() {
+    use std::mem::size_of;
+    if cfg!(target_arch = "x86_64") {
+        assert_eq!(size_of::<CONTEXT>(), 1232)
+    } else if cfg!(target_arch = "x86") {
+        assert_eq!(size_of::<CONTEXT>(), 716)
+    }
+}
 //8983
 pub const EXCEPTION_MAXIMUM_PARAMETERS: usize = 15;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
@@ -798,6 +793,405 @@ pub const IO_REPARSE_TAG_DEDUP: ::DWORD = 0x80000013;
 pub const IO_REPARSE_TAG_NFS: ::DWORD = 0x80000014;
 pub const IO_REPARSE_TAG_FILE_PLACEHOLDER: ::DWORD = 0x80000015;
 pub const IO_REPARSE_TAG_WOF: ::DWORD = 0x80000017;
+//15000
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_FILE_HEADER {
+    pub Machine: ::WORD,
+    pub NumberOfSections: ::WORD,
+    pub TimeDateStamp: ::DWORD,
+    pub PointerToSymbolTable: ::DWORD,
+    pub NumberOfSymbols: ::DWORD,
+    pub SizeOfOptionalHeader: ::WORD,
+    pub Characteristics: ::WORD,
+}
+pub type PIMAGE_FILE_HEADER = *mut IMAGE_FILE_HEADER;
+pub const IMAGE_SIZEOF_FILE_HEADER: usize = 20;
+pub const IMAGE_FILE_RELOCS_STRIPPED: ::WORD = 0x0001;
+pub const IMAGE_FILE_EXECUTABLE_IMAGE: ::WORD = 0x0002;
+pub const IMAGE_FILE_LINE_NUMS_STRIPPED: ::WORD = 0x0004;
+pub const IMAGE_FILE_LOCAL_SYMS_STRIPPED: ::WORD = 0x0008;
+pub const IMAGE_FILE_AGGRESIVE_WS_TRIM: ::WORD = 0x0010;
+pub const IMAGE_FILE_LARGE_ADDRESS_AWARE: ::WORD = 0x0020;
+pub const IMAGE_FILE_BYTES_REVERSED_LO: ::WORD = 0x0080;
+pub const IMAGE_FILE_32BIT_MACHINE: ::WORD = 0x0100;
+pub const IMAGE_FILE_DEBUG_STRIPPED: ::WORD = 0x0200;
+pub const IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP: ::WORD = 0x0400;
+pub const IMAGE_FILE_NET_RUN_FROM_SWAP: ::WORD = 0x0800;
+pub const IMAGE_FILE_SYSTEM: ::WORD = 0x1000;
+pub const IMAGE_FILE_DLL: ::WORD = 0x2000;
+pub const IMAGE_FILE_UP_SYSTEM_ONLY: ::WORD = 0x4000;
+pub const IMAGE_FILE_BYTES_REVERSED_HI: ::WORD = 0x8000;
+pub const IMAGE_FILE_MACHINE_UNKNOWN: ::WORD = 0;
+pub const IMAGE_FILE_MACHINE_I386: ::WORD = 0x014c;
+pub const IMAGE_FILE_MACHINE_R3000: ::WORD = 0x0162;
+pub const IMAGE_FILE_MACHINE_R4000: ::WORD = 0x0166;
+pub const IMAGE_FILE_MACHINE_R10000: ::WORD = 0x0168;
+pub const IMAGE_FILE_MACHINE_WCEMIPSV2: ::WORD = 0x0169;
+pub const IMAGE_FILE_MACHINE_ALPHA: ::WORD = 0x0184;
+pub const IMAGE_FILE_MACHINE_SH3: ::WORD = 0x01a2;
+pub const IMAGE_FILE_MACHINE_SH3DSP: ::WORD = 0x01a3;
+pub const IMAGE_FILE_MACHINE_SH3E: ::WORD = 0x01a4;
+pub const IMAGE_FILE_MACHINE_SH4: ::WORD = 0x01a6;
+pub const IMAGE_FILE_MACHINE_SH5: ::WORD = 0x01a8;
+pub const IMAGE_FILE_MACHINE_ARM: ::WORD = 0x01c0;
+pub const IMAGE_FILE_MACHINE_THUMB: ::WORD = 0x01c2;
+pub const IMAGE_FILE_MACHINE_ARMNT: ::WORD = 0x01c4;
+pub const IMAGE_FILE_MACHINE_AM33: ::WORD = 0x01d3;
+pub const IMAGE_FILE_MACHINE_POWERPC: ::WORD = 0x01F0;
+pub const IMAGE_FILE_MACHINE_POWERPCFP: ::WORD = 0x01f1;
+pub const IMAGE_FILE_MACHINE_IA64: ::WORD = 0x0200;
+pub const IMAGE_FILE_MACHINE_MIPS16: ::WORD = 0x0266;
+pub const IMAGE_FILE_MACHINE_ALPHA64: ::WORD = 0x0284;
+pub const IMAGE_FILE_MACHINE_MIPSFPU: ::WORD = 0x0366;
+pub const IMAGE_FILE_MACHINE_MIPSFPU16: ::WORD = 0x0466;
+pub const IMAGE_FILE_MACHINE_AXP64: ::WORD = IMAGE_FILE_MACHINE_ALPHA64;
+pub const IMAGE_FILE_MACHINE_TRICORE: ::WORD = 0x0520;
+pub const IMAGE_FILE_MACHINE_CEF: ::WORD = 0x0CEF;
+pub const IMAGE_FILE_MACHINE_EBC: ::WORD = 0x0EBC;
+pub const IMAGE_FILE_MACHINE_AMD64: ::WORD = 0x8664;
+pub const IMAGE_FILE_MACHINE_M32R: ::WORD = 0x9041;
+pub const IMAGE_FILE_MACHINE_CEE: ::WORD = 0xC0EE;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_DATA_DIRECTORY {
+    pub VirtualAddress: ::DWORD,
+    pub Size: ::DWORD,
+}
+pub type PIMAGE_DATA_DIRECTORY = *mut IMAGE_DATA_DIRECTORY;
+pub const IMAGE_NUMBEROF_DIRECTORY_ENTRIES: usize = 16;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_OPTIONAL_HEADER32 {
+    pub Magic: ::WORD,
+    pub MajorLinkerVersion: ::BYTE,
+    pub MinorLinkerVersion: ::BYTE,
+    pub SizeOfCode: ::DWORD,
+    pub SizeOfInitializedData: ::DWORD,
+    pub SizeOfUninitializedData: ::DWORD,
+    pub AddressOfEntryPoint: ::DWORD,
+    pub BaseOfCode: ::DWORD,
+    pub BaseOfData: ::DWORD,
+    pub ImageBase: ::DWORD,
+    pub SectionAlignment: ::DWORD,
+    pub FileAlignment: ::DWORD,
+    pub MajorOperatingSystemVersion: ::WORD,
+    pub MinorOperatingSystemVersion: ::WORD,
+    pub MajorImageVersion: ::WORD,
+    pub MinorImageVersion: ::WORD,
+    pub MajorSubsystemVersion: ::WORD,
+    pub MinorSubsystemVersion: ::WORD,
+    pub Win32VersionValue: ::DWORD,
+    pub SizeOfImage: ::DWORD,
+    pub SizeOfHeaders: ::DWORD,
+    pub CheckSum: ::DWORD,
+    pub Subsystem: ::WORD,
+    pub DllCharacteristics: ::WORD,
+    pub SizeOfStackReserve: ::DWORD,
+    pub SizeOfStackCommit: ::DWORD,
+    pub SizeOfHeapReserve: ::DWORD,
+    pub SizeOfHeapCommit: ::DWORD,
+    pub LoaderFlags: ::DWORD,
+    pub NumberOfRvaAndSizes: ::DWORD,
+    pub DataDirectory: [IMAGE_DATA_DIRECTORY; IMAGE_NUMBEROF_DIRECTORY_ENTRIES],
+}
+pub type PIMAGE_OPTIONAL_HEADER32 = *mut IMAGE_OPTIONAL_HEADER32;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_ROM_OPTIONAL_HEADER {
+    pub Magic: ::WORD,
+    pub MajorLinkerVersion: ::BYTE,
+    pub MinorLinkerVersion: ::BYTE,
+    pub SizeOfCode: ::DWORD,
+    pub SizeOfInitializedData: ::DWORD,
+    pub SizeOfUninitializedData: ::DWORD,
+    pub AddressOfEntryPoint: ::DWORD,
+    pub BaseOfCode: ::DWORD,
+    pub BaseOfData: ::DWORD,
+    pub BaseOfBss: ::DWORD,
+    pub GprMask: ::DWORD,
+    pub CprMask: [::DWORD; 4],
+    pub GpValue: ::DWORD,
+}
+pub type PIMAGE_ROM_OPTIONAL_HEADER = *mut IMAGE_ROM_OPTIONAL_HEADER;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_OPTIONAL_HEADER64 {
+    pub Magic: ::WORD,
+    pub MajorLinkerVersion: ::BYTE,
+    pub MinorLinkerVersion: ::BYTE,
+    pub SizeOfCode: ::DWORD,
+    pub SizeOfInitializedData: ::DWORD,
+    pub SizeOfUninitializedData: ::DWORD,
+    pub AddressOfEntryPoint: ::DWORD,
+    pub BaseOfCode: ::DWORD,
+    pub ImageBase: ::ULONGLONG,
+    pub SectionAlignment: ::DWORD,
+    pub FileAlignment: ::DWORD,
+    pub MajorOperatingSystemVersion: ::WORD,
+    pub MinorOperatingSystemVersion: ::WORD,
+    pub MajorImageVersion: ::WORD,
+    pub MinorImageVersion: ::WORD,
+    pub MajorSubsystemVersion: ::WORD,
+    pub MinorSubsystemVersion: ::WORD,
+    pub Win32VersionValue: ::DWORD,
+    pub SizeOfImage: ::DWORD,
+    pub SizeOfHeaders: ::DWORD,
+    pub CheckSum: ::DWORD,
+    pub Subsystem: ::WORD,
+    pub DllCharacteristics: ::WORD,
+    pub SizeOfStackReserve: ULONGLONG,
+    pub SizeOfStackCommit: ULONGLONG,
+    pub SizeOfHeapReserve: ULONGLONG,
+    pub SizeOfHeapCommit: ULONGLONG,
+    pub LoaderFlags: ::DWORD,
+    pub NumberOfRvaAndSizes: ::DWORD,
+    pub DataDirectory: [IMAGE_DATA_DIRECTORY; IMAGE_NUMBEROF_DIRECTORY_ENTRIES],
+}
+pub type PIMAGE_OPTIONAL_HEADER64 = *mut IMAGE_OPTIONAL_HEADER64;
+pub const IMAGE_NT_OPTIONAL_HDR32_MAGIC: ::WORD = 0x10b;
+pub const IMAGE_NT_OPTIONAL_HDR64_MAGIC: ::WORD = 0x20b;
+pub const IMAGE_ROM_OPTIONAL_HDR_MAGIC: ::WORD = 0x107;
+#[cfg(target_arch = "x86_64")]
+pub type IMAGE_OPTIONAL_HEADER = IMAGE_OPTIONAL_HEADER64;
+#[cfg(target_arch = "x86_64")]
+pub type PIMAGE_OPTIONAL_HEADER = PIMAGE_OPTIONAL_HEADER64;
+#[cfg(target_arch = "x86")]
+pub type IMAGE_OPTIONAL_HEADER = IMAGE_OPTIONAL_HEADER32;
+#[cfg(target_arch = "x86")]
+pub type PIMAGE_OPTIONAL_HEADER = PIMAGE_OPTIONAL_HEADER32;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_NT_HEADERS64 {
+    pub Signature: ::DWORD,
+    pub FileHeader: IMAGE_FILE_HEADER,
+    pub OptionalHeader: IMAGE_OPTIONAL_HEADER64,
+}
+pub type PIMAGE_NT_HEADERS64 = *mut IMAGE_NT_HEADERS64;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_NT_HEADERS32 {
+    pub Signature: ::DWORD,
+    pub FileHeader: IMAGE_FILE_HEADER,
+    pub OptionalHeader: IMAGE_OPTIONAL_HEADER32,
+}
+pub type PIMAGE_NT_HEADERS32 = *mut IMAGE_NT_HEADERS32;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_ROM_HEADERS {
+    pub FileHeader: IMAGE_FILE_HEADER,
+    pub OptionalHeader: IMAGE_ROM_OPTIONAL_HEADER,
+}
+pub type PIMAGE_ROM_HEADERS = *mut IMAGE_ROM_HEADERS;
+#[cfg(target_arch = "x86_64")]
+pub type IMAGE_NT_HEADERS = IMAGE_NT_HEADERS64;
+#[cfg(target_arch = "x86_64")]
+pub type PIMAGE_NT_HEADERS = PIMAGE_NT_HEADERS64;
+#[cfg(target_arch = "x86")]
+pub type IMAGE_NT_HEADERS = IMAGE_NT_HEADERS32;
+#[cfg(target_arch = "x86")]
+pub type PIMAGE_NT_HEADERS = PIMAGE_NT_HEADERS32;
+pub const IMAGE_SUBSYSTEM_UNKNOWN: ::WORD = 0;
+pub const IMAGE_SUBSYSTEM_NATIVE: ::WORD = 1;
+pub const IMAGE_SUBSYSTEM_WINDOWS_GUI: ::WORD = 2;
+pub const IMAGE_SUBSYSTEM_WINDOWS_CUI: ::WORD = 3;
+pub const IMAGE_SUBSYSTEM_OS2_CUI: ::WORD = 5;
+pub const IMAGE_SUBSYSTEM_POSIX_CUI: ::WORD = 7;
+pub const IMAGE_SUBSYSTEM_NATIVE_WINDOWS: ::WORD = 8;
+pub const IMAGE_SUBSYSTEM_WINDOWS_CE_GUI: ::WORD = 9;
+pub const IMAGE_SUBSYSTEM_EFI_APPLICATION: ::WORD = 10;
+pub const IMAGE_SUBSYSTEM_EFI_BOOT_SERVICE_DRIVER: ::WORD = 11;
+pub const IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER: ::WORD = 12;
+pub const IMAGE_SUBSYSTEM_EFI_ROM: ::WORD = 13;
+pub const IMAGE_SUBSYSTEM_XBOX: ::WORD = 14;
+pub const IMAGE_SUBSYSTEM_WINDOWS_BOOT_APPLICATION: ::WORD = 16;
+pub const IMAGE_DLLCHARACTERISTICS_HIGH_ENTROPY_VA: ::WORD = 0x0020;
+pub const IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE: ::WORD = 0x0040;
+pub const IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY: ::WORD = 0x0080;
+pub const IMAGE_DLLCHARACTERISTICS_NX_COMPAT: ::WORD = 0x0100;
+pub const IMAGE_DLLCHARACTERISTICS_NO_ISOLATION: ::WORD = 0x0200;
+pub const IMAGE_DLLCHARACTERISTICS_NO_SEH: ::WORD = 0x0400;
+pub const IMAGE_DLLCHARACTERISTICS_NO_BIND: ::WORD = 0x0800;
+pub const IMAGE_DLLCHARACTERISTICS_APPCONTAINER: ::WORD = 0x1000;
+pub const IMAGE_DLLCHARACTERISTICS_WDM_DRIVER: ::WORD = 0x2000;
+pub const IMAGE_DLLCHARACTERISTICS_GUARD_CF: ::WORD = 0x4000;
+pub const IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE: ::WORD = 0x8000;
+pub const IMAGE_DIRECTORY_ENTRY_EXPORT: ::WORD = 0;
+pub const IMAGE_DIRECTORY_ENTRY_IMPORT: ::WORD = 1;
+pub const IMAGE_DIRECTORY_ENTRY_RESOURCE: ::WORD = 2;
+pub const IMAGE_DIRECTORY_ENTRY_EXCEPTION: ::WORD = 3;
+pub const IMAGE_DIRECTORY_ENTRY_SECURITY: ::WORD = 4;
+pub const IMAGE_DIRECTORY_ENTRY_BASERELOC: ::WORD = 5;
+pub const IMAGE_DIRECTORY_ENTRY_DEBUG: ::WORD = 6;
+pub const IMAGE_DIRECTORY_ENTRY_ARCHITECTURE: ::WORD = 7;
+pub const IMAGE_DIRECTORY_ENTRY_GLOBALPTR: ::WORD = 8;
+pub const IMAGE_DIRECTORY_ENTRY_TLS: ::WORD = 9;
+pub const IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG: ::WORD = 10;
+pub const IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT: ::WORD = 11;
+pub const IMAGE_DIRECTORY_ENTRY_IAT: ::WORD = 12;
+pub const IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT: ::WORD = 13;
+pub const IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR: ::WORD = 14;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ANON_OBJECT_HEADER {
+    pub Sig1: ::WORD,
+    pub Sig2: ::WORD,
+    pub Version: ::WORD,
+    pub Machine: ::WORD,
+    pub TimeDateStamp: ::DWORD,
+    pub ClassID: ::CLSID,
+    pub SizeOfData: ::DWORD,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ANON_OBJECT_HEADER_V2 {
+    pub Sig1: ::WORD,
+    pub Sig2: ::WORD,
+    pub Version: ::WORD,
+    pub Machine: ::WORD,
+    pub TimeDateStamp: ::DWORD,
+    pub ClassID: ::CLSID,
+    pub SizeOfData: ::DWORD,
+    pub Flags: ::DWORD,
+    pub MetaDataSize: ::DWORD,
+    pub MetaDataOffset: ::DWORD,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ANON_OBJECT_HEADER_BIGOBJ {
+    pub Sig1: ::WORD,
+    pub Sig2: ::WORD,
+    pub Version: ::WORD,
+    pub Machine: ::WORD,
+    pub TimeDateStamp: ::DWORD,
+    pub ClassID: ::CLSID,
+    pub SizeOfData: ::DWORD,
+    pub Flags: ::DWORD,
+    pub MetaDataSize: ::DWORD,
+    pub MetaDataOffset: ::DWORD,
+    pub NumberOfSections: ::DWORD,
+    pub PointerToSymbolTable: ::DWORD,
+    pub NumberOfSymbols: ::DWORD,
+}
+pub const IMAGE_SIZEOF_SHORT_NAME: usize = 8;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_SECTION_HEADER {
+    pub Name: [::BYTE; IMAGE_SIZEOF_SHORT_NAME],
+    pub PhysicalAddressOrVirtualSize: ::DWORD,
+    pub VirtualAddress: ::DWORD,
+    pub SizeOfRawData: ::DWORD,
+    pub PointerToRawData: ::DWORD,
+    pub PointerToRelocations: ::DWORD,
+    pub PointerToLinenumbers: ::DWORD,
+    pub NumberOfRelocations: ::WORD,
+    pub NumberOfLinenumbers: ::WORD,
+    pub Characteristics: ::DWORD,
+}
+pub type PIMAGE_SECTION_HEADER = *mut IMAGE_SECTION_HEADER;
+pub const IMAGE_SIZEOF_SECTION_HEADER: usize = 40;
+pub const IMAGE_SCN_TYPE_NO_PAD: ::DWORD = 0x00000008;
+pub const IMAGE_SCN_CNT_CODE: ::DWORD = 0x00000020;
+pub const IMAGE_SCN_CNT_INITIALIZED_DATA: ::DWORD = 0x00000040;
+pub const IMAGE_SCN_CNT_UNINITIALIZED_DATA: ::DWORD = 0x00000080;
+pub const IMAGE_SCN_LNK_OTHER: ::DWORD = 0x00000100;
+pub const IMAGE_SCN_LNK_INFO: ::DWORD = 0x00000200;
+pub const IMAGE_SCN_LNK_REMOVE: ::DWORD = 0x00000800;
+pub const IMAGE_SCN_LNK_COMDAT: ::DWORD = 0x00001000;
+pub const IMAGE_SCN_NO_DEFER_SPEC_EXC: ::DWORD = 0x00004000;
+pub const IMAGE_SCN_GPREL: ::DWORD = 0x00008000;
+pub const IMAGE_SCN_MEM_FARDATA: ::DWORD = 0x00008000;
+pub const IMAGE_SCN_MEM_PURGEABLE: ::DWORD = 0x00020000;
+pub const IMAGE_SCN_MEM_16BIT: ::DWORD = 0x00020000;
+pub const IMAGE_SCN_MEM_LOCKED: ::DWORD = 0x00040000;
+pub const IMAGE_SCN_MEM_PRELOAD: ::DWORD = 0x00080000;
+pub const IMAGE_SCN_ALIGN_1BYTES: ::DWORD = 0x00100000;
+pub const IMAGE_SCN_ALIGN_2BYTES: ::DWORD = 0x00200000;
+pub const IMAGE_SCN_ALIGN_4BYTES: ::DWORD = 0x00300000;
+pub const IMAGE_SCN_ALIGN_8BYTES: ::DWORD = 0x00400000;
+pub const IMAGE_SCN_ALIGN_16BYTES: ::DWORD = 0x00500000;
+pub const IMAGE_SCN_ALIGN_32BYTES: ::DWORD = 0x00600000;
+pub const IMAGE_SCN_ALIGN_64BYTES: ::DWORD = 0x00700000;
+pub const IMAGE_SCN_ALIGN_128BYTES: ::DWORD = 0x00800000;
+pub const IMAGE_SCN_ALIGN_256BYTES: ::DWORD = 0x00900000;
+pub const IMAGE_SCN_ALIGN_512BYTES: ::DWORD = 0x00A00000;
+pub const IMAGE_SCN_ALIGN_1024BYTES: ::DWORD = 0x00B00000;
+pub const IMAGE_SCN_ALIGN_2048BYTES: ::DWORD = 0x00C00000;
+pub const IMAGE_SCN_ALIGN_4096BYTES: ::DWORD = 0x00D00000;
+pub const IMAGE_SCN_ALIGN_8192BYTES: ::DWORD = 0x00E00000;
+pub const IMAGE_SCN_ALIGN_MASK: ::DWORD = 0x00F00000;
+pub const IMAGE_SCN_LNK_NRELOC_OVFL: ::DWORD = 0x01000000;
+pub const IMAGE_SCN_MEM_DISCARDABLE: ::DWORD = 0x02000000;
+pub const IMAGE_SCN_MEM_NOT_CACHED: ::DWORD = 0x04000000;
+pub const IMAGE_SCN_MEM_NOT_PAGED: ::DWORD = 0x08000000;
+pub const IMAGE_SCN_MEM_SHARED: ::DWORD = 0x10000000;
+pub const IMAGE_SCN_MEM_EXECUTE: ::DWORD = 0x20000000;
+pub const IMAGE_SCN_MEM_READ: ::DWORD = 0x40000000;
+pub const IMAGE_SCN_MEM_WRITE: ::DWORD = 0x80000000;
+pub const IMAGE_SCN_SCALE_INDEX: ::DWORD = 0x00000001;
+//16590
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_DEBUG_DIRECTORY {
+    pub Characteristics: ::DWORD,
+    pub TimeDateStamp: ::DWORD,
+    pub MajorVersion: ::WORD,
+    pub MinorVersion: ::WORD,
+    pub Type: ::DWORD,
+    pub SizeOfData: ::DWORD,
+    pub AddressOfRawData: ::DWORD,
+    pub PointerToRawData: ::DWORD,
+}
+pub type PIMAGE_DEBUG_DIRECTORY = *mut IMAGE_DEBUG_DIRECTORY;
+pub const IMAGE_DEBUG_TYPE_UNKNOWN: ::DWORD = 0;
+pub const IMAGE_DEBUG_TYPE_COFF: ::DWORD = 1;
+pub const IMAGE_DEBUG_TYPE_CODEVIEW: ::DWORD = 2;
+pub const IMAGE_DEBUG_TYPE_FPO: ::DWORD = 3;
+pub const IMAGE_DEBUG_TYPE_MISC: ::DWORD = 4;
+pub const IMAGE_DEBUG_TYPE_EXCEPTION: ::DWORD = 5;
+pub const IMAGE_DEBUG_TYPE_FIXUP: ::DWORD = 6;
+pub const IMAGE_DEBUG_TYPE_OMAP_TO_SRC: ::DWORD = 7;
+pub const IMAGE_DEBUG_TYPE_OMAP_FROM_SRC: ::DWORD = 8;
+pub const IMAGE_DEBUG_TYPE_BORLAND: ::DWORD = 9;
+pub const IMAGE_DEBUG_TYPE_RESERVED10: ::DWORD = 10;
+pub const IMAGE_DEBUG_TYPE_CLSID: ::DWORD = 11;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_COFF_SYMBOLS_HEADER {
+    pub NumberOfSymbols: ::DWORD,
+    pub LvaToFirstSymbol: ::DWORD,
+    pub NumberOfLinenumbers: ::DWORD,
+    pub LvaToFirstLinenumber: ::DWORD,
+    pub RvaToFirstByteOfCode: ::DWORD,
+    pub RvaToLastByteOfCode: ::DWORD,
+    pub RvaToFirstByteOfData: ::DWORD,
+    pub RvaToLastByteOfData: ::DWORD,
+}
+pub type PIMAGE_COFF_SYMBOLS_HEADER = *mut IMAGE_COFF_SYMBOLS_HEADER;
+pub const FRAME_FPO: ::WORD = 0;
+pub const FRAME_TRAP: ::WORD = 1;
+pub const FRAME_TSS: ::WORD = 2;
+pub const FRAME_NONFPO: ::WORD = 3;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct FPO_DATA {
+    pub ulOffStart: ::DWORD,
+    pub cbProcSize: ::DWORD,
+    pub cdwLocals: ::DWORD,
+    pub cdwParams: ::WORD,
+    pub bitfield: ::WORD,
+}
+pub type PFPO_DATA = *mut FPO_DATA;
+pub const SIZEOF_RFPO_DATA: usize = 16;
+pub const IMAGE_DEBUG_MISC_EXENAME: ::DWORD = 1;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_DEBUG_MISC {
+    pub DataType: ::DWORD,
+    pub Length: ::DWORD,
+    pub Unicode: ::BOOLEAN,
+    pub Reserved: [::BYTE; 3],
+    pub Data: [::BYTE; 0],
+}
+pub type PIMAGE_DEBUG_MISC = *mut IMAGE_DEBUG_MISC;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_FUNCTION_ENTRY {
+    pub StartingAddress: ::DWORD,
+    pub EndingAddress: ::DWORD,
+    pub EndOfPrologue: ::DWORD,
+}
+pub type PIMAGE_FUNCTION_ENTRY = *mut IMAGE_FUNCTION_ENTRY;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_FUNCTION_ENTRY64 {
+    pub StartingAddress: ::ULONGLONG,
+    pub EndingAddress: ::ULONGLONG,
+    pub EndOfPrologueOrUnwindInfoAddress: ::ULONGLONG,
+}
+pub type PIMAGE_FUNCTION_ENTRY64 = *mut IMAGE_FUNCTION_ENTRY64;
 //18195
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct RTL_SRWLOCK {
@@ -908,7 +1302,3 @@ pub const SERVICE_WIN32: ::DWORD = SERVICE_WIN32_OWN_PROCESS | SERVICE_WIN32_SHA
 pub const SERVICE_INTERACTIVE_PROCESS: ::DWORD = 0x00000100;
 pub const SERVICE_TYPE_ALL: ::DWORD = SERVICE_WIN32 | SERVICE_ADAPTER | SERVICE_DRIVER
     | SERVICE_INTERACTIVE_PROCESS;
-
-pub const IMAGE_FILE_MACHINE_I386: ::DWORD = 0x014c;
-pub const IMAGE_FILE_MACHINE_IA64: ::DWORD = 0x0200;
-pub const IMAGE_FILE_MACHINE_AMD64: ::DWORD = 0x8664;

@@ -31,6 +31,7 @@ Bindings to library functions are in separate crates. The source to each crate i
 These are the ones that actually have functions in them:
 * [advapi32-sys ![Crates.io](https://img.shields.io/crates/v/advapi32-sys.svg)](https://crates.io/crates/advapi32-sys)
 * [d3d9-sys ![Crates.io](https://img.shields.io/crates/v/d3d9-sys.svg)](https://crates.io/crates/d3d9-sys)
+* [dbghelp-sys ![Crates.io](https://img.shields.io/crates/v/dbghelp-sys.svg)](https://crates.io/crates/dbghelp-sys)
 * [dwmapi-sys ![Crates.io](https://img.shields.io/crates/v/dwmapi-sys.svg)](https://crates.io/crates/dwmapi-sys)
 * [gdi32-sys ![Crates.io](https://img.shields.io/crates/v/gdi32-sys.svg)](https://crates.io/crates/gdi32-sys)
 * [kernel32-sys ![Crates.io](https://img.shields.io/crates/v/kernel32-sys.svg)](https://crates.io/crates/kernel32-sys)
@@ -107,7 +108,6 @@ These are the ones that are reserved for future use:
 * [d3dcsxd-sys ![Crates.io](https://img.shields.io/crates/v/d3dcsxd-sys.svg)](https://crates.io/crates/d3dcsxd-sys)
 * [davclnt-sys ![Crates.io](https://img.shields.io/crates/v/davclnt-sys.svg)](https://crates.io/crates/davclnt-sys)
 * [dbgeng-sys ![Crates.io](https://img.shields.io/crates/v/dbgeng-sys.svg)](https://crates.io/crates/dbgeng-sys)
-* [dbghelp-sys ![Crates.io](https://img.shields.io/crates/v/dbghelp-sys.svg)](https://crates.io/crates/dbghelp-sys)
 * [dciman32-sys ![Crates.io](https://img.shields.io/crates/v/dciman32-sys.svg)](https://crates.io/crates/dciman32-sys)
 * [dcomp-sys ![Crates.io](https://img.shields.io/crates/v/dcomp-sys.svg)](https://crates.io/crates/dcomp-sys)
 * [ddraw-sys ![Crates.io](https://img.shields.io/crates/v/ddraw-sys.svg)](https://crates.io/crates/ddraw-sys)
