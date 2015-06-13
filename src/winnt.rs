@@ -1203,7 +1203,20 @@ pub type PAPCFUNC = Option<unsafe extern "system" fn(Parameter: ::ULONG_PTR)>;
 pub type PVECTORED_EXCEPTION_HANDLER = Option<unsafe extern "system" fn(
     ExceptionInfo: *mut EXCEPTION_POINTERS,
 ) -> ::LONG>;
-//18243
+#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
+pub enum HEAP_INFORMATION_CLASS {
+    HeapCompatibilityInformation = 0,
+    HeapEnableTerminationOnCorruption = 1,
+    HeapOptimizeResources = 3,
+}
+pub use self::HEAP_INFORMATION_CLASS::*;
+pub const HEAP_OPTIMIZE_RESOURCES_CURRENT_VERSION: ::DWORD = 1;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct HEAP_OPTIMIZE_RESOURCES_INFORMATION {
+    Version: ::DWORD,
+    Flags: ::DWORD,
+}
+pub type PHEAP_OPTIMIZE_RESOURCES_INFORMATION = *mut HEAP_OPTIMIZE_RESOURCES_INFORMATION;
 pub const WT_EXECUTEDEFAULT: ::ULONG = 0x00000000;
 pub const WT_EXECUTEINIOTHREAD: ::ULONG = 0x00000001;
 pub const WT_EXECUTEINUITHREAD: ::ULONG = 0x00000002;

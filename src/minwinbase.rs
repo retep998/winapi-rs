@@ -123,3 +123,23 @@ pub type LPOVERLAPPED_COMPLETION_ROUTINE = Option<unsafe extern "system" fn(
 )>;
 pub const LOCKFILE_FAIL_IMMEDIATELY: ::DWORD = 0x00000001;
 pub const LOCKFILE_EXCLUSIVE_LOCK: ::DWORD = 0x00000002;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct PROCESS_HEAP_ENTRY {
+    pub lpData: ::PVOID,
+    pub cbData: ::DWORD,
+    pub cbOverhead: ::BYTE,
+    pub iRegionIndex: ::BYTE,
+    pub wFlags: ::WORD,
+    pub dwCommittedSize: ::DWORD,
+    pub dwUnCommittedSize: ::DWORD,
+    pub lpFirstBlock: ::LPVOID,
+    pub lpLastBlock: ::LPVOID,
+}
+pub type LPPROCESS_HEAP_ENTRY = *mut PROCESS_HEAP_ENTRY;
+pub type PPROCESS_HEAP_ENTRY = *mut PROCESS_HEAP_ENTRY;
+pub const PROCESS_HEAP_REGION: ::WORD = 0x0001;
+pub const PROCESS_HEAP_UNCOMMITTED_RANGE: ::WORD = 0x0002;
+pub const PROCESS_HEAP_ENTRY_BUSY: ::WORD = 0x0004;
+pub const PROCESS_HEAP_SEG_ALLOC: ::WORD = 0x0008;
+pub const PROCESS_HEAP_ENTRY_MOVEABLE: ::WORD = 0x0010;
+pub const PROCESS_HEAP_ENTRY_DDESHARE: ::WORD = 0x0020;

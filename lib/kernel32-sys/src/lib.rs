@@ -735,8 +735,8 @@ extern "system" {
     // pub fn GetProcessDEPPolicy();
     // pub fn GetProcessGroupAffinity();
     // pub fn GetProcessHandleCount();
-    // pub fn GetProcessHeap();
-    // pub fn GetProcessHeaps();
+    pub fn GetProcessHeap() -> HANDLE;
+    pub fn GetProcessHeaps(NumberOfHeaps: DWORD, ProcessHeaps: PHANDLE) -> DWORD;
     // pub fn GetProcessId();
     // pub fn GetProcessIdOfThread();
     // pub fn GetProcessInformation();
@@ -906,20 +906,26 @@ extern "system" {
     // pub fn Heap32ListFirst();
     // pub fn Heap32ListNext();
     // pub fn Heap32Next();
-    // pub fn HeapAlloc();
-    // pub fn HeapCompact();
-    // pub fn HeapCreate();
-    // pub fn HeapDestroy();
-    // pub fn HeapFree();
-    // pub fn HeapLock();
-    // pub fn HeapQueryInformation();
-    // pub fn HeapReAlloc();
-    // pub fn HeapSetInformation();
-    // pub fn HeapSize();
-    // pub fn HeapSummary();
-    // pub fn HeapUnlock();
-    // pub fn HeapValidate();
-    // pub fn HeapWalk();
+    pub fn HeapAlloc(hHeap: HANDLE, dwFlags: DWORD, dwBytes: SIZE_T) -> LPVOID;
+    pub fn HeapCompact(hHeap: HANDLE, dwFlags: DWORD) -> SIZE_T;
+    pub fn HeapCreate(flOptions: DWORD, dwInitialSize: SIZE_T, dwMaximumSize: SIZE_T) -> HANDLE;
+    pub fn HeapDestroy(hHeap: HANDLE) -> BOOL;
+    pub fn HeapFree(hHeap: HANDLE, dwFlags: DWORD, lpMem: LPVOID) -> BOOL;
+    pub fn HeapLock(hHeap: HANDLE) -> BOOL;
+    pub fn HeapQueryInformation(
+        HeapHandle: HANDLE, HeapInformationClass: HEAP_INFORMATION_CLASS, HeapInformation: PVOID,
+        HeapInformationLength: SIZE_T, ReturnLength: PSIZE_T,
+    ) -> BOOL;
+    pub fn HeapReAlloc(hHeap: HANDLE, dwFlags: DWORD, lpMem: LPVOID, dwBytes: SIZE_T) -> LPVOID;
+    pub fn HeapSetInformation(
+        HeapHandle: HANDLE, HeapInformationClass: HEAP_INFORMATION_CLASS, HeapInformation: PVOID,
+        HeapInformationLength: SIZE_T,
+    ) -> BOOL;
+    pub fn HeapSize(hHeap: HANDLE, dwFlags: DWORD, lpMem: LPCVOID) -> SIZE_T;
+    pub fn HeapSummary(hHeap: HANDLE, dwFlags: DWORD, lpSummary: LPHEAP_SUMMARY) -> BOOL;
+    pub fn HeapUnlock(hHeap: HANDLE) -> BOOL;
+    pub fn HeapValidate(hHeap: HANDLE, dwFlags: DWORD, lpMem: LPCVOID) -> BOOL;
+    pub fn HeapWalk(hHeap: HANDLE, lpEntry: LPPROCESS_HEAP_ENTRY) -> BOOL;
     // pub fn InitAtomTable();
     // pub fn InitOnceBeginInitialize();
     // pub fn InitOnceComplete();
