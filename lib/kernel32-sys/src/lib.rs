@@ -590,7 +590,7 @@ extern "system" {
     // pub fn GetDllDirectoryA();
     // pub fn GetDllDirectoryW();
     pub fn GetDriveTypeA(lpRootPathName: LPCSTR) -> UINT;
-    pub fn GetDriveTypeW(lpRootPathName: LPCSTR) -> UINT;
+    pub fn GetDriveTypeW(lpRootPathName: LPWSTR) -> UINT;
     // pub fn GetDurationFormat();
     // pub fn GetDurationFormatEx();
     // pub fn GetDynamicTimeZoneInformation();
@@ -614,7 +614,7 @@ extern "system" {
     ) -> BOOL;
     // pub fn GetFileAttributesTransactedA();
     // pub fn GetFileAttributesTransactedW();
-    pub fn GetFileAttributesW(lpFileName: LPCSTR) -> DWORD;
+    pub fn GetFileAttributesW(lpFileName: LPWSTR) -> DWORD;
     // pub fn GetFileBandwidthReservation();
     pub fn GetFileInformationByHandle(hFile: HANDLE, lpFileInformation: LPBY_HANDLE_FILE_INFORMATION) -> BOOL;
     // pub fn GetFileInformationByHandleEx();
