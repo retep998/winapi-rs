@@ -223,6 +223,25 @@ pub struct PALETTEENTRY {
     pub peBlue: ::BYTE,
     pub peFlags: ::BYTE
 }
+//2824 (Win 7 SDK)
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ABC {
+    pub abcA: ::c_int,
+    pub abcB: ::UINT,
+    pub abcC: ::c_int,
+}
+pub type PABC = *mut ABC;
+pub type NPABC = *mut ABC;
+pub type LPABC = *mut ABC;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ABCFLOAT {
+    pub abcfA: ::FLOAT,
+    pub abcfB: ::FLOAT,
+    pub abcfC: ::FLOAT,
+}
+pub type PABCFLOAT = *mut ABCFLOAT;
+pub type NPABCFLOAT = *mut ABCFLOAT;
+pub type LPABCFLOAT = *mut ABCFLOAT;
 
 //3581
 pub type LINEDDAPROC = Option<unsafe extern "system" fn(::c_int, ::c_int, ::LPARAM)>;
