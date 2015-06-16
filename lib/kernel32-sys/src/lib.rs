@@ -268,7 +268,7 @@ extern "system" {
     // pub fn DelayLoadFailureHook();
     // pub fn DeleteAtom();
     // pub fn DeleteBoundaryDescriptor();
-    // pub fn DeleteCriticalSection();
+    pub fn DeleteCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
     // pub fn DeleteFiber();
     pub fn DeleteFileA(lpFileName: LPCSTR) -> BOOL;
     // pub fn DeleteFileTransactedA();
@@ -307,7 +307,7 @@ extern "system" {
     // pub fn EncodeSystemPointer();
     // pub fn EndUpdateResourceA();
     // pub fn EndUpdateResourceW();
-    // pub fn EnterCriticalSection();
+    pub fn EnterCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
     // pub fn EnterSynchronizationBarrier();
     // #[cfg(target_arch = "x86_64")]
     // pub fn EnterUmsSchedulingMode();
@@ -674,8 +674,12 @@ extern "system" {
     // pub fn GetModuleFileNameA();
     // pub fn GetModuleFileNameW();
     pub fn GetModuleHandleA(lpModuleName: LPCSTR) -> HMODULE;
-    // pub fn GetModuleHandleExA();
-    // pub fn GetModuleHandleExW();
+    pub fn GetModuleHandleExA(
+        dwFlags: DWORD, lpModuleName: LPCSTR, phModule: *mut HMODULE,
+    ) -> BOOL;
+    pub fn GetModuleHandleExW(
+        dwFlags: DWORD, lpModuleName: LPCWSTR, phModule: *mut HMODULE,
+    ) -> BOOL;
     pub fn GetModuleHandleW(lpModuleName: LPCWSTR) -> HMODULE;
     // pub fn GetNLSVersion();
     // pub fn GetNLSVersionEx();
@@ -933,12 +937,16 @@ extern "system" {
     // pub fn InitOnceInitialize();
     // pub fn InitializeConditionVariable();
     // pub fn InitializeContext();
-    // pub fn InitializeCriticalSection();
-    // pub fn InitializeCriticalSectionAndSpinCount();
-    // pub fn InitializeCriticalSectionEx();
+    pub fn InitializeCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
+    pub fn InitializeCriticalSectionAndSpinCount(
+        lpCriticalSection: LPCRITICAL_SECTION, dwSpinCount: DWORD,
+    ) -> BOOL;
+    pub fn InitializeCriticalSectionEx(
+        lpCriticalSection: LPCRITICAL_SECTION, dwSpinCount: DWORD, Flags: DWORD,
+    ) -> BOOL;
     // pub fn InitializeProcThreadAttributeList();
     // pub fn InitializeSListHead();
-    // pub fn InitializeSRWLock();
+    pub fn InitializeSRWLock(SRWLock: PSRWLOCK);
     // pub fn InitializeSynchronizationBarrier();
     // pub fn InstallELAMCertificateInfo();
     // #[cfg(target_arch = "x86")]
@@ -1024,7 +1032,7 @@ extern "system" {
     // pub fn LCMapStringA();
     // pub fn LCMapStringEx();
     // pub fn LCMapStringW();
-    // pub fn LeaveCriticalSection();
+    pub fn LeaveCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
     // pub fn LeaveCriticalSectionWhenCallbackReturns();
     // pub fn LoadAppInitDlls();
     pub fn LoadLibraryA(lpFileName: LPCSTR) -> HMODULE;
@@ -1269,8 +1277,8 @@ extern "system" {
     // pub fn ReleaseActCtx();
     // pub fn ReleaseMutex();
     // pub fn ReleaseMutexWhenCallbackReturns();
-    // pub fn ReleaseSRWLockExclusive();
-    // pub fn ReleaseSRWLockShared();
+    pub fn ReleaseSRWLockExclusive(SRWLock: PSRWLOCK);
+    pub fn ReleaseSRWLockShared(SRWLock: PSRWLOCK);
     pub fn ReleaseSemaphore(
         hSemaphore: HANDLE, lReleaseCount: LONG, lpPreviousCount: LPLONG,
     ) -> BOOL;
@@ -1373,7 +1381,9 @@ extern "system" {
     pub fn SetConsoleWindowInfo(
         hConsoleOutput: HANDLE, bAbsolute: BOOL, lpConsoleWindow: *const SMALL_RECT,
     ) -> BOOL;
-    // pub fn SetCriticalSectionSpinCount();
+    pub fn SetCriticalSectionSpinCount(
+        lpCriticalSection: LPCRITICAL_SECTION, dwSpinCount: DWORD,
+    ) -> DWORD;
     // pub fn SetCurrentConsoleFontEx();
     pub fn SetCurrentDirectoryA(lpPathName: LPCSTR) -> BOOL;
     pub fn SetCurrentDirectoryW(lpPathName: LPCWSTR) -> BOOL;
@@ -1523,9 +1533,9 @@ extern "system" {
     // pub fn Toolhelp32ReadProcessMemory();
     // pub fn TransactNamedPipe();
     // pub fn TransmitCommChar();
-    // pub fn TryAcquireSRWLockExclusive();
-    // pub fn TryAcquireSRWLockShared();
-    // pub fn TryEnterCriticalSection();
+    pub fn TryAcquireSRWLockExclusive(SRWLock: PSRWLOCK) -> BOOLEAN;
+    pub fn TryAcquireSRWLockShared(SRWLock: PSRWLOCK) -> BOOLEAN;
+    pub fn TryEnterCriticalSection(lpCriticalSection: LPCRITICAL_SECTION) -> BOOL;
     // pub fn TrySubmitThreadpoolCallback();
     // pub fn TzSpecificLocalTimeToSystemTime();
     // pub fn TzSpecificLocalTimeToSystemTimeEx();

@@ -1192,12 +1192,48 @@ pub struct IMAGE_FUNCTION_ENTRY64 {
     pub EndOfPrologueOrUnwindInfoAddress: ::ULONGLONG,
 }
 pub type PIMAGE_FUNCTION_ENTRY64 = *mut IMAGE_FUNCTION_ENTRY64;
-//18195
+//18145
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RTL_CRITICAL_SECTION_DEBUG {
+    pub Type: ::WORD,
+    pub CreatorBackTraceIndex: ::WORD,
+    pub CriticalSection: *mut ::RTL_CRITICAL_SECTION,
+    pub ProcessLocksList: ::LIST_ENTRY,
+    pub EntryCount: ::DWORD,
+    pub ContentionCount: ::DWORD,
+    pub Flags: ::DWORD,
+    pub CreatorBackTraceIndexHigh: ::WORD,
+    pub SpareWORD: ::WORD,
+}
+pub type PRTL_CRITICAL_SECTION_DEBUG = *mut RTL_CRITICAL_SECTION_DEBUG;
+pub type RTL_RESOURCE_DEBUG = RTL_CRITICAL_SECTION_DEBUG;
+pub type PRTL_RESOURCE_DEBUG = *mut RTL_CRITICAL_SECTION_DEBUG;
+pub const RTL_CRITSECT_TYPE: ::WORD = 0;
+pub const RTL_RESOURCE_TYPE: ::WORD = 1;
+pub const RTL_CRITICAL_SECTION_FLAG_NO_DEBUG_INFO: ::ULONG_PTR = 0x01000000;
+pub const RTL_CRITICAL_SECTION_FLAG_DYNAMIC_SPIN: ::ULONG_PTR = 0x02000000;
+pub const RTL_CRITICAL_SECTION_FLAG_STATIC_INIT: ::ULONG_PTR = 0x04000000;
+pub const RTL_CRITICAL_SECTION_FLAG_RESOURCE_TYPE: ::ULONG_PTR = 0x08000000;
+pub const RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO: ::ULONG_PTR = 0x10000000;
+pub const RTL_CRITICAL_SECTION_ALL_FLAG_BITS: ::ULONG_PTR = 0xFF000000;
+pub const RTL_CRITICAL_SECTION_FLAG_RESERVED: ::ULONG_PTR = RTL_CRITICAL_SECTION_ALL_FLAG_BITS & !(RTL_CRITICAL_SECTION_FLAG_NO_DEBUG_INFO | RTL_CRITICAL_SECTION_FLAG_DYNAMIC_SPIN | RTL_CRITICAL_SECTION_FLAG_STATIC_INIT | RTL_CRITICAL_SECTION_FLAG_RESOURCE_TYPE | RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO);
+pub const RTL_CRITICAL_SECTION_DEBUG_FLAG_STATIC_INIT: ::DWORD = 0x00000001;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RTL_CRITICAL_SECTION {
+    pub DebugInfo: ::PRTL_CRITICAL_SECTION_DEBUG,
+    pub LockCount: ::LONG,
+    pub RecursionCount: ::LONG,
+    pub OwningThread: ::HANDLE,
+    pub LockSemaphore: ::HANDLE,
+    pub SpinCount: ::ULONG_PTR,
+}
+pub type PRTL_CRITICAL_SECTION = *mut RTL_CRITICAL_SECTION;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct RTL_SRWLOCK {
     pub Ptr: ::PVOID,
 }
 pub type PRTL_SRWLOCK = *mut RTL_SRWLOCK;
+pub const RTL_SRWLOCK_INIT: RTL_SRWLOCK = RTL_SRWLOCK { Ptr: 0 as PVOID };
 //18204
 pub type PAPCFUNC = Option<unsafe extern "system" fn(Parameter: ::ULONG_PTR)>;
 pub type PVECTORED_EXCEPTION_HANDLER = Option<unsafe extern "system" fn(

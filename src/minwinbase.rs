@@ -17,6 +17,7 @@ pub struct OVERLAPPED {
     pub OffsetHigh: ::DWORD,
     pub hEvent: ::HANDLE,
 }
+UNION!(OVERLAPPED, Offset, Pointer, Pointer_mut, ::PVOID);
 pub type LPOVERLAPPED = *mut OVERLAPPED;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct OVERLAPPED_ENTRY {
@@ -71,58 +72,79 @@ pub struct WIN32_FIND_DATAW {
 impl Clone for WIN32_FIND_DATAW { fn clone(&self) -> WIN32_FIND_DATAW { *self } }
 pub type PWIN32_FIND_DATAW = *mut WIN32_FIND_DATAW;
 pub type LPWIN32_FIND_DATAW = *mut WIN32_FIND_DATAW;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
+#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
 pub enum FINDEX_INFO_LEVELS {
-    FindExInfoStandard = 0,
-    FindExInfoBasic = 1,
-    FindExInfoMaxInfoLevel = 2,
+    FindExInfoStandard,
+    FindExInfoBasic,
+    FindExInfoMaxInfoLevel,
 }
+pub use self::FINDEX_INFO_LEVELS::*;
 pub const FIND_FIRST_EX_CASE_SENSITIVE: ::DWORD = 0x00000001;
 pub const FIND_FIRST_EX_LARGE_FETCH: ::DWORD = 0x00000002;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
+#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
 pub enum FINDEX_SEARCH_OPS {
-    FindExSearchNameMatch = 0,
-    FindExSearchLimitToDirectories = 1,
-    FindExSearchLimitToDevices = 2,
-    FindExSearchMaxSearchOp = 3,
+    FindExSearchNameMatch,
+    FindExSearchLimitToDirectories,
+    FindExSearchLimitToDevices,
+    FindExSearchMaxSearchOp,
 }
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub use self::FINDEX_SEARCH_OPS::*;
+#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
 pub enum GET_FILEEX_INFO_LEVELS {
-    GetFileExInfoStandard = 0,
-    GetFileExMaxInfoLevel = 1,
+    GetFileExInfoStandard,
+    GetFileExMaxInfoLevel,
 }
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub use self::GET_FILEEX_INFO_LEVELS::*;
+#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
 pub enum FILE_INFO_BY_HANDLE_CLASS {
-    FileBasicInfo = 0,
-    FileStandardInfo = 1,
-    FileNameInfo = 2,
-    FileRenameInfo = 3,
-    FileDispositionInfo = 4,
-    FileAllocationInfo = 5,
-    FileEndOfFileInfo = 6,
-    FileStreamInfo = 7,
-    FileCompressionInfo = 8,
-    FileAttributeTagInfo = 9,
-    FileIdBothDirectoryInfo = 10,
-    FileIdBothDirectoryRestartInfo = 11,
-    FileIoPriorityHintInfo = 12,
-    FileRemoteProtocolInfo = 13,
-    FileFullDirectoryInfo = 14,
-    FileFullDirectoryRestartInfo = 15,
-    FileStorageInfo = 16,
-    FileAlignmentInfo = 17,
-    FileIdInfo = 18,
-    FileIdExtdDirectoryInfo = 19,
-    FileIdExtdDirectoryRestartInfo = 20,
-    MaximumFileInfoByHandleClass = 21,
+    FileBasicInfo,
+    FileStandardInfo,
+    FileNameInfo,
+    FileRenameInfo,
+    FileDispositionInfo,
+    FileAllocationInfo,
+    FileEndOfFileInfo,
+    FileStreamInfo,
+    FileCompressionInfo,
+    FileAttributeTagInfo,
+    FileIdBothDirectoryInfo,
+    FileIdBothDirectoryRestartInfo,
+    FileIoPriorityHintInfo,
+    FileRemoteProtocolInfo,
+    FileFullDirectoryInfo,
+    FileFullDirectoryRestartInfo,
+    FileStorageInfo,
+    FileAlignmentInfo,
+    FileIdInfo,
+    FileIdExtdDirectoryInfo,
+    FileIdExtdDirectoryRestartInfo,
+    MaximumFileInfoByHandleClass,
 }
+pub use self::FILE_INFO_BY_HANDLE_CLASS::*;
 pub type PFILE_INFO_BY_HANDLE_CLASS = *mut FILE_INFO_BY_HANDLE_CLASS;
-//206
+pub type CRITICAL_SECTION = ::RTL_CRITICAL_SECTION;
+pub type PCRITICAL_SECTION = ::PRTL_CRITICAL_SECTION;
+pub type LPCRITICAL_SECTION = ::PRTL_CRITICAL_SECTION;
+pub type CRITICAL_SECTION_DEBUG = ::RTL_CRITICAL_SECTION_DEBUG;
+pub type PCRITICAL_SECTION_DEBUG = ::PRTL_CRITICAL_SECTION_DEBUG;
+pub type LPCRITICAL_SECTION_DEBUG = ::PRTL_CRITICAL_SECTION_DEBUG;
 pub type LPOVERLAPPED_COMPLETION_ROUTINE = Option<unsafe extern "system" fn(
     dwErrorCode: ::DWORD, dwNumberOfBytesTransfered: ::DWORD, lpOverlapped: LPOVERLAPPED,
 )>;
 pub const LOCKFILE_FAIL_IMMEDIATELY: ::DWORD = 0x00000001;
 pub const LOCKFILE_EXCLUSIVE_LOCK: ::DWORD = 0x00000002;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct PROCESS_HEAP_ENTRY_Block {
+    pub hMem: ::HANDLE,
+    pub dwReserved: [::DWORD; 3],
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct PROCESS_HEAP_ENTRY_Region {
+    pub dwCommittedSize: ::DWORD,
+    pub dwUnCommittedSize: ::DWORD,
+    pub lpFirstBlock: ::LPVOID,
+    pub lpLastBlock: ::LPVOID,
+}
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PROCESS_HEAP_ENTRY {
     pub lpData: ::PVOID,
@@ -130,11 +152,9 @@ pub struct PROCESS_HEAP_ENTRY {
     pub cbOverhead: ::BYTE,
     pub iRegionIndex: ::BYTE,
     pub wFlags: ::WORD,
-    pub dwCommittedSize: ::DWORD,
-    pub dwUnCommittedSize: ::DWORD,
-    pub lpFirstBlock: ::LPVOID,
-    pub lpLastBlock: ::LPVOID,
+    pub Region: PROCESS_HEAP_ENTRY_Region,
 }
+UNION!(PROCESS_HEAP_ENTRY, Region, Block, Block_mut, PROCESS_HEAP_ENTRY_Block);
 pub type LPPROCESS_HEAP_ENTRY = *mut PROCESS_HEAP_ENTRY;
 pub type PPROCESS_HEAP_ENTRY = *mut PROCESS_HEAP_ENTRY;
 pub const PROCESS_HEAP_REGION: ::WORD = 0x0001;

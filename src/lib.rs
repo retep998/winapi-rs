@@ -177,6 +177,20 @@ macro_rules! RIDL {
         }
     };
 }
+macro_rules! UNION {
+    ($base:ident, $field:ident, $variant:ident, $variantmut: ident, $fieldtype:ty) => {
+        impl $base {
+            #[inline]
+            pub unsafe fn $variant(&self) -> &$fieldtype {
+                ::std::mem::transmute(&self.$field)
+            }
+            #[inline]
+            pub unsafe fn $variantmut(&mut self) -> &mut $fieldtype {
+                ::std::mem::transmute(&mut self.$field)
+            }
+        }
+    }
+}
 //-------------------------------------------------------------------------------------------------
 // Modules
 //-------------------------------------------------------------------------------------------------
