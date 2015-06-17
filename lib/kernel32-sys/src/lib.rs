@@ -1110,8 +1110,12 @@ extern "system" {
     // pub fn OpenEventW();
     // pub fn OpenFile();
     // pub fn OpenFileById();
-    // pub fn OpenFileMappingA();
-    // pub fn OpenFileMappingW();
+    pub fn OpenFileMappingA(
+        dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCSTR,
+    ) -> HANDLE;
+    pub fn OpenFileMappingW(
+        dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR,
+    ) -> HANDLE;
     // pub fn OpenJobObjectA();
     // pub fn OpenJobObjectW();
     // pub fn OpenMutexA();
