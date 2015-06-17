@@ -14,6 +14,7 @@ libc = "*"
 
 [dev-dependencies]
 advapi32-sys = { version = "*", path = "lib/advapi32-sys" }
+crypt32-sys = { version = "*", path = "lib/crypt32-sys" }
 d3d9-sys = { version = "*", path = "lib/d3d9-sys" }
 dbghelp-sys = { version = "*", path = "lib/dbghelp-sys" }
 dwmapi-sys = { version = "*", path = "lib/dwmapi-sys" }
@@ -27,4 +28,5 @@ psapi-sys = { version = "*", path = "lib/psapi-sys" }
 shell32-sys = { version = "*", path = "lib/shell32-sys" }
 user32-sys = { version = "*", path = "lib/user32-sys" }
 uuid-sys = { version = "*", path = "lib/uuid-sys" }
+winhttp-sys = { version = "*", path = "lib/winhttp-sys" }
 winmm-sys = { version = "*", path = "lib/winmm-sys" }
