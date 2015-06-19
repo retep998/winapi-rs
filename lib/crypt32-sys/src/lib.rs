@@ -134,12 +134,26 @@ extern "system" {
     // pub fn CryptCreateAsyncHandle();
     // pub fn CryptCreateKeyIdentifierFromCSP();
     // pub fn CryptDecodeMessage();
-    // pub fn CryptDecodeObject();
-    // pub fn CryptDecodeObjectEx();
+    pub fn CryptDecodeObject(
+        dwCertEncodingType: DWORD, lpszStructType: LPCSTR, pbEncoded: *const BYTE,
+        cbEncoded: DWORD, dwFlags: DWORD, pvStructInfo: *mut c_void, pcbStructInfo: *mut DWORD,
+    ) -> BOOL;
+    pub fn CryptDecodeObjectEx(
+        dwCertEncodingType: DWORD, lpszStructType: LPCSTR, pbEncoded: *const BYTE,
+        cbEncoded: DWORD, dwFlags: DWORD, pDecodePara: PCRYPT_DECODE_PARA,
+        pvStructInfo: *mut c_void, pcbStructInfo: *mut DWORD,
+    ) -> BOOL;
     // pub fn CryptDecryptAndVerifyMessageSignature();
     // pub fn CryptDecryptMessage();
-    // pub fn CryptEncodeObject();
-    // pub fn CryptEncodeObjectEx();
+    pub fn CryptEncodeObject(
+        dwCertEncodingType: DWORD, lpszStructType: LPCSTR, pvStructInfo: *const c_void,
+        pbEncoded: *mut BYTE, pcbEncoded: *mut DWORD,
+    ) -> BOOL;
+    pub fn CryptEncodeObjectEx(
+        dwCertEncodingType: DWORD, lpszStructType: LPCSTR, pvStructInfo: *const c_void,
+        dwFlags: DWORD, pEncodePara: PCRYPT_ENCODE_PARA, pvEncoded: *mut c_void,
+        pcbEncoded: *mut DWORD,
+    ) -> BOOL;
     // pub fn CryptEncryptMessage();
     // pub fn CryptEnumKeyIdentifierProperties();
     // pub fn CryptEnumOIDFunction();
@@ -151,7 +165,11 @@ extern "system" {
     // pub fn CryptFindCertificateKeyProvInfo();
     // pub fn CryptFindLocalizedName();
     // pub fn CryptFindOIDInfo();
-    // pub fn CryptFormatObject();
+    pub fn CryptFormatObject(
+        dwCertEncodingType: DWORD, dwFormatType: DWORD, dwFormatStrType: DWORD,
+        pFormatStruct: *mut c_void, lpszStructType: LPCSTR, pbEncoded: *const BYTE,
+        cbEncoded: DWORD, pbFormat: *mut c_void, pcbFormat: *mut DWORD,
+    ) -> BOOL;
     // pub fn CryptFreeOIDFunctionAddress();
     // pub fn CryptGetAsyncParam();
     // pub fn CryptGetDefaultOIDDllList();

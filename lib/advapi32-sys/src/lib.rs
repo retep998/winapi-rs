@@ -208,50 +208,116 @@ extern "system" {
         phProv: *mut HCRYPTPROV, szContainer: LPCWSTR, szProvider: LPCWSTR, dwProvType: DWORD,
         dwFlags: DWORD,
     ) -> BOOL;
-    // pub fn CryptContextAddRef();
+    pub fn CryptContextAddRef(hProv: HCRYPTPROV, pdwReserved: *mut DWORD, dwFlags: DWORD) -> BOOL;
     pub fn CryptCreateHash(
         hProv: HCRYPTPROV, Algid: ALG_ID, hKey: HCRYPTKEY, dwFlags: DWORD, phHash: *mut HCRYPTHASH,
     ) -> BOOL;
-    // pub fn CryptDecrypt();
-    // pub fn CryptDeriveKey();
+    pub fn CryptDecrypt(
+        hKey: HCRYPTKEY, hHash: HCRYPTHASH, Final: BOOL, dwFlags: DWORD, pbData: *mut BYTE, 
+        pdwDataLen: *mut DWORD,
+    ) -> BOOL;
+    pub fn CryptDeriveKey(
+        hProv: HCRYPTPROV, Algid: ALG_ID, hBaseData: HCRYPTHASH, dwFlags: DWORD,
+        phKey: *mut HCRYPTKEY,
+    ) -> BOOL;
     pub fn CryptDestroyHash(hHash: HCRYPTHASH) -> BOOL;
-    // pub fn CryptDestroyKey();
-    // pub fn CryptDuplicateHash();
-    // pub fn CryptDuplicateKey();
-    // pub fn CryptEncrypt();
-    // pub fn CryptEnumProviderTypesA();
-    // pub fn CryptEnumProviderTypesW();
-    // pub fn CryptEnumProvidersA();
-    // pub fn CryptEnumProvidersW();
-    // pub fn CryptExportKey();
-    // pub fn CryptGenKey();
-    // pub fn CryptGenRandom();
-    // pub fn CryptGetDefaultProviderA();
-    // pub fn CryptGetDefaultProviderW();
+    pub fn CryptDestroyKey(hKey: HCRYPTKEY) -> BOOL;
+    pub fn CryptDuplicateHash(
+        hHash: HCRYPTHASH, pdwReserved: *mut DWORD, dwFlags: DWORD, phHash: *mut HCRYPTHASH,
+    ) -> BOOL;
+    pub fn CryptDuplicateKey(
+        hKey: HCRYPTKEY, pdwReserved: *mut DWORD, dwFlags: DWORD, phKey: *mut HCRYPTKEY,
+    ) -> BOOL;
+    pub fn CryptEncrypt(
+        hKey: HCRYPTKEY, hHash: HCRYPTHASH, Final: BOOL, dwFlags: DWORD, pbData: *mut BYTE, 
+        pdwDataLen: *mut DWORD, dwBufLen: DWORD,
+    ) -> BOOL;
+    pub fn CryptEnumProviderTypesA(
+        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD, 
+        szTypeName: LPSTR, pcbTypeName: *mut DWORD,
+    ) -> BOOL;
+    pub fn CryptEnumProviderTypesW(
+        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD, 
+        szTypeName: LPWSTR, pcbTypeName: *mut DWORD,
+    ) -> BOOL;
+    pub fn CryptEnumProvidersA(
+        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD, 
+        szProvName: LPSTR, pcbProvName: *mut DWORD,
+    ) -> BOOL;
+    pub fn CryptEnumProvidersW(
+        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD, 
+        szProvName: LPWSTR, pcbProvName: *mut DWORD,
+    ) -> BOOL;
+    pub fn CryptExportKey(
+        hKey: HCRYPTKEY, hExpKey: HCRYPTKEY, dwBlobType: DWORD, dwFlags: DWORD, pbData: *mut BYTE,
+        pdwDataLen: *mut DWORD,
+    ) -> BOOL;
+    pub fn CryptGenKey(
+        hProv: HCRYPTPROV, Algid: ALG_ID, dwFlags: DWORD, phKey: *mut HCRYPTKEY,
+    ) -> BOOL;
+    pub fn CryptGenRandom(hProv: HCRYPTPROV, dwLen: DWORD, pbBuffer: *mut BYTE) -> BOOL;
+    pub fn CryptGetDefaultProviderA(
+        dwProvType: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pszProvName: LPSTR,
+        pcbProvName: *mut DWORD,
+    ) -> BOOL;
+    pub fn CryptGetDefaultProviderW(
+        dwProvType: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pszProvName: LPWSTR,
+        pcbProvName: *mut DWORD,
+    ) -> BOOL;
     pub fn CryptGetHashParam(
         hHash: HCRYPTHASH, dwParam: DWORD, pbData: *mut BYTE, pdwDataLen: *mut DWORD,
         dwFlags: DWORD,
     ) -> BOOL;
-    // pub fn CryptGetKeyParam();
-    // pub fn CryptGetProvParam();
-    // pub fn CryptGetUserKey();
+    pub fn CryptGetKeyParam(
+        hKey: HCRYPTKEY, dwParam: DWORD, pbData: *mut BYTE, pdwDataLen: *mut DWORD, dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn CryptGetProvParam(
+        hProv: HCRYPTPROV, dwParam: DWORD, pbData: *mut BYTE, pdwDataLen: *mut DWORD,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn CryptGetUserKey(hProv: HCRYPTPROV, dwKeySpec: DWORD, phUserKey: *mut HCRYPTKEY) -> BOOL;
     pub fn CryptHashData(
         hHash: HCRYPTHASH, pbData: *const BYTE, dwDataLen: DWORD, dwFlags: DWORD,
     ) -> BOOL;
-    // pub fn CryptHashSessionKey();
-    // pub fn CryptImportKey();
+    pub fn CryptHashSessionKey(hHash: HCRYPTHASH, hKey: HCRYPTKEY, dwFlags: DWORD) -> BOOL;
+    pub fn CryptImportKey(
+        hProv: HCRYPTPROV, pbData: *const BYTE, dwDataLen: DWORD, hPubKey: HCRYPTKEY,
+        dwFlags: DWORD, phKey: *mut HCRYPTKEY,
+    ) -> BOOL;
     pub fn CryptReleaseContext(hProv: HCRYPTPROV, dwFlags: DWORD) -> BOOL;
-    // pub fn CryptSetHashParam();
-    // pub fn CryptSetKeyParam();
-    // pub fn CryptSetProvParam();
-    // pub fn CryptSetProviderA();
-    // pub fn CryptSetProviderExA();
-    // pub fn CryptSetProviderExW();
-    // pub fn CryptSetProviderW();
-    // pub fn CryptSignHashA();
-    // pub fn CryptSignHashW();
-    // pub fn CryptVerifySignatureA();
-    // pub fn CryptVerifySignatureW();
+    pub fn CryptSetHashParam(
+        hHash: HCRYPTHASH, dwParam: DWORD, pbData: *const BYTE, dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn CryptSetKeyParam(
+        hKey: HCRYPTKEY, dwParam: DWORD, pbData: *const BYTE, dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn CryptSetProvParam(
+        hProv: HCRYPTPROV, dwParam: DWORD, pbData: *const BYTE, dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn CryptSetProviderA(pszProvName: LPCSTR, dwProvType: DWORD) -> BOOL;
+    pub fn CryptSetProviderExA(
+        pszProvName: LPCSTR, dwProvType: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn CryptSetProviderExW(
+        pszProvName: LPCWSTR, dwProvType: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn CryptSetProviderW(pszProvName: LPCWSTR, dwProvType: DWORD) -> BOOL;
+    pub fn CryptSignHashA(
+        hHash: HCRYPTHASH, dwKeySpec: DWORD, szDescription: LPCSTR, dwFlags: DWORD,
+        pbSignature: *mut BYTE, pdwSigLen: *mut DWORD,
+    ) -> BOOL;
+    pub fn CryptSignHashW(
+        hHash: HCRYPTHASH, dwKeySpec: DWORD, szDescription: LPCWSTR, dwFlags: DWORD,
+        pbSignature: *mut BYTE, pdwSigLen: *mut DWORD,
+    ) -> BOOL;
+    pub fn CryptVerifySignatureA(
+        hHash: HCRYPTHASH, pbSignature: *const BYTE, dwSigLen: DWORD, hPubKey: HCRYPTKEY, 
+        szDescription: LPCSTR, dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn CryptVerifySignatureW(
+        hHash: HCRYPTHASH, pbSignature: *const BYTE, dwSigLen: DWORD, hPubKey: HCRYPTKEY, 
+        szDescription: LPCWSTR, dwFlags: DWORD,
+    ) -> BOOL;
     // pub fn DecryptFileA();
     // pub fn DecryptFileW();
     // pub fn DeleteAce();
