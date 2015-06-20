@@ -47,10 +47,12 @@ pub use minwindef::*;
 pub use mmdeviceapi::*;
 pub use mmreg::*;
 pub use mmsystem::*;
+pub use objbase::*;
 pub use objidl::*;
 pub use objidlbase::*;
 pub use processthreadsapi::*;
 pub use propsys::*;
+pub use rpcdce::*;
 pub use schannel::*;
 pub use shobjidl::*;
 pub use shtypes::*;
@@ -58,6 +60,10 @@ pub use sspi::*;
 pub use synchapi::*;
 pub use unknwnbase::*;
 pub use vadefs::*;
+pub use vsbackup::*;
+pub use vss::*;
+pub use vsserror::*;
+pub use vswriter::*;
 pub use winbase::*;
 pub use wincon::*;
 pub use wincred::*;
@@ -213,10 +219,12 @@ pub mod minwindef;
 pub mod mmdeviceapi;
 pub mod mmreg;
 pub mod mmsystem;
+pub mod objbase;
 pub mod objidl;
 pub mod objidlbase;
 pub mod processthreadsapi;
 pub mod propsys;
+pub mod rpcdce;
 pub mod schannel;
 pub mod shobjidl;
 pub mod shtypes;
@@ -224,6 +232,10 @@ pub mod sspi;
 pub mod synchapi;
 pub mod unknwnbase;
 pub mod vadefs;
+pub mod vsbackup;
+pub mod vss;
+pub mod vsserror;
+pub mod vswriter;
 pub mod winbase;
 pub mod wincon;
 pub mod wincred;
@@ -840,6 +852,9 @@ pub const CLSCTX_SERVER: DWORD = CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER |
 pub const CLSCTX_ALL: DWORD = CLSCTX_INPROC_HANDLER | CLSCTX_SERVER;
 
 pub type VARTYPE = c_ushort;
+
+pub type BSTR = *mut OLECHAR;
+pub type LPBSTR = *mut BSTR;
 
 //-------------------------------------------------------------------------------------------------
 // audiosessiontypes.h
