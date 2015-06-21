@@ -1,5 +1,6 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
+extern crate build;
 fn main() {
-    println!("cargo:rustc-flags=-l secur32");
+    build::link("secur32", true)
 }

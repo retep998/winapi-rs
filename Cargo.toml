@@ -25,6 +25,7 @@ mpr-sys = { version = "*", path = "lib/mpr-sys" }
 ole32-sys = { version = "*", path = "lib/ole32-sys" }
 opengl32-sys = { version = "*", path = "lib/opengl32-sys" }
 psapi-sys = { version = "*", path = "lib/psapi-sys" }
+secur32-sys = { version = "*", path = "lib/secur32-sys" }
 shell32-sys = { version = "*", path = "lib/shell32-sys" }
 user32-sys = { version = "*", path = "lib/user32-sys" }
 uuid-sys = { version = "*", path = "lib/uuid-sys" }
