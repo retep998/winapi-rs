@@ -108,10 +108,10 @@ extern "system" {
     ) -> SECURITY_STATUS;
     pub fn QueryContextAttributesA(
         phContext: PCtxtHandle, ulAttribute: c_ulong, pBuffer: *mut c_void,
-    -> SECURITY_STATUS;
+    ) -> SECURITY_STATUS;
     pub fn QueryContextAttributesW(
         phContext: PCtxtHandle, ulAttribute: c_ulong, pBuffer: *mut c_void,
-    -> SECURITY_STATUS;
+    ) -> SECURITY_STATUS;
     pub fn QueryCredentialsAttributesA(
         phCredential: PCredHandle, ulAttribute: c_ulong, pBuffer: *mut c_void,
     ) -> SECURITY_STATUS;
