@@ -1380,3 +1380,15 @@ pub const szOID_YESNO_TRUST_ATTR: &'static str = "1.3.6.1.4.1.311.10.4.1";
 pub const szOID_PKIX_POLICY_QUALIFIER_CPS: &'static str = "1.3.6.1.5.5.7.2.1";
 pub const szOID_PKIX_POLICY_QUALIFIER_USERNOTICE: &'static str = "1.3.6.1.5.5.7.2.2";
 pub const szOID_ROOT_PROGRAM_FLAGS: &'static str = "1.3.6.1.4.1.311.60.1.1";
+//9221
+pub type HCERTSTORE = *mut ::c_void;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_CONTEXT {
+    pub dwCertEncodingType: ::DWORD,
+    pub pbCertEncoded: *mut ::BYTE,
+    pub cbCertEncoded: ::DWORD,
+    pub pCertInfo: ::PCERT_INFO,
+    pub hCertStore: HCERTSTORE,
+}
+pub type PCERT_CONTEXT = *mut CERT_CONTEXT;
+pub type PCCERT_CONTEXT = *const CERT_CONTEXT;

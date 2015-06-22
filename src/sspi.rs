@@ -642,3 +642,22 @@ pub type ADD_CREDENTIALS_FN_A = Option<unsafe extern "system" fn(
     PCredHandle, *mut SEC_CHAR, *mut SEC_CHAR, ::c_ulong, *mut ::c_void, SEC_GET_KEY_FN,
     *mut ::c_void, PTimeStamp,
 ) -> SECURITY_STATUS>;
+pub type CHANGE_PASSWORD_FN_W = Option<unsafe extern "system" fn(
+    *mut SEC_WCHAR, *mut SEC_WCHAR, *mut SEC_WCHAR, *mut SEC_WCHAR, *mut SEC_WCHAR, ::BOOLEAN,
+    ::c_ulong, PSecBufferDesc,
+) -> SECURITY_STATUS>;
+pub type CHANGE_PASSWORD_FN_A = Option<unsafe extern "system" fn(
+    *mut SEC_CHAR, *mut SEC_CHAR, *mut SEC_CHAR, *mut SEC_CHAR, *mut SEC_CHAR, ::BOOLEAN,
+    ::c_ulong, PSecBufferDesc,
+) -> SECURITY_STATUS>;
+//1844
+#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
+pub enum SecDelegationType {
+    SecFull,
+    SecService,
+    SecTree,
+    SecDirectory,
+    SecObject,
+}
+pub use self::SecDelegationType::*;
+pub type PSecDelegationType = *mut SecDelegationType;
