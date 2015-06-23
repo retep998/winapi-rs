@@ -4,6 +4,7 @@
 #![cfg(windows)]
 extern crate winapi;
 use winapi::*;
+
 #[cfg(any(target_arch = "x86", target_arch = "x86_64", target_arch = "arm"))]
 extern "system" {
     // pub fn AssocCreateForClasses();
@@ -21,13 +22,13 @@ extern "system" {
     // pub fn DAD_ShowDragImage();
     // pub fn DoEnvironmentSubstA();
     // pub fn DoEnvironmentSubstW();
-    // pub fn DragAcceptFiles();
-    // pub fn DragFinish();
+    pub fn DragAcceptFiles(hWnd: HWND, fAccept: BOOL);
+    pub fn DragFinish(hDrop: HDROP);
     // pub fn DragQueryFile();
-    // pub fn DragQueryFileA();
+    pub fn DragQueryFileA(hDrop: HDROP, iFile: UINT, lpszFile: LPSTR, cch: UINT) -> UINT;
     // pub fn DragQueryFileAorW();
-    // pub fn DragQueryFileW();
-    // pub fn DragQueryPoint();
+    pub fn DragQueryFileW(hDrop: HDROP, iFile: UINT, lpszFile: LPWSTR, cch: UINT) -> UINT;
+    pub fn DragQueryPoint(hDrop: HDROP, lppt: *mut POINT) -> BOOL;
     // pub fn DriveType();
     // pub fn DuplicateIcon();
     // pub fn ExtractAssociatedIconA();
