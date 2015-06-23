@@ -188,6 +188,44 @@ macro_rules! RIDL {
             }
         }
     };
+    (interface $interface:ident ($vtbl:ident)
+        : $( $pinterface:ident ($pvtbl:ident, $pfield:ident) ),*
+        {$(
+            fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
+        ),+}
+    ) => {
+        #[repr(C)] #[allow(missing_copy_implementations)]
+        pub struct $vtbl {
+            $(pub $pfield: ::$pvtbl,)*
+            $(pub $method: unsafe extern "system" fn(
+                This: *mut $interface
+                $(,$p: $t)*
+            ) -> $rtr,)+
+        }
+        #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
+        pub struct $interface {
+            pub lpVtbl: *const $vtbl
+        }
+        impl $interface {
+            #[inline]
+            $(pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
+                ((*self.lpVtbl).$method)(self $(,$p)*)
+            })+
+        }
+    };
+    (interface $interface:ident ($vtbl:ident)
+        : $( $pinterface:ident ($pvtbl:ident, $pfield:ident) ),*
+        {}
+    ) => {
+        #[repr(C)] #[allow(missing_copy_implementations)]
+        pub struct $vtbl {
+            $(pub $pfield: ::$pvtbl,)*
+        }
+        #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
+        pub struct $interface {
+            pub lpVtbl: *const $vtbl
+        }
+    };
 }
 macro_rules! UNION {
     ($base:ident, $field:ident, $variant:ident, $variantmut: ident, $fieldtype:ty) => {
