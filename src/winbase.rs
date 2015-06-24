@@ -156,3 +156,38 @@ pub const THREAD_PRIORITY_IDLE: ::DWORD = THREAD_BASE_PRIORITY_IDLE;
 
 pub const THREAD_MODE_BACKGROUND_BEGIN: ::DWORD = 0x00010000;
 pub const THREAD_MODE_BACKGROUND_END: ::DWORD = 0x00020000;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SYSTEMTIME {
+    pub wYear: WORD,
+    pub wMonth: WORD,
+    pub wDayOfWeek: WORD,
+    pub wDay: WORD,
+    pub wHour: WORD,
+    pub wMinute: WORD,
+    pub wSecond: WORD,
+    pub wMilliseconds: WORD,
+}
+pub type PSYSTEMTIME = *mut SYSTEMTIME;
+pub type LPSYSTEMTIME = *mut SYSTEMTIME;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct FILETIME {
+    pub dwLowDateTime: DWORD,
+    pub dwHighDateTime: DWORD,
+}
+pub type PFILETIME = *mut FILETIME;
+pub type LPFILETIME = *mut FILETIME;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TIME_ZONE_INFORMATION {
+    pub Bias: LONG,
+    pub StandardName: [WCHAR; 32],
+    pub StandardDate: SYSTEMTIME,
+    pub StandardBias: LONG,
+    pub DaylightName: [WCHAR; 32],
+    pub DaylightDate: SYSTEMTIME,
+    pub DaylightBias: LONG,
+}
+pub type PTIME_ZONE_INFORAMTION = *mut TIME_ZONE_INFORMATION;
+pub type LPTIME_ZONE_INFORAMTION = *mut TIME_ZONE_INFORMATION;

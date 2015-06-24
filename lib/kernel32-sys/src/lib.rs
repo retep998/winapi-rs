@@ -367,6 +367,9 @@ extern "system" {
         lpFileTime: *const FILETIME, lpLocalFileTime: LPFILETIME,
     ) -> BOOL;
     // pub fn FileTimeToSystemTime();
+    pub fn FileTimeToSystemTime(
+        lpFileTime: *const FILETIME, lpSystemTime: LPSYSTEMTIME
+    ) -> BOOL;
     pub fn FillConsoleOutputAttribute(
         hConsoleOutput: HANDLE, wAttribute: WORD, nLength: DWORD, dwWriteCoord: COORD,
         lpNumberOfAttrsWritten: LPDWORD,
@@ -802,7 +805,7 @@ extern "system" {
     pub fn GetSystemRegistryQuota(pdwQuotaAllowed: PDWORD, pdwQuotaUsed: PDWORD) -> BOOL;
     // pub fn GetSystemTime();
     // pub fn GetSystemTimeAdjustment();
-    // pub fn GetSystemTimeAsFileTime();
+    pub fn GetSystemTimeAsFileTime(lpSystemTimeAsFileTime: LPFILETIME);
     // pub fn GetSystemTimePreciseAsFileTime();
     // pub fn GetSystemTimes();
     // pub fn GetSystemWindowsDirectoryA();
@@ -1522,8 +1525,14 @@ extern "system" {
     // pub fn SuspendThread();
     // pub fn SwitchToFiber();
     // pub fn SwitchToThread();
-    // pub fn SystemTimeToFileTime();
-    // pub fn SystemTimeToTzSpecificLocalTime();
+    pub fn SystemTimeToFileTime(
+        lpSystemTime: *const SystemTime, lpFileTime: LPFILETIME
+    ) -> BOOL;
+    pub fn SystemTimeToTzSpecificLocalTime(
+        lpTimeZone: LPTIME_ZONE_INFORMATION,
+        lpUniversalTime: LPSYSTEMTIME,
+        lpLocalTime: LPSYSTEMTIME
+    ) -> BOOL;
     // pub fn SystemTimeToTzSpecificLocalTimeEx();
     pub fn TerminateJobObject(hJob: HANDLE, uExitCode: UINT) -> BOOL;
     pub fn TerminateProcess(hProcess: HANDLE, uExitCode: UINT) -> BOOL;
@@ -1542,6 +1551,11 @@ extern "system" {
     pub fn TryEnterCriticalSection(lpCriticalSection: LPCRITICAL_SECTION) -> BOOL;
     // pub fn TrySubmitThreadpoolCallback();
     // pub fn TzSpecificLocalTimeToSystemTime();
+    pub fn TzSpecificLocalTimeToSystemTime(
+        lpTimeZone: LPTIME_ZONE_INFORMATION,
+        lpLocalTime: LPSYSTEMTIME,
+        lpUniveralTime: LPSYSTEMTIME
+    ) -> BOOL;
     // pub fn TzSpecificLocalTimeToSystemTimeEx();
     // #[cfg(target_arch = "x86_64")]
     // pub fn UmsThreadYield();
