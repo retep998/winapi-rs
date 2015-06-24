@@ -1,11 +1,9 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
-#![feature(test)]
 #![cfg(windows)]
 extern crate user32;
-extern crate test;
 use user32::*;
-use test::black_box as bb;
+#[inline(never)] fn bb<T>(_: T) {}
 #[cfg(target_arch = "x86_64")]
 #[test]
 fn functions_x64() {

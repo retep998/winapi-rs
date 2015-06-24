@@ -1,11 +1,9 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
-#![feature(test)]
 #![cfg(windows)]
 extern crate mpr;
-extern crate test;
 use mpr::*;
-use test::black_box as bb;
+#[inline(never)] fn bb<T>(_: T) {}
 #[test]
 fn functions() {
     bb(MultinetGetConnectionPerformanceA);

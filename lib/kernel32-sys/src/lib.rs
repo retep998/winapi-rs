@@ -299,7 +299,7 @@ extern "system" {
     // pub fn DnsHostnameToComputerNameA();
     // pub fn DnsHostnameToComputerNameExW();
     // pub fn DnsHostnameToComputerNameW();
-    // pub fn DosDateTimeToFileTime();
+    pub fn DosDateTimeToFileTime(wFatDate: WORD, wFatTime: WORD, lpFileTime: LPFILETIME) -> BOOL;
     // pub fn DosPathToSessionPathW();
     // pub fn DuplicateHandle();
     // pub fn EnableThreadProfiling();
@@ -362,13 +362,14 @@ extern "system" {
     // pub fn FatalAppExitA();
     // pub fn FatalAppExitW();
     // pub fn FatalExit();
-    // pub fn FileTimeToDosDateTime();
+    pub fn FileTimeToDosDateTime(
+        lpFileTime: *const FILETIME, lpFatDate: LPWORD, lpFatTime: LPWORD,
+    ) -> BOOL;
     pub fn FileTimeToLocalFileTime(
         lpFileTime: *const FILETIME, lpLocalFileTime: LPFILETIME,
     ) -> BOOL;
-    // pub fn FileTimeToSystemTime();
     pub fn FileTimeToSystemTime(
-        lpFileTime: *const FILETIME, lpSystemTime: LPSYSTEMTIME
+        lpFileTime: *const FILETIME, lpSystemTime: LPSYSTEMTIME,
     ) -> BOOL;
     pub fn FillConsoleOutputAttribute(
         hConsoleOutput: HANDLE, wAttribute: WORD, nLength: DWORD, dwWriteCoord: COORD,
@@ -596,7 +597,9 @@ extern "system" {
     pub fn GetDriveTypeW(lpRootPathName: LPCWSTR) -> UINT;
     // pub fn GetDurationFormat();
     // pub fn GetDurationFormatEx();
-    // pub fn GetDynamicTimeZoneInformation();
+    pub fn GetDynamicTimeZoneInformation(
+        pTimeZoneInformation: PDYNAMIC_TIME_ZONE_INFORMATION,
+    ) -> DWORD;
     // #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
     // pub fn GetEnabledXStateFeatures();
     // pub fn GetEnvironmentStrings();
@@ -655,7 +658,7 @@ extern "system" {
     // pub fn GetLargePageMinimum();
     pub fn GetLargestConsoleWindowSize(hConsoleOutput: HANDLE) -> COORD;
     pub fn GetLastError() -> DWORD;
-    // pub fn GetLocalTime();
+    pub fn GetLocalTime(lpSystemTime: LPSYSTEMTIME);
     // pub fn GetLocaleInfoA();
     // pub fn GetLocaleInfoEx();
     // pub fn GetLocaleInfoW();
@@ -803,11 +806,15 @@ extern "system" {
     // pub fn GetSystemPowerStatus();
     // pub fn GetSystemPreferredUILanguages();
     pub fn GetSystemRegistryQuota(pdwQuotaAllowed: PDWORD, pdwQuotaUsed: PDWORD) -> BOOL;
-    // pub fn GetSystemTime();
-    // pub fn GetSystemTimeAdjustment();
+    pub fn GetSystemTime(lpSystemTime: LPSYSTEMTIME);
+    pub fn GetSystemTimeAdjustment(
+        lpTimeAdjustment: PDWORD, lpTimeIncrement: PDWORD, lpTimeAdjustmentDisabled: PBOOL,
+    ) -> BOOL;
     pub fn GetSystemTimeAsFileTime(lpSystemTimeAsFileTime: LPFILETIME);
-    // pub fn GetSystemTimePreciseAsFileTime();
-    // pub fn GetSystemTimes();
+    pub fn GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime: LPFILETIME);
+    pub fn GetSystemTimes(
+        lpIdleTime: PFILETIME, lpKernelTime: PFILETIME, lpUserTime: PFILETIME,
+    ) -> BOOL;
     // pub fn GetSystemWindowsDirectoryA();
     // pub fn GetSystemWindowsDirectoryW();
     // pub fn GetSystemWow64DirectoryA();
@@ -833,15 +840,29 @@ extern "system" {
     // pub fn GetThreadPriority();
     // pub fn GetThreadPriorityBoost();
     // pub fn GetThreadSelectorEntry();
-    // pub fn GetThreadTimes();
+    pub fn GetThreadTimes(
+        hThread: HANDLE, lpCreationTime: LPFILETIME, lpExitTime: LPFILETIME,
+        lpKernelTime: LPFILETIME, lpUserTime: LPFILETIME,
+    ) -> BOOL;
     // pub fn GetThreadUILanguage();
     // pub fn GetTickCount();
     // pub fn GetTickCount64();
-    // pub fn GetTimeFormatA();
-    // pub fn GetTimeFormatEx();
-    // pub fn GetTimeFormatW();
-    // pub fn GetTimeZoneInformation();
-    // pub fn GetTimeZoneInformationForYear();
+    pub fn GetTimeFormatA(
+        Locale: LCID, dwFlags: DWORD, lpTime: *const SYSTEMTIME, lpFormat: LPCSTR,
+        lpTimeStr: LPSTR, cchTime: c_int,
+    ) -> c_int;
+    pub fn GetTimeFormatEx(
+        lpLocaleName: LPCWSTR, dwFlags: DWORD, lpTime: *const SYSTEMTIME, lpFormat: LPCWSTR,
+        lpTimeStr: LPWSTR, cchTime: c_int,
+    ) -> c_int;
+    pub fn GetTimeFormatW(
+        Locale: LCID, dwFlags: DWORD, lpTime: *const SYSTEMTIME, lpFormat: LPCWSTR,
+        lpTimeStr: LPWSTR, cchTime: c_int,
+    ) -> c_int;
+    pub fn GetTimeZoneInformation(lpTimeZoneInformation: LPTIME_ZONE_INFORMATION) -> DWORD;
+    pub fn GetTimeZoneInformationForYear(
+        wYear: USHORT, pdtzi: PDYNAMIC_TIME_ZONE_INFORMATION, ptzi: LPTIME_ZONE_INFORMATION,
+    ) -> BOOL;
     // pub fn GetUILanguageInfo();
     // #[cfg(target_arch = "x86_64")]
     // pub fn GetUmsCompletionListEvent();
@@ -1399,7 +1420,9 @@ extern "system" {
     // pub fn SetDefaultDllDirectories();
     // pub fn SetDllDirectoryA();
     // pub fn SetDllDirectoryW();
-    // pub fn SetDynamicTimeZoneInformation();
+    pub fn SetDynamicTimeZoneInformation(
+        lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
+    ) -> BOOL;
     pub fn SetEndOfFile(hFile: HANDLE) -> BOOL;
     // pub fn SetEnvironmentStringsA();
     // pub fn SetEnvironmentStringsW();
@@ -1450,7 +1473,7 @@ extern "system" {
     pub fn SetLastError(dwErrCode: DWORD);
     // pub fn SetLocalPrimaryComputerNameA();
     // pub fn SetLocalPrimaryComputerNameW();
-    // pub fn SetLocalTime();
+    pub fn SetLocalTime(lpSystemTime: *const SYSTEMTIME) -> BOOL;
     // pub fn SetLocaleInfoA();
     // pub fn SetLocaleInfoW();
     // pub fn SetMailslotInfo();
@@ -1474,8 +1497,8 @@ extern "system" {
     // pub fn SetStdHandleEx();
     // pub fn SetSystemFileCacheSize();
     // pub fn SetSystemPowerState();
-    // pub fn SetSystemTime();
-    // pub fn SetSystemTimeAdjustment();
+    pub fn SetSystemTime(lpSystemTime: *const SYSTEMTIME) -> BOOL;
+    pub fn SetSystemTimeAdjustment(dwTimeAdjustment: DWORD, bTimeAdjustmentDisabled: BOOL) -> BOOL;
     // pub fn SetTapeParameters();
     // pub fn SetTapePosition();
     // pub fn SetThreadAffinityMask();
@@ -1499,7 +1522,7 @@ extern "system" {
     // pub fn SetThreadpoolTimerEx();
     // pub fn SetThreadpoolWait();
     // pub fn SetThreadpoolWaitEx();
-    // pub fn SetTimeZoneInformation();
+    pub fn SetTimeZoneInformation(lpTimeZoneInformation: *const TIME_ZONE_INFORMATION) -> BOOL;
     // pub fn SetTimerQueueTimer();
     // #[cfg(target_arch = "x86_64")]
     // pub fn SetUmsThreadInformation();
@@ -1526,14 +1549,16 @@ extern "system" {
     // pub fn SwitchToFiber();
     // pub fn SwitchToThread();
     pub fn SystemTimeToFileTime(
-        lpSystemTime: *const SystemTime, lpFileTime: LPFILETIME
+        lpSystemTime: *const SYSTEMTIME, lpFileTime: LPFILETIME,
     ) -> BOOL;
     pub fn SystemTimeToTzSpecificLocalTime(
-        lpTimeZone: LPTIME_ZONE_INFORMATION,
-        lpUniversalTime: LPSYSTEMTIME,
-        lpLocalTime: LPSYSTEMTIME
+        lpTimeZoneInformation: *const TIME_ZONE_INFORMATION, lpUniversalTime: *const SYSTEMTIME,
+        lpLocalTime: LPSYSTEMTIME,
     ) -> BOOL;
-    // pub fn SystemTimeToTzSpecificLocalTimeEx();
+    pub fn SystemTimeToTzSpecificLocalTimeEx(
+        lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
+        lpUniversalTime: *const SYSTEMTIME, lpLocalTime: LPSYSTEMTIME,
+    ) -> BOOL;
     pub fn TerminateJobObject(hJob: HANDLE, uExitCode: UINT) -> BOOL;
     pub fn TerminateProcess(hProcess: HANDLE, uExitCode: UINT) -> BOOL;
     // pub fn TerminateThread();
@@ -1550,13 +1575,14 @@ extern "system" {
     pub fn TryAcquireSRWLockShared(SRWLock: PSRWLOCK) -> BOOLEAN;
     pub fn TryEnterCriticalSection(lpCriticalSection: LPCRITICAL_SECTION) -> BOOL;
     // pub fn TrySubmitThreadpoolCallback();
-    // pub fn TzSpecificLocalTimeToSystemTime();
     pub fn TzSpecificLocalTimeToSystemTime(
-        lpTimeZone: LPTIME_ZONE_INFORMATION,
-        lpLocalTime: LPSYSTEMTIME,
-        lpUniveralTime: LPSYSTEMTIME
+        lpTimeZoneInformation: *const TIME_ZONE_INFORMATION, lpLocalTime: *const SYSTEMTIME,
+        lpUniversalTime: LPSYSTEMTIME,
     ) -> BOOL;
-    // pub fn TzSpecificLocalTimeToSystemTimeEx();
+    pub fn TzSpecificLocalTimeToSystemTimeEx(
+        lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
+        lpLocalTime: *const SYSTEMTIME, lpUniversalTime: LPSYSTEMTIME,
+    ) -> BOOL;
     // #[cfg(target_arch = "x86_64")]
     // pub fn UmsThreadYield();
     // pub fn UnhandledExceptionFilter();

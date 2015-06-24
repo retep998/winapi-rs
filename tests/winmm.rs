@@ -1,11 +1,9 @@
 // Copyright © 2015, Jordan Miner
 // Licensed under the MIT License <LICENSE.md>
-#![feature(test)]
 #![cfg(windows)]
 extern crate winmm;
-extern crate test;
 use winmm::*;
-use test::black_box as bb;
+#[inline(never)] fn bb<T>(_: T) {}
 #[test]
 fn functions() {
     bb(PlaySoundA);
