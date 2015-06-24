@@ -2,19 +2,28 @@
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to vssapi.
 #![cfg(windows)]
+#![allow(non_snake_case)]
 extern crate winapi;
 use winapi::*;
 
-// x86_64 will work once rust issue 23216 is fixed.
-// Starting link_name with \x01 prevents the name from being mangled further.
 #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
 extern "system" {
-    #[cfg(target_arch = "x86_64")]
-    #[link_name="\x01?CreateVssBackupComponents@@YAJPEAPEAVIVssBackupComponents@@@Z"]
+    #[link_name="CreateVssBackupComponentsInternal"]
     pub fn CreateVssBackupComponents(ppBackup: *mut *mut IVssBackupComponents) -> HRESULT;
-    
-    #[cfg(target_arch = "x86")]
-    #[link_name="\x01?CreateVssBackupComponents@@YGJPAPAVIVssBackupComponents@@@Z"]
-    pub fn CreateVssBackupComponents(ppBackup: *mut *mut IVssBackupComponents) -> HRESULT;
+    #[link_name="CreateVssExamineWriterMetadataInternal"]
+    pub fn CreateVssExamineWriterMetadata(
+        bstrXML: BSTR, ppMetadata: *mut *mut IVssExamineWriterMetadata
+    ) -> HRESULT;
+    #[link_name="IsVolumeSnapshottedInternal"]
+    pub fn IsVolumeSnapshotted(
+        pwszVolumeName: VSS_PWSZ, pbSnapshotsPresent: *mut BOOL, plSnapshotCapability: *mut LONG
+    ) -> HRESULT;
+    #[link_name="VssFreeSnapshotPropertiesInternal"]
+    pub fn VssFreeSnapshotProperties(pProp: *mut VSS_SNAPSHOT_PROP);
+    #[link_name="GetProviderMgmtInterfaceInternal"]
+    pub fn GetProviderMgmtInterface(
+        ProviderId: VSS_ID, InterfaceId: IID, ppItf: *mut *mut IUnknown
+    ) -> HRESULT;
+    #[link_name="ShouldBlockRevertInternal"]
+    pub fn ShouldBlockRevert(wszVolumeName: LPCWSTR, pbBlock: *mut bool) -> HRESULT;
 }
-

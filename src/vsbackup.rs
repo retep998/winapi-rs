@@ -1,6 +1,18 @@
 // Copyright © 2015, Brian Vincent
 // Licensed under the MIT License <LICENSE.md>
 //! VSS backup interfaces
+DEFINE_GUID!(IID_IVssExamineWriterMetadata, 0x902fcf7f, 0xb7fd, 0x42f8,
+    0x81, 0xf1, 0xb2, 0xe4, 0x00, 0xb1, 0xe5, 0xbd);
+
+DEFINE_GUID!(IID_IVssExamineWriterMetadataEx, 0x0c0e5ec0, 0xca44, 0x472b,
+    0xb7, 0x02, 0xe6, 0x52, 0xdb, 0x1c, 0x04, 0x51);
+                    
+DEFINE_GUID!(IID_IVssBackupComponents, 0x665c1d5f, 0xc218, 0x414d,
+    0xa0, 0x5d, 0x7f, 0xef, 0x5f, 0x9d, 0x5c, 0x86);
+
+DEFINE_GUID!(IID_IVssBackupComponentsEx, 0x963f03ad, 0x9e4c, 0x4a34,
+    0xac, 0x15, 0xe4, 0xb6, 0x17, 0x4e, 0x50, 0x36);
+
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct VSS_COMPONENTINFO {
     pub type_: ::VSS_COMPONENT_TYPE, // type is a keyword in rust
@@ -66,20 +78,41 @@ interface IVssExamineWriterMetadata(IVssExamineWriterMetadataVtbl): IUnknown(IUn
         &mut self, iMapping: ::UINT, ppFiledesc: *mut *mut ::IVssWMFiledesc
     ) -> ::HRESULT,
     fn GetBackupSchema(&mut self, pdwSchemaMask: *mut ::DWORD) -> ::HRESULT,
-    fn GetDocument(&mut self, pDoc: usize) -> ::HRESULT, //TODO IXMLDOMDocument
+    fn GetDocument(&mut self, pDoc: *mut ::c_void) -> ::HRESULT, //TODO IXMLDOMDocument
     fn SaveAsXML(&mut self, pbstrXML: *mut ::BSTR) -> ::HRESULT,
     fn LoadFromXML(&mut self, pbstrXML: *mut ::BSTR) -> ::HRESULT
 }
 );
-// class IVssExamineWriterMetadataEx
 
-// class IVssExamineWriterMetadataEx2
-
-#[repr(C)] #[allow(missing_copy_implementations)]
-pub struct IVssWriterComponentsExt {
-    pub lpVtbl: *mut IVssWriterComponentsExtVtbl,
+RIDL!(
+interface IVssExamineWriterMetadataEx(IVssExamineWriterMetadataExVtbl):
+    IVssExamineWriterMetadata(IVssExamineWriterMetadataVtbl) {
+    fn GetIdentityEx(
+        &mut self, pidInstance: *mut ::VSS_ID, pidWriter: *mut ::VSS_ID,
+        pbstrWriterName: *mut ::BSTR, pbstrInstanceName: *mut ::BSTR,
+        pUsage: *mut ::VSS_USAGE_TYPE, pSource: *mut ::VSS_SOURCE_TYPE
+    ) -> ::HRESULT
 }
-#[repr(C)]
+);
+
+RIDL!(
+interface IVssExamineWriterMetadataEx2(IVssExamineWriterMetadataEx2Vtbl):
+    IVssExamineWriterMetadataEx(IVssExamineWriterMetadataExVtbl) {
+    fn GetVersion(
+        &mut self, pdwMajorVersion: *mut ::DWORD, pdwMinorVersion: *mut ::DWORD
+    ) -> ::HRESULT,
+    fn GetExcludeFromSnapshotCount(&mut self, pcExcludedFromSnapshot: *mut ::UINT) -> ::HRESULT,
+    fn GetExcludeFromSnapshotFile(
+        &mut self, iFile: ::UINT, ppFiledesc: *mut *mut ::IVssWMFiledesc
+    ) -> ::HRESULT
+}
+);
+
+#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
+pub struct IVssWriterComponentsExt {
+    pub lpVtbl: *const IVssWriterComponentsExtVtbl,
+}
+#[repr(C)] #[allow(missing_copy_implementations)]
 pub struct IVssWriterComponentsExtVtbl {
     pub parent1: ::IVssWriterComponentsVtbl,
     pub parent2: ::IUnknownVtbl,
@@ -109,7 +142,7 @@ interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl)
     fn FreeWriterMetadata(&mut self) -> ::HRESULT,
     fn AddComponent(
         &mut self, instanceId: ::VSS_ID, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE,
-        wszLogicalPath: ::LPCWSTR, wszComponentName: ::LPWSTR
+        wszLogicalPath: ::LPCWSTR, wszComponentName: ::LPCWSTR
     ) -> ::HRESULT,
     fn PrepareForBackup(&mut self, ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
     fn AbortBackup(&mut self) -> ::HRESULT,
@@ -123,52 +156,52 @@ interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl)
     ) -> ::HRESULT,
     fn SetBackupSucceeded(
         &mut self, instanceId: ::VSS_ID, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE,
-        wszLogicalPath: ::LPCWSTR, wszComponentName: ::LPWSTR, bSucceded: bool
+        wszLogicalPath: ::LPCWSTR, wszComponentName: ::LPCWSTR, bSucceded: bool
     ) -> ::HRESULT,
     fn SetBackupOptions(
         &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPWSTR, wszBackupOptions: ::LPWSTR
+        wszComponentName: ::LPCWSTR, wszBackupOptions: ::LPCWSTR
     ) -> ::HRESULT,
     fn SetSelectedForRestore(
         &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPWSTR, bSelectedForRestore: bool
+        wszComponentName: ::LPCWSTR, bSelectedForRestore: bool
     ) -> ::HRESULT,
     fn SetRestoreOptions(
         &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPWSTR, wszRestoreOptions: ::LPWSTR
+        wszComponentName: ::LPCWSTR, wszRestoreOptions: ::LPCWSTR
     ) -> ::HRESULT,
     fn SetAdditionalRestores(
         &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPWSTR, bAdditionalRestores: bool
+        wszComponentName: ::LPCWSTR, bAdditionalRestores: bool
     ) -> ::HRESULT,
     fn SetPreviousBackupStamp(
         &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPWSTR, wszPreviousBackupStamp: ::LPWSTR
+        wszComponentName: ::LPCWSTR, wszPreviousBackupStamp: ::LPCWSTR
     ) -> ::HRESULT,
-    fn SaveAsXML(&mut self, pbstrXML: *mut *mut ::BSTR) -> ::HRESULT,
+    fn SaveAsXML(&mut self, pbstrXML: *mut ::BSTR) -> ::HRESULT,
     fn BackupComplete(&mut self, ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
     fn AddAlternativeLocationMapping(
         &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPWSTR, wszPath: ::LPCWSTR, wszFilespec: ::LPCWSTR, bRecursive: bool,
-        wszDestination: ::LPWSTR
+        wszComponentName: ::LPCWSTR, wszPath: ::LPCWSTR, wszFilespec: ::LPCWSTR, bRecursive: bool,
+        wszDestination: ::LPCWSTR
     ) -> ::HRESULT,
     fn AddRestoreSubcomponent(
         &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPWSTR, wszSubComponentLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR, wszSubComponentLogicalPath: ::LPCWSTR,
         wszSubComponentName: ::LPCWSTR, bRepair: bool
     ) -> ::HRESULT,
     fn SetFileRestoreStatus(
         &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPWSTR, status: ::VSS_FILE_RESTORE_STATUS
+        wszComponentName: ::LPCWSTR, status: ::VSS_FILE_RESTORE_STATUS
     ) -> ::HRESULT,
     fn AddNewTarget(
         &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPWSTR, wszPath: ::LPCWSTR, wszFileName: ::LPCWSTR, bRecursive: bool,
-        wszAlternatePath: ::LPWSTR
+        wszComponentName: ::LPCWSTR, wszPath: ::LPCWSTR, wszFileName: ::LPCWSTR, bRecursive: bool,
+        wszAlternatePath: ::LPCWSTR
     ) -> ::HRESULT,
     fn SetRangesFilePath(
         &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPWSTR, iPartialFile: ::UINT, wszRangesFile: ::LPCWSTR
+        wszComponentName: ::LPCWSTR, iPartialFile: ::UINT, wszRangesFile: ::LPCWSTR
     ) -> ::HRESULT,
     fn PreRestore(&mut self, ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
     fn PostRestore(&mut self, ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
@@ -186,7 +219,7 @@ interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl)
     fn BreakSnapshotSet(&mut self, SnapshotSetId: ::VSS_ID) -> ::HRESULT,
     fn GetSnapshotProperties(
         &mut self, SnapshotId: ::VSS_ID,
-        pProp: ::VSS_SNAPSHOT_PROP
+        pProp: *mut ::VSS_SNAPSHOT_PROP
     ) -> ::HRESULT,
     fn Query(&mut self, QueriedObjectId: ::VSS_ID, eQueriedObjectType: ::VSS_OBJECT_TYPE,
         eReturnedObjectsType: ::VSS_OBJECT_TYPE, ppEnum: *mut *mut ::IVssEnumObject) -> ::HRESULT,
@@ -213,7 +246,76 @@ interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl)
 }
 );
 
-// class IVssBackupComponentsEx
-// IVssBackupComponentsEx2
-// IVssBackupComponentsEx3
-// IVssBackupComponentsEx4
+RIDL!(
+interface IVssBackupComponentsEx(IVssBackupComponentsExVtbl):
+    IVssBackupComponents(IVssBackupComponentsVtbl) {
+    fn GetWriterMetadataEx(
+        &mut self, iWriter: ::UINT, pidInstance: *mut ::VSS_ID,
+        ppMetadata: *mut *mut ::IVssExamineWriterMetadataEx
+    ) -> ::HRESULT,
+    fn SetSelectedForRestoreEx(
+        &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR, bSelectedForRestore: bool, instanceId: ::VSS_ID
+    ) -> ::HRESULT
+}
+);
+
+RIDL!(
+interface IVssBackupComponentsEx2(IVssBackupComponentsEx2Vtbl):
+    IVssBackupComponentsEx(IVssBackupComponentsExVtbl) {
+    fn UnexposeSnapshot(&mut self, snapshotId: ::VSS_ID) -> ::HRESULT,
+    fn SetAuthoritativeRestore(
+        &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR, bAuth: bool
+    ) -> ::HRESULT,
+    fn SetRollForward(
+        &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR, rollType: ::VSS_ROLLFORWARD_TYPE,
+        wszRollForwardPoint: ::LPCWSTR
+    ) -> ::HRESULT,
+    fn SetRestoreName(
+        &mut self, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR, wszRestoreName: ::LPCWSTR
+    ) -> ::HRESULT,
+    fn BreakSnapshotSetEx(
+        &mut self, SnapshotSetID: ::VSS_ID, dwBreakFlags: ::DWORD, ppAsync: *mut *mut ::IVssAsync
+    ) -> ::HRESULT,
+    fn PreFastRecovery(
+        &mut self, SnapshotSetID: ::VSS_ID, dwPreFastRecoveryFlags: ::DWORD,
+        ppAsync: *mut *mut ::IVssAsync
+    ) -> ::HRESULT,
+    fn FastRecovery(
+        &mut self, SnapshotSetID: ::VSS_ID, dwFastRecoveryFlags: ::DWORD,
+        ppAsync: *mut *mut ::IVssAsync
+    ) -> ::HRESULT
+}
+);
+
+RIDL!(
+interface IVssBackupComponentsEx3(IVssBackupComponentsEx3Vtbl):
+    IVssBackupComponentsEx2(IVssBackupComponentsEx2Vtbl) {
+    fn GetWriterStatusEx(
+        &mut self, iWriter: ::UINT, pidInstance: *mut ::VSS_ID, pidWriter: *mut ::VSS_ID,
+        pbstrWriter: *mut ::BSTR, pnStatus: *mut ::VSS_WRITER_STATE,
+        phrFailureWriter: *mut ::HRESULT, phrApplication: *mut ::HRESULT,
+        pbstrApplicationMessage: *mut ::BSTR
+    ) -> ::HRESULT,
+    fn AddSnapshotToRecoverySet(
+        &mut self, snapshotId: ::VSS_ID, dwFlags: ::DWORD, pwszDestinationVolume: ::VSS_PWSZ
+    ) -> ::HRESULT,
+    fn RecoverSet(&mut self, dwFlags: ::DWORD, ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
+    fn GetSessionId(&mut self, idSession: *mut ::VSS_ID) -> ::HRESULT
+}
+);
+
+RIDL!(
+interface IVssBackupComponentsEx4(IVssBackupComponentsEx4Vtbl):
+    IVssBackupComponentsEx3(IVssBackupComponentsEx3Vtbl) {
+    fn GetRootAndLogicalPrefixPaths(
+        &mut self, pwszFilePath: ::VSS_PWSZ, ppwszRootPath: *mut ::VSS_PWSZ,
+        ppwszLogicalPrefix: *mut ::VSS_PWSZ, bNormalizeFQDNforRootPath: ::BOOL
+    ) -> ::HRESULT
+}
+);
+
+pub const VSS_SW_BOOTABLE_STATE: ::DWORD = 1;
