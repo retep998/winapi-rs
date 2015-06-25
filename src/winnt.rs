@@ -793,6 +793,22 @@ pub const IO_REPARSE_TAG_DEDUP: ::DWORD = 0x80000013;
 pub const IO_REPARSE_TAG_NFS: ::DWORD = 0x80000014;
 pub const IO_REPARSE_TAG_FILE_PLACEHOLDER: ::DWORD = 0x80000015;
 pub const IO_REPARSE_TAG_WOF: ::DWORD = 0x80000017;
+//14708
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct PROCESSOR_POWER_POLICY_INFO {
+    pub TimeCheck: ::DWORD,
+    pub DemoteLimit: ::DWORD,
+    pub PromoteLimit: ::DWORD,
+    pub DemotePercent: ::BYTE,
+    pub PromotePercent: ::BYTE,
+    pub Spare: [::BYTE; 2],
+    pub Reserved: ::DWORD,
+}
+BITFIELD!(PROCESSOR_POWER_POLICY_INFO Reserved: ::DWORD [
+    AllowDemotion set_AllowDemotion[0..1],
+    AllowPromotion set_AllowPromotion[1..2],
+]);
+pub type PPROCESSOR_POWER_POLICY_INFO = *mut PROCESSOR_POWER_POLICY_INFO;
 //15000
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IMAGE_FILE_HEADER {
