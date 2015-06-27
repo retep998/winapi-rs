@@ -854,14 +854,17 @@ pub struct IContactManagerInterop;
 //-------------------------------------------------------------------------------------------------
 // wtypes.h
 //-------------------------------------------------------------------------------------------------
-pub const CLSCTX_INPROC_SERVER: DWORD = 0x1;
-pub const CLSCTX_INPROC_HANDLER: DWORD = 0x2;
-pub const CLSCTX_LOCAL_SERVER: DWORD = 0x4;
-pub const CLSCTX_REMOTE_SERVER: DWORD = 0x10;
-pub const CLSCTX_SERVER: DWORD = CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER |
-                                 CLSCTX_REMOTE_SERVER;
-pub const CLSCTX_ALL: DWORD = CLSCTX_INPROC_HANDLER | CLSCTX_SERVER;
-
+pub type DATE = c_double;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DECIMAL {
+    pub wReserved: USHORT,
+    pub scale: BYTE,
+    pub sign: BYTE,
+    pub Hi32: ULONG,
+    pub Lo64: ULONGLONG,
+}
+pub const DECIMAL_NEG: ::BYTE = 0x80;
+pub type LPDECIMAL = *mut DECIMAL;
 pub type VARTYPE = c_ushort;
 
 //-------------------------------------------------------------------------------------------------
@@ -908,6 +911,14 @@ pub struct PROPVARIANT {
 // combaseapi.h
 // Base Component Object Model defintions.
 //-------------------------------------------------------------------------------------------------
+pub const CLSCTX_INPROC_SERVER: DWORD = 0x1;
+pub const CLSCTX_INPROC_HANDLER: DWORD = 0x2;
+pub const CLSCTX_LOCAL_SERVER: DWORD = 0x4;
+pub const CLSCTX_REMOTE_SERVER: DWORD = 0x10;
+pub const CLSCTX_SERVER: DWORD = CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER |
+                                 CLSCTX_REMOTE_SERVER;
+pub const CLSCTX_ALL: DWORD = CLSCTX_INPROC_HANDLER | CLSCTX_SERVER;
+
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ServerInformation {
     pub dwServerPid: DWORD,
