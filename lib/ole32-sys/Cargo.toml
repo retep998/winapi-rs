@@ -3,7 +3,7 @@ name = "ole32-sys"
 version = "0.1.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to ole32."
-documentation = "https://retep998.github.io/doc/ole32-sys/"
+documentation = "https://retep998.github.io/doc/ole32/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["Windows", "FFI", "WinSDK"]
@@ -14,6 +14,7 @@ links = "ole32"
 [lib]
 name = "ole32"
 
-[dependencies.winapi]
-version = "*"
-path = "../.."
+[dependencies]
+winapi = { version = "*", path = "../.." }
+[build-dependencies]
+winapi-build = { version = "*", path = "../../build" }

@@ -3,12 +3,13 @@ name = "secur32-sys"
 version = "0.0.1"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to secur32."
-documentation = "https://retep998.github.io/doc/secur32-sys/"
+documentation = "https://retep998.github.io/doc/secur32/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["Windows", "FFI", "WinSDK"]
 license = "MIT"
 build = "build.rs"
+links = "secur32"
 
 [lib]
 name = "secur32"

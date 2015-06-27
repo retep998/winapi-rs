@@ -3,7 +3,7 @@ name = "gdi32-sys"
 version = "0.1.1"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to gdi32."
-documentation = "https://retep998.github.io/doc/gdi32-sys/"
+documentation = "https://retep998.github.io/doc/gdi32/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["Windows", "FFI", "WinSDK"]
@@ -14,6 +14,7 @@ links = "gdi32"
 [lib]
 name = "gdi32"
 
-[dependencies.winapi]
-version = "*"
-path = "../.."
+[dependencies]
+winapi = { version = "*", path = "../.." }
+[build-dependencies]
+winapi-build = { version = "*", path = "../../build" }
