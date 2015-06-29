@@ -506,8 +506,12 @@ extern "system" {
     // pub fn LookupPrivilegeDisplayNameW();
     // pub fn LookupPrivilegeNameA();
     // pub fn LookupPrivilegeNameW();
-    // pub fn LookupPrivilegeValueA();
-    // pub fn LookupPrivilegeValueW();
+    pub fn LookupPrivilegeValueA(
+        lpSystemName: LPCSTR, lpName: LPCSTR, lpLuid: PLUID,
+    ) -> BOOL;
+    pub fn LookupPrivilegeValueW(
+        lpSystemName: LPCWSTR, lpName: LPCWSTR, lpLuid: PLUID,
+    ) -> BOOL;
     // pub fn LookupSecurityDescriptorPartsA();
     // pub fn LookupSecurityDescriptorPartsW();
     // pub fn LsaAddAccountRights();
