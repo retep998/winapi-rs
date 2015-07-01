@@ -1089,7 +1089,7 @@ pub struct D3DVOLUME_DESC {
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DLOCKED_RECT {
     pub Pitch: ::INT,
-    pub pBits: *mut ::libc::c_void,
+    pub pBits: *mut ::c_void,
 }
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DBOX {
@@ -1104,7 +1104,7 @@ pub struct D3DBOX {
 pub struct D3DLOCKED_BOX {
     pub RowPitch: ::INT,
     pub SlicePitch: ::INT,
-    pub pBits: *mut ::libc::c_void,
+    pub pBits: *mut ::c_void,
 }
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3DRANGE {

@@ -6,13 +6,9 @@
 #![warn(unused_qualifications, unused)]
 #![cfg(windows)]
 //-------------------------------------------------------------------------------------------------
-// External crates
-//-------------------------------------------------------------------------------------------------
-extern crate libc;
-//-------------------------------------------------------------------------------------------------
 // Imports
 //-------------------------------------------------------------------------------------------------
-pub use libc::{
+pub use std::os::raw::{
     c_void,
     c_char,
     c_schar,
@@ -25,10 +21,8 @@ pub use libc::{
     c_ulong,
     c_longlong,
     c_ulonglong,
-    wchar_t,
     c_float,
     c_double,
-    size_t,
 };
 pub use audioclient::*;
 pub use basetsd::*;
@@ -267,7 +261,7 @@ pub mod winuser;
 pub mod ws2def;
 pub mod wtypesbase;
 //-------------------------------------------------------------------------------------------------
-// Primitive types not defined by libc
+// Primitive types not provided by std
 //-------------------------------------------------------------------------------------------------
 pub type __int8 = i8;
 pub type __uint8 = u8;
@@ -277,6 +271,12 @@ pub type __int32 = i32;
 pub type __uint32 = u32;
 pub type __int64 = i64;
 pub type __uint64 = u64;
+pub type wchar_t = c_ushort;
+#[cfg(target_arch = "x86")]
+pub type size_t = c_uint;
+#[cfg(target_arch = "x86_64")]
+pub type size_t = __uint64;
+
 
 // guiddef.h
 #[repr(C)] #[derive(Clone, Copy, Debug)]
