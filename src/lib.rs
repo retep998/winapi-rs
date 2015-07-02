@@ -32,7 +32,9 @@ pub use d3d9caps::*;
 pub use d3d9types::*;
 pub use dbghelp::*;
 pub use dwmapi::*;
+pub use excpt::*;
 pub use fileapi::*;
+pub use guiddef::*;
 pub use heapapi::*;
 pub use inaddr::*;
 pub use libloaderapi::*;
@@ -220,7 +222,9 @@ pub mod d3d9caps;
 pub mod d3d9types;
 pub mod dbghelp;
 pub mod dwmapi;
+pub mod excpt;
 pub mod fileapi;
+pub mod guiddef;
 pub mod heapapi;
 pub mod inaddr;
 pub mod libloaderapi;
@@ -277,41 +281,6 @@ pub type size_t = c_uint;
 #[cfg(target_arch = "x86_64")]
 pub type size_t = __uint64;
 
-
-// guiddef.h
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct GUID {
-    pub Data1: c_ulong,
-    pub Data2: c_ushort,
-    pub Data3: c_ushort,
-    pub Data4: [c_uchar; 8],
-}
-pub type LPGUID = *mut GUID;
-pub type LPCGUID = *const GUID;
-pub type IID = GUID;
-pub type LPIID = *mut IID;
-pub type CLSID = GUID;
-pub type LPCLSID = *mut CLSID;
-pub type FMTID = GUID;
-pub type LPFMTID = *mut FMTID;
-pub type REFGUID = *const GUID;
-pub type REFIID = *const IID;
-pub type REFCLSID = *const IID;
-pub type REFFMTID = *const IID;
-// excpt.h
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub enum EXCEPTION_DISPOSITION {
-    ExceptionContinueExecution = 0,
-    ExceptionContinueSearch = 1,
-    ExceptionNestedException = 2,
-    ExceptionCollidedUnwind = 3,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct _EXCEPTION_RECORD;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct _CONTEXT;
-#[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct _DISPATCHER_CONTEXT;
 // shlobj.h
 pub type GPFIDL_FLAGS = c_int;
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
@@ -338,85 +307,6 @@ pub const GPFIDL_ALTNAME: GPFIDL_FLAGS = 0x0001;
 pub const GPFIDL_UNCPRINTER: GPFIDL_FLAGS = 0x0002;
 pub const OFASI_EDIT: DWORD = 0x0001;
 pub const OFASI_OPENDESKTOP: DWORD = 0x0002;
-// winddef.h
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HWND__;
-pub type HWND = *mut HWND__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HHOOK__;
-pub type HHOOK = *mut HHOOK__;
-pub type HGDIOBJ = *mut c_void;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HACCEL__;
-pub type HACCEL = *mut HACCEL__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HBITMAP__;
-pub type HBITMAP = *mut HBITMAP__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HBRUSH__;
-pub type HBRUSH = *mut HBRUSH__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HCOLORSPACE__;
-pub type HCOLORSPACE = *mut HCOLORSPACE__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HDC__;
-pub type HDC = *mut HDC__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HGLRC__;
-pub type HGLRC = *mut HGLRC__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HDESK__;
-pub type HDESK = *mut HDESK__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HENHMETAFILE__;
-pub type HENHMETAFILE = *mut HENHMETAFILE__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HFONT__;
-pub type HFONT = *mut HFONT__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HICON__;
-pub type HICON = *mut HICON__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HMENU__;
-pub type HMENU = *mut HMENU__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HPALETTE__;
-pub type HPALETTE = *mut HPALETTE__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HPEN__;
-pub type HPEN = *mut HPEN__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HWINEVENTHOOK__;
-pub type HWINEVENTHOOK = *mut HWINEVENTHOOK__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HMONITOR__;
-pub type HMONITOR = *mut HMONITOR__;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HUMPD__;
-pub type HUMPD = *mut HUMPD__;
-pub type HCURSOR = HICON;
-pub type COLORREF = DWORD;
-pub type LPCOLORREF = *mut DWORD;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RECT {
-    pub left: LONG,
-    pub top: LONG,
-    pub right: LONG,
-    pub bottom: LONG,
-}
-pub type PRECT = *mut RECT;
-pub type NPRECT = *mut RECT;
-pub type LPRECT = *mut RECT;
-pub type LPCRECT = *const RECT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POINT {
-    pub x: LONG,
-    pub y: LONG,
-}
-pub type PPOINT = *mut POINT;
-pub type NPPOINT = *mut POINT;
-pub type LPPOINT = *mut POINT;
-
 // shlobjdl.h
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IContextMenu;
