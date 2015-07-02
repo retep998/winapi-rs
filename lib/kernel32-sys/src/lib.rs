@@ -101,12 +101,16 @@ extern "system" {
     pub fn ConvertThreadToFiberEx(lpParameter: LPVOID, dwFlags: DWORD) -> LPVOID;
     // pub fn CopyContext();
     // pub fn CopyFile2();
-    // pub fn CopyFileA();
+    pub fn CopyFileA(
+        lpExistingFileName: LPCSTR, lpNewFileName: LPCSTR, bFailIfExists: BOOL
+    ) -> BOOL;
     // pub fn CopyFileExA();
     // pub fn CopyFileExW();
     // pub fn CopyFileTransactedA();
     // pub fn CopyFileTransactedW();
-    // pub fn CopyFileW();
+    pub fn CopyFileW(
+        lpExistingFileName: LPCWSTR, lpNewFileName: LPCWSTR, bFailIfExists: BOOL
+    ) -> BOOL;
     // pub fn CreateActCtxA();
     // pub fn CreateActCtxW();
     // pub fn CreateBoundaryDescriptorA();
