@@ -44,6 +44,7 @@ These are the ones that actually have functions in them:
 * [user32-sys ![Crates.io](https://img.shields.io/crates/v/user32-sys.svg)](https://crates.io/crates/user32-sys)
 * [uuid-sys ![Crates.io](https://img.shields.io/crates/v/uuid-sys.svg)](https://crates.io/crates/uuid-sys)
 * [winmm-sys ![Crates.io](https://img.shields.io/crates/v/winmm-sys.svg)](https://crates.io/crates/winmm-sys)
+* [xinput-sys ![Crates.io](https://img.shields.io/crates/v/xinput-sys.svg)](https://crates.io/crates/xinput-sys)
 
 ### Reserved crates ###
 These are the ones that are reserved for future use:
@@ -447,7 +448,6 @@ These are the ones that are reserved for future use:
 * [xapobase-sys ![Crates.io](https://img.shields.io/crates/v/xapobase-sys.svg)](https://crates.io/crates/xapobase-sys)
 * [xaswitch-sys ![Crates.io](https://img.shields.io/crates/v/xaswitch-sys.svg)](https://crates.io/crates/xaswitch-sys)
 * [xaudio2-sys ![Crates.io](https://img.shields.io/crates/v/xaudio2-sys.svg)](https://crates.io/crates/xaudio2-sys)
-* [xinput-sys ![Crates.io](https://img.shields.io/crates/v/xinput-sys.svg)](https://crates.io/crates/xinput-sys)
 * [xinput9_1_0-sys ![Crates.io](https://img.shields.io/crates/v/xinput9_1_0-sys.svg)](https://crates.io/crates/xinput9_1_0-sys)
 * [xmllite-sys ![Crates.io](https://img.shields.io/crates/v/xmllite-sys.svg)](https://crates.io/crates/xmllite-sys)
 * [xolehlp-sys ![Crates.io](https://img.shields.io/crates/v/xolehlp-sys.svg)](https://crates.io/crates/xolehlp-sys)
