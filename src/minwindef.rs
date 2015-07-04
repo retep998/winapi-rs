@@ -37,22 +37,22 @@ pub type WPARAM = ::UINT_PTR;
 pub type LPARAM = ::LONG_PTR;
 pub type LRESULT = ::LONG_PTR;
 pub fn MAKEWORD(a: BYTE, b: BYTE) -> WORD {
-	(a as WORD) | ((b as WORD) << 8)
+    (a as WORD) | ((b as WORD) << 8)
 }
 pub fn MAKELONG(a: WORD, b: WORD) -> ::LONG {
-	((a as DWORD) | ((b as DWORD) << 16)) as ::LONG
+    ((a as DWORD) | ((b as DWORD) << 16)) as ::LONG
 }
 pub fn LOWORD(l: DWORD) -> WORD {
-	(l & 0xffff) as WORD
+    (l & 0xffff) as WORD
 }
 pub fn HIWORD(l: DWORD) -> WORD {
-	((l >> 16) & 0xffff) as WORD
+    ((l >> 16) & 0xffff) as WORD
 }
 pub fn LOBYTE(l: WORD) -> BYTE {
-	(l & 0xff) as BYTE
+    (l & 0xff) as BYTE
 }
 pub fn HIBYTE(l: WORD) -> BYTE {
-	((l >> 8) & 0xff) as BYTE
+    ((l >> 8) & 0xff) as BYTE
 }
 pub type SPHANDLE = *mut ::HANDLE;
 pub type LPHANDLE = *mut ::HANDLE;

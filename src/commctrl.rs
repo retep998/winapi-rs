@@ -3,8 +3,8 @@
 //138
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct INITCOMMONCONTROLSEX {
-	pub dwSize: ::DWORD,
-	pub dwICC: ::DWORD,
+    pub dwSize: ::DWORD,
+    pub dwICC: ::DWORD,
 }
 pub type LPINITCOMMONCONTROLSEX = *mut INITCOMMONCONTROLSEX;
 pub const ICC_LISTVIEW_CLASSES: ::DWORD = 0x1;

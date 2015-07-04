@@ -5,5 +5,5 @@
 extern crate winapi;
 use winapi::*;
 extern "system" {
-	pub fn InitCommonControlsEx(lpInitCtrls: *const INITCOMMONCONTROLSEX) -> BOOL;
+    pub fn InitCommonControlsEx(lpInitCtrls: *const INITCOMMONCONTROLSEX) -> BOOL;
 }
