@@ -808,7 +808,9 @@ extern "system" {
     // pub fn SetGestureConfig();
     // pub fn SetKeyboardState();
     // pub fn SetLastErrorEx();
-    // pub fn SetLayeredWindowAttributes();
+    pub fn SetLayeredWindowAttributes(
+        hwnd: HWND, crKey: COLORREF, bAlpha: BYTE, dwFlags: DWORD
+    ) -> BOOL;
     // pub fn SetMenu();
     // pub fn SetMenuContextHelpId();
     // pub fn SetMenuDefaultItem();
