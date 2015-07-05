@@ -356,7 +356,7 @@ extern "system" {
         hdc: HDC, hbm: HBITMAP, start: UINT, cLines: UINT, lpvBits: LPVOID, lpbmi: LPBITMAPINFO,
         usage: UINT
     ) -> c_int;
-    // pub fn GetDeviceCaps();
+    pub fn GetDeviceCaps(hdc: HDC, nIndex: c_int) -> c_int;
     // pub fn GetDeviceGammaRamp();
     // pub fn GetEnhMetaFileA();
     // pub fn GetEnhMetaFileBits();
