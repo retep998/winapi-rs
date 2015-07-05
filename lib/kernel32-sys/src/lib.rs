@@ -245,7 +245,7 @@ extern "system" {
     // pub fn CreateThreadpoolWork();
     // pub fn CreateTimerQueue();
     // pub fn CreateTimerQueueTimer();
-    // pub fn CreateToolhelp32Snapshot();
+    pub fn CreateToolhelp32Snapshot(dwFlags: DWORD, th32ProcessID: DWORD) -> HANDLE;
     // #[cfg(target_arch = "x86_64")]
     // pub fn CreateUmsCompletionList();
     // #[cfg(target_arch = "x86_64")]
@@ -930,10 +930,10 @@ extern "system" {
     // pub fn GlobalUnfix();
     pub fn GlobalUnlock(hMem: HGLOBAL) -> BOOL;
     // pub fn GlobalWire();
-    // pub fn Heap32First();
-    // pub fn Heap32ListFirst();
-    // pub fn Heap32ListNext();
-    // pub fn Heap32Next();
+    pub fn Heap32First(lphe: LPHEAPENTRY32, th32ProcessID: DWORD, th32HeapID: ULONG_PTR) -> BOOL;
+    pub fn Heap32ListFirst(hSnapshot: HANDLE, lphl: LPHEAPLIST32) -> BOOL;
+    pub fn Heap32ListNext(hSnapshot: HANDLE, lphl: LPHEAPLIST32) -> BOOL;
+    pub fn Heap32Next(lphe: LPHEAPENTRY32) -> BOOL;
     pub fn HeapAlloc(hHeap: HANDLE, dwFlags: DWORD, dwBytes: SIZE_T) -> LPVOID;
     pub fn HeapCompact(hHeap: HANDLE, dwFlags: DWORD) -> SIZE_T;
     pub fn HeapCreate(flOptions: DWORD, dwInitialSize: SIZE_T, dwMaximumSize: SIZE_T) -> HANDLE;
@@ -1105,10 +1105,10 @@ extern "system" {
     ) -> LPVOID;
     // pub fn MapViewOfFileExNuma();
     // pub fn MapViewOfFileFromApp();
-    // pub fn Module32First();
-    // pub fn Module32FirstW();
-    // pub fn Module32Next();
-    // pub fn Module32NextW();
+    pub fn Module32First(hSnapshot: HANDLE, lpme: LPMODULEENTRY32) -> BOOL;
+    pub fn Module32FirstW(hSnapshot: HANDLE, lpme: LPMODULEENTRY32W) -> BOOL;
+    pub fn Module32Next(hSnapshot: HANDLE, lpme: LPMODULEENTRY32) -> BOOL;
+    pub fn Module32NextW(hSnapshot: HANDLE, lpme: LPMODULEENTRY32W) -> BOOL;
     // pub fn MoveFileA();
     pub fn MoveFileExA(lpExistingFileName: LPCSTR, lpNewFileName: LPCSTR, dwFlags: DWORD) -> BOOL;
     pub fn MoveFileExW(
@@ -1181,10 +1181,10 @@ extern "system" {
     // pub fn PowerSetRequest();
     // pub fn PrefetchVirtualMemory();
     // pub fn PrepareTape();
-    // pub fn Process32First();
-    // pub fn Process32FirstW();
-    // pub fn Process32Next();
-    // pub fn Process32NextW();
+    pub fn Process32First(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
+    pub fn Process32FirstW(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32W) -> BOOL;
+    pub fn Process32Next(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
+    pub fn Process32NextW(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32W) -> BOOL;
     // pub fn ProcessIdToSessionId();
     // pub fn PssCaptureSnapshot();
     // pub fn PssDuplicateSnapshot();
@@ -1562,13 +1562,15 @@ extern "system" {
     pub fn TerminateJobObject(hJob: HANDLE, uExitCode: UINT) -> BOOL;
     pub fn TerminateProcess(hProcess: HANDLE, uExitCode: UINT) -> BOOL;
     // pub fn TerminateThread();
-    // pub fn Thread32First();
-    // pub fn Thread32Next();
+    pub fn Thread32First(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
+    pub fn Thread32Next(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
     // pub fn TlsAlloc();
     // pub fn TlsFree();
     // pub fn TlsGetValue();
     // pub fn TlsSetValue();
-    // pub fn Toolhelp32ReadProcessMemory();
+    pub fn Toolhelp32ReadProcessMemory(th32ProcessID: DWORD, lpBaseAddress: LPCVOID,
+        lpBuffer: LPVOID, cbRead: SIZE_T, lpNumberOfBytesRead: *mut SIZE_T
+    ) -> BOOL;
     // pub fn TransactNamedPipe();
     // pub fn TransmitCommChar();
     pub fn TryAcquireSRWLockExclusive(SRWLock: PSRWLOCK) -> BOOLEAN;
