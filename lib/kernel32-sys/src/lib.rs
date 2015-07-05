@@ -1349,7 +1349,7 @@ extern "system" {
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
     // pub fn RtlCompareMemory();
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    // pub fn RtlCopyMemory();
+    pub fn RtlCopyMemory(Destination: PVOID, Source: *const VOID, Length: SIZE_T);
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
     // pub fn RtlDeleteFunctionTable();
     // pub fn RtlFillMemory();
