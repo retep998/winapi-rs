@@ -171,11 +171,11 @@ pub struct INPUT {
 }
 #[test]
 fn test_INPUT() {
-    use std::mem::{size_of, min_align_of};
+    use std::mem::{size_of, align_of};
     assert!(size_of::<MOUSEINPUT>() >= size_of::<HARDWAREINPUT>());
     assert!(size_of::<MOUSEINPUT>() >= size_of::<KEYBDINPUT>());
-    assert!(min_align_of::<MOUSEINPUT>() >= min_align_of::<HARDWAREINPUT>());
-    assert!(min_align_of::<MOUSEINPUT>() >= min_align_of::<KEYBDINPUT>());
+    assert!(align_of::<MOUSEINPUT>() >= align_of::<HARDWAREINPUT>());
+    assert!(align_of::<MOUSEINPUT>() >= align_of::<KEYBDINPUT>());
 }
 pub type PINPUT = *mut INPUT;
 pub type LPINPUT = *mut INPUT;
@@ -564,13 +564,13 @@ pub struct RAWINPUT {
 }
 #[test]
 fn test_RAWINPUT() {
-    use std::mem::{size_of, min_align_of};
+    use std::mem::{size_of, align_of};
     assert!(size_of::<RAWMOUSE>() >= size_of::<RAWMOUSE>());
     assert!(size_of::<RAWMOUSE>() >= size_of::<RAWKEYBOARD>());
     assert!(size_of::<RAWMOUSE>() >= size_of::<RAWHID>());
-    assert!(min_align_of::<RAWMOUSE>() >= min_align_of::<RAWMOUSE>());
-    assert!(min_align_of::<RAWMOUSE>() >= min_align_of::<RAWKEYBOARD>());
-    assert!(min_align_of::<RAWMOUSE>() >= min_align_of::<RAWHID>());
+    assert!(align_of::<RAWMOUSE>() >= align_of::<RAWMOUSE>());
+    assert!(align_of::<RAWMOUSE>() >= align_of::<RAWKEYBOARD>());
+    assert!(align_of::<RAWMOUSE>() >= align_of::<RAWHID>());
 }
 pub type PRAWINPUT = *mut RAWINPUT;
 pub type LPRAWINPUT = *mut RAWINPUT;
@@ -614,14 +614,14 @@ pub struct RID_DEVICE_INFO {
 }
 #[test]
 fn test_RID_DEVICE_INFO() {
-    use std::mem::{size_of, min_align_of};
+    use std::mem::{size_of, align_of};
     assert!(size_of::<RID_DEVICE_INFO_KEYBOARD>() >= size_of::<RID_DEVICE_INFO_MOUSE>());
     assert!(size_of::<RID_DEVICE_INFO_KEYBOARD>() >= size_of::<RID_DEVICE_INFO_KEYBOARD>());
     assert!(size_of::<RID_DEVICE_INFO_KEYBOARD>() >= size_of::<RID_DEVICE_INFO_HID>());
-    assert!(min_align_of::<RID_DEVICE_INFO_KEYBOARD>() >= min_align_of::<RID_DEVICE_INFO_MOUSE>());
-    assert!(min_align_of::<RID_DEVICE_INFO_KEYBOARD>()
-        >= min_align_of::<RID_DEVICE_INFO_KEYBOARD>());
-    assert!(min_align_of::<RID_DEVICE_INFO_KEYBOARD>() >= min_align_of::<RID_DEVICE_INFO_HID>());
+    assert!(align_of::<RID_DEVICE_INFO_KEYBOARD>() >= align_of::<RID_DEVICE_INFO_MOUSE>());
+    assert!(align_of::<RID_DEVICE_INFO_KEYBOARD>()
+        >= align_of::<RID_DEVICE_INFO_KEYBOARD>());
+    assert!(align_of::<RID_DEVICE_INFO_KEYBOARD>() >= align_of::<RID_DEVICE_INFO_HID>());
 }
 pub type PRID_DEVICE_INFO = *mut RID_DEVICE_INFO;
 pub type LPRID_DEVICE_INFO = *mut RID_DEVICE_INFO;
