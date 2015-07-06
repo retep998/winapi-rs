@@ -492,8 +492,8 @@ extern "system" {
     // pub fn GetCommProperties();
     // pub fn GetCommState();
     // pub fn GetCommTimeouts();
-    // pub fn GetCommandLineA();
-    // pub fn GetCommandLineW();
+    pub fn GetCommandLineA() -> LPSTR;
+    pub fn GetCommandLineW() -> LPWSTR;
     pub fn GetCompressedFileSizeA(lpFileName: LPCSTR, lpFileSizeHigh: LPDWORD) -> DWORD;
     // pub fn GetCompressedFileSizeTransactedA();
     // pub fn GetCompressedFileSizeTransactedW();
@@ -1749,8 +1749,8 @@ extern "system" {
     // pub fn lstrcpynA();
     // pub fn lstrcpynW();
     // pub fn lstrlen();
-    // pub fn lstrlenA();
-    // pub fn lstrlenW();
+    pub fn lstrlenA(lpString: LPCSTR) -> i32;
+    pub fn lstrlenW(lpString: LPCWSTR) -> i32;
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
     // pub fn uaw_lstrcmpW();
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
