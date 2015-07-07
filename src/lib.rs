@@ -43,10 +43,12 @@ pub use minwindef::*;
 pub use mmdeviceapi::*;
 pub use mmreg::*;
 pub use mmsystem::*;
+pub use objbase::*;
 pub use objidl::*;
 pub use objidlbase::*;
 pub use processthreadsapi::*;
 pub use propsys::*;
+pub use rpcdce::*;
 pub use schannel::*;
 pub use shellapi::*;
 pub use shobjidl::*;
@@ -58,6 +60,10 @@ pub use tlhelp32::*;
 pub use unknwnbase::*;
 pub use usp10::*;
 pub use vadefs::*;
+pub use vsbackup::*;
+pub use vss::*;
+pub use vsserror::*;
+pub use vswriter::*;
 pub use winbase::*;
 pub use wincon::*;
 pub use wincred::*;
@@ -235,10 +241,12 @@ pub mod minwindef;
 pub mod mmdeviceapi;
 pub mod mmreg;
 pub mod mmsystem;
+pub mod objbase;
 pub mod objidl;
 pub mod objidlbase;
 pub mod processthreadsapi;
 pub mod propsys;
+pub mod rpcdce;
 pub mod schannel;
 pub mod shellapi;
 pub mod shobjidl;
@@ -250,6 +258,10 @@ pub mod tlhelp32;
 pub mod unknwnbase;
 pub mod usp10;
 pub mod vadefs;
+pub mod vsbackup;
+pub mod vss;
+pub mod vsserror;
+pub mod vswriter;
 pub mod winbase;
 pub mod wincon;
 pub mod wincred;
@@ -762,6 +774,9 @@ pub struct DECIMAL {
 pub const DECIMAL_NEG: ::BYTE = 0x80;
 pub type LPDECIMAL = *mut DECIMAL;
 pub type VARTYPE = c_ushort;
+
+pub type BSTR = *mut OLECHAR;
+pub type LPBSTR = *mut BSTR;
 
 //-------------------------------------------------------------------------------------------------
 // audiosessiontypes.h

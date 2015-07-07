@@ -27,6 +27,7 @@ shell32-sys = { version = "*", path = "lib/shell32-sys" }
 user32-sys = { version = "*", path = "lib/user32-sys" }
 usp10-sys = { version = "*", path = "lib/usp10-sys" }
 uuid-sys = { version = "*", path = "lib/uuid-sys" }
+vssapi-sys = { version = "*", path = "lib/vssapi-sys" }
 winhttp-sys = { version = "*", path = "lib/winhttp-sys" }
 winmm-sys = { version = "*", path = "lib/winmm-sys" }
 xinput-sys = { version = "*", path = "lib/xinput-sys" }

@@ -43,6 +43,7 @@ These are the ones that actually have functions in them:
 * [shell32-sys ![Crates.io](https://img.shields.io/crates/v/shell32-sys.svg)](https://crates.io/crates/shell32-sys)
 * [user32-sys ![Crates.io](https://img.shields.io/crates/v/user32-sys.svg)](https://crates.io/crates/user32-sys)
 * [uuid-sys ![Crates.io](https://img.shields.io/crates/v/uuid-sys.svg)](https://crates.io/crates/uuid-sys)
+* [vssapi-sys ![Crates.io](https://img.shields.io/crates/v/vssapi-sys.svg)](https://crates.io/crates/vssapi-sys)
 * [winmm-sys ![Crates.io](https://img.shields.io/crates/v/winmm-sys.svg)](https://crates.io/crates/winmm-sys)
 * [xinput-sys ![Crates.io](https://img.shields.io/crates/v/xinput-sys.svg)](https://crates.io/crates/xinput-sys)
 
@@ -389,7 +390,6 @@ These are the ones that are reserved for future use:
 * [virtdisk-sys ![Crates.io](https://img.shields.io/crates/v/virtdisk-sys.svg)](https://crates.io/crates/virtdisk-sys)
 * [vscmgr-sys ![Crates.io](https://img.shields.io/crates/v/vscmgr-sys.svg)](https://crates.io/crates/vscmgr-sys)
 * [vss_uuid-sys ![Crates.io](https://img.shields.io/crates/v/vss_uuid-sys.svg)](https://crates.io/crates/vss_uuid-sys)
-* [vssapi-sys ![Crates.io](https://img.shields.io/crates/v/vssapi-sys.svg)](https://crates.io/crates/vssapi-sys)
 * [vstorinterface-sys ![Crates.io](https://img.shields.io/crates/v/vstorinterface-sys.svg)](https://crates.io/crates/vstorinterface-sys)
 * [wbemuuid-sys ![Crates.io](https://img.shields.io/crates/v/wbemuuid-sys.svg)](https://crates.io/crates/wbemuuid-sys)
 * [wcmapi-sys ![Crates.io](https://img.shields.io/crates/v/wcmapi-sys.svg)](https://crates.io/crates/wcmapi-sys)
