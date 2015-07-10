@@ -1045,6 +1045,36 @@ pub const GW_CHILD: UINT = 5;
 pub const GW_ENABLEDPOPUP: UINT = 6;
 pub const GW_MAX: UINT = 6;
 
+pub const HTERROR: c_int = -2;
+pub const HTTRANSPARENT: c_int = -1;
+pub const HTNOWHERE: c_int = 0;
+pub const HTCLIENT: c_int = 1;
+pub const HTCAPTION: c_int = 2;
+pub const HTSYSMENU: c_int = 3;
+pub const HTGROWBOX: c_int = 4;
+pub const HTSIZE: c_int = HTGROWBOX;
+pub const HTMENU: c_int = 5;
+pub const HTHSCROLL: c_int = 6;
+pub const HTVSCROLL: c_int = 7;
+pub const HTMINBUTTON: c_int = 8;
+pub const HTMAXBUTTON: c_int = 9;
+pub const HTLEFT: c_int = 10;
+pub const HTRIGHT: c_int = 11;
+pub const HTTOP: c_int = 12;
+pub const HTTOPLEFT: c_int = 13;
+pub const HTTOPRIGHT: c_int = 14;
+pub const HTBOTTOM: c_int = 15;
+pub const HTBOTTOMLEFT: c_int = 16;
+pub const HTBOTTOMRIGHT: c_int = 17;
+pub const HTBORDER: c_int = 18;
+pub const HTREDUCE: c_int = HTMINBUTTON;
+pub const HTZOOM: c_int = HTMAXBUTTON;
+pub const HTSIZEFIRST: c_int = HTLEFT;
+pub const HTSIZELAST: c_int = HTBOTTOMRIGHT;
+pub const HTOBJECT: c_int = 19;
+pub const HTCLOSE: c_int = 20;
+pub const HTHELP: c_int = 21;
+
 pub const LSFW_LOCK: UINT = 1;
 pub const LSFW_UNLOCK: UINT = 2;
 
