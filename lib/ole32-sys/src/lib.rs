@@ -89,15 +89,9 @@ extern "system" {
     pub fn CoInitialize(pvReserved: LPVOID) -> HRESULT;
     pub fn CoInitializeEx(pvReserved: LPVOID, dwCoInit: DWORD) -> HRESULT;
     pub fn CoInitializeSecurity(
-        pSecDesc: PSECURITY_DESCRIPTOR,
-        cAuthSvc: LONG,
-        asAuthSvc: *mut SOLE_AUTHENTICATION_SERVICE,
-        pReserved1: LPVOID,
-        dwAuthnLevel: DWORD,
-        dwImpLevel: DWORD,
-        pAuthList: LPVOID,
-        dwCapabilities: DWORD,
-        pReserved3: LPVOID,
+        pSecDesc: PSECURITY_DESCRIPTOR, cAuthSvc: LONG,
+        asAuthSvc: *mut SOLE_AUTHENTICATION_SERVICE, pReserved1: LPVOID, dwAuthnLevel: DWORD,
+        dwImpLevel: DWORD, pAuthList: LPVOID, dwCapabilities: DWORD, pReserved3: LPVOID,
     ) -> HRESULT;
     // pub fn CoInitializeWOW();
     // pub fn CoInstall();

@@ -27,6 +27,7 @@ pub use std::os::raw::{
 pub use audioclient::*;
 pub use basetsd::*;
 pub use commctrl::*;
+pub use corsym::*;
 pub use d3d9::*;
 pub use d3d9caps::*;
 pub use d3d9types::*;
@@ -225,6 +226,7 @@ macro_rules! BITFIELD {
 pub mod audioclient;
 pub mod basetsd;
 pub mod commctrl;
+pub mod corsym;
 pub mod d3d9;
 pub mod d3d9caps;
 pub mod d3d9types;
