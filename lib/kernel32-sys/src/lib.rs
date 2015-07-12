@@ -1130,8 +1130,8 @@ extern "system" {
     // pub fn NotifyMountMgr();
     // pub fn NotifyUILanguageChange();
     // pub fn OOBEComplete();
-    // pub fn OpenEventA();
-    // pub fn OpenEventW();
+    pub fn OpenEventA(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCSTR) -> HANDLE;
+    pub fn OpenEventW(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR) -> HANDLE;
     // pub fn OpenFile();
     // pub fn OpenFileById();
     pub fn OpenFileMappingA(
@@ -1327,7 +1327,7 @@ extern "system" {
     // pub fn ReplacePartitionUnit();
     // pub fn RequestDeviceWakeup();
     // pub fn RequestWakeupLatency();
-    // pub fn ResetEvent();
+    pub fn ResetEvent(hEvent: HANDLE) -> BOOL;
     // pub fn ResetWriteWatch();
     // pub fn ResolveDelayLoadedAPI();
     // pub fn ResolveDelayLoadsFromDll();
@@ -1429,7 +1429,7 @@ extern "system" {
     // pub fn SetEnvironmentVariableA();
     // pub fn SetEnvironmentVariableW();
     // pub fn SetErrorMode();
-    // pub fn SetEvent();
+    pub fn SetEvent(hEvent: HANDLE) -> BOOL;
     // pub fn SetEventWhenCallbackReturns();
     // pub fn SetFileApisToANSI();
     // pub fn SetFileApisToOEM();
@@ -1628,10 +1628,17 @@ extern "system" {
     // pub fn WTSGetActiveConsoleSessionId();
     // pub fn WaitCommEvent();
     // pub fn WaitForDebugEvent();
-    // pub fn WaitForMultipleObjects();
-    // pub fn WaitForMultipleObjectsEx();
-    // pub fn WaitForSingleObject();
-    // pub fn WaitForSingleObjectEx();
+    pub fn WaitForMultipleObjects(
+        nCount: DWORD, lpHandles: *const HANDLE, bWaitAll: BOOL, dwMilliseconds: DWORD,
+    ) -> DWORD;
+    pub fn WaitForMultipleObjectsEx(
+        nCount: DWORD, lpHandles: *const HANDLE, bWaitAll: BOOL, dwMilliseconds: DWORD,
+        bAlertable: BOOL,
+    ) -> DWORD;
+    pub fn WaitForSingleObject(hHandle: HANDLE, dwMilliseconds: DWORD) -> DWORD;
+    pub fn WaitForSingleObjectEx(
+        hHandle: HANDLE, dwMilliseconds: DWORD, bAlertable: BOOL,
+    ) -> DWORD;
     // pub fn WaitForThreadpoolIoCallbacks();
     // pub fn WaitForThreadpoolTimerCallbacks();
     // pub fn WaitForThreadpoolWaitCallbacks();

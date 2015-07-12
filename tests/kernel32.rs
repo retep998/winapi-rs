@@ -8,4 +8,12 @@ use kernel32::*;
 fn functions() {
     bb(GetStartupInfoA);
     bb(GetStartupInfoW);
+    bb(OpenEventA);
+    bb(OpenEventW);
+    bb(ResetEvent);
+    bb(SetEvent);
+    bb(WaitForMultipleObjects);
+    bb(WaitForMultipleObjectsEx);
+    bb(WaitForSingleObject);
+    bb(WaitForSingleObjectEx);
 }
