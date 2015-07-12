@@ -64,7 +64,7 @@ extern "system" {
     // pub fn CancelThreadpoolIo();
     // pub fn CancelTimerQueueTimer();
     // pub fn CancelWaitableTimer();
-    // pub fn CeipIsOptedIn();
+    pub fn CeipIsOptedIn() -> BOOL;
     // pub fn ChangeTimerQueueTimer();
     // pub fn CheckElevation();
     // pub fn CheckElevationEnabled();
