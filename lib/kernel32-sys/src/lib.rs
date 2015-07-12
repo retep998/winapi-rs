@@ -917,7 +917,7 @@ extern "system" {
     // pub fn GlobalFindAtomW();
     // pub fn GlobalFix();
     // pub fn GlobalFlags();
-    // pub fn GlobalFree();
+    pub fn GlobalFree(hMem: HGLOBAL) -> HGLOBAL;
     // pub fn GlobalGetAtomNameA();
     // pub fn GlobalGetAtomNameW();
     // pub fn GlobalHandle();
