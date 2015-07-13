@@ -5,17 +5,21 @@
 extern crate winapi;
 use winapi::*;
 extern "system" {
-    // pub fn AbortDoc();
-    // pub fn AbortPath();
-    // pub fn AddFontMemResourceEx();
-    // pub fn AddFontResourceA();
-    // pub fn AddFontResourceExA();
-    // pub fn AddFontResourceExW();
-    // pub fn AddFontResourceW();
+    pub fn AbortDoc(hdc: HDC) -> c_int;
+    pub fn AbortPath(hdc: HDC) -> BOOL;
+    pub fn AddFontMemResourceEx(
+        pbFont: PVOID, cbSize: DWORD, pdv: PVOID, pcFonts: *mut DWORD,
+    ) -> HANDLE;
+    pub fn AddFontResourceA(lpszFilename: LPCSTR) -> c_int;
+    pub fn AddFontResourceExA(lpszFilename: LPCSTR, fl: DWORD, pdv: PVOID) -> c_int;
+    pub fn AddFontResourceExW(lpszFilename: LPCWSTR, fl: DWORD, pdv: PVOID) -> c_int;
+    pub fn AddFontResourceW(lpszFilename: LPCWSTR) -> c_int;
     pub fn AngleArc(
         hdc: HDC, X: c_int, Y: c_int, dwRadius: DWORD, eStartAngle: FLOAT, eSweepAngle: FLOAT,
     ) -> BOOL;
-    // pub fn AnimatePalette();
+    pub fn AnimatePalette(
+        hpal: HPALETTE, iStartIndex: UINT, cEntries: UINT, ppe: *const PALETTEENTRY,
+    ) -> BOOL;
     pub fn Arc(
         hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int,
         nXStartArc: c_int, nYStartArc: c_int, nXEndArc: c_int, nYEndArc: c_int,
@@ -24,38 +28,44 @@ extern "system" {
         hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int,
         nXRadial1: c_int, nYRadial1: c_int, nXRadial2: c_int, nYRadial2: c_int,
     ) -> BOOL;
-    // pub fn BeginPath();
+    pub fn BeginPath(hdc: HDC) -> BOOL;
     pub fn BitBlt(
         hdc: HDC, x: c_int, y: c_int, cx: c_int, cy: c_int, hdcSrc: HDC, x1: c_int, y1: c_int,
         rop: DWORD,
     ) -> BOOL;
-    // pub fn CancelDC();
-    // pub fn CheckColorsInGamut();
+    pub fn CancelDC(hdc: HDC) -> BOOL;
+    pub fn CheckColorsInGamut(
+        hDC: HDC, lpRGBTriples: LPVOID, lpBuffer: LPVOID, nCount: UINT,
+    ) -> BOOL;
     pub fn ChoosePixelFormat(hdc: HDC, ppfd: *const PIXELFORMATDESCRIPTOR) -> c_int;
     pub fn Chord(
         hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int,
         nXRadial1: c_int, nYRadial1: c_int, nXRadial2: c_int, nYRadial2: c_int,
     ) -> BOOL;
-    // pub fn CloseEnhMetaFile();
-    // pub fn CloseFigure();
-    // pub fn CloseMetaFile();
-    // pub fn ColorCorrectPalette();
-    // pub fn ColorMatchToTarget();
+    pub fn CloseEnhMetaFile(hdc: HDC) -> HENHMETAFILE;
+    pub fn CloseFigure(hdc: HDC) -> BOOL;
+    pub fn CloseMetaFile(hdc: HDC) -> HMETAFILE;
+    pub fn ColorCorrectPalette(
+        hDC: HDC, hPalette: HPALETTE, dwFirstEntry: DWORD, dwNumOfEntries: DWORD,
+    ) -> BOOL;
+    pub fn ColorMatchToTarget(hDC: HDC, hdcTarget: HDC, uiAction: UINT) -> BOOL;
     pub fn CombineRgn(
         hrgnDst: HRGN, hrgnSrc1: HRGN, hrgnSrc2: HRGN, fnCombineMode: c_int,
     ) -> c_int;
-    // pub fn CombineTransform();
-    // pub fn CopyEnhMetaFileA();
-    // pub fn CopyEnhMetaFileW();
-    // pub fn CopyMetaFileA();
-    // pub fn CopyMetaFileW();
+    pub fn CombineTransform(
+        lpxformResult: LPXFORM, lpxform1: *const XFORM, lpxform2: *const XFORM,
+    ) -> BOOL;
+    pub fn CopyEnhMetaFileA(hemfSrc: HENHMETAFILE, lpszFile: LPCSTR) -> HENHMETAFILE;
+    pub fn CopyEnhMetaFileW(hemfSrc: HENHMETAFILE, lpszFile: LPCWSTR) -> HENHMETAFILE;
+    pub fn CopyMetaFileA(hmfSrc: HMETAFILE, lpszFile: LPCSTR) -> HMETAFILE;
+    pub fn CopyMetaFileW(hmfSrc: HMETAFILE, lpszFile: LPCWSTR) -> HMETAFILE;
     pub fn CreateBitmap(
         nWidth: c_int, nHeight: c_int, nPlanes: UINT, nBitCount: UINT, lpBits: *const c_void,
     ) -> HBITMAP;
     pub fn CreateBitmapIndirect(pbm: *const BITMAP) -> HBITMAP;
-    // pub fn CreateBrushIndirect();
-    // pub fn CreateColorSpaceA();
-    // pub fn CreateColorSpaceW();
+    pub fn CreateBrushIndirect(lplb: *const LOGBRUSH) -> HBRUSH;
+    pub fn CreateColorSpaceA(lpLogColorSpace: LPLOGCOLORSPACEA) -> HCOLORSPACE;
+    pub fn CreateColorSpaceW(lpLogColorSpace: LPLOGCOLORSPACEW) -> HCOLORSPACE;
     pub fn CreateCompatibleBitmap(hdc: HDC, cx: c_int, cy: c_int) -> HBITMAP;
     pub fn CreateCompatibleDC(hdc: HDC) -> HDC;
     pub fn CreateDCA(
@@ -64,8 +74,8 @@ extern "system" {
     pub fn CreateDCW(
         lpszDriver: LPCWSTR, lpszDevice: LPCWSTR, lpszOutput: LPCWSTR, lpInitData: *const DEVMODEW,
     ) -> HDC;
-    // pub fn CreateDIBPatternBrush();
-    // pub fn CreateDIBPatternBrushPt();
+    pub fn CreateDIBPatternBrush(hglbDIBPacked: HGLOBAL, fuColorSpec: UINT) -> HBRUSH;
+    pub fn CreateDIBPatternBrushPt(lpPackedDIB: *const VOID, iUsage: UINT) -> HBRUSH;
     pub fn CreateDIBSection(
         hdc: HDC, lpbmi: *const BITMAPINFO, usage: UINT, ppvBits: *mut *mut c_void,
         hSection: HANDLE, offset: DWORD,
@@ -74,11 +84,17 @@ extern "system" {
         hdc: HDC, pbmih: *const BITMAPINFOHEADER, flInit: DWORD, pjBits: *const c_void,
         pbmi: *const BITMAPINFO, iUsage: UINT,
     ) -> HBITMAP;
-    // pub fn CreateDiscardableBitmap();
-    // pub fn CreateEllipticRgn();
-    // pub fn CreateEllipticRgnIndirect();
-    // pub fn CreateEnhMetaFileA();
-    // pub fn CreateEnhMetaFileW();
+    pub fn CreateDiscardableBitmap(hdc: HDC, nWidth: c_int, nHeight: c_int) -> HBITMAP;
+    pub fn CreateEllipticRgn(
+        nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int,
+    ) -> HRGN;
+    pub fn CreateEllipticRgnIndirect(lprc: *const RECT) -> HRGN;
+    pub fn CreateEnhMetaFileA(
+        hdcRef: HDC, lpFilename: LPCSTR, lpRect: *const RECT, lpDescription: LPCSTR,
+    ) -> HDC;
+    pub fn CreateEnhMetaFileW(
+        hdcRef: HDC, lpFilename: LPCWSTR, lpRect: *const RECT, lpDescription: LPCWSTR,
+    ) -> HDC;
     pub fn CreateFontA(
         cHeight: c_int, cWidth: c_int, cEscapement: c_int, cOrientation: c_int, cWeight: c_int,
         bItalic: DWORD, bUnderline: DWORD, bStrikeOut: DWORD, iCharSet: DWORD,
@@ -86,8 +102,8 @@ extern "system" {
         pszFaceName: LPCSTR,
     ) -> HFONT;
     pub fn CreateFontIndirectA(lplf: *const LOGFONTA) -> HFONT;
-    // pub fn CreateFontIndirectExA();
-    // pub fn CreateFontIndirectExW();
+    pub fn CreateFontIndirectExA(penumlfex: *const ENUMLOGFONTEXDVA) -> HFONT;
+    pub fn CreateFontIndirectExW(penumlfex: *const ENUMLOGFONTEXDVW) -> HFONT;
     pub fn CreateFontIndirectW(lplf: *const LOGFONTW) -> HFONT;
     pub fn CreateFontW(
         cHeight: c_int, cWidth: c_int, cEscapement: c_int, cOrientation: c_int, cWeight: c_int,
@@ -95,18 +111,24 @@ extern "system" {
         iOutPrecision: DWORD, iClipPrecision: DWORD, iQuality: DWORD, iPitchAndFamily: DWORD,
         pszFaceName: LPCWSTR,
     ) -> HFONT;
-    // pub fn CreateHalftonePalette();
-    // pub fn CreateHatchBrush();
-    // pub fn CreateICA();
-    // pub fn CreateICW();
-    // pub fn CreateMetaFileA();
-    // pub fn CreateMetaFileW();
-    // pub fn CreatePalette();
-    // pub fn CreatePatternBrush();
-    // pub fn CreatePen();
-    // pub fn CreatePenIndirect();
-    // pub fn CreatePolyPolygonRgn();
-    // pub fn CreatePolygonRgn();
+    pub fn CreateHalftonePalette(hdc: HDC) -> HPALETTE;
+    pub fn CreateHatchBrush(fnStyle: c_int, clrref: COLORREF) -> HBRUSH;
+    pub fn CreateICA(
+        lpszDriver: LPCSTR, lpszDevice: LPCSTR, lpszOutput: LPCSTR, lpdvmInit: *const DEVMODEA,
+    ) -> HDC;
+    pub fn CreateICW(
+        lpszDriver: LPCWSTR, lpszDevice: LPCWSTR, lpszOutput: LPCWSTR, lpdvmInit: *const DEVMODEW,
+    ) -> HDC;
+    pub fn CreateMetaFileA(lpszFile: LPCSTR) -> HDC;
+    pub fn CreateMetaFileW(lpszFile: LPCWSTR) -> HDC;
+    pub fn CreatePalette(lplgpl: *const LOGPALETTE) -> HPALETTE;
+    pub fn CreatePatternBrush(hbmp: HBITMAP) -> HBRUSH;
+    pub fn CreatePen(fnPenStyle: c_int, nWidth: c_int, crColor: COLORREF) -> HPEN;
+    pub fn CreatePenIndirect(lplgpn: *const LOGPEN) -> HPEN;
+    pub fn CreatePolyPolygonRgn(
+        lppt: *const POINT, lpPolyCounts: *const INT, nCount: c_int, fnPolyFillMode: c_int,
+    ) -> HRGN;
+    pub fn CreatePolygonRgn(lppt: *const POINT, cPoints: c_int, fnPolyFillMode: c_int) -> HRGN;
     pub fn CreateRectRgn(
         nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int,
     ) -> HRGN;
@@ -431,7 +453,7 @@ extern "system" {
     // pub fn OffsetWindowOrgEx();
     // pub fn PaintRgn();
     pub fn PatBlt(
-        hdc: HDC, nXLeft: c_int, nYLeft: c_int, nWidth: c_int, nHeight: c_int, dwRop: DWORD
+        hdc: HDC, nXLeft: c_int, nYLeft: c_int, nWidth: c_int, nHeight: c_int, dwRop: DWORD,
     ) -> BOOL;
     // pub fn PathToRegion();
     pub fn Pie(
@@ -545,7 +567,7 @@ extern "system" {
         hdc: HDC, XDest: c_int, YDest: c_int, nDestWidth: c_int,
         nDestHeight: c_int, XSrc: c_int, YSrc: c_int, nSrcWidth: c_int,
         nSrcHeight: c_int, lpBits: *const VOID, lpBitsInfo: *const BITMAPINFO,
-        iUsage: UINT, dwRop: DWORD
+        iUsage: UINT, dwRop: DWORD,
     ) -> c_int;
     // pub fn StrokeAndFillPath();
     // pub fn StrokePath();
