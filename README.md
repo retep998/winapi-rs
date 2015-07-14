@@ -6,13 +6,15 @@ This crate provides types and constants for WinAPI FFI bindings. They are gather
 
 If this crate is missing something you need, feel free to create an issue, open a pull request, or contact me via [other means](http://www.rustaceans.org/retep998).
 
+As of version 0.2, this crate depends on Rust 1.1 (in order to lose the dependency on libc). If you need compatibility with Rust 1.0 you must continue to use older 0.1.x versions.
+
 ## Example ##
 
 Cargo.toml:
 ```toml
 [dependencies]
-winapi = "*"
-winmm-sys = "*"
+winapi = "0.2"
+winmm-sys = "0.1"
 ```
 example.rs:
 ```Rust
@@ -30,6 +32,7 @@ Bindings to library functions are in separate crates. The source to each crate i
 ### Usable crates ###
 These are the ones that actually have functions in them:
 * [advapi32-sys ![Crates.io](https://img.shields.io/crates/v/advapi32-sys.svg)](https://crates.io/crates/advapi32-sys)
+* [crypt32-sys ![Crates.io](https://img.shields.io/crates/v/crypt32-sys.svg)](https://crates.io/crates/crypt32-sys)
 * [d3d9-sys ![Crates.io](https://img.shields.io/crates/v/d3d9-sys.svg)](https://crates.io/crates/d3d9-sys)
 * [dbghelp-sys ![Crates.io](https://img.shields.io/crates/v/dbghelp-sys.svg)](https://crates.io/crates/dbghelp-sys)
 * [dsound-sys ![Crates.io](https://img.shields.io/crates/v/dsound-sys.svg)](https://crates.io/crates/dsound-sys)
@@ -41,6 +44,7 @@ These are the ones that actually have functions in them:
 * [ole32-sys ![Crates.io](https://img.shields.io/crates/v/ole32-sys.svg)](https://crates.io/crates/ole32-sys)
 * [opengl32-sys ![Crates.io](https://img.shields.io/crates/v/opengl32-sys.svg)](https://crates.io/crates/opengl32-sys)
 * [psapi-sys ![Crates.io](https://img.shields.io/crates/v/psapi-sys.svg)](https://crates.io/crates/psapi-sys)
+* [secur32-sys ![Crates.io](https://img.shields.io/crates/v/secur32-sys.svg)](https://crates.io/crates/secur32-sys)
 * [shell32-sys ![Crates.io](https://img.shields.io/crates/v/shell32-sys.svg)](https://crates.io/crates/shell32-sys)
 * [user32-sys ![Crates.io](https://img.shields.io/crates/v/user32-sys.svg)](https://crates.io/crates/user32-sys)
 * [uuid-sys ![Crates.io](https://img.shields.io/crates/v/uuid-sys.svg)](https://crates.io/crates/uuid-sys)
@@ -95,7 +99,6 @@ These are the ones that are reserved for future use:
 * [corguids-sys ![Crates.io](https://img.shields.io/crates/v/corguids-sys.svg)](https://crates.io/crates/corguids-sys)
 * [correngine-sys ![Crates.io](https://img.shields.io/crates/v/correngine-sys.svg)](https://crates.io/crates/correngine-sys)
 * [credui-sys ![Crates.io](https://img.shields.io/crates/v/credui-sys.svg)](https://crates.io/crates/credui-sys)
-* [crypt32-sys ![Crates.io](https://img.shields.io/crates/v/crypt32-sys.svg)](https://crates.io/crates/crypt32-sys)
 * [cryptdll-sys ![Crates.io](https://img.shields.io/crates/v/cryptdll-sys.svg)](https://crates.io/crates/cryptdll-sys)
 * [cryptnet-sys ![Crates.io](https://img.shields.io/crates/v/cryptnet-sys.svg)](https://crates.io/crates/cryptnet-sys)
 * [cryptui-sys ![Crates.io](https://img.shields.io/crates/v/cryptui-sys.svg)](https://crates.io/crates/cryptui-sys)
@@ -331,7 +334,6 @@ These are the ones that are reserved for future use:
 * [scrnsave-sys ![Crates.io](https://img.shields.io/crates/v/scrnsave-sys.svg)](https://crates.io/crates/scrnsave-sys)
 * [scrnsavw-sys ![Crates.io](https://img.shields.io/crates/v/scrnsavw-sys.svg)](https://crates.io/crates/scrnsavw-sys)
 * [searchsdk-sys ![Crates.io](https://img.shields.io/crates/v/searchsdk-sys.svg)](https://crates.io/crates/searchsdk-sys)
-* [secur32-sys ![Crates.io](https://img.shields.io/crates/v/secur32-sys.svg)](https://crates.io/crates/secur32-sys)
 * [security-sys ![Crates.io](https://img.shields.io/crates/v/security-sys.svg)](https://crates.io/crates/security-sys)
 * [sens-sys ![Crates.io](https://img.shields.io/crates/v/sens-sys.svg)](https://crates.io/crates/sens-sys)
 * [sensapi-sys ![Crates.io](https://img.shields.io/crates/v/sensapi-sys.svg)](https://crates.io/crates/sensapi-sys)

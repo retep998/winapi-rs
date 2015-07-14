@@ -1,6 +1,6 @@
 [package]
 name = "winapi"
-version = "0.2.0-pre"
+version = "0.2.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "Types and constants for WinAPI bindings. See README for list of crates providing function bindings."
 documentation = "https://retep998.github.io/doc/winapi/"
@@ -29,6 +29,5 @@ user32-sys = { version = "*", path = "lib/user32-sys" }
 usp10-sys = { version = "*", path = "lib/usp10-sys" }
 uuid-sys = { version = "*", path = "lib/uuid-sys" }
 vssapi-sys = { version = "*", path = "lib/vssapi-sys" }
-winhttp-sys = { version = "*", path = "lib/winhttp-sys" }
 winmm-sys = { version = "*", path = "lib/winmm-sys" }
 xinput-sys = { version = "*", path = "lib/xinput-sys" }
