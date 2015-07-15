@@ -571,7 +571,7 @@ extern "system" {
     pub fn IsCharLowerW(ch: WCHAR) -> BOOL;
     pub fn IsCharUpperA(ch: CHAR) -> BOOL;
     pub fn IsCharUpperW(ch: WCHAR) -> BOOL;
-    // pub fn IsChild();
+    pub fn IsChild(hWndParent: HWND, hWnd: HWND) -> BOOL;
     pub fn IsClipboardFormatAvailable(format: UINT) -> BOOL;
     pub fn IsDialogMessage(hDlg: HWND, lpMsg: LPMSG) -> BOOL;
     pub fn IsDialogMessageA(hDlg: HWND, lpMsg: LPMSG) -> BOOL;
@@ -590,7 +590,7 @@ extern "system" {
     // pub fn IsWinEventHookInstalled();
     pub fn IsWindow(hWnd: HWND) -> BOOL;
     pub fn IsWindowEnabled(hWnd: HWND) -> BOOL;
-    // pub fn IsWindowUnicode();
+    pub fn IsWindowUnicode(hWnd: HWND) -> BOOL;
     pub fn IsWindowVisible(hWnd: HWND) -> BOOL;
     pub fn IsWow64Message() -> BOOL;
     pub fn IsZoomed(hwnd: HWND) -> BOOL;
@@ -620,8 +620,8 @@ extern "system" {
     // pub fn LoadStringA();
     // pub fn LoadStringW();
     // pub fn LockSetForegroundWindow();
-    // pub fn LockWindowUpdate();
-    // pub fn LockWorkStation();
+    pub fn LockWindowUpdate(hWndLock: HWND) -> BOOL;
+    pub fn LockWorkStation() -> BOOL;
     // pub fn LogicalToPhysicalPoint();
     // pub fn LogicalToPhysicalPointForPerMonitorDPI();
     // pub fn LookupIconIdFromDirectory();
