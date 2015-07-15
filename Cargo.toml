@@ -30,4 +30,5 @@ usp10-sys = { version = "*", path = "lib/usp10-sys" }
 uuid-sys = { version = "*", path = "lib/uuid-sys" }
 vssapi-sys = { version = "*", path = "lib/vssapi-sys" }
 winmm-sys = { version = "*", path = "lib/winmm-sys" }
+winspool-sys = { version = "*", path = "lib/winspool-sys" }
 xinput-sys = { version = "*", path = "lib/xinput-sys" }

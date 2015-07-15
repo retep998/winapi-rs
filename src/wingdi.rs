@@ -245,3 +245,124 @@ pub type LPABCFLOAT = *mut ABCFLOAT;
 
 //3581
 pub type LINEDDAPROC = Option<unsafe extern "system" fn(::c_int, ::c_int, ::LPARAM)>;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct XFORM {
+    pub eM11: ::FLOAT,
+    pub eM12: ::FLOAT,
+    pub eM21: ::FLOAT,
+    pub eM22: ::FLOAT,
+    pub eDx: ::FLOAT,
+    pub eDy: ::FLOAT,
+}
+pub type PXFORM = *mut XFORM;
+pub type LPXFORM = *mut XFORM;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct LOGBRUSH {
+    pub lbStyle: ::UINT,
+    pub lbColor: ::COLORREF,
+    pub lbHatch: ::ULONG_PTR,
+}
+pub type PLOGBRUSH = *mut LOGBRUSH;
+
+#[repr(C)] #[derive(Copy)]
+pub struct LOGCOLORSPACEA {
+    pub lcsSignature: ::DWORD,
+    pub lcsVersion: ::DWORD,
+    pub lcsSize: ::DWORD,
+    pub lcsCSType: LCSCSTYPE,
+    pub lcsIntent: LCSGAMUTMATCH,
+    pub lcsEndpoints: CIEXYZTRIPLE,
+    pub lcsGammaRed: ::DWORD,
+    pub lcsGammaGreen: ::DWORD,
+    pub lcsGammaBlue: ::DWORD,
+    pub lcsFilename: [::CHAR; ::MAX_PATH],
+}
+impl Clone for LOGCOLORSPACEA { fn clone(&self) -> LOGCOLORSPACEA { *self } }
+pub type LPLOGCOLORSPACEA = *mut LOGCOLORSPACEA;
+
+#[repr(C)] #[derive(Copy)]
+pub struct LOGCOLORSPACEW {
+    pub lcsSignature: ::DWORD,
+    pub lcsVersion: ::DWORD,
+    pub lcsSize: ::DWORD,
+    pub lcsCSType: LCSCSTYPE,
+    pub lcsIntent: LCSGAMUTMATCH,
+    pub lcsEndpoints: CIEXYZTRIPLE,
+    pub lcsGammaRed: ::DWORD,
+    pub lcsGammaGreen: ::DWORD,
+    pub lcsGammaBlue: ::DWORD,
+    pub lcsFilename: [::WCHAR; ::MAX_PATH],
+}
+impl Clone for LOGCOLORSPACEW { fn clone(&self) -> LOGCOLORSPACEW { *self } }
+pub type LPLOGCOLORSPACEW = *mut LOGCOLORSPACEW;
+
+pub const LF_FULLFACESIZE: usize = 64;
+
+#[repr(C)] #[derive(Copy)]
+pub struct ENUMLOGFONTEXA {
+    pub elfLogFont: LOGFONTA,
+    pub elfFullName: [::BYTE; LF_FULLFACESIZE],
+    pub elfStyle: [::BYTE; LF_FACESIZE],
+    pub elfScript: [::BYTE; LF_FACESIZE],
+}
+impl Clone for ENUMLOGFONTEXA { fn clone(&self) -> ENUMLOGFONTEXA { *self } }
+pub type LPENUMLOGFONTEXA = *mut ENUMLOGFONTEXA;
+
+#[repr(C)] #[derive(Copy)]
+pub struct ENUMLOGFONTEXW {
+    pub elfLogFont: LOGFONTW,
+    pub elfFullName: [::WCHAR; LF_FULLFACESIZE],
+    pub elfStyle: [::WCHAR; LF_FACESIZE],
+    pub elfScript: [::WCHAR; LF_FACESIZE],
+}
+impl Clone for ENUMLOGFONTEXW { fn clone(&self) -> ENUMLOGFONTEXW { *self } }
+pub type LPENUMLOGFONTEXW = *mut ENUMLOGFONTEXW;
+
+pub const MM_MAX_NUMAXES: usize = 16;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DESIGNVECTOR {
+    pub dvReserved: ::DWORD,
+    pub dvNumAxes: ::DWORD,
+    pub dvValues: [::LONG; MM_MAX_NUMAXES],
+}
+pub type PDESIGNVECTOR = *mut DESIGNVECTOR;
+pub type LPDESIGNVECTOR = *mut DESIGNVECTOR;
+
+#[repr(C)] #[derive(Clone, Copy)]
+pub struct ENUMLOGFONTEXDVA {
+    pub elfEnumLogfontEx: ENUMLOGFONTEXA,
+    pub elfDesignVector: DESIGNVECTOR,
+}
+pub type PENUMLOGFONTEXDVA = *mut ENUMLOGFONTEXDVA;
+pub type LPENUMLOGFONTEXDVA = *mut ENUMLOGFONTEXDVA;
+
+#[repr(C)] #[derive(Clone, Copy)]
+pub struct ENUMLOGFONTEXDVW {
+    pub elfEnumLogfontEx: ENUMLOGFONTEXW,
+    pub elfDesignVector: DESIGNVECTOR,
+}
+pub type PENUMLOGFONTEXDVW = *mut ENUMLOGFONTEXDVW;
+pub type LPENUMLOGFONTEXDVW = *mut ENUMLOGFONTEXDVW;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct LOGPALETTE {
+    pub palVersion: ::WORD,
+    pub palNumEntries: ::WORD,
+    pub palPalEntry: [PALETTEENTRY; 1],
+}
+pub type PLOGPALETTE = *mut LOGPALETTE;
+pub type NPLOGPALETTE = *mut LOGPALETTE;
+pub type LPLOGPALETTE = *mut LOGPALETTE;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct LOGPEN {
+    pub lopnStyle: ::UINT,
+    pub lopnWidth: ::POINT,
+    pub lopnColor: ::COLORREF
+}
+pub type PLOGPEN = *mut LOGPEN;
+pub type NPLOGPEN = *mut LOGPEN;
+pub type LPLOGPEN = *mut LOGPEN;
