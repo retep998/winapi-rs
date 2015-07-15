@@ -45,7 +45,7 @@ extern "system" {
     // pub fn BackupSeek();
     // pub fn BackupWrite();
     // pub fn BaseSetLastNTError();
-    // pub fn Beep();
+    pub fn Beep(dwFreq: DWORD, dwDuration: DWORD) -> BOOL;
     // pub fn BeginUpdateResourceA();
     // pub fn BeginUpdateResourceW();
     // pub fn BindIoCompletionCallback();
