@@ -38,7 +38,7 @@ extern "system" {
     // pub fn AppXGetOSMaxVersionTested();
     // pub fn ApplicationRecoveryFinished();
     // pub fn ApplicationRecoveryInProgress();
-    // pub fn AreFileApisANSI();
+    pub fn AreFileApisANSI() -> BOOL;
     pub fn AssignProcessToJobObject(hJob: HANDLE, hProcess: HANDLE) -> BOOL;
     pub fn AttachConsole(dwProcessId: DWORD) -> BOOL;
     // pub fn BackupRead();
@@ -96,9 +96,9 @@ extern "system" {
     pub fn ConnectNamedPipe(hNamedPipe: HANDLE, lpOverlapped: LPOVERLAPPED) -> BOOL;
     // pub fn ContinueDebugEvent();
     // pub fn ConvertDefaultLocale();
-    // pub fn ConvertFiberToThread();
-    // pub fn ConvertThreadToFiber();
-    // pub fn ConvertThreadToFiberEx();
+    pub fn ConvertFiberToThread() -> BOOL;
+    pub fn ConvertThreadToFiber(lpParameter: LPVOID) -> LPVOID;
+    pub fn ConvertThreadToFiberEx(lpParameter: LPVOID, dwFlags: DWORD) -> LPVOID;
     // pub fn CopyContext();
     // pub fn CopyFile2();
     // pub fn CopyFileA();
@@ -269,7 +269,7 @@ extern "system" {
     // pub fn DeleteAtom();
     // pub fn DeleteBoundaryDescriptor();
     pub fn DeleteCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
-    // pub fn DeleteFiber();
+    pub fn DeleteFiber(lpFiber: LPVOID);
     pub fn DeleteFileA(lpFileName: LPCSTR) -> BOOL;
     // pub fn DeleteFileTransactedA();
     // pub fn DeleteFileTransactedW();
@@ -355,8 +355,8 @@ extern "system" {
     // pub fn EscapeCommFunction();
     // #[cfg(target_arch = "x86_64")]
     // pub fn ExecuteUmsThread();
-    // pub fn ExitProcess();
-    // pub fn ExitThread();
+    pub fn ExitProcess(uExitCode: UINT);
+    pub fn ExitThread(hThread: HANDLE, lpExitCode: LPDWORD) -> BOOL;
     // pub fn ExpandEnvironmentStringsA();
     // pub fn ExpandEnvironmentStringsW();
     // pub fn FatalAppExitA();
@@ -819,9 +819,13 @@ extern "system" {
     // pub fn GetSystemWindowsDirectoryW();
     // pub fn GetSystemWow64DirectoryA();
     // pub fn GetSystemWow64DirectoryW();
-    // pub fn GetTapeParameters();
-    // pub fn GetTapePosition();
-    // pub fn GetTapeStatus();
+    pub fn GetTapeParameters(
+        hDevice: HANDLE, dwOperation: DWORD, lpdwSize: LPDWORD, lpTapeInformation: LPVOID
+    ) -> DWORD;
+    pub fn GetTapePosition(
+        hDevice: HANDLE, dwPositionType: DWORD, lpdwPartition: LPDWORD, lpdwOffsetLow: LPDWORD, lpdwOffsetHigh: LPDWORD
+    ) -> DWORD;
+    pub fn GetTapeStatus(hDevice: HANDLE) -> DWORD;
     // pub fn GetTempFileNameA();
     pub fn GetTempFileNameW(
         lpPathName: LPCWSTR, lpPrefixString: LPCWSTR, uUnique: UINT, lpTempFileName: LPWSTR,
@@ -1006,8 +1010,8 @@ extern "system" {
     // pub fn IsProcessCritical();
     // pub fn IsProcessInJob();
     // pub fn IsProcessorFeaturePresent();
-    // pub fn IsSystemResumeAutomatic();
-    // pub fn IsThreadAFiber();
+    pub fn IsSystemResumeAutomatic() -> BOOL;
+    pub fn IsThreadAFiber() -> BOOL;
     // pub fn IsThreadpoolTimerSet();
     // pub fn IsValidCodePage();
     // pub fn IsValidLanguageGroup();
@@ -1180,7 +1184,7 @@ extern "system" {
     // pub fn PowerCreateRequest();
     // pub fn PowerSetRequest();
     // pub fn PrefetchVirtualMemory();
-    // pub fn PrepareTape();
+    pub fn PrepareTape(hDevice: HANDLE, dwOperation: DWORD, bImmediate: BOOL) -> DWORD;
     pub fn Process32First(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
     pub fn Process32FirstW(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32W) -> BOOL;
     pub fn Process32Next(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
@@ -1499,8 +1503,11 @@ extern "system" {
     // pub fn SetSystemPowerState();
     pub fn SetSystemTime(lpSystemTime: *const SYSTEMTIME) -> BOOL;
     pub fn SetSystemTimeAdjustment(dwTimeAdjustment: DWORD, bTimeAdjustmentDisabled: BOOL) -> BOOL;
-    // pub fn SetTapeParameters();
-    // pub fn SetTapePosition();
+    pub fn SetTapeParameters(hDevice: HANDLE, dwOperation: DWORD, lpTapeInformation: LPVOID) -> DWORD;
+    pub fn SetTapePosition(
+        hDevice: HANDLE, dwPositionMethod: DWORD, dwPartition: DWORD, 
+        dwOffsetLow: DWORD, dwOffsetHigh: DWORD, bImmediate: BOOL
+    ) -> DWORD;
     // pub fn SetThreadAffinityMask();
     // pub fn SetThreadContext();
     // pub fn SetThreadErrorMode();
@@ -1546,8 +1553,8 @@ extern "system" {
     // pub fn StartThreadpoolIo();
     // pub fn SubmitThreadpoolWork();
     // pub fn SuspendThread();
-    // pub fn SwitchToFiber();
-    // pub fn SwitchToThread();
+    pub fn SwitchToFiber(lpFiber: LPVOID);
+    pub fn SwitchToThread() -> BOOL;
     pub fn SystemTimeToFileTime(
         lpSystemTime: *const SYSTEMTIME, lpFileTime: LPFILETIME,
     ) -> BOOL;
@@ -1564,10 +1571,10 @@ extern "system" {
     // pub fn TerminateThread();
     pub fn Thread32First(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
     pub fn Thread32Next(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
-    // pub fn TlsAlloc();
-    // pub fn TlsFree();
-    // pub fn TlsGetValue();
-    // pub fn TlsSetValue();
+    pub fn TlsAlloc() -> DWORD;
+    pub fn TlsFree(dwTlsIndex: DWORD) -> BOOL;
+    pub fn TlsGetValue(dwTlsIndex: DWORD) -> LPVOID;
+    pub fn TlsSetValue(dwTlsIndex: DWORD, lpTlsValue: LPVOID) -> BOOL;
     pub fn Toolhelp32ReadProcessMemory(th32ProcessID: DWORD, lpBaseAddress: LPCVOID,
         lpBuffer: LPVOID, cbRead: SIZE_T, lpNumberOfBytesRead: *mut SIZE_T
     ) -> BOOL;
