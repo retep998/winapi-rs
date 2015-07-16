@@ -467,8 +467,8 @@ extern "system" {
     // pub fn FreeUserPhysicalPages();
     pub fn GenerateConsoleCtrlEvent(dwCtrlEvent: DWORD, dwProcessGroupId: DWORD) -> BOOL;
     // pub fn GetACP();
-    // pub fn GetActiveProcessorCount();
-    // pub fn GetActiveProcessorGroupCount();
+    pub fn GetActiveProcessorCount(GroupNumber: WORD) -> DWORD;
+    pub fn GetActiveProcessorGroupCount() -> WORD;
     // pub fn GetAppContainerAce();
     // pub fn GetAppContainerNamedObjectPath();
     // pub fn GetApplicationRecoveryCallback();
@@ -562,11 +562,11 @@ extern "system" {
     // pub fn GetCurrentPackagePath();
     pub fn GetCurrentProcess() -> HANDLE;
     pub fn GetCurrentProcessId() -> DWORD;
-    // pub fn GetCurrentProcessorNumber();
-    // pub fn GetCurrentProcessorNumberEx();
+    pub fn GetCurrentProcessorNumber() -> DWORD;
+    pub fn GetCurrentProcessorNumberEx(ProcNumber: PPROCESSOR_NUMBER);
     pub fn GetCurrentThread() -> HANDLE;
     pub fn GetCurrentThreadId() -> DWORD;
-    // pub fn GetCurrentThreadStackLimits();
+    pub fn GetCurrentThreadStackLimits(LowLimit: PULONG_PTR, HighLimit: PULONG_PTR);
     // #[cfg(target_arch = "x86_64")]
     // pub fn GetCurrentUmsThread();
     // pub fn GetDateFormatA();
@@ -797,7 +797,7 @@ extern "system" {
     // pub fn GetSystemDefaultLCID();
     // pub fn GetSystemDefaultLangID();
     // pub fn GetSystemDefaultLocaleName();
-    // pub fn GetSystemDefaultUILanguage();
+    pub fn GetSystemDefaultUILanguage() -> LANGID;
     // pub fn GetSystemDirectoryA();
     // pub fn GetSystemDirectoryW();
     // pub fn GetSystemFileCacheSize();
@@ -832,7 +832,7 @@ extern "system" {
     // pub fn GetThreadErrorMode();
     // pub fn GetThreadGroupAffinity();
     // pub fn GetThreadIOPendingFlag();
-    // pub fn GetThreadId();
+    pub fn GetThreadId(Thread: HANDLE) -> DWORD;
     // pub fn GetThreadIdealProcessorEx();
     // pub fn GetThreadInformation();
     // pub fn GetThreadLocale();
@@ -844,9 +844,9 @@ extern "system" {
         hThread: HANDLE, lpCreationTime: LPFILETIME, lpExitTime: LPFILETIME,
         lpKernelTime: LPFILETIME, lpUserTime: LPFILETIME,
     ) -> BOOL;
-    // pub fn GetThreadUILanguage();
-    // pub fn GetTickCount();
-    // pub fn GetTickCount64();
+    pub fn GetThreadUILanguage() -> LANGID;
+    pub fn GetTickCount() -> DWORD;
+    pub fn GetTickCount64() -> ULONGLONG;
     pub fn GetTimeFormatA(
         Locale: LCID, dwFlags: DWORD, lpTime: *const SYSTEMTIME, lpFormat: LPCSTR,
         lpTimeStr: LPSTR, cchTime: c_int,
