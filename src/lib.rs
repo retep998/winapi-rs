@@ -1635,20 +1635,35 @@ pub const WS_EX_NOREDIRECTIONBITMAP: DWORD = 0x00200000;
 pub const WS_EX_LAYOUTRTL: DWORD = 0x00400000;
 pub const WS_EX_COMPOSITED: DWORD = 0x02000000;
 pub const WS_EX_NOACTIVATE: DWORD = 0x08000000;
-pub type DESKTOPENUMPROCA = Option<unsafe extern "system" fn(LPSTR, LPARAM) -> BOOL>;
-pub type DESKTOPENUMPROCW = Option<unsafe extern "system" fn(LPWSTR, LPARAM) -> BOOL>;
-pub type NAMEENUMPROCA = DESKTOPENUMPROCA;
-pub type NAMEENUMPROCW = DESKTOPENUMPROCW;
+pub type NAMEENUMPROCA = Option<unsafe extern "system" fn(LPSTR, LPARAM) -> BOOL>;
+pub type NAMEENUMPROCW = Option<unsafe extern "system" fn(LPWSTR, LPARAM) -> BOOL>;
+pub type DESKTOPENUMPROCA = NAMEENUMPROCA;
+pub type DESKTOPENUMPROCW = NAMEENUMPROCW;
+pub type WINSTAENUMPROCA = NAMEENUMPROCA;
+pub type WINSTAENUMPROCW = NAMEENUMPROCW;
 pub type WNDENUMPROC = Option<unsafe extern "system" fn(HWND, LPARAM) -> BOOL>;
 pub type WNDPROC = Option<unsafe extern "system" fn(HWND, UINT, WPARAM, LPARAM) -> LRESULT>;
+pub type DLGPROC = Option<unsafe extern "system" fn(HWND, UINT, WPARAM, LPARAM) -> INT_PTR>;
 pub type HOOKPROC = Option<unsafe extern "system" fn(
     code: c_int, wParam: WPARAM, lParam: LPARAM,
 ) -> LRESULT>;
 pub type TimerProc = Option<unsafe extern "system" fn(
     hwnd: HWND, uMsg: UINT, idEvent: UINT_PTR, dwTime: DWORD,
 )>;
+pub type DRAWSTATEPROC = Option<unsafe extern "system" fn(
+    HDC, LPARAM, WPARAM, c_int, c_int,
+) -> BOOL>;
+pub type PROPENUMPROCA = Option<unsafe extern "system" fn(HWND, LPCSTR, HANDLE) -> BOOL>;
+pub type PROPENUMPROCW = Option<unsafe extern "system" fn(HWND, LPCWSTR, HANDLE) -> BOOL>;
+pub type GRAYSTRINGPROC = Option<unsafe extern "system" fn(HDC, LPARAM, c_int) -> BOOL>;
+pub type MSGBOXCALLBACK = Option<unsafe extern "system" fn(LPHELPINFO)>;
+pub type WINEVENTPROC = Option<unsafe extern "system" fn(
+    HWINEVENTHOOK, DWORD, HWND, LONG, LONG, DWORD, DWORD,
+)>;
 
 pub type HDEVNOTIFY = PVOID;
+pub type MENUTEMPLATEA = VOID;
+pub type MENUTEMPLATEW = VOID;
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MSG {
