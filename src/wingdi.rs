@@ -195,7 +195,48 @@ pub type LPLOGFONTW = *mut LOGFONTW;
 pub fn RGB (r: ::BYTE, g: ::BYTE, b: ::BYTE) -> ::COLORREF {
   r as ::COLORREF | ((g as ::COLORREF) << 8) | ((b as ::COLORREF) << 16)
 }
-//1906 (Win 7 SDK)
+//
+pub const DRIVERVERSION: ::c_int = 0;
+pub const TECHNOLOGY: ::c_int = 2;
+pub const HORZSIZE: ::c_int = 4;
+pub const VERTSIZE: ::c_int = 6;
+pub const HORZRES: ::c_int = 8;
+pub const VERTRES: ::c_int = 10;
+pub const BITSPIXEL: ::c_int = 12;
+pub const PLANES: ::c_int = 14;
+pub const NUMBRUSHES: ::c_int = 16;
+pub const NUMPENS: ::c_int = 18;
+pub const NUMMARKERS: ::c_int = 20;
+pub const NUMFONTS: ::c_int = 22;
+pub const NUMCOLORS: ::c_int = 24;
+pub const PDEVICESIZE: ::c_int = 26;
+pub const CURVECAPS: ::c_int = 28;
+pub const LINECAPS: ::c_int = 30;
+pub const POLYGONALCAPS: ::c_int = 32;
+pub const TEXTCAPS: ::c_int = 34;
+pub const CLIPCAPS: ::c_int = 36;
+pub const RASTERCAPS: ::c_int = 38;
+pub const ASPECTX: ::c_int = 40;
+pub const ASPECTY: ::c_int = 42;
+pub const ASPECTXY: ::c_int = 44;
+pub const LOGPIXELSX: ::c_int = 88;
+pub const LOGPIXELSY: ::c_int = 90;
+pub const SIZEPALETTE: ::c_int = 104;
+pub const NUMRESERVED: ::c_int = 106;
+pub const COLORRES: ::c_int = 108;
+pub const PHYSICALWIDTH: ::c_int = 110;
+pub const PHYSICALHEIGHT: ::c_int = 111;
+pub const PHYSICALOFFSETX: ::c_int = 112;
+pub const PHYSICALOFFSETY: ::c_int = 113;
+pub const SCALINGFACTORX: ::c_int = 114;
+pub const SCALINGFACTORY: ::c_int = 115;
+pub const VREFRESH: ::c_int = 116;
+pub const DESKTOPVERTRES: ::c_int = 117;
+pub const DESKTOPHORZRES: ::c_int = 118;
+pub const BLTALIGNMENT: ::c_int = 119;
+pub const SHADEBLENDCAPS: ::c_int = 120;
+pub const COLORMGMTCAPS: ::c_int = 121;
+//
 pub const DIB_RGB_COLORS: ::UINT = 0;
 pub const DIB_PAL_COLORS: ::UINT = 1;
 

@@ -101,12 +101,16 @@ extern "system" {
     pub fn ConvertThreadToFiberEx(lpParameter: LPVOID, dwFlags: DWORD) -> LPVOID;
     // pub fn CopyContext();
     // pub fn CopyFile2();
-    // pub fn CopyFileA();
+    pub fn CopyFileA(
+        lpExistingFileName: LPCSTR, lpNewFileName: LPCSTR, bFailIfExists: BOOL
+    ) -> BOOL;
     // pub fn CopyFileExA();
     // pub fn CopyFileExW();
     // pub fn CopyFileTransactedA();
     // pub fn CopyFileTransactedW();
-    // pub fn CopyFileW();
+    pub fn CopyFileW(
+        lpExistingFileName: LPCWSTR, lpNewFileName: LPCWSTR, bFailIfExists: BOOL
+    ) -> BOOL;
     // pub fn CreateActCtxA();
     // pub fn CreateActCtxW();
     // pub fn CreateBoundaryDescriptorA();
@@ -1345,7 +1349,7 @@ extern "system" {
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
     // pub fn RtlCompareMemory();
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    // pub fn RtlCopyMemory();
+    pub fn RtlCopyMemory(Destination: PVOID, Source: *const VOID, Length: SIZE_T);
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
     // pub fn RtlDeleteFunctionTable();
     // pub fn RtlFillMemory();

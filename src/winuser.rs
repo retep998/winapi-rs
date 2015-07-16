@@ -97,6 +97,9 @@ pub const PM_QS_INPUT: ::UINT = QS_INPUT << 16;
 pub const PM_QS_POSTMESSAGE: ::UINT = (QS_POSTMESSAGE | QS_HOTKEY | QS_TIMER) << 16;
 pub const PM_QS_PAINT: ::UINT = QS_PAINT << 16;
 pub const PM_QS_SENDMESSAGE: ::UINT = QS_SENDMESSAGE << 16;
+//
+pub const LWA_COLORKEY: ::DWORD = 0x00000001;
+pub const LWA_ALPHA: ::DWORD = 0x00000002;
 //4054 (Win 7 SDK)
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FLASHWINFO {
