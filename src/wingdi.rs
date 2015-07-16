@@ -407,3 +407,11 @@ pub struct LOGPEN {
 pub type PLOGPEN = *mut LOGPEN;
 pub type NPLOGPEN = *mut LOGPEN;
 pub type LPLOGPEN = *mut LOGPEN;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct BLENDFUNCTION {
+    pub BlendOp: ::BYTE,
+    pub BlendFlags: ::BYTE,
+    pub SourceConstantAlpha: ::BYTE,
+    pub AlphaFormat: ::BYTE,
+}
+pub type PBLENDFUNCTION = *mut BLENDFUNCTION;

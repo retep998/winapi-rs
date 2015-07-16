@@ -677,3 +677,115 @@ pub struct RAWINPUTDEVICELIST {
     pub dwType: ::DWORD,
 }
 pub type PRAWINPUTDEVICELIST = *mut RAWINPUTDEVICELIST;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CHANGEFILTERSTRUCT {
+    pub cbSize: ::DWORD,
+    pub ExtStatus: ::DWORD,
+}
+pub type PCHANGEFILTERSTRUCT = *mut CHANGEFILTERSTRUCT;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DLGTEMPLATE {
+    pub style: ::DWORD,
+    pub dwExtendedStyle: ::DWORD,
+    pub cdit: ::WORD,
+    pub x: ::c_short,
+    pub y: ::c_short,
+    pub cx: ::c_short,
+    pub cy: ::c_short,
+}
+pub type LPDLGTEMPLATEA = *mut DLGTEMPLATE;
+pub type LPDLGTEMPLATEW = *mut DLGTEMPLATE;
+pub type LPCDLGTEMPLATEA = *const DLGTEMPLATE;
+pub type LPCDLGTEMPLATEW = *const DLGTEMPLATE;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DRAWTEXTPARAMS {
+    pub cbSize: ::UINT,
+    pub iTabLength: ::c_int,
+    pub iLeftMargin: ::c_int,
+    pub iRightMargin: ::c_int,
+    pub uiLengthDrawn: ::UINT,
+}
+pub type LPDRAWTEXTPARAMS = *mut DRAWTEXTPARAMS;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ACCEL {
+    pub fVirt: ::BYTE,
+    pub key: ::WORD,
+    pub cmd: ::WORD,
+}
+pub type LPACCEL = *mut ACCEL;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MENUITEMINFOA {
+    pub cbSize: ::UINT,
+    pub fMask: ::UINT,
+    pub fType: ::UINT,
+    pub fState: ::UINT,
+    pub wID: ::UINT,
+    pub hSubMenu: ::HMENU,
+    pub hbmpChecked: ::HBITMAP,
+    pub hbmpUnchecked: ::HBITMAP,
+    pub dwItemData: ::ULONG_PTR,
+    pub dwTypeData: ::LPSTR,
+    pub cch: ::UINT,
+    pub hbmpItem: ::HBITMAP,  
+}
+pub type LPMENUITEMINFOA = *mut MENUITEMINFOA;
+pub type LPCMENUITEMINFOA = *const MENUITEMINFOA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MENUITEMINFOW {
+    pub cbSize: ::UINT,
+    pub fMask: ::UINT,
+    pub fType: ::UINT,
+    pub fState: ::UINT,
+    pub wID: ::UINT,
+    pub hSubMenu: ::HMENU,
+    pub hbmpChecked: ::HBITMAP,
+    pub hbmpUnchecked: ::HBITMAP,
+    pub dwItemData: ::ULONG_PTR,
+    pub dwTypeData: ::LPWSTR,
+    pub cch: ::UINT,
+    pub hbmpItem: ::HBITMAP,  
+}
+pub type LPMENUITEMINFOW = *mut MENUITEMINFOW;
+pub type LPCMENUITEMINFOW = *const MENUITEMINFOW;
+#[repr(C)] #[derive(Copy)]
+pub struct MSGBOXPARAMSA {
+    pub cbSize: ::UINT,
+    pub hwndOwner: ::HWND,
+    pub hInstance: ::HINSTANCE,
+    pub lpszText: ::LPCSTR,
+    pub lpszCaption: ::LPCSTR,
+    pub dwStyle: ::DWORD,
+    pub lpszIcon: ::LPCSTR,
+    pub dwContextHelpId: ::DWORD_PTR,
+    pub lpfnMsgBoxCallback: ::MSGBOXCALLBACK,
+    pub dwLanguageId: ::DWORD,
+}
+impl Clone for MSGBOXPARAMSA { fn clone(&self) -> MSGBOXPARAMSA { *self } }
+pub type PMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
+pub type LPMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
+#[repr(C)] #[derive(Copy)]
+pub struct MSGBOXPARAMSW {
+    pub cbSize: ::UINT,
+    pub hwndOwner: ::HWND,
+    pub hInstance: ::HINSTANCE,
+    pub lpszText: ::LPCWSTR,
+    pub lpszCaption: ::LPCWSTR,
+    pub dwStyle: ::DWORD,
+    pub lpszIcon: ::LPCWSTR,
+    pub dwContextHelpId: ::DWORD_PTR,
+    pub lpfnMsgBoxCallback: ::MSGBOXCALLBACK,
+    pub dwLanguageId: ::DWORD,
+}
+impl Clone for MSGBOXPARAMSW { fn clone(&self) -> MSGBOXPARAMSW { *self } }
+pub type PMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
+pub type LPMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct HELPINFO {
+    pub cbSize: ::UINT,
+    pub iContextType: ::c_int,
+    pub iCtrlId: ::c_int,
+    pub hItemHandle: ::HANDLE,
+    pub dwContextId: ::DWORD,
+    pub MousePos: ::POINT,
+}
+pub type LPHELPINFO = *mut HELPINFO;
