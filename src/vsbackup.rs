@@ -75,16 +75,12 @@ interface IVssExamineWriterMetadata(IVssExamineWriterMetadataVtbl): IUnknown(IUn
 
 // class IVssExamineWriterMetadataEx2
 
-#[repr(C)] #[allow(missing_copy_implementations)]
-pub struct IVssWriterComponentsExt {
-    pub lpVtbl: *mut IVssWriterComponentsExtVtbl,
+RIDL!(
+interface IVssWriterComponentsExt(IVssWriterComponentsExtVtbl):
+    IVssWriterComponents(IVssWriterComponentsVtbl, parent1),
+    IUnknown(IUnknownVtbl, parent2) {
 }
-#[repr(C)]
-pub struct IVssWriterComponentsExtVtbl {
-    pub parent1: ::IVssWriterComponentsVtbl,
-    pub parent2: ::IUnknownVtbl,
-}
-
+);
 
 RIDL!(
 interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl) {
