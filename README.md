@@ -2,7 +2,9 @@
 
 [Documentation](https://retep998.github.io/doc/winapi/)
 
-This crate provides types and constants for WinAPI FFI bindings. They are gathered by hand using the very latest official SDK from Microsoft. I aim to replace all existing Windows FFI in other crates with this set of crates through the "[Embrace, extend, and extinguish](http://en.wikipedia.org/wiki/Embrace,_extend_and_extinguish)" technique.
+Official IRC channel: #winapi on [Mozilla IRC](https://wiki.mozilla.org/IRC)
+
+This crate provides types and constants for WinAPI FFI bindings. They are gathered by hand using the Windows 8.1 SDK from Microsoft. I aim to replace all existing Windows FFI in other crates with this set of crates through the "[Embrace, extend, and extinguish](http://en.wikipedia.org/wiki/Embrace,_extend_and_extinguish)" technique.
 
 If this crate is missing something you need, feel free to create an issue, open a pull request, or contact me via [other means](http://www.rustaceans.org/retep998).
 
