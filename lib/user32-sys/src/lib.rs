@@ -304,7 +304,7 @@ extern "system" {
     // pub fn EvaluateProximityToPolygon();
     // pub fn EvaluateProximityToRect();
     // pub fn ExcludeUpdateRgn();
-    // pub fn ExitWindowsEx();
+    pub fn ExitWindowsEx(uFlags: UINT, dwReason: DWORD) -> BOOL;
     pub fn FillRect(hDC: HDC, lprc: *const RECT, hbr: HBRUSH) -> c_int;
     pub fn FindWindowA (lpClassName: LPCSTR, lpWindowName: LPCSTR) -> HWND;
     pub fn FindWindowExA(
@@ -454,7 +454,7 @@ extern "system" {
     // pub fn GetPointerPenInfoHistory();
     // pub fn GetPointerTouchInfo();
     // pub fn GetPointerTouchInfoHistory();
-    // pub fn GetPointerType();
+    pub fn GetPointerType(pointerId: UINT32, pointerType: *mut POINTER_INPUT_TYPE) -> BOOL;
     // pub fn GetPriorityClipboardFormat();
     // pub fn GetProcessDefaultLayout();
     // pub fn GetProcessWindowStation();
@@ -492,7 +492,7 @@ extern "system" {
     // pub fn GetTabbedTextExtentW();
     pub fn GetThreadDesktop(dwThreadId: DWORD) -> HDESK;
     // pub fn GetTitleBarInfo();
-    // pub fn GetTopWindow();
+    pub fn GetTopWindow(hWnd: HWND) -> HWND;
     // pub fn GetTouchInputInfo();
     // pub fn GetUnpredictedMessagePos();
     // pub fn GetUpdateRect();
@@ -531,7 +531,7 @@ extern "system" {
     pub fn GetWindowTextLengthW(hWnd: HWND) -> c_int;
     pub fn GetWindowTextW(hWnd: HWND, lpString: LPWSTR, nMaxCount: c_int) -> c_int;
     pub fn GetWindowThreadProcessId(hWnd: HWND, lpdwProcessId: LPDWORD) -> DWORD;
-    // pub fn GetWindowWord();
+    pub fn GetWindowWord(nIndex: c_int) -> WORD;
     // pub fn GrayStringA();
     // pub fn GrayStringW();
     pub fn HideCaret(hWnd: HWND) -> BOOL;
@@ -587,7 +587,7 @@ extern "system" {
     pub fn IsProcessDPIAware() -> BOOL;
     pub fn IsRectEmpty(lprc: *const RECT) -> BOOL;
     pub fn IsTouchWindow(hwnd: HWND, pulFlags: PULONG) -> BOOL;
-    // pub fn IsWinEventHookInstalled();
+    pub fn IsWinEventHookInstalled(event: DWORD) -> BOOL;
     pub fn IsWindow(hWnd: HWND) -> BOOL;
     pub fn IsWindowEnabled(hWnd: HWND) -> BOOL;
     pub fn IsWindowUnicode(hWnd: HWND) -> BOOL;
