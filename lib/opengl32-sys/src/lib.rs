@@ -11,8 +11,8 @@ extern "system" {
     // pub fn GlmfEndPlayback();
     // pub fn GlmfInitPlayback();
     // pub fn GlmfPlayGlsRecord();
-    // pub fn glAccum();
-    // pub fn glAlphaFunc();
+    pub fn glAccum(op: GLenum, value: GLfloat);
+    pub fn glAlphaFunc(func: GLenum, reference: GLclampf);
     // pub fn glAreTexturesResident();
     // pub fn glArrayElement();
     // pub fn glBegin();
