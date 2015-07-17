@@ -613,8 +613,8 @@ extern "system" {
     // pub fn GetEnvironmentVariableW();
     // pub fn GetEraNameCountedString();
     // pub fn GetErrorMode();
-    // pub fn GetExitCodeProcess();
-    // pub fn GetExitCodeThread();
+    pub fn GetExitCodeProcess(hProcess: HANDLE, lpExitCode: LPDWORD) -> BOOL;
+    pub fn GetExitCodeThread(hThread: HANDLE, lpExitCode: LPDWORD) -> BOOL;
     pub fn GetFileAttributesA(lpFileName: LPCSTR) -> DWORD;
     pub fn GetFileAttributesExA(
         lpFileName: LPCSTR, fInfoLevelId: GET_FILEEX_INFO_LEVELS, lpFileInformation: LPVOID,
@@ -678,8 +678,8 @@ extern "system" {
         lpszShortPath: LPCWSTR, lpszLongPath: LPWSTR, cchBuffer: DWORD,
     ) -> DWORD;
     // pub fn GetMailslotInfo();
-    // pub fn GetMaximumProcessorCount();
-    // pub fn GetMaximumProcessorGroupCount();
+    pub fn GetMaximumProcessorCount(GroupNumber: WORD) -> DWORD;
+    pub fn GetMaximumProcessorGroupCount() -> WORD;
     // pub fn GetMemoryErrorHandlingCapabilities();
     // pub fn GetModuleFileNameA();
     // pub fn GetModuleFileNameW();
@@ -748,22 +748,22 @@ extern "system" {
     // pub fn GetProcessAffinityMask();
     // pub fn GetProcessDEPPolicy();
     // pub fn GetProcessGroupAffinity();
-    // pub fn GetProcessHandleCount();
+    pub fn GetProcessHandleCount(hProcess: HANDLE, pdwHandleCount: PDWORD) -> BOOL;
     pub fn GetProcessHeap() -> HANDLE;
     pub fn GetProcessHeaps(NumberOfHeaps: DWORD, ProcessHeaps: PHANDLE) -> DWORD;
-    // pub fn GetProcessId();
-    // pub fn GetProcessIdOfThread();
+    pub fn GetProcessId(Process: HANDLE) -> DWORD;
+    pub fn GetProcessIdOfThread(Thread: HANDLE) -> DWORD;
     // pub fn GetProcessInformation();
     // pub fn GetProcessIoCounters();
     // pub fn GetProcessMitigationPolicy();
     // pub fn GetProcessPreferredUILanguages();
-    // pub fn GetProcessPriorityBoost();
+    pub fn GetProcessPriorityBoost(hProcess: HANDLE, pDisablePriorityBoost: PBOOL) -> BOOL;
     // pub fn GetProcessShutdownParameters();
     pub fn GetProcessTimes(
         hProcess: HANDLE, lpCreationTime: LPFILETIME, lpExitTime: LPFILETIME,
         lpKernelTime: LPFILETIME, lpUserTime: LPFILETIME,
     ) -> BOOL;
-    // pub fn GetProcessVersion();
+    pub fn GetProcessVersion(ProcessId: DWORD) -> DWORD;
     // pub fn GetProcessWorkingSetSize();
     // pub fn GetProcessWorkingSetSizeEx();
     // pub fn GetProcessorSystemCycleTime();
@@ -827,10 +827,13 @@ extern "system" {
         hDevice: HANDLE, dwOperation: DWORD, lpdwSize: LPDWORD, lpTapeInformation: LPVOID
     ) -> DWORD;
     pub fn GetTapePosition(
-        hDevice: HANDLE, dwPositionType: DWORD, lpdwPartition: LPDWORD, lpdwOffsetLow: LPDWORD, lpdwOffsetHigh: LPDWORD
+        hDevice: HANDLE, dwPositionType: DWORD, lpdwPartition: LPDWORD,
+        lpdwOffsetLow: LPDWORD, lpdwOffsetHigh: LPDWORD
     ) -> DWORD;
     pub fn GetTapeStatus(hDevice: HANDLE) -> DWORD;
-    // pub fn GetTempFileNameA();
+    pub fn GetTempFileNameA(
+        lpPathName: LPCSTR, lpPrefixString: LPCSTR, uUnique: UINT, lpTempFileName: LPSTR
+    ) -> UINT;
     pub fn GetTempFileNameW(
         lpPathName: LPCWSTR, lpPrefixString: LPCWSTR, uUnique: UINT, lpTempFileName: LPWSTR,
     ) -> UINT;
@@ -845,8 +848,8 @@ extern "system" {
     // pub fn GetThreadInformation();
     // pub fn GetThreadLocale();
     // pub fn GetThreadPreferredUILanguages();
-    // pub fn GetThreadPriority();
-    // pub fn GetThreadPriorityBoost();
+    pub fn GetThreadPriority(hThread: HANDLE) -> c_int;
+    pub fn GetThreadPriorityBoost(hThread: HANDLE, pDisablePriorityBoost: PBOOL) -> BOOL;
     // pub fn GetThreadSelectorEntry();
     pub fn GetThreadTimes(
         hThread: HANDLE, lpCreationTime: LPFILETIME, lpExitTime: LPFILETIME,
@@ -882,7 +885,7 @@ extern "system" {
     // pub fn GetUserDefaultUILanguage();
     // pub fn GetUserGeoID();
     // pub fn GetUserPreferredUILanguages();
-    // pub fn GetVersion();
+    pub fn GetVersion() -> DWORD;
     // pub fn GetVersionExA();
     // pub fn GetVersionExW();
     // pub fn GetVolumeInformationA();
@@ -1009,9 +1012,9 @@ extern "system" {
     // pub fn IsDBCSLeadByteEx();
     // pub fn IsDebuggerPresent();
     // pub fn IsNLSDefinedString();
-    // pub fn IsNativeVhdBoot();
+    pub fn IsNativeVhdBoot(NativeVhdBoot: *mut PBOOL) -> BOOL;
     // pub fn IsNormalizedString();
-    // pub fn IsProcessCritical();
+    pub fn IsProcessCritical(hProcess: HANDLE, Critical: PBOOL) -> BOOL;
     // pub fn IsProcessInJob();
     // pub fn IsProcessorFeaturePresent();
     pub fn IsSystemResumeAutomatic() -> BOOL;
@@ -1022,7 +1025,7 @@ extern "system" {
     // pub fn IsValidLocale();
     // pub fn IsValidLocaleName();
     // pub fn IsValidNLSVersion();
-    // pub fn IsWow64Process();
+    pub fn IsWow64Process(hProcess: HANDLE, Wow64Process: PBOOL);
     // pub fn K32EmptyWorkingSet();
     // pub fn K32EnumDeviceDrivers();
     // pub fn K32EnumPageFilesA();
@@ -1522,8 +1525,8 @@ extern "system" {
     // pub fn SetThreadInformation();
     // pub fn SetThreadLocale();
     // pub fn SetThreadPreferredUILanguages();
-    // pub fn SetThreadPriority();
-    // pub fn SetThreadPriorityBoost();
+    pub fn SetThreadPriority(hThread: HANDLE, nPriority: c_int) -> BOOL;
+    pub fn SetThreadPriorityBoost(hThread: HANDLE, DisablePriorityBoost: BOOL) -> BOOL;
     // pub fn SetThreadStackGuarantee();
     // pub fn SetThreadUILanguage();
     // pub fn SetThreadpoolStackInformation();
@@ -1556,7 +1559,7 @@ extern "system" {
     pub fn SleepEx(dwMilliseconds: DWORD, bAlertable: BOOL) -> DWORD;
     // pub fn StartThreadpoolIo();
     // pub fn SubmitThreadpoolWork();
-    // pub fn SuspendThread();
+    pub fn SuspendThread(hThread: HANDLE) -> DWORD;
     pub fn SwitchToFiber(lpFiber: LPVOID);
     pub fn SwitchToThread() -> BOOL;
     pub fn SystemTimeToFileTime(
@@ -1572,7 +1575,7 @@ extern "system" {
     ) -> BOOL;
     pub fn TerminateJobObject(hJob: HANDLE, uExitCode: UINT) -> BOOL;
     pub fn TerminateProcess(hProcess: HANDLE, uExitCode: UINT) -> BOOL;
-    // pub fn TerminateThread();
+    pub fn TerminateThread(hThread: HANDLE, dwExitCode: DWORD) -> BOOL;
     pub fn Thread32First(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
     pub fn Thread32Next(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
     pub fn TlsAlloc() -> DWORD;
