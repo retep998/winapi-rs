@@ -1392,3 +1392,538 @@ pub struct CERT_CONTEXT {
 }
 pub type PCERT_CONTEXT = *mut CERT_CONTEXT;
 pub type PCCERT_CONTEXT = *const CERT_CONTEXT;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRL_CONTEXT {
+    pub dwCertEncodingType: ::DWORD,
+    pub pbCrlEncoded: *mut ::BYTE,
+    pub cbCrlEncoded: ::DWORD,
+    pub pCrlInfo: ::PCRL_INFO,
+    pub hCertStore: HCERTSTORE,
+}
+pub type PCRL_CONTEXT = *mut CRL_CONTEXT;
+pub type PCCRL_CONTEXT = *const CRL_CONTEXT;
+//6854
+pub type HCRYPTMSG = *mut ::c_void;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CTL_CONTEXT {
+    pub dwMsgAndCertEncodingType: ::DWORD,
+    pub pbCtlEncoded: *mut ::BYTE,
+    pub cbCtlEncoded: ::DWORD,
+    pub pCtlInfo: ::PCTL_INFO,
+    pub hCertStore: HCERTSTORE,
+    pub hCryptMsg: HCRYPTMSG,
+    pub pbCtlContent: *mut ::BYTE,
+    pub cbCtlContent: ::DWORD,
+}
+pub type PCTL_CONTEXT = *mut CTL_CONTEXT;
+pub type PCCTL_CONTEXT = *const CTL_CONTEXT;
+//20213
+pub type HCERT_SERVER_OCSP_RESPONSE = *mut ::c_void;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_SERVER_OCSP_RESPONSE_CONTEXT {
+    pub cbSize: ::DWORD,
+    pub pbEncodedOcspResponse: *mut ::BYTE,
+    pub cbEncodedOcspResponse: ::DWORD,
+}
+pub type PCERT_SERVER_OCSP_RESPONSE_CONTEXT = *mut CERT_SERVER_OCSP_RESPONSE_CONTEXT;
+pub type PCCERT_SERVER_OCSP_RESPONSE_CONTEXT = *const CERT_SERVER_OCSP_RESPONSE_CONTEXT;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_CHAIN_ENGINE_CONFIG {
+    pub cbSize: ::DWORD,
+    pub hRestrictedRoot: HCERTSTORE,
+    pub hRestrictedTrust: HCERTSTORE,
+    pub hRestrictedOther: HCERTSTORE,
+    pub cAdditionalStore: ::DWORD,
+    pub rghAdditionalStore: *mut HCERTSTORE,
+    pub dwFlags: ::DWORD,
+    pub dwUrlRetrievalTimeout: ::DWORD,
+    pub MaximumCachedCertificates: ::DWORD,
+    pub CycleDetectionModulus: ::DWORD,
+    // #if (NTDDI_VERSION >= NTDDI_WIN7)
+    pub hExclusiveRoot: HCERTSTORE,
+    pub hExclusiveTrustedPeople: HCERTSTORE,
+    // #if (NTDDI_VERSION >= NTDDI_WIN8)
+    pub dwExclusiveFlags: ::DWORD,
+}
+pub type PCERT_CHAIN_ENGINE_CONFIG = *mut CERT_CHAIN_ENGINE_CONFIG;
+// 18748
+pub type HCERTCHAINENGINE = ::HANDLE;
+pub type PFN_CERT_CREATE_CONTEXT_SORT_FUNC = Option<unsafe extern "system" fn(
+    cbTotalEncoded: ::DWORD, cbRemainEncoded: ::DWORD, cEntry: ::DWORD, pvSort: *mut ::c_void
+) -> ::BOOL>;
+#[repr(C)] #[derive(Copy)]
+pub struct CERT_CREATE_CONTEXT_PARA {
+    pub cbSize: ::DWORD,
+    pub pfnFree: PFN_CRYPT_FREE,
+    pub pvFree: *mut ::c_void,
+    pub pfnSort: PFN_CERT_CREATE_CONTEXT_SORT_FUNC,
+    pub pvSort: *mut ::c_void,
+}
+impl Clone for CERT_CREATE_CONTEXT_PARA { fn clone(&self) -> CERT_CREATE_CONTEXT_PARA { *self } }
+pub type PCERT_CREATE_CONTEXT_PARA = *mut CERT_CREATE_CONTEXT_PARA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_KEY_PROV_PARAM {
+    pub dwParam: ::DWORD,
+    pub pbData: *mut ::BYTE,
+    pub cbData: ::DWORD,
+    pub dwFlags: ::DWORD,
+}
+pub type PCRYPT_KEY_PROV_PARAM = *mut CRYPT_KEY_PROV_PARAM;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_KEY_PROV_INFO {
+    pub pwszContainerName: ::LPWSTR,
+    pub pwszProvName: ::LPWSTR,
+    pub dwProvType: ::DWORD,
+    pub dwFlags: ::DWORD,
+    pub cProvParam: ::DWORD,
+    pub rgProvParam: PCRYPT_KEY_PROV_PARAM,
+    pub dwKeySpec: ::DWORD,
+}
+pub type PCRYPT_KEY_PROV_INFO = *mut CRYPT_KEY_PROV_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_EXTENSIONS {
+    cExtension: ::DWORD,
+    rgExtension: PCERT_EXTENSION,
+}
+pub type PCERT_EXTENSIONS = *mut CERT_EXTENSIONS;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_REVOCATION_CRL_INFO {
+    pub cbSize: ::DWORD,
+    pub pBaseCrlContext: PCCRL_CONTEXT,
+    pub pDeltaCrlContext: PCCRL_CONTEXT,
+    pub pCrlEntry: PCRL_ENTRY,
+    pub fDeltaCrlEntry: ::BOOL,
+}
+pub type PCERT_REVOCATION_CRL_INFO = *mut CERT_REVOCATION_CRL_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_TRUST_STATUS {
+    dwErrorStatus: ::DWORD,
+    dwInfoStatus: ::DWORD,
+}
+pub type PCERT_TRUST_STATUS = *mut CERT_TRUST_STATUS;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_REVOCATION_INFO {
+    pub cbSize: ::DWORD,
+    pub dwRevocationResult: ::DWORD,
+    pub pszRevocationOid: ::LPCSTR,
+    pub pvOidSpecificInfo: ::LPVOID,
+    pub fHasFreshnessTime: ::BOOL,
+    pub dwFreshnessTime: ::DWORD,
+    pub pCrlInfo: PCERT_REVOCATION_CRL_INFO,
+}
+pub type PCERT_REVOCATION_INFO = *mut CERT_REVOCATION_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_TRUST_LIST_INFO {
+    pub cbSize: ::DWORD,
+    pub pCtlEntry: PCTL_ENTRY,
+    pub pCtlContext: PCCTL_CONTEXT,
+}
+pub type PCERT_TRUST_LIST_INFO = *mut CERT_TRUST_LIST_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_CHAIN_ELEMENT {
+    pub cbSize: ::DWORD,
+    pub pCertContext: PCCERT_CONTEXT,
+    pub TrustStatus: CERT_TRUST_STATUS,
+    pub pRevocationInfo: PCERT_REVOCATION_INFO,
+    pub pIssuanceUsage: PCERT_ENHKEY_USAGE,
+    pub pApplicationUsage: PCERT_ENHKEY_USAGE,
+    pub pwszExtendedErrorInfo: ::LPWSTR,
+}
+pub type PCERT_CHAIN_ELEMENT = *mut CERT_CHAIN_ELEMENT;
+pub type PCCERT_CHAIN_ELEMENT = *const CERT_CHAIN_ELEMENT;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_SIMPLE_CHAIN {
+    pub cbSize: ::DWORD,
+    pub TrustStatus: CERT_TRUST_STATUS,
+    pub cElement: ::DWORD,
+    pub rgpElement: *mut PCERT_CHAIN_ELEMENT,
+    pub pTrustListInfo: PCERT_TRUST_LIST_INFO,
+    pub fHasRevocationFreshnessTime: ::BOOL,
+    pub dwRevocationFreshnessTime: ::DWORD,
+}
+pub type PCERT_SIMPLE_CHAIN = *mut CERT_SIMPLE_CHAIN;
+pub type PCCERT_SIMPLE_CHAIN = *const CERT_SIMPLE_CHAIN;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_CHAIN_CONTEXT {
+    pub cbSize: ::DWORD,
+    pub TrustStatus: CERT_TRUST_STATUS,
+    pub cChain: ::DWORD,
+    pub rgpChain: *mut PCERT_SIMPLE_CHAIN,
+    pub cLowerQualityChainContext: ::DWORD,
+    pub rgpLowerQualityChainContext: *mut PCCERT_CHAIN_CONTEXT,
+    pub fHasRevocationFreshnessTime: ::BOOL,
+    pub dwRevocationFreshnessTime: ::DWORD,
+    pub dwCreateFlags: ::DWORD,
+    pub ChainId: ::GUID,
+}
+pub type PCERT_CHAIN_CONTEXT = *mut CERT_CHAIN_CONTEXT;
+pub type PCCERT_CHAIN_CONTEXT = *const CERT_CHAIN_CONTEXT;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_PHYSICAL_STORE_INFO {
+    pub cbSize: ::DWORD,
+    pub pszOpenStoreProvider: ::LPSTR,
+    pub dwOpenEncodingType: ::DWORD,
+    pub dwOpenFlags: ::DWORD,
+    pub OpenParameters: CRYPT_DATA_BLOB,
+    pub dwFlags: ::DWORD,
+    pub dwPriority: ::DWORD,
+}
+pub type PCERT_PHYSICAL_STORE_INFO = *mut CERT_PHYSICAL_STORE_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_SYSTEM_STORE_INFO {
+    pub cbSize: ::DWORD,
+}
+pub type PCERT_SYSTEM_STORE_INFO = *mut CERT_SYSTEM_STORE_INFO;
+//13401
+pub type PFN_CERT_ENUM_SYSTEM_STORE_LOCATION = Option<unsafe extern "system" fn(
+    pwszStoreLocation: ::LPCWSTR, dwFlags: ::DWORD, pvReserved: *mut ::c_void, pvArg: *mut ::c_void,
+) -> ::BOOL>;
+//13408
+pub type PFN_CERT_ENUM_SYSTEM_STORE = Option<unsafe extern "system" fn(
+    pvSystemStore: *const ::c_void, dwFlags: ::DWORD, pStoreInfo: PCERT_SYSTEM_STORE_INFO,
+    pvReserved: *mut ::c_void, pvArg: *mut ::c_void,
+) -> ::BOOL>;
+//13416
+pub type PFN_CERT_ENUM_PHYSICAL_STORE = Option<unsafe extern "system" fn(
+    pvSystemStore: *const ::c_void, dwFlags: ::DWORD, pwszStoreName: ::LPCWSTR,
+    pStoreInfo: PCERT_PHYSICAL_STORE_INFO, pvReserved: *mut ::c_void, pvArg: *mut ::c_void,
+) -> ::BOOL>;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_STRONG_SIGN_SERIALIZED_INFO {
+    pub dwFlags: ::DWORD,
+    pub pwszCNGSignHashAlgids: ::LPWSTR,
+    pub pwszCNGPubKeyMinBitLengths: ::LPWSTR,
+}
+pub type PCERT_STRONG_SIGN_SERIALIZED_INFO = *mut CERT_STRONG_SIGN_SERIALIZED_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_STRONG_SIGN_PARA {
+    pub cbSize: ::DWORD,
+    pub dwInfoChoice: ::DWORD,
+    pub pvInfo: *mut ::c_void,
+}
+UNION!(
+    CERT_STRONG_SIGN_PARA, pvInfo, pSerializedInfo, pSerializedInfo_mut, 
+    PCERT_STRONG_SIGN_SERIALIZED_INFO
+);
+UNION!(CERT_STRONG_SIGN_PARA, pvInfo, pszOID, pszOID_mut, ::LPSTR);
+pub type PCERT_STRONG_SIGN_PARA = *mut CERT_STRONG_SIGN_PARA;
+pub type PCCERT_STRONG_SIGN_PARA = *const CERT_STRONG_SIGN_PARA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_USAGE_MATCH {
+    pub dwType: ::DWORD,
+    pub Usage: CERT_ENHKEY_USAGE,
+}
+pub type PCERT_USAGE_MATCH = *mut CERT_USAGE_MATCH;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_CHAIN_PARA {
+    pub cbSize: ::DWORD,
+    pub RequestedUsage: CERT_USAGE_MATCH,
+    pub RequestedIssuancePolicy: CERT_USAGE_MATCH,
+    pub dwUrlRetrievalTimeout: ::DWORD,
+    pub fCheckRevocationFreshnessTime: ::BOOL,
+    pub dwRevocationFreshnessTime: ::DWORD,
+    pub pftCacheResync: ::LPFILETIME,
+    pub pStrongSignPara: PCCERT_STRONG_SIGN_PARA,
+    pub dwStrongSignFlags: ::DWORD,
+}
+pub type PCERT_CHAIN_PARA = *mut CERT_CHAIN_PARA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_SELECT_CHAIN_PARA {
+    pub hChainEngine: HCERTCHAINENGINE,
+    pub pTime: ::PFILETIME,
+    pub hAdditionalStore: HCERTSTORE,
+    pub pChainPara: PCERT_CHAIN_PARA,
+    pub dwFlags: ::DWORD,
+}
+pub type PCERT_SELECT_CHAIN_PARA = *mut CERT_SELECT_CHAIN_PARA;
+pub type PCCERT_SELECT_CHAIN_PARA = *const CERT_SELECT_CHAIN_PARA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_SELECT_CRITERIA {
+    pub dwType: ::DWORD,
+    pub cPara: ::DWORD,
+    pub ppPara: *mut *mut ::c_void,
+}
+pub type PCERT_SELECT_CRITERIA = *mut CERT_SELECT_CRITERIA;
+pub type PCCERT_SELECT_CRITERIA = *const CERT_SELECT_CRITERIA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CTL_VERIFY_USAGE_PARA {
+    pub cbSize: ::DWORD,
+    pub ListIdentifier: CRYPT_DATA_BLOB,
+    pub cCtlStore: ::DWORD,
+    pub rghCtlStore: *mut HCERTSTORE,
+    pub cSignerStore: ::DWORD,
+    pub rghSignerStore: *mut HCERTSTORE,
+}
+pub type PCTL_VERIFY_USAGE_PARA = *mut CTL_VERIFY_USAGE_PARA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CTL_VERIFY_USAGE_STATUS {
+    pub cbSize: ::DWORD,
+    pub dwError: ::DWORD,
+    pub dwFlags: ::DWORD,
+    pub ppCtl: *mut PCCTL_CONTEXT,
+    pub dwCtlEntryIndex: ::DWORD,
+    pub ppSigner: *mut PCCERT_CONTEXT,
+    pub dwSignerIndex: ::DWORD,
+}
+pub type PCTL_VERIFY_USAGE_STATUS = *mut CTL_VERIFY_USAGE_STATUS;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_CHAIN_POLICY_PARA {
+    pub cbSize: ::DWORD,
+    pub dwFlags: ::DWORD,
+    pub pvExtraPolicyPara: *mut ::c_void,
+}
+pub type PCERT_CHAIN_POLICY_PARA = *mut CERT_CHAIN_POLICY_PARA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_CHAIN_POLICY_STATUS {
+    pub cbSize: ::DWORD,
+    pub dwError: ::DWORD,
+    pub lChainIndex: ::LONG,
+    pub lElementIndex: ::LONG,
+    pub pvExtraPolicyStatus: *mut ::c_void,
+}
+pub type PCERT_CHAIN_POLICY_STATUS = *mut CERT_CHAIN_POLICY_STATUS;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_REVOCATION_CHAIN_PARA {
+    pub cbSize: ::DWORD,
+    pub hChainEngine: HCERTCHAINENGINE,
+    pub hAdditionalStore: HCERTSTORE,
+    pub dwChainFlags: ::DWORD,
+    pub dwUrlRetrievalTimeout: ::DWORD,
+    pub pftCurrentTime: ::LPFILETIME,
+    pub pftCacheResync: ::LPFILETIME,
+}
+pub type PCERT_REVOCATION_CHAIN_PARA = *mut CERT_REVOCATION_CHAIN_PARA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_REVOCATION_PARA {
+    pub cbSize: ::DWORD,
+    pub pIssuerCert: PCCERT_CONTEXT,
+    pub cCertStore: ::DWORD,
+    pub rgCertStore: *mut HCERTSTORE,
+    pub hCrlStore: HCERTSTORE,
+    pub pftTimeToUse: ::LPFILETIME,
+    pub dwUrlRetrievalTimeout: ::DWORD,
+    pub fCheckFreshnessTime: ::BOOL,
+    pub dwFreshnessTime: ::DWORD,
+    pub pftCurrentTime: ::LPFILETIME,
+    pub pCrlInfo: PCERT_REVOCATION_CRL_INFO,
+    pub pftCacheResync: ::LPFILETIME,
+    pub pChainPara: PCERT_REVOCATION_CHAIN_PARA,
+}
+pub type PCERT_REVOCATION_PARA = *mut CERT_REVOCATION_PARA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CERT_REVOCATION_STATUS {
+    pub cbSize: ::DWORD,
+    pub dwIndex: ::DWORD,
+    pub dwError: ::DWORD,
+    pub dwReason: ::DWORD,
+    pub fHasFreshnessTime: ::BOOL,
+    pub dwFreshnessTime: ::DWORD,
+}
+pub type PCERT_REVOCATION_STATUS = *mut CERT_REVOCATION_STATUS;
+//16990
+pub type HCRYPTASYNC = ::HANDLE;
+pub type PHCRYPTASYNC = *mut ::HANDLE;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_ENCRYPT_MESSAGE_PARA {
+    pub cbSize: ::DWORD,
+    pub dwMsgEncodingType: ::DWORD,
+    pub hCryptProv: HCRYPTPROV_LEGACY,
+    pub ContentEncryptionAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    pub pvEncryptionAuxInfo: *mut ::c_void,
+    pub dwFlags: ::DWORD,
+    pub dwInnerContentType: ::DWORD,
+}
+pub type PCRYPT_ENCRYPT_MESSAGE_PARA = *mut CRYPT_DECRYPT_MESSAGE_PARA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_DECRYPT_MESSAGE_PARA {
+    pub cbSize: ::DWORD,
+    pub dwMsgAndCertEncodingType: ::DWORD,
+    pub cCertStore: ::DWORD,
+    pub rghCertStore: *mut HCERTSTORE,
+    pub dwFlags: ::DWORD,
+}
+pub type PCRYPT_DECRYPT_MESSAGE_PARA = *mut CRYPT_DECRYPT_MESSAGE_PARA;
+pub type PFN_CRYPT_GET_SIGNER_CERTIFICATE = Option<unsafe extern "system" fn(
+    pvGetArg: *mut ::c_void, dwCertEncodingType: ::DWORD, pSignerId: PCERT_INFO,
+    hMsgCertStore: HCERTSTORE,
+) -> PCCERT_CONTEXT>;
+#[repr(C)] #[derive(Copy)]
+pub struct CRYPT_VERIFY_MESSAGE_PARA {
+    pub cbSize: ::DWORD,
+    pub dwMsgAndCertEncodingType: ::DWORD,
+    pub hCryptProv: HCRYPTPROV_LEGACY,
+    pub pfnGetSignerCertificate: PFN_CRYPT_GET_SIGNER_CERTIFICATE,
+    pub pvGetArg: *mut ::c_void,
+    pub pStrongSignPara: PCCERT_STRONG_SIGN_PARA,
+}
+impl Clone for CRYPT_VERIFY_MESSAGE_PARA { fn clone(&self) -> CRYPT_VERIFY_MESSAGE_PARA { *self } }
+pub type PCRYPT_VERIFY_MESSAGE_PARA = *mut CRYPT_VERIFY_MESSAGE_PARA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_OID_INFO {
+    pub cbSize: ::DWORD,
+    pub oszOID: ::LPCSTR,
+    pub pwszName: ::LPCWSTR,
+    pub dwGroupId: ::DWORD,
+    pub dwValue: ::DWORD,
+    pub ExtraInfo: CRYPT_DATA_BLOB,
+    pub pwszCNGAlgid: ::LPCWSTR,
+    pub pwszCNGExtraAlgid: ::LPCWSTR,
+}
+UNION!(CRYPT_OID_INFO, dwValue, Algid, Algid_mut, ALG_ID);
+UNION!(CRYPT_OID_INFO, dwValue, dwLength, dwLength_mut, ::DWORD);
+pub type PCRYPT_OID_INFO = *mut CRYPT_OID_INFO;
+pub type PCCRYPT_OID_INFO = *const CRYPT_OID_INFO;
+//18004
+pub type PFN_CRYPT_ENUM_KEYID_PROP = Option<unsafe extern "system" fn(
+    pKeyIdentifier: *const CRYPT_HASH_BLOB, dwFlags: ::DWORD, pvReserved: *mut ::c_void,
+    pvArg: *mut ::c_void, cProp: ::DWORD, rgdwPropId: *mut ::DWORD, rgpvData: *mut *mut ::c_void,
+    rgcbData: *mut ::DWORD,
+) -> ::BOOL>;
+//6379
+pub type PFN_CRYPT_ENUM_OID_FUNC = Option<unsafe extern "system" fn(
+    dwEncodingType: ::DWORD, pszFuncName: ::LPCSTR, pszOID: ::LPCSTR, cValue: ::DWORD,
+    rgdwValueType: *const ::DWORD, rgpwszValueName: *const ::LPCWSTR,
+    rgpbValueData: *const *const ::BYTE, rgcbValueData: *const ::DWORD, pvArg: *mut ::c_void,
+) -> ::BOOL>;
+//6675
+pub type PFN_CRYPT_ENUM_OID_INFO = Option<unsafe extern "system" fn(
+    pInfo: PCCRYPT_OID_INFO, pvArg: *mut ::c_void,
+) -> ::BOOL>;
+//6022
+pub type HCRYPTOIDFUNCSET = *mut ::c_void;
+pub type HCRYPTOIDFUNCADDR = *mut ::c_void;
+pub type PFN_CRYPT_ASYNC_PARAM_FREE_FUNC = Option<unsafe extern "system" fn(
+    pszParamOid: ::LPSTR, pvParam: ::LPVOID,
+)>;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_HASH_MESSAGE_PARA {
+    pub cbSize: ::DWORD,
+    pub dwMsgEncodingType: ::DWORD,
+    pub hCryptProv: HCRYPTPROV_LEGACY,
+    pub HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    pub pvHashAuxInfo: *mut ::c_void,
+}
+pub type PCRYPT_HASH_MESSAGE_PARA = *mut CRYPT_HASH_MESSAGE_PARA;
+//14750
+pub type HCRYPTDEFAULTCONTEXT = *mut ::c_void;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_OID_FUNC_ENTRY {
+    pub pszOID: ::LPCSTR,
+    pub pvFuncAddr: *mut ::c_void,
+}
+pub type PCRYPT_OID_FUNC_ENTRY = *mut CRYPT_OID_FUNC_ENTRY;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CMSG_SIGNER_ENCODE_INFO {
+    pub cbSize: ::DWORD,
+    pub pCertInfo: PCERT_INFO,
+    pub hCryptProv: HCRYPTPROV,
+    pub dwKeySpec: ::DWORD,
+    pub HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    pub pvHashAuxInfo: *mut ::c_void,
+    pub cAuthAttr: ::DWORD,
+    pub rgAuthAttr: PCRYPT_ATTRIBUTE,
+    pub cUnauthAttr: ::DWORD,
+    pub rgUnauthAttr: PCRYPT_ATTRIBUTE,
+}
+UNION!(CMSG_SIGNER_ENCODE_INFO, hCryptProv, hNCryptKey, hNCryptKey_mut, ::NCRYPT_KEY_HANDLE);
+pub type PCMSG_SIGNER_ENCODE_INFO = *mut CMSG_SIGNER_ENCODE_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CMSG_SIGNED_ENCODE_INFO {
+    pub cbSize: ::DWORD,
+    pub cSigners: ::DWORD,
+    pub rgSigners: PCMSG_SIGNER_ENCODE_INFO,
+    pub cCertEncoded: ::DWORD,
+    pub rgCertEncoded: PCERT_BLOB,
+    pub cCrlEncoded: ::DWORD,
+    pub rgCrlEncoded: PCRL_BLOB,
+}
+pub type PCMSG_SIGNED_ENCODE_INFO = *mut CMSG_SIGNED_ENCODE_INFO;
+//7393
+pub type PFN_CMSG_STREAM_OUTPUT = Option<unsafe extern "system" fn(
+    pvArg: *const ::c_void, pbData: *mut ::BYTE, cbData: ::DWORD, fFinal: ::BOOL,
+) -> ::BOOL>;
+#[repr(C)] #[derive(Copy)]
+pub struct CMSG_STREAM_INFO {
+    pub cbContent: ::DWORD,
+    pub pfnStreamOutput: PFN_CMSG_STREAM_OUTPUT,
+    pub pvArg: *mut ::c_void,
+}
+impl Clone for CMSG_STREAM_INFO { fn clone(&self) -> CMSG_STREAM_INFO { *self } }
+pub type PCMSG_STREAM_INFO = *mut CMSG_STREAM_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_TIMESTAMP_ACCURACY {
+    pub dwSeconds: ::DWORD,
+    pub dwMillis: ::DWORD,
+    pub dwMicros: ::DWORD,
+}
+pub type PCRYPT_TIMESTAMP_ACCURACY = *mut CRYPT_TIMESTAMP_ACCURACY;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_TIMESTAMP_INFO {
+    pub dwVersion: ::DWORD,
+    pub pszTSAPolicyId: ::LPSTR,
+    pub HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    pub HashedMessage: CRYPT_DER_BLOB,
+    pub SerialNumber: CRYPT_INTEGER_BLOB,
+    pub ftTime: ::FILETIME,
+    pub pvAccuracy: PCRYPT_TIMESTAMP_ACCURACY,
+    pub fOrdering: ::BOOL,
+    pub Nonce: CRYPT_DER_BLOB,
+    pub Tsa: CRYPT_DER_BLOB,
+    pub cExtension: ::DWORD,
+    pub rgExtension: PCERT_EXTENSION,
+}
+pub type PCRYPT_TIMESTAMP_INFO = *mut CRYPT_TIMESTAMP_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_TIMESTAMP_CONTEXT {
+    pub cbEncoded: ::DWORD,
+    pub pbEncoded: *mut ::BYTE,
+    pub pTimeStamp: PCRYPT_TIMESTAMP_INFO,
+}
+pub type PCRYPT_TIMESTAMP_CONTEXT = *mut CRYPT_TIMESTAMP_CONTEXT;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_TIMESTAMP_PARA {
+    pub pszTSAPolicyId: ::LPCSTR,
+    pub fRequestCerts: ::BOOL,
+    pub Nonce: CRYPT_INTEGER_BLOB,
+    pub cExtension: ::DWORD,
+    pub rgExtension: PCERT_EXTENSION,
+}
+pub type PCRYPT_TIMESTAMP_PARA = *mut CRYPT_TIMESTAMP_PARA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_SIGN_MESSAGE_PARA {
+    pub cbSize: ::DWORD,
+    pub dwMsgEncodingType: ::DWORD,
+    pub pSigningCert: PCCERT_CONTEXT,
+    pub HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    pub pvHashAuxInfo: *mut ::c_void,
+    pub cMsgCert: ::DWORD,
+    pub rgpMsgCert: *mut PCCERT_CONTEXT,
+    pub cMsgCrl: ::DWORD,
+    pub rgpMsgCrl: *mut PCCRL_CONTEXT,
+    pub cAuthAttr: ::DWORD,
+    pub rgAuthAttr: PCRYPT_ATTRIBUTE,
+    pub cUnauthAttr: ::DWORD,
+    pub rgUnauthAttr: PCRYPT_ATTRIBUTE,
+    pub dwFlags: ::DWORD,
+    pub dwInnerContentType: ::DWORD,
+}
+pub type PCRYPT_SIGN_MESSAGE_PARA = *mut CRYPT_SIGN_MESSAGE_PARA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_KEY_SIGN_MESSAGE_PARA {
+    pub cbSize: ::DWORD,
+    pub dwMsgAndCertEncodingType: ::DWORD,
+    pub hCryptProv: HCRYPTPROV,
+    pub dwKeySpec: ::DWORD,
+    pub HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    pub pvHashAuxInfo: *mut ::c_void,
+    pub PubKeyAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+}
+UNION!(CRYPT_KEY_SIGN_MESSAGE_PARA, hCryptProv, hNCryptKey, hNCryptKey_mut, ::NCRYPT_KEY_HANDLE);
+pub type PCRYPT_KEY_SIGN_MESSAGE_PARA = *mut CRYPT_KEY_SIGN_MESSAGE_PARA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_KEY_VERIFY_MESSAGE_PARA {
+    pub cbSize: ::DWORD,
+    pub dwMsgEncodingType: ::DWORD,
+    pub hCryptProv: HCRYPTPROV_LEGACY,
+}
+pub type PCRYPT_KEY_VERIFY_MESSAGE_PARA = *mut CRYPT_KEY_VERIFY_MESSAGE_PARA;
