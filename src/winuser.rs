@@ -100,6 +100,17 @@ pub const PM_QS_SENDMESSAGE: ::UINT = QS_SENDMESSAGE << 16;
 //
 pub const LWA_COLORKEY: ::DWORD = 0x00000001;
 pub const LWA_ALPHA: ::DWORD = 0x00000002;
+//3469
+pub const EWX_LOGOFF: ::UINT = 0x00000000;
+pub const EWX_SHUTDOWN: ::UINT = 0x00000001;
+pub const EWX_REBOOT: ::UINT = 0x00000002;
+pub const EWX_FORCE: ::UINT = 0x00000004;
+pub const EWX_POWEROFF: ::UINT = 0x00000008;
+pub const EWX_FORCEIFHUNG: ::UINT = 0x00000010;
+pub const EWX_QUICKRESOLVE: ::UINT = 0x00000020;
+pub const EWX_RESTARTAPPS: ::UINT = 0x00000040;
+pub const EWX_HYBRID_SHUTDOWN: ::UINT = 0x00400000;
+pub const EWX_BOOTOPTIONS: ::UINT = 0x01000000;
 //4054 (Win 7 SDK)
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FLASHWINFO {
@@ -195,6 +206,15 @@ pub const GWL_ID: ::c_int = -12;
 pub const GWLP_ID: ::c_int = -12;
 pub const GWL_USERDATA: ::c_int = -21;
 pub const GWLP_USERDATA: ::c_int = -21;
+//5976
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum POINTER_INPUT_TYPE {
+    PT_POINTER = 0x00000001,
+    PT_TOUCH = 0x00000002,
+    PT_PEN = 0x00000003,
+    PT_MOUSE = 0x00000004,
+    PT_TOUCHPAD = 0x00000005,
+}
 //6566
 // flags for MsgWaitForMultipleObjectsEx
 pub const MWMO_WAITALL: ::DWORD = 0x0001;
