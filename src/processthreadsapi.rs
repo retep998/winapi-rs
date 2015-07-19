@@ -1,6 +1,16 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 #[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct PROCESS_INFORMATION {
+    pub hProcess: ::HANDLE,
+    pub hThread: ::HANDLE,
+    pub dwProcessId: ::DWORD,
+    pub dwThreadId: ::DWORD,
+}
+pub type PPROCESS_INFORMATION = *mut PROCESS_INFORMATION;
+pub type LPPROCESS_INFORMATION = *mut PROCESS_INFORMATION;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct STARTUPINFOA {
     pub cb: ::DWORD,
     pub lpReserved: ::LPSTR,
@@ -44,3 +54,17 @@ pub struct STARTUPINFOW {
     pub hStdError: ::HANDLE,
 }
 pub type LPSTARTUPINFOW = *mut STARTUPINFOW;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct PROC_THREAD_ATTRIBUTE_LIST {
+    dummy: *mut ::c_void,
+}
+pub type PPROC_THREAD_ATTRIBUTE_LIST = *mut PROC_THREAD_ATTRIBUTE_LIST;
+pub type LPPROC_THREAD_ATTRIBUTE_LIST = *mut PROC_THREAD_ATTRIBUTE_LIST;
+
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum THREAD_INFORMATION_CLASS {
+    ThreadMemoryPriority,
+    ThreadAbsoluteCpuPriority,
+    ThreadInformationClassMax,
+}
