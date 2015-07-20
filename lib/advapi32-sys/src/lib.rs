@@ -5,8 +5,8 @@
 extern crate winapi;
 use winapi::*;
 extern "system" {
-    // pub fn AbortSystemShutdownA();
-    // pub fn AbortSystemShutdownW();
+    pub fn AbortSystemShutdownA(lpMachineName: LPCSTR) -> BOOL;
+    pub fn AbortSystemShutdownW(lpMachineName: LPWSTR) -> BOOL;
     // pub fn AccessCheck();
     // pub fn AccessCheckAndAuditAlarmA();
     // pub fn AccessCheckAndAuditAlarmW();
@@ -38,15 +38,15 @@ extern "system" {
         BufferLength: DWORD, PreviousState: PTOKEN_PRIVILEGES, ReturnLength: PDWORD,
     ) -> BOOL;
     // pub fn AllocateAndInitializeSid();
-    // pub fn AllocateLocallyUniqueId();
-    // pub fn AreAllAccessesGranted();
-    // pub fn AreAnyAccessesGranted();
+    pub fn AllocateLocallyUniqueId(Luid: PLUID) -> BOOL;
+    pub fn AreAllAccessesGranted(GrantedAccess: DWORD, DesiredAccess: DWORD) -> BOOL;
+    pub fn AreAnyAccessesGranted(GrantedAccess: DWORD, DesiredAccess: DWORD) -> BOOL;
     // pub fn AuditComputeEffectivePolicyBySid();
     // pub fn AuditComputeEffectivePolicyByToken();
     // pub fn AuditEnumerateCategories();
     // pub fn AuditEnumeratePerUserPolicy();
     // pub fn AuditEnumerateSubCategories();
-    // pub fn AuditFree();
+    pub fn AuditFree(Buffer: PVOID);
     // pub fn AuditLookupCategoryGuidFromCategoryId();
     // pub fn AuditLookupCategoryIdFromCategoryGuid();
     // pub fn AuditLookupCategoryNameA();
@@ -504,8 +504,8 @@ extern "system" {
     // pub fn LookupAccountSidW();
     // pub fn LookupPrivilegeDisplayNameA();
     // pub fn LookupPrivilegeDisplayNameW();
-    // pub fn LookupPrivilegeNameA();
-    // pub fn LookupPrivilegeNameW();
+    pub fn LookupPrivilegeNameA(lpSystemName: LPCSTR, lpLuid: PLUID, lpName: LPSTR, cchName: LPDWORD) -> BOOL;
+    pub fn LookupPrivilegeNameW(lpSystemName: LPWSTR, lpLuid: PLUID, lpName: LPSTR, cchName: LPDWORD) -> BOOL;
     pub fn LookupPrivilegeValueA(
         lpSystemName: LPCSTR, lpName: LPCSTR, lpLuid: PLUID,
     ) -> BOOL;
