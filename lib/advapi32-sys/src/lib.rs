@@ -464,8 +464,8 @@ extern "system" {
     // pub fn GetTrusteeNameW();
     // pub fn GetTrusteeTypeA();
     // pub fn GetTrusteeTypeW();
-    // pub fn GetUserNameA();
-    // pub fn GetUserNameW();
+    pub fn GetUserNameA(lpBuffer: LPSTR, pcbBuffer: LPDWORD) -> BOOL;
+    pub fn GetUserNameW(lpBuffer: LPWSTR, pcbBuffer: LPDWORD) -> BOOL;
     // pub fn GetWindowsAccountDomainSid();
     // pub fn I_ScSetServiceBitsA();
     // pub fn I_ScSetServiceBitsW();
