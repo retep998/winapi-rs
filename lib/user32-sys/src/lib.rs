@@ -2,6 +2,7 @@
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to user32.
 #![cfg(windows)]
+#![allow(non_snake_case)]
 extern crate winapi;
 use winapi::*;
 extern "system" {
@@ -1076,4 +1077,37 @@ extern "system" {
     // pub fn wsprintfW();
     // pub fn wvsprintfA();
     // pub fn wvsprintfW();
+}
+
+#[cfg(target_arch = "x86")] #[inline]
+pub unsafe fn GetClassLongPtrA(hWnd: HWND, nIndex: c_int) -> ULONG_PTR {
+    GetClassLongA(hWnd, nIndex)
+}
+#[cfg(target_arch = "x86")] #[inline]
+pub unsafe fn GetClassLongPtrW(hWnd: HWND, nIndex: c_int) -> ULONG_PTR {
+    GetClassLongW(hWnd, nIndex)
+}
+#[cfg(target_arch = "x86")] #[inline]
+pub unsafe fn GetWindowLongPtrA(hWnd: HWND, nIndex: c_int) -> LONG_PTR {
+    GetWindowLongA(hWnd, nIndex)
+}
+#[cfg(target_arch = "x86")] #[inline]
+pub unsafe fn GetWindowLongPtrW(hWnd: HWND, nIndex: c_int) -> LONG_PTR {
+    GetWindowLongW(hWnd, nIndex)
+}
+#[cfg(target_arch = "x86")] #[inline]
+pub unsafe fn SetClassLongPtrA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> ULONG_PTR {
+    SetClassLongA(hWnd, nIndex, dwNewLong)
+}
+#[cfg(target_arch = "x86")] #[inline]
+pub unsafe fn SetClassLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> ULONG_PTR {
+    SetClassLongW(hWnd, nIndex, dwNewLong)
+}
+#[cfg(target_arch = "x86")] #[inline]
+pub unsafe fn SetWindowLongPtrA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> LONG_PTR {
+    SetWindowLongA(hWnd, nIndex, dwNewLong)
+}
+#[cfg(target_arch = "x86")] #[inline]
+pub unsafe fn SetWindowLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> LONG_PTR {
+    SetWindowLongW(hWnd, nIndex, dwNewLong)
 }
