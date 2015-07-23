@@ -168,9 +168,137 @@ pub const SIO_RESERVED_1: ::DWORD = _WSAIOW!(IOC_WS2, 26);
 pub const SIO_RESERVED_2: ::DWORD = _WSAIOW!(IOC_WS2, 33);
 pub const SIO_GET_MULTIPLE_EXTENSION_FUNCTION_POINTER: ::DWORD = _WSAIORW!(IOC_WS2, 36);
 
+pub const IPPROTO_IP: ::c_int = 0;
+
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum IPPROTO {
+    IPPROTO_HOPOPTS = 0,  // IPv6 Hop-by-Hop options
+    IPPROTO_ICMP = 1,
+    IPPROTO_IGMP = 2,
+    IPPROTO_GGP = 3,
+    IPPROTO_IPV4 = 4,
+    IPPROTO_ST = 5,
+    IPPROTO_TCP = 6,
+    IPPROTO_CBT = 7,
+    IPPROTO_EGP = 8,
+    IPPROTO_IGP = 9,
+    IPPROTO_PUP = 12,
+    IPPROTO_UDP = 17,
+    IPPROTO_IDP = 22,
+    IPPROTO_RDP = 27,
+    IPPROTO_IPV6 = 41, // IPv6 header
+    IPPROTO_ROUTING = 43, // IPv6 Routing header
+    IPPROTO_FRAGMENT = 44, // IPv6 fragmentation header
+    IPPROTO_ESP = 50, // encapsulating security payload
+    IPPROTO_AH = 51, // authentication header
+    IPPROTO_ICMPV6 = 58, // ICMPv6
+    IPPROTO_NONE = 59, // IPv6 no next header
+    IPPROTO_DSTOPTS = 60, // IPv6 Destination options
+    IPPROTO_ND = 77,
+    IPPROTO_ICLFXBM = 78,
+    IPPROTO_PIM = 103,
+    IPPROTO_PGM = 113,
+    IPPROTO_L2TP = 115,
+    IPPROTO_SCTP = 132,
+    IPPROTO_RAW = 255,
+    IPPROTO_MAX = 256,
+    IPPROTO_RESERVED_RAW  = 257,
+    IPPROTO_RESERVED_IPSEC = 258,
+    IPPROTO_RESERVED_IPSECOFFLOAD = 259,
+    IPPROTO_RESERVED_WNV = 260,
+    IPPROTO_RESERVED_MAX = 261,
+}
+pub type PIPPROTO = *mut IPPROTO;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SOCKADDR_IN {
+    pub sin_family: ADDRESS_FAMILY,
+    pub sin_port: ::USHORT,
+    pub sin_addr: ::IN_ADDR,
+    pub sin_zero: [::CHAR; 8],
+}
+pub type PSOCKADDR_IN = *mut SOCKADDR_IN;
+
 //645
 pub const IOCPARM_MASK: ::DWORD = 0x7f;
 pub const IOC_VOID: ::DWORD = 0x20000000;
 pub const IOC_OUT: ::DWORD = 0x40000000;
 pub const IOC_IN: ::DWORD = 0x80000000;
 pub const IOC_INOUT: ::DWORD = IOC_IN | IOC_OUT;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct WSABUF {
+    pub len: ::ULONG,
+    pub buf: *mut ::CHAR,
+}
+pub type LPWSABUF = *mut WSABUF;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct WSAMSG {
+    pub name: LPSOCKADDR,
+    pub namelen: ::INT,
+    pub lpBuffers: LPWSABUF,
+    pub dwBufferCount: ::ULONG,
+    pub Control: WSABUF,
+    pub dwFlags: ::ULONG,
+}
+pub type PWSAMSG = *mut WSAMSG;
+pub type LPWSAMSG = *mut WSAMSG;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ADDRINFOA {
+    pub ai_flags: ::c_int,
+    pub ai_family: ::c_int,
+    pub ai_socktype: ::c_int,
+    pub ai_protocol: ::c_int,
+    pub ai_addrlen: ::size_t,
+    pub ai_canonname: *mut ::c_char,
+    pub ai_addr: *mut SOCKADDR,
+    pub ai_next: *mut ADDRINFOA,
+}
+pub type PADDRINFOA = *mut ADDRINFOA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ADDRINFOW {
+    pub ai_flags: ::c_int,
+    pub ai_family: ::c_int,
+    pub ai_socktype: ::c_int,
+    pub ai_protocol: ::c_int,
+    pub ai_addrlen: ::size_t,
+    pub ai_canonname: ::PWSTR,
+    pub ai_addr: *mut SOCKADDR,
+    pub ai_next: *mut ADDRINFOW,
+}
+pub type PADDRINFOW = *mut ADDRINFOW;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ADDRINFOEXA {
+    pub ai_flags: ::c_int,
+    pub ai_family: ::c_int,
+    pub ai_socktype: ::c_int,
+    pub ai_protocol: ::c_int,
+    pub ai_addrlen: ::size_t,
+    pub ai_canonname: *mut ::c_char,
+    pub ai_addr: *mut SOCKADDR,
+    pub ai_blob: *mut ::c_void,
+    pub ai_bloblen: ::size_t,
+    pub ai_provider: ::LPGUID,
+    pub ai_next: *mut ADDRINFOEXW,
+}
+pub type PADDRINFOEXA = *mut ADDRINFOEXA;
+pub type LPADDRINFOEXA = *mut ADDRINFOEXA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ADDRINFOEXW {
+    pub ai_flags: ::c_int,
+    pub ai_family: ::c_int,
+    pub ai_socktype: ::c_int,
+    pub ai_protocol: ::c_int,
+    pub ai_addrlen: ::size_t,
+    pub ai_canonname: ::PWSTR,
+    pub ai_addr: *mut SOCKADDR,
+    pub ai_blob: *mut ::c_void,
+    pub ai_bloblen: ::size_t,
+    pub ai_provider: ::LPGUID,
+    pub ai_next: *mut ADDRINFOEXW,
+}
+pub type PADDRINFOEXW = *mut ADDRINFOEXW;
+pub type LPADDRINFOEXW = *mut ADDRINFOEXW;

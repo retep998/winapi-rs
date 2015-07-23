@@ -9,3 +9,10 @@ pub type DOUBLE = ::c_double;
 //281
 pub type SCODE = ::LONG;
 pub type PSCODE = *mut SCODE;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct BLOB {
+    pub cbSize: ::ULONG,
+    pub pBlobData: *mut ::BYTE,
+}
+pub type LPBLOB = *mut BLOB;
