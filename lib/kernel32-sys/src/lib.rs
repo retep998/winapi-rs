@@ -305,7 +305,10 @@ extern "system" {
     // pub fn DnsHostnameToComputerNameW();
     pub fn DosDateTimeToFileTime(wFatDate: WORD, wFatTime: WORD, lpFileTime: LPFILETIME) -> BOOL;
     // pub fn DosPathToSessionPathW();
-    // pub fn DuplicateHandle();
+    pub fn DuplicateHandle(
+        hSourceProcessHandle: HANDLE, hSourceHandle: HANDLE, hTargetProcessHandle: HANDLE,
+        lpTargetHandle: LPHANDLE, dwDesiredAccess: DWORD, bInheritHandle: BOOL, dwOptions: DWORD,
+    ) -> BOOL;
     // pub fn EnableThreadProfiling();
     // pub fn EncodePointer();
     // pub fn EncodeSystemPointer();
