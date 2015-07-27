@@ -19,3 +19,11 @@ interface AsyncIUnknown(AsyncIUnknownVtbl): IUnknown(IUnknownVtbl) {
     fn Finish_Release(&mut self) -> ::ULONG
 }
 );
+RIDL!(
+interface IClassFactory(IClassFactoryVtbl): IUnknown(IUnknownVtbl) {
+    fn CreateInstance(
+        &mut self, pUnkOuter: *mut IUnknown, riid: ::REFIID, ppvObject: *mut *mut ::c_void
+    ) -> ::HRESULT,
+    fn LockServer(&mut self, fLock: ::BOOL) -> ::HRESULT
+}
+);
