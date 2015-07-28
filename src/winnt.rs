@@ -2,6 +2,7 @@
 // Licensed under the MIT License <LICENSE.md>
 //! This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed
 //! through the Win32 API.
+pub const ANYSIZE_ARRAY: usize = 1;
 //341
 pub type PVOID = *mut ::c_void;
 pub type PVOID64 = u64; // This is a 64-bit pointer, even when in 32-bit
