@@ -4,9 +4,9 @@ pub fn link(name: &str, bundled: bool) {
     use std::env::var;
     let target = var("TARGET").unwrap();
     let target: Vec<_> = target.split('-').collect();
-    if target.len() > 2 && target[2] == "windows" {
+    if target.get(2) == Some(&"windows") {
         println!("cargo:rustc-link-lib=dylib={}", name);
-        if bundled && target.len() > 3 && target[3] == "gnu" {
+        if bundled && target.get(3) == Some(&"gnu") {
             let dir = var("CARGO_MANIFEST_DIR").unwrap();
             println!("cargo:rustc-link-search=native={}/{}", dir, target[0]);
         }
