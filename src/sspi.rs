@@ -661,3 +661,74 @@ pub enum SecDelegationType {
 }
 pub use self::SecDelegationType::*;
 pub type PSecDelegationType = *mut SecDelegationType;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SEC_WINNT_AUTH_BYTE_VECTOR {
+    pub ByteArrayOffset: ::c_ulong,
+    pub ByteArrayLength: ::c_ushort,
+}
+pub type PSEC_WINNT_AUTH_BYTE_VECTOR = *mut SEC_WINNT_AUTH_BYTE_VECTOR;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SEC_WINNT_AUTH_DATA {
+    pub CredType: ::GUID,
+    pub CredData: SEC_WINNT_AUTH_BYTE_VECTOR,
+}
+pub type PSEC_WINNT_AUTH_DATA = *mut SEC_WINNT_AUTH_DATA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SEC_WINNT_AUTH_PACKED_CREDENTIALS {
+    pub cbHeaderLength: ::c_ushort,
+    pub cbStructureLength: ::c_ushort,
+    pub AuthData: SEC_WINNT_AUTH_DATA,
+}
+pub type PSEC_WINNT_AUTH_PACKED_CREDENTIALS = *mut SEC_WINNT_AUTH_PACKED_CREDENTIALS;
+DEFINE_GUID!(SEC_WINNT_AUTH_DATA_TYPE_PASSWORD, 0x28bfc32f, 0x10f6, 0x4738,
+    0x98, 0xd1, 0x1a, 0xc0, 0x61, 0xdf, 0x71, 0x6a);
+DEFINE_GUID!(SEC_WINNT_AUTH_DATA_TYPE_CERT, 0x235f69ad, 0x73fb, 0x4dbc,
+    0x82, 0x3, 0x6, 0x29, 0xe7, 0x39, 0x33, 0x9b);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SEC_WINNT_AUTH_DATA_PASSWORD {
+    pub UnicodePassword: SEC_WINNT_AUTH_BYTE_VECTOR,
+}
+pub type PSEC_WINNT_AUTH_DATA_PASSWORD = *mut SEC_WINNT_AUTH_DATA_PASSWORD;
+DEFINE_GUID!(SEC_WINNT_AUTH_DATA_TYPE_CSP_DATA, 0x68fd9879, 0x79c, 0x4dfe,
+    0x82, 0x81, 0x57, 0x8a, 0xad, 0xc1, 0xc1, 0x0);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SEC_WINNT_AUTH_CERTIFICATE_DATA {
+    pub cbHeaderLength: ::c_ushort,
+    pub cbStructureLength: ::c_ushort,
+    pub Certificate: SEC_WINNT_AUTH_BYTE_VECTOR,
+}
+pub type PSEC_WINNT_AUTH_CERTIFICATE_DATA = *mut SEC_WINNT_AUTH_CERTIFICATE_DATA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SEC_WINNT_CREDUI_CONTEXT_VECTOR {
+    pub CredUIContextArrayOffset: ::ULONG,
+    pub CredUIContextCount: ::USHORT,
+}
+pub type PSEC_WINNT_CREDUI_CONTEXT_VECTOR = *mut SEC_WINNT_CREDUI_CONTEXT_VECTOR;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SEC_WINNT_AUTH_SHORT_VECTOR {
+    pub ShortArrayOffset: ::ULONG,
+    pub ShortArrayCount: ::USHORT,
+}
+pub type PSEC_WINNT_AUTH_SHORT_VECTOR = *mut SEC_WINNT_AUTH_SHORT_VECTOR;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CREDUIWIN_MARSHALED_CONTEXT {
+    pub StructureType: ::GUID,
+    pub cbHeaderLength: ::USHORT,
+    pub LogonId: ::LUID,
+    pub MarshaledDataType: ::GUID,
+    pub MarshaledDataOffset: ::ULONG,
+    pub MarshaledDataLength: ::USHORT,
+}
+pub type PCREDUIWIN_MARSHALED_CONTEXT = *mut CREDUIWIN_MARSHALED_CONTEXT;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SEC_WINNT_CREDUI_CONTEXT {
+    pub cbHeaderLength: ::USHORT,
+    pub CredUIContextHandle: ::HANDLE,
+    pub UIInfo: ::PCREDUI_INFOW,
+    pub dwAuthError: ::ULONG,
+    pub pInputAuthIdentity: PSEC_WINNT_AUTH_IDENTITY_OPAQUE,
+    pub TargetName: ::PUNICODE_STRING,
+}
+pub type PSEC_WINNT_CREDUI_CONTEXT = *mut SEC_WINNT_CREDUI_CONTEXT;
+
+pub type PSEC_WINNT_AUTH_IDENTITY_OPAQUE = ::PVOID;

@@ -14,6 +14,7 @@ advapi32-sys = { version = "*", path = "lib/advapi32-sys" }
 bcrypt-sys = { version = "*", path = "lib/bcrypt-sys" }
 comctl32-sys = { version = "*", path = "lib/comctl32-sys" }
 comdlg32-sys = { version = "*", path = "lib/comdlg32-sys" }
+credui-sys = { version = "*", path = "lib/credui-sys" }
 crypt32-sys = { version = "*", path = "lib/crypt32-sys" }
 d2d1-sys = { version = "*", path = "lib/d2d1-sys" }
 d3d9-sys = { version = "*", path = "lib/d3d9-sys" }
