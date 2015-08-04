@@ -12,6 +12,7 @@ license = "MIT"
 [dev-dependencies]
 advapi32-sys = { version = "*", path = "lib/advapi32-sys" }
 bcrypt-sys = { version = "*", path = "lib/bcrypt-sys" }
+comdlg32-sys = { version = "*", path = "lib/comdlg32-sys" }
 crypt32-sys = { version = "*", path = "lib/crypt32-sys" }
 d3d9-sys = { version = "*", path = "lib/d3d9-sys" }
 dbghelp-sys = { version = "*", path = "lib/dbghelp-sys" }
