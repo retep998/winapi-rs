@@ -919,35 +919,6 @@ pub const SND_SENTRY: DWORD = 0x00080000;
 pub const SND_RING: DWORD = 0x00100000;
 pub const SND_SYSTEM: DWORD = 0x00200000;
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PROCESS_MEMORY_COUNTERS {
-    pub cb: DWORD,
-    pub PageFaultCount: DWORD,
-    pub PeakWorkingSetSize: SIZE_T,
-    pub WorkingSetSize: SIZE_T,
-    pub QuotaPeakPagedPoolUsage: SIZE_T,
-    pub QuotaPagedPoolUsage: SIZE_T,
-    pub QuotaPeakNonPagedPoolUsage: SIZE_T,
-    pub QuotaNonPagedPoolUsage: SIZE_T,
-    pub PagefileUsage: SIZE_T,
-    pub PeakPagefileUsage: SIZE_T,
-}
-pub type PPROCESS_MEMORY_COUNTERS = *mut PROCESS_MEMORY_COUNTERS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PROCESS_MEMORY_COUNTERS_EX {
-    pub cb: DWORD,
-    pub PageFaultCount: DWORD,
-    pub PeakWorkingSetSize: SIZE_T,
-    pub WorkingSetSize: SIZE_T,
-    pub QuotaPeakPagedPoolUsage: SIZE_T,
-    pub QuotaPagedPoolUsage: SIZE_T,
-    pub QuotaPeakNonPagedPoolUsage: SIZE_T,
-    pub QuotaNonPagedPoolUsage: SIZE_T,
-    pub PagefileUsage: SIZE_T,
-    pub PeakPagefileUsage: SIZE_T,
-    pub PrivateUsage: SIZE_T,
-}
-
 //-------------------------------------------------------------------------------------------------
 // winreg.h
 // Registry API procedure declarations, constant definitions and macros
