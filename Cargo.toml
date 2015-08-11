@@ -33,6 +33,7 @@ oleaut32-sys = { version = "*", path = "lib/oleaut32-sys" }
 opengl32-sys = { version = "*", path = "lib/opengl32-sys" }
 psapi-sys = { version = "*", path = "lib/psapi-sys" }
 secur32-sys = { version = "*", path = "lib/secur32-sys" }
+setupapi-sys = { version = "*", path = "lib/setupapi-sys" }
 shell32-sys = { version = "*", path = "lib/shell32-sys" }
 user32-sys = { version = "*", path = "lib/user32-sys" }
 usp10-sys = { version = "*", path = "lib/usp10-sys" }
