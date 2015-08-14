@@ -3,7 +3,7 @@ name = "hid-sys"
 version = "0.0.1"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to hid. This crate is a placeholder for the future. If you are interested in this library feel free to get in touch with me: http://www.rustaceans.org/retep998"
-documentation = "https://retep998.github.io/doc/hid-sys/"
+documentation = "https://retep998.github.io/doc/hid/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["Windows", "FFI", "WinSDK"]
@@ -11,5 +11,10 @@ license = "MIT"
 build = "build.rs"
 links = "hid"
 
+[lib]
+name = "hid"
+
 [dependencies]
-winapi = "*"
+winapi = { version = "*", path = "../.." }
+[build-dependencies]
+winapi-build = { version = "*", path = "../../build" }
