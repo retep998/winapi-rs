@@ -415,3 +415,78 @@ pub struct BLENDFUNCTION {
     pub AlphaFormat: ::BYTE,
 }
 pub type PBLENDFUNCTION = *mut BLENDFUNCTION;
+pub const TMPF_FIXED_PITCH: ::BYTE = 0x01;
+pub const TMPF_VECTOR: ::BYTE = 0x02;
+pub const TMPF_DEVICE: ::BYTE = 0x08;
+pub const TMPF_TRUETYPE: ::BYTE = 0x04;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TEXTMETRICW {
+    pub tmHeight: ::LONG,
+    pub tmAscent: ::LONG,
+    pub tmDescent: ::LONG,
+    pub tmInternalLeading: ::LONG,
+    pub tmExternalLeading: ::LONG,
+    pub tmAveCharWidth: ::LONG,
+    pub tmMaxCharWidth: ::LONG,
+    pub tmWeight: ::LONG,
+    pub tmOverhang: ::LONG,
+    pub tmDigitizedAspectX: ::LONG,
+    pub tmDigitizedAspectY: ::LONG,
+    pub tmFirstChar: ::WCHAR,
+    pub tmLastChar: ::WCHAR,
+    pub tmDefaultChar: ::WCHAR,
+    pub tmBreakChar: ::WCHAR,
+    pub tmItalic: ::BYTE,
+    pub tmUnderlined: ::BYTE,
+    pub tmStruckOut: ::BYTE,
+    pub tmPitchAndFamily: ::BYTE,
+    pub tmCharSet: ::BYTE,
+}
+
+pub const TA_NOUPDATECP: ::UINT = 0x0000;
+pub const TA_UPDATECP: ::UINT = 0x0001;
+
+pub const TA_LEFT: ::UINT = 0x0000;
+pub const TA_RIGHT: ::UINT = 0x0002;
+pub const TA_CENTER: ::UINT = 0x0006;
+
+pub const TA_TOP: ::UINT = 0x0000;
+pub const TA_BOTTOM: ::UINT = 0x0008;
+pub const TA_BASELINE: ::UINT = 0x0018;
+
+pub const TA_RTLREADING: ::UINT = 0x0100;
+pub const TA_MASK: ::UINT = (TA_BASELINE+TA_CENTER+TA_UPDATECP+TA_RTLREADING);
+
+pub const WHITE_BRUSH: ::c_int = 0;
+pub const LTGRAY_BRUSH: ::c_int = 1;
+pub const GRAY_BRUSH: ::c_int = 2;
+pub const DKGRAY_BRUSH: ::c_int = 3;
+pub const BLACK_BRUSH: ::c_int = 4;
+pub const NULL_BRUSH: ::c_int = 5;
+pub const HOLLOW_BRUSH: ::c_int = 5;
+pub const WHITE_PEN: ::c_int = 6;
+pub const BLACK_PEN: ::c_int = 7;
+pub const NULL_PEN: ::c_int = 8;
+pub const OEM_FIXED_FONT: ::c_int = 10;
+pub const ANSI_FIXED_FONT: ::c_int = 11;
+pub const ANSI_VAR_FONT: ::c_int = 12;
+pub const SYSTEM_FONT: ::c_int = 13;
+pub const DEVICE_DEFAULT_FONT: ::c_int = 14;
+pub const DEFAULT_PALETTE: ::c_int = 15;
+pub const SYSTEM_FIXED_FONT: ::c_int = 16;
+pub const DEFAULT_GUI_FONT: ::c_int = 17;
+
+pub const TRANSPARENT: ::c_int = 1;
+pub const OPAQUE: ::c_int = 2;
+
+pub const MM_TEXT: ::c_int = 1;
+pub const MM_LOMETRIC: ::c_int = 2;
+pub const MM_HIMETRIC: ::c_int = 3;
+pub const MM_LOENGLISH: ::c_int = 4;
+pub const MM_HIENGLISH: ::c_int = 5;
+pub const MM_TWIPS: ::c_int = 6;
+pub const MM_ISOTROPIC: ::c_int = 7;
+pub const MM_ANISOTROPIC: ::c_int = 8;
+
+pub const ALTERNATE: ::c_int = 1;
+pub const WINDING: ::c_int = 2;
