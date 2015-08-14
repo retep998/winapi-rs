@@ -248,7 +248,7 @@ extern "system" {
     // pub fn D3DKMTWaitForSynchronizationObject2();
     // pub fn D3DKMTWaitForVerticalBlankEvent();
     // pub fn D3DKMTWaitForVerticalBlankEvent2();
-    // pub fn DPtoLP();
+    pub fn DPtoLP(hdc: HDC, lppt: *mut POINT, c: c_int) -> BOOL;
     // pub fn DeleteColorSpace();
     pub fn DeleteDC(hdc: HDC) -> BOOL;
     // pub fn DeleteEnhMetaFile();
@@ -427,9 +427,9 @@ extern "system" {
     // pub fn GetTextExtentPointI();
     // pub fn GetTextExtentPointW();
     // pub fn GetTextFaceA();
-    // pub fn GetTextFaceW();
+    pub fn GetTextFaceW(hdc: HDC, c: c_int, lpName: LPWSTR) -> c_int;
     // pub fn GetTextMetricsA();
-    // pub fn GetTextMetricsW();
+    pub fn GetTextMetricsW(hdc: HDC, lptm: *mut TEXTMETRICW) -> BOOL;
     // pub fn GetViewportExtEx();
     // pub fn GetViewportOrgEx();
     // pub fn GetWinMetaFileBits();
@@ -493,12 +493,12 @@ extern "system" {
     // pub fn ResetDCA();
     // pub fn ResetDCW();
     // pub fn ResizePalette();
-    // pub fn RestoreDC();
+    pub fn RestoreDC(hdc: HDC, nSavedDC: c_int) -> BOOL;
     pub fn RoundRect(
         hdc: HDC, nLeftRect: c_int, nTopRect: c_int, nRightRect: c_int, nBottomRect: c_int,
         nWidth: c_int, nHeight: c_int,
     ) -> BOOL;
-    // pub fn SaveDC();
+    pub fn SaveDC(hdc: HDC) -> c_int;
     // pub fn ScaleViewportExtEx();
     // pub fn ScaleWindowExtEx();
     // pub fn SelectBrushLocal();
@@ -512,7 +512,7 @@ extern "system" {
     // pub fn SetBitmapBits();
     // pub fn SetBitmapDimensionEx();
     pub fn SetBkColor(hdc: HDC, color: COLORREF) -> COLORREF;
-    // pub fn SetBkMode();
+    pub fn SetBkMode(hdc: HDC, mode: c_int) -> c_int;
     // pub fn SetBoundsRect();
     // pub fn SetBrushOrgEx();
     // pub fn SetColorAdjustment();
@@ -531,31 +531,31 @@ extern "system" {
     // pub fn SetICMProfileW();
     // pub fn SetLayout();
     // pub fn SetMagicColors();
-    // pub fn SetMapMode();
+    pub fn SetMapMode(hdc: HDC, mode: c_int) -> c_int;
     // pub fn SetMapperFlags();
     // pub fn SetMetaFileBitsEx();
     // pub fn SetMetaRgn();
     // pub fn SetMiterLimit();
     // pub fn SetPaletteEntries();
-    // pub fn SetPixel();
+    pub fn SetPixel(hdc: HDC, x: c_int, y: c_int, color: COLORREF) -> COLORREF;
     pub fn SetPixelFormat(
         hdc: HDC, iPixelFormat: c_int, ppfd: *const PIXELFORMATDESCRIPTOR,
     ) -> BOOL;
     // pub fn SetPixelV();
-    // pub fn SetPolyFillMode();
+    pub fn SetPolyFillMode(hdc: HDC, iPolyFillMode: c_int);
     // pub fn SetROP2();
     pub fn SetRectRgn(hrgn: HRGN, left: c_int, top: c_int, right: c_int, bottom: c_int) -> BOOL;
     // pub fn SetRelAbs();
     // pub fn SetStretchBltMode();
     // pub fn SetSystemPaletteUse();
-    // pub fn SetTextAlign();
+    pub fn SetTextAlign(hdc: HDC, align: UINT) -> UINT;
     // pub fn SetTextCharacterExtra();
     pub fn SetTextColor(hdc: HDC, color: COLORREF) -> COLORREF;
     // pub fn SetTextJustification();
-    // pub fn SetViewportExtEx();
-    // pub fn SetViewportOrgEx();
+    pub fn SetViewportExtEx(hdc: HDC, x: c_int, y: c_int, lpsz: *mut SIZE) -> BOOL;
+    pub fn SetViewportOrgEx(hdc: HDC, x: c_int, y: c_int, lppt: *mut POINT) -> BOOL;
     // pub fn SetWinMetaFileBits();
-    // pub fn SetWindowExtEx();
+    pub fn SetWindowExtEx(hdc: HDC, x: c_int, y: c_int, lppt: *mut SIZE) -> BOOL;
     // pub fn SetWindowOrgEx();
     // pub fn SetWorldTransform();
     // pub fn StartDocA();

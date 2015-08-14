@@ -789,3 +789,83 @@ pub struct HELPINFO {
     pub MousePos: ::POINT,
 }
 pub type LPHELPINFO = *mut HELPINFO;
+
+pub fn GET_WHEEL_DELTA_WPARAM(wParam: ::WPARAM) -> ::c_short {
+    ::HIWORD(wParam as ::DWORD) as ::c_short
+}
+pub fn GET_KEYSTATE_WPARAM(wparam: ::WPARAM) -> ::c_int {
+    ::LOWORD(wparam as ::DWORD) as ::c_short as ::c_int
+}
+
+pub const SIF_RANGE: ::UINT = 0x0001;
+pub const SIF_PAGE: ::UINT = 0x0002;
+pub const SIF_POS: ::UINT = 0x0004;
+pub const SIF_DISABLENOSCROLL: ::UINT = 0x0008;
+pub const SIF_TRACKPOS: ::UINT = 0x0010;
+pub const SIF_ALL: ::UINT = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
+
+pub const SW_SCROLLCHILDREN: ::UINT = 0x0001;
+pub const SW_INVALIDATE: ::UINT = 0x0002;
+pub const SW_ERASE: ::UINT = 0x0004;
+pub const SW_SMOOTHSCROLL: ::UINT = 0x0010;
+
+pub const SB_LINEUP: ::c_int = 0;
+pub const SB_LINELEFT: ::c_int = 0;
+pub const SB_LINEDOWN: ::c_int = 1;
+pub const SB_LINERIGHT: ::c_int = 1;
+pub const SB_PAGEUP: ::c_int = 2;
+pub const SB_PAGELEFT: ::c_int = 2;
+pub const SB_PAGEDOWN: ::c_int = 3;
+pub const SB_PAGERIGHT: ::c_int = 3;
+pub const SB_THUMBPOSITION: ::c_int = 4;
+pub const SB_THUMBTRACK: ::c_int = 5;
+pub const SB_TOP: ::c_int = 6;
+pub const SB_LEFT: ::c_int = 6;
+pub const SB_BOTTOM: ::c_int = 7;
+pub const SB_RIGHT: ::c_int = 7;
+pub const SB_ENDSCROLL: ::c_int = 8;
+
+pub const LR_DEFAULTCOLOR: ::UINT = 0x00000000;
+pub const LR_MONOCHROME: ::UINT = 0x00000001;
+pub const LR_COLOR: ::UINT = 0x00000002;
+pub const LR_COPYRETURNORG: ::UINT = 0x00000004;
+pub const LR_COPYDELETEORG: ::UINT = 0x00000008;
+pub const LR_LOADFROMFILE: ::UINT = 0x00000010;
+pub const LR_LOADTRANSPARENT: ::UINT = 0x00000020;
+pub const LR_DEFAULTSIZE: ::UINT = 0x00000040;
+pub const LR_VGACOLOR: ::UINT = 0x00000080;
+pub const LR_LOADMAP3DCOLORS: ::UINT = 0x00001000;
+pub const LR_CREATEDIBSECTION: ::UINT = 0x00002000;
+pub const LR_COPYFROMRESOURCE: ::UINT = 0x00004000;
+pub const LR_SHARED: ::UINT = 0x00008000;
+
+pub const IMAGE_BITMAP: ::UINT = 0;
+pub const IMAGE_ICON: ::UINT = 1;
+pub const IMAGE_CURSOR: ::UINT = 2;
+pub const IMAGE_ENHMETAFILE: ::UINT = 3;
+
+pub const DT_TOP: ::UINT = 0x00000000;
+pub const DT_LEFT: ::UINT = 0x00000000;
+pub const DT_CENTER: ::UINT = 0x00000001;
+pub const DT_RIGHT: ::UINT = 0x00000002;
+pub const DT_VCENTER: ::UINT = 0x00000004;
+pub const DT_BOTTOM: ::UINT = 0x00000008;
+pub const DT_WORDBREAK: ::UINT = 0x00000010;
+pub const DT_SINGLELINE: ::UINT = 0x00000020;
+pub const DT_EXPANDTABS: ::UINT = 0x00000040;
+pub const DT_TABSTOP: ::UINT = 0x00000080;
+pub const DT_NOCLIP: ::UINT = 0x00000100;
+pub const DT_EXTERNALLEADING: ::UINT = 0x00000200;
+pub const DT_CALCRECT: ::UINT = 0x00000400;
+pub const DT_NOPREFIX: ::UINT = 0x00000800;
+pub const DT_INTERNAL: ::UINT = 0x00001000;
+
+pub const DT_EDITCONTROL: ::UINT = 0x00002000;
+pub const DT_PATH_ELLIPSIS: ::UINT = 0x00004000;
+pub const DT_END_ELLIPSIS: ::UINT = 0x00008000;
+pub const DT_MODIFYSTRING: ::UINT = 0x00010000;
+pub const DT_RTLREADING: ::UINT = 0x00020000;
+pub const DT_WORD_ELLIPSIS: ::UINT = 0x00040000;
+pub const DT_NOFULLWIDTHCHARBREAK: ::UINT = 0x00080000;
+pub const DT_HIDEPREFIX: ::UINT = 0x00100000;
+pub const DT_PREFIXONLY: ::UINT = 0x00200000;

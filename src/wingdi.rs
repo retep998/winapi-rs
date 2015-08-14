@@ -415,3 +415,173 @@ pub struct BLENDFUNCTION {
     pub AlphaFormat: ::BYTE,
 }
 pub type PBLENDFUNCTION = *mut BLENDFUNCTION;
+pub const TMPF_FIXED_PITCH: ::BYTE = 0x01;
+pub const TMPF_VECTOR: ::BYTE = 0x02;
+pub const TMPF_DEVICE: ::BYTE = 0x08;
+pub const TMPF_TRUETYPE: ::BYTE = 0x04;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TEXTMETRICW {
+    pub tmHeight: ::LONG,
+    pub tmAscent: ::LONG,
+    pub tmDescent: ::LONG,
+    pub tmInternalLeading: ::LONG,
+    pub tmExternalLeading: ::LONG,
+    pub tmAveCharWidth: ::LONG,
+    pub tmMaxCharWidth: ::LONG,
+    pub tmWeight: ::LONG,
+    pub tmOverhang: ::LONG,
+    pub tmDigitizedAspectX: ::LONG,
+    pub tmDigitizedAspectY: ::LONG,
+    pub tmFirstChar: ::WCHAR,
+    pub tmLastChar: ::WCHAR,
+    pub tmDefaultChar: ::WCHAR,
+    pub tmBreakChar: ::WCHAR,
+    pub tmItalic: ::BYTE,
+    pub tmUnderlined: ::BYTE,
+    pub tmStruckOut: ::BYTE,
+    pub tmPitchAndFamily: ::BYTE,
+    pub tmCharSet: ::BYTE,
+}
+
+pub const TA_NOUPDATECP: ::UINT = 0;
+pub const TA_UPDATECP: ::UINT = 1;
+
+pub const TA_LEFT: ::UINT = 0;
+pub const TA_RIGHT: ::UINT = 2;
+pub const TA_CENTER: ::UINT = 6;
+
+pub const TA_TOP: ::UINT = 0;
+pub const TA_BOTTOM: ::UINT = 8;
+pub const TA_BASELINE: ::UINT = 24;
+
+pub const TA_RTLREADING: ::UINT = 256;
+pub const TA_MASK: ::UINT = (TA_BASELINE+TA_CENTER+TA_UPDATECP+TA_RTLREADING);
+
+pub const WHITE_BRUSH: ::c_int = 0;
+pub const LTGRAY_BRUSH: ::c_int = 1;
+pub const GRAY_BRUSH: ::c_int = 2;
+pub const DKGRAY_BRUSH: ::c_int = 3;
+pub const BLACK_BRUSH: ::c_int = 4;
+pub const NULL_BRUSH: ::c_int = 5;
+pub const HOLLOW_BRUSH: ::c_int = 5;
+pub const WHITE_PEN: ::c_int = 6;
+pub const BLACK_PEN: ::c_int = 7;
+pub const NULL_PEN: ::c_int = 8;
+pub const OEM_FIXED_FONT: ::c_int = 10;
+pub const ANSI_FIXED_FONT: ::c_int = 11;
+pub const ANSI_VAR_FONT: ::c_int = 12;
+pub const SYSTEM_FONT: ::c_int = 13;
+pub const DEVICE_DEFAULT_FONT: ::c_int = 14;
+pub const DEFAULT_PALETTE: ::c_int = 15;
+pub const SYSTEM_FIXED_FONT: ::c_int = 16;
+pub const DEFAULT_GUI_FONT: ::c_int = 17;
+
+pub const TRANSPARENT: ::c_int = 1;
+pub const OPAQUE: ::c_int = 2;
+pub const BKMODE_LAST: ::c_int = 2;
+
+pub const MM_TEXT: ::c_int = 1;
+pub const MM_LOMETRIC: ::c_int = 2;
+pub const MM_HIMETRIC: ::c_int = 3;
+pub const MM_LOENGLISH: ::c_int = 4;
+pub const MM_HIENGLISH: ::c_int = 5;
+pub const MM_TWIPS: ::c_int = 6;
+pub const MM_ISOTROPIC: ::c_int = 7;
+pub const MM_ANISOTROPIC: ::c_int = 8;
+
+pub const ALTERNATE: ::c_int = 1;
+pub const WINDING: ::c_int = 2;
+pub const POLYFILL_LAST: ::c_int = 2;
+
+pub const OUT_DEFAULT_PRECIS: ::DWORD = 0;
+pub const OUT_STRING_PRECIS: ::DWORD = 1;
+pub const OUT_CHARACTER_PRECIS: ::DWORD = 2;
+pub const OUT_STROKE_PRECIS: ::DWORD = 3;
+pub const OUT_TT_PRECIS: ::DWORD = 4;
+pub const OUT_DEVICE_PRECIS: ::DWORD = 5;
+pub const OUT_RASTER_PRECIS: ::DWORD = 6;
+pub const OUT_TT_ONLY_PRECIS: ::DWORD = 7;
+pub const OUT_OUTLINE_PRECIS: ::DWORD = 8;
+pub const OUT_SCREEN_OUTLINE_PRECIS: ::DWORD = 9;
+pub const OUT_PS_ONLY_PRECIS: ::DWORD = 10;
+
+pub const CLIP_DEFAULT_PRECIS: ::DWORD = 0;
+pub const CLIP_CHARACTER_PRECIS: ::DWORD = 1;
+pub const CLIP_STROKE_PRECIS: ::DWORD = 2;
+pub const CLIP_MASK: ::DWORD = 0xf;
+pub const CLIP_LH_ANGLES: ::DWORD = (1<<4);
+pub const CLIP_TT_ALWAYS: ::DWORD = (2<<4);
+pub const CLIP_DFA_DISABLE: ::DWORD = (4<<4);
+pub const CLIP_EMBEDDED: ::DWORD = (8<<4);
+
+pub const DEFAULT_QUALITY: ::DWORD = 0;
+pub const DRAFT_QUALITY: ::DWORD = 1;
+pub const PROOF_QUALITY: ::DWORD = 2;
+pub const NONANTIALIASED_QUALITY: ::DWORD = 3;
+pub const ANTIALIASED_QUALITY: ::DWORD = 4;
+
+pub const CLEARTYPE_QUALITY: ::DWORD = 5;
+pub const CLEARTYPE_NATURAL_QUALITY: ::DWORD = 6;
+
+pub const DEFAULT_PITCH: ::DWORD = 0;
+pub const FIXED_PITCH: ::DWORD = 1;
+pub const VARIABLE_PITCH: ::DWORD = 2;
+pub const MONO_FONT: ::DWORD = 8;
+
+
+pub const ANSI_CHARSET: ::DWORD = 0;
+pub const DEFAULT_CHARSET: ::DWORD = 1;
+pub const SYMBOL_CHARSET: ::DWORD = 2;
+pub const SHIFTJIS_CHARSET: ::DWORD = 128;
+pub const HANGEUL_CHARSET: ::DWORD = 129;
+pub const HANGUL_CHARSET: ::DWORD = 129;
+pub const GB2312_CHARSET: ::DWORD = 134;
+pub const CHINESEBIG5_CHARSET: ::DWORD = 136;
+pub const OEM_CHARSET: ::DWORD = 255;
+pub const JOHAB_CHARSET: ::DWORD = 130;
+pub const HEBREW_CHARSET: ::DWORD = 177;
+pub const ARABIC_CHARSET: ::DWORD = 178;
+pub const GREEK_CHARSET: ::DWORD = 161;
+pub const TURKISH_CHARSET: ::DWORD = 162;
+pub const VIETNAMESE_CHARSET: ::DWORD = 163;
+pub const THAI_CHARSET: ::DWORD = 222;
+pub const EASTEUROPE_CHARSET: ::DWORD = 238;
+pub const RUSSIAN_CHARSET: ::DWORD = 204;
+
+pub const MAC_CHARSET: ::DWORD = 77;
+pub const BALTIC_CHARSET: ::DWORD = 186;
+
+pub const FS_LATIN1: ::DWORD = 0x00000001;
+pub const FS_LATIN2: ::DWORD = 0x00000002;
+pub const FS_CYRILLIC: ::DWORD = 0x00000004;
+pub const FS_GREEK: ::DWORD = 0x00000008;
+pub const FS_TURKISH: ::DWORD = 0x00000010;
+pub const FS_HEBREW: ::DWORD = 0x00000020;
+pub const FS_ARABIC: ::DWORD = 0x00000040;
+pub const FS_BALTIC: ::DWORD = 0x00000080;
+pub const FS_VIETNAMESE: ::DWORD = 0x00000100;
+pub const FS_THAI: ::DWORD = 0x00010000;
+pub const FS_JISJAPAN: ::DWORD = 0x00020000;
+pub const FS_CHINESESIMP: ::DWORD = 0x00040000;
+pub const FS_WANSUNG: ::DWORD = 0x00080000;
+pub const FS_CHINESETRAD: ::DWORD = 0x00100000;
+pub const FS_JOHAB: ::DWORD = 0x00200000;
+pub const FS_SYMBOL: ::DWORD = 0x80000000;
+
+
+pub const FW_DONTCARE: ::c_int = 0;
+pub const FW_THIN: ::c_int = 100;
+pub const FW_EXTRALIGHT: ::c_int = 200;
+pub const FW_LIGHT: ::c_int = 300;
+pub const FW_NORMAL: ::c_int = 400;
+pub const FW_MEDIUM: ::c_int = 500;
+pub const FW_SEMIBOLD: ::c_int = 600;
+pub const FW_BOLD: ::c_int = 700;
+pub const FW_EXTRABOLD: ::c_int = 800;
+pub const FW_HEAVY: ::c_int = 900;
+
+pub const FW_ULTRALIGHT: ::c_int = FW_EXTRALIGHT;
+pub const FW_REGULAR: ::c_int = FW_NORMAL;
+pub const FW_DEMIBOLD: ::c_int = FW_SEMIBOLD;
+pub const FW_ULTRABOLD: ::c_int = FW_EXTRABOLD;
+pub const FW_BLACK: ::c_int = FW_HEAVY;
