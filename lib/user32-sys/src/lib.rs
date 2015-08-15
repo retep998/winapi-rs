@@ -559,7 +559,7 @@ extern "system" {
         pRawInputDevices: PRAWINPUTDEVICE, puiNumDevices: PUINT, cbSize: UINT,
     ) -> UINT;
     // pub fn GetScrollBarInfo();
-    pub fn GetScrollInfo(hwnd: HWND, fnBar: c_int, lpsi: *mut SCROLLINFO) -> BOOL;
+    pub fn GetScrollInfo(hwnd: HWND, nBar: c_int, lpsi: *mut SCROLLINFO) -> BOOL;
     pub fn GetScrollPos(hWnd: HWND, nBar: c_int) -> c_int;
     pub fn GetScrollRange(hWnd: HWND, nBar: c_int, lpMinPos: LPINT, lpMaxPos: LPINT) -> BOOL;
     pub fn GetShellWindow() -> HWND;
@@ -943,7 +943,7 @@ extern "system" {
     pub fn SetPropW(hWnd: HWND, lpString: LPCWSTR, hData: HANDLE) -> BOOL;
     pub fn SetRect(lprc: LPRECT, xLeft: c_int, yTop: c_int, xRight: c_int, yBottom: c_int) -> BOOL;
     pub fn SetRectEmpty(lprc: LPRECT) -> BOOL;
-    pub fn SetScrollInfo(hwnd: HWND, fnBar: c_int, lpsi: *const SCROLLINFO, fRedraw: BOOL) -> c_int;
+    pub fn SetScrollInfo(hwnd: HWND, nBar: c_int, lpsi: *const SCROLLINFO, redraw: BOOL) -> c_int;
     pub fn SetScrollPos(hWnd: HWND, nBar: c_int, nPos: c_int, bRedraw: BOOL) -> c_int;
     pub fn SetScrollRange(
         hWnd: HWND, nBar: c_int, nMinPos: c_int, nMaxPos: c_int, bRedraw: BOOL,

@@ -248,7 +248,7 @@ extern "system" {
     // pub fn D3DKMTWaitForSynchronizationObject2();
     // pub fn D3DKMTWaitForVerticalBlankEvent();
     // pub fn D3DKMTWaitForVerticalBlankEvent2();
-    pub fn DPtoLP(hdc: HDC, lpPoints: *mut POINT, nCount: c_int) -> BOOL;
+    pub fn DPtoLP(hdc: HDC, lppt: *mut POINT, c: c_int) -> BOOL;
     // pub fn DeleteColorSpace();
     pub fn DeleteDC(hdc: HDC) -> BOOL;
     // pub fn DeleteEnhMetaFile();
@@ -512,7 +512,7 @@ extern "system" {
     // pub fn SetBitmapBits();
     // pub fn SetBitmapDimensionEx();
     pub fn SetBkColor(hdc: HDC, color: COLORREF) -> COLORREF;
-    pub fn SetBkMode(hdc: HDC, iBkMode: c_int) -> c_int;
+    pub fn SetBkMode(hdc: HDC, mode: c_int) -> c_int;
     // pub fn SetBoundsRect();
     // pub fn SetBrushOrgEx();
     // pub fn SetColorAdjustment();
@@ -531,7 +531,7 @@ extern "system" {
     // pub fn SetICMProfileW();
     // pub fn SetLayout();
     // pub fn SetMagicColors();
-    pub fn SetMapMode(hdc: HDC, fnMapMode: c_int) -> c_int;
+    pub fn SetMapMode(hdc: HDC, mode: c_int) -> c_int;
     // pub fn SetMapperFlags();
     // pub fn SetMetaFileBitsEx();
     // pub fn SetMetaRgn();
@@ -548,14 +548,14 @@ extern "system" {
     // pub fn SetRelAbs();
     // pub fn SetStretchBltMode();
     // pub fn SetSystemPaletteUse();
-    pub fn SetTextAlign(hdc: HDC, fMode: UINT) -> UINT;
+    pub fn SetTextAlign(hdc: HDC, align: UINT) -> UINT;
     // pub fn SetTextCharacterExtra();
     pub fn SetTextColor(hdc: HDC, color: COLORREF) -> COLORREF;
     // pub fn SetTextJustification();
-    pub fn SetViewportExtEx(hdc: HDC, nXExtent: c_int, nYExtent: c_int, lpSize: *mut SIZE) -> BOOL;
-    pub fn SetViewportOrgEx(hdc: HDC, X: c_int, Y: c_int, lpPoint: *mut POINT) -> BOOL;
+    pub fn SetViewportExtEx(hdc: HDC, x: c_int, y: c_int, lpsz: *mut SIZE) -> BOOL;
+    pub fn SetViewportOrgEx(hdc: HDC, x: c_int, y: c_int, lppt: *mut POINT) -> BOOL;
     // pub fn SetWinMetaFileBits();
-    pub fn SetWindowExtEx(hdc: HDC, nXExtent: c_int, nYExtent: c_int, lpSize: *mut SIZE) -> BOOL;
+    pub fn SetWindowExtEx(hdc: HDC, x: c_int, y: c_int, lppt: *mut SIZE) -> BOOL;
     // pub fn SetWindowOrgEx();
     // pub fn SetWorldTransform();
     // pub fn StartDocA();

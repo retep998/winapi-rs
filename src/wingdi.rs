@@ -443,18 +443,18 @@ pub struct TEXTMETRICW {
     pub tmCharSet: ::BYTE,
 }
 
-pub const TA_NOUPDATECP: ::UINT = 0x0000;
-pub const TA_UPDATECP: ::UINT = 0x0001;
+pub const TA_NOUPDATECP: ::UINT = 0;
+pub const TA_UPDATECP: ::UINT = 1;
 
-pub const TA_LEFT: ::UINT = 0x0000;
-pub const TA_RIGHT: ::UINT = 0x0002;
-pub const TA_CENTER: ::UINT = 0x0006;
+pub const TA_LEFT: ::UINT = 0;
+pub const TA_RIGHT: ::UINT = 2;
+pub const TA_CENTER: ::UINT = 6;
 
-pub const TA_TOP: ::UINT = 0x0000;
-pub const TA_BOTTOM: ::UINT = 0x0008;
-pub const TA_BASELINE: ::UINT = 0x0018;
+pub const TA_TOP: ::UINT = 0;
+pub const TA_BOTTOM: ::UINT = 8;
+pub const TA_BASELINE: ::UINT = 24;
 
-pub const TA_RTLREADING: ::UINT = 0x0100;
+pub const TA_RTLREADING: ::UINT = 256;
 pub const TA_MASK: ::UINT = (TA_BASELINE+TA_CENTER+TA_UPDATECP+TA_RTLREADING);
 
 pub const WHITE_BRUSH: ::c_int = 0;
@@ -478,6 +478,7 @@ pub const DEFAULT_GUI_FONT: ::c_int = 17;
 
 pub const TRANSPARENT: ::c_int = 1;
 pub const OPAQUE: ::c_int = 2;
+pub const BKMODE_LAST: ::c_int = 2;
 
 pub const MM_TEXT: ::c_int = 1;
 pub const MM_LOMETRIC: ::c_int = 2;
@@ -490,3 +491,4 @@ pub const MM_ANISOTROPIC: ::c_int = 8;
 
 pub const ALTERNATE: ::c_int = 1;
 pub const WINDING: ::c_int = 2;
+pub const POLYFILL_LAST: ::c_int = 2;
