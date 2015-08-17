@@ -1,6 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 #![cfg(windows)]
+#![cfg(not(target_env = "msvc"))] // FIXME - https://github.com/rust-lang/rust/issues/27438
 extern crate uuid;
 use uuid::*;
 #[inline(never)] fn bb<T>(_: T) {}
