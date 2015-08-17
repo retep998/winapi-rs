@@ -318,11 +318,11 @@ extern "system" {
         hdc: HDC, lpchText: LPCSTR, cchText: c_int, lprc: LPRECT, format: UINT,
     ) -> c_int;
     pub fn DrawTextExA(
-        hdc: HDC, lpchText: LPCSTR, cchText: c_int, lprc: LPRECT, format: UINT, 
+        hdc: HDC, lpchText: LPCSTR, cchText: c_int, lprc: LPRECT, format: UINT,
         lpdtp: LPDRAWTEXTPARAMS,
     ) -> c_int;
     pub fn DrawTextExW(
-        hdc: HDC, lpchText: LPCWSTR, cchText: c_int, lprc: LPRECT, format: UINT, 
+        hdc: HDC, lpchText: LPCWSTR, cchText: c_int, lprc: LPRECT, format: UINT,
         lpdtp: LPDRAWTEXTPARAMS,
     ) -> c_int;
     pub fn DrawTextW(
@@ -1023,7 +1023,10 @@ extern "system" {
     // pub fn TileWindows();
     // pub fn ToAscii();
     // pub fn ToAsciiEx();
-    // pub fn ToUnicode();
+    pub fn ToUnicode(
+        wVirtKey: UINT, wScanCode: UINT, lpKeyState: *const BYTE, lwszBuff: LPWSTR, cchBuff: c_int,
+        wFlags: UINT
+    ) -> c_int;
     // pub fn ToUnicodeEx();
     pub fn TrackMouseEvent(lpEventTrack: LPTRACKMOUSEEVENT) -> BOOL;
     // pub fn TrackPopupMenu();
