@@ -95,6 +95,7 @@ fn functions() {
     bb(SelectObject);
     bb(SetBkColor);
     bb(SetDCBrushColor);
+    bb(SetPixel);
     bb(SetPixelFormat);
     bb(SetRectRgn);
     bb(SetTextColor);
@@ -102,4 +103,11 @@ fn functions() {
     bb(SwapBuffers);
     bb(TextOutA);
     bb(TextOutW);
+    bb(DPtoLP);
+    bb(SetBkMode);
+    bb(SetMapMode);
+    bb(SetTextAlign);
+    bb(SetViewportExtEx);
+    bb(SetViewportOrgEx);
+    bb(SetWindowExtEx);
 }

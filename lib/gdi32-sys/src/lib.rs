@@ -427,7 +427,7 @@ extern "system" {
     // pub fn GetTextExtentPointI();
     // pub fn GetTextExtentPointW();
     // pub fn GetTextFaceA();
-    // pub fn GetTextFaceW();
+    pub fn GetTextFaceW(hdc: HDC, c: c_int, lpName: LPWSTR) -> c_int;
     // pub fn GetTextMetricsA();
     pub fn GetTextMetricsW(hdc: HDC, lptm: *mut TEXTMETRICW) -> BOOL;
     // pub fn GetViewportExtEx();
@@ -537,7 +537,7 @@ extern "system" {
     // pub fn SetMetaRgn();
     // pub fn SetMiterLimit();
     // pub fn SetPaletteEntries();
-    // pub fn SetPixel();
+    pub fn SetPixel(hdc: HDC, x: c_int, y: c_int, color: COLORREF) -> COLORREF;
     pub fn SetPixelFormat(
         hdc: HDC, iPixelFormat: c_int, ppfd: *const PIXELFORMATDESCRIPTOR,
     ) -> BOOL;

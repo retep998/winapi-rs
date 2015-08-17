@@ -436,4 +436,6 @@ fn functions() {
     bb(WindowFromPoint);
     bb(keybd_event);
     bb(mouse_event);
+    bb(GetScrollInfo);
+    bb(SetScrollInfo);
 }
