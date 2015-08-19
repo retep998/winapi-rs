@@ -107,20 +107,20 @@ pub type PCSADDR_INFO = *mut CSADDR_INFO;
 pub type LPCSADDR_INFO = *mut CSADDR_INFO;
 #[repr(C)] #[derive(Copy)]
 pub struct SOCKADDR_STORAGE_LH {
-    ss_family: ADDRESS_FAMILY,
-    __ss_pad1: [::CHAR; 6],
-    __ss_align: ::__int64,
-    __ss_pad2: [::CHAR; 112],
+    pub ss_family: ADDRESS_FAMILY,
+    pub __ss_pad1: [::CHAR; 6],
+    pub __ss_align: ::__int64,
+    pub __ss_pad2: [::CHAR; 112],
 }
 impl Clone for SOCKADDR_STORAGE_LH { fn clone(&self) -> SOCKADDR_STORAGE_LH { *self } }
 pub type PSOCKADDR_STORAGE_LH = *mut SOCKADDR_STORAGE_LH;
 pub type LPSOCKADDR_STORAGE_LH = *mut SOCKADDR_STORAGE_LH;
 #[repr(C)] #[derive(Copy)]
 pub struct SOCKADDR_STORAGE_XP {
-    ss_family: ::c_short,
-    __ss_pad1: [::CHAR; 6],
-    __ss_align: ::__int64,
-    __ss_pad2: [::CHAR; 112],
+    pub ss_family: ::c_short,
+    pub __ss_pad1: [::CHAR; 6],
+    pub __ss_align: ::__int64,
+    pub __ss_pad2: [::CHAR; 112],
 }
 impl Clone for SOCKADDR_STORAGE_XP { fn clone(&self) -> SOCKADDR_STORAGE_XP { *self } }
 pub type PSOCKADDR_STORAGE_XP = *mut SOCKADDR_STORAGE_XP;
@@ -130,9 +130,9 @@ pub type PSOCKADDR_STORAGE = *mut SOCKADDR_STORAGE;
 pub type LPSOCKADDR_STORAGE = *mut SOCKADDR_STORAGE;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SOCKET_PROCESSOR_AFFINITY {
-    Processor: ::PROCESSOR_NUMBER,
-    NumaNodeId: ::USHORT,
-    Reserved: ::USHORT,
+    pub Processor: ::PROCESSOR_NUMBER,
+    pub NumaNodeId: ::USHORT,
+    pub Reserved: ::USHORT,
 }
 pub type PSOCKET_PROCESSOR_AFFINITY = *mut SOCKET_PROCESSOR_AFFINITY;
 pub const IOC_UNIX: ::DWORD = 0x00000000;
