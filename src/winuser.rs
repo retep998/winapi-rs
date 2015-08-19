@@ -23,6 +23,7 @@ pub const TME_LEAVE: ::DWORD = 0x0000_0002;
 pub const TME_NONCLIENT: ::DWORD = 0x0000_0010;
 pub const TME_QUERY: ::DWORD = 0x4000_0000;
 pub const TME_CANCEL: ::DWORD = 0x8000_0000;
+pub const HWND_MESSAGE: ::HWND = -3isize as ::HWND;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TRACKMOUSEEVENT {
     pub cbSize: ::DWORD,
@@ -523,6 +524,7 @@ pub const RIM_TYPEHID: ::DWORD = 2;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct RAWMOUSE {
     pub usFlags: ::USHORT,
+    pub memory_padding: ::USHORT, // 16bit Padding for 32bit align in following union
     pub usButtonFlags: ::USHORT,
     pub usButtonData: ::USHORT,
     pub ulRawButtons: ::ULONG,
@@ -726,7 +728,7 @@ pub struct MENUITEMINFOA {
     pub dwItemData: ::ULONG_PTR,
     pub dwTypeData: ::LPSTR,
     pub cch: ::UINT,
-    pub hbmpItem: ::HBITMAP,  
+    pub hbmpItem: ::HBITMAP,
 }
 pub type LPMENUITEMINFOA = *mut MENUITEMINFOA;
 pub type LPCMENUITEMINFOA = *const MENUITEMINFOA;
@@ -743,7 +745,7 @@ pub struct MENUITEMINFOW {
     pub dwItemData: ::ULONG_PTR,
     pub dwTypeData: ::LPWSTR,
     pub cch: ::UINT,
-    pub hbmpItem: ::HBITMAP,  
+    pub hbmpItem: ::HBITMAP,
 }
 pub type LPMENUITEMINFOW = *mut MENUITEMINFOW;
 pub type LPCMENUITEMINFOW = *const MENUITEMINFOW;
