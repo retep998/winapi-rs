@@ -92,9 +92,9 @@ pub struct D3DLIGHT9 {
     pub Theta: ::c_float,
     pub Phi: ::c_float,
 }
-pub const D3DCLEAR_TARGET: ::DWORD = 0;
-pub const D3DCLEAR_ZBUFFER: ::DWORD = 0;
-pub const D3DCLEAR_STENCIL: ::DWORD = 0;
+pub const D3DCLEAR_TARGET: ::DWORD = 0x1;
+pub const D3DCLEAR_ZBUFFER: ::DWORD = 0x2;
+pub const D3DCLEAR_STENCIL: ::DWORD = 0x4;
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum D3DSHADEMODE {
     FLAT = 1,
