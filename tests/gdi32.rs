@@ -110,4 +110,5 @@ fn functions() {
     bb(SetViewportExtEx);
     bb(SetViewportOrgEx);
     bb(SetWindowExtEx);
+    bb(SetROP2);
 }

@@ -163,3 +163,125 @@ pub const PROCESS_HEAP_ENTRY_BUSY: ::WORD = 0x0004;
 pub const PROCESS_HEAP_SEG_ALLOC: ::WORD = 0x0008;
 pub const PROCESS_HEAP_ENTRY_MOVEABLE: ::WORD = 0x0010;
 pub const PROCESS_HEAP_ENTRY_DDESHARE: ::WORD = 0x0020;
+
+pub type PTHREAD_START_ROUTINE = Option<unsafe extern "system" fn(
+    lpThreadParameter: ::LPVOID,
+) -> ::DWORD>;
+pub type LPTHREAD_START_ROUTINE = PTHREAD_START_ROUTINE;
+
+pub type LPCONTEXT = ::PCONTEXT;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct REASON_CONTEXT_Detailed {
+    pub LocalizedReasonModule: ::HMODULE,
+    pub LocalizedReasonId: ::ULONG,
+    pub ReasonStringCount: ::ULONG,
+    pub ReasonStrings: *mut ::LPWSTR,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct REASON_CONTEXT {
+    pub Version: ::ULONG,
+    pub Flags: ::DWORD,
+    pub Reason: REASON_CONTEXT_Detailed,
+}
+UNION!(REASON_CONTEXT, Reason, SimpleReasonString, SimpleReasonString_mut, ::LPWSTR);
+pub type PREASON_CONTEXT = *mut REASON_CONTEXT;
+
+pub const EXCEPTION_DEBUG_EVENT: ::DWORD = 1;
+pub const CREATE_THREAD_DEBUG_EVENT: ::DWORD = 2;
+pub const CREATE_PROCESS_DEBUG_EVENT: ::DWORD = 3;
+pub const EXIT_THREAD_DEBUG_EVENT: ::DWORD = 4;
+pub const EXIT_PROCESS_DEBUG_EVENT: ::DWORD = 5;
+pub const LOAD_DLL_DEBUG_EVENT: ::DWORD = 6;
+pub const UNLOAD_DLL_DEBUG_EVENT: ::DWORD = 7;
+pub const OUTPUT_DEBUG_STRING_EVENT: ::DWORD = 8;
+pub const RIP_EVENT: ::DWORD = 9;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct EXCEPTION_DEBUG_INFO {
+    pub ExceptionRecord: ::EXCEPTION_RECORD,
+    pub dwFirstChance: ::DWORD,
+}
+pub type LPEXCEPTION_DEBUG_INFO = *mut EXCEPTION_DEBUG_INFO;
+#[repr(C)] #[derive(Copy)]
+pub struct CREATE_THREAD_DEBUG_INFO {
+    pub hThread: ::HANDLE,
+    pub lpThreadLocalBase: ::LPVOID,
+    pub lpStartAddress: LPTHREAD_START_ROUTINE,
+}
+impl Clone for CREATE_THREAD_DEBUG_INFO { fn clone(&self) -> CREATE_THREAD_DEBUG_INFO { *self } }
+pub type LPCREATE_THREAD_DEBUG_INFO = *mut CREATE_THREAD_DEBUG_INFO;
+#[repr(C)] #[derive(Copy)]
+pub struct CREATE_PROCESS_DEBUG_INFO {
+    pub hFile: ::HANDLE,
+    pub hProcess: ::HANDLE,
+    pub hThread: ::HANDLE,
+    pub lpBaseOfImage: ::LPVOID,
+    pub dwDebugInfoFileOffset: ::DWORD,
+    pub nDebugInfoSize: ::DWORD,
+    pub lpThreadLocalBase: ::LPVOID,
+    pub lpStartAddress: LPTHREAD_START_ROUTINE,
+    pub lpImageName: ::LPVOID,
+    pub fUnicode: ::WORD,
+}
+impl Clone for CREATE_PROCESS_DEBUG_INFO { fn clone(&self) -> CREATE_PROCESS_DEBUG_INFO { *self } }
+pub type LPCREATE_PROCESS_DEBUG_INFO = *mut CREATE_PROCESS_DEBUG_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct EXIT_THREAD_DEBUG_INFO {
+    pub dwExitCode: ::DWORD,
+}
+pub type LPEXIT_THREAD_DEBUG_INFO = *mut EXIT_THREAD_DEBUG_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct EXIT_PROCESS_DEBUG_INFO {
+    pub dwExitCode: ::DWORD,
+}
+pub type LPEXIT_PROCESS_DEBUG_INFO = *mut EXIT_PROCESS_DEBUG_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct LOAD_DLL_DEBUG_INFO {
+    pub hFile: ::HANDLE,
+    pub lpBaseOfDll: ::LPVOID,
+    pub dwDebugInfoFileOffset: ::DWORD,
+    pub nDebugInfoSize: ::DWORD,
+    pub lpImageName: ::LPVOID,
+    pub fUnicode: ::WORD,
+}
+pub type LPLOAD_DLL_DEBUG_INFO = *mut LOAD_DLL_DEBUG_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct UNLOAD_DLL_DEBUG_INFO {
+    pub lpBaseOfDll: ::LPVOID,
+}
+pub type LPUNLOAD_DLL_DEBUG_INFO = *mut UNLOAD_DLL_DEBUG_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct OUTPUT_DEBUG_STRING_INFO {
+    pub lpDebugStringData: ::LPSTR,
+    pub fUnicode: ::WORD,
+    pub nDebugStringLength: ::WORD,
+}
+pub type LPOUTPUT_DEBUG_STRING_INFO = *mut OUTPUT_DEBUG_STRING_INFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RIP_INFO {
+    pub dwError: ::DWORD,
+    pub dwType: ::DWORD,
+}
+pub type LPRIP_INFO = *mut RIP_INFO;
+#[repr(C)] #[derive(Copy)]
+pub struct DEBUG_EVENT {
+    pub dwDebugEventCode: ::DWORD,
+    pub dwProcessId: ::DWORD,
+    pub dwThreadId: ::DWORD,
+    #[cfg(target_arch="x86")]
+    pub u: [u8; 84],
+    #[cfg(target_arch="x86_64")]
+    pub u: [u8; 160],
+}
+impl Clone for DEBUG_EVENT { fn clone(&self) -> DEBUG_EVENT { *self } }
+UNION!(DEBUG_EVENT, u, Exception, Exception_mut, EXCEPTION_DEBUG_INFO);
+UNION!(DEBUG_EVENT, u, CreateThread, CreateThread_mut, CREATE_THREAD_DEBUG_INFO);
+UNION!(DEBUG_EVENT, u, CreateProcessInfo, CreateProcessInfo_mut, CREATE_PROCESS_DEBUG_INFO);
+UNION!(DEBUG_EVENT, u, ExitThread, ExitThread_mut, EXIT_THREAD_DEBUG_INFO);
+UNION!(DEBUG_EVENT, u, ExitProcess, ExitProcess_mut, EXIT_PROCESS_DEBUG_INFO);
+UNION!(DEBUG_EVENT, u, LoadDll, LoadDll_mut, LOAD_DLL_DEBUG_INFO);
+UNION!(DEBUG_EVENT, u, UnloadDll, UnloadDll_mut, UNLOAD_DLL_DEBUG_INFO);
+UNION!(DEBUG_EVENT, u, DebugString, DebugString_mut, OUTPUT_DEBUG_STRING_INFO);
+UNION!(DEBUG_EVENT, u, RipInfo, RipInfo_mut, RIP_INFO);
+pub type LPDEBUG_EVENT = *mut DEBUG_EVENT;

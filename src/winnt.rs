@@ -2,6 +2,7 @@
 // Licensed under the MIT License <LICENSE.md>
 //! This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed
 //! through the Win32 API.
+pub const ANYSIZE_ARRAY: usize = 1;
 //341
 pub type PVOID = *mut ::c_void;
 pub type PVOID64 = u64; // This is a 64-bit pointer, even when in 32-bit
@@ -727,6 +728,82 @@ fn test_CONTEXT_size() {
         assert_eq!(size_of::<CONTEXT>(), 716)
     }
 }
+pub type RUNTIME_FUNCTION = IMAGE_RUNTIME_FUNCTION_ENTRY;
+pub type PRUNTIME_FUNCTION = *mut RUNTIME_FUNCTION;
+pub const UNWIND_HISTORY_TABLE_SIZE: usize = 12;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct UNWIND_HISTORY_TABLE_ENTRY {
+    pub ImageBase: ::DWORD64,
+    pub FunctionEntry: PRUNTIME_FUNCTION,
+}
+pub type PUNWIND_HISTORY_TABLE_ENTRY = *mut UNWIND_HISTORY_TABLE_ENTRY;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct UNWIND_HISTORY_TABLE {
+    pub Count: ::DWORD,
+    pub LocalHint: ::BYTE,
+    pub GlobalHint: ::BYTE,
+    pub Search: ::BYTE,
+    pub Once: ::BYTE,
+    pub LowAddress: ::DWORD64,
+    pub HighAddress: ::DWORD64,
+    pub Entry: [UNWIND_HISTORY_TABLE_ENTRY; UNWIND_HISTORY_TABLE_SIZE],
+}
+pub type PUNWIND_HISTORY_TABLE = *mut UNWIND_HISTORY_TABLE;
+pub type PGET_RUNTIME_FUNCTION_CALLBACK = Option<unsafe extern "system" fn(
+    ControlPc: ::DWORD64, Context: ::PVOID,
+) -> PRUNTIME_FUNCTION>;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct KNONVOLATILE_CONTEXT_POINTERS_u1 {
+    pub Xmm0: PM128A,
+    pub Xmm1: PM128A,
+    pub Xmm2: PM128A,
+    pub Xmm3: PM128A,
+    pub Xmm4: PM128A,
+    pub Xmm5: PM128A,
+    pub Xmm6: PM128A,
+    pub Xmm7: PM128A,
+    pub Xmm8: PM128A,
+    pub Xmm9: PM128A,
+    pub Xmm10: PM128A,
+    pub Xmm11: PM128A,
+    pub Xmm12: PM128A,
+    pub Xmm14: PM128A,
+    pub Xmm15: PM128A,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct KNONVOLATILE_CONTEXT_POINTERS_u2 {
+    pub Rax: ::DWORD64,
+    pub Rcx: ::DWORD64,
+    pub Rdx: ::DWORD64,
+    pub Rbx: ::DWORD64,
+    pub Rsp: ::DWORD64,
+    pub Rbp: ::DWORD64,
+    pub Rsi: ::DWORD64,
+    pub Rdi: ::DWORD64,
+    pub R8: ::DWORD64,
+    pub R9: ::DWORD64,
+    pub R10: ::DWORD64,
+    pub R11: ::DWORD64,
+    pub R12: ::DWORD64,
+    pub R13: ::DWORD64,
+    pub R14: ::DWORD64,
+    pub R15: ::DWORD64,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct KNONVOLATILE_CONTEXT_POINTERS {
+    pub FloatingContext: [PM128A; 16],
+    pub IntegerContext: [::PDWORD64; 16],
+}
+// FIXME: all unions are untagged
+UNION!(
+    KNONVOLATILE_CONTEXT_POINTERS, FloatingContext, Xmms, Xmms_mut,
+    KNONVOLATILE_CONTEXT_POINTERS_u1
+);
+UNION!(
+    KNONVOLATILE_CONTEXT_POINTERS, IntegerContext, Regs, Regs_mut,
+    KNONVOLATILE_CONTEXT_POINTERS_u2
+);
+pub type PKNONVOLATILE_CONTEXT_POINTERS = *mut KNONVOLATILE_CONTEXT_POINTERS;
 //8983
 pub const EXCEPTION_MAXIMUM_PARAMETERS: usize = 15;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
@@ -1206,6 +1283,9 @@ pub const IO_REPARSE_TAG_DEDUP: ::DWORD = 0x80000013;
 pub const IO_REPARSE_TAG_NFS: ::DWORD = 0x80000014;
 pub const IO_REPARSE_TAG_FILE_PLACEHOLDER: ::DWORD = 0x80000015;
 pub const IO_REPARSE_TAG_WOF: ::DWORD = 0x80000017;
+//12788
+pub const DUPLICATE_CLOSE_SOURCE: ::DWORD = 0x00000001;
+pub const DUPLICATE_SAME_ACCESS: ::DWORD = 0x00000002;
 //14708
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PROCESSOR_POWER_POLICY_INFO {
@@ -1583,6 +1663,14 @@ pub struct IMAGE_COFF_SYMBOLS_HEADER {
     pub RvaToLastByteOfData: ::DWORD,
 }
 pub type PIMAGE_COFF_SYMBOLS_HEADER = *mut IMAGE_COFF_SYMBOLS_HEADER;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct IMAGE_RUNTIME_FUNCTION_ENTRY {
+    pub BeginAddress: ::DWORD,
+    pub EndAddress: ::DWORD,
+    pub UnwindInfoAddress: ::DWORD,
+}
+UNION!(IMAGE_RUNTIME_FUNCTION_ENTRY, UnwindInfoAddress, UnwindData, UnwindData_mut, ::DWORD);
+pub type PIMAGE_RUNTIME_FUNCTION_ENTRY = *mut IMAGE_RUNTIME_FUNCTION_ENTRY;
 pub const FRAME_FPO: ::WORD = 0;
 pub const FRAME_TRAP: ::WORD = 1;
 pub const FRAME_TSS: ::WORD = 2;
@@ -1663,6 +1751,14 @@ pub struct RTL_SRWLOCK {
 }
 pub type PRTL_SRWLOCK = *mut RTL_SRWLOCK;
 pub const RTL_SRWLOCK_INIT: RTL_SRWLOCK = RTL_SRWLOCK { Ptr: 0 as PVOID };
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RTL_CONDITION_VARIABLE {
+    pub Ptr: ::PVOID,
+}
+pub type PRTL_CONDITION_VARIABLE = *mut RTL_CONDITION_VARIABLE;
+pub const RTL_CONDITION_VARIABLE_INIT: RTL_CONDITION_VARIABLE = RTL_CONDITION_VARIABLE {
+    Ptr: 0 as PVOID
+};
 //18204
 pub type PAPCFUNC = Option<unsafe extern "system" fn(Parameter: ::ULONG_PTR)>;
 pub type PVECTORED_EXCEPTION_HANDLER = Option<unsafe extern "system" fn(
@@ -1780,3 +1876,536 @@ pub const SERVICE_WIN32: ::DWORD = SERVICE_WIN32_OWN_PROCESS | SERVICE_WIN32_SHA
 pub const SERVICE_INTERACTIVE_PROCESS: ::DWORD = 0x00000100;
 pub const SERVICE_TYPE_ALL: ::DWORD = SERVICE_WIN32 | SERVICE_ADAPTER | SERVICE_DRIVER
     | SERVICE_INTERACTIVE_PROCESS;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TP_CALLBACK_INSTANCE {
+    dummy: *mut ::c_void,
+}
+pub type PTP_CALLBACK_INSTANCE = *mut TP_CALLBACK_INSTANCE;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TP_IO {
+    dummy: *mut ::c_void,
+}
+pub type PTP_IO = *mut TP_IO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TP_POOL {
+    dummy: *mut ::c_void,
+}
+pub type PTP_POOL = *mut TP_POOL;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TP_CLEANUP_GROUP {
+    dummy: *mut ::c_void,
+}
+pub type PTP_CLEANUP_GROUP = *mut TP_CLEANUP_GROUP;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TP_TIMER {
+    dummy: *mut ::c_void,
+}
+pub type PTP_TIMER = *mut TP_TIMER;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TP_WAIT {
+    dummy: *mut ::c_void,
+}
+pub type PTP_WAIT = *mut TP_WAIT;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TP_WORK {
+    dummy: *mut ::c_void,
+}
+pub type PTP_WORK = *mut TP_WORK;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ACTIVATION_CONTEXT {
+    dummy: *mut ::c_void,
+}
+
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum TP_CALLBACK_PRIORITY {
+    TP_CALLBACK_PRIORITY_HIGH,
+    TP_CALLBACK_PRIORITY_NORMAL,
+    TP_CALLBACK_PRIORITY_LOW,
+    TP_CALLBACK_PRIORITY_INVALID,
+    TP_CALLBACK_PRIORITY_COUNT = 4,
+}
+
+pub type PTP_CLEANUP_GROUP_CANCEL_CALLBACK = Option<unsafe extern "system" fn(
+    ObjectContext: ::PVOID, CleanupContext: ::PVOID,
+)>;
+pub type PTP_SIMPLE_CALLBACK = Option<unsafe extern "system" fn(
+    Instance: PTP_CALLBACK_INSTANCE, Context: ::PVOID,
+)>;
+pub type PTP_WORK_CALLBACK = Option<unsafe extern "system" fn(
+    Instance: PTP_CALLBACK_INSTANCE, Context: ::PVOID, Work: PTP_WORK,
+)>;
+pub type PTP_TIMER_CALLBACK = Option<unsafe extern "system" fn(
+    Instance: PTP_CALLBACK_INSTANCE, Context: ::PVOID, Timer: PTP_TIMER,
+)>;
+pub type TP_WAIT_RESULT = ::DWORD;
+pub type PTP_WAIT_CALLBACK = Option<unsafe extern "system" fn(
+    Instance: PTP_CALLBACK_INSTANCE, Context: ::PVOID, Wait: PTP_WAIT, WaitResult: TP_WAIT_RESULT,
+)>;
+
+pub type TP_VERSION = ::DWORD;
+pub type PTP_VERSION = *mut ::DWORD;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TP_POOL_STACK_INFORMATION {
+    pub StackReserve: ::SIZE_T,
+    pub StackCommit: ::SIZE_T,
+}
+pub type PTP_POOL_STACK_INFORMATION = *mut TP_POOL_STACK_INFORMATION;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TP_CALLBACK_ENVIRON_V3_s {
+    pub BitFields: ::DWORD,
+}
+BITFIELD!(TP_CALLBACK_ENVIRON_V3_s BitFields: ::DWORD [
+    LongFunction set_LongFunction[0..1],
+    Persistent set_Persistent[1..2],
+    Private set_Private[2..32],
+]);
+#[repr(C)] #[derive(Copy)]
+pub struct TP_CALLBACK_ENVIRON_V3 {
+    pub Version: TP_VERSION,
+    pub Pool: PTP_POOL,
+    pub CleanupGroup: PTP_CLEANUP_GROUP,
+    pub CleanupGroupCancelCallback: PTP_CLEANUP_GROUP_CANCEL_CALLBACK,
+    pub RaceDll: ::PVOID,
+    pub ActivationContext: *mut ACTIVATION_CONTEXT,
+    pub FinalizationCallback: PTP_SIMPLE_CALLBACK,
+    pub u: ::DWORD,
+    pub CallbackPriority: TP_CALLBACK_PRIORITY,
+    pub Size: ::DWORD,
+}
+impl Clone for TP_CALLBACK_ENVIRON_V3 { fn clone(&self) -> TP_CALLBACK_ENVIRON_V3 { *self } }
+UNION!(TP_CALLBACK_ENVIRON_V3, u, Flags, Flags_mut, ::DWORD);
+UNION!(TP_CALLBACK_ENVIRON_V3, u, s, s_mut, TP_CALLBACK_ENVIRON_V3_s);
+pub type TP_CALLBACK_ENVIRON = TP_CALLBACK_ENVIRON_V3;
+pub type PTP_CALLBACK_ENVIRON = *mut TP_CALLBACK_ENVIRON_V3;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct JOB_SET_ARRAY {
+    pub JobHandle: ::HANDLE,
+    pub MemberLevel: ::DWORD,
+    pub Flags: ::DWORD,
+}
+pub type PJOB_SET_ARRAY = *mut JOB_SET_ARRAY;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RTL_BARRIER {
+    pub Reserved1: ::DWORD,
+    pub Reserved2: ::DWORD,
+    pub Reserved3: [::ULONG_PTR; 2],
+    pub Reserved4: ::DWORD,
+    pub Reserved5: ::DWORD,
+}
+pub type PRTL_BARRIER = *mut RTL_BARRIER;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RTL_RUN_ONCE {
+    pub Ptr: ::PVOID,
+}
+pub type PRTL_RUN_ONCE = *mut RTL_RUN_ONCE;
+
+#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(dead_code)]
+pub enum RTL_UMS_THREAD_INFO_CLASS {
+    UmsThreadInvalidInfoClass = 0,
+    UmsThreadUserContext,
+    UmsThreadPriority,              // Reserved
+    UmsThreadAffinity,              // Reserved
+    UmsThreadTeb,
+    UmsThreadIsSuspended,
+    UmsThreadIsTerminated,
+    UmsThreadMaxInfoClass,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum RTL_UMS_SCHEDULER_REASON {
+    UmsSchedulerStartup = 0,
+    UmsSchedulerThreadBlocked,
+    UmsSchedulerThreadYield,
+}
+pub type PRTL_UMS_SCHEDULER_ENTRY_POINT = Option<unsafe extern "system" fn(
+    Reason: RTL_UMS_SCHEDULER_REASON, ActivationPayload: ::ULONG_PTR, SchedulerParam: ::PVOID,
+)>;
+
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum FIRMWARE_TYPE {
+    FirmwareTypeUnknown,
+    FirmwareTypeBios,
+    FirmwareTypeUefi,
+    FirmwareTypeMax,
+}
+pub type PFIRMWARE_TYPE = *mut FIRMWARE_TYPE;
+
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum LOGICAL_PROCESSOR_RELATIONSHIP {
+    RelationProcessorCore,
+    RelationNumaNode,
+    RelationCache,
+    RelationProcessorPackage,
+    RelationGroup,
+    RelationAll = 0xffff,
+}
+
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum PROCESSOR_CACHE_TYPE {
+    CacheUnified,
+    CacheInstruction,
+    CacheData,
+    CacheTrace,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CACHE_DESCRIPTOR {
+    pub Level: ::BYTE,
+    pub Associativity: ::BYTE,
+    pub LineSize: ::WORD,
+    pub Size: ::DWORD,
+    pub Type: PROCESSOR_CACHE_TYPE,
+}
+pub type PCACHE_DESCRIPTOR = *mut CACHE_DESCRIPTOR;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_ProcessorCore {
+    pub Flags: ::BYTE,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_NumaNode {
+    pub NodeNumber: ::DWORD,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION {
+    pub ProcessorMask: ::ULONG_PTR,
+    pub Relationship: LOGICAL_PROCESSOR_RELATIONSHIP,
+    pub Reserved: [::ULONGLONG; 2],
+}
+UNION!(
+    SYSTEM_LOGICAL_PROCESSOR_INFORMATION, Reserved, ProcessorCore, ProcessorCore_mut,
+    SYSTEM_LOGICAL_PROCESSOR_INFORMATION_ProcessorCore
+);
+UNION!(
+    SYSTEM_LOGICAL_PROCESSOR_INFORMATION, Reserved, NumaNode, NumaNode_mut,
+    SYSTEM_LOGICAL_PROCESSOR_INFORMATION_NumaNode
+);
+UNION!(SYSTEM_LOGICAL_PROCESSOR_INFORMATION, Reserved, Cache, Cache_mut, CACHE_DESCRIPTOR);
+pub type PSYSTEM_LOGICAL_PROCESSOR_INFORMATION = *mut SYSTEM_LOGICAL_PROCESSOR_INFORMATION;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION {
+    pub CycleTime: ::DWORD64,
+}
+pub type PSYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION = *mut SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION;
+
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum HARDWARE_COUNTER_TYPE {
+    PMCCounter,
+    MaxHardwareCounterType,
+}
+pub type PHARDWARE_COUNTER_TYPE = *mut HARDWARE_COUNTER_TYPE;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum PROCESS_MITIGATION_POLICY {
+    ProcessDEPPolicy,
+    ProcessASLRPolicy,
+    ProcessDynamicCodePolicy,
+    ProcessStrictHandleCheckPolicy,
+    ProcessSystemCallDisablePolicy,
+    ProcessMitigationOptionsMask,
+    ProcessExtensionPointDisablePolicy,
+    ProcessReserved1Policy,
+    ProcessSignaturePolicy,
+    MaxProcessMitigationPolicy,
+}
+
+#[repr(C)] #[derive(Copy)]
+pub struct OSVERSIONINFOA {
+    pub dwOSVersionInfoSize: ::DWORD,
+    pub dwMajorVersion: ::DWORD,
+    pub dwMinorVersion: ::DWORD,
+    pub dwBuildNumber: ::DWORD,
+    pub dwPlatformId: ::DWORD,
+    pub szCSDVersion: [::CHAR; 128],
+}
+impl Clone for OSVERSIONINFOA { fn clone(&self) -> OSVERSIONINFOA { *self } }
+pub type POSVERSIONINFOA = *mut OSVERSIONINFOA;
+pub type LPOSVERSIONINFOA = *mut OSVERSIONINFOA;
+#[repr(C)] #[derive(Copy)]
+pub struct OSVERSIONINFOW {
+    pub dwOSVersionInfoSize: ::DWORD,
+    pub dwMajorVersion: ::DWORD,
+    pub dwMinorVersion: ::DWORD,
+    pub dwBuildNumber: ::DWORD,
+    pub dwPlatformId: ::DWORD,
+    pub szCSDVersion: [::WCHAR; 128],
+}
+impl Clone for OSVERSIONINFOW { fn clone(&self) -> OSVERSIONINFOW { *self } }
+pub type POSVERSIONINFOW = *mut OSVERSIONINFOW;
+pub type LPOSVERSIONINFOW = *mut OSVERSIONINFOW;
+#[repr(C)] #[derive(Copy)]
+pub struct OSVERSIONINFOEXA {
+    pub dwOSVersionInfoSize: ::DWORD,
+    pub dwMajorVersion: ::DWORD,
+    pub dwMinorVersion: ::DWORD,
+    pub dwBuildNumber: ::DWORD,
+    pub dwPlatformId: ::DWORD,
+    pub szCSDVersion: [::CHAR; 128],
+    pub wServicePackMajor: ::WORD,
+    pub wServicePackMinor: ::WORD,
+    pub wSuiteMask: ::WORD,
+    pub wProductType: ::BYTE,
+    pub wReserved: ::BYTE,
+}
+impl Clone for OSVERSIONINFOEXA { fn clone(&self) -> OSVERSIONINFOEXA { *self } }
+pub type POSVERSIONINFOEXA = *mut OSVERSIONINFOEXA;
+pub type LPOSVERSIONINFOEXA = *mut OSVERSIONINFOEXA;
+#[repr(C)] #[derive(Copy)]
+pub struct OSVERSIONINFOEXW {
+    pub dwOSVersionInfoSize: ::DWORD,
+    pub dwMajorVersion: ::DWORD,
+    pub dwMinorVersion: ::DWORD,
+    pub dwBuildNumber: ::DWORD,
+    pub dwPlatformId: ::DWORD,
+    pub szCSDVersion: [::WCHAR; 128],
+    pub wServicePackMajor: ::WORD,
+    pub wServicePackMinor: ::WORD,
+    pub wSuiteMask: ::WORD,
+    pub wProductType: ::BYTE,
+    pub wReserved: ::BYTE,
+}
+impl Clone for OSVERSIONINFOEXW { fn clone(&self) -> OSVERSIONINFOEXW { *self } }
+pub type POSVERSIONINFOEXW = *mut OSVERSIONINFOEXW;
+pub type LPOSVERSIONINFOEXW = *mut OSVERSIONINFOEXW;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SLIST_ENTRY {
+    pub Next: *mut SLIST_ENTRY,
+}
+pub type PSLIST_ENTRY = *mut SLIST_ENTRY;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SLIST_HEADER_HeaderX64 {
+    pub BitFields1: ::ULONGLONG,
+    pub BitFields2: ::ULONGLONG,
+}
+BITFIELD!(SLIST_HEADER_HeaderX64 BitFields1: ::ULONGLONG [
+    Depth set_Depth[0..16],
+    Sequence set_Sequence[16..64],
+]);
+BITFIELD!(SLIST_HEADER_HeaderX64 BitFields2: ::ULONGLONG [
+    Reserved set_Reserved[0..4],
+    NextEntry set_NextEntry[4..64],
+]);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SLIST_HEADER {
+    pub Alignment: ::ULONGLONG,
+    pub Region: ::ULONGLONG,
+}
+UNION!(SLIST_HEADER, Alignment, HeaderX64, HeaderX64_mut, SLIST_HEADER_HeaderX64);
+
+pub type PSLIST_HEADER = *mut SLIST_HEADER;
+
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum SYSTEM_POWER_STATE {
+    PowerSystemUnspecified = 0,
+    PowerSystemWorking = 1,
+    PowerSystemSleeping1 = 2,
+    PowerSystemSleeping2 = 3,
+    PowerSystemSleeping3 = 4,
+    PowerSystemHibernate = 5,
+    PowerSystemShutdown = 6,
+    PowerSystemMaximum = 7,
+}
+pub type PSYSTEM_POWER_STATE = *mut SYSTEM_POWER_STATE;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum POWER_ACTION {
+    PowerActionNone = 0,
+    PowerActionReserved,
+    PowerActionSleep,
+    PowerActionHibernate,
+    PowerActionShutdown,
+    PowerActionShutdownReset,
+    PowerActionShutdownOff,
+    PowerActionWarmEject,
+}
+pub type PPOWER_ACTION = *mut POWER_ACTION;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum DEVICE_POWER_STATE {
+    PowerDeviceUnspecified = 0,
+    PowerDeviceD0,
+    PowerDeviceD1,
+    PowerDeviceD2,
+    PowerDeviceD3,
+    PowerDeviceMaximum,
+}
+pub type PDEVICE_POWER_STATE = *mut DEVICE_POWER_STATE;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum MONITOR_DISPLAY_STATE {
+    PowerMonitorOff = 0,
+    PowerMonitorOn,
+    PowerMonitorDim,
+}
+pub type PMONITOR_DISPLAY_STATE = *mut MONITOR_DISPLAY_STATE;
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum USER_ACTIVITY_PRESENCE {
+    PowerUserPresent = 0,
+    PowerUserNotPresent,
+    PowerUserInactive,
+    PowerUserMaximum,
+    //PowerUserInvalid = 3,
+}
+pub type PUSER_ACTIVITY_PRESENCE = *mut USER_ACTIVITY_PRESENCE;
+
+pub type EXECUTION_STATE = ::DWORD;
+pub type PEXECUTION_STATE = *mut ::DWORD;
+
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum LATENCY_TIME {
+    LT_DONT_CARE,
+    LT_LOWEST_LATENCY,
+}
+#[repr(i32)] #[derive(Clone, Copy, Debug)]
+pub enum POWER_REQUEST_TYPE {
+    PowerRequestDisplayRequired,
+    PowerRequestSystemRequired,
+    PowerRequestAwayModeRequired,
+    PowerRequestExecutionRequired,
+}
+pub type PPOWER_REQUEST_TYPE = *mut POWER_REQUEST_TYPE;
+
+pub const MAX_HW_COUNTERS: usize = 16;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct HARDWARE_COUNTER_DATA {
+    pub Type: HARDWARE_COUNTER_TYPE,
+    pub Reserved: ::DWORD,
+    pub Value: ::DWORD64,
+}
+pub type PHARDWARE_COUNTER_DATA = *mut HARDWARE_COUNTER_DATA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct PERFORMANCE_DATA {
+    pub Size: ::WORD,
+    pub Version: ::BYTE,
+    pub HwCountersCount: ::BYTE,
+    pub ContextSwitchCount: ::DWORD,
+    pub WaitReasonBitMap: ::DWORD64,
+    pub CycleTime: ::DWORD64,
+    pub RetryCount: ::DWORD,
+    pub Reserved: ::DWORD,
+    pub HwCounters: [HARDWARE_COUNTER_DATA; MAX_HW_COUNTERS],
+}
+pub type PPERFORMANCE_DATA = *mut PERFORMANCE_DATA;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MEMORY_BASIC_INFORMATION {
+    pub BaseAddress: ::PVOID,
+    pub AllocationBase: ::PVOID,
+    pub AllocationProtect: ::DWORD,
+    pub RegionSize: ::SIZE_T,
+    pub State: ::DWORD,
+    pub Protect: ::DWORD,
+    pub Type: ::DWORD,
+}
+pub type PMEMORY_BASIC_INFORMATION = *mut MEMORY_BASIC_INFORMATION;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MEMORY_BASIC_INFORMATION32 {
+    pub BaseAddress: ::DWORD,
+    pub AllocationBase: ::DWORD,
+    pub AllocationProtect: ::DWORD,
+    pub RegionSize: ::DWORD,
+    pub State: ::DWORD,
+    pub Protect: ::DWORD,
+    pub Type: ::DWORD,
+}
+pub type PMEMORY_BASIC_INFORMATION32 = *mut MEMORY_BASIC_INFORMATION32;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MEMORY_BASIC_INFORMATION64 { // FIXME: align 16
+    pub BaseAddress: ::ULONGLONG,
+    pub AllocationBase: ::ULONGLONG,
+    pub AllocationProtect: ::DWORD,
+    pub __alignment1: ::DWORD,
+    pub RegionSize: ::ULONGLONG,
+    pub State: ::DWORD,
+    pub Protect: ::DWORD,
+    pub Type: ::DWORD,
+    pub __alignment2: ::DWORD,
+}
+pub type PMEMORY_BASIC_INFORMATION64 = *mut MEMORY_BASIC_INFORMATION64;
+
+pub const WOW64_SIZE_OF_80387_REGISTERS: usize = 80;
+pub const WOW64_MAXIMUM_SUPPORTED_EXTENSION: usize = 512;
+#[repr(C)] #[derive(Copy)]
+pub struct WOW64_FLOATING_SAVE_AREA {
+    pub ControlWord: ::DWORD,
+    pub StatusWord: ::DWORD,
+    pub TagWord: ::DWORD,
+    pub ErrorOffset: ::DWORD,
+    pub ErrorSelector: ::DWORD,
+    pub DataOffset: ::DWORD,
+    pub DataSelector: ::DWORD,
+    pub RegisterArea: [::BYTE; WOW64_SIZE_OF_80387_REGISTERS],
+    pub Cr0NpxState: ::DWORD,
+}
+impl Clone for WOW64_FLOATING_SAVE_AREA { fn clone(&self) -> WOW64_FLOATING_SAVE_AREA { *self } }
+pub type PWOW64_FLOATING_SAVE_AREA = *mut WOW64_FLOATING_SAVE_AREA;
+#[repr(C)] #[derive(Copy)]
+pub struct WOW64_CONTEXT {
+    pub ContextFlags: ::DWORD,
+    pub Dr0: ::DWORD,
+    pub Dr1: ::DWORD,
+    pub Dr2: ::DWORD,
+    pub Dr3: ::DWORD,
+    pub Dr4: ::DWORD,
+    pub Dr5: ::DWORD,
+    pub Dr6: ::DWORD,
+    pub Dr7: ::DWORD,
+    pub FloatSave: WOW64_FLOATING_SAVE_AREA,
+    pub SegGs: ::DWORD,
+    pub SegFs: ::DWORD,
+    pub SegEs: ::DWORD,
+    pub SegDs: ::DWORD,
+    pub Edi: ::DWORD,
+    pub Esi: ::DWORD,
+    pub Ebx: ::DWORD,
+    pub Edx: ::DWORD,
+    pub Ecx: ::DWORD,
+    pub Eax: ::DWORD,
+    pub Ebp: ::DWORD,
+    pub Eip: ::DWORD,
+    pub SegCs: ::DWORD,
+    pub EFlags: ::DWORD,
+    pub Esp: ::DWORD,
+    pub SegSs: ::DWORD,
+    pub ExtendedRegisters: [::BYTE; WOW64_MAXIMUM_SUPPORTED_EXTENSION],
+}
+impl Clone for WOW64_CONTEXT { fn clone(&self) -> WOW64_CONTEXT { *self } }
+pub type PWOW64_CONTEXT = *mut WOW64_CONTEXT;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct WOW64_LDT_ENTRY_Bytes {
+    pub BaseMid: ::BYTE,
+    pub Flags1: ::BYTE,
+    pub Flags2: ::BYTE,
+    pub BaseHi: ::BYTE,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct WOW64_LDT_ENTRY_Bits {
+    pub BitFields: ::DWORD,
+}
+BITFIELD!(WOW64_LDT_ENTRY_Bits BitFields: ::DWORD [
+    BaseMid set_BaseMid[0..8],
+    Type set_Type[8..13],
+    Dpl set_Dpl[13..15],
+    Pres set_Pres[15..16],
+    LimitHi set_LimitHi[16..20],
+    Sys set_Sys[20..21],
+    Reserved_0 set_Reserved_0[21..22],
+    Default_Big set_Default_Big[22..23],
+    Granularity set_Granularity[23..24],
+    BaseHi set_BaseHi[24..32],
+]);
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct WOW64_LDT_ENTRY {
+    pub LimitLow: ::WORD,
+    pub BaseLow: ::WORD,
+    pub HighWord: ::DWORD,
+}
+UNION!(WOW64_LDT_ENTRY, HighWord, Bytes, Bytes_mut, WOW64_LDT_ENTRY_Bytes);
+UNION!(WOW64_LDT_ENTRY, HighWord, Bits, Bits_mut, WOW64_LDT_ENTRY_Bits);
+pub type PWOW64_LDT_ENTRY = *mut WOW64_LDT_ENTRY;

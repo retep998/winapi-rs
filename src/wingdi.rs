@@ -1,6 +1,23 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! GDI procedure declarations, constant definitions and macros
+pub const R2_BLACK: ::c_int = 1;
+pub const R2_NOTMERGEPEN: ::c_int = 2;
+pub const R2_MASKNOTPEN: ::c_int = 3;
+pub const R2_NOTCOPYPEN: ::c_int = 4;
+pub const R2_MASKPENNOT: ::c_int = 5;
+pub const R2_NOT: ::c_int = 6;
+pub const R2_XORPEN: ::c_int = 7;
+pub const R2_NOTMASKPEN: ::c_int = 8;
+pub const R2_MASKPEN: ::c_int = 9;
+pub const R2_NOTXORPEN: ::c_int = 10;
+pub const R2_NOP: ::c_int = 11;
+pub const R2_MERGENOTPEN: ::c_int = 12;
+pub const R2_COPYPEN: ::c_int = 13;
+pub const R2_MERGEPENNOT: ::c_int = 14;
+pub const R2_MERGEPEN: ::c_int = 15;
+pub const R2_WHITE: ::c_int = 16;
+pub const R2_LAST: ::c_int = 16;
 //83
 pub const SRCCOPY: ::DWORD = 0x00CC0020;
 pub const SRCPAINT: ::DWORD = 0x00EE0086;
@@ -475,6 +492,16 @@ pub const DEVICE_DEFAULT_FONT: ::c_int = 14;
 pub const DEFAULT_PALETTE: ::c_int = 15;
 pub const SYSTEM_FIXED_FONT: ::c_int = 16;
 pub const DEFAULT_GUI_FONT: ::c_int = 17;
+
+pub const PS_SOLID: ::c_int = 0;
+pub const PS_DASH: ::c_int = 1;
+pub const PS_DOT: ::c_int = 2;
+pub const PS_DASHDOT: ::c_int = 3;
+pub const PS_DASHDOTDOT: ::c_int = 4;
+pub const PS_NULL: ::c_int = 5;
+pub const PS_INSIDEFRAME: ::c_int = 6;
+pub const PS_USERSTYLE: ::c_int = 7;
+pub const PS_ALTERNATE: ::c_int = 8;
 
 pub const TRANSPARENT: ::c_int = 1;
 pub const OPAQUE: ::c_int = 2;

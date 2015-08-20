@@ -543,7 +543,7 @@ extern "system" {
     ) -> BOOL;
     // pub fn SetPixelV();
     pub fn SetPolyFillMode(hdc: HDC, iPolyFillMode: c_int);
-    // pub fn SetROP2();
+    pub fn SetROP2(hdc: HDC, rop2: c_int) -> c_int;
     pub fn SetRectRgn(hrgn: HRGN, left: c_int, top: c_int, right: c_int, bottom: c_int) -> BOOL;
     // pub fn SetRelAbs();
     // pub fn SetStretchBltMode();

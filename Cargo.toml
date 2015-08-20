@@ -1,6 +1,6 @@
 [package]
 name = "winapi"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "Types and constants for WinAPI bindings. See README for list of crates providing function bindings."
 documentation = "https://retep998.github.io/doc/winapi/"
@@ -11,12 +11,14 @@ license = "MIT"
 
 [dev-dependencies]
 advapi32-sys = { version = "*", path = "lib/advapi32-sys" }
+bcrypt-sys = { version = "*", path = "lib/bcrypt-sys" }
 crypt32-sys = { version = "*", path = "lib/crypt32-sys" }
 d3d9-sys = { version = "*", path = "lib/d3d9-sys" }
 dbghelp-sys = { version = "*", path = "lib/dbghelp-sys" }
 dsound-sys = { version = "*", path = "lib/dsound-sys" }
 dwmapi-sys = { version = "*", path = "lib/dwmapi-sys" }
 gdi32-sys = { version = "*", path = "lib/gdi32-sys" }
+httpapi-sys = { version = "*", path = "lib/httpapi-sys" }
 kernel32-sys = { version = "*", path = "lib/kernel32-sys" }
 ktmw32-sys = { version = "*", path = "lib/ktmw32-sys" }
 mpr-sys = { version = "*", path = "lib/mpr-sys" }
@@ -32,4 +34,5 @@ vssapi-sys = { version = "*", path = "lib/vssapi-sys" }
 winhttp-sys = { version = "*", path = "lib/winhttp-sys" }
 winmm-sys = { version = "*", path = "lib/winmm-sys" }
 winspool-sys = { version = "*", path = "lib/winspool-sys" }
+ws2_32-sys = { version = "*", path = "lib/ws2_32-sys" }
 xinput-sys = { version = "*", path = "lib/xinput-sys" }

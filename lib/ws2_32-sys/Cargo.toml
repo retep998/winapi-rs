@@ -1,9 +1,9 @@
 [package]
 name = "ws2_32-sys"
-version = "0.0.1"
+version = "0.1.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to ws2_32."
-documentation = "https://retep998.github.io/doc/ws2_32-sys/"
+documentation = "https://retep998.github.io/doc/ws2_32/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["Windows", "FFI", "WinSDK"]
@@ -12,7 +12,7 @@ build = "build.rs"
 links = "ws2_32"
 
 [lib]
-name = "kernel32"
+name = "ws2_32"
 
 [dependencies]
 winapi = { version = "*", path = "../.." }
