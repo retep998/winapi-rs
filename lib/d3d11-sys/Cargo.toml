@@ -2,14 +2,19 @@
 name = "d3d11-sys"
 version = "0.0.1"
 authors = ["Peter Atashian <retep998@gmail.com>"]
-description = "FFI bindings to d3d11. This crate is a placeholder for the future. If you are interested in this library feel free to get in touch with me: http://www.rustaceans.org/retep998"
-documentation = "https://retep998.github.io/doc/d3d11-sys/"
+description = "FFI bindings to d3d11."
+documentation = "https://retep998.github.io/doc/d3d11/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["Windows", "FFI", "WinSDK"]
+keywords = ["Windows", "FFI", "WinSDK", "DirectX"]
 license = "MIT"
 build = "build.rs"
 links = "d3d11"
 
+[lib]
+name = "d3d11"
+
 [dependencies]
-winapi = "*"
+winapi = { version = "*", path = "../.." }
+[build-dependencies]
+winapi-build = { version = "*", path = "../../build" }
