@@ -52,6 +52,11 @@ fn functions_x64_msvc() {
     bb(LocateXStateFeature);
     bb(SetXStateFeaturesMask);
 }
+#[test] #[cfg(any(target_arch="x86_64", target_arch="arm"))] #[cfg(target_env = "msvc")]
+fn functions_x64_arm_msvc() {
+    bb(RtlCompareMemory);
+    bb(RtlCopyMemory);
+}
 #[test] #[cfg(target_arch="arm")]
 fn functions_arm() {
     bb(RtlAddFunctionTable);
@@ -161,9 +166,6 @@ fn functions_msvc() {
     bb(QueryProtectedPolicy);
     bb(RegisterBadMemoryNotification);
     bb(RemoveDllDirectory);
-    bb(RtlCompareMemory);
-    bb(RtlCopyMemory);
-    bb(RtlPcToFileHeader);
     bb(SetCachedSigningLevel);
     bb(SetComputerNameEx2W);
     bb(SetDefaultDllDirectories);

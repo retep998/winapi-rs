@@ -650,7 +650,7 @@ extern "system" {
     #[cfg(target_arch = "x86_64")]
     pub fn ExecuteUmsThread(UmsThread: PUMS_CONTEXT) -> BOOL;
     pub fn ExitProcess(uExitCode: UINT);
-    pub fn ExitThread(hThread: HANDLE, lpExitCode: LPDWORD) -> BOOL;
+    pub fn ExitThread(dwExitCode: DWORD);
     pub fn ExpandEnvironmentStringsA(lpSrc: LPCSTR, lpDst: LPSTR, nSize: DWORD) -> DWORD;
     pub fn ExpandEnvironmentStringsW(lpSrc: LPCWSTR, lpDst: LPWSTR, nSize: DWORD) -> DWORD;
     pub fn FatalAppExitA(uAction: UINT, lpMessageText: LPCSTR);
@@ -1049,7 +1049,7 @@ extern "system" {
     ) -> BOOL;
     pub fn GetFileMUIPath(
         dwFlags: DWORD, pcwszFilePath: PCWSTR, pwszLanguage: PWSTR, pcchLanguage: PULONG,
-        pwszFileMUIPath: PWSTR, pcchFileMUIPath: PULONG, pululEnumerator: ULONGLONG,
+        pwszFileMUIPath: PWSTR, pcchFileMUIPath: PULONG, pululEnumerator: PULONGLONG,
     ) -> BOOL;
     pub fn GetFileSize(hFile: HANDLE, lpFileSizeHigh: LPDWORD) -> DWORD;
     pub fn GetFileSizeEx(hFile: HANDLE, lpFileSize: PLARGE_INTEGER) -> BOOL;
