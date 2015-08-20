@@ -127,6 +127,12 @@ pub const FLASHW_TRAY: ::DWORD = 0x00000002;
 pub const FLASHW_ALL: ::DWORD = FLASHW_CAPTION | FLASHW_TRAY;
 pub const FLASHW_TIMER: ::DWORD = 0x00000004;
 pub const FLASHW_TIMERNOFG: ::DWORD = 0x0000000C;
+//5499
+pub const MAPVK_VK_TO_VSC: ::UINT = 0;
+pub const MAPVK_VSC_TO_VK: ::UINT = 1;
+pub const MAPVK_VK_TO_CHAR: ::UINT = 2;
+pub const MAPVK_VSC_TO_VK_EX: ::UINT = 3;
+pub const MAPVK_VK_TO_VSC_EX: ::UINT = 4;
 //5741
 pub const KEYEVENTF_EXTENDEDKEY: ::DWORD = 0x0001;
 pub const KEYEVENTF_KEYUP: ::DWORD = 0x0002;
@@ -726,7 +732,7 @@ pub struct MENUITEMINFOA {
     pub dwItemData: ::ULONG_PTR,
     pub dwTypeData: ::LPSTR,
     pub cch: ::UINT,
-    pub hbmpItem: ::HBITMAP,  
+    pub hbmpItem: ::HBITMAP,
 }
 pub type LPMENUITEMINFOA = *mut MENUITEMINFOA;
 pub type LPCMENUITEMINFOA = *const MENUITEMINFOA;
@@ -743,7 +749,7 @@ pub struct MENUITEMINFOW {
     pub dwItemData: ::ULONG_PTR,
     pub dwTypeData: ::LPWSTR,
     pub cch: ::UINT,
-    pub hbmpItem: ::HBITMAP,  
+    pub hbmpItem: ::HBITMAP,
 }
 pub type LPMENUITEMINFOW = *mut MENUITEMINFOW;
 pub type LPCMENUITEMINFOW = *const MENUITEMINFOW;
