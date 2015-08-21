@@ -104,6 +104,10 @@ fn functions() {
     bb(TextOutA);
     bb(TextOutW);
     bb(DPtoLP);
+    bb(GetTextFaceW);
+    bb(GetTextMetricsW);
+    bb(RestoreDC);
+    bb(SaveDC);
     bb(SetBkMode);
     bb(SetMapMode);
     bb(SetTextAlign);
@@ -111,4 +115,5 @@ fn functions() {
     bb(SetViewportOrgEx);
     bb(SetWindowExtEx);
     bb(SetROP2);
+    bb(SetPolyFillMode);
 }

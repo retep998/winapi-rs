@@ -472,7 +472,7 @@ pub const TA_BOTTOM: ::UINT = 8;
 pub const TA_BASELINE: ::UINT = 24;
 
 pub const TA_RTLREADING: ::UINT = 256;
-pub const TA_MASK: ::UINT = (TA_BASELINE+TA_CENTER+TA_UPDATECP+TA_RTLREADING);
+pub const TA_MASK: ::UINT = TA_BASELINE + TA_CENTER + TA_UPDATECP + TA_RTLREADING;
 
 pub const WHITE_BRUSH: ::c_int = 0;
 pub const LTGRAY_BRUSH: ::c_int = 1;
@@ -536,10 +536,10 @@ pub const CLIP_DEFAULT_PRECIS: ::DWORD = 0;
 pub const CLIP_CHARACTER_PRECIS: ::DWORD = 1;
 pub const CLIP_STROKE_PRECIS: ::DWORD = 2;
 pub const CLIP_MASK: ::DWORD = 0xf;
-pub const CLIP_LH_ANGLES: ::DWORD = (1<<4);
-pub const CLIP_TT_ALWAYS: ::DWORD = (2<<4);
-pub const CLIP_DFA_DISABLE: ::DWORD = (4<<4);
-pub const CLIP_EMBEDDED: ::DWORD = (8<<4);
+pub const CLIP_LH_ANGLES: ::DWORD = 1 << 4;
+pub const CLIP_TT_ALWAYS: ::DWORD = 2 << 4;
+pub const CLIP_DFA_DISABLE: ::DWORD = 4 << 4;
+pub const CLIP_EMBEDDED: ::DWORD = 8 << 4;
 
 pub const DEFAULT_QUALITY: ::DWORD = 0;
 pub const DRAFT_QUALITY: ::DWORD = 1;
