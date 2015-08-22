@@ -11,5 +11,10 @@ license = "MIT"
 build = "build.rs"
 links = "d2d1"
 
+[lib]
+name = "d2d1"
+
 [dependencies]
-winapi = "*"
+winapi = { version = "*", path = "../.." }
+[build-dependencies]
+winapi-build = { version = "*", path = "../../build" }

@@ -29,13 +29,21 @@ pub use basetsd::*;
 pub use bcrypt::*;
 pub use commctrl::*;
 pub use corsym::*;
+pub use d2d1::*;
+pub use d2dbasetypes::*;
 pub use d3d9::*;
 pub use d3d9caps::*;
 pub use d3d9types::*;
+pub use d3dcommon::*;
 pub use dbghelp::*;
+pub use dcommon::*;
 pub use dpapi::*;
 pub use dsound::*;
 pub use dwmapi::*;
+pub use dwrite::*;
+pub use dxgi::*;
+pub use dxgiformat::*;
+pub use dxgitype::*;
 pub use errhandlingapi::*;
 pub use excpt::*;
 pub use fileapi::*;
@@ -93,6 +101,7 @@ pub use wincred::*;
 pub use wincrypt::*;
 pub use windowsx::*;
 pub use windef::*;
+pub use windowscodecs::*;
 pub use winerror::*;
 pub use wingdi::*;
 pub use winhttp::*;
@@ -175,6 +184,31 @@ macro_rules! RIDL {
             })+
         }
     };
+    (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {
+    }) => {
+        #[repr(C)] #[allow(missing_copy_implementations)]
+        pub struct $vtbl {
+            pub parent: ::$pvtbl
+        }
+        #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
+        pub struct $interface {
+            pub lpVtbl: *const $vtbl
+        }
+        impl ::std::ops::Deref for $interface {
+            type Target = ::$pinterface;
+            #[inline]
+            fn deref(&self) -> &::$pinterface {
+                unsafe { ::std::mem::transmute(self) }
+            }
+        }
+        impl ::std::ops::DerefMut for $interface {
+            #[inline]
+            fn deref_mut(&mut self) -> &mut ::$pinterface {
+                unsafe { ::std::mem::transmute(self) }
+            }
+        }
+        
+    };
     (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident)
         {$(
             fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
@@ -254,13 +288,21 @@ pub mod basetsd;
 pub mod bcrypt;
 pub mod commctrl;
 pub mod corsym;
+pub mod d2d1;
+pub mod d2dbasetypes;
 pub mod d3d9;
 pub mod d3d9caps;
 pub mod d3d9types;
+pub mod d3dcommon;
 pub mod dbghelp;
+pub mod dcommon;
 pub mod dpapi;
 pub mod dsound;
 pub mod dwmapi;
+pub mod dwrite;
+pub mod dxgi;
+pub mod dxgiformat;
+pub mod dxgitype;
 pub mod errhandlingapi;
 pub mod excpt;
 pub mod fileapi;
@@ -317,6 +359,7 @@ pub mod wincon;
 pub mod wincred;
 pub mod wincrypt;
 pub mod windef;
+pub mod windowscodecs;
 pub mod windowsx;
 pub mod winerror;
 pub mod wingdi;

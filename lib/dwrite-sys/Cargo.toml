@@ -11,5 +11,10 @@ license = "MIT"
 build = "build.rs"
 links = "dwrite"
 
+[lib]
+name = "dwrite"
+
 [dependencies]
-winapi = "*"
+winapi = { version = "*", path = "../.." }
+[build-dependencies]
+winapi-build = { version = "*", path = "../../build" }
