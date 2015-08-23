@@ -236,9 +236,10 @@ pub const DESKTOPHORZRES: ::c_int = 118;
 pub const BLTALIGNMENT: ::c_int = 119;
 pub const SHADEBLENDCAPS: ::c_int = 120;
 pub const COLORMGMTCAPS: ::c_int = 121;
-//
+//1906
 pub const DIB_RGB_COLORS: ::UINT = 0;
 pub const DIB_PAL_COLORS: ::UINT = 1;
+pub const CBM_INIT: ::DWORD = 4;
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct RGNDATAHEADER {
