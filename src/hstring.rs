@@ -7,7 +7,7 @@ pub struct HSTRING_HEADER {
     pub Reserved: [::PVOID; 0], // For alignment
     #[cfg(target_arch = "x86_64")]
     pub Reserved2: [::c_char; 24],
-    #[cfg(target_arch = "i686")]
+    #[cfg(target_arch = "x86")]
     pub Reserved2: [::c_char; 20],
 }
 UNION!(HSTRING_HEADER, Reserved2, Reserved1, Reserved1_mut, ::PVOID);
