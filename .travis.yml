@@ -1,16 +1,17 @@
 language: rust
 sudo: false
 script:
-  - cargo build --verbose
-  - cargo test --verbose
-  - cargo doc --verbose
+  - cargo build
+  - cargo package
+  - cargo test
+  - cargo doc
 notifications:
   email: false
   webhooks:
     - https://webhooks.gitter.im/e/295a1e640ebd30d63457
   irc:
     channels:
-      - "irc.fyrechat.net#vana-commits"
+      - "irc.mozilla.org#winapi"
     template:
       - "%{repository_slug}/%{branch} (%{commit} - %{author}): %{message}"
     skip_join: true

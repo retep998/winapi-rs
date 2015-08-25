@@ -163,8 +163,8 @@ pub const TTN_LAST: ::UINT = 0 - 549;
 pub const TCN_FIRST: ::UINT = 0 - 550;
 pub const TCN_LAST: ::UINT = 0 - 580;
 
-pub const CDN_FIRST: ::UINT = 0 - 601;
-pub const CDN_LAST: ::UINT = 0 - 699;
+// pub const CDN_FIRST: ::UINT = 0 - 601;
+// pub const CDN_LAST: ::UINT = 0 - 699;
 
 pub const TBN_FIRST: ::UINT = 0 - 700;
 pub const TBN_LAST: ::UINT = 0 - 720;
