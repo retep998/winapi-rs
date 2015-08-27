@@ -1,4 +1,4 @@
-// Copyright © 2015, Peter Atashian
+// Copyright © 2015, Alex Daniel Jones
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to hid.
 #![cfg(windows)]
