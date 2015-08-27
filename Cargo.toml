@@ -24,6 +24,7 @@ dwmapi-sys = { version = "*", path = "lib/dwmapi-sys" }
 dwrite-sys = { version = "*", path = "lib/dwrite-sys" }
 dxgi-sys = { version = "*", path = "lib/dxgi-sys" }
 gdi32-sys = { version = "*", path = "lib/gdi32-sys" }
+hid-sys = { version = "*", path = "lib/hid-sys" }
 httpapi-sys = { version = "*", path = "lib/httpapi-sys" }
 kernel32-sys = { version = "*", path = "lib/kernel32-sys" }
 ktmw32-sys = { version = "*", path = "lib/ktmw32-sys" }
