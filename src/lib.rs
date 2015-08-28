@@ -51,6 +51,10 @@ pub use fileapi::*;
 pub use gl::*;
 pub use guiddef::*;
 pub use heapapi::*;
+pub use hidclass::*;
+pub use hidpi::*;
+pub use hidsdi::*;
+pub use hidusage::*;
 pub use hstring::*;
 pub use http::*;
 pub use inaddr::*;
@@ -212,7 +216,7 @@ macro_rules! RIDL {
                 unsafe { ::std::mem::transmute(self) }
             }
         }
-        
+
     };
     (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident)
         {$(
@@ -315,6 +319,10 @@ pub mod fileapi;
 pub mod gl;
 pub mod guiddef;
 pub mod heapapi;
+pub mod hidclass;
+pub mod hidpi;
+pub mod hidsdi;
+pub mod hidusage;
 pub mod hstring;
 pub mod http;
 pub mod inaddr;
