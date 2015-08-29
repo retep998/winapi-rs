@@ -96,6 +96,15 @@ pub const MMSYSERR_VALNOTFOUND: MMRESULT = MMSYSERR_BASE + 19;
 pub const MMSYSERR_NODRIVERCB: MMRESULT = MMSYSERR_BASE + 20;
 pub const MMSYSERR_MOREDATA: MMRESULT = MMSYSERR_BASE + 21;
 pub const MMSYSERR_LASTERROR: MMRESULT = MMSYSERR_BASE + 21;
+pub const MIDIERR_UNPREPARED: MMRESULT = MIDIERR_BASE + 0;
+pub const MIDIERR_STILLPLAYING: MMRESULT = MIDIERR_BASE + 1;
+pub const MIDIERR_NOMAP: MMRESULT = MIDIERR_BASE + 2;
+pub const MIDIERR_NOTREADY: MMRESULT = MIDIERR_BASE + 3;
+pub const MIDIERR_NODEVICE: MMRESULT = MIDIERR_BASE + 4;
+pub const MIDIERR_INVALIDSETUP: MMRESULT = MIDIERR_BASE + 5;
+pub const MIDIERR_BADOPENMODE: MMRESULT = MIDIERR_BASE + 6;
+pub const MIDIERR_DONT_CONTINUE: MMRESULT = MIDIERR_BASE + 7;
+pub const MIDIERR_LASTERROR: MMRESULT = MIDIERR_BASE + 7;
 pub const CALLBACK_TYPEMASK: ::DWORD = 0x00070000;
 pub const CALLBACK_NULL: ::DWORD = 0x00000000;
 pub const CALLBACK_WINDOW: ::DWORD = 0x00010000;
@@ -210,3 +219,52 @@ pub struct TIMECAPS {
 pub type PTIMECAPS = *mut TIMECAPS;
 pub type NPTIMECAPS = *mut TIMECAPS;
 pub type LPTIMECAPS = *mut TIMECAPS;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MIDIHDR {
+    pub lpData: ::LPSTR,
+    pub dwBufferLength: ::DWORD,
+    pub dwBytesRecorded: ::DWORD,
+    pub dwUser: ::DWORD_PTR,
+    pub dwFlags: ::DWORD,
+    pub lpNext: *mut MIDIHDR,
+    pub reserved: ::DWORD_PTR,
+    pub dwOffset: ::DWORD,
+    pub dwReserved: [::DWORD_PTR; 4],
+}
+pub type PMIDIHDR = *mut MIDIHDR;
+pub type NPMIDIHDR = *mut MIDIHDR;
+pub type LPMIDIHDR = *mut MIDIHDR;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MIDIINCAPSW {
+    pub wMid: ::WORD,
+    pub wPid: ::WORD,
+    pub vDriverVersion: MMVERSION,
+    pub szPname: [::WCHAR; 32],
+    pub dwSupport: ::DWORD,
+}
+pub type PMIDIINCAPSW = *mut MIDIINCAPSW;
+pub type NPMIDIINCAPSW = *mut MIDIINCAPSW;
+pub type LPMIDIINCAPSW = *mut MIDIINCAPSW;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MIDIOUTCAPSW {
+    pub wMid: ::WORD,
+    pub wPid: ::WORD,
+    pub vDriverVersion: ::MMVERSION,
+    pub szPname: [::WCHAR; 32],
+    pub wTechnology: ::WORD,
+    pub wVoices: ::WORD,
+    pub wNotes: ::WORD,
+    pub wChannelMask: ::WORD,
+    pub dwSupport: ::DWORD,
+}
+pub type PMIDIOUTCAPSW = *mut MIDIOUTCAPSW;
+pub type NPMIDIOUTCAPSW = *mut MIDIOUTCAPSW;
+pub type LPMIDIOUTCAPSW = *mut MIDIOUTCAPSW;
+DECLARE_HANDLE!(HMIDIIN, HMIDIIN__);
+DECLARE_HANDLE!(HMIDIOUT, HMIDIOUT__);
+pub type LPHMIDIIN = *mut HMIDIIN;
+pub type LPHMIDIOUT = *mut HMIDIOUT;
+DECLARE_HANDLE!(HMIDISTRM, HMIDISTRM__);
+DECLARE_HANDLE!(HMIDI, HMIDI__);
+pub type LPHMIDISTRM = *mut HMIDISTRM;
+pub type LPHMIDI = *mut HMIDI;
