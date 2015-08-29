@@ -621,8 +621,11 @@ pub type LPRAWHID = *mut RAWHID;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct RAWINPUT {
     pub header: RAWINPUTHEADER,
-    pub mouse: RAWMOUSE, // FIXME untagged union
+    pub mouse: RAWMOUSE,
 }
+UNION!(RAWINPUT, mouse, mouse, mouse_mut, RAWMOUSE);
+UNION!(RAWINPUT, mouse, keyboard, keyboard_mut, RAWKEYBOARD);
+UNION!(RAWINPUT, mouse, hid, hid_mut, RAWHID);
 #[test]
 fn test_RAWINPUT() {
     use std::mem::{size_of, align_of};
@@ -671,8 +674,11 @@ pub type PRID_DEVICE_INFO_HID = *mut RID_DEVICE_INFO_HID;
 pub struct RID_DEVICE_INFO {
     pub cbSize: ::DWORD,
     pub dwType: ::DWORD,
-    pub keyboard: RID_DEVICE_INFO_KEYBOARD, // FIXME untagged union
+    pub keyboard: RID_DEVICE_INFO_KEYBOARD,
 }
+UNION!(RID_DEVICE_INFO, keyboard, mouse, mouse_mut, RID_DEVICE_INFO_MOUSE);
+UNION!(RID_DEVICE_INFO, keyboard, keyboard, keyboard_mut, RID_DEVICE_INFO_KEYBOARD);
+UNION!(RID_DEVICE_INFO, keyboard, hid, hid_mut, RID_DEVICE_INFO_HID);
 #[test]
 fn test_RID_DEVICE_INFO() {
     use std::mem::{size_of, align_of};

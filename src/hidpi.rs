@@ -34,12 +34,14 @@ pub struct HIDP_BUTTON_CAPS {
     pub IsAbsolute: ::BOOLEAN,
 
     pub Reserved: [::ULONG; 10],
-    pub Range: RANGE_STRUCT,
+    pub S_un: [u8; 16],
 }
+UNION!(HIDP_BUTTON_CAPS, S_un, Range, Range_mut, HIDP_RANGE_STRUCT);
+UNION!(HIDP_BUTTON_CAPS, S_un, NotRange, NotRange_mut, HIDP_NOTRANGE_STRUCT);
 pub type PHIDP_BUTTON_CAPS = *mut HIDP_BUTTON_CAPS;
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RANGE_STRUCT {
+pub struct HIDP_RANGE_STRUCT {
     pub UsageMin: ::USAGE,
     pub UsageMax: ::USAGE,
     pub StringMin: ::USHORT,
@@ -48,6 +50,18 @@ pub struct RANGE_STRUCT {
     pub DesignatorMax: ::USHORT,
     pub DataIndexMin: ::USHORT,
     pub DataIndexMax: ::USHORT,
+}
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct HIDP_NOTRANGE_STRUCT {
+    pub Usage: ::USAGE,
+    pub Reserved1: ::USAGE,
+    pub StringIndex: ::USHORT,
+    pub Reserved2: ::USHORT,
+    pub DesignatorIndex: ::USHORT,
+    pub Reserved3: ::USHORT,
+    pub DataIndex: ::USHORT,
+    pub Reserved4: ::USHORT,
 }
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
@@ -82,8 +96,10 @@ pub struct HIDP_VALUE_CAPS {
     pub PhysicalMin: ::LONG,
     pub PhysicalMax: ::LONG,
 
-    pub Range: RANGE_STRUCT,
+    pub S_un: [u8; 16],
 }
+UNION!(HIDP_VALUE_CAPS, S_un, Range, Range_mut, HIDP_RANGE_STRUCT);
+UNION!(HIDP_VALUE_CAPS, S_un, NotRange, NotRange_mut, HIDP_NOTRANGE_STRUCT);
 pub type PHIDP_VALUE_CAPS = *mut HIDP_VALUE_CAPS;
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
@@ -94,12 +110,16 @@ pub struct HIDP_LINK_COLLECTION_NODE {
     pub NumberOfChildren: ::USHORT,
     pub NextSibling: ::USHORT,
     pub FirstChild: ::USHORT,
-    pub CollectionType: ::ULONG,
-    pub IsAlias: ::ULONG,
-    pub Reserved: ::ULONG,
+    pub bit_fields: ::ULONG,
     pub UserContext: ::PVOID,
 }
+BITFIELD!(HIDP_LINK_COLLECTION_NODE bit_fields: ::ULONG [
+    CollectionType set_CollectionType[0..8],
+    IsAlias set_IsAlias[8..9],
+    Reserved set_Reserved[9..32],
+]);
 pub type PHIDP_LINK_COLLECTION_NODE = *mut HIDP_LINK_COLLECTION_NODE;
+
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HIDP_CAPS {
@@ -130,8 +150,10 @@ pub type PHIDP_CAPS = *mut HIDP_CAPS;
 pub struct HIDP_DATA {
   pub DataIndex: ::USHORT,
   pub Reserved: ::USHORT,
-  pub RawValue: ::ULONG,
+  pub S_un: [u8; 4],
 }
+UNION!(HIDP_DATA, S_un, RawValue, RawValue_mut, ::ULONG);
+UNION!(HIDP_DATA, S_un, On, On_mut, ::BOOLEAN);
 pub type PHIDP_DATA = *mut HIDP_DATA;
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
