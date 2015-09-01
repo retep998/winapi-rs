@@ -1,6 +1,12 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
+pub const DEVICE_STATE_ACTIVE: ::DWORD = 0x00000001;
+pub const DEVICE_STATE_DISABLED: ::DWORD = 0x00000002;
+pub const DEVICE_STATE_NOTPRESENT: ::DWORD = 0x00000004;
+pub const DEVICE_STATE_UNPLUGGED: ::DWORD = 0x00000008;
+pub const DEVICE_STATEMASK_ALL: ::DWORD = 0x0000000F;
+
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum EDataFlow {
     eRender,
@@ -50,7 +56,12 @@ interface IMMDeviceEnumerator(IMMDeviceEnumeratorVtbl): IUnknown(IUnknownVtbl) {
     ) -> ::HRESULT
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMMDeviceCollection;
+RIDL!(
+interface IMMDeviceCollection(IMMDeviceCollectionVtbl): IUnknown(IUnknownVtbl) {
+    fn GetCount(&mut self, pcDevices: *const ::UINT) -> ::HRESULT,
+    fn Item(&mut self, nDevice: ::UINT, ppDevice: *mut *mut IMMDevice) -> ::HRESULT
+}
+);
+
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IMMNotificationClient;
