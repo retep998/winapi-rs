@@ -102,4 +102,18 @@ fn functions() {
     bb(SwapBuffers);
     bb(TextOutA);
     bb(TextOutW);
+    bb(DPtoLP);
+    bb(SetPixel);
+    bb(GetTextFaceW);
+    bb(GetTextMetricsW);
+    bb(RestoreDC);
+    bb(SaveDC);
+    bb(SetBkMode);
+    bb(SetMapMode);
+    bb(SetTextAlign);
+    bb(SetViewportExtEx);
+    bb(SetViewportOrgEx);
+    bb(SetWindowExtEx);
+    bb(SetROP2);
+    bb(SetPolyFillMode);
 }
