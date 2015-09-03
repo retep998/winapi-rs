@@ -133,10 +133,10 @@ pub struct DXGI_SWAP_CHAIN_DESC1 {
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC {
-    pub RefreshRate: :: DXGI_RATIONAL,
-    pub ScanlineOrdering: :: DXGI_MODE_SCANLINE_ORDER,
-    pub Scaling: :: DXGI_MODE_SCALING,
-    pub Windowed: :: BOOL,
+    pub RefreshRate: ::DXGI_RATIONAL,
+    pub ScanlineOrdering: ::DXGI_MODE_SCANLINE_ORDER,
+    pub Scaling: ::DXGI_MODE_SCALING,
+    pub Windowed: ::BOOL,
 }
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
@@ -396,9 +396,9 @@ impl Clone for DXGI_ADAPTER_DESC1 {
 
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum DXGI_SCALING {
-  DXGI_SCALING_STRETCH,
-  DXGI_SCALING_NONE,
-  DXGI_SCALING_ASPECT_RATIO_STRETCH,
+    DXGI_SCALING_STRETCH,
+    DXGI_SCALING_NONE,
+    DXGI_SCALING_ASPECT_RATIO_STRETCH,
 }
 
 pub use self::DXGI_SCALING::*;
