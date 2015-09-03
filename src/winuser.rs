@@ -829,68 +829,63 @@ pub struct HELPINFO {
 pub type LPHELPINFO = *mut HELPINFO;
 
 //RedrawWindow() flags
-pub const RDW_INVALIDATE        : ::UINT=0x0001;
-pub const RDW_INTERNALPAINT     : ::UINT=0x0002;
-pub const RDW_ERASE             : ::UINT=0x0004;
-
-pub const RDW_VALIDATE          : ::UINT=0x0008;
-pub const RDW_NOINTERNALPAINT   : ::UINT=0x0010;
-pub const RDW_NOERASE           : ::UINT=0x0020;
-
-pub const RDW_NOCHILDREN        : ::UINT=0x0040;
-pub const RDW_ALLCHILDREN       : ::UINT=0x0080;
-
-pub const RDW_UPDATENOW         : ::UINT=0x0100;
-pub const RDW_ERASENOW          : ::UINT=0x0200;
-
-pub const RDW_FRAME             : ::UINT=0x0400;
-pub const RDW_NOFRAME           : ::UINT=0x0800;
-
+pub const RDW_INVALIDATE: ::UINT=0x0001;
+pub const RDW_INTERNALPAINT: ::UINT=0x0002;
+pub const RDW_ERASE: ::UINT=0x0004;
+pub const RDW_VALIDATE: ::UINT=0x0008;
+pub const RDW_NOINTERNALPAINT: ::UINT=0x0010;
+pub const RDW_NOERASE: ::UINT=0x0020;
+pub const RDW_NOCHILDREN: ::UINT=0x0040;
+pub const RDW_ALLCHILDREN: ::UINT=0x0080;
+pub const RDW_UPDATENOW: ::UINT=0x0100;
+pub const RDW_ERASENOW: ::UINT=0x0200;
+pub const RDW_FRAME: ::UINT=0x0400;
+pub const RDW_NOFRAME: ::UINT=0x0800;
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MEASUREITEMSTRUCT {
-    pub CtlType         : ::UINT,
-    pub CtlID           : ::UINT,
-    pub itemID          : ::UINT,
-    pub itemWidth       : ::UINT,
-    pub itemHeight      : ::UINT,
-    pub itemData        : ::ULONG_PTR,
+    pub CtlType: ::UINT,
+    pub CtlID: ::UINT,
+    pub itemID: ::UINT,
+    pub itemWidth: ::UINT,
+    pub itemHeight: ::UINT,
+    pub itemData: ::ULONG_PTR,
 }
 pub type LPMEASUREITEMSTRUCT = *mut MEASUREITEMSTRUCT;
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DRAWITEMSTRUCT {
-    pub CtlType         : ::UINT,
-    pub CtlID           : ::UINT,
-    pub itemID          : ::UINT,
-    pub itemAction      : ::UINT,
-    pub itemState       : ::UINT,
-    pub hwndItem        : ::HWND,
-    pub hDC             : ::HDC,
-    pub rcItem          : ::RECT,
-    pub itemData        : ::ULONG_PTR,
+    pub CtlType: ::UINT,
+    pub CtlID: ::UINT,
+    pub itemID: ::UINT,
+    pub itemAction: ::UINT,
+    pub itemState: ::UINT,
+    pub hwndItem: ::HWND,
+    pub hDC: ::HDC,
+    pub rcItem: ::RECT,
+    pub itemData: ::ULONG_PTR,
 }
 pub type LPDRAWITEMSTRUCT = *mut DRAWITEMSTRUCT;
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DELETEITEMSTRUCT {
-    pub CtlType         : ::UINT,
-    pub CtlID           : ::UINT,
-    pub itemID          : ::UINT,
-    pub hwndItem        : ::HWND,
-    pub itemData        : ::ULONG_PTR,
+    pub CtlType: ::UINT,
+    pub CtlID: ::UINT,
+    pub itemID: ::UINT,
+    pub hwndItem: ::HWND,
+    pub itemData: ::ULONG_PTR,
 }
 pub type LPDELETEITEMSTRUCT = *mut DELETEITEMSTRUCT;
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct COMPAREITEMSTRUCT {
-    pub CtlType         : ::UINT,
-    pub CtlID           : ::UINT,
-    pub hwndItem        : ::HWND,
-    pub itemID1         : ::UINT,
-    pub itemData1       : ::ULONG_PTR,
-    pub itemID2         : ::UINT,
-    pub itemData2       : ::ULONG_PTR,
-    pub dwLocaleId      : ::DWORD,
+    pub CtlType: ::UINT,
+    pub CtlID: ::UINT,
+    pub hwndItem: ::HWND,
+    pub itemID1: ::UINT,
+    pub itemData1: ::ULONG_PTR,
+    pub itemID2: ::UINT,
+    pub itemData2: ::ULONG_PTR,
+    pub dwLocaleId: ::DWORD,
 }
 pub type LPCOMPAREITEMSTRUCT = *mut COMPAREITEMSTRUCT;
