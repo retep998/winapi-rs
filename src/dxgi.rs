@@ -294,6 +294,38 @@ interface IDXGISwapChain2(IDXGISwapChain2Vtbl): IDXGISwapChain1(IDXGISwapChain1V
     fn GetMatrixTransform(&mut self, pMatrix: *mut DXGI_MATRIX_3X2_F) -> ::HRESULT
 });
 
+#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
+pub enum DXGI_COLOR_SPACE_TYPE {
+    DXGI_COLOR_SPACE_RGB_FULL_G22_NONE_P709,
+    DXGI_COLOR_SPACE_RGB_FULL_G10_NONE_P709,
+    DXGI_COLOR_SPACE_RGB_STUDIO_G22_NONE_P709,
+    DXGI_COLOR_SPACE_RGB_STUDIO_G22_NONE_P2020,
+    DXGI_COLOR_SPACE_RESERVED,
+    DXGI_COLOR_SPACE_YCBCR_FULL_G22_NONE_P709_X601,
+    DXGI_COLOR_SPACE_YCBCR_STUDIO_G22_LEFT_P601,
+    DXGI_COLOR_SPACE_YCBCR_FULL_G22_LEFT_P601,
+    DXGI_COLOR_SPACE_YCBCR_STUDIO_G22_LEFT_P709,
+    DXGI_COLOR_SPACE_YCBCR_FULL_G22_LEFT_P709,
+    DXGI_COLOR_SPACE_YCBCR_STUDIO_G22_LEFT_P2020,
+    DXGI_COLOR_SPACE_YCBCR_FULL_G22_LEFT_P2020,
+}
+
+pub use self::DXGI_COLOR_SPACE_TYPE::*;
+
+RIDL!(
+interface IDXGISwapChain3(IDXGISwapChain3Vtbl): IDXGISwapChain2(IDXGISwapChain2Vtbl) {
+    fn GetCurrentBackBufferIndex(&mut self) -> ::UINT,
+    fn CheckColorSpaceSupport(
+        &mut self, ColorSpace: ::DXGI_COLOR_SPACE_TYPE, pColorSpaceSupport: *mut ::UINT
+    ) -> ::HRESULT,
+    fn SetColorSpace1(&mut self, ColorSpace: ::DXGI_COLOR_SPACE_TYPE) -> ::HRESULT,
+    fn ResizeBuffers1(
+        &mut self, BufferCount: ::UINT, Width: ::UINT, Height: ::UINT, Format: ::DXGI_FORMAT,
+        SwapChainFlags: ::UINT, pCreationNodeMask: *const ::UINT, 
+        ppPresentQueue: *const *mut ::IUnknown
+    ) -> ::HRESULT
+});
+
 RIDL!(
 interface IDXGIFactory(IDXGIFactoryVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn EnumAdapters(&mut self, Adapter: ::UINT, ppAdapter: *mut *mut IDXGIAdapter) -> ::HRESULT,
