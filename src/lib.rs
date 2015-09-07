@@ -63,6 +63,7 @@ pub use http::*;
 pub use imm::*;
 pub use inaddr::*;
 pub use inspectable::*;
+pub use ksmedia::*;
 pub use libloaderapi::*;
 pub use lmcons::*;
 pub use memoryapi::*;
@@ -338,6 +339,7 @@ pub mod http;
 pub mod imm;
 pub mod inaddr;
 pub mod inspectable;
+pub mod ksmedia;
 pub mod libloaderapi;
 pub mod lmcons;
 pub mod memoryapi;
@@ -938,6 +940,14 @@ pub struct WAVEFORMATEX {
     pub nBlockAlign: WORD,
     pub wBitsPerSample: WORD,
     pub cbSize: WORD,
+}
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct WAVEFORMATEXTENSIBLE {
+    pub Format: WAVEFORMATEX,
+    pub Samples: WORD,
+    pub dwChannelMask: DWORD,
+    pub SubFormat: GUID,
 }
 
 //-------------------------------------------------------------------------------------------------
