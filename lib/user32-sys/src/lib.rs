@@ -94,7 +94,7 @@ extern "system" {
     pub fn CharUpperBuffA(lpsz: LPSTR, cchLength: DWORD) -> DWORD;
     pub fn CharUpperBuffW(lpsz: LPWSTR, cchLength: DWORD) -> DWORD;
     pub fn CharUpperW(lpsz: LPWSTR) -> LPWSTR;
-    pub fn CheckDlgButton(hDlg: HWND,nIDButton: c_int,uCheck: UINT) -> BOOL;
+    pub fn CheckDlgButton(hDlg: HWND, nIDButton: c_int, uCheck: UINT) -> BOOL;
     pub fn CheckMenuItem(hMenu: HMENU, uIDCheckItem: UINT, uCheck: UINT) -> DWORD;
     pub fn CheckMenuRadioItem(
         hMenu: HMENU, first: UINT, last: UINT, check: UINT, flags: UINT,
@@ -176,7 +176,7 @@ extern "system" {
         nWidth: c_int, nHeight: c_int, hWndParent: HWND, hInstance: HINSTANCE, lParam: LPARAM,
     ) -> HWND;
     pub fn CreateMenu() -> HMENU;
-    pub fn CreatePopupMenu() ->HMENU;
+    pub fn CreatePopupMenu() -> HMENU;
     pub fn CreateWindowExA(
         dwExStyle: DWORD, lpClassName: LPCSTR, lpWindowName: LPCSTR, dwStyle: DWORD, x: c_int,
         y: c_int, nWidth: c_int, nHeight: c_int, hWndParent: HWND, hMenu: HMENU,
@@ -444,7 +444,7 @@ extern "system" {
     // pub fn GetCursorInfo();
     pub fn GetCursorPos(lpPoint: LPPOINT) -> BOOL;
     pub fn GetDC(hWnd: HWND) -> HDC;
-    pub fn GetDCEx(hWnd: HWND,hrgnClip: HRGN,flags: DWORD) -> HDC;
+    pub fn GetDCEx(hWnd: HWND, hrgnClip: HRGN, flags: DWORD) -> HDC;
     pub fn GetDesktopWindow() -> HWND;
     pub fn GetDialogBaseUnits() -> LONG;
     // pub fn GetDisplayAutoRotationPreferences();
@@ -510,8 +510,8 @@ extern "system" {
     pub fn GetMonitorInfoA(hMonitor: HMONITOR, lpmi: LPMONITORINFO) -> BOOL;
     pub fn GetMonitorInfoW(hMonitor: HMONITOR, lpmi: LPMONITORINFO) -> BOOL;
     // pub fn GetMouseMovePointsEx();
-    pub fn GetNextDlgGroupItem(hDlg: HWND,hCtl: HWND,bPrevious: BOOL) -> HWND;
-    pub fn GetNextDlgTabItem(hDlg: HWND,hCtl: HWND,bPrevious: BOOL) -> HWND;
+    pub fn GetNextDlgGroupItem(hDlg: HWND, hCtl: HWND, bPrevious: BOOL) -> HWND;
+    pub fn GetNextDlgTabItem(hDlg: HWND, hCtl: HWND, bPrevious: BOOL) -> HWND;
     pub fn GetOpenClipboardWindow() -> HWND;
     pub fn GetParent(hWnd: HWND) -> HWND;
     pub fn GetPhysicalCursorPos(lpPoint: LPPOINT) -> BOOL;
@@ -559,14 +559,14 @@ extern "system" {
         pRawInputDevices: PRAWINPUTDEVICE, puiNumDevices: PUINT, cbSize: UINT,
     ) -> UINT;
     // pub fn GetScrollBarInfo();
-    pub fn GetScrollInfo(hwnd: HWND,nBar: c_int,lpsi: LPSCROLLINFO) -> BOOL;
+    pub fn GetScrollInfo(hwnd: HWND, nBar: c_int, lpsi: LPSCROLLINFO) -> BOOL;
     pub fn GetScrollPos(hWnd: HWND, nBar: c_int) -> c_int;
     pub fn GetScrollRange(hWnd: HWND, nBar: c_int, lpMinPos: LPINT, lpMaxPos: LPINT) -> BOOL;
     pub fn GetShellWindow() -> HWND;
     // pub fn GetSubMenu();
     pub fn GetSysColor(nIndex: c_int) -> DWORD;
     pub fn GetSysColorBrush(nIndex: c_int) -> HBRUSH;
-    pub fn GetSystemMenu(hWnd: HWND,bRevert: BOOL) -> HMENU;
+    pub fn GetSystemMenu(hWnd: HWND, bRevert: BOOL) -> HMENU;
     pub fn GetSystemMetrics(nIndex: c_int) -> c_int;
     // pub fn GetTabbedTextExtentA();
     // pub fn GetTabbedTextExtentW();
@@ -575,8 +575,8 @@ extern "system" {
     pub fn GetTopWindow(hWnd: HWND) -> HWND;
     // pub fn GetTouchInputInfo();
     // pub fn GetUnpredictedMessagePos();
-    pub fn GetUpdateRect(hWnd: HWND,lpRect: LPRECT,bErase: BOOL) -> BOOL;
-    pub fn GetUpdateRgn(hWnd:HWND,hRgn:HRGN,bErase:BOOL) -> c_int;
+    pub fn GetUpdateRect(hWnd: HWND, lpRect: LPRECT, bErase: BOOL) -> BOOL;
+    pub fn GetUpdateRgn(hWnd: HWND, hRgn: HRGN, bErase: BOOL) -> c_int;
     pub fn GetUpdatedClipboardFormats(
         lpuiFormats: PUINT, cFormats: UINT, pcFormatsOUT: PUINT,
     ) -> BOOL;
@@ -611,7 +611,7 @@ extern "system" {
     pub fn GetWindowTextLengthW(hWnd: HWND) -> c_int;
     pub fn GetWindowTextW(hWnd: HWND, lpString: LPWSTR, nMaxCount: c_int) -> c_int;
     pub fn GetWindowThreadProcessId(hWnd: HWND, lpdwProcessId: LPDWORD) -> DWORD;
-    pub fn GetWindowWord(hWnd: HWND,nIndex: c_int) -> WORD;
+    pub fn GetWindowWord(hWnd: HWND, nIndex: c_int) -> WORD;
     pub fn GrayStringA(
         hDC: HDC, hBrush: HBRUSH, lpOutputFunc: GRAYSTRINGPROC, lpData: LPARAM, nCount: c_int,
         X: c_int, Y: c_int, nWidth: c_int, nHeight: c_int,
@@ -621,7 +621,7 @@ extern "system" {
         X: c_int, Y: c_int, nWidth: c_int, nHeight: c_int,
     ) -> BOOL;
     pub fn HideCaret(hWnd: HWND) -> BOOL;
-    pub fn HiliteMenuItem(hWnd: HWND,hMenu: HMENU,uIDHiliteItem: UINT,uHilite:UINT) -> BOOL;
+    pub fn HiliteMenuItem(hWnd: HWND, hMenu: HMENU, uIDHiliteItem: UINT, uHilite: UINT) -> BOOL;
     // pub fn IMPGetIMEA();
     // pub fn IMPGetIMEW();
     // pub fn IMPQueryIMEA();
@@ -943,7 +943,7 @@ extern "system" {
     pub fn SetPropW(hWnd: HWND, lpString: LPCWSTR, hData: HANDLE) -> BOOL;
     pub fn SetRect(lprc: LPRECT, xLeft: c_int, yTop: c_int, xRight: c_int, yBottom: c_int) -> BOOL;
     pub fn SetRectEmpty(lprc: LPRECT) -> BOOL;
-    pub fn SetScrollInfo(hwnd: HWND,nBar: c_int,lpsi: LPCSCROLLINFO,redraw: BOOL) -> c_int;
+    pub fn SetScrollInfo(hwnd: HWND, nBar: c_int, lpsi: LPCSCROLLINFO, redraw: BOOL) -> c_int;
 	pub fn SetScrollPos(hWnd: HWND, nBar: c_int, nPos: c_int, bRedraw: BOOL) -> c_int;
     pub fn SetScrollRange(
         hWnd: HWND, nBar: c_int, nMinPos: c_int, nMaxPos: c_int, bRedraw: BOOL,
@@ -964,7 +964,7 @@ extern "system" {
         eventMin: DWORD, eventMax: DWORD, hmodWinEventProc: HMODULE, pfnWinEventProc: WINEVENTPROC,
         idProcess: DWORD, idThread: DWORD, dwFlags: DWORD,
     ) -> HWINEVENTHOOK;
-    pub fn SetWindowContextHelpId(h: HWND,d: DWORD) -> BOOL;
+    pub fn SetWindowContextHelpId(h: HWND, d: DWORD) -> BOOL;
     // pub fn SetWindowDisplayAffinity();
     // pub fn SetWindowFeedbackSetting();
     pub fn SetWindowLongA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> LONG;
@@ -973,7 +973,7 @@ extern "system" {
     #[cfg(target_arch = "x86_64")]
     pub fn SetWindowLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> LONG_PTR;
     pub fn SetWindowLongW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> LONG;
-    pub fn SetWindowPlacement(hWnd: HWND,lpwndpl: *const WINDOWPLACEMENT) -> BOOL;
+    pub fn SetWindowPlacement(hWnd: HWND, lpwndpl: *const WINDOWPLACEMENT) -> BOOL;
     pub fn SetWindowPos(
         hWnd: HWND, hWndInsertAfter: HWND, X: c_int, Y: c_int, cx: c_int, cy: c_int, uFlags: UINT,
     ) -> BOOL;
@@ -991,8 +991,8 @@ extern "system" {
     // pub fn SetWindowsHookW();
     pub fn ShowCaret(hWnd: HWND) -> BOOL;
     pub fn ShowCursor(bShow: BOOL) -> c_int;
-    pub fn ShowOwnedPopups(hWnd: HWND,fShow: BOOL) -> BOOL;
-    pub fn ShowScrollBar(hWnd: HWND,wBar: c_int,bShow: BOOL) -> BOOL;
+    pub fn ShowOwnedPopups(hWnd: HWND, fShow: BOOL) -> BOOL;
+    pub fn ShowScrollBar(hWnd: HWND, wBar: c_int, bShow: BOOL) -> BOOL;
     // pub fn ShowSystemCursor();
     pub fn ShowWindow(hWnd: HWND, nCmdShow: c_int) -> BOOL;
     pub fn ShowWindowAsync(hWnd: HWND, nCmdShow: c_int) -> BOOL;
