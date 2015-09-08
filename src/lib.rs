@@ -931,7 +931,7 @@ pub type REFERENCE_TIME = LONGLONG;
 //-------------------------------------------------------------------------------------------------
 // mmreg.h
 //-------------------------------------------------------------------------------------------------
-#[repr(C)] #[derive(Clone, Copy, Debug)]
+#[repr(C, packed)] #[derive(Clone, Copy, Debug)]
 pub struct WAVEFORMATEX {
     pub wFormatTag: WORD,
     pub nChannels: WORD,
@@ -942,7 +942,7 @@ pub struct WAVEFORMATEX {
     pub cbSize: WORD,
 }
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
+#[repr(C, packed)] #[derive(Clone, Copy, Debug)]
 pub struct WAVEFORMATEXTENSIBLE {
     pub Format: WAVEFORMATEX,
     pub Samples: WORD,
