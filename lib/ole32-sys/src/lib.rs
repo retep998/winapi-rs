@@ -18,7 +18,7 @@ extern "system" {
     // pub fn CLIPFORMAT_UserUnmarshal();
     // #[cfg(target_arch = "x86_64")]
     // pub fn CLIPFORMAT_UserUnmarshal64();
-    // pub fn CLSIDFromProgID();
+    pub fn CLSIDFromProgID(lpszProgID: LPCOLESTR, lpclsid: LPCLSID) -> HRESULT;
     // pub fn CLSIDFromProgIDEx();
     // pub fn CLSIDFromString();
     // pub fn CoAddRefServerProcess();

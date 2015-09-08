@@ -11,5 +11,10 @@ license = "MIT"
 build = "build.rs"
 links = "sapi"
 
+[lib]
+name = "sapi"
+
 [dependencies]
-winapi = "*"
+winapi = { version = "*", path = "../.." }
+[build-dependencies]
+winapi-build = { version = "*", path = "../../build" }

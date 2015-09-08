@@ -77,6 +77,7 @@ pub use mssip::*;
 pub use ncrypt::*;
 pub use ntdef::*;
 pub use ntstatus::*;
+pub use oaidl::*;
 pub use objbase::*;
 pub use objidl::*;
 pub use objidlbase::*;
@@ -89,7 +90,9 @@ pub use psapi::*;
 pub use qos::*;
 pub use reason::*;
 pub use rpcdce::*;
+pub use sapi::*;
 pub use schannel::*;
+pub use servprov::*;
 pub use setupapi::*;
 pub use shellapi::*;
 pub use shellscalingapi::*;
@@ -105,6 +108,7 @@ pub use threadpoolapi::*;
 pub use timezoneapi::*;
 pub use tlhelp32::*;
 pub use unknwnbase::*;
+pub use urlmon::*;
 pub use usp10::*;
 pub use vadefs::*;
 pub use vsbackup::*;
@@ -133,6 +137,7 @@ pub use winuser::*;
 pub use ws2def::*;
 pub use ws2spi::*;
 pub use ws2tcpip::*;
+pub use wtypes::*;
 pub use wtypesbase::*;
 pub use xinput::*;
 //-------------------------------------------------------------------------------------------------
@@ -353,6 +358,7 @@ pub mod mssip;
 pub mod ncrypt;
 pub mod ntdef;
 pub mod ntstatus;
+pub mod oaidl;
 pub mod objbase;
 pub mod objidl;
 pub mod objidlbase;
@@ -365,7 +371,9 @@ pub mod psapi;
 pub mod qos;
 pub mod reason;
 pub mod rpcdce;
+pub mod sapi;
 pub mod schannel;
+pub mod servprov;
 pub mod setupapi;
 pub mod shellapi;
 pub mod shellscalingapi;
@@ -381,6 +389,7 @@ pub mod threadpoolapi;
 pub mod timezoneapi;
 pub mod tlhelp32;
 pub mod unknwnbase;
+pub mod urlmon;
 pub mod usp10;
 pub mod vadefs;
 pub mod vsbackup;
@@ -409,6 +418,7 @@ pub mod winuser;
 pub mod ws2def;
 pub mod ws2spi;
 pub mod ws2tcpip;
+pub mod wtypes;
 pub mod wtypesbase;
 pub mod xinput;
 //-------------------------------------------------------------------------------------------------
@@ -889,25 +899,6 @@ pub struct IHandlerInfo;
 pub struct IHandlerActivationHost;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IContactManagerInterop;
-
-//-------------------------------------------------------------------------------------------------
-// wtypes.h
-//-------------------------------------------------------------------------------------------------
-pub type DATE = c_double;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DECIMAL {
-    pub wReserved: USHORT,
-    pub scale: BYTE,
-    pub sign: BYTE,
-    pub Hi32: ULONG,
-    pub Lo64: ULONGLONG,
-}
-pub const DECIMAL_NEG: ::BYTE = 0x80;
-pub type LPDECIMAL = *mut DECIMAL;
-pub type VARTYPE = c_ushort;
-
-pub type BSTR = *mut OLECHAR;
-pub type LPBSTR = *mut BSTR;
 
 //-------------------------------------------------------------------------------------------------
 // audiosessiontypes.h
