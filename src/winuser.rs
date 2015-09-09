@@ -1,6 +1,815 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! USER procedure declarations, constant definitions and macros
+pub const BN_CLICKED: ::WORD = 0;
+pub const BN_PAINT: ::WORD = 1;
+pub const BN_HILITE: ::WORD = 2;
+pub const BN_UNHILITE: ::WORD = 3;
+pub const BN_DISABLE: ::WORD = 4;
+pub const BN_DOUBLECLICKED: ::WORD = 5;
+pub const BN_PUSHED: ::WORD = BN_HILITE;
+pub const BN_UNPUSHED: ::WORD = BN_UNHILITE;
+pub const BN_DBLCLK: ::WORD = BN_DOUBLECLICKED;
+pub const BN_SETFOCUS: ::WORD = 6;
+pub const BN_KILLFOCUS: ::WORD = 7;
+
+pub const BS_PUSHBUTTON: ::DWORD = 0x00000000;
+pub const BS_DEFPUSHBUTTON: ::DWORD = 0x00000001;
+pub const BS_CHECKBOX: ::DWORD = 0x00000002;
+pub const BS_AUTOCHECKBOX: ::DWORD = 0x00000003;
+pub const BS_RADIOBUTTON: ::DWORD = 0x00000004;
+pub const BS_3STATE: ::DWORD = 0x00000005;
+pub const BS_AUTO3STATE: ::DWORD = 0x00000006;
+pub const BS_GROUPBOX: ::DWORD = 0x00000007;
+pub const BS_USERBUTTON: ::DWORD = 0x00000008;
+pub const BS_AUTORADIOBUTTON: ::DWORD = 0x00000009;
+pub const BS_PUSHBOX: ::DWORD = 0x0000000A;
+pub const BS_OWNERDRAW: ::DWORD = 0x0000000B;
+pub const BS_TYPEMASK: ::DWORD = 0x0000000F;
+pub const BS_LEFTTEXT: ::DWORD = 0x00000020;
+pub const BS_TEXT: ::DWORD = 0x00000000;
+pub const BS_ICON: ::DWORD = 0x00000040;
+pub const BS_BITMAP: ::DWORD = 0x00000080;
+pub const BS_LEFT: ::DWORD = 0x00000100;
+pub const BS_RIGHT: ::DWORD = 0x00000200;
+pub const BS_CENTER: ::DWORD = 0x00000300;
+pub const BS_TOP: ::DWORD = 0x00000400;
+pub const BS_BOTTOM: ::DWORD = 0x00000800;
+pub const BS_VCENTER: ::DWORD = 0x00000C00;
+pub const BS_PUSHLIKE: ::DWORD = 0x00001000;
+pub const BS_MULTILINE: ::DWORD = 0x00002000;
+pub const BS_NOTIFY: ::DWORD = 0x00004000;
+pub const BS_FLAT: ::DWORD = 0x00008000;
+pub const BS_RIGHTBUTTON: ::DWORD = BS_LEFTTEXT;
+
+pub const CCHILDREN_SCROLLBAR: usize = 5;
+
+pub const CDS_UPDATEREGISTRY: ::DWORD = 0x00000001;
+pub const CDS_TEST: ::DWORD = 0x00000002;
+pub const CDS_FULLSCREEN: ::DWORD = 0x00000004;
+pub const CDS_GLOBAL: ::DWORD = 0x00000008;
+pub const CDS_SET_PRIMARY: ::DWORD = 0x00000010;
+pub const CDS_VIDEOPARAMETERS: ::DWORD = 0x00000020;
+pub const CDS_ENABLE_UNSAFE_MODES: ::DWORD = 0x00000100;
+pub const CDS_DISABLE_UNSAFE_MODES: ::DWORD = 0x00000200;
+pub const CDS_RESET: ::DWORD = 0x40000000;
+pub const CDS_RESET_EX: ::DWORD = 0x20000000;
+pub const CDS_NORESET: ::DWORD = 0x10000000;
+
+pub const CS_VREDRAW: ::DWORD = 0x0001;
+pub const CS_HREDRAW: ::DWORD = 0x0002;
+pub const CS_DBLCLKS: ::DWORD = 0x0008;
+pub const CS_OWNDC: ::DWORD = 0x0020;
+pub const CS_CLASSDC: ::DWORD = 0x0040;
+pub const CS_PARENTDC: ::DWORD = 0x0080;
+pub const CS_NOCLOSE: ::DWORD = 0x0200;
+pub const CS_SAVEBITS: ::DWORD = 0x0800;
+pub const CS_BYTEALIGNCLIENT: ::DWORD = 0x1000;
+pub const CS_BYTEALIGNWINDOW: ::DWORD = 0x2000;
+pub const CS_GLOBALCLASS: ::DWORD = 0x4000;
+pub const CS_IME: ::DWORD = 0x00010000;
+pub const CS_DROPSHADOW: ::DWORD = 0x00020000;
+
+pub const CW_USEDEFAULT: ::c_int = 0x80000000u32 as ::c_int;
+
+pub const DISP_CHANGE_SUCCESSFUL: ::LONG = 0;
+pub const DISP_CHANGE_RESTART: ::LONG = 1;
+pub const DISP_CHANGE_FAILED: ::LONG = -1;
+pub const DISP_CHANGE_BADMODE: ::LONG = -2;
+pub const DISP_CHANGE_NOTUPDATED: ::LONG = -3;
+pub const DISP_CHANGE_BADFLAGS: ::LONG = -4;
+pub const DISP_CHANGE_BADPARAM: ::LONG = -5;
+pub const DISP_CHANGE_BADDUALVIEW: ::LONG = -6;
+
+pub const EDD_GET_DEVICE_INTERFACE_NAME: ::DWORD = 0x00000001;
+
+pub const ENUM_CURRENT_SETTINGS: ::DWORD = 0xFFFFFFFF;
+pub const ENUM_REGISTRY_SETTINGS: ::DWORD = 0xFFFFFFFE;
+
+pub const GW_HWNDFIRST: ::UINT = 0;
+pub const GW_HWNDLAST: ::UINT = 1;
+pub const GW_HWNDNEXT: ::UINT = 2;
+pub const GW_HWNDPREV: ::UINT = 3;
+pub const GW_OWNER: ::UINT = 4;
+pub const GW_CHILD: ::UINT = 5;
+pub const GW_ENABLEDPOPUP: ::UINT = 6;
+pub const GW_MAX: ::UINT = 6;
+
+pub const HTERROR: ::c_int = -2;
+pub const HTTRANSPARENT: ::c_int = -1;
+pub const HTNOWHERE: ::c_int = 0;
+pub const HTCLIENT: ::c_int = 1;
+pub const HTCAPTION: ::c_int = 2;
+pub const HTSYSMENU: ::c_int = 3;
+pub const HTGROWBOX: ::c_int = 4;
+pub const HTSIZE: ::c_int = HTGROWBOX;
+pub const HTMENU: ::c_int = 5;
+pub const HTHSCROLL: ::c_int = 6;
+pub const HTVSCROLL: ::c_int = 7;
+pub const HTMINBUTTON: ::c_int = 8;
+pub const HTMAXBUTTON: ::c_int = 9;
+pub const HTLEFT: ::c_int = 10;
+pub const HTRIGHT: ::c_int = 11;
+pub const HTTOP: ::c_int = 12;
+pub const HTTOPLEFT: ::c_int = 13;
+pub const HTTOPRIGHT: ::c_int = 14;
+pub const HTBOTTOM: ::c_int = 15;
+pub const HTBOTTOMLEFT: ::c_int = 16;
+pub const HTBOTTOMRIGHT: ::c_int = 17;
+pub const HTBORDER: ::c_int = 18;
+pub const HTREDUCE: ::c_int = HTMINBUTTON;
+pub const HTZOOM: ::c_int = HTMAXBUTTON;
+pub const HTSIZEFIRST: ::c_int = HTLEFT;
+pub const HTSIZELAST: ::c_int = HTBOTTOMRIGHT;
+pub const HTOBJECT: ::c_int = 19;
+pub const HTCLOSE: ::c_int = 20;
+pub const HTHELP: ::c_int = 21;
+
+pub const LSFW_LOCK: ::UINT = 1;
+pub const LSFW_UNLOCK: ::UINT = 2;
+
+pub const MDITILE_VERTICAL: ::UINT = 0x0000;
+pub const MDITILE_HORIZONTAL: ::UINT = 0x0001;
+pub const MDITILE_SKIPDISABLED: ::UINT = 0x0002;
+pub const MDITILE_ZORDER: ::UINT = 0x0004;
+
+pub const MB_OK: ::DWORD = 0x00000000;
+pub const MB_OKCANCEL: ::DWORD = 0x00000001;
+pub const MB_ABORTRETRYIGNORE: ::DWORD = 0x00000002;
+pub const MB_YESNOCANCEL: ::DWORD = 0x00000003;
+pub const MB_YESNO: ::DWORD = 0x00000004;
+pub const MB_RETRYCANCEL: ::DWORD = 0x00000005;
+pub const MB_CANCELTRYCONTINUE: ::DWORD = 0x00000006;
+pub const MB_ICONHAND: ::DWORD = 0x00000010;
+pub const MB_ICONQUESTION: ::DWORD = 0x00000020;
+pub const MB_ICONEXCLAMATION: ::DWORD = 0x00000030;
+pub const MB_ICONASTERISK: ::DWORD = 0x00000040;
+pub const MB_USERICON: ::DWORD = 0x00000080;
+pub const MB_ICONWARNING: ::DWORD = MB_ICONEXCLAMATION;
+pub const MB_ICONERROR: ::DWORD = MB_ICONHAND;
+pub const MB_ICONINFORMATION: ::DWORD = MB_ICONASTERISK;
+pub const MB_ICONSTOP: ::DWORD = MB_ICONHAND;
+pub const MB_DEFBUTTON1: ::DWORD = 0x00000000;
+pub const MB_DEFBUTTON2: ::DWORD = 0x00000100;
+pub const MB_DEFBUTTON3: ::DWORD = 0x00000200;
+pub const MB_DEFBUTTON4: ::DWORD = 0x00000300;
+pub const MB_APPLMODAL: ::DWORD = 0x00000000;
+pub const MB_SYSTEMMODAL: ::DWORD = 0x00001000;
+pub const MB_TASKMODAL: ::DWORD = 0x00002000;
+pub const MB_HELP: ::DWORD = 0x00004000;
+pub const MB_NOFOCUS: ::DWORD = 0x00008000;
+pub const MB_SETFOREGROUND: ::DWORD = 0x00010000;
+pub const MB_DEFAULT_DESKTOP_ONLY: ::DWORD = 0x00020000;
+pub const MB_TOPMOST: ::DWORD = 0x00040000;
+pub const MB_RIGHT: ::DWORD = 0x00080000;
+pub const MB_RTLREADING: ::DWORD = 0x00100000;
+pub const MB_SERVICE_NOTIFICATION: ::DWORD = 0x00200000;
+pub const MB_SERVICE_NOTIFICATION_NT3X: ::DWORD = 0x00040000;
+pub const MB_TYPEMASK: ::DWORD = 0x0000000F;
+pub const MB_ICONMASK: ::DWORD = 0x000000F0;
+pub const MB_DEFMASK: ::DWORD = 0x00000F00;
+pub const MB_MODEMASK: ::DWORD = 0x00003000;
+pub const MB_MISCMASK: ::DWORD = 0x0000C000;
+
+pub const SB_HORZ: ::c_int = 0;
+pub const SB_VERT: ::c_int = 1;
+pub const SB_CTL: ::c_int = 2;
+pub const SB_BOTH: ::c_int = 3;
+
+pub const SW_HIDE: ::c_int = 0;
+pub const SW_SHOWNORMAL: ::c_int = 1;
+pub const SW_NORMAL: ::c_int = 1;
+pub const SW_SHOWMINIMIZED: ::c_int = 2;
+pub const SW_SHOWMAXIMIZED: ::c_int = 3;
+pub const SW_MAXIMIZE: ::c_int = 3;
+pub const SW_SHOWNOACTIVATE: ::c_int = 4;
+pub const SW_SHOW: ::c_int = 5;
+pub const SW_MINIMIZE: ::c_int = 6;
+pub const SW_SHOWMINNOACTIVE: ::c_int = 7;
+pub const SW_SHOWNA: ::c_int = 8;
+pub const SW_RESTORE: ::c_int = 9;
+pub const SW_SHOWDEFAULT: ::c_int = 10;
+pub const SW_FORCEMINIMIZE: ::c_int = 11;
+pub const SW_MAX: ::c_int = 11;
+
+pub const SWP_NOSIZE: ::UINT = 0x0001;
+pub const SWP_NOMOVE: ::UINT = 0x0002;
+pub const SWP_NOZORDER: ::UINT = 0x0004;
+pub const SWP_NOREDRAW: ::UINT = 0x0008;
+pub const SWP_NOACTIVATE: ::UINT = 0x0010;
+pub const SWP_FRAMECHANGED: ::UINT = 0x0020;
+pub const SWP_SHOWWINDOW: ::UINT = 0x0040;
+pub const SWP_HIDEWINDOW: ::UINT = 0x0080;
+pub const SWP_NOCOPYBITS: ::UINT = 0x0100;
+pub const SWP_NOOWNERZORDER: ::UINT = 0x0200;
+pub const SWP_NOSENDCHANGING: ::UINT = 0x0400;
+pub const SWP_DRAWFRAME: ::UINT = SWP_FRAMECHANGED;
+pub const SWP_NOREPOSITION: ::UINT = SWP_NOOWNERZORDER;
+pub const SWP_DEFERERASE: ::UINT = 0x2000;
+pub const SWP_ASYNCWINDOWPOS: ::UINT = 0x4000;
+
+pub const VK_LBUTTON: ::c_int = 0x01;
+pub const VK_RBUTTON: ::c_int = 0x02;
+pub const VK_CANCEL: ::c_int = 0x03;
+pub const VK_MBUTTON: ::c_int = 0x04;
+pub const VK_XBUTTON1: ::c_int = 0x05;
+pub const VK_XBUTTON2: ::c_int = 0x06;
+pub const VK_BACK: ::c_int = 0x08;
+pub const VK_TAB: ::c_int = 0x09;
+pub const VK_CLEAR: ::c_int = 0x0C;
+pub const VK_RETURN: ::c_int = 0x0D;
+pub const VK_SHIFT: ::c_int = 0x10;
+pub const VK_CONTROL: ::c_int = 0x11;
+pub const VK_MENU: ::c_int = 0x12;
+pub const VK_PAUSE: ::c_int = 0x13;
+pub const VK_CAPITAL: ::c_int = 0x14;
+pub const VK_KANA: ::c_int = 0x15;
+pub const VK_HANGUEL: ::c_int = 0x15;
+pub const VK_HANGUL: ::c_int = 0x15;
+pub const VK_JUNJA: ::c_int = 0x17;
+pub const VK_FINAL: ::c_int = 0x18;
+pub const VK_HANJA: ::c_int = 0x19;
+pub const VK_KANJI: ::c_int = 0x19;
+pub const VK_ESCAPE: ::c_int = 0x1B;
+pub const VK_CONVERT: ::c_int = 0x1C;
+pub const VK_NONCONVERT: ::c_int = 0x1D;
+pub const VK_ACCEPT: ::c_int = 0x1E;
+pub const VK_MODECHANGE: ::c_int = 0x1F;
+pub const VK_SPACE: ::c_int = 0x20;
+pub const VK_PRIOR: ::c_int = 0x21;
+pub const VK_NEXT: ::c_int = 0x22;
+pub const VK_END: ::c_int = 0x23;
+pub const VK_HOME: ::c_int = 0x24;
+pub const VK_LEFT: ::c_int = 0x25;
+pub const VK_UP: ::c_int = 0x26;
+pub const VK_RIGHT: ::c_int = 0x27;
+pub const VK_DOWN: ::c_int = 0x28;
+pub const VK_SELECT: ::c_int = 0x29;
+pub const VK_PRINT: ::c_int = 0x2A;
+pub const VK_EXECUTE: ::c_int = 0x2B;
+pub const VK_SNAPSHOT: ::c_int = 0x2C;
+pub const VK_INSERT: ::c_int = 0x2D;
+pub const VK_DELETE: ::c_int = 0x2E;
+pub const VK_HELP: ::c_int = 0x2F;
+pub const VK_LWIN: ::c_int = 0x5B;
+pub const VK_RWIN: ::c_int = 0x5C;
+pub const VK_APPS: ::c_int = 0x5D;
+pub const VK_SLEEP: ::c_int = 0x5F;
+pub const VK_NUMPAD0: ::c_int = 0x60;
+pub const VK_NUMPAD1: ::c_int = 0x61;
+pub const VK_NUMPAD2: ::c_int = 0x62;
+pub const VK_NUMPAD3: ::c_int = 0x63;
+pub const VK_NUMPAD4: ::c_int = 0x64;
+pub const VK_NUMPAD5: ::c_int = 0x65;
+pub const VK_NUMPAD6: ::c_int = 0x66;
+pub const VK_NUMPAD7: ::c_int = 0x67;
+pub const VK_NUMPAD8: ::c_int = 0x68;
+pub const VK_NUMPAD9: ::c_int = 0x69;
+pub const VK_MULTIPLY: ::c_int = 0x6A;
+pub const VK_ADD: ::c_int = 0x6B;
+pub const VK_SEPARATOR: ::c_int = 0x6C;
+pub const VK_SUBTRACT: ::c_int = 0x6D;
+pub const VK_DECIMAL: ::c_int = 0x6E;
+pub const VK_DIVIDE: ::c_int = 0x6F;
+pub const VK_F1: ::c_int = 0x70;
+pub const VK_F2: ::c_int = 0x71;
+pub const VK_F3: ::c_int = 0x72;
+pub const VK_F4: ::c_int = 0x73;
+pub const VK_F5: ::c_int = 0x74;
+pub const VK_F6: ::c_int = 0x75;
+pub const VK_F7: ::c_int = 0x76;
+pub const VK_F8: ::c_int = 0x77;
+pub const VK_F9: ::c_int = 0x78;
+pub const VK_F10: ::c_int = 0x79;
+pub const VK_F11: ::c_int = 0x7A;
+pub const VK_F12: ::c_int = 0x7B;
+pub const VK_F13: ::c_int = 0x7C;
+pub const VK_F14: ::c_int = 0x7D;
+pub const VK_F15: ::c_int = 0x7E;
+pub const VK_F16: ::c_int = 0x7F;
+pub const VK_F17: ::c_int = 0x80;
+pub const VK_F18: ::c_int = 0x81;
+pub const VK_F19: ::c_int = 0x82;
+pub const VK_F20: ::c_int = 0x83;
+pub const VK_F21: ::c_int = 0x84;
+pub const VK_F22: ::c_int = 0x85;
+pub const VK_F23: ::c_int = 0x86;
+pub const VK_F24: ::c_int = 0x87;
+pub const VK_NUMLOCK: ::c_int = 0x90;
+pub const VK_SCROLL: ::c_int = 0x91;
+pub const VK_OEM_NEC_EQUAL: ::c_int = 0x92;
+pub const VK_OEM_FJ_JISHO: ::c_int = 0x92;
+pub const VK_OEM_FJ_MASSHOU: ::c_int = 0x93;
+pub const VK_OEM_FJ_TOUROKU: ::c_int = 0x94;
+pub const VK_OEM_FJ_LOYA: ::c_int = 0x95;
+pub const VK_OEM_FJ_ROYA: ::c_int = 0x96;
+pub const VK_LSHIFT: ::c_int = 0xA0;
+pub const VK_RSHIFT: ::c_int = 0xA1;
+pub const VK_LCONTROL: ::c_int = 0xA2;
+pub const VK_RCONTROL: ::c_int = 0xA3;
+pub const VK_LMENU: ::c_int = 0xA4;
+pub const VK_RMENU: ::c_int = 0xA5;
+pub const VK_BROWSER_BACK: ::c_int = 0xA6;
+pub const VK_BROWSER_FORWARD: ::c_int = 0xA7;
+pub const VK_BROWSER_REFRESH: ::c_int = 0xA8;
+pub const VK_BROWSER_STOP: ::c_int = 0xA9;
+pub const VK_BROWSER_SEARCH: ::c_int = 0xAA;
+pub const VK_BROWSER_FAVORITES: ::c_int = 0xAB;
+pub const VK_BROWSER_HOME: ::c_int = 0xAC;
+pub const VK_VOLUME_MUTE: ::c_int = 0xAD;
+pub const VK_VOLUME_DOWN: ::c_int = 0xAE;
+pub const VK_VOLUME_UP: ::c_int = 0xAF;
+pub const VK_MEDIA_NEXT_TRACK: ::c_int = 0xB0;
+pub const VK_MEDIA_PREV_TRACK: ::c_int = 0xB1;
+pub const VK_MEDIA_STOP: ::c_int = 0xB2;
+pub const VK_MEDIA_PLAY_PAUSE: ::c_int = 0xB3;
+pub const VK_LAUNCH_MAIL: ::c_int = 0xB4;
+pub const VK_LAUNCH_MEDIA_SELECT: ::c_int = 0xB5;
+pub const VK_LAUNCH_APP1: ::c_int = 0xB6;
+pub const VK_LAUNCH_APP2: ::c_int = 0xB7;
+pub const VK_OEM_1: ::c_int = 0xBA;
+pub const VK_OEM_PLUS: ::c_int = 0xBB;
+pub const VK_OEM_COMMA: ::c_int = 0xBC;
+pub const VK_OEM_MINUS: ::c_int = 0xBD;
+pub const VK_OEM_PERIOD: ::c_int = 0xBE;
+pub const VK_OEM_2: ::c_int = 0xBF;
+pub const VK_OEM_3: ::c_int = 0xC0;
+pub const VK_OEM_4: ::c_int = 0xDB;
+pub const VK_OEM_5: ::c_int = 0xDC;
+pub const VK_OEM_6: ::c_int = 0xDD;
+pub const VK_OEM_7: ::c_int = 0xDE;
+pub const VK_OEM_8: ::c_int = 0xDF;
+pub const VK_OEM_AX: ::c_int = 0xE1;
+pub const VK_OEM_102: ::c_int = 0xE2;
+pub const VK_ICO_HELP: ::c_int = 0xE3;
+pub const VK_ICO_00: ::c_int = 0xE4;
+pub const VK_PROCESSKEY: ::c_int = 0xE5;
+pub const VK_ICO_CLEAR: ::c_int = 0xE6;
+pub const VK_PACKET: ::c_int = 0xE7;
+pub const VK_OEM_RESET: ::c_int = 0xE9;
+pub const VK_OEM_JUMP: ::c_int = 0xEA;
+pub const VK_OEM_PA1: ::c_int = 0xEB;
+pub const VK_OEM_PA2: ::c_int = 0xEC;
+pub const VK_OEM_PA3: ::c_int = 0xED;
+pub const VK_OEM_WSCTRL: ::c_int = 0xEE;
+pub const VK_OEM_CUSEL: ::c_int = 0xEF;
+pub const VK_OEM_ATTN: ::c_int = 0xF0;
+pub const VK_OEM_FINISH: ::c_int = 0xF1;
+pub const VK_OEM_COPY: ::c_int = 0xF2;
+pub const VK_OEM_AUTO: ::c_int = 0xF3;
+pub const VK_OEM_ENLW: ::c_int = 0xF4;
+pub const VK_OEM_BACKTAB: ::c_int = 0xF5;
+pub const VK_ATTN: ::c_int = 0xF6;
+pub const VK_CRSEL: ::c_int = 0xF7;
+pub const VK_EXSEL: ::c_int = 0xF8;
+pub const VK_EREOF: ::c_int = 0xF9;
+pub const VK_PLAY: ::c_int = 0xFA;
+pub const VK_ZOOM: ::c_int = 0xFB;
+pub const VK_NONAME: ::c_int = 0xFC;
+pub const VK_PA1: ::c_int = 0xFD;
+pub const VK_OEM_CLEAR: ::c_int = 0xFE;
+
+pub const WM_NULL: ::UINT = 0x0000;
+pub const WM_CREATE: ::UINT = 0x0001;
+pub const WM_DESTROY: ::UINT = 0x0002;
+pub const WM_MOVE: ::UINT = 0x0003;
+pub const WM_SIZE: ::UINT = 0x0005;
+pub const WM_ACTIVATE: ::UINT = 0x0006;
+pub const WM_SETFOCUS: ::UINT = 0x0007;
+pub const WM_KILLFOCUS: ::UINT = 0x0008;
+pub const WM_ENABLE: ::UINT = 0x000A;
+pub const WM_SETREDRAW: ::UINT = 0x000B;
+pub const WM_SETTEXT: ::UINT = 0x000C;
+pub const WM_GETTEXT: ::UINT = 0x000D;
+pub const WM_GETTEXTLENGTH: ::UINT = 0x000E;
+pub const WM_PAINT: ::UINT = 0x000F;
+pub const WM_CLOSE: ::UINT = 0x0010;
+pub const WM_QUERYENDSESSION: ::UINT = 0x0011;
+pub const WM_QUERYOPEN: ::UINT = 0x0013;
+pub const WM_ENDSESSION: ::UINT = 0x0016;
+pub const WM_QUIT: ::UINT = 0x0012;
+pub const WM_ERASEBKGND: ::UINT = 0x0014;
+pub const WM_SYSCOLORCHANGE: ::UINT = 0x0015;
+pub const WM_SHOWWINDOW: ::UINT = 0x0018;
+pub const WM_WININICHANGE: ::UINT = 0x001A;
+pub const WM_SETTINGCHANGE: ::UINT = WM_WININICHANGE;
+pub const WM_DEVMODECHANGE: ::UINT = 0x001B;
+pub const WM_ACTIVATEAPP: ::UINT = 0x001C;
+pub const WM_FONTCHANGE: ::UINT = 0x001D;
+pub const WM_TIMECHANGE: ::UINT = 0x001E;
+pub const WM_CANCELMODE: ::UINT = 0x001F;
+pub const WM_SETCURSOR: ::UINT = 0x0020;
+pub const WM_MOUSEACTIVATE: ::UINT = 0x0021;
+pub const WM_CHILDACTIVATE: ::UINT = 0x0022;
+pub const WM_QUEUESYNC: ::UINT = 0x0023;
+pub const WM_GETMINMAXINFO: ::UINT = 0x0024;
+pub const WM_PAINTICON: ::UINT = 0x0026;
+pub const WM_ICONERASEBKGND: ::UINT = 0x0027;
+pub const WM_NEXTDLGCTL: ::UINT = 0x0028;
+pub const WM_SPOOLERSTATUS: ::UINT = 0x002A;
+pub const WM_DRAWITEM: ::UINT = 0x002B;
+pub const WM_MEASUREITEM: ::UINT = 0x002C;
+pub const WM_DELETEITEM: ::UINT = 0x002D;
+pub const WM_VKEYTOITEM: ::UINT = 0x002E;
+pub const WM_CHARTOITEM: ::UINT = 0x002F;
+pub const WM_SETFONT: ::UINT = 0x0030;
+pub const WM_GETFONT: ::UINT = 0x0031;
+pub const WM_SETHOTKEY: ::UINT = 0x0032;
+pub const WM_GETHOTKEY: ::UINT = 0x0033;
+pub const WM_QUERYDRAGICON: ::UINT = 0x0037;
+pub const WM_COMPAREITEM: ::UINT = 0x0039;
+pub const WM_GETOBJECT: ::UINT = 0x003D;
+pub const WM_COMPACTING: ::UINT = 0x0041;
+pub const WM_COMMNOTIFY: ::UINT = 0x0044;
+pub const WM_WINDOWPOSCHANGING: ::UINT = 0x0046;
+pub const WM_WINDOWPOSCHANGED: ::UINT = 0x0047;
+pub const WM_POWER: ::UINT = 0x0048;
+pub const WM_COPYDATA: ::UINT = 0x004A;
+pub const WM_CANCELJOURNAL: ::UINT = 0x004B;
+pub const WM_NOTIFY: ::UINT = 0x004E;
+pub const WM_INPUTLANGCHANGEREQUEST: ::UINT = 0x0050;
+pub const WM_INPUTLANGCHANGE: ::UINT = 0x0051;
+pub const WM_TCARD: ::UINT = 0x0052;
+pub const WM_HELP: ::UINT = 0x0053;
+pub const WM_USERCHANGED: ::UINT = 0x0054;
+pub const WM_NOTIFYFORMAT: ::UINT = 0x0055;
+pub const WM_CONTEXTMENU: ::UINT = 0x007B;
+pub const WM_STYLECHANGING: ::UINT = 0x007C;
+pub const WM_STYLECHANGED: ::UINT = 0x007D;
+pub const WM_DISPLAYCHANGE: ::UINT = 0x007E;
+pub const WM_GETICON: ::UINT = 0x007F;
+pub const WM_SETICON: ::UINT = 0x0080;
+pub const WM_NCCREATE: ::UINT = 0x0081;
+pub const WM_NCDESTROY: ::UINT = 0x0082;
+pub const WM_NCCALCSIZE: ::UINT = 0x0083;
+pub const WM_NCHITTEST: ::UINT = 0x0084;
+pub const WM_NCPAINT: ::UINT = 0x0085;
+pub const WM_NCACTIVATE: ::UINT = 0x0086;
+pub const WM_GETDLGCODE: ::UINT = 0x0087;
+pub const WM_SYNCPAINT: ::UINT = 0x0088;
+pub const WM_NCMOUSEMOVE: ::UINT = 0x00A0;
+pub const WM_NCLBUTTONDOWN: ::UINT = 0x00A1;
+pub const WM_NCLBUTTONUP: ::UINT = 0x00A2;
+pub const WM_NCLBUTTONDBLCLK: ::UINT = 0x00A3;
+pub const WM_NCRBUTTONDOWN: ::UINT = 0x00A4;
+pub const WM_NCRBUTTONUP: ::UINT = 0x00A5;
+pub const WM_NCRBUTTONDBLCLK: ::UINT = 0x00A6;
+pub const WM_NCMBUTTONDOWN: ::UINT = 0x00A7;
+pub const WM_NCMBUTTONUP: ::UINT = 0x00A8;
+pub const WM_NCMBUTTONDBLCLK: ::UINT = 0x00A9;
+pub const WM_NCXBUTTONDOWN: ::UINT = 0x00AB;
+pub const WM_NCXBUTTONUP: ::UINT = 0x00AC;
+pub const WM_NCXBUTTONDBLCLK: ::UINT = 0x00AD;
+pub const WM_INPUT_DEVICE_CHANGE: ::UINT = 0x00FE;
+pub const WM_INPUT: ::UINT = 0x00FF;
+pub const WM_KEYFIRST: ::UINT = 0x0100;
+pub const WM_KEYDOWN: ::UINT = 0x0100;
+pub const WM_KEYUP: ::UINT = 0x0101;
+pub const WM_CHAR: ::UINT = 0x0102;
+pub const WM_DEADCHAR: ::UINT = 0x0103;
+pub const WM_SYSKEYDOWN: ::UINT = 0x0104;
+pub const WM_SYSKEYUP: ::UINT = 0x0105;
+pub const WM_SYSCHAR: ::UINT = 0x0106;
+pub const WM_SYSDEADCHAR: ::UINT = 0x0107;
+pub const WM_UNICHAR: ::UINT = 0x0109;
+pub const WM_KEYLAST: ::UINT = 0x0109;
+pub const WM_IME_STARTCOMPOSITION: ::UINT = 0x010D;
+pub const WM_IME_ENDCOMPOSITION: ::UINT = 0x010E;
+pub const WM_IME_COMPOSITION: ::UINT = 0x010F;
+pub const WM_IME_KEYLAST: ::UINT = 0x010F;
+pub const WM_INITDIALOG: ::UINT = 0x0110;
+pub const WM_COMMAND: ::UINT = 0x0111;
+pub const WM_SYSCOMMAND: ::UINT = 0x0112;
+pub const WM_TIMER: ::UINT = 0x0113;
+pub const WM_HSCROLL: ::UINT = 0x0114;
+pub const WM_VSCROLL: ::UINT = 0x0115;
+pub const WM_INITMENU: ::UINT = 0x0116;
+pub const WM_INITMENUPOPUP: ::UINT = 0x0117;
+pub const WM_GESTURE: ::UINT = 0x0119;
+pub const WM_GESTURENOTIFY: ::UINT = 0x011A;
+pub const WM_MENUSELECT: ::UINT = 0x011F;
+pub const WM_MENUCHAR: ::UINT = 0x0120;
+pub const WM_ENTERIDLE: ::UINT = 0x0121;
+pub const WM_MENURBUTTONUP: ::UINT = 0x0122;
+pub const WM_MENUDRAG: ::UINT = 0x0123;
+pub const WM_MENUGETOBJECT: ::UINT = 0x0124;
+pub const WM_UNINITMENUPOPUP: ::UINT = 0x0125;
+pub const WM_MENUCOMMAND: ::UINT = 0x0126;
+pub const WM_CHANGEUISTATE: ::UINT = 0x0127;
+pub const WM_UPDATEUISTATE: ::UINT = 0x0128;
+pub const WM_QUERYUISTATE: ::UINT = 0x0129;
+pub const WM_CTLCOLORMSGBOX: ::UINT = 0x0132;
+pub const WM_CTLCOLOREDIT: ::UINT = 0x0133;
+pub const WM_CTLCOLORLISTBOX: ::UINT = 0x0134;
+pub const WM_CTLCOLORBTN: ::UINT = 0x0135;
+pub const WM_CTLCOLORDLG: ::UINT = 0x0136;
+pub const WM_CTLCOLORSCROLLBAR: ::UINT = 0x0137;
+pub const WM_CTLCOLORSTATIC: ::UINT = 0x0138;
+pub const WM_MOUSEFIRST: ::UINT = 0x0200;
+pub const WM_MOUSEMOVE: ::UINT = 0x0200;
+pub const WM_LBUTTONDOWN: ::UINT = 0x0201;
+pub const WM_LBUTTONUP: ::UINT = 0x0202;
+pub const WM_LBUTTONDBLCLK: ::UINT = 0x0203;
+pub const WM_RBUTTONDOWN: ::UINT = 0x0204;
+pub const WM_RBUTTONUP: ::UINT = 0x0205;
+pub const WM_RBUTTONDBLCLK: ::UINT = 0x0206;
+pub const WM_MBUTTONDOWN: ::UINT = 0x0207;
+pub const WM_MBUTTONUP: ::UINT = 0x0208;
+pub const WM_MBUTTONDBLCLK: ::UINT = 0x0209;
+pub const WM_MOUSEWHEEL: ::UINT = 0x020A;
+pub const WM_XBUTTONDOWN: ::UINT = 0x020B;
+pub const WM_XBUTTONUP: ::UINT = 0x020C;
+pub const WM_XBUTTONDBLCLK: ::UINT = 0x020D;
+pub const WM_MOUSEHWHEEL: ::UINT = 0x020E;
+pub const WM_MOUSELAST: ::UINT = 0x020E;
+pub const WM_PARENTNOTIFY: ::UINT = 0x0210;
+pub const WM_ENTERMENULOOP: ::UINT = 0x0211;
+pub const WM_EXITMENULOOP: ::UINT = 0x0212;
+pub const WM_NEXTMENU: ::UINT = 0x0213;
+pub const WM_SIZING: ::UINT = 0x0214;
+pub const WM_CAPTURECHANGED: ::UINT = 0x0215;
+pub const WM_MOVING: ::UINT = 0x0216;
+pub const WM_POWERBROADCAST: ::UINT = 0x0218;
+pub const WM_DEVICECHANGE: ::UINT = 0x0219;
+pub const WM_MDICREATE: ::UINT = 0x0220;
+pub const WM_MDIDESTROY: ::UINT = 0x0221;
+pub const WM_MDIACTIVATE: ::UINT = 0x0222;
+pub const WM_MDIRESTORE: ::UINT = 0x0223;
+pub const WM_MDINEXT: ::UINT = 0x0224;
+pub const WM_MDIMAXIMIZE: ::UINT = 0x0225;
+pub const WM_MDITILE: ::UINT = 0x0226;
+pub const WM_MDICASCADE: ::UINT = 0x0227;
+pub const WM_MDIICONARRANGE: ::UINT = 0x0228;
+pub const WM_MDIGETACTIVE: ::UINT = 0x0229;
+pub const WM_MDISETMENU: ::UINT = 0x0230;
+pub const WM_ENTERSIZEMOVE: ::UINT = 0x0231;
+pub const WM_EXITSIZEMOVE: ::UINT = 0x0232;
+pub const WM_DROPFILES: ::UINT = 0x0233;
+pub const WM_MDIREFRESHMENU: ::UINT = 0x0234;
+pub const WM_POINTERDEVICECHANGE: ::UINT = 0x238;
+pub const WM_POINTERDEVICEINRANGE: ::UINT = 0x239;
+pub const WM_POINTERDEVICEOUTOFRANGE: ::UINT = 0x23A;
+pub const WM_TOUCH: ::UINT = 0x0240;
+pub const WM_NCPOINTERUPDATE: ::UINT = 0x0241;
+pub const WM_NCPOINTERDOWN: ::UINT = 0x0242;
+pub const WM_NCPOINTERUP: ::UINT = 0x0243;
+pub const WM_POINTERUPDATE: ::UINT = 0x0245;
+pub const WM_POINTERDOWN: ::UINT = 0x0246;
+pub const WM_POINTERUP: ::UINT = 0x0247;
+pub const WM_POINTERENTER: ::UINT = 0x0249;
+pub const WM_POINTERLEAVE: ::UINT = 0x024A;
+pub const WM_POINTERACTIVATE: ::UINT = 0x024B;
+pub const WM_POINTERCAPTURECHANGED: ::UINT = 0x024C;
+pub const WM_TOUCHHITTESTING: ::UINT = 0x024D;
+pub const WM_POINTERWHEEL: ::UINT = 0x024E;
+pub const WM_POINTERHWHEEL: ::UINT = 0x024F;
+pub const WM_IME_SETCONTEXT: ::UINT = 0x0281;
+pub const WM_IME_NOTIFY: ::UINT = 0x0282;
+pub const WM_IME_CONTROL: ::UINT = 0x0283;
+pub const WM_IME_COMPOSITIONFULL: ::UINT = 0x0284;
+pub const WM_IME_SELECT: ::UINT = 0x0285;
+pub const WM_IME_CHAR: ::UINT = 0x0286;
+pub const WM_IME_REQUEST: ::UINT = 0x0288;
+pub const WM_IME_KEYDOWN: ::UINT = 0x0290;
+pub const WM_IME_KEYUP: ::UINT = 0x0291;
+pub const WM_MOUSEHOVER: ::UINT = 0x02A1;
+pub const WM_MOUSELEAVE: ::UINT = 0x02A3;
+pub const WM_NCMOUSEHOVER: ::UINT = 0x02A0;
+pub const WM_NCMOUSELEAVE: ::UINT = 0x02A2;
+pub const WM_WTSSESSION_CHANGE: ::UINT = 0x02B1;
+pub const WM_TABLET_FIRST: ::UINT = 0x02c0;
+pub const WM_TABLET_LAST: ::UINT = 0x02df;
+pub const WM_DPICHANGED: ::UINT = 0x02E0;
+pub const WM_CUT: ::UINT = 0x0300;
+pub const WM_COPY: ::UINT = 0x0301;
+pub const WM_PASTE: ::UINT = 0x0302;
+pub const WM_CLEAR: ::UINT = 0x0303;
+pub const WM_UNDO: ::UINT = 0x0304;
+pub const WM_RENDERFORMAT: ::UINT = 0x0305;
+pub const WM_RENDERALLFORMATS: ::UINT = 0x0306;
+pub const WM_DESTROYCLIPBOARD: ::UINT = 0x0307;
+pub const WM_DRAWCLIPBOARD: ::UINT = 0x0308;
+pub const WM_PAINTCLIPBOARD: ::UINT = 0x0309;
+pub const WM_VSCROLLCLIPBOARD: ::UINT = 0x030A;
+pub const WM_SIZECLIPBOARD: ::UINT = 0x030B;
+pub const WM_ASKCBFORMATNAME: ::UINT = 0x030C;
+pub const WM_CHANGECBCHAIN: ::UINT = 0x030D;
+pub const WM_HSCROLLCLIPBOARD: ::UINT = 0x030E;
+pub const WM_QUERYNEWPALETTE: ::UINT = 0x030F;
+pub const WM_PALETTEISCHANGING: ::UINT = 0x0310;
+pub const WM_PALETTECHANGED: ::UINT = 0x0311;
+pub const WM_HOTKEY: ::UINT = 0x0312;
+pub const WM_PRINT: ::UINT = 0x0317;
+pub const WM_PRINTCLIENT: ::UINT = 0x0318;
+pub const WM_APPCOMMAND: ::UINT = 0x0319;
+pub const WM_THEMECHANGED: ::UINT = 0x031A;
+pub const WM_CLIPBOARDUPDATE: ::UINT = 0x031D;
+pub const WM_DWMCOMPOSITIONCHANGED: ::UINT = 0x031E;
+pub const WM_DWMNCRENDERINGCHANGED: ::UINT = 0x031F;
+pub const WM_DWMCOLORIZATIONCOLORCHANGED: ::UINT = 0x0320;
+pub const WM_DWMWINDOWMAXIMIZEDCHANGE: ::UINT = 0x0321;
+pub const WM_DWMSENDICONICTHUMBNAIL: ::UINT = 0x0323;
+pub const WM_DWMSENDICONICLIVEPREVIEWBITMAP: ::UINT = 0x0326;
+pub const WM_GETTITLEBARINFOEX: ::UINT = 0x033F;
+pub const WM_HANDHELDFIRST: ::UINT = 0x0358;
+pub const WM_HANDHELDLAST: ::UINT = 0x035F;
+pub const WM_AFXFIRST: ::UINT = 0x0360;
+pub const WM_AFXLAST: ::UINT = 0x037F;
+pub const WM_PENWINFIRST: ::UINT = 0x0380;
+pub const WM_PENWINLAST: ::UINT = 0x038F;
+pub const WM_APP: ::UINT = 0x8000;
+pub const WM_USER: ::UINT = 0x0400;
+
+pub const WS_OVERLAPPED: ::DWORD = 0x00000000;
+pub const WS_POPUP: ::DWORD = 0x80000000;
+pub const WS_CHILD: ::DWORD = 0x40000000;
+pub const WS_MINIMIZE: ::DWORD = 0x20000000;
+pub const WS_VISIBLE: ::DWORD = 0x10000000;
+pub const WS_DISABLED: ::DWORD = 0x08000000;
+pub const WS_CLIPSIBLINGS: ::DWORD = 0x04000000;
+pub const WS_CLIPCHILDREN: ::DWORD = 0x02000000;
+pub const WS_MAXIMIZE: ::DWORD = 0x01000000;
+pub const WS_CAPTION: ::DWORD = 0x00C00000;
+pub const WS_BORDER: ::DWORD = 0x00800000;
+pub const WS_DLGFRAME: ::DWORD = 0x00400000;
+pub const WS_VSCROLL: ::DWORD = 0x00200000;
+pub const WS_HSCROLL: ::DWORD = 0x00100000;
+pub const WS_SYSMENU: ::DWORD = 0x00080000;
+pub const WS_THICKFRAME: ::DWORD = 0x00040000;
+pub const WS_GROUP: ::DWORD = 0x00020000;
+pub const WS_TABSTOP: ::DWORD = 0x00010000;
+pub const WS_MINIMIZEBOX: ::DWORD = 0x00020000;
+pub const WS_MAXIMIZEBOX: ::DWORD = 0x00010000;
+pub const WS_TILED: ::DWORD = WS_OVERLAPPED;
+pub const WS_ICONIC: ::DWORD = WS_MINIMIZE;
+pub const WS_SIZEBOX: ::DWORD = WS_THICKFRAME;
+pub const WS_TILEDWINDOW: ::DWORD = WS_OVERLAPPEDWINDOW;
+pub const WS_OVERLAPPEDWINDOW: ::DWORD = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+pub const WS_POPUPWINDOW: ::DWORD = WS_POPUP | WS_BORDER | WS_SYSMENU;
+pub const WS_CHILDWINDOW: ::DWORD = WS_CHILD;
+
+pub const WS_EX_DLGMODALFRAME: ::DWORD = 0x00000001;
+pub const WS_EX_NOPARENTNOTIFY: ::DWORD = 0x00000004;
+pub const WS_EX_TOPMOST: ::DWORD = 0x00000008;
+pub const WS_EX_ACCEPTFILES: ::DWORD = 0x00000010;
+pub const WS_EX_TRANSPARENT: ::DWORD = 0x00000020;
+pub const WS_EX_MDICHILD: ::DWORD = 0x00000040;
+pub const WS_EX_TOOLWINDOW: ::DWORD = 0x00000080;
+pub const WS_EX_WINDOWEDGE: ::DWORD = 0x00000100;
+pub const WS_EX_CLIENTEDGE: ::DWORD = 0x00000200;
+pub const WS_EX_CONTEXTHELP: ::DWORD = 0x00000400;
+pub const WS_EX_RIGHT: ::DWORD = 0x00001000;
+pub const WS_EX_LEFT: ::DWORD = 0x00000000;
+pub const WS_EX_RTLREADING: ::DWORD = 0x00002000;
+pub const WS_EX_LTRREADING: ::DWORD = 0x00000000;
+pub const WS_EX_LEFTSCROLLBAR: ::DWORD = 0x00004000;
+pub const WS_EX_RIGHTSCROLLBAR: ::DWORD = 0x00000000;
+pub const WS_EX_CONTROLPARENT: ::DWORD = 0x00010000;
+pub const WS_EX_STATICEDGE: ::DWORD = 0x00020000;
+pub const WS_EX_APPWINDOW: ::DWORD = 0x00040000;
+pub const WS_EX_OVERLAPPEDWINDOW: ::DWORD = WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE;
+pub const WS_EX_PALETTEWINDOW: ::DWORD = WS_EX_WINDOWEDGE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST;
+pub const WS_EX_LAYERED: ::DWORD = 0x00080000;
+pub const WS_EX_NOINHERITLAYOUT: ::DWORD = 0x00100000;
+pub const WS_EX_NOREDIRECTIONBITMAP: ::DWORD = 0x00200000;
+pub const WS_EX_LAYOUTRTL: ::DWORD = 0x00400000;
+pub const WS_EX_COMPOSITED: ::DWORD = 0x02000000;
+pub const WS_EX_NOACTIVATE: ::DWORD = 0x08000000;
+pub type NAMEENUMPROCA = Option<unsafe extern "system" fn(::LPSTR, ::LPARAM) -> ::BOOL>;
+pub type NAMEENUMPROCW = Option<unsafe extern "system" fn(::LPWSTR, ::LPARAM) -> ::BOOL>;
+pub type DESKTOPENUMPROCA = NAMEENUMPROCA;
+pub type DESKTOPENUMPROCW = NAMEENUMPROCW;
+pub type WINSTAENUMPROCA = NAMEENUMPROCA;
+pub type WINSTAENUMPROCW = NAMEENUMPROCW;
+pub type WNDENUMPROC = Option<unsafe extern "system" fn(::HWND, ::LPARAM) -> ::BOOL>;
+pub type WNDPROC = Option<unsafe extern "system" fn(
+    ::HWND, ::UINT, ::WPARAM, ::LPARAM,
+) -> ::LRESULT>;
+pub type DLGPROC = Option<unsafe extern "system" fn(
+    ::HWND, ::UINT, ::WPARAM, ::LPARAM,
+) -> ::INT_PTR>;
+pub type HOOKPROC = Option<unsafe extern "system" fn(
+    code: ::c_int, wParam: ::WPARAM, lParam: ::LPARAM,
+) -> ::LRESULT>;
+pub type TimerProc = Option<unsafe extern "system" fn(
+    hwnd: ::HWND, uMsg: ::UINT, idEvent: ::UINT_PTR, dwTime: ::DWORD,
+)>;
+pub type DRAWSTATEPROC = Option<unsafe extern "system" fn(
+    ::HDC, ::LPARAM, ::WPARAM, ::c_int, ::c_int,
+) -> ::BOOL>;
+pub type PROPENUMPROCA = Option<unsafe extern "system" fn(::HWND, ::LPCSTR, ::HANDLE) -> ::BOOL>;
+pub type PROPENUMPROCW = Option<unsafe extern "system" fn(::HWND, ::LPCWSTR, ::HANDLE) -> ::BOOL>;
+pub type GRAYSTRINGPROC = Option<unsafe extern "system" fn(::HDC, ::LPARAM, ::c_int) -> ::BOOL>;
+pub type MSGBOXCALLBACK = Option<unsafe extern "system" fn(LPHELPINFO)>;
+pub type WINEVENTPROC = Option<unsafe extern "system" fn(
+    ::HWINEVENTHOOK, ::DWORD, ::HWND, ::LONG, ::LONG, ::DWORD, ::DWORD,
+)>;
+
+pub type HDEVNOTIFY = ::PVOID;
+pub type MENUTEMPLATEA = ::VOID;
+pub type MENUTEMPLATEW = ::VOID;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MSG {
+    pub hwnd: ::HWND,
+    pub message: ::UINT,
+    pub wParam: ::WPARAM,
+    pub lParam: ::LPARAM,
+    pub time: ::DWORD,
+    pub pt: ::POINT,
+}
+pub type PMSG = *mut MSG;
+pub type NPMSG = *mut MSG;
+pub type LPMSG = *mut MSG;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct PAINTSTRUCT {
+    pub hdc: ::HDC,
+    pub fErase: ::BOOL,
+    pub rcPaint: ::RECT,
+    pub fRestore: ::BOOL,
+    pub fIncUpdate: ::BOOL,
+    pub rgbReserved: [::BYTE; 32],
+}
+pub type PPAINTSTRUCT = *mut PAINTSTRUCT;
+pub type NPPAINTSTRUCT = *mut PAINTSTRUCT;
+pub type LPPAINTSTRUCT = *mut PAINTSTRUCT;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct WINDOWPLACEMENT {
+    pub length: ::UINT,
+    pub flags: ::UINT,
+    pub showCmd: ::UINT,
+    pub ptMinPosition: ::POINT,
+    pub ptMaxPosition: ::POINT,
+    pub rcNormalPosition: ::RECT,
+}
+pub type PWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
+pub type LPWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
+#[repr(C)] #[derive(Copy)]
+pub struct WNDCLASSEXW {
+    pub cbSize: ::UINT,
+    pub style: ::UINT,
+    pub lpfnWndProc: WNDPROC,
+    pub cbClsExtra: ::c_int,
+    pub cbWndExtra: ::c_int,
+    pub hInstance: ::HINSTANCE,
+    pub hIcon: ::HICON,
+    pub hCursor: ::HCURSOR,
+    pub hbrBackground: ::HBRUSH,
+    pub lpszMenuName: ::LPCWSTR,
+    pub lpszClassName: ::LPCWSTR,
+    pub hIconSm: ::HICON,
+}
+impl Clone for WNDCLASSEXW { fn clone(&self) -> WNDCLASSEXW { *self } }
+pub type PWNDCLASSEXW = *mut WNDCLASSEXW;
+pub type NPWNDCLASSEXW = *mut WNDCLASSEXW;
+pub type LPWNDCLASSEXW = *mut WNDCLASSEXW;
+#[repr(C)] #[derive(Copy)]
+pub struct WNDCLASSW {
+    pub style: ::UINT,
+    pub lpfnWndProc: WNDPROC,
+    pub cbClsExtra: ::c_int,
+    pub cbWndExtra: ::c_int,
+    pub hInstance: ::HINSTANCE,
+    pub hIcon: ::HICON,
+    pub hCursor: ::HCURSOR,
+    pub hbrBackground: ::HBRUSH,
+    pub lpszMenuName: ::LPCWSTR,
+    pub lpszClassName: ::LPCWSTR
+}
+impl Clone for WNDCLASSW { fn clone(&self) -> WNDCLASSW { *self } }
+pub type PWNDCLASSW = *mut WNDCLASSW;
+pub type NPWNDCLASSW = *mut WNDCLASSW;
+pub type LPWNDCLASSW = *mut WNDCLASSW;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SCROLLBARINFO {
+    pub cbSize: ::DWORD,
+    pub rcScrollBar: ::RECT,
+    pub dxyLineButton: ::c_int,
+    pub xyThumbTop: ::c_int,
+    pub xyThumbBottom: ::c_int,
+    pub reserved: ::c_int,
+    pub rgstate: [::DWORD; CCHILDREN_SCROLLBAR + 1]
+}
+pub type PSCROLLBARINFO = *mut SCROLLBARINFO;
+pub type LPSCROLLBARINFO = *mut SCROLLBARINFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SCROLLINFO {
+    pub cbSize: ::UINT,
+    pub fMask: ::UINT,
+    pub nMin: ::c_int,
+    pub nMax: ::c_int,
+    pub nPage: ::UINT,
+    pub nPos: ::c_int,
+    pub nTrackPos: ::c_int
+}
+pub type LPSCROLLINFO = *mut SCROLLINFO;
+pub type LPCSCROLLINFO = *const SCROLLINFO;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SIZE {
+    pub cx: ::LONG,
+    pub cy: ::LONG
+}
+pub type PSIZE = *mut SIZE;
 //1913
 pub const UNICODE_NOCHAR: ::WPARAM = 0xffff;
 pub type HDWP = *mut ::HANDLE;

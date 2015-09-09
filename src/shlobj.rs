@@ -1,6 +1,30 @@
-// Copyright © 2015, skdltmxn
+// Copyright © 2015, Peter Atashian, skdltmxn
 // Licensed under the MIT License <LICENSE.md>
-
+pub const INVALID_HANDLE_VALUE: ::HANDLE = -1isize as ::HANDLE;
+pub type GPFIDL_FLAGS = ::c_int;
+ENUM!{enum KNOWN_FOLDER_FLAG {
+    KF_FLAG_DEFAULT = 0x00000000,
+    KF_FLAG_NO_APPCONTAINER_REDIRECTION = 0x00010000,
+    KF_FLAG_CREATE = 0x00008000,
+    KF_FLAG_DONT_VERIFY = 0x00004000,
+    KF_FLAG_DONT_UNEXPAND = 0x00002000,
+    KF_FLAG_NO_ALIAS = 0x00001000,
+    KF_FLAG_INIT = 0x00000800,
+    KF_FLAG_DEFAULT_PATH = 0x00000400,
+    KF_FLAG_NOT_PARENT_RELATIVE = 0x00000200,
+    KF_FLAG_SIMPLE_IDLIST = 0x00000100,
+    KF_FLAG_ALIAS_ONLY = 0x80000000,
+}}
+pub const IDO_SHGIOI_SHARE: ::c_int = 0x0FFFFFFF;
+pub const IDO_SHGIOI_LINK: ::c_int = 0x0FFFFFFE;
+// Yes, these values are supposed to overflow. Blame Microsoft.
+pub const IDO_SHGIOI_SLOWFILE: ::c_int = 0xFFFFFFFDu32 as ::c_int;
+pub const IDO_SHGIOI_DEFAULT: ::c_int = 0xFFFFFFFCu32 as ::c_int;
+pub const GPFIDL_DEFAULT: GPFIDL_FLAGS = 0x0000;
+pub const GPFIDL_ALTNAME: GPFIDL_FLAGS = 0x0001;
+pub const GPFIDL_UNCPRINTER: GPFIDL_FLAGS = 0x0002;
+pub const OFASI_EDIT: ::DWORD = 0x0001;
+pub const OFASI_OPENDESKTOP: ::DWORD = 0x0002;
 // 1204
 pub const CSIDL_DESKTOP: ::c_int = 0x0000;
 pub const CSIDL_INTERNET: ::c_int = 0x0001;

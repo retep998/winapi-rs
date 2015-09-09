@@ -1,6 +1,199 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! GDI procedure declarations, constant definitions and macros
+pub const DISPLAY_DEVICE_ATTACHED_TO_DESKTOP: ::DWORD = 0x00000001;
+pub const DISPLAY_DEVICE_MULTI_DRIVER: ::DWORD = 0x00000002;
+pub const DISPLAY_DEVICE_PRIMARY_DEVICE: ::DWORD = 0x00000004;
+pub const DISPLAY_DEVICE_MIRRORING_DRIVER: ::DWORD = 0x00000008;
+pub const DISPLAY_DEVICE_VGA_COMPATIBLE: ::DWORD = 0x00000010;
+pub const DISPLAY_DEVICE_REMOVABLE: ::DWORD = 0x00000020;
+pub const DISPLAY_DEVICE_ACC_DRIVER: ::DWORD = 0x00000040;
+pub const DISPLAY_DEVICE_MODESPRUNED: ::DWORD = 0x08000000;
+pub const DISPLAY_DEVICE_REMOTE: ::DWORD = 0x04000000;
+pub const DISPLAY_DEVICE_DISCONNECT: ::DWORD = 0x02000000;
+pub const DISPLAY_DEVICE_TS_COMPATIBLE: ::DWORD = 0x00200000;
+pub const DISPLAY_DEVICE_UNSAFE_MODES_ON: ::DWORD = 0x00080000;
+pub const DISPLAY_DEVICE_ACTIVE: ::DWORD = 0x00000001;
+pub const DISPLAY_DEVICE_ATTACHED: ::DWORD = 0x00000002;
+
+pub const DM_ORIENTATION: ::DWORD = 0x00000001;
+pub const DM_PAPERSIZE: ::DWORD = 0x00000002;
+pub const DM_PAPERLENGTH: ::DWORD = 0x00000004;
+pub const DM_PAPERWIDTH: ::DWORD = 0x00000008;
+pub const DM_SCALE: ::DWORD = 0x00000010;
+pub const DM_POSITION: ::DWORD = 0x00000020;
+pub const DM_NUP: ::DWORD = 0x00000040;
+pub const DM_DISPLAYORIENTATION: ::DWORD = 0x00000080;
+pub const DM_COPIES: ::DWORD = 0x00000100;
+pub const DM_DEFAULTSOURCE: ::DWORD = 0x00000200;
+pub const DM_PRINTQUALITY: ::DWORD = 0x00000400;
+pub const DM_COLOR: ::DWORD = 0x00000800;
+pub const DM_DUPLEX: ::DWORD = 0x00001000;
+pub const DM_YRESOLUTION: ::DWORD = 0x00002000;
+pub const DM_TTOPTION: ::DWORD = 0x00004000;
+pub const DM_COLLATE: ::DWORD = 0x00008000;
+pub const DM_FORMNAME: ::DWORD = 0x00010000;
+pub const DM_LOGPIXELS: ::DWORD = 0x00020000;
+pub const DM_BITSPERPEL: ::DWORD = 0x00040000;
+pub const DM_PELSWIDTH: ::DWORD = 0x00080000;
+pub const DM_PELSHEIGHT: ::DWORD = 0x00100000;
+pub const DM_DISPLAYFLAGS: ::DWORD = 0x00200000;
+pub const DM_DISPLAYFREQUENCY: ::DWORD = 0x00400000;
+pub const DM_ICMMETHOD: ::DWORD = 0x00800000;
+pub const DM_ICMINTENT: ::DWORD = 0x01000000;
+pub const DM_MEDIATYPE: ::DWORD = 0x02000000;
+pub const DM_DITHERTYPE: ::DWORD = 0x04000000;
+pub const DM_PANNINGWIDTH: ::DWORD = 0x08000000;
+pub const DM_PANNINGHEIGHT: ::DWORD = 0x10000000;
+pub const DM_DISPLAYFIXEDOUTPUT: ::DWORD = 0x20000000;
+
+pub const PFD_TYPE_RGBA: ::BYTE = 0;
+pub const PFD_TYPE_COLORINDEX: ::BYTE = 1;
+pub const PFD_MAIN_PLANE: ::BYTE = 0;
+pub const PFD_OVERLAY_PLANE: ::BYTE = 1;
+pub const PFD_UNDERLAY_PLANE: ::BYTE = 0xFF;
+pub const PFD_DOUBLEBUFFER: ::DWORD = 0x00000001;
+pub const PFD_STEREO: ::DWORD = 0x00000002;
+pub const PFD_DRAW_TO_WINDOW: ::DWORD = 0x00000004;
+pub const PFD_DRAW_TO_BITMAP: ::DWORD = 0x00000008;
+pub const PFD_SUPPORT_GDI: ::DWORD = 0x00000010;
+pub const PFD_SUPPORT_OPENGL: ::DWORD = 0x00000020;
+pub const PFD_GENERIC_FORMAT: ::DWORD = 0x00000040;
+pub const PFD_NEED_PALETTE: ::DWORD = 0x00000080;
+pub const PFD_NEED_SYSTEM_PALETTE: ::DWORD = 0x00000100;
+pub const PFD_SWAP_EXCHANGE: ::DWORD = 0x00000200;
+pub const PFD_SWAP_COPY: ::DWORD = 0x00000400;
+pub const PFD_SWAP_LAYER_BUFFERS: ::DWORD = 0x00000800;
+pub const PFD_GENERIC_ACCELERATED: ::DWORD = 0x00001000;
+pub const PFD_SUPPORT_DIRECTDRAW: ::DWORD = 0x00002000;
+pub const PFD_DIRECT3D_ACCELERATED: ::DWORD = 0x00004000;
+pub const PFD_SUPPORT_COMPOSITION: ::DWORD = 0x00008000;
+pub const PFD_DEPTH_DONTCARE: ::DWORD = 0x20000000;
+pub const PFD_DOUBLEBUFFER_DONTCARE: ::DWORD = 0x40000000;
+pub const PFD_STEREO_DONTCARE: ::DWORD = 0x80000000;
+
+pub const CCHFORMNAME: usize = 32;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DEVMODEA {
+    pub dmDeviceName: [::CHAR; ::CCHDEVICENAME],
+    pub dmSpecVersion: ::WORD,
+    pub dmDriverVersion: ::WORD,
+    pub dmSize: ::WORD,
+    pub dmDriverExtra: ::WORD,
+    pub dmFields: ::DWORD,
+    pub union1: [u8; 16],
+    pub dmColor: ::c_short,
+    pub dmDuplex: ::c_short,
+    pub dmYResolution: ::c_short,
+    pub dmTTOption: ::c_short,
+    pub dmCollate: ::c_short,
+    pub dmFormName: [::CHAR; CCHFORMNAME],
+    pub dmLogPixels: ::WORD,
+    pub dmBitsPerPel: ::DWORD,
+    pub dmPelsWidth: ::DWORD,
+    pub dmPelsHeight: ::DWORD,
+    pub dmDisplayFlags: ::DWORD,
+    pub dmDisplayFrequency: ::DWORD,
+    pub dmICMMethod: ::DWORD,
+    pub dmICMIntent: ::DWORD,
+    pub dmMediaType: ::DWORD,
+    pub dmDitherType: ::DWORD,
+    pub dmReserved1: ::DWORD,
+    pub dmReserved2: ::DWORD,
+    pub dmPanningWidth: ::DWORD,
+    pub dmPanningHeight: ::DWORD,
+}
+pub type PDEVMODEA = *mut DEVMODEA;
+pub type NPDEVMODEA = *mut DEVMODEA;
+pub type LPDEVMODEA = *mut DEVMODEA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DEVMODEW {
+    pub dmDeviceName: [::WCHAR; ::CCHDEVICENAME],
+    pub dmSpecVersion: ::WORD,
+    pub dmDriverVersion: ::WORD,
+    pub dmSize: ::WORD,
+    pub dmDriverExtra: ::WORD,
+    pub dmFields: ::DWORD,
+    pub union1: [u8; 16],
+    pub dmColor: ::c_short,
+    pub dmDuplex: ::c_short,
+    pub dmYResolution: ::c_short,
+    pub dmTTOption: ::c_short,
+    pub dmCollate: ::c_short,
+    pub dmFormName: [::WCHAR; CCHFORMNAME],
+    pub dmLogPixels: ::WORD,
+    pub dmBitsPerPel: ::DWORD,
+    pub dmPelsWidth: ::DWORD,
+    pub dmPelsHeight: ::DWORD,
+    pub dmDisplayFlags: ::DWORD,
+    pub dmDisplayFrequency: ::DWORD,
+    pub dmICMMethod: ::DWORD,
+    pub dmICMIntent: ::DWORD,
+    pub dmMediaType: ::DWORD,
+    pub dmDitherType: ::DWORD,
+    pub dmReserved1: ::DWORD,
+    pub dmReserved2: ::DWORD,
+    pub dmPanningWidth: ::DWORD,
+    pub dmPanningHeight: ::DWORD,
+}
+pub type PDEVMODEW = *mut DEVMODEW;
+pub type NPDEVMODEW = *mut DEVMODEW;
+pub type LPDEVMODEW = *mut DEVMODEW;
+#[repr(C)] #[derive(Copy)]
+pub struct DISPLAY_DEVICEW {
+    pub cb: ::DWORD,
+    pub DeviceName: [::WCHAR; 32],
+    pub DeviceString: [::WCHAR; 128],
+    pub StateFlags: ::DWORD,
+    pub DeviceID: [::WCHAR; 128],
+    pub DeviceKey: [::WCHAR; 128],
+}
+impl Clone for DISPLAY_DEVICEW { fn clone(&self) -> DISPLAY_DEVICEW { *self } }
+pub type PDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
+pub type LPDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
+#[repr(C)] #[derive(Copy)]
+pub struct DISPLAY_DEVICEA {
+    pub cb: ::DWORD,
+    pub DeviceName: [::CHAR; 32],
+    pub DeviceString: [::CHAR; 128],
+    pub StateFlags: ::DWORD,
+    pub DeviceID: [::CHAR; 128],
+    pub DeviceKey: [::CHAR; 128],
+}
+impl Clone for DISPLAY_DEVICEA { fn clone(&self) -> DISPLAY_DEVICEA { *self } }
+pub type PDISPLAY_DEVICEA = *mut DISPLAY_DEVICEA;
+pub type LPDISPLAY_DEVICEA = *mut DISPLAY_DEVICEA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct PIXELFORMATDESCRIPTOR {
+    pub nSize: ::WORD,
+    pub nVersion: ::WORD,
+    pub dwFlags: ::DWORD,
+    pub iPixelType: ::BYTE,
+    pub cColorBits: ::BYTE,
+    pub cRedBits: ::BYTE,
+    pub cRedShift: ::BYTE,
+    pub cGreenBits: ::BYTE,
+    pub cGreenShift: ::BYTE,
+    pub cBlueBits: ::BYTE,
+    pub cBlueShift: ::BYTE,
+    pub cAlphaBits: ::BYTE,
+    pub cAlphaShift: ::BYTE,
+    pub cAccumBits: ::BYTE,
+    pub cAccumRedBits: ::BYTE,
+    pub cAccumGreenBits: ::BYTE,
+    pub cAccumBlueBits: ::BYTE,
+    pub cAccumAlphaBits: ::BYTE,
+    pub cDepthBits: ::BYTE,
+    pub cStencilBits: ::BYTE,
+    pub cAuxBuffers: ::BYTE,
+    pub iLayerType: ::BYTE,
+    pub bReserved: ::BYTE,
+    pub dwLayerMask: ::DWORD,
+    pub dwVisibleMask: ::DWORD,
+    pub dwDamageMask: ::DWORD,
+}
+pub type PPIXELFORMATDESCRIPTOR = *mut PIXELFORMATDESCRIPTOR;
+pub type LPPIXELFORMATDESCRIPTOR = *mut PIXELFORMATDESCRIPTOR;
 pub const R2_BLACK: ::c_int = 1;
 pub const R2_NOTMERGEPEN: ::c_int = 2;
 pub const R2_MASKNOTPEN: ::c_int = 3;
