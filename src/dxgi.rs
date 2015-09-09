@@ -116,6 +116,37 @@ pub struct DXGI_SWAP_CHAIN_DESC {
     pub Flags: ::UINT,
 }
 
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DXGI_SWAP_CHAIN_DESC1 {
+    pub Width: ::UINT,
+    pub Height: ::UINT,
+    pub Format: ::DXGI_FORMAT,
+    pub Stereo: ::BOOL,
+    pub SampleDesc: ::DXGI_SAMPLE_DESC,
+    pub BufferUsage: ::DXGI_USAGE,
+    pub BufferCount: ::UINT,
+    pub Scaling: ::DXGI_SCALING,
+    pub SwapEffect: ::DXGI_SWAP_EFFECT,
+    pub AlphaMode: ::DXGI_ALPHA_MODE,
+    pub Flags: ::UINT,
+}
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC {
+    pub RefreshRate: ::DXGI_RATIONAL,
+    pub ScanlineOrdering: ::DXGI_MODE_SCANLINE_ORDER,
+    pub Scaling: ::DXGI_MODE_SCALING,
+    pub Windowed: ::BOOL,
+}
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DXGI_PRESENT_PARAMETERS {
+    pub DirtyRectsCount: ::UINT,
+    pub pDirtyRects: *mut ::RECT,
+    pub pScrollRect: *mut ::RECT,
+    pub pScrollOffset: *mut ::POINT,
+}
+
 RIDL!(
 interface IDXGIObject(IDXGIObjectVtbl): IUnknown(IUnknownVtbl) {
     fn SetPrivateData(
@@ -227,6 +258,59 @@ interface IDXGISwapChain(IDXGISwapChainVtbl): IDXGIDeviceSubObject(IDXGIDeviceSu
 });
 
 RIDL!(
+interface IDXGISwapChain1(IDXGISwapChain1Vtbl): IDXGISwapChain(IDXGISwapChainVtbl) {
+    fn GetDesc1(&mut self, pDesc: *mut ::DXGI_SWAP_CHAIN_DESC1) -> ::HRESULT,
+    fn GetFullscreenDesc(&mut self, pDesc: *mut ::DXGI_SWAP_CHAIN_FULLSCREEN_DESC) -> ::HRESULT,
+    fn GetHwnd(&mut self, pHwnd: *mut ::HWND) -> ::HRESULT,
+    fn GetCoreWindow(&mut self, refiid: ::REFIID, ppUnk: *mut *mut ::c_void) -> ::HRESULT,
+    fn Present1(
+        &mut self, SyncInterval: ::UINT, PresentFlags: ::UINT,
+        pPresentParameters: *const DXGI_PRESENT_PARAMETERS
+    ) -> ::HRESULT,
+    fn IsTemporaryMonoSupported(&mut self) -> ::BOOL,
+    fn GetRestrictToOutput(&mut self, ppRestrictToOutput: *mut *mut ::IDXGIOutput) -> ::HRESULT,
+    fn SetBackgroundColor(&mut self, pColor: *const ::DXGI_RGBA) -> ::HRESULT,
+    fn GetBackgroundColor(&mut self, pColor: *mut ::DXGI_RGBA) -> ::HRESULT,
+    fn SetRotation(&mut self, Rotation: *const ::DXGI_MODE_ROTATION ) -> ::HRESULT,
+    fn GetRotation(&mut self, pRotation: *mut ::DXGI_MODE_ROTATION) -> ::HRESULT
+});
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DXGI_MATRIX_3X2_F {
+    pub _11: ::FLOAT,
+    pub _12: ::FLOAT,
+    pub _21: ::FLOAT,
+    pub _22: ::FLOAT,
+    pub _31: ::FLOAT,
+    pub _32: ::FLOAT,
+}
+
+RIDL!(
+interface IDXGISwapChain2(IDXGISwapChain2Vtbl): IDXGISwapChain1(IDXGISwapChain1Vtbl) {
+    fn SetSourceSize(&mut self, Width: ::UINT, Height: ::UINT) -> ::HRESULT,
+    fn GetSourceSize(&mut self, pWidth: *mut ::UINT, pHeight: *mut ::UINT) -> ::HRESULT,
+    fn SetMaximumFrameLatency(&mut self, MaxLatency: ::UINT) -> ::HRESULT,
+    fn GetMaximumFrameLatency(&mut self, pMaxLatency: *mut ::UINT) -> ::HRESULT,
+    fn GetFrameLatencyWaitableObject(&mut self) -> ::HANDLE,
+    fn SetMatrixTransform(&mut self, pMatrix: *const DXGI_MATRIX_3X2_F) -> ::HRESULT,
+    fn GetMatrixTransform(&mut self, pMatrix: *mut DXGI_MATRIX_3X2_F) -> ::HRESULT
+});
+
+RIDL!(
+interface IDXGISwapChain3(IDXGISwapChain3Vtbl): IDXGISwapChain2(IDXGISwapChain2Vtbl) {
+    fn GetCurrentBackBufferIndex(&mut self) -> ::UINT,
+    fn CheckColorSpaceSupport(
+        &mut self, ColorSpace: ::DXGI_COLOR_SPACE_TYPE, pColorSpaceSupport: *mut ::UINT
+    ) -> ::HRESULT,
+    fn SetColorSpace1(&mut self, ColorSpace: ::DXGI_COLOR_SPACE_TYPE) -> ::HRESULT,
+    fn ResizeBuffers1(
+        &mut self, BufferCount: ::UINT, Width: ::UINT, Height: ::UINT, Format: ::DXGI_FORMAT,
+        SwapChainFlags: ::UINT, pCreationNodeMask: *const ::UINT, 
+        ppPresentQueue: *const *mut ::IUnknown
+    ) -> ::HRESULT
+});
+
+RIDL!(
 interface IDXGIFactory(IDXGIFactoryVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn EnumAdapters(&mut self, Adapter: ::UINT, ppAdapter: *mut *mut IDXGIAdapter) -> ::HRESULT,
     fn MakeWindowAssociation(&mut self, WindowHandle: ::HWND, Flags: ::UINT) -> ::HRESULT,
@@ -264,6 +348,16 @@ pub enum DXGI_ADAPTER_FLAG {
 
 pub use self::DXGI_ADAPTER_FLAG::*;
 
+#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
+pub enum DXGI_ALPHA_MODE {
+    DXGI_ALPHA_MODE_UNSPECIFIED,
+    DXGI_ALPHA_MODE_PREMULTIPLIED,
+    DXGI_ALPHA_MODE_STRAIGHT,
+    DXGI_ALPHA_MODE_IGNORE,
+}
+
+pub use self::DXGI_ALPHA_MODE::*;
+
 #[repr(C)] #[derive(Copy)]
 pub struct DXGI_ADAPTER_DESC1 {
     pub Description: [::WCHAR; 128],
@@ -283,6 +377,15 @@ impl Clone for DXGI_ADAPTER_DESC1 {
         *self
     }
 }
+
+#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
+pub enum DXGI_SCALING {
+    DXGI_SCALING_STRETCH,
+    DXGI_SCALING_NONE,
+    DXGI_SCALING_ASPECT_RATIO_STRETCH,
+}
+
+pub use self::DXGI_SCALING::*;
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DXGI_DISPLAY_COLOR_SPACE {
