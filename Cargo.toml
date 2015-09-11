@@ -28,6 +28,7 @@ httpapi-sys = { version = "*", path = "lib/httpapi-sys" }
 kernel32-sys = { version = "*", path = "lib/kernel32-sys" }
 ktmw32-sys = { version = "*", path = "lib/ktmw32-sys" }
 mpr-sys = { version = "*", path = "lib/mpr-sys" }
+netapi32-sys = { version = "*", path = "lib/netapi32-sys" }
 ole32-sys = { version = "*", path = "lib/ole32-sys" }
 oleaut32-sys = { version = "*", path = "lib/oleaut32-sys" }
 opengl32-sys = { version = "*", path = "lib/opengl32-sys" }
