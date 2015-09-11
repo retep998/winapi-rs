@@ -41,6 +41,7 @@ uuid-sys = { version = "*", path = "lib/uuid-sys" }
 vssapi-sys = { version = "*", path = "lib/vssapi-sys" }
 winhttp-sys = { version = "*", path = "lib/winhttp-sys" }
 winmm-sys = { version = "*", path = "lib/winmm-sys" }
+winscard-sys = { version = "*", path = "lib/winscard-sys" }
 winspool-sys = { version = "*", path = "lib/winspool-sys" }
 ws2_32-sys = { version = "*", path = "lib/ws2_32-sys" }
 xinput-sys = { version = "*", path = "lib/xinput-sys" }
