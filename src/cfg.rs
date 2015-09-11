@@ -1,8 +1,7 @@
 // Copyright © 2015, skdltmxn
 // Licensed under the MIT License <LICENSE.md>
 //! common Configuration Manager definitions for both user mode and kernel mode code
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum PNP_VETO_TYPE {
+ENUM!{enum PNP_VETO_TYPE {
     PNP_VetoTypeUnknown,
     PNP_VetoLegacyDevice,
     PNP_VetoPendingClose,
@@ -16,7 +15,7 @@ pub enum PNP_VETO_TYPE {
     PNP_VetoNonDisableable,
     PNP_VetoLegacyDriver,
     PNP_VetoInsufficientRights,
-}
+}}
 pub type PPNP_VETO_TYPE = *mut PNP_VETO_TYPE;
 
 pub const CM_PROB_NOT_CONFIGURED: ::CONFIGRET = 0x00000001;
