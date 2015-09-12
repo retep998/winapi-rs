@@ -1963,3 +1963,54 @@ pub const DT_WORD_ELLIPSIS: ::UINT = 0x00040000;
 pub const DT_NOFULLWIDTHCHARBREAK: ::UINT = 0x00080000;
 pub const DT_HIDEPREFIX: ::UINT = 0x00100000;
 pub const DT_PREFIXONLY: ::UINT = 0x00200000;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct KBDLLHOOKSTRUCT {
+    pub vkCode: ::DWORD,
+    pub scanCode: ::DWORD,
+    pub flags: ::DWORD,
+    pub time: ::DWORD,
+    pub dwExtraInfo: ::ULONG_PTR,
+}
+pub type PKBDLLHOOKSTRUCT = *mut KBDLLHOOKSTRUCT;
+pub type LPKBDLLHOOKSTRUCT = *mut KBDLLHOOKSTRUCT;
+
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MSLLHOOKSTRUCT {
+    pub pt: ::POINT,
+    pub mouseData: ::DWORD,
+    pub flags: ::DWORD,
+    pub time: ::DWORD,
+    pub dwExtraInfo: ::ULONG_PTR,
+}
+pub type PMSLLHOOKSTRUCT = *mut MSLLHOOKSTRUCT;
+pub type LPMSLLHOOKSTRUCT = *mut MSLLHOOKSTRUCT;
+
+pub const WH_MIN: ::c_int = -1;
+pub const WH_MSGFILTER: ::c_int = -1;
+pub const WH_JOURNALRECORD: ::c_int = 0;
+pub const WH_JOURNALPLAYBACK: ::c_int = 1;
+pub const WH_KEYBOARD: ::c_int = 2;
+pub const WH_GETMESSAGE: ::c_int = 3;
+pub const WH_CALLWNDPROC: ::c_int = 4;
+pub const WH_CBT: ::c_int = 5;
+pub const WH_SYSMSGFILTER: ::c_int = 6;
+pub const WH_MOUSE: ::c_int = 7;
+pub const WH_HARDWARE: ::c_int = 8;
+pub const WH_DEBUG: ::c_int = 9;
+pub const WH_SHELL: ::c_int = 10;
+pub const WH_FOREGROUNDIDLE: ::c_int = 11;
+pub const WH_CALLWNDPROCRET: ::c_int = 12;
+pub const WH_KEYBOARD_LL: ::c_int = 13;
+pub const WH_MOUSE_LL: ::c_int = 14;
+pub const WH_MAX: ::c_int = 14;
+pub const WH_MINHOOK: ::c_int = WH_MIN;
+pub const WH_MAXHOOK: ::c_int = WH_MAX;
+
+pub const KLF_ACTIVATE: ::UINT = 1;
+pub const KLF_SUBSTITUTE_OK: ::UINT = 2;
+pub const KLF_UNLOADPREVIOUS: ::UINT = 4;
+pub const KLF_REORDER: ::UINT = 8;
+pub const KLF_REPLACELANG: ::UINT = 16;
+pub const KLF_NOTELLSHELL: ::UINT = 128;
+pub const KLF_SETFORPROCESS: ::UINT = 256;
