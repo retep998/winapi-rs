@@ -1,10 +1,12 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! Types and constants for WinAPI bindings.
+#![feature(trace_macros)]
 #![allow(bad_style, raw_pointer_derive)]
 #![warn(missing_copy_implementations, trivial_casts, trivial_numeric_casts)]
 #![warn(unused_qualifications, unused)]
 #![cfg(windows)]
+trace_macros!(true);
 //-------------------------------------------------------------------------------------------------
 // Imports
 //-------------------------------------------------------------------------------------------------
@@ -46,6 +48,9 @@ pub use dsound::*;
 pub use dwmapi::*;
 pub use dwrite::*;
 pub use dxgi::*;
+pub use dxgi1_2::*;
+pub use dxgi1_3::*;
+pub use dxgi1_4::*;
 pub use dxgiformat::*;
 pub use dxgitype::*;
 pub use errhandlingapi::*;
@@ -161,6 +166,9 @@ pub mod dsound;
 pub mod dwmapi;
 pub mod dwrite;
 pub mod dxgi;
+pub mod dxgi1_2;
+pub mod dxgi1_3;
+pub mod dxgi1_4;
 pub mod dxgiformat;
 pub mod dxgitype;
 pub mod errhandlingapi;
