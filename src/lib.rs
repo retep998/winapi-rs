@@ -1,12 +1,10 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! Types and constants for WinAPI bindings.
-#![feature(trace_macros)]
 #![allow(bad_style, raw_pointer_derive)]
 #![warn(missing_copy_implementations, trivial_casts, trivial_numeric_casts)]
 #![warn(unused_qualifications, unused)]
 #![cfg(windows)]
-trace_macros!(true);
 //-------------------------------------------------------------------------------------------------
 // Imports
 //-------------------------------------------------------------------------------------------------
