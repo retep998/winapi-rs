@@ -1,9 +1,7 @@
 // Copyright © 2015, Connor Hilarides
 // Licensed under the MIT License <LICENSE.md>
 //! Mappings for the contents of dxgiformat.h
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DXGI_FORMAT {
+ENUM!{enum DXGI_FORMAT {
     DXGI_FORMAT_UNKNOWN = 0,
     DXGI_FORMAT_R32G32B32A32_TYPELESS = 1,
     DXGI_FORMAT_R32G32B32A32_FLOAT = 2,
@@ -123,6 +121,4 @@ pub enum DXGI_FORMAT {
     DXGI_FORMAT_P208 = 130,
     DXGI_FORMAT_V208 = 131,
     DXGI_FORMAT_V408 = 132,
-}
-
-pub use self::DXGI_FORMAT::*;
+}}
