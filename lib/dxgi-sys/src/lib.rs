@@ -8,11 +8,15 @@ use winapi::*;
 extern "system" {
     pub fn CreateDXGIFactory(riid: REFIID, ppFactory: *mut *mut c_void) -> HRESULT;
     pub fn CreateDXGIFactory1(riid: REFIID, ppFactory: *mut *mut c_void) -> HRESULT;
-    // pub fn CreateDXGIFactory2();
+    pub fn CreateDXGIFactory2(
+        Flags: UINT, riid: REFGUID, ppFactory: *mut *mut c_void
+    ) -> HRESULT;
+    pub fn DXGIGetDebugInterface1(
+        Flags: UINT, riid: REFGUID, pDebug: *mut *mut c_void
+    ) -> HRESULT;
     // pub fn DXGID3D10CreateDevice();
     // pub fn DXGID3D10CreateLayeredDevice();
     // pub fn DXGID3D10GetLayeredDeviceSize();
     // pub fn DXGID3D10RegisterLayers();
-    // pub fn DXGIGetDebugInterface1();
     // pub fn DXGIReportAdapterConfiguration();
 }
