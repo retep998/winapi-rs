@@ -8,8 +8,8 @@ use dxgi_sys::*;
 fn functions() {
     bb(CreateDXGIFactory);
     bb(CreateDXGIFactory1);
-    bb(CreateDXGIFactory2);
-    bb(DXGIGetDebugInterface1);
+//    bb(CreateDXGIFactory2);
+//    bb(DXGIGetDebugInterface1);
 }
 #[cfg(target_env = "msvc")]
 #[test]

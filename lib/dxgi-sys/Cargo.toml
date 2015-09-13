@@ -13,3 +13,5 @@ links = "dxgi"
 
 [dependencies]
 winapi = "*"
+[build-dependencies]
+winapi-build = { version = "*", path = "../../build" }
