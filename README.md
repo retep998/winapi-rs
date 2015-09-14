@@ -36,6 +36,7 @@ These are the ones that actually have functions in them:
 * [advapi32-sys ![Crates.io](https://img.shields.io/crates/v/advapi32-sys.svg)](https://crates.io/crates/advapi32-sys)
 * [crypt32-sys ![Crates.io](https://img.shields.io/crates/v/crypt32-sys.svg)](https://crates.io/crates/crypt32-sys)
 * [d3d9-sys ![Crates.io](https://img.shields.io/crates/v/d3d9-sys.svg)](https://crates.io/crates/d3d9-sys)
+* [d3d12-sys ![Crates.io](https://img.shields.io/crates/v/d3d12-sys.svg)](https://crates.io/crates/d3d12-sys)
 * [dbghelp-sys ![Crates.io](https://img.shields.io/crates/v/dbghelp-sys.svg)](https://crates.io/crates/dbghelp-sys)
 * [dsound-sys ![Crates.io](https://img.shields.io/crates/v/dsound-sys.svg)](https://crates.io/crates/dsound-sys)
 * [dwmapi-sys ![Crates.io](https://img.shields.io/crates/v/dwmapi-sys.svg)](https://crates.io/crates/dwmapi-sys)
