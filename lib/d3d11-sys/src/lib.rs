@@ -10,8 +10,21 @@ extern "system" {
     // pub fn D3D11CoreCreateLayeredDevice();
     // pub fn D3D11CoreGetLayeredDeviceSize();
     // pub fn D3D11CoreRegisterLayers();
-    // pub fn D3D11CreateDevice();
-    // pub fn D3D11CreateDeviceAndSwapChain();
+
+    pub fn D3D11CreateDevice(
+        pAdapter: *const IDXGIAdapter, DriverType: D3D_DRIVER_TYPE, Software: HMODULE,
+        Flags: UINT, pFeatureLevels: *mut D3D_FEATURE_LEVEL, FeatureLevels: UINT,
+        SDKVersion: UINT, ppDevice: *mut *mut ID3D11Device, pFeatureLevel: *mut D3D_FEATURE_LEVEL,
+        ppImmediateContext: *mut *mut ID3D11DeviceContext
+    ) -> HRESULT;
+    pub fn D3D11CreateDeviceAndSwapChain(
+        pAdapter: *const IDXGIAdapter, DriverType: D3D_DRIVER_TYPE, Software: HMODULE,
+        Flags: UINT, pFeatureLevels: *mut D3D_FEATURE_LEVEL, FeatureLevels: UINT,
+        SDKVersion: UINT, pSwapChainDesc: *const DXGI_SWAP_CHAIN_DESC,
+        ppSwapChain: *mut *mut IDXGISwapChain, ppDevice: *mut *mut ID3D11Device,
+        pFeatureLevel: *mut D3D_FEATURE_LEVEL, ppImmediateContext: *mut *mut ID3D11DeviceContext
+    ) -> HRESULT;
+
     // pub fn D3DKMTCreateAllocation();
     // pub fn D3DKMTCreateContext();
     // pub fn D3DKMTCreateDevice();
