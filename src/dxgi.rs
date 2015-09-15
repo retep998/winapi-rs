@@ -62,14 +62,11 @@ pub const DXGI_RESOURCE_PRIORITY_NORMAL: ::DWORD = 0x78000000;
 pub const DXGI_RESOURCE_PRIORITY_HIGH: ::DWORD = 0xa0000000;
 pub const DXGI_RESOURCE_PRIORITY_MAXIMUM: ::DWORD = 0xc8000000;
 
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DXGI_RESIDENCY {
+ENUM!{ enum DXGI_RESIDENCY {
     DXGI_RESIDENCY_FULLY_RESIDENT = 1,
     DXGI_RESIDENCY_RESIDENT_IN_SHARED_MEMORY = 2,
     DXGI_RESIDENCY_EVICTED_TO_DISK = 3,
-}
-
-pub use self::DXGI_RESIDENCY::*;
+}}
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DXGI_SURFACE_DESC {
@@ -79,30 +76,26 @@ pub struct DXGI_SURFACE_DESC {
     pub SampleDesc: ::DXGI_SAMPLE_DESC,
 }
 
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DXGI_SWAP_EFFECT {
+ENUM!{ enum DXGI_SWAP_EFFECT {
     DXGI_SWAP_EFFECT_DISCARD = 0,
     DXGI_SWAP_EFFECT_SEQUENTIAL = 1,
     DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL = 3,
-}
+    DXGI_SWAP_EFFECT_FLIP_DISCARD = 4,
+}}
 
-pub use self::DXGI_SWAP_EFFECT::*;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DXGI_SWAP_CHAIN_FLAG {
-    DXGI_SWAP_CHAIN_FLAG_NONPREROTATED = 1,
-    DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH = 2,
-    DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE = 4,
-    DXGI_SWAP_CHAIN_FLAG_RESTRICTED_CONTENT = 8,
-    DXGI_SWAP_CHAIN_FLAG_RESTRICT_SHARED_RESOURCE_DRIVER = 16,
-    DXGI_SWAP_CHAIN_FLAG_DISPLAY_ONLY = 32,
-    DXGI_SWAP_CHAIN_FLAG_FRAME_LATENCY_WAITABLE_OBJECT = 64,
-    DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER = 128,
-    DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO = 256,
-    DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO = 512,
-}
-
-pub use self::DXGI_SWAP_CHAIN_FLAG::*;
+FLAGS!{ enum DXGI_SWAP_CHAIN_FLAG {
+    DXGI_SWAP_CHAIN_FLAG_NONPREROTATED = 0x1,
+    DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH = 0x2,
+    DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE = 0x4,
+    DXGI_SWAP_CHAIN_FLAG_RESTRICTED_CONTENT = 0x8,
+    DXGI_SWAP_CHAIN_FLAG_RESTRICT_SHARED_RESOURCE_DRIVER = 0x10,
+    DXGI_SWAP_CHAIN_FLAG_DISPLAY_ONLY = 0x20,
+    DXGI_SWAP_CHAIN_FLAG_FRAME_LATENCY_WAITABLE_OBJECT = 0x40,
+    DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER = 0x80,
+    DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO = 0x100,
+    DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO = 0x200,
+    DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED = 0x400,
+}}
 
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DXGI_SWAP_CHAIN_DESC {
@@ -231,7 +224,7 @@ interface IDXGIFactory(IDXGIFactoryVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn EnumAdapters(&mut self, Adapter: ::UINT, ppAdapter: *mut *mut IDXGIAdapter) -> ::HRESULT,
     fn MakeWindowAssociation(&mut self, WindowHandle: ::HWND, Flags: ::UINT) -> ::HRESULT,
     fn GetWindowAssociation(&mut self, pWindowHandle: *mut ::HWND) -> ::HRESULT,
-    fn CreateSwapChan(
+    fn CreateSwapChain(
         &mut self, pDevice: *mut ::IUnknown, pDesc: *mut DXGI_SWAP_CHAIN_DESC,
         ppSwapChain: *mut *mut IDXGISwapChain
     ) -> ::HRESULT,
@@ -255,14 +248,12 @@ interface IDXGIDevice(IDXGIDeviceVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn GetGPUThreadPriority(&mut self, pPriority: *mut ::INT) -> ::HRESULT
 });
 
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DXGI_ADAPTER_FLAG {
-    DXGI_ADAPTER_FLAG_NONE,
-    DXGI_ADAPTER_FLAG_REMOTE,
-    DXGI_ADAPTER_FLAG_SOFTWARE,
-}
-
-pub use self::DXGI_ADAPTER_FLAG::*;
+FLAGS!{ enum DXGI_ADAPTER_FLAG {
+    DXGI_ADAPTER_FLAG_NONE = 0x0,
+    DXGI_ADAPTER_FLAG_REMOTE = 0x1,
+    DXGI_ADAPTER_FLAG_SOFTWARE = 0x2,
+    DXGI_ADAPTER_FLAG_FORCE_DWORD = 0xFFFFFFFF,
+}}
 
 #[repr(C)] #[derive(Copy)]
 pub struct DXGI_ADAPTER_DESC1 {
@@ -306,3 +297,53 @@ interface IDXGIDevice1(IDXGIDevice1Vtbl): IDXGIDevice(IDXGIDeviceVtbl) {
     fn SetMaximumFrameLatency(&mut self, MaxLatency: ::UINT) -> ::HRESULT,
     fn GetMaximumFrameLatency(&mut self, pMaxLatency: *mut ::UINT) -> ::HRESULT
 });
+
+pub type DXGI_USAGE = ::UINT;
+
+pub const DXGI_CPU_ACCESS_DYNAMIC: ::UINT = 1;
+pub const DXGI_CPU_ACCESS_FIELD: ::UINT = 15;
+pub const DXGI_CPU_ACCESS_NONE: ::UINT = 0;
+pub const DXGI_CPU_ACCESS_READ_WRITE: ::UINT = 2;
+pub const DXGI_CPU_ACCESS_SCRATCH: ::UINT = 3;
+pub const DXGI_ENUM_MODES_INTERLACED: ::UINT = 1;
+pub const DXGI_ENUM_MODES_SCALING: ::UINT = 2;
+pub const DXGI_MAP_DISCARD: ::UINT = 4;
+pub const DXGI_MAP_READ: ::UINT = 1;
+pub const DXGI_MAP_WRITE: ::UINT = 2;
+pub const DXGI_MWA_VALID: ::UINT = 0x7;
+pub const DXGI_USAGE_BACK_BUFFER: ::UINT = 0x00000040;
+pub const DXGI_USAGE_DISCARD_ON_PRESENT: ::UINT = 0x00000200;
+pub const DXGI_USAGE_READ_ONLY: ::UINT = 0x00000100;
+pub const DXGI_USAGE_RENDER_TARGET_OUTPUT: ::UINT = 0x00000020;
+pub const DXGI_USAGE_SHADER_INPUT: ::UINT = 0x00000010;
+pub const DXGI_USAGE_SHARED: ::UINT = 0x00000080;
+pub const DXGI_USAGE_UNORDERED_ACCESS: ::UINT = 0x00000400;
+
+DEFINE_GUID!(IID_IDXGIObject,0xaec22fb8,0x76f3,0x4639,0x9b,0xe0,0x28,0xeb,0x43,
+    0xa6,0x7a,0x2e);
+DEFINE_GUID!(IID_IDXGIDeviceSubObject,0x3d3e0379,0xf9de,0x4d58,0xbb,0x6c,0x18,
+    0xd6,0x29,0x92,0xf1,0xa6);
+DEFINE_GUID!(IID_IDXGIResource,0x035f3ab4,0x482e,0x4e50,0xb4,0x1f,0x8a,0x7f,
+    0x8b,0xd8,0x96,0x0b);
+DEFINE_GUID!(IID_IDXGIKeyedMutex,0x9d8e1289,0xd7b3,0x465f,0x81,0x26,0x25,0x0e,
+    0x34,0x9a,0xf8,0x5d);
+DEFINE_GUID!(IID_IDXGISurface,0xcafcb56c,0x6ac3,0x4889,0xbf,0x47,0x9e,0x23,
+    0xbb,0xd2,0x60,0xec);
+DEFINE_GUID!(IID_IDXGISurface1,0x4AE63092,0x6327,0x4c1b,0x80,0xAE,0xBF,0xE1,
+    0x2E,0xA3,0x2B,0x86);
+DEFINE_GUID!(IID_IDXGIAdapter,0x2411e7e1,0x12ac,0x4ccf,0xbd,0x14,0x97,0x98,
+    0xe8,0x53,0x4d,0xc0);
+DEFINE_GUID!(IID_IDXGIOutput,0xae02eedb,0xc735,0x4690,0x8d,0x52,0x5a,0x8d,
+    0xc2,0x02,0x13,0xaa);
+DEFINE_GUID!(IID_IDXGISwapChain,0x310d36a0,0xd2e7,0x4c0a,0xaa,0x04,0x6a,0x9d,
+    0x23,0xb8,0x88,0x6a);
+DEFINE_GUID!(IID_IDXGIFactory,0x7b7166ec,0x21c7,0x44ae,0xb2,0x1a,0xc9,0xae,
+    0x32,0x1a,0xe3,0x69);
+DEFINE_GUID!(IID_IDXGIDevice,0x54ec77fa,0x1377,0x44e6,0x8c,0x32,0x88,0xfd,0x5f,
+    0x44,0xc8,0x4c);
+DEFINE_GUID!(IID_IDXGIFactory1,0x770aae78,0xf26f,0x4dba,0xa8,0x29,0x25,0x3c,
+    0x83,0xd1,0xb3,0x87);
+DEFINE_GUID!(IID_IDXGIAdapter1,0x29038f61,0x3839,0x4626,0x91,0xfd,0x08,0x68,
+    0x79,0x01,0x1a,0x05);
+DEFINE_GUID!(IID_IDXGIDevice1,0x77db970f,0x6276,0x48ba,0xba,0x28,0x07,0x01,
+    0x43,0xb4,0x39,0x2c);
