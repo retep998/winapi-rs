@@ -1,0 +1,18 @@
+[package]
+name = "d3d12-sys"
+version = "0.0.1"
+authors = ["Peter Atashian <retep998@gmail.com>"]
+description = "FFI bindings to d3d12."
+documentation = "https://retep998.github.io/doc/d3d12-sys/"
+repository = "https://github.com/retep998/winapi-rs"
+readme = "README.md"
+keywords = ["Windows", "FFI", "WinSDK", "D3D12"]
+license = "MIT"
+build = "build.rs"
+links = "d3d12"
+
+[dependencies]
+winapi = { version = "*", path = "../.." }
+
+[build-dependencies]
+winapi-build = { version = "*", path = "../../build" }
