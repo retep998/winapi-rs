@@ -1,12 +1,12 @@
 [package]
 name = "winapi"
-version = "0.2.3"
+version = "0.2.4"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "Types and constants for WinAPI bindings. See README for list of crates providing function bindings."
 documentation = "https://retep998.github.io/doc/winapi/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["Windows", "FFI", "WinSDK"]
+keywords = ["windows", "ffi", "win32", "com", "directx"]
 license = "MIT"
 
 [dev-dependencies]
