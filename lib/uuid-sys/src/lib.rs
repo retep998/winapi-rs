@@ -234,7 +234,6 @@ extern {
     pub static CLSID_CUIAutomation8: CLSID;
     pub static CLSID_CUIAutomationRegistrar: CLSID;
     pub static CLSID_CURLSearchHook: CLSID;
-    pub static CLSID_CUrlHistory: CLSID;
     pub static CLSID_CXWizard: CLSID;
     pub static CLSID_CanvasGradient: CLSID;
     pub static CLSID_CanvasImageData: CLSID;
@@ -4168,7 +4167,6 @@ extern {
     pub static IID_IEnumSTATPROPSETSTG: IID;
     pub static IID_IEnumSTATPROPSTG: IID;
     pub static IID_IEnumSTATSTG: IID;
-    pub static IID_IEnumSTATURL: IID;
     pub static IID_IEnumScheduleGroup: IID;
     pub static IID_IEnumScript: IID;
     pub static IID_IEnumShellItems: IID;
@@ -6751,8 +6749,6 @@ extern {
     pub static IID_IUriBuilderFactory: IID;
     pub static IID_IUriContainer: IID;
     pub static IID_IUrlHistoryNotify: IID;
-    pub static IID_IUrlHistoryStg: IID;
-    pub static IID_IUrlHistoryStg2: IID;
     pub static IID_IUrlMon: IID;
     pub static IID_IUseToBrowseItem: IID;
     pub static IID_IUserAccountChangeCallback: IID;
