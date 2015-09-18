@@ -38,6 +38,20 @@ pub const NETBIOS_NAME_LEN: ::DWORD = 16;
 pub const MAX_PREFERRED_LENGTH: ::DWORD = -1i32 as ::DWORD;
 pub const CRYPT_KEY_LEN: ::DWORD = 7;
 pub const CRYPT_TXT_LEN: ::DWORD = 8;
-pub const ENCRYPTED_PWLEN: ::DWORD = 16;
+pub const ENCRYPTED_PWLEN: usize = 16;
 pub const SESSION_PWLEN: ::DWORD = 24;
 pub const SESSION_CRYPT_KLEN: ::DWORD = 21;
+pub const PARM_ERROR_UNKNOWN: ::DWORD = -1i32 as ::DWORD;
+pub const PARM_ERROR_NONE: ::DWORD = 0;
+pub const PARMNUM_BASE_INFOLEVEL: ::DWORD = 1000;
+
+pub type LMSTR = ::LPWSTR;
+pub type LMCSTR = ::LPCWSTR;
+pub type NET_API_STATUS = ::DWORD;
+pub type API_RET_TYPE = NET_API_STATUS;
+
+pub const PLATFORM_ID_DOS: ::DWORD = 300;
+pub const PLATFORM_ID_OS2: ::DWORD = 400;
+pub const PLATFORM_ID_NT: ::DWORD = 500;
+pub const PLATFORM_ID_OSF: ::DWORD = 600;
+pub const PLATFORM_ID_VMS: ::DWORD = 700;

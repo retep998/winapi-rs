@@ -97,11 +97,10 @@ pub type CCHAR = ::c_char;
 pub type LCID = ::DWORD;
 pub type PLCID = ::PDWORD;
 pub type LANGID = ::WORD;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub enum COMPARTMENT_ID {
+ENUM!{enum COMPARTMENT_ID {
     UNSPECIFIED_COMPARTMENT_ID = 0,
     DEFAULT_COMPARTMENT_ID = 1,
-}
+}}
 pub type PCOMPARTMENT_ID = *mut COMPARTMENT_ID;
 pub const APPLICATION_ERROR_MASK: ::DWORD = 0x20000000;
 pub const ERROR_SEVERITY_SUCCESS: ::DWORD = 0x00000000;
@@ -859,6 +858,26 @@ pub struct LUID_AND_ATTRIBUTES {
     pub Attributes: ::DWORD,
 }
 pub type PLUID_AND_ATTRIBUTES = *mut LUID_AND_ATTRIBUTES;
+//9243
+ENUM!{enum SID_NAME_USE {
+    SidTypeUser = 1,
+    SidTypeGroup,
+    SidTypeDomain,
+    SidTypeAlias,
+    SidTypeWellKnownGroup,
+    SidTypeDeletedAccount,
+    SidTypeInvalid,
+    SidTypeUnknown,
+    SidTypeComputer,
+    SidTypeLabel,
+}}
+pub type PSID_NAME_USE = *mut SID_NAME_USE;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SID_AND_ATTRIBUTES {
+    pub Sid: PSID,
+    pub Attributes: ::DWORD,
+}
+pub type PSID_AND_ATTRIBUTES = *mut SID_AND_ATTRIBUTES;
 //9802
 pub const ACL_REVISION: ::BYTE = 2;
 pub const ACL_REVISION_DS: ::BYTE = 4;
@@ -973,7 +992,36 @@ pub struct CLAIM_SECURITY_ATTRIBUTES_INFORMATION {
     pub pAttributeV1: PCLAIM_SECURITY_ATTRIBUTE_V1,
 }
 pub type PCLAIM_SECURITY_ATTRIBUTES_INFORMATION = *mut CLAIM_SECURITY_ATTRIBUTES_INFORMATION;
-//11294
+//11257
+pub type SECURITY_INFORMATION = ::DWORD;
+pub type PSECURITY_INFORMATION = *mut ::DWORD;
+pub const OWNER_SECURITY_INFORMATION: SECURITY_INFORMATION = 0x00000001;
+pub const GROUP_SECURITY_INFORMATION: SECURITY_INFORMATION = 0x00000002;
+pub const DACL_SECURITY_INFORMATION: SECURITY_INFORMATION = 0x00000004;
+pub const SACL_SECURITY_INFORMATION: SECURITY_INFORMATION = 0x00000008;
+pub const LABEL_SECURITY_INFORMATION: SECURITY_INFORMATION = 0x00000010;
+pub const ATTRIBUTE_SECURITY_INFORMATION: SECURITY_INFORMATION = 0x00000020;
+pub const SCOPE_SECURITY_INFORMATION: SECURITY_INFORMATION = 0x00000040;
+pub const PROCESS_TRUST_LABEL_SECURITY_INFORMATION: SECURITY_INFORMATION = 0x00000080;
+pub const BACKUP_SECURITY_INFORMATION: SECURITY_INFORMATION = 0x00010000;
+pub const PROTECTED_DACL_SECURITY_INFORMATION: SECURITY_INFORMATION = 0x80000000;
+pub const PROTECTED_SACL_SECURITY_INFORMATION: SECURITY_INFORMATION = 0x40000000;
+pub const UNPROTECTED_DACL_SECURITY_INFORMATION: SECURITY_INFORMATION = 0x20000000;
+pub const UNPROTECTED_SACL_SECURITY_INFORMATION: SECURITY_INFORMATION = 0x10000000;
+ENUM!{enum SE_LEARNING_MODE_DATA_TYPE {
+    SeLearningModeInvalidType = 0,
+    SeLearningModeSettings,
+    SeLearningModeMax,
+}}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct SECURITY_CAPABILITIES {
+    pub AppContainerSid: PSID,
+    pub Capabilities: PSID_AND_ATTRIBUTES,
+    pub CapabilityCount: ::DWORD,
+    pub Reserved: ::DWORD,
+}
+pub type PSECURITY_CAPABILITIES = *mut SECURITY_CAPABILITIES;
+pub type LPSECURITY_CAPABILITIES = *mut SECURITY_CAPABILITIES;
 pub const PROCESS_TERMINATE: ::DWORD = 0x0001;
 pub const PROCESS_CREATE_THREAD: ::DWORD = 0x0002;
 pub const PROCESS_SET_SESSIONID: ::DWORD = 0x0004;
@@ -989,7 +1037,49 @@ pub const PROCESS_SUSPEND_RESUME: ::DWORD = 0x0800;
 pub const PROCESS_QUERY_LIMITED_INFORMATION: ::DWORD = 0x1000;
 pub const PROCESS_SET_LIMITED_INFORMATION: ::DWORD = 0x2000;
 pub const PROCESS_ALL_ACCESS: ::DWORD = STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xFFFF;
-//11490
+//11445
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct QUOTA_LIMITS {
+    pub PagedPoolLimit: ::SIZE_T,
+    pub NonPagedPoolLimit: ::SIZE_T,
+    pub MinimumWorkingSetSize: ::SIZE_T,
+    pub MaximumWorkingSetSize: ::SIZE_T,
+    pub PagefileLimit: ::SIZE_T,
+    pub TimeLimit: ::LARGE_INTEGER,
+}
+pub type PQUOTA_LIMITS = *mut QUOTA_LIMITS;
+
+pub const QUOTA_LIMITS_HARDWS_MIN_ENABLE: ::DWORD = 0x00000001;
+pub const QUOTA_LIMITS_HARDWS_MIN_DISABLE: ::DWORD = 0x00000002;
+pub const QUOTA_LIMITS_HARDWS_MAX_ENABLE: ::DWORD = 0x00000004;
+pub const QUOTA_LIMITS_HARDWS_MAX_DISABLE: ::DWORD = 0x00000008;
+pub const QUOTA_LIMITS_USE_DEFAULT_LIMITS: ::DWORD = 0x00000010;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RATE_QUOTA_LIMIT {
+    pub RateData: ::DWORD,
+    pub BitFields: ::DWORD,
+}
+BITFIELD!(RATE_QUOTA_LIMIT BitFields: ::DWORD [
+    RatePercent set_RatePercent[0..7],
+    Reserved0 set_Reserved0[7..32],
+]);
+pub type PRATE_QUOTA_LIMIT = *mut RATE_QUOTA_LIMIT;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct QUOTA_LIMITS_EX {
+    pub PagedPoolLimit: ::SIZE_T,
+    pub NonPagedPoolLimit: ::SIZE_T,
+    pub MinimumWorkingSetSize: ::SIZE_T,
+    pub MaximumWorkingSetSize: ::SIZE_T,
+    pub PagefileLimit: ::SIZE_T,
+    pub TimeLimit: ::LARGE_INTEGER,
+    pub WorkingSetLimit: ::SIZE_T,
+    pub Reserved2: ::SIZE_T,
+    pub Reserved3: ::SIZE_T,
+    pub Reserved4: ::SIZE_T,
+    pub Flags: ::DWORD,
+    pub CpuRateLimit: RATE_QUOTA_LIMIT,
+}
+pub type PQUOTA_LIMITS_EX = *mut QUOTA_LIMITS_EX;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IO_COUNTERS {
     pub ReadOperationCount: ::ULONGLONG,
@@ -1094,8 +1184,7 @@ pub const JOB_OBJECT_CPU_RATE_CONTROL_WEIGHT_BASED: ::DWORD = 0x2;
 pub const JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP: ::DWORD = 0x4;
 pub const JOB_OBJECT_CPU_RATE_CONTROL_NOTIFY: ::DWORD = 0x8;
 pub const JOB_OBJECT_CPU_RATE_CONTROL_VALID_FLAGS: ::DWORD = 0xf;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum JOBOBJECTINFOCLASS {
+ENUM!{enum JOBOBJECTINFOCLASS {
     JobObjectBasicAccountingInformation = 1,
     JobObjectBasicLimitInformation,
     JobObjectBasicProcessIdList,
@@ -1123,7 +1212,7 @@ pub enum JOBOBJECTINFOCLASS {
     JobObjectReserved8Information,
     JobObjectReserved9Information,
     MaxJobObjectInfoClass,
-}
+}}
 //
 pub const SECTION_QUERY: ::DWORD = 0x0001;
 pub const SECTION_MAP_WRITE: ::DWORD = 0x0002;
@@ -1769,13 +1858,12 @@ pub type PAPCFUNC = Option<unsafe extern "system" fn(Parameter: ::ULONG_PTR)>;
 pub type PVECTORED_EXCEPTION_HANDLER = Option<unsafe extern "system" fn(
     ExceptionInfo: *mut EXCEPTION_POINTERS,
 ) -> ::LONG>;
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum HEAP_INFORMATION_CLASS {
+ENUM!{enum HEAP_INFORMATION_CLASS {
     HeapCompatibilityInformation = 0,
     HeapEnableTerminationOnCorruption = 1,
     HeapOptimizeResources = 3,
-}
-pub use self::HEAP_INFORMATION_CLASS::*;
+}}
+//pub use self::HEAP_INFORMATION_CLASS::*;
 pub const HEAP_OPTIMIZE_RESOURCES_CURRENT_VERSION: ::DWORD = 1;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HEAP_OPTIMIZE_RESOURCES_INFORMATION {
@@ -1923,14 +2011,13 @@ pub struct ACTIVATION_CONTEXT {
     dummy: *mut ::c_void,
 }
 
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum TP_CALLBACK_PRIORITY {
+ENUM!{enum TP_CALLBACK_PRIORITY {
     TP_CALLBACK_PRIORITY_HIGH,
     TP_CALLBACK_PRIORITY_NORMAL,
     TP_CALLBACK_PRIORITY_LOW,
     TP_CALLBACK_PRIORITY_INVALID,
     TP_CALLBACK_PRIORITY_COUNT = 4,
-}
+}}
 
 pub type PTP_CLEANUP_GROUP_CANCEL_CALLBACK = Option<unsafe extern "system" fn(
     ObjectContext: ::PVOID, CleanupContext: ::PVOID,
@@ -2011,8 +2098,7 @@ pub struct RTL_RUN_ONCE {
 }
 pub type PRTL_RUN_ONCE = *mut RTL_RUN_ONCE;
 
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(dead_code)]
-pub enum RTL_UMS_THREAD_INFO_CLASS {
+ENUM!{enum RTL_UMS_THREAD_INFO_CLASS {
     UmsThreadInvalidInfoClass = 0,
     UmsThreadUserContext,
     UmsThreadPriority,              // Reserved
@@ -2021,43 +2107,39 @@ pub enum RTL_UMS_THREAD_INFO_CLASS {
     UmsThreadIsSuspended,
     UmsThreadIsTerminated,
     UmsThreadMaxInfoClass,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum RTL_UMS_SCHEDULER_REASON {
+}}
+ENUM!{enum RTL_UMS_SCHEDULER_REASON {
     UmsSchedulerStartup = 0,
     UmsSchedulerThreadBlocked,
     UmsSchedulerThreadYield,
-}
+}}
 pub type PRTL_UMS_SCHEDULER_ENTRY_POINT = Option<unsafe extern "system" fn(
     Reason: RTL_UMS_SCHEDULER_REASON, ActivationPayload: ::ULONG_PTR, SchedulerParam: ::PVOID,
 )>;
 
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum FIRMWARE_TYPE {
+ENUM!{enum FIRMWARE_TYPE {
     FirmwareTypeUnknown,
     FirmwareTypeBios,
     FirmwareTypeUefi,
     FirmwareTypeMax,
-}
+}}
 pub type PFIRMWARE_TYPE = *mut FIRMWARE_TYPE;
 
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum LOGICAL_PROCESSOR_RELATIONSHIP {
+ENUM!{enum LOGICAL_PROCESSOR_RELATIONSHIP {
     RelationProcessorCore,
     RelationNumaNode,
     RelationCache,
     RelationProcessorPackage,
     RelationGroup,
     RelationAll = 0xffff,
-}
+}}
 
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum PROCESSOR_CACHE_TYPE {
+ENUM!{enum PROCESSOR_CACHE_TYPE {
     CacheUnified,
     CacheInstruction,
     CacheData,
     CacheTrace,
-}
+}}
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CACHE_DESCRIPTOR {
     pub Level: ::BYTE,
@@ -2099,14 +2181,12 @@ pub struct SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION {
 }
 pub type PSYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION = *mut SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION;
 
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HARDWARE_COUNTER_TYPE {
+ENUM!{enum HARDWARE_COUNTER_TYPE {
     PMCCounter,
     MaxHardwareCounterType,
-}
+}}
 pub type PHARDWARE_COUNTER_TYPE = *mut HARDWARE_COUNTER_TYPE;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum PROCESS_MITIGATION_POLICY {
+ENUM!{enum PROCESS_MITIGATION_POLICY {
     ProcessDEPPolicy,
     ProcessASLRPolicy,
     ProcessDynamicCodePolicy,
@@ -2117,7 +2197,7 @@ pub enum PROCESS_MITIGATION_POLICY {
     ProcessReserved1Policy,
     ProcessSignaturePolicy,
     MaxProcessMitigationPolicy,
-}
+}}
 
 #[repr(C)] #[derive(Copy)]
 pub struct OSVERSIONINFOA {
@@ -2206,8 +2286,7 @@ UNION!(SLIST_HEADER, Alignment, HeaderX64, HeaderX64_mut, SLIST_HEADER_HeaderX64
 
 pub type PSLIST_HEADER = *mut SLIST_HEADER;
 
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum SYSTEM_POWER_STATE {
+ENUM!{enum SYSTEM_POWER_STATE {
     PowerSystemUnspecified = 0,
     PowerSystemWorking = 1,
     PowerSystemSleeping1 = 2,
@@ -2216,10 +2295,9 @@ pub enum SYSTEM_POWER_STATE {
     PowerSystemHibernate = 5,
     PowerSystemShutdown = 6,
     PowerSystemMaximum = 7,
-}
+}}
 pub type PSYSTEM_POWER_STATE = *mut SYSTEM_POWER_STATE;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum POWER_ACTION {
+ENUM!{enum POWER_ACTION {
     PowerActionNone = 0,
     PowerActionReserved,
     PowerActionSleep,
@@ -2228,50 +2306,45 @@ pub enum POWER_ACTION {
     PowerActionShutdownReset,
     PowerActionShutdownOff,
     PowerActionWarmEject,
-}
+}}
 pub type PPOWER_ACTION = *mut POWER_ACTION;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum DEVICE_POWER_STATE {
+ENUM!{enum DEVICE_POWER_STATE {
     PowerDeviceUnspecified = 0,
     PowerDeviceD0,
     PowerDeviceD1,
     PowerDeviceD2,
     PowerDeviceD3,
     PowerDeviceMaximum,
-}
+}}
 pub type PDEVICE_POWER_STATE = *mut DEVICE_POWER_STATE;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum MONITOR_DISPLAY_STATE {
+ENUM!{enum MONITOR_DISPLAY_STATE {
     PowerMonitorOff = 0,
     PowerMonitorOn,
     PowerMonitorDim,
-}
+}}
 pub type PMONITOR_DISPLAY_STATE = *mut MONITOR_DISPLAY_STATE;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum USER_ACTIVITY_PRESENCE {
+ENUM!{enum USER_ACTIVITY_PRESENCE {
     PowerUserPresent = 0,
     PowerUserNotPresent,
     PowerUserInactive,
     PowerUserMaximum,
     //PowerUserInvalid = 3,
-}
+}}
 pub type PUSER_ACTIVITY_PRESENCE = *mut USER_ACTIVITY_PRESENCE;
 
 pub type EXECUTION_STATE = ::DWORD;
 pub type PEXECUTION_STATE = *mut ::DWORD;
 
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum LATENCY_TIME {
+ENUM!{enum LATENCY_TIME {
     LT_DONT_CARE,
     LT_LOWEST_LATENCY,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum POWER_REQUEST_TYPE {
+}}
+ENUM!{enum POWER_REQUEST_TYPE {
     PowerRequestDisplayRequired,
     PowerRequestSystemRequired,
     PowerRequestAwayModeRequired,
     PowerRequestExecutionRequired,
-}
+}}
 pub type PPOWER_REQUEST_TYPE = *mut POWER_REQUEST_TYPE;
 
 pub const MAX_HW_COUNTERS: usize = 16;
