@@ -1,6 +1,6 @@
 [package]
 name = "d3d11-sys"
-version = "0.0.1"
+version = "0.1.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "FFI bindings to d3d11."
 documentation = "https://retep998.github.io/doc/d3d11/"
