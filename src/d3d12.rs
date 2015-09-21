@@ -1127,7 +1127,7 @@ pub struct D3D12_ROOT_DESCRIPTOR_TABLE {
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3D12_ROOT_PARAMETER {
     pub ParameterType: ::D3D12_ROOT_PARAMETER_TYPE,
-    pub u: ::D3D12_ROOT_CONSTANTS,
+    pub u: ::D3D12_ROOT_DESCRIPTOR_TABLE,
     pub ShaderVisibility: ::D3D12_SHADER_VISIBILITY,
 }
 
