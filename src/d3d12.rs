@@ -1967,7 +1967,7 @@ interface ID3D12Resource(ID3D12ResourceVtbl): ID3D12Pageable(ID3D12PageableVtbl)
     fn Unmap(
         &mut self, Subresource: ::UINT, pWrittenRange: *const ::D3D12_RANGE
     ) -> (),
-    fn GetDesc(&mut self, *mut ::D3D12_RESOURCE_DESC) -> *mut ::D3D12_RESOURCE_DESC,
+    fn GetDesc(&mut self, __ret_val: *mut ::D3D12_RESOURCE_DESC) -> *mut ::D3D12_RESOURCE_DESC,
     fn GetGPUVirtualAddress(&mut self) -> ::D3D12_GPU_VIRTUAL_ADDRESS,
     fn WriteToSubresource(
         &mut self, DstSubresource: ::UINT, pDstBox: *const ::D3D12_BOX, pSrcData: *const ::c_void,
