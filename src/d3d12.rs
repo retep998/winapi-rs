@@ -1124,10 +1124,19 @@ pub struct D3D12_ROOT_DESCRIPTOR_TABLE {
     pub pDescriptorRanges: *const ::D3D12_DESCRIPTOR_RANGE,
 }
 
+#[cfg(target_pointer_width = "64")]
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct D3D12_ROOT_PARAMETER {
     pub ParameterType: ::D3D12_ROOT_PARAMETER_TYPE,
     pub u: ::D3D12_ROOT_DESCRIPTOR_TABLE,
+    pub ShaderVisibility: ::D3D12_SHADER_VISIBILITY,
+}
+
+#[cfg(target_pointer_width = "32")]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct D3D12_ROOT_PARAMETER {
+    pub ParameterType: ::D3D12_ROOT_PARAMETER_TYPE,
+    pub u: ::D3D12_ROOT_CONSTANTS,
     pub ShaderVisibility: ::D3D12_SHADER_VISIBILITY,
 }
 
