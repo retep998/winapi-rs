@@ -1566,7 +1566,9 @@ interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12Pagea
     fn GetClockCalibration(
         &mut self, pGpuTimestamp: *mut ::UINT64, pCpuTimestamp: *mut ::UINT64
     ) -> ::HRESULT,
-    fn GetDesc(&mut self) -> ::D3D12_COMMAND_QUEUE_DESC
+    fn GetDesc(
+        &mut self, __ret_val: *mut ::D3D12_COMMAND_QUEUE_DESC
+    ) -> *mut ::D3D12_COMMAND_QUEUE_DESC
 });
 
 RIDL!(
@@ -1575,7 +1577,9 @@ interface ID3D12CommandSignature(ID3D12CommandSignatureVtbl): ID3D12Pageable(ID3
 
 RIDL!(
 interface ID3D12DescriptorHeap(ID3D12DescriptorHeapVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
-    fn GetDesc(&mut self) -> ::D3D12_DESCRIPTOR_HEAP_DESC,
+    fn GetDesc(
+        &mut self, __ret_val: *mut ::D3D12_DESCRIPTOR_HEAP_DESC
+    ) -> *mut ::D3D12_DESCRIPTOR_HEAP_DESC,
     fn GetCPUDescriptorHandleForHeapStart(
         &mut self, __ret_val: *mut ::D3D12_CPU_DESCRIPTOR_HANDLE
     ) -> *mut ::D3D12_CPU_DESCRIPTOR_HANDLE,
@@ -1671,11 +1675,13 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     ) -> (),
     fn GetResourceAllocationInfo(
         &mut self, visibleMask: ::UINT, numResourceDescs: ::UINT,
-        pResourceDescs: *const ::D3D12_RESOURCE_DESC
-    ) -> ::D3D12_RESOURCE_ALLOCATION_INFO,
+        pResourceDescs: *const ::D3D12_RESOURCE_DESC,
+        __ret_val: *mut ::D3D12_RESOURCE_ALLOCATION_INFO
+    ) -> *mut ::D3D12_RESOURCE_ALLOCATION_INFO,
     fn GetCustomHeapProperties(
-        &mut self, nodeMask: ::UINT, heapType: ::D3D12_HEAP_TYPE
-    ) -> ::D3D12_HEAP_PROPERTIES,
+        &mut self, nodeMask: ::UINT, heapType: ::D3D12_HEAP_TYPE,
+        __ret_val: *mut ::D3D12_HEAP_PROPERTIES
+    ) -> *mut ::D3D12_HEAP_PROPERTIES,
     fn CreateCommittedResource(
         &mut self, pHeapProperties: *const ::D3D12_HEAP_PROPERTIES, HeapFlags: ::D3D12_HEAP_FLAGS,
         pResourceDesc: *const ::D3D12_RESOURCE_DESC, InitialResourceState: ::D3D12_RESOURCE_STATES,
@@ -1928,7 +1934,9 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
 
 RIDL!(
 interface ID3D12Heap(ID3D12HeapVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
-    fn GetDesc(&mut self) -> ::D3D12_HEAP_DESC
+    fn GetDesc(
+        &mut self, __ret_val: *mut ::D3D12_HEAP_DESC
+    ) -> *mut ::D3D12_HEAP_DESC
 });
 
 RIDL!(
@@ -1967,7 +1975,9 @@ interface ID3D12Resource(ID3D12ResourceVtbl): ID3D12Pageable(ID3D12PageableVtbl)
     fn Unmap(
         &mut self, Subresource: ::UINT, pWrittenRange: *const ::D3D12_RANGE
     ) -> (),
-    fn GetDesc(&mut self, __ret_val: *mut ::D3D12_RESOURCE_DESC) -> *mut ::D3D12_RESOURCE_DESC,
+    fn GetDesc(
+        &mut self, __ret_val: *mut ::D3D12_RESOURCE_DESC
+    ) -> *mut ::D3D12_RESOURCE_DESC,
     fn GetGPUVirtualAddress(&mut self) -> ::D3D12_GPU_VIRTUAL_ADDRESS,
     fn WriteToSubresource(
         &mut self, DstSubresource: ::UINT, pDstBox: *const ::D3D12_BOX, pSrcData: *const ::c_void,
