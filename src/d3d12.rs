@@ -1807,7 +1807,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
     fn RSSetScissorRects(
         &mut self, NumRects: ::UINT, pRects: *const ::D3D12_RECT
     ) -> (),
-    fn OMSetBlendFactor(&mut self, BlendFactor: *mut [::FLOAT; 4]) -> (),
+    fn OMSetBlendFactor(&mut self, BlendFactor: *const [::FLOAT; 4]) -> (),
     fn OMSetStencilRef(&mut self, StencilRef: ::UINT) -> (),
     fn SetPipelineState(
         &mut self, pPipelineState: *mut ::ID3D12PipelineState
@@ -1887,18 +1887,18 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         pRects: *const ::D3D12_RECT
     ) -> (),
     fn ClearRenderTargetView(
-        &mut self, RenderTargetView: ::D3D12_CPU_DESCRIPTOR_HANDLE, ColorRGBA: *mut [::FLOAT; 4],
+        &mut self, RenderTargetView: ::D3D12_CPU_DESCRIPTOR_HANDLE, ColorRGBA: *const [::FLOAT; 4],
         NumRects: ::UINT, pRects: *const ::D3D12_RECT
     ) -> (),
     fn ClearUnorderedAccessViewUint(
         &mut self, ViewGPUHandleInCurrentHeap: ::D3D12_GPU_DESCRIPTOR_HANDLE,
         ViewCPUHandle: ::D3D12_CPU_DESCRIPTOR_HANDLE, pResource: *mut ::ID3D12Resource,
-        Values: *mut [::UINT; 4], NumRects: ::UINT, pRects: *const ::D3D12_RECT
+        Values: *const [::UINT; 4], NumRects: ::UINT, pRects: *const ::D3D12_RECT
     ) -> (),
     fn ClearUnorderedAccessViewFloat(
         &mut self, ViewGPUHandleInCurrentHeap: ::D3D12_GPU_DESCRIPTOR_HANDLE,
         ViewCPUHandle: ::D3D12_CPU_DESCRIPTOR_HANDLE, pResource: *mut ::ID3D12Resource,
-        Values: *mut [::FLOAT; 4], NumRects: ::UINT, pRects: *const ::D3D12_RECT
+        Values: *const [::FLOAT; 4], NumRects: ::UINT, pRects: *const ::D3D12_RECT
     ) -> (),
     fn DiscardResource(
         &mut self, pResource: *mut ::ID3D12Resource, pRegion: *const ::D3D12_DISCARD_REGION
