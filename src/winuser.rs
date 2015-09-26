@@ -1562,7 +1562,7 @@ pub type LPNONCLIENTMETRICSW = *mut NONCLIENTMETRICSW;
 //12900
 pub const MONITORINFOF_PRIMARY: ::DWORD = 1;
 pub const CCHDEVICENAME: usize = 32;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MONITORINFO {
     pub cbSize: ::DWORD,
     pub rcMonitor: ::RECT,

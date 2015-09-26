@@ -24,7 +24,7 @@ DECLARE_HANDLE!(HUMPD, HUMPD__);
 pub type HCURSOR = HICON;
 pub type COLORREF = ::DWORD;
 pub type LPCOLORREF = *mut ::DWORD;
-#[repr(C)] #[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct RECT {
     pub left: ::LONG,
     pub top: ::LONG,
