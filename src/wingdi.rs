@@ -939,7 +939,7 @@ pub type PMETARECORD = *mut METARECORD;
 pub type LPMETARECORD = *mut METARECORD;
 
 pub type MFENUMPROC = Option<unsafe extern "system" fn(
-    hdc: ::HDC, lpht: *const ::HANDLETABLE, lpMR: *const ::METARECORD, nObj: ::c_int, param: ::LPARAM
+    hdc: ::HDC, lpht: *mut ::HANDLETABLE, lpMR: *mut ::METARECORD, nObj: ::c_int, param: ::LPARAM
 ) -> ::c_int>;
 
 pub type GOBJENUMPROC = Option<unsafe extern "system" fn(::LPVOID, ::LPARAM) -> ::c_int>;
@@ -1293,3 +1293,74 @@ pub type LPEXTLOGPEN = *mut EXTLOGPEN;
 pub type ENHMFENUMPROC = Option<unsafe extern "system" fn(
     hdc: ::HDC, lpht: HANDLETABLE, lpmr: *const ENHMETARECORD, nHandles: ::c_int, data: ::LPARAM
 ) -> ::c_int>;
+
+/* Metafile Functions */
+pub const META_SETBKCOLOR: ::WORD = 0x0201;
+pub const META_SETBKMODE: ::WORD = 0x0102;
+pub const META_SETMAPMODE: ::WORD = 0x0103;
+pub const META_SETROP2: ::WORD = 0x0104;
+pub const META_SETRELABS: ::WORD = 0x0105;
+pub const META_SETPOLYFILLMODE: ::WORD = 0x0106;
+pub const META_SETSTRETCHBLTMODE: ::WORD = 0x0107;
+pub const META_SETTEXTCHAREXTRA: ::WORD = 0x0108;
+pub const META_SETTEXTCOLOR: ::WORD = 0x0209;
+pub const META_SETTEXTJUSTIFICATION: ::WORD = 0x020A;
+pub const META_SETWINDOWORG: ::WORD = 0x020B;
+pub const META_SETWINDOWEXT: ::WORD = 0x020C;
+pub const META_SETVIEWPORTORG: ::WORD = 0x020D;
+pub const META_SETVIEWPORTEXT: ::WORD = 0x020E;
+pub const META_OFFSETWINDOWORG: ::WORD = 0x020F;
+pub const META_SCALEWINDOWEXT: ::WORD = 0x0410;
+pub const META_OFFSETVIEWPORTORG: ::WORD = 0x0211;
+pub const META_SCALEVIEWPORTEXT: ::WORD = 0x0412;
+pub const META_LINETO: ::WORD = 0x0213;
+pub const META_MOVETO: ::WORD = 0x0214;
+pub const META_EXCLUDECLIPRECT: ::WORD = 0x0415;
+pub const META_INTERSECTCLIPRECT: ::WORD = 0x0416;
+pub const META_ARC: ::WORD = 0x0817;
+pub const META_ELLIPSE: ::WORD = 0x0418;
+pub const META_FLOODFILL: ::WORD = 0x0419;
+pub const META_PIE: ::WORD = 0x081A;
+pub const META_RECTANGLE: ::WORD = 0x041B;
+pub const META_ROUNDRECT: ::WORD = 0x061C;
+pub const META_PATBLT: ::WORD = 0x061D;
+pub const META_SAVEDC: ::WORD = 0x001E;
+pub const META_SETPIXEL: ::WORD = 0x041F;
+pub const META_OFFSETCLIPRGN: ::WORD = 0x0220;
+pub const META_TEXTOUT: ::WORD = 0x0521;
+pub const META_BITBLT: ::WORD = 0x0922;
+pub const META_STRETCHBLT: ::WORD = 0x0B23;
+pub const META_POLYGON: ::WORD = 0x0324;
+pub const META_POLYLINE: ::WORD = 0x0325;
+pub const META_ESCAPE: ::WORD = 0x0626;
+pub const META_RESTOREDC: ::WORD = 0x0127;
+pub const META_FILLREGION: ::WORD = 0x0228;
+pub const META_FRAMEREGION: ::WORD = 0x0429;
+pub const META_INVERTREGION: ::WORD = 0x012A;
+pub const META_PAINTREGION: ::WORD = 0x012B;
+pub const META_SELECTCLIPREGION: ::WORD = 0x012C;
+pub const META_SELECTOBJECT: ::WORD = 0x012D;
+pub const META_SETTEXTALIGN: ::WORD = 0x012E;
+pub const META_CHORD: ::WORD = 0x0830;
+pub const META_SETMAPPERFLAGS: ::WORD = 0x0231;
+pub const META_EXTTEXTOUT: ::WORD = 0x0a32;
+pub const META_SETDIBTODEV: ::WORD = 0x0d33;
+pub const META_SELECTPALETTE: ::WORD = 0x0234;
+pub const META_REALIZEPALETTE: ::WORD = 0x0035;
+pub const META_ANIMATEPALETTE: ::WORD = 0x0436;
+pub const META_SETPALENTRIES: ::WORD = 0x0037;
+pub const META_POLYPOLYGON: ::WORD = 0x0538;
+pub const META_RESIZEPALETTE: ::WORD = 0x0139;
+pub const META_DIBBITBLT: ::WORD = 0x0940;
+pub const META_DIBSTRETCHBLT: ::WORD = 0x0b41;
+pub const META_DIBCREATEPATTERNBRUSH: ::WORD = 0x0142;
+pub const META_STRETCHDIB: ::WORD = 0x0f43;
+pub const META_EXTFLOODFILL: ::WORD = 0x0548;
+pub const META_SETLAYOUT: ::WORD = 0x0149;
+pub const META_DELETEOBJECT: ::WORD = 0x01f0;
+pub const META_CREATEPALETTE: ::WORD = 0x00f7;
+pub const META_CREATEPATTERNBRUSH: ::WORD = 0x01F9;
+pub const META_CREATEPENINDIRECT: ::WORD = 0x02FA;
+pub const META_CREATEFONTINDIRECT: ::WORD = 0x02FB;
+pub const META_CREATEBRUSHINDIRECT: ::WORD = 0x02FC;
+pub const META_CREATEREGION: ::WORD = 0x06FF;
