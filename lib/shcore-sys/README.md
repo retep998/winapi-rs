@@ -1,4 +1,13 @@
-# shcore-sys #
-FFI bindings to shcore.
+# shcore #
+Contains function definitions for the Windows API library shcore. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/shcore-sys/)
+```toml
+[dependencies]
+shcore-sys = "0.0.1"
+```
+
+```rust
+extern crate shcore;
+```
+
+[Documentation](https://retep998.github.io/doc/shcore/)

@@ -1,4 +1,13 @@
-# imgutil-sys #
-FFI bindings to imgutil.
+# imgutil #
+Contains function definitions for the Windows API library imgutil. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/imgutil-sys/)
+```toml
+[dependencies]
+imgutil-sys = "0.0.1"
+```
+
+```rust
+extern crate imgutil;
+```
+
+[Documentation](https://retep998.github.io/doc/imgutil/)

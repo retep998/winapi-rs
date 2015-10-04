@@ -1,4 +1,13 @@
-# faultrep-sys #
-FFI bindings to faultrep.
+# faultrep #
+Contains function definitions for the Windows API library faultrep. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/faultrep-sys/)
+```toml
+[dependencies]
+faultrep-sys = "0.0.1"
+```
+
+```rust
+extern crate faultrep;
+```
+
+[Documentation](https://retep998.github.io/doc/faultrep/)

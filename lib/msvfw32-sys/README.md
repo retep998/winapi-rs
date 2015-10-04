@@ -1,4 +1,13 @@
-# msvfw32-sys #
-FFI bindings to msvfw32.
+# msvfw32 #
+Contains function definitions for the Windows API library msvfw32. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/msvfw32-sys/)
+```toml
+[dependencies]
+msvfw32-sys = "0.0.1"
+```
+
+```rust
+extern crate msvfw32;
+```
+
+[Documentation](https://retep998.github.io/doc/msvfw32/)

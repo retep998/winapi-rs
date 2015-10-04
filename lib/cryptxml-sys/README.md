@@ -1,4 +1,13 @@
-# cryptxml-sys #
-FFI bindings to cryptxml.
+# cryptxml #
+Contains function definitions for the Windows API library cryptxml. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/cryptxml-sys/)
+```toml
+[dependencies]
+cryptxml-sys = "0.0.1"
+```
+
+```rust
+extern crate cryptxml;
+```
+
+[Documentation](https://retep998.github.io/doc/cryptxml/)

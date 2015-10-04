@@ -1,4 +1,13 @@
-# d3dcsxd-sys #
-FFI bindings to d3dcsxd.
+# d3dcsxd #
+Contains function definitions for the Windows API library d3dcsxd. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/d3dcsxd-sys/)
+```toml
+[dependencies]
+d3dcsxd-sys = "0.0.1"
+```
+
+```rust
+extern crate d3dcsxd;
+```
+
+[Documentation](https://retep998.github.io/doc/d3dcsxd/)

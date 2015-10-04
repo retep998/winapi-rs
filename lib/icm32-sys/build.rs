@@ -1,5 +1,6 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
+extern crate build;
 fn main() {
-    println!("cargo:rustc-flags=-l icm32");
+    build::link("icm32", true)
 }

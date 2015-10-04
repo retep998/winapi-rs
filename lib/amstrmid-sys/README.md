@@ -1,4 +1,13 @@
-# amstrmid-sys #
-FFI bindings to amstrmid.
+# amstrmid #
+Contains function definitions for the Windows API library amstrmid. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/amstrmid-sys/)
+```toml
+[dependencies]
+amstrmid-sys = "0.0.1"
+```
+
+```rust
+extern crate amstrmid;
+```
+
+[Documentation](https://retep998.github.io/doc/amstrmid/)

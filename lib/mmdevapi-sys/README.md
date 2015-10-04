@@ -1,4 +1,13 @@
-# mmdevapi-sys #
-FFI bindings to mmdevapi.
+# mmdevapi #
+Contains function definitions for the Windows API library mmdevapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/mmdevapi-sys/)
+```toml
+[dependencies]
+mmdevapi-sys = "0.0.1"
+```
+
+```rust
+extern crate mmdevapi;
+```
+
+[Documentation](https://retep998.github.io/doc/mmdevapi/)

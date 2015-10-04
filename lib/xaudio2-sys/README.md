@@ -1,4 +1,13 @@
-# xaudio2-sys #
-FFI bindings to xaudio2.
+# xaudio2 #
+Contains function definitions for the Windows API library xaudio2. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/xaudio2-sys/)
+```toml
+[dependencies]
+xaudio2-sys = "0.0.1"
+```
+
+```rust
+extern crate xaudio2;
+```
+
+[Documentation](https://retep998.github.io/doc/xaudio2/)

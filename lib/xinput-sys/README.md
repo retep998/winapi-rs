@@ -1,4 +1,13 @@
-# xinput-sys #
-FFI bindings to xinput.
+# xinput #
+Contains function definitions for the Windows API library xinput. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/xinput-sys/)
+```toml
+[dependencies]
+xinput-sys = "0.0.1"
+```
+
+```rust
+extern crate xinput;
+```
+
+[Documentation](https://retep998.github.io/doc/xinput/)

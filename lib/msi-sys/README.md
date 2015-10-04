@@ -1,4 +1,13 @@
-# msi-sys #
-FFI bindings to msi.
+# msi #
+Contains function definitions for the Windows API library msi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/msi-sys/)
+```toml
+[dependencies]
+msi-sys = "0.0.1"
+```
+
+```rust
+extern crate msi;
+```
+
+[Documentation](https://retep998.github.io/doc/msi/)

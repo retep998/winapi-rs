@@ -1,4 +1,13 @@
-# iscsidsc-sys #
-FFI bindings to iscsidsc.
+# iscsidsc #
+Contains function definitions for the Windows API library iscsidsc. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/iscsidsc-sys/)
+```toml
+[dependencies]
+iscsidsc-sys = "0.0.1"
+```
+
+```rust
+extern crate iscsidsc;
+```
+
+[Documentation](https://retep998.github.io/doc/iscsidsc/)

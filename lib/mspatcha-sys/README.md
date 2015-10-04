@@ -1,4 +1,13 @@
-# mspatcha-sys #
-FFI bindings to mspatcha.
+# mspatcha #
+Contains function definitions for the Windows API library mspatcha. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/mspatcha-sys/)
+```toml
+[dependencies]
+mspatcha-sys = "0.0.1"
+```
+
+```rust
+extern crate mspatcha;
+```
+
+[Documentation](https://retep998.github.io/doc/mspatcha/)

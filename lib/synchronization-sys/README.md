@@ -1,4 +1,13 @@
-# synchronization-sys #
-FFI bindings to synchronization.
+# synchronization #
+Contains function definitions for the Windows API library synchronization. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/synchronization-sys/)
+```toml
+[dependencies]
+synchronization-sys = "0.0.1"
+```
+
+```rust
+extern crate synchronization;
+```
+
+[Documentation](https://retep998.github.io/doc/synchronization/)

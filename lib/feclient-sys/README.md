@@ -1,4 +1,13 @@
-# feclient-sys #
-FFI bindings to feclient.
+# feclient #
+Contains function definitions for the Windows API library feclient. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/feclient-sys/)
+```toml
+[dependencies]
+feclient-sys = "0.0.1"
+```
+
+```rust
+extern crate feclient;
+```
+
+[Documentation](https://retep998.github.io/doc/feclient/)

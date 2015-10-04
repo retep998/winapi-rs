@@ -1,5 +1,6 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
+extern crate build;
 fn main() {
-    println!("cargo:rustc-flags=-l msxml6");
+    build::link("msxml6", true)
 }

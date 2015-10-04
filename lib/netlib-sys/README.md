@@ -1,4 +1,13 @@
-# netlib-sys #
-FFI bindings to netlib.
+# netlib #
+Contains function definitions for the Windows API library netlib. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/netlib-sys/)
+```toml
+[dependencies]
+netlib-sys = "0.0.1"
+```
+
+```rust
+extern crate netlib;
+```
+
+[Documentation](https://retep998.github.io/doc/netlib/)

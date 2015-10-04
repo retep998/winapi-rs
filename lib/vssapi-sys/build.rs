@@ -2,5 +2,5 @@
 // Licensed under the MIT License <LICENSE.md>
 extern crate build;
 fn main() {
-    build::link("vssapi", false)
+    build::link("vssapi", true)
 }

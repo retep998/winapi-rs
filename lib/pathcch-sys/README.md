@@ -1,4 +1,13 @@
-# pathcch-sys #
-FFI bindings to pathcch.
+# pathcch #
+Contains function definitions for the Windows API library pathcch. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/pathcch-sys/)
+```toml
+[dependencies]
+pathcch-sys = "0.0.1"
+```
+
+```rust
+extern crate pathcch;
+```
+
+[Documentation](https://retep998.github.io/doc/pathcch/)

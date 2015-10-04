@@ -1,4 +1,13 @@
-# ahadmin-sys #
-FFI bindings to ahadmin.
+# ahadmin #
+Contains function definitions for the Windows API library ahadmin. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/ahadmin-sys/)
+```toml
+[dependencies]
+ahadmin-sys = "0.0.1"
+```
+
+```rust
+extern crate ahadmin;
+```
+
+[Documentation](https://retep998.github.io/doc/ahadmin/)

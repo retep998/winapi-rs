@@ -2,5 +2,5 @@
 // Licensed under the MIT License <LICENSE.md>
 extern crate build;
 fn main() {
-    build::link("dwrite", true);
+    build::link("dwrite", true)
 }

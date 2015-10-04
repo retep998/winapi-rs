@@ -1,4 +1,13 @@
-# ole32-sys #
-FFI bindings to ole32.
+# ole32 #
+Contains function definitions for the Windows API library ole32. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/ole32-sys/)
+```toml
+[dependencies]
+ole32-sys = "0.1.0"
+```
+
+```rust
+extern crate ole32;
+```
+
+[Documentation](https://retep998.github.io/doc/ole32/)

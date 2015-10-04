@@ -1,4 +1,13 @@
-# sensapi-sys #
-FFI bindings to sensapi.
+# sensapi #
+Contains function definitions for the Windows API library sensapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/sensapi-sys/)
+```toml
+[dependencies]
+sensapi-sys = "0.0.1"
+```
+
+```rust
+extern crate sensapi;
+```
+
+[Documentation](https://retep998.github.io/doc/sensapi/)

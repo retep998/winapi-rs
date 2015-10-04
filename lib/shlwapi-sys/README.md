@@ -1,4 +1,13 @@
-# shlwapi-sys #
-FFI bindings to shlwapi.
+# shlwapi #
+Contains function definitions for the Windows API library shlwapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/shlwapi-sys/)
+```toml
+[dependencies]
+shlwapi-sys = "0.0.1"
+```
+
+```rust
+extern crate shlwapi;
+```
+
+[Documentation](https://retep998.github.io/doc/shlwapi/)

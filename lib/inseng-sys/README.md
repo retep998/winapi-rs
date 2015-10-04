@@ -1,4 +1,13 @@
-# inseng-sys #
-FFI bindings to inseng.
+# inseng #
+Contains function definitions for the Windows API library inseng. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/inseng-sys/)
+```toml
+[dependencies]
+inseng-sys = "0.0.1"
+```
+
+```rust
+extern crate inseng;
+```
+
+[Documentation](https://retep998.github.io/doc/inseng/)

@@ -1,4 +1,13 @@
-# comsvcs-sys #
-FFI bindings to comsvcs.
+# comsvcs #
+Contains function definitions for the Windows API library comsvcs. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/comsvcs-sys/)
+```toml
+[dependencies]
+comsvcs-sys = "0.0.1"
+```
+
+```rust
+extern crate comsvcs;
+```
+
+[Documentation](https://retep998.github.io/doc/comsvcs/)

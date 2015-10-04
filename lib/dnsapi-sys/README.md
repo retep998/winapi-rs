@@ -1,4 +1,13 @@
-# dnsapi-sys #
-FFI bindings to dnsapi.
+# dnsapi #
+Contains function definitions for the Windows API library dnsapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/dnsapi-sys/)
+```toml
+[dependencies]
+dnsapi-sys = "0.0.1"
+```
+
+```rust
+extern crate dnsapi;
+```
+
+[Documentation](https://retep998.github.io/doc/dnsapi/)

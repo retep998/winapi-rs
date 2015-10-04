@@ -1,4 +1,13 @@
-# fltlib-sys #
-FFI bindings to fltlib.
+# fltlib #
+Contains function definitions for the Windows API library fltlib. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/fltlib-sys/)
+```toml
+[dependencies]
+fltlib-sys = "0.0.1"
+```
+
+```rust
+extern crate fltlib;
+```
+
+[Documentation](https://retep998.github.io/doc/fltlib/)

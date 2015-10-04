@@ -1,4 +1,13 @@
-# uuid-sys #
-FFI bindings to uuid.
+# uuid #
+Contains function definitions for the Windows API library uuid. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/uuid-sys/)
+```toml
+[dependencies]
+uuid-sys = "0.1.2"
+```
+
+```rust
+extern crate uuid;
+```
+
+[Documentation](https://retep998.github.io/doc/uuid/)

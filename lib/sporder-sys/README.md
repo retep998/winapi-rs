@@ -1,4 +1,13 @@
-# sporder-sys #
-FFI bindings to sporder.
+# sporder #
+Contains function definitions for the Windows API library sporder. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/sporder-sys/)
+```toml
+[dependencies]
+sporder-sys = "0.0.1"
+```
+
+```rust
+extern crate sporder;
+```
+
+[Documentation](https://retep998.github.io/doc/sporder/)

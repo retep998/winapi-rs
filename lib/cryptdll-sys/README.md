@@ -1,4 +1,13 @@
-# cryptdll-sys #
-FFI bindings to cryptdll.
+# cryptdll #
+Contains function definitions for the Windows API library cryptdll. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/cryptdll-sys/)
+```toml
+[dependencies]
+cryptdll-sys = "0.0.1"
+```
+
+```rust
+extern crate cryptdll;
+```
+
+[Documentation](https://retep998.github.io/doc/cryptdll/)

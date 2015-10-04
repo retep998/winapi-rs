@@ -1,4 +1,13 @@
-# scrnsavw-sys #
-FFI bindings to scrnsavw.
+# scrnsavw #
+Contains function definitions for the Windows API library scrnsavw. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/scrnsavw-sys/)
+```toml
+[dependencies]
+scrnsavw-sys = "0.0.1"
+```
+
+```rust
+extern crate scrnsavw;
+```
+
+[Documentation](https://retep998.github.io/doc/scrnsavw/)

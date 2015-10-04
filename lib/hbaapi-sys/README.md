@@ -1,4 +1,13 @@
-# hbaapi-sys #
-FFI bindings to hbaapi.
+# hbaapi #
+Contains function definitions for the Windows API library hbaapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/hbaapi-sys/)
+```toml
+[dependencies]
+hbaapi-sys = "0.0.1"
+```
+
+```rust
+extern crate hbaapi;
+```
+
+[Documentation](https://retep998.github.io/doc/hbaapi/)

@@ -1,4 +1,13 @@
-# appmgmts-sys #
-FFI bindings to appmgmts.
+# appmgmts #
+Contains function definitions for the Windows API library appmgmts. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/appmgmts-sys/)
+```toml
+[dependencies]
+appmgmts-sys = "0.0.1"
+```
+
+```rust
+extern crate appmgmts;
+```
+
+[Documentation](https://retep998.github.io/doc/appmgmts/)

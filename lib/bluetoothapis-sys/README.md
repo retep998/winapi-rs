@@ -1,4 +1,13 @@
-# bluetoothapis-sys #
-FFI bindings to bluetoothapis.
+# bluetoothapis #
+Contains function definitions for the Windows API library bluetoothapis. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/bluetoothapis-sys/)
+```toml
+[dependencies]
+bluetoothapis-sys = "0.0.1"
+```
+
+```rust
+extern crate bluetoothapis;
+```
+
+[Documentation](https://retep998.github.io/doc/bluetoothapis/)

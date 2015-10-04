@@ -1,4 +1,13 @@
-# evr_vista-sys #
-FFI bindings to evr_vista.
+# evr_vista #
+Contains function definitions for the Windows API library evr_vista. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/evr_vista-sys/)
+```toml
+[dependencies]
+evr_vista-sys = "0.0.1"
+```
+
+```rust
+extern crate evr_vista;
+```
+
+[Documentation](https://retep998.github.io/doc/evr_vista/)

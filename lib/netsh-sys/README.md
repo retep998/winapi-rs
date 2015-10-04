@@ -1,4 +1,13 @@
-# netsh-sys #
-FFI bindings to netsh.
+# netsh #
+Contains function definitions for the Windows API library netsh. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/netsh-sys/)
+```toml
+[dependencies]
+netsh-sys = "0.0.1"
+```
+
+```rust
+extern crate netsh;
+```
+
+[Documentation](https://retep998.github.io/doc/netsh/)

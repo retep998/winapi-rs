@@ -1,4 +1,13 @@
-# imagehlp-sys #
-FFI bindings to imagehlp.
+# imagehlp #
+Contains function definitions for the Windows API library imagehlp. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/imagehlp-sys/)
+```toml
+[dependencies]
+imagehlp-sys = "0.0.1"
+```
+
+```rust
+extern crate imagehlp;
+```
+
+[Documentation](https://retep998.github.io/doc/imagehlp/)

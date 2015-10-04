@@ -1,4 +1,13 @@
-# icmui-sys #
-FFI bindings to icmui.
+# icmui #
+Contains function definitions for the Windows API library icmui. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/icmui-sys/)
+```toml
+[dependencies]
+icmui-sys = "0.0.1"
+```
+
+```rust
+extern crate icmui;
+```
+
+[Documentation](https://retep998.github.io/doc/icmui/)

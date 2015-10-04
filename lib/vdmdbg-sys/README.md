@@ -1,4 +1,13 @@
-# vdmdbg-sys #
-FFI bindings to vdmdbg.
+# vdmdbg #
+Contains function definitions for the Windows API library vdmdbg. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/vdmdbg-sys/)
+```toml
+[dependencies]
+vdmdbg-sys = "0.0.1"
+```
+
+```rust
+extern crate vdmdbg;
+```
+
+[Documentation](https://retep998.github.io/doc/vdmdbg/)

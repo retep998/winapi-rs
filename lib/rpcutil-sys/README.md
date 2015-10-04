@@ -1,4 +1,13 @@
-# rpcutil-sys #
-FFI bindings to rpcutil.
+# rpcutil #
+Contains function definitions for the Windows API library rpcutil. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/rpcutil-sys/)
+```toml
+[dependencies]
+rpcutil-sys = "0.0.1"
+```
+
+```rust
+extern crate rpcutil;
+```
+
+[Documentation](https://retep998.github.io/doc/rpcutil/)

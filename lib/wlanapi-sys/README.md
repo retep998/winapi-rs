@@ -1,4 +1,13 @@
-# wlanapi-sys #
-FFI bindings to wlanapi.
+# wlanapi #
+Contains function definitions for the Windows API library wlanapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/wlanapi-sys/)
+```toml
+[dependencies]
+wlanapi-sys = "0.0.1"
+```
+
+```rust
+extern crate wlanapi;
+```
+
+[Documentation](https://retep998.github.io/doc/wlanapi/)

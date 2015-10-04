@@ -1,4 +1,13 @@
-# compstui-sys #
-FFI bindings to compstui.
+# compstui #
+Contains function definitions for the Windows API library compstui. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/compstui-sys/)
+```toml
+[dependencies]
+compstui-sys = "0.0.1"
+```
+
+```rust
+extern crate compstui;
+```
+
+[Documentation](https://retep998.github.io/doc/compstui/)

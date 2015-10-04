@@ -1,4 +1,13 @@
-# oledb-sys #
-FFI bindings to oledb.
+# oledb #
+Contains function definitions for the Windows API library oledb. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/oledb-sys/)
+```toml
+[dependencies]
+oledb-sys = "0.0.1"
+```
+
+```rust
+extern crate oledb;
+```
+
+[Documentation](https://retep998.github.io/doc/oledb/)

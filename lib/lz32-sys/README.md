@@ -1,4 +1,13 @@
-# lz32-sys #
-FFI bindings to lz32.
+# lz32 #
+Contains function definitions for the Windows API library lz32. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/lz32-sys/)
+```toml
+[dependencies]
+lz32-sys = "0.0.1"
+```
+
+```rust
+extern crate lz32;
+```
+
+[Documentation](https://retep998.github.io/doc/lz32/)

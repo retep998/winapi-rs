@@ -2,14 +2,17 @@
 name = "cabinet-sys"
 version = "0.0.1"
 authors = ["Peter Atashian <retep998@gmail.com>"]
-description = "FFI bindings to cabinet. This crate is a placeholder for the future. If you are interested in this library feel free to get in touch with me: http://www.rustaceans.org/retep998"
-documentation = "https://retep998.github.io/doc/cabinet-sys/"
+description = "Contains function definitions for the Windows API library cabinet. See winapi for types and constants."
+documentation = "https://retep998.github.io/doc/cabinet/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["Windows", "FFI", "WinSDK"]
+keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
 links = "cabinet"
-
+[lib]
+name = "cabinet"
 [dependencies]
-winapi = "*"
+winapi = { version = "0.2.4", path = "../.." }
+[build-dependencies]
+winapi-build = { version = "0.1.1", path = "../../build" }

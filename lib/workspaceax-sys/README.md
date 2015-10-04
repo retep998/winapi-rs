@@ -1,4 +1,13 @@
-# workspaceax-sys #
-FFI bindings to workspaceax.
+# workspaceax #
+Contains function definitions for the Windows API library workspaceax. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/workspaceax-sys/)
+```toml
+[dependencies]
+workspaceax-sys = "0.0.1"
+```
+
+```rust
+extern crate workspaceax;
+```
+
+[Documentation](https://retep998.github.io/doc/workspaceax/)

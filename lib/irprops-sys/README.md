@@ -1,4 +1,13 @@
-# irprops-sys #
-FFI bindings to irprops.
+# irprops #
+Contains function definitions for the Windows API library irprops. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/irprops-sys/)
+```toml
+[dependencies]
+irprops-sys = "0.0.1"
+```
+
+```rust
+extern crate irprops;
+```
+
+[Documentation](https://retep998.github.io/doc/irprops/)

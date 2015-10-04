@@ -1,4 +1,13 @@
-# icm32-sys #
-FFI bindings to icm32.
+# icm32 #
+Contains function definitions for the Windows API library icm32. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/icm32-sys/)
+```toml
+[dependencies]
+icm32-sys = "0.0.1"
+```
+
+```rust
+extern crate icm32;
+```
+
+[Documentation](https://retep998.github.io/doc/icm32/)

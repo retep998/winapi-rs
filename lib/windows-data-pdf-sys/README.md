@@ -1,4 +1,13 @@
-# windows.data.pdf-sys #
-FFI bindings to windows.data.pdf.
+# windows.data.pdf #
+Contains function definitions for the Windows API library windows.data.pdf. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/windows.data.pdf-sys/)
+```toml
+[dependencies]
+windows.data.pdf-sys = "0.0.1"
+```
+
+```rust
+extern crate windows.data.pdf;
+```
+
+[Documentation](https://retep998.github.io/doc/windows.data.pdf/)

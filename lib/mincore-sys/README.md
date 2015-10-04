@@ -1,4 +1,13 @@
-# mincore-sys #
-FFI bindings to mincore.
+# mincore #
+Contains function definitions for the Windows API library mincore. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/mincore-sys/)
+```toml
+[dependencies]
+mincore-sys = "0.0.1"
+```
+
+```rust
+extern crate mincore;
+```
+
+[Documentation](https://retep998.github.io/doc/mincore/)

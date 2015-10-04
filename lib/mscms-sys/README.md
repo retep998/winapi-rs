@@ -1,4 +1,13 @@
-# mscms-sys #
-FFI bindings to mscms.
+# mscms #
+Contains function definitions for the Windows API library mscms. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/mscms-sys/)
+```toml
+[dependencies]
+mscms-sys = "0.0.1"
+```
+
+```rust
+extern crate mscms;
+```
+
+[Documentation](https://retep998.github.io/doc/mscms/)

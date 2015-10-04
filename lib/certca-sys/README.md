@@ -1,4 +1,13 @@
-# certca-sys #
-FFI bindings to certca.
+# certca #
+Contains function definitions for the Windows API library certca. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/certca-sys/)
+```toml
+[dependencies]
+certca-sys = "0.0.1"
+```
+
+```rust
+extern crate certca;
+```
+
+[Documentation](https://retep998.github.io/doc/certca/)

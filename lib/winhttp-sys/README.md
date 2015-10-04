@@ -1,4 +1,13 @@
-# winhttp-sys #
-FFI bindings to winhttp.
+# winhttp #
+Contains function definitions for the Windows API library winhttp. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/winhttp-sys/)
+```toml
+[dependencies]
+winhttp-sys = "0.0.1"
+```
+
+```rust
+extern crate winhttp;
+```
+
+[Documentation](https://retep998.github.io/doc/winhttp/)

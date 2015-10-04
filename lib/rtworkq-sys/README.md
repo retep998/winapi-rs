@@ -1,4 +1,13 @@
-# rtworkq-sys #
-FFI bindings to rtworkq.
+# rtworkq #
+Contains function definitions for the Windows API library rtworkq. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/rtworkq-sys/)
+```toml
+[dependencies]
+rtworkq-sys = "0.0.1"
+```
+
+```rust
+extern crate rtworkq;
+```
+
+[Documentation](https://retep998.github.io/doc/rtworkq/)

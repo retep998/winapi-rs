@@ -1,4 +1,13 @@
-# newdev-sys #
-FFI bindings to newdev.
+# newdev #
+Contains function definitions for the Windows API library newdev. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/newdev-sys/)
+```toml
+[dependencies]
+newdev-sys = "0.0.1"
+```
+
+```rust
+extern crate newdev;
+```
+
+[Documentation](https://retep998.github.io/doc/newdev/)

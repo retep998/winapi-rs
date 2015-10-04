@@ -1,4 +1,13 @@
-# opengl32-sys #
-FFI bindings to opengl32.
+# opengl32 #
+Contains function definitions for the Windows API library opengl32. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/opengl32-sys/)
+```toml
+[dependencies]
+opengl32-sys = "0.1.0"
+```
+
+```rust
+extern crate opengl32;
+```
+
+[Documentation](https://retep998.github.io/doc/opengl32/)

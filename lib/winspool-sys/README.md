@@ -1,4 +1,13 @@
-# winspool-sys #
-FFI bindings to winspool.
+# winspool #
+Contains function definitions for the Windows API library winspool. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/winspool-sys/)
+```toml
+[dependencies]
+winspool-sys = "0.0.1"
+```
+
+```rust
+extern crate winspool;
+```
+
+[Documentation](https://retep998.github.io/doc/winspool/)

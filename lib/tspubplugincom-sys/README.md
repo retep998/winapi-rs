@@ -1,4 +1,13 @@
-# tspubplugincom-sys #
-FFI bindings to tspubplugincom.
+# tspubplugincom #
+Contains function definitions for the Windows API library tspubplugincom. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/tspubplugincom-sys/)
+```toml
+[dependencies]
+tspubplugincom-sys = "0.0.1"
+```
+
+```rust
+extern crate tspubplugincom;
+```
+
+[Documentation](https://retep998.github.io/doc/tspubplugincom/)

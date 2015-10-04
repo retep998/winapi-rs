@@ -1,4 +1,13 @@
-# structuredquery-sys #
-FFI bindings to structuredquery.
+# structuredquery #
+Contains function definitions for the Windows API library structuredquery. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/structuredquery-sys/)
+```toml
+[dependencies]
+structuredquery-sys = "0.0.1"
+```
+
+```rust
+extern crate structuredquery;
+```
+
+[Documentation](https://retep998.github.io/doc/structuredquery/)

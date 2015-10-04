@@ -1,4 +1,13 @@
-# thunk32-sys #
-FFI bindings to thunk32.
+# thunk32 #
+Contains function definitions for the Windows API library thunk32. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/thunk32-sys/)
+```toml
+[dependencies]
+thunk32-sys = "0.0.1"
+```
+
+```rust
+extern crate thunk32;
+```
+
+[Documentation](https://retep998.github.io/doc/thunk32/)

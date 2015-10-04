@@ -1,4 +1,13 @@
-# oledlg-sys #
-FFI bindings to oledlg.
+# oledlg #
+Contains function definitions for the Windows API library oledlg. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/oledlg-sys/)
+```toml
+[dependencies]
+oledlg-sys = "0.0.1"
+```
+
+```rust
+extern crate oledlg;
+```
+
+[Documentation](https://retep998.github.io/doc/oledlg/)

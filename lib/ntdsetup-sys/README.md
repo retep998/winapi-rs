@@ -1,4 +1,13 @@
-# ntdsetup-sys #
-FFI bindings to ntdsetup.
+# ntdsetup #
+Contains function definitions for the Windows API library ntdsetup. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/ntdsetup-sys/)
+```toml
+[dependencies]
+ntdsetup-sys = "0.0.1"
+```
+
+```rust
+extern crate ntdsetup;
+```
+
+[Documentation](https://retep998.github.io/doc/ntdsetup/)

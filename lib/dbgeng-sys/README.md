@@ -1,4 +1,13 @@
-# dbgeng-sys #
-FFI bindings to dbgeng.
+# dbgeng #
+Contains function definitions for the Windows API library dbgeng. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/dbgeng-sys/)
+```toml
+[dependencies]
+dbgeng-sys = "0.0.1"
+```
+
+```rust
+extern crate dbgeng;
+```
+
+[Documentation](https://retep998.github.io/doc/dbgeng/)

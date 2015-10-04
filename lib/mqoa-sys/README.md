@@ -1,4 +1,13 @@
-# mqoa-sys #
-FFI bindings to mqoa.
+# mqoa #
+Contains function definitions for the Windows API library mqoa. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/mqoa-sys/)
+```toml
+[dependencies]
+mqoa-sys = "0.0.1"
+```
+
+```rust
+extern crate mqoa;
+```
+
+[Documentation](https://retep998.github.io/doc/mqoa/)

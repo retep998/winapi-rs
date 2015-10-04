@@ -1,4 +1,13 @@
-# d3dcompiler-sys #
-FFI bindings to d3dcompiler.
+# d3dcompiler #
+Contains function definitions for the Windows API library d3dcompiler. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/d3dcompiler-sys/)
+```toml
+[dependencies]
+d3dcompiler-sys = "0.0.1"
+```
+
+```rust
+extern crate d3dcompiler;
+```
+
+[Documentation](https://retep998.github.io/doc/d3dcompiler/)

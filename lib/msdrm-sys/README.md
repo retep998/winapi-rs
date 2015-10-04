@@ -1,4 +1,13 @@
-# msdrm-sys #
-FFI bindings to msdrm.
+# msdrm #
+Contains function definitions for the Windows API library msdrm. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/msdrm-sys/)
+```toml
+[dependencies]
+msdrm-sys = "0.0.1"
+```
+
+```rust
+extern crate msdrm;
+```
+
+[Documentation](https://retep998.github.io/doc/msdrm/)

@@ -1,4 +1,13 @@
-# mspatchc-sys #
-FFI bindings to mspatchc.
+# mspatchc #
+Contains function definitions for the Windows API library mspatchc. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/mspatchc-sys/)
+```toml
+[dependencies]
+mspatchc-sys = "0.0.1"
+```
+
+```rust
+extern crate mspatchc;
+```
+
+[Documentation](https://retep998.github.io/doc/mspatchc/)

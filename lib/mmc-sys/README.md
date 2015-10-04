@@ -1,4 +1,13 @@
-# mmc-sys #
-FFI bindings to mmc.
+# mmc #
+Contains function definitions for the Windows API library mmc. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/mmc-sys/)
+```toml
+[dependencies]
+mmc-sys = "0.0.1"
+```
+
+```rust
+extern crate mmc;
+```
+
+[Documentation](https://retep998.github.io/doc/mmc/)

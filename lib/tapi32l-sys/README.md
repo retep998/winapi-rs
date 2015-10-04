@@ -1,4 +1,13 @@
-# tapi32l-sys #
-FFI bindings to tapi32l.
+# tapi32l #
+Contains function definitions for the Windows API library tapi32l. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/tapi32l-sys/)
+```toml
+[dependencies]
+tapi32l-sys = "0.0.1"
+```
+
+```rust
+extern crate tapi32l;
+```
+
+[Documentation](https://retep998.github.io/doc/tapi32l/)

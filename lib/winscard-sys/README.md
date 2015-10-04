@@ -1,4 +1,13 @@
-# winscard-sys #
-FFI bindings to winscard.
+# winscard #
+Contains function definitions for the Windows API library winscard. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/winscard-sys/)
+```toml
+[dependencies]
+winscard-sys = "0.0.1"
+```
+
+```rust
+extern crate winscard;
+```
+
+[Documentation](https://retep998.github.io/doc/winscard/)

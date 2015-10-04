@@ -1,4 +1,13 @@
-# dtchelp-sys #
-FFI bindings to dtchelp.
+# dtchelp #
+Contains function definitions for the Windows API library dtchelp. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/dtchelp-sys/)
+```toml
+[dependencies]
+dtchelp-sys = "0.0.1"
+```
+
+```rust
+extern crate dtchelp;
+```
+
+[Documentation](https://retep998.github.io/doc/dtchelp/)

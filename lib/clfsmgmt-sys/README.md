@@ -1,4 +1,13 @@
-# clfsmgmt-sys #
-FFI bindings to clfsmgmt.
+# clfsmgmt #
+Contains function definitions for the Windows API library clfsmgmt. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/clfsmgmt-sys/)
+```toml
+[dependencies]
+clfsmgmt-sys = "0.0.1"
+```
+
+```rust
+extern crate clfsmgmt;
+```
+
+[Documentation](https://retep998.github.io/doc/clfsmgmt/)

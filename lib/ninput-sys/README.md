@@ -1,4 +1,13 @@
-# ninput-sys #
-FFI bindings to ninput.
+# ninput #
+Contains function definitions for the Windows API library ninput. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/ninput-sys/)
+```toml
+[dependencies]
+ninput-sys = "0.0.1"
+```
+
+```rust
+extern crate ninput;
+```
+
+[Documentation](https://retep998.github.io/doc/ninput/)

@@ -1,5 +1,6 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
+extern crate build;
 fn main() {
-    println!("cargo:rustc-link-lib=dylib=d3d9");
+    build::link("d3d9", true)
 }

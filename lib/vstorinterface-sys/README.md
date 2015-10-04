@@ -1,4 +1,13 @@
-# vstorinterface-sys #
-FFI bindings to vstorinterface.
+# vstorinterface #
+Contains function definitions for the Windows API library vstorinterface. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/vstorinterface-sys/)
+```toml
+[dependencies]
+vstorinterface-sys = "0.0.1"
+```
+
+```rust
+extern crate vstorinterface;
+```
+
+[Documentation](https://retep998.github.io/doc/vstorinterface/)

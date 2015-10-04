@@ -1,4 +1,13 @@
-# xolehlp-sys #
-FFI bindings to xolehlp.
+# xolehlp #
+Contains function definitions for the Windows API library xolehlp. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/xolehlp-sys/)
+```toml
+[dependencies]
+xolehlp-sys = "0.0.1"
+```
+
+```rust
+extern crate xolehlp;
+```
+
+[Documentation](https://retep998.github.io/doc/xolehlp/)

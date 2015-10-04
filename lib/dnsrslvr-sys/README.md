@@ -1,4 +1,13 @@
-# dnsrslvr-sys #
-FFI bindings to dnsrslvr.
+# dnsrslvr #
+Contains function definitions for the Windows API library dnsrslvr. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/dnsrslvr-sys/)
+```toml
+[dependencies]
+dnsrslvr-sys = "0.0.1"
+```
+
+```rust
+extern crate dnsrslvr;
+```
+
+[Documentation](https://retep998.github.io/doc/dnsrslvr/)

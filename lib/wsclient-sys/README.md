@@ -1,4 +1,13 @@
-# wsclient-sys #
-FFI bindings to wsclient.
+# wsclient #
+Contains function definitions for the Windows API library wsclient. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/wsclient-sys/)
+```toml
+[dependencies]
+wsclient-sys = "0.0.1"
+```
+
+```rust
+extern crate wsclient;
+```
+
+[Documentation](https://retep998.github.io/doc/wsclient/)

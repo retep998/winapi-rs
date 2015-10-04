@@ -1,4 +1,13 @@
-# mqrt-sys #
-FFI bindings to mqrt.
+# mqrt #
+Contains function definitions for the Windows API library mqrt. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/mqrt-sys/)
+```toml
+[dependencies]
+mqrt-sys = "0.0.1"
+```
+
+```rust
+extern crate mqrt;
+```
+
+[Documentation](https://retep998.github.io/doc/mqrt/)

@@ -1,4 +1,13 @@
-# rpcrt4-sys #
-FFI bindings to rpcrt4.
+# rpcrt4 #
+Contains function definitions for the Windows API library rpcrt4. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/rpcrt4-sys/)
+```toml
+[dependencies]
+rpcrt4-sys = "0.0.1"
+```
+
+```rust
+extern crate rpcrt4;
+```
+
+[Documentation](https://retep998.github.io/doc/rpcrt4/)

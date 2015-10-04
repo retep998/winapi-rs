@@ -1,4 +1,13 @@
-# mciole32-sys #
-FFI bindings to mciole32.
+# mciole32 #
+Contains function definitions for the Windows API library mciole32. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/mciole32-sys/)
+```toml
+[dependencies]
+mciole32-sys = "0.0.1"
+```
+
+```rust
+extern crate mciole32;
+```
+
+[Documentation](https://retep998.github.io/doc/mciole32/)

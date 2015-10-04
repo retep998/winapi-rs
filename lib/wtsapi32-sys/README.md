@@ -1,4 +1,13 @@
-# wtsapi32-sys #
-FFI bindings to wtsapi32.
+# wtsapi32 #
+Contains function definitions for the Windows API library wtsapi32. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/wtsapi32-sys/)
+```toml
+[dependencies]
+wtsapi32-sys = "0.0.1"
+```
+
+```rust
+extern crate wtsapi32;
+```
+
+[Documentation](https://retep998.github.io/doc/wtsapi32/)

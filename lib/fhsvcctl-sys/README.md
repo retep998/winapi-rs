@@ -1,4 +1,13 @@
-# fhsvcctl-sys #
-FFI bindings to fhsvcctl.
+# fhsvcctl #
+Contains function definitions for the Windows API library fhsvcctl. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/fhsvcctl-sys/)
+```toml
+[dependencies]
+fhsvcctl-sys = "0.0.1"
+```
+
+```rust
+extern crate fhsvcctl;
+```
+
+[Documentation](https://retep998.github.io/doc/fhsvcctl/)

@@ -1,4 +1,13 @@
-# urlmon-sys #
-FFI bindings to urlmon.
+# urlmon #
+Contains function definitions for the Windows API library urlmon. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/urlmon-sys/)
+```toml
+[dependencies]
+urlmon-sys = "0.0.1"
+```
+
+```rust
+extern crate urlmon;
+```
+
+[Documentation](https://retep998.github.io/doc/urlmon/)

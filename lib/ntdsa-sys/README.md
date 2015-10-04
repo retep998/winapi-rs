@@ -1,4 +1,13 @@
-# ntdsa-sys #
-FFI bindings to ntdsa.
+# ntdsa #
+Contains function definitions for the Windows API library ntdsa. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/ntdsa-sys/)
+```toml
+[dependencies]
+ntdsa-sys = "0.0.1"
+```
+
+```rust
+extern crate ntdsa;
+```
+
+[Documentation](https://retep998.github.io/doc/ntdsa/)

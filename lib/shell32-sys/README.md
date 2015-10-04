@@ -1,4 +1,13 @@
-# shell32-sys #
-FFI bindings to shell32.
+# shell32 #
+Contains function definitions for the Windows API library shell32. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/shell32-sys/)
+```toml
+[dependencies]
+shell32-sys = "0.1.1"
+```
+
+```rust
+extern crate shell32;
+```
+
+[Documentation](https://retep998.github.io/doc/shell32/)

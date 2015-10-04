@@ -1,4 +1,13 @@
-# samlib-sys #
-FFI bindings to samlib.
+# samlib #
+Contains function definitions for the Windows API library samlib. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/samlib-sys/)
+```toml
+[dependencies]
+samlib-sys = "0.0.1"
+```
+
+```rust
+extern crate samlib;
+```
+
+[Documentation](https://retep998.github.io/doc/samlib/)

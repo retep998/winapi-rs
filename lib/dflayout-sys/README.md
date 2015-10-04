@@ -1,4 +1,13 @@
-# dflayout-sys #
-FFI bindings to dflayout.
+# dflayout #
+Contains function definitions for the Windows API library dflayout. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/dflayout-sys/)
+```toml
+[dependencies]
+dflayout-sys = "0.0.1"
+```
+
+```rust
+extern crate dflayout;
+```
+
+[Documentation](https://retep998.github.io/doc/dflayout/)

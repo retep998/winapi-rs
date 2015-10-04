@@ -1,4 +1,13 @@
-# wsbonline-sys #
-FFI bindings to wsbonline.
+# wsbonline #
+Contains function definitions for the Windows API library wsbonline. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/wsbonline-sys/)
+```toml
+[dependencies]
+wsbonline-sys = "0.0.1"
+```
+
+```rust
+extern crate wsbonline;
+```
+
+[Documentation](https://retep998.github.io/doc/wsbonline/)

@@ -1,4 +1,13 @@
-# windows.ui-sys #
-FFI bindings to windows.ui.
+# windows.ui #
+Contains function definitions for the Windows API library windows.ui. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/windows.ui-sys/)
+```toml
+[dependencies]
+windows.ui-sys = "0.0.1"
+```
+
+```rust
+extern crate windows.ui;
+```
+
+[Documentation](https://retep998.github.io/doc/windows.ui/)

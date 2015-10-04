@@ -1,4 +1,13 @@
-# sfc-sys #
-FFI bindings to sfc.
+# sfc #
+Contains function definitions for the Windows API library sfc. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/sfc-sys/)
+```toml
+[dependencies]
+sfc-sys = "0.0.1"
+```
+
+```rust
+extern crate sfc;
+```
+
+[Documentation](https://retep998.github.io/doc/sfc/)

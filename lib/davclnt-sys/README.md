@@ -1,4 +1,13 @@
-# davclnt-sys #
-FFI bindings to davclnt.
+# davclnt #
+Contains function definitions for the Windows API library davclnt. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/davclnt-sys/)
+```toml
+[dependencies]
+davclnt-sys = "0.0.1"
+```
+
+```rust
+extern crate davclnt;
+```
+
+[Documentation](https://retep998.github.io/doc/davclnt/)

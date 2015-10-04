@@ -1,4 +1,13 @@
-# dhcpcsvc-sys #
-FFI bindings to dhcpcsvc.
+# dhcpcsvc #
+Contains function definitions for the Windows API library dhcpcsvc. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/dhcpcsvc-sys/)
+```toml
+[dependencies]
+dhcpcsvc-sys = "0.0.1"
+```
+
+```rust
+extern crate dhcpcsvc;
+```
+
+[Documentation](https://retep998.github.io/doc/dhcpcsvc/)

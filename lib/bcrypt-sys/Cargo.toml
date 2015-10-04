@@ -2,19 +2,17 @@
 name = "bcrypt-sys"
 version = "0.0.1"
 authors = ["Peter Atashian <retep998@gmail.com>"]
-description = "FFI bindings to bcrypt."
-documentation = "https://retep998.github.io/doc/bcrypt-sys/"
+description = "Contains function definitions for the Windows API library bcrypt. See winapi for types and constants."
+documentation = "https://retep998.github.io/doc/bcrypt/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["Windows", "FFI", "WinSDK"]
+keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
 links = "bcrypt"
-
 [lib]
 name = "bcrypt"
-
 [dependencies]
-winapi = { version = "*", path = "../.." }
+winapi = { version = "0.2.4", path = "../.." }
 [build-dependencies]
-winapi-build = { version = "*", path = "../../build" }
+winapi-build = { version = "0.1.1", path = "../../build" }

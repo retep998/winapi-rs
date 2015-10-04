@@ -1,4 +1,13 @@
-# gpedit-sys #
-FFI bindings to gpedit.
+# gpedit #
+Contains function definitions for the Windows API library gpedit. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/gpedit-sys/)
+```toml
+[dependencies]
+gpedit-sys = "0.0.1"
+```
+
+```rust
+extern crate gpedit;
+```
+
+[Documentation](https://retep998.github.io/doc/gpedit/)

@@ -1,4 +1,13 @@
-# ondemandconnroutehelper-sys #
-FFI bindings to ondemandconnroutehelper.
+# ondemandconnroutehelper #
+Contains function definitions for the Windows API library ondemandconnroutehelper. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/ondemandconnroutehelper-sys/)
+```toml
+[dependencies]
+ondemandconnroutehelper-sys = "0.0.1"
+```
+
+```rust
+extern crate ondemandconnroutehelper;
+```
+
+[Documentation](https://retep998.github.io/doc/ondemandconnroutehelper/)

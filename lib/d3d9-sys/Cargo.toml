@@ -2,19 +2,17 @@
 name = "d3d9-sys"
 version = "0.1.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
-description = "FFI bindings to d3d9."
+description = "Contains function definitions for the Windows API library d3d9. See winapi for types and constants."
 documentation = "https://retep998.github.io/doc/d3d9/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["Windows", "FFI", "WinSDK", "DirectX"]
+keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
 links = "d3d9"
-
 [lib]
 name = "d3d9"
-
 [dependencies]
-winapi = { version = "*", path = "../.." }
+winapi = { version = "0.2.4", path = "../.." }
 [build-dependencies]
-winapi-build = { version = "*", path = "../../build" }
+winapi-build = { version = "0.1.1", path = "../../build" }

@@ -1,4 +1,13 @@
-# dnslib-sys #
-FFI bindings to dnslib.
+# dnslib #
+Contains function definitions for the Windows API library dnslib. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/dnslib-sys/)
+```toml
+[dependencies]
+dnslib-sys = "0.0.1"
+```
+
+```rust
+extern crate dnslib;
+```
+
+[Documentation](https://retep998.github.io/doc/dnslib/)

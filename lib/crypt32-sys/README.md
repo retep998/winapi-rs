@@ -1,4 +1,13 @@
-# crypt32-sys #
-FFI bindings to crypt32.
+# crypt32 #
+Contains function definitions for the Windows API library crypt32. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/crypt32-sys/)
+```toml
+[dependencies]
+crypt32-sys = "0.0.1"
+```
+
+```rust
+extern crate crypt32;
+```
+
+[Documentation](https://retep998.github.io/doc/crypt32/)

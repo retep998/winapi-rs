@@ -1,4 +1,13 @@
-# xinput9_1_0-sys #
-FFI bindings to xinput9_1_0.
+# xinput9_1_0 #
+Contains function definitions for the Windows API library xinput9_1_0. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/xinput9_1_0-sys/)
+```toml
+[dependencies]
+xinput9_1_0-sys = "0.0.1"
+```
+
+```rust
+extern crate xinput9_1_0;
+```
+
+[Documentation](https://retep998.github.io/doc/xinput9_1_0/)

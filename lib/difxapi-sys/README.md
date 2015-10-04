@@ -1,4 +1,13 @@
-# difxapi-sys #
-FFI bindings to difxapi.
+# difxapi #
+Contains function definitions for the Windows API library difxapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/difxapi-sys/)
+```toml
+[dependencies]
+difxapi-sys = "0.0.1"
+```
+
+```rust
+extern crate difxapi;
+```
+
+[Documentation](https://retep998.github.io/doc/difxapi/)

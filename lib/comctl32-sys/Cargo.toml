@@ -2,19 +2,17 @@
 name = "comctl32-sys"
 version = "0.0.1"
 authors = ["Peter Atashian <retep998@gmail.com>"]
-description = "FFI bindings to comctl32."
-documentation = "https://retep998.github.io/doc/comctl32-sys/"
+description = "Contains function definitions for the Windows API library comctl32. See winapi for types and constants."
+documentation = "https://retep998.github.io/doc/comctl32/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["Windows", "FFI", "WinSDK"]
+keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
 links = "comctl32"
-
 [lib]
 name = "comctl32"
-
 [dependencies]
-winapi = { version = "*", path = "../.." }
+winapi = { version = "0.2.4", path = "../.." }
 [build-dependencies]
-winapi-build = { version = "*", path = "../../build" }
+winapi-build = { version = "0.1.1", path = "../../build" }

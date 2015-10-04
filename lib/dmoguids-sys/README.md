@@ -1,4 +1,13 @@
-# dmoguids-sys #
-FFI bindings to dmoguids.
+# dmoguids #
+Contains function definitions for the Windows API library dmoguids. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/dmoguids-sys/)
+```toml
+[dependencies]
+dmoguids-sys = "0.0.1"
+```
+
+```rust
+extern crate dmoguids;
+```
+
+[Documentation](https://retep998.github.io/doc/dmoguids/)

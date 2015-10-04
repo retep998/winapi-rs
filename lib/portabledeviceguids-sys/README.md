@@ -1,4 +1,13 @@
-# portabledeviceguids-sys #
-FFI bindings to portabledeviceguids.
+# portabledeviceguids #
+Contains function definitions for the Windows API library portabledeviceguids. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/portabledeviceguids-sys/)
+```toml
+[dependencies]
+portabledeviceguids-sys = "0.0.1"
+```
+
+```rust
+extern crate portabledeviceguids;
+```
+
+[Documentation](https://retep998.github.io/doc/portabledeviceguids/)

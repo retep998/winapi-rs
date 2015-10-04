@@ -1,4 +1,13 @@
-# mfuuid-sys #
-FFI bindings to mfuuid.
+# mfuuid #
+Contains function definitions for the Windows API library mfuuid. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/mfuuid-sys/)
+```toml
+[dependencies]
+mfuuid-sys = "0.0.1"
+```
+
+```rust
+extern crate mfuuid;
+```
+
+[Documentation](https://retep998.github.io/doc/mfuuid/)

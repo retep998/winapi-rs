@@ -1,4 +1,13 @@
-# wiaservc-sys #
-FFI bindings to wiaservc.
+# wiaservc #
+Contains function definitions for the Windows API library wiaservc. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/wiaservc-sys/)
+```toml
+[dependencies]
+wiaservc-sys = "0.0.1"
+```
+
+```rust
+extern crate wiaservc;
+```
+
+[Documentation](https://retep998.github.io/doc/wiaservc/)

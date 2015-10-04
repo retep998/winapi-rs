@@ -1,4 +1,13 @@
-# wmvcore-sys #
-FFI bindings to wmvcore.
+# wmvcore #
+Contains function definitions for the Windows API library wmvcore. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/wmvcore-sys/)
+```toml
+[dependencies]
+wmvcore-sys = "0.0.1"
+```
+
+```rust
+extern crate wmvcore;
+```
+
+[Documentation](https://retep998.github.io/doc/wmvcore/)

@@ -1,4 +1,13 @@
-# fxsutility-sys #
-FFI bindings to fxsutility.
+# fxsutility #
+Contains function definitions for the Windows API library fxsutility. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/fxsutility-sys/)
+```toml
+[dependencies]
+fxsutility-sys = "0.0.1"
+```
+
+```rust
+extern crate fxsutility;
+```
+
+[Documentation](https://retep998.github.io/doc/fxsutility/)

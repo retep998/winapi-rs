@@ -1,4 +1,13 @@
-# propsys-sys #
-FFI bindings to propsys.
+# propsys #
+Contains function definitions for the Windows API library propsys. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/propsys-sys/)
+```toml
+[dependencies]
+propsys-sys = "0.0.1"
+```
+
+```rust
+extern crate propsys;
+```
+
+[Documentation](https://retep998.github.io/doc/propsys/)

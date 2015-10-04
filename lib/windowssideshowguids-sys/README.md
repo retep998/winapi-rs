@@ -1,4 +1,13 @@
-# windowssideshowguids-sys #
-FFI bindings to windowssideshowguids.
+# windowssideshowguids #
+Contains function definitions for the Windows API library windowssideshowguids. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/windowssideshowguids-sys/)
+```toml
+[dependencies]
+windowssideshowguids-sys = "0.0.1"
+```
+
+```rust
+extern crate windowssideshowguids;
+```
+
+[Documentation](https://retep998.github.io/doc/windowssideshowguids/)

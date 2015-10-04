@@ -1,4 +1,13 @@
-# ntquery-sys #
-FFI bindings to ntquery.
+# ntquery #
+Contains function definitions for the Windows API library ntquery. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/ntquery-sys/)
+```toml
+[dependencies]
+ntquery-sys = "0.0.1"
+```
+
+```rust
+extern crate ntquery;
+```
+
+[Documentation](https://retep998.github.io/doc/ntquery/)

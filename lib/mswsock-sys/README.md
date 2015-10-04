@@ -1,4 +1,13 @@
-# mswsock-sys #
-FFI bindings to mswsock.
+# mswsock #
+Contains function definitions for the Windows API library mswsock. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/mswsock-sys/)
+```toml
+[dependencies]
+mswsock-sys = "0.0.1"
+```
+
+```rust
+extern crate mswsock;
+```
+
+[Documentation](https://retep998.github.io/doc/mswsock/)

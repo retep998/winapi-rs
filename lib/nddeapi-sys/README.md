@@ -1,4 +1,13 @@
-# nddeapi-sys #
-FFI bindings to nddeapi.
+# nddeapi #
+Contains function definitions for the Windows API library nddeapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/nddeapi-sys/)
+```toml
+[dependencies]
+nddeapi-sys = "0.0.1"
+```
+
+```rust
+extern crate nddeapi;
+```
+
+[Documentation](https://retep998.github.io/doc/nddeapi/)

@@ -1,4 +1,13 @@
-# magnification-sys #
-FFI bindings to magnification.
+# magnification #
+Contains function definitions for the Windows API library magnification. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/magnification-sys/)
+```toml
+[dependencies]
+magnification-sys = "0.0.1"
+```
+
+```rust
+extern crate magnification;
+```
+
+[Documentation](https://retep998.github.io/doc/magnification/)

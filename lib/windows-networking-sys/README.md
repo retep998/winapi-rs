@@ -1,4 +1,13 @@
-# windows.networking-sys #
-FFI bindings to windows.networking.
+# windows.networking #
+Contains function definitions for the Windows API library windows.networking. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/windows.networking-sys/)
+```toml
+[dependencies]
+windows.networking-sys = "0.0.1"
+```
+
+```rust
+extern crate windows.networking;
+```
+
+[Documentation](https://retep998.github.io/doc/windows.networking/)

@@ -1,4 +1,13 @@
-# scarddlg-sys #
-FFI bindings to scarddlg.
+# scarddlg #
+Contains function definitions for the Windows API library scarddlg. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/scarddlg-sys/)
+```toml
+[dependencies]
+scarddlg-sys = "0.0.1"
+```
+
+```rust
+extern crate scarddlg;
+```
+
+[Documentation](https://retep998.github.io/doc/scarddlg/)

@@ -1,4 +1,13 @@
-# easregprov-sys #
-FFI bindings to easregprov.
+# easregprov #
+Contains function definitions for the Windows API library easregprov. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/easregprov-sys/)
+```toml
+[dependencies]
+easregprov-sys = "0.0.1"
+```
+
+```rust
+extern crate easregprov;
+```
+
+[Documentation](https://retep998.github.io/doc/easregprov/)

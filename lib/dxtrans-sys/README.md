@@ -1,4 +1,13 @@
-# dxtrans-sys #
-FFI bindings to dxtrans.
+# dxtrans #
+Contains function definitions for the Windows API library dxtrans. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/dxtrans-sys/)
+```toml
+[dependencies]
+dxtrans-sys = "0.0.1"
+```
+
+```rust
+extern crate dxtrans;
+```
+
+[Documentation](https://retep998.github.io/doc/dxtrans/)

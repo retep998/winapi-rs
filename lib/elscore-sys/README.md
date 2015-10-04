@@ -1,4 +1,13 @@
-# elscore-sys #
-FFI bindings to elscore.
+# elscore #
+Contains function definitions for the Windows API library elscore. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/elscore-sys/)
+```toml
+[dependencies]
+elscore-sys = "0.0.1"
+```
+
+```rust
+extern crate elscore;
+```
+
+[Documentation](https://retep998.github.io/doc/elscore/)

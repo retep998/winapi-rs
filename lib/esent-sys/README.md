@@ -1,4 +1,13 @@
-# esent-sys #
-FFI bindings to esent.
+# esent #
+Contains function definitions for the Windows API library esent. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/esent-sys/)
+```toml
+[dependencies]
+esent-sys = "0.0.1"
+```
+
+```rust
+extern crate esent;
+```
+
+[Documentation](https://retep998.github.io/doc/esent/)

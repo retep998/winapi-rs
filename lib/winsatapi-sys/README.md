@@ -1,4 +1,13 @@
-# winsatapi-sys #
-FFI bindings to winsatapi.
+# winsatapi #
+Contains function definitions for the Windows API library winsatapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/winsatapi-sys/)
+```toml
+[dependencies]
+winsatapi-sys = "0.0.1"
+```
+
+```rust
+extern crate winsatapi;
+```
+
+[Documentation](https://retep998.github.io/doc/winsatapi/)

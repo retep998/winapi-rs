@@ -1,4 +1,13 @@
-# wer-sys #
-FFI bindings to wer.
+# wer #
+Contains function definitions for the Windows API library wer. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/wer-sys/)
+```toml
+[dependencies]
+wer-sys = "0.0.1"
+```
+
+```rust
+extern crate wer;
+```
+
+[Documentation](https://retep998.github.io/doc/wer/)

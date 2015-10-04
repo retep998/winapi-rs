@@ -1,4 +1,13 @@
-# mdmregistration-sys #
-FFI bindings to mdmregistration.
+# mdmregistration #
+Contains function definitions for the Windows API library mdmregistration. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/mdmregistration-sys/)
+```toml
+[dependencies]
+mdmregistration-sys = "0.0.1"
+```
+
+```rust
+extern crate mdmregistration;
+```
+
+[Documentation](https://retep998.github.io/doc/mdmregistration/)

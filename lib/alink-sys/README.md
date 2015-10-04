@@ -1,4 +1,13 @@
-# alink-sys #
-FFI bindings to alink.
+# alink #
+Contains function definitions for the Windows API library alink. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/alink-sys/)
+```toml
+[dependencies]
+alink-sys = "0.0.1"
+```
+
+```rust
+extern crate alink;
+```
+
+[Documentation](https://retep998.github.io/doc/alink/)

@@ -1,4 +1,13 @@
-# wsnmp32-sys #
-FFI bindings to wsnmp32.
+# wsnmp32 #
+Contains function definitions for the Windows API library wsnmp32. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/wsnmp32-sys/)
+```toml
+[dependencies]
+wsnmp32-sys = "0.0.1"
+```
+
+```rust
+extern crate wsnmp32;
+```
+
+[Documentation](https://retep998.github.io/doc/wsnmp32/)

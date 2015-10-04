@@ -1,4 +1,13 @@
-# wevtapi-sys #
-FFI bindings to wevtapi.
+# wevtapi #
+Contains function definitions for the Windows API library wevtapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/wevtapi-sys/)
+```toml
+[dependencies]
+wevtapi-sys = "0.0.1"
+```
+
+```rust
+extern crate wevtapi;
+```
+
+[Documentation](https://retep998.github.io/doc/wevtapi/)

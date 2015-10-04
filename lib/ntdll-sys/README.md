@@ -1,4 +1,13 @@
-# ntdll-sys #
-FFI bindings to ntdll.
+# ntdll #
+Contains function definitions for the Windows API library ntdll. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/ntdll-sys/)
+```toml
+[dependencies]
+ntdll-sys = "0.0.1"
+```
+
+```rust
+extern crate ntdll;
+```
+
+[Documentation](https://retep998.github.io/doc/ntdll/)

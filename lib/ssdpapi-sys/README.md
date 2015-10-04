@@ -1,4 +1,13 @@
-# ssdpapi-sys #
-FFI bindings to ssdpapi.
+# ssdpapi #
+Contains function definitions for the Windows API library ssdpapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/ssdpapi-sys/)
+```toml
+[dependencies]
+ssdpapi-sys = "0.0.1"
+```
+
+```rust
+extern crate ssdpapi;
+```
+
+[Documentation](https://retep998.github.io/doc/ssdpapi/)

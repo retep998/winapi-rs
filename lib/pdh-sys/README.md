@@ -1,4 +1,13 @@
-# pdh-sys #
-FFI bindings to pdh.
+# pdh #
+Contains function definitions for the Windows API library pdh. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/pdh-sys/)
+```toml
+[dependencies]
+pdh-sys = "0.0.1"
+```
+
+```rust
+extern crate pdh;
+```
+
+[Documentation](https://retep998.github.io/doc/pdh/)

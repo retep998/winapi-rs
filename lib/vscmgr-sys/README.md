@@ -1,4 +1,13 @@
-# vscmgr-sys #
-FFI bindings to vscmgr.
+# vscmgr #
+Contains function definitions for the Windows API library vscmgr. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/vscmgr-sys/)
+```toml
+[dependencies]
+vscmgr-sys = "0.0.1"
+```
+
+```rust
+extern crate vscmgr;
+```
+
+[Documentation](https://retep998.github.io/doc/vscmgr/)

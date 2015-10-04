@@ -1,4 +1,13 @@
-# sisbkup-sys #
-FFI bindings to sisbkup.
+# sisbkup #
+Contains function definitions for the Windows API library sisbkup. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/sisbkup-sys/)
+```toml
+[dependencies]
+sisbkup-sys = "0.0.1"
+```
+
+```rust
+extern crate sisbkup;
+```
+
+[Documentation](https://retep998.github.io/doc/sisbkup/)

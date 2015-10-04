@@ -1,4 +1,13 @@
-# ehstorguids-sys #
-FFI bindings to ehstorguids.
+# ehstorguids #
+Contains function definitions for the Windows API library ehstorguids. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/ehstorguids-sys/)
+```toml
+[dependencies]
+ehstorguids-sys = "0.0.1"
+```
+
+```rust
+extern crate ehstorguids;
+```
+
+[Documentation](https://retep998.github.io/doc/ehstorguids/)

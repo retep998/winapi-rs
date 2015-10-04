@@ -1,4 +1,13 @@
-# httpapi-sys #
-FFI bindings to httpapi.
+# httpapi #
+Contains function definitions for the Windows API library httpapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/httpapi-sys/)
+```toml
+[dependencies]
+httpapi-sys = "0.0.1"
+```
+
+```rust
+extern crate httpapi;
+```
+
+[Documentation](https://retep998.github.io/doc/httpapi/)

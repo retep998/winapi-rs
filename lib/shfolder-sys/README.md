@@ -1,4 +1,13 @@
-# shfolder-sys #
-FFI bindings to shfolder.
+# shfolder #
+Contains function definitions for the Windows API library shfolder. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/shfolder-sys/)
+```toml
+[dependencies]
+shfolder-sys = "0.0.1"
+```
+
+```rust
+extern crate shfolder;
+```
+
+[Documentation](https://retep998.github.io/doc/shfolder/)

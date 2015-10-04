@@ -1,4 +1,13 @@
-# dsuiext-sys #
-FFI bindings to dsuiext.
+# dsuiext #
+Contains function definitions for the Windows API library dsuiext. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/dsuiext-sys/)
+```toml
+[dependencies]
+dsuiext-sys = "0.0.1"
+```
+
+```rust
+extern crate dsuiext;
+```
+
+[Documentation](https://retep998.github.io/doc/dsuiext/)

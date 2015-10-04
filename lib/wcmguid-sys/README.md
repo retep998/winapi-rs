@@ -1,4 +1,13 @@
-# wcmguid-sys #
-FFI bindings to wcmguid.
+# wcmguid #
+Contains function definitions for the Windows API library wcmguid. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/wcmguid-sys/)
+```toml
+[dependencies]
+wcmguid-sys = "0.0.1"
+```
+
+```rust
+extern crate wcmguid;
+```
+
+[Documentation](https://retep998.github.io/doc/wcmguid/)

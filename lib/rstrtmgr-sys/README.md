@@ -1,4 +1,13 @@
-# rstrtmgr-sys #
-FFI bindings to rstrtmgr.
+# rstrtmgr #
+Contains function definitions for the Windows API library rstrtmgr. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/rstrtmgr-sys/)
+```toml
+[dependencies]
+rstrtmgr-sys = "0.0.1"
+```
+
+```rust
+extern crate rstrtmgr;
+```
+
+[Documentation](https://retep998.github.io/doc/rstrtmgr/)

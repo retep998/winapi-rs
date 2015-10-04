@@ -1,4 +1,13 @@
-# sens-sys #
-FFI bindings to sens.
+# sens #
+Contains function definitions for the Windows API library sens. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/sens-sys/)
+```toml
+[dependencies]
+sens-sys = "0.0.1"
+```
+
+```rust
+extern crate sens;
+```
+
+[Documentation](https://retep998.github.io/doc/sens/)

@@ -1,4 +1,13 @@
-# mprapi-sys #
-FFI bindings to mprapi.
+# mprapi #
+Contains function definitions for the Windows API library mprapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/mprapi-sys/)
+```toml
+[dependencies]
+mprapi-sys = "0.0.1"
+```
+
+```rust
+extern crate mprapi;
+```
+
+[Documentation](https://retep998.github.io/doc/mprapi/)

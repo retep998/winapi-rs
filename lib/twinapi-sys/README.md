@@ -1,4 +1,13 @@
-# twinapi-sys #
-FFI bindings to twinapi.
+# twinapi #
+Contains function definitions for the Windows API library twinapi. See winapi for types and constants.
 
-[Documentation](https://retep998.github.io/doc/twinapi-sys/)
+```toml
+[dependencies]
+twinapi-sys = "0.0.1"
+```
+
+```rust
+extern crate twinapi;
+```
+
+[Documentation](https://retep998.github.io/doc/twinapi/)
