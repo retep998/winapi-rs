@@ -1,9 +1,7 @@
 // Copyright © 2015, Connor Hilarides
 // Licensed under the MIT License <LICENSE.md>
-//! Mappings for the contents of dwrite.h
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_FONT_FILE_TYPE {
+//! DirectX Typography Services public API definitions.
+ENUM!{enum DWRITE_FONT_FILE_TYPE {
     DWRITE_FONT_FILE_TYPE_UNKNOWN,
     DWRITE_FONT_FILE_TYPE_CFF,
     DWRITE_FONT_FILE_TYPE_TRUETYPE,
@@ -11,13 +9,9 @@ pub enum DWRITE_FONT_FILE_TYPE {
     DWRITE_FONT_FILE_TYPE_TYPE1_PFM,
     DWRITE_FONT_FILE_TYPE_TYPE1_PFB,
     DWRITE_FONT_FILE_TYPE_VECTOR,
-    DWRITE_FONT_FILE_TYPE_BITMAP
-}
-
-pub use self::DWRITE_FONT_FILE_TYPE::*;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_FONT_FACE_TYPE {
+    DWRITE_FONT_FILE_TYPE_BITMAP,
+}}
+ENUM!{enum DWRITE_FONT_FACE_TYPE {
     DWRITE_FONT_FACE_TYPE_CFF,
     DWRITE_FONT_FACE_TYPE_TRUETYPE,
     DWRITE_FONT_FACE_TYPE_TRUETYPE_COLLECTION,
@@ -25,73 +19,51 @@ pub enum DWRITE_FONT_FACE_TYPE {
     DWRITE_FONT_FACE_TYPE_VECTOR,
     DWRITE_FONT_FACE_TYPE_BITMAP,
     DWRITE_FONT_FACE_TYPE_UNKNOWN,
-    DWRITE_FONT_FACE_TYPE_RAW_CFF
-}
-
-pub use self::DWRITE_FONT_FACE_TYPE::*;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_FONT_SIMULATIONS {
+    DWRITE_FONT_FACE_TYPE_RAW_CFF,
+}}
+FLAGS!{enum DWRITE_FONT_SIMULATIONS {
     DWRITE_FONT_SIMULATIONS_NONE = 0x0000,
     DWRITE_FONT_SIMULATIONS_BOLD = 0x0001,
-    DWRITE_FONT_SIMULATIONS_OBLIQUE = 0x0002
-}
-
-pub use self::DWRITE_FONT_SIMULATIONS::*;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_FONT_WEIGHT {
+    DWRITE_FONT_SIMULATIONS_OBLIQUE = 0x0002,
+}}
+ENUM!{enum DWRITE_FONT_WEIGHT {
     DWRITE_FONT_WEIGHT_THIN = 100,
     DWRITE_FONT_WEIGHT_EXTRA_LIGHT = 200,
+    DWRITE_FONT_WEIGHT_ULTRA_LIGHT = 200,
     DWRITE_FONT_WEIGHT_LIGHT = 300,
     DWRITE_FONT_WEIGHT_SEMI_LIGHT = 350,
     DWRITE_FONT_WEIGHT_NORMAL = 400,
+    DWRITE_FONT_WEIGHT_REGULAR = 400,
     DWRITE_FONT_WEIGHT_MEDIUM = 500,
     DWRITE_FONT_WEIGHT_DEMI_BOLD = 600,
+    DWRITE_FONT_WEIGHT_SEMI_BOLD = 600,
     DWRITE_FONT_WEIGHT_BOLD = 700,
+    DWRITE_FONT_WEIGHT_EXTRA_BOLD = 800,
     DWRITE_FONT_WEIGHT_ULTRA_BOLD = 800,
     DWRITE_FONT_WEIGHT_BLACK = 900,
+    DWRITE_FONT_WEIGHT_HEAVY = 900,
     DWRITE_FONT_WEIGHT_EXTRA_BLACK = 950,
-}
-
-pub use self::DWRITE_FONT_WEIGHT::*;
-
-pub const DWRITE_FONT_WEIGHT_ULTRA_LIGHT: DWRITE_FONT_WEIGHT = DWRITE_FONT_WEIGHT_EXTRA_LIGHT;
-pub const DWRITE_FONT_WEIGHT_REGULAR: DWRITE_FONT_WEIGHT = DWRITE_FONT_WEIGHT_NORMAL;
-pub const DWRITE_FONT_WEIGHT_SEMI_BOLD: DWRITE_FONT_WEIGHT = DWRITE_FONT_WEIGHT_DEMI_BOLD;
-pub const DWRITE_FONT_WEIGHT_EXTRA_BOLD: DWRITE_FONT_WEIGHT = DWRITE_FONT_WEIGHT_ULTRA_BOLD;
-pub const DWRITE_FONT_WEIGHT_HEAVY: DWRITE_FONT_WEIGHT = DWRITE_FONT_WEIGHT_BLACK;
-pub const DWRITE_FONT_WEIGHT_ULTRA_BLACK: DWRITE_FONT_WEIGHT = DWRITE_FONT_WEIGHT_EXTRA_BLACK;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_FONT_STRETCH {
+    DWRITE_FONT_WEIGHT_ULTRA_BLACK = 950,
+}}
+ENUM!{enum DWRITE_FONT_STRETCH {
     DWRITE_FONT_STRETCH_UNDEFINED = 0,
     DWRITE_FONT_STRETCH_ULTRA_CONDENSED = 1,
     DWRITE_FONT_STRETCH_EXTRA_CONDENSED = 2,
     DWRITE_FONT_STRETCH_CONDENSED = 3,
     DWRITE_FONT_STRETCH_SEMI_CONDENSED = 4,
     DWRITE_FONT_STRETCH_NORMAL = 5,
+    DWRITE_FONT_STRETCH_MEDIUM = 5,
     DWRITE_FONT_STRETCH_SEMI_EXPANDED = 6,
     DWRITE_FONT_STRETCH_EXPANDED = 7,
     DWRITE_FONT_STRETCH_EXTRA_EXPANDED = 8,
-    DWRITE_FONT_STRETCH_ULTRA_EXPANDED = 9
-}
-
-pub use self::DWRITE_FONT_STRETCH::*;
-
-pub const DWRITE_FONT_STRETCH_MEDIUM: DWRITE_FONT_STRETCH = DWRITE_FONT_STRETCH_NORMAL;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_FONT_STYLE {
+    DWRITE_FONT_STRETCH_ULTRA_EXPANDED = 9,
+}}
+ENUM!{enum DWRITE_FONT_STYLE {
     DWRITE_FONT_STYLE_NORMAL,
     DWRITE_FONT_STYLE_OBLIQUE,
-    DWRITE_FONT_STYLE_ITALIC
-}
-
-pub use self::DWRITE_FONT_STYLE::*;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_INFORMATIONAL_STRING_ID {
+    DWRITE_FONT_STYLE_ITALIC,
+}}
+ENUM!{enum DWRITE_INFORMATIONAL_STRING_ID {
     DWRITE_INFORMATIONAL_STRING_NONE,
     DWRITE_INFORMATIONAL_STRING_COPYRIGHT_NOTICE,
     DWRITE_INFORMATIONAL_STRING_VERSION_STRINGS,
@@ -110,11 +82,11 @@ pub enum DWRITE_INFORMATIONAL_STRING_ID {
     DWRITE_INFORMATIONAL_STRING_SAMPLE_TEXT,
     DWRITE_INFORMATIONAL_STRING_FULL_NAME,
     DWRITE_INFORMATIONAL_STRING_POSTSCRIPT_NAME,
-    DWRITE_INFORMATIONAL_STRING_POSTSCRIPT_CID_NAME
-}
-
-pub use self::DWRITE_INFORMATIONAL_STRING_ID::*;
-
+    DWRITE_INFORMATIONAL_STRING_POSTSCRIPT_CID_NAME,
+    DWRITE_INFORMATIONAL_STRING_WWS_FAMILY_NAME,
+    DWRITE_INFORMATIONAL_STRING_DESIGN_SCRIPT_LANGUAGE_TAG,
+    DWRITE_INFORMATIONAL_STRING_SUPPORTED_SCRIPT_LANGUAGE_TAG,
+}}
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_FONT_METRICS {
     pub designUnitsPerEm: ::UINT16,
@@ -128,7 +100,6 @@ pub struct DWRITE_FONT_METRICS {
     pub strikethroughPosition: ::INT16,
     pub strikethroughThickness: ::UINT16,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_GLYPH_METRICS {
     pub leftSideBearing: ::INT32,
@@ -139,37 +110,27 @@ pub struct DWRITE_GLYPH_METRICS {
     pub bottomSideBearing: ::INT32,
     pub verticalOriginY: ::INT32,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_GLYPH_OFFSET {
     pub advanceOffset: ::FLOAT,
     pub ascenderOffset: ::FLOAT,
 }
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_FACTORY_TYPE {
+ENUM!{enum DWRITE_FACTORY_TYPE {
     DWRITE_FACTORY_TYPE_SHARED,
     DWRITE_FACTORY_TYPE_ISOLATED,
-}
-
-pub use self::DWRITE_FACTORY_TYPE::*;
-
+}}
 #[inline]
 pub fn DWRITE_MAKE_OPENTYPE_TAG(a: u8, b: u8, c: u8, d: u8) -> u32 {
-    ((d as u32) << 24) | ((c as u32) << 16) | ((b as u32) << 8) | (a as u32) 
+    ((d as u32) << 24) | ((c as u32) << 16) | ((b as u32) << 8) | (a as u32)
 }
-
-RIDL!(
-interface IDWriteFontFileLoader(IDWriteFontFileLoaderVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{interface IDWriteFontFileLoader(IDWriteFontFileLoaderVtbl): IUnknown(IUnknownVtbl) {
     fn CreateStreamFromKey(
         &mut self, fontFileReferenceKey: *const ::c_void, fontFileReferenceKeySize: ::UINT32,
         fontFileStream: *mut *mut IDWriteFontFileStream
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteLocalFontFileLoader(IDWriteLocalFontFileLoaderVtbl)
-    : IDWriteFontFileLoader(IDWriteFontFileLoaderVtbl) {
+}}
+RIDL!{interface IDWriteLocalFontFileLoader(IDWriteLocalFontFileLoaderVtbl):
+        IDWriteFontFileLoader(IDWriteFontFileLoaderVtbl) {
     fn GetFilePathLengthFromKey(
         &mut self, fontFileReferenceKey: *const ::c_void, fontFileReferenceKeySize: ::UINT32,
         filePathLength: *mut ::UINT32
@@ -183,10 +144,8 @@ interface IDWriteLocalFontFileLoader(IDWriteLocalFontFileLoaderVtbl)
         &mut self, fontFileReferenceKey: *const ::c_void, fontFileReferenceKeySize: ::UINT32,
         lastWriteTime: *mut ::FILETIME
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtbl) {
     fn ReadFileFragment(
         &mut self, fragmentStart: *mut *const ::c_void, fileOffset: ::UINT64,
         fragmentSize: ::UINT64, fragmentContext: *mut *mut ::c_void
@@ -194,10 +153,8 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
     fn ReleaseFileFragment(&mut self, fragmentContext: *mut ::c_void) -> (),
     fn GetFileSize(&mut self, fileSize: *mut ::UINT64) -> ::HRESULT,
     fn GetLastWriteTime(&mut self, lastWriteTime: *mut ::UINT64) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteFontFile(IDWriteFontFileVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteFontFile(IDWriteFontFileVtbl): IUnknown(IUnknownVtbl) {
     fn GetReferenceKey(
         &mut self, fontFileReferenceKey: *mut *const ::c_void,
         fontFileReferenceKeySize: *mut ::UINT32
@@ -207,19 +164,13 @@ interface IDWriteFontFile(IDWriteFontFileVtbl): IUnknown(IUnknownVtbl) {
         &mut self, isSupportedFontType: *mut ::BOOL, fontFileType: *mut DWRITE_FONT_FILE_TYPE,
         fontFaceType: *mut DWRITE_FONT_FACE_TYPE, numberOfFaces: *mut ::UINT32
     ) -> ::HRESULT
-});
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_PIXEL_GEOMETRY {
+}}
+ENUM!{enum DWRITE_PIXEL_GEOMETRY {
     DWRITE_PIXEL_GEOMETRY_FLAT,
     DWRITE_PIXEL_GEOMETRY_RGB,
-    DWRITE_PIXEL_GEOMETRY_BGR
-}
-
-pub use self::DWRITE_PIXEL_GEOMETRY::*;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_RENDERING_MODE {
+    DWRITE_PIXEL_GEOMETRY_BGR,
+}}
+ENUM!{enum DWRITE_RENDERING_MODE {
     DWRITE_RENDERING_MODE_DEFAULT,
     DWRITE_RENDERING_MODE_ALIASED,
     DWRITE_RENDERING_MODE_GDI_CLASSIC,
@@ -227,19 +178,11 @@ pub enum DWRITE_RENDERING_MODE {
     DWRITE_RENDERING_MODE_NATURAL,
     DWRITE_RENDERING_MODE_NATURAL_SYMMETRIC,
     DWRITE_RENDERING_MODE_OUTLINE,
-}
-
-pub use self::DWRITE_RENDERING_MODE::*;
-
-pub const DWRITE_RENDERING_MODE_CLEARTYPE_GDI_CLASSIC: DWRITE_RENDERING_MODE =
-    DWRITE_RENDERING_MODE_GDI_CLASSIC;
-pub const DWRITE_RENDERING_MODE_CLEARTYPE_GDI_NATURAL: DWRITE_RENDERING_MODE =
-    DWRITE_RENDERING_MODE_GDI_NATURAL;
-pub const DWRITE_RENDERING_MODE_CLEARTYPE_NATURAL: DWRITE_RENDERING_MODE =
-    DWRITE_RENDERING_MODE_NATURAL;
-pub const DWRITE_RENDERING_MODE_CLEARTYPE_NATURAL_SYMMETRIC: DWRITE_RENDERING_MODE =
-    DWRITE_RENDERING_MODE_NATURAL_SYMMETRIC;
-
+    DWRITE_RENDERING_MODE_CLEARTYPE_GDI_CLASSIC = DWRITE_RENDERING_MODE_GDI_CLASSIC.0,
+    DWRITE_RENDERING_MODE_CLEARTYPE_GDI_NATURAL = DWRITE_RENDERING_MODE_GDI_NATURAL.0,
+    DWRITE_RENDERING_MODE_CLEARTYPE_NATURAL = DWRITE_RENDERING_MODE_NATURAL.0,
+    DWRITE_RENDERING_MODE_CLEARTYPE_NATURAL_SYMMETRIC = DWRITE_RENDERING_MODE_NATURAL_SYMMETRIC.0,
+}}
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_MATRIX {
     pub m11: ::FLOAT,
@@ -249,20 +192,15 @@ pub struct DWRITE_MATRIX {
     pub dx: ::FLOAT,
     pub dy: ::FLOAT,
 }
-
-RIDL!(
-interface IDWriteRenderingParams(IDWriteRenderingParamsVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{interface IDWriteRenderingParams(IDWriteRenderingParamsVtbl): IUnknown(IUnknownVtbl) {
     fn GetGamma(&mut self) -> ::FLOAT,
     fn GetEnhancedContrast(&mut self) -> ::FLOAT,
     fn GetClearTypeLevel(&mut self) -> ::FLOAT,
     fn GetPixelGeometry(&mut self) -> DWRITE_PIXEL_GEOMETRY,
     fn GetRenderingMode(&mut self) -> DWRITE_RENDERING_MODE
-});
-
+}}
 pub type IDWriteGeometrySink = ::ID2D1SimplifiedGeometrySink;
-
-RIDL!(
-interface IDWriteFontFace(IDWriteFontFaceVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{interface IDWriteFontFace(IDWriteFontFaceVtbl): IUnknown(IUnknownVtbl) {
     fn GetType(&mut self) -> DWRITE_FONT_FACE_TYPE,
     fn GetFiles(
         &mut self, numberOfFiles: *mut ::UINT32, fontFiles: *mut *mut IDWriteFontFile
@@ -305,24 +243,19 @@ interface IDWriteFontFace(IDWriteFontFaceVtbl): IUnknown(IUnknownVtbl) {
         useGdiNatrual: ::BOOL, glyphIndices: *const ::UINT16, glyphCount: ::UINT32,
         glyphMetrics: *mut DWRITE_GLYPH_METRICS, isSideways: ::BOOL
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteFontCollectionLoader(IDWriteFontCollectionLoaderVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteFontCollectionLoader(IDWriteFontCollectionLoaderVtbl):
+        IUnknown(IUnknownVtbl) {
     fn CreateEnumeratorFromKey(
         &mut self, factory: *mut IDWriteFactory, collectionKey: *const ::c_void,
         collectionKeySize: ::UINT32, fontFileEnumerator: *mut *mut IDWriteFontFileEnumerator
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteFontFileEnumerator(IDWriteFontFileEnumeratorVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteFontFileEnumerator(IDWriteFontFileEnumeratorVtbl): IUnknown(IUnknownVtbl) {
     fn MoveNext(&mut self, hasCurrentFile: *mut ::BOOL) -> ::HRESULT,
     fn GetCurrentFontFile(&mut self, fontFile: *mut *mut IDWriteFontFile) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteLocalizedStrings(IDWriteLocalizedStringsVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteLocalizedStrings(IDWriteLocalizedStringsVtbl): IUnknown(IUnknownVtbl) {
     fn GetCount(&mut self) -> ::UINT32,
     fn FindLocaleName(
         &mut self, localeName: *const ::WCHAR, index: *mut ::UINT32, exists: *mut ::BOOL
@@ -335,10 +268,8 @@ interface IDWriteLocalizedStrings(IDWriteLocalizedStringsVtbl): IUnknown(IUnknow
     fn GetString(
         &mut self, index: ::UINT32, stringBuffer: *mut ::WCHAR, size: ::UINT32
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteFontCollection(IDWriteFontCollectionVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteFontCollection(IDWriteFontCollectionVtbl): IUnknown(IUnknownVtbl) {
     fn GetFontFamilyCount(&mut self) -> ::UINT32,
     fn GetFontFamily(
         &mut self, index: ::UINT32, fontFamily: *mut *mut IDWriteFontFamily
@@ -349,17 +280,13 @@ interface IDWriteFontCollection(IDWriteFontCollectionVtbl): IUnknown(IUnknownVtb
     fn GetFontFromFontFace(
         &mut self, fontFace: *mut IDWriteFontFace, font: *mut *mut IDWriteFont
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteFontList(IDWriteFontListVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteFontList(IDWriteFontListVtbl): IUnknown(IUnknownVtbl) {
     fn GetFontCollection(&mut self, fontCollection: *mut *mut IDWriteFontCollection) -> ::HRESULT,
     fn GetFontCount(&mut self) -> ::UINT32,
     fn GetFont(&mut self, index: ::UINT32, font: *mut *mut IDWriteFont) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteFontFamily(IDWriteFontFamilyVtbl): IDWriteFontList(IDWriteFontListVtbl) {
+}}
+RIDL!{interface IDWriteFontFamily(IDWriteFontFamilyVtbl): IDWriteFontList(IDWriteFontListVtbl) {
     fn GetFamilyNames(&mut self, names: *mut *mut IDWriteLocalizedStrings) -> ::HRESULT,
     fn GetFirstMatchingFont(
         &mut self, weight: DWRITE_FONT_WEIGHT, stretch: DWRITE_FONT_STRETCH,
@@ -369,10 +296,8 @@ interface IDWriteFontFamily(IDWriteFontFamilyVtbl): IDWriteFontList(IDWriteFontL
         &mut self, weight: DWRITE_FONT_WEIGHT, stretch: DWRITE_FONT_STRETCH,
         style: DWRITE_FONT_STYLE, matchingFonts: *mut *mut IDWriteFontList
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteFont(IDWriteFontVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteFont(IDWriteFontVtbl): IUnknown(IUnknownVtbl) {
     fn GetFontFamily(&mut self, fontFamily: *mut *mut IDWriteFontFamily) -> ::HRESULT,
     fn GetWeight(&mut self) -> DWRITE_FONT_WEIGHT,
     fn GetStretch(&mut self) -> DWRITE_FONT_STRETCH,
@@ -387,77 +312,48 @@ interface IDWriteFont(IDWriteFontVtbl): IUnknown(IUnknownVtbl) {
     fn GetMetrics(&mut self, fontMetrics: *mut DWRITE_FONT_METRICS) -> (),
     fn HasCharacter(&mut self, unicodeValue: ::UINT32, exists: *mut ::BOOL) -> ::HRESULT,
     fn CreateFontFace(&mut self, fontFace: *mut *mut IDWriteFontFace) -> ::HRESULT
-});
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_READING_DIRECTION {
+}}
+ENUM!{enum DWRITE_READING_DIRECTION {
     DWRITE_READING_DIRECTION_LEFT_TO_RIGHT = 0,
     DWRITE_READING_DIRECTION_RIGHT_TO_LEFT = 1,
     DWRITE_READING_DIRECTION_TOP_TO_BOTTOM = 2,
     DWRITE_READING_DIRECTION_BOTTOM_TO_TOP = 3,
-}
-
-pub use self::DWRITE_READING_DIRECTION::*;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_FLOW_DIRECTION {
+}}
+ENUM!{enum DWRITE_FLOW_DIRECTION {
     DWRITE_FLOW_DIRECTION_TOP_TO_BOTTOM = 0,
     DWRITE_FLOW_DIRECTION_BOTTOM_TO_TOP = 1,
     DWRITE_FLOW_DIRECTION_LEFT_TO_RIGHT = 2,
     DWRITE_FLOW_DIRECTION_RIGHT_TO_LEFT = 3,
-}
-
-pub use self::DWRITE_FLOW_DIRECTION::*;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_TEXT_ALIGNMENT {
+}}
+ENUM!{enum DWRITE_TEXT_ALIGNMENT {
     DWRITE_TEXT_ALIGNMENT_LEADING,
     DWRITE_TEXT_ALIGNMENT_TRAILING,
     DWRITE_TEXT_ALIGNMENT_CENTER,
-    DWRITE_TEXT_ALIGNMENT_JUSTIFIED
-}
-
-pub use self::DWRITE_TEXT_ALIGNMENT::*;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_PARAGRAPH_ALIGNMENT {
+    DWRITE_TEXT_ALIGNMENT_JUSTIFIED,
+}}
+ENUM!{enum DWRITE_PARAGRAPH_ALIGNMENT {
     DWRITE_PARAGRAPH_ALIGNMENT_NEAR,
     DWRITE_PARAGRAPH_ALIGNMENT_FAR,
-    DWRITE_PARAGRAPH_ALIGNMENT_CENTER
-}
-
-pub use self::DWRITE_PARAGRAPH_ALIGNMENT::*;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_WORD_WRAPPING {
+    DWRITE_PARAGRAPH_ALIGNMENT_CENTER,
+}}
+ENUM!{enum DWRITE_WORD_WRAPPING {
     DWRITE_WORD_WRAPPING_WRAP = 0,
     DWRITE_WORD_WRAPPING_NO_WRAP = 1,
     DWRITE_WORD_WRAPPING_EMERGENCY_BREAK = 2,
     DWRITE_WORD_WRAPPING_WHOLE_WORD = 3,
     DWRITE_WORD_WRAPPING_CHARACTER = 4,
-}
-
-pub use self::DWRITE_WORD_WRAPPING::*;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_LINE_SPACING_METHOD {
+}}
+ENUM!{enum DWRITE_LINE_SPACING_METHOD {
     DWRITE_LINE_SPACING_METHOD_DEFAULT,
-    DWRITE_LINE_SPACING_METHOD_UNIFORM
-}
-
-pub use self::DWRITE_LINE_SPACING_METHOD::*;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_TRIMMING_GRANULARITY {
+    DWRITE_LINE_SPACING_METHOD_UNIFORM,
+    DWRITE_LINE_SPACING_METHOD_PROPORTIONAL,
+}}
+ENUM!{enum DWRITE_TRIMMING_GRANULARITY {
     DWRITE_TRIMMING_GRANULARITY_NONE,
     DWRITE_TRIMMING_GRANULARITY_CHARACTER,
-    DWRITE_TRIMMING_GRANULARITY_WORD    
-}
-
-pub use self::DWRITE_TRIMMING_GRANULARITY::*;
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_FONT_FEATURE_TAG {
+    DWRITE_TRIMMING_GRANULARITY_WORD,
+}}
+ENUM!{enum DWRITE_FONT_FEATURE_TAG {
     DWRITE_FONT_FEATURE_TAG_ALTERNATIVE_FRACTIONS = 0x63726661, // 'afrc'
     DWRITE_FONT_FEATURE_TAG_PETITE_CAPITALS_FROM_CAPITALS = 0x63703263, // 'c2pc'
     DWRITE_FONT_FEATURE_TAG_SMALL_CAPITALS_FROM_CAPITALS = 0x63733263, // 'c2sc'
@@ -539,37 +435,29 @@ pub enum DWRITE_FONT_FEATURE_TAG {
     DWRITE_FONT_FEATURE_TAG_VERTICAL_WRITING = 0x74726576, // 'vert'
     DWRITE_FONT_FEATURE_TAG_VERTICAL_ALTERNATES_AND_ROTATION = 0x32747276, // 'vrt2'
     DWRITE_FONT_FEATURE_TAG_SLASHED_ZERO = 0x6f72657a, // 'zero'
-}
-
-pub use self::DWRITE_FONT_FEATURE_TAG::*;
-
+}}
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_TEXT_RANGE {
     pub startPosition: ::UINT32,
     pub length: ::UINT32,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_FONT_FEATURE {
     pub nameTag: DWRITE_FONT_FEATURE_TAG,
     pub parameter: ::UINT32,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_TYPOGRAPHIC_FEATURES {
     pub features: *mut DWRITE_FONT_FEATURE,
     pub featureCount: ::UINT32,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_TRIMMING {
     pub granularity: DWRITE_TRIMMING_GRANULARITY,
     pub delimiter: ::UINT32,
     pub delimiterCount: ::UINT32,
 }
-
-RIDL!(
-interface IDWriteTextFormat(IDWriteTextFormatVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{interface IDWriteTextFormat(IDWriteTextFormatVtbl): IUnknown(IUnknownVtbl) {
     fn SetTextAlignment(&mut self, textAlignment: DWRITE_TEXT_ALIGNMENT) -> ::HRESULT,
     fn SetParagraphAlignment(
         &mut self, paragraphAlignment: DWRITE_PARAGRAPH_ALIGNMENT
@@ -608,94 +496,69 @@ interface IDWriteTextFormat(IDWriteTextFormatVtbl): IUnknown(IUnknownVtbl) {
     fn GetFontSize(&mut self) -> ::FLOAT,
     fn GetLocaleNameLength(&mut self) -> ::UINT32,
     fn GetLocaleName(&mut self, localeName: *mut ::WCHAR, nameSize: ::UINT32) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteTypography(IDWriteTypographyVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteTypography(IDWriteTypographyVtbl): IUnknown(IUnknownVtbl) {
     fn AddFontFeature(&mut self, fontFeature: DWRITE_FONT_FEATURE) -> ::HRESULT,
     fn GetFontFeatureCount(&mut self) -> ::UINT32,
     fn GetFontFeature(
         &mut self, fontFeatureIndex: ::UINT32, fontFeature: *mut DWRITE_FONT_FEATURE
     ) -> ::HRESULT
-});
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_SCRIPT_SHAPES {
-    DWRITE_SCRIPT_SHAPES_DEFAULT,
-    DWRITE_SCRIPT_SHAPES_NO_VISUAL,
-}
-
-pub use self::DWRITE_SCRIPT_SHAPES::*;
-
+}}
+FLAGS!{enum DWRITE_SCRIPT_SHAPES {
+    DWRITE_SCRIPT_SHAPES_DEFAULT = 0,
+    DWRITE_SCRIPT_SHAPES_NO_VISUAL = 1,
+}}
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_SCRIPT_ANALYSIS {
     pub script: ::UINT16,
     pub shapes: DWRITE_SCRIPT_SHAPES,
 }
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_BREAK_CONDITION {
+ENUM!{enum DWRITE_BREAK_CONDITION {
     DWRITE_BREAK_CONDITION_NEUTRAL,
     DWRITE_BREAK_CONDITION_CAN_BREAK,
     DWRITE_BREAK_CONDITION_MAY_NOT_BREAK,
     DWRITE_BREAK_CONDITION_MUST_BREAK,
-}
-
-pub use self::DWRITE_BREAK_CONDITION::*;
-
+}}
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_LINE_BREAKPOINT {
     bit_fields: ::UINT8,
 }
-
-BITFIELD!(DWRITE_LINE_BREAKPOINT bit_fields: ::UINT8 [
+BITFIELD!{DWRITE_LINE_BREAKPOINT bit_fields: ::UINT8 [
     breakConditionBefore set_breakConditionBefore[0..2],
     breakConditionAfter set_breakConditionAfter[2..4],
     isWhitespace set_isWhitespace[4..5],
     isSoftHyphen set_isSoftHyphen[5..6],
     padding set_padding[6..8],
-]);
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_NUMBER_SUBSTITUTION_METHOD {
+]}
+ENUM!{enum DWRITE_NUMBER_SUBSTITUTION_METHOD {
     DWRITE_NUMBER_SUBSTITUTION_METHOD_FROM_CULTURE,
     DWRITE_NUMBER_SUBSTITUTION_METHOD_CONTEXTUAL,
     DWRITE_NUMBER_SUBSTITUTION_METHOD_NONE,
     DWRITE_NUMBER_SUBSTITUTION_METHOD_NATIONAL,
     DWRITE_NUMBER_SUBSTITUTION_METHOD_TRADITIONAL,
-}
-
-pub use self::DWRITE_NUMBER_SUBSTITUTION_METHOD::*;
-
-RIDL!(
-interface IDWriteNumberSubstitution(IDWriteNumberSubstitutionVtbl): IUnknown(IUnknownVtbl) {
-});
-
+}}
+RIDL!{interface IDWriteNumberSubstitution(IDWriteNumberSubstitutionVtbl): IUnknown(IUnknownVtbl) {
+}}
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_SHAPING_TEXT_PROPERTIES {
     bit_fields: ::UINT16,
 }
-
-BITFIELD!(DWRITE_SHAPING_TEXT_PROPERTIES bit_fields: ::UINT16 [
+BITFIELD!{DWRITE_SHAPING_TEXT_PROPERTIES bit_fields: ::UINT16 [
     isShapedAlone set_isShapedAlone[0..1],
     reserved set_reserved[1..16],
-]);
-
+]}
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_SHAPING_GLYPH_PROPERTIES {
     bit_fields: ::UINT16,
 }
-
-BITFIELD!(DWRITE_SHAPING_GLYPH_PROPERTIES bit_fields: ::UINT16 [
+BITFIELD!{DWRITE_SHAPING_GLYPH_PROPERTIES bit_fields: ::UINT16 [
     justification set_justification[0..4],
     isClusterStart set_isClusterStart[4..5],
     isDiacritic set_isDiacritic[5..6],
     isZeroWidthSpace set_isZeroWidthSpace[6..7],
     reserved set_reserved[7..16],
-]);
-
-RIDL!(
-interface IDWriteTextAnalysisSource(IDWriteTextAnalysisSourceVtbl): IUnknown(IUnknownVtbl) {
+]}
+RIDL!{interface IDWriteTextAnalysisSource(IDWriteTextAnalysisSourceVtbl): IUnknown(IUnknownVtbl) {
     fn GetTextAtPosition(
         &mut self, textPosition: ::UINT32, textString: *mut *const ::WCHAR,
         textLength: *mut ::UINT32
@@ -713,10 +576,8 @@ interface IDWriteTextAnalysisSource(IDWriteTextAnalysisSourceVtbl): IUnknown(IUn
         &mut self, textPosition: ::UINT32, textLength: *mut ::UINT32,
         numberSubstitution: *mut *mut IDWriteNumberSubstitution
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteTextAnalysisSink(IDWriteTextAnalysisSinkVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteTextAnalysisSink(IDWriteTextAnalysisSinkVtbl): IUnknown(IUnknownVtbl) {
     fn SetScriptAnalysis(
         &mut self, textPosition: ::UINT32, textLength: ::UINT32,
         scriptAnalysis: *const DWRITE_SCRIPT_ANALYSIS
@@ -733,10 +594,8 @@ interface IDWriteTextAnalysisSink(IDWriteTextAnalysisSinkVtbl): IUnknown(IUnknow
         &mut self, textPosition: ::UINT32, textLength: ::UINT32,
         numberSubstitution: *mut IDWriteNumberSubstitution
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteTextAnalyzer(IDWriteTextAnalyzerVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteTextAnalyzer(IDWriteTextAnalyzerVtbl): IUnknown(IUnknownVtbl) {
     fn AnalyzeScript(
         &mut self, analysisSource: *mut IDWriteTextAnalysisSource, textPosition: ::UINT32,
         textLength: ::UINT32, analysisSink: *mut IDWriteTextAnalysisSink
@@ -784,8 +643,7 @@ interface IDWriteTextAnalyzer(IDWriteTextAnalyzerVtbl): IUnknown(IUnknownVtbl) {
         featureRangeLengths: *const ::UINT32, featureRanges: ::UINT32, glyphAdvances: *mut ::FLOAT,
         glyphOffsets: *mut DWRITE_GLYPH_OFFSET
     ) -> ::HRESULT
-});
-
+}}
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_GLYPH_RUN {
     pub fontFace: *mut IDWriteFontFace,
@@ -797,7 +655,6 @@ pub struct DWRITE_GLYPH_RUN {
     pub isSideways: ::BOOL,
     pub bidiLevel: ::UINT32
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_GLYPH_RUN_DESCRIPTION {
     pub localeName: *const ::WCHAR,
@@ -806,7 +663,6 @@ pub struct DWRITE_GLYPH_RUN_DESCRIPTION {
     pub clusterMap: *const ::UINT16,
     pub textPosition: ::UINT32,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_UNDERLINE {
     pub width: ::FLOAT,
@@ -818,7 +674,6 @@ pub struct DWRITE_UNDERLINE {
     pub localeName: *const ::WCHAR,
     pub measuringMode: ::DWRITE_MEASURING_MODE,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_STRIKETHROUGH {
     pub width: ::FLOAT,
@@ -829,7 +684,6 @@ pub struct DWRITE_STRIKETHROUGH {
     pub localeName: *const ::WCHAR,
     pub measuringMode: ::DWRITE_MEASURING_MODE,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_LINE_METRICS {
     pub length: ::UINT32,
@@ -846,15 +700,14 @@ pub struct DWRITE_CLUSTER_METRICS {
     pub length: ::UINT16,
     pub bit_fields: ::UINT16,
 }
-BITFIELD!(DWRITE_CLUSTER_METRICS bit_fields: ::UINT16 [
+BITFIELD!{DWRITE_CLUSTER_METRICS bit_fields: ::UINT16 [
     canWrapLineAfter set_canWrapLineAfter[0..1],
     isWhitespace set_isWhitespace[1..2],
     isNewline set_isNewline[2..3],
     isSoftHyphen set_isSoftHyphen[3..4],
     isRightToLeft set_isRightToLeft[4..5],
     padding set_padding[5..16],
-]);
-
+]}
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_TEXT_METRICS {
     pub left: ::FLOAT,
@@ -867,7 +720,6 @@ pub struct DWRITE_TEXT_METRICS {
     pub maxBidiReorderingDepth: ::UINT32,
     pub lineCount: ::UINT32,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_INLINE_OBJECT_METRICS {
     pub width: ::FLOAT,
@@ -875,7 +727,6 @@ pub struct DWRITE_INLINE_OBJECT_METRICS {
     pub baseline: ::FLOAT,
     pub supportsSideways: ::BOOL,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_OVERHANG_METRICS {
     pub left: ::FLOAT,
@@ -883,7 +734,6 @@ pub struct DWRITE_OVERHANG_METRICS {
     pub right: ::FLOAT,
     pub bottom: ::FLOAT,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_HIT_TEST_METRICS {
     pub textPosition: ::UINT32,
@@ -896,9 +746,7 @@ pub struct DWRITE_HIT_TEST_METRICS {
     pub isText: ::BOOL,
     pub isTrimmed: ::BOOL,
 }
-
-RIDL!(
-interface IDWriteInlineObject(IDWriteInlineObjectVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{interface IDWriteInlineObject(IDWriteInlineObjectVtbl): IUnknown(IUnknownVtbl) {
     fn Draw(
         &mut self, clientDrawingContext: *mut ::c_void, renderer: *mut IDWriteTextRenderer,
         originX: ::FLOAT, originY: ::FLOAT, isSideways: ::BOOL, isRightToLeft: ::BOOL,
@@ -910,10 +758,8 @@ interface IDWriteInlineObject(IDWriteInlineObjectVtbl): IUnknown(IUnknownVtbl) {
         &mut self, breakConditionBefore: *mut DWRITE_BREAK_CONDITION,
         breakConditionAfter: *mut DWRITE_BREAK_CONDITION
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWritePixelSnapping(IDWritePixelSnappingVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWritePixelSnapping(IDWritePixelSnappingVtbl): IUnknown(IUnknownVtbl) {
     fn IsPixelSnappingDisabled(
         &mut self, clientDrawingContext: *mut ::c_void, isDisabled: *mut ::BOOL
     ) -> ::HRESULT,
@@ -923,11 +769,9 @@ interface IDWritePixelSnapping(IDWritePixelSnappingVtbl): IUnknown(IUnknownVtbl)
     fn GetPixelsPerDip(
         &mut self, clientDrawingContext: *mut ::c_void, pixelsPerDip: *mut ::FLOAT
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteTextRenderer(IDWriteTextRendererVtbl)
-    : IDWritePixelSnapping(IDWritePixelSnappingVtbl) {
+}}
+RIDL!{interface IDWriteTextRenderer(IDWriteTextRendererVtbl):
+        IDWritePixelSnapping(IDWritePixelSnappingVtbl) {
     fn DrawGlyphRun(
         &mut self, clientDrawingContext: *mut ::c_void, baselineOriginX: ::FLOAT,
         baselineOriginY: ::FLOAT, measuringMode: ::DWRITE_MEASURING_MODE,
@@ -950,10 +794,9 @@ interface IDWriteTextRenderer(IDWriteTextRendererVtbl)
         baselineOriginY: ::FLOAT, inlineObject: *mut IDWriteInlineObject,
         isSideways: ::BOOL, isRightToLeft: ::BOOL, clientDrawingEffect: *mut ::IUnknown
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteTextLayout(IDWriteTextLayoutVtbl): IDWriteTextFormat(IDWriteTextFormatVtbl) {
+}}
+RIDL!{interface IDWriteTextLayout(IDWriteTextLayoutVtbl):
+        IDWriteTextFormat(IDWriteTextFormatVtbl) {
     fn SetMaxWidth(&mut self, maxWidth: ::FLOAT) -> ::HRESULT,
     fn SetMaxHeight(&mut self, maxHeight: ::FLOAT) -> ::HRESULT,
     fn SetFontCollection(
@@ -1074,10 +917,8 @@ interface IDWriteTextLayout(IDWriteTextLayoutVtbl): IDWriteTextFormat(IDWriteTex
         originY: ::FLOAT, hitTestMetrics: *mut DWRITE_HIT_TEST_METRICS,
         maxHitTestMetricsCount: ::UINT32, actualHitTestMetricsCount: *mut ::UINT32
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteBitmapRenderTarget(IDWriteBitmapRenderTargetVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteBitmapRenderTarget(IDWriteBitmapRenderTargetVtbl): IUnknown(IUnknownVtbl) {
     fn DrawGlyphRun(
         &mut self, baselineOriginX: ::FLOAT, baselineOriginY: ::FLOAT,
         measuringMode: ::DWRITE_MEASURING_MODE, glyphRun: *const ::c_void,
@@ -1091,10 +932,8 @@ interface IDWriteBitmapRenderTarget(IDWriteBitmapRenderTargetVtbl): IUnknown(IUn
     fn SetCurrentTransform(&mut self, transform: *const DWRITE_MATRIX) -> ::HRESULT,
     fn GetSize(&mut self, size: *mut ::SIZE) -> ::HRESULT,
     fn Resize(&mut self, width: ::UINT32, height: ::UINT32) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteGdiInterop(IDWriteGdiInteropVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteGdiInterop(IDWriteGdiInteropVtbl): IUnknown(IUnknownVtbl) {
     fn CreateFontFromLOGFONT(
         &mut self, logFont: *const ::LOGFONTW, font: *mut *mut IDWriteFont
     ) -> ::HRESULT,
@@ -1111,18 +950,13 @@ interface IDWriteGdiInterop(IDWriteGdiInteropVtbl): IUnknown(IUnknownVtbl) {
         &mut self, hdc: ::HDC, width: ::UINT32, height: ::UINT32,
         renderTarget: *mut *mut IDWriteBitmapRenderTarget
     ) -> ::HRESULT
-});
-
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DWRITE_TEXTURE_TYPE {
+}}
+ENUM!{enum DWRITE_TEXTURE_TYPE {
     DWRITE_TEXTURE_ALIASED_1x1 = 0,
     DWRITE_TEXTURE_CLEARTYPE_3x1 = 1,
-}
-
-pub use self::DWRITE_TEXTURE_TYPE::*;
-
-RIDL!(
-interface IDWriteGlyphRunAnalysis(IDWriteGlyphRunAnalysisVtbl): IUnknown(IUnknownVtbl) {
+}}
+pub const DWRITE_ALPHA_MAX: ::BYTE = 255;
+RIDL!{interface IDWriteGlyphRunAnalysis(IDWriteGlyphRunAnalysisVtbl): IUnknown(IUnknownVtbl) {
     fn GetAlphaTextureBounds(
         &mut self, textureType: DWRITE_TEXTURE_TYPE, textureBounds: *mut ::RECT
     ) -> ::HRESULT,
@@ -1134,10 +968,8 @@ interface IDWriteGlyphRunAnalysis(IDWriteGlyphRunAnalysisVtbl): IUnknown(IUnknow
         &mut self, renderingParams: *mut IDWriteRenderingParams, blendGamma: *mut ::FLOAT,
         blendEnhancedContrast: *mut ::FLOAT, blendClearTypeLevel: *mut ::FLOAT
     ) -> ::HRESULT
-});
-
-RIDL!(
-interface IDWriteFactory(IDWriteFactoryVtbl): IUnknown(IUnknownVtbl) {
+}}
+RIDL!{interface IDWriteFactory(IDWriteFactoryVtbl): IUnknown(IUnknownVtbl) {
     fn GetSystemFontCollection(
         &mut self, fontCollection: *mut *mut IDWriteFontCollection, checkForUpdates: ::BOOL
     ) -> ::HRESULT,
@@ -1216,7 +1048,14 @@ interface IDWriteFactory(IDWriteFactoryVtbl): IUnknown(IUnknownVtbl) {
         measuringMode: ::DWRITE_MEASURING_MODE, baselineOriginX: ::FLOAT,
         baselineOriginY: ::FLOAT, glyphRunAnalysis: *mut *mut IDWriteGlyphRunAnalysis
     ) -> ::HRESULT
-});
-DEFINE_GUID!(
-    UuidOfIDWriteFactory,0xb859ee5a,0xd838,0x4b5b,0xa2,0xe8,0x1a,0xdc,0x7d,0x93,0xdb,0x48
-);
+}}
+pub const FACILITY_DWRITE: ::HRESULT = 0x898;
+pub const DWRITE_ERR_BASE: ::HRESULT = 0x5000;
+#[inline]
+pub fn MAKE_DWRITE_HR(severity: ::HRESULT, code: ::HRESULT) -> ::HRESULT {
+    ::MAKE_HRESULT(severity, FACILITY_DWRITE, DWRITE_ERR_BASE + code)
+}
+#[inline]
+pub fn MAKE_DWRITE_HR_ERR(code: ::HRESULT) -> ::HRESULT {
+    MAKE_DWRITE_HR(::SEVERITY_ERROR, code)
+}

@@ -2940,6 +2940,10 @@ pub const STORE_ERROR_PENDING_COM_TRANSACTION: ::DWORD = 15863;
 pub const STORE_ERROR_LICENSE_REVOKED: ::DWORD = 15864;
 pub const SEVERITY_SUCCESS: HRESULT = 0;
 pub const SEVERITY_ERROR: HRESULT = 1;
+#[inline]
+pub fn MAKE_HRESULT(sev: HRESULT, fac: HRESULT, code: HRESULT) -> HRESULT {
+    (sev << 31) | (fac << 16) | code
+}
 pub type HRESULT = ::c_long;
 pub const NOERROR: HRESULT = 0;
 pub const E_UNEXPECTED: HRESULT = 0x8000FFFFu32 as HRESULT;

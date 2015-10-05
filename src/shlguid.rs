@@ -1,5 +1,2 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
-//230
-DEFINE_GUID!(CLSID_CUrlHistory, 0x3C374A40, 0xBAE4, 0x11CF,
-    0xBF, 0x7D, 0x00, 0xAA, 0x00, 0x69, 0x46, 0xEE);
