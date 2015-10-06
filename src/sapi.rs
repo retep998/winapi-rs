@@ -3110,6 +3110,3 @@ interface ISpeechWaveFormatEx(ISpeechWaveFormatExVtbl): IDispatch(IDispatchVtbl)
 }
 );
 
-
-
-
