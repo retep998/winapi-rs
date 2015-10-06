@@ -8,7 +8,6 @@ pub struct LSA_UNICODE_STRING {
     pub Buffer: ::PWSTR,
 }
 pub type PLSA_UNICODE_STRING = *mut LSA_UNICODE_STRING;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LSA_STRING {
     pub Length: ::USHORT,
@@ -16,7 +15,6 @@ pub struct LSA_STRING {
     pub Buffer: ::PCHAR,
 }
 pub type PLSA_STRING = *mut LSA_STRING;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LSA_OBJECT_ATTRIBUTES {
     pub Length: ::ULONG,
@@ -27,21 +25,18 @@ pub struct LSA_OBJECT_ATTRIBUTES {
     pub SecurityQualityOfService: ::PVOID,
 }
 pub type PLSA_OBJECT_ATTRIBUTES = *mut LSA_OBJECT_ATTRIBUTES;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LSA_TRUST_INFORMATION {
     pub Name: LSA_UNICODE_STRING,
     pub Sid: ::PSID,
 }
 pub type PLSA_TRUST_INFORMATION = *mut LSA_TRUST_INFORMATION;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LSA_REFERENCED_DOMAIN_LIST {
     pub Entries: ::ULONG,
     pub Domains: PLSA_TRUST_INFORMATION,
 }
 pub type PLSA_REFERENCED_DOMAIN_LIST = *mut LSA_REFERENCED_DOMAIN_LIST;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LSA_TRANSLATED_SID2 {
     pub Use: ::SID_NAME_USE,
@@ -50,7 +45,6 @@ pub struct LSA_TRANSLATED_SID2 {
     pub Flags: ::ULONG,
 }
 pub type PLSA_TRANSLATED_SID2 = *mut LSA_TRANSLATED_SID2;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LSA_TRANSLATED_NAME {
     pub Use: ::SID_NAME_USE,
@@ -58,14 +52,12 @@ pub struct LSA_TRANSLATED_NAME {
     pub DomainIndex: ::LONG,
 }
 pub type PLSA_TRANSLATED_NAME = *mut LSA_TRANSLATED_NAME;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct POLICY_ACCOUNT_DOMAIN_INFO {
     pub DomainName: LSA_UNICODE_STRING,
     pub DomainSid: ::PSID,
 }
 pub type PPOLICY_ACCOUNT_DOMAIN_INFO = *mut POLICY_ACCOUNT_DOMAIN_INFO;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct POLICY_DNS_DOMAIN_INFO {
     pub Name: LSA_UNICODE_STRING,
@@ -75,15 +67,12 @@ pub struct POLICY_DNS_DOMAIN_INFO {
     pub Sid: ::PSID,
 }
 pub type PPOLICY_DNS_DOMAIN_INFO = *mut POLICY_DNS_DOMAIN_INFO;
-
 pub const LOOKUP_VIEW_LOCAL_INFORMATION: ::ACCESS_MASK = 0x00000001;
 pub const LOOKUP_TRANSLATE_NAMES: ::ACCESS_MASK = 0x00000800;
-
 ENUM!{enum LSA_LOOKUP_DOMAIN_INFO_CLASS {
     AccountDomainInformation = 5,
     DnsDomainInformation = 12,
 }}
 pub type PLSA_LOOKUP_DOMAIN_INFO_CLASS = *mut LSA_LOOKUP_DOMAIN_INFO_CLASS;
-
 pub type LSA_LOOKUP_HANDLE = ::PVOID;
 pub type PLSA_LOOKUP_HANDLE = *mut ::PVOID;

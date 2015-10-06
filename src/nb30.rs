@@ -3,9 +3,7 @@
 // This module contains the definitions for portable NetBIOS 3.0 support.
 pub const NCBNAMSZ: usize = 16;
 pub const MAX_LANA: usize = 254;
-
 pub type PFPOST = Option<unsafe extern "system" fn(*mut NCB)>;
-
 #[repr(C)] #[derive(Copy)]
 pub struct NCB {
     pub ncb_command: ::UCHAR,
@@ -29,7 +27,6 @@ pub struct NCB {
 }
 impl Clone for NCB { fn clone(&self) -> NCB { *self } }
 pub type PNCB = *mut NCB;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ADAPTER_STATUS {
     pub adapter_address: [::UCHAR; 6],
@@ -61,7 +58,6 @@ pub struct ADAPTER_STATUS {
     pub name_count: ::WORD,
 }
 pub type PADAPTER_STATUS = *mut ADAPTER_STATUS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NAME_BUFFER {
     pub name: [::UCHAR; NCBNAMSZ],
@@ -69,18 +65,14 @@ pub struct NAME_BUFFER {
     pub name_flags: ::UCHAR,
 }
 pub type PNAME_BUFFER = *mut NAME_BUFFER;
-
 pub const NAME_FLAGS_MASK: ::UCHAR = 0x87;
-
 pub const GROUP_NAME: ::UCHAR = 0x80;
 pub const UNIQUE_NAME: ::UCHAR = 0x00;
-
 pub const REGISTERING: ::UCHAR = 0x00;
 pub const REGISTERED: ::UCHAR = 0x04;
 pub const DEREGISTERED: ::UCHAR = 0x05;
 pub const DUPLICATE: ::UCHAR = 0x06;
 pub const DUPLICATE_DEREG: ::UCHAR = 0x07;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SESSION_HEADER {
     pub sess_name: ::UCHAR,
@@ -89,7 +81,6 @@ pub struct SESSION_HEADER {
     pub rcv_any_outstanding: ::UCHAR,
 }
 pub type PSESSION_HEADER = *mut SESSION_HEADER;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SESSION_BUFFER {
     pub lsn: ::UCHAR,
@@ -100,14 +91,12 @@ pub struct SESSION_BUFFER {
     pub sends_outstanding: ::UCHAR,
 }
 pub type PSESSION_BUFFER = *mut SESSION_BUFFER;
-
 pub const LISTEN_OUTSTANDING: ::UCHAR = 0x01;
 pub const CALL_PENDING: ::UCHAR = 0x02;
 pub const SESSION_ESTABLISHED: ::UCHAR = 0x03;
 pub const HANGUP_PENDING: ::UCHAR = 0x04;
 pub const HANGUP_COMPLETE: ::UCHAR = 0x05;
 pub const SESSION_ABORTED: ::UCHAR = 0x06;
-
 #[repr(C)] #[derive(Copy)]
 pub struct LANA_ENUM {
     pub length: ::UCHAR,
@@ -115,7 +104,6 @@ pub struct LANA_ENUM {
 }
 impl Clone for LANA_ENUM { fn clone(&self) -> LANA_ENUM { *self } }
 pub type PLANA_ENUM = *mut LANA_ENUM;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FIND_NAME_HEADER {
     pub node_count: ::WORD,
@@ -123,7 +111,6 @@ pub struct FIND_NAME_HEADER {
     pub unique_group: ::UCHAR,
 }
 pub type PFIND_NAME_HEADER = *mut FIND_NAME_HEADER;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FIND_NAME_BUFFER {
     pub length: ::UCHAR,
@@ -134,7 +121,6 @@ pub struct FIND_NAME_BUFFER {
     pub routing_info: [::UCHAR; 18],
 }
 pub type PFIND_NAME_BUFFER = *mut FIND_NAME_BUFFER;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ACTION_HEADER {
     pub transport_id: ::ULONG,
@@ -142,7 +128,6 @@ pub struct ACTION_HEADER {
     pub reserved: ::USHORT,
 }
 pub type PACTION_HEADER = *mut ACTION_HEADER;
-
 pub const NCBCALL: ::UCHAR = 0x10;
 pub const NCBLISTEN: ::UCHAR = 0x11;
 pub const NCBHANGUP: ::UCHAR = 0x12;
@@ -169,7 +154,6 @@ pub const NCBACTION: ::UCHAR = 0x77;
 pub const NCBFINDNAME: ::UCHAR = 0x78;
 pub const NCBTRACE: ::UCHAR = 0x79;
 pub const ASYNCH: ::UCHAR = 0x80;
-
 pub const NRC_GOODRET: ::UCHAR = 0x00;
 pub const NRC_BUFLEN: ::UCHAR = 0x01;
 pub const NRC_ILLCMD: ::UCHAR = 0x03;

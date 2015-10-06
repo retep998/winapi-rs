@@ -1,7 +1,6 @@
 // Copyright © 2015, Connor Hilarides
 // Licensed under the MIT License <LICENSE.md>
 //! Mappings for the contents of wstypes.h
-
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum VARENUM {
     VT_EMPTY = 0,
@@ -55,19 +54,14 @@ pub enum VARENUM {
     VT_RESERVED = 0x8000,
     VT_ILLEGAL = 0xffff,
 }
-
 pub use self::VARENUM::*;
-
 pub const VT_ILLEGALMASKED: VARENUM = VT_BSTR_BLOB;
 pub const VT_TYPEMASK: VARENUM = VT_BSTR_BLOB;
-
 pub type DATE = ::c_double;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CY {
     pub int64: ::LONGLONG,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DECIMAL {
     pub wReserved: ::USHORT,
@@ -76,11 +70,9 @@ pub struct DECIMAL {
     pub Hi32: ::ULONG,
     pub Lo64: ::ULONGLONG,
 }
-
 pub const DECIMAL_NEG: ::BYTE = 0x80;
 pub type LPDECIMAL = *mut DECIMAL;
 pub type VARTYPE = ::c_ushort;
-
 pub type wireBSTR = *mut ::FLAGGED_WORD_BLOB;
 pub type BSTR = *mut ::OLECHAR;
 pub type LPBSTR = *mut BSTR;

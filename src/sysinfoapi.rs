@@ -17,7 +17,6 @@ pub struct SYSTEM_INFO {
 }
 UNION!(SYSTEM_INFO, wProcessorArchitecture, dwOemId, dwOemId_mut, ::DWORD);
 pub type LPSYSTEM_INFO = *mut SYSTEM_INFO;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MEMORYSTATUSEX {
     pub dwLength: ::DWORD,
@@ -31,7 +30,6 @@ pub struct MEMORYSTATUSEX {
     pub ullAvailExtendedVirtual: ::DWORDLONG,
 }
 pub type LPMEMORYSTATUSEX = *mut MEMORYSTATUSEX;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum COMPUTER_NAME_FORMAT {
     ComputerNameNetBIOS,
@@ -44,10 +42,8 @@ pub enum COMPUTER_NAME_FORMAT {
     ComputerNamePhysicalDnsFullyQualified,
     ComputerNameMax,
 }
-
 pub type INIT_ONCE = ::RTL_RUN_ONCE;
 pub type PINIT_ONCE = ::PRTL_RUN_ONCE;
 pub type LPINIT_ONCE = ::PRTL_RUN_ONCE;
-
 pub type CONDITION_VARIABLE = ::RTL_CONDITION_VARIABLE;
 pub type PCONDITION_VARIABLE = *mut CONDITION_VARIABLE;

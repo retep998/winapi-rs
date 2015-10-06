@@ -6,7 +6,6 @@ pub const DEVICE_STATE_DISABLED: ::DWORD = 0x00000002;
 pub const DEVICE_STATE_NOTPRESENT: ::DWORD = 0x00000004;
 pub const DEVICE_STATE_UNPLUGGED: ::DWORD = 0x00000008;
 pub const DEVICE_STATEMASK_ALL: ::DWORD = 0x0000000F;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum EDataFlow {
     eRender,
@@ -62,6 +61,5 @@ interface IMMDeviceCollection(IMMDeviceCollectionVtbl): IUnknown(IUnknownVtbl) {
     fn Item(&mut self, nDevice: ::UINT, ppDevice: *mut *mut IMMDevice) -> ::HRESULT
 }
 );
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IMMNotificationClient;

@@ -48,7 +48,6 @@ interface IRunningObjectTable(IRunningObjectTableVtbl): IUnknown(IUnknownVtbl) {
 );
 //9350
 pub type IMoniker = ::IUnknown; // TODO
-
 pub type EOLE_AUTHENTICATION_CAPABILITIES = ::DWORD;
 pub const EOAC_NONE: ::DWORD = 0;
 pub const EOAC_MUTUAL_AUTH: ::DWORD = 0x1;
@@ -65,7 +64,6 @@ pub const EOAC_REQUIRE_FULLSIC: ::DWORD = 0x200;
 pub const EOAC_AUTO_IMPERSONATE: ::DWORD = 0x400;
 pub const EOAC_NO_CUSTOM_MARSHAL: ::DWORD = 0x2000;
 pub const EOAC_DISABLE_AAA: ::DWORD = 0x1000;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SOLE_AUTHENTICATION_SERVICE {
     pub dwAuthnSvc: ::DWORD,

@@ -5,7 +5,6 @@
 pub fn SUCCEEDED(hr: HRESULT) -> bool {
     hr >= 0
 }
-
 pub const FACILITY_XPS: HRESULT = 82;
 pub const FACILITY_XAML: HRESULT = 43;
 pub const FACILITY_USN: HRESULT = 129;

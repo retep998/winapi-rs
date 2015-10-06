@@ -1,10 +1,8 @@
 // Copyright © 2015, Corey Richardson
 // Licensed under the MIT License <LICENSE.md>
 //! Direct3D include file
-
 pub const D3D_SDK_VERSION: ::DWORD = 32;
 pub const D3D9b_SDK_VERSION: ::DWORD = 31;
-
 RIDL!(
 interface IDirect3D9(IDirect3D9Vtbl): IUnknown(IUnknownVtbl) {
     fn RegisterSoftwareDevice(&mut self, pInitializeFunction: *mut ::VOID) -> ::HRESULT,
@@ -540,7 +538,6 @@ interface IDirect3DQuery9(IDirect3DQuery9Vtbl): IUnknown(IUnknownVtbl) {
 );
 pub type LPDIRECT3DQUERY9 = *mut IDirect3DQuery9;
 pub type PDIRECT3DQUERY9 = *mut IDirect3DQuery9;
-
 pub const D3DCREATE_FPU_PRESERVE: ::DWORD = 0x2;
 pub const D3DCREATE_MULTITHREADED: ::DWORD = 0x4;
 pub const D3DCREATE_PUREDEVICE: ::DWORD = 0x10;
@@ -555,9 +552,7 @@ pub const D3DCREATE_DISABLE_PSGP_THREADING: ::DWORD = 0x2000;
 pub const D3DCREATE_ENABLE_PRESENTSTATS: ::DWORD = 0x4000;
 pub const D3DCREATE_DISABLE_PRESENTSTATS: ::DWORD = 0x8000;
 pub const D3DCREATE_SCREENSAVER: ::DWORD = 0x10000000;
-
 pub const D3DADAPTER_DEFAULT: ::DWORD = 0;
-
 RIDL!(
 interface IDirect3D9Ex(IDirect3D9ExVtbl): IDirect3D9(IDirect3D9Vtbl) {
     fn GetAdapterModeCountEx(

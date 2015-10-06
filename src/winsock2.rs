@@ -24,7 +24,6 @@ pub struct timeval {
     pub tv_sec: ::c_long,
     pub tv_usec: ::c_long,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct hostent {
     pub h_name: *mut ::c_char,
@@ -33,7 +32,6 @@ pub struct hostent {
     pub h_length: ::c_short,
     pub h_addr_list: *mut *mut ::c_char,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct netent {
     pub n_name: *mut ::c_char,
@@ -41,7 +39,6 @@ pub struct netent {
     pub n_addrtype: ::c_short,
     pub n_net: u_long,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct servent {
     pub s_name: *mut ::c_char,
@@ -55,14 +52,12 @@ pub struct servent {
     #[cfg(target_arch="x86_64")]
     pub s_port: ::c_short,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct protoent {
     pub p_name: *mut ::c_char,
     pub p_aliases: *mut *mut ::c_char,
     pub p_proto: ::c_short,
 }
-
 pub const WSADESCRIPTION_LEN: usize = 256;
 pub const WSASYS_STATUS_LEN: usize = 128;
 #[repr(C)] #[derive(Copy)]
@@ -83,17 +78,14 @@ pub struct WSADATA {
 }
 impl Clone for WSADATA { fn clone(&self) -> WSADATA { *self } }
 pub type LPWSADATA = *mut WSADATA;
-
 //391
 pub const INVALID_SOCKET: SOCKET = !0;
 pub const SOCKET_ERROR: ::c_int = -1;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct sockproto {
     pub sp_family: u_short,
     pub sp_protocol: u_short,
 }
-
 pub const PF_UNSPEC: ::c_int = ::AF_UNSPEC;
 pub const PF_UNIX: ::c_int = ::AF_UNIX;
 pub const PF_INET: ::c_int = ::AF_INET;
@@ -121,27 +113,22 @@ pub const PF_ATM: ::c_int = ::AF_ATM;
 pub const PF_INET6: ::c_int = ::AF_INET6;
 pub const PF_BTH: ::c_int = ::AF_BTH;
 pub const PF_MAX: ::c_int = ::AF_MAX;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct linger {
     pub l_onoff: u_short,
     pub l_linger: u_short,
 }
-
 pub const SOMAXCONN: ::c_int = 0x7fffffff;
-
 pub type WSAEVENT = ::HANDLE;
 pub type LPWSAEVENT = ::LPHANDLE;
 pub type WSAOVERLAPPED = ::OVERLAPPED;
 pub type LPWSAOVERLAPPED = *mut ::OVERLAPPED;
-
 pub const WSA_IO_PENDING: ::DWORD = ::ERROR_IO_PENDING;
 pub const WSA_IO_INCOMPLETE: ::DWORD = ::ERROR_IO_INCOMPLETE;
 pub const WSA_INVALID_HANDLE: ::DWORD = ::ERROR_INVALID_HANDLE;
 pub const WSA_INVALID_PARAMETER: ::DWORD = ::ERROR_INVALID_PARAMETER;
 pub const WSA_NOT_ENOUGH_MEMORY: ::DWORD = ::ERROR_NOT_ENOUGH_MEMORY;
 pub const WSA_OPERATION_ABORTED: ::DWORD = ::ERROR_OPERATION_ABORTED;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct QOS {
     pub SendingFlowspec: ::FLOWSPEC,
@@ -149,14 +136,12 @@ pub struct QOS {
     pub ProviderSpecific: ::WSABUF,
 }
 pub type LPQOS = *mut QOS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WSANETWORKEVENTS {
     pub lNetworkEvents: ::c_long,
     pub iErrorCode: [::c_int; FD_MAX_EVENTS],
 }
 pub type LPWSANETWORKEVENTS = *mut WSANETWORKEVENTS;
-
 pub const MAX_PROTOCOL_CHAIN: usize = 7;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WSAPROTOCOLCHAIN {
@@ -164,7 +149,6 @@ pub struct WSAPROTOCOLCHAIN {
     pub ChainEntries: [::DWORD; MAX_PROTOCOL_CHAIN],
 }
 pub type LPWSAPROTOCOLCHAIN = *mut WSAPROTOCOLCHAIN;
-
 pub const WSAPROTOCOL_LEN: usize = 255;
 #[repr(C)] #[derive(Copy)]
 pub struct WSAPROTOCOL_INFOA {
@@ -216,15 +200,13 @@ pub struct WSAPROTOCOL_INFOW {
 }
 impl Clone for WSAPROTOCOL_INFOW { fn clone(&self) -> WSAPROTOCOL_INFOW { *self } }
 pub type LPWSAPROTOCOL_INFOW = *mut WSAPROTOCOL_INFOW;
-
 pub type LPCONDITIONPROC = Option<unsafe extern "system" fn(
     lpCallerId: ::LPWSABUF, lpCallerData: ::LPWSABUF, lpSQOS: LPQOS, lpGQOS: LPQOS,
     lpCalleeId: ::LPWSABUF, lpCalleeData: ::LPWSABUF, g: *mut GROUP, dwCallbackData: ::DWORD,
 ) -> ::c_int>;
-pub type LPWSAOVERLAPPED_COMPLETION_ROUTINE = Option<unsafe extern "system" fn(   
+pub type LPWSAOVERLAPPED_COMPLETION_ROUTINE = Option<unsafe extern "system" fn(
     dwError: ::DWORD, cbTransferred: ::DWORD, lpOverlapped: LPWSAOVERLAPPED, dwFlags: ::DWORD,
 )>;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum WSACOMPLETIONTYPE {
     NSP_NOTIFY_IMMEDIATELY = 0,
@@ -235,7 +217,6 @@ pub enum WSACOMPLETIONTYPE {
 }
 pub type PWSACOMPLETIONTYPE = *mut WSACOMPLETIONTYPE;
 pub type LPWSACOMPLETIONTYPE = *mut WSACOMPLETIONTYPE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WSACOMPLETION_WindowMessage {
     pub hWnd: ::HWND,
@@ -272,7 +253,6 @@ UNION!(WSACOMPLETION, Parameters, Apc, Apc_mut, WSACOMPLETION_Apc);
 UNION!(WSACOMPLETION, Parameters, Port, Port_mut, WSACOMPLETION_Port);
 pub type PWSACOMPLETION = *mut WSACOMPLETION;
 pub type LPWSACOMPLETION = *mut WSACOMPLETION;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct AFPROTOCOLS {
     pub iAddressFamily: ::INT,
@@ -280,7 +260,6 @@ pub struct AFPROTOCOLS {
 }
 pub type PAFPROTOCOLS = *mut AFPROTOCOLS;
 pub type LPAFPROTOCOLS = *mut AFPROTOCOLS;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum WSAECOMPARATOR {
     COMP_EQUAL = 0,
@@ -288,7 +267,6 @@ pub enum WSAECOMPARATOR {
 }
 pub type PWSAECOMPARATOR = *mut WSAECOMPARATOR;
 pub type LPWSAECOMPARATOR = *mut WSAECOMPARATOR;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WSAVERSION {
     pub dwVersion: ::DWORD,
@@ -296,7 +274,6 @@ pub struct WSAVERSION {
 }
 pub type PWSAVERSION = *mut WSAVERSION;
 pub type LPWSAVERSION = *mut WSAVERSION;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WSAQUERYSETA {
     pub dwSize: ::DWORD,
@@ -337,7 +314,6 @@ pub struct WSAQUERYSETW {
 }
 pub type PWSAQUERYSETW = *mut WSAQUERYSETW;
 pub type LPWSAQUERYSETW = *mut WSAQUERYSETW;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WSAQUERYSET2A {
     pub dwSize: ::DWORD,
@@ -376,7 +352,6 @@ pub struct WSAQUERYSET2W {
 }
 pub type PWSAQUERYSET2W = *mut WSAQUERYSET2W;
 pub type LPWSAQUERYSET2W = *mut WSAQUERYSET2W;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum WSAESETSERVICEOP {
     RNRSERVICE_REGISTER = 0,
@@ -385,7 +360,6 @@ pub enum WSAESETSERVICEOP {
 }
 pub type PWSAESETSERVICEOP = *mut WSAESETSERVICEOP;
 pub type LPWSAESETSERVICEOP = *mut WSAESETSERVICEOP;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WSANSCLASSINFOA {
     pub lpszName: ::LPSTR,
@@ -406,7 +380,6 @@ pub struct WSANSCLASSINFOW {
 }
 pub type PWSANSCLASSINFOW = *mut WSANSCLASSINFOW;
 pub type LPWSANSCLASSINFOW = *mut WSANSCLASSINFOW;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WSASERVICECLASSINFOA {
     pub lpServiceClassId: ::LPGUID,
@@ -425,7 +398,6 @@ pub struct WSASERVICECLASSINFOW {
 }
 pub type PWSASERVICECLASSINFOW = *mut WSASERVICECLASSINFOW;
 pub type LPWSASERVICECLASSINFOW = *mut WSASERVICECLASSINFOW;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WSANAMESPACE_INFOA {
     pub NSProviderId: ::GUID,
@@ -468,7 +440,6 @@ pub struct WSANAMESPACE_INFOEXW {
 }
 pub type PWSANAMESPACE_INFOEXW = *mut WSANAMESPACE_INFOEXW;
 pub type LPWSANAMESPACE_INFOEXW = *mut WSANAMESPACE_INFOEXW;
-
 pub const POLLRDNORM: ::SHORT = 0x0100;
 pub const POLLRDBAND: ::SHORT = 0x0200;
 pub const POLLIN: ::SHORT = POLLRDNORM | POLLRDBAND;
@@ -479,7 +450,6 @@ pub const POLLWRBAND: ::SHORT = 0x0020;
 pub const POLLERR: ::SHORT = 0x0001;
 pub const POLLHUP: ::SHORT = 0x0002;
 pub const POLLNVAL: ::SHORT = 0x0004;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WSAPOLLFD {
     pub fd: ::SOCKET,

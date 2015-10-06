@@ -8,7 +8,6 @@ pub struct USER_INFO_0 {
 }
 pub type PUSER_INFO_0 = *mut USER_INFO_0;
 pub type LPUSER_INFO_0 = *mut USER_INFO_0;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1 {
     pub usri1_name: ::LPWSTR,
@@ -22,7 +21,6 @@ pub struct USER_INFO_1 {
 }
 pub type PUSER_INFO_1 = *mut USER_INFO_1;
 pub type LPUSER_INFO_1 = *mut USER_INFO_1;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_2 {
     pub usri2_name: ::LPWSTR,
@@ -52,7 +50,6 @@ pub struct USER_INFO_2 {
 }
 pub type PUSER_INFO_2 = *mut USER_INFO_2;
 pub type LPUSER_INFO_2 = *mut USER_INFO_2;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_3 {
     pub usri3_name: ::LPWSTR,
@@ -87,7 +84,6 @@ pub struct USER_INFO_3 {
 }
 pub type PUSER_INFO_3 = *mut USER_INFO_3;
 pub type LPUSER_INFO_3 = *mut USER_INFO_3;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_4 {
     pub usri4_name: ::LPWSTR,
@@ -122,7 +118,6 @@ pub struct USER_INFO_4 {
 }
 pub type PUSER_INFO_4 = *mut USER_INFO_4;
 pub type LPUSER_INFO_4 = *mut USER_INFO_4;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_10 {
     pub usri10_name: ::LPWSTR,
@@ -132,7 +127,6 @@ pub struct USER_INFO_10 {
 }
 pub type PUSER_INFO_10 = *mut USER_INFO_10;
 pub type LPUSER_INFO_10 = *mut USER_INFO_10;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_11 {
     pub usri11_name: ::LPWSTR,
@@ -158,7 +152,6 @@ pub struct USER_INFO_11 {
 }
 pub type PUSER_INFO_11 = *mut USER_INFO_11;
 pub type LPUSER_INFO_11 = *mut USER_INFO_11;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_20 {
     pub usri20_name: ::LPWSTR,
@@ -169,14 +162,12 @@ pub struct USER_INFO_20 {
 }
 pub type PUSER_INFO_20 = *mut USER_INFO_20;
 pub type LPUSER_INFO_20 = *mut USER_INFO_20;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_21 {
     pub usri21_password: [::BYTE; ::ENCRYPTED_PWLEN],
 }
 pub type PUSER_INFO_21 = *mut USER_INFO_21;
 pub type LPUSER_INFO_21 = *mut USER_INFO_21;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_22 {
     pub usri22_name: ::LPWSTR,
@@ -206,7 +197,6 @@ pub struct USER_INFO_22 {
 }
 pub type PUSER_INFO_22 = *mut USER_INFO_22;
 pub type LPUSER_INFO_22 = *mut USER_INFO_22;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_23 {
     pub usri23_name: ::LPWSTR,
@@ -217,7 +207,6 @@ pub struct USER_INFO_23 {
 }
 pub type PUSER_INFO_23 = *mut USER_INFO_23;
 pub type LPUSER_INFO_23 = *mut USER_INFO_23;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_24 {
     pub usri24_internet_identity: ::BOOL,
@@ -228,98 +217,84 @@ pub struct USER_INFO_24 {
 }
 pub type PUSER_INFO_24 = *mut USER_INFO_24;
 pub type LPUSER_INFO_24 = *mut USER_INFO_24;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1003 {
     pub usri1003_password: ::LPWSTR,
 }
 pub type PUSER_INFO_1003 = *mut USER_INFO_1003;
 pub type LPUSER_INFO_1003 = *mut USER_INFO_1003;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1005 {
     pub usri1005_priv: ::DWORD,
 }
 pub type PUSER_INFO_1005 = *mut USER_INFO_1005;
 pub type LPUSER_INFO_1005 = *mut USER_INFO_1005;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1006 {
     pub usri1006_home_dir: ::LPWSTR,
 }
 pub type PUSER_INFO_1006 = *mut USER_INFO_1006;
 pub type LPUSER_INFO_1006 = *mut USER_INFO_1006;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1007 {
     pub usri1007_comment: ::LPWSTR,
 }
 pub type PUSER_INFO_1007 = *mut USER_INFO_1007;
 pub type LPUSER_INFO_1007 = *mut USER_INFO_1007;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1008 {
     pub usri1008_flags: ::DWORD,
 }
 pub type PUSER_INFO_1008 = *mut USER_INFO_1008;
 pub type LPUSER_INFO_1008 = *mut USER_INFO_1008;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1009 {
     pub usri1009_script_path: ::LPWSTR,
 }
 pub type PUSER_INFO_1009 = *mut USER_INFO_1009;
 pub type LPUSER_INFO_1009 = *mut USER_INFO_1009;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1010 {
     pub usri1010_auth_flags: ::DWORD,
 }
 pub type PUSER_INFO_1010 = *mut USER_INFO_1010;
 pub type LPUSER_INFO_1010 = *mut USER_INFO_1010;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1011 {
     pub usri1011_full_name: ::LPWSTR,
 }
 pub type PUSER_INFO_1011 = *mut USER_INFO_1011;
 pub type LPUSER_INFO_1011 = *mut USER_INFO_1011;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1012 {
     pub usri1012_usr_comment: ::LPWSTR,
 }
 pub type PUSER_INFO_1012 = *mut USER_INFO_1012;
 pub type LPUSER_INFO_1012 = *mut USER_INFO_1012;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1013 {
     pub usri1013_parms: ::LPWSTR,
 }
 pub type PUSER_INFO_1013 = *mut USER_INFO_1013;
 pub type LPUSER_INFO_1013 = *mut USER_INFO_1013;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1014 {
     pub usri1014_workstations: ::LPWSTR,
 }
 pub type PUSER_INFO_1014 = *mut USER_INFO_1014;
 pub type LPUSER_INFO_1014 = *mut USER_INFO_1014;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1017 {
     pub usri1017_acct_expires: ::DWORD,
 }
 pub type PUSER_INFO_1017 = *mut USER_INFO_1017;
 pub type LPUSER_INFO_1017 = *mut USER_INFO_1017;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1018 {
     pub usri1018_max_storage: ::DWORD,
 }
 pub type PUSER_INFO_1018 = *mut USER_INFO_1018;
 pub type LPUSER_INFO_1018 = *mut USER_INFO_1018;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1020 {
     pub usri1020_units_per_week: ::DWORD,
@@ -327,49 +302,42 @@ pub struct USER_INFO_1020 {
 }
 pub type PUSER_INFO_1020 = *mut USER_INFO_1020;
 pub type LPUSER_INFO_1020 = *mut USER_INFO_1020;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1023 {
     pub usri1023_logon_server: ::LPWSTR,
 }
 pub type PUSER_INFO_1023 = *mut USER_INFO_1023;
 pub type LPUSER_INFO_1023 = *mut USER_INFO_1023;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1024 {
     pub usri1024_country_code: ::DWORD,
 }
 pub type PUSER_INFO_1024 = *mut USER_INFO_1024;
 pub type LPUSER_INFO_1024 = *mut USER_INFO_1024;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1025 {
     pub usri1025_code_page: ::DWORD,
 }
 pub type PUSER_INFO_1025 = *mut USER_INFO_1025;
 pub type LPUSER_INFO_1025 = *mut USER_INFO_1025;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1051 {
     pub usri1051_primary_group_id: ::DWORD,
 }
 pub type PUSER_INFO_1051 = *mut USER_INFO_1051;
 pub type LPUSER_INFO_1051 = *mut USER_INFO_1051;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1052 {
     pub usri1052_profile: ::LPWSTR,
 }
 pub type PUSER_INFO_1052 = *mut USER_INFO_1052;
 pub type LPUSER_INFO_1052 = *mut USER_INFO_1052;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_INFO_1053 {
     pub usri1053_home_dir_drive: ::LPWSTR,
 }
 pub type PUSER_INFO_1053 = *mut USER_INFO_1053;
 pub type LPUSER_INFO_1053 = *mut USER_INFO_1053;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_MODALS_INFO_0 {
     pub usrmod0_min_passwd_len: ::DWORD,
@@ -380,7 +348,6 @@ pub struct USER_MODALS_INFO_0 {
 }
 pub type PUSER_MODALS_INFO_0 = *mut USER_MODALS_INFO_0;
 pub type LPUSER_MODALS_INFO_0 = *mut USER_MODALS_INFO_0;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_MODALS_INFO_1 {
     pub usrmod1_role: ::DWORD,
@@ -388,7 +355,6 @@ pub struct USER_MODALS_INFO_1 {
 }
 pub type PUSER_MODALS_INFO_1 = *mut USER_MODALS_INFO_1;
 pub type LPUSER_MODALS_INFO_1 = *mut USER_MODALS_INFO_1;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_MODALS_INFO_2 {
     pub usrmod2_domain_name: ::LPWSTR,
@@ -396,7 +362,6 @@ pub struct USER_MODALS_INFO_2 {
 }
 pub type PUSER_MODALS_INFO_2 = *mut USER_MODALS_INFO_2;
 pub type LPUSER_MODALS_INFO_2 = *mut USER_MODALS_INFO_2;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_MODALS_INFO_3 {
     pub usrmod3_lockout_duration: ::DWORD,
@@ -405,56 +370,48 @@ pub struct USER_MODALS_INFO_3 {
 }
 pub type PUSER_MODALS_INFO_3 = *mut USER_MODALS_INFO_3;
 pub type LPUSER_MODALS_INFO_3 = *mut USER_MODALS_INFO_3;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_MODALS_INFO_1001 {
     pub usrmod1001_min_passwd_len: ::DWORD,
 }
 pub type PUSER_MODALS_INFO_1001 = *mut USER_MODALS_INFO_1001;
 pub type LPUSER_MODALS_INFO_1001 = *mut USER_MODALS_INFO_1001;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_MODALS_INFO_1002 {
     pub usrmod1002_max_passwd_age: ::DWORD,
 }
 pub type PUSER_MODALS_INFO_1002 = *mut USER_MODALS_INFO_1002;
 pub type LPUSER_MODALS_INFO_1002 = *mut USER_MODALS_INFO_1002;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_MODALS_INFO_1003 {
     pub usrmod1003_min_passwd_age: ::DWORD,
 }
 pub type PUSER_MODALS_INFO_1003 = *mut USER_MODALS_INFO_1003;
 pub type LPUSER_MODALS_INFO_1003 = *mut USER_MODALS_INFO_1003;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_MODALS_INFO_1004 {
     pub usrmod1004_force_logoff: ::DWORD,
 }
 pub type PUSER_MODALS_INFO_1004 = *mut USER_MODALS_INFO_1004;
 pub type LPUSER_MODALS_INFO_1004 = *mut USER_MODALS_INFO_1004;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_MODALS_INFO_1005 {
     pub usrmod1005_password_hist_len: ::DWORD,
 }
 pub type PUSER_MODALS_INFO_1005 = *mut USER_MODALS_INFO_1005;
 pub type LPUSER_MODALS_INFO_1005 = *mut USER_MODALS_INFO_1005;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_MODALS_INFO_1006 {
     pub usrmod1006_role: ::DWORD,
 }
 pub type PUSER_MODALS_INFO_1006 = *mut USER_MODALS_INFO_1006;
 pub type LPUSER_MODALS_INFO_1006 = *mut USER_MODALS_INFO_1006;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USER_MODALS_INFO_1007 {
     pub usrmod1007_primary: ::LPWSTR,
 }
 pub type PUSER_MODALS_INFO_1007 = *mut USER_MODALS_INFO_1007;
 pub type LPUSER_MODALS_INFO_1007 = *mut USER_MODALS_INFO_1007;
-
 pub const UF_SCRIPT: ::DWORD = 0x0001;
 pub const UF_ACCOUNTDISABLE: ::DWORD = 0x0002;
 pub const UF_HOMEDIR_REQUIRED: ::DWORD = 0x0008;
@@ -489,26 +446,21 @@ pub const UF_SETTABLE_BITS: ::DWORD = UF_SCRIPT |  UF_ACCOUNTDISABLE |  UF_LOCKO
     | UF_SMARTCARD_REQUIRED | UF_TRUSTED_FOR_DELEGATION | UF_NOT_DELEGATED | UF_USE_DES_KEY_ONLY
     | UF_DONT_REQUIRE_PREAUTH | UF_PASSWORD_EXPIRED | UF_TRUSTED_TO_AUTHENTICATE_FOR_DELEGATION
     | UF_NO_AUTH_DATA_REQUIRED | UF_USE_AES_KEYS | UF_PARTIAL_SECRETS_ACCOUNT;
-
 pub const FILTER_TEMP_DUPLICATE_ACCOUNT: ::DWORD = 0x0001;
 pub const FILTER_NORMAL_ACCOUNT: ::DWORD = 0x0002;
 pub const FILTER_INTERDOMAIN_TRUST_ACCOUNT: ::DWORD = 0x0008;
 pub const FILTER_WORKSTATION_TRUST_ACCOUNT: ::DWORD = 0x0010;
 pub const FILTER_SERVER_TRUST_ACCOUNT: ::DWORD = 0x0020;
-
 pub const LG_INCLUDE_INDIRECT: ::DWORD = 0x0001;
-
 pub const AF_OP_PRINT: ::DWORD = 0x1;
 pub const AF_OP_COMM: ::DWORD = 0x2;
 pub const AF_OP_SERVER: ::DWORD = 0x4;
 pub const AF_OP_ACCOUNTS: ::DWORD = 0x8;
 pub const AF_SETTABLE_BITS: ::DWORD = AF_OP_PRINT | AF_OP_COMM | AF_OP_SERVER | AF_OP_ACCOUNTS;
-
 pub const UAS_ROLE_STANDALONE: ::DWORD = 0;
 pub const UAS_ROLE_MEMBER: ::DWORD = 1;
 pub const UAS_ROLE_BACKUP: ::DWORD = 2;
 pub const UAS_ROLE_PRIMARY: ::DWORD = 3;
-
 pub const USER_NAME_PARMNUM: ::DWORD = 1;
 pub const USER_PASSWORD_PARMNUM: ::DWORD = 3;
 pub const USER_PASSWORD_AGE_PARMNUM: ::DWORD = 4;
@@ -537,7 +489,6 @@ pub const USER_PRIMARY_GROUP_PARMNUM: ::DWORD = 51;
 pub const USER_PROFILE: ::DWORD = 52;
 pub const USER_PROFILE_PARMNUM: ::DWORD = 52;
 pub const USER_HOME_DIR_DRIVE_PARMNUM: ::DWORD = 53;
-
 pub const USER_NAME_INFOLEVEL: ::DWORD = ::PARMNUM_BASE_INFOLEVEL + USER_NAME_PARMNUM;
 pub const USER_PASSWORD_INFOLEVEL: ::DWORD = ::PARMNUM_BASE_INFOLEVEL + USER_PASSWORD_PARMNUM;
 pub const USER_PASSWORD_AGE_INFOLEVEL: ::DWORD =
@@ -577,35 +528,28 @@ pub const USER_PRIMARY_GROUP_INFOLEVEL: ::DWORD =
     ::PARMNUM_BASE_INFOLEVEL + USER_PRIMARY_GROUP_PARMNUM;
 pub const USER_HOME_DIR_DRIVE_INFOLEVEL: ::DWORD =
     ::PARMNUM_BASE_INFOLEVEL + USER_HOME_DIR_DRIVE_PARMNUM;
-
 pub const TIMEQ_FOREVER: ::DWORD = -1i32 as ::DWORD;
 pub const USER_MAXSTORAGE_UNLIMITED: ::DWORD = -1i32 as ::DWORD;
 pub const USER_NO_LOGOFF: ::DWORD = -1i32 as ::DWORD;
 pub const UNITS_PER_DAY: ::DWORD = 24;
 pub const UNITS_PER_WEEK: ::DWORD = UNITS_PER_DAY * 7;
-
 pub const USER_PRIV_MASK: ::DWORD = 0x3;
 pub const USER_PRIV_GUEST: ::DWORD = 0;
 pub const USER_PRIV_USER: ::DWORD = 1;
 pub const USER_PRIV_ADMIN: ::DWORD = 2;
-
 pub const MAX_PASSWD_LEN: ::DWORD = ::PWLEN;
 pub const DEF_MIN_PWLEN: ::DWORD = 6;
 pub const DEF_PWUNIQUENESS: ::DWORD = 5;
 pub const DEF_MAX_PWHIST: ::DWORD = 8;
-
 pub const DEF_MAX_PWAGE: ::DWORD = TIMEQ_FOREVER;
 pub const DEF_MIN_PWAGE: ::DWORD = 0;
 pub const DEF_FORCE_LOGOFF: ::DWORD = 0xffffffff;
 pub const DEF_MAX_BADPW: ::DWORD = 0;
 pub const ONE_DAY: ::DWORD = 1 * 24 * 3600;
-
 pub const VALIDATED_LOGON: ::DWORD = 0;
 pub const PASSWORD_EXPIRED: ::DWORD = 2;
 pub const NON_VALIDATED_LOGON: ::DWORD = 3;
-
 pub const VALID_LOGOFF: ::DWORD = 1;
-
 pub const MODALS_MIN_PASSWD_LEN_PARMNUM: ::DWORD = 1;
 pub const MODALS_MAX_PASSWD_AGE_PARMNUM: ::DWORD = 2;
 pub const MODALS_MIN_PASSWD_AGE_PARMNUM: ::DWORD = 3;
@@ -618,7 +562,6 @@ pub const MODALS_DOMAIN_ID_PARMNUM: ::DWORD = 9;
 pub const MODALS_LOCKOUT_DURATION_PARMNUM: ::DWORD = 10;
 pub const MODALS_LOCKOUT_OBSERVATION_WINDOW_PARMNUM: ::DWORD = 11;
 pub const MODALS_LOCKOUT_THRESHOLD_PARMNUM: ::DWORD = 12;
-
 pub const MODALS_MIN_PASSWD_LEN_INFOLEVEL: ::DWORD =
     ::PARMNUM_BASE_INFOLEVEL + MODALS_MIN_PASSWD_LEN_PARMNUM;
 pub const MODALS_MAX_PASSWD_AGE_INFOLEVEL: ::DWORD =
@@ -634,14 +577,12 @@ pub const MODALS_PRIMARY_INFOLEVEL: ::DWORD = ::PARMNUM_BASE_INFOLEVEL + MODALS_
 pub const MODALS_DOMAIN_NAME_INFOLEVEL: ::DWORD =
     ::PARMNUM_BASE_INFOLEVEL + MODALS_DOMAIN_NAME_PARMNUM;
 pub const MODALS_DOMAIN_ID_INFOLEVEL: ::DWORD = ::PARMNUM_BASE_INFOLEVEL + MODALS_DOMAIN_ID_PARMNUM;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GROUP_INFO_0 {
     pub grpi0_name: ::LPWSTR,
 }
 pub type PGROUP_INFO_0 = *mut GROUP_INFO_0;
 pub type LPGROUP_INFO_0 = *mut GROUP_INFO_0;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GROUP_INFO_1 {
     pub grpi1_name: ::LPWSTR,
@@ -649,7 +590,6 @@ pub struct GROUP_INFO_1 {
 }
 pub type PGROUP_INFO_1 = *mut GROUP_INFO_1;
 pub type LPGROUP_INFO_1 = *mut GROUP_INFO_1;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GROUP_INFO_2 {
     pub grpi2_name: ::LPWSTR,
@@ -658,7 +598,6 @@ pub struct GROUP_INFO_2 {
     pub grpi2_attributes: ::DWORD,
 }
 pub type PGROUP_INFO_2 = *mut GROUP_INFO_2;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GROUP_INFO_3 {
     pub grpi3_name: ::LPWSTR,
@@ -667,28 +606,24 @@ pub struct GROUP_INFO_3 {
     pub grpi3_attributes: ::DWORD,
 }
 pub type PGROUP_INFO_3 = *mut GROUP_INFO_3;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GROUP_INFO_1002 {
     pub grpi1002_comment: ::LPWSTR,
 }
 pub type PGROUP_INFO_1002 = *mut GROUP_INFO_1002;
 pub type LPGROUP_INFO_1002 = *mut GROUP_INFO_1002;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GROUP_INFO_1005 {
     pub grpi1005_attributes: ::DWORD,
 }
 pub type PGROUP_INFO_1005 = *mut GROUP_INFO_1005;
 pub type LPGROUP_INFO_1005 = *mut GROUP_INFO_1005;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GROUP_USERS_INFO_0 {
     pub grui0_name: ::LPWSTR,
 }
 pub type PGROUP_USERS_INFO_0 = *mut GROUP_USERS_INFO_0;
 pub type LPGROUP_USERS_INFO_0 = *mut GROUP_USERS_INFO_0;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GROUP_USERS_INFO_1 {
     pub grui1_name: ::LPWSTR,
@@ -696,31 +631,25 @@ pub struct GROUP_USERS_INFO_1 {
 }
 pub type PGROUP_USERS_INFO_1 = *mut GROUP_USERS_INFO_1;
 pub type LPGROUP_USERS_INFO_1 = *mut GROUP_USERS_INFO_1;
-
 pub const GROUPIDMASK: ::DWORD = 0x8000;
-
 pub const GROUP_SPECIALGRP_USERS: &'static str = "USERS";
 pub const GROUP_SPECIALGRP_ADMINS: &'static str = "ADMINS";
 pub const GROUP_SPECIALGRP_GUESTS: &'static str = "GUESTS";
 pub const GROUP_SPECIALGRP_LOCAL: &'static str = "LOCAL";
-
 pub const GROUP_ALL_PARMNUM: ::DWORD = 0;
 pub const GROUP_NAME_PARMNUM: ::DWORD = 1;
 pub const GROUP_COMMENT_PARMNUM: ::DWORD = 2;
 pub const GROUP_ATTRIBUTES_PARMNUM: ::DWORD = 3;
-
 pub const GROUP_ALL_INFOLEVEL: ::DWORD = ::PARMNUM_BASE_INFOLEVEL + GROUP_ALL_PARMNUM;
 pub const GROUP_NAME_INFOLEVEL: ::DWORD = ::PARMNUM_BASE_INFOLEVEL + GROUP_NAME_PARMNUM;
 pub const GROUP_COMMENT_INFOLEVEL: ::DWORD = ::PARMNUM_BASE_INFOLEVEL + GROUP_COMMENT_PARMNUM;
 pub const GROUP_ATTRIBUTES_INFOLEVEL: ::DWORD = ::PARMNUM_BASE_INFOLEVEL + GROUP_ATTRIBUTES_PARMNUM;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LOCALGROUP_INFO_0 {
     pub lgrpi0_name: ::LPWSTR,
 }
 pub type PLOCALGROUP_INFO_0 = *mut LOCALGROUP_INFO_0;
 pub type LPLOCALGROUP_INFO_0 = *mut LOCALGROUP_INFO_0;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LOCALGROUP_INFO_1 {
     pub lgrpi1_name: ::LPWSTR,
@@ -728,21 +657,18 @@ pub struct LOCALGROUP_INFO_1 {
 }
 pub type PLOCALGROUP_INFO_1 = *mut LOCALGROUP_INFO_1;
 pub type LPLOCALGROUP_INFO_1 = *mut LOCALGROUP_INFO_1;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LOCALGROUP_INFO_1002 {
     pub lgrpi1002_comment: ::LPWSTR,
 }
 pub type PLOCALGROUP_INFO_1002 = *mut LOCALGROUP_INFO_1002;
 pub type LPLOCALGROUP_INFO_1002 = *mut LOCALGROUP_INFO_1002;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LOCALGROUP_MEMBERS_INFO_0 {
     pub lgrmi0_sid: ::PSID,
 }
 pub type PLOCALGROUP_MEMBERS_INFO_0 = *mut LOCALGROUP_MEMBERS_INFO_0;
 pub type LPLOCALGROUP_MEMBERS_INFO_0 = *mut LOCALGROUP_MEMBERS_INFO_0;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LOCALGROUP_MEMBERS_INFO_1 {
     pub lgrmi1_sid: ::PSID,
@@ -751,7 +677,6 @@ pub struct LOCALGROUP_MEMBERS_INFO_1 {
 }
 pub type PLOCALGROUP_MEMBERS_INFO_1 = *mut LOCALGROUP_MEMBERS_INFO_1;
 pub type LPLOCALGROUP_MEMBERS_INFO_1 = *mut LOCALGROUP_MEMBERS_INFO_1;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LOCALGROUP_MEMBERS_INFO_2 {
     pub lgrmi2_sid: ::PSID,
@@ -760,24 +685,20 @@ pub struct LOCALGROUP_MEMBERS_INFO_2 {
 }
 pub type PLOCALGROUP_MEMBERS_INFO_2 = *mut LOCALGROUP_MEMBERS_INFO_2;
 pub type LPLOCALGROUP_MEMBERS_INFO_2 = *mut LOCALGROUP_MEMBERS_INFO_2;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LOCALGROUP_MEMBERS_INFO_3 {
     pub lgrmi3_domainandname: ::LPWSTR,
 }
 pub type PLOCALGROUP_MEMBERS_INFO_3 = *mut LOCALGROUP_MEMBERS_INFO_3;
 pub type LPLOCALGROUP_MEMBERS_INFO_3 = *mut LOCALGROUP_MEMBERS_INFO_3;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LOCALGROUP_USERS_INFO_0 {
     pub lgrui0_name: ::LPWSTR,
 }
 pub type PLOCALGROUP_USERS_INFO_0 = *mut LOCALGROUP_USERS_INFO_0;
 pub type LPLOCALGROUP_USERS_INFO_0 = *mut LOCALGROUP_USERS_INFO_0;
-
 pub const LOCALGROUP_NAME_PARMNUM: ::DWORD = 1;
 pub const LOCALGROUP_COMMENT_PARMNUM: ::DWORD = 2;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NET_DISPLAY_USER {
     pub usri1_name: ::LPWSTR,
@@ -788,7 +709,6 @@ pub struct NET_DISPLAY_USER {
     pub usri1_next_index: ::DWORD,
 }
 pub type PNET_DISPLAY_USER = *mut NET_DISPLAY_USER;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NET_DISPLAY_MACHINE {
     pub usri2_name: ::LPWSTR,
@@ -798,7 +718,6 @@ pub struct NET_DISPLAY_MACHINE {
     pub usri2_next_index: ::DWORD,
 }
 pub type PNET_DISPLAY_MACHINE = *mut NET_DISPLAY_MACHINE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NET_DISPLAY_GROUP {
     pub usri3_name: ::LPWSTR,
@@ -808,14 +727,12 @@ pub struct NET_DISPLAY_GROUP {
     pub grpi3_next_index: ::DWORD,
 }
 pub type PNET_DISPLAY_GROUP = *mut NET_DISPLAY_GROUP;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ACCESS_INFO_0 {
     pub acc0_resource_name: ::LPWSTR,
 }
 pub type PACCESS_INFO_0 = *mut ACCESS_INFO_0;
 pub type LPACCESS_INFO_0 = *mut ACCESS_INFO_0;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ACCESS_INFO_1 {
     pub acc1_resource_name: ::LPWSTR,
@@ -824,14 +741,12 @@ pub struct ACCESS_INFO_1 {
 }
 pub type PACCESS_INFO_1 = *mut ACCESS_INFO_1;
 pub type LPACCESS_INFO_1 = *mut ACCESS_INFO_1;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ACCESS_INFO_1002 {
     pub acc1002_attr: ::DWORD,
 }
 pub type PACCESS_INFO_1002 = *mut ACCESS_INFO_1002;
 pub type LPACCESS_INFO_1002 = *mut ACCESS_INFO_1002;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ACCESS_LIST {
     pub acl_ugname: ::LPWSTR,
@@ -839,11 +754,9 @@ pub struct ACCESS_LIST {
 }
 pub type PACCESS_LIST = *mut ACCESS_LIST;
 pub type LPACCESS_LIST = *mut ACCESS_LIST;
-
 pub const ACCESS_NONE: ::DWORD = 0;
 pub const ACCESS_ALL: ::DWORD = ACCESS_READ | ACCESS_WRITE | ACCESS_CREATE | ACCESS_EXEC
     | ACCESS_DELETE | ACCESS_ATRIB | ACCESS_PERM;
-
 pub const ACCESS_READ: ::DWORD = 0x01;
 pub const ACCESS_WRITE: ::DWORD = 0x02;
 pub const ACCESS_CREATE: ::DWORD = 0x04;
@@ -851,58 +764,47 @@ pub const ACCESS_EXEC: ::DWORD = 0x08;
 pub const ACCESS_DELETE: ::DWORD = 0x10;
 pub const ACCESS_ATRIB: ::DWORD = 0x20;
 pub const ACCESS_PERM: ::DWORD = 0x40;
-
 pub const ACCESS_GROUP: ::DWORD = 0x8000;
-
 pub const ACCESS_AUDIT: ::DWORD = 0x1;
-
 pub const ACCESS_SUCCESS_OPEN: ::DWORD = 0x10;
 pub const ACCESS_SUCCESS_WRITE: ::DWORD = 0x20;
 pub const ACCESS_SUCCESS_DELETE: ::DWORD = 0x40;
 pub const ACCESS_SUCCESS_ACL: ::DWORD = 0x80;
 pub const ACCESS_SUCCESS_MASK: ::DWORD = 0xF0;
-
 pub const ACCESS_FAIL_OPEN: ::DWORD = 0x100;
 pub const ACCESS_FAIL_WRITE: ::DWORD = 0x200;
 pub const ACCESS_FAIL_DELETE: ::DWORD = 0x400;
 pub const ACCESS_FAIL_ACL: ::DWORD = 0x800;
 pub const ACCESS_FAIL_MASK: ::DWORD = 0xF00;
-
 pub const ACCESS_FAIL_SHIFT: ::DWORD = 4;
-
 pub const ACCESS_RESOURCE_NAME_PARMNUM: ::DWORD = 1;
 pub const ACCESS_ATTR_PARMNUM: ::DWORD = 2;
 pub const ACCESS_COUNT_PARMNUM: ::DWORD = 3;
 pub const ACCESS_ACCESS_LIST_PARMNUM: ::DWORD = 4;
-
 pub const ACCESS_RESOURCE_NAME_INFOLEVEL: ::DWORD =
     ::PARMNUM_BASE_INFOLEVEL + ACCESS_RESOURCE_NAME_PARMNUM;
 pub const ACCESS_ATTR_INFOLEVEL: ::DWORD = ::PARMNUM_BASE_INFOLEVEL + ACCESS_ATTR_PARMNUM;
 pub const ACCESS_COUNT_INFOLEVEL: ::DWORD = ::PARMNUM_BASE_INFOLEVEL + ACCESS_COUNT_PARMNUM;
 pub const ACCESS_ACCESS_LIST_INFOLEVEL: ::DWORD =
     ::PARMNUM_BASE_INFOLEVEL + ACCESS_ACCESS_LIST_PARMNUM;
-
 ENUM!{enum NET_VALIDATE_PASSWORD_TYPE {
     NetValidateAuthentication = 1,
     NetValidatePasswordChange,
     NetValidatePasswordReset,
 }}
 pub type PNET_VALIDATE_PASSWORD_TYPE = *mut NET_VALIDATE_PASSWORD_TYPE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NET_VALIDATE_PASSWORD_HASH {
     pub Length: ::ULONG,
     pub Hash: ::LPBYTE,
 }
 pub type PNET_VALIDATE_PASSWORD_HASH = *mut NET_VALIDATE_PASSWORD_HASH;
-
 pub const NET_VALIDATE_PASSWORD_LAST_SET: ::ULONG = 0x00000001;
 pub const NET_VALIDATE_BAD_PASSWORD_TIME: ::ULONG = 0x00000002;
 pub const NET_VALIDATE_LOCKOUT_TIME: ::ULONG = 0x00000004;
 pub const NET_VALIDATE_BAD_PASSWORD_COUNT: ::ULONG = 0x00000008;
 pub const NET_VALIDATE_PASSWORD_HISTORY_LENGTH: ::ULONG = 0x00000010;
 pub const NET_VALIDATE_PASSWORD_HISTORY: ::ULONG = 0x00000020;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NET_VALIDATE_PERSISTED_FIELDS {
     pub PresentFields: ::ULONG,
@@ -914,21 +816,18 @@ pub struct NET_VALIDATE_PERSISTED_FIELDS {
     pub PasswordHistory: PNET_VALIDATE_PASSWORD_HASH,
 }
 pub type PNET_VALIDATE_PERSISTED_FIELDS = *mut NET_VALIDATE_PERSISTED_FIELDS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NET_VALIDATE_OUTPUT_ARG {
     pub ChangedPersistedFields: NET_VALIDATE_PERSISTED_FIELDS,
     pub ValidationStatus: ::NET_API_STATUS,
 }
 pub type PNET_VALIDATE_OUTPUT_ARG = *mut NET_VALIDATE_OUTPUT_ARG;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NET_VALIDATE_AUTHENTICATION_INPUT_ARG {
     pub InputPersistedFields: NET_VALIDATE_PERSISTED_FIELDS,
     pub PasswordMatched: ::BOOLEAN,
 }
 pub type PNET_VALIDATE_AUTHENTICATION_INPUT_ARG = *mut NET_VALIDATE_AUTHENTICATION_INPUT_ARG;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NET_VALIDATE_PASSWORD_CHANGE_INPUT_ARG {
     pub InputPersistedFields: NET_VALIDATE_PERSISTED_FIELDS,
@@ -938,7 +837,6 @@ pub struct NET_VALIDATE_PASSWORD_CHANGE_INPUT_ARG {
     pub PasswordMatch: ::BOOLEAN,
 }
 pub type PNET_VALIDATE_PASSWORD_CHANGE_INPUT_ARG = *mut NET_VALIDATE_PASSWORD_CHANGE_INPUT_ARG;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NET_VALIDATE_PASSWORD_RESET_INPUT_ARG {
     pub InputPersistedFields: NET_VALIDATE_PERSISTED_FIELDS,
@@ -949,7 +847,6 @@ pub struct NET_VALIDATE_PASSWORD_RESET_INPUT_ARG {
     pub ClearLockout: ::BOOLEAN,
 }
 pub type PNET_VALIDATE_PASSWORD_RESET_INPUT_ARG = *mut NET_VALIDATE_PASSWORD_RESET_INPUT_ARG;
-
 pub const NETLOGON_CONTROL_QUERY: ::DWORD = 1;
 pub const NETLOGON_CONTROL_REPLICATE: ::DWORD = 2;
 pub const NETLOGON_CONTROL_SYNCHRONIZE: ::DWORD = 3;
@@ -962,20 +859,17 @@ pub const NETLOGON_CONTROL_CHANGE_PASSWORD: ::DWORD = 9;
 pub const NETLOGON_CONTROL_TC_VERIFY: ::DWORD = 10;
 pub const NETLOGON_CONTROL_FORCE_DNS_REG: ::DWORD = 11;
 pub const NETLOGON_CONTROL_QUERY_DNS_REG: ::DWORD = 12;
-
 pub const NETLOGON_CONTROL_UNLOAD_NETLOGON_DLL: ::DWORD = 0xFFFB;
 pub const NETLOGON_CONTROL_BACKUP_CHANGE_LOG: ::DWORD = 0xFFFC;
 pub const NETLOGON_CONTROL_TRUNCATE_LOG: ::DWORD = 0xFFFD;
 pub const NETLOGON_CONTROL_SET_DBFLAG: ::DWORD = 0xFFFE;
 pub const NETLOGON_CONTROL_BREAKPOINT: ::DWORD = 0xFFFF;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NETLOGON_INFO_1 {
     pub netlog1_flags: ::DWORD,
     pub netlog1_pdc_connection_status: ::NET_API_STATUS,
 }
 pub type PNETLOGON_INFO_1 = *mut NETLOGON_INFO_1;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NETLOGON_INFO_2 {
     pub netlog2_flags: ::DWORD,
@@ -984,7 +878,6 @@ pub struct NETLOGON_INFO_2 {
     pub netlog2_tc_connection_status: ::NET_API_STATUS,
 }
 pub type PNETLOGON_INFO_2 = *mut NETLOGON_INFO_2;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NETLOGON_INFO_3 {
     pub netlog3_flags: ::DWORD,
@@ -996,14 +889,12 @@ pub struct NETLOGON_INFO_3 {
     pub netlog3_reserved5: ::DWORD,
 }
 pub type PNETLOGON_INFO_3 = *mut NETLOGON_INFO_3;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NETLOGON_INFO_4 {
     pub netlog4_trusted_dc_name: ::LPWSTR,
     pub netlog4_trusted_domain_name: ::LPWSTR,
 }
 pub type PNETLOGON_INFO_4 = *mut NETLOGON_INFO_4;
-
 pub const NETLOGON_REPLICATION_NEEDED: ::DWORD = 0x01;
 pub const NETLOGON_REPLICATION_IN_PROGRESS: ::DWORD = 0x02;
 pub const NETLOGON_FULL_SYNC_REPLICATION: ::DWORD = 0x04;
@@ -1012,21 +903,17 @@ pub const NETLOGON_HAS_IP: ::DWORD = 0x10;
 pub const NETLOGON_HAS_TIMESERV: ::DWORD = 0x20;
 pub const NETLOGON_DNS_UPDATE_FAILURE: ::DWORD = 0x40;
 pub const NETLOGON_VERIFY_STATUS_RETURNED: ::DWORD = 0x80;
-
 DEFINE_GUID!(ServiceAccountPasswordGUID, 0x262E99C9, 0x6160, 0x4871,
     0xAC, 0xEC, 0x4E, 0x61, 0x73, 0x6B, 0x6F, 0x21);
-
 pub const SERVICE_ACCOUNT_FLAG_LINK_TO_HOST_ONLY: ::DWORD = 0x00000001;
 pub const SERVICE_ACCOUNT_FLAG_ADD_AGAINST_RODC: ::DWORD = 0x00000002;
 pub const SERVICE_ACCOUNT_FLAG_UNLINK_FROM_HOST_ONLY: ::DWORD = 0x00000001;
 pub const SERVICE_ACCOUNT_FLAG_REMOVE_OFFLINE: ::DWORD = 0x00000002;
-
 ENUM!{enum MSA_INFO_LEVEL {
     MsaInfoLevel0 = 0,
     MsaInfoLevelMax,
 }}
 pub type PMSA_INFO_LEVEL = *mut MSA_INFO_LEVEL;
-
 ENUM!{enum MSA_INFO_STATE {
     MsaInfoNotExist = 1,
     MsaInfoNotService,
@@ -1035,7 +922,6 @@ ENUM!{enum MSA_INFO_STATE {
     MsaInfoInstalled,
 }}
 pub type PMSA_INFO_STATE = *mut MSA_INFO_STATE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MSA_INFO_0 {
     pub State: MSA_INFO_STATE,

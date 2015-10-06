@@ -24,7 +24,6 @@ pub enum PSS_CAPTURE_FLAGS {
     PSS_CREATE_MEASURE_PERFORMANCE = 0x40000000,
     PSS_CREATE_RELEASE_SECTION = -2147483648,
 }
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum PSS_QUERY_INFORMATION_CLASS {
     PSS_QUERY_PROCESS_INFORMATION = 0,
@@ -36,7 +35,6 @@ pub enum PSS_QUERY_INFORMATION_CLASS {
     PSS_QUERY_HANDLE_TRACE_INFORMATION = 6,
     PSS_QUERY_PERFORMANCE_COUNTERS = 7,
 }
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum PSS_WALK_INFORMATION_CLASS {
     PSS_WALK_AUXILIARY_PAGES = 0,
@@ -44,16 +42,13 @@ pub enum PSS_WALK_INFORMATION_CLASS {
     PSS_WALK_HANDLES = 2,
     PSS_WALK_THREADS = 3,
 }
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum PSS_DUPLICATE_FLAGS {
     PSS_DUPLICATE_NONE = 0x00,
     PSS_DUPLICATE_CLOSE_SOURCE = 0x01,
 }
-
 DECLARE_HANDLE!(HPSS, HPSS__);
 DECLARE_HANDLE!(HPSSWALK, HPSSWALK__);
-
 pub type pAllocRoutine = Option<unsafe extern "system" fn(
     Context: *mut ::c_void, Size: ::DWORD,
 ) -> *mut ::c_void>;

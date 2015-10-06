@@ -1,15 +1,11 @@
 // Copyright © 2015, Jordan Miner
 // Licensed under the MIT License <LICENSE.md>
 //! Uniscribe structure declarations and constant definitions
-
 pub const SCRIPT_UNDEFINED: ::WORD = 0;
-
 pub const USP_E_SCRIPT_NOT_IN_FONT: ::HRESULT = MAKE_HRESULT!(
     ::SEVERITY_ERROR, ::FACILITY_ITF, 0x200
 );
-
 DECLARE_HANDLE!(SCRIPT_CACHE, SCRIPT_CACHE__);
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SCRIPT_CONTROL {
     bit_fields: ::DWORD,
@@ -27,7 +23,6 @@ BITFIELD!(SCRIPT_CONTROL bit_fields: ::DWORD [
     fMergeNeutralItems set_fMergeNeutralItems[24..25],
     fReserved set_fReserved[25..32],
 ]);
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SCRIPT_STATE {
     bit_fields: ::WORD,
@@ -45,7 +40,6 @@ BITFIELD!(SCRIPT_STATE bit_fields: ::WORD [
     fReserved set_fReserved[13..14],
     fEngineReserved set_fEngineReserved[14..16],
 ]);
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SCRIPT_ANALYSIS {
     bit_fields: ::WORD,
@@ -60,13 +54,11 @@ BITFIELD!(SCRIPT_ANALYSIS bit_fields: ::WORD [
     fLogicalOrder set_fLogicalOrder[14..15],
     fNoGlyphIndex set_fNoGlyphIndex[15..16],
 ]);
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SCRIPT_ITEM {
     pub iCharPos: ::c_int,
     pub a: SCRIPT_ANALYSIS,
 }
-
 //490
 pub const SCRIPT_JUSTIFY_NONE: ::WORD = 0;
 pub const SCRIPT_JUSTIFY_ARABIC_BLANK: ::WORD = 1;
@@ -84,8 +76,6 @@ pub const SCRIPT_JUSTIFY_ARABIC_BA: ::WORD = 12;
 pub const SCRIPT_JUSTIFY_ARABIC_BARA: ::WORD = 13;
 pub const SCRIPT_JUSTIFY_ARABIC_SEEN: ::WORD = 14;
 pub const SCRIPT_JUSTIFY_ARABIC_SEEN_M: ::WORD = 15;
-
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SCRIPT_VISATTR {
     bit_fields: ::WORD,
@@ -98,17 +88,14 @@ BITFIELD!(SCRIPT_VISATTR bit_fields: ::WORD [
     fReserved set_fReserved[7..8],
     fShapeReserved set_fShapeReserved[8..16],
 ]);
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GOFFSET {
     pub du: ::LONG,
     pub dv: ::LONG,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SCRIPT_LOGATTR {
     bit_fields: ::BYTE,
-
 }
 BITFIELD!(SCRIPT_LOGATTR bit_fields: ::BYTE [
     fSoftBreak set_fSoftBreak[0..1],
@@ -118,9 +105,7 @@ BITFIELD!(SCRIPT_LOGATTR bit_fields: ::BYTE [
     fInvalid set_fInvalid[4..5],
     fReserved set_fReserved[5..8],
 ]);
-
 pub const SGCM_RTL: ::DWORD = 0x00000001;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SCRIPT_PROPERTIES {
     bit_fields1: ::DWORD,
@@ -145,7 +130,6 @@ BITFIELD!(SCRIPT_PROPERTIES bit_fields2: ::DWORD [
     fClusterSizeVaries set_fClusterSizeVaries[3..4],
     fRejectInvalid set_fRejectInvalid[4..5],
 ]);
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SCRIPT_FONTPROPERTIES {
     pub cBytes: ::c_int,
@@ -155,7 +139,6 @@ pub struct SCRIPT_FONTPROPERTIES {
     pub wgKashida: ::WORD,
     pub iKashidaWidth: ::c_int,
 }
-
 //1440
 pub const SSA_PASSWORD: ::DWORD = 0x00000001;
 pub const SSA_TAB: ::DWORD = 0x00000002;
@@ -172,14 +155,12 @@ pub const SSA_METAFILE: ::DWORD = 0x00000800;
 pub const SSA_LINK: ::DWORD = 0x00001000;
 pub const SSA_HIDEHOTKEY: ::DWORD = 0x00002000;
 pub const SSA_HOTKEYONLY: ::DWORD = 0x00002400;
-
 pub const SSA_FULLMEASURE: ::DWORD = 0x04000000;
 pub const SSA_LPKANSIFALLBACK: ::DWORD = 0x08000000;
 pub const SSA_PIDX: ::DWORD = 0x10000000;
 pub const SSA_LAYOUTRTL: ::DWORD = 0x20000000;
 pub const SSA_DONTGLYPH: ::DWORD = 0x40000000;
 pub const SSA_NOKASHIDA: ::DWORD = 0x80000000;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SCRIPT_TABDEF {
     pub cTabStops: ::c_int,
@@ -187,13 +168,10 @@ pub struct SCRIPT_TABDEF {
     pub pTabStops: *mut ::c_int,
     pub iTabOrigin: ::c_int,
 }
-
 DECLARE_HANDLE!(SCRIPT_STRING_ANALYSIS, SCRIPT_STRING_ANALYSIS__);
-
 pub const SIC_COMPLEX: ::DWORD = 1;
 pub const SIC_ASCIIDIGIT: ::DWORD = 2;
 pub const SIC_NEUTRAL: ::DWORD = 4;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SCRIPT_DIGITSUBSTITUTE {
     bit_fields1: ::DWORD,
@@ -207,28 +185,22 @@ BITFIELD!(SCRIPT_DIGITSUBSTITUTE bit_fields1: ::DWORD [
 BITFIELD!(SCRIPT_DIGITSUBSTITUTE bit_fields2: ::DWORD [
     DigitSubstitute set_DigitSubstitute[0..8],
 ]);
-
 pub const SCRIPT_DIGITSUBSTITUTE_CONTEXT: ::BYTE = 0;
 pub const SCRIPT_DIGITSUBSTITUTE_NONE: ::BYTE = 1;
 pub const SCRIPT_DIGITSUBSTITUTE_NATIONAL: ::BYTE = 2;
 pub const SCRIPT_DIGITSUBSTITUTE_TRADITIONAL: ::BYTE = 3;
-
 pub type OPENTYPE_TAG = ::ULONG;
-
 pub const SCRIPT_TAG_UNKNOWN: OPENTYPE_TAG = 0x00000000;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct OPENTYPE_FEATURE_RECORD {
     pub tagFeature: OPENTYPE_TAG,
     pub lParameter: ::LONG,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TEXTRANGE_PROPERTIES {
     pub potfRecords: *mut OPENTYPE_FEATURE_RECORD,
     pub cotfRecords: ::c_int,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SCRIPT_CHARPROP {
     bit_fields: ::WORD,
@@ -237,7 +209,6 @@ BITFIELD!(SCRIPT_CHARPROP bit_fields: ::WORD [
     fCanGlyphAlone set_fCanGlyphAlone[0..1],
     reserved set_reserved[1..16],
 ]);
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SCRIPT_GLYPHPROP {
     pub sva: SCRIPT_VISATTR,

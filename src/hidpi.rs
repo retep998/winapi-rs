@@ -1,45 +1,37 @@
 // Copyright © 2015, Alex Daniel Jones
 // Licensed under the MIT License <LICENSE.md>
 // Taken from hidpi.h
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub enum HIDP_REPORT_TYPE {
   HidP_Input,
   HidP_Output,
   HidP_Feature,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct USAGE_AND_PAGE {
     pub Usage: ::USAGE,
     pub UsagePage: ::USAGE,
 }
 pub type PUSAGE_AND_PAGE = *mut USAGE_AND_PAGE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HIDP_BUTTON_CAPS {
     pub UsagePage: ::USAGE,
     pub ReportID: ::UCHAR,
     pub IsAlias: ::BOOLEAN,
-
     pub BitField: ::USHORT,
     pub LinkCollection: ::USHORT,
-
     pub LinkUsage: ::USAGE,
     pub LinkUsagePage: ::USAGE,
-
     pub IsRange: ::BOOLEAN,
     pub IsStringRange: ::BOOLEAN,
     pub IsDesignatorRange: ::BOOLEAN,
     pub IsAbsolute: ::BOOLEAN,
-
     pub Reserved: [::ULONG; 10],
     pub S_un: [u8; 16],
 }
 UNION!(HIDP_BUTTON_CAPS, S_un, Range, Range_mut, HIDP_RANGE_STRUCT);
 UNION!(HIDP_BUTTON_CAPS, S_un, NotRange, NotRange_mut, HIDP_NOTRANGE_STRUCT);
 pub type PHIDP_BUTTON_CAPS = *mut HIDP_BUTTON_CAPS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HIDP_RANGE_STRUCT {
     pub UsageMin: ::USAGE,
@@ -51,7 +43,6 @@ pub struct HIDP_RANGE_STRUCT {
     pub DataIndexMin: ::USHORT,
     pub DataIndexMax: ::USHORT,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HIDP_NOTRANGE_STRUCT {
     pub Usage: ::USAGE,
@@ -63,45 +54,35 @@ pub struct HIDP_NOTRANGE_STRUCT {
     pub DataIndex: ::USHORT,
     pub Reserved4: ::USHORT,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HIDP_VALUE_CAPS {
     pub UsagePage: ::USAGE,
     pub ReportID: ::UCHAR,
     pub IsAlias: ::BOOLEAN,
-
     pub BitField: ::USHORT,
     pub LinkCollection: ::USHORT,
-
     pub LinkUsage: ::USAGE,
     pub LinkUsagePage: ::USAGE,
-
     pub IsRange: ::BOOLEAN,
     pub IsStringRange: ::BOOLEAN,
     pub IsDesignatorRange: ::BOOLEAN,
     pub IsAbsolute: ::BOOLEAN,
-
     pub HasNull: ::BOOLEAN,
     pub Reserved: ::UCHAR,
     pub BitSize: ::USHORT,
-
     pub ReportCount: ::USHORT,
     pub Reserved2: [::USHORT; 5],
-
     pub UnitsExp: ::ULONG,
     pub Units: ::ULONG,
-
     pub LogicalMin: ::LONG,
     pub LogicalMax: ::LONG,
     pub PhysicalMin: ::LONG,
     pub PhysicalMax: ::LONG,
-
     pub S_un: [u8; 16],
 }
 UNION!(HIDP_VALUE_CAPS, S_un, Range, Range_mut, HIDP_RANGE_STRUCT);
 UNION!(HIDP_VALUE_CAPS, S_un, NotRange, NotRange_mut, HIDP_NOTRANGE_STRUCT);
 pub type PHIDP_VALUE_CAPS = *mut HIDP_VALUE_CAPS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HIDP_LINK_COLLECTION_NODE {
     pub LinkUsage: ::USAGE,
@@ -119,8 +100,6 @@ BITFIELD!(HIDP_LINK_COLLECTION_NODE bit_fields: ::ULONG [
     Reserved set_Reserved[9..32],
 ]);
 pub type PHIDP_LINK_COLLECTION_NODE = *mut HIDP_LINK_COLLECTION_NODE;
-
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HIDP_CAPS {
     pub Usage: ::USAGE,
@@ -129,23 +108,18 @@ pub struct HIDP_CAPS {
     pub OutputReportByteLength: ::USHORT,
     pub FeatureReportByteLength: ::USHORT,
     pub Reserved: [::USHORT; 17],
-
     pub NumberLinkCollectionNodes: ::USHORT,
-
     pub NumberInputButtonCaps: ::USHORT,
     pub NumberInputValueCaps: ::USHORT,
     pub NumberInputDataIndices: ::USHORT,
-
     pub NumberOutputButtonCaps: ::USHORT,
     pub NumberOutputValueCaps: ::USHORT,
     pub NumberOutputDataIndices: ::USHORT,
-
     pub NumberFeatureButtonCaps: ::USHORT,
     pub NumberFeatureValueCaps: ::USHORT,
     pub NumberFeatureDataIndices: ::USHORT,
 }
 pub type PHIDP_CAPS = *mut HIDP_CAPS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HIDP_DATA {
   pub DataIndex: ::USHORT,
@@ -155,7 +129,6 @@ pub struct HIDP_DATA {
 UNION!(HIDP_DATA, S_un, RawValue, RawValue_mut, ::ULONG);
 UNION!(HIDP_DATA, S_un, On, On_mut, ::BOOLEAN);
 pub type PHIDP_DATA = *mut HIDP_DATA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HIDP_UNKNOWN_TOKEN {
     pub Token: ::UCHAR,
@@ -163,7 +136,6 @@ pub struct HIDP_UNKNOWN_TOKEN {
     pub BitField: ::ULONG,
 }
 pub type PHIDP_UNKNOWN_TOKEN = *mut HIDP_UNKNOWN_TOKEN;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HIDP_EXTENDED_ATTRIBUTES {
     pub NumGlobalUnknowns: ::UCHAR,
@@ -172,7 +144,6 @@ pub struct HIDP_EXTENDED_ATTRIBUTES {
     pub Data: [::ULONG; 1],
 }
 pub type PHIDP_EXTENDED_ATTRIBUTES = *mut HIDP_EXTENDED_ATTRIBUTES;
-
 pub const HIDP_STATUS_SUCCESS: ::NTSTATUS = 0x00110000;
 pub const HIDP_STATUS_NULL: ::NTSTATUS = 0x08110001;
 pub const HIDP_STATUS_INVALID_PREPARSED_DATA: ::NTSTATUS = 0x0C110001;

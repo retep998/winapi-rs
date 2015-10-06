@@ -47,21 +47,18 @@ pub const AUDCLNT_E_RAW_MODE_UNSUPPORTED: ::HRESULT = AUDCLNT_ERR!(0x027);
 pub const AUDCLNT_S_BUFFER_EMPTY: ::SCODE = AUDCLNT_SUCCESS!(0x001);
 pub const AUDCLNT_S_THREAD_ALREADY_REGISTERED: ::SCODE = AUDCLNT_SUCCESS!(0x002);
 pub const AUDCLNT_S_POSITION_STALLED: ::SCODE = AUDCLNT_SUCCESS!(0x003);
-
 pub const IID_IAudioClient: ::IID = ::GUID {
     Data1: 0x1CB9AD4C,
     Data2: 0xDBFA,
     Data3: 0x4c32,
     Data4: [0xB1, 0x78, 0xC2, 0xF5, 0x68, 0xA7, 0x03, 0xB2],
 };
-
 pub const IID_IAudioRenderClient: ::IID = ::GUID {
     Data1: 0xF294ACFC,
     Data2: 0x3146,
     Data3: 0x4483,
     Data4: [0xA7, 0xBF, 0xAD, 0xDC, 0xA7, 0xC2, 0x60, 0xE2],
 };
-
 RIDL!(
 interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
     fn Initialize(

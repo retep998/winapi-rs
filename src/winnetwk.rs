@@ -1,7 +1,6 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! Standard WINNET Header File for WIN32
-
 pub const WNNC_NET_MSNET: ::DWORD = 0x00010000;
 pub const WNNC_NET_SMB: ::DWORD = 0x00020000;
 pub const WNNC_NET_NETWARE: ::DWORD = 0x00030000;
@@ -70,24 +69,18 @@ pub const WNNC_NET_MS_NFS: ::DWORD = 0x00420000;
 pub const WNNC_NET_GOOGLE: ::DWORD = 0x00430000;
 pub const WNNC_NET_NDFS: ::DWORD = 0x00440000;
 pub const WNNC_NET_DOCUSHARE: ::DWORD = 0x00450000;
-
 pub const WNNC_CRED_MANAGER: ::DWORD = 0xFFFF0000;
-
 pub const WNNC_NET_LANMAN: ::DWORD = WNNC_NET_SMB;
-
-
 pub const RESOURCE_CONNECTED: ::DWORD = 0x00000001;
 pub const RESOURCE_GLOBALNET: ::DWORD = 0x00000002;
 pub const RESOURCE_REMEMBERED: ::DWORD = 0x00000003;
 pub const RESOURCE_RECENT: ::DWORD = 0x00000004;
 pub const RESOURCE_CONTEXT: ::DWORD = 0x00000005;
-
 pub const RESOURCETYPE_ANY: ::DWORD = 0x00000000;
 pub const RESOURCETYPE_DISK: ::DWORD = 0x00000001;
 pub const RESOURCETYPE_PRINT: ::DWORD = 0x00000002;
 pub const RESOURCETYPE_RESERVED: ::DWORD = 0x00000008;
 pub const RESOURCETYPE_UNKNOWN: ::DWORD = 0xFFFFFFFF;
-
 pub const RESOURCEUSAGE_CONNECTABLE: ::DWORD = 0x00000001;
 pub const RESOURCEUSAGE_CONTAINER: ::DWORD = 0x00000002;
 pub const RESOURCEUSAGE_NOLOCALDEVICE: ::DWORD = 0x00000004;
@@ -96,7 +89,6 @@ pub const RESOURCEUSAGE_ATTACHED: ::DWORD = 0x00000010;
 pub const RESOURCEUSAGE_ALL: ::DWORD = RESOURCEUSAGE_CONNECTABLE | RESOURCEUSAGE_CONTAINER
     | RESOURCEUSAGE_ATTACHED;
 pub const RESOURCEUSAGE_RESERVED: ::DWORD = 0x80000000;
-
 pub const RESOURCEDISPLAYTYPE_GENERIC: ::DWORD = 0x00000000;
 pub const RESOURCEDISPLAYTYPE_DOMAIN: ::DWORD = 0x00000001;
 pub const RESOURCEDISPLAYTYPE_SERVER: ::DWORD = 0x00000002;
@@ -109,7 +101,6 @@ pub const RESOURCEDISPLAYTYPE_SHAREADMIN: ::DWORD = 0x00000008;
 pub const RESOURCEDISPLAYTYPE_DIRECTORY: ::DWORD = 0x00000009;
 pub const RESOURCEDISPLAYTYPE_TREE: ::DWORD = 0x0000000A;
 pub const RESOURCEDISPLAYTYPE_NDSCONTAINER: ::DWORD = 0x0000000B;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NETRESOURCEA {
     pub dwScope: ::DWORD,
@@ -122,7 +113,6 @@ pub struct NETRESOURCEA {
     pub lpProvider: ::LPSTR,
 }
 pub type LPNETRESOURCEA = *mut NETRESOURCEA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NETRESOURCEW {
     pub dwScope: ::DWORD,
@@ -135,9 +125,7 @@ pub struct NETRESOURCEW {
     pub lpProvider: ::LPWSTR,
 }
 pub type LPNETRESOURCEW = *mut NETRESOURCEW;
-
 pub const NETPROPERTY_PERSISTENT: ::DWORD = 1;
-
 pub const CONNECT_UPDATE_PROFILE: ::DWORD = 0x00000001;
 pub const CONNECT_UPDATE_RECENT: ::DWORD = 0x00000002;
 pub const CONNECT_TEMPORARY: ::DWORD = 0x00000004;
@@ -153,7 +141,6 @@ pub const CONNECT_RESERVED: ::DWORD = 0xFF000000;
 pub const CONNECT_COMMANDLINE: ::DWORD = 0x00000800;
 pub const CONNECT_CMD_SAVECRED: ::DWORD = 0x00001000;
 pub const CONNECT_CRED_RESET: ::DWORD = 0x00002000;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CONNECTDLGSTRUCTA {
     pub cbStructure: ::DWORD,
@@ -163,7 +150,6 @@ pub struct CONNECTDLGSTRUCTA {
     pub dwDevNum: ::DWORD,
 }
 pub type LPCONNECTDLGSTRUCTA = *mut CONNECTDLGSTRUCTA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CONNECTDLGSTRUCTW {
     pub cbStructure: ::DWORD,
@@ -173,15 +159,12 @@ pub struct CONNECTDLGSTRUCTW {
     pub dwDevNum: ::DWORD,
 }
 pub type LPCONNECTDLGSTRUCTW = *mut CONNECTDLGSTRUCTW;
-
 pub const CONNDLG_RO_PATH: ::DWORD = 0x00000001;
 pub const CONNDLG_CONN_POINT: ::DWORD = 0x00000002;
 pub const CONNDLG_USE_MRU: ::DWORD = 0x00000004;
 pub const CONNDLG_HIDE_BOX: ::DWORD = 0x00000008;
-
 pub const CONNDLG_PERSIST: ::DWORD = 0x00000010;
 pub const CONNDLG_NOT_PERSIST: ::DWORD = 0x00000020;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DISCDLGSTRUCTA {
     pub cbStructure: ::DWORD,
@@ -191,7 +174,6 @@ pub struct DISCDLGSTRUCTA {
     pub dwFlags: ::DWORD,
 }
 pub type LPDISCDLGSTRUCTA = *mut DISCDLGSTRUCTA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DISCDLGSTRUCTW {
     pub cbStructure: ::DWORD,
@@ -201,25 +183,20 @@ pub struct DISCDLGSTRUCTW {
     pub dwFlags: ::DWORD,
 }
 pub type LPDISCDLGSTRUCTW = *mut DISCDLGSTRUCTW;
-
 pub const DISC_UPDATE_PROFILE: ::DWORD = 0x00000001;
 pub const DISC_NO_FORCE: ::DWORD = 0x00000040;
-
 pub const UNIVERSAL_NAME_INFO_LEVEL: ::DWORD = 0x00000001;
 pub const REMOTE_NAME_INFO_LEVEL: ::DWORD = 0x00000002;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct UNIVERSAL_NAME_INFOA {
     pub lpUniversalName: ::LPSTR,
 }
 pub type LPUNIVERSAL_NAME_INFOA = *mut UNIVERSAL_NAME_INFOA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct UNIVERSAL_NAME_INFOW {
     pub lpUniversalName: ::LPWSTR,
 }
 pub type LPUNIVERSAL_NAME_INFOW = *mut UNIVERSAL_NAME_INFOW;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct REMOTE_NAME_INFOA {
     pub lpUniversalName: ::LPSTR,
@@ -227,7 +204,6 @@ pub struct REMOTE_NAME_INFOA {
     pub lpRemainingPath: ::LPSTR,
 }
 pub type LPREMOTE_NAME_INFOA = *mut REMOTE_NAME_INFOA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct REMOTE_NAME_INFOW {
     pub lpUniversalName: ::LPWSTR,
@@ -235,12 +211,10 @@ pub struct REMOTE_NAME_INFOW {
     pub lpRemainingPath: ::LPWSTR,
 }
 pub type LPREMOTE_NAME_INFOW = *mut REMOTE_NAME_INFOW;
-
 pub const WNFMT_MULTILINE: ::DWORD = 0x01;
 pub const WNFMT_ABBREVIATED: ::DWORD = 0x02;
 pub const WNFMT_INENUM: ::DWORD = 0x10;
 pub const WNFMT_CONNECTION: ::DWORD = 0x20;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NETINFOSTRUCT {
     pub cbStructure: ::DWORD,
@@ -253,11 +227,9 @@ pub struct NETINFOSTRUCT {
     pub dwDrives: ::DWORD,
 }
 pub type LPNETINFOSTRUCT = *mut NETINFOSTRUCT;
-
 pub const NETINFO_DLL16: ::DWORD = 0x00000001;
 pub const NETINFO_DISKRED: ::DWORD = 0x00000004;
 pub const NETINFO_PRINTERRED: ::DWORD = 0x00000008;
-
 pub const WN_SUCCESS: ::DWORD = ::NO_ERROR;
 pub const WN_NO_ERROR: ::DWORD = ::NO_ERROR;
 pub const WN_NOT_SUPPORTED: ::DWORD = ::ERROR_NOT_SUPPORTED;
@@ -279,7 +251,6 @@ pub const WN_BAD_LEVEL: ::DWORD = ::ERROR_INVALID_LEVEL;
 pub const WN_BAD_HANDLE: ::DWORD = ::ERROR_INVALID_HANDLE;
 pub const WN_NOT_INITIALIZING: ::DWORD = ::ERROR_ALREADY_INITIALIZED;
 pub const WN_NO_MORE_DEVICES: ::DWORD = ::ERROR_NO_MORE_DEVICES;
-
 pub const WN_NOT_CONNECTED: ::DWORD = ::ERROR_NOT_CONNECTED;
 pub const WN_OPEN_FILES: ::DWORD = ::ERROR_OPEN_FILES;
 pub const WN_DEVICE_IN_USE: ::DWORD = ::ERROR_DEVICE_IN_USE;
@@ -296,14 +267,11 @@ pub const WN_BAD_DEV_TYPE: ::DWORD = ::ERROR_BAD_DEV_TYPE;
 pub const WN_DEVICE_ALREADY_REMEMBERED: ::DWORD = ::ERROR_DEVICE_ALREADY_REMEMBERED;
 pub const WN_CONNECTED_OTHER_PASSWORD: ::DWORD = ::ERROR_CONNECTED_OTHER_PASSWORD;
 pub const WN_CONNECTED_OTHER_PASSWORD_DEFAULT: ::DWORD = ::ERROR_CONNECTED_OTHER_PASSWORD_DEFAULT;
-
 pub const WN_NO_MORE_ENTRIES: ::DWORD = ::ERROR_NO_MORE_ITEMS;
 pub const WN_NOT_CONTAINER: ::DWORD = ::ERROR_NOT_CONTAINER;
-
 pub const WN_NOT_AUTHENTICATED: ::DWORD = ::ERROR_NOT_AUTHENTICATED;
 pub const WN_NOT_LOGGED_ON: ::DWORD = ::ERROR_NOT_LOGGED_ON;
 pub const WN_NOT_VALIDATED: ::DWORD = ::ERROR_NO_LOGON_SERVERS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct NETCONNECTINFOSTRUCT {
     pub cbStructure: ::DWORD,
@@ -313,7 +281,6 @@ pub struct NETCONNECTINFOSTRUCT {
     pub dwOptDataSize: ::DWORD,
 }
 pub type LPNETCONNECTINFOSTRUCT = *mut NETCONNECTINFOSTRUCT;
-
 pub const WNCON_FORNETCARD: ::DWORD = 0x00000001;
 pub const WNCON_NOTROUTED: ::DWORD = 0x00000002;
 pub const WNCON_SLOWLINK: ::DWORD = 0x00000004;

@@ -15,7 +15,6 @@ pub const DISPLAY_DEVICE_TS_COMPATIBLE: ::DWORD = 0x00200000;
 pub const DISPLAY_DEVICE_UNSAFE_MODES_ON: ::DWORD = 0x00080000;
 pub const DISPLAY_DEVICE_ACTIVE: ::DWORD = 0x00000001;
 pub const DISPLAY_DEVICE_ATTACHED: ::DWORD = 0x00000002;
-
 pub const DM_ORIENTATION: ::DWORD = 0x00000001;
 pub const DM_PAPERSIZE: ::DWORD = 0x00000002;
 pub const DM_PAPERLENGTH: ::DWORD = 0x00000004;
@@ -46,7 +45,6 @@ pub const DM_DITHERTYPE: ::DWORD = 0x04000000;
 pub const DM_PANNINGWIDTH: ::DWORD = 0x08000000;
 pub const DM_PANNINGHEIGHT: ::DWORD = 0x10000000;
 pub const DM_DISPLAYFIXEDOUTPUT: ::DWORD = 0x20000000;
-
 pub const PFD_TYPE_RGBA: ::BYTE = 0;
 pub const PFD_TYPE_COLORINDEX: ::BYTE = 1;
 pub const PFD_MAIN_PLANE: ::BYTE = 0;
@@ -71,7 +69,6 @@ pub const PFD_SUPPORT_COMPOSITION: ::DWORD = 0x00008000;
 pub const PFD_DEPTH_DONTCARE: ::DWORD = 0x20000000;
 pub const PFD_DOUBLEBUFFER_DONTCARE: ::DWORD = 0x40000000;
 pub const PFD_STEREO_DONTCARE: ::DWORD = 0x80000000;
-
 pub const CCHFORMNAME: usize = 32;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DEVMODEA {
@@ -361,7 +358,6 @@ pub type LPBITMAPINFO = *mut BITMAPINFO;
 pub type PBITMAPINFO = *mut BITMAPINFO;
 //1438
 pub const LF_FACESIZE: usize = 32;
-
 #[repr(C)] #[derive(Copy, Clone)]
 pub struct LOGFONTA {
     pub lfHeight: ::LONG,
@@ -380,7 +376,6 @@ pub struct LOGFONTA {
     pub lfFaceName: [::CHAR; LF_FACESIZE],
 }
 pub type LPLOGFONTA = *mut LOGFONTA;
-
 #[repr(C)] #[derive(Copy, Clone)]
 pub struct LOGFONTW {
     pub lfHeight: ::LONG,
@@ -399,7 +394,6 @@ pub struct LOGFONTW {
     pub lfFaceName: [::WCHAR; LF_FACESIZE],
 }
 pub type LPLOGFONTW = *mut LOGFONTW;
-
 //1595
 #[inline]
 pub fn RGB (r: ::BYTE, g: ::BYTE, b: ::BYTE) -> ::COLORREF {
@@ -450,7 +444,6 @@ pub const COLORMGMTCAPS: ::c_int = 121;
 pub const DIB_RGB_COLORS: ::UINT = 0;
 pub const DIB_PAL_COLORS: ::UINT = 1;
 pub const CBM_INIT: ::DWORD = 4;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct RGNDATAHEADER {
     pub dwSize: ::DWORD,
@@ -494,10 +487,8 @@ pub struct ABCFLOAT {
 pub type PABCFLOAT = *mut ABCFLOAT;
 pub type NPABCFLOAT = *mut ABCFLOAT;
 pub type LPABCFLOAT = *mut ABCFLOAT;
-
 //3581
 pub type LINEDDAPROC = Option<unsafe extern "system" fn(::c_int, ::c_int, ::LPARAM)>;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct XFORM {
     pub eM11: ::FLOAT,
@@ -509,7 +500,6 @@ pub struct XFORM {
 }
 pub type PXFORM = *mut XFORM;
 pub type LPXFORM = *mut XFORM;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LOGBRUSH {
     pub lbStyle: ::UINT,
@@ -517,7 +507,6 @@ pub struct LOGBRUSH {
     pub lbHatch: ::ULONG_PTR,
 }
 pub type PLOGBRUSH = *mut LOGBRUSH;
-
 #[repr(C)] #[derive(Copy)]
 pub struct LOGCOLORSPACEA {
     pub lcsSignature: ::DWORD,
@@ -533,7 +522,6 @@ pub struct LOGCOLORSPACEA {
 }
 impl Clone for LOGCOLORSPACEA { fn clone(&self) -> LOGCOLORSPACEA { *self } }
 pub type LPLOGCOLORSPACEA = *mut LOGCOLORSPACEA;
-
 #[repr(C)] #[derive(Copy)]
 pub struct LOGCOLORSPACEW {
     pub lcsSignature: ::DWORD,
@@ -549,9 +537,7 @@ pub struct LOGCOLORSPACEW {
 }
 impl Clone for LOGCOLORSPACEW { fn clone(&self) -> LOGCOLORSPACEW { *self } }
 pub type LPLOGCOLORSPACEW = *mut LOGCOLORSPACEW;
-
 pub const LF_FULLFACESIZE: usize = 64;
-
 #[repr(C)] #[derive(Copy)]
 pub struct ENUMLOGFONTEXA {
     pub elfLogFont: LOGFONTA,
@@ -561,7 +547,6 @@ pub struct ENUMLOGFONTEXA {
 }
 impl Clone for ENUMLOGFONTEXA { fn clone(&self) -> ENUMLOGFONTEXA { *self } }
 pub type LPENUMLOGFONTEXA = *mut ENUMLOGFONTEXA;
-
 #[repr(C)] #[derive(Copy)]
 pub struct ENUMLOGFONTEXW {
     pub elfLogFont: LOGFONTW,
@@ -571,9 +556,7 @@ pub struct ENUMLOGFONTEXW {
 }
 impl Clone for ENUMLOGFONTEXW { fn clone(&self) -> ENUMLOGFONTEXW { *self } }
 pub type LPENUMLOGFONTEXW = *mut ENUMLOGFONTEXW;
-
 pub const MM_MAX_NUMAXES: usize = 16;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DESIGNVECTOR {
     pub dvReserved: ::DWORD,
@@ -582,7 +565,6 @@ pub struct DESIGNVECTOR {
 }
 pub type PDESIGNVECTOR = *mut DESIGNVECTOR;
 pub type LPDESIGNVECTOR = *mut DESIGNVECTOR;
-
 #[repr(C)] #[derive(Clone, Copy)]
 pub struct ENUMLOGFONTEXDVA {
     pub elfEnumLogfontEx: ENUMLOGFONTEXA,
@@ -590,7 +572,6 @@ pub struct ENUMLOGFONTEXDVA {
 }
 pub type PENUMLOGFONTEXDVA = *mut ENUMLOGFONTEXDVA;
 pub type LPENUMLOGFONTEXDVA = *mut ENUMLOGFONTEXDVA;
-
 #[repr(C)] #[derive(Clone, Copy)]
 pub struct ENUMLOGFONTEXDVW {
     pub elfEnumLogfontEx: ENUMLOGFONTEXW,
@@ -598,7 +579,6 @@ pub struct ENUMLOGFONTEXDVW {
 }
 pub type PENUMLOGFONTEXDVW = *mut ENUMLOGFONTEXDVW;
 pub type LPENUMLOGFONTEXDVW = *mut ENUMLOGFONTEXDVW;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LOGPALETTE {
     pub palVersion: ::WORD,
@@ -608,7 +588,6 @@ pub struct LOGPALETTE {
 pub type PLOGPALETTE = *mut LOGPALETTE;
 pub type NPLOGPALETTE = *mut LOGPALETTE;
 pub type LPLOGPALETTE = *mut LOGPALETTE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LOGPEN {
     pub lopnStyle: ::UINT,
@@ -653,21 +632,16 @@ pub struct TEXTMETRICW {
     pub tmPitchAndFamily: ::BYTE,
     pub tmCharSet: ::BYTE,
 }
-
 pub const TA_NOUPDATECP: ::UINT = 0;
 pub const TA_UPDATECP: ::UINT = 1;
-
 pub const TA_LEFT: ::UINT = 0;
 pub const TA_RIGHT: ::UINT = 2;
 pub const TA_CENTER: ::UINT = 6;
-
 pub const TA_TOP: ::UINT = 0;
 pub const TA_BOTTOM: ::UINT = 8;
 pub const TA_BASELINE: ::UINT = 24;
-
 pub const TA_RTLREADING: ::UINT = 256;
 pub const TA_MASK: ::UINT = TA_BASELINE + TA_CENTER + TA_UPDATECP + TA_RTLREADING;
-
 pub const WHITE_BRUSH: ::c_int = 0;
 pub const LTGRAY_BRUSH: ::c_int = 1;
 pub const GRAY_BRUSH: ::c_int = 2;
@@ -686,7 +660,6 @@ pub const DEVICE_DEFAULT_FONT: ::c_int = 14;
 pub const DEFAULT_PALETTE: ::c_int = 15;
 pub const SYSTEM_FIXED_FONT: ::c_int = 16;
 pub const DEFAULT_GUI_FONT: ::c_int = 17;
-
 pub const PS_SOLID: ::c_int = 0;
 pub const PS_DASH: ::c_int = 1;
 pub const PS_DOT: ::c_int = 2;
@@ -696,11 +669,9 @@ pub const PS_NULL: ::c_int = 5;
 pub const PS_INSIDEFRAME: ::c_int = 6;
 pub const PS_USERSTYLE: ::c_int = 7;
 pub const PS_ALTERNATE: ::c_int = 8;
-
 pub const TRANSPARENT: ::c_int = 1;
 pub const OPAQUE: ::c_int = 2;
 pub const BKMODE_LAST: ::c_int = 2;
-
 pub const MM_TEXT: ::c_int = 1;
 pub const MM_LOMETRIC: ::c_int = 2;
 pub const MM_HIMETRIC: ::c_int = 3;
@@ -709,11 +680,9 @@ pub const MM_HIENGLISH: ::c_int = 5;
 pub const MM_TWIPS: ::c_int = 6;
 pub const MM_ISOTROPIC: ::c_int = 7;
 pub const MM_ANISOTROPIC: ::c_int = 8;
-
 pub const ALTERNATE: ::c_int = 1;
 pub const WINDING: ::c_int = 2;
 pub const POLYFILL_LAST: ::c_int = 2;
-
 pub const OUT_DEFAULT_PRECIS: ::DWORD = 0;
 pub const OUT_STRING_PRECIS: ::DWORD = 1;
 pub const OUT_CHARACTER_PRECIS: ::DWORD = 2;
@@ -725,7 +694,6 @@ pub const OUT_TT_ONLY_PRECIS: ::DWORD = 7;
 pub const OUT_OUTLINE_PRECIS: ::DWORD = 8;
 pub const OUT_SCREEN_OUTLINE_PRECIS: ::DWORD = 9;
 pub const OUT_PS_ONLY_PRECIS: ::DWORD = 10;
-
 pub const CLIP_DEFAULT_PRECIS: ::DWORD = 0;
 pub const CLIP_CHARACTER_PRECIS: ::DWORD = 1;
 pub const CLIP_STROKE_PRECIS: ::DWORD = 2;
@@ -734,21 +702,17 @@ pub const CLIP_LH_ANGLES: ::DWORD = 1 << 4;
 pub const CLIP_TT_ALWAYS: ::DWORD = 2 << 4;
 pub const CLIP_DFA_DISABLE: ::DWORD = 4 << 4;
 pub const CLIP_EMBEDDED: ::DWORD = 8 << 4;
-
 pub const DEFAULT_QUALITY: ::DWORD = 0;
 pub const DRAFT_QUALITY: ::DWORD = 1;
 pub const PROOF_QUALITY: ::DWORD = 2;
 pub const NONANTIALIASED_QUALITY: ::DWORD = 3;
 pub const ANTIALIASED_QUALITY: ::DWORD = 4;
-
 pub const CLEARTYPE_QUALITY: ::DWORD = 5;
 pub const CLEARTYPE_NATURAL_QUALITY: ::DWORD = 6;
-
 pub const DEFAULT_PITCH: ::DWORD = 0;
 pub const FIXED_PITCH: ::DWORD = 1;
 pub const VARIABLE_PITCH: ::DWORD = 2;
 pub const MONO_FONT: ::DWORD = 8;
-
 pub const ANSI_CHARSET: ::DWORD = 0;
 pub const DEFAULT_CHARSET: ::DWORD = 1;
 pub const SYMBOL_CHARSET: ::DWORD = 2;
@@ -767,10 +731,8 @@ pub const VIETNAMESE_CHARSET: ::DWORD = 163;
 pub const THAI_CHARSET: ::DWORD = 222;
 pub const EASTEUROPE_CHARSET: ::DWORD = 238;
 pub const RUSSIAN_CHARSET: ::DWORD = 204;
-
 pub const MAC_CHARSET: ::DWORD = 77;
 pub const BALTIC_CHARSET: ::DWORD = 186;
-
 pub const FS_LATIN1: ::DWORD = 0x00000001;
 pub const FS_LATIN2: ::DWORD = 0x00000002;
 pub const FS_CYRILLIC: ::DWORD = 0x00000004;
@@ -787,7 +749,6 @@ pub const FS_WANSUNG: ::DWORD = 0x00080000;
 pub const FS_CHINESETRAD: ::DWORD = 0x00100000;
 pub const FS_JOHAB: ::DWORD = 0x00200000;
 pub const FS_SYMBOL: ::DWORD = 0x80000000;
-
 pub const FW_DONTCARE: ::c_int = 0;
 pub const FW_THIN: ::c_int = 100;
 pub const FW_EXTRALIGHT: ::c_int = 200;
@@ -798,7 +759,6 @@ pub const FW_SEMIBOLD: ::c_int = 600;
 pub const FW_BOLD: ::c_int = 700;
 pub const FW_EXTRABOLD: ::c_int = 800;
 pub const FW_HEAVY: ::c_int = 900;
-
 pub const FW_ULTRALIGHT: ::c_int = FW_EXTRALIGHT;
 pub const FW_REGULAR: ::c_int = FW_NORMAL;
 pub const FW_DEMIBOLD: ::c_int = FW_SEMIBOLD;

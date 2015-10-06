@@ -1602,7 +1602,7 @@ pub struct CERT_STRONG_SIGN_PARA {
     pub pvInfo: *mut ::c_void,
 }
 UNION!(
-    CERT_STRONG_SIGN_PARA, pvInfo, pSerializedInfo, pSerializedInfo_mut, 
+    CERT_STRONG_SIGN_PARA, pvInfo, pSerializedInfo, pSerializedInfo_mut,
     PCERT_STRONG_SIGN_SERIALIZED_INFO
 );
 UNION!(CERT_STRONG_SIGN_PARA, pvInfo, pszOID, pszOID_mut, ::LPSTR);

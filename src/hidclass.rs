@@ -1,9 +1,7 @@
 // Copyright © 2015, Alex Daniel Jones
 // Licensed under the MIT License <LICENSE.md>
 // Taken from hidclass.h
-
 pub type PHIDP_PREPARSED_DATA = ::PVOID;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HID_COLLECTION_INFORMATION {
     pub DescriptorSize: ::ULONG,

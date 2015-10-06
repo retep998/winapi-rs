@@ -4,7 +4,6 @@
 pub type LPOFNHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-
 #[repr(C)] #[derive(Copy)]
 pub struct OPENFILENAME_NT4A {
     pub lStructSize: ::DWORD,
@@ -55,7 +54,6 @@ pub struct OPENFILENAME_NT4W {
 }
 impl Clone for OPENFILENAME_NT4W { fn clone(&self) -> OPENFILENAME_NT4W { *self } }
 pub type LPOPENFILENAME_NT4W = *mut OPENFILENAME_NT4W;
-
 #[repr(C)] #[derive(Copy)]
 pub struct OPENFILENAMEA {
     pub lStructSize: ::DWORD,
@@ -112,7 +110,6 @@ pub struct OPENFILENAMEW {
 }
 impl Clone for OPENFILENAMEW { fn clone(&self) -> OPENFILENAMEW { *self } }
 pub type LPOPENFILENAMEW = *mut OPENFILENAMEW;
-
 pub const OFN_READONLY: ::DWORD = 0x00000001;
 pub const OFN_OVERWRITEPROMPT: ::DWORD = 0x00000002;
 pub const OFN_HIDEREADONLY: ::DWORD = 0x00000004;
@@ -140,15 +137,12 @@ pub const OFN_ENABLESIZING: ::DWORD = 0x00800000;
 pub const OFN_DONTADDTORECENT: ::DWORD = 0x02000000;
 pub const OFN_FORCESHOWHIDDEN: ::DWORD = 0x10000000;
 pub const OFN_EX_NOPLACESBAR: ::DWORD = 0x00000001;
-
 pub const OFN_SHAREFALLTHROUGH: ::UINT_PTR = 2;
 pub const OFN_SHARENOWARN: ::UINT_PTR = 1;
 pub const OFN_SHAREWARN: ::UINT_PTR = 0;
-
 pub type LPCCHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct OFNOTIFYA {
     pub hdr: ::NMHDR,
@@ -163,7 +157,6 @@ pub struct OFNOTIFYW {
     pub pszFile: ::LPWSTR,
 }
 pub type LPOFNOTIFYW = *mut OFNOTIFYW;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct OFNOTIFYEXA {
     pub hdr: ::NMHDR,
@@ -180,10 +173,8 @@ pub struct OFNOTIFYEXW {
     pub pidl: ::LPVOID,
 }
 pub type LPOFNOTIFYEXW = *mut OFNOTIFYEXW;
-
 pub const CDN_FIRST: ::UINT = 0 - 601;
 pub const CDN_LAST: ::UINT = 0 - 699;
-
 pub const CDN_INITDONE: ::UINT = CDN_FIRST - 0x0000;
 pub const CDN_SELCHANGE: ::UINT = CDN_FIRST - 0x0001;
 pub const CDN_FOLDERCHANGE: ::UINT = CDN_FIRST - 0x0002;
@@ -192,10 +183,8 @@ pub const CDN_HELP: ::UINT = CDN_FIRST - 0x0004;
 pub const CDN_FILEOK: ::UINT = CDN_FIRST - 0x0005;
 pub const CDN_TYPECHANGE: ::UINT = CDN_FIRST - 0x0006;
 pub const CDN_INCLUDEITEM: ::UINT = CDN_FIRST - 0x0007;
-
 pub const CDM_FIRST: ::UINT = ::WM_USER + 100;
 pub const CDM_LAST: ::UINT = ::WM_USER + 200;
-
 pub const CDM_GETSPEC: ::UINT = CDM_FIRST + 0x0000;
 pub const CDM_GETFILEPATH: ::UINT = CDM_FIRST + 0x0001;
 pub const CDM_GETFOLDERPATH: ::UINT = CDM_FIRST + 0x0002;
@@ -203,7 +192,6 @@ pub const CDM_GETFOLDERIDLIST: ::UINT = CDM_FIRST + 0x0003;
 pub const CDM_SETCONTROLTEXT: ::UINT = CDM_FIRST + 0x0004;
 pub const CDM_HIDECONTROL: ::UINT = CDM_FIRST + 0x0005;
 pub const CDM_SETDEFEXT: ::UINT = CDM_FIRST + 0x0006;
-
 #[repr(C)] #[derive(Copy)]
 pub struct CHOOSECOLORA {
     pub lStructSize: ::DWORD,
@@ -232,7 +220,6 @@ pub struct CHOOSECOLORW {
 }
 impl Clone for CHOOSECOLORW { fn clone(&self) -> CHOOSECOLORW { *self } }
 pub type LPCHOOSECOLORW = *mut CHOOSECOLORW;
-
 pub const CC_RGBINIT: ::DWORD = 0x00000001;
 pub const CC_FULLOPEN: ::DWORD = 0x00000002;
 pub const CC_PREVENTFULLOPEN: ::DWORD = 0x00000004;
@@ -242,11 +229,9 @@ pub const CC_ENABLETEMPLATE: ::DWORD = 0x00000020;
 pub const CC_ENABLETEMPLATEHANDLE: ::DWORD = 0x00000040;
 pub const CC_SOLIDCOLOR: ::DWORD = 0x00000080;
 pub const CC_ANYCOLOR: ::DWORD = 0x00000100;
-
 pub type LPFRHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-
 #[repr(C)] #[derive(Copy)]
 pub struct FINDREPLACEA {
     pub lStructSize: ::DWORD,
@@ -279,7 +264,6 @@ pub struct FINDREPLACEW {
 }
 impl Clone for FINDREPLACEW { fn clone(&self) -> FINDREPLACEW { *self } }
 pub type LPFINDREPLACEW = *mut FINDREPLACEW;
-
 pub const FR_DOWN: ::DWORD = 0x00000001;
 pub const FR_WHOLEWORD: ::DWORD = 0x00000002;
 pub const FR_MATCHCASE: ::DWORD = 0x00000004;
@@ -301,11 +285,9 @@ pub const FR_RAW: ::DWORD = 0x00020000;
 pub const FR_MATCHDIAC: ::DWORD = 0x20000000;
 pub const FR_MATCHKASHIDA: ::DWORD = 0x40000000;
 pub const FR_MATCHALEFHAMZA: ::DWORD = 0x80000000;
-
 pub type LPCFHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-
 #[repr(C)] #[derive(Copy)]
 pub struct CHOOSEFONTA {
     pub lStructSize: ::DWORD,
@@ -348,7 +330,6 @@ pub struct CHOOSEFONTW {
 }
 impl Clone for CHOOSEFONTW { fn clone(&self) -> CHOOSEFONTW { *self } }
 pub type LPCHOOSEFONTW = *mut CHOOSEFONTW;
-
 pub const CF_SCREENFONTS: ::DWORD = 0x00000001;
 pub const CF_PRINTERFONTS: ::DWORD = 0x00000002;
 pub const CF_BOTH: ::DWORD = CF_SCREENFONTS | CF_PRINTERFONTS;
@@ -378,35 +359,29 @@ pub const CF_SELECTSCRIPT: ::DWORD = 0x00400000;
 pub const CF_NOSCRIPTSEL: ::DWORD = 0x00800000;
 pub const CF_NOVERTFONTS: ::DWORD = 0x01000000;
 pub const CF_INACTIVEFONTS: ::DWORD = 0x02000000;
-
 pub const SIMULATED_FONTTYPE: ::WORD = 0x8000;
 pub const PRINTER_FONTTYPE: ::WORD = 0x4000;
 pub const SCREEN_FONTTYPE: ::WORD = 0x2000;
 pub const BOLD_FONTTYPE: ::WORD = 0x0100;
 pub const ITALIC_FONTTYPE: ::WORD = 0x0200;
 pub const REGULAR_FONTTYPE: ::WORD = 0x0400;
-
 pub const PS_OPENTYPE_FONTTYPE: ::DWORD = 0x10000;
 pub const TT_OPENTYPE_FONTTYPE: ::DWORD = 0x20000;
 pub const TYPE1_FONTTYPE: ::DWORD = 0x40000;
 pub const SYMBOL_FONTTYPE: ::DWORD = 0x80000;
-
 pub const WM_CHOOSEFONT_GETLOGFONT: ::UINT = ::WM_USER + 1;
 pub const WM_CHOOSEFONT_SETLOGFONT: ::UINT = ::WM_USER + 101;
 pub const WM_CHOOSEFONT_SETFLAGS: ::UINT = ::WM_USER + 102;
-
 pub const CD_LBSELNOITEMS: ::WORD = 0 - 1;
 pub const CD_LBSELCHANGE: ::WORD = 0;
 pub const CD_LBSELSUB: ::WORD = 1;
 pub const CD_LBSELADD: ::WORD = 2;
-
 pub type LPPRINTHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
 pub type LPSETUPHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-
 #[repr(C)] #[derive(Copy)]
 pub struct PRINTDLGA {
     pub lStructSize: ::DWORD,
@@ -455,7 +430,6 @@ pub struct PRINTDLGW {
 }
 impl Clone for PRINTDLGW { fn clone(&self) -> PRINTDLGW { *self } }
 pub type LPPRINTDLGW = *mut PRINTDLGW;
-
 RIDL!(
 interface IPrintDialogCallback(IPrintDialogCallbackVtbl) : IUnknown(IUnknownVtbl) {
     fn InitDone(&mut self) -> ::HRESULT,
@@ -473,7 +447,6 @@ interface IPrintDialogServices(IPrintDialogServicesVtbl) : IUnknown(IUnknownVtbl
     fn GetCurrentPortName(&mut self, pPortName: ::LPWSTR, pcchSize: *mut ::UINT) -> ::HRESULT
 }
 );
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PRINTPAGERANGE {
     pub nFromPage: ::DWORD,
@@ -481,7 +454,6 @@ pub struct PRINTPAGERANGE {
 }
 pub type LPPRINTPAGERANGE = *mut PRINTPAGERANGE;
 pub type PCPRINTPAGERANGE = *const PRINTPAGERANGE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PRINTDLGEXA {
     pub lStructSize: ::DWORD,
@@ -532,7 +504,6 @@ pub struct PRINTDLGEXW {
     pub dwResultAction: ::DWORD,
 }
 pub type LPPRINTDLGEXW = *mut PRINTDLGEXW;
-
 pub const PD_ALLPAGES: ::DWORD = 0x00000000;
 pub const PD_SELECTION: ::DWORD = 0x00000001;
 pub const PD_PAGENUMS: ::DWORD = 0x00000002;
@@ -562,13 +533,10 @@ pub const PD_NOCURRENTPAGE: ::DWORD = 0x00800000;
 pub const PD_EXCLUSIONFLAGS: ::DWORD = 0x01000000;
 pub const PD_USELARGETEMPLATE: ::DWORD = 0x10000000;
 pub const PD_EXCL_COPIESANDCOLLATE: ::DWORD = ::DM_COPIES | ::DM_COLLATE;
-
 pub const START_PAGE_GENERAL: ::DWORD = 0xffffffff;
-
 pub const PD_RESULT_CANCEL: ::DWORD = 0;
 pub const PD_RESULT_PRINT: ::DWORD = 1;
 pub const PD_RESULT_APPLY: ::DWORD = 2;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DEVNAMES {
     pub wDriverOffset: ::WORD,
@@ -578,9 +546,7 @@ pub struct DEVNAMES {
 }
 pub type LPDEVNAMES = *mut DEVNAMES;
 pub type PCDEVNAMES = *const DEVNAMES;
-
 pub const DN_DEFAULTPRN: ::WORD = 0x0001;
-
 pub const WM_PSD_PAGESETUPDLG: ::UINT = ::WM_USER;
 pub const WM_PSD_FULLPAGERECT: ::UINT = ::WM_USER + 1;
 pub const WM_PSD_MINMARGINRECT: ::UINT = ::WM_USER + 2;
@@ -588,14 +554,12 @@ pub const WM_PSD_MARGINRECT: ::UINT = ::WM_USER + 3;
 pub const WM_PSD_GREEKTEXTRECT: ::UINT = ::WM_USER + 4;
 pub const WM_PSD_ENVSTAMPRECT: ::UINT = ::WM_USER + 5;
 pub const WM_PSD_YAFULLPAGERECT: ::UINT = ::WM_USER + 6;
-
 pub type LPPAGEPAINTHOOK = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
 pub type LPPAGESETUPHOOK = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-
 #[repr(C)] #[derive(Copy)]
 pub struct PAGESETUPDLGA {
     pub lStructSize: ::DWORD,
@@ -634,7 +598,6 @@ pub struct PAGESETUPDLGW {
 }
 impl Clone for PAGESETUPDLGW { fn clone(&self) -> PAGESETUPDLGW { *self } }
 pub type LPPAGESETUPDLGW = *mut PAGESETUPDLGW;
-
 pub const PSD_DEFAULTMINMARGINS: ::DWORD = 0x00000000;
 pub const PSD_INWININIINTLMEASURE: ::DWORD = 0x00000000;
 pub const PSD_MINMARGINS: ::DWORD = 0x00000001;

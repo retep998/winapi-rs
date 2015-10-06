@@ -693,7 +693,6 @@ pub struct DWRITE_LINE_METRICS {
     pub baseline: ::FLOAT,
     pub isTrimmed: ::BOOL,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DWRITE_CLUSTER_METRICS {
     pub width: ::FLOAT,
