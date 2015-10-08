@@ -601,6 +601,53 @@ pub const WM_PENWINFIRST: ::UINT = 0x0380;
 pub const WM_PENWINLAST: ::UINT = 0x038F;
 pub const WM_APP: ::UINT = 0x8000;
 pub const WM_USER: ::UINT = 0x0400;
+pub const WMSZ_LEFT: ::UINT = 1;
+pub const WMSZ_RIGHT: ::UINT = 2;
+pub const WMSZ_TOP: ::UINT = 3;
+pub const WMSZ_TOPLEFT: ::UINT = 4;
+pub const WMSZ_TOPRIGHT: ::UINT = 5;
+pub const WMSZ_BOTTOM: ::UINT = 6;
+pub const WMSZ_BOTTOMLEFT: ::UINT = 7;
+pub const WMSZ_BOTTOMRIGHT: ::UINT = 8;
+pub const SMTO_NORMAL: ::UINT = 0x0000;
+pub const SMTO_BLOCK: ::UINT = 0x0001;
+pub const SMTO_ABORTIFHUNG: ::UINT = 0x0002;
+pub const SMTO_NOTIMEOUTIFNOTHUNG: ::UINT = 0x0008;
+pub const SMTO_ERRORONEXIT: ::UINT = 0x0020;
+pub const MA_ACTIVATE: ::UINT = 1;
+pub const MA_ACTIVATEANDEAT: ::UINT = 2;
+pub const MA_NOACTIVATE: ::UINT = 3;
+pub const MA_NOACTIVATEANDEAT: ::UINT = 4;
+pub const ICON_SMALL: ::UINT = 0;
+pub const ICON_BIG: ::UINT = 1;
+pub const ICON_SMALL2: ::UINT = 2;
+pub const SIZE_RESTORED: ::UINT = 0;
+pub const SIZE_MINIMIZED: ::UINT = 1;
+pub const SIZE_MAXIMIZED: ::UINT = 2;
+pub const SIZE_MAXSHOW: ::UINT = 3;
+pub const SIZE_MAXHIDE: ::UINT = 4;
+pub const SIZENORMAL: ::UINT = SIZE_RESTORED;
+pub const SIZEICONIC: ::UINT = SIZE_MINIMIZED;
+pub const SIZEFULLSCREEN: ::UINT = SIZE_MAXIMIZED;
+pub const SIZEZOOMSHOW: ::UINT = SIZE_MAXSHOW;
+pub const SIZEZOOMHIDE: ::UINT = SIZE_MAXHIDE;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+struct NCCALCSIZE_PARAMS {
+    rgrc: [::RECT; 3],
+    lppos: PWINDOWPOS,
+}
+pub type PNCCALCSIZE_PARAMS = *mut NCCALCSIZE_PARAMS;
+pub type NPNCCALCSIZE_PARAMS = *mut NCCALCSIZE_PARAMS;
+pub type LPNCCALCSIZE_PARAMS = *mut NCCALCSIZE_PARAMS;
+pub const WVR_ALIGNTOP: ::UINT = 0x0010;
+pub const WVR_ALIGNLEFT: ::UINT = 0x0020;
+pub const WVR_ALIGNBOTTOM: ::UINT = 0x0040;
+pub const WVR_ALIGNRIGHT: ::UINT = 0x0080;
+pub const WVR_HREDRAW: ::UINT = 0x0100;
+pub const WVR_VREDRAW: ::UINT = 0x0200;
+pub const WVR_REDRAW: ::UINT = WVR_HREDRAW | WVR_VREDRAW;
+pub const WVR_VALIDRECTS: ::UINT = 0x0400;
+pub const HOVER_DEFAULT: ::UINT = 0xFFFFFFFF;
 pub const WS_OVERLAPPED: ::DWORD = 0x00000000;
 pub const WS_POPUP: ::DWORD = 0x80000000;
 pub const WS_CHILD: ::DWORD = 0x40000000;
@@ -811,6 +858,7 @@ pub const TME_LEAVE: ::DWORD = 0x0000_0002;
 pub const TME_NONCLIENT: ::DWORD = 0x0000_0010;
 pub const TME_QUERY: ::DWORD = 0x4000_0000;
 pub const TME_CANCEL: ::DWORD = 0x8000_0000;
+pub const HWND_BROADCAST: ::HWND = 0xFFFF as ::HWND;
 pub const HWND_MESSAGE: ::HWND = -3isize as ::HWND;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TRACKMOUSEEVENT {
