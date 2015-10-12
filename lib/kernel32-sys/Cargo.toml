@@ -16,3 +16,5 @@ name = "kernel32"
 winapi = { version = "0.2.4", path = "../.." }
 [build-dependencies]
 winapi-build = { version = "0.1.1", path = "../../build" }
+[features]
+no_std = []

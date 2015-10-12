@@ -2,6 +2,8 @@
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to kernel32.
 #![cfg(windows)]
+#![cfg_attr(feature="no_std", feature(no_std))]
+#![cfg_attr(feature="no_std", no_std)]
 extern crate winapi;
 use winapi::*;
 extern "system" {

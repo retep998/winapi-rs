@@ -5,9 +5,62 @@
 #![warn(missing_copy_implementations, trivial_casts, trivial_numeric_casts)]
 #![warn(unused_qualifications, unused)]
 #![cfg(windows)]
+
+#![cfg_attr(feature="no_std", feature(no_std, core))]
+#![cfg_attr(feature="no_std", no_std)]
 //-------------------------------------------------------------------------------------------------
 // Imports
 //-------------------------------------------------------------------------------------------------
+
+#[cfg(feature="no_std")]
+pub mod std {
+    extern crate core;
+
+    pub mod os {
+        pub mod raw {
+            // Copied directly from std::os::raw, minus some stability markers.
+
+            #[cfg(target_arch = "aarch64")]
+            pub type c_char = u8;
+            #[cfg(not(target_arch = "aarch64"))]
+            pub type c_char = i8;
+            pub type c_schar = i8;
+            pub type c_uchar = u8;
+            pub type c_short = i16;
+            pub type c_ushort = u16;
+            pub type c_int = i32;
+            pub type c_uint = u32;
+            #[cfg(any(target_pointer_width = "32", windows))]
+            pub type c_long = i32;
+            #[cfg(any(target_pointer_width = "32", windows))]
+            pub type c_ulong = u32;
+            #[cfg(all(target_pointer_width = "64", not(windows)))]
+            pub type c_long = i64;
+            #[cfg(all(target_pointer_width = "64", not(windows)))]
+            pub type c_ulong = u64;
+            pub type c_longlong = i64;
+            pub type c_ulonglong = u64;
+            pub type c_float = f32;
+            pub type c_double = f64;
+
+            #[repr(u8)]
+            #[allow(missing_copy_implementations)]
+            pub enum c_void {
+                #[doc(hidden)] __variant1,
+                #[doc(hidden)] __variant2,
+            }
+        }
+    }
+
+    pub mod ops {
+        pub use super::core::ops::*;
+    }
+
+    pub mod mem {
+        pub use super::core::mem::*;
+    }
+}
+
 pub use std::os::raw::{
     c_void,
     c_char,
