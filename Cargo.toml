@@ -9,6 +9,9 @@ readme = "README.md"
 keywords = ["windows", "ffi", "win32", "com", "directx"]
 license = "MIT"
 
+[features]
+no_std = []
+
 [dev-dependencies]
 advapi32-sys = { version = "*", path = "lib/advapi32-sys" }
 bcrypt-sys = { version = "*", path = "lib/bcrypt-sys" }
