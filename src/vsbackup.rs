@@ -3,16 +3,12 @@
 //! VSS backup interfaces
 DEFINE_GUID!(IID_IVssExamineWriterMetadata, 0x902fcf7f, 0xb7fd, 0x42f8,
     0x81, 0xf1, 0xb2, 0xe4, 0x00, 0xb1, 0xe5, 0xbd);
-
 DEFINE_GUID!(IID_IVssExamineWriterMetadataEx, 0x0c0e5ec0, 0xca44, 0x472b,
     0xb7, 0x02, 0xe6, 0x52, 0xdb, 0x1c, 0x04, 0x51);
-                    
 DEFINE_GUID!(IID_IVssBackupComponents, 0x665c1d5f, 0xc218, 0x414d,
     0xa0, 0x5d, 0x7f, 0xef, 0x5f, 0x9d, 0x5c, 0x86);
-
 DEFINE_GUID!(IID_IVssBackupComponentsEx, 0x963f03ad, 0x9e4c, 0x4a34,
     0xac, 0x15, 0xe4, 0xb6, 0x17, 0x4e, 0x50, 0x36);
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct VSS_COMPONENTINFO {
     pub type_: ::VSS_COMPONENT_TYPE, // type is a keyword in rust
@@ -32,7 +28,6 @@ pub struct VSS_COMPONENTINFO {
     pub cDependencies: ::UINT,
 }
 pub type PVSSCOMPONENTINFO = *const ::VSS_COMPONENTINFO;
-
 RIDL!(
 interface IVssWMComponent(IVssWMComponentVtbl): IUnknown(IUnknownVtbl) {
     fn GetComponentInfo(&mut self, ppInfo: *mut ::PVSSCOMPONENTINFO) -> ::HRESULT,
@@ -49,7 +44,6 @@ interface IVssWMComponent(IVssWMComponentVtbl): IUnknown(IUnknownVtbl) {
     ) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssExamineWriterMetadata(IVssExamineWriterMetadataVtbl): IUnknown(IUnknownVtbl) {
     fn GetIdentity(
@@ -83,7 +77,6 @@ interface IVssExamineWriterMetadata(IVssExamineWriterMetadataVtbl): IUnknown(IUn
     fn LoadFromXML(&mut self, pbstrXML: *mut ::BSTR) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssExamineWriterMetadataEx(IVssExamineWriterMetadataExVtbl):
     IVssExamineWriterMetadata(IVssExamineWriterMetadataVtbl) {
@@ -94,7 +87,6 @@ interface IVssExamineWriterMetadataEx(IVssExamineWriterMetadataExVtbl):
     ) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssExamineWriterMetadataEx2(IVssExamineWriterMetadataEx2Vtbl):
     IVssExamineWriterMetadataEx(IVssExamineWriterMetadataExVtbl) {
@@ -107,7 +99,6 @@ interface IVssExamineWriterMetadataEx2(IVssExamineWriterMetadataEx2Vtbl):
     ) -> ::HRESULT
 }
 );
-
 #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
 pub struct IVssWriterComponentsExt {
     pub lpVtbl: *const IVssWriterComponentsExtVtbl,
@@ -117,8 +108,6 @@ pub struct IVssWriterComponentsExtVtbl {
     pub parent1: ::IVssWriterComponentsVtbl,
     pub parent2: ::IUnknownVtbl,
 }
-
-
 RIDL!(
 interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl) {
     fn GetWriterComponentsCount(&mut self, pcComponents: *mut ::UINT) -> ::HRESULT,
@@ -131,7 +120,6 @@ interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl)
         backupType: ::VSS_BACKUP_TYPE, bPartialFileSupport: bool
     ) -> ::HRESULT,
     fn InitializeForRestore(&mut self, bstrXML: ::BSTR) -> ::HRESULT,
-
     fn SetRestoreState(&mut self, restoreType: ::VSS_RESTORE_TYPE) -> ::HRESULT,
     fn GatherWriterMetadata(&mut self, pAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
     fn GetWriterMetadataCount(&mut self, pcWriters: *mut ::UINT) -> ::HRESULT,
@@ -245,7 +233,6 @@ interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl)
     ) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssBackupComponentsEx(IVssBackupComponentsExVtbl):
     IVssBackupComponents(IVssBackupComponentsVtbl) {
@@ -259,7 +246,6 @@ interface IVssBackupComponentsEx(IVssBackupComponentsExVtbl):
     ) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssBackupComponentsEx2(IVssBackupComponentsEx2Vtbl):
     IVssBackupComponentsEx(IVssBackupComponentsExVtbl) {
@@ -290,7 +276,6 @@ interface IVssBackupComponentsEx2(IVssBackupComponentsEx2Vtbl):
     ) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssBackupComponentsEx3(IVssBackupComponentsEx3Vtbl):
     IVssBackupComponentsEx2(IVssBackupComponentsEx2Vtbl) {
@@ -307,7 +292,6 @@ interface IVssBackupComponentsEx3(IVssBackupComponentsEx3Vtbl):
     fn GetSessionId(&mut self, idSession: *mut ::VSS_ID) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssBackupComponentsEx4(IVssBackupComponentsEx4Vtbl):
     IVssBackupComponentsEx3(IVssBackupComponentsEx3Vtbl) {
@@ -317,5 +301,4 @@ interface IVssBackupComponentsEx4(IVssBackupComponentsEx4Vtbl):
     ) -> ::HRESULT
 }
 );
-
 pub const VSS_SW_BOOTABLE_STATE: ::DWORD = 1;

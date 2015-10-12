@@ -5,7 +5,6 @@
 pub const FILE_BEGIN: ::DWORD = 0;
 pub const FILE_CURRENT: ::DWORD = 1;
 pub const FILE_END: ::DWORD = 2;
-
 pub const WAIT_FAILED: ::DWORD = 0xFFFFFFFF;
 pub const WAIT_OBJECT_0: ::DWORD = ::STATUS_WAIT_0 as ::DWORD;
 pub const WAIT_ABANDONED: ::DWORD = ::STATUS_ABANDONED_WAIT_0 as ::DWORD;
@@ -116,7 +115,6 @@ pub const MOVEFILE_DELAY_UNTIL_REBOOT: ::DWORD = 0x00000004;
 pub const MOVEFILE_WRITE_THROUGH: ::DWORD = 0x00000008;
 pub const MOVEFILE_CREATE_HARDLINK: ::DWORD = 0x00000010;
 pub const MOVEFILE_FAIL_IF_NOT_TRACKABLE: ::DWORD = 0x00000020;
-
 pub const FORMAT_MESSAGE_IGNORE_INSERTS: ::DWORD = 0x00000200;
 pub const FORMAT_MESSAGE_FROM_STRING: ::DWORD = 0x00000400;
 pub const FORMAT_MESSAGE_FROM_HMODULE: ::DWORD = 0x00000800;
@@ -124,63 +122,50 @@ pub const FORMAT_MESSAGE_FROM_SYSTEM: ::DWORD = 0x00001000;
 pub const FORMAT_MESSAGE_ARGUMENT_ARRAY: ::DWORD = 0x00002000;
 pub const FORMAT_MESSAGE_MAX_WIDTH_MASK: ::DWORD = 0x000000FF;
 pub const FORMAT_MESSAGE_ALLOCATE_BUFFER: ::DWORD = 0x00000100;
-
 pub const DEBUG_PROCESS: ::DWORD = 0x00000001;
 pub const DEBUG_ONLY_THIS_PROCESS: ::DWORD = 0x00000002;
 pub const CREATE_SUSPENDED: ::DWORD = 0x00000004;
 pub const DETACHED_PROCESS: ::DWORD = 0x00000008;
-
 pub const CREATE_NEW_CONSOLE: ::DWORD = 0x00000010;
 pub const NORMAL_PRIORITY_CLASS: ::DWORD = 0x00000020;
 pub const IDLE_PRIORITY_CLASS: ::DWORD = 0x00000040;
 pub const HIGH_PRIORITY_CLASS: ::DWORD = 0x00000080;
-
 pub const REALTIME_PRIORITY_CLASS: ::DWORD = 0x00000100;
 pub const CREATE_NEW_PROCESS_GROUP: ::DWORD = 0x00000200;
 pub const CREATE_UNICODE_ENVIRONMENT: ::DWORD = 0x00000400;
 pub const CREATE_SEPARATE_WOW_VDM: ::DWORD = 0x00000800;
-
 pub const CREATE_SHARED_WOW_VDM: ::DWORD = 0x00001000;
 pub const CREATE_FORCEDOS: ::DWORD = 0x00002000;
 pub const BELOW_NORMAL_PRIORITY_CLASS: ::DWORD = 0x00004000;
 pub const ABOVE_NORMAL_PRIORITY_CLASS: ::DWORD = 0x00008000;
-
 pub const INHERIT_PARENT_AFFINITY: ::DWORD = 0x00010000;
 pub const INHERIT_CALLER_PRIORITY: ::DWORD = 0x00020000;
 pub const CREATE_PROTECTED_PROCESS: ::DWORD = 0x00040000;
 pub const EXTENDED_STARTUPINFO_PRESENT: ::DWORD = 0x00080000;
-
 pub const PROCESS_MODE_BACKGROUND_BEGIN: ::DWORD = 0x00100000;
 pub const PROCESS_MODE_BACKGROUND_END: ::DWORD = 0x00200000;
-
 pub const CREATE_BREAKAWAY_FROM_JOB: ::DWORD = 0x01000000;
 pub const CREATE_PRESERVE_CODE_AUTHZ_LEVEL: ::DWORD = 0x02000000;
 pub const CREATE_DEFAULT_ERROR_MODE: ::DWORD = 0x04000000;
 pub const CREATE_NO_WINDOW: ::DWORD = 0x08000000;
-
 pub const PROFILE_USER: ::DWORD = 0x10000000;
 pub const PROFILE_KERNEL: ::DWORD = 0x20000000;
 pub const PROFILE_SERVER: ::DWORD = 0x40000000;
 pub const CREATE_IGNORE_SYSTEM_DEFAULT: ::DWORD = 0x80000000;
-
 pub const THREAD_BASE_PRIORITY_LOWRT: ::DWORD = 15;
 pub const THREAD_BASE_PRIORITY_MAX: ::DWORD = 2;
 pub const THREAD_BASE_PRIORITY_MIN: ::DWORD = -2i32 as ::DWORD;
 pub const THREAD_BASE_PRIORITY_IDLE: ::DWORD = -15i32 as ::DWORD;
-
 pub const THREAD_PRIORITY_LOWEST: ::DWORD = THREAD_BASE_PRIORITY_MIN;
 pub const THREAD_PRIORITY_BELOW_NORMAL: ::DWORD = THREAD_PRIORITY_LOWEST + 1;
 pub const THREAD_PRIORITY_NORMAL: ::DWORD = 0;
 pub const THREAD_PRIORITY_HIGHEST: ::DWORD = THREAD_BASE_PRIORITY_MAX;
 pub const THREAD_PRIORITY_ABOVE_NORMAL: ::DWORD = THREAD_PRIORITY_HIGHEST - 1;
 pub const THREAD_PRIORITY_ERROR_RETURN: ::DWORD = 0x7fffffff;
-
 pub const THREAD_PRIORITY_TIME_CRITICAL: ::DWORD = THREAD_BASE_PRIORITY_LOWRT;
 pub const THREAD_PRIORITY_IDLE: ::DWORD = THREAD_BASE_PRIORITY_IDLE;
-
 pub const THREAD_MODE_BACKGROUND_BEGIN: ::DWORD = 0x00010000;
 pub const THREAD_MODE_BACKGROUND_END: ::DWORD = 0x00020000;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MEMORYSTATUS {
     pub dwLength: ::DWORD,
@@ -193,7 +178,6 @@ pub struct MEMORYSTATUS {
     pub dwAvailVirtual: ::SIZE_T,
 }
 pub type LPMEMORYSTATUS = *mut MEMORYSTATUS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct COMMPROP {
     pub wPacketLength: ::WORD,
@@ -216,7 +200,6 @@ pub struct COMMPROP {
     pub wcProvChar: [::WCHAR; 1],
 }
 pub type LPCOMMPROP = *mut COMMPROP;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct COMSTAT {
     pub BitFields: ::DWORD,
@@ -234,7 +217,6 @@ BITFIELD!(COMSTAT BitFields: ::DWORD [
     fReserved set_fReserved[7..32],
 ]);
 pub type LPCOMSTAT = *mut COMSTAT;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DCB {
     pub DCBlength: ::DWORD,
@@ -270,7 +252,6 @@ BITFIELD!(DCB BitFields: ::DWORD [
     fDummy2 set_fDummy2[15..32],
 ]);
 pub type LPDCB = *mut DCB;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct COMMTIMEOUTS {
     pub ReadIntervalTimeout: ::DWORD,
@@ -280,7 +261,6 @@ pub struct COMMTIMEOUTS {
     pub WriteTotalTimeoutConstant: ::DWORD,
 }
 pub type LPCOMMTIMEOUTS = *mut COMMTIMEOUTS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct COMMCONFIG {
     pub dwSize: ::DWORD,
@@ -293,12 +273,10 @@ pub struct COMMCONFIG {
     pub wcProviderData: [::WCHAR; 1],
 }
 pub type LPCOMMCONFIG = *mut COMMCONFIG;
-
 pub type PFIBER_CALLOUT_ROUTINE = Option<unsafe extern "system" fn(
     lpParameter: ::LPVOID,
 ) -> ::LPVOID>;
 pub type LPLDT_ENTRY = ::LPVOID;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum COPYFILE2_MESSAGE_TYPE {
     COPYFILE2_CALLBACK_NONE = 0,
@@ -329,7 +307,6 @@ pub enum COPYFILE2_COPY_PHASE {
     COPYFILE2_PHASE_NAMEGRAFT_COPY,
     COPYFILE2_PHASE_MAX,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct COPYFILE2_MESSAGE_ChunkStarted {
     pub dwStreamNumber: ::DWORD,
@@ -408,11 +385,9 @@ UNION!(
 );
 UNION!(COPYFILE2_MESSAGE, Info, PollContinue, PollContinue_mut, COPYFILE2_MESSAGE_PollContinue);
 UNION!(COPYFILE2_MESSAGE, Info, Error, Error_mut, COPYFILE2_MESSAGE_Error);
-
 pub type PCOPYFILE2_PROGRESS_ROUTINE = Option<unsafe extern "system" fn(
     pMessage: *const COPYFILE2_MESSAGE, pvCallbackContext: ::PVOID,
 ) -> COPYFILE2_MESSAGE_ACTION>;
-
 #[repr(C)] #[derive(Copy)]
 pub struct COPYFILE2_EXTENDED_PARAMETERS {
     pub dwSize: ::DWORD,
@@ -429,7 +404,6 @@ pub type LPPROGRESS_ROUTINE = Option<unsafe extern "system" fn(
     StreamSize: ::LARGE_INTEGER, StreamBytesTransferred: ::LARGE_INTEGER, dwStreamNumber: ::DWORD,
     dwCallbackReason: ::DWORD, hSourceFile: ::HANDLE, hDestinationFile: ::HANDLE, lpData: ::LPVOID,
 ) -> ::DWORD>;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ACTCTXA {
     pub cbSize: ::ULONG,
@@ -458,16 +432,13 @@ pub struct ACTCTXW {
 }
 pub type PACTCTXW = *mut ACTCTXW;
 pub type PCACTCTXW = *const ACTCTXW;
-
 pub type PFIBER_START_ROUTINE = Option<unsafe extern "system" fn(lpFiberParameter: ::LPVOID)>;
 pub type LPFIBER_START_ROUTINE = PFIBER_START_ROUTINE;
-
 pub type PUMS_CONTEXT = *mut ::c_void;
 pub type PUMS_COMPLETION_LIST = *mut ::c_void;
 pub type UMS_THREAD_INFO_CLASS = ::RTL_UMS_THREAD_INFO_CLASS;
 pub type PUMS_THREAD_INFO_CLASS = *mut UMS_THREAD_INFO_CLASS;
 pub type PUMS_SCHEDULER_ENTRY_POINT = ::PRTL_UMS_SCHEDULER_ENTRY_POINT;
-
 #[repr(C)] #[derive(Copy)]
 pub struct UMS_SCHEDULER_STARTUP_INFO {
     pub UmsVersion: ::ULONG,
@@ -479,7 +450,6 @@ impl Clone for UMS_SCHEDULER_STARTUP_INFO {
     fn clone(&self) -> UMS_SCHEDULER_STARTUP_INFO { *self }
 }
 pub type PUMS_SCHEDULER_STARTUP_INFO = *mut UMS_SCHEDULER_STARTUP_INFO;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct UMS_SYSTEM_THREAD_INFORMATION {
     pub UmsVersion: ::ULONG,
@@ -494,7 +464,6 @@ UNION!(
     ::ULONG
 );
 pub type PUMS_SYSTEM_THREAD_INFORMATION = *mut UMS_SYSTEM_THREAD_INFORMATION;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA {
     pub lpInformation: ::PVOID,
@@ -524,19 +493,16 @@ pub struct ACTCTX_SECTION_KEYED_DATA {
 }
 pub type PACTCTX_SECTION_KEYED_DATA = *mut ACTCTX_SECTION_KEYED_DATA;
 pub type PCACTCTX_SECTION_KEYED_DATA = *const ACTCTX_SECTION_KEYED_DATA;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum STREAM_INFO_LEVELS {
     FindStreamInfoStandard,
     FindStreamInfoMaxInfoLevel,
 }
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum PROCESS_INFORMATION_CLASS {
     ProcessMemoryPriority,
     ProcessInformationClassMax,
 }
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum DEP_SYSTEM_POLICY_TYPE {
     DEPPolicyAlwaysOff = 0,
@@ -545,18 +511,15 @@ pub enum DEP_SYSTEM_POLICY_TYPE {
     DEPPolicyOptOut,
     DEPTotalPolicyCount,
 }
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum PIPE_ATTRIBUTE_TYPE {
     PipeAttribute,
     PipeConnectionAttribute,
     PipeHandleAttribute,
 }
-
 pub type APPLICATION_RECOVERY_CALLBACK = Option<unsafe extern "system" fn(
     pvParameter: ::PVOID
 ) -> ::DWORD>;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SYSTEM_POWER_STATUS {
     pub ACLineStatus: ::BYTE,
@@ -567,7 +530,6 @@ pub struct SYSTEM_POWER_STATUS {
     pub BatteryFullLifeTime: ::DWORD,
 }
 pub type LPSYSTEM_POWER_STATUS = *mut SYSTEM_POWER_STATUS;
-
 pub const OFS_MAXPATHNAME: usize = 128;
 #[repr(C)] #[derive(Copy)]
 pub struct OFSTRUCT {
@@ -581,7 +543,6 @@ pub struct OFSTRUCT {
 impl Clone for OFSTRUCT { fn clone(&self) -> OFSTRUCT { *self } }
 pub type POFSTRUCT = *mut OFSTRUCT;
 pub type LPOFSTRUCT = *mut OFSTRUCT;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum FILE_ID_TYPE {
     FileIdType,

@@ -2,64 +2,46 @@
 // Licensed under the MIT License <LICENSE.md>
 //! user APIs for the Configuration Manager
 pub type PCVOID = *const ::VOID;
-
 pub const MAX_DEVICE_ID_LEN: usize = 200;
 pub const MAX_DEVNODE_ID_LEN: usize = MAX_DEVICE_ID_LEN;
-
 pub const MAX_GUID_STRING_LEN: usize = 39;
 pub const MAX_CLASS_NAME_LEN: usize = 32;
 pub const MAX_PROFILE_LEN: usize = 80;
-
 pub const MAX_CONFIG_VALUE: ::DWORD = 9999;
 pub const MAX_INSTANCE_VALUE: ::DWORD = 9999;
-
 pub const MAX_MEM_REGISTERS: ::DWORD = 9;
 pub const MAX_IO_PORTS: ::DWORD = 20;
 pub const MAX_IRQS: ::DWORD = 7;
 pub const MAX_DMA_CHANNELS: ::DWORD = 7;
-
 pub const DWORD_MAX: ::DWORD = 0xffffffff;
 pub const DWORDLONG_MAX: ::DWORDLONG = 0xffffffffffffffff;
-
 pub const CONFIGMG_VERSION: ::DWORD = 0x0400;
-
 pub type RETURN_TYPE = ::DWORD;
 pub type CONFIGRET = RETURN_TYPE;
-
 pub type DEVNODE = ::DWORD;
 pub type DEVINST = ::DWORD;
 pub type PDEVNODE = *mut DEVNODE;
 pub type PDEVINST = *mut DEVNODE;
-
 pub type DEVNODEID_A = *mut ::CHAR;
 pub type DEVINSTID_A = *mut ::CHAR;
 pub type DEVNODEID_W = *mut ::WCHAR;
 pub type DEVINSTID_W = *mut ::WCHAR;
-
 pub type LOG_CONF = ::DWORD_PTR;
 pub type PLOG_CONF = *mut LOG_CONF;
-
 pub type RES_DES = ::DWORD_PTR;
 pub type PRES_DES = *mut RES_DES;
-
 pub type RESOURCEID = ::ULONG;
 pub type PRESOURCEID = *mut RESOURCEID;
-
 pub type PRIORITY = ::ULONG;
 pub type PPRIORITY = *mut PRIORITY;
-
 pub type RANGE_LIST = ::DWORD_PTR;
 pub type PRANGE_LIST = *mut RANGE_LIST;
-
 pub type RANGE_ELEMENT = ::DWORD_PTR;
 pub type PRANGE_ELEMENT = *mut RANGE_ELEMENT;
-
 pub type HMACHINE = ::HANDLE;
 pub type PHMACHINE = *mut HMACHINE;
-
 pub type CONFLICT_LIST = ::ULONG_PTR;
 pub type PCONFLICT_LIST = *mut CONFLICT_LIST;
-
 #[repr(C)] #[derive(Copy)]
 pub struct CONFLICT_DETAILS_A {
     pub CD_ulSize: ::ULONG,
@@ -82,19 +64,15 @@ pub struct CONFLICT_DETAILS_W {
 }
 impl Clone for CONFLICT_DETAILS_W { fn clone(&self) -> CONFLICT_DETAILS_W { *self } }
 pub type PCONFLICT_DETAILS_W = *mut CONFLICT_DETAILS_W;
-
 pub const CM_CDMASK_DEVINST: ::ULONG = 0x00000001;
 pub const CM_CDMASK_RESDES: ::ULONG = 0x00000002;
 pub const CM_CDMASK_FLAGS: ::ULONG = 0x00000004;
 pub const CM_CDMASK_DESCRIPTION: ::ULONG = 0x00000008;
 pub const CM_CDMASK_VALID: ::ULONG = 0x0000000F;
-
 pub const CM_CDFLAGS_DRIVER: ::ULONG = 0x00000001;
 pub const CM_CDFLAGS_ROOT_OWNED: ::ULONG = 0x00000002;
 pub const CM_CDFLAGS_RESERVED: ::ULONG = 0x00000004;
-
 pub type REGDISPOSITION = ::ULONG;
-
 pub const mMD_MemoryType: ::DWORD = 0x1;
 pub const fMD_MemoryType: ::DWORD = mMD_MemoryType;
 pub const fMD_ROM: ::DWORD = 0x0;
@@ -121,7 +99,6 @@ pub const fMD_NonCacheable: ::DWORD = 0x0;
 pub const fMD_Cacheable: ::DWORD = 0x20;
 pub const fMD_WINDOW_DECODE: ::DWORD = 0x40;
 pub const fMD_MEMORY_BAR: ::DWORD = 0x80;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MEM_RANGE {
     pub MR_Align: ::DWORDLONG,
@@ -132,7 +109,6 @@ pub struct MEM_RANGE {
     pub MR_Reserved: ::DWORD,
 }
 pub type PMEM_RANGE = *mut MEM_RANGE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MEM_DES {
     pub MD_Count: ::DWORD,
@@ -143,14 +119,12 @@ pub struct MEM_DES {
     pub MD_Reserved: ::DWORD,
 }
 pub type PMEM_DES = *mut MEM_DES;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MEM_RESOURCE {
     pub MEM_Header: MEM_DES,
     pub MEM_Data: [MEM_RANGE; ::ANYSIZE_ARRAY],
 }
 pub type PMEM_RESOURCE = *mut MEM_RESOURCE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MEM_LARGE_RANGE {
     pub MLR_Align: ::DWORDLONG,
@@ -161,7 +135,6 @@ pub struct MEM_LARGE_RANGE {
     pub MLR_Reserved: ::DWORD,
 }
 pub type PMEM_LARGE_RANGE = *mut MEM_LARGE_RANGE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MEM_LARGE_DES {
     pub MLD_Count: ::DWORD,
@@ -172,14 +145,12 @@ pub struct MEM_LARGE_DES {
     pub MLD_Reserved: ::DWORD,
 }
 pub type PMEM_LARGE_DES = *mut MEM_LARGE_DES;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MEM_LARGE_RESOURCE {
     pub MEM_LARGE_Header: MEM_LARGE_DES,
     pub MEM_LARGE_Data: [MEM_LARGE_RANGE; ::ANYSIZE_ARRAY],
 }
 pub type PMEM_LARGE_RESOURCE = *mut MEM_LARGE_RESOURCE;
-
 pub const fIOD_PortType: ::DWORD = 0x1;
 pub const fIOD_Memory: ::DWORD = 0x0;
 pub const fIOD_IO: ::DWORD = 0x1;
@@ -191,12 +162,10 @@ pub const fIOD_POSITIVE_DECODE: ::DWORD = 0x0020;
 pub const fIOD_PASSIVE_DECODE: ::DWORD = 0x0040;
 pub const fIOD_WINDOW_DECODE: ::DWORD = 0x0080;
 pub const fIOD_PORT_BAR: ::DWORD = 0x0100;
-
 pub const IO_ALIAS_10_BIT_DECODE: ::DWORDLONG = 0x00000004;
 pub const IO_ALIAS_12_BIT_DECODE: ::DWORDLONG = 0x00000010;
 pub const IO_ALIAS_16_BIT_DECODE: ::DWORDLONG = 0x00000000;
 pub const IO_ALIAS_POSITIVE_DECODE: ::DWORDLONG = 0x000000FF;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IO_RANGE {
     pub IOR_Align: ::DWORDLONG,
@@ -207,7 +176,6 @@ pub struct IO_RANGE {
     pub IOR_Alias: ::DWORDLONG,
 }
 pub type PIO_RANGE = *mut IO_RANGE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IO_DES {
     pub IOD_Count: ::DWORD,
@@ -217,14 +185,12 @@ pub struct IO_DES {
     pub IOD_DesFlags: ::DWORD,
 }
 pub type PIO_DES = *mut IO_DES;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IO_RESOURCE {
     pub IO_Header: IO_DES,
     pub IO_Data: [IO_RANGE; ::ANYSIZE_ARRAY],
 }
 pub type PIO_RESOURCE = *mut IO_RESOURCE;
-
 pub const mDD_Width: ::ULONG = 0x3;
 pub const fDD_BYTE: ::ULONG = 0x0;
 pub const fDD_WORD: ::ULONG = 0x1;
@@ -238,7 +204,6 @@ pub const fDD_TypeStandard: ::ULONG = 0x00;
 pub const fDD_TypeA: ::ULONG = 0x08;
 pub const fDD_TypeB: ::ULONG = 0x10;
 pub const fDD_TypeF: ::ULONG = 0x18;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DMA_RANGE {
     pub DR_Min: ::ULONG,
@@ -246,7 +211,6 @@ pub struct DMA_RANGE {
     pub DR_Flags: ::ULONG,
 }
 pub type PDMA_RANGE = *mut DMA_RANGE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DMA_DES {
     pub DD_Count: ::DWORD,
@@ -255,14 +219,12 @@ pub struct DMA_DES {
     pub DD_Alloc_Chan: ::ULONG,
 }
 pub type PDMA_DES = *mut DMA_DES;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DMA_RESOURCE {
     pub DMA_Header: DMA_DES,
     pub DMA_Data: [DMA_RANGE; ::ANYSIZE_ARRAY],
 }
 pub type PDMA_RESOURCE = *mut DMA_RESOURCE;
-
 pub const mIRQD_Share: ::ULONG = 0x1;
 pub const fIRQD_Exclusive: ::ULONG = 0x0;
 pub const fIRQD_Share: ::ULONG = 0x1;
@@ -271,7 +233,6 @@ pub const fIRQD_Level_Bit: ::ULONG = 1;
 pub const mIRQD_Edge_Level: ::ULONG = 0x2;
 pub const fIRQD_Level: ::ULONG = 0x0;
 pub const fIRQD_Edge: ::ULONG = 0x2;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IRQ_RANGE {
     pub IRQR_Min: ::ULONG,
@@ -279,7 +240,6 @@ pub struct IRQ_RANGE {
     pub IRQR_Flags: ::ULONG,
 }
 pub type PIRQ_RANGE = *mut IRQ_RANGE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IRQ_DES_32 {
     pub IRQD_Count: ::DWORD,
@@ -298,7 +258,6 @@ pub struct IRQ_DES_64 {
     pub IRQD_Affinity: ::ULONG64,
 }
 pub type PIRQ_DES_64 = *mut IRQ_DES_64;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IRQ_RESOURCE_32 {
     pub IRQ_Header: IRQ_DES_32,
@@ -311,7 +270,6 @@ pub struct IRQ_RESOURCE_64 {
     pub IRQ_Data: [IRQ_RANGE; ::ANYSIZE_ARRAY],
 }
 pub type PIRQ_RESOURCE_64 = *mut IRQ_RESOURCE_64;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DEVPRIVATE_RANGE {
     pub PR_Data1: ::DWORD,
@@ -319,7 +277,6 @@ pub struct DEVPRIVATE_RANGE {
     pub PR_Data3: ::DWORD,
 }
 pub type PDEVPRIVATE_RANGE = *mut DEVPRIVATE_RANGE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DEVPRIVATE_DES {
     pub PD_Count: ::DWORD,
@@ -330,14 +287,12 @@ pub struct DEVPRIVATE_DES {
     pub PD_Flags: ::DWORD,
 }
 pub type PDEVPRIVATE_DES = *mut DEVPRIVATE_DES;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DEVPRIVATE_RESOURCE {
     pub PRV_Header: DEVPRIVATE_DES,
     pub PRV_Data: [DEVPRIVATE_RANGE; ::ANYSIZE_ARRAY],
 }
 pub type PDEVPRIVATE_RESOURCE = *mut DEVPRIVATE_RESOURCE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CS_DES {
     pub CSD_SignatureLength: ::DWORD,
@@ -348,13 +303,11 @@ pub struct CS_DES {
     pub CSD_Signature: [::BYTE; ::ANYSIZE_ARRAY],
 }
 pub type PCS_DES = *mut CS_DES;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CS_RESOURCE {
     pub CS_Header: CS_DES,
 }
 pub type PCS_RESOURCE = *mut CS_RESOURCE;
-
 pub const mPCD_IO_8_16: ::DWORD = 0x1;
 pub const fPCD_IO_8: ::DWORD = 0x0;
 pub const fPCD_IO_16: ::DWORD = 0x1;
@@ -390,10 +343,8 @@ pub const fPCD_MEM2_WS_ONE: ::DWORD = 0x10000000;
 pub const fPCD_MEM2_WS_TWO: ::DWORD = 0x20000000;
 pub const fPCD_MEM2_WS_THREE: ::DWORD = 0x30000000;
 pub const fPCD_MEM2_16: ::DWORD = 0x40000000;
-
 pub const PCD_MAX_MEMORY: usize = 2;
 pub const PCD_MAX_IO: usize = 2;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PCCARD_DES {
     pub PCD_Count: ::DWORD,
@@ -408,16 +359,13 @@ pub struct PCCARD_DES {
     pub PCD_IoFlags: [::BYTE; PCD_MAX_IO],
 }
 pub type PPCCARD_DES = *mut PCCARD_DES;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PCCARD_RESOURCE {
     pub PcCard_Header: PCCARD_DES,
 }
 pub type PPCCARD_RESOURCE = *mut PCCARD_RESOURCE;
-
 pub const mPMF_AUDIO_ENABLE: ::DWORD = 0x8;
 pub const fPMF_AUDIO_ENABLE: ::DWORD = 0x8;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MFCARD_DES {
     pub PMF_Count: ::DWORD,
@@ -429,13 +377,11 @@ pub struct MFCARD_DES {
     pub PMF_ConfigRegisterBase: ::DWORD,
 }
 pub type PMFCARD_DES = *mut MFCARD_DES;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MFCARD_RESOURCE {
     pub MfCard_Header: MFCARD_DES,
 }
 pub type PMFCARD_RESOURCE = *mut MFCARD_RESOURCE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct BUSNUMBER_RANGE {
     pub BUSR_Min: ::ULONG,
@@ -444,7 +390,6 @@ pub struct BUSNUMBER_RANGE {
     pub BUSR_Flags: ::ULONG,
 }
 pub type PBUSNUMBER_RANGE = *mut BUSNUMBER_RANGE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct BUSNUMBER_DES {
     pub BUSD_Count: ::DWORD,
@@ -454,14 +399,12 @@ pub struct BUSNUMBER_DES {
     pub BUSD_Alloc_End: ::ULONG,
 }
 pub type PBUSNUMBER_DES = *mut BUSNUMBER_DES;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct BUSNUMBER_RESOURCE {
     pub BusNumber_Header: BUSNUMBER_DES,
     pub BusNumber_Data: [BUSNUMBER_RANGE; ::ANYSIZE_ARRAY],
 }
 pub type PBUSNUMBER_RESOURCE = *mut BUSNUMBER_RESOURCE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CONNECTION_DES {
     pub COND_Type: ::DWORD,
@@ -473,17 +416,14 @@ pub struct CONNECTION_DES {
     pub COND_Id: ::LARGE_INTEGER,
 }
 pub type PCONNECTION_DES = *mut CONNECTION_DES;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CONNECTION_RESOURCE {
     pub Connection_Header: CONNECTION_DES,
 }
 pub type PCONNECTION_RESOURCE = *mut CONNECTION_RESOURCE;
-
 pub const CM_HWPI_NOT_DOCKABLE: ::DWORD = 0x00000000;
 pub const CM_HWPI_UNDOCKED: ::DWORD = 0x00000001;
 pub const CM_HWPI_DOCKED: ::DWORD = 0x00000002;
-
 #[repr(C)] #[derive(Copy)]
 pub struct HWPROFILEINFO_A {
     pub HWPI_ulHWProfile: ::ULONG,
@@ -500,7 +440,6 @@ pub struct HWPROFILEINFO_W {
 }
 impl Clone for HWPROFILEINFO_W { fn clone(&self) -> HWPROFILEINFO_W { *self } }
 pub type PHWPROFILEINFO_W = *mut HWPROFILEINFO_W;
-
 pub const ResType_All: RESOURCEID = 0x00000000;
 pub const ResType_None: RESOURCEID = 0x00000000;
 pub const ResType_Mem: RESOURCEID = 0x00000001;
@@ -518,11 +457,9 @@ pub const ResType_DevicePrivate: RESOURCEID = 0x00008001;
 pub const ResType_PcCardConfig: RESOURCEID = 0x00008002;
 pub const ResType_MfCardConfig: RESOURCEID = 0x00008003;
 pub const ResType_Connection: RESOURCEID = 0x00008004;
-
 pub const CM_ADD_RANGE_ADDIFCONFLICT: ::ULONG = 0x00000000;
 pub const CM_ADD_RANGE_DONOTADDIFCONFLICT: ::ULONG = 0x00000001;
 pub const CM_ADD_RANGE_BITS: ::ULONG = 0x00000001;
-
 pub const BASIC_LOG_CONF: ::ULONG = 0x00000000;
 pub const FILTERED_LOG_CONF: ::ULONG = 0x00000001;
 pub const ALLOC_LOG_CONF: ::ULONG = 0x00000002;
@@ -531,54 +468,44 @@ pub const FORCED_LOG_CONF: ::ULONG = 0x00000004;
 pub const OVERRIDE_LOG_CONF: ::ULONG = 0x00000005;
 pub const NUM_LOG_CONF: ::ULONG = 0x00000006;
 pub const LOG_CONF_BITS: ::ULONG = 0x00000007;
-
 pub const PRIORITY_EQUAL_FIRST: ::ULONG = 0x00000008;
 pub const PRIORITY_EQUAL_LAST: ::ULONG = 0x00000000;
 pub const PRIORITY_BIT: ::ULONG = 0x00000008;
-
 pub const RegDisposition_OpenAlways: REGDISPOSITION = 0x00000000;
 pub const RegDisposition_OpenExisting: REGDISPOSITION = 0x00000001;
 pub const RegDisposition_Bits: REGDISPOSITION = 0x00000001;
-
 pub const CM_ADD_ID_HARDWARE: ::ULONG = 0x00000000;
 pub const CM_ADD_ID_COMPATIBLE: ::ULONG = 0x00000001;
 pub const CM_ADD_ID_BITS: ::ULONG = 0x00000001;
-
 pub const CM_CREATE_DEVNODE_NORMAL: ::ULONG = 0x00000000;
 pub const CM_CREATE_DEVNODE_NO_WAIT_INSTALL: ::ULONG = 0x00000001;
 pub const CM_CREATE_DEVNODE_PHANTOM: ::ULONG = 0x00000002;
 pub const CM_CREATE_DEVNODE_GENERATE_ID: ::ULONG = 0x00000004;
 pub const CM_CREATE_DEVNODE_DO_NOT_INSTALL: ::ULONG = 0x00000008;
 pub const CM_CREATE_DEVNODE_BITS: ::ULONG = 0x0000000F;
-
 pub const CM_CREATE_DEVINST_NORMAL: ::ULONG = CM_CREATE_DEVNODE_NORMAL;
 pub const CM_CREATE_DEVINST_NO_WAIT_INSTALL: ::ULONG = CM_CREATE_DEVNODE_NO_WAIT_INSTALL;
 pub const CM_CREATE_DEVINST_PHANTOM: ::ULONG = CM_CREATE_DEVNODE_PHANTOM;
 pub const CM_CREATE_DEVINST_GENERATE_ID: ::ULONG = CM_CREATE_DEVNODE_GENERATE_ID;
 pub const CM_CREATE_DEVINST_DO_NOT_INSTALL: ::ULONG = CM_CREATE_DEVNODE_DO_NOT_INSTALL;
 pub const CM_CREATE_DEVINST_BITS: ::ULONG = CM_CREATE_DEVNODE_BITS;
-
 pub const CM_DELETE_CLASS_ONLY: ::ULONG = 0x00000000;
 pub const CM_DELETE_CLASS_SUBKEYS: ::ULONG = 0x00000001;
 pub const CM_DELETE_CLASS_INTERFACE: ::ULONG = 0x00000002;
 pub const CM_DELETE_CLASS_BITS: ::ULONG = 0x00000003;
-
 pub const CM_ENUMERATE_CLASSES_INSTALLER: ::ULONG = 0x00000000;
 pub const CM_ENUMERATE_CLASSES_INTERFACE: ::ULONG = 0x00000001;
 pub const CM_ENUMERATE_CLASSES_BITS: ::ULONG = 0x00000001;
-
 pub const CM_DETECT_NEW_PROFILE: ::ULONG = 0x00000001;
 pub const CM_DETECT_CRASHED: ::ULONG = 0x00000002;
 pub const CM_DETECT_HWPROF_FIRST_BOOT: ::ULONG = 0x00000004;
 pub const CM_DETECT_RUN: ::ULONG = 0x80000000;
 pub const CM_DETECT_BITS: ::ULONG = 0x80000007;
-
 pub const CM_DISABLE_POLITE: ::ULONG = 0x00000000;
 pub const CM_DISABLE_ABSOLUTE: ::ULONG = 0x00000001;
 pub const CM_DISABLE_HARDWARE: ::ULONG = 0x00000002;
 pub const CM_DISABLE_UI_NOT_OK: ::ULONG = 0x00000004;
 pub const CM_DISABLE_BITS: ::ULONG = 0x00000007;
-
 pub const CM_GETIDLIST_FILTER_NONE: ::ULONG = 0x00000000;
 pub const CM_GETIDLIST_FILTER_ENUMERATOR: ::ULONG = 0x00000001;
 pub const CM_GETIDLIST_FILTER_SERVICE: ::ULONG = 0x00000002;
@@ -591,11 +518,9 @@ pub const CM_GETIDLIST_FILTER_TRANSPORTRELATIONS: ::ULONG = 0x00000080;
 pub const CM_GETIDLIST_FILTER_PRESENT: ::ULONG = 0x00000100;
 pub const CM_GETIDLIST_FILTER_CLASS: ::ULONG = 0x00000200;
 pub const CM_GETIDLIST_FILTER_BITS: ::ULONG = 0x100003FF;
-
 pub const CM_GET_DEVICE_INTERFACE_LIST_PRESENT: ::ULONG = 0x00000000;
 pub const CM_GET_DEVICE_INTERFACE_LIST_ALL_DEVICES: ::ULONG = 0x00000001;
 pub const CM_GET_DEVICE_INTERFACE_LIST_BITS: ::ULONG = 0x00000001;
-
 pub const CM_DRP_DEVICEDESC: ::ULONG = 0x00000001;
 pub const CM_DRP_HARDWAREID: ::ULONG = 0x00000002;
 pub const CM_DRP_COMPATIBLEIDS: ::ULONG = 0x00000003;
@@ -644,7 +569,6 @@ pub const CM_DRP_MIN: ::ULONG = 0x00000001;
 pub const CM_CRP_MIN: ::ULONG = CM_DRP_MIN;
 pub const CM_DRP_MAX: ::ULONG = 0x00000025;
 pub const CM_CRP_MAX: ::ULONG = CM_DRP_MAX;
-
 pub const CM_DEVCAP_LOCKSUPPORTED: ::ULONG = 0x00000001;
 pub const CM_DEVCAP_EJECTSUPPORTED: ::ULONG = 0x00000002;
 pub const CM_DEVCAP_REMOVABLE: ::ULONG = 0x00000004;
@@ -655,69 +579,55 @@ pub const CM_DEVCAP_RAWDEVICEOK: ::ULONG = 0x00000040;
 pub const CM_DEVCAP_SURPRISEREMOVALOK: ::ULONG = 0x00000080;
 pub const CM_DEVCAP_HARDWAREDISABLED: ::ULONG = 0x00000100;
 pub const CM_DEVCAP_NONDYNAMIC: ::ULONG = 0x00000200;
-
 pub const CM_REMOVAL_POLICY_EXPECT_NO_REMOVAL: ::ULONG = 1;
 pub const CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL: ::ULONG = 2;
 pub const CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL: ::ULONG = 3;
-
 pub const CM_INSTALL_STATE_INSTALLED: ::ULONG = 0;
 pub const CM_INSTALL_STATE_NEEDS_REINSTALL: ::ULONG = 1;
 pub const CM_INSTALL_STATE_FAILED_INSTALL: ::ULONG = 2;
 pub const CM_INSTALL_STATE_FINISH_INSTALL: ::ULONG = 3;
-
 pub const CM_LOCATE_DEVNODE_NORMAL: ::ULONG = 0x00000000;
 pub const CM_LOCATE_DEVNODE_PHANTOM: ::ULONG = 0x00000001;
 pub const CM_LOCATE_DEVNODE_CANCELREMOVE: ::ULONG = 0x00000002;
 pub const CM_LOCATE_DEVNODE_NOVALIDATION: ::ULONG = 0x00000004;
 pub const CM_LOCATE_DEVNODE_BITS: ::ULONG = 0x00000007;
-
 pub const CM_LOCATE_DEVINST_NORMAL: ::ULONG = CM_LOCATE_DEVNODE_NORMAL;
 pub const CM_LOCATE_DEVINST_PHANTOM: ::ULONG = CM_LOCATE_DEVNODE_PHANTOM;
 pub const CM_LOCATE_DEVINST_CANCELREMOVE: ::ULONG = CM_LOCATE_DEVNODE_CANCELREMOVE;
 pub const CM_LOCATE_DEVINST_NOVALIDATION: ::ULONG = CM_LOCATE_DEVNODE_NOVALIDATION;
 pub const CM_LOCATE_DEVINST_BITS: ::ULONG = CM_LOCATE_DEVNODE_BITS;
-
 pub const CM_OPEN_CLASS_KEY_INSTALLER: ::ULONG = 0x00000000;
 pub const CM_OPEN_CLASS_KEY_INTERFACE: ::ULONG = 0x00000001;
 pub const CM_OPEN_CLASS_KEY_BITS: ::ULONG = 0x00000001;
-
 pub const CM_REMOVE_UI_OK: ::ULONG = 0x00000000;
 pub const CM_REMOVE_UI_NOT_OK: ::ULONG = 0x00000001;
 pub const CM_REMOVE_NO_RESTART: ::ULONG = 0x00000002;
 pub const CM_REMOVE_BITS: ::ULONG = 0x00000003;
-
 pub const CM_QUERY_REMOVE_UI_OK: ::ULONG = CM_REMOVE_UI_OK;
 pub const CM_QUERY_REMOVE_UI_NOT_OK: ::ULONG = CM_REMOVE_UI_NOT_OK;
 pub const CM_QUERY_REMOVE_BITS: ::ULONG = CM_QUERY_REMOVE_UI_OK | CM_QUERY_REMOVE_UI_NOT_OK;
-
 pub const CM_REENUMERATE_NORMAL: ::ULONG = 0x00000000;
 pub const CM_REENUMERATE_SYNCHRONOUS: ::ULONG = 0x00000001;
 pub const CM_REENUMERATE_RETRY_INSTALLATION: ::ULONG = 0x00000002;
 pub const CM_REENUMERATE_ASYNCHRONOUS: ::ULONG = 0x00000004;
 pub const CM_REENUMERATE_BITS: ::ULONG = 0x00000007;
-
 pub const CM_REGISTER_DEVICE_DRIVER_STATIC: ::ULONG = 0x00000000;
 pub const CM_REGISTER_DEVICE_DRIVER_DISABLEABLE: ::ULONG = 0x00000001;
 pub const CM_REGISTER_DEVICE_DRIVER_REMOVABLE: ::ULONG = 0x00000002;
 pub const CM_REGISTER_DEVICE_DRIVER_BITS: ::ULONG = 0x00000003;
-
 pub const CM_REGISTRY_HARDWARE: ::ULONG = 0x00000000;
 pub const CM_REGISTRY_SOFTWARE: ::ULONG = 0x00000001;
 pub const CM_REGISTRY_USER: ::ULONG = 0x00000100;
 pub const CM_REGISTRY_CONFIG: ::ULONG = 0x00000200;
 pub const CM_REGISTRY_BITS: ::ULONG = 0x00000301;
-
 pub const CM_SET_DEVNODE_PROBLEM_NORMAL: ::ULONG = 0x00000000;
 pub const CM_SET_DEVNODE_PROBLEM_OVERRIDE: ::ULONG = 0x00000001;
 pub const CM_SET_DEVNODE_PROBLEM_BITS: ::ULONG = 0x00000001;
-
 pub const CM_SET_DEVINST_PROBLEM_NORMAL: ::ULONG = CM_SET_DEVNODE_PROBLEM_NORMAL;
 pub const CM_SET_DEVINST_PROBLEM_OVERRIDE: ::ULONG = CM_SET_DEVNODE_PROBLEM_OVERRIDE;
 pub const CM_SET_DEVINST_PROBLEM_BITS: ::ULONG = CM_SET_DEVNODE_PROBLEM_BITS;
-
 pub const CM_SET_HW_PROF_FLAGS_UI_NOT_OK: ::ULONG = 0x00000001;
 pub const CM_SET_HW_PROF_FLAGS_BITS: ::ULONG = 0x00000001;
-
 pub const CM_SETUP_DEVNODE_READY: ::ULONG = 0x00000000;
 pub const CM_SETUP_DEVINST_READY: ::ULONG = CM_SETUP_DEVNODE_READY;
 pub const CM_SETUP_DOWNLOAD: ::ULONG = 0x00000001;
@@ -732,29 +642,22 @@ pub const CM_SETUP_DEVINST_CONFIG_CLASS: ::ULONG = CM_SETUP_DEVNODE_CONFIG_CLASS
 pub const CM_SETUP_DEVNODE_CONFIG_EXTENSIONS: ::ULONG = 0x00000007;
 pub const CM_SETUP_DEVINST_CONFIG_EXTENSIONS: ::ULONG = CM_SETUP_DEVNODE_CONFIG_EXTENSIONS;
 pub const CM_SETUP_BITS: ::ULONG = 0x00000007;
-
 pub const CM_QUERY_ARBITRATOR_RAW: ::ULONG = 0x00000000;
 pub const CM_QUERY_ARBITRATOR_TRANSLATED: ::ULONG = 0x00000001;
 pub const CM_QUERY_ARBITRATOR_BITS: ::ULONG = 0x00000001;
-
 pub const CM_CUSTOMDEVPROP_MERGE_MULTISZ: ::ULONG = 0x00000001;
 pub const CM_CUSTOMDEVPROP_BITS: ::ULONG = 0x00000001;
-
 pub const CM_NAME_ATTRIBUTE_NAME_RETRIEVED_FROM_DEVICE: ::ULONG = 0x1;
 pub const CM_NAME_ATTRIBUTE_USER_ASSIGNED_NAME: ::ULONG = 0x2;
-
 pub const CM_CLASS_PROPERTY_INSTALLER: ::ULONG = 0x00000000;
 pub const CM_CLASS_PROPERTY_INTERFACE: ::ULONG = 0x00000001;
 pub const CM_CLASS_PROPERTY_BITS: ::ULONG = 0x00000001;
-
 DECLARE_HANDLE!(HCMNOTIFICATION, HCMNOTIFICATION__);
 pub type PHCMNOTIFICATION = *mut HCMNOTIFICATION;
-
 pub const CM_NOTIFY_FILTER_FLAG_ALL_INTERFACE_CLASSES: ::ULONG = 0x00000001;
 pub const CM_NOTIFY_FILTER_FLAG_ALL_DEVICE_INSTANCES: ::ULONG = 0x00000002;
 pub const CM_NOTIFY_FILTER_VALID_FLAGS: ::ULONG = CM_NOTIFY_FILTER_FLAG_ALL_INTERFACE_CLASSES
     | CM_NOTIFY_FILTER_FLAG_ALL_DEVICE_INSTANCES;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum CM_NOTIFY_FILTER_TYPE {
     CM_NOTIFY_FILTER_TYPE_DEVICEINTERFACE = 0,
@@ -763,7 +666,6 @@ pub enum CM_NOTIFY_FILTER_TYPE {
     CM_NOTIFY_FILTER_TYPE_MAX,
 }
 pub type PCM_NOTIFY_FILTER_TYPE = *mut CM_NOTIFY_FILTER_TYPE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CM_NOTIFY_FILTER_DeviceInterface {
     pub ClassGuid: ::GUID,
@@ -777,7 +679,7 @@ pub struct CM_NOTIFY_FILTER_DeviceInstance {
     pub InstanceId: [::WCHAR; MAX_DEVICE_ID_LEN],
 }
 impl Clone for CM_NOTIFY_FILTER_DeviceInstance {
-    fn clone(&self) -> CM_NOTIFY_FILTER_DeviceInstance { *self } 
+    fn clone(&self) -> CM_NOTIFY_FILTER_DeviceInstance { *self }
 }
 #[repr(C)] #[derive(Copy)]
 pub struct CM_NOTIFY_FILTER {
@@ -792,7 +694,6 @@ UNION!(CM_NOTIFY_FILTER, u, DeviceInterface, DeviceInterface_mut, CM_NOTIFY_FILT
 UNION!(CM_NOTIFY_FILTER, u, DeviceHandle, DeviceHandle_mut, CM_NOTIFY_FILTER_DeviceHandle);
 UNION!(CM_NOTIFY_FILTER, u, DeviceInstance, DeviceInstance_mut, CM_NOTIFY_FILTER_DeviceInstance);
 pub type PCM_NOTIFY_FILTER = *mut CM_NOTIFY_FILTER;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum CM_NOTIFY_ACTION {
     CM_NOTIFY_ACTION_DEVICEINTERFACEARRIVAL = 0,
@@ -808,7 +709,6 @@ pub enum CM_NOTIFY_ACTION {
     CM_NOTIFY_ACTION_MAX,
 }
 pub type PCM_NOTIFY_ACTION = *mut CM_NOTIFY_ACTION;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CM_NOTIFY_EVENT_DATA_DeviceInterface {
     pub ClassGuid: ::GUID,
@@ -840,12 +740,10 @@ UNION!(
     CM_NOTIFY_EVENT_DATA, u, DeviceInstance, DeviceInstance_mut, CM_NOTIFY_EVENT_DATA_DeviceInstance
 );
 pub type PCM_NOTIFY_EVENT_DATA = *mut CM_NOTIFY_EVENT_DATA;
-
 pub type PCM_NOTIFY_CALLBACK = Option<unsafe extern "system" fn(
     hNotify: HCMNOTIFICATION, Context: ::PVOID, Action: CM_NOTIFY_ACTION,
     EventData: PCM_NOTIFY_EVENT_DATA, EventDataSize: ::DWORD,
 ) -> ::DWORD>;
-
 pub const CR_SUCCESS: CONFIGRET = 0x00000000;
 pub const CR_DEFAULT: CONFIGRET = 0x00000001;
 pub const CR_OUT_OF_MEMORY: CONFIGRET = 0x00000002;

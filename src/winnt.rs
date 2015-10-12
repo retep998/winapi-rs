@@ -1048,7 +1048,6 @@ pub struct QUOTA_LIMITS {
     pub TimeLimit: ::LARGE_INTEGER,
 }
 pub type PQUOTA_LIMITS = *mut QUOTA_LIMITS;
-
 pub const QUOTA_LIMITS_HARDWS_MIN_ENABLE: ::DWORD = 0x00000001;
 pub const QUOTA_LIMITS_HARDWS_MIN_DISABLE: ::DWORD = 0x00000002;
 pub const QUOTA_LIMITS_HARDWS_MAX_ENABLE: ::DWORD = 0x00000004;
@@ -1901,7 +1900,6 @@ pub const KEY_CREATE_LINK: ::REGSAM = 0x0020;
 pub const KEY_WOW64_32KEY: ::REGSAM = 0x0200;
 pub const KEY_WOW64_64KEY: ::REGSAM = 0x0100;
 pub const KEY_WOW64_RES: ::REGSAM = 0x0300;
-
 pub const KEY_READ: ::REGSAM = (
         STANDARD_RIGHTS_READ |
         KEY_QUERY_VALUE |
@@ -1919,29 +1917,23 @@ pub const KEY_ALL_ACCESS: ::REGSAM = (
         KEY_NOTIFY |
         KEY_CREATE_LINK
     ) & (!SYNCHRONIZE);
-
 pub const REG_CREATED_NEW_KEY: ::DWORD = 0x00000001;
 pub const REG_OPENED_EXISTING_KEY: ::DWORD = 0x00000002;
-
 pub const REG_NOTIFY_CHANGE_NAME: ::DWORD = 0x00000001;
 pub const REG_NOTIFY_CHANGE_ATTRIBUTES: ::DWORD = 0x00000002;
 pub const REG_NOTIFY_CHANGE_LAST_SET: ::DWORD = 0x00000004;
 pub const REG_NOTIFY_CHANGE_SECURITY: ::DWORD = 0x00000008;
-
 pub const REG_LEGAL_CHANGE_FILTER: ::DWORD = REG_NOTIFY_CHANGE_NAME |
     REG_NOTIFY_CHANGE_ATTRIBUTES |
     REG_NOTIFY_CHANGE_LAST_SET |
     REG_NOTIFY_CHANGE_SECURITY;
-
 pub const REG_NOTIFY_THREAD_AGNOSTIC: ::DWORD = 0x10000000; //supported only on Windows 8 and later
-
 pub const REG_OPTION_RESERVED: ::DWORD = 0x00000000;
 pub const REG_OPTION_NON_VOLATILE: ::DWORD = 0x00000000;
 pub const REG_OPTION_VOLATILE: ::DWORD = 0x00000001;
 pub const REG_OPTION_CREATE_LINK: ::DWORD = 0x00000002;
 pub const REG_OPTION_BACKUP_RESTORE: ::DWORD = 0x00000004;
 pub const REG_OPTION_OPEN_LINK: ::DWORD = 0x00000008;
-
 pub const REG_NONE: ::DWORD = 0;
 pub const REG_SZ: ::DWORD = 1;
 pub const REG_EXPAND_SZ: ::DWORD = 2;
@@ -1969,7 +1961,6 @@ pub const SERVICE_WIN32: ::DWORD = SERVICE_WIN32_OWN_PROCESS | SERVICE_WIN32_SHA
 pub const SERVICE_INTERACTIVE_PROCESS: ::DWORD = 0x00000100;
 pub const SERVICE_TYPE_ALL: ::DWORD = SERVICE_WIN32 | SERVICE_ADAPTER | SERVICE_DRIVER
     | SERVICE_INTERACTIVE_PROCESS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TP_CALLBACK_INSTANCE {
     dummy: *mut ::c_void,
@@ -2005,12 +1996,10 @@ pub struct TP_WORK {
     dummy: *mut ::c_void,
 }
 pub type PTP_WORK = *mut TP_WORK;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ACTIVATION_CONTEXT {
     dummy: *mut ::c_void,
 }
-
 ENUM!{enum TP_CALLBACK_PRIORITY {
     TP_CALLBACK_PRIORITY_HIGH,
     TP_CALLBACK_PRIORITY_NORMAL,
@@ -2018,7 +2007,6 @@ ENUM!{enum TP_CALLBACK_PRIORITY {
     TP_CALLBACK_PRIORITY_INVALID,
     TP_CALLBACK_PRIORITY_COUNT = 4,
 }}
-
 pub type PTP_CLEANUP_GROUP_CANCEL_CALLBACK = Option<unsafe extern "system" fn(
     ObjectContext: ::PVOID, CleanupContext: ::PVOID,
 )>;
@@ -2035,17 +2023,14 @@ pub type TP_WAIT_RESULT = ::DWORD;
 pub type PTP_WAIT_CALLBACK = Option<unsafe extern "system" fn(
     Instance: PTP_CALLBACK_INSTANCE, Context: ::PVOID, Wait: PTP_WAIT, WaitResult: TP_WAIT_RESULT,
 )>;
-
 pub type TP_VERSION = ::DWORD;
 pub type PTP_VERSION = *mut ::DWORD;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TP_POOL_STACK_INFORMATION {
     pub StackReserve: ::SIZE_T,
     pub StackCommit: ::SIZE_T,
 }
 pub type PTP_POOL_STACK_INFORMATION = *mut TP_POOL_STACK_INFORMATION;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TP_CALLBACK_ENVIRON_V3_s {
     pub BitFields: ::DWORD,
@@ -2073,7 +2058,6 @@ UNION!(TP_CALLBACK_ENVIRON_V3, u, Flags, Flags_mut, ::DWORD);
 UNION!(TP_CALLBACK_ENVIRON_V3, u, s, s_mut, TP_CALLBACK_ENVIRON_V3_s);
 pub type TP_CALLBACK_ENVIRON = TP_CALLBACK_ENVIRON_V3;
 pub type PTP_CALLBACK_ENVIRON = *mut TP_CALLBACK_ENVIRON_V3;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct JOB_SET_ARRAY {
     pub JobHandle: ::HANDLE,
@@ -2081,7 +2065,6 @@ pub struct JOB_SET_ARRAY {
     pub Flags: ::DWORD,
 }
 pub type PJOB_SET_ARRAY = *mut JOB_SET_ARRAY;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct RTL_BARRIER {
     pub Reserved1: ::DWORD,
@@ -2091,13 +2074,11 @@ pub struct RTL_BARRIER {
     pub Reserved5: ::DWORD,
 }
 pub type PRTL_BARRIER = *mut RTL_BARRIER;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct RTL_RUN_ONCE {
     pub Ptr: ::PVOID,
 }
 pub type PRTL_RUN_ONCE = *mut RTL_RUN_ONCE;
-
 ENUM!{enum RTL_UMS_THREAD_INFO_CLASS {
     UmsThreadInvalidInfoClass = 0,
     UmsThreadUserContext,
@@ -2116,7 +2097,6 @@ ENUM!{enum RTL_UMS_SCHEDULER_REASON {
 pub type PRTL_UMS_SCHEDULER_ENTRY_POINT = Option<unsafe extern "system" fn(
     Reason: RTL_UMS_SCHEDULER_REASON, ActivationPayload: ::ULONG_PTR, SchedulerParam: ::PVOID,
 )>;
-
 ENUM!{enum FIRMWARE_TYPE {
     FirmwareTypeUnknown,
     FirmwareTypeBios,
@@ -2124,7 +2104,6 @@ ENUM!{enum FIRMWARE_TYPE {
     FirmwareTypeMax,
 }}
 pub type PFIRMWARE_TYPE = *mut FIRMWARE_TYPE;
-
 ENUM!{enum LOGICAL_PROCESSOR_RELATIONSHIP {
     RelationProcessorCore,
     RelationNumaNode,
@@ -2133,7 +2112,6 @@ ENUM!{enum LOGICAL_PROCESSOR_RELATIONSHIP {
     RelationGroup,
     RelationAll = 0xffff,
 }}
-
 ENUM!{enum PROCESSOR_CACHE_TYPE {
     CacheUnified,
     CacheInstruction,
@@ -2149,7 +2127,6 @@ pub struct CACHE_DESCRIPTOR {
     pub Type: PROCESSOR_CACHE_TYPE,
 }
 pub type PCACHE_DESCRIPTOR = *mut CACHE_DESCRIPTOR;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_ProcessorCore {
     pub Flags: ::BYTE,
@@ -2174,13 +2151,11 @@ UNION!(
 );
 UNION!(SYSTEM_LOGICAL_PROCESSOR_INFORMATION, Reserved, Cache, Cache_mut, CACHE_DESCRIPTOR);
 pub type PSYSTEM_LOGICAL_PROCESSOR_INFORMATION = *mut SYSTEM_LOGICAL_PROCESSOR_INFORMATION;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION {
     pub CycleTime: ::DWORD64,
 }
 pub type PSYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION = *mut SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION;
-
 ENUM!{enum HARDWARE_COUNTER_TYPE {
     PMCCounter,
     MaxHardwareCounterType,
@@ -2198,7 +2173,6 @@ ENUM!{enum PROCESS_MITIGATION_POLICY {
     ProcessSignaturePolicy,
     MaxProcessMitigationPolicy,
 }}
-
 #[repr(C)] #[derive(Copy)]
 pub struct OSVERSIONINFOA {
     pub dwOSVersionInfoSize: ::DWORD,
@@ -2257,13 +2231,11 @@ pub struct OSVERSIONINFOEXW {
 impl Clone for OSVERSIONINFOEXW { fn clone(&self) -> OSVERSIONINFOEXW { *self } }
 pub type POSVERSIONINFOEXW = *mut OSVERSIONINFOEXW;
 pub type LPOSVERSIONINFOEXW = *mut OSVERSIONINFOEXW;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SLIST_ENTRY {
     pub Next: *mut SLIST_ENTRY,
 }
 pub type PSLIST_ENTRY = *mut SLIST_ENTRY;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SLIST_HEADER_HeaderX64 {
     pub BitFields1: ::ULONGLONG,
@@ -2283,9 +2255,7 @@ pub struct SLIST_HEADER {
     pub Region: ::ULONGLONG,
 }
 UNION!(SLIST_HEADER, Alignment, HeaderX64, HeaderX64_mut, SLIST_HEADER_HeaderX64);
-
 pub type PSLIST_HEADER = *mut SLIST_HEADER;
-
 ENUM!{enum SYSTEM_POWER_STATE {
     PowerSystemUnspecified = 0,
     PowerSystemWorking = 1,
@@ -2331,10 +2301,8 @@ ENUM!{enum USER_ACTIVITY_PRESENCE {
     //PowerUserInvalid = 3,
 }}
 pub type PUSER_ACTIVITY_PRESENCE = *mut USER_ACTIVITY_PRESENCE;
-
 pub type EXECUTION_STATE = ::DWORD;
 pub type PEXECUTION_STATE = *mut ::DWORD;
-
 ENUM!{enum LATENCY_TIME {
     LT_DONT_CARE,
     LT_LOWEST_LATENCY,
@@ -2346,9 +2314,7 @@ ENUM!{enum POWER_REQUEST_TYPE {
     PowerRequestExecutionRequired,
 }}
 pub type PPOWER_REQUEST_TYPE = *mut POWER_REQUEST_TYPE;
-
 pub const MAX_HW_COUNTERS: usize = 16;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HARDWARE_COUNTER_DATA {
     pub Type: HARDWARE_COUNTER_TYPE,
@@ -2369,7 +2335,6 @@ pub struct PERFORMANCE_DATA {
     pub HwCounters: [HARDWARE_COUNTER_DATA; MAX_HW_COUNTERS],
 }
 pub type PPERFORMANCE_DATA = *mut PERFORMANCE_DATA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MEMORY_BASIC_INFORMATION {
     pub BaseAddress: ::PVOID,
@@ -2405,7 +2370,6 @@ pub struct MEMORY_BASIC_INFORMATION64 { // FIXME: align 16
     pub __alignment2: ::DWORD,
 }
 pub type PMEMORY_BASIC_INFORMATION64 = *mut MEMORY_BASIC_INFORMATION64;
-
 pub const WOW64_SIZE_OF_80387_REGISTERS: usize = 80;
 pub const WOW64_MAXIMUM_SUPPORTED_EXTENSION: usize = 512;
 #[repr(C)] #[derive(Copy)]
@@ -2454,7 +2418,6 @@ pub struct WOW64_CONTEXT {
 }
 impl Clone for WOW64_CONTEXT { fn clone(&self) -> WOW64_CONTEXT { *self } }
 pub type PWOW64_CONTEXT = *mut WOW64_CONTEXT;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WOW64_LDT_ENTRY_Bytes {
     pub BaseMid: ::BYTE,

@@ -14,7 +14,6 @@ pub struct ERROR_LOG {
 }
 pub type PERROR_LOG = *mut ERROR_LOG;
 pub type LPERROR_LOG = *mut ERROR_LOG;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HLOG {
     pub time: ::DWORD,
@@ -24,11 +23,9 @@ pub struct HLOG {
 }
 pub type PHLOG = *mut HLOG;
 pub type LPHLOG = *mut HLOG;
-
 pub const LOGFLAGS_FORWARD: ::DWORD = 0;
 pub const LOGFLAGS_BACKWARD: ::DWORD = 0x1;
 pub const LOGFLAGS_SEEK: ::DWORD = 0x2;
-
 pub const ERRLOG_BASE: ::DWORD = 3100;
 pub const NELOG_Internal_Error: ::DWORD = ERRLOG_BASE + 0;
 pub const NELOG_Resource_Shortage: ::DWORD = ERRLOG_BASE + 1;
@@ -140,7 +137,6 @@ pub const NELOG_FT_Update_In_Progress: ::DWORD = ERRLOG_BASE + 159;
 pub const NELOG_Joined_Domain: ::DWORD = ERRLOG_BASE + 160;
 pub const NELOG_Joined_Workgroup: ::DWORD = ERRLOG_BASE + 161;
 pub const NELOG_OEM_Code: ::DWORD = ERRLOG_BASE + 199;
-
 pub const ERRLOG2_BASE: ::DWORD = 5700;
 pub const NELOG_NetlogonSSIInitError: ::DWORD = ERRLOG2_BASE + 0;
 pub const NELOG_NetlogonFailedToUpdateTrustList: ::DWORD = ERRLOG2_BASE + 1;

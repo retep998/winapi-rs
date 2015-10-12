@@ -1,7 +1,6 @@
 // Copyright © 2015, Brian Vincent
 // Licensed under the MIT License <LICENSE.md>
 //! VSS header file
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_OBJECT_TYPE {
     VSS_OBJECT_UNKNOWN = 0,
@@ -12,7 +11,6 @@ pub enum VSS_OBJECT_TYPE {
     VSS_OBJECT_TYPE_COUNT = 5,
 }
 pub type PVSS_OBJECT_TYPE = *mut VSS_OBJECT_TYPE;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_SNAPSHOT_STATE {
     VSS_SS_UNKNOWN = 0x00,
@@ -34,7 +32,6 @@ pub enum VSS_SNAPSHOT_STATE {
     VSS_SS_COUNT = 0x10,
 }
 pub type PVSS_SNAPSHOT_STATE = *mut VSS_SNAPSHOT_STATE;
-
 pub type VSS_VOLUME_SNAPSHOT_ATTRIBUTES = ::LONG;
 pub const VSS_VOLSNAP_ATTR_PERSISTENT: ::LONG = 0x00000001;
 pub const VSS_VOLSNAP_ATTR_NO_AUTORECOVERY: ::LONG = 0x00000002;
@@ -56,22 +53,20 @@ pub const VSS_VOLSNAP_ATTR_DELAYED_POSTSNAPSHOT: ::LONG = 0x01000000;
 pub const VSS_VOLSNAP_ATTR_TXF_RECOVERY: ::LONG = 0x02000000;
 pub const VSS_VOLSNAP_ATTR_FILE_SHARE: ::LONG = 0x04000000;
 pub type PVSS_VOLUME_SNAPSHOT_ATTRIBUTES = *mut VSS_VOLUME_SNAPSHOT_ATTRIBUTES;
-
 pub type VSS_SNAPSHOT_CONTEXT = ::LONG;
 pub type PVSS_SNAPSHOT_CONTEXT = *mut VSS_SNAPSHOT_CONTEXT;
 pub const VSS_CTX_BACKUP: ::LONG = 0;
 pub const VSS_CTX_FILE_SHARE_BACKUP: ::LONG = VSS_VOLSNAP_ATTR_NO_WRITERS;
-pub const VSS_CTX_NAS_ROLLBACK: ::LONG = VSS_VOLSNAP_ATTR_PERSISTENT 
+pub const VSS_CTX_NAS_ROLLBACK: ::LONG = VSS_VOLSNAP_ATTR_PERSISTENT
     | VSS_VOLSNAP_ATTR_NO_AUTO_RELEASE | VSS_VOLSNAP_ATTR_NO_WRITERS;
-pub const VSS_CTX_APP_ROLLBACK: ::LONG = VSS_VOLSNAP_ATTR_PERSISTENT 
+pub const VSS_CTX_APP_ROLLBACK: ::LONG = VSS_VOLSNAP_ATTR_PERSISTENT
     | VSS_VOLSNAP_ATTR_NO_AUTO_RELEASE;
 pub const VSS_CTX_CLIENT_ACCESSIBLE: ::LONG = VSS_VOLSNAP_ATTR_PERSISTENT
-    | VSS_VOLSNAP_ATTR_CLIENT_ACCESSIBLE | VSS_VOLSNAP_ATTR_NO_AUTO_RELEASE 
+    | VSS_VOLSNAP_ATTR_CLIENT_ACCESSIBLE | VSS_VOLSNAP_ATTR_NO_AUTO_RELEASE
     | VSS_VOLSNAP_ATTR_NO_WRITERS;
-pub const VSS_CTX_CLIENT_ACCESSIBLE_WRITERS: ::LONG = VSS_VOLSNAP_ATTR_PERSISTENT 
+pub const VSS_CTX_CLIENT_ACCESSIBLE_WRITERS: ::LONG = VSS_VOLSNAP_ATTR_PERSISTENT
     | VSS_VOLSNAP_ATTR_CLIENT_ACCESSIBLE | VSS_VOLSNAP_ATTR_NO_AUTO_RELEASE;
 pub const VSS_CTX_ALL: ::LONG = 0xffffffffu32 as ::LONG;
-
 pub type VSS_PROVIDER_CAPABILITIES = ::DWORD;
 pub type PVSS_PROVIDER_CAPABILITIES = *mut VSS_PROVIDER_CAPABILITIES;
 pub const VSS_PRV_CAPABILITY_LEGACY: ::DWORD = 0x1;
@@ -84,7 +79,6 @@ pub const VSS_PRV_CAPABILITY_RECYCLING: ::DWORD = 0x40;
 pub const VSS_PRV_CAPABILITY_PLEX: ::DWORD = 0x80;
 pub const VSS_PRV_CAPABILITY_DIFFERENTIAL: ::DWORD = 0x100;
 pub const VSS_PRV_CAPABILITY_CLUSTERED: ::DWORD = 0x200;
-
 pub type VSS_HARDWARE_OPTIONS = ::DWORD;
 pub type PVSS_HARDWARE_OPTIONS = *mut VSS_HARDWARE_OPTIONS;
 pub const VSS_BREAKEX_FLAG_MASK_LUNS: ::DWORD = 0x1;
@@ -95,12 +89,10 @@ pub const VSS_ONLUNSTATECHANGE_NOTIFY_READ_WRITE: ::DWORD = 0x100;
 pub const VSS_ONLUNSTATECHANGE_NOTIFY_LUN_PRE_RECOVERY: ::DWORD = 0x200;
 pub const VSS_ONLUNSTATECHANGE_NOTIFY_LUN_POST_RECOVERY: ::DWORD = 0x400;
 pub const VSS_ONLUNSTATECHANGE_DO_MASK_LUNS: ::DWORD = 0x800;
-
 pub type VSS_RECOVERY_OPTIONS = ::DWORD;
 pub type PVSS_RECOVERY_OPTIONS = *mut VSS_RECOVERY_OPTIONS;
 pub const VSS_RECOVERY_REVERT_IDENTITY_ALL: ::DWORD = 0x00000100;
 pub const VSS_RECOVERY_NO_VOLUME_CHECK: ::DWORD = 0x00000200;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_WRITER_STATE {
     VSS_WS_UNKNOWN = 0,
@@ -122,7 +114,6 @@ pub enum VSS_WRITER_STATE {
     VSS_WS_COUNT = 16,
 }
 pub type PVSS_WRITER_STATE = *mut VSS_WRITER_STATE;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_BACKUP_TYPE {
     VSS_BT_UNDEFINED = 0,
@@ -134,7 +125,6 @@ pub enum VSS_BACKUP_TYPE {
     VSS_BT_OTHER = 6,
 }
 pub type PVSS_BACKUP_TYPE = *mut VSS_BACKUP_TYPE;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_RESTORE_TYPE {
     VSS_RTYPE_UNDEFINED = 0,
@@ -143,7 +133,6 @@ pub enum VSS_RESTORE_TYPE {
     VSS_RTYPE_OTHER = 3,
 }
 pub type PVSS_RESTORE_TYPE = *mut VSS_RESTORE_TYPE;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_ROLLFORWARD_TYPE {
     VSS_RF_UNDEFINED = 0,
@@ -152,7 +141,6 @@ pub enum VSS_ROLLFORWARD_TYPE {
     VSS_RF_PARTIAL = 3,
 }
 pub type PVSS_ROLLFORWARD_TYPE = *mut VSS_ROLLFORWARD_TYPE;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_PROVIDER_TYPE {
     VSS_PROV_UNKNOWN = 0,
@@ -162,7 +150,6 @@ pub enum VSS_PROVIDER_TYPE {
     VSS_PROV_FILESHARE = 4,
 }
 pub type PVSS_PROVIDER_TYPE = *mut VSS_PROVIDER_TYPE;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_APPLICATION_LEVEL {
     VSS_APP_UNKNOWN = 0,
@@ -173,7 +160,6 @@ pub enum VSS_APPLICATION_LEVEL {
     VSS_APP_AUTO = -1,
 }
 pub type PVSS_APPLICATION_LEVEL = *mut VSS_APPLICATION_LEVEL;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_SNAPSHOT_PROPERTY_ID {
     VSS_SPROPID_UNKNOWN = 0,
@@ -192,7 +178,6 @@ pub enum VSS_SNAPSHOT_PROPERTY_ID {
     VSS_SPROPID_STATUS = 0xd,
 }
 pub type PVSS_SNAPSHOT_PROPERTY_ID = *mut VSS_SNAPSHOT_PROPERTY_ID;
-
 pub type VSS_FILE_SPEC_BACKUP_TYPE = ::DWORD;
 pub type PVSS_FILE_SPEC_BACKUP_TYPE = *mut VSS_FILE_SPEC_BACKUP_TYPE;
 pub const VSS_FSBT_FULL_BACKUP_REQUIRED: ::DWORD = 0x1;
@@ -206,7 +191,6 @@ pub const VSS_FSBT_LOG_SNAPSHOT_REQUIRED: ::DWORD = 0x800;
 pub const VSS_FSBT_CREATED_DURING_BACKUP: ::DWORD = 0x10000;
 pub const VSS_FSBT_ALL_BACKUP_REQUIRED: ::DWORD = 0xf;
 pub const VSS_FSBT_ALL_SNAPSHOT_REQUIRED: ::DWORD = 0xf00;
-
 pub type VSS_BACKUP_SCHEMA = ::DWORD;
 pub type PVSS_BACKUP_SCHEMA = *mut VSS_BACKUP_SCHEMA;
 pub const VSS_BS_UNDEFINED: ::DWORD = 0;
@@ -225,14 +209,9 @@ pub const VSS_BS_ROLLFORWARD_RESTORE: ::DWORD = 0x1000;
 pub const VSS_BS_RESTORE_RENAME: ::DWORD = 0x2000;
 pub const VSS_BS_AUTHORITATIVE_RESTORE: ::DWORD = 0x4000;
 pub const VSS_BS_WRITER_SUPPORTS_PARALLEL_RESTORES: ::DWORD = 0x8000;
-
-
 pub type VSS_ID = ::GUID;
-
 pub type VSS_PWSZ = *mut ::WCHAR;
-
 pub type VSS_TIMESTAMP = ::LONGLONG;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct VSS_SNAPSHOT_PROP {
     pub m_SnapshotId: ::VSS_ID,
@@ -250,7 +229,6 @@ pub struct VSS_SNAPSHOT_PROP {
     pub m_eStatus: ::VSS_SNAPSHOT_STATE,
 }
 type PVSS_SNAPSHOT_PROP = *mut VSS_SNAPSHOT_PROP;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct VSS_PROVIDER_PROP {
     pub m_ProviderId: ::VSS_ID,
@@ -261,21 +239,17 @@ pub struct VSS_PROVIDER_PROP {
     pub m_ClassId: ::CLSID,
 }
 type PVSS_PROVIDER_PROP = *mut VSS_PROVIDER_PROP;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct VSS_OBJECT_UNION {
     pub Snap: ::VSS_SNAPSHOT_PROP,
 }
 UNION!(VSS_OBJECT_UNION, Snap, Prov, Prov_mut, VSS_PROVIDER_PROP);
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct VSS_OBJECT_PROP {
     pub Type: ::VSS_OBJECT_TYPE,
     pub Obj: ::VSS_OBJECT_UNION,
 }
 type PVSS_OBJECT_PROP = *mut VSS_OBJECT_PROP;
-
-
 RIDL!(
 interface IVssEnumObject(IVssEnumObjectVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
@@ -286,7 +260,6 @@ interface IVssEnumObject(IVssEnumObjectVtbl): IUnknown(IUnknownVtbl) {
     fn Clone(&mut self, ppenum: *mut *mut ::IVssEnumObject) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssAsync(IVssAsyncVtbl): IUnknown(IUnknownVtbl) {
     fn Cancel(&mut self) -> ::HRESULT,

@@ -1,7 +1,7 @@
 // Copyright © 2015, skdltmxn
 // Licensed under the MIT License <LICENSE.md>
 //! Data Protection API Prototypes and Definitions
-// This header file provides the definitions and symbols necessary for an 
+// This header file provides the definitions and symbols necessary for an
 // Application or Smart Card Service Provider to access the Smartcard Subsystem.
 pub type LPCBYTE = *const ::BYTE;
 pub type SCARDCONTEXT = ::ULONG_PTR;
@@ -10,16 +10,13 @@ pub type LPSCARDCONTEXT = *mut SCARDCONTEXT;
 pub type SCARDHANDLE = ::ULONG_PTR;
 pub type PSCARDHANDLE = *mut SCARDHANDLE;
 pub type LPSCARDHANDLE = *mut SCARDHANDLE;
-
 pub const SCARD_AUTOALLOCATE: ::DWORD = -1i32 as ::DWORD;
 pub const SCARD_SCOPE_USER: ::DWORD = 0;
 pub const SCARD_SCOPE_TERMINAL: ::DWORD = 1;
 pub const SCARD_SCOPE_SYSTEM: ::DWORD = 2;
-
 pub const SCARD_PROVIDER_PRIMARY: ::DWORD = 1;
 pub const SCARD_PROVIDER_CSP: ::DWORD = 2;
 pub const SCARD_PROVIDER_KSP: ::DWORD = 3;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SCARD_READERSTATEA {
     pub szReader: ::LPCSTR,
@@ -44,14 +41,12 @@ pub struct SCARD_READERSTATEW {
 impl Clone for SCARD_READERSTATEW { fn clone(&self) -> SCARD_READERSTATEW { *self } }
 pub type PSCARD_READERSTATEW = *mut SCARD_READERSTATEW;
 pub type LPSCARD_READERSTATEW = *mut SCARD_READERSTATEW;
-
 pub type SCARD_READERSTATE_A = SCARD_READERSTATEA;
 pub type SCARD_READERSTATE_W = SCARD_READERSTATEW;
 pub type PSCARD_READERSTATE_A = PSCARD_READERSTATEA;
 pub type PSCARD_READERSTATE_W = PSCARD_READERSTATEW;
 pub type LPSCARD_READERSTATE_A = LPSCARD_READERSTATEA;
 pub type LPSCARD_READERSTATE_W = LPSCARD_READERSTATEW;
-
 pub const SCARD_STATE_UNAWARE: ::DWORD = 0x00000000;
 pub const SCARD_STATE_IGNORE: ::DWORD = 0x00000001;
 pub const SCARD_STATE_CHANGED: ::DWORD = 0x00000002;
@@ -64,7 +59,6 @@ pub const SCARD_STATE_EXCLUSIVE: ::DWORD = 0x00000080;
 pub const SCARD_STATE_INUSE: ::DWORD = 0x00000100;
 pub const SCARD_STATE_MUTE: ::DWORD = 0x00000200;
 pub const SCARD_STATE_UNPOWERED: ::DWORD = 0x00000400;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SCARD_ATRMASK {
     pub cbAtr: ::DWORD,
@@ -74,23 +68,18 @@ pub struct SCARD_ATRMASK {
 impl Clone for SCARD_ATRMASK { fn clone(&self) -> SCARD_ATRMASK { *self } }
 pub type PSCARD_ATRMASK = *mut SCARD_ATRMASK;
 pub type LPSCARD_ATRMASK = *mut SCARD_ATRMASK;
-
 pub const SCARD_SHARE_EXCLUSIVE: ::DWORD = 1;
 pub const SCARD_SHARE_SHARED: ::DWORD = 2;
 pub const SCARD_SHARE_DIRECT: ::DWORD = 3;
-
 pub const SCARD_LEAVE_CARD: ::DWORD = 0;
 pub const SCARD_RESET_CARD: ::DWORD = 1;
 pub const SCARD_UNPOWER_CARD: ::DWORD = 2;
 pub const SCARD_EJECT_CARD: ::DWORD = 3;
-
 pub const SC_DLG_MINIMAL_UI: ::DWORD = 0x01;
 pub const SC_DLG_NO_UI: ::DWORD = 0x02;
 pub const SC_DLG_FORCE_UI: ::DWORD = 0x04;
-
 pub const SCERR_NOCARDNAME: ::DWORD = 0x4000;
 pub const SCERR_NOGUIDS: ::DWORD = 0x8000;
-
 pub type LPOCNCONNPROCA = Option<unsafe extern "system" fn(
     SCARDCONTEXT, ::LPSTR, ::LPSTR, ::PVOID,
 ) -> SCARDHANDLE>;
@@ -101,7 +90,6 @@ pub type LPOCNCHKPROC = Option<unsafe extern "system" fn(
     SCARDCONTEXT, SCARDHANDLE, ::PVOID,
 ) -> ::BOOL>;
 pub type LPOCNDSCPROC = Option<unsafe extern "system" fn(SCARDCONTEXT, SCARDHANDLE, ::PVOID)>;
-
 #[repr(C)] #[derive(Copy)]
 pub struct OPENCARD_SEARCH_CRITERIAA {
     pub dwStructSize: ::DWORD,
@@ -140,7 +128,6 @@ pub struct OPENCARD_SEARCH_CRITERIAW {
 impl Clone for OPENCARD_SEARCH_CRITERIAW { fn clone(&self) -> OPENCARD_SEARCH_CRITERIAW { *self } }
 pub type POPENCARD_SEARCH_CRITERIAW = *mut OPENCARD_SEARCH_CRITERIAW;
 pub type LPOPENCARD_SEARCH_CRITERIAW = *mut OPENCARD_SEARCH_CRITERIAW;
-
 #[repr(C)] #[derive(Copy)]
 pub struct OPENCARDNAME_EXA {
     pub dwStructSize: ::DWORD,
@@ -189,22 +176,18 @@ pub struct OPENCARDNAME_EXW {
 impl Clone for OPENCARDNAME_EXW { fn clone(&self) -> OPENCARDNAME_EXW { *self } }
 pub type POPENCARDNAME_EXW = *mut OPENCARDNAME_EXW;
 pub type LPOPENCARDNAME_EXW = *mut OPENCARDNAME_EXW;
-
 pub type OPENCARDNAMEA_EX = OPENCARDNAME_EXA;
 pub type OPENCARDNAMEW_EX = OPENCARDNAME_EXW;
 pub type POPENCARDNAMEA_EX = POPENCARDNAME_EXA;
 pub type POPENCARDNAMEW_EX = POPENCARDNAME_EXW;
 pub type LPOPENCARDNAMEA_EX = LPOPENCARDNAME_EXA;
 pub type LPOPENCARDNAMEW_EX = LPOPENCARDNAME_EXW;
-
 pub const SCARD_READER_SEL_AUTH_PACKAGE: ::DWORD = -629i32 as ::DWORD;
-
 ENUM!{enum READER_SEL_REQUEST_MATCH_TYPE {
     RSR_MATCH_TYPE_READER_AND_CONTAINER = 1,
     RSR_MATCH_TYPE_SERIAL_NUMBER,
     RSR_MATCH_TYPE_ALL_CARDS,
 }}
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct READER_SEL_REQUEST_ReaderAndContainerParameter {
     pub cbReaderNameOffset: ::DWORD,
@@ -232,7 +215,6 @@ UNION!(
     SerialNumberParameter_mut, READER_SEL_REQUEST_SerialNumberParameter
 );
 pub type PREADER_SEL_REQUEST = *mut READER_SEL_REQUEST;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct READER_SEL_RESPONSE {
     pub cbReaderNameOffset: ::DWORD,
@@ -241,7 +223,6 @@ pub struct READER_SEL_RESPONSE {
     pub cchCardNameLength: ::DWORD,
 }
 pub type PREADER_SEL_RESPONSE = *mut READER_SEL_RESPONSE;
-
 #[repr(C)] #[derive(Copy)]
 pub struct OPENCARDNAMEA {
     pub dwStructSize: ::DWORD,
@@ -300,13 +281,11 @@ pub struct OPENCARDNAMEW {
 impl Clone for OPENCARDNAMEW { fn clone(&self) -> OPENCARDNAMEW { *self } }
 pub type POPENCARDNAMEW = *mut OPENCARDNAMEW;
 pub type LPOPENCARDNAMEW = *mut OPENCARDNAMEW;
-
 pub type OPENCARDNAME_A = OPENCARDNAMEA;
 pub type OPENCARDNAME_W = OPENCARDNAMEW;
 pub type POPENCARDNAME_A = POPENCARDNAMEA;
 pub type POPENCARDNAME_W = POPENCARDNAMEW;
 pub type LPOPENCARDNAME_A = LPOPENCARDNAMEA;
 pub type LPOPENCARDNAME_W = LPOPENCARDNAMEW;
-
 pub const SCARD_AUDIT_CHV_FAILURE: ::DWORD = 0x0;
 pub const SCARD_AUDIT_CHV_SUCCESS: ::DWORD = 0x1;

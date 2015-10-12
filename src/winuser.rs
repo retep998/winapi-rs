@@ -12,7 +12,6 @@ pub const BN_UNPUSHED: ::WORD = BN_UNHILITE;
 pub const BN_DBLCLK: ::WORD = BN_DOUBLECLICKED;
 pub const BN_SETFOCUS: ::WORD = 6;
 pub const BN_KILLFOCUS: ::WORD = 7;
-
 pub const BS_PUSHBUTTON: ::DWORD = 0x00000000;
 pub const BS_DEFPUSHBUTTON: ::DWORD = 0x00000001;
 pub const BS_CHECKBOX: ::DWORD = 0x00000002;
@@ -41,9 +40,7 @@ pub const BS_MULTILINE: ::DWORD = 0x00002000;
 pub const BS_NOTIFY: ::DWORD = 0x00004000;
 pub const BS_FLAT: ::DWORD = 0x00008000;
 pub const BS_RIGHTBUTTON: ::DWORD = BS_LEFTTEXT;
-
 pub const CCHILDREN_SCROLLBAR: usize = 5;
-
 pub const CDS_UPDATEREGISTRY: ::DWORD = 0x00000001;
 pub const CDS_TEST: ::DWORD = 0x00000002;
 pub const CDS_FULLSCREEN: ::DWORD = 0x00000004;
@@ -55,7 +52,6 @@ pub const CDS_DISABLE_UNSAFE_MODES: ::DWORD = 0x00000200;
 pub const CDS_RESET: ::DWORD = 0x40000000;
 pub const CDS_RESET_EX: ::DWORD = 0x20000000;
 pub const CDS_NORESET: ::DWORD = 0x10000000;
-
 pub const CS_VREDRAW: ::DWORD = 0x0001;
 pub const CS_HREDRAW: ::DWORD = 0x0002;
 pub const CS_DBLCLKS: ::DWORD = 0x0008;
@@ -69,9 +65,7 @@ pub const CS_BYTEALIGNWINDOW: ::DWORD = 0x2000;
 pub const CS_GLOBALCLASS: ::DWORD = 0x4000;
 pub const CS_IME: ::DWORD = 0x00010000;
 pub const CS_DROPSHADOW: ::DWORD = 0x00020000;
-
 pub const CW_USEDEFAULT: ::c_int = 0x80000000u32 as ::c_int;
-
 pub const DISP_CHANGE_SUCCESSFUL: ::LONG = 0;
 pub const DISP_CHANGE_RESTART: ::LONG = 1;
 pub const DISP_CHANGE_FAILED: ::LONG = -1;
@@ -80,12 +74,9 @@ pub const DISP_CHANGE_NOTUPDATED: ::LONG = -3;
 pub const DISP_CHANGE_BADFLAGS: ::LONG = -4;
 pub const DISP_CHANGE_BADPARAM: ::LONG = -5;
 pub const DISP_CHANGE_BADDUALVIEW: ::LONG = -6;
-
 pub const EDD_GET_DEVICE_INTERFACE_NAME: ::DWORD = 0x00000001;
-
 pub const ENUM_CURRENT_SETTINGS: ::DWORD = 0xFFFFFFFF;
 pub const ENUM_REGISTRY_SETTINGS: ::DWORD = 0xFFFFFFFE;
-
 pub const GW_HWNDFIRST: ::UINT = 0;
 pub const GW_HWNDLAST: ::UINT = 1;
 pub const GW_HWNDNEXT: ::UINT = 2;
@@ -94,7 +85,6 @@ pub const GW_OWNER: ::UINT = 4;
 pub const GW_CHILD: ::UINT = 5;
 pub const GW_ENABLEDPOPUP: ::UINT = 6;
 pub const GW_MAX: ::UINT = 6;
-
 pub const HTERROR: ::c_int = -2;
 pub const HTTRANSPARENT: ::c_int = -1;
 pub const HTNOWHERE: ::c_int = 0;
@@ -124,15 +114,12 @@ pub const HTSIZELAST: ::c_int = HTBOTTOMRIGHT;
 pub const HTOBJECT: ::c_int = 19;
 pub const HTCLOSE: ::c_int = 20;
 pub const HTHELP: ::c_int = 21;
-
 pub const LSFW_LOCK: ::UINT = 1;
 pub const LSFW_UNLOCK: ::UINT = 2;
-
 pub const MDITILE_VERTICAL: ::UINT = 0x0000;
 pub const MDITILE_HORIZONTAL: ::UINT = 0x0001;
 pub const MDITILE_SKIPDISABLED: ::UINT = 0x0002;
 pub const MDITILE_ZORDER: ::UINT = 0x0004;
-
 pub const MB_OK: ::DWORD = 0x00000000;
 pub const MB_OKCANCEL: ::DWORD = 0x00000001;
 pub const MB_ABORTRETRYIGNORE: ::DWORD = 0x00000002;
@@ -170,12 +157,10 @@ pub const MB_ICONMASK: ::DWORD = 0x000000F0;
 pub const MB_DEFMASK: ::DWORD = 0x00000F00;
 pub const MB_MODEMASK: ::DWORD = 0x00003000;
 pub const MB_MISCMASK: ::DWORD = 0x0000C000;
-
 pub const SB_HORZ: ::c_int = 0;
 pub const SB_VERT: ::c_int = 1;
 pub const SB_CTL: ::c_int = 2;
 pub const SB_BOTH: ::c_int = 3;
-
 pub const SW_HIDE: ::c_int = 0;
 pub const SW_SHOWNORMAL: ::c_int = 1;
 pub const SW_NORMAL: ::c_int = 1;
@@ -191,7 +176,6 @@ pub const SW_RESTORE: ::c_int = 9;
 pub const SW_SHOWDEFAULT: ::c_int = 10;
 pub const SW_FORCEMINIMIZE: ::c_int = 11;
 pub const SW_MAX: ::c_int = 11;
-
 pub const SWP_NOSIZE: ::UINT = 0x0001;
 pub const SWP_NOMOVE: ::UINT = 0x0002;
 pub const SWP_NOZORDER: ::UINT = 0x0004;
@@ -207,7 +191,6 @@ pub const SWP_DRAWFRAME: ::UINT = SWP_FRAMECHANGED;
 pub const SWP_NOREPOSITION: ::UINT = SWP_NOOWNERZORDER;
 pub const SWP_DEFERERASE: ::UINT = 0x2000;
 pub const SWP_ASYNCWINDOWPOS: ::UINT = 0x4000;
-
 pub const VK_LBUTTON: ::c_int = 0x01;
 pub const VK_RBUTTON: ::c_int = 0x02;
 pub const VK_CANCEL: ::c_int = 0x03;
@@ -368,7 +351,6 @@ pub const VK_ZOOM: ::c_int = 0xFB;
 pub const VK_NONAME: ::c_int = 0xFC;
 pub const VK_PA1: ::c_int = 0xFD;
 pub const VK_OEM_CLEAR: ::c_int = 0xFE;
-
 pub const WM_NULL: ::UINT = 0x0000;
 pub const WM_CREATE: ::UINT = 0x0001;
 pub const WM_DESTROY: ::UINT = 0x0002;
@@ -619,7 +601,6 @@ pub const WM_PENWINFIRST: ::UINT = 0x0380;
 pub const WM_PENWINLAST: ::UINT = 0x038F;
 pub const WM_APP: ::UINT = 0x8000;
 pub const WM_USER: ::UINT = 0x0400;
-
 pub const WS_OVERLAPPED: ::DWORD = 0x00000000;
 pub const WS_POPUP: ::DWORD = 0x80000000;
 pub const WS_CHILD: ::DWORD = 0x40000000;
@@ -647,7 +628,6 @@ pub const WS_TILEDWINDOW: ::DWORD = WS_OVERLAPPEDWINDOW;
 pub const WS_OVERLAPPEDWINDOW: ::DWORD = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
 pub const WS_POPUPWINDOW: ::DWORD = WS_POPUP | WS_BORDER | WS_SYSMENU;
 pub const WS_CHILDWINDOW: ::DWORD = WS_CHILD;
-
 pub const WS_EX_DLGMODALFRAME: ::DWORD = 0x00000001;
 pub const WS_EX_NOPARENTNOTIFY: ::DWORD = 0x00000004;
 pub const WS_EX_TOPMOST: ::DWORD = 0x00000008;
@@ -704,11 +684,9 @@ pub type MSGBOXCALLBACK = Option<unsafe extern "system" fn(LPHELPINFO)>;
 pub type WINEVENTPROC = Option<unsafe extern "system" fn(
     ::HWINEVENTHOOK, ::DWORD, ::HWND, ::LONG, ::LONG, ::DWORD, ::DWORD,
 )>;
-
 pub type HDEVNOTIFY = ::PVOID;
 pub type MENUTEMPLATEA = ::VOID;
 pub type MENUTEMPLATEW = ::VOID;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MSG {
     pub hwnd: ::HWND,
@@ -900,7 +878,6 @@ pub struct NMHDR {
     pub code: ::UINT,  // NM_ code
 }
 pub type LPNMHDR = *mut NMHDR;
-
 //3400
 pub const PM_NOREMOVE: ::UINT = 0x0000;
 pub const PM_REMOVE: ::UINT = 0x0001;
@@ -1210,7 +1187,6 @@ pub const COLOR_GRADIENTINACTIVECAPTION: ::c_int = 28;
 // Introduced in Windows XP (winver 0x0501)
 pub const COLOR_MENUHILIGHT: ::c_int = 29;
 pub const COLOR_MENUBAR: ::c_int = 30;
-
 //10069
 pub const IDC_ARROW: ::LPCWSTR = 32512 as ::LPCWSTR;
 pub const IDC_IBEAM: ::LPCWSTR = 32513 as ::LPCWSTR;
@@ -1228,7 +1204,6 @@ pub const IDC_NO: ::LPCWSTR = 32648 as ::LPCWSTR;
 pub const IDC_HAND: ::LPCWSTR = 32649 as ::LPCWSTR;
 pub const IDC_APPSTARTING: ::LPCWSTR = 32650 as ::LPCWSTR;
 pub const IDC_HELP: ::LPCWSTR = 32651 as ::LPCWSTR;
-
 //10492
 pub const IDI_APPLICATION: ::LPCWSTR = 32512 as ::LPCWSTR;
 pub const IDI_HAND: ::LPCWSTR = 32513 as ::LPCWSTR;
@@ -1237,11 +1212,9 @@ pub const IDI_EXCLAMATION: ::LPCWSTR = 32515 as ::LPCWSTR;
 pub const IDI_ASTERISK: ::LPCWSTR = 32516 as ::LPCWSTR;
 pub const IDI_WINLOGO: ::LPCWSTR = 32517 as ::LPCWSTR;
 pub const IDI_SHIELD: ::LPCWSTR = 32518 as ::LPCWSTR;
-
 pub const IDI_WARNING: ::LPCWSTR = IDI_EXCLAMATION;
 pub const IDI_ERROR: ::LPCWSTR = IDI_HAND;
 pub const IDI_INFORMATION: ::LPCWSTR = IDI_ASTERISK;
-
 pub const SPI_GETBEEP: ::UINT = 0x0001;
 pub const SPI_SETBEEP: ::UINT = 0x0002;
 pub const SPI_GETMOUSE: ::UINT = 0x0003;
@@ -1286,7 +1259,6 @@ pub const SPI_SETICONMETRICS: ::UINT = 0x002E;
 pub const SPI_SETWORKAREA: ::UINT = 0x002F;
 pub const SPI_GETWORKAREA: ::UINT = 0x0030;
 pub const SPI_SETPENWINDOWS: ::UINT = 0x0031;
-
 pub const SPI_GETHIGHCONTRAST: ::UINT = 0x0042;
 pub const SPI_SETHIGHCONTRAST: ::UINT = 0x0043;
 pub const SPI_GETKEYBOARDPREF: ::UINT = 0x0044;
@@ -1346,24 +1318,18 @@ pub const SPI_GETWHEELSCROLLLINES: ::UINT = 0x0068;
 pub const SPI_SETWHEELSCROLLLINES: ::UINT = 0x0069;
 pub const SPI_GETMENUSHOWDELAY: ::UINT = 0x006A;
 pub const SPI_SETMENUSHOWDELAY: ::UINT = 0x006B;
-
 pub const SPI_GETWHEELSCROLLCHARS: ::UINT = 0x006C;
 pub const SPI_SETWHEELSCROLLCHARS: ::UINT = 0x006D;
-
 pub const SPI_GETSHOWIMEUI: ::UINT = 0x006E;
 pub const SPI_SETSHOWIMEUI: ::UINT = 0x006F;
-
 pub const SPI_GETMOUSESPEED: ::UINT = 0x0070;
 pub const SPI_SETMOUSESPEED: ::UINT = 0x0071;
 pub const SPI_GETSCREENSAVERRUNNING: ::UINT = 0x0072;
 pub const SPI_GETDESKWALLPAPER: ::UINT = 0x0073;
-
 pub const SPI_GETAUDIODESCRIPTION: ::UINT = 0x0074;
 pub const SPI_SETAUDIODESCRIPTION: ::UINT = 0x0075;
-
 pub const SPI_GETSCREENSAVESECURE: ::UINT = 0x0076;
 pub const SPI_SETSCREENSAVESECURE: ::UINT = 0x0077;
-
 pub const SPI_GETHUNGAPPTIMEOUT: ::UINT = 0x0078;
 pub const SPI_SETHUNGAPPTIMEOUT: ::UINT = 0x0079;
 pub const SPI_GETWAITTOKILLTIMEOUT: ::UINT = 0x007A;
@@ -1390,7 +1356,6 @@ pub const SPI_GETSNAPSIZING: ::UINT = 0x008E;
 pub const SPI_SETSNAPSIZING: ::UINT = 0x008F;
 pub const SPI_GETDOCKMOVING: ::UINT = 0x0090;
 pub const SPI_SETDOCKMOVING: ::UINT = 0x0091;
-
 pub const SPI_GETACTIVEWINDOWTRACKING: ::UINT = 0x1000;
 pub const SPI_SETACTIVEWINDOWTRACKING: ::UINT = 0x1001;
 pub const SPI_GETMENUANIMATION: ::UINT = 0x1002;
@@ -1431,10 +1396,8 @@ pub const SPI_GETDROPSHADOW: ::UINT = 0x1024;
 pub const SPI_SETDROPSHADOW: ::UINT = 0x1025;
 pub const SPI_GETBLOCKSENDINPUTRESETS: ::UINT = 0x1026;
 pub const SPI_SETBLOCKSENDINPUTRESETS: ::UINT = 0x1027;
-
 pub const SPI_GETUIEFFECTS: ::UINT = 0x103E;
 pub const SPI_SETUIEFFECTS: ::UINT = 0x103F;
-
 pub const SPI_GETDISABLEOVERLAPPEDCONTENT: ::UINT = 0x1040;
 pub const SPI_SETDISABLEOVERLAPPEDCONTENT: ::UINT = 0x1041;
 pub const SPI_GETCLIENTAREAANIMATION: ::UINT = 0x1042;
@@ -1443,7 +1406,6 @@ pub const SPI_GETCLEARTYPE: ::UINT = 0x1048;
 pub const SPI_SETCLEARTYPE: ::UINT = 0x1049;
 pub const SPI_GETSPEECHRECOGNITION: ::UINT = 0x104A;
 pub const SPI_SETSPEECHRECOGNITION: ::UINT = 0x104B;
-
 pub const SPI_GETFOREGROUNDLOCKTIMEOUT: ::UINT = 0x2000;
 pub const SPI_SETFOREGROUNDLOCKTIMEOUT: ::UINT = 0x2001;
 pub const SPI_GETACTIVEWNDTRKTIMEOUT: ::UINT = 0x2002;
@@ -1452,34 +1414,26 @@ pub const SPI_GETFOREGROUNDFLASHCOUNT: ::UINT = 0x2004;
 pub const SPI_SETFOREGROUNDFLASHCOUNT: ::UINT = 0x2005;
 pub const SPI_GETCARETWIDTH: ::UINT = 0x2006;
 pub const SPI_SETCARETWIDTH: ::UINT = 0x2007;
-
 pub const SPI_GETMOUSECLICKLOCKTIME: ::UINT = 0x2008;
 pub const SPI_SETMOUSECLICKLOCKTIME: ::UINT = 0x2009;
 pub const SPI_GETFONTSMOOTHINGTYPE: ::UINT = 0x200A;
 pub const SPI_SETFONTSMOOTHINGTYPE: ::UINT = 0x200B;
-
 pub const FE_FONTSMOOTHINGSTANDARD: ::UINT = 0x0001;
 pub const FE_FONTSMOOTHINGCLEARTYPE: ::UINT = 0x0002;
-
 pub const SPI_GETFONTSMOOTHINGCONTRAST: ::UINT = 0x200C;
 pub const SPI_SETFONTSMOOTHINGCONTRAST: ::UINT = 0x200D;
-
 pub const SPI_GETFOCUSBORDERWIDTH: ::UINT = 0x200E;
 pub const SPI_SETFOCUSBORDERWIDTH: ::UINT = 0x200F;
 pub const SPI_GETFOCUSBORDERHEIGHT: ::UINT = 0x2010;
 pub const SPI_SETFOCUSBORDERHEIGHT: ::UINT = 0x2011;
-
 pub const SPI_GETFONTSMOOTHINGORIENTATION: ::UINT = 0x2012;
 pub const SPI_SETFONTSMOOTHINGORIENTATION: ::UINT = 0x2013;
-
 pub const FE_FONTSMOOTHINGORIENTATIONBGR: ::UINT = 0x0000;
 pub const FE_FONTSMOOTHINGORIENTATIONRGB: ::UINT = 0x0001;
-
 pub const SPI_GETMINIMUMHITRADIUS: ::UINT = 0x2014;
 pub const SPI_SETMINIMUMHITRADIUS: ::UINT = 0x2015;
 pub const SPI_GETMESSAGEDURATION: ::UINT = 0x2016;
 pub const SPI_SETMESSAGEDURATION: ::UINT = 0x2017;
-
 //11264
 pub const CB_GETEDITSEL: ::UINT = 0x0140;
 pub const CB_LIMITTEXT: ::UINT = 0x0141;
@@ -1515,7 +1469,6 @@ pub const CB_SETHORIZONTALEXTENT: ::UINT = 0x015e;
 pub const CB_GETDROPPEDWIDTH: ::UINT = 0x015f;
 pub const CB_SETDROPPEDWIDTH: ::UINT = 0x0160;
 pub const CB_INITSTORAGE: ::UINT = 0x0161;
-
 //12141
 #[repr(C)] #[derive(Clone, Copy)]
 pub struct NONCLIENTMETRICSA {
@@ -1537,7 +1490,6 @@ pub struct NONCLIENTMETRICSA {
     pub iPaddedBorderWidth: ::c_int,
 }
 pub type LPNONCLIENTMETRICSA = *mut NONCLIENTMETRICSA;
-
 #[repr(C)] #[derive(Clone, Copy)]
 pub struct NONCLIENTMETRICSW {
     pub cbSize: ::UINT,
@@ -1558,7 +1510,6 @@ pub struct NONCLIENTMETRICSW {
     pub iPaddedBorderWidth: ::c_int,
 }
 pub type LPNONCLIENTMETRICSW = *mut NONCLIENTMETRICSW;
-
 //12900
 pub const MONITORINFOF_PRIMARY: ::DWORD = 1;
 pub const CCHDEVICENAME: usize = 32;
@@ -1885,26 +1836,22 @@ pub struct HELPINFO {
     pub MousePos: ::POINT,
 }
 pub type LPHELPINFO = *mut HELPINFO;
-
 pub fn GET_WHEEL_DELTA_WPARAM(wParam: ::WPARAM) -> ::c_short {
     ::HIWORD(wParam as ::DWORD) as ::c_short
 }
 pub fn GET_KEYSTATE_WPARAM(wparam: ::WPARAM) -> ::c_int {
     ::LOWORD(wparam as ::DWORD) as ::c_short as ::c_int
 }
-
 pub const SIF_RANGE: ::UINT = 0x0001;
 pub const SIF_PAGE: ::UINT = 0x0002;
 pub const SIF_POS: ::UINT = 0x0004;
 pub const SIF_DISABLENOSCROLL: ::UINT = 0x0008;
 pub const SIF_TRACKPOS: ::UINT = 0x0010;
 pub const SIF_ALL: ::UINT = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
-
 pub const SW_SCROLLCHILDREN: ::UINT = 0x0001;
 pub const SW_INVALIDATE: ::UINT = 0x0002;
 pub const SW_ERASE: ::UINT = 0x0004;
 pub const SW_SMOOTHSCROLL: ::UINT = 0x0010;
-
 pub const SB_LINEUP: ::c_int = 0;
 pub const SB_LINELEFT: ::c_int = 0;
 pub const SB_LINEDOWN: ::c_int = 1;
@@ -1920,7 +1867,6 @@ pub const SB_LEFT: ::c_int = 6;
 pub const SB_BOTTOM: ::c_int = 7;
 pub const SB_RIGHT: ::c_int = 7;
 pub const SB_ENDSCROLL: ::c_int = 8;
-
 pub const LR_DEFAULTCOLOR: ::UINT = 0x00000000;
 pub const LR_MONOCHROME: ::UINT = 0x00000001;
 pub const LR_COLOR: ::UINT = 0x00000002;
@@ -1934,12 +1880,10 @@ pub const LR_LOADMAP3DCOLORS: ::UINT = 0x00001000;
 pub const LR_CREATEDIBSECTION: ::UINT = 0x00002000;
 pub const LR_COPYFROMRESOURCE: ::UINT = 0x00004000;
 pub const LR_SHARED: ::UINT = 0x00008000;
-
 pub const IMAGE_BITMAP: ::UINT = 0;
 pub const IMAGE_ICON: ::UINT = 1;
 pub const IMAGE_CURSOR: ::UINT = 2;
 pub const IMAGE_ENHMETAFILE: ::UINT = 3;
-
 pub const DT_TOP: ::UINT = 0x00000000;
 pub const DT_LEFT: ::UINT = 0x00000000;
 pub const DT_CENTER: ::UINT = 0x00000001;
@@ -1955,7 +1899,6 @@ pub const DT_EXTERNALLEADING: ::UINT = 0x00000200;
 pub const DT_CALCRECT: ::UINT = 0x00000400;
 pub const DT_NOPREFIX: ::UINT = 0x00000800;
 pub const DT_INTERNAL: ::UINT = 0x00001000;
-
 pub const DT_EDITCONTROL: ::UINT = 0x00002000;
 pub const DT_PATH_ELLIPSIS: ::UINT = 0x00004000;
 pub const DT_END_ELLIPSIS: ::UINT = 0x00008000;
@@ -1965,7 +1908,6 @@ pub const DT_WORD_ELLIPSIS: ::UINT = 0x00040000;
 pub const DT_NOFULLWIDTHCHARBREAK: ::UINT = 0x00080000;
 pub const DT_HIDEPREFIX: ::UINT = 0x00100000;
 pub const DT_PREFIXONLY: ::UINT = 0x00200000;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct KBDLLHOOKSTRUCT {
     pub vkCode: ::DWORD,
@@ -1976,7 +1918,6 @@ pub struct KBDLLHOOKSTRUCT {
 }
 pub type PKBDLLHOOKSTRUCT = *mut KBDLLHOOKSTRUCT;
 pub type LPKBDLLHOOKSTRUCT = *mut KBDLLHOOKSTRUCT;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MSLLHOOKSTRUCT {
     pub pt: ::POINT,
@@ -1987,7 +1928,6 @@ pub struct MSLLHOOKSTRUCT {
 }
 pub type PMSLLHOOKSTRUCT = *mut MSLLHOOKSTRUCT;
 pub type LPMSLLHOOKSTRUCT = *mut MSLLHOOKSTRUCT;
-
 pub const WH_MIN: ::c_int = -1;
 pub const WH_MSGFILTER: ::c_int = -1;
 pub const WH_JOURNALRECORD: ::c_int = 0;
@@ -2008,7 +1948,6 @@ pub const WH_MOUSE_LL: ::c_int = 14;
 pub const WH_MAX: ::c_int = 14;
 pub const WH_MINHOOK: ::c_int = WH_MIN;
 pub const WH_MAXHOOK: ::c_int = WH_MAX;
-
 pub const KLF_ACTIVATE: ::UINT = 1;
 pub const KLF_SUBSTITUTE_OK: ::UINT = 2;
 pub const KLF_UNLOADPREVIOUS: ::UINT = 4;
@@ -2016,7 +1955,6 @@ pub const KLF_REORDER: ::UINT = 8;
 pub const KLF_REPLACELANG: ::UINT = 16;
 pub const KLF_NOTELLSHELL: ::UINT = 128;
 pub const KLF_SETFORPROCESS: ::UINT = 256;
-
 //RedrawWindow() flags
 pub const RDW_INVALIDATE: ::UINT = 0x0001;
 pub const RDW_INTERNALPAINT: ::UINT = 0x0002;
@@ -2030,7 +1968,6 @@ pub const RDW_UPDATENOW: ::UINT = 0x0100;
 pub const RDW_ERASENOW: ::UINT = 0x0200;
 pub const RDW_FRAME: ::UINT = 0x0400;
 pub const RDW_NOFRAME: ::UINT = 0x0800;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MEASUREITEMSTRUCT {
     pub CtlType: ::UINT,
@@ -2041,7 +1978,6 @@ pub struct MEASUREITEMSTRUCT {
     pub itemData: ::ULONG_PTR,
 }
 pub type LPMEASUREITEMSTRUCT = *mut MEASUREITEMSTRUCT;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DRAWITEMSTRUCT {
     pub CtlType: ::UINT,
@@ -2055,7 +1991,6 @@ pub struct DRAWITEMSTRUCT {
     pub itemData: ::ULONG_PTR,
 }
 pub type LPDRAWITEMSTRUCT = *mut DRAWITEMSTRUCT;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DELETEITEMSTRUCT {
     pub CtlType: ::UINT,
@@ -2065,7 +2000,6 @@ pub struct DELETEITEMSTRUCT {
     pub itemData: ::ULONG_PTR,
 }
 pub type LPDELETEITEMSTRUCT = *mut DELETEITEMSTRUCT;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct COMPAREITEMSTRUCT {
     pub CtlType: ::UINT,

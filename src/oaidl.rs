@@ -1,53 +1,44 @@
 // Copyright © 2015, Connor Hilarides
 // Licensed under the MIT License <LICENSE.md>
 //! Mappings for the contents of OAIdl.h
-
 pub type wireBRECORD = *mut _wireBRECORD;
 pub type wireVARIANT = *mut _wireVARIANT;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SAFEARRAYBOUND {
     pub cElements: ::ULONG,
     pub lLbound: ::LONG,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SAFEARR_BSTR {
     pub Size: ::ULONG,
     pub aBstr: *mut ::wireBSTR,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SAFEARR_UNKNOWN {
     pub Size: ::ULONG,
     pub apUnknown: *mut *mut ::IUnknown,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SAFEARR_DISPATCH {
     pub Size: ::ULONG,
     pub apDispatch: *mut *mut IDispatch,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SAFEARR_VARIANT {
     pub Size: ::ULONG,
     pub aVariant: *mut wireVARIANT,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SAFEARR_BRECORD {
     pub Size: ::ULONG,
     pub aRecord: *mut wireBRECORD,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SAFEARR_HAVEIID {
     pub Size: ::ULONG,
     pub apUnknown: *mut *mut ::IUnknown,
     pub iid: ::IID,
 }
-
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum SF_TYPE {
     SF_ERROR = ::VT_ERROR as i32,
@@ -62,29 +53,24 @@ pub enum SF_TYPE {
     SF_RECORD = ::VT_RECORD as i32,
     SF_HAVEIID = ::VT_UNKNOWN as i32 | ::VT_RESERVED as i32
 }
-
 pub use self::SF_TYPE::*;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SAFEARRAYUNION {
     pub sfType: ::ULONG,
     pub u: __MIDL_IOleAutomationTypes_0001,
 }
-
 #[cfg(target_arch = "x86_64")]
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct __MIDL_IOleAutomationTypes_0001 {
     pub data0: u32,
     pub data1: [u32; 6],
 }
-
 #[cfg(target_arch = "x86")]
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct __MIDL_IOleAutomationTypes_0001 {
     pub data0: u32,
     pub data1: [u32; 5],
 }
-
 UNION!(__MIDL_IOleAutomationTypes_0001, data0, BstrStr, BstrStr_mut, SAFEARR_BSTR);
 UNION!(__MIDL_IOleAutomationTypes_0001, data0, UnknownStr, UnknownStr_mut, SAFEARR_UNKNOWN);
 UNION!(__MIDL_IOleAutomationTypes_0001, data0, DispatchStr, DispatchStr_mut, SAFEARR_DISPATCH);
@@ -95,7 +81,6 @@ UNION!(__MIDL_IOleAutomationTypes_0001, data0, ByteStr, ByteStr_mut, ::BYTE_SIZE
 UNION!(__MIDL_IOleAutomationTypes_0001, data0, WordStr, WordStr_mut, ::WORD_SIZEDARR);
 UNION!(__MIDL_IOleAutomationTypes_0001, data0, LongStr, LongStr_mut, ::DWORD_SIZEDARR);
 UNION!(__MIDL_IOleAutomationTypes_0001, data0, HyperStr, HyperStr_mut, ::HYPER_SIZEDARR);
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct _wireSAFEARRAY {
     pub cDims: ::USHORT,
@@ -105,10 +90,8 @@ pub struct _wireSAFEARRAY {
     pub uArrayStructs: SAFEARRAYUNION,
     pub rgsaBound: [SAFEARRAYBOUND; 1],
 }
-
 pub type wireSAFEARRAY = *mut _wireSAFEARRAY;
 pub type wirePSAFEARRAY = *mut wireSAFEARRAY;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SAFEARRAY {
     pub cDims: ::USHORT,
@@ -118,9 +101,7 @@ pub struct SAFEARRAY {
     pub pvData: ::PVOID,
     pub rgsabound: [SAFEARRAYBOUND; 1],
 }
-
 pub type LPSAFEARRAY = *mut SAFEARRAY;
-
 pub const FADF_AUTO: ::DWORD = 0x1;
 pub const FADF_STATIC: ::DWORD = 0x2;
 pub const FADF_EMBEDDED: ::DWORD = 0x4;
@@ -133,7 +114,6 @@ pub const FADF_UNKNOWN: ::DWORD = 0x200;
 pub const FADF_DISPATCH: ::DWORD = 0x400;
 pub const FADF_VARIANT: ::DWORD = 0x800;
 pub const FADF_RESERVED: ::DWORD = 0xf008;
-
 #[cfg(target_arch = "x86_64")]
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct VARIANT {
@@ -141,7 +121,6 @@ pub struct VARIANT {
     pub data1: u64,
     pub data2: u64,
 }
-
 #[cfg(target_arch = "x86")]
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct VARIANT {
@@ -149,7 +128,6 @@ pub struct VARIANT {
     pub data1: u32,
     pub data2: u32,
 }
-
 UNION!(VARIANT, data0, vt, vt_mut, ::VARTYPE);
 UNION!(VARIANT, data1, llVal, llVal_mut, ::LONGLONG);
 UNION!(VARIANT, data1, lVal, lVal_mut, ::LONG);
@@ -197,12 +175,10 @@ UNION!(VARIANT, data1, puintVal, puintVal_mut, *mut ::UINT);
 UNION!(VARIANT, data1, pvRecord, pvRecord_mut, ::PVOID);
 UNION!(VARIANT, data2, pRecInfo, pRecInfo_mut, *mut IRecordInfo);
 UNION!(VARIANT, data0, decVal, decVal_mut, ::DECIMAL);
-
 pub type LPVARIANT = *mut VARIANT;
 pub type VARIANTARG = VARIANT;
 pub type LPVARIANTARG = *mut VARIANT;
 pub type REFVARIANT = *const VARIANT;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct _wireBRECORD {
     fFlags: ::ULONG,
@@ -210,7 +186,6 @@ pub struct _wireBRECORD {
     pRecInfo: *mut IRecordInfo,
     pRecord: *mut ::BYTE,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct _wireVARIANT {
     clSize: ::DWORD,
@@ -222,7 +197,6 @@ pub struct _wireVARIANT {
     data0: u64,
     data1: u64,
 }
-
 UNION!(_wireVARIANT, data0, llVal, llVal_mut, ::LONGLONG);
 UNION!(_wireVARIANT, data0, lVal, lVal_mut, ::LONG);
 UNION!(_wireVARIANT, data0, bVal, bVal_mut, ::BYTE);
@@ -267,11 +241,9 @@ UNION!(_wireVARIANT, data0, pullVal, pullVal_mut, *mut ::ULONGLONG);
 UNION!(_wireVARIANT, data0, pintVal, pintVal_mut, *mut ::INT);
 UNION!(_wireVARIANT, data0, puintVal, puintVal_mut, *mut ::UINT);
 UNION!(_wireVARIANT, data0, pdecVal, pdecVal_mut, *mut ::DECIMAL);
-
 pub type DISPID = ::LONG;
 pub type MEMBERID = DISPID;
 pub type HREFTYPE = ::DWORD;
-
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum TYPEKIND {
     TKIND_ENUM = 0,
@@ -284,50 +256,40 @@ pub enum TYPEKIND {
     TKIND_UNION,
     TKIND_MAX,
 }
-
 pub use self::TYPEKIND::*;
-
 #[cfg(target_arch = "x86_64")]
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TYPEDESC {
     pub data: u64,
     pub vt: ::VARTYPE,
 }
-
 #[cfg(target_arch = "x86")]
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TYPEDESC {
     pub data: u32,
     pub vt: ::VARTYPE,
 }
-
 UNION!(TYPEDESC, data, lptdesc, lptdesc_mut, *mut TYPEDESC);
 UNION!(TYPEDESC, data, lpadesc, lpadesc_mut, *mut ARRAYDESC);
 UNION!(TYPEDESC, data, hreftype, hreftype_mut, HREFTYPE);
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ARRAYDESC {
     pub tdescElem: TYPEDESC,
     pub cDims: ::USHORT,
     pub rgbounds: [SAFEARRAYBOUND; 1],
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PARAMDESCEX {
     pub cBytes: ::ULONG,
     pub varDefaultValue: VARIANTARG,
 }
-
 pub type LPPARAMDESCEX = *mut PARAMDESCEX;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PARAMDESC {
     pub pparamdescex: LPPARAMDESCEX,
     pub wParamFlags: ::USHORT,
 }
-
 pub type LPPARAMDESC = *mut PARAMDESC;
-
 pub const PARAMFLAG_NONE: ::DWORD = 0;
 pub const PARAMFLAG_FIN: ::DWORD = 0x1;
 pub const PARAMFLAG_FOUT: ::DWORD = 0x2;
@@ -336,30 +298,24 @@ pub const PARAMFLAG_FRETVAL: ::DWORD = 0x8;
 pub const PARAMFLAG_FOPT: ::DWORD = 0x10;
 pub const PARAMFLAG_FHASDEFAULT: ::DWORD = 0x20;
 pub const PARAMFLAG_FHASCUSTDATA: ::DWORD = 0x40;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IDLDESC {
     pub dwReserved: ::ULONG_PTR,
     pub wIDLFlags: ::USHORT,
 }
-
 pub type LPIDLDESC = *mut IDLDESC;
-
 pub const IDLFLAG_NONE: ::DWORD = PARAMFLAG_NONE;
 pub const IDLFLAG_FIN: ::DWORD = PARAMFLAG_FIN;
 pub const IDLFLAG_FOUT: ::DWORD = PARAMFLAG_FOUT;
 pub const IDLFLAG_FLCID: ::DWORD = PARAMFLAG_FLCID;
 pub const IDLFLAG_FRETVAL: ::DWORD = PARAMFLAG_FRETVAL;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ELEMDESC {
     pub tdesc: TYPEDESC,
     pub idldesc: IDLDESC,
 }
 UNION!(ELEMDESC, idldesc, paramdesc, paramdesc_mut, PARAMDESC);
-
 pub type LPELEMDESC = *mut ELEMDESC;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TYPEATTR {
     pub guid: ::GUID,
@@ -381,9 +337,7 @@ pub struct TYPEATTR {
     pub tdescAlias: ::TYPEDESC,
     pub idldescType: ::IDLDESC,
 }
-
 pub type LPTYPEATTR = *mut TYPEATTR;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DISPPARAMS {
     pub rgvarg: *mut VARIANTARG,
@@ -391,7 +345,6 @@ pub struct DISPPARAMS {
     pub cArgs: ::UINT,
     pub cNamedArgs: ::UINT,
 }
-
 #[repr(C)] #[derive(Copy)]
 pub struct EXCEPINFO {
     pub wCode: ::WORD,
@@ -404,13 +357,11 @@ pub struct EXCEPINFO {
     pub pfnDeferredFillIn: Option<unsafe extern "system" fn(einfo: *mut EXCEPINFO) -> ::HRESULT>,
     pub scode: ::SCODE,
 }
-
 impl Clone for EXCEPINFO {
     fn clone(&self) -> Self {
         *self
     }
 }
-
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum CALLCONV {
     CC_FASTCALL = 0,
@@ -425,9 +376,7 @@ pub enum CALLCONV {
     CC_MPWPASCAL,
     CC_MAX,
 }
-
 pub use self::CALLCONV::*;
-
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum FUNCKIND {
     FUNC_VIRTUAL = 0,
@@ -436,9 +385,7 @@ pub enum FUNCKIND {
     FUNC_STATIC,
     FUNC_DISPATCH,
 }
-
 pub use self::FUNCKIND::*;
-
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum INVOKEKIND {
     INVOKE_FUNC = 1,
@@ -446,9 +393,7 @@ pub enum INVOKEKIND {
     INVOKE_PROPERTYPUT = 4,
     INVOKE_PROPERTYPUTREF = 8,
 }
-
 pub use self::INVOKEKIND::*;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FUNCDESC {
     pub memid: ::MEMBERID,
@@ -464,9 +409,7 @@ pub struct FUNCDESC {
     pub elemdescFunc: ::ELEMDESC,
     pub wFuncFlags: ::WORD,
 }
-
 pub type LPFUNCDESC = *mut FUNCDESC;
-
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum VARKIND {
     VAR_PERINSTANCE = 0,
@@ -474,14 +417,11 @@ pub enum VARKIND {
     VAR_CONST,
     VAR_DISPATCH,
 }
-
 pub use self::VARKIND::*;
-
 pub const IMPLTYPEFLAG_FDEFAULT: ::DWORD = 0x1;
 pub const IMPLTYPEFLAG_FSOURCE: ::DWORD = 0x2;
 pub const IMPLTYPEFLAG_FRESTRICTED: ::DWORD = 0x4;
 pub const IMPLTYPEFLAG_FDEFAULTVTABLE: ::DWORD = 0x8;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct VARDESC {
     pub memid: MEMBERID,
@@ -491,11 +431,8 @@ pub struct VARDESC {
     pub wVarFlags: ::WORD,
     pub varkind: VARKIND,
 }
-
 UNION!(VARDESC, lpvarValue, oInst, oInst_mut, ::ULONG);
-
 pub type LPVARDESC = *mut VARDESC;
-
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum TYPEFLAGS {
     TYPEFLAG_FAPPOBJECT = 0x1,
@@ -514,9 +451,7 @@ pub enum TYPEFLAGS {
     TYPEFLAG_FREVERSEBIND = 0x2000,
     TYPEFLAG_FPROXY = 0x4000
 }
-
 pub use self::TYPEFLAGS::*;
-
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum FUNCFLAGS {
     FUNCFLAG_FRESTRICTED = 0x1,
@@ -533,9 +468,7 @@ pub enum FUNCFLAGS {
     FUNCFLAG_FREPLACEABLE = 0x800,
     FUNCFLAG_FIMMEDIATEBIND = 0x1000
 }
-
 pub use self::FUNCFLAGS::*;
-
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum VARFLAGS {
     VARFLAG_FREADONLY = 0x1,
@@ -552,34 +485,26 @@ pub enum VARFLAGS {
     VARFLAG_FREPLACEABLE = 0x800,
     VARFLAG_FIMMEDIATEBIND = 0x1000
 }
-
 pub use self::VARFLAGS::*;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CLEANLOCALSTORAGE {
     pub pInterface: *mut ::IUnknown,
     pub pStorage: ::PVOID,
     pub flags: ::DWORD,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CUSTDATAITEM {
     pub guid: ::GUID,
     pub varValue: VARIANTARG,
 }
-
 pub type LPCUSTDATAITEM = *mut CUSTDATAITEM;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CUSTDATA {
     pub cCustData: ::DWORD,
     pub prgCustData: LPCUSTDATAITEM,
 }
-
 pub type LPCUSTDATA = *mut CUSTDATA;
-
 pub type LPCREATETYPEINFO = *mut ICreateTypeInfo;
-
 RIDL!(
 interface ICreateTypeInfo(ICreateTypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn SetGuid(&mut self, guid: ::REFGUID) -> ::HRESULT,
@@ -610,7 +535,6 @@ interface ICreateTypeInfo(ICreateTypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn LayOut(&mut self) -> ::HRESULT
 }
 );
-
 // FIXME: Implement these interfaces
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ICreateTypeInfo2;
@@ -618,9 +542,7 @@ pub struct ICreateTypeInfo2;
 pub struct ICreateTypeLib;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ICreateTypeLib2;
-
 pub type LPDISPATCH = *mut IDispatch;
-
 pub const DISPID_UNKNOWN: ::INT = -1;
 pub const DISPID_VALUE: ::INT = 0;
 pub const DISPID_PROPERTYPUT: ::INT = -3;
@@ -629,7 +551,6 @@ pub const DISPID_EVALUATE: ::INT = -5;
 pub const DISPID_CONSTRUCTOR: ::INT = -6;
 pub const DISPID_DESTRUCTOR: ::INT = -7;
 pub const DISPID_COLLECT: ::INT = -8;
-
 RIDL!(
 interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeInfoCount(&mut self, pctinfo: *mut ::UINT) -> ::HRESULT,
@@ -647,13 +568,11 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
     ) -> ::HRESULT
 }
 );
-
 // FIXME: Implement these interfaces
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IEnumVARIANT;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ITypeComp;
-
 RIDL!(
 interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeAttr(&mut self, ppTypeAttr: *mut *mut TYPEATTR) -> ::HRESULT,
@@ -698,7 +617,6 @@ interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn ReleaseVarDesc(&mut self, pVarDesc: *mut VARDESC) -> ()
 }
 );
-
 // FIXME: Implement these interfaces
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ITypeInfo2;

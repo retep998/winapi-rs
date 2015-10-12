@@ -582,7 +582,7 @@ pub struct D3D11_DEPTH_STENCIL_DESC {
     pub StencilReadMask: ::UINT8,
     pub StencilWriteMask: ::UINT8,
     pub FrontFace: D3D11_DEPTH_STENCILOP_DESC,
-    pub BackFace: D3D11_DEPTH_STENCILOP_DESC,   
+    pub BackFace: D3D11_DEPTH_STENCILOP_DESC,
 }
 RIDL!(
 interface ID3D11DepthStencilState(ID3D11DepthStencilStateVtbl)
@@ -657,7 +657,7 @@ pub struct D3D11_RASTERIZER_DESC {
     pub DepthClipEnable: ::BOOL,
     pub ScissorEnable: ::BOOL,
     pub MultisampleEnable: ::BOOL,
-    pub AntialiasedLineEnable: ::BOOL,  
+    pub AntialiasedLineEnable: ::BOOL,
 }
 RIDL!(
 interface ID3D11RasterizerState(ID3D11RasterizerStateVtbl)
@@ -2304,7 +2304,7 @@ DEFINE_GUID!(D3D11_AUTHENTICATED_QUERY_UNRESTRICTED_PROTECTED_SHARED_RESOURCE_CO
     0xe662, 0x4474, 0xbe, 0xfd, 0xaa, 0x53, 0xe5, 0x14, 0x3c, 0x6d);
 DEFINE_GUID!(D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT, 0x2c042b5e, 0x8c07, 0x46d5, 0xaa, 0xbe,
     0x8f, 0x75, 0xcb, 0xad, 0x4c, 0x31);
-DEFINE_GUID!(D3D11_AUTHENTICATED_QUERY_OUTPUT_ID, 0x839ddca3, 0x9b4e, 0x41e4, 0xb0, 0x53, 0x89, 
+DEFINE_GUID!(D3D11_AUTHENTICATED_QUERY_OUTPUT_ID, 0x839ddca3, 0x9b4e, 0x41e4, 0xb0, 0x53, 0x89,
     0x2b, 0xd2, 0xa1, 0x1e, 0xe7);
 DEFINE_GUID!(D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ATTRIBUTES, 0x6214d9d2, 0x432c, 0x4abb, 0x9f,
     0xce, 0x21, 0x6e, 0xea, 0x26, 0x9e, 0x3b);

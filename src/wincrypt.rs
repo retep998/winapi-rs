@@ -1380,7 +1380,9 @@ pub const szOID_YESNO_TRUST_ATTR: &'static str = "1.3.6.1.4.1.311.10.4.1";
 pub const szOID_PKIX_POLICY_QUALIFIER_CPS: &'static str = "1.3.6.1.5.5.7.2.1";
 pub const szOID_PKIX_POLICY_QUALIFIER_USERNOTICE: &'static str = "1.3.6.1.5.5.7.2.2";
 pub const szOID_ROOT_PROGRAM_FLAGS: &'static str = "1.3.6.1.4.1.311.60.1.1";
-//9221
+//6992
+pub type HCRYPTMSG = *mut ::c_void;
+//9353
 pub type HCERTSTORE = *mut ::c_void;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CERT_CONTEXT {
@@ -1402,8 +1404,6 @@ pub struct CRL_CONTEXT {
 }
 pub type PCRL_CONTEXT = *mut CRL_CONTEXT;
 pub type PCCRL_CONTEXT = *const CRL_CONTEXT;
-//6854
-pub type HCRYPTMSG = *mut ::c_void;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CTL_CONTEXT {
     pub dwMsgAndCertEncodingType: ::DWORD,
@@ -1417,6 +1417,135 @@ pub struct CTL_CONTEXT {
 }
 pub type PCTL_CONTEXT = *mut CTL_CONTEXT;
 pub type PCCTL_CONTEXT = *const CTL_CONTEXT;
+pub const CERT_KEY_PROV_HANDLE_PROP_ID: ::DWORD = 1;
+pub const CERT_KEY_PROV_INFO_PROP_ID: ::DWORD = 2;
+pub const CERT_SHA1_HASH_PROP_ID: ::DWORD = 3;
+pub const CERT_MD5_HASH_PROP_ID: ::DWORD = 4;
+pub const CERT_HASH_PROP_ID: ::DWORD = CERT_SHA1_HASH_PROP_ID;
+pub const CERT_KEY_CONTEXT_PROP_ID: ::DWORD = 5;
+pub const CERT_KEY_SPEC_PROP_ID: ::DWORD = 6;
+pub const CERT_IE30_RESERVED_PROP_ID: ::DWORD = 7;
+pub const CERT_PUBKEY_HASH_RESERVED_PROP_ID: ::DWORD = 8;
+pub const CERT_ENHKEY_USAGE_PROP_ID: ::DWORD = 9;
+pub const CERT_CTL_USAGE_PROP_ID: ::DWORD = CERT_ENHKEY_USAGE_PROP_ID;
+pub const CERT_NEXT_UPDATE_LOCATION_PROP_ID: ::DWORD = 10;
+pub const CERT_FRIENDLY_NAME_PROP_ID: ::DWORD = 11;
+pub const CERT_PVK_FILE_PROP_ID: ::DWORD = 12;
+pub const CERT_DESCRIPTION_PROP_ID: ::DWORD = 13;
+pub const CERT_ACCESS_STATE_PROP_ID: ::DWORD = 14;
+pub const CERT_SIGNATURE_HASH_PROP_ID: ::DWORD = 15;
+pub const CERT_SMART_CARD_DATA_PROP_ID: ::DWORD = 16;
+pub const CERT_EFS_PROP_ID: ::DWORD = 17;
+pub const CERT_FORTEZZA_DATA_PROP_ID: ::DWORD = 18;
+pub const CERT_ARCHIVED_PROP_ID: ::DWORD = 19;
+pub const CERT_KEY_IDENTIFIER_PROP_ID: ::DWORD = 20;
+pub const CERT_AUTO_ENROLL_PROP_ID: ::DWORD = 21;
+pub const CERT_PUBKEY_ALG_PARA_PROP_ID: ::DWORD = 22;
+pub const CERT_CROSS_CERT_DIST_POINTS_PROP_ID: ::DWORD = 23;
+pub const CERT_ISSUER_PUBLIC_KEY_MD5_HASH_PROP_ID: ::DWORD = 24;
+pub const CERT_SUBJECT_PUBLIC_KEY_MD5_HASH_PROP_ID: ::DWORD = 25;
+pub const CERT_ENROLLMENT_PROP_ID: ::DWORD = 26;
+pub const CERT_DATE_STAMP_PROP_ID: ::DWORD = 27;
+pub const CERT_ISSUER_SERIAL_NUMBER_MD5_HASH_PROP_ID: ::DWORD = 28;
+pub const CERT_SUBJECT_NAME_MD5_HASH_PROP_ID: ::DWORD = 29;
+pub const CERT_EXTENDED_ERROR_INFO_PROP_ID: ::DWORD = 30;
+pub const CERT_RENEWAL_PROP_ID: ::DWORD = 64;
+pub const CERT_ARCHIVED_KEY_HASH_PROP_ID: ::DWORD = 65;
+pub const CERT_AUTO_ENROLL_RETRY_PROP_ID: ::DWORD = 66;
+pub const CERT_AIA_URL_RETRIEVED_PROP_ID: ::DWORD = 67;
+pub const CERT_AUTHORITY_INFO_ACCESS_PROP_ID: ::DWORD = 68;
+pub const CERT_BACKED_UP_PROP_ID: ::DWORD = 69;
+pub const CERT_OCSP_RESPONSE_PROP_ID: ::DWORD = 70;
+pub const CERT_REQUEST_ORIGINATOR_PROP_ID: ::DWORD = 71;
+pub const CERT_SOURCE_LOCATION_PROP_ID: ::DWORD = 72;
+pub const CERT_SOURCE_URL_PROP_ID: ::DWORD = 73;
+pub const CERT_NEW_KEY_PROP_ID: ::DWORD = 74;
+pub const CERT_OCSP_CACHE_PREFIX_PROP_ID: ::DWORD = 75;
+pub const CERT_SMART_CARD_ROOT_INFO_PROP_ID: ::DWORD = 76;
+pub const CERT_NO_AUTO_EXPIRE_CHECK_PROP_ID: ::DWORD = 77;
+pub const CERT_NCRYPT_KEY_HANDLE_PROP_ID: ::DWORD = 78;
+pub const CERT_HCRYPTPROV_OR_NCRYPT_KEY_HANDLE_PROP_ID: ::DWORD = 79;
+pub const CERT_SUBJECT_INFO_ACCESS_PROP_ID: ::DWORD = 80;
+pub const CERT_CA_OCSP_AUTHORITY_INFO_ACCESS_PROP_ID: ::DWORD = 81;
+pub const CERT_CA_DISABLE_CRL_PROP_ID: ::DWORD = 82;
+pub const CERT_ROOT_PROGRAM_CERT_POLICIES_PROP_ID: ::DWORD = 83;
+pub const CERT_ROOT_PROGRAM_NAME_CONSTRAINTS_PROP_ID: ::DWORD = 84;
+pub const CERT_SUBJECT_OCSP_AUTHORITY_INFO_ACCESS_PROP_ID: ::DWORD = 85;
+pub const CERT_SUBJECT_DISABLE_CRL_PROP_ID: ::DWORD = 86;
+pub const CERT_CEP_PROP_ID: ::DWORD = 87;
+pub const CERT_SIGN_HASH_CNG_ALG_PROP_ID: ::DWORD = 89;
+pub const CERT_SCARD_PIN_ID_PROP_ID: ::DWORD = 90;
+pub const CERT_SCARD_PIN_INFO_PROP_ID: ::DWORD = 91;
+pub const CERT_SUBJECT_PUB_KEY_BIT_LENGTH_PROP_ID: ::DWORD = 92;
+pub const CERT_PUB_KEY_CNG_ALG_BIT_LENGTH_PROP_ID: ::DWORD = 93;
+pub const CERT_ISSUER_PUB_KEY_BIT_LENGTH_PROP_ID: ::DWORD = 94;
+pub const CERT_ISSUER_CHAIN_SIGN_HASH_CNG_ALG_PROP_ID: ::DWORD = 95;
+pub const CERT_ISSUER_CHAIN_PUB_KEY_CNG_ALG_BIT_LENGTH_PROP_ID: ::DWORD = 96;
+pub const CERT_NO_EXPIRE_NOTIFICATION_PROP_ID: ::DWORD = 97;
+pub const CERT_AUTH_ROOT_SHA256_HASH_PROP_ID: ::DWORD = 98;
+pub const CERT_NCRYPT_KEY_HANDLE_TRANSFER_PROP_ID: ::DWORD = 99;
+pub const CERT_HCRYPTPROV_TRANSFER_PROP_ID: ::DWORD = 100;
+pub const CERT_SMART_CARD_READER_PROP_ID: ::DWORD = 101;
+pub const CERT_SEND_AS_TRUSTED_ISSUER_PROP_ID: ::DWORD = 102;
+pub const CERT_KEY_REPAIR_ATTEMPTED_PROP_ID: ::DWORD = 103;
+pub const CERT_DISALLOWED_FILETIME_PROP_ID: ::DWORD = 104;
+pub const CERT_ROOT_PROGRAM_CHAIN_POLICIES_PROP_ID: ::DWORD = 105;
+pub const CERT_SMART_CARD_READER_NON_REMOVABLE_PROP_ID: ::DWORD = 106;
+pub const CERT_SHA256_HASH_PROP_ID: ::DWORD = 107;
+pub const CERT_SCEP_SERVER_CERTS_PROP_ID: ::DWORD = 108;
+pub const CERT_SCEP_RA_SIGNATURE_CERT_PROP_ID: ::DWORD = 109;
+pub const CERT_SCEP_RA_ENCRYPTION_CERT_PROP_ID: ::DWORD = 110;
+pub const CERT_SCEP_CA_CERT_PROP_ID: ::DWORD = 111;
+pub const CERT_SCEP_SIGNER_CERT_PROP_ID: ::DWORD = 112;
+pub const CERT_SCEP_NONCE_PROP_ID: ::DWORD = 113;
+pub const CERT_SCEP_ENCRYPT_HASH_CNG_ALG_PROP_ID: ::DWORD = 114;
+pub const CERT_SCEP_FLAGS_PROP_ID: ::DWORD = 115;
+pub const CERT_SCEP_GUID_PROP_ID: ::DWORD = 116;
+pub const CERT_SERIALIZABLE_KEY_CONTEXT_PROP_ID: ::DWORD = 117;
+pub const CERT_ISOLATED_KEY_PROP_ID: ::DWORD = 118;
+pub const CERT_FIRST_RESERVED_PROP_ID: ::DWORD = 119;
+pub const CERT_LAST_RESERVED_PROP_ID: ::DWORD = 0x00007FFF;
+pub const CERT_FIRST_USER_PROP_ID: ::DWORD = 0x00008000;
+pub const CERT_LAST_USER_PROP_ID: ::DWORD = 0x0000FFFF;
+pub const szOID_CERT_PROP_ID_PREFIX: &'static str = "1.3.6.1.4.1.311.10.11.";
+pub const szOID_CERT_KEY_IDENTIFIER_PROP_ID: &'static str = "1.3.6.1.4.1.311.10.11.20";
+pub const szOID_CERT_ISSUER_SERIAL_NUMBER_MD5_HASH_PROP_ID: &'static str
+    = "1.3.6.1.4.1.311.10.11.28";
+pub const szOID_CERT_SUBJECT_NAME_MD5_HASH_PROP_ID: &'static str = "1.3.6.1.4.1.311.10.11.29";
+pub const szOID_CERT_MD5_HASH_PROP_ID: &'static str = "1.3.6.1.4.1.311.10.11.4";
+pub const szOID_CERT_SIGNATURE_HASH_PROP_ID: &'static str = "1.3.6.1.4.1.311.10.11.15";
+pub const szOID_DISALLOWED_HASH: &'static str = szOID_CERT_SIGNATURE_HASH_PROP_ID;
+pub const szOID_CERT_DISALLOWED_FILETIME_PROP_ID: &'static str = "1.3.6.1.4.1.311.10.11.104";
+pub const CERT_ACCESS_STATE_WRITE_PERSIST_FLAG: ::DWORD = 0x1;
+pub const CERT_ACCESS_STATE_SYSTEM_STORE_FLAG: ::DWORD = 0x2;
+pub const CERT_ACCESS_STATE_LM_SYSTEM_STORE_FLAG: ::DWORD = 0x4;
+pub const CERT_ACCESS_STATE_GP_SYSTEM_STORE_FLAG: ::DWORD = 0x8;
+pub const CERT_ACCESS_STATE_SHARED_USER_FLAG: ::DWORD = 0x10;
+pub const szOID_ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION: &'static str = "1.3.6.1.4.1.311.60.3.1";
+pub const szOID_ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION: &'static str = "1.3.6.1.4.1.311.60.3.2";
+pub const szOID_ROOT_PROGRAM_NO_OCSP_FAILOVER_TO_CRL: &'static str = "1.3.6.1.4.1.311.60.3.3";
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_KEY_PROV_PARAM {
+    pub dwParam: ::DWORD,
+    pub pbData: *mut ::BYTE,
+    pub cbData: ::DWORD,
+    pub dwFlags: ::DWORD,
+}
+pub type PCRYPT_KEY_PROV_PARAM = *mut CRYPT_KEY_PROV_PARAM;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CRYPT_KEY_PROV_INFO {
+    pub pwszContainerName: ::LPWSTR,
+    pub pwszProvName: ::LPWSTR,
+    pub dwProvType: ::DWORD,
+    pub dwFlags: ::DWORD,
+    pub cProvParam: ::DWORD,
+    pub rgProvParam: PCRYPT_KEY_PROV_PARAM,
+    pub dwKeySpec: ::DWORD,
+}
+pub type PCRYPT_KEY_PROV_INFO = *mut CRYPT_KEY_PROV_INFO;
+pub const CERT_SET_KEY_PROV_HANDLE_PROP_ID: ::DWORD = 0x00000001;
+pub const CERT_SET_KEY_CONTEXT_PROP_ID: ::DWORD = 0x00000001;
+pub const CERT_NCRYPT_KEY_SPEC: ::DWORD = 0xFFFFFFFF;
 //20213
 pub type HCERT_SERVER_OCSP_RESPONSE = *mut ::c_void;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
@@ -1461,25 +1590,6 @@ pub struct CERT_CREATE_CONTEXT_PARA {
 }
 impl Clone for CERT_CREATE_CONTEXT_PARA { fn clone(&self) -> CERT_CREATE_CONTEXT_PARA { *self } }
 pub type PCERT_CREATE_CONTEXT_PARA = *mut CERT_CREATE_CONTEXT_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_KEY_PROV_PARAM {
-    pub dwParam: ::DWORD,
-    pub pbData: *mut ::BYTE,
-    pub cbData: ::DWORD,
-    pub dwFlags: ::DWORD,
-}
-pub type PCRYPT_KEY_PROV_PARAM = *mut CRYPT_KEY_PROV_PARAM;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_KEY_PROV_INFO {
-    pub pwszContainerName: ::LPWSTR,
-    pub pwszProvName: ::LPWSTR,
-    pub dwProvType: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub cProvParam: ::DWORD,
-    pub rgProvParam: PCRYPT_KEY_PROV_PARAM,
-    pub dwKeySpec: ::DWORD,
-}
-pub type PCRYPT_KEY_PROV_INFO = *mut CRYPT_KEY_PROV_INFO;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CERT_EXTENSIONS {
     cExtension: ::DWORD,
@@ -1602,7 +1712,7 @@ pub struct CERT_STRONG_SIGN_PARA {
     pub pvInfo: *mut ::c_void,
 }
 UNION!(
-    CERT_STRONG_SIGN_PARA, pvInfo, pSerializedInfo, pSerializedInfo_mut, 
+    CERT_STRONG_SIGN_PARA, pvInfo, pSerializedInfo, pSerializedInfo_mut,
     PCERT_STRONG_SIGN_SERIALIZED_INFO
 );
 UNION!(CERT_STRONG_SIGN_PARA, pvInfo, pszOID, pszOID_mut, ::LPSTR);

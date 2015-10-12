@@ -35,7 +35,6 @@ interface ISequentialStream(ISequentialStreamVtbl): IUnknown(IUnknownVtbl) {
     fn Write(&mut self, pv: *const ::c_void, cb: ::ULONG, pcbWritten: *mut ::ULONG) -> ::HRESULT
 }
 );
-
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum STGTY {
     STGTY_STORAGE = 1,
@@ -43,27 +42,21 @@ pub enum STGTY {
     STGTY_LOCKBYTES = 3,
     STGTY_PROPERTY = 4
 }
-
 pub use self::STGTY::*;
-
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum STREAM_SEEK {
     STREAM_SEEK_SET = 0,
     STREAM_SEEK_CUR = 1,
     STREAM_SEEK_END = 2
 }
-
 pub use self::STREAM_SEEK::*;
-
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum LOCKTYPE {
     LOCK_WRITE = 1,
     LOCK_EXCLUSIVE = 2,
     LOCK_ONLYONCE = 4
 }
-
 pub use self::LOCKTYPE::*;
-
 //2255
 RIDL!(
 interface IStream(IStreamVtbl): ISequentialStream(ISequentialStreamVtbl) {

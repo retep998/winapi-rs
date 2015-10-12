@@ -29,7 +29,6 @@ pub struct DSCAPS {
     pub dwReserved2: ::DWORD,
 }
 pub type LPDSCAPS = *mut DSCAPS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DSBCAPS {
     pub dwSize: ::DWORD,
@@ -39,7 +38,6 @@ pub struct DSBCAPS {
     pub dwPlayCpuOverhead: ::DWORD,
 }
 pub type LPDSBCAPS = *mut DSBCAPS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DSBUFFERDESC {
     pub dwSize: ::DWORD,
@@ -50,7 +48,6 @@ pub struct DSBUFFERDESC {
     pub guid3DAlgorithm: ::GUID,
 }
 pub type LPCDSBUFFERDESC = *const DSBUFFERDESC;
-
 RIDL!(
 interface IDirectSoundBuffer(IDirectSoundBufferVtbl): IUnknown(IUnknownVtbl) {
     fn GetCaps(&mut self, pDSBufferCaps: ::LPDSBCAPS) -> ::HRESULT,
@@ -88,7 +85,6 @@ interface IDirectSoundBuffer(IDirectSoundBufferVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 pub type LPDIRECTSOUNDBUFFER = *mut IDirectSoundBuffer;
-
 RIDL!(
 interface IDirectSound(IDirectSoundVtbl): IUnknown(IUnknownVtbl)
 {
@@ -109,15 +105,12 @@ interface IDirectSound(IDirectSoundVtbl): IUnknown(IUnknownVtbl)
 }
 );
 pub type LPDIRECTSOUND = *mut IDirectSound;
-
 pub const DS_OK: ::HRESULT = ::S_OK;
 pub const DSERR_GENERIC: ::HRESULT = ::E_FAIL;
-
 pub const DSSCL_NORMAL: ::DWORD = 0x00000001;
 pub const DSSCL_PRIORITY: ::DWORD = 0x00000002;
 pub const DSSCL_EXCLUSIVE: ::DWORD = 0x00000003;
 pub const DSSCL_WRITEPRIMARY: ::DWORD = 0x00000004;
-
 pub const DSBCAPS_PRIMARYBUFFER: ::DWORD = 0x00000001;
 pub const DSBCAPS_STATIC: ::DWORD = 0x00000002;
 pub const DSBCAPS_LOCHARDWARE: ::DWORD = 0x00000004;
@@ -134,7 +127,6 @@ pub const DSBCAPS_GETCURRENTPOSITION2: ::DWORD = 0x00010000;
 pub const DSBCAPS_MUTE3DATMAXDISTANCE: ::DWORD = 0x00020000;
 pub const DSBCAPS_LOCDEFER: ::DWORD = 0x00040000;
 pub const DSBCAPS_TRUEPLAYPOSITION: ::DWORD = 0x00080000;
-
 pub const DSBPLAY_LOOPING: ::DWORD = 0x00000001;
 pub const DSBPLAY_LOCHARDWARE: ::DWORD = 0x00000002;
 pub const DSBPLAY_LOCSOFTWARE: ::DWORD = 0x00000004;

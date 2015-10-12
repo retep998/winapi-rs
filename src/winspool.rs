@@ -17,7 +17,6 @@ pub struct PRINTER_DEFAULTSW {
 }
 pub type PPRINTER_DEFAULTSW = *mut PRINTER_DEFAULTSW;
 pub type LPPRINTER_DEFAULTSW = *mut PRINTER_DEFAULTSW;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PRINTER_OPTIONSA {
     pub cbSize: ::UINT,

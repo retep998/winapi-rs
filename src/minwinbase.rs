@@ -163,14 +163,11 @@ pub const PROCESS_HEAP_ENTRY_BUSY: ::WORD = 0x0004;
 pub const PROCESS_HEAP_SEG_ALLOC: ::WORD = 0x0008;
 pub const PROCESS_HEAP_ENTRY_MOVEABLE: ::WORD = 0x0010;
 pub const PROCESS_HEAP_ENTRY_DDESHARE: ::WORD = 0x0020;
-
 pub type PTHREAD_START_ROUTINE = Option<unsafe extern "system" fn(
     lpThreadParameter: ::LPVOID,
 ) -> ::DWORD>;
 pub type LPTHREAD_START_ROUTINE = PTHREAD_START_ROUTINE;
-
 pub type LPCONTEXT = ::PCONTEXT;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct REASON_CONTEXT_Detailed {
     pub LocalizedReasonModule: ::HMODULE,
@@ -186,7 +183,6 @@ pub struct REASON_CONTEXT {
 }
 UNION!(REASON_CONTEXT, Reason, SimpleReasonString, SimpleReasonString_mut, ::LPWSTR);
 pub type PREASON_CONTEXT = *mut REASON_CONTEXT;
-
 pub const EXCEPTION_DEBUG_EVENT: ::DWORD = 1;
 pub const CREATE_THREAD_DEBUG_EVENT: ::DWORD = 2;
 pub const CREATE_PROCESS_DEBUG_EVENT: ::DWORD = 3;
@@ -196,7 +192,6 @@ pub const LOAD_DLL_DEBUG_EVENT: ::DWORD = 6;
 pub const UNLOAD_DLL_DEBUG_EVENT: ::DWORD = 7;
 pub const OUTPUT_DEBUG_STRING_EVENT: ::DWORD = 8;
 pub const RIP_EVENT: ::DWORD = 9;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct EXCEPTION_DEBUG_INFO {
     pub ExceptionRecord: ::EXCEPTION_RECORD,

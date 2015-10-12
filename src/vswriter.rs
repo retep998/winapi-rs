@@ -9,7 +9,6 @@ pub enum VSS_USAGE_TYPE {
     VSS_UT_USERDATA = 3,
     VSS_UT_OTHER = 4,
 }
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_SOURCE_TYPE {
     VSS_ST_UNDEFINED = 0,
@@ -17,7 +16,6 @@ pub enum VSS_SOURCE_TYPE {
     VSS_ST_NONTRANSACTEDDB = 2,
     VSS_ST_OTHER = 3,
 }
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_RESTOREMETHOD_ENUM {
     VSS_RME_UNDEFINED = 0,
@@ -30,7 +28,6 @@ pub enum VSS_RESTOREMETHOD_ENUM {
     VSS_RME_CUSTOM = 7,
     VSS_RME_RESTORE_STOP_START = 8,
 }
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_WRITERRESTORE_ENUM {
     VSS_WRE_UNDEFINED = 0,
@@ -38,14 +35,12 @@ pub enum VSS_WRITERRESTORE_ENUM {
     VSS_WRE_IF_REPLACE_FAILS = 2,
     VSS_WRE_ALWAYS = 3,
 }
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_COMPONENT_TYPE {
     VSS_CT_UNDEFINED = 0,
     VSS_CT_DATABASE = 1,
     VSS_CT_FILEGROUP = 2,
 }
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_ALTERNATE_WRITER_STATE {
     VSS_AWS_UNDEFINED = 0,
@@ -53,14 +48,12 @@ pub enum VSS_ALTERNATE_WRITER_STATE {
     VSS_AWS_ALTERNATE_WRITER_EXISTS = 2,
     VSS_AWS_THIS_IS_ALTERNATE_WRITER = 3,
 }
-
 pub type VSS_SUBSCRIBE_MASK = ::DWORD;
 pub const VSS_SM_POST_SNAPSHOT_FLAG: ::DWORD = 0x00000001;
 pub const VSS_SM_BACKUP_EVENTS_FLAG: ::DWORD = 0x00000002;
 pub const VSS_SM_RESTORE_EVENTS_FLAG: ::DWORD = 0x00000004;
 pub const VSS_SM_IO_THROTTLING_FLAG: ::DWORD = 0x00000008;
 pub const VSS_SM_ALL_FLAGS: ::DWORD = 0xffffffff;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_RESTORE_TARGET {
     VSS_RT_UNDEFINED = 0,
@@ -69,7 +62,6 @@ pub enum VSS_RESTORE_TARGET {
     VSS_RT_DIRECTED = 3,
     VSS_RT_ORIGINAL_LOCATION = 4,
 }
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum VSS_FILE_RESTORE_STATUS {
     VSS_RS_UNDEFINED = 0,
@@ -77,12 +69,10 @@ pub enum VSS_FILE_RESTORE_STATUS {
     VSS_RS_ALL = 2,
     VSS_RS_FAILED = 3,
 }
-
 pub type VSS_COMPONENT_FLAGS = ::DWORD;
 pub const VSS_CF_BACKUP_RECOVERY: ::DWORD = 0x00000001;
 pub const VSS_CF_APP_ROLLBACK_RECOVERY: ::DWORD = 0x00000002;
 pub const VSS_CF_NOT_SYSTEM_STATE: ::DWORD = 0x00000004;
-
 RIDL!(
 interface IVssWMFiledesc(IVssWMFiledescVtbl): IUnknown(IUnknownVtbl) {
     fn GetPath(&mut self, pbstrPath: *mut ::BSTR) -> ::HRESULT,
@@ -92,7 +82,6 @@ interface IVssWMFiledesc(IVssWMFiledescVtbl): IUnknown(IUnknownVtbl) {
     fn GetBackupTypeMask(&mut self, pdwTypeMask: *mut ::DWORD) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssWMDependency(IVssWMDependencyVtbl): IUnknown(IUnknownVtbl) {
     fn GetWriterId(&mut self, pWriterId: *mut ::VSS_ID) -> ::HRESULT,
@@ -100,7 +89,6 @@ interface IVssWMDependency(IVssWMDependencyVtbl): IUnknown(IUnknownVtbl) {
     fn GetComponentName(&mut self, pbstrComponentName: *mut ::BSTR) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssComponent(IVssComponentVtbl): IUnknown(IUnknownVtbl) {
     fn GetLogicalPath(&mut self, pbstrPath: *mut ::BSTR) -> ::HRESULT,
@@ -174,7 +162,6 @@ interface IVssComponent(IVssComponentVtbl): IUnknown(IUnknownVtbl) {
     ) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssWriterComponents(IVssWriterComponentsVtbl) {
     fn GetComponentCount(&mut self, pcComponents: *mut ::UINT) -> ::HRESULT,
@@ -186,7 +173,6 @@ interface IVssWriterComponents(IVssWriterComponentsVtbl) {
     ) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssComponentEx(IVssComponentExVtbl): IVssComponent(IVssComponentVtbl) {
     fn SetPrepareForBackupFailureMsg(&mut self, wszFailureMsg: ::LPCWSTR) -> ::HRESULT,
@@ -200,7 +186,6 @@ interface IVssComponentEx(IVssComponentExVtbl): IVssComponent(IVssComponentVtbl)
     fn GetRestoreName(&mut self, pbstrName: *mut ::BSTR) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssComponentEx2(IVssComponentEx2Vtbl): IVssComponentEx(IVssComponentExVtbl) {
     fn SetFailure(
@@ -213,7 +198,6 @@ interface IVssComponentEx2(IVssComponentEx2Vtbl): IVssComponentEx(IVssComponentE
     ) -> ::HRESULT
 }
 );
-
 RIDL!(
 interface IVssCreateWriterMetadata(IVssCreateWriterMetadataVtbl) {
     fn AddIncludeFiles(
@@ -256,13 +240,10 @@ interface IVssCreateWriterMetadata(IVssCreateWriterMetadataVtbl) {
     fn SaveAsXML(&mut self, pbstrXML: *mut ::BSTR) -> ::HRESULT
 }
 );
-
 //IVssCreateWriterMetadataEx
 //IVssWriterImpl
 //IVssCreateExpressWriterMetadata
 //IVssExpressWriter
-
 //CVssWriter
 //CVssWriterEx
 //CVssWriterEx2
-

@@ -4,5 +4,4 @@
 pub type LPLOOKUPSERVICE_COMPLETION_ROUTINE = Option<unsafe extern "system" fn(
     dwError: ::DWORD, dwBytes: ::DWORD, lpOverlapped: ::LPWSAOVERLAPPED,
 )>;
-
 pub type socklen_t = ::c_int;

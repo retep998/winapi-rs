@@ -87,7 +87,6 @@ macro_rules! RIDL {
                 unsafe { ::std::mem::transmute(self) }
             }
         }
-
     };
     (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident)
         {$(

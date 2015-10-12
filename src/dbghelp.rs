@@ -299,8 +299,6 @@ pub struct API_VERSION {
     pub Reserved: ::USHORT,
 }
 pub type LPAPI_VERSION = *mut API_VERSION;
-
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SYMBOL_INFOW {
     pub SizeOfStruct: ::ULONG,
@@ -319,9 +317,7 @@ pub struct SYMBOL_INFOW {
     pub MaxNameLen: ::ULONG,
     pub Name: [::WCHAR; 1],
 }
-
 pub type PSYMBOL_INFOW = *mut SYMBOL_INFOW;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IMAGEHLP_SYMBOL64 {
     pub SizeOfStruct: ::DWORD,
@@ -331,9 +327,7 @@ pub struct IMAGEHLP_SYMBOL64 {
     pub MaxNameLength: ::DWORD,
     pub Name: [::CHAR; 1],
 }
-
 pub type PIMAGEHLP_SYMBOL64 = *mut IMAGEHLP_SYMBOL64;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct IMAGEHLP_LINEW64 {
     pub SizeOfStruct: ::DWORD,
@@ -342,5 +336,4 @@ pub struct IMAGEHLP_LINEW64 {
     pub FileName: ::PWSTR,
     pub Address: ::DWORD64,
 }
-
 pub type PIMAGEHLP_LINEW64 = *mut IMAGEHLP_LINEW64;

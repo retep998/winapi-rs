@@ -10,9 +10,7 @@ pub const MAX_LABEL_LEN: usize = 30;
 pub const MAX_SERVICE_NAME_LEN: usize = 256;
 pub const MAX_SUBTITLE_LEN: usize = 256;
 pub const SP_MAX_MACHINENAME_LENGTH: usize = ::MAX_PATH + 3;
-
 pub type HINF = ::PVOID;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct INFCONTEXT {
     pub Inf: ::PVOID,
@@ -21,7 +19,6 @@ pub struct INFCONTEXT {
     pub Line: ::UINT,
 }
 pub type PINFCONTEXT = *mut INFCONTEXT;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_INF_INFORMATION {
     pub InfStyle: ::DWORD,
@@ -29,7 +26,6 @@ pub struct SP_INF_INFORMATION {
     pub VersionData: [::BYTE; ::ANYSIZE_ARRAY],
 }
 pub type PSP_INF_INFORMATION = *mut SP_INF_INFORMATION;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_ALTPLATFORM_INFO_V2 {
     pub cbSize: ::DWORD,
@@ -43,7 +39,6 @@ pub struct SP_ALTPLATFORM_INFO_V2 {
 }
 UNION!(SP_ALTPLATFORM_INFO_V2, Reserved, Flags, Flags_mut, ::WORD);
 pub type PSP_ALTPLATFORM_INFO_V2 = *mut SP_ALTPLATFORM_INFO_V2;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_ALTPLATFORM_INFO_V1 {
     pub cbSize: ::DWORD,
@@ -54,12 +49,9 @@ pub struct SP_ALTPLATFORM_INFO_V1 {
     pub Reserved: ::WORD,
 }
 pub type PSP_ALTPLATFORM_INFO_V1 = *mut SP_ALTPLATFORM_INFO_V1;
-
 pub type SP_ALTPLATFORM_INFO = SP_ALTPLATFORM_INFO_V2;
 pub type PSP_ALTPLATFORM_INFO = PSP_ALTPLATFORM_INFO_V2;
-
 pub const SP_ALTPLATFORM_FLAGS_VERSION_RANGE: ::WORD = 0x0001;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_ORIGINAL_FILE_INFO_A {
     pub cbSize: ::DWORD,
@@ -76,14 +68,12 @@ pub struct SP_ORIGINAL_FILE_INFO_W {
 }
 impl Clone for SP_ORIGINAL_FILE_INFO_W { fn clone(&self) -> SP_ORIGINAL_FILE_INFO_W { *self } }
 pub type PSP_ORIGINAL_FILE_INFO_W = *mut SP_ORIGINAL_FILE_INFO_W;
-
 pub const INF_STYLE_NONE: ::DWORD = 0x00000000;
 pub const INF_STYLE_OLDNT: ::DWORD = 0x00000001;
 pub const INF_STYLE_WIN4: ::DWORD = 0x00000002;
 pub const INF_STYLE_CACHE_ENABLE: ::DWORD = 0x00000010;
 pub const INF_STYLE_CACHE_DISABLE: ::DWORD = 0x00000020;
 pub const INF_STYLE_CACHE_IGNORE: ::DWORD = 0x00000040;
-
 pub const DIRID_ABSOLUTE: ::DWORD = 0 - 1;
 pub const DIRID_ABSOLUTE_16BIT: ::DWORD = 0xffff;
 pub const DIRID_NULL: ::DWORD = 0;
@@ -122,14 +112,12 @@ pub const DIRID_PROGRAM_FILES_COMMONX86: ::DWORD = 16428;
 pub const DIRID_COMMON_TEMPLATES: ::DWORD = 16429;
 pub const DIRID_COMMON_DOCUMENTS: ::DWORD = 16430;
 pub const DIRID_USER: ::DWORD = 0x8000;
-
 pub type PSP_FILE_CALLBACK_A = Option<unsafe extern "system" fn(
     Context: ::PVOID, Notification: ::UINT, Param1: ::UINT_PTR, Param2: ::UINT_PTR,
 ) -> ::UINT>;
 pub type PSP_FILE_CALLBACK_W = Option<unsafe extern "system" fn(
     Context: ::PVOID, Notification: ::UINT, Param1: ::UINT_PTR, Param2: ::UINT_PTR,
 ) -> ::UINT>;
-
 pub const SPFILENOTIFY_STARTQUEUE: ::UINT = 0x00000001;
 pub const SPFILENOTIFY_ENDQUEUE: ::UINT = 0x00000002;
 pub const SPFILENOTIFY_STARTSUBQUEUE: ::UINT = 0x00000003;
@@ -160,18 +148,15 @@ pub const SPFILENOTIFY_QUEUESCAN_SIGNERINFO: ::UINT = 0x00000040;
 pub const SPFILENOTIFY_LANGMISMATCH: ::UINT = 0x00010000;
 pub const SPFILENOTIFY_TARGETEXISTS: ::UINT = 0x00020000;
 pub const SPFILENOTIFY_TARGETNEWER: ::UINT = 0x00040000;
-
 pub const FILEOP_COPY: ::UINT = 0;
 pub const FILEOP_RENAME: ::UINT = 1;
 pub const FILEOP_DELETE: ::UINT = 2;
 pub const FILEOP_BACKUP: ::UINT = 3;
-
 pub const FILEOP_ABORT: ::UINT = 0;
 pub const FILEOP_DOIT: ::UINT = 1;
 pub const FILEOP_SKIP: ::UINT = 2;
 pub const FILEOP_RETRY: ::UINT = FILEOP_DOIT;
 pub const FILEOP_NEWPATH: ::UINT = 4;
-
 pub const COPYFLG_WARN_IF_SKIP: ::UINT = 0x00000001;
 pub const COPYFLG_NOSKIP: ::UINT = 0x00000002;
 pub const COPYFLG_NOVERSIONCHECK: ::UINT = 0x00000004;
@@ -185,10 +170,8 @@ pub const COPYFLG_NODECOMP: ::UINT = 0x00000800;
 pub const COPYFLG_REPLACE_BOOT_FILE: ::UINT = 0x00001000;
 pub const COPYFLG_NOPRUNE: ::UINT = 0x00002000;
 pub const COPYFLG_IN_USE_TRY_RENAME: ::UINT = 0x00004000;
-
 pub const DELFLG_IN_USE: ::UINT = 0x00000001;
 pub const DELFLG_IN_USE1: ::UINT = 0x00010000;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FILEPATHS_A {
     pub Target: ::PCSTR,
@@ -205,7 +188,6 @@ pub struct FILEPATHS_W {
     pub Flags: ::DWORD,
 }
 pub type PFILEPATHS_W = *mut FILEPATHS_W;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FILEPATHS_SIGNERINFO_A {
     pub Target: ::PCSTR,
@@ -228,7 +210,6 @@ pub struct FILEPATHS_SIGNERINFO_W {
     pub CatalogFile: ::PCWSTR
 }
 pub type PFILEPATHS_SIGNERINFO_W = *mut FILEPATHS_SIGNERINFO_W;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SOURCE_MEDIA_A {
     pub Reserved: ::PCSTR,
@@ -249,7 +230,6 @@ pub struct SOURCE_MEDIA_W {
     pub Flags: ::DWORD,
 }
 pub type PSOURCE_MEDIA_W = *mut SOURCE_MEDIA_W;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CABINET_INFO_A {
     pub CabinetPath: ::PCSTR,
@@ -268,7 +248,6 @@ pub struct CABINET_INFO_W {
     pub CabinetNumber: ::USHORT,
 }
 pub type PCABINET_INFO_W = *mut CABINET_INFO_W;
-
 #[repr(C)] #[derive(Copy)]
 pub struct FILE_IN_CABINET_INFO_A {
     pub NameInCabinet: ::PCSTR,
@@ -293,7 +272,6 @@ pub struct FILE_IN_CABINET_INFO_W {
 }
 impl Clone for FILE_IN_CABINET_INFO_W { fn clone(&self) -> FILE_IN_CABINET_INFO_W { *self } }
 pub type PFILE_IN_CABINET_INFO_W = *mut FILE_IN_CABINET_INFO_W;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_REGISTER_CONTROL_STATUSA {
     pub cbSize: ::DWORD,
@@ -310,7 +288,6 @@ pub struct SP_REGISTER_CONTROL_STATUSW {
     pub FailureCode: ::DWORD,
 }
 pub type PSP_REGISTER_CONTROL_STATUSW = *mut SP_REGISTER_CONTROL_STATUSW;
-
 pub const SPREG_SUCCESS: ::DWORD = 0x00000000;
 pub const SPREG_LOADLIBRARY: ::DWORD = 0x00000001;
 pub const SPREG_GETPROCADDR: ::DWORD = 0x00000002;
@@ -318,9 +295,7 @@ pub const SPREG_REGSVR: ::DWORD = 0x00000003;
 pub const SPREG_DLLINSTALL: ::DWORD = 0x00000004;
 pub const SPREG_TIMEOUT: ::DWORD = 0x00000005;
 pub const SPREG_UNKNOWN: ::DWORD = 0xFFFFFFFF;
-
 pub type HSPFILEQ = ::PVOID;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_FILE_COPY_PARAMS_A {
     pub cbSize: ::DWORD,
@@ -353,10 +328,8 @@ pub struct SP_FILE_COPY_PARAMS_W {
     pub SecurityDescriptor: ::PCWSTR,
 }
 pub type PSP_FILE_COPY_PARAMS_W = *mut SP_FILE_COPY_PARAMS_W;
-
 pub type HDSKSPC = ::PVOID;
 pub type HDEVINFO = ::PVOID;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_DEVINFO_DATA {
     pub cbSize: ::DWORD,
@@ -365,7 +338,6 @@ pub struct SP_DEVINFO_DATA {
     pub Reserved: ::ULONG_PTR,
 }
 pub type PSP_DEVINFO_DATA = *mut SP_DEVINFO_DATA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_DEVICE_INTERFACE_DATA {
     pub cbSize: ::DWORD,
@@ -374,18 +346,14 @@ pub struct SP_DEVICE_INTERFACE_DATA {
     pub Reserved: ::ULONG_PTR,
 }
 pub type PSP_DEVICE_INTERFACE_DATA = *mut SP_DEVICE_INTERFACE_DATA;
-
 pub const SPINT_ACTIVE: ::DWORD = 0x00000001;
 pub const SPINT_DEFAULT: ::DWORD = 0x00000002;
 pub const SPINT_REMOVED: ::DWORD = 0x00000004;
-
 pub type SP_INTERFACE_DEVICE_DATA = SP_DEVICE_INTERFACE_DATA;
 pub type PSP_INTERFACE_DEVICE_DATA = PSP_DEVICE_INTERFACE_DATA;
-
 pub const SPID_ACTIVE: ::DWORD = SPINT_ACTIVE;
 pub const SPID_DEFAULT: ::DWORD = SPINT_DEFAULT;
 pub const SPID_REMOVED: ::DWORD = SPINT_REMOVED;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_DEVICE_INTERFACE_DETAIL_DATA_A {
     pub cbSize: ::DWORD,
@@ -398,7 +366,6 @@ pub struct SP_DEVICE_INTERFACE_DETAIL_DATA_W {
     pub DevicePath: [::WCHAR; ::ANYSIZE_ARRAY],
 }
 pub type PSP_DEVICE_INTERFACE_DETAIL_DATA_W = *mut SP_DEVICE_INTERFACE_DETAIL_DATA_W;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_DEVINFO_LIST_DETAIL_DATA_A {
     pub cbSize: ::DWORD,
@@ -407,7 +374,7 @@ pub struct SP_DEVINFO_LIST_DETAIL_DATA_A {
     pub RemoteMachineName: [::CHAR; SP_MAX_MACHINENAME_LENGTH],
 }
 impl Clone for SP_DEVINFO_LIST_DETAIL_DATA_A {
-    fn clone(&self) -> SP_DEVINFO_LIST_DETAIL_DATA_A { *self } 
+    fn clone(&self) -> SP_DEVINFO_LIST_DETAIL_DATA_A { *self }
 }
 pub type PSP_DEVINFO_LIST_DETAIL_DATA_A = *mut SP_DEVINFO_LIST_DETAIL_DATA_A;
 #[repr(C)] #[derive(Copy)]
@@ -418,10 +385,9 @@ pub struct SP_DEVINFO_LIST_DETAIL_DATA_W {
     pub RemoteMachineName: [::WCHAR; SP_MAX_MACHINENAME_LENGTH],
 }
 impl Clone for SP_DEVINFO_LIST_DETAIL_DATA_W {
-    fn clone(&self) -> SP_DEVINFO_LIST_DETAIL_DATA_W { *self } 
+    fn clone(&self) -> SP_DEVINFO_LIST_DETAIL_DATA_W { *self }
 }
 pub type PSP_DEVINFO_LIST_DETAIL_DATA_W = *mut SP_DEVINFO_LIST_DETAIL_DATA_W;
-
 pub const DIF_SELECTDEVICE: DI_FUNCTION = 0x00000001;
 pub const DIF_INSTALLDEVICE: DI_FUNCTION = 0x00000002;
 pub const DIF_ASSIGNRESOURCES: DI_FUNCTION = 0x00000003;
@@ -465,9 +431,7 @@ pub const DIF_UPDATEDRIVER_UI: DI_FUNCTION = 0x00000029;
 pub const DIF_FINISHINSTALL_ACTION: DI_FUNCTION = 0x0000002A;
 pub const DIF_RESERVED2: DI_FUNCTION = 0x00000030;
 pub const DIF_MOVEDEVICE: DI_FUNCTION = 0x0000000E;
-
 pub type DI_FUNCTION = ::UINT;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_DEVINSTALL_PARAMS_A {
     pub cbSize: ::DWORD,
@@ -498,7 +462,6 @@ pub struct SP_DEVINSTALL_PARAMS_W {
 }
 impl Clone for SP_DEVINSTALL_PARAMS_W { fn clone(&self) -> SP_DEVINSTALL_PARAMS_W { *self } }
 pub type PSP_DEVINSTALL_PARAMS_W = *mut SP_DEVINSTALL_PARAMS_W;
-
 pub const DI_SHOWOEM: ::DWORD = 0x00000001;
 pub const DI_SHOWCOMPAT: ::DWORD = 0x00000002;
 pub const DI_SHOWCLASS: ::DWORD = 0x00000004;
@@ -563,14 +526,12 @@ pub const DI_FLAGSEX_ALTPLATFORM_DRVSEARCH: ::DWORD = 0x10000000;
 pub const DI_FLAGSEX_RESTART_DEVICE_ONLY: ::DWORD = 0x20000000;
 pub const DI_FLAGSEX_RECURSIVESEARCH: ::DWORD = 0x40000000;
 pub const DI_FLAGSEX_SEARCH_PUBLISHED_INFS: ::DWORD = 0x80000000;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_CLASSINSTALL_HEADER {
     pub cbSize: ::DWORD,
     pub InstallFunction: DI_FUNCTION,
 }
 pub type PSP_CLASSINSTALL_HEADER = *mut SP_CLASSINSTALL_HEADER;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_ENABLECLASS_PARAMS {
     pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
@@ -578,11 +539,9 @@ pub struct SP_ENABLECLASS_PARAMS {
     pub EnableMessage: ::DWORD,
 }
 pub type PSP_ENABLECLASS_PARAMS = *mut SP_ENABLECLASS_PARAMS;
-
 pub const ENABLECLASS_QUERY: ::DWORD = 0;
 pub const ENABLECLASS_SUCCESS: ::DWORD = 1;
 pub const ENABLECLASS_FAILURE: ::DWORD = 2;
-
 pub const DICS_ENABLE: ::DWORD = 0x00000001;
 pub const DICS_DISABLE: ::DWORD = 0x00000002;
 pub const DICS_PROPCHANGE: ::DWORD = 0x00000003;
@@ -591,7 +550,6 @@ pub const DICS_STOP: ::DWORD = 0x00000005;
 pub const DICS_FLAG_GLOBAL: ::DWORD = 0x00000001;
 pub const DICS_FLAG_CONFIGSPECIFIC: ::DWORD = 0x00000002;
 pub const DICS_FLAG_CONFIGGENERAL: ::DWORD = 0x00000004;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_PROPCHANGE_PARAMS {
     pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
@@ -600,7 +558,6 @@ pub struct SP_PROPCHANGE_PARAMS {
     pub HwProfile: ::DWORD,
 }
 pub type PSP_PROPCHANGE_PARAMS = *mut SP_PROPCHANGE_PARAMS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_REMOVEDEVICE_PARAMS {
     pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
@@ -608,10 +565,8 @@ pub struct SP_REMOVEDEVICE_PARAMS {
     pub HwProfile: ::DWORD,
 }
 pub type PSP_REMOVEDEVICE_PARAMS = *mut SP_REMOVEDEVICE_PARAMS;
-
 pub const DI_REMOVEDEVICE_GLOBAL: ::DWORD = 0x00000001;
 pub const DI_REMOVEDEVICE_CONFIGSPECIFIC: ::DWORD = 0x00000002;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_UNREMOVEDEVICE_PARAMS {
     pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
@@ -619,9 +574,7 @@ pub struct SP_UNREMOVEDEVICE_PARAMS {
     pub HwProfile: ::DWORD,
 }
 pub type PSP_UNREMOVEDEVICE_PARAMS = *mut SP_UNREMOVEDEVICE_PARAMS;
-
 pub const DI_UNREMOVEDEVICE_CONFIGSPECIFIC: ::DWORD = 0x00000002;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_SELECTDEVICE_PARAMS_A {
     pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
@@ -643,11 +596,9 @@ pub struct SP_SELECTDEVICE_PARAMS_W {
 }
 impl Clone for SP_SELECTDEVICE_PARAMS_W { fn clone(&self) -> SP_SELECTDEVICE_PARAMS_W { *self } }
 pub type PSP_SELECTDEVICE_PARAMS_W = *mut SP_SELECTDEVICE_PARAMS_W;
-
 pub type PDETECT_PROGRESS_NOTIFY = Option<unsafe extern "system" fn(
     ProgressNotifyParam: ::PVOID, DetectComplete: ::DWORD,
 ) -> ::BOOL>;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_DETECTDEVICE_PARAMS {
     pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
@@ -656,9 +607,7 @@ pub struct SP_DETECTDEVICE_PARAMS {
 }
 impl Clone for SP_DETECTDEVICE_PARAMS { fn clone(&self) -> SP_DETECTDEVICE_PARAMS { *self } }
 pub type PSP_DETECTDEVICE_PARAMS = *mut SP_DETECTDEVICE_PARAMS;
-
 pub const MAX_INSTALLWIZARD_DYNAPAGES: usize = 20;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_INSTALLWIZARD_DATA {
     pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
@@ -671,7 +620,6 @@ pub struct SP_INSTALLWIZARD_DATA {
     pub hwndWizardDlg: ::HWND,
 }
 pub type PSP_INSTALLWIZARD_DATA = *mut SP_INSTALLWIZARD_DATA;
-
 pub const NDW_INSTALLFLAG_DIDFACTDEFS: ::DWORD = 0x00000001;
 pub const NDW_INSTALLFLAG_HARDWAREALLREADYIN: ::DWORD = 0x00000002;
 pub const NDW_INSTALLFLAG_NEEDRESTART: ::DWORD = DI_NEEDRESTART;
@@ -687,12 +635,10 @@ pub const NDW_INSTALLFLAG_PCMCIAMODE: ::DWORD = 0x00010000;
 pub const NDW_INSTALLFLAG_PCMCIADEVICE: ::DWORD = 0x00020000;
 pub const NDW_INSTALLFLAG_USERCANCEL: ::DWORD = 0x00040000;
 pub const NDW_INSTALLFLAG_KNOWNCLASS: ::DWORD = 0x00080000;
-
 pub const DYNAWIZ_FLAG_PAGESADDED: ::DWORD = 0x00000001;
 pub const DYNAWIZ_FLAG_ANALYZE_HANDLECONFLICT: ::DWORD = 0x00000008;
 pub const DYNAWIZ_FLAG_INSTALLDET_NEXT: ::DWORD = 0x00000002;
 pub const DYNAWIZ_FLAG_INSTALLDET_PREV: ::DWORD = 0x00000004;
-
 pub const MIN_IDD_DYNAWIZ_RESOURCE_ID: ::c_int = 10000;
 pub const MAX_IDD_DYNAWIZ_RESOURCE_ID: ::c_int = 11000;
 pub const IDD_DYNAWIZ_FIRSTPAGE: ::c_int = 10000;
@@ -707,7 +653,6 @@ pub const IDD_DYNAWIZ_SELECTCLASS_PAGE: ::c_int = 10012;
 pub const IDD_DYNAWIZ_INSTALLDETECTED_PREVPAGE: ::c_int = 10006;
 pub const IDD_DYNAWIZ_INSTALLDETECTED_NEXTPAGE: ::c_int = 10007;
 pub const IDD_DYNAWIZ_INSTALLDETECTED_NODEVS: ::c_int = 10008;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_NEWDEVICEWIZARD_DATA {
     pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
@@ -717,10 +662,8 @@ pub struct SP_NEWDEVICEWIZARD_DATA {
     pub hwndWizardDlg: ::HWND,
 }
 pub type PSP_NEWDEVICEWIZARD_DATA = *mut SP_NEWDEVICEWIZARD_DATA;
-
 pub type SP_ADDPROPERTYPAGE_DATA = SP_NEWDEVICEWIZARD_DATA;
 pub type PSP_ADDPROPERTYPAGE_DATA = PSP_NEWDEVICEWIZARD_DATA;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_TROUBLESHOOTER_PARAMS_A {
     pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
@@ -741,7 +684,6 @@ impl Clone for SP_TROUBLESHOOTER_PARAMS_W {
     fn clone(&self) -> SP_TROUBLESHOOTER_PARAMS_W { *self }
 }
 pub type PSP_TROUBLESHOOTER_PARAMS_W = *mut SP_TROUBLESHOOTER_PARAMS_W;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_POWERMESSAGEWAKE_PARAMS_A {
     pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
@@ -760,7 +702,6 @@ impl Clone for SP_POWERMESSAGEWAKE_PARAMS_W {
     fn clone(&self) -> SP_POWERMESSAGEWAKE_PARAMS_W { *self }
 }
 pub type PSP_POWERMESSAGEWAKE_PARAMS_W = *mut SP_POWERMESSAGEWAKE_PARAMS_W;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_DRVINFO_DATA_V2_A {
     pub cbSize: ::DWORD,
@@ -787,7 +728,6 @@ pub struct SP_DRVINFO_DATA_V2_W {
 }
 impl Clone for SP_DRVINFO_DATA_V2_W { fn clone(&self) -> SP_DRVINFO_DATA_V2_W { *self } }
 pub type PSP_DRVINFO_DATA_V2_W = *mut SP_DRVINFO_DATA_V2_W;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_DRVINFO_DATA_V1_A {
     pub cbSize: ::DWORD,
@@ -810,12 +750,10 @@ pub struct SP_DRVINFO_DATA_V1_W {
 }
 impl Clone for SP_DRVINFO_DATA_V1_W { fn clone(&self) -> SP_DRVINFO_DATA_V1_W { *self } }
 pub type PSP_DRVINFO_DATA_V1_W = *mut SP_DRVINFO_DATA_V1_W;
-
 pub type SP_DRVINFO_DATA_A = SP_DRVINFO_DATA_V2_A;
 pub type PSP_DRVINFO_DATA_A = PSP_DRVINFO_DATA_V2_A;
 pub type SP_DRVINFO_DATA_W = SP_DRVINFO_DATA_V2_W;
 pub type PSP_DRVINFO_DATA_W = PSP_DRVINFO_DATA_V2_W;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_DRVINFO_DETAIL_DATA_A {
     pub cbSize: ::DWORD,
@@ -844,7 +782,6 @@ pub struct SP_DRVINFO_DETAIL_DATA_W {
 }
 impl Clone for SP_DRVINFO_DETAIL_DATA_W { fn clone(&self) -> SP_DRVINFO_DETAIL_DATA_W { *self } }
 pub type PSP_DRVINFO_DETAIL_DATA_W = *mut SP_DRVINFO_DETAIL_DATA_W;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_DRVINSTALL_PARAMS {
     pub cbSize: ::DWORD,
@@ -854,7 +791,6 @@ pub struct SP_DRVINSTALL_PARAMS {
     pub Reserved: ::DWORD,
 }
 pub type PSP_DRVINSTALL_PARAMS = *mut SP_DRVINSTALL_PARAMS;
-
 pub const DNF_DUPDESC: ::DWORD = 0x00000001;
 pub const DNF_OLDDRIVER: ::DWORD = 0x00000002;
 pub const DNF_EXCLUDEFROMLIST: ::DWORD = 0x00000004;
@@ -887,12 +823,10 @@ pub const DNF_UNUSED_28: ::DWORD = 0x10000000;
 pub const DNF_UNUSED_29: ::DWORD = 0x20000000;
 pub const DNF_UNUSED_30: ::DWORD = 0x40000000;
 pub const DNF_UNUSED_31: ::DWORD = 0x80000000;
-
 pub type PSP_DETSIG_CMPPROC = Option<unsafe extern "system" fn(
     DeviceInfoSet: HDEVINFO, NewDeviceData: PSP_DEVINFO_DATA, ExistingDeviceData: PSP_DEVINFO_DATA,
     CompareContext: ::PVOID,
 ) -> ::DWORD>;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct COINSTALLER_CONTEXT_DATA {
     pub PostProcessing: ::BOOL,
@@ -900,7 +834,6 @@ pub struct COINSTALLER_CONTEXT_DATA {
     pub PrivateData: ::PVOID,
 }
 pub type PCOINSTALLER_CONTEXT_DATA = *mut COINSTALLER_CONTEXT_DATA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_CLASSIMAGELIST_DATA {
     pub cbSize: ::DWORD,
@@ -908,7 +841,6 @@ pub struct SP_CLASSIMAGELIST_DATA {
     pub Reserved: ::ULONG_PTR,
 }
 pub type PSP_CLASSIMAGELIST_DATA = *mut SP_CLASSIMAGELIST_DATA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct SP_PROPSHEETPAGE_REQUEST {
     pub cbSize: ::DWORD,
@@ -917,11 +849,9 @@ pub struct SP_PROPSHEETPAGE_REQUEST {
     pub DeviceInfoData: PSP_DEVINFO_DATA,
 }
 pub type PSP_PROPSHEETPAGE_REQUEST = *mut SP_PROPSHEETPAGE_REQUEST;
-
 pub const SPPSR_SELECT_DEVICE_RESOURCES: ::DWORD = 1;
 pub const SPPSR_ENUM_BASIC_DEVICE_PROPERTIES: ::DWORD = 2;
 pub const SPPSR_ENUM_ADV_DEVICE_PROPERTIES: ::DWORD = 3;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_BACKUP_QUEUE_PARAMS_V2_A {
     pub cbSize: ::DWORD,
@@ -944,7 +874,6 @@ impl Clone for SP_BACKUP_QUEUE_PARAMS_V2_W {
     fn clone(&self) -> SP_BACKUP_QUEUE_PARAMS_V2_W { *self }
 }
 pub type PSP_BACKUP_QUEUE_PARAMS_V2_W = *mut SP_BACKUP_QUEUE_PARAMS_V2_W;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_BACKUP_QUEUE_PARAMS_V1_A {
     pub cbSize: ::DWORD,
@@ -965,12 +894,10 @@ impl Clone for SP_BACKUP_QUEUE_PARAMS_V1_W {
     fn clone(&self) -> SP_BACKUP_QUEUE_PARAMS_V1_W { *self }
 }
 pub type PSP_BACKUP_QUEUE_PARAMS_V1_W = *mut SP_BACKUP_QUEUE_PARAMS_V1_W;
-
 pub type SP_BACKUP_QUEUE_PARAMS_A = SP_BACKUP_QUEUE_PARAMS_V2_A;
 pub type PSP_BACKUP_QUEUE_PARAMS_A = PSP_BACKUP_QUEUE_PARAMS_V2_A;
 pub type SP_BACKUP_QUEUE_PARAMS_W = SP_BACKUP_QUEUE_PARAMS_V2_W;
 pub type PSP_BACKUP_QUEUE_PARAMS_W = PSP_BACKUP_QUEUE_PARAMS_V2_W;
-
 pub const ERROR_EXPECTED_SECTION_NAME: ::DWORD = ::APPLICATION_ERROR_MASK | ::ERROR_SEVERITY_ERROR
     | 0;
 pub const ERROR_BAD_SECTION_NAME_LINE: ::DWORD = ::APPLICATION_ERROR_MASK | ::ERROR_SEVERITY_ERROR
@@ -1130,7 +1057,7 @@ pub const ERROR_DRIVER_STORE_DELETE_FAILED: ::DWORD = ::APPLICATION_ERROR_MASK
     | ::ERROR_SEVERITY_ERROR | 0x24C;
 pub const ERROR_UNRECOVERABLE_STACK_OVERFLOW: ::DWORD = ::APPLICATION_ERROR_MASK
     | ::ERROR_SEVERITY_ERROR | 0x300;
-pub const EXCEPTION_SPAPI_UNRECOVERABLE_STACK_OVERFLOW: ::DWORD = 
+pub const EXCEPTION_SPAPI_UNRECOVERABLE_STACK_OVERFLOW: ::DWORD =
     ERROR_UNRECOVERABLE_STACK_OVERFLOW;
 pub const ERROR_NO_DEFAULT_INTERFACE_DEVICE: ::DWORD = ERROR_NO_DEFAULT_DEVICE_INTERFACE;
 pub const ERROR_INTERFACE_DEVICE_ACTIVE: ::DWORD = ERROR_DEVICE_INTERFACE_ACTIVE;
@@ -1138,18 +1065,15 @@ pub const ERROR_INTERFACE_DEVICE_REMOVED: ::DWORD = ERROR_DEVICE_INTERFACE_REMOV
 pub const ERROR_NO_SUCH_INTERFACE_DEVICE: ::DWORD = ERROR_NO_SUCH_DEVICE_INTERFACE;
 pub const ERROR_NOT_INSTALLED: ::DWORD = ::APPLICATION_ERROR_MASK | ::ERROR_SEVERITY_ERROR
     | 0x1000;
-
 pub const INFINFO_INF_SPEC_IS_HINF: ::DWORD = 1;
 pub const INFINFO_INF_NAME_IS_ABSOLUTE: ::DWORD = 2;
 pub const INFINFO_DEFAULT_SEARCH: ::DWORD = 3;
 pub const INFINFO_REVERSE_DEFAULT_SEARCH: ::DWORD = 4;
 pub const INFINFO_INF_PATH_LIST_SEARCH: ::DWORD = 5;
-
 pub const FILE_COMPRESSION_NONE: ::UINT = 0;
 pub const FILE_COMPRESSION_WINLZA: ::UINT = 1;
 pub const FILE_COMPRESSION_MSZIP: ::UINT = 2;
 pub const FILE_COMPRESSION_NTCAB: ::UINT = 3;
-
 pub const SRCLIST_TEMPORARY: ::DWORD = 0x00000001;
 pub const SRCLIST_NOBROWSE: ::DWORD = 0x00000002;
 pub const SRCLIST_SYSTEM: ::DWORD = 0x00000010;
@@ -1158,7 +1082,6 @@ pub const SRCLIST_SYSIFADMIN: ::DWORD = 0x00000040;
 pub const SRCLIST_SUBDIRS: ::DWORD = 0x00000100;
 pub const SRCLIST_APPEND: ::DWORD = 0x00000200;
 pub const SRCLIST_NOSTRIPPLATFORM: ::DWORD = 0x00000400;
-
 pub const IDF_NOBROWSE: ::DWORD = 0x00000001;
 pub const IDF_NOSKIP: ::DWORD = 0x00000002;
 pub const IDF_NODETAILS: ::DWORD = 0x00000004;
@@ -1170,22 +1093,18 @@ pub const IDF_WARNIFSKIP: ::DWORD = 0x00000800;
 pub const IDF_NOREMOVABLEMEDIAPROMPT: ::DWORD = 0x00001000;
 pub const IDF_USEDISKNAMEASPROMPT: ::DWORD = 0x00002000;
 pub const IDF_OEMDISK: ::DWORD = 0x80000000;
-
 pub const DPROMPT_SUCCESS: ::UINT = 0;
 pub const DPROMPT_CANCEL: ::UINT = 1;
 pub const DPROMPT_SKIPFILE: ::UINT = 2;
 pub const DPROMPT_BUFFERTOOSMALL: ::UINT = 3;
 pub const DPROMPT_OUTOFMEMORY: ::UINT = 4;
-
 pub const SETDIRID_NOT_FULL_PATH: ::DWORD = 0x00000001;
-
 pub const SRCINFO_PATH: ::UINT = 1;
 pub const SRCINFO_TAGFILE: ::UINT = 2;
 pub const SRCINFO_DESCRIPTION: ::UINT = 3;
 pub const SRCINFO_FLAGS: ::UINT = 4;
 pub const SRCINFO_TAGFILE2: ::UINT = 4;
 pub const SRC_FLAGS_CABFILE: ::UINT = 0x0010;
-
 pub const SP_COPY_DELETESOURCE: ::DWORD = 0x0000001;
 pub const SP_COPY_REPLACEONLY: ::DWORD = 0x0000002;
 pub const SP_COPY_NEWER: ::DWORD = 0x0000004;
@@ -1219,7 +1138,6 @@ pub const SP_BACKUP_BACKUPPASS: ::DWORD = 0x00000001;
 pub const SP_BACKUP_DEMANDPASS: ::DWORD = 0x00000002;
 pub const SP_BACKUP_SPECIAL: ::DWORD = 0x00000004;
 pub const SP_BACKUP_BOOTFILE: ::DWORD = 0x00000008;
-
 pub const SPQ_SCAN_FILE_PRESENCE: ::DWORD = 0x00000001;
 pub const SPQ_SCAN_FILE_VALIDITY: ::DWORD = 0x00000002;
 pub const SPQ_SCAN_USE_CALLBACK: ::DWORD = 0x00000004;
@@ -1232,28 +1150,22 @@ pub const SPQ_SCAN_FILE_PRESENCE_WITHOUT_SOURCE: ::DWORD = 0x00000100;
 pub const SPQ_SCAN_FILE_COMPARISON: ::DWORD = 0x00000200;
 pub const SPQ_SCAN_ACTIVATE_DRP: ::DWORD = 0x00000400;
 pub const SPQ_DELAYED_COPY: ::DWORD = 0x00000001;
-
 pub const SPQ_FLAG_BACKUP_AWARE: ::DWORD = 0x00000001;
 pub const SPQ_FLAG_ABORT_IF_UNSIGNED: ::DWORD = 0x00000002;
 pub const SPQ_FLAG_FILES_MODIFIED: ::DWORD = 0x00000004;
 pub const SPQ_FLAG_DO_SHUFFLEMOVE: ::DWORD = 0x00000008;
 pub const SPQ_FLAG_VALID: ::DWORD = 0x0000000F;
-
 pub const SPOST_NONE: ::DWORD = 0;
 pub const SPOST_PATH: ::DWORD = 1;
 pub const SPOST_URL: ::DWORD = 2;
 pub const SPOST_MAX: ::DWORD = 3;
-
 pub const SUOI_FORCEDELETE: ::DWORD = 0x00000001;
 pub const SUOI_INTERNAL1: ::DWORD = 0x00000002;
-
 pub const SPDSL_IGNORE_DISK: ::UINT = 0x00000001;
 pub const SPDSL_DISALLOW_NEGATIVE_ADJUST: ::UINT = 0x00000002;
-
 pub const SPFILEQ_FILE_IN_USE: ::INT = 0x00000001;
 pub const SPFILEQ_REBOOT_RECOMMENDED: ::INT = 0x00000002;
 pub const SPFILEQ_REBOOT_IN_PROGRESS: ::INT = 0x00000004;
-
 pub const FLG_ADDREG_DELREG_BIT: ::DWORD = 0x00008000;
 pub const FLG_ADDREG_BINVALUETYPE: ::DWORD = 0x00000001;
 pub const FLG_ADDREG_NOCLOBBER: ::DWORD = 0x00000002;
@@ -1303,7 +1215,6 @@ pub const FLG_ADDPROPERTY_APPEND: ::DWORD = 0x00000004;
 pub const FLG_ADDPROPERTY_OR: ::DWORD = 0x00000008;
 pub const FLG_ADDPROPERTY_AND: ::DWORD = 0x00000010;
 pub const FLG_DELPROPERTY_MULTI_SZ_DELSTRING: ::DWORD = 0x00000001;
-
 pub const SPINST_LOGCONFIG: ::UINT = 0x00000001;
 pub const SPINST_INIFILES: ::UINT = 0x00000002;
 pub const SPINST_REGISTRY: ::UINT = 0x00000004;
@@ -1321,7 +1232,6 @@ pub const SPINST_LOGCONFIG_IS_FORCED: ::UINT = 0x00020000;
 pub const SPINST_LOGCONFIGS_ARE_OVERRIDES: ::UINT = 0x00040000;
 pub const SPINST_REGISTERCALLBACKAWARE: ::UINT = 0x00080000;
 pub const SPINST_DEVICEINSTALL: ::UINT = 0x00100000;
-
 pub const SPSVCINST_TAGTOFRONT: ::DWORD = 0x00000001;
 pub const SPSVCINST_ASSOCSERVICE: ::DWORD = 0x00000002;
 pub const SPSVCINST_DELETEEVENTLOGENTRY: ::DWORD = 0x00000004;
@@ -1335,15 +1245,11 @@ pub const SPSVCINST_STOPSERVICE: ::DWORD = 0x00000200;
 pub const SPSVCINST_CLOBBER_SECURITY: ::DWORD = 0x00000400;
 pub const SPSVCINST_STARTSERVICE: ::DWORD = 0x00000800;
 pub const SPSVCINST_NOCLOBBER_REQUIREDPRIVILEGES: ::DWORD = 0x00001000;
-
 pub type HSPFILELOG = ::PVOID;
-
 pub const SPFILELOG_SYSTEMLOG: ::DWORD = 0x00000001;
 pub const SPFILELOG_FORCENEW: ::DWORD = 0x00000002;
 pub const SPFILELOG_QUERYONLY: ::DWORD = 0x00000004;
-
 pub const SPFILELOG_OEMFILE: ::DWORD = 0x00000001;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum SetupFileLogInfo {
     SetupFileLogSourceFilename,
@@ -1353,47 +1259,35 @@ pub enum SetupFileLogInfo {
     SetupFileLogOtherInfo,
     SetupFileLogMax,
 }
-
 pub type LogSeverity = ::DWORD;
 pub const LogSevInformation: LogSeverity = 0x00000000;
 pub const LogSevWarning: LogSeverity = 0x00000001;
 pub const LogSevError: LogSeverity = 0x00000002;
 pub const LogSevFatalError: LogSeverity = 0x00000003;
 pub const LogSevMaximum: LogSeverity = 0x00000004;
-
 pub const DICD_GENERATE_ID: ::DWORD = 0x00000001;
 pub const DICD_INHERIT_CLASSDRVS: ::DWORD = 0x00000002;
-
 pub const DIOD_INHERIT_CLASSDRVS: ::DWORD = 0x00000002;
 pub const DIOD_CANCEL_REMOVE: ::DWORD = 0x00000004;
-
 pub const DIODI_NO_ADD: ::DWORD = 0x00000001;
-
 pub const SPRDI_FIND_DUPS: ::DWORD = 0x00000001;
-
 pub const SPDIT_NODRIVER: ::DWORD = 0x00000000;
 pub const SPDIT_CLASSDRIVER: ::DWORD = 0x00000001;
 pub const SPDIT_COMPATDRIVER: ::DWORD = 0x00000002;
-
 pub const DIGCF_DEFAULT: ::DWORD = 0x00000001;
 pub const DIGCF_PRESENT: ::DWORD = 0x00000002;
 pub const DIGCF_ALLCLASSES: ::DWORD = 0x00000004;
 pub const DIGCF_PROFILE: ::DWORD = 0x00000008;
 pub const DIGCF_DEVICEINTERFACE: ::DWORD = 0x00000010;
-
 pub const DIBCI_NOINSTALLCLASS: ::DWORD = 0x00000001;
 pub const DIBCI_NODISPLAYCLASS: ::DWORD = 0x00000002;
-
 pub const DIOCR_INSTALLER: ::DWORD = 0x00000001;
 pub const DIOCR_INTERFACE: ::DWORD = 0x00000002;
-
 pub const DIREG_DEV: ::DWORD = 0x00000001;
 pub const DIREG_DRV: ::DWORD = 0x00000002;
 pub const DIREG_BOTH: ::DWORD = 0x00000004;
-
 pub const DICLASSPROP_INSTALLER: ::DWORD = 0x00000001;
 pub const DICLASSPROP_INTERFACE: ::DWORD = 0x00000002;
-
 pub const SPDRP_DEVICEDESC: ::DWORD = 0x00000000;
 pub const SPDRP_HARDWAREID: ::DWORD = 0x00000001;
 pub const SPDRP_COMPATIBLEIDS: ::DWORD = 0x00000002;
@@ -1432,7 +1326,6 @@ pub const SPDRP_INSTALL_STATE: ::DWORD = 0x00000022;
 pub const SPDRP_LOCATION_PATHS: ::DWORD = 0x00000023;
 pub const SPDRP_BASE_CONTAINERID: ::DWORD = 0x00000024;
 pub const SPDRP_MAXIMUM_PROPERTY: ::DWORD = 0x00000025;
-
 pub const SPCRP_UPPERFILTERS: ::DWORD = 0x00000011;
 pub const SPCRP_LOWERFILTERS: ::DWORD = 0x00000012;
 pub const SPCRP_SECURITY: ::DWORD = 0x00000017;
@@ -1441,32 +1334,26 @@ pub const SPCRP_DEVTYPE: ::DWORD = 0x00000019;
 pub const SPCRP_EXCLUSIVE: ::DWORD = 0x0000001A;
 pub const SPCRP_CHARACTERISTICS: ::DWORD = 0x0000001B;
 pub const SPCRP_MAXIMUM_PROPERTY: ::DWORD = 0x0000001C;
-
 pub const DMI_MASK: ::DWORD = 0x00000001;
 pub const DMI_BKCOLOR: ::DWORD = 0x00000002;
 pub const DMI_USERECT: ::DWORD = 0x00000004;
-
 pub const DIGCDP_FLAG_BASIC: ::DWORD = 0x00000001;
 pub const DIGCDP_FLAG_ADVANCED: ::DWORD = 0x00000002;
 pub const DIGCDP_FLAG_REMOTE_BASIC: ::DWORD = 0x00000003;
 pub const DIGCDP_FLAG_REMOTE_ADVANCED: ::DWORD = 0x00000004;
-
 pub const IDI_RESOURCEFIRST: ::c_int = 159;
 pub const IDI_RESOURCE: ::c_int = 159;
 pub const IDI_RESOURCELAST: ::c_int = 161;
 pub const IDI_RESOURCEOVERLAYFIRST: ::c_int = 161;
 pub const IDI_RESOURCEOVERLAYLAST: ::c_int = 161;
 pub const IDI_CONFLICT: ::c_int = 161;
-
 pub const IDI_CLASSICON_OVERLAYFIRST: ::c_int = 500;
 pub const IDI_CLASSICON_OVERLAYLAST: ::c_int = 502;
 pub const IDI_PROBLEM_OVL: ::c_int = 500;
 pub const IDI_DISABLED_OVL: ::c_int = 501;
 pub const IDI_FORCED_OVL: ::c_int = 502;
-
 pub const SPWPT_SELECTDEVICE: ::DWORD = 0x00000001;
 pub const SPWP_USE_DEVINFO_DATA: ::DWORD = 0x00000001;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_INF_SIGNER_INFO_V1_A {
     pub cbSize: ::DWORD,
@@ -1485,7 +1372,6 @@ pub struct SP_INF_SIGNER_INFO_V1_W {
 }
 impl Clone for SP_INF_SIGNER_INFO_V1_W { fn clone(&self) -> SP_INF_SIGNER_INFO_V1_W { *self } }
 pub type PSP_INF_SIGNER_INFO_V1_W = *mut SP_INF_SIGNER_INFO_V1_W;
-
 #[repr(C)] #[derive(Copy)]
 pub struct SP_INF_SIGNER_INFO_V2_A {
     pub cbSize: ::DWORD,
@@ -1506,12 +1392,10 @@ pub struct SP_INF_SIGNER_INFO_V2_W {
 }
 impl Clone for SP_INF_SIGNER_INFO_V2_W { fn clone(&self) -> SP_INF_SIGNER_INFO_V2_W { *self } }
 pub type PSP_INF_SIGNER_INFO_V2_W = *mut SP_INF_SIGNER_INFO_V2_W;
-
 pub type SP_INF_SIGNER_INFO_A = SP_INF_SIGNER_INFO_V2_A;
 pub type PSP_INF_SIGNER_INFO_A = PSP_INF_SIGNER_INFO_V2_A;
 pub type SP_INF_SIGNER_INFO_W = SP_INF_SIGNER_INFO_V2_W;
 pub type PSP_INF_SIGNER_INFO_W = PSP_INF_SIGNER_INFO_V2_W;
-
 pub const SIGNERSCORE_UNKNOWN: ::DWORD = 0xFF000000;
 pub const SIGNERSCORE_W9X_SUSPECT: ::DWORD = 0xC0000000;
 pub const SIGNERSCORE_UNSIGNED: ::DWORD = 0x80000000;
@@ -1523,7 +1407,5 @@ pub const SIGNERSCORE_LOGO_STANDARD: ::DWORD = 0x0D000002;
 pub const SIGNERSCORE_LOGO_PREMIUM: ::DWORD = 0x0D000001;
 pub const SIGNERSCORE_MASK: ::DWORD = 0xFF000000;
 pub const SIGNERSCORE_SIGNED_MASK: ::DWORD = 0xF0000000;
-
 pub const DICUSTOMDEVPROP_MERGE_MULTISZ: ::DWORD = 0x00000001;
-
 pub const SCWMI_CLOBBER_SECURITY: ::DWORD = 0x00000001;

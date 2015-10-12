@@ -2,7 +2,6 @@
 // Licensed under the MIT License <LICENSE.md>
 //! QoS definitions for NDIS components.
 pub type SERVICETYPE = ::ULONG;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FLOWSPEC {
     pub TokenRate: ::ULONG,

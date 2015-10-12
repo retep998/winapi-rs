@@ -3,10 +3,8 @@
 //! Defines property types and keys for the Plug and Play Device Property API
 pub type DEVPROPTYPE = ::ULONG;
 pub type PDEVPROPTYPE = *mut ::ULONG;
-
 pub const DEVPROP_TYPEMOD_ARRAY: DEVPROPTYPE = 0x00001000;
 pub const DEVPROP_TYPEMOD_LIST: DEVPROPTYPE = 0x00002000;
-
 pub const DEVPROP_TYPE_EMPTY: DEVPROPTYPE = 0x00000000;
 pub const DEVPROP_TYPE_NULL: DEVPROPTYPE = 0x00000001;
 pub const DEVPROP_TYPE_SBYTE: DEVPROPTYPE = 0x00000002;
@@ -35,38 +33,30 @@ pub const DEVPROP_TYPE_BINARY: DEVPROPTYPE = DEVPROP_TYPE_BYTE | DEVPROP_TYPEMOD
 pub const DEVPROP_TYPE_ERROR: DEVPROPTYPE = 0x00000017;
 pub const DEVPROP_TYPE_NTSTATUS: DEVPROPTYPE = 0x00000018;
 pub const DEVPROP_TYPE_STRING_INDIRECT: DEVPROPTYPE = 0x00000019;
-
 pub const MAX_DEVPROP_TYPE: DEVPROPTYPE = 0x00000019;
 pub const MAX_DEVPROP_TYPEMOD: DEVPROPTYPE = 0x00002000;
-
 pub const DEVPROP_MASK_TYPE: DEVPROPTYPE = 0x00000FFF;
 pub const DEVPROP_MASK_TYPEMOD: DEVPROPTYPE = 0x0000F000;
-
 pub type DEVPROP_BOOLEAN = ::CHAR;
 pub type PDEVPROP_BOOLEAN = *mut ::CHAR;
-
 pub const DEVPROP_TRUE: DEVPROP_BOOLEAN = -1;
 pub const DEVPROP_FALSE: DEVPROP_BOOLEAN = 0;
-
 pub type DEVPROPGUID = ::GUID;
 pub type PDEVPROPGUID = *mut ::GUID;
 pub type DEVPROPID = ::ULONG;
 pub type PDEVPROPID = *mut ::ULONG;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DEVPROPKEY {
     pub fmtid: DEVPROPGUID,
     pub pid: DEVPROPID,
 }
 pub type PDEVPROPKEY = *mut DEVPROPKEY;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum DEVPROPSTORE {
     DEVPROP_STORE_SYSTEM,
     DEVPROP_STORE_USER,
 }
 pub type PDEVPROPSTORE = *mut DEVPROPSTORE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DEVPROPCOMPKEY {
     pub Key: DEVPROPKEY,
@@ -74,7 +64,6 @@ pub struct DEVPROPCOMPKEY {
     pub LocaleName: ::PCWSTR,
 }
 pub type PDEVPROPCOMPKEY = *mut DEVPROPCOMPKEY;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DEVPROPERTY {
     pub CompKey: DEVPROPCOMPKEY,
@@ -83,5 +72,4 @@ pub struct DEVPROPERTY {
     pub Buffer: ::PVOID,
 }
 pub type PDEVPROPERTY = *mut DEVPROPERTY;
-
 pub const DEVPROPID_FIRST_USABLE: DEVPROPID = 2;

@@ -2,7 +2,6 @@
 // Licensed under the MIT License <LICENSE.md>
 //! Definitions to be used with the WinSock service provider
 pub const WSPDESCRIPTION_LEN: usize = 255;
-
 #[repr(C)] #[derive(Copy)]
 pub struct WSPDATA {
     pub wVersion: ::WORD,
@@ -11,14 +10,12 @@ pub struct WSPDATA {
 }
 impl Clone for WSPDATA { fn clone(&self) -> WSPDATA { *self } }
 pub type LPWSPDATA = *mut WSPDATA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WSATHREADID {
     pub ThreadHandle: ::HANDLE,
     pub Reserved: ::DWORD_PTR,
 }
 pub type LPWSATHREADID = *mut WSATHREADID;
-
 pub type LPNSPV2STARTUP = Option<unsafe extern "system" fn(
     lpProviderId: ::LPGUID, ppvClientSessionArg: *mut ::LPVOID,
 ) -> ::INT>;
@@ -41,7 +38,6 @@ pub type LPNSPV2SETSERVICEEX = Option<unsafe extern "system" fn(
 pub type LPNSPV2CLIENTSESSIONRUNDOWN = Option<unsafe extern "system" fn(
     lpProviderId: ::LPGUID, pvClientSessionArg: ::LPVOID,
 )>;
-
 #[repr(C)] #[derive(Copy)]
 pub struct NSPV2_ROUTINE {
     pub cbSize: ::DWORD,
@@ -60,7 +56,6 @@ pub type PNSPV2_ROUTINE = *mut NSPV2_ROUTINE;
 pub type LPNSPV2_ROUTINE = *mut NSPV2_ROUTINE;
 pub type PCNSPV2_ROUTINE = *const NSPV2_ROUTINE;
 pub type LPCNSPV2_ROUTINE = *const NSPV2_ROUTINE;
-
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum WSC_PROVIDER_INFO_TYPE {
     ProviderInfoLspCategories,

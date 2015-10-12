@@ -361,7 +361,6 @@ pub type wchar_t = c_ushort;
 pub type size_t = c_uint;
 #[cfg(target_arch = "x86_64")]
 pub type size_t = __uint64;
-
 //-------------------------------------------------------------------------------------------------
 // audiosessiontypes.h
 //-------------------------------------------------------------------------------------------------
@@ -375,12 +374,10 @@ pub const AUDCLNT_STREAMFLAGS_LOOPBACK: DWORD = 0x00020000;
 pub const AUDCLNT_STREAMFLAGS_EVENTCALLBACK: DWORD = 0x00040000;
 pub const AUDCLNT_STREAMFLAGS_NOPERSIST: DWORD = 0x00080000;
 pub const AUDCLNT_STREAMFLAGS_RATEADJUST: DWORD = 0x00100000;
-
 //-------------------------------------------------------------------------------------------------
 // strmif.h
 //-------------------------------------------------------------------------------------------------
 pub type REFERENCE_TIME = LONGLONG;
-
 //-------------------------------------------------------------------------------------------------
 // mmreg.h
 //-------------------------------------------------------------------------------------------------
@@ -394,7 +391,6 @@ pub struct WAVEFORMATEX {
     pub wBitsPerSample: WORD,
     pub cbSize: WORD,
 }
-
 #[repr(C, packed)] #[derive(Clone, Copy, Debug)]
 pub struct WAVEFORMATEXTENSIBLE {
     pub Format: WAVEFORMATEX,
@@ -402,7 +398,6 @@ pub struct WAVEFORMATEXTENSIBLE {
     pub dwChannelMask: DWORD,
     pub SubFormat: GUID,
 }
-
 //-------------------------------------------------------------------------------------------------
 // propidl.h
 //-------------------------------------------------------------------------------------------------
@@ -414,7 +409,6 @@ pub struct PROPVARIANT {
     pub wReserved3: WORD,
     pub data: [u8; 16],
 }
-
 //-------------------------------------------------------------------------------------------------
 // combaseapi.h
 // Base Component Object Model defintions.
@@ -426,7 +420,6 @@ pub const CLSCTX_REMOTE_SERVER: DWORD = 0x10;
 pub const CLSCTX_SERVER: DWORD = CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER |
                                  CLSCTX_REMOTE_SERVER;
 pub const CLSCTX_ALL: DWORD = CLSCTX_INPROC_HANDLER | CLSCTX_SERVER;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ServerInformation {
     pub dwServerPid: DWORD,
@@ -435,7 +428,6 @@ pub struct ServerInformation {
 }
 pub type PServerInformation = *mut ServerInformation;
 DECLARE_HANDLE!(CO_MTA_USAGE_COOKIE, CO_MTA_USAGE_COOKIE__);
-
 //-------------------------------------------------------------------------------------------------
 // playsoundapi.h
 // ApiSet Contract for api-ms-win-mm-playsound-l1-1-0
@@ -456,14 +448,11 @@ pub const SND_APPLICATION: DWORD = 0x0080;
 pub const SND_SENTRY: DWORD = 0x00080000;
 pub const SND_RING: DWORD = 0x00100000;
 pub const SND_SYSTEM: DWORD = 0x00200000;
-
 //-------------------------------------------------------------------------------------------------
 // winreg.h
 // Registry API procedure declarations, constant definitions and macros
 //-------------------------------------------------------------------------------------------------
-
 pub type REGSAM = ACCESS_MASK;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct VALENTA {
     pub ve_valuename: LPSTR,
@@ -472,7 +461,6 @@ pub struct VALENTA {
     pub ve_type: DWORD,
 }
 pub type PVALENTA = *mut VALENTA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct VALENTW {
     pub ve_valuename: LPWSTR,
@@ -481,7 +469,6 @@ pub struct VALENTW {
     pub ve_type: DWORD,
 }
 pub type PVALENTW = *mut VALENTW;
-
 pub const HKEY_CLASSES_ROOT: HKEY = 0x80000000 as HKEY;
 pub const HKEY_CURRENT_USER: HKEY = 0x80000001 as HKEY;
 pub const HKEY_LOCAL_MACHINE: HKEY = 0x80000002 as HKEY;
@@ -492,9 +479,7 @@ pub const HKEY_PERFORMANCE_NLSTEXT: HKEY = 0x80000060 as HKEY;
 pub const HKEY_CURRENT_CONFIG: HKEY = 0x80000005 as HKEY;
 pub const HKEY_DYN_DATA: HKEY = 0x80000006 as HKEY;
 pub const HKEY_CURRENT_USER_LOCAL_SETTINGS: HKEY = 0x80000007 as HKEY;
-
 pub const REG_MUI_STRING_TRUNCATE: DWORD = 0x00000001;
-
 pub const RRF_RT_REG_NONE: DWORD = 0x00000001;
 pub const RRF_RT_REG_SZ: DWORD = 0x00000002;
 pub const RRF_RT_REG_EXPAND_SZ: DWORD = 0x00000004;
@@ -502,10 +487,8 @@ pub const RRF_RT_REG_BINARY: DWORD = 0x00000008;
 pub const RRF_RT_REG_DWORD: DWORD = 0x00000010;
 pub const RRF_RT_REG_MULTI_SZ: DWORD = 0x00000020;
 pub const RRF_RT_REG_QWORD: DWORD = 0x00000040;
-
 pub const RRF_RT_DWORD: DWORD = RRF_RT_REG_BINARY|RRF_RT_REG_DWORD;
 pub const RRF_RT_QWORD: DWORD = RRF_RT_REG_BINARY|RRF_RT_REG_QWORD;
 pub const RRF_RT_ANY: DWORD = 0x0000ffff;
-
 pub const RRF_NOEXPAND: DWORD = 0x10000000;
 pub const RRF_ZEROONFAILURE: DWORD = 0x20000000;
