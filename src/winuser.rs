@@ -2063,14 +2063,12 @@ pub struct COMPAREITEMSTRUCT {
     pub dwLocaleId: ::DWORD,
 }
 pub type LPCOMPAREITEMSTRUCT = *mut COMPAREITEMSTRUCT;
-
 /* Image type */
 pub const DST_COMPLEX: ::UINT = 0x0000;
 pub const DST_TEXT: ::UINT = 0x0001;
 pub const DST_PREFIXTEXT: ::UINT = 0x0002;
 pub const DST_ICON: ::UINT = 0x0003;
 pub const DST_BITMAP: ::UINT = 0x0004;
-
 pub const DI_MASK: ::UINT = 0x0001;
 pub const DI_IMAGE: ::UINT = 0x0002;
 pub const DI_NORMAL: ::UINT = 0x0003;

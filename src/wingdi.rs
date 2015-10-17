@@ -611,7 +611,6 @@ pub const TMPF_FIXED_PITCH: ::BYTE = 0x01;
 pub const TMPF_VECTOR: ::BYTE = 0x02;
 pub const TMPF_DEVICE: ::BYTE = 0x08;
 pub const TMPF_TRUETYPE: ::BYTE = 0x04;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TEXTMETRICA {
     pub tmHeight: ::LONG,
@@ -635,11 +634,9 @@ pub struct TEXTMETRICA {
     pub tmPitchAndFamily: ::BYTE,
     pub tmCharSet: ::BYTE,
 }
-
 pub type PTEXTMETRICA = *mut TEXTMETRICA;
 pub type NPTEXTMETRICA = *mut TEXTMETRICA;
 pub type LPTEXTMETRICA = *mut TEXTMETRICA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TEXTMETRICW {
     pub tmHeight: ::LONG,
@@ -666,7 +663,6 @@ pub struct TEXTMETRICW {
 pub type PTEXTMETRICW = *mut TEXTMETRICW;
 pub type NPTEXTMETRICW = *mut TEXTMETRICW;
 pub type LPTEXTMETRICW = *mut TEXTMETRICW;
-
 pub const TA_NOUPDATECP: ::UINT = 0;
 pub const TA_UPDATECP: ::UINT = 1;
 pub const TA_LEFT: ::UINT = 0;
@@ -801,9 +797,7 @@ pub const FW_REGULAR: ::c_int = FW_NORMAL;
 pub const FW_DEMIBOLD: ::c_int = FW_SEMIBOLD;
 pub const FW_ULTRABOLD: ::c_int = FW_EXTRABOLD;
 pub const FW_BLACK: ::c_int = FW_HEAVY;
-
 pub type COLOR16 = ::c_ushort;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TRIVERTEX {
     pub x: ::LONG,
@@ -813,19 +807,15 @@ pub struct TRIVERTEX {
     pub Blue: COLOR16,
     pub Alpha: COLOR16,
 }
-
 pub type PTRIVERTEX = *mut TRIVERTEX;
 pub type LPTRIVERTEX = *mut TRIVERTEX;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GRADIENT_RECT {
     pub UpperLeft: ::ULONG,
     pub LowerRight: ::ULONG,
 }
-
 pub type PGRADIENT_RECT = *mut GRADIENT_RECT;
 pub type LPGRADIENT_RECT = *mut GRADIENT_RECT;
-
 /* Object Definitions for EnumObjects() */
 pub const OBJ_PEN: ::UINT = 1;
 pub const OBJ_BRUSH: ::UINT = 2;
@@ -842,7 +832,6 @@ pub const OBJ_ENHMETADC: ::UINT = 12;
 pub const OBJ_ENHMETAFILE: ::UINT = 13;
 pub const OBJ_COLORSPACE: ::UINT = 14;
 pub const GDI_OBJ_LAST: ::UINT = OBJ_COLORSPACE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct COLORADJUSTMENT {
     pub caSize: ::WORD,
@@ -858,30 +847,23 @@ pub struct COLORADJUSTMENT {
     pub caColorfulness: ::SHORT,
     pub caRedGreenTint: ::SHORT,
 }
-
 pub type PCOLORADJUSTMENT = *mut COLORADJUSTMENT;
 pub type LPCOLORADJUSTMENT = *mut COLORADJUSTMENT;
-
 pub type OLDFONTENUMPROCA = Option<unsafe extern "system" fn(
     *const LOGFONTA, *const ::VOID, ::DWORD, ::LPARAM
 ) -> ::c_int>;
-
 pub type OLDFONTENUMPROCW = Option<unsafe extern "system" fn(
     *const LOGFONTW, *const ::VOID, ::DWORD, ::LPARAM
 ) -> ::c_int>;
-
 pub type FONTENUMPROCA = OLDFONTENUMPROCA;
 pub type FONTENUMPROCW = OLDFONTENUMPROCW;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct WCRANGE {
     pub wcLow: ::WCHAR,
     pub cGlyphs: ::USHORT,
 }
-
 pub type PWCRANGE = *mut WCRANGE;
 pub type LPWCRANGE = *mut WCRANGE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GLYPHSET {
     pub cbThis: ::DWORD,
@@ -890,12 +872,9 @@ pub struct GLYPHSET {
     pub cRanges: ::DWORD,
     pub ranges: [WCRANGE;1],
 }
-
 pub type PGLYPHSET = *mut GLYPHSET;
 pub type LPGLYPHSET = *mut GLYPHSET;
-
 pub type ABORTPROC = Option<unsafe extern "system" fn(::HDC, ::c_int) -> ::BOOL>;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DOCINFOA {
     pub cbSize: ::c_int,
@@ -904,9 +883,7 @@ pub struct DOCINFOA {
     pub lpszDatatype: ::LPCSTR,
     pub fwType: ::DWORD,
 }
-
 pub type LPDOCINFOA = *mut DOCINFOA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct DOCINFOW {
     pub cbSize: ::c_int,
@@ -915,20 +892,15 @@ pub struct DOCINFOW {
     pub lpszDatatype: ::LPCWSTR,
     pub fwType: ::DWORD,
 }
-
 pub type LPDOCINFOW = *mut DOCINFOW;
-
 pub type ICMENUMPROCA = Option<unsafe extern "system" fn(::LPSTR, ::LPARAM) -> ::c_int>;
 pub type ICMENUMPROCW = Option<unsafe extern "system" fn(::LPWSTR, ::LPARAM) -> ::c_int>;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct HANDLETABLE {
     pub objectHandle: [::HGDIOBJ; 1],
 }
-
 pub type LPHANDLETABLE = *mut HANDLETABLE;
 pub type PHANDLETABLE = *mut HANDLETABLE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct METARECORD {
     pub rdSize: ::DWORD,
@@ -937,13 +909,10 @@ pub struct METARECORD {
 }
 pub type PMETARECORD = *mut METARECORD;
 pub type LPMETARECORD = *mut METARECORD;
-
 pub type MFENUMPROC = Option<unsafe extern "system" fn(
     hdc: ::HDC, lpht: *mut ::HANDLETABLE, lpMR: *mut ::METARECORD, nObj: ::c_int, param: ::LPARAM
 ) -> ::c_int>;
-
 pub type GOBJENUMPROC = Option<unsafe extern "system" fn(::LPVOID, ::LPARAM) -> ::c_int>;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GCP_RESULTSA {
     pub lStructSize: ::DWORD,
@@ -956,9 +925,7 @@ pub struct GCP_RESULTSA {
     pub nGlyphs: ::UINT,
     pub nMaxFit: ::c_int,
 }
-
 pub type LPGCP_RESULTSA = *mut GCP_RESULTSA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GCP_RESULTSW {
     pub lStructSize: ::DWORD,
@@ -971,18 +938,14 @@ pub struct GCP_RESULTSW {
     pub nGlyphs: ::UINT,
     pub nMaxFit: ::c_int,
 }
-
 pub type LPGCP_RESULTSW = *mut GCP_RESULTSW;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FONTSIGNATURE {
     pub fsUsb: [::DWORD; 4],
     pub fsCsb: [::DWORD; 2],
 }
-
 pub type LPFONTSIGNATURE = *mut FONTSIGNATURE;
 pub type PFONTSIGNATURE = *mut FONTSIGNATURE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct POLYTEXTA {
     pub x: ::c_int,
@@ -993,11 +956,9 @@ pub struct POLYTEXTA {
     pub rcl: ::RECT,
     pub pdx: *const ::c_int,
 }
-
 pub type PPOLYTEXTA = *mut POLYTEXTA;
 pub type NPPOLYTEXTA = *mut POLYTEXTA;
 pub type LPPOLYTEXTA = *mut POLYTEXTA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct POLYTEXTW {
     pub x: ::c_int,
@@ -1008,27 +969,22 @@ pub struct POLYTEXTW {
     pub rcl: ::RECT,
     pub pdx: *const ::c_int,
 }
-
 pub type PPOLYTEXTW = *mut POLYTEXTW;
 pub type NPPOLYTEXTW = *mut POLYTEXTW;
 pub type LPPOLYTEXTW = *mut POLYTEXTW;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct CHARSETINFO {
     pub ciCharset: ::UINT,
     pub ciACP: ::UINT,
     pub fs: ::FONTSIGNATURE,
 }
-
 pub type PCHARSETINFO = *mut CHARSETINFO;
 pub type NPCHARSETINFO = *mut CHARSETINFO;
 pub type LPCHARSETINFO = *mut CHARSETINFO;
-
 pub const GRADIENT_FILL_RECT_H: ::ULONG = 0x00000000;
 pub const GRADIENT_FILL_RECT_V: ::ULONG = 0x00000001;
 pub const GRADIENT_FILL_TRIANGLE: ::ULONG = 0x00000002;
 pub const GRADIENT_FILL_OP_FLAG: ::ULONG = 0x000000ff;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct LAYERPLANEDESCRIPTOR {
     pub nSize: ::WORD,
@@ -1056,10 +1012,8 @@ pub struct LAYERPLANEDESCRIPTOR {
     pub bReserved: ::BYTE,
     pub crTransparent: ::COLORREF,
 }
-
 pub type PLAYERPLANEDESCRIPTOR = *mut LAYERPLANEDESCRIPTOR;
 pub type LPLAYERPLANEDESCRIPTOR = *mut LAYERPLANEDESCRIPTOR;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ENHMETAHEADER {
     pub iType: ::DWORD,
@@ -1084,13 +1038,11 @@ pub struct ENHMETAHEADER {
 }
 pub type PENHMETAHEADER = *mut ENHMETAHEADER;
 pub type LPENHMETAHEADER = *mut ENHMETAHEADER;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct FIXED {
     pub fract: ::WORD,
     pub value: ::c_short,
 }
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct MAT2 {
     pub eM11: FIXED,
@@ -1099,7 +1051,6 @@ pub struct MAT2 {
     pub eM22: FIXED,
 }
 pub type LPMAT2 = *mut MAT2;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GLYPHMETRICS {
     pub gmBlackBoxX: ::UINT,
@@ -1109,7 +1060,6 @@ pub struct GLYPHMETRICS {
     pub gmCellIncY: ::c_short,
 }
 pub type LPGLYPHMETRICS = *mut GLYPHMETRICS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct KERNINGPAIR {
    pub wFirst: ::WORD,
@@ -1117,7 +1067,6 @@ pub struct KERNINGPAIR {
    pub iKernAmount: ::c_int,
 }
 pub type LPKERNINGPAIR = *mut KERNINGPAIR;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct PANOSE {
     pub bFamilyType: ::BYTE,
@@ -1132,7 +1081,6 @@ pub struct PANOSE {
     pub bXHeight: ::BYTE,
 }
 pub type LPPANOSE = *mut PANOSE;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct OUTLINETEXTMETRICA {
     pub otmSize: ::UINT,
@@ -1171,7 +1119,6 @@ pub struct OUTLINETEXTMETRICA {
 pub type POUTLINETEXTMETRICA = *mut OUTLINETEXTMETRICA;
 pub type NPOUTLINETEXTMETRICA = *mut OUTLINETEXTMETRICA;
 pub type LPOUTLINETEXTMETRICA = *mut OUTLINETEXTMETRICA;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct OUTLINETEXTMETRICW {
     pub otmSize: ::UINT,
@@ -1210,7 +1157,6 @@ pub struct OUTLINETEXTMETRICW {
 pub type POUTLINETEXTMETRICW = *mut OUTLINETEXTMETRICW;
 pub type NPOUTLINETEXTMETRICW = *mut OUTLINETEXTMETRICW;
 pub type LPOUTLINETEXTMETRICW = *mut OUTLINETEXTMETRICW;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct RASTERIZER_STATUS {
     pub nSize: ::c_short,
@@ -1218,7 +1164,6 @@ pub struct RASTERIZER_STATUS {
     pub nLanguageID: ::c_short,
 }
 pub type LPRASTERIZER_STATUS = *mut RASTERIZER_STATUS;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ENHMETARECORD {
     pub iType: ::DWORD,
@@ -1227,7 +1172,6 @@ pub struct ENHMETARECORD {
 }
 pub type PENHMETARECORD = *mut ENHMETARECORD;
 pub type LPENHMETARECORD = *mut ENHMETARECORD;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct METAFILEPICT {
     pub mm: ::LONG,
@@ -1236,14 +1180,12 @@ pub struct METAFILEPICT {
     pub hMF: ::HMETAFILE,
 }
 pub type LPMETAFILEPICT = *mut METAFILEPICT;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct POINTFLOAT {
     pub x: ::FLOAT,
     pub y: ::FLOAT,
 }
 pub type PPOINTFLOAT = *mut POINTFLOAT;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct GLYPHMETRICSFLOAT {
     pub gmfBlackBoxX: ::FLOAT,
@@ -1254,7 +1196,6 @@ pub struct GLYPHMETRICSFLOAT {
 }
 pub type PGLYPHMETRICSFLOAT = *mut GLYPHMETRICSFLOAT;
 pub type LPGLYPHMETRICSFLOAT = *mut GLYPHMETRICSFLOAT;
-
 pub const DT_PLOTTER: ::c_int = 0;
 pub const DT_RASDISPLAY: ::c_int = 1;
 pub const DT_RASPRINTER: ::c_int = 2;
@@ -1262,9 +1203,7 @@ pub const DT_RASCAMERA: ::c_int = 3;
 pub const DT_CHARSTREAM: ::c_int = 4;
 pub const DT_METAFILE: ::c_int = 5;
 pub const DT_DISPFILE: ::c_int = 6;
-
 pub const CLR_INVALID: ::COLORREF = 0xFFFFFFFF;
-
 pub const ETO_OPAQUE: ::UINT = 0x0002;
 pub const ETO_CLIPPED: ::UINT = 0x0004;
 pub const ETO_GLYPH_INDEX: ::UINT = 0x0010;
@@ -1274,7 +1213,6 @@ pub const ETO_NUMERICSLATIN: ::UINT = 0x0800;
 pub const ETO_IGNORELANGUAGE: ::UINT = 0x1000;
 pub const ETO_PDY: ::UINT = 0x2000;
 pub const ETO_REVERSE_INDEX_MAP: ::UINT = 0x10000;
-
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct EXTLOGPEN {
     pub elpPenStyle: ::DWORD, 
@@ -1285,15 +1223,12 @@ pub struct EXTLOGPEN {
     pub elpNumEntries: ::DWORD, 
     pub elpStyleEntry: [::DWORD; 1],
 }
-
 pub type PEXTLOGPEN = *mut EXTLOGPEN;
 pub type NPEXTLOGPEN = *mut EXTLOGPEN;
 pub type LPEXTLOGPEN = *mut EXTLOGPEN;
-
 pub type ENHMFENUMPROC = Option<unsafe extern "system" fn(
     hdc: ::HDC, lpht: HANDLETABLE, lpmr: *const ENHMETARECORD, nHandles: ::c_int, data: ::LPARAM
 ) -> ::c_int>;
-
 /* Metafile Functions */
 pub const META_SETBKCOLOR: ::WORD = 0x0201;
 pub const META_SETBKMODE: ::WORD = 0x0102;

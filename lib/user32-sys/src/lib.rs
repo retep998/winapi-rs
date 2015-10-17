@@ -1,7 +1,6 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to user32.
-#![allow(non_snake_case)]
 #![cfg(windows)]
 extern crate winapi;
 use winapi::*;
@@ -1100,24 +1099,4 @@ extern "system" {
     // pub fn wsprintfW();
     // pub fn wvsprintfA();
     // pub fn wvsprintfW();
-}
-
-#[cfg(target_arch = "x86")]
-pub unsafe extern "system" fn GetWindowLongPtrA(hWnd: HWND, nIndex: c_int) -> LONG_PTR {
-    GetWindowLongA(hWnd, nIndex)
-}
-
-#[cfg(target_arch = "x86")]
-pub unsafe extern "system" fn GetWindowLongPtrW(hWnd: HWND, nIndex: c_int) -> LONG_PTR {
-    GetWindowLongW(hWnd, nIndex)
-}
-
-#[cfg(target_arch = "x86")]
-pub unsafe extern "system" fn SetWindowLongPtrA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> LONG_PTR {
-    SetWindowLongA(hWnd, nIndex, dwNewLong)
-}
-
-#[cfg(target_arch = "x86")]
-pub unsafe extern "system" fn SetWindowLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> LONG_PTR {
-    SetWindowLongW(hWnd, nIndex, dwNewLong)
 }
