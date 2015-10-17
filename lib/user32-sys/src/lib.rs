@@ -1,6 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to user32.
+#![allow(non_snake_case)]
 #![cfg(windows)]
 extern crate winapi;
 use winapi::*;
@@ -280,14 +281,30 @@ extern "system" {
     pub fn DispatchMessageW(lpmsg: *const MSG) -> LRESULT;
     // pub fn DisplayConfigGetDeviceInfo();
     // pub fn DisplayConfigSetDeviceInfo();
-    // pub fn DlgDirListA();
-    // pub fn DlgDirListComboBoxA();
-    // pub fn DlgDirListComboBoxW();
-    // pub fn DlgDirListW();
-    // pub fn DlgDirSelectComboBoxExA();
-    // pub fn DlgDirSelectComboBoxExW();
-    // pub fn DlgDirSelectExA();
-    // pub fn DlgDirSelectExW();
+    pub fn DlgDirListA(
+        hDlg: HWND, lpPathSpec: LPSTR, nIDListBox: c_int, nIDStaticPath: c_int, uFileType: UINT
+    ) -> c_int;
+    pub fn DlgDirListComboBoxA(
+        hDlg: HWND, lpPathSpec: LPSTR, nIDComboBox: c_int, nIDStaticPath: c_int, uFiletype: UINT
+    ) -> c_int;
+    pub fn DlgDirListComboBoxW(
+        hDlg: HWND, lpPathSpec: LPWSTR, nIDComboBox: c_int, nIDStaticPath: c_int, uFiletype: UINT
+    ) -> c_int;
+    pub fn DlgDirListW(
+        hDlg: HWND, lpPathSpec: LPWSTR, nIDListBox: c_int, nIDStaticPath: c_int, uFileType: UINT
+    ) -> c_int;
+    pub fn DlgDirSelectComboBoxExA(
+        hwndDlg: HWND, lpString: LPSTR, cchOut: c_int, idComboBox: c_int
+    ) -> BOOL;
+    pub fn DlgDirSelectComboBoxExW(
+        hwndDlg: HWND, lpString: LPWSTR, cchOut: c_int, idComboBox: c_int
+    ) -> BOOL;
+    pub fn DlgDirSelectExA(
+        hwndDlg: HWND, lpString: LPSTR, chCount: c_int, idListBox: c_int
+    ) -> BOOL;
+    pub fn DlgDirSelectExW(
+        hwndDlg: HWND, lpString: LPWSTR, chCount: c_int, idListBox: c_int
+    ) -> BOOL;
     pub fn DragDetect(hwnd: HWND, pt: POINT) -> BOOL;
     pub fn DragObject(
         hwndParent: HWND, hwndFrom: HWND, fmt: UINT, data: ULONG_PTR, hcur: HCURSOR,
@@ -383,7 +400,7 @@ extern "system" {
     // pub fn EqualRect();
     // pub fn EvaluateProximityToPolygon();
     // pub fn EvaluateProximityToRect();
-    // pub fn ExcludeUpdateRgn();
+    pub fn ExcludeUpdateRgn(hDC: HDC, hWnd: HWND) -> c_int;
     pub fn ExitWindowsEx(uFlags: UINT, dwReason: DWORD) -> BOOL;
     pub fn FillRect(hDC: HDC, lprc: *const RECT, hbr: HBRUSH) -> c_int;
     pub fn FindWindowA (lpClassName: LPCSTR, lpWindowName: LPCSTR) -> HWND;
@@ -568,8 +585,12 @@ extern "system" {
     pub fn GetSysColorBrush(nIndex: c_int) -> HBRUSH;
     pub fn GetSystemMenu(hWnd: HWND, bRevert: BOOL) -> HMENU;
     pub fn GetSystemMetrics(nIndex: c_int) -> c_int;
-    // pub fn GetTabbedTextExtentA();
-    // pub fn GetTabbedTextExtentW();
+    pub fn GetTabbedTextExtentA(hdc: HDC, lpString: LPCSTR, chCount: c_int, nTabPositions: c_int,
+        lpnTabStopPositions: *const INT
+    ) -> DWORD;
+    pub fn GetTabbedTextExtentW(hdc: HDC, lpString: LPCWSTR, chCount: c_int, nTabPositions: c_int,
+        lpnTabStopPositions: *const INT
+    ) -> DWORD;
     pub fn GetThreadDesktop(dwThreadId: DWORD) -> HDESK;
     // pub fn GetTitleBarInfo();
     pub fn GetTopWindow(hWnd: HWND) -> HWND;
@@ -1079,4 +1100,24 @@ extern "system" {
     // pub fn wsprintfW();
     // pub fn wvsprintfA();
     // pub fn wvsprintfW();
+}
+
+#[cfg(target_arch = "x86")]
+pub unsafe extern "system" fn GetWindowLongPtrA(hWnd: HWND, nIndex: c_int) -> LONG_PTR {
+    GetWindowLongA(hWnd, nIndex)
+}
+
+#[cfg(target_arch = "x86")]
+pub unsafe extern "system" fn GetWindowLongPtrW(hWnd: HWND, nIndex: c_int) -> LONG_PTR {
+    GetWindowLongW(hWnd, nIndex)
+}
+
+#[cfg(target_arch = "x86")]
+pub unsafe extern "system" fn SetWindowLongPtrA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> LONG_PTR {
+    SetWindowLongA(hWnd, nIndex, dwNewLong)
+}
+
+#[cfg(target_arch = "x86")]
+pub unsafe extern "system" fn SetWindowLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> LONG_PTR {
+    SetWindowLongW(hWnd, nIndex, dwNewLong)
 }

@@ -836,6 +836,9 @@ pub struct SIZE {
 }
 pub type PSIZE = *mut SIZE;
 pub type LPSIZE = *mut SIZE;
+pub type SIZEL = SIZE;
+pub type PSIZEL = *mut SIZEL;
+pub type LPSIZEL = *mut SIZEL;
 //1913
 pub const UNICODE_NOCHAR: ::WPARAM = 0xffff;
 pub type HDWP = *mut ::HANDLE;
@@ -2060,3 +2063,16 @@ pub struct COMPAREITEMSTRUCT {
     pub dwLocaleId: ::DWORD,
 }
 pub type LPCOMPAREITEMSTRUCT = *mut COMPAREITEMSTRUCT;
+
+/* Image type */
+pub const DST_COMPLEX: ::UINT = 0x0000;
+pub const DST_TEXT: ::UINT = 0x0001;
+pub const DST_PREFIXTEXT: ::UINT = 0x0002;
+pub const DST_ICON: ::UINT = 0x0003;
+pub const DST_BITMAP: ::UINT = 0x0004;
+
+pub const DI_MASK: ::UINT = 0x0001;
+pub const DI_IMAGE: ::UINT = 0x0002;
+pub const DI_NORMAL: ::UINT = 0x0003;
+pub const DI_COMPAT: ::UINT = 0x0004;
+pub const DI_DEFAULTSIZE: ::UINT = 0x0008;
