@@ -1,4 +1,5 @@
-
+// Copyright © 2015, Peter Atashian
+// Licensed under the MIT License <LICENSE.md>
 pub const D3D11_16BIT_INDEX_STRIP_CUT_VALUE: ::DWORD = 0xffff;
 pub const D3D11_32BIT_INDEX_STRIP_CUT_VALUE: ::DWORD = 0xffffffff;
 pub const D3D11_8BIT_INDEX_STRIP_CUT_VALUE: ::DWORD = 0xff;
