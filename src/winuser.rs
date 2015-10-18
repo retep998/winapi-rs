@@ -1021,19 +1021,21 @@ pub type LPHARDWAREINPUT= *mut HARDWAREINPUT;
 pub const INPUT_MOUSE: ::DWORD = 0;
 pub const INPUT_KEYBOARD: ::DWORD = 1;
 pub const INPUT_HARDWARE: ::DWORD = 2;
+#[cfg(target_arch = "x86")]
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct INPUT {
     pub type_: ::DWORD,
-    pub union_: MOUSEINPUT, // FIXME - Untagged unions
+    pub u: [u32; 6],
 }
-#[test]
-fn test_INPUT() {
-    use std::mem::{size_of, align_of};
-    assert!(size_of::<MOUSEINPUT>() >= size_of::<HARDWAREINPUT>());
-    assert!(size_of::<MOUSEINPUT>() >= size_of::<KEYBDINPUT>());
-    assert!(align_of::<MOUSEINPUT>() >= align_of::<HARDWAREINPUT>());
-    assert!(align_of::<MOUSEINPUT>() >= align_of::<KEYBDINPUT>());
+#[cfg(target_arch = "x86_64")]
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct INPUT {
+    pub type_: ::DWORD,
+    pub u: [u64; 4],
 }
+UNION!{INPUT, u, mi, mi_mut, MOUSEINPUT}
+UNION!{INPUT, u, ki, ki_mut, KEYBDINPUT}
+UNION!{INPUT, u, hi, hi_mut, HARDWAREINPUT}
 pub type PINPUT = *mut INPUT;
 pub type LPINPUT = *mut INPUT;
 //Indices for GetWindowLong etc.
