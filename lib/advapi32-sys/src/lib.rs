@@ -213,7 +213,7 @@ extern "system" {
         hProv: HCRYPTPROV, Algid: ALG_ID, hKey: HCRYPTKEY, dwFlags: DWORD, phHash: *mut HCRYPTHASH,
     ) -> BOOL;
     pub fn CryptDecrypt(
-        hKey: HCRYPTKEY, hHash: HCRYPTHASH, Final: BOOL, dwFlags: DWORD, pbData: *mut BYTE, 
+        hKey: HCRYPTKEY, hHash: HCRYPTHASH, Final: BOOL, dwFlags: DWORD, pbData: *mut BYTE,
         pdwDataLen: *mut DWORD,
     ) -> BOOL;
     pub fn CryptDeriveKey(
@@ -229,23 +229,23 @@ extern "system" {
         hKey: HCRYPTKEY, pdwReserved: *mut DWORD, dwFlags: DWORD, phKey: *mut HCRYPTKEY,
     ) -> BOOL;
     pub fn CryptEncrypt(
-        hKey: HCRYPTKEY, hHash: HCRYPTHASH, Final: BOOL, dwFlags: DWORD, pbData: *mut BYTE, 
+        hKey: HCRYPTKEY, hHash: HCRYPTHASH, Final: BOOL, dwFlags: DWORD, pbData: *mut BYTE,
         pdwDataLen: *mut DWORD, dwBufLen: DWORD,
     ) -> BOOL;
     pub fn CryptEnumProviderTypesA(
-        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD, 
+        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD,
         szTypeName: LPSTR, pcbTypeName: *mut DWORD,
     ) -> BOOL;
     pub fn CryptEnumProviderTypesW(
-        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD, 
+        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD,
         szTypeName: LPWSTR, pcbTypeName: *mut DWORD,
     ) -> BOOL;
     pub fn CryptEnumProvidersA(
-        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD, 
+        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD,
         szProvName: LPSTR, pcbProvName: *mut DWORD,
     ) -> BOOL;
     pub fn CryptEnumProvidersW(
-        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD, 
+        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD,
         szProvName: LPWSTR, pcbProvName: *mut DWORD,
     ) -> BOOL;
     pub fn CryptExportKey(
@@ -311,11 +311,11 @@ extern "system" {
         pbSignature: *mut BYTE, pdwSigLen: *mut DWORD,
     ) -> BOOL;
     pub fn CryptVerifySignatureA(
-        hHash: HCRYPTHASH, pbSignature: *const BYTE, dwSigLen: DWORD, hPubKey: HCRYPTKEY, 
+        hHash: HCRYPTHASH, pbSignature: *const BYTE, dwSigLen: DWORD, hPubKey: HCRYPTKEY,
         szDescription: LPCSTR, dwFlags: DWORD,
     ) -> BOOL;
     pub fn CryptVerifySignatureW(
-        hHash: HCRYPTHASH, pbSignature: *const BYTE, dwSigLen: DWORD, hPubKey: HCRYPTKEY, 
+        hHash: HCRYPTHASH, pbSignature: *const BYTE, dwSigLen: DWORD, hPubKey: HCRYPTKEY,
         szDescription: LPCWSTR, dwFlags: DWORD,
     ) -> BOOL;
     // pub fn DecryptFileA();
