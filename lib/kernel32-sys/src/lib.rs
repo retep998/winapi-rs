@@ -2373,7 +2373,7 @@ extern "system" {
         hDevice: HANDLE, dwOperation: DWORD, lpTapeInformation: LPVOID,
     ) -> DWORD;
     pub fn SetTapePosition(
-        hDevice: HANDLE, dwPositionMethod: DWORD, dwPartition: DWORD, 
+        hDevice: HANDLE, dwPositionMethod: DWORD, dwPartition: DWORD,
         dwOffsetLow: DWORD, dwOffsetHigh: DWORD, bImmediate: BOOL
     ) -> DWORD;
     pub fn SetThreadAffinityMask(hThread: HANDLE, dwThreadAffinityMask: DWORD) -> DWORD_PTR;

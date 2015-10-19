@@ -10,7 +10,7 @@
 ###Multiline functions
 
 * Multiline functions and structs **should** have commas after every field and parameter.
-* When implementing multiline functions, please use this style:  
+* When implementing multiline functions, please use this style:
 ```rust
     pub fn QueryInformationJobObject(
         hJob: HANDLE, JobObjectInformationClass: JOBOBJECTINFOCLASS,
