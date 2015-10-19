@@ -104,7 +104,7 @@ extern "system" {
     ) -> MMRESULT;
     pub fn midiInGetErrorTextW(wError: MMRESULT, lpText: LPWSTR, cchText: UINT) -> MMRESULT;
     pub fn midiInOpen(
-        lphMidiIn: LPHMIDIIN, uDeviceID: UINT, dwCallback: DWORD_PTR, 
+        lphMidiIn: LPHMIDIIN, uDeviceID: UINT, dwCallback: DWORD_PTR,
         dwCallbackInstance: DWORD_PTR, dwFlags: DWORD
     ) -> MMRESULT;
     pub fn midiInClose(hMidiIn: HMIDIIN) -> MMRESULT;

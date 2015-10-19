@@ -7,7 +7,7 @@ use winapi::*;
 extern "system" {
     pub fn DavAddConnection(
         ConnectionHandle: *mut HANDLE, RemoteName: LPCWSTR, UserName: LPCWSTR, Password: LPCWSTR,
-        ClientCert: PBYTE, CertSize: DWORD, 
+        ClientCert: PBYTE, CertSize: DWORD,
     ) -> DWORD;
     pub fn DavDeleteConnection(ConnectionHandle: HANDLE) -> DWORD;
     pub fn DavFlushFile(hFile: HANDLE) -> DWORD;
@@ -568,7 +568,7 @@ extern "system" {
         servername: LPCWSTR, level: DWORD, buf: LPBYTE, parm_err: LPDWORD,
     ) -> NET_API_STATUS;
     pub fn NetUserChangePassword(
-        domainname: LPCWSTR, username: LPCWSTR, oldpassword: LPCWSTR, newpassword: LPCWSTR, 
+        domainname: LPCWSTR, username: LPCWSTR, oldpassword: LPCWSTR, newpassword: LPCWSTR,
     ) -> NET_API_STATUS;
     pub fn NetUserDel(servername: LPCWSTR, username: LPCWSTR) -> NET_API_STATUS;
     pub fn NetUserEnum(
