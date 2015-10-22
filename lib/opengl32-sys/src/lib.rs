@@ -353,24 +353,37 @@ extern "system" {
     pub fn wglCreateContext(hdc: HDC) -> HGLRC;
     pub fn wglCreateLayerContext(hdc: HDC, iLayerPlane: c_int) -> HGLRC;
     pub fn wglDeleteContext(hglrc: HGLRC) -> BOOL;
-    // pub fn wglDescribeLayerPlane();
+    pub fn wglDescribeLayerPlane(
+        hdc: HDC, iPixelFormat: c_int, iLayerPlane: c_int, nBytes: UINT,
+        plpd: LPLAYERPLANEDESCRIPTOR
+    ) -> BOOL;
     // pub fn wglDescribePixelFormat();
     pub fn wglGetCurrentContext() -> HGLRC;
     pub fn wglGetCurrentDC() -> HDC;
     // pub fn wglGetDefaultProcAddress();
-    // pub fn wglGetLayerPaletteEntries();
+    pub fn wglGetLayerPaletteEntries(
+        hdc: HDC, iLayerPlane: c_int, iStart: c_int, cEntries: c_int, pcr: *const COLORREF
+    ) -> c_int;
     // pub fn wglGetPixelFormat();
     pub fn wglGetProcAddress(lpszProc: LPCSTR) -> PROC;
     pub fn wglMakeCurrent(hdc: HDC, hglrc: HGLRC) -> BOOL;
-    // pub fn wglRealizeLayerPalette();
-    // pub fn wglSetLayerPaletteEntries();
+    pub fn wglRealizeLayerPalette(hdc: HDC, iLayerPlane: c_int, bRealize: BOOL) -> BOOL;
+    pub fn wglSetLayerPaletteEntries(
+        hdc: HDC, iLayerPlane: c_int, iStart: c_int, cEntries: c_int, pcr: *const COLORREF
+    ) -> c_int;
     // pub fn wglSetPixelFormat();
     pub fn wglShareLists(hglrc1: HGLRC, hglrc2: HGLRC) -> BOOL;
     // pub fn wglSwapBuffers();
-    // pub fn wglSwapLayerBuffers();
+    pub fn wglSwapLayerBuffers(hdc: HDC, fuPlanes: UINT) -> BOOL;
     // pub fn wglSwapMultipleBuffers();
-    // pub fn wglUseFontBitmapsA();
-    // pub fn wglUseFontBitmapsW();
-    // pub fn wglUseFontOutlinesA();
-    // pub fn wglUseFontOutlinesW();
+    pub fn wglUseFontBitmapsA(hdc: HDC, first: DWORD, count: DWORD, listBase: DWORD) -> BOOL;
+    pub fn wglUseFontBitmapsW(hdc: HDC, first: DWORD, count: DWORD, listBase: DWORD) -> BOOL;
+    pub fn wglUseFontOutlinesA(
+        hdc: HDC, first: DWORD, count: DWORD, listBase: DWORD, deviation: FLOAT,
+        extrusion: FLOAT, format: c_int, lpgmf: LPGLYPHMETRICSFLOAT
+    ) -> BOOL;
+    pub fn wglUseFontOutlinesW(
+        hdc: HDC, first: DWORD, count: DWORD, listBase: DWORD, deviation: FLOAT,
+        extrusion: FLOAT, format: c_int, lpgmf: LPGLYPHMETRICSFLOAT
+    ) -> BOOL;
 }
