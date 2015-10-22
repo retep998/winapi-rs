@@ -468,6 +468,8 @@ pub struct PALETTEENTRY {
     pub peBlue: ::BYTE,
     pub peFlags: ::BYTE
 }
+pub type PPALETTEENTRY = *mut PALETTEENTRY;
+pub type LPPALETTEENTRY = *mut PALETTEENTRY;
 //2824 (Win 7 SDK)
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct ABC {
@@ -610,6 +612,32 @@ pub const TMPF_VECTOR: ::BYTE = 0x02;
 pub const TMPF_DEVICE: ::BYTE = 0x08;
 pub const TMPF_TRUETYPE: ::BYTE = 0x04;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TEXTMETRICA {
+    pub tmHeight: ::LONG,
+    pub tmAscent: ::LONG,
+    pub tmDescent: ::LONG,
+    pub tmInternalLeading: ::LONG,
+    pub tmExternalLeading: ::LONG,
+    pub tmAveCharWidth: ::LONG,
+    pub tmMaxCharWidth: ::LONG,
+    pub tmWeight: ::LONG,
+    pub tmOverhang: ::LONG,
+    pub tmDigitizedAspectX: ::LONG,
+    pub tmDigitizedAspectY: ::LONG,
+    pub tmFirstChar: ::BYTE,
+    pub tmLastChar: ::BYTE,
+    pub tmDefaultChar: ::BYTE,
+    pub tmBreakChar: ::BYTE,
+    pub tmItalic: ::BYTE,
+    pub tmUnderlined: ::BYTE,
+    pub tmStruckOut: ::BYTE,
+    pub tmPitchAndFamily: ::BYTE,
+    pub tmCharSet: ::BYTE,
+}
+pub type PTEXTMETRICA = *mut TEXTMETRICA;
+pub type NPTEXTMETRICA = *mut TEXTMETRICA;
+pub type LPTEXTMETRICA = *mut TEXTMETRICA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TEXTMETRICW {
     pub tmHeight: ::LONG,
     pub tmAscent: ::LONG,
@@ -632,6 +660,9 @@ pub struct TEXTMETRICW {
     pub tmPitchAndFamily: ::BYTE,
     pub tmCharSet: ::BYTE,
 }
+pub type PTEXTMETRICW = *mut TEXTMETRICW;
+pub type NPTEXTMETRICW = *mut TEXTMETRICW;
+pub type LPTEXTMETRICW = *mut TEXTMETRICW;
 pub const TA_NOUPDATECP: ::UINT = 0;
 pub const TA_UPDATECP: ::UINT = 1;
 pub const TA_LEFT: ::UINT = 0;
@@ -660,7 +691,9 @@ pub const DEVICE_DEFAULT_FONT: ::c_int = 14;
 pub const DEFAULT_PALETTE: ::c_int = 15;
 pub const SYSTEM_FIXED_FONT: ::c_int = 16;
 pub const DEFAULT_GUI_FONT: ::c_int = 17;
-pub const PS_SOLID: ::c_int = 0;
+pub const DC_BRUSH: ::c_int = 18;
+pub const DC_PEN: ::c_int = 19;
+pub const STOCK_LAST: ::c_int = 19;pub const PS_SOLID: ::c_int = 0;
 pub const PS_DASH: ::c_int = 1;
 pub const PS_DOT: ::c_int = 2;
 pub const PS_DASHDOT: ::c_int = 3;
@@ -764,3 +797,505 @@ pub const FW_REGULAR: ::c_int = FW_NORMAL;
 pub const FW_DEMIBOLD: ::c_int = FW_SEMIBOLD;
 pub const FW_ULTRABOLD: ::c_int = FW_EXTRABOLD;
 pub const FW_BLACK: ::c_int = FW_HEAVY;
+pub type COLOR16 = ::c_ushort;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct TRIVERTEX {
+    pub x: ::LONG,
+    pub y: ::LONG,
+    pub Red: COLOR16,
+    pub Green: COLOR16,
+    pub Blue: COLOR16,
+    pub Alpha: COLOR16,
+}
+pub type PTRIVERTEX = *mut TRIVERTEX;
+pub type LPTRIVERTEX = *mut TRIVERTEX;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct GRADIENT_RECT {
+    pub UpperLeft: ::ULONG,
+    pub LowerRight: ::ULONG,
+}
+pub type PGRADIENT_RECT = *mut GRADIENT_RECT;
+pub type LPGRADIENT_RECT = *mut GRADIENT_RECT;
+/* Object Definitions for EnumObjects() */
+pub const OBJ_PEN: ::UINT = 1;
+pub const OBJ_BRUSH: ::UINT = 2;
+pub const OBJ_DC: ::UINT = 3;
+pub const OBJ_METADC: ::UINT = 4;
+pub const OBJ_PAL: ::UINT = 5;
+pub const OBJ_FONT: ::UINT = 6;
+pub const OBJ_BITMAP: ::UINT = 7;
+pub const OBJ_REGION: ::UINT = 8;
+pub const OBJ_METAFILE: ::UINT = 9;
+pub const OBJ_MEMDC: ::UINT = 10;
+pub const OBJ_EXTPEN: ::UINT = 11;
+pub const OBJ_ENHMETADC: ::UINT = 12;
+pub const OBJ_ENHMETAFILE: ::UINT = 13;
+pub const OBJ_COLORSPACE: ::UINT = 14;
+pub const GDI_OBJ_LAST: ::UINT = OBJ_COLORSPACE;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct COLORADJUSTMENT {
+    pub caSize: ::WORD,
+    pub caFlags: ::WORD,
+    pub caIlluminantIndex: ::WORD,
+    pub caRedGamma: ::WORD,
+    pub caGreenGamma: ::WORD,
+    pub caBlueGamma: ::WORD,
+    pub caReferenceBlack: ::WORD,
+    pub caReferenceWhite: ::WORD,
+    pub caContrast: ::SHORT,
+    pub caBrightness: ::SHORT,
+    pub caColorfulness: ::SHORT,
+    pub caRedGreenTint: ::SHORT,
+}
+pub type PCOLORADJUSTMENT = *mut COLORADJUSTMENT;
+pub type LPCOLORADJUSTMENT = *mut COLORADJUSTMENT;
+pub type OLDFONTENUMPROCA = Option<unsafe extern "system" fn(
+    *const LOGFONTA, *const ::VOID, ::DWORD, ::LPARAM
+) -> ::c_int>;
+pub type OLDFONTENUMPROCW = Option<unsafe extern "system" fn(
+    *const LOGFONTW, *const ::VOID, ::DWORD, ::LPARAM
+) -> ::c_int>;
+pub type FONTENUMPROCA = OLDFONTENUMPROCA;
+pub type FONTENUMPROCW = OLDFONTENUMPROCW;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct WCRANGE {
+    pub wcLow: ::WCHAR,
+    pub cGlyphs: ::USHORT,
+}
+pub type PWCRANGE = *mut WCRANGE;
+pub type LPWCRANGE = *mut WCRANGE;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct GLYPHSET {
+    pub cbThis: ::DWORD,
+    pub flAccel: ::DWORD,
+    pub cGlyphsSupported: ::DWORD,
+    pub cRanges: ::DWORD,
+    pub ranges: [WCRANGE;1],
+}
+pub type PGLYPHSET = *mut GLYPHSET;
+pub type LPGLYPHSET = *mut GLYPHSET;
+pub type ABORTPROC = Option<unsafe extern "system" fn(::HDC, ::c_int) -> ::BOOL>;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DOCINFOA {
+    pub cbSize: ::c_int,
+    pub lpszDocName: ::LPCSTR,
+    pub lpszOutput: ::LPCSTR,
+    pub lpszDatatype: ::LPCSTR,
+    pub fwType: ::DWORD,
+}
+pub type LPDOCINFOA = *mut DOCINFOA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct DOCINFOW {
+    pub cbSize: ::c_int,
+    pub lpszDocName: ::LPCWSTR,
+    pub lpszOutput: ::LPCWSTR,
+    pub lpszDatatype: ::LPCWSTR,
+    pub fwType: ::DWORD,
+}
+pub type LPDOCINFOW = *mut DOCINFOW;
+pub type ICMENUMPROCA = Option<unsafe extern "system" fn(::LPSTR, ::LPARAM) -> ::c_int>;
+pub type ICMENUMPROCW = Option<unsafe extern "system" fn(::LPWSTR, ::LPARAM) -> ::c_int>;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct HANDLETABLE {
+    pub objectHandle: [::HGDIOBJ; 1],
+}
+pub type LPHANDLETABLE = *mut HANDLETABLE;
+pub type PHANDLETABLE = *mut HANDLETABLE;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct METARECORD {
+    pub rdSize: ::DWORD,
+    pub rdFunction: ::WORD,
+    pub rdParm: [::WORD; 1],
+}
+pub type PMETARECORD = *mut METARECORD;
+pub type LPMETARECORD = *mut METARECORD;
+pub type MFENUMPROC = Option<unsafe extern "system" fn(
+    hdc: ::HDC, lpht: *mut ::HANDLETABLE, lpMR: *mut ::METARECORD, nObj: ::c_int, param: ::LPARAM
+) -> ::c_int>;
+pub type GOBJENUMPROC = Option<unsafe extern "system" fn(::LPVOID, ::LPARAM) -> ::c_int>;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct GCP_RESULTSA {
+    pub lStructSize: ::DWORD,
+    pub lpOutString: ::LPSTR,
+    pub lpOrder: *const ::UINT,
+    pub lpDx: *const ::c_int,
+    pub lpCaretPos: *const ::c_int,
+    pub lpClass: ::LPSTR,
+    pub lpGlyphs: ::LPWSTR,
+    pub nGlyphs: ::UINT,
+    pub nMaxFit: ::c_int,
+}
+pub type LPGCP_RESULTSA = *mut GCP_RESULTSA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct GCP_RESULTSW {
+    pub lStructSize: ::DWORD,
+    pub lpOutString: ::LPWSTR,
+    pub lpOrder: *const ::UINT,
+    pub lpDx: *const ::c_int,
+    pub lpCaretPos: *const ::c_int,
+    pub lpClass: ::LPSTR,
+    pub lpGlyphs: ::LPWSTR,
+    pub nGlyphs: ::UINT,
+    pub nMaxFit: ::c_int,
+}
+pub type LPGCP_RESULTSW = *mut GCP_RESULTSW;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct FONTSIGNATURE {
+    pub fsUsb: [::DWORD; 4],
+    pub fsCsb: [::DWORD; 2],
+}
+pub type LPFONTSIGNATURE = *mut FONTSIGNATURE;
+pub type PFONTSIGNATURE = *mut FONTSIGNATURE;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct POLYTEXTA {
+    pub x: ::c_int,
+    pub y: ::c_int,
+    pub n: ::UINT,
+    pub lpstr: ::LPCSTR,
+    pub uiFlags: ::UINT,
+    pub rcl: ::RECT,
+    pub pdx: *const ::c_int,
+}
+pub type PPOLYTEXTA = *mut POLYTEXTA;
+pub type NPPOLYTEXTA = *mut POLYTEXTA;
+pub type LPPOLYTEXTA = *mut POLYTEXTA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct POLYTEXTW {
+    pub x: ::c_int,
+    pub y: ::c_int,
+    pub n: ::UINT,
+    pub lpstr: ::LPCWSTR,
+    pub uiFlags: ::UINT,
+    pub rcl: ::RECT,
+    pub pdx: *const ::c_int,
+}
+pub type PPOLYTEXTW = *mut POLYTEXTW;
+pub type NPPOLYTEXTW = *mut POLYTEXTW;
+pub type LPPOLYTEXTW = *mut POLYTEXTW;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct CHARSETINFO {
+    pub ciCharset: ::UINT,
+    pub ciACP: ::UINT,
+    pub fs: ::FONTSIGNATURE,
+}
+pub type PCHARSETINFO = *mut CHARSETINFO;
+pub type NPCHARSETINFO = *mut CHARSETINFO;
+pub type LPCHARSETINFO = *mut CHARSETINFO;
+pub const GRADIENT_FILL_RECT_H: ::ULONG = 0x00000000;
+pub const GRADIENT_FILL_RECT_V: ::ULONG = 0x00000001;
+pub const GRADIENT_FILL_TRIANGLE: ::ULONG = 0x00000002;
+pub const GRADIENT_FILL_OP_FLAG: ::ULONG = 0x000000ff;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct LAYERPLANEDESCRIPTOR {
+    pub nSize: ::WORD,
+    pub nVersion: ::WORD,
+    pub dwFlags: ::DWORD,
+    pub iPixelType: ::BYTE,
+    pub cColorBits: ::BYTE,
+    pub cRedBits: ::BYTE,
+    pub cRedShift: ::BYTE,
+    pub cGreenBits: ::BYTE,
+    pub cGreenShift: ::BYTE,
+    pub cBlueBits: ::BYTE,
+    pub cBlueShift: ::BYTE,
+    pub cAlphaBits: ::BYTE,
+    pub cAlphaShift: ::BYTE,
+    pub cAccumBits: ::BYTE,
+    pub cAccumRedBits: ::BYTE,
+    pub cAccumGreenBits: ::BYTE,
+    pub cAccumBlueBits: ::BYTE,
+    pub cAccumAlphaBits: ::BYTE,
+    pub cDepthBits: ::BYTE,
+    pub cStencilBits: ::BYTE,
+    pub cAuxBuffers: ::BYTE,
+    pub iLayerPlane: ::BYTE,
+    pub bReserved: ::BYTE,
+    pub crTransparent: ::COLORREF,
+}
+pub type PLAYERPLANEDESCRIPTOR = *mut LAYERPLANEDESCRIPTOR;
+pub type LPLAYERPLANEDESCRIPTOR = *mut LAYERPLANEDESCRIPTOR;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ENHMETAHEADER {
+    pub iType: ::DWORD,
+    pub nSize: ::DWORD,
+    pub rclBounds: ::RECTL,
+    pub rclFrame: ::RECTL,
+    pub dSignature: ::DWORD,
+    pub nVersion: ::DWORD,
+    pub nBytes: ::DWORD,
+    pub nRecords: ::DWORD,
+    pub nHandles: ::WORD,
+    pub sReserved: ::WORD,
+    pub nDescription: ::DWORD,
+    pub offDescription: ::DWORD,
+    pub nPalEntries: ::DWORD,
+    pub szlDevice: ::SIZEL,
+    pub szlMillimeters: ::SIZEL,
+    pub cbPixelFormat: ::DWORD,
+    pub offPixelFormat: ::DWORD,
+    pub bOpenGL: ::DWORD,
+    pub szlMicrometers: ::SIZEL,
+}
+pub type PENHMETAHEADER = *mut ENHMETAHEADER;
+pub type LPENHMETAHEADER = *mut ENHMETAHEADER;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct FIXED {
+    pub fract: ::WORD,
+    pub value: ::c_short,
+}
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct MAT2 {
+    pub eM11: FIXED,
+    pub eM12: FIXED,
+    pub eM21: FIXED,
+    pub eM22: FIXED,
+}
+pub type LPMAT2 = *mut MAT2;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct GLYPHMETRICS {
+    pub gmBlackBoxX: ::UINT,
+    pub gmBlackBoxY: ::UINT,
+    pub gmptGlyphOrigin: ::POINT,
+    pub gmCellIncX: ::c_short,
+    pub gmCellIncY: ::c_short,
+}
+pub type LPGLYPHMETRICS = *mut GLYPHMETRICS;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct KERNINGPAIR {
+   pub wFirst: ::WORD,
+   pub wSecond: ::WORD,
+   pub iKernAmount: ::c_int,
+}
+pub type LPKERNINGPAIR = *mut KERNINGPAIR;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct PANOSE {
+    pub bFamilyType: ::BYTE,
+    pub bSerifStyle: ::BYTE,
+    pub bWeight: ::BYTE,
+    pub bProportion: ::BYTE,
+    pub bContrast: ::BYTE,
+    pub bStrokeVariation: ::BYTE,
+    pub bArmStyle: ::BYTE,
+    pub bLetterform: ::BYTE,
+    pub bMidline: ::BYTE,
+    pub bXHeight: ::BYTE,
+}
+pub type LPPANOSE = *mut PANOSE;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct OUTLINETEXTMETRICA {
+    pub otmSize: ::UINT,
+    pub otmTextMetrics: TEXTMETRICA,
+    pub otmFiller: ::BYTE,
+    pub otmPanoseNumber: ::PANOSE,
+    pub otmfsSelection: ::UINT,
+    pub otmfsType: ::UINT,
+    pub otmsCharSlopeRise: ::c_int,
+    pub otmsCharSlopeRun: ::c_int,
+    pub otmItalicAngle: ::c_int,
+    pub otmEMSquare: ::UINT,
+    pub otmAscent: ::c_int,
+    pub otmDescent: ::c_int,
+    pub otmLineGap: ::UINT,
+    pub otmsCapEmHeight: ::UINT,
+    pub otmsXHeight: ::UINT,
+    pub otmrcFontBox: ::RECT,
+    pub otmMacAscent: ::c_int,
+    pub otmMacDescent: ::c_int,
+    pub otmMacLineGap: ::UINT,
+    pub otmusMinimumPPEM: ::UINT,
+    pub otmptSubscriptSize: ::POINT,
+    pub otmptSubscriptOffset: ::POINT,
+    pub otmptSuperscriptSize: ::POINT,
+    pub otmptSuperscriptOffset: ::POINT,
+    pub otmsStrikeoutSize: ::UINT,
+    pub otmsStrikeoutPosition: ::c_int,
+    pub otmsUnderscoreSize: ::c_int,
+    pub otmsUnderscorePosition: ::c_int,
+    pub otmpFamilyName: ::PSTR,
+    pub otmpFaceName: ::PSTR,
+    pub otmpStyleName: ::PSTR,
+    pub otmpFullName: ::PSTR,
+}
+pub type POUTLINETEXTMETRICA = *mut OUTLINETEXTMETRICA;
+pub type NPOUTLINETEXTMETRICA = *mut OUTLINETEXTMETRICA;
+pub type LPOUTLINETEXTMETRICA = *mut OUTLINETEXTMETRICA;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct OUTLINETEXTMETRICW {
+    pub otmSize: ::UINT,
+    pub otmTextMetrics: TEXTMETRICW,
+    pub otmFiller: ::BYTE,
+    pub otmPanoseNumber: ::PANOSE,
+    pub otmfsSelection: ::UINT,
+    pub otmfsType: ::UINT,
+    pub otmsCharSlopeRise: ::c_int,
+    pub otmsCharSlopeRun: ::c_int,
+    pub otmItalicAngle: ::c_int,
+    pub otmEMSquare: ::UINT,
+    pub otmAscent: ::c_int,
+    pub otmDescent: ::c_int,
+    pub otmLineGap: ::UINT,
+    pub otmsCapEmHeight: ::UINT,
+    pub otmsXHeight: ::UINT,
+    pub otmrcFontBox: ::RECT,
+    pub otmMacAscent: ::c_int,
+    pub otmMacDescent: ::c_int,
+    pub otmMacLineGap: ::UINT,
+    pub otmusMinimumPPEM: ::UINT,
+    pub otmptSubscriptSize: ::POINT,
+    pub otmptSubscriptOffset: ::POINT,
+    pub otmptSuperscriptSize: ::POINT,
+    pub otmptSuperscriptOffset: ::POINT,
+    pub otmsStrikeoutSize: ::UINT,
+    pub otmsStrikeoutPosition: ::c_int,
+    pub otmsUnderscoreSize: ::c_int,
+    pub otmsUnderscorePosition: ::c_int,
+    pub otmpFamilyName: ::PSTR,
+    pub otmpFaceName: ::PSTR,
+    pub otmpStyleName: ::PSTR,
+    pub otmpFullName: ::PSTR,
+}
+pub type POUTLINETEXTMETRICW = *mut OUTLINETEXTMETRICW;
+pub type NPOUTLINETEXTMETRICW = *mut OUTLINETEXTMETRICW;
+pub type LPOUTLINETEXTMETRICW = *mut OUTLINETEXTMETRICW;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct RASTERIZER_STATUS {
+    pub nSize: ::c_short,
+    pub wFlags: ::c_short,
+    pub nLanguageID: ::c_short,
+}
+pub type LPRASTERIZER_STATUS = *mut RASTERIZER_STATUS;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct ENHMETARECORD {
+    pub iType: ::DWORD,
+    pub nSize: ::DWORD,
+    pub dParm: [::DWORD; 1],
+}
+pub type PENHMETARECORD = *mut ENHMETARECORD;
+pub type LPENHMETARECORD = *mut ENHMETARECORD;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct METAFILEPICT {
+    pub mm: ::LONG,
+    pub xExt: ::LONG,
+    pub yExt: ::LONG,
+    pub hMF: ::HMETAFILE,
+}
+pub type LPMETAFILEPICT = *mut METAFILEPICT;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct POINTFLOAT {
+    pub x: ::FLOAT,
+    pub y: ::FLOAT,
+}
+pub type PPOINTFLOAT = *mut POINTFLOAT;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct GLYPHMETRICSFLOAT {
+    pub gmfBlackBoxX: ::FLOAT,
+    pub gmfBlackBoxY: ::FLOAT,
+    pub gmfptGlyphOrigin: POINTFLOAT,
+    pub gmfCellIncX: ::FLOAT,
+    pub gmfCellIncY: ::FLOAT,
+}
+pub type PGLYPHMETRICSFLOAT = *mut GLYPHMETRICSFLOAT;
+pub type LPGLYPHMETRICSFLOAT = *mut GLYPHMETRICSFLOAT;
+pub const DT_PLOTTER: ::c_int = 0;
+pub const DT_RASDISPLAY: ::c_int = 1;
+pub const DT_RASPRINTER: ::c_int = 2;
+pub const DT_RASCAMERA: ::c_int = 3;
+pub const DT_CHARSTREAM: ::c_int = 4;
+pub const DT_METAFILE: ::c_int = 5;
+pub const DT_DISPFILE: ::c_int = 6;
+pub const CLR_INVALID: ::COLORREF = 0xFFFFFFFF;
+pub const ETO_OPAQUE: ::UINT = 0x0002;
+pub const ETO_CLIPPED: ::UINT = 0x0004;
+pub const ETO_GLYPH_INDEX: ::UINT = 0x0010;
+pub const ETO_RTLREADING: ::UINT = 0x0080;
+pub const ETO_NUMERICSLOCAL: ::UINT = 0x0400;
+pub const ETO_NUMERICSLATIN: ::UINT = 0x0800;
+pub const ETO_IGNORELANGUAGE: ::UINT = 0x1000;
+pub const ETO_PDY: ::UINT = 0x2000;
+pub const ETO_REVERSE_INDEX_MAP: ::UINT = 0x10000;
+#[repr(C)] #[derive(Clone, Copy, Debug)]
+pub struct EXTLOGPEN {
+    pub elpPenStyle: ::DWORD, 
+    pub elpWidth: ::DWORD, 
+    pub elpBrushStyle: ::UINT, 
+    pub elpColor: ::COLORREF, 
+    pub elpHatch: ::ULONG_PTR, 
+    pub elpNumEntries: ::DWORD, 
+    pub elpStyleEntry: [::DWORD; 1],
+}
+pub type PEXTLOGPEN = *mut EXTLOGPEN;
+pub type NPEXTLOGPEN = *mut EXTLOGPEN;
+pub type LPEXTLOGPEN = *mut EXTLOGPEN;
+pub type ENHMFENUMPROC = Option<unsafe extern "system" fn(
+    hdc: ::HDC, lpht: HANDLETABLE, lpmr: *const ENHMETARECORD, nHandles: ::c_int, data: ::LPARAM
+) -> ::c_int>;
+/* Metafile Functions */
+pub const META_SETBKCOLOR: ::WORD = 0x0201;
+pub const META_SETBKMODE: ::WORD = 0x0102;
+pub const META_SETMAPMODE: ::WORD = 0x0103;
+pub const META_SETROP2: ::WORD = 0x0104;
+pub const META_SETRELABS: ::WORD = 0x0105;
+pub const META_SETPOLYFILLMODE: ::WORD = 0x0106;
+pub const META_SETSTRETCHBLTMODE: ::WORD = 0x0107;
+pub const META_SETTEXTCHAREXTRA: ::WORD = 0x0108;
+pub const META_SETTEXTCOLOR: ::WORD = 0x0209;
+pub const META_SETTEXTJUSTIFICATION: ::WORD = 0x020A;
+pub const META_SETWINDOWORG: ::WORD = 0x020B;
+pub const META_SETWINDOWEXT: ::WORD = 0x020C;
+pub const META_SETVIEWPORTORG: ::WORD = 0x020D;
+pub const META_SETVIEWPORTEXT: ::WORD = 0x020E;
+pub const META_OFFSETWINDOWORG: ::WORD = 0x020F;
+pub const META_SCALEWINDOWEXT: ::WORD = 0x0410;
+pub const META_OFFSETVIEWPORTORG: ::WORD = 0x0211;
+pub const META_SCALEVIEWPORTEXT: ::WORD = 0x0412;
+pub const META_LINETO: ::WORD = 0x0213;
+pub const META_MOVETO: ::WORD = 0x0214;
+pub const META_EXCLUDECLIPRECT: ::WORD = 0x0415;
+pub const META_INTERSECTCLIPRECT: ::WORD = 0x0416;
+pub const META_ARC: ::WORD = 0x0817;
+pub const META_ELLIPSE: ::WORD = 0x0418;
+pub const META_FLOODFILL: ::WORD = 0x0419;
+pub const META_PIE: ::WORD = 0x081A;
+pub const META_RECTANGLE: ::WORD = 0x041B;
+pub const META_ROUNDRECT: ::WORD = 0x061C;
+pub const META_PATBLT: ::WORD = 0x061D;
+pub const META_SAVEDC: ::WORD = 0x001E;
+pub const META_SETPIXEL: ::WORD = 0x041F;
+pub const META_OFFSETCLIPRGN: ::WORD = 0x0220;
+pub const META_TEXTOUT: ::WORD = 0x0521;
+pub const META_BITBLT: ::WORD = 0x0922;
+pub const META_STRETCHBLT: ::WORD = 0x0B23;
+pub const META_POLYGON: ::WORD = 0x0324;
+pub const META_POLYLINE: ::WORD = 0x0325;
+pub const META_ESCAPE: ::WORD = 0x0626;
+pub const META_RESTOREDC: ::WORD = 0x0127;
+pub const META_FILLREGION: ::WORD = 0x0228;
+pub const META_FRAMEREGION: ::WORD = 0x0429;
+pub const META_INVERTREGION: ::WORD = 0x012A;
+pub const META_PAINTREGION: ::WORD = 0x012B;
+pub const META_SELECTCLIPREGION: ::WORD = 0x012C;
+pub const META_SELECTOBJECT: ::WORD = 0x012D;
+pub const META_SETTEXTALIGN: ::WORD = 0x012E;
+pub const META_CHORD: ::WORD = 0x0830;
+pub const META_SETMAPPERFLAGS: ::WORD = 0x0231;
+pub const META_EXTTEXTOUT: ::WORD = 0x0a32;
+pub const META_SETDIBTODEV: ::WORD = 0x0d33;
+pub const META_SELECTPALETTE: ::WORD = 0x0234;
+pub const META_REALIZEPALETTE: ::WORD = 0x0035;
+pub const META_ANIMATEPALETTE: ::WORD = 0x0436;
+pub const META_SETPALENTRIES: ::WORD = 0x0037;
+pub const META_POLYPOLYGON: ::WORD = 0x0538;
+pub const META_RESIZEPALETTE: ::WORD = 0x0139;
+pub const META_DIBBITBLT: ::WORD = 0x0940;
+pub const META_DIBSTRETCHBLT: ::WORD = 0x0b41;
+pub const META_DIBCREATEPATTERNBRUSH: ::WORD = 0x0142;
+pub const META_STRETCHDIB: ::WORD = 0x0f43;
+pub const META_EXTFLOODFILL: ::WORD = 0x0548;
+pub const META_SETLAYOUT: ::WORD = 0x0149;
+pub const META_DELETEOBJECT: ::WORD = 0x01f0;
+pub const META_CREATEPALETTE: ::WORD = 0x00f7;
+pub const META_CREATEPATTERNBRUSH: ::WORD = 0x01F9;
+pub const META_CREATEPENINDIRECT: ::WORD = 0x02FA;
+pub const META_CREATEFONTINDIRECT: ::WORD = 0x02FB;
+pub const META_CREATEBRUSHINDIRECT: ::WORD = 0x02FC;
+pub const META_CREATEREGION: ::WORD = 0x06FF;
