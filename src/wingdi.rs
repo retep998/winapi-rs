@@ -1215,12 +1215,12 @@ pub const ETO_PDY: ::UINT = 0x2000;
 pub const ETO_REVERSE_INDEX_MAP: ::UINT = 0x10000;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct EXTLOGPEN {
-    pub elpPenStyle: ::DWORD, 
-    pub elpWidth: ::DWORD, 
-    pub elpBrushStyle: ::UINT, 
-    pub elpColor: ::COLORREF, 
-    pub elpHatch: ::ULONG_PTR, 
-    pub elpNumEntries: ::DWORD, 
+    pub elpPenStyle: ::DWORD,
+    pub elpWidth: ::DWORD,
+    pub elpBrushStyle: ::UINT,
+    pub elpColor: ::COLORREF,
+    pub elpHatch: ::ULONG_PTR,
+    pub elpNumEntries: ::DWORD,
     pub elpStyleEntry: [::DWORD; 1],
 }
 pub type PEXTLOGPEN = *mut EXTLOGPEN;

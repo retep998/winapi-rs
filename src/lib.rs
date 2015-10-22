@@ -25,6 +25,7 @@ pub use std::os::raw::{
     c_double,
 };
 pub use audioclient::*;
+pub use audiosessiontypes::*;
 pub use basetsd::*;
 pub use bcrypt::*;
 pub use cfg::*;
@@ -161,6 +162,7 @@ pub use xinput::*;
 //-------------------------------------------------------------------------------------------------
 #[macro_use] mod macros;
 pub mod audioclient;
+pub mod audiosessiontypes;
 pub mod basetsd;
 pub mod bcrypt;
 pub mod cfg;
@@ -308,19 +310,6 @@ pub type wchar_t = c_ushort;
 pub type size_t = c_uint;
 #[cfg(target_arch = "x86_64")]
 pub type size_t = __uint64;
-//-------------------------------------------------------------------------------------------------
-// audiosessiontypes.h
-//-------------------------------------------------------------------------------------------------
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub enum AUDCLNT_SHAREMODE {
-    AUDCLNT_SHAREMODE_SHARED,
-    AUDCLNT_SHAREMODE_EXCLUSIVE,
-}
-pub const AUDCLNT_STREAMFLAGS_CROSSPROCESS: DWORD = 0x00010000;
-pub const AUDCLNT_STREAMFLAGS_LOOPBACK: DWORD = 0x00020000;
-pub const AUDCLNT_STREAMFLAGS_EVENTCALLBACK: DWORD = 0x00040000;
-pub const AUDCLNT_STREAMFLAGS_NOPERSIST: DWORD = 0x00080000;
-pub const AUDCLNT_STREAMFLAGS_RATEADJUST: DWORD = 0x00100000;
 //-------------------------------------------------------------------------------------------------
 // strmif.h
 //-------------------------------------------------------------------------------------------------
