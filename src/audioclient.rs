@@ -2,16 +2,6 @@
 // Licensed under the MIT License <LICENSE.md>
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
 //1627
-macro_rules! AUDCLNT_ERR {
-    ($n:expr) => {
-        MAKE_HRESULT!(::SEVERITY_ERROR, ::FACILITY_AUDCLNT, $n)
-    };
-}
-macro_rules! AUDCLNT_SUCCESS {
-    ($n:expr) => {
-        MAKE_SCODE!(::SEVERITY_SUCCESS, ::FACILITY_AUDCLNT, $n)
-    };
-}
 pub const AUDCLNT_E_NOT_INITIALIZED: ::HRESULT = AUDCLNT_ERR!(0x001);
 pub const AUDCLNT_E_ALREADY_INITIALIZED: ::HRESULT = AUDCLNT_ERR!(0x002);
 pub const AUDCLNT_E_WRONG_ENDPOINT_TYPE: ::HRESULT = AUDCLNT_ERR!(0x003);
@@ -47,51 +37,26 @@ pub const AUDCLNT_E_RAW_MODE_UNSUPPORTED: ::HRESULT = AUDCLNT_ERR!(0x027);
 pub const AUDCLNT_S_BUFFER_EMPTY: ::SCODE = AUDCLNT_SUCCESS!(0x001);
 pub const AUDCLNT_S_THREAD_ALREADY_REGISTERED: ::SCODE = AUDCLNT_SUCCESS!(0x002);
 pub const AUDCLNT_S_POSITION_STALLED: ::SCODE = AUDCLNT_SUCCESS!(0x003);
-pub const IID_IAudioClient: ::IID = ::GUID {
-    Data1: 0x1CB9AD4C,
-    Data2: 0xDBFA,
-    Data3: 0x4c32,
-    Data4: [0xB1, 0x78, 0xC2, 0xF5, 0x68, 0xA7, 0x03, 0xB2],
-};
-pub const IID_IAudioRenderClient: ::IID = ::GUID {
-    Data1: 0xF294ACFC,
-    Data2: 0x3146,
-    Data3: 0x4483,
-    Data4: [0xA7, 0xBF, 0xAD, 0xDC, 0xA7, 0xC2, 0x60, 0xE2],
-};
-RIDL!(
-interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
+DEFINE_GUID!(IID_IAudioClient, 0x1CB9AD4C, 0xDBFA, 0x4c32,
+    0xB1, 0x78, 0xC2, 0xF5, 0x68, 0xA7, 0x03, 0xB2);
+DEFINE_GUID!(IID_IAudioRenderClient, 0xF294ACFC, 0x3146, 0x4483,
+    0xA7, 0xBF, 0xAD, 0xDC, 0xA7, 0xC2, 0x60, 0xE2);
+RIDL!{interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
     fn Initialize(
-        &mut self,
-        ShareMode: ::AUDCLNT_SHAREMODE,
-        StreamFlags: ::DWORD,
-        hnsBufferDuration: ::REFERENCE_TIME,
-        hnsPeriodicity: ::REFERENCE_TIME,
-        pFormat: *const ::WAVEFORMATEX,
-        AudioSessionGuid: ::LPCGUID
+        &mut self, ShareMode: ::AUDCLNT_SHAREMODE, StreamFlags: ::DWORD,
+        hnsBufferDuration: ::REFERENCE_TIME, hnsPeriodicity: ::REFERENCE_TIME,
+        pFormat: *const ::WAVEFORMATEX, AudioSessionGuid: ::LPCGUID
     ) -> ::HRESULT,
-    fn GetBufferSize(
-        &mut self,
-        pNumBufferFrames: *mut ::UINT32
-    ) -> ::HRESULT,
-    fn GetStreamLatency(
-        &mut self,
-        phnsLatency: *mut ::REFERENCE_TIME
-    ) -> ::HRESULT,
+    fn GetBufferSize(&mut self, pNumBufferFrames: *mut ::UINT32) -> ::HRESULT,
+    fn GetStreamLatency(&mut self, phnsLatency: *mut ::REFERENCE_TIME) -> ::HRESULT,
     fn GetCurrentPadding(&mut self, pNumPaddingFrames: *mut ::UINT32) -> ::HRESULT,
     fn IsFormatSupported(
-        &mut self,
-        ShareMode: ::AUDCLNT_SHAREMODE,
-        pFormat: *const ::WAVEFORMATEX,
+        &mut self, ShareMode: ::AUDCLNT_SHAREMODE, pFormat: *const ::WAVEFORMATEX,
         ppClosestMatch: *mut *mut ::WAVEFORMATEX
     ) -> ::HRESULT,
-    fn GetMixFormat(
-        &mut self,
-        ppDeviceFormat: *mut *mut ::WAVEFORMATEX
-    ) -> ::HRESULT,
+    fn GetMixFormat(&mut self, ppDeviceFormat: *mut *mut ::WAVEFORMATEX) -> ::HRESULT,
     fn GetDevicePeriod(
-        &mut self,
-        phnsDefaultDevicePeriod: *mut ::REFERENCE_TIME,
+        &mut self, phnsDefaultDevicePeriod: *mut ::REFERENCE_TIME,
         phnsMinimumDevicePeriod: *mut ::REFERENCE_TIME
     ) -> ::HRESULT,
     fn Start(&mut self) -> ::HRESULT,
@@ -99,19 +64,8 @@ interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
     fn Reset(&mut self) -> ::HRESULT,
     fn SetEventHandle(&mut self, eventHandle: ::HANDLE) -> ::HRESULT,
     fn GetService(&mut self, riid: ::REFIID, ppv: *mut ::LPVOID) -> ::HRESULT
-}
-);
-RIDL!(
-interface IAudioRenderClient(IAudioRenderClientVtbl): IUnknown(IUnknownVtbl) {
-    fn GetBuffer(
-        &mut self,
-        NumFramesRequested: ::UINT32,
-        ppData: *mut *mut ::BYTE
-    ) -> ::HRESULT,
-    fn ReleaseBuffer(
-        &mut self,
-        NumFramesWritten: ::UINT32,
-        dwFlags: ::DWORD
-    ) -> ::HRESULT
-}
-);
+}}
+RIDL!{interface IAudioRenderClient(IAudioRenderClientVtbl): IUnknown(IUnknownVtbl) {
+    fn GetBuffer(&mut self, NumFramesRequested: ::UINT32, ppData: *mut *mut ::BYTE) -> ::HRESULT,
+    fn ReleaseBuffer(&mut self, NumFramesWritten: ::UINT32, dwFlags: ::DWORD) -> ::HRESULT
+}}

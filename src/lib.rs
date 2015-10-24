@@ -315,26 +315,6 @@ pub type size_t = __uint64;
 //-------------------------------------------------------------------------------------------------
 pub type REFERENCE_TIME = LONGLONG;
 //-------------------------------------------------------------------------------------------------
-// mmreg.h
-//-------------------------------------------------------------------------------------------------
-#[repr(C, packed)] #[derive(Clone, Copy, Debug)]
-pub struct WAVEFORMATEX {
-    pub wFormatTag: WORD,
-    pub nChannels: WORD,
-    pub nSamplesPerSec: DWORD,
-    pub nAvgBytesPerSec: DWORD,
-    pub nBlockAlign: WORD,
-    pub wBitsPerSample: WORD,
-    pub cbSize: WORD,
-}
-#[repr(C, packed)] #[derive(Clone, Copy, Debug)]
-pub struct WAVEFORMATEXTENSIBLE {
-    pub Format: WAVEFORMATEX,
-    pub Samples: WORD,
-    pub dwChannelMask: DWORD,
-    pub SubFormat: GUID,
-}
-//-------------------------------------------------------------------------------------------------
 // propidl.h
 //-------------------------------------------------------------------------------------------------
 #[repr(C)] #[derive(Clone, Copy, Debug)]

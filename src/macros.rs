@@ -40,6 +40,21 @@ macro_rules! CTL_CODE {
         ($DeviceType << 16) | ($Access << 14) | ($Function << 2) | $Method
     }
 }
+macro_rules! AUDCLNT_ERR {
+    ($n:expr) => {
+        MAKE_HRESULT!(::SEVERITY_ERROR, ::FACILITY_AUDCLNT, $n)
+    };
+}
+macro_rules! AUDCLNT_SUCCESS {
+    ($n:expr) => {
+        MAKE_SCODE!(::SEVERITY_SUCCESS, ::FACILITY_AUDCLNT, $n)
+    };
+}
+macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
+    ($major:expr, $minor:expr) => {
+        ::BCRYPT_INTERFACE_VERSION { MajorVersion: $major, MinorVersion: $minor }
+    }
+}
 macro_rules! RIDL {
     (interface $interface:ident ($vtbl:ident)
         {$(
@@ -205,5 +220,15 @@ macro_rules! FLAGS {
             type Output = $name;
             fn not(self) -> $name { $name(!self.0) }
         }
+    }
+}
+macro_rules! STRUCT {
+    {struct $name:ident { $($field:ident: $ftype:ty,)+ }} => {
+        #[repr(C)] #[derive(Debug)]
+        pub struct $name {
+            $(pub $field: $ftype,)+
+        }
+        impl Copy for $name {}
+        impl Clone for $name { fn clone(&self) -> $name { *self } }
     }
 }
