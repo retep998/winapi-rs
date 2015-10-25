@@ -302,11 +302,17 @@ extern "system" {
     // pub fn SetCurrentProcessExplicitAppUserModelID();
     // pub fn ShellAboutA();
     // pub fn ShellAboutW();
-    // pub fn ShellExecuteA();
+    pub fn ShellExecuteA(
+        hwnd: HWND, lpOperation: LPCSTR, lpFile: LPCSTR, lpParameters: LPCSTR, lpDirectory: LPCSTR,
+        nShowCmd: c_int
+    ) -> HINSTANCE;
     // pub fn ShellExecuteEx();
     // pub fn ShellExecuteExA();
     // pub fn ShellExecuteExW();
-    // pub fn ShellExecuteW();
+    pub fn ShellExecuteW(
+        hwnd: HWND, lpOperation: LPCWSTR, lpFile: LPCWSTR, lpParameters: LPCWSTR,
+        lpDirectory: LPCWSTR, nShowCmd: c_int
+    ) -> HINSTANCE;
     // pub fn ShellHookProc();
     // pub fn Shell_GetCachedImageIndex();
     // pub fn Shell_GetCachedImageIndexA();
