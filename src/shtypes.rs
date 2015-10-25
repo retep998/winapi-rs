@@ -32,10 +32,9 @@ pub type PCUITEMID_CHILD_ARRAY = *const PCUITEMID_CHILD;
 pub type PCUIDLIST_RELATIVE_ARRAY = *const PCUIDLIST_RELATIVE;
 pub type PCIDLIST_ABSOLUTE_ARRAY = *const PCIDLIST_ABSOLUTE;
 pub type PCUIDLIST_ABSOLUTE_ARRAY = *const PCUIDLIST_ABSOLUTE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COMDLG_FILTERSPEC {
-    pub pszName: ::LPCWSTR,
-    pub pszSpec: ::LPCWSTR,
-}
+STRUCT!{struct COMDLG_FILTERSPEC {
+    pszName: ::LPCWSTR,
+    pszSpec: ::LPCWSTR,
+}}
 pub type KNOWNFOLDERID = ::GUID;
 pub type REFKNOWNFOLDERID = *const KNOWNFOLDERID;

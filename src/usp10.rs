@@ -6,10 +6,9 @@ pub const USP_E_SCRIPT_NOT_IN_FONT: ::HRESULT = MAKE_HRESULT!(
     ::SEVERITY_ERROR, ::FACILITY_ITF, 0x200
 );
 DECLARE_HANDLE!(SCRIPT_CACHE, SCRIPT_CACHE__);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCRIPT_CONTROL {
+STRUCT!{struct SCRIPT_CONTROL {
     bit_fields: ::DWORD,
-}
+}}
 BITFIELD!(SCRIPT_CONTROL bit_fields: ::DWORD [
     uDefaultLanguage set_uDefaultLanguage[0..16],
     fContextDigits set_fContextDigits[16..17],
@@ -23,10 +22,9 @@ BITFIELD!(SCRIPT_CONTROL bit_fields: ::DWORD [
     fMergeNeutralItems set_fMergeNeutralItems[24..25],
     fReserved set_fReserved[25..32],
 ]);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCRIPT_STATE {
+STRUCT!{struct SCRIPT_STATE {
     bit_fields: ::WORD,
-}
+}}
 BITFIELD!(SCRIPT_STATE bit_fields: ::WORD [
     uBidiLevel set_uBidiLevel[0..5],
     fOverrideDirection set_fOverrideDirection[5..6],
@@ -40,11 +38,10 @@ BITFIELD!(SCRIPT_STATE bit_fields: ::WORD [
     fReserved set_fReserved[13..14],
     fEngineReserved set_fEngineReserved[14..16],
 ]);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCRIPT_ANALYSIS {
+STRUCT!{struct SCRIPT_ANALYSIS {
     bit_fields: ::WORD,
-    pub s: SCRIPT_STATE,
-}
+    s: SCRIPT_STATE,
+}}
 BITFIELD!(SCRIPT_ANALYSIS bit_fields: ::WORD [
     eScript set_eScript[0..10],
     fRTL set_fRTL[10..11],
@@ -54,11 +51,10 @@ BITFIELD!(SCRIPT_ANALYSIS bit_fields: ::WORD [
     fLogicalOrder set_fLogicalOrder[14..15],
     fNoGlyphIndex set_fNoGlyphIndex[15..16],
 ]);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCRIPT_ITEM {
-    pub iCharPos: ::c_int,
-    pub a: SCRIPT_ANALYSIS,
-}
+STRUCT!{struct SCRIPT_ITEM {
+    iCharPos: ::c_int,
+    a: SCRIPT_ANALYSIS,
+}}
 //490
 pub const SCRIPT_JUSTIFY_NONE: ::WORD = 0;
 pub const SCRIPT_JUSTIFY_ARABIC_BLANK: ::WORD = 1;
@@ -76,10 +72,9 @@ pub const SCRIPT_JUSTIFY_ARABIC_BA: ::WORD = 12;
 pub const SCRIPT_JUSTIFY_ARABIC_BARA: ::WORD = 13;
 pub const SCRIPT_JUSTIFY_ARABIC_SEEN: ::WORD = 14;
 pub const SCRIPT_JUSTIFY_ARABIC_SEEN_M: ::WORD = 15;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCRIPT_VISATTR {
+STRUCT!{struct SCRIPT_VISATTR {
     bit_fields: ::WORD,
-}
+}}
 BITFIELD!(SCRIPT_VISATTR bit_fields: ::WORD [
     uJustification set_uJustification[0..4],
     fClusterStart set_fClusterStart[4..5],
@@ -88,15 +83,13 @@ BITFIELD!(SCRIPT_VISATTR bit_fields: ::WORD [
     fReserved set_fReserved[7..8],
     fShapeReserved set_fShapeReserved[8..16],
 ]);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct GOFFSET {
-    pub du: ::LONG,
-    pub dv: ::LONG,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCRIPT_LOGATTR {
+STRUCT!{struct GOFFSET {
+    du: ::LONG,
+    dv: ::LONG,
+}}
+STRUCT!{struct SCRIPT_LOGATTR {
     bit_fields: ::BYTE,
-}
+}}
 BITFIELD!(SCRIPT_LOGATTR bit_fields: ::BYTE [
     fSoftBreak set_fSoftBreak[0..1],
     fWhiteSpace set_fWhiteSpace[1..2],
@@ -106,11 +99,10 @@ BITFIELD!(SCRIPT_LOGATTR bit_fields: ::BYTE [
     fReserved set_fReserved[5..8],
 ]);
 pub const SGCM_RTL: ::DWORD = 0x00000001;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCRIPT_PROPERTIES {
+STRUCT!{struct SCRIPT_PROPERTIES {
     bit_fields1: ::DWORD,
     bit_fields2: ::DWORD,
-}
+}}
 BITFIELD!(SCRIPT_PROPERTIES bit_fields1: ::DWORD [
     langid set_langid[0..16],
     fNumeric set_fNumeric[16..17],
@@ -130,15 +122,14 @@ BITFIELD!(SCRIPT_PROPERTIES bit_fields2: ::DWORD [
     fClusterSizeVaries set_fClusterSizeVaries[3..4],
     fRejectInvalid set_fRejectInvalid[4..5],
 ]);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCRIPT_FONTPROPERTIES {
-    pub cBytes: ::c_int,
-    pub wgBlank: ::WORD,
-    pub wgDefault: ::WORD,
-    pub wgInvalid: ::WORD,
-    pub wgKashida: ::WORD,
-    pub iKashidaWidth: ::c_int,
-}
+STRUCT!{struct SCRIPT_FONTPROPERTIES {
+    cBytes: ::c_int,
+    wgBlank: ::WORD,
+    wgDefault: ::WORD,
+    wgInvalid: ::WORD,
+    wgKashida: ::WORD,
+    iKashidaWidth: ::c_int,
+}}
 //1440
 pub const SSA_PASSWORD: ::DWORD = 0x00000001;
 pub const SSA_TAB: ::DWORD = 0x00000002;
@@ -161,23 +152,21 @@ pub const SSA_PIDX: ::DWORD = 0x10000000;
 pub const SSA_LAYOUTRTL: ::DWORD = 0x20000000;
 pub const SSA_DONTGLYPH: ::DWORD = 0x40000000;
 pub const SSA_NOKASHIDA: ::DWORD = 0x80000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCRIPT_TABDEF {
-    pub cTabStops: ::c_int,
-    pub iScale: ::c_int,
-    pub pTabStops: *mut ::c_int,
-    pub iTabOrigin: ::c_int,
-}
+STRUCT!{struct SCRIPT_TABDEF {
+    cTabStops: ::c_int,
+    iScale: ::c_int,
+    pTabStops: *mut ::c_int,
+    iTabOrigin: ::c_int,
+}}
 DECLARE_HANDLE!(SCRIPT_STRING_ANALYSIS, SCRIPT_STRING_ANALYSIS__);
 pub const SIC_COMPLEX: ::DWORD = 1;
 pub const SIC_ASCIIDIGIT: ::DWORD = 2;
 pub const SIC_NEUTRAL: ::DWORD = 4;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCRIPT_DIGITSUBSTITUTE {
+STRUCT!{struct SCRIPT_DIGITSUBSTITUTE {
     bit_fields1: ::DWORD,
     bit_fields2: ::DWORD,
-    pub dwReserved: ::DWORD,
-}
+    dwReserved: ::DWORD,
+}}
 BITFIELD!(SCRIPT_DIGITSUBSTITUTE bit_fields1: ::DWORD [
     NationalDigitLanguage set_NationalDigitLanguage[0..16],
     TraditionalDigitLanguage set_TraditionalDigitLanguage[16..32],
@@ -191,26 +180,22 @@ pub const SCRIPT_DIGITSUBSTITUTE_NATIONAL: ::BYTE = 2;
 pub const SCRIPT_DIGITSUBSTITUTE_TRADITIONAL: ::BYTE = 3;
 pub type OPENTYPE_TAG = ::ULONG;
 pub const SCRIPT_TAG_UNKNOWN: OPENTYPE_TAG = 0x00000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct OPENTYPE_FEATURE_RECORD {
-    pub tagFeature: OPENTYPE_TAG,
-    pub lParameter: ::LONG,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TEXTRANGE_PROPERTIES {
-    pub potfRecords: *mut OPENTYPE_FEATURE_RECORD,
-    pub cotfRecords: ::c_int,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCRIPT_CHARPROP {
+STRUCT!{struct OPENTYPE_FEATURE_RECORD {
+    tagFeature: OPENTYPE_TAG,
+    lParameter: ::LONG,
+}}
+STRUCT!{struct TEXTRANGE_PROPERTIES {
+    potfRecords: *mut OPENTYPE_FEATURE_RECORD,
+    cotfRecords: ::c_int,
+}}
+STRUCT!{struct SCRIPT_CHARPROP {
     bit_fields: ::WORD,
-}
+}}
 BITFIELD!(SCRIPT_CHARPROP bit_fields: ::WORD [
     fCanGlyphAlone set_fCanGlyphAlone[0..1],
     reserved set_reserved[1..16],
 ]);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCRIPT_GLYPHPROP {
-    pub sva: SCRIPT_VISATTR,
-    pub reserved: ::WORD,
-}
+STRUCT!{struct SCRIPT_GLYPHPROP {
+    sva: SCRIPT_VISATTR,
+    reserved: ::WORD,
+}}

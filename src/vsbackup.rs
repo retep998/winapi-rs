@@ -9,24 +9,23 @@ DEFINE_GUID!(IID_IVssBackupComponents, 0x665c1d5f, 0xc218, 0x414d,
     0xa0, 0x5d, 0x7f, 0xef, 0x5f, 0x9d, 0x5c, 0x86);
 DEFINE_GUID!(IID_IVssBackupComponentsEx, 0x963f03ad, 0x9e4c, 0x4a34,
     0xac, 0x15, 0xe4, 0xb6, 0x17, 0x4e, 0x50, 0x36);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct VSS_COMPONENTINFO {
-    pub type_: ::VSS_COMPONENT_TYPE, // type is a keyword in rust
-    pub bstrLogicalPath: ::BSTR,
-    pub bstrComponentName: ::BSTR,
-    pub bstrCaption: ::BSTR,
-    pub pbIcon: *mut ::BYTE,
-    pub cbIcon: ::UINT,
-    pub bRestoreMetadata: bool,
-    pub bNotifyOnBackupComplete: bool,
-    pub bSelectable: bool,
-    pub bSelectableForRestore: bool,
-    pub dwComponentFlags: ::DWORD,
-    pub cFileCount: ::UINT,
-    pub cDatabases: ::UINT,
-    pub cLogFiles: ::UINT,
-    pub cDependencies: ::UINT,
-}
+STRUCT!{struct VSS_COMPONENTINFO {
+    type_: ::VSS_COMPONENT_TYPE, // type is a keyword in rust
+    bstrLogicalPath: ::BSTR,
+    bstrComponentName: ::BSTR,
+    bstrCaption: ::BSTR,
+    pbIcon: *mut ::BYTE,
+    cbIcon: ::UINT,
+    bRestoreMetadata: bool,
+    bNotifyOnBackupComplete: bool,
+    bSelectable: bool,
+    bSelectableForRestore: bool,
+    dwComponentFlags: ::DWORD,
+    cFileCount: ::UINT,
+    cDatabases: ::UINT,
+    cLogFiles: ::UINT,
+    cDependencies: ::UINT,
+}}
 pub type PVSSCOMPONENTINFO = *const ::VSS_COMPONENTINFO;
 RIDL!(
 interface IVssWMComponent(IVssWMComponentVtbl): IUnknown(IUnknownVtbl) {

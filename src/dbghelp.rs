@@ -105,30 +105,27 @@ pub const UNDNAME_NO_SPECIAL_SYMS: ::DWORD = 0x4000;
 pub const DBHHEADER_DEBUGDIRS: ::DWORD = 0x1;
 pub const DBHHEADER_CVMISC: ::DWORD = 0x2;
 pub const DBHHEADER_PDBGUID: ::DWORD = 0x3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MODLOAD_DATA {
-    pub ssize: ::DWORD,
-    pub ssig: ::DWORD,
-    pub data: ::PVOID,
-    pub size: ::DWORD,
-    pub flags: ::DWORD,
-}
+STRUCT!{struct MODLOAD_DATA {
+    ssize: ::DWORD,
+    ssig: ::DWORD,
+    data: ::PVOID,
+    size: ::DWORD,
+    flags: ::DWORD,
+}}
 pub type PMODLOAD_DATA = *mut MODLOAD_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MODLOAD_CVMISC {
-    pub oCV: ::DWORD,
-    pub cCV: ::size_t,
-    pub oMisc: ::DWORD,
-    pub cMisc: ::size_t,
-    pub dtImage: ::DWORD,
-    pub cImage: ::DWORD,
-}
+STRUCT!{struct MODLOAD_CVMISC {
+    oCV: ::DWORD,
+    cCV: ::size_t,
+    oMisc: ::DWORD,
+    cMisc: ::size_t,
+    dtImage: ::DWORD,
+    cImage: ::DWORD,
+}}
 pub type PMODLOAD_CVMISC = *mut MODLOAD_CVMISC;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MODLOAD_PDBGUID_PDBAGE {
-    pub PdbGuid: ::GUID,
-    pub PdbAge: ::DWORD,
-}
+STRUCT!{struct MODLOAD_PDBGUID_PDBAGE {
+    PdbGuid: ::GUID,
+    PdbAge: ::DWORD,
+}}
 pub type PMODLOAD_PDBGUID_PDBAGE = *mut MODLOAD_PDBGUID_PDBAGE;
 #[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
 pub enum ADDRESS_MODE {
@@ -138,12 +135,11 @@ pub enum ADDRESS_MODE {
     AddrModeFlat,
 }
 pub use self::ADDRESS_MODE::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ADDRESS64 {
-    pub Offset: ::DWORD64,
-    pub Segment: ::WORD,
-    pub Mode: ::ADDRESS_MODE,
-}
+STRUCT!{struct ADDRESS64 {
+    Offset: ::DWORD64,
+    Segment: ::WORD,
+    Mode: ::ADDRESS_MODE,
+}}
 pub type LPADDRESS64 = *mut ADDRESS64;
 #[cfg(target_arch = "x86_64")]
 pub type ADDRESS = ADDRESS64;
@@ -157,23 +153,22 @@ pub struct ADDRESS {
 }
 #[cfg(target_arch = "x86")]
 pub type LPADDRESS = *mut ADDRESS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KDHELP64 {
-    pub Thread: ::DWORD64,
-    pub ThCallbackStack: ::DWORD,
-    pub ThCallbackBStore: ::DWORD,
-    pub NextCallback: ::DWORD,
-    pub FramePointer: ::DWORD,
-    pub KiCallUserMode: ::DWORD64,
-    pub KeUserCallbackDispatcher: ::DWORD64,
-    pub SystemRangeStart: ::DWORD64,
-    pub KiUserExceptionDispatcher: ::DWORD64,
-    pub StackBase: ::DWORD64,
-    pub StackLimit: ::DWORD64,
-    pub BuildVersion: ::DWORD,
-    pub Reserved0: ::DWORD,
-    pub Reserved1: [::DWORD64; 4],
-}
+STRUCT!{struct KDHELP64 {
+    Thread: ::DWORD64,
+    ThCallbackStack: ::DWORD,
+    ThCallbackBStore: ::DWORD,
+    NextCallback: ::DWORD,
+    FramePointer: ::DWORD,
+    KiCallUserMode: ::DWORD64,
+    KeUserCallbackDispatcher: ::DWORD64,
+    SystemRangeStart: ::DWORD64,
+    KiUserExceptionDispatcher: ::DWORD64,
+    StackBase: ::DWORD64,
+    StackLimit: ::DWORD64,
+    BuildVersion: ::DWORD,
+    Reserved0: ::DWORD,
+    Reserved1: [::DWORD64; 4],
+}}
 pub type PKDHELP64 = *mut KDHELP64;
 #[cfg(target_arch = "x86_64")]
 pub type KDHELP = KDHELP64;
@@ -196,39 +191,37 @@ pub struct KDHELP {
 }
 #[cfg(target_arch = "x86")]
 pub type PKDHELP = *mut KDHELP;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct STACKFRAME64 {
-    pub AddrPC: ::ADDRESS64,
-    pub AddrReturn: ::ADDRESS64,
-    pub AddrFrame: ::ADDRESS64,
-    pub AddrStack: ::ADDRESS64,
-    pub AddrBStore: ::ADDRESS64,
-    pub FuncTableEntry: ::PVOID,
-    pub Params: [::DWORD64; 4],
-    pub Far: ::BOOL,
-    pub Virtual: ::BOOL,
-    pub Reserved: [::DWORD64; 3],
-    pub KdHelp: ::KDHELP64,
-}
+STRUCT!{struct STACKFRAME64 {
+    AddrPC: ::ADDRESS64,
+    AddrReturn: ::ADDRESS64,
+    AddrFrame: ::ADDRESS64,
+    AddrStack: ::ADDRESS64,
+    AddrBStore: ::ADDRESS64,
+    FuncTableEntry: ::PVOID,
+    Params: [::DWORD64; 4],
+    Far: ::BOOL,
+    Virtual: ::BOOL,
+    Reserved: [::DWORD64; 3],
+    KdHelp: ::KDHELP64,
+}}
 pub type LPSTACKFRAME64 = *mut STACKFRAME64;
 pub const INLINE_FRAME_CONTEXT_INIT: ::DWORD = 0;
 pub const INLINE_FRAME_CONTEXT_IGNORE: ::DWORD = 0xFFFFFFFF;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct STACKFRAME_EX {
-    pub AddrPC: ::ADDRESS64,
-    pub AddrReturn: ::ADDRESS64,
-    pub AddrFrame: ::ADDRESS64,
-    pub AddrStack: ::ADDRESS64,
-    pub AddrBStore: ::ADDRESS64,
-    pub FuncTableEntry: ::PVOID,
-    pub Params: [::DWORD64; 4],
-    pub Far: ::BOOL,
-    pub Virtual: ::BOOL,
-    pub Reserved: [::DWORD64; 3],
-    pub KdHelp: ::KDHELP64,
-    pub StackFrameSize: ::DWORD,
-    pub InlineFrameContext: ::DWORD,
-}
+STRUCT!{struct STACKFRAME_EX {
+    AddrPC: ::ADDRESS64,
+    AddrReturn: ::ADDRESS64,
+    AddrFrame: ::ADDRESS64,
+    AddrStack: ::ADDRESS64,
+    AddrBStore: ::ADDRESS64,
+    FuncTableEntry: ::PVOID,
+    Params: [::DWORD64; 4],
+    Far: ::BOOL,
+    Virtual: ::BOOL,
+    Reserved: [::DWORD64; 3],
+    KdHelp: ::KDHELP64,
+    StackFrameSize: ::DWORD,
+    InlineFrameContext: ::DWORD,
+}}
 pub type LPSTACKFRAME_EX = *mut STACKFRAME_EX;
 #[cfg(target_arch = "x86_64")]
 pub type STACKFRAME = STACKFRAME64;
@@ -291,49 +284,45 @@ pub type PTRANSLATE_ADDRESS_ROUTINE = Option<unsafe extern "system" fn(
     hProcess: ::HANDLE, hThread: ::HANDLE, lpaddr: LPADDRESS,
 ) -> ::DWORD>;
 pub const API_VERSION_NUMBER: ::USHORT = 12;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct API_VERSION {
-    pub MajorVersion: ::USHORT,
-    pub MinorVersion: ::USHORT,
-    pub Revision: ::USHORT,
-    pub Reserved: ::USHORT,
-}
+STRUCT!{struct API_VERSION {
+    MajorVersion: ::USHORT,
+    MinorVersion: ::USHORT,
+    Revision: ::USHORT,
+    Reserved: ::USHORT,
+}}
 pub type LPAPI_VERSION = *mut API_VERSION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SYMBOL_INFOW {
-    pub SizeOfStruct: ::ULONG,
-    pub TypeIndex: ::ULONG,
-    pub Reserved: [::ULONG64; 2],
-    pub Index: ::ULONG,
-    pub Size: ::ULONG,
-    pub ModBase: ::ULONG64,
-    pub Flags: ::ULONG,
-    pub Value: ::ULONG64,
-    pub Address: ::ULONG64,
-    pub Register: ::ULONG,
-    pub Scope: ::ULONG,
-    pub Tag: ::ULONG,
-    pub NameLen: ::ULONG,
-    pub MaxNameLen: ::ULONG,
-    pub Name: [::WCHAR; 1],
-}
+STRUCT!{struct SYMBOL_INFOW {
+    SizeOfStruct: ::ULONG,
+    TypeIndex: ::ULONG,
+    Reserved: [::ULONG64; 2],
+    Index: ::ULONG,
+    Size: ::ULONG,
+    ModBase: ::ULONG64,
+    Flags: ::ULONG,
+    Value: ::ULONG64,
+    Address: ::ULONG64,
+    Register: ::ULONG,
+    Scope: ::ULONG,
+    Tag: ::ULONG,
+    NameLen: ::ULONG,
+    MaxNameLen: ::ULONG,
+    Name: [::WCHAR; 1],
+}}
 pub type PSYMBOL_INFOW = *mut SYMBOL_INFOW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGEHLP_SYMBOL64 {
-    pub SizeOfStruct: ::DWORD,
-    pub Address: ::DWORD64,
-    pub Size: ::DWORD,
-    pub Flags: ::DWORD,
-    pub MaxNameLength: ::DWORD,
-    pub Name: [::CHAR; 1],
-}
+STRUCT!{struct IMAGEHLP_SYMBOL64 {
+    SizeOfStruct: ::DWORD,
+    Address: ::DWORD64,
+    Size: ::DWORD,
+    Flags: ::DWORD,
+    MaxNameLength: ::DWORD,
+    Name: [::CHAR; 1],
+}}
 pub type PIMAGEHLP_SYMBOL64 = *mut IMAGEHLP_SYMBOL64;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGEHLP_LINEW64 {
-    pub SizeOfStruct: ::DWORD,
-    pub Key: ::PVOID,
-    pub LineNumber: ::DWORD,
-    pub FileName: ::PWSTR,
-    pub Address: ::DWORD64,
-}
+STRUCT!{struct IMAGEHLP_LINEW64 {
+    SizeOfStruct: ::DWORD,
+    Key: ::PVOID,
+    LineNumber: ::DWORD,
+    FileName: ::PWSTR,
+    Address: ::DWORD64,
+}}
 pub type PIMAGEHLP_LINEW64 = *mut IMAGEHLP_LINEW64;

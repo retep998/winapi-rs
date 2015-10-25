@@ -27,56 +27,51 @@ pub enum eTlsHashAlgorithm {
 }
 pub use self::eTlsHashAlgorithm::*;
 pub const UNISP_RPC_ID: ::DWORD = 14;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_RemoteCredentialInfo {
-    pub cbCertificateChain: ::DWORD,
-    pub pbCertificateChain: ::PBYTE,
-    pub cCertificates: ::DWORD,
-    pub fFlags: ::DWORD,
-    pub dwBits: ::DWORD,
-}
+STRUCT!{struct SecPkgContext_RemoteCredentialInfo {
+    cbCertificateChain: ::DWORD,
+    pbCertificateChain: ::PBYTE,
+    cCertificates: ::DWORD,
+    fFlags: ::DWORD,
+    dwBits: ::DWORD,
+}}
 pub type PSecPkgContext_RemoteCredentialInfo = *mut SecPkgContext_RemoteCredentialInfo;
 pub type SecPkgContext_RemoteCredenitalInfo = SecPkgContext_RemoteCredentialInfo;
 pub type PSecPkgContext_RemoteCredenitalInfo = *mut SecPkgContext_RemoteCredentialInfo;
 pub const RCRED_STATUS_NOCRED: ::DWORD = 0x00000000;
 pub const RCRED_CRED_EXISTS: ::DWORD = 0x00000001;
 pub const RCRED_STATUS_UNKNOWN_ISSUER: ::DWORD = 0x00000002;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_LocalCredentialInfo {
-    pub cbCertificateChain: ::DWORD,
-    pub pbCertificateChain: ::PBYTE,
-    pub cCertificates: ::DWORD,
-    pub fFlags: ::DWORD,
-    pub dwBits: ::DWORD,
-}
+STRUCT!{struct SecPkgContext_LocalCredentialInfo {
+    cbCertificateChain: ::DWORD,
+    pbCertificateChain: ::PBYTE,
+    cCertificates: ::DWORD,
+    fFlags: ::DWORD,
+    dwBits: ::DWORD,
+}}
 pub type PSecPkgContext_LocalCredentialInfo = *mut SecPkgContext_LocalCredentialInfo;
 pub type SecPkgContext_LocalCredenitalInfo = SecPkgContext_LocalCredentialInfo;
 pub type PSecPkgContext_LocalCredenitalInfo = *mut SecPkgContext_LocalCredentialInfo;
 pub const LCRED_STATUS_NOCRED: ::DWORD = 0x00000000;
 pub const LCRED_CRED_EXISTS: ::DWORD = 0x00000001;
 pub const LCRED_STATUS_UNKNOWN_ISSUER: ::DWORD = 0x00000002;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_ClientCertPolicyResult {
-    pub dwPolicyResult: ::HRESULT,
-    pub guidPolicyId: ::GUID,
-}
+STRUCT!{struct SecPkgContext_ClientCertPolicyResult {
+    dwPolicyResult: ::HRESULT,
+    guidPolicyId: ::GUID,
+}}
 pub type PSecPkgContext_ClientCertPolicyResult = *mut SecPkgContext_ClientCertPolicyResult;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_IssuerListInfoEx {
-    pub aIssuers: ::PCERT_NAME_BLOB,
-    pub cIssuers: ::DWORD,
-}
+STRUCT!{struct SecPkgContext_IssuerListInfoEx {
+    aIssuers: ::PCERT_NAME_BLOB,
+    cIssuers: ::DWORD,
+}}
 pub type PSecPkgContext_IssuerListInfoEx = *mut SecPkgContext_IssuerListInfoEx;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_ConnectionInfo {
-    pub dwProtocol: ::DWORD,
-    pub aiCipher: ::ALG_ID,
-    pub dwCipherStrength: ::DWORD,
-    pub aiHash: ::ALG_ID,
-    pub dwHashStrength: ::DWORD,
-    pub aiExch: ::ALG_ID,
-    pub dwExchStrength: ::DWORD,
-}
+STRUCT!{struct SecPkgContext_ConnectionInfo {
+    dwProtocol: ::DWORD,
+    aiCipher: ::ALG_ID,
+    dwCipherStrength: ::DWORD,
+    aiHash: ::ALG_ID,
+    dwHashStrength: ::DWORD,
+    aiExch: ::ALG_ID,
+    dwExchStrength: ::DWORD,
+}}
 pub type PSecPkgContext_ConnectionInfo = *mut SecPkgContext_ConnectionInfo;
 pub const SZ_ALG_MAX_SIZE: usize = 64;
 pub const SECPKGCONTEXT_CIPHERINFO_V1: ::DWORD = 1;
@@ -107,67 +102,58 @@ pub struct SecPkgContext_EapKeyBlock {
 }
 impl Clone for SecPkgContext_EapKeyBlock { fn clone(&self) -> SecPkgContext_EapKeyBlock { *self } }
 pub type PSecPkgContext_EapKeyBlock = *mut SecPkgContext_EapKeyBlock;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_MappedCredAttr {
-    pub dwAttribute: ::DWORD,
-    pub pvBuffer: ::PVOID,
-}
+STRUCT!{struct SecPkgContext_MappedCredAttr {
+    dwAttribute: ::DWORD,
+    pvBuffer: ::PVOID,
+}}
 pub type PSecPkgContext_MappedCredAttr = *mut SecPkgContext_MappedCredAttr;
 pub const SSL_SESSION_RECONNECT: ::DWORD = 1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_SessionInfo {
-    pub dwFlags: ::DWORD,
-    pub cbSessionId: ::DWORD,
-    pub rgbSessionId: [::BYTE; 32],
-}
+STRUCT!{struct SecPkgContext_SessionInfo {
+    dwFlags: ::DWORD,
+    cbSessionId: ::DWORD,
+    rgbSessionId: [::BYTE; 32],
+}}
 pub type PSecPkgContext_SessionInfo = *mut SecPkgContext_SessionInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_SessionAppData {
-    pub dwFlags: ::DWORD,
-    pub cbAppData: ::DWORD,
-    pub pbAppData: ::PBYTE,
-}
+STRUCT!{struct SecPkgContext_SessionAppData {
+    dwFlags: ::DWORD,
+    cbAppData: ::DWORD,
+    pbAppData: ::PBYTE,
+}}
 pub type PSecPkgContext_SessionAppData = *mut SecPkgContext_SessionAppData;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_EapPrfInfo {
-    pub dwVersion: ::DWORD,
-    pub cbPrfData: ::DWORD,
-    pub pbPrfData: ::PBYTE,
-}
+STRUCT!{struct SecPkgContext_EapPrfInfo {
+    dwVersion: ::DWORD,
+    cbPrfData: ::DWORD,
+    pbPrfData: ::PBYTE,
+}}
 pub type PSecPkgContext_EapPrfInfo = *mut SecPkgContext_EapPrfInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_SupportedSignatures {
-    pub cSignatureAndHashAlgorithms: ::WORD,
-    pub pSignatureAndHashAlgorithms: *mut ::WORD,
-}
+STRUCT!{struct SecPkgContext_SupportedSignatures {
+    cSignatureAndHashAlgorithms: ::WORD,
+    pSignatureAndHashAlgorithms: *mut ::WORD,
+}}
 pub type PSecPkgContext_SupportedSignatures = *mut SecPkgContext_SupportedSignatures;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_Certificates {
-    pub cCertificates: ::DWORD,
-    pub cbCertificateChain: ::DWORD,
-    pub pbCertificateChain: ::PBYTE,
-}
+STRUCT!{struct SecPkgContext_Certificates {
+    cCertificates: ::DWORD,
+    cbCertificateChain: ::DWORD,
+    pbCertificateChain: ::PBYTE,
+}}
 pub type PSecPkgContext_Certificates = *mut SecPkgContext_Certificates;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_CertInfo {
-    pub dwVersion: ::DWORD,
-    pub cbSubjectName: ::DWORD,
-    pub pwszSubjectName: ::LPWSTR,
-    pub cbIssuerName: ::DWORD,
-    pub pwszIssuerName: ::LPWSTR,
-    pub dwKeySize: ::DWORD,
-}
+STRUCT!{struct SecPkgContext_CertInfo {
+    dwVersion: ::DWORD,
+    cbSubjectName: ::DWORD,
+    pwszSubjectName: ::LPWSTR,
+    cbIssuerName: ::DWORD,
+    pwszIssuerName: ::LPWSTR,
+    dwKeySize: ::DWORD,
+}}
 pub type PSecPkgContext_CertInfo = *mut SecPkgContext_CertInfo;
 pub const KERN_CONTEXT_CERT_INFO_V1: ::DWORD = 0x00000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_UiInfo {
-    pub hParentWindow: ::HWND,
-}
+STRUCT!{struct SecPkgContext_UiInfo {
+    hParentWindow: ::HWND,
+}}
 pub type PSecPkgContext_UiInfo = *mut SecPkgContext_UiInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_EarlyStart {
-    pub dwEarlyStartFlags: ::DWORD,
-}
+STRUCT!{struct SecPkgContext_EarlyStart {
+    dwEarlyStartFlags: ::DWORD,
+}}
 pub type PSecPkgContext_EarlyStart = *mut SecPkgContext_EarlyStart;
 pub const ENABLE_TLS_CLIENT_EARLY_START: ::DWORD = 0x00000001;
 pub const SCH_CRED_V1: ::DWORD = 0x00000001;
@@ -177,23 +163,22 @@ pub const SCH_CRED_V3: ::DWORD = 0x00000003;
 pub const SCHANNEL_CRED_VERSION: ::DWORD = 0x00000004;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct _HMAPPER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCHANNEL_CRED {
-    pub dwVersion: ::DWORD,
-    pub cCreds: ::DWORD,
-    pub paCred: *mut ::PCCERT_CONTEXT,
-    pub hRootStore: ::HCERTSTORE,
-    pub cMappers: ::DWORD,
-    pub aphMappers: *mut *mut _HMAPPER,
-    pub cSupportedAlgs: ::DWORD,
-    pub palgSupportedAlgs: *mut ::ALG_ID,
-    pub grbitEnabledProtocols: ::DWORD,
-    pub dwMinimumCipherStrength: ::DWORD,
-    pub dwMaximumCipherStrength: ::DWORD,
-    pub dwSessionLifespan: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub dwCredFormat: ::DWORD,
-}
+STRUCT!{struct SCHANNEL_CRED {
+    dwVersion: ::DWORD,
+    cCreds: ::DWORD,
+    paCred: *mut ::PCCERT_CONTEXT,
+    hRootStore: ::HCERTSTORE,
+    cMappers: ::DWORD,
+    aphMappers: *mut *mut _HMAPPER,
+    cSupportedAlgs: ::DWORD,
+    palgSupportedAlgs: *mut ::ALG_ID,
+    grbitEnabledProtocols: ::DWORD,
+    dwMinimumCipherStrength: ::DWORD,
+    dwMaximumCipherStrength: ::DWORD,
+    dwSessionLifespan: ::DWORD,
+    dwFlags: ::DWORD,
+    dwCredFormat: ::DWORD,
+}}
 pub type PSCHANNEL_CRED = *mut SCHANNEL_CRED;
 pub const SCH_CRED_FORMAT_CERT_CONTEXT: ::DWORD = 0x00000000;
 pub const SCH_CRED_FORMAT_CERT_HASH: ::DWORD = 0x00000001;
@@ -201,13 +186,12 @@ pub const SCH_CRED_FORMAT_CERT_HASH_STORE: ::DWORD = 0x00000002;
 pub const SCH_CRED_MAX_STORE_NAME_SIZE: usize = 128;
 pub const SCH_CRED_MAX_SUPPORTED_ALGS: ::DWORD = 256;
 pub const SCH_CRED_MAX_SUPPORTED_CERTS: ::DWORD = 100;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCHANNEL_CERT_HASH {
-    pub dwLength: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub hProv: ::HCRYPTPROV,
-    pub ShaHash: [::BYTE; 20],
-}
+STRUCT!{struct SCHANNEL_CERT_HASH {
+    dwLength: ::DWORD,
+    dwFlags: ::DWORD,
+    hProv: ::HCRYPTPROV,
+    ShaHash: [::BYTE; 20],
+}}
 pub type PSCHANNEL_CERT_HASH = *mut SCHANNEL_CERT_HASH;
 #[repr(C)] #[derive(Copy)]
 pub struct SCHANNEL_CERT_HASH_STORE {
@@ -246,12 +230,11 @@ pub const SCHANNEL_RENEGOTIATE: ::DWORD = 0;
 pub const SCHANNEL_SHUTDOWN: ::DWORD = 1;
 pub const SCHANNEL_ALERT: ::DWORD = 2;
 pub const SCHANNEL_SESSION: ::DWORD = 3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCHANNEL_ALERT_TOKEN {
-    pub dwTokenType: ::DWORD,
-    pub dwAlertType: ::DWORD,
-    pub dwAlertNumber: ::DWORD,
-}
+STRUCT!{struct SCHANNEL_ALERT_TOKEN {
+    dwTokenType: ::DWORD,
+    dwAlertType: ::DWORD,
+    dwAlertNumber: ::DWORD,
+}}
 pub const TLS1_ALERT_WARNING: ::DWORD = 1;
 pub const TLS1_ALERT_FATAL: ::DWORD = 2;
 pub const TLS1_ALERT_CLOSE_NOTIFY: ::DWORD = 0;
@@ -281,11 +264,10 @@ pub const TLS1_ALERT_UNSUPPORTED_EXT: ::DWORD = 110;
 pub const TLS1_ALERT_NO_APP_PROTOCOL: ::DWORD = 120;
 pub const SSL_SESSION_ENABLE_RECONNECTS: ::DWORD = 1;
 pub const SSL_SESSION_DISABLE_RECONNECTS: ::DWORD = 2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCHANNEL_SESSION_TOKEN {
-    pub dwTokenType: ::DWORD,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct SCHANNEL_SESSION_TOKEN {
+    dwTokenType: ::DWORD,
+    dwFlags: ::DWORD,
+}}
 #[repr(C)] #[derive(Copy)]
 pub struct SCHANNEL_CLIENT_SIGNATURE {
     pub cbLength: ::DWORD,

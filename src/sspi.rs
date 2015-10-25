@@ -4,11 +4,10 @@
 pub type SEC_WCHAR = ::WCHAR;
 pub type SEC_CHAR = ::CHAR;
 pub type SECURITY_STATUS = ::LONG;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecHandle {
-    pub dwLower: ::ULONG_PTR,
-    pub dwUpper: ::ULONG_PTR,
-}
+STRUCT!{struct SecHandle {
+    dwLower: ::ULONG_PTR,
+    dwUpper: ::ULONG_PTR,
+}}
 pub type PSecHandle = *mut SecHandle;
 pub const SEC_DELETED_HANDLE: ::ULONG_PTR = 2;
 pub type CredHandle = SecHandle;
@@ -19,32 +18,29 @@ pub type SECURITY_INTEGER = ::LARGE_INTEGER;
 pub type PSECURITY_INTEGER = *mut ::LARGE_INTEGER;
 pub type TimeStamp = SECURITY_INTEGER;
 pub type PTimeStamp = *mut SECURITY_INTEGER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SECURITY_STRING {
-    pub Length: ::c_ushort,
-    pub MaximumLength: ::c_ushort,
-    pub Buffer: *mut ::c_ushort,
-}
+STRUCT!{struct SECURITY_STRING {
+    Length: ::c_ushort,
+    MaximumLength: ::c_ushort,
+    Buffer: *mut ::c_ushort,
+}}
 pub type PSECURITY_STRING = *mut SECURITY_STRING;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgInfoW {
-    pub fCapabilities: ::c_ulong,
-    pub wVersion: ::c_ushort,
-    pub wRPCID: ::c_ushort,
-    pub cbMaxToken: ::c_ulong,
-    pub Name: *mut SEC_WCHAR,
-    pub Comment: *mut SEC_WCHAR,
-}
+STRUCT!{struct SecPkgInfoW {
+    fCapabilities: ::c_ulong,
+    wVersion: ::c_ushort,
+    wRPCID: ::c_ushort,
+    cbMaxToken: ::c_ulong,
+    Name: *mut SEC_WCHAR,
+    Comment: *mut SEC_WCHAR,
+}}
 pub type PSecPkgInfoW = *mut SecPkgInfoW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgInfoA {
-    pub fCapabilities: ::c_ulong,
-    pub wVersion: ::c_ushort,
-    pub wRPCID: ::c_ushort,
-    pub cbMaxToken: ::c_ulong,
-    pub Name: *mut SEC_CHAR,
-    pub Comment: *mut SEC_CHAR,
-}
+STRUCT!{struct SecPkgInfoA {
+    fCapabilities: ::c_ulong,
+    wVersion: ::c_ushort,
+    wRPCID: ::c_ushort,
+    cbMaxToken: ::c_ulong,
+    Name: *mut SEC_CHAR,
+    Comment: *mut SEC_CHAR,
+}}
 pub type PSecPkgInfoA = *mut SecPkgInfoA;
 pub const SECPKG_FLAG_INTEGRITY: ::c_ulong = 0x00000001;
 pub const SECPKG_FLAG_PRIVACY: ::c_ulong = 0x00000002;
@@ -74,19 +70,17 @@ pub const SECPKG_ID_NONE: ::c_ulong = 0xFFFF;
 pub const SECPKG_CALLFLAGS_APPCONTAINER: ::c_ulong = 0x00000001;
 pub const SECPKG_CALLFLAGS_APPCONTAINER_AUTHCAPABLE: ::c_ulong = 0x00000002;
 pub const SECPKG_CALLFLAGS_FORCE_SUPPLIED: ::c_ulong = 0x00000004;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecBuffer {
-    pub cbBuffer: ::c_ulong,
-    pub BufferType: ::c_ulong,
-    pub pvBuffer: *mut ::c_void,
-}
+STRUCT!{struct SecBuffer {
+    cbBuffer: ::c_ulong,
+    BufferType: ::c_ulong,
+    pvBuffer: *mut ::c_void,
+}}
 pub type PSecBuffer = *mut SecBuffer;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecBufferDesc {
-    pub ulVersion: ::c_ulong,
-    pub cBuffers: ::c_ulong,
-    pub pBuffers: PSecBuffer,
-}
+STRUCT!{struct SecBufferDesc {
+    ulVersion: ::c_ulong,
+    cBuffers: ::c_ulong,
+    pBuffers: PSecBuffer,
+}}
 pub type PSecBufferDesc = *mut SecBufferDesc;
 pub const SECBUFFER_VERSION: ::c_ulong = 0;
 pub const SECBUFFER_EMPTY: ::c_ulong = 0;
@@ -112,25 +106,23 @@ pub const SECBUFFER_ATTRMASK: ::c_ulong = 0xF0000000;
 pub const SECBUFFER_READONLY: ::c_ulong = 0x80000000;
 pub const SECBUFFER_READONLY_WITH_CHECKSUM: ::c_ulong = 0x10000000;
 pub const SECBUFFER_RESERVED: ::c_ulong = 0x60000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SEC_NEGOTIATION_INFO {
-    pub Size: ::c_ulong,
-    pub NameLength: ::c_ulong,
-    pub Name: *mut SEC_WCHAR,
-    pub Reserved: *mut ::c_void,
-}
+STRUCT!{struct SEC_NEGOTIATION_INFO {
+    Size: ::c_ulong,
+    NameLength: ::c_ulong,
+    Name: *mut SEC_WCHAR,
+    Reserved: *mut ::c_void,
+}}
 pub type PSEC_NEGOTIATION_INFO = *mut SEC_NEGOTIATION_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SEC_CHANNEL_BINDINGS {
-    pub dwInitiatorAddrType: ::c_ulong,
-    pub cbInitiatorLength: ::c_ulong,
-    pub dwInitiatorOffset: ::c_ulong,
-    pub dwAcceptorAddrType: ::c_ulong,
-    pub cbAcceptorLength: ::c_ulong,
-    pub dwAcceptorOffset: ::c_ulong,
-    pub cbApplicationDataLength: ::c_ulong,
-    pub dwApplicationDataOffset: ::c_ulong,
-}
+STRUCT!{struct SEC_CHANNEL_BINDINGS {
+    dwInitiatorAddrType: ::c_ulong,
+    cbInitiatorLength: ::c_ulong,
+    dwInitiatorOffset: ::c_ulong,
+    dwAcceptorAddrType: ::c_ulong,
+    cbAcceptorLength: ::c_ulong,
+    dwAcceptorOffset: ::c_ulong,
+    cbApplicationDataLength: ::c_ulong,
+    dwApplicationDataOffset: ::c_ulong,
+}}
 pub type PSEC_CHANNEL_BINDINGS = *mut SEC_CHANNEL_BINDINGS;
 #[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
 pub enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT {
@@ -140,17 +132,15 @@ pub enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT {
 }
 pub use self::SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT::*;
 pub type PSEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT = *mut SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SEC_APPLICATION_PROTOCOL_LIST {
-    pub ProtoNegoExt: ::SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT,
-    pub ProtocolListSize: ::c_ushort,
-    pub ProtocolList: [::c_uchar; 0],
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SEC_APPLICATION_PROTOCOLS {
-    pub ProtocolListsSize: ::c_ulong,
-    pub ProtocolLists: [SEC_APPLICATION_PROTOCOL_LIST; 0],
-}
+STRUCT!{struct SEC_APPLICATION_PROTOCOL_LIST {
+    ProtoNegoExt: ::SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT,
+    ProtocolListSize: ::c_ushort,
+    ProtocolList: [::c_uchar; 0],
+}}
+STRUCT!{struct SEC_APPLICATION_PROTOCOLS {
+    ProtocolListsSize: ::c_ulong,
+    ProtocolLists: [SEC_APPLICATION_PROTOCOL_LIST; 0],
+}}
 pub type PSEC_APPLICATION_PROTOCOLS = *mut SEC_APPLICATION_PROTOCOLS;
 pub const SECURITY_NATIVE_DREP: ::c_ulong = 0x00000010;
 pub const SECURITY_NETWORK_DREP: ::c_ulong = 0x00000000;
@@ -268,47 +258,41 @@ pub const SECPKG_CRED_ATTR_NAMES: ::c_ulong = 1;
 pub const SECPKG_CRED_ATTR_SSI_PROVIDER: ::c_ulong = 2;
 pub const SECPKG_CRED_ATTR_KDC_PROXY_SETTINGS: ::c_ulong = 3;
 pub const SECPKG_CRED_ATTR_CERT: ::c_ulong = 4;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgCredentials_NamesW {
-    pub sUserName: *mut SEC_WCHAR,
-}
+STRUCT!{struct SecPkgCredentials_NamesW {
+    sUserName: *mut SEC_WCHAR,
+}}
 pub type PSecPkgCredentials_NamesW = *mut SecPkgCredentials_NamesW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgCredentials_NamesA {
-    pub sUserName: *mut SEC_CHAR,
-}
+STRUCT!{struct SecPkgCredentials_NamesA {
+    sUserName: *mut SEC_CHAR,
+}}
 pub type PSecPkgCredentials_NamesA = *mut SecPkgCredentials_NamesA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgCredentials_SSIProviderW {
-    pub sProviderName: *mut SEC_WCHAR,
-    pub ProviderInfoLength: ::c_ulong,
-    pub ProviderInfo: *mut ::c_char,
-}
+STRUCT!{struct SecPkgCredentials_SSIProviderW {
+    sProviderName: *mut SEC_WCHAR,
+    ProviderInfoLength: ::c_ulong,
+    ProviderInfo: *mut ::c_char,
+}}
 pub type PSecPkgCredentials_SSIProviderW = *mut SecPkgCredentials_SSIProviderW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgCredentials_SSIProviderA {
-    pub sProviderName: *mut SEC_CHAR,
-    pub ProviderInfoLength: ::c_ulong,
-    pub ProviderInfo: *mut ::c_char,
-}
+STRUCT!{struct SecPkgCredentials_SSIProviderA {
+    sProviderName: *mut SEC_CHAR,
+    ProviderInfoLength: ::c_ulong,
+    ProviderInfo: *mut ::c_char,
+}}
 pub type PSecPkgCredentials_SSIProviderA = *mut SecPkgCredentials_SSIProviderA;
 pub const KDC_PROXY_SETTINGS_V1: ::ULONG = 1;
 pub const KDC_PROXY_SETTINGS_FLAGS_FORCEPROXY: ::ULONG = 0x1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgCredentials_KdcProxySettingsW {
-    pub Version: ::ULONG,
-    pub Flags: ::ULONG,
-    pub ProxyServerOffset: ::USHORT,
-    pub ProxyServerLength: ::USHORT,
-    pub ClientTlsCredOffset: ::USHORT,
-    pub ClientTlsCredLength: ::USHORT,
-}
+STRUCT!{struct SecPkgCredentials_KdcProxySettingsW {
+    Version: ::ULONG,
+    Flags: ::ULONG,
+    ProxyServerOffset: ::USHORT,
+    ProxyServerLength: ::USHORT,
+    ClientTlsCredOffset: ::USHORT,
+    ClientTlsCredLength: ::USHORT,
+}}
 pub type PSecPkgCredentials_KdcProxySettingsW = *mut SecPkgCredentials_KdcProxySettingsW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgCredentials_Cert {
-    pub EncodedCertSize: ::c_ulong,
-    pub EncodedCert: *mut ::c_uchar,
-}
+STRUCT!{struct SecPkgCredentials_Cert {
+    EncodedCertSize: ::c_ulong,
+    EncodedCert: *mut ::c_uchar,
+}}
 pub type PSecPkgCredentials_Cert = *mut SecPkgCredentials_Cert;
 pub const SECPKG_ATTR_SIZES: ::c_ulong = 0;
 pub const SECPKG_ATTR_NAMES: ::c_ulong = 1;
@@ -345,10 +329,9 @@ pub const SECPKG_ATTR_DTLS_MTU: ::c_ulong = 34;
 pub const SECPKG_ATTR_DATAGRAM_SIZES: ::c_ulong = SECPKG_ATTR_STREAM_SIZES;
 pub const SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES: ::c_ulong = 128;
 pub const SECPKG_ATTR_APPLICATION_PROTOCOL: ::c_ulong = 35;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_SubjectAttributes {
-    pub AttributeInfo: *mut ::c_void,
-}
+STRUCT!{struct SecPkgContext_SubjectAttributes {
+    AttributeInfo: *mut ::c_void,
+}}
 pub type PSecPkgContext_SubjectAttributes = *mut SecPkgContext_SubjectAttributes;
 pub const SECPKG_ATTR_NEGO_INFO_FLAG_NO_KERBEROS: ::c_ulong = 0x1;
 pub const SECPKG_ATTR_NEGO_INFO_FLAG_NO_NTLM: ::c_ulong = 0x2;
@@ -362,45 +345,39 @@ pub enum SECPKG_CRED_CLASS {
 }
 pub use self::SECPKG_CRED_CLASS::*;
 pub type PSECPKG_CRED_CLASS = *mut SECPKG_CRED_CLASS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_CredInfo {
-    pub CredClass: SECPKG_CRED_CLASS,
-    pub IsPromptingNeeded: ::c_ulong,
-}
+STRUCT!{struct SecPkgContext_CredInfo {
+    CredClass: SECPKG_CRED_CLASS,
+    IsPromptingNeeded: ::c_ulong,
+}}
 pub type PSecPkgContext_CredInfo = *mut SecPkgContext_CredInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_NegoPackageInfo {
-    pub PackageMask: ::c_ulong,
-}
+STRUCT!{struct SecPkgContext_NegoPackageInfo {
+    PackageMask: ::c_ulong,
+}}
 pub type PSecPkgContext_NegoPackageInfo = *mut SecPkgContext_NegoPackageInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_NegoStatus {
-    pub LastStatus: ::c_ulong,
-}
+STRUCT!{struct SecPkgContext_NegoStatus {
+    LastStatus: ::c_ulong,
+}}
 pub type PSecPkgContext_NegoStatus = *mut SecPkgContext_NegoStatus;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_Sizes {
-    pub cbMaxToken: ::c_ulong,
-    pub cbMaxSignature: ::c_ulong,
-    pub cbBlockSize: ::c_ulong,
-    pub cbSecurityTrailer: ::c_ulong,
-}
+STRUCT!{struct SecPkgContext_Sizes {
+    cbMaxToken: ::c_ulong,
+    cbMaxSignature: ::c_ulong,
+    cbBlockSize: ::c_ulong,
+    cbSecurityTrailer: ::c_ulong,
+}}
 pub type PSecPkgContext_Sizes = *mut SecPkgContext_Sizes;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_StreamSizes {
-    pub cbHeader: ::c_ulong,
-    pub cbTrailer: ::c_ulong,
-    pub cbMaximumMessage: ::c_ulong,
-    pub cBuffers: ::c_ulong,
-    pub cbBlockSize: ::c_ulong,
-}
+STRUCT!{struct SecPkgContext_StreamSizes {
+    cbHeader: ::c_ulong,
+    cbTrailer: ::c_ulong,
+    cbMaximumMessage: ::c_ulong,
+    cBuffers: ::c_ulong,
+    cbBlockSize: ::c_ulong,
+}}
 pub type PSecPkgContext_StreamSizes = *mut SecPkgContext_StreamSizes;
 pub type SecPkgContext_DatagramSizes = SecPkgContext_StreamSizes;
 pub type PSecPkgContext_DatagramSizes = PSecPkgContext_StreamSizes;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_NamesW {
-    pub sUserName: *mut SEC_WCHAR,
-}
+STRUCT!{struct SecPkgContext_NamesW {
+    sUserName: *mut SEC_WCHAR,
+}}
 pub type PSecPkgContext_NamesW = *mut SecPkgContext_NamesW;
 #[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
 pub enum SECPKG_ATTR_LCT_STATUS {
@@ -410,190 +387,160 @@ pub enum SECPKG_ATTR_LCT_STATUS {
 }
 pub use self::SECPKG_ATTR_LCT_STATUS::*;
 pub type PSECPKG_ATTR_LCT_STATUS = *mut SECPKG_ATTR_LCT_STATUS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_LastClientTokenStatus {
-    pub LastClientTokenStatus: SECPKG_ATTR_LCT_STATUS,
-}
+STRUCT!{struct SecPkgContext_LastClientTokenStatus {
+    LastClientTokenStatus: SECPKG_ATTR_LCT_STATUS,
+}}
 pub type PSecPkgContext_LastClientTokenStatus = *mut SecPkgContext_LastClientTokenStatus;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_NamesA {
-    pub sUserName: *mut SEC_CHAR,
-}
+STRUCT!{struct SecPkgContext_NamesA {
+    sUserName: *mut SEC_CHAR,
+}}
 pub type PSecPkgContext_NamesA = *mut SecPkgContext_NamesA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_Lifespan {
-    pub tsStart: TimeStamp,
-    pub tsExpiry: TimeStamp,
-}
+STRUCT!{struct SecPkgContext_Lifespan {
+    tsStart: TimeStamp,
+    tsExpiry: TimeStamp,
+}}
 pub type PSecPkgContext_Lifespan = *mut SecPkgContext_Lifespan;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_DceInfo {
-    pub AuthzSvc: ::c_ulong,
-    pub pPac: *mut ::c_void,
-}
+STRUCT!{struct SecPkgContext_DceInfo {
+    AuthzSvc: ::c_ulong,
+    pPac: *mut ::c_void,
+}}
 pub type PSecPkgContext_DceInfo = *mut SecPkgContext_DceInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_KeyInfoA {
-    pub sSignatureAlgorithmName: *mut ::SEC_CHAR,
-    pub sEncryptAlgorithmName: *mut ::SEC_CHAR,
-    pub KeySize: ::c_ulong,
-    pub SignatureAlgorithm: ::c_ulong,
-    pub EncryptAlgorithm: ::c_ulong,
-}
+STRUCT!{struct SecPkgContext_KeyInfoA {
+    sSignatureAlgorithmName: *mut ::SEC_CHAR,
+    sEncryptAlgorithmName: *mut ::SEC_CHAR,
+    KeySize: ::c_ulong,
+    SignatureAlgorithm: ::c_ulong,
+    EncryptAlgorithm: ::c_ulong,
+}}
 pub type PSecPkgContext_KeyInfoA = *mut SecPkgContext_KeyInfoA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_KeyInfoW {
-    pub sSignatureAlgorithmName: *mut ::SEC_WCHAR,
-    pub sEncryptAlgorithmName: *mut ::SEC_WCHAR,
-    pub KeySize: ::c_ulong,
-    pub SignatureAlgorithm: ::c_ulong,
-    pub EncryptAlgorithm: ::c_ulong,
-}
+STRUCT!{struct SecPkgContext_KeyInfoW {
+    sSignatureAlgorithmName: *mut ::SEC_WCHAR,
+    sEncryptAlgorithmName: *mut ::SEC_WCHAR,
+    KeySize: ::c_ulong,
+    SignatureAlgorithm: ::c_ulong,
+    EncryptAlgorithm: ::c_ulong,
+}}
 pub type PSecPkgContext_KeyInfoW = *mut SecPkgContext_KeyInfoW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_AuthorityA {
-    pub sAuthorityName: *mut SEC_CHAR,
-}
+STRUCT!{struct SecPkgContext_AuthorityA {
+    sAuthorityName: *mut SEC_CHAR,
+}}
 pub type PSecPkgContext_AuthorityA = *mut SecPkgContext_AuthorityA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_AuthorityW {
-    pub sAuthorityName: *mut SEC_WCHAR,
-}
+STRUCT!{struct SecPkgContext_AuthorityW {
+    sAuthorityName: *mut SEC_WCHAR,
+}}
 pub type PSecPkgContext_AuthorityW = *mut SecPkgContext_AuthorityW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_ProtoInfoA {
-    pub sProtocolName: *mut SEC_CHAR,
-    pub majorVersion: ::c_ulong,
-    pub minorVersion: ::c_ulong,
-}
+STRUCT!{struct SecPkgContext_ProtoInfoA {
+    sProtocolName: *mut SEC_CHAR,
+    majorVersion: ::c_ulong,
+    minorVersion: ::c_ulong,
+}}
 pub type PSecPkgContext_ProtoInfoA = *mut SecPkgContext_ProtoInfoA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_ProtoInfoW {
-    pub sProtocolName: *mut SEC_WCHAR,
-    pub majorVersion: ::c_ulong,
-    pub minorVersion: ::c_ulong,
-}
+STRUCT!{struct SecPkgContext_ProtoInfoW {
+    sProtocolName: *mut SEC_WCHAR,
+    majorVersion: ::c_ulong,
+    minorVersion: ::c_ulong,
+}}
 pub type PSecPkgContext_ProtoInfoW = *mut SecPkgContext_ProtoInfoW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_PasswordExpiry {
-    pub tsPasswordExpires: TimeStamp,
-}
+STRUCT!{struct SecPkgContext_PasswordExpiry {
+    tsPasswordExpires: TimeStamp,
+}}
 pub type PSecPkgContext_PasswordExpiry = *mut SecPkgContext_PasswordExpiry;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_LogoffTime {
-    pub tsLogoffTime: TimeStamp,
-}
+STRUCT!{struct SecPkgContext_LogoffTime {
+    tsLogoffTime: TimeStamp,
+}}
 pub type PSecPkgContext_LogoffTime = *mut SecPkgContext_LogoffTime;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_SessionKey {
-    pub SessionKeyLength: ::c_ulong,
-    pub SessionKey: *mut ::c_uchar,
-}
+STRUCT!{struct SecPkgContext_SessionKey {
+    SessionKeyLength: ::c_ulong,
+    SessionKey: *mut ::c_uchar,
+}}
 pub type PSecPkgContext_SessionKey = *mut SecPkgContext_SessionKey;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_NegoKeys {
-    pub KeyType: ::c_ulong,
-    pub KeyLength: ::c_ushort,
-    pub KeyValue: *mut ::c_uchar,
-    pub VerifyKeyType: ::c_ulong,
-    pub VerifyKeyLength: ::c_ushort,
-    pub VerifyKeyValue: *mut ::c_uchar,
-}
+STRUCT!{struct SecPkgContext_NegoKeys {
+    KeyType: ::c_ulong,
+    KeyLength: ::c_ushort,
+    KeyValue: *mut ::c_uchar,
+    VerifyKeyType: ::c_ulong,
+    VerifyKeyLength: ::c_ushort,
+    VerifyKeyValue: *mut ::c_uchar,
+}}
 pub type PSecPkgContext_NegoKeys = *mut SecPkgContext_NegoKeys;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_PackageInfoW {
-    pub PackageInfo: PSecPkgInfoW,
-}
+STRUCT!{struct SecPkgContext_PackageInfoW {
+    PackageInfo: PSecPkgInfoW,
+}}
 pub type PSecPkgContext_PackageInfoW = *mut SecPkgContext_PackageInfoW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_PackageInfoA {
-    pub PackageInfo: PSecPkgInfoA,
-}
+STRUCT!{struct SecPkgContext_PackageInfoA {
+    PackageInfo: PSecPkgInfoA,
+}}
 pub type PSecPkgContext_PackageInfoA = *mut SecPkgContext_PackageInfoA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_UserFlags {
-    pub UserFlags: ::c_ulong,
-}
+STRUCT!{struct SecPkgContext_UserFlags {
+    UserFlags: ::c_ulong,
+}}
 pub type PSecPkgContext_UserFlags = *mut SecPkgContext_UserFlags;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_Flags {
-    pub Flags: ::c_ulong,
-}
+STRUCT!{struct SecPkgContext_Flags {
+    Flags: ::c_ulong,
+}}
 pub type PSecPkgContext_Flags = *mut SecPkgContext_Flags;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_NegotiationInfoA {
-    pub PackageInfo: PSecPkgInfoA,
-    pub NegotiationState: ::c_ulong,
-}
+STRUCT!{struct SecPkgContext_NegotiationInfoA {
+    PackageInfo: PSecPkgInfoA,
+    NegotiationState: ::c_ulong,
+}}
 pub type PSecPkgContext_NegotiationInfoA = *mut SecPkgContext_NegotiationInfoA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_NegotiationInfoW {
-    pub PackageInfo: PSecPkgInfoW,
-    pub NegotiationState: ::c_ulong,
-}
+STRUCT!{struct SecPkgContext_NegotiationInfoW {
+    PackageInfo: PSecPkgInfoW,
+    NegotiationState: ::c_ulong,
+}}
 pub type PSecPkgContext_NegotiationInfoW = *mut SecPkgContext_NegotiationInfoW;
 pub const SECPKG_NEGOTIATION_COMPLETE: ::c_ulong = 0;
 pub const SECPKG_NEGOTIATION_OPTIMISTIC: ::c_ulong = 1;
 pub const SECPKG_NEGOTIATION_IN_PROGRESS: ::c_ulong = 2;
 pub const SECPKG_NEGOTIATION_DIRECT: ::c_ulong = 3;
 pub const SECPKG_NEGOTIATION_TRY_MULTICRED: ::c_ulong = 4;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_NativeNamesW {
-    pub sClientName: SEC_WCHAR,
-    pub sServerName: SEC_WCHAR,
-}
+STRUCT!{struct SecPkgContext_NativeNamesW {
+    sClientName: SEC_WCHAR,
+    sServerName: SEC_WCHAR,
+}}
 pub type PSecPkgContext_NativeNamesW = *mut SecPkgContext_NativeNamesW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_NativeNamesA {
-    pub sClientName: SEC_CHAR,
-    pub sServerName: SEC_CHAR,
-}
+STRUCT!{struct SecPkgContext_NativeNamesA {
+    sClientName: SEC_CHAR,
+    sServerName: SEC_CHAR,
+}}
 pub type PSecPkgContext_NativeNamesA = *mut SecPkgContext_NativeNamesA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_CredentialNameW {
-    pub CredentialType: ::c_ulong,
-    pub sCredentialName: *mut SEC_WCHAR,
-}
+STRUCT!{struct SecPkgContext_CredentialNameW {
+    CredentialType: ::c_ulong,
+    sCredentialName: *mut SEC_WCHAR,
+}}
 pub type PSecPkgContext_CredentialNameW = *mut SecPkgContext_CredentialNameW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_CredentialNameA {
-    pub CredentialType: ::c_ulong,
-    pub sCredentialName: *mut SEC_CHAR,
-}
+STRUCT!{struct SecPkgContext_CredentialNameA {
+    CredentialType: ::c_ulong,
+    sCredentialName: *mut SEC_CHAR,
+}}
 pub type PSecPkgContext_CredentialNameA = *mut SecPkgContext_CredentialNameA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_AccessToken {
-    pub AccessToken: *mut ::c_void,
-}
+STRUCT!{struct SecPkgContext_AccessToken {
+    AccessToken: *mut ::c_void,
+}}
 pub type PSecPkgContext_AccessToken = *mut SecPkgContext_AccessToken;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_TargetInformation {
-    pub MarshalledTargetInfoLength: ::c_ulong,
-    pub MarshalledTargetInfo: *mut ::c_uchar,
-}
+STRUCT!{struct SecPkgContext_TargetInformation {
+    MarshalledTargetInfoLength: ::c_ulong,
+    MarshalledTargetInfo: *mut ::c_uchar,
+}}
 pub type PSecPkgContext_TargetInformation = *mut SecPkgContext_TargetInformation;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_AuthzID {
-    pub AuthzIDLength: ::c_ulong,
-    pub AuthzID: *mut ::c_char,
-}
+STRUCT!{struct SecPkgContext_AuthzID {
+    AuthzIDLength: ::c_ulong,
+    AuthzID: *mut ::c_char,
+}}
 pub type PSecPkgContext_AuthzID = *mut SecPkgContext_AuthzID;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_Target {
-    pub TargetLength: ::c_ulong,
-    pub Target: *mut ::c_char,
-}
+STRUCT!{struct SecPkgContext_Target {
+    TargetLength: ::c_ulong,
+    Target: *mut ::c_char,
+}}
 pub type PSecPkgContext_Target = *mut SecPkgContext_Target;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_ClientSpecifiedTarget {
-    pub sTargetName: *mut SEC_WCHAR,
-}
+STRUCT!{struct SecPkgContext_ClientSpecifiedTarget {
+    sTargetName: *mut SEC_WCHAR,
+}}
 pub type PSecPkgContext_ClientSpecifiedTarget = *mut SecPkgContext_ClientSpecifiedTarget;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SecPkgContext_Bindings {
-    pub BindingsLength: ::c_ulong,
-    pub Bindings: *mut SEC_CHANNEL_BINDINGS,
-}
+STRUCT!{struct SecPkgContext_Bindings {
+    BindingsLength: ::c_ulong,
+    Bindings: *mut SEC_CHANNEL_BINDINGS,
+}}
 pub type PSecPkgContext_Bindings = *mut SecPkgContext_Bindings;
 #[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
 pub enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS {
@@ -661,73 +608,64 @@ pub enum SecDelegationType {
 }
 pub use self::SecDelegationType::*;
 pub type PSecDelegationType = *mut SecDelegationType;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SEC_WINNT_AUTH_BYTE_VECTOR {
-    pub ByteArrayOffset: ::c_ulong,
-    pub ByteArrayLength: ::c_ushort,
-}
+STRUCT!{struct SEC_WINNT_AUTH_BYTE_VECTOR {
+    ByteArrayOffset: ::c_ulong,
+    ByteArrayLength: ::c_ushort,
+}}
 pub type PSEC_WINNT_AUTH_BYTE_VECTOR = *mut SEC_WINNT_AUTH_BYTE_VECTOR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SEC_WINNT_AUTH_DATA {
-    pub CredType: ::GUID,
-    pub CredData: SEC_WINNT_AUTH_BYTE_VECTOR,
-}
+STRUCT!{struct SEC_WINNT_AUTH_DATA {
+    CredType: ::GUID,
+    CredData: SEC_WINNT_AUTH_BYTE_VECTOR,
+}}
 pub type PSEC_WINNT_AUTH_DATA = *mut SEC_WINNT_AUTH_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SEC_WINNT_AUTH_PACKED_CREDENTIALS {
-    pub cbHeaderLength: ::c_ushort,
-    pub cbStructureLength: ::c_ushort,
-    pub AuthData: SEC_WINNT_AUTH_DATA,
-}
+STRUCT!{struct SEC_WINNT_AUTH_PACKED_CREDENTIALS {
+    cbHeaderLength: ::c_ushort,
+    cbStructureLength: ::c_ushort,
+    AuthData: SEC_WINNT_AUTH_DATA,
+}}
 pub type PSEC_WINNT_AUTH_PACKED_CREDENTIALS = *mut SEC_WINNT_AUTH_PACKED_CREDENTIALS;
 DEFINE_GUID!(SEC_WINNT_AUTH_DATA_TYPE_PASSWORD, 0x28bfc32f, 0x10f6, 0x4738,
     0x98, 0xd1, 0x1a, 0xc0, 0x61, 0xdf, 0x71, 0x6a);
 DEFINE_GUID!(SEC_WINNT_AUTH_DATA_TYPE_CERT, 0x235f69ad, 0x73fb, 0x4dbc,
     0x82, 0x3, 0x6, 0x29, 0xe7, 0x39, 0x33, 0x9b);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SEC_WINNT_AUTH_DATA_PASSWORD {
-    pub UnicodePassword: SEC_WINNT_AUTH_BYTE_VECTOR,
-}
+STRUCT!{struct SEC_WINNT_AUTH_DATA_PASSWORD {
+    UnicodePassword: SEC_WINNT_AUTH_BYTE_VECTOR,
+}}
 pub type PSEC_WINNT_AUTH_DATA_PASSWORD = *mut SEC_WINNT_AUTH_DATA_PASSWORD;
 DEFINE_GUID!(SEC_WINNT_AUTH_DATA_TYPE_CSP_DATA, 0x68fd9879, 0x79c, 0x4dfe,
     0x82, 0x81, 0x57, 0x8a, 0xad, 0xc1, 0xc1, 0x0);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SEC_WINNT_AUTH_CERTIFICATE_DATA {
-    pub cbHeaderLength: ::c_ushort,
-    pub cbStructureLength: ::c_ushort,
-    pub Certificate: SEC_WINNT_AUTH_BYTE_VECTOR,
-}
+STRUCT!{struct SEC_WINNT_AUTH_CERTIFICATE_DATA {
+    cbHeaderLength: ::c_ushort,
+    cbStructureLength: ::c_ushort,
+    Certificate: SEC_WINNT_AUTH_BYTE_VECTOR,
+}}
 pub type PSEC_WINNT_AUTH_CERTIFICATE_DATA = *mut SEC_WINNT_AUTH_CERTIFICATE_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SEC_WINNT_CREDUI_CONTEXT_VECTOR {
-    pub CredUIContextArrayOffset: ::ULONG,
-    pub CredUIContextCount: ::USHORT,
-}
+STRUCT!{struct SEC_WINNT_CREDUI_CONTEXT_VECTOR {
+    CredUIContextArrayOffset: ::ULONG,
+    CredUIContextCount: ::USHORT,
+}}
 pub type PSEC_WINNT_CREDUI_CONTEXT_VECTOR = *mut SEC_WINNT_CREDUI_CONTEXT_VECTOR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SEC_WINNT_AUTH_SHORT_VECTOR {
-    pub ShortArrayOffset: ::ULONG,
-    pub ShortArrayCount: ::USHORT,
-}
+STRUCT!{struct SEC_WINNT_AUTH_SHORT_VECTOR {
+    ShortArrayOffset: ::ULONG,
+    ShortArrayCount: ::USHORT,
+}}
 pub type PSEC_WINNT_AUTH_SHORT_VECTOR = *mut SEC_WINNT_AUTH_SHORT_VECTOR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CREDUIWIN_MARSHALED_CONTEXT {
-    pub StructureType: ::GUID,
-    pub cbHeaderLength: ::USHORT,
-    pub LogonId: ::LUID,
-    pub MarshaledDataType: ::GUID,
-    pub MarshaledDataOffset: ::ULONG,
-    pub MarshaledDataLength: ::USHORT,
-}
+STRUCT!{struct CREDUIWIN_MARSHALED_CONTEXT {
+    StructureType: ::GUID,
+    cbHeaderLength: ::USHORT,
+    LogonId: ::LUID,
+    MarshaledDataType: ::GUID,
+    MarshaledDataOffset: ::ULONG,
+    MarshaledDataLength: ::USHORT,
+}}
 pub type PCREDUIWIN_MARSHALED_CONTEXT = *mut CREDUIWIN_MARSHALED_CONTEXT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SEC_WINNT_CREDUI_CONTEXT {
-    pub cbHeaderLength: ::USHORT,
-    pub CredUIContextHandle: ::HANDLE,
-    pub UIInfo: ::PCREDUI_INFOW,
-    pub dwAuthError: ::ULONG,
-    pub pInputAuthIdentity: PSEC_WINNT_AUTH_IDENTITY_OPAQUE,
-    pub TargetName: ::PUNICODE_STRING,
-}
+STRUCT!{struct SEC_WINNT_CREDUI_CONTEXT {
+    cbHeaderLength: ::USHORT,
+    CredUIContextHandle: ::HANDLE,
+    UIInfo: ::PCREDUI_INFOW,
+    dwAuthError: ::ULONG,
+    pInputAuthIdentity: PSEC_WINNT_AUTH_IDENTITY_OPAQUE,
+    TargetName: ::PUNICODE_STRING,
+}}
 pub type PSEC_WINNT_CREDUI_CONTEXT = *mut SEC_WINNT_CREDUI_CONTEXT;
 pub type PSEC_WINNT_AUTH_IDENTITY_OPAQUE = ::PVOID;

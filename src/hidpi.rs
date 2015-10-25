@@ -7,142 +7,132 @@ pub enum HIDP_REPORT_TYPE {
   HidP_Output,
   HidP_Feature,
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct USAGE_AND_PAGE {
-    pub Usage: ::USAGE,
-    pub UsagePage: ::USAGE,
-}
+STRUCT!{struct USAGE_AND_PAGE {
+    Usage: ::USAGE,
+    UsagePage: ::USAGE,
+}}
 pub type PUSAGE_AND_PAGE = *mut USAGE_AND_PAGE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HIDP_BUTTON_CAPS {
-    pub UsagePage: ::USAGE,
-    pub ReportID: ::UCHAR,
-    pub IsAlias: ::BOOLEAN,
-    pub BitField: ::USHORT,
-    pub LinkCollection: ::USHORT,
-    pub LinkUsage: ::USAGE,
-    pub LinkUsagePage: ::USAGE,
-    pub IsRange: ::BOOLEAN,
-    pub IsStringRange: ::BOOLEAN,
-    pub IsDesignatorRange: ::BOOLEAN,
-    pub IsAbsolute: ::BOOLEAN,
-    pub Reserved: [::ULONG; 10],
-    pub S_un: [u8; 16],
-}
+STRUCT!{struct HIDP_BUTTON_CAPS {
+    UsagePage: ::USAGE,
+    ReportID: ::UCHAR,
+    IsAlias: ::BOOLEAN,
+    BitField: ::USHORT,
+    LinkCollection: ::USHORT,
+    LinkUsage: ::USAGE,
+    LinkUsagePage: ::USAGE,
+    IsRange: ::BOOLEAN,
+    IsStringRange: ::BOOLEAN,
+    IsDesignatorRange: ::BOOLEAN,
+    IsAbsolute: ::BOOLEAN,
+    Reserved: [::ULONG; 10],
+    S_un: [u8; 16],
+}}
 UNION!(HIDP_BUTTON_CAPS, S_un, Range, Range_mut, HIDP_RANGE_STRUCT);
 UNION!(HIDP_BUTTON_CAPS, S_un, NotRange, NotRange_mut, HIDP_NOTRANGE_STRUCT);
 pub type PHIDP_BUTTON_CAPS = *mut HIDP_BUTTON_CAPS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HIDP_RANGE_STRUCT {
-    pub UsageMin: ::USAGE,
-    pub UsageMax: ::USAGE,
-    pub StringMin: ::USHORT,
-    pub StringMax: ::USHORT,
-    pub DesignatorMin: ::USHORT,
-    pub DesignatorMax: ::USHORT,
-    pub DataIndexMin: ::USHORT,
-    pub DataIndexMax: ::USHORT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HIDP_NOTRANGE_STRUCT {
-    pub Usage: ::USAGE,
-    pub Reserved1: ::USAGE,
-    pub StringIndex: ::USHORT,
-    pub Reserved2: ::USHORT,
-    pub DesignatorIndex: ::USHORT,
-    pub Reserved3: ::USHORT,
-    pub DataIndex: ::USHORT,
-    pub Reserved4: ::USHORT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HIDP_VALUE_CAPS {
-    pub UsagePage: ::USAGE,
-    pub ReportID: ::UCHAR,
-    pub IsAlias: ::BOOLEAN,
-    pub BitField: ::USHORT,
-    pub LinkCollection: ::USHORT,
-    pub LinkUsage: ::USAGE,
-    pub LinkUsagePage: ::USAGE,
-    pub IsRange: ::BOOLEAN,
-    pub IsStringRange: ::BOOLEAN,
-    pub IsDesignatorRange: ::BOOLEAN,
-    pub IsAbsolute: ::BOOLEAN,
-    pub HasNull: ::BOOLEAN,
-    pub Reserved: ::UCHAR,
-    pub BitSize: ::USHORT,
-    pub ReportCount: ::USHORT,
-    pub Reserved2: [::USHORT; 5],
-    pub UnitsExp: ::ULONG,
-    pub Units: ::ULONG,
-    pub LogicalMin: ::LONG,
-    pub LogicalMax: ::LONG,
-    pub PhysicalMin: ::LONG,
-    pub PhysicalMax: ::LONG,
-    pub S_un: [u8; 16],
-}
+STRUCT!{struct HIDP_RANGE_STRUCT {
+    UsageMin: ::USAGE,
+    UsageMax: ::USAGE,
+    StringMin: ::USHORT,
+    StringMax: ::USHORT,
+    DesignatorMin: ::USHORT,
+    DesignatorMax: ::USHORT,
+    DataIndexMin: ::USHORT,
+    DataIndexMax: ::USHORT,
+}}
+STRUCT!{struct HIDP_NOTRANGE_STRUCT {
+    Usage: ::USAGE,
+    Reserved1: ::USAGE,
+    StringIndex: ::USHORT,
+    Reserved2: ::USHORT,
+    DesignatorIndex: ::USHORT,
+    Reserved3: ::USHORT,
+    DataIndex: ::USHORT,
+    Reserved4: ::USHORT,
+}}
+STRUCT!{struct HIDP_VALUE_CAPS {
+    UsagePage: ::USAGE,
+    ReportID: ::UCHAR,
+    IsAlias: ::BOOLEAN,
+    BitField: ::USHORT,
+    LinkCollection: ::USHORT,
+    LinkUsage: ::USAGE,
+    LinkUsagePage: ::USAGE,
+    IsRange: ::BOOLEAN,
+    IsStringRange: ::BOOLEAN,
+    IsDesignatorRange: ::BOOLEAN,
+    IsAbsolute: ::BOOLEAN,
+    HasNull: ::BOOLEAN,
+    Reserved: ::UCHAR,
+    BitSize: ::USHORT,
+    ReportCount: ::USHORT,
+    Reserved2: [::USHORT; 5],
+    UnitsExp: ::ULONG,
+    Units: ::ULONG,
+    LogicalMin: ::LONG,
+    LogicalMax: ::LONG,
+    PhysicalMin: ::LONG,
+    PhysicalMax: ::LONG,
+    S_un: [u8; 16],
+}}
 UNION!(HIDP_VALUE_CAPS, S_un, Range, Range_mut, HIDP_RANGE_STRUCT);
 UNION!(HIDP_VALUE_CAPS, S_un, NotRange, NotRange_mut, HIDP_NOTRANGE_STRUCT);
 pub type PHIDP_VALUE_CAPS = *mut HIDP_VALUE_CAPS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HIDP_LINK_COLLECTION_NODE {
-    pub LinkUsage: ::USAGE,
-    pub LinkUsagePage: ::USAGE,
-    pub Parent: ::USHORT,
-    pub NumberOfChildren: ::USHORT,
-    pub NextSibling: ::USHORT,
-    pub FirstChild: ::USHORT,
-    pub bit_fields: ::ULONG,
-    pub UserContext: ::PVOID,
-}
+STRUCT!{struct HIDP_LINK_COLLECTION_NODE {
+    LinkUsage: ::USAGE,
+    LinkUsagePage: ::USAGE,
+    Parent: ::USHORT,
+    NumberOfChildren: ::USHORT,
+    NextSibling: ::USHORT,
+    FirstChild: ::USHORT,
+    bit_fields: ::ULONG,
+    UserContext: ::PVOID,
+}}
 BITFIELD!(HIDP_LINK_COLLECTION_NODE bit_fields: ::ULONG [
     CollectionType set_CollectionType[0..8],
     IsAlias set_IsAlias[8..9],
     Reserved set_Reserved[9..32],
 ]);
 pub type PHIDP_LINK_COLLECTION_NODE = *mut HIDP_LINK_COLLECTION_NODE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HIDP_CAPS {
-    pub Usage: ::USAGE,
-    pub UsagePage: ::USAGE,
-    pub InputReportByteLength: ::USHORT,
-    pub OutputReportByteLength: ::USHORT,
-    pub FeatureReportByteLength: ::USHORT,
-    pub Reserved: [::USHORT; 17],
-    pub NumberLinkCollectionNodes: ::USHORT,
-    pub NumberInputButtonCaps: ::USHORT,
-    pub NumberInputValueCaps: ::USHORT,
-    pub NumberInputDataIndices: ::USHORT,
-    pub NumberOutputButtonCaps: ::USHORT,
-    pub NumberOutputValueCaps: ::USHORT,
-    pub NumberOutputDataIndices: ::USHORT,
-    pub NumberFeatureButtonCaps: ::USHORT,
-    pub NumberFeatureValueCaps: ::USHORT,
-    pub NumberFeatureDataIndices: ::USHORT,
-}
+STRUCT!{struct HIDP_CAPS {
+    Usage: ::USAGE,
+    UsagePage: ::USAGE,
+    InputReportByteLength: ::USHORT,
+    OutputReportByteLength: ::USHORT,
+    FeatureReportByteLength: ::USHORT,
+    Reserved: [::USHORT; 17],
+    NumberLinkCollectionNodes: ::USHORT,
+    NumberInputButtonCaps: ::USHORT,
+    NumberInputValueCaps: ::USHORT,
+    NumberInputDataIndices: ::USHORT,
+    NumberOutputButtonCaps: ::USHORT,
+    NumberOutputValueCaps: ::USHORT,
+    NumberOutputDataIndices: ::USHORT,
+    NumberFeatureButtonCaps: ::USHORT,
+    NumberFeatureValueCaps: ::USHORT,
+    NumberFeatureDataIndices: ::USHORT,
+}}
 pub type PHIDP_CAPS = *mut HIDP_CAPS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HIDP_DATA {
-  pub DataIndex: ::USHORT,
-  pub Reserved: ::USHORT,
-  pub S_un: [u8; 4],
-}
+STRUCT!{struct HIDP_DATA {
+    DataIndex: ::USHORT,
+    Reserved: ::USHORT,
+    S_un: [u8; 4],
+}}
 UNION!(HIDP_DATA, S_un, RawValue, RawValue_mut, ::ULONG);
 UNION!(HIDP_DATA, S_un, On, On_mut, ::BOOLEAN);
 pub type PHIDP_DATA = *mut HIDP_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HIDP_UNKNOWN_TOKEN {
-    pub Token: ::UCHAR,
-    pub Reserved: [::UCHAR; 3],
-    pub BitField: ::ULONG,
-}
+STRUCT!{struct HIDP_UNKNOWN_TOKEN {
+    Token: ::UCHAR,
+    Reserved: [::UCHAR; 3],
+    BitField: ::ULONG,
+}}
 pub type PHIDP_UNKNOWN_TOKEN = *mut HIDP_UNKNOWN_TOKEN;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HIDP_EXTENDED_ATTRIBUTES {
-    pub NumGlobalUnknowns: ::UCHAR,
-    pub Reserved: [::UCHAR; 3],
-    pub GlobalUnknowns: ::PHIDP_UNKNOWN_TOKEN,
-    pub Data: [::ULONG; 1],
-}
+STRUCT!{struct HIDP_EXTENDED_ATTRIBUTES {
+    NumGlobalUnknowns: ::UCHAR,
+    Reserved: [::UCHAR; 3],
+    GlobalUnknowns: ::PHIDP_UNKNOWN_TOKEN,
+    Data: [::ULONG; 1],
+}}
 pub type PHIDP_EXTENDED_ATTRIBUTES = *mut HIDP_EXTENDED_ATTRIBUTES;
 pub const HIDP_STATUS_SUCCESS: ::NTSTATUS = 0x00110000;
 pub const HIDP_STATUS_NULL: ::NTSTATUS = 0x08110001;

@@ -87,34 +87,31 @@ ENUM!{enum DWRITE_INFORMATIONAL_STRING_ID {
     DWRITE_INFORMATIONAL_STRING_DESIGN_SCRIPT_LANGUAGE_TAG,
     DWRITE_INFORMATIONAL_STRING_SUPPORTED_SCRIPT_LANGUAGE_TAG,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_FONT_METRICS {
-    pub designUnitsPerEm: ::UINT16,
-    pub ascent: ::UINT16,
-    pub descent: ::UINT16,
-    pub lineGap: ::INT16,
-    pub capHeight: ::UINT16,
-    pub xHeight: ::UINT16,
-    pub underlinePosition: ::INT16,
-    pub underlineThickness: ::UINT16,
-    pub strikethroughPosition: ::INT16,
-    pub strikethroughThickness: ::UINT16,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_GLYPH_METRICS {
-    pub leftSideBearing: ::INT32,
-    pub advanceWidth: ::UINT32,
-    pub rightSideBearing: ::INT32,
-    pub topSideBearing: ::INT32,
-    pub advanceHeight: ::UINT32,
-    pub bottomSideBearing: ::INT32,
-    pub verticalOriginY: ::INT32,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_GLYPH_OFFSET {
-    pub advanceOffset: ::FLOAT,
-    pub ascenderOffset: ::FLOAT,
-}
+STRUCT!{struct DWRITE_FONT_METRICS {
+    designUnitsPerEm: ::UINT16,
+    ascent: ::UINT16,
+    descent: ::UINT16,
+    lineGap: ::INT16,
+    capHeight: ::UINT16,
+    xHeight: ::UINT16,
+    underlinePosition: ::INT16,
+    underlineThickness: ::UINT16,
+    strikethroughPosition: ::INT16,
+    strikethroughThickness: ::UINT16,
+}}
+STRUCT!{struct DWRITE_GLYPH_METRICS {
+    leftSideBearing: ::INT32,
+    advanceWidth: ::UINT32,
+    rightSideBearing: ::INT32,
+    topSideBearing: ::INT32,
+    advanceHeight: ::UINT32,
+    bottomSideBearing: ::INT32,
+    verticalOriginY: ::INT32,
+}}
+STRUCT!{struct DWRITE_GLYPH_OFFSET {
+    advanceOffset: ::FLOAT,
+    ascenderOffset: ::FLOAT,
+}}
 ENUM!{enum DWRITE_FACTORY_TYPE {
     DWRITE_FACTORY_TYPE_SHARED,
     DWRITE_FACTORY_TYPE_ISOLATED,
@@ -183,15 +180,14 @@ ENUM!{enum DWRITE_RENDERING_MODE {
     DWRITE_RENDERING_MODE_CLEARTYPE_NATURAL = DWRITE_RENDERING_MODE_NATURAL.0,
     DWRITE_RENDERING_MODE_CLEARTYPE_NATURAL_SYMMETRIC = DWRITE_RENDERING_MODE_NATURAL_SYMMETRIC.0,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_MATRIX {
-    pub m11: ::FLOAT,
-    pub m12: ::FLOAT,
-    pub m21: ::FLOAT,
-    pub m22: ::FLOAT,
-    pub dx: ::FLOAT,
-    pub dy: ::FLOAT,
-}
+STRUCT!{struct DWRITE_MATRIX {
+    m11: ::FLOAT,
+    m12: ::FLOAT,
+    m21: ::FLOAT,
+    m22: ::FLOAT,
+    dx: ::FLOAT,
+    dy: ::FLOAT,
+}}
 RIDL!{interface IDWriteRenderingParams(IDWriteRenderingParamsVtbl): IUnknown(IUnknownVtbl) {
     fn GetGamma(&mut self) -> ::FLOAT,
     fn GetEnhancedContrast(&mut self) -> ::FLOAT,
@@ -436,27 +432,23 @@ ENUM!{enum DWRITE_FONT_FEATURE_TAG {
     DWRITE_FONT_FEATURE_TAG_VERTICAL_ALTERNATES_AND_ROTATION = 0x32747276, // 'vrt2'
     DWRITE_FONT_FEATURE_TAG_SLASHED_ZERO = 0x6f72657a, // 'zero'
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_TEXT_RANGE {
-    pub startPosition: ::UINT32,
-    pub length: ::UINT32,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_FONT_FEATURE {
-    pub nameTag: DWRITE_FONT_FEATURE_TAG,
-    pub parameter: ::UINT32,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_TYPOGRAPHIC_FEATURES {
-    pub features: *mut DWRITE_FONT_FEATURE,
-    pub featureCount: ::UINT32,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_TRIMMING {
-    pub granularity: DWRITE_TRIMMING_GRANULARITY,
-    pub delimiter: ::UINT32,
-    pub delimiterCount: ::UINT32,
-}
+STRUCT!{struct DWRITE_TEXT_RANGE {
+    startPosition: ::UINT32,
+    length: ::UINT32,
+}}
+STRUCT!{struct DWRITE_FONT_FEATURE {
+    nameTag: DWRITE_FONT_FEATURE_TAG,
+    parameter: ::UINT32,
+}}
+STRUCT!{struct DWRITE_TYPOGRAPHIC_FEATURES {
+    features: *mut DWRITE_FONT_FEATURE,
+    featureCount: ::UINT32,
+}}
+STRUCT!{struct DWRITE_TRIMMING {
+    granularity: DWRITE_TRIMMING_GRANULARITY,
+    delimiter: ::UINT32,
+    delimiterCount: ::UINT32,
+}}
 RIDL!{interface IDWriteTextFormat(IDWriteTextFormatVtbl): IUnknown(IUnknownVtbl) {
     fn SetTextAlignment(&mut self, textAlignment: DWRITE_TEXT_ALIGNMENT) -> ::HRESULT,
     fn SetParagraphAlignment(
@@ -508,21 +500,19 @@ FLAGS!{enum DWRITE_SCRIPT_SHAPES {
     DWRITE_SCRIPT_SHAPES_DEFAULT = 0,
     DWRITE_SCRIPT_SHAPES_NO_VISUAL = 1,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_SCRIPT_ANALYSIS {
-    pub script: ::UINT16,
-    pub shapes: DWRITE_SCRIPT_SHAPES,
-}
+STRUCT!{struct DWRITE_SCRIPT_ANALYSIS {
+    script: ::UINT16,
+    shapes: DWRITE_SCRIPT_SHAPES,
+}}
 ENUM!{enum DWRITE_BREAK_CONDITION {
     DWRITE_BREAK_CONDITION_NEUTRAL,
     DWRITE_BREAK_CONDITION_CAN_BREAK,
     DWRITE_BREAK_CONDITION_MAY_NOT_BREAK,
     DWRITE_BREAK_CONDITION_MUST_BREAK,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_LINE_BREAKPOINT {
+STRUCT!{struct DWRITE_LINE_BREAKPOINT {
     bit_fields: ::UINT8,
-}
+}}
 BITFIELD!{DWRITE_LINE_BREAKPOINT bit_fields: ::UINT8 [
     breakConditionBefore set_breakConditionBefore[0..2],
     breakConditionAfter set_breakConditionAfter[2..4],
@@ -539,18 +529,16 @@ ENUM!{enum DWRITE_NUMBER_SUBSTITUTION_METHOD {
 }}
 RIDL!{interface IDWriteNumberSubstitution(IDWriteNumberSubstitutionVtbl): IUnknown(IUnknownVtbl) {
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_SHAPING_TEXT_PROPERTIES {
+STRUCT!{struct DWRITE_SHAPING_TEXT_PROPERTIES {
     bit_fields: ::UINT16,
-}
+}}
 BITFIELD!{DWRITE_SHAPING_TEXT_PROPERTIES bit_fields: ::UINT16 [
     isShapedAlone set_isShapedAlone[0..1],
     reserved set_reserved[1..16],
 ]}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_SHAPING_GLYPH_PROPERTIES {
+STRUCT!{struct DWRITE_SHAPING_GLYPH_PROPERTIES {
     bit_fields: ::UINT16,
-}
+}}
 BITFIELD!{DWRITE_SHAPING_GLYPH_PROPERTIES bit_fields: ::UINT16 [
     justification set_justification[0..4],
     isClusterStart set_isClusterStart[4..5],
@@ -644,61 +632,55 @@ RIDL!{interface IDWriteTextAnalyzer(IDWriteTextAnalyzerVtbl): IUnknown(IUnknownV
         glyphOffsets: *mut DWRITE_GLYPH_OFFSET
     ) -> ::HRESULT
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_GLYPH_RUN {
-    pub fontFace: *mut IDWriteFontFace,
-    pub fontEmSize: ::FLOAT,
-    pub glyphCount: ::UINT32,
-    pub glyphIndices: *const ::UINT16,
-    pub glyphAdvances: *const ::FLOAT,
-    pub glyphOffsets: *const DWRITE_GLYPH_OFFSET,
-    pub isSideways: ::BOOL,
-    pub bidiLevel: ::UINT32
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_GLYPH_RUN_DESCRIPTION {
-    pub localeName: *const ::WCHAR,
-    pub string: *const ::WCHAR,
-    pub stringLength: ::UINT32,
-    pub clusterMap: *const ::UINT16,
-    pub textPosition: ::UINT32,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_UNDERLINE {
-    pub width: ::FLOAT,
-    pub thickness: ::FLOAT,
-    pub offset: ::FLOAT,
-    pub runHeight: ::FLOAT,
-    pub readingDirection: DWRITE_READING_DIRECTION,
-    pub flowDirection: DWRITE_FLOW_DIRECTION,
-    pub localeName: *const ::WCHAR,
-    pub measuringMode: ::DWRITE_MEASURING_MODE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_STRIKETHROUGH {
-    pub width: ::FLOAT,
-    pub thickness: ::FLOAT,
-    pub offset: ::FLOAT,
-    pub readingDirection: DWRITE_READING_DIRECTION,
-    pub flowDirection: DWRITE_FLOW_DIRECTION,
-    pub localeName: *const ::WCHAR,
-    pub measuringMode: ::DWRITE_MEASURING_MODE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_LINE_METRICS {
-    pub length: ::UINT32,
-    pub trailingWhitespaceLength: ::UINT32,
-    pub newlineLength: ::UINT32,
-    pub height: ::FLOAT,
-    pub baseline: ::FLOAT,
-    pub isTrimmed: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_CLUSTER_METRICS {
-    pub width: ::FLOAT,
-    pub length: ::UINT16,
-    pub bit_fields: ::UINT16,
-}
+STRUCT!{struct DWRITE_GLYPH_RUN {
+    fontFace: *mut IDWriteFontFace,
+    fontEmSize: ::FLOAT,
+    glyphCount: ::UINT32,
+    glyphIndices: *const ::UINT16,
+    glyphAdvances: *const ::FLOAT,
+    glyphOffsets: *const DWRITE_GLYPH_OFFSET,
+    isSideways: ::BOOL,
+    bidiLevel: ::UINT32,
+}}
+STRUCT!{struct DWRITE_GLYPH_RUN_DESCRIPTION {
+    localeName: *const ::WCHAR,
+    string: *const ::WCHAR,
+    stringLength: ::UINT32,
+    clusterMap: *const ::UINT16,
+    textPosition: ::UINT32,
+}}
+STRUCT!{struct DWRITE_UNDERLINE {
+    width: ::FLOAT,
+    thickness: ::FLOAT,
+    offset: ::FLOAT,
+    runHeight: ::FLOAT,
+    readingDirection: DWRITE_READING_DIRECTION,
+    flowDirection: DWRITE_FLOW_DIRECTION,
+    localeName: *const ::WCHAR,
+    measuringMode: ::DWRITE_MEASURING_MODE,
+}}
+STRUCT!{struct DWRITE_STRIKETHROUGH {
+    width: ::FLOAT,
+    thickness: ::FLOAT,
+    offset: ::FLOAT,
+    readingDirection: DWRITE_READING_DIRECTION,
+    flowDirection: DWRITE_FLOW_DIRECTION,
+    localeName: *const ::WCHAR,
+    measuringMode: ::DWRITE_MEASURING_MODE,
+}}
+STRUCT!{struct DWRITE_LINE_METRICS {
+    length: ::UINT32,
+    trailingWhitespaceLength: ::UINT32,
+    newlineLength: ::UINT32,
+    height: ::FLOAT,
+    baseline: ::FLOAT,
+    isTrimmed: ::BOOL,
+}}
+STRUCT!{struct DWRITE_CLUSTER_METRICS {
+    width: ::FLOAT,
+    length: ::UINT16,
+    bit_fields: ::UINT16,
+}}
 BITFIELD!{DWRITE_CLUSTER_METRICS bit_fields: ::UINT16 [
     canWrapLineAfter set_canWrapLineAfter[0..1],
     isWhitespace set_isWhitespace[1..2],
@@ -707,44 +689,40 @@ BITFIELD!{DWRITE_CLUSTER_METRICS bit_fields: ::UINT16 [
     isRightToLeft set_isRightToLeft[4..5],
     padding set_padding[5..16],
 ]}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_TEXT_METRICS {
-    pub left: ::FLOAT,
-    pub top: ::FLOAT,
-    pub width: ::FLOAT,
-    pub widthIncludingTrailingWhitespace: ::FLOAT,
-    pub height: ::FLOAT,
-    pub layoutWidth: ::FLOAT,
-    pub layoutHeight: ::FLOAT,
-    pub maxBidiReorderingDepth: ::UINT32,
-    pub lineCount: ::UINT32,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_INLINE_OBJECT_METRICS {
-    pub width: ::FLOAT,
-    pub height: ::FLOAT,
-    pub baseline: ::FLOAT,
-    pub supportsSideways: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_OVERHANG_METRICS {
-    pub left: ::FLOAT,
-    pub top: ::FLOAT,
-    pub right: ::FLOAT,
-    pub bottom: ::FLOAT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DWRITE_HIT_TEST_METRICS {
-    pub textPosition: ::UINT32,
-    pub length: ::UINT32,
-    pub left: ::FLOAT,
-    pub top: ::FLOAT,
-    pub width: ::FLOAT,
-    pub height: ::FLOAT,
-    pub bidiLevel: ::UINT32,
-    pub isText: ::BOOL,
-    pub isTrimmed: ::BOOL,
-}
+STRUCT!{struct DWRITE_TEXT_METRICS {
+    left: ::FLOAT,
+    top: ::FLOAT,
+    width: ::FLOAT,
+    widthIncludingTrailingWhitespace: ::FLOAT,
+    height: ::FLOAT,
+    layoutWidth: ::FLOAT,
+    layoutHeight: ::FLOAT,
+    maxBidiReorderingDepth: ::UINT32,
+    lineCount: ::UINT32,
+}}
+STRUCT!{struct DWRITE_INLINE_OBJECT_METRICS {
+    width: ::FLOAT,
+    height: ::FLOAT,
+    baseline: ::FLOAT,
+    supportsSideways: ::BOOL,
+}}
+STRUCT!{struct DWRITE_OVERHANG_METRICS {
+    left: ::FLOAT,
+    top: ::FLOAT,
+    right: ::FLOAT,
+    bottom: ::FLOAT,
+}}
+STRUCT!{struct DWRITE_HIT_TEST_METRICS {
+    textPosition: ::UINT32,
+    length: ::UINT32,
+    left: ::FLOAT,
+    top: ::FLOAT,
+    width: ::FLOAT,
+    height: ::FLOAT,
+    bidiLevel: ::UINT32,
+    isText: ::BOOL,
+    isTrimmed: ::BOOL,
+}}
 RIDL!{interface IDWriteInlineObject(IDWriteInlineObjectVtbl): IUnknown(IUnknownVtbl) {
     fn Draw(
         &mut self, clientDrawingContext: *mut ::c_void, renderer: *mut IDWriteTextRenderer,

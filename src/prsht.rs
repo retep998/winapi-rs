@@ -182,11 +182,10 @@ pub type LPFNADDPROPSHEETPAGE = Option<unsafe extern "system" fn(
 pub type LPFNADDPROPSHEETPAGES = Option<unsafe extern "system" fn(
     ::LPVOID, LPFNADDPROPSHEETPAGE, ::LPARAM,
 ) -> ::BOOL>;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PSHNOTIFY {
-    pub hdr: ::NMHDR,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct PSHNOTIFY {
+    hdr: ::NMHDR,
+    lParam: ::LPARAM,
+}}
 pub type LPPSHNOTIFY = *mut PSHNOTIFY;
 pub const PSN_FIRST: ::UINT = (0 - 200);
 pub const PSN_LAST: ::UINT = (0 - 299);

@@ -9,29 +9,27 @@ pub const TH32CS_SNAPMODULE32: ::DWORD = 0x00000010;
 pub const TH32CS_SNAPALL: ::DWORD =
     (TH32CS_SNAPHEAPLIST | TH32CS_SNAPPROCESS | TH32CS_SNAPTHREAD | TH32CS_SNAPMODULE);
 pub const TH32CS_INHERIT: ::DWORD = 0x80000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HEAPLIST32 {
-    pub dwSize: ::SIZE_T,
-    pub th32ProcessID: ::DWORD,
-    pub th32HeapID: :: ULONG_PTR,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct HEAPLIST32 {
+    dwSize: ::SIZE_T,
+    th32ProcessID: ::DWORD,
+    th32HeapID: :: ULONG_PTR,
+    dwFlags: ::DWORD,
+}}
 pub type PHEAPLIST32 = *mut HEAPLIST32;
 pub type LPHEAPLIST32 = *mut HEAPLIST32;
 pub const HF32_DEFAULT: ::DWORD = 1;
 pub const HF32_SHARED: ::DWORD = 2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HEAPENTRY32 {
-    pub dwSize: ::SIZE_T,
-    pub hHandle: ::HANDLE,
-    pub dwAddress: ::ULONG_PTR,
-    pub dwBlockSize: ::SIZE_T,
-    pub dwFlags: ::DWORD,
-    pub dwLockCount: ::DWORD,
-    pub dwResvd: ::DWORD,
-    pub th32ProcessID: ::DWORD,
-    pub th32HeapID: ::ULONG_PTR,
-}
+STRUCT!{struct HEAPENTRY32 {
+    dwSize: ::SIZE_T,
+    hHandle: ::HANDLE,
+    dwAddress: ::ULONG_PTR,
+    dwBlockSize: ::SIZE_T,
+    dwFlags: ::DWORD,
+    dwLockCount: ::DWORD,
+    dwResvd: ::DWORD,
+    th32ProcessID: ::DWORD,
+    th32HeapID: ::ULONG_PTR,
+}}
 pub type PHEAPENTRY32 = *mut HEAPENTRY32;
 pub type LPHEAPENTRY32 = *mut HEAPENTRY32;
 pub const LF32_FIXED: ::DWORD = 0x00000001;
@@ -69,16 +67,15 @@ pub struct PROCESSENTRY32 {
 impl Clone for PROCESSENTRY32{ fn clone(&self) -> PROCESSENTRY32 { *self } }
 pub type PPROCESSENTRY32 = *mut PROCESSENTRY32;
 pub type LPPROCESSENTRY32 = *mut PROCESSENTRY32;
-#[repr(C)] #[derive(Copy, Clone, Debug)]
-pub struct THREADENTRY32 {
-    pub dwSize: ::DWORD,
-    pub cntUsage: ::DWORD,
-    pub th32ThreadID: ::DWORD,
-    pub th32OwnerProcessID: ::DWORD,
-    pub tpBasePri: ::LONG,
-    pub tpDeltaPri: ::LONG,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct THREADENTRY32 {
+    dwSize: ::DWORD,
+    cntUsage: ::DWORD,
+    th32ThreadID: ::DWORD,
+    th32OwnerProcessID: ::DWORD,
+    tpBasePri: ::LONG,
+    tpDeltaPri: ::LONG,
+    dwFlags: ::DWORD,
+}}
 pub type PTHREADENTRY32 = *mut THREADENTRY32;
 pub type LPTHREADENTRY32 = *mut THREADENTRY32;
 #[repr(C)] #[derive(Copy)]

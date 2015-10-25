@@ -12,20 +12,19 @@ interface IMalloc(IMallocVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 pub type LPMALLOC = *mut IMalloc;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct STATSTG {
-    pub pwcsName: ::LPOLESTR,
-    pub type_: ::DWORD,
-    pub cbSize: ::ULARGE_INTEGER,
-    pub mtime: ::FILETIME,
-    pub ctime: ::FILETIME,
-    pub atime: ::FILETIME,
-    pub grfMode: ::DWORD,
-    pub grfLocksSupported: ::DWORD,
-    pub clsid: ::CLSID,
-    pub grfStateBits: ::DWORD,
-    pub reserved: ::DWORD,
-}
+STRUCT!{struct STATSTG {
+    pwcsName: ::LPOLESTR,
+    type_: ::DWORD,
+    cbSize: ::ULARGE_INTEGER,
+    mtime: ::FILETIME,
+    ctime: ::FILETIME,
+    atime: ::FILETIME,
+    grfMode: ::DWORD,
+    grfLocksSupported: ::DWORD,
+    clsid: ::CLSID,
+    grfStateBits: ::DWORD,
+    reserved: ::DWORD,
+}}
 //1945
 pub type IEnumString = ::IUnknown; // TODO
 //2075

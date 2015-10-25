@@ -3,42 +3,35 @@
 //! Mappings for the contents of OAIdl.h
 pub type wireBRECORD = *mut _wireBRECORD;
 pub type wireVARIANT = *mut _wireVARIANT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SAFEARRAYBOUND {
-    pub cElements: ::ULONG,
-    pub lLbound: ::LONG,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SAFEARR_BSTR {
-    pub Size: ::ULONG,
-    pub aBstr: *mut ::wireBSTR,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SAFEARR_UNKNOWN {
-    pub Size: ::ULONG,
-    pub apUnknown: *mut *mut ::IUnknown,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SAFEARR_DISPATCH {
-    pub Size: ::ULONG,
-    pub apDispatch: *mut *mut IDispatch,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SAFEARR_VARIANT {
-    pub Size: ::ULONG,
-    pub aVariant: *mut wireVARIANT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SAFEARR_BRECORD {
-    pub Size: ::ULONG,
-    pub aRecord: *mut wireBRECORD,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SAFEARR_HAVEIID {
-    pub Size: ::ULONG,
-    pub apUnknown: *mut *mut ::IUnknown,
-    pub iid: ::IID,
-}
+STRUCT!{struct SAFEARRAYBOUND {
+    cElements: ::ULONG,
+    lLbound: ::LONG,
+}}
+STRUCT!{struct SAFEARR_BSTR {
+    Size: ::ULONG,
+    aBstr: *mut ::wireBSTR,
+}}
+STRUCT!{struct SAFEARR_UNKNOWN {
+    Size: ::ULONG,
+    apUnknown: *mut *mut ::IUnknown,
+}}
+STRUCT!{struct SAFEARR_DISPATCH {
+    Size: ::ULONG,
+    apDispatch: *mut *mut IDispatch,
+}}
+STRUCT!{struct SAFEARR_VARIANT {
+    Size: ::ULONG,
+    aVariant: *mut wireVARIANT,
+}}
+STRUCT!{struct SAFEARR_BRECORD {
+    Size: ::ULONG,
+    aRecord: *mut wireBRECORD,
+}}
+STRUCT!{struct SAFEARR_HAVEIID {
+    Size: ::ULONG,
+    apUnknown: *mut *mut ::IUnknown,
+    iid: ::IID,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum SF_TYPE {
     SF_ERROR = ::VT_ERROR as i32,
@@ -54,23 +47,20 @@ pub enum SF_TYPE {
     SF_HAVEIID = ::VT_UNKNOWN as i32 | ::VT_RESERVED as i32
 }
 pub use self::SF_TYPE::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SAFEARRAYUNION {
-    pub sfType: ::ULONG,
-    pub u: __MIDL_IOleAutomationTypes_0001,
-}
+STRUCT!{struct SAFEARRAYUNION {
+    sfType: ::ULONG,
+    u: __MIDL_IOleAutomationTypes_0001,
+}}
 #[cfg(target_arch = "x86_64")]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct __MIDL_IOleAutomationTypes_0001 {
-    pub data0: u32,
-    pub data1: [u32; 6],
-}
+STRUCT!{struct __MIDL_IOleAutomationTypes_0001 {
+    data0: u32,
+    data1: [u32; 6],
+}}
 #[cfg(target_arch = "x86")]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct __MIDL_IOleAutomationTypes_0001 {
-    pub data0: u32,
-    pub data1: [u32; 5],
-}
+STRUCT!{struct __MIDL_IOleAutomationTypes_0001 {
+    data0: u32,
+    data1: [u32; 5],
+}}
 UNION!(__MIDL_IOleAutomationTypes_0001, data0, BstrStr, BstrStr_mut, SAFEARR_BSTR);
 UNION!(__MIDL_IOleAutomationTypes_0001, data0, UnknownStr, UnknownStr_mut, SAFEARR_UNKNOWN);
 UNION!(__MIDL_IOleAutomationTypes_0001, data0, DispatchStr, DispatchStr_mut, SAFEARR_DISPATCH);
@@ -81,26 +71,24 @@ UNION!(__MIDL_IOleAutomationTypes_0001, data0, ByteStr, ByteStr_mut, ::BYTE_SIZE
 UNION!(__MIDL_IOleAutomationTypes_0001, data0, WordStr, WordStr_mut, ::WORD_SIZEDARR);
 UNION!(__MIDL_IOleAutomationTypes_0001, data0, LongStr, LongStr_mut, ::DWORD_SIZEDARR);
 UNION!(__MIDL_IOleAutomationTypes_0001, data0, HyperStr, HyperStr_mut, ::HYPER_SIZEDARR);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct _wireSAFEARRAY {
-    pub cDims: ::USHORT,
-    pub fFeatures: ::USHORT,
-    pub cbElements: ::ULONG,
-    pub cLocks: ::ULONG,
-    pub uArrayStructs: SAFEARRAYUNION,
-    pub rgsaBound: [SAFEARRAYBOUND; 1],
-}
+STRUCT!{struct _wireSAFEARRAY {
+    cDims: ::USHORT,
+    fFeatures: ::USHORT,
+    cbElements: ::ULONG,
+    cLocks: ::ULONG,
+    uArrayStructs: SAFEARRAYUNION,
+    rgsaBound: [SAFEARRAYBOUND; 1],
+}}
 pub type wireSAFEARRAY = *mut _wireSAFEARRAY;
 pub type wirePSAFEARRAY = *mut wireSAFEARRAY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SAFEARRAY {
-    pub cDims: ::USHORT,
-    pub fFeatures: ::USHORT,
-    pub cbElements: ::ULONG,
-    pub cLocks: ::ULONG,
-    pub pvData: ::PVOID,
-    pub rgsabound: [SAFEARRAYBOUND; 1],
-}
+STRUCT!{struct SAFEARRAY {
+    cDims: ::USHORT,
+    fFeatures: ::USHORT,
+    cbElements: ::ULONG,
+    cLocks: ::ULONG,
+    pvData: ::PVOID,
+    rgsabound: [SAFEARRAYBOUND; 1],
+}}
 pub type LPSAFEARRAY = *mut SAFEARRAY;
 pub const FADF_AUTO: ::DWORD = 0x1;
 pub const FADF_STATIC: ::DWORD = 0x2;
@@ -115,19 +103,17 @@ pub const FADF_DISPATCH: ::DWORD = 0x400;
 pub const FADF_VARIANT: ::DWORD = 0x800;
 pub const FADF_RESERVED: ::DWORD = 0xf008;
 #[cfg(target_arch = "x86_64")]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct VARIANT {
-    pub data0: u64,
-    pub data1: u64,
-    pub data2: u64,
-}
+STRUCT!{struct VARIANT {
+    data0: u64,
+    data1: u64,
+    data2: u64,
+}}
 #[cfg(target_arch = "x86")]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct VARIANT {
-    pub data0: u64,
-    pub data1: u32,
-    pub data2: u32,
-}
+STRUCT!{struct VARIANT {
+    data0: u64,
+    data1: u32,
+    data2: u32,
+}}
 UNION!(VARIANT, data0, vt, vt_mut, ::VARTYPE);
 UNION!(VARIANT, data1, llVal, llVal_mut, ::LONGLONG);
 UNION!(VARIANT, data1, lVal, lVal_mut, ::LONG);
@@ -179,15 +165,13 @@ pub type LPVARIANT = *mut VARIANT;
 pub type VARIANTARG = VARIANT;
 pub type LPVARIANTARG = *mut VARIANT;
 pub type REFVARIANT = *const VARIANT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct _wireBRECORD {
+STRUCT!{struct _wireBRECORD {
     fFlags: ::ULONG,
     clSize: ::ULONG,
     pRecInfo: *mut IRecordInfo,
     pRecord: *mut ::BYTE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct _wireVARIANT {
+}}
+STRUCT!{struct _wireVARIANT {
     clSize: ::DWORD,
     rpcReserved: ::DWORD,
     vt: ::USHORT,
@@ -196,7 +180,7 @@ pub struct _wireVARIANT {
     wReserved3: ::USHORT,
     data0: u64,
     data1: u64,
-}
+}}
 UNION!(_wireVARIANT, data0, llVal, llVal_mut, ::LONGLONG);
 UNION!(_wireVARIANT, data0, lVal, lVal_mut, ::LONG);
 UNION!(_wireVARIANT, data0, bVal, bVal_mut, ::BYTE);
@@ -258,37 +242,32 @@ pub enum TYPEKIND {
 }
 pub use self::TYPEKIND::*;
 #[cfg(target_arch = "x86_64")]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TYPEDESC {
-    pub data: u64,
-    pub vt: ::VARTYPE,
-}
+STRUCT!{struct TYPEDESC {
+    data: u64,
+    vt: ::VARTYPE,
+}}
 #[cfg(target_arch = "x86")]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TYPEDESC {
-    pub data: u32,
-    pub vt: ::VARTYPE,
-}
+STRUCT!{struct TYPEDESC {
+    data: u32,
+    vt: ::VARTYPE,
+}}
 UNION!(TYPEDESC, data, lptdesc, lptdesc_mut, *mut TYPEDESC);
 UNION!(TYPEDESC, data, lpadesc, lpadesc_mut, *mut ARRAYDESC);
 UNION!(TYPEDESC, data, hreftype, hreftype_mut, HREFTYPE);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ARRAYDESC {
-    pub tdescElem: TYPEDESC,
-    pub cDims: ::USHORT,
-    pub rgbounds: [SAFEARRAYBOUND; 1],
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PARAMDESCEX {
-    pub cBytes: ::ULONG,
-    pub varDefaultValue: VARIANTARG,
-}
+STRUCT!{struct ARRAYDESC {
+    tdescElem: TYPEDESC,
+    cDims: ::USHORT,
+    rgbounds: [SAFEARRAYBOUND; 1],
+}}
+STRUCT!{struct PARAMDESCEX {
+    cBytes: ::ULONG,
+    varDefaultValue: VARIANTARG,
+}}
 pub type LPPARAMDESCEX = *mut PARAMDESCEX;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PARAMDESC {
-    pub pparamdescex: LPPARAMDESCEX,
-    pub wParamFlags: ::USHORT,
-}
+STRUCT!{struct PARAMDESC {
+    pparamdescex: LPPARAMDESCEX,
+    wParamFlags: ::USHORT,
+}}
 pub type LPPARAMDESC = *mut PARAMDESC;
 pub const PARAMFLAG_NONE: ::DWORD = 0;
 pub const PARAMFLAG_FIN: ::DWORD = 0x1;
@@ -298,53 +277,49 @@ pub const PARAMFLAG_FRETVAL: ::DWORD = 0x8;
 pub const PARAMFLAG_FOPT: ::DWORD = 0x10;
 pub const PARAMFLAG_FHASDEFAULT: ::DWORD = 0x20;
 pub const PARAMFLAG_FHASCUSTDATA: ::DWORD = 0x40;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDLDESC {
-    pub dwReserved: ::ULONG_PTR,
-    pub wIDLFlags: ::USHORT,
-}
+STRUCT!{struct IDLDESC {
+    dwReserved: ::ULONG_PTR,
+    wIDLFlags: ::USHORT,
+}}
 pub type LPIDLDESC = *mut IDLDESC;
 pub const IDLFLAG_NONE: ::DWORD = PARAMFLAG_NONE;
 pub const IDLFLAG_FIN: ::DWORD = PARAMFLAG_FIN;
 pub const IDLFLAG_FOUT: ::DWORD = PARAMFLAG_FOUT;
 pub const IDLFLAG_FLCID: ::DWORD = PARAMFLAG_FLCID;
 pub const IDLFLAG_FRETVAL: ::DWORD = PARAMFLAG_FRETVAL;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ELEMDESC {
-    pub tdesc: TYPEDESC,
-    pub idldesc: IDLDESC,
-}
+STRUCT!{struct ELEMDESC {
+    tdesc: TYPEDESC,
+    idldesc: IDLDESC,
+}}
 UNION!(ELEMDESC, idldesc, paramdesc, paramdesc_mut, PARAMDESC);
 pub type LPELEMDESC = *mut ELEMDESC;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TYPEATTR {
-    pub guid: ::GUID,
-    pub lcid: ::LCID,
-    pub dwReserved: ::DWORD,
-    pub memidConstructor: ::MEMBERID,
-    pub memidDestructor: ::MEMBERID,
-    pub lpstrSchema: ::LPOLESTR,
-    pub cbSizeInstance: ::ULONG,
-    pub typekind: ::TYPEKIND,
-    pub cFuncs: ::WORD,
-    pub cVars: ::WORD,
-    pub cImplTypes: ::WORD,
-    pub cbSizeVft: ::WORD,
-    pub cbAlignment: ::WORD,
-    pub wTypeFlags: ::WORD,
-    pub wMajorVerNum: ::WORD,
-    pub wMinorVerNum: ::WORD,
-    pub tdescAlias: ::TYPEDESC,
-    pub idldescType: ::IDLDESC,
-}
+STRUCT!{struct TYPEATTR {
+    guid: ::GUID,
+    lcid: ::LCID,
+    dwReserved: ::DWORD,
+    memidConstructor: ::MEMBERID,
+    memidDestructor: ::MEMBERID,
+    lpstrSchema: ::LPOLESTR,
+    cbSizeInstance: ::ULONG,
+    typekind: ::TYPEKIND,
+    cFuncs: ::WORD,
+    cVars: ::WORD,
+    cImplTypes: ::WORD,
+    cbSizeVft: ::WORD,
+    cbAlignment: ::WORD,
+    wTypeFlags: ::WORD,
+    wMajorVerNum: ::WORD,
+    wMinorVerNum: ::WORD,
+    tdescAlias: ::TYPEDESC,
+    idldescType: ::IDLDESC,
+}}
 pub type LPTYPEATTR = *mut TYPEATTR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DISPPARAMS {
-    pub rgvarg: *mut VARIANTARG,
-    pub rgdispidNamedArgs: *mut DISPID,
-    pub cArgs: ::UINT,
-    pub cNamedArgs: ::UINT,
-}
+STRUCT!{struct DISPPARAMS {
+    rgvarg: *mut VARIANTARG,
+    rgdispidNamedArgs: *mut DISPID,
+    cArgs: ::UINT,
+    cNamedArgs: ::UINT,
+}}
 #[repr(C)] #[derive(Copy)]
 pub struct EXCEPINFO {
     pub wCode: ::WORD,
@@ -394,21 +369,20 @@ pub enum INVOKEKIND {
     INVOKE_PROPERTYPUTREF = 8,
 }
 pub use self::INVOKEKIND::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FUNCDESC {
-    pub memid: ::MEMBERID,
-    pub lprgscode: *mut ::SCODE,
-    pub lprgelemdescParam: *mut ::ELEMDESC,
-    pub funckind: ::FUNCKIND,
-    pub invkind: ::INVOKEKIND,
-    pub callconv: ::CALLCONV,
-    pub cParams: ::SHORT,
-    pub cParamsOpt: ::SHORT,
-    pub oVft: ::SHORT,
-    pub cScodes: ::SHORT,
-    pub elemdescFunc: ::ELEMDESC,
-    pub wFuncFlags: ::WORD,
-}
+STRUCT!{struct FUNCDESC {
+    memid: ::MEMBERID,
+    lprgscode: *mut ::SCODE,
+    lprgelemdescParam: *mut ::ELEMDESC,
+    funckind: ::FUNCKIND,
+    invkind: ::INVOKEKIND,
+    callconv: ::CALLCONV,
+    cParams: ::SHORT,
+    cParamsOpt: ::SHORT,
+    oVft: ::SHORT,
+    cScodes: ::SHORT,
+    elemdescFunc: ::ELEMDESC,
+    wFuncFlags: ::WORD,
+}}
 pub type LPFUNCDESC = *mut FUNCDESC;
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum VARKIND {
@@ -422,15 +396,14 @@ pub const IMPLTYPEFLAG_FDEFAULT: ::DWORD = 0x1;
 pub const IMPLTYPEFLAG_FSOURCE: ::DWORD = 0x2;
 pub const IMPLTYPEFLAG_FRESTRICTED: ::DWORD = 0x4;
 pub const IMPLTYPEFLAG_FDEFAULTVTABLE: ::DWORD = 0x8;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct VARDESC {
-    pub memid: MEMBERID,
-    pub lpstrSchema: ::LPOLESTR,
-    pub lpvarValue: *mut VARIANT,
-    pub elemdescVar: ::ELEMDESC,
-    pub wVarFlags: ::WORD,
-    pub varkind: VARKIND,
-}
+STRUCT!{struct VARDESC {
+    memid: MEMBERID,
+    lpstrSchema: ::LPOLESTR,
+    lpvarValue: *mut VARIANT,
+    elemdescVar: ::ELEMDESC,
+    wVarFlags: ::WORD,
+    varkind: VARKIND,
+}}
 UNION!(VARDESC, lpvarValue, oInst, oInst_mut, ::ULONG);
 pub type LPVARDESC = *mut VARDESC;
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
@@ -486,23 +459,20 @@ pub enum VARFLAGS {
     VARFLAG_FIMMEDIATEBIND = 0x1000
 }
 pub use self::VARFLAGS::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CLEANLOCALSTORAGE {
-    pub pInterface: *mut ::IUnknown,
-    pub pStorage: ::PVOID,
-    pub flags: ::DWORD,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CUSTDATAITEM {
-    pub guid: ::GUID,
-    pub varValue: VARIANTARG,
-}
+STRUCT!{struct CLEANLOCALSTORAGE {
+    pInterface: *mut ::IUnknown,
+    pStorage: ::PVOID,
+    flags: ::DWORD,
+}}
+STRUCT!{struct CUSTDATAITEM {
+    guid: ::GUID,
+    varValue: VARIANTARG,
+}}
 pub type LPCUSTDATAITEM = *mut CUSTDATAITEM;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CUSTDATA {
-    pub cCustData: ::DWORD,
-    pub prgCustData: LPCUSTDATAITEM,
-}
+STRUCT!{struct CUSTDATA {
+    cCustData: ::DWORD,
+    prgCustData: LPCUSTDATAITEM,
+}}
 pub type LPCUSTDATA = *mut CUSTDATA;
 pub type LPCREATETYPEINFO = *mut ICreateTypeInfo;
 RIDL!(

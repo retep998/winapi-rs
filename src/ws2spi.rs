@@ -10,11 +10,10 @@ pub struct WSPDATA {
 }
 impl Clone for WSPDATA { fn clone(&self) -> WSPDATA { *self } }
 pub type LPWSPDATA = *mut WSPDATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WSATHREADID {
-    pub ThreadHandle: ::HANDLE,
-    pub Reserved: ::DWORD_PTR,
-}
+STRUCT!{struct WSATHREADID {
+    ThreadHandle: ::HANDLE,
+    Reserved: ::DWORD_PTR,
+}}
 pub type LPWSATHREADID = *mut WSATHREADID;
 pub type LPNSPV2STARTUP = Option<unsafe extern "system" fn(
     lpProviderId: ::LPGUID, ppvClientSessionArg: *mut ::LPVOID,

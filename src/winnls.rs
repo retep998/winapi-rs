@@ -17,23 +17,21 @@ pub type CALID = ::DWORD;
 pub type GEOID = ::LONG;
 pub type GEOTYPE = ::DWORD;
 pub type GEOCLASS = ::DWORD;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NLSVERSIONINFO {
-    pub dwNLSVersionInfoSize: ::DWORD,
-    pub dwNLSVersion: ::DWORD,
-    pub dwDefinedVersion: ::DWORD,
-    pub dwEffectiveId: ::DWORD,
-    pub guidCustomVersion: ::GUID,
-}
+STRUCT!{struct NLSVERSIONINFO {
+    dwNLSVersionInfoSize: ::DWORD,
+    dwNLSVersion: ::DWORD,
+    dwDefinedVersion: ::DWORD,
+    dwEffectiveId: ::DWORD,
+    guidCustomVersion: ::GUID,
+}}
 pub type LPNLSVERSIONINFO = *mut NLSVERSIONINFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NLSVERSIONINFOEX {
-    pub dwNLSVersionInfoSize: ::DWORD,
-    pub dwNLSVersion: ::DWORD,
-    pub dwDefinedVersion: ::DWORD,
-    pub dwEffectiveId: ::DWORD,
-    pub guidCustomVersion: ::GUID,
-}
+STRUCT!{struct NLSVERSIONINFOEX {
+    dwNLSVersionInfoSize: ::DWORD,
+    dwNLSVersion: ::DWORD,
+    dwDefinedVersion: ::DWORD,
+    dwEffectiveId: ::DWORD,
+    guidCustomVersion: ::GUID,
+}}
 pub type LPNLSVERSIONINFOEX = *mut NLSVERSIONINFOEX;
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum NORM_FORM {
@@ -72,12 +70,11 @@ pub type TIMEFMT_ENUMPROCW = Option<unsafe extern "system" fn(::LPWSTR) -> ::BOO
 pub type CALINFO_ENUMPROCW = Option<unsafe extern "system" fn(::LPWSTR) -> ::BOOL>;
 pub type CALINFO_ENUMPROCEXW = Option<unsafe extern "system" fn(::LPWSTR, ::CALID) -> ::BOOL>;
 pub type GEO_ENUMPROC = Option<unsafe extern "system" fn(GEOID) -> ::BOOL>;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CPINFO {
-    pub MaxCharSize: ::UINT,
-    pub DefaultChar: [::BYTE; MAX_DEFAULTCHAR],
-    pub LeadByte: [::BYTE; MAX_LEADBYTES],
-}
+STRUCT!{struct CPINFO {
+    MaxCharSize: ::UINT,
+    DefaultChar: [::BYTE; MAX_DEFAULTCHAR],
+    LeadByte: [::BYTE; MAX_LEADBYTES],
+}}
 pub type LPCPINFO = *mut CPINFO;
 #[repr(C)] #[derive(Copy)]
 pub struct CPINFOEXA {
@@ -101,67 +98,62 @@ pub struct CPINFOEXW {
 }
 impl Clone for CPINFOEXW { fn clone(&self) -> CPINFOEXW{ *self } }
 pub type LPCPINFOEXW = *mut CPINFOEXW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NUMBERFMTA {
-    pub NumDigits: ::UINT,
-    pub LeadingZero: ::UINT,
-    pub Grouping: ::UINT,
-    pub lpDecimalSep: ::LPSTR,
-    pub lpThousandSep: ::LPSTR,
-    pub NegativeOrder: ::UINT,
-}
+STRUCT!{struct NUMBERFMTA {
+    NumDigits: ::UINT,
+    LeadingZero: ::UINT,
+    Grouping: ::UINT,
+    lpDecimalSep: ::LPSTR,
+    lpThousandSep: ::LPSTR,
+    NegativeOrder: ::UINT,
+}}
 pub type LPNUMBERFMTA = *mut NUMBERFMTA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NUMBERFMTW {
-    pub NumDigits: ::UINT,
-    pub LeadingZero: ::UINT,
-    pub Grouping: ::UINT,
-    pub lpDecimalSep: ::LPWSTR,
-    pub lpThousandSep: ::LPWSTR,
-    pub NegativeOrder: ::UINT,
-}
+STRUCT!{struct NUMBERFMTW {
+    NumDigits: ::UINT,
+    LeadingZero: ::UINT,
+    Grouping: ::UINT,
+    lpDecimalSep: ::LPWSTR,
+    lpThousandSep: ::LPWSTR,
+    NegativeOrder: ::UINT,
+}}
 pub type LPNUMBERFMTW = *mut NUMBERFMTW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CURRENCYFMTA {
-    pub NumDigits: ::UINT,
-    pub LeadingZero: ::UINT,
-    pub Grouping: ::UINT,
-    pub lpDecimalSep: ::LPSTR,
-    pub lpThousandSep: ::LPSTR,
-    pub NegativeOrder: ::UINT,
-    pub PositiveOrder: ::UINT,
-    pub lpCurrencySymbol: ::LPSTR,
-}
+STRUCT!{struct CURRENCYFMTA {
+    NumDigits: ::UINT,
+    LeadingZero: ::UINT,
+    Grouping: ::UINT,
+    lpDecimalSep: ::LPSTR,
+    lpThousandSep: ::LPSTR,
+    NegativeOrder: ::UINT,
+    PositiveOrder: ::UINT,
+    lpCurrencySymbol: ::LPSTR,
+}}
 pub type LPCURRENCYFMTA = *mut CURRENCYFMTA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CURRENCYFMTW {
-    pub NumDigits: ::UINT,
-    pub LeadingZero: ::UINT,
-    pub Grouping: ::UINT,
-    pub lpDecimalSep: ::LPWSTR,
-    pub lpThousandSep: ::LPWSTR,
-    pub NegativeOrder: ::UINT,
-    pub PositiveOrder: ::UINT,
-    pub lpCurrencySymbol: ::LPWSTR,
-}
+STRUCT!{struct CURRENCYFMTW {
+    NumDigits: ::UINT,
+    LeadingZero: ::UINT,
+    Grouping: ::UINT,
+    lpDecimalSep: ::LPWSTR,
+    lpThousandSep: ::LPWSTR,
+    NegativeOrder: ::UINT,
+    PositiveOrder: ::UINT,
+    lpCurrencySymbol: ::LPWSTR,
+}}
 pub type LPCURRENCYFMTW = *mut CURRENCYFMTW;
 pub type NLS_FUNCTION = ::DWORD;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FILEMUIINFO {
-    pub dwSize: ::DWORD,
-    pub dwVersion: ::DWORD,
-    pub dwFileType: ::DWORD,
-    pub pChecksum: [::BYTE; 16],
-    pub pServiceChecksum: [::BYTE; 16],
-    pub dwLanguageNameOffset: ::DWORD,
-    pub dwTypeIDMainSize: ::DWORD,
-    pub dwTypeIDMainOffset: ::DWORD,
-    pub dwTypeNameMainOffset: ::DWORD,
-    pub dwTypeIDMUISize: ::DWORD,
-    pub dwTypeIDMUIOffset: ::DWORD,
-    pub dwTypeNameMUIOffset: ::DWORD,
-    pub abBuffer: [::BYTE; 8],
-}
+STRUCT!{struct FILEMUIINFO {
+    dwSize: ::DWORD,
+    dwVersion: ::DWORD,
+    dwFileType: ::DWORD,
+    pChecksum: [::BYTE; 16],
+    pServiceChecksum: [::BYTE; 16],
+    dwLanguageNameOffset: ::DWORD,
+    dwTypeIDMainSize: ::DWORD,
+    dwTypeIDMainOffset: ::DWORD,
+    dwTypeNameMainOffset: ::DWORD,
+    dwTypeIDMUISize: ::DWORD,
+    dwTypeIDMUIOffset: ::DWORD,
+    dwTypeNameMUIOffset: ::DWORD,
+    abBuffer: [::BYTE; 8],
+}}
 pub type PFILEMUIINFO = *mut FILEMUIINFO;
 pub type CALINFO_ENUMPROCEXEX = Option<unsafe extern "system" fn(
     ::LPWSTR, ::CALID, ::LPWSTR, ::LPARAM,

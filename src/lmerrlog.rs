@@ -1,26 +1,24 @@
 // Copyright © 2015, skdltmxn
 // Licensed under the MIT License <LICENSE.md>
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ERROR_LOG {
-    pub el_len: ::DWORD,
-    pub el_reserved: ::DWORD,
-    pub el_time: ::DWORD,
-    pub el_error: ::DWORD,
-    pub el_name: ::LPWSTR,
-    pub el_text: ::LPWSTR,
-    pub el_data: ::LPBYTE,
-    pub el_data_size: ::DWORD,
-    pub el_nstrings: ::DWORD,
-}
+STRUCT!{struct ERROR_LOG {
+    el_len: ::DWORD,
+    el_reserved: ::DWORD,
+    el_time: ::DWORD,
+    el_error: ::DWORD,
+    el_name: ::LPWSTR,
+    el_text: ::LPWSTR,
+    el_data: ::LPBYTE,
+    el_data_size: ::DWORD,
+    el_nstrings: ::DWORD,
+}}
 pub type PERROR_LOG = *mut ERROR_LOG;
 pub type LPERROR_LOG = *mut ERROR_LOG;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HLOG {
-    pub time: ::DWORD,
-    pub last_flags: ::DWORD,
-    pub offset: ::DWORD,
-    pub rec_offset: ::DWORD,
-}
+STRUCT!{struct HLOG {
+    time: ::DWORD,
+    last_flags: ::DWORD,
+    offset: ::DWORD,
+    rec_offset: ::DWORD,
+}}
 pub type PHLOG = *mut HLOG;
 pub type LPHLOG = *mut HLOG;
 pub const LOGFLAGS_FORWARD: ::DWORD = 0;

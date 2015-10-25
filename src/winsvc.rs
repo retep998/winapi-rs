@@ -170,16 +170,15 @@ pub enum _SC_ENUM_TYPE {
     __, // FIXME - Univariant enums
 }
 //700
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SERVICE_STATUS {
-    pub dwServiceType: ::DWORD,
-    pub dwCurrentState: ::DWORD,
-    pub dwControlsAccepted: ::DWORD,
-    pub dwWin32ExitCode: ::DWORD,
-    pub dwServiceSpecificExitCode: ::DWORD,
-    pub dwCheckPoint: ::DWORD,
-    pub dwWaitHint: ::DWORD,
-}
+STRUCT!{struct SERVICE_STATUS {
+    dwServiceType: ::DWORD,
+    dwCurrentState: ::DWORD,
+    dwControlsAccepted: ::DWORD,
+    dwWin32ExitCode: ::DWORD,
+    dwServiceSpecificExitCode: ::DWORD,
+    dwCheckPoint: ::DWORD,
+    dwWaitHint: ::DWORD,
+}}
 pub type LPSERVICE_STATUS = *mut SERVICE_STATUS;
 //848
 pub type LPSERVICE_MAIN_FUNCTIONW = Option<unsafe extern "system" fn(

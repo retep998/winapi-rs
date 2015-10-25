@@ -101,29 +101,27 @@ pub const RESOURCEDISPLAYTYPE_SHAREADMIN: ::DWORD = 0x00000008;
 pub const RESOURCEDISPLAYTYPE_DIRECTORY: ::DWORD = 0x00000009;
 pub const RESOURCEDISPLAYTYPE_TREE: ::DWORD = 0x0000000A;
 pub const RESOURCEDISPLAYTYPE_NDSCONTAINER: ::DWORD = 0x0000000B;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NETRESOURCEA {
-    pub dwScope: ::DWORD,
-    pub dwType: ::DWORD,
-    pub dwDisplayType: ::DWORD,
-    pub dwUsage: ::DWORD,
-    pub lpLocalName: ::LPSTR,
-    pub lpRemoteName: ::LPSTR,
-    pub lpComment: ::LPSTR,
-    pub lpProvider: ::LPSTR,
-}
+STRUCT!{struct NETRESOURCEA {
+    dwScope: ::DWORD,
+    dwType: ::DWORD,
+    dwDisplayType: ::DWORD,
+    dwUsage: ::DWORD,
+    lpLocalName: ::LPSTR,
+    lpRemoteName: ::LPSTR,
+    lpComment: ::LPSTR,
+    lpProvider: ::LPSTR,
+}}
 pub type LPNETRESOURCEA = *mut NETRESOURCEA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NETRESOURCEW {
-    pub dwScope: ::DWORD,
-    pub dwType: ::DWORD,
-    pub dwDisplayType: ::DWORD,
-    pub dwUsage: ::DWORD,
-    pub lpLocalName: ::LPWSTR,
-    pub lpRemoteName: ::LPWSTR,
-    pub lpComment: ::LPWSTR,
-    pub lpProvider: ::LPWSTR,
-}
+STRUCT!{struct NETRESOURCEW {
+    dwScope: ::DWORD,
+    dwType: ::DWORD,
+    dwDisplayType: ::DWORD,
+    dwUsage: ::DWORD,
+    lpLocalName: ::LPWSTR,
+    lpRemoteName: ::LPWSTR,
+    lpComment: ::LPWSTR,
+    lpProvider: ::LPWSTR,
+}}
 pub type LPNETRESOURCEW = *mut NETRESOURCEW;
 pub const NETPROPERTY_PERSISTENT: ::DWORD = 1;
 pub const CONNECT_UPDATE_PROFILE: ::DWORD = 0x00000001;
@@ -141,23 +139,21 @@ pub const CONNECT_RESERVED: ::DWORD = 0xFF000000;
 pub const CONNECT_COMMANDLINE: ::DWORD = 0x00000800;
 pub const CONNECT_CMD_SAVECRED: ::DWORD = 0x00001000;
 pub const CONNECT_CRED_RESET: ::DWORD = 0x00002000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CONNECTDLGSTRUCTA {
-    pub cbStructure: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub lpConnRes: ::LPNETRESOURCEA,
-    pub dwFlags: ::DWORD,
-    pub dwDevNum: ::DWORD,
-}
+STRUCT!{struct CONNECTDLGSTRUCTA {
+    cbStructure: ::DWORD,
+    hwndOwner: ::HWND,
+    lpConnRes: ::LPNETRESOURCEA,
+    dwFlags: ::DWORD,
+    dwDevNum: ::DWORD,
+}}
 pub type LPCONNECTDLGSTRUCTA = *mut CONNECTDLGSTRUCTA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CONNECTDLGSTRUCTW {
-    pub cbStructure: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub lpConnRes: ::LPNETRESOURCEW,
-    pub dwFlags: ::DWORD,
-    pub dwDevNum: ::DWORD,
-}
+STRUCT!{struct CONNECTDLGSTRUCTW {
+    cbStructure: ::DWORD,
+    hwndOwner: ::HWND,
+    lpConnRes: ::LPNETRESOURCEW,
+    dwFlags: ::DWORD,
+    dwDevNum: ::DWORD,
+}}
 pub type LPCONNECTDLGSTRUCTW = *mut CONNECTDLGSTRUCTW;
 pub const CONNDLG_RO_PATH: ::DWORD = 0x00000001;
 pub const CONNDLG_CONN_POINT: ::DWORD = 0x00000002;
@@ -165,67 +161,60 @@ pub const CONNDLG_USE_MRU: ::DWORD = 0x00000004;
 pub const CONNDLG_HIDE_BOX: ::DWORD = 0x00000008;
 pub const CONNDLG_PERSIST: ::DWORD = 0x00000010;
 pub const CONNDLG_NOT_PERSIST: ::DWORD = 0x00000020;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DISCDLGSTRUCTA {
-    pub cbStructure: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub lpLocalName: ::LPSTR,
-    pub lpRemoteName: ::LPSTR,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct DISCDLGSTRUCTA {
+    cbStructure: ::DWORD,
+    hwndOwner: ::HWND,
+    lpLocalName: ::LPSTR,
+    lpRemoteName: ::LPSTR,
+    dwFlags: ::DWORD,
+}}
 pub type LPDISCDLGSTRUCTA = *mut DISCDLGSTRUCTA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DISCDLGSTRUCTW {
-    pub cbStructure: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub lpLocalName: ::LPWSTR,
-    pub lpRemoteName: ::LPWSTR,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct DISCDLGSTRUCTW {
+    cbStructure: ::DWORD,
+    hwndOwner: ::HWND,
+    lpLocalName: ::LPWSTR,
+    lpRemoteName: ::LPWSTR,
+    dwFlags: ::DWORD,
+}}
 pub type LPDISCDLGSTRUCTW = *mut DISCDLGSTRUCTW;
 pub const DISC_UPDATE_PROFILE: ::DWORD = 0x00000001;
 pub const DISC_NO_FORCE: ::DWORD = 0x00000040;
 pub const UNIVERSAL_NAME_INFO_LEVEL: ::DWORD = 0x00000001;
 pub const REMOTE_NAME_INFO_LEVEL: ::DWORD = 0x00000002;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct UNIVERSAL_NAME_INFOA {
-    pub lpUniversalName: ::LPSTR,
-}
+STRUCT!{struct UNIVERSAL_NAME_INFOA {
+    lpUniversalName: ::LPSTR,
+}}
 pub type LPUNIVERSAL_NAME_INFOA = *mut UNIVERSAL_NAME_INFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct UNIVERSAL_NAME_INFOW {
-    pub lpUniversalName: ::LPWSTR,
-}
+STRUCT!{struct UNIVERSAL_NAME_INFOW {
+    lpUniversalName: ::LPWSTR,
+}}
 pub type LPUNIVERSAL_NAME_INFOW = *mut UNIVERSAL_NAME_INFOW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct REMOTE_NAME_INFOA {
-    pub lpUniversalName: ::LPSTR,
-    pub lpConnectionName: ::LPSTR,
-    pub lpRemainingPath: ::LPSTR,
-}
+STRUCT!{struct REMOTE_NAME_INFOA {
+    lpUniversalName: ::LPSTR,
+    lpConnectionName: ::LPSTR,
+    lpRemainingPath: ::LPSTR,
+}}
 pub type LPREMOTE_NAME_INFOA = *mut REMOTE_NAME_INFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct REMOTE_NAME_INFOW {
-    pub lpUniversalName: ::LPWSTR,
-    pub lpConnectionName: ::LPWSTR,
-    pub lpRemainingPath: ::LPWSTR,
-}
+STRUCT!{struct REMOTE_NAME_INFOW {
+    lpUniversalName: ::LPWSTR,
+    lpConnectionName: ::LPWSTR,
+    lpRemainingPath: ::LPWSTR,
+}}
 pub type LPREMOTE_NAME_INFOW = *mut REMOTE_NAME_INFOW;
 pub const WNFMT_MULTILINE: ::DWORD = 0x01;
 pub const WNFMT_ABBREVIATED: ::DWORD = 0x02;
 pub const WNFMT_INENUM: ::DWORD = 0x10;
 pub const WNFMT_CONNECTION: ::DWORD = 0x20;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NETINFOSTRUCT {
-    pub cbStructure: ::DWORD,
-    pub dwProviderVersion: ::DWORD,
-    pub dwStatus: ::DWORD,
-    pub dwCharacteristics: ::DWORD,
-    pub dwHandle: ::ULONG_PTR,
-    pub wNetType: ::WORD,
-    pub dwPrinters: ::DWORD,
-    pub dwDrives: ::DWORD,
-}
+STRUCT!{struct NETINFOSTRUCT {
+    cbStructure: ::DWORD,
+    dwProviderVersion: ::DWORD,
+    dwStatus: ::DWORD,
+    dwCharacteristics: ::DWORD,
+    dwHandle: ::ULONG_PTR,
+    wNetType: ::WORD,
+    dwPrinters: ::DWORD,
+    dwDrives: ::DWORD,
+}}
 pub type LPNETINFOSTRUCT = *mut NETINFOSTRUCT;
 pub const NETINFO_DLL16: ::DWORD = 0x00000001;
 pub const NETINFO_DISKRED: ::DWORD = 0x00000004;
@@ -272,14 +261,13 @@ pub const WN_NOT_CONTAINER: ::DWORD = ::ERROR_NOT_CONTAINER;
 pub const WN_NOT_AUTHENTICATED: ::DWORD = ::ERROR_NOT_AUTHENTICATED;
 pub const WN_NOT_LOGGED_ON: ::DWORD = ::ERROR_NOT_LOGGED_ON;
 pub const WN_NOT_VALIDATED: ::DWORD = ::ERROR_NO_LOGON_SERVERS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NETCONNECTINFOSTRUCT {
-    pub cbStructure: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub dwSpeed: ::DWORD,
-    pub dwDelay: ::DWORD,
-    pub dwOptDataSize: ::DWORD,
-}
+STRUCT!{struct NETCONNECTINFOSTRUCT {
+    cbStructure: ::DWORD,
+    dwFlags: ::DWORD,
+    dwSpeed: ::DWORD,
+    dwDelay: ::DWORD,
+    dwOptDataSize: ::DWORD,
+}}
 pub type LPNETCONNECTINFOSTRUCT = *mut NETCONNECTINFOSTRUCT;
 pub const WNCON_FORNETCARD: ::DWORD = 0x00000001;
 pub const WNCON_NOTROUTED: ::DWORD = 0x00000002;

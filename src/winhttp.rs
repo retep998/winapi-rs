@@ -17,11 +17,10 @@ pub const WINHTTP_FLAG_BYPASS_PROXY_CACHE: ::DWORD = 0x00000100;
 pub const WINHTTP_FLAG_REFRESH: ::DWORD = WINHTTP_FLAG_BYPASS_PROXY_CACHE;
 pub const WINHTTP_FLAG_ESCAPE_DISABLE: ::DWORD = 0x00000040;
 pub const WINHTTP_FLAG_ESCAPE_DISABLE_QUERY: ::DWORD = 0x00000080;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WINHTTP_ASYNC_RESULT {
-    pub dwResult: ::DWORD_PTR,
-    pub dwError: ::DWORD,
-}
+STRUCT!{struct WINHTTP_ASYNC_RESULT {
+    dwResult: ::DWORD_PTR,
+    dwError: ::DWORD,
+}}
 pub type LPWINHTTP_ASYNC_RESULT = *mut WINHTTP_ASYNC_RESULT;
 pub type INTERNET_SCHEME = ::c_int;
 pub type LPINTERNET_SCHEME = *mut ::c_int;
@@ -29,45 +28,42 @@ pub const INTERNET_SCHEME_HTTP: INTERNET_SCHEME = 1;
 pub const INTERNET_SCHEME_HTTPS: INTERNET_SCHEME = 2;
 pub const INTERNET_SCHEME_FTP: INTERNET_SCHEME = 3;
 pub const INTERNET_SCHEME_SOCKS: INTERNET_SCHEME = 4;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct URL_COMPONENTS {
-    pub dwStructSize: ::DWORD,
-    pub lpszScheme: ::LPWSTR,
-    pub dwSchemeLength: ::DWORD,
-    pub nScheme: INTERNET_SCHEME,
-    pub lpszHostName: ::LPWSTR,
-    pub dwHostNameLength: ::DWORD,
-    pub nPort: INTERNET_PORT,
-    pub lpszUserName: ::LPWSTR,
-    pub dwUserNameLength: ::DWORD,
-    pub lpszPassword: ::LPWSTR,
-    pub dwPasswordLength: ::DWORD,
-    pub lpszUrlPath: ::LPWSTR,
-    pub dwUrlPathLength: ::DWORD,
-    pub lpszExtraInfo: ::LPWSTR,
-    pub dwExtraInfoLength: ::DWORD,
-}
+STRUCT!{struct URL_COMPONENTS {
+    dwStructSize: ::DWORD,
+    lpszScheme: ::LPWSTR,
+    dwSchemeLength: ::DWORD,
+    nScheme: INTERNET_SCHEME,
+    lpszHostName: ::LPWSTR,
+    dwHostNameLength: ::DWORD,
+    nPort: INTERNET_PORT,
+    lpszUserName: ::LPWSTR,
+    dwUserNameLength: ::DWORD,
+    lpszPassword: ::LPWSTR,
+    dwPasswordLength: ::DWORD,
+    lpszUrlPath: ::LPWSTR,
+    dwUrlPathLength: ::DWORD,
+    lpszExtraInfo: ::LPWSTR,
+    dwExtraInfoLength: ::DWORD,
+}}
 pub type LPURL_COMPONENTS = *mut URL_COMPONENTS;
 pub type URL_COMPONENTSW = URL_COMPONENTS;
 pub type LPURL_COMPONENTSW = LPURL_COMPONENTS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WINHTTP_PROXY_INFO {
-    pub dwAccessType: ::DWORD,
-    pub lpszProxy: ::LPWSTR,
-    pub lpszProxyBypass: ::LPWSTR,
-}
+STRUCT!{struct WINHTTP_PROXY_INFO {
+    dwAccessType: ::DWORD,
+    lpszProxy: ::LPWSTR,
+    lpszProxyBypass: ::LPWSTR,
+}}
 pub type LPWINHTTP_PROXY_INFO = *mut WINHTTP_PROXY_INFO;
 pub type WINHTTP_PROXY_INFOW = WINHTTP_PROXY_INFO;
 pub type LPWINHTTP_PROXY_INFOW = LPWINHTTP_PROXY_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WINHTTP_AUTOPROXY_OPTIONS {
-    pub dwFlags: ::DWORD,
-    pub dwAutoDetectFlags: ::DWORD,
-    pub lpszAutoConfigUrl: ::LPCWSTR,
-    pub lpvReserved: ::LPVOID,
-    pub dwReserved: ::DWORD,
-    pub fAutoLogonIfChallenged: ::BOOL,
-}
+STRUCT!{struct WINHTTP_AUTOPROXY_OPTIONS {
+    dwFlags: ::DWORD,
+    dwAutoDetectFlags: ::DWORD,
+    lpszAutoConfigUrl: ::LPCWSTR,
+    lpvReserved: ::LPVOID,
+    dwReserved: ::DWORD,
+    fAutoLogonIfChallenged: ::BOOL,
+}}
 pub const WINHTTP_AUTOPROXY_AUTO_DETECT: ::DWORD = 0x00000001;
 pub const WINHTTP_AUTOPROXY_CONFIG_URL: ::DWORD = 0x00000002;
 pub const WINHTTP_AUTOPROXY_HOST_KEEPCASE: ::DWORD = 0x00000004;
@@ -80,19 +76,17 @@ pub const WINHTTP_AUTOPROXY_NO_CACHE_SVC: ::DWORD = 0x00100000;
 pub const WINHTTP_AUTOPROXY_SORT_RESULTS: ::DWORD = 0x00400000;
 pub const WINHTTP_AUTO_DETECT_TYPE_DHCP: ::DWORD = 0x00000001;
 pub const WINHTTP_AUTO_DETECT_TYPE_DNS_A: ::DWORD = 0x00000002;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WINHTTP_PROXY_RESULT_ENTRY {
-    pub fProxy: ::BOOL,
-    pub fBypass: ::BOOL,
-    pub ProxyScheme: INTERNET_SCHEME,
-    pub pwszProxy: ::PWSTR,
-    pub ProxyPort: INTERNET_PORT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WINHTTP_PROXY_RESULT {
-    pub cEntries: ::DWORD,
-    pub pEntries: *mut WINHTTP_PROXY_RESULT_ENTRY,
-}
+STRUCT!{struct WINHTTP_PROXY_RESULT_ENTRY {
+    fProxy: ::BOOL,
+    fBypass: ::BOOL,
+    ProxyScheme: INTERNET_SCHEME,
+    pwszProxy: ::PWSTR,
+    ProxyPort: INTERNET_PORT,
+}}
+STRUCT!{struct WINHTTP_PROXY_RESULT {
+    cEntries: ::DWORD,
+    pEntries: *mut WINHTTP_PROXY_RESULT_ENTRY,
+}}
 pub const WINHTTP_FIRST_OPTION: ::DWORD = WINHTTP_OPTION_CALLBACK;
 pub const WINHTTP_OPTION_CALLBACK: ::DWORD = 1;
 pub const WINHTTP_OPTION_RESOLVE_TIMEOUT: ::DWORD = 2;
@@ -411,13 +405,12 @@ pub const WINHTTP_RESET_SCRIPT_CACHE: ::DWORD = 0x00000008;
 pub const WINHTTP_RESET_ALL: ::DWORD = 0x0000FFFF;
 pub const WINHTTP_RESET_NOTIFY_NETWORK_CHANGED: ::DWORD = 0x00010000;
 pub const WINHTTP_RESET_OUT_OF_PROC: ::DWORD = 0x00020000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WINHTTP_CURRENT_USER_IE_PROXY_CONFIG {
-    pub fAutoDetect: ::BOOL,
-    pub lpszAutoConfigUrl: ::LPWSTR,
-    pub lpszProxy: ::LPWSTR,
-    pub lpszProxyBypass: ::LPWSTR,
-}
+STRUCT!{struct WINHTTP_CURRENT_USER_IE_PROXY_CONFIG {
+    fAutoDetect: ::BOOL,
+    lpszAutoConfigUrl: ::LPWSTR,
+    lpszProxy: ::LPWSTR,
+    lpszProxyBypass: ::LPWSTR,
+}}
 //1370
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum WINHTTP_WEB_SOCKET_OPERATION {

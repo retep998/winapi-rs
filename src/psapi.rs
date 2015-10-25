@@ -5,18 +5,16 @@ pub const LIST_MODULES_DEFAULT: ::DWORD = 0x0;
 pub const LIST_MODULES_32BIT: ::DWORD = 0x01;
 pub const LIST_MODULES_64BIT: ::DWORD = 0x02;
 pub const LIST_MODULES_ALL: ::DWORD = LIST_MODULES_32BIT | LIST_MODULES_64BIT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MODULEINFO {
-    pub lpBaseOfDll: ::LPVOID,
-    pub SizeOfImage: ::DWORD,
-    pub EntryPoint: ::LPVOID,
-}
+STRUCT!{struct MODULEINFO {
+    lpBaseOfDll: ::LPVOID,
+    SizeOfImage: ::DWORD,
+    EntryPoint: ::LPVOID,
+}}
 pub type LPMODULEINFO = *mut MODULEINFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PSAPI_WORKING_SET_BLOCK {
-    pub Flags: ::ULONG_PTR,
-    pub BitFields: ::ULONG_PTR,
-}
+STRUCT!{struct PSAPI_WORKING_SET_BLOCK {
+    Flags: ::ULONG_PTR,
+    BitFields: ::ULONG_PTR,
+}}
 #[cfg(target_arch="x86")]
 BITFIELD!(PSAPI_WORKING_SET_BLOCK BitFields: ::ULONG_PTR [
     Protection set_Protection[0..5],
@@ -34,16 +32,14 @@ BITFIELD!(PSAPI_WORKING_SET_BLOCK BitFields: ::ULONG_PTR [
     VirtualPage set_VirtualPage[12..64],
 ]);
 pub type PPSAPI_WORKING_SET_BLOCK = *mut PSAPI_WORKING_SET_BLOCK;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PSAPI_WORKING_SET_INFORMATION {
-    pub NumberOfEntries: ::ULONG_PTR,
-    pub WorkingSetInfo: [PSAPI_WORKING_SET_BLOCK; 1],
-}
+STRUCT!{struct PSAPI_WORKING_SET_INFORMATION {
+    NumberOfEntries: ::ULONG_PTR,
+    WorkingSetInfo: [PSAPI_WORKING_SET_BLOCK; 1],
+}}
 pub type PPSAPI_WORKING_SET_INFORMATION = *mut PSAPI_WORKING_SET_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PSAPI_WORKING_SET_EX_BLOCK_Invalid {
-    pub BitFields: ::ULONG_PTR,
-}
+STRUCT!{struct PSAPI_WORKING_SET_EX_BLOCK_Invalid {
+    BitFields: ::ULONG_PTR,
+}}
 #[cfg(target_arch="x86")]
 BITFIELD!(PSAPI_WORKING_SET_EX_BLOCK_Invalid BitFields: ::ULONG_PTR [
     Valid set_Valid[0..1],
@@ -61,11 +57,10 @@ BITFIELD!(PSAPI_WORKING_SET_EX_BLOCK_Invalid BitFields: ::ULONG_PTR [
     Bad set_Bad[31..32],
     ReservedUlong set_ReservedUlong[32..64],
 ]);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PSAPI_WORKING_SET_EX_BLOCK {
-    pub Flags: ::ULONG_PTR,
-    pub BitFields: ::ULONG_PTR,
-}
+STRUCT!{struct PSAPI_WORKING_SET_EX_BLOCK {
+    Flags: ::ULONG_PTR,
+    BitFields: ::ULONG_PTR,
+}}
 #[cfg(target_arch="x86")]
 BITFIELD!(PSAPI_WORKING_SET_EX_BLOCK BitFields: ::ULONG_PTR [
     Valid set_Valid[0..1],
@@ -95,80 +90,73 @@ UNION!(
     PSAPI_WORKING_SET_EX_BLOCK, BitFields, Invalid, Invalid_mut, PSAPI_WORKING_SET_EX_BLOCK_Invalid
 );
 pub type PPSAPI_WORKING_SET_EX_BLOCK = *mut PSAPI_WORKING_SET_EX_BLOCK;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PSAPI_WORKING_SET_EX_INFORMATION {
-    pub VirtualAddress: ::PVOID,
-    pub VirtualAttributes: PSAPI_WORKING_SET_EX_BLOCK,
-}
+STRUCT!{struct PSAPI_WORKING_SET_EX_INFORMATION {
+    VirtualAddress: ::PVOID,
+    VirtualAttributes: PSAPI_WORKING_SET_EX_BLOCK,
+}}
 pub type PPSAPI_WORKING_SET_EX_INFORMATION = *mut PSAPI_WORKING_SET_EX_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PSAPI_WS_WATCH_INFORMATION {
-    pub FaultingPc: ::LPVOID,
-    pub FaultingVa: ::LPVOID,
-}
+STRUCT!{struct PSAPI_WS_WATCH_INFORMATION {
+    FaultingPc: ::LPVOID,
+    FaultingVa: ::LPVOID,
+}}
 pub type PPSAPI_WS_WATCH_INFORMATION = *mut PSAPI_WS_WATCH_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PSAPI_WS_WATCH_INFORMATION_EX {
-    pub BasicInfo: PSAPI_WS_WATCH_INFORMATION,
-    pub FaultingThreadId: ::ULONG_PTR,
-    pub Flags: ::ULONG_PTR,
-}
+STRUCT!{struct PSAPI_WS_WATCH_INFORMATION_EX {
+    BasicInfo: PSAPI_WS_WATCH_INFORMATION,
+    FaultingThreadId: ::ULONG_PTR,
+    Flags: ::ULONG_PTR,
+}}
 pub type PPSAPI_WS_WATCH_INFORMATION_EX = *mut PSAPI_WS_WATCH_INFORMATION_EX;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PROCESS_MEMORY_COUNTERS {
-    pub cb: ::DWORD,
-    pub PageFaultCount: ::DWORD,
-    pub PeakWorkingSetSize: ::SIZE_T,
-    pub WorkingSetSize: ::SIZE_T,
-    pub QuotaPeakPagedPoolUsage: ::SIZE_T,
-    pub QuotaPagedPoolUsage: ::SIZE_T,
-    pub QuotaPeakNonPagedPoolUsage: ::SIZE_T,
-    pub QuotaNonPagedPoolUsage: ::SIZE_T,
-    pub PagefileUsage: ::SIZE_T,
-    pub PeakPagefileUsage: ::SIZE_T,
-}
+STRUCT!{struct PROCESS_MEMORY_COUNTERS {
+    cb: ::DWORD,
+    PageFaultCount: ::DWORD,
+    PeakWorkingSetSize: ::SIZE_T,
+    WorkingSetSize: ::SIZE_T,
+    QuotaPeakPagedPoolUsage: ::SIZE_T,
+    QuotaPagedPoolUsage: ::SIZE_T,
+    QuotaPeakNonPagedPoolUsage: ::SIZE_T,
+    QuotaNonPagedPoolUsage: ::SIZE_T,
+    PagefileUsage: ::SIZE_T,
+    PeakPagefileUsage: ::SIZE_T,
+}}
 pub type PPROCESS_MEMORY_COUNTERS = *mut PROCESS_MEMORY_COUNTERS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PROCESS_MEMORY_COUNTERS_EX {
-    pub cb: ::DWORD,
-    pub PageFaultCount: ::DWORD,
-    pub PeakWorkingSetSize: ::SIZE_T,
-    pub WorkingSetSize: ::SIZE_T,
-    pub QuotaPeakPagedPoolUsage: ::SIZE_T,
-    pub QuotaPagedPoolUsage: ::SIZE_T,
-    pub QuotaPeakNonPagedPoolUsage: ::SIZE_T,
-    pub QuotaNonPagedPoolUsage: ::SIZE_T,
-    pub PagefileUsage: ::SIZE_T,
-    pub PeakPagefileUsage: ::SIZE_T,
-    pub PrivateUsage: ::SIZE_T,
-}
+STRUCT!{struct PROCESS_MEMORY_COUNTERS_EX {
+    cb: ::DWORD,
+    PageFaultCount: ::DWORD,
+    PeakWorkingSetSize: ::SIZE_T,
+    WorkingSetSize: ::SIZE_T,
+    QuotaPeakPagedPoolUsage: ::SIZE_T,
+    QuotaPagedPoolUsage: ::SIZE_T,
+    QuotaPeakNonPagedPoolUsage: ::SIZE_T,
+    QuotaNonPagedPoolUsage: ::SIZE_T,
+    PagefileUsage: ::SIZE_T,
+    PeakPagefileUsage: ::SIZE_T,
+    PrivateUsage: ::SIZE_T,
+}}
 pub type PPROCESS_MEMORY_COUNTERS_EX = *mut PROCESS_MEMORY_COUNTERS_EX;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PERFORMANCE_INFORMATION {
-    pub cb: ::DWORD,
-    pub CommitTotal: ::SIZE_T,
-    pub CommitLimit: ::SIZE_T,
-    pub CommitPeak: ::SIZE_T,
-    pub PhysicalTotal: ::SIZE_T,
-    pub PhysicalAvailable: ::SIZE_T,
-    pub SystemCache: ::SIZE_T,
-    pub KernelTotal: ::SIZE_T,
-    pub KernelPaged: ::SIZE_T,
-    pub KernelNonpaged: ::SIZE_T,
-    pub PageSize: ::SIZE_T,
-    pub HandleCount: ::DWORD,
-    pub ProcessCount: ::DWORD,
-    pub ThreadCount: ::DWORD,
-}
+STRUCT!{struct PERFORMANCE_INFORMATION {
+    cb: ::DWORD,
+    CommitTotal: ::SIZE_T,
+    CommitLimit: ::SIZE_T,
+    CommitPeak: ::SIZE_T,
+    PhysicalTotal: ::SIZE_T,
+    PhysicalAvailable: ::SIZE_T,
+    SystemCache: ::SIZE_T,
+    KernelTotal: ::SIZE_T,
+    KernelPaged: ::SIZE_T,
+    KernelNonpaged: ::SIZE_T,
+    PageSize: ::SIZE_T,
+    HandleCount: ::DWORD,
+    ProcessCount: ::DWORD,
+    ThreadCount: ::DWORD,
+}}
 pub type PPERFORMANCE_INFORMATION = *mut PERFORMANCE_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ENUM_PAGE_FILE_INFORMATION {
-    pub cb: ::DWORD,
-    pub Reserved: ::DWORD,
-    pub TotalSize: ::SIZE_T,
-    pub TotalInUse: ::SIZE_T,
-    pub PeakUsage: ::SIZE_T,
-}
+STRUCT!{struct ENUM_PAGE_FILE_INFORMATION {
+    cb: ::DWORD,
+    Reserved: ::DWORD,
+    TotalSize: ::SIZE_T,
+    TotalInUse: ::SIZE_T,
+    PeakUsage: ::SIZE_T,
+}}
 pub type PENUM_PAGE_FILE_INFORMATION = *mut ENUM_PAGE_FILE_INFORMATION;
 pub type PENUM_PAGE_FILE_CALLBACKA = Option<unsafe extern "system" fn(
     pContext: ::LPVOID, pPageFileInfo: PENUM_PAGE_FILE_INFORMATION, lpFilename: ::LPCSTR,

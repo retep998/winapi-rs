@@ -75,18 +75,16 @@ pub const SO_RANDOMIZE_PORT: ::c_int = 0x3005;
 pub const SO_PORT_SCALABILITY: ::c_int = 0x3006;
 pub const WSK_SO_BASE: ::c_int = 0x4000;
 pub const TCP_NODELAY: ::c_int = 0x0001;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SOCKADDR {
-    pub sa_family: ADDRESS_FAMILY,
-    pub sa_data: [::CHAR; 14],
-}
+STRUCT!{struct SOCKADDR {
+    sa_family: ADDRESS_FAMILY,
+    sa_data: [::CHAR; 14],
+}}
 pub type PSOCKADDR = *mut SOCKADDR;
 pub type LPSOCKADDR = *mut SOCKADDR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SOCKET_ADDRESS {
-    pub lpSockaddr: LPSOCKADDR,
-    pub iSockaddrLength: ::INT,
-}
+STRUCT!{struct SOCKET_ADDRESS {
+    lpSockaddr: LPSOCKADDR,
+    iSockaddrLength: ::INT,
+}}
 pub type PSOCKET_ADDRESS = *mut SOCKET_ADDRESS;
 pub type LPSOCKET_ADDRESS = *mut SOCKET_ADDRESS;
 #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
@@ -96,13 +94,12 @@ pub struct SOCKET_ADDRESS_LIST {
 }
 pub type PSOCKET_ADDRESS_LIST = *mut SOCKET_ADDRESS_LIST;
 pub type LPSOCKET_ADDRESS_LIST = *mut SOCKET_ADDRESS_LIST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CSADDR_INFO {
-    pub LocalAddr: SOCKET_ADDRESS,
-    pub RemoteAddr: SOCKET_ADDRESS,
-    pub iSocketType: ::INT,
-    pub iProtocol: ::INT,
-}
+STRUCT!{struct CSADDR_INFO {
+    LocalAddr: SOCKET_ADDRESS,
+    RemoteAddr: SOCKET_ADDRESS,
+    iSocketType: ::INT,
+    iProtocol: ::INT,
+}}
 pub type PCSADDR_INFO = *mut CSADDR_INFO;
 pub type LPCSADDR_INFO = *mut CSADDR_INFO;
 #[repr(C)] #[derive(Copy)]
@@ -128,12 +125,11 @@ pub type LPSOCKADDR_STORAGE_XP = *mut SOCKADDR_STORAGE_XP;
 pub type SOCKADDR_STORAGE = SOCKADDR_STORAGE_LH;
 pub type PSOCKADDR_STORAGE = *mut SOCKADDR_STORAGE;
 pub type LPSOCKADDR_STORAGE = *mut SOCKADDR_STORAGE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SOCKET_PROCESSOR_AFFINITY {
-    pub Processor: ::PROCESSOR_NUMBER,
-    pub NumaNodeId: ::USHORT,
-    pub Reserved: ::USHORT,
-}
+STRUCT!{struct SOCKET_PROCESSOR_AFFINITY {
+    Processor: ::PROCESSOR_NUMBER,
+    NumaNodeId: ::USHORT,
+    Reserved: ::USHORT,
+}}
 pub type PSOCKET_PROCESSOR_AFFINITY = *mut SOCKET_PROCESSOR_AFFINITY;
 pub const IOC_UNIX: ::DWORD = 0x00000000;
 pub const IOC_WS2: ::DWORD = 0x08000000;
@@ -207,13 +203,12 @@ pub enum IPPROTO {
     IPPROTO_RESERVED_MAX = 261,
 }
 pub type PIPPROTO = *mut IPPROTO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SOCKADDR_IN {
-    pub sin_family: ADDRESS_FAMILY,
-    pub sin_port: ::USHORT,
-    pub sin_addr: ::IN_ADDR,
-    pub sin_zero: [::CHAR; 8],
-}
+STRUCT!{struct SOCKADDR_IN {
+    sin_family: ADDRESS_FAMILY,
+    sin_port: ::USHORT,
+    sin_addr: ::IN_ADDR,
+    sin_zero: [::CHAR; 8],
+}}
 pub type PSOCKADDR_IN = *mut SOCKADDR_IN;
 //645
 pub const IOCPARM_MASK: ::DWORD = 0x7f;
@@ -221,76 +216,70 @@ pub const IOC_VOID: ::DWORD = 0x20000000;
 pub const IOC_OUT: ::DWORD = 0x40000000;
 pub const IOC_IN: ::DWORD = 0x80000000;
 pub const IOC_INOUT: ::DWORD = IOC_IN | IOC_OUT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WSABUF {
-    pub len: ::ULONG,
-    pub buf: *mut ::CHAR,
-}
+STRUCT!{struct WSABUF {
+    len: ::ULONG,
+    buf: *mut ::CHAR,
+}}
 pub type LPWSABUF = *mut WSABUF;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WSAMSG {
-    pub name: LPSOCKADDR,
-    pub namelen: ::INT,
-    pub lpBuffers: LPWSABUF,
-    pub dwBufferCount: ::ULONG,
-    pub Control: WSABUF,
-    pub dwFlags: ::ULONG,
-}
+STRUCT!{struct WSAMSG {
+    name: LPSOCKADDR,
+    namelen: ::INT,
+    lpBuffers: LPWSABUF,
+    dwBufferCount: ::ULONG,
+    Control: WSABUF,
+    dwFlags: ::ULONG,
+}}
 pub type PWSAMSG = *mut WSAMSG;
 pub type LPWSAMSG = *mut WSAMSG;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ADDRINFOA {
-    pub ai_flags: ::c_int,
-    pub ai_family: ::c_int,
-    pub ai_socktype: ::c_int,
-    pub ai_protocol: ::c_int,
-    pub ai_addrlen: ::size_t,
-    pub ai_canonname: *mut ::c_char,
-    pub ai_addr: *mut SOCKADDR,
-    pub ai_next: *mut ADDRINFOA,
-}
+STRUCT!{struct ADDRINFOA {
+    ai_flags: ::c_int,
+    ai_family: ::c_int,
+    ai_socktype: ::c_int,
+    ai_protocol: ::c_int,
+    ai_addrlen: ::size_t,
+    ai_canonname: *mut ::c_char,
+    ai_addr: *mut SOCKADDR,
+    ai_next: *mut ADDRINFOA,
+}}
 pub type PADDRINFOA = *mut ADDRINFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ADDRINFOW {
-    pub ai_flags: ::c_int,
-    pub ai_family: ::c_int,
-    pub ai_socktype: ::c_int,
-    pub ai_protocol: ::c_int,
-    pub ai_addrlen: ::size_t,
-    pub ai_canonname: ::PWSTR,
-    pub ai_addr: *mut SOCKADDR,
-    pub ai_next: *mut ADDRINFOW,
-}
+STRUCT!{struct ADDRINFOW {
+    ai_flags: ::c_int,
+    ai_family: ::c_int,
+    ai_socktype: ::c_int,
+    ai_protocol: ::c_int,
+    ai_addrlen: ::size_t,
+    ai_canonname: ::PWSTR,
+    ai_addr: *mut SOCKADDR,
+    ai_next: *mut ADDRINFOW,
+}}
 pub type PADDRINFOW = *mut ADDRINFOW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ADDRINFOEXA {
-    pub ai_flags: ::c_int,
-    pub ai_family: ::c_int,
-    pub ai_socktype: ::c_int,
-    pub ai_protocol: ::c_int,
-    pub ai_addrlen: ::size_t,
-    pub ai_canonname: *mut ::c_char,
-    pub ai_addr: *mut SOCKADDR,
-    pub ai_blob: *mut ::c_void,
-    pub ai_bloblen: ::size_t,
-    pub ai_provider: ::LPGUID,
-    pub ai_next: *mut ADDRINFOEXW,
-}
+STRUCT!{struct ADDRINFOEXA {
+    ai_flags: ::c_int,
+    ai_family: ::c_int,
+    ai_socktype: ::c_int,
+    ai_protocol: ::c_int,
+    ai_addrlen: ::size_t,
+    ai_canonname: *mut ::c_char,
+    ai_addr: *mut SOCKADDR,
+    ai_blob: *mut ::c_void,
+    ai_bloblen: ::size_t,
+    ai_provider: ::LPGUID,
+    ai_next: *mut ADDRINFOEXW,
+}}
 pub type PADDRINFOEXA = *mut ADDRINFOEXA;
 pub type LPADDRINFOEXA = *mut ADDRINFOEXA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ADDRINFOEXW {
-    pub ai_flags: ::c_int,
-    pub ai_family: ::c_int,
-    pub ai_socktype: ::c_int,
-    pub ai_protocol: ::c_int,
-    pub ai_addrlen: ::size_t,
-    pub ai_canonname: ::PWSTR,
-    pub ai_addr: *mut SOCKADDR,
-    pub ai_blob: *mut ::c_void,
-    pub ai_bloblen: ::size_t,
-    pub ai_provider: ::LPGUID,
-    pub ai_next: *mut ADDRINFOEXW,
-}
+STRUCT!{struct ADDRINFOEXW {
+    ai_flags: ::c_int,
+    ai_family: ::c_int,
+    ai_socktype: ::c_int,
+    ai_protocol: ::c_int,
+    ai_addrlen: ::size_t,
+    ai_canonname: ::PWSTR,
+    ai_addr: *mut SOCKADDR,
+    ai_blob: *mut ::c_void,
+    ai_bloblen: ::size_t,
+    ai_provider: ::LPGUID,
+    ai_next: *mut ADDRINFOEXW,
+}}
 pub type PADDRINFOEXW = *mut ADDRINFOEXW;
 pub type LPADDRINFOEXW = *mut ADDRINFOEXW;

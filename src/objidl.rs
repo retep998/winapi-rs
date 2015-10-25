@@ -2,13 +2,12 @@
 // Licensed under the MIT License <LICENSE.md>
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
 //8402
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct BIND_OPTS {
-    pub cbStruct: ::DWORD,
-    pub grfFlags: ::DWORD,
-    pub grfMode: ::DWORD,
-    pub dwTickCountDeadline: ::DWORD,
-}
+STRUCT!{struct BIND_OPTS {
+    cbStruct: ::DWORD,
+    grfFlags: ::DWORD,
+    grfMode: ::DWORD,
+    dwTickCountDeadline: ::DWORD,
+}}
 pub type LPBIND_OPTS = *mut BIND_OPTS;
 //8479
 RIDL!(
@@ -64,10 +63,9 @@ pub const EOAC_REQUIRE_FULLSIC: ::DWORD = 0x200;
 pub const EOAC_AUTO_IMPERSONATE: ::DWORD = 0x400;
 pub const EOAC_NO_CUSTOM_MARSHAL: ::DWORD = 0x2000;
 pub const EOAC_DISABLE_AAA: ::DWORD = 0x1000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SOLE_AUTHENTICATION_SERVICE {
-    pub dwAuthnSvc: ::DWORD,
-    pub dwAuthzSvc: ::DWORD,
-    pub pPrincipalName: *mut ::OLECHAR,
-    pub hr: ::HRESULT,
-}
+STRUCT!{struct SOLE_AUTHENTICATION_SERVICE {
+    dwAuthnSvc: ::DWORD,
+    dwAuthzSvc: ::DWORD,
+    pPrincipalName: *mut ::OLECHAR,
+    hr: ::HRESULT,
+}}

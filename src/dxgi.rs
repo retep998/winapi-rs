@@ -1,19 +1,17 @@
 // Copyright © 2015; Connor Hilarides
 // Licensed under the MIT License <LICENSE.md>
 //! Mappings for the contents of dxgi.h
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_FRAME_STATISTICS {
-    pub PresentCount: ::UINT,
-    pub PresentRefreshCount: ::UINT,
-    pub SyncRefreshCount: ::UINT,
-    pub SyncQPCTime: ::LARGE_INTEGER,
-    pub SyncGPUTime: ::LARGE_INTEGER,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_MAPPED_RECT {
+STRUCT!{struct DXGI_FRAME_STATISTICS {
+    PresentCount: ::UINT,
+    PresentRefreshCount: ::UINT,
+    SyncRefreshCount: ::UINT,
+    SyncQPCTime: ::LARGE_INTEGER,
+    SyncGPUTime: ::LARGE_INTEGER,
+}}
+STRUCT!{struct DXGI_MAPPED_RECT {
     Pitch: ::INT,
     pBits: *mut ::BYTE,
-}
+}}
 #[repr(C)] #[derive(Copy)]
 pub struct DXGI_ADAPTER_DESC {
     pub Description: [::WCHAR; 128],
@@ -44,10 +42,9 @@ impl Clone for DXGI_OUTPUT_DESC {
         *self
     }
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_SHARED_RESOURCE {
-    pub Handle: ::HANDLE,
-}
+STRUCT!{struct DXGI_SHARED_RESOURCE {
+    Handle: ::HANDLE,
+}}
 pub const DXGI_RESOURCE_PRIORITY_MINIMUM: ::DWORD = 0x28000000;
 pub const DXGI_RESOURCE_PRIORITY_LOW: ::DWORD = 0x50000000;
 pub const DXGI_RESOURCE_PRIORITY_NORMAL: ::DWORD = 0x78000000;
@@ -60,13 +57,12 @@ pub enum DXGI_RESIDENCY {
     DXGI_RESIDENCY_EVICTED_TO_DISK = 3,
 }
 pub use self::DXGI_RESIDENCY::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_SURFACE_DESC {
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub Format: ::DXGI_FORMAT,
-    pub SampleDesc: ::DXGI_SAMPLE_DESC,
-}
+STRUCT!{struct DXGI_SURFACE_DESC {
+    Width: ::UINT,
+    Height: ::UINT,
+    Format: ::DXGI_FORMAT,
+    SampleDesc: ::DXGI_SAMPLE_DESC,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum DXGI_SWAP_EFFECT {
     DXGI_SWAP_EFFECT_DISCARD = 0,
@@ -88,17 +84,16 @@ pub enum DXGI_SWAP_CHAIN_FLAG {
     DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO = 512,
 }
 pub use self::DXGI_SWAP_CHAIN_FLAG::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_SWAP_CHAIN_DESC {
-    pub BufferDesc: ::DXGI_MODE_DESC,
-    pub SampleDesc: ::DXGI_SAMPLE_DESC,
-    pub BufferUsage: ::DXGI_USAGE,
-    pub BufferCount: ::UINT,
-    pub OutputWindow: ::HWND,
-    pub Windowed: ::BOOL,
-    pub SwapEffect: DXGI_SWAP_EFFECT,
-    pub Flags: ::UINT,
-}
+STRUCT!{struct DXGI_SWAP_CHAIN_DESC {
+    BufferDesc: ::DXGI_MODE_DESC,
+    SampleDesc: ::DXGI_SAMPLE_DESC,
+    BufferUsage: ::DXGI_USAGE,
+    BufferCount: ::UINT,
+    OutputWindow: ::HWND,
+    Windowed: ::BOOL,
+    SwapEffect: DXGI_SWAP_EFFECT,
+    Flags: ::UINT,
+}}
 RIDL!(
 interface IDXGIObject(IDXGIObjectVtbl): IUnknown(IUnknownVtbl) {
     fn SetPrivateData(
@@ -251,11 +246,10 @@ impl Clone for DXGI_ADAPTER_DESC1 {
         *self
     }
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_DISPLAY_COLOR_SPACE {
-    pub PrimaryCoordinates: [[::FLOAT; 2]; 8],
-    pub WhitePoints: [[::FLOAT; 2]; 16],
-}
+STRUCT!{struct DXGI_DISPLAY_COLOR_SPACE {
+    PrimaryCoordinates: [[::FLOAT; 2]; 8],
+    WhitePoints: [[::FLOAT; 2]; 16],
+}}
 RIDL!(
 interface IDXGIFactory1(IDXGIFactory1Vtbl): IDXGIFactory(IDXGIFactoryVtbl) {
     fn EnumAdapters1(&mut self, Adapter: ::UINT, ppAdapter: *mut *mut IDXGIAdapter1) -> ::HRESULT,

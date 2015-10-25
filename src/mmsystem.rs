@@ -4,38 +4,34 @@
 //109 (Win 7 SDK)
 pub type MMVERSION = ::UINT;
 pub type MMRESULT = ::UINT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MMTIME {
+STRUCT!{struct MMTIME {
     wType: ::UINT,
     u: MMTIME_u,
-}
+}}
 pub type PMMTIME = *mut MMTIME;
 pub type NPMMTIME = *mut MMTIME;
 pub type LPMMTIME = *mut MMTIME;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MMTIME_u {
+STRUCT!{struct MMTIME_u {
     data: [u8; 8],
-}
+}}
 UNION!(MMTIME_u, data, ms, ms_mut, ::DWORD);
 UNION!(MMTIME_u, data, sample, sample_mut, ::DWORD);
 UNION!(MMTIME_u, data, cb, cb_mut, ::DWORD);
 UNION!(MMTIME_u, data, ticks, ticks_mut, ::DWORD);
 UNION!(MMTIME_u, data, smpte, smpte_mut, MMTIME_smpte);
 UNION!(MMTIME_u, data, midi, midi_mut, MMTIME_midi);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MMTIME_smpte {
-    pub hour: ::BYTE,
-    pub min: ::BYTE,
-    pub sec: ::BYTE,
-    pub frame: ::BYTE,
-    pub fps: ::BYTE,
-    pub dummy: ::BYTE,
-    pub pad: [::BYTE; 2],
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MMTIME_midi {
-    pub songptrpos: ::DWORD,
-}
+STRUCT!{struct MMTIME_smpte {
+    hour: ::BYTE,
+    min: ::BYTE,
+    sec: ::BYTE,
+    frame: ::BYTE,
+    fps: ::BYTE,
+    dummy: ::BYTE,
+    pad: [::BYTE; 2],
+}}
+STRUCT!{struct MMTIME_midi {
+    songptrpos: ::DWORD,
+}}
 pub const TIME_MS: ::UINT = 0x0001;
 pub const TIME_SAMPLES: ::UINT = 0x0002;
 pub const TIME_BYTES: ::UINT = 0x0004;
@@ -135,44 +131,41 @@ pub const WAVE_MAPPED: ::DWORD = 0x0004;
 pub const WAVE_FORMAT_DIRECT: ::DWORD = 0x0008;
 pub const WAVE_FORMAT_DIRECT_QUERY: ::DWORD = WAVE_FORMAT_QUERY | WAVE_FORMAT_DIRECT;
 pub const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE: ::DWORD = 0x0010;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WAVEHDR {
-    pub lpData: ::LPSTR,
-    pub dwBufferLength: ::DWORD,
-    pub dwBytesRecorded: ::DWORD,
-    pub dwUser: ::DWORD_PTR,
-    pub dwFlags: ::DWORD,
-    pub dwLoops: ::DWORD,
-    pub lpNext: *mut WAVEHDR,
-    pub reserved: ::DWORD_PTR,
-}
+STRUCT!{struct WAVEHDR {
+    lpData: ::LPSTR,
+    dwBufferLength: ::DWORD,
+    dwBytesRecorded: ::DWORD,
+    dwUser: ::DWORD_PTR,
+    dwFlags: ::DWORD,
+    dwLoops: ::DWORD,
+    lpNext: *mut WAVEHDR,
+    reserved: ::DWORD_PTR,
+}}
 pub type PWAVEHDR = *mut WAVEHDR;
 pub type NPWAVEHDR = *mut WAVEHDR;
 pub type LPWAVEHDR = *mut WAVEHDR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WAVEOUTCAPSW {
-    pub wMid: ::WORD,
-    pub wPid: ::WORD,
-    pub vDriverVersion: MMVERSION,
-    pub szPname: [::WCHAR; 32],
-    pub dwFormats: ::DWORD,
-    pub wChannels: ::WORD,
-    pub wReserved1: ::WORD,
-    pub dwSupport: ::DWORD,
-}
+STRUCT!{struct WAVEOUTCAPSW {
+    wMid: ::WORD,
+    wPid: ::WORD,
+    vDriverVersion: MMVERSION,
+    szPname: [::WCHAR; 32],
+    dwFormats: ::DWORD,
+    wChannels: ::WORD,
+    wReserved1: ::WORD,
+    dwSupport: ::DWORD,
+}}
 pub type PWAVEOUTCAPSW = *mut WAVEOUTCAPSW;
 pub type NPWAVEOUTCAPSW = *mut WAVEOUTCAPSW;
 pub type LPWAVEOUTCAPSW = *mut WAVEOUTCAPSW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WAVEINCAPSW {
-    pub wMid: ::WORD,
-    pub wPid: ::WORD,
-    pub vDriverVersion: MMVERSION,
-    pub szPname: [::WCHAR; 32],
-    pub dwFormats: ::DWORD,
-    pub wChannels: ::WORD,
-    pub wReserved1: ::WORD,
-}
+STRUCT!{struct WAVEINCAPSW {
+    wMid: ::WORD,
+    wPid: ::WORD,
+    vDriverVersion: MMVERSION,
+    szPname: [::WCHAR; 32],
+    dwFormats: ::DWORD,
+    wChannels: ::WORD,
+    wReserved1: ::WORD,
+}}
 pub type PWAVEINCAPSW = *mut WAVEINCAPSW;
 pub type NPWAVEINCAPSW = *mut WAVEINCAPSW;
 pub type LPWAVEINCAPSW = *mut WAVEINCAPSW;
@@ -211,52 +204,48 @@ pub const TIMERR_NOERROR: ::MMRESULT = 0;
 pub const TIMERR_NOCANDO: ::MMRESULT = TIMERR_BASE + 1;
 pub const TIMERR_STRUCT: ::MMRESULT = TIMERR_BASE + 33;
 //2198 (Win 7 SDK)
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TIMECAPS {
-    pub wPeriodMin: ::UINT,
-    pub wPeriodMax: ::UINT,
-}
+STRUCT!{struct TIMECAPS {
+    wPeriodMin: ::UINT,
+    wPeriodMax: ::UINT,
+}}
 pub type PTIMECAPS = *mut TIMECAPS;
 pub type NPTIMECAPS = *mut TIMECAPS;
 pub type LPTIMECAPS = *mut TIMECAPS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MIDIHDR {
-    pub lpData: ::LPSTR,
-    pub dwBufferLength: ::DWORD,
-    pub dwBytesRecorded: ::DWORD,
-    pub dwUser: ::DWORD_PTR,
-    pub dwFlags: ::DWORD,
-    pub lpNext: *mut MIDIHDR,
-    pub reserved: ::DWORD_PTR,
-    pub dwOffset: ::DWORD,
-    pub dwReserved: [::DWORD_PTR; 4],
-}
+STRUCT!{struct MIDIHDR {
+    lpData: ::LPSTR,
+    dwBufferLength: ::DWORD,
+    dwBytesRecorded: ::DWORD,
+    dwUser: ::DWORD_PTR,
+    dwFlags: ::DWORD,
+    lpNext: *mut MIDIHDR,
+    reserved: ::DWORD_PTR,
+    dwOffset: ::DWORD,
+    dwReserved: [::DWORD_PTR; 4],
+}}
 pub type PMIDIHDR = *mut MIDIHDR;
 pub type NPMIDIHDR = *mut MIDIHDR;
 pub type LPMIDIHDR = *mut MIDIHDR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MIDIINCAPSW {
-    pub wMid: ::WORD,
-    pub wPid: ::WORD,
-    pub vDriverVersion: MMVERSION,
-    pub szPname: [::WCHAR; 32],
-    pub dwSupport: ::DWORD,
-}
+STRUCT!{struct MIDIINCAPSW {
+    wMid: ::WORD,
+    wPid: ::WORD,
+    vDriverVersion: MMVERSION,
+    szPname: [::WCHAR; 32],
+    dwSupport: ::DWORD,
+}}
 pub type PMIDIINCAPSW = *mut MIDIINCAPSW;
 pub type NPMIDIINCAPSW = *mut MIDIINCAPSW;
 pub type LPMIDIINCAPSW = *mut MIDIINCAPSW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MIDIOUTCAPSW {
-    pub wMid: ::WORD,
-    pub wPid: ::WORD,
-    pub vDriverVersion: ::MMVERSION,
-    pub szPname: [::WCHAR; 32],
-    pub wTechnology: ::WORD,
-    pub wVoices: ::WORD,
-    pub wNotes: ::WORD,
-    pub wChannelMask: ::WORD,
-    pub dwSupport: ::DWORD,
-}
+STRUCT!{struct MIDIOUTCAPSW {
+    wMid: ::WORD,
+    wPid: ::WORD,
+    vDriverVersion: ::MMVERSION,
+    szPname: [::WCHAR; 32],
+    wTechnology: ::WORD,
+    wVoices: ::WORD,
+    wNotes: ::WORD,
+    wChannelMask: ::WORD,
+    dwSupport: ::DWORD,
+}}
 pub type PMIDIOUTCAPSW = *mut MIDIOUTCAPSW;
 pub type NPMIDIOUTCAPSW = *mut MIDIOUTCAPSW;
 pub type LPMIDIOUTCAPSW = *mut MIDIOUTCAPSW;

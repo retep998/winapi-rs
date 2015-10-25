@@ -176,12 +176,11 @@ pub const POLICY_WRITE: ::ACCESS_MASK = ::STANDARD_RIGHTS_WRITE | POLICY_TRUST_A
     | POLICY_SERVER_ADMIN;
 pub const POLICY_EXECUTE: ::ACCESS_MASK = ::STANDARD_RIGHTS_EXECUTE
     | POLICY_VIEW_LOCAL_INFORMATION | POLICY_LOOKUP_NAMES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_TRANSLATED_SID {
-    pub Use: ::SID_NAME_USE,
-    pub RelativeId: ::ULONG,
-    pub DomainIndex: ::LONG,
-}
+STRUCT!{struct LSA_TRANSLATED_SID {
+    Use: ::SID_NAME_USE,
+    RelativeId: ::ULONG,
+    DomainIndex: ::LONG,
+}}
 pub type PLSA_TRANSLATED_SID = *mut LSA_TRANSLATED_SID;
 ENUM!{enum POLICY_LSA_SERVER_ROLE {
     PolicyServerRoleBackup = 2,
@@ -208,34 +207,30 @@ ENUM!{enum POLICY_INFORMATION_CLASS {
     PolicyLastEntry,
 }}
 pub type PPOLICY_INFORMATION_CLASS = *mut POLICY_INFORMATION_CLASS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_AUDIT_LOG_INFO {
-    pub AuditLogPercentFull: ::ULONG,
-    pub MaximumLogSize: ::ULONG,
-    pub AuditRetentionPeriod: ::LARGE_INTEGER,
-    pub AuditLogFullShutdownInProgress: ::BOOLEAN,
-    pub TimeToShutdown: ::LARGE_INTEGER,
-    pub NextAuditRecordId: ::ULONG,
-}
+STRUCT!{struct POLICY_AUDIT_LOG_INFO {
+    AuditLogPercentFull: ::ULONG,
+    MaximumLogSize: ::ULONG,
+    AuditRetentionPeriod: ::LARGE_INTEGER,
+    AuditLogFullShutdownInProgress: ::BOOLEAN,
+    TimeToShutdown: ::LARGE_INTEGER,
+    NextAuditRecordId: ::ULONG,
+}}
 pub type PPOLICY_AUDIT_LOG_INFO = *mut POLICY_AUDIT_LOG_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_AUDIT_EVENTS_INFO {
-    pub AuditingMode: ::BOOLEAN,
-    pub EventAuditingOptions: PPOLICY_AUDIT_EVENT_OPTIONS,
-    pub MaximumAuditEventCount: ::ULONG,
-}
+STRUCT!{struct POLICY_AUDIT_EVENTS_INFO {
+    AuditingMode: ::BOOLEAN,
+    EventAuditingOptions: PPOLICY_AUDIT_EVENT_OPTIONS,
+    MaximumAuditEventCount: ::ULONG,
+}}
 pub type PPOLICY_AUDIT_EVENTS_INFO = *mut POLICY_AUDIT_EVENTS_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_AUDIT_SUBCATEGORIES_INFO {
-    pub MaximumSubCategoryCount: ::ULONG,
-    pub EventAuditingOptions: PPOLICY_AUDIT_EVENT_OPTIONS,
-}
+STRUCT!{struct POLICY_AUDIT_SUBCATEGORIES_INFO {
+    MaximumSubCategoryCount: ::ULONG,
+    EventAuditingOptions: PPOLICY_AUDIT_EVENT_OPTIONS,
+}}
 pub type PPOLICY_AUDIT_SUBCATEGORIES_INFO = *mut POLICY_AUDIT_SUBCATEGORIES_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_AUDIT_CATEGORIES_INFO {
-    pub MaximumSubCategoryCount: ::ULONG,
-    pub SubCategoriesInfo: PPOLICY_AUDIT_SUBCATEGORIES_INFO,
-}
+STRUCT!{struct POLICY_AUDIT_CATEGORIES_INFO {
+    MaximumSubCategoryCount: ::ULONG,
+    SubCategoriesInfo: PPOLICY_AUDIT_SUBCATEGORIES_INFO,
+}}
 pub type PPOLICY_AUDIT_CATEGORIES_INFO = *mut POLICY_AUDIT_CATEGORIES_INFO;
 pub const PER_USER_POLICY_UNCHANGED: ::ULONG = 0x00;
 pub const PER_USER_AUDIT_SUCCESS_INCLUDE: ::ULONG = 0x01;
@@ -246,70 +241,60 @@ pub const PER_USER_AUDIT_NONE: ::ULONG = 0x10;
 pub const VALID_PER_USER_AUDIT_POLICY_FLAG: ::ULONG = PER_USER_AUDIT_SUCCESS_INCLUDE
     | PER_USER_AUDIT_SUCCESS_EXCLUDE | PER_USER_AUDIT_FAILURE_INCLUDE
     | PER_USER_AUDIT_FAILURE_EXCLUDE | PER_USER_AUDIT_NONE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_PRIMARY_DOMAIN_INFO {
-    pub Name: ::LSA_UNICODE_STRING,
-    pub Sid: ::PSID,
-}
+STRUCT!{struct POLICY_PRIMARY_DOMAIN_INFO {
+    Name: ::LSA_UNICODE_STRING,
+    Sid: ::PSID,
+}}
 pub type PPOLICY_PRIMARY_DOMAIN_INFO = *mut POLICY_PRIMARY_DOMAIN_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_PD_ACCOUNT_INFO {
-    pub Name: ::LSA_UNICODE_STRING,
-}
+STRUCT!{struct POLICY_PD_ACCOUNT_INFO {
+    Name: ::LSA_UNICODE_STRING,
+}}
 pub type PPOLICY_PD_ACCOUNT_INFO = *mut POLICY_PD_ACCOUNT_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_LSA_SERVER_ROLE_INFO {
-    pub LsaServerRole: POLICY_LSA_SERVER_ROLE,
-}
+STRUCT!{struct POLICY_LSA_SERVER_ROLE_INFO {
+    LsaServerRole: POLICY_LSA_SERVER_ROLE,
+}}
 pub type PPOLICY_LSA_SERVER_ROLE_INFO = *mut POLICY_LSA_SERVER_ROLE_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_REPLICA_SOURCE_INFO {
-    pub ReplicaSource: ::LSA_UNICODE_STRING,
-    pub ReplicaAccountName: ::LSA_UNICODE_STRING,
-}
+STRUCT!{struct POLICY_REPLICA_SOURCE_INFO {
+    ReplicaSource: ::LSA_UNICODE_STRING,
+    ReplicaAccountName: ::LSA_UNICODE_STRING,
+}}
 pub type PPOLICY_REPLICA_SOURCE_INFO = *mut POLICY_REPLICA_SOURCE_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_DEFAULT_QUOTA_INFO {
-    pub QuotaLimits: ::QUOTA_LIMITS,
-}
+STRUCT!{struct POLICY_DEFAULT_QUOTA_INFO {
+    QuotaLimits: ::QUOTA_LIMITS,
+}}
 pub type PPOLICY_DEFAULT_QUOTA_INFO = *mut POLICY_DEFAULT_QUOTA_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_MODIFICATION_INFO {
-    pub ModifiedId: ::LARGE_INTEGER,
-    pub DatabaseCreationTime: ::LARGE_INTEGER,
-}
+STRUCT!{struct POLICY_MODIFICATION_INFO {
+    ModifiedId: ::LARGE_INTEGER,
+    DatabaseCreationTime: ::LARGE_INTEGER,
+}}
 pub type PPOLICY_MODIFICATION_INFO = *mut POLICY_MODIFICATION_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_AUDIT_FULL_SET_INFO {
-    pub ShutDownOnFull: ::BOOLEAN,
-}
+STRUCT!{struct POLICY_AUDIT_FULL_SET_INFO {
+    ShutDownOnFull: ::BOOLEAN,
+}}
 pub type PPOLICY_AUDIT_FULL_SET_INFO = *mut POLICY_AUDIT_FULL_SET_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_AUDIT_FULL_QUERY_INFO {
-    pub ShutDownOnFull: ::BOOLEAN,
-    pub LogIsFull: ::BOOLEAN,
-}
+STRUCT!{struct POLICY_AUDIT_FULL_QUERY_INFO {
+    ShutDownOnFull: ::BOOLEAN,
+    LogIsFull: ::BOOLEAN,
+}}
 pub type PPOLICY_AUDIT_FULL_QUERY_INFO = *mut POLICY_AUDIT_FULL_QUERY_INFO;
 ENUM!{enum POLICY_DOMAIN_INFORMATION_CLASS {
     PolicyDomainEfsInformation = 2,
     PolicyDomainKerberosTicketInformation,
 }}
 pub type PPOLICY_DOMAIN_INFORMATION_CLASS = *mut POLICY_DOMAIN_INFORMATION_CLASS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_DOMAIN_EFS_INFO {
-    pub InfoLength: ::ULONG,
-    pub EfsBlob: ::PUCHAR,
-}
+STRUCT!{struct POLICY_DOMAIN_EFS_INFO {
+    InfoLength: ::ULONG,
+    EfsBlob: ::PUCHAR,
+}}
 pub type PPOLICY_DOMAIN_EFS_INFO = *mut POLICY_DOMAIN_EFS_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_DOMAIN_KERBEROS_TICKET_INFO {
-    pub AuthenticationOptions: ::ULONG,
-    pub MaxServiceTicketAge: ::LARGE_INTEGER,
-    pub MaxTicketAge: ::LARGE_INTEGER,
-    pub MaxRenewAge: ::LARGE_INTEGER,
-    pub MaxClockSkew: ::LARGE_INTEGER,
-    pub Reserved: ::LARGE_INTEGER,
-}
+STRUCT!{struct POLICY_DOMAIN_KERBEROS_TICKET_INFO {
+    AuthenticationOptions: ::ULONG,
+    MaxServiceTicketAge: ::LARGE_INTEGER,
+    MaxTicketAge: ::LARGE_INTEGER,
+    MaxRenewAge: ::LARGE_INTEGER,
+    MaxClockSkew: ::LARGE_INTEGER,
+    Reserved: ::LARGE_INTEGER,
+}}
 pub type PPOLICY_DOMAIN_KERBEROS_TICKET_INFO = *mut POLICY_DOMAIN_KERBEROS_TICKET_INFO;
 ENUM!{enum POLICY_NOTIFICATION_INFORMATION_CLASS {
     PolicyNotifyAuditEventsInformation = 1,
@@ -341,27 +326,23 @@ ENUM!{enum TRUSTED_INFORMATION_CLASS {
     TrustedDomainSupportedEncryptionTypes,
 }}
 pub type PTRUSTED_INFORMATION_CLASS = *mut TRUSTED_INFORMATION_CLASS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TRUSTED_DOMAIN_NAME_INFO {
-    pub Name: ::LSA_UNICODE_STRING,
-}
+STRUCT!{struct TRUSTED_DOMAIN_NAME_INFO {
+    Name: ::LSA_UNICODE_STRING,
+}}
 pub type PTRUSTED_DOMAIN_NAME_INFO = *mut TRUSTED_DOMAIN_NAME_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TRUSTED_CONTROLLERS_INFO {
-    pub Entries: ::ULONG,
-    pub Names: ::PLSA_UNICODE_STRING,
-}
+STRUCT!{struct TRUSTED_CONTROLLERS_INFO {
+    Entries: ::ULONG,
+    Names: ::PLSA_UNICODE_STRING,
+}}
 pub type PTRUSTED_CONTROLLERS_INFO = *mut TRUSTED_CONTROLLERS_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TRUSTED_POSIX_OFFSET_INFO {
-    pub Offset: ::ULONG,
-}
+STRUCT!{struct TRUSTED_POSIX_OFFSET_INFO {
+    Offset: ::ULONG,
+}}
 pub type PTRUSTED_POSIX_OFFSET_INFO = *mut TRUSTED_POSIX_OFFSET_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TRUSTED_PASSWORD_INFO {
-    pub Password: ::LSA_UNICODE_STRING,
-    pub OldPassword: ::LSA_UNICODE_STRING,
-}
+STRUCT!{struct TRUSTED_PASSWORD_INFO {
+    Password: ::LSA_UNICODE_STRING,
+    OldPassword: ::LSA_UNICODE_STRING,
+}}
 pub type PTRUSTED_PASSWORD_INFO = *mut TRUSTED_PASSWORD_INFO;
 pub type TRUSTED_DOMAIN_INFORMATION_BASIC = ::LSA_TRUST_INFORMATION;
 pub type PTRUSTED_DOMAIN_INFORMATION_BASIC = ::PLSA_TRUST_INFORMATION;
@@ -385,68 +366,61 @@ pub const TRUST_ATTRIBUTE_TRUST_USES_AES_KEYS: ::ULONG = 0x00000100;
 pub const TRUST_ATTRIBUTE_CROSS_ORGANIZATION_NO_TGT_DELEGATION: ::ULONG = 0x00000200;
 pub const TRUST_ATTRIBUTES_VALID: ::ULONG = 0xFF03FFFF;
 pub const TRUST_ATTRIBUTES_USER: ::ULONG = 0xFF000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TRUSTED_DOMAIN_INFORMATION_EX {
-    pub Name: ::LSA_UNICODE_STRING,
-    pub FlatName: ::LSA_UNICODE_STRING,
-    pub Sid: ::PSID,
-    pub TrustDirection: ::ULONG,
-    pub TrustType: ::ULONG,
-    pub TrustAttributes: ::ULONG,
-}
+STRUCT!{struct TRUSTED_DOMAIN_INFORMATION_EX {
+    Name: ::LSA_UNICODE_STRING,
+    FlatName: ::LSA_UNICODE_STRING,
+    Sid: ::PSID,
+    TrustDirection: ::ULONG,
+    TrustType: ::ULONG,
+    TrustAttributes: ::ULONG,
+}}
 pub type PTRUSTED_DOMAIN_INFORMATION_EX = *mut TRUSTED_DOMAIN_INFORMATION_EX;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TRUSTED_DOMAIN_INFORMATION_EX2 {
-    pub Name: ::LSA_UNICODE_STRING,
-    pub FlatName: ::LSA_UNICODE_STRING,
-    pub Sid: ::PSID,
-    pub TrustDirection: ::ULONG,
-    pub TrustType: ::ULONG,
-    pub TrustAttributes: ::ULONG,
-    pub ForestTrustLength: ::ULONG,
-    pub ForestTrustInfo: ::PUCHAR,
-}
+STRUCT!{struct TRUSTED_DOMAIN_INFORMATION_EX2 {
+    Name: ::LSA_UNICODE_STRING,
+    FlatName: ::LSA_UNICODE_STRING,
+    Sid: ::PSID,
+    TrustDirection: ::ULONG,
+    TrustType: ::ULONG,
+    TrustAttributes: ::ULONG,
+    ForestTrustLength: ::ULONG,
+    ForestTrustInfo: ::PUCHAR,
+}}
 pub type PTRUSTED_DOMAIN_INFORMATION_EX2 = *mut TRUSTED_DOMAIN_INFORMATION_EX2;
 pub const TRUST_AUTH_TYPE_NONE: ::ULONG = 0;
 pub const TRUST_AUTH_TYPE_NT4OWF: ::ULONG = 1;
 pub const TRUST_AUTH_TYPE_CLEAR: ::ULONG = 2;
 pub const TRUST_AUTH_TYPE_VERSION: ::ULONG = 3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_AUTH_INFORMATION {
-    pub LastUpdateTime: ::LARGE_INTEGER,
-    pub AuthType: ::ULONG,
-    pub AuthInfoLength: ::ULONG,
-    pub AuthInfo: ::PUCHAR,
-}
+STRUCT!{struct LSA_AUTH_INFORMATION {
+    LastUpdateTime: ::LARGE_INTEGER,
+    AuthType: ::ULONG,
+    AuthInfoLength: ::ULONG,
+    AuthInfo: ::PUCHAR,
+}}
 pub type PLSA_AUTH_INFORMATION = *mut LSA_AUTH_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TRUSTED_DOMAIN_AUTH_INFORMATION {
-    pub IncomingAuthInfos: ::ULONG,
-    pub IncomingAuthenticationInformation: PLSA_AUTH_INFORMATION,
-    pub IncomingPreviousAuthenticationInformation: PLSA_AUTH_INFORMATION,
-    pub OutgoingAuthInfos: ::ULONG,
-    pub OutgoingAuthenticationInformation: PLSA_AUTH_INFORMATION,
-    pub OutgoingPreviousAuthenticationInformation: PLSA_AUTH_INFORMATION,
-}
+STRUCT!{struct TRUSTED_DOMAIN_AUTH_INFORMATION {
+    IncomingAuthInfos: ::ULONG,
+    IncomingAuthenticationInformation: PLSA_AUTH_INFORMATION,
+    IncomingPreviousAuthenticationInformation: PLSA_AUTH_INFORMATION,
+    OutgoingAuthInfos: ::ULONG,
+    OutgoingAuthenticationInformation: PLSA_AUTH_INFORMATION,
+    OutgoingPreviousAuthenticationInformation: PLSA_AUTH_INFORMATION,
+}}
 pub type PTRUSTED_DOMAIN_AUTH_INFORMATION = *mut TRUSTED_DOMAIN_AUTH_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TRUSTED_DOMAIN_FULL_INFORMATION {
-    pub Information: TRUSTED_DOMAIN_INFORMATION_EX,
-    pub PosixOffset: TRUSTED_POSIX_OFFSET_INFO,
-    pub AuthInformation: TRUSTED_DOMAIN_AUTH_INFORMATION,
-}
+STRUCT!{struct TRUSTED_DOMAIN_FULL_INFORMATION {
+    Information: TRUSTED_DOMAIN_INFORMATION_EX,
+    PosixOffset: TRUSTED_POSIX_OFFSET_INFO,
+    AuthInformation: TRUSTED_DOMAIN_AUTH_INFORMATION,
+}}
 pub type PTRUSTED_DOMAIN_FULL_INFORMATION = *mut TRUSTED_DOMAIN_FULL_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TRUSTED_DOMAIN_FULL_INFORMATION2 {
-    pub Information: TRUSTED_DOMAIN_INFORMATION_EX2,
-    pub PosixOffset: TRUSTED_POSIX_OFFSET_INFO,
-    pub AuthInformation: TRUSTED_DOMAIN_AUTH_INFORMATION,
-}
+STRUCT!{struct TRUSTED_DOMAIN_FULL_INFORMATION2 {
+    Information: TRUSTED_DOMAIN_INFORMATION_EX2,
+    PosixOffset: TRUSTED_POSIX_OFFSET_INFO,
+    AuthInformation: TRUSTED_DOMAIN_AUTH_INFORMATION,
+}}
 pub type PTRUSTED_DOMAIN_FULL_INFORMATION2 = *mut TRUSTED_DOMAIN_FULL_INFORMATION2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TRUSTED_DOMAIN_SUPPORTED_ENCRYPTION_TYPES {
-    pub SupportedEncryptionTypes: ::ULONG,
-}
+STRUCT!{struct TRUSTED_DOMAIN_SUPPORTED_ENCRYPTION_TYPES {
+    SupportedEncryptionTypes: ::ULONG,
+}}
 pub type PTRUSTED_DOMAIN_SUPPORTED_ENCRYPTION_TYPES =
     *mut TRUSTED_DOMAIN_SUPPORTED_ENCRYPTION_TYPES;
 ENUM!{enum LSA_FOREST_TRUST_RECORD_TYPE {
@@ -463,24 +437,21 @@ pub const LSA_SID_DISABLED_ADMIN: ::ULONG = 0x00000001;
 pub const LSA_SID_DISABLED_CONFLICT: ::ULONG = 0x00000002;
 pub const LSA_NB_DISABLED_ADMIN: ::ULONG = 0x00000004;
 pub const LSA_NB_DISABLED_CONFLICT: ::ULONG = 0x00000008;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_FOREST_TRUST_DOMAIN_INFO {
-    pub Sid: ::PSID,
-    pub DnsName: ::LSA_UNICODE_STRING,
-    pub NetbiosName: ::LSA_UNICODE_STRING,
-}
+STRUCT!{struct LSA_FOREST_TRUST_DOMAIN_INFO {
+    Sid: ::PSID,
+    DnsName: ::LSA_UNICODE_STRING,
+    NetbiosName: ::LSA_UNICODE_STRING,
+}}
 pub type PLSA_FOREST_TRUST_DOMAIN_INFO = *mut LSA_FOREST_TRUST_DOMAIN_INFO;
 pub const MAX_FOREST_TRUST_BINARY_DATA_SIZE: ::ULONG = 128 * 1024;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_FOREST_TRUST_BINARY_DATA {
-    pub Length: ::ULONG,
-    pub Buffer: ::PUCHAR,
-}
+STRUCT!{struct LSA_FOREST_TRUST_BINARY_DATA {
+    Length: ::ULONG,
+    Buffer: ::PUCHAR,
+}}
 pub type PLSA_FOREST_TRUST_BINARY_DATA = *mut LSA_FOREST_TRUST_BINARY_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_FOREST_TRUST_RECORD_ForestTrustData {
-    pub DomainInfo: LSA_FOREST_TRUST_DOMAIN_INFO,
-}
+STRUCT!{struct LSA_FOREST_TRUST_RECORD_ForestTrustData {
+    DomainInfo: LSA_FOREST_TRUST_DOMAIN_INFO,
+}}
 UNION!(
     LSA_FOREST_TRUST_RECORD_ForestTrustData, DomainInfo, TopLevelName, TopLevelName_mut,
     ::LSA_UNICODE_STRING
@@ -489,80 +460,73 @@ UNION!(
     LSA_FOREST_TRUST_RECORD_ForestTrustData, DomainInfo, Data, Data_mut,
     LSA_FOREST_TRUST_BINARY_DATA
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_FOREST_TRUST_RECORD {
-    pub Flags: ::ULONG,
-    pub ForestTrustType: LSA_FOREST_TRUST_RECORD_TYPE,
-    pub Time: ::LARGE_INTEGER,
-    pub ForestTrustData: LSA_FOREST_TRUST_RECORD_ForestTrustData,
-}
+STRUCT!{struct LSA_FOREST_TRUST_RECORD {
+    Flags: ::ULONG,
+    ForestTrustType: LSA_FOREST_TRUST_RECORD_TYPE,
+    Time: ::LARGE_INTEGER,
+    ForestTrustData: LSA_FOREST_TRUST_RECORD_ForestTrustData,
+}}
 pub type PLSA_FOREST_TRUST_RECORD = *mut LSA_FOREST_TRUST_RECORD;
 pub const MAX_RECORDS_IN_FOREST_TRUST_INFO: ::ULONG = 4000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_FOREST_TRUST_INFORMATION {
-    pub RecordCount: ::ULONG,
-    pub Entries: *mut PLSA_FOREST_TRUST_RECORD,
-}
+STRUCT!{struct LSA_FOREST_TRUST_INFORMATION {
+    RecordCount: ::ULONG,
+    Entries: *mut PLSA_FOREST_TRUST_RECORD,
+}}
 pub type PLSA_FOREST_TRUST_INFORMATION = *mut LSA_FOREST_TRUST_INFORMATION;
 ENUM!{enum LSA_FOREST_TRUST_COLLISION_RECORD_TYPE {
     CollisionTdo,
     CollisionXref,
     CollisionOther,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_FOREST_TRUST_COLLISION_RECORD {
-    pub Index: ::ULONG,
-    pub Type: LSA_FOREST_TRUST_COLLISION_RECORD_TYPE,
-    pub Flags: ::ULONG,
-    pub Name: ::LSA_UNICODE_STRING,
-}
+STRUCT!{struct LSA_FOREST_TRUST_COLLISION_RECORD {
+    Index: ::ULONG,
+    Type: LSA_FOREST_TRUST_COLLISION_RECORD_TYPE,
+    Flags: ::ULONG,
+    Name: ::LSA_UNICODE_STRING,
+}}
 pub type PLSA_FOREST_TRUST_COLLISION_RECORD = *mut LSA_FOREST_TRUST_COLLISION_RECORD;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_FOREST_TRUST_COLLISION_INFORMATION {
-    pub RecordCount: ::ULONG,
-    pub Entries: *mut PLSA_FOREST_TRUST_COLLISION_RECORD,
-}
+STRUCT!{struct LSA_FOREST_TRUST_COLLISION_INFORMATION {
+    RecordCount: ::ULONG,
+    Entries: *mut PLSA_FOREST_TRUST_COLLISION_RECORD,
+}}
 pub type PLSA_FOREST_TRUST_COLLISION_INFORMATION = *mut LSA_FOREST_TRUST_COLLISION_INFORMATION;
 pub type LSA_ENUMERATION_HANDLE = ::ULONG;
 pub type PLSA_ENUMERATION_HANDLE = *mut ::ULONG;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_ENUMERATION_INFORMATION {
-    pub Sid: ::PSID,
-}
+STRUCT!{struct LSA_ENUMERATION_INFORMATION {
+    Sid: ::PSID,
+}}
 pub type PLSA_ENUMERATION_INFORMATION = *mut LSA_ENUMERATION_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_LAST_INTER_LOGON_INFO {
-    pub LastSuccessfulLogon: ::LARGE_INTEGER,
-    pub LastFailedLogon: ::LARGE_INTEGER,
-    pub FailedAttemptCountSinceLastSuccessfulLogon: ::ULONG,
-}
+STRUCT!{struct LSA_LAST_INTER_LOGON_INFO {
+    LastSuccessfulLogon: ::LARGE_INTEGER,
+    LastFailedLogon: ::LARGE_INTEGER,
+    FailedAttemptCountSinceLastSuccessfulLogon: ::ULONG,
+}}
 pub type PLSA_LAST_INTER_LOGON_INFO = *mut LSA_LAST_INTER_LOGON_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SECURITY_LOGON_SESSION_DATA {
-    pub Size: ::ULONG,
-    pub LogonId: ::LUID,
-    pub UserName: ::LSA_UNICODE_STRING,
-    pub LogonDomain: ::LSA_UNICODE_STRING,
-    pub AuthenticationPackage: ::LSA_UNICODE_STRING,
-    pub LogonType: ::ULONG,
-    pub Session: ::ULONG,
-    pub Sid: ::PSID,
-    pub LogonTime: ::LARGE_INTEGER,
-    pub LogonServer: ::LSA_UNICODE_STRING,
-    pub DnsDomainName: ::LSA_UNICODE_STRING,
-    pub Upn: ::LSA_UNICODE_STRING,
-    pub UserFlags: ::ULONG,
-    pub LastLogonInfo: LSA_LAST_INTER_LOGON_INFO,
-    pub LogonScript: ::LSA_UNICODE_STRING,
-    pub ProfilePath: ::LSA_UNICODE_STRING,
-    pub HomeDirectory: ::LSA_UNICODE_STRING,
-    pub HomeDirectoryDrive: ::LSA_UNICODE_STRING,
-    pub LogoffTime: ::LARGE_INTEGER,
-    pub KickOffTime: ::LARGE_INTEGER,
-    pub PasswordLastSet: ::LARGE_INTEGER,
-    pub PasswordCanChange: ::LARGE_INTEGER,
-    pub PasswordMustChange: ::LARGE_INTEGER,
-}
+STRUCT!{struct SECURITY_LOGON_SESSION_DATA {
+    Size: ::ULONG,
+    LogonId: ::LUID,
+    UserName: ::LSA_UNICODE_STRING,
+    LogonDomain: ::LSA_UNICODE_STRING,
+    AuthenticationPackage: ::LSA_UNICODE_STRING,
+    LogonType: ::ULONG,
+    Session: ::ULONG,
+    Sid: ::PSID,
+    LogonTime: ::LARGE_INTEGER,
+    LogonServer: ::LSA_UNICODE_STRING,
+    DnsDomainName: ::LSA_UNICODE_STRING,
+    Upn: ::LSA_UNICODE_STRING,
+    UserFlags: ::ULONG,
+    LastLogonInfo: LSA_LAST_INTER_LOGON_INFO,
+    LogonScript: ::LSA_UNICODE_STRING,
+    ProfilePath: ::LSA_UNICODE_STRING,
+    HomeDirectory: ::LSA_UNICODE_STRING,
+    HomeDirectoryDrive: ::LSA_UNICODE_STRING,
+    LogoffTime: ::LARGE_INTEGER,
+    KickOffTime: ::LARGE_INTEGER,
+    PasswordLastSet: ::LARGE_INTEGER,
+    PasswordCanChange: ::LARGE_INTEGER,
+    PasswordMustChange: ::LARGE_INTEGER,
+}}
 pub type PSECURITY_LOGON_SESSION_DATA = *mut SECURITY_LOGON_SESSION_DATA;
 pub const CENTRAL_ACCESS_POLICY_OWNER_RIGHTS_PRESENT_FLAG: ::ULONG = 0x00000001;
 pub const CENTRAL_ACCESS_POLICY_STAGED_OWNER_RIGHTS_PRESENT_FLAG: ::ULONG = 0x00000100;
@@ -572,31 +536,29 @@ pub const CENTRAL_ACCESS_POLICY_VALID_FLAG_MASK: ::ULONG =
     | CENTRAL_ACCESS_POLICY_STAGED_OWNER_RIGHTS_PRESENT_FLAG | CENTRAL_ACCESS_POLICY_STAGED_FLAG;
 pub const LSASETCAPS_RELOAD_FLAG: ::ULONG = 0x00000001;
 pub const LSASETCAPS_VALID_FLAG_MASK: ::ULONG = LSASETCAPS_RELOAD_FLAG;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CENTRAL_ACCESS_POLICY_ENTRY {
-    pub Name: ::LSA_UNICODE_STRING,
-    pub Description: ::LSA_UNICODE_STRING,
-    pub ChangeId: ::LSA_UNICODE_STRING,
-    pub LengthAppliesTo: ::ULONG,
-    pub AppliesTo: ::PUCHAR,
-    pub LengthSD: ::ULONG,
-    pub SD: ::PSECURITY_DESCRIPTOR,
-    pub LengthStagedSD: ::ULONG,
-    pub StagedSD: ::PSECURITY_DESCRIPTOR,
-    pub Flags: ::ULONG,
-}
+STRUCT!{struct CENTRAL_ACCESS_POLICY_ENTRY {
+    Name: ::LSA_UNICODE_STRING,
+    Description: ::LSA_UNICODE_STRING,
+    ChangeId: ::LSA_UNICODE_STRING,
+    LengthAppliesTo: ::ULONG,
+    AppliesTo: ::PUCHAR,
+    LengthSD: ::ULONG,
+    SD: ::PSECURITY_DESCRIPTOR,
+    LengthStagedSD: ::ULONG,
+    StagedSD: ::PSECURITY_DESCRIPTOR,
+    Flags: ::ULONG,
+}}
 pub type PCENTRAL_ACCESS_POLICY_ENTRY = *mut CENTRAL_ACCESS_POLICY_ENTRY;
 pub type PCCENTRAL_ACCESS_POLICY_ENTRY = *const CENTRAL_ACCESS_POLICY_ENTRY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CENTRAL_ACCESS_POLICY {
-    pub CAPID: ::PSID,
-    pub Name: ::LSA_UNICODE_STRING,
-    pub Description: ::LSA_UNICODE_STRING,
-    pub ChangeId: ::LSA_UNICODE_STRING,
-    pub Flags: ::ULONG,
-    pub CAPECount: ::ULONG,
-    pub CAPEs: *mut PCENTRAL_ACCESS_POLICY_ENTRY,
-}
+STRUCT!{struct CENTRAL_ACCESS_POLICY {
+    CAPID: ::PSID,
+    Name: ::LSA_UNICODE_STRING,
+    Description: ::LSA_UNICODE_STRING,
+    ChangeId: ::LSA_UNICODE_STRING,
+    Flags: ::ULONG,
+    CAPECount: ::ULONG,
+    CAPEs: *mut PCENTRAL_ACCESS_POLICY_ENTRY,
+}}
 pub type PCENTRAL_ACCESS_POLICY = *mut CENTRAL_ACCESS_POLICY;
 pub type PCCENTRAL_ACCESS_POLICY = *const CENTRAL_ACCESS_POLICY;
 ENUM!{enum NEGOTIATE_MESSAGES {
@@ -606,43 +568,38 @@ ENUM!{enum NEGOTIATE_MESSAGES {
     NegCallPackageMax,
 }}
 pub const NEGOTIATE_MAX_PREFIX: usize = 32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NEGOTIATE_PACKAGE_PREFIX {
-    pub PackageId: ::ULONG_PTR,
-    pub PackageDataA: ::PVOID,
-    pub PackageDataW: ::PVOID,
-    pub PrefixLen: ::ULONG_PTR,
-    pub Prefix: [::UCHAR; NEGOTIATE_MAX_PREFIX],
-}
+STRUCT!{struct NEGOTIATE_PACKAGE_PREFIX {
+    PackageId: ::ULONG_PTR,
+    PackageDataA: ::PVOID,
+    PackageDataW: ::PVOID,
+    PrefixLen: ::ULONG_PTR,
+    Prefix: [::UCHAR; NEGOTIATE_MAX_PREFIX],
+}}
 pub type PNEGOTIATE_PACKAGE_PREFIX = *mut NEGOTIATE_PACKAGE_PREFIX;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NEGOTIATE_PACKAGE_PREFIXES {
-    pub MessageType: ::ULONG,
-    pub PrefixCount: ::ULONG,
-    pub Offset: ::ULONG,
-    pub Pad: ::ULONG,
-}
+STRUCT!{struct NEGOTIATE_PACKAGE_PREFIXES {
+    MessageType: ::ULONG,
+    PrefixCount: ::ULONG,
+    Offset: ::ULONG,
+    Pad: ::ULONG,
+}}
 pub type PNEGOTIATE_PACKAGE_PREFIXES = *mut NEGOTIATE_PACKAGE_PREFIXES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NEGOTIATE_CALLER_NAME_REQUEST {
-    pub MessageType: ::ULONG,
-    pub LogonId: ::LUID,
-}
+STRUCT!{struct NEGOTIATE_CALLER_NAME_REQUEST {
+    MessageType: ::ULONG,
+    LogonId: ::LUID,
+}}
 pub type PNEGOTIATE_CALLER_NAME_REQUEST = *mut NEGOTIATE_CALLER_NAME_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NEGOTIATE_CALLER_NAME_RESPONSE {
-    pub MessageType: ::ULONG,
-    pub CallerName: ::PWSTR,
-}
+STRUCT!{struct NEGOTIATE_CALLER_NAME_RESPONSE {
+    MessageType: ::ULONG,
+    CallerName: ::PWSTR,
+}}
 pub type PNEGOTIATE_CALLER_NAME_RESPONSE = *mut NEGOTIATE_CALLER_NAME_RESPONSE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DOMAIN_PASSWORD_INFORMATION {
-    pub MinPasswordLength: ::USHORT,
-    pub PasswordHistoryLength: ::USHORT,
-    pub PasswordProperties: ::ULONG,
-    pub MaxPasswordAge: ::LARGE_INTEGER,
-    pub MinPasswordAge: ::LARGE_INTEGER,
-}
+STRUCT!{struct DOMAIN_PASSWORD_INFORMATION {
+    MinPasswordLength: ::USHORT,
+    PasswordHistoryLength: ::USHORT,
+    PasswordProperties: ::ULONG,
+    MaxPasswordAge: ::LARGE_INTEGER,
+    MinPasswordAge: ::LARGE_INTEGER,
+}}
 pub type PDOMAIN_PASSWORD_INFORMATION = *mut DOMAIN_PASSWORD_INFORMATION;
 pub const DOMAIN_PASSWORD_COMPLEX: ::ULONG = 0x00000001;
 pub const DOMAIN_PASSWORD_NO_ANON_CHANGE: ::ULONG = 0x00000002;
@@ -677,33 +634,31 @@ ENUM!{enum MSV1_0_PROFILE_BUFFER_TYPE {
     MsV1_0SmartCardProfile,
 }}
 pub type PMSV1_0_PROFILE_BUFFER_TYPE = *mut MSV1_0_PROFILE_BUFFER_TYPE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_INTERACTIVE_LOGON {
-    pub MessageType: MSV1_0_LOGON_SUBMIT_TYPE,
-    pub LogonDomainName: ::UNICODE_STRING,
-    pub UserName: ::UNICODE_STRING,
-    pub Password: ::UNICODE_STRING,
-}
+STRUCT!{struct MSV1_0_INTERACTIVE_LOGON {
+    MessageType: MSV1_0_LOGON_SUBMIT_TYPE,
+    LogonDomainName: ::UNICODE_STRING,
+    UserName: ::UNICODE_STRING,
+    Password: ::UNICODE_STRING,
+}}
 pub type PMSV1_0_INTERACTIVE_LOGON = *mut MSV1_0_INTERACTIVE_LOGON;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_INTERACTIVE_PROFILE {
-    pub MessageType: MSV1_0_PROFILE_BUFFER_TYPE,
-    pub LogonCount: ::USHORT,
-    pub BadPasswordCount: ::USHORT,
-    pub LogonTime: ::LARGE_INTEGER,
-    pub LogoffTime: ::LARGE_INTEGER,
-    pub KickOffTime: ::LARGE_INTEGER,
-    pub PasswordLastSet: ::LARGE_INTEGER,
-    pub PasswordCanChange: ::LARGE_INTEGER,
-    pub PasswordMustChange: ::LARGE_INTEGER,
-    pub LogonScript: ::UNICODE_STRING,
-    pub HomeDirectory: ::UNICODE_STRING,
-    pub FullName: ::UNICODE_STRING,
-    pub ProfilePath: ::UNICODE_STRING,
-    pub HomeDirectoryDrive: ::UNICODE_STRING,
-    pub LogonServer: ::UNICODE_STRING,
-    pub UserFlags: ::ULONG,
-}
+STRUCT!{struct MSV1_0_INTERACTIVE_PROFILE {
+    MessageType: MSV1_0_PROFILE_BUFFER_TYPE,
+    LogonCount: ::USHORT,
+    BadPasswordCount: ::USHORT,
+    LogonTime: ::LARGE_INTEGER,
+    LogoffTime: ::LARGE_INTEGER,
+    KickOffTime: ::LARGE_INTEGER,
+    PasswordLastSet: ::LARGE_INTEGER,
+    PasswordCanChange: ::LARGE_INTEGER,
+    PasswordMustChange: ::LARGE_INTEGER,
+    LogonScript: ::UNICODE_STRING,
+    HomeDirectory: ::UNICODE_STRING,
+    FullName: ::UNICODE_STRING,
+    ProfilePath: ::UNICODE_STRING,
+    HomeDirectoryDrive: ::UNICODE_STRING,
+    LogonServer: ::UNICODE_STRING,
+    UserFlags: ::ULONG,
+}}
 pub type PMSV1_0_INTERACTIVE_PROFILE = *mut MSV1_0_INTERACTIVE_PROFILE;
 pub const MSV1_0_CHALLENGE_LENGTH: usize = 8;
 pub const MSV1_0_USER_SESSION_KEY_LENGTH: usize = 16;
@@ -733,38 +688,35 @@ pub const MSV1_0_SUBAUTHENTICATION_DLL_SHIFT: ::ULONG = 24;
 pub const MSV1_0_MNS_LOGON: ::ULONG = 0x01000000;
 pub const MSV1_0_SUBAUTHENTICATION_DLL_RAS: ::ULONG = 2;
 pub const MSV1_0_SUBAUTHENTICATION_DLL_IIS: ::ULONG = 132;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_LM20_LOGON {
-    pub MessageType: MSV1_0_LOGON_SUBMIT_TYPE,
-    pub LogonDomainName: ::UNICODE_STRING,
-    pub UserName: ::UNICODE_STRING,
-    pub Workstation: ::UNICODE_STRING,
-    pub ChallengeToClient: [::UCHAR; MSV1_0_CHALLENGE_LENGTH],
-    pub CaseSensitiveChallengeResponse: ::STRING,
-    pub CaseInsensitiveChallengeResponse: ::STRING,
-    pub ParameterControl: ::ULONG,
-}
+STRUCT!{struct MSV1_0_LM20_LOGON {
+    MessageType: MSV1_0_LOGON_SUBMIT_TYPE,
+    LogonDomainName: ::UNICODE_STRING,
+    UserName: ::UNICODE_STRING,
+    Workstation: ::UNICODE_STRING,
+    ChallengeToClient: [::UCHAR; MSV1_0_CHALLENGE_LENGTH],
+    CaseSensitiveChallengeResponse: ::STRING,
+    CaseInsensitiveChallengeResponse: ::STRING,
+    ParameterControl: ::ULONG,
+}}
 pub type PMSV1_0_LM20_LOGON = *mut MSV1_0_LM20_LOGON;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_SUBAUTH_LOGON {
-    pub MessageType: MSV1_0_LOGON_SUBMIT_TYPE,
-    pub LogonDomainName: ::UNICODE_STRING,
-    pub UserName: ::UNICODE_STRING,
-    pub Workstation: ::UNICODE_STRING,
-    pub ChallengeToClient: [::UCHAR; MSV1_0_CHALLENGE_LENGTH],
-    pub AuthenticationInfo1: ::STRING,
-    pub AuthenticationInfo2: ::STRING,
-    pub ParameterControl: ::ULONG,
-    pub SubAuthPackageId: ::ULONG,
-}
+STRUCT!{struct MSV1_0_SUBAUTH_LOGON {
+    MessageType: MSV1_0_LOGON_SUBMIT_TYPE,
+    LogonDomainName: ::UNICODE_STRING,
+    UserName: ::UNICODE_STRING,
+    Workstation: ::UNICODE_STRING,
+    ChallengeToClient: [::UCHAR; MSV1_0_CHALLENGE_LENGTH],
+    AuthenticationInfo1: ::STRING,
+    AuthenticationInfo2: ::STRING,
+    ParameterControl: ::ULONG,
+    SubAuthPackageId: ::ULONG,
+}}
 pub type PMSV1_0_SUBAUTH_LOGON = *mut MSV1_0_SUBAUTH_LOGON;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_S4U_LOGON {
-    pub MessageType: MSV1_0_LOGON_SUBMIT_TYPE,
-    pub MSV1_0_LOGON_SUBMIT_TYPE: ::ULONG,
-    pub UserPrincipalName: ::UNICODE_STRING,
-    pub DomainName: ::UNICODE_STRING,
-}
+STRUCT!{struct MSV1_0_S4U_LOGON {
+    MessageType: MSV1_0_LOGON_SUBMIT_TYPE,
+    MSV1_0_LOGON_SUBMIT_TYPE: ::ULONG,
+    UserPrincipalName: ::UNICODE_STRING,
+    DomainName: ::UNICODE_STRING,
+}}
 pub type PMSV1_0_S4U_LOGON = *mut MSV1_0_S4U_LOGON;
 pub const LOGON_GUEST: ::ULONG = 0x01;
 pub const LOGON_NOENCRYPTION: ::ULONG = 0x02;
@@ -786,42 +738,39 @@ pub const LOGON_NO_OPTIMIZED: ::ULONG = 0x20000;
 pub const LOGON_NO_ELEVATION: ::ULONG = 0x40000;
 pub const LOGON_MANAGED_SERVICE: ::ULONG = 0x80000;
 pub const LOGON_GRACE_LOGON: ::ULONG = 0x01000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_LM20_LOGON_PROFILE {
-    pub MessageType: MSV1_0_PROFILE_BUFFER_TYPE,
-    pub KickOffTime: ::LARGE_INTEGER,
-    pub LogoffTime: ::LARGE_INTEGER,
-    pub UserFlags: ::ULONG,
-    pub UserSessionKey: [::UCHAR; MSV1_0_USER_SESSION_KEY_LENGTH],
-    pub LogonDomainName: ::UNICODE_STRING,
-    pub LanmanSessionKey: [::UCHAR; MSV1_0_LANMAN_SESSION_KEY_LENGTH],
-    pub LogonServer: ::UNICODE_STRING,
-    pub UserParameters: ::UNICODE_STRING,
-}
+STRUCT!{struct MSV1_0_LM20_LOGON_PROFILE {
+    MessageType: MSV1_0_PROFILE_BUFFER_TYPE,
+    KickOffTime: ::LARGE_INTEGER,
+    LogoffTime: ::LARGE_INTEGER,
+    UserFlags: ::ULONG,
+    UserSessionKey: [::UCHAR; MSV1_0_USER_SESSION_KEY_LENGTH],
+    LogonDomainName: ::UNICODE_STRING,
+    LanmanSessionKey: [::UCHAR; MSV1_0_LANMAN_SESSION_KEY_LENGTH],
+    LogonServer: ::UNICODE_STRING,
+    UserParameters: ::UNICODE_STRING,
+}}
 pub type PMSV1_0_LM20_LOGON_PROFILE = *mut MSV1_0_LM20_LOGON_PROFILE;
 pub const MSV1_0_OWF_PASSWORD_LENGTH: usize = 16;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_SUPPLEMENTAL_CREDENTIAL {
-    pub Version: ::ULONG,
-    pub Flags: ::ULONG,
-    pub LmPassword: [::UCHAR; MSV1_0_OWF_PASSWORD_LENGTH],
-    pub NtPassword: [::UCHAR; MSV1_0_OWF_PASSWORD_LENGTH],
-}
+STRUCT!{struct MSV1_0_SUPPLEMENTAL_CREDENTIAL {
+    Version: ::ULONG,
+    Flags: ::ULONG,
+    LmPassword: [::UCHAR; MSV1_0_OWF_PASSWORD_LENGTH],
+    NtPassword: [::UCHAR; MSV1_0_OWF_PASSWORD_LENGTH],
+}}
 pub type PMSV1_0_SUPPLEMENTAL_CREDENTIAL = *mut MSV1_0_SUPPLEMENTAL_CREDENTIAL;
 pub const MSV1_0_NTLM3_RESPONSE_LENGTH: usize = 16;
 pub const MSV1_0_NTLM3_OWF_LENGTH: usize = 16;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_NTLM3_RESPONSE {
-    pub Response: [::UCHAR; MSV1_0_NTLM3_RESPONSE_LENGTH],
-    pub RespType: ::UCHAR,
-    pub HiRespType: ::UCHAR,
-    pub Flags: ::USHORT,
-    pub MsgWord: ::ULONG,
-    pub TimeStamp: ::ULONGLONG,
-    pub ChallengeFromClient: [::UCHAR; MSV1_0_CHALLENGE_LENGTH],
-    pub AvPairsOff: ::ULONG,
-    pub Buffer: [::UCHAR; 1],
-}
+STRUCT!{struct MSV1_0_NTLM3_RESPONSE {
+    Response: [::UCHAR; MSV1_0_NTLM3_RESPONSE_LENGTH],
+    RespType: ::UCHAR,
+    HiRespType: ::UCHAR,
+    Flags: ::USHORT,
+    MsgWord: ::ULONG,
+    TimeStamp: ::ULONGLONG,
+    ChallengeFromClient: [::UCHAR; MSV1_0_CHALLENGE_LENGTH],
+    AvPairsOff: ::ULONG,
+    Buffer: [::UCHAR; 1],
+}}
 pub type PMSV1_0_NTLM3_RESPONSE = *mut MSV1_0_NTLM3_RESPONSE;
 ENUM!{enum MSV1_0_AVID {
     MsvAvEOL,
@@ -836,11 +785,10 @@ ENUM!{enum MSV1_0_AVID {
     MsvAvTargetName,
     MsvAvChannelBindings,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_AV_PAIR {
-    pub AvId: ::USHORT,
-    pub AvLen: ::USHORT,
-}
+STRUCT!{struct MSV1_0_AV_PAIR {
+    AvId: ::USHORT,
+    AvLen: ::USHORT,
+}}
 pub type PMSV1_0_AV_PAIR = *mut MSV1_0_AV_PAIR;
 ENUM!{enum MSV1_0_PROTOCOL_MESSAGE_TYPE {
     MsV1_0Lm20ChallengeRequest = 0,
@@ -865,55 +813,49 @@ ENUM!{enum MSV1_0_PROTOCOL_MESSAGE_TYPE {
     MsV1_0SetThreadOption,
 }}
 pub type PMSV1_0_PROTOCOL_MESSAGE_TYPE = *mut MSV1_0_PROTOCOL_MESSAGE_TYPE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_CHANGEPASSWORD_REQUEST {
-    pub MessageType: MSV1_0_PROTOCOL_MESSAGE_TYPE,
-    pub DomainName: ::UNICODE_STRING,
-    pub AccountName: ::UNICODE_STRING,
-    pub OldPassword: ::UNICODE_STRING,
-    pub NewPassword: ::UNICODE_STRING,
-    pub Impersonating: ::BOOLEAN,
-}
+STRUCT!{struct MSV1_0_CHANGEPASSWORD_REQUEST {
+    MessageType: MSV1_0_PROTOCOL_MESSAGE_TYPE,
+    DomainName: ::UNICODE_STRING,
+    AccountName: ::UNICODE_STRING,
+    OldPassword: ::UNICODE_STRING,
+    NewPassword: ::UNICODE_STRING,
+    Impersonating: ::BOOLEAN,
+}}
 pub type PMSV1_0_CHANGEPASSWORD_REQUEST = *mut MSV1_0_CHANGEPASSWORD_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_CHANGEPASSWORD_RESPONSE {
-    pub MessageType: MSV1_0_PROTOCOL_MESSAGE_TYPE,
-    pub PasswordInfoValid: ::BOOLEAN,
-    pub DomainPasswordInfo: DOMAIN_PASSWORD_INFORMATION,
-}
+STRUCT!{struct MSV1_0_CHANGEPASSWORD_RESPONSE {
+    MessageType: MSV1_0_PROTOCOL_MESSAGE_TYPE,
+    PasswordInfoValid: ::BOOLEAN,
+    DomainPasswordInfo: DOMAIN_PASSWORD_INFORMATION,
+}}
 pub type PMSV1_0_CHANGEPASSWORD_RESPONSE = *mut MSV1_0_CHANGEPASSWORD_RESPONSE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_PASSTHROUGH_REQUEST {
-    pub MessageType: MSV1_0_PROTOCOL_MESSAGE_TYPE,
-    pub DomainName: ::UNICODE_STRING,
-    pub PackageName: ::UNICODE_STRING,
-    pub DataLength: ::ULONG,
-    pub LogonData: ::PUCHAR,
-    pub Pad: ::ULONG,
-}
+STRUCT!{struct MSV1_0_PASSTHROUGH_REQUEST {
+    MessageType: MSV1_0_PROTOCOL_MESSAGE_TYPE,
+    DomainName: ::UNICODE_STRING,
+    PackageName: ::UNICODE_STRING,
+    DataLength: ::ULONG,
+    LogonData: ::PUCHAR,
+    Pad: ::ULONG,
+}}
 pub type PMSV1_0_PASSTHROUGH_REQUEST = *mut MSV1_0_PASSTHROUGH_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_PASSTHROUGH_RESPONSE {
-    pub MessageType: MSV1_0_PROTOCOL_MESSAGE_TYPE,
-    pub Pad: ::ULONG,
-    pub DataLength: ::ULONG,
-    pub ValidationData: ::PUCHAR,
-}
+STRUCT!{struct MSV1_0_PASSTHROUGH_RESPONSE {
+    MessageType: MSV1_0_PROTOCOL_MESSAGE_TYPE,
+    Pad: ::ULONG,
+    DataLength: ::ULONG,
+    ValidationData: ::PUCHAR,
+}}
 pub type PMSV1_0_PASSTHROUGH_RESPONSE = *mut MSV1_0_PASSTHROUGH_RESPONSE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_SUBAUTH_REQUEST {
-    pub MessageType: MSV1_0_PROTOCOL_MESSAGE_TYPE,
-    pub SubAuthPackageId: ::ULONG,
-    pub SubAuthInfoLength: ::ULONG,
-    pub SubAuthSubmitBuffer: ::PUCHAR,
-}
+STRUCT!{struct MSV1_0_SUBAUTH_REQUEST {
+    MessageType: MSV1_0_PROTOCOL_MESSAGE_TYPE,
+    SubAuthPackageId: ::ULONG,
+    SubAuthInfoLength: ::ULONG,
+    SubAuthSubmitBuffer: ::PUCHAR,
+}}
 pub type PMSV1_0_SUBAUTH_REQUEST = *mut MSV1_0_SUBAUTH_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_SUBAUTH_RESPONSE {
-    pub MessageType: MSV1_0_PROTOCOL_MESSAGE_TYPE,
-    pub SubAuthInfoLength: ::ULONG,
-    pub SubAuthReturnBuffer: ::PUCHAR,
-}
+STRUCT!{struct MSV1_0_SUBAUTH_RESPONSE {
+    MessageType: MSV1_0_PROTOCOL_MESSAGE_TYPE,
+    SubAuthInfoLength: ::ULONG,
+    SubAuthReturnBuffer: ::PUCHAR,
+}}
 pub type PMSV1_0_SUBAUTH_RESPONSE = *mut MSV1_0_SUBAUTH_RESPONSE;
 pub const RTL_ENCRYPT_MEMORY_SIZE: ::ULONG = 8;
 pub const RTL_ENCRYPT_OPTION_CROSS_PROCESS: ::ULONG = 0x01;
@@ -1026,92 +968,82 @@ ENUM!{enum KERB_LOGON_SUBMIT_TYPE {
     KerbLuidLogon = 84,
 }}
 pub type PKERB_LOGON_SUBMIT_TYPE = *mut KERB_LOGON_SUBMIT_TYPE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_INTERACTIVE_LOGON {
-    pub MessageType: KERB_LOGON_SUBMIT_TYPE,
-    pub LogonDomainName: ::UNICODE_STRING,
-    pub UserName: ::UNICODE_STRING,
-    pub Password: ::UNICODE_STRING,
-}
+STRUCT!{struct KERB_INTERACTIVE_LOGON {
+    MessageType: KERB_LOGON_SUBMIT_TYPE,
+    LogonDomainName: ::UNICODE_STRING,
+    UserName: ::UNICODE_STRING,
+    Password: ::UNICODE_STRING,
+}}
 pub type PKERB_INTERACTIVE_LOGON = *mut KERB_INTERACTIVE_LOGON;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_INTERACTIVE_UNLOCK_LOGON {
-    pub Logon: KERB_INTERACTIVE_LOGON,
-    pub LogonId: ::LUID,
-}
+STRUCT!{struct KERB_INTERACTIVE_UNLOCK_LOGON {
+    Logon: KERB_INTERACTIVE_LOGON,
+    LogonId: ::LUID,
+}}
 pub type PKERB_INTERACTIVE_UNLOCK_LOGON = *mut KERB_INTERACTIVE_UNLOCK_LOGON;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_SMART_CARD_LOGON {
-    pub MessageType: KERB_LOGON_SUBMIT_TYPE,
-    pub Pin: ::UNICODE_STRING,
-    pub CspDataLength: ::ULONG,
-    pub CspData: ::PUCHAR,
-}
+STRUCT!{struct KERB_SMART_CARD_LOGON {
+    MessageType: KERB_LOGON_SUBMIT_TYPE,
+    Pin: ::UNICODE_STRING,
+    CspDataLength: ::ULONG,
+    CspData: ::PUCHAR,
+}}
 pub type PKERB_SMART_CARD_LOGON = *mut KERB_SMART_CARD_LOGON;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_SMART_CARD_UNLOCK_LOGON {
-    pub Logon: KERB_SMART_CARD_LOGON,
-    pub LogonId: ::LUID,
-}
+STRUCT!{struct KERB_SMART_CARD_UNLOCK_LOGON {
+    Logon: KERB_SMART_CARD_LOGON,
+    LogonId: ::LUID,
+}}
 pub type PKERB_SMART_CARD_UNLOCK_LOGON = *mut KERB_SMART_CARD_UNLOCK_LOGON;
 pub const KERB_CERTIFICATE_LOGON_FLAG_CHECK_DUPLICATES: ::ULONG = 0x1;
 pub const KERB_CERTIFICATE_LOGON_FLAG_USE_CERTIFICATE_INFO: ::ULONG = 0x2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_CERTIFICATE_LOGON {
-    pub MessageType: KERB_LOGON_SUBMIT_TYPE,
-    pub DomainName: ::UNICODE_STRING,
-    pub UserName: ::UNICODE_STRING,
-    pub Pin: ::UNICODE_STRING,
-    pub Flags: ::ULONG,
-    pub CspDataLength: ::ULONG,
-    pub CspData: ::PUCHAR,
-}
+STRUCT!{struct KERB_CERTIFICATE_LOGON {
+    MessageType: KERB_LOGON_SUBMIT_TYPE,
+    DomainName: ::UNICODE_STRING,
+    UserName: ::UNICODE_STRING,
+    Pin: ::UNICODE_STRING,
+    Flags: ::ULONG,
+    CspDataLength: ::ULONG,
+    CspData: ::PUCHAR,
+}}
 pub type PKERB_CERTIFICATE_LOGON = *mut KERB_CERTIFICATE_LOGON;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_CERTIFICATE_UNLOCK_LOGON {
-    pub Logon: KERB_CERTIFICATE_LOGON,
-    pub LogonId: ::LUID,
-}
+STRUCT!{struct KERB_CERTIFICATE_UNLOCK_LOGON {
+    Logon: KERB_CERTIFICATE_LOGON,
+    LogonId: ::LUID,
+}}
 pub type PKERB_CERTIFICATE_UNLOCK_LOGON = *mut KERB_CERTIFICATE_UNLOCK_LOGON;
 pub const KERB_CERTIFICATE_S4U_LOGON_FLAG_CHECK_DUPLICATES: ::ULONG = 0x1;
 pub const KERB_CERTIFICATE_S4U_LOGON_FLAG_CHECK_LOGONHOURS: ::ULONG = 0x2;
 pub const KERB_CERTIFICATE_S4U_LOGON_FLAG_FAIL_IF_NT_AUTH_POLICY_REQUIRED: ::ULONG = 0x4;
 pub const KERB_CERTIFICATE_S4U_LOGON_FLAG_IDENTIFY: ::ULONG = 0x8;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_CERTIFICATE_S4U_LOGON {
-    pub MessageType: KERB_LOGON_SUBMIT_TYPE,
-    pub Flags: ::ULONG,
-    pub UserPrincipalName: ::UNICODE_STRING,
-    pub DomainName: ::UNICODE_STRING,
-    pub CertificateLength: ::ULONG,
-    pub Certificate: ::PUCHAR,
-}
+STRUCT!{struct KERB_CERTIFICATE_S4U_LOGON {
+    MessageType: KERB_LOGON_SUBMIT_TYPE,
+    Flags: ::ULONG,
+    UserPrincipalName: ::UNICODE_STRING,
+    DomainName: ::UNICODE_STRING,
+    CertificateLength: ::ULONG,
+    Certificate: ::PUCHAR,
+}}
 pub type PKERB_CERTIFICATE_S4U_LOGON = *mut KERB_CERTIFICATE_S4U_LOGON;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_TICKET_LOGON {
-    pub MessageType: KERB_LOGON_SUBMIT_TYPE,
-    pub Flags: ::ULONG,
-    pub ServiceTicketLength: ::ULONG,
-    pub TicketGrantingTicketLength: ::ULONG,
-    pub ServiceTicket: ::PUCHAR,
-    pub TicketGrantingTicket: ::PUCHAR,
-}
+STRUCT!{struct KERB_TICKET_LOGON {
+    MessageType: KERB_LOGON_SUBMIT_TYPE,
+    Flags: ::ULONG,
+    ServiceTicketLength: ::ULONG,
+    TicketGrantingTicketLength: ::ULONG,
+    ServiceTicket: ::PUCHAR,
+    TicketGrantingTicket: ::PUCHAR,
+}}
 pub type PKERB_TICKET_LOGON = *mut KERB_TICKET_LOGON;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_TICKET_UNLOCK_LOGON {
-    pub Logon: KERB_TICKET_LOGON,
-    pub LogonId: ::LUID,
-}
+STRUCT!{struct KERB_TICKET_UNLOCK_LOGON {
+    Logon: KERB_TICKET_LOGON,
+    LogonId: ::LUID,
+}}
 pub type PKERB_TICKET_UNLOCK_LOGON = *mut KERB_TICKET_UNLOCK_LOGON;
 pub const KERB_S4U_LOGON_FLAG_CHECK_LOGONHOURS: ::ULONG = 0x2;
 pub const KERB_S4U_LOGON_FLAG_IDENTIFY: ::ULONG = 0x8;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_S4U_LOGON {
-    pub MessageType: KERB_LOGON_SUBMIT_TYPE,
-    pub Flags: ::ULONG,
-    pub ClientUpn: ::UNICODE_STRING,
-    pub ClientRealm: ::UNICODE_STRING,
-}
+STRUCT!{struct KERB_S4U_LOGON {
+    MessageType: KERB_LOGON_SUBMIT_TYPE,
+    Flags: ::ULONG,
+    ClientUpn: ::UNICODE_STRING,
+    ClientRealm: ::UNICODE_STRING,
+}}
 pub type PKERB_S4U_LOGON = *mut KERB_S4U_LOGON;
 ENUM!{enum KERB_PROFILE_BUFFER_TYPE {
     KerbInteractiveProfile = 2,
@@ -1119,52 +1051,47 @@ ENUM!{enum KERB_PROFILE_BUFFER_TYPE {
     KerbTicketProfile = 6,
 }}
 pub type PKERB_PROFILE_BUFFER_TYPE = *mut KERB_PROFILE_BUFFER_TYPE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_INTERACTIVE_PROFILE {
-    pub MessageType: KERB_PROFILE_BUFFER_TYPE,
-    pub LogonCount: ::USHORT,
-    pub BadPasswordCount: ::USHORT,
-    pub LogonTime: ::LARGE_INTEGER,
-    pub LogoffTime: ::LARGE_INTEGER,
-    pub KickOffTime: ::LARGE_INTEGER,
-    pub PasswordLastSet: ::LARGE_INTEGER,
-    pub PasswordCanChange: ::LARGE_INTEGER,
-    pub PasswordMustChange: ::LARGE_INTEGER,
-    pub LogonScript: ::UNICODE_STRING,
-    pub HomeDirectory: ::UNICODE_STRING,
-    pub FullName: ::UNICODE_STRING,
-    pub ProfilePath: ::UNICODE_STRING,
-    pub HomeDirectoryDrive: ::UNICODE_STRING,
-    pub LogonServer: ::UNICODE_STRING,
-    pub UserFlags: ::ULONG,
-}
+STRUCT!{struct KERB_INTERACTIVE_PROFILE {
+    MessageType: KERB_PROFILE_BUFFER_TYPE,
+    LogonCount: ::USHORT,
+    BadPasswordCount: ::USHORT,
+    LogonTime: ::LARGE_INTEGER,
+    LogoffTime: ::LARGE_INTEGER,
+    KickOffTime: ::LARGE_INTEGER,
+    PasswordLastSet: ::LARGE_INTEGER,
+    PasswordCanChange: ::LARGE_INTEGER,
+    PasswordMustChange: ::LARGE_INTEGER,
+    LogonScript: ::UNICODE_STRING,
+    HomeDirectory: ::UNICODE_STRING,
+    FullName: ::UNICODE_STRING,
+    ProfilePath: ::UNICODE_STRING,
+    HomeDirectoryDrive: ::UNICODE_STRING,
+    LogonServer: ::UNICODE_STRING,
+    UserFlags: ::ULONG,
+}}
 pub type PKERB_INTERACTIVE_PROFILE = *mut KERB_INTERACTIVE_PROFILE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_SMART_CARD_PROFILE {
-    pub Profile: KERB_INTERACTIVE_PROFILE,
-    pub CertificateSize: ::ULONG,
-    pub CertificateData: ::PUCHAR,
-}
+STRUCT!{struct KERB_SMART_CARD_PROFILE {
+    Profile: KERB_INTERACTIVE_PROFILE,
+    CertificateSize: ::ULONG,
+    CertificateData: ::PUCHAR,
+}}
 pub type PKERB_SMART_CARD_PROFILE = *mut KERB_SMART_CARD_PROFILE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_CRYPTO_KEY {
-    pub KeyType: ::LONG,
-    pub Length: ::ULONG,
-    pub Value: ::PUCHAR,
-}
+STRUCT!{struct KERB_CRYPTO_KEY {
+    KeyType: ::LONG,
+    Length: ::ULONG,
+    Value: ::PUCHAR,
+}}
 pub type PKERB_CRYPTO_KEY = *mut KERB_CRYPTO_KEY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_CRYPTO_KEY32 {
-    pub KeyType: ::LONG,
-    pub Length: ::ULONG,
-    pub Offset: ::ULONG,
-}
+STRUCT!{struct KERB_CRYPTO_KEY32 {
+    KeyType: ::LONG,
+    Length: ::ULONG,
+    Offset: ::ULONG,
+}}
 pub type PKERB_CRYPTO_KEY32 = *mut KERB_CRYPTO_KEY32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_TICKET_PROFILE {
-    pub Profile: KERB_INTERACTIVE_PROFILE,
-    pub SessionKey: KERB_CRYPTO_KEY,
-}
+STRUCT!{struct KERB_TICKET_PROFILE {
+    Profile: KERB_INTERACTIVE_PROFILE,
+    SessionKey: KERB_CRYPTO_KEY,
+}}
 pub type PKERB_TICKET_PROFILE = *mut KERB_TICKET_PROFILE;
 ENUM!{enum KERB_PROTOCOL_MESSAGE_TYPE {
     KerbDebugRequestMessage = 0,
@@ -1203,95 +1130,86 @@ ENUM!{enum KERB_PROTOCOL_MESSAGE_TYPE {
     KerbQueryS4U2ProxyCacheMessage,
 }}
 pub type PKERB_PROTOCOL_MESSAGE_TYPE = *mut KERB_PROTOCOL_MESSAGE_TYPE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_QUERY_TKT_CACHE_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub LogonId: ::LUID,
-}
+STRUCT!{struct KERB_QUERY_TKT_CACHE_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    LogonId: ::LUID,
+}}
 pub type PKERB_QUERY_TKT_CACHE_REQUEST = *mut KERB_QUERY_TKT_CACHE_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_TICKET_CACHE_INFO {
-    pub ServerName: ::UNICODE_STRING,
-    pub RealmName: ::UNICODE_STRING,
-    pub StartTime: ::LARGE_INTEGER,
-    pub EndTime: ::LARGE_INTEGER,
-    pub RenewTime: ::LARGE_INTEGER,
-    pub EncryptionType: ::LONG,
-    pub TicketFlags: ::ULONG,
-}
+STRUCT!{struct KERB_TICKET_CACHE_INFO {
+    ServerName: ::UNICODE_STRING,
+    RealmName: ::UNICODE_STRING,
+    StartTime: ::LARGE_INTEGER,
+    EndTime: ::LARGE_INTEGER,
+    RenewTime: ::LARGE_INTEGER,
+    EncryptionType: ::LONG,
+    TicketFlags: ::ULONG,
+}}
 pub type PKERB_TICKET_CACHE_INFO = *mut KERB_TICKET_CACHE_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_TICKET_CACHE_INFO_EX {
-    pub ClientName: ::UNICODE_STRING,
-    pub ClientRealm: ::UNICODE_STRING,
-    pub ServerName: ::UNICODE_STRING,
-    pub ServerRealm: ::UNICODE_STRING,
-    pub StartTime: ::LARGE_INTEGER,
-    pub EndTime: ::LARGE_INTEGER,
-    pub RenewTime: ::LARGE_INTEGER,
-    pub EncryptionType: ::LONG,
-    pub TicketFlags: ::ULONG,
-}
+STRUCT!{struct KERB_TICKET_CACHE_INFO_EX {
+    ClientName: ::UNICODE_STRING,
+    ClientRealm: ::UNICODE_STRING,
+    ServerName: ::UNICODE_STRING,
+    ServerRealm: ::UNICODE_STRING,
+    StartTime: ::LARGE_INTEGER,
+    EndTime: ::LARGE_INTEGER,
+    RenewTime: ::LARGE_INTEGER,
+    EncryptionType: ::LONG,
+    TicketFlags: ::ULONG,
+}}
 pub type PKERB_TICKET_CACHE_INFO_EX = *mut KERB_TICKET_CACHE_INFO_EX;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_TICKET_CACHE_INFO_EX2 {
-    pub ClientName: ::UNICODE_STRING,
-    pub ClientRealm: ::UNICODE_STRING,
-    pub ServerName: ::UNICODE_STRING,
-    pub ServerRealm: ::UNICODE_STRING,
-    pub StartTime: ::LARGE_INTEGER,
-    pub EndTime: ::LARGE_INTEGER,
-    pub RenewTime: ::LARGE_INTEGER,
-    pub EncryptionType: ::LONG,
-    pub TicketFlags: ::ULONG,
-    pub SessionKeyType: ::ULONG,
-    pub BranchId: ::ULONG,
-}
+STRUCT!{struct KERB_TICKET_CACHE_INFO_EX2 {
+    ClientName: ::UNICODE_STRING,
+    ClientRealm: ::UNICODE_STRING,
+    ServerName: ::UNICODE_STRING,
+    ServerRealm: ::UNICODE_STRING,
+    StartTime: ::LARGE_INTEGER,
+    EndTime: ::LARGE_INTEGER,
+    RenewTime: ::LARGE_INTEGER,
+    EncryptionType: ::LONG,
+    TicketFlags: ::ULONG,
+    SessionKeyType: ::ULONG,
+    BranchId: ::ULONG,
+}}
 pub type PKERB_TICKET_CACHE_INFO_EX2 = *mut KERB_TICKET_CACHE_INFO_EX2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_TICKET_CACHE_INFO_EX3 {
-    pub ClientName: ::UNICODE_STRING,
-    pub ClientRealm: ::UNICODE_STRING,
-    pub ServerName: ::UNICODE_STRING,
-    pub ServerRealm: ::UNICODE_STRING,
-    pub StartTime: ::LARGE_INTEGER,
-    pub EndTime: ::LARGE_INTEGER,
-    pub RenewTime: ::LARGE_INTEGER,
-    pub EncryptionType: ::LONG,
-    pub TicketFlags: ::ULONG,
-    pub SessionKeyType: ::ULONG,
-    pub BranchId: ::ULONG,
-    pub CacheFlags: ::ULONG,
-    pub KdcCalled: ::UNICODE_STRING,
-}
+STRUCT!{struct KERB_TICKET_CACHE_INFO_EX3 {
+    ClientName: ::UNICODE_STRING,
+    ClientRealm: ::UNICODE_STRING,
+    ServerName: ::UNICODE_STRING,
+    ServerRealm: ::UNICODE_STRING,
+    StartTime: ::LARGE_INTEGER,
+    EndTime: ::LARGE_INTEGER,
+    RenewTime: ::LARGE_INTEGER,
+    EncryptionType: ::LONG,
+    TicketFlags: ::ULONG,
+    SessionKeyType: ::ULONG,
+    BranchId: ::ULONG,
+    CacheFlags: ::ULONG,
+    KdcCalled: ::UNICODE_STRING,
+}}
 pub type PKERB_TICKET_CACHE_INFO_EX3 = *mut KERB_TICKET_CACHE_INFO_EX3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_QUERY_TKT_CACHE_RESPONSE {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub CountOfTickets: ::ULONG,
-    pub Tickets: [KERB_TICKET_CACHE_INFO; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct KERB_QUERY_TKT_CACHE_RESPONSE {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    CountOfTickets: ::ULONG,
+    Tickets: [KERB_TICKET_CACHE_INFO; ::ANYSIZE_ARRAY],
+}}
 pub type PKERB_QUERY_TKT_CACHE_RESPONSE = *mut KERB_QUERY_TKT_CACHE_RESPONSE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_QUERY_TKT_CACHE_EX_RESPONSE {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub CountOfTickets: ::ULONG,
-    pub Tickets: [KERB_TICKET_CACHE_INFO_EX; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct KERB_QUERY_TKT_CACHE_EX_RESPONSE {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    CountOfTickets: ::ULONG,
+    Tickets: [KERB_TICKET_CACHE_INFO_EX; ::ANYSIZE_ARRAY],
+}}
 pub type PKERB_QUERY_TKT_CACHE_EX_RESPONSE = *mut KERB_QUERY_TKT_CACHE_EX_RESPONSE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_QUERY_TKT_CACHE_EX2_RESPONSE {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub CountOfTickets: ::ULONG,
-    pub Tickets: [KERB_TICKET_CACHE_INFO_EX2; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct KERB_QUERY_TKT_CACHE_EX2_RESPONSE {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    CountOfTickets: ::ULONG,
+    Tickets: [KERB_TICKET_CACHE_INFO_EX2; ::ANYSIZE_ARRAY],
+}}
 pub type PKERB_QUERY_TKT_CACHE_EX2_RESPONSE = *mut KERB_QUERY_TKT_CACHE_EX2_RESPONSE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_QUERY_TKT_CACHE_EX3_RESPONSE {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub CountOfTickets: ::ULONG,
-    pub Tickets: [KERB_TICKET_CACHE_INFO_EX3; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct KERB_QUERY_TKT_CACHE_EX3_RESPONSE {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    CountOfTickets: ::ULONG,
+    Tickets: [KERB_TICKET_CACHE_INFO_EX3; ::ANYSIZE_ARRAY],
+}}
 pub type PKERB_QUERY_TKT_CACHE_EX3_RESPONSE = *mut KERB_QUERY_TKT_CACHE_EX3_RESPONSE;
 pub const KERB_USE_DEFAULT_TICKET_FLAGS: ::ULONG = 0x0;
 pub const KERB_RETRIEVE_TICKET_DEFAULT: ::ULONG = 0x0;
@@ -1302,369 +1220,328 @@ pub const KERB_RETRIEVE_TICKET_AS_KERB_CRED: ::ULONG = 0x8;
 pub const KERB_RETRIEVE_TICKET_WITH_SEC_CRED: ::ULONG = 0x10;
 pub const KERB_RETRIEVE_TICKET_CACHE_TICKET: ::ULONG = 0x20;
 pub const KERB_RETRIEVE_TICKET_MAX_LIFETIME: ::ULONG = 0x40;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_AUTH_DATA {
-    pub Type: ::ULONG,
-    pub Length: ::ULONG,
-    pub Data: ::PUCHAR,
-}
+STRUCT!{struct KERB_AUTH_DATA {
+    Type: ::ULONG,
+    Length: ::ULONG,
+    Data: ::PUCHAR,
+}}
 pub type PKERB_AUTH_DATA = *mut KERB_AUTH_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_NET_ADDRESS {
-    pub Family: ::ULONG,
-    pub Length: ::ULONG,
-    pub Address: ::PUCHAR,
-}
+STRUCT!{struct KERB_NET_ADDRESS {
+    Family: ::ULONG,
+    Length: ::ULONG,
+    Address: ::PUCHAR,
+}}
 pub type PKERB_NET_ADDRESS = *mut KERB_NET_ADDRESS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_NET_ADDRESSES {
-    pub Number: ::ULONG,
-    pub Addresses: [KERB_NET_ADDRESS; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct KERB_NET_ADDRESSES {
+    Number: ::ULONG,
+    Addresses: [KERB_NET_ADDRESS; ::ANYSIZE_ARRAY],
+}}
 pub type PKERB_NET_ADDRESSES = *mut KERB_NET_ADDRESSES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_EXTERNAL_NAME {
-    pub NameType: ::SHORT,
-    pub NameCount: ::USHORT,
-    pub Names: [::UNICODE_STRING; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct KERB_EXTERNAL_NAME {
+    NameType: ::SHORT,
+    NameCount: ::USHORT,
+    Names: [::UNICODE_STRING; ::ANYSIZE_ARRAY],
+}}
 pub type PKERB_EXTERNAL_NAME = *mut KERB_EXTERNAL_NAME;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_EXTERNAL_TICKET {
-    pub ServiceName: PKERB_EXTERNAL_NAME,
-    pub TargetName: PKERB_EXTERNAL_NAME,
-    pub ClientName: PKERB_EXTERNAL_NAME,
-    pub DomainName: ::UNICODE_STRING,
-    pub TargetDomainName: ::UNICODE_STRING,
-    pub AltTargetDomainName: ::UNICODE_STRING,
-    pub SessionKey: KERB_CRYPTO_KEY,
-    pub TicketFlags: ::ULONG,
-    pub Flags: ::ULONG,
-    pub KeyExpirationTime: ::LARGE_INTEGER,
-    pub StartTime: ::LARGE_INTEGER,
-    pub EndTime: ::LARGE_INTEGER,
-    pub RenewUntil: ::LARGE_INTEGER,
-    pub TimeSkew: ::LARGE_INTEGER,
-    pub EncodedTicketSize: ::ULONG,
-    pub EncodedTicket: ::PUCHAR,
-}
+STRUCT!{struct KERB_EXTERNAL_TICKET {
+    ServiceName: PKERB_EXTERNAL_NAME,
+    TargetName: PKERB_EXTERNAL_NAME,
+    ClientName: PKERB_EXTERNAL_NAME,
+    DomainName: ::UNICODE_STRING,
+    TargetDomainName: ::UNICODE_STRING,
+    AltTargetDomainName: ::UNICODE_STRING,
+    SessionKey: KERB_CRYPTO_KEY,
+    TicketFlags: ::ULONG,
+    Flags: ::ULONG,
+    KeyExpirationTime: ::LARGE_INTEGER,
+    StartTime: ::LARGE_INTEGER,
+    EndTime: ::LARGE_INTEGER,
+    RenewUntil: ::LARGE_INTEGER,
+    TimeSkew: ::LARGE_INTEGER,
+    EncodedTicketSize: ::ULONG,
+    EncodedTicket: ::PUCHAR,
+}}
 pub type PKERB_EXTERNAL_TICKET = *mut KERB_EXTERNAL_TICKET;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_RETRIEVE_TKT_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub LogonId: ::LUID,
-    pub TargetName: ::UNICODE_STRING,
-    pub TicketFlags: ::ULONG,
-    pub CacheOptions: ::ULONG,
-    pub EncryptionType: ::LONG,
-    pub CredentialsHandle: ::SecHandle,
-}
+STRUCT!{struct KERB_RETRIEVE_TKT_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    LogonId: ::LUID,
+    TargetName: ::UNICODE_STRING,
+    TicketFlags: ::ULONG,
+    CacheOptions: ::ULONG,
+    EncryptionType: ::LONG,
+    CredentialsHandle: ::SecHandle,
+}}
 pub type PKERB_RETRIEVE_TKT_REQUEST = *mut KERB_RETRIEVE_TKT_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_RETRIEVE_TKT_RESPONSE {
-    pub Ticket: KERB_EXTERNAL_TICKET,
-}
+STRUCT!{struct KERB_RETRIEVE_TKT_RESPONSE {
+    Ticket: KERB_EXTERNAL_TICKET,
+}}
 pub type PKERB_RETRIEVE_TKT_RESPONSE = *mut KERB_RETRIEVE_TKT_RESPONSE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_PURGE_TKT_CACHE_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub LogonId: ::LUID,
-    pub ServerName: ::UNICODE_STRING,
-    pub RealmName: ::UNICODE_STRING,
-}
+STRUCT!{struct KERB_PURGE_TKT_CACHE_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    LogonId: ::LUID,
+    ServerName: ::UNICODE_STRING,
+    RealmName: ::UNICODE_STRING,
+}}
 pub type PKERB_PURGE_TKT_CACHE_REQUEST = *mut KERB_PURGE_TKT_CACHE_REQUEST;
 pub const KERB_PURGE_ALL_TICKETS: ::ULONG = 1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_PURGE_TKT_CACHE_EX_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub LogonId: ::LUID,
-    pub Flags: ::ULONG,
-    pub TicketTemplate: KERB_TICKET_CACHE_INFO_EX,
-}
+STRUCT!{struct KERB_PURGE_TKT_CACHE_EX_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    LogonId: ::LUID,
+    Flags: ::ULONG,
+    TicketTemplate: KERB_TICKET_CACHE_INFO_EX,
+}}
 pub type PKERB_PURGE_TKT_CACHE_EX_REQUEST = *mut KERB_PURGE_TKT_CACHE_EX_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_SUBMIT_TKT_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub LogonId: ::LUID,
-    pub Flags: ::ULONG,
-    pub Key: KERB_CRYPTO_KEY32,
-    pub KerbCredSize: ::ULONG,
-    pub KerbCredOffset: ::ULONG,
-}
+STRUCT!{struct KERB_SUBMIT_TKT_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    LogonId: ::LUID,
+    Flags: ::ULONG,
+    Key: KERB_CRYPTO_KEY32,
+    KerbCredSize: ::ULONG,
+    KerbCredOffset: ::ULONG,
+}}
 pub type PKERB_SUBMIT_TKT_REQUEST = *mut KERB_SUBMIT_TKT_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_QUERY_KDC_PROXY_CACHE_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub Flags: ::ULONG,
-    pub LogonId: ::LUID,
-}
+STRUCT!{struct KERB_QUERY_KDC_PROXY_CACHE_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    Flags: ::ULONG,
+    LogonId: ::LUID,
+}}
 pub type PKERB_QUERY_KDC_PROXY_CACHE_REQUEST = *mut KERB_QUERY_KDC_PROXY_CACHE_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KDC_PROXY_CACHE_ENTRY_DATA {
-    pub SinceLastUsed: ::ULONG64,
-    pub DomainName: ::UNICODE_STRING,
-    pub ProxyServerName: ::UNICODE_STRING,
-    pub ProxyServerVdir: ::UNICODE_STRING,
-    pub ProxyServerPort: ::USHORT,
-    pub LogonId: ::LUID,
-    pub CredUserName: ::UNICODE_STRING,
-    pub CredDomainName: ::UNICODE_STRING,
-    pub GlobalCache: ::BOOLEAN,
-}
+STRUCT!{struct KDC_PROXY_CACHE_ENTRY_DATA {
+    SinceLastUsed: ::ULONG64,
+    DomainName: ::UNICODE_STRING,
+    ProxyServerName: ::UNICODE_STRING,
+    ProxyServerVdir: ::UNICODE_STRING,
+    ProxyServerPort: ::USHORT,
+    LogonId: ::LUID,
+    CredUserName: ::UNICODE_STRING,
+    CredDomainName: ::UNICODE_STRING,
+    GlobalCache: ::BOOLEAN,
+}}
 pub type PKDC_PROXY_CACHE_ENTRY_DATA = *mut KDC_PROXY_CACHE_ENTRY_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_QUERY_KDC_PROXY_CACHE_RESPONSE {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub CountOfEntries: ::ULONG,
-    pub Entries: PKDC_PROXY_CACHE_ENTRY_DATA,
-}
+STRUCT!{struct KERB_QUERY_KDC_PROXY_CACHE_RESPONSE {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    CountOfEntries: ::ULONG,
+    Entries: PKDC_PROXY_CACHE_ENTRY_DATA,
+}}
 pub type PKERB_QUERY_KDC_PROXY_CACHE_RESPONSE = *mut KERB_QUERY_KDC_PROXY_CACHE_RESPONSE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_PURGE_KDC_PROXY_CACHE_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub Flags: ::ULONG,
-    pub LogonId: ::LUID,
-}
+STRUCT!{struct KERB_PURGE_KDC_PROXY_CACHE_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    Flags: ::ULONG,
+    LogonId: ::LUID,
+}}
 pub type PKERB_PURGE_KDC_PROXY_CACHE_REQUEST = *mut KERB_PURGE_KDC_PROXY_CACHE_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_PURGE_KDC_PROXY_CACHE_RESPONSE {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub CountOfPurged: ::ULONG,
-}
+STRUCT!{struct KERB_PURGE_KDC_PROXY_CACHE_RESPONSE {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    CountOfPurged: ::ULONG,
+}}
 pub type PKERB_PURGE_KDC_PROXY_CACHE_RESPONSE = *mut KERB_PURGE_KDC_PROXY_CACHE_RESPONSE;
 pub const KERB_S4U2PROXY_CACHE_ENTRY_INFO_FLAG_NEGATIVE: ::ULONG = 0x1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_S4U2PROXY_CACHE_ENTRY_INFO {
-    pub ServerName: ::UNICODE_STRING,
-    pub Flags: ::ULONG,
-    pub LastStatus: ::NTSTATUS,
-    pub Expiry: ::LARGE_INTEGER,
-}
+STRUCT!{struct KERB_S4U2PROXY_CACHE_ENTRY_INFO {
+    ServerName: ::UNICODE_STRING,
+    Flags: ::ULONG,
+    LastStatus: ::NTSTATUS,
+    Expiry: ::LARGE_INTEGER,
+}}
 pub type PKERB_S4U2PROXY_CACHE_ENTRY_INFO = *mut KERB_S4U2PROXY_CACHE_ENTRY_INFO;
 pub const KERB_S4U2PROXY_CRED_FLAG_NEGATIVE: ::ULONG = 0x1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_S4U2PROXY_CRED {
-    pub UserName: ::UNICODE_STRING,
-    pub DomainName: ::UNICODE_STRING,
-    pub Flags: ::ULONG,
-    pub LastStatus: ::NTSTATUS,
-    pub Expiry: ::LARGE_INTEGER,
-    pub CountOfEntries: ::ULONG,
-    pub Entries: PKERB_S4U2PROXY_CACHE_ENTRY_INFO,
-}
+STRUCT!{struct KERB_S4U2PROXY_CRED {
+    UserName: ::UNICODE_STRING,
+    DomainName: ::UNICODE_STRING,
+    Flags: ::ULONG,
+    LastStatus: ::NTSTATUS,
+    Expiry: ::LARGE_INTEGER,
+    CountOfEntries: ::ULONG,
+    Entries: PKERB_S4U2PROXY_CACHE_ENTRY_INFO,
+}}
 pub type PKERB_S4U2PROXY_CRED = *mut KERB_S4U2PROXY_CRED;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_QUERY_S4U2PROXY_CACHE_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub Flags: ::ULONG,
-    pub LogonId: ::LUID,
-}
+STRUCT!{struct KERB_QUERY_S4U2PROXY_CACHE_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    Flags: ::ULONG,
+    LogonId: ::LUID,
+}}
 pub type PKERB_QUERY_S4U2PROXY_CACHE_REQUEST = *mut KERB_QUERY_S4U2PROXY_CACHE_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_QUERY_S4U2PROXY_CACHE_RESPONSE {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub CountOfCreds: ::ULONG,
-    pub Creds: PKERB_S4U2PROXY_CRED,
-}
+STRUCT!{struct KERB_QUERY_S4U2PROXY_CACHE_RESPONSE {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    CountOfCreds: ::ULONG,
+    Creds: PKERB_S4U2PROXY_CRED,
+}}
 pub type PKERB_QUERY_S4U2PROXY_CACHE_RESPONSE = *mut KERB_QUERY_S4U2PROXY_CACHE_RESPONSE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_CHANGEPASSWORD_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub DomainName: ::UNICODE_STRING,
-    pub AccountName: ::UNICODE_STRING,
-    pub OldPassword: ::UNICODE_STRING,
-    pub NewPassword: ::UNICODE_STRING,
-    pub Impersonating: ::BOOLEAN,
-}
+STRUCT!{struct KERB_CHANGEPASSWORD_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    DomainName: ::UNICODE_STRING,
+    AccountName: ::UNICODE_STRING,
+    OldPassword: ::UNICODE_STRING,
+    NewPassword: ::UNICODE_STRING,
+    Impersonating: ::BOOLEAN,
+}}
 pub type PKERB_CHANGEPASSWORD_REQUEST = *mut KERB_CHANGEPASSWORD_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_SETPASSWORD_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub LogonId: ::LUID,
-    pub CredentialsHandle: ::SecHandle,
-    pub Flags: ::ULONG,
-    pub DomainName: ::UNICODE_STRING,
-    pub AccountName: ::UNICODE_STRING,
-    pub Password: ::UNICODE_STRING,
-}
+STRUCT!{struct KERB_SETPASSWORD_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    LogonId: ::LUID,
+    CredentialsHandle: ::SecHandle,
+    Flags: ::ULONG,
+    DomainName: ::UNICODE_STRING,
+    AccountName: ::UNICODE_STRING,
+    Password: ::UNICODE_STRING,
+}}
 pub type PKERB_SETPASSWORD_REQUEST = *mut KERB_SETPASSWORD_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_SETPASSWORD_EX_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub LogonId: ::LUID,
-    pub CredentialsHandle: ::SecHandle,
-    pub Flags: ::ULONG,
-    pub AccountRealm: ::UNICODE_STRING,
-    pub AccountName: ::UNICODE_STRING,
-    pub Password: ::UNICODE_STRING,
-    pub ClientRealm: ::UNICODE_STRING,
-    pub ClientName: ::UNICODE_STRING,
-    pub Impersonating: ::BOOLEAN,
-    pub KdcAddress: ::UNICODE_STRING,
-    pub KdcAddressType: ::ULONG,
-}
+STRUCT!{struct KERB_SETPASSWORD_EX_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    LogonId: ::LUID,
+    CredentialsHandle: ::SecHandle,
+    Flags: ::ULONG,
+    AccountRealm: ::UNICODE_STRING,
+    AccountName: ::UNICODE_STRING,
+    Password: ::UNICODE_STRING,
+    ClientRealm: ::UNICODE_STRING,
+    ClientName: ::UNICODE_STRING,
+    Impersonating: ::BOOLEAN,
+    KdcAddress: ::UNICODE_STRING,
+    KdcAddressType: ::ULONG,
+}}
 pub type PKERB_SETPASSWORD_EX_REQUEST = *mut KERB_SETPASSWORD_EX_REQUEST;
 pub const DS_UNKNOWN_ADDRESS_TYPE: ::ULONG = 0;
 pub const KERB_SETPASS_USE_LOGONID: ::ULONG = 1;
 pub const KERB_SETPASS_USE_CREDHANDLE: ::ULONG = 2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_DECRYPT_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub LogonId: ::LUID,
-    pub Flags: ::ULONG,
-    pub CryptoType: ::LONG,
-    pub KeyUsage: ::LONG,
-    pub Key: KERB_CRYPTO_KEY,
-    pub EncryptedDataSize: ::ULONG,
-    pub InitialVectorSize: ::ULONG,
-    pub InitialVector: ::PUCHAR,
-    pub EncryptedData: ::PUCHAR,
-}
+STRUCT!{struct KERB_DECRYPT_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    LogonId: ::LUID,
+    Flags: ::ULONG,
+    CryptoType: ::LONG,
+    KeyUsage: ::LONG,
+    Key: KERB_CRYPTO_KEY,
+    EncryptedDataSize: ::ULONG,
+    InitialVectorSize: ::ULONG,
+    InitialVector: ::PUCHAR,
+    EncryptedData: ::PUCHAR,
+}}
 pub type PKERB_DECRYPT_REQUEST = *mut KERB_DECRYPT_REQUEST;
 pub const KERB_DECRYPT_FLAG_DEFAULT_KEY: ::ULONG = 0x00000001;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_DECRYPT_RESPONSE {
-    pub DecryptedData: [::UCHAR; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct KERB_DECRYPT_RESPONSE {
+    DecryptedData: [::UCHAR; ::ANYSIZE_ARRAY],
+}}
 pub type PKERB_DECRYPT_RESPONSE = *mut KERB_DECRYPT_RESPONSE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_ADD_BINDING_CACHE_ENTRY_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub RealmName: ::UNICODE_STRING,
-    pub KdcAddress: ::UNICODE_STRING,
-    pub AddressType: ::ULONG,
-}
+STRUCT!{struct KERB_ADD_BINDING_CACHE_ENTRY_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    RealmName: ::UNICODE_STRING,
+    KdcAddress: ::UNICODE_STRING,
+    AddressType: ::ULONG,
+}}
 pub type PKERB_ADD_BINDING_CACHE_ENTRY_REQUEST = *mut KERB_ADD_BINDING_CACHE_ENTRY_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_REFRESH_SCCRED_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub CredentialBlob: ::UNICODE_STRING,
-    pub LogonId: ::LUID,
-    pub Flags: ::ULONG,
-}
+STRUCT!{struct KERB_REFRESH_SCCRED_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    CredentialBlob: ::UNICODE_STRING,
+    LogonId: ::LUID,
+    Flags: ::ULONG,
+}}
 pub type PKERB_REFRESH_SCCRED_REQUEST = *mut KERB_REFRESH_SCCRED_REQUEST;
 pub const KERB_REFRESH_SCCRED_RELEASE: ::ULONG = 0x0;
 pub const KERB_REFRESH_SCCRED_GETTGT: ::ULONG = 0x1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_ADD_CREDENTIALS_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub UserName: ::UNICODE_STRING,
-    pub DomainName: ::UNICODE_STRING,
-    pub Password: ::UNICODE_STRING,
-    pub LogonId: ::LUID,
-    pub Flags: ::ULONG,
-}
+STRUCT!{struct KERB_ADD_CREDENTIALS_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    UserName: ::UNICODE_STRING,
+    DomainName: ::UNICODE_STRING,
+    Password: ::UNICODE_STRING,
+    LogonId: ::LUID,
+    Flags: ::ULONG,
+}}
 pub type PKERB_ADD_CREDENTIALS_REQUEST = *mut KERB_ADD_CREDENTIALS_REQUEST;
 pub const KERB_REQUEST_ADD_CREDENTIAL: ::ULONG = 1;
 pub const KERB_REQUEST_REPLACE_CREDENTIAL: ::ULONG = 2;
 pub const KERB_REQUEST_REMOVE_CREDENTIAL: ::ULONG = 4;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_ADD_CREDENTIALS_REQUEST_EX {
-    pub Credentials: KERB_ADD_CREDENTIALS_REQUEST,
-    pub PrincipalNameCount: ::ULONG,
-    pub PrincipalNames: [::UNICODE_STRING; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct KERB_ADD_CREDENTIALS_REQUEST_EX {
+    Credentials: KERB_ADD_CREDENTIALS_REQUEST,
+    PrincipalNameCount: ::ULONG,
+    PrincipalNames: [::UNICODE_STRING; ::ANYSIZE_ARRAY],
+}}
 pub type PKERB_ADD_CREDENTIALS_REQUEST_EX = *mut KERB_ADD_CREDENTIALS_REQUEST_EX;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_TRANSFER_CRED_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub OriginLogonId: ::LUID,
-    pub DestinationLogonId: ::LUID,
-    pub Flags: ::ULONG,
-}
+STRUCT!{struct KERB_TRANSFER_CRED_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    OriginLogonId: ::LUID,
+    DestinationLogonId: ::LUID,
+    Flags: ::ULONG,
+}}
 pub type PKERB_TRANSFER_CRED_REQUEST = *mut KERB_TRANSFER_CRED_REQUEST;
 pub const KERB_TRANSFER_CRED_WITH_TICKETS: ::ULONG = 0x1;
 pub const KERB_TRANSFER_CRED_CLEANUP_CREDENTIALS: ::ULONG = 0x2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_CLEANUP_MACHINE_PKINIT_CREDS_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub LogonId: ::LUID,
-}
+STRUCT!{struct KERB_CLEANUP_MACHINE_PKINIT_CREDS_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    LogonId: ::LUID,
+}}
 pub type PKERB_CLEANUP_MACHINE_PKINIT_CREDS_REQUEST =
     *mut KERB_CLEANUP_MACHINE_PKINIT_CREDS_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_BINDING_CACHE_ENTRY_DATA {
-    pub DiscoveryTime: ::ULONG64,
-    pub RealmName: ::UNICODE_STRING,
-    pub KdcAddress: ::UNICODE_STRING,
-    pub AddressType: ::ULONG,
-    pub Flags: ::ULONG,
-    pub DcFlags: ::ULONG,
-    pub CacheFlags: ::ULONG,
-    pub KdcName: ::UNICODE_STRING,
-}
+STRUCT!{struct KERB_BINDING_CACHE_ENTRY_DATA {
+    DiscoveryTime: ::ULONG64,
+    RealmName: ::UNICODE_STRING,
+    KdcAddress: ::UNICODE_STRING,
+    AddressType: ::ULONG,
+    Flags: ::ULONG,
+    DcFlags: ::ULONG,
+    CacheFlags: ::ULONG,
+    KdcName: ::UNICODE_STRING,
+}}
 pub type PKERB_BINDING_CACHE_ENTRY_DATA = *mut KERB_BINDING_CACHE_ENTRY_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_QUERY_BINDING_CACHE_RESPONSE {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub CountOfEntries: ::ULONG,
-    pub Entries: PKERB_BINDING_CACHE_ENTRY_DATA,
-}
+STRUCT!{struct KERB_QUERY_BINDING_CACHE_RESPONSE {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    CountOfEntries: ::ULONG,
+    Entries: PKERB_BINDING_CACHE_ENTRY_DATA,
+}}
 pub type PKERB_QUERY_BINDING_CACHE_RESPONSE = *mut KERB_QUERY_BINDING_CACHE_RESPONSE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_ADD_BINDING_CACHE_ENTRY_EX_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub RealmName: ::UNICODE_STRING,
-    pub KdcAddress: ::UNICODE_STRING,
-    pub AddressType: ::ULONG,
-    pub DcFlags: ::ULONG,
-}
+STRUCT!{struct KERB_ADD_BINDING_CACHE_ENTRY_EX_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    RealmName: ::UNICODE_STRING,
+    KdcAddress: ::UNICODE_STRING,
+    AddressType: ::ULONG,
+    DcFlags: ::ULONG,
+}}
 pub type PKERB_ADD_BINDING_CACHE_ENTRY_EX_REQUEST = *mut KERB_ADD_BINDING_CACHE_ENTRY_EX_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_QUERY_BINDING_CACHE_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-}
+STRUCT!{struct KERB_QUERY_BINDING_CACHE_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+}}
 pub type PKERB_QUERY_BINDING_CACHE_REQUEST = *mut KERB_QUERY_BINDING_CACHE_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_PURGE_BINDING_CACHE_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-}
+STRUCT!{struct KERB_PURGE_BINDING_CACHE_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+}}
 pub type PKERB_PURGE_BINDING_CACHE_REQUEST = *mut KERB_PURGE_BINDING_CACHE_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_QUERY_DOMAIN_EXTENDED_POLICIES_REQUEST {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub Flags: ::ULONG,
-    pub DomainName: ::UNICODE_STRING,
-}
+STRUCT!{struct KERB_QUERY_DOMAIN_EXTENDED_POLICIES_REQUEST {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    Flags: ::ULONG,
+    DomainName: ::UNICODE_STRING,
+}}
 pub type PKERB_QUERY_DOMAIN_EXTENDED_POLICIES_REQUEST =
     *mut KERB_QUERY_DOMAIN_EXTENDED_POLICIES_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_QUERY_DOMAIN_EXTENDED_POLICIES_RESPONSE {
-    pub MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
-    pub Flags: ::ULONG,
-    pub ExtendedPolicies: ::ULONG,
-    pub DsFlags: ::ULONG,
-}
+STRUCT!{struct KERB_QUERY_DOMAIN_EXTENDED_POLICIES_RESPONSE {
+    MessageType: KERB_PROTOCOL_MESSAGE_TYPE,
+    Flags: ::ULONG,
+    ExtendedPolicies: ::ULONG,
+    DsFlags: ::ULONG,
+}}
 pub type PKERB_QUERY_DOMAIN_EXTENDED_POLICIES_RESPONSE =
     *mut KERB_QUERY_DOMAIN_EXTENDED_POLICIES_RESPONSE;
 ENUM!{enum KERB_CERTIFICATE_INFO_TYPE {
     CertHashInfo = 1,
 }}
 pub type PKERB_CERTIFICATE_INFO_TYPE = *mut KERB_CERTIFICATE_INFO_TYPE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_CERTIFICATE_HASHINFO {
-    pub StoreNameLength: ::USHORT,
-    pub HashLength: ::USHORT,
-}
+STRUCT!{struct KERB_CERTIFICATE_HASHINFO {
+    StoreNameLength: ::USHORT,
+    HashLength: ::USHORT,
+}}
 pub type PKERB_CERTIFICATE_HASHINFO = *mut KERB_CERTIFICATE_HASHINFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KERB_CERTIFICATE_INFO {
-    pub CertInfoSize: ::ULONG,
-    pub InfoType: ::ULONG,
-}
+STRUCT!{struct KERB_CERTIFICATE_INFO {
+    CertInfoSize: ::ULONG,
+    InfoType: ::ULONG,
+}}
 pub type PKERB_CERTIFICATE_INFO = *mut KERB_CERTIFICATE_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_AUDIT_SID_ARRAY {
-    pub UsersCount: ::ULONG,
-    pub UserSidArray: *mut ::PSID,
-}
+STRUCT!{struct POLICY_AUDIT_SID_ARRAY {
+    UsersCount: ::ULONG,
+    UserSidArray: *mut ::PSID,
+}}
 pub type PPOLICY_AUDIT_SID_ARRAY = *mut POLICY_AUDIT_SID_ARRAY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct AUDIT_POLICY_INFORMATION {
-    pub AuditSubCategoryGuid: ::GUID,
-    pub AuditingInformation: ::ULONG,
-    pub AuditCategoryGuid: ::GUID,
-}
+STRUCT!{struct AUDIT_POLICY_INFORMATION {
+    AuditSubCategoryGuid: ::GUID,
+    AuditingInformation: ::ULONG,
+    AuditCategoryGuid: ::GUID,
+}}
 pub type PAUDIT_POLICY_INFORMATION = *mut AUDIT_POLICY_INFORMATION;
 pub type LPAUDIT_POLICY_INFORMATION = PAUDIT_POLICY_INFORMATION;
 pub type PCAUDIT_POLICY_INFORMATION = *const AUDIT_POLICY_INFORMATION;
@@ -1683,33 +1560,30 @@ pub const AUDIT_GENERIC_READ: ::ULONG = ::STANDARD_RIGHTS_READ | AUDIT_QUERY_SYS
 pub const AUDIT_GENERIC_WRITE: ::ULONG = ::STANDARD_RIGHTS_WRITE | AUDIT_SET_USER_POLICY
     | AUDIT_SET_MISC_POLICY | AUDIT_SET_SYSTEM_POLICY;
 pub const AUDIT_GENERIC_EXECUTE: ::ULONG = ::STANDARD_RIGHTS_EXECUTE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PKU2U_CERT_BLOB {
-    pub CertOffset: ::ULONG,
-    pub CertLength: ::USHORT,
-}
+STRUCT!{struct PKU2U_CERT_BLOB {
+    CertOffset: ::ULONG,
+    CertLength: ::USHORT,
+}}
 pub type PPKU2U_CERT_BLOB = *mut PKU2U_CERT_BLOB;
 pub const PKU2U_CREDUI_CONTEXT_VERSION: ::ULONG64 = 0x4154414454524543;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PKU2U_CREDUI_CONTEXT {
-    pub Version: ::ULONG64,
-    pub cbHeaderLength: ::USHORT,
-    pub cbStructureLength: ::ULONG,
-    pub CertArrayCount: ::USHORT,
-    pub CertArrayOffset: ::ULONG,
-}
+STRUCT!{struct PKU2U_CREDUI_CONTEXT {
+    Version: ::ULONG64,
+    cbHeaderLength: ::USHORT,
+    cbStructureLength: ::ULONG,
+    CertArrayCount: ::USHORT,
+    CertArrayOffset: ::ULONG,
+}}
 pub type PPKU2U_CREDUI_CONTEXT = *mut PKU2U_CREDUI_CONTEXT;
 ENUM!{enum PKU2U_LOGON_SUBMIT_TYPE {
     Pku2uCertificateS4ULogon = 14,
 }}
 pub type PPKU2U_LOGON_SUBMIT_TYPE = *mut PKU2U_LOGON_SUBMIT_TYPE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PKU2U_CERTIFICATE_S4U_LOGON {
-    pub MessageType: PKU2U_LOGON_SUBMIT_TYPE,
-    pub Flags: ::ULONG,
-    pub UserPrincipalName: ::UNICODE_STRING,
-    pub DomainName: ::UNICODE_STRING,
-    pub CertificateLength: ::ULONG,
-    pub Certificate: ::PUCHAR,
-}
+STRUCT!{struct PKU2U_CERTIFICATE_S4U_LOGON {
+    MessageType: PKU2U_LOGON_SUBMIT_TYPE,
+    Flags: ::ULONG,
+    UserPrincipalName: ::UNICODE_STRING,
+    DomainName: ::UNICODE_STRING,
+    CertificateLength: ::ULONG,
+    Certificate: ::PUCHAR,
+}}
 pub type PPKU2U_CERTIFICATE_S4U_LOGON = *mut PKU2U_CERTIFICATE_S4U_LOGON;

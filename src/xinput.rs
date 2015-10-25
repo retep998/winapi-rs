@@ -76,49 +76,43 @@ pub const VK_PAD_RTHUMB_DOWNLEFT: ::WORD = 0x5837;
 pub const XINPUT_KEYSTROKE_KEYDOWN: ::WORD = 0x0001;
 pub const XINPUT_KEYSTROKE_KEYUP: ::WORD = 0x0002;
 pub const XINPUT_KEYSTROKE_REPEAT: ::WORD = 0x0004;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct XINPUT_GAMEPAD {
-    pub wButtons: ::WORD,
-    pub bLeftTrigger: ::BYTE,
-    pub bRightTrigger: ::BYTE,
-    pub sThumbLX: ::SHORT,
-    pub sThumbLY: ::SHORT,
-    pub sThumbRX: ::SHORT,
-    pub sThumbRY: ::SHORT,
-}
+STRUCT!{struct XINPUT_GAMEPAD {
+    wButtons: ::WORD,
+    bLeftTrigger: ::BYTE,
+    bRightTrigger: ::BYTE,
+    sThumbLX: ::SHORT,
+    sThumbLY: ::SHORT,
+    sThumbRX: ::SHORT,
+    sThumbRY: ::SHORT,
+}}
 pub type PXINPUT_GAMEPAD = *mut XINPUT_GAMEPAD;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct XINPUT_STATE {
-    pub dwPacketNumber: ::DWORD,
-    pub Gamepad: ::XINPUT_GAMEPAD,
-}
+STRUCT!{struct XINPUT_STATE {
+    dwPacketNumber: ::DWORD,
+    Gamepad: ::XINPUT_GAMEPAD,
+}}
 pub type PXINPUT_STATE = *mut XINPUT_STATE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct XINPUT_VIBRATION {
-    pub wLeftMotorSpeed: ::WORD,
-    pub wRightMotorSpeed: ::WORD,
-}
+STRUCT!{struct XINPUT_VIBRATION {
+    wLeftMotorSpeed: ::WORD,
+    wRightMotorSpeed: ::WORD,
+}}
 pub type PXINPUT_VIBRATION = *mut XINPUT_VIBRATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct XINPUT_CAPABILITIES {
-    pub Type: ::BYTE,
-    pub SubType: ::BYTE,
-    pub Flags: ::WORD,
-    pub Gamepad: ::XINPUT_GAMEPAD,
-    pub Vibration: ::XINPUT_VIBRATION,
-}
+STRUCT!{struct XINPUT_CAPABILITIES {
+    Type: ::BYTE,
+    SubType: ::BYTE,
+    Flags: ::WORD,
+    Gamepad: ::XINPUT_GAMEPAD,
+    Vibration: ::XINPUT_VIBRATION,
+}}
 pub type PXINPUT_CAPABILITIES = *mut XINPUT_CAPABILITIES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct XINPUT_BATTERY_INFORMATION {
-    pub BatteryType: ::BYTE,
-    pub BatteryLevel: ::BYTE,
-}
+STRUCT!{struct XINPUT_BATTERY_INFORMATION {
+    BatteryType: ::BYTE,
+    BatteryLevel: ::BYTE,
+}}
 pub type PXINPUT_BATTERY_INFORMATION = *mut XINPUT_BATTERY_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct XINPUT_KEYSTROKE {
-    pub VirtualKey: ::WORD,
-    pub Unicode: ::WCHAR,
-    pub UserIndex: ::BYTE,
-    pub HidCode: ::BYTE,
-}
+STRUCT!{struct XINPUT_KEYSTROKE {
+    VirtualKey: ::WORD,
+    Unicode: ::WCHAR,
+    UserIndex: ::BYTE,
+    HidCode: ::BYTE,
+}}
 pub type PXINPUT_KEYSTROKE = *mut XINPUT_KEYSTROKE;

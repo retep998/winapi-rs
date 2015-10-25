@@ -58,18 +58,16 @@ pub use self::VARENUM::*;
 pub const VT_ILLEGALMASKED: VARENUM = VT_BSTR_BLOB;
 pub const VT_TYPEMASK: VARENUM = VT_BSTR_BLOB;
 pub type DATE = ::c_double;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CY {
-    pub int64: ::LONGLONG,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DECIMAL {
-    pub wReserved: ::USHORT,
-    pub scale: ::BYTE,
-    pub sign: ::BYTE,
-    pub Hi32: ::ULONG,
-    pub Lo64: ::ULONGLONG,
-}
+STRUCT!{struct CY {
+    int64: ::LONGLONG,
+}}
+STRUCT!{struct DECIMAL {
+    wReserved: ::USHORT,
+    scale: ::BYTE,
+    sign: ::BYTE,
+    Hi32: ::ULONG,
+    Lo64: ::ULONGLONG,
+}}
 pub const DECIMAL_NEG: ::BYTE = 0x80;
 pub type LPDECIMAL = *mut DECIMAL;
 pub type VARTYPE = ::c_ushort;

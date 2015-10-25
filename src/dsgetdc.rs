@@ -30,31 +30,29 @@ pub const DSGETDC_VALID_FLAGS: ::ULONG = DS_FORCE_REDISCOVERY | DS_DIRECTORY_SER
     | DS_IS_DNS_NAME | DS_TRY_NEXTCLOSEST_SITE | DS_DIRECTORY_SERVICE_6_REQUIRED
     | DS_DIRECTORY_SERVICE_8_REQUIRED | DS_DIRECTORY_SERVICE_9_REQUIRED | DS_WEB_SERVICE_REQUIRED
     | DS_RETURN_FLAT_NAME | DS_RETURN_DNS_NAME;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DOMAIN_CONTROLLER_INFOA {
-    pub DomainControllerName: ::LPSTR,
-    pub DomainControllerAddress: ::LPSTR,
-    pub DomainControllerAddressType: ::ULONG,
-    pub DomainGuid: ::GUID,
-    pub DomainName: ::LPSTR,
-    pub DnsForestName: ::LPSTR,
-    pub Flags: ::ULONG,
-    pub DcSiteName: ::LPSTR,
-    pub ClientSiteName: ::LPSTR,
-}
+STRUCT!{struct DOMAIN_CONTROLLER_INFOA {
+    DomainControllerName: ::LPSTR,
+    DomainControllerAddress: ::LPSTR,
+    DomainControllerAddressType: ::ULONG,
+    DomainGuid: ::GUID,
+    DomainName: ::LPSTR,
+    DnsForestName: ::LPSTR,
+    Flags: ::ULONG,
+    DcSiteName: ::LPSTR,
+    ClientSiteName: ::LPSTR,
+}}
 pub type PDOMAIN_CONTROLLER_INFOA = *mut DOMAIN_CONTROLLER_INFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DOMAIN_CONTROLLER_INFOW {
-    pub DomainControllerName: ::LPWSTR,
-    pub DomainControllerAddress: ::LPWSTR,
-    pub DomainControllerAddressType: ::ULONG,
-    pub DomainGuid: ::GUID,
-    pub DomainName: ::LPWSTR,
-    pub DnsForestName: ::LPWSTR,
-    pub Flags: ::ULONG,
-    pub DcSiteName: ::LPWSTR,
-    pub ClientSiteName: ::LPWSTR,
-}
+STRUCT!{struct DOMAIN_CONTROLLER_INFOW {
+    DomainControllerName: ::LPWSTR,
+    DomainControllerAddress: ::LPWSTR,
+    DomainControllerAddressType: ::ULONG,
+    DomainGuid: ::GUID,
+    DomainName: ::LPWSTR,
+    DnsForestName: ::LPWSTR,
+    Flags: ::ULONG,
+    DcSiteName: ::LPWSTR,
+    ClientSiteName: ::LPWSTR,
+}}
 pub type PDOMAIN_CONTROLLER_INFOW = *mut DOMAIN_CONTROLLER_INFOW;
 pub const DS_INET_ADDRESS: ::ULONG = 1;
 pub const DS_NETBIOS_ADDRESS: ::ULONG = 2;
@@ -85,29 +83,27 @@ pub const DS_DOMAIN_NATIVE_MODE: ::ULONG = 0x0010;
 pub const DS_DOMAIN_DIRECT_INBOUND: ::ULONG = 0x0020;
 pub const DS_DOMAIN_VALID_FLAGS: ::ULONG = DS_DOMAIN_IN_FOREST | DS_DOMAIN_DIRECT_OUTBOUND
     | DS_DOMAIN_TREE_ROOT | DS_DOMAIN_PRIMARY | DS_DOMAIN_NATIVE_MODE | DS_DOMAIN_DIRECT_INBOUND;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DS_DOMAIN_TRUSTSW {
-    pub NetbiosDomainName: ::LPWSTR,
-    pub DnsDomainName: ::LPWSTR,
-    pub Flags: ::ULONG,
-    pub ParentIndex: ::ULONG,
-    pub TrustType: ::ULONG,
-    pub TrustAttributes: ::ULONG,
-    pub DomainSid: ::PSID,
-    pub DomainGuid: ::GUID,
-}
+STRUCT!{struct DS_DOMAIN_TRUSTSW {
+    NetbiosDomainName: ::LPWSTR,
+    DnsDomainName: ::LPWSTR,
+    Flags: ::ULONG,
+    ParentIndex: ::ULONG,
+    TrustType: ::ULONG,
+    TrustAttributes: ::ULONG,
+    DomainSid: ::PSID,
+    DomainGuid: ::GUID,
+}}
 pub type PDS_DOMAIN_TRUSTSW = *mut DS_DOMAIN_TRUSTSW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DS_DOMAIN_TRUSTSA {
-    pub NetbiosDomainName: ::LPSTR,
-    pub DnsDomainName: ::LPSTR,
-    pub Flags: ::ULONG,
-    pub ParentIndex: ::ULONG,
-    pub TrustType: ::ULONG,
-    pub TrustAttributes: ::ULONG,
-    pub DomainSid: ::PSID,
-    pub DomainGuid: ::GUID,
-}
+STRUCT!{struct DS_DOMAIN_TRUSTSA {
+    NetbiosDomainName: ::LPSTR,
+    DnsDomainName: ::LPSTR,
+    Flags: ::ULONG,
+    ParentIndex: ::ULONG,
+    TrustType: ::ULONG,
+    TrustAttributes: ::ULONG,
+    DomainSid: ::PSID,
+    DomainGuid: ::GUID,
+}}
 pub type PDS_DOMAIN_TRUSTSA = *mut DS_DOMAIN_TRUSTSA;
 pub const DS_ONLY_DO_SITE_NAME: ::ULONG = 0x01;
 pub const DS_NOTIFY_AFTER_SITE_RECORDS: ::ULONG = 0x02;

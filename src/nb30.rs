@@ -27,43 +27,41 @@ pub struct NCB {
 }
 impl Clone for NCB { fn clone(&self) -> NCB { *self } }
 pub type PNCB = *mut NCB;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ADAPTER_STATUS {
-    pub adapter_address: [::UCHAR; 6],
-    pub rev_major: ::UCHAR,
-    pub reserved0: ::UCHAR,
-    pub adapter_type: ::UCHAR,
-    pub rev_minor: ::UCHAR,
-    pub duration: ::WORD,
-    pub frmr_recv: ::WORD,
-    pub frmr_xmit: ::WORD,
-    pub iframe_recv_err: ::WORD,
-    pub xmit_aborts: ::WORD,
-    pub xmit_success: ::DWORD,
-    pub recv_success: ::DWORD,
-    pub iframe_xmit_err: ::WORD,
-    pub recv_buff_unavail: ::WORD,
-    pub t1_timeouts: ::WORD,
-    pub ti_timeouts: ::WORD,
-    pub reserved1: ::DWORD,
-    pub free_ncbs: ::WORD,
-    pub max_cfg_ncbs: ::WORD,
-    pub max_ncbs: ::WORD,
-    pub xmit_buf_unavail: ::WORD,
-    pub max_dgram_size: ::WORD,
-    pub pending_sess: ::WORD,
-    pub max_cfg_sess: ::WORD,
-    pub max_sess: ::WORD,
-    pub max_sess_pkt_size: ::WORD,
-    pub name_count: ::WORD,
-}
+STRUCT!{struct ADAPTER_STATUS {
+    adapter_address: [::UCHAR; 6],
+    rev_major: ::UCHAR,
+    reserved0: ::UCHAR,
+    adapter_type: ::UCHAR,
+    rev_minor: ::UCHAR,
+    duration: ::WORD,
+    frmr_recv: ::WORD,
+    frmr_xmit: ::WORD,
+    iframe_recv_err: ::WORD,
+    xmit_aborts: ::WORD,
+    xmit_success: ::DWORD,
+    recv_success: ::DWORD,
+    iframe_xmit_err: ::WORD,
+    recv_buff_unavail: ::WORD,
+    t1_timeouts: ::WORD,
+    ti_timeouts: ::WORD,
+    reserved1: ::DWORD,
+    free_ncbs: ::WORD,
+    max_cfg_ncbs: ::WORD,
+    max_ncbs: ::WORD,
+    xmit_buf_unavail: ::WORD,
+    max_dgram_size: ::WORD,
+    pending_sess: ::WORD,
+    max_cfg_sess: ::WORD,
+    max_sess: ::WORD,
+    max_sess_pkt_size: ::WORD,
+    name_count: ::WORD,
+}}
 pub type PADAPTER_STATUS = *mut ADAPTER_STATUS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NAME_BUFFER {
-    pub name: [::UCHAR; NCBNAMSZ],
-    pub name_num: ::UCHAR,
-    pub name_flags: ::UCHAR,
-}
+STRUCT!{struct NAME_BUFFER {
+    name: [::UCHAR; NCBNAMSZ],
+    name_num: ::UCHAR,
+    name_flags: ::UCHAR,
+}}
 pub type PNAME_BUFFER = *mut NAME_BUFFER;
 pub const NAME_FLAGS_MASK: ::UCHAR = 0x87;
 pub const GROUP_NAME: ::UCHAR = 0x80;
@@ -73,23 +71,21 @@ pub const REGISTERED: ::UCHAR = 0x04;
 pub const DEREGISTERED: ::UCHAR = 0x05;
 pub const DUPLICATE: ::UCHAR = 0x06;
 pub const DUPLICATE_DEREG: ::UCHAR = 0x07;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SESSION_HEADER {
-    pub sess_name: ::UCHAR,
-    pub num_sess: ::UCHAR,
-    pub rcv_dg_outstanding: ::UCHAR,
-    pub rcv_any_outstanding: ::UCHAR,
-}
+STRUCT!{struct SESSION_HEADER {
+    sess_name: ::UCHAR,
+    num_sess: ::UCHAR,
+    rcv_dg_outstanding: ::UCHAR,
+    rcv_any_outstanding: ::UCHAR,
+}}
 pub type PSESSION_HEADER = *mut SESSION_HEADER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SESSION_BUFFER {
-    pub lsn: ::UCHAR,
-    pub state: ::UCHAR,
-    pub local_name: [::UCHAR; NCBNAMSZ],
-    pub remote_name: [::UCHAR; NCBNAMSZ],
-    pub rcvs_outstanding: ::UCHAR,
-    pub sends_outstanding: ::UCHAR,
-}
+STRUCT!{struct SESSION_BUFFER {
+    lsn: ::UCHAR,
+    state: ::UCHAR,
+    local_name: [::UCHAR; NCBNAMSZ],
+    remote_name: [::UCHAR; NCBNAMSZ],
+    rcvs_outstanding: ::UCHAR,
+    sends_outstanding: ::UCHAR,
+}}
 pub type PSESSION_BUFFER = *mut SESSION_BUFFER;
 pub const LISTEN_OUTSTANDING: ::UCHAR = 0x01;
 pub const CALL_PENDING: ::UCHAR = 0x02;
@@ -104,29 +100,26 @@ pub struct LANA_ENUM {
 }
 impl Clone for LANA_ENUM { fn clone(&self) -> LANA_ENUM { *self } }
 pub type PLANA_ENUM = *mut LANA_ENUM;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FIND_NAME_HEADER {
-    pub node_count: ::WORD,
-    pub reserved: ::UCHAR,
-    pub unique_group: ::UCHAR,
-}
+STRUCT!{struct FIND_NAME_HEADER {
+    node_count: ::WORD,
+    reserved: ::UCHAR,
+    unique_group: ::UCHAR,
+}}
 pub type PFIND_NAME_HEADER = *mut FIND_NAME_HEADER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FIND_NAME_BUFFER {
-    pub length: ::UCHAR,
-    pub access_control: ::UCHAR,
-    pub frame_control: ::UCHAR,
-    pub destination_addr: [::UCHAR; 6],
-    pub source_addr: [::UCHAR; 6],
-    pub routing_info: [::UCHAR; 18],
-}
+STRUCT!{struct FIND_NAME_BUFFER {
+    length: ::UCHAR,
+    access_control: ::UCHAR,
+    frame_control: ::UCHAR,
+    destination_addr: [::UCHAR; 6],
+    source_addr: [::UCHAR; 6],
+    routing_info: [::UCHAR; 18],
+}}
 pub type PFIND_NAME_BUFFER = *mut FIND_NAME_BUFFER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ACTION_HEADER {
-    pub transport_id: ::ULONG,
-    pub action_code: ::USHORT,
-    pub reserved: ::USHORT,
-}
+STRUCT!{struct ACTION_HEADER {
+    transport_id: ::ULONG,
+    action_code: ::USHORT,
+    reserved: ::USHORT,
+}}
 pub type PACTION_HEADER = *mut ACTION_HEADER;
 pub const NCBCALL: ::UCHAR = 0x10;
 pub const NCBLISTEN: ::UCHAR = 0x11;

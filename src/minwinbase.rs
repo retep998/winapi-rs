@@ -1,43 +1,39 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! This module defines the 32-Bit Windows Base APIs
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SECURITY_ATTRIBUTES {
-    pub nLength: ::DWORD,
-    pub lpSecurityDescriptor: ::LPVOID,
-    pub bInheritHandle: ::BOOL,
-}
+STRUCT!{struct SECURITY_ATTRIBUTES {
+    nLength: ::DWORD,
+    lpSecurityDescriptor: ::LPVOID,
+    bInheritHandle: ::BOOL,
+}}
 pub type PSECURITY_ATTRIBUTES = *mut SECURITY_ATTRIBUTES;
 pub type LPSECURITY_ATTRIBUTES = *mut SECURITY_ATTRIBUTES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct OVERLAPPED {
-    pub Internal: ::ULONG_PTR,
-    pub InternalHigh: ::ULONG_PTR,
-    pub Offset: ::DWORD,
-    pub OffsetHigh: ::DWORD,
-    pub hEvent: ::HANDLE,
-}
+STRUCT!{struct OVERLAPPED {
+    Internal: ::ULONG_PTR,
+    InternalHigh: ::ULONG_PTR,
+    Offset: ::DWORD,
+    OffsetHigh: ::DWORD,
+    hEvent: ::HANDLE,
+}}
 UNION!(OVERLAPPED, Offset, Pointer, Pointer_mut, ::PVOID);
 pub type LPOVERLAPPED = *mut OVERLAPPED;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct OVERLAPPED_ENTRY {
-    pub lpCompletionKey: ::ULONG_PTR,
-    pub lpOverlapped: LPOVERLAPPED,
-    pub Internal: ::ULONG_PTR,
-    pub dwNumberOfBytesTransferred: ::DWORD,
-}
+STRUCT!{struct OVERLAPPED_ENTRY {
+    lpCompletionKey: ::ULONG_PTR,
+    lpOverlapped: LPOVERLAPPED,
+    Internal: ::ULONG_PTR,
+    dwNumberOfBytesTransferred: ::DWORD,
+}}
 pub type LPOVERLAPPED_ENTRY = *mut OVERLAPPED_ENTRY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SYSTEMTIME {
-    pub wYear: ::WORD,
-    pub wMonth: ::WORD,
-    pub wDayOfWeek: ::WORD,
-    pub wDay: ::WORD,
-    pub wHour: ::WORD,
-    pub wMinute: ::WORD,
-    pub wSecond: ::WORD,
-    pub wMilliseconds: ::WORD,
-}
+STRUCT!{struct SYSTEMTIME {
+    wYear: ::WORD,
+    wMonth: ::WORD,
+    wDayOfWeek: ::WORD,
+    wDay: ::WORD,
+    wHour: ::WORD,
+    wMinute: ::WORD,
+    wSecond: ::WORD,
+    wMilliseconds: ::WORD,
+}}
 pub type PSYSTEMTIME = *mut SYSTEMTIME;
 pub type LPSYSTEMTIME = *mut SYSTEMTIME;
 #[repr(C)] #[derive(Copy)]
@@ -133,27 +129,24 @@ pub type LPOVERLAPPED_COMPLETION_ROUTINE = Option<unsafe extern "system" fn(
 )>;
 pub const LOCKFILE_FAIL_IMMEDIATELY: ::DWORD = 0x00000001;
 pub const LOCKFILE_EXCLUSIVE_LOCK: ::DWORD = 0x00000002;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PROCESS_HEAP_ENTRY_Block {
-    pub hMem: ::HANDLE,
-    pub dwReserved: [::DWORD; 3],
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PROCESS_HEAP_ENTRY_Region {
-    pub dwCommittedSize: ::DWORD,
-    pub dwUnCommittedSize: ::DWORD,
-    pub lpFirstBlock: ::LPVOID,
-    pub lpLastBlock: ::LPVOID,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PROCESS_HEAP_ENTRY {
-    pub lpData: ::PVOID,
-    pub cbData: ::DWORD,
-    pub cbOverhead: ::BYTE,
-    pub iRegionIndex: ::BYTE,
-    pub wFlags: ::WORD,
-    pub Region: PROCESS_HEAP_ENTRY_Region,
-}
+STRUCT!{struct PROCESS_HEAP_ENTRY_Block {
+    hMem: ::HANDLE,
+    dwReserved: [::DWORD; 3],
+}}
+STRUCT!{struct PROCESS_HEAP_ENTRY_Region {
+    dwCommittedSize: ::DWORD,
+    dwUnCommittedSize: ::DWORD,
+    lpFirstBlock: ::LPVOID,
+    lpLastBlock: ::LPVOID,
+}}
+STRUCT!{struct PROCESS_HEAP_ENTRY {
+    lpData: ::PVOID,
+    cbData: ::DWORD,
+    cbOverhead: ::BYTE,
+    iRegionIndex: ::BYTE,
+    wFlags: ::WORD,
+    Region: PROCESS_HEAP_ENTRY_Region,
+}}
 UNION!(PROCESS_HEAP_ENTRY, Region, Block, Block_mut, PROCESS_HEAP_ENTRY_Block);
 pub type LPPROCESS_HEAP_ENTRY = *mut PROCESS_HEAP_ENTRY;
 pub type PPROCESS_HEAP_ENTRY = *mut PROCESS_HEAP_ENTRY;
@@ -168,19 +161,17 @@ pub type PTHREAD_START_ROUTINE = Option<unsafe extern "system" fn(
 ) -> ::DWORD>;
 pub type LPTHREAD_START_ROUTINE = PTHREAD_START_ROUTINE;
 pub type LPCONTEXT = ::PCONTEXT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct REASON_CONTEXT_Detailed {
-    pub LocalizedReasonModule: ::HMODULE,
-    pub LocalizedReasonId: ::ULONG,
-    pub ReasonStringCount: ::ULONG,
-    pub ReasonStrings: *mut ::LPWSTR,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct REASON_CONTEXT {
-    pub Version: ::ULONG,
-    pub Flags: ::DWORD,
-    pub Reason: REASON_CONTEXT_Detailed,
-}
+STRUCT!{struct REASON_CONTEXT_Detailed {
+    LocalizedReasonModule: ::HMODULE,
+    LocalizedReasonId: ::ULONG,
+    ReasonStringCount: ::ULONG,
+    ReasonStrings: *mut ::LPWSTR,
+}}
+STRUCT!{struct REASON_CONTEXT {
+    Version: ::ULONG,
+    Flags: ::DWORD,
+    Reason: REASON_CONTEXT_Detailed,
+}}
 UNION!(REASON_CONTEXT, Reason, SimpleReasonString, SimpleReasonString_mut, ::LPWSTR);
 pub type PREASON_CONTEXT = *mut REASON_CONTEXT;
 pub const EXCEPTION_DEBUG_EVENT: ::DWORD = 1;
@@ -192,11 +183,10 @@ pub const LOAD_DLL_DEBUG_EVENT: ::DWORD = 6;
 pub const UNLOAD_DLL_DEBUG_EVENT: ::DWORD = 7;
 pub const OUTPUT_DEBUG_STRING_EVENT: ::DWORD = 8;
 pub const RIP_EVENT: ::DWORD = 9;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct EXCEPTION_DEBUG_INFO {
-    pub ExceptionRecord: ::EXCEPTION_RECORD,
-    pub dwFirstChance: ::DWORD,
-}
+STRUCT!{struct EXCEPTION_DEBUG_INFO {
+    ExceptionRecord: ::EXCEPTION_RECORD,
+    dwFirstChance: ::DWORD,
+}}
 pub type LPEXCEPTION_DEBUG_INFO = *mut EXCEPTION_DEBUG_INFO;
 #[repr(C)] #[derive(Copy)]
 pub struct CREATE_THREAD_DEBUG_INFO {
@@ -221,43 +211,37 @@ pub struct CREATE_PROCESS_DEBUG_INFO {
 }
 impl Clone for CREATE_PROCESS_DEBUG_INFO { fn clone(&self) -> CREATE_PROCESS_DEBUG_INFO { *self } }
 pub type LPCREATE_PROCESS_DEBUG_INFO = *mut CREATE_PROCESS_DEBUG_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct EXIT_THREAD_DEBUG_INFO {
-    pub dwExitCode: ::DWORD,
-}
+STRUCT!{struct EXIT_THREAD_DEBUG_INFO {
+    dwExitCode: ::DWORD,
+}}
 pub type LPEXIT_THREAD_DEBUG_INFO = *mut EXIT_THREAD_DEBUG_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct EXIT_PROCESS_DEBUG_INFO {
-    pub dwExitCode: ::DWORD,
-}
+STRUCT!{struct EXIT_PROCESS_DEBUG_INFO {
+    dwExitCode: ::DWORD,
+}}
 pub type LPEXIT_PROCESS_DEBUG_INFO = *mut EXIT_PROCESS_DEBUG_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LOAD_DLL_DEBUG_INFO {
-    pub hFile: ::HANDLE,
-    pub lpBaseOfDll: ::LPVOID,
-    pub dwDebugInfoFileOffset: ::DWORD,
-    pub nDebugInfoSize: ::DWORD,
-    pub lpImageName: ::LPVOID,
-    pub fUnicode: ::WORD,
-}
+STRUCT!{struct LOAD_DLL_DEBUG_INFO {
+    hFile: ::HANDLE,
+    lpBaseOfDll: ::LPVOID,
+    dwDebugInfoFileOffset: ::DWORD,
+    nDebugInfoSize: ::DWORD,
+    lpImageName: ::LPVOID,
+    fUnicode: ::WORD,
+}}
 pub type LPLOAD_DLL_DEBUG_INFO = *mut LOAD_DLL_DEBUG_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct UNLOAD_DLL_DEBUG_INFO {
-    pub lpBaseOfDll: ::LPVOID,
-}
+STRUCT!{struct UNLOAD_DLL_DEBUG_INFO {
+    lpBaseOfDll: ::LPVOID,
+}}
 pub type LPUNLOAD_DLL_DEBUG_INFO = *mut UNLOAD_DLL_DEBUG_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct OUTPUT_DEBUG_STRING_INFO {
-    pub lpDebugStringData: ::LPSTR,
-    pub fUnicode: ::WORD,
-    pub nDebugStringLength: ::WORD,
-}
+STRUCT!{struct OUTPUT_DEBUG_STRING_INFO {
+    lpDebugStringData: ::LPSTR,
+    fUnicode: ::WORD,
+    nDebugStringLength: ::WORD,
+}}
 pub type LPOUTPUT_DEBUG_STRING_INFO = *mut OUTPUT_DEBUG_STRING_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RIP_INFO {
-    pub dwError: ::DWORD,
-    pub dwType: ::DWORD,
-}
+STRUCT!{struct RIP_INFO {
+    dwError: ::DWORD,
+    dwType: ::DWORD,
+}}
 pub type LPRIP_INFO = *mut RIP_INFO;
 #[repr(C)] #[derive(Copy)]
 pub struct DEBUG_EVENT {

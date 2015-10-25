@@ -24,38 +24,34 @@ DECLARE_HANDLE!(HUMPD, HUMPD__);
 pub type HCURSOR = HICON;
 pub type COLORREF = ::DWORD;
 pub type LPCOLORREF = *mut ::DWORD;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RECT {
-    pub left: ::LONG,
-    pub top: ::LONG,
-    pub right: ::LONG,
-    pub bottom: ::LONG,
-}
+STRUCT!{struct RECT {
+    left: ::LONG,
+    top: ::LONG,
+    right: ::LONG,
+    bottom: ::LONG,
+}}
 pub type PRECT = *mut RECT;
 pub type NPRECT = *mut RECT;
 pub type LPRECT = *mut RECT;
 pub type LPCRECT = *const RECT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RECTL {
-    pub left: ::LONG,
-    pub top: ::LONG,
-    pub right: ::LONG,
-    pub bottom: ::LONG,
-}
+STRUCT!{struct RECTL {
+    left: ::LONG,
+    top: ::LONG,
+    right: ::LONG,
+    bottom: ::LONG,
+}}
 pub type PRECTL = *mut RECTL;
 pub type LPRECTL = *mut RECTL;
 pub type LPCRECTL = *const RECTL;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POINT {
-    pub x: ::LONG,
-    pub y: ::LONG,
-}
+STRUCT!{struct POINT {
+    x: ::LONG,
+    y: ::LONG,
+}}
 pub type PPOINT = *mut POINT;
 pub type NPPOINT = *mut POINT;
 pub type LPPOINT = *mut POINT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POINTL {
-    pub x: ::LONG,
-    pub y: ::LONG,
-}
+STRUCT!{struct POINTL {
+    x: ::LONG,
+    y: ::LONG,
+}}
 pub type PPOINTL = *mut POINTL;

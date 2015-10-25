@@ -12,10 +12,9 @@ pub enum MEMORY_RESOURCE_NOTIFICATION_TYPE {
     LowMemoryResourceNotification,
     HighMemoryResourceNotification
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WIN32_MEMORY_RANGE_ENTRY {
-    pub VirtualAddress: ::PVOID,
-    pub NumberOfBytes: ::SIZE_T,
-}
+STRUCT!{struct WIN32_MEMORY_RANGE_ENTRY {
+    VirtualAddress: ::PVOID,
+    NumberOfBytes: ::SIZE_T,
+}}
 pub type PWIN32_MEMORY_RANGE_ENTRY = *mut WIN32_MEMORY_RANGE_ENTRY;
 pub type PBAD_MEMORY_CALLBACK_ROUTINE = Option<unsafe extern "system" fn()>;

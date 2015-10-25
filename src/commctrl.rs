@@ -1,11 +1,10 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //138
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INITCOMMONCONTROLSEX {
-    pub dwSize: ::DWORD,
-    pub dwICC: ::DWORD,
-}
+STRUCT!{struct INITCOMMONCONTROLSEX {
+    dwSize: ::DWORD,
+    dwICC: ::DWORD,
+}}
 pub type LPINITCOMMONCONTROLSEX = *mut INITCOMMONCONTROLSEX;
 pub const ICC_LISTVIEW_CLASSES: ::DWORD = 0x1;
 pub const ICC_TREEVIEW_CLASSES: ::DWORD = 0x2;
@@ -38,12 +37,11 @@ pub const CBM_FIRST: ::UINT = 0x1700;
 pub const CCM_FIRST: ::UINT = 0x2000;
 pub const CCM_LAST: ::UINT = CCM_FIRST + 0x200;
 pub const CCM_SETBKCOLOR: ::UINT = CCM_FIRST + 1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COLORSCHEME {
-    pub dwSize: ::DWORD,
-    pub clrBtnHighlight: ::COLORREF,
-    pub clrBtnShadow: ::COLORREF,
-}
+STRUCT!{struct COLORSCHEME {
+    dwSize: ::DWORD,
+    clrBtnHighlight: ::COLORREF,
+    clrBtnShadow: ::COLORREF,
+}}
 pub type LPCOLORSCHEME = *mut COLORSCHEME;
 pub const CCM_SETCOLORSCHEME: ::UINT = CCM_FIRST + 2;
 pub const CCM_GETCOLORSCHEME: ::UINT = CCM_FIRST + 3;
@@ -78,58 +76,52 @@ pub const NM_THEMECHANGED: ::UINT = NM_FIRST-22;
 pub const NM_FONTCHANGED: ::UINT = NM_FIRST-23;
 pub const NM_CUSTOMTEXT: ::UINT = NM_FIRST-24;
 pub const NM_TVSTATEIMAGECHANGING: ::UINT = NM_FIRST-24;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTOOLTIPSCREATED {
-    pub hdr: ::NMHDR,
-    pub hwndToolTips: ::HWND,
-}
+STRUCT!{struct NMTOOLTIPSCREATED {
+    hdr: ::NMHDR,
+    hwndToolTips: ::HWND,
+}}
 pub type LPNMTOOLTIPSCREATED = *mut NMTOOLTIPSCREATED;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMMOUSE {
-    pub hdr : ::NMHDR,
-    pub dwItemSpec: ::DWORD_PTR,
-    pub dwItemData: ::DWORD_PTR,
-    pub pt: ::POINT,
-    pub dwHitInfo: ::LPARAM,
-}
+STRUCT!{struct NMMOUSE {
+    hdr : ::NMHDR,
+    dwItemSpec: ::DWORD_PTR,
+    dwItemData: ::DWORD_PTR,
+    pt: ::POINT,
+    dwHitInfo: ::LPARAM,
+}}
 pub type LPNMMOUSE = *mut NMMOUSE;
 pub type NMCLICK = NMMOUSE;
 pub type LPNMCLICK = LPNMMOUSE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMOBJECTNOTIFY {
-    pub hdr: ::NMHDR,
-    pub iItem: ::c_int,
-    pub piid: *const ::IID,
-    pub pObject: *mut ::c_void,
-    pub hResult: ::HRESULT,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct NMOBJECTNOTIFY {
+    hdr: ::NMHDR,
+    iItem: ::c_int,
+    piid: *const ::IID,
+    pObject: *mut ::c_void,
+    hResult: ::HRESULT,
+    dwFlags: ::DWORD,
+}}
 pub type LPNMOBJECTNOTIFY = *mut NMOBJECTNOTIFY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMKEY {
-    pub hdr: ::NMHDR,
-    pub nVKey: ::UINT,
-    pub uFlags: ::UINT,
-}
+STRUCT!{struct NMKEY {
+    hdr: ::NMHDR,
+    nVKey: ::UINT,
+    uFlags: ::UINT,
+}}
 pub type LPNMKEY = *mut NMKEY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMCHAR {
-    pub hdr: ::NMHDR,
-    pub ch: ::UINT,
-    pub dwItemPrev: ::DWORD,
-    pub dwItemNext: ::DWORD,
-}
+STRUCT!{struct NMCHAR {
+    hdr: ::NMHDR,
+    ch: ::UINT,
+    dwItemPrev: ::DWORD,
+    dwItemNext: ::DWORD,
+}}
 pub type LPNMCHAR = *mut NMCHAR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMCUSTOMTEXT {
-    pub hdr: ::NMHDR,
-    pub hDC: ::HDC,
-    pub lpString: ::LPCWSTR,
-    pub nCount: ::c_int,
-    pub lpRect: ::LPRECT,
-    pub uFormat: ::UINT,
-    pub fLink: ::BOOL,
-}
+STRUCT!{struct NMCUSTOMTEXT {
+    hdr: ::NMHDR,
+    hDC: ::HDC,
+    lpString: ::LPCWSTR,
+    nCount: ::c_int,
+    lpRect: ::LPRECT,
+    uFormat: ::UINT,
+    fLink: ::BOOL,
+}}
 pub type LPNMCUSTOMTEXT = *mut NMCUSTOMTEXT;
 pub const NM_FIRST: ::UINT = 0;
 pub const NM_LAST: ::UINT = 0 - 99;
@@ -203,30 +195,27 @@ pub const CDIS_SHOWKEYBOARDCUES: ::UINT = 0x0200;
 pub const CDIS_NEARHOT: ::UINT = 0x0400;
 pub const CDIS_OTHERSIDEHOT: ::UINT = 0x0800;
 pub const CDIS_DROPHILITED: ::UINT = 0x1000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMCUSTOMDRAW {
-    pub hdr: ::NMHDR,
-    pub dwDrawStage: ::DWORD,
-    pub hdc: ::HDC,
-    pub rc: ::RECT,
-    pub dwItemSpec: ::DWORD_PTR,
-    pub uItemState: ::UINT,
-    pub lItemlParam: ::LPARAM,
-}
+STRUCT!{struct NMCUSTOMDRAW {
+    hdr: ::NMHDR,
+    dwDrawStage: ::DWORD,
+    hdc: ::HDC,
+    rc: ::RECT,
+    dwItemSpec: ::DWORD_PTR,
+    uItemState: ::UINT,
+    lItemlParam: ::LPARAM,
+}}
 pub type LPNMCUSTOMDRAW = *mut NMCUSTOMDRAW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTTCUSTOMDRAW {
-    pub nmcd: NMCUSTOMDRAW,
-    pub uDrawFlags: ::UINT,
-}
+STRUCT!{struct NMTTCUSTOMDRAW {
+    nmcd: NMCUSTOMDRAW,
+    uDrawFlags: ::UINT,
+}}
 pub type LPNMTTCUSTOMDRAW = *mut NMTTCUSTOMDRAW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMCUSTOMSPLITRECTINFO {
-    pub hdr: ::NMHDR,
-    pub rcClient: ::RECT,
-    pub rcButton: ::RECT,
-    pub rcSplit: ::RECT,
-}
+STRUCT!{struct NMCUSTOMSPLITRECTINFO {
+    hdr: ::NMHDR,
+    rcClient: ::RECT,
+    rcButton: ::RECT,
+    rcSplit: ::RECT,
+}}
 pub type LPNMCUSTOMSPLITRECTINFO = *mut NMCUSTOMSPLITRECTINFO;
 pub const NM_GETCUSTOMSPLITRECT: ::UINT = BCN_FIRST + 0x0003;
 pub const CLR_NONE: ::DWORD = 0xFFFFFFFF;
@@ -236,26 +225,25 @@ pub struct IMAGELIST {
     unused: ::c_void,
 }
 pub type HIMAGELIST = *mut IMAGELIST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGELISTDRAWPARAMS {
-    pub cbSize: ::DWORD,
-    pub himl: HIMAGELIST,
-    pub i: ::c_int,
-    pub hdcDst: ::HDC,
-    pub x: ::c_int,
-    pub y: ::c_int,
-    pub cx: ::c_int,
-    pub cy: ::c_int,
-    pub xBitmap: ::c_int,
-    pub yBitmap: ::c_int,
-    pub rgbBk: ::COLORREF,
-    pub rgbFg: ::COLORREF,
-    pub fStyle: ::UINT,
-    pub dwRop: ::DWORD,
-    pub fState: ::DWORD,
-    pub Frame: ::DWORD,
-    pub crEffect: ::COLORREF,
-}
+STRUCT!{struct IMAGELISTDRAWPARAMS {
+    cbSize: ::DWORD,
+    himl: HIMAGELIST,
+    i: ::c_int,
+    hdcDst: ::HDC,
+    x: ::c_int,
+    y: ::c_int,
+    cx: ::c_int,
+    cy: ::c_int,
+    xBitmap: ::c_int,
+    yBitmap: ::c_int,
+    rgbBk: ::COLORREF,
+    rgbFg: ::COLORREF,
+    fStyle: ::UINT,
+    dwRop: ::DWORD,
+    fState: ::DWORD,
+    Frame: ::DWORD,
+    crEffect: ::COLORREF,
+}}
 pub type LPIMAGELISTDRAWPARAMS = *mut IMAGELISTDRAWPARAMS;
 pub const ILC_MASK: ::UINT = 0x00000001;
 pub const ILC_COLOR: ::UINT = 0x00000000;
@@ -296,14 +284,13 @@ pub const ILS_ALPHA: ::DWORD = 0x00000008;
 pub const HBITMAP_CALLBACK: ::HBITMAP = (0-1) as ::HBITMAP;
 pub const ILCF_MOVE: ::UINT = 0x00000000;
 pub const ILCF_SWAP: ::UINT = 0x00000001;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGEINFO {
-    pub hbmImage: ::HBITMAP,
-    pub hbmMask: ::HBITMAP,
-    pub Unused1: ::c_int,
-    pub Unused2: ::c_int,
-    pub rcImage: ::RECT,
-}
+STRUCT!{struct IMAGEINFO {
+    hbmImage: ::HBITMAP,
+    hbmMask: ::HBITMAP,
+    Unused1: ::c_int,
+    Unused2: ::c_int,
+    rcImage: ::RECT,
+}}
 pub type LPIMAGEINFO = *mut IMAGEINFO;
 pub const HDS_HORZ: ::DWORD = 0x0000;
 pub const HDS_BUTTONS: ::DWORD = 0x0002;
@@ -320,49 +307,45 @@ pub const HDFT_ISSTRING: ::UINT = 0x0000;
 pub const HDFT_ISNUMBER: ::UINT = 0x0001;
 pub const HDFT_ISDATE: ::UINT = 0x0002;
 pub const HDFT_HASNOVALUE: ::UINT = 0x8000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HD_TEXTFILTERA {
-    pub pszText: ::LPSTR,
-    pub cchTextMax: ::INT,
-}
+STRUCT!{struct HD_TEXTFILTERA {
+    pszText: ::LPSTR,
+    cchTextMax: ::INT,
+}}
 pub type LPHD_TEXTFILTERA = *mut HD_TEXTFILTERA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HD_TEXTFILTERW {
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::INT,
-}
+STRUCT!{struct HD_TEXTFILTERW {
+    pszText: ::LPWSTR,
+    cchTextMax: ::INT,
+}}
 pub type LPHD_TEXTFILTERW = *mut HD_TEXTFILTERW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HDITEMA {
-    pub mask: ::UINT,
-    pub cxy: ::c_int,
-    pub pszText: ::LPSTR,
-    pub hbm: ::HBITMAP,
-    pub cchTextMax: ::c_int,
-    pub fmt: ::c_int,
-    pub lParam: ::LPARAM,
-    pub iImage: ::c_int,
-    pub iOrder: ::c_int,
-    pub _type: ::UINT,
-    pub pvFilter: *mut ::c_void,
-    pub state: ::UINT,
-}
+STRUCT!{struct HDITEMA {
+    mask: ::UINT,
+    cxy: ::c_int,
+    pszText: ::LPSTR,
+    hbm: ::HBITMAP,
+    cchTextMax: ::c_int,
+    fmt: ::c_int,
+    lParam: ::LPARAM,
+    iImage: ::c_int,
+    iOrder: ::c_int,
+    _type: ::UINT,
+    pvFilter: *mut ::c_void,
+    state: ::UINT,
+}}
 pub type LPHDITEMA = *mut HDITEMA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HDITEMW {
-    pub mask: ::UINT,
-    pub cxy: ::c_int,
-    pub pszText: ::LPWSTR,
-    pub hbm: ::HBITMAP,
-    pub cchTextMax: ::c_int,
-    pub fmt: ::c_int,
-    pub lParam: ::LPARAM,
-    pub iImage: ::c_int,
-    pub iOrder: ::c_int,
-    pub _type: ::UINT,
-    pub pvFilter: *mut ::c_void,
-    pub state: ::UINT,
-}
+STRUCT!{struct HDITEMW {
+    mask: ::UINT,
+    cxy: ::c_int,
+    pszText: ::LPWSTR,
+    hbm: ::HBITMAP,
+    cchTextMax: ::c_int,
+    fmt: ::c_int,
+    lParam: ::LPARAM,
+    iImage: ::c_int,
+    iOrder: ::c_int,
+    _type: ::UINT,
+    pvFilter: *mut ::c_void,
+    state: ::UINT,
+}}
 pub type LPHDITEMW = *mut HDITEMW;
 pub const HDI_WIDTH: ::UINT = 0x0001;
 pub const HDI_HEIGHT: ::UINT = HDI_WIDTH;
@@ -400,11 +383,10 @@ pub const HDM_GETITEMA: ::UINT = HDM_FIRST + 3;
 pub const HDM_GETITEMW: ::UINT = HDM_FIRST + 11;
 pub const HDM_SETITEMA: ::UINT = HDM_FIRST + 4;
 pub const HDM_SETITEMW: ::UINT = HDM_FIRST + 12;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HDLAYOUT {
-    pub prc: *mut ::RECT,
-    pub pwpos: *mut ::WINDOWPOS,
-}
+STRUCT!{struct HDLAYOUT {
+    prc: *mut ::RECT,
+    pwpos: *mut ::WINDOWPOS,
+}}
 pub type LPHDLAYOUT = *mut HDLAYOUT;
 pub const HDM_LAYOUT: ::UINT = HDM_FIRST + 5;
 pub const HHT_NOWHERE: ::UINT = 0x0001;
@@ -420,12 +402,11 @@ pub const HHT_TOLEFT: ::UINT = 0x0800;
 pub const HHT_ONITEMSTATEICON: ::UINT = 0x1000;
 pub const HHT_ONDROPDOWN: ::UINT = 0x2000;
 pub const HHT_ONOVERFLOW: ::UINT = 0x4000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HDHITTESTINFO {
-    pub pt: ::POINT,
-    pub flags: ::UINT,
-    pub iItem: ::c_int,
-}
+STRUCT!{struct HDHITTESTINFO {
+    pt: ::POINT,
+    flags: ::UINT,
+    iItem: ::c_int,
+}}
 pub type LPHDHITTESTINFO = *mut HDHITTESTINFO;
 pub const HDSIL_NORMAL: ::WPARAM = 0;
 pub const HDSIL_STATE: ::WPARAM = 1;
@@ -475,50 +456,45 @@ pub const HDN_ITEMSTATEICONCLICK: ::UINT = HDN_FIRST-16;
 pub const HDN_ITEMKEYDOWN: ::UINT = HDN_FIRST-17;
 pub const HDN_DROPDOWN: ::UINT = HDN_FIRST-18;
 pub const HDN_OVERFLOWCLICK: ::UINT = HDN_FIRST-19;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMHEADERA {
-    pub hdr: ::NMHDR,
-    pub iItem: ::c_int,
-    pub iButton: ::c_int,
-    pub pitem: *mut HDITEMA,
-}
+STRUCT!{struct NMHEADERA {
+    hdr: ::NMHDR,
+    iItem: ::c_int,
+    iButton: ::c_int,
+    pitem: *mut HDITEMA,
+}}
 pub type LPNMHEADERA = *mut NMHEADERA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMHEADERW {
-    pub hdr: ::NMHDR,
-    pub iItem: ::c_int,
-    pub iButton: ::c_int,
-    pub pitem: *mut HDITEMW,
-}
+STRUCT!{struct NMHEADERW {
+    hdr: ::NMHDR,
+    iItem: ::c_int,
+    iButton: ::c_int,
+    pitem: *mut HDITEMW,
+}}
 pub type LPNMHEADERW = *mut NMHEADERW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMHDDISPINFOW {
-    pub hdr: ::NMHDR,
-    pub iItem: ::c_int,
-    pub mask: ::UINT,
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct NMHDDISPINFOW {
+    hdr: ::NMHDR,
+    iItem: ::c_int,
+    mask: ::UINT,
+    pszText: ::LPWSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+    lParam: ::LPARAM,
+}}
 pub type LPNMHDDISPINFOW = *mut NMHDDISPINFOW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMHDDISPINFOA {
-    pub hdr: ::NMHDR,
-    pub iItem: ::c_int,
-    pub mask: ::UINT,
-    pub pszText: ::LPSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct NMHDDISPINFOA {
+    hdr: ::NMHDR,
+    iItem: ::c_int,
+    mask: ::UINT,
+    pszText: ::LPSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+    lParam: ::LPARAM,
+}}
 pub type LPNMHDDISPINFOA = *mut NMHDDISPINFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMHDFILTERBTNCLICK {
-    pub hdr: ::NMHDR,
-    pub iItem: ::INT,
-    pub rc: ::RECT,
-}
+STRUCT!{struct NMHDFILTERBTNCLICK {
+    hdr: ::NMHDR,
+    iItem: ::INT,
+    rc: ::RECT,
+}}
 pub type LPNMHDFILTERBTNCLICK = *mut NMHDFILTERBTNCLICK;
 #[repr(C)] #[derive(Clone, Copy, Debug)]
 pub struct TBBUTTON {
@@ -536,11 +512,10 @@ pub struct TBBUTTON {
 pub type PTBBUTTON = *mut TBBUTTON;
 pub type LPTBBUTTON = *mut TBBUTTON;
 pub type LPCTBBUTTON = *const TBBUTTON;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COLORMAP {
-    pub from: ::COLORREF,
-    pub to: ::COLORREF,
-}
+STRUCT!{struct COLORMAP {
+    from: ::COLORREF,
+    to: ::COLORREF,
+}}
 pub type LPCOLORMAP = *mut COLORMAP;
 pub const CMB_MASKED: ::UINT = 0x02;
 pub const TBSTATE_CHECKED: ::BYTE = 0x01;
@@ -583,23 +558,22 @@ pub const TBSTYLE_EX_HIDECLIPPEDBUTTONS: ::DWORD = 0x00000010;
 pub const TBSTYLE_EX_MULTICOLUMN: ::DWORD = 0x00000002;
 pub const TBSTYLE_EX_VERTICAL: ::DWORD = 0x00000004;
 pub const TBSTYLE_EX_DOUBLEBUFFER: ::DWORD = 0x00000080;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTBCUSTOMDRAW {
-    pub nmcd: NMCUSTOMDRAW,
-    pub hbrMonoDither: ::HBRUSH,
-    pub hbrLines: ::HBRUSH,
-    pub hpenLines: ::HPEN,
-    pub clrText: ::COLORREF,
-    pub clrMark: ::COLORREF,
-    pub clrTextHighlight: ::COLORREF,
-    pub clrBtnFace: ::COLORREF,
-    pub clrBtnHighlight: ::COLORREF,
-    pub clrHighlightHotTrack: ::COLORREF,
-    pub rcText: ::RECT,
-    pub nStringBkMode: ::c_int,
-    pub nHLStringBkMode: ::c_int,
-    pub iListGap: ::c_int,
-}
+STRUCT!{struct NMTBCUSTOMDRAW {
+    nmcd: NMCUSTOMDRAW,
+    hbrMonoDither: ::HBRUSH,
+    hbrLines: ::HBRUSH,
+    hpenLines: ::HPEN,
+    clrText: ::COLORREF,
+    clrMark: ::COLORREF,
+    clrTextHighlight: ::COLORREF,
+    clrBtnFace: ::COLORREF,
+    clrBtnHighlight: ::COLORREF,
+    clrHighlightHotTrack: ::COLORREF,
+    rcText: ::RECT,
+    nStringBkMode: ::c_int,
+    nHLStringBkMode: ::c_int,
+    iListGap: ::c_int,
+}}
 pub type LPNMTBCUSTOMDRAW = *mut NMTBCUSTOMDRAW;
 pub const TBCDRF_NOEDGES: ::LRESULT = 0x00010000;
 pub const TBCDRF_HILITEHOTTRACK: ::LRESULT = 0x00020000;
@@ -624,11 +598,10 @@ pub const TB_ISBUTTONHIGHLIGHTED: ::UINT = ::WM_USER + 14;
 pub const TB_SETSTATE: ::UINT = ::WM_USER + 17;
 pub const TB_GETSTATE: ::UINT = ::WM_USER + 18;
 pub const TB_ADDBITMAP: ::UINT = ::WM_USER + 19;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TBADDBITMAP {
-    pub hInst: ::HINSTANCE,
-    pub nID: ::UINT_PTR,
-}
+STRUCT!{struct TBADDBITMAP {
+    hInst: ::HINSTANCE,
+    nID: ::UINT_PTR,
+}}
 pub type LPTBADDBITMAP = *mut TBADDBITMAP;
 pub const HINST_COMMCTRL: ::HINSTANCE = (0 - 1) as ::HINSTANCE;
 pub const IDB_STD_SMALL_COLOR: ::WPARAM = 0;
@@ -680,19 +653,17 @@ pub const TB_DELETEBUTTON: ::UINT = ::WM_USER + 22;
 pub const TB_GETBUTTON: ::UINT = ::WM_USER + 23;
 pub const TB_BUTTONCOUNT: ::UINT = ::WM_USER + 24;
 pub const TB_COMMANDTOINDEX: ::UINT = ::WM_USER + 25;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TBSAVEPARAMSA {
-    pub hkr: ::HKEY,
-    pub pszSubKey: ::LPCSTR,
-    pub pszValueName: ::LPCSTR,
-}
+STRUCT!{struct TBSAVEPARAMSA {
+    hkr: ::HKEY,
+    pszSubKey: ::LPCSTR,
+    pszValueName: ::LPCSTR,
+}}
 pub type LPTBSAVEPARAMSA = *mut TBSAVEPARAMSA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TBSAVEPARAMSW {
-    pub hkr: ::HKEY,
-    pub pszSubKey: ::LPCWSTR,
-    pub pszValueName: ::LPCWSTR,
-}
+STRUCT!{struct TBSAVEPARAMSW {
+    hkr: ::HKEY,
+    pszSubKey: ::LPCWSTR,
+    pszValueName: ::LPCWSTR,
+}}
 pub type LPTBSAVEPARAMSW = *mut TBSAVEPARAMSW;
 pub const TB_SAVERESTOREA: ::UINT = ::WM_USER + 26;
 pub const TB_SAVERESTOREW: ::UINT = ::WM_USER + 76;
@@ -736,11 +707,10 @@ pub const TB_SETHOTITEM: ::UINT = ::WM_USER + 72;
 pub const TB_SETANCHORHIGHLIGHT: ::UINT = ::WM_USER + 73;
 pub const TB_GETANCHORHIGHLIGHT: ::UINT = ::WM_USER + 74;
 pub const TB_MAPACCELERATORA: ::UINT = ::WM_USER + 78;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TBINSERTMARK {
-    pub iButton: ::c_int,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct TBINSERTMARK {
+    iButton: ::c_int,
+    dwFlags: ::DWORD,
+}}
 pub type LPTBINSERTMARK = *mut TBINSERTMARK;
 pub const TBIMHT_AFTER: ::DWORD = 0x00000001;
 pub const TBIMHT_BACKGROUND: ::DWORD = 0x00000002;
@@ -760,14 +730,13 @@ pub const TB_GETCOLORSCHEME: ::UINT = CCM_GETCOLORSCHEME;
 pub const TB_SETUNICODEFORMAT: ::UINT = CCM_SETUNICODEFORMAT;
 pub const TB_GETUNICODEFORMAT: ::UINT = CCM_GETUNICODEFORMAT;
 pub const TB_MAPACCELERATORW: ::UINT = ::WM_USER + 90;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TBREPLACEBITMAP {
-    pub hInstOld: ::HINSTANCE,
-    pub nIDOld: ::UINT_PTR,
-    pub hInstNew: ::HINSTANCE,
-    pub nIDNew: ::UINT_PTR,
-    pub nButtons: ::c_int,
-}
+STRUCT!{struct TBREPLACEBITMAP {
+    hInstOld: ::HINSTANCE,
+    nIDOld: ::UINT_PTR,
+    hInstNew: ::HINSTANCE,
+    nIDNew: ::UINT_PTR,
+    nButtons: ::c_int,
+}}
 pub type LPTBREPLACEBITMAP = *mut TBREPLACEBITMAP;
 pub const TBBF_LARGE: ::DWORD = 0x0001;
 pub const TB_GETBITMAPFLAGS: ::UINT = ::WM_USER + 41;
@@ -779,33 +748,31 @@ pub const TBIF_LPARAM: ::DWORD = 0x00000010;
 pub const TBIF_COMMAND: ::DWORD = 0x00000020;
 pub const TBIF_SIZE: ::DWORD = 0x00000040;
 pub const TBIF_BYINDEX: ::DWORD = 0x80000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TBBUTTONINFOA {
-    pub cbSize: ::UINT,
-    pub dwMask: ::DWORD,
-    pub idCommand: ::c_int,
-    pub iImage: ::c_int,
-    pub fsState: ::BYTE,
-    pub fsStyle: ::BYTE,
-    pub cx: ::WORD,
-    pub lParam: ::DWORD_PTR,
-    pub pszText: ::LPSTR,
-    pub cchText: ::c_int,
-}
+STRUCT!{struct TBBUTTONINFOA {
+    cbSize: ::UINT,
+    dwMask: ::DWORD,
+    idCommand: ::c_int,
+    iImage: ::c_int,
+    fsState: ::BYTE,
+    fsStyle: ::BYTE,
+    cx: ::WORD,
+    lParam: ::DWORD_PTR,
+    pszText: ::LPSTR,
+    cchText: ::c_int,
+}}
 pub type LPTBBUTTONINFOA = *mut TBBUTTONINFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TBBUTTONINFOW {
-    pub cbSize: ::UINT,
-    pub dwMask: ::DWORD,
-    pub idCommand: ::c_int,
-    pub iImage: ::c_int,
-    pub fsState: ::BYTE,
-    pub fsStyle: ::BYTE,
-    pub cx: ::WORD,
-    pub lParam: ::DWORD_PTR,
-    pub pszText: ::LPWSTR,
-    pub cchText: ::c_int,
-}
+STRUCT!{struct TBBUTTONINFOW {
+    cbSize: ::UINT,
+    dwMask: ::DWORD,
+    idCommand: ::c_int,
+    iImage: ::c_int,
+    fsState: ::BYTE,
+    fsStyle: ::BYTE,
+    cx: ::WORD,
+    lParam: ::DWORD_PTR,
+    pszText: ::LPWSTR,
+    cchText: ::c_int,
+}}
 pub type LPTBBUTTONINFOW = *mut TBBUTTONINFOW;
 pub const TB_GETBUTTONINFOW: ::UINT = ::WM_USER + 63;
 pub const TB_SETBUTTONINFOW: ::UINT = ::WM_USER + 64;
@@ -826,17 +793,16 @@ pub const TB_GETIDEALSIZE: ::UINT = ::WM_USER + 99;
 pub const TBMF_PAD: ::DWORD = 0x00000001;
 pub const TBMF_BARPAD: ::DWORD = 0x00000002;
 pub const TBMF_BUTTONSPACING: ::DWORD = 0x00000004;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TBMETRICS {
-    pub cbSize: ::UINT,
-    pub dwMask: ::DWORD,
-    pub cxPad: ::c_int,
-    pub cyPad: ::c_int,
-    pub cxBarPad: ::c_int,
-    pub cyBarPad: ::c_int,
-    pub cxButtonSpacing: ::c_int,
-    pub cyButtonSpacing: ::c_int,
-}
+STRUCT!{struct TBMETRICS {
+    cbSize: ::UINT,
+    dwMask: ::DWORD,
+    cxPad: ::c_int,
+    cyPad: ::c_int,
+    cxBarPad: ::c_int,
+    cyBarPad: ::c_int,
+    cxButtonSpacing: ::c_int,
+    cyButtonSpacing: ::c_int,
+}}
 pub type LPTBMETRICS = *mut TBMETRICS;
 pub const TB_GETMETRICS: ::UINT = ::WM_USER + 101;
 pub const TB_SETMETRICS: ::UINT = ::WM_USER + 102;
@@ -856,13 +822,12 @@ pub const TBN_TOOLBARCHANGE: ::UINT = TBN_FIRST - 8;
 pub const TBN_CUSTHELP: ::UINT = TBN_FIRST - 9;
 pub const TBN_DROPDOWN: ::UINT = TBN_FIRST - 10;
 pub const TBN_GETOBJECT: ::UINT = TBN_FIRST - 12;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTBHOTITEM {
-    pub hdr: ::NMHDR,
-    pub idOld: ::c_int,
-    pub idNew: ::c_int,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct NMTBHOTITEM {
+    hdr: ::NMHDR,
+    idOld: ::c_int,
+    idNew: ::c_int,
+    dwFlags: ::DWORD,
+}}
 pub type LPNMTBHOTITEM = *mut NMTBHOTITEM;
 pub const HICF_OTHER: ::DWORD = 0x00000000;
 pub const HICF_MOUSE: ::DWORD = 0x00000001;
@@ -892,71 +857,65 @@ pub const TBN_DRAGOVER: ::UINT = TBN_FIRST - 27;
 pub const TBN_MAPACCELERATOR: ::UINT = TBN_FIRST - 28;
 pub const TBNRF_HIDEHELP: ::LRESULT = 0x00000001;
 pub const TBNRF_ENDCUSTOMIZE: ::LRESULT = 0x00000002;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTBSAVE {
-    pub hdr: ::NMHDR,
-    pub pData: *mut ::DWORD,
-    pub pCurrent: *mut ::DWORD,
-    pub cbData: ::UINT,
-    pub iItem: ::c_int,
-    pub cButtons: ::c_int,
-    pub tbButton: TBBUTTON,
-}
+STRUCT!{struct NMTBSAVE {
+    hdr: ::NMHDR,
+    pData: *mut ::DWORD,
+    pCurrent: *mut ::DWORD,
+    cbData: ::UINT,
+    iItem: ::c_int,
+    cButtons: ::c_int,
+    tbButton: TBBUTTON,
+}}
 pub type LPNMTBSAVE = *mut NMTBSAVE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTBRESTORE {
-    pub hdr: ::NMHDR,
-    pub pData: *mut ::DWORD,
-    pub pCurrent: *mut ::DWORD,
-    pub cbData: ::UINT,
-    pub iItem: ::c_int,
-    pub cButtons: ::c_int,
-    pub cbBytesPerRecord: ::c_int,
-    pub tbButton: TBBUTTON,
-}
+STRUCT!{struct NMTBRESTORE {
+    hdr: ::NMHDR,
+    pData: *mut ::DWORD,
+    pCurrent: *mut ::DWORD,
+    cbData: ::UINT,
+    iItem: ::c_int,
+    cButtons: ::c_int,
+    cbBytesPerRecord: ::c_int,
+    tbButton: TBBUTTON,
+}}
 pub type LPNMTBRESTORE = *mut NMTBRESTORE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTBGETINFOTIPA {
-    pub hdr: ::NMHDR,
-    pub pszText: ::LPSTR,
-    pub cchTextMax: ::c_int,
-    pub iItem: ::c_int,
-    pub lParal: ::LPARAM,
-}
+STRUCT!{struct NMTBGETINFOTIPA {
+    hdr: ::NMHDR,
+    pszText: ::LPSTR,
+    cchTextMax: ::c_int,
+    iItem: ::c_int,
+    lParal: ::LPARAM,
+}}
 pub type LPNMTBGETINFOTIPA = *mut NMTBGETINFOTIPA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTBGETINFOTIPW {
-    pub hdr: ::NMHDR,
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::c_int,
-    pub iItem: ::c_int,
-    pub lParal: ::LPARAM,
-}
+STRUCT!{struct NMTBGETINFOTIPW {
+    hdr: ::NMHDR,
+    pszText: ::LPWSTR,
+    cchTextMax: ::c_int,
+    iItem: ::c_int,
+    lParal: ::LPARAM,
+}}
 pub type LPNMTBGETINFOTIPW = *mut NMTBGETINFOTIPW;
 pub const TBNF_IMAGE: ::DWORD = 0x00000001;
 pub const TBNF_TEXT: ::DWORD = 0x00000002;
 pub const TBNF_DI_SETITEM: ::DWORD = 0x10000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTBDISPINFOA {
-    pub hdr: ::NMHDR,
-    pub dwMask: ::DWORD,
-    pub idCommand: ::c_int,
-    pub lParam: ::DWORD_PTR,
-    pub iImage: ::c_int,
-    pub pszText: ::LPSTR,
-    pub cchText: ::c_int,
-}
+STRUCT!{struct NMTBDISPINFOA {
+    hdr: ::NMHDR,
+    dwMask: ::DWORD,
+    idCommand: ::c_int,
+    lParam: ::DWORD_PTR,
+    iImage: ::c_int,
+    pszText: ::LPSTR,
+    cchText: ::c_int,
+}}
 pub type LPNMTBDISPINFOA = *mut NMTBDISPINFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTBDISPINFOW {
-    pub hdr: ::NMHDR,
-    pub dwMask: ::DWORD,
-    pub idCommand: ::c_int,
-    pub lParam: ::DWORD_PTR,
-    pub iImage: ::c_int,
-    pub pszText: ::LPWSTR,
-    pub cchText: ::c_int,
-}
+STRUCT!{struct NMTBDISPINFOW {
+    hdr: ::NMHDR,
+    dwMask: ::DWORD,
+    idCommand: ::c_int,
+    lParam: ::DWORD_PTR,
+    iImage: ::c_int,
+    pszText: ::LPWSTR,
+    cchText: ::c_int,
+}}
 pub type LPNMTBDISPINFOW = *mut NMTBDISPINFOW;
 pub const TBDDRET_DEFAULT: ::LRESULT = 0;
 pub const TBDDRET_NODEFAULT: ::LRESULT = 1;
@@ -965,25 +924,23 @@ pub type TBNOTIFYA = NMTOOLBARA;
 pub type TBNOTIFYW = NMTOOLBARW;
 pub type LPTBNOTIFYA = LPNMTOOLBARA;
 pub type LPTBNOTIFYW = LPNMTOOLBARW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTOOLBARA {
-    pub hdr: ::NMHDR,
-    pub iItem: ::c_int,
-    pub tbButton: TBBUTTON,
-    pub cchText: ::c_int,
-    pub pszText: ::LPSTR,
-    pub rcButton: ::RECT,
-}
+STRUCT!{struct NMTOOLBARA {
+    hdr: ::NMHDR,
+    iItem: ::c_int,
+    tbButton: TBBUTTON,
+    cchText: ::c_int,
+    pszText: ::LPSTR,
+    rcButton: ::RECT,
+}}
 pub type LPNMTOOLBARA = *mut NMTOOLBARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTOOLBARW {
-    pub hdr: ::NMHDR,
-    pub iItem: ::c_int,
-    pub tbButton: TBBUTTON,
-    pub cchText: ::c_int,
-    pub pszText: ::LPWSTR,
-    pub rcButton: ::RECT,
-}
+STRUCT!{struct NMTOOLBARW {
+    hdr: ::NMHDR,
+    iItem: ::c_int,
+    tbButton: TBBUTTON,
+    cchText: ::c_int,
+    pszText: ::LPWSTR,
+    rcButton: ::RECT,
+}}
 pub type LPNMTOOLBARW = *mut NMTOOLBARW;
 pub const RBIM_IMAGELIST: ::UINT = 0x00000001;
 pub const RBS_TOOLTIPS: ::DWORD = 0x00000100;
@@ -994,12 +951,11 @@ pub const RBS_REGISTERDROP: ::DWORD = 0x00001000;
 pub const RBS_AUTOSIZE: ::DWORD = 0x00002000;
 pub const RBS_VERTICALGRIPPER: ::DWORD = 0x00004000;
 pub const RBS_DBLCLKTOGGLE: ::DWORD = 0x00008000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct REBARINFO {
-    pub cbSize: ::UINT,
-    pub fMask: ::UINT,
-    pub himl: HIMAGELIST,
-}
+STRUCT!{struct REBARINFO {
+    cbSize: ::UINT,
+    fMask: ::UINT,
+    himl: HIMAGELIST,
+}}
 pub type LPREBARINFO = *mut REBARINFO;
 pub const RBBS_BREAK: ::UINT = 0x00000001;
 pub const RBBS_FIXEDSIZE: ::UINT = 0x00000002;
@@ -1027,58 +983,56 @@ pub const RBBIM_LPARAM: ::UINT = 0x00000400;
 pub const RBBIM_HEADERSIZE: ::UINT = 0x00000800;
 pub const RBBIM_CHEVRONLOCATION: ::UINT = 0x00001000;
 pub const RBBIM_CHEVRONSTATE: ::UINT = 0x00002000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct REBARBANDINFOA {
-    pub cbSize: ::UINT,
-    pub fMask: ::UINT,
-    pub fStyle: ::UINT,
-    pub clrFore: ::COLORREF,
-    pub clrBack: ::COLORREF,
-    pub lpText: ::LPSTR,
-    pub cch: ::UINT,
-    pub iImage: ::c_int,
-    pub hwndChild: ::HWND,
-    pub cxMinChild: ::UINT,
-    pub cyMinChild: ::UINT,
-    pub cx: ::UINT,
-    pub hbmBack: ::HBITMAP,
-    pub wID: ::UINT,
-    pub cyChild: ::UINT,
-    pub cyMaxChild: ::UINT,
-    pub cyIntegral: ::UINT,
-    pub cxIdeal: ::UINT,
-    pub lParam: ::LPARAM,
-    pub cxHeader: ::UINT,
-    pub rcChevronLocation: ::RECT,
-    pub uChevronState: ::UINT,
-}
+STRUCT!{struct REBARBANDINFOA {
+    cbSize: ::UINT,
+    fMask: ::UINT,
+    fStyle: ::UINT,
+    clrFore: ::COLORREF,
+    clrBack: ::COLORREF,
+    lpText: ::LPSTR,
+    cch: ::UINT,
+    iImage: ::c_int,
+    hwndChild: ::HWND,
+    cxMinChild: ::UINT,
+    cyMinChild: ::UINT,
+    cx: ::UINT,
+    hbmBack: ::HBITMAP,
+    wID: ::UINT,
+    cyChild: ::UINT,
+    cyMaxChild: ::UINT,
+    cyIntegral: ::UINT,
+    cxIdeal: ::UINT,
+    lParam: ::LPARAM,
+    cxHeader: ::UINT,
+    rcChevronLocation: ::RECT,
+    uChevronState: ::UINT,
+}}
 pub type LPREBARBANDINFOA = *mut REBARBANDINFOA;
 pub type LPCREBARBANDINFOA = *const REBARBANDINFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct REBARBANDINFOW {
-    pub cbSize: ::UINT,
-    pub fMask: ::UINT,
-    pub fStyle: ::UINT,
-    pub clrFore: ::COLORREF,
-    pub clrBack: ::COLORREF,
-    pub lpText: ::LPWSTR,
-    pub cch: ::UINT,
-    pub iImage: ::c_int,
-    pub hwndChild: ::HWND,
-    pub cxMinChild: ::UINT,
-    pub cyMinChild: ::UINT,
-    pub cx: ::UINT,
-    pub hbmBack: ::HBITMAP,
-    pub wID: ::UINT,
-    pub cyChild: ::UINT,
-    pub cyMaxChild: ::UINT,
-    pub cyIntegral: ::UINT,
-    pub cxIdeal: ::UINT,
-    pub lParam: ::LPARAM,
-    pub cxHeader: ::UINT,
-    pub rcChevronLocation: ::RECT,
-    pub uChevronState: ::UINT,
-}
+STRUCT!{struct REBARBANDINFOW {
+    cbSize: ::UINT,
+    fMask: ::UINT,
+    fStyle: ::UINT,
+    clrFore: ::COLORREF,
+    clrBack: ::COLORREF,
+    lpText: ::LPWSTR,
+    cch: ::UINT,
+    iImage: ::c_int,
+    hwndChild: ::HWND,
+    cxMinChild: ::UINT,
+    cyMinChild: ::UINT,
+    cx: ::UINT,
+    hbmBack: ::HBITMAP,
+    wID: ::UINT,
+    cyChild: ::UINT,
+    cyMaxChild: ::UINT,
+    cyIntegral: ::UINT,
+    cxIdeal: ::UINT,
+    lParam: ::LPARAM,
+    cxHeader: ::UINT,
+    rcChevronLocation: ::RECT,
+    uChevronState: ::UINT,
+}}
 pub type LPREBARBANDINFOW = *mut REBARBANDINFOW;
 pub type LPCREBARBANDINFOW = *const REBARBANDINFOW;
 pub const RB_INSERTBANDA: ::UINT = ::WM_USER + 1;
@@ -1140,64 +1094,58 @@ pub const RBN_CHEVRONPUSHED: ::UINT = RBN_FIRST - 10;
 pub const RBN_SPLITTERDRAG: ::UINT = RBN_FIRST - 11;
 pub const RBN_MINMAX: ::UINT = RBN_FIRST - 21;
 pub const RBN_AUTOBREAK: ::UINT = RBN_FIRST - 22;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMREBARCHILDSIZE {
-    pub hdr: ::NMHDR,
-    pub uBand: ::UINT,
-    pub wID: ::UINT,
-    pub rcChild: ::RECT,
-    pub rcBand: ::RECT,
-}
+STRUCT!{struct NMREBARCHILDSIZE {
+    hdr: ::NMHDR,
+    uBand: ::UINT,
+    wID: ::UINT,
+    rcChild: ::RECT,
+    rcBand: ::RECT,
+}}
 pub type LPNMREBARCHILDSIZE = *mut NMREBARCHILDSIZE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMREBAR {
-    pub hdr: ::NMHDR,
-    pub dwMask: ::DWORD,
-    pub uBand: ::UINT,
-    pub fStyle: ::UINT,
-    pub wID: ::UINT,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct NMREBAR {
+    hdr: ::NMHDR,
+    dwMask: ::DWORD,
+    uBand: ::UINT,
+    fStyle: ::UINT,
+    wID: ::UINT,
+    lParam: ::LPARAM,
+}}
 pub type LPNMREBAR = *mut NMREBAR;
 pub const RBNM_ID: ::DWORD = 0x00000001;
 pub const RBNM_STYLE: ::DWORD = 0x00000002;
 pub const RBNM_LPARAM: ::DWORD = 0x00000004;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMRBAUTOSIZE {
-    pub hdr: ::NMHDR,
-    pub fChanged: ::BOOL,
-    pub rcTarget: ::RECT,
-    pub rcActual: ::RECT,
-}
+STRUCT!{struct NMRBAUTOSIZE {
+    hdr: ::NMHDR,
+    fChanged: ::BOOL,
+    rcTarget: ::RECT,
+    rcActual: ::RECT,
+}}
 pub type LPNMRBAUTOSIZE = *mut NMRBAUTOSIZE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMREBARCHEVRON {
-    pub hdr: ::NMHDR,
-    pub uBand: ::UINT,
-    pub wID: ::UINT,
-    pub lParam: ::LPARAM,
-    pub rc: ::RECT,
-    pub lParamNM: ::LPARAM,
-}
+STRUCT!{struct NMREBARCHEVRON {
+    hdr: ::NMHDR,
+    uBand: ::UINT,
+    wID: ::UINT,
+    lParam: ::LPARAM,
+    rc: ::RECT,
+    lParamNM: ::LPARAM,
+}}
 pub type LPNMREBARCHEVRON = *mut NMREBARCHEVRON;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMREBARSPLITTER {
-    pub hdr: ::NMHDR,
-    pub rcSizing: ::RECT,
-}
+STRUCT!{struct NMREBARSPLITTER {
+    hdr: ::NMHDR,
+    rcSizing: ::RECT,
+}}
 pub type LPNMREBARSPLITTER = *mut NMREBARSPLITTER;
 pub const RBAB_AUTOSIZE: ::UINT = 0x0001;
 pub const RBAB_ADDBAND: ::UINT = 0x0002;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMREBARAUTOBREAK {
-    pub hdr: ::NMHDR,
-    pub uBand: ::UINT,
-    pub wID: ::UINT,
-    pub lParam: ::LPARAM,
-    pub uMsg: ::UINT,
-    pub fStyleCurrent: ::UINT,
-    pub fAutoBreak: ::UINT,
-}
+STRUCT!{struct NMREBARAUTOBREAK {
+    hdr: ::NMHDR,
+    uBand: ::UINT,
+    wID: ::UINT,
+    lParam: ::LPARAM,
+    uMsg: ::UINT,
+    fStyleCurrent: ::UINT,
+    fAutoBreak: ::UINT,
+}}
 pub type LPNMREBARAUTOBREAK = *mut NMREBARAUTOBREAK;
 pub const RBHT_NOWHERE: ::UINT = 0x0001;
 pub const RBHT_CAPTION: ::UINT = 0x0002;
@@ -1205,43 +1153,40 @@ pub const RBHT_CLIENT: ::UINT = 0x0003;
 pub const RBHT_GRABBER: ::UINT = 0x0004;
 pub const RBHT_CHEVRON: ::UINT = 0x0008;
 pub const RBHT_SPLITTER: ::UINT = 0x0010;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RBHITTESTINFO {
-    pub pt: ::POINT,
-    pub flags: ::UINT,
-    pub iBand: ::c_int,
-}
+STRUCT!{struct RBHITTESTINFO {
+    pt: ::POINT,
+    flags: ::UINT,
+    iBand: ::c_int,
+}}
 pub type LPRBHITTESTINFO = *mut RBHITTESTINFO;
 pub type LPTOOLINFOA = LPTTTOOLINFOA;
 pub type LPTOOLINFOW = LPTTTOOLINFOW;
 pub type TOOLINFOA = TTTOOLINFOA;
 pub type TOOLINFOW = TTTOOLINFOW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TTTOOLINFOA {
-    pub cbSize: ::UINT,
-    pub uFlags: ::UINT,
-    pub hwnd: ::HWND,
-    pub uId: ::UINT_PTR,
-    pub rect: ::RECT,
-    pub hinst: ::HINSTANCE,
-    pub lpszText: ::LPSTR,
-    pub lParam: ::LPARAM,
-    pub lpReserved: *mut ::c_void,
-}
+STRUCT!{struct TTTOOLINFOA {
+    cbSize: ::UINT,
+    uFlags: ::UINT,
+    hwnd: ::HWND,
+    uId: ::UINT_PTR,
+    rect: ::RECT,
+    hinst: ::HINSTANCE,
+    lpszText: ::LPSTR,
+    lParam: ::LPARAM,
+    lpReserved: *mut ::c_void,
+}}
 pub type PTTTOOLINFOA = *mut TTTOOLINFOA;
 pub type LPTTTOOLINFOA = *mut TTTOOLINFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TTTOOLINFOW {
-    pub cbSize: ::UINT,
-    pub uFlags: ::UINT,
-    pub hwnd: ::HWND,
-    pub uId: ::UINT_PTR,
-    pub rect: ::RECT,
-    pub hinst: ::HINSTANCE,
-    pub lpszText: ::LPSTR,
-    pub lParam: ::LPARAM,
-    pub lpReserved: *mut ::c_void,
-}
+STRUCT!{struct TTTOOLINFOW {
+    cbSize: ::UINT,
+    uFlags: ::UINT,
+    hwnd: ::HWND,
+    uId: ::UINT_PTR,
+    rect: ::RECT,
+    hinst: ::HINSTANCE,
+    lpszText: ::LPSTR,
+    lParam: ::LPARAM,
+    lpReserved: *mut ::c_void,
+}}
 pub type PTTTOOLINFOW = *mut TTTOOLINFOW;
 pub type LPTTTOOLINFOW = *mut TTTOOLINFOW;
 pub const TTS_ALWAYSTIP: ::DWORD = 0x01;
@@ -1315,30 +1260,27 @@ pub const TTM_SETTITLEA: ::UINT = ::WM_USER + 32;
 pub const TTM_SETTITLEW: ::UINT = ::WM_USER + 33;
 pub const TTM_POPUP: ::UINT = ::WM_USER + 34;
 pub const TTM_GETTITLE: ::UINT = ::WM_USER + 35;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TTGETTITLE {
-    pub dwSize: ::DWORD,
-    pub uTitleBitmap: ::UINT,
-    pub cch: ::UINT,
-    pub pszTitle: *mut ::WCHAR,
-}
+STRUCT!{struct TTGETTITLE {
+    dwSize: ::DWORD,
+    uTitleBitmap: ::UINT,
+    cch: ::UINT,
+    pszTitle: *mut ::WCHAR,
+}}
 pub type LPTTGETTITLE = *mut TTGETTITLE;
 pub const TTM_SETWINDOWTHEME: ::UINT = CCM_SETWINDOWTHEME;
 pub type LPHITTESTINFOW = LPTTHITTESTINFOW;
 pub type LPHITTESTINFOA = LPTTHITTESTINFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TTHITTESTINFOA {
-    pub hwnd: ::HWND,
-    pub pt: ::POINT,
-    pub ti: TTTOOLINFOA,
-}
+STRUCT!{struct TTHITTESTINFOA {
+    hwnd: ::HWND,
+    pt: ::POINT,
+    ti: TTTOOLINFOA,
+}}
 pub type LPTTHITTESTINFOA = *mut TTHITTESTINFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TTHITTESTINFOW {
-    pub hwnd: ::HWND,
-    pub pt: ::POINT,
-    pub ti: TTTOOLINFOW,
-}
+STRUCT!{struct TTHITTESTINFOW {
+    hwnd: ::HWND,
+    pt: ::POINT,
+    ti: TTTOOLINFOW,
+}}
 pub type LPTTHITTESTINFOW = *mut TTHITTESTINFOW;
 pub const TTN_GETDISPINFOA: ::UINT = TTN_FIRST - 0;
 pub const TTN_GETDISPINFOW: ::UINT = TTN_FIRST - 10;
@@ -1475,18 +1417,16 @@ pub const TB_TOP: ::WPARAM = 6;
 pub const TB_BOTTOM: ::WPARAM = 7;
 pub const TB_ENDTRACK: ::WPARAM = 8;
 pub const TRBN_THUMBPOSCHANGING: ::UINT = TRBN_FIRST - 1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTRBTHUMBPOSCHANGING {
-    pub hdr: ::NMHDR,
-    pub dwPos: ::DWORD,
-    pub nReason: ::c_int,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DRAGLISTINFO {
-    pub uNotification: ::UINT,
-    pub hWnd: ::HWND,
-    pub ptCursor: ::POINT,
-}
+STRUCT!{struct NMTRBTHUMBPOSCHANGING {
+    hdr: ::NMHDR,
+    dwPos: ::DWORD,
+    nReason: ::c_int,
+}}
+STRUCT!{struct DRAGLISTINFO {
+    uNotification: ::UINT,
+    hWnd: ::HWND,
+    ptCursor: ::POINT,
+}}
 pub type LPDRAGLISTINFO = *mut DRAGLISTINFO;
 pub const DL_BEGINDRAG: ::UINT = ::WM_USER + 133;
 pub const DL_DRAGGING: ::UINT = ::WM_USER + 134;
@@ -1496,11 +1436,10 @@ pub const DL_CURSORSET: ::UINT = 0;
 pub const DL_STOPCURSOR: ::UINT = 1;
 pub const DL_COPYCURSOR: ::UINT = 2;
 pub const DL_MOVECURSOR: ::UINT = 3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct UDACCEL {
-    pub nSec: ::UINT,
-    pub nInc: ::UINT,
-}
+STRUCT!{struct UDACCEL {
+    nSec: ::UINT,
+    nInc: ::UINT,
+}}
 pub type LPUDACCEL = *mut UDACCEL;
 pub const UD_MAXVAL: ::c_short = 0x7fff;
 pub const UD_MINVAL: ::c_short = 0 - UD_MAXVAL;
@@ -1531,12 +1470,11 @@ pub const UDM_SETPOS32: ::UINT = ::WM_USER + 113;
 pub const UDM_GETPOS32: ::UINT = ::WM_USER + 114;
 pub type NM_UPDOWN = NMUPDOWN;
 pub type LPNM_UPDOWN = LPNMUPDOWN;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMUPDOWN {
-    pub hdr: ::NMHDR,
-    pub iPos: ::c_int,
-    pub iDelta: ::c_int,
-}
+STRUCT!{struct NMUPDOWN {
+    hdr: ::NMHDR,
+    iPos: ::c_int,
+    iDelta: ::c_int,
+}}
 pub type LPNMUPDOWN = *mut NMUPDOWN;
 pub const UDN_DELTAPOS: ::UINT = UDN_FIRST - 1;
 pub const PBS_SMOOTH: ::DWORD = 0x01;
@@ -1547,11 +1485,10 @@ pub const PBM_DELTAPOS: ::UINT = ::WM_USER + 3;
 pub const PBM_SETSTEP: ::UINT = ::WM_USER + 4;
 pub const PBM_STEPIT: ::UINT = ::WM_USER + 5;
 pub const PBM_SETRANGE32: ::UINT = ::WM_USER + 6;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PBRANGE {
-    pub iLow: ::c_int,
-    pub iHigh: ::c_int,
-}
+STRUCT!{struct PBRANGE {
+    iLow: ::c_int,
+    iHigh: ::c_int,
+}}
 pub type LPPBRANGE = *mut PBRANGE;
 pub const PBM_GETRANGE: ::UINT = ::WM_USER + 7;
 pub const PBM_GETPOS: ::UINT = ::WM_USER + 8;
@@ -1698,43 +1635,41 @@ pub type LV_ITEMA = LVITEMA;
 pub type LV_ITEMW = LVITEMW;
 pub const I_GROUPIDCALLBACK: ::c_int = -1;
 pub const I_GROUPIDNONE: ::c_int = -2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVITEMA {
-    pub mask: ::UINT,
-    pub iItem: ::c_int,
-    pub iSubItem: ::c_int,
-    pub state: ::UINT,
-    pub stateMask: ::UINT,
-    pub pszText: ::LPSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-    pub lParam: ::LPARAM,
-    pub iIndent: ::c_int,
-    pub iGroupId: ::c_int,
-    pub cColumns: ::UINT,
-    pub puColumns: ::PUINT,
-    pub piColFmt: *mut ::c_int,
-    pub iGroup: ::c_int,
-}
+STRUCT!{struct LVITEMA {
+    mask: ::UINT,
+    iItem: ::c_int,
+    iSubItem: ::c_int,
+    state: ::UINT,
+    stateMask: ::UINT,
+    pszText: ::LPSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+    lParam: ::LPARAM,
+    iIndent: ::c_int,
+    iGroupId: ::c_int,
+    cColumns: ::UINT,
+    puColumns: ::PUINT,
+    piColFmt: *mut ::c_int,
+    iGroup: ::c_int,
+}}
 pub type LPLVITEMA = *mut LVITEMA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVITEMW {
-    pub mask: ::UINT,
-    pub iItem: ::c_int,
-    pub iSubItem: ::c_int,
-    pub state: ::UINT,
-    pub stateMask: ::UINT,
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-    pub lParam: ::LPARAM,
-    pub iIndent: ::c_int,
-    pub iGroupId: ::c_int,
-    pub cColumns: ::UINT,
-    pub puColumns: ::PUINT,
-    pub piColFmt: *mut ::c_int,
-    pub iGroup: ::c_int,
-}
+STRUCT!{struct LVITEMW {
+    mask: ::UINT,
+    iItem: ::c_int,
+    iSubItem: ::c_int,
+    state: ::UINT,
+    stateMask: ::UINT,
+    pszText: ::LPWSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+    lParam: ::LPARAM,
+    iIndent: ::c_int,
+    iGroupId: ::c_int,
+    cColumns: ::UINT,
+    puColumns: ::PUINT,
+    piColFmt: *mut ::c_int,
+    iGroup: ::c_int,
+}}
 pub type LPLVITEMW = *mut LVITEMW;
 pub const LPSTR_TEXTCALLBACKW: ::LPWSTR = (0 - 1) as ::LPWSTR;
 pub const LPSTR_TEXTCALLBACKA: ::LPSTR = (0 - 1) as ::LPSTR;
@@ -1775,23 +1710,21 @@ pub const LVFI_WRAP: ::UINT = 0x0020;
 pub const LVFI_NEARESTXY: ::UINT = 0x0040;
 pub type LV_FINDINFOA = LVFINDINFOA;
 pub type LV_FINDINFOW = LVFINDINFOW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVFINDINFOA {
-    pub flags: ::UINT,
-    pub psz: ::LPCSTR,
-    pub lParam: ::LPARAM,
-    pub pt: ::POINT,
-    pub vkDirection: ::UINT,
-}
+STRUCT!{struct LVFINDINFOA {
+    flags: ::UINT,
+    psz: ::LPCSTR,
+    lParam: ::LPARAM,
+    pt: ::POINT,
+    vkDirection: ::UINT,
+}}
 pub type LPLVFINDINFOA = *mut LVFINDINFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVFINDINFOW {
-    pub flags: ::UINT,
-    pub psz: ::LPCWSTR,
-    pub lParam: ::LPARAM,
-    pub pt: ::POINT,
-    pub vkDirection: ::UINT,
-}
+STRUCT!{struct LVFINDINFOW {
+    flags: ::UINT,
+    psz: ::LPCWSTR,
+    lParam: ::LPARAM,
+    pt: ::POINT,
+    vkDirection: ::UINT,
+}}
 pub type LPLVFINDINFOW = *mut LVFINDINFOW;
 pub const LVM_FINDITEMA: ::UINT = LVM_FIRST + 13;
 pub const LVM_FINDITEMW: ::UINT = LVM_FIRST + 83;
@@ -1825,14 +1758,13 @@ pub const LVHT_EX_GROUP: ::UINT = LVHT_EX_GROUP_BACKGROUND | LVHT_EX_GROUP_COLLA
 pub const LVHT_EX_ONCONTENTS: ::UINT = 0x04000000;
 pub const LVHT_EX_FOOTER: ::UINT = 0x08000000;
 pub type LV_HITTESTINFO = LVHITTESTINFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVHITTESTINFO {
-    pub pt: ::POINT,
-    pub flags: ::UINT,
-    pub iItem: ::c_int,
-    pub iSubItem: ::c_int,
-    pub iGroup: ::c_int,
-}
+STRUCT!{struct LVHITTESTINFO {
+    pt: ::POINT,
+    flags: ::UINT,
+    iItem: ::c_int,
+    iSubItem: ::c_int,
+    iGroup: ::c_int,
+}}
 pub type LPLVHITTESTINFO = *mut LVHITTESTINFO;
 pub const LVM_HITTEST: ::UINT = LVM_FIRST + 18;
 pub const LVM_ENSUREVISIBLE: ::UINT = LVM_FIRST + 19;
@@ -1848,35 +1780,33 @@ pub const LVM_EDITLABELW: ::UINT = LVM_FIRST + 118;
 pub const LVM_GETEDITCONTROL: ::UINT = LVM_FIRST + 24;
 pub type LV_COLUMNA = LVCOLUMNA;
 pub type LV_COLUMNW = LVCOLUMNW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVCOLUMNA {
-    pub mask: ::UINT,
-    pub fmt: ::c_int,
-    pub cx: ::c_int,
-    pub pszText: ::LPSTR,
-    pub cchTextMax: ::c_int,
-    pub iSubItem: ::c_int,
-    pub iImage: ::c_int,
-    pub iOrder: ::c_int,
-    pub cxMin: ::c_int,
-    pub cxDefault: ::c_int,
-    pub cxIdeal: ::c_int,
-}
+STRUCT!{struct LVCOLUMNA {
+    mask: ::UINT,
+    fmt: ::c_int,
+    cx: ::c_int,
+    pszText: ::LPSTR,
+    cchTextMax: ::c_int,
+    iSubItem: ::c_int,
+    iImage: ::c_int,
+    iOrder: ::c_int,
+    cxMin: ::c_int,
+    cxDefault: ::c_int,
+    cxIdeal: ::c_int,
+}}
 pub type LPLVCOLUMNA = *mut LVCOLUMNA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVCOLUMNW {
-    pub mask: ::UINT,
-    pub fmt: ::c_int,
-    pub cx: ::c_int,
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::c_int,
-    pub iSubItem: ::c_int,
-    pub iImage: ::c_int,
-    pub iOrder: ::c_int,
-    pub cxMin: ::c_int,
-    pub cxDefault: ::c_int,
-    pub cxIdeal: ::c_int,
-}
+STRUCT!{struct LVCOLUMNW {
+    mask: ::UINT,
+    fmt: ::c_int,
+    cx: ::c_int,
+    pszText: ::LPWSTR,
+    cchTextMax: ::c_int,
+    iSubItem: ::c_int,
+    iImage: ::c_int,
+    iOrder: ::c_int,
+    cxMin: ::c_int,
+    cxDefault: ::c_int,
+    cxIdeal: ::c_int,
+}}
 pub type LPLVCOLUMNW = *mut LVCOLUMNW;
 pub const LVCF_FMT: ::UINT = 0x0001;
 pub const LVCF_WIDTH: ::UINT = 0x0002;
@@ -1991,25 +1921,23 @@ pub const LVM_GETHOVERTIME: ::UINT = LVM_FIRST + 72;
 pub const LVM_SETTOOLTIPS: ::UINT = LVM_FIRST + 74;
 pub const LVM_GETTOOLTIPS: ::UINT = LVM_FIRST + 78;
 pub const LVM_SORTITEMSEX: ::UINT = LVM_FIRST + 81;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVBKIMAGEA {
-    pub ulFlags: ::ULONG,
-    pub hbm: ::HBITMAP,
-    pub pszImage: ::LPSTR,
-    pub cchImageMax: ::UINT,
-    pub xOffsetPercent: ::c_int,
-    pub yOffsetPercent: ::c_int,
-}
+STRUCT!{struct LVBKIMAGEA {
+    ulFlags: ::ULONG,
+    hbm: ::HBITMAP,
+    pszImage: ::LPSTR,
+    cchImageMax: ::UINT,
+    xOffsetPercent: ::c_int,
+    yOffsetPercent: ::c_int,
+}}
 pub type LPLVBKIMAGEA = *mut LVBKIMAGEA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVBKIMAGEW {
-    pub ulFlags: ::ULONG,
-    pub hbm: ::HBITMAP,
-    pub pszImage: ::LPWSTR,
-    pub cchImageMax: ::UINT,
-    pub xOffsetPercent: ::c_int,
-    pub yOffsetPercent: ::c_int,
-}
+STRUCT!{struct LVBKIMAGEW {
+    ulFlags: ::ULONG,
+    hbm: ::HBITMAP,
+    pszImage: ::LPWSTR,
+    cchImageMax: ::UINT,
+    xOffsetPercent: ::c_int,
+    yOffsetPercent: ::c_int,
+}}
 pub type LPLVBKIMAGEW = *mut LVBKIMAGEW;
 pub const LVBKIF_SOURCE_NONE: ::ULONG = 0x00000000;
 pub const LVBKIF_SOURCE_HBITMAP: ::ULONG = 0x00000001;
@@ -2064,33 +1992,32 @@ pub const LVGA_HEADER_RIGHT: ::UINT = 0x00000004;
 pub const LVGA_FOOTER_LEFT: ::UINT = 0x00000008;
 pub const LVGA_FOOTER_CENTER: ::UINT = 0x00000010;
 pub const LVGA_FOOTER_RIGHT: ::UINT = 0x00000020;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVGROUP {
-    pub cbSize: ::UINT,
-    pub mask: ::UINT,
-    pub pszHeader: ::LPWSTR,
-    pub cchHeader: ::c_int,
-    pub pszFooter: ::LPWSTR,
-    pub cchFooter: ::c_int,
-    pub iGroupId: ::c_int,
-    pub stateMask: ::UINT,
-    pub state: ::UINT,
-    pub uAlign: ::UINT,
-    pub pszSubtitle: ::LPWSTR,
-    pub cchSubtitle: ::UINT,
-    pub pszTask: ::LPWSTR,
-    pub cchTask: ::UINT,
-    pub pszDescriptionTop: ::LPWSTR,
-    pub cchDescriptionTop: ::UINT,
-    pub pszDescriptionBottom: ::LPWSTR,
-    pub cchDescriptionBottom: ::UINT,
-    pub iTitleImage: ::c_int,
-    pub iExtendedImage: ::c_int,
-    pub iFirstItem: ::c_int,
-    pub cItems: ::UINT,
-    pub pszSubsetTitle: ::LPWSTR,
-    pub cchSubsetTitle: ::UINT,
-}
+STRUCT!{struct LVGROUP {
+    cbSize: ::UINT,
+    mask: ::UINT,
+    pszHeader: ::LPWSTR,
+    cchHeader: ::c_int,
+    pszFooter: ::LPWSTR,
+    cchFooter: ::c_int,
+    iGroupId: ::c_int,
+    stateMask: ::UINT,
+    state: ::UINT,
+    uAlign: ::UINT,
+    pszSubtitle: ::LPWSTR,
+    cchSubtitle: ::UINT,
+    pszTask: ::LPWSTR,
+    cchTask: ::UINT,
+    pszDescriptionTop: ::LPWSTR,
+    cchDescriptionTop: ::UINT,
+    pszDescriptionBottom: ::LPWSTR,
+    cchDescriptionBottom: ::UINT,
+    iTitleImage: ::c_int,
+    iExtendedImage: ::c_int,
+    iFirstItem: ::c_int,
+    cItems: ::UINT,
+    pszSubsetTitle: ::LPWSTR,
+    cchSubsetTitle: ::UINT,
+}}
 pub type PLVGROUP = *mut LVGROUP;
 pub const LVM_INSERTGROUP: ::UINT = LVM_FIRST + 145;
 pub const LVM_SETGROUPINFO: ::UINT = LVM_FIRST + 147;
@@ -2109,21 +2036,20 @@ pub const LVGMF_NONE: ::UINT = 0x00000000;
 pub const LVGMF_BORDERSIZE: ::UINT = 0x00000001;
 pub const LVGMF_BORDERCOLOR: ::UINT = 0x00000002;
 pub const LVGMF_TEXTCOLOR: ::UINT = 0x00000004;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVGROUPMETRICS {
-    pub cbSize: ::UINT,
-    pub mask: ::UINT,
-    pub Left: ::UINT,
-    pub Top: ::UINT,
-    pub Right: ::UINT,
-    pub Bottom: ::UINT,
-    pub crLeft: ::COLORREF,
-    pub crTop: ::COLORREF,
-    pub crRight: ::COLORREF,
-    pub crBottom: ::COLORREF,
-    pub crHeader: ::COLORREF,
-    pub crFooter: ::COLORREF,
-}
+STRUCT!{struct LVGROUPMETRICS {
+    cbSize: ::UINT,
+    mask: ::UINT,
+    Left: ::UINT,
+    Top: ::UINT,
+    Right: ::UINT,
+    Bottom: ::UINT,
+    crLeft: ::COLORREF,
+    crTop: ::COLORREF,
+    crRight: ::COLORREF,
+    crBottom: ::COLORREF,
+    crHeader: ::COLORREF,
+    crFooter: ::COLORREF,
+}}
 pub type PLVGROUPMETRICS = *mut LVGROUPMETRICS;
 pub const LVM_SETGROUPMETRICS: ::UINT = LVM_FIRST + 155;
 pub const LVM_GETGROUPMETRICS: ::UINT = LVM_FIRST + 156;
@@ -2153,36 +2079,33 @@ pub const LVTVIF_EXTENDED: ::DWORD = 0x00000004;
 pub const LVTVIM_TILESIZE: ::DWORD = 0x00000001;
 pub const LVTVIM_COLUMNS: ::DWORD = 0x00000002;
 pub const LVTVIM_LABELMARGIN: ::DWORD = 0x00000004;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVTILEVIEWINFO {
-    pub cbSize: ::UINT,
-    pub dwMask: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub sizeTile: ::SIZE,
-    pub cLines: ::c_int,
-    pub rcLabelMargin: ::RECT,
-}
+STRUCT!{struct LVTILEVIEWINFO {
+    cbSize: ::UINT,
+    dwMask: ::DWORD,
+    dwFlags: ::DWORD,
+    sizeTile: ::SIZE,
+    cLines: ::c_int,
+    rcLabelMargin: ::RECT,
+}}
 pub type PLVTILEVIEWINFO = *mut LVTILEVIEWINFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVTILEINFO {
-    pub cbSize: ::UINT,
-    pub iItem: ::c_int,
-    pub cColumns: ::UINT,
-    pub puColumns: ::PUINT,
-    pub piColFmt: *mut ::c_int,
-}
+STRUCT!{struct LVTILEINFO {
+    cbSize: ::UINT,
+    iItem: ::c_int,
+    cColumns: ::UINT,
+    puColumns: ::PUINT,
+    piColFmt: *mut ::c_int,
+}}
 pub type PLVTILEINFO = *mut LVTILEINFO;
 pub const LVM_SETTILEVIEWINFO: ::UINT = LVM_FIRST + 162;
 pub const LVM_GETTILEVIEWINFO: ::UINT = LVM_FIRST + 163;
 pub const LVM_SETTILEINFO: ::UINT = LVM_FIRST + 164;
 pub const LVM_GETTILEINFO: ::UINT = LVM_FIRST + 165;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVINSERTMARK {
-    pub cbSize: ::UINT,
-    pub dwFlags: ::DWORD,
-    pub iItem: ::c_int,
-    pub dwReserved: ::DWORD,
-}
+STRUCT!{struct LVINSERTMARK {
+    cbSize: ::UINT,
+    dwFlags: ::DWORD,
+    iItem: ::c_int,
+    dwReserved: ::DWORD,
+}}
 pub type LPLVINSERTMARK = *mut LVINSERTMARK;
 pub const LVIM_AFTER: ::DWORD = 0x00000001;
 pub const LVM_SETINSERTMARK: ::UINT = LVM_FIRST + 166;
@@ -2191,14 +2114,13 @@ pub const LVM_INSERTMARKHITTEST: ::UINT = LVM_FIRST + 168;
 pub const LVM_GETINSERTMARKRECT: ::UINT = LVM_FIRST + 169;
 pub const LVM_SETINSERTMARKCOLOR: ::UINT = LVM_FIRST + 170;
 pub const LVM_GETINSERTMARKCOLOR: ::UINT = LVM_FIRST + 171;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVSETINFOTIP {
-    pub cbSize: ::UINT,
-    pub dwFlags: ::DWORD,
-    pub pszText: ::LPWSTR,
-    pub iItem: ::c_int,
-    pub iSubItem: ::c_int,
-}
+STRUCT!{struct LVSETINFOTIP {
+    cbSize: ::UINT,
+    dwFlags: ::DWORD,
+    pszText: ::LPWSTR,
+    iItem: ::c_int,
+    iSubItem: ::c_int,
+}}
 pub type PLVSETINFOTIP = *mut LVSETINFOTIP;
 pub const  LVM_SETINFOTIP: ::UINT = LVM_FIRST + 173;
 pub const LVM_GETSELECTEDCOLUMN: ::UINT = LVM_FIRST + 174;
@@ -2212,113 +2134,104 @@ pub const LVM_ISITEMVISIBLE: ::UINT = LVM_FIRST + 182;
 pub const LVM_GETEMPTYTEXT: ::UINT = LVM_FIRST + 204;
 pub const LVM_GETFOOTERRECT: ::UINT = LVM_FIRST + 205;
 pub const LVFF_ITEMCOUNT: ::UINT = 0x00000001;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVFOOTERINFO {
-    pub mask: ::UINT,
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::c_int,
-    pub cItems: ::UINT,
-}
+STRUCT!{struct LVFOOTERINFO {
+    mask: ::UINT,
+    pszText: ::LPWSTR,
+    cchTextMax: ::c_int,
+    cItems: ::UINT,
+}}
 pub type LPLVFOOTERINFO = *mut LVFOOTERINFO;
 pub const LVM_GETFOOTERINFO: ::UINT = LVM_FIRST + 206;
 pub const LVM_GETFOOTERITEMRECT: ::UINT = LVM_FIRST + 207;
 pub const LVFIF_TEXT: ::UINT = 0x00000001;
 pub const LVFIF_STATE: ::UINT = 0x00000002;
 pub const LVFIS_FOCUSED: ::UINT = 0x0001;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVFOOTERITEM {
-    pub mask: ::UINT,
-    pub iItem: ::c_int,
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::c_int,
-    pub state: ::UINT,
-    pub stateMask: ::UINT,
-}
+STRUCT!{struct LVFOOTERITEM {
+    mask: ::UINT,
+    iItem: ::c_int,
+    pszText: ::LPWSTR,
+    cchTextMax: ::c_int,
+    state: ::UINT,
+    stateMask: ::UINT,
+}}
 pub type LPLVFOOTERITEM = *mut LVFOOTERITEM;
 pub const LVM_GETFOOTERITEM: ::UINT = LVM_FIRST + 208;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LVITEMINDEX {
-    pub iItem: ::c_int,
-    pub iGroup: ::c_int,
-}
+STRUCT!{struct LVITEMINDEX {
+    iItem: ::c_int,
+    iGroup: ::c_int,
+}}
 pub type PLVITEMINDEX = *mut LVITEMINDEX;
 pub const LVM_GETITEMINDEXRECT: ::UINT = LVM_FIRST + 209;
 pub const LVM_SETITEMINDEXSTATE: ::UINT = LVM_FIRST + 210;
 pub const LVM_GETNEXTITEMINDEX: ::UINT = LVM_FIRST + 211;
 pub type LPNM_LISTVIEW = LPNMLISTVIEW;
 pub type NM_LISTVIEW = NMLISTVIEW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMLISTVIEW {
-    pub hdr: ::NMHDR,
-    pub iItem: ::c_int,
-    pub iSubItem: ::c_int,
-    pub uNewState: ::UINT,
-    pub uOldState: ::UINT,
-    pub uChanged: ::UINT,
-    pub ptAction: ::POINT,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct NMLISTVIEW {
+    hdr: ::NMHDR,
+    iItem: ::c_int,
+    iSubItem: ::c_int,
+    uNewState: ::UINT,
+    uOldState: ::UINT,
+    uChanged: ::UINT,
+    ptAction: ::POINT,
+    lParam: ::LPARAM,
+}}
 pub type LPNMLISTVIEW = *mut NMLISTVIEW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMITEMACTIVATE {
-    pub hdr: ::NMHDR,
-    pub iItem: ::c_int,
-    pub iSubItem: ::c_int,
-    pub uNewState: ::UINT,
-    pub uOldState: ::UINT,
-    pub uChanged: ::UINT,
-    pub ptAction: ::POINT,
-    pub lParam: ::LPARAM,
-    pub uKeyFlags: ::UINT,
-}
+STRUCT!{struct NMITEMACTIVATE {
+    hdr: ::NMHDR,
+    iItem: ::c_int,
+    iSubItem: ::c_int,
+    uNewState: ::UINT,
+    uOldState: ::UINT,
+    uChanged: ::UINT,
+    ptAction: ::POINT,
+    lParam: ::LPARAM,
+    uKeyFlags: ::UINT,
+}}
 pub type LPNMITEMACTIVATE = *mut NMITEMACTIVATE;
 pub const LVKF_ALT: ::UINT = 0x0001;
 pub const LVKF_CONTROL: ::UINT = 0x0002;
 pub const LVKF_SHIFT: ::UINT = 0x0004;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMLVCUSTOMDRAW {
-    pub nmcd: NMCUSTOMDRAW,
-    pub clrText: ::COLORREF,
-    pub clrTextBk: ::COLORREF,
-    pub iSubItem: ::c_int,
-    pub dwItemType: ::DWORD,
-    pub clrFace: ::COLORREF,
-    pub iIconEffect: ::c_int,
-    pub iIconPhase: ::c_int,
-    pub iPartId: ::c_int,
-    pub iStateId: ::c_int,
-    pub rcText: ::RECT,
-    pub uAlign: ::UINT,
-}
+STRUCT!{struct NMLVCUSTOMDRAW {
+    nmcd: NMCUSTOMDRAW,
+    clrText: ::COLORREF,
+    clrTextBk: ::COLORREF,
+    iSubItem: ::c_int,
+    dwItemType: ::DWORD,
+    clrFace: ::COLORREF,
+    iIconEffect: ::c_int,
+    iIconPhase: ::c_int,
+    iPartId: ::c_int,
+    iStateId: ::c_int,
+    rcText: ::RECT,
+    uAlign: ::UINT,
+}}
 pub type LPNMLVCUSTOMDRAW = *mut NMLVCUSTOMDRAW;
 pub const LVCDI_ITEM: ::DWORD = 0x00000000;
 pub const LVCDI_GROUP: ::DWORD = 0x00000001;
 pub const LVCDI_ITEMSLIST: ::DWORD = 0x00000002;
 pub const LVCDRF_NOSELECT: ::LRESULT = 0x00010000;
 pub const LVCDRF_NOGROUPFRAME: ::LRESULT = 0x00020000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMLVCACHEHINT {
-    pub hdr: ::NMHDR,
-    pub iFrom: ::c_int,
-    pub iTo: ::c_int,
-}
+STRUCT!{struct NMLVCACHEHINT {
+    hdr: ::NMHDR,
+    iFrom: ::c_int,
+    iTo: ::c_int,
+}}
 pub type LPNMLVCACHEHINT = *mut NMLVCACHEHINT;
 pub type LPNM_CACHEHINT = LPNMLVCACHEHINT;
 pub type PNM_CACHEHINT = LPNMLVCACHEHINT;
 pub type NM_CACHEHINT = NMLVCACHEHINT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMLVFINDITEMA {
-    pub hdr: ::NMHDR,
-    pub iStart: ::c_int,
-    pub lvfi: LVFINDINFOA,
-}
+STRUCT!{struct NMLVFINDITEMA {
+    hdr: ::NMHDR,
+    iStart: ::c_int,
+    lvfi: LVFINDINFOA,
+}}
 pub type LPNMLVFINDITEMA = *mut NMLVFINDITEMA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMLVFINDITEMW {
-    pub hdr: ::NMHDR,
-    pub iStart: ::c_int,
-    pub lvfi: LVFINDINFOW,
-}
+STRUCT!{struct NMLVFINDITEMW {
+    hdr: ::NMHDR,
+    iStart: ::c_int,
+    lvfi: LVFINDINFOW,
+}}
 pub type LPNMLVFINDITEMW = *mut NMLVFINDITEMW;
 pub type PNM_FINDITEMA = LPNMLVFINDITEMA;
 pub type LPNM_FINDITEMA = LPNMLVFINDITEMA;
@@ -2326,14 +2239,13 @@ pub type NM_FINDITEMA = NMLVFINDITEMA;
 pub type PNM_FINDITEMW = LPNMLVFINDITEMW;
 pub type LPNM_FINDITEMW = LPNMLVFINDITEMW;
 pub type NM_FINDITEMW = NMLVFINDITEMW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMLVODSTATECHANGE {
-    pub hdr: ::NMHDR,
-    pub iFrom: ::c_int,
-    pub iTo: ::c_int,
-    pub uNewState: ::UINT,
-    pub uOldState: ::UINT,
-}
+STRUCT!{struct NMLVODSTATECHANGE {
+    hdr: ::NMHDR,
+    iFrom: ::c_int,
+    iTo: ::c_int,
+    uNewState: ::UINT,
+    uOldState: ::UINT,
+}}
 pub type LPNMLVODSTATECHANGE = *mut NMLVODSTATECHANGE;
 pub type PNM_ODSTATECHANGE = LPNMLVODSTATECHANGE;
 pub type LPNM_ODSTATECHANGE = LPNMLVODSTATECHANGE;
@@ -2363,26 +2275,23 @@ pub const LVN_SETDISPINFOW: ::UINT = LVN_FIRST - 78;
 pub const LVIF_DI_SETITEM: ::UINT = 0x1000;
 pub type LV_DISPINFOA = NMLVDISPINFOA;
 pub type LV_DISPINFOW = NMLVDISPINFOW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMLVDISPINFOA {
-    pub hdr: ::NMHDR,
-    pub item: LVITEMA,
-}
+STRUCT!{struct NMLVDISPINFOA {
+    hdr: ::NMHDR,
+    item: LVITEMA,
+}}
 pub type LPNMLVDISPINFOA = *mut NMLVDISPINFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMLVDISPINFOW {
-    pub hdr: ::NMHDR,
-    pub item: LVITEMW,
-}
+STRUCT!{struct NMLVDISPINFOW {
+    hdr: ::NMHDR,
+    item: LVITEMW,
+}}
 pub type LPNMLVDISPINFOW = *mut NMLVDISPINFOW;
 pub const LVN_KEYDOWN: ::UINT = LVN_FIRST - 55;
 pub type LV_KEYDOWN = NMLVKEYDOWN;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMLVKEYDOWN {
-    pub hdr: ::NMHDR,
-    pub wVKey: ::WORD,
-    pub flags: ::UINT,
-}
+STRUCT!{struct NMLVKEYDOWN {
+    hdr: ::NMHDR,
+    wVKey: ::WORD,
+    flags: ::UINT,
+}}
 pub type LPNMLVKEYDOWN = *mut NMLVKEYDOWN;
 pub const LVN_MARQUEEBEGIN: ::UINT = LVN_FIRST - 56;
 #[repr(C)] #[derive(Clone, Copy)]
@@ -2393,27 +2302,25 @@ pub struct NMLVLINK {
     pub iSubItem: ::c_int,
 }
 pub type PNMLVLINK = *mut NMLVLINK;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMLVGETINFOTIPA {
-    pub hdr: ::NMHDR,
-    pub dwFlags: ::DWORD,
-    pub pszText: ::LPSTR,
-    pub cchTextMax: ::c_int,
-    pub iItem: ::c_int,
-    pub iSubItem: ::c_int,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct NMLVGETINFOTIPA {
+    hdr: ::NMHDR,
+    dwFlags: ::DWORD,
+    pszText: ::LPSTR,
+    cchTextMax: ::c_int,
+    iItem: ::c_int,
+    iSubItem: ::c_int,
+    lParam: ::LPARAM,
+}}
 pub type LPNMLVGETINFOTIPA = *mut NMLVGETINFOTIPA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMLVGETINFOTIPW {
-    pub hdr: ::NMHDR,
-    pub dwFlags: ::DWORD,
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::c_int,
-    pub iItem: ::c_int,
-    pub iSubItem: ::c_int,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct NMLVGETINFOTIPW {
+    hdr: ::NMHDR,
+    dwFlags: ::DWORD,
+    pszText: ::LPWSTR,
+    cchTextMax: ::c_int,
+    iItem: ::c_int,
+    iSubItem: ::c_int,
+    lParam: ::LPARAM,
+}}
 pub type LPNMLVGETINFOTIPW = *mut NMLVGETINFOTIPW;
 pub const LVGIT_UNFOLDED: ::DWORD = 0x0001;
 pub const LVN_GETINFOTIPA: ::UINT = LVN_FIRST - 57;
@@ -2425,12 +2332,11 @@ pub const LVN_INCREMENTALSEARCHA: ::UINT = LVN_FIRST - 62;
 pub const LVN_INCREMENTALSEARCHW: ::UINT = LVN_FIRST - 63;
 pub const LVN_COLUMNDROPDOWN: ::UINT = LVN_FIRST - 64;
 pub const LVN_COLUMNOVERFLOWCLICK: ::UINT = LVN_FIRST - 66;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMLVSCROLL {
-    pub hdr: ::NMHDR,
-    pub dx: ::c_int,
-    pub dy: ::c_int,
-}
+STRUCT!{struct NMLVSCROLL {
+    hdr: ::NMHDR,
+    dx: ::c_int,
+    dy: ::c_int,
+}}
 pub type LPNMLVSCROLL = *mut NMLVSCROLL;
 pub const LVN_BEGINSCROLL: ::UINT = LVN_FIRST - 80;
 pub const LVN_ENDSCROLL: ::UINT = LVN_FIRST - 81;
@@ -2499,13 +2405,12 @@ pub const TVIS_USERMASK: ::UINT = 0xF000;
 pub const TVIS_EX_FLAT: ::UINT = 0x0001;
 pub const TVIS_EX_DISABLED: ::UINT = 0x0002;
 pub const TVIS_EX_ALL: ::UINT = 0x0002;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTVSTATEIMAGECHANGING {
-    pub hdr: ::NMHDR,
-    pub hti: HTREEITEM,
-    pub iOldStateImageIndex: ::c_int,
-    pub iNewStateImageIndex: ::c_int,
-}
+STRUCT!{struct NMTVSTATEIMAGECHANGING {
+    hdr: ::NMHDR,
+    hti: HTREEITEM,
+    iOldStateImageIndex: ::c_int,
+    iNewStateImageIndex: ::c_int,
+}}
 pub type LPNMTVSTATEIMAGECHANGING = *mut NMTVSTATEIMAGECHANGING;
 pub const I_CHILDRENCALLBACK: ::c_int = -1;
 pub const I_CHILDRENAUTO: ::c_int = -2;
@@ -2513,71 +2418,67 @@ pub type LPTV_ITEMW = LPTVITEMW;
 pub type LPTV_ITEMA = LPTVITEMA;
 pub type TV_ITEMW = TVITEMW;
 pub type TV_ITEMA = TVITEMA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TVITEMA {
-    pub mask: ::UINT,
-    pub hItem: HTREEITEM,
-    pub state: ::UINT,
-    pub stateMask: ::UINT,
-    pub pszText: ::LPSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-    pub iSelectedImage: ::c_int,
-    pub cChildren: ::c_int,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct TVITEMA {
+    mask: ::UINT,
+    hItem: HTREEITEM,
+    state: ::UINT,
+    stateMask: ::UINT,
+    pszText: ::LPSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+    iSelectedImage: ::c_int,
+    cChildren: ::c_int,
+    lParam: ::LPARAM,
+}}
 pub type LPTVITEMA = *mut TVITEMA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TVITEMW {
-    pub mask: ::UINT,
-    pub hItem: HTREEITEM,
-    pub state: ::UINT,
-    pub stateMask: ::UINT,
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-    pub iSelectedImage: ::c_int,
-    pub cChildren: ::c_int,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct TVITEMW {
+    mask: ::UINT,
+    hItem: HTREEITEM,
+    state: ::UINT,
+    stateMask: ::UINT,
+    pszText: ::LPWSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+    iSelectedImage: ::c_int,
+    cChildren: ::c_int,
+    lParam: ::LPARAM,
+}}
 pub type LPTVITEMW = *mut TVITEMW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TVITEMEXA {
-    pub mask: ::UINT,
-    pub hItem: HTREEITEM,
-    pub state: ::UINT,
-    pub stateMask: ::UINT,
-    pub pszText: ::LPSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-    pub iSelectedImage: ::c_int,
-    pub cChildren: ::c_int,
-    pub lParam: ::LPARAM,
-    pub iIntegral: ::c_int,
-    pub uStateEx: ::UINT,
-    pub hwnd: ::HWND,
-    pub iExpandedImage: ::c_int,
-    pub iReserved: ::c_int,
-}
+STRUCT!{struct TVITEMEXA {
+    mask: ::UINT,
+    hItem: HTREEITEM,
+    state: ::UINT,
+    stateMask: ::UINT,
+    pszText: ::LPSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+    iSelectedImage: ::c_int,
+    cChildren: ::c_int,
+    lParam: ::LPARAM,
+    iIntegral: ::c_int,
+    uStateEx: ::UINT,
+    hwnd: ::HWND,
+    iExpandedImage: ::c_int,
+    iReserved: ::c_int,
+}}
 pub type LPTVITEMEXA = *mut TVITEMEXA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TVITEMEXW {
-    pub mask: ::UINT,
-    pub hItem: HTREEITEM,
-    pub state: ::UINT,
-    pub stateMask: ::UINT,
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-    pub iSelectedImage: ::c_int,
-    pub cChildren: ::c_int,
-    pub lParam: ::LPARAM,
-    pub iIntegral: ::c_int,
-    pub uStateEx: ::UINT,
-    pub hwnd: ::HWND,
-    pub iExpandedImage: ::c_int,
-    pub iReserved: ::c_int,
-}
+STRUCT!{struct TVITEMEXW {
+    mask: ::UINT,
+    hItem: HTREEITEM,
+    state: ::UINT,
+    stateMask: ::UINT,
+    pszText: ::LPWSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+    iSelectedImage: ::c_int,
+    cChildren: ::c_int,
+    lParam: ::LPARAM,
+    iIntegral: ::c_int,
+    uStateEx: ::UINT,
+    hwnd: ::HWND,
+    iExpandedImage: ::c_int,
+    iReserved: ::c_int,
+}}
 pub type LPTVITEMEXW = *mut TVITEMEXW;
 pub const TVI_ROOT: HTREEITEM = (0 - 0x10000) as HTREEITEM;
 pub const TVI_FIRST: HTREEITEM = (0 - 0x0FFFF) as HTREEITEM;
@@ -2587,20 +2488,18 @@ pub type LPTV_INSERTSTRUCTA = LPTVINSERTSTRUCTA;
 pub type LPTV_INSERTSTRUCTW = LPTVINSERTSTRUCTW;
 pub type TV_INSERTSTRUCTA = TVINSERTSTRUCTA;
 pub type TV_INSERTSTRUCTW = TVINSERTSTRUCTW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TVINSERTSTRUCTA {
-    pub hParent: HTREEITEM,
-    pub hInsertAfter: HTREEITEM,
-    pub itemex: TVITEMEXA,
-}
+STRUCT!{struct TVINSERTSTRUCTA {
+    hParent: HTREEITEM,
+    hInsertAfter: HTREEITEM,
+    itemex: TVITEMEXA,
+}}
 UNION!(TVINSERTSTRUCTA, itemex, item, item_mut, TV_ITEMA);
 pub type LPTVINSERTSTRUCTA = *mut TVINSERTSTRUCTA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TVINSERTSTRUCTW {
-    pub hParent: HTREEITEM,
-    pub hInsertAfter: HTREEITEM,
-    pub itemex: TVITEMEXW,
-}
+STRUCT!{struct TVINSERTSTRUCTW {
+    hParent: HTREEITEM,
+    hInsertAfter: HTREEITEM,
+    itemex: TVITEMEXW,
+}}
 UNION!(TVINSERTSTRUCTA, itemex, item, item_mut, TV_ITEMW);
 pub type LPTVINSERTSTRUCTW = *mut TVINSERTSTRUCTW;
 pub const TVM_INSERTITEMA: ::UINT = TV_FIRST + 0;
@@ -2646,12 +2545,11 @@ pub const TVM_GETVISIBLECOUNT: ::UINT = TV_FIRST + 16;
 pub const TVM_HITTEST: ::UINT = TV_FIRST + 17;
 pub type LPTV_HITTESTINFO = LPTVHITTESTINFO;
 pub type TV_HITTESTINFO = TVHITTESTINFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TVHITTESTINFO {
-    pub pt: ::POINT,
-    pub flags: ::UINT,
-    pub hItem: HTREEITEM,
-}
+STRUCT!{struct TVHITTESTINFO {
+    pt: ::POINT,
+    flags: ::UINT,
+    hItem: HTREEITEM,
+}}
 pub type LPTVHITTESTINFO = *mut TVHITTESTINFO;
 pub const TVHT_NOWHERE: ::UINT = 0x0001;
 pub const TVHT_ONITEMICON: ::UINT = 0x0002;
@@ -2706,12 +2604,11 @@ pub enum TVITEMPART {
     TVGIPR_BUTTON = 0x0001,
     DUMMY,
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TVGETITEMPARTRECTINFO {
-    pub hti: HTREEITEM,
-    pub prc: *mut ::RECT,
-    pub partID: TVITEMPART,
-}
+STRUCT!{struct TVGETITEMPARTRECTINFO {
+    hti: HTREEITEM,
+    prc: *mut ::RECT,
+    partID: TVITEMPART,
+}}
 pub const TVM_GETITEMPARTRECT: ::UINT = TV_FIRST + 72;
 pub type PFNTVCOMPARE = Option<unsafe extern "system" fn(
     lParam1: ::LPARAM, lParam2: ::LPARAM, lParamSort: ::LPARAM,
@@ -2730,23 +2627,21 @@ pub type LPNM_TREEVIEWA = LPNMTREEVIEWA;
 pub type LPNM_TREEVIEWW = LPNMTREEVIEWW;
 pub type NM_TREEVIEWA = NMTREEVIEWA;
 pub type NM_TREEVIEWW = NMTREEVIEWW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTREEVIEWA {
-    pub hdr: ::NMHDR,
-    pub action: ::UINT,
-    pub itemOld: TVITEMA,
-    pub itemNew: TVITEMA,
-    pub ptDrag: ::POINT,
-}
+STRUCT!{struct NMTREEVIEWA {
+    hdr: ::NMHDR,
+    action: ::UINT,
+    itemOld: TVITEMA,
+    itemNew: TVITEMA,
+    ptDrag: ::POINT,
+}}
 pub type LPNMTREEVIEWA = *mut NMTREEVIEWA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTREEVIEWW {
-    pub hdr: ::NMHDR,
-    pub action: ::UINT,
-    pub itemOld: TVITEMW,
-    pub itemNew: TVITEMW,
-    pub ptDrag: ::POINT,
-}
+STRUCT!{struct NMTREEVIEWW {
+    hdr: ::NMHDR,
+    action: ::UINT,
+    itemOld: TVITEMW,
+    itemNew: TVITEMW,
+    ptDrag: ::POINT,
+}}
 pub type LPNMTREEVIEWW = *mut NMTREEVIEWW;
 pub const TVN_SELCHANGINGA: ::UINT = TVN_FIRST - 1;
 pub const TVN_SELCHANGINGW: ::UINT = TVN_FIRST - 50;
@@ -2762,29 +2657,25 @@ pub const TVC_BYKEYBOARD: ::LPARAM = 0x0002;
 pub const TVIF_DI_SETITEM: ::UINT = 0x1000;
 pub type TV_DISPINFOA = NMTVDISPINFOA;
 pub type TV_DISPINFOW = NMTVDISPINFOW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTVDISPINFOA {
-    pub hdr: ::NMHDR,
-    pub item: TVITEMA,
-}
+STRUCT!{struct NMTVDISPINFOA {
+    hdr: ::NMHDR,
+    item: TVITEMA,
+}}
 pub type LPNMTVDISPINFOA = *mut NMTVDISPINFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTVDISPINFOW {
-    pub hdr: ::NMHDR,
-    pub item: TVITEMW,
-}
+STRUCT!{struct NMTVDISPINFOW {
+    hdr: ::NMHDR,
+    item: TVITEMW,
+}}
 pub type LPNMTVDISPINFOW = *mut NMTVDISPINFOW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTVDISPINFOEXA {
-    pub hdr: ::NMHDR,
-    pub item: TVITEMEXA,
-}
+STRUCT!{struct NMTVDISPINFOEXA {
+    hdr: ::NMHDR,
+    item: TVITEMEXA,
+}}
 pub type LPNMTVDISPINFOEXA = *mut NMTVDISPINFOEXA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTVDISPINFOEXW {
-    pub hdr: ::NMHDR,
-    pub item: TVITEMEXW,
-}
+STRUCT!{struct NMTVDISPINFOEXW {
+    hdr: ::NMHDR,
+    item: TVITEMEXW,
+}}
 pub type LPNMTVDISPINFOEXW = *mut NMTVDISPINFOEXW;
 pub type TV_DISPINFOEXA = NMTVDISPINFOEXA;
 pub type TV_DISPINFOEXW = NMTVDISPINFOEXW;
@@ -2815,59 +2706,53 @@ pub const TVNRET_DEFAULT: ::LRESULT = 0;
 pub const TVNRET_SKIPOLD: ::LRESULT = 1;
 pub const TVNRET_SKIPNEW: ::LRESULT = 2;
 pub type TV_KEYDOWN = NMTVKEYDOWN;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTVKEYDOWN {
-    pub hdr: ::NMHDR,
-    pub wVKey: ::WORD,
-    pub flags: ::UINT,
-}
+STRUCT!{struct NMTVKEYDOWN {
+    hdr: ::NMHDR,
+    wVKey: ::WORD,
+    flags: ::UINT,
+}}
 pub type LPNMTVKEYDOWN = *mut NMTVKEYDOWN;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTVCUSTOMDRAW {
-    pub nmcd: NMCUSTOMDRAW,
-    pub clrText: ::COLORREF,
-    pub clrTextBk: ::COLORREF,
-    pub iLevel: ::c_int,
-}
+STRUCT!{struct NMTVCUSTOMDRAW {
+    nmcd: NMCUSTOMDRAW,
+    clrText: ::COLORREF,
+    clrTextBk: ::COLORREF,
+    iLevel: ::c_int,
+}}
 pub type LPNMTVCUSTOMDRAW = *mut NMTVCUSTOMDRAW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTVGETINFOTIPA {
-    pub hdr: ::NMHDR,
-    pub pszText: ::LPSTR,
-    pub cchTextMax: ::c_int,
-    pub hItem: HTREEITEM,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct NMTVGETINFOTIPA {
+    hdr: ::NMHDR,
+    pszText: ::LPSTR,
+    cchTextMax: ::c_int,
+    hItem: HTREEITEM,
+    lParam: ::LPARAM,
+}}
 pub type LPNMTVGETINFOTIPA = *mut NMTVGETINFOTIPA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTVGETINFOTIPW {
-    pub hdr: ::NMHDR,
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::c_int,
-    pub hItem: HTREEITEM,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct NMTVGETINFOTIPW {
+    hdr: ::NMHDR,
+    pszText: ::LPWSTR,
+    cchTextMax: ::c_int,
+    hItem: HTREEITEM,
+    lParam: ::LPARAM,
+}}
 pub type LPNMTVGETINFOTIPW = *mut NMTVGETINFOTIPW;
 pub const TVCDRF_NOIMAGES: ::LRESULT = 0x00010000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTVITEMCHANGE {
-    pub hdr: ::NMHDR,
-    pub uChanged: ::UINT,
-    pub hItem: HTREEITEM,
-    pub uStateNew: ::UINT,
-    pub uStateOld: ::UINT,
-    pub lParam: ::LPARAM,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTVASYNCDRAW {
-    pub hdr: ::NMHDR,
-    pub pimldp: *mut IMAGELISTDRAWPARAMS,
-    pub hr: ::HRESULT,
-    pub hItem: HTREEITEM,
-    pub lParam: ::LPARAM,
-    pub dwRetFlags: ::DWORD,
-    pub iRetImageIndex: ::c_int,
-}
+STRUCT!{struct NMTVITEMCHANGE {
+    hdr: ::NMHDR,
+    uChanged: ::UINT,
+    hItem: HTREEITEM,
+    uStateNew: ::UINT,
+    uStateOld: ::UINT,
+    lParam: ::LPARAM,
+}}
+STRUCT!{struct NMTVASYNCDRAW {
+    hdr: ::NMHDR,
+    pimldp: *mut IMAGELISTDRAWPARAMS,
+    hr: ::HRESULT,
+    hItem: HTREEITEM,
+    lParam: ::LPARAM,
+    dwRetFlags: ::DWORD,
+    iRetImageIndex: ::c_int,
+}}
 pub const CBEIF_TEXT: ::UINT = 0x00000001;
 pub const CBEIF_IMAGE: ::UINT = 0x00000002;
 pub const CBEIF_SELECTEDIMAGE: ::UINT = 0x00000004;
@@ -2875,32 +2760,30 @@ pub const CBEIF_OVERLAY: ::UINT = 0x00000008;
 pub const CBEIF_INDENT: ::UINT = 0x00000010;
 pub const CBEIF_LPARAM: ::UINT = 0x00000020;
 pub const CBEIF_DI_SETITEM: ::UINT = 0x10000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COMBOBOXEXITEMA {
-    pub mask: ::UINT,
-    pub iItem: ::INT_PTR,
-    pub pszText: ::LPSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-    pub iSelectedImage: ::c_int,
-    pub iOverlay: ::c_int,
-    pub iIndent: ::c_int,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct COMBOBOXEXITEMA {
+    mask: ::UINT,
+    iItem: ::INT_PTR,
+    pszText: ::LPSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+    iSelectedImage: ::c_int,
+    iOverlay: ::c_int,
+    iIndent: ::c_int,
+    lParam: ::LPARAM,
+}}
 pub type PCOMBOBOXEXITEMA = *mut COMBOBOXEXITEMA;
 pub type PCCOMBOBOXEXITEMA = *const COMBOBOXEXITEMA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COMBOBOXEXITEMW {
-    pub mask: ::UINT,
-    pub iItem: ::INT_PTR,
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-    pub iSelectedImage: ::c_int,
-    pub iOverlay: ::c_int,
-    pub iIndent: ::c_int,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct COMBOBOXEXITEMW {
+    mask: ::UINT,
+    iItem: ::INT_PTR,
+    pszText: ::LPWSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+    iSelectedImage: ::c_int,
+    iOverlay: ::c_int,
+    iIndent: ::c_int,
+    lParam: ::LPARAM,
+}}
 pub type PCOMBOBOXEXITEMW = *mut COMBOBOXEXITEMW;
 pub type PCCOMBOBOXEXITEMW = *const COMBOBOXEXITEMW;
 pub const CBEM_INSERTITEMA: ::UINT = ::WM_USER + 1;
@@ -2928,17 +2811,15 @@ pub const CBES_EX_PATHWORDBREAKPROC: ::DWORD = 0x00000004;
 pub const CBES_EX_NOSIZELIMIT: ::DWORD = 0x00000008;
 pub const CBES_EX_CASESENSITIVE: ::DWORD = 0x00000010;
 pub const CBES_EX_TEXTENDELLIPSIS: ::DWORD = 0x00000020;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMCOMBOBOXEXA {
-    pub hdr: ::NMHDR,
-    pub ceItem: COMBOBOXEXITEMA,
-}
+STRUCT!{struct NMCOMBOBOXEXA {
+    hdr: ::NMHDR,
+    ceItem: COMBOBOXEXITEMA,
+}}
 pub type PNMCOMBOBOXEXA = *mut NMCOMBOBOXEXA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMCOMBOBOXEXW {
-    pub hdr: ::NMHDR,
-    pub ceItem: COMBOBOXEXITEMW,
-}
+STRUCT!{struct NMCOMBOBOXEXW {
+    hdr: ::NMHDR,
+    ceItem: COMBOBOXEXITEMW,
+}}
 pub type PNMCOMBOBOXEXW = *mut NMCOMBOBOXEXW;
 pub const CBEN_GETDISPINFOA: ::UINT = CBEN_FIRST - 0;
 pub const CBEN_INSERTITEM: ::UINT = CBEN_FIRST - 1;
@@ -3028,49 +2909,45 @@ pub const TCIS_BUTTONPRESSED: ::DWORD = 0x0001;
 pub const TCIS_HIGHLIGHTED: ::DWORD = 0x0002;
 pub type TC_ITEMHEADERA = TCITEMHEADERA;
 pub type TC_ITEMHEADERW = TCITEMHEADERW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TCITEMHEADERA {
-    pub mask: ::UINT,
-    pub lpReserved1: ::UINT,
-    pub lpReserved2: ::UINT,
-    pub pszText: ::LPSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-}
+STRUCT!{struct TCITEMHEADERA {
+    mask: ::UINT,
+    lpReserved1: ::UINT,
+    lpReserved2: ::UINT,
+    pszText: ::LPSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+}}
 pub type LPTCITEMHEADERA = *mut TCITEMHEADERA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TCITEMHEADERW {
-    pub mask: ::UINT,
-    pub lpReserved1: ::UINT,
-    pub lpReserved2: ::UINT,
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-}
+STRUCT!{struct TCITEMHEADERW {
+    mask: ::UINT,
+    lpReserved1: ::UINT,
+    lpReserved2: ::UINT,
+    pszText: ::LPWSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+}}
 pub type LPTCITEMHEADERW = *mut TCITEMHEADERW;
 pub type TC_ITEMA = TCITEMA;
 pub type TC_ITEMW = TCITEMW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TCITEMA {
-    pub mask: ::UINT,
-    pub dwState: ::DWORD,
-    pub dwStateMask: ::DWORD,
-    pub pszText: ::LPSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct TCITEMA {
+    mask: ::UINT,
+    dwState: ::DWORD,
+    dwStateMask: ::DWORD,
+    pszText: ::LPSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+    lParam: ::LPARAM,
+}}
 pub type LPTCITEMA = *mut TCITEMA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TCITEMW {
-    pub mask: ::UINT,
-    pub dwState: ::DWORD,
-    pub dwStateMask: ::DWORD,
-    pub pszText: ::LPWSTR,
-    pub cchTextMax: ::c_int,
-    pub iImage: ::c_int,
-    pub lParam: ::LPARAM,
-}
+STRUCT!{struct TCITEMW {
+    mask: ::UINT,
+    dwState: ::DWORD,
+    dwStateMask: ::DWORD,
+    pszText: ::LPWSTR,
+    cchTextMax: ::c_int,
+    iImage: ::c_int,
+    lParam: ::LPARAM,
+}}
 pub type LPTCITEMW = *mut TCITEMW;
 pub const TCM_GETITEMA: ::UINT = TCM_FIRST + 5;
 pub const TCM_GETITEMW: ::UINT = TCM_FIRST + 60;
@@ -3089,11 +2966,10 @@ pub const TCHT_ONITEMLABEL: ::UINT = 0x0004;
 pub const TCHT_ONITEM: ::UINT = TCHT_ONITEMICON | TCHT_ONITEMLABEL;
 pub type LPTC_HITTESTINFO = LPTCHITTESTINFO;
 pub type TC_HITTESTINFO = TCHITTESTINFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TCHITTESTINFO {
-    pub pt: ::POINT,
-    pub flags: ::UINT,
-}
+STRUCT!{struct TCHITTESTINFO {
+    pt: ::POINT,
+    flags: ::UINT,
+}}
 pub type LPTCHITTESTINFO = *mut TCHITTESTINFO;
 pub const TCM_HITTEST: ::UINT = TCM_FIRST + 13;
 pub const TCM_SETITEMEXTRA: ::UINT = TCM_FIRST + 14;
@@ -3115,12 +2991,11 @@ pub const TCM_SETUNICODEFORMAT: ::UINT = CCM_SETUNICODEFORMAT;
 pub const TCM_GETUNICODEFORMAT: ::UINT = CCM_GETUNICODEFORMAT;
 pub const TCN_KEYDOWN: ::UINT = TCN_FIRST - 0;
 pub type TC_KEYDOWN = NMTCKEYDOWN;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMTCKEYDOWN {
-    pub hdr: ::NMHDR,
-    pub wVKey: ::WORD,
-    pub flags: ::UINT,
-}
+STRUCT!{struct NMTCKEYDOWN {
+    hdr: ::NMHDR,
+    wVKey: ::WORD,
+    flags: ::UINT,
+}}
 pub const TCN_SELCHANGE: ::UINT = TCN_FIRST - 1;
 pub const TCN_SELCHANGING: ::UINT = TCN_FIRST - 2;
 pub const TCN_GETOBJECT: ::UINT = TCN_FIRST - 3;
@@ -3159,17 +3034,16 @@ pub const MCSC_TITLEBK: ::WPARAM = 2;
 pub const MCSC_TITLETEXT: ::WPARAM = 3;
 pub const MCSC_MONTHBK: ::WPARAM = 4;
 pub const MCSC_TRAILINGTEXT: ::WPARAM = 5;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MCHITTESTINFO {
-    pub cbSize: ::UINT,
-    pub pt: ::POINT,
-    pub uHit: ::UINT,
-    pub st: ::SYSTEMTIME,
-    pub rc: ::RECT,
-    pub iOffset: ::c_int,
-    pub iRow: ::c_int,
-    pub iCol: ::c_int,
-}
+STRUCT!{struct MCHITTESTINFO {
+    cbSize: ::UINT,
+    pt: ::POINT,
+    uHit: ::UINT,
+    st: ::SYSTEMTIME,
+    rc: ::RECT,
+    iOffset: ::c_int,
+    iRow: ::c_int,
+    iCol: ::c_int,
+}}
 pub type PMCHITTESTINFO = *mut MCHITTESTINFO;
 pub const MCHT_TITLE: ::UINT = 0x00010000;
 pub const MCHT_CALENDAR: ::UINT = 0x00020000;
@@ -3219,21 +3093,20 @@ pub const MCGIP_CALENDARCELL: ::DWORD = 8;
 pub const MCGIF_DATE: ::DWORD = 0x00000001;
 pub const MCGIF_RECT: ::DWORD = 0x00000002;
 pub const MCGIF_NAME: ::DWORD = 0x00000004;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MCGRIDINFO {
-    pub cbSize: ::UINT,
-    pub dwPart: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub iCalendar: ::c_int,
-    pub iRow: ::c_int,
-    pub iCol: ::c_int,
-    pub bSelected: ::BOOL,
-    pub stStart: ::SYSTEMTIME,
-    pub stEnd: ::SYSTEMTIME,
-    pub rc: ::RECT,
-    pub pszName: ::PWSTR,
-    pub cchName: ::size_t,
-}
+STRUCT!{struct MCGRIDINFO {
+    cbSize: ::UINT,
+    dwPart: ::DWORD,
+    dwFlags: ::DWORD,
+    iCalendar: ::c_int,
+    iRow: ::c_int,
+    iCol: ::c_int,
+    bSelected: ::BOOL,
+    stStart: ::SYSTEMTIME,
+    stEnd: ::SYSTEMTIME,
+    rc: ::RECT,
+    pszName: ::PWSTR,
+    cchName: ::size_t,
+}}
 pub type PMCGRIDINFO = *mut MCGRIDINFO;
 pub const MCM_GETCALENDARGRIDINFO: ::UINT = MCM_FIRST + 24;
 pub const MCM_GETCALID: ::UINT = MCM_FIRST + 27;
@@ -3242,32 +3115,29 @@ pub const MCM_SIZERECTTOMIN: ::UINT = MCM_FIRST + 29;
 pub const MCM_SETCALENDARBORDER: ::UINT = MCM_FIRST + 30;
 pub const MCM_GETCALENDARBORDER: ::UINT = MCM_FIRST + 31;
 pub const MCM_SETCURRENTVIEW: ::UINT = MCM_FIRST + 32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMSELCHANGE {
-    pub nmhdr: ::NMHDR,
-    pub stSelStart: ::SYSTEMTIME,
-    pub stSelEnd: ::SYSTEMTIME,
-}
+STRUCT!{struct NMSELCHANGE {
+    nmhdr: ::NMHDR,
+    stSelStart: ::SYSTEMTIME,
+    stSelEnd: ::SYSTEMTIME,
+}}
 pub type LPNMSELCHANGE = *mut NMSELCHANGE;
 pub const MCN_SELCHANGE: ::UINT = MCN_FIRST - 3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMDAYSTATE {
-    pub nmhdr: ::NMHDR,
-    pub stStart: ::SYSTEMTIME,
-    pub cDayState: ::c_int,
-    pub prgDayState: LPMONTHDAYSTATE
-}
+STRUCT!{struct NMDAYSTATE {
+    nmhdr: ::NMHDR,
+    stStart: ::SYSTEMTIME,
+    cDayState: ::c_int,
+    prgDayState: LPMONTHDAYSTATE,
+}}
 pub type LPNMDAYSTATE = *mut NMDAYSTATE;
 pub const MCN_GETDAYSTATE: ::UINT = MCN_FIRST - 1;
 pub type NMSELECT = NMSELCHANGE;
 pub type LPNMSELECT = *mut NMSELCHANGE;
 pub const MCN_SELECT: ::UINT = MCN_FIRST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMVIEWCHANGE {
-    pub nmhdr: ::NMHDR,
-    pub dwOldView: ::DWORD,
-    pub dwNewView: ::DWORD,
-}
+STRUCT!{struct NMVIEWCHANGE {
+    nmhdr: ::NMHDR,
+    dwOldView: ::DWORD,
+    dwNewView: ::DWORD,
+}}
 pub type LPNMVIEWCHANGE = *mut NMVIEWCHANGE;
 pub const MCN_VIEWCHANGE: ::UINT = MCN_FIRST - 4;
 pub const MCS_DAYSTATE: ::DWORD = 0x0001;
@@ -3280,17 +3150,16 @@ pub const MCS_SHORTDAYSOFWEEK: ::DWORD = 0x0080;
 pub const MCS_NOSELCHANGEONNAV: ::DWORD = 0x0100;
 pub const GMR_VISIBLE: ::DWORD = 0;
 pub const GMR_DAYSTATE: ::DWORD = 1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DATETIMEPICKERINFO {
-    pub cbSize: ::UINT,
-    pub rcCheck: ::RECT,
-    pub stateCheck: ::DWORD,
-    pub rcButton: ::RECT,
-    pub stateButton: ::DWORD,
-    pub hwndEdit: ::HWND,
-    pub hwndUD: ::HWND,
-    pub hwndDropDown: ::HWND,
-}
+STRUCT!{struct DATETIMEPICKERINFO {
+    cbSize: ::UINT,
+    rcCheck: ::RECT,
+    stateCheck: ::DWORD,
+    rcButton: ::RECT,
+    stateButton: ::DWORD,
+    hwndEdit: ::HWND,
+    hwndUD: ::HWND,
+    hwndDropDown: ::HWND,
+}}
 pub type LPDATETIMEPICKERINFO = *mut DATETIMEPICKERINFO;
 pub const DTM_FIRST: ::UINT = 0x1000;
 pub const DTM_GETSYSTEMTIME: ::UINT = DTM_FIRST + 1;
@@ -3318,48 +3187,43 @@ pub const DTS_TIMEFORMAT: ::DWORD = 0x0009;
 pub const DTS_APPCANPARSE: ::DWORD = 0x0010;
 pub const DTS_RIGHTALIGN: ::DWORD = 0x0020;
 pub const DTN_DATETIMECHANGE: ::UINT = DTN_FIRST2 - 6;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMDATETIMECHANGE {
-    pub nmhdr: ::NMHDR,
-    pub dwFlags: ::DWORD,
-    pub st: ::SYSTEMTIME,
-}
+STRUCT!{struct NMDATETIMECHANGE {
+    nmhdr: ::NMHDR,
+    dwFlags: ::DWORD,
+    st: ::SYSTEMTIME,
+}}
 pub type LPNMDATETIMECHANGE = *mut NMDATETIMECHANGE;
 pub const DTN_USERSTRINGA: ::UINT = DTN_FIRST2 - 5;
 pub const DTN_USERSTRINGW: ::UINT = DTN_FIRST - 5;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMDATETIMESTRINGA {
-    pub nmhdr: ::NMHDR,
-    pub pszUserString: ::LPCSTR,
-    pub st: ::SYSTEMTIME,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct NMDATETIMESTRINGA {
+    nmhdr: ::NMHDR,
+    pszUserString: ::LPCSTR,
+    st: ::SYSTEMTIME,
+    dwFlags: ::DWORD,
+}}
 pub type LPNMDATETIMESTRINGA = *mut NMDATETIMESTRINGA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMDATETIMESTRINGW {
-    pub nmhdr: ::NMHDR,
-    pub pszUserString: ::LPCWSTR,
-    pub st: ::SYSTEMTIME,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct NMDATETIMESTRINGW {
+    nmhdr: ::NMHDR,
+    pszUserString: ::LPCWSTR,
+    st: ::SYSTEMTIME,
+    dwFlags: ::DWORD,
+}}
 pub type LPNMDATETIMESTRINGW = *mut NMDATETIMESTRINGW;
 pub const DTN_WMKEYDOWNA: ::UINT = DTN_FIRST2 - 4;
 pub const DTN_WMKEYDOWNW: ::UINT = DTN_FIRST - 4;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMDATETIMEWMKEYDOWNA {
-    pub nmhdr: ::NMHDR,
-    pub nVirtKey: ::c_int,
-    pub pszFormat: ::LPCSTR,
-    pub st: ::SYSTEMTIME,
-}
+STRUCT!{struct NMDATETIMEWMKEYDOWNA {
+    nmhdr: ::NMHDR,
+    nVirtKey: ::c_int,
+    pszFormat: ::LPCSTR,
+    st: ::SYSTEMTIME,
+}}
 pub type LPNMDATETIMEWMKEYDOWNA = *mut NMDATETIMEWMKEYDOWNA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMDATETIMEWMKEYDOWNW {
-    pub nmhdr: ::NMHDR,
-    pub nVirtKey: ::c_int,
-    pub pszFormat: ::LPCWSTR,
-    pub st: ::SYSTEMTIME,
-}
+STRUCT!{struct NMDATETIMEWMKEYDOWNW {
+    nmhdr: ::NMHDR,
+    nVirtKey: ::c_int,
+    pszFormat: ::LPCWSTR,
+    st: ::SYSTEMTIME,
+}}
 pub type LPNMDATETIMEWMKEYDOWNW = *mut NMDATETIMEWMKEYDOWNW;
 pub const DTN_FORMATA: ::UINT = DTN_FIRST2 - 3;
 pub const DTN_FORMATW: ::UINT = DTN_FIRST - 3;
@@ -3385,19 +3249,17 @@ impl Clone for NMDATETIMEFORMATW { fn clone(&self) -> NMDATETIMEFORMATW { *self 
 pub type LPNMDATETIMEFORMATW = *mut NMDATETIMEFORMATW;
 pub const DTN_FORMATQUERYA: ::UINT = DTN_FIRST2 - 2;
 pub const DTN_FORMATQUERYW: ::UINT = DTN_FIRST - 2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMDATETIMEFORMATQUERYA {
-    pub nmhdr: ::NMHDR,
-    pub pszFormat: ::LPCSTR,
-    pub szMax: ::SIZE,
-}
+STRUCT!{struct NMDATETIMEFORMATQUERYA {
+    nmhdr: ::NMHDR,
+    pszFormat: ::LPCSTR,
+    szMax: ::SIZE,
+}}
 pub type LPNMDATETIMEFORMATQUERYA = *mut NMDATETIMEFORMATQUERYA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMDATETIMEFORMATQUERYW {
-    pub nmhdr: ::NMHDR,
-    pub pszFormat: ::LPCWSTR,
-    pub szMax: ::SIZE,
-}
+STRUCT!{struct NMDATETIMEFORMATQUERYW {
+    nmhdr: ::NMHDR,
+    pszFormat: ::LPCWSTR,
+    szMax: ::SIZE,
+}}
 pub type LPNMDATETIMEFORMATQUERYW = *mut NMDATETIMEFORMATQUERYW;
 pub const DTN_DROPDOWN: ::UINT = DTN_FIRST2 - 1;
 pub const DTN_CLOSEUP: ::UINT = DTN_FIRST2;
@@ -3413,12 +3275,11 @@ pub const IPM_SETRANGE: ::UINT = ::WM_USER + 103;
 pub const IPM_SETFOCUS: ::UINT = ::WM_USER + 104;
 pub const IPM_ISBLANK: ::UINT = ::WM_USER + 105;
 pub const IPN_FIELDCHANGED: ::UINT = IPN_FIRST - 0;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMIPADDRESS {
-    pub hdr: ::NMHDR,
-    pub iField: ::c_int,
-    pub iValue: ::c_int,
-}
+STRUCT!{struct NMIPADDRESS {
+    hdr: ::NMHDR,
+    iField: ::c_int,
+    iValue: ::c_int,
+}}
 pub type LPNMIPADDRESS = *mut NMIPADDRESS;
 #[inline] #[allow(dead_code)]
 pub fn MAKEIPRANGE(low: ::BYTE, high: ::BYTE) -> ::LPARAM {
@@ -3461,36 +3322,33 @@ pub const PGF_SCROLLRIGHT: ::c_int = 8;
 pub const PGK_SHIFT: ::BOOL = 1;
 pub const PGK_CONTROL: ::BOOL = 2;
 pub const PGK_MENU: ::BOOL = 4;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMPGSCROLL {
-    pub hdr: ::NMHDR,
-    pub fwKeys: ::BOOL,
-    pub rcParent: ::RECT,
-    pub iDir: ::c_int,
-    pub iXpos: ::c_int,
-    pub iYpos: ::c_int,
-    pub iScroll: ::c_int,
-}
+STRUCT!{struct NMPGSCROLL {
+    hdr: ::NMHDR,
+    fwKeys: ::BOOL,
+    rcParent: ::RECT,
+    iDir: ::c_int,
+    iXpos: ::c_int,
+    iYpos: ::c_int,
+    iScroll: ::c_int,
+}}
 pub type LPNMPGSCROLL = *mut NMPGSCROLL;
 pub const PGN_CALCSIZE: ::UINT = PGN_FIRST - 2;
 pub const PGF_CALCWIDTH: ::DWORD = 1;
 pub const PGF_CALCHEIGHT: ::DWORD = 2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMPGCALCSIZE {
-    pub hdr: ::NMHDR,
-    pub dwFlag: ::DWORD,
-    pub iWidth: ::c_int,
-    pub iHeight: ::c_int,
-}
+STRUCT!{struct NMPGCALCSIZE {
+    hdr: ::NMHDR,
+    dwFlag: ::DWORD,
+    iWidth: ::c_int,
+    iHeight: ::c_int,
+}}
 pub type LPNMPGCALCSIZE = *mut NMPGCALCSIZE;
 pub const PGN_HOTITEMCHANGE: ::UINT = PGN_FIRST - 3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMPGHOTITEM {
-    pub hdr: ::NMHDR,
-    pub idOld: ::c_int,
-    pub idNew: ::c_int,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct NMPGHOTITEM {
+    hdr: ::NMHDR,
+    idOld: ::c_int,
+    idNew: ::c_int,
+    dwFlags: ::DWORD,
+}}
 pub type LPNMPGHOTITEM = *mut NMPGHOTITEM;
 pub const NFS_EDIT: ::DWORD = 0x0001;
 pub const NFS_STATIC: ::DWORD = 0x0002;
@@ -3503,23 +3361,21 @@ pub const BUTTON_IMAGELIST_ALIGN_RIGHT: ::UINT = 1;
 pub const BUTTON_IMAGELIST_ALIGN_TOP: ::UINT = 2;
 pub const BUTTON_IMAGELIST_ALIGN_BOTTOM: ::UINT = 3;
 pub const BUTTON_IMAGELIST_ALIGN_CENTER: ::UINT = 4;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct BUTTON_IMAGELIST {
-    pub himl: HIMAGELIST,
-    pub margin: ::RECT,
-    pub uAlign: ::UINT,
-}
+STRUCT!{struct BUTTON_IMAGELIST {
+    himl: HIMAGELIST,
+    margin: ::RECT,
+    uAlign: ::UINT,
+}}
 pub type PBUTTON_IMAGELIST = *mut BUTTON_IMAGELIST;
 pub const BCM_GETIDEALSIZE: ::UINT = BCM_FIRST + 0x0001;
 pub const BCM_SETIMAGELIST: ::UINT = BCM_FIRST + 0x0002;
 pub const BCM_GETIMAGELIST: ::UINT = BCM_FIRST + 0x0003;
 pub const BCM_SETTEXTMARGIN: ::UINT = BCM_FIRST + 0x0004;
 pub const BCM_GETTEXTMARGIN: ::UINT = BCM_FIRST + 0x0005;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMBCHOTITEM {
-    pub hdr: ::NMHDR,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct NMBCHOTITEM {
+    hdr: ::NMHDR,
+    dwFlags: ::DWORD,
+}}
 pub type LPNMBCHOTITEM = *mut NMBCHOTITEM;
 pub const BCN_HOTITEMCHANGE: ::UINT = BCN_FIRST + 0x0001;
 pub const BS_SPLITBUTTON: ::UINT = 0x0000000C;
@@ -3534,13 +3390,12 @@ pub const BCSS_NOSPLIT: ::UINT = 0x0001;
 pub const BCSS_STRETCH: ::UINT = 0x0002;
 pub const BCSS_ALIGNLEFT: ::UINT = 0x0004;
 pub const BCSS_IMAGE: ::UINT = 0x0008;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct BUTTON_SPLITINFO {
-    pub mask: ::UINT,
-    pub himlGlyph: HIMAGELIST,
-    pub uSplitStyle: ::UINT,
-    pub size: ::SIZE,
-}
+STRUCT!{struct BUTTON_SPLITINFO {
+    mask: ::UINT,
+    himlGlyph: HIMAGELIST,
+    uSplitStyle: ::UINT,
+    size: ::SIZE,
+}}
 pub type PBUTTON_SPLITINFO = *mut BUTTON_SPLITINFO;
 pub const BCM_SETDROPDOWNSTATE: ::UINT = BCM_FIRST + 0x0006;
 pub const BCM_SETSPLITINFO: ::UINT = BCM_FIRST + 0x0007;
@@ -3550,11 +3405,10 @@ pub const BCM_GETNOTE: ::UINT = BCM_FIRST + 0x000A;
 pub const BCM_GETNOTELENGTH: ::UINT = BCM_FIRST + 0x000B;
 pub const BCM_SETSHIELD: ::UINT = BCM_FIRST + 0x000C;
 pub const BCCL_NOGLYPH: HIMAGELIST = (0 - 1) as HIMAGELIST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NMBCDROPDOWN {
-    pub hdr: ::NMHDR,
-    pub rcButton: ::RECT,
-}
+STRUCT!{struct NMBCDROPDOWN {
+    hdr: ::NMHDR,
+    rcButton: ::RECT,
+}}
 pub type LPNMBCDROPDOWN = *mut NMBCDROPDOWN;
 pub const BCN_DROPDOWN: ::UINT = BCN_FIRST + 0x0002;
 pub const EM_SETCUEBANNER: ::UINT = ECM_FIRST + 1;
@@ -3565,13 +3419,12 @@ pub const EM_SETHILITE: ::UINT = ECM_FIRST + 5;
 pub const EM_GETHILITE: ::UINT = ECM_FIRST + 6;
 pub const EM_NOSETFOCUS: ::UINT = ECM_FIRST + 7;
 pub const EM_TAKEFOCUS: ::UINT = ECM_FIRST + 8;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct EDITBALLOONTIP {
-    pub cbStruct: ::DWORD,
-    pub pszTitle: ::LPCWSTR,
-    pub pszText: ::LPCWSTR,
-    pub ttiIcon: ::INT,
-}
+STRUCT!{struct EDITBALLOONTIP {
+    cbStruct: ::DWORD,
+    pszTitle: ::LPCWSTR,
+    pszText: ::LPCWSTR,
+    ttiIcon: ::INT,
+}}
 pub type PEDITBALLOONTIP = *mut EDITBALLOONTIP;
 pub const CB_SETMINVISIBLE: ::UINT = CBM_FIRST + 1;
 pub const CB_GETMINVISIBLE: ::UINT = CBM_FIRST + 2;
@@ -3633,11 +3486,10 @@ pub enum TASKDIALOG_NOTIFICATIONS {
     TDN_HELP = 9,
     TDN_EXPANDO_BUTTON_CLICKED = 10,
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TASKDIALOG_BUTTON {
-    pub nButtonID: ::c_int,
-    pub pszButtonText: ::PCWSTR,
-}
+STRUCT!{struct TASKDIALOG_BUTTON {
+    nButtonID: ::c_int,
+    pszButtonText: ::PCWSTR,
+}}
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum TASKDIALOG_ELEMENTS {
     TDE_CONTENT,
@@ -3719,11 +3571,10 @@ pub struct DPA {
     unused: ::c_void,
 }
 pub type HDPA = *mut DPA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DPASTREAMINFO {
-    pub iPos: ::c_int,
-    pub pvItem: *mut ::c_void,
-}
+STRUCT!{struct DPASTREAMINFO {
+    iPos: ::c_int,
+    pvItem: *mut ::c_void,
+}}
 pub type PFNDPASTREAM = Option<unsafe extern "system" fn(
     pinfo: *mut DPASTREAMINFO, pstream: *mut ::IStream, pvInstData: *mut ::c_void,
 ) -> ::HRESULT>;

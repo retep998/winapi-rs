@@ -188,40 +188,36 @@ ENUM!{enum READER_SEL_REQUEST_MATCH_TYPE {
     RSR_MATCH_TYPE_SERIAL_NUMBER,
     RSR_MATCH_TYPE_ALL_CARDS,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct READER_SEL_REQUEST_ReaderAndContainerParameter {
-    pub cbReaderNameOffset: ::DWORD,
-    pub cchReaderNameLength: ::DWORD,
-    pub cbContainerNameOffset: ::DWORD,
-    pub cchContainerNameLength: ::DWORD,
-    pub dwDesiredCardModuleVersion: ::DWORD,
-    pub dwCspFlags: ::DWORD,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct READER_SEL_REQUEST_SerialNumberParameter {
-    pub cbSerialNumberOffset: ::DWORD,
-    pub cbSerialNumberLength: ::DWORD,
-    pub dwDesiredCardModuleVersion: ::DWORD,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct READER_SEL_REQUEST {
-    pub dwShareMode: ::DWORD,
-    pub dwPreferredProtocols: ::DWORD,
-    pub MatchType: READER_SEL_REQUEST_MATCH_TYPE,
-    pub ReaderAndContainerParameter: READER_SEL_REQUEST_ReaderAndContainerParameter,
-}
+STRUCT!{struct READER_SEL_REQUEST_ReaderAndContainerParameter {
+    cbReaderNameOffset: ::DWORD,
+    cchReaderNameLength: ::DWORD,
+    cbContainerNameOffset: ::DWORD,
+    cchContainerNameLength: ::DWORD,
+    dwDesiredCardModuleVersion: ::DWORD,
+    dwCspFlags: ::DWORD,
+}}
+STRUCT!{struct READER_SEL_REQUEST_SerialNumberParameter {
+    cbSerialNumberOffset: ::DWORD,
+    cbSerialNumberLength: ::DWORD,
+    dwDesiredCardModuleVersion: ::DWORD,
+}}
+STRUCT!{struct READER_SEL_REQUEST {
+    dwShareMode: ::DWORD,
+    dwPreferredProtocols: ::DWORD,
+    MatchType: READER_SEL_REQUEST_MATCH_TYPE,
+    ReaderAndContainerParameter: READER_SEL_REQUEST_ReaderAndContainerParameter,
+}}
 UNION!(
     READER_SEL_REQUEST, ReaderAndContainerParameter, SerialNumberParameter,
     SerialNumberParameter_mut, READER_SEL_REQUEST_SerialNumberParameter
 );
 pub type PREADER_SEL_REQUEST = *mut READER_SEL_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct READER_SEL_RESPONSE {
-    pub cbReaderNameOffset: ::DWORD,
-    pub cchReaderNameLength: ::DWORD,
-    pub cbCardNameOffset: ::DWORD,
-    pub cchCardNameLength: ::DWORD,
-}
+STRUCT!{struct READER_SEL_RESPONSE {
+    cbReaderNameOffset: ::DWORD,
+    cchReaderNameLength: ::DWORD,
+    cbCardNameOffset: ::DWORD,
+    cchCardNameLength: ::DWORD,
+}}
 pub type PREADER_SEL_RESPONSE = *mut READER_SEL_RESPONSE;
 #[repr(C)] #[derive(Copy)]
 pub struct OPENCARDNAMEA {

@@ -631,11 +631,10 @@ pub const FSCTL_UPDATE_OVERLAY: ::DWORD = CTL_CODE!(FILE_DEVICE_FILE_SYSTEM, 206
 //    FILE_SPECIAL_ACCESS);
 //pub const IOCTL_AVIO_MODIFY_STREAM: ::DWORD = CTL_CODE!(FILE_DEVICE_AVIO, 3, METHOD_BUFFERED,
 //    FILE_SPECIAL_ACCESS);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PATHNAME_BUFFER {
-    pub PathNameLength: ::DWORD,
-    pub Name: [::WCHAR; 1],
-}
+STRUCT!{struct PATHNAME_BUFFER {
+    PathNameLength: ::DWORD,
+    Name: [::WCHAR; 1],
+}}
 pub type PPATHNAME_BUFFER = *mut PATHNAME_BUFFER;
 #[repr(C)] #[derive(Copy)]
 pub struct FSCTL_QUERY_FAT_BPB_BUFFER {
@@ -643,123 +642,109 @@ pub struct FSCTL_QUERY_FAT_BPB_BUFFER {
 }
 impl Clone for FSCTL_QUERY_FAT_BPB_BUFFER {fn clone(&self) -> FSCTL_QUERY_FAT_BPB_BUFFER { *self }}
 pub type PFSCTL_QUERY_FAT_BPB_BUFFER = *mut FSCTL_QUERY_FAT_BPB_BUFFER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NTFS_VOLUME_DATA_BUFFER {
-    pub VolumeSerialNumber: ::LARGE_INTEGER,
-    pub NumberSectors: ::LARGE_INTEGER,
-    pub TotalClusters: ::LARGE_INTEGER,
-    pub FreeClusters: ::LARGE_INTEGER,
-    pub TotalReserved: ::LARGE_INTEGER,
-    pub BytesPerSector: ::DWORD,
-    pub BytesPerCluster: ::DWORD,
-    pub BytesPerFileRecordSegment: ::DWORD,
-    pub ClustersPerFileRecordSegment: ::DWORD,
-    pub MftValidDataLength: ::LARGE_INTEGER,
-    pub MftStartLcn: ::LARGE_INTEGER,
-    pub Mft2StartLcn: ::LARGE_INTEGER,
-    pub MftZoneStart: ::LARGE_INTEGER,
-    pub MftZoneEnd: ::LARGE_INTEGER,
-}
+STRUCT!{struct NTFS_VOLUME_DATA_BUFFER {
+    VolumeSerialNumber: ::LARGE_INTEGER,
+    NumberSectors: ::LARGE_INTEGER,
+    TotalClusters: ::LARGE_INTEGER,
+    FreeClusters: ::LARGE_INTEGER,
+    TotalReserved: ::LARGE_INTEGER,
+    BytesPerSector: ::DWORD,
+    BytesPerCluster: ::DWORD,
+    BytesPerFileRecordSegment: ::DWORD,
+    ClustersPerFileRecordSegment: ::DWORD,
+    MftValidDataLength: ::LARGE_INTEGER,
+    MftStartLcn: ::LARGE_INTEGER,
+    Mft2StartLcn: ::LARGE_INTEGER,
+    MftZoneStart: ::LARGE_INTEGER,
+    MftZoneEnd: ::LARGE_INTEGER,
+}}
 pub type PNTFS_VOLUME_DATA_BUFFER = *mut NTFS_VOLUME_DATA_BUFFER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NTFS_EXTENDED_VOLUME_DATA {
-    pub ByteCount: ::DWORD,
-    pub MajorVersion: ::WORD,
-    pub MinorVersion: ::WORD,
-    pub BytesPerPhysicalSector: ::DWORD,
-    pub LfsMajorVersion: ::WORD,
-    pub LfsMinorVersion: ::WORD,
-}
+STRUCT!{struct NTFS_EXTENDED_VOLUME_DATA {
+    ByteCount: ::DWORD,
+    MajorVersion: ::WORD,
+    MinorVersion: ::WORD,
+    BytesPerPhysicalSector: ::DWORD,
+    LfsMajorVersion: ::WORD,
+    LfsMinorVersion: ::WORD,
+}}
 pub type PNTFS_EXTENDED_VOLUME_DATA = *mut NTFS_EXTENDED_VOLUME_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct REFS_VOLUME_DATA_BUFFER {
-    pub ByteCount: ::DWORD,
-    pub MajorVersion: ::DWORD,
-    pub MinorVersion: ::DWORD,
-    pub BytesPerPhysicalSector: ::DWORD,
-    pub VolumeSerialNumber: ::LARGE_INTEGER,
-    pub NumberSectors: ::LARGE_INTEGER,
-    pub TotalClusters: ::LARGE_INTEGER,
-    pub FreeClusters: ::LARGE_INTEGER,
-    pub TotalReserved: ::LARGE_INTEGER,
-    pub BytesPerSector: ::DWORD,
-    pub BytesPerCluster: ::DWORD,
-    pub MaximumSizeOfResidentFile: ::LARGE_INTEGER,
-    pub Reserved: [::LARGE_INTEGER; 10],
-}
+STRUCT!{struct REFS_VOLUME_DATA_BUFFER {
+    ByteCount: ::DWORD,
+    MajorVersion: ::DWORD,
+    MinorVersion: ::DWORD,
+    BytesPerPhysicalSector: ::DWORD,
+    VolumeSerialNumber: ::LARGE_INTEGER,
+    NumberSectors: ::LARGE_INTEGER,
+    TotalClusters: ::LARGE_INTEGER,
+    FreeClusters: ::LARGE_INTEGER,
+    TotalReserved: ::LARGE_INTEGER,
+    BytesPerSector: ::DWORD,
+    BytesPerCluster: ::DWORD,
+    MaximumSizeOfResidentFile: ::LARGE_INTEGER,
+    Reserved: [::LARGE_INTEGER; 10],
+}}
 pub type PREFS_VOLUME_DATA_BUFFER = *mut REFS_VOLUME_DATA_BUFFER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct STARTING_LCN_INPUT_BUFFER {
-    pub StartingLcn: ::LARGE_INTEGER,
-}
+STRUCT!{struct STARTING_LCN_INPUT_BUFFER {
+    StartingLcn: ::LARGE_INTEGER,
+}}
 pub type PSTARTING_LCN_INPUT_BUFFER = *mut STARTING_LCN_INPUT_BUFFER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct VOLUME_BITMAP_BUFFER {
-    pub StartingLcn: ::LARGE_INTEGER,
-    pub BitmapSize: ::LARGE_INTEGER,
-    pub Buffer: [::BYTE; 1],
-}
+STRUCT!{struct VOLUME_BITMAP_BUFFER {
+    StartingLcn: ::LARGE_INTEGER,
+    BitmapSize: ::LARGE_INTEGER,
+    Buffer: [::BYTE; 1],
+}}
 pub type PVOLUME_BITMAP_BUFFER = *mut VOLUME_BITMAP_BUFFER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct STARTING_VCN_INPUT_BUFFER {
-    pub StartingVcn: ::LARGE_INTEGER,
-}
+STRUCT!{struct STARTING_VCN_INPUT_BUFFER {
+    StartingVcn: ::LARGE_INTEGER,
+}}
 pub type PSTARTING_VCN_INPUT_BUFFER = *mut STARTING_VCN_INPUT_BUFFER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RETRIEVAL_POINTERS_BUFFER_INTERNAL {
-    pub NextVcn: ::LARGE_INTEGER,
-    pub Lcn: ::LARGE_INTEGER,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RETRIEVAL_POINTERS_BUFFER {
-    pub ExtentCount: ::DWORD,
-    pub StartingVcn: ::LARGE_INTEGER,
-    pub Extents: [RETRIEVAL_POINTERS_BUFFER_INTERNAL; 1],
-}
+STRUCT!{struct RETRIEVAL_POINTERS_BUFFER_INTERNAL {
+    NextVcn: ::LARGE_INTEGER,
+    Lcn: ::LARGE_INTEGER,
+}}
+STRUCT!{struct RETRIEVAL_POINTERS_BUFFER {
+    ExtentCount: ::DWORD,
+    StartingVcn: ::LARGE_INTEGER,
+    Extents: [RETRIEVAL_POINTERS_BUFFER_INTERNAL; 1],
+}}
 pub type PRETRIEVAL_POINTERS_BUFFER = *mut RETRIEVAL_POINTERS_BUFFER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NTFS_FILE_RECORD_INPUT_BUFFER {
-    pub FileReferenceNumber: ::LARGE_INTEGER,
-}
+STRUCT!{struct NTFS_FILE_RECORD_INPUT_BUFFER {
+    FileReferenceNumber: ::LARGE_INTEGER,
+}}
 pub type PNTFS_FILE_RECORD_INPUT_BUFFER = *mut NTFS_FILE_RECORD_INPUT_BUFFER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NTFS_FILE_RECORD_OUTPUT_BUFFER {
-    pub FileReferenceNumber: ::LARGE_INTEGER,
-    pub FileRecordLength: ::DWORD,
-    pub FileRecordBuffer: [::BYTE; 1],
-}
+STRUCT!{struct NTFS_FILE_RECORD_OUTPUT_BUFFER {
+    FileReferenceNumber: ::LARGE_INTEGER,
+    FileRecordLength: ::DWORD,
+    FileRecordBuffer: [::BYTE; 1],
+}}
 pub type PNTFS_FILE_RECORD_OUTPUT_BUFFER = *mut NTFS_FILE_RECORD_OUTPUT_BUFFER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MOVE_FILE_DATA {
-    pub FileHandle: ::HANDLE,
-    pub StartingVcn: ::LARGE_INTEGER,
-    pub StartingLcn: ::LARGE_INTEGER,
-    pub ClusterCount: ::DWORD,
-}
+STRUCT!{struct MOVE_FILE_DATA {
+    FileHandle: ::HANDLE,
+    StartingVcn: ::LARGE_INTEGER,
+    StartingLcn: ::LARGE_INTEGER,
+    ClusterCount: ::DWORD,
+}}
 pub type PMOVE_FILE_DATA = *mut MOVE_FILE_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MOVE_FILE_RECORD_DATA {
-    pub FileHandle: ::HANDLE,
-    pub SourceFileRecord: ::LARGE_INTEGER,
-    pub TargetFileRecord: ::LARGE_INTEGER,
-}
+STRUCT!{struct MOVE_FILE_RECORD_DATA {
+    FileHandle: ::HANDLE,
+    SourceFileRecord: ::LARGE_INTEGER,
+    TargetFileRecord: ::LARGE_INTEGER,
+}}
 pub type PMOVE_FILE_RECORD_DATA = *mut MOVE_FILE_RECORD_DATA;
 //9207
 pub const IOCTL_VOLUME_BASE: ::DWORD = 0x00000056;
 pub const IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS: ::DWORD = CTL_CODE!(IOCTL_VOLUME_BASE, 0,
     METHOD_BUFFERED, FILE_ANY_ACCESS);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DISK_EXTENT {
-    pub DiskNumber: ::DWORD,
-    pub StartingOffset: ::LARGE_INTEGER,
-    pub ExtentLength: ::LARGE_INTEGER,
-}
+STRUCT!{struct DISK_EXTENT {
+    DiskNumber: ::DWORD,
+    StartingOffset: ::LARGE_INTEGER,
+    ExtentLength: ::LARGE_INTEGER,
+}}
 pub type PDISK_EXTENT = *mut DISK_EXTENT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct VOLUME_DISK_EXTENTS {
-    pub NumberOfDiskExtents: ::DWORD,
-    pub Extents: [DISK_EXTENT; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct VOLUME_DISK_EXTENTS {
+    NumberOfDiskExtents: ::DWORD,
+    Extents: [DISK_EXTENT; ::ANYSIZE_ARRAY],
+}}
 pub type PVOLUME_DISK_EXTENTS = *mut VOLUME_DISK_EXTENTS;
 pub const IOCTL_VOLUME_ONLINE: ::DWORD = CTL_CODE!(IOCTL_VOLUME_BASE, 2, METHOD_BUFFERED,
     FILE_READ_ACCESS | FILE_WRITE_ACCESS);

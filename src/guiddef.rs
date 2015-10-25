@@ -1,12 +1,11 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct GUID {
-    pub Data1: ::c_ulong,
-    pub Data2: ::c_ushort,
-    pub Data3: ::c_ushort,
-    pub Data4: [::c_uchar; 8],
-}
+STRUCT!{struct GUID {
+    Data1: ::c_ulong,
+    Data2: ::c_ushort,
+    Data3: ::c_ushort,
+    Data4: [::c_uchar; 8],
+}}
 pub type LPGUID = *mut GUID;
 pub type LPCGUID = *const GUID;
 pub type IID = GUID;

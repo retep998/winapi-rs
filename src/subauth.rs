@@ -1,25 +1,22 @@
 // Copyright © 2015, skdltmxn
 // Licensed under the MIT License <LICENSE.md>
 //! Types and macros for Subauthentication Packages.
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct UNICODE_STRING {
-    pub Length: ::USHORT,
-    pub MaximumLength: ::USHORT,
-    pub Buffer: ::PWSTR,
-}
+STRUCT!{struct UNICODE_STRING {
+    Length: ::USHORT,
+    MaximumLength: ::USHORT,
+    Buffer: ::PWSTR,
+}}
 pub type PUNICODE_STRING = *mut UNICODE_STRING;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct STRING {
-    pub Length: ::USHORT,
-    pub MaximumLength: ::USHORT,
-    pub Buffer: ::PCHAR,
-}
+STRUCT!{struct STRING {
+    Length: ::USHORT,
+    MaximumLength: ::USHORT,
+    Buffer: ::PCHAR,
+}}
 pub type PSTRING = *mut STRING;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct OLD_LARGE_INTEGER {
-    pub LowPart: ::ULONG,
-    pub HighPart: ::LONG,
-}
+STRUCT!{struct OLD_LARGE_INTEGER {
+    LowPart: ::ULONG,
+    HighPart: ::LONG,
+}}
 pub type POLD_LARGE_INTEGER = *mut OLD_LARGE_INTEGER;
 pub type SAM_HANDLE = ::PVOID;
 pub type PSAM_HANDLE = *mut ::PVOID;
@@ -55,72 +52,66 @@ pub const USER_COMPUTED_ACCOUNT_CONTROL_BITS: ::ULONG = USER_ACCOUNT_AUTO_LOCKED
 pub const SAM_DAYS_PER_WEEK: ::USHORT = 7;
 pub const SAM_HOURS_PER_WEEK: ::USHORT = 24 * SAM_DAYS_PER_WEEK;
 pub const SAM_MINUTES_PER_WEEK: ::USHORT = 60 * SAM_HOURS_PER_WEEK;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LOGON_HOURS {
-    pub UnitsPerWeek: ::USHORT,
-    pub LogonHours: ::PUCHAR,
-}
+STRUCT!{struct LOGON_HOURS {
+    UnitsPerWeek: ::USHORT,
+    LogonHours: ::PUCHAR,
+}}
 pub type PLOGON_HOURS = *mut LOGON_HOURS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SR_SECURITY_DESCRIPTOR {
-    pub Length: ::ULONG,
-    pub SecurityDescriptor: ::PUCHAR,
-}
+STRUCT!{struct SR_SECURITY_DESCRIPTOR {
+    Length: ::ULONG,
+    SecurityDescriptor: ::PUCHAR,
+}}
 pub type PSR_SECURITY_DESCRIPTOR = *mut SR_SECURITY_DESCRIPTOR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct USER_ALL_INFORMATION {
-    pub LastLogon: ::LARGE_INTEGER,
-    pub LastLogoff: ::LARGE_INTEGER,
-    pub PasswordLastSet: ::LARGE_INTEGER,
-    pub AccountExpires: ::LARGE_INTEGER,
-    pub PasswordCanChange: ::LARGE_INTEGER,
-    pub PasswordMustChange: ::LARGE_INTEGER,
-    pub UserName: UNICODE_STRING,
-    pub FullName: UNICODE_STRING,
-    pub HomeDirectory: UNICODE_STRING,
-    pub HomeDirectoryDrive: UNICODE_STRING,
-    pub ScriptPath: UNICODE_STRING,
-    pub ProfilePath: UNICODE_STRING,
-    pub AdminComment: UNICODE_STRING,
-    pub WorkStations: UNICODE_STRING,
-    pub UserComment: UNICODE_STRING,
-    pub Parameters: UNICODE_STRING,
-    pub LmPassword: UNICODE_STRING,
-    pub NtPassword: UNICODE_STRING,
-    pub PrivateData: UNICODE_STRING,
-    pub SecurityDescriptor: SR_SECURITY_DESCRIPTOR,
-    pub UserId: ::ULONG,
-    pub PrimaryGroupId: ::ULONG,
-    pub UserAccountControl: ::ULONG,
-    pub WhichFields: ::ULONG,
-    pub LogonHours: LOGON_HOURS,
-    pub BadPasswordCount: ::USHORT,
-    pub LogonCount: ::USHORT,
-    pub CountryCode: ::USHORT,
-    pub CodePage: ::USHORT,
-    pub LmPasswordPresent: ::BOOLEAN,
-    pub NtPasswordPresent: ::BOOLEAN,
-    pub PasswordExpired: ::BOOLEAN,
-    pub PrivateDataSensitive: ::BOOLEAN,
-}
+STRUCT!{struct USER_ALL_INFORMATION {
+    LastLogon: ::LARGE_INTEGER,
+    LastLogoff: ::LARGE_INTEGER,
+    PasswordLastSet: ::LARGE_INTEGER,
+    AccountExpires: ::LARGE_INTEGER,
+    PasswordCanChange: ::LARGE_INTEGER,
+    PasswordMustChange: ::LARGE_INTEGER,
+    UserName: UNICODE_STRING,
+    FullName: UNICODE_STRING,
+    HomeDirectory: UNICODE_STRING,
+    HomeDirectoryDrive: UNICODE_STRING,
+    ScriptPath: UNICODE_STRING,
+    ProfilePath: UNICODE_STRING,
+    AdminComment: UNICODE_STRING,
+    WorkStations: UNICODE_STRING,
+    UserComment: UNICODE_STRING,
+    Parameters: UNICODE_STRING,
+    LmPassword: UNICODE_STRING,
+    NtPassword: UNICODE_STRING,
+    PrivateData: UNICODE_STRING,
+    SecurityDescriptor: SR_SECURITY_DESCRIPTOR,
+    UserId: ::ULONG,
+    PrimaryGroupId: ::ULONG,
+    UserAccountControl: ::ULONG,
+    WhichFields: ::ULONG,
+    LogonHours: LOGON_HOURS,
+    BadPasswordCount: ::USHORT,
+    LogonCount: ::USHORT,
+    CountryCode: ::USHORT,
+    CodePage: ::USHORT,
+    LmPasswordPresent: ::BOOLEAN,
+    NtPasswordPresent: ::BOOLEAN,
+    PasswordExpired: ::BOOLEAN,
+    PrivateDataSensitive: ::BOOLEAN,
+}}
 pub type PUSER_ALL_INFORMATION = *mut USER_ALL_INFORMATION;
 pub const USER_ALL_PARAMETERS: ::ULONG = 0x00200000;
 pub const CLEAR_BLOCK_LENGTH: usize = 8;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CLEAR_BLOCK {
-    pub data: [::CHAR; CLEAR_BLOCK_LENGTH],
-}
+STRUCT!{struct CLEAR_BLOCK {
+    data: [::CHAR; CLEAR_BLOCK_LENGTH],
+}}
 pub type PCLEAR_BLOCK = *mut CLEAR_BLOCK;
 pub const CYPHER_BLOCK_LENGTH: usize = 8;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CYPHER_BLOCK {
-    pub data: [::CHAR; CYPHER_BLOCK_LENGTH],
-}
+STRUCT!{struct CYPHER_BLOCK {
+    data: [::CHAR; CYPHER_BLOCK_LENGTH],
+}}
 pub type PCYPHER_BLOCK = *mut CYPHER_BLOCK;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LM_OWF_PASSWORD {
-    pub data: [CYPHER_BLOCK; 2],
-}
+STRUCT!{struct LM_OWF_PASSWORD {
+    data: [CYPHER_BLOCK; 2],
+}}
 pub type PLM_OWF_PASSWORD = *mut LM_OWF_PASSWORD;
 pub type LM_CHALLENGE = CLEAR_BLOCK;
 pub type PLM_CHALLENGE = *mut LM_CHALLENGE;
@@ -129,10 +120,9 @@ pub type PNT_OWF_PASSWORD = *mut NT_OWF_PASSWORD;
 pub type NT_CHALLENGE = LM_CHALLENGE;
 pub type PNT_CHALLENGE = *mut NT_CHALLENGE;
 pub const USER_SESSION_KEY_LENGTH: usize = CYPHER_BLOCK_LENGTH * 2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct USER_SESSION_KEY {
-    pub data: [CYPHER_BLOCK; 2],
-}
+STRUCT!{struct USER_SESSION_KEY {
+    data: [CYPHER_BLOCK; 2],
+}}
 pub type PUSER_SESSION_KEY = *mut USER_SESSION_KEY;
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum NETLOGON_LOGON_INFO_CLASS {
@@ -144,59 +134,53 @@ pub enum NETLOGON_LOGON_INFO_CLASS {
     NetlogonNetworkTransitiveInformation,
     NetlogonServiceTransitiveInformation,
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NETLOGON_LOGON_IDENTITY_INFO {
-    pub LogonDomainName: UNICODE_STRING,
-    pub ParameterControl: ::ULONG,
-    pub LogonId: OLD_LARGE_INTEGER,
-    pub UserName: UNICODE_STRING,
-    pub Workstation: UNICODE_STRING,
-}
+STRUCT!{struct NETLOGON_LOGON_IDENTITY_INFO {
+    LogonDomainName: UNICODE_STRING,
+    ParameterControl: ::ULONG,
+    LogonId: OLD_LARGE_INTEGER,
+    UserName: UNICODE_STRING,
+    Workstation: UNICODE_STRING,
+}}
 pub type PNETLOGON_LOGON_IDENTITY_INFO = *mut NETLOGON_LOGON_IDENTITY_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NETLOGON_INTERACTIVE_INFO {
-    pub Identity: NETLOGON_LOGON_IDENTITY_INFO,
-    pub LmOwfPassword: LM_OWF_PASSWORD,
-    pub NtOwfPassword: NT_OWF_PASSWORD,
-}
+STRUCT!{struct NETLOGON_INTERACTIVE_INFO {
+    Identity: NETLOGON_LOGON_IDENTITY_INFO,
+    LmOwfPassword: LM_OWF_PASSWORD,
+    NtOwfPassword: NT_OWF_PASSWORD,
+}}
 pub type PNETLOGON_INTERACTIVE_INFO = *mut NETLOGON_INTERACTIVE_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NETLOGON_SERVICE_INFO {
-    pub Identity: NETLOGON_LOGON_IDENTITY_INFO,
-    pub LmOwfPassword: LM_OWF_PASSWORD,
-    pub NtOwfPassword: NT_OWF_PASSWORD,
-}
+STRUCT!{struct NETLOGON_SERVICE_INFO {
+    Identity: NETLOGON_LOGON_IDENTITY_INFO,
+    LmOwfPassword: LM_OWF_PASSWORD,
+    NtOwfPassword: NT_OWF_PASSWORD,
+}}
 pub type PNETLOGON_SERVICE_INFO = *mut NETLOGON_SERVICE_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NETLOGON_NETWORK_INFO {
-    pub Identity: NETLOGON_LOGON_IDENTITY_INFO,
-    pub LmChallenge: LM_CHALLENGE,
-    pub NtChallengeResponse: STRING,
-    pub LmChallengeResponse: STRING,
-}
+STRUCT!{struct NETLOGON_NETWORK_INFO {
+    Identity: NETLOGON_LOGON_IDENTITY_INFO,
+    LmChallenge: LM_CHALLENGE,
+    NtChallengeResponse: STRING,
+    LmChallengeResponse: STRING,
+}}
 pub type PNETLOGON_NETWORK_INFO = *mut NETLOGON_NETWORK_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NETLOGON_GENERIC_INFO {
-    pub Identity: NETLOGON_LOGON_IDENTITY_INFO,
-    pub PackageName: UNICODE_STRING,
-    pub DataLength: ::ULONG,
-    pub LogonData: ::PUCHAR,
-}
+STRUCT!{struct NETLOGON_GENERIC_INFO {
+    Identity: NETLOGON_LOGON_IDENTITY_INFO,
+    PackageName: UNICODE_STRING,
+    DataLength: ::ULONG,
+    LogonData: ::PUCHAR,
+}}
 pub type PNETLOGON_GENERIC_INFO = *mut NETLOGON_GENERIC_INFO;
 pub const MSV1_0_PASSTHRU: ::ULONG = 0x01;
 pub const MSV1_0_GUEST_LOGON: ::ULONG = 0x02;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSV1_0_VALIDATION_INFO {
-    pub LogoffTime: ::LARGE_INTEGER,
-    pub KickoffTime: ::LARGE_INTEGER,
-    pub LogonServer: UNICODE_STRING,
-    pub LogonDomainName: UNICODE_STRING,
-    pub SessionKey: USER_SESSION_KEY,
-    pub Authoritative: ::BOOLEAN,
-    pub UserFlags: ::ULONG,
-    pub WhichFields: ::ULONG,
-    pub UserId: ::ULONG,
-}
+STRUCT!{struct MSV1_0_VALIDATION_INFO {
+    LogoffTime: ::LARGE_INTEGER,
+    KickoffTime: ::LARGE_INTEGER,
+    LogonServer: UNICODE_STRING,
+    LogonDomainName: UNICODE_STRING,
+    SessionKey: USER_SESSION_KEY,
+    Authoritative: ::BOOLEAN,
+    UserFlags: ::ULONG,
+    WhichFields: ::ULONG,
+    UserId: ::ULONG,
+}}
 pub type PMSV1_0_VALIDATION_INFO = *mut MSV1_0_VALIDATION_INFO;
 pub const MSV1_0_VALIDATION_LOGOFF_TIME: ::ULONG = 0x00000001;
 pub const MSV1_0_VALIDATION_KICKOFF_TIME: ::ULONG = 0x00000002;

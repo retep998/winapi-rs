@@ -1,13 +1,12 @@
 // Copyright © 2015, Corey Richardson
 // Licensed under the MIT License <LICENSE.md>
 //! Direct3D capabilities include file
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DVSHADERCAPS2_0 {
-    pub Caps: ::DWORD,
-    pub DynamicFlowControlDepth: ::INT,
-    pub NumTemps: ::INT,
-    pub StaticFlowControlDepth: ::INT,
-}
+STRUCT!{struct D3DVSHADERCAPS2_0 {
+    Caps: ::DWORD,
+    DynamicFlowControlDepth: ::INT,
+    NumTemps: ::INT,
+    StaticFlowControlDepth: ::INT,
+}}
 pub const D3DVS20CAPS_PREDICATION: ::DWORD = 1 << 0;
 pub const D3DVS20_MAX_DYNAMICFLOWCONTROLDEPTH: ::DWORD = 24;
 pub const D3DVS20_MIN_DYNAMICFLOWCONTROLDEPTH: ::DWORD = 0;
@@ -15,14 +14,13 @@ pub const D3DVS20_MAX_NUMTEMPS: ::DWORD = 32;
 pub const D3DVS20_MIN_NUMTEMPS: ::DWORD = 12;
 pub const D3DVS20_MAX_STATICFLOWCONTROLDEPTH: ::DWORD = 4;
 pub const D3DVS20_MIN_STATICFLOWCONTROLDEPTH: ::DWORD = 1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DPSHADERCAPS2_0 {
-    pub Caps: ::DWORD,
-    pub DynamicFlowControlDepth: ::INT,
-    pub NumTemps: ::INT,
-    pub StaticFlowControlDepth: ::INT,
-    pub NumInstructionSlots: ::INT,
-}
+STRUCT!{struct D3DPSHADERCAPS2_0 {
+    Caps: ::DWORD,
+    DynamicFlowControlDepth: ::INT,
+    NumTemps: ::INT,
+    StaticFlowControlDepth: ::INT,
+    NumInstructionSlots: ::INT,
+}}
 pub const D3DPS20CAPS_ARBITRARYSWIZZLE: ::DWORD = 1 << 0;
 pub const D3DPS20CAPS_GRADIENTINSTRUCTIONS: ::DWORD = 1 << 1;
 pub const D3DPS20CAPS_PREDICATION: ::DWORD = 1 << 2;
@@ -38,12 +36,11 @@ pub const D3DPS20_MAX_NUMINSTRUCTIONSLOTS: ::DWORD = 512;
 pub const D3DPS20_MIN_NUMINSTRUCTIONSLOTS: ::DWORD = 96;
 pub const D3DMIN30SHADERINSTRUCTIONS: ::DWORD = 512;
 pub const D3DMAX30SHADERINSTRUCTIONS: ::DWORD = 32768;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DOVERLAYCAPS {
-    pub Caps: ::UINT,
-    pub MaxOverlayDisplayWidth: ::UINT,
-    pub MaxOverlayDisplayHeight: ::UINT,
-}
+STRUCT!{struct D3DOVERLAYCAPS {
+    Caps: ::UINT,
+    MaxOverlayDisplayWidth: ::UINT,
+    MaxOverlayDisplayHeight: ::UINT,
+}}
 pub const D3DOVERLAYCAPS_FULLRANGERGB: ::DWORD = 0x00000001;
 pub const D3DOVERLAYCAPS_LIMITEDRANGERGB: ::DWORD = 0x00000002;
 pub const D3DOVERLAYCAPS_YCbCr_BT601: ::DWORD = 0x00000004;
@@ -52,14 +49,13 @@ pub const D3DOVERLAYCAPS_YCbCr_BT601_xvYCC: ::DWORD = 0x00000010;
 pub const D3DOVERLAYCAPS_YCbCr_BT709_xvYCC: ::DWORD = 0x00000020;
 pub const D3DOVERLAYCAPS_STRETCHX: ::DWORD = 0x00000040;
 pub const D3DOVERLAYCAPS_STRETCHY: ::DWORD = 0x00000080;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DCONTENTPROTECTIONCAPS {
-    pub Caps: ::DWORD,
-    pub KeyExchangeType: ::GUID,
-    pub BufferAlignmentStart: ::UINT,
-    pub BlockAlignmentSize: ::UINT,
-    pub ProtectedMemorySize: ::ULONGLONG,
-}
+STRUCT!{struct D3DCONTENTPROTECTIONCAPS {
+    Caps: ::DWORD,
+    KeyExchangeType: ::GUID,
+    BufferAlignmentStart: ::UINT,
+    BlockAlignmentSize: ::UINT,
+    ProtectedMemorySize: ::ULONGLONG,
+}}
 pub const D3DCPCAPS_SOFTWARE: ::DWORD = 0x00000001;
 pub const D3DCPCAPS_HARDWARE: ::DWORD = 0x00000002;
 pub const D3DCPCAPS_PROTECTIONALWAYSON: ::DWORD = 0x00000004;
@@ -78,78 +74,77 @@ DEFINE_GUID!(D3DKEYEXCHANGE_RSAES_OAEP, 0xc1949895, 0xd72a, 0x4a1d,
     0x8e, 0x5d, 0xed, 0x85, 0x7d, 0x17, 0x15, 0x20);
 DEFINE_GUID!(D3DKEYEXCHANGE_DXVA, 0x43d3775c, 0x38e5, 0x4924, 0x8d,
     0x86, 0xd3, 0xfc, 0xcf, 0x15, 0x3e, 0x9b);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DCAPS9 {
-    pub DeviceType: ::D3DDEVTYPE,
-    pub AdapterOrdinal: ::UINT,
-    pub Caps: ::DWORD,
-    pub Caps2: ::DWORD,
-    pub Caps3: ::DWORD,
-    pub PresentationIntervals: ::DWORD,
-    pub CursorCaps: ::DWORD,
-    pub DevCaps: ::DWORD,
-    pub PrimitiveMiscCaps: ::DWORD,
-    pub RasterCaps: ::DWORD,
-    pub ZCmpCaps: ::DWORD,
-    pub SrcBlendCaps: ::DWORD,
-    pub DestBlendCaps: ::DWORD,
-    pub AlphaCmpCaps: ::DWORD,
-    pub ShadeCaps: ::DWORD,
-    pub TextureCaps: ::DWORD,
-    pub TextureFilterCaps: ::DWORD,
-    pub CubeTextureFilterCaps: ::DWORD,
-    pub VolumeTextureFilterCaps: ::DWORD,
-    pub TextureAddressCaps: ::DWORD,
-    pub VolumeTextureAddressCaps: ::DWORD,
-    pub LineCaps: ::DWORD,
-    pub MaxTextureWidth: ::DWORD,
-    pub MaxTextureHeight: ::DWORD,
-    pub MaxVolumeExtent: ::DWORD,
-    pub MaxTextureRepeat: ::DWORD,
-    pub MaxTextureAspectRatio: ::DWORD,
-    pub MaxAnisotropy: ::DWORD,
-    pub MaxVertexW: ::c_float,
-    pub GuardBandLeft: ::c_float,
-    pub GuardBandTop: ::c_float,
-    pub GuardBandRight: ::c_float,
-    pub GuardBandBottom: ::c_float,
-    pub ExtentsAdjust: ::c_float,
-    pub StencilCaps: ::DWORD,
-    pub FVFCaps: ::DWORD,
-    pub TextureOpCaps: ::DWORD,
-    pub MaxTextureBlendStages: ::DWORD,
-    pub MaxSimultaneousTextures: ::DWORD,
-    pub VertexProcessingCaps: ::DWORD,
-    pub MaxActiveLights: ::DWORD,
-    pub MaxUserClipPlanes: ::DWORD,
-    pub MaxVertexBlendMatrices: ::DWORD,
-    pub MaxVertexBlendMatrixIndex: ::DWORD,
-    pub MaxPointSize: ::c_float,
-    pub MaxPrimitiveCount: ::DWORD,
-    pub MaxVertexIndex: ::DWORD,
-    pub MaxStreams: ::DWORD,
-    pub MaxStreamStride: ::DWORD,
-    pub VertexShaderVersion: ::DWORD,
-    pub MaxVertexShaderConst: ::DWORD,
-    pub PixelShaderVersion: ::DWORD,
-    pub PixelShader1xMaxValue: ::c_float,
-    pub DevCaps2: ::DWORD,
-    pub MaxNpatchTessellationLevel: ::c_float,
-    pub Reserved5: ::DWORD,
-    pub MasterAdapterOrdinal: ::UINT,
-    pub AdapterOrdinalInGroup: ::UINT,
-    pub NumberOfAdaptersInGroup: ::UINT,
-    pub DeclTypes: ::DWORD,
-    pub NumSimultaneousRTs: ::DWORD,
-    pub StretchRectFilterCaps: ::DWORD,
-    pub VS20Caps: ::D3DVSHADERCAPS2_0,
-    pub PS20Caps: ::D3DPSHADERCAPS2_0,
-    pub VertexTextureFilterCaps: ::DWORD,
-    pub MaxVShaderInstructionsExecuted: ::DWORD,
-    pub MaxPShaderInstructionsExecuted: ::DWORD,
-    pub MaxVertexShader30InstructionSlots: ::DWORD,
-    pub MaxPixelShader30InstructionSlots: ::DWORD,
-}
+STRUCT!{struct D3DCAPS9 {
+    DeviceType: ::D3DDEVTYPE,
+    AdapterOrdinal: ::UINT,
+    Caps: ::DWORD,
+    Caps2: ::DWORD,
+    Caps3: ::DWORD,
+    PresentationIntervals: ::DWORD,
+    CursorCaps: ::DWORD,
+    DevCaps: ::DWORD,
+    PrimitiveMiscCaps: ::DWORD,
+    RasterCaps: ::DWORD,
+    ZCmpCaps: ::DWORD,
+    SrcBlendCaps: ::DWORD,
+    DestBlendCaps: ::DWORD,
+    AlphaCmpCaps: ::DWORD,
+    ShadeCaps: ::DWORD,
+    TextureCaps: ::DWORD,
+    TextureFilterCaps: ::DWORD,
+    CubeTextureFilterCaps: ::DWORD,
+    VolumeTextureFilterCaps: ::DWORD,
+    TextureAddressCaps: ::DWORD,
+    VolumeTextureAddressCaps: ::DWORD,
+    LineCaps: ::DWORD,
+    MaxTextureWidth: ::DWORD,
+    MaxTextureHeight: ::DWORD,
+    MaxVolumeExtent: ::DWORD,
+    MaxTextureRepeat: ::DWORD,
+    MaxTextureAspectRatio: ::DWORD,
+    MaxAnisotropy: ::DWORD,
+    MaxVertexW: ::c_float,
+    GuardBandLeft: ::c_float,
+    GuardBandTop: ::c_float,
+    GuardBandRight: ::c_float,
+    GuardBandBottom: ::c_float,
+    ExtentsAdjust: ::c_float,
+    StencilCaps: ::DWORD,
+    FVFCaps: ::DWORD,
+    TextureOpCaps: ::DWORD,
+    MaxTextureBlendStages: ::DWORD,
+    MaxSimultaneousTextures: ::DWORD,
+    VertexProcessingCaps: ::DWORD,
+    MaxActiveLights: ::DWORD,
+    MaxUserClipPlanes: ::DWORD,
+    MaxVertexBlendMatrices: ::DWORD,
+    MaxVertexBlendMatrixIndex: ::DWORD,
+    MaxPointSize: ::c_float,
+    MaxPrimitiveCount: ::DWORD,
+    MaxVertexIndex: ::DWORD,
+    MaxStreams: ::DWORD,
+    MaxStreamStride: ::DWORD,
+    VertexShaderVersion: ::DWORD,
+    MaxVertexShaderConst: ::DWORD,
+    PixelShaderVersion: ::DWORD,
+    PixelShader1xMaxValue: ::c_float,
+    DevCaps2: ::DWORD,
+    MaxNpatchTessellationLevel: ::c_float,
+    Reserved5: ::DWORD,
+    MasterAdapterOrdinal: ::UINT,
+    AdapterOrdinalInGroup: ::UINT,
+    NumberOfAdaptersInGroup: ::UINT,
+    DeclTypes: ::DWORD,
+    NumSimultaneousRTs: ::DWORD,
+    StretchRectFilterCaps: ::DWORD,
+    VS20Caps: ::D3DVSHADERCAPS2_0,
+    PS20Caps: ::D3DPSHADERCAPS2_0,
+    VertexTextureFilterCaps: ::DWORD,
+    MaxVShaderInstructionsExecuted: ::DWORD,
+    MaxPShaderInstructionsExecuted: ::DWORD,
+    MaxVertexShader30InstructionSlots: ::DWORD,
+    MaxPixelShader30InstructionSlots: ::DWORD,
+}}
 pub const D3DCAPS_OVERLAY: ::DWORD = 0x00000800;
 pub const D3DCAPS_READ_SCANLINE: ::DWORD = 0x00020000;
 pub const D3DCAPS2_FULLSCREENGAMMA: ::DWORD = 0x00020000;

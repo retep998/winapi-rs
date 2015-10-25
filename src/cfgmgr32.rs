@@ -99,57 +99,51 @@ pub const fMD_NonCacheable: ::DWORD = 0x0;
 pub const fMD_Cacheable: ::DWORD = 0x20;
 pub const fMD_WINDOW_DECODE: ::DWORD = 0x40;
 pub const fMD_MEMORY_BAR: ::DWORD = 0x80;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MEM_RANGE {
-    pub MR_Align: ::DWORDLONG,
-    pub MR_nBytes: ::ULONG,
-    pub MR_Min: ::DWORDLONG,
-    pub MR_Max: ::DWORDLONG,
-    pub MR_Flags: ::DWORD,
-    pub MR_Reserved: ::DWORD,
-}
+STRUCT!{struct MEM_RANGE {
+    MR_Align: ::DWORDLONG,
+    MR_nBytes: ::ULONG,
+    MR_Min: ::DWORDLONG,
+    MR_Max: ::DWORDLONG,
+    MR_Flags: ::DWORD,
+    MR_Reserved: ::DWORD,
+}}
 pub type PMEM_RANGE = *mut MEM_RANGE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MEM_DES {
-    pub MD_Count: ::DWORD,
-    pub MD_Type: ::DWORD,
-    pub MD_Alloc_Base: ::DWORDLONG,
-    pub MD_Alloc_End: ::DWORDLONG,
-    pub MD_Flags: ::DWORD,
-    pub MD_Reserved: ::DWORD,
-}
+STRUCT!{struct MEM_DES {
+    MD_Count: ::DWORD,
+    MD_Type: ::DWORD,
+    MD_Alloc_Base: ::DWORDLONG,
+    MD_Alloc_End: ::DWORDLONG,
+    MD_Flags: ::DWORD,
+    MD_Reserved: ::DWORD,
+}}
 pub type PMEM_DES = *mut MEM_DES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MEM_RESOURCE {
-    pub MEM_Header: MEM_DES,
-    pub MEM_Data: [MEM_RANGE; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct MEM_RESOURCE {
+    MEM_Header: MEM_DES,
+    MEM_Data: [MEM_RANGE; ::ANYSIZE_ARRAY],
+}}
 pub type PMEM_RESOURCE = *mut MEM_RESOURCE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MEM_LARGE_RANGE {
-    pub MLR_Align: ::DWORDLONG,
-    pub MLR_nBytes: ::ULONGLONG,
-    pub MLR_Min: ::DWORDLONG,
-    pub MLR_Max: ::DWORDLONG,
-    pub MLR_Flags: ::DWORD,
-    pub MLR_Reserved: ::DWORD,
-}
+STRUCT!{struct MEM_LARGE_RANGE {
+    MLR_Align: ::DWORDLONG,
+    MLR_nBytes: ::ULONGLONG,
+    MLR_Min: ::DWORDLONG,
+    MLR_Max: ::DWORDLONG,
+    MLR_Flags: ::DWORD,
+    MLR_Reserved: ::DWORD,
+}}
 pub type PMEM_LARGE_RANGE = *mut MEM_LARGE_RANGE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MEM_LARGE_DES {
-    pub MLD_Count: ::DWORD,
-    pub MLD_Type: ::DWORD,
-    pub MLD_Alloc_Base: ::DWORDLONG,
-    pub MLD_Alloc_End: ::DWORDLONG,
-    pub MLD_Flags: ::DWORD,
-    pub MLD_Reserved: ::DWORD,
-}
+STRUCT!{struct MEM_LARGE_DES {
+    MLD_Count: ::DWORD,
+    MLD_Type: ::DWORD,
+    MLD_Alloc_Base: ::DWORDLONG,
+    MLD_Alloc_End: ::DWORDLONG,
+    MLD_Flags: ::DWORD,
+    MLD_Reserved: ::DWORD,
+}}
 pub type PMEM_LARGE_DES = *mut MEM_LARGE_DES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MEM_LARGE_RESOURCE {
-    pub MEM_LARGE_Header: MEM_LARGE_DES,
-    pub MEM_LARGE_Data: [MEM_LARGE_RANGE; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct MEM_LARGE_RESOURCE {
+    MEM_LARGE_Header: MEM_LARGE_DES,
+    MEM_LARGE_Data: [MEM_LARGE_RANGE; ::ANYSIZE_ARRAY],
+}}
 pub type PMEM_LARGE_RESOURCE = *mut MEM_LARGE_RESOURCE;
 pub const fIOD_PortType: ::DWORD = 0x1;
 pub const fIOD_Memory: ::DWORD = 0x0;
@@ -166,30 +160,27 @@ pub const IO_ALIAS_10_BIT_DECODE: ::DWORDLONG = 0x00000004;
 pub const IO_ALIAS_12_BIT_DECODE: ::DWORDLONG = 0x00000010;
 pub const IO_ALIAS_16_BIT_DECODE: ::DWORDLONG = 0x00000000;
 pub const IO_ALIAS_POSITIVE_DECODE: ::DWORDLONG = 0x000000FF;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IO_RANGE {
-    pub IOR_Align: ::DWORDLONG,
-    pub IOR_nPorts: ::DWORD,
-    pub IOR_Min: ::DWORDLONG,
-    pub IOR_Max: ::DWORDLONG,
-    pub IOR_RangeFlags: ::DWORD,
-    pub IOR_Alias: ::DWORDLONG,
-}
+STRUCT!{struct IO_RANGE {
+    IOR_Align: ::DWORDLONG,
+    IOR_nPorts: ::DWORD,
+    IOR_Min: ::DWORDLONG,
+    IOR_Max: ::DWORDLONG,
+    IOR_RangeFlags: ::DWORD,
+    IOR_Alias: ::DWORDLONG,
+}}
 pub type PIO_RANGE = *mut IO_RANGE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IO_DES {
-    pub IOD_Count: ::DWORD,
-    pub IOD_Type: ::DWORD,
-    pub IOD_Alloc_Base: ::DWORDLONG,
-    pub IOD_Alloc_End: ::DWORDLONG,
-    pub IOD_DesFlags: ::DWORD,
-}
+STRUCT!{struct IO_DES {
+    IOD_Count: ::DWORD,
+    IOD_Type: ::DWORD,
+    IOD_Alloc_Base: ::DWORDLONG,
+    IOD_Alloc_End: ::DWORDLONG,
+    IOD_DesFlags: ::DWORD,
+}}
 pub type PIO_DES = *mut IO_DES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IO_RESOURCE {
-    pub IO_Header: IO_DES,
-    pub IO_Data: [IO_RANGE; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct IO_RESOURCE {
+    IO_Header: IO_DES,
+    IO_Data: [IO_RANGE; ::ANYSIZE_ARRAY],
+}}
 pub type PIO_RESOURCE = *mut IO_RESOURCE;
 pub const mDD_Width: ::ULONG = 0x3;
 pub const fDD_BYTE: ::ULONG = 0x0;
@@ -204,26 +195,23 @@ pub const fDD_TypeStandard: ::ULONG = 0x00;
 pub const fDD_TypeA: ::ULONG = 0x08;
 pub const fDD_TypeB: ::ULONG = 0x10;
 pub const fDD_TypeF: ::ULONG = 0x18;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DMA_RANGE {
-    pub DR_Min: ::ULONG,
-    pub DR_Max: ::ULONG,
-    pub DR_Flags: ::ULONG,
-}
+STRUCT!{struct DMA_RANGE {
+    DR_Min: ::ULONG,
+    DR_Max: ::ULONG,
+    DR_Flags: ::ULONG,
+}}
 pub type PDMA_RANGE = *mut DMA_RANGE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DMA_DES {
-    pub DD_Count: ::DWORD,
-    pub DD_Type: ::DWORD,
-    pub DD_Flags: ::DWORD,
-    pub DD_Alloc_Chan: ::ULONG,
-}
+STRUCT!{struct DMA_DES {
+    DD_Count: ::DWORD,
+    DD_Type: ::DWORD,
+    DD_Flags: ::DWORD,
+    DD_Alloc_Chan: ::ULONG,
+}}
 pub type PDMA_DES = *mut DMA_DES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DMA_RESOURCE {
-    pub DMA_Header: DMA_DES,
-    pub DMA_Data: [DMA_RANGE; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct DMA_RESOURCE {
+    DMA_Header: DMA_DES,
+    DMA_Data: [DMA_RANGE; ::ANYSIZE_ARRAY],
+}}
 pub type PDMA_RESOURCE = *mut DMA_RESOURCE;
 pub const mIRQD_Share: ::ULONG = 0x1;
 pub const fIRQD_Exclusive: ::ULONG = 0x0;
@@ -233,80 +221,70 @@ pub const fIRQD_Level_Bit: ::ULONG = 1;
 pub const mIRQD_Edge_Level: ::ULONG = 0x2;
 pub const fIRQD_Level: ::ULONG = 0x0;
 pub const fIRQD_Edge: ::ULONG = 0x2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IRQ_RANGE {
-    pub IRQR_Min: ::ULONG,
-    pub IRQR_Max: ::ULONG,
-    pub IRQR_Flags: ::ULONG,
-}
+STRUCT!{struct IRQ_RANGE {
+    IRQR_Min: ::ULONG,
+    IRQR_Max: ::ULONG,
+    IRQR_Flags: ::ULONG,
+}}
 pub type PIRQ_RANGE = *mut IRQ_RANGE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IRQ_DES_32 {
-    pub IRQD_Count: ::DWORD,
-    pub IRQD_Type: ::DWORD,
-    pub IRQD_Flags: ::DWORD,
-    pub IRQD_Alloc_Num: ::ULONG,
-    pub IRQD_Affinity: ::ULONG32,
-}
+STRUCT!{struct IRQ_DES_32 {
+    IRQD_Count: ::DWORD,
+    IRQD_Type: ::DWORD,
+    IRQD_Flags: ::DWORD,
+    IRQD_Alloc_Num: ::ULONG,
+    IRQD_Affinity: ::ULONG32,
+}}
 pub type PIRQ_DES_32 = *mut IRQ_DES_32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IRQ_DES_64 {
-    pub IRQD_Count: ::DWORD,
-    pub IRQD_Type: ::DWORD,
-    pub IRQD_Flags: ::DWORD,
-    pub IRQD_Alloc_Num: ::ULONG,
-    pub IRQD_Affinity: ::ULONG64,
-}
+STRUCT!{struct IRQ_DES_64 {
+    IRQD_Count: ::DWORD,
+    IRQD_Type: ::DWORD,
+    IRQD_Flags: ::DWORD,
+    IRQD_Alloc_Num: ::ULONG,
+    IRQD_Affinity: ::ULONG64,
+}}
 pub type PIRQ_DES_64 = *mut IRQ_DES_64;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IRQ_RESOURCE_32 {
-    pub IRQ_Header: IRQ_DES_32,
-    pub IRQ_Data: [IRQ_RANGE; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct IRQ_RESOURCE_32 {
+    IRQ_Header: IRQ_DES_32,
+    IRQ_Data: [IRQ_RANGE; ::ANYSIZE_ARRAY],
+}}
 pub type PIRQ_RESOURCE_32 = *mut IRQ_RESOURCE_32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IRQ_RESOURCE_64 {
-    pub IRQ_Header: IRQ_DES_64,
-    pub IRQ_Data: [IRQ_RANGE; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct IRQ_RESOURCE_64 {
+    IRQ_Header: IRQ_DES_64,
+    IRQ_Data: [IRQ_RANGE; ::ANYSIZE_ARRAY],
+}}
 pub type PIRQ_RESOURCE_64 = *mut IRQ_RESOURCE_64;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DEVPRIVATE_RANGE {
-    pub PR_Data1: ::DWORD,
-    pub PR_Data2: ::DWORD,
-    pub PR_Data3: ::DWORD,
-}
+STRUCT!{struct DEVPRIVATE_RANGE {
+    PR_Data1: ::DWORD,
+    PR_Data2: ::DWORD,
+    PR_Data3: ::DWORD,
+}}
 pub type PDEVPRIVATE_RANGE = *mut DEVPRIVATE_RANGE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DEVPRIVATE_DES {
-    pub PD_Count: ::DWORD,
-    pub PD_Type: ::DWORD,
-    pub PD_Data1: ::DWORD,
-    pub PD_Data2: ::DWORD,
-    pub PD_Data3: ::DWORD,
-    pub PD_Flags: ::DWORD,
-}
+STRUCT!{struct DEVPRIVATE_DES {
+    PD_Count: ::DWORD,
+    PD_Type: ::DWORD,
+    PD_Data1: ::DWORD,
+    PD_Data2: ::DWORD,
+    PD_Data3: ::DWORD,
+    PD_Flags: ::DWORD,
+}}
 pub type PDEVPRIVATE_DES = *mut DEVPRIVATE_DES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DEVPRIVATE_RESOURCE {
-    pub PRV_Header: DEVPRIVATE_DES,
-    pub PRV_Data: [DEVPRIVATE_RANGE; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct DEVPRIVATE_RESOURCE {
+    PRV_Header: DEVPRIVATE_DES,
+    PRV_Data: [DEVPRIVATE_RANGE; ::ANYSIZE_ARRAY],
+}}
 pub type PDEVPRIVATE_RESOURCE = *mut DEVPRIVATE_RESOURCE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CS_DES {
-    pub CSD_SignatureLength: ::DWORD,
-    pub CSD_LegacyDataOffset: ::DWORD,
-    pub CSD_LegacyDataSize: ::DWORD,
-    pub CSD_Flags: ::DWORD,
-    pub CSD_ClassGuid: ::GUID,
-    pub CSD_Signature: [::BYTE; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct CS_DES {
+    CSD_SignatureLength: ::DWORD,
+    CSD_LegacyDataOffset: ::DWORD,
+    CSD_LegacyDataSize: ::DWORD,
+    CSD_Flags: ::DWORD,
+    CSD_ClassGuid: ::GUID,
+    CSD_Signature: [::BYTE; ::ANYSIZE_ARRAY],
+}}
 pub type PCS_DES = *mut CS_DES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CS_RESOURCE {
-    pub CS_Header: CS_DES,
-}
+STRUCT!{struct CS_RESOURCE {
+    CS_Header: CS_DES,
+}}
 pub type PCS_RESOURCE = *mut CS_RESOURCE;
 pub const mPCD_IO_8_16: ::DWORD = 0x1;
 pub const fPCD_IO_8: ::DWORD = 0x0;
@@ -345,81 +323,72 @@ pub const fPCD_MEM2_WS_THREE: ::DWORD = 0x30000000;
 pub const fPCD_MEM2_16: ::DWORD = 0x40000000;
 pub const PCD_MAX_MEMORY: usize = 2;
 pub const PCD_MAX_IO: usize = 2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PCCARD_DES {
-    pub PCD_Count: ::DWORD,
-    pub PCD_Type: ::DWORD,
-    pub PCD_Flags: ::DWORD,
-    pub PCD_ConfigIndex: ::BYTE,
-    pub PCD_Reserved: [::BYTE; 3],
-    pub PCD_MemoryCardBase1: ::DWORD,
-    pub PCD_MemoryCardBase2: ::DWORD,
-    pub PCD_MemoryCardBase: [::DWORD; PCD_MAX_MEMORY],
-    pub PCD_MemoryFlags: [::WORD; PCD_MAX_MEMORY],
-    pub PCD_IoFlags: [::BYTE; PCD_MAX_IO],
-}
+STRUCT!{struct PCCARD_DES {
+    PCD_Count: ::DWORD,
+    PCD_Type: ::DWORD,
+    PCD_Flags: ::DWORD,
+    PCD_ConfigIndex: ::BYTE,
+    PCD_Reserved: [::BYTE; 3],
+    PCD_MemoryCardBase1: ::DWORD,
+    PCD_MemoryCardBase2: ::DWORD,
+    PCD_MemoryCardBase: [::DWORD; PCD_MAX_MEMORY],
+    PCD_MemoryFlags: [::WORD; PCD_MAX_MEMORY],
+    PCD_IoFlags: [::BYTE; PCD_MAX_IO],
+}}
 pub type PPCCARD_DES = *mut PCCARD_DES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PCCARD_RESOURCE {
-    pub PcCard_Header: PCCARD_DES,
-}
+STRUCT!{struct PCCARD_RESOURCE {
+    PcCard_Header: PCCARD_DES,
+}}
 pub type PPCCARD_RESOURCE = *mut PCCARD_RESOURCE;
 pub const mPMF_AUDIO_ENABLE: ::DWORD = 0x8;
 pub const fPMF_AUDIO_ENABLE: ::DWORD = 0x8;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MFCARD_DES {
-    pub PMF_Count: ::DWORD,
-    pub PMF_Type: ::DWORD,
-    pub PMF_Flags: ::DWORD,
-    pub PMF_ConfigOptions: ::BYTE,
-    pub PMF_IoResourceIndex: ::BYTE,
-    pub PMF_Reserved: [::BYTE; 2],
-    pub PMF_ConfigRegisterBase: ::DWORD,
-}
+STRUCT!{struct MFCARD_DES {
+    PMF_Count: ::DWORD,
+    PMF_Type: ::DWORD,
+    PMF_Flags: ::DWORD,
+    PMF_ConfigOptions: ::BYTE,
+    PMF_IoResourceIndex: ::BYTE,
+    PMF_Reserved: [::BYTE; 2],
+    PMF_ConfigRegisterBase: ::DWORD,
+}}
 pub type PMFCARD_DES = *mut MFCARD_DES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MFCARD_RESOURCE {
-    pub MfCard_Header: MFCARD_DES,
-}
+STRUCT!{struct MFCARD_RESOURCE {
+    MfCard_Header: MFCARD_DES,
+}}
 pub type PMFCARD_RESOURCE = *mut MFCARD_RESOURCE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct BUSNUMBER_RANGE {
-    pub BUSR_Min: ::ULONG,
-    pub BUSR_Max: ::ULONG,
-    pub BUSR_nBusNumbers: ::ULONG,
-    pub BUSR_Flags: ::ULONG,
-}
+STRUCT!{struct BUSNUMBER_RANGE {
+    BUSR_Min: ::ULONG,
+    BUSR_Max: ::ULONG,
+    BUSR_nBusNumbers: ::ULONG,
+    BUSR_Flags: ::ULONG,
+}}
 pub type PBUSNUMBER_RANGE = *mut BUSNUMBER_RANGE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct BUSNUMBER_DES {
-    pub BUSD_Count: ::DWORD,
-    pub BUSD_Type: ::DWORD,
-    pub BUSD_Flags: ::DWORD,
-    pub BUSD_Alloc_Base: ::ULONG,
-    pub BUSD_Alloc_End: ::ULONG,
-}
+STRUCT!{struct BUSNUMBER_DES {
+    BUSD_Count: ::DWORD,
+    BUSD_Type: ::DWORD,
+    BUSD_Flags: ::DWORD,
+    BUSD_Alloc_Base: ::ULONG,
+    BUSD_Alloc_End: ::ULONG,
+}}
 pub type PBUSNUMBER_DES = *mut BUSNUMBER_DES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct BUSNUMBER_RESOURCE {
-    pub BusNumber_Header: BUSNUMBER_DES,
-    pub BusNumber_Data: [BUSNUMBER_RANGE; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct BUSNUMBER_RESOURCE {
+    BusNumber_Header: BUSNUMBER_DES,
+    BusNumber_Data: [BUSNUMBER_RANGE; ::ANYSIZE_ARRAY],
+}}
 pub type PBUSNUMBER_RESOURCE = *mut BUSNUMBER_RESOURCE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CONNECTION_DES {
-    pub COND_Type: ::DWORD,
-    pub COND_Flags: ::DWORD,
-    pub COND_Class: ::BYTE,
-    pub COND_ClassType: ::BYTE,
-    pub COND_Reserved1: ::BYTE,
-    pub COND_Reserved2: ::BYTE,
-    pub COND_Id: ::LARGE_INTEGER,
-}
+STRUCT!{struct CONNECTION_DES {
+    COND_Type: ::DWORD,
+    COND_Flags: ::DWORD,
+    COND_Class: ::BYTE,
+    COND_ClassType: ::BYTE,
+    COND_Reserved1: ::BYTE,
+    COND_Reserved2: ::BYTE,
+    COND_Id: ::LARGE_INTEGER,
+}}
 pub type PCONNECTION_DES = *mut CONNECTION_DES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CONNECTION_RESOURCE {
-    pub Connection_Header: CONNECTION_DES,
-}
+STRUCT!{struct CONNECTION_RESOURCE {
+    Connection_Header: CONNECTION_DES,
+}}
 pub type PCONNECTION_RESOURCE = *mut CONNECTION_RESOURCE;
 pub const CM_HWPI_NOT_DOCKABLE: ::DWORD = 0x00000000;
 pub const CM_HWPI_UNDOCKED: ::DWORD = 0x00000001;
@@ -666,14 +635,12 @@ pub enum CM_NOTIFY_FILTER_TYPE {
     CM_NOTIFY_FILTER_TYPE_MAX,
 }
 pub type PCM_NOTIFY_FILTER_TYPE = *mut CM_NOTIFY_FILTER_TYPE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CM_NOTIFY_FILTER_DeviceInterface {
-    pub ClassGuid: ::GUID,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CM_NOTIFY_FILTER_DeviceHandle {
-    pub hTarget: ::HANDLE,
-}
+STRUCT!{struct CM_NOTIFY_FILTER_DeviceInterface {
+    ClassGuid: ::GUID,
+}}
+STRUCT!{struct CM_NOTIFY_FILTER_DeviceHandle {
+    hTarget: ::HANDLE,
+}}
 #[repr(C)] #[derive(Copy)]
 pub struct CM_NOTIFY_FILTER_DeviceInstance {
     pub InstanceId: [::WCHAR; MAX_DEVICE_ID_LEN],
@@ -709,28 +676,24 @@ pub enum CM_NOTIFY_ACTION {
     CM_NOTIFY_ACTION_MAX,
 }
 pub type PCM_NOTIFY_ACTION = *mut CM_NOTIFY_ACTION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CM_NOTIFY_EVENT_DATA_DeviceInterface {
-    pub ClassGuid: ::GUID,
-    pub SymbolicLink: [::WCHAR; ::ANYSIZE_ARRAY],
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CM_NOTIFY_EVENT_DATA_DeviceHandle {
-    pub EventGuid: ::GUID,
-    pub NameOffset: ::LONG,
-    pub DataSize: ::DWORD,
-    pub Data: [::BYTE; ::ANYSIZE_ARRAY],
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CM_NOTIFY_EVENT_DATA_DeviceInstance {
-    pub InstanceId: [::WCHAR; ::ANYSIZE_ARRAY],
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CM_NOTIFY_EVENT_DATA {
-    pub FilterType: CM_NOTIFY_FILTER_TYPE,
-    pub Reserved: ::DWORD,
-    pub u: [::BYTE; 25],
-}
+STRUCT!{struct CM_NOTIFY_EVENT_DATA_DeviceInterface {
+    ClassGuid: ::GUID,
+    SymbolicLink: [::WCHAR; ::ANYSIZE_ARRAY],
+}}
+STRUCT!{struct CM_NOTIFY_EVENT_DATA_DeviceHandle {
+    EventGuid: ::GUID,
+    NameOffset: ::LONG,
+    DataSize: ::DWORD,
+    Data: [::BYTE; ::ANYSIZE_ARRAY],
+}}
+STRUCT!{struct CM_NOTIFY_EVENT_DATA_DeviceInstance {
+    InstanceId: [::WCHAR; ::ANYSIZE_ARRAY],
+}}
+STRUCT!{struct CM_NOTIFY_EVENT_DATA {
+    FilterType: CM_NOTIFY_FILTER_TYPE,
+    Reserved: ::DWORD,
+    u: [::BYTE; 25],
+}}
 UNION!(
     CM_NOTIFY_EVENT_DATA, u, DeviceInterface, DeviceInterface_mut,
     CM_NOTIFY_EVENT_DATA_DeviceInterface

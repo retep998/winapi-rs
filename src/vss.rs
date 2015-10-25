@@ -212,43 +212,39 @@ pub const VSS_BS_WRITER_SUPPORTS_PARALLEL_RESTORES: ::DWORD = 0x8000;
 pub type VSS_ID = ::GUID;
 pub type VSS_PWSZ = *mut ::WCHAR;
 pub type VSS_TIMESTAMP = ::LONGLONG;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct VSS_SNAPSHOT_PROP {
-    pub m_SnapshotId: ::VSS_ID,
-    pub m_SnapshotSetId: ::VSS_ID,
-    pub m_lSnapshotsCount: ::LONG,
-    pub m_pwszSnapshotDeviceObject: ::VSS_PWSZ,
-    pub m_pwszOriginalVolumeName: ::VSS_PWSZ,
-    pub m_pwszOriginatingMachine: ::VSS_PWSZ,
-    pub m_pwszServiceMachine: ::VSS_PWSZ,
-    pub m_pwszExposedName: ::VSS_PWSZ,
-    pub m_pwszExposedPath: ::VSS_PWSZ,
-    pub m_ProviderId: ::VSS_ID,
-    pub m_lSnapshotAttributes: ::LONG,
-    pub m_tsCreationTimestamp: ::VSS_TIMESTAMP,
-    pub m_eStatus: ::VSS_SNAPSHOT_STATE,
-}
+STRUCT!{struct VSS_SNAPSHOT_PROP {
+    m_SnapshotId: ::VSS_ID,
+    m_SnapshotSetId: ::VSS_ID,
+    m_lSnapshotsCount: ::LONG,
+    m_pwszSnapshotDeviceObject: ::VSS_PWSZ,
+    m_pwszOriginalVolumeName: ::VSS_PWSZ,
+    m_pwszOriginatingMachine: ::VSS_PWSZ,
+    m_pwszServiceMachine: ::VSS_PWSZ,
+    m_pwszExposedName: ::VSS_PWSZ,
+    m_pwszExposedPath: ::VSS_PWSZ,
+    m_ProviderId: ::VSS_ID,
+    m_lSnapshotAttributes: ::LONG,
+    m_tsCreationTimestamp: ::VSS_TIMESTAMP,
+    m_eStatus: ::VSS_SNAPSHOT_STATE,
+}}
 type PVSS_SNAPSHOT_PROP = *mut VSS_SNAPSHOT_PROP;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct VSS_PROVIDER_PROP {
-    pub m_ProviderId: ::VSS_ID,
-    pub m_pwszProviderName: ::VSS_PWSZ,
-    pub m_eProviderType: ::VSS_PROVIDER_TYPE,
-    pub m_pwszProviderVersion: ::VSS_PWSZ,
-    pub m_ProviderVersionId: ::VSS_ID,
-    pub m_ClassId: ::CLSID,
-}
+STRUCT!{struct VSS_PROVIDER_PROP {
+    m_ProviderId: ::VSS_ID,
+    m_pwszProviderName: ::VSS_PWSZ,
+    m_eProviderType: ::VSS_PROVIDER_TYPE,
+    m_pwszProviderVersion: ::VSS_PWSZ,
+    m_ProviderVersionId: ::VSS_ID,
+    m_ClassId: ::CLSID,
+}}
 type PVSS_PROVIDER_PROP = *mut VSS_PROVIDER_PROP;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct VSS_OBJECT_UNION {
-    pub Snap: ::VSS_SNAPSHOT_PROP,
-}
+STRUCT!{struct VSS_OBJECT_UNION {
+    Snap: ::VSS_SNAPSHOT_PROP,
+}}
 UNION!(VSS_OBJECT_UNION, Snap, Prov, Prov_mut, VSS_PROVIDER_PROP);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct VSS_OBJECT_PROP {
-    pub Type: ::VSS_OBJECT_TYPE,
-    pub Obj: ::VSS_OBJECT_UNION,
-}
+STRUCT!{struct VSS_OBJECT_PROP {
+    Type: ::VSS_OBJECT_TYPE,
+    Obj: ::VSS_OBJECT_UNION,
+}}
 type PVSS_OBJECT_PROP = *mut VSS_OBJECT_PROP;
 RIDL!(
 interface IVssEnumObject(IVssEnumObjectVtbl): IUnknown(IUnknownVtbl) {

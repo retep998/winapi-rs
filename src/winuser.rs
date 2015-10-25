@@ -734,39 +734,36 @@ pub type WINEVENTPROC = Option<unsafe extern "system" fn(
 pub type HDEVNOTIFY = ::PVOID;
 pub type MENUTEMPLATEA = ::VOID;
 pub type MENUTEMPLATEW = ::VOID;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSG {
-    pub hwnd: ::HWND,
-    pub message: ::UINT,
-    pub wParam: ::WPARAM,
-    pub lParam: ::LPARAM,
-    pub time: ::DWORD,
-    pub pt: ::POINT,
-}
+STRUCT!{struct MSG {
+    hwnd: ::HWND,
+    message: ::UINT,
+    wParam: ::WPARAM,
+    lParam: ::LPARAM,
+    time: ::DWORD,
+    pt: ::POINT,
+}}
 pub type PMSG = *mut MSG;
 pub type NPMSG = *mut MSG;
 pub type LPMSG = *mut MSG;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PAINTSTRUCT {
-    pub hdc: ::HDC,
-    pub fErase: ::BOOL,
-    pub rcPaint: ::RECT,
-    pub fRestore: ::BOOL,
-    pub fIncUpdate: ::BOOL,
-    pub rgbReserved: [::BYTE; 32],
-}
+STRUCT!{struct PAINTSTRUCT {
+    hdc: ::HDC,
+    fErase: ::BOOL,
+    rcPaint: ::RECT,
+    fRestore: ::BOOL,
+    fIncUpdate: ::BOOL,
+    rgbReserved: [::BYTE; 32],
+}}
 pub type PPAINTSTRUCT = *mut PAINTSTRUCT;
 pub type NPPAINTSTRUCT = *mut PAINTSTRUCT;
 pub type LPPAINTSTRUCT = *mut PAINTSTRUCT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WINDOWPLACEMENT {
-    pub length: ::UINT,
-    pub flags: ::UINT,
-    pub showCmd: ::UINT,
-    pub ptMinPosition: ::POINT,
-    pub ptMaxPosition: ::POINT,
-    pub rcNormalPosition: ::RECT,
-}
+STRUCT!{struct WINDOWPLACEMENT {
+    length: ::UINT,
+    flags: ::UINT,
+    showCmd: ::UINT,
+    ptMinPosition: ::POINT,
+    ptMaxPosition: ::POINT,
+    rcNormalPosition: ::RECT,
+}}
 pub type PWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
 pub type LPWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
 #[repr(C)] #[derive(Copy)]
@@ -805,35 +802,32 @@ impl Clone for WNDCLASSW { fn clone(&self) -> WNDCLASSW { *self } }
 pub type PWNDCLASSW = *mut WNDCLASSW;
 pub type NPWNDCLASSW = *mut WNDCLASSW;
 pub type LPWNDCLASSW = *mut WNDCLASSW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCROLLBARINFO {
-    pub cbSize: ::DWORD,
-    pub rcScrollBar: ::RECT,
-    pub dxyLineButton: ::c_int,
-    pub xyThumbTop: ::c_int,
-    pub xyThumbBottom: ::c_int,
-    pub reserved: ::c_int,
-    pub rgstate: [::DWORD; CCHILDREN_SCROLLBAR + 1]
-}
+STRUCT!{struct SCROLLBARINFO {
+    cbSize: ::DWORD,
+    rcScrollBar: ::RECT,
+    dxyLineButton: ::c_int,
+    xyThumbTop: ::c_int,
+    xyThumbBottom: ::c_int,
+    reserved: ::c_int,
+    rgstate: [::DWORD; CCHILDREN_SCROLLBAR + 1],
+}}
 pub type PSCROLLBARINFO = *mut SCROLLBARINFO;
 pub type LPSCROLLBARINFO = *mut SCROLLBARINFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCROLLINFO {
-    pub cbSize: ::UINT,
-    pub fMask: ::UINT,
-    pub nMin: ::c_int,
-    pub nMax: ::c_int,
-    pub nPage: ::UINT,
-    pub nPos: ::c_int,
-    pub nTrackPos: ::c_int
-}
+STRUCT!{struct SCROLLINFO {
+    cbSize: ::UINT,
+    fMask: ::UINT,
+    nMin: ::c_int,
+    nMax: ::c_int,
+    nPage: ::UINT,
+    nPos: ::c_int,
+    nTrackPos: ::c_int,
+}}
 pub type LPSCROLLINFO = *mut SCROLLINFO;
 pub type LPCSCROLLINFO = *const SCROLLINFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SIZE {
-    pub cx: ::LONG,
-    pub cy: ::LONG
-}
+STRUCT!{struct SIZE {
+    cx: ::LONG,
+    cy: ::LONG,
+}}
 pub type PSIZE = *mut SIZE;
 pub type LPSIZE = *mut SIZE;
 pub type SIZEL = SIZE;
@@ -863,13 +857,12 @@ pub const TME_QUERY: ::DWORD = 0x4000_0000;
 pub const TME_CANCEL: ::DWORD = 0x8000_0000;
 pub const HWND_BROADCAST: ::HWND = 0xFFFF as ::HWND;
 pub const HWND_MESSAGE: ::HWND = -3isize as ::HWND;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TRACKMOUSEEVENT {
-    pub cbSize: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub hwndTrack: ::HWND,
-    pub dwHoverTime: ::DWORD,
-}
+STRUCT!{struct TRACKMOUSEEVENT {
+    cbSize: ::DWORD,
+    dwFlags: ::DWORD,
+    hwndTrack: ::HWND,
+    dwHoverTime: ::DWORD,
+}}
 pub type LPTRACKMOUSEEVENT = *mut TRACKMOUSEEVENT;
 //2575
 /// lParam of WM_WINDOWPOSCHANGING, WM_WINDOWPOSCHANGED
@@ -888,37 +881,35 @@ pub struct WINDOWPOS {
 pub type LPWINDOWPOS = *mut WINDOWPOS;
 pub type PWINDOWPOS = *mut WINDOWPOS;
 //3082
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CREATESTRUCTA {
-    pub lpCreateParams: ::LPVOID,
-    pub hInstance: ::HINSTANCE,
-    pub hMenu: ::HMENU,
-    pub hwndParent: ::HWND,
-    pub cy: ::c_int,
-    pub cx: ::c_int,
-    pub y: ::c_int,
-    pub x: ::c_int,
-    pub style: ::LONG,
-    pub lpszName: ::LPCSTR,
-    pub lpszClass: ::LPCSTR,
-    pub dwExStyle: ::DWORD,
-}
+STRUCT!{struct CREATESTRUCTA {
+    lpCreateParams: ::LPVOID,
+    hInstance: ::HINSTANCE,
+    hMenu: ::HMENU,
+    hwndParent: ::HWND,
+    cy: ::c_int,
+    cx: ::c_int,
+    y: ::c_int,
+    x: ::c_int,
+    style: ::LONG,
+    lpszName: ::LPCSTR,
+    lpszClass: ::LPCSTR,
+    dwExStyle: ::DWORD,
+}}
 pub type LPCREATESTRUCTA = *mut CREATESTRUCTA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CREATESTRUCTW {
-    pub lpCreateParams: ::LPVOID,
-    pub hInstance: ::HINSTANCE,
-    pub hMenu: ::HMENU,
-    pub hwndParent: ::HWND,
-    pub cy: ::c_int,
-    pub cx: ::c_int,
-    pub y: ::c_int,
-    pub x: ::c_int,
-    pub style: ::LONG,
-    pub lpszName: ::LPCWSTR,
-    pub lpszClass: ::LPCWSTR,
-    pub dwExStyle: ::DWORD,
-}
+STRUCT!{struct CREATESTRUCTW {
+    lpCreateParams: ::LPVOID,
+    hInstance: ::HINSTANCE,
+    hMenu: ::HMENU,
+    hwndParent: ::HWND,
+    cy: ::c_int,
+    cx: ::c_int,
+    y: ::c_int,
+    x: ::c_int,
+    style: ::LONG,
+    lpszName: ::LPCWSTR,
+    lpszClass: ::LPCWSTR,
+    dwExStyle: ::DWORD,
+}}
 pub type LPCREATESTRUCTW = *mut CREATESTRUCTW;
 //3145
 #[repr(C)] #[derive(Clone, Copy, Debug)]
@@ -952,14 +943,13 @@ pub const EWX_RESTARTAPPS: ::UINT = 0x00000040;
 pub const EWX_HYBRID_SHUTDOWN: ::UINT = 0x00400000;
 pub const EWX_BOOTOPTIONS: ::UINT = 0x01000000;
 //4054 (Win 7 SDK)
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FLASHWINFO {
-    pub cbSize: ::UINT,
-    pub hwnd: ::HWND,
-    pub dwFlags: ::DWORD,
-    pub uCount: ::UINT,
-    pub dwTimeout: ::DWORD,
-}
+STRUCT!{struct FLASHWINFO {
+    cbSize: ::UINT,
+    hwnd: ::HWND,
+    dwFlags: ::DWORD,
+    uCount: ::UINT,
+    dwTimeout: ::DWORD,
+}}
 pub type PFLASHWINFO = *mut FLASHWINFO;
 pub const FLASHW_STOP: ::DWORD = 0;
 pub const FLASHW_CAPTION: ::DWORD = 0x00000001;
@@ -992,50 +982,45 @@ pub const MOUSEEVENTF_HWHEEL: ::DWORD = 0x01000;
 pub const MOUSEEVENTF_MOVE_NOCOALESCE: ::DWORD = 0x2000;
 pub const MOUSEEVENTF_VIRTUALDESK: ::DWORD = 0x4000;
 pub const MOUSEEVENTF_ABSOLUTE: ::DWORD = 0x8000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MOUSEINPUT {
-    pub dx: ::LONG,
-    pub dy: ::LONG,
-    pub mouseData: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub time: ::DWORD,
-    pub dwExtraInfo: ::ULONG_PTR,
-}
+STRUCT!{struct MOUSEINPUT {
+    dx: ::LONG,
+    dy: ::LONG,
+    mouseData: ::DWORD,
+    dwFlags: ::DWORD,
+    time: ::DWORD,
+    dwExtraInfo: ::ULONG_PTR,
+}}
 pub type PMOUSEINPUT = *mut MOUSEINPUT;
 pub type LPMOUSEINPUT = *mut MOUSEINPUT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KEYBDINPUT {
-    pub wVk: ::WORD,
-    pub wScan: ::WORD,
-    pub dwFlags: ::DWORD,
-    pub time: ::DWORD,
-    pub dwExtraInfo: ::ULONG_PTR,
-}
+STRUCT!{struct KEYBDINPUT {
+    wVk: ::WORD,
+    wScan: ::WORD,
+    dwFlags: ::DWORD,
+    time: ::DWORD,
+    dwExtraInfo: ::ULONG_PTR,
+}}
 pub type PKEYBDINPUT = *mut KEYBDINPUT;
 pub type LPKEYBDINPUT = *mut KEYBDINPUT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HARDWAREINPUT {
-    pub uMsg: ::DWORD,
-    pub wParamL: ::WORD,
-    pub wParamH: ::WORD,
-}
+STRUCT!{struct HARDWAREINPUT {
+    uMsg: ::DWORD,
+    wParamL: ::WORD,
+    wParamH: ::WORD,
+}}
 pub type PHARDWAREINPUT = *mut HARDWAREINPUT;
 pub type LPHARDWAREINPUT= *mut HARDWAREINPUT;
 pub const INPUT_MOUSE: ::DWORD = 0;
 pub const INPUT_KEYBOARD: ::DWORD = 1;
 pub const INPUT_HARDWARE: ::DWORD = 2;
 #[cfg(target_arch = "x86")]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INPUT {
-    pub type_: ::DWORD,
-    pub u: [u32; 6],
-}
+STRUCT!{struct INPUT {
+    type_: ::DWORD,
+    u: [u32; 6],
+}}
 #[cfg(target_arch = "x86_64")]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INPUT {
-    pub type_: ::DWORD,
-    pub u: [u64; 4],
-}
+STRUCT!{struct INPUT {
+    type_: ::DWORD,
+    u: [u64; 4],
+}}
 UNION!{INPUT, u, mi, mi_mut, MOUSEINPUT}
 UNION!{INPUT, u, ki, ki_mut, KEYBDINPUT}
 UNION!{INPUT, u, hi, hi_mut, HARDWAREINPUT}
@@ -1189,14 +1174,13 @@ pub const SM_CARETBLINKINGENABLED: ::c_int = 0x2002;
 pub const SM_CONVERTIBLESLATEMODE: ::c_int = 0x2003;
 pub const SM_SYSTEMDOCKED: ::c_int = 0x2004;
 //8855 (Win 7 SDK)
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICONINFO {
-    pub fIcon: ::BOOL,
-    pub xHotspot: ::DWORD,
-    pub yHotspot: ::DWORD,
-    pub hbmMask: ::HBITMAP,
-    pub hbmColor: ::HBITMAP,
-}
+STRUCT!{struct ICONINFO {
+    fIcon: ::BOOL,
+    xHotspot: ::DWORD,
+    yHotspot: ::DWORD,
+    hbmMask: ::HBITMAP,
+    hbmColor: ::HBITMAP,
+}}
 pub type PICONINFO = *mut ICONINFO;
 //9066
 // Color indexes for use in GetSysColor and SetSysColor
@@ -1566,31 +1550,28 @@ pub type LPNONCLIENTMETRICSW = *mut NONCLIENTMETRICSW;
 //12900
 pub const MONITORINFOF_PRIMARY: ::DWORD = 1;
 pub const CCHDEVICENAME: usize = 32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MONITORINFO {
-    pub cbSize: ::DWORD,
-    pub rcMonitor: ::RECT,
-    pub rcWork: ::RECT,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct MONITORINFO {
+    cbSize: ::DWORD,
+    rcMonitor: ::RECT,
+    rcWork: ::RECT,
+    dwFlags: ::DWORD,
+}}
 pub type LPMONITORINFO = *mut MONITORINFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MONITORINFOEXA {
-    pub cbSize: ::DWORD,
-    pub rcMonitor: ::RECT,
-    pub rcWork: ::RECT,
-    pub dwFlags: ::DWORD,
-    pub szDevice: [::CHAR; ::CCHDEVICENAME],
-}
+STRUCT!{struct MONITORINFOEXA {
+    cbSize: ::DWORD,
+    rcMonitor: ::RECT,
+    rcWork: ::RECT,
+    dwFlags: ::DWORD,
+    szDevice: [::CHAR; ::CCHDEVICENAME],
+}}
 pub type LPMONITORINFOEXA = *mut MONITORINFOEXA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MONITORINFOEXW {
-    pub cbSize: ::DWORD,
-    pub rcMonitor: ::RECT,
-    pub rcWork: ::RECT,
-    pub dwFlags: ::DWORD,
-    pub szDevice: [::WCHAR; ::CCHDEVICENAME],
-}
+STRUCT!{struct MONITORINFOEXW {
+    cbSize: ::DWORD,
+    rcMonitor: ::RECT,
+    rcWork: ::RECT,
+    dwFlags: ::DWORD,
+    szDevice: [::WCHAR; ::CCHDEVICENAME],
+}}
 pub type LPMONITORINFOEXW = *mut MONITORINFOEXW;
 //12971
 pub type MONITORENUMPROC = Option<unsafe extern "system" fn(
@@ -1601,29 +1582,27 @@ DECLARE_HANDLE!(HRAWINPUT, HRAWINPUT__);
 pub fn GET_RAWINPUT_CODE_WPARAM(wParam: ::WPARAM) -> ::WPARAM { wParam & 0xff }
 pub const RIM_INPUT: ::WPARAM = 0;
 pub const RIM_INPUTSINK: ::WPARAM = 1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RAWINPUTHEADER {
-    pub dwType: ::DWORD,
-    pub dwSize: ::DWORD,
-    pub hDevice: ::HANDLE,
-    pub wParam: ::WPARAM,
-}
+STRUCT!{struct RAWINPUTHEADER {
+    dwType: ::DWORD,
+    dwSize: ::DWORD,
+    hDevice: ::HANDLE,
+    wParam: ::WPARAM,
+}}
 pub type PRAWINPUTHEADER = *mut RAWINPUTHEADER;
 pub type LPRAWINPUTHEADER = *mut RAWINPUTHEADER;
 pub const RIM_TYPEMOUSE: ::DWORD = 0;
 pub const RIM_TYPEKEYBOARD: ::DWORD = 1;
 pub const RIM_TYPEHID: ::DWORD = 2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RAWMOUSE {
-    pub usFlags: ::USHORT,
-    pub memory_padding: ::USHORT, // 16bit Padding for 32bit align in following union
-    pub usButtonFlags: ::USHORT,
-    pub usButtonData: ::USHORT,
-    pub ulRawButtons: ::ULONG,
-    pub lLastX: ::LONG,
-    pub lLastY: ::LONG,
-    pub ulExtraInformation: ::ULONG,
-}
+STRUCT!{struct RAWMOUSE {
+    usFlags: ::USHORT,
+    memory_padding: ::USHORT, // 16bit Padding for 32bit align in following union
+    usButtonFlags: ::USHORT,
+    usButtonData: ::USHORT,
+    ulRawButtons: ::ULONG,
+    lLastX: ::LONG,
+    lLastY: ::LONG,
+    ulExtraInformation: ::ULONG,
+}}
 pub type PRAWMOUSE = *mut RAWMOUSE;
 pub type LPRAWMOUSE = *mut RAWMOUSE;
 pub const RI_MOUSE_LEFT_BUTTON_DOWN: ::USHORT = 0x0001;
@@ -1648,15 +1627,14 @@ pub const MOUSE_MOVE_ABSOLUTE: ::USHORT = 1;
 pub const MOUSE_VIRTUAL_DESKTOP: ::USHORT = 0x02;
 pub const MOUSE_ATTRIBUTES_CHANGED: ::USHORT = 0x04;
 pub const MOUSE_MOVE_NOCOALESCE: ::USHORT = 0x08;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RAWKEYBOARD {
-    pub MakeCode: ::USHORT,
-    pub Flags: ::USHORT,
-    pub Reserved: ::USHORT,
-    pub VKey: ::USHORT,
-    pub Message: ::UINT,
-    pub ExtraInformation: ::ULONG,
-}
+STRUCT!{struct RAWKEYBOARD {
+    MakeCode: ::USHORT,
+    Flags: ::USHORT,
+    Reserved: ::USHORT,
+    VKey: ::USHORT,
+    Message: ::UINT,
+    ExtraInformation: ::ULONG,
+}}
 pub type PRAWKEYBOARD = *mut RAWKEYBOARD;
 pub type LPRAWKEYBOARD = *mut RAWKEYBOARD;
 pub const KEYBOARD_OVERRUN_MAKE_CODE: ::DWORD = 0xFF;
@@ -1674,11 +1652,10 @@ pub struct RAWHID {
 }
 pub type PRAWHID = *mut RAWHID;
 pub type LPRAWHID = *mut RAWHID;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RAWINPUT {
-    pub header: RAWINPUTHEADER,
-    pub mouse: RAWMOUSE,
-}
+STRUCT!{struct RAWINPUT {
+    header: RAWINPUTHEADER,
+    mouse: RAWMOUSE,
+}}
 UNION!(RAWINPUT, mouse, mouse, mouse_mut, RAWMOUSE);
 UNION!(RAWINPUT, mouse, keyboard, keyboard_mut, RAWKEYBOARD);
 UNION!(RAWINPUT, mouse, hid, hid_mut, RAWHID);
@@ -1699,39 +1676,35 @@ pub const RID_HEADER: ::DWORD = 0x10000005;
 pub const RIDI_PREPARSEDDATA: ::DWORD = 0x20000005;
 pub const RIDI_DEVICENAME: ::DWORD = 0x20000007;
 pub const RIDI_DEVICEINFO: ::DWORD = 0x2000000b;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RID_DEVICE_INFO_MOUSE {
-    pub dwId: ::DWORD,
-    pub dwNumberOfButtons: ::DWORD,
-    pub dwSampleRate: ::DWORD,
-    pub fHasHorizontalWheel: ::BOOL,
-}
+STRUCT!{struct RID_DEVICE_INFO_MOUSE {
+    dwId: ::DWORD,
+    dwNumberOfButtons: ::DWORD,
+    dwSampleRate: ::DWORD,
+    fHasHorizontalWheel: ::BOOL,
+}}
 pub type PRID_DEVICE_INFO_MOUSE = *mut RID_DEVICE_INFO_MOUSE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RID_DEVICE_INFO_KEYBOARD {
-    pub dwType: ::DWORD,
-    pub dwSubType: ::DWORD,
-    pub dwKeyboardMode: ::DWORD,
-    pub dwNumberOfFunctionKeys: ::DWORD,
-    pub dwNumberOfIndicators: ::DWORD,
-    pub dwNumberOfKeysTotal: ::DWORD,
-}
+STRUCT!{struct RID_DEVICE_INFO_KEYBOARD {
+    dwType: ::DWORD,
+    dwSubType: ::DWORD,
+    dwKeyboardMode: ::DWORD,
+    dwNumberOfFunctionKeys: ::DWORD,
+    dwNumberOfIndicators: ::DWORD,
+    dwNumberOfKeysTotal: ::DWORD,
+}}
 pub type PRID_DEVICE_INFO_KEYBOARD = *mut RID_DEVICE_INFO_KEYBOARD;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RID_DEVICE_INFO_HID {
-    pub dwVendorId: ::DWORD,
-    pub dwProductId: ::DWORD,
-    pub dwVersionNumber: ::DWORD,
-    pub usUsagePage: ::USHORT,
-    pub usUsage: ::USHORT,
-}
+STRUCT!{struct RID_DEVICE_INFO_HID {
+    dwVendorId: ::DWORD,
+    dwProductId: ::DWORD,
+    dwVersionNumber: ::DWORD,
+    usUsagePage: ::USHORT,
+    usUsage: ::USHORT,
+}}
 pub type PRID_DEVICE_INFO_HID = *mut RID_DEVICE_INFO_HID;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RID_DEVICE_INFO {
-    pub cbSize: ::DWORD,
-    pub dwType: ::DWORD,
-    pub keyboard: RID_DEVICE_INFO_KEYBOARD,
-}
+STRUCT!{struct RID_DEVICE_INFO {
+    cbSize: ::DWORD,
+    dwType: ::DWORD,
+    keyboard: RID_DEVICE_INFO_KEYBOARD,
+}}
 UNION!(RID_DEVICE_INFO, keyboard, mouse, mouse_mut, RID_DEVICE_INFO_MOUSE);
 UNION!(RID_DEVICE_INFO, keyboard, keyboard, keyboard_mut, RID_DEVICE_INFO_KEYBOARD);
 UNION!(RID_DEVICE_INFO, keyboard, hid, hid_mut, RID_DEVICE_INFO_HID);
@@ -1748,13 +1721,12 @@ fn test_RID_DEVICE_INFO() {
 }
 pub type PRID_DEVICE_INFO = *mut RID_DEVICE_INFO;
 pub type LPRID_DEVICE_INFO = *mut RID_DEVICE_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RAWINPUTDEVICE {
-    pub usUsagePage: ::USHORT,
-    pub usUsage: ::USHORT,
-    pub dwFlags: ::DWORD,
-    pub hwndTarget: ::HWND,
-}
+STRUCT!{struct RAWINPUTDEVICE {
+    usUsagePage: ::USHORT,
+    usUsage: ::USHORT,
+    dwFlags: ::DWORD,
+    hwndTarget: ::HWND,
+}}
 pub type PRAWINPUTDEVICE = *mut RAWINPUTDEVICE;
 pub type LPRAWINPUTDEVICE = *mut RAWINPUTDEVICE;
 pub type PCRAWINPUTDEVICE = *const RAWINPUTDEVICE;
@@ -1771,80 +1743,73 @@ pub const RIDEV_DEVNOTIFY: ::DWORD = 0x00002000;
 pub const RIDEV_EXMODEMASK: ::DWORD = 0x000000F0;
 pub const GIDC_ARRIVAL: ::DWORD = 1;
 pub const GIDC_REMOVAL: ::DWORD = 2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RAWINPUTDEVICELIST {
-    pub hDevice: ::HANDLE,
-    pub dwType: ::DWORD,
-}
+STRUCT!{struct RAWINPUTDEVICELIST {
+    hDevice: ::HANDLE,
+    dwType: ::DWORD,
+}}
 pub type PRAWINPUTDEVICELIST = *mut RAWINPUTDEVICELIST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CHANGEFILTERSTRUCT {
-    pub cbSize: ::DWORD,
-    pub ExtStatus: ::DWORD,
-}
+STRUCT!{struct CHANGEFILTERSTRUCT {
+    cbSize: ::DWORD,
+    ExtStatus: ::DWORD,
+}}
 pub type PCHANGEFILTERSTRUCT = *mut CHANGEFILTERSTRUCT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DLGTEMPLATE {
-    pub style: ::DWORD,
-    pub dwExtendedStyle: ::DWORD,
-    pub cdit: ::WORD,
-    pub x: ::c_short,
-    pub y: ::c_short,
-    pub cx: ::c_short,
-    pub cy: ::c_short,
-}
+STRUCT!{struct DLGTEMPLATE {
+    style: ::DWORD,
+    dwExtendedStyle: ::DWORD,
+    cdit: ::WORD,
+    x: ::c_short,
+    y: ::c_short,
+    cx: ::c_short,
+    cy: ::c_short,
+}}
 pub type LPDLGTEMPLATEA = *mut DLGTEMPLATE;
 pub type LPDLGTEMPLATEW = *mut DLGTEMPLATE;
 pub type LPCDLGTEMPLATEA = *const DLGTEMPLATE;
 pub type LPCDLGTEMPLATEW = *const DLGTEMPLATE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DRAWTEXTPARAMS {
-    pub cbSize: ::UINT,
-    pub iTabLength: ::c_int,
-    pub iLeftMargin: ::c_int,
-    pub iRightMargin: ::c_int,
-    pub uiLengthDrawn: ::UINT,
-}
+STRUCT!{struct DRAWTEXTPARAMS {
+    cbSize: ::UINT,
+    iTabLength: ::c_int,
+    iLeftMargin: ::c_int,
+    iRightMargin: ::c_int,
+    uiLengthDrawn: ::UINT,
+}}
 pub type LPDRAWTEXTPARAMS = *mut DRAWTEXTPARAMS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ACCEL {
-    pub fVirt: ::BYTE,
-    pub key: ::WORD,
-    pub cmd: ::WORD,
-}
+STRUCT!{struct ACCEL {
+    fVirt: ::BYTE,
+    key: ::WORD,
+    cmd: ::WORD,
+}}
 pub type LPACCEL = *mut ACCEL;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MENUITEMINFOA {
-    pub cbSize: ::UINT,
-    pub fMask: ::UINT,
-    pub fType: ::UINT,
-    pub fState: ::UINT,
-    pub wID: ::UINT,
-    pub hSubMenu: ::HMENU,
-    pub hbmpChecked: ::HBITMAP,
-    pub hbmpUnchecked: ::HBITMAP,
-    pub dwItemData: ::ULONG_PTR,
-    pub dwTypeData: ::LPSTR,
-    pub cch: ::UINT,
-    pub hbmpItem: ::HBITMAP,
-}
+STRUCT!{struct MENUITEMINFOA {
+    cbSize: ::UINT,
+    fMask: ::UINT,
+    fType: ::UINT,
+    fState: ::UINT,
+    wID: ::UINT,
+    hSubMenu: ::HMENU,
+    hbmpChecked: ::HBITMAP,
+    hbmpUnchecked: ::HBITMAP,
+    dwItemData: ::ULONG_PTR,
+    dwTypeData: ::LPSTR,
+    cch: ::UINT,
+    hbmpItem: ::HBITMAP,
+}}
 pub type LPMENUITEMINFOA = *mut MENUITEMINFOA;
 pub type LPCMENUITEMINFOA = *const MENUITEMINFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MENUITEMINFOW {
-    pub cbSize: ::UINT,
-    pub fMask: ::UINT,
-    pub fType: ::UINT,
-    pub fState: ::UINT,
-    pub wID: ::UINT,
-    pub hSubMenu: ::HMENU,
-    pub hbmpChecked: ::HBITMAP,
-    pub hbmpUnchecked: ::HBITMAP,
-    pub dwItemData: ::ULONG_PTR,
-    pub dwTypeData: ::LPWSTR,
-    pub cch: ::UINT,
-    pub hbmpItem: ::HBITMAP,
-}
+STRUCT!{struct MENUITEMINFOW {
+    cbSize: ::UINT,
+    fMask: ::UINT,
+    fType: ::UINT,
+    fState: ::UINT,
+    wID: ::UINT,
+    hSubMenu: ::HMENU,
+    hbmpChecked: ::HBITMAP,
+    hbmpUnchecked: ::HBITMAP,
+    dwItemData: ::ULONG_PTR,
+    dwTypeData: ::LPWSTR,
+    cch: ::UINT,
+    hbmpItem: ::HBITMAP,
+}}
 pub type LPMENUITEMINFOW = *mut MENUITEMINFOW;
 pub type LPCMENUITEMINFOW = *const MENUITEMINFOW;
 #[repr(C)] #[derive(Copy)]
@@ -1879,15 +1844,14 @@ pub struct MSGBOXPARAMSW {
 impl Clone for MSGBOXPARAMSW { fn clone(&self) -> MSGBOXPARAMSW { *self } }
 pub type PMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
 pub type LPMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HELPINFO {
-    pub cbSize: ::UINT,
-    pub iContextType: ::c_int,
-    pub iCtrlId: ::c_int,
-    pub hItemHandle: ::HANDLE,
-    pub dwContextId: ::DWORD,
-    pub MousePos: ::POINT,
-}
+STRUCT!{struct HELPINFO {
+    cbSize: ::UINT,
+    iContextType: ::c_int,
+    iCtrlId: ::c_int,
+    hItemHandle: ::HANDLE,
+    dwContextId: ::DWORD,
+    MousePos: ::POINT,
+}}
 pub type LPHELPINFO = *mut HELPINFO;
 pub fn GET_WHEEL_DELTA_WPARAM(wParam: ::WPARAM) -> ::c_short {
     ::HIWORD(wParam as ::DWORD) as ::c_short
@@ -1961,24 +1925,22 @@ pub const DT_WORD_ELLIPSIS: ::UINT = 0x00040000;
 pub const DT_NOFULLWIDTHCHARBREAK: ::UINT = 0x00080000;
 pub const DT_HIDEPREFIX: ::UINT = 0x00100000;
 pub const DT_PREFIXONLY: ::UINT = 0x00200000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KBDLLHOOKSTRUCT {
-    pub vkCode: ::DWORD,
-    pub scanCode: ::DWORD,
-    pub flags: ::DWORD,
-    pub time: ::DWORD,
-    pub dwExtraInfo: ::ULONG_PTR,
-}
+STRUCT!{struct KBDLLHOOKSTRUCT {
+    vkCode: ::DWORD,
+    scanCode: ::DWORD,
+    flags: ::DWORD,
+    time: ::DWORD,
+    dwExtraInfo: ::ULONG_PTR,
+}}
 pub type PKBDLLHOOKSTRUCT = *mut KBDLLHOOKSTRUCT;
 pub type LPKBDLLHOOKSTRUCT = *mut KBDLLHOOKSTRUCT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MSLLHOOKSTRUCT {
-    pub pt: ::POINT,
-    pub mouseData: ::DWORD,
-    pub flags: ::DWORD,
-    pub time: ::DWORD,
-    pub dwExtraInfo: ::ULONG_PTR,
-}
+STRUCT!{struct MSLLHOOKSTRUCT {
+    pt: ::POINT,
+    mouseData: ::DWORD,
+    flags: ::DWORD,
+    time: ::DWORD,
+    dwExtraInfo: ::ULONG_PTR,
+}}
 pub type PMSLLHOOKSTRUCT = *mut MSLLHOOKSTRUCT;
 pub type LPMSLLHOOKSTRUCT = *mut MSLLHOOKSTRUCT;
 pub const WH_MIN: ::c_int = -1;
@@ -2021,49 +1983,45 @@ pub const RDW_UPDATENOW: ::UINT = 0x0100;
 pub const RDW_ERASENOW: ::UINT = 0x0200;
 pub const RDW_FRAME: ::UINT = 0x0400;
 pub const RDW_NOFRAME: ::UINT = 0x0800;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MEASUREITEMSTRUCT {
-    pub CtlType: ::UINT,
-    pub CtlID: ::UINT,
-    pub itemID: ::UINT,
-    pub itemWidth: ::UINT,
-    pub itemHeight: ::UINT,
-    pub itemData: ::ULONG_PTR,
-}
+STRUCT!{struct MEASUREITEMSTRUCT {
+    CtlType: ::UINT,
+    CtlID: ::UINT,
+    itemID: ::UINT,
+    itemWidth: ::UINT,
+    itemHeight: ::UINT,
+    itemData: ::ULONG_PTR,
+}}
 pub type LPMEASUREITEMSTRUCT = *mut MEASUREITEMSTRUCT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DRAWITEMSTRUCT {
-    pub CtlType: ::UINT,
-    pub CtlID: ::UINT,
-    pub itemID: ::UINT,
-    pub itemAction: ::UINT,
-    pub itemState: ::UINT,
-    pub hwndItem: ::HWND,
-    pub hDC: ::HDC,
-    pub rcItem: ::RECT,
-    pub itemData: ::ULONG_PTR,
-}
+STRUCT!{struct DRAWITEMSTRUCT {
+    CtlType: ::UINT,
+    CtlID: ::UINT,
+    itemID: ::UINT,
+    itemAction: ::UINT,
+    itemState: ::UINT,
+    hwndItem: ::HWND,
+    hDC: ::HDC,
+    rcItem: ::RECT,
+    itemData: ::ULONG_PTR,
+}}
 pub type LPDRAWITEMSTRUCT = *mut DRAWITEMSTRUCT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DELETEITEMSTRUCT {
-    pub CtlType: ::UINT,
-    pub CtlID: ::UINT,
-    pub itemID: ::UINT,
-    pub hwndItem: ::HWND,
-    pub itemData: ::ULONG_PTR,
-}
+STRUCT!{struct DELETEITEMSTRUCT {
+    CtlType: ::UINT,
+    CtlID: ::UINT,
+    itemID: ::UINT,
+    hwndItem: ::HWND,
+    itemData: ::ULONG_PTR,
+}}
 pub type LPDELETEITEMSTRUCT = *mut DELETEITEMSTRUCT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COMPAREITEMSTRUCT {
-    pub CtlType: ::UINT,
-    pub CtlID: ::UINT,
-    pub hwndItem: ::HWND,
-    pub itemID1: ::UINT,
-    pub itemData1: ::ULONG_PTR,
-    pub itemID2: ::UINT,
-    pub itemData2: ::ULONG_PTR,
-    pub dwLocaleId: ::DWORD,
-}
+STRUCT!{struct COMPAREITEMSTRUCT {
+    CtlType: ::UINT,
+    CtlID: ::UINT,
+    hwndItem: ::HWND,
+    itemID1: ::UINT,
+    itemData1: ::ULONG_PTR,
+    itemID2: ::UINT,
+    itemData2: ::ULONG_PTR,
+    dwLocaleId: ::DWORD,
+}}
 pub type LPCOMPAREITEMSTRUCT = *mut COMPAREITEMSTRUCT;
 /* Image type */
 pub const DST_COMPLEX: ::UINT = 0x0000;

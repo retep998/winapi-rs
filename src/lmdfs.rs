@@ -26,184 +26,167 @@ ENUM!{enum DFS_TARGET_PRIORITY_CLASS {
     DfsSiteCostLowPriorityClass,
     DfsGlobalLowPriorityClass,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_TARGET_PRIORITY {
-    pub TargetPriorityClass: DFS_TARGET_PRIORITY_CLASS,
-    pub TargetPriorityRank: ::USHORT,
-    pub Reserved: ::USHORT,
-}
+STRUCT!{struct DFS_TARGET_PRIORITY {
+    TargetPriorityClass: DFS_TARGET_PRIORITY_CLASS,
+    TargetPriorityRank: ::USHORT,
+    Reserved: ::USHORT,
+}}
 pub type PDFS_TARGET_PRIORITY = *mut DFS_TARGET_PRIORITY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_1 {
-    pub EntryPath: ::LPWSTR,
-}
+STRUCT!{struct DFS_INFO_1 {
+    EntryPath: ::LPWSTR,
+}}
 pub type PDFS_INFO_1 = *mut DFS_INFO_1;
 pub type LPDFS_INFO_1 = *mut DFS_INFO_1;
-#[cfg(target_arch="x86_64")] #[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_1_32 {
-    pub EntryPath: ::ULONG,
-}
+#[cfg(target_arch="x86_64")] STRUCT!{struct DFS_INFO_1_32 {
+    EntryPath: ::ULONG,
+}}
 #[cfg(target_arch="x86_64")]
 pub type PDFS_INFO_1_32 = *mut DFS_INFO_1_32;
 #[cfg(target_arch="x86_64")]
 pub type LPDFS_INFO_1_32 = *mut DFS_INFO_1_32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_2 {
-    pub EntryPath: ::LPWSTR,
-    pub Comment: ::LPWSTR,
-    pub State: ::DWORD,
-    pub NumberOfStorages: ::DWORD,
-}
+STRUCT!{struct DFS_INFO_2 {
+    EntryPath: ::LPWSTR,
+    Comment: ::LPWSTR,
+    State: ::DWORD,
+    NumberOfStorages: ::DWORD,
+}}
 pub type PDFS_INFO_2 = *mut DFS_INFO_2;
 pub type LPDFS_INFO_2 = *mut DFS_INFO_2;
-#[cfg(target_arch="x86_64")] #[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_2_32 {
-    pub EntryPath: ::ULONG,
-    pub Comment: ::ULONG,
-    pub State: ::DWORD,
-    pub NumberOfStorages: ::DWORD,
-}
+#[cfg(target_arch="x86_64")] STRUCT!{struct DFS_INFO_2_32 {
+    EntryPath: ::ULONG,
+    Comment: ::ULONG,
+    State: ::DWORD,
+    NumberOfStorages: ::DWORD,
+}}
 #[cfg(target_arch="x86_64")]
 pub type PDFS_INFO_2_32 = *mut DFS_INFO_2_32;
 #[cfg(target_arch="x86_64")]
 pub type LPDFS_INFO_2_32 = *mut DFS_INFO_2_32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_STORAGE_INFO {
-    pub State: ::ULONG,
-    pub ServerName: ::LPWSTR,
-    pub ShareName: ::LPWSTR,
-}
+STRUCT!{struct DFS_STORAGE_INFO {
+    State: ::ULONG,
+    ServerName: ::LPWSTR,
+    ShareName: ::LPWSTR,
+}}
 pub type PDFS_STORAGE_INFO = *mut DFS_STORAGE_INFO;
 pub type LPDFS_STORAGE_INFO = *mut DFS_STORAGE_INFO;
-#[cfg(target_arch="x86_64")] #[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_STORAGE_INFO_0_32 {
-    pub State: ::ULONG,
-    pub ServerName: ::ULONG,
-    pub ShareName: ::ULONG,
-}
+#[cfg(target_arch="x86_64")] STRUCT!{struct DFS_STORAGE_INFO_0_32 {
+    State: ::ULONG,
+    ServerName: ::ULONG,
+    ShareName: ::ULONG,
+}}
 #[cfg(target_arch="x86_64")]
 pub type PDFS_STORAGE_INFO_0_32 = *mut DFS_STORAGE_INFO_0_32;
 #[cfg(target_arch="x86_64")]
 pub type LPDFS_STORAGE_INFO_0_32 = *mut DFS_STORAGE_INFO_0_32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_STORAGE_INFO_1 {
-    pub State: ::ULONG,
-    pub ServerName: ::LPWSTR,
-    pub ShareName: ::LPWSTR,
-    pub TargetPriority: DFS_TARGET_PRIORITY,
-}
+STRUCT!{struct DFS_STORAGE_INFO_1 {
+    State: ::ULONG,
+    ServerName: ::LPWSTR,
+    ShareName: ::LPWSTR,
+    TargetPriority: DFS_TARGET_PRIORITY,
+}}
 pub type PDFS_STORAGE_INFO_1 = *mut DFS_STORAGE_INFO_1;
 pub type LPDFS_STORAGE_INFO_1 = *mut DFS_STORAGE_INFO_1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_3 {
-    pub EntryPath: ::LPWSTR,
-    pub Comment: ::LPWSTR,
-    pub State: ::DWORD,
-    pub NumberOfStorages: ::DWORD,
-    pub Storage: LPDFS_STORAGE_INFO,
-}
+STRUCT!{struct DFS_INFO_3 {
+    EntryPath: ::LPWSTR,
+    Comment: ::LPWSTR,
+    State: ::DWORD,
+    NumberOfStorages: ::DWORD,
+    Storage: LPDFS_STORAGE_INFO,
+}}
 pub type PDFS_INFO_3 = *mut DFS_INFO_3;
 pub type LPDFS_INFO_3 = *mut DFS_INFO_3;
-#[cfg(target_arch="x86_64")] #[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_3_32 {
-    pub EntryPath: ::ULONG,
-    pub Comment: ::ULONG,
-    pub State: ::DWORD,
-    pub NumberOfStorages: ::DWORD,
-    pub Storage: ::ULONG,
-}
+#[cfg(target_arch="x86_64")] STRUCT!{struct DFS_INFO_3_32 {
+    EntryPath: ::ULONG,
+    Comment: ::ULONG,
+    State: ::DWORD,
+    NumberOfStorages: ::DWORD,
+    Storage: ::ULONG,
+}}
 #[cfg(target_arch="x86_64")]
 pub type PDFS_INFO_3_32 = *mut DFS_INFO_3_32;
 #[cfg(target_arch="x86_64")]
 pub type LPDFS_INFO_3_32 = *mut DFS_INFO_3_32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_4 {
-    pub EntryPath: ::LPWSTR,
-    pub Comment: ::LPWSTR,
-    pub State: ::DWORD,
-    pub Timeout: ::ULONG,
-    pub Guid: ::GUID,
-    pub NumberOfStorages: ::DWORD,
-    pub Storage: LPDFS_STORAGE_INFO,
-}
+STRUCT!{struct DFS_INFO_4 {
+    EntryPath: ::LPWSTR,
+    Comment: ::LPWSTR,
+    State: ::DWORD,
+    Timeout: ::ULONG,
+    Guid: ::GUID,
+    NumberOfStorages: ::DWORD,
+    Storage: LPDFS_STORAGE_INFO,
+}}
 pub type PDFS_INFO_4 = *mut DFS_INFO_4;
 pub type LPDFS_INFO_4 = *mut DFS_INFO_4;
-#[cfg(target_arch="x86_64")] #[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_4_32 {
-    pub EntryPath: ::ULONG,
-    pub Comment: ::ULONG,
-    pub State: ::DWORD,
-    pub Timeout: ::ULONG,
-    pub Guid: ::GUID,
-    pub NumberOfStorages: ::DWORD,
-    pub Storage: ::ULONG,
-}
+#[cfg(target_arch="x86_64")] STRUCT!{struct DFS_INFO_4_32 {
+    EntryPath: ::ULONG,
+    Comment: ::ULONG,
+    State: ::DWORD,
+    Timeout: ::ULONG,
+    Guid: ::GUID,
+    NumberOfStorages: ::DWORD,
+    Storage: ::ULONG,
+}}
 #[cfg(target_arch="x86_64")]
 pub type PDFS_INFO_4_32 = *mut DFS_INFO_4_32;
 #[cfg(target_arch="x86_64")]
 pub type LPDFS_INFO_4_32 = *mut DFS_INFO_4_32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_5 {
-    pub EntryPath: ::LPWSTR,
-    pub Comment: ::LPWSTR,
-    pub State: ::DWORD,
-    pub Timeout: ::ULONG,
-    pub Guid: ::GUID,
-    pub PropertyFlags: ::ULONG,
-    pub MetadataSize: ::ULONG,
-    pub NumberOfStorages: ::DWORD,
-}
+STRUCT!{struct DFS_INFO_5 {
+    EntryPath: ::LPWSTR,
+    Comment: ::LPWSTR,
+    State: ::DWORD,
+    Timeout: ::ULONG,
+    Guid: ::GUID,
+    PropertyFlags: ::ULONG,
+    MetadataSize: ::ULONG,
+    NumberOfStorages: ::DWORD,
+}}
 pub type PDFS_INFO_5 = *mut DFS_INFO_5;
 pub type LPDFS_INFO_5 = *mut DFS_INFO_5;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_6 {
-    pub EntryPath: ::LPWSTR,
-    pub Comment: ::LPWSTR,
-    pub State: ::DWORD,
-    pub Timeout: ::ULONG,
-    pub Guid: ::GUID,
-    pub PropertyFlags: ::ULONG,
-    pub MetadataSize: ::ULONG,
-    pub NumberOfStorages: ::DWORD,
-    pub Storage: LPDFS_STORAGE_INFO,
-}
+STRUCT!{struct DFS_INFO_6 {
+    EntryPath: ::LPWSTR,
+    Comment: ::LPWSTR,
+    State: ::DWORD,
+    Timeout: ::ULONG,
+    Guid: ::GUID,
+    PropertyFlags: ::ULONG,
+    MetadataSize: ::ULONG,
+    NumberOfStorages: ::DWORD,
+    Storage: LPDFS_STORAGE_INFO,
+}}
 pub type PDFS_INFO_6 = *mut DFS_INFO_6;
 pub type LPDFS_INFO_6 = *mut DFS_INFO_6;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_7 {
-    pub GenerationGuid: ::GUID,
-}
+STRUCT!{struct DFS_INFO_7 {
+    GenerationGuid: ::GUID,
+}}
 pub type PDFS_INFO_7 = *mut DFS_INFO_7;
 pub type LPDFS_INFO_7 = *mut DFS_INFO_7;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_8 {
-    pub EntryPath: ::LPWSTR,
-    pub Comment: ::LPWSTR,
-    pub State: ::DWORD,
-    pub Timeout: ::ULONG,
-    pub Guid: ::GUID,
-    pub PropertyFlags: ::ULONG,
-    pub MetadataSize: ::ULONG,
-    pub SdLengthReserved: ::ULONG,
-    pub pSecurityDescriptor: ::PSECURITY_DESCRIPTOR,
-    pub NumberOfStorages: ::DWORD,
-}
+STRUCT!{struct DFS_INFO_8 {
+    EntryPath: ::LPWSTR,
+    Comment: ::LPWSTR,
+    State: ::DWORD,
+    Timeout: ::ULONG,
+    Guid: ::GUID,
+    PropertyFlags: ::ULONG,
+    MetadataSize: ::ULONG,
+    SdLengthReserved: ::ULONG,
+    pSecurityDescriptor: ::PSECURITY_DESCRIPTOR,
+    NumberOfStorages: ::DWORD,
+}}
 pub type PDFS_INFO_8 = *mut DFS_INFO_8;
 pub type LPDFS_INFO_8 = *mut DFS_INFO_8;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_9 {
-    pub EntryPath: ::LPWSTR,
-    pub Comment: ::LPWSTR,
-    pub State: ::DWORD,
-    pub Timeout: ::ULONG,
-    pub Guid: ::GUID,
-    pub PropertyFlags: ::ULONG,
-    pub MetadataSize: ::ULONG,
-    pub SdLengthReserved: ::ULONG,
-    pub pSecurityDescriptor: ::PSECURITY_DESCRIPTOR,
-    pub NumberOfStorages: ::DWORD,
-    pub Storage: LPDFS_STORAGE_INFO,
-}
+STRUCT!{struct DFS_INFO_9 {
+    EntryPath: ::LPWSTR,
+    Comment: ::LPWSTR,
+    State: ::DWORD,
+    Timeout: ::ULONG,
+    Guid: ::GUID,
+    PropertyFlags: ::ULONG,
+    MetadataSize: ::ULONG,
+    SdLengthReserved: ::ULONG,
+    pSecurityDescriptor: ::PSECURITY_DESCRIPTOR,
+    NumberOfStorages: ::DWORD,
+    Storage: LPDFS_STORAGE_INFO,
+}}
 pub type PDFS_INFO_9 = *mut DFS_INFO_9;
 pub type LPDFS_INFO_9 = *mut DFS_INFO_9;
 pub const DFS_PROPERTY_FLAG_INSITE_REFERRALS: ::ULONG = 0x00000001;
@@ -216,92 +199,80 @@ pub const DFS_VALID_PROPERTY_FLAGS: ::ULONG = DFS_PROPERTY_FLAG_INSITE_REFERRALS
     | DFS_PROPERTY_FLAG_ROOT_SCALABILITY | DFS_PROPERTY_FLAG_SITE_COSTING
     | DFS_PROPERTY_FLAG_TARGET_FAILBACK | DFS_PROPERTY_FLAG_CLUSTER_ENABLED
     | DFS_PROPERTY_FLAG_ABDE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_50 {
-    pub NamespaceMajorVersion: ::ULONG,
-    pub NamespaceMinorVersion: ::ULONG,
-    pub NamespaceCapabilities: ::ULONGLONG,
-}
+STRUCT!{struct DFS_INFO_50 {
+    NamespaceMajorVersion: ::ULONG,
+    NamespaceMinorVersion: ::ULONG,
+    NamespaceCapabilities: ::ULONGLONG,
+}}
 pub type PDFS_INFO_50 = *mut DFS_INFO_50;
 pub type LPDFS_INFO_50 = *mut DFS_INFO_50;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_100 {
-    pub Comment: ::LPWSTR,
-}
+STRUCT!{struct DFS_INFO_100 {
+    Comment: ::LPWSTR,
+}}
 pub type PDFS_INFO_100 = *mut DFS_INFO_100;
 pub type LPDFS_INFO_100 = *mut DFS_INFO_100;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_101 {
-    pub State: ::DWORD,
-}
+STRUCT!{struct DFS_INFO_101 {
+    State: ::DWORD,
+}}
 pub type PDFS_INFO_101 = *mut DFS_INFO_101;
 pub type LPDFS_INFO_101 = *mut DFS_INFO_101;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_102 {
-    pub Timeout: ::ULONG,
-}
+STRUCT!{struct DFS_INFO_102 {
+    Timeout: ::ULONG,
+}}
 pub type PDFS_INFO_102 = *mut DFS_INFO_102;
 pub type LPDFS_INFO_102 = *mut DFS_INFO_102;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_103 {
-    pub PropertyFlagMask: ::ULONG,
-    pub PropertyFlags: ::ULONG,
-}
+STRUCT!{struct DFS_INFO_103 {
+    PropertyFlagMask: ::ULONG,
+    PropertyFlags: ::ULONG,
+}}
 pub type PDFS_INFO_103 = *mut DFS_INFO_103;
 pub type LPDFS_INFO_103 = *mut DFS_INFO_103;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_104 {
-    pub TargetPriority: DFS_TARGET_PRIORITY,
-}
+STRUCT!{struct DFS_INFO_104 {
+    TargetPriority: DFS_TARGET_PRIORITY,
+}}
 pub type PDFS_INFO_104 = *mut DFS_INFO_104;
 pub type LPDFS_INFO_104 = *mut DFS_INFO_104;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_105 {
-    pub Comment: ::LPWSTR,
-    pub State: ::DWORD,
-    pub Timeout: ::ULONG,
-    pub PropertyFlagMask: ::ULONG,
-    pub PropertyFlags: ::ULONG,
-}
+STRUCT!{struct DFS_INFO_105 {
+    Comment: ::LPWSTR,
+    State: ::DWORD,
+    Timeout: ::ULONG,
+    PropertyFlagMask: ::ULONG,
+    PropertyFlags: ::ULONG,
+}}
 pub type PDFS_INFO_105 = *mut DFS_INFO_105;
 pub type LPDFS_INFO_105 = *mut DFS_INFO_105;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_106 {
-    pub State: ::DWORD,
-    pub TargetPriority: DFS_TARGET_PRIORITY,
-}
+STRUCT!{struct DFS_INFO_106 {
+    State: ::DWORD,
+    TargetPriority: DFS_TARGET_PRIORITY,
+}}
 pub type PDFS_INFO_106 = *mut DFS_INFO_106;
 pub type LPDFS_INFO_106 = *mut DFS_INFO_106;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_107 {
-    pub Comment: ::LPWSTR,
-    pub State: ::DWORD,
-    pub Timeout: ::ULONG,
-    pub PropertyFlagMask: ::ULONG,
-    pub PropertyFlags: ::ULONG,
-    pub SdLengthReserved: ::ULONG,
-    pub pSecurityDescriptor: ::PSECURITY_DESCRIPTOR,
-}
+STRUCT!{struct DFS_INFO_107 {
+    Comment: ::LPWSTR,
+    State: ::DWORD,
+    Timeout: ::ULONG,
+    PropertyFlagMask: ::ULONG,
+    PropertyFlags: ::ULONG,
+    SdLengthReserved: ::ULONG,
+    pSecurityDescriptor: ::PSECURITY_DESCRIPTOR,
+}}
 pub type PDFS_INFO_107 = *mut DFS_INFO_107;
 pub type LPDFS_INFO_107 = *mut DFS_INFO_107;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_150 {
-    pub SdLengthReserved: ::ULONG,
-    pub pSecurityDescriptor: ::PSECURITY_DESCRIPTOR,
-}
+STRUCT!{struct DFS_INFO_150 {
+    SdLengthReserved: ::ULONG,
+    pSecurityDescriptor: ::PSECURITY_DESCRIPTOR,
+}}
 pub type PDFS_INFO_150 = *mut DFS_INFO_150;
 pub type LPDFS_INFO_150 = *mut DFS_INFO_150;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_200 {
-    pub FtDfsName: ::LPWSTR,
-}
+STRUCT!{struct DFS_INFO_200 {
+    FtDfsName: ::LPWSTR,
+}}
 pub type PDFS_INFO_200 = *mut DFS_INFO_200;
 pub type LPDFS_INFO_200 = *mut DFS_INFO_200;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_INFO_300 {
-    pub Flags: ::DWORD,
-    pub DfsName: ::LPWSTR,
-}
+STRUCT!{struct DFS_INFO_300 {
+    Flags: ::DWORD,
+    DfsName: ::LPWSTR,
+}}
 pub type PDFS_INFO_300 = *mut DFS_INFO_300;
 pub type LPDFS_INFO_300 = *mut DFS_INFO_300;
 pub const DFS_ADD_VOLUME: ::DWORD = 1;
@@ -309,19 +280,17 @@ pub const DFS_RESTORE_VOLUME: ::DWORD = 2;
 pub const NET_DFS_SETDC_FLAGS: ::DWORD = 0x00000000;
 pub const NET_DFS_SETDC_TIMEOUT: ::DWORD = 0x00000001;
 pub const NET_DFS_SETDC_INITPKT: ::DWORD = 0x00000002;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_SITENAME_INFO {
-    pub SiteFlags: ::ULONG,
-    pub SiteName: ::LPWSTR,
-}
+STRUCT!{struct DFS_SITENAME_INFO {
+    SiteFlags: ::ULONG,
+    SiteName: ::LPWSTR,
+}}
 pub type PDFS_SITENAME_INFO = *mut DFS_SITENAME_INFO;
 pub type LPDFS_SITENAME_INFO = *mut DFS_SITENAME_INFO;
 pub const DFS_SITE_PRIMARY: ::ULONG = 0x1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_SITELIST_INFO {
-    pub cSites: ::ULONG,
-    pub Site: [DFS_SITENAME_INFO; 1],
-}
+STRUCT!{struct DFS_SITELIST_INFO {
+    cSites: ::ULONG,
+    Site: [DFS_SITENAME_INFO; 1],
+}}
 pub type PDFS_SITELIST_INFO = *mut DFS_SITELIST_INFO;
 pub type LPDFS_SITELIST_INFO = *mut DFS_SITELIST_INFO;
 ENUM!{enum DFS_NAMESPACE_VERSION_ORIGIN {
@@ -331,13 +300,12 @@ ENUM!{enum DFS_NAMESPACE_VERSION_ORIGIN {
 }}
 pub type PDFS_NAMESPACE_VERSION_ORIGIN = *mut DFS_NAMESPACE_VERSION_ORIGIN;
 pub const DFS_NAMESPACE_CAPABILITY_ABDE: ::ULONGLONG = 0x0000000000000001;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DFS_SUPPORTED_NAMESPACE_VERSION_INFO {
-    pub DomainDfsMajorVersion: ::ULONG,
-    pub DomainDfsMinorVersion: ::ULONG,
-    pub DomainDfsCapabilities: ::ULONGLONG,
-    pub StandaloneDfsMajorVersion: ::ULONG,
-    pub StandaloneDfsMinorVersion: ::ULONG,
-    pub StandaloneDfsCapabilities: ::ULONGLONG,
-}
+STRUCT!{struct DFS_SUPPORTED_NAMESPACE_VERSION_INFO {
+    DomainDfsMajorVersion: ::ULONG,
+    DomainDfsMinorVersion: ::ULONG,
+    DomainDfsCapabilities: ::ULONGLONG,
+    StandaloneDfsMajorVersion: ::ULONG,
+    StandaloneDfsMinorVersion: ::ULONG,
+    StandaloneDfsCapabilities: ::ULONGLONG,
+}}
 pub type PDFS_SUPPORTED_NAMESPACE_VERSION_INFO = *mut DFS_SUPPORTED_NAMESPACE_VERSION_INFO;

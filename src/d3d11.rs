@@ -374,16 +374,15 @@ ENUM!{enum D3D11_INPUT_CLASSIFICATION {
     D3D11_INPUT_PER_INSTANCE_DATA = 1,
 }}
 pub const D3D11_APPEND_ALIGNED_ELEMENT: ::DWORD = 0xffffffff;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_INPUT_ELEMENT_DESC {
-    pub SemanticName: ::LPCSTR,
-    pub SemanticIndex: ::UINT,
-    pub Format: ::DXGI_FORMAT,
-    pub InputSlot: ::UINT,
-    pub AlignedByteOffset: ::UINT,
-    pub InputSlotClass: ::D3D11_INPUT_CLASSIFICATION,
-    pub InstanceDataStepRate: ::UINT,
-}
+STRUCT!{struct D3D11_INPUT_ELEMENT_DESC {
+    SemanticName: ::LPCSTR,
+    SemanticIndex: ::UINT,
+    Format: ::DXGI_FORMAT,
+    InputSlot: ::UINT,
+    AlignedByteOffset: ::UINT,
+    InputSlotClass: ::D3D11_INPUT_CLASSIFICATION,
+    InstanceDataStepRate: ::UINT,
+}}
 ENUM!{enum D3D11_FILL_MODE {
     D3D11_FILL_WIREFRAME = 2,
     D3D11_FILL_SOLID = 3,
@@ -395,39 +394,35 @@ ENUM!{enum D3D11_CULL_MODE {
     D3D11_CULL_FRONT = 2,
     D3D11_CULL_BACK = 3,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_SO_DECLARATION_ENTRY {
-    pub Stream: ::UINT,
-    pub SemanticName: ::LPCSTR,
-    pub SemanticIndex: ::UINT,
-    pub StartComponent: ::BYTE,
-    pub ComponentCount: ::BYTE,
-    pub OutputSlot: ::BYTE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIEWPORT {
-    pub TopLeftX: ::FLOAT,
-    pub TopLeftY: ::FLOAT,
-    pub Width: ::FLOAT,
-    pub Height: ::FLOAT,
-    pub MinDepth: ::FLOAT,
-    pub MaxDepth: ::FLOAT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_DRAW_INSTANCED_INDIRECT_ARGS {
-    pub VertexCountPerInstance: ::UINT,
-    pub InstanceCount: ::UINT,
-    pub StartVertexLocation: ::UINT,
-    pub StartInstanceLocation: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_DRAW_INDEXED_INSTANCED_INDIRECT_ARGS {
-    pub IndexCountPerInstance: ::UINT,
-    pub InstanceCount: ::UINT,
-    pub StartIndexLocation: ::UINT,
-    pub BaseVertexLocation: ::INT,
-    pub StartInstanceLocation: ::UINT,
-}
+STRUCT!{struct D3D11_SO_DECLARATION_ENTRY {
+    Stream: ::UINT,
+    SemanticName: ::LPCSTR,
+    SemanticIndex: ::UINT,
+    StartComponent: ::BYTE,
+    ComponentCount: ::BYTE,
+    OutputSlot: ::BYTE,
+}}
+STRUCT!{struct D3D11_VIEWPORT {
+    TopLeftX: ::FLOAT,
+    TopLeftY: ::FLOAT,
+    Width: ::FLOAT,
+    Height: ::FLOAT,
+    MinDepth: ::FLOAT,
+    MaxDepth: ::FLOAT,
+}}
+STRUCT!{struct D3D11_DRAW_INSTANCED_INDIRECT_ARGS {
+    VertexCountPerInstance: ::UINT,
+    InstanceCount: ::UINT,
+    StartVertexLocation: ::UINT,
+    StartInstanceLocation: ::UINT,
+}}
+STRUCT!{struct D3D11_DRAW_INDEXED_INSTANCED_INDIRECT_ARGS {
+    IndexCountPerInstance: ::UINT,
+    InstanceCount: ::UINT,
+    StartIndexLocation: ::UINT,
+    BaseVertexLocation: ::INT,
+    StartInstanceLocation: ::UINT,
+}}
 ENUM!{enum D3D11_RESOURCE_DIMENSION {
     D3D11_RESOURCE_DIMENSION_UNKNOWN = 0,
     D3D11_RESOURCE_DIMENSION_BUFFER = 1,
@@ -520,15 +515,14 @@ FLAGS!{enum D3D11_CLEAR_FLAG {
     STENCIL = 0x2,
 }}
 pub type D3D11_RECT = ::RECT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_BOX {
+STRUCT!{struct D3D11_BOX {
     left: ::UINT,
     top: ::UINT,
     front: ::UINT,
     right: ::UINT,
     bottom: ::UINT,
     back: ::UINT,
-}
+}}
 RIDL!(
 interface ID3D11DeviceChild(ID3D11DeviceChildVtbl): IUnknown(IUnknownVtbl) {
     fn GetDevice(&mut self, ppDevice: *mut *mut ID3D11Device) -> (),
@@ -567,24 +561,22 @@ ENUM!{enum D3D11_STENCIL_OP {
     D3D11_STENCIL_OP_INCR = 7,
     D3D11_STENCIL_OP_DECR = 8,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_DEPTH_STENCILOP_DESC {
-    pub StencilFailOp: D3D11_STENCIL_OP,
-    pub StencilDepthFailOp: D3D11_STENCIL_OP,
-    pub StencilPassOp: D3D11_STENCIL_OP,
-    pub StencilFunc: D3D11_COMPARISON_FUNC,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_DEPTH_STENCIL_DESC {
-    pub DepthEnable: ::BOOL,
-    pub DepthWriteMask: D3D11_DEPTH_WRITE_MASK,
-    pub DepthFunc: D3D11_COMPARISON_FUNC,
-    pub StencilEnable: ::BOOL,
-    pub StencilReadMask: ::UINT8,
-    pub StencilWriteMask: ::UINT8,
-    pub FrontFace: D3D11_DEPTH_STENCILOP_DESC,
-    pub BackFace: D3D11_DEPTH_STENCILOP_DESC,
-}
+STRUCT!{struct D3D11_DEPTH_STENCILOP_DESC {
+    StencilFailOp: D3D11_STENCIL_OP,
+    StencilDepthFailOp: D3D11_STENCIL_OP,
+    StencilPassOp: D3D11_STENCIL_OP,
+    StencilFunc: D3D11_COMPARISON_FUNC,
+}}
+STRUCT!{struct D3D11_DEPTH_STENCIL_DESC {
+    DepthEnable: ::BOOL,
+    DepthWriteMask: D3D11_DEPTH_WRITE_MASK,
+    DepthFunc: D3D11_COMPARISON_FUNC,
+    StencilEnable: ::BOOL,
+    StencilReadMask: ::UINT8,
+    StencilWriteMask: ::UINT8,
+    FrontFace: D3D11_DEPTH_STENCILOP_DESC,
+    BackFace: D3D11_DEPTH_STENCILOP_DESC,
+}}
 RIDL!(
 interface ID3D11DepthStencilState(ID3D11DepthStencilStateVtbl)
     : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
@@ -625,59 +617,54 @@ FLAGS!{enum D3D11_COLOR_WRITE_ENABLE {
     D3D11_COLOR_WRITE_ENABLE_ALL = D3D11_COLOR_WRITE_ENABLE_RED.0 | D3D11_COLOR_WRITE_ENABLE_GREEN.0 |
         D3D11_COLOR_WRITE_ENABLE_BLUE.0 | D3D11_COLOR_WRITE_ENABLE_ALPHA.0,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_RENDER_TARGET_BLEND_DESC {
-    pub BlendEnable: ::BOOL,
-    pub SrcBlend: D3D11_BLEND,
-    pub DestBlend: D3D11_BLEND,
-    pub BlendOp: D3D11_BLEND_OP,
-    pub SrcBlendAlpha: D3D11_BLEND,
-    pub DestBlendAlpha: D3D11_BLEND,
-    pub BlendOpAlpha: D3D11_BLEND_OP,
-    pub RenderTargetWriteMask: ::UINT8,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_BLEND_DESC {
-    pub AlphaToCoverageEnable: ::BOOL,
-    pub IndependentBlendEnable: ::BOOL,
-    pub RenderTarget: [D3D11_RENDER_TARGET_BLEND_DESC; 8],
-}
+STRUCT!{struct D3D11_RENDER_TARGET_BLEND_DESC {
+    BlendEnable: ::BOOL,
+    SrcBlend: D3D11_BLEND,
+    DestBlend: D3D11_BLEND,
+    BlendOp: D3D11_BLEND_OP,
+    SrcBlendAlpha: D3D11_BLEND,
+    DestBlendAlpha: D3D11_BLEND,
+    BlendOpAlpha: D3D11_BLEND_OP,
+    RenderTargetWriteMask: ::UINT8,
+}}
+STRUCT!{struct D3D11_BLEND_DESC {
+    AlphaToCoverageEnable: ::BOOL,
+    IndependentBlendEnable: ::BOOL,
+    RenderTarget: [D3D11_RENDER_TARGET_BLEND_DESC; 8],
+}}
 RIDL!(
 interface ID3D11BlendState(ID3D11BlendStateVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetDesc(&mut self, pDesc: *mut D3D11_BLEND_DESC) -> ()
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_RASTERIZER_DESC {
-    pub FillMode: D3D11_FILL_MODE,
-    pub CullMode: D3D11_CULL_MODE,
-    pub FrontCounterClockwise: ::BOOL,
-    pub DepthBias: ::INT,
-    pub DepthBiasClamp: ::FLOAT,
-    pub SlopeScaledDepthBias: ::FLOAT,
-    pub DepthClipEnable: ::BOOL,
-    pub ScissorEnable: ::BOOL,
-    pub MultisampleEnable: ::BOOL,
-    pub AntialiasedLineEnable: ::BOOL,
-}
+STRUCT!{struct D3D11_RASTERIZER_DESC {
+    FillMode: D3D11_FILL_MODE,
+    CullMode: D3D11_CULL_MODE,
+    FrontCounterClockwise: ::BOOL,
+    DepthBias: ::INT,
+    DepthBiasClamp: ::FLOAT,
+    SlopeScaledDepthBias: ::FLOAT,
+    DepthClipEnable: ::BOOL,
+    ScissorEnable: ::BOOL,
+    MultisampleEnable: ::BOOL,
+    AntialiasedLineEnable: ::BOOL,
+}}
 RIDL!(
 interface ID3D11RasterizerState(ID3D11RasterizerStateVtbl)
     : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetDesc(&mut self, pDesc: *mut D3D11_RASTERIZER_DESC) -> ()
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_SUBRESOURCE_DATA {
-    pub pSysMem: *const ::c_void,
-    pub SysMemPitch: ::UINT,
-    pub SysMemSlicePitch: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_MAPPED_SUBRESOURCE {
-    pub pData: *mut ::c_void,
-    pub RowPitch: ::UINT,
-    pub DepthPitch: ::UINT,
-}
+STRUCT!{struct D3D11_SUBRESOURCE_DATA {
+    pSysMem: *const ::c_void,
+    SysMemPitch: ::UINT,
+    SysMemSlicePitch: ::UINT,
+}}
+STRUCT!{struct D3D11_MAPPED_SUBRESOURCE {
+    pData: *mut ::c_void,
+    RowPitch: ::UINT,
+    DepthPitch: ::UINT,
+}}
 RIDL!(
 interface ID3D11Resource(ID3D11ResourceVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetType(&mut self, pResourceDimension: *mut D3D11_RESOURCE_DIMENSION) -> (),
@@ -685,66 +672,62 @@ interface ID3D11Resource(ID3D11ResourceVtbl): ID3D11DeviceChild(ID3D11DeviceChil
     fn GetEvictionPriority(&mut self) -> ::UINT
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_BUFFER_DESC {
-    pub ByteWidth: ::UINT,
-    pub Usage: D3D11_USAGE,
-    pub BindFlags: ::UINT,
-    pub CPUAccessFlags: ::UINT,
-    pub MiscFlags: ::UINT,
-    pub StructureByteStride: ::UINT,
-}
+STRUCT!{struct D3D11_BUFFER_DESC {
+    ByteWidth: ::UINT,
+    Usage: D3D11_USAGE,
+    BindFlags: ::UINT,
+    CPUAccessFlags: ::UINT,
+    MiscFlags: ::UINT,
+    StructureByteStride: ::UINT,
+}}
 RIDL!(
 interface ID3D11Buffer(ID3D11BufferVtbl): ID3D11Resource(ID3D11ResourceVtbl) {
     fn GetDesc(&mut self, pDesc: *mut D3D11_BUFFER_DESC) -> ()
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEXTURE1D_DESC {
-    pub Width: ::UINT,
-    pub MipLevels: ::UINT,
-    pub ArraySize: ::UINT,
-    pub Format: ::DXGI_FORMAT,
-    pub Usage: D3D11_USAGE,
-    pub BindFlags: ::UINT,
-    pub CPUAccessFlags: ::UINT,
-    pub MiscFlags: ::UINT,
-}
+STRUCT!{struct D3D11_TEXTURE1D_DESC {
+    Width: ::UINT,
+    MipLevels: ::UINT,
+    ArraySize: ::UINT,
+    Format: ::DXGI_FORMAT,
+    Usage: D3D11_USAGE,
+    BindFlags: ::UINT,
+    CPUAccessFlags: ::UINT,
+    MiscFlags: ::UINT,
+}}
 RIDL!(
 interface ID3D11Texture1D(ID3D11Texture1DVtbl): ID3D11Resource(ID3D11ResourceVtbl) {
     fn GetDesc(&mut self, pDesc: *mut D3D11_TEXTURE1D_DESC) -> ()
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEXTURE2D_DESC {
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub MipLevels: ::UINT,
-    pub ArraySize: ::UINT,
-    pub Format: ::DXGI_FORMAT,
-    pub SampleDesc: ::DXGI_SAMPLE_DESC,
-    pub Usage: D3D11_USAGE,
-    pub BindFlags: ::UINT,
-    pub CPUAccessFlags: ::UINT,
-    pub MiscFlags: ::UINT,
-}
+STRUCT!{struct D3D11_TEXTURE2D_DESC {
+    Width: ::UINT,
+    Height: ::UINT,
+    MipLevels: ::UINT,
+    ArraySize: ::UINT,
+    Format: ::DXGI_FORMAT,
+    SampleDesc: ::DXGI_SAMPLE_DESC,
+    Usage: D3D11_USAGE,
+    BindFlags: ::UINT,
+    CPUAccessFlags: ::UINT,
+    MiscFlags: ::UINT,
+}}
 RIDL!(
 interface ID3D11Texture2D(ID3D11Texture2DVtbl): ID3D11Resource(ID3D11ResourceVtbl) {
     fn GetDesc(&mut self, pDesc: *mut D3D11_TEXTURE2D_DESC) -> ()
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEXTURE3D_DESC {
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub Depth: ::UINT,
-    pub MipLevels: ::UINT,
-    pub Format: ::DXGI_FORMAT,
-    pub Usage: D3D11_USAGE,
-    pub BindFlags: ::UINT,
-    pub CPUAccessFlags: ::UINT,
-    pub MiscFlags: ::UINT,
-}
+STRUCT!{struct D3D11_TEXTURE3D_DESC {
+    Width: ::UINT,
+    Height: ::UINT,
+    Depth: ::UINT,
+    MipLevels: ::UINT,
+    Format: ::DXGI_FORMAT,
+    Usage: D3D11_USAGE,
+    BindFlags: ::UINT,
+    CPUAccessFlags: ::UINT,
+    MiscFlags: ::UINT,
+}}
 RIDL!(
 interface ID3D11Texture3D(ID3D11Texture3DVtbl): ID3D11Resource(ID3D11ResourceVtbl) {
     fn GetDesc(&mut self, pDesc: *mut D3D11_TEXTURE3D_DESC) -> ()
@@ -763,11 +746,10 @@ interface ID3D11View(ID3D11ViewVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetResource(&mut self, ppResource: *mut *mut ID3D11Resource) -> ()
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_BUFFER_SRV {
+STRUCT!{struct D3D11_BUFFER_SRV {
     u1: ::UINT,
     u2: ::UINT,
-}
+}}
 UNION!(D3D11_BUFFER_SRV, u1, FirstElement, FirstElement_mut, ::UINT);
 UNION!(D3D11_BUFFER_SRV, u1, ElementOffset, ElementOffset_mut, ::UINT);
 UNION!(D3D11_BUFFER_SRV, u2, ElementWidth, ElementWidth_mut, ::UINT);
@@ -775,68 +757,57 @@ UNION!(D3D11_BUFFER_SRV, u2, NumElements, NumElements_mut, ::UINT);
 FLAGS!{enum D3D11_BUFFEREX_SRV_FLAG {
     D3D11_BUFFEREX_SRV_FLAG_RAW = 0x1,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_BUFFEREX_SRV {
-    pub FirstElement: ::UINT,
-    pub NumElements: ::UINT,
-    pub Flags: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX1D_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX1D_ARRAY_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2D_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2D_ARRAY_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX3D_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEXCUBE_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEXCUBE_ARRAY_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-    pub First2DArrayFace: ::UINT,
-    pub NumCubes: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2DMS_SRV {
-    pub UnusedField_NothingToDefine: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2DMS_ARRAY_SRV {
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_SHADER_RESOURCE_VIEW_DESC {
-    pub Format: ::DXGI_FORMAT,
-    pub ViewDimension:  D3D11_SRV_DIMENSION,
+STRUCT!{struct D3D11_BUFFEREX_SRV {
+    FirstElement: ::UINT,
+    NumElements: ::UINT,
+    Flags: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX1D_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX1D_ARRAY_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2D_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2D_ARRAY_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX3D_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+}}
+STRUCT!{struct D3D11_TEXCUBE_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+}}
+STRUCT!{struct D3D11_TEXCUBE_ARRAY_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+    First2DArrayFace: ::UINT,
+    NumCubes: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2DMS_SRV {
+    UnusedField_NothingToDefine: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2DMS_ARRAY_SRV {
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
+STRUCT!{struct D3D11_SHADER_RESOURCE_VIEW_DESC {
+    Format: ::DXGI_FORMAT,
+    ViewDimension:  D3D11_SRV_DIMENSION,
     u: [::UINT; 4],
-}
+}}
 UNION!(D3D11_SHADER_RESOURCE_VIEW_DESC, u, Buffer, Buffer_mut, D3D11_BUFFER_SRV);
 UNION!(D3D11_SHADER_RESOURCE_VIEW_DESC, u, Texture1D, Texture1D_mut, D3D11_TEX1D_SRV);
 UNION!(D3D11_SHADER_RESOURCE_VIEW_DESC, u, Texture1DArray, Texture1DArray_mut,
@@ -857,56 +828,47 @@ interface ID3D11ShaderResourceView(ID3D11ShaderResourceViewVtbl): ID3D11View(ID3
     fn GetDesc(&mut self, pDesc: *mut D3D11_SHADER_RESOURCE_VIEW_DESC) -> ()
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_BUFFER_RTV {
+STRUCT!{struct D3D11_BUFFER_RTV {
     u1: ::UINT,
     u2: ::UINT,
-}
+}}
 UNION!(D3D11_BUFFER_RTV, u1, FirstElement, FirstElement_mut, ::UINT);
 UNION!(D3D11_BUFFER_RTV, u1, ElementOffset, ElementOffset_mut, ::UINT);
 UNION!(D3D11_BUFFER_RTV, u2, NumElements, NumElements_mut, ::UINT);
 UNION!(D3D11_BUFFER_RTV, u2, ElementWidth, ElementWidth_mut, ::UINT);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX1D_RTV {
-    pub MipSlice: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX1D_ARRAY_RTV {
-    pub MipSlice: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2D_RTV {
-    pub MipSlice: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2DMS_RTV {
-    pub UnusedField_NothingToDefine: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2D_ARRAY_RTV {
-    pub MipSlice: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2DMS_ARRAY_RTV {
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX3D_RTV {
-    pub MipSlice: ::UINT,
-    pub FirstWSlice: ::UINT,
-    pub WSize: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_RENDER_TARGET_VIEW_DESC {
-    pub Format: ::DXGI_FORMAT,
-    pub ViewDimension: D3D11_RTV_DIMENSION,
+STRUCT!{struct D3D11_TEX1D_RTV {
+    MipSlice: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX1D_ARRAY_RTV {
+    MipSlice: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2D_RTV {
+    MipSlice: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2DMS_RTV {
+    UnusedField_NothingToDefine: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2D_ARRAY_RTV {
+    MipSlice: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2DMS_ARRAY_RTV {
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX3D_RTV {
+    MipSlice: ::UINT,
+    FirstWSlice: ::UINT,
+    WSize: ::UINT,
+}}
+STRUCT!{struct D3D11_RENDER_TARGET_VIEW_DESC {
+    Format: ::DXGI_FORMAT,
+    ViewDimension: D3D11_RTV_DIMENSION,
     u: [::UINT; 3],
-}
+}}
 UNION!(D3D11_RENDER_TARGET_VIEW_DESC, u, Buffer, Buffer_mut, D3D11_BUFFER_RTV);
 UNION!(D3D11_RENDER_TARGET_VIEW_DESC, u, Texture1D, Texture1D_mut, D3D11_TEX1D_RTV);
 UNION!(D3D11_RENDER_TARGET_VIEW_DESC, u, Texture1DArray, Texture1DArray_mut,
@@ -923,45 +885,38 @@ interface ID3D11RenderTargetView(ID3D11RenderTargetViewVtbl): ID3D11View(ID3D11V
     fn GetDesc(&mut self, pDesc: *mut D3D11_RENDER_TARGET_VIEW_DESC) -> ()
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX1D_DSV {
-    pub MipSlice: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX1D_ARRAY_DSV {
-    pub MipSlice: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2D_DSV {
-    pub MipSlice: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2D_ARRAY_DSV {
-    pub MipSlice: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2DMS_DSV {
-    pub UnusedField_NothingToDefine: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2DMS_ARRAY_DSV {
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
+STRUCT!{struct D3D11_TEX1D_DSV {
+    MipSlice: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX1D_ARRAY_DSV {
+    MipSlice: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2D_DSV {
+    MipSlice: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2D_ARRAY_DSV {
+    MipSlice: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2DMS_DSV {
+    UnusedField_NothingToDefine: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2DMS_ARRAY_DSV {
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
 FLAGS!{enum D3D11_DSV_FLAG{
     D3D11_DSV_READ_ONLY_DEPTH = 0x1,
     D3D11_DSV_READ_ONLY_STENCIL = 0x2,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_DEPTH_STENCIL_VIEW_DESC {
-    pub Format: ::DXGI_FORMAT,
-    pub ViewDimension: D3D11_DSV_DIMENSION,
+STRUCT!{struct D3D11_DEPTH_STENCIL_VIEW_DESC {
+    Format: ::DXGI_FORMAT,
+    ViewDimension: D3D11_DSV_DIMENSION,
     u: [::UINT; 3],
-}
+}}
 UNION!(D3D11_DEPTH_STENCIL_VIEW_DESC, u, Texture1D, Texture1D_mut, D3D11_TEX1D_DSV);
 UNION!(D3D11_DEPTH_STENCIL_VIEW_DESC, u, Texture1DArray, Texture1DArray_mut,
     D3D11_TEX1D_ARRAY_DSV);
@@ -981,44 +936,37 @@ FLAGS!{enum D3D11_BUFFER_UAV_FLAG {
     D3D11_BUFFER_UAV_FLAG_APPEND = 0x2,
     D3D11_BUFFER_UAV_FLAG_COUNTER = 0x4,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_BUFFER_UAV {
-    pub FirstElement: ::UINT,
-    pub NumElements: ::UINT,
-    pub Flags: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX1D_UAV {
-    pub MipSlice: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX1D_ARRAY_UAV {
-    pub MipSlice: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2D_UAV {
-    pub MipSlice: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2D_ARRAY_UAV {
-    pub MipSlice: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX3D_UAV {
-    pub MipSlice: ::UINT,
-    pub FirstWSlice: ::UINT,
-    pub WSize: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_UNORDERED_ACCESS_VIEW_DESC {
-    pub Format: ::DXGI_FORMAT,
-    pub ViewDimension: D3D11_UAV_DIMENSION,
+STRUCT!{struct D3D11_BUFFER_UAV {
+    FirstElement: ::UINT,
+    NumElements: ::UINT,
+    Flags: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX1D_UAV {
+    MipSlice: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX1D_ARRAY_UAV {
+    MipSlice: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2D_UAV {
+    MipSlice: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2D_ARRAY_UAV {
+    MipSlice: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX3D_UAV {
+    MipSlice: ::UINT,
+    FirstWSlice: ::UINT,
+    WSize: ::UINT,
+}}
+STRUCT!{struct D3D11_UNORDERED_ACCESS_VIEW_DESC {
+    Format: ::DXGI_FORMAT,
+    ViewDimension: D3D11_UAV_DIMENSION,
     u: [::UINT; 3],
-}
+}}
 UNION!(D3D11_UNORDERED_ACCESS_VIEW_DESC, u, Buffer, Buffer_mut, D3D11_BUFFER_UAV);
 UNION!(D3D11_UNORDERED_ACCESS_VIEW_DESC, u, Texture1D, Texture1D_mut, D3D11_TEX1D_UAV);
 UNION!(D3D11_UNORDERED_ACCESS_VIEW_DESC, u, Texture1DArray, Texture1DArray_mut,
@@ -1124,19 +1072,18 @@ ENUM!{enum D3D11_TEXTURE_ADDRESS_MODE {
     D3D11_TEXTURE_ADDRESS_BORDER = 4,
     D3D11_TEXTURE_ADDRESS_MIRROR_ONCE = 5,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_SAMPLER_DESC {
-    pub Filter:  D3D11_FILTER,
-    pub AddressU: D3D11_FILTER,
-    pub AddressV: D3D11_FILTER,
-    pub AddressW: D3D11_FILTER,
-    pub MipLODBias: ::FLOAT,
-    pub MaxAnisotropy: ::UINT,
-    pub ComparisonFunc: D3D11_COMPARISON_FUNC,
-    pub BorderColor: [::FLOAT; 4],
-    pub MinLOD: ::FLOAT,
-    pub MaxLOD: ::FLOAT,
-}
+STRUCT!{struct D3D11_SAMPLER_DESC {
+    Filter:  D3D11_FILTER,
+    AddressU: D3D11_FILTER,
+    AddressV: D3D11_FILTER,
+    AddressW: D3D11_FILTER,
+    MipLODBias: ::FLOAT,
+    MaxAnisotropy: ::UINT,
+    ComparisonFunc: D3D11_COMPARISON_FUNC,
+    BorderColor: [::FLOAT; 4],
+    MinLOD: ::FLOAT,
+    MaxLOD: ::FLOAT,
+}}
 RIDL!(
 interface ID3D11SamplerState(ID3D11SamplerStateVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetDesc(&mut self, pDesc: *mut D3D11_SAMPLER_DESC) -> ()
@@ -1218,11 +1165,10 @@ ENUM!{enum D3D11_QUERY {
 FLAGS!{enum D3D11_QUERY_MISC_FLAG {
     D3D11_QUERY_MISC_PREDICATEHINT = 0x1,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_QUERY_DESC {
-    pub Query: D3D11_QUERY,
-    pub MiscFlags: ::UINT,
-}
+STRUCT!{struct D3D11_QUERY_DESC {
+    Query: D3D11_QUERY,
+    MiscFlags: ::UINT,
+}}
 RIDL!(
 interface ID3D11Query(ID3D11QueryVtbl): ID3D11Asynchronous(ID3D11AsynchronousVtbl) {
     fn GetDesc(&mut self, pDesc: *mut D3D11_QUERY_DESC) -> ()
@@ -1232,30 +1178,27 @@ RIDL!(
 interface ID3D11Predicate(ID3D11PredicateVtbl): ID3D11Query(ID3D11QueryVtbl) {
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_QUERY_DATA_TIMESTAMP_DISJOINT {
-    pub Frequency: ::UINT64,
-    pub Disjoint: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_QUERY_DATA_PIPELINE_STATISTICS {
-    pub IAVertices: ::UINT64,
-    pub IAPrimitives: ::UINT64,
-    pub VSInvocations: ::UINT64,
-    pub GSInvocations: ::UINT64,
-    pub GSPrimitives: ::UINT64,
-    pub CInvocations: ::UINT64,
-    pub CPrimitives: ::UINT64,
-    pub PSInvocations: ::UINT64,
-    pub HSInvocations: ::UINT64,
-    pub DSInvocations: ::UINT64,
-    pub CSInvocations: ::UINT64,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_QUERY_DATA_SO_STATISTICS {
-    pub NumPrimitivesWritten: ::UINT64,
-    pub PrimitivesStorageNeeded: ::UINT64,
-}
+STRUCT!{struct D3D11_QUERY_DATA_TIMESTAMP_DISJOINT {
+    Frequency: ::UINT64,
+    Disjoint: ::BOOL,
+}}
+STRUCT!{struct D3D11_QUERY_DATA_PIPELINE_STATISTICS {
+    IAVertices: ::UINT64,
+    IAPrimitives: ::UINT64,
+    VSInvocations: ::UINT64,
+    GSInvocations: ::UINT64,
+    GSPrimitives: ::UINT64,
+    CInvocations: ::UINT64,
+    CPrimitives: ::UINT64,
+    PSInvocations: ::UINT64,
+    HSInvocations: ::UINT64,
+    DSInvocations: ::UINT64,
+    CSInvocations: ::UINT64,
+}}
+STRUCT!{struct D3D11_QUERY_DATA_SO_STATISTICS {
+    NumPrimitivesWritten: ::UINT64,
+    PrimitivesStorageNeeded: ::UINT64,
+}}
 FLAGS!{enum D3D11_COUNTER {
     D3D11_COUNTER_DEVICE_DEPENDENT_0 = 0x40000000,
 }}
@@ -1265,17 +1208,15 @@ ENUM!{enum D3D11_COUNTER_TYPE {
     D3D11_COUNTER_TYPE_UINT32 = D3D11_COUNTER_TYPE_UINT16.0 + 1,
     D3D11_COUNTER_TYPE_UINT64 = D3D11_COUNTER_TYPE_UINT32.0 + 1,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_COUNTER_DESC {
-    pub Counter: D3D11_COUNTER,
-    pub MiscFlags: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_COUNTER_INFO {
-    pub LastDeviceDependentCounter: D3D11_COUNTER,
-    pub NumSimultaneousCounters: ::UINT,
-    pub NumDetectableParallelUnits: ::UINT8,
-}
+STRUCT!{struct D3D11_COUNTER_DESC {
+    Counter: D3D11_COUNTER,
+    MiscFlags: ::UINT,
+}}
+STRUCT!{struct D3D11_COUNTER_INFO {
+    LastDeviceDependentCounter: D3D11_COUNTER,
+    NumSimultaneousCounters: ::UINT,
+    NumDetectableParallelUnits: ::UINT8,
+}}
 RIDL!(
 interface ID3D11Counter(ID3D11CounterVtbl): ID3D11Asynchronous(ID3D11AsynchronousVtbl) {
     fn GetDesc(&mut self, pDesc: *mut D3D11_COUNTER_DESC) -> ()
@@ -1289,17 +1230,16 @@ ENUM!{enum D3D11_DEVICE_CONTEXT_TYPE {
     D3D11_DEVICE_CONTEXT_IMMEDIATE = 0,
     D3D11_DEVICE_CONTEXT_DEFERRED = D3D11_DEVICE_CONTEXT_IMMEDIATE.0 + 1,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_CLASS_INSTANCE_DESC {
-    pub InstanceId: ::UINT,
-    pub InstanceIndex: ::UINT,
-    pub TypeId: ::UINT,
-    pub ConstantBuffer: ::UINT,
-    pub BaseConstantBufferOffset: ::UINT,
-    pub BaseTexture: ::UINT,
-    pub BaseSampler: ::UINT,
-    pub Created: ::BOOL,
-}
+STRUCT!{struct D3D11_CLASS_INSTANCE_DESC {
+    InstanceId: ::UINT,
+    InstanceIndex: ::UINT,
+    TypeId: ::UINT,
+    ConstantBuffer: ::UINT,
+    BaseConstantBufferOffset: ::UINT,
+    BaseTexture: ::UINT,
+    BaseSampler: ::UINT,
+    Created: ::BOOL,
+}}
 RIDL!(
 interface ID3D11ClassInstance(ID3D11ClassInstanceVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetClassLinkage(&mut self, ppLinkage: *mut *mut ID3D11ClassLinkage) -> (),
@@ -1345,121 +1285,104 @@ ENUM!{enum D3D11_FEATURE {
     D3D11_FEATURE_D3D11_OPTIONS3 = D3D11_FEATURE_D3D11_OPTIONS2.0 + 1,
     D3D11_FEATURE_GPU_VIRTUAL_ADDRESS_SUPPORT = D3D11_FEATURE_D3D11_OPTIONS3.0 + 1,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_THREADING {
-    pub DriverConcurrentCreates: ::BOOL,
-    pub DriverCommandLists: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_DOUBLES {
-    pub DoublePrecisionFloatShaderOps: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_FORMAT_SUPPORT {
-    pub InFormat: ::DXGI_FORMAT,
-    pub OutFormatSupport: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_FORMAT_SUPPORT2 {
-    pub InFormat: ::DXGI_FORMAT,
-    pub OutFormatSupport2: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_D3D10_X_HARDWARE_OPTIONS {
-    pub ComputeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_D3D11_OPTIONS {
-    pub OutputMergerLogicOp: ::BOOL,
-    pub UAVOnlyRenderingForcedSampleCount: ::BOOL,
-    pub DiscardAPIsSeenByDriver: ::BOOL,
-    pub FlagsForUpdateAndCopySeenByDriver: ::BOOL,
-    pub ClearView: ::BOOL,
-    pub CopyWithOverlap: ::BOOL,
-    pub ConstantBufferPartialUpdate: ::BOOL,
-    pub ConstantBufferOffsetting: ::BOOL,
-    pub MapNoOverwriteOnDynamicConstantBuffer: ::BOOL,
-    pub MapNoOverwriteOnDynamicBufferSRV: ::BOOL,
-    pub MultisampleRTVWithForcedSampleCountOne: ::BOOL,
-    pub SAD4ShaderInstructions: ::BOOL,
-    pub ExtendedDoublesShaderInstructions: ::BOOL,
-    pub ExtendedResourceSharing: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_ARCHITECTURE_INFO {
-    pub TileBasedDeferredRenderer: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_D3D9_OPTIONS {
-    pub FullNonPow2TextureSupport: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_D3D9_SHADOW_SUPPORT {
-    pub SupportsDepthAsTextureWithLessEqualComparisonFilter: ::BOOL,
-}
+STRUCT!{struct D3D11_FEATURE_DATA_THREADING {
+    DriverConcurrentCreates: ::BOOL,
+    DriverCommandLists: ::BOOL,
+}}
+STRUCT!{struct D3D11_FEATURE_DATA_DOUBLES {
+    DoublePrecisionFloatShaderOps: ::BOOL,
+}}
+STRUCT!{struct D3D11_FEATURE_DATA_FORMAT_SUPPORT {
+    InFormat: ::DXGI_FORMAT,
+    OutFormatSupport: ::UINT,
+}}
+STRUCT!{struct D3D11_FEATURE_DATA_FORMAT_SUPPORT2 {
+    InFormat: ::DXGI_FORMAT,
+    OutFormatSupport2: ::UINT,
+}}
+STRUCT!{struct D3D11_FEATURE_DATA_D3D10_X_HARDWARE_OPTIONS {
+    ComputeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x: ::BOOL,
+}}
+STRUCT!{struct D3D11_FEATURE_DATA_D3D11_OPTIONS {
+    OutputMergerLogicOp: ::BOOL,
+    UAVOnlyRenderingForcedSampleCount: ::BOOL,
+    DiscardAPIsSeenByDriver: ::BOOL,
+    FlagsForUpdateAndCopySeenByDriver: ::BOOL,
+    ClearView: ::BOOL,
+    CopyWithOverlap: ::BOOL,
+    ConstantBufferPartialUpdate: ::BOOL,
+    ConstantBufferOffsetting: ::BOOL,
+    MapNoOverwriteOnDynamicConstantBuffer: ::BOOL,
+    MapNoOverwriteOnDynamicBufferSRV: ::BOOL,
+    MultisampleRTVWithForcedSampleCountOne: ::BOOL,
+    SAD4ShaderInstructions: ::BOOL,
+    ExtendedDoublesShaderInstructions: ::BOOL,
+    ExtendedResourceSharing: ::BOOL,
+}}
+STRUCT!{struct D3D11_FEATURE_DATA_ARCHITECTURE_INFO {
+    TileBasedDeferredRenderer: ::BOOL,
+}}
+STRUCT!{struct D3D11_FEATURE_DATA_D3D9_OPTIONS {
+    FullNonPow2TextureSupport: ::BOOL,
+}}
+STRUCT!{struct D3D11_FEATURE_DATA_D3D9_SHADOW_SUPPORT {
+    SupportsDepthAsTextureWithLessEqualComparisonFilter: ::BOOL,
+}}
 FLAGS!{enum D3D11_SHADER_MIN_PRECISION_SUPPORT {
     D3D11_SHADER_MIN_PRECISION_10_BIT = 0x1,
     D3D11_SHADER_MIN_PRECISION_16_BIT = 0x2,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_SHADER_MIN_PRECISION_SUPPORT {
-    pub PixelShaderMinPrecision: ::UINT,
-    pub AllOtherShaderStagesMinPrecision: ::UINT,
-}
+STRUCT!{struct D3D11_FEATURE_DATA_SHADER_MIN_PRECISION_SUPPORT {
+    PixelShaderMinPrecision: ::UINT,
+    AllOtherShaderStagesMinPrecision: ::UINT,
+}}
 ENUM!{enum D3D11_TILED_RESOURCES_TIER {
     D3D11_TILED_RESOURCES_NOT_SUPPORTED = 0,
     D3D11_TILED_RESOURCES_TIER_1 = 1,
     D3D11_TILED_RESOURCES_TIER_2 = 2,
     D3D11_TILED_RESOURCES_TIER_3 = 3,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_D3D11_OPTIONS1 {
-    pub TiledResourcesTier: D3D11_TILED_RESOURCES_TIER,
-    pub MinMaxFiltering: ::BOOL,
-    pub ClearViewAlsoSupportsDepthOnlyFormats: ::BOOL,
-    pub MapOnDefaultBuffers: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_D3D9_SIMPLE_INSTANCING_SUPPORT {
-    pub SimpleInstancingSupported: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_MARKER_SUPPORT {
-    pub Profile: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_D3D9_OPTIONS1 {
-    pub FullNonPow2TextureSupported: ::BOOL,
-    pub DepthAsTextureWithLessEqualComparisonFilterSupported: ::BOOL,
-    pub SimpleInstancingSupported: ::BOOL,
-    pub TextureCubeFaceRenderTargetWithNonCubeDepthStencilSupported: ::BOOL,
-}
+STRUCT!{struct D3D11_FEATURE_DATA_D3D11_OPTIONS1 {
+    TiledResourcesTier: D3D11_TILED_RESOURCES_TIER,
+    MinMaxFiltering: ::BOOL,
+    ClearViewAlsoSupportsDepthOnlyFormats: ::BOOL,
+    MapOnDefaultBuffers: ::BOOL,
+}}
+STRUCT!{struct D3D11_FEATURE_DATA_D3D9_SIMPLE_INSTANCING_SUPPORT {
+    SimpleInstancingSupported: ::BOOL,
+}}
+STRUCT!{struct D3D11_FEATURE_DATA_MARKER_SUPPORT {
+    Profile: ::BOOL,
+}}
+STRUCT!{struct D3D11_FEATURE_DATA_D3D9_OPTIONS1 {
+    FullNonPow2TextureSupported: ::BOOL,
+    DepthAsTextureWithLessEqualComparisonFilterSupported: ::BOOL,
+    SimpleInstancingSupported: ::BOOL,
+    TextureCubeFaceRenderTargetWithNonCubeDepthStencilSupported: ::BOOL,
+}}
 ENUM!{enum D3D11_CONSERVATIVE_RASTERIZATION_TIER {
     D3D11_CONSERVATIVE_RASTERIZATION_NOT_SUPPORTED = 0,
     D3D11_CONSERVATIVE_RASTERIZATION_TIER_1 = 1,
     D3D11_CONSERVATIVE_RASTERIZATION_TIER_2 = 2,
     D3D11_CONSERVATIVE_RASTERIZATION_TIER_3 = 3,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_D3D11_OPTIONS2 {
-    pub PSSpecifiedStencilRefSupported: ::BOOL,
-    pub TypedUAVLoadAdditionalFormats: ::BOOL,
-    pub ROVsSupported: ::BOOL,
-    pub ConservativeRasterizationTier: D3D11_CONSERVATIVE_RASTERIZATION_TIER,
-    pub TiledResourcesTier: D3D11_TILED_RESOURCES_TIER,
-    pub MapOnDefaultTextures: ::BOOL,
-    pub StandardSwizzle: ::BOOL,
-    pub UnifiedMemoryArchitecture: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_D3D11_OPTIONS3 {
-    pub VPAndRTArrayIndexFromAnyShaderFeedingRasterizer: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT {
-    pub MaxGPUVirtualAddressBitsPerResource: ::UINT,
-    pub MaxGPUVirtualAddressBitsPerProcess: ::UINT,
-}
+STRUCT!{struct D3D11_FEATURE_DATA_D3D11_OPTIONS2 {
+    PSSpecifiedStencilRefSupported: ::BOOL,
+    TypedUAVLoadAdditionalFormats: ::BOOL,
+    ROVsSupported: ::BOOL,
+    ConservativeRasterizationTier: D3D11_CONSERVATIVE_RASTERIZATION_TIER,
+    TiledResourcesTier: D3D11_TILED_RESOURCES_TIER,
+    MapOnDefaultTextures: ::BOOL,
+    StandardSwizzle: ::BOOL,
+    UnifiedMemoryArchitecture: ::BOOL,
+}}
+STRUCT!{struct D3D11_FEATURE_DATA_D3D11_OPTIONS3 {
+    VPAndRTArrayIndexFromAnyShaderFeedingRasterizer: ::BOOL,
+}}
+STRUCT!{struct D3D11_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT {
+    MaxGPUVirtualAddressBitsPerResource: ::UINT,
+    MaxGPUVirtualAddressBitsPerProcess: ::UINT,
+}}
 RIDL!(
 interface ID3D11DeviceContext(ID3D11DeviceContextVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn VSSetConstantBuffers(
@@ -1895,33 +1818,31 @@ DEFINE_GUID!(D3D11_DECODER_PROFILE_HEVC_VLD_MAIN, 0x5b11d51b, 0x2f4c, 0x4452, 0x
     0xf2, 0xa1, 0x16, 0x0c, 0xc0);
 DEFINE_GUID!(D3D11_DECODER_PROFILE_HEVC_VLD_MAIN10, 0x107af0e0, 0xef1a, 0x4d19, 0xab, 0xa8, 0x67,
     0xa1, 0x63, 0x07, 0x3d, 0x13);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_DECODER_DESC {
-    pub Guid: ::GUID,
-    pub SampleWidth: ::UINT,
-    pub SampleHeight: ::UINT,
-    pub OutputFormat: ::DXGI_FORMAT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_DECODER_CONFIG {
-    pub guidConfigBitstreamEncryption: ::GUID,
-    pub guidConfigMBcontrolEncryption: ::GUID,
-    pub guidConfigResidDiffEncryption: ::GUID,
-    pub ConfigBitstreamRaw: ::UINT,
-    pub ConfigMBcontrolRasterOrder: ::UINT,
-    pub ConfigResidDiffHost: ::UINT,
-    pub ConfigSpatialResid8: ::UINT,
-    pub ConfigResid8Subtraction: ::UINT,
-    pub ConfigSpatialHost8or9Clipping: ::UINT,
-    pub ConfigSpatialResidInterleaved: ::UINT,
-    pub ConfigIntraResidUnsigned: ::UINT,
-    pub ConfigResidDiffAccelerator: ::UINT,
-    pub ConfigHostInverseScan: ::UINT,
-    pub ConfigSpecificIDCT: ::UINT,
-    pub Config4GroupedCoefs: ::UINT,
-    pub ConfigMinRenderTargetBuffCount: ::USHORT,
-    pub ConfigDecoderSpecific: ::USHORT,
-}
+STRUCT!{struct D3D11_VIDEO_DECODER_DESC {
+    Guid: ::GUID,
+    SampleWidth: ::UINT,
+    SampleHeight: ::UINT,
+    OutputFormat: ::DXGI_FORMAT,
+}}
+STRUCT!{struct D3D11_VIDEO_DECODER_CONFIG {
+    guidConfigBitstreamEncryption: ::GUID,
+    guidConfigMBcontrolEncryption: ::GUID,
+    guidConfigResidDiffEncryption: ::GUID,
+    ConfigBitstreamRaw: ::UINT,
+    ConfigMBcontrolRasterOrder: ::UINT,
+    ConfigResidDiffHost: ::UINT,
+    ConfigSpatialResid8: ::UINT,
+    ConfigResid8Subtraction: ::UINT,
+    ConfigSpatialHost8or9Clipping: ::UINT,
+    ConfigSpatialResidInterleaved: ::UINT,
+    ConfigIntraResidUnsigned: ::UINT,
+    ConfigResidDiffAccelerator: ::UINT,
+    ConfigHostInverseScan: ::UINT,
+    ConfigSpecificIDCT: ::UINT,
+    Config4GroupedCoefs: ::UINT,
+    ConfigMinRenderTargetBuffCount: ::USHORT,
+    ConfigDecoderSpecific: ::USHORT,
+}}
 ENUM!{enum D3D11_VIDEO_DECODER_BUFFER_TYPE {
     D3D11_VIDEO_DECODER_BUFFER_PICTURE_PARAMETERS = 0,
     D3D11_VIDEO_DECODER_BUFFER_MACROBLOCK_CONTROL = 1,
@@ -1933,44 +1854,40 @@ ENUM!{enum D3D11_VIDEO_DECODER_BUFFER_TYPE {
     D3D11_VIDEO_DECODER_BUFFER_MOTION_VECTOR = 7,
     D3D11_VIDEO_DECODER_BUFFER_FILM_GRAIN = 8,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct _D3D11_AES_CTR_IV {
-    pub IV: ::UINT64,
-    pub Count: ::UINT64,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_ENCRYPTED_BLOCK_INFO {
-    pub NumEncryptedBytesAtBeginning: ::UINT,
-    pub NumBytesInSkipPattern: ::UINT,
-    pub NumBytesInEncryptPattern: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_DECODER_BUFFER_DESC {
-    pub BufferType: D3D11_VIDEO_DECODER_BUFFER_TYPE,
-    pub BufferIndex: ::UINT,
-    pub DataOffset: ::UINT,
-    pub DataSize: ::UINT,
-    pub FirstMBaddress: ::UINT,
-    pub NumMBsInBuffer: ::UINT,
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub Stride: ::UINT,
-    pub ReservedBits: ::UINT,
-    pub pIV: *mut ::c_void,
-    pub IVSize: ::UINT,
-    pub PartialEncryption: ::BOOL,
-    pub EncryptedBlockInfo: D3D11_ENCRYPTED_BLOCK_INFO,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_DECODER_EXTENSION {
-    pub Function: ::UINT,
-    pub pPrivateInputData: *mut ::c_void,
-    pub PrivateInputDataSize: ::UINT,
-    pub pPrivateOutputData: *mut ::c_void,
-    pub PrivateOutputDataSize: ::UINT,
-    pub ResourceCount: ::UINT,
-    pub ppResourceList: *mut *mut ID3D11Resource,
-}
+STRUCT!{struct _D3D11_AES_CTR_IV {
+    IV: ::UINT64,
+    Count: ::UINT64,
+}}
+STRUCT!{struct D3D11_ENCRYPTED_BLOCK_INFO {
+    NumEncryptedBytesAtBeginning: ::UINT,
+    NumBytesInSkipPattern: ::UINT,
+    NumBytesInEncryptPattern: ::UINT,
+}}
+STRUCT!{struct D3D11_VIDEO_DECODER_BUFFER_DESC {
+    BufferType: D3D11_VIDEO_DECODER_BUFFER_TYPE,
+    BufferIndex: ::UINT,
+    DataOffset: ::UINT,
+    DataSize: ::UINT,
+    FirstMBaddress: ::UINT,
+    NumMBsInBuffer: ::UINT,
+    Width: ::UINT,
+    Height: ::UINT,
+    Stride: ::UINT,
+    ReservedBits: ::UINT,
+    pIV: *mut ::c_void,
+    IVSize: ::UINT,
+    PartialEncryption: ::BOOL,
+    EncryptedBlockInfo: D3D11_ENCRYPTED_BLOCK_INFO,
+}}
+STRUCT!{struct D3D11_VIDEO_DECODER_EXTENSION {
+    Function: ::UINT,
+    pPrivateInputData: *mut ::c_void,
+    PrivateInputDataSize: ::UINT,
+    pPrivateOutputData: *mut ::c_void,
+    PrivateOutputDataSize: ::UINT,
+    ResourceCount: ::UINT,
+    ppResourceList: *mut *mut ID3D11Resource,
+}}
 RIDL!(
 interface ID3D11VideoDecoder(ID3D11VideoDecoderVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetCreationParameters(
@@ -2037,18 +1954,17 @@ FLAGS!{enum D3D11_VIDEO_PROCESSOR_STEREO_CAPS {
     D3D11_VIDEO_PROCESSOR_STEREO_CAPS_CHECKERBOARD = 0x8,
     D3D11_VIDEO_PROCESSOR_STEREO_CAPS_FLIP_MODE = 0x10,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_PROCESSOR_CAPS {
-    pub DeviceCaps: ::UINT,
-    pub FeatureCaps: ::UINT,
-    pub FilterCaps: ::UINT,
-    pub InputFormatCaps: ::UINT,
-    pub AutoStreamCaps: ::UINT,
-    pub StereoCaps: ::UINT,
-    pub RateConversionCapsCount: ::UINT,
-    pub MaxInputStreams: ::UINT,
-    pub MaxStreamStates: ::UINT,
-}
+STRUCT!{struct D3D11_VIDEO_PROCESSOR_CAPS {
+    DeviceCaps: ::UINT,
+    FeatureCaps: ::UINT,
+    FilterCaps: ::UINT,
+    InputFormatCaps: ::UINT,
+    AutoStreamCaps: ::UINT,
+    StereoCaps: ::UINT,
+    RateConversionCapsCount: ::UINT,
+    MaxInputStreams: ::UINT,
+    MaxStreamStates: ::UINT,
+}}
 FLAGS!{enum D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS {
     D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_BLEND = 0x1,
     D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_BOB = 0x2,
@@ -2069,14 +1985,13 @@ FLAGS!{enum D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS {
     D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_222222222223 = 0x100,
     D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_OTHER = 0x80000000,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS {
-    pub PastFrames: ::UINT,
-    pub FutureFrames: ::UINT,
-    pub ProcessorCaps: ::UINT,
-    pub ITelecineCaps: ::UINT,
-    pub CustomRateCount: ::UINT,
-}
+STRUCT!{struct D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS {
+    PastFrames: ::UINT,
+    FutureFrames: ::UINT,
+    ProcessorCaps: ::UINT,
+    ITelecineCaps: ::UINT,
+    CustomRateCount: ::UINT,
+}}
 FLAGS!{enum D3D11_CONTENT_PROTECTION_CAPS {
     D3D11_CONTENT_PROTECTION_CAPS_SOFTWARE = 0x1,
     D3D11_CONTENT_PROTECTION_CAPS_HARDWARE = 0x2,
@@ -2100,20 +2015,18 @@ DEFINE_GUID!(D3D11_DECODER_ENCRYPTION_HW_CENC, 0x89d6ac4f, 0x9f2, 0x4229, 0xb2, 
     0xa, 0x6d, 0xfd, 0x81);
 DEFINE_GUID!(D3D11_KEY_EXCHANGE_HW_PROTECTION, 0xb1170d8a, 0x628d, 0x4da3, 0xad, 0x3b, 0x82, 0xdd,
     0xb0, 0x8b, 0x49, 0x70);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_CONTENT_PROTECTION_CAPS {
-    pub Caps: ::UINT,
-    pub KeyExchangeTypeCount: ::UINT,
-    pub BlockAlignmentSize: ::UINT,
-    pub ProtectedMemorySize: ::ULONGLONG,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_PROCESSOR_CUSTOM_RATE {
-    pub CustomRate: ::DXGI_RATIONAL,
-    pub OutputFrames: ::UINT,
-    pub InputInterlaced: ::BOOL,
-    pub InputFramesOrFields: ::UINT,
-}
+STRUCT!{struct D3D11_VIDEO_CONTENT_PROTECTION_CAPS {
+    Caps: ::UINT,
+    KeyExchangeTypeCount: ::UINT,
+    BlockAlignmentSize: ::UINT,
+    ProtectedMemorySize: ::ULONGLONG,
+}}
+STRUCT!{struct D3D11_VIDEO_PROCESSOR_CUSTOM_RATE {
+    CustomRate: ::DXGI_RATIONAL,
+    OutputFrames: ::UINT,
+    InputInterlaced: ::BOOL,
+    InputFramesOrFields: ::UINT,
+}}
 ENUM!{enum D3D11_VIDEO_PROCESSOR_FILTER {
     D3D11_VIDEO_PROCESSOR_FILTER_BRIGHTNESS = 0,
     D3D11_VIDEO_PROCESSOR_FILTER_CONTRAST = 1,
@@ -2124,13 +2037,12 @@ ENUM!{enum D3D11_VIDEO_PROCESSOR_FILTER {
     D3D11_VIDEO_PROCESSOR_FILTER_ANAMORPHIC_SCALING = 6,
     D3D11_VIDEO_PROCESSOR_FILTER_STEREO_ADJUSTMENT = 7,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_PROCESSOR_FILTER_RANGE {
-    pub Minimum: ::c_int,
-    pub Maximum: ::c_int,
-    pub Default: ::c_int,
-    pub Multiplier: ::c_float,
-}
+STRUCT!{struct D3D11_VIDEO_PROCESSOR_FILTER_RANGE {
+    Minimum: ::c_int,
+    Maximum: ::c_int,
+    Default: ::c_int,
+    Multiplier: ::c_float,
+}}
 ENUM!{enum D3D11_VIDEO_FRAME_FORMAT {
     D3D11_VIDEO_FRAME_FORMAT_PROGRESSIVE = 0,
     D3D11_VIDEO_FRAME_FORMAT_INTERLACED_TOP_FIELD_FIRST = 1,
@@ -2141,17 +2053,16 @@ ENUM!{enum D3D11_VIDEO_USAGE {
     OPTIMAL_SPEED = 1,
     OPTIMAL_QUALITY = 2,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_PROCESSOR_CONTENT_DESC {
-    pub InputFrameFormat: D3D11_VIDEO_FRAME_FORMAT,
-    pub InputFrameRate: ::DXGI_RATIONAL,
-    pub InputWidth: ::UINT,
-    pub InputHeight: ::UINT,
-    pub OutputFrameRate: ::DXGI_RATIONAL,
-    pub OutputWidth: ::UINT,
-    pub OutputHeight: ::UINT,
-    pub Usage: D3D11_VIDEO_USAGE,
-}
+STRUCT!{struct D3D11_VIDEO_PROCESSOR_CONTENT_DESC {
+    InputFrameFormat: D3D11_VIDEO_FRAME_FORMAT,
+    InputFrameRate: ::DXGI_RATIONAL,
+    InputWidth: ::UINT,
+    InputHeight: ::UINT,
+    OutputFrameRate: ::DXGI_RATIONAL,
+    OutputWidth: ::UINT,
+    OutputHeight: ::UINT,
+    Usage: D3D11_VIDEO_USAGE,
+}}
 RIDL!(
 interface ID3D11VideoProcessorEnumerator(ID3D11VideoProcessorEnumeratorVtbl)
     : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
@@ -2181,24 +2092,21 @@ interface ID3D11VideoProcessorEnumerator(ID3D11VideoProcessorEnumeratorVtbl)
     ) -> ::HRESULT
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_COLOR_RGBA {
-    pub R: ::c_float,
-    pub G: ::c_float,
-    pub B: ::c_float,
-    pub A: ::c_float,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_COLOR_YCbCrA {
-    pub Y: ::c_float,
-    pub Cb: ::c_float,
-    pub Cr: ::c_float,
-    pub A: ::c_float,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_COLOR {
+STRUCT!{struct D3D11_VIDEO_COLOR_RGBA {
+    R: ::c_float,
+    G: ::c_float,
+    B: ::c_float,
+    A: ::c_float,
+}}
+STRUCT!{struct D3D11_VIDEO_COLOR_YCbCrA {
+    Y: ::c_float,
+    Cb: ::c_float,
+    Cr: ::c_float,
+    A: ::c_float,
+}}
+STRUCT!{struct D3D11_VIDEO_COLOR {
     u: [::c_float; 4],
-}
+}}
 UNION!(D3D11_VIDEO_COLOR, u, YCbCr, YCbCr_mut, D3D11_VIDEO_COLOR_YCbCrA);
 UNION!(D3D11_VIDEO_COLOR, u, RGBA, RGBA_mut, D3D11_VIDEO_COLOR_RGBA);
 ENUM!{enum D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE {
@@ -2206,10 +2114,9 @@ ENUM!{enum D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE {
     D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_16_235 = 1,
     D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_0_255 = 2,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_PROCESSOR_COLOR_SPACE {
+STRUCT!{struct D3D11_VIDEO_PROCESSOR_COLOR_SPACE {
     bit_fields: ::UINT,
-}
+}}
 BITFIELD!(D3D11_VIDEO_PROCESSOR_COLOR_SPACE bit_fields: ::UINT [
     Usage set_Usage[0..1],
     RGB_Range set_RGB_Range[1..2],
@@ -2250,20 +2157,19 @@ ENUM!{enum D3D11_VIDEO_PROCESSOR_ROTATION {
     D3D11_VIDEO_PROCESSOR_ROTATION_180 = 2,
     D3D11_VIDEO_PROCESSOR_ROTATION_270 = 3,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_PROCESSOR_STREAM {
-    pub Enable: ::BOOL,
-    pub OutputIndex: ::UINT,
-    pub InputFrameOrField: ::UINT,
-    pub PastFrames: ::UINT,
-    pub FutureFrames: ::UINT,
-    pub ppPastSurfaces: *mut *mut ID3D11VideoProcessorInputView,
-    pub pInputSurface: *mut ID3D11VideoProcessorInputView,
-    pub ppFutureSurfaces: *mut *mut ID3D11VideoProcessorInputView,
-    pub ppPastSurfacesRight: *mut *mut ID3D11VideoProcessorInputView,
-    pub pInputSurfaceRight: *mut ID3D11VideoProcessorInputView,
-    pub ppFutureSurfacesRight: *mut *mut ID3D11VideoProcessorInputView,
-}
+STRUCT!{struct D3D11_VIDEO_PROCESSOR_STREAM {
+    Enable: ::BOOL,
+    OutputIndex: ::UINT,
+    InputFrameOrField: ::UINT,
+    PastFrames: ::UINT,
+    FutureFrames: ::UINT,
+    ppPastSurfaces: *mut *mut ID3D11VideoProcessorInputView,
+    pInputSurface: *mut ID3D11VideoProcessorInputView,
+    ppFutureSurfaces: *mut *mut ID3D11VideoProcessorInputView,
+    ppPastSurfacesRight: *mut *mut ID3D11VideoProcessorInputView,
+    pInputSurfaceRight: *mut ID3D11VideoProcessorInputView,
+    ppFutureSurfacesRight: *mut *mut ID3D11VideoProcessorInputView,
+}}
 RIDL!(
 interface ID3D11VideoProcessor(ID3D11VideoProcessorVtbl)
     : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
@@ -2272,10 +2178,9 @@ interface ID3D11VideoProcessor(ID3D11VideoProcessorVtbl)
     ) -> ()
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_OMAC {
-    pub Omac: [::BYTE; 16],
-}
+STRUCT!{struct D3D11_OMAC {
+    Omac: [::BYTE; 16],
+}}
 ENUM!{enum D3D11_AUTHENTICATED_CHANNEL_TYPE {
     D3D11_AUTHENTICATED_CHANNEL_D3D11 = 1,
     D3D11_AUTHENTICATED_CHANNEL_DRIVER_SOFTWARE = 2,
@@ -2325,106 +2230,90 @@ DEFINE_GUID!(D3D11_AUTHENTICATED_CONFIGURE_SHARED_RESOURCE, 0x772d047, 0x1b40, 0
     0xa6, 0xb5, 0xf5, 0x10, 0xde, 0x9f, 0x1);
 DEFINE_GUID!(D3D11_AUTHENTICATED_CONFIGURE_ENCRYPTION_WHEN_ACCESSIBLE, 0x41fff286, 0x6ae0,
     0x4d43, 0x9d, 0x55, 0xa4, 0x6e, 0x9e, 0xfd, 0x15, 0x8a);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_INPUT {
-    pub QueryType: ::GUID,
-    pub hChannel: ::HANDLE,
-    pub SequenceNumber: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_OUTPUT {
-    pub omac: D3D11_OMAC,
-    pub QueryType: ::GUID,
-    pub hChannel: ::HANDLE,
-    pub SequenceNumber: ::UINT,
-    pub ReturnCode: ::HRESULT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_PROTECTION_FLAGS {
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_INPUT {
+    QueryType: ::GUID,
+    hChannel: ::HANDLE,
+    SequenceNumber: ::UINT,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_OUTPUT {
+    omac: D3D11_OMAC,
+    QueryType: ::GUID,
+    hChannel: ::HANDLE,
+    SequenceNumber: ::UINT,
+    ReturnCode: ::HRESULT,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_PROTECTION_FLAGS {
     u: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_PROTECTION_OUTPUT {
-    pub Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    pub ProtectionFlags: D3D11_AUTHENTICATED_PROTECTION_FLAGS,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_CHANNEL_TYPE_OUTPUT {
-    pub Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    pub ChannelType: D3D11_AUTHENTICATED_CHANNEL_TYPE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_DEVICE_HANDLE_OUTPUT {
-    pub Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    pub DeviceHandle: ::HANDLE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_INPUT {
-    pub Input: D3D11_AUTHENTICATED_QUERY_INPUT,
-    pub DecoderHandle: ::HANDLE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_OUTPUT {
-    pub Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    pub DecoderHandle: ::HANDLE,
-    pub CryptoSessionHandle: ::HANDLE,
-    pub DeviceHandle: ::HANDLE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_COUNT_OUTPUT {
-    pub Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    pub RestrictedSharedResourceProcessCount: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_INPUT {
-    pub Input: D3D11_AUTHENTICATED_QUERY_INPUT,
-    pub ProcessIndex: ::UINT,
-}
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_PROTECTION_OUTPUT {
+    Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
+    ProtectionFlags: D3D11_AUTHENTICATED_PROTECTION_FLAGS,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_CHANNEL_TYPE_OUTPUT {
+    Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
+    ChannelType: D3D11_AUTHENTICATED_CHANNEL_TYPE,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_DEVICE_HANDLE_OUTPUT {
+    Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
+    DeviceHandle: ::HANDLE,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_INPUT {
+    Input: D3D11_AUTHENTICATED_QUERY_INPUT,
+    DecoderHandle: ::HANDLE,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_OUTPUT {
+    Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
+    DecoderHandle: ::HANDLE,
+    CryptoSessionHandle: ::HANDLE,
+    DeviceHandle: ::HANDLE,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_COUNT_OUTPUT {
+    Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
+    RestrictedSharedResourceProcessCount: ::UINT,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_INPUT {
+    Input: D3D11_AUTHENTICATED_QUERY_INPUT,
+    ProcessIndex: ::UINT,
+}}
 ENUM!{enum D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE {
     DD3D11_PROCESSIDTYPE_UNKNOWN = 0,
     DD3D11_PROCESSIDTYPE_DWM = 1,
     DD3D11_PROCESSIDTYPE_HANDLE  = 2,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_OUTPUT {
-    pub Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    pub ProcessIndex: ::UINT,
-    pub ProcessIdentifier: D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE,
-    pub ProcessHandle: ::HANDLE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_UNRESTRICTED_PROTECTED_SHARED_RESOURCE_COUNT_OUTPUT {
-    pub Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    pub UnrestrictedProtectedSharedResourceCount: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_INPUT {
-    pub Input: D3D11_AUTHENTICATED_QUERY_INPUT,
-    pub DeviceHandle: ::HANDLE,
-    pub CryptoSessionHandle: ::HANDLE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_OUTPUT {
-    pub Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    pub DeviceHandle: ::HANDLE,
-    pub CryptoSessionHandle: ::HANDLE,
-    pub OutputIDCount: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_INPUT {
-    pub Input: D3D11_AUTHENTICATED_QUERY_INPUT,
-    pub DeviceHandle: ::HANDLE,
-    pub CryptoSessionHandle: ::HANDLE,
-    pub OutputIDIndex: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_OUTPUT {
-    pub Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    pub DeviceHandle: ::HANDLE,
-    pub CryptoSessionHandle: ::HANDLE,
-    pub OutputIDIndex: ::UINT,
-    pub OutputID: ::UINT64,
-}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_OUTPUT {
+    Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
+    ProcessIndex: ::UINT,
+    ProcessIdentifier: D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE,
+    ProcessHandle: ::HANDLE,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_UNRESTRICTED_PROTECTED_SHARED_RESOURCE_COUNT_OUTPUT {
+    Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
+    UnrestrictedProtectedSharedResourceCount: ::UINT,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_INPUT {
+    Input: D3D11_AUTHENTICATED_QUERY_INPUT,
+    DeviceHandle: ::HANDLE,
+    CryptoSessionHandle: ::HANDLE,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_OUTPUT {
+    Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
+    DeviceHandle: ::HANDLE,
+    CryptoSessionHandle: ::HANDLE,
+    OutputIDCount: ::UINT,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_INPUT {
+    Input: D3D11_AUTHENTICATED_QUERY_INPUT,
+    DeviceHandle: ::HANDLE,
+    CryptoSessionHandle: ::HANDLE,
+    OutputIDIndex: ::UINT,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_OUTPUT {
+    Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
+    DeviceHandle: ::HANDLE,
+    CryptoSessionHandle: ::HANDLE,
+    OutputIDIndex: ::UINT,
+    OutputID: ::UINT64,
+}}
 ENUM!{enum D3D11_BUS_TYPE {
     D3D11_BUS_TYPE_OTHER = 0,
     D3D11_BUS_TYPE_PCI = 0x1,
@@ -2438,79 +2327,67 @@ ENUM!{enum D3D11_BUS_TYPE {
     D3D11_BUS_IMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR_INSIDE_OF_NUAE = 0x50000,
     D3D11_BUS_IMPL_MODIFIER_NON_STANDARD = 0x80000000,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_ACESSIBILITY_OUTPUT {
-    pub Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    pub BusType: D3D11_BUS_TYPE,
-    pub AccessibleInContiguousBlocks: ::BOOL,
-    pub AccessibleInNonContiguousBlocks: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_COUNT_OUTPUT {
-    pub Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    pub EncryptionGuidCount: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_INPUT {
-    pub Input: D3D11_AUTHENTICATED_QUERY_INPUT,
-    pub EncryptionGuidIndex: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_OUTPUT {
-    pub Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    pub EncryptionGuidIndex: ::UINT,
-    pub EncryptionGuid: ::GUID,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_QUERY_CURRENT_ACCESSIBILITY_ENCRYPTION_OUTPUT {
-    pub Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    pub EncryptionGuid: ::GUID,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_CONFIGURE_INPUT {
-    pub omac: D3D11_OMAC,
-    pub ConfigureType: ::GUID,
-    pub hChannel: ::HANDLE,
-    pub SequenceNumber: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_CONFIGURE_OUTPUT {
-    pub omac: D3D11_OMAC,
-    pub ConfigureType: ::GUID,
-    pub hChannel: ::HANDLE,
-    pub SequenceNumber: ::UINT,
-    pub ReturnCode: ::HRESULT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_CONFIGURE_INITIALIZE_INPUT {
-    pub Parameters: D3D11_AUTHENTICATED_CONFIGURE_INPUT,
-    pub StartSequenceQuery: ::UINT,
-    pub StartSequenceConfigure: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_CONFIGURE_PROTECTION_INPUT {
-    pub Parameters: D3D11_AUTHENTICATED_CONFIGURE_INPUT,
-    pub Protections: D3D11_AUTHENTICATED_PROTECTION_FLAGS,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_CONFIGURE_CRYPTO_SESSION_INPUT {
-    pub Parameters: D3D11_AUTHENTICATED_CONFIGURE_INPUT,
-    pub DecoderHandle: ::HANDLE,
-    pub CryptoSessionHandle: ::HANDLE,
-    pub DeviceHandle: ::HANDLE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_CONFIGURE_SHARED_RESOURCE_INPUT {
-    pub Parameters: D3D11_AUTHENTICATED_CONFIGURE_INPUT,
-    pub ProcessType: D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE,
-    pub ProcessHandle: ::HANDLE,
-    pub AllowAccess: ::BOOL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_AUTHENTICATED_CONFIGURE_ACCESSIBLE_ENCRYPTION_INPUT {
-    pub Parameters: D3D11_AUTHENTICATED_CONFIGURE_INPUT,
-    pub EncryptionGuid: ::GUID,
-}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_ACESSIBILITY_OUTPUT {
+    Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
+    BusType: D3D11_BUS_TYPE,
+    AccessibleInContiguousBlocks: ::BOOL,
+    AccessibleInNonContiguousBlocks: ::BOOL,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_COUNT_OUTPUT {
+    Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
+    EncryptionGuidCount: ::UINT,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_INPUT {
+    Input: D3D11_AUTHENTICATED_QUERY_INPUT,
+    EncryptionGuidIndex: ::UINT,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_OUTPUT {
+    Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
+    EncryptionGuidIndex: ::UINT,
+    EncryptionGuid: ::GUID,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_QUERY_CURRENT_ACCESSIBILITY_ENCRYPTION_OUTPUT {
+    Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
+    EncryptionGuid: ::GUID,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_CONFIGURE_INPUT {
+    omac: D3D11_OMAC,
+    ConfigureType: ::GUID,
+    hChannel: ::HANDLE,
+    SequenceNumber: ::UINT,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_CONFIGURE_OUTPUT {
+    omac: D3D11_OMAC,
+    ConfigureType: ::GUID,
+    hChannel: ::HANDLE,
+    SequenceNumber: ::UINT,
+    ReturnCode: ::HRESULT,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_CONFIGURE_INITIALIZE_INPUT {
+    Parameters: D3D11_AUTHENTICATED_CONFIGURE_INPUT,
+    StartSequenceQuery: ::UINT,
+    StartSequenceConfigure: ::UINT,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_CONFIGURE_PROTECTION_INPUT {
+    Parameters: D3D11_AUTHENTICATED_CONFIGURE_INPUT,
+    Protections: D3D11_AUTHENTICATED_PROTECTION_FLAGS,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_CONFIGURE_CRYPTO_SESSION_INPUT {
+    Parameters: D3D11_AUTHENTICATED_CONFIGURE_INPUT,
+    DecoderHandle: ::HANDLE,
+    CryptoSessionHandle: ::HANDLE,
+    DeviceHandle: ::HANDLE,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_CONFIGURE_SHARED_RESOURCE_INPUT {
+    Parameters: D3D11_AUTHENTICATED_CONFIGURE_INPUT,
+    ProcessType: D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE,
+    ProcessHandle: ::HANDLE,
+    AllowAccess: ::BOOL,
+}}
+STRUCT!{struct D3D11_AUTHENTICATED_CONFIGURE_ACCESSIBLE_ENCRYPTION_INPUT {
+    Parameters: D3D11_AUTHENTICATED_CONFIGURE_INPUT,
+    EncryptionGuid: ::GUID,
+}}
 DEFINE_GUID!(D3D11_KEY_EXCHANGE_RSAES_OAEP, 0xc1949895, 0xd72a, 0x4a1d, 0x8e, 0x5d, 0xed, 0x85,
     0x7d, 0x17, 0x15, 0x20);
 RIDL!(
@@ -2526,16 +2403,14 @@ ENUM!{enum D3D11_VDOV_DIMENSION {
     D3D11_VDOV_DIMENSION_UNKNOWN = 0,
     D3D11_VDOV_DIMENSION_TEXTURE2D = 1,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2D_VDOV {
-    pub ArraySlice: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC {
-    pub DecodeProfile: ::GUID,
-    pub ViewDimension: D3D11_VDOV_DIMENSION,
-    pub Texture2D: D3D11_TEX2D_VDOV,
-}
+STRUCT!{struct D3D11_TEX2D_VDOV {
+    ArraySlice: ::UINT,
+}}
+STRUCT!{struct D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC {
+    DecodeProfile: ::GUID,
+    ViewDimension: D3D11_VDOV_DIMENSION,
+    Texture2D: D3D11_TEX2D_VDOV,
+}}
 RIDL!(
 interface ID3D11VideoDecoderOutputView(ID3D11VideoDecoderOutputViewVtbl)
     : ID3D11View(ID3D11ViewVtbl) {
@@ -2546,17 +2421,15 @@ ENUM!{enum D3D11_VPIV_DIMENSION {
     D3D11_VPIV_DIMENSION_UNKNOWN = 0,
     D3D11_VPIV_DIMENSION_TEXTURE2D = 1,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2D_VPIV {
-    pub MipSlice: ::UINT,
-    pub ArraySlice: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC {
-    pub FourCC: ::UINT,
-    pub ViewDimension: D3D11_VPIV_DIMENSION,
-    pub Texture2D: D3D11_TEX2D_VPIV,
-}
+STRUCT!{struct D3D11_TEX2D_VPIV {
+    MipSlice: ::UINT,
+    ArraySlice: ::UINT,
+}}
+STRUCT!{struct D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC {
+    FourCC: ::UINT,
+    ViewDimension: D3D11_VPIV_DIMENSION,
+    Texture2D: D3D11_TEX2D_VPIV,
+}}
 RIDL!(
 interface ID3D11VideoProcessorInputView(ID3D11VideoProcessorInputViewVtbl)
     : ID3D11View(ID3D11ViewVtbl) {
@@ -2568,21 +2441,18 @@ ENUM!{enum D3D11_VPOV_DIMENSION {
     D3D11_VPOV_DIMENSION_TEXTURE2D = 1,
     D3D11_VPOV_DIMENSION_TEXTURE2DARRAY = 2,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2D_VPOV {
-    pub MipSlice: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_TEX2D_ARRAY_VPOV {
-    pub MipSlice: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC {
-    pub ViewDimension: D3D11_VPOV_DIMENSION,
+STRUCT!{struct D3D11_TEX2D_VPOV {
+    MipSlice: ::UINT,
+}}
+STRUCT!{struct D3D11_TEX2D_ARRAY_VPOV {
+    MipSlice: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
+STRUCT!{struct D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC {
+    ViewDimension: D3D11_VPOV_DIMENSION,
     u: [::UINT; 3],
-}
+}}
 UNION!(D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC, u, Texture2D, Texture2D_mut, D3D11_TEX2D_VPOV);
 UNION!(D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC, u, Texture2DArray, Texture2DArray_mut,
     D3D11_TEX2D_ARRAY_VPOV);

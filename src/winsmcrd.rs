@@ -112,37 +112,33 @@ pub const SCARD_SWALLOWED: ::ULONG = 3;
 pub const SCARD_POWERED: ::ULONG = 4;
 pub const SCARD_NEGOTIABLE: ::ULONG = 5;
 pub const SCARD_SPECIFIC: ::ULONG = 6;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCARD_IO_REQUEST {
-    pub dwProtocol: ::DWORD,
-    pub cbPciLength: ::DWORD,
-}
+STRUCT!{struct SCARD_IO_REQUEST {
+    dwProtocol: ::DWORD,
+    cbPciLength: ::DWORD,
+}}
 pub type PSCARD_IO_REQUEST = *mut SCARD_IO_REQUEST;
 pub type LPSCARD_IO_REQUEST = *mut SCARD_IO_REQUEST;
 pub type LPCSCARD_IO_REQUEST = *const SCARD_IO_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCARD_T0_COMMAND {
-    pub bCla: ::BYTE,
-    pub bIns: ::BYTE,
-    pub bP1: ::BYTE,
-    pub bP2: ::BYTE,
-    pub bP3: ::BYTE,
-}
+STRUCT!{struct SCARD_T0_COMMAND {
+    bCla: ::BYTE,
+    bIns: ::BYTE,
+    bP1: ::BYTE,
+    bP2: ::BYTE,
+    bP3: ::BYTE,
+}}
 pub type LPSCARD_T0_COMMAND = *mut SCARD_T0_COMMAND;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCARD_T0_REQUEST {
-    pub ioRequest: SCARD_IO_REQUEST,
-    pub bSw1: ::BYTE,
-    pub bSw2: ::BYTE,
-    pub CmdBytes: SCARD_T0_COMMAND,
-}
+STRUCT!{struct SCARD_T0_REQUEST {
+    ioRequest: SCARD_IO_REQUEST,
+    bSw1: ::BYTE,
+    bSw2: ::BYTE,
+    CmdBytes: SCARD_T0_COMMAND,
+}}
 UNION!(SCARD_T0_REQUEST, CmdBytes, rgbHeader, rgbHeader_mut, [::BYTE; 5]);
 pub type PSCARD_T0_REQUEST = *mut SCARD_T0_REQUEST;
 pub type LPSCARD_T0_REQUEST = *mut SCARD_T0_REQUEST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCARD_T1_REQUEST {
-    pub ioRequest: SCARD_IO_REQUEST,
-}
+STRUCT!{struct SCARD_T1_REQUEST {
+    ioRequest: SCARD_IO_REQUEST,
+}}
 pub type PSCARD_T1_REQUEST = *mut SCARD_T1_REQUEST;
 pub type LPSCARD_T1_REQUEST = *mut SCARD_T1_REQUEST;
 pub const SCARD_READER_SWALLOWS: ::ULONG = 0x00000001;

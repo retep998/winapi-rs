@@ -317,14 +317,13 @@ pub type REFERENCE_TIME = LONGLONG;
 //-------------------------------------------------------------------------------------------------
 // propidl.h
 //-------------------------------------------------------------------------------------------------
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PROPVARIANT {
-    pub vt: VARTYPE,
-    pub wReserved1: WORD,
-    pub wReserved2: WORD,
-    pub wReserved3: WORD,
-    pub data: [u8; 16],
-}
+STRUCT!{struct PROPVARIANT {
+    vt: VARTYPE,
+    wReserved1: WORD,
+    wReserved2: WORD,
+    wReserved3: WORD,
+    data: [u8; 16],
+}}
 //-------------------------------------------------------------------------------------------------
 // combaseapi.h
 // Base Component Object Model defintions.
@@ -336,12 +335,11 @@ pub const CLSCTX_REMOTE_SERVER: DWORD = 0x10;
 pub const CLSCTX_SERVER: DWORD = CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER |
                                  CLSCTX_REMOTE_SERVER;
 pub const CLSCTX_ALL: DWORD = CLSCTX_INPROC_HANDLER | CLSCTX_SERVER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ServerInformation {
-    pub dwServerPid: DWORD,
-    pub dwServerTid: DWORD,
-    pub ui64ServerAddress: UINT64,
-}
+STRUCT!{struct ServerInformation {
+    dwServerPid: DWORD,
+    dwServerTid: DWORD,
+    ui64ServerAddress: UINT64,
+}}
 pub type PServerInformation = *mut ServerInformation;
 DECLARE_HANDLE!(CO_MTA_USAGE_COOKIE, CO_MTA_USAGE_COOKIE__);
 //-------------------------------------------------------------------------------------------------
@@ -369,21 +367,19 @@ pub const SND_SYSTEM: DWORD = 0x00200000;
 // Registry API procedure declarations, constant definitions and macros
 //-------------------------------------------------------------------------------------------------
 pub type REGSAM = ACCESS_MASK;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct VALENTA {
-    pub ve_valuename: LPSTR,
-    pub ve_valuelen: DWORD,
-    pub ve_valueptr: DWORD_PTR,
-    pub ve_type: DWORD,
-}
+STRUCT!{struct VALENTA {
+    ve_valuename: LPSTR,
+    ve_valuelen: DWORD,
+    ve_valueptr: DWORD_PTR,
+    ve_type: DWORD,
+}}
 pub type PVALENTA = *mut VALENTA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct VALENTW {
-    pub ve_valuename: LPWSTR,
-    pub ve_valuelen: DWORD,
-    pub ve_valueptr: DWORD_PTR,
-    pub ve_type: DWORD,
-}
+STRUCT!{struct VALENTW {
+    ve_valuename: LPWSTR,
+    ve_valuelen: DWORD,
+    ve_valueptr: DWORD_PTR,
+    ve_type: DWORD,
+}}
 pub type PVALENTW = *mut VALENTW;
 pub const HKEY_CLASSES_ROOT: HKEY = 0x80000000 as HKEY;
 pub const HKEY_CURRENT_USER: HKEY = 0x80000001 as HKEY;

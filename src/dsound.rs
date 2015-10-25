@@ -1,52 +1,49 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! DSound procedure declarations, constant definitions and macros
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DSCAPS {
-    pub dwSize: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub dwMinSecondarySampleRate: ::DWORD,
-    pub dwMaxSecondarySampleRate: ::DWORD,
-    pub dwPrimaryBuffers: ::DWORD,
-    pub dwMaxHwMixingAllBuffers: ::DWORD,
-    pub dwMaxHwMixingStaticBuffers: ::DWORD,
-    pub dwMaxHwMixingStreamingBuffers: ::DWORD,
-    pub dwFreeHwMixingAllBuffers: ::DWORD,
-    pub dwFreeHwMixingStaticBuffers: ::DWORD,
-    pub dwFreeHwMixingStreamingBuffers: ::DWORD,
-    pub dwMaxHw3DAllBuffers: ::DWORD,
-    pub dwMaxHw3DStaticBuffers: ::DWORD,
-    pub dwMaxHw3DStreamingBuffers: ::DWORD,
-    pub dwFreeHw3DAllBuffers: ::DWORD,
-    pub dwFreeHw3DStaticBuffers: ::DWORD,
-    pub dwFreeHw3DStreamingBuffers: ::DWORD,
-    pub dwTotalHwMemBytes: ::DWORD,
-    pub dwFreeHwMemBytes: ::DWORD,
-    pub dwMaxContigFreeHwMemBytes: ::DWORD,
-    pub dwUnlockTransferRateHwBuffers: ::DWORD,
-    pub dwPlayCpuOverheadSwBuffers: ::DWORD,
-    pub dwReserved1: ::DWORD,
-    pub dwReserved2: ::DWORD,
-}
+STRUCT!{struct DSCAPS {
+    dwSize: ::DWORD,
+    dwFlags: ::DWORD,
+    dwMinSecondarySampleRate: ::DWORD,
+    dwMaxSecondarySampleRate: ::DWORD,
+    dwPrimaryBuffers: ::DWORD,
+    dwMaxHwMixingAllBuffers: ::DWORD,
+    dwMaxHwMixingStaticBuffers: ::DWORD,
+    dwMaxHwMixingStreamingBuffers: ::DWORD,
+    dwFreeHwMixingAllBuffers: ::DWORD,
+    dwFreeHwMixingStaticBuffers: ::DWORD,
+    dwFreeHwMixingStreamingBuffers: ::DWORD,
+    dwMaxHw3DAllBuffers: ::DWORD,
+    dwMaxHw3DStaticBuffers: ::DWORD,
+    dwMaxHw3DStreamingBuffers: ::DWORD,
+    dwFreeHw3DAllBuffers: ::DWORD,
+    dwFreeHw3DStaticBuffers: ::DWORD,
+    dwFreeHw3DStreamingBuffers: ::DWORD,
+    dwTotalHwMemBytes: ::DWORD,
+    dwFreeHwMemBytes: ::DWORD,
+    dwMaxContigFreeHwMemBytes: ::DWORD,
+    dwUnlockTransferRateHwBuffers: ::DWORD,
+    dwPlayCpuOverheadSwBuffers: ::DWORD,
+    dwReserved1: ::DWORD,
+    dwReserved2: ::DWORD,
+}}
 pub type LPDSCAPS = *mut DSCAPS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DSBCAPS {
-    pub dwSize: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub dwBufferBytes: ::DWORD,
-    pub dwUnlockTransferRate: ::DWORD,
-    pub dwPlayCpuOverhead: ::DWORD,
-}
+STRUCT!{struct DSBCAPS {
+    dwSize: ::DWORD,
+    dwFlags: ::DWORD,
+    dwBufferBytes: ::DWORD,
+    dwUnlockTransferRate: ::DWORD,
+    dwPlayCpuOverhead: ::DWORD,
+}}
 pub type LPDSBCAPS = *mut DSBCAPS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DSBUFFERDESC {
-    pub dwSize: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub dwBufferBytes: ::DWORD,
-    pub dwReserved: ::DWORD,
-    pub lpwfxFormat: ::LPWAVEFORMATEX,
-    pub guid3DAlgorithm: ::GUID,
-}
+STRUCT!{struct DSBUFFERDESC {
+    dwSize: ::DWORD,
+    dwFlags: ::DWORD,
+    dwBufferBytes: ::DWORD,
+    dwReserved: ::DWORD,
+    lpwfxFormat: ::LPWAVEFORMATEX,
+    guid3DAlgorithm: ::GUID,
+}}
 pub type LPCDSBUFFERDESC = *const DSBUFFERDESC;
 RIDL!(
 interface IDirectSoundBuffer(IDirectSoundBufferVtbl): IUnknown(IUnknownVtbl) {

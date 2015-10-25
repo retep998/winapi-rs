@@ -166,46 +166,43 @@ pub const THREAD_PRIORITY_TIME_CRITICAL: ::DWORD = THREAD_BASE_PRIORITY_LOWRT;
 pub const THREAD_PRIORITY_IDLE: ::DWORD = THREAD_BASE_PRIORITY_IDLE;
 pub const THREAD_MODE_BACKGROUND_BEGIN: ::DWORD = 0x00010000;
 pub const THREAD_MODE_BACKGROUND_END: ::DWORD = 0x00020000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MEMORYSTATUS {
-    pub dwLength: ::DWORD,
-    pub dwMemoryLoad: ::DWORD,
-    pub dwTotalPhys: ::SIZE_T,
-    pub dwAvailPhys: ::SIZE_T,
-    pub dwTotalPageFile: ::SIZE_T,
-    pub dwAvailPageFile: ::SIZE_T,
-    pub dwTotalVirtual: ::SIZE_T,
-    pub dwAvailVirtual: ::SIZE_T,
-}
+STRUCT!{struct MEMORYSTATUS {
+    dwLength: ::DWORD,
+    dwMemoryLoad: ::DWORD,
+    dwTotalPhys: ::SIZE_T,
+    dwAvailPhys: ::SIZE_T,
+    dwTotalPageFile: ::SIZE_T,
+    dwAvailPageFile: ::SIZE_T,
+    dwTotalVirtual: ::SIZE_T,
+    dwAvailVirtual: ::SIZE_T,
+}}
 pub type LPMEMORYSTATUS = *mut MEMORYSTATUS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COMMPROP {
-    pub wPacketLength: ::WORD,
-    pub wPacketVersion: ::WORD,
-    pub dwServiceMask: ::DWORD,
-    pub dwReserved1: ::DWORD,
-    pub dwMaxTxQueue: ::DWORD,
-    pub dwMaxRxQueue: ::DWORD,
-    pub dwMaxBaud: ::DWORD,
-    pub dwProvSubType: ::DWORD,
-    pub dwProvCapabilities: ::DWORD,
-    pub dwSettableParams: ::DWORD,
-    pub dwSettableBaud: ::DWORD,
-    pub wSettableData: ::WORD,
-    pub wSettableStopParity: ::WORD,
-    pub dwCurrentTxQueue: ::DWORD,
-    pub dwCurrentRxQueue: ::DWORD,
-    pub dwProvSpec1: ::DWORD,
-    pub dwProvSpec2: ::DWORD,
-    pub wcProvChar: [::WCHAR; 1],
-}
+STRUCT!{struct COMMPROP {
+    wPacketLength: ::WORD,
+    wPacketVersion: ::WORD,
+    dwServiceMask: ::DWORD,
+    dwReserved1: ::DWORD,
+    dwMaxTxQueue: ::DWORD,
+    dwMaxRxQueue: ::DWORD,
+    dwMaxBaud: ::DWORD,
+    dwProvSubType: ::DWORD,
+    dwProvCapabilities: ::DWORD,
+    dwSettableParams: ::DWORD,
+    dwSettableBaud: ::DWORD,
+    wSettableData: ::WORD,
+    wSettableStopParity: ::WORD,
+    dwCurrentTxQueue: ::DWORD,
+    dwCurrentRxQueue: ::DWORD,
+    dwProvSpec1: ::DWORD,
+    dwProvSpec2: ::DWORD,
+    wcProvChar: [::WCHAR; 1],
+}}
 pub type LPCOMMPROP = *mut COMMPROP;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COMSTAT {
-    pub BitFields: ::DWORD,
-    pub cbInQue: ::DWORD,
-    pub cbOutQue : ::DWORD,
-}
+STRUCT!{struct COMSTAT {
+    BitFields: ::DWORD,
+    cbInQue: ::DWORD,
+    cbOutQue : ::DWORD,
+}}
 BITFIELD!(COMSTAT BitFields: ::DWORD [
     fCtsHold set_fCtsHold[0..1],
     fDsrHold set_fDsrHold[1..2],
@@ -217,24 +214,23 @@ BITFIELD!(COMSTAT BitFields: ::DWORD [
     fReserved set_fReserved[7..32],
 ]);
 pub type LPCOMSTAT = *mut COMSTAT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DCB {
-    pub DCBlength: ::DWORD,
-    pub BaudRate: ::DWORD,
-    pub BitFields: ::DWORD,
-    pub wReserved: ::WORD,
-    pub XonLim: ::WORD,
-    pub XoffLim: ::WORD,
-    pub ByteSize: ::BYTE,
-    pub Parity: ::BYTE,
-    pub StopBits: ::BYTE,
-    pub XonChar: ::c_char,
-    pub XoffChar: ::c_char,
-    pub ErrorChar: ::c_char,
-    pub EofChar: ::c_char,
-    pub EvtChar: ::c_char,
-    pub wReserved1: ::WORD,
-}
+STRUCT!{struct DCB {
+    DCBlength: ::DWORD,
+    BaudRate: ::DWORD,
+    BitFields: ::DWORD,
+    wReserved: ::WORD,
+    XonLim: ::WORD,
+    XoffLim: ::WORD,
+    ByteSize: ::BYTE,
+    Parity: ::BYTE,
+    StopBits: ::BYTE,
+    XonChar: ::c_char,
+    XoffChar: ::c_char,
+    ErrorChar: ::c_char,
+    EofChar: ::c_char,
+    EvtChar: ::c_char,
+    wReserved1: ::WORD,
+}}
 BITFIELD!(DCB BitFields: ::DWORD [
     fBinary set_fBinary[0..1],
     fParity set_fParity[1..2],
@@ -252,26 +248,24 @@ BITFIELD!(DCB BitFields: ::DWORD [
     fDummy2 set_fDummy2[15..32],
 ]);
 pub type LPDCB = *mut DCB;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COMMTIMEOUTS {
-    pub ReadIntervalTimeout: ::DWORD,
-    pub ReadTotalTimeoutMultiplier: ::DWORD,
-    pub ReadTotalTimeoutConstant: ::DWORD,
-    pub WriteTotalTimeoutMultiplier: ::DWORD,
-    pub WriteTotalTimeoutConstant: ::DWORD,
-}
+STRUCT!{struct COMMTIMEOUTS {
+    ReadIntervalTimeout: ::DWORD,
+    ReadTotalTimeoutMultiplier: ::DWORD,
+    ReadTotalTimeoutConstant: ::DWORD,
+    WriteTotalTimeoutMultiplier: ::DWORD,
+    WriteTotalTimeoutConstant: ::DWORD,
+}}
 pub type LPCOMMTIMEOUTS = *mut COMMTIMEOUTS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COMMCONFIG {
-    pub dwSize: ::DWORD,
-    pub wVersion: ::WORD,
-    pub wReserved: ::WORD,
-    pub dcb: DCB,
-    pub dwProviderSubType: ::DWORD,
-    pub dwProviderOffset: ::DWORD,
-    pub dwProviderSize: ::DWORD,
-    pub wcProviderData: [::WCHAR; 1],
-}
+STRUCT!{struct COMMCONFIG {
+    dwSize: ::DWORD,
+    wVersion: ::WORD,
+    wReserved: ::WORD,
+    dcb: DCB,
+    dwProviderSubType: ::DWORD,
+    dwProviderOffset: ::DWORD,
+    dwProviderSize: ::DWORD,
+    wcProviderData: [::WCHAR; 1],
+}}
 pub type LPCOMMCONFIG = *mut COMMCONFIG;
 pub type PFIBER_CALLOUT_ROUTINE = Option<unsafe extern "system" fn(
     lpParameter: ::LPVOID,
@@ -307,66 +301,60 @@ pub enum COPYFILE2_COPY_PHASE {
     COPYFILE2_PHASE_NAMEGRAFT_COPY,
     COPYFILE2_PHASE_MAX,
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COPYFILE2_MESSAGE_ChunkStarted {
-    pub dwStreamNumber: ::DWORD,
-    pub dwReserved: ::DWORD,
-    pub hSourceFile: ::HANDLE,
-    pub hDestinationFile: ::HANDLE,
-    pub uliChunkNumber: ::ULARGE_INTEGER,
-    pub uliChunkSize: ::ULARGE_INTEGER,
-    pub uliStreamSize: ::ULARGE_INTEGER,
-    pub uliTotalFileSize: ::ULARGE_INTEGER,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COPYFILE2_MESSAGE_ChunkFinished {
-    pub dwStreamNumber: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub hSourceFile: ::HANDLE,
-    pub hDestinationFile: ::HANDLE,
-    pub uliChunkNumber: ::ULARGE_INTEGER,
-    pub uliChunkSize: ::ULARGE_INTEGER,
-    pub uliStreamSize: ::ULARGE_INTEGER,
-    pub uliStreamBytesTransferred: ::ULARGE_INTEGER,
-    pub uliTotalFileSize: ::ULARGE_INTEGER,
-    pub uliTotalBytesTransferred: ::ULARGE_INTEGER,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COPYFILE2_MESSAGE_StreamStarted {
-    pub dwStreamNumber: ::DWORD,
-    pub dwReserved: ::DWORD,
-    pub hSourceFile: ::HANDLE,
-    pub hDestinationFile: ::HANDLE,
-    pub uliStreamSize: ::ULARGE_INTEGER,
-    pub uliTotalFileSize: ::ULARGE_INTEGER,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COPYFILE2_MESSAGE_StreamFinished {
-    pub dwStreamNumber: ::DWORD,
-    pub dwReserved: ::DWORD,
-    pub hSourceFile: ::HANDLE,
-    pub hDestinationFile: ::HANDLE,
-    pub uliStreamSize: ::ULARGE_INTEGER,
-    pub uliStreamBytesTransferred: ::ULARGE_INTEGER,
-    pub uliTotalFileSize: ::ULARGE_INTEGER,
-    pub uliTotalBytesTransferred: ::ULARGE_INTEGER,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COPYFILE2_MESSAGE_PollContinue {
-    pub dwReserved: ::DWORD,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COPYFILE2_MESSAGE_Error {
-    pub CopyPhase: COPYFILE2_COPY_PHASE,
-    pub dwStreamNumber: ::DWORD,
-    pub hrFailure: ::HRESULT,
-    pub dwReserved: ::DWORD,
-    pub uliChunkNumber: ::ULARGE_INTEGER,
-    pub uliStreamSize: ::ULARGE_INTEGER,
-    pub uliStreamBytesTransferred: ::ULARGE_INTEGER,
-    pub uliTotalFileSize: ::ULARGE_INTEGER,
-    pub uliTotalBytesTransferred: ::ULARGE_INTEGER,
-}
+STRUCT!{struct COPYFILE2_MESSAGE_ChunkStarted {
+    dwStreamNumber: ::DWORD,
+    dwReserved: ::DWORD,
+    hSourceFile: ::HANDLE,
+    hDestinationFile: ::HANDLE,
+    uliChunkNumber: ::ULARGE_INTEGER,
+    uliChunkSize: ::ULARGE_INTEGER,
+    uliStreamSize: ::ULARGE_INTEGER,
+    uliTotalFileSize: ::ULARGE_INTEGER,
+}}
+STRUCT!{struct COPYFILE2_MESSAGE_ChunkFinished {
+    dwStreamNumber: ::DWORD,
+    dwFlags: ::DWORD,
+    hSourceFile: ::HANDLE,
+    hDestinationFile: ::HANDLE,
+    uliChunkNumber: ::ULARGE_INTEGER,
+    uliChunkSize: ::ULARGE_INTEGER,
+    uliStreamSize: ::ULARGE_INTEGER,
+    uliStreamBytesTransferred: ::ULARGE_INTEGER,
+    uliTotalFileSize: ::ULARGE_INTEGER,
+    uliTotalBytesTransferred: ::ULARGE_INTEGER,
+}}
+STRUCT!{struct COPYFILE2_MESSAGE_StreamStarted {
+    dwStreamNumber: ::DWORD,
+    dwReserved: ::DWORD,
+    hSourceFile: ::HANDLE,
+    hDestinationFile: ::HANDLE,
+    uliStreamSize: ::ULARGE_INTEGER,
+    uliTotalFileSize: ::ULARGE_INTEGER,
+}}
+STRUCT!{struct COPYFILE2_MESSAGE_StreamFinished {
+    dwStreamNumber: ::DWORD,
+    dwReserved: ::DWORD,
+    hSourceFile: ::HANDLE,
+    hDestinationFile: ::HANDLE,
+    uliStreamSize: ::ULARGE_INTEGER,
+    uliStreamBytesTransferred: ::ULARGE_INTEGER,
+    uliTotalFileSize: ::ULARGE_INTEGER,
+    uliTotalBytesTransferred: ::ULARGE_INTEGER,
+}}
+STRUCT!{struct COPYFILE2_MESSAGE_PollContinue {
+    dwReserved: ::DWORD,
+}}
+STRUCT!{struct COPYFILE2_MESSAGE_Error {
+    CopyPhase: COPYFILE2_COPY_PHASE,
+    dwStreamNumber: ::DWORD,
+    hrFailure: ::HRESULT,
+    dwReserved: ::DWORD,
+    uliChunkNumber: ::ULARGE_INTEGER,
+    uliStreamSize: ::ULARGE_INTEGER,
+    uliStreamBytesTransferred: ::ULARGE_INTEGER,
+    uliTotalFileSize: ::ULARGE_INTEGER,
+    uliTotalBytesTransferred: ::ULARGE_INTEGER,
+}}
 #[repr(C)] #[derive(Copy)]
 pub struct COPYFILE2_MESSAGE {
     pub Type: COPYFILE2_MESSAGE_TYPE,
@@ -404,32 +392,30 @@ pub type LPPROGRESS_ROUTINE = Option<unsafe extern "system" fn(
     StreamSize: ::LARGE_INTEGER, StreamBytesTransferred: ::LARGE_INTEGER, dwStreamNumber: ::DWORD,
     dwCallbackReason: ::DWORD, hSourceFile: ::HANDLE, hDestinationFile: ::HANDLE, lpData: ::LPVOID,
 ) -> ::DWORD>;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ACTCTXA {
-    pub cbSize: ::ULONG,
-    pub dwFlags: ::DWORD,
-    pub lpSource: ::LPCSTR,
-    pub wProcessorArchitecture: ::USHORT,
-    pub wLangId: ::LANGID,
-    pub lpAssemblyDirectory: ::LPCSTR,
-    pub lpResourceName: ::LPCSTR,
-    pub lpApplicationName: ::LPCSTR,
-    pub hModule: ::HMODULE,
-}
+STRUCT!{struct ACTCTXA {
+    cbSize: ::ULONG,
+    dwFlags: ::DWORD,
+    lpSource: ::LPCSTR,
+    wProcessorArchitecture: ::USHORT,
+    wLangId: ::LANGID,
+    lpAssemblyDirectory: ::LPCSTR,
+    lpResourceName: ::LPCSTR,
+    lpApplicationName: ::LPCSTR,
+    hModule: ::HMODULE,
+}}
 pub type PACTCTXA = *mut ACTCTXA;
 pub type PCACTCTXA = *const ACTCTXA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ACTCTXW {
-    pub cbSize: ::ULONG,
-    pub dwFlags: ::DWORD,
-    pub lpSource: ::LPCWSTR,
-    pub wProcessorArchitecture: ::USHORT,
-    pub wLangId: ::LANGID,
-    pub lpAssemblyDirectory: ::LPCWSTR,
-    pub lpResourceName: ::LPCWSTR,
-    pub lpApplicationName: ::LPCWSTR,
-    pub hModule: ::HMODULE,
-}
+STRUCT!{struct ACTCTXW {
+    cbSize: ::ULONG,
+    dwFlags: ::DWORD,
+    lpSource: ::LPCWSTR,
+    wProcessorArchitecture: ::USHORT,
+    wLangId: ::LANGID,
+    lpAssemblyDirectory: ::LPCWSTR,
+    lpResourceName: ::LPCWSTR,
+    lpApplicationName: ::LPCWSTR,
+    hModule: ::HMODULE,
+}}
 pub type PACTCTXW = *mut ACTCTXW;
 pub type PCACTCTXW = *const ACTCTXW;
 pub type PFIBER_START_ROUTINE = Option<unsafe extern "system" fn(lpFiberParameter: ::LPVOID)>;
@@ -450,11 +436,10 @@ impl Clone for UMS_SCHEDULER_STARTUP_INFO {
     fn clone(&self) -> UMS_SCHEDULER_STARTUP_INFO { *self }
 }
 pub type PUMS_SCHEDULER_STARTUP_INFO = *mut UMS_SCHEDULER_STARTUP_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct UMS_SYSTEM_THREAD_INFORMATION {
-    pub UmsVersion: ::ULONG,
-    pub BitFields: ::ULONG,
-}
+STRUCT!{struct UMS_SYSTEM_THREAD_INFORMATION {
+    UmsVersion: ::ULONG,
+    BitFields: ::ULONG,
+}}
 BITFIELD!(UMS_SYSTEM_THREAD_INFORMATION BitFields: ::ULONG [
     IsUmsSchedulerThread set_IsUmsSchedulerThread[0..1],
     IsUmsWorkerThread set_IsUmsWorkerThread[1..2],
@@ -464,33 +449,31 @@ UNION!(
     ::ULONG
 );
 pub type PUMS_SYSTEM_THREAD_INFORMATION = *mut UMS_SYSTEM_THREAD_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA {
-    pub lpInformation: ::PVOID,
-    pub lpSectionBase: ::PVOID,
-    pub ulSectionLength: ::ULONG,
-    pub lpSectionGlobalDataBase: ::PVOID,
-    pub ulSectionGlobalDataLength: ::ULONG,
-}
+STRUCT!{struct ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA {
+    lpInformation: ::PVOID,
+    lpSectionBase: ::PVOID,
+    ulSectionLength: ::ULONG,
+    lpSectionGlobalDataBase: ::PVOID,
+    ulSectionGlobalDataLength: ::ULONG,
+}}
 pub type PACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA =
     *mut ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA;
 pub type PCACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA =
     *const ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ACTCTX_SECTION_KEYED_DATA {
-    pub cbSize: ::ULONG,
-    pub ulDataFormatVersion: ::ULONG,
-    pub lpData: ::PVOID,
-    pub ulLength: ::ULONG,
-    pub lpSectionGlobalData: ::PVOID,
-    pub ulSectionGlobalDataLength: ::ULONG,
-    pub lpSectionBase: ::PVOID,
-    pub ulSectionTotalLength: ::ULONG,
-    pub hActCtx: ::HANDLE,
-    pub ulAssemblyRosterIndex: ::ULONG,
-    pub ulFlags: ::ULONG,
-    pub AssemblyMetadata: ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA,
-}
+STRUCT!{struct ACTCTX_SECTION_KEYED_DATA {
+    cbSize: ::ULONG,
+    ulDataFormatVersion: ::ULONG,
+    lpData: ::PVOID,
+    ulLength: ::ULONG,
+    lpSectionGlobalData: ::PVOID,
+    ulSectionGlobalDataLength: ::ULONG,
+    lpSectionBase: ::PVOID,
+    ulSectionTotalLength: ::ULONG,
+    hActCtx: ::HANDLE,
+    ulAssemblyRosterIndex: ::ULONG,
+    ulFlags: ::ULONG,
+    AssemblyMetadata: ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA,
+}}
 pub type PACTCTX_SECTION_KEYED_DATA = *mut ACTCTX_SECTION_KEYED_DATA;
 pub type PCACTCTX_SECTION_KEYED_DATA = *const ACTCTX_SECTION_KEYED_DATA;
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
@@ -520,15 +503,14 @@ pub enum PIPE_ATTRIBUTE_TYPE {
 pub type APPLICATION_RECOVERY_CALLBACK = Option<unsafe extern "system" fn(
     pvParameter: ::PVOID
 ) -> ::DWORD>;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SYSTEM_POWER_STATUS {
-    pub ACLineStatus: ::BYTE,
-    pub BatteryFlag: ::BYTE,
-    pub BatteryLifePercent: ::BYTE,
-    pub Reserved1: ::BYTE,
-    pub BatteryLifeTime: ::DWORD,
-    pub BatteryFullLifeTime: ::DWORD,
-}
+STRUCT!{struct SYSTEM_POWER_STATUS {
+    ACLineStatus: ::BYTE,
+    BatteryFlag: ::BYTE,
+    BatteryLifePercent: ::BYTE,
+    Reserved1: ::BYTE,
+    BatteryLifeTime: ::DWORD,
+    BatteryFullLifeTime: ::DWORD,
+}}
 pub type LPSYSTEM_POWER_STATUS = *mut SYSTEM_POWER_STATUS;
 pub const OFS_MAXPATHNAME: usize = 128;
 #[repr(C)] #[derive(Copy)]
@@ -550,12 +532,11 @@ pub enum FILE_ID_TYPE {
     ExtendedFileIdType,
     MaximumFileIdType,
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FILE_ID_DESCRIPTOR {
-    pub dwSize: ::DWORD,
-    pub Type: FILE_ID_TYPE,
-    pub ObjectId: ::GUID,
-}
+STRUCT!{struct FILE_ID_DESCRIPTOR {
+    dwSize: ::DWORD,
+    Type: FILE_ID_TYPE,
+    ObjectId: ::GUID,
+}}
 UNION!(FILE_ID_DESCRIPTOR, ObjectId, FileId, FileId_mut, ::LARGE_INTEGER);
 UNION!(FILE_ID_DESCRIPTOR, ObjectId, ExtendedFileId, ExtendedFileId_mut, ::FILE_ID_128);
 pub type LPFILE_ID_DESCRIPTOR = *mut FILE_ID_DESCRIPTOR;

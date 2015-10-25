@@ -25,29 +25,26 @@ pub const DSROLE_PRIMARY_DS_MIXED_MODE: ::ULONG = 0x00000002;
 pub const DSROLE_UPGRADE_IN_PROGRESS: ::ULONG = 0x00000004;
 pub const DSROLE_PRIMARY_DS_READONLY: ::ULONG = 0x00000008;
 pub const DSROLE_PRIMARY_DOMAIN_GUID_PRESENT: ::ULONG = 0x01000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DSROLE_PRIMARY_DOMAIN_INFO_BASIC {
-    pub MachineRole: DSROLE_MACHINE_ROLE,
-    pub Flags: ::ULONG,
-    pub DomainNameFlat: ::LPWSTR,
-    pub DomainNameDns: ::LPWSTR,
-    pub DomainForestName: ::LPWSTR,
-    pub DomainGuid: ::GUID,
-}
+STRUCT!{struct DSROLE_PRIMARY_DOMAIN_INFO_BASIC {
+    MachineRole: DSROLE_MACHINE_ROLE,
+    Flags: ::ULONG,
+    DomainNameFlat: ::LPWSTR,
+    DomainNameDns: ::LPWSTR,
+    DomainForestName: ::LPWSTR,
+    DomainGuid: ::GUID,
+}}
 pub type PDSROLE_PRIMARY_DOMAIN_INFO_BASIC = *mut DSROLE_PRIMARY_DOMAIN_INFO_BASIC;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DSROLE_UPGRADE_STATUS_INFO {
-    pub OperationState: ::ULONG,
-    pub PreviousServerState: DSROLE_SERVER_STATE,
-}
+STRUCT!{struct DSROLE_UPGRADE_STATUS_INFO {
+    OperationState: ::ULONG,
+    PreviousServerState: DSROLE_SERVER_STATE,
+}}
 pub type PDSROLE_UPGRADE_STATUS_INFO = *mut DSROLE_UPGRADE_STATUS_INFO;
 ENUM!{enum DSROLE_OPERATION_STATE {
     DsRoleOperationIdle = 0,
     DsRoleOperationActive,
     DsRoleOperationNeedReboot,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DSROLE_OPERATION_STATE_INFO {
-    pub OperationState: DSROLE_OPERATION_STATE,
-}
+STRUCT!{struct DSROLE_OPERATION_STATE_INFO {
+    OperationState: DSROLE_OPERATION_STATE,
+}}
 pub type PDSROLE_OPERATION_STATE_INFO = *mut DSROLE_OPERATION_STATE_INFO;

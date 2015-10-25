@@ -143,35 +143,31 @@ pub const OFN_SHAREWARN: ::UINT_PTR = 0;
 pub type LPCCHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct OFNOTIFYA {
-    pub hdr: ::NMHDR,
-    pub lpOFN: LPOPENFILENAMEA,
-    pub pszFile: ::LPSTR,
-}
+STRUCT!{struct OFNOTIFYA {
+    hdr: ::NMHDR,
+    lpOFN: LPOPENFILENAMEA,
+    pszFile: ::LPSTR,
+}}
 pub type LPOFNOTIFYA = *mut OFNOTIFYA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct OFNOTIFYW {
-    pub hdr: ::NMHDR,
-    pub lpOFN: LPOPENFILENAMEW,
-    pub pszFile: ::LPWSTR,
-}
+STRUCT!{struct OFNOTIFYW {
+    hdr: ::NMHDR,
+    lpOFN: LPOPENFILENAMEW,
+    pszFile: ::LPWSTR,
+}}
 pub type LPOFNOTIFYW = *mut OFNOTIFYW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct OFNOTIFYEXA {
-    pub hdr: ::NMHDR,
-    pub lpOFN: LPOPENFILENAMEA,
-    pub psf: ::LPVOID,
-    pub pidl: ::LPVOID,
-}
+STRUCT!{struct OFNOTIFYEXA {
+    hdr: ::NMHDR,
+    lpOFN: LPOPENFILENAMEA,
+    psf: ::LPVOID,
+    pidl: ::LPVOID,
+}}
 pub type LPOFNOTIFYEXA = *mut OFNOTIFYEXA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct OFNOTIFYEXW {
-    pub hdr: ::NMHDR,
-    pub lpOFN: LPOPENFILENAMEW,
-    pub psf: ::LPVOID,
-    pub pidl: ::LPVOID,
-}
+STRUCT!{struct OFNOTIFYEXW {
+    hdr: ::NMHDR,
+    lpOFN: LPOPENFILENAMEW,
+    psf: ::LPVOID,
+    pidl: ::LPVOID,
+}}
 pub type LPOFNOTIFYEXW = *mut OFNOTIFYEXW;
 pub const CDN_FIRST: ::UINT = 0 - 601;
 pub const CDN_LAST: ::UINT = 0 - 699;
@@ -447,62 +443,59 @@ interface IPrintDialogServices(IPrintDialogServicesVtbl) : IUnknown(IUnknownVtbl
     fn GetCurrentPortName(&mut self, pPortName: ::LPWSTR, pcchSize: *mut ::UINT) -> ::HRESULT
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PRINTPAGERANGE {
-    pub nFromPage: ::DWORD,
-    pub nToPage: ::DWORD,
-}
+STRUCT!{struct PRINTPAGERANGE {
+    nFromPage: ::DWORD,
+    nToPage: ::DWORD,
+}}
 pub type LPPRINTPAGERANGE = *mut PRINTPAGERANGE;
 pub type PCPRINTPAGERANGE = *const PRINTPAGERANGE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PRINTDLGEXA {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hDevMode: ::HGLOBAL,
-    pub hDevNames: ::HGLOBAL,
-    pub hDC: ::HDC,
-    pub Flags: ::DWORD,
-    pub Flags2: ::DWORD,
-    pub ExclusionFlags: ::DWORD,
-    pub nPageRanges: ::DWORD,
-    pub nMaxPageRanges: ::DWORD,
-    pub lpPageRanges: LPPRINTPAGERANGE,
-    pub nMinPage: ::DWORD,
-    pub nMaxPage: ::DWORD,
-    pub nCopies: ::DWORD,
-    pub hInstance: ::HINSTANCE,
-    pub lpPrintTemplateName: ::LPCSTR,
-    pub lpCallback: ::LPUNKNOWN,
-    pub nPropertyPages: ::DWORD,
-    pub lphPropertyPages: *mut ::HPROPSHEETPAGE,
-    pub nStartPage: ::DWORD,
-    pub dwResultAction: ::DWORD,
-}
+STRUCT!{struct PRINTDLGEXA {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hDevMode: ::HGLOBAL,
+    hDevNames: ::HGLOBAL,
+    hDC: ::HDC,
+    Flags: ::DWORD,
+    Flags2: ::DWORD,
+    ExclusionFlags: ::DWORD,
+    nPageRanges: ::DWORD,
+    nMaxPageRanges: ::DWORD,
+    lpPageRanges: LPPRINTPAGERANGE,
+    nMinPage: ::DWORD,
+    nMaxPage: ::DWORD,
+    nCopies: ::DWORD,
+    hInstance: ::HINSTANCE,
+    lpPrintTemplateName: ::LPCSTR,
+    lpCallback: ::LPUNKNOWN,
+    nPropertyPages: ::DWORD,
+    lphPropertyPages: *mut ::HPROPSHEETPAGE,
+    nStartPage: ::DWORD,
+    dwResultAction: ::DWORD,
+}}
 pub type LPPRINTDLGEXA = *mut PRINTDLGEXA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PRINTDLGEXW {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hDevMode: ::HGLOBAL,
-    pub hDevNames: ::HGLOBAL,
-    pub hDC: ::HDC,
-    pub Flags: ::DWORD,
-    pub Flags2: ::DWORD,
-    pub ExclusionFlags: ::DWORD,
-    pub nPageRanges: ::DWORD,
-    pub nMaxPageRanges: ::DWORD,
-    pub lpPageRanges: LPPRINTPAGERANGE,
-    pub nMinPage: ::DWORD,
-    pub nMaxPage: ::DWORD,
-    pub nCopies: ::DWORD,
-    pub hInstance: ::HINSTANCE,
-    pub lpPrintTemplateName: ::LPCWSTR,
-    pub lpCallback: ::LPUNKNOWN,
-    pub nPropertyPages: ::DWORD,
-    pub lphPropertyPages: *mut ::HPROPSHEETPAGE,
-    pub nStartPage: ::DWORD,
-    pub dwResultAction: ::DWORD,
-}
+STRUCT!{struct PRINTDLGEXW {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hDevMode: ::HGLOBAL,
+    hDevNames: ::HGLOBAL,
+    hDC: ::HDC,
+    Flags: ::DWORD,
+    Flags2: ::DWORD,
+    ExclusionFlags: ::DWORD,
+    nPageRanges: ::DWORD,
+    nMaxPageRanges: ::DWORD,
+    lpPageRanges: LPPRINTPAGERANGE,
+    nMinPage: ::DWORD,
+    nMaxPage: ::DWORD,
+    nCopies: ::DWORD,
+    hInstance: ::HINSTANCE,
+    lpPrintTemplateName: ::LPCWSTR,
+    lpCallback: ::LPUNKNOWN,
+    nPropertyPages: ::DWORD,
+    lphPropertyPages: *mut ::HPROPSHEETPAGE,
+    nStartPage: ::DWORD,
+    dwResultAction: ::DWORD,
+}}
 pub type LPPRINTDLGEXW = *mut PRINTDLGEXW;
 pub const PD_ALLPAGES: ::DWORD = 0x00000000;
 pub const PD_SELECTION: ::DWORD = 0x00000001;
@@ -537,13 +530,12 @@ pub const START_PAGE_GENERAL: ::DWORD = 0xffffffff;
 pub const PD_RESULT_CANCEL: ::DWORD = 0;
 pub const PD_RESULT_PRINT: ::DWORD = 1;
 pub const PD_RESULT_APPLY: ::DWORD = 2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DEVNAMES {
-    pub wDriverOffset: ::WORD,
-    pub wDeviceOffset: ::WORD,
-    pub wOutputOffset: ::WORD,
-    pub wDefault: ::WORD,
-}
+STRUCT!{struct DEVNAMES {
+    wDriverOffset: ::WORD,
+    wDeviceOffset: ::WORD,
+    wOutputOffset: ::WORD,
+    wDefault: ::WORD,
+}}
 pub type LPDEVNAMES = *mut DEVNAMES;
 pub type PCDEVNAMES = *const DEVNAMES;
 pub const DN_DEFAULTPRN: ::WORD = 0x0001;

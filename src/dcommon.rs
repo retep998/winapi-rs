@@ -16,8 +16,7 @@ pub enum D2D1_ALPHA_MODE {
     D2D1_ALPHA_MODE_IGNORE = 3,
 }
 pub use self::D2D1_ALPHA_MODE::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_PIXEL_FORMAT {
-    pub format: ::DWORD,
-    pub alphaMode: D2D1_ALPHA_MODE,
-}
+STRUCT!{struct D2D1_PIXEL_FORMAT {
+    format: ::DWORD,
+    alphaMode: D2D1_ALPHA_MODE,
+}}

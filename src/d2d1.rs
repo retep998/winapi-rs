@@ -68,40 +68,34 @@ pub type D2D1_SIZE_U = ::D2D_SIZE_U;
 pub type D2D1_COLOR_F = ::D2D_COLOR_F;
 pub type D2D1_MATRIX_3X2_F = ::D2D_MATRIX_3X2_F;
 pub type D2D1_TAG = ::UINT64;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_BITMAP_PROPERTIES {
-    pub pixelFormat: ::D2D1_PIXEL_FORMAT,
-    pub dpiX: ::FLOAT,
-    pub dpiY: ::FLOAT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_GRADIENT_STOP {
-    pub position: ::FLOAT,
-    pub color: D2D1_COLOR_F,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_BRUSH_PROPERTIES {
-    pub opacity: ::FLOAT,
-    pub transform: D2D1_MATRIX_3X2_F,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_BITMAP_BRUSH_PROPERTIES {
-    pub extendModeX: D2D1_EXTEND_MODE,
-    pub extendModeY: D2D1_EXTEND_MODE,
-    pub interpolationMode: D2D1_BITMAP_INTERPOLATION_MODE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES {
-    pub startPoint: ::D2D1_POINT_2F,
-    pub endPoint: ::D2D1_POINT_2F,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES {
-    pub center: ::D2D1_POINT_2F,
-    pub gradientOriginOffset: ::D2D1_POINT_2F,
-    pub radiusX: ::FLOAT,
-    pub radiusY: ::FLOAT,
-}
+STRUCT!{struct D2D1_BITMAP_PROPERTIES {
+    pixelFormat: ::D2D1_PIXEL_FORMAT,
+    dpiX: ::FLOAT,
+    dpiY: ::FLOAT,
+}}
+STRUCT!{struct D2D1_GRADIENT_STOP {
+    position: ::FLOAT,
+    color: D2D1_COLOR_F,
+}}
+STRUCT!{struct D2D1_BRUSH_PROPERTIES {
+    opacity: ::FLOAT,
+    transform: D2D1_MATRIX_3X2_F,
+}}
+STRUCT!{struct D2D1_BITMAP_BRUSH_PROPERTIES {
+    extendModeX: D2D1_EXTEND_MODE,
+    extendModeY: D2D1_EXTEND_MODE,
+    interpolationMode: D2D1_BITMAP_INTERPOLATION_MODE,
+}}
+STRUCT!{struct D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES {
+    startPoint: ::D2D1_POINT_2F,
+    endPoint: ::D2D1_POINT_2F,
+}}
+STRUCT!{struct D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES {
+    center: ::D2D1_POINT_2F,
+    gradientOriginOffset: ::D2D1_POINT_2F,
+    radiusX: ::FLOAT,
+    radiusY: ::FLOAT,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum D2D1_ARC_SIZE {
     D2D1_ARC_SIZE_SMALL = 0,
@@ -169,18 +163,16 @@ pub enum D2D1_FIGURE_END {
     D2D1_FIGURE_END_CLOSED = 1,
 }
 pub use self::D2D1_FIGURE_END::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_BEZIER_SEGMENT {
-    pub point1: ::D2D1_POINT_2F,
-    pub point2: ::D2D1_POINT_2F,
-    pub point3: ::D2D1_POINT_2F,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_TRIANGLE {
-    pub point1: ::D2D1_POINT_2F,
-    pub point2: ::D2D1_POINT_2F,
-    pub point3: ::D2D1_POINT_2F,
-}
+STRUCT!{struct D2D1_BEZIER_SEGMENT {
+    point1: ::D2D1_POINT_2F,
+    point2: ::D2D1_POINT_2F,
+    point3: ::D2D1_POINT_2F,
+}}
+STRUCT!{struct D2D1_TRIANGLE {
+    point1: ::D2D1_POINT_2F,
+    point2: ::D2D1_POINT_2F,
+    point3: ::D2D1_POINT_2F,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum D2D1_PATH_SEGMENT {
     D2D1_PATH_SEGMENT_NONE = 0x00000000,
@@ -200,57 +192,51 @@ pub enum D2D1_FILL_MODE {
     D2D1_FILL_MODE_WINDING = 1,
 }
 pub use self::D2D1_FILL_MODE::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_ARC_SEGMENT {
-    pub point: ::D2D1_POINT_2F,
-    pub size: D2D1_SIZE_F,
-    pub rotationAngle: ::FLOAT,
-    pub sweepDirection: D2D1_SWEEP_DIRECTION,
-    pub arcSize: D2D1_ARC_SIZE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_QUADRATIC_BEZIER_SEGMENT {
-    pub point1: ::D2D1_POINT_2F,
-    pub point2: ::D2D1_POINT_2F,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_ELLIPSE {
-    pub point: ::D2D1_POINT_2F,
-    pub radiusX: ::FLOAT,
-    pub radiusY: ::FLOAT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_ROUNDED_RECT {
-    pub rect: ::D2D1_RECT_F,
-    pub radiusX: ::FLOAT,
-    pub radiusY: ::FLOAT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_STROKE_STYLE_PROPERTIES {
-    pub startCap: D2D1_CAP_STYLE,
-    pub endCap: D2D1_CAP_STYLE,
-    pub dashCap: D2D1_CAP_STYLE,
-    pub lineJoin: D2D1_LINE_JOIN,
-    pub miterLimit: ::FLOAT,
-    pub dashStyle: D2D1_DASH_STYLE,
-    pub dashOffset: ::FLOAT,
-}
+STRUCT!{struct D2D1_ARC_SEGMENT {
+    point: ::D2D1_POINT_2F,
+    size: D2D1_SIZE_F,
+    rotationAngle: ::FLOAT,
+    sweepDirection: D2D1_SWEEP_DIRECTION,
+    arcSize: D2D1_ARC_SIZE,
+}}
+STRUCT!{struct D2D1_QUADRATIC_BEZIER_SEGMENT {
+    point1: ::D2D1_POINT_2F,
+    point2: ::D2D1_POINT_2F,
+}}
+STRUCT!{struct D2D1_ELLIPSE {
+    point: ::D2D1_POINT_2F,
+    radiusX: ::FLOAT,
+    radiusY: ::FLOAT,
+}}
+STRUCT!{struct D2D1_ROUNDED_RECT {
+    rect: ::D2D1_RECT_F,
+    radiusX: ::FLOAT,
+    radiusY: ::FLOAT,
+}}
+STRUCT!{struct D2D1_STROKE_STYLE_PROPERTIES {
+    startCap: D2D1_CAP_STYLE,
+    endCap: D2D1_CAP_STYLE,
+    dashCap: D2D1_CAP_STYLE,
+    lineJoin: D2D1_LINE_JOIN,
+    miterLimit: ::FLOAT,
+    dashStyle: D2D1_DASH_STYLE,
+    dashOffset: ::FLOAT,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum D2D1_LAYER_OPTIONS {
     D2D1_LAYER_OPTIONS_NONE = 0x00000000,
     D2D1_LAYER_OPTIONS_INITIALIZE_FOR_CLEARTYPE = 0x00000001,
 }
 pub use self::D2D1_LAYER_OPTIONS::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_LAYER_PARAMETERS {
-    pub contentBounds: ::D2D1_RECT_F,
-    pub geometricMask: *mut ID2D1Geometry,
-    pub maskAntialiasMode: D2D1_ANTIALIAS_MODE,
-    pub maskTransform: D2D1_MATRIX_3X2_F,
-    pub opacity: ::FLOAT,
-    pub opacityBrush: *mut ID2D1Brush,
-    pub layerOptions: D2D1_LAYER_OPTIONS,
-}
+STRUCT!{struct D2D1_LAYER_PARAMETERS {
+    contentBounds: ::D2D1_RECT_F,
+    geometricMask: *mut ID2D1Geometry,
+    maskAntialiasMode: D2D1_ANTIALIAS_MODE,
+    maskTransform: D2D1_MATRIX_3X2_F,
+    opacity: ::FLOAT,
+    opacityBrush: *mut ID2D1Brush,
+    layerOptions: D2D1_LAYER_OPTIONS,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum D2D1_WINDOW_STATE {
     D2D1_WINDOW_STATE_NONE = 0x0000000,
@@ -285,35 +271,32 @@ pub enum D2D1_PRESENT_OPTIONS {
     D2D1_PRESENT_OPTIONS_IMMEDIATELY = 0x00000002,
 }
 pub use self::D2D1_PRESENT_OPTIONS::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_RENDER_TARGET_PROPERTIES {
-    pub _type: D2D1_RENDER_TARGET_TYPE,
-    pub pixelFormat: ::D2D1_PIXEL_FORMAT,
-    pub dpiX: ::FLOAT,
-    pub dpiY: ::FLOAT,
-    pub usage: D2D1_RENDER_TARGET_USAGE,
-    pub minLevel: D2D1_FEATURE_LEVEL,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_HWND_RENDER_TARGET_PROPERTIES {
-    pub hwnd: ::HWND,
-    pub pixelSize: D2D1_SIZE_U,
-    pub presentOptions: D2D1_PRESENT_OPTIONS,
-}
+STRUCT!{struct D2D1_RENDER_TARGET_PROPERTIES {
+    _type: D2D1_RENDER_TARGET_TYPE,
+    pixelFormat: ::D2D1_PIXEL_FORMAT,
+    dpiX: ::FLOAT,
+    dpiY: ::FLOAT,
+    usage: D2D1_RENDER_TARGET_USAGE,
+    minLevel: D2D1_FEATURE_LEVEL,
+}}
+STRUCT!{struct D2D1_HWND_RENDER_TARGET_PROPERTIES {
+    hwnd: ::HWND,
+    pixelSize: D2D1_SIZE_U,
+    presentOptions: D2D1_PRESENT_OPTIONS,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS {
     D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS_NONE = 0x00000000,
     D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS_GDI_COMPATIBLE = 0x00000001,
 }
 pub use self::D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_DRAWING_STATE_DESCRIPTION {
-    pub antialiasMode: D2D1_ANTIALIAS_MODE,
-    pub textAntialiasMode: D2D1_TEXT_ANTIALIAS_MODE,
-    pub tag1: D2D1_TAG,
-    pub tag2: D2D1_TAG,
-    pub transform: D2D1_MATRIX_3X2_F,
-}
+STRUCT!{struct D2D1_DRAWING_STATE_DESCRIPTION {
+    antialiasMode: D2D1_ANTIALIAS_MODE,
+    textAntialiasMode: D2D1_TEXT_ANTIALIAS_MODE,
+    tag1: D2D1_TAG,
+    tag2: D2D1_TAG,
+    transform: D2D1_MATRIX_3X2_F,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum D2D1_DC_INITIALIZE_MODE {
     D2D1_DC_INITIALIZE_MODE_COPY = 0,
@@ -334,10 +317,9 @@ pub enum D2D1_FACTORY_TYPE {
     D2D1_FACTORY_TYPE_MULTI_THREADED = 1,
 }
 pub use self::D2D1_FACTORY_TYPE::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D2D1_FACTORY_OPTIONS {
-    pub debugLevel: D2D1_DEBUG_LEVEL,
-}
+STRUCT!{struct D2D1_FACTORY_OPTIONS {
+    debugLevel: D2D1_DEBUG_LEVEL,
+}}
 RIDL!(
 interface ID2D1Resource(ID2D1ResourceVtbl): IUnknown(IUnknownVtbl) {
     fn GetFactory(&mut self, factory: *mut *mut ID2D1Factory) -> ::HRESULT

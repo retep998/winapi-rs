@@ -1,71 +1,62 @@
 // Copyright © 2015, skdltmxn
 // Licensed under the MIT License <LICENSE.md>
 //! LSA Policy Lookup API
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_UNICODE_STRING {
-    pub Length: ::USHORT,
-    pub MaximumLength: ::USHORT,
-    pub Buffer: ::PWSTR,
-}
+STRUCT!{struct LSA_UNICODE_STRING {
+    Length: ::USHORT,
+    MaximumLength: ::USHORT,
+    Buffer: ::PWSTR,
+}}
 pub type PLSA_UNICODE_STRING = *mut LSA_UNICODE_STRING;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_STRING {
-    pub Length: ::USHORT,
-    pub MaximumLength: ::USHORT,
-    pub Buffer: ::PCHAR,
-}
+STRUCT!{struct LSA_STRING {
+    Length: ::USHORT,
+    MaximumLength: ::USHORT,
+    Buffer: ::PCHAR,
+}}
 pub type PLSA_STRING = *mut LSA_STRING;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_OBJECT_ATTRIBUTES {
-    pub Length: ::ULONG,
-    pub RootDirectory: ::HANDLE,
-    pub ObjectName: PLSA_UNICODE_STRING,
-    pub Attributes: ::ULONG,
-    pub SecurityDescriptor: ::PVOID,
-    pub SecurityQualityOfService: ::PVOID,
-}
+STRUCT!{struct LSA_OBJECT_ATTRIBUTES {
+    Length: ::ULONG,
+    RootDirectory: ::HANDLE,
+    ObjectName: PLSA_UNICODE_STRING,
+    Attributes: ::ULONG,
+    SecurityDescriptor: ::PVOID,
+    SecurityQualityOfService: ::PVOID,
+}}
 pub type PLSA_OBJECT_ATTRIBUTES = *mut LSA_OBJECT_ATTRIBUTES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_TRUST_INFORMATION {
-    pub Name: LSA_UNICODE_STRING,
-    pub Sid: ::PSID,
-}
+STRUCT!{struct LSA_TRUST_INFORMATION {
+    Name: LSA_UNICODE_STRING,
+    Sid: ::PSID,
+}}
 pub type PLSA_TRUST_INFORMATION = *mut LSA_TRUST_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_REFERENCED_DOMAIN_LIST {
-    pub Entries: ::ULONG,
-    pub Domains: PLSA_TRUST_INFORMATION,
-}
+STRUCT!{struct LSA_REFERENCED_DOMAIN_LIST {
+    Entries: ::ULONG,
+    Domains: PLSA_TRUST_INFORMATION,
+}}
 pub type PLSA_REFERENCED_DOMAIN_LIST = *mut LSA_REFERENCED_DOMAIN_LIST;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_TRANSLATED_SID2 {
-    pub Use: ::SID_NAME_USE,
-    pub Sid: ::PSID,
-    pub DomainIndex: ::LONG,
-    pub Flags: ::ULONG,
-}
+STRUCT!{struct LSA_TRANSLATED_SID2 {
+    Use: ::SID_NAME_USE,
+    Sid: ::PSID,
+    DomainIndex: ::LONG,
+    Flags: ::ULONG,
+}}
 pub type PLSA_TRANSLATED_SID2 = *mut LSA_TRANSLATED_SID2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LSA_TRANSLATED_NAME {
-    pub Use: ::SID_NAME_USE,
-    pub Name: LSA_UNICODE_STRING,
-    pub DomainIndex: ::LONG,
-}
+STRUCT!{struct LSA_TRANSLATED_NAME {
+    Use: ::SID_NAME_USE,
+    Name: LSA_UNICODE_STRING,
+    DomainIndex: ::LONG,
+}}
 pub type PLSA_TRANSLATED_NAME = *mut LSA_TRANSLATED_NAME;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_ACCOUNT_DOMAIN_INFO {
-    pub DomainName: LSA_UNICODE_STRING,
-    pub DomainSid: ::PSID,
-}
+STRUCT!{struct POLICY_ACCOUNT_DOMAIN_INFO {
+    DomainName: LSA_UNICODE_STRING,
+    DomainSid: ::PSID,
+}}
 pub type PPOLICY_ACCOUNT_DOMAIN_INFO = *mut POLICY_ACCOUNT_DOMAIN_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct POLICY_DNS_DOMAIN_INFO {
-    pub Name: LSA_UNICODE_STRING,
-    pub DnsDomainName: LSA_UNICODE_STRING,
-    pub DnsForestName: LSA_UNICODE_STRING,
-    pub DomainGuid: ::GUID,
-    pub Sid: ::PSID,
-}
+STRUCT!{struct POLICY_DNS_DOMAIN_INFO {
+    Name: LSA_UNICODE_STRING,
+    DnsDomainName: LSA_UNICODE_STRING,
+    DnsForestName: LSA_UNICODE_STRING,
+    DomainGuid: ::GUID,
+    Sid: ::PSID,
+}}
 pub type PPOLICY_DNS_DOMAIN_INFO = *mut POLICY_DNS_DOMAIN_INFO;
 pub const LOOKUP_VIEW_LOCAL_INFORMATION: ::ACCESS_MASK = 0x00000001;
 pub const LOOKUP_TRANSLATE_NAMES: ::ACCESS_MASK = 0x00000800;

@@ -372,11 +372,10 @@ pub const D3D11_SRV_DIMENSION_TEXTURECUBEARRAY: ::D3D_SRV_DIMENSION =
     D3D_SRV_DIMENSION_TEXTURECUBEARRAY;
 pub const D3D11_SRV_DIMENSION_BUFFEREX: ::D3D_SRV_DIMENSION =
     D3D_SRV_DIMENSION_BUFFEREX;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D_SHADER_MACRO {
-    pub Name: ::LPCSTR,
-    pub Definition: ::LPCSTR,
-}
+STRUCT!{struct D3D_SHADER_MACRO {
+    Name: ::LPCSTR,
+    Definition: ::LPCSTR,
+}}
 pub type LPD3D_SHADER_MACRO = *mut D3D_SHADER_MACRO;
 DEFINE_GUID!(
     IID_ID3D10Blob, 0x8ba5fb08, 0x5195, 0x40e2, 0xac, 0x58, 0xd, 0x98, 0x9c, 0x3a, 0x1, 0x2

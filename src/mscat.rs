@@ -1,30 +1,28 @@
 // Copyright © 2015, skdltmxn
 // Licensed under the MIT License <LICENSE.md>
 //! Microsoft Internet Security Catalog API Prototypes and Definitions
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPTCATSTORE {
-    pub cbStruct: ::DWORD,
-    pub dwPublicVersion: ::DWORD,
-    pub pwszP7File: ::LPWSTR,
-    pub hProv: ::HCRYPTPROV,
-    pub dwEncodingType: ::DWORD,
-    pub fdwStoreFlags: ::DWORD,
-    pub hReserved: ::HANDLE,
-    pub hAttrs: ::HANDLE,
-    pub hCryptMsg: ::HCRYPTMSG,
-    pub hSorted: ::HANDLE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPTCATMEMBER{
-    pub cbStruct: ::DWORD,
-    pub pwszReferenceTag: ::LPWSTR,
-    pub pwszFileName: ::LPWSTR,
-    pub gSubjectType: ::GUID,
-    pub fdwMemberFlags: ::DWORD,
-    pub pIndirectData: *mut ::SIP_INDIRECT_DATA,
-    pub dwCertVersion: ::DWORD,
-    pub dwReserved: ::DWORD,
-    pub hReserved: ::HANDLE,
-    pub sEncodedIndirectData: ::CRYPT_ATTR_BLOB,
-    pub sEncodedMemberInfo: ::CRYPT_ATTR_BLOB,
-}
+STRUCT!{struct CRYPTCATSTORE {
+    cbStruct: ::DWORD,
+    dwPublicVersion: ::DWORD,
+    pwszP7File: ::LPWSTR,
+    hProv: ::HCRYPTPROV,
+    dwEncodingType: ::DWORD,
+    fdwStoreFlags: ::DWORD,
+    hReserved: ::HANDLE,
+    hAttrs: ::HANDLE,
+    hCryptMsg: ::HCRYPTMSG,
+    hSorted: ::HANDLE,
+}}
+STRUCT!{struct CRYPTCATMEMBER {
+    cbStruct: ::DWORD,
+    pwszReferenceTag: ::LPWSTR,
+    pwszFileName: ::LPWSTR,
+    gSubjectType: ::GUID,
+    fdwMemberFlags: ::DWORD,
+    pIndirectData: *mut ::SIP_INDIRECT_DATA,
+    dwCertVersion: ::DWORD,
+    dwReserved: ::DWORD,
+    hReserved: ::HANDLE,
+    sEncodedIndirectData: ::CRYPT_ATTR_BLOB,
+    sEncodedMemberInfo: ::CRYPT_ATTR_BLOB,
+}}

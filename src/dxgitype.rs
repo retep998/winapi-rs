@@ -17,12 +17,11 @@ pub enum DXGI_USAGE {
     DXGI_USAGE_UNORDERED_ACCESS = 1 << (6 + 4),
 }
 pub use self::DXGI_USAGE::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_RGB {
-    pub Red: f32,
-    pub Green: f32,
-    pub Blue: f32,
-}
+STRUCT!{struct DXGI_RGB {
+    Red: f32,
+    Green: f32,
+    Blue: f32,
+}}
 pub type DXGI_RGBA = ::D3DCOLORVALUE;
 #[repr(C)] #[derive(Copy)]
 pub struct DXGI_GAMMA_CONTROL {
@@ -48,11 +47,10 @@ impl Clone for DXGI_GAMMA_CONTROL_CAPABILITIES {
         *self
     }
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_RATIONAL {
-    pub Numerator: ::UINT,
-    pub Denominator: ::UINT,
-}
+STRUCT!{struct DXGI_RATIONAL {
+    Numerator: ::UINT,
+    Denominator: ::UINT,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum DXGI_MODE_SCANLINE_ORDER {
     DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED,
@@ -77,17 +75,15 @@ pub enum DXGI_MODE_ROTATION {
     DXGI_MODE_ROTATION_ROTATE270,
 }
 pub use self::DXGI_MODE_ROTATION::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_MODE_DESC {
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub RefreshRate: DXGI_RATIONAL,
-    pub Format: ::DXGI_FORMAT,
-    pub ScanlineOrdering: DXGI_MODE_SCANLINE_ORDER,
-    pub Scaling: DXGI_MODE_SCALING,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_SAMPLE_DESC {
-    pub Count: ::UINT,
-    pub Quality: ::UINT,
-}
+STRUCT!{struct DXGI_MODE_DESC {
+    Width: ::UINT,
+    Height: ::UINT,
+    RefreshRate: DXGI_RATIONAL,
+    Format: ::DXGI_FORMAT,
+    ScanlineOrdering: DXGI_MODE_SCANLINE_ORDER,
+    Scaling: DXGI_MODE_SCALING,
+}}
+STRUCT!{struct DXGI_SAMPLE_DESC {
+    Count: ::UINT,
+    Quality: ::UINT,
+}}

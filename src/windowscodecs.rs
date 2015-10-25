@@ -5,13 +5,12 @@ pub type WICColor = ::UINT32;
 pub type WICInProcPointer = *mut ::BYTE;
 pub type REFWICPixelFormatGUID = ::REFGUID;
 pub type WICPixelFormatGUID = ::GUID;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WICRect {
-    pub X: ::INT,
-    pub Y: ::INT,
-    pub Width: ::INT,
-    pub Height: ::INT,
-}
+STRUCT!{struct WICRect {
+    X: ::INT,
+    Y: ::INT,
+    Width: ::INT,
+    Height: ::INT,
+}}
 #[allow(unused_qualifications)] #[repr(i32)] #[derive(Copy, Clone, Debug)]
 pub enum WICColorContextType {
     WICColorContextUninitialized = 0,
@@ -61,14 +60,13 @@ pub enum WICComponentEnumerateOptions {
 }
 pub use self::WICComponentEnumerateOptions::*;
 #[allow(unused_qualifications)]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WICBitmapPattern {
-    pub Position: ::ULARGE_INTEGER,
-    pub Length: ::ULONG,
-    pub Pattern: *mut ::BYTE,
-    pub Mask: *mut ::BYTE,
-    pub EndOfStream: ::BOOL,
-}
+STRUCT!{struct WICBitmapPattern {
+    Position: ::ULARGE_INTEGER,
+    Length: ::ULONG,
+    Pattern: *mut ::BYTE,
+    Mask: *mut ::BYTE,
+    EndOfStream: ::BOOL,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum WICBitmapInterpolationMode {
     WICBitmapInterpolationModeNearestNeighbor = 0,
@@ -338,31 +336,28 @@ pub enum WICPlanarOptions {
 }
 pub use self::WICPlanarOptions::*;
 #[allow(unused_qualifications)]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WICImageParameters {
-    pub PixelFormat: ::D2D1_PIXEL_FORMAT,
-    pub DpiX: ::FLOAT,
-    pub DpiY: ::FLOAT,
-    pub Top: ::FLOAT,
-    pub Left: ::FLOAT,
-    pub PixelWidth: ::FLOAT,
-    pub PixelHeight: ::FLOAT,
-}
+STRUCT!{struct WICImageParameters {
+    PixelFormat: ::D2D1_PIXEL_FORMAT,
+    DpiX: ::FLOAT,
+    DpiY: ::FLOAT,
+    Top: ::FLOAT,
+    Left: ::FLOAT,
+    PixelWidth: ::FLOAT,
+    PixelHeight: ::FLOAT,
+}}
 #[allow(unused_qualifications)]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WICBitmapPlaneDescription {
-    pub Format: WICPixelFormatGUID,
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-}
+STRUCT!{struct WICBitmapPlaneDescription {
+    Format: WICPixelFormatGUID,
+    Width: ::UINT,
+    Height: ::UINT,
+}}
 #[allow(unused_qualifications)]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WICBitmapPlane {
-    pub Format: WICPixelFormatGUID,
-    pub pbBuffer: *mut ::BYTE,
-    pub cbStride: ::UINT,
-    pub cbBufferSize: ::UINT,
-}
+STRUCT!{struct WICBitmapPlane {
+    Format: WICPixelFormatGUID,
+    pbBuffer: *mut ::BYTE,
+    cbStride: ::UINT,
+    cbBufferSize: ::UINT,
+}}
 RIDL!(
 interface IWICPalette(IWICPaletteVtbl): IUnknown(IUnknownVtbl) {
     fn InitializePredefined(

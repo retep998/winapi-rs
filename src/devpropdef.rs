@@ -45,11 +45,10 @@ pub type DEVPROPGUID = ::GUID;
 pub type PDEVPROPGUID = *mut ::GUID;
 pub type DEVPROPID = ::ULONG;
 pub type PDEVPROPID = *mut ::ULONG;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DEVPROPKEY {
-    pub fmtid: DEVPROPGUID,
-    pub pid: DEVPROPID,
-}
+STRUCT!{struct DEVPROPKEY {
+    fmtid: DEVPROPGUID,
+    pid: DEVPROPID,
+}}
 pub type PDEVPROPKEY = *mut DEVPROPKEY;
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum DEVPROPSTORE {
@@ -57,19 +56,17 @@ pub enum DEVPROPSTORE {
     DEVPROP_STORE_USER,
 }
 pub type PDEVPROPSTORE = *mut DEVPROPSTORE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DEVPROPCOMPKEY {
-    pub Key: DEVPROPKEY,
-    pub Store: DEVPROPSTORE,
-    pub LocaleName: ::PCWSTR,
-}
+STRUCT!{struct DEVPROPCOMPKEY {
+    Key: DEVPROPKEY,
+    Store: DEVPROPSTORE,
+    LocaleName: ::PCWSTR,
+}}
 pub type PDEVPROPCOMPKEY = *mut DEVPROPCOMPKEY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DEVPROPERTY {
-    pub CompKey: DEVPROPCOMPKEY,
-    pub Type: DEVPROPTYPE,
-    pub BufferSize: ::ULONG,
-    pub Buffer: ::PVOID,
-}
+STRUCT!{struct DEVPROPERTY {
+    CompKey: DEVPROPCOMPKEY,
+    Type: DEVPROPTYPE,
+    BufferSize: ::ULONG,
+    Buffer: ::PVOID,
+}}
 pub type PDEVPROPERTY = *mut DEVPROPERTY;
 pub const DEVPROPID_FIRST_USABLE: DEVPROPID = 2;

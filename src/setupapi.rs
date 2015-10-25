@@ -11,43 +11,39 @@ pub const MAX_SERVICE_NAME_LEN: usize = 256;
 pub const MAX_SUBTITLE_LEN: usize = 256;
 pub const SP_MAX_MACHINENAME_LENGTH: usize = ::MAX_PATH + 3;
 pub type HINF = ::PVOID;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INFCONTEXT {
-    pub Inf: ::PVOID,
-    pub CurrentInf: ::PVOID,
-    pub Section: ::UINT,
-    pub Line: ::UINT,
-}
+STRUCT!{struct INFCONTEXT {
+    Inf: ::PVOID,
+    CurrentInf: ::PVOID,
+    Section: ::UINT,
+    Line: ::UINT,
+}}
 pub type PINFCONTEXT = *mut INFCONTEXT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_INF_INFORMATION {
-    pub InfStyle: ::DWORD,
-    pub InfCount: ::DWORD,
-    pub VersionData: [::BYTE; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct SP_INF_INFORMATION {
+    InfStyle: ::DWORD,
+    InfCount: ::DWORD,
+    VersionData: [::BYTE; ::ANYSIZE_ARRAY],
+}}
 pub type PSP_INF_INFORMATION = *mut SP_INF_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_ALTPLATFORM_INFO_V2 {
-    pub cbSize: ::DWORD,
-    pub Platform: ::DWORD,
-    pub MajorVersion: ::DWORD,
-    pub MinorVersion: ::DWORD,
-    pub ProcessorArchitecture: ::WORD,
-    pub Reserved: ::WORD,
-    pub FirstValidatedMajorVersion: ::DWORD,
-    pub FirstValidatedMinorVersion: ::DWORD,
-}
+STRUCT!{struct SP_ALTPLATFORM_INFO_V2 {
+    cbSize: ::DWORD,
+    Platform: ::DWORD,
+    MajorVersion: ::DWORD,
+    MinorVersion: ::DWORD,
+    ProcessorArchitecture: ::WORD,
+    Reserved: ::WORD,
+    FirstValidatedMajorVersion: ::DWORD,
+    FirstValidatedMinorVersion: ::DWORD,
+}}
 UNION!(SP_ALTPLATFORM_INFO_V2, Reserved, Flags, Flags_mut, ::WORD);
 pub type PSP_ALTPLATFORM_INFO_V2 = *mut SP_ALTPLATFORM_INFO_V2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_ALTPLATFORM_INFO_V1 {
-    pub cbSize: ::DWORD,
-    pub Platform: ::DWORD,
-    pub MajorVersion: ::DWORD,
-    pub MinorVersion: ::DWORD,
-    pub ProcessorArchitecture: ::WORD,
-    pub Reserved: ::WORD,
-}
+STRUCT!{struct SP_ALTPLATFORM_INFO_V1 {
+    cbSize: ::DWORD,
+    Platform: ::DWORD,
+    MajorVersion: ::DWORD,
+    MinorVersion: ::DWORD,
+    ProcessorArchitecture: ::WORD,
+    Reserved: ::WORD,
+}}
 pub type PSP_ALTPLATFORM_INFO_V1 = *mut SP_ALTPLATFORM_INFO_V1;
 pub type SP_ALTPLATFORM_INFO = SP_ALTPLATFORM_INFO_V2;
 pub type PSP_ALTPLATFORM_INFO = PSP_ALTPLATFORM_INFO_V2;
@@ -172,81 +168,73 @@ pub const COPYFLG_NOPRUNE: ::UINT = 0x00002000;
 pub const COPYFLG_IN_USE_TRY_RENAME: ::UINT = 0x00004000;
 pub const DELFLG_IN_USE: ::UINT = 0x00000001;
 pub const DELFLG_IN_USE1: ::UINT = 0x00010000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FILEPATHS_A {
-    pub Target: ::PCSTR,
-    pub Source: ::PCSTR,
-    pub Win32Error: ::UINT,
-    pub Flags: ::DWORD,
-}
+STRUCT!{struct FILEPATHS_A {
+    Target: ::PCSTR,
+    Source: ::PCSTR,
+    Win32Error: ::UINT,
+    Flags: ::DWORD,
+}}
 pub type PFILEPATHS_A = *mut FILEPATHS_A;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FILEPATHS_W {
-    pub Target: ::PCWSTR,
-    pub Source: ::PCWSTR,
-    pub Win32Error: ::UINT,
-    pub Flags: ::DWORD,
-}
+STRUCT!{struct FILEPATHS_W {
+    Target: ::PCWSTR,
+    Source: ::PCWSTR,
+    Win32Error: ::UINT,
+    Flags: ::DWORD,
+}}
 pub type PFILEPATHS_W = *mut FILEPATHS_W;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FILEPATHS_SIGNERINFO_A {
-    pub Target: ::PCSTR,
-    pub Source: ::PCSTR,
-    pub Win32Error: ::UINT,
-    pub Flags: ::DWORD,
-    pub DigitalSigner: ::PCSTR,
-    pub Version: ::PCSTR,
-    pub CatalogFile: ::PCSTR
-}
+STRUCT!{struct FILEPATHS_SIGNERINFO_A {
+    Target: ::PCSTR,
+    Source: ::PCSTR,
+    Win32Error: ::UINT,
+    Flags: ::DWORD,
+    DigitalSigner: ::PCSTR,
+    Version: ::PCSTR,
+    CatalogFile: ::PCSTR,
+}}
 pub type PFILEPATHS_SIGNERINFO_A = *mut FILEPATHS_SIGNERINFO_A;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FILEPATHS_SIGNERINFO_W {
-    pub Target: ::PCWSTR,
-    pub Source: ::PCWSTR,
-    pub Win32Error: ::UINT,
-    pub Flags: ::DWORD,
-    pub DigitalSigner: ::PCWSTR,
-    pub Version: ::PCWSTR,
-    pub CatalogFile: ::PCWSTR
-}
+STRUCT!{struct FILEPATHS_SIGNERINFO_W {
+    Target: ::PCWSTR,
+    Source: ::PCWSTR,
+    Win32Error: ::UINT,
+    Flags: ::DWORD,
+    DigitalSigner: ::PCWSTR,
+    Version: ::PCWSTR,
+    CatalogFile: ::PCWSTR,
+}}
 pub type PFILEPATHS_SIGNERINFO_W = *mut FILEPATHS_SIGNERINFO_W;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SOURCE_MEDIA_A {
-    pub Reserved: ::PCSTR,
-    pub Tagfile: ::PCSTR,
-    pub Description: ::PCSTR,
-    pub SourcePath: ::PCSTR,
-    pub SourceFile: ::PCSTR,
-    pub Flags: ::DWORD,
-}
+STRUCT!{struct SOURCE_MEDIA_A {
+    Reserved: ::PCSTR,
+    Tagfile: ::PCSTR,
+    Description: ::PCSTR,
+    SourcePath: ::PCSTR,
+    SourceFile: ::PCSTR,
+    Flags: ::DWORD,
+}}
 pub type PSOURCE_MEDIA_A = *mut SOURCE_MEDIA_A;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SOURCE_MEDIA_W {
-    pub Reserved: ::PCWSTR,
-    pub Tagfile: ::PCWSTR,
-    pub Description: ::PCWSTR,
-    pub SourcePath: ::PCWSTR,
-    pub SourceFile: ::PCWSTR,
-    pub Flags: ::DWORD,
-}
+STRUCT!{struct SOURCE_MEDIA_W {
+    Reserved: ::PCWSTR,
+    Tagfile: ::PCWSTR,
+    Description: ::PCWSTR,
+    SourcePath: ::PCWSTR,
+    SourceFile: ::PCWSTR,
+    Flags: ::DWORD,
+}}
 pub type PSOURCE_MEDIA_W = *mut SOURCE_MEDIA_W;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CABINET_INFO_A {
-    pub CabinetPath: ::PCSTR,
-    pub CabinetFile: ::PCSTR,
-    pub DiskName: ::PCSTR,
-    pub SetId: ::USHORT,
-    pub CabinetNumber: ::USHORT,
-}
+STRUCT!{struct CABINET_INFO_A {
+    CabinetPath: ::PCSTR,
+    CabinetFile: ::PCSTR,
+    DiskName: ::PCSTR,
+    SetId: ::USHORT,
+    CabinetNumber: ::USHORT,
+}}
 pub type PCABINET_INFO_A = *mut CABINET_INFO_A;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CABINET_INFO_W {
-    pub CabinetPath: ::PCWSTR,
-    pub CabinetFile: ::PCWSTR,
-    pub DiskName: ::PCWSTR,
-    pub SetId: ::USHORT,
-    pub CabinetNumber: ::USHORT,
-}
+STRUCT!{struct CABINET_INFO_W {
+    CabinetPath: ::PCWSTR,
+    CabinetFile: ::PCWSTR,
+    DiskName: ::PCWSTR,
+    SetId: ::USHORT,
+    CabinetNumber: ::USHORT,
+}}
 pub type PCABINET_INFO_W = *mut CABINET_INFO_W;
 #[repr(C)] #[derive(Copy)]
 pub struct FILE_IN_CABINET_INFO_A {
@@ -272,21 +260,19 @@ pub struct FILE_IN_CABINET_INFO_W {
 }
 impl Clone for FILE_IN_CABINET_INFO_W { fn clone(&self) -> FILE_IN_CABINET_INFO_W { *self } }
 pub type PFILE_IN_CABINET_INFO_W = *mut FILE_IN_CABINET_INFO_W;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_REGISTER_CONTROL_STATUSA {
-    pub cbSize: ::DWORD,
-    pub FileName: ::PCSTR,
-    pub Win32Error: ::DWORD,
-    pub FailureCode: ::DWORD,
-}
+STRUCT!{struct SP_REGISTER_CONTROL_STATUSA {
+    cbSize: ::DWORD,
+    FileName: ::PCSTR,
+    Win32Error: ::DWORD,
+    FailureCode: ::DWORD,
+}}
 pub type PSP_REGISTER_CONTROL_STATUSA = *mut SP_REGISTER_CONTROL_STATUSA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_REGISTER_CONTROL_STATUSW {
-    pub cbSize: ::DWORD,
-    pub FileName: ::PCWSTR,
-    pub Win32Error: ::DWORD,
-    pub FailureCode: ::DWORD,
-}
+STRUCT!{struct SP_REGISTER_CONTROL_STATUSW {
+    cbSize: ::DWORD,
+    FileName: ::PCWSTR,
+    Win32Error: ::DWORD,
+    FailureCode: ::DWORD,
+}}
 pub type PSP_REGISTER_CONTROL_STATUSW = *mut SP_REGISTER_CONTROL_STATUSW;
 pub const SPREG_SUCCESS: ::DWORD = 0x00000000;
 pub const SPREG_LOADLIBRARY: ::DWORD = 0x00000001;
@@ -296,55 +282,51 @@ pub const SPREG_DLLINSTALL: ::DWORD = 0x00000004;
 pub const SPREG_TIMEOUT: ::DWORD = 0x00000005;
 pub const SPREG_UNKNOWN: ::DWORD = 0xFFFFFFFF;
 pub type HSPFILEQ = ::PVOID;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_FILE_COPY_PARAMS_A {
-    pub cbSize: ::DWORD,
-    pub QueueHandle: HSPFILEQ,
-    pub SourceRootPath: ::PCSTR,
-    pub SourcePath: ::PCSTR,
-    pub SourceFilename: ::PCSTR,
-    pub SourceDescription: ::PCSTR,
-    pub SourceTagfile: ::PCSTR,
-    pub TargetDirectory: ::PCSTR,
-    pub TargetFilename: ::PCSTR,
-    pub CopyStyle: ::DWORD,
-    pub LayoutInf: HINF,
-    pub SecurityDescriptor: ::PCSTR,
-}
+STRUCT!{struct SP_FILE_COPY_PARAMS_A {
+    cbSize: ::DWORD,
+    QueueHandle: HSPFILEQ,
+    SourceRootPath: ::PCSTR,
+    SourcePath: ::PCSTR,
+    SourceFilename: ::PCSTR,
+    SourceDescription: ::PCSTR,
+    SourceTagfile: ::PCSTR,
+    TargetDirectory: ::PCSTR,
+    TargetFilename: ::PCSTR,
+    CopyStyle: ::DWORD,
+    LayoutInf: HINF,
+    SecurityDescriptor: ::PCSTR,
+}}
 pub type PSP_FILE_COPY_PARAMS_A = *mut SP_FILE_COPY_PARAMS_A;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_FILE_COPY_PARAMS_W {
-    pub cbSize: ::DWORD,
-    pub QueueHandle: HSPFILEQ,
-    pub SourceRootPath: ::PCWSTR,
-    pub SourcePath: ::PCWSTR,
-    pub SourceFilename: ::PCWSTR,
-    pub SourceDescription: ::PCWSTR,
-    pub SourceTagfile: ::PCWSTR,
-    pub TargetDirectory: ::PCWSTR,
-    pub TargetFilename: ::PCWSTR,
-    pub CopyStyle: ::DWORD,
-    pub LayoutInf: HINF,
-    pub SecurityDescriptor: ::PCWSTR,
-}
+STRUCT!{struct SP_FILE_COPY_PARAMS_W {
+    cbSize: ::DWORD,
+    QueueHandle: HSPFILEQ,
+    SourceRootPath: ::PCWSTR,
+    SourcePath: ::PCWSTR,
+    SourceFilename: ::PCWSTR,
+    SourceDescription: ::PCWSTR,
+    SourceTagfile: ::PCWSTR,
+    TargetDirectory: ::PCWSTR,
+    TargetFilename: ::PCWSTR,
+    CopyStyle: ::DWORD,
+    LayoutInf: HINF,
+    SecurityDescriptor: ::PCWSTR,
+}}
 pub type PSP_FILE_COPY_PARAMS_W = *mut SP_FILE_COPY_PARAMS_W;
 pub type HDSKSPC = ::PVOID;
 pub type HDEVINFO = ::PVOID;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_DEVINFO_DATA {
-    pub cbSize: ::DWORD,
-    pub ClassGuid: ::GUID,
-    pub DevInst: ::DWORD,
-    pub Reserved: ::ULONG_PTR,
-}
+STRUCT!{struct SP_DEVINFO_DATA {
+    cbSize: ::DWORD,
+    ClassGuid: ::GUID,
+    DevInst: ::DWORD,
+    Reserved: ::ULONG_PTR,
+}}
 pub type PSP_DEVINFO_DATA = *mut SP_DEVINFO_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_DEVICE_INTERFACE_DATA {
-    pub cbSize: ::DWORD,
-    pub InterfaceClassGuid: ::GUID,
-    pub Flags: ::DWORD,
-    pub Reserved: ::ULONG_PTR,
-}
+STRUCT!{struct SP_DEVICE_INTERFACE_DATA {
+    cbSize: ::DWORD,
+    InterfaceClassGuid: ::GUID,
+    Flags: ::DWORD,
+    Reserved: ::ULONG_PTR,
+}}
 pub type PSP_DEVICE_INTERFACE_DATA = *mut SP_DEVICE_INTERFACE_DATA;
 pub const SPINT_ACTIVE: ::DWORD = 0x00000001;
 pub const SPINT_DEFAULT: ::DWORD = 0x00000002;
@@ -354,17 +336,15 @@ pub type PSP_INTERFACE_DEVICE_DATA = PSP_DEVICE_INTERFACE_DATA;
 pub const SPID_ACTIVE: ::DWORD = SPINT_ACTIVE;
 pub const SPID_DEFAULT: ::DWORD = SPINT_DEFAULT;
 pub const SPID_REMOVED: ::DWORD = SPINT_REMOVED;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_DEVICE_INTERFACE_DETAIL_DATA_A {
-    pub cbSize: ::DWORD,
-    pub DevicePath: [::CHAR; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct SP_DEVICE_INTERFACE_DETAIL_DATA_A {
+    cbSize: ::DWORD,
+    DevicePath: [::CHAR; ::ANYSIZE_ARRAY],
+}}
 pub type PSP_DEVICE_INTERFACE_DETAIL_DATA_A = *mut SP_DEVICE_INTERFACE_DETAIL_DATA_A;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_DEVICE_INTERFACE_DETAIL_DATA_W {
-    pub cbSize: ::DWORD,
-    pub DevicePath: [::WCHAR; ::ANYSIZE_ARRAY],
-}
+STRUCT!{struct SP_DEVICE_INTERFACE_DETAIL_DATA_W {
+    cbSize: ::DWORD,
+    DevicePath: [::WCHAR; ::ANYSIZE_ARRAY],
+}}
 pub type PSP_DEVICE_INTERFACE_DETAIL_DATA_W = *mut SP_DEVICE_INTERFACE_DETAIL_DATA_W;
 #[repr(C)] #[derive(Copy)]
 pub struct SP_DEVINFO_LIST_DETAIL_DATA_A {
@@ -526,18 +506,16 @@ pub const DI_FLAGSEX_ALTPLATFORM_DRVSEARCH: ::DWORD = 0x10000000;
 pub const DI_FLAGSEX_RESTART_DEVICE_ONLY: ::DWORD = 0x20000000;
 pub const DI_FLAGSEX_RECURSIVESEARCH: ::DWORD = 0x40000000;
 pub const DI_FLAGSEX_SEARCH_PUBLISHED_INFS: ::DWORD = 0x80000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_CLASSINSTALL_HEADER {
-    pub cbSize: ::DWORD,
-    pub InstallFunction: DI_FUNCTION,
-}
+STRUCT!{struct SP_CLASSINSTALL_HEADER {
+    cbSize: ::DWORD,
+    InstallFunction: DI_FUNCTION,
+}}
 pub type PSP_CLASSINSTALL_HEADER = *mut SP_CLASSINSTALL_HEADER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_ENABLECLASS_PARAMS {
-    pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
-    pub ClassGuid: ::GUID,
-    pub EnableMessage: ::DWORD,
-}
+STRUCT!{struct SP_ENABLECLASS_PARAMS {
+    ClassInstallHeader: SP_CLASSINSTALL_HEADER,
+    ClassGuid: ::GUID,
+    EnableMessage: ::DWORD,
+}}
 pub type PSP_ENABLECLASS_PARAMS = *mut SP_ENABLECLASS_PARAMS;
 pub const ENABLECLASS_QUERY: ::DWORD = 0;
 pub const ENABLECLASS_SUCCESS: ::DWORD = 1;
@@ -550,29 +528,26 @@ pub const DICS_STOP: ::DWORD = 0x00000005;
 pub const DICS_FLAG_GLOBAL: ::DWORD = 0x00000001;
 pub const DICS_FLAG_CONFIGSPECIFIC: ::DWORD = 0x00000002;
 pub const DICS_FLAG_CONFIGGENERAL: ::DWORD = 0x00000004;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_PROPCHANGE_PARAMS {
-    pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
-    pub StateChange: ::DWORD,
-    pub Scope: ::DWORD,
-    pub HwProfile: ::DWORD,
-}
+STRUCT!{struct SP_PROPCHANGE_PARAMS {
+    ClassInstallHeader: SP_CLASSINSTALL_HEADER,
+    StateChange: ::DWORD,
+    Scope: ::DWORD,
+    HwProfile: ::DWORD,
+}}
 pub type PSP_PROPCHANGE_PARAMS = *mut SP_PROPCHANGE_PARAMS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_REMOVEDEVICE_PARAMS {
-    pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
-    pub Scope: ::DWORD,
-    pub HwProfile: ::DWORD,
-}
+STRUCT!{struct SP_REMOVEDEVICE_PARAMS {
+    ClassInstallHeader: SP_CLASSINSTALL_HEADER,
+    Scope: ::DWORD,
+    HwProfile: ::DWORD,
+}}
 pub type PSP_REMOVEDEVICE_PARAMS = *mut SP_REMOVEDEVICE_PARAMS;
 pub const DI_REMOVEDEVICE_GLOBAL: ::DWORD = 0x00000001;
 pub const DI_REMOVEDEVICE_CONFIGSPECIFIC: ::DWORD = 0x00000002;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_UNREMOVEDEVICE_PARAMS {
-    pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
-    pub Scope: ::DWORD,
-    pub HwProfile: ::DWORD,
-}
+STRUCT!{struct SP_UNREMOVEDEVICE_PARAMS {
+    ClassInstallHeader: SP_CLASSINSTALL_HEADER,
+    Scope: ::DWORD,
+    HwProfile: ::DWORD,
+}}
 pub type PSP_UNREMOVEDEVICE_PARAMS = *mut SP_UNREMOVEDEVICE_PARAMS;
 pub const DI_UNREMOVEDEVICE_CONFIGSPECIFIC: ::DWORD = 0x00000002;
 #[repr(C)] #[derive(Copy)]
@@ -608,17 +583,16 @@ pub struct SP_DETECTDEVICE_PARAMS {
 impl Clone for SP_DETECTDEVICE_PARAMS { fn clone(&self) -> SP_DETECTDEVICE_PARAMS { *self } }
 pub type PSP_DETECTDEVICE_PARAMS = *mut SP_DETECTDEVICE_PARAMS;
 pub const MAX_INSTALLWIZARD_DYNAPAGES: usize = 20;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_INSTALLWIZARD_DATA {
-    pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
-    pub Flags: ::DWORD,
-    pub DynamicPages: [::HPROPSHEETPAGE; MAX_INSTALLWIZARD_DYNAPAGES],
-    pub NumDynamicPages: ::DWORD,
-    pub DynamicPageFlags: ::DWORD,
-    pub PrivateFlags: ::DWORD,
-    pub PrivateData: ::LPARAM,
-    pub hwndWizardDlg: ::HWND,
-}
+STRUCT!{struct SP_INSTALLWIZARD_DATA {
+    ClassInstallHeader: SP_CLASSINSTALL_HEADER,
+    Flags: ::DWORD,
+    DynamicPages: [::HPROPSHEETPAGE; MAX_INSTALLWIZARD_DYNAPAGES],
+    NumDynamicPages: ::DWORD,
+    DynamicPageFlags: ::DWORD,
+    PrivateFlags: ::DWORD,
+    PrivateData: ::LPARAM,
+    hwndWizardDlg: ::HWND,
+}}
 pub type PSP_INSTALLWIZARD_DATA = *mut SP_INSTALLWIZARD_DATA;
 pub const NDW_INSTALLFLAG_DIDFACTDEFS: ::DWORD = 0x00000001;
 pub const NDW_INSTALLFLAG_HARDWAREALLREADYIN: ::DWORD = 0x00000002;
@@ -653,14 +627,13 @@ pub const IDD_DYNAWIZ_SELECTCLASS_PAGE: ::c_int = 10012;
 pub const IDD_DYNAWIZ_INSTALLDETECTED_PREVPAGE: ::c_int = 10006;
 pub const IDD_DYNAWIZ_INSTALLDETECTED_NEXTPAGE: ::c_int = 10007;
 pub const IDD_DYNAWIZ_INSTALLDETECTED_NODEVS: ::c_int = 10008;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_NEWDEVICEWIZARD_DATA {
-    pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
-    pub Flags: ::DWORD,
-    pub DynamicPages: [::HPROPSHEETPAGE; MAX_INSTALLWIZARD_DYNAPAGES],
-    pub NumDynamicPages: ::DWORD,
-    pub hwndWizardDlg: ::HWND,
-}
+STRUCT!{struct SP_NEWDEVICEWIZARD_DATA {
+    ClassInstallHeader: SP_CLASSINSTALL_HEADER,
+    Flags: ::DWORD,
+    DynamicPages: [::HPROPSHEETPAGE; MAX_INSTALLWIZARD_DYNAPAGES],
+    NumDynamicPages: ::DWORD,
+    hwndWizardDlg: ::HWND,
+}}
 pub type PSP_NEWDEVICEWIZARD_DATA = *mut SP_NEWDEVICEWIZARD_DATA;
 pub type SP_ADDPROPERTYPAGE_DATA = SP_NEWDEVICEWIZARD_DATA;
 pub type PSP_ADDPROPERTYPAGE_DATA = PSP_NEWDEVICEWIZARD_DATA;
@@ -782,14 +755,13 @@ pub struct SP_DRVINFO_DETAIL_DATA_W {
 }
 impl Clone for SP_DRVINFO_DETAIL_DATA_W { fn clone(&self) -> SP_DRVINFO_DETAIL_DATA_W { *self } }
 pub type PSP_DRVINFO_DETAIL_DATA_W = *mut SP_DRVINFO_DETAIL_DATA_W;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_DRVINSTALL_PARAMS {
-    pub cbSize: ::DWORD,
-    pub Rank: ::DWORD,
-    pub Flags: ::DWORD,
-    pub PrivateData: ::DWORD_PTR,
-    pub Reserved: ::DWORD,
-}
+STRUCT!{struct SP_DRVINSTALL_PARAMS {
+    cbSize: ::DWORD,
+    Rank: ::DWORD,
+    Flags: ::DWORD,
+    PrivateData: ::DWORD_PTR,
+    Reserved: ::DWORD,
+}}
 pub type PSP_DRVINSTALL_PARAMS = *mut SP_DRVINSTALL_PARAMS;
 pub const DNF_DUPDESC: ::DWORD = 0x00000001;
 pub const DNF_OLDDRIVER: ::DWORD = 0x00000002;
@@ -827,27 +799,24 @@ pub type PSP_DETSIG_CMPPROC = Option<unsafe extern "system" fn(
     DeviceInfoSet: HDEVINFO, NewDeviceData: PSP_DEVINFO_DATA, ExistingDeviceData: PSP_DEVINFO_DATA,
     CompareContext: ::PVOID,
 ) -> ::DWORD>;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct COINSTALLER_CONTEXT_DATA {
-    pub PostProcessing: ::BOOL,
-    pub InstallResult: ::DWORD,
-    pub PrivateData: ::PVOID,
-}
+STRUCT!{struct COINSTALLER_CONTEXT_DATA {
+    PostProcessing: ::BOOL,
+    InstallResult: ::DWORD,
+    PrivateData: ::PVOID,
+}}
 pub type PCOINSTALLER_CONTEXT_DATA = *mut COINSTALLER_CONTEXT_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_CLASSIMAGELIST_DATA {
-    pub cbSize: ::DWORD,
-    pub ImageList: ::HIMAGELIST,
-    pub Reserved: ::ULONG_PTR,
-}
+STRUCT!{struct SP_CLASSIMAGELIST_DATA {
+    cbSize: ::DWORD,
+    ImageList: ::HIMAGELIST,
+    Reserved: ::ULONG_PTR,
+}}
 pub type PSP_CLASSIMAGELIST_DATA = *mut SP_CLASSIMAGELIST_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SP_PROPSHEETPAGE_REQUEST {
-    pub cbSize: ::DWORD,
-    pub PageRequested: ::DWORD,
-    pub DeviceInfoSet: HDEVINFO,
-    pub DeviceInfoData: PSP_DEVINFO_DATA,
-}
+STRUCT!{struct SP_PROPSHEETPAGE_REQUEST {
+    cbSize: ::DWORD,
+    PageRequested: ::DWORD,
+    DeviceInfoSet: HDEVINFO,
+    DeviceInfoData: PSP_DEVINFO_DATA,
+}}
 pub type PSP_PROPSHEETPAGE_REQUEST = *mut SP_PROPSHEETPAGE_REQUEST;
 pub const SPPSR_SELECT_DEVICE_RESOURCES: ::DWORD = 1;
 pub const SPPSR_ENUM_BASIC_DEVICE_PROPERTIES: ::DWORD = 2;

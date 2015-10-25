@@ -73,19 +73,17 @@ pub type PCNZCH = *const CHAR;
 // Skipping TCHAR things
 pub type PSHORT = *mut SHORT;
 pub type PLONG = *mut LONG;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PROCESSOR_NUMBER {
-    pub Group: ::WORD,
-    pub Number: ::BYTE,
-    pub Reserved: ::BYTE,
-}
+STRUCT!{struct PROCESSOR_NUMBER {
+    Group: ::WORD,
+    Number: ::BYTE,
+    Reserved: ::BYTE,
+}}
 pub type PPROCESSOR_NUMBER = *mut PROCESSOR_NUMBER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct GROUP_AFFINITY {
-    pub Mask: ::KAFFINITY,
-    pub Group: ::WORD,
-    pub Reserved: [::WORD; 3],
-}
+STRUCT!{struct GROUP_AFFINITY {
+    Mask: ::KAFFINITY,
+    Group: ::WORD,
+    Reserved: [::WORD; 3],
+}}
 pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
 pub type HANDLE = *mut ::c_void;
 pub type PHANDLE = *mut HANDLE;
@@ -108,11 +106,10 @@ pub const ERROR_SEVERITY_INFORMATIONAL: ::DWORD = 0x40000000;
 pub const ERROR_SEVERITY_WARNING: ::DWORD = 0x80000000;
 pub const ERROR_SEVERITY_ERROR: ::DWORD = 0xC0000000;
 //710
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FLOAT128 {
-    pub LowPart: ::__int64,
-    pub HighPart: ::__int64,
-}
+STRUCT!{struct FLOAT128 {
+    LowPart: ::__int64,
+    HighPart: ::__int64,
+}}
 pub type PFLOAT128 = *mut FLOAT128;
 pub type LONGLONG = ::__int64;
 pub type ULONGLONG = ::__uint64;
@@ -125,45 +122,39 @@ pub type ULARGE_INTEGER = ULONGLONG;
 pub type PULARGE_INTEGER= *mut ULARGE_INTEGER;
 pub type RTL_REFERENCE_COUNT = ::LONG_PTR;
 pub type PRTL_REFERENCE_COUNT = *mut ::LONG_PTR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LUID {
-    pub LowPart: ::DWORD,
-    pub HighPart: LONG,
-}
+STRUCT!{struct LUID {
+    LowPart: ::DWORD,
+    HighPart: LONG,
+}}
 pub type PLUID = *mut LUID;
 pub type DWORDLONG = ULONGLONG;
 pub type PDWORDLONG = *mut DWORDLONG;
 //1042
 pub type BOOLEAN = ::BYTE;
 pub type PBOOLEAN = *mut BOOLEAN;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LIST_ENTRY {
-    pub Flink: *mut LIST_ENTRY,
-    pub Blink: *mut LIST_ENTRY,
-}
+STRUCT!{struct LIST_ENTRY {
+    Flink: *mut LIST_ENTRY,
+    Blink: *mut LIST_ENTRY,
+}}
 pub type PLIST_ENTRY = *mut LIST_ENTRY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SINGLE_LIST_ENTRY {
-    pub Next: *mut SINGLE_LIST_ENTRY,
-}
+STRUCT!{struct SINGLE_LIST_ENTRY {
+    Next: *mut SINGLE_LIST_ENTRY,
+}}
 pub type PSINGLE_LIST_ENTRY = *mut SINGLE_LIST_ENTRY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LIST_ENTRY32 {
-    pub Flink: ::DWORD,
-    pub Blink: ::DWORD,
-}
+STRUCT!{struct LIST_ENTRY32 {
+    Flink: ::DWORD,
+    Blink: ::DWORD,
+}}
 pub type PLIST_ENTRY32 = *mut LIST_ENTRY32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LIST_ENTRY64 {
-    pub Flink: ULONGLONG,
-    pub Blink: ULONGLONG,
-}
+STRUCT!{struct LIST_ENTRY64 {
+    Flink: ULONGLONG,
+    Blink: ULONGLONG,
+}}
 pub type PLIST_ENTRY64 = *mut LIST_ENTRY64;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct OBJECTID {
-    pub Lineage: ::GUID,
-    pub Uniquifier: ::DWORD,
-}
+STRUCT!{struct OBJECTID {
+    Lineage: ::GUID,
+    Uniquifier: ::DWORD,
+}}
 pub const MINCHAR: ::CHAR = 0x80u8 as ::CHAR;
 pub const MAXCHAR: ::CHAR = 0x7f;
 //1300
@@ -573,11 +564,10 @@ pub const MAXIMUM_SUSPEND_COUNT: ::CHAR = MAXCHAR;
 //2277
 pub type KSPIN_LOCK = ::ULONG_PTR;
 pub type PKSPIN_LOCK = *mut KSPIN_LOCK;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct M128A { // FIXME align 16
-    pub Low: ULONGLONG,
-    pub High: LONGLONG,
-}
+STRUCT!{struct M128A { // FIXME align 16
+    Low: ULONGLONG,
+    High: LONGLONG,
+}}
 pub type PM128A = *mut M128A;
 #[cfg(target_arch = "x86")] #[repr(C)] #[derive(Copy)]
 pub struct XSAVE_FORMAT { // FIXME align 16
@@ -735,69 +725,64 @@ fn test_CONTEXT_size() {
 pub type RUNTIME_FUNCTION = IMAGE_RUNTIME_FUNCTION_ENTRY;
 pub type PRUNTIME_FUNCTION = *mut RUNTIME_FUNCTION;
 pub const UNWIND_HISTORY_TABLE_SIZE: usize = 12;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct UNWIND_HISTORY_TABLE_ENTRY {
-    pub ImageBase: ::DWORD64,
-    pub FunctionEntry: PRUNTIME_FUNCTION,
-}
+STRUCT!{struct UNWIND_HISTORY_TABLE_ENTRY {
+    ImageBase: ::DWORD64,
+    FunctionEntry: PRUNTIME_FUNCTION,
+}}
 pub type PUNWIND_HISTORY_TABLE_ENTRY = *mut UNWIND_HISTORY_TABLE_ENTRY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct UNWIND_HISTORY_TABLE {
-    pub Count: ::DWORD,
-    pub LocalHint: ::BYTE,
-    pub GlobalHint: ::BYTE,
-    pub Search: ::BYTE,
-    pub Once: ::BYTE,
-    pub LowAddress: ::DWORD64,
-    pub HighAddress: ::DWORD64,
-    pub Entry: [UNWIND_HISTORY_TABLE_ENTRY; UNWIND_HISTORY_TABLE_SIZE],
-}
+STRUCT!{struct UNWIND_HISTORY_TABLE {
+    Count: ::DWORD,
+    LocalHint: ::BYTE,
+    GlobalHint: ::BYTE,
+    Search: ::BYTE,
+    Once: ::BYTE,
+    LowAddress: ::DWORD64,
+    HighAddress: ::DWORD64,
+    Entry: [UNWIND_HISTORY_TABLE_ENTRY; UNWIND_HISTORY_TABLE_SIZE],
+}}
 pub type PUNWIND_HISTORY_TABLE = *mut UNWIND_HISTORY_TABLE;
 pub type PGET_RUNTIME_FUNCTION_CALLBACK = Option<unsafe extern "system" fn(
     ControlPc: ::DWORD64, Context: ::PVOID,
 ) -> PRUNTIME_FUNCTION>;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KNONVOLATILE_CONTEXT_POINTERS_u1 {
-    pub Xmm0: PM128A,
-    pub Xmm1: PM128A,
-    pub Xmm2: PM128A,
-    pub Xmm3: PM128A,
-    pub Xmm4: PM128A,
-    pub Xmm5: PM128A,
-    pub Xmm6: PM128A,
-    pub Xmm7: PM128A,
-    pub Xmm8: PM128A,
-    pub Xmm9: PM128A,
-    pub Xmm10: PM128A,
-    pub Xmm11: PM128A,
-    pub Xmm12: PM128A,
-    pub Xmm14: PM128A,
-    pub Xmm15: PM128A,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KNONVOLATILE_CONTEXT_POINTERS_u2 {
-    pub Rax: ::DWORD64,
-    pub Rcx: ::DWORD64,
-    pub Rdx: ::DWORD64,
-    pub Rbx: ::DWORD64,
-    pub Rsp: ::DWORD64,
-    pub Rbp: ::DWORD64,
-    pub Rsi: ::DWORD64,
-    pub Rdi: ::DWORD64,
-    pub R8: ::DWORD64,
-    pub R9: ::DWORD64,
-    pub R10: ::DWORD64,
-    pub R11: ::DWORD64,
-    pub R12: ::DWORD64,
-    pub R13: ::DWORD64,
-    pub R14: ::DWORD64,
-    pub R15: ::DWORD64,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KNONVOLATILE_CONTEXT_POINTERS {
-    pub FloatingContext: [PM128A; 16],
-    pub IntegerContext: [::PDWORD64; 16],
-}
+STRUCT!{struct KNONVOLATILE_CONTEXT_POINTERS_u1 {
+    Xmm0: PM128A,
+    Xmm1: PM128A,
+    Xmm2: PM128A,
+    Xmm3: PM128A,
+    Xmm4: PM128A,
+    Xmm5: PM128A,
+    Xmm6: PM128A,
+    Xmm7: PM128A,
+    Xmm8: PM128A,
+    Xmm9: PM128A,
+    Xmm10: PM128A,
+    Xmm11: PM128A,
+    Xmm12: PM128A,
+    Xmm14: PM128A,
+    Xmm15: PM128A,
+}}
+STRUCT!{struct KNONVOLATILE_CONTEXT_POINTERS_u2 {
+    Rax: ::DWORD64,
+    Rcx: ::DWORD64,
+    Rdx: ::DWORD64,
+    Rbx: ::DWORD64,
+    Rsp: ::DWORD64,
+    Rbp: ::DWORD64,
+    Rsi: ::DWORD64,
+    Rdi: ::DWORD64,
+    R8: ::DWORD64,
+    R9: ::DWORD64,
+    R10: ::DWORD64,
+    R11: ::DWORD64,
+    R12: ::DWORD64,
+    R13: ::DWORD64,
+    R14: ::DWORD64,
+    R15: ::DWORD64,
+}}
+STRUCT!{struct KNONVOLATILE_CONTEXT_POINTERS {
+    FloatingContext: [PM128A; 16],
+    IntegerContext: [::PDWORD64; 16],
+}}
 // FIXME: all unions are untagged
 UNION!(
     KNONVOLATILE_CONTEXT_POINTERS, FloatingContext, Xmms, Xmms_mut,
@@ -810,22 +795,20 @@ UNION!(
 pub type PKNONVOLATILE_CONTEXT_POINTERS = *mut KNONVOLATILE_CONTEXT_POINTERS;
 //8983
 pub const EXCEPTION_MAXIMUM_PARAMETERS: usize = 15;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct EXCEPTION_RECORD {
-    pub ExceptionCode: ::DWORD,
-    pub ExceptionFlags: ::DWORD,
-    pub ExceptionRecord: *mut EXCEPTION_RECORD,
-    pub ExceptionAddress: ::PVOID,
-    pub NumberParameters: ::DWORD,
-    pub ExceptionInformation: [::ULONG_PTR; EXCEPTION_MAXIMUM_PARAMETERS],
-}
+STRUCT!{struct EXCEPTION_RECORD {
+    ExceptionCode: ::DWORD,
+    ExceptionFlags: ::DWORD,
+    ExceptionRecord: *mut EXCEPTION_RECORD,
+    ExceptionAddress: ::PVOID,
+    NumberParameters: ::DWORD,
+    ExceptionInformation: [::ULONG_PTR; EXCEPTION_MAXIMUM_PARAMETERS],
+}}
 pub type PEXCEPTION_RECORD = *mut EXCEPTION_RECORD;
 //9023
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct EXCEPTION_POINTERS {
-    pub ExceptionRecord: PEXCEPTION_RECORD,
-    pub ContextRecord: PCONTEXT,
-}
+STRUCT!{struct EXCEPTION_POINTERS {
+    ExceptionRecord: PEXCEPTION_RECORD,
+    ContextRecord: PCONTEXT,
+}}
 pub type PEXCEPTION_POINTERS = *mut EXCEPTION_POINTERS;
 pub type PACCESS_TOKEN = ::PVOID;
 pub type PSECURITY_DESCRIPTOR = ::PVOID;
@@ -852,11 +835,10 @@ pub const GENERIC_WRITE: ::DWORD = 0x40000000;
 pub const GENERIC_EXECUTE: ::DWORD = 0x20000000;
 pub const GENERIC_ALL: ::DWORD = 0x10000000;
 //9170
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LUID_AND_ATTRIBUTES {
-    pub Luid: LUID,
-    pub Attributes: ::DWORD,
-}
+STRUCT!{struct LUID_AND_ATTRIBUTES {
+    Luid: LUID,
+    Attributes: ::DWORD,
+}}
 pub type PLUID_AND_ATTRIBUTES = *mut LUID_AND_ATTRIBUTES;
 //9243
 ENUM!{enum SID_NAME_USE {
@@ -872,11 +854,10 @@ ENUM!{enum SID_NAME_USE {
     SidTypeLabel,
 }}
 pub type PSID_NAME_USE = *mut SID_NAME_USE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SID_AND_ATTRIBUTES {
-    pub Sid: PSID,
-    pub Attributes: ::DWORD,
-}
+STRUCT!{struct SID_AND_ATTRIBUTES {
+    Sid: PSID,
+    Attributes: ::DWORD,
+}}
 pub type PSID_AND_ATTRIBUTES = *mut SID_AND_ATTRIBUTES;
 //9802
 pub const ACL_REVISION: ::BYTE = 2;
@@ -887,14 +868,13 @@ pub const ACL_REVISION2: ::BYTE = 2;
 pub const ACL_REVISION3: ::BYTE = 3;
 pub const ACL_REVISION4: ::BYTE = 4;
 pub const MAX_ACL_REVISION: ::BYTE = ACL_REVISION4;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ACL {
-    pub AclRevision: ::BYTE,
-    pub Sbz1: ::BYTE,
-    pub AclSize: ::WORD,
-    pub AceCount: ::WORD,
-    pub Sbz2: ::WORD,
-}
+STRUCT!{struct ACL {
+    AclRevision: ::BYTE,
+    Sbz1: ::BYTE,
+    AclSize: ::WORD,
+    AceCount: ::WORD,
+    Sbz2: ::WORD,
+}}
 pub type PACL = *mut ACL;
 //9888
 pub const SE_PRIVILEGE_ENABLED_BY_DEFAULT: ::DWORD = 0x00000001;
@@ -933,20 +913,18 @@ pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_INVALID: ::WORD = 0x00;
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_INT64: ::WORD = 0x01;
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_UINT64: ::WORD = 0x02;
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_STRING: ::WORD = 0x03;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE {
-    pub Version: ::DWORD64,
-    pub Name: ::PWSTR,
-}
+STRUCT!{struct CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE {
+    Version: ::DWORD64,
+    Name: ::PWSTR,
+}}
 pub type PCLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE = *mut CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE;
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_FQBN: ::WORD = 0x04;
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_SID: ::WORD = 0x05;
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_BOOLEAN: ::WORD = 0x06;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE {
-    pub pValue: ::PVOID,
-    pub ValueLength: ::DWORD,
-}
+STRUCT!{struct CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE {
+    pValue: ::PVOID,
+    ValueLength: ::DWORD,
+}}
 pub type PCLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE =
     *mut CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE;
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_OCTET_STRING: ::WORD = 0x10;
@@ -961,36 +939,33 @@ pub const CLAIM_SECURITY_ATTRIBUTE_VALID_FLAGS: ::DWORD = CLAIM_SECURITY_ATTRIBU
     | CLAIM_SECURITY_ATTRIBUTE_DISABLED_BY_DEFAULT | CLAIM_SECURITY_ATTRIBUTE_DISABLED
     | CLAIM_SECURITY_ATTRIBUTE_MANDATORY;
 pub const CLAIM_SECURITY_ATTRIBUTE_CUSTOM_FLAGS: ::DWORD = 0xFFFF0000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CLAIM_SECURITY_ATTRIBUTE_V1 {
-    pub Name: ::PWSTR,
-    pub ValueType: ::WORD,
-    pub Reserved: ::WORD,
-    pub Flags: ::DWORD,
-    pub ValueCount: ::DWORD,
+STRUCT!{struct CLAIM_SECURITY_ATTRIBUTE_V1 {
+    Name: ::PWSTR,
+    ValueType: ::WORD,
+    Reserved: ::WORD,
+    Flags: ::DWORD,
+    ValueCount: ::DWORD,
     // Put data here
-}
+}}
 pub type PCLAIM_SECURITY_ATTRIBUTE_V1 = *mut CLAIM_SECURITY_ATTRIBUTE_V1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 {
-    pub Name: ::DWORD,
-    pub ValueType: ::WORD,
-    pub Reserved: ::WORD,
-    pub Flags: ::DWORD,
-    pub ValueCount: ::DWORD,
+STRUCT!{struct CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 {
+    Name: ::DWORD,
+    ValueType: ::WORD,
+    Reserved: ::WORD,
+    Flags: ::DWORD,
+    ValueCount: ::DWORD,
     // Put array here
-}
+}}
 pub type PCLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 = *mut CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1;
 pub const CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1: ::WORD = 1;
 pub const CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION: ::WORD =
     CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CLAIM_SECURITY_ATTRIBUTES_INFORMATION {
-    pub Version: ::WORD,
-    pub Reserved: ::WORD,
-    pub AttributeCount: ::DWORD,
-    pub pAttributeV1: PCLAIM_SECURITY_ATTRIBUTE_V1,
-}
+STRUCT!{struct CLAIM_SECURITY_ATTRIBUTES_INFORMATION {
+    Version: ::WORD,
+    Reserved: ::WORD,
+    AttributeCount: ::DWORD,
+    pAttributeV1: PCLAIM_SECURITY_ATTRIBUTE_V1,
+}}
 pub type PCLAIM_SECURITY_ATTRIBUTES_INFORMATION = *mut CLAIM_SECURITY_ATTRIBUTES_INFORMATION;
 //11257
 pub type SECURITY_INFORMATION = ::DWORD;
@@ -1013,13 +988,12 @@ ENUM!{enum SE_LEARNING_MODE_DATA_TYPE {
     SeLearningModeSettings,
     SeLearningModeMax,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SECURITY_CAPABILITIES {
-    pub AppContainerSid: PSID,
-    pub Capabilities: PSID_AND_ATTRIBUTES,
-    pub CapabilityCount: ::DWORD,
-    pub Reserved: ::DWORD,
-}
+STRUCT!{struct SECURITY_CAPABILITIES {
+    AppContainerSid: PSID,
+    Capabilities: PSID_AND_ATTRIBUTES,
+    CapabilityCount: ::DWORD,
+    Reserved: ::DWORD,
+}}
 pub type PSECURITY_CAPABILITIES = *mut SECURITY_CAPABILITIES;
 pub type LPSECURITY_CAPABILITIES = *mut SECURITY_CAPABILITIES;
 pub const PROCESS_TERMINATE: ::DWORD = 0x0001;
@@ -1038,80 +1012,74 @@ pub const PROCESS_QUERY_LIMITED_INFORMATION: ::DWORD = 0x1000;
 pub const PROCESS_SET_LIMITED_INFORMATION: ::DWORD = 0x2000;
 pub const PROCESS_ALL_ACCESS: ::DWORD = STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xFFFF;
 //11445
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct QUOTA_LIMITS {
-    pub PagedPoolLimit: ::SIZE_T,
-    pub NonPagedPoolLimit: ::SIZE_T,
-    pub MinimumWorkingSetSize: ::SIZE_T,
-    pub MaximumWorkingSetSize: ::SIZE_T,
-    pub PagefileLimit: ::SIZE_T,
-    pub TimeLimit: ::LARGE_INTEGER,
-}
+STRUCT!{struct QUOTA_LIMITS {
+    PagedPoolLimit: ::SIZE_T,
+    NonPagedPoolLimit: ::SIZE_T,
+    MinimumWorkingSetSize: ::SIZE_T,
+    MaximumWorkingSetSize: ::SIZE_T,
+    PagefileLimit: ::SIZE_T,
+    TimeLimit: ::LARGE_INTEGER,
+}}
 pub type PQUOTA_LIMITS = *mut QUOTA_LIMITS;
 pub const QUOTA_LIMITS_HARDWS_MIN_ENABLE: ::DWORD = 0x00000001;
 pub const QUOTA_LIMITS_HARDWS_MIN_DISABLE: ::DWORD = 0x00000002;
 pub const QUOTA_LIMITS_HARDWS_MAX_ENABLE: ::DWORD = 0x00000004;
 pub const QUOTA_LIMITS_HARDWS_MAX_DISABLE: ::DWORD = 0x00000008;
 pub const QUOTA_LIMITS_USE_DEFAULT_LIMITS: ::DWORD = 0x00000010;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RATE_QUOTA_LIMIT {
-    pub RateData: ::DWORD,
-    pub BitFields: ::DWORD,
-}
+STRUCT!{struct RATE_QUOTA_LIMIT {
+    RateData: ::DWORD,
+    BitFields: ::DWORD,
+}}
 BITFIELD!(RATE_QUOTA_LIMIT BitFields: ::DWORD [
     RatePercent set_RatePercent[0..7],
     Reserved0 set_Reserved0[7..32],
 ]);
 pub type PRATE_QUOTA_LIMIT = *mut RATE_QUOTA_LIMIT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct QUOTA_LIMITS_EX {
-    pub PagedPoolLimit: ::SIZE_T,
-    pub NonPagedPoolLimit: ::SIZE_T,
-    pub MinimumWorkingSetSize: ::SIZE_T,
-    pub MaximumWorkingSetSize: ::SIZE_T,
-    pub PagefileLimit: ::SIZE_T,
-    pub TimeLimit: ::LARGE_INTEGER,
-    pub WorkingSetLimit: ::SIZE_T,
-    pub Reserved2: ::SIZE_T,
-    pub Reserved3: ::SIZE_T,
-    pub Reserved4: ::SIZE_T,
-    pub Flags: ::DWORD,
-    pub CpuRateLimit: RATE_QUOTA_LIMIT,
-}
+STRUCT!{struct QUOTA_LIMITS_EX {
+    PagedPoolLimit: ::SIZE_T,
+    NonPagedPoolLimit: ::SIZE_T,
+    MinimumWorkingSetSize: ::SIZE_T,
+    MaximumWorkingSetSize: ::SIZE_T,
+    PagefileLimit: ::SIZE_T,
+    TimeLimit: ::LARGE_INTEGER,
+    WorkingSetLimit: ::SIZE_T,
+    Reserved2: ::SIZE_T,
+    Reserved3: ::SIZE_T,
+    Reserved4: ::SIZE_T,
+    Flags: ::DWORD,
+    CpuRateLimit: RATE_QUOTA_LIMIT,
+}}
 pub type PQUOTA_LIMITS_EX = *mut QUOTA_LIMITS_EX;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IO_COUNTERS {
-    pub ReadOperationCount: ::ULONGLONG,
-    pub WriteOperationCount: ::ULONGLONG,
-    pub OtherOperationCount: ::ULONGLONG,
-    pub ReadTransferCount: ::ULONGLONG,
-    pub WriteTransferCount: ::ULONGLONG,
-    pub OtherTransferCount: ::ULONGLONG,
-}
+STRUCT!{struct IO_COUNTERS {
+    ReadOperationCount: ::ULONGLONG,
+    WriteOperationCount: ::ULONGLONG,
+    OtherOperationCount: ::ULONGLONG,
+    ReadTransferCount: ::ULONGLONG,
+    WriteTransferCount: ::ULONGLONG,
+    OtherTransferCount: ::ULONGLONG,
+}}
 pub type PIO_COUNTERS = *mut IO_COUNTERS;
 //11607
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct JOBOBJECT_BASIC_LIMIT_INFORMATION {
-    pub PerProcessUserTimeLimit: ::LARGE_INTEGER,
-    pub PerJobUserTimeLimit: ::LARGE_INTEGER,
-    pub LimitFlags: ::DWORD,
-    pub MinimumWorkingSetSize: ::SIZE_T,
-    pub MaximumWorkingSetSize: ::SIZE_T,
-    pub ActiveProcessLimit: ::DWORD,
-    pub Affinity: ::ULONG_PTR,
-    pub PriorityClass: ::DWORD,
-    pub SchedulingClass: ::DWORD,
-}
+STRUCT!{struct JOBOBJECT_BASIC_LIMIT_INFORMATION {
+    PerProcessUserTimeLimit: ::LARGE_INTEGER,
+    PerJobUserTimeLimit: ::LARGE_INTEGER,
+    LimitFlags: ::DWORD,
+    MinimumWorkingSetSize: ::SIZE_T,
+    MaximumWorkingSetSize: ::SIZE_T,
+    ActiveProcessLimit: ::DWORD,
+    Affinity: ::ULONG_PTR,
+    PriorityClass: ::DWORD,
+    SchedulingClass: ::DWORD,
+}}
 pub type PJOBOBJECT_BASIC_LIMIT_INFORMATION = *mut JOBOBJECT_BASIC_LIMIT_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct JOBOBJECT_EXTENDED_LIMIT_INFORMATION {
-    pub BasicLimitInformation: JOBOBJECT_BASIC_LIMIT_INFORMATION,
-    pub IoInfo: IO_COUNTERS,
-    pub ProcessMemoryLimit: ::SIZE_T,
-    pub JobMemoryLimit: ::SIZE_T,
-    pub PeakProcessMemoryUsed: ::SIZE_T,
-    pub PeakJobMemoryUsed: ::SIZE_T,
-}
+STRUCT!{struct JOBOBJECT_EXTENDED_LIMIT_INFORMATION {
+    BasicLimitInformation: JOBOBJECT_BASIC_LIMIT_INFORMATION,
+    IoInfo: IO_COUNTERS,
+    ProcessMemoryLimit: ::SIZE_T,
+    JobMemoryLimit: ::SIZE_T,
+    PeakProcessMemoryUsed: ::SIZE_T,
+    PeakJobMemoryUsed: ::SIZE_T,
+}}
 pub type PJOBOBJECT_EXTENDED_LIMIT_INFORMATION = *mut JOBOBJECT_EXTENDED_LIMIT_INFORMATION;
 #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
 pub struct JOBOBJECT_BASIC_PROCESS_ID_LIST {
@@ -1344,10 +1312,9 @@ pub const FILE_SUPPORTS_OPEN_BY_FILE_ID: ::DWORD = 0x01000000;
 pub const FILE_SUPPORTS_USN_JOURNAL: ::DWORD = 0x02000000;
 pub const FILE_SUPPORTS_INTEGRITY_STREAMS: ::DWORD = 0x04000000;
 pub const FILE_INVALID_FILE_ID: ::LONGLONG = -1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FILE_ID_128 {
-    pub Identifier: [::BYTE; 16],
-}
+STRUCT!{struct FILE_ID_128 {
+    Identifier: [::BYTE; 16],
+}}
 pub type PFILE_ID_128 = *mut FILE_ID_128;
 #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
 pub struct FILE_NOTIFY_INFORMATION {
@@ -1356,11 +1323,10 @@ pub struct FILE_NOTIFY_INFORMATION {
     pub FileNameLength: ::DWORD,
     pub FileName: [::WCHAR; 0],
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FILE_SEGMENT_ELEMENT {
-    pub Buffer: ::PVOID64,
-    pub Alignment: ::ULONGLONG,
-}
+STRUCT!{struct FILE_SEGMENT_ELEMENT {
+    Buffer: ::PVOID64,
+    Alignment: ::ULONGLONG,
+}}
 pub type PFILE_SEGMENT_ELEMENT = *mut FILE_SEGMENT_ELEMENT;
 //12475
 pub const IO_REPARSE_TAG_MOUNT_POINT: ::DWORD = 0xA0000003;
@@ -1380,32 +1346,30 @@ pub const IO_REPARSE_TAG_WOF: ::DWORD = 0x80000017;
 pub const DUPLICATE_CLOSE_SOURCE: ::DWORD = 0x00000001;
 pub const DUPLICATE_SAME_ACCESS: ::DWORD = 0x00000002;
 //14708
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PROCESSOR_POWER_POLICY_INFO {
-    pub TimeCheck: ::DWORD,
-    pub DemoteLimit: ::DWORD,
-    pub PromoteLimit: ::DWORD,
-    pub DemotePercent: ::BYTE,
-    pub PromotePercent: ::BYTE,
-    pub Spare: [::BYTE; 2],
-    pub Reserved: ::DWORD,
-}
+STRUCT!{struct PROCESSOR_POWER_POLICY_INFO {
+    TimeCheck: ::DWORD,
+    DemoteLimit: ::DWORD,
+    PromoteLimit: ::DWORD,
+    DemotePercent: ::BYTE,
+    PromotePercent: ::BYTE,
+    Spare: [::BYTE; 2],
+    Reserved: ::DWORD,
+}}
 BITFIELD!(PROCESSOR_POWER_POLICY_INFO Reserved: ::DWORD [
     AllowDemotion set_AllowDemotion[0..1],
     AllowPromotion set_AllowPromotion[1..2],
 ]);
 pub type PPROCESSOR_POWER_POLICY_INFO = *mut PROCESSOR_POWER_POLICY_INFO;
 //15000
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_FILE_HEADER {
-    pub Machine: ::WORD,
-    pub NumberOfSections: ::WORD,
-    pub TimeDateStamp: ::DWORD,
-    pub PointerToSymbolTable: ::DWORD,
-    pub NumberOfSymbols: ::DWORD,
-    pub SizeOfOptionalHeader: ::WORD,
-    pub Characteristics: ::WORD,
-}
+STRUCT!{struct IMAGE_FILE_HEADER {
+    Machine: ::WORD,
+    NumberOfSections: ::WORD,
+    TimeDateStamp: ::DWORD,
+    PointerToSymbolTable: ::DWORD,
+    NumberOfSymbols: ::DWORD,
+    SizeOfOptionalHeader: ::WORD,
+    Characteristics: ::WORD,
+}}
 pub type PIMAGE_FILE_HEADER = *mut IMAGE_FILE_HEADER;
 pub const IMAGE_SIZEOF_FILE_HEADER: usize = 20;
 pub const IMAGE_FILE_RELOCS_STRIPPED: ::WORD = 0x0001;
@@ -1453,98 +1417,94 @@ pub const IMAGE_FILE_MACHINE_EBC: ::WORD = 0x0EBC;
 pub const IMAGE_FILE_MACHINE_AMD64: ::WORD = 0x8664;
 pub const IMAGE_FILE_MACHINE_M32R: ::WORD = 0x9041;
 pub const IMAGE_FILE_MACHINE_CEE: ::WORD = 0xC0EE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_DATA_DIRECTORY {
-    pub VirtualAddress: ::DWORD,
-    pub Size: ::DWORD,
-}
+STRUCT!{struct IMAGE_DATA_DIRECTORY {
+    VirtualAddress: ::DWORD,
+    Size: ::DWORD,
+}}
 pub type PIMAGE_DATA_DIRECTORY = *mut IMAGE_DATA_DIRECTORY;
 pub const IMAGE_NUMBEROF_DIRECTORY_ENTRIES: usize = 16;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_OPTIONAL_HEADER32 {
-    pub Magic: ::WORD,
-    pub MajorLinkerVersion: ::BYTE,
-    pub MinorLinkerVersion: ::BYTE,
-    pub SizeOfCode: ::DWORD,
-    pub SizeOfInitializedData: ::DWORD,
-    pub SizeOfUninitializedData: ::DWORD,
-    pub AddressOfEntryPoint: ::DWORD,
-    pub BaseOfCode: ::DWORD,
-    pub BaseOfData: ::DWORD,
-    pub ImageBase: ::DWORD,
-    pub SectionAlignment: ::DWORD,
-    pub FileAlignment: ::DWORD,
-    pub MajorOperatingSystemVersion: ::WORD,
-    pub MinorOperatingSystemVersion: ::WORD,
-    pub MajorImageVersion: ::WORD,
-    pub MinorImageVersion: ::WORD,
-    pub MajorSubsystemVersion: ::WORD,
-    pub MinorSubsystemVersion: ::WORD,
-    pub Win32VersionValue: ::DWORD,
-    pub SizeOfImage: ::DWORD,
-    pub SizeOfHeaders: ::DWORD,
-    pub CheckSum: ::DWORD,
-    pub Subsystem: ::WORD,
-    pub DllCharacteristics: ::WORD,
-    pub SizeOfStackReserve: ::DWORD,
-    pub SizeOfStackCommit: ::DWORD,
-    pub SizeOfHeapReserve: ::DWORD,
-    pub SizeOfHeapCommit: ::DWORD,
-    pub LoaderFlags: ::DWORD,
-    pub NumberOfRvaAndSizes: ::DWORD,
-    pub DataDirectory: [IMAGE_DATA_DIRECTORY; IMAGE_NUMBEROF_DIRECTORY_ENTRIES],
-}
+STRUCT!{struct IMAGE_OPTIONAL_HEADER32 {
+    Magic: ::WORD,
+    MajorLinkerVersion: ::BYTE,
+    MinorLinkerVersion: ::BYTE,
+    SizeOfCode: ::DWORD,
+    SizeOfInitializedData: ::DWORD,
+    SizeOfUninitializedData: ::DWORD,
+    AddressOfEntryPoint: ::DWORD,
+    BaseOfCode: ::DWORD,
+    BaseOfData: ::DWORD,
+    ImageBase: ::DWORD,
+    SectionAlignment: ::DWORD,
+    FileAlignment: ::DWORD,
+    MajorOperatingSystemVersion: ::WORD,
+    MinorOperatingSystemVersion: ::WORD,
+    MajorImageVersion: ::WORD,
+    MinorImageVersion: ::WORD,
+    MajorSubsystemVersion: ::WORD,
+    MinorSubsystemVersion: ::WORD,
+    Win32VersionValue: ::DWORD,
+    SizeOfImage: ::DWORD,
+    SizeOfHeaders: ::DWORD,
+    CheckSum: ::DWORD,
+    Subsystem: ::WORD,
+    DllCharacteristics: ::WORD,
+    SizeOfStackReserve: ::DWORD,
+    SizeOfStackCommit: ::DWORD,
+    SizeOfHeapReserve: ::DWORD,
+    SizeOfHeapCommit: ::DWORD,
+    LoaderFlags: ::DWORD,
+    NumberOfRvaAndSizes: ::DWORD,
+    DataDirectory: [IMAGE_DATA_DIRECTORY; IMAGE_NUMBEROF_DIRECTORY_ENTRIES],
+}}
 pub type PIMAGE_OPTIONAL_HEADER32 = *mut IMAGE_OPTIONAL_HEADER32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_ROM_OPTIONAL_HEADER {
-    pub Magic: ::WORD,
-    pub MajorLinkerVersion: ::BYTE,
-    pub MinorLinkerVersion: ::BYTE,
-    pub SizeOfCode: ::DWORD,
-    pub SizeOfInitializedData: ::DWORD,
-    pub SizeOfUninitializedData: ::DWORD,
-    pub AddressOfEntryPoint: ::DWORD,
-    pub BaseOfCode: ::DWORD,
-    pub BaseOfData: ::DWORD,
-    pub BaseOfBss: ::DWORD,
-    pub GprMask: ::DWORD,
-    pub CprMask: [::DWORD; 4],
-    pub GpValue: ::DWORD,
-}
+STRUCT!{struct IMAGE_ROM_OPTIONAL_HEADER {
+    Magic: ::WORD,
+    MajorLinkerVersion: ::BYTE,
+    MinorLinkerVersion: ::BYTE,
+    SizeOfCode: ::DWORD,
+    SizeOfInitializedData: ::DWORD,
+    SizeOfUninitializedData: ::DWORD,
+    AddressOfEntryPoint: ::DWORD,
+    BaseOfCode: ::DWORD,
+    BaseOfData: ::DWORD,
+    BaseOfBss: ::DWORD,
+    GprMask: ::DWORD,
+    CprMask: [::DWORD; 4],
+    GpValue: ::DWORD,
+}}
 pub type PIMAGE_ROM_OPTIONAL_HEADER = *mut IMAGE_ROM_OPTIONAL_HEADER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_OPTIONAL_HEADER64 {
-    pub Magic: ::WORD,
-    pub MajorLinkerVersion: ::BYTE,
-    pub MinorLinkerVersion: ::BYTE,
-    pub SizeOfCode: ::DWORD,
-    pub SizeOfInitializedData: ::DWORD,
-    pub SizeOfUninitializedData: ::DWORD,
-    pub AddressOfEntryPoint: ::DWORD,
-    pub BaseOfCode: ::DWORD,
-    pub ImageBase: ::ULONGLONG,
-    pub SectionAlignment: ::DWORD,
-    pub FileAlignment: ::DWORD,
-    pub MajorOperatingSystemVersion: ::WORD,
-    pub MinorOperatingSystemVersion: ::WORD,
-    pub MajorImageVersion: ::WORD,
-    pub MinorImageVersion: ::WORD,
-    pub MajorSubsystemVersion: ::WORD,
-    pub MinorSubsystemVersion: ::WORD,
-    pub Win32VersionValue: ::DWORD,
-    pub SizeOfImage: ::DWORD,
-    pub SizeOfHeaders: ::DWORD,
-    pub CheckSum: ::DWORD,
-    pub Subsystem: ::WORD,
-    pub DllCharacteristics: ::WORD,
-    pub SizeOfStackReserve: ULONGLONG,
-    pub SizeOfStackCommit: ULONGLONG,
-    pub SizeOfHeapReserve: ULONGLONG,
-    pub SizeOfHeapCommit: ULONGLONG,
-    pub LoaderFlags: ::DWORD,
-    pub NumberOfRvaAndSizes: ::DWORD,
-    pub DataDirectory: [IMAGE_DATA_DIRECTORY; IMAGE_NUMBEROF_DIRECTORY_ENTRIES],
-}
+STRUCT!{struct IMAGE_OPTIONAL_HEADER64 {
+    Magic: ::WORD,
+    MajorLinkerVersion: ::BYTE,
+    MinorLinkerVersion: ::BYTE,
+    SizeOfCode: ::DWORD,
+    SizeOfInitializedData: ::DWORD,
+    SizeOfUninitializedData: ::DWORD,
+    AddressOfEntryPoint: ::DWORD,
+    BaseOfCode: ::DWORD,
+    ImageBase: ::ULONGLONG,
+    SectionAlignment: ::DWORD,
+    FileAlignment: ::DWORD,
+    MajorOperatingSystemVersion: ::WORD,
+    MinorOperatingSystemVersion: ::WORD,
+    MajorImageVersion: ::WORD,
+    MinorImageVersion: ::WORD,
+    MajorSubsystemVersion: ::WORD,
+    MinorSubsystemVersion: ::WORD,
+    Win32VersionValue: ::DWORD,
+    SizeOfImage: ::DWORD,
+    SizeOfHeaders: ::DWORD,
+    CheckSum: ::DWORD,
+    Subsystem: ::WORD,
+    DllCharacteristics: ::WORD,
+    SizeOfStackReserve: ULONGLONG,
+    SizeOfStackCommit: ULONGLONG,
+    SizeOfHeapReserve: ULONGLONG,
+    SizeOfHeapCommit: ULONGLONG,
+    LoaderFlags: ::DWORD,
+    NumberOfRvaAndSizes: ::DWORD,
+    DataDirectory: [IMAGE_DATA_DIRECTORY; IMAGE_NUMBEROF_DIRECTORY_ENTRIES],
+}}
 pub type PIMAGE_OPTIONAL_HEADER64 = *mut IMAGE_OPTIONAL_HEADER64;
 pub const IMAGE_NT_OPTIONAL_HDR32_MAGIC: ::WORD = 0x10b;
 pub const IMAGE_NT_OPTIONAL_HDR64_MAGIC: ::WORD = 0x20b;
@@ -1557,25 +1517,22 @@ pub type PIMAGE_OPTIONAL_HEADER = PIMAGE_OPTIONAL_HEADER64;
 pub type IMAGE_OPTIONAL_HEADER = IMAGE_OPTIONAL_HEADER32;
 #[cfg(target_arch = "x86")]
 pub type PIMAGE_OPTIONAL_HEADER = PIMAGE_OPTIONAL_HEADER32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_NT_HEADERS64 {
-    pub Signature: ::DWORD,
-    pub FileHeader: IMAGE_FILE_HEADER,
-    pub OptionalHeader: IMAGE_OPTIONAL_HEADER64,
-}
+STRUCT!{struct IMAGE_NT_HEADERS64 {
+    Signature: ::DWORD,
+    FileHeader: IMAGE_FILE_HEADER,
+    OptionalHeader: IMAGE_OPTIONAL_HEADER64,
+}}
 pub type PIMAGE_NT_HEADERS64 = *mut IMAGE_NT_HEADERS64;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_NT_HEADERS32 {
-    pub Signature: ::DWORD,
-    pub FileHeader: IMAGE_FILE_HEADER,
-    pub OptionalHeader: IMAGE_OPTIONAL_HEADER32,
-}
+STRUCT!{struct IMAGE_NT_HEADERS32 {
+    Signature: ::DWORD,
+    FileHeader: IMAGE_FILE_HEADER,
+    OptionalHeader: IMAGE_OPTIONAL_HEADER32,
+}}
 pub type PIMAGE_NT_HEADERS32 = *mut IMAGE_NT_HEADERS32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_ROM_HEADERS {
-    pub FileHeader: IMAGE_FILE_HEADER,
-    pub OptionalHeader: IMAGE_ROM_OPTIONAL_HEADER,
-}
+STRUCT!{struct IMAGE_ROM_HEADERS {
+    FileHeader: IMAGE_FILE_HEADER,
+    OptionalHeader: IMAGE_ROM_OPTIONAL_HEADER,
+}}
 pub type PIMAGE_ROM_HEADERS = *mut IMAGE_ROM_HEADERS;
 #[cfg(target_arch = "x86_64")]
 pub type IMAGE_NT_HEADERS = IMAGE_NT_HEADERS64;
@@ -1625,59 +1582,55 @@ pub const IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT: ::WORD = 11;
 pub const IMAGE_DIRECTORY_ENTRY_IAT: ::WORD = 12;
 pub const IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT: ::WORD = 13;
 pub const IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR: ::WORD = 14;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ANON_OBJECT_HEADER {
-    pub Sig1: ::WORD,
-    pub Sig2: ::WORD,
-    pub Version: ::WORD,
-    pub Machine: ::WORD,
-    pub TimeDateStamp: ::DWORD,
-    pub ClassID: ::CLSID,
-    pub SizeOfData: ::DWORD,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ANON_OBJECT_HEADER_V2 {
-    pub Sig1: ::WORD,
-    pub Sig2: ::WORD,
-    pub Version: ::WORD,
-    pub Machine: ::WORD,
-    pub TimeDateStamp: ::DWORD,
-    pub ClassID: ::CLSID,
-    pub SizeOfData: ::DWORD,
-    pub Flags: ::DWORD,
-    pub MetaDataSize: ::DWORD,
-    pub MetaDataOffset: ::DWORD,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ANON_OBJECT_HEADER_BIGOBJ {
-    pub Sig1: ::WORD,
-    pub Sig2: ::WORD,
-    pub Version: ::WORD,
-    pub Machine: ::WORD,
-    pub TimeDateStamp: ::DWORD,
-    pub ClassID: ::CLSID,
-    pub SizeOfData: ::DWORD,
-    pub Flags: ::DWORD,
-    pub MetaDataSize: ::DWORD,
-    pub MetaDataOffset: ::DWORD,
-    pub NumberOfSections: ::DWORD,
-    pub PointerToSymbolTable: ::DWORD,
-    pub NumberOfSymbols: ::DWORD,
-}
+STRUCT!{struct ANON_OBJECT_HEADER {
+    Sig1: ::WORD,
+    Sig2: ::WORD,
+    Version: ::WORD,
+    Machine: ::WORD,
+    TimeDateStamp: ::DWORD,
+    ClassID: ::CLSID,
+    SizeOfData: ::DWORD,
+}}
+STRUCT!{struct ANON_OBJECT_HEADER_V2 {
+    Sig1: ::WORD,
+    Sig2: ::WORD,
+    Version: ::WORD,
+    Machine: ::WORD,
+    TimeDateStamp: ::DWORD,
+    ClassID: ::CLSID,
+    SizeOfData: ::DWORD,
+    Flags: ::DWORD,
+    MetaDataSize: ::DWORD,
+    MetaDataOffset: ::DWORD,
+}}
+STRUCT!{struct ANON_OBJECT_HEADER_BIGOBJ {
+    Sig1: ::WORD,
+    Sig2: ::WORD,
+    Version: ::WORD,
+    Machine: ::WORD,
+    TimeDateStamp: ::DWORD,
+    ClassID: ::CLSID,
+    SizeOfData: ::DWORD,
+    Flags: ::DWORD,
+    MetaDataSize: ::DWORD,
+    MetaDataOffset: ::DWORD,
+    NumberOfSections: ::DWORD,
+    PointerToSymbolTable: ::DWORD,
+    NumberOfSymbols: ::DWORD,
+}}
 pub const IMAGE_SIZEOF_SHORT_NAME: usize = 8;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_SECTION_HEADER {
-    pub Name: [::BYTE; IMAGE_SIZEOF_SHORT_NAME],
-    pub PhysicalAddressOrVirtualSize: ::DWORD,
-    pub VirtualAddress: ::DWORD,
-    pub SizeOfRawData: ::DWORD,
-    pub PointerToRawData: ::DWORD,
-    pub PointerToRelocations: ::DWORD,
-    pub PointerToLinenumbers: ::DWORD,
-    pub NumberOfRelocations: ::WORD,
-    pub NumberOfLinenumbers: ::WORD,
-    pub Characteristics: ::DWORD,
-}
+STRUCT!{struct IMAGE_SECTION_HEADER {
+    Name: [::BYTE; IMAGE_SIZEOF_SHORT_NAME],
+    PhysicalAddressOrVirtualSize: ::DWORD,
+    VirtualAddress: ::DWORD,
+    SizeOfRawData: ::DWORD,
+    PointerToRawData: ::DWORD,
+    PointerToRelocations: ::DWORD,
+    PointerToLinenumbers: ::DWORD,
+    NumberOfRelocations: ::WORD,
+    NumberOfLinenumbers: ::WORD,
+    Characteristics: ::DWORD,
+}}
 pub type PIMAGE_SECTION_HEADER = *mut IMAGE_SECTION_HEADER;
 pub const IMAGE_SIZEOF_SECTION_HEADER: usize = 40;
 pub const IMAGE_SCN_TYPE_NO_PAD: ::DWORD = 0x00000008;
@@ -1720,17 +1673,16 @@ pub const IMAGE_SCN_MEM_READ: ::DWORD = 0x40000000;
 pub const IMAGE_SCN_MEM_WRITE: ::DWORD = 0x80000000;
 pub const IMAGE_SCN_SCALE_INDEX: ::DWORD = 0x00000001;
 //16590
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_DEBUG_DIRECTORY {
-    pub Characteristics: ::DWORD,
-    pub TimeDateStamp: ::DWORD,
-    pub MajorVersion: ::WORD,
-    pub MinorVersion: ::WORD,
-    pub Type: ::DWORD,
-    pub SizeOfData: ::DWORD,
-    pub AddressOfRawData: ::DWORD,
-    pub PointerToRawData: ::DWORD,
-}
+STRUCT!{struct IMAGE_DEBUG_DIRECTORY {
+    Characteristics: ::DWORD,
+    TimeDateStamp: ::DWORD,
+    MajorVersion: ::WORD,
+    MinorVersion: ::WORD,
+    Type: ::DWORD,
+    SizeOfData: ::DWORD,
+    AddressOfRawData: ::DWORD,
+    PointerToRawData: ::DWORD,
+}}
 pub type PIMAGE_DEBUG_DIRECTORY = *mut IMAGE_DEBUG_DIRECTORY;
 pub const IMAGE_DEBUG_TYPE_UNKNOWN: ::DWORD = 0;
 pub const IMAGE_DEBUG_TYPE_COFF: ::DWORD = 1;
@@ -1744,63 +1696,57 @@ pub const IMAGE_DEBUG_TYPE_OMAP_FROM_SRC: ::DWORD = 8;
 pub const IMAGE_DEBUG_TYPE_BORLAND: ::DWORD = 9;
 pub const IMAGE_DEBUG_TYPE_RESERVED10: ::DWORD = 10;
 pub const IMAGE_DEBUG_TYPE_CLSID: ::DWORD = 11;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_COFF_SYMBOLS_HEADER {
-    pub NumberOfSymbols: ::DWORD,
-    pub LvaToFirstSymbol: ::DWORD,
-    pub NumberOfLinenumbers: ::DWORD,
-    pub LvaToFirstLinenumber: ::DWORD,
-    pub RvaToFirstByteOfCode: ::DWORD,
-    pub RvaToLastByteOfCode: ::DWORD,
-    pub RvaToFirstByteOfData: ::DWORD,
-    pub RvaToLastByteOfData: ::DWORD,
-}
+STRUCT!{struct IMAGE_COFF_SYMBOLS_HEADER {
+    NumberOfSymbols: ::DWORD,
+    LvaToFirstSymbol: ::DWORD,
+    NumberOfLinenumbers: ::DWORD,
+    LvaToFirstLinenumber: ::DWORD,
+    RvaToFirstByteOfCode: ::DWORD,
+    RvaToLastByteOfCode: ::DWORD,
+    RvaToFirstByteOfData: ::DWORD,
+    RvaToLastByteOfData: ::DWORD,
+}}
 pub type PIMAGE_COFF_SYMBOLS_HEADER = *mut IMAGE_COFF_SYMBOLS_HEADER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_RUNTIME_FUNCTION_ENTRY {
-    pub BeginAddress: ::DWORD,
-    pub EndAddress: ::DWORD,
-    pub UnwindInfoAddress: ::DWORD,
-}
+STRUCT!{struct IMAGE_RUNTIME_FUNCTION_ENTRY {
+    BeginAddress: ::DWORD,
+    EndAddress: ::DWORD,
+    UnwindInfoAddress: ::DWORD,
+}}
 UNION!(IMAGE_RUNTIME_FUNCTION_ENTRY, UnwindInfoAddress, UnwindData, UnwindData_mut, ::DWORD);
 pub type PIMAGE_RUNTIME_FUNCTION_ENTRY = *mut IMAGE_RUNTIME_FUNCTION_ENTRY;
 pub const FRAME_FPO: ::WORD = 0;
 pub const FRAME_TRAP: ::WORD = 1;
 pub const FRAME_TSS: ::WORD = 2;
 pub const FRAME_NONFPO: ::WORD = 3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct FPO_DATA {
-    pub ulOffStart: ::DWORD,
-    pub cbProcSize: ::DWORD,
-    pub cdwLocals: ::DWORD,
-    pub cdwParams: ::WORD,
-    pub bitfield: ::WORD,
-}
+STRUCT!{struct FPO_DATA {
+    ulOffStart: ::DWORD,
+    cbProcSize: ::DWORD,
+    cdwLocals: ::DWORD,
+    cdwParams: ::WORD,
+    bitfield: ::WORD,
+}}
 pub type PFPO_DATA = *mut FPO_DATA;
 pub const SIZEOF_RFPO_DATA: usize = 16;
 pub const IMAGE_DEBUG_MISC_EXENAME: ::DWORD = 1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_DEBUG_MISC {
-    pub DataType: ::DWORD,
-    pub Length: ::DWORD,
-    pub Unicode: ::BOOLEAN,
-    pub Reserved: [::BYTE; 3],
-    pub Data: [::BYTE; 0],
-}
+STRUCT!{struct IMAGE_DEBUG_MISC {
+    DataType: ::DWORD,
+    Length: ::DWORD,
+    Unicode: ::BOOLEAN,
+    Reserved: [::BYTE; 3],
+    Data: [::BYTE; 0],
+}}
 pub type PIMAGE_DEBUG_MISC = *mut IMAGE_DEBUG_MISC;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_FUNCTION_ENTRY {
-    pub StartingAddress: ::DWORD,
-    pub EndingAddress: ::DWORD,
-    pub EndOfPrologue: ::DWORD,
-}
+STRUCT!{struct IMAGE_FUNCTION_ENTRY {
+    StartingAddress: ::DWORD,
+    EndingAddress: ::DWORD,
+    EndOfPrologue: ::DWORD,
+}}
 pub type PIMAGE_FUNCTION_ENTRY = *mut IMAGE_FUNCTION_ENTRY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMAGE_FUNCTION_ENTRY64 {
-    pub StartingAddress: ::ULONGLONG,
-    pub EndingAddress: ::ULONGLONG,
-    pub EndOfPrologueOrUnwindInfoAddress: ::ULONGLONG,
-}
+STRUCT!{struct IMAGE_FUNCTION_ENTRY64 {
+    StartingAddress: ::ULONGLONG,
+    EndingAddress: ::ULONGLONG,
+    EndOfPrologueOrUnwindInfoAddress: ::ULONGLONG,
+}}
 pub type PIMAGE_FUNCTION_ENTRY64 = *mut IMAGE_FUNCTION_ENTRY64;
 //18245
 pub const HEAP_NO_SERIALIZE: ::DWORD = 0x00000001;
@@ -1818,18 +1764,17 @@ pub const HEAP_MAXIMUM_TAG: ::DWORD = 0x0FFF;
 pub const HEAP_PSEUDO_TAG_FLAG: ::DWORD = 0x8000;
 pub const HEAP_TAG_SHIFT: ::DWORD = 18;
 //18145
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RTL_CRITICAL_SECTION_DEBUG {
-    pub Type: ::WORD,
-    pub CreatorBackTraceIndex: ::WORD,
-    pub CriticalSection: *mut ::RTL_CRITICAL_SECTION,
-    pub ProcessLocksList: ::LIST_ENTRY,
-    pub EntryCount: ::DWORD,
-    pub ContentionCount: ::DWORD,
-    pub Flags: ::DWORD,
-    pub CreatorBackTraceIndexHigh: ::WORD,
-    pub SpareWORD: ::WORD,
-}
+STRUCT!{struct RTL_CRITICAL_SECTION_DEBUG {
+    Type: ::WORD,
+    CreatorBackTraceIndex: ::WORD,
+    CriticalSection: *mut ::RTL_CRITICAL_SECTION,
+    ProcessLocksList: ::LIST_ENTRY,
+    EntryCount: ::DWORD,
+    ContentionCount: ::DWORD,
+    Flags: ::DWORD,
+    CreatorBackTraceIndexHigh: ::WORD,
+    SpareWORD: ::WORD,
+}}
 pub type PRTL_CRITICAL_SECTION_DEBUG = *mut RTL_CRITICAL_SECTION_DEBUG;
 pub type RTL_RESOURCE_DEBUG = RTL_CRITICAL_SECTION_DEBUG;
 pub type PRTL_RESOURCE_DEBUG = *mut RTL_CRITICAL_SECTION_DEBUG;
@@ -1843,26 +1788,23 @@ pub const RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO: ::ULONG_PTR = 0x10000000;
 pub const RTL_CRITICAL_SECTION_ALL_FLAG_BITS: ::ULONG_PTR = 0xFF000000;
 pub const RTL_CRITICAL_SECTION_FLAG_RESERVED: ::ULONG_PTR = RTL_CRITICAL_SECTION_ALL_FLAG_BITS & !(RTL_CRITICAL_SECTION_FLAG_NO_DEBUG_INFO | RTL_CRITICAL_SECTION_FLAG_DYNAMIC_SPIN | RTL_CRITICAL_SECTION_FLAG_STATIC_INIT | RTL_CRITICAL_SECTION_FLAG_RESOURCE_TYPE | RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO);
 pub const RTL_CRITICAL_SECTION_DEBUG_FLAG_STATIC_INIT: ::DWORD = 0x00000001;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RTL_CRITICAL_SECTION {
-    pub DebugInfo: ::PRTL_CRITICAL_SECTION_DEBUG,
-    pub LockCount: ::LONG,
-    pub RecursionCount: ::LONG,
-    pub OwningThread: ::HANDLE,
-    pub LockSemaphore: ::HANDLE,
-    pub SpinCount: ::ULONG_PTR,
-}
+STRUCT!{struct RTL_CRITICAL_SECTION {
+    DebugInfo: ::PRTL_CRITICAL_SECTION_DEBUG,
+    LockCount: ::LONG,
+    RecursionCount: ::LONG,
+    OwningThread: ::HANDLE,
+    LockSemaphore: ::HANDLE,
+    SpinCount: ::ULONG_PTR,
+}}
 pub type PRTL_CRITICAL_SECTION = *mut RTL_CRITICAL_SECTION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RTL_SRWLOCK {
-    pub Ptr: ::PVOID,
-}
+STRUCT!{struct RTL_SRWLOCK {
+    Ptr: ::PVOID,
+}}
 pub type PRTL_SRWLOCK = *mut RTL_SRWLOCK;
 pub const RTL_SRWLOCK_INIT: RTL_SRWLOCK = RTL_SRWLOCK { Ptr: 0 as PVOID };
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RTL_CONDITION_VARIABLE {
-    pub Ptr: ::PVOID,
-}
+STRUCT!{struct RTL_CONDITION_VARIABLE {
+    Ptr: ::PVOID,
+}}
 pub type PRTL_CONDITION_VARIABLE = *mut RTL_CONDITION_VARIABLE;
 pub const RTL_CONDITION_VARIABLE_INIT: RTL_CONDITION_VARIABLE = RTL_CONDITION_VARIABLE {
     Ptr: 0 as PVOID
@@ -1879,11 +1821,10 @@ ENUM!{enum HEAP_INFORMATION_CLASS {
 }}
 //pub use self::HEAP_INFORMATION_CLASS::*;
 pub const HEAP_OPTIMIZE_RESOURCES_CURRENT_VERSION: ::DWORD = 1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HEAP_OPTIMIZE_RESOURCES_INFORMATION {
+STRUCT!{struct HEAP_OPTIMIZE_RESOURCES_INFORMATION {
     Version: ::DWORD,
     Flags: ::DWORD,
-}
+}}
 pub type PHEAP_OPTIMIZE_RESOURCES_INFORMATION = *mut HEAP_OPTIMIZE_RESOURCES_INFORMATION;
 pub const WT_EXECUTEDEFAULT: ::ULONG = 0x00000000;
 pub const WT_EXECUTEINIOTHREAD: ::ULONG = 0x00000001;
@@ -1976,45 +1917,37 @@ pub const SERVICE_WIN32: ::DWORD = SERVICE_WIN32_OWN_PROCESS | SERVICE_WIN32_SHA
 pub const SERVICE_INTERACTIVE_PROCESS: ::DWORD = 0x00000100;
 pub const SERVICE_TYPE_ALL: ::DWORD = SERVICE_WIN32 | SERVICE_ADAPTER | SERVICE_DRIVER
     | SERVICE_INTERACTIVE_PROCESS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TP_CALLBACK_INSTANCE {
+STRUCT!{struct TP_CALLBACK_INSTANCE {
     dummy: *mut ::c_void,
-}
+}}
 pub type PTP_CALLBACK_INSTANCE = *mut TP_CALLBACK_INSTANCE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TP_IO {
+STRUCT!{struct TP_IO {
     dummy: *mut ::c_void,
-}
+}}
 pub type PTP_IO = *mut TP_IO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TP_POOL {
+STRUCT!{struct TP_POOL {
     dummy: *mut ::c_void,
-}
+}}
 pub type PTP_POOL = *mut TP_POOL;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TP_CLEANUP_GROUP {
+STRUCT!{struct TP_CLEANUP_GROUP {
     dummy: *mut ::c_void,
-}
+}}
 pub type PTP_CLEANUP_GROUP = *mut TP_CLEANUP_GROUP;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TP_TIMER {
+STRUCT!{struct TP_TIMER {
     dummy: *mut ::c_void,
-}
+}}
 pub type PTP_TIMER = *mut TP_TIMER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TP_WAIT {
+STRUCT!{struct TP_WAIT {
     dummy: *mut ::c_void,
-}
+}}
 pub type PTP_WAIT = *mut TP_WAIT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TP_WORK {
+STRUCT!{struct TP_WORK {
     dummy: *mut ::c_void,
-}
+}}
 pub type PTP_WORK = *mut TP_WORK;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ACTIVATION_CONTEXT {
+STRUCT!{struct ACTIVATION_CONTEXT {
     dummy: *mut ::c_void,
-}
+}}
 ENUM!{enum TP_CALLBACK_PRIORITY {
     TP_CALLBACK_PRIORITY_HIGH,
     TP_CALLBACK_PRIORITY_NORMAL,
@@ -2040,16 +1973,14 @@ pub type PTP_WAIT_CALLBACK = Option<unsafe extern "system" fn(
 )>;
 pub type TP_VERSION = ::DWORD;
 pub type PTP_VERSION = *mut ::DWORD;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TP_POOL_STACK_INFORMATION {
-    pub StackReserve: ::SIZE_T,
-    pub StackCommit: ::SIZE_T,
-}
+STRUCT!{struct TP_POOL_STACK_INFORMATION {
+    StackReserve: ::SIZE_T,
+    StackCommit: ::SIZE_T,
+}}
 pub type PTP_POOL_STACK_INFORMATION = *mut TP_POOL_STACK_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TP_CALLBACK_ENVIRON_V3_s {
-    pub BitFields: ::DWORD,
-}
+STRUCT!{struct TP_CALLBACK_ENVIRON_V3_s {
+    BitFields: ::DWORD,
+}}
 BITFIELD!(TP_CALLBACK_ENVIRON_V3_s BitFields: ::DWORD [
     LongFunction set_LongFunction[0..1],
     Persistent set_Persistent[1..2],
@@ -2073,26 +2004,23 @@ UNION!(TP_CALLBACK_ENVIRON_V3, u, Flags, Flags_mut, ::DWORD);
 UNION!(TP_CALLBACK_ENVIRON_V3, u, s, s_mut, TP_CALLBACK_ENVIRON_V3_s);
 pub type TP_CALLBACK_ENVIRON = TP_CALLBACK_ENVIRON_V3;
 pub type PTP_CALLBACK_ENVIRON = *mut TP_CALLBACK_ENVIRON_V3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct JOB_SET_ARRAY {
-    pub JobHandle: ::HANDLE,
-    pub MemberLevel: ::DWORD,
-    pub Flags: ::DWORD,
-}
+STRUCT!{struct JOB_SET_ARRAY {
+    JobHandle: ::HANDLE,
+    MemberLevel: ::DWORD,
+    Flags: ::DWORD,
+}}
 pub type PJOB_SET_ARRAY = *mut JOB_SET_ARRAY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RTL_BARRIER {
-    pub Reserved1: ::DWORD,
-    pub Reserved2: ::DWORD,
-    pub Reserved3: [::ULONG_PTR; 2],
-    pub Reserved4: ::DWORD,
-    pub Reserved5: ::DWORD,
-}
+STRUCT!{struct RTL_BARRIER {
+    Reserved1: ::DWORD,
+    Reserved2: ::DWORD,
+    Reserved3: [::ULONG_PTR; 2],
+    Reserved4: ::DWORD,
+    Reserved5: ::DWORD,
+}}
 pub type PRTL_BARRIER = *mut RTL_BARRIER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RTL_RUN_ONCE {
-    pub Ptr: ::PVOID,
-}
+STRUCT!{struct RTL_RUN_ONCE {
+    Ptr: ::PVOID,
+}}
 pub type PRTL_RUN_ONCE = *mut RTL_RUN_ONCE;
 ENUM!{enum RTL_UMS_THREAD_INFO_CLASS {
     UmsThreadInvalidInfoClass = 0,
@@ -2133,29 +2061,25 @@ ENUM!{enum PROCESSOR_CACHE_TYPE {
     CacheData,
     CacheTrace,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CACHE_DESCRIPTOR {
-    pub Level: ::BYTE,
-    pub Associativity: ::BYTE,
-    pub LineSize: ::WORD,
-    pub Size: ::DWORD,
-    pub Type: PROCESSOR_CACHE_TYPE,
-}
+STRUCT!{struct CACHE_DESCRIPTOR {
+    Level: ::BYTE,
+    Associativity: ::BYTE,
+    LineSize: ::WORD,
+    Size: ::DWORD,
+    Type: PROCESSOR_CACHE_TYPE,
+}}
 pub type PCACHE_DESCRIPTOR = *mut CACHE_DESCRIPTOR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_ProcessorCore {
-    pub Flags: ::BYTE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_NumaNode {
-    pub NodeNumber: ::DWORD,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION {
-    pub ProcessorMask: ::ULONG_PTR,
-    pub Relationship: LOGICAL_PROCESSOR_RELATIONSHIP,
-    pub Reserved: [::ULONGLONG; 2],
-}
+STRUCT!{struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_ProcessorCore {
+    Flags: ::BYTE,
+}}
+STRUCT!{struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_NumaNode {
+    NodeNumber: ::DWORD,
+}}
+STRUCT!{struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION {
+    ProcessorMask: ::ULONG_PTR,
+    Relationship: LOGICAL_PROCESSOR_RELATIONSHIP,
+    Reserved: [::ULONGLONG; 2],
+}}
 UNION!(
     SYSTEM_LOGICAL_PROCESSOR_INFORMATION, Reserved, ProcessorCore, ProcessorCore_mut,
     SYSTEM_LOGICAL_PROCESSOR_INFORMATION_ProcessorCore
@@ -2166,10 +2090,9 @@ UNION!(
 );
 UNION!(SYSTEM_LOGICAL_PROCESSOR_INFORMATION, Reserved, Cache, Cache_mut, CACHE_DESCRIPTOR);
 pub type PSYSTEM_LOGICAL_PROCESSOR_INFORMATION = *mut SYSTEM_LOGICAL_PROCESSOR_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION {
-    pub CycleTime: ::DWORD64,
-}
+STRUCT!{struct SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION {
+    CycleTime: ::DWORD64,
+}}
 pub type PSYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION = *mut SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION;
 ENUM!{enum HARDWARE_COUNTER_TYPE {
     PMCCounter,
@@ -2246,16 +2169,14 @@ pub struct OSVERSIONINFOEXW {
 impl Clone for OSVERSIONINFOEXW { fn clone(&self) -> OSVERSIONINFOEXW { *self } }
 pub type POSVERSIONINFOEXW = *mut OSVERSIONINFOEXW;
 pub type LPOSVERSIONINFOEXW = *mut OSVERSIONINFOEXW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SLIST_ENTRY {
-    pub Next: *mut SLIST_ENTRY,
-}
+STRUCT!{struct SLIST_ENTRY {
+    Next: *mut SLIST_ENTRY,
+}}
 pub type PSLIST_ENTRY = *mut SLIST_ENTRY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SLIST_HEADER_HeaderX64 {
-    pub BitFields1: ::ULONGLONG,
-    pub BitFields2: ::ULONGLONG,
-}
+STRUCT!{struct SLIST_HEADER_HeaderX64 {
+    BitFields1: ::ULONGLONG,
+    BitFields2: ::ULONGLONG,
+}}
 BITFIELD!(SLIST_HEADER_HeaderX64 BitFields1: ::ULONGLONG [
     Depth set_Depth[0..16],
     Sequence set_Sequence[16..64],
@@ -2264,11 +2185,10 @@ BITFIELD!(SLIST_HEADER_HeaderX64 BitFields2: ::ULONGLONG [
     Reserved set_Reserved[0..4],
     NextEntry set_NextEntry[4..64],
 ]);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SLIST_HEADER {
-    pub Alignment: ::ULONGLONG,
-    pub Region: ::ULONGLONG,
-}
+STRUCT!{struct SLIST_HEADER {
+    Alignment: ::ULONGLONG,
+    Region: ::ULONGLONG,
+}}
 UNION!(SLIST_HEADER, Alignment, HeaderX64, HeaderX64_mut, SLIST_HEADER_HeaderX64);
 pub type PSLIST_HEADER = *mut SLIST_HEADER;
 ENUM!{enum SYSTEM_POWER_STATE {
@@ -2330,60 +2250,55 @@ ENUM!{enum POWER_REQUEST_TYPE {
 }}
 pub type PPOWER_REQUEST_TYPE = *mut POWER_REQUEST_TYPE;
 pub const MAX_HW_COUNTERS: usize = 16;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HARDWARE_COUNTER_DATA {
-    pub Type: HARDWARE_COUNTER_TYPE,
-    pub Reserved: ::DWORD,
-    pub Value: ::DWORD64,
-}
+STRUCT!{struct HARDWARE_COUNTER_DATA {
+    Type: HARDWARE_COUNTER_TYPE,
+    Reserved: ::DWORD,
+    Value: ::DWORD64,
+}}
 pub type PHARDWARE_COUNTER_DATA = *mut HARDWARE_COUNTER_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PERFORMANCE_DATA {
-    pub Size: ::WORD,
-    pub Version: ::BYTE,
-    pub HwCountersCount: ::BYTE,
-    pub ContextSwitchCount: ::DWORD,
-    pub WaitReasonBitMap: ::DWORD64,
-    pub CycleTime: ::DWORD64,
-    pub RetryCount: ::DWORD,
-    pub Reserved: ::DWORD,
-    pub HwCounters: [HARDWARE_COUNTER_DATA; MAX_HW_COUNTERS],
-}
+STRUCT!{struct PERFORMANCE_DATA {
+    Size: ::WORD,
+    Version: ::BYTE,
+    HwCountersCount: ::BYTE,
+    ContextSwitchCount: ::DWORD,
+    WaitReasonBitMap: ::DWORD64,
+    CycleTime: ::DWORD64,
+    RetryCount: ::DWORD,
+    Reserved: ::DWORD,
+    HwCounters: [HARDWARE_COUNTER_DATA; MAX_HW_COUNTERS],
+}}
 pub type PPERFORMANCE_DATA = *mut PERFORMANCE_DATA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MEMORY_BASIC_INFORMATION {
-    pub BaseAddress: ::PVOID,
-    pub AllocationBase: ::PVOID,
-    pub AllocationProtect: ::DWORD,
-    pub RegionSize: ::SIZE_T,
-    pub State: ::DWORD,
-    pub Protect: ::DWORD,
-    pub Type: ::DWORD,
-}
+STRUCT!{struct MEMORY_BASIC_INFORMATION {
+    BaseAddress: ::PVOID,
+    AllocationBase: ::PVOID,
+    AllocationProtect: ::DWORD,
+    RegionSize: ::SIZE_T,
+    State: ::DWORD,
+    Protect: ::DWORD,
+    Type: ::DWORD,
+}}
 pub type PMEMORY_BASIC_INFORMATION = *mut MEMORY_BASIC_INFORMATION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MEMORY_BASIC_INFORMATION32 {
-    pub BaseAddress: ::DWORD,
-    pub AllocationBase: ::DWORD,
-    pub AllocationProtect: ::DWORD,
-    pub RegionSize: ::DWORD,
-    pub State: ::DWORD,
-    pub Protect: ::DWORD,
-    pub Type: ::DWORD,
-}
+STRUCT!{struct MEMORY_BASIC_INFORMATION32 {
+    BaseAddress: ::DWORD,
+    AllocationBase: ::DWORD,
+    AllocationProtect: ::DWORD,
+    RegionSize: ::DWORD,
+    State: ::DWORD,
+    Protect: ::DWORD,
+    Type: ::DWORD,
+}}
 pub type PMEMORY_BASIC_INFORMATION32 = *mut MEMORY_BASIC_INFORMATION32;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct MEMORY_BASIC_INFORMATION64 { // FIXME: align 16
-    pub BaseAddress: ::ULONGLONG,
-    pub AllocationBase: ::ULONGLONG,
-    pub AllocationProtect: ::DWORD,
-    pub __alignment1: ::DWORD,
-    pub RegionSize: ::ULONGLONG,
-    pub State: ::DWORD,
-    pub Protect: ::DWORD,
-    pub Type: ::DWORD,
-    pub __alignment2: ::DWORD,
-}
+STRUCT!{struct MEMORY_BASIC_INFORMATION64 { // FIXME: align 16
+    BaseAddress: ::ULONGLONG,
+    AllocationBase: ::ULONGLONG,
+    AllocationProtect: ::DWORD,
+    __alignment1: ::DWORD,
+    RegionSize: ::ULONGLONG,
+    State: ::DWORD,
+    Protect: ::DWORD,
+    Type: ::DWORD,
+    __alignment2: ::DWORD,
+}}
 pub type PMEMORY_BASIC_INFORMATION64 = *mut MEMORY_BASIC_INFORMATION64;
 pub const WOW64_SIZE_OF_80387_REGISTERS: usize = 80;
 pub const WOW64_MAXIMUM_SUPPORTED_EXTENSION: usize = 512;
@@ -2433,17 +2348,15 @@ pub struct WOW64_CONTEXT {
 }
 impl Clone for WOW64_CONTEXT { fn clone(&self) -> WOW64_CONTEXT { *self } }
 pub type PWOW64_CONTEXT = *mut WOW64_CONTEXT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WOW64_LDT_ENTRY_Bytes {
-    pub BaseMid: ::BYTE,
-    pub Flags1: ::BYTE,
-    pub Flags2: ::BYTE,
-    pub BaseHi: ::BYTE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WOW64_LDT_ENTRY_Bits {
-    pub BitFields: ::DWORD,
-}
+STRUCT!{struct WOW64_LDT_ENTRY_Bytes {
+    BaseMid: ::BYTE,
+    Flags1: ::BYTE,
+    Flags2: ::BYTE,
+    BaseHi: ::BYTE,
+}}
+STRUCT!{struct WOW64_LDT_ENTRY_Bits {
+    BitFields: ::DWORD,
+}}
 BITFIELD!(WOW64_LDT_ENTRY_Bits BitFields: ::DWORD [
     BaseMid set_BaseMid[0..8],
     Type set_Type[8..13],
@@ -2456,12 +2369,11 @@ BITFIELD!(WOW64_LDT_ENTRY_Bits BitFields: ::DWORD [
     Granularity set_Granularity[23..24],
     BaseHi set_BaseHi[24..32],
 ]);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WOW64_LDT_ENTRY {
-    pub LimitLow: ::WORD,
-    pub BaseLow: ::WORD,
-    pub HighWord: ::DWORD,
-}
+STRUCT!{struct WOW64_LDT_ENTRY {
+    LimitLow: ::WORD,
+    BaseLow: ::WORD,
+    HighWord: ::DWORD,
+}}
 UNION!(WOW64_LDT_ENTRY, HighWord, Bytes, Bytes_mut, WOW64_LDT_ENTRY_Bytes);
 UNION!(WOW64_LDT_ENTRY, HighWord, Bits, Bits_mut, WOW64_LDT_ENTRY_Bits);
 pub type PWOW64_LDT_ENTRY = *mut WOW64_LDT_ENTRY;

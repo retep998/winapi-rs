@@ -373,42 +373,38 @@ pub const szPRIV_KEY_CACHE_PURGE_INTERVAL_SECONDS: &'static str =
     "PrivKeyCachePurgeIntervalSeconds";
 pub const cPRIV_KEY_CACHE_PURGE_INTERVAL_SECONDS_DEFAULT: ::DWORD = 86400;
 pub const CUR_BLOB_VERSION: ::DWORD = 2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CMS_KEY_INFO {
-    pub dwVersion: ::DWORD,
-    pub Algid: ALG_ID,
-    pub pbOID: *mut ::BYTE,
-    pub cbOID: ::DWORD,
-}
+STRUCT!{struct CMS_KEY_INFO {
+    dwVersion: ::DWORD,
+    Algid: ALG_ID,
+    pbOID: *mut ::BYTE,
+    cbOID: ::DWORD,
+}}
 pub type PCMS_KEY_INFO = *mut CMS_KEY_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct HMAC_INFO {
-    pub HashAlgid: ALG_ID,
-    pub pbInnerString: *mut ::BYTE,
-    pub cbInnerString: ::DWORD,
-    pub pbOuterString: *mut ::BYTE,
-    pub cbOuterString: ::DWORD,
-}
+STRUCT!{struct HMAC_INFO {
+    HashAlgid: ALG_ID,
+    pbInnerString: *mut ::BYTE,
+    cbInnerString: ::DWORD,
+    pbOuterString: *mut ::BYTE,
+    cbOuterString: ::DWORD,
+}}
 pub type PHMAC_INFO = *mut HMAC_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SCHANNEL_ALG {
-    pub dwUse: ::DWORD,
-    pub Algid: ALG_ID,
-    pub cBits: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub dwReserved: ::DWORD,
-}
+STRUCT!{struct SCHANNEL_ALG {
+    dwUse: ::DWORD,
+    Algid: ALG_ID,
+    cBits: ::DWORD,
+    dwFlags: ::DWORD,
+    dwReserved: ::DWORD,
+}}
 pub type PSCHANNEL_ALG = *mut SCHANNEL_ALG;
 pub const SCHANNEL_MAC_KEY: ::DWORD = 0x00000000;
 pub const SCHANNEL_ENC_KEY: ::DWORD = 0x00000001;
 pub const INTERNATIONAL_USAGE: ::DWORD = 0x00000001;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct PROV_ENUMALGS {
-    pub aiAlgid: ALG_ID,
-    pub dwBitLen: ::DWORD,
-    pub dwNameLen: ::DWORD,
-    pub szName: [::CHAR; 20],
-}
+STRUCT!{struct PROV_ENUMALGS {
+    aiAlgid: ALG_ID,
+    dwBitLen: ::DWORD,
+    dwNameLen: ::DWORD,
+    szName: [::CHAR; 20],
+}}
 #[repr(C)] #[derive(Copy)]
 pub struct PROV_ENUMALGS_EX {
     pub aiAlgid: ALG_ID,
@@ -422,58 +418,51 @@ pub struct PROV_ENUMALGS_EX {
     pub szLongName: [::CHAR; 40],
 }
 impl Clone for PROV_ENUMALGS_EX { fn clone(&self) -> PROV_ENUMALGS_EX { *self } }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct BLOBHEADER {
-    pub bType: ::BYTE,
-    pub bVersion: ::BYTE,
-    pub reserved: ::WORD,
-    pub aiKeyAlg: ::ALG_ID,
-}
+STRUCT!{struct BLOBHEADER {
+    bType: ::BYTE,
+    bVersion: ::BYTE,
+    reserved: ::WORD,
+    aiKeyAlg: ::ALG_ID,
+}}
 pub type PUBLICKEYSTRUC = BLOBHEADER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct RSAPUBKEY {
-    pub magic: ::DWORD,
-    pub bitlen: ::DWORD,
-    pub pubexp: ::DWORD,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DHPUBKEY {
-    pub magic: ::DWORD,
-    pub bitlen: ::DWORD,
-}
+STRUCT!{struct RSAPUBKEY {
+    magic: ::DWORD,
+    bitlen: ::DWORD,
+    pubexp: ::DWORD,
+}}
+STRUCT!{struct DHPUBKEY {
+    magic: ::DWORD,
+    bitlen: ::DWORD,
+}}
 pub type DSSPUBKEY = DHPUBKEY;
 pub type KEAPUBKEY = DHPUBKEY;
 pub type TEKPUBKEY = DHPUBKEY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DSSSEED {
-    pub counter: ::DWORD,
-    pub seed: [::BYTE; 20],
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DHPUBKEY_VER3 {
-    pub magic: ::DWORD,
-    pub bitlenP: ::DWORD,
-    pub bitlenQ: ::DWORD,
-    pub bitlenJ: ::DWORD,
-    pub DSSSeed: DSSSEED,
-}
+STRUCT!{struct DSSSEED {
+    counter: ::DWORD,
+    seed: [::BYTE; 20],
+}}
+STRUCT!{struct DHPUBKEY_VER3 {
+    magic: ::DWORD,
+    bitlenP: ::DWORD,
+    bitlenQ: ::DWORD,
+    bitlenJ: ::DWORD,
+    DSSSeed: DSSSEED,
+}}
 pub type DSSPUBKEY_VER3 = DHPUBKEY_VER3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DHPRIVKEY_VER3 {
-    pub magic: ::DWORD,
-    pub bitlenP: ::DWORD,
-    pub bitlenQ: ::DWORD,
-    pub bitlenJ: ::DWORD,
-    pub bitlenX: ::DWORD,
-    pub DSSSeed: DSSSEED,
-}
+STRUCT!{struct DHPRIVKEY_VER3 {
+    magic: ::DWORD,
+    bitlenP: ::DWORD,
+    bitlenQ: ::DWORD,
+    bitlenJ: ::DWORD,
+    bitlenX: ::DWORD,
+    DSSSeed: DSSSEED,
+}}
 pub type DSSPRIVKEY_VER3 = DHPRIVKEY_VER3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct KEY_TYPE_SUBTYPE {
-    pub dwKeySpec: ::DWORD,
-    pub Type: ::GUID,
-    pub Subtype: ::GUID,
-}
+STRUCT!{struct KEY_TYPE_SUBTYPE {
+    dwKeySpec: ::DWORD,
+    Type: ::GUID,
+    Subtype: ::GUID,
+}}
 pub type PKEY_TYPE_SUBTYPE = *mut KEY_TYPE_SUBTYPE;
 #[repr(C)] #[derive(Copy)]
 pub struct CERT_FORTEZZA_DATA_PROP {
@@ -491,43 +480,38 @@ pub struct CRYPT_RC4_KEY_STATE {
 }
 impl Clone for CRYPT_RC4_KEY_STATE { fn clone(&self) -> CRYPT_RC4_KEY_STATE { *self } }
 pub type PCRYPT_RC4_KEY_STATE = *mut CRYPT_RC4_KEY_STATE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_DES_KEY_STATE {
-    pub Key: [::c_uchar; 8],
-    pub IV: [::c_uchar; 8],
-    pub Feedback: [::c_uchar; 8],
-}
+STRUCT!{struct CRYPT_DES_KEY_STATE {
+    Key: [::c_uchar; 8],
+    IV: [::c_uchar; 8],
+    Feedback: [::c_uchar; 8],
+}}
 pub type PCRYPT_DES_KEY_STATE = *mut CRYPT_DES_KEY_STATE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_3DES_KEY_STATE {
-    pub Key: [::c_uchar; 24],
-    pub IV: [::c_uchar; 8],
-    pub Feedback: [::c_uchar; 8],
-}
+STRUCT!{struct CRYPT_3DES_KEY_STATE {
+    Key: [::c_uchar; 24],
+    IV: [::c_uchar; 8],
+    Feedback: [::c_uchar; 8],
+}}
 pub type PCRYPT_3DES_KEY_STATE = *mut CRYPT_3DES_KEY_STATE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_AES_128_KEY_STATE {
-    pub Key: [::c_uchar; 16],
-    pub IV: [::c_uchar; 16],
-    pub EncryptionState: [[::c_uchar; 16]; 11],
-    pub DecryptionState: [[::c_uchar; 16]; 11],
-    pub Feedback: [::c_uchar; 16],
-}
+STRUCT!{struct CRYPT_AES_128_KEY_STATE {
+    Key: [::c_uchar; 16],
+    IV: [::c_uchar; 16],
+    EncryptionState: [[::c_uchar; 16]; 11],
+    DecryptionState: [[::c_uchar; 16]; 11],
+    Feedback: [::c_uchar; 16],
+}}
 pub type PCRYPT_AES_128_KEY_STATE = *mut CRYPT_AES_128_KEY_STATE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_AES_256_KEY_STATE {
-    pub Key: [::c_uchar; 32],
-    pub IV: [::c_uchar; 16],
-    pub EncryptionState: [[::c_uchar; 16]; 15],
-    pub DecryptionState: [[::c_uchar; 16]; 15],
-    pub Feedback: [::c_uchar; 16],
-}
+STRUCT!{struct CRYPT_AES_256_KEY_STATE {
+    Key: [::c_uchar; 32],
+    IV: [::c_uchar; 16],
+    EncryptionState: [[::c_uchar; 16]; 15],
+    DecryptionState: [[::c_uchar; 16]; 15],
+    Feedback: [::c_uchar; 16],
+}}
 pub type PCRYPT_AES_256_KEY_STATE = *mut CRYPT_AES_256_KEY_STATE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPTOAPI_BLOB {
-    pub cbData: ::DWORD,
-    pub pbData: *mut ::BYTE,
-}
+STRUCT!{struct CRYPTOAPI_BLOB {
+    cbData: ::DWORD,
+    pbData: *mut ::BYTE,
+}}
 pub type CRYPT_INTEGER_BLOB = CRYPTOAPI_BLOB;
 pub type PCRYPT_INTEGER_BLOB = *mut CRYPTOAPI_BLOB;
 pub type CRYPT_UINT_BLOB = CRYPTOAPI_BLOB;
@@ -554,29 +538,26 @@ pub type CRYPT_DER_BLOB = CRYPTOAPI_BLOB;
 pub type PCRYPT_DER_BLOB = *mut CRYPTOAPI_BLOB;
 pub type CRYPT_ATTR_BLOB = CRYPTOAPI_BLOB;
 pub type PCRYPT_ATTR_BLOB = *mut CRYPTOAPI_BLOB;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CMS_DH_KEY_INFO {
-    pub dwVersion: ::DWORD,
-    pub Algid: ALG_ID,
-    pub pszContentEncObjId: ::LPSTR,
-    pub PubInfo: CRYPT_DATA_BLOB,
-    pub pReserved: *mut ::c_void,
-}
+STRUCT!{struct CMS_DH_KEY_INFO {
+    dwVersion: ::DWORD,
+    Algid: ALG_ID,
+    pszContentEncObjId: ::LPSTR,
+    PubInfo: CRYPT_DATA_BLOB,
+    pReserved: *mut ::c_void,
+}}
 pub type PCMS_DH_KEY_INFO = *mut CMS_DH_KEY_INFO;
 pub type HCRYPTPROV_OR_NCRYPT_KEY_HANDLE = ::ULONG_PTR;
 pub type HCRYPTPROV_LEGACY = ::ULONG_PTR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_BIT_BLOB {
-    pub cbData: ::DWORD,
-    pub pbData: *mut ::BYTE,
-    pub cUnusedBits: ::DWORD,
-}
+STRUCT!{struct CRYPT_BIT_BLOB {
+    cbData: ::DWORD,
+    pbData: *mut ::BYTE,
+    cUnusedBits: ::DWORD,
+}}
 pub type PCRYPT_BIT_BLOB = *mut CRYPT_BIT_BLOB;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_ALGORITHM_IDENTIFIER {
-    pub pszObjId: ::LPSTR,
-    pub Parameters: CRYPT_OBJID_BLOB,
-}
+STRUCT!{struct CRYPT_ALGORITHM_IDENTIFIER {
+    pszObjId: ::LPSTR,
+    Parameters: CRYPT_OBJID_BLOB,
+}}
 pub type PCRYPT_ALGORITHM_IDENTIFIER = *mut CRYPT_ALGORITHM_IDENTIFIER;
 pub const szOID_RSA: &'static str = "1.2.840.113549";
 pub const szOID_PKCS: &'static str = "1.2.840.113549.1";
@@ -728,51 +709,44 @@ pub const szOID_INFOSEC_mosaicUpdatedInteg: &'static str = "2.16.840.1.101.2.1.1
 pub const szOID_NIST_sha256: &'static str = "2.16.840.1.101.3.4.2.1";
 pub const szOID_NIST_sha384: &'static str = "2.16.840.1.101.3.4.2.2";
 pub const szOID_NIST_sha512: &'static str = "2.16.840.1.101.3.4.2.3";
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_OBJID_TABLE {
-    pub dwAlgId: ::DWORD,
-    pub pszObjId: ::LPCSTR,
-}
+STRUCT!{struct CRYPT_OBJID_TABLE {
+    dwAlgId: ::DWORD,
+    pszObjId: ::LPCSTR,
+}}
 pub type PCRYPT_OBJID_TABLE = *mut CRYPT_OBJID_TABLE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_HASH_INFO {
-    pub HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
-    pub Hash: CRYPT_HASH_BLOB,
-}
+STRUCT!{struct CRYPT_HASH_INFO {
+    HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    Hash: CRYPT_HASH_BLOB,
+}}
 pub type PCRYPT_HASH_INFO = *mut CRYPT_HASH_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_EXTENSION {
-    pub pszObjId: ::LPSTR,
-    pub fCritical: ::BOOL,
-    pub Value: CRYPT_OBJID_BLOB,
-}
+STRUCT!{struct CERT_EXTENSION {
+    pszObjId: ::LPSTR,
+    fCritical: ::BOOL,
+    Value: CRYPT_OBJID_BLOB,
+}}
 pub type PCERT_EXTENSION = *mut CERT_EXTENSION;
 pub type PCCERT_EXTENSION = *const CERT_EXTENSION;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_ATTRIBUTE_TYPE_VALUE {
-    pub pszObjId: ::LPSTR,
-    pub Value: CRYPT_OBJID_BLOB,
-}
+STRUCT!{struct CRYPT_ATTRIBUTE_TYPE_VALUE {
+    pszObjId: ::LPSTR,
+    Value: CRYPT_OBJID_BLOB,
+}}
 pub type PCRYPT_ATTRIBUTE_TYPE_VALUE = *mut CRYPT_ATTRIBUTE_TYPE_VALUE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_ATTRIBUTE {
-    pub pszObjId: ::LPSTR,
-    pub cValue: ::DWORD,
-    pub rgValue: PCRYPT_ATTR_BLOB,
-}
+STRUCT!{struct CRYPT_ATTRIBUTE {
+    pszObjId: ::LPSTR,
+    cValue: ::DWORD,
+    rgValue: PCRYPT_ATTR_BLOB,
+}}
 pub type PCRYPT_ATTRIBUTE = *mut CRYPT_ATTRIBUTE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_ATTRIBUTES {
-    pub cAttr: ::DWORD,
-    pub rgAttr: PCRYPT_ATTRIBUTE,
-}
+STRUCT!{struct CRYPT_ATTRIBUTES {
+    cAttr: ::DWORD,
+    rgAttr: PCRYPT_ATTRIBUTE,
+}}
 pub type PCRYPT_ATTRIBUTES = *mut CRYPT_ATTRIBUTES;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_RDN_ATTR {
-    pub pszObjId: ::LPSTR,
-    pub dwValueType: ::DWORD,
-    pub Value: CERT_RDN_VALUE_BLOB,
-}
+STRUCT!{struct CERT_RDN_ATTR {
+    pszObjId: ::LPSTR,
+    dwValueType: ::DWORD,
+    Value: CERT_RDN_VALUE_BLOB,
+}}
 pub type PCERT_RDN_ATTR = *mut CERT_RDN_ATTR;
 pub const szOID_COMMON_NAME: &'static str = "2.5.4.3";
 pub const szOID_SUR_NAME: &'static str = "2.5.4.4";
@@ -853,55 +827,48 @@ pub const CERT_RDN_FORCE_UTF8_UNICODE_FLAG: ::DWORD = 0x10000000;
 pub const CERT_RDN_DISABLE_CHECK_TYPE_FLAG: ::DWORD = 0x40000000;
 pub const CERT_RDN_DISABLE_IE4_UTF8_FLAG: ::DWORD = 0x01000000;
 pub const CERT_RDN_ENABLE_PUNYCODE_FLAG: ::DWORD = 0x02000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_RDN {
-    pub cRDNAttr: ::DWORD,
-    pub rgRDNAttr: PCERT_RDN_ATTR,
-}
+STRUCT!{struct CERT_RDN {
+    cRDNAttr: ::DWORD,
+    rgRDNAttr: PCERT_RDN_ATTR,
+}}
 pub type PCERT_RDN = *mut CERT_RDN;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_NAME_INFO {
-    pub cRDN: ::DWORD,
-    pub rgRDN: PCERT_RDN,
-}
+STRUCT!{struct CERT_NAME_INFO {
+    cRDN: ::DWORD,
+    rgRDN: PCERT_RDN,
+}}
 pub type PCERT_NAME_INFO = *mut CERT_NAME_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_NAME_VALUE {
-    pub dwValueType: ::DWORD,
-    pub Value: CERT_RDN_VALUE_BLOB,
-}
+STRUCT!{struct CERT_NAME_VALUE {
+    dwValueType: ::DWORD,
+    Value: CERT_RDN_VALUE_BLOB,
+}}
 pub type PCERT_NAME_VALUE = *mut CERT_NAME_VALUE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_PUBLIC_KEY_INFO {
-    pub Algorithm: CRYPT_ALGORITHM_IDENTIFIER,
-    pub PublicKey: CRYPT_BIT_BLOB,
-}
+STRUCT!{struct CERT_PUBLIC_KEY_INFO {
+    Algorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    PublicKey: CRYPT_BIT_BLOB,
+}}
 pub type PCERT_PUBLIC_KEY_INFO = *mut CERT_PUBLIC_KEY_INFO;
 pub const CERT_RSA_PUBLIC_KEY_OBJID: &'static str = szOID_RSA_RSA;
 pub const CERT_DEFAULT_OID_PUBLIC_KEY_SIGN: &'static str = szOID_RSA_RSA;
 pub const CERT_DEFAULT_OID_PUBLIC_KEY_XCHG: &'static str = szOID_RSA_RSA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_ECC_PRIVATE_KEY_INFO {
-    pub dwVersion: ::DWORD,
-    pub PrivateKey: CRYPT_DER_BLOB,
-    pub szCurveOid: ::LPSTR,
-    pub PublicKey: CRYPT_BIT_BLOB,
-}
+STRUCT!{struct CRYPT_ECC_PRIVATE_KEY_INFO {
+    dwVersion: ::DWORD,
+    PrivateKey: CRYPT_DER_BLOB,
+    szCurveOid: ::LPSTR,
+    PublicKey: CRYPT_BIT_BLOB,
+}}
 pub type PCRYPT_ECC_PRIVATE_KEY_INFO = *mut CRYPT_ECC_PRIVATE_KEY_INFO;
 pub const CRYPT_ECC_PRIVATE_KEY_INFO_v1: ::DWORD = 1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_PRIVATE_KEY_INFO {
-    pub Version: ::DWORD,
-    pub Algorithm: CRYPT_ALGORITHM_IDENTIFIER,
-    pub PrivateKey: CRYPT_DER_BLOB,
-    pub pAttributes: PCRYPT_ATTRIBUTES,
-}
+STRUCT!{struct CRYPT_PRIVATE_KEY_INFO {
+    Version: ::DWORD,
+    Algorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    PrivateKey: CRYPT_DER_BLOB,
+    pAttributes: PCRYPT_ATTRIBUTES,
+}}
 pub type PCRYPT_PRIVATE_KEY_INFO = *mut CRYPT_PRIVATE_KEY_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_ENCRYPTED_PRIVATE_KEY_INFO {
-    pub EncryptionAlgorithm: ::CRYPT_ALGORITHM_IDENTIFIER,
-    pub EncryptedPrivateKey: ::CRYPT_DATA_BLOB,
-}
+STRUCT!{struct CRYPT_ENCRYPTED_PRIVATE_KEY_INFO {
+    EncryptionAlgorithm: ::CRYPT_ALGORITHM_IDENTIFIER,
+    EncryptedPrivateKey: ::CRYPT_DATA_BLOB,
+}}
 pub type PCRYPT_ENCRYPTED_PRIVATE_KEY_INFO = *mut CRYPT_ENCRYPTED_PRIVATE_KEY_INFO;
 pub type PCRYPT_DECRYPT_PRIVATE_KEY_FUNC = Option<unsafe extern "system" fn(
     Algorithm: CRYPT_ALGORITHM_IDENTIFIER, EncryptedPrivateKey: CRYPT_DATA_BLOB,
@@ -937,21 +904,20 @@ pub struct CRYPT_PKCS8_EXPORT_PARAMS {
 }
 impl Clone for CRYPT_PKCS8_EXPORT_PARAMS { fn clone(&self) -> CRYPT_PKCS8_EXPORT_PARAMS { *self } }
 pub type PCRYPT_PKCS8_EXPORT_PARAMS = *mut CRYPT_PKCS8_EXPORT_PARAMS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_INFO {
-    pub dwVersion: ::DWORD,
-    pub SerialNumber: CRYPT_INTEGER_BLOB,
-    pub SignatureAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
-    pub Issuer: CERT_NAME_BLOB,
-    pub NotBefore: ::FILETIME,
-    pub NotAfter: ::FILETIME,
-    pub Subject: CERT_NAME_BLOB,
-    pub SubjectPublicKeyInfo: CERT_PUBLIC_KEY_INFO,
-    pub IssuerUniqueId: CRYPT_BIT_BLOB,
-    pub SubjectUniqueId: CRYPT_BIT_BLOB,
-    pub cExtension: ::DWORD,
-    pub rgExtension: PCERT_EXTENSION,
-}
+STRUCT!{struct CERT_INFO {
+    dwVersion: ::DWORD,
+    SerialNumber: CRYPT_INTEGER_BLOB,
+    SignatureAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    Issuer: CERT_NAME_BLOB,
+    NotBefore: ::FILETIME,
+    NotAfter: ::FILETIME,
+    Subject: CERT_NAME_BLOB,
+    SubjectPublicKeyInfo: CERT_PUBLIC_KEY_INFO,
+    IssuerUniqueId: CRYPT_BIT_BLOB,
+    SubjectUniqueId: CRYPT_BIT_BLOB,
+    cExtension: ::DWORD,
+    rgExtension: PCERT_EXTENSION,
+}}
 pub type PCERT_INFO = *mut CERT_INFO;
 pub const CERT_V1: ::DWORD = 0;
 pub const CERT_V2: ::DWORD = 1;
@@ -967,123 +933,110 @@ pub const CERT_INFO_SUBJECT_PUBLIC_KEY_INFO_FLAG: ::DWORD = 8;
 pub const CERT_INFO_ISSUER_UNIQUE_ID_FLAG: ::DWORD = 9;
 pub const CERT_INFO_SUBJECT_UNIQUE_ID_FLAG: ::DWORD = 10;
 pub const CERT_INFO_EXTENSION_FLAG: ::DWORD = 11;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRL_ENTRY {
-    pub SerialNumber: CRYPT_INTEGER_BLOB,
-    pub RevocationDate: ::FILETIME,
-    pub cExtension: ::DWORD,
-    pub rgExtension: PCERT_EXTENSION,
-}
+STRUCT!{struct CRL_ENTRY {
+    SerialNumber: CRYPT_INTEGER_BLOB,
+    RevocationDate: ::FILETIME,
+    cExtension: ::DWORD,
+    rgExtension: PCERT_EXTENSION,
+}}
 pub type PCRL_ENTRY = *mut CRL_ENTRY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRL_INFO {
-    pub dwVersion: ::DWORD,
-    pub SignatureAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
-    pub Issuer: CERT_NAME_BLOB,
-    pub ThisUpdate: ::FILETIME,
-    pub NextUpdate: ::FILETIME,
-    pub cCRLEntry: ::DWORD,
-    pub rgCRLEntry: PCRL_ENTRY,
-    pub cExtension: ::DWORD,
-    pub rgExtension: PCERT_EXTENSION,
-}
+STRUCT!{struct CRL_INFO {
+    dwVersion: ::DWORD,
+    SignatureAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    Issuer: CERT_NAME_BLOB,
+    ThisUpdate: ::FILETIME,
+    NextUpdate: ::FILETIME,
+    cCRLEntry: ::DWORD,
+    rgCRLEntry: PCRL_ENTRY,
+    cExtension: ::DWORD,
+    rgExtension: PCERT_EXTENSION,
+}}
 pub type PCRL_INFO = *mut CRL_INFO;
 pub const CRL_V1: ::DWORD = 0;
 pub const CRL_V2: ::DWORD = 1;
 pub const CERT_BUNDLE_CERTIFICATE: ::DWORD = 0;
 pub const CERT_BUNDLE_CRL: ::DWORD = 1;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_OR_CRL_BLOB {
-    pub dwChoice: ::DWORD,
-    pub cbEncoded: ::DWORD,
-    pub pbEncoded: *mut ::BYTE,
-}
+STRUCT!{struct CERT_OR_CRL_BLOB {
+    dwChoice: ::DWORD,
+    cbEncoded: ::DWORD,
+    pbEncoded: *mut ::BYTE,
+}}
 pub type PCERT_OR_CRL_BLOB = *mut CERT_OR_CRL_BLOB;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_OR_CRL_BUNDLE {
-    pub cItem: ::DWORD,
-    pub rgItem: PCERT_OR_CRL_BLOB,
-}
+STRUCT!{struct CERT_OR_CRL_BUNDLE {
+    cItem: ::DWORD,
+    rgItem: PCERT_OR_CRL_BLOB,
+}}
 pub type PCERT_OR_CRL_BUNDLE = *mut CERT_OR_CRL_BUNDLE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_REQUEST_INFO {
-    pub dwVersion: ::DWORD,
-    pub Subject: CERT_NAME_BLOB,
-    pub SubjectPublicKeyInfo: CERT_PUBLIC_KEY_INFO,
-    pub cAttribute: ::DWORD,
-    pub rgAttribute: PCRYPT_ATTRIBUTE,
-}
+STRUCT!{struct CERT_REQUEST_INFO {
+    dwVersion: ::DWORD,
+    Subject: CERT_NAME_BLOB,
+    SubjectPublicKeyInfo: CERT_PUBLIC_KEY_INFO,
+    cAttribute: ::DWORD,
+    rgAttribute: PCRYPT_ATTRIBUTE,
+}}
 pub type PCERT_REQUEST_INFO = *mut CERT_REQUEST_INFO;
 pub const CERT_REQUEST_V1: ::DWORD = 0;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_KEYGEN_REQUEST_INFO {
-    pub dwVersion: ::DWORD,
-    pub SubjectPublicKeyInfo: CERT_PUBLIC_KEY_INFO,
-    pub pwszChallengeString: ::LPWSTR,
-}
+STRUCT!{struct CERT_KEYGEN_REQUEST_INFO {
+    dwVersion: ::DWORD,
+    SubjectPublicKeyInfo: CERT_PUBLIC_KEY_INFO,
+    pwszChallengeString: ::LPWSTR,
+}}
 pub type PCERT_KEYGEN_REQUEST_INFO = *mut CERT_KEYGEN_REQUEST_INFO;
 pub const CERT_KEYGEN_REQUEST_V1: ::DWORD = 0;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_SIGNED_CONTENT_INFO {
-    pub ToBeSigned: CRYPT_DER_BLOB,
-    pub SignatureAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
-    pub Signature: CRYPT_BIT_BLOB,
-}
+STRUCT!{struct CERT_SIGNED_CONTENT_INFO {
+    ToBeSigned: CRYPT_DER_BLOB,
+    SignatureAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    Signature: CRYPT_BIT_BLOB,
+}}
 pub type PCERT_SIGNED_CONTENT_INFO = *mut CERT_SIGNED_CONTENT_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CTL_USAGE {
-    pub cUsageIdentifier: ::DWORD,
-    pub rgpszUsageIdentifier: *mut ::LPSTR,
-}
+STRUCT!{struct CTL_USAGE {
+    cUsageIdentifier: ::DWORD,
+    rgpszUsageIdentifier: *mut ::LPSTR,
+}}
 pub type PCTL_USAGE = *mut CTL_USAGE;
 pub type CERT_ENHKEY_USAGE = CTL_USAGE;
 pub type PCERT_ENHKEY_USAGE = *mut CERT_ENHKEY_USAGE;
 pub type PCCTL_USAGE = *const CTL_USAGE;
 pub type PCCERT_ENHKEY_USAGE = *const CERT_ENHKEY_USAGE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CTL_ENTRY {
-    pub SubjectIdentifier: CRYPT_DATA_BLOB,
-    pub cAttribute: ::DWORD,
-    pub rgAttribute: PCRYPT_ATTRIBUTE,
-}
+STRUCT!{struct CTL_ENTRY {
+    SubjectIdentifier: CRYPT_DATA_BLOB,
+    cAttribute: ::DWORD,
+    rgAttribute: PCRYPT_ATTRIBUTE,
+}}
 pub type PCTL_ENTRY = *mut CTL_ENTRY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CTL_INFO {
-    pub dwVersion: ::DWORD,
-    pub SubjectUsage: CTL_USAGE,
-    pub ListIdentifier: CRYPT_DATA_BLOB,
-    pub SequenceNumber: CRYPT_INTEGER_BLOB,
-    pub ThisUpdate: ::FILETIME,
-    pub NextUpdate: ::FILETIME,
-    pub SubjectAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
-    pub cCTLEntry: ::DWORD,
-    pub rgCTLEntry: PCTL_ENTRY,
-    pub cExtension: ::DWORD,
-    pub rgExtension: PCERT_EXTENSION,
-}
+STRUCT!{struct CTL_INFO {
+    dwVersion: ::DWORD,
+    SubjectUsage: CTL_USAGE,
+    ListIdentifier: CRYPT_DATA_BLOB,
+    SequenceNumber: CRYPT_INTEGER_BLOB,
+    ThisUpdate: ::FILETIME,
+    NextUpdate: ::FILETIME,
+    SubjectAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    cCTLEntry: ::DWORD,
+    rgCTLEntry: PCTL_ENTRY,
+    cExtension: ::DWORD,
+    rgExtension: PCERT_EXTENSION,
+}}
 pub type PCTL_INFO = *mut CTL_INFO;
 pub const CTL_V1: ::DWORD = 0;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_TIME_STAMP_REQUEST_INFO {
-    pub pszTimeStampAlgorithm: ::LPSTR,
-    pub pszContentType: ::LPSTR,
-    pub Content: CRYPT_OBJID_BLOB,
-    pub cAttribute: ::DWORD,
-    pub rgAttribute: PCRYPT_ATTRIBUTE,
-}
+STRUCT!{struct CRYPT_TIME_STAMP_REQUEST_INFO {
+    pszTimeStampAlgorithm: ::LPSTR,
+    pszContentType: ::LPSTR,
+    Content: CRYPT_OBJID_BLOB,
+    cAttribute: ::DWORD,
+    rgAttribute: PCRYPT_ATTRIBUTE,
+}}
 pub type PCRYPT_TIME_STAMP_REQUEST_INFO = *mut CRYPT_TIME_STAMP_REQUEST_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_ENROLLMENT_NAME_VALUE_PAIR {
-    pub pwszName: ::LPWSTR,
-    pub pwszValue: ::LPWSTR,
-}
+STRUCT!{struct CRYPT_ENROLLMENT_NAME_VALUE_PAIR {
+    pwszName: ::LPWSTR,
+    pwszValue: ::LPWSTR,
+}}
 pub type PCRYPT_ENROLLMENT_NAME_VALUE_PAIR = *mut CRYPT_ENROLLMENT_NAME_VALUE_PAIR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_CSP_PROVIDER {
-    pub dwKeySpec: ::DWORD,
-    pub pwszProviderName: ::LPWSTR,
-    pub Signature: CRYPT_BIT_BLOB,
-}
+STRUCT!{struct CRYPT_CSP_PROVIDER {
+    dwKeySpec: ::DWORD,
+    pwszProviderName: ::LPWSTR,
+    Signature: CRYPT_BIT_BLOB,
+}}
 pub type PCRYPT_CSP_PROVIDER = *mut CRYPT_CSP_PROVIDER;
 pub const CERT_ENCODING_TYPE_MASK: ::DWORD = 0x0000FFFF;
 pub const CMSG_ENCODING_TYPE_MASK: ::DWORD = 0xFFFF0000;
@@ -1384,37 +1337,34 @@ pub const szOID_ROOT_PROGRAM_FLAGS: &'static str = "1.3.6.1.4.1.311.60.1.1";
 pub type HCRYPTMSG = *mut ::c_void;
 //9353
 pub type HCERTSTORE = *mut ::c_void;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_CONTEXT {
-    pub dwCertEncodingType: ::DWORD,
-    pub pbCertEncoded: *mut ::BYTE,
-    pub cbCertEncoded: ::DWORD,
-    pub pCertInfo: ::PCERT_INFO,
-    pub hCertStore: HCERTSTORE,
-}
+STRUCT!{struct CERT_CONTEXT {
+    dwCertEncodingType: ::DWORD,
+    pbCertEncoded: *mut ::BYTE,
+    cbCertEncoded: ::DWORD,
+    pCertInfo: ::PCERT_INFO,
+    hCertStore: HCERTSTORE,
+}}
 pub type PCERT_CONTEXT = *mut CERT_CONTEXT;
 pub type PCCERT_CONTEXT = *const CERT_CONTEXT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRL_CONTEXT {
-    pub dwCertEncodingType: ::DWORD,
-    pub pbCrlEncoded: *mut ::BYTE,
-    pub cbCrlEncoded: ::DWORD,
-    pub pCrlInfo: ::PCRL_INFO,
-    pub hCertStore: HCERTSTORE,
-}
+STRUCT!{struct CRL_CONTEXT {
+    dwCertEncodingType: ::DWORD,
+    pbCrlEncoded: *mut ::BYTE,
+    cbCrlEncoded: ::DWORD,
+    pCrlInfo: ::PCRL_INFO,
+    hCertStore: HCERTSTORE,
+}}
 pub type PCRL_CONTEXT = *mut CRL_CONTEXT;
 pub type PCCRL_CONTEXT = *const CRL_CONTEXT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CTL_CONTEXT {
-    pub dwMsgAndCertEncodingType: ::DWORD,
-    pub pbCtlEncoded: *mut ::BYTE,
-    pub cbCtlEncoded: ::DWORD,
-    pub pCtlInfo: ::PCTL_INFO,
-    pub hCertStore: HCERTSTORE,
-    pub hCryptMsg: HCRYPTMSG,
-    pub pbCtlContent: *mut ::BYTE,
-    pub cbCtlContent: ::DWORD,
-}
+STRUCT!{struct CTL_CONTEXT {
+    dwMsgAndCertEncodingType: ::DWORD,
+    pbCtlEncoded: *mut ::BYTE,
+    cbCtlEncoded: ::DWORD,
+    pCtlInfo: ::PCTL_INFO,
+    hCertStore: HCERTSTORE,
+    hCryptMsg: HCRYPTMSG,
+    pbCtlContent: *mut ::BYTE,
+    cbCtlContent: ::DWORD,
+}}
 pub type PCTL_CONTEXT = *mut CTL_CONTEXT;
 pub type PCCTL_CONTEXT = *const CTL_CONTEXT;
 pub const CERT_STORE_PROV_MSG: ::DWORD = 1;
@@ -1778,56 +1728,52 @@ pub const CERT_ACCESS_STATE_SHARED_USER_FLAG: ::DWORD = 0x10;
 pub const szOID_ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION: &'static str = "1.3.6.1.4.1.311.60.3.1";
 pub const szOID_ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION: &'static str = "1.3.6.1.4.1.311.60.3.2";
 pub const szOID_ROOT_PROGRAM_NO_OCSP_FAILOVER_TO_CRL: &'static str = "1.3.6.1.4.1.311.60.3.3";
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_KEY_PROV_PARAM {
-    pub dwParam: ::DWORD,
-    pub pbData: *mut ::BYTE,
-    pub cbData: ::DWORD,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct CRYPT_KEY_PROV_PARAM {
+    dwParam: ::DWORD,
+    pbData: *mut ::BYTE,
+    cbData: ::DWORD,
+    dwFlags: ::DWORD,
+}}
 pub type PCRYPT_KEY_PROV_PARAM = *mut CRYPT_KEY_PROV_PARAM;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_KEY_PROV_INFO {
-    pub pwszContainerName: ::LPWSTR,
-    pub pwszProvName: ::LPWSTR,
-    pub dwProvType: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub cProvParam: ::DWORD,
-    pub rgProvParam: PCRYPT_KEY_PROV_PARAM,
-    pub dwKeySpec: ::DWORD,
-}
+STRUCT!{struct CRYPT_KEY_PROV_INFO {
+    pwszContainerName: ::LPWSTR,
+    pwszProvName: ::LPWSTR,
+    dwProvType: ::DWORD,
+    dwFlags: ::DWORD,
+    cProvParam: ::DWORD,
+    rgProvParam: PCRYPT_KEY_PROV_PARAM,
+    dwKeySpec: ::DWORD,
+}}
 pub type PCRYPT_KEY_PROV_INFO = *mut CRYPT_KEY_PROV_INFO;
 pub const CERT_SET_KEY_PROV_HANDLE_PROP_ID: ::DWORD = 0x00000001;
 pub const CERT_SET_KEY_CONTEXT_PROP_ID: ::DWORD = 0x00000001;
 pub const CERT_NCRYPT_KEY_SPEC: ::DWORD = 0xFFFFFFFF;
 //20213
 pub type HCERT_SERVER_OCSP_RESPONSE = *mut ::c_void;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_SERVER_OCSP_RESPONSE_CONTEXT {
-    pub cbSize: ::DWORD,
-    pub pbEncodedOcspResponse: *mut ::BYTE,
-    pub cbEncodedOcspResponse: ::DWORD,
-}
+STRUCT!{struct CERT_SERVER_OCSP_RESPONSE_CONTEXT {
+    cbSize: ::DWORD,
+    pbEncodedOcspResponse: *mut ::BYTE,
+    cbEncodedOcspResponse: ::DWORD,
+}}
 pub type PCERT_SERVER_OCSP_RESPONSE_CONTEXT = *mut CERT_SERVER_OCSP_RESPONSE_CONTEXT;
 pub type PCCERT_SERVER_OCSP_RESPONSE_CONTEXT = *const CERT_SERVER_OCSP_RESPONSE_CONTEXT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_CHAIN_ENGINE_CONFIG {
-    pub cbSize: ::DWORD,
-    pub hRestrictedRoot: HCERTSTORE,
-    pub hRestrictedTrust: HCERTSTORE,
-    pub hRestrictedOther: HCERTSTORE,
-    pub cAdditionalStore: ::DWORD,
-    pub rghAdditionalStore: *mut HCERTSTORE,
-    pub dwFlags: ::DWORD,
-    pub dwUrlRetrievalTimeout: ::DWORD,
-    pub MaximumCachedCertificates: ::DWORD,
-    pub CycleDetectionModulus: ::DWORD,
+STRUCT!{struct CERT_CHAIN_ENGINE_CONFIG {
+    cbSize: ::DWORD,
+    hRestrictedRoot: HCERTSTORE,
+    hRestrictedTrust: HCERTSTORE,
+    hRestrictedOther: HCERTSTORE,
+    cAdditionalStore: ::DWORD,
+    rghAdditionalStore: *mut HCERTSTORE,
+    dwFlags: ::DWORD,
+    dwUrlRetrievalTimeout: ::DWORD,
+    MaximumCachedCertificates: ::DWORD,
+    CycleDetectionModulus: ::DWORD,
     // #if (NTDDI_VERSION >= NTDDI_WIN7)
-    pub hExclusiveRoot: HCERTSTORE,
-    pub hExclusiveTrustedPeople: HCERTSTORE,
+    hExclusiveRoot: HCERTSTORE,
+    hExclusiveTrustedPeople: HCERTSTORE,
     // #if (NTDDI_VERSION >= NTDDI_WIN8)
-    pub dwExclusiveFlags: ::DWORD,
-}
+    dwExclusiveFlags: ::DWORD,
+}}
 pub type PCERT_CHAIN_ENGINE_CONFIG = *mut CERT_CHAIN_ENGINE_CONFIG;
 // 18748
 pub type HCERTCHAINENGINE = ::HANDLE;
@@ -1844,99 +1790,89 @@ pub struct CERT_CREATE_CONTEXT_PARA {
 }
 impl Clone for CERT_CREATE_CONTEXT_PARA { fn clone(&self) -> CERT_CREATE_CONTEXT_PARA { *self } }
 pub type PCERT_CREATE_CONTEXT_PARA = *mut CERT_CREATE_CONTEXT_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_EXTENSIONS {
+STRUCT!{struct CERT_EXTENSIONS {
     cExtension: ::DWORD,
     rgExtension: PCERT_EXTENSION,
-}
+}}
 pub type PCERT_EXTENSIONS = *mut CERT_EXTENSIONS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_REVOCATION_CRL_INFO {
-    pub cbSize: ::DWORD,
-    pub pBaseCrlContext: PCCRL_CONTEXT,
-    pub pDeltaCrlContext: PCCRL_CONTEXT,
-    pub pCrlEntry: PCRL_ENTRY,
-    pub fDeltaCrlEntry: ::BOOL,
-}
+STRUCT!{struct CERT_REVOCATION_CRL_INFO {
+    cbSize: ::DWORD,
+    pBaseCrlContext: PCCRL_CONTEXT,
+    pDeltaCrlContext: PCCRL_CONTEXT,
+    pCrlEntry: PCRL_ENTRY,
+    fDeltaCrlEntry: ::BOOL,
+}}
 pub type PCERT_REVOCATION_CRL_INFO = *mut CERT_REVOCATION_CRL_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_TRUST_STATUS {
+STRUCT!{struct CERT_TRUST_STATUS {
     dwErrorStatus: ::DWORD,
     dwInfoStatus: ::DWORD,
-}
+}}
 pub type PCERT_TRUST_STATUS = *mut CERT_TRUST_STATUS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_REVOCATION_INFO {
-    pub cbSize: ::DWORD,
-    pub dwRevocationResult: ::DWORD,
-    pub pszRevocationOid: ::LPCSTR,
-    pub pvOidSpecificInfo: ::LPVOID,
-    pub fHasFreshnessTime: ::BOOL,
-    pub dwFreshnessTime: ::DWORD,
-    pub pCrlInfo: PCERT_REVOCATION_CRL_INFO,
-}
+STRUCT!{struct CERT_REVOCATION_INFO {
+    cbSize: ::DWORD,
+    dwRevocationResult: ::DWORD,
+    pszRevocationOid: ::LPCSTR,
+    pvOidSpecificInfo: ::LPVOID,
+    fHasFreshnessTime: ::BOOL,
+    dwFreshnessTime: ::DWORD,
+    pCrlInfo: PCERT_REVOCATION_CRL_INFO,
+}}
 pub type PCERT_REVOCATION_INFO = *mut CERT_REVOCATION_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_TRUST_LIST_INFO {
-    pub cbSize: ::DWORD,
-    pub pCtlEntry: PCTL_ENTRY,
-    pub pCtlContext: PCCTL_CONTEXT,
-}
+STRUCT!{struct CERT_TRUST_LIST_INFO {
+    cbSize: ::DWORD,
+    pCtlEntry: PCTL_ENTRY,
+    pCtlContext: PCCTL_CONTEXT,
+}}
 pub type PCERT_TRUST_LIST_INFO = *mut CERT_TRUST_LIST_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_CHAIN_ELEMENT {
-    pub cbSize: ::DWORD,
-    pub pCertContext: PCCERT_CONTEXT,
-    pub TrustStatus: CERT_TRUST_STATUS,
-    pub pRevocationInfo: PCERT_REVOCATION_INFO,
-    pub pIssuanceUsage: PCERT_ENHKEY_USAGE,
-    pub pApplicationUsage: PCERT_ENHKEY_USAGE,
-    pub pwszExtendedErrorInfo: ::LPWSTR,
-}
+STRUCT!{struct CERT_CHAIN_ELEMENT {
+    cbSize: ::DWORD,
+    pCertContext: PCCERT_CONTEXT,
+    TrustStatus: CERT_TRUST_STATUS,
+    pRevocationInfo: PCERT_REVOCATION_INFO,
+    pIssuanceUsage: PCERT_ENHKEY_USAGE,
+    pApplicationUsage: PCERT_ENHKEY_USAGE,
+    pwszExtendedErrorInfo: ::LPWSTR,
+}}
 pub type PCERT_CHAIN_ELEMENT = *mut CERT_CHAIN_ELEMENT;
 pub type PCCERT_CHAIN_ELEMENT = *const CERT_CHAIN_ELEMENT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_SIMPLE_CHAIN {
-    pub cbSize: ::DWORD,
-    pub TrustStatus: CERT_TRUST_STATUS,
-    pub cElement: ::DWORD,
-    pub rgpElement: *mut PCERT_CHAIN_ELEMENT,
-    pub pTrustListInfo: PCERT_TRUST_LIST_INFO,
-    pub fHasRevocationFreshnessTime: ::BOOL,
-    pub dwRevocationFreshnessTime: ::DWORD,
-}
+STRUCT!{struct CERT_SIMPLE_CHAIN {
+    cbSize: ::DWORD,
+    TrustStatus: CERT_TRUST_STATUS,
+    cElement: ::DWORD,
+    rgpElement: *mut PCERT_CHAIN_ELEMENT,
+    pTrustListInfo: PCERT_TRUST_LIST_INFO,
+    fHasRevocationFreshnessTime: ::BOOL,
+    dwRevocationFreshnessTime: ::DWORD,
+}}
 pub type PCERT_SIMPLE_CHAIN = *mut CERT_SIMPLE_CHAIN;
 pub type PCCERT_SIMPLE_CHAIN = *const CERT_SIMPLE_CHAIN;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_CHAIN_CONTEXT {
-    pub cbSize: ::DWORD,
-    pub TrustStatus: CERT_TRUST_STATUS,
-    pub cChain: ::DWORD,
-    pub rgpChain: *mut PCERT_SIMPLE_CHAIN,
-    pub cLowerQualityChainContext: ::DWORD,
-    pub rgpLowerQualityChainContext: *mut PCCERT_CHAIN_CONTEXT,
-    pub fHasRevocationFreshnessTime: ::BOOL,
-    pub dwRevocationFreshnessTime: ::DWORD,
-    pub dwCreateFlags: ::DWORD,
-    pub ChainId: ::GUID,
-}
+STRUCT!{struct CERT_CHAIN_CONTEXT {
+    cbSize: ::DWORD,
+    TrustStatus: CERT_TRUST_STATUS,
+    cChain: ::DWORD,
+    rgpChain: *mut PCERT_SIMPLE_CHAIN,
+    cLowerQualityChainContext: ::DWORD,
+    rgpLowerQualityChainContext: *mut PCCERT_CHAIN_CONTEXT,
+    fHasRevocationFreshnessTime: ::BOOL,
+    dwRevocationFreshnessTime: ::DWORD,
+    dwCreateFlags: ::DWORD,
+    ChainId: ::GUID,
+}}
 pub type PCERT_CHAIN_CONTEXT = *mut CERT_CHAIN_CONTEXT;
 pub type PCCERT_CHAIN_CONTEXT = *const CERT_CHAIN_CONTEXT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_PHYSICAL_STORE_INFO {
-    pub cbSize: ::DWORD,
-    pub pszOpenStoreProvider: ::LPSTR,
-    pub dwOpenEncodingType: ::DWORD,
-    pub dwOpenFlags: ::DWORD,
-    pub OpenParameters: CRYPT_DATA_BLOB,
-    pub dwFlags: ::DWORD,
-    pub dwPriority: ::DWORD,
-}
+STRUCT!{struct CERT_PHYSICAL_STORE_INFO {
+    cbSize: ::DWORD,
+    pszOpenStoreProvider: ::LPSTR,
+    dwOpenEncodingType: ::DWORD,
+    dwOpenFlags: ::DWORD,
+    OpenParameters: CRYPT_DATA_BLOB,
+    dwFlags: ::DWORD,
+    dwPriority: ::DWORD,
+}}
 pub type PCERT_PHYSICAL_STORE_INFO = *mut CERT_PHYSICAL_STORE_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_SYSTEM_STORE_INFO {
-    pub cbSize: ::DWORD,
-}
+STRUCT!{struct CERT_SYSTEM_STORE_INFO {
+    cbSize: ::DWORD,
+}}
 pub type PCERT_SYSTEM_STORE_INFO = *mut CERT_SYSTEM_STORE_INFO;
 //13401
 pub type PFN_CERT_ENUM_SYSTEM_STORE_LOCATION = Option<unsafe extern "system" fn(
@@ -1952,19 +1888,17 @@ pub type PFN_CERT_ENUM_PHYSICAL_STORE = Option<unsafe extern "system" fn(
     pvSystemStore: *const ::c_void, dwFlags: ::DWORD, pwszStoreName: ::LPCWSTR,
     pStoreInfo: PCERT_PHYSICAL_STORE_INFO, pvReserved: *mut ::c_void, pvArg: *mut ::c_void,
 ) -> ::BOOL>;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_STRONG_SIGN_SERIALIZED_INFO {
-    pub dwFlags: ::DWORD,
-    pub pwszCNGSignHashAlgids: ::LPWSTR,
-    pub pwszCNGPubKeyMinBitLengths: ::LPWSTR,
-}
+STRUCT!{struct CERT_STRONG_SIGN_SERIALIZED_INFO {
+    dwFlags: ::DWORD,
+    pwszCNGSignHashAlgids: ::LPWSTR,
+    pwszCNGPubKeyMinBitLengths: ::LPWSTR,
+}}
 pub type PCERT_STRONG_SIGN_SERIALIZED_INFO = *mut CERT_STRONG_SIGN_SERIALIZED_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_STRONG_SIGN_PARA {
-    pub cbSize: ::DWORD,
-    pub dwInfoChoice: ::DWORD,
-    pub pvInfo: *mut ::c_void,
-}
+STRUCT!{struct CERT_STRONG_SIGN_PARA {
+    cbSize: ::DWORD,
+    dwInfoChoice: ::DWORD,
+    pvInfo: *mut ::c_void,
+}}
 UNION!(
     CERT_STRONG_SIGN_PARA, pvInfo, pSerializedInfo, pSerializedInfo_mut,
     PCERT_STRONG_SIGN_SERIALIZED_INFO
@@ -1972,140 +1906,127 @@ UNION!(
 UNION!(CERT_STRONG_SIGN_PARA, pvInfo, pszOID, pszOID_mut, ::LPSTR);
 pub type PCERT_STRONG_SIGN_PARA = *mut CERT_STRONG_SIGN_PARA;
 pub type PCCERT_STRONG_SIGN_PARA = *const CERT_STRONG_SIGN_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_USAGE_MATCH {
-    pub dwType: ::DWORD,
-    pub Usage: CERT_ENHKEY_USAGE,
-}
+STRUCT!{struct CERT_USAGE_MATCH {
+    dwType: ::DWORD,
+    Usage: CERT_ENHKEY_USAGE,
+}}
 pub type PCERT_USAGE_MATCH = *mut CERT_USAGE_MATCH;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_CHAIN_PARA {
-    pub cbSize: ::DWORD,
-    pub RequestedUsage: CERT_USAGE_MATCH,
-    pub RequestedIssuancePolicy: CERT_USAGE_MATCH,
-    pub dwUrlRetrievalTimeout: ::DWORD,
-    pub fCheckRevocationFreshnessTime: ::BOOL,
-    pub dwRevocationFreshnessTime: ::DWORD,
-    pub pftCacheResync: ::LPFILETIME,
-    pub pStrongSignPara: PCCERT_STRONG_SIGN_PARA,
-    pub dwStrongSignFlags: ::DWORD,
-}
+STRUCT!{struct CERT_CHAIN_PARA {
+    cbSize: ::DWORD,
+    RequestedUsage: CERT_USAGE_MATCH,
+    RequestedIssuancePolicy: CERT_USAGE_MATCH,
+    dwUrlRetrievalTimeout: ::DWORD,
+    fCheckRevocationFreshnessTime: ::BOOL,
+    dwRevocationFreshnessTime: ::DWORD,
+    pftCacheResync: ::LPFILETIME,
+    pStrongSignPara: PCCERT_STRONG_SIGN_PARA,
+    dwStrongSignFlags: ::DWORD,
+}}
 pub type PCERT_CHAIN_PARA = *mut CERT_CHAIN_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_SELECT_CHAIN_PARA {
-    pub hChainEngine: HCERTCHAINENGINE,
-    pub pTime: ::PFILETIME,
-    pub hAdditionalStore: HCERTSTORE,
-    pub pChainPara: PCERT_CHAIN_PARA,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct CERT_SELECT_CHAIN_PARA {
+    hChainEngine: HCERTCHAINENGINE,
+    pTime: ::PFILETIME,
+    hAdditionalStore: HCERTSTORE,
+    pChainPara: PCERT_CHAIN_PARA,
+    dwFlags: ::DWORD,
+}}
 pub type PCERT_SELECT_CHAIN_PARA = *mut CERT_SELECT_CHAIN_PARA;
 pub type PCCERT_SELECT_CHAIN_PARA = *const CERT_SELECT_CHAIN_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_SELECT_CRITERIA {
-    pub dwType: ::DWORD,
-    pub cPara: ::DWORD,
-    pub ppPara: *mut *mut ::c_void,
-}
+STRUCT!{struct CERT_SELECT_CRITERIA {
+    dwType: ::DWORD,
+    cPara: ::DWORD,
+    ppPara: *mut *mut ::c_void,
+}}
 pub type PCERT_SELECT_CRITERIA = *mut CERT_SELECT_CRITERIA;
 pub type PCCERT_SELECT_CRITERIA = *const CERT_SELECT_CRITERIA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CTL_VERIFY_USAGE_PARA {
-    pub cbSize: ::DWORD,
-    pub ListIdentifier: CRYPT_DATA_BLOB,
-    pub cCtlStore: ::DWORD,
-    pub rghCtlStore: *mut HCERTSTORE,
-    pub cSignerStore: ::DWORD,
-    pub rghSignerStore: *mut HCERTSTORE,
-}
+STRUCT!{struct CTL_VERIFY_USAGE_PARA {
+    cbSize: ::DWORD,
+    ListIdentifier: CRYPT_DATA_BLOB,
+    cCtlStore: ::DWORD,
+    rghCtlStore: *mut HCERTSTORE,
+    cSignerStore: ::DWORD,
+    rghSignerStore: *mut HCERTSTORE,
+}}
 pub type PCTL_VERIFY_USAGE_PARA = *mut CTL_VERIFY_USAGE_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CTL_VERIFY_USAGE_STATUS {
-    pub cbSize: ::DWORD,
-    pub dwError: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub ppCtl: *mut PCCTL_CONTEXT,
-    pub dwCtlEntryIndex: ::DWORD,
-    pub ppSigner: *mut PCCERT_CONTEXT,
-    pub dwSignerIndex: ::DWORD,
-}
+STRUCT!{struct CTL_VERIFY_USAGE_STATUS {
+    cbSize: ::DWORD,
+    dwError: ::DWORD,
+    dwFlags: ::DWORD,
+    ppCtl: *mut PCCTL_CONTEXT,
+    dwCtlEntryIndex: ::DWORD,
+    ppSigner: *mut PCCERT_CONTEXT,
+    dwSignerIndex: ::DWORD,
+}}
 pub type PCTL_VERIFY_USAGE_STATUS = *mut CTL_VERIFY_USAGE_STATUS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_CHAIN_POLICY_PARA {
-    pub cbSize: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub pvExtraPolicyPara: *mut ::c_void,
-}
+STRUCT!{struct CERT_CHAIN_POLICY_PARA {
+    cbSize: ::DWORD,
+    dwFlags: ::DWORD,
+    pvExtraPolicyPara: *mut ::c_void,
+}}
 pub type PCERT_CHAIN_POLICY_PARA = *mut CERT_CHAIN_POLICY_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_CHAIN_POLICY_STATUS {
-    pub cbSize: ::DWORD,
-    pub dwError: ::DWORD,
-    pub lChainIndex: ::LONG,
-    pub lElementIndex: ::LONG,
-    pub pvExtraPolicyStatus: *mut ::c_void,
-}
+STRUCT!{struct CERT_CHAIN_POLICY_STATUS {
+    cbSize: ::DWORD,
+    dwError: ::DWORD,
+    lChainIndex: ::LONG,
+    lElementIndex: ::LONG,
+    pvExtraPolicyStatus: *mut ::c_void,
+}}
 pub type PCERT_CHAIN_POLICY_STATUS = *mut CERT_CHAIN_POLICY_STATUS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_REVOCATION_CHAIN_PARA {
-    pub cbSize: ::DWORD,
-    pub hChainEngine: HCERTCHAINENGINE,
-    pub hAdditionalStore: HCERTSTORE,
-    pub dwChainFlags: ::DWORD,
-    pub dwUrlRetrievalTimeout: ::DWORD,
-    pub pftCurrentTime: ::LPFILETIME,
-    pub pftCacheResync: ::LPFILETIME,
-}
+STRUCT!{struct CERT_REVOCATION_CHAIN_PARA {
+    cbSize: ::DWORD,
+    hChainEngine: HCERTCHAINENGINE,
+    hAdditionalStore: HCERTSTORE,
+    dwChainFlags: ::DWORD,
+    dwUrlRetrievalTimeout: ::DWORD,
+    pftCurrentTime: ::LPFILETIME,
+    pftCacheResync: ::LPFILETIME,
+}}
 pub type PCERT_REVOCATION_CHAIN_PARA = *mut CERT_REVOCATION_CHAIN_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_REVOCATION_PARA {
-    pub cbSize: ::DWORD,
-    pub pIssuerCert: PCCERT_CONTEXT,
-    pub cCertStore: ::DWORD,
-    pub rgCertStore: *mut HCERTSTORE,
-    pub hCrlStore: HCERTSTORE,
-    pub pftTimeToUse: ::LPFILETIME,
-    pub dwUrlRetrievalTimeout: ::DWORD,
-    pub fCheckFreshnessTime: ::BOOL,
-    pub dwFreshnessTime: ::DWORD,
-    pub pftCurrentTime: ::LPFILETIME,
-    pub pCrlInfo: PCERT_REVOCATION_CRL_INFO,
-    pub pftCacheResync: ::LPFILETIME,
-    pub pChainPara: PCERT_REVOCATION_CHAIN_PARA,
-}
+STRUCT!{struct CERT_REVOCATION_PARA {
+    cbSize: ::DWORD,
+    pIssuerCert: PCCERT_CONTEXT,
+    cCertStore: ::DWORD,
+    rgCertStore: *mut HCERTSTORE,
+    hCrlStore: HCERTSTORE,
+    pftTimeToUse: ::LPFILETIME,
+    dwUrlRetrievalTimeout: ::DWORD,
+    fCheckFreshnessTime: ::BOOL,
+    dwFreshnessTime: ::DWORD,
+    pftCurrentTime: ::LPFILETIME,
+    pCrlInfo: PCERT_REVOCATION_CRL_INFO,
+    pftCacheResync: ::LPFILETIME,
+    pChainPara: PCERT_REVOCATION_CHAIN_PARA,
+}}
 pub type PCERT_REVOCATION_PARA = *mut CERT_REVOCATION_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_REVOCATION_STATUS {
-    pub cbSize: ::DWORD,
-    pub dwIndex: ::DWORD,
-    pub dwError: ::DWORD,
-    pub dwReason: ::DWORD,
-    pub fHasFreshnessTime: ::BOOL,
-    pub dwFreshnessTime: ::DWORD,
-}
+STRUCT!{struct CERT_REVOCATION_STATUS {
+    cbSize: ::DWORD,
+    dwIndex: ::DWORD,
+    dwError: ::DWORD,
+    dwReason: ::DWORD,
+    fHasFreshnessTime: ::BOOL,
+    dwFreshnessTime: ::DWORD,
+}}
 pub type PCERT_REVOCATION_STATUS = *mut CERT_REVOCATION_STATUS;
 //16990
 pub type HCRYPTASYNC = ::HANDLE;
 pub type PHCRYPTASYNC = *mut ::HANDLE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_ENCRYPT_MESSAGE_PARA {
-    pub cbSize: ::DWORD,
-    pub dwMsgEncodingType: ::DWORD,
-    pub hCryptProv: HCRYPTPROV_LEGACY,
-    pub ContentEncryptionAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
-    pub pvEncryptionAuxInfo: *mut ::c_void,
-    pub dwFlags: ::DWORD,
-    pub dwInnerContentType: ::DWORD,
-}
+STRUCT!{struct CRYPT_ENCRYPT_MESSAGE_PARA {
+    cbSize: ::DWORD,
+    dwMsgEncodingType: ::DWORD,
+    hCryptProv: HCRYPTPROV_LEGACY,
+    ContentEncryptionAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    pvEncryptionAuxInfo: *mut ::c_void,
+    dwFlags: ::DWORD,
+    dwInnerContentType: ::DWORD,
+}}
 pub type PCRYPT_ENCRYPT_MESSAGE_PARA = *mut CRYPT_DECRYPT_MESSAGE_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_DECRYPT_MESSAGE_PARA {
-    pub cbSize: ::DWORD,
-    pub dwMsgAndCertEncodingType: ::DWORD,
-    pub cCertStore: ::DWORD,
-    pub rghCertStore: *mut HCERTSTORE,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct CRYPT_DECRYPT_MESSAGE_PARA {
+    cbSize: ::DWORD,
+    dwMsgAndCertEncodingType: ::DWORD,
+    cCertStore: ::DWORD,
+    rghCertStore: *mut HCERTSTORE,
+    dwFlags: ::DWORD,
+}}
 pub type PCRYPT_DECRYPT_MESSAGE_PARA = *mut CRYPT_DECRYPT_MESSAGE_PARA;
 pub type PFN_CRYPT_GET_SIGNER_CERTIFICATE = Option<unsafe extern "system" fn(
     pvGetArg: *mut ::c_void, dwCertEncodingType: ::DWORD, pSignerId: PCERT_INFO,
@@ -2122,17 +2043,16 @@ pub struct CRYPT_VERIFY_MESSAGE_PARA {
 }
 impl Clone for CRYPT_VERIFY_MESSAGE_PARA { fn clone(&self) -> CRYPT_VERIFY_MESSAGE_PARA { *self } }
 pub type PCRYPT_VERIFY_MESSAGE_PARA = *mut CRYPT_VERIFY_MESSAGE_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_OID_INFO {
-    pub cbSize: ::DWORD,
-    pub oszOID: ::LPCSTR,
-    pub pwszName: ::LPCWSTR,
-    pub dwGroupId: ::DWORD,
-    pub dwValue: ::DWORD,
-    pub ExtraInfo: CRYPT_DATA_BLOB,
-    pub pwszCNGAlgid: ::LPCWSTR,
-    pub pwszCNGExtraAlgid: ::LPCWSTR,
-}
+STRUCT!{struct CRYPT_OID_INFO {
+    cbSize: ::DWORD,
+    oszOID: ::LPCSTR,
+    pwszName: ::LPCWSTR,
+    dwGroupId: ::DWORD,
+    dwValue: ::DWORD,
+    ExtraInfo: CRYPT_DATA_BLOB,
+    pwszCNGAlgid: ::LPCWSTR,
+    pwszCNGExtraAlgid: ::LPCWSTR,
+}}
 UNION!(CRYPT_OID_INFO, dwValue, Algid, Algid_mut, ALG_ID);
 UNION!(CRYPT_OID_INFO, dwValue, dwLength, dwLength_mut, ::DWORD);
 pub type PCRYPT_OID_INFO = *mut CRYPT_OID_INFO;
@@ -2159,48 +2079,44 @@ pub type HCRYPTOIDFUNCADDR = *mut ::c_void;
 pub type PFN_CRYPT_ASYNC_PARAM_FREE_FUNC = Option<unsafe extern "system" fn(
     pszParamOid: ::LPSTR, pvParam: ::LPVOID,
 )>;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_HASH_MESSAGE_PARA {
-    pub cbSize: ::DWORD,
-    pub dwMsgEncodingType: ::DWORD,
-    pub hCryptProv: HCRYPTPROV_LEGACY,
-    pub HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
-    pub pvHashAuxInfo: *mut ::c_void,
-}
+STRUCT!{struct CRYPT_HASH_MESSAGE_PARA {
+    cbSize: ::DWORD,
+    dwMsgEncodingType: ::DWORD,
+    hCryptProv: HCRYPTPROV_LEGACY,
+    HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    pvHashAuxInfo: *mut ::c_void,
+}}
 pub type PCRYPT_HASH_MESSAGE_PARA = *mut CRYPT_HASH_MESSAGE_PARA;
 //14750
 pub type HCRYPTDEFAULTCONTEXT = *mut ::c_void;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_OID_FUNC_ENTRY {
-    pub pszOID: ::LPCSTR,
-    pub pvFuncAddr: *mut ::c_void,
-}
+STRUCT!{struct CRYPT_OID_FUNC_ENTRY {
+    pszOID: ::LPCSTR,
+    pvFuncAddr: *mut ::c_void,
+}}
 pub type PCRYPT_OID_FUNC_ENTRY = *mut CRYPT_OID_FUNC_ENTRY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CMSG_SIGNER_ENCODE_INFO {
-    pub cbSize: ::DWORD,
-    pub pCertInfo: PCERT_INFO,
-    pub hCryptProv: HCRYPTPROV,
-    pub dwKeySpec: ::DWORD,
-    pub HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
-    pub pvHashAuxInfo: *mut ::c_void,
-    pub cAuthAttr: ::DWORD,
-    pub rgAuthAttr: PCRYPT_ATTRIBUTE,
-    pub cUnauthAttr: ::DWORD,
-    pub rgUnauthAttr: PCRYPT_ATTRIBUTE,
-}
+STRUCT!{struct CMSG_SIGNER_ENCODE_INFO {
+    cbSize: ::DWORD,
+    pCertInfo: PCERT_INFO,
+    hCryptProv: HCRYPTPROV,
+    dwKeySpec: ::DWORD,
+    HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    pvHashAuxInfo: *mut ::c_void,
+    cAuthAttr: ::DWORD,
+    rgAuthAttr: PCRYPT_ATTRIBUTE,
+    cUnauthAttr: ::DWORD,
+    rgUnauthAttr: PCRYPT_ATTRIBUTE,
+}}
 UNION!(CMSG_SIGNER_ENCODE_INFO, hCryptProv, hNCryptKey, hNCryptKey_mut, ::NCRYPT_KEY_HANDLE);
 pub type PCMSG_SIGNER_ENCODE_INFO = *mut CMSG_SIGNER_ENCODE_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CMSG_SIGNED_ENCODE_INFO {
-    pub cbSize: ::DWORD,
-    pub cSigners: ::DWORD,
-    pub rgSigners: PCMSG_SIGNER_ENCODE_INFO,
-    pub cCertEncoded: ::DWORD,
-    pub rgCertEncoded: PCERT_BLOB,
-    pub cCrlEncoded: ::DWORD,
-    pub rgCrlEncoded: PCRL_BLOB,
-}
+STRUCT!{struct CMSG_SIGNED_ENCODE_INFO {
+    cbSize: ::DWORD,
+    cSigners: ::DWORD,
+    rgSigners: PCMSG_SIGNER_ENCODE_INFO,
+    cCertEncoded: ::DWORD,
+    rgCertEncoded: PCERT_BLOB,
+    cCrlEncoded: ::DWORD,
+    rgCrlEncoded: PCRL_BLOB,
+}}
 pub type PCMSG_SIGNED_ENCODE_INFO = *mut CMSG_SIGNED_ENCODE_INFO;
 //7393
 pub type PFN_CMSG_STREAM_OUTPUT = Option<unsafe extern "system" fn(
@@ -2214,80 +2130,73 @@ pub struct CMSG_STREAM_INFO {
 }
 impl Clone for CMSG_STREAM_INFO { fn clone(&self) -> CMSG_STREAM_INFO { *self } }
 pub type PCMSG_STREAM_INFO = *mut CMSG_STREAM_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_TIMESTAMP_ACCURACY {
-    pub dwSeconds: ::DWORD,
-    pub dwMillis: ::DWORD,
-    pub dwMicros: ::DWORD,
-}
+STRUCT!{struct CRYPT_TIMESTAMP_ACCURACY {
+    dwSeconds: ::DWORD,
+    dwMillis: ::DWORD,
+    dwMicros: ::DWORD,
+}}
 pub type PCRYPT_TIMESTAMP_ACCURACY = *mut CRYPT_TIMESTAMP_ACCURACY;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_TIMESTAMP_INFO {
-    pub dwVersion: ::DWORD,
-    pub pszTSAPolicyId: ::LPSTR,
-    pub HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
-    pub HashedMessage: CRYPT_DER_BLOB,
-    pub SerialNumber: CRYPT_INTEGER_BLOB,
-    pub ftTime: ::FILETIME,
-    pub pvAccuracy: PCRYPT_TIMESTAMP_ACCURACY,
-    pub fOrdering: ::BOOL,
-    pub Nonce: CRYPT_DER_BLOB,
-    pub Tsa: CRYPT_DER_BLOB,
-    pub cExtension: ::DWORD,
-    pub rgExtension: PCERT_EXTENSION,
-}
+STRUCT!{struct CRYPT_TIMESTAMP_INFO {
+    dwVersion: ::DWORD,
+    pszTSAPolicyId: ::LPSTR,
+    HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    HashedMessage: CRYPT_DER_BLOB,
+    SerialNumber: CRYPT_INTEGER_BLOB,
+    ftTime: ::FILETIME,
+    pvAccuracy: PCRYPT_TIMESTAMP_ACCURACY,
+    fOrdering: ::BOOL,
+    Nonce: CRYPT_DER_BLOB,
+    Tsa: CRYPT_DER_BLOB,
+    cExtension: ::DWORD,
+    rgExtension: PCERT_EXTENSION,
+}}
 pub type PCRYPT_TIMESTAMP_INFO = *mut CRYPT_TIMESTAMP_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_TIMESTAMP_CONTEXT {
-    pub cbEncoded: ::DWORD,
-    pub pbEncoded: *mut ::BYTE,
-    pub pTimeStamp: PCRYPT_TIMESTAMP_INFO,
-}
+STRUCT!{struct CRYPT_TIMESTAMP_CONTEXT {
+    cbEncoded: ::DWORD,
+    pbEncoded: *mut ::BYTE,
+    pTimeStamp: PCRYPT_TIMESTAMP_INFO,
+}}
 pub type PCRYPT_TIMESTAMP_CONTEXT = *mut CRYPT_TIMESTAMP_CONTEXT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_TIMESTAMP_PARA {
-    pub pszTSAPolicyId: ::LPCSTR,
-    pub fRequestCerts: ::BOOL,
-    pub Nonce: CRYPT_INTEGER_BLOB,
-    pub cExtension: ::DWORD,
-    pub rgExtension: PCERT_EXTENSION,
-}
+STRUCT!{struct CRYPT_TIMESTAMP_PARA {
+    pszTSAPolicyId: ::LPCSTR,
+    fRequestCerts: ::BOOL,
+    Nonce: CRYPT_INTEGER_BLOB,
+    cExtension: ::DWORD,
+    rgExtension: PCERT_EXTENSION,
+}}
 pub type PCRYPT_TIMESTAMP_PARA = *mut CRYPT_TIMESTAMP_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_SIGN_MESSAGE_PARA {
-    pub cbSize: ::DWORD,
-    pub dwMsgEncodingType: ::DWORD,
-    pub pSigningCert: PCCERT_CONTEXT,
-    pub HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
-    pub pvHashAuxInfo: *mut ::c_void,
-    pub cMsgCert: ::DWORD,
-    pub rgpMsgCert: *mut PCCERT_CONTEXT,
-    pub cMsgCrl: ::DWORD,
-    pub rgpMsgCrl: *mut PCCRL_CONTEXT,
-    pub cAuthAttr: ::DWORD,
-    pub rgAuthAttr: PCRYPT_ATTRIBUTE,
-    pub cUnauthAttr: ::DWORD,
-    pub rgUnauthAttr: PCRYPT_ATTRIBUTE,
-    pub dwFlags: ::DWORD,
-    pub dwInnerContentType: ::DWORD,
-}
+STRUCT!{struct CRYPT_SIGN_MESSAGE_PARA {
+    cbSize: ::DWORD,
+    dwMsgEncodingType: ::DWORD,
+    pSigningCert: PCCERT_CONTEXT,
+    HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    pvHashAuxInfo: *mut ::c_void,
+    cMsgCert: ::DWORD,
+    rgpMsgCert: *mut PCCERT_CONTEXT,
+    cMsgCrl: ::DWORD,
+    rgpMsgCrl: *mut PCCRL_CONTEXT,
+    cAuthAttr: ::DWORD,
+    rgAuthAttr: PCRYPT_ATTRIBUTE,
+    cUnauthAttr: ::DWORD,
+    rgUnauthAttr: PCRYPT_ATTRIBUTE,
+    dwFlags: ::DWORD,
+    dwInnerContentType: ::DWORD,
+}}
 pub type PCRYPT_SIGN_MESSAGE_PARA = *mut CRYPT_SIGN_MESSAGE_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_KEY_SIGN_MESSAGE_PARA {
-    pub cbSize: ::DWORD,
-    pub dwMsgAndCertEncodingType: ::DWORD,
-    pub hCryptProv: HCRYPTPROV,
-    pub dwKeySpec: ::DWORD,
-    pub HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
-    pub pvHashAuxInfo: *mut ::c_void,
-    pub PubKeyAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
-}
+STRUCT!{struct CRYPT_KEY_SIGN_MESSAGE_PARA {
+    cbSize: ::DWORD,
+    dwMsgAndCertEncodingType: ::DWORD,
+    hCryptProv: HCRYPTPROV,
+    dwKeySpec: ::DWORD,
+    HashAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    pvHashAuxInfo: *mut ::c_void,
+    PubKeyAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+}}
 UNION!(CRYPT_KEY_SIGN_MESSAGE_PARA, hCryptProv, hNCryptKey, hNCryptKey_mut, ::NCRYPT_KEY_HANDLE);
 pub type PCRYPT_KEY_SIGN_MESSAGE_PARA = *mut CRYPT_KEY_SIGN_MESSAGE_PARA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CRYPT_KEY_VERIFY_MESSAGE_PARA {
-    pub cbSize: ::DWORD,
-    pub dwMsgEncodingType: ::DWORD,
-    pub hCryptProv: HCRYPTPROV_LEGACY,
-}
+STRUCT!{struct CRYPT_KEY_VERIFY_MESSAGE_PARA {
+    cbSize: ::DWORD,
+    dwMsgEncodingType: ::DWORD,
+    hCryptProv: HCRYPTPROV_LEGACY,
+}}
 pub type PCRYPT_KEY_VERIFY_MESSAGE_PARA = *mut CRYPT_KEY_VERIFY_MESSAGE_PARA;

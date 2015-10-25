@@ -53,24 +53,23 @@ pub const NETSETUP_PROVISION_ONLINE_CALLER: ::DWORD = 0x40000000;
 pub const NETSETUP_PROVISION_CHECK_PWD_ONLY: ::DWORD = 0x80000000;
 pub const NETSETUP_PROVISIONING_PARAMS_WIN8_VERSION: ::DWORD = 0x00000001;
 pub const NETSETUP_PROVISIONING_PARAMS_CURRENT_VERSION: ::DWORD = 0x00000002;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct NETSETUP_PROVISIONING_PARAMS {
-    pub dwVersion: ::DWORD,
-    pub lpDomain: ::LPCWSTR,
-    pub lpHostName: ::LPCWSTR,
-    pub lpMachineAccountOU: ::LPCWSTR,
-    pub lpDcName: ::LPCWSTR,
-    pub dwProvisionOptions: ::DWORD,
-    pub aCertTemplateNames: *mut ::LPCWSTR,
-    pub cCertTemplateNames: ::DWORD,
-    pub aMachinePolicyNames: *mut ::LPCWSTR,
-    pub cMachinePolicyNames: ::DWORD,
-    pub aMachinePolicyPaths: *mut ::LPCWSTR,
-    pub cMachinePolicyPaths: ::DWORD,
-    pub lpNetbiosName: ::LPWSTR,
-    pub lpSiteName: ::LPWSTR,
-    pub lpPrimaryDNSDomain: ::LPWSTR,
-}
+STRUCT!{struct NETSETUP_PROVISIONING_PARAMS {
+    dwVersion: ::DWORD,
+    lpDomain: ::LPCWSTR,
+    lpHostName: ::LPCWSTR,
+    lpMachineAccountOU: ::LPCWSTR,
+    lpDcName: ::LPCWSTR,
+    dwProvisionOptions: ::DWORD,
+    aCertTemplateNames: *mut ::LPCWSTR,
+    cCertTemplateNames: ::DWORD,
+    aMachinePolicyNames: *mut ::LPCWSTR,
+    cMachinePolicyNames: ::DWORD,
+    aMachinePolicyPaths: *mut ::LPCWSTR,
+    cMachinePolicyPaths: ::DWORD,
+    lpNetbiosName: ::LPWSTR,
+    lpSiteName: ::LPWSTR,
+    lpPrimaryDNSDomain: ::LPWSTR,
+}}
 pub type PNETSETUP_PROVISIONING_PARAMS = *mut NETSETUP_PROVISIONING_PARAMS;
 ENUM!{enum NET_COMPUTER_NAME_TYPE {
     NetPrimaryComputerName,

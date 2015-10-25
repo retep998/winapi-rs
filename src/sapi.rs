@@ -346,43 +346,39 @@ pub const SPFEI_ALL_EVENTS: u64 = 0xEFFFFFFFFFFFFFFF;
 pub fn SPFEI(SPEI_ord: u64) -> u64 {
     (1 << SPEI_ord) | SPFEI_FLAGCHECK
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPEVENT {
-    pub eEventId: ::WORD,
-    pub elParamType: ::WORD,
-    pub ulStreamNum: ::ULONG,
-    pub ullAudioStreamOffset: ::ULONGLONG,
-    pub wParam: ::WPARAM,
-    pub lParam: ::LPARAM,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPSERIALIZEDEVENT {
-    pub eEventId: ::WORD,
-    pub elParamType: ::WORD,
-    pub ulStreamNum: ::ULONG,
-    pub ullAudioStreamOffset: ::ULONGLONG,
-    pub SerializedwParam: ::ULONG,
-    pub SerializedlParam: ::LONG,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPSERIALIZEDEVENT64 {
-    pub eEventId: ::WORD,
-    pub elParamType: ::WORD,
-    pub ulStreamNum: ::ULONG,
-    pub ullAudioStreamOffset: ::ULONGLONG,
-    pub SerializedwParam: ::ULONGLONG,
-    pub SerializedlParam: ::LONGLONG,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPEVENTEX {
-    pub eEventId: ::WORD,
-    pub elParamType: ::WORD,
-    pub ulStreamNum: ::ULONG,
-    pub ullAudioStreamOffset: ::ULONGLONG,
-    pub wParam: ::WPARAM,
-    pub lParam: ::LPARAM,
-    pub ullAudioTimeOffset: ::ULONGLONG,
-}
+STRUCT!{struct SPEVENT {
+    eEventId: ::WORD,
+    elParamType: ::WORD,
+    ulStreamNum: ::ULONG,
+    ullAudioStreamOffset: ::ULONGLONG,
+    wParam: ::WPARAM,
+    lParam: ::LPARAM,
+}}
+STRUCT!{struct SPSERIALIZEDEVENT {
+    eEventId: ::WORD,
+    elParamType: ::WORD,
+    ulStreamNum: ::ULONG,
+    ullAudioStreamOffset: ::ULONGLONG,
+    SerializedwParam: ::ULONG,
+    SerializedlParam: ::LONG,
+}}
+STRUCT!{struct SPSERIALIZEDEVENT64 {
+    eEventId: ::WORD,
+    elParamType: ::WORD,
+    ulStreamNum: ::ULONG,
+    ullAudioStreamOffset: ::ULONGLONG,
+    SerializedwParam: ::ULONGLONG,
+    SerializedlParam: ::LONGLONG,
+}}
+STRUCT!{struct SPEVENTEX {
+    eEventId: ::WORD,
+    elParamType: ::WORD,
+    ulStreamNum: ::ULONG,
+    ullAudioStreamOffset: ::ULONGLONG,
+    wParam: ::WPARAM,
+    lParam: ::LPARAM,
+    ullAudioTimeOffset: ::ULONGLONG,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum SPINTERFERENCE {
     SPINTERFERENCE_NONE = 0,
@@ -436,12 +432,11 @@ pub enum SPVISEMES {
     SP_VISEME_21,
 }
 pub use self::SPVISEMES::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPEVENTSOURCEINFO {
-    pub ullEventInterest: ::ULONGLONG,
-    pub ullQueuedInterest: ::ULONGLONG,
-    pub ulCount: ::ULONG,
-}
+STRUCT!{struct SPEVENTSOURCEINFO {
+    ullEventInterest: ::ULONGLONG,
+    ullQueuedInterest: ::ULONGLONG,
+    ulCount: ::ULONG,
+}}
 RIDL!(
 interface ISpEventSource(ISpEventSourceVtbl): ISpNotifySource(ISpNotifySourceVtbl) {
     fn SetInterest(
@@ -525,22 +520,20 @@ pub enum SPAUDIOSTATE {
     SPAS_RUN = 3
 }
 pub use self::SPAUDIOSTATE::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPAUDIOSTATUS {
-    pub cbFreeBuffSpace: ::LONG,
-    pub cbNonBlockingIO: ::ULONG,
-    pub State: SPAUDIOSTATE,
-    pub CurSeekPos: ::ULONGLONG,
-    pub CurDevicePos: ::ULONGLONG,
-    pub dwAudioLevel: ::DWORD,
-    pub dwReserved2: ::DWORD,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPAUDIOBUFFERINFO {
-    pub ulMsMinNotification: ::ULONG,
-    pub ulMsBufferSize: ::ULONG,
-    pub ulMsEventBias: ::ULONG,
-}
+STRUCT!{struct SPAUDIOSTATUS {
+    cbFreeBuffSpace: ::LONG,
+    cbNonBlockingIO: ::ULONG,
+    State: SPAUDIOSTATE,
+    CurSeekPos: ::ULONGLONG,
+    CurDevicePos: ::ULONGLONG,
+    dwAudioLevel: ::DWORD,
+    dwReserved2: ::DWORD,
+}}
+STRUCT!{struct SPAUDIOBUFFERINFO {
+    ulMsMinNotification: ::ULONG,
+    ulMsBufferSize: ::ULONG,
+    ulMsEventBias: ::ULONG,
+}}
 RIDL!(
 interface ISpAudio(ISpAudioVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
     fn SetState(&mut self, NewState: SPAUDIOSTATE, ullReserved: ::ULONGLONG) -> ::HRESULT,
@@ -588,71 +581,66 @@ pub use self::SPDISPLYATTRIBUTES::*;
 pub type SPPHONEID = ::WCHAR;
 pub type PSPPHONEID = ::LPWSTR;
 pub type PCSPPHONEID = ::LPCWSTR;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPPHRASEELEMENT {
-    pub ulAudioTimeOffset: ::ULONG,
-    pub ulAudioSizeTime: ::ULONG,
-    pub ulAudioStreamOffset: ::ULONG,
-    pub ulAudioSizeBytes: ::ULONG,
-    pub ulRetainedStreamOffset: ::ULONG,
-    pub ulRetainedSizeBytes: ::ULONG,
-    pub pszDisplayText: ::LPCWSTR,
-    pub pszLexicalForm: ::LPCWSTR,
-    pub pszPronunciation: *const SPPHONEID,
-    pub bDisplayAttributes: ::BYTE,
-    pub RequiredConfidence: ::c_char,
-    pub ActualConfidence: ::c_char,
-    pub Reserved: ::BYTE,
-    pub SREngineConfidence: ::c_float,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPPHRASERULE {
-    pub pszName: ::LPCWSTR,
-    pub ulId: ::ULONG,
-    pub ulFirstElement: ::ULONG,
-    pub ulCountOfElements: ::ULONG,
-    pub pNextSibling: *const SPPHRASERULE,
-    pub pFirstChild: *const SPPHRASERULE,
-    pub SREngineConfidence: ::c_float,
-    pub Confidence: ::c_char,
-}
+STRUCT!{struct SPPHRASEELEMENT {
+    ulAudioTimeOffset: ::ULONG,
+    ulAudioSizeTime: ::ULONG,
+    ulAudioStreamOffset: ::ULONG,
+    ulAudioSizeBytes: ::ULONG,
+    ulRetainedStreamOffset: ::ULONG,
+    ulRetainedSizeBytes: ::ULONG,
+    pszDisplayText: ::LPCWSTR,
+    pszLexicalForm: ::LPCWSTR,
+    pszPronunciation: *const SPPHONEID,
+    bDisplayAttributes: ::BYTE,
+    RequiredConfidence: ::c_char,
+    ActualConfidence: ::c_char,
+    Reserved: ::BYTE,
+    SREngineConfidence: ::c_float,
+}}
+STRUCT!{struct SPPHRASERULE {
+    pszName: ::LPCWSTR,
+    ulId: ::ULONG,
+    ulFirstElement: ::ULONG,
+    ulCountOfElements: ::ULONG,
+    pNextSibling: *const SPPHRASERULE,
+    pFirstChild: *const SPPHRASERULE,
+    SREngineConfidence: ::c_float,
+    Confidence: ::c_char,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum SPPHRASEPROPERTYUNIONTYPE {
     SPPPUT_UNUSED = 0,
     SPPPUT_ARRAY_INDEX,
 }
 pub use self::SPPHRASEPROPERTYUNIONTYPE::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPPHRASEPROPERTY {
-    pub pszName: ::LPCWSTR,
-    pub bType: ::BYTE,
-    pub bReserved: ::BYTE,
-    pub usArrayIndex: u16,
-    pub pszValue: ::LPCWSTR,
-    pub vValue: ::VARIANT,
-    pub ulFirstElement: ::ULONG,
-    pub ulCountOfElements: ::ULONG,
-    pub pNextSibling: *const SPPHRASEPROPERTY,
-    pub pFirstChild: *const SPPHRASEPROPERTY,
-    pub SREngineConfidence: ::c_float,
-    pub Confidence: ::c_char,
-}
+STRUCT!{struct SPPHRASEPROPERTY {
+    pszName: ::LPCWSTR,
+    bType: ::BYTE,
+    bReserved: ::BYTE,
+    usArrayIndex: u16,
+    pszValue: ::LPCWSTR,
+    vValue: ::VARIANT,
+    ulFirstElement: ::ULONG,
+    ulCountOfElements: ::ULONG,
+    pNextSibling: *const SPPHRASEPROPERTY,
+    pFirstChild: *const SPPHRASEPROPERTY,
+    SREngineConfidence: ::c_float,
+    Confidence: ::c_char,
+}}
 UNION!(SPPHRASEPROPERTY, bType, ulId, ulId_mut, ::ULONG);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPPHRASEREPLACEMENT {
-    pub bDisplayAttributes: ::BYTE,
-    pub pszReplacementText: ::LPCWSTR,
-    pub ulFirstElement: ::ULONG,
-    pub ulCountOfElements: ::ULONG,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPSEMANTICERRORINFO {
-    pub ulLineNumber: ::ULONG,
-    pub pszScriptLine: ::LPWSTR,
-    pub pszSource: ::LPWSTR,
-    pub pszDescription: ::LPWSTR,
-    pub hrResultCode: ::HRESULT,
-}
+STRUCT!{struct SPPHRASEREPLACEMENT {
+    bDisplayAttributes: ::BYTE,
+    pszReplacementText: ::LPCWSTR,
+    ulFirstElement: ::ULONG,
+    ulCountOfElements: ::ULONG,
+}}
+STRUCT!{struct SPSEMANTICERRORINFO {
+    ulLineNumber: ::ULONG,
+    pszScriptLine: ::LPWSTR,
+    pszSource: ::LPWSTR,
+    pszDescription: ::LPWSTR,
+    hrResultCode: ::HRESULT,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum SPSEMANTICFORMAT {
     SPSMF_SAPI_PROPERTIES = 0,
@@ -662,81 +650,76 @@ pub enum SPSEMANTICFORMAT {
     SPSMF_SRGS_SEMANTICINTERPRETATION_W3C = 8
 }
 pub use self::SPSEMANTICFORMAT::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPPHRASE_50 {
-    pub cbSize: ::ULONG,
-    pub LangID: ::WORD,
-    pub wHomophoneGroupId: ::WORD,
-    pub ullGrammarID: ::ULONGLONG,
-    pub ftStartTime: ::ULONGLONG,
-    pub ullAudioStreamPosition: ::ULONGLONG,
-    pub ulAudioSizeBytes: ::ULONG,
-    pub ulRetainedSizeBytes: ::ULONG,
-    pub ulAudioSizeTime: ::ULONG,
-    pub Rule: ::SPPHRASERULE,
-    pub pProperties: *const ::SPPHRASEPROPERTY,
-    pub pElements: *const ::SPPHRASEELEMENT,
-    pub cReplacements: ::ULONG,
-    pub pReplacements: *const ::SPPHRASEREPLACEMENT,
-    pub SREngineID: ::GUID,
-    pub ulSREnginePrivateDataSize: ::ULONG,
-    pub pSREnginePrivateData: *const ::BYTE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPPHRASE_53 {
-    pub cbSize: ::ULONG,
-    pub LangID: ::WORD,
-    pub wHomophoneGroupId: ::WORD,
-    pub ullGrammarID: ::ULONGLONG,
-    pub ftStartTime: ::ULONGLONG,
-    pub ullAudioStreamPosition: ::ULONGLONG,
-    pub ulAudioSizeBytes: ::ULONG,
-    pub ulRetainedSizeBytes: ::ULONG,
-    pub ulAudioSizeTime: ::ULONG,
-    pub Rule: ::SPPHRASERULE,
-    pub pProperties: *const ::SPPHRASEPROPERTY,
-    pub pElements: *const ::SPPHRASEELEMENT,
-    pub cReplacements: ::ULONG,
-    pub pReplacements: *const ::SPPHRASEREPLACEMENT,
-    pub SREngineID: ::GUID,
-    pub ulSREnginePrivateDataSize: ::ULONG,
-    pub pSREnginePrivateData: *const ::BYTE,
-    pub pSML: ::LPWSTR,
-    pub pSemanticErrorInfo: *mut SPSEMANTICERRORINFO,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPPHRASE {
-    pub cbSize: ::ULONG,
-    pub LangID: ::WORD,
-    pub wHomophoneGroupId: ::WORD,
-    pub ullGrammarID: ::ULONGLONG,
-    pub ftStartTime: ::ULONGLONG,
-    pub ullAudioStreamPosition: ::ULONGLONG,
-    pub ulAudioSizeBytes: ::ULONG,
-    pub ulRetainedSizeBytes: ::ULONG,
-    pub ulAudioSizeTime: ::ULONG,
-    pub Rule: ::SPPHRASERULE,
-    pub pProperties: *const ::SPPHRASEPROPERTY,
-    pub pElements: *const ::SPPHRASEELEMENT,
-    pub cReplacements: ::ULONG,
-    pub pReplacements: *const ::SPPHRASEREPLACEMENT,
-    pub SREngineID: ::GUID,
-    pub ulSREnginePrivateDataSize: ::ULONG,
-    pub pSREnginePrivateData: *const ::BYTE,
-    pub pSML: ::LPWSTR,
-    pub pSemanticErrorInfo: *mut SPSEMANTICERRORINFO,
-    pub SemanticTagFormat: SPSEMANTICFORMAT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPSERIALIZEDPHRASE {
-    pub ulSerializedSize: ::ULONG,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPRULE {
-    pub pszRuleName: ::LPCWSTR,
-    pub ulRuleId: ::ULONG,
-    pub dwAttributes: ::DWORD,
-}
+STRUCT!{struct SPPHRASE_50 {
+    cbSize: ::ULONG,
+    LangID: ::WORD,
+    wHomophoneGroupId: ::WORD,
+    ullGrammarID: ::ULONGLONG,
+    ftStartTime: ::ULONGLONG,
+    ullAudioStreamPosition: ::ULONGLONG,
+    ulAudioSizeBytes: ::ULONG,
+    ulRetainedSizeBytes: ::ULONG,
+    ulAudioSizeTime: ::ULONG,
+    Rule: ::SPPHRASERULE,
+    pProperties: *const ::SPPHRASEPROPERTY,
+    pElements: *const ::SPPHRASEELEMENT,
+    cReplacements: ::ULONG,
+    pReplacements: *const ::SPPHRASEREPLACEMENT,
+    SREngineID: ::GUID,
+    ulSREnginePrivateDataSize: ::ULONG,
+    pSREnginePrivateData: *const ::BYTE,
+}}
+STRUCT!{struct SPPHRASE_53 {
+    cbSize: ::ULONG,
+    LangID: ::WORD,
+    wHomophoneGroupId: ::WORD,
+    ullGrammarID: ::ULONGLONG,
+    ftStartTime: ::ULONGLONG,
+    ullAudioStreamPosition: ::ULONGLONG,
+    ulAudioSizeBytes: ::ULONG,
+    ulRetainedSizeBytes: ::ULONG,
+    ulAudioSizeTime: ::ULONG,
+    Rule: ::SPPHRASERULE,
+    pProperties: *const ::SPPHRASEPROPERTY,
+    pElements: *const ::SPPHRASEELEMENT,
+    cReplacements: ::ULONG,
+    pReplacements: *const ::SPPHRASEREPLACEMENT,
+    SREngineID: ::GUID,
+    ulSREnginePrivateDataSize: ::ULONG,
+    pSREnginePrivateData: *const ::BYTE,
+    pSML: ::LPWSTR,
+    pSemanticErrorInfo: *mut SPSEMANTICERRORINFO,
+}}
+STRUCT!{struct SPPHRASE {
+    cbSize: ::ULONG,
+    LangID: ::WORD,
+    wHomophoneGroupId: ::WORD,
+    ullGrammarID: ::ULONGLONG,
+    ftStartTime: ::ULONGLONG,
+    ullAudioStreamPosition: ::ULONGLONG,
+    ulAudioSizeBytes: ::ULONG,
+    ulRetainedSizeBytes: ::ULONG,
+    ulAudioSizeTime: ::ULONG,
+    Rule: ::SPPHRASERULE,
+    pProperties: *const ::SPPHRASEPROPERTY,
+    pElements: *const ::SPPHRASEELEMENT,
+    cReplacements: ::ULONG,
+    pReplacements: *const ::SPPHRASEREPLACEMENT,
+    SREngineID: ::GUID,
+    ulSREnginePrivateDataSize: ::ULONG,
+    pSREnginePrivateData: *const ::BYTE,
+    pSML: ::LPWSTR,
+    pSemanticErrorInfo: *mut SPSEMANTICERRORINFO,
+    SemanticTagFormat: SPSEMANTICFORMAT,
+}}
+STRUCT!{struct SPSERIALIZEDPHRASE {
+    ulSerializedSize: ::ULONG,
+}}
+STRUCT!{struct SPRULE {
+    pszRuleName: ::LPCWSTR,
+    ulRuleId: ::ULONG,
+    dwAttributes: ::DWORD,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum SPVALUETYPE {
     SPDF_PROPERTY = 0x1,
@@ -750,10 +733,9 @@ pub enum SPVALUETYPE {
     SPDF_ALL = 0xff
 }
 pub use self::SPVALUETYPE::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPBINARYGRAMMAR {
-    pub ulTotalSerializedSize: ::ULONG,
-}
+STRUCT!{struct SPBINARYGRAMMAR {
+    ulTotalSerializedSize: ::ULONG,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum SPPHRASERNG {
     SPPR_ALL_ELEMENTS = -1,
@@ -836,36 +818,32 @@ pub enum SPPRONUNCIATIONFLAGS {
     __, // FIXME: Univariant enum
 }
 pub use self::SPPRONUNCIATIONFLAGS::ePRONFLAG_USED;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPWORDPRONUNCIATION {
-    pub pNextWordPronunciation: *mut SPWORDPRONUNCIATION,
-    pub eLexiconType: SPLEXICONTYPE,
-    pub LangID: ::WORD,
-    pub wPronunciationFlags: ::WORD,
-    pub ePartOfSpeech: SPPARTOFSPEECH,
-    pub szPronunciation: [SPPHONEID; 1],
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPWORDPRONUNCIATIONLIST {
-    pub ulSize: ::ULONG,
-    pub pvBuffer: *mut ::BYTE,
-    pub pFirstWordPronunciation: *mut SPWORDPRONUNCIATION,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPWORD {
-    pub pNextWord: *mut SPWORD,
-    pub LangID: ::WORD,
-    pub wReserved: ::WORD,
-    pub eWordType: SPWORDTYPE,
-    pub pszWord: ::LPWSTR,
-    pub pFirstWordPronunciation: *mut SPWORDPRONUNCIATION,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPWORDLIST {
-    pub ulSize: ::ULONG,
-    pub pvBuffer: *mut ::BYTE,
-    pub pFirstWord: *mut SPWORD,
-}
+STRUCT!{struct SPWORDPRONUNCIATION {
+    pNextWordPronunciation: *mut SPWORDPRONUNCIATION,
+    eLexiconType: SPLEXICONTYPE,
+    LangID: ::WORD,
+    wPronunciationFlags: ::WORD,
+    ePartOfSpeech: SPPARTOFSPEECH,
+    szPronunciation: [SPPHONEID; 1],
+}}
+STRUCT!{struct SPWORDPRONUNCIATIONLIST {
+    ulSize: ::ULONG,
+    pvBuffer: *mut ::BYTE,
+    pFirstWordPronunciation: *mut SPWORDPRONUNCIATION,
+}}
+STRUCT!{struct SPWORD {
+    pNextWord: *mut SPWORD,
+    LangID: ::WORD,
+    wReserved: ::WORD,
+    eWordType: SPWORDTYPE,
+    pszWord: ::LPWSTR,
+    pFirstWordPronunciation: *mut SPWORDPRONUNCIATION,
+}}
+STRUCT!{struct SPWORDLIST {
+    ulSize: ::ULONG,
+    pvBuffer: *mut ::BYTE,
+    pFirstWord: *mut SPWORD,
+}}
 RIDL!(
 interface ISpLexicon(ISpLexiconVtbl): IUnknown(IUnknownVtbl) {
     fn GetPronunciations(
@@ -907,20 +885,18 @@ pub enum SPSHORTCUTTYPE {
     SPPS_RESERVED4 = 0xf000
 }
 pub use self::SPSHORTCUTTYPE::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPSHORTCUTPAIR {
-    pub pNextSHORTCUTPAIR: *mut SPSHORTCUTPAIR,
-    pub LangID: ::WORD,
-    pub shType: SPSHORTCUTTYPE,
-    pub pszDisplay: ::LPWSTR,
-    pub pszSpoken: ::LPWSTR,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPSHORTCUTPAIRLIST {
-    pub ulSize: ::ULONG,
-    pub pvBuffer: *mut ::BYTE,
-    pub pFirstShortcutPair: *mut SPSHORTCUTPAIR,
-}
+STRUCT!{struct SPSHORTCUTPAIR {
+    pNextSHORTCUTPAIR: *mut SPSHORTCUTPAIR,
+    LangID: ::WORD,
+    shType: SPSHORTCUTTYPE,
+    pszDisplay: ::LPWSTR,
+    pszSpoken: ::LPWSTR,
+}}
+STRUCT!{struct SPSHORTCUTPAIRLIST {
+    ulSize: ::ULONG,
+    pvBuffer: *mut ::BYTE,
+    pFirstShortcutPair: *mut SPSHORTCUTPAIR,
+}}
 RIDL!(
 interface ISpShortcut(ISpShortcutVtbl): IUnknown(IUnknownVtbl) {
     fn AddShortcut(
@@ -977,11 +953,10 @@ interface ISpPhoneticAlphabetSelection(ISpPhoneticAlphabetSelectionVtbl): IUnkno
     fn SetAlphabetToUPS(&mut self, fForceUPS: ::BOOL) -> ::HRESULT
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPVPITCH {
-    pub MiddleAdj: ::c_long,
-    pub RangeAdj: ::c_long,
-}
+STRUCT!{struct SPVPITCH {
+    MiddleAdj: ::c_long,
+    RangeAdj: ::c_long,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum SPVACTIONS {
     SPVA_Speak = 0,
@@ -993,26 +968,24 @@ pub enum SPVACTIONS {
     SPVA_ParseUnknownTag,
 }
 pub use self::SPVACTIONS::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPVCONTEXT {
-    pub pCategory: ::LPCWSTR,
-    pub pBefore: ::LPCWSTR,
-    pub pAfter: ::LPCWSTR,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPVSTATE {
-    pub eAction: SPVACTIONS,
-    pub LangID: ::WORD,
-    pub wReserved: ::WORD,
-    pub EmphAdj: ::c_long,
-    pub RateAdj: ::c_long,
-    pub Volume: ::ULONG,
-    pub PitchAdj: SPVPITCH,
-    pub SilenceMSecs: ::ULONG,
-    pub pPhoneIds: *mut SPPHONEID,
-    pub ePartOfSpeech: SPPARTOFSPEECH,
-    pub Context: SPVCONTEXT,
-}
+STRUCT!{struct SPVCONTEXT {
+    pCategory: ::LPCWSTR,
+    pBefore: ::LPCWSTR,
+    pAfter: ::LPCWSTR,
+}}
+STRUCT!{struct SPVSTATE {
+    eAction: SPVACTIONS,
+    LangID: ::WORD,
+    wReserved: ::WORD,
+    EmphAdj: ::c_long,
+    RateAdj: ::c_long,
+    Volume: ::ULONG,
+    PitchAdj: SPVPITCH,
+    SilenceMSecs: ::ULONG,
+    pPhoneIds: *mut SPPHONEID,
+    ePartOfSpeech: SPPARTOFSPEECH,
+    Context: SPVCONTEXT,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum SPRUNSTATE {
     SPRS_DONE = 1 << 0,
@@ -1034,22 +1007,21 @@ pub enum SPVPRIORITY {
     SPVPRI_OVER = 1 << 1
 }
 pub use self::SPVPRIORITY::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPVOICESTATUS {
-    pub ulCurrentStream: ::ULONG,
-    pub ulLastStreamQueued: ::ULONG,
-    pub hrLastResult: ::HRESULT,
-    pub dwRunningState: ::DWORD,
-    pub ulInputWordPos: ::ULONG,
-    pub ulInputWordLen: ::ULONG,
-    pub ulInputSentPos: ::ULONG,
-    pub ulInputSentLen: ::ULONG,
-    pub lBookmarkId: ::LONG,
-    pub PhonemeId: SPPHONEID,
-    pub VisemeId: SPVISEMES,
-    pub dwReserved1: ::DWORD,
-    pub dwReserved2: ::DWORD,
-}
+STRUCT!{struct SPVOICESTATUS {
+    ulCurrentStream: ::ULONG,
+    ulLastStreamQueued: ::ULONG,
+    hrLastResult: ::HRESULT,
+    dwRunningState: ::DWORD,
+    ulInputWordPos: ::ULONG,
+    ulInputWordLen: ::ULONG,
+    ulInputSentPos: ::ULONG,
+    ulInputSentLen: ::ULONG,
+    lBookmarkId: ::LONG,
+    PhonemeId: SPPHONEID,
+    VisemeId: SPVISEMES,
+    dwReserved1: ::DWORD,
+    dwReserved2: ::DWORD,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum SPEAKFLAGS {
     SPF_DEFAULT = 0,
@@ -1155,17 +1127,15 @@ interface ISpPhrase2(ISpPhrase2Vtbl): ISpPhrase(ISpPhraseVtbl) {
     ) -> ::HRESULT
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPRECORESULTTIMES {
-    pub ftStreamTime: ::FILETIME,
-    pub ullLength: ::ULONGLONG,
-    pub dwTickCount: ::DWORD,
-    pub ullStart: ::ULONGLONG,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPSERIALIZEDRESULT {
-    pub ulSerializedSize: ::ULONG,
-}
+STRUCT!{struct SPRECORESULTTIMES {
+    ftStreamTime: ::FILETIME,
+    ullLength: ::ULONGLONG,
+    dwTickCount: ::DWORD,
+    ullStart: ::ULONGLONG,
+}}
+STRUCT!{struct SPSERIALIZEDRESULT {
+    ulSerializedSize: ::ULONG,
+}}
 RIDL!(
 interface ISpRecoResult(ISpRecoResultVtbl): ISpPhrase(ISpPhraseVtbl) {
     fn GetResultTimes(&mut self, pTimes: *mut SPRECORESULTTIMES) -> ::HRESULT,
@@ -1214,13 +1184,12 @@ interface ISpXMLRecoResult(ISpXMLRecoResultVtbl): ISpRecoResult(ISpRecoResultVtb
     fn GetXMLErrorInfo(&mut self, pSemanticErrorInfo: *mut SPSEMANTICERRORINFO) -> ::HRESULT
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPTEXTSELECTIONINFO {
-    pub ulStartActiveOffset: ::ULONG,
-    pub cchActiveChars: ::ULONG,
-    pub ulStartSelection: ::ULONG,
-    pub cchSelection: ::ULONG,
-}
+STRUCT!{struct SPTEXTSELECTIONINFO {
+    ulStartActiveOffset: ::ULONG,
+    cchActiveChars: ::ULONG,
+    ulStartSelection: ::ULONG,
+    cchSelection: ::ULONG,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum SPWORDPRONOUNCEABLE {
     SPWP_UNKNOWN_WORD_UNPRONOUNCEABLE = 0,
@@ -1262,13 +1231,12 @@ pub enum SPGRAMMARWORDTYPE {
     SPWT_LEXICAL_NO_SPECIAL_CHARS = 3,
 }
 pub use self::SPGRAMMARWORDTYPE::*;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPPROPERTYINFO {
-    pub pszName: ::LPCWSTR,
-    pub ulId: ::ULONG,
-    pub pszValue: ::LPCWSTR,
-    pub vValue: ::VARIANT,
-}
+STRUCT!{struct SPPROPERTYINFO {
+    pszName: ::LPCWSTR,
+    ulId: ::ULONG,
+    pszValue: ::LPCWSTR,
+    vValue: ::VARIANT,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum SPCFGRULEATTRIBUTES {
     SPRAF_TopLevel = 1 << 0,
@@ -1530,17 +1498,16 @@ interface ISpProperties(ISpPropertiesVtbl): IUnknown(IUnknownVtbl) {
     fn GetPropertyString(&mut self, pName: ::LPCWSTR, ppCoMemValue: *mut ::LPWSTR) -> ::HRESULT
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPRECOGNIZERSTATUS {
-    pub AudioStatus: SPAUDIOSTATUS,
-    pub ullRecognitionStreamPos: ::ULONGLONG,
-    pub ulStreamNumber: ::ULONG,
-    pub ulNumActive: ::ULONG,
-    pub clsidEngine: ::CLSID,
-    pub cLangIDs: ::ULONG,
-    pub aLangID: [::WORD; 20],
-    pub ullRecognitionStreamTime: ::ULONGLONG,
-}
+STRUCT!{struct SPRECOGNIZERSTATUS {
+    AudioStatus: SPAUDIOSTATUS,
+    ullRecognitionStreamPos: ::ULONGLONG,
+    ulStreamNumber: ::ULONG,
+    ulNumActive: ::ULONG,
+    clsidEngine: ::CLSID,
+    cLangIDs: ::ULONG,
+    aLangID: [::WORD; 20],
+    ullRecognitionStreamTime: ::ULONGLONG,
+}}
 #[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
 pub enum SPWAVEFORMATTYPE {
     SPWF_INPUT = 0,
@@ -1629,11 +1596,10 @@ interface ISpRecognizer3(ISpRecognizer3Vtbl): IUnknown(IUnknownVtbl) {
     fn GetActiveCategory(&mut self, ppCategory: *mut *mut ISpRecoCategory) -> ::HRESULT
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPNORMALIZATIONLIST {
-    pub ulSize: ::ULONG,
-    pub ppszzNormalizedList: *mut *mut ::WCHAR,
-}
+STRUCT!{struct SPNORMALIZATIONLIST {
+    ulSize: ::ULONG,
+    ppszzNormalizedList: *mut *mut ::WCHAR,
+}}
 RIDL!(
 interface ISpEnginePronunciation(ISpEnginePronunciationVtbl): IUnknown(IUnknownVtbl) {
     fn Normalize(
@@ -1646,17 +1612,15 @@ interface ISpEnginePronunciation(ISpEnginePronunciationVtbl): IUnknown(IUnknownV
     ) -> ::HRESULT
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPDISPLAYTOKEN {
-    pub pszLexical: *const ::WCHAR,
-    pub pszDisplay: *const ::WCHAR,
-    pub bDisplayAttributes: ::BYTE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct SPDISPLAYPHRASE {
-    pub ulNumTokens: ::ULONG,
-    pub pTokens: *mut SPDISPLAYTOKEN,
-}
+STRUCT!{struct SPDISPLAYTOKEN {
+    pszLexical: *const ::WCHAR,
+    pszDisplay: *const ::WCHAR,
+    bDisplayAttributes: ::BYTE,
+}}
+STRUCT!{struct SPDISPLAYPHRASE {
+    ulNumTokens: ::ULONG,
+    pTokens: *mut SPDISPLAYTOKEN,
+}}
 RIDL!(
 interface ISpDisplayAlternates(ISpDisplayAlternatesVtbl): IUnknown(IUnknownVtbl) {
     fn GetDisplayAlternates(

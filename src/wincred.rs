@@ -33,53 +33,49 @@ pub const CRED_PERSIST_NONE: ::DWORD = 0;
 pub const CRED_PERSIST_SESSION: ::DWORD = 1;
 pub const CRED_PERSIST_LOCAL_MACHINE: ::DWORD = 2;
 pub const CRED_PERSIST_ENTERPRISE: ::DWORD = 3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CREDENTIAL_ATTRIBUTEA {
-    pub Keyword: ::LPSTR,
-    pub Flags: ::DWORD,
-    pub ValueSize: ::DWORD,
-    pub Value: ::LPBYTE,
-}
+STRUCT!{struct CREDENTIAL_ATTRIBUTEA {
+    Keyword: ::LPSTR,
+    Flags: ::DWORD,
+    ValueSize: ::DWORD,
+    Value: ::LPBYTE,
+}}
 pub type PCREDENTIAL_ATTRIBUTEA = *mut CREDENTIAL_ATTRIBUTEA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CREDENTIAL_ATTRIBUTEW {
-    pub Keyword: ::LPWSTR,
-    pub Flags: ::DWORD,
-    pub ValueSize: ::DWORD,
-    pub Value: ::LPBYTE,
-}
+STRUCT!{struct CREDENTIAL_ATTRIBUTEW {
+    Keyword: ::LPWSTR,
+    Flags: ::DWORD,
+    ValueSize: ::DWORD,
+    Value: ::LPBYTE,
+}}
 pub type PCREDENTIAL_ATTRIBUTEW = *mut CREDENTIAL_ATTRIBUTEW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CREDENTIALA {
-    pub Flags: ::DWORD,
-    pub Type: ::DWORD,
-    pub TargetName: ::LPSTR,
-    pub Comment: ::LPSTR,
-    pub LastWritten: ::FILETIME,
-    pub CredentialBlobSize: ::DWORD,
-    pub CredentialBlob: ::LPBYTE,
-    pub Persist: ::DWORD,
-    pub AttributeCount: ::DWORD,
-    pub Attributes: PCREDENTIAL_ATTRIBUTEA,
-    pub TargetAlias: ::LPSTR,
-    pub UserName: ::LPSTR,
-}
+STRUCT!{struct CREDENTIALA {
+    Flags: ::DWORD,
+    Type: ::DWORD,
+    TargetName: ::LPSTR,
+    Comment: ::LPSTR,
+    LastWritten: ::FILETIME,
+    CredentialBlobSize: ::DWORD,
+    CredentialBlob: ::LPBYTE,
+    Persist: ::DWORD,
+    AttributeCount: ::DWORD,
+    Attributes: PCREDENTIAL_ATTRIBUTEA,
+    TargetAlias: ::LPSTR,
+    UserName: ::LPSTR,
+}}
 pub type PCREDENTIALA = *mut CREDENTIALA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CREDENTIALW {
-    pub Flags: ::DWORD,
-    pub Type: ::DWORD,
-    pub TargetName: ::LPWSTR,
-    pub Comment: ::LPWSTR,
-    pub LastWritten: ::FILETIME,
-    pub CredentialBlobSize: ::DWORD,
-    pub CredentialBlob: ::LPBYTE,
-    pub Persist: ::DWORD,
-    pub AttributeCount: ::DWORD,
-    pub Attributes: PCREDENTIAL_ATTRIBUTEW,
-    pub TargetAlias: ::LPWSTR,
-    pub UserName: ::LPWSTR,
-}
+STRUCT!{struct CREDENTIALW {
+    Flags: ::DWORD,
+    Type: ::DWORD,
+    TargetName: ::LPWSTR,
+    Comment: ::LPWSTR,
+    LastWritten: ::FILETIME,
+    CredentialBlobSize: ::DWORD,
+    CredentialBlob: ::LPBYTE,
+    Persist: ::DWORD,
+    AttributeCount: ::DWORD,
+    Attributes: PCREDENTIAL_ATTRIBUTEW,
+    TargetAlias: ::LPWSTR,
+    UserName: ::LPWSTR,
+}}
 pub type PCREDENTIALW = *mut CREDENTIALW;
 pub const CRED_TI_SERVER_FORMAT_UNKNOWN: ::ULONG = 0x0001;
 pub const CRED_TI_DOMAIN_FORMAT_UNKNOWN: ::ULONG = 0x0002;
@@ -88,51 +84,46 @@ pub const CRED_TI_USERNAME_TARGET: ::ULONG = 0x0008;
 pub const CRED_TI_CREATE_EXPLICIT_CRED: ::ULONG = 0x0010;
 pub const CRED_TI_WORKGROUP_MEMBER: ::ULONG = 0x0020;
 pub const CRED_TI_VALID_FLAGS: ::ULONG = 0xF07F;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CREDENTIAL_TARGET_INFORMATIONA {
-    pub TargetName: ::LPSTR,
-    pub NetbiosServerName: ::LPSTR,
-    pub DnsServerName: ::LPSTR,
-    pub NetbiosDomainName: ::LPSTR,
-    pub DnsDomainName: ::LPSTR,
-    pub DnsTreeName: ::LPSTR,
-    pub PackageName: ::LPSTR,
-    pub Flags: ::ULONG,
-    pub CredTypeCount: ::DWORD,
-    pub CredTypes: ::LPDWORD,
-}
+STRUCT!{struct CREDENTIAL_TARGET_INFORMATIONA {
+    TargetName: ::LPSTR,
+    NetbiosServerName: ::LPSTR,
+    DnsServerName: ::LPSTR,
+    NetbiosDomainName: ::LPSTR,
+    DnsDomainName: ::LPSTR,
+    DnsTreeName: ::LPSTR,
+    PackageName: ::LPSTR,
+    Flags: ::ULONG,
+    CredTypeCount: ::DWORD,
+    CredTypes: ::LPDWORD,
+}}
 pub type PCREDENTIAL_TARGET_INFORMATIONA = *mut CREDENTIAL_TARGET_INFORMATIONA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CREDENTIAL_TARGET_INFORMATIONW {
-    pub TargetName: ::LPWSTR,
-    pub NetbiosServerName: ::LPWSTR,
-    pub DnsServerName: ::LPWSTR,
-    pub NetbiosDomainName: ::LPWSTR,
-    pub DnsDomainName: ::LPWSTR,
-    pub DnsTreeName: ::LPWSTR,
-    pub PackageName: ::LPWSTR,
-    pub Flags: ::ULONG,
-    pub CredTypeCount: ::DWORD,
-    pub CredTypes: ::LPDWORD,
-}
+STRUCT!{struct CREDENTIAL_TARGET_INFORMATIONW {
+    TargetName: ::LPWSTR,
+    NetbiosServerName: ::LPWSTR,
+    DnsServerName: ::LPWSTR,
+    NetbiosDomainName: ::LPWSTR,
+    DnsDomainName: ::LPWSTR,
+    DnsTreeName: ::LPWSTR,
+    PackageName: ::LPWSTR,
+    Flags: ::ULONG,
+    CredTypeCount: ::DWORD,
+    CredTypes: ::LPDWORD,
+}}
 pub type PCREDENTIAL_TARGET_INFORMATIONW = *mut CREDENTIAL_TARGET_INFORMATIONW;
 pub const CERT_HASH_LENGTH: usize = 20;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CERT_CREDENTIAL_INFO {
-    pub cbSize: ::ULONG,
-    pub rgbHashOfCert: [::UCHAR; CERT_HASH_LENGTH],
-}
+STRUCT!{struct CERT_CREDENTIAL_INFO {
+    cbSize: ::ULONG,
+    rgbHashOfCert: [::UCHAR; CERT_HASH_LENGTH],
+}}
 pub type PCERT_CREDENTIAL_INFO = *mut CERT_CREDENTIAL_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct USERNAME_TARGET_CREDENTIAL_INFO {
-    pub UserName: ::LPWSTR,
-}
+STRUCT!{struct USERNAME_TARGET_CREDENTIAL_INFO {
+    UserName: ::LPWSTR,
+}}
 pub type PUSERNAME_TARGET_CREDENTIAL_INFO = *mut USERNAME_TARGET_CREDENTIAL_INFO;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct BINARY_BLOB_CREDENTIAL_INFO {
-    pub cbBlob: ::ULONG,
-    pub pbBlob: ::LPBYTE,
-}
+STRUCT!{struct BINARY_BLOB_CREDENTIAL_INFO {
+    cbBlob: ::ULONG,
+    pbBlob: ::LPBYTE,
+}}
 pub type PBINARY_BLOB_CREDENTIAL_INFO = *mut BINARY_BLOB_CREDENTIAL_INFO;
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum CRED_MARSHAL_TYPE {
@@ -153,23 +144,21 @@ pub const CRED_PACK_PROTECTED_CREDENTIALS: ::DWORD = 0x1;
 pub const CRED_PACK_WOW_BUFFER: ::DWORD = 0x2;
 pub const CRED_PACK_GENERIC_CREDENTIALS: ::DWORD = 0x4;
 pub const CRED_PACK_ID_PROVIDER_CREDENTIALS: ::DWORD = 0x8;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CREDUI_INFOA {
-    pub cbSize: ::DWORD,
-    pub hwndParent: ::HWND,
-    pub pszMessageText: ::PCSTR,
-    pub pszCaptionText: ::PCSTR,
-    pub hbmBanner: ::HBITMAP,
-}
+STRUCT!{struct CREDUI_INFOA {
+    cbSize: ::DWORD,
+    hwndParent: ::HWND,
+    pszMessageText: ::PCSTR,
+    pszCaptionText: ::PCSTR,
+    hbmBanner: ::HBITMAP,
+}}
 pub type PCREDUI_INFOA = *mut CREDUI_INFOA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct CREDUI_INFOW {
-    pub cbSize: ::DWORD,
-    pub hwndParent: ::HWND,
-    pub pszMessageText: ::PCWSTR,
-    pub pszCaptionText: ::PCWSTR,
-    pub hbmBanner: ::HBITMAP,
-}
+STRUCT!{struct CREDUI_INFOW {
+    cbSize: ::DWORD,
+    hwndParent: ::HWND,
+    pszMessageText: ::PCWSTR,
+    pszCaptionText: ::PCWSTR,
+    hbmBanner: ::HBITMAP,
+}}
 pub type PCREDUI_INFOW = *mut CREDUI_INFOW;
 pub const CREDUI_MAX_MESSAGE_LENGTH: ::DWORD = 1024;
 pub const CREDUI_MAX_CAPTION_LENGTH: ::DWORD = 128;

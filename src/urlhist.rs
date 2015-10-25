@@ -14,16 +14,15 @@ ENUM!{enum ADDURL_FLAG {
     ADDURL_Max = 2147483647,
 }}
 pub type LPENUMSTATURL = *mut IEnumSTATURL;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct STATURL {
-    pub cbSize: ::DWORD,
-    pub pwcsUrl: ::LPWSTR,
-    pub pwcsTitle: ::LPWSTR,
-    pub ftLastVisited: ::FILETIME,
-    pub ftLastUpdated: ::FILETIME,
-    pub ftExpires: ::FILETIME,
-    pub dwFlags: ::DWORD,
-}
+STRUCT!{struct STATURL {
+    cbSize: ::DWORD,
+    pwcsUrl: ::LPWSTR,
+    pwcsTitle: ::LPWSTR,
+    ftLastVisited: ::FILETIME,
+    ftLastUpdated: ::FILETIME,
+    ftExpires: ::FILETIME,
+    dwFlags: ::DWORD,
+}}
 pub type LPSTATURL = *mut STATURL;
 RIDL!{interface IEnumSTATURL(IEnumSTATURLVtbl): IUnknown(IUnknownVtbl) {
     fn Next(&mut self, celt: ::ULONG, rgelt: LPSTATURL, pceltFetched: *mut ::ULONG) -> ::HRESULT,

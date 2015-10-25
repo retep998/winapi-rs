@@ -2,39 +2,34 @@
 // Licensed under the MIT License <LICENSE.md>
 //! Direct3D capabilities include file
 pub type D3DCOLOR = ::DWORD;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DVECTOR {
-    pub x: ::c_float,
-    pub y: ::c_float,
-    pub z: ::c_float,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DCOLORVALUE {
-    pub r: ::c_float,
-    pub g: ::c_float,
-    pub b: ::c_float,
-    pub a: ::c_float,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DRECT {
-    pub x1: ::LONG,
-    pub y1: ::LONG,
-    pub x2: ::LONG,
-    pub y2: ::LONG,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DMATRIX {
-    pub m: [[::c_float; 4]; 4],
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DVIEWPORT9 {
-    pub X: ::DWORD,
-    pub Y: ::DWORD,
-    pub Width: ::DWORD,
-    pub Height: ::DWORD,
-    pub MinZ: ::c_float,
-    pub MaxZ: ::c_float,
-}
+STRUCT!{struct D3DVECTOR {
+    x: ::c_float,
+    y: ::c_float,
+    z: ::c_float,
+}}
+STRUCT!{struct D3DCOLORVALUE {
+    r: ::c_float,
+    g: ::c_float,
+    b: ::c_float,
+    a: ::c_float,
+}}
+STRUCT!{struct D3DRECT {
+    x1: ::LONG,
+    y1: ::LONG,
+    x2: ::LONG,
+    y2: ::LONG,
+}}
+STRUCT!{struct D3DMATRIX {
+    m: [[::c_float; 4]; 4],
+}}
+STRUCT!{struct D3DVIEWPORT9 {
+    X: ::DWORD,
+    Y: ::DWORD,
+    Width: ::DWORD,
+    Height: ::DWORD,
+    MinZ: ::c_float,
+    MaxZ: ::c_float,
+}}
 pub const D3DMAXUSERCLIPPLANES: ::DWORD = 32;
 pub const D3DCLIPPLANE0: ::DWORD = (1 << 0);
 pub const D3DCLIPPLANE1: ::DWORD = (1 << 1);
@@ -57,41 +52,38 @@ pub const D3DCS_PLANE5: ::DWORD = 0x00000800;
 pub const D3DCS_ALL: ::DWORD = D3DCS_LEFT | D3DCS_RIGHT | D3DCS_TOP | D3DCS_BOTTOM | D3DCS_FRONT
     | D3DCS_BACK | D3DCS_PLANE0 | D3DCS_PLANE1 | D3DCS_PLANE2 | D3DCS_PLANE3 | D3DCS_PLANE4
     | D3DCS_PLANE5;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DCLIPSTATUS9 {
-    pub ClipUnion: ::DWORD,
-    pub ClipIntersection: ::DWORD,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DMATERIAL9 {
-    pub Diffuse: D3DCOLORVALUE,
-    pub Ambient: D3DCOLORVALUE,
-    pub Specular: D3DCOLORVALUE,
-    pub Emissive: D3DCOLORVALUE,
-    pub Power: ::c_float,
-}
+STRUCT!{struct D3DCLIPSTATUS9 {
+    ClipUnion: ::DWORD,
+    ClipIntersection: ::DWORD,
+}}
+STRUCT!{struct D3DMATERIAL9 {
+    Diffuse: D3DCOLORVALUE,
+    Ambient: D3DCOLORVALUE,
+    Specular: D3DCOLORVALUE,
+    Emissive: D3DCOLORVALUE,
+    Power: ::c_float,
+}}
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum D3DLIGHTTYPE {
     POINT = 1,
     SPOT = 2,
     DIRECTIONAL = 3,
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DLIGHT9 {
-    pub Type: D3DLIGHTTYPE,
-    pub Diffuse: D3DCOLORVALUE,
-    pub Specular: D3DCOLORVALUE,
-    pub Ambient: D3DCOLORVALUE,
-    pub Position: D3DVECTOR,
-    pub Direction: D3DVECTOR,
-    pub Range: ::c_float,
-    pub Falloff: ::c_float,
-    pub Attenuation0: ::c_float,
-    pub Attenuation1: ::c_float,
-    pub Attenuation2: ::c_float,
-    pub Theta: ::c_float,
-    pub Phi: ::c_float,
-}
+STRUCT!{struct D3DLIGHT9 {
+    Type: D3DLIGHTTYPE,
+    Diffuse: D3DCOLORVALUE,
+    Specular: D3DCOLORVALUE,
+    Ambient: D3DCOLORVALUE,
+    Position: D3DVECTOR,
+    Direction: D3DVECTOR,
+    Range: ::c_float,
+    Falloff: ::c_float,
+    Attenuation0: ::c_float,
+    Attenuation1: ::c_float,
+    Attenuation2: ::c_float,
+    Theta: ::c_float,
+    Phi: ::c_float,
+}}
 pub const D3DCLEAR_TARGET: ::DWORD = 0x1;
 pub const D3DCLEAR_ZBUFFER: ::DWORD = 0x2;
 pub const D3DCLEAR_STENCIL: ::DWORD = 0x4;
@@ -507,15 +499,14 @@ pub enum D3DDECLTYPE {
     UNUSED = 17,
 }
 pub const MAXD3DDECLTYPE: D3DDECLTYPE = D3DDECLTYPE::UNUSED;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DVERTEXELEMENT9 {
-    pub Stream: ::WORD,
-    pub Offset: ::WORD,
-    pub Type: ::BYTE,
-    pub Method: ::BYTE,
-    pub Usage: ::BYTE,
-    pub UsageIndex: ::BYTE,
-}
+STRUCT!{struct D3DVERTEXELEMENT9 {
+    Stream: ::WORD,
+    Offset: ::WORD,
+    Type: ::BYTE,
+    Method: ::BYTE,
+    Usage: ::BYTE,
+    UsageIndex: ::BYTE,
+}}
 pub type LPD3DVERTEXELEMENT9 = *mut D3DVERTEXELEMENT9;
 pub const D3DDECL_END: D3DVERTEXELEMENT9 = D3DVERTEXELEMENT9 {
     Stream: 0xFF,
@@ -927,22 +918,18 @@ pub enum D3DFORMAT {
     A2B10G10R10_XR_BIAS = 119,
     BINARYBUFFER = 199,
 }
-#[repr(C)]
-#[derive(Clone, Copy, Debug)]
-pub struct D3DDISPLAYMODE {
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub RefreshRate: ::UINT,
-    pub Format: D3DFORMAT,
-}
-#[repr(C)]
-#[derive(Clone, Copy, Debug)]
-pub struct D3DDEVICE_CREATION_PARAMETERS {
-    pub AdapterOrdinal: ::UINT,
-    pub DeviceType: D3DDEVTYPE,
-    pub hFocusWindow: ::HWND,
-    pub BehaviorFlags: ::DWORD,
-}
+STRUCT!{struct D3DDISPLAYMODE {
+    Width: ::UINT,
+    Height: ::UINT,
+    RefreshRate: ::UINT,
+    Format: D3DFORMAT,
+}}
+STRUCT!{struct D3DDEVICE_CREATION_PARAMETERS {
+    AdapterOrdinal: ::UINT,
+    DeviceType: D3DDEVTYPE,
+    hFocusWindow: ::HWND,
+    BehaviorFlags: ::DWORD,
+}}
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum D3DSWAPEFFECT {
     DISCARD = 1,
@@ -959,23 +946,22 @@ pub enum D3DPOOL {
     SCRATCH = 3,
 }
 pub const D3DPRESENT_RATE_DEFAULT: ::DWORD = 0x00000000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DPRESENT_PARAMETERS {
-    pub BackBufferWidth: ::UINT,
-    pub BackBufferHeight: ::UINT,
-    pub BackBufferFormat: D3DFORMAT,
-    pub BackBufferCount: ::UINT,
-    pub MultiSampleType: D3DMULTISAMPLE_TYPE,
-    pub MultiSampleQuality: ::DWORD,
-    pub SwapEffect: D3DSWAPEFFECT,
-    pub hDeviceWindow: ::HWND,
-    pub Windowed: ::BOOL,
-    pub EnableAutoDepthStencil: ::BOOL,
-    pub AutoDepthStencilFormat: D3DFORMAT,
-    pub Flags: ::DWORD,
-    pub FullScreen_RefreshRateInHz: ::UINT,
-    pub PresentationInterval: ::UINT,
-}
+STRUCT!{struct D3DPRESENT_PARAMETERS {
+    BackBufferWidth: ::UINT,
+    BackBufferHeight: ::UINT,
+    BackBufferFormat: D3DFORMAT,
+    BackBufferCount: ::UINT,
+    MultiSampleType: D3DMULTISAMPLE_TYPE,
+    MultiSampleQuality: ::DWORD,
+    SwapEffect: D3DSWAPEFFECT,
+    hDeviceWindow: ::HWND,
+    Windowed: ::BOOL,
+    EnableAutoDepthStencil: ::BOOL,
+    AutoDepthStencilFormat: D3DFORMAT,
+    Flags: ::DWORD,
+    FullScreen_RefreshRateInHz: ::UINT,
+    PresentationInterval: ::UINT,
+}}
 pub const D3DPRESENTFLAG_LOCKABLE_BACKBUFFER: ::DWORD = 0x00000001;
 pub const D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL: ::DWORD = 0x00000002;
 pub const D3DPRESENTFLAG_DEVICECLIP: ::DWORD = 0x00000004;
@@ -1048,86 +1034,76 @@ pub const D3DLOCK_NOOVERWRITE: ::DWORD = 0x00001000;
 pub const D3DLOCK_NOSYSLOCK: ::DWORD = 0x00000800;
 pub const D3DLOCK_DONOTWAIT: ::DWORD = 0x00004000;
 pub const D3DLOCK_NO_DIRTY_UPDATE: ::DWORD = 0x00008000;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DVERTEXBUFFER_DESC {
-    pub Format: D3DFORMAT,
-    pub Type: D3DRESOURCETYPE,
-    pub Usage: ::DWORD,
-    pub Pool: D3DPOOL,
-    pub Size: ::UINT,
-    pub FVF: ::DWORD,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DINDEXBUFFER_DESC {
-    pub Format: D3DFORMAT,
-    pub Type: D3DRESOURCETYPE,
-    pub Usage: ::DWORD,
-    pub Pool: D3DPOOL,
-    pub Size: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DSURFACE_DESC {
-    pub Format: D3DFORMAT,
-    pub Type: D3DRESOURCETYPE,
-    pub Usage: ::DWORD,
-    pub Pool: D3DPOOL,
-    pub MultiSampleType: D3DMULTISAMPLE_TYPE,
-    pub MultiSampleQuality: ::DWORD,
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DVOLUME_DESC {
-    pub Format: D3DFORMAT,
-    pub Type: D3DRESOURCETYPE,
-    pub Usage: ::DWORD,
-    pub Pool: D3DPOOL,
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub Depth: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DLOCKED_RECT {
-    pub Pitch: ::INT,
-    pub pBits: *mut ::c_void,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DBOX {
-    pub Left: ::UINT,
-    pub Top: ::UINT,
-    pub Right: ::UINT,
-    pub Bottom: ::UINT,
-    pub Front: ::UINT,
-    pub Back: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DLOCKED_BOX {
-    pub RowPitch: ::INT,
-    pub SlicePitch: ::INT,
-    pub pBits: *mut ::c_void,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DRANGE {
-    pub Offset: ::UINT,
-    pub Size: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DRECTPATCH_INFO {
-    pub StartVertexOffsetWidth: ::UINT,
-    pub StartVertexOffsetHeight: ::UINT,
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub Stride: ::UINT,
-    pub Basis: D3DBASISTYPE,
-    pub Degree: D3DDEGREETYPE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DTRIPATCH_INFO {
-    pub StartVertexOffset: ::UINT,
-    pub NumVertices: ::UINT,
-    pub Basis: D3DBASISTYPE,
-    pub Degree: D3DDEGREETYPE,
-}
+STRUCT!{struct D3DVERTEXBUFFER_DESC {
+    Format: D3DFORMAT,
+    Type: D3DRESOURCETYPE,
+    Usage: ::DWORD,
+    Pool: D3DPOOL,
+    Size: ::UINT,
+    FVF: ::DWORD,
+}}
+STRUCT!{struct D3DINDEXBUFFER_DESC {
+    Format: D3DFORMAT,
+    Type: D3DRESOURCETYPE,
+    Usage: ::DWORD,
+    Pool: D3DPOOL,
+    Size: ::UINT,
+}}
+STRUCT!{struct D3DSURFACE_DESC {
+    Format: D3DFORMAT,
+    Type: D3DRESOURCETYPE,
+    Usage: ::DWORD,
+    Pool: D3DPOOL,
+    MultiSampleType: D3DMULTISAMPLE_TYPE,
+    MultiSampleQuality: ::DWORD,
+    Width: ::UINT,
+    Height: ::UINT,
+}}
+STRUCT!{struct D3DVOLUME_DESC {
+    Format: D3DFORMAT,
+    Type: D3DRESOURCETYPE,
+    Usage: ::DWORD,
+    Pool: D3DPOOL,
+    Width: ::UINT,
+    Height: ::UINT,
+    Depth: ::UINT,
+}}
+STRUCT!{struct D3DLOCKED_RECT {
+    Pitch: ::INT,
+    pBits: *mut ::c_void,
+}}
+STRUCT!{struct D3DBOX {
+    Left: ::UINT,
+    Top: ::UINT,
+    Right: ::UINT,
+    Bottom: ::UINT,
+    Front: ::UINT,
+    Back: ::UINT,
+}}
+STRUCT!{struct D3DLOCKED_BOX {
+    RowPitch: ::INT,
+    SlicePitch: ::INT,
+    pBits: *mut ::c_void,
+}}
+STRUCT!{struct D3DRANGE {
+    Offset: ::UINT,
+    Size: ::UINT,
+}}
+STRUCT!{struct D3DRECTPATCH_INFO {
+    StartVertexOffsetWidth: ::UINT,
+    StartVertexOffsetHeight: ::UINT,
+    Width: ::UINT,
+    Height: ::UINT,
+    Stride: ::UINT,
+    Basis: D3DBASISTYPE,
+    Degree: D3DDEGREETYPE,
+}}
+STRUCT!{struct D3DTRIPATCH_INFO {
+    StartVertexOffset: ::UINT,
+    NumVertices: ::UINT,
+    Basis: D3DBASISTYPE,
+    Degree: D3DDEGREETYPE,
+}}
 pub const MAX_DEVICE_IDENTIFIER_STRING: usize = 512;
 #[repr(C)] #[derive(Copy)]
 pub struct D3DADAPTER_IDENTIFIER9 {
@@ -1143,11 +1119,10 @@ pub struct D3DADAPTER_IDENTIFIER9 {
     pub WHQLLevel: ::DWORD,
 }
 impl Clone for D3DADAPTER_IDENTIFIER9 { fn clone(&self) -> D3DADAPTER_IDENTIFIER9 { *self } }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DRASTER_STATUS {
-    pub InVBlank: ::BOOL,
-    pub ScanLine: ::UINT,
-}
+STRUCT!{struct D3DRASTER_STATUS {
+    InVBlank: ::BOOL,
+    ScanLine: ::UINT,
+}}
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum D3DDEBUGMONITORTOKENS {
     ENABLE = 0,
@@ -1174,79 +1149,69 @@ pub enum D3DQUERYTYPE {
 pub const D3DISSUE_END: ::DWORD = 1 << 0;
 pub const D3DISSUE_BEGIN: ::DWORD = 1 << 1;
 pub const D3DGETDATA_FLUSH: ::DWORD = 1 << 0;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DRESOURCESTATS {
-    pub bThrashing: ::BOOL,
-    pub ApproxBytesDownloaded: ::DWORD,
-    pub NumEvicts: ::DWORD,
-    pub NumVidCreates: ::DWORD,
-    pub LastPri: ::DWORD,
-    pub NumUsed: ::DWORD,
-    pub NumUsedInVidMem: ::DWORD,
-    pub WorkingSet: ::DWORD,
-    pub WorkingSetBytes: ::DWORD,
-    pub TotalManaged: ::DWORD,
-    pub TotalBytes: ::DWORD,
-}
+STRUCT!{struct D3DRESOURCESTATS {
+    bThrashing: ::BOOL,
+    ApproxBytesDownloaded: ::DWORD,
+    NumEvicts: ::DWORD,
+    NumVidCreates: ::DWORD,
+    LastPri: ::DWORD,
+    NumUsed: ::DWORD,
+    NumUsedInVidMem: ::DWORD,
+    WorkingSet: ::DWORD,
+    WorkingSetBytes: ::DWORD,
+    TotalManaged: ::DWORD,
+    TotalBytes: ::DWORD,
+}}
 pub const D3DRTYPECOUNT: usize = 8;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DDEVINFO_RESOURCEMANAGER {
-    pub stats: [D3DRESOURCESTATS; 8 /*D3DRTYPECOUNT, rust bug?*/],
-}
+STRUCT!{struct D3DDEVINFO_RESOURCEMANAGER {
+    stats: [D3DRESOURCESTATS; 8 /*D3DRTYPECOUNT, rust bug?*/],
+}}
 pub type LPD3DDEVINFO_RESOURCEMANAGER = *mut D3DDEVINFO_RESOURCEMANAGER;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DDEVINFO_D3DVERTEXSTATS {
-    pub NumRenderedTriangles: ::DWORD,
-    pub NumExtraClippingTriangles: ::DWORD,
-}
+STRUCT!{struct D3DDEVINFO_D3DVERTEXSTATS {
+    NumRenderedTriangles: ::DWORD,
+    NumExtraClippingTriangles: ::DWORD,
+}}
 pub type LPD3DDEVINFO_D3DVERTEXSTATS = *mut D3DDEVINFO_D3DVERTEXSTATS;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DDEVINFO_VCACHE {
-    pub Pattern: ::DWORD,
-    pub OptMethod: ::DWORD,
-    pub CacheSize: ::DWORD,
-    pub MagicNumber: ::DWORD,
-}
+STRUCT!{struct D3DDEVINFO_VCACHE {
+    Pattern: ::DWORD,
+    OptMethod: ::DWORD,
+    CacheSize: ::DWORD,
+    MagicNumber: ::DWORD,
+}}
 pub type LPD3DDEVINFO_VCACHE = *mut D3DDEVINFO_VCACHE;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DDEVINFO_D3D9PIPELINETIMINGS {
-    pub VertexProcessingTimePercent: ::FLOAT,
-    pub PixelProcessingTimePercent: ::FLOAT,
-    pub OtherGPUProcessingTimePercent: ::FLOAT,
-    pub GPUIdleTimePercent: ::FLOAT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DDEVINFO_D3D9INTERFACETIMINGS {
-    pub WaitingForGPUToUseApplicationResourceTimePercent: ::FLOAT,
-    pub WaitingForGPUToAcceptMoreCommandsTimePercent: ::FLOAT,
-    pub WaitingForGPUToStayWithinLatencyTimePercent: ::FLOAT,
-    pub WaitingForGPUExclusiveResourceTimePercent: ::FLOAT,
-    pub WaitingForGPUOtherTimePercent: ::FLOAT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DDEVINFO_D3D9STAGETIMINGS {
-    pub MemoryProcessingPercent: ::FLOAT,
-    pub ComputationProcessingPercent: ::FLOAT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DDEVINFO_D3D9BANDWIDTHTIMINGS {
-    pub MaxBandwidthUtilized: ::FLOAT,
-    pub FrontEndUploadMemoryUtilizedPercent: ::FLOAT,
-    pub VertexRateUtilizedPercent: ::FLOAT,
-    pub TriangleSetupRateUtilizedPercent: ::FLOAT,
-    pub FillRateUtilizedPercent: ::FLOAT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DDEVINFO_D3D9CACHEUTILIZATION {
-    pub TextureCacheHitRate: ::FLOAT,
-    pub PostTransformVertexCacheHitRate: ::FLOAT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DMEMORYPRESSURE {
-    pub BytesEvictedFromProcess: ::UINT64,
-    pub SizeOfInefficientAllocation: ::UINT64,
-    pub LevelOfEfficiency: ::DWORD,
-}
+STRUCT!{struct D3DDEVINFO_D3D9PIPELINETIMINGS {
+    VertexProcessingTimePercent: ::FLOAT,
+    PixelProcessingTimePercent: ::FLOAT,
+    OtherGPUProcessingTimePercent: ::FLOAT,
+    GPUIdleTimePercent: ::FLOAT,
+}}
+STRUCT!{struct D3DDEVINFO_D3D9INTERFACETIMINGS {
+    WaitingForGPUToUseApplicationResourceTimePercent: ::FLOAT,
+    WaitingForGPUToAcceptMoreCommandsTimePercent: ::FLOAT,
+    WaitingForGPUToStayWithinLatencyTimePercent: ::FLOAT,
+    WaitingForGPUExclusiveResourceTimePercent: ::FLOAT,
+    WaitingForGPUOtherTimePercent: ::FLOAT,
+}}
+STRUCT!{struct D3DDEVINFO_D3D9STAGETIMINGS {
+    MemoryProcessingPercent: ::FLOAT,
+    ComputationProcessingPercent: ::FLOAT,
+}}
+STRUCT!{struct D3DDEVINFO_D3D9BANDWIDTHTIMINGS {
+    MaxBandwidthUtilized: ::FLOAT,
+    FrontEndUploadMemoryUtilizedPercent: ::FLOAT,
+    VertexRateUtilizedPercent: ::FLOAT,
+    TriangleSetupRateUtilizedPercent: ::FLOAT,
+    FillRateUtilizedPercent: ::FLOAT,
+}}
+STRUCT!{struct D3DDEVINFO_D3D9CACHEUTILIZATION {
+    TextureCacheHitRate: ::FLOAT,
+    PostTransformVertexCacheHitRate: ::FLOAT,
+}}
+STRUCT!{struct D3DMEMORYPRESSURE {
+    BytesEvictedFromProcess: ::UINT64,
+    SizeOfInefficientAllocation: ::UINT64,
+    LevelOfEfficiency: ::DWORD,
+}}
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum D3DCOMPOSERECTSOP {
     COPY = 1,
@@ -1254,54 +1219,49 @@ pub enum D3DCOMPOSERECTSOP {
     AND = 3,
     NEG = 4,
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DCOMPOSERECTDESC {
-    pub X: ::USHORT,
-    pub Y: ::USHORT,
-    pub Width: ::USHORT,
-    pub Height: ::USHORT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DCOMPOSERECTDESTINATION {
-    pub SrcRectIndex: ::USHORT,
-    pub Reserved: ::USHORT,
-    pub X: ::SHORT,
-    pub Y: ::SHORT,
-}
+STRUCT!{struct D3DCOMPOSERECTDESC {
+    X: ::USHORT,
+    Y: ::USHORT,
+    Width: ::USHORT,
+    Height: ::USHORT,
+}}
+STRUCT!{struct D3DCOMPOSERECTDESTINATION {
+    SrcRectIndex: ::USHORT,
+    Reserved: ::USHORT,
+    X: ::SHORT,
+    Y: ::SHORT,
+}}
 pub const D3DCOMPOSERECTS_MAXNUMRECTS: ::DWORD = 0xFFFF;
 pub const D3DCONVOLUTIONMONO_MAXWIDTH: ::DWORD = 7;
 pub const D3DCONVOLUTIONMONO_MAXHEIGHT: ::DWORD = D3DCONVOLUTIONMONO_MAXWIDTH;
 pub const D3DFMT_A1_SURFACE_MAXWIDTH: ::DWORD = 8192;
 pub const D3DFMT_A1_SURFACE_MAXHEIGHT: ::DWORD = 2048;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DPRESENTSTATS {
-    pub PresentCount: ::UINT,
-    pub PresentRefreshCount: ::UINT,
-    pub SyncRefreshCount: ::UINT,
-    pub SyncQPCTime: ::LARGE_INTEGER,
-    pub SyncGPUTime: ::LARGE_INTEGER,
-}
+STRUCT!{struct D3DPRESENTSTATS {
+    PresentCount: ::UINT,
+    PresentRefreshCount: ::UINT,
+    SyncRefreshCount: ::UINT,
+    SyncQPCTime: ::LARGE_INTEGER,
+    SyncGPUTime: ::LARGE_INTEGER,
+}}
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum D3DSCANLINEORDERING {
     UNKNOWN = 0,
     PROGRESSIVE = 1,
     INTERLACED = 2,
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DDISPLAYMODEEX {
-    pub Size: ::UINT,
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub RefreshRate: ::UINT,
-    pub Format: D3DFORMAT,
-    pub ScanLineOrdering: D3DSCANLINEORDERING,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DDISPLAYMODEFILTER {
-    pub Size: ::UINT,
-    pub Format: D3DFORMAT,
-    pub ScanLineOrdering: D3DSCANLINEORDERING,
-}
+STRUCT!{struct D3DDISPLAYMODEEX {
+    Size: ::UINT,
+    Width: ::UINT,
+    Height: ::UINT,
+    RefreshRate: ::UINT,
+    Format: D3DFORMAT,
+    ScanLineOrdering: D3DSCANLINEORDERING,
+}}
+STRUCT!{struct D3DDISPLAYMODEFILTER {
+    Size: ::UINT,
+    Format: D3DFORMAT,
+    ScanLineOrdering: D3DSCANLINEORDERING,
+}}
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum D3DDISPLAYROTATION {
     IDENTITY = 1,
@@ -1315,135 +1275,118 @@ pub const D3D9_RESOURCE_PRIORITY_NORMAL: ::DWORD = 0x78000000;
 pub const D3D9_RESOURCE_PRIORITY_HIGH: ::DWORD = 0xa0000000;
 pub const D3D9_RESOURCE_PRIORITY_MAXIMUM: ::DWORD = 0xc8000000;
 pub const D3D_OMAC_SIZE: usize = 16;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D_OMAC {
-    pub Omac: [::BYTE; D3D_OMAC_SIZE],
-}
+STRUCT!{struct D3D_OMAC {
+    Omac: [::BYTE; D3D_OMAC_SIZE],
+}}
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum D3DAUTHENTICATEDCHANNELTYPE {
     D3D9 = 1,
     DRIVER_SOFTWARE = 2,
     DRIVER_HARDWARE = 3,
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERY_INPUT {
-    pub QueryType: ::GUID,
-    pub hChannel: ::HANDLE,
-    pub SequenceNumber: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT {
-    pub omac: D3D_OMAC,
-    pub QueryType: ::GUID,
-    pub hChannel: ::HANDLE,
-    pub SequenceNumber: ::UINT,
-    pub ReturnCode: ::HRESULT,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERY_INPUT {
+    QueryType: ::GUID,
+    hChannel: ::HANDLE,
+    SequenceNumber: ::UINT,
+}}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT {
+    omac: D3D_OMAC,
+    QueryType: ::GUID,
+    hChannel: ::HANDLE,
+    SequenceNumber: ::UINT,
+    ReturnCode: ::HRESULT,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDQUERY_PROTECTION, 0xa84eb584, 0xc495, 0x48aa,
     0xb9, 0x4d, 0x8b, 0xd2, 0xd6, 0xfb, 0xce, 0x5);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS {
-    pub Value: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYPROTECTION_OUTPUT {
-    pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    pub ProtectionFlags: D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS {
+    Value: ::UINT,
+}}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYPROTECTION_OUTPUT {
+    Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
+    ProtectionFlags: D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDQUERY_CHANNELTYPE, 0xbc1b18a5, 0xb1fb, 0x42ab,
     0xbd, 0x94, 0xb5, 0x82, 0x8b, 0x4b, 0xf7, 0xbe);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYCHANNELTYPE_OUTPUT {
-    pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    pub ChannelType: D3DAUTHENTICATEDCHANNELTYPE,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYCHANNELTYPE_OUTPUT {
+    Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
+    ChannelType: D3DAUTHENTICATEDCHANNELTYPE,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDQUERY_DEVICEHANDLE, 0xec1c539d, 0x8cff, 0x4e2a,
     0xbc, 0xc4, 0xf5, 0x69, 0x2f, 0x99, 0xf4, 0x80);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYDEVICEHANDLE_OUTPUT {
-    pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    pub DeviceHandle: ::HANDLE,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYDEVICEHANDLE_OUTPUT {
+    Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
+    DeviceHandle: ::HANDLE,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDQUERY_CRYPTOSESSION, 0x2634499e, 0xd018, 0x4d74,
     0xac, 0x17, 0x7f, 0x72, 0x40, 0x59, 0x52, 0x8d);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYCRYPTOSESSION_INPUT {
-    pub Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
-    pub DXVA2DecodeHandle: ::HANDLE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYCRYPTOSESSION_OUTPUT {
-    pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    pub DXVA2DecodeHandle: ::HANDLE,
-    pub CryptoSessionHandle: ::HANDLE,
-    pub DeviceHandle: ::HANDLE,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYCRYPTOSESSION_INPUT {
+    Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
+    DXVA2DecodeHandle: ::HANDLE,
+}}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYCRYPTOSESSION_OUTPUT {
+    Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
+    DXVA2DecodeHandle: ::HANDLE,
+    CryptoSessionHandle: ::HANDLE,
+    DeviceHandle: ::HANDLE,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDQUERY_RESTRICTEDSHAREDRESOURCEPROCESSCOUNT, 0xdb207b3, 0x9450, 0x46a6,
     0x82, 0xde, 0x1b, 0x96, 0xd4, 0x4f, 0x9c, 0xf2);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESSCOUNT_OUTPUT {
-    pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    pub NumRestrictedSharedResourceProcesses: ::UINT,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESSCOUNT_OUTPUT {
+    Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
+    NumRestrictedSharedResourceProcesses: ::UINT,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDQUERY_RESTRICTEDSHAREDRESOURCEPROCESS, 0x649bbadb, 0xf0f4, 0x4639,
     0xa1, 0x5b, 0x24, 0x39, 0x3f, 0xc3, 0xab, 0xac);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESS_INPUT {
-    pub Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
-    pub ProcessIndex: ::UINT,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESS_INPUT {
+    Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
+    ProcessIndex: ::UINT,
+}}
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
 pub enum D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE {
     UNKNOWN = 0,
     DWM = 1,
     HANDLE = 2,
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESS_OUTPUT {
-    pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    pub ProcessIndex: ::UINT,
-    pub ProcessIdentifer: D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE,
-    pub ProcessHandle: ::HANDLE,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYRESTRICTEDSHAREDRESOURCEPROCESS_OUTPUT {
+    Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
+    ProcessIndex: ::UINT,
+    ProcessIdentifer: D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE,
+    ProcessHandle: ::HANDLE,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDQUERY_UNRESTRICTEDPROTECTEDSHAREDRESOURCECOUNT,
     0x12f0bd6, 0xe662, 0x4474, 0xbe, 0xfd, 0xaa, 0x53, 0xe5, 0x14, 0x3c, 0x6d);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYUNRESTRICTEDPROTECTEDSHAREDRESOURCECOUNT_OUTPUT {
-    pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    pub NumUnrestrictedProtectedSharedResources: ::UINT,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYUNRESTRICTEDPROTECTEDSHAREDRESOURCECOUNT_OUTPUT {
+    Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
+    NumUnrestrictedProtectedSharedResources: ::UINT,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDQUERY_OUTPUTIDCOUNT, 0x2c042b5e, 0x8c07, 0x46d5,
     0xaa, 0xbe, 0x8f, 0x75, 0xcb, 0xad, 0x4c, 0x31);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTIDCOUNT_INPUT {
-    pub Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
-    pub DeviceHandle: ::HANDLE,
-    pub CryptoSessionHandle: ::HANDLE,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTIDCOUNT_OUTPUT {
-    pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    pub DeviceHandle: ::HANDLE,
-    pub CryptoSessionHandle: ::HANDLE,
-    pub NumOutputIDs: ::UINT,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTIDCOUNT_INPUT {
+    Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
+    DeviceHandle: ::HANDLE,
+    CryptoSessionHandle: ::HANDLE,
+}}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTIDCOUNT_OUTPUT {
+    Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
+    DeviceHandle: ::HANDLE,
+    CryptoSessionHandle: ::HANDLE,
+    NumOutputIDs: ::UINT,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDQUERY_OUTPUTID, 0x839ddca3, 0x9b4e, 0x41e4,
     0xb0, 0x53, 0x89, 0x2b, 0xd2, 0xa1, 0x1e, 0xe7);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTID_INPUT {
-    pub Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
-    pub DeviceHandle: ::HANDLE,
-    pub CryptoSessionHandle: ::HANDLE,
-    pub OutputIDIndex: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTID_OUTPUT {
-    pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    pub DeviceHandle: ::HANDLE,
-    pub CryptoSessionHandle: ::HANDLE,
-    pub OutputIDIndex: ::UINT,
-    pub OutputID: ::UINT64,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTID_INPUT {
+    Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
+    DeviceHandle: ::HANDLE,
+    CryptoSessionHandle: ::HANDLE,
+    OutputIDIndex: ::UINT,
+}}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYOUTPUTID_OUTPUT {
+    Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
+    DeviceHandle: ::HANDLE,
+    CryptoSessionHandle: ::HANDLE,
+    OutputIDIndex: ::UINT,
+    OutputID: ::UINT64,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDQUERY_ACCESSIBILITYATTRIBUTES, 0x6214d9d2, 0x432c, 0x4abb,
     0x9f, 0xce, 0x21, 0x6e, 0xea, 0x26, 0x9e, 0x3b);
 #[repr(i32)] #[derive(Clone, Copy, Debug)]
@@ -1460,103 +1403,89 @@ pub enum D3DBUSTYPE {
     MODIFIER_DAUGHTER_BOARD_CONNECTOR_INSIDE_OF_NUAE = 0x00050000,
     MODIFIER_NON_STANDARD = 0x80000000u32 as i32,
 }
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYINFOBUSTYPE_OUTPUT {
-    pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    pub BusType: D3DBUSTYPE,
-    pub bAccessibleInContiguousBlocks: ::BOOL,
-    pub bAccessibleInNonContiguousBlocks: ::BOOL,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYINFOBUSTYPE_OUTPUT {
+    Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
+    BusType: D3DBUSTYPE,
+    bAccessibleInContiguousBlocks: ::BOOL,
+    bAccessibleInNonContiguousBlocks: ::BOOL,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDQUERY_ENCRYPTIONWHENACCESSIBLEGUIDCOUNT, 0xb30f7066, 0x203c, 0x4b07,
     0x93, 0xfc, 0xce, 0xaa, 0xfd, 0x61, 0x24, 0x1e);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUIDCOUNT_OUTPUT {
-    pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    pub NumEncryptionGuids: ::UINT,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUIDCOUNT_OUTPUT {
+    Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
+    NumEncryptionGuids: ::UINT,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDQUERY_ENCRYPTIONWHENACCESSIBLEGUID, 0xf83a5958, 0xe986, 0x4bda,
     0xbe, 0xb0, 0x41, 0x1f, 0x6a, 0x7a, 0x1, 0xb7);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUID_INPUT {
-    pub Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
-    pub EncryptionGuidIndex: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUID_OUTPUT {
-    pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    pub EncryptionGuidIndex: ::UINT,
-    pub EncryptionGuid: ::GUID,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUID_INPUT {
+    Input: D3DAUTHENTICATEDCHANNEL_QUERY_INPUT,
+    EncryptionGuidIndex: ::UINT,
+}}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYEVICTIONENCRYPTIONGUID_OUTPUT {
+    Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
+    EncryptionGuidIndex: ::UINT,
+    EncryptionGuid: ::GUID,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDQUERY_CURRENTENCRYPTIONWHENACCESSIBLE, 0xec1791c7, 0xdad3, 0x4f15,
     0x9e, 0xc3, 0xfa, 0xa9, 0x3d, 0x60, 0xd4, 0xf0);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_QUERYUNCOMPRESSEDENCRYPTIONLEVEL_OUTPUT {
-    pub Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
-    pub EncryptionGuid: ::GUID,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT {
-    pub omac: D3D_OMAC,
-    pub ConfigureType: ::GUID,
-    pub hChannel: ::HANDLE,
-    pub SequenceNumber: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT {
-    pub omac: D3D_OMAC,
-    pub ConfigureType: ::GUID,
-    pub hChannel: ::HANDLE,
-    pub SequenceNumber: ::UINT,
-    pub ReturnCode: ::HRESULT,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_QUERYUNCOMPRESSEDENCRYPTIONLEVEL_OUTPUT {
+    Output: D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT,
+    EncryptionGuid: ::GUID,
+}}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT {
+    omac: D3D_OMAC,
+    ConfigureType: ::GUID,
+    hChannel: ::HANDLE,
+    SequenceNumber: ::UINT,
+}}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT {
+    omac: D3D_OMAC,
+    ConfigureType: ::GUID,
+    hChannel: ::HANDLE,
+    SequenceNumber: ::UINT,
+    ReturnCode: ::HRESULT,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDCONFIGURE_INITIALIZE, 0x6114bdb, 0x3523, 0x470a,
     0x8d, 0xca, 0xfb, 0xc2, 0x84, 0x51, 0x54, 0xf0);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_CONFIGUREINITIALIZE {
-    pub Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
-    pub StartSequenceQuery: ::UINT,
-    pub StartSequenceConfigure: ::UINT,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_CONFIGUREINITIALIZE {
+    Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
+    StartSequenceQuery: ::UINT,
+    StartSequenceConfigure: ::UINT,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDCONFIGURE_PROTECTION, 0x50455658, 0x3f47, 0x4362,
     0xbf, 0x99, 0xbf, 0xdf, 0xcd, 0xe9, 0xed, 0x29);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_CONFIGUREPROTECTION {
-    pub Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
-    pub Protections: D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_CONFIGUREPROTECTION {
+    Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
+    Protections: D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDCONFIGURE_CRYPTOSESSION, 0x6346cc54, 0x2cfc, 0x4ad4,
     0x82, 0x24, 0xd1, 0x58, 0x37, 0xde, 0x77, 0x0);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_CONFIGURECRYPTOSESSION {
-    pub Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
-    pub DXVA2DecodeHandle: ::HANDLE,
-    pub CryptoSessionHandle: ::HANDLE,
-    pub DeviceHandle: ::HANDLE,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_CONFIGURECRYPTOSESSION {
+    Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
+    DXVA2DecodeHandle: ::HANDLE,
+    CryptoSessionHandle: ::HANDLE,
+    DeviceHandle: ::HANDLE,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDCONFIGURE_SHAREDRESOURCE, 0x772d047, 0x1b40, 0x48e8,
     0x9c, 0xa6, 0xb5, 0xf5, 0x10, 0xde, 0x9f, 0x1);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_CONFIGURESHAREDRESOURCE {
-    pub Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
-    pub ProcessIdentiferType: D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE,
-    pub ProcessHandle: ::HANDLE,
-    pub AllowAccess: ::BOOL,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_CONFIGURESHAREDRESOURCE {
+    Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
+    ProcessIdentiferType: D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE,
+    ProcessHandle: ::HANDLE,
+    AllowAccess: ::BOOL,
+}}
 DEFINE_GUID!(D3DAUTHENTICATEDCONFIGURE_ENCRYPTIONWHENACCESSIBLE, 0x41fff286, 0x6ae0, 0x4d43,
     0x9d, 0x55, 0xa4, 0x6e, 0x9e, 0xfd, 0x15, 0x8a);
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAUTHENTICATEDCHANNEL_CONFIGUREUNCOMPRESSEDENCRYPTION {
-    pub Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
-    pub EncryptionGuid: ::GUID,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DENCRYPTED_BLOCK_INFO {
-    pub NumEncryptedBytesAtBeginning: ::UINT,
-    pub NumBytesInSkipPattern: ::UINT,
-    pub NumBytesInEncryptPattern: ::UINT,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3DAES_CTR_IV {
-    pub IV: ::UINT64,
-    pub Count: ::UINT64,
-}
+STRUCT!{struct D3DAUTHENTICATEDCHANNEL_CONFIGUREUNCOMPRESSEDENCRYPTION {
+    Parameters: D3DAUTHENTICATEDCHANNEL_CONFIGURE_INPUT,
+    EncryptionGuid: ::GUID,
+}}
+STRUCT!{struct D3DENCRYPTED_BLOCK_INFO {
+    NumEncryptedBytesAtBeginning: ::UINT,
+    NumBytesInSkipPattern: ::UINT,
+    NumBytesInEncryptPattern: ::UINT,
+}}
+STRUCT!{struct D3DAES_CTR_IV {
+    IV: ::UINT64,
+    Count: ::UINT64,
+}}
