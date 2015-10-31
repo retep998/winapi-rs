@@ -164,8 +164,7 @@ pub const SIO_RESERVED_1: ::DWORD = _WSAIOW!(IOC_WS2, 26);
 pub const SIO_RESERVED_2: ::DWORD = _WSAIOW!(IOC_WS2, 33);
 pub const SIO_GET_MULTIPLE_EXTENSION_FUNCTION_POINTER: ::DWORD = _WSAIORW!(IOC_WS2, 36);
 pub const IPPROTO_IP: ::c_int = 0;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum IPPROTO {
+ENUM!{enum IPPROTO {
     IPPROTO_HOPOPTS = 0,  // IPv6 Hop-by-Hop options
     IPPROTO_ICMP = 1,
     IPPROTO_IGMP = 2,
@@ -201,7 +200,7 @@ pub enum IPPROTO {
     IPPROTO_RESERVED_IPSECOFFLOAD = 259,
     IPPROTO_RESERVED_WNV = 260,
     IPPROTO_RESERVED_MAX = 261,
-}
+}}
 pub type PIPPROTO = *mut IPPROTO;
 STRUCT!{struct SOCKADDR_IN {
     sin_family: ADDRESS_FAMILY,

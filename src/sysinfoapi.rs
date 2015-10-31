@@ -28,8 +28,7 @@ STRUCT!{struct MEMORYSTATUSEX {
     ullAvailExtendedVirtual: ::DWORDLONG,
 }}
 pub type LPMEMORYSTATUSEX = *mut MEMORYSTATUSEX;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum COMPUTER_NAME_FORMAT {
+ENUM!{enum COMPUTER_NAME_FORMAT {
     ComputerNameNetBIOS,
     ComputerNameDnsHostname,
     ComputerNameDnsDomain,
@@ -39,7 +38,7 @@ pub enum COMPUTER_NAME_FORMAT {
     ComputerNamePhysicalDnsDomain,
     ComputerNamePhysicalDnsFullyQualified,
     ComputerNameMax,
-}
+}}
 pub type INIT_ONCE = ::RTL_RUN_ONCE;
 pub type PINIT_ONCE = ::PRTL_RUN_ONCE;
 pub type LPINIT_ONCE = ::PRTL_RUN_ONCE;

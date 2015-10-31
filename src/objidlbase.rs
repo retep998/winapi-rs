@@ -34,28 +34,22 @@ interface ISequentialStream(ISequentialStreamVtbl): IUnknown(IUnknownVtbl) {
     fn Write(&mut self, pv: *const ::c_void, cb: ::ULONG, pcbWritten: *mut ::ULONG) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum STGTY {
+ENUM!{enum STGTY {
     STGTY_STORAGE = 1,
     STGTY_STREAM = 2,
     STGTY_LOCKBYTES = 3,
-    STGTY_PROPERTY = 4
-}
-pub use self::STGTY::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum STREAM_SEEK {
+    STGTY_PROPERTY = 4,
+}}
+ENUM!{enum STREAM_SEEK {
     STREAM_SEEK_SET = 0,
     STREAM_SEEK_CUR = 1,
-    STREAM_SEEK_END = 2
-}
-pub use self::STREAM_SEEK::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum LOCKTYPE {
+    STREAM_SEEK_END = 2,
+}}
+ENUM!{enum LOCKTYPE {
     LOCK_WRITE = 1,
     LOCK_EXCLUSIVE = 2,
-    LOCK_ONLYONCE = 4
-}
-pub use self::LOCKTYPE::*;
+    LOCK_ONLYONCE = 4,
+}}
 //2255
 RIDL!(
 interface IStream(IStreamVtbl): ISequentialStream(ISequentialStreamVtbl) {
@@ -81,8 +75,7 @@ interface IStream(IStreamVtbl): ISequentialStream(ISequentialStreamVtbl) {
 }
 );
 pub type LPSTREAM = *mut IStream;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub enum APTTYPEQUALIFIER {
+ENUM!{enum APTTYPEQUALIFIER {
     APTTYPEQUALIFIER_NONE = 0,
     APTTYPEQUALIFIER_IMPLICIT_MTA = 1,
     APTTYPEQUALIFIER_NA_ON_MTA = 2,
@@ -90,12 +83,11 @@ pub enum APTTYPEQUALIFIER {
     APTTYPEQUALIFIER_NA_ON_IMPLICIT_MTA = 4,
     APTTYPEQUALIFIER_NA_ON_MAINSTA = 5,
     APTTYPEQUALIFIER_APPLICATION_STA= 6,
-}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub enum APTTYPE {
-    APTTYPE_CURRENT = -1,
+}}
+ENUM!{enum APTTYPE {
+    APTTYPE_CURRENT = -1i32 as u32,
     APTTYPE_STA = 0,
     APTTYPE_MTA = 1,
     APTTYPE_NA = 2,
     APTTYPE_MAINSTA = 3,
-}
+}}

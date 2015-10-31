@@ -7,11 +7,10 @@ pub const FILE_MAP_ALL_ACCESS: ::DWORD = ::SECTION_ALL_ACCESS;
 pub const FILE_MAP_EXECUTE: ::DWORD = ::SECTION_MAP_EXECUTE_EXPLICIT;
 pub const FILE_MAP_COPY: ::DWORD = 0x00000001;
 pub const FILE_MAP_RESERVE: ::DWORD = 0x80000000;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum MEMORY_RESOURCE_NOTIFICATION_TYPE {
+ENUM!{enum MEMORY_RESOURCE_NOTIFICATION_TYPE {
     LowMemoryResourceNotification,
-    HighMemoryResourceNotification
-}
+    HighMemoryResourceNotification,
+}}
 STRUCT!{struct WIN32_MEMORY_RANGE_ENTRY {
     VirtualAddress: ::PVOID,
     NumberOfBytes: ::SIZE_T,

@@ -1,23 +1,20 @@
 // Copyright © 2015, Brian Vincent
 // Licensed under the MIT License <LICENSE.md>
 //! VSS Writer header file
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_USAGE_TYPE {
+ENUM!{enum VSS_USAGE_TYPE {
     VSS_UT_UNDEFINED = 0,
     VSS_UT_BOOTABLESYSTEMSTATE = 1,
     VSS_UT_SYSTEMSERVICE = 2,
     VSS_UT_USERDATA = 3,
     VSS_UT_OTHER = 4,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_SOURCE_TYPE {
+}}
+ENUM!{enum VSS_SOURCE_TYPE {
     VSS_ST_UNDEFINED = 0,
     VSS_ST_TRANSACTEDDB = 1,
     VSS_ST_NONTRANSACTEDDB = 2,
     VSS_ST_OTHER = 3,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_RESTOREMETHOD_ENUM {
+}}
+ENUM!{enum VSS_RESTOREMETHOD_ENUM {
     VSS_RME_UNDEFINED = 0,
     VSS_RME_RESTORE_IF_NOT_THERE = 1,
     VSS_RME_RESTORE_IF_CAN_REPLACE = 2,
@@ -27,48 +24,43 @@ pub enum VSS_RESTOREMETHOD_ENUM {
     VSS_RME_RESTORE_AT_REBOOT_IF_CANNOT_REPLACE = 6,
     VSS_RME_CUSTOM = 7,
     VSS_RME_RESTORE_STOP_START = 8,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_WRITERRESTORE_ENUM {
+}}
+ENUM!{enum VSS_WRITERRESTORE_ENUM {
     VSS_WRE_UNDEFINED = 0,
     VSS_WRE_NEVER = 1,
     VSS_WRE_IF_REPLACE_FAILS = 2,
     VSS_WRE_ALWAYS = 3,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_COMPONENT_TYPE {
+}}
+ENUM!{enum VSS_COMPONENT_TYPE {
     VSS_CT_UNDEFINED = 0,
     VSS_CT_DATABASE = 1,
     VSS_CT_FILEGROUP = 2,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_ALTERNATE_WRITER_STATE {
+}}
+ENUM!{enum VSS_ALTERNATE_WRITER_STATE {
     VSS_AWS_UNDEFINED = 0,
     VSS_AWS_NO_ALTERNATE_WRITER = 1,
     VSS_AWS_ALTERNATE_WRITER_EXISTS = 2,
     VSS_AWS_THIS_IS_ALTERNATE_WRITER = 3,
-}
+}}
 pub type VSS_SUBSCRIBE_MASK = ::DWORD;
 pub const VSS_SM_POST_SNAPSHOT_FLAG: ::DWORD = 0x00000001;
 pub const VSS_SM_BACKUP_EVENTS_FLAG: ::DWORD = 0x00000002;
 pub const VSS_SM_RESTORE_EVENTS_FLAG: ::DWORD = 0x00000004;
 pub const VSS_SM_IO_THROTTLING_FLAG: ::DWORD = 0x00000008;
 pub const VSS_SM_ALL_FLAGS: ::DWORD = 0xffffffff;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_RESTORE_TARGET {
+ENUM!{enum VSS_RESTORE_TARGET {
     VSS_RT_UNDEFINED = 0,
     VSS_RT_ORIGINAL = 1,
     VSS_RT_ALTERNATE = 2,
     VSS_RT_DIRECTED = 3,
     VSS_RT_ORIGINAL_LOCATION = 4,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_FILE_RESTORE_STATUS {
+}}
+ENUM!{enum VSS_FILE_RESTORE_STATUS {
     VSS_RS_UNDEFINED = 0,
     VSS_RS_NONE = 1,
     VSS_RS_ALL = 2,
     VSS_RS_FAILED = 3,
-}
+}}
 pub type VSS_COMPONENT_FLAGS = ::DWORD;
 pub const VSS_CF_BACKUP_RECOVERY: ::DWORD = 0x00000001;
 pub const VSS_CF_APP_ROLLBACK_RECOVERY: ::DWORD = 0x00000002;

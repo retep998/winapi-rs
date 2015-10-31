@@ -1219,15 +1219,14 @@ pub const SPFILELOG_SYSTEMLOG: ::DWORD = 0x00000001;
 pub const SPFILELOG_FORCENEW: ::DWORD = 0x00000002;
 pub const SPFILELOG_QUERYONLY: ::DWORD = 0x00000004;
 pub const SPFILELOG_OEMFILE: ::DWORD = 0x00000001;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum SetupFileLogInfo {
+ENUM!{enum SetupFileLogInfo {
     SetupFileLogSourceFilename,
     SetupFileLogChecksum,
     SetupFileLogDiskTagfile,
     SetupFileLogDiskDescription,
     SetupFileLogOtherInfo,
     SetupFileLogMax,
-}
+}}
 pub type LogSeverity = ::DWORD;
 pub const LogSevInformation: LogSeverity = 0x00000000;
 pub const LogSevWarning: LogSeverity = 0x00000001;

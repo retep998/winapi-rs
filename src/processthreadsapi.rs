@@ -55,9 +55,8 @@ STRUCT!{struct PROC_THREAD_ATTRIBUTE_LIST {
 }}
 pub type PPROC_THREAD_ATTRIBUTE_LIST = *mut PROC_THREAD_ATTRIBUTE_LIST;
 pub type LPPROC_THREAD_ATTRIBUTE_LIST = *mut PROC_THREAD_ATTRIBUTE_LIST;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum THREAD_INFORMATION_CLASS {
+ENUM!{enum THREAD_INFORMATION_CLASS {
     ThreadMemoryPriority,
     ThreadAbsoluteCpuPriority,
     ThreadInformationClassMax,
-}
+}}

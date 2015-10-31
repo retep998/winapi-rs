@@ -1,12 +1,11 @@
 // Copyright © 2015, Alex Daniel Jones
 // Licensed under the MIT License <LICENSE.md>
 // Taken from hidpi.h
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub enum HIDP_REPORT_TYPE {
+ENUM!{enum HIDP_REPORT_TYPE {
   HidP_Input,
   HidP_Output,
   HidP_Feature,
-}
+}}
 STRUCT!{struct USAGE_AND_PAGE {
     Usage: ::USAGE,
     UsagePage: ::USAGE,

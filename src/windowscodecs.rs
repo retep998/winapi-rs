@@ -11,35 +11,26 @@ STRUCT!{struct WICRect {
     Width: ::INT,
     Height: ::INT,
 }}
-#[allow(unused_qualifications)] #[repr(i32)] #[derive(Copy, Clone, Debug)]
-pub enum WICColorContextType {
+ENUM!{enum WICColorContextType {
     WICColorContextUninitialized = 0,
     WICColorContextProfile = 0x1,
     WICColorContextExifColorSpace = 0x2,
-}
-pub use self::WICColorContextType::*;
-#[allow(unused_qualifications)] #[repr(i32)] #[derive(Copy, Clone, Debug)]
-pub enum WICBitmapCreateCacheOption {
+}}
+ENUM!{enum WICBitmapCreateCacheOption {
     WICBitmapNoCache = 0,
     WICBitmapCacheOnDemand = 0x1,
     WICBitmapCacheOnLoad = 0x2,
-}
-pub use self::WICBitmapCreateCacheOption::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICDecodeOptions {
+}}
+ENUM!{enum WICDecodeOptions {
     WICDecodeMetadataCacheOnDemand = 0,
     WICDecodeMetadataCacheOnLoad = 0x1,
-}
-pub use self::WICDecodeOptions::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICBitmapEncoderCacheOption {
+}}
+ENUM!{enum WICBitmapEncoderCacheOption {
     WICBitmapEncoderCacheInMemory = 0,
     WICBitmapEncoderCacheTempFile = 0x1,
     WICBitmapEncoderNoCache = 0x2,
-}
-pub use self::WICBitmapEncoderCacheOption::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICComponentType {
+}}
+FLAGS!{enum WICComponentType {
     WICDecoder = 0x1,
     WICEncoder = 0x2,
     WICPixelFormatConverter = 0x4,
@@ -47,18 +38,14 @@ pub enum WICComponentType {
     WICMetadataWriter = 0x10,
     WICPixelFormat = 0x20,
     WICAllComponents = 0x3f,
-}
-pub use self::WICComponentType::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)]
-#[allow(unused_qualifications, overflowing_literals, trivial_numeric_casts)]
-pub enum WICComponentEnumerateOptions {
+}}
+FLAGS!{enum WICComponentEnumerateOptions {
     WICComponentEnumerateDefault = 0,
     WICComponentEnumerateRefresh = 0x1,
-    WICComponentEnumerateDisabled = 0x80000000 as i32,
-    WICComponentEnumerateUnsigned = 0x40000000 as i32,
-    WICComponentEnumerateBuiltInOnly = 0x20000000 as i32,
-}
-pub use self::WICComponentEnumerateOptions::*;
+    WICComponentEnumerateDisabled = 0x80000000,
+    WICComponentEnumerateUnsigned = 0x40000000,
+    WICComponentEnumerateBuiltInOnly = 0x20000000,
+}}
 #[allow(unused_qualifications)]
 STRUCT!{struct WICBitmapPattern {
     Position: ::ULARGE_INTEGER,
@@ -67,16 +54,13 @@ STRUCT!{struct WICBitmapPattern {
     Mask: *mut ::BYTE,
     EndOfStream: ::BOOL,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICBitmapInterpolationMode {
+ENUM!{enum WICBitmapInterpolationMode {
     WICBitmapInterpolationModeNearestNeighbor = 0,
     WICBitmapInterpolationModeLinear = 0x1,
     WICBitmapInterpolationModeCubic = 0x2,
     WICBitmapInterpolationModeFant = 0x3,
-}
-pub use self::WICBitmapInterpolationMode::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICBitmapPaletteType {
+}}
+ENUM!{enum WICBitmapPaletteType {
     WICBitmapPaletteTypeCustom = 0,
     WICBitmapPaletteTypeMedianCut = 0x1,
     WICBitmapPaletteTypeFixedBW = 0x2,
@@ -90,12 +74,10 @@ pub enum WICBitmapPaletteType {
     WICBitmapPaletteTypeFixedGray4 = 0xa,
     WICBitmapPaletteTypeFixedGray16 = 0xb,
     WICBitmapPaletteTypeFixedGray256 = 0xc,
-}
-pub use self::WICBitmapPaletteType::*;
+}}
 pub const WICBitmapPaletteTypeFixedWebPalette: WICBitmapPaletteType =
     WICBitmapPaletteTypeFixedHalftone216;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICBitmapDitherType {
+ENUM!{enum WICBitmapDitherType {
     WICBitmapDitherTypeSolid = 0,
     WICBitmapDitherTypeOrdered4x4 = 0x1,
     WICBitmapDitherTypeOrdered8x8 = 0x2,
@@ -105,68 +87,50 @@ pub enum WICBitmapDitherType {
     WICBitmapDitherTypeDualSpiral4x4 = 0x6,
     WICBitmapDitherTypeDualSpiral8x8 = 0x7,
     WICBitmapDitherTypeErrorDiffusion = 0x8,
-}
-pub use self::WICBitmapDitherType::*;
+}}
 pub const WICBitmapDitherTypeNone: WICBitmapDitherType = WICBitmapDitherTypeSolid;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICBitmapAlphaChannelOption {
+ENUM!{enum WICBitmapAlphaChannelOption {
     WICBitmapUseAlpha = 0,
     WICBitmapUsePremultipliedAlpha = 0x1,
     WICBitmapIgnoreAlpha = 0x2,
-}
-pub use self::WICBitmapAlphaChannelOption::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICBitmapTransformOptions {
+}}
+FLAGS!{enum WICBitmapTransformOptions {
     WICBitmapTransformRotate0 = 0,
     WICBitmapTransformRotate90 = 0x1,
     WICBitmapTransformRotate180 = 0x2,
     WICBitmapTransformRotate270 = 0x3,
     WICBitmapTransformFlipHorizontal = 0x8,
     WICBitmapTransformFlipVertical = 0x10,
-}
-pub use self::WICBitmapTransformOptions::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICBitmapLockFlags {
+}}
+FLAGS!{enum WICBitmapLockFlags {
     WICBitmapLockRead = 0x1,
     WICBitmapLockWrite = 0x2,
-}
-pub use self::WICBitmapLockFlags::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICBitmapDecoderCapabilities {
+}}
+FLAGS!{enum WICBitmapDecoderCapabilities {
     WICBitmapDecoderCapabilitySameEncoder = 0x1,
     WICBitmapDecoderCapabilityCanDecodeAllImages = 0x2,
     WICBitmapDecoderCapabilityCanDecodeSomeImages = 0x4,
     WICBitmapDecoderCapabilityCanEnumerateMetadata = 0x8,
     WICBitmapDecoderCapabilityCanDecodeThumbnail = 0x10,
-}
-pub use self::WICBitmapDecoderCapabilities::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICProgressOperation {
+}}
+FLAGS!{enum WICProgressOperation {
     WICProgressOperationCopyPixels = 0x1,
     WICProgressOperationWritePixels = 0x2,
     WICProgressOperationAll = 0xffff,
-}
-pub use self::WICProgressOperation::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)]
-#[allow(unused_qualifications, overflowing_literals, trivial_numeric_casts)]
-pub enum WICProgressNotification {
+}}
+FLAGS!{enum WICProgressNotification {
     WICProgressNotificationBegin = 0x10000,
     WICProgressNotificationEnd = 0x20000,
     WICProgressNotificationFrequent = 0x40000,
-    WICProgressNotificationAll = 0xffff0000 as i32,
-}
-pub use self::WICProgressNotification::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)]
-#[allow(unused_qualifications, overflowing_literals, trivial_numeric_casts)]
-pub enum WICComponentSigning {
+    WICProgressNotificationAll = 0xffff0000,
+}}
+FLAGS!{enum WICComponentSigning {
     WICComponentSigned = 0x1,
     WICComponentUnsigned = 0x2,
     WICComponentSafe = 0x4,
-    WICComponentDisabled = 0x80000000 as i32,
-}
-pub use self::WICComponentSigning::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICGifLogicalScreenDescriptorProperties {
+    WICComponentDisabled = 0x80000000,
+}}
+ENUM!{enum WICGifLogicalScreenDescriptorProperties {
     WICGifLogicalScreenSignature = 0x1,
     WICGifLogicalScreenDescriptorWidth = 0x2,
     WICGifLogicalScreenDescriptorHeight = 0x3,
@@ -176,10 +140,8 @@ pub enum WICGifLogicalScreenDescriptorProperties {
     WICGifLogicalScreenDescriptorGlobalColorTableSize = 0x7,
     WICGifLogicalScreenDescriptorBackgroundColorIndex = 0x8,
     WICGifLogicalScreenDescriptorPixelAspectRatio = 0x9,
-}
-pub use self::WICGifLogicalScreenDescriptorProperties::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICGifImageDescriptorProperties {
+}}
+ENUM!{enum WICGifImageDescriptorProperties {
     WICGifImageDescriptorLeft = 0x1,
     WICGifImageDescriptorTop = 0x2,
     WICGifImageDescriptorWidth = 0x3,
@@ -188,55 +150,35 @@ pub enum WICGifImageDescriptorProperties {
     WICGifImageDescriptorInterlaceFlag = 0x6,
     WICGifImageDescriptorSortFlag = 0x7,
     WICGifImageDescriptorLocalColorTableSize = 0x8,
-}
-pub use self::WICGifImageDescriptorProperties::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICGifGraphicControlExtensionProperties {
+}}
+ENUM!{enum WICGifGraphicControlExtensionProperties {
     WICGifGraphicControlExtensionDisposal = 0x1,
     WICGifGraphicControlExtensionUserInputFlag = 0x2,
     WICGifGraphicControlExtensionTransparencyFlag = 0x3,
     WICGifGraphicControlExtensionDelay = 0x4,
     WICGifGraphicControlExtensionTransparentColorIndex = 0x5,
-}
-pub use self::WICGifGraphicControlExtensionProperties::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICGifApplicationExtensionProperties {
+}}
+ENUM!{enum WICGifApplicationExtensionProperties {
     WICGifApplicationExtensionApplication = 0x1,
     WICGifApplicationExtensionData = 0x2,
-}
-pub use self::WICGifApplicationExtensionProperties::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICGifCommentExtensionProperties {
+}}
+ENUM!{enum WICGifCommentExtensionProperties {
     WICGifCommentExtensionText = 0x1,
-    __, // FIXME - univariant enum
-}
-pub use self::WICGifCommentExtensionProperties::WICGifCommentExtensionText;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICJpegCommentProperties {
+}}
+ENUM!{enum WICJpegCommentProperties {
     WICJpegCommentText = 0x1,
-    __, // FIXME - univariant enum
-}
-pub use self::WICJpegCommentProperties::WICJpegCommentText;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICJpegLuminanceProperties {
+}}
+ENUM!{enum WICJpegLuminanceProperties {
     WICJpegLuminanceTable = 0x1,
-    __, // FIXME - univariant enum
-}
-pub use self::WICJpegLuminanceProperties::WICJpegLuminanceTable;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICJpegChrominanceProperties {
+}}
+ENUM!{enum WICJpegChrominanceProperties {
     WICJpegChrominanceTable = 0x1,
-    __, // FIXME - univariant enum
-}
-pub use self::WICJpegChrominanceProperties::WICJpegChrominanceTable;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WIC8BIMIptcProperties {
+}}
+ENUM!{enum WIC8BIMIptcProperties {
     WIC8BIMIptcPString = 0,
     WIC8BIMIptcEmbeddedIPTC = 0x1,
-}
-pub use self::WIC8BIMIptcProperties::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WIC8BIMResolutionInfoProperties {
+}}
+ENUM!{enum WIC8BIMResolutionInfoProperties {
     WIC8BIMResolutionInfoPString = 0x1,
     WIC8BIMResolutionInfoHResolution = 0x2,
     WIC8BIMResolutionInfoHResolutionUnit = 0x3,
@@ -244,37 +186,25 @@ pub enum WIC8BIMResolutionInfoProperties {
     WIC8BIMResolutionInfoVResolution = 0x5,
     WIC8BIMResolutionInfoVResolutionUnit = 0x6,
     WIC8BIMResolutionInfoHeightUnit = 0x7,
-}
-pub use self::WIC8BIMResolutionInfoProperties::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WIC8BIMIptcDigestProperties {
+}}
+ENUM!{enum WIC8BIMIptcDigestProperties {
     WIC8BIMIptcDigestPString = 0x1,
     WIC8BIMIptcDigestIptcDigest = 0x2,
-}
-pub use self::WIC8BIMIptcDigestProperties::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICPngGamaProperties {
+}}
+ENUM!{enum WICPngGamaProperties {
     WICPngGamaGamma = 0x1,
-    __, // FIXME - univariant enum
-}
-pub use self::WICPngGamaProperties::WICPngGamaGamma;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICPngBkgdProperties {
+}}
+ENUM!{enum WICPngBkgdProperties {
     WICPngBkgdBackgroundColor = 0x1,
-    __, // FIXME - univariant enum
-}
-pub use self::WICPngBkgdProperties::WICPngBkgdBackgroundColor;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICPngItxtProperties {
+}}
+ENUM!{enum WICPngItxtProperties {
     WICPngItxtKeyword = 0x1,
     WICPngItxtCompressionFlag = 0x2,
     WICPngItxtLanguageTag = 0x3,
     WICPngItxtTranslatedKeyword = 0x4,
     WICPngItxtText = 0x5,
-}
-pub use self::WICPngItxtProperties::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICPngChrmProperties {
+}}
+ENUM!{enum WICPngChrmProperties {
     WICPngChrmWhitePointX = 0x1,
     WICPngChrmWhitePointY = 0x2,
     WICPngChrmRedX = 0x3,
@@ -283,58 +213,41 @@ pub enum WICPngChrmProperties {
     WICPngChrmGreenY = 0x6,
     WICPngChrmBlueX = 0x7,
     WICPngChrmBlueY = 0x8,
-}
-pub use self::WICPngChrmProperties::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICPngHistProperties {
+}}
+ENUM!{enum WICPngHistProperties {
     WICPngHistFrequencies = 0x1,
-    __, // FIXME - univariant enum
-}
-pub use self::WICPngHistProperties::WICPngHistFrequencies;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICPngIccpProperties {
+}}
+ENUM!{enum WICPngIccpProperties {
     WICPngIccpProfileName = 0x1,
     WICPngIccpProfileData = 0x2,
-}
-pub use self::WICPngIccpProperties::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICPngSrgbProperties {
+}}
+ENUM!{enum WICPngSrgbProperties {
     WICPngSrgbRenderingIntent = 0x1,
-    __, // FIXME - univariant enum
-}
-pub use self::WICPngSrgbProperties::WICPngSrgbRenderingIntent;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICPngTimeProperties {
+}}
+ENUM!{enum WICPngTimeProperties {
     WICPngTimeYear = 0x1,
     WICPngTimeMonth = 0x2,
     WICPngTimeDay = 0x3,
     WICPngTimeHour = 0x4,
     WICPngTimeMinute = 0x5,
     WICPngTimeSecond = 0x6,
-}
-pub use self::WICPngTimeProperties::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICSectionAccessLevel {
+}}
+ENUM!{enum WICSectionAccessLevel {
     WICSectionAccessLevelRead = 0x1,
     WICSectionAccessLevelReadWrite = 0x3,
-}
-pub use self::WICSectionAccessLevel::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICPixelFormatNumericRepresentation {
+}}
+ENUM!{enum WICPixelFormatNumericRepresentation {
     WICPixelFormatNumericRepresentationUnspecified = 0,
     WICPixelFormatNumericRepresentationIndexed = 0x1,
     WICPixelFormatNumericRepresentationUnsignedInteger = 0x2,
     WICPixelFormatNumericRepresentationSignedInteger = 0x3,
     WICPixelFormatNumericRepresentationFixed = 0x4,
     WICPixelFormatNumericRepresentationFloat = 0x5,
-}
-pub use self::WICPixelFormatNumericRepresentation::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum WICPlanarOptions {
+}}
+ENUM!{enum WICPlanarOptions {
     WICPlanarOptionsDefault = 0,
     WICPlanarOptionsPreserveSubsampling = 0x1,
-}
-pub use self::WICPlanarOptions::*;
+}}
 #[allow(unused_qualifications)]
 STRUCT!{struct WICImageParameters {
     PixelFormat: ::D2D1_PIXEL_FORMAT,

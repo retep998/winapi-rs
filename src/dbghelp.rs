@@ -127,14 +127,12 @@ STRUCT!{struct MODLOAD_PDBGUID_PDBAGE {
     PdbAge: ::DWORD,
 }}
 pub type PMODLOAD_PDBGUID_PDBAGE = *mut MODLOAD_PDBGUID_PDBAGE;
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum ADDRESS_MODE {
+ENUM!{enum ADDRESS_MODE {
     AddrMode1616,
     AddrMode1632,
     AddrModeReal,
     AddrModeFlat,
-}
-pub use self::ADDRESS_MODE::*;
+}}
 STRUCT!{struct ADDRESS64 {
     Offset: ::DWORD64,
     Segment: ::WORD,

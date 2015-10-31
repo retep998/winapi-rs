@@ -1,8 +1,7 @@
 // Copyright © 2015, Connor Hilarides
 // Licensed under the MIT License <LICENSE.md>
 //! Mappings for the contents of wstypes.h
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum VARENUM {
+ENUM!{enum VARENUM {
     VT_EMPTY = 0,
     VT_NULL = 1,
     VT_I2 = 2,
@@ -53,8 +52,7 @@ pub enum VARENUM {
     VT_BYREF = 0x4000,
     VT_RESERVED = 0x8000,
     VT_ILLEGAL = 0xffff,
-}
-pub use self::VARENUM::*;
+}}
 pub const VT_ILLEGALMASKED: VARENUM = VT_BSTR_BLOB;
 pub const VT_TYPEMASK: VARENUM = VT_BSTR_BLOB;
 pub type DATE = ::c_double;

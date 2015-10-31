@@ -68,31 +68,24 @@ pub struct WIN32_FIND_DATAW {
 impl Clone for WIN32_FIND_DATAW { fn clone(&self) -> WIN32_FIND_DATAW { *self } }
 pub type PWIN32_FIND_DATAW = *mut WIN32_FIND_DATAW;
 pub type LPWIN32_FIND_DATAW = *mut WIN32_FIND_DATAW;
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum FINDEX_INFO_LEVELS {
+ENUM!{enum FINDEX_INFO_LEVELS {
     FindExInfoStandard,
     FindExInfoBasic,
     FindExInfoMaxInfoLevel,
-}
-pub use self::FINDEX_INFO_LEVELS::*;
+}}
 pub const FIND_FIRST_EX_CASE_SENSITIVE: ::DWORD = 0x00000001;
 pub const FIND_FIRST_EX_LARGE_FETCH: ::DWORD = 0x00000002;
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum FINDEX_SEARCH_OPS {
+ENUM!{enum FINDEX_SEARCH_OPS {
     FindExSearchNameMatch,
     FindExSearchLimitToDirectories,
     FindExSearchLimitToDevices,
     FindExSearchMaxSearchOp,
-}
-pub use self::FINDEX_SEARCH_OPS::*;
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum GET_FILEEX_INFO_LEVELS {
+}}
+ENUM!{enum GET_FILEEX_INFO_LEVELS {
     GetFileExInfoStandard,
     GetFileExMaxInfoLevel,
-}
-pub use self::GET_FILEEX_INFO_LEVELS::*;
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum FILE_INFO_BY_HANDLE_CLASS {
+}}
+ENUM!{enum FILE_INFO_BY_HANDLE_CLASS {
     FileBasicInfo,
     FileStandardInfo,
     FileNameInfo,
@@ -115,8 +108,7 @@ pub enum FILE_INFO_BY_HANDLE_CLASS {
     FileIdExtdDirectoryInfo,
     FileIdExtdDirectoryRestartInfo,
     MaximumFileInfoByHandleClass,
-}
-pub use self::FILE_INFO_BY_HANDLE_CLASS::*;
+}}
 pub type PFILE_INFO_BY_HANDLE_CLASS = *mut FILE_INFO_BY_HANDLE_CLASS;
 pub type CRITICAL_SECTION = ::RTL_CRITICAL_SECTION;
 pub type PCRITICAL_SECTION = ::PRTL_CRITICAL_SECTION;

@@ -33,14 +33,13 @@ STRUCT!{struct NLSVERSIONINFOEX {
     guidCustomVersion: ::GUID,
 }}
 pub type LPNLSVERSIONINFOEX = *mut NLSVERSIONINFOEX;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum NORM_FORM {
+ENUM!{enum NORM_FORM {
     NormalizationOther = 0,
     NormalizationC = 0x1,
     NormalizationD = 0x2,
     NormalizationKC = 0x5,
     NormalizationKD = 0x6,
-}
+}}
 pub type LANGUAGEGROUP_ENUMPROCA = Option<unsafe extern "system" fn(
     ::LGRPID, ::LPSTR, ::LPSTR, ::DWORD, ::LONG_PTR,
 ) -> ::BOOL>;

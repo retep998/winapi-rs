@@ -1,14 +1,12 @@
 // Copyright © 2015, Connor Hilarides
 // Licensed under the MIT License <LICENSE.md>
 //! Mappings for the contents of sapi.h
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPDATAKEYLOCATION {
+ENUM!{enum SPDATAKEYLOCATION {
     SPDKL_DefaultLocation = 0,
     SPDKL_CurrentUser = 1,
     SPDKL_LocalMachine = 2,
-    SPDKL_CurrentConfig = 5
-}
-pub use self::SPDATAKEYLOCATION::*;
+    SPDKL_CurrentConfig = 5,
+}}
 pub const SPDUI_EngineProperties: &'static str = "EngineProperties";
 pub const SPDUI_AddRemoveWord: &'static str = "AddRemoveWord";
 pub const SPDUI_UserTraining: &'static str = "UserTraining";
@@ -19,81 +17,79 @@ pub const SPDUI_AudioVolume: &'static str = "AudioVolume";
 pub const SPDUI_UserEnrollment: &'static str = "UserEnrollment";
 pub const SPDUI_ShareData: &'static str = "ShareData";
 pub const SPDUI_Tutorial: &'static str = "Tutorial";
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPSTREAMFORMAT {
-     SPSF_Default = -1,
+ENUM!{enum SPSTREAMFORMAT {
+     SPSF_Default = -1i32 as u32,
      SPSF_NoAssignedFormat = 0,
-     SPSF_Text,
-     SPSF_NonStandardFormat,
-     SPSF_ExtendedAudioFormat,
-     SPSF_8kHz8BitMono,
-     SPSF_8kHz8BitStereo,
-     SPSF_8kHz16BitMono,
-     SPSF_8kHz16BitStereo,
-     SPSF_11kHz8BitMono,
-     SPSF_11kHz8BitStereo,
-     SPSF_11kHz16BitMono,
-     SPSF_11kHz16BitStereo,
-     SPSF_12kHz8BitMono,
-     SPSF_12kHz8BitStereo,
-     SPSF_12kHz16BitMono,
-     SPSF_12kHz16BitStereo,
-     SPSF_16kHz8BitMono,
-     SPSF_16kHz8BitStereo,
-     SPSF_16kHz16BitMono,
-     SPSF_16kHz16BitStereo,
-     SPSF_22kHz8BitMono,
-     SPSF_22kHz8BitStereo,
-     SPSF_22kHz16BitMono,
-     SPSF_22kHz16BitStereo,
-     SPSF_24kHz8BitMono,
-     SPSF_24kHz8BitStereo,
-     SPSF_24kHz16BitMono,
-     SPSF_24kHz16BitStereo,
-     SPSF_32kHz8BitMono,
-     SPSF_32kHz8BitStereo,
-     SPSF_32kHz16BitMono,
-     SPSF_32kHz16BitStereo,
-     SPSF_44kHz8BitMono,
-     SPSF_44kHz8BitStereo,
-     SPSF_44kHz16BitMono,
-     SPSF_44kHz16BitStereo,
-     SPSF_48kHz8BitMono,
-     SPSF_48kHz8BitStereo,
-     SPSF_48kHz16BitMono,
-     SPSF_48kHz16BitStereo,
-     SPSF_TrueSpeech_8kHz1BitMono,
-     SPSF_CCITT_ALaw_8kHzMono,
-     SPSF_CCITT_ALaw_8kHzStereo,
-     SPSF_CCITT_ALaw_11kHzMono,
-     SPSF_CCITT_ALaw_11kHzStereo,
-     SPSF_CCITT_ALaw_22kHzMono,
-     SPSF_CCITT_ALaw_22kHzStereo,
-     SPSF_CCITT_ALaw_44kHzMono,
-     SPSF_CCITT_ALaw_44kHzStereo,
-     SPSF_CCITT_uLaw_8kHzMono,
-     SPSF_CCITT_uLaw_8kHzStereo,
-     SPSF_CCITT_uLaw_11kHzMono,
-     SPSF_CCITT_uLaw_11kHzStereo,
-     SPSF_CCITT_uLaw_22kHzMono,
-     SPSF_CCITT_uLaw_22kHzStereo,
-     SPSF_CCITT_uLaw_44kHzMono,
-     SPSF_CCITT_uLaw_44kHzStereo,
-     SPSF_ADPCM_8kHzMono,
-     SPSF_ADPCM_8kHzStereo,
-     SPSF_ADPCM_11kHzMono,
-     SPSF_ADPCM_11kHzStereo,
-     SPSF_ADPCM_22kHzMono,
-     SPSF_ADPCM_22kHzStereo,
-     SPSF_ADPCM_44kHzMono,
-     SPSF_ADPCM_44kHzStereo,
-     SPSF_GSM610_8kHzMono,
-     SPSF_GSM610_11kHzMono,
-     SPSF_GSM610_22kHzMono,
-     SPSF_GSM610_44kHzMono,
-     SPSF_NUM_FORMATS,
-}
-pub use self::SPSTREAMFORMAT::*;
+     SPSF_Text = 1,
+     SPSF_NonStandardFormat = 2,
+     SPSF_ExtendedAudioFormat = 3,
+     SPSF_8kHz8BitMono = 4,
+     SPSF_8kHz8BitStereo = 5,
+     SPSF_8kHz16BitMono = 6,
+     SPSF_8kHz16BitStereo = 7,
+     SPSF_11kHz8BitMono = 8,
+     SPSF_11kHz8BitStereo = 9,
+     SPSF_11kHz16BitMono = 10,
+     SPSF_11kHz16BitStereo = 11,
+     SPSF_12kHz8BitMono = 12,
+     SPSF_12kHz8BitStereo = 13,
+     SPSF_12kHz16BitMono = 14,
+     SPSF_12kHz16BitStereo = 15,
+     SPSF_16kHz8BitMono = 16,
+     SPSF_16kHz8BitStereo = 17,
+     SPSF_16kHz16BitMono = 18,
+     SPSF_16kHz16BitStereo = 19,
+     SPSF_22kHz8BitMono = 20,
+     SPSF_22kHz8BitStereo = 21,
+     SPSF_22kHz16BitMono = 22,
+     SPSF_22kHz16BitStereo = 23,
+     SPSF_24kHz8BitMono = 24,
+     SPSF_24kHz8BitStereo = 25,
+     SPSF_24kHz16BitMono = 26,
+     SPSF_24kHz16BitStereo = 27,
+     SPSF_32kHz8BitMono = 28,
+     SPSF_32kHz8BitStereo = 29,
+     SPSF_32kHz16BitMono = 30,
+     SPSF_32kHz16BitStereo = 31,
+     SPSF_44kHz8BitMono = 32,
+     SPSF_44kHz8BitStereo = 33,
+     SPSF_44kHz16BitMono = 34,
+     SPSF_44kHz16BitStereo = 35,
+     SPSF_48kHz8BitMono = 36,
+     SPSF_48kHz8BitStereo = 37,
+     SPSF_48kHz16BitMono = 38,
+     SPSF_48kHz16BitStereo = 39,
+     SPSF_TrueSpeech_8kHz1BitMono = 40,
+     SPSF_CCITT_ALaw_8kHzMono = 41,
+     SPSF_CCITT_ALaw_8kHzStereo = 42,
+     SPSF_CCITT_ALaw_11kHzMono = 43,
+     SPSF_CCITT_ALaw_11kHzStereo = 44,
+     SPSF_CCITT_ALaw_22kHzMono = 45,
+     SPSF_CCITT_ALaw_22kHzStereo = 46,
+     SPSF_CCITT_ALaw_44kHzMono = 47,
+     SPSF_CCITT_ALaw_44kHzStereo = 48,
+     SPSF_CCITT_uLaw_8kHzMono = 49,
+     SPSF_CCITT_uLaw_8kHzStereo = 50,
+     SPSF_CCITT_uLaw_11kHzMono = 51,
+     SPSF_CCITT_uLaw_11kHzStereo = 52,
+     SPSF_CCITT_uLaw_22kHzMono = 53,
+     SPSF_CCITT_uLaw_22kHzStereo = 54,
+     SPSF_CCITT_uLaw_44kHzMono = 55,
+     SPSF_CCITT_uLaw_44kHzStereo = 56,
+     SPSF_ADPCM_8kHzMono = 57,
+     SPSF_ADPCM_8kHzStereo = 58,
+     SPSF_ADPCM_11kHzMono = 59,
+     SPSF_ADPCM_11kHzStereo = 60,
+     SPSF_ADPCM_22kHzMono = 61,
+     SPSF_ADPCM_22kHzStereo = 62,
+     SPSF_ADPCM_44kHzMono = 63,
+     SPSF_ADPCM_44kHzStereo = 64,
+     SPSF_GSM610_8kHzMono = 65,
+     SPSF_GSM610_11kHzMono = 66,
+     SPSF_GSM610_22kHzMono = 67,
+     SPSF_GSM610_44kHzMono = 68,
+     SPSF_NUM_FORMATS = 69,
+}}
 pub const SPREG_USER_ROOT: &'static str = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Speech";
 pub const SPREG_LOCAL_MACHINE_ROOT: &'static str = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech";
 pub const SPCAT_AUDIOOUT: &'static str = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AudioOutput";
@@ -285,17 +281,14 @@ interface ISpResourceManager(ISpResourceManagerVtbl): IServiceProvider(IServiceP
     ) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPEVENTLPARAMTYPE {
+ENUM!{enum SPEVENTLPARAMTYPE {
     SPET_LPARAM_IS_UNDEFINED = 0,
     SPET_LPARAM_IS_TOKEN,
     SPET_LPARAM_IS_OBJECT,
     SPET_LPARAM_IS_POINTER,
     SPET_LPARAM_IS_STRING,
-}
-pub use self::SPEVENTLPARAMTYPE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPEVENTENUM {
+}}
+ENUM!{enum SPEVENTENUM {
     SPEI_UNDEFINED = 0,
     SPEI_START_INPUT_STREAM = 1,
     SPEI_END_INPUT_STREAM = 2,
@@ -331,14 +324,13 @@ pub enum SPEVENTENUM {
     SPEI_RESERVED6 = 55,
     SPEI_RESERVED1 = 30,
     SPEI_RESERVED2 = 33,
-    SPEI_RESERVED3 = 63
-}
-pub use self::SPEVENTENUM::*;
+    SPEI_RESERVED3 = 63,
+}}
 pub const SPEI_MIN_TTS: SPEVENTENUM = SPEI_START_INPUT_STREAM;
 pub const SPEI_MAX_TTS: SPEVENTENUM = SPEI_TTS_PRIVATE;
 pub const SPEI_MIN_SR: SPEVENTENUM = SPEI_END_SR_STREAM;
 pub const SPEI_MAX_SR: SPEVENTENUM = SPEI_RESERVED6;
-pub const SPFEI_FLAGCHECK: u64 = (1 << SPEI_RESERVED1 as u64) | (1 << SPEI_RESERVED2 as u64);
+pub const SPFEI_FLAGCHECK: u64 = (1 << SPEI_RESERVED1.0 as u64) | (1 << SPEI_RESERVED2.0 as u64);
 pub const SPFEI_ALL_TTS_EVENTS: u64 = 0x000000000000FFFE | SPFEI_FLAGCHECK;
 pub const SPFEI_ALL_SR_EVENTS: u64 = 0x003FFFFC00000000 | SPFEI_FLAGCHECK;
 pub const SPFEI_ALL_EVENTS: u64 = 0xEFFFFFFFFFFFFFFF;
@@ -379,8 +371,7 @@ STRUCT!{struct SPEVENTEX {
     lParam: ::LPARAM,
     ullAudioTimeOffset: ::ULONGLONG,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPINTERFERENCE {
+ENUM!{enum SPINTERFERENCE {
     SPINTERFERENCE_NONE = 0,
     SPINTERFERENCE_NOISE = 1,
     SPINTERFERENCE_NOSIGNAL = 2,
@@ -391,23 +382,17 @@ pub enum SPINTERFERENCE {
     SPINTERFERENCE_LATENCY_WARNING = 7,
     SPINTERFERENCE_LATENCY_TRUNCATE_BEGIN = 8,
     SPINTERFERENCE_LATENCY_TRUNCATE_END = 9,
-}
-pub use self::SPINTERFERENCE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPENDSRSTREAMFLAGS {
+}}
+FLAGS!{enum SPENDSRSTREAMFLAGS {
     SPESF_NONE = 0,
     SPESF_STREAM_RELEASED = 1 << 0,
-    SPESF_EMULATED = 1 << 1
-}
-pub use self::SPENDSRSTREAMFLAGS::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPVFEATURE {
+    SPESF_EMULATED = 1 << 1,
+}}
+FLAGS!{enum SPVFEATURE {
     SPVFEATURE_STRESSED = 1 << 0,
-    SPVFEATURE_EMPHASIS = 1 << 1
-}
-pub use self::SPVFEATURE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPVISEMES {
+    SPVFEATURE_EMPHASIS = 1 << 1,
+}}
+ENUM!{enum SPVISEMES {
     SP_VISEME_0 = 0,
     SP_VISEME_1,
     SP_VISEME_2,
@@ -430,8 +415,7 @@ pub enum SPVISEMES {
     SP_VISEME_19,
     SP_VISEME_20,
     SP_VISEME_21,
-}
-pub use self::SPVISEMES::*;
+}}
 STRUCT!{struct SPEVENTSOURCEINFO {
     ullEventInterest: ::ULONGLONG,
     ullQueuedInterest: ::ULONGLONG,
@@ -468,15 +452,13 @@ interface ISpStreamFormat(ISpStreamFormatVtbl): IStream(IStreamVtbl) {
     ) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPFILEMODE {
+ENUM!{enum SPFILEMODE {
     SPFM_OPEN_READONLY = 0,
     SPFM_OPEN_READWRITE = 1,
     SPFM_CREATE = 2,
     SPFM_CREATE_ALWAYS = 3,
     SPFM_NUM_MODES = 4,
-}
-pub use self::SPFILEMODE::*;
+}}
 RIDL!(
 interface ISpStream(ISpStreamVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
     fn SetBaseStream(
@@ -512,14 +494,12 @@ interface ISpStreamFormatConverter(ISpStreamFormatConverterVtbl)
     ) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPAUDIOSTATE {
+ENUM!{enum SPAUDIOSTATE {
     SPAS_CLOSED = 0,
     SPAS_STOP = 1,
     SPAS_PAUSE = 2,
-    SPAS_RUN = 3
-}
-pub use self::SPAUDIOSTATE::*;
+    SPAS_RUN = 3,
+}}
 STRUCT!{struct SPAUDIOSTATUS {
     cbFreeBuffSpace: ::LONG,
     cbNonBlockingIO: ::ULONG,
@@ -568,16 +548,14 @@ interface ISpTranscript(ISpTranscriptVtbl): IUnknown(IUnknownVtbl) {
     fn AppendTranscript(&mut self, pszTranscript: ::LPCWSTR) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPDISPLYATTRIBUTES {
+ENUM!{enum SPDISPLYATTRIBUTES {
     SPAF_ONE_TRAILING_SPACE = 0x2,
     SPAF_TWO_TRAILING_SPACES = 0x4,
     SPAF_CONSUME_LEADING_SPACES = 0x8,
     SPAF_BUFFER_POSITION = 0x10,
     SPAF_ALL = 0x1f,
-    SPAF_USER_SPECIFIED = 0x80
-}
-pub use self::SPDISPLYATTRIBUTES::*;
+    SPAF_USER_SPECIFIED = 0x80,
+}}
 pub type SPPHONEID = ::WCHAR;
 pub type PSPPHONEID = ::LPWSTR;
 pub type PCSPPHONEID = ::LPCWSTR;
@@ -607,12 +585,10 @@ STRUCT!{struct SPPHRASERULE {
     SREngineConfidence: ::c_float,
     Confidence: ::c_char,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPPHRASEPROPERTYUNIONTYPE {
+ENUM!{enum SPPHRASEPROPERTYUNIONTYPE {
     SPPPUT_UNUSED = 0,
     SPPPUT_ARRAY_INDEX,
-}
-pub use self::SPPHRASEPROPERTYUNIONTYPE::*;
+}}
 STRUCT!{struct SPPHRASEPROPERTY {
     pszName: ::LPCWSTR,
     bType: ::BYTE,
@@ -641,15 +617,13 @@ STRUCT!{struct SPSEMANTICERRORINFO {
     pszDescription: ::LPWSTR,
     hrResultCode: ::HRESULT,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPSEMANTICFORMAT {
+ENUM!{enum SPSEMANTICFORMAT {
     SPSMF_SAPI_PROPERTIES = 0,
     SPSMF_SRGS_SEMANTICINTERPRETATION_MS = 1,
     SPSMF_SRGS_SAPIPROPERTIES = 2,
     SPSMF_UPS = 4,
-    SPSMF_SRGS_SEMANTICINTERPRETATION_W3C = 8
-}
-pub use self::SPSEMANTICFORMAT::*;
+    SPSMF_SRGS_SEMANTICINTERPRETATION_W3C = 8,
+}}
 STRUCT!{struct SPPHRASE_50 {
     cbSize: ::ULONG,
     LangID: ::WORD,
@@ -720,8 +694,7 @@ STRUCT!{struct SPRULE {
     ulRuleId: ::ULONG,
     dwAttributes: ::DWORD,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPVALUETYPE {
+ENUM!{enum SPVALUETYPE {
     SPDF_PROPERTY = 0x1,
     SPDF_REPLACEMENT = 0x2,
     SPDF_RULE = 0x4,
@@ -730,23 +703,18 @@ pub enum SPVALUETYPE {
     SPDF_PRONUNCIATION = 0x20,
     SPDF_AUDIO = 0x40,
     SPDF_ALTERNATES = 0x80,
-    SPDF_ALL = 0xff
-}
-pub use self::SPVALUETYPE::*;
+    SPDF_ALL = 0xff,
+}}
 STRUCT!{struct SPBINARYGRAMMAR {
     ulTotalSerializedSize: ::ULONG,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPPHRASERNG {
-    SPPR_ALL_ELEMENTS = -1,
-    __, // FIXME: Univariant enum
-}
-pub use self::SPPHRASERNG::SPPR_ALL_ELEMENTS;
+ENUM!{enum SPPHRASERNG {
+    SPPR_ALL_ELEMENTS = -1i32 as u32,
+}}
 pub const SP_GETWHOLEPHRASE: SPPHRASERNG = SPPR_ALL_ELEMENTS;
 pub const SPRR_ALL_ELEMENTS: SPPHRASERNG = SPPR_ALL_ELEMENTS;
 DECLARE_HANDLE!(SPSTATEHANDLE, SPSTATEHANDLE__);
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPRECOEVENTFLAGS {
+FLAGS!{enum SPRECOEVENTFLAGS {
     SPREF_AutoPause = 1 << 0,
     SPREF_Emulated = 1 << 1,
     SPREF_SMLTimeout = 1 << 2,
@@ -754,11 +722,9 @@ pub enum SPRECOEVENTFLAGS {
     SPREF_ReSent = 1 << 4,
     SPREF_Hypothesis = 1 << 5,
     SPREF_FalseRecognition = 1 << 6,
-}
-pub use self::SPRECOEVENTFLAGS::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPPARTOFSPEECH {
-    SPPS_NotOverriden = -1,
+}}
+ENUM!{enum SPPARTOFSPEECH {
+    SPPS_NotOverriden = -1i32 as u32,
     SPPS_Unknown = 0,
     SPPS_Noun = 0x1000,
     SPPS_Verb = 0x2000,
@@ -767,11 +733,9 @@ pub enum SPPARTOFSPEECH {
     SPPS_Interjection = 0x5000,
     SPPS_Noncontent = 0x6000,
     SPPS_LMA = 0x7000,
-    SPPS_SuppressWord = 0xf000
-}
-pub use self::SPPARTOFSPEECH::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPLEXICONTYPE {
+    SPPS_SuppressWord = 0xf000,
+}}
+FLAGS!{enum SPLEXICONTYPE {
     eLEXTYPE_USER = 1 << 0,
     eLEXTYPE_APP = 1 << 1,
     eLEXTYPE_VENDORLEXICON = 1 << 2,
@@ -804,20 +768,14 @@ pub enum SPLEXICONTYPE {
     eLEXTYPE_PRIVATE18 = 1 << 29,
     eLEXTYPE_PRIVATE19 = 1 << 30,
     eLEXTYPE_PRIVATE20 = 1 << 31,
-}
-pub use self::SPLEXICONTYPE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPWORDTYPE {
+}}
+ENUM!{enum SPWORDTYPE {
     eWORDTYPE_ADDED = 1 << 0,
     eWORDTYPE_DELETED = 1 << 1,
-}
-pub use self::SPWORDTYPE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPPRONUNCIATIONFLAGS {
+}}
+FLAGS!{enum SPPRONUNCIATIONFLAGS {
     ePRONFLAG_USED = 1 << 0,
-    __, // FIXME: Univariant enum
-}
-pub use self::SPPRONUNCIATIONFLAGS::ePRONFLAG_USED;
+}}
 STRUCT!{struct SPWORDPRONUNCIATION {
     pNextWordPronunciation: *mut SPWORDPRONUNCIATION,
     eLexiconType: SPLEXICONTYPE,
@@ -873,18 +831,16 @@ interface ISpContainerLexicon(ISpContainerLexiconVtbl): ISpLexicon(ISpLexiconVtb
     fn AddLexicon(&mut self, pAddLexicon: *mut ISpLexicon, dwFlags: ::DWORD) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPSHORTCUTTYPE {
-    SPSHT_NotOverriden = -1,
+ENUM!{enum SPSHORTCUTTYPE {
+    SPSHT_NotOverriden = -1i32 as u32,
     SPSHT_Unknown = 0,
     SPSHT_EMAIL = 0x1000,
     SPSHT_OTHER = 0x2000,
     SPPS_RESERVED1 = 0x3000,
     SPPS_RESERVED2 = 0x4000,
     SPPS_RESERVED3 = 0x5000,
-    SPPS_RESERVED4 = 0xf000
-}
-pub use self::SPSHORTCUTTYPE::*;
+    SPPS_RESERVED4 = 0xf000,
+}}
 STRUCT!{struct SPSHORTCUTPAIR {
     pNextSHORTCUTPAIR: *mut SPSHORTCUTPAIR,
     LangID: ::WORD,
@@ -957,8 +913,7 @@ STRUCT!{struct SPVPITCH {
     MiddleAdj: ::c_long,
     RangeAdj: ::c_long,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPVACTIONS {
+ENUM!{enum SPVACTIONS {
     SPVA_Speak = 0,
     SPVA_Silence,
     SPVA_Pronounce,
@@ -966,8 +921,7 @@ pub enum SPVACTIONS {
     SPVA_SpellOut,
     SPVA_Section,
     SPVA_ParseUnknownTag,
-}
-pub use self::SPVACTIONS::*;
+}}
 STRUCT!{struct SPVCONTEXT {
     pCategory: ::LPCWSTR,
     pBefore: ::LPCWSTR,
@@ -986,27 +940,21 @@ STRUCT!{struct SPVSTATE {
     ePartOfSpeech: SPPARTOFSPEECH,
     Context: SPVCONTEXT,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPRUNSTATE {
+ENUM!{enum SPRUNSTATE {
     SPRS_DONE = 1 << 0,
-    SPRS_IS_SPEAKING = 1 << 1
-}
-pub use self::SPRUNSTATE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPVLIMITS {
+    SPRS_IS_SPEAKING = 1 << 1,
+}}
+ENUM!{enum SPVLIMITS {
     SPMIN_VOLUME = 0,
     SPMAX_VOLUME = 100,
-    SPMIN_RATE = -10,
-    SPMAX_RATE = 10
-}
-pub use self::SPVLIMITS::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPVPRIORITY {
+    SPMIN_RATE = -10i32 as u32,
+    SPMAX_RATE = 10,
+}}
+ENUM!{enum SPVPRIORITY {
     SPVPRI_NORMAL = 0,
     SPVPRI_ALERT = 1 << 0,
-    SPVPRI_OVER = 1 << 1
-}
-pub use self::SPVPRIORITY::*;
+    SPVPRI_OVER = 1 << 1,
+}}
 STRUCT!{struct SPVOICESTATUS {
     ulCurrentStream: ::ULONG,
     ulLastStreamQueued: ::ULONG,
@@ -1022,8 +970,7 @@ STRUCT!{struct SPVOICESTATUS {
     dwReserved1: ::DWORD,
     dwReserved2: ::DWORD,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPEAKFLAGS {
+FLAGS!{enum SPEAKFLAGS {
     SPF_DEFAULT = 0,
     SPF_ASYNC = 1 << 0,
     SPF_PURGEBEFORESPEAK = 1 << 1,
@@ -1034,14 +981,13 @@ pub enum SPEAKFLAGS {
     SPF_NLP_SPEAK_PUNC = 1 << 6,
     SPF_PARSE_SAPI = 1 << 7,
     SPF_PARSE_SSML = 1 << 8,
-}
-pub use self::SPEAKFLAGS::*;
+}}
 pub const SPF_PARSE_AUTODETECT: SPEAKFLAGS = SPF_DEFAULT;
 pub const SPF_NLP_MASK: SPEAKFLAGS = SPF_NLP_SPEAK_PUNC;
-pub const SPF_PARSE_MASK: i32 = SPF_PARSE_SAPI as i32 | SPF_PARSE_SSML as i32;
+pub const SPF_PARSE_MASK: i32 = SPF_PARSE_SAPI.0 as i32 | SPF_PARSE_SSML.0 as i32;
 pub const SPF_VOICE_MASK: i32 =
-    SPF_ASYNC as i32 | SPF_PURGEBEFORESPEAK as i32 | SPF_IS_FILENAME as i32 | SPF_IS_XML as i32 |
-    SPF_IS_NOT_XML as i32 | SPF_NLP_MASK as i32 | SPF_PERSIST_XML as i32 | SPF_PARSE_MASK;
+    SPF_ASYNC.0 as i32 | SPF_PURGEBEFORESPEAK.0 as i32 | SPF_IS_FILENAME.0 as i32 | SPF_IS_XML.0 as i32 |
+    SPF_IS_NOT_XML.0 as i32 | SPF_NLP_MASK.0 as i32 | SPF_PERSIST_XML.0 as i32 | SPF_PARSE_MASK;
 pub const SPF_UNUSED_FLAGS: i32 = !SPF_VOICE_MASK;
 RIDL!(
 interface ISpVoice(ISpVoiceVtbl): ISpEventSource(ISpEventSourceVtbl) {
@@ -1110,12 +1056,10 @@ interface ISpPhraseAlt(ISpPhraseAltVtbl): ISpPhrase(ISpPhraseVtbl) {
     fn Commit(&mut self) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPXMLRESULTOPTIONS {
+ENUM!{enum SPXMLRESULTOPTIONS {
     SPXRO_SML = 0,
-    SPXRO_Alternates_SML = 1
-}
-pub use self::SPXMLRESULTOPTIONS::*;
+    SPXRO_Alternates_SML = 1,
+}}
 RIDL!(
 interface ISpPhrase2(ISpPhrase2Vtbl): ISpPhrase(ISpPhraseVtbl) {
     fn GetXMLResult(
@@ -1157,13 +1101,11 @@ interface ISpRecoResult(ISpRecoResultVtbl): ISpPhrase(ISpPhraseVtbl) {
     fn GetRecoContext(&mut self, ppRecoContext: *mut *mut ISpRecoContext) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPCOMMITFLAGS {
+FLAGS!{enum SPCOMMITFLAGS {
     SPCF_NONE = 0,
     SPCF_ADD_TO_USER_LEXICON = 1 << 0,
-    SPCF_DEFINITE_CORRECTION = 1 << 1
-}
-pub use self::SPCOMMITFLAGS::*;
+    SPCF_DEFINITE_CORRECTION = 1 << 1,
+}}
 RIDL!(
 interface ISpRecoResult2(ISpRecoResult2Vtbl): ISpRecoResult(ISpRecoResultVtbl) {
     fn CommitAlternate(
@@ -1190,55 +1132,44 @@ STRUCT!{struct SPTEXTSELECTIONINFO {
     ulStartSelection: ::ULONG,
     cchSelection: ::ULONG,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPWORDPRONOUNCEABLE {
+ENUM!{enum SPWORDPRONOUNCEABLE {
     SPWP_UNKNOWN_WORD_UNPRONOUNCEABLE = 0,
     SPWP_UNKNOWN_WORD_PRONOUNCEABLE = 1,
-    SPWP_KNOWN_WORD_PRONOUNCEABLE = 2
-}
-pub use self::SPWORDPRONOUNCEABLE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPGRAMMARSTATE {
+    SPWP_KNOWN_WORD_PRONOUNCEABLE = 2,
+}}
+ENUM!{enum SPGRAMMARSTATE {
     SPGS_DISABLED = 0,
     SPGS_ENABLED = 1,
-    SPGS_EXCLUSIVE = 3
-}
-pub use self::SPGRAMMARSTATE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPCONTEXTSTATE {
+    SPGS_EXCLUSIVE = 3,
+}}
+ENUM!{enum SPCONTEXTSTATE {
     SPCS_DISABLED = 0,
-    SPCS_ENABLED = 1
-}
-pub use self::SPCONTEXTSTATE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPRULESTATE {
+    SPCS_ENABLED = 1,
+}}
+ENUM!{enum SPRULESTATE {
     SPRS_INACTIVE = 0,
     SPRS_ACTIVE = 1,
     SPRS_ACTIVE_WITH_AUTO_PAUSE = 3,
-    SPRS_ACTIVE_USER_DELIMITED = 4
-}
-pub use self::SPRULESTATE::*;
+    SPRS_ACTIVE_USER_DELIMITED = 4,
+}}
 pub const SP_STREAMPOS_ASAP: ::INT = 0;
 pub const SP_STREAMPOS_REALTIME: ::INT = -1;
 pub const SPRULETRANS_TEXTBUFFER: SPSTATEHANDLE = -1isize as SPSTATEHANDLE;
 pub const SPRULETRANS_WILDCARD: SPSTATEHANDLE = -2isize as SPSTATEHANDLE;
 pub const SPRULETRANS_DICTATION: SPSTATEHANDLE = -3isize as SPSTATEHANDLE;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPGRAMMARWORDTYPE {
+ENUM!{enum SPGRAMMARWORDTYPE {
     SPWT_DISPLAY = 0,
     SPWT_LEXICAL = 1,
     SPWT_PRONUNCIATION = 2,
     SPWT_LEXICAL_NO_SPECIAL_CHARS = 3,
-}
-pub use self::SPGRAMMARWORDTYPE::*;
+}}
 STRUCT!{struct SPPROPERTYINFO {
     pszName: ::LPCWSTR,
     ulId: ::ULONG,
     pszValue: ::LPCWSTR,
     vValue: ::VARIANT,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPCFGRULEATTRIBUTES {
+FLAGS!{enum SPCFGRULEATTRIBUTES {
     SPRAF_TopLevel = 1 << 0,
     SPRAF_Active = 1 << 1,
     SPRAF_Export = 1 << 2,
@@ -1247,9 +1178,8 @@ pub enum SPCFGRULEATTRIBUTES {
     SPRAF_Dynamic = 1 << 5,
     SPRAF_Root = 1 << 6,
     SPRAF_AutoPause = 1 << 16,
-    SPRAF_UserDelimited = 1 << 17
-}
-pub use self::SPCFGRULEATTRIBUTES::*;
+    SPRAF_UserDelimited = 1 << 17,
+}}
 RIDL!(
 interface ISpGrammarBuilder(ISpGrammarBuilderVtbl): IUnknown(IUnknownVtbl) {
     fn ResetGrammar(&mut self, NewLanguage: ::WORD) -> ::HRESULT,
@@ -1275,12 +1205,10 @@ interface ISpGrammarBuilder(ISpGrammarBuilderVtbl): IUnknown(IUnknownVtbl) {
     fn Commit(&mut self, dwReserved: ::DWORD) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPLOADOPTIONS {
+ENUM!{enum SPLOADOPTIONS {
     SPLO_STATIC = 0,
-    SPLO_DYNAMIC = 1
-}
-pub use self::SPLOADOPTIONS::*;
+    SPLO_DYNAMIC = 1,
+}}
 RIDL!(
 interface ISpRecoGrammar(ISpRecoGrammarVtbl): ISpGrammarBuilder(ISpGrammarBuilderVtbl) {
     fn GetGrammarId(&mut self, pullGrammarId: *mut ::ULONGLONG) -> ::HRESULT,
@@ -1319,22 +1247,18 @@ interface ISpRecoGrammar(ISpRecoGrammarVtbl): ISpGrammarBuilder(ISpGrammarBuilde
     fn GetGrammarState(&mut self, peGrammarState: *mut SPGRAMMARSTATE) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPMATCHINGMODE {
+ENUM!{enum SPMATCHINGMODE {
     AllWords = 0,
     Subsequence = 1,
     OrderedSubset = 3,
     SubsequenceContentRequired = 5,
-    OrderedSubsetContentRequired = 7
-}
-pub use self::SPMATCHINGMODE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum PHONETICALPHABET {
+    OrderedSubsetContentRequired = 7,
+}}
+ENUM!{enum PHONETICALPHABET {
     PA_Ipa = 0,
     PA_Ups = 1,
-    PA_Sapi = 2
-}
-pub use self::PHONETICALPHABET::*;
+    PA_Sapi = 2,
+}}
 RIDL!(
 interface ISpGrammarBuilder2(ISpGrammarBuilder2Vtbl): IUnknown(IUnknownVtbl) {
     fn AddTextSubset(
@@ -1394,20 +1318,16 @@ impl Clone for SPRECOCONTEXTSTATUS {
         *self
     }
 }
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPBOOKMARKOPTIONS {
+FLAGS!{enum SPBOOKMARKOPTIONS {
     SPBO_NONE = 0,
     SPBO_PAUSE = 1 << 0,
     SPBO_AHEAD = 1 << 1,
-    SPBO_TIME_UNITS = 1 << 2
-}
-pub use self::SPBOOKMARKOPTIONS::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPAUDIOOPTIONS {
+    SPBO_TIME_UNITS = 1 << 2,
+}}
+FLAGS!{enum SPAUDIOOPTIONS {
     SPAO_NONE = 0,
-    SPAO_RETAIN_AUDIO = 1 << 0
-}
-pub use self::SPAUDIOOPTIONS::*;
+    SPAO_RETAIN_AUDIO = 1 << 0,
+}}
 RIDL!(
 interface ISpRecoContext(ISpRecoContextVtbl): ISpEventSource(ISpEventSourceVtbl) {
     fn GetRecognizer(&mut self, ppRecognizer: *mut *mut ISpRecognizer) -> ::HRESULT,
@@ -1443,8 +1363,7 @@ interface ISpRecoContext(ISpRecoContextVtbl): ISpEventSource(ISpEventSourceVtbl)
     fn GetContextState(&mut self, peContextState: *mut SPCONTEXTSTATE) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPGRAMMAROPTIONS {
+FLAGS!{enum SPGRAMMAROPTIONS {
     SPGO_SAPI = 0x1,
     SPGO_SRGS = 0x2,
     SPGO_UPS = 0x4,
@@ -1452,34 +1371,29 @@ pub enum SPGRAMMAROPTIONS {
     SPGO_SRGS_W3C_SCRIPT = 0x100,
     SPGO_SRGS_STG_SCRIPT = 0x200,
     SPGO_SRGS_SCRIPT =
-        SPGO_SRGS as i32 | SPGO_SRGS_MS_SCRIPT as i32 | SPGO_SRGS_W3C_SCRIPT as i32 |
-        SPGO_SRGS_STG_SCRIPT as i32,
+        SPGO_SRGS.0 | SPGO_SRGS_MS_SCRIPT.0 | SPGO_SRGS_W3C_SCRIPT.0 |
+             SPGO_SRGS_STG_SCRIPT.0,
     SPGO_FILE = 0x10,
     SPGO_HTTP = 0x20,
     SPGO_RES = 0x40,
     SPGO_OBJECT = 0x80,
     SPGO_DEFAULT = 0x3fb,
-    SPGO_ALL = 0x3ff
-}
-pub use self::SPGRAMMAROPTIONS::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPADAPTATIONSETTINGS {
+    SPGO_ALL = 0x3ff,
+}}
+FLAGS!{enum SPADAPTATIONSETTINGS {
     SPADS_Default = 0,
     SPADS_CurrentRecognizer = 0x1,
     SPADS_RecoProfile = 0x2,
     SPADS_Immediate = 0x4,
     SPADS_Reset = 0x8,
-    SPADS_HighVolumeDataSource = 0x10
-}
-pub use self::SPADAPTATIONSETTINGS::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPADAPTATIONRELEVANCE {
+    SPADS_HighVolumeDataSource = 0x10,
+}}
+ENUM!{enum SPADAPTATIONRELEVANCE {
     SPAR_Unknown = 0,
     SPAR_Low = 1,
     SPAR_Medium = 2,
-    SPAR_High = 3
-}
-pub use self::SPADAPTATIONRELEVANCE::*;
+    SPAR_High = 3,
+}}
 RIDL!(
 interface ISpRecoContext2(ISpRecoContext2Vtbl): IUnknown(IUnknownVtbl) {
     fn SetGrammarOptions(&mut self, eGrammarOptions: ::DWORD) -> ::HRESULT,
@@ -1508,22 +1422,18 @@ STRUCT!{struct SPRECOGNIZERSTATUS {
     aLangID: [::WORD; 20],
     ullRecognitionStreamTime: ::ULONGLONG,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPWAVEFORMATTYPE {
+ENUM!{enum SPWAVEFORMATTYPE {
     SPWF_INPUT = 0,
     SPWF_SRENGINE = 1,
-}
+}}
 pub type SPSTREAMFORMATTYPE = SPWAVEFORMATTYPE;
-pub use self::SPWAVEFORMATTYPE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPRECOSTATE {
+ENUM!{enum SPRECOSTATE {
     SPRST_INACTIVE = 0,
     SPRST_ACTIVE = 1,
     SPRST_ACTIVE_ALWAYS = 2,
     SPRST_INACTIVE_WITH_PURGE = 3,
     SPRST_NUM_STATES = 4,
-}
-pub use self::SPRECOSTATE::*;
+}}
 RIDL!(
 interface ISpRecognizer(ISpRecognizerVtbl): ISpProperties(ISpPropertiesVtbl) {
     fn SetRecognizer(&mut self, pRecognizer: *mut ISpObjectToken) -> ::HRESULT,
@@ -1574,14 +1484,13 @@ interface ISpRecognizer2(ISpRecognizer2Vtbl): IUnknown(IUnknownVtbl) {
     fn ResetAcousticModelAdaptation(&mut self) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SPCATEGORYTYPE {
+ENUM!{enum SPCATEGORYTYPE {
     SPCT_COMMAND = 0,
     SPCT_DICTATION,
     SPCT_SLEEP,
     SPCT_SUB_COMMAND,
     SPCT_SUB_DICTATION,
-}
+}}
 RIDL!(
 interface ISpRecoCategory(ISpRecoCategoryVtbl): IUnknown(IUnknownVtbl) {
     fn GetType(&mut self, peCategoryType: *mut SPCATEGORYTYPE) -> ::HRESULT
@@ -1631,8 +1540,7 @@ interface ISpDisplayAlternates(ISpDisplayAlternatesVtbl): IUnknown(IUnknownVtbl)
 }
 );
 pub type SpeechLanguageId = ::c_long;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechDataKey {
+ENUM!{enum DISPID_SpeechDataKey {
     DISPID_SDKSetBinaryValue = 1,
     DISPID_SDKGetBinaryValue,
     DISPID_SDKSetStringValue,
@@ -1645,10 +1553,8 @@ pub enum DISPID_SpeechDataKey {
     DISPID_SDKDeleteValue,
     DISPID_SDKEnumKeys,
     DISPID_SDKEnumValues,
-}
-pub use self::DISPID_SpeechDataKey::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechObjectToken {
+}}
+ENUM!{enum DISPID_SpeechObjectToken {
     DISPID_SOTId = 1,
     DISPID_SOTDataKey,
     DISPID_SOTCategory,
@@ -1662,149 +1568,129 @@ pub enum DISPID_SpeechObjectToken {
     DISPID_SOTIsUISupported,
     DISPID_SOTDisplayUI,
     DISPID_SOTMatchesAttributes,
-}
-pub use self::DISPID_SpeechObjectToken::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechDataKeyLocation {
-    SDKLDefaultLocation = SPDKL_DefaultLocation as i32,
-    SDKLCurrentUser = SPDKL_CurrentUser as i32,
-    SDKLLocalMachine = SPDKL_LocalMachine as i32,
-    SDKLCurrentConfig = SPDKL_CurrentConfig as i32
-}
-pub use self::SpeechDataKeyLocation::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechTokenContext {
-    STCInprocServer = ::CLSCTX_INPROC_SERVER as i32,
-    STCInprocHandler = ::CLSCTX_INPROC_HANDLER as i32,
-    STCLocalServer = ::CLSCTX_LOCAL_SERVER as i32,
-    STCRemoteServer = ::CLSCTX_REMOTE_SERVER as i32,
-    STCAll = ::CLSCTX_INPROC_SERVER as i32 | ::CLSCTX_INPROC_HANDLER as i32 |
-             ::CLSCTX_LOCAL_SERVER as i32 | ::CLSCTX_REMOTE_SERVER as i32
-}
-pub use self::SpeechTokenContext::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechTokenShellFolder {
+}}
+ENUM!{enum SpeechDataKeyLocation {
+    SDKLDefaultLocation = SPDKL_DefaultLocation.0,
+    SDKLCurrentUser = SPDKL_CurrentUser.0,
+    SDKLLocalMachine = SPDKL_LocalMachine.0,
+    SDKLCurrentConfig = SPDKL_CurrentConfig.0,
+}}
+ENUM!{enum SpeechTokenContext {
+    STCInprocServer = ::CLSCTX_INPROC_SERVER,
+    STCInprocHandler = ::CLSCTX_INPROC_HANDLER,
+    STCLocalServer = ::CLSCTX_LOCAL_SERVER,
+    STCRemoteServer = ::CLSCTX_REMOTE_SERVER,
+    STCAll = ::CLSCTX_INPROC_SERVER | ::CLSCTX_INPROC_HANDLER |
+             ::CLSCTX_LOCAL_SERVER | ::CLSCTX_REMOTE_SERVER,
+}}
+ENUM!{enum SpeechTokenShellFolder {
     STSF_AppData = 0x1a,
     STSF_LocalAppData = 0x1c,
     STSF_CommonAppData = 0x23,
-    STSF_FlagCreate = 0x8000
-}
-pub use self::SpeechTokenShellFolder::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechObjectTokens {
+    STSF_FlagCreate = 0x8000,
+}}
+ENUM!{enum DISPID_SpeechObjectTokens {
     DISPID_SOTsCount = 1,
-    DISPID_SOTsItem = ::DISPID_VALUE,
-    DISPID_SOTs_NewEnum = ::DISPID_NEWENUM
-}
-pub use self::DISPID_SpeechObjectTokens::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechObjectTokenCategory {
+    DISPID_SOTsItem = ::DISPID_VALUE as u32,
+    DISPID_SOTs_NewEnum = ::DISPID_NEWENUM as u32,
+}}
+ENUM!{enum DISPID_SpeechObjectTokenCategory {
     DISPID_SOTCId = 1,
     DISPID_SOTCDefault,
     DISPID_SOTCSetId,
     DISPID_SOTCGetDataKey,
     DISPID_SOTCEnumerateTokens,
-}
-pub use self::DISPID_SpeechObjectTokenCategory::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechAudioFormatType {
-    SAFTDefault = -1,
+}}
+ENUM!{enum SpeechAudioFormatType {
+    SAFTDefault = -1i32 as u32,
     SAFTNoAssignedFormat = 0,
-    SAFTText,
-    SAFTNonStandardFormat,
-    SAFTExtendedAudioFormat,
-    SAFT8kHz8BitMono,
-    SAFT8kHz8BitStereo,
-    SAFT8kHz16BitMono,
-    SAFT8kHz16BitStereo,
-    SAFT11kHz8BitMono,
-    SAFT11kHz8BitStereo,
-    SAFT11kHz16BitMono,
-    SAFT11kHz16BitStereo,
-    SAFT12kHz8BitMono,
-    SAFT12kHz8BitStereo,
-    SAFT12kHz16BitMono,
-    SAFT12kHz16BitStereo,
-    SAFT16kHz8BitMono,
-    SAFT16kHz8BitStereo,
-    SAFT16kHz16BitMono,
-    SAFT16kHz16BitStereo,
-    SAFT22kHz8BitMono,
-    SAFT22kHz8BitStereo,
-    SAFT22kHz16BitMono,
-    SAFT22kHz16BitStereo,
-    SAFT24kHz8BitMono,
-    SAFT24kHz8BitStereo,
-    SAFT24kHz16BitMono,
-    SAFT24kHz16BitStereo,
-    SAFT32kHz8BitMono,
-    SAFT32kHz8BitStereo,
-    SAFT32kHz16BitMono,
-    SAFT32kHz16BitStereo,
-    SAFT44kHz8BitMono,
-    SAFT44kHz8BitStereo,
-    SAFT44kHz16BitMono,
-    SAFT44kHz16BitStereo,
-    SAFT48kHz8BitMono,
-    SAFT48kHz8BitStereo,
-    SAFT48kHz16BitMono,
-    SAFT48kHz16BitStereo,
-    SAFTTrueSpeech_8kHz1BitMono,
-    SAFTCCITT_ALaw_8kHzMono,
-    SAFTCCITT_ALaw_8kHzStereo,
-    SAFTCCITT_ALaw_11kHzMono,
-    SAFTCCITT_ALaw_11kHzStereo,
-    SAFTCCITT_ALaw_22kHzMono,
-    SAFTCCITT_ALaw_22kHzStereo,
-    SAFTCCITT_ALaw_44kHzMono,
-    SAFTCCITT_ALaw_44kHzStereo,
-    SAFTCCITT_uLaw_8kHzMono,
-    SAFTCCITT_uLaw_8kHzStereo,
-    SAFTCCITT_uLaw_11kHzMono,
-    SAFTCCITT_uLaw_11kHzStereo,
-    SAFTCCITT_uLaw_22kHzMono,
-    SAFTCCITT_uLaw_22kHzStereo,
-    SAFTCCITT_uLaw_44kHzMono,
-    SAFTCCITT_uLaw_44kHzStereo,
-    SAFTADPCM_8kHzMono,
-    SAFTADPCM_8kHzStereo,
-    SAFTADPCM_11kHzMono,
-    SAFTADPCM_11kHzStereo,
-    SAFTADPCM_22kHzMono,
-    SAFTADPCM_22kHzStereo,
-    SAFTADPCM_44kHzMono,
-    SAFTADPCM_44kHzStereo,
-    SAFTGSM610_8kHzMono,
-    SAFTGSM610_11kHzMono,
-    SAFTGSM610_22kHzMono,
-    SAFTGSM610_44kHzMono,
-}
-pub use self::SpeechAudioFormatType::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechAudioFormat {
+    SAFTText = 1,
+    SAFTNonStandardFormat = 2,
+    SAFTExtendedAudioFormat = 3,
+    SAFT8kHz8BitMono = 4,
+    SAFT8kHz8BitStereo = 5,
+    SAFT8kHz16BitMono = 6,
+    SAFT8kHz16BitStereo = 7,
+    SAFT11kHz8BitMono = 8,
+    SAFT11kHz8BitStereo = 9,
+    SAFT11kHz16BitMono = 10,
+    SAFT11kHz16BitStereo = 11,
+    SAFT12kHz8BitMono = 12,
+    SAFT12kHz8BitStereo = 13,
+    SAFT12kHz16BitMono = 14,
+    SAFT12kHz16BitStereo = 15,
+    SAFT16kHz8BitMono = 16,
+    SAFT16kHz8BitStereo = 17,
+    SAFT16kHz16BitMono = 18,
+    SAFT16kHz16BitStereo = 19,
+    SAFT22kHz8BitMono = 20,
+    SAFT22kHz8BitStereo = 21,
+    SAFT22kHz16BitMono = 22,
+    SAFT22kHz16BitStereo = 23,
+    SAFT24kHz8BitMono = 24,
+    SAFT24kHz8BitStereo = 25,
+    SAFT24kHz16BitMono = 26,
+    SAFT24kHz16BitStereo = 27,
+    SAFT32kHz8BitMono = 28,
+    SAFT32kHz8BitStereo = 29,
+    SAFT32kHz16BitMono = 30,
+    SAFT32kHz16BitStereo = 31,
+    SAFT44kHz8BitMono = 32,
+    SAFT44kHz8BitStereo = 33,
+    SAFT44kHz16BitMono = 34,
+    SAFT44kHz16BitStereo = 35,
+    SAFT48kHz8BitMono = 36,
+    SAFT48kHz8BitStereo = 37,
+    SAFT48kHz16BitMono = 38,
+    SAFT48kHz16BitStereo = 39,
+    SAFTTrueSpeech_8kHz1BitMono = 40,
+    SAFTCCITT_ALaw_8kHzMono = 41,
+    SAFTCCITT_ALaw_8kHzStereo = 42,
+    SAFTCCITT_ALaw_11kHzMono = 43,
+    SAFTCCITT_ALaw_11kHzStereo = 44,
+    SAFTCCITT_ALaw_22kHzMono = 45,
+    SAFTCCITT_ALaw_22kHzStereo = 46,
+    SAFTCCITT_ALaw_44kHzMono = 47,
+    SAFTCCITT_ALaw_44kHzStereo = 48,
+    SAFTCCITT_uLaw_8kHzMono = 49,
+    SAFTCCITT_uLaw_8kHzStereo = 50,
+    SAFTCCITT_uLaw_11kHzMono = 51,
+    SAFTCCITT_uLaw_11kHzStereo = 52,
+    SAFTCCITT_uLaw_22kHzMono = 53,
+    SAFTCCITT_uLaw_22kHzStereo = 54,
+    SAFTCCITT_uLaw_44kHzMono = 55,
+    SAFTCCITT_uLaw_44kHzStereo = 56,
+    SAFTADPCM_8kHzMono = 57,
+    SAFTADPCM_8kHzStereo = 58,
+    SAFTADPCM_11kHzMono = 59,
+    SAFTADPCM_11kHzStereo = 60,
+    SAFTADPCM_22kHzMono = 61,
+    SAFTADPCM_22kHzStereo = 62,
+    SAFTADPCM_44kHzMono = 63,
+    SAFTADPCM_44kHzStereo = 64,
+    SAFTGSM610_8kHzMono = 65,
+    SAFTGSM610_11kHzMono = 66,
+    SAFTGSM610_22kHzMono = 67,
+    SAFTGSM610_44kHzMono = 68,
+}}
+ENUM!{enum DISPID_SpeechAudioFormat {
     DISPID_SAFType = 1,
     DISPID_SAFGuid,
     DISPID_SAFGetWaveFormatEx,
     DISPID_SAFSetWaveFormatEx,
-}
-pub use self::DISPID_SpeechAudioFormat::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechBaseStream {
+}}
+ENUM!{enum DISPID_SpeechBaseStream {
     DISPID_SBSFormat = 1,
     DISPID_SBSRead,
     DISPID_SBSWrite,
     DISPID_SBSSeek,
-}
-pub use self::DISPID_SpeechBaseStream::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechStreamSeekPositionType {
-    SSSPTRelativeToStart = ::STREAM_SEEK_SET as i32,
-    SSSPTRelativeToCurrentPosition = ::STREAM_SEEK_CUR as i32,
-    SSSPTRelativeToEnd = ::STREAM_SEEK_END as i32
-}
-pub use self::SpeechStreamSeekPositionType::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechAudio {
+}}
+ENUM!{enum SpeechStreamSeekPositionType {
+    SSSPTRelativeToStart = 0, //::STREAM_SEEK_SET,
+    SSSPTRelativeToCurrentPosition = 1, //::STREAM_SEEK_CUR,
+    SSSPTRelativeToEnd = 2, //::STREAM_SEEK_END,
+}}
+ENUM!{enum DISPID_SpeechAudio {
     DISPID_SAStatus = 200,
     DISPID_SABufferInfo,
     DISPID_SADefaultFormat,
@@ -1812,67 +1698,48 @@ pub enum DISPID_SpeechAudio {
     DISPID_SABufferNotifySize,
     DISPID_SAEventHandle,
     DISPID_SASetState,
-}
-pub use self::DISPID_SpeechAudio::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechAudioState {
-    SASClosed = SPAS_CLOSED as i32,
-    SASStop = SPAS_STOP as i32,
-    SASPause = SPAS_PAUSE as i32,
-    SASRun = SPAS_RUN as i32
-}
-pub use self::SpeechAudioState::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechMMSysAudio {
+}}
+ENUM!{enum SpeechAudioState {
+    SASClosed = SPAS_CLOSED.0,
+    SASStop = SPAS_STOP.0,
+    SASPause = SPAS_PAUSE.0,
+    SASRun = SPAS_RUN.0,
+}}
+ENUM!{enum DISPID_SpeechMMSysAudio {
     DISPID_SMSADeviceId = 300,
     DISPID_SMSALineId,
     DISPID_SMSAMMHandle,
-}
-pub use self::DISPID_SpeechMMSysAudio::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechFileStream {
+}}
+ENUM!{enum DISPID_SpeechFileStream {
     DISPID_SFSOpen = 100,
     DISPID_SFSClose,
-}
-pub use self::DISPID_SpeechFileStream::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechStreamFileMode {
-    SSFMOpenForRead = SPFM_OPEN_READONLY as i32,
-    SSFMOpenReadWrite = SPFM_OPEN_READWRITE as i32,
-    SSFMCreate = SPFM_CREATE as i32,
-    SSFMCreateForWrite = SPFM_CREATE_ALWAYS as i32
-}
-pub use self::SpeechStreamFileMode::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechCustomStream {
+}}
+ENUM!{enum SpeechStreamFileMode {
+    SSFMOpenForRead = SPFM_OPEN_READONLY.0,
+    SSFMOpenReadWrite = SPFM_OPEN_READWRITE.0,
+    SSFMCreate = SPFM_CREATE.0,
+    SSFMCreateForWrite = SPFM_CREATE_ALWAYS.0,
+}}
+ENUM!{enum DISPID_SpeechCustomStream {
     DISPID_SCSBaseStream = 100,
-    __, // FIXME: Univariant enum
-}
-pub use self::DISPID_SpeechCustomStream::DISPID_SCSBaseStream;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechMemoryStream {
+}}
+ENUM!{enum DISPID_SpeechMemoryStream {
     DISPID_SMSSetData = 100,
     DISPID_SMSGetData,
-}
-pub use self::DISPID_SpeechMemoryStream::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechAudioStatus {
+}}
+ENUM!{enum DISPID_SpeechAudioStatus {
     DISPID_SASFreeBufferSpace = 1,
     DISPID_SASNonBlockingIO,
     DISPID_SASState,
     DISPID_SASCurrentSeekPosition,
     DISPID_SASCurrentDevicePosition,
-}
-pub use self::DISPID_SpeechAudioStatus::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechAudioBufferInfo {
+}}
+ENUM!{enum DISPID_SpeechAudioBufferInfo {
     DISPID_SABIMinNotification = 1,
     DISPID_SABIBufferSize,
     DISPID_SABIEventBias,
-}
-pub use self::DISPID_SpeechAudioBufferInfo::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechWaveFormatEx {
+}}
+ENUM!{enum DISPID_SpeechWaveFormatEx {
     DISPID_SWFEFormatTag = 1,
     DISPID_SWFEChannels,
     DISPID_SWFESamplesPerSec,
@@ -1880,10 +1747,8 @@ pub enum DISPID_SpeechWaveFormatEx {
     DISPID_SWFEBlockAlign,
     DISPID_SWFEBitsPerSample,
     DISPID_SWFEExtraData,
-}
-pub use self::DISPID_SpeechWaveFormatEx::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechVoice {
+}}
+ENUM!{enum DISPID_SpeechVoice {
     DISPID_SVStatus = 1,
     DISPID_SVVoice,
     DISPID_SVAudioOutput,
@@ -1906,36 +1771,30 @@ pub enum DISPID_SpeechVoice {
     DISPID_SVSpeakCompleteEvent,
     DISPID_SVIsUISupported,
     DISPID_SVDisplayUI,
-}
-pub use self::DISPID_SpeechVoice::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechVoicePriority {
-    SVPNormal = SPVPRI_NORMAL as i32,
-    SVPAlert = SPVPRI_ALERT as i32,
-    SVPOver = SPVPRI_OVER as i32
-}
-pub use self::SpeechVoicePriority::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechVoiceSpeakFlags {
-    SVSFDefault = SPF_DEFAULT as i32,
-    SVSFlagsAsync = SPF_ASYNC as i32,
-    SVSFPurgeBeforeSpeak = SPF_PURGEBEFORESPEAK as i32,
-    SVSFIsFilename = SPF_IS_FILENAME as i32,
-    SVSFIsXML = SPF_IS_XML as i32,
-    SVSFIsNotXML = SPF_IS_NOT_XML as i32,
-    SVSFPersistXML = SPF_PERSIST_XML as i32,
-    SVSFNLPSpeakPunc = SPF_NLP_SPEAK_PUNC as i32,
-    SVSFParseSapi = SPF_PARSE_SAPI as i32,
-    SVSFParseSsml = SPF_PARSE_SSML as i32,
-    SVSFParseMask = SPF_PARSE_MASK,
-    SVSFVoiceMask = SPF_VOICE_MASK,
-    SVSFUnusedFlags = SPF_UNUSED_FLAGS
-}
-pub use self::SpeechVoiceSpeakFlags::*;
+}}
+ENUM!{enum SpeechVoicePriority {
+    SVPNormal = SPVPRI_NORMAL.0,
+    SVPAlert = SPVPRI_ALERT.0,
+    SVPOver = SPVPRI_OVER.0,
+}}
+FLAGS!{enum SpeechVoiceSpeakFlags {
+    SVSFDefault = SPF_DEFAULT.0,
+    SVSFlagsAsync = SPF_ASYNC.0,
+    SVSFPurgeBeforeSpeak = SPF_PURGEBEFORESPEAK.0,
+    SVSFIsFilename = SPF_IS_FILENAME.0,
+    SVSFIsXML = SPF_IS_XML.0,
+    SVSFIsNotXML = SPF_IS_NOT_XML.0,
+    SVSFPersistXML = SPF_PERSIST_XML.0,
+    SVSFNLPSpeakPunc = SPF_NLP_SPEAK_PUNC.0,
+    SVSFParseSapi = SPF_PARSE_SAPI.0,
+    SVSFParseSsml = SPF_PARSE_SSML.0,
+    SVSFParseMask = SPF_PARSE_MASK as u32,
+    SVSFVoiceMask = SPF_VOICE_MASK as u32,
+    SVSFUnusedFlags = SPF_UNUSED_FLAGS as u32,
+}}
 pub const SVSFParseAutodetect: SpeechVoiceSpeakFlags = SVSFDefault;
 pub const SVSFNLPMask: SpeechVoiceSpeakFlags = SVSFNLPSpeakPunc;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechVoiceEvents {
+FLAGS!{enum SpeechVoiceEvents {
     SVEStartInputStream = 1 << 1,
     SVEEndInputStream = 1 << 2,
     SVEVoiceChange = 1 << 3,
@@ -1946,11 +1805,9 @@ pub enum SpeechVoiceEvents {
     SVEViseme = 1 << 8,
     SVEAudioLevel = 1 << 9,
     SVEPrivate = 1 << 15,
-    SVEAllEvents = 0x83fe
-}
-pub use self::SpeechVoiceEvents::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechVoiceStatus {
+    SVEAllEvents = 0x83fe,
+}}
+ENUM!{enum DISPID_SpeechVoiceStatus {
     DISPID_SVSCurrentStreamNumber = 1,
     DISPID_SVSLastStreamNumberQueued,
     DISPID_SVSLastResult,
@@ -1963,16 +1820,12 @@ pub enum DISPID_SpeechVoiceStatus {
     DISPID_SVSLastBookmarkId,
     DISPID_SVSPhonemeId,
     DISPID_SVSVisemeId,
-}
-pub use self::DISPID_SpeechVoiceStatus::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechRunState {
-    SRSEDone = SPRS_DONE as i32,
-    SRSEIsSpeaking = SPRS_IS_SPEAKING as i32
-}
-pub use self::SpeechRunState::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechVisemeType {
+}}
+ENUM!{enum SpeechRunState {
+    SRSEDone = SPRS_DONE.0,
+    SRSEIsSpeaking = SPRS_IS_SPEAKING.0,
+}}
+ENUM!{enum SpeechVisemeType {
     SVP_0 = 0,
     SVP_1,
     SVP_2,
@@ -1995,17 +1848,13 @@ pub enum SpeechVisemeType {
     SVP_19,
     SVP_20,
     SVP_21,
-}
-pub use self::SpeechVisemeType::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechVisemeFeature {
+}}
+ENUM!{enum SpeechVisemeFeature {
     SVF_None = 0,
-    SVF_Stressed = SPVFEATURE_STRESSED as i32,
-    SVF_Emphasis = SPVFEATURE_EMPHASIS as i32
-}
-pub use self::SpeechVisemeFeature::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechVoiceEvent {
+    SVF_Stressed = SPVFEATURE_STRESSED.0,
+    SVF_Emphasis = SPVFEATURE_EMPHASIS.0,
+}}
+ENUM!{enum DISPID_SpeechVoiceEvent {
     DISPID_SVEStreamStart = 1,
     DISPID_SVEStreamEnd,
     DISPID_SVEVoiceChange,
@@ -2016,10 +1865,8 @@ pub enum DISPID_SpeechVoiceEvent {
     DISPID_SVEViseme,
     DISPID_SVEAudioLevel,
     DISPID_SVEEnginePrivate,
-}
-pub use self::DISPID_SpeechVoiceEvent::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechRecognizer {
+}}
+ENUM!{enum DISPID_SpeechRecognizer {
     DISPID_SRRecognizer = 1,
     DISPID_SRAllowAudioInputFormatChangesOnNextSet,
     DISPID_SRAudioInput,
@@ -2040,52 +1887,40 @@ pub enum DISPID_SpeechRecognizer {
     DISPID_SRGetRecognizers,
     DISPID_SVGetAudioInputs,
     DISPID_SVGetProfiles,
-}
-pub use self::DISPID_SpeechRecognizer::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechRecognizerState {
-    SRSInactive = SPRST_INACTIVE as i32,
-    SRSActive = SPRST_ACTIVE as i32,
-    SRSActiveAlways = SPRST_ACTIVE_ALWAYS as i32,
-    SRSInactiveWithPurge = SPRST_INACTIVE_WITH_PURGE as i32
-}
-pub use self::SpeechRecognizerState::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechDisplayAttributes {
+}}
+ENUM!{enum SpeechRecognizerState {
+    SRSInactive = SPRST_INACTIVE.0,
+    SRSActive = SPRST_ACTIVE.0,
+    SRSActiveAlways = SPRST_ACTIVE_ALWAYS.0,
+    SRSInactiveWithPurge = SPRST_INACTIVE_WITH_PURGE.0,
+}}
+ENUM!{enum SpeechDisplayAttributes {
     SDA_No_Trailing_Space = 0,
-    SDA_One_Trailing_Space = SPAF_ONE_TRAILING_SPACE as i32,
-    SDA_Two_Trailing_Spaces = SPAF_TWO_TRAILING_SPACES as i32,
-    SDA_Consume_Leading_Spaces = SPAF_CONSUME_LEADING_SPACES as i32
-}
-pub use self::SpeechDisplayAttributes::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechFormatType {
-    SFTInput = SPWF_INPUT as i32,
-    SFTSREngine = SPWF_SRENGINE as i32
-}
-pub use self::SpeechFormatType::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechEmulationCompareFlags {
+    SDA_One_Trailing_Space = SPAF_ONE_TRAILING_SPACE.0,
+    SDA_Two_Trailing_Spaces = SPAF_TWO_TRAILING_SPACES.0,
+    SDA_Consume_Leading_Spaces = SPAF_CONSUME_LEADING_SPACES.0,
+}}
+ENUM!{enum SpeechFormatType {
+    SFTInput = SPWF_INPUT.0,
+    SFTSREngine = SPWF_SRENGINE.0,
+}}
+FLAGS!{enum SpeechEmulationCompareFlags {
     SECFIgnoreCase = 0x1,
     SECFIgnoreKanaType = 0x10000,
     SECFIgnoreWidth = 0x20000,
     SECFNoSpecialChars = 0x20000000,
     SECFEmulateResult = 0x40000000,
-    SECFDefault = SECFIgnoreCase as i32 | SECFIgnoreKanaType as i32 | SECFIgnoreWidth as i32
-}
-pub use self::SpeechEmulationCompareFlags::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechRecognizerStatus {
+    SECFDefault = SECFIgnoreCase.0 | SECFIgnoreKanaType.0 | SECFIgnoreWidth.0,
+}}
+ENUM!{enum DISPID_SpeechRecognizerStatus {
     DISPID_SRSAudioStatus = 1,
     DISPID_SRSCurrentStreamPosition,
     DISPID_SRSCurrentStreamNumber,
     DISPID_SRSNumberOfActiveRules,
     DISPID_SRSClsidEngine,
     DISPID_SRSSupportedLanguages,
-}
-pub use self::DISPID_SpeechRecognizerStatus::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechRecoContext {
+}}
+ENUM!{enum DISPID_SpeechRecoContext {
     DISPID_SRCRecognizer = 1,
     DISPID_SRCAudioInInterferenceStatus,
     DISPID_SRCRequestedUIType,
@@ -2103,33 +1938,25 @@ pub enum DISPID_SpeechRecoContext {
     DISPID_SRCCreateResultFromMemory,
     DISPID_SRCBookmark,
     DISPID_SRCSetAdaptationData,
-}
-pub use self::DISPID_SpeechRecoContext::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechRetainedAudioOptions {
-    SRAONone = SPAO_NONE as i32,
-    SRAORetainAudio = SPAO_RETAIN_AUDIO as i32
-}
-pub use self::SpeechRetainedAudioOptions::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechBookmarkOptions {
-    SBONone = SPBO_NONE as i32,
-    SBOPause = SPBO_PAUSE as i32
-}
-pub use self::SpeechBookmarkOptions::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechInterference {
-    SINone = SPINTERFERENCE_NONE as i32,
-    SINoise = SPINTERFERENCE_NOISE as i32,
-    SINoSignal = SPINTERFERENCE_NOSIGNAL as i32,
-    SITooLoud = SPINTERFERENCE_TOOLOUD as i32,
-    SITooQuiet = SPINTERFERENCE_TOOQUIET as i32,
-    SITooFast = SPINTERFERENCE_TOOFAST as i32,
-    SITooSlow = SPINTERFERENCE_TOOSLOW as i32
-}
-pub use self::SpeechInterference::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechRecoEvents {
+}}
+ENUM!{enum SpeechRetainedAudioOptions {
+    SRAONone = SPAO_NONE.0,
+    SRAORetainAudio = SPAO_RETAIN_AUDIO.0,
+}}
+ENUM!{enum SpeechBookmarkOptions {
+    SBONone = SPBO_NONE.0,
+    SBOPause = SPBO_PAUSE.0,
+}}
+ENUM!{enum SpeechInterference {
+    SINone = SPINTERFERENCE_NONE.0,
+    SINoise = SPINTERFERENCE_NOISE.0,
+    SINoSignal = SPINTERFERENCE_NOSIGNAL.0,
+    SITooLoud = SPINTERFERENCE_TOOLOUD.0,
+    SITooQuiet = SPINTERFERENCE_TOOQUIET.0,
+    SITooFast = SPINTERFERENCE_TOOFAST.0,
+    SITooSlow = SPINTERFERENCE_TOOSLOW.0,
+}}
+FLAGS!{enum SpeechRecoEvents {
     SREStreamEnd = 1 << 0,
     SRESoundStart = 1 << 1,
     SRESoundEnd = 1 << 2,
@@ -2148,17 +1975,13 @@ pub enum SpeechRecoEvents {
     SRERecoOtherContext = 1 << 15,
     SREAudioLevel = 1 << 16,
     SREPrivate = 1 << 18,
-    SREAllEvents = 0x5ffff
-}
-pub use self::SpeechRecoEvents::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechRecoContextState {
-    SRCS_Disabled = SPCS_DISABLED as i32,
-    SRCS_Enabled = SPCS_ENABLED as i32
-}
-pub use self::SpeechRecoContextState::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPIDSPRG {
+    SREAllEvents = 0x5ffff,
+}}
+ENUM!{enum SpeechRecoContextState {
+    SRCS_Disabled = SPCS_DISABLED.0,
+    SRCS_Enabled = SPCS_ENABLED.0,
+}}
+ENUM!{enum DISPIDSPRG {
     DISPID_SRGId = 1,
     DISPID_SRGRecoContext,
     DISPID_SRGState,
@@ -2178,57 +2001,43 @@ pub enum DISPIDSPRG {
     DISPID_SRGSetWordSequenceData,
     DISPID_SRGSetTextSelection,
     DISPID_SRGIsPronounceable,
-}
-pub use self::DISPIDSPRG::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechLoadOption {
-    SLOStatic = SPLO_STATIC as i32,
-    SLODynamic = SPLO_DYNAMIC as i32
-}
-pub use self::SpeechLoadOption::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechWordPronounceable {
-    SWPUnknownWordUnpronounceable = SPWP_UNKNOWN_WORD_UNPRONOUNCEABLE as i32,
-    SWPUnknownWordPronounceable = SPWP_UNKNOWN_WORD_PRONOUNCEABLE as i32,
-    SWPKnownWordPronounceable = SPWP_KNOWN_WORD_PRONOUNCEABLE as i32
-}
-pub use self::SpeechWordPronounceable::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechGrammarState {
-    SGSEnabled = SPGS_ENABLED as i32,
-    SGSDisabled = SPGS_DISABLED as i32,
-    SGSExclusive = SPGS_EXCLUSIVE as i32
-}
-pub use self::SpeechGrammarState::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechRuleState {
-    SGDSInactive = SPRS_INACTIVE as i32,
-    SGDSActive = SPRS_ACTIVE as i32,
-    SGDSActiveWithAutoPause = SPRS_ACTIVE_WITH_AUTO_PAUSE as i32,
-    SGDSActiveUserDelimited = SPRS_ACTIVE_USER_DELIMITED as i32
-}
-pub use self::SpeechRuleState::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechRuleAttributes {
-    SRATopLevel = SPRAF_TopLevel as i32,
-    SRADefaultToActive = SPRAF_Active as i32,
-    SRAExport = SPRAF_Export as i32,
-    SRAImport = SPRAF_Import as i32,
-    SRAInterpreter = SPRAF_Interpreter as i32,
-    SRADynamic = SPRAF_Dynamic as i32,
-    SRARoot = SPRAF_Root as i32
-}
-pub use self::SpeechRuleAttributes::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechGrammarWordType {
-    SGDisplay = SPWT_DISPLAY as i32,
-    SGLexical = SPWT_LEXICAL as i32,
-    SGPronounciation = SPWT_PRONUNCIATION as i32,
-    SGLexicalNoSpecialChars = SPWT_LEXICAL_NO_SPECIAL_CHARS as i32
-}
-pub use self::SpeechGrammarWordType::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechRecoContextEvents {
+}}
+ENUM!{enum SpeechLoadOption {
+    SLOStatic = SPLO_STATIC.0,
+    SLODynamic = SPLO_DYNAMIC.0,
+}}
+ENUM!{enum SpeechWordPronounceable {
+    SWPUnknownWordUnpronounceable = SPWP_UNKNOWN_WORD_UNPRONOUNCEABLE.0,
+    SWPUnknownWordPronounceable = SPWP_UNKNOWN_WORD_PRONOUNCEABLE.0,
+    SWPKnownWordPronounceable = SPWP_KNOWN_WORD_PRONOUNCEABLE.0,
+}}
+ENUM!{enum SpeechGrammarState {
+    SGSEnabled = SPGS_ENABLED.0,
+    SGSDisabled = SPGS_DISABLED.0,
+    SGSExclusive = SPGS_EXCLUSIVE.0,
+}}
+ENUM!{enum SpeechRuleState {
+    SGDSInactive = SPRS_INACTIVE.0,
+    SGDSActive = SPRS_ACTIVE.0,
+    SGDSActiveWithAutoPause = SPRS_ACTIVE_WITH_AUTO_PAUSE.0,
+    SGDSActiveUserDelimited = SPRS_ACTIVE_USER_DELIMITED.0,
+}}
+ENUM!{enum SpeechRuleAttributes {
+    SRATopLevel = SPRAF_TopLevel.0,
+    SRADefaultToActive = SPRAF_Active.0,
+    SRAExport = SPRAF_Export.0,
+    SRAImport = SPRAF_Import.0,
+    SRAInterpreter = SPRAF_Interpreter.0,
+    SRADynamic = SPRAF_Dynamic.0,
+    SRARoot = SPRAF_Root.0,
+}}
+ENUM!{enum SpeechGrammarWordType {
+    SGDisplay = SPWT_DISPLAY.0,
+    SGLexical = SPWT_LEXICAL.0,
+    SGPronounciation = SPWT_PRONUNCIATION.0,
+    SGLexicalNoSpecialChars = SPWT_LEXICAL_NO_SPECIAL_CHARS.0,
+}}
+ENUM!{enum DISPID_SpeechRecoContextEvents {
     DISPID_SRCEStartStream = 1,
     DISPID_SRCEEndStream,
     DISPID_SRCEBookmark,
@@ -2247,20 +2056,16 @@ pub enum DISPID_SpeechRecoContextEvents {
     DISPID_SRCERecognitionForOtherContext,
     DISPID_SRCEAudioLevel,
     DISPID_SRCEEnginePrivate,
-}
-pub use self::DISPID_SpeechRecoContextEvents::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechRecognitionType {
+}}
+ENUM!{enum SpeechRecognitionType {
     SRTStandard = 0,
-    SRTAutopause = SPREF_AutoPause as i32,
-    SRTEmulated = SPREF_Emulated as i32,
-    SRTSMLTimeout = SPREF_SMLTimeout as i32,
-    SRTExtendableParse = SPREF_ExtendableParse as i32,
-    SRTReSent = SPREF_ReSent as i32
-}
-pub use self::SpeechRecognitionType::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechGrammarRule {
+    SRTAutopause = SPREF_AutoPause.0,
+    SRTEmulated = SPREF_Emulated.0,
+    SRTSMLTimeout = SPREF_SMLTimeout.0,
+    SRTExtendableParse = SPREF_ExtendableParse.0,
+    SRTReSent = SPREF_ReSent.0,
+}}
+ENUM!{enum DISPID_SpeechGrammarRule {
     DISPID_SGRAttributes = 1,
     DISPID_SGRInitialState,
     DISPID_SGRName,
@@ -2268,45 +2073,35 @@ pub enum DISPID_SpeechGrammarRule {
     DISPID_SGRClear,
     DISPID_SGRAddResource,
     DISPID_SGRAddState,
-}
-pub use self::DISPID_SpeechGrammarRule::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechGrammarRules {
+}}
+ENUM!{enum DISPID_SpeechGrammarRules {
     DISPID_SGRsCount = 1,
     DISPID_SGRsDynamic,
     DISPID_SGRsAdd,
     DISPID_SGRsCommit,
     DISPID_SGRsCommitAndSave,
     DISPID_SGRsFindRule,
-    DISPID_SGRsItem = ::DISPID_VALUE,
-    DISPID_SGRs_NewEnum = ::DISPID_NEWENUM
-}
-pub use self::DISPID_SpeechGrammarRules::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechGrammarRuleState {
+    DISPID_SGRsItem = ::DISPID_VALUE as u32,
+    DISPID_SGRs_NewEnum = ::DISPID_NEWENUM as u32,
+}}
+ENUM!{enum DISPID_SpeechGrammarRuleState {
     DISPID_SGRSRule = 1,
     DISPID_SGRSTransitions,
     DISPID_SGRSAddWordTransition,
     DISPID_SGRSAddRuleTransition,
     DISPID_SGRSAddSpecialTransition,
-}
-pub use self::DISPID_SpeechGrammarRuleState::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechSpecialTransitionType {
+}}
+ENUM!{enum SpeechSpecialTransitionType {
     SSTTWildcard = 1,
     SSTTDictation,
     SSTTTextBuffer,
-}
-pub use self::SpeechSpecialTransitionType::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechGrammarRuleStateTransitions {
+}}
+ENUM!{enum DISPID_SpeechGrammarRuleStateTransitions {
     DISPID_SGRSTsCount = 1,
-    DISPID_SGRSTsItem = ::DISPID_VALUE,
-    DISPID_SGRSTs_NewEnum = ::DISPID_NEWENUM
-}
-pub use self::DISPID_SpeechGrammarRuleStateTransitions::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechGrammarRuleStateTransition {
+    DISPID_SGRSTsItem = ::DISPID_VALUE as u32,
+    DISPID_SGRSTs_NewEnum = ::DISPID_NEWENUM as u32,
+}}
+ENUM!{enum DISPID_SpeechGrammarRuleStateTransition {
     DISPID_SGRSTType = 1,
     DISPID_SGRSTText,
     DISPID_SGRSTRule,
@@ -2315,28 +2110,22 @@ pub enum DISPID_SpeechGrammarRuleStateTransition {
     DISPID_SGRSTPropertyId,
     DISPID_SGRSTPropertyValue,
     DISPID_SGRSTNextState,
-}
-pub use self::DISPID_SpeechGrammarRuleStateTransition::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechGrammarRuleStateTransitionType {
+}}
+ENUM!{enum SpeechGrammarRuleStateTransitionType {
     SGRSTTEpsilon = 0,
     SGRSTTWord,
     SGRSTTRule,
     SGRSTTDictation,
     SGRSTTWildcard,
     SGRSTTTextBuffer,
-}
-pub use self::SpeechGrammarRuleStateTransitionType::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPIDSPTSI {
+}}
+ENUM!{enum DISPIDSPTSI {
     DISPIDSPTSI_ActiveOffset = 1,
     DISPIDSPTSI_ActiveLength,
     DISPIDSPTSI_SelectionOffset,
     DISPIDSPTSI_SelectionLength,
-}
-pub use self::DISPIDSPTSI::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechRecoResult {
+}}
+ENUM!{enum DISPID_SpeechRecoResult {
     DISPID_SRRRecoContext = 1,
     DISPID_SRRTimes,
     DISPID_SRRAudioFormat,
@@ -2346,65 +2135,47 @@ pub enum DISPID_SpeechRecoResult {
     DISPID_SRRSpeakAudio,
     DISPID_SRRSaveToMemory,
     DISPID_SRRDiscardResultInfo,
-}
-pub use self::DISPID_SpeechRecoResult::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechDiscardType {
-    SDTProperty = SPDF_PROPERTY as i32,
-    SDTReplacement = SPDF_REPLACEMENT as i32,
-    SDTRule = SPDF_RULE as i32,
-    SDTDisplayText = SPDF_DISPLAYTEXT as i32,
-    SDTLexicalForm = SPDF_LEXICALFORM as i32,
-    SDTPronunciation = SPDF_PRONUNCIATION as i32,
-    SDTAudio = SPDF_AUDIO as i32,
-    SDTAlternates = SPDF_ALTERNATES as i32,
-    SDTAll = SPDF_ALL as i32
-}
-pub use self::SpeechDiscardType::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechXMLRecoResult {
+}}
+ENUM!{enum SpeechDiscardType {
+    SDTProperty = SPDF_PROPERTY.0,
+    SDTReplacement = SPDF_REPLACEMENT.0,
+    SDTRule = SPDF_RULE.0,
+    SDTDisplayText = SPDF_DISPLAYTEXT.0,
+    SDTLexicalForm = SPDF_LEXICALFORM.0,
+    SDTPronunciation = SPDF_PRONUNCIATION.0,
+    SDTAudio = SPDF_AUDIO.0,
+    SDTAlternates = SPDF_ALTERNATES.0,
+    SDTAll = SPDF_ALL.0,
+}}
+ENUM!{enum DISPID_SpeechXMLRecoResult {
     DISPID_SRRGetXMLResult,
     DISPID_SRRGetXMLErrorInfo,
-}
-pub use self::DISPID_SpeechXMLRecoResult::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechRecoResult2 {
+}}
+ENUM!{enum DISPID_SpeechRecoResult2 {
     DISPID_SRRSetTextFeedback,
-    __, // FIXME: Univariant enum
-}
-pub use self::DISPID_SpeechRecoResult2::DISPID_SRRSetTextFeedback;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechPhraseBuilder {
+}}
+ENUM!{enum DISPID_SpeechPhraseBuilder {
     DISPID_SPPBRestorePhraseFromMemory = 1,
-    __, // FIXME: Univariant enum
-}
-pub use self::DISPID_SpeechPhraseBuilder::DISPID_SPPBRestorePhraseFromMemory;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechRecoResultTimes {
+}}
+ENUM!{enum DISPID_SpeechRecoResultTimes {
     DISPID_SRRTStreamTime = 1,
     DISPID_SRRTLength,
     DISPID_SRRTTickCount,
     DISPID_SRRTOffsetFromStart,
-}
-pub use self::DISPID_SpeechRecoResultTimes::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechPhraseAlternate {
+}}
+ENUM!{enum DISPID_SpeechPhraseAlternate {
     DISPID_SPARecoResult = 1,
     DISPID_SPAStartElementInResult,
     DISPID_SPANumberOfElementsInResult,
     DISPID_SPAPhraseInfo,
     DISPID_SPACommit,
-}
-pub use self::DISPID_SpeechPhraseAlternate::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechPhraseAlternates {
+}}
+ENUM!{enum DISPID_SpeechPhraseAlternates {
     DISPID_SPAsCount = 1,
-    DISPID_SPAsItem = ::DISPID_VALUE,
-    DISPID_SPAs_NewEnum = ::DISPID_NEWENUM
-}
-pub use self::DISPID_SpeechPhraseAlternates::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechPhraseInfo {
+    DISPID_SPAsItem = ::DISPID_VALUE as u32,
+    DISPID_SPAs_NewEnum = ::DISPID_NEWENUM as u32,
+}}
+ENUM!{enum DISPID_SpeechPhraseInfo {
     DISPID_SPILanguageId = 1,
     DISPID_SPIGrammarId,
     DISPID_SPIStartTime,
@@ -2421,10 +2192,8 @@ pub enum DISPID_SpeechPhraseInfo {
     DISPID_SPISaveToMemory,
     DISPID_SPIGetText,
     DISPID_SPIGetDisplayAttributes,
-}
-pub use self::DISPID_SpeechPhraseInfo::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechPhraseElement {
+}}
+ENUM!{enum DISPID_SpeechPhraseElement {
     DISPID_SPEAudioTimeOffset = 1,
     DISPID_SPEAudioSizeTime,
     DISPID_SPEAudioStreamOffset,
@@ -2438,39 +2207,29 @@ pub enum DISPID_SpeechPhraseElement {
     DISPID_SPERequiredConfidence,
     DISPID_SPEActualConfidence,
     DISPID_SPEEngineConfidence,
-}
-pub use self::DISPID_SpeechPhraseElement::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechEngineConfidence {
-    SECLowConfidence = -1,
+}}
+ENUM!{enum SpeechEngineConfidence {
+    SECLowConfidence = -1i32 as u32,
     SECNormalConfidence = 0,
-    SECHighConfidence = 1
-}
-pub use self::SpeechEngineConfidence::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechPhraseElements {
+    SECHighConfidence = 1,
+}}
+ENUM!{enum DISPID_SpeechPhraseElements {
     DISPID_SPEsCount = 1,
-    DISPID_SPEsItem = ::DISPID_VALUE,
-    DISPID_SPEs_NewEnum = ::DISPID_NEWENUM
-}
-pub use self::DISPID_SpeechPhraseElements::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechPhraseReplacement {
+    DISPID_SPEsItem = ::DISPID_VALUE as u32,
+    DISPID_SPEs_NewEnum = ::DISPID_NEWENUM as u32,
+}}
+ENUM!{enum DISPID_SpeechPhraseReplacement {
     DISPID_SPRDisplayAttributes = 1,
     DISPID_SPRText,
     DISPID_SPRFirstElement,
     DISPID_SPRNumberOfElements,
-}
-pub use self::DISPID_SpeechPhraseReplacement::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechPhraseReplacements {
+}}
+ENUM!{enum DISPID_SpeechPhraseReplacements {
     DISPID_SPRsCount = 1,
-    DISPID_SPRsItem = ::DISPID_VALUE,
-    DISPID_SPRs_NewEnum = ::DISPID_NEWENUM
-}
-pub use self::DISPID_SpeechPhraseReplacements::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechPhraseProperty {
+    DISPID_SPRsItem = ::DISPID_VALUE as u32,
+    DISPID_SPRs_NewEnum = ::DISPID_NEWENUM as u32,
+}}
+ENUM!{enum DISPID_SpeechPhraseProperty {
     DISPID_SPPName = 1,
     DISPID_SPPId,
     DISPID_SPPValue,
@@ -2480,17 +2239,13 @@ pub enum DISPID_SpeechPhraseProperty {
     DISPID_SPPConfidence,
     DISPID_SPPParent,
     DISPID_SPPChildren,
-}
-pub use self::DISPID_SpeechPhraseProperty::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechPhraseProperties {
+}}
+ENUM!{enum DISPID_SpeechPhraseProperties {
     DISPID_SPPsCount = 1,
-    DISPID_SPPsItem = ::DISPID_VALUE,
-    DISPID_SPPs_NewEnum = ::DISPID_NEWENUM
-}
-pub use self::DISPID_SpeechPhraseProperties::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechPhraseRule {
+    DISPID_SPPsItem = ::DISPID_VALUE as u32,
+    DISPID_SPPs_NewEnum = ::DISPID_NEWENUM as u32,
+}}
+ENUM!{enum DISPID_SpeechPhraseRule {
     DISPID_SPRuleName = 1,
     DISPID_SPRuleId,
     DISPID_SPRuleFirstElement,
@@ -2499,17 +2254,13 @@ pub enum DISPID_SpeechPhraseRule {
     DISPID_SPRuleChildren,
     DISPID_SPRuleConfidence,
     DISPID_SPRuleEngineConfidence,
-}
-pub use self::DISPID_SpeechPhraseRule::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechPhraseRules {
+}}
+ENUM!{enum DISPID_SpeechPhraseRules {
     DISPID_SPRulesCount = 1,
-    DISPID_SPRulesItem = ::DISPID_VALUE,
-    DISPID_SPRules_NewEnum = ::DISPID_NEWENUM
-}
-pub use self::DISPID_SpeechPhraseRules::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechLexicon {
+    DISPID_SPRulesItem = ::DISPID_VALUE as u32,
+    DISPID_SPRules_NewEnum = ::DISPID_NEWENUM as u32,
+}}
+ENUM!{enum DISPID_SpeechLexicon {
     DISPID_SLGenerationId = 1,
     DISPID_SLGetWords,
     DISPID_SLAddPronunciation,
@@ -2518,71 +2269,54 @@ pub enum DISPID_SpeechLexicon {
     DISPID_SLRemovePronunciationByPhoneIds,
     DISPID_SLGetPronunciations,
     DISPID_SLGetGenerationChange,
-}
-pub use self::DISPID_SpeechLexicon::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechLexiconType {
-    SLTUser = eLEXTYPE_USER as i32,
-    SLTApp = eLEXTYPE_APP as i32
-}
-pub use self::SpeechLexiconType::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechPartOfSpeech {
-    SPSNotOverriden = SPPS_NotOverriden as i32,
-    SPSUnknown = SPPS_Unknown as i32,
-    SPSNoun = SPPS_Noun as i32,
-    SPSVerb = SPPS_Verb as i32,
-    SPSModifier = SPPS_Modifier as i32,
-    SPSFunction = SPPS_Function as i32,
-    SPSInterjection = SPPS_Interjection as i32,
-    SPSLMA = SPPS_LMA as i32,
-    SPSSuppressWord = SPPS_SuppressWord as i32
-}
-pub use self::SpeechPartOfSpeech::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechLexiconWords {
+}}
+ENUM!{enum SpeechLexiconType {
+    SLTUser = eLEXTYPE_USER.0,
+    SLTApp = eLEXTYPE_APP.0,
+}}
+ENUM!{enum SpeechPartOfSpeech {
+    SPSNotOverriden = SPPS_NotOverriden.0,
+    SPSUnknown = SPPS_Unknown.0,
+    SPSNoun = SPPS_Noun.0,
+    SPSVerb = SPPS_Verb.0,
+    SPSModifier = SPPS_Modifier.0,
+    SPSFunction = SPPS_Function.0,
+    SPSInterjection = SPPS_Interjection.0,
+    SPSLMA = SPPS_LMA.0,
+    SPSSuppressWord = SPPS_SuppressWord.0,
+}}
+ENUM!{enum DISPID_SpeechLexiconWords {
     DISPID_SLWsCount = 1,
-    DISPID_SLWsItem = ::DISPID_VALUE,
-    DISPID_SLWs_NewEnum = ::DISPID_NEWENUM
-}
-pub use self::DISPID_SpeechLexiconWords::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SpeechWordType {
-    SWTAdded = eWORDTYPE_ADDED as i32,
-    SWTDeleted = eWORDTYPE_DELETED as i32
-}
-pub use self::SpeechWordType::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechLexiconWord {
+    DISPID_SLWsItem = ::DISPID_VALUE as u32,
+    DISPID_SLWs_NewEnum = ::DISPID_NEWENUM as u32,
+}}
+ENUM!{enum SpeechWordType {
+    SWTAdded = eWORDTYPE_ADDED.0,
+    SWTDeleted = eWORDTYPE_DELETED.0,
+}}
+ENUM!{enum DISPID_SpeechLexiconWord {
     DISPID_SLWLangId = 1,
     DISPID_SLWType,
     DISPID_SLWWord,
     DISPID_SLWPronunciations,
-}
-pub use self::DISPID_SpeechLexiconWord::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechLexiconProns {
+}}
+ENUM!{enum DISPID_SpeechLexiconProns {
     DISPID_SLPsCount = 1,
-    DISPID_SLPsItem = ::DISPID_VALUE,
-    DISPID_SLPs_NewEnum = ::DISPID_NEWENUM
-}
-pub use self::DISPID_SpeechLexiconProns::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechLexiconPronunciation {
+    DISPID_SLPsItem = ::DISPID_VALUE as u32,
+    DISPID_SLPs_NewEnum = ::DISPID_NEWENUM as u32,
+}}
+ENUM!{enum DISPID_SpeechLexiconPronunciation {
     DISPID_SLPType = 1,
     DISPID_SLPLangId,
     DISPID_SLPPartOfSpeech,
     DISPID_SLPPhoneIds,
     DISPID_SLPSymbolic,
-}
-pub use self::DISPID_SpeechLexiconPronunciation::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DISPID_SpeechPhoneConverter {
+}}
+ENUM!{enum DISPID_SpeechPhoneConverter {
     DISPID_SPCLangId = 1,
     DISPID_SPCPhoneToId,
     DISPID_SPCIdToPhone,
-}
-pub use self::DISPID_SpeechPhoneConverter::*;
+}}
 RIDL!(
 interface ISpeechDataKey(ISpeechDataKeyVtbl): IDispatch(IDispatchVtbl) {
     fn SetBinaryValue(&mut self, ValueName: ::BSTR, Value: ::VARIANT) -> ::HRESULT,

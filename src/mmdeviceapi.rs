@@ -6,20 +6,18 @@ pub const DEVICE_STATE_DISABLED: ::DWORD = 0x00000002;
 pub const DEVICE_STATE_NOTPRESENT: ::DWORD = 0x00000004;
 pub const DEVICE_STATE_UNPLUGGED: ::DWORD = 0x00000008;
 pub const DEVICE_STATEMASK_ALL: ::DWORD = 0x0000000F;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum EDataFlow {
+ENUM!{enum EDataFlow {
     eRender,
     eCapture,
     eAll,
     EDataFlow_enum_count,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum ERole {
+}}
+ENUM!{enum ERole {
     eConsole,
     eMultimedia,
     eCommunications,
     ERole_enum_count,
-}
+}}
 DEFINE_GUID!(CLSID_MMDeviceEnumerator, 0xBCDE0395, 0xE52F, 0x467C,
     0x8E, 0x3D, 0xC4, 0x57, 0x92, 0x91, 0x69, 0x2E);
 DEFINE_GUID!(IID_IMMDeviceEnumerator, 0xA95664D2, 0x9614, 0x4F35,

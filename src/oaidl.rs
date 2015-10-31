@@ -32,21 +32,19 @@ STRUCT!{struct SAFEARR_HAVEIID {
     apUnknown: *mut *mut ::IUnknown,
     iid: ::IID,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum SF_TYPE {
-    SF_ERROR = ::VT_ERROR as i32,
-    SF_I1 = ::VT_I1 as i32,
-    SF_I2 = ::VT_I2 as i32,
-    SF_I4 = ::VT_I4 as i32,
-    SF_I8 = ::VT_I8 as i32,
-    SF_BSTR = ::VT_BSTR as i32,
-    SF_UNKNOWN = ::VT_UNKNOWN as i32,
-    SF_DISPATCH = ::VT_DISPATCH as i32,
-    SF_VARIANT = ::VT_VARIANT as i32,
-    SF_RECORD = ::VT_RECORD as i32,
-    SF_HAVEIID = ::VT_UNKNOWN as i32 | ::VT_RESERVED as i32
-}
-pub use self::SF_TYPE::*;
+ENUM!{enum SF_TYPE {
+    SF_ERROR = ::VT_ERROR.0,
+    SF_I1 = ::VT_I1.0,
+    SF_I2 = ::VT_I2.0,
+    SF_I4 = ::VT_I4.0,
+    SF_I8 = ::VT_I8.0,
+    SF_BSTR = ::VT_BSTR.0,
+    SF_UNKNOWN = ::VT_UNKNOWN.0,
+    SF_DISPATCH = ::VT_DISPATCH.0,
+    SF_VARIANT = ::VT_VARIANT.0,
+    SF_RECORD = ::VT_RECORD.0,
+    SF_HAVEIID = ::VT_UNKNOWN.0 | ::VT_RESERVED.0,
+}}
 STRUCT!{struct SAFEARRAYUNION {
     sfType: ::ULONG,
     u: __MIDL_IOleAutomationTypes_0001,
@@ -228,8 +226,7 @@ UNION!(_wireVARIANT, data0, pdecVal, pdecVal_mut, *mut ::DECIMAL);
 pub type DISPID = ::LONG;
 pub type MEMBERID = DISPID;
 pub type HREFTYPE = ::DWORD;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum TYPEKIND {
+ENUM!{enum TYPEKIND {
     TKIND_ENUM = 0,
     TKIND_RECORD,
     TKIND_MODULE,
@@ -239,8 +236,7 @@ pub enum TYPEKIND {
     TKIND_ALIAS,
     TKIND_UNION,
     TKIND_MAX,
-}
-pub use self::TYPEKIND::*;
+}}
 #[cfg(target_arch = "x86_64")]
 STRUCT!{struct TYPEDESC {
     data: u64,
@@ -337,8 +333,7 @@ impl Clone for EXCEPINFO {
         *self
     }
 }
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum CALLCONV {
+ENUM!{enum CALLCONV {
     CC_FASTCALL = 0,
     CC_CDECL = 1,
     CC_MSCPASCAL,
@@ -350,25 +345,20 @@ pub enum CALLCONV {
     CC_MPWCDECL,
     CC_MPWPASCAL,
     CC_MAX,
-}
-pub use self::CALLCONV::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum FUNCKIND {
+}}
+ENUM!{enum FUNCKIND {
     FUNC_VIRTUAL = 0,
     FUNC_PUREVIRTUAL,
     FUNC_NONVIRTUAL,
     FUNC_STATIC,
     FUNC_DISPATCH,
-}
-pub use self::FUNCKIND::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum INVOKEKIND {
+}}
+FLAGS!{enum INVOKEKIND {
     INVOKE_FUNC = 1,
     INVOKE_PROPERTYGET = 2,
     INVOKE_PROPERTYPUT = 4,
     INVOKE_PROPERTYPUTREF = 8,
-}
-pub use self::INVOKEKIND::*;
+}}
 STRUCT!{struct FUNCDESC {
     memid: ::MEMBERID,
     lprgscode: *mut ::SCODE,
@@ -384,14 +374,12 @@ STRUCT!{struct FUNCDESC {
     wFuncFlags: ::WORD,
 }}
 pub type LPFUNCDESC = *mut FUNCDESC;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum VARKIND {
+ENUM!{enum VARKIND {
     VAR_PERINSTANCE = 0,
     VAR_STATIC,
     VAR_CONST,
     VAR_DISPATCH,
-}
-pub use self::VARKIND::*;
+}}
 pub const IMPLTYPEFLAG_FDEFAULT: ::DWORD = 0x1;
 pub const IMPLTYPEFLAG_FSOURCE: ::DWORD = 0x2;
 pub const IMPLTYPEFLAG_FRESTRICTED: ::DWORD = 0x4;
@@ -406,8 +394,7 @@ STRUCT!{struct VARDESC {
 }}
 UNION!(VARDESC, lpvarValue, oInst, oInst_mut, ::ULONG);
 pub type LPVARDESC = *mut VARDESC;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum TYPEFLAGS {
+FLAGS!{enum TYPEFLAGS {
     TYPEFLAG_FAPPOBJECT = 0x1,
     TYPEFLAG_FCANCREATE = 0x2,
     TYPEFLAG_FLICENSED  = 0x4,
@@ -422,11 +409,9 @@ pub enum TYPEFLAGS {
     TYPEFLAG_FREPLACEABLE = 0x800,
     TYPEFLAG_FDISPATCHABLE = 0x1000,
     TYPEFLAG_FREVERSEBIND = 0x2000,
-    TYPEFLAG_FPROXY = 0x4000
-}
-pub use self::TYPEFLAGS::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum FUNCFLAGS {
+    TYPEFLAG_FPROXY = 0x4000,
+}}
+FLAGS!{enum FUNCFLAGS {
     FUNCFLAG_FRESTRICTED = 0x1,
     FUNCFLAG_FSOURCE = 0x2,
     FUNCFLAG_FBINDABLE = 0x4,
@@ -439,11 +424,9 @@ pub enum FUNCFLAGS {
     FUNCFLAG_FUIDEFAULT = 0x200,
     FUNCFLAG_FNONBROWSABLE = 0x400,
     FUNCFLAG_FREPLACEABLE = 0x800,
-    FUNCFLAG_FIMMEDIATEBIND = 0x1000
-}
-pub use self::FUNCFLAGS::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum VARFLAGS {
+    FUNCFLAG_FIMMEDIATEBIND = 0x1000,
+}}
+FLAGS!{enum VARFLAGS {
     VARFLAG_FREADONLY = 0x1,
     VARFLAG_FSOURCE = 0x2,
     VARFLAG_FBINDABLE = 0x4,
@@ -456,9 +439,8 @@ pub enum VARFLAGS {
     VARFLAG_FUIDEFAULT = 0x200,
     VARFLAG_FNONBROWSABLE = 0x400,
     VARFLAG_FREPLACEABLE = 0x800,
-    VARFLAG_FIMMEDIATEBIND = 0x1000
-}
-pub use self::VARFLAGS::*;
+    VARFLAG_FIMMEDIATEBIND = 0x1000,
+}}
 STRUCT!{struct CLEANLOCALSTORAGE {
     pInterface: *mut ::IUnknown,
     pStorage: ::PVOID,
