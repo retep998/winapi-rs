@@ -19,9 +19,10 @@ STRUCT!{struct KEY_EVENT_RECORD {
     wRepeatCount: ::WORD,
     wVirtualKeyCode: ::WORD,
     wVirtualScanCode: ::WORD,
-    uChar: ::WCHAR, //FIXME - untagged union
+    UnicodeChar: ::WCHAR,
     dwControlKeyState: ::DWORD,
 }}
+UNION!{KEY_EVENT_RECORD, UnicodeChar, AsciiChar, AsciiChar_mut, ::CHAR}
 pub type PKEY_EVENT_RECORD = *mut KEY_EVENT_RECORD;
 pub const RIGHT_ALT_PRESSED: ::DWORD = 0x0001;
 pub const LEFT_ALT_PRESSED: ::DWORD = 0x0002;
@@ -69,36 +70,25 @@ STRUCT!{struct FOCUS_EVENT_RECORD {
 pub type PFOCUS_EVENT_RECORD = *mut FOCUS_EVENT_RECORD;
 STRUCT!{struct INPUT_RECORD {
     EventType: ::WORD,
-    Event: MOUSE_EVENT_RECORD, //FIXME - untagged union
+    Event: [u32; 4],
 }}
-#[test]
-fn test_INPUT_RECORD() {
-    use std::mem::{size_of, align_of};
-    assert!(size_of::<MOUSE_EVENT_RECORD>() >= size_of::<KEY_EVENT_RECORD>());
-    assert!(size_of::<MOUSE_EVENT_RECORD>() >= size_of::<WINDOW_BUFFER_SIZE_RECORD>());
-    assert!(size_of::<MOUSE_EVENT_RECORD>() >= size_of::<MENU_EVENT_RECORD>());
-    assert!(size_of::<MOUSE_EVENT_RECORD>() >= size_of::<FOCUS_EVENT_RECORD>());
-    assert!(align_of::<MOUSE_EVENT_RECORD>() >= align_of::<KEY_EVENT_RECORD>());
-    assert!(align_of::<MOUSE_EVENT_RECORD>() >= align_of::<WINDOW_BUFFER_SIZE_RECORD>());
-    assert!(align_of::<MOUSE_EVENT_RECORD>() >= align_of::<MENU_EVENT_RECORD>());
-    assert!(align_of::<MOUSE_EVENT_RECORD>() >= align_of::<FOCUS_EVENT_RECORD>());
-}
+UNION!{INPUT_RECORD, Event, KeyEvent, KeyEvent_mut, KEY_EVENT_RECORD}
+UNION!{INPUT_RECORD, Event, MouseEvent, MouseEvent_mut, MOUSE_EVENT_RECORD}
+UNION!{INPUT_RECORD, Event, WindowBufferSizeEvent, WindowBufferSizeEvent_mut,
+    WINDOW_BUFFER_SIZE_RECORD}
+UNION!{INPUT_RECORD, Event, MenuEvent, MenuEvent_mut, MENU_EVENT_RECORD}
+UNION!{INPUT_RECORD, Event, FocusEvent, FocusEvent_mut, FOCUS_EVENT_RECORD}
 pub type PINPUT_RECORD = *mut INPUT_RECORD;
-pub const KEY_EVENT: ::DWORD = 0x0001;
-pub const MOUSE_EVENT: ::DWORD = 0x0002;
-pub const WINDOW_BUFFER_SIZE_EVENT: ::DWORD = 0x0004;
-pub const MENU_EVENT: ::DWORD = 0x0008;
-pub const FOCUS_EVENT: ::DWORD = 0x0010;
+pub const KEY_EVENT: ::WORD = 0x0001;
+pub const MOUSE_EVENT: ::WORD = 0x0002;
+pub const WINDOW_BUFFER_SIZE_EVENT: ::WORD = 0x0004;
+pub const MENU_EVENT: ::WORD = 0x0008;
+pub const FOCUS_EVENT: ::WORD = 0x0010;
 STRUCT!{struct CHAR_INFO {
-    Char: ::WCHAR, //FIXME - untagged union
+    UnicodeChar: ::WCHAR,
     Attributes: ::WORD,
 }}
-#[test]
-fn test_CHAR_INFO() {
-    use std::mem::{size_of, align_of};
-    assert!(size_of::<::WCHAR>() >= size_of::<::CHAR>());
-    assert!(align_of::<::WCHAR>() >= align_of::<::CHAR>());
-}
+UNION!{CHAR_INFO, UnicodeChar, AsciiChar, AsciiChar_mut, ::CHAR}
 pub type PCHAR_INFO = *mut CHAR_INFO;
 pub const FOREGROUND_BLUE: ::DWORD = 0x0001;
 pub const FOREGROUND_GREEN: ::DWORD = 0x0002;
@@ -191,14 +181,8 @@ pub const ENABLE_EXTENDED_FLAGS: ::DWORD = 0x0080;
 pub const ENABLE_AUTO_POSITION: ::DWORD = 0x0100;
 pub const ENABLE_PROCESSED_OUTPUT: ::DWORD = 0x0001;
 pub const ENABLE_WRAP_AT_EOL_OUTPUT: ::DWORD = 0x0002;
-#[cfg(target_arch = "x86")]
-pub const CONSOLE_REAL_OUTPUT_HANDLE: *mut ::c_void = 0xFFFFFFFE as *mut ::c_void;
-#[cfg(target_arch = "x86_64")]
-pub const CONSOLE_REAL_OUTPUT_HANDLE: *mut ::c_void = 0xFFFFFFFFFFFFFFFE as *mut ::c_void;
-#[cfg(target_arch = "x86")]
-pub const CONSOLE_REAL_INPUT_HANDLE: *mut ::c_void = 0xFFFFFFFD as *mut ::c_void;
-#[cfg(target_arch = "x86_64")]
-pub const CONSOLE_REAL_INPUT_HANDLE: *mut ::c_void = 0xFFFFFFFFFFFFFFFD as *mut ::c_void;
+pub const CONSOLE_REAL_OUTPUT_HANDLE: *mut ::c_void = -2isize as *mut ::c_void;
+pub const CONSOLE_REAL_INPUT_HANDLE: *mut ::c_void = -3isize as *mut ::c_void;
 pub const ATTACH_PARENT_PROCESS: ::DWORD = 0xFFFFFFFF;
 STRUCT!{struct CONSOLE_READCONSOLE_CONTROL {
     nLength: ::ULONG,
