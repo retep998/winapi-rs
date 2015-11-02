@@ -33,8 +33,7 @@ DEFINE_GUID!(CorSym_SourceHash_MD5,  0x406ea660, 0x64cf, 0x4c82,
     0xb6, 0xf0, 0x42, 0xd4, 0x81, 0x72, 0xa7, 0x99);
 DEFINE_GUID!(CorSym_SourceHash_SHA1, 0xff1816ec, 0xaa5e, 0x4d10,
     0x87, 0xf7, 0x6f, 0x49, 0x63, 0x83, 0x34, 0x60);
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum CorSymAddrKind {
+ENUM!{enum CorSymAddrKind {
     ADDR_IL_OFFSET = 1,
     ADDR_NATIVE_RVA = 2,
     ADDR_NATIVE_REGISTER = 3,
@@ -45,14 +44,10 @@ pub enum CorSymAddrKind {
     ADDR_NATIVE_STKREG = 8,
     ADDR_BITFIELD = 9,
     ADDR_NATIVE_ISECTOFFSET = 10,
-}
-pub use self::CorSymAddrKind::*;
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum CorSymVarFlag {
+}}
+FLAGS!{enum CorSymVarFlag {
     VAR_IS_COMP_GEN = 1,
-    #[doc(hidden)] __,
-}
-pub use self::CorSymVarFlag::*;
+}}
 RIDL!(
 interface ISymUnmanagedBinder(ISymUnmanagedBinderVtbl): IUnknown(IUnknownVtbl) {
     fn GetReaderForFile(
@@ -65,14 +60,12 @@ interface ISymUnmanagedBinder(ISymUnmanagedBinderVtbl): IUnknown(IUnknownVtbl) {
     ) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum CorSymSearchPolicyAttributes {
+FLAGS!{enum CorSymSearchPolicyAttributes {
     AllowRegistryAccess = 0x1,
     AllowSymbolServerAccess = 0x2,
     AllowOriginalPathAccess = 0x4,
     AllowReferencePathAccess = 0x8,
-}
-pub use self::CorSymSearchPolicyAttributes::*;
+}}
 RIDL!(
 interface ISymUnmanagedBinder2(ISymUnmanagedBinder2Vtbl):
     ISymUnmanagedBinder(ISymUnmanagedBinderVtbl) {

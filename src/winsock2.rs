@@ -198,14 +198,13 @@ pub type LPCONDITIONPROC = Option<unsafe extern "system" fn(
 pub type LPWSAOVERLAPPED_COMPLETION_ROUTINE = Option<unsafe extern "system" fn(
     dwError: ::DWORD, cbTransferred: ::DWORD, lpOverlapped: LPWSAOVERLAPPED, dwFlags: ::DWORD,
 )>;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum WSACOMPLETIONTYPE {
+ENUM!{enum WSACOMPLETIONTYPE {
     NSP_NOTIFY_IMMEDIATELY = 0,
     NSP_NOTIFY_HWND,
     NSP_NOTIFY_EVENT,
     NSP_NOTIFY_PORT,
     NSP_NOTIFY_APC,
-}
+}}
 pub type PWSACOMPLETIONTYPE = *mut WSACOMPLETIONTYPE;
 pub type LPWSACOMPLETIONTYPE = *mut WSACOMPLETIONTYPE;
 STRUCT!{struct WSACOMPLETION_WindowMessage {
@@ -247,11 +246,10 @@ STRUCT!{struct AFPROTOCOLS {
 }}
 pub type PAFPROTOCOLS = *mut AFPROTOCOLS;
 pub type LPAFPROTOCOLS = *mut AFPROTOCOLS;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum WSAECOMPARATOR {
+ENUM!{enum WSAECOMPARATOR {
     COMP_EQUAL = 0,
     COMP_NOTLESS,
-}
+}}
 pub type PWSAECOMPARATOR = *mut WSAECOMPARATOR;
 pub type LPWSAECOMPARATOR = *mut WSAECOMPARATOR;
 STRUCT!{struct WSAVERSION {
@@ -334,12 +332,11 @@ STRUCT!{struct WSAQUERYSET2W {
 }}
 pub type PWSAQUERYSET2W = *mut WSAQUERYSET2W;
 pub type LPWSAQUERYSET2W = *mut WSAQUERYSET2W;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum WSAESETSERVICEOP {
+ENUM!{enum WSAESETSERVICEOP {
     RNRSERVICE_REGISTER = 0,
     RNRSERVICE_DEREGISTER,
     RNRSERVICE_DELETE,
-}
+}}
 pub type PWSAESETSERVICEOP = *mut WSAESETSERVICEOP;
 pub type LPWSAESETSERVICEOP = *mut WSAESETSERVICEOP;
 STRUCT!{struct WSANSCLASSINFOA {

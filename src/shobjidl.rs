@@ -439,26 +439,24 @@ pub struct IContactManagerInterop;
 //4498
 pub type SFGAOF = ::ULONG;
 //9466
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum SIGDN {
-    NORMALDISPLAY = 0,
-    PARENTRELATIVEPARSING = 0x80018001u32 as i32,
-    DESKTOPABSOLUTEPARSING = 0x80028000u32 as i32,
-    PARENTRELATIVEEDITING = 0x80031001u32 as i32,
-    DESKTOPABSOLUTEEDITING = 0x8004c000u32 as i32,
-    FILESYSPATH = 0x80058000u32 as i32,
-    URL = 0x80068000u32 as i32,
-    PARENTRELATIVEFORADDRESSBAR = 0x8007c001u32 as i32,
-    PARENTRELATIVE = 0x80080001u32 as i32,
-    PARENTRELATIVEFORUI = 0x80094001u32 as i32,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum SICHINTF {
-    DISPLAY = 0,
-    ALLFIELDS = 0x80000000u32 as i32,
-    CANONICAL = 0x10000000,
-    TEST_FILESYSPATH_IF_NOT_EQUAL = 0x20000000,
-}
+ENUM!{enum SIGDN {
+    SIGDN_NORMALDISPLAY = 0,
+    SIGDN_PARENTRELATIVEPARSING = 0x80018001,
+    SIGDN_DESKTOPABSOLUTEPARSING = 0x80028000,
+    SIGDN_PARENTRELATIVEEDITING = 0x80031001,
+    SIGDN_DESKTOPABSOLUTEEDITING = 0x8004c000,
+    SIGDN_FILESYSPATH = 0x80058000,
+    SIGDN_URL = 0x80068000,
+    SIGDN_PARENTRELATIVEFORADDRESSBAR = 0x8007c001,
+    SIGDN_PARENTRELATIVE = 0x80080001,
+    SIGDN_PARENTRELATIVEFORUI = 0x80094001,
+}}
+ENUM!{enum SICHINTF {
+    SICHINT_DISPLAY = 0,
+    SICHINT_ALLFIELDS = 0x80000000,
+    SICHINT_CANONICAL = 0x10000000,
+    SICHINT_TEST_FILESYSPATH_IF_NOT_EQUAL = 0x20000000,
+}}
 //9498
 RIDL!(
 interface IShellItem(IShellItemVtbl): IUnknown(IUnknownVtbl) {
@@ -481,23 +479,20 @@ interface IModalWindow(IModalWindowVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 //22307
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum FDE_OVERWRITE_RESPONSE {
-    DEFAULT = 0,
-    ACCEPT = 1,
-    REFUSE = 2,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum FDE_SHAREVIOLATION_RESPONSE {
-    DEFAULT = 0,
-    ACCEPT = 1,
-    REFUSE = 2,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum FDAP {
-    BOTTOM = 0,
-    TOP = 1,
-}
+ENUM!{enum FDE_OVERWRITE_RESPONSE {
+    FDEOR_DEFAULT = 0,
+    FDEOR_ACCEPT = 1,
+    FDEOR_REFUSE = 2,
+}}
+ENUM!{enum FDE_SHAREVIOLATION_RESPONSE {
+    FDESVR_DEFAULT = 0,
+    FDESVR_ACCEPT = 1,
+    FDESVR_REFUSE = 2,
+}}
+ENUM!{enum FDAP {
+    FDAP_BOTTOM = 0,
+    FDAP_TOP = 1,
+}}
 RIDL!(
 interface IFileDialogEvents(IFileDialogEventsVtbl): IUnknown(IUnknownVtbl) {
     fn OnFileOk(&mut self, pfd: *mut IFileDialog) -> ::HRESULT,
@@ -515,31 +510,30 @@ interface IFileDialogEvents(IFileDialogEventsVtbl): IUnknown(IUnknownVtbl) {
     ) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum FILEOPENDIALOGOPTIONS {
-    OVERWRITEPROMPT = 0x2,
-    STRICTFILETYPES = 0x4,
-    NOCHANGEDIR = 0x8,
-    PICKFOLDERS = 0x20,
-    FORCEFILESYSTEM = 0x40,
-    ALLNONSTORAGEITEMS = 0x80,
-    NOVALIDATE = 0x100,
-    ALLOWMULTISELECT = 0x200,
-    PATHMUSTEXIST = 0x800,
-    FILEMUSTEXIST = 0x1000,
-    CREATEPROMPT = 0x2000,
-    SHAREAWARE = 0x4000,
-    NOREADONLYRETURN = 0x8000,
-    NOTESTFILECREATE = 0x10000,
-    HIDEMRUPLACES = 0x20000,
-    HIDEPINNEDPLACES = 0x40000,
-    NODEREFERENCELINKS = 0x100000,
-    DONTADDTORECENT = 0x2000000,
-    FORCESHOWHIDDEN = 0x10000000,
-    DEFAULTNOMINIMODE = 0x20000000,
-    FORCEPREVIEWPANEON = 0x40000000,
-    SUPPORTSTREAMABLEITEMS = 0x80000000u32 as i32,
-}
+FLAGS!{enum FILEOPENDIALOGOPTIONS {
+    FOS_OVERWRITEPROMPT = 0x2,
+    FOS_STRICTFILETYPES = 0x4,
+    FOS_NOCHANGEDIR = 0x8,
+    FOS_PICKFOLDERS = 0x20,
+    FOS_FORCEFILESYSTEM = 0x40,
+    FOS_ALLNONSTORAGEITEMS = 0x80,
+    FOS_NOVALIDATE = 0x100,
+    FOS_ALLOWMULTISELECT = 0x200,
+    FOS_PATHMUSTEXIST = 0x800,
+    FOS_FILEMUSTEXIST = 0x1000,
+    FOS_CREATEPROMPT = 0x2000,
+    FOS_SHAREAWARE = 0x4000,
+    FOS_NOREADONLYRETURN = 0x8000,
+    FOS_NOTESTFILECREATE = 0x10000,
+    FOS_HIDEMRUPLACES = 0x20000,
+    FOS_HIDEPINNEDPLACES = 0x40000,
+    FOS_NODEREFERENCELINKS = 0x100000,
+    FOS_DONTADDTORECENT = 0x2000000,
+    FOS_FORCESHOWHIDDEN = 0x10000000,
+    FOS_DEFAULTNOMINIMODE = 0x20000000,
+    FOS_FORCEPREVIEWPANEON = 0x40000000,
+    FOS_SUPPORTSTREAMABLEITEMS = 0x80000000,
+}}
 RIDL!(
 interface IFileDialog(IFileDialogVtbl): IModalWindow(IModalWindowVtbl) {
     fn SetFileTypes(
@@ -589,13 +583,12 @@ interface IFileOpenDialog(IFileOpenDialogVtbl): IFileDialog(IFileDialogVtbl) {
     fn GetSelectedItems(&mut self, ppsai: *mut *mut IShellItemArray) -> ::HRESULT
 }
 );
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum CDCONTROLSTATEF {
-    INACTIVE = 0x00000000,
-    ENABLED = 0x00000001,
-    VISIBLE = 0x00000002,
-    ENABLEDVISIBLE = 0x00000003,
-}
+ENUM!{enum CDCONTROLSTATE {
+    CDCS_INACTIVE = 0x00000000,
+    CDCS_ENABLED = 0x00000001,
+    CDCS_VISIBLE = 0x00000002,
+    CDCS_ENABLEDVISIBLE = 0x00000003,
+}}
 RIDL!(
 interface IFileDialogCustomize(IFileDialogCustomizeVtbl): IUnknown(IUnknownVtbl) {
     fn EnableOpenDropDown(&mut self, dwIDCtl: ::DWORD) -> ::HRESULT,
@@ -610,8 +603,8 @@ interface IFileDialogCustomize(IFileDialogCustomizeVtbl): IUnknown(IUnknownVtbl)
     fn AddSeparator(&mut self, dwIDCtl: ::DWORD) -> ::HRESULT,
     fn AddText(&mut self, dwIDCtl: ::DWORD, pszText: ::LPCWSTR) -> ::HRESULT,
     fn SetControlLabel(&mut self, dwIDCtl: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT,
-    fn GetControlState(&mut self, dwIDCtl: ::DWORD, pdwState: *mut CDCONTROLSTATEF) -> ::HRESULT,
-    fn SetControlState(&mut self, dwIDCtl: ::DWORD, dwState: CDCONTROLSTATEF) -> ::HRESULT,
+    fn GetControlState(&mut self, dwIDCtl: ::DWORD, pdwState: *mut CDCONTROLSTATE) -> ::HRESULT,
+    fn SetControlState(&mut self, dwIDCtl: ::DWORD, dwState: CDCONTROLSTATE) -> ::HRESULT,
     fn GetEditBoxText(&mut self, dwIDCtl: ::DWORD, ppszText: *mut *mut ::WCHAR) -> ::HRESULT,
     fn SetEditBoxText(&mut self, dwIDCtl: ::DWORD, pszText: ::LPCWSTR) -> ::HRESULT,
     fn GetCheckButtonState(&mut self, dwIDCtl: ::DWORD, pbChecked: *mut ::BOOL) -> ::HRESULT,
@@ -622,10 +615,10 @@ interface IFileDialogCustomize(IFileDialogCustomizeVtbl): IUnknown(IUnknownVtbl)
     fn RemoveControlItem(&mut self, dwIDCtl: ::DWORD, dwIDItem: ::DWORD) -> ::HRESULT,
     fn RemoveAllControlItems(&mut self, dwIDCtl: ::DWORD) -> ::HRESULT,
     fn GetControlItemState(
-        &mut self, dwIDCtl: ::DWORD, dwIDItem: ::DWORD, pdwState: *mut CDCONTROLSTATEF
+        &mut self, dwIDCtl: ::DWORD, dwIDItem: ::DWORD, pdwState: *mut CDCONTROLSTATE
     ) -> ::HRESULT,
     fn SetControlItemState(
-        &mut self, dwIDCtl: ::DWORD, dwIDItem: ::DWORD, dwState: CDCONTROLSTATEF
+        &mut self, dwIDCtl: ::DWORD, dwIDItem: ::DWORD, dwState: CDCONTROLSTATE
     ) -> ::HRESULT,
     fn GetSelectedControlItem(&mut self, dwIDCtl: ::DWORD, pdwIDItem: *mut ::DWORD) -> ::HRESULT,
     fn SetSelectedControlItem(&mut self, dwIDCtl: ::DWORD, dwIDItem: ::DWORD) -> ::HRESULT,

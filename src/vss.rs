@@ -1,18 +1,16 @@
 // Copyright © 2015, Brian Vincent
 // Licensed under the MIT License <LICENSE.md>
 //! VSS header file
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_OBJECT_TYPE {
+ENUM!{enum VSS_OBJECT_TYPE {
     VSS_OBJECT_UNKNOWN = 0,
     VSS_OBJECT_NONE = 1,
     VSS_OBJECT_SNAPSHOT_SET = 2,
     VSS_OBJECT_SNAPSHOT = 3,
     VSS_OBJECT_PROVIDER = 4,
     VSS_OBJECT_TYPE_COUNT = 5,
-}
+}}
 pub type PVSS_OBJECT_TYPE = *mut VSS_OBJECT_TYPE;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_SNAPSHOT_STATE {
+ENUM!{enum VSS_SNAPSHOT_STATE {
     VSS_SS_UNKNOWN = 0x00,
     VSS_SS_PREPARING = 0x01,
     VSS_SS_PROCESSING_PREPARE = 0x02,
@@ -30,7 +28,7 @@ pub enum VSS_SNAPSHOT_STATE {
     VSS_SS_DELETED = 0x0e,
     VSS_SS_POSTCOMMITTED = 0x0f,
     VSS_SS_COUNT = 0x10,
-}
+}}
 pub type PVSS_SNAPSHOT_STATE = *mut VSS_SNAPSHOT_STATE;
 pub type VSS_VOLUME_SNAPSHOT_ATTRIBUTES = ::LONG;
 pub const VSS_VOLSNAP_ATTR_PERSISTENT: ::LONG = 0x00000001;
@@ -93,8 +91,7 @@ pub type VSS_RECOVERY_OPTIONS = ::DWORD;
 pub type PVSS_RECOVERY_OPTIONS = *mut VSS_RECOVERY_OPTIONS;
 pub const VSS_RECOVERY_REVERT_IDENTITY_ALL: ::DWORD = 0x00000100;
 pub const VSS_RECOVERY_NO_VOLUME_CHECK: ::DWORD = 0x00000200;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_WRITER_STATE {
+ENUM!{enum VSS_WRITER_STATE {
     VSS_WS_UNKNOWN = 0,
     VSS_WS_STABLE = 1,
     VSS_WS_WAITING_FOR_FREEZE = 2,
@@ -112,10 +109,9 @@ pub enum VSS_WRITER_STATE {
     VSS_WS_FAILED_AT_POST_RESTORE = 14,
     VSS_WS_FAILED_AT_BACKUPSHUTDOWN = 15,
     VSS_WS_COUNT = 16,
-}
+}}
 pub type PVSS_WRITER_STATE = *mut VSS_WRITER_STATE;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_BACKUP_TYPE {
+ENUM!{enum VSS_BACKUP_TYPE {
     VSS_BT_UNDEFINED = 0,
     VSS_BT_FULL = 1,
     VSS_BT_INCREMENTAL = 2,
@@ -123,45 +119,40 @@ pub enum VSS_BACKUP_TYPE {
     VSS_BT_LOG = 4,
     VSS_BT_COPY = 5,
     VSS_BT_OTHER = 6,
-}
+}}
 pub type PVSS_BACKUP_TYPE = *mut VSS_BACKUP_TYPE;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_RESTORE_TYPE {
+ENUM!{enum VSS_RESTORE_TYPE {
     VSS_RTYPE_UNDEFINED = 0,
     VSS_RTYPE_BY_COPY = 1,
     VSS_RTYPE_IMPORT = 2,
     VSS_RTYPE_OTHER = 3,
-}
+}}
 pub type PVSS_RESTORE_TYPE = *mut VSS_RESTORE_TYPE;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_ROLLFORWARD_TYPE {
+ENUM!{enum VSS_ROLLFORWARD_TYPE {
     VSS_RF_UNDEFINED = 0,
     VSS_RF_NONE = 1,
     VSS_RF_ALL = 2,
     VSS_RF_PARTIAL = 3,
-}
+}}
 pub type PVSS_ROLLFORWARD_TYPE = *mut VSS_ROLLFORWARD_TYPE;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_PROVIDER_TYPE {
+ENUM!{enum VSS_PROVIDER_TYPE {
     VSS_PROV_UNKNOWN = 0,
     VSS_PROV_SYSTEM = 1,
     VSS_PROV_SOFTWARE = 2,
     VSS_PROV_HARDWARE = 3,
     VSS_PROV_FILESHARE = 4,
-}
+}}
 pub type PVSS_PROVIDER_TYPE = *mut VSS_PROVIDER_TYPE;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_APPLICATION_LEVEL {
+ENUM!{enum VSS_APPLICATION_LEVEL {
     VSS_APP_UNKNOWN = 0,
     VSS_APP_SYSTEM = 1,
     VSS_APP_BACK_END = 2,
     VSS_APP_FRONT_END = 3,
     VSS_APP_SYSTEM_RM = 4,
-    VSS_APP_AUTO = -1,
-}
+    VSS_APP_AUTO = -1i32 as u32,
+}}
 pub type PVSS_APPLICATION_LEVEL = *mut VSS_APPLICATION_LEVEL;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum VSS_SNAPSHOT_PROPERTY_ID {
+ENUM!{enum VSS_SNAPSHOT_PROPERTY_ID {
     VSS_SPROPID_UNKNOWN = 0,
     VSS_SPROPID_SNAPSHOT_ID = 0x1,
     VSS_SPROPID_SNAPSHOT_SET_ID = 0x2,
@@ -176,7 +167,7 @@ pub enum VSS_SNAPSHOT_PROPERTY_ID {
     VSS_SPROPID_SNAPSHOT_ATTRIBUTES = 0xb,
     VSS_SPROPID_CREATION_TIMESTAMP = 0xc,
     VSS_SPROPID_STATUS = 0xd,
-}
+}}
 pub type PVSS_SNAPSHOT_PROPERTY_ID = *mut VSS_SNAPSHOT_PROPERTY_ID;
 pub type VSS_FILE_SPEC_BACKUP_TYPE = ::DWORD;
 pub type PVSS_FILE_SPEC_BACKUP_TYPE = *mut VSS_FILE_SPEC_BACKUP_TYPE;

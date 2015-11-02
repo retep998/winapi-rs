@@ -4,8 +4,7 @@
 pub const HTTP_INITIALIZE_SERVER: ::ULONG = 0x00000001;
 pub const HTTP_INITIALIZE_CONFIG: ::ULONG = 0x00000002;
 pub const HTTP_DEMAND_CBT: ::ULONG = 0x00000004;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_SERVER_PROPERTY {
+ENUM!{enum HTTP_SERVER_PROPERTY {
     HttpServerAuthenticationProperty,
     HttpServerLoggingProperty,
     HttpServerQosProperty,
@@ -18,7 +17,7 @@ pub enum HTTP_SERVER_PROPERTY {
     HttpServerListenEndpointProperty,
     HttpServerChannelBindProperty,
     HttpServerProtectionLevelProperty,
-}
+}}
 pub type PHTTP_SERVER_PROPERTY = *mut HTTP_SERVER_PROPERTY;
 STRUCT!{struct HTTP_PROPERTY_FLAGS {
     BitFields: ::ULONG,
@@ -27,30 +26,27 @@ BITFIELD!(HTTP_PROPERTY_FLAGS BitFields: ::ULONG [
     Present set_Present[0..1],
 ]);
 pub type PHTTP_PROPERTY_FLAGS = *mut HTTP_PROPERTY_FLAGS;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_ENABLED_STATE {
+ENUM!{enum HTTP_ENABLED_STATE {
     HttpEnabledStateActive,
     HttpEnabledStateInactive,
-}
+}}
 pub type PHTTP_ENABLED_STATE = *mut HTTP_ENABLED_STATE;
 STRUCT!{struct HTTP_STATE_INFO {
     Flags: HTTP_PROPERTY_FLAGS,
     State: HTTP_ENABLED_STATE,
 }}
 pub type PHTTP_STATE_INFO = *mut HTTP_STATE_INFO;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_503_RESPONSE_VERBOSITY {
+ENUM!{enum HTTP_503_RESPONSE_VERBOSITY {
     Http503ResponseVerbosityBasic,
     Http503ResponseVerbosityLimited,
     Http503ResponseVerbosityFull,
-}
+}}
 pub type PHTTP_503_RESPONSE_VERBOSITY = *mut HTTP_503_RESPONSE_VERBOSITY;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_QOS_SETTING_TYPE {
+ENUM!{enum HTTP_QOS_SETTING_TYPE {
     HttpQosSettingTypeBandwidth,
     HttpQosSettingTypeConnectionLimit,
     HttpQosSettingTypeFlowRate,
-}
+}}
 pub type PHTTP_QOS_SETTING_TYPE = *mut HTTP_QOS_SETTING_TYPE;
 STRUCT!{struct HTTP_QOS_SETTING_INFO {
     QosType: HTTP_QOS_SETTING_TYPE,
@@ -76,11 +72,10 @@ STRUCT!{struct HTTP_FLOWRATE_INFO {
 pub type PHTTP_FLOWRATE_INFO = *mut HTTP_FLOWRATE_INFO;
 pub const HTTP_MIN_ALLOWED_BANDWIDTH_THROTTLING_RATE: ::ULONG = 1024;
 pub const HTTP_LIMIT_INFINITE: ::ULONG = !0;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_SERVICE_CONFIG_TIMEOUT_KEY {
+ENUM!{enum HTTP_SERVICE_CONFIG_TIMEOUT_KEY {
     IdleConnectionTimeout = 0,
     HeaderWaitTimeout,
-}
+}}
 pub type PHTTP_SERVICE_CONFIG_TIMEOUT_KEY = *mut HTTP_SERVICE_CONFIG_TIMEOUT_KEY;
 pub type HTTP_SERVICE_CONFIG_TIMEOUT_PARAM = ::USHORT;
 pub type PHTTP_SERVICE_CONFIG_TIMEOUT_PARAM = *mut ::USHORT;
@@ -136,12 +131,11 @@ STRUCT!{struct HTTP_SERVER_AUTHENTICATION_INFO {
     BasicParams: HTTP_SERVER_AUTHENTICATION_BASIC_PARAMS,
 }}
 pub type PHTTP_SERVER_AUTHENTICATION_INFO = *mut HTTP_SERVER_AUTHENTICATION_INFO;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_SERVICE_BINDING_TYPE {
+ENUM!{enum HTTP_SERVICE_BINDING_TYPE {
     HttpServiceBindingTypeNone = 0,
     HttpServiceBindingTypeW,
     HttpServiceBindingTypeA,
-}
+}}
 STRUCT!{struct HTTP_SERVICE_BINDING_BASE {
     Type: HTTP_SERVICE_BINDING_TYPE,
 }}
@@ -158,12 +152,11 @@ STRUCT!{struct HTTP_SERVICE_BINDING_W {
     BufferSize: ::ULONG,
 }}
 pub type PHTTP_SERVICE_BINDING_W = *mut HTTP_SERVICE_BINDING_W;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_AUTHENTICATION_HARDENING_LEVELS {
+ENUM!{enum HTTP_AUTHENTICATION_HARDENING_LEVELS {
     HttpAuthenticationHardeningLegacy = 0,
     HttpAuthenticationHardeningMedium,
     HttpAuthenticationHardeningStrict,
-}
+}}
 pub const HTTP_CHANNEL_BIND_PROXY: ::ULONG = 0x1;
 pub const HTTP_CHANNEL_BIND_PROXY_COHOSTING: ::ULONG = 0x20;
 pub const HTTP_CHANNEL_BIND_NO_SERVICE_NAME_CHECK: ::ULONG = 0x2;
@@ -211,21 +204,19 @@ pub const HTTP_LOG_FIELD_URI: ::ULONG = 0x00800000;
 pub const HTTP_LOG_FIELD_SITE_ID: ::ULONG = 0x01000000;
 pub const HTTP_LOG_FIELD_REASON: ::ULONG = 0x02000000;
 pub const HTTP_LOG_FIELD_QUEUE_NAME: ::ULONG = 0x04000000;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_LOGGING_TYPE {
+ENUM!{enum HTTP_LOGGING_TYPE {
     HttpLoggingTypeW3C,
     HttpLoggingTypeIIS,
     HttpLoggingTypeNCSA,
     HttpLoggingTypeRaw,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_LOGGING_ROLLOVER_TYPE {
+}}
+ENUM!{enum HTTP_LOGGING_ROLLOVER_TYPE {
     HttpLoggingRolloverSize,
     HttpLoggingRolloverDaily,
     HttpLoggingRolloverWeekly,
     HttpLoggingRolloverMonthly,
     HttpLoggingRolloverHourly,
-}
+}}
 pub const HTTP_MIN_ALLOWED_LOG_FILE_ROLLOVER_SIZE: ::ULONG = (1 * 1024 * 1024) as ::ULONG;
 pub const HTTP_LOGGING_FLAG_LOCAL_TIME_ROLLOVER: ::ULONG = 0x00000001;
 pub const HTTP_LOGGING_FLAG_USE_UTF8_CONVERSION: ::ULONG = 0x00000002;
@@ -253,12 +244,11 @@ STRUCT!{struct HTTP_BINDING_INFO {
     RequestQueueHandle: ::HANDLE,
 }}
 pub type PHTTP_BINDING_INFO = *mut HTTP_BINDING_INFO;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_PROTECTION_LEVEL_TYPE {
+ENUM!{enum HTTP_PROTECTION_LEVEL_TYPE {
     HttpProtectionLevelUnrestricted,
     HttpProtectionLevelEdgeRestricted,
     HttpProtectionLevelRestricted,
-}
+}}
 pub type PHTTP_PROTECTION_LEVEL_TYPE = *mut HTTP_PROTECTION_LEVEL_TYPE;
 STRUCT!{struct HTTP_PROTECTION_LEVEL_INFO {
     Flags: HTTP_PROPERTY_FLAGS,
@@ -333,8 +323,7 @@ pub fn HTTP_GREATER_EQUAL_VERSION(version: HTTP_VERSION, major: ::USHORT, minor:
 pub fn HTTP_LESS_EQUAL_VERSION(version: HTTP_VERSION, major: ::USHORT, minor: ::USHORT) -> bool {
     !HTTP_GREATER_VERSION(version, major, minor)
 }
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_VERB {
+ENUM!{enum HTTP_VERB {
     HttpVerbUnparsed,
     HttpVerbUnknown,
     HttpVerbInvalid,
@@ -356,10 +345,9 @@ pub enum HTTP_VERB {
     HttpVerbUNLOCK,
     HttpVerbSEARCH,
     HttpVerbMaximum,
-}
+}}
 pub type PHTTP_VERB = *mut HTTP_VERB;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_HEADER_ID {
+ENUM!{enum HTTP_HEADER_ID {
     HttpHeaderCacheControl = 0,
     HttpHeaderConnection = 1,
     HttpHeaderDate = 2,
@@ -369,52 +357,52 @@ pub enum HTTP_HEADER_ID {
     HttpHeaderTransferEncoding = 6,
     HttpHeaderUpgrade = 7,
     HttpHeaderVia = 8,
-    HttpHeaderWarning= 9,
-    HttpHeaderAllow= 10,
-    HttpHeaderContentLength= 11,
-    HttpHeaderContentType= 12,
-    HttpHeaderContentEncoding= 13,
-    HttpHeaderContentLanguage= 14,
-    HttpHeaderContentLocation= 15,
-    HttpHeaderContentMd5= 16,
-    HttpHeaderContentRange= 17,
-    HttpHeaderExpires= 18,
-    HttpHeaderLastModified= 19,
-    HttpHeaderAccept= 20,
-    HttpHeaderAcceptCharset= 21,
-    HttpHeaderAcceptEncoding= 22,
-    HttpHeaderAcceptLanguage= 23,
-    HttpHeaderAuthorization= 24,
-    HttpHeaderCookie= 25,
-    HttpHeaderExpect= 26,
-    HttpHeaderFrom= 27,
-    HttpHeaderHost= 28,
-    HttpHeaderIfMatch= 29,
-    HttpHeaderIfModifiedSince= 30,
-    HttpHeaderIfNoneMatch= 31,
-    HttpHeaderIfRange= 32,
-    HttpHeaderIfUnmodifiedSince= 33,
-    HttpHeaderMaxForwards= 34,
-    HttpHeaderProxyAuthorization= 35,
-    HttpHeaderReferer= 36,
-    HttpHeaderRange= 37,
-    HttpHeaderTe= 38,
-    HttpHeaderTranslate= 39,
-    HttpHeaderUserAgent= 40,
-    HttpHeaderRequestMaximum= 41,
-    // HttpHeaderAcceptRanges= 20,  >>> FIXME: rust doesn't allow duplicate enum value
-    // HttpHeaderAge= 21,
-    // HttpHeaderEtag= 22,
-    // HttpHeaderLocation= 23,
-    // HttpHeaderProxyAuthenticate= 24,
-    // HttpHeaderRetryAfter= 25,
-    // HttpHeaderServer= 26,
-    // HttpHeaderSetCookie= 27,
-    // HttpHeaderVary= 28,
-    // HttpHeaderWwwAuthenticate= 29,
-    // HttpHeaderResponseMaximum= 30,
-    // HttpHeaderMaximum= 41,
-}
+    HttpHeaderWarning = 9,
+    HttpHeaderAllow = 10,
+    HttpHeaderContentLength = 11,
+    HttpHeaderContentType = 12,
+    HttpHeaderContentEncoding = 13,
+    HttpHeaderContentLanguage = 14,
+    HttpHeaderContentLocation = 15,
+    HttpHeaderContentMd5 = 16,
+    HttpHeaderContentRange = 17,
+    HttpHeaderExpires = 18,
+    HttpHeaderLastModified = 19,
+    HttpHeaderAccept = 20,
+    HttpHeaderAcceptCharset = 21,
+    HttpHeaderAcceptEncoding = 22,
+    HttpHeaderAcceptLanguage = 23,
+    HttpHeaderAuthorization = 24,
+    HttpHeaderCookie = 25,
+    HttpHeaderExpect = 26,
+    HttpHeaderFrom = 27,
+    HttpHeaderHost = 28,
+    HttpHeaderIfMatch = 29,
+    HttpHeaderIfModifiedSince = 30,
+    HttpHeaderIfNoneMatch = 31,
+    HttpHeaderIfRange = 32,
+    HttpHeaderIfUnmodifiedSince = 33,
+    HttpHeaderMaxForwards = 34,
+    HttpHeaderProxyAuthorization = 35,
+    HttpHeaderReferer = 36,
+    HttpHeaderRange = 37,
+    HttpHeaderTe = 38,
+    HttpHeaderTranslate = 39,
+    HttpHeaderUserAgent = 40,
+    HttpHeaderRequestMaximum = 41,
+    HttpHeaderAcceptRanges = 20,
+    HttpHeaderAge = 21,
+    HttpHeaderEtag = 22,
+    HttpHeaderLocation = 23,
+    HttpHeaderProxyAuthenticate = 24,
+    HttpHeaderRetryAfter = 25,
+    HttpHeaderServer = 26,
+    HttpHeaderSetCookie = 27,
+    HttpHeaderVary = 28,
+    HttpHeaderWwwAuthenticate = 29,
+    HttpHeaderResponseMaximum = 30,
+    HttpHeaderMaximum = 41,
+}}
 pub type PHTTP_HEADER_ID = *mut HTTP_HEADER_ID;
 STRUCT!{struct HTTP_KNOWN_HEADER {
     RawValueLength: ::USHORT,
@@ -428,11 +416,9 @@ STRUCT!{struct HTTP_UNKNOWN_HEADER {
     pRawValue: ::PCSTR,
 }}
 pub type PHTTP_UNKNOWN_HEADER = *mut HTTP_UNKNOWN_HEADER;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_LOG_DATA_TYPE {
+ENUM!{enum HTTP_LOG_DATA_TYPE {
     HttpLogDataTypeFields = 0,
-    DUMMY, // rustc --explain E0083
-}
+}}
 pub type PHTTP_LOG_DATA_TYPE = *mut HTTP_LOG_DATA_TYPE;
 STRUCT!{struct HTTP_LOG_DATA {
     Type: HTTP_LOG_DATA_TYPE,
@@ -471,14 +457,13 @@ STRUCT!{struct HTTP_LOG_FIELDS_DATA {
     SubStatus: ::USHORT,
 }}
 pub type PHTTP_LOG_FIELDS_DATA = *mut HTTP_LOG_FIELDS_DATA;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_DATA_CHUNK_TYPE {
+ENUM!{enum HTTP_DATA_CHUNK_TYPE {
     HttpDataChunkFromMemory,
     HttpDataChunkFromFileHandle,
     HttpDataChunkFromFragmentCache,
     HttpDataChunkFromFragmentCacheEx,
     HttpDataChunkMaximum,
-}
+}}
 pub type PHTTP_DATA_CHUNK_TYPE = *mut HTTP_DATA_CHUNK_TYPE;
 STRUCT!{struct HTTP_DATA_CHUNK_FromMemory {
     pBuffer: ::PVOID,
@@ -516,7 +501,8 @@ pub struct HTTP_REQUEST_HEADERS {
     pub pUnknownHeaders: PHTTP_UNKNOWN_HEADER,
     pub TrailerCount: ::USHORT,
     pub pTrailers: PHTTP_UNKNOWN_HEADER,
-    pub KnownHeaders: [HTTP_KNOWN_HEADER; HTTP_HEADER_ID::HttpHeaderRequestMaximum as usize],
+    pub KnownHeaders: [HTTP_KNOWN_HEADER; 41usize],
+    //                                    ^- FIXME: need to be HttpHeaderRequestMaximum
 }
 impl Clone for HTTP_REQUEST_HEADERS { fn clone(&self) -> HTTP_REQUEST_HEADERS { *self } }
 pub type PHTTP_REQUEST_HEADERS = *mut HTTP_REQUEST_HEADERS;
@@ -549,22 +535,20 @@ STRUCT!{struct HTTP_COOKED_URL {
 pub type PHTTP_COOKED_URL = *mut HTTP_COOKED_URL;
 pub type HTTP_URL_CONTEXT = ::ULONGLONG;
 pub const HTTP_URL_FLAG_REMOVE_ALL: ::ULONG = 0x00000001;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_AUTH_STATUS {
+ENUM!{enum HTTP_AUTH_STATUS {
     HttpAuthStatusSuccess,
     HttpAuthStatusNotAuthenticated,
     HttpAuthStatusFailure,
-}
+}}
 pub type PHTTP_AUTH_STATUS = *mut HTTP_AUTH_STATUS;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_REQUEST_AUTH_TYPE {
+ENUM!{enum HTTP_REQUEST_AUTH_TYPE {
     HttpRequestAuthTypeNone = 0,
     HttpRequestAuthTypeBasic,
     HttpRequestAuthTypeDigest,
     HttpRequestAuthTypeNTLM,
     HttpRequestAuthTypeNegotiate,
     HttpRequestAuthTypeKerberos,
-}
+}}
 pub type PHTTP_REQUEST_AUTH_TYPE = *mut HTTP_REQUEST_AUTH_TYPE;
 STRUCT!{struct HTTP_SSL_CLIENT_CERT_INFO {
     CertFlags: ::ULONG,
@@ -586,11 +570,10 @@ STRUCT!{struct HTTP_SSL_INFO {
     SslClientCertNegotiated: ::ULONG,
 }}
 pub type PHTTP_SSL_INFO = *mut HTTP_SSL_INFO;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_REQUEST_INFO_TYPE {
+ENUM!{enum HTTP_REQUEST_INFO_TYPE {
     HttpRequestInfoTypeAuth,
     HttpRequestInfoTypeChannelBind,
-}
+}}
 STRUCT!{struct HTTP_REQUEST_INFO {
     InfoType: HTTP_REQUEST_INFO_TYPE,
     InfoLength: ::ULONG,
@@ -660,13 +643,12 @@ pub struct HTTP_RESPONSE_V1 {
 }
 pub type PHTTP_RESPONSE_V1 = *mut HTTP_RESPONSE_V1;
 pub const HTTP_RESPONSE_FLAG_MULTIPLE_ENCODINGS_AVAILABLE: ::ULONG = 0x00000001;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_RESPONSE_INFO_TYPE {
+ENUM!{enum HTTP_RESPONSE_INFO_TYPE {
     HttpResponseInfoTypeMultipleKnownHeaders,
     HttpResponseInfoTypeAuthenticationProperty,
     HttpResponseInfoTypeQoSProperty,
     HttpResponseInfoTypeChannelBind,
-}
+}}
 pub type PHTTP_RESPONSE_INFO_TYPE = *mut HTTP_RESPONSE_INFO_TYPE;
 STRUCT!{struct HTTP_RESPONSE_INFO {
     Type: HTTP_RESPONSE_INFO_TYPE,
@@ -722,21 +704,19 @@ pub fn HTTPAPI_VERSION_GREATER_OR_EQUAL(
 ) -> bool {
     !HTTPAPI_LESS_VERSION(version, major, minor)
 }
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_CACHE_POLICY_TYPE {
+ENUM!{enum HTTP_CACHE_POLICY_TYPE {
     HttpCachePolicyNocache,
     HttpCachePolicyUserInvalidates,
     HttpCachePolicyTimeToLive,
     HttpCachePolicyMaximum,
-}
+}}
 pub type PHTTP_CACHE_POLICY_TYPE = *mut HTTP_CACHE_POLICY_TYPE;
 STRUCT!{struct HTTP_CACHE_POLICY {
     Policy: HTTP_CACHE_POLICY_TYPE,
     SecondsToLive: ::ULONG,
 }}
 pub type PHTTP_CACHE_POLICY = *mut HTTP_CACHE_POLICY;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_SERVICE_CONFIG_ID {
+ENUM!{enum HTTP_SERVICE_CONFIG_ID {
     HttpServiceConfigIPListenList,
     HttpServiceConfigSSLCertInfo,
     HttpServiceConfigUrlAclInfo,
@@ -745,14 +725,13 @@ pub enum HTTP_SERVICE_CONFIG_ID {
     HttpServiceConfigSslSniCertInfo,
     HttpServiceConfigSslCcsCertInfo,
     HttpServiceConfigMax,
-}
+}}
 pub type PHTTP_SERVICE_CONFIG_ID = *mut HTTP_SERVICE_CONFIG_ID;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_SERVICE_CONFIG_QUERY_TYPE {
+ENUM!{enum HTTP_SERVICE_CONFIG_QUERY_TYPE {
     HttpServiceConfigQueryExact,
     HttpServiceConfigQueryNext,
     HttpServiceConfigQueryMax,
-}
+}}
 pub type PHTTP_SERVICE_CONFIG_QUERY_TYPE = *mut HTTP_SERVICE_CONFIG_QUERY_TYPE;
 STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_KEY {
     pIpPort: ::PSOCKADDR,
@@ -852,11 +831,10 @@ STRUCT!{struct HTTP_SERVICE_CONFIG_URLACL_QUERY {
     dwToken: ::DWORD,
 }}
 pub type PHTTP_SERVICE_CONFIG_URLACL_QUERY = *mut HTTP_SERVICE_CONFIG_URLACL_QUERY;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum HTTP_SERVICE_CONFIG_CACHE_KEY {
+ENUM!{enum HTTP_SERVICE_CONFIG_CACHE_KEY {
     MaxCacheResponseSize = 0,
     CacheRangeChunkSize,
-}
+}}
 pub type PHTTP_SERVICE_CONFIG_CACHE_KEY = *mut HTTP_SERVICE_CONFIG_CACHE_KEY;
 pub type HTTP_SERVICE_CONFIG_CACHE_PARAM = ::ULONG;
 pub type PHTTP_SERVICE_CONFIG_CACHE_PARAM = *mut ::ULONG;

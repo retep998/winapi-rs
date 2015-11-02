@@ -13,40 +13,30 @@ pub const D2D1_INTERPOLATION_MODE_DEFINITION_ANISOTROPIC: ::DWORD = 4;
 pub const D2D1_INTERPOLATION_MODE_DEFINITION_HIGH_QUALITY_CUBIC: ::DWORD = 5;
 pub const D2D1_INTERPOLATION_MODE_DEFINITION_FANT: ::DWORD = 6;
 pub const D2D1_INTERPOLATION_MODE_DEFINITION_MIPMAP_LINEAR: ::DWORD = 7;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_GAMMA {
+ENUM!{enum D2D1_GAMMA {
     D2D1_GAMMA_2_2 = 0,
     D2D1_GAMMA_1_0 = 1,
-}
-pub use self::D2D1_GAMMA::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_OPACITY_MASK_CONTENT {
+}}
+ENUM!{enum D2D1_OPACITY_MASK_CONTENT {
     D2D1_OPACITY_MASK_CONTENT_GRAPHICS = 0,
     D2D1_OPACITY_MASK_CONTENT_TEXT_NATURAL = 1,
     D2D1_OPACITY_MASK_CONTENT_TEXT_GDI_COMPATIBLE = 2,
-}
-pub use self::D2D1_OPACITY_MASK_CONTENT::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_EXTEND_MODE {
+}}
+ENUM!{enum D2D1_EXTEND_MODE {
     D2D1_EXTEND_MODE_CLAMP = 0,
     D2D1_EXTEND_MODE_WRAP = 1,
     D2D1_EXTEND_MODE_MIRROR = 2,
-}
-pub use self::D2D1_EXTEND_MODE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_ANTIALIAS_MODE {
+}}
+ENUM!{enum D2D1_ANTIALIAS_MODE {
     D2D1_ANTIALIAS_MODE_PER_PRIMITIVE = 0,
     D2D1_ANTIALIAS_MODE_ALIASED = 1,
-}
-pub use self::D2D1_ANTIALIAS_MODE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_TEXT_ANTIALIAS_MODE {
+}}
+ENUM!{enum D2D1_TEXT_ANTIALIAS_MODE {
     D2D1_TEXT_ANTIALIAS_MODE_DEFAULT = 0,
     D2D1_TEXT_ANTIALIAS_MODE_CLEARTYPE = 1,
     D2D1_TEXT_ANTIALIAS_MODE_GRAYSCALE = 2,
     D2D1_TEXT_ANTIALIAS_MODE_ALIASED = 3,
-}
-pub use self::D2D1_TEXT_ANTIALIAS_MODE::*;
+}}
 ENUM!{enum D2D1_BITMAP_INTERPOLATION_MODE {
     D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR =
         D2D1_INTERPOLATION_MODE_DEFINITION_NEAREST_NEIGHBOR,
@@ -96,73 +86,55 @@ STRUCT!{struct D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES {
     radiusX: ::FLOAT,
     radiusY: ::FLOAT,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_ARC_SIZE {
+ENUM!{enum D2D1_ARC_SIZE {
     D2D1_ARC_SIZE_SMALL = 0,
     D2D1_ARC_SIZE_LARGE = 1,
-}
-pub use self::D2D1_ARC_SIZE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_CAP_STYLE {
+}}
+ENUM!{enum D2D1_CAP_STYLE {
     D2D1_CAP_STYLE_FLAT = 0,
     D2D1_CAP_STYLE_SQUARE = 1,
     D2D1_CAP_STYLE_ROUND = 2,
     D2D1_CAP_STYLE_TRIANGLE = 3,
-}
-pub use self::D2D1_CAP_STYLE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_DASH_STYLE {
+}}
+ENUM!{enum D2D1_DASH_STYLE {
     D2D1_DASH_STYLE_SOLID = 0,
     D2D1_DASH_STYLE_DASH = 1,
     D2D1_DASH_STYLE_DOT = 2,
     D2D1_DASH_STYLE_DASH_DOT = 3,
     D2D1_DASH_STYLE_DASH_DOT_DOT = 4,
     D2D1_DASH_STYLE_CUSTOM = 5,
-}
-pub use self::D2D1_DASH_STYLE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_LINE_JOIN {
+}}
+ENUM!{enum D2D1_LINE_JOIN {
     D2D1_LINE_JOIN_MITER = 0,
     D2D1_LINE_JOIN_BEVEL = 1,
     D2D1_LINE_JOIN_ROUND = 2,
     D2D1_LINE_JOIN_MITER_OR_BEVEL = 3,
-}
-pub use self::D2D1_LINE_JOIN::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_COMBINE_MODE {
+}}
+ENUM!{enum D2D1_COMBINE_MODE {
     D2D1_COMBINE_MODE_UNION = 0,
     D2D1_COMBINE_MODE_INTERSECT = 1,
     D2D1_COMBINE_MODE_XOR = 2,
     D2D1_COMBINE_MODE_EXCLUDE = 3,
-}
-pub use self::D2D1_COMBINE_MODE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_GEOMETRY_RELATION {
+}}
+ENUM!{enum D2D1_GEOMETRY_RELATION {
     D2D1_GEOMETRY_RELATION_UNKNOWN = 0,
     D2D1_GEOMETRY_RELATION_DISJOINT = 1,
     D2D1_GEOMETRY_RELATION_IS_CONTAINED = 2,
     D2D1_GEOMETRY_RELATION_CONTAINS = 3,
     D2D1_GEOMETRY_RELATION_OVERLAP = 4,
-}
-pub use self::D2D1_GEOMETRY_RELATION::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_GEOMETRY_SIMPLIFICATION_OPTION {
+}}
+ENUM!{enum D2D1_GEOMETRY_SIMPLIFICATION_OPTION {
     D2D1_GEOMETRY_SIMPLIFICATION_OPTION_CUBICS_AND_LINES = 0,
     D2D1_GEOMETRY_SIMPLIFICATION_OPTION_LINES = 1,
-}
-pub use self::D2D1_GEOMETRY_SIMPLIFICATION_OPTION::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_FIGURE_BEGIN {
+}}
+ENUM!{enum D2D1_FIGURE_BEGIN {
     D2D1_FIGURE_BEGIN_FILLED = 0,
     D2D1_FIGURE_BEGIN_HOLLOW = 1,
-}
-pub use self::D2D1_FIGURE_BEGIN::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_FIGURE_END {
+}}
+ENUM!{enum D2D1_FIGURE_END {
     D2D1_FIGURE_END_OPEN = 0,
     D2D1_FIGURE_END_CLOSED = 1,
-}
-pub use self::D2D1_FIGURE_END::*;
+}}
 STRUCT!{struct D2D1_BEZIER_SEGMENT {
     point1: ::D2D1_POINT_2F,
     point2: ::D2D1_POINT_2F,
@@ -173,25 +145,19 @@ STRUCT!{struct D2D1_TRIANGLE {
     point2: ::D2D1_POINT_2F,
     point3: ::D2D1_POINT_2F,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_PATH_SEGMENT {
+FLAGS!{enum D2D1_PATH_SEGMENT {
     D2D1_PATH_SEGMENT_NONE = 0x00000000,
     D2D1_PATH_SEGMENT_FORCE_UNSTROKED = 0x00000001,
     D2D1_PATH_SEGMENT_FORCE_ROUND_LINE_JOIN = 0x00000002,
-}
-pub use self::D2D1_PATH_SEGMENT::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_SWEEP_DIRECTION {
+}}
+ENUM!{enum D2D1_SWEEP_DIRECTION {
     D2D1_SWEEP_DIRECTION_COUNTER_CLOCKWISE = 0,
     D2D1_SWEEP_DIRECTION_CLOCKWISE = 1,
-}
-pub use self::D2D1_SWEEP_DIRECTION::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_FILL_MODE {
+}}
+ENUM!{enum D2D1_FILL_MODE {
     D2D1_FILL_MODE_ALTERNATE = 0,
     D2D1_FILL_MODE_WINDING = 1,
-}
-pub use self::D2D1_FILL_MODE::*;
+}}
 STRUCT!{struct D2D1_ARC_SEGMENT {
     point: ::D2D1_POINT_2F,
     size: D2D1_SIZE_F,
@@ -222,12 +188,10 @@ STRUCT!{struct D2D1_STROKE_STYLE_PROPERTIES {
     dashStyle: D2D1_DASH_STYLE,
     dashOffset: ::FLOAT,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_LAYER_OPTIONS {
+FLAGS!{enum D2D1_LAYER_OPTIONS {
     D2D1_LAYER_OPTIONS_NONE = 0x00000000,
     D2D1_LAYER_OPTIONS_INITIALIZE_FOR_CLEARTYPE = 0x00000001,
-}
-pub use self::D2D1_LAYER_OPTIONS::*;
+}}
 STRUCT!{struct D2D1_LAYER_PARAMETERS {
     contentBounds: ::D2D1_RECT_F,
     geometricMask: *mut ID2D1Geometry,
@@ -237,40 +201,30 @@ STRUCT!{struct D2D1_LAYER_PARAMETERS {
     opacityBrush: *mut ID2D1Brush,
     layerOptions: D2D1_LAYER_OPTIONS,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_WINDOW_STATE {
+ENUM!{enum D2D1_WINDOW_STATE {
     D2D1_WINDOW_STATE_NONE = 0x0000000,
     D2D1_WINDOW_STATE_OCCLUDED = 0x0000001,
-}
-pub use self::D2D1_WINDOW_STATE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_RENDER_TARGET_TYPE {
+}}
+ENUM!{enum D2D1_RENDER_TARGET_TYPE {
     D2D1_RENDER_TARGET_TYPE_DEFAULT = 0,
     D2D1_RENDER_TARGET_TYPE_SOFTWARE = 1,
     D2D1_RENDER_TARGET_TYPE_HARDWARE = 2,
-}
-pub use self::D2D1_RENDER_TARGET_TYPE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_FEATURE_LEVEL {
+}}
+ENUM!{enum D2D1_FEATURE_LEVEL {
     D2D1_FEATURE_LEVEL_DEFAULT = 0,
-    D2D1_FEATURE_LEVEL_9 = ::D3D_FEATURE_LEVEL_9_1 as i32,
-    D2D1_FEATURE_LEVEL_10 = ::D3D_FEATURE_LEVEL_10_0 as i32,
-}
-pub use self::D2D1_FEATURE_LEVEL::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_RENDER_TARGET_USAGE {
+    D2D1_FEATURE_LEVEL_9 = ::D3D_FEATURE_LEVEL_9_1.0,
+    D2D1_FEATURE_LEVEL_10 = ::D3D_FEATURE_LEVEL_10_0.0,
+}}
+FLAGS!{enum D2D1_RENDER_TARGET_USAGE {
     D2D1_RENDER_TARGET_USAGE_NONE = 0x00000000,
     D2D1_RENDER_TARGET_USAGE_FORCE_BITMAP_REMOTING = 0x00000001,
     D2D1_RENDER_TARGET_USAGE_GDI_COMPATIBLE = 0x00000002,
-}
-pub use self::D2D1_RENDER_TARGET_USAGE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_PRESENT_OPTIONS {
+}}
+FLAGS!{enum D2D1_PRESENT_OPTIONS {
     D2D1_PRESENT_OPTIONS_NONE = 0x00000000,
     D2D1_PRESENT_OPTIONS_RETAIN_CONTENTS = 0x00000001,
     D2D1_PRESENT_OPTIONS_IMMEDIATELY = 0x00000002,
-}
-pub use self::D2D1_PRESENT_OPTIONS::*;
+}}
 STRUCT!{struct D2D1_RENDER_TARGET_PROPERTIES {
     _type: D2D1_RENDER_TARGET_TYPE,
     pixelFormat: ::D2D1_PIXEL_FORMAT,
@@ -284,12 +238,10 @@ STRUCT!{struct D2D1_HWND_RENDER_TARGET_PROPERTIES {
     pixelSize: D2D1_SIZE_U,
     presentOptions: D2D1_PRESENT_OPTIONS,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS {
+FLAGS!{enum D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS {
     D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS_NONE = 0x00000000,
     D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS_GDI_COMPATIBLE = 0x00000001,
-}
-pub use self::D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS::*;
+}}
 STRUCT!{struct D2D1_DRAWING_STATE_DESCRIPTION {
     antialiasMode: D2D1_ANTIALIAS_MODE,
     textAntialiasMode: D2D1_TEXT_ANTIALIAS_MODE,
@@ -297,26 +249,20 @@ STRUCT!{struct D2D1_DRAWING_STATE_DESCRIPTION {
     tag2: D2D1_TAG,
     transform: D2D1_MATRIX_3X2_F,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_DC_INITIALIZE_MODE {
+ENUM!{enum D2D1_DC_INITIALIZE_MODE {
     D2D1_DC_INITIALIZE_MODE_COPY = 0,
     D2D1_DC_INITIALIZE_MODE_CLEAR = 1,
-}
-pub use self::D2D1_DC_INITIALIZE_MODE::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_DEBUG_LEVEL {
+}}
+ENUM!{enum D2D1_DEBUG_LEVEL {
     D2D1_DEBUG_LEVEL_NONE = 0,
     D2D1_DEBUG_LEVEL_ERROR = 1,
     D2D1_DEBUG_LEVEL_WARNING = 2,
     D2D1_DEBUG_LEVEL_INFORMATION = 3,
-}
-pub use self::D2D1_DEBUG_LEVEL::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum D2D1_FACTORY_TYPE {
+}}
+ENUM!{enum D2D1_FACTORY_TYPE {
     D2D1_FACTORY_TYPE_SINGLE_THREADED = 0,
     D2D1_FACTORY_TYPE_MULTI_THREADED = 1,
-}
-pub use self::D2D1_FACTORY_TYPE::*;
+}}
 STRUCT!{struct D2D1_FACTORY_OPTIONS {
     debugLevel: D2D1_DEBUG_LEVEL,
 }}

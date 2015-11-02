@@ -55,8 +55,7 @@ pub type PNSPV2_ROUTINE = *mut NSPV2_ROUTINE;
 pub type LPNSPV2_ROUTINE = *mut NSPV2_ROUTINE;
 pub type PCNSPV2_ROUTINE = *const NSPV2_ROUTINE;
 pub type LPCNSPV2_ROUTINE = *const NSPV2_ROUTINE;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum WSC_PROVIDER_INFO_TYPE {
+ENUM!{enum WSC_PROVIDER_INFO_TYPE {
     ProviderInfoLspCategories,
     ProviderInfoAudit,
-}
+}}

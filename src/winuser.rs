@@ -1040,14 +1040,13 @@ pub const GWLP_ID: ::c_int = -12;
 pub const GWL_USERDATA: ::c_int = -21;
 pub const GWLP_USERDATA: ::c_int = -21;
 //5976
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum POINTER_INPUT_TYPE {
+ENUM!{enum POINTER_INPUT_TYPE {
     PT_POINTER = 0x00000001,
     PT_TOUCH = 0x00000002,
     PT_PEN = 0x00000003,
     PT_MOUSE = 0x00000004,
     PT_TOUCHPAD = 0x00000005,
-}
+}}
 //6566
 // flags for MsgWaitForMultipleObjectsEx
 pub const MWMO_WAITALL: ::DWORD = 0x0001;

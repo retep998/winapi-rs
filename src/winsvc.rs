@@ -159,16 +159,12 @@ pub const SERVICE_LAUNCH_PROTECTED_ANTIMALWARE_LIGHT: ::DWORD = 3;
 DECLARE_HANDLE!(SC_HANDLE, SC_HANDLE__);
 pub type LPSC_HANDLE = *mut SC_HANDLE;
 DECLARE_HANDLE!(SERVICE_STATUS_HANDLE, SERVICE_STATUS_HANDLE__);
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum SC_STATUS_TYPE {
+ENUM!{enum SC_STATUS_TYPE {
     SC_STATUS_PROCESS_INFO = 0,
-    __, // FIXME - Univariant enums
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum _SC_ENUM_TYPE {
+}}
+ENUM!{enum _SC_ENUM_TYPE {
     SC_ENUM_PROCESS_INFO = 0,
-    __, // FIXME - Univariant enums
-}
+}}
 //700
 STRUCT!{struct SERVICE_STATUS {
     dwServiceType: ::DWORD,

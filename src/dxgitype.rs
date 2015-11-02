@@ -6,8 +6,7 @@ pub const DXGI_CPU_ACCESS_DYNAMIC: ::DWORD = 1;
 pub const DXGI_CPU_ACCESS_READ_WRITE: ::DWORD = 2;
 pub const DXGI_CPU_ACCESS_SCRATCH: ::DWORD = 3;
 pub const DXGI_CPU_ACCESS_FIELD: ::DWORD = 15;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DXGI_USAGE {
+FLAGS!{enum DXGI_USAGE {
     DXGI_USAGE_SHADER_INPUT = 1 << (0 + 4),
     DXGI_USAGE_RENDER_TARGET_OUTPUT = 1 << (1 + 4),
     DXGI_USAGE_BACK_BUFFER = 1 << (2 + 4),
@@ -15,8 +14,7 @@ pub enum DXGI_USAGE {
     DXGI_USAGE_READ_ONLY = 1 << (4 + 4),
     DXGI_USAGE_DISCARD_ON_PRESENT = 1 << (5 + 4),
     DXGI_USAGE_UNORDERED_ACCESS = 1 << (6 + 4),
-}
-pub use self::DXGI_USAGE::*;
+}}
 STRUCT!{struct DXGI_RGB {
     Red: f32,
     Green: f32,
@@ -51,30 +49,24 @@ STRUCT!{struct DXGI_RATIONAL {
     Numerator: ::UINT,
     Denominator: ::UINT,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DXGI_MODE_SCANLINE_ORDER {
+ENUM!{enum DXGI_MODE_SCANLINE_ORDER {
     DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED,
     DXGI_MODE_SCANLINE_ORDER_PROGRESSIVE,
     DXGI_MODE_SCANLINE_ORDER_UPPER_FIELD_FIRST,
     DXGI_MODE_SCANLINE_ORDER_LOWER_FIELD_FIRST,
-}
-pub use self::DXGI_MODE_SCANLINE_ORDER::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DXGI_MODE_SCALING {
+}}
+ENUM!{enum DXGI_MODE_SCALING {
     DXGI_MODE_SCALING_UNSPECIFIED,
     DXGI_MODE_SCALING_CENTERED,
     DXGI_MODE_SCALING_STRETCHED,
-}
-pub use self::DXGI_MODE_SCALING::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DXGI_MODE_ROTATION {
+}}
+ENUM!{enum DXGI_MODE_ROTATION {
     DXGI_MODE_ROTATION_UNSPECIFIED,
     DXGI_MODE_ROTATION_IDENTITY,
     DXGI_MODE_ROTATION_ROTATE90,
     DXGI_MODE_ROTATION_ROTATE180,
     DXGI_MODE_ROTATION_ROTATE270,
-}
-pub use self::DXGI_MODE_ROTATION::*;
+}}
 STRUCT!{struct DXGI_MODE_DESC {
     Width: ::UINT,
     Height: ::UINT,

@@ -124,13 +124,11 @@ STRUCT!{struct SEC_CHANNEL_BINDINGS {
     dwApplicationDataOffset: ::c_ulong,
 }}
 pub type PSEC_CHANNEL_BINDINGS = *mut SEC_CHANNEL_BINDINGS;
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT {
+ENUM!{enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT {
     SecApplicationProtocolNegotiationExt_None,
     SecApplicationProtocolNegotiationExt_NPN,
     SecApplicationProtocolNegotiationExt_ALPN,
-}
-pub use self::SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT::*;
+}}
 pub type PSEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT = *mut SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT;
 STRUCT!{struct SEC_APPLICATION_PROTOCOL_LIST {
     ProtoNegoExt: ::SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT,
@@ -335,15 +333,13 @@ STRUCT!{struct SecPkgContext_SubjectAttributes {
 pub type PSecPkgContext_SubjectAttributes = *mut SecPkgContext_SubjectAttributes;
 pub const SECPKG_ATTR_NEGO_INFO_FLAG_NO_KERBEROS: ::c_ulong = 0x1;
 pub const SECPKG_ATTR_NEGO_INFO_FLAG_NO_NTLM: ::c_ulong = 0x2;
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum SECPKG_CRED_CLASS {
+ENUM!{enum SECPKG_CRED_CLASS {
     SecPkgCredClass_None = 0,
     SecPkgCredClass_Ephemeral = 10,
     SecPkgCredClass_PersistedGeneric = 20,
     SecPkgCredClass_PersistedSpecific = 30,
     SecPkgCredClass_Explicit = 40,
-}
-pub use self::SECPKG_CRED_CLASS::*;
+}}
 pub type PSECPKG_CRED_CLASS = *mut SECPKG_CRED_CLASS;
 STRUCT!{struct SecPkgContext_CredInfo {
     CredClass: SECPKG_CRED_CLASS,
@@ -379,13 +375,11 @@ STRUCT!{struct SecPkgContext_NamesW {
     sUserName: *mut SEC_WCHAR,
 }}
 pub type PSecPkgContext_NamesW = *mut SecPkgContext_NamesW;
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum SECPKG_ATTR_LCT_STATUS {
+ENUM!{enum SECPKG_ATTR_LCT_STATUS {
     SecPkgAttrLastClientTokenYes,
     SecPkgAttrLastClientTokenNo,
     SecPkgAttrLastClientTokenMaybe,
-}
-pub use self::SECPKG_ATTR_LCT_STATUS::*;
+}}
 pub type PSECPKG_ATTR_LCT_STATUS = *mut SECPKG_ATTR_LCT_STATUS;
 STRUCT!{struct SecPkgContext_LastClientTokenStatus {
     LastClientTokenStatus: SECPKG_ATTR_LCT_STATUS,
@@ -542,13 +536,11 @@ STRUCT!{struct SecPkgContext_Bindings {
     Bindings: *mut SEC_CHANNEL_BINDINGS,
 }}
 pub type PSecPkgContext_Bindings = *mut SecPkgContext_Bindings;
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS {
+ENUM!{enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS {
     SecApplicationProtocolNegotiationStatus_None,
     SecApplicationProtocolNegotiationStatus_Success,
     SecApplicationProtocolNegotiationStatus_SelectedClientOnly,
-}
-pub use self::SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS::*;
+}}
 pub type PSEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS =
     *mut SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS;
 pub const MAX_PROTOCOL_ID_SIZE: usize = 0xff;
@@ -598,15 +590,13 @@ pub type CHANGE_PASSWORD_FN_A = Option<unsafe extern "system" fn(
     ::c_ulong, PSecBufferDesc,
 ) -> SECURITY_STATUS>;
 //1844
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum SecDelegationType {
+ENUM!{enum SecDelegationType {
     SecFull,
     SecService,
     SecTree,
     SecDirectory,
     SecObject,
-}
-pub use self::SecDelegationType::*;
+}}
 pub type PSecDelegationType = *mut SecDelegationType;
 STRUCT!{struct SEC_WINNT_AUTH_BYTE_VECTOR {
     ByteArrayOffset: ::c_ulong,

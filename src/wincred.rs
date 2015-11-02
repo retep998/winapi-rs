@@ -125,20 +125,18 @@ STRUCT!{struct BINARY_BLOB_CREDENTIAL_INFO {
     pbBlob: ::LPBYTE,
 }}
 pub type PBINARY_BLOB_CREDENTIAL_INFO = *mut BINARY_BLOB_CREDENTIAL_INFO;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum CRED_MARSHAL_TYPE {
+ENUM!{enum CRED_MARSHAL_TYPE {
     CertCredential = 1,
     UsernameTargetCredential,
     BinaryBlobCredential,
     UsernameForPackedCredentials,
-}
+}}
 pub type PCRED_MARSHAL_TYPE = *mut CRED_MARSHAL_TYPE;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum CRED_PROTECTION_TYPE {
+ENUM!{enum CRED_PROTECTION_TYPE {
     CredUnprotected,
     CredUserProtection,
     CredTrustedProtection,
-}
+}}
 pub type PCRED_PROTECTION_TYPE = *mut CRED_PROTECTION_TYPE;
 pub const CRED_PACK_PROTECTED_CREDENTIALS: ::DWORD = 0x1;
 pub const CRED_PACK_WOW_BUFFER: ::DWORD = 0x2;

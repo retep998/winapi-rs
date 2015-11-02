@@ -124,8 +124,7 @@ STRUCT!{struct USER_SESSION_KEY {
     data: [CYPHER_BLOCK; 2],
 }}
 pub type PUSER_SESSION_KEY = *mut USER_SESSION_KEY;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum NETLOGON_LOGON_INFO_CLASS {
+ENUM!{enum NETLOGON_LOGON_INFO_CLASS {
     NetlogonInteractiveInformation = 1,
     NetlogonNetworkInformation,
     NetlogonServiceInformation,
@@ -133,7 +132,7 @@ pub enum NETLOGON_LOGON_INFO_CLASS {
     NetlogonInteractiveTransitiveInformation,
     NetlogonNetworkTransitiveInformation,
     NetlogonServiceTransitiveInformation,
-}
+}}
 STRUCT!{struct NETLOGON_LOGON_IDENTITY_INFO {
     LogonDomainName: UNICODE_STRING,
     ParameterControl: ::ULONG,

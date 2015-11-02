@@ -50,28 +50,23 @@ pub const DXGI_RESOURCE_PRIORITY_LOW: ::DWORD = 0x50000000;
 pub const DXGI_RESOURCE_PRIORITY_NORMAL: ::DWORD = 0x78000000;
 pub const DXGI_RESOURCE_PRIORITY_HIGH: ::DWORD = 0xa0000000;
 pub const DXGI_RESOURCE_PRIORITY_MAXIMUM: ::DWORD = 0xc8000000;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DXGI_RESIDENCY {
+ENUM!{enum DXGI_RESIDENCY {
     DXGI_RESIDENCY_FULLY_RESIDENT = 1,
     DXGI_RESIDENCY_RESIDENT_IN_SHARED_MEMORY = 2,
     DXGI_RESIDENCY_EVICTED_TO_DISK = 3,
-}
-pub use self::DXGI_RESIDENCY::*;
+}}
 STRUCT!{struct DXGI_SURFACE_DESC {
     Width: ::UINT,
     Height: ::UINT,
     Format: ::DXGI_FORMAT,
     SampleDesc: ::DXGI_SAMPLE_DESC,
 }}
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DXGI_SWAP_EFFECT {
+ENUM!{enum DXGI_SWAP_EFFECT {
     DXGI_SWAP_EFFECT_DISCARD = 0,
     DXGI_SWAP_EFFECT_SEQUENTIAL = 1,
     DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL = 3,
-}
-pub use self::DXGI_SWAP_EFFECT::*;
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DXGI_SWAP_CHAIN_FLAG {
+}}
+FLAGS!{enum DXGI_SWAP_CHAIN_FLAG {
     DXGI_SWAP_CHAIN_FLAG_NONPREROTATED = 1,
     DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH = 2,
     DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE = 4,
@@ -82,8 +77,7 @@ pub enum DXGI_SWAP_CHAIN_FLAG {
     DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER = 128,
     DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO = 256,
     DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO = 512,
-}
-pub use self::DXGI_SWAP_CHAIN_FLAG::*;
+}}
 STRUCT!{struct DXGI_SWAP_CHAIN_DESC {
     BufferDesc: ::DXGI_MODE_DESC,
     SampleDesc: ::DXGI_SAMPLE_DESC,
@@ -221,13 +215,11 @@ interface IDXGIDevice(IDXGIDeviceVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn SetGPUThreadPriority(&mut self, Priority: ::INT) -> ::HRESULT,
     fn GetGPUThreadPriority(&mut self, pPriority: *mut ::INT) -> ::HRESULT
 });
-#[repr(i32)] #[derive(Copy, Clone, Debug)] #[allow(unused_qualifications)]
-pub enum DXGI_ADAPTER_FLAG {
+ENUM!{enum DXGI_ADAPTER_FLAG {
     DXGI_ADAPTER_FLAG_NONE,
     DXGI_ADAPTER_FLAG_REMOTE,
     DXGI_ADAPTER_FLAG_SOFTWARE,
-}
-pub use self::DXGI_ADAPTER_FLAG::*;
+}}
 #[repr(C)] #[derive(Copy)]
 pub struct DXGI_ADAPTER_DESC1 {
     pub Description: [::WCHAR; 128],

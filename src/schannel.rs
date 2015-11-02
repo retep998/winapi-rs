@@ -7,16 +7,13 @@ pub const SSL3SP_NAME: &'static str = "Microsoft SSL 3.0";
 pub const TLS1SP_NAME: &'static str = "Microsoft TLS 1.0";
 pub const PCT1SP_NAME: &'static str = "Microsoft PCT 1.0";
 pub const SCHANNEL_NAME: &'static str = "Schannel";
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum eTlsSignatureAlgorithm {
+ENUM!{enum eTlsSignatureAlgorithm {
     TlsSignatureAlgorithm_Anonymous = 0,
     TlsSignatureAlgorithm_Rsa = 1,
     TlsSignatureAlgorithm_Dsa = 2,
     TlsSignatureAlgorithm_Ecdsa = 3,
-}
-pub use self::eTlsSignatureAlgorithm::*;
-#[repr(i32)] #[derive(Clone, Copy, Debug)] #[allow(unused_qualifications)]
-pub enum eTlsHashAlgorithm {
+}}
+ENUM!{enum eTlsHashAlgorithm {
     TlsHashAlgorithm_None = 0,
     TlsHashAlgorithm_Md5 = 1,
     TlsHashAlgorithm_Sha1 = 2,
@@ -24,8 +21,7 @@ pub enum eTlsHashAlgorithm {
     TlsHashAlgorithm_Sha256 = 4,
     TlsHashAlgorithm_Sha384 = 5,
     TlsHashAlgorithm_Sha512 = 6,
-}
-pub use self::eTlsHashAlgorithm::*;
+}}
 pub const UNISP_RPC_ID: ::DWORD = 14;
 STRUCT!{struct SecPkgContext_RemoteCredentialInfo {
     cbCertificateChain: ::DWORD,

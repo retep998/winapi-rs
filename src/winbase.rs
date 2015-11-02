@@ -271,8 +271,7 @@ pub type PFIBER_CALLOUT_ROUTINE = Option<unsafe extern "system" fn(
     lpParameter: ::LPVOID,
 ) -> ::LPVOID>;
 pub type LPLDT_ENTRY = ::LPVOID;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum COPYFILE2_MESSAGE_TYPE {
+ENUM!{enum COPYFILE2_MESSAGE_TYPE {
     COPYFILE2_CALLBACK_NONE = 0,
     COPYFILE2_CALLBACK_CHUNK_STARTED,
     COPYFILE2_CALLBACK_CHUNK_FINISHED,
@@ -281,17 +280,15 @@ pub enum COPYFILE2_MESSAGE_TYPE {
     COPYFILE2_CALLBACK_POLL_CONTINUE,
     COPYFILE2_CALLBACK_ERROR,
     COPYFILE2_CALLBACK_MAX,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum COPYFILE2_MESSAGE_ACTION {
+}}
+ENUM!{enum COPYFILE2_MESSAGE_ACTION {
     COPYFILE2_PROGRESS_CONTINUE = 0,
     COPYFILE2_PROGRESS_CANCEL,
     COPYFILE2_PROGRESS_STOP,
     COPYFILE2_PROGRESS_QUIET,
     COPYFILE2_PROGRESS_PAUSE,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum COPYFILE2_COPY_PHASE {
+}}
+ENUM!{enum COPYFILE2_COPY_PHASE {
     COPYFILE2_PHASE_NONE = 0,
     COPYFILE2_PHASE_PREPARE_SOURCE,
     COPYFILE2_PHASE_PREPARE_DEST,
@@ -300,7 +297,7 @@ pub enum COPYFILE2_COPY_PHASE {
     COPYFILE2_PHASE_SERVER_COPY,
     COPYFILE2_PHASE_NAMEGRAFT_COPY,
     COPYFILE2_PHASE_MAX,
-}
+}}
 STRUCT!{struct COPYFILE2_MESSAGE_ChunkStarted {
     dwStreamNumber: ::DWORD,
     dwReserved: ::DWORD,
@@ -476,30 +473,26 @@ STRUCT!{struct ACTCTX_SECTION_KEYED_DATA {
 }}
 pub type PACTCTX_SECTION_KEYED_DATA = *mut ACTCTX_SECTION_KEYED_DATA;
 pub type PCACTCTX_SECTION_KEYED_DATA = *const ACTCTX_SECTION_KEYED_DATA;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum STREAM_INFO_LEVELS {
+ENUM!{enum STREAM_INFO_LEVELS {
     FindStreamInfoStandard,
     FindStreamInfoMaxInfoLevel,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum PROCESS_INFORMATION_CLASS {
+}}
+ENUM!{enum PROCESS_INFORMATION_CLASS {
     ProcessMemoryPriority,
     ProcessInformationClassMax,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum DEP_SYSTEM_POLICY_TYPE {
+}}
+ENUM!{enum DEP_SYSTEM_POLICY_TYPE {
     DEPPolicyAlwaysOff = 0,
     DEPPolicyAlwaysOn,
     DEPPolicyOptIn,
     DEPPolicyOptOut,
     DEPTotalPolicyCount,
-}
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum PIPE_ATTRIBUTE_TYPE {
+}}
+ENUM!{enum PIPE_ATTRIBUTE_TYPE {
     PipeAttribute,
     PipeConnectionAttribute,
     PipeHandleAttribute,
-}
+}}
 pub type APPLICATION_RECOVERY_CALLBACK = Option<unsafe extern "system" fn(
     pvParameter: ::PVOID
 ) -> ::DWORD>;
@@ -525,13 +518,12 @@ pub struct OFSTRUCT {
 impl Clone for OFSTRUCT { fn clone(&self) -> OFSTRUCT { *self } }
 pub type POFSTRUCT = *mut OFSTRUCT;
 pub type LPOFSTRUCT = *mut OFSTRUCT;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum FILE_ID_TYPE {
+ENUM!{enum FILE_ID_TYPE {
     FileIdType,
     ObjectIdType,
     ExtendedFileIdType,
     MaximumFileIdType,
-}
+}}
 STRUCT!{struct FILE_ID_DESCRIPTOR {
     dwSize: ::DWORD,
     Type: FILE_ID_TYPE,

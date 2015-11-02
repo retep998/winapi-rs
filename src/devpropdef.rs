@@ -50,11 +50,10 @@ STRUCT!{struct DEVPROPKEY {
     pid: DEVPROPID,
 }}
 pub type PDEVPROPKEY = *mut DEVPROPKEY;
-#[repr(i32)] #[derive(Clone, Copy, Debug)]
-pub enum DEVPROPSTORE {
+ENUM!{enum DEVPROPSTORE {
     DEVPROP_STORE_SYSTEM,
     DEVPROP_STORE_USER,
-}
+}}
 pub type PDEVPROPSTORE = *mut DEVPROPSTORE;
 STRUCT!{struct DEVPROPCOMPKEY {
     Key: DEVPROPKEY,
