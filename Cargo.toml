@@ -41,6 +41,7 @@ user32-sys = { version = "*", path = "lib/user32-sys" }
 usp10-sys = { version = "*", path = "lib/usp10-sys" }
 uuid-sys = { version = "*", path = "lib/uuid-sys" }
 vssapi-sys = { version = "*", path = "lib/vssapi-sys" }
+wevtapi-sys = { version = "*", path = "lib/wevtapi-sys" }
 winhttp-sys = { version = "*", path = "lib/winhttp-sys" }
 winmm-sys = { version = "*", path = "lib/winmm-sys" }
 winscard-sys = { version = "*", path = "lib/winscard-sys" }
