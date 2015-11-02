@@ -223,6 +223,14 @@ macro_rules! FLAGS {
     }
 }
 macro_rules! STRUCT {
+    {nodebug struct $name:ident { $($field:ident: $ftype:ty,)+ }} => {
+        #[repr(C)]
+        pub struct $name {
+            $(pub $field: $ftype,)+
+        }
+        impl Copy for $name {}
+        impl Clone for $name { fn clone(&self) -> $name { *self } }
+    };
     {struct $name:ident { $($field:ident: $ftype:ty,)+ }} => {
         #[repr(C)] #[derive(Debug)]
         pub struct $name {
@@ -230,5 +238,5 @@ macro_rules! STRUCT {
         }
         impl Copy for $name {}
         impl Clone for $name { fn clone(&self) -> $name { *self } }
-    }
+    };
 }

@@ -401,8 +401,8 @@ extern "system" {
     // pub fn GetAclInformation();
     // pub fn GetAuditedPermissionsFromAclA();
     // pub fn GetAuditedPermissionsFromAclW();
-    // pub fn GetCurrentHwProfileA();
-    // pub fn GetCurrentHwProfileW();
+    pub fn GetCurrentHwProfileA(lpHwProfileInfo: LPHW_PROFILE_INFOA) -> BOOL;
+    pub fn GetCurrentHwProfileW(lpHwProfileInfo: LPHW_PROFILE_INFOW) -> BOOL;
     // pub fn GetDynamicTimeZoneInformationEffectiveYears();
     // pub fn GetEffectiveRightsFromAclA();
     // pub fn GetEffectiveRightsFromAclW();

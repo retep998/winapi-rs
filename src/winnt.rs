@@ -157,6 +157,13 @@ STRUCT!{struct OBJECTID {
 }}
 pub const MINCHAR: ::CHAR = 0x80u8 as ::CHAR;
 pub const MAXCHAR: ::CHAR = 0x7f;
+pub const MINSHORT: ::SHORT = 0x8000u16 as ::SHORT;
+pub const MAXSHORT: ::SHORT = 0x7fff;
+pub const MINLONG: ::LONG = 0x80000000u32 as ::LONG;
+pub const MAXLONG: ::LONG = 0x7fffffff;
+pub const MAXBYTE: ::BYTE = 0xff;
+pub const MAXWORD: ::WORD = 0xffff;
+pub const MAXDWORD: ::DWORD = 0xffffffff;
 //1300
 pub type PEXCEPTION_ROUTINE = Option<unsafe extern "system" fn(
     ExceptionRecord: *mut EXCEPTION_RECORD, EstablisherFrame: PVOID, ContextRecord: *mut CONTEXT,
@@ -1011,7 +1018,12 @@ pub const PROCESS_SUSPEND_RESUME: ::DWORD = 0x0800;
 pub const PROCESS_QUERY_LIMITED_INFORMATION: ::DWORD = 0x1000;
 pub const PROCESS_SET_LIMITED_INFORMATION: ::DWORD = 0x2000;
 pub const PROCESS_ALL_ACCESS: ::DWORD = STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xFFFF;
-//11445
+//11007
+pub const THREAD_BASE_PRIORITY_LOWRT: ::DWORD = 15;
+pub const THREAD_BASE_PRIORITY_MAX: ::DWORD = 2;
+pub const THREAD_BASE_PRIORITY_MIN: ::DWORD = -2i32 as ::DWORD;
+pub const THREAD_BASE_PRIORITY_IDLE: ::DWORD = -15i32 as ::DWORD;
+//11018
 STRUCT!{struct QUOTA_LIMITS {
     PagedPoolLimit: ::SIZE_T,
     NonPagedPoolLimit: ::SIZE_T,
@@ -1059,7 +1071,7 @@ STRUCT!{struct IO_COUNTERS {
     OtherTransferCount: ::ULONGLONG,
 }}
 pub type PIO_COUNTERS = *mut IO_COUNTERS;
-//11607
+//11192
 STRUCT!{struct JOBOBJECT_BASIC_LIMIT_INFORMATION {
     PerProcessUserTimeLimit: ::LARGE_INTEGER,
     PerJobUserTimeLimit: ::LARGE_INTEGER,
@@ -1180,7 +1192,7 @@ ENUM!{enum JOBOBJECTINFOCLASS {
     JobObjectReserved9Information,
     MaxJobObjectInfoClass,
 }}
-//
+//12063
 pub const SECTION_QUERY: ::DWORD = 0x0001;
 pub const SECTION_MAP_WRITE: ::DWORD = 0x0002;
 pub const SECTION_MAP_READ: ::DWORD = 0x0004;
@@ -1189,7 +1201,7 @@ pub const SECTION_EXTEND_SIZE: ::DWORD = 0x0010;
 pub const SECTION_MAP_EXECUTE_EXPLICIT: ::DWORD = 0x0020;
 pub const SECTION_ALL_ACCESS: ::DWORD = STANDARD_RIGHTS_REQUIRED | SECTION_QUERY
     | SECTION_MAP_WRITE | SECTION_MAP_READ | SECTION_MAP_EXECUTE | SECTION_EXTEND_SIZE;
-//
+//12100
 pub const PAGE_NOACCESS: ::DWORD = 0x01;
 pub const PAGE_READONLY: ::DWORD = 0x02;
 pub const PAGE_READWRITE: ::DWORD = 0x04;
