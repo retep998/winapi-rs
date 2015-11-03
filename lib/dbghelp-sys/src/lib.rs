@@ -56,6 +56,10 @@ extern "system" {
     pub fn ImagehlpApiVersion() -> LPAPI_VERSION;
     pub fn ImagehlpApiVersionEx(AppVersion: LPAPI_VERSION) -> LPAPI_VERSION;
     pub fn MakeSureDirectoryPathExists(DirPath: PCSTR) -> BOOL;
+    #[cfg(any(target_arch = "x86", target_arch = "arm"))]
+    pub fn MapDebugInformation(
+        FileHandle: HANDLE, FileName: PCSTR, SymbolPath: PCSTR, ImageBase: ULONG,
+    ) -> PIMAGE_DEBUG_INFORMATION;
     // pub fn MiniDumpReadDumpStream();
     // pub fn MiniDumpWriteDump();
     // pub fn RangeMapAddPeImageSections();
@@ -74,6 +78,13 @@ extern "system" {
     ) -> BOOL;
     // pub fn SetCheckUserInterruptShared();
     // pub fn SetSymLoadError();
+    pub fn StackWalk(
+        MachineType: DWORD, hProcess: HANDLE, hThread: HANDLE, StackFrame: LPSTACKFRAME,
+        ContextRecord: PVOID, ReadMemoryRoutine: PREAD_PROCESS_MEMORY_ROUTINE,
+        FunctionTableAccessRoutine: PFUNCTION_TABLE_ACCESS_ROUTINE,
+        GetModuleBaseRoutine: PGET_MODULE_BASE_ROUTINE,
+        TranslateAddress: PTRANSLATE_ADDRESS_ROUTINE,
+    ) -> BOOL;
     pub fn StackWalk64(
         MachineType: DWORD, hProcess: HANDLE, hThread: HANDLE, StackFrame: LPSTACKFRAME64,
         ContextRecord: PVOID, ReadMemoryRoutine: PREAD_PROCESS_MEMORY_ROUTINE64,
@@ -280,6 +291,8 @@ extern "system" {
     pub fn UnDecorateSymbolNameW(
         name: PCWSTR, outputString: PWSTR, maxStringLength: DWORD, flags: DWORD,
     ) -> DWORD;
+    #[cfg(any(target_arch = "x86", target_arch = "arm"))]
+    pub fn UnmapDebugInformation(DebugInfo: PIMAGE_DEBUG_INFORMATION) -> BOOL;
     // pub fn WinDbgExtensionDllInit();
     // pub fn block();
     // pub fn chksym();
@@ -300,21 +313,4 @@ extern "system" {
     // pub fn sym();
     // pub fn symsrv();
     // pub fn vc7fpo();
-}
-#[cfg(target_arch = "x86")]
-extern "system" {
-    pub fn StackWalk(
-        MachineType: DWORD, hProcess: HANDLE, hThread: HANDLE, StackFrame: LPSTACKFRAME,
-        ContextRecord: PVOID, ReadMemoryRoutine: PREAD_PROCESS_MEMORY_ROUTINE,
-        FunctionTableAccessRoutine: PFUNCTION_TABLE_ACCESS_ROUTINE,
-        GetModuleBaseRoutine: PGET_MODULE_BASE_ROUTINE,
-        TranslateAddress: PTRANSLATE_ADDRESS_ROUTINE,
-    ) -> BOOL;
-}
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
-extern "system" {
-    pub fn MapDebugInformation(
-        FileHandle: HANDLE, FileName: PCSTR, SymbolPath: PCSTR, ImageBase: ULONG,
-    ) -> PIMAGE_DEBUG_INFORMATION;
-    pub fn UnmapDebugInformation(DebugInfo: PIMAGE_DEBUG_INFORMATION) -> BOOL;
 }

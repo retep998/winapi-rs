@@ -501,8 +501,7 @@ pub struct HTTP_REQUEST_HEADERS {
     pub pUnknownHeaders: PHTTP_UNKNOWN_HEADER,
     pub TrailerCount: ::USHORT,
     pub pTrailers: PHTTP_UNKNOWN_HEADER,
-    pub KnownHeaders: [HTTP_KNOWN_HEADER; 41usize],
-    //                                    ^- FIXME: need to be HttpHeaderRequestMaximum
+    pub KnownHeaders: [HTTP_KNOWN_HEADER; 41], // FIXME HttpHeaderRequestMaximum
 }
 impl Clone for HTTP_REQUEST_HEADERS { fn clone(&self) -> HTTP_REQUEST_HEADERS { *self } }
 pub type PHTTP_REQUEST_HEADERS = *mut HTTP_REQUEST_HEADERS;
@@ -512,8 +511,7 @@ pub struct HTTP_RESPONSE_HEADERS {
     pub pUnknownHeaders: PHTTP_UNKNOWN_HEADER,
     pub TrailerCount: ::USHORT,
     pub pTrailers: PHTTP_UNKNOWN_HEADER,
-    pub KnownHeaders: [HTTP_KNOWN_HEADER; 30],
-    //                                    ^- FIXME: need to be HttpHeaderResponseMaximum
+    pub KnownHeaders: [HTTP_KNOWN_HEADER; 30], // FIXME HttpHeaderResponseMaximum
 }
 impl Clone for HTTP_RESPONSE_HEADERS { fn clone(&self) -> HTTP_RESPONSE_HEADERS { *self } }
 pub type PHTTP_RESPONSE_HEADERS = *mut HTTP_RESPONSE_HEADERS;

@@ -548,7 +548,7 @@ interface ISpTranscript(ISpTranscriptVtbl): IUnknown(IUnknownVtbl) {
     fn AppendTranscript(&mut self, pszTranscript: ::LPCWSTR) -> ::HRESULT
 }
 );
-ENUM!{enum SPDISPLYATTRIBUTES {
+FLAGS!{enum SPDISPLYATTRIBUTES {
     SPAF_ONE_TRAILING_SPACE = 0x2,
     SPAF_TWO_TRAILING_SPACES = 0x4,
     SPAF_CONSUME_LEADING_SPACES = 0x8,
@@ -694,7 +694,7 @@ STRUCT!{struct SPRULE {
     ulRuleId: ::ULONG,
     dwAttributes: ::DWORD,
 }}
-ENUM!{enum SPVALUETYPE {
+FLAGS!{enum SPVALUETYPE {
     SPDF_PROPERTY = 0x1,
     SPDF_REPLACEMENT = 0x2,
     SPDF_RULE = 0x4,
@@ -769,7 +769,7 @@ FLAGS!{enum SPLEXICONTYPE {
     eLEXTYPE_PRIVATE19 = 1 << 30,
     eLEXTYPE_PRIVATE20 = 1 << 31,
 }}
-ENUM!{enum SPWORDTYPE {
+FLAGS!{enum SPWORDTYPE {
     eWORDTYPE_ADDED = 1 << 0,
     eWORDTYPE_DELETED = 1 << 1,
 }}
@@ -1686,9 +1686,9 @@ ENUM!{enum DISPID_SpeechBaseStream {
     DISPID_SBSSeek,
 }}
 ENUM!{enum SpeechStreamSeekPositionType {
-    SSSPTRelativeToStart = 0, //::STREAM_SEEK_SET,
-    SSSPTRelativeToCurrentPosition = 1, //::STREAM_SEEK_CUR,
-    SSSPTRelativeToEnd = 2, //::STREAM_SEEK_END,
+    SSSPTRelativeToStart = ::STREAM_SEEK_SET.0,
+    SSSPTRelativeToCurrentPosition = ::STREAM_SEEK_CUR.0,
+    SSSPTRelativeToEnd = ::STREAM_SEEK_END.0,
 }}
 ENUM!{enum DISPID_SpeechAudio {
     DISPID_SAStatus = 200,
