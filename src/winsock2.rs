@@ -428,3 +428,4 @@ STRUCT!{struct WSAPOLLFD {
 }}
 pub type PWSAPOLLFD = *mut WSAPOLLFD;
 pub type LPWSAPOLLFD = *mut WSAPOLLFD;
+pub const FIONBIO: ::c_ulong = 0x8004667e;
