@@ -54,6 +54,7 @@ These are the ones that actually have functions in them:
 * [uuid-sys ![Crates.io](https://img.shields.io/crates/v/uuid-sys.svg)](https://crates.io/crates/uuid-sys)
 * [vssapi-sys ![Crates.io](https://img.shields.io/crates/v/vssapi-sys.svg)](https://crates.io/crates/vssapi-sys)
 * [winmm-sys ![Crates.io](https://img.shields.io/crates/v/winmm-sys.svg)](https://crates.io/crates/winmm-sys)
+* [ws2_32-sys ![Crates.io](https://img.shields.io/crates/v/ws2_32-sys.svg)](https://crates.io/crates/ws2_32-sys)
 * [xinput-sys ![Crates.io](https://img.shields.io/crates/v/xinput-sys.svg)](https://crates.io/crates/xinput-sys)
 
 ### Reserved crates ###
@@ -438,7 +439,6 @@ These are the ones that are reserved for future use:
 * [wnvapi-sys ![Crates.io](https://img.shields.io/crates/v/wnvapi-sys.svg)](https://crates.io/crates/wnvapi-sys)
 * [workspaceax-sys ![Crates.io](https://img.shields.io/crates/v/workspaceax-sys.svg)](https://crates.io/crates/workspaceax-sys)
 * [wow32-sys ![Crates.io](https://img.shields.io/crates/v/wow32-sys.svg)](https://crates.io/crates/wow32-sys)
-* [ws2_32-sys ![Crates.io](https://img.shields.io/crates/v/ws2_32-sys.svg)](https://crates.io/crates/ws2_32-sys)
 * [wsbapp_uuid-sys ![Crates.io](https://img.shields.io/crates/v/wsbapp_uuid-sys.svg)](https://crates.io/crates/wsbapp_uuid-sys)
 * [wsbonline-sys ![Crates.io](https://img.shields.io/crates/v/wsbonline-sys.svg)](https://crates.io/crates/wsbonline-sys)
 * [wscapi-sys ![Crates.io](https://img.shields.io/crates/v/wscapi-sys.svg)](https://crates.io/crates/wscapi-sys)
