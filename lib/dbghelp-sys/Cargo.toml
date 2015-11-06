@@ -1,6 +1,6 @@
 [package]
 name = "dbghelp-sys"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "Contains function definitions for the Windows API library dbghelp. See winapi for types and constants."
 documentation = "https://retep998.github.io/doc/dbghelp/"
