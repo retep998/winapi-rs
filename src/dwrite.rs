@@ -815,7 +815,7 @@ RIDL!{interface IDWriteTextLayout(IDWriteTextLayoutVtbl):
         textRange: *mut DWRITE_TEXT_RANGE
     ) -> ::HRESULT,
     fn GetFontFamilyNameLength(
-        &mut self, currentPosition: *mut ::UINT32, nameLength: *mut ::UINT32,
+        &mut self, currentPosition: ::UINT32, nameLength: *mut ::UINT32,
         textRange: *mut DWRITE_TEXT_RANGE
     ) -> ::HRESULT,
     fn GetFontFamilyName(
@@ -898,7 +898,7 @@ RIDL!{interface IDWriteTextLayout(IDWriteTextLayoutVtbl):
 RIDL!{interface IDWriteBitmapRenderTarget(IDWriteBitmapRenderTargetVtbl): IUnknown(IUnknownVtbl) {
     fn DrawGlyphRun(
         &mut self, baselineOriginX: ::FLOAT, baselineOriginY: ::FLOAT,
-        measuringMode: ::DWRITE_MEASURING_MODE, glyphRun: *const ::c_void,
+        measuringMode: ::DWRITE_MEASURING_MODE, glyphRun: *const ::DWRITE_GLYPH_RUN,
         renderingParams: *mut IDWriteRenderingParams, textColor: ::COLORREF,
         blackBoxRect: *mut ::RECT
     ) -> ::HRESULT,

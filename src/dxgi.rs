@@ -193,7 +193,7 @@ interface IDXGIFactory(IDXGIFactoryVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn EnumAdapters(&mut self, Adapter: ::UINT, ppAdapter: *mut *mut IDXGIAdapter) -> ::HRESULT,
     fn MakeWindowAssociation(&mut self, WindowHandle: ::HWND, Flags: ::UINT) -> ::HRESULT,
     fn GetWindowAssociation(&mut self, pWindowHandle: *mut ::HWND) -> ::HRESULT,
-    fn CreateSwapChan(
+    fn CreateSwapChain(
         &mut self, pDevice: *mut ::IUnknown, pDesc: *mut DXGI_SWAP_CHAIN_DESC,
         ppSwapChain: *mut *mut IDXGISwapChain
     ) -> ::HRESULT,
