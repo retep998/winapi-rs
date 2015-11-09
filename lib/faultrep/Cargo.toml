@@ -9,7 +9,6 @@ readme = "README.md"
 keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
-links = "faultrep"
 [lib]
 name = "faultrep"
 [dependencies]

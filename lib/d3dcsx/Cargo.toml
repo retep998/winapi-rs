@@ -6,10 +6,9 @@ description = "Contains function definitions for the Windows API library d3dcsx.
 documentation = "https://retep998.github.io/doc/d3dcsx/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["windows", "ffi", "win32"]
+keywords = ["windows", "ffi", "win32", "directx"]
 license = "MIT"
 build = "build.rs"
-links = "d3dcsx"
 [lib]
 name = "d3dcsx"
 [dependencies]

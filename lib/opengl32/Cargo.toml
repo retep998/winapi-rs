@@ -9,7 +9,6 @@ readme = "README.md"
 keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
-links = "opengl32"
 [lib]
 name = "opengl32"
 [dependencies]

@@ -6,10 +6,9 @@ description = "Contains function definitions for the Windows API library d3dcomp
 documentation = "https://retep998.github.io/doc/d3dcompiler/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["windows", "ffi", "win32"]
+keywords = ["windows", "ffi", "win32", "directx"]
 license = "MIT"
 build = "build.rs"
-links = "d3dcompiler"
 [lib]
 name = "d3dcompiler"
 [dependencies]

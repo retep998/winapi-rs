@@ -1,17 +1,16 @@
 [package]
-name = "windows.data.pdf-sys"
+name = "windows-networking-sys"
 version = "0.0.1"
 authors = ["Peter Atashian <retep998@gmail.com>"]
-description = "Contains function definitions for the Windows API library windows.data.pdf. See winapi for types and constants."
-documentation = "https://retep998.github.io/doc/windows.data.pdf/"
+description = "Contains function definitions for the Windows API library windows-networking. See winapi for types and constants."
+documentation = "https://retep998.github.io/doc/windows-networking/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
-links = "windows.data.pdf"
 [lib]
-name = "windows.data.pdf"
+name = "windows_networking"
 [dependencies]
 winapi = { version = "0.2.4", path = "../.." }
 [build-dependencies]

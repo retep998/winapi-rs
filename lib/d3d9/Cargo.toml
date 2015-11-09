@@ -6,10 +6,9 @@ description = "Contains function definitions for the Windows API library d3d9. S
 documentation = "https://retep998.github.io/doc/d3d9/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["windows", "ffi", "win32"]
+keywords = ["windows", "ffi", "win32", "directx"]
 license = "MIT"
 build = "build.rs"
-links = "d3d9"
 [lib]
 name = "d3d9"
 [dependencies]

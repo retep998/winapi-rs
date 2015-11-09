@@ -9,7 +9,6 @@ readme = "README.md"
 keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
-links = "netapi32"
 [lib]
 name = "netapi32"
 [dependencies]

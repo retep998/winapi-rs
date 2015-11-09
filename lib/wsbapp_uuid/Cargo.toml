@@ -9,7 +9,6 @@ readme = "README.md"
 keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
-links = "wsbapp_uuid"
 [lib]
 name = "wsbapp_uuid"
 [dependencies]

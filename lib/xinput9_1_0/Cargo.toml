@@ -9,7 +9,6 @@ readme = "README.md"
 keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
-links = "xinput9_1_0"
 [lib]
 name = "xinput9_1_0"
 [dependencies]

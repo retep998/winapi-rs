@@ -9,7 +9,6 @@ readme = "README.md"
 keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
-links = "comdlg32"
 [lib]
 name = "comdlg32"
 [dependencies]

@@ -1,17 +1,16 @@
 [package]
-name = "windows.ui-sys"
+name = "windows-data-pdf-sys"
 version = "0.0.1"
 authors = ["Peter Atashian <retep998@gmail.com>"]
-description = "Contains function definitions for the Windows API library windows.ui. See winapi for types and constants."
-documentation = "https://retep998.github.io/doc/windows.ui/"
+description = "Contains function definitions for the Windows API library windows-data-pdf. See winapi for types and constants."
+documentation = "https://retep998.github.io/doc/windows-data-pdf/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
-links = "windows.ui"
 [lib]
-name = "windows.ui"
+name = "windows_data_pdf"
 [dependencies]
 winapi = { version = "0.2.4", path = "../.." }
 [build-dependencies]

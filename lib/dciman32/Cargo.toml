@@ -9,7 +9,6 @@ readme = "README.md"
 keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
-links = "dciman32"
 [lib]
 name = "dciman32"
 [dependencies]

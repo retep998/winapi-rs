@@ -9,7 +9,6 @@ readme = "README.md"
 keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
-links = "evr_vista"
 [lib]
 name = "evr_vista"
 [dependencies]

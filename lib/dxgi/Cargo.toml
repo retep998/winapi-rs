@@ -6,10 +6,9 @@ description = "Contains function definitions for the Windows API library dxgi. S
 documentation = "https://retep998.github.io/doc/dxgi/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["windows", "ffi", "win32", "dxgi"]
+keywords = ["windows", "ffi", "win32", "directx"]
 license = "MIT"
 build = "build.rs"
-links = "dxgi"
 [lib]
 name = "dxgi"
 [dependencies]

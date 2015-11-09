@@ -6,10 +6,9 @@ description = "Contains function definitions for the Windows API library d2d1. S
 documentation = "https://retep998.github.io/doc/d2d1/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["windows", "ffi", "win32"]
+keywords = ["windows", "ffi", "win32", "directx"]
 license = "MIT"
 build = "build.rs"
-links = "d2d1"
 [lib]
 name = "d2d1"
 [dependencies]

@@ -9,7 +9,6 @@ readme = "README.md"
 keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
-links = "txfw32"
 [lib]
 name = "txfw32"
 [dependencies]

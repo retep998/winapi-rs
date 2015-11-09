@@ -9,7 +9,6 @@ readme = "README.md"
 keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
-links = "twain_32"
 [lib]
 name = "twain_32"
 [dependencies]
