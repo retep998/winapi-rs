@@ -12,6 +12,6 @@ build = "build.rs"
 [lib]
 name = "dbgeng"
 [dependencies]
-winapi = { version = "0.2.4", path = "../.." }
+winapi = { version = "0.2.5", path = "../.." }
 [build-dependencies]
 winapi-build = { version = "0.1.1", path = "../../build" }

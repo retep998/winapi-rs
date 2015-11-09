@@ -3,7 +3,7 @@ Contains function definitions for the Windows API library kernel32. See winapi f
 
 ```toml
 [dependencies]
-kernel32-sys = "0.2.0"
+kernel32-sys = "0.2.1"
 ```
 
 ```rust
