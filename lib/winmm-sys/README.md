@@ -3,7 +3,7 @@ Contains function definitions for the Windows API library winmm. See winapi for 
 
 ```toml
 [dependencies]
-winmm-sys = "0.1.1"
+winmm-sys = "0.2.0"
 ```
 
 ```rust

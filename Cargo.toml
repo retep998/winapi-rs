@@ -18,8 +18,8 @@ credui-sys = { version = "*", path = "lib/credui-sys" }
 crypt32-sys = { version = "*", path = "lib/crypt32-sys" }
 d2d1-sys = { version = "*", path = "lib/d2d1-sys" }
 d3d11-sys = { version = "*", path = "lib/d3d11-sys" }
-d3d9-sys = { version = "*", path = "lib/d3d9-sys" }
 d3d12-sys = { version = "*", path = "lib/d3d12-sys" }
+d3d9-sys = { version = "*", path = "lib/d3d9-sys" }
 dbghelp-sys = { version = "*", path = "lib/dbghelp-sys" }
 dsound-sys = { version = "*", path = "lib/dsound-sys" }
 dwmapi-sys = { version = "*", path = "lib/dwmapi-sys" }

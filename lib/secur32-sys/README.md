@@ -3,7 +3,7 @@ Contains function definitions for the Windows API library secur32. See winapi fo
 
 ```toml
 [dependencies]
-secur32-sys = "0.0.1"
+secur32-sys = "0.2.0"
 ```
 
 ```rust

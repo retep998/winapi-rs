@@ -3,7 +3,7 @@ Contains function definitions for the Windows API library dbghelp. See winapi fo
 
 ```toml
 [dependencies]
-dbghelp-sys = "0.1.0"
+dbghelp-sys = "0.2.0"
 ```
 
 ```rust

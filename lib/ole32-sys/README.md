@@ -3,7 +3,7 @@ Contains function definitions for the Windows API library ole32. See winapi for 
 
 ```toml
 [dependencies]
-ole32-sys = "0.1.0"
+ole32-sys = "0.2.0"
 ```
 
 ```rust

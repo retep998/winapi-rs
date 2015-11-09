@@ -3,7 +3,7 @@ Contains function definitions for the Windows API library ws2_32. See winapi for
 
 ```toml
 [dependencies]
-ws2_32-sys = "0.1.0"
+ws2_32-sys = "0.2.0"
 ```
 
 ```rust

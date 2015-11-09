@@ -1,14 +1,39 @@
-// Copyright © 2015; Dmitry Roschin
+// Copyright © 2015, Dmitry Roschin
 // Licensed under the MIT License <LICENSE.md>
-//! Mappings for the contents of d3d12sdklayers.h
-
-ENUM!{ enum D3D12_DEBUG_FEATURE {
-    D3D12_DEBUG_FEATURE_NONE = 0,
-    D3D12_DEBUG_FEATURE_TREAT_BUNDLE_AS_DRAW = 1,
-    D3D12_DEBUG_FEATURE_TREAT_BUNDLE_AS_DISPATCH = 2,
+RIDL!{interface ID3D12Debug(ID3D12DebugVtbl): IUnknown(IUnknownVtbl) {
+    fn EnableDebugLayer(&mut self) -> ()
 }}
-
-ENUM!{ enum D3D12_MESSAGE_CATEGORY {
+FLAGS!{enum D3D12_DEBUG_FEATURE {
+    D3D12_DEBUG_FEATURE_NONE = 0,
+    D3D12_DEBUG_FEATURE_TREAT_BUNDLE_AS_DRAW = 0x1,
+    D3D12_DEBUG_FEATURE_TREAT_BUNDLE_AS_DISPATCH = 0x2,
+}}
+FLAGS!{enum D3D12_RLDO_FLAGS {
+    D3D12_RLDO_NONE = 0x0,
+    D3D12_RLDO_SUMMARY = 0x1,
+    D3D12_RLDO_DETAIL = 0x2,
+    D3D12_RLDO_IGNORE_INTERNAL = 0x4,
+}}
+RIDL!{interface ID3D12DebugDevice(ID3D12DebugDeviceVtbl): IUnknown(IUnknownVtbl) {
+    fn SetFeatureMask(&mut self, Mask: ::D3D12_DEBUG_FEATURE) -> ::HRESULT,
+    fn GetFeatureMask(&mut self) -> ::D3D12_DEBUG_FEATURE,
+    fn ReportLiveDeviceObjects(&mut self, Flags: ::D3D12_RLDO_FLAGS) -> ::HRESULT
+}}
+DEFINE_GUID!{DXGI_DEBUG_D3D12, 0xcf59a98c, 0xa950, 0x4326,
+    0x91, 0xef, 0x9b, 0xba, 0xa1, 0x7b, 0xfd, 0x95}
+RIDL!{interface ID3D12DebugCommandQueue(ID3D12DebugCommandQueueVtbl): IUnknown(IUnknownVtbl) {
+    fn AssertResourceState(
+        &mut self, pResource: *mut ::ID3D12Resource, Subresource: ::UINT, State: ::UINT
+    ) -> ::BOOL
+}}
+RIDL!{interface ID3D12DebugCommandList(ID3D12DebugCommandListVtbl): IUnknown(IUnknownVtbl) {
+    fn AssertResourceState(
+        &mut self, pResource: *mut ::ID3D12Resource, Subresource: ::UINT, State: ::UINT
+    ) -> ::BOOL,
+    fn SetFeatureMask(&mut self, Mask: ::D3D12_DEBUG_FEATURE) -> ::HRESULT,
+    fn GetFeatureMask(&mut self) -> ::D3D12_DEBUG_FEATURE
+}}
+ENUM!{enum D3D12_MESSAGE_CATEGORY {
     D3D12_MESSAGE_CATEGORY_APPLICATION_DEFINED = 0,
     D3D12_MESSAGE_CATEGORY_MISCELLANEOUS = 1,
     D3D12_MESSAGE_CATEGORY_INITIALIZATION = 2,
@@ -21,8 +46,14 @@ ENUM!{ enum D3D12_MESSAGE_CATEGORY {
     D3D12_MESSAGE_CATEGORY_EXECUTION = 9,
     D3D12_MESSAGE_CATEGORY_SHADER = 10,
 }}
-
-ENUM!{ enum D3D12_MESSAGE_ID {
+ENUM!{enum D3D12_MESSAGE_SEVERITY {
+    D3D12_MESSAGE_SEVERITY_CORRUPTION = 0,
+    D3D12_MESSAGE_SEVERITY_ERROR = 1,
+    D3D12_MESSAGE_SEVERITY_WARNING = 2,
+    D3D12_MESSAGE_SEVERITY_INFO = 3,
+    D3D12_MESSAGE_SEVERITY_MESSAGE = 4,
+}}
+ENUM!{enum D3D12_MESSAGE_ID {
     D3D12_MESSAGE_ID_UNKNOWN = 0,
     D3D12_MESSAGE_ID_STRING_FROM_APPLICATION = 1,
     D3D12_MESSAGE_ID_CORRUPTED_THIS = 2,
@@ -959,82 +990,28 @@ ENUM!{ enum D3D12_MESSAGE_ID {
     D3D12_MESSAGE_ID_NO_COMPUTE_API_SUPPORT = 933,
     D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 934,
 }}
-
-ENUM!{ enum D3D12_MESSAGE_SEVERITY {
-    D3D12_MESSAGE_SEVERITY_CORRUPTION = 0,
-    D3D12_MESSAGE_SEVERITY_ERROR = 1,
-    D3D12_MESSAGE_SEVERITY_WARNING = 2,
-    D3D12_MESSAGE_SEVERITY_INFO = 3,
-    D3D12_MESSAGE_SEVERITY_MESSAGE = 4,
+STRUCT!{struct D3D12_MESSAGE {
+    Category: D3D12_MESSAGE_CATEGORY,
+    Severity: D3D12_MESSAGE_SEVERITY,
+    ID: D3D12_MESSAGE_ID,
+    pDescription: *const ::c_char,
+    DescriptionByteLength: ::SIZE_T,
 }}
-
-FLAGS!{ enum D3D12_RLDO_FLAGS {
-    D3D12_RLDO_NONE = 0x0,
-    D3D12_RLDO_SUMMARY = 0x1,
-    D3D12_RLDO_DETAIL = 0x2,
-    D3D12_RLDO_IGNORE_INTERNAL = 0x4,
+STRUCT!{struct D3D12_INFO_QUEUE_FILTER_DESC {
+    NumCategories: ::UINT,
+    pCategoryList: *mut D3D12_MESSAGE_CATEGORY,
+    NumSeverities: ::UINT,
+    pSeverityList: *mut D3D12_MESSAGE_SEVERITY,
+    NumIDs: ::UINT,
+    pIDList: *mut D3D12_MESSAGE_ID,
 }}
-
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_INFO_QUEUE_FILTER {
-    pub AllowList: ::D3D12_INFO_QUEUE_FILTER_DESC,
-    pub DenyList: ::D3D12_INFO_QUEUE_FILTER_DESC,
-}
-
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_INFO_QUEUE_FILTER_DESC {
-    pub NumCategories: ::UINT,
-    pub pCategoryList: *mut ::D3D12_MESSAGE_CATEGORY,
-    pub NumSeverities: ::UINT,
-    pub pSeverityList: *mut ::D3D12_MESSAGE_SEVERITY,
-    pub NumIDs: ::UINT,
-    pub pIDList: *mut ::D3D12_MESSAGE_ID,
-}
-
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_MESSAGE {
-    pub Category: ::D3D12_MESSAGE_CATEGORY,
-    pub Severity: ::D3D12_MESSAGE_SEVERITY,
-    pub ID: ::D3D12_MESSAGE_ID,
-    pub pDescription: *mut u8,
-    pub DescriptionByteLength: ::SIZE_T,
-}
-
-RIDL!(
-interface ID3D12DebugCommandList(ID3D12DebugCommandListVtbl): IUnknown(IUnknownVtbl) {
-    fn AssertResourceState(
-        &mut self, pResource: *mut ::ID3D12Resource, Subresource: ::UINT, State: ::UINT
-    ) -> ::BOOL,
-    fn SetFeatureMask(&mut self, Mask: ::D3D12_DEBUG_FEATURE) -> ::HRESULT,
-    fn GetFeatureMask(&mut self) -> ::D3D12_DEBUG_FEATURE
-});
-
-RIDL!(
-interface ID3D12DebugCommandQueue(ID3D12DebugCommandQueueVtbl): IUnknown(IUnknownVtbl) {
-    fn AssertResourceState(
-        &mut self, pResource: *mut ::ID3D12Resource, Subresource: ::UINT, State: ::UINT
-    ) -> ::BOOL
-});
-
-RIDL!(
-interface ID3D12DebugDevice(ID3D12DebugDeviceVtbl): IUnknown(IUnknownVtbl) {
-    fn SetFeatureMask(&mut self, Mask: ::D3D12_DEBUG_FEATURE) -> ::HRESULT,
-    fn GetFeatureMask(&mut self) -> ::D3D12_DEBUG_FEATURE,
-    fn ReportLiveDeviceObjects(
-        &mut self, Flags: ::D3D12_RLDO_FLAGS
-    ) -> ::HRESULT
-});
-
-RIDL!(
-interface ID3D12Debug(ID3D12DebugVtbl): IUnknown(IUnknownVtbl) {
-    fn EnableDebugLayer(&mut self) -> ()
-});
-
-RIDL!(
-interface ID3D12InfoQueue(ID3D12InfoQueueVtbl): IUnknown(IUnknownVtbl) {
-    fn SetMessageCountLimit(
-        &mut self, MessageCountLimit: ::UINT64
-    ) -> ::HRESULT,
+STRUCT!{struct D3D12_INFO_QUEUE_FILTER {
+    AllowList: D3D12_INFO_QUEUE_FILTER_DESC,
+    DenyList: D3D12_INFO_QUEUE_FILTER_DESC,
+}}
+pub const D3D12_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT: ::UINT = 1024;
+RIDL!{interface ID3D12InfoQueue(ID3D12InfoQueueVtbl): IUnknown(IUnknownVtbl) {
+    fn SetMessageCountLimit(&mut self, MessageCountLimit: ::UINT64) -> ::HRESULT,
     fn ClearStoredMessages(&mut self) -> (),
     fn GetMessage(
         &mut self, MessageIndex: ::UINT64, pMessage: *mut ::D3D12_MESSAGE,
@@ -1046,32 +1023,24 @@ interface ID3D12InfoQueue(ID3D12InfoQueueVtbl): IUnknown(IUnknownVtbl) {
     fn GetNumStoredMessagesAllowedByRetrievalFilter(&mut self) -> ::UINT64,
     fn GetNumMessagesDiscardedByMessageCountLimit(&mut self) -> ::UINT64,
     fn GetMessageCountLimit(&mut self) -> ::UINT64,
-    fn AddStorageFilterEntries(
-        &mut self, pFilter: *mut ::D3D12_INFO_QUEUE_FILTER
-    ) -> ::HRESULT,
+    fn AddStorageFilterEntries(&mut self, pFilter: *mut ::D3D12_INFO_QUEUE_FILTER) -> ::HRESULT,
     fn GetStorageFilter(
         &mut self, pFilter: *mut ::D3D12_INFO_QUEUE_FILTER, pFilterByteLength: *mut ::SIZE_T
     ) -> ::HRESULT,
     fn ClearStorageFilter(&mut self) -> (),
     fn PushEmptyStorageFilter(&mut self) -> ::HRESULT,
     fn PushCopyOfStorageFilter(&mut self) -> ::HRESULT,
-    fn PushStorageFilter(
-        &mut self, pFilter: *mut ::D3D12_INFO_QUEUE_FILTER
-    ) -> ::HRESULT,
+    fn PushStorageFilter(&mut self, pFilter: *mut ::D3D12_INFO_QUEUE_FILTER) -> ::HRESULT,
     fn PopStorageFilter(&mut self) -> (),
     fn GetStorageFilterStackSize(&mut self) -> ::UINT,
-    fn AddRetrievalFilterEntries(
-        &mut self, pFilter: *mut ::D3D12_INFO_QUEUE_FILTER
-    ) -> ::HRESULT,
+    fn AddRetrievalFilterEntries(&mut self, pFilter: *mut ::D3D12_INFO_QUEUE_FILTER) -> ::HRESULT,
     fn GetRetrievalFilter(
         &mut self, pFilter: *mut ::D3D12_INFO_QUEUE_FILTER, pFilterByteLength: *mut ::SIZE_T
     ) -> ::HRESULT,
     fn ClearRetrievalFilter(&mut self) -> (),
     fn PushEmptyRetrievalFilter(&mut self) -> ::HRESULT,
     fn PushCopyOfRetrievalFilter(&mut self) -> ::HRESULT,
-    fn PushRetrievalFilter(
-        &mut self, pFilter: *mut ::D3D12_INFO_QUEUE_FILTER
-    ) -> ::HRESULT,
+    fn PushRetrievalFilter(&mut self, pFilter: *mut ::D3D12_INFO_QUEUE_FILTER) -> ::HRESULT,
     fn PopRetrievalFilter(&mut self) -> (),
     fn GetRetrievalFilterStackSize(&mut self) -> ::UINT,
     fn AddMessage(
@@ -1087,29 +1056,20 @@ interface ID3D12InfoQueue(ID3D12InfoQueueVtbl): IUnknown(IUnknownVtbl) {
     fn SetBreakOnSeverity(
         &mut self, Severity: ::D3D12_MESSAGE_SEVERITY, bEnable: ::BOOL
     ) -> ::HRESULT,
-    fn SetBreakOnID(
-        &mut self, ID: ::D3D12_MESSAGE_ID, bEnable: ::BOOL
-    ) -> ::HRESULT,
-    fn GetBreakOnCategory(
-        &mut self, Category: ::D3D12_MESSAGE_CATEGORY
-    ) -> ::BOOL,
-    fn GetBreakOnSeverity(
-        &mut self, Severity: ::D3D12_MESSAGE_SEVERITY
-    ) -> ::BOOL,
+    fn SetBreakOnID(&mut self, ID: ::D3D12_MESSAGE_ID, bEnable: ::BOOL) -> ::HRESULT,
+    fn GetBreakOnCategory(&mut self, Category: ::D3D12_MESSAGE_CATEGORY) -> ::BOOL,
+    fn GetBreakOnSeverity(&mut self, Severity: ::D3D12_MESSAGE_SEVERITY) -> ::BOOL,
     fn GetBreakOnID(&mut self, ID: ::D3D12_MESSAGE_ID) -> ::BOOL,
     fn SetMuteDebugOutput(&mut self, bMute: ::BOOL) -> (),
     fn GetMuteDebugOutput(&mut self) -> ::BOOL
-});
-
-pub const D3D12_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT: ::UINT = 1024;
-
-DEFINE_GUID!(IID_ID3D12Debug,0x344488b7,0x6846,0x474b,0xb9,0x89,0xf0,0x27,0x44,
-    0x82,0x45,0xe0);
-DEFINE_GUID!(IID_ID3D12DebugDevice,0x3febd6dd,0x4973,0x4787,0x81,0x94,0xe4,0x5f,
-    0x9e,0x28,0x92,0x3e);
-DEFINE_GUID!(IID_ID3D12DebugCommandQueue,0x09e0bf36,0x54ac,0x484f,0x88,0x47,
-    0x4b,0xae,0xea,0xb6,0x05,0x3a);
-DEFINE_GUID!(IID_ID3D12DebugCommandList,0x09e0bf36,0x54ac,0x484f,0x88,0x47,0x4b,
-    0xae,0xea,0xb6,0x05,0x3f);
-DEFINE_GUID!(IID_ID3D12InfoQueue,0x0742a90b,0xc387,0x483f,0xb9,0x46,0x30,0xa7,
-    0xe4,0xe6,0x14,0x58);
+}}
+DEFINE_GUID!{IID_ID3D12Debug, 0x344488b7, 0x6846, 0x474b,
+    0xb9, 0x89, 0xf0, 0x27, 0x44, 0x82, 0x45, 0xe0}
+DEFINE_GUID!{IID_ID3D12DebugDevice, 0x3febd6dd, 0x4973, 0x4787,
+    0x81, 0x94, 0xe4, 0x5f, 0x9e, 0x28, 0x92, 0x3e}
+DEFINE_GUID!{IID_ID3D12DebugCommandQueue, 0x09e0bf36, 0x54ac, 0x484f,
+    0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3a}
+DEFINE_GUID!{IID_ID3D12DebugCommandList, 0x09e0bf36, 0x54ac, 0x484f,
+    0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3f}
+DEFINE_GUID!{IID_ID3D12InfoQueue, 0x0742a90b, 0xc387, 0x483f,
+    0xb9, 0x46, 0x30, 0xa7, 0xe4, 0xe6, 0x14, 0x58}

@@ -3,7 +3,7 @@ Contains function definitions for the Windows API library crypt32. See winapi fo
 
 ```toml
 [dependencies]
-crypt32-sys = "0.0.1"
+crypt32-sys = "0.2.0"
 ```
 
 ```rust

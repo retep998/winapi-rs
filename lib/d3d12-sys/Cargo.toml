@@ -2,17 +2,17 @@
 name = "d3d12-sys"
 version = "0.0.1"
 authors = ["Peter Atashian <retep998@gmail.com>"]
-description = "FFI bindings to d3d12."
-documentation = "https://retep998.github.io/doc/d3d12-sys/"
+description = "Contains function definitions for the Windows API library d3d12. See winapi for types and constants."
+documentation = "https://retep998.github.io/doc/d3d12/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["Windows", "FFI", "WinSDK", "D3D12"]
+keywords = ["windows", "ffi", "win32"]
 license = "MIT"
 build = "build.rs"
 links = "d3d12"
-
+[lib]
+name = "d3d12"
 [dependencies]
-winapi = { version = "*", path = "../.." }
-
+winapi = { version = "0.2.4", path = "../.." }
 [build-dependencies]
-winapi-build = { version = "*", path = "../../build" }
+winapi-build = { version = "0.1.1", path = "../../build" }
