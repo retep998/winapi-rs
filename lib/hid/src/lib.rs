@@ -11,6 +11,9 @@ extern "system" {
     pub fn HidD_GetAttributes(
         HidDeviceObject: HANDLE, Attributes: PHIDD_ATTRIBUTES,
     ) -> BOOLEAN;
+    pub fn HidD_GetConfiguration(
+        HidDeviceObject: HANDLE, Configuration: PHIDD_CONFIGURATION, ConfigurationLength: ULONG,
+    ) -> BOOLEAN;
     pub fn HidD_GetFeature(
         HidDeviceObject: HANDLE, ReportBuffer: PVOID, ReportBufferLength: ULONG,
     ) -> BOOLEAN;
@@ -22,6 +25,9 @@ extern "system" {
         HidDeviceObject: HANDLE, ReportBuffer: PVOID, ReportBufferLength: ULONG,
     ) -> BOOLEAN;
     pub fn HidD_GetManufacturerString(
+        HidDeviceObject: HANDLE, Buffer: PVOID, BufferLength: ULONG,
+    ) -> BOOLEAN;
+    pub fn HidD_GetMsGenreDescriptor(
         HidDeviceObject: HANDLE, Buffer: PVOID, BufferLength: ULONG,
     ) -> BOOLEAN;
     pub fn HidD_GetNumInputBuffers(
@@ -38,6 +44,10 @@ extern "system" {
     ) -> BOOLEAN;
     pub fn HidD_GetSerialNumberString(
         HidDeviceObject: HANDLE, Buffer: PVOID, BufferLength: ULONG,
+    ) -> BOOLEAN;
+    // pub fn HidD_Hello();
+    pub fn HidD_SetConfiguration(
+        HidDeviceObject: HANDLE, Configuration: PHIDD_CONFIGURATION, ConfigurationLength: ULONG,
     ) -> BOOLEAN;
     pub fn HidD_SetFeature(
         HidDeviceObject: HANDLE, ReportBuffer: PVOID, ReportBufferLength: ULONG,
@@ -83,16 +93,6 @@ extern "system" {
         Usage: USAGE, ValueCaps: PHIDP_VALUE_CAPS, ValueCapsLength: PUSHORT,
         PreparsedData: PHIDP_PREPARSED_DATA,
     ) -> NTSTATUS;
-    pub fn HidP_GetUsages(
-        ReportType: HIDP_REPORT_TYPE, UsagePage: USAGE, LinkCollection: USHORT,
-        UsageList: PUSAGE, UsageLength: PULONG, PreparsedData: PHIDP_PREPARSED_DATA,
-        Report: PCHAR, ReportLength: ULONG,
-    ) -> NTSTATUS;
-    pub fn HidP_GetUsagesEx(
-        ReportType: HIDP_REPORT_TYPE, LinkCollection: USHORT, ButtonList: PUSAGE_AND_PAGE,
-        UsageLength: *mut ULONG, PreparsedData: PHIDP_PREPARSED_DATA, Report: PCHAR,
-        ReportLength: ULONG,
-    ) -> NTSTATUS;
     pub fn HidP_GetUsageValue(
         ReportType: HIDP_REPORT_TYPE, UsagePage: USAGE, LinkCollection: USHORT,
         Usage: USAGE, UsageValue: PULONG, PreparsedData: PHIDP_PREPARSED_DATA,
@@ -102,6 +102,16 @@ extern "system" {
         ReportType: HIDP_REPORT_TYPE, UsagePage: USAGE, LinkCollection: USHORT,
         Usage: USAGE, UsageValue: PCHAR, UsageValueByteLength: USHORT,
         PreparsedData: PHIDP_PREPARSED_DATA, Report: PCHAR, ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_GetUsages(
+        ReportType: HIDP_REPORT_TYPE, UsagePage: USAGE, LinkCollection: USHORT,
+        UsageList: PUSAGE, UsageLength: PULONG, PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR, ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_GetUsagesEx(
+        ReportType: HIDP_REPORT_TYPE, LinkCollection: USHORT, ButtonList: PUSAGE_AND_PAGE,
+        UsageLength: *mut ULONG, PreparsedData: PHIDP_PREPARSED_DATA, Report: PCHAR,
+        ReportLength: ULONG,
     ) -> NTSTATUS;
     pub fn HidP_GetValueCaps(
         ReportType: HIDP_REPORT_TYPE, ValueCaps: PHIDP_VALUE_CAPS,
@@ -142,6 +152,11 @@ extern "system" {
         UsageList: PUSAGE, UsageLength: PULONG, PreparsedData: PHIDP_PREPARSED_DATA,
         Report: PCHAR, ReportLength: ULONG,
     ) -> NTSTATUS;
+    pub fn HidP_TranslateUsagesToI8042ScanCodes(
+        ChangedUsageList: PUSAGE, UsageListLength: ULONG, KeyAction: HIDP_KEYBOARD_DIRECTION,
+        ModifierState: PHIDP_KEYBOARD_MODIFIER_STATE, InsertCodesProcedure: PHIDP_INSERT_SCANCODES,
+        InsertCodesContext: PVOID,
+    ) -> NTSTATUS;
     pub fn HidP_UnsetUsages(
         ReportType: HIDP_REPORT_TYPE, UsagePage: USAGE, LinkCollection: USHORT,
         UsageList: PUSAGE, UsageLength: PULONG, PreparsedData: PHIDP_PREPARSED_DATA,
@@ -151,8 +166,4 @@ extern "system" {
         PreviousUsageList: PUSAGE, CurrentUsageList: PUSAGE, BreakUsageList: PUSAGE,
         MakeUsageList: PUSAGE, UsageListLength: ULONG,
     ) -> NTSTATUS;
-    // pub fn HidD_GetConfiguration();
-    // pub fn HidD_SetConfiguration();
-    // pub fn HidD_GetMsGenreDescriptor();
-    // pub fn HidP_TranslateUsagesToI8042ScanCodes();
 }

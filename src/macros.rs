@@ -17,6 +17,11 @@ macro_rules! MAKE_SCODE {
         ($sev << 31) | ($fac << 16) | $code
     }
 }
+macro_rules! HIDP_ERROR_CODES {
+    ($sev:expr, $code:expr) => {
+        ($sev << 28) | (::FACILITY_HID_ERROR_CODE << 16) | $code
+    }
+}
 macro_rules! MAKEFOURCC {
     ($a:expr, $b:expr, $c:expr, $d:expr) => {
         ($a as i32) | (($b as i32) << 8) | (($c as i32) << 16) | (($d as i32) << 24)
@@ -38,6 +43,26 @@ macro_rules! DEFINE_GUID {
 macro_rules! CTL_CODE {
     ($DeviceType:expr, $Function:expr, $Method:expr, $Access:expr) => {
         ($DeviceType << 16) | ($Access << 14) | ($Function << 2) | $Method
+    }
+}
+macro_rules! HID_CTL_CODE {
+    ($id:expr) => {
+        CTL_CODE!(::FILE_DEVICE_KEYBOARD, $id, ::METHOD_NEITHER, ::FILE_ANY_ACCESS)
+    }
+}
+macro_rules! HID_BUFFER_CTL_CODE {
+    ($id:expr) => {
+        CTL_CODE!(::FILE_DEVICE_KEYBOARD, $id, ::METHOD_BUFFERED, ::FILE_ANY_ACCESS)
+    }
+}
+macro_rules! HID_IN_CTL_CODE {
+    ($id:expr) => {
+        CTL_CODE!(::FILE_DEVICE_KEYBOARD, $id, ::METHOD_IN_DIRECT, ::FILE_ANY_ACCESS)
+    }
+}
+macro_rules! HID_OUT_CTL_CODE {
+    ($id:expr) => {
+        CTL_CODE!(::FILE_DEVICE_KEYBOARD, $id, ::METHOD_OUT_DIRECT, ::FILE_ANY_ACCESS)
     }
 }
 macro_rules! AUDCLNT_ERR {

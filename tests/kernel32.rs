@@ -80,7 +80,7 @@ fn functions_msvc() {
     bb(AddDllDirectory);
     bb(AddResourceAttributeAce);
     bb(AddScopedPolicyIDAce);
-    bb(CalloutOnFiberStack);
+    //bb(CalloutOnFiberStack);
     bb(CeipIsOptedIn);
     bb(CheckTokenCapability);
     bb(CheckTokenMembershipEx);
