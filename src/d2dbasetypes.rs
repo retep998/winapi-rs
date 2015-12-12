@@ -48,14 +48,14 @@ STRUCT!{struct D2D_SIZE_U {
 }}
 pub type D2D_COLOR_F = ::D3DCOLORVALUE;
 STRUCT!{struct D2D_MATRIX_3X2_F {
-    matrix: [[::FLOAT; 3]; 2],
+    matrix: [[::FLOAT; 2]; 3],
 }}
 STRUCT!{struct D2D_MATRIX_4X3_F {
-    matrix: [[::FLOAT; 4]; 3],
+    matrix: [[::FLOAT; 3]; 4],
 }}
 STRUCT!{struct D2D_MATRIX_4X4_F {
     matrix: [[::FLOAT; 4]; 4],
 }}
 STRUCT!{struct D2D_MATRIX_5X4_F {
-    matrix: [[::FLOAT; 5]; 4],
+    matrix: [[::FLOAT; 4]; 5],
 }}
