@@ -268,7 +268,7 @@ STRUCT!{struct D2D1_FACTORY_OPTIONS {
 }}
 RIDL!(
 interface ID2D1Resource(ID2D1ResourceVtbl): IUnknown(IUnknownVtbl) {
-    fn GetFactory(&mut self, factory: *mut *mut ID2D1Factory) -> ::HRESULT
+    fn GetFactory(&mut self, factory: *mut *mut ID2D1Factory) -> ()
 });
 RIDL!(
 interface ID2D1Image(ID2D1ImageVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
