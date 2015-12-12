@@ -268,7 +268,7 @@ STRUCT!{struct D2D1_FACTORY_OPTIONS {
 }}
 RIDL!(
 interface ID2D1Resource(ID2D1ResourceVtbl): IUnknown(IUnknownVtbl) {
-    fn GetFactory(&mut self, factory: *mut *mut ID2D1Factory) -> ::HRESULT
+    fn GetFactory(&mut self, factory: *mut *mut ID2D1Factory) -> ()
 });
 RIDL!(
 interface ID2D1Image(ID2D1ImageVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
@@ -605,7 +605,7 @@ interface ID2D1RenderTarget(ID2D1RenderTargetVtbl): ID2D1Resource(ID2D1ResourceV
     ) -> (),
     fn DrawTextLayout(
         &mut self, origin: ::D2D1_POINT_2F, textLayout: *mut ::IDWriteTextLayout,
-        defaultForegroundBrush: *mut ID2D1Brush
+        defaultForegroundBrush: *mut ID2D1Brush, options: D2D1_DRAW_TEXT_OPTIONS
     ) -> (),
     fn DrawGlyphRun(
         &mut self, baselineOrigin: ::D2D1_POINT_2F, glyphRun: *const ::DWRITE_GLYPH_RUN,
@@ -629,7 +629,7 @@ interface ID2D1RenderTarget(ID2D1RenderTargetVtbl): ID2D1Resource(ID2D1ResourceV
         &mut self, layerParameters: *const D2D1_LAYER_PARAMETERS, layer: *mut ID2D1Layer
     ) -> (),
     fn PopLayer(&mut self) -> (),
-    fn Flush(&mut self, tag1: *mut D2D1_TAG, tag2: *mut D2D1_TAG) -> (),
+    fn Flush(&mut self, tag1: *mut D2D1_TAG, tag2: *mut D2D1_TAG) -> ::HRESULT,
     fn SaveDrawingState(&mut self, drawingStateBlock: *mut ID2D1DrawingStateBlock) -> (),
     fn RestoreDrawingState(&mut self, drawingStateBlock: *mut ID2D1DrawingStateBlock) -> (),
     fn PushAxisAlignedClip(

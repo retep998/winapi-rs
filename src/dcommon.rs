@@ -13,6 +13,6 @@ ENUM!{enum D2D1_ALPHA_MODE {
     D2D1_ALPHA_MODE_IGNORE = 3,
 }}
 STRUCT!{struct D2D1_PIXEL_FORMAT {
-    format: ::DWORD,
+    format: ::DXGI_FORMAT,
     alphaMode: D2D1_ALPHA_MODE,
 }}
