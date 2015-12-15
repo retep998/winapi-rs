@@ -1,29 +1,25 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 pub type SQLCHAR = ::c_uchar;
-pub type SQLWCHAR = ::wchar_t;
-pub type SQLSCHAR = ::c_char;
+pub type SQLSCHAR = ::c_schar;
 pub type SQLDATE = ::c_uchar;
 pub type SQLDECIMAL = ::c_uchar;
 pub type SQLDOUBLE = ::c_double;
 pub type SQLFLOAT = ::c_double;
 pub type SQLINTEGER = ::c_long;
 pub type SQLUINTEGER = ::c_ulong;
-
 #[cfg(target_arch = "x86_64")]
 pub type SQLLEN = ::INT64;
 #[cfg(target_arch = "x86_64")]
 pub type SQLULEN = ::UINT64;
 #[cfg(target_arch = "x86_64")]
 pub type SQLSETPOSIROW = ::UINT64;
-
 #[cfg(target_arch = "x86")]
 pub type SQLLEN = SQLINTEGER;
 #[cfg(target_arch = "x86")]
 pub type SQLULEN = SQLUINTEGER;
 #[cfg(target_arch = "x86")]
 pub type SQLSETPOSIROW = SQLUSMALLINT;
-
 pub type SQLROWCOUNT = SQLULEN;
 pub type SQLROWSETSIZE = SQLULEN;
 pub type SQLTRANSID = SQLULEN;
@@ -42,167 +38,93 @@ pub type SQLHENV = SQLHANDLE;
 pub type SQLHDBC = SQLHANDLE;
 pub type SQLHSTMT = SQLHANDLE;
 pub type SQLHDESC = SQLHANDLE;
+//pub type UCHAR = ::c_uchar;
+pub type SCHAR = ::c_schar;
+//pub type SQLSCHAR = SCHAR;
+pub type SDWORD = ::c_long;
+pub type SWORD = ::c_short;
+pub type UDWORD = ::c_ulong;
+//pub type UWORD = ::c_ushort;
+#[cfg(target_arch = "x86")]
+pub type SQLUINTEGER = ::UDWORD;
+pub type SLONG = ::c_long;
+pub type SSHORT = ::c_short;
+//pub type ULONG = ::c_ulong;
+//pub type USHORT = ::c_ushort;
+pub type SDOUBLE = ::c_double;
+pub type LDOUBLE = ::c_double;
+pub type SFLOAT = ::c_float;
+pub type PTR = *mut ::c_void;
+pub type HENV = *mut ::c_void;
+pub type HDBC = *mut ::c_void;
+pub type HSTMT = *mut ::c_void;
+pub type RETCODE = ::c_short;
 pub type SQLHWND = ::HWND;
-
-//Handle type identifiers
-pub const SQL_HANDLE_ENV: SQLSMALLINT = 1;
-pub const SQL_HANDLE_DBC: SQLSMALLINT = 2;
-pub const SQL_HANDLE_STMT: SQLSMALLINT = 3;
-pub const SQL_HANDLE_DESC: SQLSMALLINT = 4;
-
-//Null handle used in place of parent handle when allocating HENV
-pub const SQL_NULL_HANDLE: SQLHANDLE = 0 as SQLHANDLE;
-
-//Special length/indicator values
-pub const SQL_NULL_DATA: SQLLEN = -1;
-pub const SQL_DATA_AT_EXEC: SQLLEN = -2;
-
-//Return values from functions
-pub const SQL_SUCCESS: SQLRETURN = 0;
-pub const SQL_SUCCESS_WITH_INFO: SQLRETURN = 1;
-pub const SQL_NO_DATA: SQLRETURN = 100;
-pub const SQL_PARAM_DATA_AVAILABLE: SQLRETURN = 101;
-pub const SQL_ERROR: SQLRETURN = -1;
-pub const SQL_INVALID_HANDLE: SQLRETURN = -2;
-pub const SQL_STILL_EXECUTING: SQLRETURN = 2;
-pub const SQL_NEED_DATA: SQLRETURN = 99;
-
-//Values of NULLABLE field in descriptor
-pub const SQL_NO_NULLS: SQLSMALLINT = 0;
-pub const SQL_NULLABLE: SQLSMALLINT = 1;
-pub const SQL_NULLABLE_UNKNOWN: SQLSMALLINT = 2;
-
-//Env attribute
-pub const SQL_ATTR_ODBC_VERSION: SQLINTEGER = 200;
-pub const SQL_ATTR_CONNECTION_POOLING: SQLINTEGER = 201;
-pub const SQL_ATTR_CP_MATCH: SQLINTEGER = 202;
-
-//Values for SQL_ATTR_ODBC_VERSION
-pub const SQL_OV_ODBC2: SQLINTEGER = 2;
-pub const SQL_OV_ODBC3: SQLINTEGER = 3;
-pub const SQL_OV_ODBC3_80: SQLINTEGER = 380;
-
-//Connection attributes
-pub const SQL_ACCESS_MODE: SQLINTEGER = 101;
-pub const SQL_AUTOCOMMIT: SQLINTEGER = 102;
-pub const SQL_LOGIN_TIMEOUT: SQLINTEGER = 103;
-pub const SQL_OPT_TRACE: SQLINTEGER = 104;
-pub const SQL_OPT_TRACEFILE: SQLINTEGER = 105;
-pub const SQL_TRANSLATE_DLL: SQLINTEGER = 106;
-pub const SQL_TRANSLATE_OPTION: SQLINTEGER = 107;
-pub const SQL_TXN_ISOLATION: SQLINTEGER = 108;
-pub const SQL_CURRENT_QUALIFIER: SQLINTEGER = 109;
-pub const SQL_ODBC_CURSORS: SQLINTEGER = 110;
-pub const SQL_QUIET_MODE: SQLINTEGER = 111;
-pub const SQL_PACKET_SIZE: SQLINTEGER = 112;
-
-//Connection attributes with new names
-pub const SQL_ATTR_ACCESS_MODE: SQLINTEGER = SQL_ACCESS_MODE;
-pub const SQL_ATTR_AUTOCOMMIT: SQLINTEGER = SQL_AUTOCOMMIT;
-pub const SQL_ATTR_CONNECTION_TIMEOUT: SQLINTEGER = 113;
-pub const SQL_ATTR_CURRENT_CATALOG: SQLINTEGER = SQL_CURRENT_QUALIFIER;
-pub const SQL_ATTR_DISCONNECT_BEHAVIOR: SQLINTEGER = 114;
-pub const SQL_ATTR_ENLIST_IN_DTC: SQLINTEGER = 1207;
-pub const SQL_ATTR_ENLIST_IN_XA: SQLINTEGER = 1208;
-pub const SQL_ATTR_LOGIN_TIMEOUT: SQLINTEGER = SQL_LOGIN_TIMEOUT;
-pub const SQL_ATTR_ODBC_CURSORS: SQLINTEGER = SQL_ODBC_CURSORS;
-pub const SQL_ATTR_PACKET_SIZE: SQLINTEGER = SQL_PACKET_SIZE;
-pub const SQL_ATTR_QUIET_MODE: SQLINTEGER = SQL_QUIET_MODE;
-pub const SQL_ATTR_TRACE: SQLINTEGER = SQL_OPT_TRACE;
-pub const SQL_ATTR_TRACEFILE: SQLINTEGER = SQL_OPT_TRACEFILE;
-pub const SQL_ATTR_TRANSLATE_LIB: SQLINTEGER = SQL_TRANSLATE_DLL;
-pub const SQL_ATTR_TRANSLATE_OPTION: SQLINTEGER = SQL_TRANSLATE_OPTION;
-pub const SQL_ATTR_TXN_ISOLATION: SQLINTEGER = SQL_TXN_ISOLATION;
-pub const SQL_ATTR_CONNECTION_DEAD: SQLINTEGER = 1209;
-
-//Flags for null-terminated string
-pub const SQL_NTS: SQLSMALLINT = -3;
-
-//Options for SQLDriverConnect
-pub const SQL_DRIVER_NOPROMPT: SQLUSMALLINT = 0;
-pub const SQL_DRIVER_COMPLETE: SQLUSMALLINT = 1;
-pub const SQL_DRIVER_PROMPT: SQLUSMALLINT = 2;
-pub const SQL_DRIVER_COMPLETE_REQUIRED: SQLUSMALLINT = 3;
-
-//Whether an attribute is a pointer or not
-pub const SQL_IS_POINTER: SQLINTEGER = -4;
-pub const SQL_IS_UINTEGER: SQLINTEGER = -5;
-pub const SQL_IS_INTEGER: SQLINTEGER = -6;
-pub const SQL_IS_USMALLINT: SQLINTEGER = -7;
-pub const SQL_IS_SMALLINT: SQLINTEGER = -8;
-
-//FreeStmt options
-pub const SQL_CLOSE: SQLUSMALLINT = 0;
-pub const SQL_DROP: SQLUSMALLINT = 1;
-pub const SQL_UNBIND: SQLUSMALLINT = 2;
-pub const SQL_RESET_PARAMS: SQLUSMALLINT = 3;
-
-//C datatype to SQL datatype mapping
-pub const SQL_UNKNOWN_TYPE: SQLSMALLINT = 0;
-pub const SQL_CHAR: SQLSMALLINT = 1;
-pub const SQL_NUMERIC: SQLSMALLINT = 2;
-pub const SQL_DECIMAL: SQLSMALLINT = 3;
-pub const SQL_INTEGER: SQLSMALLINT = 4;
-pub const SQL_SMALLINT: SQLSMALLINT = 5;
-pub const SQL_FLOAT: SQLSMALLINT = 6;
-pub const SQL_REAL: SQLSMALLINT = 7;
-pub const SQL_DOUBLE: SQLSMALLINT = 8;
-pub const SQL_DATETIME: SQLSMALLINT = 9;
-pub const SQL_VARCHAR: SQLSMALLINT = 12;
-
-pub const SQL_TYPE_DATE: SQLSMALLINT = 91;
-pub const SQL_TYPE_TIME: SQLSMALLINT = 92;
-pub const SQL_TYPE_TIMESTAMP: SQLSMALLINT = 93;
-
-pub const SQL_DATE: SQLSMALLINT = 9;
-pub const SQL_INTERVAL: SQLSMALLINT = 10;
-pub const SQL_TIME: SQLSMALLINT = 10;
-pub const SQL_TIMESTAMP: SQLSMALLINT = 11;
-pub const SQL_LONGVARCHAR: SQLSMALLINT = -1;
-pub const SQL_BINARY: SQLSMALLINT = -2;
-pub const SQL_VARBINARY: SQLSMALLINT = -3;
-pub const SQL_LONGVARBINARY: SQLSMALLINT = -4;
-pub const SQL_BIGINT: SQLSMALLINT = -5;
-pub const SQL_TINYINT: SQLSMALLINT = -6;
-pub const SQL_BIT: SQLSMALLINT = -7;
-pub const SQL_GUID: SQLSMALLINT = -11;
-
-pub const SQL_C_CHAR: SQLSMALLINT = SQL_CHAR;
-pub const SQL_C_LONG: SQLSMALLINT = SQL_INTEGER;
-pub const SQL_C_SHORT: SQLSMALLINT = SQL_SMALLINT;
-pub const SQL_C_FLOAT: SQLSMALLINT = SQL_REAL;
-pub const SQL_C_DOUBLE: SQLSMALLINT = SQL_DOUBLE;
-pub const SQL_C_NUMERIC: SQLSMALLINT = SQL_NUMERIC;
-pub const SQL_C_DEFAULT: SQLSMALLINT = 99;
-
-pub const SQL_SIGNED_OFFSET: SQLSMALLINT = -20;
-pub const SQL_UNSIGNED_OFFSET: SQLSMALLINT = -22;
-
-pub const SQL_C_DATE: SQLSMALLINT = SQL_DATE;
-pub const SQL_C_TIME: SQLSMALLINT = SQL_TIME;
-pub const SQL_C_TIMESTAMP: SQLSMALLINT = SQL_TIMESTAMP;
-
-pub const SQL_C_TYPE_DATE: SQLSMALLINT = SQL_TYPE_DATE;
-pub const SQL_C_TYPE_TIME: SQLSMALLINT = SQL_TYPE_TIME;
-pub const SQL_C_TYPE_TIMESTAMP: SQLSMALLINT = SQL_TYPE_TIMESTAMP;
-
-pub const SQL_C_BINARY: SQLSMALLINT = SQL_BINARY;
-pub const SQL_C_BIT: SQLSMALLINT = SQL_BIT;
-pub const SQL_C_SBIGINT: SQLSMALLINT = SQL_BIGINT + SQL_SIGNED_OFFSET;
-pub const SQL_C_UBIGINT: SQLSMALLINT = SQL_BIGINT + SQL_UNSIGNED_OFFSET;
-pub const SQL_C_TINYINT: SQLSMALLINT = SQL_TINYINT;
-pub const SQL_C_SLONG: SQLSMALLINT = SQL_C_LONG + SQL_SIGNED_OFFSET;
-pub const SQL_C_SSHORT: SQLSMALLINT = SQL_C_SHORT + SQL_SIGNED_OFFSET;
-pub const SQL_C_STINYINT: SQLSMALLINT = SQL_TINYINT + SQL_SIGNED_OFFSET;
-pub const SQL_C_ULONG: SQLSMALLINT = SQL_C_LONG + SQL_UNSIGNED_OFFSET;
-pub const SQL_C_USHORT: SQLSMALLINT = SQL_C_SHORT + SQL_UNSIGNED_OFFSET;
-pub const SQL_C_UTINYINT: SQLSMALLINT = SQL_TINYINT + SQL_UNSIGNED_OFFSET;
-
-pub const SQL_C_GUID: SQLSMALLINT = SQL_GUID;
-
-pub const SQL_WCHAR: SQLSMALLINT = -8;
-pub const SQL_WVARCHAR: SQLSMALLINT = -9;
-pub const SQL_WLONGVARCHAR: SQLSMALLINT = -10;
-pub const SQL_C_WCHAR: SQLSMALLINT = SQL_WCHAR;
-
-pub const SQL_TYPE_NULL: SQLSMALLINT = 0;
+STRUCT!{struct DATE_STRUCT {
+    year: SQLSMALLINT,
+    month: SQLUSMALLINT,
+    day: SQLUSMALLINT,
+}}
+pub type SQL_DATE_STRUCT = DATE_STRUCT;
+STRUCT!{struct TIME_STRUCT {
+    hour: SQLUSMALLINT,
+    minute: SQLUSMALLINT,
+    second: SQLUSMALLINT,
+}}
+pub type SQL_TIME_STRUCT = TIME_STRUCT;
+STRUCT!{struct TIMESTAMP_STRUCT {
+    year: SQLSMALLINT,
+    month: SQLUSMALLINT,
+    day: SQLUSMALLINT,
+    hour: SQLUSMALLINT,
+    minute: SQLUSMALLINT,
+    second: SQLUSMALLINT,
+    fraction: SQLUINTEGER,
+}}
+pub type SQL_TIMESTAMP_STRUCT = TIMESTAMP_STRUCT;
+ENUM!{enum SQLINTERVAL {
+    SQL_IS_YEAR = 1,
+    SQL_IS_MONTH = 2,
+    SQL_IS_DAY = 3,
+    SQL_IS_HOUR = 4,
+    SQL_IS_MINUTE = 5,
+    SQL_IS_SECOND = 6,
+    SQL_IS_YEAR_TO_MONTH = 7,
+    SQL_IS_DAY_TO_HOUR = 8,
+    SQL_IS_DAY_TO_MINUTE = 9,
+    SQL_IS_DAY_TO_SECOND = 10,
+    SQL_IS_HOUR_TO_MINUTE = 11,
+    SQL_IS_HOUR_TO_SECOND = 12,
+    SQL_IS_MINUTE_TO_SECOND = 13,
+}}
+STRUCT!{struct SQL_YEAR_MONTH_STRUCT {
+    year: SQLUINTEGER,
+    month: SQLUINTEGER,
+}}
+STRUCT!{struct SQL_DAY_SECOND_STRUCT {
+    day: SQLUINTEGER,
+    hour: SQLUINTEGER,
+    minute: SQLUINTEGER,
+    second: SQLUINTEGER,
+    fraction: SQLUINTEGER,
+}}
+STRUCT!{struct SQL_INTERVAL_STRUCT {
+    interval_type: SQLINTERVAL,
+    interval_sign: SQLSMALLINT,
+    intval: [u32; 5],
+}}
+UNION!{SQL_INTERVAL_STRUCT, intval, year_month, year_month_mut, SQL_YEAR_MONTH_STRUCT}
+UNION!{SQL_INTERVAL_STRUCT, intval, day_second, day_second_mut, SQL_DAY_SECOND_STRUCT}
+pub type ODBCINT64 = ::__int64;
+pub type SQLBIGINT = ODBCINT64;
+pub type SQLUBIGINT = ::__uint64;
+pub const SQL_MAX_NUMERIC_LEN: usize = 16;
+STRUCT!{struct SQL_NUMERIC_STRUCT {
+    precision: SQLCHAR,
+    scale: SQLSCHAR,
+    sign: SQLCHAR,
+    val: [SQLCHAR; SQL_MAX_NUMERIC_LEN],
+}}
+pub type SQLGUID = ::GUID;
+pub type BOOKMARK = SQLULEN;
+pub type SQLWCHAR = ::wchar_t;
