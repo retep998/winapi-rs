@@ -1,7 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to gdi32.
-#![cfg(all(windows, any(target_arch = "x86", target_arch = "x86_64")))]
+#![cfg(windows)]
 extern crate winapi;
 use winapi::*;
 extern "system" {
