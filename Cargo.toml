@@ -41,6 +41,7 @@ psapi-sys = { version = "*", path = "lib/psapi" }
 secur32-sys = { version = "*", path = "lib/secur32" }
 setupapi-sys = { version = "*", path = "lib/setupapi" }
 shell32-sys = { version = "*", path = "lib/shell32" }
+shlwapi-sys = { version = "*", path = "lib/shlwapi" }
 user32-sys = { version = "*", path = "lib/user32" }
 usp10-sys = { version = "*", path = "lib/usp10" }
 uuid-sys = { version = "*", path = "lib/uuid" }

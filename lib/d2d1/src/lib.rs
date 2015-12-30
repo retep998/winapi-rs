@@ -4,7 +4,6 @@
 #![cfg(windows)]
 extern crate winapi;
 use winapi::*;
-#[cfg(any(target_arch = "x86", target_arch = "x86_64", target_arch = "arm"))]
 extern "system" {
     pub fn D2D1ComputeMaximumScaleFactor(matrix: *const D2D1_MATRIX_3X2_F) -> FLOAT;
     //pub fn D2D1ConvertColorSpace(

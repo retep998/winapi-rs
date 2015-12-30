@@ -35,6 +35,7 @@ Bindings to library functions are in separate crates. The source to each crate i
 These are the ones that actually have functions in them:
 * [advapi32-sys ![Crates.io](https://img.shields.io/crates/v/advapi32-sys.svg)](https://crates.io/crates/advapi32-sys)
 * [crypt32-sys ![Crates.io](https://img.shields.io/crates/v/crypt32-sys.svg)](https://crates.io/crates/crypt32-sys)
+* [d2d1-sys ![Crates.io](https://img.shields.io/crates/v/d2d1-sys.svg)](https://crates.io/crates/d2d1-sys)
 * [d3d9-sys ![Crates.io](https://img.shields.io/crates/v/d3d9-sys.svg)](https://crates.io/crates/d3d9-sys)
 * [d3d11-sys ![Crates.io](https://img.shields.io/crates/v/d3d11-sys.svg)](https://crates.io/crates/d3d11-sys)
 * [dbghelp-sys ![Crates.io](https://img.shields.io/crates/v/dbghelp-sys.svg)](https://crates.io/crates/dbghelp-sys)
@@ -113,7 +114,6 @@ These are the ones that are reserved for future use:
 * [cryptxml-sys ![Crates.io](https://img.shields.io/crates/v/cryptxml-sys.svg)](https://crates.io/crates/cryptxml-sys)
 * [cscapi-sys ![Crates.io](https://img.shields.io/crates/v/cscapi-sys.svg)](https://crates.io/crates/cscapi-sys)
 * [cscdll-sys ![Crates.io](https://img.shields.io/crates/v/cscdll-sys.svg)](https://crates.io/crates/cscdll-sys)
-* [d2d1-sys ![Crates.io](https://img.shields.io/crates/v/d2d1-sys.svg)](https://crates.io/crates/d2d1-sys)
 * [d3d10-sys ![Crates.io](https://img.shields.io/crates/v/d3d10-sys.svg)](https://crates.io/crates/d3d10-sys)
 * [d3d10_1-sys ![Crates.io](https://img.shields.io/crates/v/d3d10_1-sys.svg)](https://crates.io/crates/d3d10_1-sys)
 * [d3dcompiler-sys ![Crates.io](https://img.shields.io/crates/v/d3dcompiler-sys.svg)](https://crates.io/crates/d3dcompiler-sys)
