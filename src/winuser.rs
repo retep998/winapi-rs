@@ -2033,3 +2033,16 @@ pub const DI_IMAGE: ::UINT = 0x0002;
 pub const DI_NORMAL: ::UINT = 0x0003;
 pub const DI_COMPAT: ::UINT = 0x0004;
 pub const DI_DEFAULTSIZE: ::UINT = 0x0008;
+/*Menu Flags*/
+pub const MF_BITMAP: ::UINT = 0x0004;
+pub const MF_CHECKED: ::UINT = 0x0008;
+pub const MF_DISABLED: ::UINT = 0x0002;
+pub const MF_ENABLED: ::UINT = 0x0000;
+pub const MF_GRAYED: ::UINT = 0x0001;
+pub const MF_MENUBARBREAK: ::UINT = 0x0020;
+pub const MF_MENUBREAK: ::UINT = 0x0040;
+pub const MF_OWNERDRAW: ::UINT = 0x0100;
+pub const MF_POPUP: ::UINT = 0x0010;
+pub const MF_SEPARATOR: ::UINT = 0x0800;
+pub const MF_STRING: ::UINT = 0x0000;
+pub const MF_UNCHECKED: ::UINT = 0x0000;
