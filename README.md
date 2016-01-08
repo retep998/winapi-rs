@@ -4,7 +4,7 @@
 
 Official IRC channel: #winapi on [Mozilla IRC](https://wiki.mozilla.org/IRC)
 
-This crate provides types and constants for WinAPI FFI bindings. They are gathered by hand using the Windows 8.1 SDK from Microsoft. I aim to replace all existing Windows FFI in other crates with this set of crates through the "[Embrace, extend, and extinguish](http://en.wikipedia.org/wiki/Embrace,_extend_and_extinguish)" technique.
+This crate provides types and constants for WinAPI FFI bindings. They are gathered by hand using the Windows 10 SDK from Microsoft. I aim to replace all existing Windows FFI in other crates with this set of crates through the "[Embrace, extend, and extinguish](http://en.wikipedia.org/wiki/Embrace,_extend_and_extinguish)" technique.
 
 If this crate is missing something you need, feel free to create an issue, open a pull request, or contact me via [other means](http://www.rustaceans.org/retep998).
 
@@ -35,16 +35,19 @@ Bindings to library functions are in separate crates. The source to each crate i
 These are the ones that actually have functions in them:
 * [advapi32-sys ![Crates.io](https://img.shields.io/crates/v/advapi32-sys.svg)](https://crates.io/crates/advapi32-sys)
 * [crypt32-sys ![Crates.io](https://img.shields.io/crates/v/crypt32-sys.svg)](https://crates.io/crates/crypt32-sys)
+* [d2d1-sys ![Crates.io](https://img.shields.io/crates/v/d2d1-sys.svg)](https://crates.io/crates/d2d1-sys)
 * [d3d9-sys ![Crates.io](https://img.shields.io/crates/v/d3d9-sys.svg)](https://crates.io/crates/d3d9-sys)
 * [d3d11-sys ![Crates.io](https://img.shields.io/crates/v/d3d11-sys.svg)](https://crates.io/crates/d3d11-sys)
 * [dbghelp-sys ![Crates.io](https://img.shields.io/crates/v/dbghelp-sys.svg)](https://crates.io/crates/dbghelp-sys)
 * [dsound-sys ![Crates.io](https://img.shields.io/crates/v/dsound-sys.svg)](https://crates.io/crates/dsound-sys)
 * [dwmapi-sys ![Crates.io](https://img.shields.io/crates/v/dwmapi-sys.svg)](https://crates.io/crates/dwmapi-sys)
+* [dwrite-sys ![Crates.io](https://img.shields.io/crates/v/dwrite-sys.svg)](https://crates.io/crates/dwrite-sys)
 * [gdi32-sys ![Crates.io](https://img.shields.io/crates/v/gdi32-sys.svg)](https://crates.io/crates/gdi32-sys)
 * [hid-sys ![Crates.io](https://img.shields.io/crates/v/hid-sys.svg)](https://crates.io/crates/hid-sys)
 * [kernel32-sys ![Crates.io](https://img.shields.io/crates/v/kernel32-sys.svg)](https://crates.io/crates/kernel32-sys)
 * [ktmw32-sys ![Crates.io](https://img.shields.io/crates/v/ktmw32-sys.svg)](https://crates.io/crates/ktmw32-sys)
 * [mpr-sys ![Crates.io](https://img.shields.io/crates/v/mpr-sys.svg)](https://crates.io/crates/mpr-sys)
+* [odbc32-sys ![Crates.io](https://img.shields.io/crates/v/odbc32-sys.svg)](https://crates.io/crates/odbc32-sys)
 * [ole32-sys ![Crates.io](https://img.shields.io/crates/v/ole32-sys.svg)](https://crates.io/crates/ole32-sys)
 * [oleaut32-sys ![Crates.io](https://img.shields.io/crates/v/oleaut32-sys.svg)](https://crates.io/crates/oleaut32-sys)
 * [opengl32-sys ![Crates.io](https://img.shields.io/crates/v/opengl32-sys.svg)](https://crates.io/crates/opengl32-sys)
@@ -111,7 +114,6 @@ These are the ones that are reserved for future use:
 * [cryptxml-sys ![Crates.io](https://img.shields.io/crates/v/cryptxml-sys.svg)](https://crates.io/crates/cryptxml-sys)
 * [cscapi-sys ![Crates.io](https://img.shields.io/crates/v/cscapi-sys.svg)](https://crates.io/crates/cscapi-sys)
 * [cscdll-sys ![Crates.io](https://img.shields.io/crates/v/cscdll-sys.svg)](https://crates.io/crates/cscdll-sys)
-* [d2d1-sys ![Crates.io](https://img.shields.io/crates/v/d2d1-sys.svg)](https://crates.io/crates/d2d1-sys)
 * [d3d10-sys ![Crates.io](https://img.shields.io/crates/v/d3d10-sys.svg)](https://crates.io/crates/d3d10-sys)
 * [d3d10_1-sys ![Crates.io](https://img.shields.io/crates/v/d3d10_1-sys.svg)](https://crates.io/crates/d3d10_1-sys)
 * [d3dcompiler-sys ![Crates.io](https://img.shields.io/crates/v/d3dcompiler-sys.svg)](https://crates.io/crates/d3dcompiler-sys)
@@ -148,7 +150,6 @@ These are the ones that are reserved for future use:
 * [dststlog-sys ![Crates.io](https://img.shields.io/crates/v/dststlog-sys.svg)](https://crates.io/crates/dststlog-sys)
 * [dsuiext-sys ![Crates.io](https://img.shields.io/crates/v/dsuiext-sys.svg)](https://crates.io/crates/dsuiext-sys)
 * [dtchelp-sys ![Crates.io](https://img.shields.io/crates/v/dtchelp-sys.svg)](https://crates.io/crates/dtchelp-sys)
-* [dwrite-sys ![Crates.io](https://img.shields.io/crates/v/dwrite-sys.svg)](https://crates.io/crates/dwrite-sys)
 * [dxgi-sys ![Crates.io](https://img.shields.io/crates/v/dxgi-sys.svg)](https://crates.io/crates/dxgi-sys)
 * [dxguid-sys ![Crates.io](https://img.shields.io/crates/v/dxguid-sys.svg)](https://crates.io/crates/dxguid-sys)
 * [dxtmsft-sys ![Crates.io](https://img.shields.io/crates/v/dxtmsft-sys.svg)](https://crates.io/crates/dxtmsft-sys)
@@ -283,7 +284,6 @@ These are the ones that are reserved for future use:
 * [ntstc_msvcrt-sys ![Crates.io](https://img.shields.io/crates/v/ntstc_msvcrt-sys.svg)](https://crates.io/crates/ntstc_msvcrt-sys)
 * [ntvdm-sys ![Crates.io](https://img.shields.io/crates/v/ntvdm-sys.svg)](https://crates.io/crates/ntvdm-sys)
 * [objsel-sys ![Crates.io](https://img.shields.io/crates/v/objsel-sys.svg)](https://crates.io/crates/objsel-sys)
-* [odbc32-sys ![Crates.io](https://img.shields.io/crates/v/odbc32-sys.svg)](https://crates.io/crates/odbc32-sys)
 * [odbcbcp-sys ![Crates.io](https://img.shields.io/crates/v/odbcbcp-sys.svg)](https://crates.io/crates/odbcbcp-sys)
 * [odbccp32-sys ![Crates.io](https://img.shields.io/crates/v/odbccp32-sys.svg)](https://crates.io/crates/odbccp32-sys)
 * [oemlicense-sys ![Crates.io](https://img.shields.io/crates/v/oemlicense-sys.svg)](https://crates.io/crates/oemlicense-sys)

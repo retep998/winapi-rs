@@ -6,7 +6,7 @@ description = "Contains function definitions for the Windows API library odbc32.
 documentation = "https://retep998.github.io/doc/odbc32/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
-keywords = ["windows", "ffi", "win32"]
+keywords = ["windows", "ffi", "win32", "odbc"]
 license = "MIT"
 build = "build.rs"
 [lib]

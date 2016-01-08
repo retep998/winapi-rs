@@ -167,7 +167,7 @@ macro_rules! RIDL {
     };
 }
 macro_rules! UNION {
-    ($base:ident, $field:ident, $variant:ident, $variantmut: ident, $fieldtype:ty) => {
+    ($base:ident, $field:ident, $variant:ident, $variantmut:ident, $fieldtype:ty) => {
         impl $base {
             #[inline]
             pub unsafe fn $variant(&self) -> &$fieldtype {
