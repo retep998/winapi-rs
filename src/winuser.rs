@@ -807,7 +807,7 @@ STRUCT!{struct MINMAXINFO {
     ptMaxSize: ::POINT,
     ptMaxPosition: ::POINT,
     ptMinTrackSize: ::POINT,
-    ptMaxTrackSize: ::POINT
+    ptMaxTrackSize: ::POINT,
 }}
 STRUCT!{struct SCROLLBARINFO {
     cbSize: ::DWORD,
