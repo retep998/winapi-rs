@@ -605,7 +605,7 @@ interface ID2D1RenderTarget(ID2D1RenderTargetVtbl): ID2D1Resource(ID2D1ResourceV
     ) -> (),
     fn DrawTextLayout(
         &mut self, origin: ::D2D1_POINT_2F, textLayout: *mut ::IDWriteTextLayout,
-        defaultForegroundBrush: *mut ID2D1Brush
+        defaultForegroundBrush: *mut ID2D1Brush, options: D2D1_DRAW_TEXT_OPTIONS
     ) -> (),
     fn DrawGlyphRun(
         &mut self, baselineOrigin: ::D2D1_POINT_2F, glyphRun: *const ::DWRITE_GLYPH_RUN,
