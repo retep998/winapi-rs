@@ -33,6 +33,7 @@ kernel32-sys = { version = "*", path = "lib/kernel32" }
 ktmw32-sys = { version = "*", path = "lib/ktmw32" }
 mpr-sys = { version = "*", path = "lib/mpr" }
 netapi32-sys = { version = "*", path = "lib/netapi32" }
+odbc32-sys = { version = "*", path = "lib/odbc32" }
 ole32-sys = { version = "*", path = "lib/ole32" }
 oleaut32-sys = { version = "*", path = "lib/oleaut32" }
 opengl32-sys = { version = "*", path = "lib/opengl32" }
@@ -40,6 +41,7 @@ psapi-sys = { version = "*", path = "lib/psapi" }
 secur32-sys = { version = "*", path = "lib/secur32" }
 setupapi-sys = { version = "*", path = "lib/setupapi" }
 shell32-sys = { version = "*", path = "lib/shell32" }
+shlwapi-sys = { version = "*", path = "lib/shlwapi" }
 user32-sys = { version = "*", path = "lib/user32" }
 usp10-sys = { version = "*", path = "lib/usp10" }
 uuid-sys = { version = "*", path = "lib/uuid" }

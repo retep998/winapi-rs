@@ -3,7 +3,7 @@ Contains function definitions for the Windows API library dwrite. See winapi for
 
 ```toml
 [dependencies]
-dwrite-sys = "0.0.1"
+dwrite-sys = "0.2.0"
 ```
 
 ```rust

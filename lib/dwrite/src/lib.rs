@@ -4,9 +4,8 @@
 #![cfg(windows)]
 extern crate winapi;
 use winapi::*;
-#[cfg(any(target_arch = "x86", target_arch = "x86_64", target_arch = "arm"))]
 extern "system" {
     pub fn DWriteCreateFactory(
-        factoryType: DWRITE_FACTORY_TYPE, iid: REFIID, factory: *mut *mut IUnknown
+        factoryType: DWRITE_FACTORY_TYPE, iid: REFIID, factory: *mut *mut IUnknown,
     ) -> HRESULT;
 }
