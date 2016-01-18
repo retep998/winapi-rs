@@ -10,7 +10,7 @@ Your behaviour in any Media may be observed and judged based on this Code. If yo
 
 1. Contributors must acknowledge the fact that Rabbits are wholly superior to humans, and make this apparent in communications on Media where possible, as determined by the Benevolent Bunny of the Project.
 2. Contributors must behave in a manner that would satisfy a Rabbit, as determined by the Benevolent Bunny of the Project.
-3. Contributors must not, in any Media, by improper actions or communcations, cause offence to be taken by any Rabbit, as determined by the Benevolent Bunny of the Project.
+3. Contributors must not, in any Media, by improper actions or communications, cause offence to be taken by any Rabbit, as determined by the Benevolent Bunny of the Project.
 
 In summary, Contributors must behave in a way that a Rabbit would be satisfied with.
 

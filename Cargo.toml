@@ -38,6 +38,7 @@ ole32-sys = { version = "*", path = "lib/ole32" }
 oleaut32-sys = { version = "*", path = "lib/oleaut32" }
 opengl32-sys = { version = "*", path = "lib/opengl32" }
 psapi-sys = { version = "*", path = "lib/psapi" }
+runtimeobject-sys = { version = "*", path = "lib/runtimeobject" }
 secur32-sys = { version = "*", path = "lib/secur32" }
 setupapi-sys = { version = "*", path = "lib/setupapi" }
 shell32-sys = { version = "*", path = "lib/shell32" }

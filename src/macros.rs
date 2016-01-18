@@ -3,7 +3,7 @@
 //! Macros to make things easier to define
 macro_rules! DECLARE_HANDLE {
     ($name:ident, $inner:ident) => {
-        #[repr(C)] #[allow(missing_copy_implementations)] struct $inner { unused: ::c_void }
+        #[allow(missing_copy_implementations)] pub enum $inner { }
         pub type $name = *mut $inner;
     };
 }

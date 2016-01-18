@@ -2,7 +2,7 @@
 // Licensed under the MIT License <LICENSE.md>
 //! Types and constants for WinAPI bindings.
 #![allow(bad_style)]
-#![warn(missing_copy_implementations, trivial_casts, trivial_numeric_casts)]
+#![warn(trivial_casts, trivial_numeric_casts)]
 #![warn(unused_qualifications, unused)]
 #![cfg(windows)]
 //-------------------------------------------------------------------------------------------------
