@@ -27,12 +27,13 @@ macro_rules! MAKEFOURCC {
         ($a as i32) | (($b as i32) << 8) | (($c as i32) << 16) | (($d as i32) << 24)
     }
 }
+#[macro_export]
 macro_rules! DEFINE_GUID {
     (
         $name:ident, $l:expr, $w1:expr, $w2:expr, $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr,
         $b6:expr, $b7:expr, $b8:expr
     ) => {
-        pub const $name: ::GUID = ::GUID {
+        pub const $name: $crate::GUID = $crate::GUID {
             Data1: $l,
             Data2: $w1,
             Data3: $w2,
