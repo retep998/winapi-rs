@@ -896,6 +896,13 @@ impl Clone for WNDCLASSW { fn clone(&self) -> WNDCLASSW { *self } }
 pub type PWNDCLASSW = *mut WNDCLASSW;
 pub type NPWNDCLASSW = *mut WNDCLASSW;
 pub type LPWNDCLASSW = *mut WNDCLASSW;
+STRUCT!{struct MINMAXINFO {
+    ptReserved: ::POINT,
+    ptMaxSize: ::POINT,
+    ptMaxPosition: ::POINT,
+    ptMinTrackSize: ::POINT,
+    ptMaxTrackSize: ::POINT,
+}}
 STRUCT!{struct SCROLLBARINFO {
     cbSize: ::DWORD,
     rcScrollBar: ::RECT,
@@ -1951,6 +1958,9 @@ pub fn GET_WHEEL_DELTA_WPARAM(wParam: ::WPARAM) -> ::c_short {
 }
 pub fn GET_KEYSTATE_WPARAM(wparam: ::WPARAM) -> ::c_int {
     ::LOWORD(wparam as ::DWORD) as ::c_short as ::c_int
+}
+pub fn GET_XBUTTON_WPARAM(wparam: ::WPARAM) -> ::c_int {
+    ::HIWORD(wparam as ::DWORD) as ::c_int
 }
 pub const SIF_RANGE: ::UINT = 0x0001;
 pub const SIF_PAGE: ::UINT = 0x0002;
