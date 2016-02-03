@@ -459,7 +459,7 @@ extern "system" {
     pub fn DecodeSystemPointer(Ptr: PVOID) -> PVOID;
     pub fn DefineDosDeviceA(dwFlags: DWORD, lpDeviceName: LPCSTR, lpTargetPath: LPCSTR) -> BOOL;
     pub fn DefineDosDeviceW(dwFlags: DWORD, lpDeviceName: LPCWSTR, lpTargetPath: LPCWSTR) -> BOOL;
-    pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR);
+    pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
     pub fn DeleteAtom(nAtom: ATOM) -> ATOM;
     pub fn DeleteBoundaryDescriptor(BoundaryDescriptor: HANDLE);
     pub fn DeleteCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
@@ -1281,7 +1281,7 @@ extern "system" {
     ) -> BOOL;
     pub fn GetProcessIoCounters(hProcess: HANDLE, lpIoCounters: PIO_COUNTERS) -> BOOL;
     pub fn GetProcessMitigationPolicy(
-        hProcess: HANDLE, MitigationPolicy: PROCESS_MITIGATION_POLICY, lpBuffer: LPVOID,
+        hProcess: HANDLE, MitigationPolicy: PROCESS_MITIGATION_POLICY, lpBuffer: PVOID,
         dwLength: SIZE_T,
     ) -> BOOL;
     pub fn GetProcessPreferredUILanguages(
@@ -1384,7 +1384,7 @@ extern "system" {
     pub fn GetSystemTimeAsFileTime(lpSystemTimeAsFileTime: LPFILETIME);
     pub fn GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime: LPFILETIME);
     pub fn GetSystemTimes(
-        lpIdleTime: PFILETIME, lpKernelTime: PFILETIME, lpUserTime: PFILETIME,
+        lpIdleTime: LPFILETIME, lpKernelTime: LPFILETIME, lpUserTime: LPFILETIME,
     ) -> BOOL;
     pub fn GetSystemWindowsDirectoryA(lpBuffer: LPSTR, uSize: UINT) -> UINT;
     pub fn GetSystemWindowsDirectoryW(lpBuffer: LPWSTR, uSize: UINT) -> UINT;
@@ -1713,7 +1713,7 @@ extern "system" {
         hProcess: HANDLE, lpWatchInfo: PPSAPI_WS_WATCH_INFORMATION, cb: DWORD,
     ) -> BOOL;
     pub fn K32GetWsChangesEx(
-        hProcess: HANDLE, lpWatchInfoEx: PPSAPI_WS_WATCH_INFORMATION_EX, cb: DWORD,
+        hProcess: HANDLE, lpWatchInfoEx: PPSAPI_WS_WATCH_INFORMATION_EX, cb: PDWORD,
     ) -> BOOL;
     pub fn K32InitializeProcessForWsWatch(hProcess: HANDLE) -> BOOL;
     pub fn K32QueryWorkingSet(hProcess: HANDLE, pv: PVOID, cb: DWORD) -> BOOL;
@@ -1791,7 +1791,7 @@ extern "system" {
         nndPreferred: DWORD,
     ) -> LPVOID;
     pub fn MapViewOfFileFromApp(
-        hFileMappingObject: HANDLE, DesiredAccess: DWORD, FileOffset: ULONG64,
+        hFileMappingObject: HANDLE, DesiredAccess: ULONG, FileOffset: ULONG64,
         NumberOfBytesToMap: SIZE_T,
     ) -> PVOID;
     pub fn Module32First(hSnapshot: HANDLE, lpme: LPMODULEENTRY32) -> BOOL;
@@ -1820,7 +1820,7 @@ extern "system" {
     ) -> BOOL;
     pub fn MulDiv(nNumber: c_int, nNumerator: c_int, nDenominator: c_int) -> c_int;
     pub fn MultiByteToWideChar(
-        CodePage: UINT, dwFlags: DWORD, lpMultiByteStr: LPCCH, cbMultiByte: c_int,
+        CodePage: UINT, dwFlags: DWORD, lpMultiByteStr: LPCSTR, cbMultiByte: c_int,
         lpWideCharStr: LPWSTR, cchWideChar: c_int,
     ) -> c_int;
     pub fn NeedCurrentDirectoryForExePathA(ExeName: LPCSTR) -> BOOL;
@@ -1925,7 +1925,7 @@ extern "system" {
     pub fn PssWalkMarkerGetPosition(WalkMarkerHandle: HPSSWALK, Position: *mut ULONG_PTR) -> DWORD;
     // pub fn PssWalkMarkerRewind();
     // pub fn PssWalkMarkerSeek();
-    pub fn PssWalkMarkerSeekToBeginning(WalkMarkerHandle: HPSSWALK) -> DWORD;
+    pub fn PssWalkMarkerSeekToBeginning(WalkMarkerHandle: HPSS) -> DWORD;
     pub fn PssWalkMarkerSetPosition(WalkMarkerHandle: HPSSWALK, Position: ULONG_PTR) -> DWORD;
     // pub fn PssWalkMarkerTell();
     pub fn PssWalkSnapshot(
@@ -1979,7 +1979,7 @@ extern "system" {
     pub fn QueryUmsThreadInformation(
         UmsThread: PUMS_CONTEXT, UmsThreadInfoClass: UMS_THREAD_INFO_CLASS,
         UmsThreadInformation: PVOID, UmsThreadInformationLength: ULONG, ReturnLength: PULONG,
-    );
+    ) -> BOOL;
     pub fn QueryUnbiasedInterruptTime(UnbiasedTime: PULONGLONG) -> BOOL;
     pub fn QueueUserAPC(pfnAPC: PAPCFUNC, hThread: HANDLE, dwData: ULONG_PTR) -> DWORD;
     pub fn QueueUserWorkItem(
@@ -2334,7 +2334,7 @@ extern "system" {
         hNamedPipe: HANDLE, lpMode: LPDWORD, lpMaxCollectionCount: LPDWORD,
         lpCollectDataTimeout: LPDWORD,
     ) -> BOOL;
-    pub fn SetPriorityClass(hProcess: HANDLE, dwPriorityClass: DWORD);
+    pub fn SetPriorityClass(hProcess: HANDLE, dwPriorityClass: DWORD) -> BOOL;
     pub fn SetProcessAffinityMask(hProcess: HANDLE, dwProcessAffinityMask: DWORD) -> BOOL;
     pub fn SetProcessAffinityUpdateMode(hProcess: HANDLE, dwFlags: DWORD) -> BOOL;
     pub fn SetProcessDEPPolicy(dwFlags: DWORD) -> BOOL;
@@ -2405,7 +2405,7 @@ extern "system" {
         ptpp: PTP_POOL, ptpsi: PTP_POOL_STACK_INFORMATION,
     ) -> BOOL;
     pub fn SetThreadpoolThreadMaximum(ptpp: PTP_POOL, cthrdMost: DWORD);
-    pub fn SetThreadpoolThreadMinimum(ptpp: PTP_POOL, cthrdMic: DWORD);
+    pub fn SetThreadpoolThreadMinimum(ptpp: PTP_POOL, cthrdMic: DWORD) -> BOOL;
     pub fn SetThreadpoolTimer(
         pti: PTP_TIMER, pftDueTime: PFILETIME, msPeriod: DWORD, msWindowLength: DWORD,
     );
@@ -2566,7 +2566,7 @@ extern "system" {
     ) -> BOOL;
     pub fn VirtualLock(lpAddress: LPVOID, dwSize: SIZE_T) -> BOOL;
     pub fn VirtualProtect(
-        lpAddress: LPVOID, dwSize: SIZE_T, flNewProtect: DWORD, lpflOldProtect: DWORD,
+        lpAddress: LPVOID, dwSize: SIZE_T, flNewProtect: DWORD, lpflOldProtect: PDWORD,
     ) -> BOOL;
     pub fn VirtualProtectEx(
         hProcess: HANDLE, lpAddress: LPVOID, dwSize: SIZE_T, flNewProtect: DWORD,
@@ -2617,8 +2617,8 @@ extern "system" {
     ) -> HRESULT;
     // pub fn WerpInitiateRemoteRecovery();
     pub fn WideCharToMultiByte(
-      CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWCH, cchWideChar: c_int,
-      lpMultiByteStr: LPSTR, cbMultiByte: c_int, lpDefaultChar: LPCCH, lpUsedDefaultChar: LPBOOL,
+      CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWSTR, cchWideChar: c_int,
+      lpMultiByteStr: LPSTR, cbMultiByte: c_int, lpDefaultChar: LPCSTR, lpUsedDefaultChar: LPBOOL,
     ) -> c_int;
     pub fn WinExec(lpCmdLine: LPCSTR, uCmdShow: UINT) -> UINT;
     pub fn Wow64DisableWow64FsRedirection(OldValue: *mut PVOID) -> BOOL;
