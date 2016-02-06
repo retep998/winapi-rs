@@ -1,5 +1,9 @@
 language: rust
 sudo: false
+rust:
+  - 1.0.0
+  - beta
+  - nightly
 script:
   - cargo build
   - cargo package

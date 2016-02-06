@@ -8,7 +8,7 @@ This crate provides types and constants for WinAPI FFI bindings. They are gather
 
 If this crate is missing something you need, feel free to create an issue, open a pull request, or contact me via [other means](http://www.rustaceans.org/retep998).
 
-As of version 0.2, this crate depends on Rust 1.1 (in order to lose the dependency on libc). If you need compatibility with Rust 1.0 you must continue to use older 0.1.x versions.
+This crate depends on Rust 1.4 on Windows. On other platforms this crate is a no-op and should compile with Rust 1.0.
 
 ## Example ##
 
