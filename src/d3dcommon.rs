@@ -367,9 +367,6 @@ STRUCT!{struct D3D_SHADER_MACRO {
     Definition: ::LPCSTR,
 }}
 pub type LPD3D_SHADER_MACRO = *mut D3D_SHADER_MACRO;
-DEFINE_GUID!(
-    IID_ID3D10Blob, 0x8ba5fb08, 0x5195, 0x40e2, 0xac, 0x58, 0xd, 0x98, 0x9c, 0x3a, 0x1, 0x2
-);
 RIDL!(
 interface ID3D10Blob(ID3D10BlobVtbl): IUnknown(IUnknownVtbl) {
     fn GetBufferPointer(&mut self) -> ::LPVOID,
@@ -747,7 +744,3 @@ ENUM!{enum D3D_INTERPOLATION_MODE {
     D3D_INTERPOLATION_LINEAR_SAMPLE,
     D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE_SAMPLE,
 }}
-DEFINE_GUID!(
-    WKPDID_D3DDebugObjectName,
-    0x429b8c22, 0x9188, 0x4b0c, 0x87, 0x42, 0xac, 0xb0, 0xbf, 0x85, 0xc2, 0x00
-);
