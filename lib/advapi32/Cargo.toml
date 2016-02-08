@@ -1,6 +1,6 @@
 [package]
 name = "advapi32-sys"
-version = "0.1.2"
+version = "0.2.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "Contains function definitions for the Windows API library advapi32. See winapi for types and constants."
 documentation = "https://retep998.github.io/doc/advapi32/"
