@@ -2376,7 +2376,7 @@ extern "system" {
         hDevice: HANDLE, dwPositionMethod: DWORD, dwPartition: DWORD,
         dwOffsetLow: DWORD, dwOffsetHigh: DWORD, bImmediate: BOOL
     ) -> DWORD;
-    pub fn SetThreadAffinityMask(hThread: HANDLE, dwThreadAffinityMask: DWORD) -> DWORD_PTR;
+    pub fn SetThreadAffinityMask(hThread: HANDLE, dwThreadAffinityMask: DWORD_PTR) -> DWORD_PTR;
     pub fn SetThreadContext(hThread: HANDLE, lpContext: *const CONTEXT) -> BOOL;
     pub fn SetThreadErrorMode(dwNewMode: DWORD, lpOldMode: LPDWORD) -> BOOL;
     pub fn SetThreadExecutionState(esFlags: EXECUTION_STATE) -> EXECUTION_STATE;
