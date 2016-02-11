@@ -20,6 +20,7 @@ d2d1-sys = { version = "*", path = "lib/d2d1" }
 d3d11-sys = { version = "*", path = "lib/d3d11" }
 d3d12-sys = { version = "*", path = "lib/d3d12" }
 d3d9-sys = { version = "*", path = "lib/d3d9" }
+d3dcompiler-sys = { version = "*", path = "lib/d3dcompiler" }
 dbghelp-sys = { version = "*", path = "lib/dbghelp" }
 dsound-sys = { version = "*", path = "lib/dsound" }
 dwmapi-sys = { version = "*", path = "lib/dwmapi" }
