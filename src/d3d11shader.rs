@@ -290,12 +290,31 @@ RIDL!{interface ID3D11Linker(ID3D11LinkerVtbl): IUnknown(IUnknownVtbl) {
 }}
 RIDL!{interface ID3D11LinkingNode(ID3D11LinkingNodeVtbl): IUnknown(IUnknownVtbl) {}}
 RIDL!{interface ID3D11FunctionLinkingGraph(ID3D11FunctionLinkingGraphVtbl): IUnknown(IUnknownVtbl) {
-    fn CreateModuleInstance(&mut self, ppModuleInstance: *mut *mut ID3D11ModuleInstance, ppErrorBuffer: *mut *mut ID3DBlob) -> HRESULT,
-    fn SetInputSignature(&mut self, pInputParameters: *const D3D11_PARAMETER_DESC, cInputParameters: UINT, ppInputNode: *mut *mut ID3D11LinkingNode) -> HRESULT,
-    fn SetOutputSignature(&mut self, pOutputParameters: *const D3D11_PARAMETER_DESC, cOutputParameters: UINT, ppOutputNode: *mut *mut ID3D11LinkingNode) -> HRESULT,
-    fn CallFunction(&mut self, pModuleInstanceNamespace: LPCSTR, pModuleWithFunctionPrototype: *mut ID3D11Module, pFunctionName: LPCSTR, ppCallNode: *mut *mut ID3D11LinkingNode) -> HRESULT,
-    fn PassValue(&mut self, pSrcNode: *mut ID3D11LinkingNode, SrcParameterIndex: INT, pDstNode: *mut ID3D11LinkingNode, DstParameterIndex: INT) -> HRESULT,
-    fn PassValueWithSwizzle(&mut self, pSrcNode: *mut ID3D11LinkingNode, SrcParameterIndex: INT, pSrcSwizzle: LPCSTR, pDstNode: *mut ID3D11LinkingNode, DstParameterIndex: INT, pDstSwizzle: LPCSTR) -> HRESULT,
+    fn CreateModuleInstance(
+        &mut self, ppModuleInstance: *mut *mut ID3D11ModuleInstance,
+        ppErrorBuffer: *mut *mut ID3DBlob
+    ) -> HRESULT,
+    fn SetInputSignature(
+        &mut self, pInputParameters: *const D3D11_PARAMETER_DESC, cInputParameters: UINT,
+        ppInputNode: *mut *mut ID3D11LinkingNode
+    ) -> HRESULT,
+    fn SetOutputSignature(
+        &mut self, pOutputParameters: *const D3D11_PARAMETER_DESC, cOutputParameters: UINT,
+        ppOutputNode: *mut *mut ID3D11LinkingNode
+    ) -> HRESULT,
+    fn CallFunction(
+        &mut self, pModuleInstanceNamespace: LPCSTR,
+        pModuleWithFunctionPrototype: *mut ID3D11Module, pFunctionName: LPCSTR,
+        ppCallNode: *mut *mut ID3D11LinkingNode
+    ) -> HRESULT,
+    fn PassValue(
+        &mut self, pSrcNode: *mut ID3D11LinkingNode, SrcParameterIndex: INT,
+        pDstNode: *mut ID3D11LinkingNode, DstParameterIndex: INT
+    ) -> HRESULT,
+    fn PassValueWithSwizzle(
+        &mut self, pSrcNode: *mut ID3D11LinkingNode, SrcParameterIndex: INT, pSrcSwizzle: LPCSTR,
+        pDstNode: *mut ID3D11LinkingNode, DstParameterIndex: INT, pDstSwizzle: LPCSTR
+    ) -> HRESULT,
     fn GetLastError(&mut self, ppErrorBuffer: *mut *mut ID3DBlob) -> HRESULT,
     fn GenerateHlsl(&mut self, uFlags: UINT, ppBuffer: *mut *mut ID3DBlob) -> HRESULT
 }}
