@@ -28,10 +28,10 @@ extern "system" {
         ppCompressedData: *mut *mut ID3DBlob,
     ) -> HRESULT;
     pub fn D3DCreateBlob(Size: SIZE_T, ppBlob: *mut *mut ID3DBlob) -> HRESULT;
-    // pub fn D3DCreateFunctionLinkingGraph(
-    //     uFlags: UINT, ppFunctionLinkingGraph: *mut *mut ID3D11FunctionLinkingGraph,
-    // ) -> HRESULT;
-    // pub fn D3DCreateLinker(ppLinker: *mut *mut ID3D11Linker) -> HRESULT;
+    pub fn D3DCreateFunctionLinkingGraph(
+        uFlags: UINT, ppFunctionLinkingGraph: *mut *mut ID3D11FunctionLinkingGraph,
+    ) -> HRESULT;
+    pub fn D3DCreateLinker(ppLinker: *mut *mut ID3D11Linker) -> HRESULT;
     pub fn D3DDecompressShaders(
         pSrcData: LPCVOID, SrcDataSize: SIZE_T, uNumShaders: UINT, uStartIndex: UINT,
         pIndices: *mut UINT, uFlags: UINT, ppShaders: *mut *mut ID3DBlob, pTotalShaders: *mut UINT,
@@ -69,9 +69,9 @@ extern "system" {
         pSrcData: LPCVOID, SrcDataSize: SIZE_T, Flags: UINT, StartInstIndex: SIZE_T,
         NumInsts: SIZE_T, pOffsets: *mut SIZE_T, pTotalInsts: *mut SIZE_T,
     ) -> HRESULT;
-    // pub fn D3DLoadModule(
-    //     pSrcData: LPCVOID, cbSrcDataSize: SIZE_T, ppModule: *mut *mut ID3D11Module,
-    // ) -> HRESULT;
+    pub fn D3DLoadModule(
+        pSrcData: LPCVOID, cbSrcDataSize: SIZE_T, ppModule: *mut *mut ID3D11Module,
+    ) -> HRESULT;
     pub fn D3DPreprocess(
         pSrcData: LPCVOID, SrcDataSize: SIZE_T, pSourceName: LPCSTR,
         pDefines: *const D3D_SHADER_MACRO, pInclude: *mut ID3DInclude,
