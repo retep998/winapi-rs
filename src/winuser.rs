@@ -1139,6 +1139,39 @@ UNION!{INPUT, u, ki, ki_mut, KEYBDINPUT}
 UNION!{INPUT, u, hi, hi_mut, HARDWAREINPUT}
 pub type PINPUT = *mut INPUT;
 pub type LPINPUT = *mut INPUT;
+// if WINVER >= 0x0601
+DECLARE_HANDLE!(HTOUCHINPUT, HTOUCHINPUT__);
+STRUCT!{struct TOUCHINPUT {
+    x: ::LONG,
+    y: ::LONG,
+    hSource: ::HANDLE,
+    dwID: ::DWORD,
+    dwFlags: ::DWORD,
+    dwMask: ::DWORD,
+    dwTime: ::DWORD,
+    dwExtraInfo: ::ULONG_PTR,
+    cxContact: ::DWORD,
+    cyContact: ::DWORD,
+}}
+pub type PTOUCHINPUT = *mut TOUCHINPUT;
+pub type PCTOUCHINPUT = *const TOUCHINPUT;
+//Touch input flag values (TOUCHINPUT.dwFlags)
+pub const TOUCHEVENTF_MOVE: ::DWORD = 0x0001;
+pub const TOUCHEVENTF_DOWN: ::DWORD = 0x0002;
+pub const TOUCHEVENTF_UP: ::DWORD = 0x0004;
+pub const TOUCHEVENTF_INRANGE: ::DWORD = 0x0008;
+pub const TOUCHEVENTF_PRIMARY: ::DWORD = 0x0010;
+pub const TOUCHEVENTF_NOCOALESCE: ::DWORD = 0x0020;
+pub const TOUCHEVENTF_PEN: ::DWORD = 0x0040;
+pub const TOUCHEVENTF_PALM: ::DWORD = 0x0080;
+//Touch input mask values (TOUCHINPUT.dwMask)
+pub const TOUCHINPUTMASKF_TIMEFROMSYSTEM: ::DWORD = 0x0001;
+pub const TOUCHINPUTMASKF_EXTRAINFO: ::DWORD = 0x0002;
+pub const TOUCHINPUTMASKF_CONTACTAREA: ::DWORD = 0x0004;
+//RegisterTouchWindow flag values
+pub const TWF_FINETOUCH: ::ULONG = 0x00000001;
+pub const TWF_WANTPALM: ::ULONG = 0x00000002;
+// end if WINVER >= 0x0601
 //Indices for GetWindowLong etc.
 pub const GWL_EXSTYLE: ::c_int = -20;
 pub const GWL_STYLE: ::c_int = -16;
@@ -2149,3 +2182,14 @@ pub const DI_IMAGE: ::UINT = 0x0002;
 pub const DI_NORMAL: ::UINT = 0x0003;
 pub const DI_COMPAT: ::UINT = 0x0004;
 pub const DI_DEFAULTSIZE: ::UINT = 0x0008;
+// if WINVER >= 0x0601
+// GetSystemMetrics(SM_DIGITIZER) flag values
+pub const NID_INTEGRATED_TOUCH: ::UINT = 0x00000001;
+pub const NID_EXTERNAL_TOUCH: ::UINT = 0x00000002;
+pub const NID_INTEGRATED_PEN: ::UINT = 0x00000004;
+pub const NID_EXTERNAL_PEN: ::UINT = 0x00000008;
+pub const NID_MULTI_INPUT: ::UINT = 0x00000040;
+pub const NID_READY: ::UINT = 0x00000080;
+// end if WINVER >= 0x0601 
+
+

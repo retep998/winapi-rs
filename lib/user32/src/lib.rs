@@ -109,7 +109,7 @@ extern "system" {
     pub fn CloseClipboard() -> BOOL;
     pub fn CloseDesktop(hDesktop: HDESK) -> BOOL;
     // pub fn CloseGestureInfoHandle();
-    // pub fn CloseTouchInputHandle();
+    pub fn CloseTouchInputHandle(hTouchInput: HTOUCHINPUT) -> BOOL;
     pub fn CloseWindow(hWnd: HWND) -> BOOL;
     pub fn CloseWindowStation(hWinSta: HWINSTA) -> BOOL;
     pub fn CopyAcceleratorTableA(
@@ -593,7 +593,9 @@ extern "system" {
     pub fn GetThreadDesktop(dwThreadId: DWORD) -> HDESK;
     // pub fn GetTitleBarInfo();
     pub fn GetTopWindow(hWnd: HWND) -> HWND;
-    // pub fn GetTouchInputInfo();
+    pub fn GetTouchInputInfo(
+        hTouchInput: HTOUCHINPUT, cInputs: c_uint, pInputs: PTOUCHINPUT, cbSize: c_int
+    ) -> BOOL;
     // pub fn GetUnpredictedMessagePos();
     pub fn GetUpdateRect(hWnd: HWND, lpRect: LPRECT, bErase: BOOL) -> BOOL;
     pub fn GetUpdateRgn(hWnd: HWND, hRgn: HRGN, bErase: BOOL) -> c_int;
@@ -866,7 +868,7 @@ extern "system" {
     // pub fn RegisterShellHookWindow();
     // pub fn RegisterSuspendResumeNotification();
     // pub fn RegisterTouchHitTestingWindow();
-    // pub fn RegisterTouchWindow();
+    pub fn RegisterTouchWindow(hWnd: HWND, flags: ULONG) -> BOOL;
     pub fn RegisterWindowMessageA(lpString: LPCSTR) -> UINT;
     pub fn RegisterWindowMessageW(lpString: LPCWSTR) -> UINT;
     pub fn ReleaseCapture() -> BOOL;
