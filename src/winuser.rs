@@ -1,6 +1,101 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! USER procedure declarations, constant definitions and macros
+
+// Edit Control Styles
+//
+pub const ES_LEFT: ::DWORD = 0x0000;
+pub const ES_CENTER: ::DWORD = 0x0001;
+pub const ES_RIGHT: ::DWORD = 0x0002;
+pub const ES_MULTILINE: ::DWORD = 0x0004;
+pub const ES_UPPERCASE: ::DWORD = 0x0008;
+pub const ES_LOWERCASE: ::DWORD = 0x0010;
+pub const ES_PASSWORD: ::DWORD = 0x0020;
+pub const ES_AUTOVSCROLL: ::DWORD = 0x0040;
+pub const ES_AUTOHSCROLL: ::DWORD = 0x0080;
+pub const ES_NOHIDESEL: ::DWORD = 0x0100;
+pub const ES_OEMCONVERT: ::DWORD = 0x0400;
+pub const ES_READONLY: ::DWORD = 0x0800;
+pub const ES_WANTRETURN: ::DWORD = 0x1000;
+pub const ES_NUMBER: ::DWORD = 0x2000;
+
+// Edit Control Notification Codes
+//
+pub const EN_SETFOCUS: ::WORD = 0x0100;
+pub const EN_KILLFOCUS: ::WORD = 0x0200;
+pub const EN_CHANGE: ::WORD = 0x0300;
+pub const EN_UPDATE: ::WORD = 0x0400;
+pub const EN_ERRSPACE: ::WORD = 0x0500;
+pub const EN_MAXTEXT: ::WORD = 0x0501;
+pub const EN_HSCROLL: ::WORD = 0x0601;
+pub const EN_VSCROLL: ::WORD = 0x0602;
+
+pub const EN_ALIGN_LTR_EC: ::WORD = 0x0700;
+pub const EN_ALIGN_RTL_EC: ::WORD = 0x0701;
+
+// Edit control EM_SETMARGIN parameters
+pub const EC_LEFTMARGIN: ::WORD = 0x0001;
+pub const EC_RIGHTMARGIN: ::WORD = 0x0002;
+pub const EC_USEFONTINFO: ::WORD = 0xffff;
+
+// wParam of EM_GET/SETIMESTATUS
+pub const EMSIS_COMPOSITIONSTRING: ::WORD = 0x0001;
+
+// lParam for EMSIS_COMPOSITIONSTRING
+pub const EIMES_GETCOMPSTRATONCE: ::WORD = 0x0001;
+pub const EIMES_CANCELCOMPSTRINFOCUS: ::WORD = 0x0002;
+pub const EIMES_COMPLETECOMPSTRKILLFOCUS: ::WORD = 0x0004;
+
+// Edit Control Messages
+//
+pub const EM_GETSEL: ::WORD = 0x00B0;
+pub const EM_SETSEL: ::WORD = 0x00B1;
+pub const EM_GETRECT: ::WORD = 0x00B2;
+pub const EM_SETRECT: ::WORD = 0x00B3;
+pub const EM_SETRECTNP: ::WORD = 0x00B4;
+pub const EM_SCROLL: ::WORD = 0x00B5;
+pub const EM_LINESCROLL: ::WORD = 0x00B6;
+pub const EM_SCROLLCARET: ::WORD = 0x00B7;
+pub const EM_GETMODIFY: ::WORD = 0x00B8;
+pub const EM_SETMODIFY: ::WORD = 0x00B9;
+pub const EM_GETLINECOUNT: ::WORD = 0x00BA;
+pub const EM_LINEINDEX: ::WORD = 0x00BB;
+pub const EM_SETHANDLE: ::WORD = 0x00BC;
+pub const EM_GETHANDLE: ::WORD = 0x00BD;
+pub const EM_GETTHUMB: ::WORD = 0x00BE;
+pub const EM_LINELENGTH: ::WORD = 0x00C1;
+pub const EM_REPLACESEL: ::WORD = 0x00C2;
+pub const EM_GETLINE: ::WORD = 0x00C4;
+pub const EM_LIMITTEXT: ::WORD = 0x00C5;
+pub const EM_CANUNDO: ::WORD = 0x00C6;
+pub const EM_UNDO: ::WORD = 0x00C7;
+pub const EM_FMTLINES: ::WORD = 0x00C8;
+pub const EM_LINEFROMCHAR: ::WORD = 0x00C9;
+pub const EM_SETTABSTOPS: ::WORD = 0x00CB;
+pub const EM_SETPASSWORDCHAR: ::WORD = 0x00CC;
+pub const EM_EMPTYUNDOBUFFER: ::WORD = 0x00CD;
+pub const EM_GETFIRSTVISIBLELINE: ::WORD = 0x00CE;
+pub const EM_SETREADONLY: ::WORD = 0x00CF;
+pub const EM_SETWORDBREAKPROC: ::WORD = 0x00D0;
+pub const EM_GETWORDBREAKPROC: ::WORD = 0x00D1;
+pub const EM_GETPASSWORDCHAR: ::WORD = 0x00D2;
+
+pub const EM_SETMARGINS: ::WORD = 0x00D3;
+pub const EM_GETMARGINS: ::WORD = 0x00D4;
+pub const EM_SETLIMITTEXT: ::WORD = EM_LIMITTEXT;
+pub const EM_GETLIMITTEXT: ::WORD = 0x00D5;
+pub const EM_POSFROMCHAR: ::WORD = 0x00D6;
+pub const EM_CHARFROMPOS: ::WORD = 0x00D7;
+
+pub const EM_SETIMESTATUS: ::WORD = 0x00D8;
+pub const EM_GETIMESTATUS: ::WORD = 0x00D9;
+
+// EDITWORDBREAKPROC code values
+//
+pub const WB_LEFT: ::WORD = 0;
+pub const WB_RIGHT: ::WORD = 1;
+pub const WB_ISDELIMITER: ::WORD = 2;
+
 pub const BN_CLICKED: ::WORD = 0;
 pub const BN_PAINT: ::WORD = 1;
 pub const BN_HILITE: ::WORD = 2;
