@@ -3,7 +3,7 @@ Contains function definitions for the Windows API library xinput. See winapi for
 
 ```toml
 [dependencies]
-xinput-sys = "0.0.1"
+xinput-sys = "0.2.0"
 ```
 
 ```rust
