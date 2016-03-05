@@ -71,32 +71,28 @@ STRUCT!{struct SecPkgContext_ConnectionInfo {
 pub type PSecPkgContext_ConnectionInfo = *mut SecPkgContext_ConnectionInfo;
 pub const SZ_ALG_MAX_SIZE: usize = 64;
 pub const SECPKGCONTEXT_CIPHERINFO_V1: ::DWORD = 1;
-#[repr(C)] #[derive(Copy)]
-pub struct SecPkgContext_CipherInfo {
-    pub dwVersion: ::DWORD,
-    pub dwProtocol: ::DWORD,
-    pub dwCipherSuite: ::DWORD,
-    pub dwBaseCipherSuite: ::DWORD,
-    pub szCipherSuite: [::WCHAR; SZ_ALG_MAX_SIZE],
-    pub szCipher: [::WCHAR; SZ_ALG_MAX_SIZE],
-    pub dwCipherLen: ::DWORD,
-    pub dwCipherBlockLen: ::DWORD,
-    pub szHash: [::WCHAR; SZ_ALG_MAX_SIZE],
-    pub dwHashLen: ::DWORD,
-    pub szExchange: [::WCHAR; SZ_ALG_MAX_SIZE],
-    pub dwMinExchangeLen: ::DWORD,
-    pub dwMaxExchangeLen: ::DWORD,
-    pub szCertificate: [::WCHAR; SZ_ALG_MAX_SIZE],
-    pub dwKeyType: ::DWORD,
-}
-impl Clone for SecPkgContext_CipherInfo { fn clone(&self) -> SecPkgContext_CipherInfo { *self } }
+STRUCT!{nodebug struct SecPkgContext_CipherInfo {
+    dwVersion: ::DWORD,
+    dwProtocol: ::DWORD,
+    dwCipherSuite: ::DWORD,
+    dwBaseCipherSuite: ::DWORD,
+    szCipherSuite: [::WCHAR; SZ_ALG_MAX_SIZE],
+    szCipher: [::WCHAR; SZ_ALG_MAX_SIZE],
+    dwCipherLen: ::DWORD,
+    dwCipherBlockLen: ::DWORD,
+    szHash: [::WCHAR; SZ_ALG_MAX_SIZE],
+    dwHashLen: ::DWORD,
+    szExchange: [::WCHAR; SZ_ALG_MAX_SIZE],
+    dwMinExchangeLen: ::DWORD,
+    dwMaxExchangeLen: ::DWORD,
+    szCertificate: [::WCHAR; SZ_ALG_MAX_SIZE],
+    dwKeyType: ::DWORD,
+}}
 pub type PSecPkgContext_CipherInfo = *mut SecPkgContext_CipherInfo;
-#[repr(C)] #[derive(Copy)]
-pub struct SecPkgContext_EapKeyBlock {
-    pub rgbKeys: [::BYTE; 128],
-    pub rgbIVs: [::BYTE; 64],
-}
-impl Clone for SecPkgContext_EapKeyBlock { fn clone(&self) -> SecPkgContext_EapKeyBlock { *self } }
+STRUCT!{nodebug struct SecPkgContext_EapKeyBlock {
+    rgbKeys: [::BYTE; 128],
+    rgbIVs: [::BYTE; 64],
+}}
 pub type PSecPkgContext_EapKeyBlock = *mut SecPkgContext_EapKeyBlock;
 STRUCT!{struct SecPkgContext_MappedCredAttr {
     dwAttribute: ::DWORD,
@@ -157,8 +153,7 @@ pub const SCH_CRED_V2: ::DWORD = 0x00000002;
 pub const SCH_CRED_VERSION: ::DWORD = 0x00000002;
 pub const SCH_CRED_V3: ::DWORD = 0x00000003;
 pub const SCHANNEL_CRED_VERSION: ::DWORD = 0x00000004;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct _HMAPPER;
+pub enum _HMAPPER {}
 STRUCT!{struct SCHANNEL_CRED {
     dwVersion: ::DWORD,
     cCreds: ::DWORD,
@@ -189,15 +184,13 @@ STRUCT!{struct SCHANNEL_CERT_HASH {
     ShaHash: [::BYTE; 20],
 }}
 pub type PSCHANNEL_CERT_HASH = *mut SCHANNEL_CERT_HASH;
-#[repr(C)] #[derive(Copy)]
-pub struct SCHANNEL_CERT_HASH_STORE {
-    pub dwLength: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub hProv: ::HCRYPTPROV,
-    pub ShaHash: [::BYTE; 20],
-    pub pwszStoreName: [::WCHAR; SCH_CRED_MAX_STORE_NAME_SIZE],
-}
-impl Clone for SCHANNEL_CERT_HASH_STORE { fn clone(&self) -> SCHANNEL_CERT_HASH_STORE { *self } }
+STRUCT!{nodebug struct SCHANNEL_CERT_HASH_STORE {
+    dwLength: ::DWORD,
+    dwFlags: ::DWORD,
+    hProv: ::HCRYPTPROV,
+    ShaHash: [::BYTE; 20],
+    pwszStoreName: [::WCHAR; SCH_CRED_MAX_STORE_NAME_SIZE],
+}}
 pub type PSCHANNEL_CERT_HASH_STORE = *mut SCHANNEL_CERT_HASH_STORE;
 pub const SCH_MACHINE_CERT_HASH: ::DWORD = 0x00000001;
 pub const SCH_CRED_NO_SYSTEM_MAPPER: ::DWORD = 0x00000002;
@@ -264,15 +257,13 @@ STRUCT!{struct SCHANNEL_SESSION_TOKEN {
     dwTokenType: ::DWORD,
     dwFlags: ::DWORD,
 }}
-#[repr(C)] #[derive(Copy)]
-pub struct SCHANNEL_CLIENT_SIGNATURE {
-    pub cbLength: ::DWORD,
-    pub aiHash: ::ALG_ID,
-    pub cbHash: ::DWORD,
-    pub HashValue: [::BYTE; 36],
-    pub CertThumbprint: [::BYTE; 20],
-}
-impl Clone for SCHANNEL_CLIENT_SIGNATURE { fn clone(&self) -> SCHANNEL_CLIENT_SIGNATURE { *self } }
+STRUCT!{nodebug struct SCHANNEL_CLIENT_SIGNATURE {
+    cbLength: ::DWORD,
+    aiHash: ::ALG_ID,
+    cbHash: ::DWORD,
+    HashValue: [::BYTE; 36],
+    CertThumbprint: [::BYTE; 20],
+}}
 pub type PSCHANNEL_CLIENT_SIGNATURE = *mut SCHANNEL_CLIENT_SIGNATURE;
 pub const SP_PROT_PCT1_SERVER: ::DWORD = 0x00000001;
 pub const SP_PROT_PCT1_CLIENT: ::DWORD = 0x00000002;

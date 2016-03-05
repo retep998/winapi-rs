@@ -4,28 +4,42 @@
 pub const NCBNAMSZ: usize = 16;
 pub const MAX_LANA: usize = 254;
 pub type PFPOST = Option<unsafe extern "system" fn(*mut NCB)>;
-#[repr(C)] #[derive(Copy)]
-pub struct NCB {
-    pub ncb_command: ::UCHAR,
-    pub ncb_retcode: ::UCHAR,
-    pub ncb_lsn: ::UCHAR,
-    pub ncb_num: ::UCHAR,
-    pub ncb_buffer: ::PUCHAR,
-    pub ncb_length: ::WORD,
-    pub ncb_callname: [::UCHAR; NCBNAMSZ],
-    pub ncb_name: [::UCHAR; NCBNAMSZ],
-    pub ncb_rto: ::UCHAR,
-    pub ncb_sto: ::UCHAR,
-    pub ncb_post: PFPOST,
-    pub ncb_lana_num: ::UCHAR,
-    pub ncb_cmd_cplt: ::UCHAR,
-    #[cfg(target_arch="x86")]
-    pub ncb_reserve: [::UCHAR; 10],
-    #[cfg(target_arch="x86_64")]
-    pub ncb_reserve: [::UCHAR; 18],
-    pub ncb_event: ::HANDLE,
-}
-impl Clone for NCB { fn clone(&self) -> NCB { *self } }
+#[cfg(target_arch="x86_64")]
+STRUCT!{nodebug struct NCB {
+    ncb_command: ::UCHAR,
+    ncb_retcode: ::UCHAR,
+    ncb_lsn: ::UCHAR,
+    ncb_num: ::UCHAR,
+    ncb_buffer: ::PUCHAR,
+    ncb_length: ::WORD,
+    ncb_callname: [::UCHAR; NCBNAMSZ],
+    ncb_name: [::UCHAR; NCBNAMSZ],
+    ncb_rto: ::UCHAR,
+    ncb_sto: ::UCHAR,
+    ncb_post: PFPOST,
+    ncb_lana_num: ::UCHAR,
+    ncb_cmd_cplt: ::UCHAR,
+    ncb_reserve: [::UCHAR; 18],
+    ncb_event: ::HANDLE,
+}}
+#[cfg(target_arch="x86")]
+STRUCT!{nodebug struct NCB {
+    ncb_command: ::UCHAR,
+    ncb_retcode: ::UCHAR,
+    ncb_lsn: ::UCHAR,
+    ncb_num: ::UCHAR,
+    ncb_buffer: ::PUCHAR,
+    ncb_length: ::WORD,
+    ncb_callname: [::UCHAR; NCBNAMSZ],
+    ncb_name: [::UCHAR; NCBNAMSZ],
+    ncb_rto: ::UCHAR,
+    ncb_sto: ::UCHAR,
+    ncb_post: PFPOST,
+    ncb_lana_num: ::UCHAR,
+    ncb_cmd_cplt: ::UCHAR,
+    ncb_reserve: [::UCHAR; 10],
+    ncb_event: ::HANDLE,
+}}
 pub type PNCB = *mut NCB;
 STRUCT!{struct ADAPTER_STATUS {
     adapter_address: [::UCHAR; 6],
@@ -93,12 +107,10 @@ pub const SESSION_ESTABLISHED: ::UCHAR = 0x03;
 pub const HANGUP_PENDING: ::UCHAR = 0x04;
 pub const HANGUP_COMPLETE: ::UCHAR = 0x05;
 pub const SESSION_ABORTED: ::UCHAR = 0x06;
-#[repr(C)] #[derive(Copy)]
-pub struct LANA_ENUM {
-    pub length: ::UCHAR,
-    pub lana: [::UCHAR; MAX_LANA + 1],
-}
-impl Clone for LANA_ENUM { fn clone(&self) -> LANA_ENUM { *self } }
+STRUCT!{nodebug struct LANA_ENUM {
+    length: ::UCHAR,
+    lana: [::UCHAR; MAX_LANA + 1],
+}}
 pub type PLANA_ENUM = *mut LANA_ENUM;
 STRUCT!{struct FIND_NAME_HEADER {
     node_count: ::WORD,

@@ -2,13 +2,11 @@
 // Licensed under the MIT License <LICENSE.md>
 //! Definitions to be used with the WinSock service provider
 pub const WSPDESCRIPTION_LEN: usize = 255;
-#[repr(C)] #[derive(Copy)]
-pub struct WSPDATA {
-    pub wVersion: ::WORD,
-    pub wHighVersion: ::WORD,
-    pub szDescription: [::WCHAR; WSPDESCRIPTION_LEN + 1],
-}
-impl Clone for WSPDATA { fn clone(&self) -> WSPDATA { *self } }
+STRUCT!{nodebug struct WSPDATA {
+    wVersion: ::WORD,
+    wHighVersion: ::WORD,
+    szDescription: [::WCHAR; WSPDESCRIPTION_LEN + 1],
+}}
 pub type LPWSPDATA = *mut WSPDATA;
 STRUCT!{struct WSATHREADID {
     ThreadHandle: ::HANDLE,
@@ -37,20 +35,18 @@ pub type LPNSPV2SETSERVICEEX = Option<unsafe extern "system" fn(
 pub type LPNSPV2CLIENTSESSIONRUNDOWN = Option<unsafe extern "system" fn(
     lpProviderId: ::LPGUID, pvClientSessionArg: ::LPVOID,
 )>;
-#[repr(C)] #[derive(Copy)]
-pub struct NSPV2_ROUTINE {
-    pub cbSize: ::DWORD,
-    pub dwMajorVersion: ::DWORD,
-    pub dwMinorVersion: ::DWORD,
-    pub NSPv2Startup: LPNSPV2STARTUP,
-    pub NSPv2Cleanup: LPNSPV2CLEANUP,
-    pub NSPv2LookupServiceBegin: LPNSPV2LOOKUPSERVICEBEGIN,
-    pub NSPv2LookupServiceNextEx: LPNSPV2LOOKUPSERVICENEXTEX,
-    pub NSPv2LookupServiceEnd: LPNSPV2LOOKUPSERVICEEND,
-    pub NSPv2SetServiceEx: LPNSPV2SETSERVICEEX,
-    pub NSPv2ClientSessionRundown: LPNSPV2CLIENTSESSIONRUNDOWN,
-}
-impl Clone for NSPV2_ROUTINE { fn clone(&self) -> NSPV2_ROUTINE { *self } }
+STRUCT!{nodebug struct NSPV2_ROUTINE {
+    cbSize: ::DWORD,
+    dwMajorVersion: ::DWORD,
+    dwMinorVersion: ::DWORD,
+    NSPv2Startup: LPNSPV2STARTUP,
+    NSPv2Cleanup: LPNSPV2CLEANUP,
+    NSPv2LookupServiceBegin: LPNSPV2LOOKUPSERVICEBEGIN,
+    NSPv2LookupServiceNextEx: LPNSPV2LOOKUPSERVICENEXTEX,
+    NSPv2LookupServiceEnd: LPNSPV2LOOKUPSERVICEEND,
+    NSPv2SetServiceEx: LPNSPV2SETSERVICEEX,
+    NSPv2ClientSessionRundown: LPNSPV2CLIENTSESSIONRUNDOWN,
+}}
 pub type PNSPV2_ROUTINE = *mut NSPV2_ROUTINE;
 pub type LPNSPV2_ROUTINE = *mut NSPV2_ROUTINE;
 pub type PCNSPV2_ROUTINE = *const NSPV2_ROUTINE;

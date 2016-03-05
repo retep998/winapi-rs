@@ -636,11 +636,9 @@ STRUCT!{struct PATHNAME_BUFFER {
     Name: [::WCHAR; 1],
 }}
 pub type PPATHNAME_BUFFER = *mut PATHNAME_BUFFER;
-#[repr(C)] #[derive(Copy)]
-pub struct FSCTL_QUERY_FAT_BPB_BUFFER {
-    pub First0x24BytesOfBootSector: [::BYTE; 0x24],
-}
-impl Clone for FSCTL_QUERY_FAT_BPB_BUFFER {fn clone(&self) -> FSCTL_QUERY_FAT_BPB_BUFFER { *self }}
+STRUCT!{nodebug struct FSCTL_QUERY_FAT_BPB_BUFFER {
+    First0x24BytesOfBootSector: [::BYTE; 0x24],
+}}
 pub type PFSCTL_QUERY_FAT_BPB_BUFFER = *mut FSCTL_QUERY_FAT_BPB_BUFFER;
 STRUCT!{struct NTFS_VOLUME_DATA_BUFFER {
     VolumeSerialNumber: ::LARGE_INTEGER,

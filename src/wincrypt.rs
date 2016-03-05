@@ -405,19 +405,17 @@ STRUCT!{struct PROV_ENUMALGS {
     dwNameLen: ::DWORD,
     szName: [::CHAR; 20],
 }}
-#[repr(C)] #[derive(Copy)]
-pub struct PROV_ENUMALGS_EX {
-    pub aiAlgid: ALG_ID,
-    pub dwDefaultLen: ::DWORD,
-    pub dwMinLen: ::DWORD,
-    pub dwMaxLen: ::DWORD,
-    pub dwProtocols: ::DWORD,
-    pub dwNameLen: ::DWORD,
-    pub szName: [::CHAR; 20],
-    pub dwLongNameLen: ::DWORD,
-    pub szLongName: [::CHAR; 40],
-}
-impl Clone for PROV_ENUMALGS_EX { fn clone(&self) -> PROV_ENUMALGS_EX { *self } }
+STRUCT!{nodebug struct PROV_ENUMALGS_EX {
+    aiAlgid: ALG_ID,
+    dwDefaultLen: ::DWORD,
+    dwMinLen: ::DWORD,
+    dwMaxLen: ::DWORD,
+    dwProtocols: ::DWORD,
+    dwNameLen: ::DWORD,
+    szName: [::CHAR; 20],
+    dwLongNameLen: ::DWORD,
+    szLongName: [::CHAR; 40],
+}}
 STRUCT!{struct BLOBHEADER {
     bType: ::BYTE,
     bVersion: ::BYTE,
@@ -464,21 +462,17 @@ STRUCT!{struct KEY_TYPE_SUBTYPE {
     Subtype: ::GUID,
 }}
 pub type PKEY_TYPE_SUBTYPE = *mut KEY_TYPE_SUBTYPE;
-#[repr(C)] #[derive(Copy)]
-pub struct CERT_FORTEZZA_DATA_PROP {
-    pub SerialNumber: [::c_uchar; 8],
-    pub CertIndex: ::c_int,
-    pub CertLabel: [::c_uchar; 36],
-}
-impl Clone for CERT_FORTEZZA_DATA_PROP { fn clone(&self) -> CERT_FORTEZZA_DATA_PROP { *self } }
-#[repr(C)] #[derive(Copy)]
-pub struct CRYPT_RC4_KEY_STATE {
-    pub Key: [::c_uchar; 16],
-    pub SBox: [::c_uchar; 256],
-    pub i: ::c_uchar,
-    pub j: ::c_uchar,
-}
-impl Clone for CRYPT_RC4_KEY_STATE { fn clone(&self) -> CRYPT_RC4_KEY_STATE { *self } }
+STRUCT!{nodebug struct CERT_FORTEZZA_DATA_PROP {
+    SerialNumber: [::c_uchar; 8],
+    CertIndex: ::c_int,
+    CertLabel: [::c_uchar; 36],
+}}
+STRUCT!{nodebug struct CRYPT_RC4_KEY_STATE {
+    Key: [::c_uchar; 16],
+    SBox: [::c_uchar; 256],
+    i: ::c_uchar,
+    j: ::c_uchar,
+}}
 pub type PCRYPT_RC4_KEY_STATE = *mut CRYPT_RC4_KEY_STATE;
 STRUCT!{struct CRYPT_DES_KEY_STATE {
     Key: [::c_uchar; 8],
@@ -882,27 +876,23 @@ pub type PCRYPT_RESOLVE_HCRYPTPROV_FUNC = Option<unsafe extern "system" fn(
     pPrivateKeyInfo: *mut CRYPT_PRIVATE_KEY_INFO, phCryptProv: *mut HCRYPTPROV,
     pVoidResolveFunc: ::LPVOID,
 ) -> ::BOOL>;
-#[repr(C)] #[derive(Copy)]
-pub struct CRYPT_PKCS8_IMPORT_PARAMS {
-    pub PrivateKey: CRYPT_DIGEST_BLOB,
-    pub pResolvehCryptProvFunc: PCRYPT_RESOLVE_HCRYPTPROV_FUNC,
-    pub pVoidResolveFunc: ::LPVOID,
-    pub pDecryptPrivateKeyFunc: PCRYPT_DECRYPT_PRIVATE_KEY_FUNC,
-    pub pVoidDecryptFunc: ::LPVOID,
-}
-impl Clone for CRYPT_PKCS8_IMPORT_PARAMS { fn clone(&self) -> CRYPT_PKCS8_IMPORT_PARAMS { *self } }
+STRUCT!{nodebug struct CRYPT_PKCS8_IMPORT_PARAMS {
+    PrivateKey: CRYPT_DIGEST_BLOB,
+    pResolvehCryptProvFunc: PCRYPT_RESOLVE_HCRYPTPROV_FUNC,
+    pVoidResolveFunc: ::LPVOID,
+    pDecryptPrivateKeyFunc: PCRYPT_DECRYPT_PRIVATE_KEY_FUNC,
+    pVoidDecryptFunc: ::LPVOID,
+}}
 pub type PCRYPT_PKCS8_IMPORT_PARAMS = *mut CRYPT_PKCS8_IMPORT_PARAMS;
 pub type CRYPT_PRIVATE_KEY_BLOB_AND_PARAMS = CRYPT_PKCS8_IMPORT_PARAMS;
 pub type PPCRYPT_PRIVATE_KEY_BLOB_AND_PARAMS = *mut CRYPT_PKCS8_IMPORT_PARAMS;
-#[repr(C)] #[derive(Copy)]
-pub struct CRYPT_PKCS8_EXPORT_PARAMS {
-    pub hCryptProv: HCRYPTPROV,
-    pub dwKeySpec: ::DWORD,
-    pub pszPrivateKeyObjId: ::LPSTR,
-    pub pEncryptPrivateKeyFunc: PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC,
-    pub pVoidEncryptFunc: ::LPVOID,
-}
-impl Clone for CRYPT_PKCS8_EXPORT_PARAMS { fn clone(&self) -> CRYPT_PKCS8_EXPORT_PARAMS { *self } }
+STRUCT!{nodebug struct CRYPT_PKCS8_EXPORT_PARAMS {
+    hCryptProv: HCRYPTPROV,
+    dwKeySpec: ::DWORD,
+    pszPrivateKeyObjId: ::LPSTR,
+    pEncryptPrivateKeyFunc: PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC,
+    pVoidEncryptFunc: ::LPVOID,
+}}
 pub type PCRYPT_PKCS8_EXPORT_PARAMS = *mut CRYPT_PKCS8_EXPORT_PARAMS;
 STRUCT!{struct CERT_INFO {
     dwVersion: ::DWORD,
@@ -1060,13 +1050,11 @@ pub const CRYPT_FORMAT_SEMICOLON: ::DWORD = CRYPT_FORMAT_RDN_SEMICOLON;
 pub const CRYPT_FORMAT_CRLF: ::DWORD = CRYPT_FORMAT_RDN_CRLF;
 pub type PFN_CRYPT_ALLOC = Option<unsafe extern "system" fn(cbSize: ::size_t)>;
 pub type PFN_CRYPT_FREE = Option<unsafe extern "system" fn(pv: ::LPVOID)>;
-#[repr(C)] #[derive(Copy)]
-pub struct CRYPT_ENCODE_PARA {
-    pub cbSize: ::DWORD,
-    pub pfnAlloc: PFN_CRYPT_ALLOC,
-    pub pfnFree: PFN_CRYPT_FREE,
-}
-impl Clone for CRYPT_ENCODE_PARA { fn clone(&self) -> CRYPT_ENCODE_PARA { *self } }
+STRUCT!{nodebug struct CRYPT_ENCODE_PARA {
+    cbSize: ::DWORD,
+    pfnAlloc: PFN_CRYPT_ALLOC,
+    pfnFree: PFN_CRYPT_FREE,
+}}
 pub type PCRYPT_ENCODE_PARA = *mut CRYPT_ENCODE_PARA;
 pub const CRYPT_ENCODE_NO_SIGNATURE_BYTE_REVERSAL_FLAG: ::DWORD = 0x8;
 pub const CRYPT_ENCODE_ALLOC_FLAG: ::DWORD = 0x8000;
@@ -1083,13 +1071,11 @@ pub const CRYPT_ENCODE_ENABLE_PUNYCODE_FLAG: ::DWORD = 0x20000;
 pub const CRYPT_ENCODE_ENABLE_UTF8PERCENT_FLAG: ::DWORD = 0x40000;
 pub const CRYPT_ENCODE_ENABLE_IA5CONVERSION_FLAG: ::DWORD = CRYPT_ENCODE_ENABLE_PUNYCODE_FLAG
     | CRYPT_ENCODE_ENABLE_UTF8PERCENT_FLAG;
-#[repr(C)] #[derive(Copy)]
-pub struct CRYPT_DECODE_PARA {
-    pub cbSize: ::DWORD,
-    pub pfnAlloc: PFN_CRYPT_ALLOC,
-    pub pfnFree: PFN_CRYPT_FREE,
-}
-impl Clone for CRYPT_DECODE_PARA { fn clone(&self) -> CRYPT_DECODE_PARA { *self } }
+STRUCT!{nodebug struct CRYPT_DECODE_PARA {
+    cbSize: ::DWORD,
+    pfnAlloc: PFN_CRYPT_ALLOC,
+    pfnFree: PFN_CRYPT_FREE,
+}}
 pub type PCRYPT_DECODE_PARA = *mut CRYPT_DECODE_PARA;
 pub const CRYPT_DECODE_NOCOPY_FLAG: ::DWORD = 0x1;
 pub const CRYPT_DECODE_TO_BE_SIGNED_FLAG: ::DWORD = 0x2;
@@ -1780,15 +1766,13 @@ pub type HCERTCHAINENGINE = ::HANDLE;
 pub type PFN_CERT_CREATE_CONTEXT_SORT_FUNC = Option<unsafe extern "system" fn(
     cbTotalEncoded: ::DWORD, cbRemainEncoded: ::DWORD, cEntry: ::DWORD, pvSort: *mut ::c_void
 ) -> ::BOOL>;
-#[repr(C)] #[derive(Copy)]
-pub struct CERT_CREATE_CONTEXT_PARA {
-    pub cbSize: ::DWORD,
-    pub pfnFree: PFN_CRYPT_FREE,
-    pub pvFree: *mut ::c_void,
-    pub pfnSort: PFN_CERT_CREATE_CONTEXT_SORT_FUNC,
-    pub pvSort: *mut ::c_void,
-}
-impl Clone for CERT_CREATE_CONTEXT_PARA { fn clone(&self) -> CERT_CREATE_CONTEXT_PARA { *self } }
+STRUCT!{nodebug struct CERT_CREATE_CONTEXT_PARA {
+    cbSize: ::DWORD,
+    pfnFree: PFN_CRYPT_FREE,
+    pvFree: *mut ::c_void,
+    pfnSort: PFN_CERT_CREATE_CONTEXT_SORT_FUNC,
+    pvSort: *mut ::c_void,
+}}
 pub type PCERT_CREATE_CONTEXT_PARA = *mut CERT_CREATE_CONTEXT_PARA;
 STRUCT!{struct CERT_EXTENSIONS {
     cExtension: ::DWORD,
@@ -2032,16 +2016,14 @@ pub type PFN_CRYPT_GET_SIGNER_CERTIFICATE = Option<unsafe extern "system" fn(
     pvGetArg: *mut ::c_void, dwCertEncodingType: ::DWORD, pSignerId: PCERT_INFO,
     hMsgCertStore: HCERTSTORE,
 ) -> PCCERT_CONTEXT>;
-#[repr(C)] #[derive(Copy)]
-pub struct CRYPT_VERIFY_MESSAGE_PARA {
-    pub cbSize: ::DWORD,
-    pub dwMsgAndCertEncodingType: ::DWORD,
-    pub hCryptProv: HCRYPTPROV_LEGACY,
-    pub pfnGetSignerCertificate: PFN_CRYPT_GET_SIGNER_CERTIFICATE,
-    pub pvGetArg: *mut ::c_void,
-    pub pStrongSignPara: PCCERT_STRONG_SIGN_PARA,
-}
-impl Clone for CRYPT_VERIFY_MESSAGE_PARA { fn clone(&self) -> CRYPT_VERIFY_MESSAGE_PARA { *self } }
+STRUCT!{nodebug struct CRYPT_VERIFY_MESSAGE_PARA {
+    cbSize: ::DWORD,
+    dwMsgAndCertEncodingType: ::DWORD,
+    hCryptProv: HCRYPTPROV_LEGACY,
+    pfnGetSignerCertificate: PFN_CRYPT_GET_SIGNER_CERTIFICATE,
+    pvGetArg: *mut ::c_void,
+    pStrongSignPara: PCCERT_STRONG_SIGN_PARA,
+}}
 pub type PCRYPT_VERIFY_MESSAGE_PARA = *mut CRYPT_VERIFY_MESSAGE_PARA;
 STRUCT!{struct CRYPT_OID_INFO {
     cbSize: ::DWORD,
@@ -2122,13 +2104,11 @@ pub type PCMSG_SIGNED_ENCODE_INFO = *mut CMSG_SIGNED_ENCODE_INFO;
 pub type PFN_CMSG_STREAM_OUTPUT = Option<unsafe extern "system" fn(
     pvArg: *const ::c_void, pbData: *mut ::BYTE, cbData: ::DWORD, fFinal: ::BOOL,
 ) -> ::BOOL>;
-#[repr(C)] #[derive(Copy)]
-pub struct CMSG_STREAM_INFO {
-    pub cbContent: ::DWORD,
-    pub pfnStreamOutput: PFN_CMSG_STREAM_OUTPUT,
-    pub pvArg: *mut ::c_void,
-}
-impl Clone for CMSG_STREAM_INFO { fn clone(&self) -> CMSG_STREAM_INFO { *self } }
+STRUCT!{nodebug struct CMSG_STREAM_INFO {
+    cbContent: ::DWORD,
+    pfnStreamOutput: PFN_CMSG_STREAM_OUTPUT,
+    pvArg: *mut ::c_void,
+}}
 pub type PCMSG_STREAM_INFO = *mut CMSG_STREAM_INFO;
 STRUCT!{struct CRYPT_TIMESTAMP_ACCURACY {
     dwSeconds: ::DWORD,

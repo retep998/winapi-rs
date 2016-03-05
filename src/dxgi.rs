@@ -12,36 +12,24 @@ STRUCT!{struct DXGI_MAPPED_RECT {
     Pitch: ::INT,
     pBits: *mut ::BYTE,
 }}
-#[repr(C)] #[derive(Copy)]
-pub struct DXGI_ADAPTER_DESC {
-    pub Description: [::WCHAR; 128],
-    pub VectorId: ::UINT,
-    pub DeviceId: ::UINT,
-    pub SubSysId: ::UINT,
-    pub Revision: ::UINT,
-    pub DedicatedVideoMemory: ::SIZE_T,
-    pub DedicatedSystemMemory: ::SIZE_T,
-    pub SharedSystemMemory: ::SIZE_T,
-    pub AdapterLuid: ::LUID,
-}
-impl Clone for DXGI_ADAPTER_DESC {
-    fn clone(&self) -> DXGI_ADAPTER_DESC {
-        *self
-    }
-}
-#[repr(C)] #[derive(Copy)]
-pub struct DXGI_OUTPUT_DESC {
-    pub DeviceName: [::WCHAR; 32],
-    pub DesktopCoordinates: ::RECT,
-    pub AttachedToDesktop: ::BOOL,
-    pub Rotation: ::DXGI_MODE_ROTATION,
-    pub Monitor: ::HMONITOR,
-}
-impl Clone for DXGI_OUTPUT_DESC {
-    fn clone(&self) -> DXGI_OUTPUT_DESC {
-        *self
-    }
-}
+STRUCT!{nodebug struct DXGI_ADAPTER_DESC {
+    Description: [::WCHAR; 128],
+    VectorId: ::UINT,
+    DeviceId: ::UINT,
+    SubSysId: ::UINT,
+    Revision: ::UINT,
+    DedicatedVideoMemory: ::SIZE_T,
+    DedicatedSystemMemory: ::SIZE_T,
+    SharedSystemMemory: ::SIZE_T,
+    AdapterLuid: ::LUID,
+}}
+STRUCT!{nodebug struct DXGI_OUTPUT_DESC {
+    DeviceName: [::WCHAR; 32],
+    DesktopCoordinates: ::RECT,
+    AttachedToDesktop: ::BOOL,
+    Rotation: ::DXGI_MODE_ROTATION,
+    Monitor: ::HMONITOR,
+}}
 STRUCT!{struct DXGI_SHARED_RESOURCE {
     Handle: ::HANDLE,
 }}
@@ -220,24 +208,18 @@ ENUM!{enum DXGI_ADAPTER_FLAG {
     DXGI_ADAPTER_FLAG_REMOTE,
     DXGI_ADAPTER_FLAG_SOFTWARE,
 }}
-#[repr(C)] #[derive(Copy)]
-pub struct DXGI_ADAPTER_DESC1 {
-    pub Description: [::WCHAR; 128],
-    pub VendorId: ::UINT,
-    pub DeviceId: ::UINT,
-    pub SubSysId: ::UINT,
-    pub Revision: ::UINT,
-    pub DedicatedVideoMemory: ::SIZE_T,
-    pub DedicatedSystemMemory: ::SIZE_T,
-    pub SharedSystemMemory: ::SIZE_T,
-    pub AdapterLuid: ::LUID,
-    pub Flags: ::UINT,
-}
-impl Clone for DXGI_ADAPTER_DESC1 {
-    fn clone(&self) -> DXGI_ADAPTER_DESC1 {
-        *self
-    }
-}
+STRUCT!{nodebug struct DXGI_ADAPTER_DESC1 {
+    Description: [::WCHAR; 128],
+    VendorId: ::UINT,
+    DeviceId: ::UINT,
+    SubSysId: ::UINT,
+    Revision: ::UINT,
+    DedicatedVideoMemory: ::SIZE_T,
+    DedicatedSystemMemory: ::SIZE_T,
+    SharedSystemMemory: ::SIZE_T,
+    AdapterLuid: ::LUID,
+    Flags: ::UINT,
+}}
 STRUCT!{struct DXGI_DISPLAY_COLOR_SPACE {
     PrimaryCoordinates: [[::FLOAT; 2]; 8],
     WhitePoints: [[::FLOAT; 2]; 16],

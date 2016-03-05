@@ -134,28 +134,24 @@ STRUCT!{struct DEVMODEW {
 pub type PDEVMODEW = *mut DEVMODEW;
 pub type NPDEVMODEW = *mut DEVMODEW;
 pub type LPDEVMODEW = *mut DEVMODEW;
-#[repr(C)] #[derive(Copy)]
-pub struct DISPLAY_DEVICEW {
-    pub cb: ::DWORD,
-    pub DeviceName: [::WCHAR; 32],
-    pub DeviceString: [::WCHAR; 128],
-    pub StateFlags: ::DWORD,
-    pub DeviceID: [::WCHAR; 128],
-    pub DeviceKey: [::WCHAR; 128],
-}
-impl Clone for DISPLAY_DEVICEW { fn clone(&self) -> DISPLAY_DEVICEW { *self } }
+STRUCT!{nodebug struct DISPLAY_DEVICEW {
+    cb: ::DWORD,
+    DeviceName: [::WCHAR; 32],
+    DeviceString: [::WCHAR; 128],
+    StateFlags: ::DWORD,
+    DeviceID: [::WCHAR; 128],
+    DeviceKey: [::WCHAR; 128],
+}}
 pub type PDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
 pub type LPDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
-#[repr(C)] #[derive(Copy)]
-pub struct DISPLAY_DEVICEA {
-    pub cb: ::DWORD,
-    pub DeviceName: [::CHAR; 32],
-    pub DeviceString: [::CHAR; 128],
-    pub StateFlags: ::DWORD,
-    pub DeviceID: [::CHAR; 128],
-    pub DeviceKey: [::CHAR; 128],
-}
-impl Clone for DISPLAY_DEVICEA { fn clone(&self) -> DISPLAY_DEVICEA { *self } }
+STRUCT!{nodebug struct DISPLAY_DEVICEA {
+    cb: ::DWORD,
+    DeviceName: [::CHAR; 32],
+    DeviceString: [::CHAR; 128],
+    StateFlags: ::DWORD,
+    DeviceID: [::CHAR; 128],
+    DeviceKey: [::CHAR; 128],
+}}
 pub type PDISPLAY_DEVICEA = *mut DISPLAY_DEVICEA;
 pub type LPDISPLAY_DEVICEA = *mut DISPLAY_DEVICEA;
 STRUCT!{struct PIXELFORMATDESCRIPTOR {
@@ -340,50 +336,47 @@ pub const BI_RLE4: ::DWORD = 2;
 pub const BI_BITFIELDS: ::DWORD = 3;
 pub const BI_JPEG: ::DWORD = 4;
 pub const BI_PNG: ::DWORD = 5;
-#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
-pub struct BITMAPINFO {
-    pub bmiHeader: BITMAPINFOHEADER,
-    pub bmiColors: [RGBQUAD; 0],
-}
+STRUCT!{struct BITMAPINFO {
+    bmiHeader: BITMAPINFOHEADER,
+    bmiColors: [RGBQUAD; 0],
+}}
 pub type LPBITMAPINFO = *mut BITMAPINFO;
 pub type PBITMAPINFO = *mut BITMAPINFO;
 //1438
 pub const LF_FACESIZE: usize = 32;
-#[repr(C)] #[derive(Copy, Clone)]
-pub struct LOGFONTA {
-    pub lfHeight: ::LONG,
-    pub lfWidth: ::LONG,
-    pub lfEscapement: ::LONG,
-    pub lfOrientation: ::LONG,
-    pub lfWeight: ::LONG,
-    pub lfItalic: ::BYTE,
-    pub lfUnderline: ::BYTE,
-    pub lfStrikeOut: ::BYTE,
-    pub lfCharSet: ::BYTE,
-    pub lfOutPrecision: ::BYTE,
-    pub lfClipPrecision: ::BYTE,
-    pub lfQuality: ::BYTE,
-    pub lfPitchAndFamily: ::BYTE,
-    pub lfFaceName: [::CHAR; LF_FACESIZE],
-}
+STRUCT!{nodebug struct LOGFONTA {
+    lfHeight: ::LONG,
+    lfWidth: ::LONG,
+    lfEscapement: ::LONG,
+    lfOrientation: ::LONG,
+    lfWeight: ::LONG,
+    lfItalic: ::BYTE,
+    lfUnderline: ::BYTE,
+    lfStrikeOut: ::BYTE,
+    lfCharSet: ::BYTE,
+    lfOutPrecision: ::BYTE,
+    lfClipPrecision: ::BYTE,
+    lfQuality: ::BYTE,
+    lfPitchAndFamily: ::BYTE,
+    lfFaceName: [::CHAR; LF_FACESIZE],
+}}
 pub type LPLOGFONTA = *mut LOGFONTA;
-#[repr(C)] #[derive(Copy, Clone)]
-pub struct LOGFONTW {
-    pub lfHeight: ::LONG,
-    pub lfWidth: ::LONG,
-    pub lfEscapement: ::LONG,
-    pub lfOrientation: ::LONG,
-    pub lfWeight: ::LONG,
-    pub lfItalic: ::BYTE,
-    pub lfUnderline: ::BYTE,
-    pub lfStrikeOut: ::BYTE,
-    pub lfCharSet: ::BYTE,
-    pub lfOutPrecision: ::BYTE,
-    pub lfClipPrecision: ::BYTE,
-    pub lfQuality: ::BYTE,
-    pub lfPitchAndFamily: ::BYTE,
-    pub lfFaceName: [::WCHAR; LF_FACESIZE],
-}
+STRUCT!{nodebug struct LOGFONTW {
+    lfHeight: ::LONG,
+    lfWidth: ::LONG,
+    lfEscapement: ::LONG,
+    lfOrientation: ::LONG,
+    lfWeight: ::LONG,
+    lfItalic: ::BYTE,
+    lfUnderline: ::BYTE,
+    lfStrikeOut: ::BYTE,
+    lfCharSet: ::BYTE,
+    lfOutPrecision: ::BYTE,
+    lfClipPrecision: ::BYTE,
+    lfQuality: ::BYTE,
+    lfPitchAndFamily: ::BYTE,
+    lfFaceName: [::WCHAR; LF_FACESIZE],
+}}
 pub type LPLOGFONTW = *mut LOGFONTW;
 //1595
 #[inline]
@@ -443,11 +436,10 @@ STRUCT!{struct RGNDATAHEADER {
     rcBound: ::RECT,
 }}
 pub type PRGNDATAHEADER = *mut RGNDATAHEADER;
-#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
-pub struct RGNDATA {
-    pub rdh: RGNDATAHEADER,
-    pub Buffer: [::c_char; 0],
-}
+STRUCT!{nodebug struct RGNDATA {
+    rdh: RGNDATAHEADER,
+    Buffer: [::c_char; 0],
+}}
 pub type PRGNDATA = *mut RGNDATA;
 pub type NPRGNDATA = *mut RGNDATA;
 pub type LPRGNDATA = *mut RGNDATA;
@@ -494,54 +486,46 @@ STRUCT!{struct LOGBRUSH {
     lbHatch: ::ULONG_PTR,
 }}
 pub type PLOGBRUSH = *mut LOGBRUSH;
-#[repr(C)] #[derive(Copy)]
-pub struct LOGCOLORSPACEA {
-    pub lcsSignature: ::DWORD,
-    pub lcsVersion: ::DWORD,
-    pub lcsSize: ::DWORD,
-    pub lcsCSType: LCSCSTYPE,
-    pub lcsIntent: LCSGAMUTMATCH,
-    pub lcsEndpoints: CIEXYZTRIPLE,
-    pub lcsGammaRed: ::DWORD,
-    pub lcsGammaGreen: ::DWORD,
-    pub lcsGammaBlue: ::DWORD,
-    pub lcsFilename: [::CHAR; ::MAX_PATH],
-}
-impl Clone for LOGCOLORSPACEA { fn clone(&self) -> LOGCOLORSPACEA { *self } }
+STRUCT!{nodebug struct LOGCOLORSPACEA {
+    lcsSignature: ::DWORD,
+    lcsVersion: ::DWORD,
+    lcsSize: ::DWORD,
+    lcsCSType: LCSCSTYPE,
+    lcsIntent: LCSGAMUTMATCH,
+    lcsEndpoints: CIEXYZTRIPLE,
+    lcsGammaRed: ::DWORD,
+    lcsGammaGreen: ::DWORD,
+    lcsGammaBlue: ::DWORD,
+    lcsFilename: [::CHAR; ::MAX_PATH],
+}}
 pub type LPLOGCOLORSPACEA = *mut LOGCOLORSPACEA;
-#[repr(C)] #[derive(Copy)]
-pub struct LOGCOLORSPACEW {
-    pub lcsSignature: ::DWORD,
-    pub lcsVersion: ::DWORD,
-    pub lcsSize: ::DWORD,
-    pub lcsCSType: LCSCSTYPE,
-    pub lcsIntent: LCSGAMUTMATCH,
-    pub lcsEndpoints: CIEXYZTRIPLE,
-    pub lcsGammaRed: ::DWORD,
-    pub lcsGammaGreen: ::DWORD,
-    pub lcsGammaBlue: ::DWORD,
-    pub lcsFilename: [::WCHAR; ::MAX_PATH],
-}
-impl Clone for LOGCOLORSPACEW { fn clone(&self) -> LOGCOLORSPACEW { *self } }
+STRUCT!{nodebug struct LOGCOLORSPACEW {
+    lcsSignature: ::DWORD,
+    lcsVersion: ::DWORD,
+    lcsSize: ::DWORD,
+    lcsCSType: LCSCSTYPE,
+    lcsIntent: LCSGAMUTMATCH,
+    lcsEndpoints: CIEXYZTRIPLE,
+    lcsGammaRed: ::DWORD,
+    lcsGammaGreen: ::DWORD,
+    lcsGammaBlue: ::DWORD,
+    lcsFilename: [::WCHAR; ::MAX_PATH],
+}}
 pub type LPLOGCOLORSPACEW = *mut LOGCOLORSPACEW;
 pub const LF_FULLFACESIZE: usize = 64;
-#[repr(C)] #[derive(Copy)]
-pub struct ENUMLOGFONTEXA {
-    pub elfLogFont: LOGFONTA,
-    pub elfFullName: [::BYTE; LF_FULLFACESIZE],
-    pub elfStyle: [::BYTE; LF_FACESIZE],
-    pub elfScript: [::BYTE; LF_FACESIZE],
-}
-impl Clone for ENUMLOGFONTEXA { fn clone(&self) -> ENUMLOGFONTEXA { *self } }
+STRUCT!{nodebug struct ENUMLOGFONTEXA {
+    elfLogFont: LOGFONTA,
+    elfFullName: [::BYTE; LF_FULLFACESIZE],
+    elfStyle: [::BYTE; LF_FACESIZE],
+    elfScript: [::BYTE; LF_FACESIZE],
+}}
 pub type LPENUMLOGFONTEXA = *mut ENUMLOGFONTEXA;
-#[repr(C)] #[derive(Copy)]
-pub struct ENUMLOGFONTEXW {
-    pub elfLogFont: LOGFONTW,
-    pub elfFullName: [::WCHAR; LF_FULLFACESIZE],
-    pub elfStyle: [::WCHAR; LF_FACESIZE],
-    pub elfScript: [::WCHAR; LF_FACESIZE],
-}
-impl Clone for ENUMLOGFONTEXW { fn clone(&self) -> ENUMLOGFONTEXW { *self } }
+STRUCT!{nodebug struct ENUMLOGFONTEXW {
+    elfLogFont: LOGFONTW,
+    elfFullName: [::WCHAR; LF_FULLFACESIZE],
+    elfStyle: [::WCHAR; LF_FACESIZE],
+    elfScript: [::WCHAR; LF_FACESIZE],
+}}
 pub type LPENUMLOGFONTEXW = *mut ENUMLOGFONTEXW;
 pub const MM_MAX_NUMAXES: usize = 16;
 STRUCT!{struct DESIGNVECTOR {
@@ -551,18 +535,16 @@ STRUCT!{struct DESIGNVECTOR {
 }}
 pub type PDESIGNVECTOR = *mut DESIGNVECTOR;
 pub type LPDESIGNVECTOR = *mut DESIGNVECTOR;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct ENUMLOGFONTEXDVA {
-    pub elfEnumLogfontEx: ENUMLOGFONTEXA,
-    pub elfDesignVector: DESIGNVECTOR,
-}
+STRUCT!{nodebug struct ENUMLOGFONTEXDVA {
+    elfEnumLogfontEx: ENUMLOGFONTEXA,
+    elfDesignVector: DESIGNVECTOR,
+}}
 pub type PENUMLOGFONTEXDVA = *mut ENUMLOGFONTEXDVA;
 pub type LPENUMLOGFONTEXDVA = *mut ENUMLOGFONTEXDVA;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct ENUMLOGFONTEXDVW {
-    pub elfEnumLogfontEx: ENUMLOGFONTEXW,
-    pub elfDesignVector: DESIGNVECTOR,
-}
+STRUCT!{nodebug struct ENUMLOGFONTEXDVW {
+    elfEnumLogfontEx: ENUMLOGFONTEXW,
+    elfDesignVector: DESIGNVECTOR,
+}}
 pub type PENUMLOGFONTEXDVW = *mut ENUMLOGFONTEXDVW;
 pub type LPENUMLOGFONTEXDVW = *mut ENUMLOGFONTEXDVW;
 STRUCT!{struct LOGPALETTE {

@@ -13,12 +13,10 @@ pub type SOCKET = ::UINT_PTR;
 pub type GROUP = ::c_uint;
 pub const FD_SETSIZE: usize = 64;
 pub const FD_MAX_EVENTS: usize = 10;
-#[repr(C)] #[derive(Copy)]
-pub struct fd_set {
-    pub fd_count: u_int,
-    pub fd_array: [SOCKET; FD_SETSIZE],
-}
-impl Clone for fd_set { fn clone(&self) -> fd_set { *self } }
+STRUCT!{nodebug struct fd_set {
+    fd_count: u_int,
+    fd_array: [SOCKET; FD_SETSIZE],
+}}
 STRUCT!{struct timeval {
     tv_sec: ::c_long,
     tv_usec: ::c_long,
@@ -36,19 +34,20 @@ STRUCT!{struct netent {
     n_addrtype: ::c_short,
     n_net: u_long,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct servent {
-    pub s_name: *mut ::c_char,
-    pub s_aliases: *mut *mut ::c_char,
-    #[cfg(target_arch="x86")]
-    pub s_port: ::c_short,
-    #[cfg(target_arch="x86")]
-    pub s_proto: *mut ::c_char,
-    #[cfg(target_arch="x86_64")]
-    pub s_proto: *mut ::c_char,
-    #[cfg(target_arch="x86_64")]
-    pub s_port: ::c_short,
-}
+#[cfg(target_arch="x86")]
+STRUCT!{struct servent {
+    s_name: *mut ::c_char,
+    s_aliases: *mut *mut ::c_char,
+    s_port: ::c_short,
+    s_proto: *mut ::c_char,
+}}
+#[cfg(target_arch="x86_64")]
+STRUCT!{struct servent {
+    s_name: *mut ::c_char,
+    s_aliases: *mut *mut ::c_char,
+    s_proto: *mut ::c_char,
+    s_port: ::c_short,
+}}
 STRUCT!{struct protoent {
     p_name: *mut ::c_char,
     p_aliases: *mut *mut ::c_char,
@@ -56,23 +55,26 @@ STRUCT!{struct protoent {
 }}
 pub const WSADESCRIPTION_LEN: usize = 256;
 pub const WSASYS_STATUS_LEN: usize = 128;
-#[repr(C)] #[derive(Copy)]
-pub struct WSADATA {
-    pub wVersion: ::WORD,
-    pub wHighVersion: ::WORD,
-    #[cfg(target_arch="x86")]
-    pub szDescription: [::c_char; WSADESCRIPTION_LEN + 1],
-    #[cfg(target_arch="x86")]
-    pub szSystemStatus: [::c_char; WSASYS_STATUS_LEN + 1],
-    pub iMaxSockets: ::c_ushort,
-    pub iMaxUdpDg: ::c_ushort,
-    pub lpVendorInfo: *mut ::c_char,
-    #[cfg(target_arch="x86_64")]
-    pub szDescription: [::c_char; WSADESCRIPTION_LEN + 1],
-    #[cfg(target_arch="x86_64")]
-    pub szSystemStatus: [::c_char; WSASYS_STATUS_LEN + 1],
-}
-impl Clone for WSADATA { fn clone(&self) -> WSADATA { *self } }
+#[cfg(target_arch="x86")]
+STRUCT!{nodebug struct WSADATA {
+    wVersion: ::WORD,
+    wHighVersion: ::WORD,
+    szDescription: [::c_char; WSADESCRIPTION_LEN + 1],
+    szSystemStatus: [::c_char; WSASYS_STATUS_LEN + 1],
+    iMaxSockets: ::c_ushort,
+    iMaxUdpDg: ::c_ushort,
+    lpVendorInfo: *mut ::c_char,
+}}
+#[cfg(target_arch="x86_64")]
+STRUCT!{nodebug struct WSADATA {
+    wVersion: ::WORD,
+    wHighVersion: ::WORD,
+    iMaxSockets: ::c_ushort,
+    iMaxUdpDg: ::c_ushort,
+    lpVendorInfo: *mut ::c_char,
+    szDescription: [::c_char; WSADESCRIPTION_LEN + 1],
+    szSystemStatus: [::c_char; WSASYS_STATUS_LEN + 1],
+}}
 pub type LPWSADATA = *mut WSADATA;
 //391
 pub const INVALID_SOCKET: SOCKET = !0;
@@ -141,55 +143,51 @@ STRUCT!{struct WSAPROTOCOLCHAIN {
 }}
 pub type LPWSAPROTOCOLCHAIN = *mut WSAPROTOCOLCHAIN;
 pub const WSAPROTOCOL_LEN: usize = 255;
-#[repr(C)] #[derive(Copy)]
-pub struct WSAPROTOCOL_INFOA {
-    pub dwServiceFlags1: ::DWORD,
-    pub dwServiceFlags2: ::DWORD,
-    pub dwServiceFlags3: ::DWORD,
-    pub dwServiceFlags4: ::DWORD,
-    pub dwServiceFlags5: ::DWORD,
-    pub ProviderId: ::GUID,
-    pub dwCatalogEntryId: ::DWORD,
-    pub ProtocolChain: WSAPROTOCOLCHAIN,
-    pub iVersion: ::c_int,
-    pub iAddressFamily: ::c_int,
-    pub iMaxSockAddr: ::c_int,
-    pub iMinSockAddr: ::c_int,
-    pub iSocketType: ::c_int,
-    pub iProtocol: ::c_int,
-    pub iProtocolMaxOffset: ::c_int,
-    pub iNetworkByteOrder: ::c_int,
-    pub iSecurityScheme: ::c_int,
-    pub dwMessageSize: ::DWORD,
-    pub dwProviderReserved: ::DWORD,
-    pub szProtocol: [::CHAR; WSAPROTOCOL_LEN + 1],
-}
-impl Clone for WSAPROTOCOL_INFOA { fn clone(&self) -> WSAPROTOCOL_INFOA { *self } }
+STRUCT!{nodebug struct WSAPROTOCOL_INFOA {
+    dwServiceFlags1: ::DWORD,
+    dwServiceFlags2: ::DWORD,
+    dwServiceFlags3: ::DWORD,
+    dwServiceFlags4: ::DWORD,
+    dwServiceFlags5: ::DWORD,
+    ProviderId: ::GUID,
+    dwCatalogEntryId: ::DWORD,
+    ProtocolChain: WSAPROTOCOLCHAIN,
+    iVersion: ::c_int,
+    iAddressFamily: ::c_int,
+    iMaxSockAddr: ::c_int,
+    iMinSockAddr: ::c_int,
+    iSocketType: ::c_int,
+    iProtocol: ::c_int,
+    iProtocolMaxOffset: ::c_int,
+    iNetworkByteOrder: ::c_int,
+    iSecurityScheme: ::c_int,
+    dwMessageSize: ::DWORD,
+    dwProviderReserved: ::DWORD,
+    szProtocol: [::CHAR; WSAPROTOCOL_LEN + 1],
+}}
 pub type LPWSAPROTOCOL_INFOA = *mut WSAPROTOCOL_INFOA;
-#[repr(C)] #[derive(Copy)]
-pub struct WSAPROTOCOL_INFOW {
-    pub dwServiceFlags1: ::DWORD,
-    pub dwServiceFlags2: ::DWORD,
-    pub dwServiceFlags3: ::DWORD,
-    pub dwServiceFlags4: ::DWORD,
-    pub dwServiceFlags5: ::DWORD,
-    pub ProviderId: ::GUID,
-    pub dwCatalogEntryId: ::DWORD,
-    pub ProtocolChain: WSAPROTOCOLCHAIN,
-    pub iVersion: ::c_int,
-    pub iAddressFamily: ::c_int,
-    pub iMaxSockAddr: ::c_int,
-    pub iMinSockAddr: ::c_int,
-    pub iSocketType: ::c_int,
-    pub iProtocol: ::c_int,
-    pub iProtocolMaxOffset: ::c_int,
-    pub iNetworkByteOrder: ::c_int,
-    pub iSecurityScheme: ::c_int,
-    pub dwMessageSize: ::DWORD,
-    pub dwProviderReserved: ::DWORD,
-    pub szProtocol: [::WCHAR; WSAPROTOCOL_LEN + 1],
-}
-impl Clone for WSAPROTOCOL_INFOW { fn clone(&self) -> WSAPROTOCOL_INFOW { *self } }
+STRUCT!{nodebug struct WSAPROTOCOL_INFOW {
+    dwServiceFlags1: ::DWORD,
+    dwServiceFlags2: ::DWORD,
+    dwServiceFlags3: ::DWORD,
+    dwServiceFlags4: ::DWORD,
+    dwServiceFlags5: ::DWORD,
+    ProviderId: ::GUID,
+    dwCatalogEntryId: ::DWORD,
+    ProtocolChain: WSAPROTOCOLCHAIN,
+    iVersion: ::c_int,
+    iAddressFamily: ::c_int,
+    iMaxSockAddr: ::c_int,
+    iMinSockAddr: ::c_int,
+    iSocketType: ::c_int,
+    iProtocol: ::c_int,
+    iProtocolMaxOffset: ::c_int,
+    iNetworkByteOrder: ::c_int,
+    iSecurityScheme: ::c_int,
+    dwMessageSize: ::DWORD,
+    dwProviderReserved: ::DWORD,
+    szProtocol: [::WCHAR; WSAPROTOCOL_LEN + 1],
+}}
 pub type LPWSAPROTOCOL_INFOW = *mut WSAPROTOCOL_INFOW;
 pub type LPCONDITIONPROC = Option<unsafe extern "system" fn(
     lpCallerId: ::LPWSABUF, lpCallerData: ::LPWSABUF, lpSQOS: LPQOS, lpGQOS: LPQOS,
@@ -215,25 +213,25 @@ STRUCT!{struct WSACOMPLETION_WindowMessage {
 STRUCT!{struct WSACOMPLETION_Event {
     lpOverlapped: LPWSAOVERLAPPED,
 }}
-#[repr(C)] #[derive(Copy)]
-pub struct WSACOMPLETION_Apc {
-    pub lpOverlapped: LPWSAOVERLAPPED,
-    pub lpfnCompletionProc: LPWSAOVERLAPPED_COMPLETION_ROUTINE
-}
-impl Clone for WSACOMPLETION_Apc { fn clone(&self) -> WSACOMPLETION_Apc { *self } }
+STRUCT!{nodebug struct WSACOMPLETION_Apc {
+    lpOverlapped: LPWSAOVERLAPPED,
+    lpfnCompletionProc: LPWSAOVERLAPPED_COMPLETION_ROUTINE,
+}}
 STRUCT!{struct WSACOMPLETION_Port {
     lpOverlapped: LPWSAOVERLAPPED,
     hPort: ::HANDLE,
     Key: ::ULONG_PTR,
 }}
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WSACOMPLETION {
-    pub Type: WSACOMPLETIONTYPE,
-    #[cfg(target_arch="x86")]
-    pub Parameters: [u8; 12],
-    #[cfg(target_arch="x86_64")]
-    pub Parameters: [u8; 24],
-}
+#[cfg(target_arch="x86")]
+STRUCT!{struct WSACOMPLETION {
+    Type: WSACOMPLETIONTYPE,
+    Parameters: [u8; 12],
+}}
+#[cfg(target_arch="x86_64")]
+STRUCT!{struct WSACOMPLETION {
+    Type: WSACOMPLETIONTYPE,
+    Parameters: [u8; 24],
+}}
 UNION!(WSACOMPLETION, Parameters, WindowMessage, WindowMessage_mut, WSACOMPLETION_WindowMessage);
 UNION!(WSACOMPLETION, Parameters, Event, Event_mut, WSACOMPLETION_Event);
 UNION!(WSACOMPLETION, Parameters, Apc, Apc_mut, WSACOMPLETION_Apc);

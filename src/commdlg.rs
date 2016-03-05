@@ -4,111 +4,103 @@
 pub type LPOFNHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-#[repr(C)] #[derive(Copy)]
-pub struct OPENFILENAME_NT4A {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hInstance: ::HINSTANCE,
-    pub lpstrFilter: ::LPCSTR,
-    pub lpstrCustomFilter: ::LPSTR,
-    pub nMaxCustFilter: ::DWORD,
-    pub nFilterIndex: ::DWORD,
-    pub lpstrFile: ::LPSTR,
-    pub nMaxFile: ::DWORD,
-    pub lpstrFileTitle: ::LPSTR,
-    pub nMaxFileTitle: ::DWORD,
-    pub lpstrInitialDir: ::LPCSTR,
-    pub lpstrTitle: ::LPCSTR,
-    pub Flags: ::DWORD,
-    pub nFileOffset: ::WORD,
-    pub nFileExtension: ::WORD,
-    pub lpstrDefExt: ::LPCSTR,
-    pub lCustData: ::LPARAM,
-    pub lpfnHook: LPOFNHOOKPROC,
-    pub lpTemplateName: ::LPCSTR,
-}
-impl Clone for OPENFILENAME_NT4A { fn clone(&self) -> OPENFILENAME_NT4A { *self } }
+STRUCT!{nodebug struct OPENFILENAME_NT4A {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hInstance: ::HINSTANCE,
+    lpstrFilter: ::LPCSTR,
+    lpstrCustomFilter: ::LPSTR,
+    nMaxCustFilter: ::DWORD,
+    nFilterIndex: ::DWORD,
+    lpstrFile: ::LPSTR,
+    nMaxFile: ::DWORD,
+    lpstrFileTitle: ::LPSTR,
+    nMaxFileTitle: ::DWORD,
+    lpstrInitialDir: ::LPCSTR,
+    lpstrTitle: ::LPCSTR,
+    Flags: ::DWORD,
+    nFileOffset: ::WORD,
+    nFileExtension: ::WORD,
+    lpstrDefExt: ::LPCSTR,
+    lCustData: ::LPARAM,
+    lpfnHook: LPOFNHOOKPROC,
+    lpTemplateName: ::LPCSTR,
+}}
 pub type LPOPENFILENAME_NT4A = *mut OPENFILENAME_NT4A;
-#[repr(C)] #[derive(Copy)]
-pub struct OPENFILENAME_NT4W {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hInstance: ::HINSTANCE,
-    pub lpstrFilter: ::LPCWSTR,
-    pub lpstrCustomFilter: ::LPWSTR,
-    pub nMaxCustFilter: ::DWORD,
-    pub nFilterIndex: ::DWORD,
-    pub lpstrFile: ::LPWSTR,
-    pub nMaxFile: ::DWORD,
-    pub lpstrFileTitle: ::LPWSTR,
-    pub nMaxFileTitle: ::DWORD,
-    pub lpstrInitialDir: ::LPCWSTR,
-    pub lpstrTitle: ::LPCWSTR,
-    pub Flags: ::DWORD,
-    pub nFileOffset: ::WORD,
-    pub nFileExtension: ::WORD,
-    pub lpstrDefExt: ::LPCWSTR,
-    pub lCustData: ::LPARAM,
-    pub lpfnHook: LPOFNHOOKPROC,
-    pub lpTemplateName: ::LPCWSTR,
-}
-impl Clone for OPENFILENAME_NT4W { fn clone(&self) -> OPENFILENAME_NT4W { *self } }
+STRUCT!{nodebug struct OPENFILENAME_NT4W {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hInstance: ::HINSTANCE,
+    lpstrFilter: ::LPCWSTR,
+    lpstrCustomFilter: ::LPWSTR,
+    nMaxCustFilter: ::DWORD,
+    nFilterIndex: ::DWORD,
+    lpstrFile: ::LPWSTR,
+    nMaxFile: ::DWORD,
+    lpstrFileTitle: ::LPWSTR,
+    nMaxFileTitle: ::DWORD,
+    lpstrInitialDir: ::LPCWSTR,
+    lpstrTitle: ::LPCWSTR,
+    Flags: ::DWORD,
+    nFileOffset: ::WORD,
+    nFileExtension: ::WORD,
+    lpstrDefExt: ::LPCWSTR,
+    lCustData: ::LPARAM,
+    lpfnHook: LPOFNHOOKPROC,
+    lpTemplateName: ::LPCWSTR,
+}}
 pub type LPOPENFILENAME_NT4W = *mut OPENFILENAME_NT4W;
-#[repr(C)] #[derive(Copy)]
-pub struct OPENFILENAMEA {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hInstance: ::HINSTANCE,
-    pub lpstrFilter: ::LPCSTR,
-    pub lpstrCustomFilter: ::LPSTR,
-    pub nMaxCustFilter: ::DWORD,
-    pub nFilterIndex: ::DWORD,
-    pub lpstrFile: ::LPSTR,
-    pub nMaxFile: ::DWORD,
-    pub lpstrFileTitle: ::LPSTR,
-    pub nMaxFileTitle: ::DWORD,
-    pub lpstrInitialDir: ::LPCSTR,
-    pub lpstrTitle: ::LPCSTR,
-    pub Flags: ::DWORD,
-    pub nFileOffset: ::WORD,
-    pub nFileExtension: ::WORD,
-    pub lpstrDefExt: ::LPCSTR,
-    pub lCustData: ::LPARAM,
-    pub lpfnHook: LPOFNHOOKPROC,
-    pub lpTemplateName: ::LPCSTR,
-    pub pvReserved: *mut ::c_void,
-    pub dwReserved: ::DWORD,
-    pub FlagsEx: ::DWORD,
-}
-impl Clone for OPENFILENAMEA { fn clone(&self) -> OPENFILENAMEA { *self } }
+STRUCT!{nodebug struct OPENFILENAMEA {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hInstance: ::HINSTANCE,
+    lpstrFilter: ::LPCSTR,
+    lpstrCustomFilter: ::LPSTR,
+    nMaxCustFilter: ::DWORD,
+    nFilterIndex: ::DWORD,
+    lpstrFile: ::LPSTR,
+    nMaxFile: ::DWORD,
+    lpstrFileTitle: ::LPSTR,
+    nMaxFileTitle: ::DWORD,
+    lpstrInitialDir: ::LPCSTR,
+    lpstrTitle: ::LPCSTR,
+    Flags: ::DWORD,
+    nFileOffset: ::WORD,
+    nFileExtension: ::WORD,
+    lpstrDefExt: ::LPCSTR,
+    lCustData: ::LPARAM,
+    lpfnHook: LPOFNHOOKPROC,
+    lpTemplateName: ::LPCSTR,
+    pvReserved: *mut ::c_void,
+    dwReserved: ::DWORD,
+    FlagsEx: ::DWORD,
+}}
 pub type LPOPENFILENAMEA = *mut OPENFILENAMEA;
-#[repr(C)] #[derive(Copy)]
-pub struct OPENFILENAMEW {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hInstance: ::HINSTANCE,
-    pub lpstrFilter: ::LPCWSTR,
-    pub lpstrCustomFilter: ::LPWSTR,
-    pub nMaxCustFilter: ::DWORD,
-    pub nFilterIndex: ::DWORD,
-    pub lpstrFile: ::LPWSTR,
-    pub nMaxFile: ::DWORD,
-    pub lpstrFileTitle: ::LPWSTR,
-    pub nMaxFileTitle: ::DWORD,
-    pub lpstrInitialDir: ::LPCWSTR,
-    pub lpstrTitle: ::LPCWSTR,
-    pub Flags: ::DWORD,
-    pub nFileOffset: ::WORD,
-    pub nFileExtension: ::WORD,
-    pub lpstrDefExt: ::LPCWSTR,
-    pub lCustData: ::LPARAM,
-    pub lpfnHook: LPOFNHOOKPROC,
-    pub lpTemplateName: ::LPCWSTR,
-    pub pvReserved: *mut ::c_void,
-    pub dwReserved: ::DWORD,
-    pub FlagsEx: ::DWORD,
-}
-impl Clone for OPENFILENAMEW { fn clone(&self) -> OPENFILENAMEW { *self } }
+STRUCT!{nodebug struct OPENFILENAMEW {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hInstance: ::HINSTANCE,
+    lpstrFilter: ::LPCWSTR,
+    lpstrCustomFilter: ::LPWSTR,
+    nMaxCustFilter: ::DWORD,
+    nFilterIndex: ::DWORD,
+    lpstrFile: ::LPWSTR,
+    nMaxFile: ::DWORD,
+    lpstrFileTitle: ::LPWSTR,
+    nMaxFileTitle: ::DWORD,
+    lpstrInitialDir: ::LPCWSTR,
+    lpstrTitle: ::LPCWSTR,
+    Flags: ::DWORD,
+    nFileOffset: ::WORD,
+    nFileExtension: ::WORD,
+    lpstrDefExt: ::LPCWSTR,
+    lCustData: ::LPARAM,
+    lpfnHook: LPOFNHOOKPROC,
+    lpTemplateName: ::LPCWSTR,
+    pvReserved: *mut ::c_void,
+    dwReserved: ::DWORD,
+    FlagsEx: ::DWORD,
+}}
 pub type LPOPENFILENAMEW = *mut OPENFILENAMEW;
 pub const OFN_READONLY: ::DWORD = 0x00000001;
 pub const OFN_OVERWRITEPROMPT: ::DWORD = 0x00000002;
@@ -188,33 +180,29 @@ pub const CDM_GETFOLDERIDLIST: ::UINT = CDM_FIRST + 0x0003;
 pub const CDM_SETCONTROLTEXT: ::UINT = CDM_FIRST + 0x0004;
 pub const CDM_HIDECONTROL: ::UINT = CDM_FIRST + 0x0005;
 pub const CDM_SETDEFEXT: ::UINT = CDM_FIRST + 0x0006;
-#[repr(C)] #[derive(Copy)]
-pub struct CHOOSECOLORA {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hInstance: ::HWND,
-    pub rgbResult: ::COLORREF,
-    pub lpCustColors: *mut ::COLORREF,
-    pub Flags: ::DWORD,
-    pub lCustData: ::LPARAM,
-    pub lpfnHook: LPCCHOOKPROC,
-    pub lpTemplateName: ::LPCSTR,
-}
-impl Clone for CHOOSECOLORA { fn clone(&self) -> CHOOSECOLORA { *self } }
+STRUCT!{nodebug struct CHOOSECOLORA {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hInstance: ::HWND,
+    rgbResult: ::COLORREF,
+    lpCustColors: *mut ::COLORREF,
+    Flags: ::DWORD,
+    lCustData: ::LPARAM,
+    lpfnHook: LPCCHOOKPROC,
+    lpTemplateName: ::LPCSTR,
+}}
 pub type LPCHOOSECOLORA = *mut CHOOSECOLORA;
-#[repr(C)] #[derive(Copy)]
-pub struct CHOOSECOLORW {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hInstance: ::HWND,
-    pub rgbResult: ::COLORREF,
-    pub lpCustColors: *mut ::COLORREF,
-    pub Flags: ::DWORD,
-    pub lCustData: ::LPARAM,
-    pub lpfnHook: LPCCHOOKPROC,
-    pub lpTemplateName: ::LPCWSTR,
-}
-impl Clone for CHOOSECOLORW { fn clone(&self) -> CHOOSECOLORW { *self } }
+STRUCT!{nodebug struct CHOOSECOLORW {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hInstance: ::HWND,
+    rgbResult: ::COLORREF,
+    lpCustColors: *mut ::COLORREF,
+    Flags: ::DWORD,
+    lCustData: ::LPARAM,
+    lpfnHook: LPCCHOOKPROC,
+    lpTemplateName: ::LPCWSTR,
+}}
 pub type LPCHOOSECOLORW = *mut CHOOSECOLORW;
 pub const CC_RGBINIT: ::DWORD = 0x00000001;
 pub const CC_FULLOPEN: ::DWORD = 0x00000002;
@@ -228,37 +216,33 @@ pub const CC_ANYCOLOR: ::DWORD = 0x00000100;
 pub type LPFRHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-#[repr(C)] #[derive(Copy)]
-pub struct FINDREPLACEA {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hInstance: ::HINSTANCE,
-    pub Flags: ::DWORD,
-    pub lpstrFindWhat: ::LPSTR,
-    pub lpstrReplaceWith: ::LPSTR,
-    pub wFindWhatLen: ::WORD,
-    pub wReplaceWithLen: ::WORD,
-    pub lCustData: ::LPARAM,
-    pub lpfnHook: LPFRHOOKPROC,
-    pub lpTemplateName: ::LPCSTR,
-}
-impl Clone for FINDREPLACEA { fn clone(&self) -> FINDREPLACEA { *self } }
+STRUCT!{nodebug struct FINDREPLACEA {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hInstance: ::HINSTANCE,
+    Flags: ::DWORD,
+    lpstrFindWhat: ::LPSTR,
+    lpstrReplaceWith: ::LPSTR,
+    wFindWhatLen: ::WORD,
+    wReplaceWithLen: ::WORD,
+    lCustData: ::LPARAM,
+    lpfnHook: LPFRHOOKPROC,
+    lpTemplateName: ::LPCSTR,
+}}
 pub type LPFINDREPLACEA = *mut FINDREPLACEA;
-#[repr(C)] #[derive(Copy)]
-pub struct FINDREPLACEW {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hInstance: ::HINSTANCE,
-    pub Flags: ::DWORD,
-    pub lpstrFindWhat: ::LPWSTR,
-    pub lpstrReplaceWith: ::LPWSTR,
-    pub wFindWhatLen: ::WORD,
-    pub wReplaceWithLen: ::WORD,
-    pub lCustData: ::LPARAM,
-    pub lpfnHook: LPFRHOOKPROC,
-    pub lpTemplateName: ::LPCWSTR,
-}
-impl Clone for FINDREPLACEW { fn clone(&self) -> FINDREPLACEW { *self } }
+STRUCT!{nodebug struct FINDREPLACEW {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hInstance: ::HINSTANCE,
+    Flags: ::DWORD,
+    lpstrFindWhat: ::LPWSTR,
+    lpstrReplaceWith: ::LPWSTR,
+    wFindWhatLen: ::WORD,
+    wReplaceWithLen: ::WORD,
+    lCustData: ::LPARAM,
+    lpfnHook: LPFRHOOKPROC,
+    lpTemplateName: ::LPCWSTR,
+}}
 pub type LPFINDREPLACEW = *mut FINDREPLACEW;
 pub const FR_DOWN: ::DWORD = 0x00000001;
 pub const FR_WHOLEWORD: ::DWORD = 0x00000002;
@@ -284,47 +268,43 @@ pub const FR_MATCHALEFHAMZA: ::DWORD = 0x80000000;
 pub type LPCFHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-#[repr(C)] #[derive(Copy)]
-pub struct CHOOSEFONTA {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hDC: ::HDC,
-    pub lpLogFont: ::LPLOGFONTA,
-    pub iPointSize: ::INT,
-    pub Flags: ::DWORD,
-    pub rgbColors: ::COLORREF,
-    pub lCustData: ::LPARAM,
-    pub lpfnHook: LPCFHOOKPROC,
-    pub lpTemplateName: ::LPCSTR,
-    pub hInstance: ::HINSTANCE,
-    pub lpszStyle: ::LPSTR,
-    pub nFontType: ::WORD,
-    pub ___MISSING_ALIGNMENT__: ::WORD,
-    pub nSizeMin: ::INT,
-    pub nSizeMax: ::INT,
-}
-impl Clone for CHOOSEFONTA { fn clone(&self) -> CHOOSEFONTA { *self } }
+STRUCT!{nodebug struct CHOOSEFONTA {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hDC: ::HDC,
+    lpLogFont: ::LPLOGFONTA,
+    iPointSize: ::INT,
+    Flags: ::DWORD,
+    rgbColors: ::COLORREF,
+    lCustData: ::LPARAM,
+    lpfnHook: LPCFHOOKPROC,
+    lpTemplateName: ::LPCSTR,
+    hInstance: ::HINSTANCE,
+    lpszStyle: ::LPSTR,
+    nFontType: ::WORD,
+    ___MISSING_ALIGNMENT__: ::WORD,
+    nSizeMin: ::INT,
+    nSizeMax: ::INT,
+}}
 pub type LPCHOOSEFONTA = *mut CHOOSEFONTA;
-#[repr(C)] #[derive(Copy)]
-pub struct CHOOSEFONTW {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hDC: ::HDC,
-    pub lpLogFont: ::LPLOGFONTW,
-    pub iPointSize: ::INT,
-    pub Flags: ::DWORD,
-    pub rgbColors: ::COLORREF,
-    pub lCustData: ::LPARAM,
-    pub lpfnHook: LPCFHOOKPROC,
-    pub lpTemplateName: ::LPCWSTR,
-    pub hInstance: ::HINSTANCE,
-    pub lpszStyle: ::LPWSTR,
-    pub nFontType: ::WORD,
-    pub ___MISSING_ALIGNMENT__: ::WORD,
-    pub nSizeMin: ::INT,
-    pub nSizeMax: ::INT,
-}
-impl Clone for CHOOSEFONTW { fn clone(&self) -> CHOOSEFONTW { *self } }
+STRUCT!{nodebug struct CHOOSEFONTW {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hDC: ::HDC,
+    lpLogFont: ::LPLOGFONTW,
+    iPointSize: ::INT,
+    Flags: ::DWORD,
+    rgbColors: ::COLORREF,
+    lCustData: ::LPARAM,
+    lpfnHook: LPCFHOOKPROC,
+    lpTemplateName: ::LPCWSTR,
+    hInstance: ::HINSTANCE,
+    lpszStyle: ::LPWSTR,
+    nFontType: ::WORD,
+    ___MISSING_ALIGNMENT__: ::WORD,
+    nSizeMin: ::INT,
+    nSizeMax: ::INT,
+}}
 pub type LPCHOOSEFONTW = *mut CHOOSEFONTW;
 pub const CF_SCREENFONTS: ::DWORD = 0x00000001;
 pub const CF_PRINTERFONTS: ::DWORD = 0x00000002;
@@ -378,53 +358,49 @@ pub type LPPRINTHOOKPROC = Option<unsafe extern "system" fn(
 pub type LPSETUPHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-#[repr(C)] #[derive(Copy)]
-pub struct PRINTDLGA {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hDevMode: ::HGLOBAL,
-    pub hDevNames: ::HGLOBAL,
-    pub hDC: ::HDC,
-    pub Flags: ::DWORD,
-    pub nFromPage: ::WORD,
-    pub nToPage: ::WORD,
-    pub nMinPage: ::WORD,
-    pub nMaxPage: ::WORD,
-    pub nCopies: ::WORD,
-    pub hInstance: ::HINSTANCE,
-    pub lCustData: ::LPARAM,
-    pub lpfnPrintHook: LPPRINTHOOKPROC,
-    pub lpfnSetupHook: LPSETUPHOOKPROC,
-    pub lpPrintTemplateName: ::LPCSTR,
-    pub lpSetupTemplateName: ::LPCSTR,
-    pub hPrintTemplate: ::HGLOBAL,
-    pub hSetupTemplate: ::HGLOBAL,
-}
-impl Clone for PRINTDLGA { fn clone(&self) -> PRINTDLGA { *self } }
+STRUCT!{nodebug struct PRINTDLGA {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hDevMode: ::HGLOBAL,
+    hDevNames: ::HGLOBAL,
+    hDC: ::HDC,
+    Flags: ::DWORD,
+    nFromPage: ::WORD,
+    nToPage: ::WORD,
+    nMinPage: ::WORD,
+    nMaxPage: ::WORD,
+    nCopies: ::WORD,
+    hInstance: ::HINSTANCE,
+    lCustData: ::LPARAM,
+    lpfnPrintHook: LPPRINTHOOKPROC,
+    lpfnSetupHook: LPSETUPHOOKPROC,
+    lpPrintTemplateName: ::LPCSTR,
+    lpSetupTemplateName: ::LPCSTR,
+    hPrintTemplate: ::HGLOBAL,
+    hSetupTemplate: ::HGLOBAL,
+}}
 pub type LPPRINTDLGA = *mut PRINTDLGA;
-#[repr(C)] #[derive(Copy)]
-pub struct PRINTDLGW {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hDevMode: ::HGLOBAL,
-    pub hDevNames: ::HGLOBAL,
-    pub hDC: ::HDC,
-    pub Flags: ::DWORD,
-    pub nFromPage: ::WORD,
-    pub nToPage: ::WORD,
-    pub nMinPage: ::WORD,
-    pub nMaxPage: ::WORD,
-    pub nCopies: ::WORD,
-    pub hInstance: ::HINSTANCE,
-    pub lCustData: ::LPARAM,
-    pub lpfnPrintHook: LPPRINTHOOKPROC,
-    pub lpfnSetupHook: LPSETUPHOOKPROC,
-    pub lpPrintTemplateName: ::LPCWSTR,
-    pub lpSetupTemplateName: ::LPCWSTR,
-    pub hPrintTemplate: ::HGLOBAL,
-    pub hSetupTemplate: ::HGLOBAL,
-}
-impl Clone for PRINTDLGW { fn clone(&self) -> PRINTDLGW { *self } }
+STRUCT!{nodebug struct PRINTDLGW {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hDevMode: ::HGLOBAL,
+    hDevNames: ::HGLOBAL,
+    hDC: ::HDC,
+    Flags: ::DWORD,
+    nFromPage: ::WORD,
+    nToPage: ::WORD,
+    nMinPage: ::WORD,
+    nMaxPage: ::WORD,
+    nCopies: ::WORD,
+    hInstance: ::HINSTANCE,
+    lCustData: ::LPARAM,
+    lpfnPrintHook: LPPRINTHOOKPROC,
+    lpfnSetupHook: LPSETUPHOOKPROC,
+    lpPrintTemplateName: ::LPCWSTR,
+    lpSetupTemplateName: ::LPCWSTR,
+    hPrintTemplate: ::HGLOBAL,
+    hSetupTemplate: ::HGLOBAL,
+}}
 pub type LPPRINTDLGW = *mut PRINTDLGW;
 RIDL!(
 interface IPrintDialogCallback(IPrintDialogCallbackVtbl) : IUnknown(IUnknownVtbl) {
@@ -552,43 +528,39 @@ pub type LPPAGEPAINTHOOK = Option<unsafe extern "system" fn(
 pub type LPPAGESETUPHOOK = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-#[repr(C)] #[derive(Copy)]
-pub struct PAGESETUPDLGA {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hDevMode: ::HGLOBAL,
-    pub hDevNames: ::HGLOBAL,
-    pub Flags: ::DWORD,
-    pub ptPaperSize: ::POINT,
-    pub rtMinMargin: ::RECT,
-    pub rtMargin: ::RECT,
-    pub hInstance: ::HINSTANCE,
-    pub lCustData: ::LPARAM,
-    pub lpfnPageSetupHook: LPPAGESETUPHOOK,
-    pub lpfnPagePaintHook: LPPAGEPAINTHOOK,
-    pub lpPageSetupTemplateName: ::LPCSTR,
-    pub hPageSetupTemplate: ::HGLOBAL,
-}
-impl Clone for PAGESETUPDLGA { fn clone(&self) -> PAGESETUPDLGA { *self } }
+STRUCT!{nodebug struct PAGESETUPDLGA {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hDevMode: ::HGLOBAL,
+    hDevNames: ::HGLOBAL,
+    Flags: ::DWORD,
+    ptPaperSize: ::POINT,
+    rtMinMargin: ::RECT,
+    rtMargin: ::RECT,
+    hInstance: ::HINSTANCE,
+    lCustData: ::LPARAM,
+    lpfnPageSetupHook: LPPAGESETUPHOOK,
+    lpfnPagePaintHook: LPPAGEPAINTHOOK,
+    lpPageSetupTemplateName: ::LPCSTR,
+    hPageSetupTemplate: ::HGLOBAL,
+}}
 pub type LPPAGESETUPDLGA = *mut PAGESETUPDLGA;
-#[repr(C)] #[derive(Copy)]
-pub struct PAGESETUPDLGW {
-    pub lStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hDevMode: ::HGLOBAL,
-    pub hDevNames: ::HGLOBAL,
-    pub Flags: ::DWORD,
-    pub ptPaperSize: ::POINT,
-    pub rtMinMargin: ::RECT,
-    pub rtMargin: ::RECT,
-    pub hInstance: ::HINSTANCE,
-    pub lCustData: ::LPARAM,
-    pub lpfnPageSetupHook: LPPAGESETUPHOOK,
-    pub lpfnPagePaintHook: LPPAGEPAINTHOOK,
-    pub lpPageSetupTemplateName: ::LPCWSTR,
-    pub hPageSetupTemplate: ::HGLOBAL,
-}
-impl Clone for PAGESETUPDLGW { fn clone(&self) -> PAGESETUPDLGW { *self } }
+STRUCT!{nodebug struct PAGESETUPDLGW {
+    lStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hDevMode: ::HGLOBAL,
+    hDevNames: ::HGLOBAL,
+    Flags: ::DWORD,
+    ptPaperSize: ::POINT,
+    rtMinMargin: ::RECT,
+    rtMargin: ::RECT,
+    hInstance: ::HINSTANCE,
+    lCustData: ::LPARAM,
+    lpfnPageSetupHook: LPPAGESETUPHOOK,
+    lpfnPagePaintHook: LPPAGEPAINTHOOK,
+    lpPageSetupTemplateName: ::LPCWSTR,
+    hPageSetupTemplate: ::HGLOBAL,
+}}
 pub type LPPAGESETUPDLGW = *mut PAGESETUPDLGW;
 pub const PSD_DEFAULTMINMARGINS: ::DWORD = 0x00000000;
 pub const PSD_INWININIINTLMEASURE: ::DWORD = 0x00000000;

@@ -21,30 +21,18 @@ STRUCT!{struct DXGI_RGB {
     Blue: f32,
 }}
 pub type DXGI_RGBA = ::D3DCOLORVALUE;
-#[repr(C)] #[derive(Copy)]
-pub struct DXGI_GAMMA_CONTROL {
-    pub Scale: DXGI_RGB,
-    pub Offset: DXGI_RGB,
-    pub GammaCurve: [DXGI_RGB; 1025],
-}
-impl Clone for DXGI_GAMMA_CONTROL {
-    fn clone(&self) -> DXGI_GAMMA_CONTROL {
-        *self
-    }
-}
-#[repr(C)] #[derive(Copy)]
-pub struct DXGI_GAMMA_CONTROL_CAPABILITIES {
-    pub ScaleAndOffsetSupported: ::BOOL,
-    pub MaxConvertedValue: f32,
-    pub MinConvertedValue: f32,
-    pub NumGammaControlPoints: ::UINT,
-    pub ControlPointPositions: [f32; 1025],
-}
-impl Clone for DXGI_GAMMA_CONTROL_CAPABILITIES {
-    fn clone(&self) -> DXGI_GAMMA_CONTROL_CAPABILITIES {
-        *self
-    }
-}
+STRUCT!{nodebug struct DXGI_GAMMA_CONTROL {
+    Scale: DXGI_RGB,
+    Offset: DXGI_RGB,
+    GammaCurve: [DXGI_RGB; 1025],
+}}
+STRUCT!{nodebug struct DXGI_GAMMA_CONTROL_CAPABILITIES {
+    ScaleAndOffsetSupported: ::BOOL,
+    MaxConvertedValue: f32,
+    MinConvertedValue: f32,
+    NumGammaControlPoints: ::UINT,
+    ControlPointPositions: [f32; 1025],
+}}
 STRUCT!{struct DXGI_RATIONAL {
     Numerator: ::UINT,
     Denominator: ::UINT,

@@ -930,13 +930,11 @@ pub const D3DPRESENTFLAG_OVERLAY_YCbCr_BT709: ::DWORD = 0x00000100;
 pub const D3DPRESENTFLAG_OVERLAY_YCbCr_xvYCC: ::DWORD = 0x00000200;
 pub const D3DPRESENTFLAG_RESTRICTED_CONTENT: ::DWORD = 0x00000400;
 pub const D3DPRESENTFLAG_RESTRICT_SHARED_RESOURCE_DRIVER: ::DWORD = 0x00000800;
-#[repr(C)] #[derive(Copy)]
-pub struct D3DGAMMARAMP {
-    pub red: [::WORD; 256],
-    pub green: [::WORD; 256],
-    pub blue: [::WORD; 256],
-}
-impl Clone for D3DGAMMARAMP { fn clone(&self) -> D3DGAMMARAMP { *self } }
+STRUCT!{nodebug struct D3DGAMMARAMP {
+    red: [::WORD; 256],
+    green: [::WORD; 256],
+    blue: [::WORD; 256],
+}}
 ENUM!{enum D3DBACKBUFFER_TYPE {
     D3DBACKBUFFER_TYPE_MONO = 0,
     D3DBACKBUFFER_TYPE_LEFT = 1,
@@ -1059,20 +1057,18 @@ STRUCT!{struct D3DTRIPATCH_INFO {
     Degree: D3DDEGREETYPE,
 }}
 pub const MAX_DEVICE_IDENTIFIER_STRING: usize = 512;
-#[repr(C)] #[derive(Copy)]
-pub struct D3DADAPTER_IDENTIFIER9 {
-    pub Driver: [::c_char; MAX_DEVICE_IDENTIFIER_STRING],
-    pub Description: [::c_char; MAX_DEVICE_IDENTIFIER_STRING],
-    pub DeviceName: [::c_char; 32],
-    pub DriverVersion: ::LARGE_INTEGER,
-    pub VendorId: ::DWORD,
-    pub DeviceId: ::DWORD,
-    pub SubSysId: ::DWORD,
-    pub Revision: ::DWORD,
-    pub DeviceIdentifier: ::GUID,
-    pub WHQLLevel: ::DWORD,
-}
-impl Clone for D3DADAPTER_IDENTIFIER9 { fn clone(&self) -> D3DADAPTER_IDENTIFIER9 { *self } }
+STRUCT!{nodebug struct D3DADAPTER_IDENTIFIER9 {
+    Driver: [::c_char; MAX_DEVICE_IDENTIFIER_STRING],
+    Description: [::c_char; MAX_DEVICE_IDENTIFIER_STRING],
+    DeviceName: [::c_char; 32],
+    DriverVersion: ::LARGE_INTEGER,
+    VendorId: ::DWORD,
+    DeviceId: ::DWORD,
+    SubSysId: ::DWORD,
+    Revision: ::DWORD,
+    DeviceIdentifier: ::GUID,
+    WHQLLevel: ::DWORD,
+}}
 STRUCT!{struct D3DRASTER_STATUS {
     InVBlank: ::BOOL,
     ScanLine: ::UINT,

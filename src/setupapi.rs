@@ -48,21 +48,17 @@ pub type PSP_ALTPLATFORM_INFO_V1 = *mut SP_ALTPLATFORM_INFO_V1;
 pub type SP_ALTPLATFORM_INFO = SP_ALTPLATFORM_INFO_V2;
 pub type PSP_ALTPLATFORM_INFO = PSP_ALTPLATFORM_INFO_V2;
 pub const SP_ALTPLATFORM_FLAGS_VERSION_RANGE: ::WORD = 0x0001;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_ORIGINAL_FILE_INFO_A {
-    pub cbSize: ::DWORD,
-    pub OriginalInfName: [::CHAR; ::MAX_PATH],
-    pub OriginalCatalogName: [::CHAR; ::MAX_PATH],
-}
-impl Clone for SP_ORIGINAL_FILE_INFO_A { fn clone(&self) -> SP_ORIGINAL_FILE_INFO_A { *self } }
+STRUCT!{nodebug struct SP_ORIGINAL_FILE_INFO_A {
+    cbSize: ::DWORD,
+    OriginalInfName: [::CHAR; ::MAX_PATH],
+    OriginalCatalogName: [::CHAR; ::MAX_PATH],
+}}
 pub type PSP_ORIGINAL_FILE_INFO_A = *mut SP_ORIGINAL_FILE_INFO_A;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_ORIGINAL_FILE_INFO_W {
-    pub cbSize: ::DWORD,
-    pub OriginalInfName: [::WCHAR; ::MAX_PATH],
-    pub OriginalCatalogName: [::WCHAR; ::MAX_PATH],
-}
-impl Clone for SP_ORIGINAL_FILE_INFO_W { fn clone(&self) -> SP_ORIGINAL_FILE_INFO_W { *self } }
+STRUCT!{nodebug struct SP_ORIGINAL_FILE_INFO_W {
+    cbSize: ::DWORD,
+    OriginalInfName: [::WCHAR; ::MAX_PATH],
+    OriginalCatalogName: [::WCHAR; ::MAX_PATH],
+}}
 pub type PSP_ORIGINAL_FILE_INFO_W = *mut SP_ORIGINAL_FILE_INFO_W;
 pub const INF_STYLE_NONE: ::DWORD = 0x00000000;
 pub const INF_STYLE_OLDNT: ::DWORD = 0x00000001;
@@ -236,29 +232,25 @@ STRUCT!{struct CABINET_INFO_W {
     CabinetNumber: ::USHORT,
 }}
 pub type PCABINET_INFO_W = *mut CABINET_INFO_W;
-#[repr(C)] #[derive(Copy)]
-pub struct FILE_IN_CABINET_INFO_A {
-    pub NameInCabinet: ::PCSTR,
-    pub FileSize: ::DWORD,
-    pub Win32Error: ::DWORD,
-    pub DosDate: ::WORD,
-    pub DosTime: ::WORD,
-    pub DosAttribs: ::WORD,
-    pub FullTargetName: [::CHAR; ::MAX_PATH],
-}
-impl Clone for FILE_IN_CABINET_INFO_A { fn clone(&self) -> FILE_IN_CABINET_INFO_A { *self } }
+STRUCT!{nodebug struct FILE_IN_CABINET_INFO_A {
+    NameInCabinet: ::PCSTR,
+    FileSize: ::DWORD,
+    Win32Error: ::DWORD,
+    DosDate: ::WORD,
+    DosTime: ::WORD,
+    DosAttribs: ::WORD,
+    FullTargetName: [::CHAR; ::MAX_PATH],
+}}
 pub type PFILE_IN_CABINET_INFO_A = *mut FILE_IN_CABINET_INFO_A;
-#[repr(C)] #[derive(Copy)]
-pub struct FILE_IN_CABINET_INFO_W {
-    pub NameInCabinet: ::PCWSTR,
-    pub FileSize: ::DWORD,
-    pub Win32Error: ::DWORD,
-    pub DosDate: ::WORD,
-    pub DosTime: ::WORD,
-    pub DosAttribs: ::WORD,
-    pub FullTargetName: [::WCHAR; ::MAX_PATH],
-}
-impl Clone for FILE_IN_CABINET_INFO_W { fn clone(&self) -> FILE_IN_CABINET_INFO_W { *self } }
+STRUCT!{nodebug struct FILE_IN_CABINET_INFO_W {
+    NameInCabinet: ::PCWSTR,
+    FileSize: ::DWORD,
+    Win32Error: ::DWORD,
+    DosDate: ::WORD,
+    DosTime: ::WORD,
+    DosAttribs: ::WORD,
+    FullTargetName: [::WCHAR; ::MAX_PATH],
+}}
 pub type PFILE_IN_CABINET_INFO_W = *mut FILE_IN_CABINET_INFO_W;
 STRUCT!{struct SP_REGISTER_CONTROL_STATUSA {
     cbSize: ::DWORD,
@@ -346,27 +338,19 @@ STRUCT!{struct SP_DEVICE_INTERFACE_DETAIL_DATA_W {
     DevicePath: [::WCHAR; ::ANYSIZE_ARRAY],
 }}
 pub type PSP_DEVICE_INTERFACE_DETAIL_DATA_W = *mut SP_DEVICE_INTERFACE_DETAIL_DATA_W;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_DEVINFO_LIST_DETAIL_DATA_A {
-    pub cbSize: ::DWORD,
-    pub ClassGuid: ::GUID,
-    pub RemoteMachineHandle: ::HANDLE,
-    pub RemoteMachineName: [::CHAR; SP_MAX_MACHINENAME_LENGTH],
-}
-impl Clone for SP_DEVINFO_LIST_DETAIL_DATA_A {
-    fn clone(&self) -> SP_DEVINFO_LIST_DETAIL_DATA_A { *self }
-}
+STRUCT!{nodebug struct SP_DEVINFO_LIST_DETAIL_DATA_A {
+    cbSize: ::DWORD,
+    ClassGuid: ::GUID,
+    RemoteMachineHandle: ::HANDLE,
+    RemoteMachineName: [::CHAR; SP_MAX_MACHINENAME_LENGTH],
+}}
 pub type PSP_DEVINFO_LIST_DETAIL_DATA_A = *mut SP_DEVINFO_LIST_DETAIL_DATA_A;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_DEVINFO_LIST_DETAIL_DATA_W {
-    pub cbSize: ::DWORD,
-    pub ClassGuid: ::GUID,
-    pub RemoteMachineHandle: ::HANDLE,
-    pub RemoteMachineName: [::WCHAR; SP_MAX_MACHINENAME_LENGTH],
-}
-impl Clone for SP_DEVINFO_LIST_DETAIL_DATA_W {
-    fn clone(&self) -> SP_DEVINFO_LIST_DETAIL_DATA_W { *self }
-}
+STRUCT!{nodebug struct SP_DEVINFO_LIST_DETAIL_DATA_W {
+    cbSize: ::DWORD,
+    ClassGuid: ::GUID,
+    RemoteMachineHandle: ::HANDLE,
+    RemoteMachineName: [::WCHAR; SP_MAX_MACHINENAME_LENGTH],
+}}
 pub type PSP_DEVINFO_LIST_DETAIL_DATA_W = *mut SP_DEVINFO_LIST_DETAIL_DATA_W;
 pub const DIF_SELECTDEVICE: DI_FUNCTION = 0x00000001;
 pub const DIF_INSTALLDEVICE: DI_FUNCTION = 0x00000002;
@@ -412,35 +396,31 @@ pub const DIF_FINISHINSTALL_ACTION: DI_FUNCTION = 0x0000002A;
 pub const DIF_RESERVED2: DI_FUNCTION = 0x00000030;
 pub const DIF_MOVEDEVICE: DI_FUNCTION = 0x0000000E;
 pub type DI_FUNCTION = ::UINT;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_DEVINSTALL_PARAMS_A {
-    pub cbSize: ::DWORD,
-    pub Flags: ::DWORD,
-    pub FlagsEx: ::DWORD,
-    pub hwndParent: ::HWND,
-    pub InstallMsgHandler: PSP_FILE_CALLBACK_A,
-    pub InstallMsgHandlerContext: ::PVOID,
-    pub FileQueue: HSPFILEQ,
-    pub ClassInstallReserved: ::ULONG_PTR,
-    pub Reserved: ::DWORD,
-    pub DriverPath: [::CHAR; ::MAX_PATH],
-}
-impl Clone for SP_DEVINSTALL_PARAMS_A { fn clone(&self) -> SP_DEVINSTALL_PARAMS_A { *self } }
+STRUCT!{nodebug struct SP_DEVINSTALL_PARAMS_A {
+    cbSize: ::DWORD,
+    Flags: ::DWORD,
+    FlagsEx: ::DWORD,
+    hwndParent: ::HWND,
+    InstallMsgHandler: PSP_FILE_CALLBACK_A,
+    InstallMsgHandlerContext: ::PVOID,
+    FileQueue: HSPFILEQ,
+    ClassInstallReserved: ::ULONG_PTR,
+    Reserved: ::DWORD,
+    DriverPath: [::CHAR; ::MAX_PATH],
+}}
 pub type PSP_DEVINSTALL_PARAMS_A = *mut SP_DEVINSTALL_PARAMS_A;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_DEVINSTALL_PARAMS_W {
-    pub cbSize: ::DWORD,
-    pub Flags: ::DWORD,
-    pub FlagsEx: ::DWORD,
-    pub hwndParent: ::HWND,
-    pub InstallMsgHandler: PSP_FILE_CALLBACK_W,
-    pub InstallMsgHandlerContext: ::PVOID,
-    pub FileQueue: HSPFILEQ,
-    pub ClassInstallReserved: ::ULONG_PTR,
-    pub Reserved: ::DWORD,
-    pub DriverPath: [::WCHAR; ::MAX_PATH],
-}
-impl Clone for SP_DEVINSTALL_PARAMS_W { fn clone(&self) -> SP_DEVINSTALL_PARAMS_W { *self } }
+STRUCT!{nodebug struct SP_DEVINSTALL_PARAMS_W {
+    cbSize: ::DWORD,
+    Flags: ::DWORD,
+    FlagsEx: ::DWORD,
+    hwndParent: ::HWND,
+    InstallMsgHandler: PSP_FILE_CALLBACK_W,
+    InstallMsgHandlerContext: ::PVOID,
+    FileQueue: HSPFILEQ,
+    ClassInstallReserved: ::ULONG_PTR,
+    Reserved: ::DWORD,
+    DriverPath: [::WCHAR; ::MAX_PATH],
+}}
 pub type PSP_DEVINSTALL_PARAMS_W = *mut SP_DEVINSTALL_PARAMS_W;
 pub const DI_SHOWOEM: ::DWORD = 0x00000001;
 pub const DI_SHOWCOMPAT: ::DWORD = 0x00000002;
@@ -550,37 +530,31 @@ STRUCT!{struct SP_UNREMOVEDEVICE_PARAMS {
 }}
 pub type PSP_UNREMOVEDEVICE_PARAMS = *mut SP_UNREMOVEDEVICE_PARAMS;
 pub const DI_UNREMOVEDEVICE_CONFIGSPECIFIC: ::DWORD = 0x00000002;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_SELECTDEVICE_PARAMS_A {
-    pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
-    pub Title: [::CHAR; MAX_TITLE_LEN],
-    pub Instructions: [::CHAR; MAX_INSTRUCTION_LEN],
-    pub ListLabel: [::CHAR; MAX_LABEL_LEN],
-    pub SubTitle: [::CHAR; MAX_SUBTITLE_LEN],
-    pub Reserved: [::BYTE; 2],
-}
-impl Clone for SP_SELECTDEVICE_PARAMS_A { fn clone(&self) -> SP_SELECTDEVICE_PARAMS_A { *self } }
+STRUCT!{nodebug struct SP_SELECTDEVICE_PARAMS_A {
+    ClassInstallHeader: SP_CLASSINSTALL_HEADER,
+    Title: [::CHAR; MAX_TITLE_LEN],
+    Instructions: [::CHAR; MAX_INSTRUCTION_LEN],
+    ListLabel: [::CHAR; MAX_LABEL_LEN],
+    SubTitle: [::CHAR; MAX_SUBTITLE_LEN],
+    Reserved: [::BYTE; 2],
+}}
 pub type PSP_SELECTDEVICE_PARAMS_A = *mut SP_SELECTDEVICE_PARAMS_A;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_SELECTDEVICE_PARAMS_W {
-    pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
-    pub Title: [::WCHAR; MAX_TITLE_LEN],
-    pub Instructions: [::WCHAR; MAX_INSTRUCTION_LEN],
-    pub ListLabel: [::WCHAR; MAX_LABEL_LEN],
-    pub SubTitle: [::WCHAR; MAX_SUBTITLE_LEN],
-}
-impl Clone for SP_SELECTDEVICE_PARAMS_W { fn clone(&self) -> SP_SELECTDEVICE_PARAMS_W { *self } }
+STRUCT!{nodebug struct SP_SELECTDEVICE_PARAMS_W {
+    ClassInstallHeader: SP_CLASSINSTALL_HEADER,
+    Title: [::WCHAR; MAX_TITLE_LEN],
+    Instructions: [::WCHAR; MAX_INSTRUCTION_LEN],
+    ListLabel: [::WCHAR; MAX_LABEL_LEN],
+    SubTitle: [::WCHAR; MAX_SUBTITLE_LEN],
+}}
 pub type PSP_SELECTDEVICE_PARAMS_W = *mut SP_SELECTDEVICE_PARAMS_W;
 pub type PDETECT_PROGRESS_NOTIFY = Option<unsafe extern "system" fn(
     ProgressNotifyParam: ::PVOID, DetectComplete: ::DWORD,
 ) -> ::BOOL>;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_DETECTDEVICE_PARAMS {
-    pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
-    pub DetectProgressNotify: PDETECT_PROGRESS_NOTIFY,
-    pub ProgressNotifyParam: ::PVOID,
-}
-impl Clone for SP_DETECTDEVICE_PARAMS { fn clone(&self) -> SP_DETECTDEVICE_PARAMS { *self } }
+STRUCT!{nodebug struct SP_DETECTDEVICE_PARAMS {
+    ClassInstallHeader: SP_CLASSINSTALL_HEADER,
+    DetectProgressNotify: PDETECT_PROGRESS_NOTIFY,
+    ProgressNotifyParam: ::PVOID,
+}}
 pub type PSP_DETECTDEVICE_PARAMS = *mut SP_DETECTDEVICE_PARAMS;
 pub const MAX_INSTALLWIZARD_DYNAPAGES: usize = 20;
 STRUCT!{struct SP_INSTALLWIZARD_DATA {
@@ -637,123 +611,95 @@ STRUCT!{struct SP_NEWDEVICEWIZARD_DATA {
 pub type PSP_NEWDEVICEWIZARD_DATA = *mut SP_NEWDEVICEWIZARD_DATA;
 pub type SP_ADDPROPERTYPAGE_DATA = SP_NEWDEVICEWIZARD_DATA;
 pub type PSP_ADDPROPERTYPAGE_DATA = PSP_NEWDEVICEWIZARD_DATA;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_TROUBLESHOOTER_PARAMS_A {
-    pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
-    pub ChmFile: [::CHAR; ::MAX_PATH],
-    pub HtmlTroubleShooter: [::CHAR; ::MAX_PATH],
-}
-impl Clone for SP_TROUBLESHOOTER_PARAMS_A {
-    fn clone(&self) -> SP_TROUBLESHOOTER_PARAMS_A { *self }
-}
+STRUCT!{nodebug struct SP_TROUBLESHOOTER_PARAMS_A {
+    ClassInstallHeader: SP_CLASSINSTALL_HEADER,
+    ChmFile: [::CHAR; ::MAX_PATH],
+    HtmlTroubleShooter: [::CHAR; ::MAX_PATH],
+}}
 pub type PSP_TROUBLESHOOTER_PARAMS_A = *mut SP_TROUBLESHOOTER_PARAMS_A;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_TROUBLESHOOTER_PARAMS_W {
-    pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
-    pub ChmFile: [::WCHAR; ::MAX_PATH],
-    pub HtmlTroubleShooter: [::WCHAR; ::MAX_PATH],
-}
-impl Clone for SP_TROUBLESHOOTER_PARAMS_W {
-    fn clone(&self) -> SP_TROUBLESHOOTER_PARAMS_W { *self }
-}
+STRUCT!{nodebug struct SP_TROUBLESHOOTER_PARAMS_W {
+    ClassInstallHeader: SP_CLASSINSTALL_HEADER,
+    ChmFile: [::WCHAR; ::MAX_PATH],
+    HtmlTroubleShooter: [::WCHAR; ::MAX_PATH],
+}}
 pub type PSP_TROUBLESHOOTER_PARAMS_W = *mut SP_TROUBLESHOOTER_PARAMS_W;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_POWERMESSAGEWAKE_PARAMS_A {
-    pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
-    pub PowerMessageWake: [::CHAR; LINE_LEN * 2],
-}
-impl Clone for SP_POWERMESSAGEWAKE_PARAMS_A {
-    fn clone(&self) -> SP_POWERMESSAGEWAKE_PARAMS_A { *self }
-}
+STRUCT!{nodebug struct SP_POWERMESSAGEWAKE_PARAMS_A {
+    ClassInstallHeader: SP_CLASSINSTALL_HEADER,
+    PowerMessageWake: [::CHAR; LINE_LEN * 2],
+}}
 pub type PSP_POWERMESSAGEWAKE_PARAMS_A = *mut SP_POWERMESSAGEWAKE_PARAMS_A;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_POWERMESSAGEWAKE_PARAMS_W {
-    pub ClassInstallHeader: SP_CLASSINSTALL_HEADER,
-    pub PowerMessageWake: [::WCHAR; LINE_LEN * 2],
-}
-impl Clone for SP_POWERMESSAGEWAKE_PARAMS_W {
-    fn clone(&self) -> SP_POWERMESSAGEWAKE_PARAMS_W { *self }
-}
+STRUCT!{nodebug struct SP_POWERMESSAGEWAKE_PARAMS_W {
+    ClassInstallHeader: SP_CLASSINSTALL_HEADER,
+    PowerMessageWake: [::WCHAR; LINE_LEN * 2],
+}}
 pub type PSP_POWERMESSAGEWAKE_PARAMS_W = *mut SP_POWERMESSAGEWAKE_PARAMS_W;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_DRVINFO_DATA_V2_A {
-    pub cbSize: ::DWORD,
-    pub DriverType: ::DWORD,
-    pub Reserved: ::ULONG_PTR,
-    pub Description: [::CHAR; LINE_LEN],
-    pub MfgName: [::CHAR; LINE_LEN],
-    pub ProviderName: [::CHAR; LINE_LEN],
-    pub DriverDate: ::FILETIME,
-    pub DriverVersion: ::DWORDLONG,
-}
-impl Clone for SP_DRVINFO_DATA_V2_A { fn clone(&self) -> SP_DRVINFO_DATA_V2_A { *self } }
+STRUCT!{nodebug struct SP_DRVINFO_DATA_V2_A {
+    cbSize: ::DWORD,
+    DriverType: ::DWORD,
+    Reserved: ::ULONG_PTR,
+    Description: [::CHAR; LINE_LEN],
+    MfgName: [::CHAR; LINE_LEN],
+    ProviderName: [::CHAR; LINE_LEN],
+    DriverDate: ::FILETIME,
+    DriverVersion: ::DWORDLONG,
+}}
 pub type PSP_DRVINFO_DATA_V2_A = *mut SP_DRVINFO_DATA_V2_A;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_DRVINFO_DATA_V2_W {
-    pub cbSize: ::DWORD,
-    pub DriverType: ::DWORD,
-    pub Reserved: ::ULONG_PTR,
-    pub Description: [::WCHAR; LINE_LEN],
-    pub MfgName: [::WCHAR; LINE_LEN],
-    pub ProviderName: [::WCHAR; LINE_LEN],
-    pub DriverDate: ::FILETIME,
-    pub DriverVersion: ::DWORDLONG,
-}
-impl Clone for SP_DRVINFO_DATA_V2_W { fn clone(&self) -> SP_DRVINFO_DATA_V2_W { *self } }
+STRUCT!{nodebug struct SP_DRVINFO_DATA_V2_W {
+    cbSize: ::DWORD,
+    DriverType: ::DWORD,
+    Reserved: ::ULONG_PTR,
+    Description: [::WCHAR; LINE_LEN],
+    MfgName: [::WCHAR; LINE_LEN],
+    ProviderName: [::WCHAR; LINE_LEN],
+    DriverDate: ::FILETIME,
+    DriverVersion: ::DWORDLONG,
+}}
 pub type PSP_DRVINFO_DATA_V2_W = *mut SP_DRVINFO_DATA_V2_W;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_DRVINFO_DATA_V1_A {
-    pub cbSize: ::DWORD,
-    pub DriverType: ::DWORD,
-    pub Reserved: ::ULONG_PTR,
-    pub Description: [::CHAR; LINE_LEN],
-    pub MfgName: [::CHAR; LINE_LEN],
-    pub ProviderName: [::CHAR; LINE_LEN],
-}
-impl Clone for SP_DRVINFO_DATA_V1_A { fn clone(&self) -> SP_DRVINFO_DATA_V1_A { *self } }
+STRUCT!{nodebug struct SP_DRVINFO_DATA_V1_A {
+    cbSize: ::DWORD,
+    DriverType: ::DWORD,
+    Reserved: ::ULONG_PTR,
+    Description: [::CHAR; LINE_LEN],
+    MfgName: [::CHAR; LINE_LEN],
+    ProviderName: [::CHAR; LINE_LEN],
+}}
 pub type PSP_DRVINFO_DATA_V1_A = *mut SP_DRVINFO_DATA_V1_A;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_DRVINFO_DATA_V1_W {
-    pub cbSize: ::DWORD,
-    pub DriverType: ::DWORD,
-    pub Reserved: ::ULONG_PTR,
-    pub Description: [::WCHAR; LINE_LEN],
-    pub MfgName: [::WCHAR; LINE_LEN],
-    pub ProviderName: [::WCHAR; LINE_LEN],
-}
-impl Clone for SP_DRVINFO_DATA_V1_W { fn clone(&self) -> SP_DRVINFO_DATA_V1_W { *self } }
+STRUCT!{nodebug struct SP_DRVINFO_DATA_V1_W {
+    cbSize: ::DWORD,
+    DriverType: ::DWORD,
+    Reserved: ::ULONG_PTR,
+    Description: [::WCHAR; LINE_LEN],
+    MfgName: [::WCHAR; LINE_LEN],
+    ProviderName: [::WCHAR; LINE_LEN],
+}}
 pub type PSP_DRVINFO_DATA_V1_W = *mut SP_DRVINFO_DATA_V1_W;
 pub type SP_DRVINFO_DATA_A = SP_DRVINFO_DATA_V2_A;
 pub type PSP_DRVINFO_DATA_A = PSP_DRVINFO_DATA_V2_A;
 pub type SP_DRVINFO_DATA_W = SP_DRVINFO_DATA_V2_W;
 pub type PSP_DRVINFO_DATA_W = PSP_DRVINFO_DATA_V2_W;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_DRVINFO_DETAIL_DATA_A {
-    pub cbSize: ::DWORD,
-    pub InfDate: ::FILETIME,
-    pub CompatIDsOffset: ::DWORD,
-    pub CompatIDsLength: ::DWORD,
-    pub Reserved: ::ULONG_PTR,
-    pub SectionName: [::CHAR; LINE_LEN],
-    pub InfFileName: [::CHAR; ::MAX_PATH],
-    pub DrvDescription: [::CHAR; LINE_LEN],
-    pub HardwareID: [::CHAR; ::ANYSIZE_ARRAY],
-}
-impl Clone for SP_DRVINFO_DETAIL_DATA_A { fn clone(&self) -> SP_DRVINFO_DETAIL_DATA_A { *self } }
+STRUCT!{nodebug struct SP_DRVINFO_DETAIL_DATA_A {
+    cbSize: ::DWORD,
+    InfDate: ::FILETIME,
+    CompatIDsOffset: ::DWORD,
+    CompatIDsLength: ::DWORD,
+    Reserved: ::ULONG_PTR,
+    SectionName: [::CHAR; LINE_LEN],
+    InfFileName: [::CHAR; ::MAX_PATH],
+    DrvDescription: [::CHAR; LINE_LEN],
+    HardwareID: [::CHAR; ::ANYSIZE_ARRAY],
+}}
 pub type PSP_DRVINFO_DETAIL_DATA_A = *mut SP_DRVINFO_DETAIL_DATA_A;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_DRVINFO_DETAIL_DATA_W {
-    pub cbSize: ::DWORD,
-    pub InfDate: ::FILETIME,
-    pub CompatIDsOffset: ::DWORD,
-    pub CompatIDsLength: ::DWORD,
-    pub Reserved: ::ULONG_PTR,
-    pub SectionName: [::WCHAR; LINE_LEN],
-    pub InfFileName: [::WCHAR; ::MAX_PATH],
-    pub DrvDescription: [::WCHAR; LINE_LEN],
-    pub HardwareID: [::WCHAR; ::ANYSIZE_ARRAY],
-}
-impl Clone for SP_DRVINFO_DETAIL_DATA_W { fn clone(&self) -> SP_DRVINFO_DETAIL_DATA_W { *self } }
+STRUCT!{nodebug struct SP_DRVINFO_DETAIL_DATA_W {
+    cbSize: ::DWORD,
+    InfDate: ::FILETIME,
+    CompatIDsOffset: ::DWORD,
+    CompatIDsLength: ::DWORD,
+    Reserved: ::ULONG_PTR,
+    SectionName: [::WCHAR; LINE_LEN],
+    InfFileName: [::WCHAR; ::MAX_PATH],
+    DrvDescription: [::WCHAR; LINE_LEN],
+    HardwareID: [::WCHAR; ::ANYSIZE_ARRAY],
+}}
 pub type PSP_DRVINFO_DETAIL_DATA_W = *mut SP_DRVINFO_DETAIL_DATA_W;
 STRUCT!{struct SP_DRVINSTALL_PARAMS {
     cbSize: ::DWORD,
@@ -821,47 +767,31 @@ pub type PSP_PROPSHEETPAGE_REQUEST = *mut SP_PROPSHEETPAGE_REQUEST;
 pub const SPPSR_SELECT_DEVICE_RESOURCES: ::DWORD = 1;
 pub const SPPSR_ENUM_BASIC_DEVICE_PROPERTIES: ::DWORD = 2;
 pub const SPPSR_ENUM_ADV_DEVICE_PROPERTIES: ::DWORD = 3;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_BACKUP_QUEUE_PARAMS_V2_A {
-    pub cbSize: ::DWORD,
-    pub FullInfPath: [::CHAR; ::MAX_PATH],
-    pub FilenameOffset: ::INT,
-    pub ReinstallInstance: [::CHAR; ::MAX_PATH],
-}
-impl Clone for SP_BACKUP_QUEUE_PARAMS_V2_A {
-    fn clone(&self) -> SP_BACKUP_QUEUE_PARAMS_V2_A { *self }
-}
+STRUCT!{nodebug struct SP_BACKUP_QUEUE_PARAMS_V2_A {
+    cbSize: ::DWORD,
+    FullInfPath: [::CHAR; ::MAX_PATH],
+    FilenameOffset: ::INT,
+    ReinstallInstance: [::CHAR; ::MAX_PATH],
+}}
 pub type PSP_BACKUP_QUEUE_PARAMS_V2_A = *mut SP_BACKUP_QUEUE_PARAMS_V2_A;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_BACKUP_QUEUE_PARAMS_V2_W {
-    pub cbSize: ::DWORD,
-    pub FullInfPath: [::WCHAR; ::MAX_PATH],
-    pub FilenameOffset: ::INT,
-    pub ReinstallInstance: [::WCHAR; ::MAX_PATH],
-}
-impl Clone for SP_BACKUP_QUEUE_PARAMS_V2_W {
-    fn clone(&self) -> SP_BACKUP_QUEUE_PARAMS_V2_W { *self }
-}
+STRUCT!{nodebug struct SP_BACKUP_QUEUE_PARAMS_V2_W {
+    cbSize: ::DWORD,
+    FullInfPath: [::WCHAR; ::MAX_PATH],
+    FilenameOffset: ::INT,
+    ReinstallInstance: [::WCHAR; ::MAX_PATH],
+}}
 pub type PSP_BACKUP_QUEUE_PARAMS_V2_W = *mut SP_BACKUP_QUEUE_PARAMS_V2_W;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_BACKUP_QUEUE_PARAMS_V1_A {
-    pub cbSize: ::DWORD,
-    pub FullInfPath: [::CHAR; ::MAX_PATH],
-    pub FilenameOffset: ::INT,
-}
-impl Clone for SP_BACKUP_QUEUE_PARAMS_V1_A {
-    fn clone(&self) -> SP_BACKUP_QUEUE_PARAMS_V1_A { *self }
-}
+STRUCT!{nodebug struct SP_BACKUP_QUEUE_PARAMS_V1_A {
+    cbSize: ::DWORD,
+    FullInfPath: [::CHAR; ::MAX_PATH],
+    FilenameOffset: ::INT,
+}}
 pub type PSP_BACKUP_QUEUE_PARAMS_V1_A = *mut SP_BACKUP_QUEUE_PARAMS_V1_A;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_BACKUP_QUEUE_PARAMS_V1_W {
-    pub cbSize: ::DWORD,
-    pub FullInfPath: [::WCHAR; ::MAX_PATH],
-    pub FilenameOffset: ::INT,
-}
-impl Clone for SP_BACKUP_QUEUE_PARAMS_V1_W {
-    fn clone(&self) -> SP_BACKUP_QUEUE_PARAMS_V1_W { *self }
-}
+STRUCT!{nodebug struct SP_BACKUP_QUEUE_PARAMS_V1_W {
+    cbSize: ::DWORD,
+    FullInfPath: [::WCHAR; ::MAX_PATH],
+    FilenameOffset: ::INT,
+}}
 pub type PSP_BACKUP_QUEUE_PARAMS_V1_W = *mut SP_BACKUP_QUEUE_PARAMS_V1_W;
 pub type SP_BACKUP_QUEUE_PARAMS_A = SP_BACKUP_QUEUE_PARAMS_V2_A;
 pub type PSP_BACKUP_QUEUE_PARAMS_A = PSP_BACKUP_QUEUE_PARAMS_V2_A;
@@ -1322,43 +1252,35 @@ pub const IDI_DISABLED_OVL: ::c_int = 501;
 pub const IDI_FORCED_OVL: ::c_int = 502;
 pub const SPWPT_SELECTDEVICE: ::DWORD = 0x00000001;
 pub const SPWP_USE_DEVINFO_DATA: ::DWORD = 0x00000001;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_INF_SIGNER_INFO_V1_A {
-    pub cbSize: ::DWORD,
-    pub CatalogFile: [::CHAR; ::MAX_PATH],
-    pub DigitalSigner: [::CHAR; ::MAX_PATH],
-    pub DigitalSignerVersion: [::CHAR; ::MAX_PATH],
-}
-impl Clone for SP_INF_SIGNER_INFO_V1_A { fn clone(&self) -> SP_INF_SIGNER_INFO_V1_A { *self } }
+STRUCT!{nodebug struct SP_INF_SIGNER_INFO_V1_A {
+    cbSize: ::DWORD,
+    CatalogFile: [::CHAR; ::MAX_PATH],
+    DigitalSigner: [::CHAR; ::MAX_PATH],
+    DigitalSignerVersion: [::CHAR; ::MAX_PATH],
+}}
 pub type PSP_INF_SIGNER_INFO_V1_A = *mut SP_INF_SIGNER_INFO_V1_A;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_INF_SIGNER_INFO_V1_W {
-    pub cbSize: ::DWORD,
-    pub CatalogFile: [::WCHAR; ::MAX_PATH],
-    pub DigitalSigner: [::WCHAR; ::MAX_PATH],
-    pub DigitalSignerVersion: [::WCHAR; ::MAX_PATH],
-}
-impl Clone for SP_INF_SIGNER_INFO_V1_W { fn clone(&self) -> SP_INF_SIGNER_INFO_V1_W { *self } }
+STRUCT!{nodebug struct SP_INF_SIGNER_INFO_V1_W {
+    cbSize: ::DWORD,
+    CatalogFile: [::WCHAR; ::MAX_PATH],
+    DigitalSigner: [::WCHAR; ::MAX_PATH],
+    DigitalSignerVersion: [::WCHAR; ::MAX_PATH],
+}}
 pub type PSP_INF_SIGNER_INFO_V1_W = *mut SP_INF_SIGNER_INFO_V1_W;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_INF_SIGNER_INFO_V2_A {
-    pub cbSize: ::DWORD,
-    pub CatalogFile: [::CHAR; ::MAX_PATH],
-    pub DigitalSigner: [::CHAR; ::MAX_PATH],
-    pub DigitalSignerVersion: [::CHAR; ::MAX_PATH],
-    pub SignerScore: ::DWORD,
-}
-impl Clone for SP_INF_SIGNER_INFO_V2_A { fn clone(&self) -> SP_INF_SIGNER_INFO_V2_A { *self } }
+STRUCT!{nodebug struct SP_INF_SIGNER_INFO_V2_A {
+    cbSize: ::DWORD,
+    CatalogFile: [::CHAR; ::MAX_PATH],
+    DigitalSigner: [::CHAR; ::MAX_PATH],
+    DigitalSignerVersion: [::CHAR; ::MAX_PATH],
+    SignerScore: ::DWORD,
+}}
 pub type PSP_INF_SIGNER_INFO_V2_A = *mut SP_INF_SIGNER_INFO_V2_A;
-#[repr(C)] #[derive(Copy)]
-pub struct SP_INF_SIGNER_INFO_V2_W {
-    pub cbSize: ::DWORD,
-    pub CatalogFile: [::WCHAR; ::MAX_PATH],
-    pub DigitalSigner: [::WCHAR; ::MAX_PATH],
-    pub DigitalSignerVersion: [::WCHAR; ::MAX_PATH],
-    pub SignerScore: ::DWORD,
-}
-impl Clone for SP_INF_SIGNER_INFO_V2_W { fn clone(&self) -> SP_INF_SIGNER_INFO_V2_W { *self } }
+STRUCT!{nodebug struct SP_INF_SIGNER_INFO_V2_W {
+    cbSize: ::DWORD,
+    CatalogFile: [::WCHAR; ::MAX_PATH],
+    DigitalSigner: [::WCHAR; ::MAX_PATH],
+    DigitalSignerVersion: [::WCHAR; ::MAX_PATH],
+    SignerScore: ::DWORD,
+}}
 pub type PSP_INF_SIGNER_INFO_V2_W = *mut SP_INF_SIGNER_INFO_V2_W;
 pub type SP_INF_SIGNER_INFO_A = SP_INF_SIGNER_INFO_V2_A;
 pub type PSP_INF_SIGNER_INFO_A = PSP_INF_SIGNER_INFO_V2_A;

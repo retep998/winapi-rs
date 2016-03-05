@@ -87,11 +87,10 @@ STRUCT!{struct SOCKET_ADDRESS {
 }}
 pub type PSOCKET_ADDRESS = *mut SOCKET_ADDRESS;
 pub type LPSOCKET_ADDRESS = *mut SOCKET_ADDRESS;
-#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
-pub struct SOCKET_ADDRESS_LIST {
-    pub iAddressCount: ::INT,
-    pub Address: [SOCKET_ADDRESS; 0],
-}
+STRUCT!{nodebug struct SOCKET_ADDRESS_LIST {
+    iAddressCount: ::INT,
+    Address: [SOCKET_ADDRESS; 0],
+}}
 pub type PSOCKET_ADDRESS_LIST = *mut SOCKET_ADDRESS_LIST;
 pub type LPSOCKET_ADDRESS_LIST = *mut SOCKET_ADDRESS_LIST;
 STRUCT!{struct CSADDR_INFO {
@@ -102,24 +101,20 @@ STRUCT!{struct CSADDR_INFO {
 }}
 pub type PCSADDR_INFO = *mut CSADDR_INFO;
 pub type LPCSADDR_INFO = *mut CSADDR_INFO;
-#[repr(C)] #[derive(Copy)]
-pub struct SOCKADDR_STORAGE_LH {
-    pub ss_family: ADDRESS_FAMILY,
-    pub __ss_pad1: [::CHAR; 6],
-    pub __ss_align: ::__int64,
-    pub __ss_pad2: [::CHAR; 112],
-}
-impl Clone for SOCKADDR_STORAGE_LH { fn clone(&self) -> SOCKADDR_STORAGE_LH { *self } }
+STRUCT!{nodebug struct SOCKADDR_STORAGE_LH {
+    ss_family: ADDRESS_FAMILY,
+    __ss_pad1: [::CHAR; 6],
+    __ss_align: ::__int64,
+    __ss_pad2: [::CHAR; 112],
+}}
 pub type PSOCKADDR_STORAGE_LH = *mut SOCKADDR_STORAGE_LH;
 pub type LPSOCKADDR_STORAGE_LH = *mut SOCKADDR_STORAGE_LH;
-#[repr(C)] #[derive(Copy)]
-pub struct SOCKADDR_STORAGE_XP {
-    pub ss_family: ::c_short,
-    pub __ss_pad1: [::CHAR; 6],
-    pub __ss_align: ::__int64,
-    pub __ss_pad2: [::CHAR; 112],
-}
-impl Clone for SOCKADDR_STORAGE_XP { fn clone(&self) -> SOCKADDR_STORAGE_XP { *self } }
+STRUCT!{nodebug struct SOCKADDR_STORAGE_XP {
+    ss_family: ::c_short,
+    __ss_pad1: [::CHAR; 6],
+    __ss_align: ::__int64,
+    __ss_pad2: [::CHAR; 112],
+}}
 pub type PSOCKADDR_STORAGE_XP = *mut SOCKADDR_STORAGE_XP;
 pub type LPSOCKADDR_STORAGE_XP = *mut SOCKADDR_STORAGE_XP;
 pub type SOCKADDR_STORAGE = SOCKADDR_STORAGE_LH;

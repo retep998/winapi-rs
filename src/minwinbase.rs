@@ -36,36 +36,32 @@ STRUCT!{struct SYSTEMTIME {
 }}
 pub type PSYSTEMTIME = *mut SYSTEMTIME;
 pub type LPSYSTEMTIME = *mut SYSTEMTIME;
-#[repr(C)] #[derive(Copy)]
-pub struct WIN32_FIND_DATAA {
-    pub dwFileAttributes: ::DWORD,
-    pub ftCreationTime: ::FILETIME,
-    pub ftLastAccessTime: ::FILETIME,
-    pub ftLastWriteTime: ::FILETIME,
-    pub nFileSizeHigh: ::DWORD,
-    pub nFileSizeLow: ::DWORD,
-    pub dwReserved0: ::DWORD,
-    pub dwReserved1: ::DWORD,
-    pub cFileName: [::CHAR; ::MAX_PATH],
-    pub cAlternateFileName: [::CHAR; 14],
-}
-impl Clone for WIN32_FIND_DATAA { fn clone(&self) -> WIN32_FIND_DATAA { *self } }
+STRUCT!{nodebug struct WIN32_FIND_DATAA {
+    dwFileAttributes: ::DWORD,
+    ftCreationTime: ::FILETIME,
+    ftLastAccessTime: ::FILETIME,
+    ftLastWriteTime: ::FILETIME,
+    nFileSizeHigh: ::DWORD,
+    nFileSizeLow: ::DWORD,
+    dwReserved0: ::DWORD,
+    dwReserved1: ::DWORD,
+    cFileName: [::CHAR; ::MAX_PATH],
+    cAlternateFileName: [::CHAR; 14],
+}}
 pub type PWIN32_FIND_DATAA = *mut WIN32_FIND_DATAA;
 pub type LPWIN32_FIND_DATAA = *mut WIN32_FIND_DATAA;
-#[repr(C)] #[derive(Copy)]
-pub struct WIN32_FIND_DATAW {
-    pub dwFileAttributes: ::DWORD,
-    pub ftCreationTime: ::FILETIME,
-    pub ftLastAccessTime: ::FILETIME,
-    pub ftLastWriteTime: ::FILETIME,
-    pub nFileSizeHigh: ::DWORD,
-    pub nFileSizeLow: ::DWORD,
-    pub dwReserved0: ::DWORD,
-    pub dwReserved1: ::DWORD,
-    pub cFileName: [::WCHAR; ::MAX_PATH],
-    pub cAlternateFileName: [::WCHAR; 14],
-}
-impl Clone for WIN32_FIND_DATAW { fn clone(&self) -> WIN32_FIND_DATAW { *self } }
+STRUCT!{nodebug struct WIN32_FIND_DATAW {
+    dwFileAttributes: ::DWORD,
+    ftCreationTime: ::FILETIME,
+    ftLastAccessTime: ::FILETIME,
+    ftLastWriteTime: ::FILETIME,
+    nFileSizeHigh: ::DWORD,
+    nFileSizeLow: ::DWORD,
+    dwReserved0: ::DWORD,
+    dwReserved1: ::DWORD,
+    cFileName: [::WCHAR; ::MAX_PATH],
+    cAlternateFileName: [::WCHAR; 14],
+}}
 pub type PWIN32_FIND_DATAW = *mut WIN32_FIND_DATAW;
 pub type LPWIN32_FIND_DATAW = *mut WIN32_FIND_DATAW;
 ENUM!{enum FINDEX_INFO_LEVELS {
@@ -180,28 +176,24 @@ STRUCT!{struct EXCEPTION_DEBUG_INFO {
     dwFirstChance: ::DWORD,
 }}
 pub type LPEXCEPTION_DEBUG_INFO = *mut EXCEPTION_DEBUG_INFO;
-#[repr(C)] #[derive(Copy)]
-pub struct CREATE_THREAD_DEBUG_INFO {
-    pub hThread: ::HANDLE,
-    pub lpThreadLocalBase: ::LPVOID,
-    pub lpStartAddress: LPTHREAD_START_ROUTINE,
-}
-impl Clone for CREATE_THREAD_DEBUG_INFO { fn clone(&self) -> CREATE_THREAD_DEBUG_INFO { *self } }
+STRUCT!{nodebug struct CREATE_THREAD_DEBUG_INFO {
+    hThread: ::HANDLE,
+    lpThreadLocalBase: ::LPVOID,
+    lpStartAddress: LPTHREAD_START_ROUTINE,
+}}
 pub type LPCREATE_THREAD_DEBUG_INFO = *mut CREATE_THREAD_DEBUG_INFO;
-#[repr(C)] #[derive(Copy)]
-pub struct CREATE_PROCESS_DEBUG_INFO {
-    pub hFile: ::HANDLE,
-    pub hProcess: ::HANDLE,
-    pub hThread: ::HANDLE,
-    pub lpBaseOfImage: ::LPVOID,
-    pub dwDebugInfoFileOffset: ::DWORD,
-    pub nDebugInfoSize: ::DWORD,
-    pub lpThreadLocalBase: ::LPVOID,
-    pub lpStartAddress: LPTHREAD_START_ROUTINE,
-    pub lpImageName: ::LPVOID,
-    pub fUnicode: ::WORD,
-}
-impl Clone for CREATE_PROCESS_DEBUG_INFO { fn clone(&self) -> CREATE_PROCESS_DEBUG_INFO { *self } }
+STRUCT!{nodebug struct CREATE_PROCESS_DEBUG_INFO {
+    hFile: ::HANDLE,
+    hProcess: ::HANDLE,
+    hThread: ::HANDLE,
+    lpBaseOfImage: ::LPVOID,
+    dwDebugInfoFileOffset: ::DWORD,
+    nDebugInfoSize: ::DWORD,
+    lpThreadLocalBase: ::LPVOID,
+    lpStartAddress: LPTHREAD_START_ROUTINE,
+    lpImageName: ::LPVOID,
+    fUnicode: ::WORD,
+}}
 pub type LPCREATE_PROCESS_DEBUG_INFO = *mut CREATE_PROCESS_DEBUG_INFO;
 STRUCT!{struct EXIT_THREAD_DEBUG_INFO {
     dwExitCode: ::DWORD,
@@ -235,17 +227,20 @@ STRUCT!{struct RIP_INFO {
     dwType: ::DWORD,
 }}
 pub type LPRIP_INFO = *mut RIP_INFO;
-#[repr(C)] #[derive(Copy)]
-pub struct DEBUG_EVENT {
-    pub dwDebugEventCode: ::DWORD,
-    pub dwProcessId: ::DWORD,
-    pub dwThreadId: ::DWORD,
-    #[cfg(target_arch="x86")]
-    pub u: [u8; 84],
-    #[cfg(target_arch="x86_64")]
-    pub u: [u8; 160],
-}
-impl Clone for DEBUG_EVENT { fn clone(&self) -> DEBUG_EVENT { *self } }
+#[cfg(target_arch="x86_64")]
+STRUCT!{nodebug struct DEBUG_EVENT {
+    dwDebugEventCode: ::DWORD,
+    dwProcessId: ::DWORD,
+    dwThreadId: ::DWORD,
+    u: [u8; 160],
+}}
+#[cfg(target_arch="x86")]
+STRUCT!{nodebug struct DEBUG_EVENT {
+    dwDebugEventCode: ::DWORD,
+    dwProcessId: ::DWORD,
+    dwThreadId: ::DWORD,
+    u: [u8; 84],
+}}
 UNION!(DEBUG_EVENT, u, Exception, Exception_mut, EXCEPTION_DEBUG_INFO);
 UNION!(DEBUG_EVENT, u, CreateThread, CreateThread_mut, CREATE_THREAD_DEBUG_INFO);
 UNION!(DEBUG_EVENT, u, CreateProcessInfo, CreateProcessInfo_mut, CREATE_PROCESS_DEBUG_INFO);

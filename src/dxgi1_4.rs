@@ -16,13 +16,12 @@ FLAGS!{ enum DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG {
     DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT = 0x2,
 }}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_QUERY_VIDEO_MEMORY_INFO {
-    pub Budget: ::UINT64,
-    pub CurrentUsage: ::UINT64,
-    pub AvailableForReservation: ::UINT64,
-    pub CurrentReservation: ::UINT64,
-}
+STRUCT!{struct DXGI_QUERY_VIDEO_MEMORY_INFO {
+    Budget: ::UINT64,
+    CurrentUsage: ::UINT64,
+    AvailableForReservation: ::UINT64,
+    CurrentReservation: ::UINT64,
+}}
 
 RIDL!(
 interface IDXGIAdapter3(IDXGIAdapter3Vtbl): IDXGIAdapter2(IDXGIAdapter2Vtbl) {

@@ -872,39 +872,35 @@ STRUCT!{struct WINDOWPLACEMENT {
 }}
 pub type PWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
 pub type LPWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
-#[repr(C)] #[derive(Copy)]
-pub struct WNDCLASSEXW {
-    pub cbSize: ::UINT,
-    pub style: ::UINT,
-    pub lpfnWndProc: WNDPROC,
-    pub cbClsExtra: ::c_int,
-    pub cbWndExtra: ::c_int,
-    pub hInstance: ::HINSTANCE,
-    pub hIcon: ::HICON,
-    pub hCursor: ::HCURSOR,
-    pub hbrBackground: ::HBRUSH,
-    pub lpszMenuName: ::LPCWSTR,
-    pub lpszClassName: ::LPCWSTR,
-    pub hIconSm: ::HICON,
-}
-impl Clone for WNDCLASSEXW { fn clone(&self) -> WNDCLASSEXW { *self } }
+STRUCT!{nodebug struct WNDCLASSEXW {
+    cbSize: ::UINT,
+    style: ::UINT,
+    lpfnWndProc: WNDPROC,
+    cbClsExtra: ::c_int,
+    cbWndExtra: ::c_int,
+    hInstance: ::HINSTANCE,
+    hIcon: ::HICON,
+    hCursor: ::HCURSOR,
+    hbrBackground: ::HBRUSH,
+    lpszMenuName: ::LPCWSTR,
+    lpszClassName: ::LPCWSTR,
+    hIconSm: ::HICON,
+}}
 pub type PWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type NPWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type LPWNDCLASSEXW = *mut WNDCLASSEXW;
-#[repr(C)] #[derive(Copy)]
-pub struct WNDCLASSW {
-    pub style: ::UINT,
-    pub lpfnWndProc: WNDPROC,
-    pub cbClsExtra: ::c_int,
-    pub cbWndExtra: ::c_int,
-    pub hInstance: ::HINSTANCE,
-    pub hIcon: ::HICON,
-    pub hCursor: ::HCURSOR,
-    pub hbrBackground: ::HBRUSH,
-    pub lpszMenuName: ::LPCWSTR,
-    pub lpszClassName: ::LPCWSTR
-}
-impl Clone for WNDCLASSW { fn clone(&self) -> WNDCLASSW { *self } }
+STRUCT!{nodebug struct WNDCLASSW {
+    style: ::UINT,
+    lpfnWndProc: WNDPROC,
+    cbClsExtra: ::c_int,
+    cbWndExtra: ::c_int,
+    hInstance: ::HINSTANCE,
+    hIcon: ::HICON,
+    hCursor: ::HCURSOR,
+    hbrBackground: ::HBRUSH,
+    lpszMenuName: ::LPCWSTR,
+    lpszClassName: ::LPCWSTR,
+}}
 pub type PWNDCLASSW = *mut WNDCLASSW;
 pub type NPWNDCLASSW = *mut WNDCLASSW;
 pub type LPWNDCLASSW = *mut WNDCLASSW;
@@ -978,19 +974,15 @@ STRUCT!{struct TRACKMOUSEEVENT {
 }}
 pub type LPTRACKMOUSEEVENT = *mut TRACKMOUSEEVENT;
 //2575
-/// lParam of WM_WINDOWPOSCHANGING, WM_WINDOWPOSCHANGED
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WINDOWPOS {
-    pub hwnd: ::HWND,
-    /// hwnd or HWND_BOTTOM, HWND_NOTOPMOST, HWND_TOP, HWND_TOPMOST
-    pub hwndInsertAfter: ::HWND,
-    pub x: ::c_int,
-    pub y: ::c_int,
-    pub cx: ::c_int,
-    pub cy: ::c_int,
-    /// SWP_\*
-    pub flags: ::UINT,
-}
+STRUCT!{nodebug struct WINDOWPOS {
+    hwnd: ::HWND,
+    hwndInsertAfter: ::HWND,
+    x: ::c_int,
+    y: ::c_int,
+    cx: ::c_int,
+    cy: ::c_int,
+    flags: ::UINT,
+}}
 pub type LPWINDOWPOS = *mut WINDOWPOS;
 pub type PWINDOWPOS = *mut WINDOWPOS;
 //3082
@@ -1025,13 +1017,11 @@ STRUCT!{struct CREATESTRUCTW {
 }}
 pub type LPCREATESTRUCTW = *mut CREATESTRUCTW;
 //3145
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-/// The lParam of the WM_NOTIFY message is a pointer to this structure
-pub struct NMHDR {
-    pub hwndFrom: ::HWND,
-    pub idFrom: ::UINT_PTR,
-    pub code: ::UINT,  // NM_ code
-}
+STRUCT!{struct NMHDR {
+    hwndFrom: ::HWND,
+    idFrom: ::UINT_PTR,
+    code: ::UINT,  // NM_ code
+}}
 pub type LPNMHDR = *mut NMHDR;
 //3400
 pub const PM_NOREMOVE: ::UINT = 0x0000;
@@ -1619,45 +1609,43 @@ pub const CB_GETDROPPEDWIDTH: ::UINT = 0x015f;
 pub const CB_SETDROPPEDWIDTH: ::UINT = 0x0160;
 pub const CB_INITSTORAGE: ::UINT = 0x0161;
 //12141
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct NONCLIENTMETRICSA {
-    pub cbSize: ::UINT,
-    pub iBorderWidth: ::c_int,
-    pub iScrollWidth: ::c_int,
-    pub iScrollHeight: ::c_int,
-    pub iCaptionWidth: ::c_int,
-    pub iCaptionHeight: ::c_int,
-    pub lfCaptionFont: ::LOGFONTA,
-    pub iSmCaptionWidth: ::c_int,
-    pub iSmCaptionHeight: ::c_int,
-    pub lfSmCaptionFont: ::LOGFONTA,
-    pub iMenuWidth: ::c_int,
-    pub iMenuHeight: ::c_int,
-    pub lfMenuFont: ::LOGFONTA,
-    pub lfStatusFont: ::LOGFONTA,
-    pub lfMessageFont: ::LOGFONTA,
-    pub iPaddedBorderWidth: ::c_int,
-}
+STRUCT!{nodebug struct NONCLIENTMETRICSA {
+    cbSize: ::UINT,
+    iBorderWidth: ::c_int,
+    iScrollWidth: ::c_int,
+    iScrollHeight: ::c_int,
+    iCaptionWidth: ::c_int,
+    iCaptionHeight: ::c_int,
+    lfCaptionFont: ::LOGFONTA,
+    iSmCaptionWidth: ::c_int,
+    iSmCaptionHeight: ::c_int,
+    lfSmCaptionFont: ::LOGFONTA,
+    iMenuWidth: ::c_int,
+    iMenuHeight: ::c_int,
+    lfMenuFont: ::LOGFONTA,
+    lfStatusFont: ::LOGFONTA,
+    lfMessageFont: ::LOGFONTA,
+    iPaddedBorderWidth: ::c_int,
+}}
 pub type LPNONCLIENTMETRICSA = *mut NONCLIENTMETRICSA;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct NONCLIENTMETRICSW {
-    pub cbSize: ::UINT,
-    pub iBorderWidth: ::c_int,
-    pub iScrollWidth: ::c_int,
-    pub iScrollHeight: ::c_int,
-    pub iCaptionWidth: ::c_int,
-    pub iCaptionHeight: ::c_int,
-    pub lfCaptionFont: ::LOGFONTW,
-    pub iSmCaptionWidth: ::c_int,
-    pub iSmCaptionHeight: ::c_int,
-    pub lfSmCaptionFont: ::LOGFONTW,
-    pub iMenuWidth: ::c_int,
-    pub iMenuHeight: ::c_int,
-    pub lfMenuFont: ::LOGFONTW,
-    pub lfStatusFont: ::LOGFONTW,
-    pub lfMessageFont: ::LOGFONTW,
-    pub iPaddedBorderWidth: ::c_int,
-}
+STRUCT!{nodebug struct NONCLIENTMETRICSW {
+    cbSize: ::UINT,
+    iBorderWidth: ::c_int,
+    iScrollWidth: ::c_int,
+    iScrollHeight: ::c_int,
+    iCaptionWidth: ::c_int,
+    iCaptionHeight: ::c_int,
+    lfCaptionFont: ::LOGFONTW,
+    iSmCaptionWidth: ::c_int,
+    iSmCaptionHeight: ::c_int,
+    lfSmCaptionFont: ::LOGFONTW,
+    iMenuWidth: ::c_int,
+    iMenuHeight: ::c_int,
+    lfMenuFont: ::LOGFONTW,
+    lfStatusFont: ::LOGFONTW,
+    lfMessageFont: ::LOGFONTW,
+    iPaddedBorderWidth: ::c_int,
+}}
 pub type LPNONCLIENTMETRICSW = *mut NONCLIENTMETRICSW;
 //12900
 pub const MONITORINFOF_PRIMARY: ::DWORD = 1;
@@ -1756,12 +1744,11 @@ pub const RI_KEY_E0: ::DWORD = 2;
 pub const RI_KEY_E1: ::DWORD = 4;
 pub const RI_KEY_TERMSRV_SET_LED: ::DWORD = 8;
 pub const RI_KEY_TERMSRV_SHADOW: ::DWORD = 0x10;
-#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
-pub struct RAWHID {
-    pub dwSizeHid: ::DWORD,
-    pub dwCount: ::DWORD,
-    pub bRawData: [::BYTE; 0],
-}
+STRUCT!{struct RAWHID {
+    dwSizeHid: ::DWORD,
+    dwCount: ::DWORD,
+    bRawData: [::BYTE; 0],
+}}
 pub type PRAWHID = *mut RAWHID;
 pub type LPRAWHID = *mut RAWHID;
 STRUCT!{struct RAWINPUT {
@@ -1924,36 +1911,32 @@ STRUCT!{struct MENUITEMINFOW {
 }}
 pub type LPMENUITEMINFOW = *mut MENUITEMINFOW;
 pub type LPCMENUITEMINFOW = *const MENUITEMINFOW;
-#[repr(C)] #[derive(Copy)]
-pub struct MSGBOXPARAMSA {
-    pub cbSize: ::UINT,
-    pub hwndOwner: ::HWND,
-    pub hInstance: ::HINSTANCE,
-    pub lpszText: ::LPCSTR,
-    pub lpszCaption: ::LPCSTR,
-    pub dwStyle: ::DWORD,
-    pub lpszIcon: ::LPCSTR,
-    pub dwContextHelpId: ::DWORD_PTR,
-    pub lpfnMsgBoxCallback: ::MSGBOXCALLBACK,
-    pub dwLanguageId: ::DWORD,
-}
-impl Clone for MSGBOXPARAMSA { fn clone(&self) -> MSGBOXPARAMSA { *self } }
+STRUCT!{nodebug struct MSGBOXPARAMSA {
+    cbSize: ::UINT,
+    hwndOwner: ::HWND,
+    hInstance: ::HINSTANCE,
+    lpszText: ::LPCSTR,
+    lpszCaption: ::LPCSTR,
+    dwStyle: ::DWORD,
+    lpszIcon: ::LPCSTR,
+    dwContextHelpId: ::DWORD_PTR,
+    lpfnMsgBoxCallback: ::MSGBOXCALLBACK,
+    dwLanguageId: ::DWORD,
+}}
 pub type PMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
 pub type LPMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
-#[repr(C)] #[derive(Copy)]
-pub struct MSGBOXPARAMSW {
-    pub cbSize: ::UINT,
-    pub hwndOwner: ::HWND,
-    pub hInstance: ::HINSTANCE,
-    pub lpszText: ::LPCWSTR,
-    pub lpszCaption: ::LPCWSTR,
-    pub dwStyle: ::DWORD,
-    pub lpszIcon: ::LPCWSTR,
-    pub dwContextHelpId: ::DWORD_PTR,
-    pub lpfnMsgBoxCallback: ::MSGBOXCALLBACK,
-    pub dwLanguageId: ::DWORD,
-}
-impl Clone for MSGBOXPARAMSW { fn clone(&self) -> MSGBOXPARAMSW { *self } }
+STRUCT!{nodebug struct MSGBOXPARAMSW {
+    cbSize: ::UINT,
+    hwndOwner: ::HWND,
+    hInstance: ::HINSTANCE,
+    lpszText: ::LPCWSTR,
+    lpszCaption: ::LPCWSTR,
+    dwStyle: ::DWORD,
+    lpszIcon: ::LPCWSTR,
+    dwContextHelpId: ::DWORD_PTR,
+    lpfnMsgBoxCallback: ::MSGBOXCALLBACK,
+    dwLanguageId: ::DWORD,
+}}
 pub type PMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
 pub type LPMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
 STRUCT!{struct HELPINFO {

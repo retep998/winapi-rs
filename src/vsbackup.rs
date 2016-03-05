@@ -98,11 +98,11 @@ interface IVssExamineWriterMetadataEx2(IVssExamineWriterMetadataEx2Vtbl):
     ) -> ::HRESULT
 }
 );
-#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
+#[repr(C)]
 pub struct IVssWriterComponentsExt {
     pub lpVtbl: *const IVssWriterComponentsExtVtbl,
 }
-#[repr(C)] #[allow(missing_copy_implementations)]
+#[repr(C)]
 pub struct IVssWriterComponentsExtVtbl {
     pub parent1: ::IVssWriterComponentsVtbl,
     pub parent2: ::IUnknownVtbl,

@@ -183,19 +183,15 @@ pub type LPSERVICE_MAIN_FUNCTIONW = Option<unsafe extern "system" fn(
 pub type LPSERVICE_MAIN_FUNCTIONA = Option<unsafe extern "system" fn(
     dwNumServicesArgs: ::DWORD, lpServiceArgVectors: *mut ::LPSTR,
 )>;
-#[repr(C)] #[derive(Copy)]
-pub struct SERVICE_TABLE_ENTRYA {
-    pub lpServiceName: ::LPCSTR,
-    pub lpServiceProc: LPSERVICE_MAIN_FUNCTIONA,
-}
-impl Clone for SERVICE_TABLE_ENTRYA { fn clone(&self) -> SERVICE_TABLE_ENTRYA { *self } }
+STRUCT!{nodebug struct SERVICE_TABLE_ENTRYA {
+    lpServiceName: ::LPCSTR,
+    lpServiceProc: LPSERVICE_MAIN_FUNCTIONA,
+}}
 pub type LPSERVICE_TABLE_ENTRYA = *mut SERVICE_TABLE_ENTRYA;
-#[repr(C)] #[derive(Copy)]
-pub struct SERVICE_TABLE_ENTRYW {
-    pub lpServiceName: ::LPCWSTR,
-    pub lpServiceProc: LPSERVICE_MAIN_FUNCTIONW,
-}
-impl Clone for SERVICE_TABLE_ENTRYW { fn clone(&self) -> SERVICE_TABLE_ENTRYW { *self } }
+STRUCT!{nodebug struct SERVICE_TABLE_ENTRYW {
+    lpServiceName: ::LPCWSTR,
+    lpServiceProc: LPSERVICE_MAIN_FUNCTIONW,
+}}
 pub type LPSERVICE_TABLE_ENTRYW = *mut SERVICE_TABLE_ENTRYW;
 //900
 pub type LPHANDLER_FUNCTION = Option<unsafe extern "system" fn(dwControl: ::DWORD)>;

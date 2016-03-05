@@ -75,27 +75,23 @@ STRUCT!{struct CPINFO {
     LeadByte: [::BYTE; MAX_LEADBYTES],
 }}
 pub type LPCPINFO = *mut CPINFO;
-#[repr(C)] #[derive(Copy)]
-pub struct CPINFOEXA {
-    pub MaxCharSize: ::UINT,
-    pub DefaultChar: [::BYTE; MAX_DEFAULTCHAR],
-    pub LeadByte: [::BYTE; MAX_LEADBYTES],
-    pub UnicodeDefaultChar: ::WCHAR,
-    pub CodePage: ::UINT,
-    pub CodePageName: [::CHAR; ::MAX_PATH],
-}
-impl Clone for CPINFOEXA { fn clone(&self) -> CPINFOEXA{ *self } }
+STRUCT!{nodebug struct CPINFOEXA {
+    MaxCharSize: ::UINT,
+    DefaultChar: [::BYTE; MAX_DEFAULTCHAR],
+    LeadByte: [::BYTE; MAX_LEADBYTES],
+    UnicodeDefaultChar: ::WCHAR,
+    CodePage: ::UINT,
+    CodePageName: [::CHAR; ::MAX_PATH],
+}}
 pub type LPCPINFOEXA = *mut CPINFOEXA;
-#[repr(C)] #[derive(Copy)]
-pub struct CPINFOEXW {
-    pub MaxCharSize: ::UINT,
-    pub DefaultChar: [::BYTE; MAX_DEFAULTCHAR],
-    pub LeadByte: [::BYTE; MAX_LEADBYTES],
-    pub UnicodeDefaultChar: ::WCHAR,
-    pub CodePage: ::UINT,
-    pub CodePageName: [::WCHAR; ::MAX_PATH],
-}
-impl Clone for CPINFOEXW { fn clone(&self) -> CPINFOEXW{ *self } }
+STRUCT!{nodebug struct CPINFOEXW {
+    MaxCharSize: ::UINT,
+    DefaultChar: [::BYTE; MAX_DEFAULTCHAR],
+    LeadByte: [::BYTE; MAX_LEADBYTES],
+    UnicodeDefaultChar: ::WCHAR,
+    CodePage: ::UINT,
+    CodePageName: [::WCHAR; ::MAX_PATH],
+}}
 pub type LPCPINFOEXW = *mut CPINFOEXW;
 STRUCT!{struct NUMBERFMTA {
     NumDigits: ::UINT,

@@ -495,25 +495,21 @@ UNION!(
     HTTP_DATA_CHUNK_FromFragmentCacheEx
 );
 pub type PHTTP_DATA_CHUNK = *mut HTTP_DATA_CHUNK;
-#[repr(C)] #[derive(Copy)]
-pub struct HTTP_REQUEST_HEADERS {
-    pub UnknownHeaderCount: ::USHORT,
-    pub pUnknownHeaders: PHTTP_UNKNOWN_HEADER,
-    pub TrailerCount: ::USHORT,
-    pub pTrailers: PHTTP_UNKNOWN_HEADER,
-    pub KnownHeaders: [HTTP_KNOWN_HEADER; 41], // FIXME HttpHeaderRequestMaximum
-}
-impl Clone for HTTP_REQUEST_HEADERS { fn clone(&self) -> HTTP_REQUEST_HEADERS { *self } }
+STRUCT!{nodebug struct HTTP_REQUEST_HEADERS {
+    UnknownHeaderCount: ::USHORT,
+    pUnknownHeaders: PHTTP_UNKNOWN_HEADER,
+    TrailerCount: ::USHORT,
+    pTrailers: PHTTP_UNKNOWN_HEADER,
+    KnownHeaders: [HTTP_KNOWN_HEADER; 41], // FIXME HttpHeaderRequestMaximum
+}}
 pub type PHTTP_REQUEST_HEADERS = *mut HTTP_REQUEST_HEADERS;
-#[repr(C)] #[derive(Copy)]
-pub struct HTTP_RESPONSE_HEADERS {
-    pub UnknownHeaderCount: ::USHORT,
-    pub pUnknownHeaders: PHTTP_UNKNOWN_HEADER,
-    pub TrailerCount: ::USHORT,
-    pub pTrailers: PHTTP_UNKNOWN_HEADER,
-    pub KnownHeaders: [HTTP_KNOWN_HEADER; 30], // FIXME HttpHeaderResponseMaximum
-}
-impl Clone for HTTP_RESPONSE_HEADERS { fn clone(&self) -> HTTP_RESPONSE_HEADERS { *self } }
+STRUCT!{nodebug struct HTTP_RESPONSE_HEADERS {
+    UnknownHeaderCount: ::USHORT,
+    pUnknownHeaders: PHTTP_UNKNOWN_HEADER,
+    TrailerCount: ::USHORT,
+    pTrailers: PHTTP_UNKNOWN_HEADER,
+    KnownHeaders: [HTTP_KNOWN_HEADER; 30], // FIXME HttpHeaderResponseMaximum
+}}
 pub type PHTTP_RESPONSE_HEADERS = *mut HTTP_RESPONSE_HEADERS;
 STRUCT!{struct HTTP_TRANSPORT_ADDRESS {
     pRemoteAddress: ::PSOCKADDR,
@@ -595,50 +591,47 @@ STRUCT!{struct HTTP_REQUEST_AUTH_INFO {
     pPackageName: ::PWSTR,
 }}
 pub type PHTTP_REQUEST_AUTH_INFO = *mut HTTP_REQUEST_AUTH_INFO;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct HTTP_REQUEST_V1 {
-    pub Flags: ::ULONG,
-    pub ConnectionId: HTTP_CONNECTION_ID,
-    pub RequestId: HTTP_REQUEST_ID,
-    pub UrlContext: HTTP_URL_CONTEXT,
-    pub Version: HTTP_VERSION,
-    pub Verb: HTTP_VERB,
-    pub UnknownVerbLength: ::USHORT,
-    pub RawUrlLength: ::USHORT,
-    pub pUnknownVerb: ::PCSTR,
-    pub pRawUrl: ::PCSTR,
-    pub CookedUrl: HTTP_COOKED_URL,
-    pub Address: HTTP_TRANSPORT_ADDRESS,
-    pub Headers: HTTP_REQUEST_HEADERS,
-    pub BytesReceived: ::ULONGLONG,
-    pub EntityChunkCount: ::USHORT,
-    pub pEntityChunks: PHTTP_DATA_CHUNK,
-    pub RawConnectionId: HTTP_RAW_CONNECTION_ID,
-    pub pSslInfo: PHTTP_SSL_INFO,
-}
+STRUCT!{nodebug struct HTTP_REQUEST_V1 {
+    Flags: ::ULONG,
+    ConnectionId: HTTP_CONNECTION_ID,
+    RequestId: HTTP_REQUEST_ID,
+    UrlContext: HTTP_URL_CONTEXT,
+    Version: HTTP_VERSION,
+    Verb: HTTP_VERB,
+    UnknownVerbLength: ::USHORT,
+    RawUrlLength: ::USHORT,
+    pUnknownVerb: ::PCSTR,
+    pRawUrl: ::PCSTR,
+    CookedUrl: HTTP_COOKED_URL,
+    Address: HTTP_TRANSPORT_ADDRESS,
+    Headers: HTTP_REQUEST_HEADERS,
+    BytesReceived: ::ULONGLONG,
+    EntityChunkCount: ::USHORT,
+    pEntityChunks: PHTTP_DATA_CHUNK,
+    RawConnectionId: HTTP_RAW_CONNECTION_ID,
+    pSslInfo: PHTTP_SSL_INFO,
+}}
 pub type PHTTP_REQUEST_V1 = *mut HTTP_REQUEST_V1;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct HTTP_REQUEST_V2 {
-    pub Base: HTTP_REQUEST_V1,
-    pub RequestInfoCount: ::USHORT,
-    pub pRequestInfo: PHTTP_REQUEST_INFO,
-}
+STRUCT!{nodebug struct HTTP_REQUEST_V2 {
+    Base: HTTP_REQUEST_V1,
+    RequestInfoCount: ::USHORT,
+    pRequestInfo: PHTTP_REQUEST_INFO,
+}}
 pub type PHTTP_REQUEST_V2 = *mut HTTP_REQUEST_V2;
 pub type HTTP_REQUEST = HTTP_REQUEST_V2;
 pub type PHTTP_REQUEST = *mut HTTP_REQUEST;
 pub const HTTP_REQUEST_FLAG_MORE_ENTITY_BODY_EXISTS: ::ULONG = 0x00000001;
 pub const HTTP_REQUEST_FLAG_IP_ROUTED: ::ULONG = 0x00000002;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct HTTP_RESPONSE_V1 {
-    pub Flags: ::ULONG,
-    pub Version: HTTP_VERSION,
-    pub StatusCode: ::USHORT,
-    pub ReasonLength: ::USHORT,
-    pub pReason: ::PCSTR,
-    pub Headers: HTTP_RESPONSE_HEADERS,
-    pub EntityChunkCount: ::USHORT,
-    pub pEntityChunks: PHTTP_DATA_CHUNK,
-}
+STRUCT!{nodebug struct HTTP_RESPONSE_V1 {
+    Flags: ::ULONG,
+    Version: HTTP_VERSION,
+    StatusCode: ::USHORT,
+    ReasonLength: ::USHORT,
+    pReason: ::PCSTR,
+    Headers: HTTP_RESPONSE_HEADERS,
+    EntityChunkCount: ::USHORT,
+    pEntityChunks: PHTTP_DATA_CHUNK,
+}}
 pub type PHTTP_RESPONSE_V1 = *mut HTTP_RESPONSE_V1;
 pub const HTTP_RESPONSE_FLAG_MULTIPLE_ENCODINGS_AVAILABLE: ::ULONG = 0x00000001;
 ENUM!{enum HTTP_RESPONSE_INFO_TYPE {
@@ -662,12 +655,11 @@ STRUCT!{struct HTTP_MULTIPLE_KNOWN_HEADERS {
     KnownHeaders: PHTTP_KNOWN_HEADER,
 }}
 pub type PHTTP_MULTIPLE_KNOWN_HEADERS = *mut HTTP_MULTIPLE_KNOWN_HEADERS;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct HTTP_RESPONSE_V2 {
-    pub Base: HTTP_RESPONSE_V1,
-    pub ResponseInfoCount: ::USHORT,
-    pub pResponseInfo: PHTTP_RESPONSE_INFO,
-}
+STRUCT!{nodebug struct HTTP_RESPONSE_V2 {
+    Base: HTTP_RESPONSE_V1,
+    ResponseInfoCount: ::USHORT,
+    pResponseInfo: PHTTP_RESPONSE_INFO,
+}}
 pub type PHTTP_RESPONSE_V2 = *mut HTTP_RESPONSE_V2;
 pub type HTTP_RESPONSE = HTTP_RESPONSE_V2;
 pub type PHTTP_RESPONSE = *mut HTTP_RESPONSE;
@@ -735,16 +727,14 @@ STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_KEY {
     pIpPort: ::PSOCKADDR,
 }}
 pub type PHTTP_SERVICE_CONFIG_SSL_KEY = *mut HTTP_SERVICE_CONFIG_SSL_KEY;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct HTTP_SERVICE_CONFIG_SSL_SNI_KEY {
-    pub IpPort: ::SOCKADDR_STORAGE,
-    pub Host: ::PWSTR,
-}
+STRUCT!{nodebug struct HTTP_SERVICE_CONFIG_SSL_SNI_KEY {
+    IpPort: ::SOCKADDR_STORAGE,
+    Host: ::PWSTR,
+}}
 pub type PHTTP_SERVICE_CONFIG_SSL_SNI_KEY = *mut HTTP_SERVICE_CONFIG_SSL_SNI_KEY;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct HTTP_SERVICE_CONFIG_SSL_CCS_KEY {
-    pub LocalAddress: ::SOCKADDR_STORAGE,
-}
+STRUCT!{nodebug struct HTTP_SERVICE_CONFIG_SSL_CCS_KEY {
+    LocalAddress: ::SOCKADDR_STORAGE,
+}}
 pub type PHTTP_SERVICE_CONFIG_SSL_CCS_KEY = *mut HTTP_SERVICE_CONFIG_SSL_CCS_KEY;
 STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_PARAM {
     SslHashLength: ::ULONG,
@@ -767,17 +757,15 @@ STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_SET {
     ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM,
 }}
 pub type PHTTP_SERVICE_CONFIG_SSL_SET = *mut HTTP_SERVICE_CONFIG_SSL_SET;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct HTTP_SERVICE_CONFIG_SSL_SNI_SET {
-    pub KeyDesc: HTTP_SERVICE_CONFIG_SSL_SNI_KEY,
-    pub ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM,
-}
+STRUCT!{nodebug struct HTTP_SERVICE_CONFIG_SSL_SNI_SET {
+    KeyDesc: HTTP_SERVICE_CONFIG_SSL_SNI_KEY,
+    ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM,
+}}
 pub type PHTTP_SERVICE_CONFIG_SSL_SNI_SET = *mut HTTP_SERVICE_CONFIG_SSL_SNI_SET;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct HTTP_SERVICE_CONFIG_SSL_CCS_SET {
-    pub KeyDesc: HTTP_SERVICE_CONFIG_SSL_CCS_KEY,
-    pub ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM,
-}
+STRUCT!{nodebug struct HTTP_SERVICE_CONFIG_SSL_CCS_SET {
+    KeyDesc: HTTP_SERVICE_CONFIG_SSL_CCS_KEY,
+    ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM,
+}}
 pub type PHTTP_SERVICE_CONFIG_SSL_CCS_SET = *mut HTTP_SERVICE_CONFIG_SSL_CCS_SET;
 STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_QUERY {
     QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE,
@@ -785,30 +773,27 @@ STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_QUERY {
     dwToken: ::DWORD,
 }}
 pub type PHTTP_SERVICE_CONFIG_SSL_QUERY = *mut HTTP_SERVICE_CONFIG_SSL_QUERY;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct HTTP_SERVICE_CONFIG_SSL_SNI_QUERY {
-    pub QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE,
-    pub KeyDesc: HTTP_SERVICE_CONFIG_SSL_SNI_KEY,
-    pub dwToken: ::DWORD,
-}
+STRUCT!{nodebug struct HTTP_SERVICE_CONFIG_SSL_SNI_QUERY {
+    QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE,
+    KeyDesc: HTTP_SERVICE_CONFIG_SSL_SNI_KEY,
+    dwToken: ::DWORD,
+}}
 pub type PHTTP_SERVICE_CONFIG_SSL_SNI_QUERY = *mut HTTP_SERVICE_CONFIG_SSL_SNI_QUERY;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct HTTP_SERVICE_CONFIG_SSL_CCS_QUERY {
-    pub QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE,
-    pub KeyDesc: HTTP_SERVICE_CONFIG_SSL_CCS_KEY,
-    pub dwToken: ::DWORD,
-}
+STRUCT!{nodebug struct HTTP_SERVICE_CONFIG_SSL_CCS_QUERY {
+    QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE,
+    KeyDesc: HTTP_SERVICE_CONFIG_SSL_CCS_KEY,
+    dwToken: ::DWORD,
+}}
 pub type PHTTP_SERVICE_CONFIG_SSL_CCS_QUERY = *mut HTTP_SERVICE_CONFIG_SSL_CCS_QUERY;
 STRUCT!{struct HTTP_SERVICE_CONFIG_IP_LISTEN_PARAM {
     AddrLength: ::USHORT,
     pAddress: ::PSOCKADDR,
 }}
 pub type PHTTP_SERVICE_CONFIG_IP_LISTEN_PARAM = *mut HTTP_SERVICE_CONFIG_IP_LISTEN_PARAM;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct HTTP_SERVICE_CONFIG_IP_LISTEN_QUERY {
-    pub AddrCount: ::ULONG,
-    pub AddrList: [::SOCKADDR_STORAGE; ::ANYSIZE_ARRAY],
-}
+STRUCT!{nodebug struct HTTP_SERVICE_CONFIG_IP_LISTEN_QUERY {
+    AddrCount: ::ULONG,
+    AddrList: [::SOCKADDR_STORAGE; ::ANYSIZE_ARRAY],
+}}
 pub type PHTTP_SERVICE_CONFIG_IP_LISTEN_QUERY = *mut HTTP_SERVICE_CONFIG_IP_LISTEN_QUERY;
 STRUCT!{struct HTTP_SERVICE_CONFIG_URLACL_KEY {
     pUrlPrefix: ::PWSTR,

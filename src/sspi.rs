@@ -544,16 +544,12 @@ ENUM!{enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS {
 pub type PSEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS =
     *mut SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS;
 pub const MAX_PROTOCOL_ID_SIZE: usize = 0xff;
-#[repr(C)] #[derive(Copy)]
-pub struct SecPkgContext_ApplicationProtocol {
-    pub ProtoNegoStatus: SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS,
-    pub ProtoNegoExt: SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT,
-    pub ProtocolIdSize: ::c_uchar,
-    pub ProtocolId: [::c_uchar; MAX_PROTOCOL_ID_SIZE],
-}
-impl Clone for SecPkgContext_ApplicationProtocol {
-    fn clone(&self) -> SecPkgContext_ApplicationProtocol { *self }
-}
+STRUCT!{nodebug struct SecPkgContext_ApplicationProtocol {
+    ProtoNegoStatus: SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS,
+    ProtoNegoExt: SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT,
+    ProtocolIdSize: ::c_uchar,
+    ProtocolId: [::c_uchar; MAX_PROTOCOL_ID_SIZE],
+}}
 pub type PSecPkgContext_ApplicationProtocol = *mut SecPkgContext_ApplicationProtocol;
 pub type SEC_GET_KEY_FN = Option<unsafe extern "system" fn(
     Arg: *mut ::c_void, Principal: *mut ::c_void, KeyVer: ::c_ulong, Key: *mut *mut ::c_void,

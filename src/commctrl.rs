@@ -220,10 +220,7 @@ pub type LPNMCUSTOMSPLITRECTINFO = *mut NMCUSTOMSPLITRECTINFO;
 pub const NM_GETCUSTOMSPLITRECT: ::UINT = BCN_FIRST + 0x0003;
 pub const CLR_NONE: ::DWORD = 0xFFFFFFFF;
 pub const CLR_DEFAULT: ::DWORD = 0xFF000000;
-#[repr(C)] #[allow(missing_copy_implementations)]
-pub struct IMAGELIST {
-    unused: ::c_void,
-}
+pub enum IMAGELIST {}
 pub type HIMAGELIST = *mut IMAGELIST;
 STRUCT!{struct IMAGELISTDRAWPARAMS {
     cbSize: ::DWORD,
@@ -496,19 +493,26 @@ STRUCT!{struct NMHDFILTERBTNCLICK {
     rc: ::RECT,
 }}
 pub type LPNMHDFILTERBTNCLICK = *mut NMHDFILTERBTNCLICK;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct TBBUTTON {
-    pub iBitmap: ::c_int,
-    pub idCommand: ::c_int,
-    pub fsState: ::BYTE,
-    pub fsStyle: ::BYTE,
-    #[cfg(target_arch="x86_64")]
-    pub bReserved: [::BYTE; 6],
-    #[cfg(target_arch="x86")]
-    pub bReserved: [::BYTE; 2],
-    pub dwData: ::DWORD_PTR,
-    pub iString: ::INT_PTR,
-}
+#[cfg(target_arch="x86")]
+STRUCT!{struct TBBUTTON {
+    iBitmap: ::c_int,
+    idCommand: ::c_int,
+    fsState: ::BYTE,
+    fsStyle: ::BYTE,
+    bReserved: [::BYTE; 2],
+    dwData: ::DWORD_PTR,
+    iString: ::INT_PTR,
+}}
+#[cfg(target_arch="x86_64")]
+STRUCT!{struct TBBUTTON {
+    iBitmap: ::c_int,
+    idCommand: ::c_int,
+    fsState: ::BYTE,
+    fsStyle: ::BYTE,
+    bReserved: [::BYTE; 6],
+    dwData: ::DWORD_PTR,
+    iString: ::INT_PTR,
+}}
 pub type PTBBUTTON = *mut TBBUTTON;
 pub type LPTBBUTTON = *mut TBBUTTON;
 pub type LPCTBBUTTON = *const TBBUTTON;
@@ -1293,27 +1297,23 @@ pub type TOOLTIPTEXTW = NMTTDISPINFOW;
 pub type TOOLTIPTEXTA = NMTTDISPINFOA;
 pub type LPTOOLTIPTEXTA = LPNMTTDISPINFOA;
 pub type LPTOOLTIPTEXTW = LPNMTTDISPINFOW;
-#[repr(C)] #[derive(Copy)]
-pub struct NMTTDISPINFOA {
-    pub hdr: ::NMHDR,
-    pub lpszText: ::LPSTR,
-    pub szText: [::c_char; 80],
-    pub hinst: ::HINSTANCE,
-    pub uFlags: ::UINT,
-    pub lParam: ::LPARAM,
-}
-impl Clone for NMTTDISPINFOA { fn clone(&self) -> NMTTDISPINFOA { *self } }
+STRUCT!{nodebug struct NMTTDISPINFOA {
+    hdr: ::NMHDR,
+    lpszText: ::LPSTR,
+    szText: [::c_char; 80],
+    hinst: ::HINSTANCE,
+    uFlags: ::UINT,
+    lParam: ::LPARAM,
+}}
 pub type LPNMTTDISPINFOA = *mut NMTTDISPINFOA;
-#[repr(C)] #[derive(Copy)]
-pub struct NMTTDISPINFOW {
-    pub hdr: ::NMHDR,
-    pub lpszText: ::LPWSTR,
-    pub szText: [::WCHAR; 80],
-    pub hinst: ::HINSTANCE,
-    pub uFlags: ::UINT,
-    pub lParam: ::LPARAM,
-}
-impl Clone for NMTTDISPINFOW { fn clone(&self) -> NMTTDISPINFOW { *self } }
+STRUCT!{nodebug struct NMTTDISPINFOW {
+    hdr: ::NMHDR,
+    lpszText: ::LPWSTR,
+    szText: [::WCHAR; 80],
+    hinst: ::HINSTANCE,
+    uFlags: ::UINT,
+    lParam: ::LPARAM,
+}}
 pub type LPNMTTDISPINFOW = *mut NMTTDISPINFOW;
 pub const SBARS_SIZEGRIP: ::DWORD = 0x0100;
 pub const SBARS_TOOLTIPS: ::DWORD = 0x0800;
@@ -1548,30 +1548,24 @@ pub const LIS_ENABLED: ::UINT = 0x00000002;
 pub const LIS_VISITED: ::UINT = 0x00000004;
 pub const LIS_HOTTRACK: ::UINT = 0x00000008;
 pub const LIS_DEFAULTCOLORS: ::UINT = 0x00000010;
-#[repr(C)] #[derive(Copy)]
-pub struct LITEM {
-    pub mask: ::UINT,
-    pub iLink: ::c_int,
-    pub state: ::UINT,
-    pub stateMask: ::UINT,
-    pub szID: [::WCHAR; MAX_LINKID_TEXT],
-    pub szUrl: [::WCHAR; L_MAX_URL_LENGTH],
-}
-impl Clone for LITEM { fn clone(&self) -> LITEM { *self } }
+STRUCT!{nodebug struct LITEM {
+    mask: ::UINT,
+    iLink: ::c_int,
+    state: ::UINT,
+    stateMask: ::UINT,
+    szID: [::WCHAR; MAX_LINKID_TEXT],
+    szUrl: [::WCHAR; L_MAX_URL_LENGTH],
+}}
 pub type PLITEM = *mut LITEM;
-#[repr(C)] #[derive(Copy)]
-pub struct LHITTESTINFO {
-    pub pt: ::POINT,
-    pub item: LITEM,
-}
-impl Clone for LHITTESTINFO { fn clone(&self) -> LHITTESTINFO { *self } }
+STRUCT!{nodebug struct LHITTESTINFO {
+    pt: ::POINT,
+    item: LITEM,
+}}
 pub type PLHITTESTINFO = *mut LHITTESTINFO;
-#[repr(C)] #[derive(Copy)]
-pub struct NMLINK {
-    pub hdr: ::NMHDR,
-    pub item: LITEM,
-}
-impl Clone for NMLINK { fn clone(&self) -> NMLINK { *self } }
+STRUCT!{nodebug struct NMLINK {
+    hdr: ::NMHDR,
+    item: LITEM,
+}}
 pub type PNMLINK = *mut NMLINK;
 pub const LM_HITTEST: ::UINT = ::WM_USER + 0x300;
 pub const LM_GETIDEALHEIGHT: ::UINT = ::WM_USER + 0x301;
@@ -2058,13 +2052,11 @@ pub const LVM_SORTGROUPS: ::UINT = LVM_FIRST + 158;
 pub type PFNLVGROUPCOMPARE = Option<unsafe extern "system" fn(
     ::c_int, ::c_int, *mut ::c_void,
 ) -> ::c_int>;
-#[repr(C)] #[derive(Copy)]
-pub struct LVINSERTGROUPSORTED {
-    pub pfnGroupCompare: PFNLVGROUPCOMPARE,
-    pub pvData: *mut ::c_void,
-    pub lvGroup: LVGROUP,
-}
-impl Clone for LVINSERTGROUPSORTED { fn clone(&self) -> LVINSERTGROUPSORTED { *self } }
+STRUCT!{nodebug struct LVINSERTGROUPSORTED {
+    pfnGroupCompare: PFNLVGROUPCOMPARE,
+    pvData: *mut ::c_void,
+    lvGroup: LVGROUP,
+}}
 pub type PLVINSERTGROUPSORTED = *mut LVINSERTGROUPSORTED;
 pub const LVM_INSERTGROUPSORTED: ::UINT = LVM_FIRST + 159;
 pub const LVM_REMOVEALLGROUPS: ::UINT = LVM_FIRST + 160;
@@ -2294,13 +2286,12 @@ STRUCT!{struct NMLVKEYDOWN {
 }}
 pub type LPNMLVKEYDOWN = *mut NMLVKEYDOWN;
 pub const LVN_MARQUEEBEGIN: ::UINT = LVN_FIRST - 56;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct NMLVLINK {
-    pub hdr: ::NMHDR,
-    pub link: LITEM,
-    pub iItem: ::c_int,
-    pub iSubItem: ::c_int,
-}
+STRUCT!{nodebug struct NMLVLINK {
+    hdr: ::NMHDR,
+    link: LITEM,
+    iItem: ::c_int,
+    iSubItem: ::c_int,
+}}
 pub type PNMLVLINK = *mut NMLVLINK;
 STRUCT!{struct NMLVGETINFOTIPA {
     hdr: ::NMHDR,
@@ -2342,13 +2333,11 @@ pub const LVN_BEGINSCROLL: ::UINT = LVN_FIRST - 80;
 pub const LVN_ENDSCROLL: ::UINT = LVN_FIRST - 81;
 pub const LVN_LINKCLICK: ::UINT = LVN_FIRST - 84;
 pub const EMF_CENTERED: ::DWORD = 0x00000001;
-#[repr(C)] #[derive(Copy)]
-pub struct NMLVEMPTYMARKUP {
-    pub hdr: ::NMHDR,
-    pub dwFlags: ::DWORD,
-    pub szMarkup: [::WCHAR; L_MAX_URL_LENGTH],
-}
-impl Clone for NMLVEMPTYMARKUP { fn clone(&self) -> NMLVEMPTYMARKUP { *self } }
+STRUCT!{nodebug struct NMLVEMPTYMARKUP {
+    hdr: ::NMHDR,
+    dwFlags: ::DWORD,
+    szMarkup: [::WCHAR; L_MAX_URL_LENGTH],
+}}
 pub const LVN_GETEMPTYMARKUP: ::UINT = LVN_FIRST - 87;
 pub const TVS_HASBUTTONS: ::DWORD = 0x0001;
 pub const TVS_HASLINES: ::DWORD = 0x0002;
@@ -2377,10 +2366,7 @@ pub const TVS_EX_PARTIALCHECKBOXES: ::DWORD = 0x0080;
 pub const TVS_EX_EXCLUSIONCHECKBOXES: ::DWORD = 0x0100;
 pub const TVS_EX_DIMMEDCHECKBOXES: ::DWORD = 0x0200;
 pub const TVS_EX_DRAWIMAGEASYNC: ::DWORD = 0x0400;
-#[repr(C)] #[allow(missing_copy_implementations)]
-pub struct TREEITEM {
-    unused: ::c_void,
-}
+pub enum TREEITEM {}
 pub type HTREEITEM = *mut TREEITEM;
 pub const TVIF_TEXT: ::UINT = 0x0001;
 pub const TVIF_IMAGE: ::UINT = 0x0002;
@@ -2613,13 +2599,11 @@ pub type PFNTVCOMPARE = Option<unsafe extern "system" fn(
 ) -> ::c_int>;
 pub type LPTV_SORTCB = LPTVSORTCB;
 pub type TV_SORTCB = TVSORTCB;
-#[repr(C)] #[derive(Copy)]
-pub struct TVSORTCB {
-    pub hParent: HTREEITEM,
-    pub lpfnCompare: PFNTVCOMPARE,
-    pub lParam: ::LPARAM,
-}
-impl Clone for TVSORTCB { fn clone(&self) -> TVSORTCB { *self } }
+STRUCT!{nodebug struct TVSORTCB {
+    hParent: HTREEITEM,
+    lpfnCompare: PFNTVCOMPARE,
+    lParam: ::LPARAM,
+}}
 pub type LPTVSORTCB = *mut TVSORTCB;
 pub type LPNM_TREEVIEWA = LPNMTREEVIEWA;
 pub type LPNM_TREEVIEWW = LPNMTREEVIEWW;
@@ -2833,44 +2817,36 @@ pub const CBENF_RETURN: ::c_int = 2;
 pub const CBENF_ESCAPE: ::c_int = 3;
 pub const CBENF_DROPDOWN: ::c_int = 4;
 pub const CBEMAXSTRLEN: usize = 260;
-#[repr(C)] #[derive(Copy)]
-pub struct NMCBEDRAGBEGINW {
-    pub hdr: ::NMHDR,
-    pub iItemid: ::c_int,
-    pub szText: [::WCHAR; CBEMAXSTRLEN],
-}
-impl Clone for NMCBEDRAGBEGINW { fn clone(&self) -> NMCBEDRAGBEGINW { *self } }
+STRUCT!{nodebug struct NMCBEDRAGBEGINW {
+    hdr: ::NMHDR,
+    iItemid: ::c_int,
+    szText: [::WCHAR; CBEMAXSTRLEN],
+}}
 pub type PNMCBEDRAGBEGINW = *mut NMCBEDRAGBEGINW;
 pub type LPNMCBEDRAGBEGINW = *mut NMCBEDRAGBEGINW;
-#[repr(C)] #[derive(Copy)]
-pub struct NMCBEDRAGBEGINA {
-    pub hdr: ::NMHDR,
-    pub iItemid: ::c_int,
-    pub szText: [::c_char; CBEMAXSTRLEN],
-}
-impl Clone for NMCBEDRAGBEGINA { fn clone(&self) -> NMCBEDRAGBEGINA { *self } }
+STRUCT!{nodebug struct NMCBEDRAGBEGINA {
+    hdr: ::NMHDR,
+    iItemid: ::c_int,
+    szText: [::c_char; CBEMAXSTRLEN],
+}}
 pub type PNMCBEDRAGBEGINA = *mut NMCBEDRAGBEGINA;
 pub type LPNMCBEDRAGBEGINA = *mut NMCBEDRAGBEGINA;
-#[repr(C)] #[derive(Copy)]
-pub struct NMCBEENDEDITW {
-    pub hdr: ::NMHDR,
-    pub fChanged: ::BOOL,
-    pub iNewSelection: ::c_int,
-    pub szText: [::WCHAR; CBEMAXSTRLEN],
-    pub iWhy: ::c_int,
-}
-impl Clone for NMCBEENDEDITW { fn clone(&self) -> NMCBEENDEDITW { *self } }
+STRUCT!{nodebug struct NMCBEENDEDITW {
+    hdr: ::NMHDR,
+    fChanged: ::BOOL,
+    iNewSelection: ::c_int,
+    szText: [::WCHAR; CBEMAXSTRLEN],
+    iWhy: ::c_int,
+}}
 pub type PNMCBEENDEDITW = *mut NMCBEENDEDITW;
 pub type LPNMCBEENDEDITW = *mut NMCBEENDEDITW;
-#[repr(C)] #[derive(Copy)]
-pub struct NMCBEENDEDITA {
-    pub hdr: ::NMHDR,
-    pub fChanged: ::BOOL,
-    pub iNewSelection: ::c_int,
-    pub szText: [::c_char; CBEMAXSTRLEN],
-    pub iWhy: ::c_int,
-}
-impl Clone for NMCBEENDEDITA { fn clone(&self) -> NMCBEENDEDITA { *self } }
+STRUCT!{nodebug struct NMCBEENDEDITA {
+    hdr: ::NMHDR,
+    fChanged: ::BOOL,
+    iNewSelection: ::c_int,
+    szText: [::c_char; CBEMAXSTRLEN],
+    iWhy: ::c_int,
+}}
 pub type PNMCBEENDEDITA = *mut NMCBEENDEDITA;
 pub type LPNMCBEENDEDITA = *mut NMCBEENDEDITA;
 pub const TCS_SCROLLOPPOSITE: ::DWORD = 0x0001;
@@ -3225,25 +3201,21 @@ STRUCT!{struct NMDATETIMEWMKEYDOWNW {
 pub type LPNMDATETIMEWMKEYDOWNW = *mut NMDATETIMEWMKEYDOWNW;
 pub const DTN_FORMATA: ::UINT = DTN_FIRST2 - 3;
 pub const DTN_FORMATW: ::UINT = DTN_FIRST - 3;
-#[repr(C)] #[derive(Copy)]
-pub struct NMDATETIMEFORMATA {
-    pub nmhdr: ::NMHDR,
-    pub pszFormat: ::LPCSTR,
-    pub st: ::SYSTEMTIME,
-    pub pszDisplay: ::LPCSTR,
-    pub szDisplay: [::CHAR; 64],
-}
-impl Clone for NMDATETIMEFORMATA { fn clone(&self) -> NMDATETIMEFORMATA { *self } }
+STRUCT!{nodebug struct NMDATETIMEFORMATA {
+    nmhdr: ::NMHDR,
+    pszFormat: ::LPCSTR,
+    st: ::SYSTEMTIME,
+    pszDisplay: ::LPCSTR,
+    szDisplay: [::CHAR; 64],
+}}
 pub type LPNMDATETIMEFORMATA = *mut NMDATETIMEFORMATA;
-#[repr(C)] #[derive(Copy)]
-pub struct NMDATETIMEFORMATW {
-    pub nmhdr: ::NMHDR,
-    pub pszFormat: ::LPCWSTR,
-    pub st: ::SYSTEMTIME,
-    pub pszDisplay: ::LPCWSTR,
-    pub szDisplay: [::WCHAR; 64],
-}
-impl Clone for NMDATETIMEFORMATW { fn clone(&self) -> NMDATETIMEFORMATW { *self } }
+STRUCT!{nodebug struct NMDATETIMEFORMATW {
+    nmhdr: ::NMHDR,
+    pszFormat: ::LPCWSTR,
+    st: ::SYSTEMTIME,
+    pszDisplay: ::LPCWSTR,
+    szDisplay: [::WCHAR; 64],
+}}
 pub type LPNMDATETIMEFORMATW = *mut NMDATETIMEFORMATW;
 pub const DTN_FORMATQUERYA: ::UINT = DTN_FIRST2 - 2;
 pub const DTN_FORMATQUERYW: ::UINT = DTN_FIRST - 2;
@@ -3503,34 +3475,32 @@ FLAGS!{enum TASKDIALOG_COMMON_BUTTON_FLAGS {
     TDCBF_RETRY_BUTTON = 0x0010,
     TDCBF_CLOSE_BUTTON = 0x0020,
 }}
-#[repr(C)] #[derive(Copy)]
-pub struct TASKDIALOGCONFIG {
-    pub cbSize: ::UINT,
-    pub hwndParent: ::HWND,
-    pub hInstance: ::HINSTANCE,
-    pub dwFlags: TASKDIALOG_FLAGS,
-    pub dwCommonButtons: TASKDIALOG_COMMON_BUTTON_FLAGS,
-    pub pszWindowTitle: ::PCWSTR,
-    pub hMainIcon: ::HICON,
-    pub pszMainInstruction: ::PCWSTR,
-    pub pszContent: ::PCWSTR,
-    pub cButtons: ::UINT,
-    pub pButtons: *const TASKDIALOG_BUTTON,
-    pub nDefaultButton: ::c_int,
-    pub cRadioButtons: ::UINT,
-    pub pRadioButtons: *const TASKDIALOG_BUTTON,
-    pub nDefaultRadioButton: ::c_int,
-    pub pszVerificationText: ::PCWSTR,
-    pub pszExpandedInformation: ::PCWSTR,
-    pub pszExpandedControlText: ::PCWSTR,
-    pub pszCollapsedControlText: ::PCWSTR,
-    pub hFooterIcon: ::HICON,
-    pub pszFooter: ::PCWSTR,
-    pub pfCallback: PFTASKDIALOGCALLBACK,
-    pub lpCallbackData: ::LONG_PTR,
-    pub cxWidth: ::UINT,
-}
-impl Clone for TASKDIALOGCONFIG { fn clone(&self) -> TASKDIALOGCONFIG { *self } }
+STRUCT!{nodebug struct TASKDIALOGCONFIG {
+    cbSize: ::UINT,
+    hwndParent: ::HWND,
+    hInstance: ::HINSTANCE,
+    dwFlags: TASKDIALOG_FLAGS,
+    dwCommonButtons: TASKDIALOG_COMMON_BUTTON_FLAGS,
+    pszWindowTitle: ::PCWSTR,
+    hMainIcon: ::HICON,
+    pszMainInstruction: ::PCWSTR,
+    pszContent: ::PCWSTR,
+    cButtons: ::UINT,
+    pButtons: *const TASKDIALOG_BUTTON,
+    nDefaultButton: ::c_int,
+    cRadioButtons: ::UINT,
+    pRadioButtons: *const TASKDIALOG_BUTTON,
+    nDefaultRadioButton: ::c_int,
+    pszVerificationText: ::PCWSTR,
+    pszExpandedInformation: ::PCWSTR,
+    pszExpandedControlText: ::PCWSTR,
+    pszCollapsedControlText: ::PCWSTR,
+    hFooterIcon: ::HICON,
+    pszFooter: ::PCWSTR,
+    pfCallback: PFTASKDIALOGCALLBACK,
+    lpCallbackData: ::LONG_PTR,
+    cxWidth: ::UINT,
+}}
 UNION!(TASKDIALOGCONFIG, hMainIcon, pszMainIcon, pszMainIcon_mut, ::PCWSTR);
 UNION!(TASKDIALOGCONFIG, hFooterIcon, pszFooterIcon, pszFooterIcon_mut, ::PCWSTR);
 pub const DA_LAST: ::c_int = 0x7FFFFFFF;
@@ -3547,10 +3517,7 @@ pub type PFNDACOMPARE = Option<unsafe extern "system" fn(
 pub type PFNDACOMPARECONST = Option<unsafe extern "system" fn(
     p1: *const ::c_void, p2: *const ::c_void, lParam: ::LPARAM,
 ) -> ::c_int>;
-#[repr(C)] #[allow(missing_copy_implementations)]
-pub struct DSA {
-    unused: ::c_void,
-}
+pub enum DSA {}
 pub type HDSA = *mut DSA;
 pub const DSA_APPEND: ::c_int = DA_LAST;
 pub const DSA_ERR: ::c_int = DA_ERR;
@@ -3558,10 +3525,7 @@ pub type PFNDSAENUMCALLBACK = PFNDAENUMCALLBACK;
 pub type PFNDSAENUMCALLBACKCONST = PFNDAENUMCALLBACKCONST;
 pub type PFNDSACOMPARE = PFNDACOMPARE;
 pub type PFNDSACOMPARECONST = PFNDACOMPARECONST;
-#[repr(C)] #[allow(missing_copy_implementations)]
-pub struct DPA {
-    unused: ::c_void,
-}
+pub enum DPA {}
 pub type HDPA = *mut DPA;
 STRUCT!{struct DPASTREAMINFO {
     iPos: ::c_int,

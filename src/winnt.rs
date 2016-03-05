@@ -576,149 +576,144 @@ STRUCT!{struct M128A { // FIXME align 16
     High: LONGLONG,
 }}
 pub type PM128A = *mut M128A;
-#[cfg(target_arch = "x86")] #[repr(C)] #[derive(Copy)]
-pub struct XSAVE_FORMAT { // FIXME align 16
-    pub ControlWord: ::WORD,
-    pub StatusWord: ::WORD,
-    pub TagWord: ::BYTE,
-    pub Reserved1: ::BYTE,
-    pub ErrorOpcode: ::WORD,
-    pub ErrorOffset: ::DWORD,
-    pub ErrorSelector: ::WORD,
-    pub Reserved2: ::WORD,
-    pub DataOffset: ::DWORD,
-    pub DataSelector: ::WORD,
-    pub Reserved3: ::WORD,
-    pub MxCsr: ::DWORD,
-    pub MxCsr_Mask: ::DWORD,
-    pub FloatRegisters: [M128A; 8],
-    pub XmmRegisters: [M128A; 8],
-    pub Reserved4: [::BYTE; 224],
-}
-#[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Copy)]
-pub struct XSAVE_FORMAT { // FIXME align 16
-    pub ControlWord: ::WORD,
-    pub StatusWord: ::WORD,
-    pub TagWord: ::BYTE,
-    pub Reserved1: ::BYTE,
-    pub ErrorOpcode: ::WORD,
-    pub ErrorOffset: ::DWORD,
-    pub ErrorSelector: ::WORD,
-    pub Reserved2: ::WORD,
-    pub DataOffset: ::DWORD,
-    pub DataSelector: ::WORD,
-    pub Reserved3: ::WORD,
-    pub MxCsr: ::DWORD,
-    pub MxCsr_Mask: ::DWORD,
-    pub FloatRegisters: [M128A; 8],
-    pub XmmRegisters: [M128A; 16],
-    pub Reserved4: [::BYTE; 96],
-}
-impl Clone for XSAVE_FORMAT { fn clone(&self) -> XSAVE_FORMAT { *self } }
+#[cfg(target_arch = "x86")]
+STRUCT!{nodebug struct XSAVE_FORMAT { // FIXME align 16
+    ControlWord: ::WORD,
+    StatusWord: ::WORD,
+    TagWord: ::BYTE,
+    Reserved1: ::BYTE,
+    ErrorOpcode: ::WORD,
+    ErrorOffset: ::DWORD,
+    ErrorSelector: ::WORD,
+    Reserved2: ::WORD,
+    DataOffset: ::DWORD,
+    DataSelector: ::WORD,
+    Reserved3: ::WORD,
+    MxCsr: ::DWORD,
+    MxCsr_Mask: ::DWORD,
+    FloatRegisters: [M128A; 8],
+    XmmRegisters: [M128A; 8],
+    Reserved4: [::BYTE; 224],
+}}
+#[cfg(target_arch = "x86_64")]
+STRUCT!{nodebug struct XSAVE_FORMAT { // FIXME align 16
+    ControlWord: ::WORD,
+    StatusWord: ::WORD,
+    TagWord: ::BYTE,
+    Reserved1: ::BYTE,
+    ErrorOpcode: ::WORD,
+    ErrorOffset: ::DWORD,
+    ErrorSelector: ::WORD,
+    Reserved2: ::WORD,
+    DataOffset: ::DWORD,
+    DataSelector: ::WORD,
+    Reserved3: ::WORD,
+    MxCsr: ::DWORD,
+    MxCsr_Mask: ::DWORD,
+    FloatRegisters: [M128A; 8],
+    XmmRegisters: [M128A; 16],
+    Reserved4: [::BYTE; 96],
+}}
 //3563
 #[cfg(target_arch = "x86")]
 pub const SIZE_OF_80387_REGISTERS: usize = 80;
-#[cfg(target_arch = "x86")] #[repr(C)] #[derive(Copy)]
-pub struct FLOATING_SAVE_AREA {
-    pub ControlWord: ::DWORD,
-    pub StatusWord: ::DWORD,
-    pub TagWord: ::DWORD,
-    pub ErrorOffset: ::DWORD,
-    pub ErrorSelector: ::DWORD,
-    pub DataOffset: ::DWORD,
-    pub DataSelector: ::DWORD,
-    pub RegisterArea: [::BYTE; SIZE_OF_80387_REGISTERS],
-    pub Spare0: ::DWORD,
-}
 #[cfg(target_arch = "x86")]
-impl Clone for FLOATING_SAVE_AREA { fn clone(&self) -> FLOATING_SAVE_AREA { *self } }
+STRUCT!{nodebug struct FLOATING_SAVE_AREA {
+    ControlWord: ::DWORD,
+    StatusWord: ::DWORD,
+    TagWord: ::DWORD,
+    ErrorOffset: ::DWORD,
+    ErrorSelector: ::DWORD,
+    DataOffset: ::DWORD,
+    DataSelector: ::DWORD,
+    RegisterArea: [::BYTE; SIZE_OF_80387_REGISTERS],
+    Spare0: ::DWORD,
+}}
 #[cfg(target_arch = "x86")]
 pub type PFLOATING_SAVE_AREA = *mut FLOATING_SAVE_AREA;
 #[cfg(target_arch = "x86")]
 pub const MAXIMUM_SUPPORTED_EXTENSION: usize = 512;
-#[cfg(target_arch = "x86")] #[repr(C)] #[derive(Copy)]
-pub struct CONTEXT {
-    pub ContextFlags: ::DWORD,
-    pub Dr0: ::DWORD,
-    pub Dr1: ::DWORD,
-    pub Dr2: ::DWORD,
-    pub Dr3: ::DWORD,
-    pub Dr6: ::DWORD,
-    pub Dr7: ::DWORD,
-    pub FloatSave: FLOATING_SAVE_AREA,
-    pub SegGs: ::DWORD,
-    pub SegFs: ::DWORD,
-    pub SegEs: ::DWORD,
-    pub SegDs: ::DWORD,
-    pub Edi: ::DWORD,
-    pub Esi: ::DWORD,
-    pub Ebx: ::DWORD,
-    pub Edx: ::DWORD,
-    pub Ecx: ::DWORD,
-    pub Eax: ::DWORD,
-    pub Ebp: ::DWORD,
-    pub Eip: ::DWORD,
-    pub SegCs: ::DWORD,
-    pub EFlags: ::DWORD,
-    pub Esp: ::DWORD,
-    pub SegSs: ::DWORD,
-    pub ExtendedRegisters: [::BYTE; MAXIMUM_SUPPORTED_EXTENSION],
-}
 #[cfg(target_arch = "x86")]
-impl Clone for CONTEXT { fn clone(&self) -> CONTEXT { *self } }
+STRUCT!{nodebug struct CONTEXT {
+    ContextFlags: ::DWORD,
+    Dr0: ::DWORD,
+    Dr1: ::DWORD,
+    Dr2: ::DWORD,
+    Dr3: ::DWORD,
+    Dr6: ::DWORD,
+    Dr7: ::DWORD,
+    FloatSave: FLOATING_SAVE_AREA,
+    SegGs: ::DWORD,
+    SegFs: ::DWORD,
+    SegEs: ::DWORD,
+    SegDs: ::DWORD,
+    Edi: ::DWORD,
+    Esi: ::DWORD,
+    Ebx: ::DWORD,
+    Edx: ::DWORD,
+    Ecx: ::DWORD,
+    Eax: ::DWORD,
+    Ebp: ::DWORD,
+    Eip: ::DWORD,
+    SegCs: ::DWORD,
+    EFlags: ::DWORD,
+    Esp: ::DWORD,
+    SegSs: ::DWORD,
+    ExtendedRegisters: [::BYTE; MAXIMUM_SUPPORTED_EXTENSION],
+}}
 #[cfg(target_arch = "x86_64")]
 pub type XMM_SAVE_AREA32 = XSAVE_FORMAT;
 pub type PXMM_SAVE_AREA32 = *mut XSAVE_FORMAT;
 // FIXME - Align 16
-#[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Clone, Copy)]
-pub struct CONTEXT {
-    pub P1Home: ::DWORD64,
-    pub P2Home: ::DWORD64,
-    pub P3Home: ::DWORD64,
-    pub P4Home: ::DWORD64,
-    pub P5Home: ::DWORD64,
-    pub P6Home: ::DWORD64,
-    pub ContextFlags: ::DWORD,
-    pub MxCsr: ::DWORD,
-    pub SegCs: ::WORD,
-    pub SegDs: ::WORD,
-    pub SegEs: ::WORD,
-    pub SegFs: ::WORD,
-    pub SegGs: ::WORD,
-    pub SegSs: ::WORD,
-    pub EFlags: ::DWORD,
-    pub Dr0: ::DWORD64,
-    pub Dr1: ::DWORD64,
-    pub Dr2: ::DWORD64,
-    pub Dr3: ::DWORD64,
-    pub Dr6: ::DWORD64,
-    pub Dr7: ::DWORD64,
-    pub Rax: ::DWORD64,
-    pub Rcx: ::DWORD64,
-    pub Rdx: ::DWORD64,
-    pub Rbx: ::DWORD64,
-    pub Rsp: ::DWORD64,
-    pub Rbp: ::DWORD64,
-    pub Rsi: ::DWORD64,
-    pub Rdi: ::DWORD64,
-    pub R8: ::DWORD64,
-    pub R9: ::DWORD64,
-    pub R10: ::DWORD64,
-    pub R11: ::DWORD64,
-    pub R12: ::DWORD64,
-    pub R13: ::DWORD64,
-    pub R14: ::DWORD64,
-    pub R15: ::DWORD64,
-    pub Rip: ::DWORD64,
-    pub FltSave: XMM_SAVE_AREA32,
-    pub VectorRegister: [::M128A; 26],
-    pub VectorControl: ::DWORD64,
-    pub DebugControl: ::DWORD64,
-    pub LastBranchToRip: ::DWORD64,
-    pub LastBranchFromRip: ::DWORD64,
-    pub LastExceptionToRip: ::DWORD64,
-    pub LastExceptionFromRip: ::DWORD64,
-}
+#[cfg(target_arch = "x86_64")]
+STRUCT!{nodebug struct CONTEXT {
+    P1Home: ::DWORD64,
+    P2Home: ::DWORD64,
+    P3Home: ::DWORD64,
+    P4Home: ::DWORD64,
+    P5Home: ::DWORD64,
+    P6Home: ::DWORD64,
+    ContextFlags: ::DWORD,
+    MxCsr: ::DWORD,
+    SegCs: ::WORD,
+    SegDs: ::WORD,
+    SegEs: ::WORD,
+    SegFs: ::WORD,
+    SegGs: ::WORD,
+    SegSs: ::WORD,
+    EFlags: ::DWORD,
+    Dr0: ::DWORD64,
+    Dr1: ::DWORD64,
+    Dr2: ::DWORD64,
+    Dr3: ::DWORD64,
+    Dr6: ::DWORD64,
+    Dr7: ::DWORD64,
+    Rax: ::DWORD64,
+    Rcx: ::DWORD64,
+    Rdx: ::DWORD64,
+    Rbx: ::DWORD64,
+    Rsp: ::DWORD64,
+    Rbp: ::DWORD64,
+    Rsi: ::DWORD64,
+    Rdi: ::DWORD64,
+    R8: ::DWORD64,
+    R9: ::DWORD64,
+    R10: ::DWORD64,
+    R11: ::DWORD64,
+    R12: ::DWORD64,
+    R13: ::DWORD64,
+    R14: ::DWORD64,
+    R15: ::DWORD64,
+    Rip: ::DWORD64,
+    FltSave: XMM_SAVE_AREA32,
+    VectorRegister: [::M128A; 26],
+    VectorControl: ::DWORD64,
+    DebugControl: ::DWORD64,
+    LastBranchToRip: ::DWORD64,
+    LastBranchFromRip: ::DWORD64,
+    LastExceptionToRip: ::DWORD64,
+    LastExceptionFromRip: ::DWORD64,
+}}
 pub type PCONTEXT = *mut CONTEXT;
 #[test]
 fn test_CONTEXT_size() {
@@ -909,11 +904,10 @@ pub const TOKEN_WRITE: ::DWORD = STANDARD_RIGHTS_WRITE | TOKEN_ADJUST_PRIVILEGES
     | TOKEN_ADJUST_GROUPS | TOKEN_ADJUST_DEFAULT;
 pub const TOKEN_EXECUTE: ::DWORD = STANDARD_RIGHTS_EXECUTE;
 //10823
-#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
-pub struct TOKEN_PRIVILEGES {
-    pub PrivilegeCount: ::DWORD,
-    pub Privileges: [LUID_AND_ATTRIBUTES; 0],
-}
+STRUCT!{nodebug struct TOKEN_PRIVILEGES {
+    PrivilegeCount: ::DWORD,
+    Privileges: [LUID_AND_ATTRIBUTES; 0],
+}}
 pub type PTOKEN_PRIVILEGES = *mut TOKEN_PRIVILEGES;
 //10965
 pub const CLAIM_SECURITY_ATTRIBUTE_TYPE_INVALID: ::WORD = 0x00;
@@ -1093,13 +1087,11 @@ STRUCT!{struct JOBOBJECT_EXTENDED_LIMIT_INFORMATION {
     PeakJobMemoryUsed: ::SIZE_T,
 }}
 pub type PJOBOBJECT_EXTENDED_LIMIT_INFORMATION = *mut JOBOBJECT_EXTENDED_LIMIT_INFORMATION;
-#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
-pub struct JOBOBJECT_BASIC_PROCESS_ID_LIST {
-    pub NumberOfAssignedProcesses: ::DWORD,
-    pub NumberOfProcessIdsInList: ::DWORD,
-    pub ProcessIdList: [::ULONG_PTR; 0],
-}
-pub type PJOBOBJECT_BASIC_PROCESS_ID_LIST = *mut JOBOBJECT_BASIC_PROCESS_ID_LIST;
+STRUCT!{struct JOBOBJECT_BASIC_PROCESS_ID_LIST {
+    NumberOfAssignedProcesses: ::DWORD,
+    NumberOfProcessIdsInList: ::DWORD,
+    ProcessIdList: [::ULONG_PTR; 0],
+}}
 //11712
 pub const JOB_OBJECT_TERMINATE_AT_END_OF_JOB: ::DWORD = 0;
 pub const JOB_OBJECT_POST_AT_END_OF_JOB: ::DWORD = 1;
@@ -1328,13 +1320,12 @@ STRUCT!{struct FILE_ID_128 {
     Identifier: [::BYTE; 16],
 }}
 pub type PFILE_ID_128 = *mut FILE_ID_128;
-#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
-pub struct FILE_NOTIFY_INFORMATION {
-    pub NextEntryOffset: ::DWORD,
-    pub Action: ::DWORD,
-    pub FileNameLength: ::DWORD,
-    pub FileName: [::WCHAR; 0],
-}
+STRUCT!{struct FILE_NOTIFY_INFORMATION {
+    NextEntryOffset: ::DWORD,
+    Action: ::DWORD,
+    FileNameLength: ::DWORD,
+    FileName: [::WCHAR; 0],
+}}
 STRUCT!{struct FILE_SEGMENT_ELEMENT {
     Buffer: ::PVOID64,
     Alignment: ::ULONGLONG,
@@ -1998,20 +1989,18 @@ BITFIELD!(TP_CALLBACK_ENVIRON_V3_s BitFields: ::DWORD [
     Persistent set_Persistent[1..2],
     Private set_Private[2..32],
 ]);
-#[repr(C)] #[derive(Copy)]
-pub struct TP_CALLBACK_ENVIRON_V3 {
-    pub Version: TP_VERSION,
-    pub Pool: PTP_POOL,
-    pub CleanupGroup: PTP_CLEANUP_GROUP,
-    pub CleanupGroupCancelCallback: PTP_CLEANUP_GROUP_CANCEL_CALLBACK,
-    pub RaceDll: ::PVOID,
-    pub ActivationContext: *mut ACTIVATION_CONTEXT,
-    pub FinalizationCallback: PTP_SIMPLE_CALLBACK,
-    pub u: ::DWORD,
-    pub CallbackPriority: TP_CALLBACK_PRIORITY,
-    pub Size: ::DWORD,
-}
-impl Clone for TP_CALLBACK_ENVIRON_V3 { fn clone(&self) -> TP_CALLBACK_ENVIRON_V3 { *self } }
+STRUCT!{nodebug struct TP_CALLBACK_ENVIRON_V3 {
+    Version: TP_VERSION,
+    Pool: PTP_POOL,
+    CleanupGroup: PTP_CLEANUP_GROUP,
+    CleanupGroupCancelCallback: PTP_CLEANUP_GROUP_CANCEL_CALLBACK,
+    RaceDll: ::PVOID,
+    ActivationContext: *mut ACTIVATION_CONTEXT,
+    FinalizationCallback: PTP_SIMPLE_CALLBACK,
+    u: ::DWORD,
+    CallbackPriority: TP_CALLBACK_PRIORITY,
+    Size: ::DWORD,
+}}
 UNION!(TP_CALLBACK_ENVIRON_V3, u, Flags, Flags_mut, ::DWORD);
 UNION!(TP_CALLBACK_ENVIRON_V3, u, s, s_mut, TP_CALLBACK_ENVIRON_V3_s);
 pub type TP_CALLBACK_ENVIRON = TP_CALLBACK_ENVIRON_V3;
@@ -2123,62 +2112,54 @@ ENUM!{enum PROCESS_MITIGATION_POLICY {
     ProcessSignaturePolicy,
     MaxProcessMitigationPolicy,
 }}
-#[repr(C)] #[derive(Copy)]
-pub struct OSVERSIONINFOA {
-    pub dwOSVersionInfoSize: ::DWORD,
-    pub dwMajorVersion: ::DWORD,
-    pub dwMinorVersion: ::DWORD,
-    pub dwBuildNumber: ::DWORD,
-    pub dwPlatformId: ::DWORD,
-    pub szCSDVersion: [::CHAR; 128],
-}
-impl Clone for OSVERSIONINFOA { fn clone(&self) -> OSVERSIONINFOA { *self } }
+STRUCT!{nodebug struct OSVERSIONINFOA {
+    dwOSVersionInfoSize: ::DWORD,
+    dwMajorVersion: ::DWORD,
+    dwMinorVersion: ::DWORD,
+    dwBuildNumber: ::DWORD,
+    dwPlatformId: ::DWORD,
+    szCSDVersion: [::CHAR; 128],
+}}
 pub type POSVERSIONINFOA = *mut OSVERSIONINFOA;
 pub type LPOSVERSIONINFOA = *mut OSVERSIONINFOA;
-#[repr(C)] #[derive(Copy)]
-pub struct OSVERSIONINFOW {
-    pub dwOSVersionInfoSize: ::DWORD,
-    pub dwMajorVersion: ::DWORD,
-    pub dwMinorVersion: ::DWORD,
-    pub dwBuildNumber: ::DWORD,
-    pub dwPlatformId: ::DWORD,
-    pub szCSDVersion: [::WCHAR; 128],
-}
-impl Clone for OSVERSIONINFOW { fn clone(&self) -> OSVERSIONINFOW { *self } }
+STRUCT!{nodebug struct OSVERSIONINFOW {
+    dwOSVersionInfoSize: ::DWORD,
+    dwMajorVersion: ::DWORD,
+    dwMinorVersion: ::DWORD,
+    dwBuildNumber: ::DWORD,
+    dwPlatformId: ::DWORD,
+    szCSDVersion: [::WCHAR; 128],
+}}
 pub type POSVERSIONINFOW = *mut OSVERSIONINFOW;
 pub type LPOSVERSIONINFOW = *mut OSVERSIONINFOW;
-#[repr(C)] #[derive(Copy)]
-pub struct OSVERSIONINFOEXA {
-    pub dwOSVersionInfoSize: ::DWORD,
-    pub dwMajorVersion: ::DWORD,
-    pub dwMinorVersion: ::DWORD,
-    pub dwBuildNumber: ::DWORD,
-    pub dwPlatformId: ::DWORD,
-    pub szCSDVersion: [::CHAR; 128],
-    pub wServicePackMajor: ::WORD,
-    pub wServicePackMinor: ::WORD,
-    pub wSuiteMask: ::WORD,
-    pub wProductType: ::BYTE,
-    pub wReserved: ::BYTE,
-}
-impl Clone for OSVERSIONINFOEXA { fn clone(&self) -> OSVERSIONINFOEXA { *self } }
+STRUCT!{nodebug struct OSVERSIONINFOEXA {
+    dwOSVersionInfoSize: ::DWORD,
+    dwMajorVersion: ::DWORD,
+    dwMinorVersion: ::DWORD,
+    dwBuildNumber: ::DWORD,
+    dwPlatformId: ::DWORD,
+    szCSDVersion: [::CHAR; 128],
+    wServicePackMajor: ::WORD,
+    wServicePackMinor: ::WORD,
+    wSuiteMask: ::WORD,
+    wProductType: ::BYTE,
+    wReserved: ::BYTE,
+}}
 pub type POSVERSIONINFOEXA = *mut OSVERSIONINFOEXA;
 pub type LPOSVERSIONINFOEXA = *mut OSVERSIONINFOEXA;
-#[repr(C)] #[derive(Copy)]
-pub struct OSVERSIONINFOEXW {
-    pub dwOSVersionInfoSize: ::DWORD,
-    pub dwMajorVersion: ::DWORD,
-    pub dwMinorVersion: ::DWORD,
-    pub dwBuildNumber: ::DWORD,
-    pub dwPlatformId: ::DWORD,
-    pub szCSDVersion: [::WCHAR; 128],
-    pub wServicePackMajor: ::WORD,
-    pub wServicePackMinor: ::WORD,
-    pub wSuiteMask: ::WORD,
-    pub wProductType: ::BYTE,
-    pub wReserved: ::BYTE,
-}
-impl Clone for OSVERSIONINFOEXW { fn clone(&self) -> OSVERSIONINFOEXW { *self } }
+STRUCT!{nodebug struct OSVERSIONINFOEXW {
+    dwOSVersionInfoSize: ::DWORD,
+    dwMajorVersion: ::DWORD,
+    dwMinorVersion: ::DWORD,
+    dwBuildNumber: ::DWORD,
+    dwPlatformId: ::DWORD,
+    szCSDVersion: [::WCHAR; 128],
+    wServicePackMajor: ::WORD,
+    wServicePackMinor: ::WORD,
+    wSuiteMask: ::WORD,
+    wProductType: ::BYTE,
+    wReserved: ::BYTE,
+}}
 pub type POSVERSIONINFOEXW = *mut OSVERSIONINFOEXW;
 pub type LPOSVERSIONINFOEXW = *mut OSVERSIONINFOEXW;
 STRUCT!{struct SLIST_ENTRY {
@@ -2314,51 +2295,47 @@ STRUCT!{struct MEMORY_BASIC_INFORMATION64 { // FIXME: align 16
 pub type PMEMORY_BASIC_INFORMATION64 = *mut MEMORY_BASIC_INFORMATION64;
 pub const WOW64_SIZE_OF_80387_REGISTERS: usize = 80;
 pub const WOW64_MAXIMUM_SUPPORTED_EXTENSION: usize = 512;
-#[repr(C)] #[derive(Copy)]
-pub struct WOW64_FLOATING_SAVE_AREA {
-    pub ControlWord: ::DWORD,
-    pub StatusWord: ::DWORD,
-    pub TagWord: ::DWORD,
-    pub ErrorOffset: ::DWORD,
-    pub ErrorSelector: ::DWORD,
-    pub DataOffset: ::DWORD,
-    pub DataSelector: ::DWORD,
-    pub RegisterArea: [::BYTE; WOW64_SIZE_OF_80387_REGISTERS],
-    pub Cr0NpxState: ::DWORD,
-}
-impl Clone for WOW64_FLOATING_SAVE_AREA { fn clone(&self) -> WOW64_FLOATING_SAVE_AREA { *self } }
+STRUCT!{nodebug struct WOW64_FLOATING_SAVE_AREA {
+    ControlWord: ::DWORD,
+    StatusWord: ::DWORD,
+    TagWord: ::DWORD,
+    ErrorOffset: ::DWORD,
+    ErrorSelector: ::DWORD,
+    DataOffset: ::DWORD,
+    DataSelector: ::DWORD,
+    RegisterArea: [::BYTE; WOW64_SIZE_OF_80387_REGISTERS],
+    Cr0NpxState: ::DWORD,
+}}
 pub type PWOW64_FLOATING_SAVE_AREA = *mut WOW64_FLOATING_SAVE_AREA;
-#[repr(C)] #[derive(Copy)]
-pub struct WOW64_CONTEXT {
-    pub ContextFlags: ::DWORD,
-    pub Dr0: ::DWORD,
-    pub Dr1: ::DWORD,
-    pub Dr2: ::DWORD,
-    pub Dr3: ::DWORD,
-    pub Dr4: ::DWORD,
-    pub Dr5: ::DWORD,
-    pub Dr6: ::DWORD,
-    pub Dr7: ::DWORD,
-    pub FloatSave: WOW64_FLOATING_SAVE_AREA,
-    pub SegGs: ::DWORD,
-    pub SegFs: ::DWORD,
-    pub SegEs: ::DWORD,
-    pub SegDs: ::DWORD,
-    pub Edi: ::DWORD,
-    pub Esi: ::DWORD,
-    pub Ebx: ::DWORD,
-    pub Edx: ::DWORD,
-    pub Ecx: ::DWORD,
-    pub Eax: ::DWORD,
-    pub Ebp: ::DWORD,
-    pub Eip: ::DWORD,
-    pub SegCs: ::DWORD,
-    pub EFlags: ::DWORD,
-    pub Esp: ::DWORD,
-    pub SegSs: ::DWORD,
-    pub ExtendedRegisters: [::BYTE; WOW64_MAXIMUM_SUPPORTED_EXTENSION],
-}
-impl Clone for WOW64_CONTEXT { fn clone(&self) -> WOW64_CONTEXT { *self } }
+STRUCT!{nodebug struct WOW64_CONTEXT {
+    ContextFlags: ::DWORD,
+    Dr0: ::DWORD,
+    Dr1: ::DWORD,
+    Dr2: ::DWORD,
+    Dr3: ::DWORD,
+    Dr4: ::DWORD,
+    Dr5: ::DWORD,
+    Dr6: ::DWORD,
+    Dr7: ::DWORD,
+    FloatSave: WOW64_FLOATING_SAVE_AREA,
+    SegGs: ::DWORD,
+    SegFs: ::DWORD,
+    SegEs: ::DWORD,
+    SegDs: ::DWORD,
+    Edi: ::DWORD,
+    Esi: ::DWORD,
+    Ebx: ::DWORD,
+    Edx: ::DWORD,
+    Ecx: ::DWORD,
+    Eax: ::DWORD,
+    Ebp: ::DWORD,
+    Eip: ::DWORD,
+    SegCs: ::DWORD,
+    EFlags: ::DWORD,
+    Esp: ::DWORD,
+    SegSs: ::DWORD,
+    ExtendedRegisters: [::BYTE; WOW64_MAXIMUM_SUPPORTED_EXTENSION],
+}}
 pub type PWOW64_CONTEXT = *mut WOW64_CONTEXT;
 STRUCT!{struct WOW64_LDT_ENTRY_Bytes {
     BaseMid: ::BYTE,

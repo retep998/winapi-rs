@@ -35,36 +35,32 @@ pub type LPHEAPENTRY32 = *mut HEAPENTRY32;
 pub const LF32_FIXED: ::DWORD = 0x00000001;
 pub const LF32_FREE: ::DWORD = 0x00000002;
 pub const LF32_MOVEABLE: ::DWORD = 0x00000004;
-#[repr(C)] #[derive(Copy)]
-pub struct PROCESSENTRY32W {
-    pub dwSize: ::DWORD,
-    pub cntUsage: ::DWORD,
-    pub th32ProcessID: ::DWORD,
-    pub th32DefaultHeapID: ::ULONG_PTR,
-    pub th32ModuleID: ::DWORD,
-    pub cntThreads: ::DWORD,
-    pub th32ParentProcessID: ::DWORD,
-    pub pcPriClassBase: ::LONG,
-    pub dwFlags: ::DWORD,
-    pub szExeFile: [::WCHAR; ::MAX_PATH],
-}
-impl Clone for PROCESSENTRY32W{ fn clone(&self) -> PROCESSENTRY32W { *self } }
+STRUCT!{nodebug struct PROCESSENTRY32W {
+    dwSize: ::DWORD,
+    cntUsage: ::DWORD,
+    th32ProcessID: ::DWORD,
+    th32DefaultHeapID: ::ULONG_PTR,
+    th32ModuleID: ::DWORD,
+    cntThreads: ::DWORD,
+    th32ParentProcessID: ::DWORD,
+    pcPriClassBase: ::LONG,
+    dwFlags: ::DWORD,
+    szExeFile: [::WCHAR; ::MAX_PATH],
+}}
 pub type PPROCESSENTRY32W = *mut PROCESSENTRY32W;
 pub type LPPROCESSENTRY32W = *mut PROCESSENTRY32W;
-#[repr(C)] #[derive(Copy)]
-pub struct PROCESSENTRY32 {
-    pub dwSize: ::DWORD,
-    pub cntUsage: ::DWORD,
-    pub th32ProcessID: ::DWORD,
-    pub th32DefaultHeapID: ::ULONG_PTR,
-    pub th32ModuleID: ::DWORD,
-    pub cntThreads: ::DWORD,
-    pub th32ParentProcessID: ::DWORD,
-    pub pcPriClassBase: ::LONG,
-    pub dwFlags: ::DWORD,
-    pub szExeFile: [::CHAR; ::MAX_PATH],
-}
-impl Clone for PROCESSENTRY32{ fn clone(&self) -> PROCESSENTRY32 { *self } }
+STRUCT!{nodebug struct PROCESSENTRY32 {
+    dwSize: ::DWORD,
+    cntUsage: ::DWORD,
+    th32ProcessID: ::DWORD,
+    th32DefaultHeapID: ::ULONG_PTR,
+    th32ModuleID: ::DWORD,
+    cntThreads: ::DWORD,
+    th32ParentProcessID: ::DWORD,
+    pcPriClassBase: ::LONG,
+    dwFlags: ::DWORD,
+    szExeFile: [::CHAR; ::MAX_PATH],
+}}
 pub type PPROCESSENTRY32 = *mut PROCESSENTRY32;
 pub type LPPROCESSENTRY32 = *mut PROCESSENTRY32;
 STRUCT!{struct THREADENTRY32 {
@@ -78,35 +74,31 @@ STRUCT!{struct THREADENTRY32 {
 }}
 pub type PTHREADENTRY32 = *mut THREADENTRY32;
 pub type LPTHREADENTRY32 = *mut THREADENTRY32;
-#[repr(C)] #[derive(Copy)]
-pub struct MODULEENTRY32W {
-    pub dwSize: ::DWORD,
-    pub th32ModuleID: ::DWORD,
-    pub th32ProcessID: ::DWORD,
-    pub GlblcntUsage: ::DWORD,
-    pub ProccntUsage: ::DWORD,
-    pub modBaseAddr: *mut ::BYTE,
-    pub modBaseSize: ::DWORD,
-    pub hModule: ::HMODULE,
-    pub szModule: [::WCHAR; ::MAX_MODULE_NAME32 + 1],
-    pub szExePath: [::WCHAR; ::MAX_PATH],
-}
-impl Clone for MODULEENTRY32W{ fn clone(&self) -> MODULEENTRY32W { *self } }
+STRUCT!{nodebug struct MODULEENTRY32W {
+    dwSize: ::DWORD,
+    th32ModuleID: ::DWORD,
+    th32ProcessID: ::DWORD,
+    GlblcntUsage: ::DWORD,
+    ProccntUsage: ::DWORD,
+    modBaseAddr: *mut ::BYTE,
+    modBaseSize: ::DWORD,
+    hModule: ::HMODULE,
+    szModule: [::WCHAR; ::MAX_MODULE_NAME32 + 1],
+    szExePath: [::WCHAR; ::MAX_PATH],
+}}
 pub type PMODULEENTRY32W = *mut MODULEENTRY32W;
 pub type LPMODULEENTRY32W = *mut MODULEENTRY32W;
-#[repr(C)] #[derive(Copy)]
-pub struct MODULEENTRY32 {
-    pub dwSize: ::DWORD,
-    pub th32ModuleID: ::DWORD,
-    pub th32ProcessID: ::DWORD,
-    pub GlblcntUsage: ::DWORD,
-    pub ProccntUsage: ::DWORD,
-    pub modBaseAddr: *mut ::BYTE,
-    pub modBaseSize: ::DWORD,
-    pub hModule: ::HMODULE,
-    pub szModule: [::CHAR; ::MAX_MODULE_NAME32 + 1],
-    pub szExePath: [::CHAR; ::MAX_PATH],
-}
-impl Clone for MODULEENTRY32{ fn clone(&self) -> MODULEENTRY32 { *self } }
+STRUCT!{nodebug struct MODULEENTRY32 {
+    dwSize: ::DWORD,
+    th32ModuleID: ::DWORD,
+    th32ProcessID: ::DWORD,
+    GlblcntUsage: ::DWORD,
+    ProccntUsage: ::DWORD,
+    modBaseAddr: *mut ::BYTE,
+    modBaseSize: ::DWORD,
+    hModule: ::HMODULE,
+    szModule: [::CHAR; ::MAX_MODULE_NAME32 + 1],
+    szExePath: [::CHAR; ::MAX_PATH],
+}}
 pub type PMODULEENTRY32 = *mut MODULEENTRY32;
 pub type LPMODULEENTRY32 = *mut MODULEENTRY32;

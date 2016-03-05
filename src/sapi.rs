@@ -1306,18 +1306,12 @@ interface ISpeechResourceLoader(ISpeechResourceLoaderVtbl): IDispatch(IDispatchV
     fn ReleaseLocalCopy(&mut self, pbstrLocalPath: ::BSTR) -> ::HRESULT
 }
 );
-#[repr(C)] #[derive(Copy)]
-pub struct SPRECOCONTEXTSTATUS {
-    pub eInterference: SPINTERFERENCE,
-    pub szRequestTypeOfUI: [::WCHAR; 255],
-    pub dwReserved1: ::DWORD,
-    pub dwReserved2: ::DWORD,
-}
-impl Clone for SPRECOCONTEXTSTATUS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
+STRUCT!{nodebug struct SPRECOCONTEXTSTATUS {
+    eInterference: SPINTERFERENCE,
+    szRequestTypeOfUI: [::WCHAR; 255],
+    dwReserved1: ::DWORD,
+    dwReserved2: ::DWORD,
+}}
 FLAGS!{enum SPBOOKMARKOPTIONS {
     SPBO_NONE = 0,
     SPBO_PAUSE = 1 << 0,

@@ -42,27 +42,23 @@ pub type HMACHINE = ::HANDLE;
 pub type PHMACHINE = *mut HMACHINE;
 pub type CONFLICT_LIST = ::ULONG_PTR;
 pub type PCONFLICT_LIST = *mut CONFLICT_LIST;
-#[repr(C)] #[derive(Copy)]
-pub struct CONFLICT_DETAILS_A {
-    pub CD_ulSize: ::ULONG,
-    pub CD_ulMask: ::ULONG,
-    pub CD_dnDevInst: DEVINST,
-    pub CD_rdResDes: RES_DES,
-    pub CD_ulFlags: ::ULONG,
-    pub CD_szDescription: [::CHAR; ::MAX_PATH],
-}
-impl Clone for CONFLICT_DETAILS_A { fn clone(&self) -> CONFLICT_DETAILS_A { *self } }
+STRUCT!{nodebug struct CONFLICT_DETAILS_A {
+    CD_ulSize: ::ULONG,
+    CD_ulMask: ::ULONG,
+    CD_dnDevInst: DEVINST,
+    CD_rdResDes: RES_DES,
+    CD_ulFlags: ::ULONG,
+    CD_szDescription: [::CHAR; ::MAX_PATH],
+}}
 pub type PCONFLICT_DETAILS_A = *mut CONFLICT_DETAILS_A;
-#[repr(C)] #[derive(Copy)]
-pub struct CONFLICT_DETAILS_W {
-    pub CD_ulSize: ::ULONG,
-    pub CD_ulMask: ::ULONG,
-    pub CD_dnDevInst: DEVINST,
-    pub CD_rdResDes: RES_DES,
-    pub CD_ulFlags: ::ULONG,
-    pub CD_szDescription: [::WCHAR; ::MAX_PATH],
-}
-impl Clone for CONFLICT_DETAILS_W { fn clone(&self) -> CONFLICT_DETAILS_W { *self } }
+STRUCT!{nodebug struct CONFLICT_DETAILS_W {
+    CD_ulSize: ::ULONG,
+    CD_ulMask: ::ULONG,
+    CD_dnDevInst: DEVINST,
+    CD_rdResDes: RES_DES,
+    CD_ulFlags: ::ULONG,
+    CD_szDescription: [::WCHAR; ::MAX_PATH],
+}}
 pub type PCONFLICT_DETAILS_W = *mut CONFLICT_DETAILS_W;
 pub const CM_CDMASK_DEVINST: ::ULONG = 0x00000001;
 pub const CM_CDMASK_RESDES: ::ULONG = 0x00000002;
@@ -393,21 +389,17 @@ pub type PCONNECTION_RESOURCE = *mut CONNECTION_RESOURCE;
 pub const CM_HWPI_NOT_DOCKABLE: ::DWORD = 0x00000000;
 pub const CM_HWPI_UNDOCKED: ::DWORD = 0x00000001;
 pub const CM_HWPI_DOCKED: ::DWORD = 0x00000002;
-#[repr(C)] #[derive(Copy)]
-pub struct HWPROFILEINFO_A {
-    pub HWPI_ulHWProfile: ::ULONG,
-    pub HWPI_szFriendlyName: [::CHAR; MAX_PROFILE_LEN],
-    pub HWPI_dwFlags: ::DWORD,
-}
-impl Clone for HWPROFILEINFO_A { fn clone(&self) -> HWPROFILEINFO_A { *self } }
+STRUCT!{nodebug struct HWPROFILEINFO_A {
+    HWPI_ulHWProfile: ::ULONG,
+    HWPI_szFriendlyName: [::CHAR; MAX_PROFILE_LEN],
+    HWPI_dwFlags: ::DWORD,
+}}
 pub type PHWPROFILEINFO_A = *mut HWPROFILEINFO_A;
-#[repr(C)] #[derive(Copy)]
-pub struct HWPROFILEINFO_W {
-    pub HWPI_ulHWProfile: ::ULONG,
-    pub HWPI_szFriendlyName: [::WCHAR; MAX_PROFILE_LEN],
-    pub HWPI_dwFlags: ::DWORD,
-}
-impl Clone for HWPROFILEINFO_W { fn clone(&self) -> HWPROFILEINFO_W { *self } }
+STRUCT!{nodebug struct HWPROFILEINFO_W {
+    HWPI_ulHWProfile: ::ULONG,
+    HWPI_szFriendlyName: [::WCHAR; MAX_PROFILE_LEN],
+    HWPI_dwFlags: ::DWORD,
+}}
 pub type PHWPROFILEINFO_W = *mut HWPROFILEINFO_W;
 pub const ResType_All: RESOURCEID = 0x00000000;
 pub const ResType_None: RESOURCEID = 0x00000000;
@@ -640,22 +632,16 @@ STRUCT!{struct CM_NOTIFY_FILTER_DeviceInterface {
 STRUCT!{struct CM_NOTIFY_FILTER_DeviceHandle {
     hTarget: ::HANDLE,
 }}
-#[repr(C)] #[derive(Copy)]
-pub struct CM_NOTIFY_FILTER_DeviceInstance {
-    pub InstanceId: [::WCHAR; MAX_DEVICE_ID_LEN],
-}
-impl Clone for CM_NOTIFY_FILTER_DeviceInstance {
-    fn clone(&self) -> CM_NOTIFY_FILTER_DeviceInstance { *self }
-}
-#[repr(C)] #[derive(Copy)]
-pub struct CM_NOTIFY_FILTER {
-    pub cbSize: ::DWORD,
-    pub Flags: ::DWORD,
-    pub FilterType: CM_NOTIFY_FILTER_TYPE,
-    pub Reserved: ::DWORD,
-    pub u: [::BYTE; 400],
-}
-impl Clone for CM_NOTIFY_FILTER { fn clone(&self) -> CM_NOTIFY_FILTER { *self } }
+STRUCT!{nodebug struct CM_NOTIFY_FILTER_DeviceInstance {
+    InstanceId: [::WCHAR; MAX_DEVICE_ID_LEN],
+}}
+STRUCT!{nodebug struct CM_NOTIFY_FILTER {
+    cbSize: ::DWORD,
+    Flags: ::DWORD,
+    FilterType: CM_NOTIFY_FILTER_TYPE,
+    Reserved: ::DWORD,
+    u: [::BYTE; 400],
+}}
 UNION!(CM_NOTIFY_FILTER, u, DeviceInterface, DeviceInterface_mut, CM_NOTIFY_FILTER_DeviceInterface);
 UNION!(CM_NOTIFY_FILTER, u, DeviceHandle, DeviceHandle_mut, CM_NOTIFY_FILTER_DeviceHandle);
 UNION!(CM_NOTIFY_FILTER, u, DeviceInstance, DeviceInstance_mut, CM_NOTIFY_FILTER_DeviceInstance);

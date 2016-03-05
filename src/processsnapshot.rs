@@ -51,10 +51,8 @@ pub type pAllocRoutine = Option<unsafe extern "system" fn(
 pub type pFreeRoutine = Option<unsafe extern "system" fn(
     Context: *mut ::c_void, Address: *mut ::c_void,
 )>;
-#[repr(C)] #[derive(Copy)]
-pub struct PSS_ALLOCATOR {
-    pub Context: *mut ::c_void,
-    pub AllocRoutine: pAllocRoutine,
-    pub FreeRoutine: pFreeRoutine,
-}
-impl Clone for PSS_ALLOCATOR { fn clone(&self) -> PSS_ALLOCATOR { *self } }
+STRUCT!{nodebug struct PSS_ALLOCATOR {
+    Context: *mut ::c_void,
+    AllocRoutine: pAllocRoutine,
+    FreeRoutine: pFreeRoutine,
+}}

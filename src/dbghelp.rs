@@ -1,26 +1,40 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! DbgHelp include file
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct LOADED_IMAGE {
-    pub ModuleName: ::PSTR,
-    pub hFile: ::HANDLE,
-    pub MappedAddress: ::PUCHAR,
-    #[cfg(target_arch = "x86_64")]
-    pub FileHeader: ::PIMAGE_NT_HEADERS64,
-    #[cfg(not(target_arch = "x86_64"))]
-    pub FileHeader: ::PIMAGE_NT_HEADERS32,
-    pub LastRvaSection: ::PIMAGE_SECTION_HEADER,
-    pub NumberOfSections: ::ULONG,
-    pub Sections: ::PIMAGE_SECTION_HEADER,
-    pub Characteristics: ::ULONG,
-    pub fSystemImage: ::BOOLEAN,
-    pub fDOSImage: ::BOOLEAN,
-    pub fReadOnly: ::BOOLEAN,
-    pub Version: ::UCHAR,
-    pub Links: ::LIST_ENTRY,
-    pub SizeOfImage: ::ULONG,
-}
+#[cfg(target_arch = "x86_64")]
+STRUCT!{struct LOADED_IMAGE {
+    ModuleName: ::PSTR,
+    hFile: ::HANDLE,
+    MappedAddress: ::PUCHAR,
+    FileHeader: ::PIMAGE_NT_HEADERS64,
+    LastRvaSection: ::PIMAGE_SECTION_HEADER,
+    NumberOfSections: ::ULONG,
+    Sections: ::PIMAGE_SECTION_HEADER,
+    Characteristics: ::ULONG,
+    fSystemImage: ::BOOLEAN,
+    fDOSImage: ::BOOLEAN,
+    fReadOnly: ::BOOLEAN,
+    Version: ::UCHAR,
+    Links: ::LIST_ENTRY,
+    SizeOfImage: ::ULONG,
+}}
+#[cfg(target_arch = "x86")]
+STRUCT!{struct LOADED_IMAGE {
+    ModuleName: ::PSTR,
+    hFile: ::HANDLE,
+    MappedAddress: ::PUCHAR,
+    FileHeader: ::PIMAGE_NT_HEADERS32,
+    LastRvaSection: ::PIMAGE_SECTION_HEADER,
+    NumberOfSections: ::ULONG,
+    Sections: ::PIMAGE_SECTION_HEADER,
+    Characteristics: ::ULONG,
+    fSystemImage: ::BOOLEAN,
+    fDOSImage: ::BOOLEAN,
+    fReadOnly: ::BOOLEAN,
+    Version: ::UCHAR,
+    Links: ::LIST_ENTRY,
+    SizeOfImage: ::ULONG,
+}}
 pub const MAX_SYM_NAME: usize = 2000;
 pub const ERROR_IMAGE_NOT_STRIPPED: ::DWORD = 0x8800;
 pub const ERROR_NO_DBG_POINTER: ::DWORD = 0x8801;
@@ -43,40 +57,40 @@ pub type PFIND_EXE_FILE_CALLBACK = Option<unsafe extern "system" fn(
 pub type PFIND_EXE_FILE_CALLBACKW = Option<unsafe extern "system" fn(
     FileHandle: ::HANDLE, FileName: ::PCWSTR, CallerData: ::PVOID,
 ) -> ::BOOL>;
-#[repr(C)] #[derive(Clone, Copy, Debug)] #[cfg(target_arch = "x86")]
-pub struct IMAGE_DEBUG_INFORMATION {
-    pub List: ::LIST_ENTRY,
-    pub ReservedSize: ::DWORD,
-    pub ReservedMappedBase: ::PVOID,
-    pub ReservedMachine: ::USHORT,
-    pub ReservedCharacteristics: ::USHORT,
-    pub ReservedCheckSum: ::DWORD,
-    pub ImageBase: ::DWORD,
-    pub SizeOfImage: ::DWORD,
-    pub ReservedNumberOfSections: ::DWORD,
-    pub ReservedSections: ::PIMAGE_SECTION_HEADER,
-    pub ReservedExportedNamesSize: ::DWORD,
-    pub ReservedExportedNames: ::PSTR,
-    pub ReservedNumberOfFunctionTableEntries: ::DWORD,
-    pub ReservedFunctionTableEntries: ::PIMAGE_FUNCTION_ENTRY,
-    pub ReservedLowestFunctionStartingAddress: ::DWORD,
-    pub ReservedHighestFunctionEndingAddress: ::DWORD,
-    pub ReservedNumberOfFpoTableEntries: ::DWORD,
-    pub ReservedFpoTableEntries: ::PFPO_DATA,
-    pub SizeOfCoffSymbols: ::DWORD,
-    pub CoffSymbols: ::PIMAGE_COFF_SYMBOLS_HEADER,
-    pub ReservedSizeOfCodeViewSymbols: ::DWORD,
-    pub ReservedCodeViewSymbols: ::PVOID,
-    pub ImageFilePath: ::PSTR,
-    pub ImageFileName: ::PSTR,
-    pub ReservedDebugFilePath: ::PSTR,
-    pub ReservedTimeDateStamp: ::DWORD,
-    pub ReservedRomImage: ::BOOL,
-    pub ReservedDebugDirectory: ::PIMAGE_DEBUG_DIRECTORY,
-    pub ReservedNumberOfDebugDirectories: ::DWORD,
-    pub ReservedOriginalFunctionTableBaseAddress: ::DWORD,
-    pub Reserved: [::DWORD; 2],
-}
+#[cfg(target_arch = "x86")]
+STRUCT!{struct IMAGE_DEBUG_INFORMATION {
+    List: ::LIST_ENTRY,
+    ReservedSize: ::DWORD,
+    ReservedMappedBase: ::PVOID,
+    ReservedMachine: ::USHORT,
+    ReservedCharacteristics: ::USHORT,
+    ReservedCheckSum: ::DWORD,
+    ImageBase: ::DWORD,
+    SizeOfImage: ::DWORD,
+    ReservedNumberOfSections: ::DWORD,
+    ReservedSections: ::PIMAGE_SECTION_HEADER,
+    ReservedExportedNamesSize: ::DWORD,
+    ReservedExportedNames: ::PSTR,
+    ReservedNumberOfFunctionTableEntries: ::DWORD,
+    ReservedFunctionTableEntries: ::PIMAGE_FUNCTION_ENTRY,
+    ReservedLowestFunctionStartingAddress: ::DWORD,
+    ReservedHighestFunctionEndingAddress: ::DWORD,
+    ReservedNumberOfFpoTableEntries: ::DWORD,
+    ReservedFpoTableEntries: ::PFPO_DATA,
+    SizeOfCoffSymbols: ::DWORD,
+    CoffSymbols: ::PIMAGE_COFF_SYMBOLS_HEADER,
+    ReservedSizeOfCodeViewSymbols: ::DWORD,
+    ReservedCodeViewSymbols: ::PVOID,
+    ImageFilePath: ::PSTR,
+    ImageFileName: ::PSTR,
+    ReservedDebugFilePath: ::PSTR,
+    ReservedTimeDateStamp: ::DWORD,
+    ReservedRomImage: ::BOOL,
+    ReservedDebugDirectory: ::PIMAGE_DEBUG_DIRECTORY,
+    ReservedNumberOfDebugDirectories: ::DWORD,
+    ReservedOriginalFunctionTableBaseAddress: ::DWORD,
+    Reserved: [::DWORD; 2],
+}}
 #[cfg(target_arch = "x86")]
 pub type PIMAGE_DEBUG_INFORMATION = *mut IMAGE_DEBUG_INFORMATION;
 pub type PENUMDIRTREE_CALLBACK = Option<unsafe extern "system" fn(
@@ -143,12 +157,12 @@ pub type LPADDRESS64 = *mut ADDRESS64;
 pub type ADDRESS = ADDRESS64;
 #[cfg(target_arch = "x86_64")]
 pub type LPADDRESS = LPADDRESS64;
-#[repr(C)] #[derive(Clone, Copy, Debug)] #[cfg(target_arch = "x86")]
-pub struct ADDRESS {
-    pub Offset: ::DWORD,
-    pub Segment: ::WORD,
-    pub Mode: ::ADDRESS_MODE,
-}
+#[cfg(target_arch = "x86")]
+STRUCT!{struct ADDRESS {
+    Offset: ::DWORD,
+    Segment: ::WORD,
+    Mode: ::ADDRESS_MODE,
+}}
 #[cfg(target_arch = "x86")]
 pub type LPADDRESS = *mut ADDRESS;
 STRUCT!{struct KDHELP64 {
@@ -172,21 +186,21 @@ pub type PKDHELP64 = *mut KDHELP64;
 pub type KDHELP = KDHELP64;
 #[cfg(target_arch = "x86_64")]
 pub type PKDHELP = PKDHELP64;
-#[repr(C)] #[derive(Clone, Copy, Debug)] #[cfg(target_arch = "x86")]
-pub struct KDHELP {
-    pub Thread: ::DWORD,
-    pub ThCallbackStack: ::DWORD,
-    pub NextCallback: ::DWORD,
-    pub FramePointer: ::DWORD,
-    pub KiCallUserMode: ::DWORD,
-    pub KeUserCallbackDispatcher: ::DWORD,
-    pub SystemRangeStart: ::DWORD,
-    pub ThCallbackBStore: ::DWORD,
-    pub KiUserExceptionDispatcher: ::DWORD,
-    pub StackBase: ::DWORD,
-    pub StackLimit: ::DWORD,
-    pub Reserved: [::DWORD; 5],
-}
+#[cfg(target_arch = "x86")]
+STRUCT!{struct KDHELP {
+    Thread: ::DWORD,
+    ThCallbackStack: ::DWORD,
+    NextCallback: ::DWORD,
+    FramePointer: ::DWORD,
+    KiCallUserMode: ::DWORD,
+    KeUserCallbackDispatcher: ::DWORD,
+    SystemRangeStart: ::DWORD,
+    ThCallbackBStore: ::DWORD,
+    KiUserExceptionDispatcher: ::DWORD,
+    StackBase: ::DWORD,
+    StackLimit: ::DWORD,
+    Reserved: [::DWORD; 5],
+}}
 #[cfg(target_arch = "x86")]
 pub type PKDHELP = *mut KDHELP;
 STRUCT!{struct STACKFRAME64 {
@@ -225,20 +239,20 @@ pub type LPSTACKFRAME_EX = *mut STACKFRAME_EX;
 pub type STACKFRAME = STACKFRAME64;
 #[cfg(target_arch = "x86_64")]
 pub type LPSTACKFRAME = LPSTACKFRAME64;
-#[repr(C)] #[derive(Clone, Copy, Debug)] #[cfg(target_arch = "x86")]
-pub struct STACKFRAME {
-    pub AddrPC: ::ADDRESS,
-    pub AddrReturn: ::ADDRESS,
-    pub AddrFrame: ::ADDRESS,
-    pub AddrStack: ::ADDRESS,
-    pub FuncTableEntry: ::PVOID,
-    pub Params: [::DWORD; 4],
-    pub Far: ::BOOL,
-    pub Virtual: ::BOOL,
-    pub Reserved: [::DWORD; 3],
-    pub KdHelp: ::KDHELP,
-    pub AddrBStore: ::ADDRESS,
-}
+#[cfg(target_arch = "x86")]
+STRUCT!{struct STACKFRAME {
+    AddrPC: ::ADDRESS,
+    AddrReturn: ::ADDRESS,
+    AddrFrame: ::ADDRESS,
+    AddrStack: ::ADDRESS,
+    FuncTableEntry: ::PVOID,
+    Params: [::DWORD; 4],
+    Far: ::BOOL,
+    Virtual: ::BOOL,
+    Reserved: [::DWORD; 3],
+    KdHelp: ::KDHELP,
+    AddrBStore: ::ADDRESS,
+}}
 #[cfg(target_arch = "x86")]
 pub type LPSTACKFRAME = *mut STACKFRAME;
 pub type PREAD_PROCESS_MEMORY_ROUTINE64 = Option<unsafe extern "system" fn(

@@ -202,12 +202,12 @@ macro_rules! BITFIELD {
 }
 macro_rules! ENUM {
     {enum $name:ident { $($variant:ident = $value:expr,)+ }} => {
-        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
         pub struct $name(pub u32);
         $(pub const $variant: $name = $name($value);)+
     };
     {enum $name:ident { $variant:ident = $value:expr, $($rest:tt)* }} => {
-        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
         pub struct $name(pub u32);
         pub const $variant: $name = $name($value);
         ENUM!{@gen $name, $variant, $($rest)*}
@@ -227,7 +227,7 @@ macro_rules! ENUM {
 }
 macro_rules! FLAGS {
     {enum $name:ident { $($variant:ident = $value:expr,)+ }} => {
-        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
         pub struct $name(pub u32);
         $(pub const $variant: $name = $name($value);)+
         impl ::std::ops::BitAnd<$name> for $name {

@@ -17,28 +17,24 @@ pub const SCARD_SCOPE_SYSTEM: ::DWORD = 2;
 pub const SCARD_PROVIDER_PRIMARY: ::DWORD = 1;
 pub const SCARD_PROVIDER_CSP: ::DWORD = 2;
 pub const SCARD_PROVIDER_KSP: ::DWORD = 3;
-#[repr(C)] #[derive(Copy)]
-pub struct SCARD_READERSTATEA {
-    pub szReader: ::LPCSTR,
-    pub pvUserData: ::LPVOID,
-    pub dwCurrentState: ::DWORD,
-    pub dwEventState: ::DWORD,
-    pub cbAtr: ::DWORD,
-    pub rgbAtr: [::BYTE; 36],
-}
-impl Clone for SCARD_READERSTATEA { fn clone(&self) -> SCARD_READERSTATEA { *self } }
+STRUCT!{nodebug struct SCARD_READERSTATEA {
+    szReader: ::LPCSTR,
+    pvUserData: ::LPVOID,
+    dwCurrentState: ::DWORD,
+    dwEventState: ::DWORD,
+    cbAtr: ::DWORD,
+    rgbAtr: [::BYTE; 36],
+}}
 pub type PSCARD_READERSTATEA = *mut SCARD_READERSTATEA;
 pub type LPSCARD_READERSTATEA = *mut SCARD_READERSTATEA;
-#[repr(C)] #[derive(Copy)]
-pub struct SCARD_READERSTATEW {
-    pub szReader: ::LPCWSTR,
-    pub pvUserData: ::LPVOID,
-    pub dwCurrentState: ::DWORD,
-    pub dwEventState: ::DWORD,
-    pub cbAtr: ::DWORD,
-    pub rgbAtr: [::BYTE; 36],
-}
-impl Clone for SCARD_READERSTATEW { fn clone(&self) -> SCARD_READERSTATEW { *self } }
+STRUCT!{nodebug struct SCARD_READERSTATEW {
+    szReader: ::LPCWSTR,
+    pvUserData: ::LPVOID,
+    dwCurrentState: ::DWORD,
+    dwEventState: ::DWORD,
+    cbAtr: ::DWORD,
+    rgbAtr: [::BYTE; 36],
+}}
 pub type PSCARD_READERSTATEW = *mut SCARD_READERSTATEW;
 pub type LPSCARD_READERSTATEW = *mut SCARD_READERSTATEW;
 pub type SCARD_READERSTATE_A = SCARD_READERSTATEA;
@@ -59,13 +55,11 @@ pub const SCARD_STATE_EXCLUSIVE: ::DWORD = 0x00000080;
 pub const SCARD_STATE_INUSE: ::DWORD = 0x00000100;
 pub const SCARD_STATE_MUTE: ::DWORD = 0x00000200;
 pub const SCARD_STATE_UNPOWERED: ::DWORD = 0x00000400;
-#[repr(C)] #[derive(Copy)]
-pub struct SCARD_ATRMASK {
-    pub cbAtr: ::DWORD,
-    pub rgbAtr: [::BYTE; 36],
-    pub rgbMask: [::BYTE; 36],
-}
-impl Clone for SCARD_ATRMASK { fn clone(&self) -> SCARD_ATRMASK { *self } }
+STRUCT!{nodebug struct SCARD_ATRMASK {
+    cbAtr: ::DWORD,
+    rgbAtr: [::BYTE; 36],
+    rgbMask: [::BYTE; 36],
+}}
 pub type PSCARD_ATRMASK = *mut SCARD_ATRMASK;
 pub type LPSCARD_ATRMASK = *mut SCARD_ATRMASK;
 pub const SCARD_SHARE_EXCLUSIVE: ::DWORD = 1;
@@ -90,90 +84,82 @@ pub type LPOCNCHKPROC = Option<unsafe extern "system" fn(
     SCARDCONTEXT, SCARDHANDLE, ::PVOID,
 ) -> ::BOOL>;
 pub type LPOCNDSCPROC = Option<unsafe extern "system" fn(SCARDCONTEXT, SCARDHANDLE, ::PVOID)>;
-#[repr(C)] #[derive(Copy)]
-pub struct OPENCARD_SEARCH_CRITERIAA {
-    pub dwStructSize: ::DWORD,
-    pub lpstrGroupNames: ::LPSTR,
-    pub nMaxGroupNames: ::DWORD,
-    pub rgguidInterfaces: ::LPCGUID,
-    pub cguidInterfaces: ::DWORD,
-    pub lpstrCardNames: ::LPSTR,
-    pub nMaxCardNames: ::DWORD,
-    pub lpfnCheck: LPOCNCHKPROC,
-    pub lpfnConnect: LPOCNCONNPROCA,
-    pub lpfnDisconnect: LPOCNDSCPROC,
-    pub pvUserData: ::LPVOID,
-    pub dwShareMode: ::DWORD,
-    pub dwPreferredProtocols: ::DWORD,
-}
-impl Clone for OPENCARD_SEARCH_CRITERIAA { fn clone(&self) -> OPENCARD_SEARCH_CRITERIAA { *self } }
+STRUCT!{nodebug struct OPENCARD_SEARCH_CRITERIAA {
+    dwStructSize: ::DWORD,
+    lpstrGroupNames: ::LPSTR,
+    nMaxGroupNames: ::DWORD,
+    rgguidInterfaces: ::LPCGUID,
+    cguidInterfaces: ::DWORD,
+    lpstrCardNames: ::LPSTR,
+    nMaxCardNames: ::DWORD,
+    lpfnCheck: LPOCNCHKPROC,
+    lpfnConnect: LPOCNCONNPROCA,
+    lpfnDisconnect: LPOCNDSCPROC,
+    pvUserData: ::LPVOID,
+    dwShareMode: ::DWORD,
+    dwPreferredProtocols: ::DWORD,
+}}
 pub type POPENCARD_SEARCH_CRITERIAA = *mut OPENCARD_SEARCH_CRITERIAA;
 pub type LPOPENCARD_SEARCH_CRITERIAA = *mut OPENCARD_SEARCH_CRITERIAA;
-#[repr(C)] #[derive(Copy)]
-pub struct OPENCARD_SEARCH_CRITERIAW {
-    pub dwStructSize: ::DWORD,
-    pub lpstrGroupNames: ::LPWSTR,
-    pub nMaxGroupNames: ::DWORD,
-    pub rgguidInterfaces: ::LPCGUID,
-    pub cguidInterfaces: ::DWORD,
-    pub lpstrCardNames: ::LPWSTR,
-    pub nMaxCardNames: ::DWORD,
-    pub lpfnCheck: LPOCNCHKPROC,
-    pub lpfnConnect: LPOCNCONNPROCW,
-    pub lpfnDisconnect: LPOCNDSCPROC,
-    pub pvUserData: ::LPVOID,
-    pub dwShareMode: ::DWORD,
-    pub dwPreferredProtocols: ::DWORD,
-}
-impl Clone for OPENCARD_SEARCH_CRITERIAW { fn clone(&self) -> OPENCARD_SEARCH_CRITERIAW { *self } }
+STRUCT!{nodebug struct OPENCARD_SEARCH_CRITERIAW {
+    dwStructSize: ::DWORD,
+    lpstrGroupNames: ::LPWSTR,
+    nMaxGroupNames: ::DWORD,
+    rgguidInterfaces: ::LPCGUID,
+    cguidInterfaces: ::DWORD,
+    lpstrCardNames: ::LPWSTR,
+    nMaxCardNames: ::DWORD,
+    lpfnCheck: LPOCNCHKPROC,
+    lpfnConnect: LPOCNCONNPROCW,
+    lpfnDisconnect: LPOCNDSCPROC,
+    pvUserData: ::LPVOID,
+    dwShareMode: ::DWORD,
+    dwPreferredProtocols: ::DWORD,
+}}
 pub type POPENCARD_SEARCH_CRITERIAW = *mut OPENCARD_SEARCH_CRITERIAW;
 pub type LPOPENCARD_SEARCH_CRITERIAW = *mut OPENCARD_SEARCH_CRITERIAW;
-#[repr(C)] #[derive(Copy)]
-pub struct OPENCARDNAME_EXA {
-    pub dwStructSize: ::DWORD,
-    pub hSCardContext: SCARDCONTEXT,
-    pub hwndOwner: ::HWND,
-    pub dwFlags: ::DWORD,
-    pub lpstrTitle: ::LPCSTR,
-    pub lpstrSearchDesc: ::LPCSTR,
-    pub hIcon: ::HICON,
-    pub pOpenCardSearchCriteria: POPENCARD_SEARCH_CRITERIAA,
-    pub lpfnConnect: LPOCNCONNPROCA,
-    pub pvUserData: ::LPVOID,
-    pub dwShareMode: ::DWORD,
-    pub dwPreferredProtocols: ::DWORD,
-    pub lpstrRdr: ::LPSTR,
-    pub nMaxRdr: ::DWORD,
-    pub lpstrCard: ::LPSTR,
-    pub nMaxCard: ::DWORD,
-    pub dwActiveProtocol: ::DWORD,
-    pub hCardHandle: SCARDHANDLE,
-}
-impl Clone for OPENCARDNAME_EXA { fn clone(&self) -> OPENCARDNAME_EXA { *self } }
+STRUCT!{nodebug struct OPENCARDNAME_EXA {
+    dwStructSize: ::DWORD,
+    hSCardContext: SCARDCONTEXT,
+    hwndOwner: ::HWND,
+    dwFlags: ::DWORD,
+    lpstrTitle: ::LPCSTR,
+    lpstrSearchDesc: ::LPCSTR,
+    hIcon: ::HICON,
+    pOpenCardSearchCriteria: POPENCARD_SEARCH_CRITERIAA,
+    lpfnConnect: LPOCNCONNPROCA,
+    pvUserData: ::LPVOID,
+    dwShareMode: ::DWORD,
+    dwPreferredProtocols: ::DWORD,
+    lpstrRdr: ::LPSTR,
+    nMaxRdr: ::DWORD,
+    lpstrCard: ::LPSTR,
+    nMaxCard: ::DWORD,
+    dwActiveProtocol: ::DWORD,
+    hCardHandle: SCARDHANDLE,
+}}
 pub type POPENCARDNAME_EXA = *mut OPENCARDNAME_EXA;
 pub type LPOPENCARDNAME_EXA = *mut OPENCARDNAME_EXA;
-#[repr(C)] #[derive(Copy)]
-pub struct OPENCARDNAME_EXW {
-    pub dwStructSize: ::DWORD,
-    pub hSCardContext: SCARDCONTEXT,
-    pub hwndOwner: ::HWND,
-    pub dwFlags: ::DWORD,
-    pub lpstrTitle: ::LPCWSTR,
-    pub lpstrSearchDesc: ::LPCWSTR,
-    pub hIcon: ::HICON,
-    pub pOpenCardSearchCriteria: POPENCARD_SEARCH_CRITERIAW,
-    pub lpfnConnect: LPOCNCONNPROCW,
-    pub pvUserData: ::LPVOID,
-    pub dwShareMode: ::DWORD,
-    pub dwPreferredProtocols: ::DWORD,
-    pub lpstrRdr: ::LPWSTR,
-    pub nMaxRdr: ::DWORD,
-    pub lpstrCard: ::LPWSTR,
-    pub nMaxCard: ::DWORD,
-    pub dwActiveProtocol: ::DWORD,
-    pub hCardHandle: SCARDHANDLE,
-}
-impl Clone for OPENCARDNAME_EXW { fn clone(&self) -> OPENCARDNAME_EXW { *self } }
+STRUCT!{nodebug struct OPENCARDNAME_EXW {
+    dwStructSize: ::DWORD,
+    hSCardContext: SCARDCONTEXT,
+    hwndOwner: ::HWND,
+    dwFlags: ::DWORD,
+    lpstrTitle: ::LPCWSTR,
+    lpstrSearchDesc: ::LPCWSTR,
+    hIcon: ::HICON,
+    pOpenCardSearchCriteria: POPENCARD_SEARCH_CRITERIAW,
+    lpfnConnect: LPOCNCONNPROCW,
+    pvUserData: ::LPVOID,
+    dwShareMode: ::DWORD,
+    dwPreferredProtocols: ::DWORD,
+    lpstrRdr: ::LPWSTR,
+    nMaxRdr: ::DWORD,
+    lpstrCard: ::LPWSTR,
+    nMaxCard: ::DWORD,
+    dwActiveProtocol: ::DWORD,
+    hCardHandle: SCARDHANDLE,
+}}
 pub type POPENCARDNAME_EXW = *mut OPENCARDNAME_EXW;
 pub type LPOPENCARDNAME_EXW = *mut OPENCARDNAME_EXW;
 pub type OPENCARDNAMEA_EX = OPENCARDNAME_EXA;
@@ -219,62 +205,58 @@ STRUCT!{struct READER_SEL_RESPONSE {
     cchCardNameLength: ::DWORD,
 }}
 pub type PREADER_SEL_RESPONSE = *mut READER_SEL_RESPONSE;
-#[repr(C)] #[derive(Copy)]
-pub struct OPENCARDNAMEA {
-    pub dwStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hSCardContext: SCARDCONTEXT,
-    pub lpstrGroupNames: ::LPSTR,
-    pub nMaxGroupNames: ::DWORD,
-    pub lpstrCardNames: ::LPSTR,
-    pub nMaxCardNames: ::DWORD,
-    pub rgguidInterfaces: ::LPCGUID,
-    pub cguidInterfaces: ::DWORD,
-    pub lpstrRdr: ::LPSTR,
-    pub nMaxRdr: ::DWORD,
-    pub lpstrCard: ::LPSTR,
-    pub nMaxCard: ::DWORD,
-    pub lpstrTitle: ::LPCSTR,
-    pub dwFlags: ::DWORD,
-    pub pvUserData: ::LPVOID,
-    pub dwShareMode: ::DWORD,
-    pub dwPreferredProtocols: ::DWORD,
-    pub dwActiveProtocol: ::DWORD,
-    pub lpfnConnect: LPOCNCONNPROCA,
-    pub lpfnCheck: LPOCNCHKPROC,
-    pub lpfnDisconnect: LPOCNDSCPROC,
-    pub hCardHandle: SCARDHANDLE,
-}
-impl Clone for OPENCARDNAMEA { fn clone(&self) -> OPENCARDNAMEA { *self } }
+STRUCT!{nodebug struct OPENCARDNAMEA {
+    dwStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hSCardContext: SCARDCONTEXT,
+    lpstrGroupNames: ::LPSTR,
+    nMaxGroupNames: ::DWORD,
+    lpstrCardNames: ::LPSTR,
+    nMaxCardNames: ::DWORD,
+    rgguidInterfaces: ::LPCGUID,
+    cguidInterfaces: ::DWORD,
+    lpstrRdr: ::LPSTR,
+    nMaxRdr: ::DWORD,
+    lpstrCard: ::LPSTR,
+    nMaxCard: ::DWORD,
+    lpstrTitle: ::LPCSTR,
+    dwFlags: ::DWORD,
+    pvUserData: ::LPVOID,
+    dwShareMode: ::DWORD,
+    dwPreferredProtocols: ::DWORD,
+    dwActiveProtocol: ::DWORD,
+    lpfnConnect: LPOCNCONNPROCA,
+    lpfnCheck: LPOCNCHKPROC,
+    lpfnDisconnect: LPOCNDSCPROC,
+    hCardHandle: SCARDHANDLE,
+}}
 pub type POPENCARDNAMEA = *mut OPENCARDNAMEA;
 pub type LPOPENCARDNAMEA = *mut OPENCARDNAMEA;
-#[repr(C)] #[derive(Copy)]
-pub struct OPENCARDNAMEW {
-    pub dwStructSize: ::DWORD,
-    pub hwndOwner: ::HWND,
-    pub hSCardContext: SCARDCONTEXT,
-    pub lpstrGroupNames: ::LPWSTR,
-    pub nMaxGroupNames: ::DWORD,
-    pub lpstrCardNames: ::LPWSTR,
-    pub nMaxCardNames: ::DWORD,
-    pub rgguidInterfaces: ::LPCGUID,
-    pub cguidInterfaces: ::DWORD,
-    pub lpstrRdr: ::LPWSTR,
-    pub nMaxRdr: ::DWORD,
-    pub lpstrCard: ::LPWSTR,
-    pub nMaxCard: ::DWORD,
-    pub lpstrTitle: ::LPCWSTR,
-    pub dwFlags: ::DWORD,
-    pub pvUserData: ::LPVOID,
-    pub dwShareMode: ::DWORD,
-    pub dwPreferredProtocols: ::DWORD,
-    pub dwActiveProtocol: ::DWORD,
-    pub lpfnConnect: LPOCNCONNPROCW,
-    pub lpfnCheck: LPOCNCHKPROC,
-    pub lpfnDisconnect: LPOCNDSCPROC,
-    pub hCardHandle: SCARDHANDLE,
-}
-impl Clone for OPENCARDNAMEW { fn clone(&self) -> OPENCARDNAMEW { *self } }
+STRUCT!{nodebug struct OPENCARDNAMEW {
+    dwStructSize: ::DWORD,
+    hwndOwner: ::HWND,
+    hSCardContext: SCARDCONTEXT,
+    lpstrGroupNames: ::LPWSTR,
+    nMaxGroupNames: ::DWORD,
+    lpstrCardNames: ::LPWSTR,
+    nMaxCardNames: ::DWORD,
+    rgguidInterfaces: ::LPCGUID,
+    cguidInterfaces: ::DWORD,
+    lpstrRdr: ::LPWSTR,
+    nMaxRdr: ::DWORD,
+    lpstrCard: ::LPWSTR,
+    nMaxCard: ::DWORD,
+    lpstrTitle: ::LPCWSTR,
+    dwFlags: ::DWORD,
+    pvUserData: ::LPVOID,
+    dwShareMode: ::DWORD,
+    dwPreferredProtocols: ::DWORD,
+    dwActiveProtocol: ::DWORD,
+    lpfnConnect: LPOCNCONNPROCW,
+    lpfnCheck: LPOCNCHKPROC,
+    lpfnDisconnect: LPOCNDSCPROC,
+    hCardHandle: SCARDHANDLE,
+}}
 pub type POPENCARDNAMEW = *mut OPENCARDNAMEW;
 pub type LPOPENCARDNAMEW = *mut OPENCARDNAMEW;
 pub type OPENCARDNAME_A = OPENCARDNAMEA;

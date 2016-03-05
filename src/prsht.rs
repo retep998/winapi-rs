@@ -1,10 +1,7 @@
 // Copyright © 2015, skdltmxn
 // Licensed under the MIT License <LICENSE.md>
 //! Interface for the Windows Property Sheet Pages
-#[repr(C)] #[allow(missing_copy_implementations)]
-pub struct PSP {
-    unused: ::c_void,
-}
+pub enum PSP {}
 pub type HPROPSHEETPAGE = *mut PSP;
 pub type LPFNPSPCALLBACKA = Option<unsafe extern "system" fn(
     hwnd: ::HWND, uMsg: ::UINT, ppsp: *mut PROPSHEETPAGEA,
@@ -30,47 +27,43 @@ pub const PSPCB_ADDREF: ::UINT = 0;
 pub const PSPCB_RELEASE: ::UINT = 1;
 pub const PSPCB_CREATE: ::UINT = 2;
 pub type PROPSHEETPAGE_RESOURCE = ::LPCDLGTEMPLATEA;
-#[repr(C)] #[derive(Copy)]
-pub struct PROPSHEETPAGEA_V4 {
-    pub dwSize: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub hInstance: ::HINSTANCE,
-    pub pszTemplate: ::LPCSTR,
-    pub hIcon: ::HICON,
-    pub pszTitle: ::LPCSTR,
-    pub pfnDlgProc: ::DLGPROC,
-    pub lParam: ::LPARAM,
-    pub pfnCallback: LPFNPSPCALLBACKA,
-    pub pcRefParent: *mut ::UINT,
-    pub pszHeaderTitle: ::LPCSTR,
-    pub pszHeaderSubTitle: ::LPCSTR,
-    pub hActCtx: ::HANDLE,
-    pub hbmHeader: ::HBITMAP
-}
-impl Clone for PROPSHEETPAGEA_V4 { fn clone(&self) -> PROPSHEETPAGEA_V4 { *self } }
+STRUCT!{nodebug struct PROPSHEETPAGEA_V4 {
+    dwSize: ::DWORD,
+    dwFlags: ::DWORD,
+    hInstance: ::HINSTANCE,
+    pszTemplate: ::LPCSTR,
+    hIcon: ::HICON,
+    pszTitle: ::LPCSTR,
+    pfnDlgProc: ::DLGPROC,
+    lParam: ::LPARAM,
+    pfnCallback: LPFNPSPCALLBACKA,
+    pcRefParent: *mut ::UINT,
+    pszHeaderTitle: ::LPCSTR,
+    pszHeaderSubTitle: ::LPCSTR,
+    hActCtx: ::HANDLE,
+    hbmHeader: ::HBITMAP,
+}}
 UNION!(PROPSHEETPAGEA_V4, pszTemplate, pResource, pResource_mut, PROPSHEETPAGE_RESOURCE);
 UNION!(PROPSHEETPAGEA_V4, hIcon, pszIcon, pszIcon_mut, ::LPCSTR);
 UNION!(PROPSHEETPAGEA_V4, hbmHeader, pszbmHeader, pszbmHeader_mut, ::LPCSTR);
 pub type LPPROPSHEETPAGEA_V4 = *mut PROPSHEETPAGEA_V4;
 pub type LPCPROPSHEETPAGEA_V4 = *const PROPSHEETPAGEA_V4;
-#[repr(C)] #[derive(Copy)]
-pub struct PROPSHEETPAGEW_V4 {
-    pub dwSize: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub hInstance: ::HINSTANCE,
-    pub pszTemplate: ::LPCWSTR,
-    pub hIcon: ::HICON,
-    pub pszTitle: ::LPCWSTR,
-    pub pfnDlgProc: ::DLGPROC,
-    pub lParam: ::LPARAM,
-    pub pfnCallback: LPFNPSPCALLBACKW,
-    pub pcRefParent: *mut ::UINT,
-    pub pszHeaderTitle: ::LPCWSTR,
-    pub pszHeaderSubTitle: ::LPCWSTR,
-    pub hActCtx: ::HANDLE,
-    pub hbmHeader: ::HBITMAP
-}
-impl Clone for PROPSHEETPAGEW_V4 { fn clone(&self) -> PROPSHEETPAGEW_V4 { *self } }
+STRUCT!{nodebug struct PROPSHEETPAGEW_V4 {
+    dwSize: ::DWORD,
+    dwFlags: ::DWORD,
+    hInstance: ::HINSTANCE,
+    pszTemplate: ::LPCWSTR,
+    hIcon: ::HICON,
+    pszTitle: ::LPCWSTR,
+    pfnDlgProc: ::DLGPROC,
+    lParam: ::LPARAM,
+    pfnCallback: LPFNPSPCALLBACKW,
+    pcRefParent: *mut ::UINT,
+    pszHeaderTitle: ::LPCWSTR,
+    pszHeaderSubTitle: ::LPCWSTR,
+    hActCtx: ::HANDLE,
+    hbmHeader: ::HBITMAP,
+}}
 UNION!(PROPSHEETPAGEW_V4, pszTemplate, pResource, pResource_mut, PROPSHEETPAGE_RESOURCE);
 UNION!(PROPSHEETPAGEW_V4, hIcon, pszIcon, pszIcon_mut, ::LPCWSTR);
 UNION!(PROPSHEETPAGEW_V4, hbmHeader, pszbmHeader, pszbmHeader_mut, ::LPCWSTR);
@@ -119,23 +112,21 @@ pub const PSH_NOMARGIN: ::DWORD = 0x10000000;
 pub type PFNPROPSHEETCALLBACK = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::LPARAM,
 ) -> ::c_int>;
-#[repr(C)] #[derive(Copy)]
-pub struct PROPSHEETHEADERA_V2 {
-    pub dwSize: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub hwndParent: ::HWND,
-    pub hInstance: ::HINSTANCE,
-    pub hIcon: ::HICON,
-    pub pszCaption: ::LPCSTR,
-    pub nPages: ::UINT,
-    pub pStartPage: ::LPCSTR,
-    pub ppsp: LPCPROPSHEETPAGEA,
-    pub pfnCallback: PFNPROPSHEETCALLBACK,
-    pub hbmWatermark: ::HBITMAP,
-    pub hplWatermark: ::HPALETTE,
-    pub hbmHeader: ::HBITMAP,
-}
-impl Clone for PROPSHEETHEADERA_V2 { fn clone(&self) -> PROPSHEETHEADERA_V2 { *self } }
+STRUCT!{nodebug struct PROPSHEETHEADERA_V2 {
+    dwSize: ::DWORD,
+    dwFlags: ::DWORD,
+    hwndParent: ::HWND,
+    hInstance: ::HINSTANCE,
+    hIcon: ::HICON,
+    pszCaption: ::LPCSTR,
+    nPages: ::UINT,
+    pStartPage: ::LPCSTR,
+    ppsp: LPCPROPSHEETPAGEA,
+    pfnCallback: PFNPROPSHEETCALLBACK,
+    hbmWatermark: ::HBITMAP,
+    hplWatermark: ::HPALETTE,
+    hbmHeader: ::HBITMAP,
+}}
 UNION!(PROPSHEETHEADERA_V2, hIcon, pszIcon, pszIcon_mut, ::LPCSTR);
 UNION!(PROPSHEETHEADERA_V2, pStartPage, nStartPage, nStartPage_mut, ::UINT);
 UNION!(PROPSHEETHEADERA_V2, ppsp, phpage, phpage_mut, *mut HPROPSHEETPAGE);
@@ -143,23 +134,21 @@ UNION!(PROPSHEETHEADERA_V2, hbmWatermark, pszbmWatermark, pszbmWatermark_mut, ::
 UNION!(PROPSHEETHEADERA_V2, hbmHeader, pszbmHeader, pszbmHeader_mut, ::LPCSTR);
 pub type LPPROPSHEETHEADERA_V2 = *mut PROPSHEETHEADERA_V2;
 pub type LPCPROPSHEETHEADERA_V2 = *const PROPSHEETHEADERA_V2;
-#[repr(C)] #[derive(Copy)]
-pub struct PROPSHEETHEADERW_V2 {
-    pub dwSize: ::DWORD,
-    pub dwFlags: ::DWORD,
-    pub hwndParent: ::HWND,
-    pub hInstance: ::HINSTANCE,
-    pub hIcon: ::HICON,
-    pub pszCaption: ::LPCWSTR,
-    pub nPages: ::UINT,
-    pub pStartPage: ::LPCWSTR,
-    pub ppsp: LPCPROPSHEETPAGEW,
-    pub pfnCallback: PFNPROPSHEETCALLBACK,
-    pub hbmWatermark: ::HBITMAP,
-    pub hplWatermark: ::HPALETTE,
-    pub hbmHeader: ::HBITMAP,
-}
-impl Clone for PROPSHEETHEADERW_V2 { fn clone(&self) -> PROPSHEETHEADERW_V2 { *self } }
+STRUCT!{nodebug struct PROPSHEETHEADERW_V2 {
+    dwSize: ::DWORD,
+    dwFlags: ::DWORD,
+    hwndParent: ::HWND,
+    hInstance: ::HINSTANCE,
+    hIcon: ::HICON,
+    pszCaption: ::LPCWSTR,
+    nPages: ::UINT,
+    pStartPage: ::LPCWSTR,
+    ppsp: LPCPROPSHEETPAGEW,
+    pfnCallback: PFNPROPSHEETCALLBACK,
+    hbmWatermark: ::HBITMAP,
+    hplWatermark: ::HPALETTE,
+    hbmHeader: ::HBITMAP,
+}}
 UNION!(PROPSHEETHEADERW_V2, hIcon, pszIcon, pszIcon_mut, ::LPCWSTR);
 UNION!(PROPSHEETHEADERW_V2, pStartPage, nStartPage, nStartPage_mut, ::UINT);
 UNION!(PROPSHEETHEADERW_V2, ppsp, phpage, phpage_mut, *mut HPROPSHEETPAGE);

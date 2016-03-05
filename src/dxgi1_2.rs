@@ -44,107 +44,93 @@ ENUM!{ enum _DXGI_OFFER_RESOURCE_PRIORITY {
     DXGI_OFFER_RESOURCE_PRIORITY_HIGH = 3,
 }}
 
-#[repr(C)] #[derive(Copy)]
-pub struct DXGI_ADAPTER_DESC2 {
-    pub Description: [::WCHAR; 128],
-    pub VendorId: ::UINT,
-    pub DeviceId: ::UINT,
-    pub SubSysId: ::UINT,
-    pub Revision: ::UINT,
-    pub DedicatedVideoMemory: ::SIZE_T,
-    pub DedicatedSystemMemory: ::SIZE_T,
-    pub SharedSystemMemory: ::SIZE_T,
-    pub AdapterLuid: ::LUID,
-    pub Flags: ::UINT,
-    pub GraphicsPreemptionGranularity: ::DXGI_GRAPHICS_PREEMPTION_GRANULARITY,
-    pub ComputePreemptionGranularity: ::DXGI_COMPUTE_PREEMPTION_GRANULARITY,
-}
+STRUCT!{nodebug struct DXGI_ADAPTER_DESC2 {
+    Description: [::WCHAR; 128],
+    VendorId: ::UINT,
+    DeviceId: ::UINT,
+    SubSysId: ::UINT,
+    Revision: ::UINT,
+    DedicatedVideoMemory: ::SIZE_T,
+    DedicatedSystemMemory: ::SIZE_T,
+    SharedSystemMemory: ::SIZE_T,
+    AdapterLuid: ::LUID,
+    Flags: ::UINT,
+    GraphicsPreemptionGranularity: ::DXGI_GRAPHICS_PREEMPTION_GRANULARITY,
+    ComputePreemptionGranularity: ::DXGI_COMPUTE_PREEMPTION_GRANULARITY,
+}}
 
-impl Clone for DXGI_ADAPTER_DESC2 {
-    fn clone(&self) -> Self { *self }
-}
+STRUCT!{struct DXGI_MODE_DESC1 {
+    Width: ::UINT,
+    Height: ::UINT,
+    RefreshRate: ::DXGI_RATIONAL,
+    Format: ::DXGI_FORMAT,
+    ScanlineOrdering: ::DXGI_MODE_SCANLINE_ORDER,
+    Scaling: ::DXGI_MODE_SCALING,
+    Stereo: ::BOOL,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_MODE_DESC1 {
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub RefreshRate: ::DXGI_RATIONAL,
-    pub Format: ::DXGI_FORMAT,
-    pub ScanlineOrdering: ::DXGI_MODE_SCANLINE_ORDER,
-    pub Scaling: ::DXGI_MODE_SCALING,
-    pub Stereo: ::BOOL,
-}
+STRUCT!{struct DXGI_OUTDUPL_DESC {
+    ModeDesc: ::DXGI_MODE_DESC,
+    Rotation: ::DXGI_MODE_ROTATION,
+    DesktopImageInSystemMemory: ::BOOL,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_OUTDUPL_DESC {
-    pub ModeDesc: ::DXGI_MODE_DESC,
-    pub Rotation: ::DXGI_MODE_ROTATION,
-    pub DesktopImageInSystemMemory: ::BOOL,
-}
+STRUCT!{struct DXGI_OUTDUPL_FRAME_INFO {
+    LastPresentTime: ::LARGE_INTEGER,
+    LastMouseUpdateTime: ::LARGE_INTEGER,
+    AccumulatedFrames: ::UINT,
+    RectsCoalesced: ::BOOL,
+    ProtectedContentMaskedOut: ::BOOL,
+    PointerPosition: ::DXGI_OUTDUPL_POINTER_POSITION,
+    TotalMetadataBufferSize: ::UINT,
+    PointerShapeBufferSize: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_OUTDUPL_FRAME_INFO {
-    pub LastPresentTime: ::LARGE_INTEGER,
-    pub LastMouseUpdateTime: ::LARGE_INTEGER,
-    pub AccumulatedFrames: ::UINT,
-    pub RectsCoalesced: ::BOOL,
-    pub ProtectedContentMaskedOut: ::BOOL,
-    pub PointerPosition: ::DXGI_OUTDUPL_POINTER_POSITION,
-    pub TotalMetadataBufferSize: ::UINT,
-    pub PointerShapeBufferSize: ::UINT,
-}
+STRUCT!{struct DXGI_OUTDUPL_MOVE_RECT {
+    SourcePoint: ::POINT,
+    DestinationRect: ::RECT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_OUTDUPL_MOVE_RECT {
-    pub SourcePoint: ::POINT,
-    pub DestinationRect: ::RECT,
-}
+STRUCT!{struct DXGI_OUTDUPL_POINTER_POSITION {
+    Position: ::POINT,
+    Visible: ::BOOL,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_OUTDUPL_POINTER_POSITION {
-    pub Position: ::POINT,
-    pub Visible: ::BOOL,
-}
+STRUCT!{struct DXGI_OUTDUPL_POINTER_SHAPE_INFO {
+    Type: ::UINT,
+    Width: ::UINT,
+    Height: ::UINT,
+    Pitch: ::UINT,
+    HotSpot: ::POINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_OUTDUPL_POINTER_SHAPE_INFO {
-    pub Type: ::UINT,
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub Pitch: ::UINT,
-    pub HotSpot: ::POINT,
-}
+STRUCT!{struct DXGI_PRESENT_PARAMETERS {
+    DirtyRectsCount: ::UINT,
+    pDirtyRects: *mut ::RECT,
+    pScrollRect: *mut ::RECT,
+    pScrollOffset: *mut ::POINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_PRESENT_PARAMETERS {
-    pub DirtyRectsCount: ::UINT,
-    pub pDirtyRects: *mut ::RECT,
-    pub pScrollRect: *mut ::RECT,
-    pub pScrollOffset: *mut ::POINT,
-}
+STRUCT!{struct DXGI_SWAP_CHAIN_DESC1 {
+    Width: ::UINT,
+    Height: ::UINT,
+    Format: ::DXGI_FORMAT,
+    Stereo: ::BOOL,
+    SampleDesc: ::DXGI_SAMPLE_DESC,
+    BufferUsage: ::DXGI_USAGE,
+    BufferCount: ::UINT,
+    Scaling: ::DXGI_SCALING,
+    SwapEffect: ::DXGI_SWAP_EFFECT,
+    AlphaMode: ::DXGI_ALPHA_MODE,
+    Flags: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_SWAP_CHAIN_DESC1 {
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub Format: ::DXGI_FORMAT,
-    pub Stereo: ::BOOL,
-    pub SampleDesc: ::DXGI_SAMPLE_DESC,
-    pub BufferUsage: ::DXGI_USAGE,
-    pub BufferCount: ::UINT,
-    pub Scaling: ::DXGI_SCALING,
-    pub SwapEffect: ::DXGI_SWAP_EFFECT,
-    pub AlphaMode: ::DXGI_ALPHA_MODE,
-    pub Flags: ::UINT,
-}
-
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC {
-    pub RefreshRate: ::DXGI_RATIONAL,
-    pub ScanlineOrdering: ::DXGI_MODE_SCANLINE_ORDER,
-    pub Scaling: ::DXGI_MODE_SCALING,
-    pub Windowed: ::BOOL,
-}
+STRUCT!{struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC {
+    RefreshRate: ::DXGI_RATIONAL,
+    ScanlineOrdering: ::DXGI_MODE_SCANLINE_ORDER,
+    Scaling: ::DXGI_MODE_SCALING,
+    Windowed: ::BOOL,
+}}
 
 RIDL!(
 interface IDXGIAdapter2(IDXGIAdapter2Vtbl): IDXGIAdapter1(IDXGIAdapter1Vtbl) {

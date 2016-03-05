@@ -20,31 +20,28 @@ FLAGS!{ enum DXGI_OVERLAY_SUPPORT_FLAG {
     DXGI_OVERLAY_SUPPORT_FLAG_SCALING = 0x2,
 }}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_DECODE_SWAP_CHAIN_DESC {
-    pub Flags: ::UINT,
-}
+STRUCT!{struct DXGI_DECODE_SWAP_CHAIN_DESC {
+    Flags: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_FRAME_STATISTICS_MEDIA {
-    pub PresentCount: ::UINT,
-    pub PresentRefreshCount: ::UINT,
-    pub SyncRefreshCount: ::UINT,
-    pub SyncQPCTime: ::LARGE_INTEGER,
-    pub SyncGPUTime: ::LARGE_INTEGER,
-    pub CompositionMode: ::DXGI_FRAME_PRESENTATION_MODE,
-    pub ApprovedPresentDuration: ::UINT,
-}
+STRUCT!{struct DXGI_FRAME_STATISTICS_MEDIA {
+    PresentCount: ::UINT,
+    PresentRefreshCount: ::UINT,
+    SyncRefreshCount: ::UINT,
+    SyncQPCTime: ::LARGE_INTEGER,
+    SyncGPUTime: ::LARGE_INTEGER,
+    CompositionMode: ::DXGI_FRAME_PRESENTATION_MODE,
+    ApprovedPresentDuration: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_MATRIX_3X2_F {
-    pub _11: ::FLOAT,
-    pub _12: ::FLOAT,
-    pub _21: ::FLOAT,
-    pub _22: ::FLOAT,
-    pub _31: ::FLOAT,
-    pub _32: ::FLOAT,
-}
+STRUCT!{struct DXGI_MATRIX_3X2_F {
+    _11: ::FLOAT,
+    _12: ::FLOAT,
+    _21: ::FLOAT,
+    _22: ::FLOAT,
+    _31: ::FLOAT,
+    _32: ::FLOAT,
+}}
 
 RIDL!(
 interface IDXGIDecodeSwapChain(IDXGIDecodeSwapChainVtbl): IUnknown(IUnknownVtbl) {

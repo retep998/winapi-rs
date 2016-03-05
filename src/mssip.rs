@@ -91,15 +91,13 @@ pub type pCryptSIPVerifyIndirectData = Option<unsafe extern "system" fn(
 pub type pCryptSIPRemoveSignedDataMsg = Option<unsafe extern "system" fn(
     pSubjectInfo: *mut SIP_SUBJECTINFO, dwIndex: ::DWORD,
 ) -> ::BOOL>;
-#[repr(C)] #[derive(Copy)]
-pub struct SIP_DISPATCH_INFO {
-    pub cbSize: ::DWORD,
-    pub hSIP: ::HANDLE,
-    pub pfGet: pCryptSIPGetSignedDataMsg,
-    pub pfPut: pCryptSIPPutSignedDataMsg,
-    pub pfCreate: pCryptSIPCreateIndirectData,
-    pub pfVerify: pCryptSIPVerifyIndirectData,
-    pub pfRemove: pCryptSIPRemoveSignedDataMsg,
-}
-impl Clone for SIP_DISPATCH_INFO { fn clone(&self) -> SIP_DISPATCH_INFO { *self } }
+STRUCT!{nodebug struct SIP_DISPATCH_INFO {
+    cbSize: ::DWORD,
+    hSIP: ::HANDLE,
+    pfGet: pCryptSIPGetSignedDataMsg,
+    pfPut: pCryptSIPPutSignedDataMsg,
+    pfCreate: pCryptSIPCreateIndirectData,
+    pfVerify: pCryptSIPVerifyIndirectData,
+    pfRemove: pCryptSIPRemoveSignedDataMsg,
+}}
 pub type LPSIP_DISPATCH_INFO = *mut SIP_DISPATCH_INFO;

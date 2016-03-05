@@ -316,23 +316,17 @@ STRUCT!{struct DISPPARAMS {
     cArgs: ::UINT,
     cNamedArgs: ::UINT,
 }}
-#[repr(C)] #[derive(Copy)]
-pub struct EXCEPINFO {
-    pub wCode: ::WORD,
-    pub wReserved: ::WORD,
-    pub bstrSource: ::BSTR,
-    pub bstrDescription: ::BSTR,
-    pub bstrHelpFile: ::BSTR,
-    pub dwHelpContext: ::DWORD,
-    pub pvReserved: ::PVOID,
-    pub pfnDeferredFillIn: Option<unsafe extern "system" fn(einfo: *mut EXCEPINFO) -> ::HRESULT>,
-    pub scode: ::SCODE,
-}
-impl Clone for EXCEPINFO {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
+STRUCT!{nodebug struct EXCEPINFO {
+    wCode: ::WORD,
+    wReserved: ::WORD,
+    bstrSource: ::BSTR,
+    bstrDescription: ::BSTR,
+    bstrHelpFile: ::BSTR,
+    dwHelpContext: ::DWORD,
+    pvReserved: ::PVOID,
+    pfnDeferredFillIn: Option<unsafe extern "system" fn(einfo: *mut EXCEPINFO) -> ::HRESULT>,
+    scode: ::SCODE,
+}}
 ENUM!{enum CALLCONV {
     CC_FASTCALL = 0,
     CC_CDECL = 1,

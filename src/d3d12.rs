@@ -1180,78 +1180,69 @@ ENUM!{ enum D3D_ROOT_SIGNATURE_VERSION {
 
 
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_BUFFER_RTV {
-    pub FirstElement: ::UINT64,
-    pub NumElements: ::UINT,
-}
+STRUCT!{struct D3D12_BUFFER_RTV {
+    FirstElement: ::UINT64,
+    NumElements: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_BUFFER_SRV {
-    pub FirstElement: ::UINT64,
-    pub NumElements: ::UINT,
-    pub StructureByteStride: ::UINT,
-    pub Flags: ::D3D12_BUFFER_SRV_FLAGS,
-}
+STRUCT!{struct D3D12_BUFFER_SRV {
+    FirstElement: ::UINT64,
+    NumElements: ::UINT,
+    StructureByteStride: ::UINT,
+    Flags: ::D3D12_BUFFER_SRV_FLAGS,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_BUFFER_UAV {
-    pub FirstElement: ::UINT64,
-    pub NumElements: ::UINT,
-    pub StructureByteStride: ::UINT,
-    pub CounterOffsetInBytes: ::UINT64,
-    pub Flags: ::D3D12_BUFFER_UAV_FLAGS,
-}
+STRUCT!{struct D3D12_BUFFER_UAV {
+    FirstElement: ::UINT64,
+    NumElements: ::UINT,
+    StructureByteStride: ::UINT,
+    CounterOffsetInBytes: ::UINT64,
+    Flags: ::D3D12_BUFFER_UAV_FLAGS,
+}}
 
 
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_CLEAR_VALUE {
-    pub Format: ::DXGI_FORMAT,
-    pub u: [::FLOAT; 4],
-}
+STRUCT!{struct D3D12_CLEAR_VALUE {
+    Format: ::DXGI_FORMAT,
+    u: [::FLOAT; 4],
+}}
 
 UNION!(D3D12_CLEAR_VALUE, u, DepthStencil, DepthStencil_mut, ::D3D12_DEPTH_STENCIL_VALUE);
 UNION!(D3D12_CLEAR_VALUE, u, Color, Color_mut, [::FLOAT; 4]);
 
 
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_COMMAND_SIGNATURE_DESC {
-    pub ByteStride: ::UINT,
-    pub NumArgumentDescs: ::UINT,
-    pub pArgumentDescs: *const ::D3D12_INDIRECT_ARGUMENT_DESC,
-    pub NodeMask: ::UINT,
-}
+STRUCT!{struct D3D12_COMMAND_SIGNATURE_DESC {
+    ByteStride: ::UINT,
+    NumArgumentDescs: ::UINT,
+    pArgumentDescs: *const ::D3D12_INDIRECT_ARGUMENT_DESC,
+    NodeMask: ::UINT,
+}}
 
 
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_CONSTANT_BUFFER_VIEW_DESC {
-    pub BufferLocation: ::D3D12_GPU_VIRTUAL_ADDRESS,
-    pub SizeInBytes: ::UINT,
-}
+STRUCT!{struct D3D12_CONSTANT_BUFFER_VIEW_DESC {
+    BufferLocation: ::D3D12_GPU_VIRTUAL_ADDRESS,
+    SizeInBytes: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_CPU_DESCRIPTOR_HANDLE {
-    pub ptr: ::SIZE_T,
-}
+STRUCT!{struct D3D12_CPU_DESCRIPTOR_HANDLE {
+    ptr: ::SIZE_T,
+}}
 
 
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_DEPTH_STENCIL_VALUE {
-    pub Depth: ::FLOAT,
-    pub Stencil: ::UINT8,
-}
+STRUCT!{struct D3D12_DEPTH_STENCIL_VALUE {
+    Depth: ::FLOAT,
+    Stencil: ::UINT8,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_DEPTH_STENCIL_VIEW_DESC {
-    pub Format: ::DXGI_FORMAT,
-    pub ViewDimension: ::D3D12_DSV_DIMENSION,
-    pub Flags: ::D3D12_DSV_FLAGS,
-    pub u: ::D3D12_TEX1D_ARRAY_DSV,
-}
+STRUCT!{struct D3D12_DEPTH_STENCIL_VIEW_DESC {
+    Format: ::DXGI_FORMAT,
+    ViewDimension: ::D3D12_DSV_DIMENSION,
+    Flags: ::D3D12_DSV_FLAGS,
+    u: ::D3D12_TEX1D_ARRAY_DSV,
+}}
 
 UNION!(D3D12_DEPTH_STENCIL_VIEW_DESC, u, Texture2DMSArray, Texture2DMSArray_mut,
     ::D3D12_TEX2DMS_ARRAY_DSV);
@@ -1263,161 +1254,139 @@ UNION!(D3D12_DEPTH_STENCIL_VIEW_DESC, u, Texture1DArray, Texture1DArray_mut,
     ::D3D12_TEX1D_ARRAY_DSV);
 UNION!(D3D12_DEPTH_STENCIL_VIEW_DESC, u, Texture1D, Texture1D_mut, ::D3D12_TEX1D_DSV);
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_DESCRIPTOR_HEAP_DESC {
-    pub Type: ::D3D12_DESCRIPTOR_HEAP_TYPE,
-    pub NumDescriptors: ::UINT,
-    pub Flags: ::D3D12_DESCRIPTOR_HEAP_FLAGS,
-    pub NodeMask: ::UINT,
-}
+STRUCT!{struct D3D12_DESCRIPTOR_HEAP_DESC {
+    Type: ::D3D12_DESCRIPTOR_HEAP_TYPE,
+    NumDescriptors: ::UINT,
+    Flags: ::D3D12_DESCRIPTOR_HEAP_FLAGS,
+    NodeMask: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_DESCRIPTOR_RANGE {
-    pub RangeType: ::D3D12_DESCRIPTOR_RANGE_TYPE,
-    pub NumDescriptors: ::UINT,
-    pub BaseShaderRegister: ::UINT,
-    pub RegisterSpace: ::UINT,
-    pub OffsetInDescriptorsFromTableStart: ::UINT,
-}
+STRUCT!{struct D3D12_DESCRIPTOR_RANGE {
+    RangeType: ::D3D12_DESCRIPTOR_RANGE_TYPE,
+    NumDescriptors: ::UINT,
+    BaseShaderRegister: ::UINT,
+    RegisterSpace: ::UINT,
+    OffsetInDescriptorsFromTableStart: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_DISCARD_REGION {
-    pub NumRects: ::UINT,
-    pub pRects: *const ::D3D12_RECT,
-    pub FirstSubresource: ::UINT,
-    pub NumSubresources: ::UINT,
-}
+STRUCT!{struct D3D12_DISCARD_REGION {
+    NumRects: ::UINT,
+    pRects: *const ::D3D12_RECT,
+    FirstSubresource: ::UINT,
+    NumSubresources: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_DISPATCH_ARGUMENTS {
-    pub ThreadGroupCountX: ::UINT,
-    pub ThreadGroupCountY: ::UINT,
-    pub ThreadGroupCountZ: ::UINT,
-}
+STRUCT!{struct D3D12_DISPATCH_ARGUMENTS {
+    ThreadGroupCountX: ::UINT,
+    ThreadGroupCountY: ::UINT,
+    ThreadGroupCountZ: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_DRAW_ARGUMENTS {
-    pub VertexCountPerInstance: ::UINT,
-    pub InstanceCount: ::UINT,
-    pub StartVertexLocation: ::UINT,
-    pub StartInstanceLocation: ::UINT,
-}
+STRUCT!{struct D3D12_DRAW_ARGUMENTS {
+    VertexCountPerInstance: ::UINT,
+    InstanceCount: ::UINT,
+    StartVertexLocation: ::UINT,
+    StartInstanceLocation: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_DRAW_INDEXED_ARGUMENTS {
-    pub IndexCountPerInstance: ::UINT,
-    pub InstanceCount: ::UINT,
-    pub StartIndexLocation: ::UINT,
-    pub BaseVertexLocation: ::INT,
-    pub StartInstanceLocation: ::UINT,
-}
+STRUCT!{struct D3D12_DRAW_INDEXED_ARGUMENTS {
+    IndexCountPerInstance: ::UINT,
+    InstanceCount: ::UINT,
+    StartIndexLocation: ::UINT,
+    BaseVertexLocation: ::INT,
+    StartInstanceLocation: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_FEATURE_DATA_ARCHITECTURE {
-    pub NodeIndex: ::UINT,
-    pub TileBasedRenderer: ::BOOL,
-    pub UMA: ::BOOL,
-    pub CacheCoherentUMA: ::BOOL,
-}
+STRUCT!{struct D3D12_FEATURE_DATA_ARCHITECTURE {
+    NodeIndex: ::UINT,
+    TileBasedRenderer: ::BOOL,
+    UMA: ::BOOL,
+    CacheCoherentUMA: ::BOOL,
+}}
 
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_FEATURE_DATA_FEATURE_LEVELS {
-    pub NumFeatureLevels: ::UINT,
-    pub pFeatureLevelsRequested: *const ::D3D_FEATURE_LEVEL,
-    pub MaxSupportedFeatureLevel: ::D3D_FEATURE_LEVEL,
-}
+STRUCT!{struct D3D12_FEATURE_DATA_FEATURE_LEVELS {
+    NumFeatureLevels: ::UINT,
+    pFeatureLevelsRequested: *const ::D3D_FEATURE_LEVEL,
+    MaxSupportedFeatureLevel: ::D3D_FEATURE_LEVEL,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_FEATURE_DATA_FORMAT_INFO {
-    pub Format: ::DXGI_FORMAT,
-    pub PlaneCount: ::UINT8,
-}
+STRUCT!{struct D3D12_FEATURE_DATA_FORMAT_INFO {
+    Format: ::DXGI_FORMAT,
+    PlaneCount: ::UINT8,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_FEATURE_DATA_FORMAT_SUPPORT {
-    pub Format: ::DXGI_FORMAT,
-    pub Support1: ::D3D12_FORMAT_SUPPORT1,
-    pub Support2: ::D3D12_FORMAT_SUPPORT2,
-}
+STRUCT!{struct D3D12_FEATURE_DATA_FORMAT_SUPPORT {
+    Format: ::DXGI_FORMAT,
+    Support1: ::D3D12_FORMAT_SUPPORT1,
+    Support2: ::D3D12_FORMAT_SUPPORT2,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT {
-    pub MaxGPUVirtualAddressBitsPerResource: ::UINT,
-    pub MaxGPUVirtualAddressBitsPerProcess: ::UINT,
-}
+STRUCT!{struct D3D12_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT {
+    MaxGPUVirtualAddressBitsPerResource: ::UINT,
+    MaxGPUVirtualAddressBitsPerProcess: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_FEATURE_DATA_MULTISAMPLE_QUALITY_LEVELS {
-    pub Format: ::DXGI_FORMAT,
-    pub SampleCount: ::UINT,
-    pub Flags: ::D3D12_MULTISAMPLE_QUALITY_LEVEL_FLAGS,
-    pub NumQualityLevels: ::UINT,
-}
+STRUCT!{struct D3D12_FEATURE_DATA_MULTISAMPLE_QUALITY_LEVELS {
+    Format: ::DXGI_FORMAT,
+    SampleCount: ::UINT,
+    Flags: ::D3D12_MULTISAMPLE_QUALITY_LEVEL_FLAGS,
+    NumQualityLevels: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_GPU_DESCRIPTOR_HANDLE {
-    pub ptr: ::UINT64,
-}
+STRUCT!{struct D3D12_GPU_DESCRIPTOR_HANDLE {
+    ptr: ::UINT64,
+}}
 
 
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_HEAP_DESC {
-    pub SizeInBytes: ::UINT64,
-    pub Properties: ::D3D12_HEAP_PROPERTIES,
-    pub Alignment: ::UINT64,
-    pub Flags: ::D3D12_HEAP_FLAGS,
-}
+STRUCT!{struct D3D12_HEAP_DESC {
+    SizeInBytes: ::UINT64,
+    Properties: ::D3D12_HEAP_PROPERTIES,
+    Alignment: ::UINT64,
+    Flags: ::D3D12_HEAP_FLAGS,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_HEAP_PROPERTIES {
-    pub Type: ::D3D12_HEAP_TYPE,
-    pub CPUPageProperty: ::D3D12_CPU_PAGE_PROPERTY,
-    pub MemoryPoolPreference: ::D3D12_MEMORY_POOL,
-    pub CreationNodeMask: ::UINT,
-    pub VisibleNodeMask: ::UINT,
-}
+STRUCT!{struct D3D12_HEAP_PROPERTIES {
+    Type: ::D3D12_HEAP_TYPE,
+    CPUPageProperty: ::D3D12_CPU_PAGE_PROPERTY,
+    MemoryPoolPreference: ::D3D12_MEMORY_POOL,
+    CreationNodeMask: ::UINT,
+    VisibleNodeMask: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_INDEX_BUFFER_VIEW {
-    pub BufferLocation: ::D3D12_GPU_VIRTUAL_ADDRESS,
-    pub SizeInBytes: ::UINT,
-    pub Format: ::DXGI_FORMAT,
-}
+STRUCT!{struct D3D12_INDEX_BUFFER_VIEW {
+    BufferLocation: ::D3D12_GPU_VIRTUAL_ADDRESS,
+    SizeInBytes: ::UINT,
+    Format: ::DXGI_FORMAT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_INDIRECT_ARGUMENT_DESC_VertexBuffer {
-    pub Slot: ::UINT,
-}
+STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC_VertexBuffer {
+    Slot: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_INDIRECT_ARGUMENT_DESC_Constant {
-    pub RootParameterIndex: ::UINT,
-    pub DestOffsetIn32BitValues: ::UINT,
-    pub Num32BitValuesToSet: ::UINT,
-}
+STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC_Constant {
+    RootParameterIndex: ::UINT,
+    DestOffsetIn32BitValues: ::UINT,
+    Num32BitValuesToSet: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_INDIRECT_ARGUMENT_DESC_ConstantBufferView {
-    pub RootParameterIndex: ::UINT,
-}
+STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC_ConstantBufferView {
+    RootParameterIndex: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_INDIRECT_ARGUMENT_DESC_ShaderResourceView {
-    pub RootParameterIndex: ::UINT,
-}
+STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC_ShaderResourceView {
+    RootParameterIndex: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_INDIRECT_ARGUMENT_DESC_UnorderedAccessView {
-    pub RootParameterIndex: ::UINT,
-}
+STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC_UnorderedAccessView {
+    RootParameterIndex: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_INDIRECT_ARGUMENT_DESC {
-    pub Type: ::D3D12_INDIRECT_ARGUMENT_TYPE,
-    pub u: ::D3D12_INDIRECT_ARGUMENT_DESC_Constant,
-}
+STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC {
+    Type: ::D3D12_INDIRECT_ARGUMENT_TYPE,
+    u: ::D3D12_INDIRECT_ARGUMENT_DESC_Constant,
+}}
 
 UNION!(D3D12_INDIRECT_ARGUMENT_DESC, u, UnorderedAccessView, UnorderedAccessView_mut,
     D3D12_INDIRECT_ARGUMENT_DESC_UnorderedAccessView);
@@ -1433,69 +1402,61 @@ UNION!(D3D12_INDIRECT_ARGUMENT_DESC, u, VertexBuffer, VertexBuffer_mut,
 
 
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_MEMCPY_DEST {
-    pub pData: *mut ::c_void,
-    pub RowPitch: ::SIZE_T,
-    pub SlicePitch: ::SIZE_T,
-}
+STRUCT!{struct D3D12_MEMCPY_DEST {
+    pData: *mut ::c_void,
+    RowPitch: ::SIZE_T,
+    SlicePitch: ::SIZE_T,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_PACKED_MIP_INFO {
-    pub NumStandardMips: ::UINT8,
-    pub NumPackedMips: ::UINT8,
-    pub NumTilesForPackedMips: ::UINT,
-    pub StartTileIndexInOverallResource: ::UINT,
-}
+STRUCT!{struct D3D12_PACKED_MIP_INFO {
+    NumStandardMips: ::UINT8,
+    NumPackedMips: ::UINT8,
+    NumTilesForPackedMips: ::UINT,
+    StartTileIndexInOverallResource: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_PLACED_SUBRESOURCE_FOOTPRINT {
-    pub Offset: ::UINT64,
-    pub Footprint: ::D3D12_SUBRESOURCE_FOOTPRINT,
-}
+STRUCT!{struct D3D12_PLACED_SUBRESOURCE_FOOTPRINT {
+    Offset: ::UINT64,
+    Footprint: ::D3D12_SUBRESOURCE_FOOTPRINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_QUERY_DATA_PIPELINE_STATISTICS {
-    pub IAVertices: ::UINT64,
-    pub IAPrimitives: ::UINT64,
-    pub VSInvocations: ::UINT64,
-    pub GSInvocations: ::UINT64,
-    pub GSPrimitives: ::UINT64,
-    pub CInvocations: ::UINT64,
-    pub CPrimitives: ::UINT64,
-    pub PSInvocations: ::UINT64,
-    pub HSInvocations: ::UINT64,
-    pub DSInvocations: ::UINT64,
-    pub CSInvocations: ::UINT64,
-}
+STRUCT!{struct D3D12_QUERY_DATA_PIPELINE_STATISTICS {
+    IAVertices: ::UINT64,
+    IAPrimitives: ::UINT64,
+    VSInvocations: ::UINT64,
+    GSInvocations: ::UINT64,
+    GSPrimitives: ::UINT64,
+    CInvocations: ::UINT64,
+    CPrimitives: ::UINT64,
+    PSInvocations: ::UINT64,
+    HSInvocations: ::UINT64,
+    DSInvocations: ::UINT64,
+    CSInvocations: ::UINT64,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_QUERY_DATA_SO_STATISTICS {
-    pub NumPrimitivesWritten: ::UINT64,
-    pub PrimitivesStorageNeeded: ::UINT64,
-}
+STRUCT!{struct D3D12_QUERY_DATA_SO_STATISTICS {
+    NumPrimitivesWritten: ::UINT64,
+    PrimitivesStorageNeeded: ::UINT64,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_QUERY_HEAP_DESC {
-    pub Type: ::D3D12_QUERY_HEAP_TYPE,
-    pub Count: ::UINT,
-    pub NodeMask: ::UINT,
-}
+STRUCT!{struct D3D12_QUERY_HEAP_DESC {
+    Type: ::D3D12_QUERY_HEAP_TYPE,
+    Count: ::UINT,
+    NodeMask: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_RANGE {
-    pub Begin: ::SIZE_T,
-    pub End: ::SIZE_T,
-}
+STRUCT!{struct D3D12_RANGE {
+    Begin: ::SIZE_T,
+    End: ::SIZE_T,
+}}
 
 
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_RENDER_TARGET_VIEW_DESC {
-    pub Format: ::DXGI_FORMAT,
-    pub ViewDimension: ::D3D12_RTV_DIMENSION,
-    pub u: ::D3D12_BUFFER_RTV,
-}
+STRUCT!{struct D3D12_RENDER_TARGET_VIEW_DESC {
+    Format: ::DXGI_FORMAT,
+    ViewDimension: ::D3D12_RTV_DIMENSION,
+    u: ::D3D12_BUFFER_RTV,
+}}
 
 UNION!(D3D12_RENDER_TARGET_VIEW_DESC, u, Texture3D, Texture3D_mut, ::D3D12_TEX3D_RTV);
 UNION!(D3D12_RENDER_TARGET_VIEW_DESC, u, Texture2DMSArray, Texture2DMSArray_mut,
@@ -1509,128 +1470,114 @@ UNION!(D3D12_RENDER_TARGET_VIEW_DESC, u, Texture1DArray, Texture1DArray_mut,
 UNION!(D3D12_RENDER_TARGET_VIEW_DESC, u, Texture1D, Texture1D_mut, ::D3D12_TEX1D_RTV);
 UNION!(D3D12_RENDER_TARGET_VIEW_DESC, u, Buffer, Buffer_mut, ::D3D12_BUFFER_RTV);
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_RESOURCE_ALIASING_BARRIER {
-    pub pResourceBefore: *mut ::ID3D12Resource,
-    pub pResourceAfter: *mut ::ID3D12Resource,
-}
+STRUCT!{struct D3D12_RESOURCE_ALIASING_BARRIER {
+    pResourceBefore: *mut ::ID3D12Resource,
+    pResourceAfter: *mut ::ID3D12Resource,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_RESOURCE_ALLOCATION_INFO {
-    pub SizeInBytes: ::UINT64,
-    pub Alignment: ::UINT64,
-}
+STRUCT!{struct D3D12_RESOURCE_ALLOCATION_INFO {
+    SizeInBytes: ::UINT64,
+    Alignment: ::UINT64,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_RESOURCE_BARRIER {
-    pub Type: ::D3D12_RESOURCE_BARRIER_TYPE,
-    pub Flags: ::D3D12_RESOURCE_BARRIER_FLAGS,
-    pub u: ::D3D12_RESOURCE_TRANSITION_BARRIER,
-}
+STRUCT!{struct D3D12_RESOURCE_BARRIER {
+    Type: ::D3D12_RESOURCE_BARRIER_TYPE,
+    Flags: ::D3D12_RESOURCE_BARRIER_FLAGS,
+    u: ::D3D12_RESOURCE_TRANSITION_BARRIER,
+}}
 
 UNION!(D3D12_RESOURCE_BARRIER, u, UAV, UAV_mut, ::D3D12_RESOURCE_UAV_BARRIER);
 UNION!(D3D12_RESOURCE_BARRIER, u, Aliasing, Aliasing_mut, ::D3D12_RESOURCE_ALIASING_BARRIER);
 UNION!(D3D12_RESOURCE_BARRIER, u, Transition, Transition_mut, ::D3D12_RESOURCE_TRANSITION_BARRIER);
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_RESOURCE_DESC {
-    pub Dimension: ::D3D12_RESOURCE_DIMENSION,
-    pub Alignment: ::UINT64,
-    pub Width: ::UINT64,
-    pub Height: ::UINT,
-    pub DepthOrArraySize: ::UINT16,
-    pub MipLevels: ::UINT16,
-    pub Format: ::DXGI_FORMAT,
-    pub SampleDesc: ::DXGI_SAMPLE_DESC,
-    pub Layout: ::D3D12_TEXTURE_LAYOUT,
-    pub Flags: ::D3D12_RESOURCE_FLAGS,
-}
+STRUCT!{struct D3D12_RESOURCE_DESC {
+    Dimension: ::D3D12_RESOURCE_DIMENSION,
+    Alignment: ::UINT64,
+    Width: ::UINT64,
+    Height: ::UINT,
+    DepthOrArraySize: ::UINT16,
+    MipLevels: ::UINT16,
+    Format: ::DXGI_FORMAT,
+    SampleDesc: ::DXGI_SAMPLE_DESC,
+    Layout: ::D3D12_TEXTURE_LAYOUT,
+    Flags: ::D3D12_RESOURCE_FLAGS,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_RESOURCE_TRANSITION_BARRIER {
-    pub pResource: *mut ::ID3D12Resource,
-    pub Subresource: ::UINT,
-    pub StateBefore: ::D3D12_RESOURCE_STATES,
-    pub StateAfter: ::D3D12_RESOURCE_STATES,
-}
+STRUCT!{struct D3D12_RESOURCE_TRANSITION_BARRIER {
+    pResource: *mut ::ID3D12Resource,
+    Subresource: ::UINT,
+    StateBefore: ::D3D12_RESOURCE_STATES,
+    StateAfter: ::D3D12_RESOURCE_STATES,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_RESOURCE_UAV_BARRIER {
-    pub pResource: *mut ::ID3D12Resource,
-}
+STRUCT!{struct D3D12_RESOURCE_UAV_BARRIER {
+    pResource: *mut ::ID3D12Resource,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_ROOT_CONSTANTS {
-    pub ShaderRegister: ::UINT,
-    pub RegisterSpace: ::UINT,
-    pub Num32BitValues: ::UINT,
-}
+STRUCT!{struct D3D12_ROOT_CONSTANTS {
+    ShaderRegister: ::UINT,
+    RegisterSpace: ::UINT,
+    Num32BitValues: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_ROOT_DESCRIPTOR {
-    pub ShaderRegister: ::UINT,
-    pub RegisterSpace: ::UINT,
-}
+STRUCT!{struct D3D12_ROOT_DESCRIPTOR {
+    ShaderRegister: ::UINT,
+    RegisterSpace: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_ROOT_DESCRIPTOR_TABLE {
-    pub NumDescriptorRanges: ::UINT,
-    pub pDescriptorRanges: *const ::D3D12_DESCRIPTOR_RANGE,
-}
+STRUCT!{struct D3D12_ROOT_DESCRIPTOR_TABLE {
+    NumDescriptorRanges: ::UINT,
+    pDescriptorRanges: *const ::D3D12_DESCRIPTOR_RANGE,
+}}
 
 #[cfg(target_pointer_width = "64")]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_ROOT_PARAMETER {
-    pub ParameterType: ::D3D12_ROOT_PARAMETER_TYPE,
-    pub u: ::D3D12_ROOT_DESCRIPTOR_TABLE,
-    pub ShaderVisibility: ::D3D12_SHADER_VISIBILITY,
-}
+STRUCT!{struct D3D12_ROOT_PARAMETER {
+    ParameterType: ::D3D12_ROOT_PARAMETER_TYPE,
+    u: ::D3D12_ROOT_DESCRIPTOR_TABLE,
+    ShaderVisibility: ::D3D12_SHADER_VISIBILITY,
+}}
 
 #[cfg(target_pointer_width = "32")]
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_ROOT_PARAMETER {
-    pub ParameterType: ::D3D12_ROOT_PARAMETER_TYPE,
-    pub u: ::D3D12_ROOT_CONSTANTS,
-    pub ShaderVisibility: ::D3D12_SHADER_VISIBILITY,
-}
+STRUCT!{struct D3D12_ROOT_PARAMETER {
+    ParameterType: ::D3D12_ROOT_PARAMETER_TYPE,
+    u: ::D3D12_ROOT_CONSTANTS,
+    ShaderVisibility: ::D3D12_SHADER_VISIBILITY,
+}}
 
 UNION!(D3D12_ROOT_PARAMETER, u, Descriptor, Descriptor_mut, ::D3D12_ROOT_DESCRIPTOR);
 UNION!(D3D12_ROOT_PARAMETER, u, Constants, Constants_mut, ::D3D12_ROOT_CONSTANTS);
 UNION!(D3D12_ROOT_PARAMETER, u, DescriptorTable, DescriptorTable_mut,
     ::D3D12_ROOT_DESCRIPTOR_TABLE);
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_ROOT_SIGNATURE_DESC {
-    pub NumParameters: ::UINT,
-    pub pParameters: *const ::D3D12_ROOT_PARAMETER,
-    pub NumStaticSamplers: ::UINT,
-    pub pStaticSamplers: *const ::D3D12_STATIC_SAMPLER_DESC,
-    pub Flags: ::D3D12_ROOT_SIGNATURE_FLAGS,
-}
+STRUCT!{struct D3D12_ROOT_SIGNATURE_DESC {
+    NumParameters: ::UINT,
+    pParameters: *const ::D3D12_ROOT_PARAMETER,
+    NumStaticSamplers: ::UINT,
+    pStaticSamplers: *const ::D3D12_STATIC_SAMPLER_DESC,
+    Flags: ::D3D12_ROOT_SIGNATURE_FLAGS,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_SAMPLER_DESC {
-    pub Filter: ::D3D12_FILTER,
-    pub AddressU: ::D3D12_TEXTURE_ADDRESS_MODE,
-    pub AddressV: ::D3D12_TEXTURE_ADDRESS_MODE,
-    pub AddressW: ::D3D12_TEXTURE_ADDRESS_MODE,
-    pub MipLODBias: ::FLOAT,
-    pub MaxAnisotropy: ::UINT,
-    pub ComparisonFunc: ::D3D12_COMPARISON_FUNC,
-    pub BorderColor: [::FLOAT; 4],
-    pub MinLOD: ::FLOAT,
-    pub MaxLOD: ::FLOAT,
-}
+STRUCT!{struct D3D12_SAMPLER_DESC {
+    Filter: ::D3D12_FILTER,
+    AddressU: ::D3D12_TEXTURE_ADDRESS_MODE,
+    AddressV: ::D3D12_TEXTURE_ADDRESS_MODE,
+    AddressW: ::D3D12_TEXTURE_ADDRESS_MODE,
+    MipLODBias: ::FLOAT,
+    MaxAnisotropy: ::UINT,
+    ComparisonFunc: ::D3D12_COMPARISON_FUNC,
+    BorderColor: [::FLOAT; 4],
+    MinLOD: ::FLOAT,
+    MaxLOD: ::FLOAT,
+}}
 
 
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_SHADER_RESOURCE_VIEW_DESC {
-    pub Format: ::DXGI_FORMAT,
-    pub ViewDimension: ::D3D12_SRV_DIMENSION,
-    pub Shader4ComponentMapping: ::UINT,
-    pub u: ::D3D12_BUFFER_SRV,
-}
+STRUCT!{struct D3D12_SHADER_RESOURCE_VIEW_DESC {
+    Format: ::DXGI_FORMAT,
+    ViewDimension: ::D3D12_SRV_DIMENSION,
+    Shader4ComponentMapping: ::UINT,
+    u: ::D3D12_BUFFER_SRV,
+}}
 
 UNION!(D3D12_SHADER_RESOURCE_VIEW_DESC, u, TextureCubeArray, TextureCubeArray_mut,
     ::D3D12_TEXCUBE_ARRAY_SRV);
@@ -1649,284 +1596,246 @@ UNION!(D3D12_SHADER_RESOURCE_VIEW_DESC, u, Buffer, Buffer_mut, ::D3D12_BUFFER_SR
 
 
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_STATIC_SAMPLER_DESC {
-    pub Filter: ::D3D12_FILTER,
-    pub AddressU: ::D3D12_TEXTURE_ADDRESS_MODE,
-    pub AddressV: ::D3D12_TEXTURE_ADDRESS_MODE,
-    pub AddressW: ::D3D12_TEXTURE_ADDRESS_MODE,
-    pub MipLODBias: ::FLOAT,
-    pub MaxAnisotropy: ::UINT,
-    pub ComparisonFunc: ::D3D12_COMPARISON_FUNC,
-    pub BorderColor: ::D3D12_STATIC_BORDER_COLOR,
-    pub MinLOD: ::FLOAT,
-    pub MaxLOD: ::FLOAT,
-    pub ShaderRegister: ::UINT,
-    pub RegisterSpace: ::UINT,
-    pub ShaderVisibility: ::D3D12_SHADER_VISIBILITY,
-}
+STRUCT!{struct D3D12_STATIC_SAMPLER_DESC {
+    Filter: ::D3D12_FILTER,
+    AddressU: ::D3D12_TEXTURE_ADDRESS_MODE,
+    AddressV: ::D3D12_TEXTURE_ADDRESS_MODE,
+    AddressW: ::D3D12_TEXTURE_ADDRESS_MODE,
+    MipLODBias: ::FLOAT,
+    MaxAnisotropy: ::UINT,
+    ComparisonFunc: ::D3D12_COMPARISON_FUNC,
+    BorderColor: ::D3D12_STATIC_BORDER_COLOR,
+    MinLOD: ::FLOAT,
+    MaxLOD: ::FLOAT,
+    ShaderRegister: ::UINT,
+    RegisterSpace: ::UINT,
+    ShaderVisibility: ::D3D12_SHADER_VISIBILITY,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_STREAM_OUTPUT_BUFFER_VIEW {
-    pub BufferLocation: ::D3D12_GPU_VIRTUAL_ADDRESS,
-    pub SizeInBytes: ::UINT64,
-    pub BufferFilledSizeLocation: ::D3D12_GPU_VIRTUAL_ADDRESS,
-}
+STRUCT!{struct D3D12_STREAM_OUTPUT_BUFFER_VIEW {
+    BufferLocation: ::D3D12_GPU_VIRTUAL_ADDRESS,
+    SizeInBytes: ::UINT64,
+    BufferFilledSizeLocation: ::D3D12_GPU_VIRTUAL_ADDRESS,
+}}
 
 
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_SUBRESOURCE_DATA {
-    pub pData: *const ::c_void,
-    pub RowPitch: ::LONG_PTR,
-    pub SlicePitch: ::LONG_PTR,
-}
+STRUCT!{struct D3D12_SUBRESOURCE_DATA {
+    pData: *const ::c_void,
+    RowPitch: ::LONG_PTR,
+    SlicePitch: ::LONG_PTR,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_SUBRESOURCE_FOOTPRINT {
-    pub Format: ::DXGI_FORMAT,
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub Depth: ::UINT,
-    pub RowPitch: ::UINT,
-}
+STRUCT!{struct D3D12_SUBRESOURCE_FOOTPRINT {
+    Format: ::DXGI_FORMAT,
+    Width: ::UINT,
+    Height: ::UINT,
+    Depth: ::UINT,
+    RowPitch: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_SUBRESOURCE_INFO {
-    pub Offset: ::UINT64,
-    pub RowPitch: ::UINT,
-    pub DepthPitch: ::UINT,
-}
+STRUCT!{struct D3D12_SUBRESOURCE_INFO {
+    Offset: ::UINT64,
+    RowPitch: ::UINT,
+    DepthPitch: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_SUBRESOURCE_TILING {
-    pub WidthInTiles: ::UINT,
-    pub HeightInTiles: ::UINT16,
-    pub DepthInTiles: ::UINT16,
-    pub StartTileIndexInOverallResource: ::UINT,
-}
+STRUCT!{struct D3D12_SUBRESOURCE_TILING {
+    WidthInTiles: ::UINT,
+    HeightInTiles: ::UINT16,
+    DepthInTiles: ::UINT16,
+    StartTileIndexInOverallResource: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX1D_ARRAY_DSV {
-    pub MipSlice: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
+STRUCT!{struct D3D12_TEX1D_ARRAY_DSV {
+    MipSlice: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX1D_ARRAY_RTV {
-    pub MipSlice: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
+STRUCT!{struct D3D12_TEX1D_ARRAY_RTV {
+    MipSlice: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX1D_ARRAY_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-    pub ResourceMinLODClamp: ::FLOAT,
-}
+STRUCT!{struct D3D12_TEX1D_ARRAY_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+    ResourceMinLODClamp: ::FLOAT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX1D_ARRAY_UAV {
-    pub MipSlice: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
+STRUCT!{struct D3D12_TEX1D_ARRAY_UAV {
+    MipSlice: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX1D_DSV {
-    pub MipSlice: ::UINT,
-}
+STRUCT!{struct D3D12_TEX1D_DSV {
+    MipSlice: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX1D_RTV {
-    pub MipSlice: ::UINT,
-}
+STRUCT!{struct D3D12_TEX1D_RTV {
+    MipSlice: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX1D_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-    pub ResourceMinLODClamp: ::FLOAT,
-}
+STRUCT!{struct D3D12_TEX1D_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+    ResourceMinLODClamp: ::FLOAT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX1D_UAV {
-    pub MipSlice: ::UINT,
-}
+STRUCT!{struct D3D12_TEX1D_UAV {
+    MipSlice: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2DMS_ARRAY_DSV {
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
+STRUCT!{struct D3D12_TEX2DMS_ARRAY_DSV {
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2DMS_ARRAY_RTV {
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
+STRUCT!{struct D3D12_TEX2DMS_ARRAY_RTV {
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2DMS_ARRAY_SRV {
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
+STRUCT!{struct D3D12_TEX2DMS_ARRAY_SRV {
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2DMS_DSV {
-    pub UnusedField_NothingToDefine: ::UINT,
-}
+STRUCT!{struct D3D12_TEX2DMS_DSV {
+    UnusedField_NothingToDefine: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2DMS_RTV {
-    pub UnusedField_NothingToDefine: ::UINT,
-}
+STRUCT!{struct D3D12_TEX2DMS_RTV {
+    UnusedField_NothingToDefine: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2DMS_SRV {
-    pub UnusedField_NothingToDefine: ::UINT,
-}
+STRUCT!{struct D3D12_TEX2DMS_SRV {
+    UnusedField_NothingToDefine: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2D_ARRAY_DSV {
-    pub MipSlice: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-}
+STRUCT!{struct D3D12_TEX2D_ARRAY_DSV {
+    MipSlice: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2D_ARRAY_RTV {
-    pub MipSlice: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-    pub PlaneSlice: ::UINT,
-}
+STRUCT!{struct D3D12_TEX2D_ARRAY_RTV {
+    MipSlice: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+    PlaneSlice: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2D_ARRAY_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-    pub PlaneSlice: ::UINT,
-    pub ResourceMinLODClamp: ::FLOAT,
-}
+STRUCT!{struct D3D12_TEX2D_ARRAY_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+    PlaneSlice: ::UINT,
+    ResourceMinLODClamp: ::FLOAT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2D_ARRAY_UAV {
-    pub MipSlice: ::UINT,
-    pub FirstArraySlice: ::UINT,
-    pub ArraySize: ::UINT,
-    pub PlaneSlice: ::UINT,
-}
+STRUCT!{struct D3D12_TEX2D_ARRAY_UAV {
+    MipSlice: ::UINT,
+    FirstArraySlice: ::UINT,
+    ArraySize: ::UINT,
+    PlaneSlice: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2D_DSV {
-    pub MipSlice: ::UINT,
-}
+STRUCT!{struct D3D12_TEX2D_DSV {
+    MipSlice: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2D_RTV {
-    pub MipSlice: ::UINT,
-    pub PlaneSlice: ::UINT,
-}
+STRUCT!{struct D3D12_TEX2D_RTV {
+    MipSlice: ::UINT,
+    PlaneSlice: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2D_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-    pub PlaneSlice: ::UINT,
-    pub ResourceMinLODClamp: ::FLOAT,
-}
+STRUCT!{struct D3D12_TEX2D_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+    PlaneSlice: ::UINT,
+    ResourceMinLODClamp: ::FLOAT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX2D_UAV {
-    pub MipSlice: ::UINT,
-    pub PlaneSlice: ::UINT,
-}
+STRUCT!{struct D3D12_TEX2D_UAV {
+    MipSlice: ::UINT,
+    PlaneSlice: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX3D_RTV {
-    pub MipSlice: ::UINT,
-    pub FirstWSlice: ::UINT,
-    pub WSize: ::UINT,
-}
+STRUCT!{struct D3D12_TEX3D_RTV {
+    MipSlice: ::UINT,
+    FirstWSlice: ::UINT,
+    WSize: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX3D_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-    pub ResourceMinLODClamp: ::FLOAT,
-}
+STRUCT!{struct D3D12_TEX3D_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+    ResourceMinLODClamp: ::FLOAT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEX3D_UAV {
-    pub MipSlice: ::UINT,
-    pub FirstWSlice: ::UINT,
-    pub WSize: ::UINT,
-}
+STRUCT!{struct D3D12_TEX3D_UAV {
+    MipSlice: ::UINT,
+    FirstWSlice: ::UINT,
+    WSize: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEXCUBE_ARRAY_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-    pub First2DArrayFace: ::UINT,
-    pub NumCubes: ::UINT,
-    pub ResourceMinLODClamp: ::FLOAT,
-}
+STRUCT!{struct D3D12_TEXCUBE_ARRAY_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+    First2DArrayFace: ::UINT,
+    NumCubes: ::UINT,
+    ResourceMinLODClamp: ::FLOAT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEXCUBE_SRV {
-    pub MostDetailedMip: ::UINT,
-    pub MipLevels: ::UINT,
-    pub ResourceMinLODClamp: ::FLOAT,
-}
+STRUCT!{struct D3D12_TEXCUBE_SRV {
+    MostDetailedMip: ::UINT,
+    MipLevels: ::UINT,
+    ResourceMinLODClamp: ::FLOAT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TEXTURE_COPY_LOCATION {
-    pub pResource: *mut ::ID3D12Resource,
-    pub Type: ::D3D12_TEXTURE_COPY_TYPE,
-    pub u: ::D3D12_PLACED_SUBRESOURCE_FOOTPRINT,
-}
+STRUCT!{struct D3D12_TEXTURE_COPY_LOCATION {
+    pResource: *mut ::ID3D12Resource,
+    Type: ::D3D12_TEXTURE_COPY_TYPE,
+    u: ::D3D12_PLACED_SUBRESOURCE_FOOTPRINT,
+}}
 
 UNION!(D3D12_TEXTURE_COPY_LOCATION, u, SubresourceIndex, SubresourceIndex_mut, ::UINT);
 UNION!(D3D12_TEXTURE_COPY_LOCATION, u, PlacedFootprint, PlacedFootprint_mut,
     ::D3D12_PLACED_SUBRESOURCE_FOOTPRINT);
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TILED_RESOURCE_COORDINATE {
-    pub X: ::UINT,
-    pub Y: ::UINT,
-    pub Z: ::UINT,
-    pub Subresource: ::UINT,
-}
+STRUCT!{struct D3D12_TILED_RESOURCE_COORDINATE {
+    X: ::UINT,
+    Y: ::UINT,
+    Z: ::UINT,
+    Subresource: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TILE_REGION_SIZE {
-    pub NumTiles: ::UINT,
-    pub UseBox: ::BOOL,
-    pub Width: ::UINT,
-    pub Height: ::UINT16,
-    pub Depth: ::UINT16,
-}
+STRUCT!{struct D3D12_TILE_REGION_SIZE {
+    NumTiles: ::UINT,
+    UseBox: ::BOOL,
+    Width: ::UINT,
+    Height: ::UINT16,
+    Depth: ::UINT16,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_TILE_SHAPE {
-    pub WidthInTexels: ::UINT,
-    pub HeightInTexels: ::UINT,
-    pub DepthInTexels: ::UINT,
-}
+STRUCT!{struct D3D12_TILE_SHAPE {
+    WidthInTexels: ::UINT,
+    HeightInTexels: ::UINT,
+    DepthInTexels: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_UNORDERED_ACCESS_VIEW_DESC {
-    pub Format: ::DXGI_FORMAT,
-    pub ViewDimension: ::D3D12_UAV_DIMENSION,
-    pub u: ::D3D12_BUFFER_UAV,
-}
+STRUCT!{struct D3D12_UNORDERED_ACCESS_VIEW_DESC {
+    Format: ::DXGI_FORMAT,
+    ViewDimension: ::D3D12_UAV_DIMENSION,
+    u: ::D3D12_BUFFER_UAV,
+}}
 
 UNION!(D3D12_UNORDERED_ACCESS_VIEW_DESC, u, Texture3D, Texture3D_mut, ::D3D12_TEX3D_UAV);
 UNION!(D3D12_UNORDERED_ACCESS_VIEW_DESC, u, Texture2DArray, Texture2DArray_mut,
@@ -1937,12 +1846,11 @@ UNION!(D3D12_UNORDERED_ACCESS_VIEW_DESC, u, Texture1DArray, Texture1DArray_mut,
 UNION!(D3D12_UNORDERED_ACCESS_VIEW_DESC, u, Texture1D, Texture1D_mut, ::D3D12_TEX1D_UAV);
 UNION!(D3D12_UNORDERED_ACCESS_VIEW_DESC, u, Buffer, Buffer_mut, ::D3D12_BUFFER_UAV);
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct D3D12_VERTEX_BUFFER_VIEW {
-    pub BufferLocation: ::D3D12_GPU_VIRTUAL_ADDRESS,
-    pub SizeInBytes: ::UINT,
-    pub StrideInBytes: ::UINT,
-}
+STRUCT!{struct D3D12_VERTEX_BUFFER_VIEW {
+    BufferLocation: ::D3D12_GPU_VIRTUAL_ADDRESS,
+    SizeInBytes: ::UINT,
+    StrideInBytes: ::UINT,
+}}
 
 
 
