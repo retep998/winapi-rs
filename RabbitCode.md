@@ -22,6 +22,6 @@ If a Contributor is deemed by the Benevolent Bunny of the Project to have conduc
 
 The Benevolent Bunny of the Project is an entity responsible for upholding and enforcing the Rabbit Code.
 
-The Benevolent Bunny of the Project may not be a Rabbit. In the case that the Benevolent Bunny of the Project is not a Rabbit, the Benevolent Bunny of the Project is to consult a Rabbit, where possible, about suspected unsatisfactory conduct. If this is not possible, the Benevolent Bunny of the Project must judge to his, her, its, or their best ability, whether a Rabbit would consider the conduct satisfactory.
+The Benevolent Bunny of the Project is not required to be a Rabbit. In the case that the Benevolent Bunny of the Project is not a Rabbit, the Benevolent Bunny of the Project is to consult a Rabbit, where possible, about suspected unsatisfactory conduct. If this is not possible, the Benevolent Bunny of the Project must judge to his, her, its, or their best ability, whether a Rabbit would consider the conduct satisfactory.
 
 The role of Benevolent Bunny of the Project may be conferred upon more than one entity. However, the Code will always refer to the Benevolent Bunny of the Project as a single entity.
