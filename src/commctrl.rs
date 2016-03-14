@@ -2486,7 +2486,7 @@ STRUCT!{struct TVINSERTSTRUCTW {
     hInsertAfter: HTREEITEM,
     itemex: TVITEMEXW,
 }}
-UNION!(TVINSERTSTRUCTA, itemex, item, item_mut, TV_ITEMW);
+UNION!(TVINSERTSTRUCTW, itemex, item, item_mut, TV_ITEMW);
 pub type LPTVINSERTSTRUCTW = *mut TVINSERTSTRUCTW;
 pub const TVM_INSERTITEMA: ::UINT = TV_FIRST + 0;
 pub const TVM_INSERTITEMW: ::UINT = TV_FIRST + 50;
