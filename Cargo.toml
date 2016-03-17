@@ -45,6 +45,7 @@ setupapi-sys = { version = "0", path = "lib/setupapi" }
 shell32-sys = { version = "0", path = "lib/shell32" }
 shlwapi-sys = { version = "0", path = "lib/shlwapi" }
 user32-sys = { version = "0", path = "lib/user32" }
+userenv-sys = { version = "0", path = "lib/userenv" }
 usp10-sys = { version = "0", path = "lib/usp10" }
 uuid-sys = { version = "0", path = "lib/uuid" }
 vssapi-sys = { version = "0", path = "lib/vssapi" }
