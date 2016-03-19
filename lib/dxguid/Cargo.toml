@@ -1,17 +1,14 @@
 [package]
 name = "dxguid-sys"
-version = "0.0.1"
+version = "0.2.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
-description = "Contains function definitions for the Windows API library dxguid. See winapi for types and constants."
+description = "Contains DirectX GUIDs for COM typically found in `dxguid.lib`. See winapi for types and constants."
 documentation = "https://retep998.github.io/doc/dxguid/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["windows", "ffi", "win32", "directx"]
 license = "MIT"
-build = "build.rs"
 [lib]
 name = "dxguid"
 [dependencies]
 winapi = { version = "0.2.5", path = "../.." }
-[build-dependencies]
-winapi-build = { version = "0.1.1", path = "../../build" }

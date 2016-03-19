@@ -1,6 +1,6 @@
 [package]
 name = "d3dcompiler-sys"
-version = "0.0.1"
+version = "0.2.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 description = "Contains function definitions for the Windows API library d3dcompiler. See winapi for types and constants."
 documentation = "https://retep998.github.io/doc/d3dcompiler/"
