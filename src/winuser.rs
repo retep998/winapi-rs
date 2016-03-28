@@ -2268,6 +2268,29 @@ pub const NID_INTEGRATED_PEN: ::UINT = 0x00000004;
 pub const NID_EXTERNAL_PEN: ::UINT = 0x00000008;
 pub const NID_MULTI_INPUT: ::UINT = 0x00000040;
 pub const NID_READY: ::UINT = 0x00000080;
-// end if WINVER >= 0x0601 
+// end if WINVER >= 0x0601
 
-
+// System Menu Command Values
+//
+pub const SC_SIZE: ::WPARAM = 0xF000;
+pub const SC_MOVE: ::WPARAM = 0xF010;
+pub const SC_MINIMIZE: ::WPARAM = 0xF020;
+pub const SC_MAXIMIZE: ::WPARAM = 0xF030;
+pub const SC_NEXTWINDOW: ::WPARAM = 0xF040;
+pub const SC_PREVWINDOW: ::WPARAM = 0xF050;
+pub const SC_CLOSE: ::WPARAM = 0xF060;
+pub const SC_VSCROLL: ::WPARAM = 0xF070;
+pub const SC_HSCROLL: ::WPARAM = 0xF080;
+pub const SC_MOUSEMENU: ::WPARAM = 0xF090;
+pub const SC_KEYMENU: ::WPARAM = 0xF100;
+pub const SC_ARRANGE: ::WPARAM = 0xF110;
+pub const SC_RESTORE: ::WPARAM = 0xF120;
+pub const SC_TASKLIST: ::WPARAM = 0xF130;
+pub const SC_SCREENSAVE: ::WPARAM = 0xF140;
+pub const SC_HOTKEY: ::WPARAM = 0xF150;
+// if WINVER >= 0x0400
+pub const SC_DEFAULT: ::WPARAM = 0xF160;
+pub const SC_MONITORPOWER: ::WPARAM = 0xF170;
+pub const SC_CONTEXTHELP: ::WPARAM = 0xF180;
+pub const SC_SEPARATOR: ::WPARAM = 0xF00F;
+// endif WINVER >= 0x0400
