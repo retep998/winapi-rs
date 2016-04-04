@@ -8,6 +8,7 @@ repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["windows", "ffi", "win32", "com", "directx"]
 license = "MIT"
+include = ["src/**/*", "Cargo.toml", "LICENSE.md"]
 
 [dev-dependencies]
 advapi32-sys = { version = "0", path = "lib/advapi32" }
