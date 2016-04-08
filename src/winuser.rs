@@ -1155,6 +1155,11 @@ pub const FLASHW_TRAY: ::DWORD = 0x00000002;
 pub const FLASHW_ALL: ::DWORD = FLASHW_CAPTION | FLASHW_TRAY;
 pub const FLASHW_TIMER: ::DWORD = 0x00000004;
 pub const FLASHW_TIMERNOFG: ::DWORD = 0x0000000C;
+// 4674
+pub const HWND_TOP: ::HWND = 0 as ::HWND;
+pub const HWND_BOTTOM: ::HWND = 1 as ::HWND;
+pub const HWND_TOPMOST: ::HWND = -1isize as ::HWND;
+pub const HWND_NOTOPMOST: ::HWND = -2isize as ::HWND;
 //5499
 pub const MAPVK_VK_TO_VSC: ::UINT = 0;
 pub const MAPVK_VSC_TO_VK: ::UINT = 1;
@@ -1775,6 +1780,10 @@ STRUCT!{nodebug struct NONCLIENTMETRICSW {
     iPaddedBorderWidth: ::c_int,
 }}
 pub type LPNONCLIENTMETRICSW = *mut NONCLIENTMETRICSW;
+//12869
+pub const MONITOR_DEFAULTTONULL: ::DWORD = 0x00000000;
+pub const MONITOR_DEFAULTTOPRIMARY: ::DWORD = 0x00000001;
+pub const MONITOR_DEFAULTTONEAREST: ::DWORD = 0x00000002;
 //12900
 pub const MONITORINFOF_PRIMARY: ::DWORD = 1;
 pub const CCHDEVICENAME: usize = 32;
