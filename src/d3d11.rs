@@ -1476,7 +1476,10 @@ RIDL!{interface ID3D11DeviceContext(ID3D11DeviceContextVtbl): ID3D11DeviceChild(
         &mut self, pDstResource: *mut ID3D11Resource, DstSubresource: UINT,
         pSrcResource: *mut ID3D11Resource, SrcSubresource: UINT, Format: DXGI_FORMAT
     ) -> (),
-    fn ExecuteCommandList(&mut self, pCommandList: *mut ID3D11CommandList) -> (),
+    fn ExecuteCommandList(
+        &mut self, pCommandList: *mut ID3D11CommandList,
+        RestoreContextState: BOOL
+    ) -> (),
     fn HSSetShaderResources(
         &mut self, StartSlot: UINT, NumViews: UINT,
         ppShaderResourceViews: *const *mut ID3D11ShaderResourceView
