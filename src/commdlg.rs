@@ -161,8 +161,8 @@ STRUCT!{struct OFNOTIFYEXW {
     pidl: ::LPVOID,
 }}
 pub type LPOFNOTIFYEXW = *mut OFNOTIFYEXW;
-pub const CDN_FIRST: ::UINT = 0 - 601;
-pub const CDN_LAST: ::UINT = 0 - 699;
+pub const CDN_FIRST: ::UINT = -601i32 as ::UINT;
+pub const CDN_LAST: ::UINT = -699i32 as ::UINT;
 pub const CDN_INITDONE: ::UINT = CDN_FIRST - 0x0000;
 pub const CDN_SELCHANGE: ::UINT = CDN_FIRST - 0x0001;
 pub const CDN_FOLDERCHANGE: ::UINT = CDN_FIRST - 0x0002;
@@ -348,7 +348,7 @@ pub const SYMBOL_FONTTYPE: ::DWORD = 0x80000;
 pub const WM_CHOOSEFONT_GETLOGFONT: ::UINT = ::WM_USER + 1;
 pub const WM_CHOOSEFONT_SETLOGFONT: ::UINT = ::WM_USER + 101;
 pub const WM_CHOOSEFONT_SETFLAGS: ::UINT = ::WM_USER + 102;
-pub const CD_LBSELNOITEMS: ::WORD = 0 - 1;
+pub const CD_LBSELNOITEMS: ::WORD = -1i16 as ::WORD;
 pub const CD_LBSELCHANGE: ::WORD = 0;
 pub const CD_LBSELSUB: ::WORD = 1;
 pub const CD_LBSELADD: ::WORD = 2;

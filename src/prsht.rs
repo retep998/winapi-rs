@@ -176,8 +176,8 @@ STRUCT!{struct PSHNOTIFY {
     lParam: ::LPARAM,
 }}
 pub type LPPSHNOTIFY = *mut PSHNOTIFY;
-pub const PSN_FIRST: ::UINT = (0 - 200);
-pub const PSN_LAST: ::UINT = (0 - 299);
+pub const PSN_FIRST: ::UINT = -200i32 as ::UINT;
+pub const PSN_LAST: ::UINT = -299i32 as ::UINT;
 pub const PSN_SETACTIVE: ::UINT = PSN_FIRST - 0;
 pub const PSN_KILLACTIVE: ::UINT = PSN_FIRST - 1;
 pub const PSN_APPLY: ::UINT = PSN_FIRST - 2;

@@ -147,6 +147,32 @@ pub const CDS_DISABLE_UNSAFE_MODES: ::DWORD = 0x00000200;
 pub const CDS_RESET: ::DWORD = 0x40000000;
 pub const CDS_RESET_EX: ::DWORD = 0x20000000;
 pub const CDS_NORESET: ::DWORD = 0x10000000;
+pub const CF_TEXT: ::UINT = 1;
+pub const CF_BITMAP: ::UINT = 2;
+pub const CF_METAFILEPICT: ::UINT = 3;
+pub const CF_SYLK: ::UINT = 4;
+pub const CF_DIF: ::UINT = 5;
+pub const CF_TIFF: ::UINT = 6;
+pub const CF_OEMTEXT: ::UINT = 7;
+pub const CF_DIB: ::UINT = 8;
+pub const CF_PALETTE: ::UINT = 9;
+pub const CF_PENDATA: ::UINT = 10;
+pub const CF_RIFF: ::UINT = 11;
+pub const CF_WAVE: ::UINT = 12;
+pub const CF_UNICODETEXT: ::UINT = 13;
+pub const CF_ENHMETAFILE: ::UINT = 14;
+pub const CF_HDROP: ::UINT = 15;
+pub const CF_LOCALE: ::UINT = 16;
+pub const CF_DIBV5: ::UINT = 17;
+pub const CF_OWNERDISPLAY: ::UINT = 0x0080;
+pub const CF_DSPTEXT: ::UINT = 0x0081;
+pub const CF_DSPBITMAP: ::UINT = 0x0082;
+pub const CF_DSPENHMETAFILE: ::UINT = 0x008E;
+pub const CF_DSPMETAFILEPICT: ::UINT = 0x0083;
+pub const CF_PRIVATEFIRST: ::UINT = 0x0200;
+pub const CF_PRIVATELAST: ::UINT = 0x02FF;
+pub const CF_GDIOBJFIRST: ::UINT = 0x0300;
+pub const CF_GDIOBJLAST: ::UINT = 0x03FF;
 pub const CS_VREDRAW: ::DWORD = 0x0001;
 pub const CS_HREDRAW: ::DWORD = 0x0002;
 pub const CS_DBLCLKS: ::DWORD = 0x0008;
@@ -1155,6 +1181,11 @@ pub const FLASHW_TRAY: ::DWORD = 0x00000002;
 pub const FLASHW_ALL: ::DWORD = FLASHW_CAPTION | FLASHW_TRAY;
 pub const FLASHW_TIMER: ::DWORD = 0x00000004;
 pub const FLASHW_TIMERNOFG: ::DWORD = 0x0000000C;
+// 4674
+pub const HWND_TOP: ::HWND = 0 as ::HWND;
+pub const HWND_BOTTOM: ::HWND = 1 as ::HWND;
+pub const HWND_TOPMOST: ::HWND = -1isize as ::HWND;
+pub const HWND_NOTOPMOST: ::HWND = -2isize as ::HWND;
 //5499
 pub const MAPVK_VK_TO_VSC: ::UINT = 0;
 pub const MAPVK_VSC_TO_VK: ::UINT = 1;
@@ -1775,6 +1806,10 @@ STRUCT!{nodebug struct NONCLIENTMETRICSW {
     iPaddedBorderWidth: ::c_int,
 }}
 pub type LPNONCLIENTMETRICSW = *mut NONCLIENTMETRICSW;
+//12869
+pub const MONITOR_DEFAULTTONULL: ::DWORD = 0x00000000;
+pub const MONITOR_DEFAULTTOPRIMARY: ::DWORD = 0x00000001;
+pub const MONITOR_DEFAULTTONEAREST: ::DWORD = 0x00000002;
 //12900
 pub const MONITORINFOF_PRIMARY: ::DWORD = 1;
 pub const CCHDEVICENAME: usize = 32;

@@ -226,7 +226,7 @@ extern "system" {
         dwDesiredAccess: DWORD,
     ) -> HANDLE;
     pub fn CreateEventExW(
-        lpEventAttributes: LPSECURITY_ATTRIBUTES, lpName: LPWSTR, dwFlags: DWORD,
+        lpEventAttributes: LPSECURITY_ATTRIBUTES, lpName: LPCWSTR, dwFlags: DWORD,
         dwDesiredAccess: DWORD,
     ) -> HANDLE;
     pub fn CreateFiber(
