@@ -287,18 +287,20 @@ pub const SPEAKER_TOP_BACK_CENTER: ::DWORD = 0x10000;
 pub const SPEAKER_TOP_BACK_RIGHT: ::DWORD = 0x20000;
 pub const SPEAKER_RESERVED: ::DWORD = 0x7FFC0000;
 pub const SPEAKER_ALL: ::DWORD = 0x80000000;
-STRUCT!{struct WAVEFORMATEX {
-    wFormatTag: ::WORD,
-    nChannels: ::WORD,
-    nSamplesPerSec: ::DWORD,
-    nAvgBytesPerSec: ::DWORD,
-    nBlockAlign: ::WORD,
-    wBitsPerSample: ::WORD,
-    cbSize: ::WORD,
-}}
-STRUCT!{struct WAVEFORMATEXTENSIBLE {
-    Format: ::WAVEFORMATEX,
-    Samples: ::WORD,
-    dwChannelMask: ::DWORD,
-    SubFormat: ::GUID,
-}}
+#[repr(C, packed)] #[derive(Clone, Copy, Debug)]
+pub struct WAVEFORMATEX {
+    pub wFormatTag: ::WORD,
+    pub nChannels: ::WORD,
+    pub nSamplesPerSec: ::DWORD,
+    pub nAvgBytesPerSec: ::DWORD,
+    pub nBlockAlign: ::WORD,
+    pub wBitsPerSample: ::WORD,
+    pub cbSize: ::WORD,
+}
+#[repr(C, packed)] #[derive(Clone, Copy, Debug)]
+pub struct WAVEFORMATEXTENSIBLE {
+    pub Format: ::WAVEFORMATEX,
+    pub Samples: ::WORD,
+    pub dwChannelMask: ::DWORD,
+    pub SubFormat: ::GUID,
+}
