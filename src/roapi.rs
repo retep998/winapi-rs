@@ -1,0 +1,5 @@
+ENUM!{enum RO_INIT_TYPE {
+    // TODO condition on WINAPI_PARTITION_DESKTOP etc.?
+    RO_INIT_SINGLETHREADED = 0,
+    RO_INIT_MULTITHREADED = 1, 
+}}
