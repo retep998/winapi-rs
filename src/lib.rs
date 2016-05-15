@@ -24,6 +24,7 @@ pub use std::os::raw::{
     c_float,
     c_double,
 };
+pub use activation::*;
 pub use audioclient::*;
 pub use audiosessiontypes::*;
 pub use basetsd::*;
@@ -114,6 +115,9 @@ pub use prsht::*;
 pub use psapi::*;
 pub use qos::*;
 pub use reason::*;
+pub use restrictederrorinfo::*;
+pub use roapi::*;
+pub use roerrorapi::*;
 pub use rpc::*;
 pub use rpcdce::*;
 pub use sapi::*;
@@ -166,6 +170,7 @@ pub use winscard::*;
 pub use winsmcrd::*;
 pub use winsock2::*;
 pub use winspool::*;
+pub use winstring::*;
 pub use winsvc::*;
 pub use winuser::*;
 pub use ws2def::*;
@@ -179,6 +184,7 @@ pub use xinput::*;
 // Modules
 //-------------------------------------------------------------------------------------------------
 #[macro_use] mod macros;
+pub mod activation;
 pub mod audioclient;
 pub mod audiosessiontypes;
 pub mod basetsd;
@@ -269,6 +275,9 @@ pub mod prsht;
 pub mod psapi;
 pub mod qos;
 pub mod reason;
+pub mod restrictederrorinfo;
+pub mod roapi;
+pub mod roerrorapi;
 pub mod rpc;
 pub mod rpcdce;
 pub mod sapi;
@@ -321,6 +330,7 @@ pub mod winscard;
 pub mod winsmcrd;
 pub mod winsock2;
 pub mod winspool;
+pub mod winstring;
 pub mod winsvc;
 pub mod winuser;
 pub mod ws2def;
