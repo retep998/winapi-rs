@@ -17,7 +17,9 @@ extern "system" {
     // pub fn RoFailFastWithErrorContext();
     // pub fn RoFreeParameterizedTypeExtra();
     // pub fn RoGetActivatableClassRegistration();
-    // pub fn RoGetActivationFactory();
+    pub fn RoGetActivationFactory(
+        activatableClassId: HSTRING, iid: REFIID, factory: *mut *mut c_void,    
+    ) -> HRESULT; 
     // pub fn RoGetApartmentIdentifier();
     // pub fn RoGetBufferMarshaler();
     // pub fn RoGetErrorReportingFlags();
@@ -25,7 +27,7 @@ extern "system" {
     // pub fn RoGetMetaDataFile();
     // pub fn RoGetParameterizedTypeInstanceIID();
     // pub fn RoGetServerActivatableClasses();
-    // pub fn RoInitialize();
+      pub fn RoInitialize(initType: RO_INIT_TYPE,) -> HRESULT;
     // pub fn RoInspectCapturedStackBackTrace();
     // pub fn RoInspectThreadErrorInfo();
     // pub fn RoOriginateError();
@@ -43,18 +45,25 @@ extern "system" {
     // pub fn RoSetErrorReportingFlags();
     // pub fn RoTransformError();
     // pub fn RoTransformErrorW();
-    // pub fn RoUninitialize();
+    pub fn RoUninitialize() -> HRESULT;
     // pub fn RoUnregisterForApartmentShutdown();
     // pub fn SetRestrictedErrorInfo();
     // pub fn WindowsCompareStringOrdinal();
     // pub fn WindowsConcatString();
-    // pub fn WindowsCreateString();
-    // pub fn WindowsCreateStringReference();
+    pub fn WindowsCreateString(
+        sourceString: PCNZWCH, length: UINT32, string: *mut HSTRING,
+    ) -> HRESULT;
+    pub fn WindowsCreateStringReference(
+        sourceString: PCWSTR, length: UINT32,
+        hstringHeader: *mut HSTRING_HEADER, string: *mut HSTRING,
+    ) -> HRESULT; 
     // pub fn WindowsDeleteString();
     // pub fn WindowsDeleteStringBuffer();
     // pub fn WindowsDuplicateString();
     // pub fn WindowsGetStringLen();
-    // pub fn WindowsGetStringRawBuffer();
+    pub fn WindowsGetStringRawBuffer(
+        string: HSTRING, length: *mut UINT32,
+    ) -> PCWSTR;
     // pub fn WindowsInspectString();
     // pub fn WindowsIsStringEmpty();
     // pub fn WindowsPreallocateStringBuffer();
