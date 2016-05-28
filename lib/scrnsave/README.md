@@ -10,4 +10,4 @@ scrnsave-sys = "0.0.1"
 extern crate scrnsave;
 ```
 
-[Documentation](https://retep998.github.io/doc/scrnsave/)
+[Documentation](https://retep998.github.io/doc/winapi/scrnsave/)

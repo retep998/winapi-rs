@@ -10,4 +10,4 @@ elfapi-sys = "0.0.1"
 extern crate elfapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/elfapi/)
+[Documentation](https://retep998.github.io/doc/winapi/elfapi/)

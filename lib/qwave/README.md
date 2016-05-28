@@ -10,4 +10,4 @@ qwave-sys = "0.0.1"
 extern crate qwave;
 ```
 
-[Documentation](https://retep998.github.io/doc/qwave/)
+[Documentation](https://retep998.github.io/doc/winapi/qwave/)

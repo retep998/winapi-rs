@@ -10,4 +10,4 @@ dnsperf-sys = "0.0.1"
 extern crate dnsperf;
 ```
 
-[Documentation](https://retep998.github.io/doc/dnsperf/)
+[Documentation](https://retep998.github.io/doc/winapi/dnsperf/)

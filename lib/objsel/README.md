@@ -10,4 +10,4 @@ objsel-sys = "0.0.1"
 extern crate objsel;
 ```
 
-[Documentation](https://retep998.github.io/doc/objsel/)
+[Documentation](https://retep998.github.io/doc/winapi/objsel/)

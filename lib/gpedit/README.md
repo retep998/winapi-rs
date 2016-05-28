@@ -10,4 +10,4 @@ gpedit-sys = "0.0.1"
 extern crate gpedit;
 ```
 
-[Documentation](https://retep998.github.io/doc/gpedit/)
+[Documentation](https://retep998.github.io/doc/winapi/gpedit/)

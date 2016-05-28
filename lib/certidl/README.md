@@ -10,4 +10,4 @@ certidl-sys = "0.0.1"
 extern crate certidl;
 ```
 
-[Documentation](https://retep998.github.io/doc/certidl/)
+[Documentation](https://retep998.github.io/doc/winapi/certidl/)

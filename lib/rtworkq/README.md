@@ -10,4 +10,4 @@ rtworkq-sys = "0.0.1"
 extern crate rtworkq;
 ```
 
-[Documentation](https://retep998.github.io/doc/rtworkq/)
+[Documentation](https://retep998.github.io/doc/winapi/rtworkq/)

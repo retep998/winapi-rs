@@ -10,4 +10,4 @@ sbtsv-sys = "0.0.1"
 extern crate sbtsv;
 ```
 
-[Documentation](https://retep998.github.io/doc/sbtsv/)
+[Documentation](https://retep998.github.io/doc/winapi/sbtsv/)

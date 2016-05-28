@@ -10,4 +10,4 @@ wuguid-sys = "0.0.1"
 extern crate wuguid;
 ```
 
-[Documentation](https://retep998.github.io/doc/wuguid/)
+[Documentation](https://retep998.github.io/doc/winapi/wuguid/)

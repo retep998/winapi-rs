@@ -10,4 +10,4 @@ ndfapi-sys = "0.0.1"
 extern crate ndfapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/ndfapi/)
+[Documentation](https://retep998.github.io/doc/winapi/ndfapi/)

@@ -10,4 +10,4 @@ prntvpt-sys = "0.0.1"
 extern crate prntvpt;
 ```
 
-[Documentation](https://retep998.github.io/doc/prntvpt/)
+[Documentation](https://retep998.github.io/doc/winapi/prntvpt/)

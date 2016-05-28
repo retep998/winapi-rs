@@ -10,4 +10,4 @@ audioeng-sys = "0.0.1"
 extern crate audioeng;
 ```
 
-[Documentation](https://retep998.github.io/doc/audioeng/)
+[Documentation](https://retep998.github.io/doc/winapi/audioeng/)

@@ -10,4 +10,4 @@ oleaut32-sys = "0.0.1"
 extern crate oleaut32;
 ```
 
-[Documentation](https://retep998.github.io/doc/oleaut32/)
+[Documentation](https://retep998.github.io/doc/winapi/oleaut32/)

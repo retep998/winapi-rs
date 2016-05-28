@@ -10,4 +10,4 @@ mincore_downlevel-sys = "0.0.1"
 extern crate mincore_downlevel;
 ```
 
-[Documentation](https://retep998.github.io/doc/mincore_downlevel/)
+[Documentation](https://retep998.github.io/doc/winapi/mincore_downlevel/)

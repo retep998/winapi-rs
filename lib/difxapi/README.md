@@ -10,4 +10,4 @@ difxapi-sys = "0.0.1"
 extern crate difxapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/difxapi/)
+[Documentation](https://retep998.github.io/doc/winapi/difxapi/)

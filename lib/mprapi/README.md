@@ -10,4 +10,4 @@ mprapi-sys = "0.0.1"
 extern crate mprapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/mprapi/)
+[Documentation](https://retep998.github.io/doc/winapi/mprapi/)

@@ -10,4 +10,4 @@ dhcpcsvc-sys = "0.0.1"
 extern crate dhcpcsvc;
 ```
 
-[Documentation](https://retep998.github.io/doc/dhcpcsvc/)
+[Documentation](https://retep998.github.io/doc/winapi/dhcpcsvc/)

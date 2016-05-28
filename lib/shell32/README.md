@@ -10,4 +10,4 @@ shell32-sys = "0.1.1"
 extern crate shell32;
 ```
 
-[Documentation](https://retep998.github.io/doc/shell32/)
+[Documentation](https://retep998.github.io/doc/winapi/shell32/)

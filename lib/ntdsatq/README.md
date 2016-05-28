@@ -10,4 +10,4 @@ ntdsatq-sys = "0.0.1"
 extern crate ntdsatq;
 ```
 
-[Documentation](https://retep998.github.io/doc/ntdsatq/)
+[Documentation](https://retep998.github.io/doc/winapi/ntdsatq/)

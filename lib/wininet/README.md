@@ -10,4 +10,4 @@ wininet-sys = "0.0.1"
 extern crate wininet;
 ```
 
-[Documentation](https://retep998.github.io/doc/wininet/)
+[Documentation](https://retep998.github.io/doc/winapi/wininet/)

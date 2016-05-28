@@ -10,4 +10,4 @@ wevtapi-sys = "0.0.1"
 extern crate wevtapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/wevtapi/)
+[Documentation](https://retep998.github.io/doc/winapi/wevtapi/)

@@ -10,4 +10,4 @@ devenum-sys = "0.0.1"
 extern crate devenum;
 ```
 
-[Documentation](https://retep998.github.io/doc/devenum/)
+[Documentation](https://retep998.github.io/doc/winapi/devenum/)

@@ -10,4 +10,4 @@ windows-ui-sys = "0.0.1"
 extern crate windows_ui;
 ```
 
-[Documentation](https://retep998.github.io/doc/windows-ui/)
+[Documentation](https://retep998.github.io/doc/winapi/windows-ui/)

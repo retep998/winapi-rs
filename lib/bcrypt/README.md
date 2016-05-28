@@ -10,4 +10,4 @@ bcrypt-sys = "0.0.1"
 extern crate bcrypt;
 ```
 
-[Documentation](https://retep998.github.io/doc/bcrypt/)
+[Documentation](https://retep998.github.io/doc/winapi/bcrypt/)

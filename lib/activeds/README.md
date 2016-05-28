@@ -10,4 +10,4 @@ activeds-sys = "0.0.1"
 extern crate activeds;
 ```
 
-[Documentation](https://retep998.github.io/doc/activeds/)
+[Documentation](https://retep998.github.io/doc/winapi/activeds/)

@@ -10,4 +10,4 @@ correngine-sys = "0.0.1"
 extern crate correngine;
 ```
 
-[Documentation](https://retep998.github.io/doc/correngine/)
+[Documentation](https://retep998.github.io/doc/winapi/correngine/)

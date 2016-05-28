@@ -10,4 +10,4 @@ hbaapi-sys = "0.0.1"
 extern crate hbaapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/hbaapi/)
+[Documentation](https://retep998.github.io/doc/winapi/hbaapi/)

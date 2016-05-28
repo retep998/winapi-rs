@@ -10,4 +10,4 @@ irprops-sys = "0.0.1"
 extern crate irprops;
 ```
 
-[Documentation](https://retep998.github.io/doc/irprops/)
+[Documentation](https://retep998.github.io/doc/winapi/irprops/)

@@ -10,4 +10,4 @@ odbcbcp-sys = "0.0.1"
 extern crate odbcbcp;
 ```
 
-[Documentation](https://retep998.github.io/doc/odbcbcp/)
+[Documentation](https://retep998.github.io/doc/winapi/odbcbcp/)

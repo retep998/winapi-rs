@@ -10,4 +10,4 @@ format-sys = "0.0.1"
 extern crate format;
 ```
 
-[Documentation](https://retep998.github.io/doc/format/)
+[Documentation](https://retep998.github.io/doc/winapi/format/)

@@ -10,4 +10,4 @@ asycfilt-sys = "0.0.1"
 extern crate asycfilt;
 ```
 
-[Documentation](https://retep998.github.io/doc/asycfilt/)
+[Documentation](https://retep998.github.io/doc/winapi/asycfilt/)

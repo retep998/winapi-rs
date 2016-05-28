@@ -10,4 +10,4 @@ mincore-sys = "0.0.1"
 extern crate mincore;
 ```
 
-[Documentation](https://retep998.github.io/doc/mincore/)
+[Documentation](https://retep998.github.io/doc/winapi/mincore/)

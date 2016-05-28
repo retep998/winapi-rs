@@ -10,4 +10,4 @@ dnscrcli-sys = "0.0.1"
 extern crate dnscrcli;
 ```
 
-[Documentation](https://retep998.github.io/doc/dnscrcli/)
+[Documentation](https://retep998.github.io/doc/winapi/dnscrcli/)

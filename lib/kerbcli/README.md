@@ -10,4 +10,4 @@ kerbcli-sys = "0.0.1"
 extern crate kerbcli;
 ```
 
-[Documentation](https://retep998.github.io/doc/kerbcli/)
+[Documentation](https://retep998.github.io/doc/winapi/kerbcli/)

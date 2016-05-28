@@ -10,4 +10,4 @@ oemlicense-sys = "0.0.1"
 extern crate oemlicense;
 ```
 
-[Documentation](https://retep998.github.io/doc/oemlicense/)
+[Documentation](https://retep998.github.io/doc/winapi/oemlicense/)

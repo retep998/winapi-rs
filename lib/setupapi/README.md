@@ -10,4 +10,4 @@ setupapi-sys = "0.0.1"
 extern crate setupapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/setupapi/)
+[Documentation](https://retep998.github.io/doc/winapi/setupapi/)

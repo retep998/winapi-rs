@@ -10,4 +10,4 @@ wdsbp-sys = "0.0.1"
 extern crate wdsbp;
 ```
 
-[Documentation](https://retep998.github.io/doc/wdsbp/)
+[Documentation](https://retep998.github.io/doc/winapi/wdsbp/)

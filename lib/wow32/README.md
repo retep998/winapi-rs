@@ -10,4 +10,4 @@ wow32-sys = "0.0.1"
 extern crate wow32;
 ```
 
-[Documentation](https://retep998.github.io/doc/wow32/)
+[Documentation](https://retep998.github.io/doc/winapi/wow32/)

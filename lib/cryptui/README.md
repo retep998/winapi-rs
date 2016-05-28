@@ -10,4 +10,4 @@ cryptui-sys = "0.0.1"
 extern crate cryptui;
 ```
 
-[Documentation](https://retep998.github.io/doc/cryptui/)
+[Documentation](https://retep998.github.io/doc/winapi/cryptui/)

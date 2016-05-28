@@ -10,4 +10,4 @@ httpapi-sys = "0.0.1"
 extern crate httpapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/httpapi/)
+[Documentation](https://retep998.github.io/doc/winapi/httpapi/)

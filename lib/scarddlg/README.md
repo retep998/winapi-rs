@@ -10,4 +10,4 @@ scarddlg-sys = "0.0.1"
 extern crate scarddlg;
 ```
 
-[Documentation](https://retep998.github.io/doc/scarddlg/)
+[Documentation](https://retep998.github.io/doc/winapi/scarddlg/)

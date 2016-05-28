@@ -10,4 +10,4 @@ rpcrt4-sys = "0.0.1"
 extern crate rpcrt4;
 ```
 
-[Documentation](https://retep998.github.io/doc/rpcrt4/)
+[Documentation](https://retep998.github.io/doc/winapi/rpcrt4/)

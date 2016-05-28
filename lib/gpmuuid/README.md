@@ -10,4 +10,4 @@ gpmuuid-sys = "0.0.1"
 extern crate gpmuuid;
 ```
 
-[Documentation](https://retep998.github.io/doc/gpmuuid/)
+[Documentation](https://retep998.github.io/doc/winapi/gpmuuid/)

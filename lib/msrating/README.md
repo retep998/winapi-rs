@@ -10,4 +10,4 @@ msrating-sys = "0.0.1"
 extern crate msrating;
 ```
 
-[Documentation](https://retep998.github.io/doc/msrating/)
+[Documentation](https://retep998.github.io/doc/winapi/msrating/)

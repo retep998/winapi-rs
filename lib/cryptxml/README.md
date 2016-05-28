@@ -10,4 +10,4 @@ cryptxml-sys = "0.0.1"
 extern crate cryptxml;
 ```
 
-[Documentation](https://retep998.github.io/doc/cryptxml/)
+[Documentation](https://retep998.github.io/doc/winapi/cryptxml/)

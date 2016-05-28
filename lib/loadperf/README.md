@@ -10,4 +10,4 @@ loadperf-sys = "0.0.1"
 extern crate loadperf;
 ```
 
-[Documentation](https://retep998.github.io/doc/loadperf/)
+[Documentation](https://retep998.github.io/doc/winapi/loadperf/)

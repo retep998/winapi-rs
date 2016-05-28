@@ -10,4 +10,4 @@ icm32-sys = "0.0.1"
 extern crate icm32;
 ```
 
-[Documentation](https://retep998.github.io/doc/icm32/)
+[Documentation](https://retep998.github.io/doc/winapi/icm32/)

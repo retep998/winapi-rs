@@ -10,4 +10,4 @@ msaatext-sys = "0.0.1"
 extern crate msaatext;
 ```
 
-[Documentation](https://retep998.github.io/doc/msaatext/)
+[Documentation](https://retep998.github.io/doc/winapi/msaatext/)

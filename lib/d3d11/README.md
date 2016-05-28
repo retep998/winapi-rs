@@ -10,4 +10,4 @@ d3d11-sys = "0.1.0"
 extern crate d3d11;
 ```
 
-[Documentation](https://retep998.github.io/doc/d3d11/)
+[Documentation](https://retep998.github.io/doc/winapi/d3d11/)

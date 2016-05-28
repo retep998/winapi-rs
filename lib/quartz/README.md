@@ -10,4 +10,4 @@ quartz-sys = "0.0.1"
 extern crate quartz;
 ```
 
-[Documentation](https://retep998.github.io/doc/quartz/)
+[Documentation](https://retep998.github.io/doc/winapi/quartz/)

@@ -10,4 +10,4 @@ winbio-sys = "0.0.1"
 extern crate winbio;
 ```
 
-[Documentation](https://retep998.github.io/doc/winbio/)
+[Documentation](https://retep998.github.io/doc/winapi/winbio/)

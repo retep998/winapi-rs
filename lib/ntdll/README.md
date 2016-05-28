@@ -10,4 +10,4 @@ ntdll-sys = "0.0.1"
 extern crate ntdll;
 ```
 
-[Documentation](https://retep998.github.io/doc/ntdll/)
+[Documentation](https://retep998.github.io/doc/winapi/ntdll/)

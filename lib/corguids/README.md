@@ -10,4 +10,4 @@ corguids-sys = "0.0.1"
 extern crate corguids;
 ```
 
-[Documentation](https://retep998.github.io/doc/corguids/)
+[Documentation](https://retep998.github.io/doc/winapi/corguids/)

@@ -10,4 +10,4 @@ user32-sys = "0.1.2"
 extern crate user32;
 ```
 
-[Documentation](https://retep998.github.io/doc/user32/)
+[Documentation](https://retep998.github.io/doc/winapi/user32/)

@@ -10,4 +10,4 @@ vscmgr-sys = "0.0.1"
 extern crate vscmgr;
 ```
 
-[Documentation](https://retep998.github.io/doc/vscmgr/)
+[Documentation](https://retep998.github.io/doc/winapi/vscmgr/)

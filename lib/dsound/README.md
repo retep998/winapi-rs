@@ -10,4 +10,4 @@ dsound-sys = "0.0.1"
 extern crate dsound;
 ```
 
-[Documentation](https://retep998.github.io/doc/dsound/)
+[Documentation](https://retep998.github.io/doc/winapi/dsound/)

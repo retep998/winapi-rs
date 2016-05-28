@@ -10,4 +10,4 @@ mscms-sys = "0.0.1"
 extern crate mscms;
 ```
 
-[Documentation](https://retep998.github.io/doc/mscms/)
+[Documentation](https://retep998.github.io/doc/winapi/mscms/)

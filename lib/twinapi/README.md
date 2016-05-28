@@ -10,4 +10,4 @@ twinapi-sys = "0.0.1"
 extern crate twinapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/twinapi/)
+[Documentation](https://retep998.github.io/doc/winapi/twinapi/)

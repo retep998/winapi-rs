@@ -10,4 +10,4 @@ cryptdll-sys = "0.0.1"
 extern crate cryptdll;
 ```
 
-[Documentation](https://retep998.github.io/doc/cryptdll/)
+[Documentation](https://retep998.github.io/doc/winapi/cryptdll/)

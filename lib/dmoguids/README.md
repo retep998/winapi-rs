@@ -10,4 +10,4 @@ dmoguids-sys = "0.0.1"
 extern crate dmoguids;
 ```
 
-[Documentation](https://retep998.github.io/doc/dmoguids/)
+[Documentation](https://retep998.github.io/doc/winapi/dmoguids/)

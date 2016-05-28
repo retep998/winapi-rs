@@ -10,4 +10,4 @@ workspaceax-sys = "0.0.1"
 extern crate workspaceax;
 ```
 
-[Documentation](https://retep998.github.io/doc/workspaceax/)
+[Documentation](https://retep998.github.io/doc/winapi/workspaceax/)

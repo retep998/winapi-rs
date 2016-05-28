@@ -10,4 +10,4 @@ photoacquireuid-sys = "0.0.1"
 extern crate photoacquireuid;
 ```
 
-[Documentation](https://retep998.github.io/doc/photoacquireuid/)
+[Documentation](https://retep998.github.io/doc/winapi/photoacquireuid/)

@@ -10,4 +10,4 @@ rstrtmgr-sys = "0.0.1"
 extern crate rstrtmgr;
 ```
 
-[Documentation](https://retep998.github.io/doc/rstrtmgr/)
+[Documentation](https://retep998.github.io/doc/winapi/rstrtmgr/)

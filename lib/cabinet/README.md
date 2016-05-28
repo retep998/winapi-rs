@@ -10,4 +10,4 @@ cabinet-sys = "0.0.1"
 extern crate cabinet;
 ```
 
-[Documentation](https://retep998.github.io/doc/cabinet/)
+[Documentation](https://retep998.github.io/doc/winapi/cabinet/)

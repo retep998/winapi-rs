@@ -10,4 +10,4 @@ dbgeng-sys = "0.0.1"
 extern crate dbgeng;
 ```
 
-[Documentation](https://retep998.github.io/doc/dbgeng/)
+[Documentation](https://retep998.github.io/doc/winapi/dbgeng/)

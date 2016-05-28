@@ -10,4 +10,4 @@ vdmdbg-sys = "0.0.1"
 extern crate vdmdbg;
 ```
 
-[Documentation](https://retep998.github.io/doc/vdmdbg/)
+[Documentation](https://retep998.github.io/doc/winapi/vdmdbg/)

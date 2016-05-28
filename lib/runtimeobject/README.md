@@ -10,4 +10,4 @@ runtimeobject-sys = "0.0.1"
 extern crate runtimeobject;
 ```
 
-[Documentation](https://retep998.github.io/doc/runtimeobject/)
+[Documentation](https://retep998.github.io/doc/winapi/runtimeobject/)

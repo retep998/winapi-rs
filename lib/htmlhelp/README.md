@@ -10,4 +10,4 @@ htmlhelp-sys = "0.0.1"
 extern crate htmlhelp;
 ```
 
-[Documentation](https://retep998.github.io/doc/htmlhelp/)
+[Documentation](https://retep998.github.io/doc/winapi/htmlhelp/)

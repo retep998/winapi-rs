@@ -10,4 +10,4 @@ vds_uuid-sys = "0.0.1"
 extern crate vds_uuid;
 ```
 
-[Documentation](https://retep998.github.io/doc/vds_uuid/)
+[Documentation](https://retep998.github.io/doc/winapi/vds_uuid/)

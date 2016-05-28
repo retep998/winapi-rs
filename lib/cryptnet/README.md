@@ -10,4 +10,4 @@ cryptnet-sys = "0.0.1"
 extern crate cryptnet;
 ```
 
-[Documentation](https://retep998.github.io/doc/cryptnet/)
+[Documentation](https://retep998.github.io/doc/winapi/cryptnet/)

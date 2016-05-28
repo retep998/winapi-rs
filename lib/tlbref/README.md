@@ -10,4 +10,4 @@ tlbref-sys = "0.0.1"
 extern crate tlbref;
 ```
 
-[Documentation](https://retep998.github.io/doc/tlbref/)
+[Documentation](https://retep998.github.io/doc/winapi/tlbref/)

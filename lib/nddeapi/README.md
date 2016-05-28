@@ -10,4 +10,4 @@ nddeapi-sys = "0.0.1"
 extern crate nddeapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/nddeapi/)
+[Documentation](https://retep998.github.io/doc/winapi/nddeapi/)

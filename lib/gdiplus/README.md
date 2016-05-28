@@ -10,4 +10,4 @@ gdiplus-sys = "0.0.1"
 extern crate gdiplus;
 ```
 
-[Documentation](https://retep998.github.io/doc/gdiplus/)
+[Documentation](https://retep998.github.io/doc/winapi/gdiplus/)

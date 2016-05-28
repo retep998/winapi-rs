@@ -10,4 +10,4 @@ winscard-sys = "0.0.1"
 extern crate winscard;
 ```
 
-[Documentation](https://retep998.github.io/doc/winscard/)
+[Documentation](https://retep998.github.io/doc/winapi/winscard/)

@@ -10,4 +10,4 @@ psapi-sys = "0.1.0"
 extern crate psapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/psapi/)
+[Documentation](https://retep998.github.io/doc/winapi/psapi/)

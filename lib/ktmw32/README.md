@@ -10,4 +10,4 @@ ktmw32-sys = "0.1.0"
 extern crate ktmw32;
 ```
 
-[Documentation](https://retep998.github.io/doc/ktmw32/)
+[Documentation](https://retep998.github.io/doc/winapi/ktmw32/)

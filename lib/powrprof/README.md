@@ -10,4 +10,4 @@ powrprof-sys = "0.0.1"
 extern crate powrprof;
 ```
 
-[Documentation](https://retep998.github.io/doc/powrprof/)
+[Documentation](https://retep998.github.io/doc/winapi/powrprof/)

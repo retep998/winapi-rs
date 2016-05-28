@@ -10,4 +10,4 @@ wsmsvc-sys = "0.0.1"
 extern crate wsmsvc;
 ```
 
-[Documentation](https://retep998.github.io/doc/wsmsvc/)
+[Documentation](https://retep998.github.io/doc/winapi/wsmsvc/)

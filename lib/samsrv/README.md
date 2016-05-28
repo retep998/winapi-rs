@@ -10,4 +10,4 @@ samsrv-sys = "0.0.1"
 extern crate samsrv;
 ```
 
-[Documentation](https://retep998.github.io/doc/samsrv/)
+[Documentation](https://retep998.github.io/doc/winapi/samsrv/)

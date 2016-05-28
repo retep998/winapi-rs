@@ -10,4 +10,4 @@ uuid-sys = "0.1.2"
 extern crate uuid;
 ```
 
-[Documentation](https://retep998.github.io/doc/uuid/)
+[Documentation](https://retep998.github.io/doc/winapi/uuid/)

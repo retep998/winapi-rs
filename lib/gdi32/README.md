@@ -10,4 +10,4 @@ gdi32-sys = "0.2.0"
 extern crate gdi32;
 ```
 
-[Documentation](https://retep998.github.io/doc/gdi32/)
+[Documentation](https://retep998.github.io/doc/winapi/gdi32/)

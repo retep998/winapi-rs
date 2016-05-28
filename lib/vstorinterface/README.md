@@ -10,4 +10,4 @@ vstorinterface-sys = "0.0.1"
 extern crate vstorinterface;
 ```
 
-[Documentation](https://retep998.github.io/doc/vstorinterface/)
+[Documentation](https://retep998.github.io/doc/winapi/vstorinterface/)

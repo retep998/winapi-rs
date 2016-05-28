@@ -10,4 +10,4 @@ windows-networking-sys = "0.0.1"
 extern crate windows_networking;
 ```
 
-[Documentation](https://retep998.github.io/doc/windows-networking/)
+[Documentation](https://retep998.github.io/doc/winapi/windows-networking/)

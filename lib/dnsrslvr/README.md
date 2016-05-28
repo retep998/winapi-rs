@@ -10,4 +10,4 @@ dnsrslvr-sys = "0.0.1"
 extern crate dnsrslvr;
 ```
 
-[Documentation](https://retep998.github.io/doc/dnsrslvr/)
+[Documentation](https://retep998.github.io/doc/winapi/dnsrslvr/)

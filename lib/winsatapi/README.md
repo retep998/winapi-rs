@@ -10,4 +10,4 @@ winsatapi-sys = "0.0.1"
 extern crate winsatapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/winsatapi/)
+[Documentation](https://retep998.github.io/doc/winapi/winsatapi/)

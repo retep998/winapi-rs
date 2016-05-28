@@ -10,4 +10,4 @@ wmcodecdspuuid-sys = "0.0.1"
 extern crate wmcodecdspuuid;
 ```
 
-[Documentation](https://retep998.github.io/doc/wmcodecdspuuid/)
+[Documentation](https://retep998.github.io/doc/winapi/wmcodecdspuuid/)

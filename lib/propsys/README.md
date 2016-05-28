@@ -10,4 +10,4 @@ propsys-sys = "0.0.1"
 extern crate propsys;
 ```
 
-[Documentation](https://retep998.github.io/doc/propsys/)
+[Documentation](https://retep998.github.io/doc/winapi/propsys/)

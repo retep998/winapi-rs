@@ -10,4 +10,4 @@ dnsapi-sys = "0.0.1"
 extern crate dnsapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/dnsapi/)
+[Documentation](https://retep998.github.io/doc/winapi/dnsapi/)

@@ -10,4 +10,4 @@ magnification-sys = "0.0.1"
 extern crate magnification;
 ```
 
-[Documentation](https://retep998.github.io/doc/magnification/)
+[Documentation](https://retep998.github.io/doc/winapi/magnification/)

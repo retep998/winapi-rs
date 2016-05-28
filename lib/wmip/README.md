@@ -10,4 +10,4 @@ wmip-sys = "0.0.1"
 extern crate wmip;
 ```
 
-[Documentation](https://retep998.github.io/doc/wmip/)
+[Documentation](https://retep998.github.io/doc/winapi/wmip/)

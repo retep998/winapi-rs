@@ -10,4 +10,4 @@ xinput9_1_0-sys = "0.0.1"
 extern crate xinput9_1_0;
 ```
 
-[Documentation](https://retep998.github.io/doc/xinput9_1_0/)
+[Documentation](https://retep998.github.io/doc/winapi/xinput9_1_0/)

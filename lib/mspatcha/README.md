@@ -10,4 +10,4 @@ mspatcha-sys = "0.0.1"
 extern crate mspatcha;
 ```
 
-[Documentation](https://retep998.github.io/doc/mspatcha/)
+[Documentation](https://retep998.github.io/doc/winapi/mspatcha/)

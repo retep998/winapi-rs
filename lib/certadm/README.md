@@ -10,4 +10,4 @@ certadm-sys = "0.0.1"
 extern crate certadm;
 ```
 
-[Documentation](https://retep998.github.io/doc/certadm/)
+[Documentation](https://retep998.github.io/doc/winapi/certadm/)

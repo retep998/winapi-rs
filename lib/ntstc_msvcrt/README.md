@@ -10,4 +10,4 @@ ntstc_msvcrt-sys = "0.0.1"
 extern crate ntstc_msvcrt;
 ```
 
-[Documentation](https://retep998.github.io/doc/ntstc_msvcrt/)
+[Documentation](https://retep998.github.io/doc/winapi/ntstc_msvcrt/)

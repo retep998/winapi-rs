@@ -10,4 +10,4 @@ msv1_0-sys = "0.0.1"
 extern crate msv1_0;
 ```
 
-[Documentation](https://retep998.github.io/doc/msv1_0/)
+[Documentation](https://retep998.github.io/doc/winapi/msv1_0/)

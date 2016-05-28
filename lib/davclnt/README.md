@@ -10,4 +10,4 @@ davclnt-sys = "0.0.1"
 extern crate davclnt;
 ```
 
-[Documentation](https://retep998.github.io/doc/davclnt/)
+[Documentation](https://retep998.github.io/doc/winapi/davclnt/)

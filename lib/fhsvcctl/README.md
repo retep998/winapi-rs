@@ -10,4 +10,4 @@ fhsvcctl-sys = "0.0.1"
 extern crate fhsvcctl;
 ```
 
-[Documentation](https://retep998.github.io/doc/fhsvcctl/)
+[Documentation](https://retep998.github.io/doc/winapi/fhsvcctl/)

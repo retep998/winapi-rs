@@ -10,4 +10,4 @@ d3d10_1-sys = "0.0.1"
 extern crate d3d10_1;
 ```
 
-[Documentation](https://retep998.github.io/doc/d3d10_1/)
+[Documentation](https://retep998.github.io/doc/winapi/d3d10_1/)

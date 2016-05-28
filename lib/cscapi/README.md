@@ -10,4 +10,4 @@ cscapi-sys = "0.0.1"
 extern crate cscapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/cscapi/)
+[Documentation](https://retep998.github.io/doc/winapi/cscapi/)

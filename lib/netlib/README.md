@@ -10,4 +10,4 @@ netlib-sys = "0.0.1"
 extern crate netlib;
 ```
 
-[Documentation](https://retep998.github.io/doc/netlib/)
+[Documentation](https://retep998.github.io/doc/winapi/netlib/)

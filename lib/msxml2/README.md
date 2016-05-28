@@ -10,4 +10,4 @@ msxml2-sys = "0.0.1"
 extern crate msxml2;
 ```
 
-[Documentation](https://retep998.github.io/doc/msxml2/)
+[Documentation](https://retep998.github.io/doc/winapi/msxml2/)

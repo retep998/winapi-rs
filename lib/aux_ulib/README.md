@@ -10,4 +10,4 @@ aux_ulib-sys = "0.0.1"
 extern crate aux_ulib;
 ```
 
-[Documentation](https://retep998.github.io/doc/aux_ulib/)
+[Documentation](https://retep998.github.io/doc/winapi/aux_ulib/)

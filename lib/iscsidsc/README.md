@@ -10,4 +10,4 @@ iscsidsc-sys = "0.0.1"
 extern crate iscsidsc;
 ```
 
-[Documentation](https://retep998.github.io/doc/iscsidsc/)
+[Documentation](https://retep998.github.io/doc/winapi/iscsidsc/)

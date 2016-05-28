@@ -10,4 +10,4 @@ windows-data-pdf-sys = "0.0.1"
 extern crate windows_data_pdf;
 ```
 
-[Documentation](https://retep998.github.io/doc/windows-data-pdf/)
+[Documentation](https://retep998.github.io/doc/winapi/windows-data-pdf/)

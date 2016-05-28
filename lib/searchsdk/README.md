@@ -10,4 +10,4 @@ searchsdk-sys = "0.0.1"
 extern crate searchsdk;
 ```
 
-[Documentation](https://retep998.github.io/doc/searchsdk/)
+[Documentation](https://retep998.github.io/doc/winapi/searchsdk/)

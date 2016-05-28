@@ -10,4 +10,4 @@ wlanui-sys = "0.0.1"
 extern crate wlanui;
 ```
 
-[Documentation](https://retep998.github.io/doc/wlanui/)
+[Documentation](https://retep998.github.io/doc/winapi/wlanui/)

@@ -10,4 +10,4 @@ mswsock-sys = "0.0.1"
 extern crate mswsock;
 ```
 
-[Documentation](https://retep998.github.io/doc/mswsock/)
+[Documentation](https://retep998.github.io/doc/winapi/mswsock/)

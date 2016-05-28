@@ -10,4 +10,4 @@ dnslib-sys = "0.0.1"
 extern crate dnslib;
 ```
 
-[Documentation](https://retep998.github.io/doc/dnslib/)
+[Documentation](https://retep998.github.io/doc/winapi/dnslib/)

@@ -10,4 +10,4 @@ mgmtapi-sys = "0.0.1"
 extern crate mgmtapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/mgmtapi/)
+[Documentation](https://retep998.github.io/doc/winapi/mgmtapi/)

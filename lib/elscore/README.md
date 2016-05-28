@@ -10,4 +10,4 @@ elscore-sys = "0.0.1"
 extern crate elscore;
 ```
 
-[Documentation](https://retep998.github.io/doc/elscore/)
+[Documentation](https://retep998.github.io/doc/winapi/elscore/)

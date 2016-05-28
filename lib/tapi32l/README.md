@@ -10,4 +10,4 @@ tapi32l-sys = "0.0.1"
 extern crate tapi32l;
 ```
 
-[Documentation](https://retep998.github.io/doc/tapi32l/)
+[Documentation](https://retep998.github.io/doc/winapi/tapi32l/)

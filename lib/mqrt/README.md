@@ -10,4 +10,4 @@ mqrt-sys = "0.0.1"
 extern crate mqrt;
 ```
 
-[Documentation](https://retep998.github.io/doc/mqrt/)
+[Documentation](https://retep998.github.io/doc/winapi/mqrt/)

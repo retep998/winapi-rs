@@ -10,4 +10,4 @@ shcore-sys = "0.0.1"
 extern crate shcore;
 ```
 
-[Documentation](https://retep998.github.io/doc/shcore/)
+[Documentation](https://retep998.github.io/doc/winapi/shcore/)

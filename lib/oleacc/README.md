@@ -10,4 +10,4 @@ oleacc-sys = "0.0.1"
 extern crate oleacc;
 ```
 
-[Documentation](https://retep998.github.io/doc/oleacc/)
+[Documentation](https://retep998.github.io/doc/winapi/oleacc/)

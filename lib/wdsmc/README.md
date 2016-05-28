@@ -10,4 +10,4 @@ wdsmc-sys = "0.0.1"
 extern crate wdsmc;
 ```
 
-[Documentation](https://retep998.github.io/doc/wdsmc/)
+[Documentation](https://retep998.github.io/doc/winapi/wdsmc/)

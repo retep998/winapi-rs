@@ -10,4 +10,4 @@ fileextd-sys = "0.0.1"
 extern crate fileextd;
 ```
 
-[Documentation](https://retep998.github.io/doc/fileextd/)
+[Documentation](https://retep998.github.io/doc/winapi/fileextd/)

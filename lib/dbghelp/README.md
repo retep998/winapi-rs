@@ -10,4 +10,4 @@ dbghelp-sys = "0.2.0"
 extern crate dbghelp;
 ```
 
-[Documentation](https://retep998.github.io/doc/dbghelp/)
+[Documentation](https://retep998.github.io/doc/winapi/dbghelp/)

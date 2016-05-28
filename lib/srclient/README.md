@@ -10,4 +10,4 @@ srclient-sys = "0.0.1"
 extern crate srclient;
 ```
 
-[Documentation](https://retep998.github.io/doc/srclient/)
+[Documentation](https://retep998.github.io/doc/winapi/srclient/)

@@ -10,4 +10,4 @@ dxva2-sys = "0.0.1"
 extern crate dxva2;
 ```
 
-[Documentation](https://retep998.github.io/doc/dxva2/)
+[Documentation](https://retep998.github.io/doc/winapi/dxva2/)

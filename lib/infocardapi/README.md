@@ -10,4 +10,4 @@ infocardapi-sys = "0.0.1"
 extern crate infocardapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/infocardapi/)
+[Documentation](https://retep998.github.io/doc/winapi/infocardapi/)

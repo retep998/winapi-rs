@@ -10,4 +10,4 @@ xaswitch-sys = "0.0.1"
 extern crate xaswitch;
 ```
 
-[Documentation](https://retep998.github.io/doc/xaswitch/)
+[Documentation](https://retep998.github.io/doc/winapi/xaswitch/)

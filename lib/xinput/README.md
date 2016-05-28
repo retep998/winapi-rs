@@ -10,4 +10,4 @@ xinput-sys = "0.2.0"
 extern crate xinput;
 ```
 
-[Documentation](https://retep998.github.io/doc/xinput/)
+[Documentation](https://retep998.github.io/doc/winapi/xinput/)

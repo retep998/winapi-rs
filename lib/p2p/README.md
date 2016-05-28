@@ -10,4 +10,4 @@ p2p-sys = "0.0.1"
 extern crate p2p;
 ```
 
-[Documentation](https://retep998.github.io/doc/p2p/)
+[Documentation](https://retep998.github.io/doc/winapi/p2p/)

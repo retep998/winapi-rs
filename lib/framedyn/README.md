@@ -10,4 +10,4 @@ framedyn-sys = "0.0.1"
 extern crate framedyn;
 ```
 
-[Documentation](https://retep998.github.io/doc/framedyn/)
+[Documentation](https://retep998.github.io/doc/winapi/framedyn/)

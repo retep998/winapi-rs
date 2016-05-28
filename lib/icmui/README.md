@@ -10,4 +10,4 @@ icmui-sys = "0.0.1"
 extern crate icmui;
 ```
 
-[Documentation](https://retep998.github.io/doc/icmui/)
+[Documentation](https://retep998.github.io/doc/winapi/icmui/)

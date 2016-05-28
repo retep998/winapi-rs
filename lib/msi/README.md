@@ -10,4 +10,4 @@ msi-sys = "0.0.1"
 extern crate msi;
 ```
 
-[Documentation](https://retep998.github.io/doc/msi/)
+[Documentation](https://retep998.github.io/doc/winapi/msi/)

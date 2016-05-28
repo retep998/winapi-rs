@@ -10,4 +10,4 @@ comctl32-sys = "0.0.1"
 extern crate comctl32;
 ```
 
-[Documentation](https://retep998.github.io/doc/comctl32/)
+[Documentation](https://retep998.github.io/doc/winapi/comctl32/)

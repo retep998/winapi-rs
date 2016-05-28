@@ -10,4 +10,4 @@ schannel-sys = "0.0.1"
 extern crate schannel;
 ```
 
-[Documentation](https://retep998.github.io/doc/schannel/)
+[Documentation](https://retep998.github.io/doc/winapi/schannel/)

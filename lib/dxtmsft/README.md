@@ -10,4 +10,4 @@ dxtmsft-sys = "0.0.1"
 extern crate dxtmsft;
 ```
 
-[Documentation](https://retep998.github.io/doc/dxtmsft/)
+[Documentation](https://retep998.github.io/doc/winapi/dxtmsft/)

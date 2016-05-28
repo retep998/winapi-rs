@@ -10,4 +10,4 @@ comdlg32-sys = "0.0.1"
 extern crate comdlg32;
 ```
 
-[Documentation](https://retep998.github.io/doc/comdlg32/)
+[Documentation](https://retep998.github.io/doc/winapi/comdlg32/)

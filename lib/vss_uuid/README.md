@@ -10,4 +10,4 @@ vss_uuid-sys = "0.0.1"
 extern crate vss_uuid;
 ```
 
-[Documentation](https://retep998.github.io/doc/vss_uuid/)
+[Documentation](https://retep998.github.io/doc/winapi/vss_uuid/)

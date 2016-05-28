@@ -10,4 +10,4 @@ d3dcsxd-sys = "0.0.1"
 extern crate d3dcsxd;
 ```
 
-[Documentation](https://retep998.github.io/doc/d3dcsxd/)
+[Documentation](https://retep998.github.io/doc/winapi/d3dcsxd/)

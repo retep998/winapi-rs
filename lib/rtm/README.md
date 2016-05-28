@@ -10,4 +10,4 @@ rtm-sys = "0.0.1"
 extern crate rtm;
 ```
 
-[Documentation](https://retep998.github.io/doc/rtm/)
+[Documentation](https://retep998.github.io/doc/winapi/rtm/)

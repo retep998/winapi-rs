@@ -10,4 +10,4 @@ ntvdm-sys = "0.0.1"
 extern crate ntvdm;
 ```
 
-[Documentation](https://retep998.github.io/doc/ntvdm/)
+[Documentation](https://retep998.github.io/doc/winapi/ntvdm/)

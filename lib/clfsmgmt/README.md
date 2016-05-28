@@ -10,4 +10,4 @@ clfsmgmt-sys = "0.0.1"
 extern crate clfsmgmt;
 ```
 
-[Documentation](https://retep998.github.io/doc/clfsmgmt/)
+[Documentation](https://retep998.github.io/doc/winapi/clfsmgmt/)

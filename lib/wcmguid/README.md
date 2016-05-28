@@ -10,4 +10,4 @@ wcmguid-sys = "0.0.1"
 extern crate wcmguid;
 ```
 
-[Documentation](https://retep998.github.io/doc/wcmguid/)
+[Documentation](https://retep998.github.io/doc/winapi/wcmguid/)

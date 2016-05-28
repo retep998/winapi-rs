@@ -10,4 +10,4 @@ advpack-sys = "0.0.1"
 extern crate advpack;
 ```
 
-[Documentation](https://retep998.github.io/doc/advpack/)
+[Documentation](https://retep998.github.io/doc/winapi/advpack/)

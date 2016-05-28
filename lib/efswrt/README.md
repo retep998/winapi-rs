@@ -10,4 +10,4 @@ efswrt-sys = "0.0.1"
 extern crate efswrt;
 ```
 
-[Documentation](https://retep998.github.io/doc/efswrt/)
+[Documentation](https://retep998.github.io/doc/winapi/efswrt/)

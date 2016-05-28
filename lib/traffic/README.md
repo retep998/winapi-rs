@@ -10,4 +10,4 @@ traffic-sys = "0.0.1"
 extern crate traffic;
 ```
 
-[Documentation](https://retep998.github.io/doc/traffic/)
+[Documentation](https://retep998.github.io/doc/winapi/traffic/)

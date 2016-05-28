@@ -10,4 +10,4 @@ dtchelp-sys = "0.0.1"
 extern crate dtchelp;
 ```
 
-[Documentation](https://retep998.github.io/doc/dtchelp/)
+[Documentation](https://retep998.github.io/doc/winapi/dtchelp/)

@@ -10,4 +10,4 @@ wlanapi-sys = "0.0.1"
 extern crate wlanapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/wlanapi/)
+[Documentation](https://retep998.github.io/doc/winapi/wlanapi/)

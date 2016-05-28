@@ -10,4 +10,4 @@ websocket-sys = "0.0.1"
 extern crate websocket;
 ```
 
-[Documentation](https://retep998.github.io/doc/websocket/)
+[Documentation](https://retep998.github.io/doc/winapi/websocket/)

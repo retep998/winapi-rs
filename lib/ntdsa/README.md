@@ -10,4 +10,4 @@ ntdsa-sys = "0.0.1"
 extern crate ntdsa;
 ```
 
-[Documentation](https://retep998.github.io/doc/ntdsa/)
+[Documentation](https://retep998.github.io/doc/winapi/ntdsa/)

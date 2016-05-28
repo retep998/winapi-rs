@@ -10,4 +10,4 @@ xapobase-sys = "0.0.1"
 extern crate xapobase;
 ```
 
-[Documentation](https://retep998.github.io/doc/xapobase/)
+[Documentation](https://retep998.github.io/doc/winapi/xapobase/)

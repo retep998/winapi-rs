@@ -10,4 +10,4 @@ d3d12-sys = "0.0.1"
 extern crate d3d12;
 ```
 
-[Documentation](https://retep998.github.io/doc/d3d12/)
+[Documentation](https://retep998.github.io/doc/winapi/d3d12/)

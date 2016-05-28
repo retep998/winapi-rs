@@ -10,4 +10,4 @@ mqoa-sys = "0.0.1"
 extern crate mqoa;
 ```
 
-[Documentation](https://retep998.github.io/doc/mqoa/)
+[Documentation](https://retep998.github.io/doc/winapi/mqoa/)

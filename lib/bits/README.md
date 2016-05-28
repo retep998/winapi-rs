@@ -10,4 +10,4 @@ bits-sys = "0.0.1"
 extern crate bits;
 ```
 
-[Documentation](https://retep998.github.io/doc/bits/)
+[Documentation](https://retep998.github.io/doc/winapi/bits/)

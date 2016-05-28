@@ -10,4 +10,4 @@ wsbapp_uuid-sys = "0.0.1"
 extern crate wsbapp_uuid;
 ```
 
-[Documentation](https://retep998.github.io/doc/wsbapp_uuid/)
+[Documentation](https://retep998.github.io/doc/winapi/wsbapp_uuid/)

@@ -10,4 +10,4 @@ slcext-sys = "0.0.1"
 extern crate slcext;
 ```
 
-[Documentation](https://retep998.github.io/doc/slcext/)
+[Documentation](https://retep998.github.io/doc/winapi/slcext/)

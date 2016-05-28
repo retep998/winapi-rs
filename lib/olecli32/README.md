@@ -10,4 +10,4 @@ olecli32-sys = "0.0.1"
 extern crate olecli32;
 ```
 
-[Documentation](https://retep998.github.io/doc/olecli32/)
+[Documentation](https://retep998.github.io/doc/winapi/olecli32/)

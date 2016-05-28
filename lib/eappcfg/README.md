@@ -10,4 +10,4 @@ eappcfg-sys = "0.0.1"
 extern crate eappcfg;
 ```
 
-[Documentation](https://retep998.github.io/doc/eappcfg/)
+[Documentation](https://retep998.github.io/doc/winapi/eappcfg/)

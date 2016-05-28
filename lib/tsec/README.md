@@ -10,4 +10,4 @@ tsec-sys = "0.0.1"
 extern crate tsec;
 ```
 
-[Documentation](https://retep998.github.io/doc/tsec/)
+[Documentation](https://retep998.github.io/doc/winapi/tsec/)

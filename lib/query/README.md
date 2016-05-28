@@ -10,4 +10,4 @@ query-sys = "0.0.1"
 extern crate query;
 ```
 
-[Documentation](https://retep998.github.io/doc/query/)
+[Documentation](https://retep998.github.io/doc/winapi/query/)

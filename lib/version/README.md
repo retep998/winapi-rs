@@ -10,4 +10,4 @@ version-sys = "0.0.1"
 extern crate version;
 ```
 
-[Documentation](https://retep998.github.io/doc/version/)
+[Documentation](https://retep998.github.io/doc/winapi/version/)

@@ -10,4 +10,4 @@ esent-sys = "0.0.1"
 extern crate esent;
 ```
 
-[Documentation](https://retep998.github.io/doc/esent/)
+[Documentation](https://retep998.github.io/doc/winapi/esent/)
