@@ -20,11 +20,10 @@ winmm-sys = "0.1"
 ```
 example.rs:
 ```Rust
-
 #[cfg(windows)] extern crate winapi;
 #[cfg(windows)] extern crate winmm;
+#[cfg(windows)]
 fn func() {
-    #[cfg(windows)]
     winmm::PlaySoundA(...);
 }
 ```
