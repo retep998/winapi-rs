@@ -24,6 +24,7 @@ example.rs:
 #[cfg(windows)] extern crate winapi;
 #[cfg(windows)] extern crate winmm;
 fn func() {
+    #[cfg(windows)]
     winmm::PlaySoundA(...);
 }
 ```
