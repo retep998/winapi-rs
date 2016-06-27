@@ -69,3 +69,32 @@ STRUCT!{struct SOLE_AUTHENTICATION_SERVICE {
     pPrincipalName: *mut ::OLECHAR,
     hr: ::HRESULT,
 }}
+
+RIDL!(
+interface IApartmentShutdown(IApartmentShutdownVtbl): IUnknown(IUnknownVtbl) {
+    fn OnUninitialize(&mut self, ui64ApartmentIdentifier: ::UINT64) -> ::VOID
+}
+);
+
+RIDL!(
+interface IMarshal(IMarshalVtbl): IUnknown(IUnknownVtbl) {
+    fn GetUnmarshalClass(
+        &mut self, riid: ::REFIID, pv: *const ::VOID, dwDestContext: ::DWORD,
+        pvDestContext: *const ::VOID, mshlflags: ::DWORD, pCid: *mut ::CLSID
+    ) -> ::HRESULT,
+    fn GetMarshalSizeMax(
+        &mut self, riid: ::REFIID, pv: *const ::VOID, dwDestContext: ::DWORD,
+        pvDestContext: *const ::VOID, mshlflags: ::DWORD, pSize: *mut ::DWORD
+    ) -> ::HRESULT,
+    fn MarshalInterface(
+        &mut self, pStm: *const ::IStream, riid: ::REFIID, pv: *const ::VOID,
+        dwDestContext: ::DWORD, pvDestContext: *const ::VOID,
+        mshlflags: ::DWORD
+    ) -> ::HRESULT,
+    fn UnmarshalInterface(
+        &mut self, pStm: *const ::IStream, riid: ::REFIID, ppv: *mut *mut ::VOID
+    ) -> ::HRESULT,
+    fn ReleaseMarshalData(&mut self, pStm: *const ::IStream) -> ::HRESULT,
+    fn DisconnectObject(&mut self, dwReserved: ::DWORD) -> ::HRESULT
+}
+);

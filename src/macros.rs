@@ -81,6 +81,7 @@ macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
         ::BCRYPT_INTERFACE_VERSION { MajorVersion: $major, MinorVersion: $minor }
     }
 }
+#[macro_export]
 macro_rules! RIDL {
     (interface $interface:ident ($vtbl:ident)
         {$(
@@ -109,22 +110,22 @@ macro_rules! RIDL {
     }) => {
         #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $vtbl {
-            pub parent: ::$pvtbl
+            pub parent: $crate::$pvtbl
         }
         #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
         impl ::std::ops::Deref for $interface {
-            type Target = ::$pinterface;
+            type Target = $crate::$pinterface;
             #[inline]
-            fn deref(&self) -> &::$pinterface {
+            fn deref(&self) -> &$crate::$pinterface {
                 unsafe { ::std::mem::transmute(self) }
             }
         }
         impl ::std::ops::DerefMut for $interface {
             #[inline]
-            fn deref_mut(&mut self) -> &mut ::$pinterface {
+            fn deref_mut(&mut self) -> &mut $crate::$pinterface {
                 unsafe { ::std::mem::transmute(self) }
             }
         }
@@ -136,7 +137,7 @@ macro_rules! RIDL {
     ) => {
         #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $vtbl {
-            pub parent: ::$pvtbl
+            pub parent: $crate::$pvtbl
             $(,pub $method: unsafe extern "system" fn(
                 This: *mut $interface
                 $(,$p: $t)*
@@ -153,15 +154,15 @@ macro_rules! RIDL {
             })+
         }
         impl ::std::ops::Deref for $interface {
-            type Target = ::$pinterface;
+            type Target = $crate::$pinterface;
             #[inline]
-            fn deref(&self) -> &::$pinterface {
+            fn deref(&self) -> &$crate::$pinterface {
                 unsafe { ::std::mem::transmute(self) }
             }
         }
         impl ::std::ops::DerefMut for $interface {
             #[inline]
-            fn deref_mut(&mut self) -> &mut ::$pinterface {
+            fn deref_mut(&mut self) -> &mut $crate::$pinterface {
                 unsafe { ::std::mem::transmute(self) }
             }
         }
@@ -200,6 +201,7 @@ macro_rules! BITFIELD {
         )+}
     }
 }
+#[macro_export]
 macro_rules! ENUM {
     {enum $name:ident { $($variant:ident = $value:expr,)+ }} => {
         #[repr(C)] #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]

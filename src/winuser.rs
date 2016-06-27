@@ -2111,12 +2111,15 @@ STRUCT!{struct HELPINFO {
     MousePos: ::POINT,
 }}
 pub type LPHELPINFO = *mut HELPINFO;
+#[allow(trivial_numeric_casts)]
 pub fn GET_WHEEL_DELTA_WPARAM(wParam: ::WPARAM) -> ::c_short {
     ::HIWORD(wParam as ::DWORD) as ::c_short
 }
+#[allow(trivial_numeric_casts)]
 pub fn GET_KEYSTATE_WPARAM(wparam: ::WPARAM) -> ::c_int {
     ::LOWORD(wparam as ::DWORD) as ::c_short as ::c_int
 }
+#[allow(trivial_numeric_casts)]
 pub fn GET_XBUTTON_WPARAM(wparam: ::WPARAM) -> ::c_int {
     ::HIWORD(wparam as ::DWORD) as ::c_int
 }
