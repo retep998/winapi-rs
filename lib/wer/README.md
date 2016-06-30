@@ -10,4 +10,4 @@ wer-sys = "0.0.1"
 extern crate wer;
 ```
 
-[Documentation](https://retep998.github.io/doc/wer/)
+[Documentation](https://retep998.github.io/doc/winapi/wer/)

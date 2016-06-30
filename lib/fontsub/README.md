@@ -10,4 +10,4 @@ fontsub-sys = "0.0.1"
 extern crate fontsub;
 ```
 
-[Documentation](https://retep998.github.io/doc/fontsub/)
+[Documentation](https://retep998.github.io/doc/winapi/fontsub/)

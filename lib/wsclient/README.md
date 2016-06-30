@@ -10,4 +10,4 @@ wsclient-sys = "0.0.1"
 extern crate wsclient;
 ```
 
-[Documentation](https://retep998.github.io/doc/wsclient/)
+[Documentation](https://retep998.github.io/doc/winapi/wsclient/)

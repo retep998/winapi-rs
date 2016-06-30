@@ -10,4 +10,4 @@ odbc32-sys = "0.0.1"
 extern crate odbc32;
 ```
 
-[Documentation](https://retep998.github.io/doc/odbc32/)
+[Documentation](https://retep998.github.io/doc/winapi/odbc32/)

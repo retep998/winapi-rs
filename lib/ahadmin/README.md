@@ -10,4 +10,4 @@ ahadmin-sys = "0.0.1"
 extern crate ahadmin;
 ```
 
-[Documentation](https://retep998.github.io/doc/ahadmin/)
+[Documentation](https://retep998.github.io/doc/winapi/ahadmin/)

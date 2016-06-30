@@ -10,4 +10,4 @@ ntfrsapi-sys = "0.0.1"
 extern crate ntfrsapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/ntfrsapi/)
+[Documentation](https://retep998.github.io/doc/winapi/ntfrsapi/)

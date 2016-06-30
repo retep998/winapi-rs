@@ -10,4 +10,4 @@ ninput-sys = "0.0.1"
 extern crate ninput;
 ```
 
-[Documentation](https://retep998.github.io/doc/ninput/)
+[Documentation](https://retep998.github.io/doc/winapi/ninput/)

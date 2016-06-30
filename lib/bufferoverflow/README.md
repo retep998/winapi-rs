@@ -10,4 +10,4 @@ bufferoverflow-sys = "0.0.1"
 extern crate bufferoverflow;
 ```
 
-[Documentation](https://retep998.github.io/doc/bufferoverflow/)
+[Documentation](https://retep998.github.io/doc/winapi/bufferoverflow/)

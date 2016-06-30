@@ -10,4 +10,4 @@ winstrm-sys = "0.0.1"
 extern crate winstrm;
 ```
 
-[Documentation](https://retep998.github.io/doc/winstrm/)
+[Documentation](https://retep998.github.io/doc/winapi/winstrm/)

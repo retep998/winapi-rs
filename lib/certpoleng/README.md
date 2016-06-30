@@ -10,4 +10,4 @@ certpoleng-sys = "0.0.1"
 extern crate certpoleng;
 ```
 
-[Documentation](https://retep998.github.io/doc/certpoleng/)
+[Documentation](https://retep998.github.io/doc/winapi/certpoleng/)

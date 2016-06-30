@@ -10,4 +10,4 @@ windowssideshowguids-sys = "0.0.1"
 extern crate windowssideshowguids;
 ```
 
-[Documentation](https://retep998.github.io/doc/windowssideshowguids/)
+[Documentation](https://retep998.github.io/doc/winapi/windowssideshowguids/)

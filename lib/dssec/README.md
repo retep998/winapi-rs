@@ -10,4 +10,4 @@ dssec-sys = "0.0.1"
 extern crate dssec;
 ```
 
-[Documentation](https://retep998.github.io/doc/dssec/)
+[Documentation](https://retep998.github.io/doc/winapi/dssec/)

@@ -10,4 +10,4 @@ wsock32-sys = "0.0.1"
 extern crate wsock32;
 ```
 
-[Documentation](https://retep998.github.io/doc/wsock32/)
+[Documentation](https://retep998.github.io/doc/winapi/wsock32/)

@@ -10,4 +10,4 @@ cscdll-sys = "0.0.1"
 extern crate cscdll;
 ```
 
-[Documentation](https://retep998.github.io/doc/cscdll/)
+[Documentation](https://retep998.github.io/doc/winapi/cscdll/)

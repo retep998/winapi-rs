@@ -10,4 +10,4 @@ dwrite-sys = "0.2.0"
 extern crate dwrite;
 ```
 
-[Documentation](https://retep998.github.io/doc/dwrite/)
+[Documentation](https://retep998.github.io/doc/winapi/dwrite/)

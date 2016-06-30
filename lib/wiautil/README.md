@@ -10,4 +10,4 @@ wiautil-sys = "0.0.1"
 extern crate wiautil;
 ```
 
-[Documentation](https://retep998.github.io/doc/wiautil/)
+[Documentation](https://retep998.github.io/doc/winapi/wiautil/)

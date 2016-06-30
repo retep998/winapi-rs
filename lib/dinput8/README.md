@@ -10,4 +10,4 @@ dinput8-sys = "0.0.1"
 extern crate dinput8;
 ```
 
-[Documentation](https://retep998.github.io/doc/dinput8/)
+[Documentation](https://retep998.github.io/doc/winapi/dinput8/)

@@ -10,4 +10,4 @@ compstui-sys = "0.0.1"
 extern crate compstui;
 ```
 
-[Documentation](https://retep998.github.io/doc/compstui/)
+[Documentation](https://retep998.github.io/doc/winapi/compstui/)

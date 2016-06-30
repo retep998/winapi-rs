@@ -10,4 +10,4 @@ olepro32-sys = "0.0.1"
 extern crate olepro32;
 ```
 
-[Documentation](https://retep998.github.io/doc/olepro32/)
+[Documentation](https://retep998.github.io/doc/winapi/olepro32/)

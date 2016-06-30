@@ -10,4 +10,4 @@ certca-sys = "0.0.1"
 extern crate certca;
 ```
 
-[Documentation](https://retep998.github.io/doc/certca/)
+[Documentation](https://retep998.github.io/doc/winapi/certca/)

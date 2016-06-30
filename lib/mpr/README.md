@@ -10,4 +10,4 @@ mpr-sys = "0.1.0"
 extern crate mpr;
 ```
 
-[Documentation](https://retep998.github.io/doc/mpr/)
+[Documentation](https://retep998.github.io/doc/winapi/mpr/)

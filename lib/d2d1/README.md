@@ -10,4 +10,4 @@ d2d1-sys = "0.0.1"
 extern crate d2d1;
 ```
 
-[Documentation](https://retep998.github.io/doc/d2d1/)
+[Documentation](https://retep998.github.io/doc/winapi/d2d1/)

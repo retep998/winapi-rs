@@ -10,4 +10,4 @@ msdasc-sys = "0.0.1"
 extern crate msdasc;
 ```
 
-[Documentation](https://retep998.github.io/doc/msdasc/)
+[Documentation](https://retep998.github.io/doc/winapi/msdasc/)

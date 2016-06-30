@@ -10,4 +10,4 @@ appnotify-sys = "0.0.1"
 extern crate appnotify;
 ```
 
-[Documentation](https://retep998.github.io/doc/appnotify/)
+[Documentation](https://retep998.github.io/doc/winapi/appnotify/)

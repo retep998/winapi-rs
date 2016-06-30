@@ -10,4 +10,4 @@ authz-sys = "0.0.1"
 extern crate authz;
 ```
 
-[Documentation](https://retep998.github.io/doc/authz/)
+[Documentation](https://retep998.github.io/doc/winapi/authz/)

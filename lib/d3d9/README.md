@@ -10,4 +10,4 @@ d3d9-sys = "0.1.0"
 extern crate d3d9;
 ```
 
-[Documentation](https://retep998.github.io/doc/d3d9/)
+[Documentation](https://retep998.github.io/doc/winapi/d3d9/)

@@ -10,4 +10,4 @@ uiautomationcore-sys = "0.0.1"
 extern crate uiautomationcore;
 ```
 
-[Documentation](https://retep998.github.io/doc/uiautomationcore/)
+[Documentation](https://retep998.github.io/doc/winapi/uiautomationcore/)

@@ -10,4 +10,4 @@ synchronization-sys = "0.0.1"
 extern crate synchronization;
 ```
 
-[Documentation](https://retep998.github.io/doc/synchronization/)
+[Documentation](https://retep998.github.io/doc/winapi/synchronization/)

@@ -10,4 +10,4 @@ certcli-sys = "0.0.1"
 extern crate certcli;
 ```
 
-[Documentation](https://retep998.github.io/doc/certcli/)
+[Documentation](https://retep998.github.io/doc/winapi/certcli/)

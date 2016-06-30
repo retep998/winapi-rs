@@ -10,4 +10,4 @@ rpcns4-sys = "0.0.1"
 extern crate rpcns4;
 ```
 
-[Documentation](https://retep998.github.io/doc/rpcns4/)
+[Documentation](https://retep998.github.io/doc/winapi/rpcns4/)

@@ -10,4 +10,4 @@ msports-sys = "0.0.1"
 extern crate msports;
 ```
 
-[Documentation](https://retep998.github.io/doc/msports/)
+[Documentation](https://retep998.github.io/doc/winapi/msports/)

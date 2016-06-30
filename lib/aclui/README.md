@@ -10,4 +10,4 @@ aclui-sys = "0.0.1"
 extern crate aclui;
 ```
 
-[Documentation](https://retep998.github.io/doc/aclui/)
+[Documentation](https://retep998.github.io/doc/winapi/aclui/)

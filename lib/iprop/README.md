@@ -10,4 +10,4 @@ iprop-sys = "0.0.1"
 extern crate iprop;
 ```
 
-[Documentation](https://retep998.github.io/doc/iprop/)
+[Documentation](https://retep998.github.io/doc/winapi/iprop/)

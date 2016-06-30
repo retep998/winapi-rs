@@ -10,4 +10,4 @@ shdocvw-sys = "0.0.1"
 extern crate shdocvw;
 ```
 
-[Documentation](https://retep998.github.io/doc/shdocvw/)
+[Documentation](https://retep998.github.io/doc/winapi/shdocvw/)

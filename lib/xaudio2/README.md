@@ -10,4 +10,4 @@ xaudio2-sys = "0.0.1"
 extern crate xaudio2;
 ```
 
-[Documentation](https://retep998.github.io/doc/xaudio2/)
+[Documentation](https://retep998.github.io/doc/winapi/xaudio2/)

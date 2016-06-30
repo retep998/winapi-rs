@@ -10,4 +10,4 @@ winmm-sys = "0.2.0"
 extern crate winmm;
 ```
 
-[Documentation](https://retep998.github.io/doc/winmm/)
+[Documentation](https://retep998.github.io/doc/winapi/winmm/)

@@ -10,4 +10,4 @@ audiobaseprocessingobject-sys = "0.0.1"
 extern crate audiobaseprocessingobject;
 ```
 
-[Documentation](https://retep998.github.io/doc/audiobaseprocessingobject/)
+[Documentation](https://retep998.github.io/doc/winapi/audiobaseprocessingobject/)

@@ -10,4 +10,4 @@ opengl32-sys = "0.1.0"
 extern crate opengl32;
 ```
 
-[Documentation](https://retep998.github.io/doc/opengl32/)
+[Documentation](https://retep998.github.io/doc/winapi/opengl32/)

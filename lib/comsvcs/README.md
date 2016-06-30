@@ -10,4 +10,4 @@ comsvcs-sys = "0.0.1"
 extern crate comsvcs;
 ```
 
-[Documentation](https://retep998.github.io/doc/comsvcs/)
+[Documentation](https://retep998.github.io/doc/winapi/comsvcs/)

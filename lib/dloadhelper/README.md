@@ -10,4 +10,4 @@ dloadhelper-sys = "0.0.1"
 extern crate dloadhelper;
 ```
 
-[Documentation](https://retep998.github.io/doc/dloadhelper/)
+[Documentation](https://retep998.github.io/doc/winapi/dloadhelper/)

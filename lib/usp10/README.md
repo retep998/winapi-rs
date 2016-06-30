@@ -10,4 +10,4 @@ usp10-sys = "0.0.1"
 extern crate usp10;
 ```
 
-[Documentation](https://retep998.github.io/doc/usp10/)
+[Documentation](https://retep998.github.io/doc/winapi/usp10/)

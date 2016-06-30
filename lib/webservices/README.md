@@ -10,4 +10,4 @@ webservices-sys = "0.0.1"
 extern crate webservices;
 ```
 
-[Documentation](https://retep998.github.io/doc/webservices/)
+[Documentation](https://retep998.github.io/doc/winapi/webservices/)

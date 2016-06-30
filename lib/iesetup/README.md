@@ -10,4 +10,4 @@ iesetup-sys = "0.0.1"
 extern crate iesetup;
 ```
 
-[Documentation](https://retep998.github.io/doc/iesetup/)
+[Documentation](https://retep998.github.io/doc/winapi/iesetup/)

@@ -10,4 +10,4 @@ evr-sys = "0.0.1"
 extern crate evr;
 ```
 
-[Documentation](https://retep998.github.io/doc/evr/)
+[Documentation](https://retep998.github.io/doc/winapi/evr/)

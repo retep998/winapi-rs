@@ -10,4 +10,4 @@ ntstc_libcmt-sys = "0.0.1"
 extern crate ntstc_libcmt;
 ```
 
-[Documentation](https://retep998.github.io/doc/ntstc_libcmt/)
+[Documentation](https://retep998.github.io/doc/winapi/ntstc_libcmt/)

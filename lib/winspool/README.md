@@ -10,4 +10,4 @@ winspool-sys = "0.0.1"
 extern crate winspool;
 ```
 
-[Documentation](https://retep998.github.io/doc/winspool/)
+[Documentation](https://retep998.github.io/doc/winapi/winspool/)

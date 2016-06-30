@@ -10,4 +10,4 @@ sfc-sys = "0.0.1"
 extern crate sfc;
 ```
 
-[Documentation](https://retep998.github.io/doc/sfc/)
+[Documentation](https://retep998.github.io/doc/winapi/sfc/)

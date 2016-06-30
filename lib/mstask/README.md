@@ -10,4 +10,4 @@ mstask-sys = "0.0.1"
 extern crate mstask;
 ```
 
-[Documentation](https://retep998.github.io/doc/mstask/)
+[Documentation](https://retep998.github.io/doc/winapi/mstask/)

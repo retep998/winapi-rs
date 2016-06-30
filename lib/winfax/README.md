@@ -10,4 +10,4 @@ winfax-sys = "0.0.1"
 extern crate winfax;
 ```
 
-[Documentation](https://retep998.github.io/doc/winfax/)
+[Documentation](https://retep998.github.io/doc/winapi/winfax/)

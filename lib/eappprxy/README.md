@@ -10,4 +10,4 @@ eappprxy-sys = "0.0.1"
 extern crate eappprxy;
 ```
 
-[Documentation](https://retep998.github.io/doc/eappprxy/)
+[Documentation](https://retep998.github.io/doc/winapi/eappprxy/)

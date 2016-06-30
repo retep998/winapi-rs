@@ -10,4 +10,4 @@ ksuser-sys = "0.0.1"
 extern crate ksuser;
 ```
 
-[Documentation](https://retep998.github.io/doc/ksuser/)
+[Documentation](https://retep998.github.io/doc/winapi/ksuser/)

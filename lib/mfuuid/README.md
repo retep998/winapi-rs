@@ -10,4 +10,4 @@ mfuuid-sys = "0.0.1"
 extern crate mfuuid;
 ```
 
-[Documentation](https://retep998.github.io/doc/mfuuid/)
+[Documentation](https://retep998.github.io/doc/winapi/mfuuid/)

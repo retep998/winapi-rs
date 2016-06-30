@@ -10,4 +10,4 @@ dxtrans-sys = "0.0.1"
 extern crate dxtrans;
 ```
 
-[Documentation](https://retep998.github.io/doc/dxtrans/)
+[Documentation](https://retep998.github.io/doc/winapi/dxtrans/)

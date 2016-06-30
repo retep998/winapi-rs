@@ -10,4 +10,4 @@ appmgmts-sys = "0.0.1"
 extern crate appmgmts;
 ```
 
-[Documentation](https://retep998.github.io/doc/appmgmts/)
+[Documentation](https://retep998.github.io/doc/winapi/appmgmts/)

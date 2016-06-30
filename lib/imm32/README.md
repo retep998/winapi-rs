@@ -10,4 +10,4 @@ imm32-sys = "0.0.1"
 extern crate imm32;
 ```
 
-[Documentation](https://retep998.github.io/doc/imm32/)
+[Documentation](https://retep998.github.io/doc/winapi/imm32/)

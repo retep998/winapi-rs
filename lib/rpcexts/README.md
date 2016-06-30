@@ -10,4 +10,4 @@ rpcexts-sys = "0.0.1"
 extern crate rpcexts;
 ```
 
-[Documentation](https://retep998.github.io/doc/rpcexts/)
+[Documentation](https://retep998.github.io/doc/winapi/rpcexts/)

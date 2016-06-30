@@ -10,4 +10,4 @@ alink-sys = "0.0.1"
 extern crate alink;
 ```
 
-[Documentation](https://retep998.github.io/doc/alink/)
+[Documentation](https://retep998.github.io/doc/winapi/alink/)

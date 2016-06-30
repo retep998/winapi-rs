@@ -10,4 +10,4 @@ patchwiz-sys = "0.0.1"
 extern crate patchwiz;
 ```
 
-[Documentation](https://retep998.github.io/doc/patchwiz/)
+[Documentation](https://retep998.github.io/doc/winapi/patchwiz/)

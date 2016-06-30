@@ -10,4 +10,4 @@ d3dcompiler-sys = "0.0.1"
 extern crate d3dcompiler;
 ```
 
-[Documentation](https://retep998.github.io/doc/d3dcompiler/)
+[Documentation](https://retep998.github.io/doc/winapi/d3dcompiler/)

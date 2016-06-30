@@ -10,4 +10,4 @@ msxml6-sys = "0.0.1"
 extern crate msxml6;
 ```
 
-[Documentation](https://retep998.github.io/doc/msxml6/)
+[Documentation](https://retep998.github.io/doc/winapi/msxml6/)

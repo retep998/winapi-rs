@@ -10,4 +10,4 @@ ncrypt-sys = "0.0.1"
 extern crate ncrypt;
 ```
 
-[Documentation](https://retep998.github.io/doc/ncrypt/)
+[Documentation](https://retep998.github.io/doc/winapi/ncrypt/)

@@ -10,4 +10,4 @@ spoolss-sys = "0.0.1"
 extern crate spoolss;
 ```
 
-[Documentation](https://retep998.github.io/doc/spoolss/)
+[Documentation](https://retep998.github.io/doc/winapi/spoolss/)

@@ -10,4 +10,4 @@ sti-sys = "0.0.1"
 extern crate sti;
 ```
 
-[Documentation](https://retep998.github.io/doc/sti/)
+[Documentation](https://retep998.github.io/doc/winapi/sti/)

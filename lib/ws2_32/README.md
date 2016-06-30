@@ -10,4 +10,4 @@ ws2_32-sys = "0.2.0"
 extern crate ws2_32;
 ```
 
-[Documentation](https://retep998.github.io/doc/ws2_32/)
+[Documentation](https://retep998.github.io/doc/winapi/ws2_32/)

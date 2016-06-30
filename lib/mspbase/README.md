@@ -10,4 +10,4 @@ mspbase-sys = "0.0.1"
 extern crate mspbase;
 ```
 
-[Documentation](https://retep998.github.io/doc/mspbase/)
+[Documentation](https://retep998.github.io/doc/winapi/mspbase/)

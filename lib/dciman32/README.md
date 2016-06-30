@@ -10,4 +10,4 @@ dciman32-sys = "0.0.1"
 extern crate dciman32;
 ```
 
-[Documentation](https://retep998.github.io/doc/dciman32/)
+[Documentation](https://retep998.github.io/doc/winapi/dciman32/)

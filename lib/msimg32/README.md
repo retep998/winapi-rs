@@ -10,4 +10,4 @@ msimg32-sys = "0.0.1"
 extern crate msimg32;
 ```
 
-[Documentation](https://retep998.github.io/doc/msimg32/)
+[Documentation](https://retep998.github.io/doc/winapi/msimg32/)

@@ -10,4 +10,4 @@ advapi32-sys = "0.1.2"
 extern crate advapi32;
 ```
 
-[Documentation](https://retep998.github.io/doc/advapi32/)
+[Documentation](https://retep998.github.io/doc/winapi/advapi32/)

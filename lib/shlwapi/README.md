@@ -10,4 +10,4 @@ shlwapi-sys = "0.0.1"
 extern crate shlwapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/shlwapi/)
+[Documentation](https://retep998.github.io/doc/winapi/shlwapi/)

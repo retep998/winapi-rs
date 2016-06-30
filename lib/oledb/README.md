@@ -10,4 +10,4 @@ oledb-sys = "0.0.1"
 extern crate oledb;
 ```
 
-[Documentation](https://retep998.github.io/doc/oledb/)
+[Documentation](https://retep998.github.io/doc/winapi/oledb/)

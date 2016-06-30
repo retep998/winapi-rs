@@ -10,4 +10,4 @@ samlib-sys = "0.0.1"
 extern crate samlib;
 ```
 
-[Documentation](https://retep998.github.io/doc/samlib/)
+[Documentation](https://retep998.github.io/doc/winapi/samlib/)

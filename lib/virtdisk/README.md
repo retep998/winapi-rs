@@ -10,4 +10,4 @@ virtdisk-sys = "0.0.1"
 extern crate virtdisk;
 ```
 
-[Documentation](https://retep998.github.io/doc/virtdisk/)
+[Documentation](https://retep998.github.io/doc/winapi/virtdisk/)

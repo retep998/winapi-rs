@@ -10,4 +10,4 @@ t2embed-sys = "0.0.1"
 extern crate t2embed;
 ```
 
-[Documentation](https://retep998.github.io/doc/t2embed/)
+[Documentation](https://retep998.github.io/doc/winapi/t2embed/)

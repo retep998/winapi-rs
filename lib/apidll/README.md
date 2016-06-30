@@ -10,4 +10,4 @@ apidll-sys = "0.0.1"
 extern crate apidll;
 ```
 
-[Documentation](https://retep998.github.io/doc/apidll/)
+[Documentation](https://retep998.github.io/doc/winapi/apidll/)

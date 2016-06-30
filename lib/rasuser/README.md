@@ -10,4 +10,4 @@ rasuser-sys = "0.0.1"
 extern crate rasuser;
 ```
 
-[Documentation](https://retep998.github.io/doc/rasuser/)
+[Documentation](https://retep998.github.io/doc/winapi/rasuser/)

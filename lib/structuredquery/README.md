@@ -10,4 +10,4 @@ structuredquery-sys = "0.0.1"
 extern crate structuredquery;
 ```
 
-[Documentation](https://retep998.github.io/doc/structuredquery/)
+[Documentation](https://retep998.github.io/doc/winapi/structuredquery/)

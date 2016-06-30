@@ -10,4 +10,4 @@ urlmon-sys = "0.0.1"
 extern crate urlmon;
 ```
 
-[Documentation](https://retep998.github.io/doc/urlmon/)
+[Documentation](https://retep998.github.io/doc/winapi/urlmon/)

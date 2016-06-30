@@ -10,4 +10,4 @@ netapi32-sys = "0.0.1"
 extern crate netapi32;
 ```
 
-[Documentation](https://retep998.github.io/doc/netapi32/)
+[Documentation](https://retep998.github.io/doc/winapi/netapi32/)

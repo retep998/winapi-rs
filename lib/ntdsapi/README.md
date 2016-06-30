@@ -10,4 +10,4 @@ ntdsapi-sys = "0.0.1"
 extern crate ntdsapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/ntdsapi/)
+[Documentation](https://retep998.github.io/doc/winapi/ntdsapi/)

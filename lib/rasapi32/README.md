@@ -10,4 +10,4 @@ rasapi32-sys = "0.0.1"
 extern crate rasapi32;
 ```
 
-[Documentation](https://retep998.github.io/doc/rasapi32/)
+[Documentation](https://retep998.github.io/doc/winapi/rasapi32/)

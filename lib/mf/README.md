@@ -10,4 +10,4 @@ mf-sys = "0.0.1"
 extern crate mf;
 ```
 
-[Documentation](https://retep998.github.io/doc/mf/)
+[Documentation](https://retep998.github.io/doc/winapi/mf/)

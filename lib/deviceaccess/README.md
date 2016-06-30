@@ -10,4 +10,4 @@ deviceaccess-sys = "0.0.1"
 extern crate deviceaccess;
 ```
 
-[Documentation](https://retep998.github.io/doc/deviceaccess/)
+[Documentation](https://retep998.github.io/doc/winapi/deviceaccess/)

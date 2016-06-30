@@ -10,4 +10,4 @@ uxtheme-sys = "0.0.1"
 extern crate uxtheme;
 ```
 
-[Documentation](https://retep998.github.io/doc/uxtheme/)
+[Documentation](https://retep998.github.io/doc/winapi/uxtheme/)

@@ -10,4 +10,4 @@ mf_vista-sys = "0.0.1"
 extern crate mf_vista;
 ```
 
-[Documentation](https://retep998.github.io/doc/mf_vista/)
+[Documentation](https://retep998.github.io/doc/winapi/mf_vista/)

@@ -10,4 +10,4 @@ basesrv-sys = "0.0.1"
 extern crate basesrv;
 ```
 
-[Documentation](https://retep998.github.io/doc/basesrv/)
+[Documentation](https://retep998.github.io/doc/winapi/basesrv/)

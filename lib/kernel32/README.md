@@ -10,4 +10,4 @@ kernel32-sys = "0.2.1"
 extern crate kernel32;
 ```
 
-[Documentation](https://retep998.github.io/doc/kernel32/)
+[Documentation](https://retep998.github.io/doc/winapi/kernel32/)

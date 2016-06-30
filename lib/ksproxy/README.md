@@ -10,4 +10,4 @@ ksproxy-sys = "0.0.1"
 extern crate ksproxy;
 ```
 
-[Documentation](https://retep998.github.io/doc/ksproxy/)
+[Documentation](https://retep998.github.io/doc/winapi/ksproxy/)

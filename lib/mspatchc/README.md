@@ -10,4 +10,4 @@ mspatchc-sys = "0.0.1"
 extern crate mspatchc;
 ```
 
-[Documentation](https://retep998.github.io/doc/mspatchc/)
+[Documentation](https://retep998.github.io/doc/winapi/mspatchc/)

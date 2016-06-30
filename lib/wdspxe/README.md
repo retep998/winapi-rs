@@ -10,4 +10,4 @@ wdspxe-sys = "0.0.1"
 extern crate wdspxe;
 ```
 
-[Documentation](https://retep998.github.io/doc/wdspxe/)
+[Documentation](https://retep998.github.io/doc/winapi/wdspxe/)

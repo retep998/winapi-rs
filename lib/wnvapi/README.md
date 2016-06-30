@@ -10,4 +10,4 @@ wnvapi-sys = "0.0.1"
 extern crate wnvapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/wnvapi/)
+[Documentation](https://retep998.github.io/doc/winapi/wnvapi/)

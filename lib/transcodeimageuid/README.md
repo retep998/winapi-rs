@@ -10,4 +10,4 @@ transcodeimageuid-sys = "0.0.1"
 extern crate transcodeimageuid;
 ```
 
-[Documentation](https://retep998.github.io/doc/transcodeimageuid/)
+[Documentation](https://retep998.github.io/doc/winapi/transcodeimageuid/)

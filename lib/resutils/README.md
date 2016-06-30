@@ -10,4 +10,4 @@ resutils-sys = "0.0.1"
 extern crate resutils;
 ```
 
-[Documentation](https://retep998.github.io/doc/resutils/)
+[Documentation](https://retep998.github.io/doc/winapi/resutils/)

@@ -10,4 +10,4 @@ imgutil-sys = "0.0.1"
 extern crate imgutil;
 ```
 
-[Documentation](https://retep998.github.io/doc/imgutil/)
+[Documentation](https://retep998.github.io/doc/winapi/imgutil/)

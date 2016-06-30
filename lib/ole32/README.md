@@ -10,4 +10,4 @@ ole32-sys = "0.2.0"
 extern crate ole32;
 ```
 
-[Documentation](https://retep998.github.io/doc/ole32/)
+[Documentation](https://retep998.github.io/doc/winapi/ole32/)

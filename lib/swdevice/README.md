@@ -10,4 +10,4 @@ swdevice-sys = "0.0.1"
 extern crate swdevice;
 ```
 
-[Documentation](https://retep998.github.io/doc/swdevice/)
+[Documentation](https://retep998.github.io/doc/winapi/swdevice/)

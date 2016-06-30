@@ -10,4 +10,4 @@ wiaservc-sys = "0.0.1"
 extern crate wiaservc;
 ```
 
-[Documentation](https://retep998.github.io/doc/wiaservc/)
+[Documentation](https://retep998.github.io/doc/winapi/wiaservc/)

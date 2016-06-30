@@ -10,4 +10,4 @@ secur32-sys = "0.2.0"
 extern crate secur32;
 ```
 
-[Documentation](https://retep998.github.io/doc/secur32/)
+[Documentation](https://retep998.github.io/doc/winapi/secur32/)

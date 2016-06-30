@@ -10,4 +10,4 @@ sporder-sys = "0.0.1"
 extern crate sporder;
 ```
 
-[Documentation](https://retep998.github.io/doc/sporder/)
+[Documentation](https://retep998.github.io/doc/winapi/sporder/)

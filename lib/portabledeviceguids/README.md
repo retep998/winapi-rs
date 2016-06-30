@@ -10,4 +10,4 @@ portabledeviceguids-sys = "0.0.1"
 extern crate portabledeviceguids;
 ```
 
-[Documentation](https://retep998.github.io/doc/portabledeviceguids/)
+[Documentation](https://retep998.github.io/doc/winapi/portabledeviceguids/)

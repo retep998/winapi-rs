@@ -10,4 +10,4 @@ crypt32-sys = "0.2.0"
 extern crate crypt32;
 ```
 
-[Documentation](https://retep998.github.io/doc/crypt32/)
+[Documentation](https://retep998.github.io/doc/winapi/crypt32/)

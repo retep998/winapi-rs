@@ -10,4 +10,4 @@ muiload-sys = "0.0.1"
 extern crate muiload;
 ```
 
-[Documentation](https://retep998.github.io/doc/muiload/)
+[Documentation](https://retep998.github.io/doc/winapi/muiload/)

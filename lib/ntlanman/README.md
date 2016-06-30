@@ -10,4 +10,4 @@ ntlanman-sys = "0.0.1"
 extern crate ntlanman;
 ```
 
-[Documentation](https://retep998.github.io/doc/ntlanman/)
+[Documentation](https://retep998.github.io/doc/winapi/ntlanman/)

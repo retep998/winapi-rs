@@ -10,4 +10,4 @@ ntmarta-sys = "0.0.1"
 extern crate ntmarta;
 ```
 
-[Documentation](https://retep998.github.io/doc/ntmarta/)
+[Documentation](https://retep998.github.io/doc/winapi/ntmarta/)

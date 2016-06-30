@@ -10,4 +10,4 @@ mfplay-sys = "0.0.1"
 extern crate mfplay;
 ```
 
-[Documentation](https://retep998.github.io/doc/mfplay/)
+[Documentation](https://retep998.github.io/doc/winapi/mfplay/)

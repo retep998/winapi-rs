@@ -10,4 +10,4 @@ nt-sys = "0.0.1"
 extern crate nt;
 ```
 
-[Documentation](https://retep998.github.io/doc/nt/)
+[Documentation](https://retep998.github.io/doc/winapi/nt/)

@@ -10,4 +10,4 @@ dnsrpc-sys = "0.0.1"
 extern crate dnsrpc;
 ```
 
-[Documentation](https://retep998.github.io/doc/dnsrpc/)
+[Documentation](https://retep998.github.io/doc/winapi/dnsrpc/)

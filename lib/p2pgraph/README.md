@@ -10,4 +10,4 @@ p2pgraph-sys = "0.0.1"
 extern crate p2pgraph;
 ```
 
-[Documentation](https://retep998.github.io/doc/p2pgraph/)
+[Documentation](https://retep998.github.io/doc/winapi/p2pgraph/)

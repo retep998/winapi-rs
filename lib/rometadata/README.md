@@ -10,4 +10,4 @@ rometadata-sys = "0.0.1"
 extern crate rometadata;
 ```
 
-[Documentation](https://retep998.github.io/doc/rometadata/)
+[Documentation](https://retep998.github.io/doc/winapi/rometadata/)

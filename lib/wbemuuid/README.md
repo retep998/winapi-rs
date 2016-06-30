@@ -10,4 +10,4 @@ wbemuuid-sys = "0.0.1"
 extern crate wbemuuid;
 ```
 
-[Documentation](https://retep998.github.io/doc/wbemuuid/)
+[Documentation](https://retep998.github.io/doc/winapi/wbemuuid/)

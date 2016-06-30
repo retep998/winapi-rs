@@ -10,4 +10,4 @@ appmgr-sys = "0.0.1"
 extern crate appmgr;
 ```
 
-[Documentation](https://retep998.github.io/doc/appmgr/)
+[Documentation](https://retep998.github.io/doc/winapi/appmgr/)

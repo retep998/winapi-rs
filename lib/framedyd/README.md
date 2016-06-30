@@ -10,4 +10,4 @@ framedyd-sys = "0.0.1"
 extern crate framedyd;
 ```
 
-[Documentation](https://retep998.github.io/doc/framedyd/)
+[Documentation](https://retep998.github.io/doc/winapi/framedyd/)

@@ -10,4 +10,4 @@ pathcch-sys = "0.0.1"
 extern crate pathcch;
 ```
 
-[Documentation](https://retep998.github.io/doc/pathcch/)
+[Documentation](https://retep998.github.io/doc/winapi/pathcch/)

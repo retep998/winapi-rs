@@ -10,4 +10,4 @@ int64-sys = "0.0.1"
 extern crate int64;
 ```
 
-[Documentation](https://retep998.github.io/doc/int64/)
+[Documentation](https://retep998.github.io/doc/winapi/int64/)

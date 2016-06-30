@@ -10,4 +10,4 @@ drttransport-sys = "0.0.1"
 extern crate drttransport;
 ```
 
-[Documentation](https://retep998.github.io/doc/drttransport/)
+[Documentation](https://retep998.github.io/doc/winapi/drttransport/)

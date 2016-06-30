@@ -10,4 +10,4 @@ vccomsup-sys = "0.0.1"
 extern crate vccomsup;
 ```
 
-[Documentation](https://retep998.github.io/doc/vccomsup/)
+[Documentation](https://retep998.github.io/doc/winapi/vccomsup/)

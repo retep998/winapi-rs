@@ -10,4 +10,4 @@ xpsprint-sys = "0.0.1"
 extern crate xpsprint;
 ```
 
-[Documentation](https://retep998.github.io/doc/xpsprint/)
+[Documentation](https://retep998.github.io/doc/winapi/xpsprint/)

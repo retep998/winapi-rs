@@ -10,4 +10,4 @@ wsbonline-sys = "0.0.1"
 extern crate wsbonline;
 ```
 
-[Documentation](https://retep998.github.io/doc/wsbonline/)
+[Documentation](https://retep998.github.io/doc/winapi/wsbonline/)

@@ -10,4 +10,4 @@ fltlib-sys = "0.0.1"
 extern crate fltlib;
 ```
 
-[Documentation](https://retep998.github.io/doc/fltlib/)
+[Documentation](https://retep998.github.io/doc/winapi/fltlib/)

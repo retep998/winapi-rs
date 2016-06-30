@@ -10,4 +10,4 @@ dflayout-sys = "0.0.1"
 extern crate dflayout;
 ```
 
-[Documentation](https://retep998.github.io/doc/dflayout/)
+[Documentation](https://retep998.github.io/doc/winapi/dflayout/)

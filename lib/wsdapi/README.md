@@ -10,4 +10,4 @@ wsdapi-sys = "0.0.1"
 extern crate wsdapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/wsdapi/)
+[Documentation](https://retep998.github.io/doc/winapi/wsdapi/)

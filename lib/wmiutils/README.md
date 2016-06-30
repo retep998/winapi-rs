@@ -10,4 +10,4 @@ wmiutils-sys = "0.0.1"
 extern crate wmiutils;
 ```
 
-[Documentation](https://retep998.github.io/doc/wmiutils/)
+[Documentation](https://retep998.github.io/doc/winapi/wmiutils/)

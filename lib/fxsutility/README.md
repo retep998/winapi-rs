@@ -10,4 +10,4 @@ fxsutility-sys = "0.0.1"
 extern crate fxsutility;
 ```
 
-[Documentation](https://retep998.github.io/doc/fxsutility/)
+[Documentation](https://retep998.github.io/doc/winapi/fxsutility/)

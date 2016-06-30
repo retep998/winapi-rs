@@ -10,4 +10,4 @@ fwpuclnt-sys = "0.0.1"
 extern crate fwpuclnt;
 ```
 
-[Documentation](https://retep998.github.io/doc/fwpuclnt/)
+[Documentation](https://retep998.github.io/doc/winapi/fwpuclnt/)

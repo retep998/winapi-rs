@@ -10,4 +10,4 @@ ntquery-sys = "0.0.1"
 extern crate ntquery;
 ```
 
-[Documentation](https://retep998.github.io/doc/ntquery/)
+[Documentation](https://retep998.github.io/doc/winapi/ntquery/)

@@ -10,4 +10,4 @@ adsiid-sys = "0.0.1"
 extern crate adsiid;
 ```
 
-[Documentation](https://retep998.github.io/doc/adsiid/)
+[Documentation](https://retep998.github.io/doc/winapi/adsiid/)

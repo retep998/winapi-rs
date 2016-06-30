@@ -10,4 +10,4 @@ iashlpr-sys = "0.0.1"
 extern crate iashlpr;
 ```
 
-[Documentation](https://retep998.github.io/doc/iashlpr/)
+[Documentation](https://retep998.github.io/doc/winapi/iashlpr/)

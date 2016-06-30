@@ -10,4 +10,4 @@ snmpapi-sys = "0.0.1"
 extern crate snmpapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/snmpapi/)
+[Documentation](https://retep998.github.io/doc/winapi/snmpapi/)

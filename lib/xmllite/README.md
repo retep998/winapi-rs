@@ -10,4 +10,4 @@ xmllite-sys = "0.0.1"
 extern crate xmllite;
 ```
 
-[Documentation](https://retep998.github.io/doc/xmllite/)
+[Documentation](https://retep998.github.io/doc/winapi/xmllite/)

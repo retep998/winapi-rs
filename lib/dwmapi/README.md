@@ -10,4 +10,4 @@ dwmapi-sys = "0.1.0"
 extern crate dwmapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/dwmapi/)
+[Documentation](https://retep998.github.io/doc/winapi/dwmapi/)

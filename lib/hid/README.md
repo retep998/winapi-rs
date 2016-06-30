@@ -10,4 +10,4 @@ hid-sys = "0.0.1"
 extern crate hid;
 ```
 
-[Documentation](https://retep998.github.io/doc/hid/)
+[Documentation](https://retep998.github.io/doc/winapi/hid/)

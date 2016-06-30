@@ -10,4 +10,4 @@ strmbase-sys = "0.0.1"
 extern crate strmbase;
 ```
 
-[Documentation](https://retep998.github.io/doc/strmbase/)
+[Documentation](https://retep998.github.io/doc/winapi/strmbase/)

@@ -10,4 +10,4 @@ ntdsetup-sys = "0.0.1"
 extern crate ntdsetup;
 ```
 
-[Documentation](https://retep998.github.io/doc/ntdsetup/)
+[Documentation](https://retep998.github.io/doc/winapi/ntdsetup/)

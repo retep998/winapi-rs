@@ -10,4 +10,4 @@ winhttp-sys = "0.0.1"
 extern crate winhttp;
 ```
 
-[Documentation](https://retep998.github.io/doc/winhttp/)
+[Documentation](https://retep998.github.io/doc/winapi/winhttp/)

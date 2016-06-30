@@ -10,4 +10,4 @@ wdsclientapi-sys = "0.0.1"
 extern crate wdsclientapi;
 ```
 
-[Documentation](https://retep998.github.io/doc/wdsclientapi/)
+[Documentation](https://retep998.github.io/doc/winapi/wdsclientapi/)

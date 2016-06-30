@@ -10,4 +10,4 @@ mscorsn-sys = "0.0.1"
 extern crate mscorsn;
 ```
 
-[Documentation](https://retep998.github.io/doc/mscorsn/)
+[Documentation](https://retep998.github.io/doc/winapi/mscorsn/)

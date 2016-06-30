@@ -10,4 +10,4 @@ comppkgsup-sys = "0.0.1"
 extern crate comppkgsup;
 ```
 
-[Documentation](https://retep998.github.io/doc/comppkgsup/)
+[Documentation](https://retep998.github.io/doc/winapi/comppkgsup/)

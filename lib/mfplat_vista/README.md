@@ -10,4 +10,4 @@ mfplat_vista-sys = "0.0.1"
 extern crate mfplat_vista;
 ```
 
-[Documentation](https://retep998.github.io/doc/mfplat_vista/)
+[Documentation](https://retep998.github.io/doc/winapi/mfplat_vista/)

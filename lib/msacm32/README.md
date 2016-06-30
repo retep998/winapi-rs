@@ -10,4 +10,4 @@ msacm32-sys = "0.0.1"
 extern crate msacm32;
 ```
 
-[Documentation](https://retep998.github.io/doc/msacm32/)
+[Documentation](https://retep998.github.io/doc/winapi/msacm32/)

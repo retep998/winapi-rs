@@ -10,4 +10,4 @@ pdh-sys = "0.0.1"
 extern crate pdh;
 ```
 
-[Documentation](https://retep998.github.io/doc/pdh/)
+[Documentation](https://retep998.github.io/doc/winapi/pdh/)

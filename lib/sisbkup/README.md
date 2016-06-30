@@ -10,4 +10,4 @@ sisbkup-sys = "0.0.1"
 extern crate sisbkup;
 ```
 
-[Documentation](https://retep998.github.io/doc/sisbkup/)
+[Documentation](https://retep998.github.io/doc/winapi/sisbkup/)

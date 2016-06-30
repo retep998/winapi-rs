@@ -10,4 +10,4 @@ msdelta-sys = "0.0.1"
 extern crate msdelta;
 ```
 
-[Documentation](https://retep998.github.io/doc/msdelta/)
+[Documentation](https://retep998.github.io/doc/winapi/msdelta/)

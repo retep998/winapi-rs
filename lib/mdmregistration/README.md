@@ -10,4 +10,4 @@ mdmregistration-sys = "0.0.1"
 extern crate mdmregistration;
 ```
 
-[Documentation](https://retep998.github.io/doc/mdmregistration/)
+[Documentation](https://retep998.github.io/doc/winapi/mdmregistration/)

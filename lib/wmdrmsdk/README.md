@@ -10,4 +10,4 @@ wmdrmsdk-sys = "0.0.1"
 extern crate wmdrmsdk;
 ```
 
-[Documentation](https://retep998.github.io/doc/wmdrmsdk/)
+[Documentation](https://retep998.github.io/doc/winapi/wmdrmsdk/)
