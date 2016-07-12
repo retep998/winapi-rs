@@ -56,5 +56,6 @@ winhttp-sys = { version = "0", path = "lib/winhttp" }
 winmm-sys = { version = "0", path = "lib/winmm" }
 winscard-sys = { version = "0", path = "lib/winscard" }
 winspool-sys = { version = "0", path = "lib/winspool" }
+winusb-sys = { version = "0", path = "lib/winusb" }
 ws2_32-sys = { version = "0", path = "lib/ws2_32" }
 xinput-sys = { version = "0", path = "lib/xinput" }
