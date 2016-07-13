@@ -14,14 +14,15 @@ This crate depends on Rust 1.4 on Windows. On other platforms this crate is a no
 
 Cargo.toml:
 ```toml
-[dependencies]
+[target.'cfg(windows)'.dependencies]
 winapi = "0.2"
 winmm-sys = "0.1"
 ```
 example.rs:
 ```Rust
-extern crate winapi;
-extern crate winmm;
+#[cfg(windows)] extern crate winapi;
+#[cfg(windows)] extern crate winmm;
+#[cfg(windows)]
 fn func() {
     winmm::PlaySoundA(...);
 }
