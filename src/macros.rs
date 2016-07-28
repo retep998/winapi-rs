@@ -95,7 +95,7 @@ macro_rules! RIDL {
                 $(,$p: $t)*
             ) -> $rtr),+
         }
-        #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
+        #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
@@ -112,7 +112,7 @@ macro_rules! RIDL {
         pub struct $vtbl {
             pub parent: $crate::$pvtbl
         }
-        #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
+        #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
@@ -143,7 +143,7 @@ macro_rules! RIDL {
                 $(,$p: $t)*
             ) -> $rtr)+
         }
-        #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
+        #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
@@ -204,63 +204,30 @@ macro_rules! BITFIELD {
 #[macro_export]
 macro_rules! ENUM {
     {enum $name:ident { $($variant:ident = $value:expr,)+ }} => {
-        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
-        pub struct $name(pub u32);
-        $(pub const $variant: $name = $name($value);)+
+        pub type $name = u32;
+        $(pub const $variant: u32 = $value;)+
     };
     {enum $name:ident { $variant:ident = $value:expr, $($rest:tt)* }} => {
-        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
-        pub struct $name(pub u32);
-        pub const $variant: $name = $name($value);
-        ENUM!{@gen $name, $variant, $($rest)*}
+        pub type $name = u32;
+        pub const $variant: u32 = $value;
+        ENUM!{@gen $variant, $($rest)*}
     };
     {enum $name:ident { $variant:ident, $($rest:tt)* }} => {
         ENUM!{enum $name { $variant = 0, $($rest)* }}
     };
-    {@gen $name:ident, $base:ident,} => {};
-    {@gen $name:ident, $base:ident, $variant:ident = $value:expr, $($rest:tt)*} => {
-        pub const $variant: $name = $name($value);
-        ENUM!{@gen $name, $variant, $($rest)*}
+    {@gen $base:ident,} => {};
+    {@gen $base:ident, $variant:ident = $value:expr, $($rest:tt)*} => {
+        pub const $variant: u32 = $value;
+        ENUM!{@gen $variant, $($rest)*}
     };
-    {@gen $name:ident, $base:ident, $variant:ident, $($rest:tt)*} => {
-        pub const $variant: $name = $name($base.0 + 1u32);
-        ENUM!{@gen $name, $variant, $($rest)*}
+    {@gen $base:ident, $variant:ident, $($rest:tt)*} => {
+        pub const $variant: u32 = $base + 1u32;
+        ENUM!{@gen $variant, $($rest)*}
     };
-}
-macro_rules! FLAGS {
-    {enum $name:ident { $($variant:ident = $value:expr,)+ }} => {
-        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
-        pub struct $name(pub u32);
-        $(pub const $variant: $name = $name($value);)+
-        impl ::std::ops::BitAnd<$name> for $name {
-            type Output = $name;
-            fn bitand(self, o: $name) -> $name { $name(self.0 & o.0) }
-        }
-        impl ::std::ops::BitOr<$name> for $name {
-            type Output = $name;
-            fn bitor(self, o: $name) -> $name { $name(self.0 | o.0) }
-        }
-        impl ::std::ops::BitXor<$name> for $name {
-            type Output = $name;
-            fn bitxor(self, o: $name) -> $name { $name(self.0 ^ o.0) }
-        }
-        impl ::std::ops::Not for $name {
-            type Output = $name;
-            fn not(self) -> $name { $name(!self.0) }
-        }
-    }
 }
 macro_rules! STRUCT {
-    {$(#[$attrs:meta])* nodebug struct $name:ident { $($field:ident: $ftype:ty,)+ }} => {
-        #[repr(C)] $(#[$attrs])*
-        pub struct $name {
-            $(pub $field: $ftype,)+
-        }
-        impl Copy for $name {}
-        impl Clone for $name { fn clone(&self) -> $name { *self } }
-    };
     {$(#[$attrs:meta])* struct $name:ident { $($field:ident: $ftype:ty,)+ }} => {
-        #[repr(C)] #[derive(Debug)] $(#[$attrs])*
+        #[repr(C)] $(#[$attrs])*
         pub struct $name {
             $(pub $field: $ftype,)+
         }

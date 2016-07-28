@@ -510,7 +510,7 @@ interface IFileDialogEvents(IFileDialogEventsVtbl): IUnknown(IUnknownVtbl) {
     ) -> ::HRESULT
 }
 );
-FLAGS!{enum FILEOPENDIALOGOPTIONS {
+ENUM!{enum FILEOPENDIALOGOPTIONS {
     FOS_OVERWRITEPROMPT = 0x2,
     FOS_STRICTFILETYPES = 0x4,
     FOS_NOCHANGEDIR = 0x8,

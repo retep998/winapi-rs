@@ -577,7 +577,7 @@ STRUCT!{struct M128A { // FIXME align 16
 }}
 pub type PM128A = *mut M128A;
 #[cfg(target_arch = "x86")]
-STRUCT!{nodebug struct XSAVE_FORMAT { // FIXME align 16
+STRUCT!{struct XSAVE_FORMAT { // FIXME align 16
     ControlWord: ::WORD,
     StatusWord: ::WORD,
     TagWord: ::BYTE,
@@ -596,7 +596,7 @@ STRUCT!{nodebug struct XSAVE_FORMAT { // FIXME align 16
     Reserved4: [::BYTE; 224],
 }}
 #[cfg(target_arch = "x86_64")]
-STRUCT!{nodebug struct XSAVE_FORMAT { // FIXME align 16
+STRUCT!{struct XSAVE_FORMAT { // FIXME align 16
     ControlWord: ::WORD,
     StatusWord: ::WORD,
     TagWord: ::BYTE,
@@ -618,7 +618,7 @@ STRUCT!{nodebug struct XSAVE_FORMAT { // FIXME align 16
 #[cfg(target_arch = "x86")]
 pub const SIZE_OF_80387_REGISTERS: usize = 80;
 #[cfg(target_arch = "x86")]
-STRUCT!{nodebug struct FLOATING_SAVE_AREA {
+STRUCT!{struct FLOATING_SAVE_AREA {
     ControlWord: ::DWORD,
     StatusWord: ::DWORD,
     TagWord: ::DWORD,
@@ -634,7 +634,7 @@ pub type PFLOATING_SAVE_AREA = *mut FLOATING_SAVE_AREA;
 #[cfg(target_arch = "x86")]
 pub const MAXIMUM_SUPPORTED_EXTENSION: usize = 512;
 #[cfg(target_arch = "x86")]
-STRUCT!{nodebug struct CONTEXT {
+STRUCT!{struct CONTEXT {
     ContextFlags: ::DWORD,
     Dr0: ::DWORD,
     Dr1: ::DWORD,
@@ -666,7 +666,7 @@ pub type XMM_SAVE_AREA32 = XSAVE_FORMAT;
 pub type PXMM_SAVE_AREA32 = *mut XSAVE_FORMAT;
 // FIXME - Align 16
 #[cfg(target_arch = "x86_64")]
-STRUCT!{nodebug struct CONTEXT {
+STRUCT!{struct CONTEXT {
     P1Home: ::DWORD64,
     P2Home: ::DWORD64,
     P3Home: ::DWORD64,
@@ -904,7 +904,7 @@ pub const TOKEN_WRITE: ::DWORD = STANDARD_RIGHTS_WRITE | TOKEN_ADJUST_PRIVILEGES
     | TOKEN_ADJUST_GROUPS | TOKEN_ADJUST_DEFAULT;
 pub const TOKEN_EXECUTE: ::DWORD = STANDARD_RIGHTS_EXECUTE;
 //10823
-STRUCT!{nodebug struct TOKEN_PRIVILEGES {
+STRUCT!{struct TOKEN_PRIVILEGES {
     PrivilegeCount: ::DWORD,
     Privileges: [LUID_AND_ATTRIBUTES; 0],
 }}
@@ -1989,7 +1989,7 @@ BITFIELD!(TP_CALLBACK_ENVIRON_V3_s BitFields: ::DWORD [
     Persistent set_Persistent[1..2],
     Private set_Private[2..32],
 ]);
-STRUCT!{nodebug struct TP_CALLBACK_ENVIRON_V3 {
+STRUCT!{struct TP_CALLBACK_ENVIRON_V3 {
     Version: TP_VERSION,
     Pool: PTP_POOL,
     CleanupGroup: PTP_CLEANUP_GROUP,
@@ -2112,7 +2112,7 @@ ENUM!{enum PROCESS_MITIGATION_POLICY {
     ProcessSignaturePolicy,
     MaxProcessMitigationPolicy,
 }}
-STRUCT!{nodebug struct OSVERSIONINFOA {
+STRUCT!{struct OSVERSIONINFOA {
     dwOSVersionInfoSize: ::DWORD,
     dwMajorVersion: ::DWORD,
     dwMinorVersion: ::DWORD,
@@ -2122,7 +2122,7 @@ STRUCT!{nodebug struct OSVERSIONINFOA {
 }}
 pub type POSVERSIONINFOA = *mut OSVERSIONINFOA;
 pub type LPOSVERSIONINFOA = *mut OSVERSIONINFOA;
-STRUCT!{nodebug struct OSVERSIONINFOW {
+STRUCT!{struct OSVERSIONINFOW {
     dwOSVersionInfoSize: ::DWORD,
     dwMajorVersion: ::DWORD,
     dwMinorVersion: ::DWORD,
@@ -2132,7 +2132,7 @@ STRUCT!{nodebug struct OSVERSIONINFOW {
 }}
 pub type POSVERSIONINFOW = *mut OSVERSIONINFOW;
 pub type LPOSVERSIONINFOW = *mut OSVERSIONINFOW;
-STRUCT!{nodebug struct OSVERSIONINFOEXA {
+STRUCT!{struct OSVERSIONINFOEXA {
     dwOSVersionInfoSize: ::DWORD,
     dwMajorVersion: ::DWORD,
     dwMinorVersion: ::DWORD,
@@ -2147,7 +2147,7 @@ STRUCT!{nodebug struct OSVERSIONINFOEXA {
 }}
 pub type POSVERSIONINFOEXA = *mut OSVERSIONINFOEXA;
 pub type LPOSVERSIONINFOEXA = *mut OSVERSIONINFOEXA;
-STRUCT!{nodebug struct OSVERSIONINFOEXW {
+STRUCT!{struct OSVERSIONINFOEXW {
     dwOSVersionInfoSize: ::DWORD,
     dwMajorVersion: ::DWORD,
     dwMinorVersion: ::DWORD,
@@ -2295,7 +2295,7 @@ STRUCT!{struct MEMORY_BASIC_INFORMATION64 { // FIXME: align 16
 pub type PMEMORY_BASIC_INFORMATION64 = *mut MEMORY_BASIC_INFORMATION64;
 pub const WOW64_SIZE_OF_80387_REGISTERS: usize = 80;
 pub const WOW64_MAXIMUM_SUPPORTED_EXTENSION: usize = 512;
-STRUCT!{nodebug struct WOW64_FLOATING_SAVE_AREA {
+STRUCT!{struct WOW64_FLOATING_SAVE_AREA {
     ControlWord: ::DWORD,
     StatusWord: ::DWORD,
     TagWord: ::DWORD,
@@ -2307,7 +2307,7 @@ STRUCT!{nodebug struct WOW64_FLOATING_SAVE_AREA {
     Cr0NpxState: ::DWORD,
 }}
 pub type PWOW64_FLOATING_SAVE_AREA = *mut WOW64_FLOATING_SAVE_AREA;
-STRUCT!{nodebug struct WOW64_CONTEXT {
+STRUCT!{struct WOW64_CONTEXT {
     ContextFlags: ::DWORD,
     Dr0: ::DWORD,
     Dr1: ::DWORD,

@@ -993,7 +993,7 @@ STRUCT!{struct WINDOWPLACEMENT {
 }}
 pub type PWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
 pub type LPWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
-STRUCT!{nodebug struct WNDCLASSEXW {
+STRUCT!{struct WNDCLASSEXW {
     cbSize: ::UINT,
     style: ::UINT,
     lpfnWndProc: WNDPROC,
@@ -1010,7 +1010,7 @@ STRUCT!{nodebug struct WNDCLASSEXW {
 pub type PWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type NPWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type LPWNDCLASSEXW = *mut WNDCLASSEXW;
-STRUCT!{nodebug struct WNDCLASSW {
+STRUCT!{struct WNDCLASSW {
     style: ::UINT,
     lpfnWndProc: WNDPROC,
     cbClsExtra: ::c_int,
@@ -1095,7 +1095,7 @@ STRUCT!{struct TRACKMOUSEEVENT {
 }}
 pub type LPTRACKMOUSEEVENT = *mut TRACKMOUSEEVENT;
 //2575
-STRUCT!{nodebug struct WINDOWPOS {
+STRUCT!{struct WINDOWPOS {
     hwnd: ::HWND,
     hwndInsertAfter: ::HWND,
     x: ::c_int,
@@ -1768,7 +1768,7 @@ pub const CB_GETDROPPEDWIDTH: ::UINT = 0x015f;
 pub const CB_SETDROPPEDWIDTH: ::UINT = 0x0160;
 pub const CB_INITSTORAGE: ::UINT = 0x0161;
 //12141
-STRUCT!{nodebug struct NONCLIENTMETRICSA {
+STRUCT!{struct NONCLIENTMETRICSA {
     cbSize: ::UINT,
     iBorderWidth: ::c_int,
     iScrollWidth: ::c_int,
@@ -1787,7 +1787,7 @@ STRUCT!{nodebug struct NONCLIENTMETRICSA {
     iPaddedBorderWidth: ::c_int,
 }}
 pub type LPNONCLIENTMETRICSA = *mut NONCLIENTMETRICSA;
-STRUCT!{nodebug struct NONCLIENTMETRICSW {
+STRUCT!{struct NONCLIENTMETRICSW {
     cbSize: ::UINT,
     iBorderWidth: ::c_int,
     iScrollWidth: ::c_int,
@@ -2074,7 +2074,7 @@ STRUCT!{struct MENUITEMINFOW {
 }}
 pub type LPMENUITEMINFOW = *mut MENUITEMINFOW;
 pub type LPCMENUITEMINFOW = *const MENUITEMINFOW;
-STRUCT!{nodebug struct MSGBOXPARAMSA {
+STRUCT!{struct MSGBOXPARAMSA {
     cbSize: ::UINT,
     hwndOwner: ::HWND,
     hInstance: ::HINSTANCE,
@@ -2088,7 +2088,7 @@ STRUCT!{nodebug struct MSGBOXPARAMSA {
 }}
 pub type PMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
 pub type LPMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
-STRUCT!{nodebug struct MSGBOXPARAMSW {
+STRUCT!{struct MSGBOXPARAMSW {
     cbSize: ::UINT,
     hwndOwner: ::HWND,
     hInstance: ::HINSTANCE,

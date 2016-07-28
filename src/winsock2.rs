@@ -13,7 +13,7 @@ pub type SOCKET = ::UINT_PTR;
 pub type GROUP = ::c_uint;
 pub const FD_SETSIZE: usize = 64;
 pub const FD_MAX_EVENTS: usize = 10;
-STRUCT!{nodebug struct fd_set {
+STRUCT!{struct fd_set {
     fd_count: u_int,
     fd_array: [SOCKET; FD_SETSIZE],
 }}
@@ -56,7 +56,7 @@ STRUCT!{struct protoent {
 pub const WSADESCRIPTION_LEN: usize = 256;
 pub const WSASYS_STATUS_LEN: usize = 128;
 #[cfg(target_arch="x86")]
-STRUCT!{nodebug struct WSADATA {
+STRUCT!{struct WSADATA {
     wVersion: ::WORD,
     wHighVersion: ::WORD,
     szDescription: [::c_char; WSADESCRIPTION_LEN + 1],
@@ -66,7 +66,7 @@ STRUCT!{nodebug struct WSADATA {
     lpVendorInfo: *mut ::c_char,
 }}
 #[cfg(target_arch="x86_64")]
-STRUCT!{nodebug struct WSADATA {
+STRUCT!{struct WSADATA {
     wVersion: ::WORD,
     wHighVersion: ::WORD,
     iMaxSockets: ::c_ushort,
@@ -143,7 +143,7 @@ STRUCT!{struct WSAPROTOCOLCHAIN {
 }}
 pub type LPWSAPROTOCOLCHAIN = *mut WSAPROTOCOLCHAIN;
 pub const WSAPROTOCOL_LEN: usize = 255;
-STRUCT!{nodebug struct WSAPROTOCOL_INFOA {
+STRUCT!{struct WSAPROTOCOL_INFOA {
     dwServiceFlags1: ::DWORD,
     dwServiceFlags2: ::DWORD,
     dwServiceFlags3: ::DWORD,
@@ -166,7 +166,7 @@ STRUCT!{nodebug struct WSAPROTOCOL_INFOA {
     szProtocol: [::CHAR; WSAPROTOCOL_LEN + 1],
 }}
 pub type LPWSAPROTOCOL_INFOA = *mut WSAPROTOCOL_INFOA;
-STRUCT!{nodebug struct WSAPROTOCOL_INFOW {
+STRUCT!{struct WSAPROTOCOL_INFOW {
     dwServiceFlags1: ::DWORD,
     dwServiceFlags2: ::DWORD,
     dwServiceFlags3: ::DWORD,
@@ -213,7 +213,7 @@ STRUCT!{struct WSACOMPLETION_WindowMessage {
 STRUCT!{struct WSACOMPLETION_Event {
     lpOverlapped: LPWSAOVERLAPPED,
 }}
-STRUCT!{nodebug struct WSACOMPLETION_Apc {
+STRUCT!{struct WSACOMPLETION_Apc {
     lpOverlapped: LPWSAOVERLAPPED,
     lpfnCompletionProc: LPWSAOVERLAPPED_COMPLETION_ROUTINE,
 }}

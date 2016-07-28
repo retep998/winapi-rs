@@ -183,12 +183,12 @@ pub type LPSERVICE_MAIN_FUNCTIONW = Option<unsafe extern "system" fn(
 pub type LPSERVICE_MAIN_FUNCTIONA = Option<unsafe extern "system" fn(
     dwNumServicesArgs: ::DWORD, lpServiceArgVectors: *mut ::LPSTR,
 )>;
-STRUCT!{nodebug struct SERVICE_TABLE_ENTRYA {
+STRUCT!{struct SERVICE_TABLE_ENTRYA {
     lpServiceName: ::LPCSTR,
     lpServiceProc: LPSERVICE_MAIN_FUNCTIONA,
 }}
 pub type LPSERVICE_TABLE_ENTRYA = *mut SERVICE_TABLE_ENTRYA;
-STRUCT!{nodebug struct SERVICE_TABLE_ENTRYW {
+STRUCT!{struct SERVICE_TABLE_ENTRYW {
     lpServiceName: ::LPCWSTR,
     lpServiceProc: LPSERVICE_MAIN_FUNCTIONW,
 }}

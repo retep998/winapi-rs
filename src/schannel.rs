@@ -71,7 +71,7 @@ STRUCT!{struct SecPkgContext_ConnectionInfo {
 pub type PSecPkgContext_ConnectionInfo = *mut SecPkgContext_ConnectionInfo;
 pub const SZ_ALG_MAX_SIZE: usize = 64;
 pub const SECPKGCONTEXT_CIPHERINFO_V1: ::DWORD = 1;
-STRUCT!{nodebug struct SecPkgContext_CipherInfo {
+STRUCT!{struct SecPkgContext_CipherInfo {
     dwVersion: ::DWORD,
     dwProtocol: ::DWORD,
     dwCipherSuite: ::DWORD,
@@ -89,7 +89,7 @@ STRUCT!{nodebug struct SecPkgContext_CipherInfo {
     dwKeyType: ::DWORD,
 }}
 pub type PSecPkgContext_CipherInfo = *mut SecPkgContext_CipherInfo;
-STRUCT!{nodebug struct SecPkgContext_EapKeyBlock {
+STRUCT!{struct SecPkgContext_EapKeyBlock {
     rgbKeys: [::BYTE; 128],
     rgbIVs: [::BYTE; 64],
 }}
@@ -184,7 +184,7 @@ STRUCT!{struct SCHANNEL_CERT_HASH {
     ShaHash: [::BYTE; 20],
 }}
 pub type PSCHANNEL_CERT_HASH = *mut SCHANNEL_CERT_HASH;
-STRUCT!{nodebug struct SCHANNEL_CERT_HASH_STORE {
+STRUCT!{struct SCHANNEL_CERT_HASH_STORE {
     dwLength: ::DWORD,
     dwFlags: ::DWORD,
     hProv: ::HCRYPTPROV,
@@ -257,7 +257,7 @@ STRUCT!{struct SCHANNEL_SESSION_TOKEN {
     dwTokenType: ::DWORD,
     dwFlags: ::DWORD,
 }}
-STRUCT!{nodebug struct SCHANNEL_CLIENT_SIGNATURE {
+STRUCT!{struct SCHANNEL_CLIENT_SIGNATURE {
     cbLength: ::DWORD,
     aiHash: ::ALG_ID,
     cbHash: ::DWORD,

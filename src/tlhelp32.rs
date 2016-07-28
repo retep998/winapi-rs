@@ -35,7 +35,7 @@ pub type LPHEAPENTRY32 = *mut HEAPENTRY32;
 pub const LF32_FIXED: ::DWORD = 0x00000001;
 pub const LF32_FREE: ::DWORD = 0x00000002;
 pub const LF32_MOVEABLE: ::DWORD = 0x00000004;
-STRUCT!{nodebug struct PROCESSENTRY32W {
+STRUCT!{struct PROCESSENTRY32W {
     dwSize: ::DWORD,
     cntUsage: ::DWORD,
     th32ProcessID: ::DWORD,
@@ -49,7 +49,7 @@ STRUCT!{nodebug struct PROCESSENTRY32W {
 }}
 pub type PPROCESSENTRY32W = *mut PROCESSENTRY32W;
 pub type LPPROCESSENTRY32W = *mut PROCESSENTRY32W;
-STRUCT!{nodebug struct PROCESSENTRY32 {
+STRUCT!{struct PROCESSENTRY32 {
     dwSize: ::DWORD,
     cntUsage: ::DWORD,
     th32ProcessID: ::DWORD,
@@ -74,7 +74,7 @@ STRUCT!{struct THREADENTRY32 {
 }}
 pub type PTHREADENTRY32 = *mut THREADENTRY32;
 pub type LPTHREADENTRY32 = *mut THREADENTRY32;
-STRUCT!{nodebug struct MODULEENTRY32W {
+STRUCT!{struct MODULEENTRY32W {
     dwSize: ::DWORD,
     th32ModuleID: ::DWORD,
     th32ProcessID: ::DWORD,
@@ -88,7 +88,7 @@ STRUCT!{nodebug struct MODULEENTRY32W {
 }}
 pub type PMODULEENTRY32W = *mut MODULEENTRY32W;
 pub type LPMODULEENTRY32W = *mut MODULEENTRY32W;
-STRUCT!{nodebug struct MODULEENTRY32 {
+STRUCT!{struct MODULEENTRY32 {
     dwSize: ::DWORD,
     th32ModuleID: ::DWORD,
     th32ProcessID: ::DWORD,
