@@ -544,7 +544,7 @@ ENUM!{enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS {
 pub type PSEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS =
     *mut SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS;
 pub const MAX_PROTOCOL_ID_SIZE: usize = 0xff;
-STRUCT!{nodebug struct SecPkgContext_ApplicationProtocol {
+STRUCT!{struct SecPkgContext_ApplicationProtocol {
     ProtoNegoStatus: SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS,
     ProtoNegoExt: SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT,
     ProtocolIdSize: ::c_uchar,

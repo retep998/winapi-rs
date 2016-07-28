@@ -85,7 +85,7 @@ STRUCT!{struct CPINFO {
     LeadByte: [::BYTE; MAX_LEADBYTES],
 }}
 pub type LPCPINFO = *mut CPINFO;
-STRUCT!{nodebug struct CPINFOEXA {
+STRUCT!{struct CPINFOEXA {
     MaxCharSize: ::UINT,
     DefaultChar: [::BYTE; MAX_DEFAULTCHAR],
     LeadByte: [::BYTE; MAX_LEADBYTES],
@@ -94,7 +94,7 @@ STRUCT!{nodebug struct CPINFOEXA {
     CodePageName: [::CHAR; ::MAX_PATH],
 }}
 pub type LPCPINFOEXA = *mut CPINFOEXA;
-STRUCT!{nodebug struct CPINFOEXW {
+STRUCT!{struct CPINFOEXW {
     MaxCharSize: ::UINT,
     DefaultChar: [::BYTE; MAX_DEFAULTCHAR],
     LeadByte: [::BYTE; MAX_LEADBYTES],

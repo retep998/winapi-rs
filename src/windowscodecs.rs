@@ -30,7 +30,7 @@ ENUM!{enum WICBitmapEncoderCacheOption {
     WICBitmapEncoderCacheTempFile = 0x1,
     WICBitmapEncoderNoCache = 0x2,
 }}
-FLAGS!{enum WICComponentType {
+ENUM!{enum WICComponentType {
     WICDecoder = 0x1,
     WICEncoder = 0x2,
     WICPixelFormatConverter = 0x4,
@@ -39,7 +39,7 @@ FLAGS!{enum WICComponentType {
     WICPixelFormat = 0x20,
     WICAllComponents = 0x3f,
 }}
-FLAGS!{enum WICComponentEnumerateOptions {
+ENUM!{enum WICComponentEnumerateOptions {
     WICComponentEnumerateDefault = 0,
     WICComponentEnumerateRefresh = 0x1,
     WICComponentEnumerateDisabled = 0x80000000,
@@ -94,7 +94,7 @@ ENUM!{enum WICBitmapAlphaChannelOption {
     WICBitmapUsePremultipliedAlpha = 0x1,
     WICBitmapIgnoreAlpha = 0x2,
 }}
-FLAGS!{enum WICBitmapTransformOptions {
+ENUM!{enum WICBitmapTransformOptions {
     WICBitmapTransformRotate0 = 0,
     WICBitmapTransformRotate90 = 0x1,
     WICBitmapTransformRotate180 = 0x2,
@@ -102,29 +102,29 @@ FLAGS!{enum WICBitmapTransformOptions {
     WICBitmapTransformFlipHorizontal = 0x8,
     WICBitmapTransformFlipVertical = 0x10,
 }}
-FLAGS!{enum WICBitmapLockFlags {
+ENUM!{enum WICBitmapLockFlags {
     WICBitmapLockRead = 0x1,
     WICBitmapLockWrite = 0x2,
 }}
-FLAGS!{enum WICBitmapDecoderCapabilities {
+ENUM!{enum WICBitmapDecoderCapabilities {
     WICBitmapDecoderCapabilitySameEncoder = 0x1,
     WICBitmapDecoderCapabilityCanDecodeAllImages = 0x2,
     WICBitmapDecoderCapabilityCanDecodeSomeImages = 0x4,
     WICBitmapDecoderCapabilityCanEnumerateMetadata = 0x8,
     WICBitmapDecoderCapabilityCanDecodeThumbnail = 0x10,
 }}
-FLAGS!{enum WICProgressOperation {
+ENUM!{enum WICProgressOperation {
     WICProgressOperationCopyPixels = 0x1,
     WICProgressOperationWritePixels = 0x2,
     WICProgressOperationAll = 0xffff,
 }}
-FLAGS!{enum WICProgressNotification {
+ENUM!{enum WICProgressNotification {
     WICProgressNotificationBegin = 0x10000,
     WICProgressNotificationEnd = 0x20000,
     WICProgressNotificationFrequent = 0x40000,
     WICProgressNotificationAll = 0xffff0000,
 }}
-FLAGS!{enum WICComponentSigning {
+ENUM!{enum WICComponentSigning {
     WICComponentSigned = 0x1,
     WICComponentUnsigned = 0x2,
     WICComponentSafe = 0x4,

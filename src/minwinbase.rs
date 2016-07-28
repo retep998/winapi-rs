@@ -36,7 +36,7 @@ STRUCT!{struct SYSTEMTIME {
 }}
 pub type PSYSTEMTIME = *mut SYSTEMTIME;
 pub type LPSYSTEMTIME = *mut SYSTEMTIME;
-STRUCT!{nodebug struct WIN32_FIND_DATAA {
+STRUCT!{struct WIN32_FIND_DATAA {
     dwFileAttributes: ::DWORD,
     ftCreationTime: ::FILETIME,
     ftLastAccessTime: ::FILETIME,
@@ -50,7 +50,7 @@ STRUCT!{nodebug struct WIN32_FIND_DATAA {
 }}
 pub type PWIN32_FIND_DATAA = *mut WIN32_FIND_DATAA;
 pub type LPWIN32_FIND_DATAA = *mut WIN32_FIND_DATAA;
-STRUCT!{nodebug struct WIN32_FIND_DATAW {
+STRUCT!{struct WIN32_FIND_DATAW {
     dwFileAttributes: ::DWORD,
     ftCreationTime: ::FILETIME,
     ftLastAccessTime: ::FILETIME,
@@ -176,13 +176,13 @@ STRUCT!{struct EXCEPTION_DEBUG_INFO {
     dwFirstChance: ::DWORD,
 }}
 pub type LPEXCEPTION_DEBUG_INFO = *mut EXCEPTION_DEBUG_INFO;
-STRUCT!{nodebug struct CREATE_THREAD_DEBUG_INFO {
+STRUCT!{struct CREATE_THREAD_DEBUG_INFO {
     hThread: ::HANDLE,
     lpThreadLocalBase: ::LPVOID,
     lpStartAddress: LPTHREAD_START_ROUTINE,
 }}
 pub type LPCREATE_THREAD_DEBUG_INFO = *mut CREATE_THREAD_DEBUG_INFO;
-STRUCT!{nodebug struct CREATE_PROCESS_DEBUG_INFO {
+STRUCT!{struct CREATE_PROCESS_DEBUG_INFO {
     hFile: ::HANDLE,
     hProcess: ::HANDLE,
     hThread: ::HANDLE,
@@ -228,14 +228,14 @@ STRUCT!{struct RIP_INFO {
 }}
 pub type LPRIP_INFO = *mut RIP_INFO;
 #[cfg(target_arch="x86_64")]
-STRUCT!{nodebug struct DEBUG_EVENT {
+STRUCT!{struct DEBUG_EVENT {
     dwDebugEventCode: ::DWORD,
     dwProcessId: ::DWORD,
     dwThreadId: ::DWORD,
     u: [u8; 160],
 }}
 #[cfg(target_arch="x86")]
-STRUCT!{nodebug struct DEBUG_EVENT {
+STRUCT!{struct DEBUG_EVENT {
     dwDebugEventCode: ::DWORD,
     dwProcessId: ::DWORD,
     dwThreadId: ::DWORD,

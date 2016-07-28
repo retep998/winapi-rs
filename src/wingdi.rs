@@ -134,7 +134,7 @@ STRUCT!{struct DEVMODEW {
 pub type PDEVMODEW = *mut DEVMODEW;
 pub type NPDEVMODEW = *mut DEVMODEW;
 pub type LPDEVMODEW = *mut DEVMODEW;
-STRUCT!{nodebug struct DISPLAY_DEVICEW {
+STRUCT!{struct DISPLAY_DEVICEW {
     cb: ::DWORD,
     DeviceName: [::WCHAR; 32],
     DeviceString: [::WCHAR; 128],
@@ -144,7 +144,7 @@ STRUCT!{nodebug struct DISPLAY_DEVICEW {
 }}
 pub type PDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
 pub type LPDISPLAY_DEVICEW = *mut DISPLAY_DEVICEW;
-STRUCT!{nodebug struct DISPLAY_DEVICEA {
+STRUCT!{struct DISPLAY_DEVICEA {
     cb: ::DWORD,
     DeviceName: [::CHAR; 32],
     DeviceString: [::CHAR; 128],
@@ -345,7 +345,7 @@ pub type LPBITMAPINFO = *mut BITMAPINFO;
 pub type PBITMAPINFO = *mut BITMAPINFO;
 //1438
 pub const LF_FACESIZE: usize = 32;
-STRUCT!{nodebug struct LOGFONTA {
+STRUCT!{struct LOGFONTA {
     lfHeight: ::LONG,
     lfWidth: ::LONG,
     lfEscapement: ::LONG,
@@ -362,7 +362,7 @@ STRUCT!{nodebug struct LOGFONTA {
     lfFaceName: [::CHAR; LF_FACESIZE],
 }}
 pub type LPLOGFONTA = *mut LOGFONTA;
-STRUCT!{nodebug struct LOGFONTW {
+STRUCT!{struct LOGFONTW {
     lfHeight: ::LONG,
     lfWidth: ::LONG,
     lfEscapement: ::LONG,
@@ -437,7 +437,7 @@ STRUCT!{struct RGNDATAHEADER {
     rcBound: ::RECT,
 }}
 pub type PRGNDATAHEADER = *mut RGNDATAHEADER;
-STRUCT!{nodebug struct RGNDATA {
+STRUCT!{struct RGNDATA {
     rdh: RGNDATAHEADER,
     Buffer: [::c_char; 0],
 }}
@@ -487,7 +487,7 @@ STRUCT!{struct LOGBRUSH {
     lbHatch: ::ULONG_PTR,
 }}
 pub type PLOGBRUSH = *mut LOGBRUSH;
-STRUCT!{nodebug struct LOGCOLORSPACEA {
+STRUCT!{struct LOGCOLORSPACEA {
     lcsSignature: ::DWORD,
     lcsVersion: ::DWORD,
     lcsSize: ::DWORD,
@@ -500,7 +500,7 @@ STRUCT!{nodebug struct LOGCOLORSPACEA {
     lcsFilename: [::CHAR; ::MAX_PATH],
 }}
 pub type LPLOGCOLORSPACEA = *mut LOGCOLORSPACEA;
-STRUCT!{nodebug struct LOGCOLORSPACEW {
+STRUCT!{struct LOGCOLORSPACEW {
     lcsSignature: ::DWORD,
     lcsVersion: ::DWORD,
     lcsSize: ::DWORD,
@@ -514,14 +514,14 @@ STRUCT!{nodebug struct LOGCOLORSPACEW {
 }}
 pub type LPLOGCOLORSPACEW = *mut LOGCOLORSPACEW;
 pub const LF_FULLFACESIZE: usize = 64;
-STRUCT!{nodebug struct ENUMLOGFONTEXA {
+STRUCT!{struct ENUMLOGFONTEXA {
     elfLogFont: LOGFONTA,
     elfFullName: [::BYTE; LF_FULLFACESIZE],
     elfStyle: [::BYTE; LF_FACESIZE],
     elfScript: [::BYTE; LF_FACESIZE],
 }}
 pub type LPENUMLOGFONTEXA = *mut ENUMLOGFONTEXA;
-STRUCT!{nodebug struct ENUMLOGFONTEXW {
+STRUCT!{struct ENUMLOGFONTEXW {
     elfLogFont: LOGFONTW,
     elfFullName: [::WCHAR; LF_FULLFACESIZE],
     elfStyle: [::WCHAR; LF_FACESIZE],
@@ -536,13 +536,13 @@ STRUCT!{struct DESIGNVECTOR {
 }}
 pub type PDESIGNVECTOR = *mut DESIGNVECTOR;
 pub type LPDESIGNVECTOR = *mut DESIGNVECTOR;
-STRUCT!{nodebug struct ENUMLOGFONTEXDVA {
+STRUCT!{struct ENUMLOGFONTEXDVA {
     elfEnumLogfontEx: ENUMLOGFONTEXA,
     elfDesignVector: DESIGNVECTOR,
 }}
 pub type PENUMLOGFONTEXDVA = *mut ENUMLOGFONTEXDVA;
 pub type LPENUMLOGFONTEXDVA = *mut ENUMLOGFONTEXDVA;
-STRUCT!{nodebug struct ENUMLOGFONTEXDVW {
+STRUCT!{struct ENUMLOGFONTEXDVW {
     elfEnumLogfontEx: ENUMLOGFONTEXW,
     elfDesignVector: DESIGNVECTOR,
 }}
