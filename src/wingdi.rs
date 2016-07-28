@@ -203,6 +203,7 @@ pub const R2_WHITE: ::c_int = 16;
 pub const R2_LAST: ::c_int = 16;
 //83
 pub const SRCCOPY: ::DWORD = 0x00CC0020;
+pub const CAPTUREBLT: ::DWORD = 0x40000000;
 pub const SRCPAINT: ::DWORD = 0x00EE0086;
 pub const SRCAND: ::DWORD = 0x008800C6;
 pub const SRCINVERT: ::DWORD = 0x00660046;
