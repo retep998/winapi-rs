@@ -2570,7 +2570,7 @@ extern "system" {
     ) -> BOOL;
     pub fn VirtualProtectEx(
         hProcess: HANDLE, lpAddress: LPVOID, dwSize: SIZE_T, flNewProtect: DWORD,
-        lpflOldProtect: DWORD,
+        lpflOldProtect: PDWORD,
     ) -> BOOL;
     pub fn VirtualQuery(
         lpAddress: LPCVOID, lpBuffer: PMEMORY_BASIC_INFORMATION, dwLength: SIZE_T,
