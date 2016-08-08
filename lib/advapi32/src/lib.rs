@@ -498,8 +498,12 @@ extern "system" {
     // pub fn LogonUserExExW();
     // pub fn LogonUserExW();
     // pub fn LogonUserW();
-    // pub fn LookupAccountNameA();
-    // pub fn LookupAccountNameW();
+    pub fn LookupAccountNameA(
+    lpSystemName: LPCTSTR, lpAccountName: LPCSTR, Sid: PSID, cbSid: LPDWORD, ReferencedDomainName: LPCSTR, peUse: PSID_NAME_USE,
+    ) -> BOOL;
+    pub fn LookupAccountNameW(
+    lpSystemName: LPCWSTR, lpAccountName: LPCWSTR, Sid: PSID, cbSid: LPDWORD, ReferencedDomainName: LPCWSTR, peUse: PSID_NAME_USE,
+    ) -> BOOL;
     // pub fn LookupAccountSidA();
     // pub fn LookupAccountSidW();
     // pub fn LookupPrivilegeDisplayNameA();

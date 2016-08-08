@@ -1,6 +1,6 @@
 // Copyright © 2016; Dmitry Roschin
 // Licensed under the MIT License <LICENSE.md>
-FLAGS!{ enum D3D12_SHADER_VERSION_TYPE {
+ENUM!{ enum D3D12_SHADER_VERSION_TYPE {
     D3D12_SHVER_PIXEL_SHADER = 0x0,
     D3D12_SHVER_VERTEX_SHADER = 0x1,
     D3D12_SHVER_GEOMETRY_SHADER = 0x2,

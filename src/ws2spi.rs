@@ -2,7 +2,7 @@
 // Licensed under the MIT License <LICENSE.md>
 //! Definitions to be used with the WinSock service provider
 pub const WSPDESCRIPTION_LEN: usize = 255;
-STRUCT!{nodebug struct WSPDATA {
+STRUCT!{struct WSPDATA {
     wVersion: ::WORD,
     wHighVersion: ::WORD,
     szDescription: [::WCHAR; WSPDESCRIPTION_LEN + 1],
@@ -35,7 +35,7 @@ pub type LPNSPV2SETSERVICEEX = Option<unsafe extern "system" fn(
 pub type LPNSPV2CLIENTSESSIONRUNDOWN = Option<unsafe extern "system" fn(
     lpProviderId: ::LPGUID, pvClientSessionArg: ::LPVOID,
 )>;
-STRUCT!{nodebug struct NSPV2_ROUTINE {
+STRUCT!{struct NSPV2_ROUTINE {
     cbSize: ::DWORD,
     dwMajorVersion: ::DWORD,
     dwMinorVersion: ::DWORD,

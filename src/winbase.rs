@@ -379,7 +379,7 @@ UNION!{COPYFILE2_MESSAGE, Info, Error, Error_mut, COPYFILE2_MESSAGE_Error}
 pub type PCOPYFILE2_PROGRESS_ROUTINE = Option<unsafe extern "system" fn(
     pMessage: *const COPYFILE2_MESSAGE, pvCallbackContext: ::PVOID,
 ) -> COPYFILE2_MESSAGE_ACTION>;
-STRUCT!{nodebug struct COPYFILE2_EXTENDED_PARAMETERS {
+STRUCT!{struct COPYFILE2_EXTENDED_PARAMETERS {
     dwSize: ::DWORD,
     dwCopyFlags: ::DWORD,
     pfCancel: *mut ::BOOL,
@@ -401,13 +401,13 @@ pub const DOCKINFO_DOCKED: ::DWORD = 0x2;
 pub const DOCKINFO_USER_SUPPLIED: ::DWORD = 0x4;
 pub const DOCKINFO_USER_UNDOCKED: ::DWORD = DOCKINFO_USER_SUPPLIED | DOCKINFO_UNDOCKED;
 pub const DOCKINFO_USER_DOCKED: ::DWORD = DOCKINFO_USER_SUPPLIED | DOCKINFO_DOCKED;
-STRUCT!{nodebug struct HW_PROFILE_INFOA {
+STRUCT!{struct HW_PROFILE_INFOA {
     dwDockInfo: ::DWORD,
     szHwProfileGuid: [::CHAR; HW_PROFILE_GUIDLEN],
     szHwProfileName: [::CHAR; ::MAX_PROFILE_LEN],
 }}
 pub type LPHW_PROFILE_INFOA = *mut HW_PROFILE_INFOA;
-STRUCT!{nodebug struct HW_PROFILE_INFOW {
+STRUCT!{struct HW_PROFILE_INFOW {
     dwDockInfo: ::DWORD,
     szHwProfileGuid: [::WCHAR; HW_PROFILE_GUIDLEN],
     szHwProfileName: [::WCHAR; ::MAX_PROFILE_LEN],
@@ -446,7 +446,7 @@ pub type PUMS_COMPLETION_LIST = *mut ::c_void;
 pub type UMS_THREAD_INFO_CLASS = ::RTL_UMS_THREAD_INFO_CLASS;
 pub type PUMS_THREAD_INFO_CLASS = *mut UMS_THREAD_INFO_CLASS;
 pub type PUMS_SCHEDULER_ENTRY_POINT = ::PRTL_UMS_SCHEDULER_ENTRY_POINT;
-STRUCT!{nodebug struct UMS_SCHEDULER_STARTUP_INFO {
+STRUCT!{struct UMS_SCHEDULER_STARTUP_INFO {
     UmsVersion: ::ULONG,
     CompletionList: PUMS_COMPLETION_LIST,
     SchedulerProc: PUMS_SCHEDULER_ENTRY_POINT,
@@ -526,7 +526,7 @@ STRUCT!{struct SYSTEM_POWER_STATUS {
 }}
 pub type LPSYSTEM_POWER_STATUS = *mut SYSTEM_POWER_STATUS;
 pub const OFS_MAXPATHNAME: usize = 128;
-STRUCT!{nodebug struct OFSTRUCT {
+STRUCT!{struct OFSTRUCT {
     cBytes: ::BYTE,
     fFixedDisk: ::BYTE,
     nErrCode: ::WORD,

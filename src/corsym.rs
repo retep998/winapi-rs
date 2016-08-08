@@ -45,7 +45,7 @@ ENUM!{enum CorSymAddrKind {
     ADDR_BITFIELD = 9,
     ADDR_NATIVE_ISECTOFFSET = 10,
 }}
-FLAGS!{enum CorSymVarFlag {
+ENUM!{enum CorSymVarFlag {
     VAR_IS_COMP_GEN = 1,
 }}
 RIDL!(
@@ -60,7 +60,7 @@ interface ISymUnmanagedBinder(ISymUnmanagedBinderVtbl): IUnknown(IUnknownVtbl) {
     ) -> ::HRESULT
 }
 );
-FLAGS!{enum CorSymSearchPolicyAttributes {
+ENUM!{enum CorSymSearchPolicyAttributes {
     AllowRegistryAccess = 0x1,
     AllowSymbolServerAccess = 0x2,
     AllowOriginalPathAccess = 0x4,

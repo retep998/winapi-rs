@@ -42,7 +42,7 @@ pub type HMACHINE = ::HANDLE;
 pub type PHMACHINE = *mut HMACHINE;
 pub type CONFLICT_LIST = ::ULONG_PTR;
 pub type PCONFLICT_LIST = *mut CONFLICT_LIST;
-STRUCT!{nodebug struct CONFLICT_DETAILS_A {
+STRUCT!{struct CONFLICT_DETAILS_A {
     CD_ulSize: ::ULONG,
     CD_ulMask: ::ULONG,
     CD_dnDevInst: DEVINST,
@@ -51,7 +51,7 @@ STRUCT!{nodebug struct CONFLICT_DETAILS_A {
     CD_szDescription: [::CHAR; ::MAX_PATH],
 }}
 pub type PCONFLICT_DETAILS_A = *mut CONFLICT_DETAILS_A;
-STRUCT!{nodebug struct CONFLICT_DETAILS_W {
+STRUCT!{struct CONFLICT_DETAILS_W {
     CD_ulSize: ::ULONG,
     CD_ulMask: ::ULONG,
     CD_dnDevInst: DEVINST,
@@ -389,13 +389,13 @@ pub type PCONNECTION_RESOURCE = *mut CONNECTION_RESOURCE;
 pub const CM_HWPI_NOT_DOCKABLE: ::DWORD = 0x00000000;
 pub const CM_HWPI_UNDOCKED: ::DWORD = 0x00000001;
 pub const CM_HWPI_DOCKED: ::DWORD = 0x00000002;
-STRUCT!{nodebug struct HWPROFILEINFO_A {
+STRUCT!{struct HWPROFILEINFO_A {
     HWPI_ulHWProfile: ::ULONG,
     HWPI_szFriendlyName: [::CHAR; MAX_PROFILE_LEN],
     HWPI_dwFlags: ::DWORD,
 }}
 pub type PHWPROFILEINFO_A = *mut HWPROFILEINFO_A;
-STRUCT!{nodebug struct HWPROFILEINFO_W {
+STRUCT!{struct HWPROFILEINFO_W {
     HWPI_ulHWProfile: ::ULONG,
     HWPI_szFriendlyName: [::WCHAR; MAX_PROFILE_LEN],
     HWPI_dwFlags: ::DWORD,
@@ -632,10 +632,10 @@ STRUCT!{struct CM_NOTIFY_FILTER_DeviceInterface {
 STRUCT!{struct CM_NOTIFY_FILTER_DeviceHandle {
     hTarget: ::HANDLE,
 }}
-STRUCT!{nodebug struct CM_NOTIFY_FILTER_DeviceInstance {
+STRUCT!{struct CM_NOTIFY_FILTER_DeviceInstance {
     InstanceId: [::WCHAR; MAX_DEVICE_ID_LEN],
 }}
-STRUCT!{nodebug struct CM_NOTIFY_FILTER {
+STRUCT!{struct CM_NOTIFY_FILTER {
     cbSize: ::DWORD,
     Flags: ::DWORD,
     FilterType: CM_NOTIFY_FILTER_TYPE,

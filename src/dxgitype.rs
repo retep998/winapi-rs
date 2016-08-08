@@ -6,7 +6,7 @@ pub const DXGI_CPU_ACCESS_DYNAMIC: ::DWORD = 1;
 pub const DXGI_CPU_ACCESS_READ_WRITE: ::DWORD = 2;
 pub const DXGI_CPU_ACCESS_SCRATCH: ::DWORD = 3;
 pub const DXGI_CPU_ACCESS_FIELD: ::DWORD = 15;
-FLAGS!{enum DXGI_USAGE {
+ENUM!{enum DXGI_USAGE {
     DXGI_USAGE_SHADER_INPUT = 1 << (0 + 4),
     DXGI_USAGE_RENDER_TARGET_OUTPUT = 1 << (1 + 4),
     DXGI_USAGE_BACK_BUFFER = 1 << (2 + 4),
@@ -21,12 +21,12 @@ STRUCT!{struct DXGI_RGB {
     Blue: f32,
 }}
 pub type DXGI_RGBA = ::D3DCOLORVALUE;
-STRUCT!{nodebug struct DXGI_GAMMA_CONTROL {
+STRUCT!{struct DXGI_GAMMA_CONTROL {
     Scale: DXGI_RGB,
     Offset: DXGI_RGB,
     GammaCurve: [DXGI_RGB; 1025],
 }}
-STRUCT!{nodebug struct DXGI_GAMMA_CONTROL_CAPABILITIES {
+STRUCT!{struct DXGI_GAMMA_CONTROL_CAPABILITIES {
     ScaleAndOffsetSupported: ::BOOL,
     MaxConvertedValue: f32,
     MinConvertedValue: f32,

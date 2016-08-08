@@ -4,7 +4,7 @@
 pub type LPOFNHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-STRUCT!{nodebug struct OPENFILENAME_NT4A {
+STRUCT!{struct OPENFILENAME_NT4A {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hInstance: ::HINSTANCE,
@@ -27,7 +27,7 @@ STRUCT!{nodebug struct OPENFILENAME_NT4A {
     lpTemplateName: ::LPCSTR,
 }}
 pub type LPOPENFILENAME_NT4A = *mut OPENFILENAME_NT4A;
-STRUCT!{nodebug struct OPENFILENAME_NT4W {
+STRUCT!{struct OPENFILENAME_NT4W {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hInstance: ::HINSTANCE,
@@ -50,7 +50,7 @@ STRUCT!{nodebug struct OPENFILENAME_NT4W {
     lpTemplateName: ::LPCWSTR,
 }}
 pub type LPOPENFILENAME_NT4W = *mut OPENFILENAME_NT4W;
-STRUCT!{nodebug struct OPENFILENAMEA {
+STRUCT!{struct OPENFILENAMEA {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hInstance: ::HINSTANCE,
@@ -76,7 +76,7 @@ STRUCT!{nodebug struct OPENFILENAMEA {
     FlagsEx: ::DWORD,
 }}
 pub type LPOPENFILENAMEA = *mut OPENFILENAMEA;
-STRUCT!{nodebug struct OPENFILENAMEW {
+STRUCT!{struct OPENFILENAMEW {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hInstance: ::HINSTANCE,
@@ -180,7 +180,7 @@ pub const CDM_GETFOLDERIDLIST: ::UINT = CDM_FIRST + 0x0003;
 pub const CDM_SETCONTROLTEXT: ::UINT = CDM_FIRST + 0x0004;
 pub const CDM_HIDECONTROL: ::UINT = CDM_FIRST + 0x0005;
 pub const CDM_SETDEFEXT: ::UINT = CDM_FIRST + 0x0006;
-STRUCT!{nodebug struct CHOOSECOLORA {
+STRUCT!{struct CHOOSECOLORA {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hInstance: ::HWND,
@@ -192,7 +192,7 @@ STRUCT!{nodebug struct CHOOSECOLORA {
     lpTemplateName: ::LPCSTR,
 }}
 pub type LPCHOOSECOLORA = *mut CHOOSECOLORA;
-STRUCT!{nodebug struct CHOOSECOLORW {
+STRUCT!{struct CHOOSECOLORW {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hInstance: ::HWND,
@@ -216,7 +216,7 @@ pub const CC_ANYCOLOR: ::DWORD = 0x00000100;
 pub type LPFRHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-STRUCT!{nodebug struct FINDREPLACEA {
+STRUCT!{struct FINDREPLACEA {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hInstance: ::HINSTANCE,
@@ -230,7 +230,7 @@ STRUCT!{nodebug struct FINDREPLACEA {
     lpTemplateName: ::LPCSTR,
 }}
 pub type LPFINDREPLACEA = *mut FINDREPLACEA;
-STRUCT!{nodebug struct FINDREPLACEW {
+STRUCT!{struct FINDREPLACEW {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hInstance: ::HINSTANCE,
@@ -268,7 +268,7 @@ pub const FR_MATCHALEFHAMZA: ::DWORD = 0x80000000;
 pub type LPCFHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-STRUCT!{nodebug struct CHOOSEFONTA {
+STRUCT!{struct CHOOSEFONTA {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hDC: ::HDC,
@@ -287,7 +287,7 @@ STRUCT!{nodebug struct CHOOSEFONTA {
     nSizeMax: ::INT,
 }}
 pub type LPCHOOSEFONTA = *mut CHOOSEFONTA;
-STRUCT!{nodebug struct CHOOSEFONTW {
+STRUCT!{struct CHOOSEFONTW {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hDC: ::HDC,
@@ -358,7 +358,7 @@ pub type LPPRINTHOOKPROC = Option<unsafe extern "system" fn(
 pub type LPSETUPHOOKPROC = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-STRUCT!{nodebug struct PRINTDLGA {
+STRUCT!{struct PRINTDLGA {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hDevMode: ::HGLOBAL,
@@ -380,7 +380,7 @@ STRUCT!{nodebug struct PRINTDLGA {
     hSetupTemplate: ::HGLOBAL,
 }}
 pub type LPPRINTDLGA = *mut PRINTDLGA;
-STRUCT!{nodebug struct PRINTDLGW {
+STRUCT!{struct PRINTDLGW {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hDevMode: ::HGLOBAL,
@@ -528,7 +528,7 @@ pub type LPPAGEPAINTHOOK = Option<unsafe extern "system" fn(
 pub type LPPAGESETUPHOOK = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::WPARAM, ::LPARAM,
 ) -> ::UINT_PTR>;
-STRUCT!{nodebug struct PAGESETUPDLGA {
+STRUCT!{struct PAGESETUPDLGA {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hDevMode: ::HGLOBAL,
@@ -545,7 +545,7 @@ STRUCT!{nodebug struct PAGESETUPDLGA {
     hPageSetupTemplate: ::HGLOBAL,
 }}
 pub type LPPAGESETUPDLGA = *mut PAGESETUPDLGA;
-STRUCT!{nodebug struct PAGESETUPDLGW {
+STRUCT!{struct PAGESETUPDLGW {
     lStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hDevMode: ::HGLOBAL,

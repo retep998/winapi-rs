@@ -19,7 +19,7 @@ pub const NIF_SHOWTIP: ::UINT = 0x00000080;
 pub const NOTIFYICON_VERSION: ::UINT = 3;
 pub const NOTIFYICON_VERSION_4: ::UINT = 4;
 
-STRUCT!{nodebug struct NOTIFYICONDATAA {
+STRUCT!{struct NOTIFYICONDATAA {
     cbSize: ::DWORD,
     hWnd: ::HWND,
     uID: ::UINT,
@@ -40,7 +40,7 @@ UNION!(NOTIFYICONDATAA, uTimeout, uTimeout, uTimeout_mut, ::UINT);
 UNION!(NOTIFYICONDATAA, uTimeout, uVersion, uVersion_mut, ::UINT);
 pub type PNOTIFYICONDATAA = *mut NOTIFYICONDATAA;
 
-STRUCT!{nodebug struct NOTIFYICONDATAW {
+STRUCT!{struct NOTIFYICONDATAW {
     cbSize: ::DWORD,
     hWnd: ::HWND,
     uID: ::UINT,

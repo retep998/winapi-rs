@@ -27,7 +27,7 @@ pub const PSPCB_ADDREF: ::UINT = 0;
 pub const PSPCB_RELEASE: ::UINT = 1;
 pub const PSPCB_CREATE: ::UINT = 2;
 pub type PROPSHEETPAGE_RESOURCE = ::LPCDLGTEMPLATEA;
-STRUCT!{nodebug struct PROPSHEETPAGEA_V4 {
+STRUCT!{struct PROPSHEETPAGEA_V4 {
     dwSize: ::DWORD,
     dwFlags: ::DWORD,
     hInstance: ::HINSTANCE,
@@ -48,7 +48,7 @@ UNION!(PROPSHEETPAGEA_V4, hIcon, pszIcon, pszIcon_mut, ::LPCSTR);
 UNION!(PROPSHEETPAGEA_V4, hbmHeader, pszbmHeader, pszbmHeader_mut, ::LPCSTR);
 pub type LPPROPSHEETPAGEA_V4 = *mut PROPSHEETPAGEA_V4;
 pub type LPCPROPSHEETPAGEA_V4 = *const PROPSHEETPAGEA_V4;
-STRUCT!{nodebug struct PROPSHEETPAGEW_V4 {
+STRUCT!{struct PROPSHEETPAGEW_V4 {
     dwSize: ::DWORD,
     dwFlags: ::DWORD,
     hInstance: ::HINSTANCE,
@@ -112,7 +112,7 @@ pub const PSH_NOMARGIN: ::DWORD = 0x10000000;
 pub type PFNPROPSHEETCALLBACK = Option<unsafe extern "system" fn(
     ::HWND, ::UINT, ::LPARAM,
 ) -> ::c_int>;
-STRUCT!{nodebug struct PROPSHEETHEADERA_V2 {
+STRUCT!{struct PROPSHEETHEADERA_V2 {
     dwSize: ::DWORD,
     dwFlags: ::DWORD,
     hwndParent: ::HWND,
@@ -134,7 +134,7 @@ UNION!(PROPSHEETHEADERA_V2, hbmWatermark, pszbmWatermark, pszbmWatermark_mut, ::
 UNION!(PROPSHEETHEADERA_V2, hbmHeader, pszbmHeader, pszbmHeader_mut, ::LPCSTR);
 pub type LPPROPSHEETHEADERA_V2 = *mut PROPSHEETHEADERA_V2;
 pub type LPCPROPSHEETHEADERA_V2 = *const PROPSHEETHEADERA_V2;
-STRUCT!{nodebug struct PROPSHEETHEADERW_V2 {
+STRUCT!{struct PROPSHEETHEADERW_V2 {
     dwSize: ::DWORD,
     dwFlags: ::DWORD,
     hwndParent: ::HWND,
