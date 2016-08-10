@@ -441,7 +441,11 @@ extern "system" {
     // pub fn GetSecurityDescriptorOwner();
     // pub fn GetSecurityDescriptorRMControl();
     // pub fn GetSecurityDescriptorSacl();
-    // pub fn GetSecurityInfo();
+    pub fn GetSecurityInfo(
+        HANDLE: handle, SE_OBJECT_TYPE: ObjectType, SECURITY_INFORMATION: SecurityInfo,
+        PSID *ppsidOwner, PSID: *ppsidGroup, PACL: *ppDacl, PACL: *ppSacl, 
+        PSECURITY_DESCRIPTOR: *ppSecurityDescriptor
+    ) -> BOOL;
     // pub fn GetSecurityInfoExA();
     // pub fn GetSecurityInfoExW();
     // pub fn GetServiceDisplayNameA();
