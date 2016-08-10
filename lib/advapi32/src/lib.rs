@@ -1,6 +1,6 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
-//! FFI bindings to advapi32.
+// FFI bindings to advapi32.
 #![cfg(windows)]
 extern crate winapi;
 use winapi::*;
@@ -33,10 +33,13 @@ extern "system" {
     // pub fn AddUsersToEncryptedFile();
     // pub fn AddUsersToEncryptedFileEx();
     // pub fn AdjustTokenGroups();
-    pub fn AdjustTokenPrivileges(
-        TokenHandle: HANDLE, DisableAllPrivileges: BOOL, NewState: PTOKEN_PRIVILEGES,
-        BufferLength: DWORD, PreviousState: PTOKEN_PRIVILEGES, ReturnLength: PDWORD,
-    ) -> BOOL;
+    pub fn AdjustTokenPrivileges(TokenHandle: HANDLE,
+                                 DisableAllPrivileges: BOOL,
+                                 NewState: PTOKEN_PRIVILEGES,
+                                 BufferLength: DWORD,
+                                 PreviousState: PTOKEN_PRIVILEGES,
+                                 ReturnLength: PDWORD)
+                                 -> BOOL;
     // pub fn AllocateAndInitializeSid();
     pub fn AllocateLocallyUniqueId(Luid: PLUID) -> BOOL;
     pub fn AreAllAccessesGranted(GrantedAccess: DWORD, DesiredAccess: DWORD) -> BOOL;
@@ -111,9 +114,10 @@ extern "system" {
     // pub fn CloseTrace();
     // pub fn CommandLineFromMsiDescriptor();
     // pub fn ComputeAccessTokenFromCodeAuthzLevel();
-    pub fn ControlService(
-        hService: SC_HANDLE, dwControl: DWORD, lpServiceStatus: LPSERVICE_STATUS,
-    ) -> BOOL;
+    pub fn ControlService(hService: SC_HANDLE,
+                          dwControl: DWORD,
+                          lpServiceStatus: LPSERVICE_STATUS)
+                          -> BOOL;
     // pub fn ControlServiceExA();
     // pub fn ControlServiceExW();
     // pub fn ControlTraceA();
@@ -150,18 +154,34 @@ extern "system" {
     // pub fn CreateProcessWithLogonW();
     // pub fn CreateProcessWithTokenW();
     // pub fn CreateRestrictedToken();
-    pub fn CreateServiceA(
-        hSCManager: SC_HANDLE, lpServiceName: LPCSTR, lpDisplayName: LPCSTR,
-        dwDesiredAccess: DWORD, dwServiceType: DWORD, dwStartType: DWORD, dwErrorControl: DWORD,
-        lpBinaryPathName: LPCSTR, lpLoadOrderGroup: LPCSTR, lpdwTagId: LPDWORD,
-        lpDependencies: LPCSTR, lpServiceStartName: LPCSTR, lpPassword: LPCSTR,
-    ) -> SC_HANDLE;
-    pub fn CreateServiceW(
-        hSCManager: SC_HANDLE, lpServiceName: LPCWSTR, lpDisplayName: LPCWSTR,
-        dwDesiredAccess: DWORD, dwServiceType: DWORD, dwStartType: DWORD, dwErrorControl: DWORD,
-        lpBinaryPathName: LPCWSTR, lpLoadOrderGroup: LPCWSTR, lpdwTagId: LPDWORD,
-        lpDependencies: LPCWSTR, lpServiceStartName: LPCWSTR, lpPassword: LPCWSTR,
-    ) -> SC_HANDLE;
+    pub fn CreateServiceA(hSCManager: SC_HANDLE,
+                          lpServiceName: LPCSTR,
+                          lpDisplayName: LPCSTR,
+                          dwDesiredAccess: DWORD,
+                          dwServiceType: DWORD,
+                          dwStartType: DWORD,
+                          dwErrorControl: DWORD,
+                          lpBinaryPathName: LPCSTR,
+                          lpLoadOrderGroup: LPCSTR,
+                          lpdwTagId: LPDWORD,
+                          lpDependencies: LPCSTR,
+                          lpServiceStartName: LPCSTR,
+                          lpPassword: LPCSTR)
+                          -> SC_HANDLE;
+    pub fn CreateServiceW(hSCManager: SC_HANDLE,
+                          lpServiceName: LPCWSTR,
+                          lpDisplayName: LPCWSTR,
+                          dwDesiredAccess: DWORD,
+                          dwServiceType: DWORD,
+                          dwStartType: DWORD,
+                          dwErrorControl: DWORD,
+                          lpBinaryPathName: LPCWSTR,
+                          lpLoadOrderGroup: LPCWSTR,
+                          lpdwTagId: LPDWORD,
+                          lpDependencies: LPCWSTR,
+                          lpServiceStartName: LPCWSTR,
+                          lpPassword: LPCWSTR)
+                          -> SC_HANDLE;
     // pub fn CreateTraceInstanceId();
     // pub fn CreateWellKnownSid();
     pub fn CredDeleteA(TargetName: LPCSTR, Type: DWORD, Flags: DWORD) -> BOOL;
@@ -182,14 +202,18 @@ extern "system" {
     // pub fn CredMarshalCredentialW();
     // pub fn CredProtectA();
     // pub fn CredProtectW();
-    pub fn CredReadA(
-        TargetName: LPCSTR, Type: DWORD, Flags: DWORD, Credential: *mut PCREDENTIALA,
-    ) -> BOOL;
+    pub fn CredReadA(TargetName: LPCSTR,
+                     Type: DWORD,
+                     Flags: DWORD,
+                     Credential: *mut PCREDENTIALA)
+                     -> BOOL;
     // pub fn CredReadDomainCredentialsA();
     // pub fn CredReadDomainCredentialsW();
-    pub fn CredReadW(
-        TargetName: LPCWSTR, Type: DWORD, Flags: DWORD, Credential: *mut PCREDENTIALW,
-    ) -> BOOL;
+    pub fn CredReadW(TargetName: LPCWSTR,
+                     Type: DWORD,
+                     Flags: DWORD,
+                     Credential: *mut PCREDENTIALW)
+                     -> BOOL;
     // pub fn CredRenameA();
     // pub fn CredRenameW();
     // pub fn CredUnmarshalCredentialA();
@@ -200,124 +224,199 @@ extern "system" {
     // pub fn CredWriteDomainCredentialsA();
     // pub fn CredWriteDomainCredentialsW();
     pub fn CredWriteW(Credential: PCREDENTIALW, Flags: DWORD) -> BOOL;
-    pub fn CryptAcquireContextA(
-        phProv: *mut HCRYPTPROV, szContainer: LPCSTR, szProvider: LPCSTR, dwProvType: DWORD,
-        dwFlags: DWORD,
-    ) -> BOOL;
-    pub fn CryptAcquireContextW(
-        phProv: *mut HCRYPTPROV, szContainer: LPCWSTR, szProvider: LPCWSTR, dwProvType: DWORD,
-        dwFlags: DWORD,
-    ) -> BOOL;
+    pub fn CryptAcquireContextA(phProv: *mut HCRYPTPROV,
+                                szContainer: LPCSTR,
+                                szProvider: LPCSTR,
+                                dwProvType: DWORD,
+                                dwFlags: DWORD)
+                                -> BOOL;
+    pub fn CryptAcquireContextW(phProv: *mut HCRYPTPROV,
+                                szContainer: LPCWSTR,
+                                szProvider: LPCWSTR,
+                                dwProvType: DWORD,
+                                dwFlags: DWORD)
+                                -> BOOL;
     pub fn CryptContextAddRef(hProv: HCRYPTPROV, pdwReserved: *mut DWORD, dwFlags: DWORD) -> BOOL;
-    pub fn CryptCreateHash(
-        hProv: HCRYPTPROV, Algid: ALG_ID, hKey: HCRYPTKEY, dwFlags: DWORD, phHash: *mut HCRYPTHASH,
-    ) -> BOOL;
-    pub fn CryptDecrypt(
-        hKey: HCRYPTKEY, hHash: HCRYPTHASH, Final: BOOL, dwFlags: DWORD, pbData: *mut BYTE,
-        pdwDataLen: *mut DWORD,
-    ) -> BOOL;
-    pub fn CryptDeriveKey(
-        hProv: HCRYPTPROV, Algid: ALG_ID, hBaseData: HCRYPTHASH, dwFlags: DWORD,
-        phKey: *mut HCRYPTKEY,
-    ) -> BOOL;
+    pub fn CryptCreateHash(hProv: HCRYPTPROV,
+                           Algid: ALG_ID,
+                           hKey: HCRYPTKEY,
+                           dwFlags: DWORD,
+                           phHash: *mut HCRYPTHASH)
+                           -> BOOL;
+    pub fn CryptDecrypt(hKey: HCRYPTKEY,
+                        hHash: HCRYPTHASH,
+                        Final: BOOL,
+                        dwFlags: DWORD,
+                        pbData: *mut BYTE,
+                        pdwDataLen: *mut DWORD)
+                        -> BOOL;
+    pub fn CryptDeriveKey(hProv: HCRYPTPROV,
+                          Algid: ALG_ID,
+                          hBaseData: HCRYPTHASH,
+                          dwFlags: DWORD,
+                          phKey: *mut HCRYPTKEY)
+                          -> BOOL;
     pub fn CryptDestroyHash(hHash: HCRYPTHASH) -> BOOL;
     pub fn CryptDestroyKey(hKey: HCRYPTKEY) -> BOOL;
-    pub fn CryptDuplicateHash(
-        hHash: HCRYPTHASH, pdwReserved: *mut DWORD, dwFlags: DWORD, phHash: *mut HCRYPTHASH,
-    ) -> BOOL;
-    pub fn CryptDuplicateKey(
-        hKey: HCRYPTKEY, pdwReserved: *mut DWORD, dwFlags: DWORD, phKey: *mut HCRYPTKEY,
-    ) -> BOOL;
-    pub fn CryptEncrypt(
-        hKey: HCRYPTKEY, hHash: HCRYPTHASH, Final: BOOL, dwFlags: DWORD, pbData: *mut BYTE,
-        pdwDataLen: *mut DWORD, dwBufLen: DWORD,
-    ) -> BOOL;
-    pub fn CryptEnumProviderTypesA(
-        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD,
-        szTypeName: LPSTR, pcbTypeName: *mut DWORD,
-    ) -> BOOL;
-    pub fn CryptEnumProviderTypesW(
-        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD,
-        szTypeName: LPWSTR, pcbTypeName: *mut DWORD,
-    ) -> BOOL;
-    pub fn CryptEnumProvidersA(
-        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD,
-        szProvName: LPSTR, pcbProvName: *mut DWORD,
-    ) -> BOOL;
-    pub fn CryptEnumProvidersW(
-        dwIndex: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pdwProvType: *mut DWORD,
-        szProvName: LPWSTR, pcbProvName: *mut DWORD,
-    ) -> BOOL;
-    pub fn CryptExportKey(
-        hKey: HCRYPTKEY, hExpKey: HCRYPTKEY, dwBlobType: DWORD, dwFlags: DWORD, pbData: *mut BYTE,
-        pdwDataLen: *mut DWORD,
-    ) -> BOOL;
-    pub fn CryptGenKey(
-        hProv: HCRYPTPROV, Algid: ALG_ID, dwFlags: DWORD, phKey: *mut HCRYPTKEY,
-    ) -> BOOL;
+    pub fn CryptDuplicateHash(hHash: HCRYPTHASH,
+                              pdwReserved: *mut DWORD,
+                              dwFlags: DWORD,
+                              phHash: *mut HCRYPTHASH)
+                              -> BOOL;
+    pub fn CryptDuplicateKey(hKey: HCRYPTKEY,
+                             pdwReserved: *mut DWORD,
+                             dwFlags: DWORD,
+                             phKey: *mut HCRYPTKEY)
+                             -> BOOL;
+    pub fn CryptEncrypt(hKey: HCRYPTKEY,
+                        hHash: HCRYPTHASH,
+                        Final: BOOL,
+                        dwFlags: DWORD,
+                        pbData: *mut BYTE,
+                        pdwDataLen: *mut DWORD,
+                        dwBufLen: DWORD)
+                        -> BOOL;
+    pub fn CryptEnumProviderTypesA(dwIndex: DWORD,
+                                   pdwReserved: *mut DWORD,
+                                   dwFlags: DWORD,
+                                   pdwProvType: *mut DWORD,
+                                   szTypeName: LPSTR,
+                                   pcbTypeName: *mut DWORD)
+                                   -> BOOL;
+    pub fn CryptEnumProviderTypesW(dwIndex: DWORD,
+                                   pdwReserved: *mut DWORD,
+                                   dwFlags: DWORD,
+                                   pdwProvType: *mut DWORD,
+                                   szTypeName: LPWSTR,
+                                   pcbTypeName: *mut DWORD)
+                                   -> BOOL;
+    pub fn CryptEnumProvidersA(dwIndex: DWORD,
+                               pdwReserved: *mut DWORD,
+                               dwFlags: DWORD,
+                               pdwProvType: *mut DWORD,
+                               szProvName: LPSTR,
+                               pcbProvName: *mut DWORD)
+                               -> BOOL;
+    pub fn CryptEnumProvidersW(dwIndex: DWORD,
+                               pdwReserved: *mut DWORD,
+                               dwFlags: DWORD,
+                               pdwProvType: *mut DWORD,
+                               szProvName: LPWSTR,
+                               pcbProvName: *mut DWORD)
+                               -> BOOL;
+    pub fn CryptExportKey(hKey: HCRYPTKEY,
+                          hExpKey: HCRYPTKEY,
+                          dwBlobType: DWORD,
+                          dwFlags: DWORD,
+                          pbData: *mut BYTE,
+                          pdwDataLen: *mut DWORD)
+                          -> BOOL;
+    pub fn CryptGenKey(hProv: HCRYPTPROV,
+                       Algid: ALG_ID,
+                       dwFlags: DWORD,
+                       phKey: *mut HCRYPTKEY)
+                       -> BOOL;
     pub fn CryptGenRandom(hProv: HCRYPTPROV, dwLen: DWORD, pbBuffer: *mut BYTE) -> BOOL;
-    pub fn CryptGetDefaultProviderA(
-        dwProvType: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pszProvName: LPSTR,
-        pcbProvName: *mut DWORD,
-    ) -> BOOL;
-    pub fn CryptGetDefaultProviderW(
-        dwProvType: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD, pszProvName: LPWSTR,
-        pcbProvName: *mut DWORD,
-    ) -> BOOL;
-    pub fn CryptGetHashParam(
-        hHash: HCRYPTHASH, dwParam: DWORD, pbData: *mut BYTE, pdwDataLen: *mut DWORD,
-        dwFlags: DWORD,
-    ) -> BOOL;
-    pub fn CryptGetKeyParam(
-        hKey: HCRYPTKEY, dwParam: DWORD, pbData: *mut BYTE, pdwDataLen: *mut DWORD, dwFlags: DWORD,
-    ) -> BOOL;
-    pub fn CryptGetProvParam(
-        hProv: HCRYPTPROV, dwParam: DWORD, pbData: *mut BYTE, pdwDataLen: *mut DWORD,
-        dwFlags: DWORD,
-    ) -> BOOL;
+    pub fn CryptGetDefaultProviderA(dwProvType: DWORD,
+                                    pdwReserved: *mut DWORD,
+                                    dwFlags: DWORD,
+                                    pszProvName: LPSTR,
+                                    pcbProvName: *mut DWORD)
+                                    -> BOOL;
+    pub fn CryptGetDefaultProviderW(dwProvType: DWORD,
+                                    pdwReserved: *mut DWORD,
+                                    dwFlags: DWORD,
+                                    pszProvName: LPWSTR,
+                                    pcbProvName: *mut DWORD)
+                                    -> BOOL;
+    pub fn CryptGetHashParam(hHash: HCRYPTHASH,
+                             dwParam: DWORD,
+                             pbData: *mut BYTE,
+                             pdwDataLen: *mut DWORD,
+                             dwFlags: DWORD)
+                             -> BOOL;
+    pub fn CryptGetKeyParam(hKey: HCRYPTKEY,
+                            dwParam: DWORD,
+                            pbData: *mut BYTE,
+                            pdwDataLen: *mut DWORD,
+                            dwFlags: DWORD)
+                            -> BOOL;
+    pub fn CryptGetProvParam(hProv: HCRYPTPROV,
+                             dwParam: DWORD,
+                             pbData: *mut BYTE,
+                             pdwDataLen: *mut DWORD,
+                             dwFlags: DWORD)
+                             -> BOOL;
     pub fn CryptGetUserKey(hProv: HCRYPTPROV, dwKeySpec: DWORD, phUserKey: *mut HCRYPTKEY) -> BOOL;
-    pub fn CryptHashData(
-        hHash: HCRYPTHASH, pbData: *const BYTE, dwDataLen: DWORD, dwFlags: DWORD,
-    ) -> BOOL;
+    pub fn CryptHashData(hHash: HCRYPTHASH,
+                         pbData: *const BYTE,
+                         dwDataLen: DWORD,
+                         dwFlags: DWORD)
+                         -> BOOL;
     pub fn CryptHashSessionKey(hHash: HCRYPTHASH, hKey: HCRYPTKEY, dwFlags: DWORD) -> BOOL;
-    pub fn CryptImportKey(
-        hProv: HCRYPTPROV, pbData: *const BYTE, dwDataLen: DWORD, hPubKey: HCRYPTKEY,
-        dwFlags: DWORD, phKey: *mut HCRYPTKEY,
-    ) -> BOOL;
+    pub fn CryptImportKey(hProv: HCRYPTPROV,
+                          pbData: *const BYTE,
+                          dwDataLen: DWORD,
+                          hPubKey: HCRYPTKEY,
+                          dwFlags: DWORD,
+                          phKey: *mut HCRYPTKEY)
+                          -> BOOL;
     pub fn CryptReleaseContext(hProv: HCRYPTPROV, dwFlags: DWORD) -> BOOL;
-    pub fn CryptSetHashParam(
-        hHash: HCRYPTHASH, dwParam: DWORD, pbData: *const BYTE, dwFlags: DWORD,
-    ) -> BOOL;
-    pub fn CryptSetKeyParam(
-        hKey: HCRYPTKEY, dwParam: DWORD, pbData: *const BYTE, dwFlags: DWORD,
-    ) -> BOOL;
-    pub fn CryptSetProvParam(
-        hProv: HCRYPTPROV, dwParam: DWORD, pbData: *const BYTE, dwFlags: DWORD,
-    ) -> BOOL;
+    pub fn CryptSetHashParam(hHash: HCRYPTHASH,
+                             dwParam: DWORD,
+                             pbData: *const BYTE,
+                             dwFlags: DWORD)
+                             -> BOOL;
+    pub fn CryptSetKeyParam(hKey: HCRYPTKEY,
+                            dwParam: DWORD,
+                            pbData: *const BYTE,
+                            dwFlags: DWORD)
+                            -> BOOL;
+    pub fn CryptSetProvParam(hProv: HCRYPTPROV,
+                             dwParam: DWORD,
+                             pbData: *const BYTE,
+                             dwFlags: DWORD)
+                             -> BOOL;
     pub fn CryptSetProviderA(pszProvName: LPCSTR, dwProvType: DWORD) -> BOOL;
-    pub fn CryptSetProviderExA(
-        pszProvName: LPCSTR, dwProvType: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD,
-    ) -> BOOL;
-    pub fn CryptSetProviderExW(
-        pszProvName: LPCWSTR, dwProvType: DWORD, pdwReserved: *mut DWORD, dwFlags: DWORD,
-    ) -> BOOL;
+    pub fn CryptSetProviderExA(pszProvName: LPCSTR,
+                               dwProvType: DWORD,
+                               pdwReserved: *mut DWORD,
+                               dwFlags: DWORD)
+                               -> BOOL;
+    pub fn CryptSetProviderExW(pszProvName: LPCWSTR,
+                               dwProvType: DWORD,
+                               pdwReserved: *mut DWORD,
+                               dwFlags: DWORD)
+                               -> BOOL;
     pub fn CryptSetProviderW(pszProvName: LPCWSTR, dwProvType: DWORD) -> BOOL;
-    pub fn CryptSignHashA(
-        hHash: HCRYPTHASH, dwKeySpec: DWORD, szDescription: LPCSTR, dwFlags: DWORD,
-        pbSignature: *mut BYTE, pdwSigLen: *mut DWORD,
-    ) -> BOOL;
-    pub fn CryptSignHashW(
-        hHash: HCRYPTHASH, dwKeySpec: DWORD, szDescription: LPCWSTR, dwFlags: DWORD,
-        pbSignature: *mut BYTE, pdwSigLen: *mut DWORD,
-    ) -> BOOL;
-    pub fn CryptVerifySignatureA(
-        hHash: HCRYPTHASH, pbSignature: *const BYTE, dwSigLen: DWORD, hPubKey: HCRYPTKEY,
-        szDescription: LPCSTR, dwFlags: DWORD,
-    ) -> BOOL;
-    pub fn CryptVerifySignatureW(
-        hHash: HCRYPTHASH, pbSignature: *const BYTE, dwSigLen: DWORD, hPubKey: HCRYPTKEY,
-        szDescription: LPCWSTR, dwFlags: DWORD,
-    ) -> BOOL;
+    pub fn CryptSignHashA(hHash: HCRYPTHASH,
+                          dwKeySpec: DWORD,
+                          szDescription: LPCSTR,
+                          dwFlags: DWORD,
+                          pbSignature: *mut BYTE,
+                          pdwSigLen: *mut DWORD)
+                          -> BOOL;
+    pub fn CryptSignHashW(hHash: HCRYPTHASH,
+                          dwKeySpec: DWORD,
+                          szDescription: LPCWSTR,
+                          dwFlags: DWORD,
+                          pbSignature: *mut BYTE,
+                          pdwSigLen: *mut DWORD)
+                          -> BOOL;
+    pub fn CryptVerifySignatureA(hHash: HCRYPTHASH,
+                                 pbSignature: *const BYTE,
+                                 dwSigLen: DWORD,
+                                 hPubKey: HCRYPTKEY,
+                                 szDescription: LPCSTR,
+                                 dwFlags: DWORD)
+                                 -> BOOL;
+    pub fn CryptVerifySignatureW(hHash: HCRYPTHASH,
+                                 pbSignature: *const BYTE,
+                                 dwSigLen: DWORD,
+                                 hPubKey: HCRYPTKEY,
+                                 szDescription: LPCWSTR,
+                                 dwFlags: DWORD)
+                                 -> BOOL;
     // pub fn DecryptFileA();
     // pub fn DecryptFileW();
     // pub fn DeleteAce();
@@ -442,10 +541,10 @@ extern "system" {
     // pub fn GetSecurityDescriptorRMControl();
     // pub fn GetSecurityDescriptorSacl();
     pub fn GetSecurityInfo(
-        HANDLE: handle, SE_OBJECT_TYPE: ObjectType, SECURITY_INFORMATION: SecurityInfo,
-        PSID: *ppsidOwner, PSID: *ppsidGroup, PACL: *ppDacl, PACL: *ppSacl, 
-        PSECURITY_DESCRIPTOR: *ppSecurityDescriptor
-    ) -> BOOL;
+        handle: HANDLE, ObjectType: SE_OBJECT_TYPE, SecurityInfo: SECURITY_INFORMATION,
+        ppsidOwner: *mut PSID, ppsidGroup: *mut PSID, ppDacl: *mut PACL, 
+        ppSacl: *mut PACL, ppSecurityDescriptor: *mut PSECURITY_DESCRIPTOR,
+        ) -> BOOL;
     // pub fn GetSecurityInfoExA();
     // pub fn GetSecurityInfoExW();
     // pub fn GetServiceDisplayNameA();
@@ -508,18 +607,18 @@ extern "system" {
     // pub fn LookupAccountSidW();
     // pub fn LookupPrivilegeDisplayNameA();
     // pub fn LookupPrivilegeDisplayNameW();
-    pub fn LookupPrivilegeNameA(
-        lpSystemName: LPCSTR, lpLuid: PLUID, lpName: LPSTR, cchName: LPDWORD,
-    ) -> BOOL;
-    pub fn LookupPrivilegeNameW(
-        lpSystemName: LPCWSTR, lpLuid: PLUID, lpName: LPWSTR, cchName: LPDWORD,
-    ) -> BOOL;
-    pub fn LookupPrivilegeValueA(
-        lpSystemName: LPCSTR, lpName: LPCSTR, lpLuid: PLUID,
-    ) -> BOOL;
-    pub fn LookupPrivilegeValueW(
-        lpSystemName: LPCWSTR, lpName: LPCWSTR, lpLuid: PLUID,
-    ) -> BOOL;
+    pub fn LookupPrivilegeNameA(lpSystemName: LPCSTR,
+                                lpLuid: PLUID,
+                                lpName: LPSTR,
+                                cchName: LPDWORD)
+                                -> BOOL;
+    pub fn LookupPrivilegeNameW(lpSystemName: LPCWSTR,
+                                lpLuid: PLUID,
+                                lpName: LPWSTR,
+                                cchName: LPDWORD)
+                                -> BOOL;
+    pub fn LookupPrivilegeValueA(lpSystemName: LPCSTR, lpName: LPCSTR, lpLuid: PLUID) -> BOOL;
+    pub fn LookupPrivilegeValueW(lpSystemName: LPCWSTR, lpName: LPCWSTR, lpLuid: PLUID) -> BOOL;
     // pub fn LookupSecurityDescriptorPartsA();
     // pub fn LookupSecurityDescriptorPartsW();
     // pub fn LsaAddAccountRights();
@@ -614,21 +713,26 @@ extern "system" {
     // pub fn OpenEncryptedFileRawW();
     // pub fn OpenEventLogA();
     // pub fn OpenEventLogW();
-    pub fn OpenProcessToken(
-        ProcessHandle: HANDLE, DesiredAccess: DWORD, TokenHandle: PHANDLE,
-    ) -> BOOL;
-    pub fn OpenSCManagerA(
-        lpMachineName: LPCSTR, lpDatabaseName: LPCSTR, dwDesiredAccess: DWORD,
-    ) -> SC_HANDLE;
-    pub fn OpenSCManagerW(
-        lpMachineName: LPCWSTR, lpDatabaseName: LPCWSTR, dwDesiredAccess: DWORD,
-    ) -> SC_HANDLE;
-    pub fn OpenServiceA(
-        hSCManager: SC_HANDLE, lpServiceName: LPCSTR, dwDesiredAccess: DWORD,
-    ) -> SC_HANDLE;
-    pub fn OpenServiceW(
-        hSCManager: SC_HANDLE, lpServiceName: LPCWSTR, dwDesiredAccess: DWORD,
-    ) -> SC_HANDLE;
+    pub fn OpenProcessToken(ProcessHandle: HANDLE,
+                            DesiredAccess: DWORD,
+                            TokenHandle: PHANDLE)
+                            -> BOOL;
+    pub fn OpenSCManagerA(lpMachineName: LPCSTR,
+                          lpDatabaseName: LPCSTR,
+                          dwDesiredAccess: DWORD)
+                          -> SC_HANDLE;
+    pub fn OpenSCManagerW(lpMachineName: LPCWSTR,
+                          lpDatabaseName: LPCWSTR,
+                          dwDesiredAccess: DWORD)
+                          -> SC_HANDLE;
+    pub fn OpenServiceA(hSCManager: SC_HANDLE,
+                        lpServiceName: LPCSTR,
+                        dwDesiredAccess: DWORD)
+                        -> SC_HANDLE;
+    pub fn OpenServiceW(hSCManager: SC_HANDLE,
+                        lpServiceName: LPCWSTR,
+                        dwDesiredAccess: DWORD)
+                        -> SC_HANDLE;
     // pub fn OpenThreadToken();
     // pub fn OpenThreadWaitChainSession();
     // pub fn OpenTraceA();
@@ -681,10 +785,12 @@ extern "system" {
     // pub fn QueryServiceLockStatusW();
     // pub fn QueryServiceObjectSecurity();
     pub fn QueryServiceStatus(hService: SC_HANDLE, lpServiceStatus: LPSERVICE_STATUS) -> BOOL;
-    pub fn QueryServiceStatusEx(
-        hService: SC_HANDLE, InfoLevel: SC_STATUS_TYPE, lpBuffer: LPBYTE, cbBufSize: DWORD,
-        pcbBytesNeeded: LPDWORD,
-    ) -> BOOL;
+    pub fn QueryServiceStatusEx(hService: SC_HANDLE,
+                                InfoLevel: SC_STATUS_TYPE,
+                                lpBuffer: LPBYTE,
+                                cbBufSize: DWORD,
+                                pcbBytesNeeded: LPDWORD)
+                                -> BOOL;
     // pub fn QueryTraceA();
     // pub fn QueryTraceW();
     // pub fn QueryUsersOnEncryptedFile();
@@ -699,42 +805,76 @@ extern "system" {
     pub fn RegCopyTreeA(hKeySrc: HKEY, lpSubKey: LPCSTR, hKeyDest: HKEY) -> LONG;
     pub fn RegCopyTreeW(hKeySrc: HKEY, lpSubKey: LPCWSTR, hKeyDest: HKEY) -> LONG;
     // pub fn RegCreateKeyA();
-    pub fn RegCreateKeyExA(
-        hKey: HKEY, lpSubKey: LPCSTR, Reserved: DWORD, lpClass: LPSTR, dwOptions: DWORD,
-        samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY,
-        lpdwDisposition: LPDWORD,
-    ) -> LONG;
-    pub fn RegCreateKeyExW(
-        hKey: HKEY, lpSubKey: LPCWSTR, Reserved: DWORD, lpClass: LPWSTR, dwOptions: DWORD,
-        samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY,
-        lpdwDisposition: LPDWORD,
-    ) -> LONG;
-    pub fn RegCreateKeyTransactedA(
-        hKey: HKEY, lpSubKey: LPCSTR, Reserved: DWORD, lpClass: LPSTR, dwOptions: DWORD,
-        samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY,
-        lpdwDisposition: LPDWORD, hTransaction: HANDLE, pExtendedParemeter: PVOID,
-    ) -> LONG;
-    pub fn RegCreateKeyTransactedW(
-        hKey: HKEY, lpSubKey: LPCWSTR, Reserved: DWORD, lpClass: LPWSTR, dwOptions: DWORD,
-        samDesired: REGSAM, lpSecurityAttributes: LPSECURITY_ATTRIBUTES, phkResult: PHKEY,
-        lpdwDisposition: LPDWORD, hTransaction: HANDLE, pExtendedParemeter: PVOID,
-    ) -> LONG;
+    pub fn RegCreateKeyExA(hKey: HKEY,
+                           lpSubKey: LPCSTR,
+                           Reserved: DWORD,
+                           lpClass: LPSTR,
+                           dwOptions: DWORD,
+                           samDesired: REGSAM,
+                           lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+                           phkResult: PHKEY,
+                           lpdwDisposition: LPDWORD)
+                           -> LONG;
+    pub fn RegCreateKeyExW(hKey: HKEY,
+                           lpSubKey: LPCWSTR,
+                           Reserved: DWORD,
+                           lpClass: LPWSTR,
+                           dwOptions: DWORD,
+                           samDesired: REGSAM,
+                           lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+                           phkResult: PHKEY,
+                           lpdwDisposition: LPDWORD)
+                           -> LONG;
+    pub fn RegCreateKeyTransactedA(hKey: HKEY,
+                                   lpSubKey: LPCSTR,
+                                   Reserved: DWORD,
+                                   lpClass: LPSTR,
+                                   dwOptions: DWORD,
+                                   samDesired: REGSAM,
+                                   lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+                                   phkResult: PHKEY,
+                                   lpdwDisposition: LPDWORD,
+                                   hTransaction: HANDLE,
+                                   pExtendedParemeter: PVOID)
+                                   -> LONG;
+    pub fn RegCreateKeyTransactedW(hKey: HKEY,
+                                   lpSubKey: LPCWSTR,
+                                   Reserved: DWORD,
+                                   lpClass: LPWSTR,
+                                   dwOptions: DWORD,
+                                   samDesired: REGSAM,
+                                   lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+                                   phkResult: PHKEY,
+                                   lpdwDisposition: LPDWORD,
+                                   hTransaction: HANDLE,
+                                   pExtendedParemeter: PVOID)
+                                   -> LONG;
     // pub fn RegCreateKeyW();
     pub fn RegDeleteKeyA(hKey: HKEY, lpSubKey: LPCSTR) -> LONG;
-    pub fn RegDeleteKeyExA(
-        hKey: HKEY, lpSubKey: LPCSTR, samDesired: REGSAM, Reserved: DWORD,
-    ) -> LONG;
-    pub fn RegDeleteKeyExW(
-        hKey: HKEY, lpSubKey: LPCWSTR, samDesired: REGSAM, Reserved: DWORD,
-    ) -> LONG;
-    pub fn RegDeleteKeyTransactedA(
-        hKey: HKEY, lpSubKey: LPCSTR, samDesired: REGSAM, Reserved: DWORD,
-        hTransaction: HANDLE, pExtendedParemeter: PVOID,
-    ) -> LONG;
-    pub fn RegDeleteKeyTransactedW(
-        hKey: HKEY, lpSubKey: LPCWSTR, samDesired: REGSAM, Reserved: DWORD,
-        hTransaction: HANDLE, pExtendedParemeter: PVOID,
-    ) -> LONG;
+    pub fn RegDeleteKeyExA(hKey: HKEY,
+                           lpSubKey: LPCSTR,
+                           samDesired: REGSAM,
+                           Reserved: DWORD)
+                           -> LONG;
+    pub fn RegDeleteKeyExW(hKey: HKEY,
+                           lpSubKey: LPCWSTR,
+                           samDesired: REGSAM,
+                           Reserved: DWORD)
+                           -> LONG;
+    pub fn RegDeleteKeyTransactedA(hKey: HKEY,
+                                   lpSubKey: LPCSTR,
+                                   samDesired: REGSAM,
+                                   Reserved: DWORD,
+                                   hTransaction: HANDLE,
+                                   pExtendedParemeter: PVOID)
+                                   -> LONG;
+    pub fn RegDeleteKeyTransactedW(hKey: HKEY,
+                                   lpSubKey: LPCWSTR,
+                                   samDesired: REGSAM,
+                                   Reserved: DWORD,
+                                   hTransaction: HANDLE,
+                                   pExtendedParemeter: PVOID)
+                                   -> LONG;
     pub fn RegDeleteKeyValueA(hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR) -> LONG;
     pub fn RegDeleteKeyValueW(hKey: HKEY, lpSubKey: LPCWSTR, lpValueName: LPCWSTR) -> LONG;
     pub fn RegDeleteKeyW(hKey: HKEY, lpSubKey: LPCWSTR) -> LONG;
@@ -747,94 +887,170 @@ extern "system" {
     pub fn RegDisableReflectionKey(hBase: HKEY) -> LONG;
     pub fn RegEnableReflectionKey(hBase: HKEY) -> LONG;
     // pub fn RegEnumKeyA();
-    pub fn RegEnumKeyExA(
-        hKey: HKEY, dwIndex: DWORD, lpName: LPSTR, lpcName: LPDWORD, lpReserved: LPDWORD,
-        lpClass: LPSTR, lpcClass: LPDWORD, lpftLastWriteTime: PFILETIME,
-    ) -> LONG;
-    pub fn RegEnumKeyExW(
-        hKey: HKEY, dwIndex: DWORD, lpName: LPWSTR, lpcName: LPDWORD, lpReserved: LPDWORD,
-        lpClass: LPWSTR, lpcClass: LPDWORD, lpftLastWriteTime: PFILETIME,
-    ) -> LONG;
+    pub fn RegEnumKeyExA(hKey: HKEY,
+                         dwIndex: DWORD,
+                         lpName: LPSTR,
+                         lpcName: LPDWORD,
+                         lpReserved: LPDWORD,
+                         lpClass: LPSTR,
+                         lpcClass: LPDWORD,
+                         lpftLastWriteTime: PFILETIME)
+                         -> LONG;
+    pub fn RegEnumKeyExW(hKey: HKEY,
+                         dwIndex: DWORD,
+                         lpName: LPWSTR,
+                         lpcName: LPDWORD,
+                         lpReserved: LPDWORD,
+                         lpClass: LPWSTR,
+                         lpcClass: LPDWORD,
+                         lpftLastWriteTime: PFILETIME)
+                         -> LONG;
     // pub fn RegEnumKeyW();
-    pub fn RegEnumValueA(
-        hKey: HKEY, dwIndex: DWORD, lpValueName: LPSTR, lpcchValueName: LPDWORD,
-        lpReserved: LPDWORD, lpType: LPDWORD, lpData: LPBYTE, lpcbData: LPDWORD,
-    ) -> LONG;
-    pub fn RegEnumValueW(
-        hKey: HKEY, dwIndex: DWORD, lpValueName: LPWSTR, lpcchValueName: LPDWORD,
-        lpReserved: LPDWORD, lpType: LPDWORD, lpData: LPBYTE, lpcbData: LPDWORD,
-    ) -> LONG;
+    pub fn RegEnumValueA(hKey: HKEY,
+                         dwIndex: DWORD,
+                         lpValueName: LPSTR,
+                         lpcchValueName: LPDWORD,
+                         lpReserved: LPDWORD,
+                         lpType: LPDWORD,
+                         lpData: LPBYTE,
+                         lpcbData: LPDWORD)
+                         -> LONG;
+    pub fn RegEnumValueW(hKey: HKEY,
+                         dwIndex: DWORD,
+                         lpValueName: LPWSTR,
+                         lpcchValueName: LPDWORD,
+                         lpReserved: LPDWORD,
+                         lpType: LPDWORD,
+                         lpData: LPBYTE,
+                         lpcbData: LPDWORD)
+                         -> LONG;
     pub fn RegFlushKey(hKey: HKEY) -> LONG;
     // pub fn RegGetKeySecurity();
-    pub fn RegGetValueA(
-        hkey: HKEY, lpSubKey: LPCSTR, lpValue: LPCSTR, dwFlags: DWORD, pdwType: LPDWORD,
-        pvData: PVOID, pcbData: LPDWORD,
-    ) -> LONG;
-    pub fn RegGetValueW(
-        hkey: HKEY, lpSubKey: LPCWSTR, lpValue: LPCWSTR, dwFlags: DWORD, pdwType: LPDWORD,
-        pvData: PVOID, pcbData: LPDWORD,
-    ) -> LONG;
+    pub fn RegGetValueA(hkey: HKEY,
+                        lpSubKey: LPCSTR,
+                        lpValue: LPCSTR,
+                        dwFlags: DWORD,
+                        pdwType: LPDWORD,
+                        pvData: PVOID,
+                        pcbData: LPDWORD)
+                        -> LONG;
+    pub fn RegGetValueW(hkey: HKEY,
+                        lpSubKey: LPCWSTR,
+                        lpValue: LPCWSTR,
+                        dwFlags: DWORD,
+                        pdwType: LPDWORD,
+                        pvData: PVOID,
+                        pcbData: LPDWORD)
+                        -> LONG;
     // pub fn RegLoadAppKeyA();
     // pub fn RegLoadAppKeyW();
     // pub fn RegLoadKeyA();
     // pub fn RegLoadKeyW();
     // pub fn RegLoadMUIStringA();
-    pub fn RegLoadMUIStringW(
-        hKey: HKEY, pszValue: LPCWSTR, pszOutBuf: LPWSTR, cbOutBuf: DWORD, pcbData: LPDWORD,
-        Flags: DWORD, pszDirectory: LPCWSTR,
-    ) -> LONG;
-    pub fn RegNotifyChangeKeyValue(
-        hKey: HKEY, bWatchSubtree: BOOL, dwNotifyFilter: DWORD, hEvent: HANDLE,
-        fAsynchronous: BOOL,
-    ) -> LONG;
+    pub fn RegLoadMUIStringW(hKey: HKEY,
+                             pszValue: LPCWSTR,
+                             pszOutBuf: LPWSTR,
+                             cbOutBuf: DWORD,
+                             pcbData: LPDWORD,
+                             Flags: DWORD,
+                             pszDirectory: LPCWSTR)
+                             -> LONG;
+    pub fn RegNotifyChangeKeyValue(hKey: HKEY,
+                                   bWatchSubtree: BOOL,
+                                   dwNotifyFilter: DWORD,
+                                   hEvent: HANDLE,
+                                   fAsynchronous: BOOL)
+                                   -> LONG;
     pub fn RegOpenCurrentUser(samDesired: REGSAM, phkResult: PHKEY) -> LONG;
     // pub fn RegOpenKeyA();
-    pub fn RegOpenKeyExA(
-        hKey: HKEY, lpSubKey: LPCSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY,
-    ) -> LONG;
-    pub fn RegOpenKeyExW(
-        hKey: HKEY, lpSubKey: LPCWSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY,
-    ) -> LONG;
-    pub fn RegOpenKeyTransactedA(
-        hKey: HKEY, lpSubKey: LPCSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY,
-        hTransaction: HANDLE, pExtendedParemeter: PVOID,
-    ) -> LONG;
-    pub fn RegOpenKeyTransactedW(
-        hKey: HKEY, lpSubKey: LPCWSTR, ulOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY,
-        hTransaction: HANDLE, pExtendedParemeter: PVOID,
-    ) -> LONG;
+    pub fn RegOpenKeyExA(hKey: HKEY,
+                         lpSubKey: LPCSTR,
+                         ulOptions: DWORD,
+                         samDesired: REGSAM,
+                         phkResult: PHKEY)
+                         -> LONG;
+    pub fn RegOpenKeyExW(hKey: HKEY,
+                         lpSubKey: LPCWSTR,
+                         ulOptions: DWORD,
+                         samDesired: REGSAM,
+                         phkResult: PHKEY)
+                         -> LONG;
+    pub fn RegOpenKeyTransactedA(hKey: HKEY,
+                                 lpSubKey: LPCSTR,
+                                 ulOptions: DWORD,
+                                 samDesired: REGSAM,
+                                 phkResult: PHKEY,
+                                 hTransaction: HANDLE,
+                                 pExtendedParemeter: PVOID)
+                                 -> LONG;
+    pub fn RegOpenKeyTransactedW(hKey: HKEY,
+                                 lpSubKey: LPCWSTR,
+                                 ulOptions: DWORD,
+                                 samDesired: REGSAM,
+                                 phkResult: PHKEY,
+                                 hTransaction: HANDLE,
+                                 pExtendedParemeter: PVOID)
+                                 -> LONG;
     // pub fn RegOpenKeyW();
-    pub fn RegOpenUserClassesRoot(
-        hToken: HANDLE, dwOptions: DWORD, samDesired: REGSAM, phkResult: PHKEY,
-    ) -> LONG;
+    pub fn RegOpenUserClassesRoot(hToken: HANDLE,
+                                  dwOptions: DWORD,
+                                  samDesired: REGSAM,
+                                  phkResult: PHKEY)
+                                  -> LONG;
     pub fn RegOverridePredefKey(hKey: HKEY, hNewHKey: HKEY) -> LONG;
-    pub fn RegQueryInfoKeyA(
-        hKey: HKEY, lpClass: LPSTR, lpcClass: LPDWORD, lpReserved: LPDWORD, lpcSubKeys: LPDWORD,
-        lpcMaxSubKeyLen: LPDWORD, lpcMaxClassLen: LPDWORD, lpcValues: LPDWORD,
-        lpcMaxValueNameLen: LPDWORD, lpcMaxValueLen: LPDWORD, lpcbSecurityDescriptor: LPDWORD,
-        lpftLastWriteTime: PFILETIME,
-    ) -> LONG;
-    pub fn RegQueryInfoKeyW(
-        hKey: HKEY, lpClass: LPWSTR, lpcClass: LPDWORD, lpReserved: LPDWORD, lpcSubKeys: LPDWORD,
-        lpcMaxSubKeyLen: LPDWORD, lpcMaxClassLen: LPDWORD, lpcValues: LPDWORD,
-        lpcMaxValueNameLen: LPDWORD, lpcMaxValueLen: LPDWORD, lpcbSecurityDescriptor: LPDWORD,
-        lpftLastWriteTime: PFILETIME,
-    ) -> LONG;
-    pub fn RegQueryMultipleValuesA(
-        hKey: HKEY, val_list: PVALENTA, num_vals: DWORD, lpValueBuf: LPSTR, ldwTotsize: LPDWORD,
-    ) -> LONG;
-    pub fn RegQueryMultipleValuesW(
-        hKey: HKEY, val_list: PVALENTW, num_vals: DWORD, lpValueBuf: LPWSTR, ldwTotsize: LPDWORD,
-    ) -> LONG;
+    pub fn RegQueryInfoKeyA(hKey: HKEY,
+                            lpClass: LPSTR,
+                            lpcClass: LPDWORD,
+                            lpReserved: LPDWORD,
+                            lpcSubKeys: LPDWORD,
+                            lpcMaxSubKeyLen: LPDWORD,
+                            lpcMaxClassLen: LPDWORD,
+                            lpcValues: LPDWORD,
+                            lpcMaxValueNameLen: LPDWORD,
+                            lpcMaxValueLen: LPDWORD,
+                            lpcbSecurityDescriptor: LPDWORD,
+                            lpftLastWriteTime: PFILETIME)
+                            -> LONG;
+    pub fn RegQueryInfoKeyW(hKey: HKEY,
+                            lpClass: LPWSTR,
+                            lpcClass: LPDWORD,
+                            lpReserved: LPDWORD,
+                            lpcSubKeys: LPDWORD,
+                            lpcMaxSubKeyLen: LPDWORD,
+                            lpcMaxClassLen: LPDWORD,
+                            lpcValues: LPDWORD,
+                            lpcMaxValueNameLen: LPDWORD,
+                            lpcMaxValueLen: LPDWORD,
+                            lpcbSecurityDescriptor: LPDWORD,
+                            lpftLastWriteTime: PFILETIME)
+                            -> LONG;
+    pub fn RegQueryMultipleValuesA(hKey: HKEY,
+                                   val_list: PVALENTA,
+                                   num_vals: DWORD,
+                                   lpValueBuf: LPSTR,
+                                   ldwTotsize: LPDWORD)
+                                   -> LONG;
+    pub fn RegQueryMultipleValuesW(hKey: HKEY,
+                                   val_list: PVALENTW,
+                                   num_vals: DWORD,
+                                   lpValueBuf: LPWSTR,
+                                   ldwTotsize: LPDWORD)
+                                   -> LONG;
     pub fn RegQueryReflectionKey(hBase: HKEY, bIsReflectionDisabled: PBOOL) -> LONG;
-    pub fn RegQueryValueExA(
-        hKey: HKEY, lpValueName: LPCSTR, lpReserved: LPDWORD, lpType: LPDWORD, lpData: LPBYTE,
-        lpcbData: LPDWORD,
-    ) -> LONG;
-    pub fn RegQueryValueExW(
-        hKey: HKEY, lpValueName: LPCWSTR, lpReserved: LPDWORD, lpType: LPDWORD, lpData: LPBYTE,
-        lpcbData: LPDWORD,
-    ) -> LONG;
+    pub fn RegQueryValueExA(hKey: HKEY,
+                            lpValueName: LPCSTR,
+                            lpReserved: LPDWORD,
+                            lpType: LPDWORD,
+                            lpData: LPBYTE,
+                            lpcbData: LPDWORD)
+                            -> LONG;
+    pub fn RegQueryValueExW(hKey: HKEY,
+                            lpValueName: LPCWSTR,
+                            lpReserved: LPDWORD,
+                            lpType: LPDWORD,
+                            lpData: LPBYTE,
+                            lpcbData: LPDWORD)
+                            -> LONG;
     // pub fn RegQueryValueW();
     // pub fn RegRenameKey();
     // pub fn RegReplaceKeyA();
@@ -846,38 +1062,52 @@ extern "system" {
     // pub fn RegSaveKeyExW();
     // pub fn RegSaveKeyW();
     // pub fn RegSetKeySecurity();
-    pub fn RegSetKeyValueA(
-        hKey: HKEY, lpSubKey: LPCSTR, lpValueName: LPCSTR, dwType: DWORD, lpData: LPCVOID,
-        cbData: DWORD,
-    ) -> LONG;
-    pub fn RegSetValueExA(
-        hKey: HKEY, lpValueName: LPCSTR, Reserved: DWORD, dwType: DWORD, lpData: *const BYTE,
-        cbData: DWORD,
-    ) -> LONG;
-    pub fn RegSetValueExW(
-        hKey: HKEY, lpValueName: LPCWSTR, Reserved: DWORD, dwType: DWORD, lpData: *const BYTE,
-        cbData: DWORD,
-    ) -> LONG;
-    pub fn RegSetKeyValueW(
-        hKey: HKEY, lpSubKey: LPCWSTR, lpValueName: LPCWSTR, dwType: DWORD, lpData: LPCVOID,
-        cbData: DWORD,
-    ) -> LONG;
+    pub fn RegSetKeyValueA(hKey: HKEY,
+                           lpSubKey: LPCSTR,
+                           lpValueName: LPCSTR,
+                           dwType: DWORD,
+                           lpData: LPCVOID,
+                           cbData: DWORD)
+                           -> LONG;
+    pub fn RegSetValueExA(hKey: HKEY,
+                          lpValueName: LPCSTR,
+                          Reserved: DWORD,
+                          dwType: DWORD,
+                          lpData: *const BYTE,
+                          cbData: DWORD)
+                          -> LONG;
+    pub fn RegSetValueExW(hKey: HKEY,
+                          lpValueName: LPCWSTR,
+                          Reserved: DWORD,
+                          dwType: DWORD,
+                          lpData: *const BYTE,
+                          cbData: DWORD)
+                          -> LONG;
+    pub fn RegSetKeyValueW(hKey: HKEY,
+                           lpSubKey: LPCWSTR,
+                           lpValueName: LPCWSTR,
+                           dwType: DWORD,
+                           lpData: LPCVOID,
+                           cbData: DWORD)
+                           -> LONG;
     // pub fn RegUnLoadKeyA();
     // pub fn RegUnLoadKeyW();
     // pub fn RegisterEventSourceA();
     // pub fn RegisterEventSourceW();
-    pub fn RegisterServiceCtrlHandlerA(
-        lpServiceName: LPCSTR, lpHandlerProc: LPHANDLER_FUNCTION,
-    ) -> SERVICE_STATUS_HANDLE;
-    pub fn RegisterServiceCtrlHandlerExA(
-        lpServiceName: LPCSTR, lpHandlerProc: LPHANDLER_FUNCTION_EX, lpContext: LPVOID,
-    ) -> SERVICE_STATUS_HANDLE;
-    pub fn RegisterServiceCtrlHandlerExW(
-        lpServiceName: LPCWSTR, lpHandlerProc: LPHANDLER_FUNCTION_EX, lpContext: LPVOID,
-    ) -> SERVICE_STATUS_HANDLE;
-    pub fn RegisterServiceCtrlHandlerW(
-        lpServiceName: LPCWSTR, lpHandlerProc: LPHANDLER_FUNCTION,
-    ) -> SERVICE_STATUS_HANDLE;
+    pub fn RegisterServiceCtrlHandlerA(lpServiceName: LPCSTR,
+                                       lpHandlerProc: LPHANDLER_FUNCTION)
+                                       -> SERVICE_STATUS_HANDLE;
+    pub fn RegisterServiceCtrlHandlerExA(lpServiceName: LPCSTR,
+                                         lpHandlerProc: LPHANDLER_FUNCTION_EX,
+                                         lpContext: LPVOID)
+                                         -> SERVICE_STATUS_HANDLE;
+    pub fn RegisterServiceCtrlHandlerExW(lpServiceName: LPCWSTR,
+                                         lpHandlerProc: LPHANDLER_FUNCTION_EX,
+                                         lpContext: LPVOID)
+                                         -> SERVICE_STATUS_HANDLE;
+    pub fn RegisterServiceCtrlHandlerW(lpServiceName: LPCWSTR,
+                                       lpHandlerProc: LPHANDLER_FUNCTION)
+                                       -> SERVICE_STATUS_HANDLE;
     // pub fn RegisterTraceGuidsA();
     // pub fn RegisterTraceGuidsW();
     // pub fn RegisterWaitChainCOMCallback();
@@ -932,9 +1162,9 @@ extern "system" {
     // pub fn SetSecurityInfoExW();
     // pub fn SetServiceBits();
     // pub fn SetServiceObjectSecurity();
-    pub fn SetServiceStatus(
-        hServiceStatus: SERVICE_STATUS_HANDLE, lpServiceStatus: LPSERVICE_STATUS,
-    ) -> BOOL;
+    pub fn SetServiceStatus(hServiceStatus: SERVICE_STATUS_HANDLE,
+                            lpServiceStatus: LPSERVICE_STATUS)
+                            -> BOOL;
     // pub fn SetThreadToken();
     // pub fn SetTokenInformation();
     // pub fn SetTraceCallback();
@@ -943,67 +1173,67 @@ extern "system" {
     // pub fn StartServiceA();
     pub fn StartServiceCtrlDispatcherA(lpServiceStartTable: *const SERVICE_TABLE_ENTRYA) -> BOOL;
     pub fn StartServiceCtrlDispatcherW(lpServiceStartTable: *const SERVICE_TABLE_ENTRYW) -> BOOL;
-    // pub fn StartServiceW();
-    // pub fn StartTraceA();
-    // pub fn StartTraceW();
-    // pub fn StopTraceA();
-    // pub fn StopTraceW();
-    // pub fn SystemFunction001();
-    // pub fn SystemFunction002();
-    // pub fn SystemFunction003();
-    // pub fn SystemFunction004();
-    // pub fn SystemFunction005();
-    // pub fn SystemFunction006();
-    // pub fn SystemFunction007();
-    // pub fn SystemFunction008();
-    // pub fn SystemFunction009();
-    // pub fn SystemFunction010();
-    // pub fn SystemFunction011();
-    // pub fn SystemFunction012();
-    // pub fn SystemFunction013();
-    // pub fn SystemFunction014();
-    // pub fn SystemFunction015();
-    // pub fn SystemFunction016();
-    // pub fn SystemFunction017();
-    // pub fn SystemFunction018();
-    // pub fn SystemFunction019();
-    // pub fn SystemFunction020();
-    // pub fn SystemFunction021();
-    // pub fn SystemFunction022();
-    // pub fn SystemFunction023();
-    // pub fn SystemFunction024();
-    // pub fn SystemFunction025();
-    // pub fn SystemFunction026();
-    // pub fn SystemFunction027();
-    // pub fn SystemFunction028();
-    // pub fn SystemFunction029();
-    // pub fn SystemFunction030();
-    // pub fn SystemFunction031();
-    // pub fn SystemFunction032();
-    // pub fn SystemFunction033();
-    // pub fn SystemFunction034();
-    // pub fn SystemFunction036();
-    // pub fn SystemFunction040();
-    // pub fn SystemFunction041();
-    // pub fn TraceEvent();
-    // pub fn TraceEventInstance();
-    // pub fn TraceMessage();
-    // pub fn TraceMessageVa();
-    // pub fn TraceQueryInformation();
-    // pub fn TraceSetInformation();
-    // pub fn TreeResetNamedSecurityInfoA();
-    // pub fn TreeResetNamedSecurityInfoW();
-    // pub fn TreeSetNamedSecurityInfoA();
-    // pub fn TreeSetNamedSecurityInfoW();
-    // pub fn TrusteeAccessToObjectA();
-    // pub fn TrusteeAccessToObjectW();
-    // pub fn UninstallApplication();
-    // pub fn UnlockServiceDatabase();
-    // pub fn UnregisterTraceGuids();
-    // pub fn UpdateTraceA();
-    // pub fn UpdateTraceW();
-    // pub fn UsePinForEncryptedFilesA();
-    // pub fn UsePinForEncryptedFilesW();
-    // pub fn WaitServiceState();
-    // pub fn WriteEncryptedFileRaw();
+// pub fn StartServiceW();
+// pub fn StartTraceA();
+// pub fn StartTraceW();
+// pub fn StopTraceA();
+// pub fn StopTraceW();
+// pub fn SystemFunction001();
+// pub fn SystemFunction002();
+// pub fn SystemFunction003();
+// pub fn SystemFunction004();
+// pub fn SystemFunction005();
+// pub fn SystemFunction006();
+// pub fn SystemFunction007();
+// pub fn SystemFunction008();
+// pub fn SystemFunction009();
+// pub fn SystemFunction010();
+// pub fn SystemFunction011();
+// pub fn SystemFunction012();
+// pub fn SystemFunction013();
+// pub fn SystemFunction014();
+// pub fn SystemFunction015();
+// pub fn SystemFunction016();
+// pub fn SystemFunction017();
+// pub fn SystemFunction018();
+// pub fn SystemFunction019();
+// pub fn SystemFunction020();
+// pub fn SystemFunction021();
+// pub fn SystemFunction022();
+// pub fn SystemFunction023();
+// pub fn SystemFunction024();
+// pub fn SystemFunction025();
+// pub fn SystemFunction026();
+// pub fn SystemFunction027();
+// pub fn SystemFunction028();
+// pub fn SystemFunction029();
+// pub fn SystemFunction030();
+// pub fn SystemFunction031();
+// pub fn SystemFunction032();
+// pub fn SystemFunction033();
+// pub fn SystemFunction034();
+// pub fn SystemFunction036();
+// pub fn SystemFunction040();
+// pub fn SystemFunction041();
+// pub fn TraceEvent();
+// pub fn TraceEventInstance();
+// pub fn TraceMessage();
+// pub fn TraceMessageVa();
+// pub fn TraceQueryInformation();
+// pub fn TraceSetInformation();
+// pub fn TreeResetNamedSecurityInfoA();
+// pub fn TreeResetNamedSecurityInfoW();
+// pub fn TreeSetNamedSecurityInfoA();
+// pub fn TreeSetNamedSecurityInfoW();
+// pub fn TrusteeAccessToObjectA();
+// pub fn TrusteeAccessToObjectW();
+// pub fn UninstallApplication();
+// pub fn UnlockServiceDatabase();
+// pub fn UnregisterTraceGuids();
+// pub fn UpdateTraceA();
+// pub fn UpdateTraceW();
+// pub fn UsePinForEncryptedFilesA();
+// pub fn UsePinForEncryptedFilesW();
+// pub fn WaitServiceState();
+// pub fn WriteEncryptedFileRaw();
 }
