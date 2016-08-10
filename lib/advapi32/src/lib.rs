@@ -443,7 +443,7 @@ extern "system" {
     // pub fn GetSecurityDescriptorSacl();
     pub fn GetSecurityInfo(
         HANDLE: handle, SE_OBJECT_TYPE: ObjectType, SECURITY_INFORMATION: SecurityInfo,
-        PSID *ppsidOwner, PSID: *ppsidGroup, PACL: *ppDacl, PACL: *ppSacl, 
+        PSID: *ppsidOwner, PSID: *ppsidGroup, PACL: *ppDacl, PACL: *ppSacl, 
         PSECURITY_DESCRIPTOR: *ppSecurityDescriptor
     ) -> BOOL;
     // pub fn GetSecurityInfoExA();
