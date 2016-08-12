@@ -92,4 +92,5 @@ fn functions() {
     bb(SetServiceStatus);
     bb(StartServiceCtrlDispatcherA);
     bb(StartServiceCtrlDispatcherW);
+    bb(GetSecurityInfo);
 }
