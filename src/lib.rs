@@ -189,6 +189,7 @@ pub use xinput::*;
 // Modules
 //-------------------------------------------------------------------------------------------------
 #[macro_use] mod macros;
+pub mod accctrl;
 pub mod activation;
 pub mod audioclient;
 pub mod audiosessiontypes;
