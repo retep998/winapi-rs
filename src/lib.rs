@@ -24,6 +24,7 @@ pub use std::os::raw::{
     c_float,
     c_double,
 };
+pub use accctrl::*;
 pub use activation::*;
 pub use audioclient::*;
 pub use audiosessiontypes::*;
