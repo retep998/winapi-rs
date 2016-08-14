@@ -5,6 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Type definitions for the basic sized types.
+// Done as of 10.0.14393.0
 #![cfg(feature = "shared.basetsd")]
 use ctypes::*;
 pub type POINTER_64_INT = usize;
@@ -40,22 +41,22 @@ pub type ULONG_PTR = usize;
 pub type PULONG_PTR = *mut usize;
 pub type SHANDLE_PTR = isize;
 pub type HANDLE_PTR = usize;
-#[cfg(target_arch = "x86_64")]
-pub type UHALF_PTR = c_uint;
 #[cfg(target_arch = "x86")]
 pub type UHALF_PTR = c_ushort;
 #[cfg(target_arch = "x86_64")]
-pub type PUHALF_PTR = *mut c_uint;
+pub type UHALF_PTR = c_uint;
 #[cfg(target_arch = "x86")]
 pub type PUHALF_PTR = *mut c_ushort;
 #[cfg(target_arch = "x86_64")]
-pub type HALF_PTR = c_int;
+pub type PUHALF_PTR = *mut c_uint;
 #[cfg(target_arch = "x86")]
 pub type HALF_PTR = c_short;
 #[cfg(target_arch = "x86_64")]
-pub type PHALF_PTR = *mut c_int;
+pub type HALF_PTR = c_int;
 #[cfg(target_arch = "x86")]
 pub type PHALF_PTR = *mut c_short;
+#[cfg(target_arch = "x86_64")]
+pub type PHALF_PTR = *mut c_int;
 pub type SIZE_T = ULONG_PTR;
 pub type PSIZE_T = *mut ULONG_PTR;
 pub type SSIZE_T = LONG_PTR;

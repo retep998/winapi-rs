@@ -4,5 +4,6 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-//! Headers shared between user mode and kernel mode
+//! Headers that come with VC. Notably, these are not part of the Windows SDK.
 pub mod excpt;
+pub mod vcruntime;

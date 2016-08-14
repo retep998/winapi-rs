@@ -5,6 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Basic Windows Type Definitions for minwin partition
+// Done as of 10.0.14393.0
 #![cfg(feature = "shared.minwindef+shared.winnt")]
 use ctypes::*;
 use shared::basetsd::*;

@@ -5,6 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! GUID definition
+// Done as of 10.0.14393.0
 #![cfg(feature = "shared.guiddef")]
 use ctypes::*;
 STRUCT!{struct GUID {
@@ -25,3 +26,6 @@ pub type REFGUID = *const GUID;
 pub type REFIID = *const IID;
 pub type REFCLSID = *const IID;
 pub type REFFMTID = *const IID;
+pub fn IsEqualGUID(g1: &GUID, g2: &GUID) -> bool {
+    (g1.Data1, g1.Data2, g1.Data3, g1.Data4) == (g2.Data1, g2.Data2, g2.Data3, g2.Data4)
+}

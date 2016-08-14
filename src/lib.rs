@@ -7,6 +7,10 @@
 #![allow(bad_style)]
 #![deny(overflowing_literals, unused_qualifications, unused)]
 #![cfg(windows)]
+#![cfg_attr(not(feature = "std"), no_std)]
+
+#[cfg(feature = "std")]
+use std as core;
 
 // Modules
 #[macro_use] mod macros;
@@ -14,7 +18,8 @@ pub mod shared;
 pub mod um;
 pub mod vc;
 
-// Primitive types
+/// Built in primitive types provided by the C language
+#[doc(hidden)]
 pub mod ctypes {
     #[cfg(feature = "std")]
     pub use std::os::raw::c_void;
@@ -42,5 +47,4 @@ pub mod ctypes {
     pub type __int64 = i64;
     pub type __uint64 = u64;
     pub type wchar_t = u16;
-    pub type size_t = usize;
 }

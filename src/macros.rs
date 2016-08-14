@@ -77,7 +77,9 @@ macro_rules! AUDCLNT_SUCCESS {
 }
 macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
     ($major:expr, $minor:expr) => {
-        ::BCRYPT_INTERFACE_VERSION { MajorVersion: $major, MinorVersion: $minor }
+        $crate::shared::bcrypt::BCRYPT_INTERFACE_VERSION {
+            MajorVersion: $major, MinorVersion: $minor,
+        }
     }
 }
 macro_rules! RIDL {
@@ -187,7 +189,7 @@ macro_rules! BITFIELD {
         impl $base {$(
             #[inline]
             pub fn $thing(&self) -> $fieldtype {
-                let size = ::std::mem::size_of::<$fieldtype>() * 8;
+                let size = $crate::core::mem::size_of::<$fieldtype>() * 8;
                 self.$field << (size - $r.end) >> (size - $r.end + $r.start)
             }
             #[inline]
