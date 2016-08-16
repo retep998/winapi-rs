@@ -445,7 +445,7 @@ extern "system" {
         handle: HANDLE, ObjectType: SE_OBJECT_TYPE, SecurityInfo: SECURITY_INFORMATION,
         ppsidOwner: *mut PSID, ppsidGroup: *mut PSID, ppDacl: *mut PACL, 
         ppSacl: *mut PACL, ppSecurityDescriptor: *mut PSECURITY_DESCRIPTOR,
-    ) -> BOOL;
+    ) -> DWORD;
     // pub fn GetSecurityInfoExA();
     // pub fn GetSecurityInfoExW();
     // pub fn GetServiceDisplayNameA();
