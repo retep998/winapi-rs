@@ -6,10 +6,10 @@
 // except according to those terms.
 //! Basic Windows Type Definitions for minwin partition
 // Done as of 10.0.14393.0
-#![cfg(feature = "shared.minwindef+shared.winnt")]
+#![cfg(feature = "shared.minwindef+um.winnt")]
 use ctypes::*;
 use shared::basetsd::*;
-use shared::winnt::*;
+use um::winnt::*;
 pub type ULONG = c_ulong;
 pub type PULONG = *mut ULONG;
 pub type USHORT = c_ushort;

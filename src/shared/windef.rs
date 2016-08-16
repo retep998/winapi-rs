@@ -9,7 +9,7 @@
 #![cfg(feature = "shared.windef")]
 use ctypes::*;
 use shared::minwindef::*;
-use shared::winnt::*;
+use um::winnt::*;
 DECLARE_HANDLE!(HWND, HWND__);
 DECLARE_HANDLE!(HHOOK, HHOOK__);
 pub type HGDIOBJ = *mut c_void;

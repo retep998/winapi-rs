@@ -6,7 +6,7 @@
 // except according to those terms.
 //! This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed
 //! through the Win32 API.
-#![cfg(feature = "shared.minwindef+shared.winnt")]
+#![cfg(feature = "shared.minwindef+um.winnt")]
 use ctypes::*;
 use shared::basetsd::*;
 use shared::guiddef::*;

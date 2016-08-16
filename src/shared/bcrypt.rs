@@ -7,7 +7,7 @@
 //! Cryptographic Primitive API Prototypes and Definitions
 #![cfg(feature = "shared.bcrypt")]
 use shared::minwindef::*;
-use shared::winnt::*;
+use um::winnt::*;
 pub type NTSTATUS = LONG;
 pub type PNTSTATUS = *mut NTSTATUS;
 pub fn BCRYPT_SUCCESS(Status: NTSTATUS) -> bool { Status >= 0 }

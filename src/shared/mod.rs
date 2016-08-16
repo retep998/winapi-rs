@@ -7,7 +7,7 @@
 //! Headers shared between user mode and kernel mode
 pub mod basetsd;
 pub mod bcrypt;
+pub mod cderr;
 pub mod guiddef;
 pub mod minwindef;
 pub mod windef;
-pub mod winnt;
