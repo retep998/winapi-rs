@@ -32,7 +32,7 @@ macro_rules! DEFINE_GUID {
         $name:ident, $l:expr, $w1:expr, $w2:expr,
         $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr, $b6:expr, $b7:expr, $b8:expr
     ) => {
-        pub const $name: $crate::GUID = $crate::GUID {
+        pub const $name: GUID = GUID {
             Data1: $l,
             Data2: $w1,
             Data3: $w2,
@@ -116,14 +116,14 @@ macro_rules! RIDL {
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
-        impl ::std::ops::Deref for $interface {
+        impl $crate::core::ops::Deref for $interface {
             type Target = $pinterface;
             #[inline]
             fn deref(&self) -> &$pinterface {
                 unsafe { &*(self as *const _ as *const _) }
             }
         }
-        impl ::std::ops::DerefMut for $interface {
+        impl $crate::core::ops::DerefMut for $interface {
             #[inline]
             fn deref_mut(&mut self) -> &mut $pinterface {
                 unsafe { &mut *(self as *mut _ as *mut _) }
@@ -153,14 +153,14 @@ macro_rules! RIDL {
                 ((*self.lpVtbl).$method)(self $(,$p)*)
             })+
         }
-        impl ::std::ops::Deref for $interface {
+        impl $crate::core::ops::Deref for $interface {
             type Target = $crate::$pinterface;
             #[inline]
             fn deref(&self) -> &$crate::$pinterface {
                 unsafe { &*(self as *const _ as *const _) }
             }
         }
-        impl ::std::ops::DerefMut for $interface {
+        impl $crate::core::ops::DerefMut for $interface {
             #[inline]
             fn deref_mut(&mut self) -> &mut $crate::$pinterface {
                 unsafe { &mut *(self as *mut _ as *mut _) }
