@@ -426,10 +426,18 @@ extern "system" {
     // pub fn GetMultipleTrusteeOperationA();
     // pub fn GetMultipleTrusteeOperationW();
     // pub fn GetMultipleTrusteeW();
-    // pub fn GetNamedSecurityInfoA();
+    pub fn GetNamedSecurityInfoA(
+       pObjectName: LPCSTR, ObjectType: SE_OBJECT_TYPE, SecurityInfo: SECURITY_INFORMATION,
+        ppsidOwner: *mut PSID, ppsidGroup: *mut PSID, ppDacl: *mut PACL, 
+        ppSacl: *mut PACL, ppSecurityDescriptor: *mut PSECURITY_DESCRIPTOR,
+    ) -> DWORD;
     // pub fn GetNamedSecurityInfoExA();
     // pub fn GetNamedSecurityInfoExW();
-    // pub fn GetNamedSecurityInfoW();
+    pub fn GetNamedSecurityInfoW(
+       pObjectName: LPCWSTR, ObjectType: SE_OBJECT_TYPE, SecurityInfo: SECURITY_INFORMATION,
+        ppsidOwner: *mut PSID, ppsidGroup: *mut PSID, ppDacl: *mut PACL, 
+        ppSacl: *mut PACL, ppSecurityDescriptor: *mut PSECURITY_DESCRIPTOR,
+    ) -> DWORD;
     // pub fn GetNumberOfEventLogRecords();
     // pub fn GetOldestEventLogRecord();
     // pub fn GetOverlappedAccessResults();
