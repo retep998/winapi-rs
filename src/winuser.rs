@@ -321,11 +321,43 @@ pub const MF_ENABLED: ::UINT = 0x00000000;
 pub const MF_GRAYED: ::UINT = 0x00000001;
 pub const MF_MENUBARBREAK: ::UINT = 0x00000020;
 pub const MF_MENUBREAK: ::UINT = 0x00000040;
+pub const MF_UNHILITE: ::UINT = 0x00000000;
+pub const MF_HILITE: ::UINT = 0x00000080;
+pub const MF_DEFAULT: ::UINT = 0x00001000;
+pub const MF_SYSMENU: ::UINT = 0x00002000;
+pub const MF_HELP: ::UINT = 0x00004000;
+pub const MF_RIGHTJUSTIFY: ::UINT = 0x00004000;
+pub const MF_MOUSESELECT: ::UINT = 0x00008000;
+pub const MF_END: ::UINT = 0x00000080;
 pub const MF_OWNERDRAW: ::UINT = 0x00000100;
 pub const MF_POPUP: ::UINT = 0x00000010;
+pub const MF_INSERT: ::UINT = 0x00000000;
+pub const MF_CHANGE: ::UINT = 0x00000080;
+pub const MF_APPEND: ::UINT = 0x00000100;
+pub const MF_DELETE: ::UINT = 0x00000200;
+pub const MF_REMOVE: ::UINT = 0x00001000;
+pub const MF_BYCOMMAND: ::UINT = 0x00000000;
+pub const MF_BYPOSITION: ::UINT = 0x00000400;
 pub const MF_SEPARATOR: ::UINT = 0x00000800;
 pub const MF_STRING: ::UINT = 0x00000000;
 pub const MF_UNCHECKED: ::UINT = 0x00000000;
+pub const MFT_STRING: ::UINT = MF_STRING;
+pub const MFT_BITMAP: ::UINT = MF_BITMAP;
+pub const MFT_MENUBARBREAK: ::UINT = MF_MENUBARBREAK;
+pub const MFT_MENUBREAK: ::UINT = MF_MENUBREAK;
+pub const MFT_OWNERDRAW: ::UINT = MF_OWNERDRAW;
+pub const MFT_RADIOCHECK: ::UINT = 0x00000200;
+pub const MFT_SEPARATOR: ::UINT = MF_SEPARATOR;
+pub const MFT_RIGHTORDER: ::UINT = 0x00002000;
+pub const MFT_RIGHTJUSTIFY: ::UINT = MF_RIGHTJUSTIFY;
+pub const MFS_GRAYED: ::UINT = 0x00000003;
+pub const MFS_DISABLED: ::UINT = MFS_GRAYED;
+pub const MFS_CHECKED: ::UINT = MF_CHECKED;
+pub const MFS_HILITE: ::UINT = MF_HILITE;
+pub const MFS_ENABLED: ::UINT = MF_ENABLED;
+pub const MFS_UNCHECKED: ::UINT = MF_UNCHECKED;
+pub const MFS_UNHILITE: ::UINT = MF_UNHILITE;
+pub const MFS_DEFAULT: ::UINT = MF_DEFAULT;
 pub const SB_HORZ: ::c_int = 0;
 pub const SB_VERT: ::c_int = 1;
 pub const SB_CTL: ::c_int = 2;
@@ -2332,3 +2364,31 @@ pub const SC_MONITORPOWER: ::WPARAM = 0xF170;
 pub const SC_CONTEXTHELP: ::WPARAM = 0xF180;
 pub const SC_SEPARATOR: ::WPARAM = 0xF00F;
 // endif WINVER >= 0x0400
+
+STRUCT!{struct TPMPARAMS {
+    cbSize: ::UINT,
+    rcExclude: ::RECT,
+}}
+pub type LPTPMPARAMS = *mut TPMPARAMS;
+
+// Flags for TrackPopupMenu
+pub const TPM_LEFTBUTTON: ::UINT = 0x0000;
+pub const TPM_RIGHTBUTTON: ::UINT = 0x0002;
+pub const TPM_LEFTALIGN: ::UINT = 0x0000;
+pub const TPM_CENTERALIGN: ::UINT = 0x0004;
+pub const TPM_RIGHTALIGN: ::UINT = 0x0008;
+pub const TPM_TOPALIGN: ::UINT = 0x0000;
+pub const TPM_VCENTERALIGN: ::UINT = 0x0010;
+pub const TPM_BOTTOMALIGN: ::UINT = 0x0020;
+pub const TPM_HORIZONTAL: ::UINT = 0x0000;
+pub const TPM_VERTICAL: ::UINT = 0x0040;
+pub const TPM_NONOTIFY: ::UINT = 0x0080;
+pub const TPM_RETURNCMD: ::UINT = 0x0100;
+pub const TPM_RECURSE: ::UINT = 0x0001;
+pub const TPM_HORPOSANIMATION: ::UINT = 0x0400;
+pub const TPM_HORNEGANIMATION: ::UINT = 0x0800;
+pub const TPM_VERPOSANIMATION: ::UINT = 0x1000;
+pub const TPM_VERNEGANIMATION: ::UINT = 0x2000;
+pub const TPM_NOANIMATION: ::UINT = 0x4000;
+pub const TPM_LAYOUTRTL: ::UINT = 0x8000;
+pub const TPM_WORKAREA: ::UINT = 0x10000;
