@@ -528,8 +528,14 @@ extern "system" {
         ReferencedDomainName: LPCWSTR, cchReferencedDomainName: LPDWORD, 
         peUse: PSID_NAME_USE,
     ) -> BOOL;
-    // pub fn LookupPrivilegeDisplayNameA();
-    // pub fn LookupPrivilegeDisplayNameW();
+    pub fn LookupPrivilegeDisplayNameA(
+        lpSystemName: LPCSTR, lpName: LPCSTR, lpDisplayName: LPSTR, cchDisplayName: LPDWORD,
+        lpLanguageId: LPDWORD,
+    ) -> BOOL;
+    pub fn LookupPrivilegeDisplayNameW(
+        lpSystemName: LPCWSTR, lpName: LPCWSTR, lpDisplayName: LPWSTR, cchDisplayName: LPDWORD,
+        lpLanguageId: LPDWORD,
+    ) -> BOOL;
     pub fn LookupPrivilegeNameA(
         lpSystemName: LPCSTR, lpLuid: PLUID, lpName: LPSTR, cchName: LPDWORD,
     ) -> BOOL;
