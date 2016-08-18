@@ -512,14 +512,22 @@ extern "system" {
     // pub fn LogonUserW();
     pub fn LookupAccountNameA(
         lpSystemName: LPCSTR, lpAccountName: LPCSTR, Sid: PSID, cbSid: LPDWORD, 
-        ReferencedDomainName: LPSTR, cchReferencedDomainName: LPDWORD, peUse: PSID_NAME_USE
+        ReferencedDomainName: LPSTR, cchReferencedDomainName: LPDWORD, peUse: PSID_NAME_USE,
     ) -> BOOL;
     pub fn LookupAccountNameW(
         lpSystemName: LPCWSTR, lpAccountName: LPCWSTR, Sid: PSID, cbSid: LPDWORD, 
-        ReferencedDomainName: LPCWSTR, cchReferencedDomainName: LPDWORD, peUse: PSID_NAME_USE
+        ReferencedDomainName: LPCWSTR, cchReferencedDomainName: LPDWORD, peUse: PSID_NAME_USE,
     ) -> BOOL;
-    // pub fn LookupAccountSidA();
-    // pub fn LookupAccountSidW();
+    pub fn LookupAccountSidA(
+        lpSystemName: LPCWSTR, Sid: PSID, Name: LPSTR, cchName: LPDWORD, 
+        ReferencedDomainName: LPSTR, cchReferencedDomainName: LPDWORD, 
+        peUse: PSID_NAME_USE,
+    ) -> BOOL;
+    pub fn LookupAccountSidW(
+        lpSystemName: LPCWSTR, Sid: PSID, Name: LPCWSTR, cchName: LPDWORD, 
+        ReferencedDomainName: LPCWSTR, cchReferencedDomainName: LPDWORD, 
+        peUse: PSID_NAME_USE,
+    ) -> BOOL;
     // pub fn LookupPrivilegeDisplayNameA();
     // pub fn LookupPrivilegeDisplayNameW();
     pub fn LookupPrivilegeNameA(
