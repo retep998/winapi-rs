@@ -511,11 +511,11 @@ extern "system" {
     // pub fn LogonUserExW();
     // pub fn LogonUserW();
     pub fn LookupAccountNameA(
-        lpSystemName: LPCSTR, lpAccountName: LPCSTR, Sid PSID, cbSid: LPDWORD, 
+        lpSystemName: LPCSTR, lpAccountName: LPCSTR, Sid: PSID, cbSid: LPDWORD, 
         ReferencedDomainName: LPSTR, cchReferencedDomainName: LPDWORD, peUse: PSID_NAME_USE
     ) -> BOOL;
     pub fn LookupAccountNameW(
-        lpSystemName: LPCWSTR, lpAccountName: LPCWSTR, Sid PSID, cbSid: LPDWORD, 
+        lpSystemName: LPCWSTR, lpAccountName: LPCWSTR, Sid: PSID, cbSid: LPDWORD, 
         ReferencedDomainName: LPCWSTR, cchReferencedDomainName: LPDWORD, peUse: PSID_NAME_USE
     ) -> BOOL;
     // pub fn LookupAccountSidA();
