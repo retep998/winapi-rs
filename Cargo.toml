@@ -12,16 +12,25 @@ include = ["src/**/*", "Cargo.toml", "LICENSE.md"]
 
 [features]
 std = []
-everything = ["shared.basetsd", "shared.bcrypt", "shared.cderr", "shared.guiddef", "shared.minwindef", "shared.windef", "um.cguid", "um.winnt", "vc.excpt", "vc.vcruntime"]
+everything = [
+	"shared.basetsd", "shared.bcrypt", "shared.cderr", "shared.d3d9caps", "shared.d3d9types", "shared.guiddef", "shared.minwindef", "shared.windef",
+	"um.cguid", "um.winnt",
+	"vc.excpt", "vc.vcruntime"
+]
+
 # Headers
 "shared.basetsd" = []
 "shared.bcrypt" = ["shared.minwindef", "um.winnt"]
 "shared.cderr" = ["shared.minwindef"]
+"shared.d3d9caps" = ["shared.d3d9types", "shared.guiddef", "shared.minwindef"]
+"shared.d3d9types" = ["shared.basetsd", "shared.guiddef", "shared.minwindef", "shared.windef"]
 "shared.guiddef" = []
 "shared.minwindef" = ["shared.minwindef+um.winnt"]
 "shared.windef" = ["shared.minwindef", "um.winnt"]
+
 "um.cguid" = ["shared.guiddef"]
 "um.winnt" = ["shared.minwindef+um.winnt"]
+
 "vc.excpt" = []
 "vc.vcruntime" = []
 # Header cycles

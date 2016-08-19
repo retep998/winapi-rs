@@ -8,6 +8,8 @@
 pub mod basetsd;
 pub mod bcrypt;
 pub mod cderr;
+pub mod d3d9caps;
+pub mod d3d9types;
 pub mod guiddef;
 pub mod minwindef;
 pub mod windef;
