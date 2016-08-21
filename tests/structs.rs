@@ -58,7 +58,7 @@ fn shared_d3d9types() {
     assert_eq!(align_of::<D3DTRIPATCH_INFO>(), 4);
     // FIXME packed(4)
     // assert_eq!(size_of::<D3DADAPTER_IDENTIFIER9>(), 1100);
-    assert_eq!(align_of::<D3DADAPTER_IDENTIFIER9>(), 4);
+    // assert_eq!(align_of::<D3DADAPTER_IDENTIFIER9>(), 4);
     assert_eq!(size_of::<D3DRASTER_STATUS>(), 8);
     assert_eq!(align_of::<D3DRASTER_STATUS>(), 4);
     assert_eq!(size_of::<D3DRESOURCESTATS>(), 44);

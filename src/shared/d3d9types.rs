@@ -1079,7 +1079,7 @@ STRUCT!{struct D3DTRIPATCH_INFO {
 }}
 pub const MAX_DEVICE_IDENTIFIER_STRING: usize = 512;
 // FIXME packed(4)
-STRUCT!{#[repr(packed)] struct D3DADAPTER_IDENTIFIER9 {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct D3DADAPTER_IDENTIFIER9 {
     Driver: [c_char; MAX_DEVICE_IDENTIFIER_STRING],
     Description: [c_char; MAX_DEVICE_IDENTIFIER_STRING],
     DeviceName: [c_char; 32],
