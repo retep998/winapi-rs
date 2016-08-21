@@ -7,7 +7,7 @@
 //! Common dialog error return codes
 // Done as of 10.0.14393.0
 #![cfg(feature = "shared.cderr")]
-use shared::minwindef::*;
+use shared::minwindef::DWORD;
 pub const CDERR_DIALOGFAILURE: DWORD = 0xFFFF;
 pub const CDERR_GENERALCODES: DWORD = 0x0000;
 pub const CDERR_STRUCTSIZE: DWORD = 0x0001;

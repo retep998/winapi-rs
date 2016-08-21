@@ -8,7 +8,7 @@
 // Done as of 10.0.14393.0
 #![cfg(feature = "shared.d3d9types")]
 use ctypes::{ c_char, c_float, c_void };
-use shared::basetsd::{ UINT64 };
+use shared::basetsd::UINT64;
 use shared::guiddef::GUID;
 use shared::minwindef::{ BOOL, BYTE, DWORD, FLOAT, INT, UINT, USHORT, WORD };
 use shared::windef::HWND;
@@ -1078,7 +1078,8 @@ STRUCT!{struct D3DTRIPATCH_INFO {
     Degree: D3DDEGREETYPE,
 }}
 pub const MAX_DEVICE_IDENTIFIER_STRING: usize = 512;
-STRUCT!{struct D3DADAPTER_IDENTIFIER9 {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct D3DADAPTER_IDENTIFIER9 {
     Driver: [c_char; MAX_DEVICE_IDENTIFIER_STRING],
     Description: [c_char; MAX_DEVICE_IDENTIFIER_STRING],
     DeviceName: [c_char; 32],

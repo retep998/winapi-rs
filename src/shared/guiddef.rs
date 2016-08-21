@@ -7,7 +7,7 @@
 //! GUID definition
 // Done as of 10.0.14393.0
 #![cfg(feature = "shared.guiddef")]
-use ctypes::*;
+use ctypes::{ c_uchar, c_ulong, c_ushort };
 STRUCT!{struct GUID {
     Data1: c_ulong,
     Data2: c_ushort,
@@ -18,10 +18,13 @@ pub type LPGUID = *mut GUID;
 pub type LPCGUID = *const GUID;
 pub type IID = GUID;
 pub type LPIID = *mut IID;
+pub use self::IsEqualGUID as IsEqualIID;
 pub type CLSID = GUID;
 pub type LPCLSID = *mut CLSID;
+pub use self::IsEqualGUID as IsEqualCLSID;
 pub type FMTID = GUID;
 pub type LPFMTID = *mut FMTID;
+pub use self::IsEqualGUID as IsEqualFMTID;
 pub type REFGUID = *const GUID;
 pub type REFIID = *const IID;
 pub type REFCLSID = *const IID;

@@ -7,11 +7,11 @@
 //! This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed
 //! through the Win32 API.
 #![cfg(feature = "shared.minwindef+um.winnt")]
-use ctypes::*;
-use shared::basetsd::*;
-use shared::guiddef::*;
-use shared::minwindef::*;
-use vc::excpt::*;
+use ctypes::{ __int64, __uint64, c_char, c_int, c_long, c_short, c_ulong, c_void, wchar_t };
+use shared::basetsd::{ DWORD64, KAFFINITY, LONG_PTR, PDWORD64, SIZE_T, ULONG_PTR };
+use shared::guiddef::{ CLSID, GUID };
+use shared::minwindef::{ BYTE, DWORD, PDWORD, ULONG, WORD };
+use vc::excpt::EXCEPTION_DISPOSITION;
 pub const ANYSIZE_ARRAY: usize = 1;
 #[cfg(target_arch = "x86")]
 pub const MAX_NATURAL_ALIGNMENT: usize = 4;
@@ -28,7 +28,7 @@ pub type VOID = c_void;
 pub type CHAR = c_char;
 pub type SHORT = c_short;
 pub type LONG = c_long;
-// pub type INT = c_int; // Already defined by minwindef.h
+pub type INT = c_int;
 pub type WCHAR = wchar_t;
 pub type PWCHAR = *mut WCHAR;
 pub type LPWCH = *mut WCHAR;

@@ -7,7 +7,7 @@
 //! Direct3D capabilities include file
 #![cfg(feature = "shared.d3d9caps")]
 use ctypes::c_float;
-use shared::d3d9types::{ D3DDEVTYPE };
+use shared::d3d9types::D3DDEVTYPE;
 use shared::guiddef::GUID;
 use shared::minwindef::{ DWORD, INT, UINT };
 use um::winnt::ULONGLONG;

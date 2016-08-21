@@ -7,7 +7,7 @@
 //! Type definitions for the basic sized types.
 // Done as of 10.0.14393.0
 #![cfg(feature = "shared.basetsd")]
-use ctypes::*;
+use ctypes::{ __int64, __uint64, c_int, c_schar, c_short, c_uchar, c_uint, c_ushort };
 pub type POINTER_64_INT = usize;
 pub type INT8 = c_schar;
 pub type PINT8 = *mut c_schar;

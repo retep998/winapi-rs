@@ -7,9 +7,9 @@
 //! Basic Windows Type Definitions
 // Done as of 10.0.14393.0
 #![cfg(feature = "shared.windef")]
-use ctypes::*;
-use shared::minwindef::*;
-use um::winnt::*;
+use ctypes::c_void;
+use shared::minwindef::{ DWORD, HFILE, WORD };
+use um::winnt::{ LONG, SHORT };
 DECLARE_HANDLE!(HWND, HWND__);
 DECLARE_HANDLE!(HHOOK, HHOOK__);
 pub type HGDIOBJ = *mut c_void;
