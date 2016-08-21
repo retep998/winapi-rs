@@ -5,6 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Direct3D capabilities include file
+// Done as of 10.0.14393.0
 #![cfg(feature = "shared.d3d9caps")]
 use ctypes::c_float;
 use shared::d3d9types::D3DDEVTYPE;
@@ -59,7 +60,8 @@ pub const D3DOVERLAYCAPS_YCbCr_BT601_xvYCC: DWORD = 0x00000010;
 pub const D3DOVERLAYCAPS_YCbCr_BT709_xvYCC: DWORD = 0x00000020;
 pub const D3DOVERLAYCAPS_STRETCHX: DWORD = 0x00000040;
 pub const D3DOVERLAYCAPS_STRETCHY: DWORD = 0x00000080;
-STRUCT!{struct D3DCONTENTPROTECTIONCAPS {
+// FIXME packed(4)
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct D3DCONTENTPROTECTIONCAPS {
     Caps: DWORD,
     KeyExchangeType: GUID,
     BufferAlignmentStart: UINT,
@@ -76,6 +78,14 @@ pub const D3DCPCAPS_ENCRYPTEDREADBACK: DWORD = 0x00000040;
 pub const D3DCPCAPS_ENCRYPTEDREADBACKKEY: DWORD = 0x00000080;
 pub const D3DCPCAPS_SEQUENTIAL_CTR_IV: DWORD = 0x00000100;
 pub const D3DCPCAPS_ENCRYPTSLICEDATAONLY: DWORD = 0x00000200;
+DEFINE_GUID!{D3DCRYPTOTYPE_AES128_CTR,
+    0x9b6bd711, 0x4f74, 0x41c9, 0x9e, 0x7b, 0x0b, 0xe2, 0xd7, 0xd9, 0x3b, 0x4f}
+DEFINE_GUID!{D3DCRYPTOTYPE_PROPRIETARY,
+    0xab4e9afd, 0x1d1c, 0x46e6, 0xa7, 0x2f, 0x08, 0x69, 0x91, 0x7b, 0x0d, 0xe8}
+DEFINE_GUID!{D3DKEYEXCHANGE_RSAES_OAEP,
+    0xc1949895, 0xd72a, 0x4a1d, 0x8e, 0x5d, 0xed, 0x85, 0x7d, 0x17, 0x15, 0x20}
+DEFINE_GUID!{D3DKEYEXCHANGE_DXVA,
+    0x43d3775c, 0x38e5, 0x4924, 0x8d, 0x86, 0xd3, 0xfc, 0xcf, 0x15, 0x3e, 0x9b}
 STRUCT!{struct D3DCAPS9 {
     DeviceType: D3DDEVTYPE,
     AdapterOrdinal: UINT,

@@ -8,6 +8,35 @@
 extern crate winapi;
 use std::mem::{size_of, align_of};
 #[cfg(target_arch = "x86")] #[test]
+fn shared_d3d9caps() {
+    use winapi::shared::d3d9caps::*;
+    assert_eq!(size_of::<D3DVSHADERCAPS2_0>(), 16);
+    assert_eq!(align_of::<D3DVSHADERCAPS2_0>(), 4);
+    assert_eq!(size_of::<D3DPSHADERCAPS2_0>(), 20);
+    assert_eq!(align_of::<D3DPSHADERCAPS2_0>(), 4);
+    assert_eq!(size_of::<D3DOVERLAYCAPS>(), 12);
+    assert_eq!(align_of::<D3DOVERLAYCAPS>(), 4);
+    assert_eq!(size_of::<D3DCONTENTPROTECTIONCAPS>(), 36);
+    // FIXME packed(4)
+    // assert_eq!(align_of::<D3DCONTENTPROTECTIONCAPS>(), 4);
+    assert_eq!(size_of::<D3DCAPS9>(), 304);
+    assert_eq!(align_of::<D3DCAPS9>(), 4);
+}
+#[cfg(target_arch = "x86_64")] #[test]
+fn shared_d3d9caps() {
+    use winapi::shared::d3d9caps::*;
+    assert_eq!(size_of::<D3DVSHADERCAPS2_0>(), 16);
+    assert_eq!(align_of::<D3DVSHADERCAPS2_0>(), 4);
+    assert_eq!(size_of::<D3DPSHADERCAPS2_0>(), 20);
+    assert_eq!(align_of::<D3DPSHADERCAPS2_0>(), 4);
+    assert_eq!(size_of::<D3DOVERLAYCAPS>(), 12);
+    assert_eq!(align_of::<D3DOVERLAYCAPS>(), 4);
+    assert_eq!(size_of::<D3DCONTENTPROTECTIONCAPS>(), 40);
+    assert_eq!(align_of::<D3DCONTENTPROTECTIONCAPS>(), 8);
+    assert_eq!(size_of::<D3DCAPS9>(), 304);
+    assert_eq!(align_of::<D3DCAPS9>(), 4);
+}
+#[cfg(target_arch = "x86")] #[test]
 fn shared_d3d9types() {
     use winapi::shared::d3d9types::*;
     assert_eq!(size_of::<D3DVECTOR>(), 12);
@@ -56,8 +85,8 @@ fn shared_d3d9types() {
     assert_eq!(align_of::<D3DRECTPATCH_INFO>(), 4);
     assert_eq!(size_of::<D3DTRIPATCH_INFO>(), 16);
     assert_eq!(align_of::<D3DTRIPATCH_INFO>(), 4);
+    assert_eq!(size_of::<D3DADAPTER_IDENTIFIER9>(), 1100);
     // FIXME packed(4)
-    // assert_eq!(size_of::<D3DADAPTER_IDENTIFIER9>(), 1100);
     // assert_eq!(align_of::<D3DADAPTER_IDENTIFIER9>(), 4);
     assert_eq!(size_of::<D3DRASTER_STATUS>(), 8);
     assert_eq!(align_of::<D3DRASTER_STATUS>(), 4);
@@ -79,15 +108,15 @@ fn shared_d3d9types() {
     assert_eq!(align_of::<D3DDEVINFO_D3D9BANDWIDTHTIMINGS>(), 4);
     assert_eq!(size_of::<D3DDEVINFO_D3D9CACHEUTILIZATION>(), 8);
     assert_eq!(align_of::<D3DDEVINFO_D3D9CACHEUTILIZATION>(), 4);
+    assert_eq!(size_of::<D3DMEMORYPRESSURE>(), 20);
     // FIXME packed(4)
-    // assert_eq!(size_of::<D3DMEMORYPRESSURE>(), 20);
     // assert_eq!(align_of::<D3DMEMORYPRESSURE>(), 4);
     assert_eq!(size_of::<D3DCOMPOSERECTDESC>(), 8);
     assert_eq!(align_of::<D3DCOMPOSERECTDESC>(), 2);
     assert_eq!(size_of::<D3DCOMPOSERECTDESTINATION>(), 8);
     assert_eq!(align_of::<D3DCOMPOSERECTDESTINATION>(), 2);
+    assert_eq!(size_of::<D3DPRESENTSTATS>(), 28);
     // FIXME packed(4)
-    // assert_eq!(size_of::<D3DPRESENTSTATS>(), 28);
     // assert_eq!(align_of::<D3DPRESENTSTATS>(), 4);
     assert_eq!(size_of::<D3DDISPLAYMODEEX>(), 24);
     assert_eq!(align_of::<D3DDISPLAYMODEEX>(), 4);
