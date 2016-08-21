@@ -24,7 +24,7 @@ macro_rules! HIDP_ERROR_CODES {
 }
 macro_rules! MAKEFOURCC {
     ($a:expr, $b:expr, $c:expr, $d:expr) => {
-        ($a as i32) | (($b as i32) << 8) | (($c as i32) << 16) | (($d as i32) << 24)
+        ($a as u32) | (($b as u32) << 8) | (($c as u32) << 16) | (($d as u32) << 24)
     }
 }
 macro_rules! DEFINE_GUID {
