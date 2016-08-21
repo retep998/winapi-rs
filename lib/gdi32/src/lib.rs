@@ -134,14 +134,14 @@ extern "system" {
     ) -> HRGN;
     pub fn CreateRectRgnIndirect(lprect: *const RECT) -> HRGN;
     pub fn CreateRoundRectRgn(
-		x1: c_int, y1: c_int, x2: c_int, y2: c_int, w: c_int, h: c_int
-	) -> HRGN;
+        x1: c_int, y1: c_int, x2: c_int, y2: c_int, w: c_int, h: c_int
+    ) -> HRGN;
     pub fn CreateScalableFontResourceA(
-		fdwHidden: DWORD, lpszFont: LPCSTR, lpszFile: LPCSTR, lpszPath: LPCSTR
-	) -> BOOL;
+        fdwHidden: DWORD, lpszFont: LPCSTR, lpszFile: LPCSTR, lpszPath: LPCSTR
+    ) -> BOOL;
     pub fn CreateScalableFontResourceW(
-		fdwHidden: DWORD, lpszFont: LPCWSTR, lpszFile: LPCWSTR, lpszPath: LPCWSTR
-	) -> BOOL;
+        fdwHidden: DWORD, lpszFont: LPCWSTR, lpszFile: LPCWSTR, lpszPath: LPCWSTR
+    ) -> BOOL;
     pub fn CreateSolidBrush(color: COLORREF) -> HBRUSH;
     // pub fn D3DKMTAcquireKeyedMutex();
     // pub fn D3DKMTAcquireKeyedMutex2();
@@ -276,35 +276,35 @@ extern "system" {
         hdc: HDC, hmf: HENHMETAFILE, lpProc: ENHMFENUMPROC, param: LPVOID, lpRect: *const RECT
     ) -> BOOL;
     pub fn EnumFontFamiliesA(
-		hdc: HDC, lpLogfont: LPCSTR, lpProc: FONTENUMPROCA, lParam: LPARAM
-	) -> c_int;
+        hdc: HDC, lpLogfont: LPCSTR, lpProc: FONTENUMPROCA, lParam: LPARAM
+    ) -> c_int;
     pub fn EnumFontFamiliesExA(
-		hdc: HDC, lpLogfont: LPLOGFONTA, lpProc: FONTENUMPROCA, lParam: LPARAM, dwFlags: DWORD
-	) -> c_int;
+        hdc: HDC, lpLogfont: LPLOGFONTA, lpProc: FONTENUMPROCA, lParam: LPARAM, dwFlags: DWORD
+    ) -> c_int;
     pub fn EnumFontFamiliesExW(
-		hdc: HDC, lpLogfont: LPLOGFONTW, lpProc: FONTENUMPROCW, lParam: LPARAM, dwFlags: DWORD
-	) -> c_int;
+        hdc: HDC, lpLogfont: LPLOGFONTW, lpProc: FONTENUMPROCW, lParam: LPARAM, dwFlags: DWORD
+    ) -> c_int;
     pub fn EnumFontFamiliesW(
-		hdc: HDC, lpLogfont: LPCWSTR, lpProc: FONTENUMPROCW, lParam: LPARAM
-	) -> c_int;
+        hdc: HDC, lpLogfont: LPCWSTR, lpProc: FONTENUMPROCW, lParam: LPARAM
+    ) -> c_int;
     pub fn EnumFontsA(
-		hdc: HDC, lpLogfont: LPCSTR, lpProc: FONTENUMPROCA, lParam: LPARAM
-	) -> c_int;
+        hdc: HDC, lpLogfont: LPCSTR, lpProc: FONTENUMPROCA, lParam: LPARAM
+    ) -> c_int;
     pub fn EnumFontsW(
-		hdc: HDC, lpLogfont: LPCWSTR, lpProc: FONTENUMPROCW, lParam: LPARAM
-	) -> c_int;
+        hdc: HDC, lpLogfont: LPCWSTR, lpProc: FONTENUMPROCW, lParam: LPARAM
+    ) -> c_int;
     pub fn EnumICMProfilesA(
-		hdc: HDC, iproc: ICMENUMPROCA, param: LPARAM
-	) -> c_int;
+        hdc: HDC, iproc: ICMENUMPROCA, param: LPARAM
+    ) -> c_int;
     pub fn EnumICMProfilesW(
-		hdc: HDC, iproc: ICMENUMPROCW, param: LPARAM
-	) -> c_int;
+        hdc: HDC, iproc: ICMENUMPROCW, param: LPARAM
+    ) -> c_int;
     pub fn EnumMetaFile(
-		hdc: HDC, hmf: HMETAFILE, mproc: MFENUMPROC, param: LPARAM
-	) -> BOOL;
+        hdc: HDC, hmf: HMETAFILE, mproc: MFENUMPROC, param: LPARAM
+    ) -> BOOL;
     pub fn EnumObjects(
-		hdc: HDC, nType: c_int, lpFunc: GOBJENUMPROC, lParam: LPARAM
-	) -> c_int;
+        hdc: HDC, nType: c_int, lpFunc: GOBJENUMPROC, lParam: LPARAM
+    ) -> c_int;
     pub fn EqualRgn(hrgn1: HRGN, hrgn2: HRGN) -> BOOL;
     pub fn Escape(hdc: HDC, iEscape: c_int, cjIn: c_int, pvIn: LPCSTR, pvOut: LPVOID) -> c_int;
     // pub fn EudcLoadLinkW();
@@ -320,13 +320,13 @@ extern "system" {
     pub fn ExtFloodFill(hdc: HDC, x: c_int, y: c_int, color: COLORREF, utype: UINT) -> BOOL;
     pub fn ExtSelectClipRgn(hdc: HDC, hrgn: HRGN, mode: c_int) -> c_int;
     pub fn ExtTextOutA(
-		hdc: HDC, x: c_int, y: c_int, options: UINT, lprect: *const RECT, lpString: LPCSTR, c: UINT,
-		lpDx: *const INT
-	) -> BOOL;
+        hdc: HDC, x: c_int, y: c_int, options: UINT, lprect: *const RECT, lpString: LPCSTR, c: UINT,
+        lpDx: *const INT
+    ) -> BOOL;
     pub fn ExtTextOutW(
-		hdc: HDC, x: c_int, y: c_int, options: UINT, lprect: *const RECT, lpString: LPCWSTR, c: UINT,
-		lpDx: *const INT
-	) -> BOOL;
+        hdc: HDC, x: c_int, y: c_int, options: UINT, lprect: *const RECT, lpString: LPCWSTR, c: UINT,
+        lpDx: *const INT
+    ) -> BOOL;
     pub fn FillPath(hdc: HDC) -> BOOL;
     pub fn FillRgn(hdc: HDC, hrgn: HRGN, hbr: HBRUSH) -> BOOL;
     pub fn FixBrushOrgEx(hdc: HDC, x: c_int, y: c_int, ptl: LPPOINT) -> BOOL;
@@ -334,10 +334,10 @@ extern "system" {
     pub fn FloodFill(hdc: HDC, x: c_int, y: c_int, color: COLORREF) -> BOOL;
     pub fn FrameRgn(hdc: HDC, hrgn: HRGN, hbr: HBRUSH, w: c_int, h: c_int) -> BOOL;
     pub fn GdiAlphaBlend(
-		hdcDest: HDC, xoriginDest: c_int, yoriginDest: c_int, wDest: c_int, hDest: c_int,
+        hdcDest: HDC, xoriginDest: c_int, yoriginDest: c_int, wDest: c_int, hDest: c_int,
         hdcSrc: HDC, xoriginSrc: c_int, yoriginSrc: c_int, wSrc: c_int, hSrc: c_int,
         ftn: BLENDFUNCTION
-	) -> BOOL;
+    ) -> BOOL;
     // pub fn GdiArtificialDecrementDriver();
     pub fn GdiComment(hdc: HDC, nSize: UINT, lpData: *const BYTE) -> BOOL;
     // pub fn GdiDeleteSpoolFileHandle();
@@ -377,11 +377,11 @@ extern "system" {
     pub fn GetBrushOrgEx(hdc: HDC, lppt: LPPOINT) -> BOOL;
     pub fn GetCharABCWidthsA( hdc: HDC, wFirst: UINT, wLast: UINT, lpABC: LPABC) -> BOOL;
     pub fn GetCharABCWidthsFloatA(
-		hdc: HDC, iFirst: UINT, iLast: UINT, lpABC: LPABCFLOAT
-	) -> BOOL;
+        hdc: HDC, iFirst: UINT, iLast: UINT, lpABC: LPABCFLOAT
+    ) -> BOOL;
     pub fn GetCharABCWidthsFloatW(
-		hdc: HDC, iFirst: UINT, iLast: UINT, lpABC: LPABCFLOAT
-	) -> BOOL;
+        hdc: HDC, iFirst: UINT, iLast: UINT, lpABC: LPABCFLOAT
+    ) -> BOOL;
     pub fn GetCharABCWidthsI(hdc: HDC, giFirst: UINT, cgi: UINT, pgi: LPWORD, pabc: LPABC) -> BOOL;
     pub fn GetCharABCWidthsW(hdc: HDC, wFirst: UINT, wLast: UINT, lpABC: LPABC) -> BOOL;
     pub fn GetCharWidth32A(hdc: HDC, iFirst: UINT, iLast: UINT, lpBuffer: LPINT) -> BOOL;
@@ -392,13 +392,13 @@ extern "system" {
     pub fn GetCharWidthI(hdc: HDC, giFirst: UINT, cgi: UINT, pgi: LPWORD, piWidths: LPINT) -> BOOL;
     pub fn GetCharWidthW(hdc: HDC, iFirst: UINT, iLast: UINT, lpBuffer: LPINT) -> BOOL;
     pub fn GetCharacterPlacementA(
-		hdc: HDC, lpString: LPCSTR, nCount: c_int, nMexExtent: c_int, lpResults: LPGCP_RESULTSA,
-		dwFlags: DWORD
-	) -> DWORD;
+        hdc: HDC, lpString: LPCSTR, nCount: c_int, nMexExtent: c_int, lpResults: LPGCP_RESULTSA,
+        dwFlags: DWORD
+    ) -> DWORD;
     pub fn GetCharacterPlacementW(
-		hdc: HDC, lpString: LPCWSTR, nCount: c_int, nMexExtent: c_int, lpResults: LPGCP_RESULTSW,
-		dwFlags: DWORD
-	) -> DWORD;
+        hdc: HDC, lpString: LPCWSTR, nCount: c_int, nMexExtent: c_int, lpResults: LPGCP_RESULTSW,
+        dwFlags: DWORD
+    ) -> DWORD;
     pub fn GetClipBox(hdc: HDC, lprect: LPRECT) -> c_int;
     pub fn GetClipRgn(hdc: HDC, hrgn: HRGN) -> c_int;
     pub fn GetColorAdjustment(hdc: HDC, lpca: LPCOLORADJUSTMENT) -> BOOL;
@@ -524,8 +524,8 @@ extern "system" {
     pub fn GetWindowOrgEx(hdc: HDC, lppoint: LPPOINT) -> BOOL;
     pub fn GetWorldTransform(hdc: HDC, lpxf: LPXFORM) -> BOOL;
     pub fn IntersectClipRect(
-		hdc: HDC, left: c_int, top: c_int, right: c_int, bottom: c_int
-	) -> c_int;
+        hdc: HDC, left: c_int, top: c_int, right: c_int, bottom: c_int
+    ) -> c_int;
     pub fn InvertRgn(hdc: HDC, hrgn: HRGN) -> BOOL;
     pub fn LPtoDP(hdc: HDC, lppt: LPPOINT, c: c_int) -> BOOL;
     pub fn LineDDA(
@@ -596,11 +596,11 @@ extern "system" {
     ) -> BOOL;
     pub fn SaveDC(hdc: HDC) -> c_int;
     pub fn ScaleViewportExtEx(
-		hdc: HDC,xn: c_int, dx: c_int, yn: c_int, yd: c_int, lpsz: LPSIZE
-	) -> BOOL;
+        hdc: HDC,xn: c_int, dx: c_int, yn: c_int, yd: c_int, lpsz: LPSIZE
+    ) -> BOOL;
     pub fn ScaleWindowExtEx(
-		hdc: HDC, xn: c_int, xd: c_int, yn: c_int, yd: c_int, lpsz: LPSIZE
-	) -> BOOL;
+        hdc: HDC, xn: c_int, xd: c_int, yn: c_int, yd: c_int, lpsz: LPSIZE
+    ) -> BOOL;
     // pub fn SelectBrushLocal();
     pub fn SelectClipPath(hdc: HDC, mode: c_int) -> BOOL;
     pub fn SelectClipRgn(hdc: HDC, hrgn: HRGN) -> c_int;
@@ -621,9 +621,9 @@ extern "system" {
     pub fn SetDCPenColor(hdc: HDC, color: COLORREF) -> COLORREF;
     pub fn SetDIBColorTable(hdc: HDC, iStart: UINT, cEntries: UINT, prgbq: *const RGBQUAD) -> UINT;
     pub fn SetDIBits(
-		hdc: HDC, hbm: HBITMAP, start: UINT, cLines: UINT, lpBits: *const VOID,
-		lpbmi: *const BITMAPINFO, ColorUse: UINT
-	) -> c_int;
+        hdc: HDC, hbm: HBITMAP, start: UINT, cLines: UINT, lpBits: *const VOID,
+        lpbmi: *const BITMAPINFO, ColorUse: UINT
+    ) -> c_int;
     pub fn SetDIBitsToDevice(
         hdc: HDC, xDest: c_int, yDest: c_int, w: DWORD, h: DWORD, xSrc: c_int, ySrc: c_int,
         StartScan: UINT, cLines: UINT, lpvBits: *const VOID, lpbmi: *const BITMAPINFO, ColorUse: UINT
@@ -673,9 +673,9 @@ extern "system" {
     // pub fn StartFormPage();
     pub fn StartPage(hdc: HDC) -> c_int;
     pub fn StretchBlt(
-		hdcDest: HDC, xDest: c_int, yDest: c_int, wDest: c_int, hDest: c_int, hdcSrc: HDC,
-		xSrc: c_int, ySrc: c_int, wSrc: c_int, hSrc: c_int, rop: DWORD
-	) -> BOOL;
+        hdcDest: HDC, xDest: c_int, yDest: c_int, wDest: c_int, hDest: c_int, hdcSrc: HDC,
+        xSrc: c_int, ySrc: c_int, wSrc: c_int, hSrc: c_int, rop: DWORD
+    ) -> BOOL;
     pub fn StretchDIBits(
         hdc: HDC, XDest: c_int, YDest: c_int, nDestWidth: c_int,
         nDestHeight: c_int, XSrc: c_int, YSrc: c_int, nSrcWidth: c_int,
@@ -688,16 +688,16 @@ extern "system" {
     pub fn TextOutA(hdc: HDC, x: c_int, y: c_int, lpString: LPCSTR, c: c_int) -> BOOL;
     pub fn TextOutW(hdc: HDC, x: c_int, y: c_int, lpString: LPCWSTR, c: c_int) -> BOOL;
     pub fn TranslateCharsetInfo(
-		lpSrc: *const DWORD, lpCs: LPCHARSETINFO, dwFlags: DWORD
-	) -> BOOL;
+        lpSrc: *const DWORD, lpCs: LPCHARSETINFO, dwFlags: DWORD
+    ) -> BOOL;
     pub fn UnrealizeObject(h: HGDIOBJ) -> BOOL;
     pub fn  UpdateColors(hdc: HDC) -> BOOL;
     pub fn UpdateICMRegKeyA(
-		reserved: DWORD, lpszCMID: LPSTR, lpszFileName: LPSTR, command: UINT
-	) -> BOOL;
+        reserved: DWORD, lpszCMID: LPSTR, lpszFileName: LPSTR, command: UINT
+    ) -> BOOL;
     pub fn UpdateICMRegKeyW(
-		reserved: DWORD, lpszCMID: LPWSTR, lpszFileName: LPWSTR, command: UINT
-	) -> BOOL;
+        reserved: DWORD, lpszCMID: LPWSTR, lpszFileName: LPWSTR, command: UINT
+    ) -> BOOL;
     pub fn WidenPath(hdc: HDC) -> BOOL;
     // pub fn gdiPlaySpoolStream();
 }
