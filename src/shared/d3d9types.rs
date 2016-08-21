@@ -1177,7 +1177,8 @@ STRUCT!{struct D3DDEVINFO_D3D9CACHEUTILIZATION {
     TextureCacheHitRate: FLOAT,
     PostTransformVertexCacheHitRate: FLOAT,
 }}
-STRUCT!{struct D3DMEMORYPRESSURE {
+// FIXME packed(4)
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct D3DMEMORYPRESSURE {
     BytesEvictedFromProcess: UINT64,
     SizeOfInefficientAllocation: UINT64,
     LevelOfEfficiency: DWORD,
@@ -1205,7 +1206,8 @@ pub const D3DCONVOLUTIONMONO_MAXWIDTH: DWORD = 7;
 pub const D3DCONVOLUTIONMONO_MAXHEIGHT: DWORD = D3DCONVOLUTIONMONO_MAXWIDTH;
 pub const D3DFMT_A1_SURFACE_MAXWIDTH: DWORD = 8192;
 pub const D3DFMT_A1_SURFACE_MAXHEIGHT: DWORD = 2048;
-STRUCT!{struct D3DPRESENTSTATS {
+// FIXME packed(4)
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct D3DPRESENTSTATS {
     PresentCount: UINT,
     PresentRefreshCount: UINT,
     SyncRefreshCount: UINT,
