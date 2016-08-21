@@ -30,27 +30,27 @@ pub const SECPKG_ATTR_UI_INFO: ::DWORD = 0x68;
 pub const SECPKG_ATTR_EARLY_START: ::DWORD = 0x69;
 
 STRUCT!{struct SecPkgCred_SupportedAlgs {
-	cSupportedAlgs: ::DWORD,
-	palgSupportedAlgs: ::ALG_ID,
+    cSupportedAlgs: ::DWORD,
+    palgSupportedAlgs: ::ALG_ID,
 }}
 
 STRUCT!{struct SecPkgCred_CipherStrengths {
-	dwMinimumCipherStrength: ::DWORD,
-	dwMaximumCipherStrength: ::DWORD,
+    dwMinimumCipherStrength: ::DWORD,
+    dwMaximumCipherStrength: ::DWORD,
 }}
 
 STRUCT!{struct SecPkgCred_SupportedProtocols {
-	grbitProtocol: ::DWORD,
+    grbitProtocol: ::DWORD,
 }}
 
 STRUCT!{struct SecPkgCred_ClientCertPolicy {
-	dwFlags: ::DWORD,
-	guidPolicyId: ::GUID,
-	dwCertFlags: ::DWORD,
-	dwUrlRetrievalTimeout: ::DWORD,
-	fCheckRevocationFreshnessTime: ::BOOL,
-	dwRevocationFreshnessTime: ::DWORD,
-	fOmitUsageCheck: ::BOOL,
-	pwszSslCtlStoreName: ::LPWSTR,
-	pwszSslCtlIdentifier: ::LPWSTR,
+    dwFlags: ::DWORD,
+    guidPolicyId: ::GUID,
+    dwCertFlags: ::DWORD,
+    dwUrlRetrievalTimeout: ::DWORD,
+    fCheckRevocationFreshnessTime: ::BOOL,
+    dwRevocationFreshnessTime: ::DWORD,
+    fOmitUsageCheck: ::BOOL,
+    pwszSslCtlStoreName: ::LPWSTR,
+    pwszSslCtlIdentifier: ::LPWSTR,
 }}

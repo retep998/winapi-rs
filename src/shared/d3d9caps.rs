@@ -1,14 +1,16 @@
-// Copyright © 2015, Corey Richardson
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2016 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Direct3D capabilities include file
 #![cfg(feature = "shared.d3d9caps")]
-
 use ctypes::c_float;
 use shared::d3d9types::{ D3DDEVTYPE };
 use shared::guiddef::GUID;
 use shared::minwindef::{ DWORD, INT, UINT };
 use um::winnt::ULONGLONG;
-
 STRUCT!{struct D3DVSHADERCAPS2_0 {
     Caps: DWORD,
     DynamicFlowControlDepth: INT,

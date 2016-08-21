@@ -1,15 +1,17 @@
-// Copyright © 2015, Corey Richardson
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2016 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Direct3D capabilities include file
 #![cfg(feature = "shared.d3d9types")]
-
 use ctypes::{ c_char, c_float, c_void };
 use shared::basetsd::{ UINT64 };
 use shared::guiddef::GUID;
 use shared::minwindef::{ BOOL, BYTE, DWORD, FLOAT, INT, UINT, USHORT, WORD };
 use shared::windef::HWND;
 use um::winnt::{ HANDLE, HRESULT, LARGE_INTEGER, LONG, SHORT };
-
 pub type D3DCOLOR = DWORD;
 STRUCT!{struct D3DVECTOR {
     x: c_float,
@@ -40,12 +42,12 @@ STRUCT!{struct D3DVIEWPORT9 {
     MaxZ: c_float,
 }}
 pub const D3DMAXUSERCLIPPLANES: DWORD = 32;
-pub const D3DCLIPPLANE0: DWORD = (1 << 0);
-pub const D3DCLIPPLANE1: DWORD = (1 << 1);
-pub const D3DCLIPPLANE2: DWORD = (1 << 2);
-pub const D3DCLIPPLANE3: DWORD = (1 << 3);
-pub const D3DCLIPPLANE4: DWORD = (1 << 4);
-pub const D3DCLIPPLANE5: DWORD = (1 << 5);
+pub const D3DCLIPPLANE0: DWORD = 1 << 0;
+pub const D3DCLIPPLANE1: DWORD = 1 << 1;
+pub const D3DCLIPPLANE2: DWORD = 1 << 2;
+pub const D3DCLIPPLANE3: DWORD = 1 << 3;
+pub const D3DCLIPPLANE4: DWORD = 1 << 4;
+pub const D3DCLIPPLANE5: DWORD = 1 << 5;
 pub const D3DCS_LEFT: DWORD = 0x00000001;
 pub const D3DCS_RIGHT: DWORD = 0x00000002;
 pub const D3DCS_TOP: DWORD = 0x00000004;
@@ -92,9 +94,9 @@ STRUCT!{struct D3DLIGHT9 {
     Theta: c_float,
     Phi: c_float,
 }}
-pub const D3DCLEAR_TARGET: DWORD = 0x1;
-pub const D3DCLEAR_ZBUFFER: DWORD = 0x2;
-pub const D3DCLEAR_STENCIL: DWORD = 0x4;
+pub const D3DCLEAR_TARGET: DWORD = 0x00000001;
+pub const D3DCLEAR_ZBUFFER: DWORD = 0x00000002;
+pub const D3DCLEAR_STENCIL: DWORD = 0x00000004;
 ENUM!{enum D3DSHADEMODE {
     D3DSHADE_FLAT = 1,
     D3DSHADE_GOURAUD = 2,
@@ -121,6 +123,8 @@ ENUM!{enum D3DBLEND {
     D3DBLEND_BOTHINVSRCALPHA = 13,
     D3DBLEND_BLENDFACTOR = 14,
     D3DBLEND_INVBLENDFACTOR = 15,
+    D3DBLEND_SRCCOLOR2 = 16,
+    D3DBLEND_INVSRCCOLOR2 = 17,
 }}
 ENUM!{enum D3DBLENDOP {
     D3DBLENDOP_ADD = 1,
@@ -192,6 +196,13 @@ ENUM!{enum D3DTRANSFORMSTATETYPE {
     D3DTS_TEXTURE6 = 22,
     D3DTS_TEXTURE7 = 23,
 }}
+macro_rules! D3DTS_WORLDMATRIX {
+    ($index:expr) => (index + 256)
+}
+pub const D3DTS_WORLD: D3DTRANSFORMSTATETYPE = D3DTS_WORLDMATRIX!(0);
+pub const D3DTS_WORLD1: D3DTRANSFORMSTATETYPE = D3DTS_WORLDMATRIX!(1);
+pub const D3DTS_WORLD2: D3DTRANSFORMSTATETYPE = D3DTS_WORLDMATRIX!(2);
+pub const D3DTS_WORLD3: D3DTRANSFORMSTATETYPE = D3DTS_WORLDMATRIX!(3);
 ENUM!{enum D3DRENDERSTATETYPE {
     D3DRS_ZENABLE = 7,
     D3DRS_FILLMODE = 8,

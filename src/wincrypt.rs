@@ -2191,10 +2191,10 @@ STRUCT!{struct CRYPT_KEY_VERIFY_MESSAGE_PARA {
 }}
 pub type PCRYPT_KEY_VERIFY_MESSAGE_PARA = *mut CRYPT_KEY_VERIFY_MESSAGE_PARA;
 STRUCT!{struct HTTPSPolicyCallbackData {
-	cbSize: ::DWORD,
-	dwAuthType: ::DWORD,
-	fdwChecks: ::DWORD,
-	pwszServerName: *mut ::WCHAR,
+    cbSize: ::DWORD,
+    dwAuthType: ::DWORD,
+    fdwChecks: ::DWORD,
+    pwszServerName: *mut ::WCHAR,
 }}
 pub type PHTTPSPolicyCallbackData = *mut HTTPSPolicyCallbackData;
 pub type SSL_EXTRA_CERT_CHAIN_POLICY_PARA = HTTPSPolicyCallbackData;
