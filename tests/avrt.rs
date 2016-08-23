@@ -7,7 +7,7 @@ extern crate winapi;
 use avrt::*;
 
 #[inline(never)] fn bb<T>(_: T) {}
-#[test]
+#[test] #[cfg(target_env = "msvc")]
 fn functions() {
     bb(AvSetMmThreadCharacteristicsA);   
     bb(AvSetMmThreadCharacteristicsW);
