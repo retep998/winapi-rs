@@ -8,7 +8,7 @@ repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["windows", "ffi", "win32", "com", "directx"]
 license = "MIT"
-include = ["src/**/*", "Cargo.toml", "LICENSE.md"]
+include = ["src/**/*", "Cargo.toml", "LICENSE.md", "build.rs"]
 build = "build.rs"
 
 [features]
