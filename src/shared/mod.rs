@@ -12,4 +12,6 @@ pub mod d3d9caps;
 pub mod d3d9types;
 pub mod guiddef;
 pub mod minwindef;
+pub mod rpcndr;
 pub mod windef;
+pub mod wtypesbase;

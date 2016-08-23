@@ -83,11 +83,9 @@ macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
     }
 }
 macro_rules! RIDL {
-    (interface $interface:ident ($vtbl:ident)
-        {$(
-            fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
-        ),+}
-    ) => {
+    (interface $interface:ident ($vtbl:ident) {$(
+        fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
+    ),+}) => (
         #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $vtbl {
             $(pub $method: unsafe extern "system" fn(
@@ -99,15 +97,10 @@ macro_rules! RIDL {
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
-        impl $interface {
-            #[inline]
-            $(pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
-                ((*self.lpVtbl).$method)(self $(,$p)*)
-            })+
-        }
-    };
+        RIDL!{@impl $interface {$(fn $method(&mut self $(,$p: $t)*) -> $rtr),+}}
+    );
     (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {
-    }) => {
+    }) => (
         #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $vtbl {
             pub parent: $pvtbl
@@ -129,15 +122,13 @@ macro_rules! RIDL {
                 unsafe { &mut *(self as *mut _ as *mut _) }
             }
         }
-    };
-    (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident)
-        {$(
-            fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
-        ),+}
-    ) => {
+    );
+    (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
+        fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
+    ),+}) => (
         #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $vtbl {
-            pub parent: $crate::$pvtbl
+            pub parent: $pvtbl
             $(,pub $method: unsafe extern "system" fn(
                 This: *mut $interface
                 $(,$p: $t)*
@@ -147,26 +138,31 @@ macro_rules! RIDL {
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
+        RIDL!{@impl $interface {$(fn $method(&mut self $(,$p: $t)*) -> $rtr),+}}
+        impl $crate::core::ops::Deref for $interface {
+            type Target = $pinterface;
+            #[inline]
+            fn deref(&self) -> &$pinterface {
+                unsafe { &*(self as *const _ as *const _) }
+            }
+        }
+        impl $crate::core::ops::DerefMut for $interface {
+            #[inline]
+            fn deref_mut(&mut self) -> &mut $pinterface {
+                unsafe { &mut *(self as *mut _ as *mut _) }
+            }
+        }
+    );
+    (@impl $interface:ident {$(
+        fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
+    ),+}) => (
         impl $interface {
             #[inline]
             $(pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
                 ((*self.lpVtbl).$method)(self $(,$p)*)
             })+
         }
-        impl $crate::core::ops::Deref for $interface {
-            type Target = $crate::$pinterface;
-            #[inline]
-            fn deref(&self) -> &$crate::$pinterface {
-                unsafe { &*(self as *const _ as *const _) }
-            }
-        }
-        impl $crate::core::ops::DerefMut for $interface {
-            #[inline]
-            fn deref_mut(&mut self) -> &mut $crate::$pinterface {
-                unsafe { &mut *(self as *mut _ as *mut _) }
-            }
-        }
-    };
+    );
 }
 macro_rules! UNION {
     ($base:ident, $field:ident, $variant:ident, $variantmut:ident, $fieldtype:ty) => {
@@ -233,4 +229,17 @@ macro_rules! STRUCT {
         impl Copy for $name {}
         impl Clone for $name { fn clone(&self) -> $name { *self } }
     };
+}
+macro_rules! EXTERN {
+    ($lib:tt $cconv:tt fn $func:ident(
+        $($p:ident: $t:ty),*
+    ) -> $ret:ty) => (EXTERN!{@fix
+        #[cfg(feature = $lib)]
+        extern $cconv {
+            pub fn $func(
+                $($p: $t),*
+            ) -> $ret;
+        }
+    });
+    (@fix $x:item) => ($x);
 }

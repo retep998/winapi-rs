@@ -6,4 +6,7 @@
 // except according to those terms.
 //! Headers for user mode only
 pub mod cguid;
+pub mod combaseapi;
+pub mod objidlbase;
+pub mod unknwnbase;
 pub mod winnt;

@@ -7,7 +7,7 @@
 #![cfg(windows)]
 extern crate winapi;
 use std::mem::{size_of, align_of};
-#[cfg(target_arch = "x86")] #[test]
+#[cfg(all(target_arch = "x86", feature = "shared.d3d9caps"))] #[test]
 fn shared_d3d9caps() {
     use winapi::shared::d3d9caps::*;
     assert_eq!(size_of::<D3DVSHADERCAPS2_0>(), 16);
@@ -22,7 +22,7 @@ fn shared_d3d9caps() {
     assert_eq!(size_of::<D3DCAPS9>(), 304);
     assert_eq!(align_of::<D3DCAPS9>(), 4);
 }
-#[cfg(target_arch = "x86_64")] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "shared.d3d9caps"))] #[test]
 fn shared_d3d9caps() {
     use winapi::shared::d3d9caps::*;
     assert_eq!(size_of::<D3DVSHADERCAPS2_0>(), 16);
@@ -36,7 +36,7 @@ fn shared_d3d9caps() {
     assert_eq!(size_of::<D3DCAPS9>(), 304);
     assert_eq!(align_of::<D3DCAPS9>(), 4);
 }
-#[cfg(target_arch = "x86")] #[test]
+#[cfg(all(target_arch = "x86", feature = "shared.d3d9types"))] #[test]
 fn shared_d3d9types() {
     use winapi::shared::d3d9types::*;
     assert_eq!(size_of::<D3DVECTOR>(), 12);
@@ -187,7 +187,7 @@ fn shared_d3d9types() {
     // FIXME packed(4)
     // assert_eq!(align_of::<D3DAES_CTR_IV>(), 4);
 }
-#[cfg(target_arch = "x86_64")] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "shared.d3d9types"))] #[test]
 fn shared_d3d9types() {
     use winapi::shared::d3d9types::*;
     assert_eq!(size_of::<D3DVECTOR>(), 12);
@@ -333,31 +333,31 @@ fn shared_d3d9types() {
     assert_eq!(size_of::<D3DAES_CTR_IV>(), 16);
     assert_eq!(align_of::<D3DAES_CTR_IV>(), 8);
 }
-#[cfg(target_arch = "x86")] #[test]
+#[cfg(all(target_arch = "x86", feature = "shared.guiddef"))] #[test]
 fn shared_guiddef() {
     use winapi::shared::guiddef::*;
     assert_eq!(size_of::<GUID>(), 16);
     assert_eq!(align_of::<GUID>(), 4);
 }
-#[cfg(target_arch = "x86_64")] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "shared.guiddef"))] #[test]
 fn shared_guiddef() {
     use winapi::shared::guiddef::*;
     assert_eq!(size_of::<GUID>(), 16);
     assert_eq!(align_of::<GUID>(), 4);
 }
-#[cfg(target_arch = "x86")] #[test]
+#[cfg(all(target_arch = "x86", feature = "shared.minwindef"))] #[test]
 fn shared_minwindef() {
     use winapi::shared::minwindef::*;
     assert_eq!(size_of::<FILETIME>(), 8);
     assert_eq!(align_of::<FILETIME>(), 4);
 }
-#[cfg(target_arch = "x86_64")] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "shared.minwindef"))] #[test]
 fn shared_minwindef() {
     use winapi::shared::minwindef::*;
     assert_eq!(size_of::<FILETIME>(), 8);
     assert_eq!(align_of::<FILETIME>(), 4);
 }
-#[cfg(target_arch = "x86")] #[test]
+#[cfg(all(target_arch = "x86", feature = "shared.windef"))] #[test]
 fn shared_windef() {
     use winapi::shared::windef::*;
     assert_eq!(size_of::<RECT>(), 16);
@@ -373,7 +373,7 @@ fn shared_windef() {
     assert_eq!(size_of::<POINTS>(), 4);
     assert_eq!(align_of::<POINTS>(), 2);
 }
-#[cfg(target_arch = "x86_64")] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "shared.windef"))] #[test]
 fn shared_windef() {
     use winapi::shared::windef::*;
     assert_eq!(size_of::<RECT>(), 16);
@@ -388,4 +388,60 @@ fn shared_windef() {
     assert_eq!(align_of::<SIZE>(), 4);
     assert_eq!(size_of::<POINTS>(), 4);
     assert_eq!(align_of::<POINTS>(), 2);
+}
+#[cfg(all(target_arch = "x86", feature = "shared.wtypesbase"))] #[test]
+fn shared_wtypesbase() {
+    use winapi::shared::wtypesbase::*;
+    assert_eq!(size_of::<COAUTHIDENTITY>(), 28);
+    assert_eq!(align_of::<COAUTHIDENTITY>(), 4);
+    assert_eq!(size_of::<COAUTHINFO>(), 28);
+    assert_eq!(align_of::<COAUTHINFO>(), 4);
+    assert_eq!(size_of::<BYTE_BLOB>(), 8);
+    assert_eq!(align_of::<BYTE_BLOB>(), 4);
+    assert_eq!(size_of::<WORD_BLOB>(), 8);
+    assert_eq!(align_of::<WORD_BLOB>(), 4);
+    assert_eq!(size_of::<WORD_BLOB>(), 8);
+    assert_eq!(align_of::<WORD_BLOB>(), 4);
+    assert_eq!(size_of::<FLAGGED_BYTE_BLOB>(), 12);
+    assert_eq!(align_of::<FLAGGED_BYTE_BLOB>(), 4);
+    assert_eq!(size_of::<FLAGGED_WORD_BLOB>(), 12);
+    assert_eq!(align_of::<FLAGGED_WORD_BLOB>(), 4);
+    assert_eq!(size_of::<BYTE_SIZEDARR>(), 8);
+    assert_eq!(align_of::<BYTE_SIZEDARR>(), 4);
+    assert_eq!(size_of::<WORD_SIZEDARR>(), 8);
+    assert_eq!(align_of::<WORD_SIZEDARR>(), 4);
+    assert_eq!(size_of::<DWORD_SIZEDARR>(), 8);
+    assert_eq!(align_of::<DWORD_SIZEDARR>(), 4);
+    assert_eq!(size_of::<HYPER_SIZEDARR>(), 8);
+    assert_eq!(align_of::<HYPER_SIZEDARR>(), 4);
+    assert_eq!(size_of::<BLOB>(), 8);
+    assert_eq!(align_of::<BLOB>(), 4);
+}
+#[cfg(all(target_arch = "x86_64", feature = "shared.wtypesbase"))] #[test]
+fn shared_wtypesbase() {
+    use winapi::shared::wtypesbase::*;
+    assert_eq!(size_of::<COAUTHIDENTITY>(), 48);
+    assert_eq!(align_of::<COAUTHIDENTITY>(), 8);
+    assert_eq!(size_of::<COAUTHINFO>(), 40);
+    assert_eq!(align_of::<COAUTHINFO>(), 8);
+    assert_eq!(size_of::<BYTE_BLOB>(), 8);
+    assert_eq!(align_of::<BYTE_BLOB>(), 4);
+    assert_eq!(size_of::<WORD_BLOB>(), 8);
+    assert_eq!(align_of::<WORD_BLOB>(), 4);
+    assert_eq!(size_of::<WORD_BLOB>(), 8);
+    assert_eq!(align_of::<WORD_BLOB>(), 4);
+    assert_eq!(size_of::<FLAGGED_BYTE_BLOB>(), 12);
+    assert_eq!(align_of::<FLAGGED_BYTE_BLOB>(), 4);
+    assert_eq!(size_of::<FLAGGED_WORD_BLOB>(), 12);
+    assert_eq!(align_of::<FLAGGED_WORD_BLOB>(), 4);
+    assert_eq!(size_of::<BYTE_SIZEDARR>(), 16);
+    assert_eq!(align_of::<BYTE_SIZEDARR>(), 8);
+    assert_eq!(size_of::<WORD_SIZEDARR>(), 16);
+    assert_eq!(align_of::<WORD_SIZEDARR>(), 8);
+    assert_eq!(size_of::<DWORD_SIZEDARR>(), 16);
+    assert_eq!(align_of::<DWORD_SIZEDARR>(), 8);
+    assert_eq!(size_of::<HYPER_SIZEDARR>(), 16);
+    assert_eq!(align_of::<HYPER_SIZEDARR>(), 8);
+    assert_eq!(size_of::<BLOB>(), 16);
+    assert_eq!(align_of::<BLOB>(), 8);
 }
