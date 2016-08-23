@@ -227,6 +227,33 @@ macro_rules! ENUM {
         ENUM!{@gen $name, $variant, $($rest)*}
     };
 }
+
+macro_rules! ENUM_NEG {
+    {enum $name:ident { $($variant:ident = $value:expr,)+ }} => {
+        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
+        pub struct $name(pub i32);
+        $(pub const $variant: $name = $name($value);)+
+    };
+    {enum $name:ident { $variant:ident = $value:expr, $($rest:tt)* }} => {
+        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
+        pub struct $name(pub i32);
+        pub const $variant: $name = $name($value);
+        ENUM_NEG!{@gen $name, $variant, $($rest)*}
+    };
+    {enum $name:ident { $variant:ident, $($rest:tt)* }} => {
+        ENUM_NEG!{enum $name { $variant = 0, $($rest)* }}
+    };
+    {@gen $name:ident, $base:ident,} => {};
+    {@gen $name:ident, $base:ident, $variant:ident = $value:expr, $($rest:tt)*} => {
+        pub const $variant: $name = $name($value);
+        ENUM_NEG!{@gen $name, $variant, $($rest)*}
+    };
+    {@gen $name:ident, $base:ident, $variant:ident, $($rest:tt)*} => {
+        pub const $variant: $name = $name($base.0 + 1i32);
+        ENUM_NEG!{@gen $name, $variant, $($rest)*}
+    };
+}
+
 macro_rules! FLAGS {
     {enum $name:ident { $($variant:ident = $value:expr,)+ }} => {
         #[repr(C)] #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
