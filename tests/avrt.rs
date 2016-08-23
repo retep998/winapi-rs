@@ -2,7 +2,10 @@
 // Licensed under the MIT License <LICENSE.md>
 #![cfg(windows)]
 extern crate avrt;
+extern crate winapi;
+
 use avrt::*;
+
 #[inline(never)] fn bb<T>(_: T) {}
 #[test]
 fn functions() {
@@ -19,4 +22,6 @@ fn functions() {
     bb(AvRtLeaveThreadOrderingGroup);
     bb(AvRtDeleteThreadOrderingGroup);
     bb(AvQuerySystemResponsiveness);
+
+    assert_eq!(winapi::THREAD_ORDER_GROUP_INFINITE_TIMEOUT, -1);
 }
