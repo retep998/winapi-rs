@@ -27,6 +27,7 @@ pub use std::os::raw::{
 pub use activation::*;
 pub use audioclient::*;
 pub use audiosessiontypes::*;
+pub use avrt::*;
 pub use basetsd::*;
 pub use bcrypt::*;
 pub use cfg::*;
@@ -192,6 +193,7 @@ pub use xinput::*;
 pub mod activation;
 pub mod audioclient;
 pub mod audiosessiontypes;
+pub mod avrt;
 pub mod basetsd;
 pub mod bcrypt;
 pub mod cfg;

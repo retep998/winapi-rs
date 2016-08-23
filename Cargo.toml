@@ -12,6 +12,7 @@ include = ["src/**/*", "Cargo.toml", "LICENSE.md"]
 
 [dev-dependencies]
 advapi32-sys = { version = "0", path = "lib/advapi32" }
+avrt-sys = { version = "0", path = "lib/avrt" }
 bcrypt-sys = { version = "0", path = "lib/bcrypt" }
 comctl32-sys = { version = "0", path = "lib/comctl32" }
 comdlg32-sys = { version = "0", path = "lib/comdlg32" }
