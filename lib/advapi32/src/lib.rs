@@ -933,12 +933,13 @@ extern "system" {
     // pub fn SetEncryptedFileMetadata();
     // pub fn SetEntriesInAccessListA();
     // pub fn SetEntriesInAccessListW();
-    pub fn SetEntriesInAclA(cCountOfExplicitEntries: ULONG,
-        pListOfExplicitEntries: PEXPLICIT_ACCESS_A, OldAcl: PACL, NewAcl: PACL,
-    ) -> DWORD;
-    pub fn SetEntriesInAclW(cCountOfExplicitEntries: ULONG,
-        pListOfExplicitEntries: PEXPLICIT_ACCESS_W, OldAcl: PACL, NewAcl: PACL,
-    ) -> DWORD;
+//Todo 
+    // pub fn SetEntriesInAclA(cCountOfExplicitEntries: ULONG,
+    //     pListOfExplicitEntries: PEXPLICIT_ACCESS_A, OldAcl: PACL, NewAcl: PACL,
+    // ) -> DWORD;
+    // pub fn SetEntriesInAclW(cCountOfExplicitEntries: ULONG,
+    //     pListOfExplicitEntries: PEXPLICIT_ACCESS_W, OldAcl: PACL, NewAcl: PACL,
+    // ) -> DWORD;
     // pub fn SetEntriesInAuditListA();
     // pub fn SetEntriesInAuditListW();
     // pub fn SetFileSecurityA();
