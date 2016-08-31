@@ -1,3 +1,4 @@
+
 ENUM!{enum SE_OBJECT_TYPE {
     SE_UNKNOWN_OBJECT_TYPE = 0,
     SE_FILE_OBJECT,
@@ -25,17 +26,78 @@ ENUM!{enum ACCESS_MODE {
     SET_AUDIT_FAILURE,
 }}
 
-STRUCT!{struct PEXPLICIT_ACCESS_A {
-    grfAccessPermissions: DWORD,
+STRUCT!{struct _PEXPLICIT_ACCESS_A {
+    grfAccessPermissions: ::DWORD,
     grfAccessMode: ::ACCESS_MODE,
-    grfInheritance: DWORD,
-    Trustee: TRUSTEE_A  ,
+    grfInheritance: ::DWORD,
+    // Trustee: TRUSTEE_A  ,
 }}
 
-// pub type _EXPLICIT_ACCESS_A= PEXPLICIT_ACCESS_A;
-// pub type *PEXPLICIT_ACCESS_A = PEXPLICIT_ACCESS_A;
-// pub type EXPLICIT_ACCESSA = PEXPLICIT_ACCESS_A;
-// pub type *PEXPLICIT_ACCESSA = PEXPLICIT_ACCESS_A;
+pub type EXPLICIT_ACCESS_A = _PEXPLICIT_ACCESS_A;
+pub type PEXPLICIT_ACCESS_A = *mut _PEXPLICIT_ACCESS_A;
+pub type EXPLICIT_ACCESSA = _PEXPLICIT_ACCESS_A;
+pub type PEXPLICIT_ACCESSA = *mut _PEXPLICIT_ACCESS_A;
+
+// typedef struct _EXPLICIT_ACCESS_A
+// {
+//     DWORD        grfAccessPermissions;
+//     ACCESS_MODE  grfAccessMode;
+//     DWORD        grfInheritance;
+//     TRUSTEE_A    Trustee;
+// } EXPLICIT_ACCESS_A, *PEXPLICIT_ACCESS_A, EXPLICIT_ACCESSA, *PEXPLICIT_ACCESSA;
+
+STRUCT!{struct _PEXPLICIT_ACCESS_W {
+    grfAccessPermissions: ::DWORD,
+    grfAccessMode: ::ACCESS_MODE,
+    grfInheritance: ::DWORD,
+    // Trustee: TRUSTEE_W  ,
+}}
+
+pub type EXPLICIT_ACCESS_W = _PEXPLICIT_ACCESS_W;
+pub type PEXPLICIT_ACCESS_W = *mut _PEXPLICIT_ACCESS_W;
+pub type EXPLICIT_ACCESSW = _PEXPLICIT_ACCESS_W;
+pub type PEXPLICIT_ACCESSW = *mut _PEXPLICIT_ACCESS_W;
+
+// typedef struct _EXPLICIT_ACCESS_A
+// {
+//     DWORD        grfAccessPermissions;
+//     ACCESS_MODE  grfAccessMode;
+//     DWORD        grfInheritance;
+//     TRUSTEE_A    Trustee;
+// } EXPLICIT_ACCESS_A, *PEXPLICIT_ACCESS_A, EXPLICIT_ACCESSA, *PEXPLICIT_ACCESSA;
+// typedef struct _EXPLICIT_ACCESS_W
+// {
+//     DWORD        grfAccessPermissions;
+//     ACCESS_MODE  grfAccessMode;
+//     DWORD        grfInheritance;
+//     TRUSTEE_W    Trustee;
+// } EXPLICIT_ACCESS_W, *PEXPLICIT_ACCESS_W, EXPLICIT_ACCESSW, *PEXPLICIT_ACCESSW;
+
+
+// #ifdef UNICODE
+// typedef EXPLICIT_ACCESS_W EXPLICIT_ACCESS_;
+// typedef PEXPLICIT_ACCESS_W PEXPLICIT_ACCESS_;
+// typedef EXPLICIT_ACCESSW EXPLICIT_ACCESS;
+// typedef PEXPLICIT_ACCESSW PEXPLICIT_ACCESS;
+// #else
+// typedef EXPLICIT_ACCESS_A EXPLICIT_ACCESS_;
+// typedef PEXPLICIT_ACCESS_A PEXPLICIT_ACCESS_;
+// typedef EXPLICIT_ACCESSA EXPLICIT_ACCESS;
+// typedef PEXPLICIT_ACCESSA PEXPLICIT_ACCESS;
+// #endif // UNICODE
+
+
+// #ifdef UNICODE
+// typedef TRUSTEE_W TRUSTEE_;
+// typedef PTRUSTEE_W PTRUSTEE_;
+// typedef TRUSTEEW TRUSTEE;
+// typedef PTRUSTEEW PTRUSTEE;
+// #else
+// typedef TRUSTEE_A TRUSTEE_;
+// typedef PTRUSTEE_A PTRUSTEE_;
+// typedef TRUSTEEA TRUSTEE;
+// typedef PTRUSTEEA PTRUSTEE;
+// #endif // UNICODE
 
 
 // typedef struct _TRUSTEE_A
@@ -84,17 +146,7 @@ STRUCT!{struct PEXPLICIT_ACCESS_A {
 //     LPWSTR                      ptstrName;
 // #endif
 // } TRUSTEE_W, *PTRUSTEE_W, TRUSTEEW, *PTRUSTEEW;
-// #ifdef UNICODE
-// typedef TRUSTEE_W TRUSTEE_;
-// typedef PTRUSTEE_W PTRUSTEE_;
-// typedef TRUSTEEW TRUSTEE;
-// typedef PTRUSTEEW PTRUSTEE;
-// #else
-// typedef TRUSTEE_A TRUSTEE_;
-// typedef PTRUSTEE_A PTRUSTEE_;
-// typedef TRUSTEEA TRUSTEE;
-// typedef PTRUSTEEA PTRUSTEE;
-// #endif // UNICODE
+
 
 //
 // Definition: EXPLICIT_ACCESS
@@ -110,29 +162,3 @@ STRUCT!{struct PEXPLICIT_ACCESS_A {
 // Trustee - This field contains the definition of the trustee account the
 //           explicit access applies to.
 //
-
-// typedef struct _EXPLICIT_ACCESS_A
-// {
-//     DWORD        grfAccessPermissions;
-//     ACCESS_MODE  grfAccessMode;
-//     DWORD        grfInheritance;
-//     TRUSTEE_A    Trustee;
-// } EXPLICIT_ACCESS_A, *PEXPLICIT_ACCESS_A, EXPLICIT_ACCESSA, *PEXPLICIT_ACCESSA;
-// typedef struct _EXPLICIT_ACCESS_W
-// {
-//     DWORD        grfAccessPermissions;
-//     ACCESS_MODE  grfAccessMode;
-//     DWORD        grfInheritance;
-//     TRUSTEE_W    Trustee;
-// } EXPLICIT_ACCESS_W, *PEXPLICIT_ACCESS_W, EXPLICIT_ACCESSW, *PEXPLICIT_ACCESSW;
-// #ifdef UNICODE
-// typedef EXPLICIT_ACCESS_W EXPLICIT_ACCESS_;
-// typedef PEXPLICIT_ACCESS_W PEXPLICIT_ACCESS_;
-// typedef EXPLICIT_ACCESSW EXPLICIT_ACCESS;
-// typedef PEXPLICIT_ACCESSW PEXPLICIT_ACCESS;
-// #else
-// typedef EXPLICIT_ACCESS_A EXPLICIT_ACCESS_;
-// typedef PEXPLICIT_ACCESS_A PEXPLICIT_ACCESS_;
-// typedef EXPLICIT_ACCESSA EXPLICIT_ACCESS;
-// typedef PEXPLICIT_ACCESSA PEXPLICIT_ACCESS;
-// #endif // UNICODE

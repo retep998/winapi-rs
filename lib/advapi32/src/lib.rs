@@ -933,7 +933,7 @@ extern "system" {
     // pub fn SetEncryptedFileMetadata();
     // pub fn SetEntriesInAccessListA();
     // pub fn SetEntriesInAccessListW();
-//Todo 
+//Todo
     // pub fn SetEntriesInAclA(cCountOfExplicitEntries: ULONG,
     //     pListOfExplicitEntries: PEXPLICIT_ACCESS_A, OldAcl: PACL, NewAcl: PACL,
     // ) -> DWORD;
