@@ -7,6 +7,10 @@
 //! Headers for user mode only
 pub mod cguid;
 pub mod combaseapi;
+pub mod consoleapi;
+pub mod minwinbase;
 pub mod objidlbase;
 pub mod unknwnbase;
+pub mod wincon;
+pub mod wingdi;
 pub mod winnt;

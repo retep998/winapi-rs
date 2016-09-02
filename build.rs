@@ -5,7 +5,10 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use std::env::var;
-const LIBS: &'static [&'static str] = &["ole32"];
+const LIBS: &'static [&'static str] = &[
+    "kernel32",
+    "ole32"
+];
 fn main() {
     let target = var("TARGET").unwrap();
     let target: Vec<_> = target.split('-').collect();

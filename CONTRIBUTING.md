@@ -1,26 +1,60 @@
 #Guidelines
 
-##Style
+* Never get definitions from MinGW headers or MSDN. Always stick to the Windows SDK headers, in particular the latest Windows 10 SDK.
 
-###Line length
+##Line length
 
-* The maximum line length for `winapi-rs` is 99. Any lines longer than this **must** be modified before they will be accepted.
+* The maximum line length for `winapi-rs` is 99, and is strictly enforced.
 * Avoid line breaks when possible, but if you cannot make it fit, add line breaks as late as possible (for example, between 80 and 95).
 
-###Multiline functions
+##Functions
 
-* Multiline functions and structs **should** have commas after every field and parameter.
-* When implementing multiline functions, please use this style:
-```rust
-    pub fn QueryInformationJobObject(
-        hJob: HANDLE, JobObjectInformationClass: JOBOBJECTINFOCLASS,
-        lpJobObjectInformation: LPVOID, cbJobObjectInformationLength: DWORD,
-        lpReturnLength: LPDWORD,
-    ) -> BOOL;
+* First parameter is the name of the library that the function is from.
+* Second parameter is the 32-bit calling convention.
+* One parameter per line.
+
+```Rust
+EXTERN!{"ole32" "stdcall" fn CoGetMalloc(
+    dwMemContext: DWORD,
+    ppMalloc: *mut LPMALLOC
+) -> HRESULT}
 ```
+
+##Constants
+
+* Convert macro constants to Rust constants.
+* The type of the constant should depend on where the constant is used. MSDN may help for this.
+
+```C
+#define CLSCTX_INPROC           (CLSCTX_INPROC_SERVER|CLSCTX_INPROC_HANDLER)
+```
+```Rust
+pub const CLSCTX_INPROC: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER;
+```
+
+##Structs
+
+* One field per line.
+
+```C
+typedef struct _GROUP_AFFINITY {
+    KAFFINITY Mask;
+    WORD   Group;
+    WORD   Reserved[3];
+} GROUP_AFFINITY, *PGROUP_AFFINITY;
+```
+```Rust
+STRUCT!{struct GROUP_AFFINITY {
+    Mask: KAFFINITY,
+    Group: WORD,
+    Reserved: [WORD; 3],
+}}
+pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
+```
+
 
 ##Organization of code
 
-* Functions go into the respective `-sys` crate inside `lib`. All types and constants go into the
-  main crate.
-* If you have types, enums, or constants defined in a .h file not represented in `winapi-rs`, please create a new file and reference it in lib.rs.
+* All definitions go into the source file that directly maps to the header the definition is from.
+** Stuff in `winrt` is special and has its own namespaced organization.
+* Definitions are defined in the same order as they are in the original header.

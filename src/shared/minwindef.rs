@@ -6,10 +6,10 @@
 // except according to those terms.
 //! Basic Windows Type Definitions for minwin partition
 // Done as of 10.0.14393.0
-#![cfg(feature = "shared.minwindef+um.winnt")]
+#![cfg(feature = "shared.minwindef")]
 use ctypes::{ c_char, c_float, c_int, c_long, c_uchar, c_uint,  c_ulong, c_ushort, c_void };
 use shared::basetsd::{ LONG_PTR, UINT_PTR };
-use um::winnt::{ HANDLE, LONG };
+use shared::ntdef::{ HANDLE, LONG };
 pub type ULONG = c_ulong;
 pub type PULONG = *mut ULONG;
 pub type USHORT = c_ushort;
@@ -69,12 +69,13 @@ pub type HGLOBAL = HANDLE;
 pub type HLOCAL = HANDLE;
 pub type GLOBALHANDLE = HANDLE;
 pub type LOCALHANDLE = HANDLE;
+pub enum __some_function {}
 /// Pointer to a function with unknown type signature.
-pub type FARPROC = *const c_void;
+pub type FARPROC = *mut __some_function;
 /// Pointer to a function with unknown type signature.
-pub type NEARPROC = *const c_void;
+pub type NEARPROC = *mut __some_function;
 /// Pointer to a function with unknown type signature.
-pub type PROC = *const c_void;
+pub type PROC = *mut __some_function;
 pub type ATOM = WORD;
 DECLARE_HANDLE!(HKEY, HKEY__);
 pub type PHKEY = *mut HKEY;

@@ -4,10 +4,12 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
+#![cfg(windows)]
 #![allow(bad_style)]
 #![deny(overflowing_literals, unused_qualifications, unused)]
-#![cfg(windows)]
+#![recursion_limit = "128"]
 #![cfg_attr(not(feature = "std"), no_std)]
+
 
 #[cfg(feature = "std")]
 extern crate std as core;
@@ -19,7 +21,6 @@ pub mod um;
 pub mod vc;
 
 /// Built in primitive types provided by the C language
-#[doc(hidden)]
 pub mod ctypes {
     #[cfg(feature = "std")]
     pub use std::os::raw::c_void;

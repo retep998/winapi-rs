@@ -10,8 +10,6 @@ extern "system" {
     pub fn ActivateActCtx(hActCtx: HANDLE, lpCookie: *mut ULONG_PTR) -> BOOL;
     pub fn AddAtomA(lpString: LPCSTR) -> ATOM;
     pub fn AddAtomW(lpString: LPCWSTR) -> ATOM;
-    pub fn AddConsoleAliasA(Source: LPSTR, Target: LPSTR, ExeName: LPSTR) -> BOOL;
-    pub fn AddConsoleAliasW(Source: LPWSTR, Target: LPWSTR, ExeName: LPWSTR) -> BOOL;
     pub fn AddDllDirectory(NewDirectory: PCWSTR) -> DLL_DIRECTORY_COOKIE;
     pub fn AddIntegrityLabelToBoundaryDescriptor(
         BoundaryDescriptor: *mut HANDLE, IntegrityLabel: PSID,
@@ -32,7 +30,6 @@ extern "system" {
     pub fn AddVectoredExceptionHandler(
         First: ULONG, Handler: PVECTORED_EXCEPTION_HANDLER,
     ) -> PVOID;
-    pub fn AllocConsole() -> BOOL;
     pub fn AllocateUserPhysicalPages(
         hProcess: HANDLE, NumberOfPages: PULONG_PTR, PageArray: PULONG_PTR,
     ) -> BOOL;
@@ -44,7 +41,6 @@ extern "system" {
     pub fn ApplicationRecoveryInProgress(pbCancelled: PBOOL) -> HRESULT;
     pub fn AreFileApisANSI() -> BOOL;
     pub fn AssignProcessToJobObject(hJob: HANDLE, hProcess: HANDLE) -> BOOL;
-    pub fn AttachConsole(dwProcessId: DWORD) -> BOOL;
     pub fn BackupRead(
         hFile: HANDLE, lpBuffer: LPBYTE, nNumberOfBytesToRead: DWORD, lpNumberOfBytesRead: LPDWORD,
         bAbort: BOOL, bProcessSecurity: BOOL, lpContext: *mut LPVOID,
@@ -186,11 +182,6 @@ extern "system" {
     pub fn CreateActCtxW(pActCtx: PCACTCTXW) -> HANDLE;
     pub fn CreateBoundaryDescriptorA(Name: LPCSTR, Flags: ULONG) -> HANDLE;
     pub fn CreateBoundaryDescriptorW(Name: LPCWSTR, Flags: ULONG) -> HANDLE;
-    pub fn CreateConsoleScreenBuffer(
-        dwDesiredAccess: DWORD, dwShareMode: DWORD,
-        lpSecurityAttributes: *const SECURITY_ATTRIBUTES, dwFlags: DWORD,
-        lpScreenBufferData: LPVOID,
-    ) -> HANDLE;
     pub fn CreateDirectoryA(
         lpPathName: LPCSTR, lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
     ) -> BOOL;
@@ -665,18 +656,6 @@ extern "system" {
     pub fn FileTimeToSystemTime(
         lpFileTime: *const FILETIME, lpSystemTime: LPSYSTEMTIME,
     ) -> BOOL;
-    pub fn FillConsoleOutputAttribute(
-        hConsoleOutput: HANDLE, wAttribute: WORD, nLength: DWORD, dwWriteCoord: COORD,
-        lpNumberOfAttrsWritten: LPDWORD,
-    ) -> BOOL;
-    pub fn FillConsoleOutputCharacterA(
-        hConsoleOutput: HANDLE, cCharacter: CHAR, nLength: DWORD, dwWriteCoord: COORD,
-        lpNumberOfCharsWritten: LPDWORD,
-    ) -> BOOL;
-    pub fn FillConsoleOutputCharacterW(
-        hConsoleOutput: HANDLE, cCharacter: WCHAR, nLength: DWORD, dwWriteCoord: COORD,
-        lpNumberOfCharsWritten: LPDWORD,
-    ) -> BOOL;
     pub fn FindActCtxSectionGuid(
         dwFlags: DWORD, lpExtensionGuid: *const GUID, ulSectionId: ULONG, lpGuidToFind: *const GUID,
         ReturnedData: PACTCTX_SECTION_KEYED_DATA,
@@ -787,7 +766,6 @@ extern "system" {
     pub fn FlsFree(dwFlsIndex: DWORD) -> BOOL;
     pub fn FlsGetValue(dwFlsIndex: DWORD) -> PVOID;
     pub fn FlsSetValue(dwFlsIndex: DWORD, lpFlsData: PVOID) -> BOOL;
-    pub fn FlushConsoleInputBuffer(hConsoleInput: HANDLE) -> BOOL;
     pub fn FlushFileBuffers(hFile: HANDLE) -> BOOL;
     pub fn FlushInstructionCache(hProcess: HANDLE, lpBaseAddress: LPCVOID, dwSize: SIZE_T) -> BOOL;
     pub fn FlushProcessWriteBuffers();
@@ -807,7 +785,6 @@ extern "system" {
         dwFlags: DWORD, lpSource: LPCVOID, dwMessageId: DWORD, dwLanguageId: DWORD,
         lpBuffer: LPWSTR, nSize: DWORD, Arguments: *mut va_list,
     ) -> DWORD;
-    pub fn FreeConsole() -> BOOL;
     pub fn FreeEnvironmentStringsA(penv: LPCH) -> BOOL;
     pub fn FreeEnvironmentStringsW(penv: LPWCH) -> BOOL;
     pub fn FreeLibrary(hLibModule: HMODULE) -> BOOL;
@@ -817,7 +794,6 @@ extern "system" {
     pub fn FreeUserPhysicalPages(
         hProcess: HANDLE, NumberOfPages: PULONG_PTR, PageArray: PULONG_PTR,
     ) -> BOOL;
-    pub fn GenerateConsoleCtrlEvent(dwCtrlEvent: DWORD, dwProcessGroupId: DWORD) -> BOOL;
     pub fn GetACP() -> UINT;
     pub fn GetActiveProcessorCount(GroupNumber: WORD) -> DWORD;
     pub fn GetActiveProcessorGroupCount() -> WORD;
@@ -884,46 +860,6 @@ extern "system" {
         NameType: COMPUTER_NAME_FORMAT, lpBuffer: LPWSTR, nSize: LPDWORD,
     ) -> BOOL;
     pub fn GetComputerNameW(lpBuffer: LPWSTR, nSize: LPDWORD) -> BOOL;
-    pub fn GetConsoleAliasA(
-        Source: LPSTR, TargetBuffer: LPSTR, TargetBufferLength: DWORD, ExeName: LPSTR,
-    ) -> DWORD;
-    pub fn GetConsoleAliasExesA(ExeNameBuffer: LPSTR, ExeNameBufferLength: DWORD) -> DWORD;
-    pub fn GetConsoleAliasExesLengthA() -> DWORD;
-    pub fn GetConsoleAliasExesLengthW() -> DWORD;
-    pub fn GetConsoleAliasExesW(ExeNameBuffer: LPWSTR, ExeNameBufferLength: DWORD) -> DWORD;
-    pub fn GetConsoleAliasW(
-        Source: LPWSTR, TargetBuffer: LPWSTR, TargetBufferLength: DWORD, ExeName: LPWSTR,
-    ) -> DWORD;
-    pub fn GetConsoleAliasesA(
-        AliasBuffer: LPSTR, AliasBufferLength: DWORD, ExeName: LPSTR,
-    ) -> DWORD;
-    pub fn GetConsoleAliasesLengthA(ExeName: LPSTR) -> DWORD;
-    pub fn GetConsoleAliasesLengthW(ExeName: LPWSTR) -> DWORD;
-    pub fn GetConsoleAliasesW(
-        AliasBuffer: LPWSTR, AliasBufferLength: DWORD, ExeName: LPWSTR,
-    ) -> DWORD;
-    pub fn GetConsoleCP() -> UINT;
-    pub fn GetConsoleCursorInfo(
-        hConsoleOutput: HANDLE, lpConsoleCursorInfo: PCONSOLE_CURSOR_INFO,
-    ) -> BOOL;
-    pub fn GetConsoleDisplayMode(lpModeFlags: LPDWORD) -> BOOL;
-    pub fn GetConsoleFontSize(hConsoleOutput: HANDLE, nFont: DWORD) -> COORD;
-    pub fn GetConsoleHistoryInfo(lpConsoleHistoryInfo: PCONSOLE_HISTORY_INFO) -> BOOL;
-    pub fn GetConsoleMode(hConsoleHandle: HANDLE, lpMode: LPDWORD) -> BOOL;
-    pub fn GetConsoleOriginalTitleA(lpConsoleTitle: LPSTR, nSize: DWORD) -> DWORD;
-    pub fn GetConsoleOriginalTitleW(lpConsoleTitle: LPWSTR, nSize: DWORD) -> DWORD;
-    pub fn GetConsoleOutputCP() -> UINT;
-    pub fn GetConsoleProcessList(lpdwProcessList: LPDWORD, dwProcessCount: DWORD) -> DWORD;
-    pub fn GetConsoleScreenBufferInfo(
-        hConsoleOutput: HANDLE, lpConsoleScreenBufferInfo: PCONSOLE_SCREEN_BUFFER_INFO,
-    ) -> BOOL;
-    pub fn GetConsoleScreenBufferInfoEx(
-        hConsoleOutput: HANDLE, lpConsoleScreenBufferInfoEx: PCONSOLE_SCREEN_BUFFER_INFOEX,
-    ) -> BOOL;
-    pub fn GetConsoleSelectionInfo(lpConsoleSelectionInfo: PCONSOLE_SELECTION_INFO) -> BOOL;
-    pub fn GetConsoleTitleA(lpConsoleTitle: LPSTR, nSize: DWORD) -> DWORD;
-    pub fn GetConsoleTitleW(lpConsoleTitle: LPWSTR, nSize: DWORD) -> DWORD;
-    pub fn GetConsoleWindow() -> HWND;
     pub fn GetCurrencyFormatA(
         Locale: LCID, dwFlags: DWORD, lpValue: LPCSTR, lpFormat: *const CURRENCYFMTA,
         lpCurrencyStr: LPSTR, cchCurrency: c_int,
@@ -938,12 +874,6 @@ extern "system" {
     ) -> c_int;
     pub fn GetCurrentActCtx(lphActCtx: *mut HANDLE) -> BOOL;
     // pub fn GetCurrentApplicationUserModelId();
-    pub fn GetCurrentConsoleFont(
-        hConsoleOutput: HANDLE, bMaximumWindow: BOOL, lpConsoleCurrentFont: PCONSOLE_FONT_INFO,
-    ) -> BOOL;
-    pub fn GetCurrentConsoleFontEx(
-        hConsoleOutput: HANDLE, bMaximumWindow: BOOL, lpConsoleCurrentFontEx: PCONSOLE_FONT_INFOEX,
-    ) -> BOOL;
     pub fn GetCurrentDirectoryA(nBufferLength: DWORD, lpBuffer: LPSTR) -> DWORD;
     pub fn GetCurrentDirectoryW(nBufferLength: DWORD, lpBuffer: LPWSTR) -> DWORD;
     // pub fn GetCurrentPackageFamilyName();
@@ -1099,7 +1029,6 @@ extern "system" {
     ) -> c_int;
     pub fn GetHandleInformation(hObject: HANDLE, lpdwFlags: LPDWORD) -> BOOL;
     pub fn GetLargePageMinimum() -> SIZE_T;
-    pub fn GetLargestConsoleWindowSize(hConsoleOutput: HANDLE) -> COORD;
     pub fn GetLastError() -> DWORD;
     pub fn GetLocalTime(lpSystemTime: LPSYSTEMTIME);
     pub fn GetLocaleInfoA(
@@ -1209,8 +1138,6 @@ extern "system" {
         Locale: LCID, dwFlags: DWORD, lpValue: LPCWSTR, lpFormat: *const NUMBERFMTW,
         lpNumberStr: LPWSTR, cchNumber: c_int,
     ) -> c_int;
-    pub fn GetNumberOfConsoleInputEvents(hConsoleInput: HANDLE, lpNumberOfEvents: LPDWORD) -> BOOL;
-    pub fn GetNumberOfConsoleMouseButtons(lpNumberOfMouseButtons: LPDWORD) -> BOOL;
     pub fn GetOEMCP() -> UINT;
     pub fn GetOverlappedResult(
         hFile: HANDLE, lpOverlapped: LPOVERLAPPED, lpNumberOfBytesTransferred: LPDWORD, bWait: BOOL,
@@ -1876,14 +1803,6 @@ extern "system" {
     // pub fn PackageIdFromFullName();
     // pub fn PackageNameAndPublisherIdFromFamilyName();
     // pub fn ParseApplicationUserModelId();
-    pub fn PeekConsoleInputA(
-        hConsoleInput: HANDLE, lpBuffer: PINPUT_RECORD, nLength: DWORD,
-        lpNumberOfEventsRead: LPDWORD,
-    ) -> BOOL;
-    pub fn PeekConsoleInputW(
-        hConsoleInput: HANDLE, lpBuffer: PINPUT_RECORD, nLength: DWORD,
-        lpNumberOfEventsRead: LPDWORD,
-    ) -> BOOL;
     pub fn PeekNamedPipe(
         hNamedPipe: HANDLE, lpBuffer: LPVOID, nBufferSize: DWORD, lpBytesRead: LPDWORD,
         lpTotalBytesAvail: LPDWORD, lpBytesLeftThisMessage: LPDWORD,
@@ -1995,42 +1914,6 @@ extern "system" {
     pub fn ReOpenFile(
         hOriginalFile: HANDLE, dwDesiredAccess: DWORD, dwShareMode: DWORD, dwFlags: DWORD,
     ) -> HANDLE;
-    pub fn ReadConsoleA(
-        hConsoleInput: HANDLE, lpBuffer: LPVOID, nNumberOfCharsToRead: DWORD,
-        lpNumberOfCharsRead: LPDWORD, pInputControl: PCONSOLE_READCONSOLE_CONTROL,
-    ) -> BOOL;
-    pub fn ReadConsoleInputA(
-        hConsoleInput: HANDLE, lpBuffer: PINPUT_RECORD, nLength: DWORD,
-        lpNumberOfEventsRead: LPDWORD,
-    ) -> BOOL;
-    pub fn ReadConsoleInputW(
-        hConsoleInput: HANDLE, lpBuffer: PINPUT_RECORD, nLength: DWORD,
-        lpNumberOfEventsRead: LPDWORD,
-    ) -> BOOL;
-    pub fn ReadConsoleOutputA(
-        hConsoleOutput: HANDLE, lpBuffer: PCHAR_INFO, dwBufferSize: COORD, dwBufferCoord: COORD,
-        lpReadRegion: PSMALL_RECT,
-    ) -> BOOL;
-    pub fn ReadConsoleOutputAttribute(
-        hConsoleOutput: HANDLE, lpAttribute: LPWORD, nLength: DWORD, dwReadCoord: COORD,
-        lpNumberOfAttrsRead: LPDWORD,
-    ) -> BOOL;
-    pub fn ReadConsoleOutputCharacterA(
-        hConsoleOutput: HANDLE, lpCharacter: LPSTR, nLength: DWORD, dwReadCoord: COORD,
-        lpNumberOfCharsRead: LPDWORD,
-    ) -> BOOL;
-    pub fn ReadConsoleOutputCharacterW(
-        hConsoleOutput: HANDLE, lpCharacter: LPWSTR, nLength: DWORD, dwReadCoord: COORD,
-        lpNumberOfCharsRead: LPDWORD,
-    ) -> BOOL;
-    pub fn ReadConsoleOutputW(
-        hConsoleOutput: HANDLE, lpBuffer: PCHAR_INFO, dwBufferSize: COORD, dwBufferCoord: COORD,
-        lpReadRegion: PSMALL_RECT,
-    ) -> BOOL;
-    pub fn ReadConsoleW(
-        hConsoleInput: HANDLE, lpBuffer: LPVOID, nNumberOfCharsToRead: DWORD,
-        lpNumberOfCharsRead: LPDWORD, pInputControl: PCONSOLE_READCONSOLE_CONTROL,
-    ) -> BOOL;
     pub fn ReadDirectoryChangesW(
         hDirectory: HANDLE, lpBuffer: LPVOID, nBufferLength: DWORD, bWatchSubtree: BOOL,
         dwNotifyFilter: DWORD, lpBytesReturned: LPDWORD, lpOverlapped: LPOVERLAPPED,
@@ -2179,14 +2062,6 @@ extern "system" {
         EstablisherFrame: PDWORD64, ContextPointers: PKNONVOLATILE_CONTEXT_POINTERS,
     ) -> PEXCEPTION_ROUTINE;
     // pub fn RtlZeroMemory();
-    pub fn ScrollConsoleScreenBufferA(
-        hConsoleOutput: HANDLE, lpScrollRectangle: *const SMALL_RECT,
-        lpClipRectangle: *const SMALL_RECT, dwDestinationOrigin: COORD, lpFill: *const CHAR_INFO,
-    ) -> BOOL;
-    pub fn ScrollConsoleScreenBufferW(
-        hConsoleOutput: HANDLE, lpScrollRectangle: *const SMALL_RECT,
-        lpClipRectangle: *const SMALL_RECT, dwDestinationOrigin: COORD, lpFill: *const CHAR_INFO,
-    ) -> BOOL;
     pub fn SearchPathA(
         lpPath: LPCSTR, lpFileName: LPCSTR, lpExtension: LPCSTR, nBufferLength: DWORD,
         lpBuffer: LPSTR, lpFilePart: *mut LPSTR,
@@ -2216,36 +2091,10 @@ extern "system" {
     pub fn SetComputerNameExA(NameType: COMPUTER_NAME_FORMAT, lpBuffer: LPCSTR) -> BOOL;
     pub fn SetComputerNameExW(NameType: COMPUTER_NAME_FORMAT, lpBuffer: LPCWSTR) -> BOOL;
     pub fn SetComputerNameW(lpComputerName: LPCWSTR) -> BOOL;
-    pub fn SetConsoleActiveScreenBuffer(hConsoleOutput: HANDLE) -> BOOL;
-    pub fn SetConsoleCP(wCodePageID: UINT) -> BOOL;
-    pub fn SetConsoleCtrlHandler(HandlerRoutine: PHANDLER_ROUTINE, Add: BOOL) -> BOOL;
     // pub fn SetConsoleCursor();
-    pub fn SetConsoleCursorInfo(
-        hConsoleOutput: HANDLE, lpConsoleCursorInfo: *const CONSOLE_CURSOR_INFO,
-    ) -> BOOL;
-    pub fn SetConsoleCursorPosition(hConsoleOutput: HANDLE, dwCursorPosition: COORD) -> BOOL;
-    pub fn SetConsoleDisplayMode(
-        hConsoleOutput: HANDLE, dwFlags: DWORD, lpNewScreenBufferDimensions: PCOORD,
-    ) -> BOOL;
-    pub fn SetConsoleHistoryInfo(lpConsoleHistoryInfo: PCONSOLE_HISTORY_INFO) -> BOOL;
-    pub fn SetConsoleMode(hConsoleHandle: HANDLE, dwMode: DWORD) -> BOOL;
-    pub fn SetConsoleOutputCP(wCodePageID: UINT) -> BOOL;
-    pub fn SetConsoleScreenBufferInfoEx(
-        hConsoleOutput: HANDLE, lpConsoleScreenBufferInfoEx: PCONSOLE_SCREEN_BUFFER_INFOEX,
-    ) -> BOOL;
-    pub fn SetConsoleScreenBufferSize(hConsoleOutput: HANDLE, dwSize: COORD) -> BOOL;
-    pub fn SetConsoleTextAttribute(hConsoleOutput: HANDLE, wAttributes: WORD) -> BOOL;
-    pub fn SetConsoleTitleA(lpConsoleTitle: LPCSTR) -> BOOL;
-    pub fn SetConsoleTitleW(lpConsoleTitle: LPCWSTR) -> BOOL;
-    pub fn SetConsoleWindowInfo(
-        hConsoleOutput: HANDLE, bAbsolute: BOOL, lpConsoleWindow: *const SMALL_RECT,
-    ) -> BOOL;
     pub fn SetCriticalSectionSpinCount(
         lpCriticalSection: LPCRITICAL_SECTION, dwSpinCount: DWORD,
     ) -> DWORD;
-    pub fn SetCurrentConsoleFontEx(
-        hConsoleOutput: HANDLE, bMaximumWindow: BOOL, lpConsoleCurrentFontEx: PCONSOLE_FONT_INFOEX,
-    ) -> BOOL;
     pub fn SetCurrentDirectoryA(lpPathName: LPCSTR) -> BOOL;
     pub fn SetCurrentDirectoryW(lpPathName: LPCWSTR) -> BOOL;
     pub fn SetDefaultCommConfigA(lpszName: LPCSTR, lpCC: LPCOMMCONFIG, dwSize: DWORD) -> BOOL;
@@ -2630,42 +2479,6 @@ extern "system" {
     pub fn Wow64RevertWow64FsRedirection(OlValue: PVOID) -> BOOL;
     pub fn Wow64SetThreadContext(hThread: HANDLE, lpContext: *const WOW64_CONTEXT) -> BOOL;
     pub fn Wow64SuspendThread(hThread: HANDLE) -> DWORD;
-    pub fn WriteConsoleA(
-        hConsoleOutput: HANDLE, lpBuffer: *const VOID, nNumberOfCharsToWrite: DWORD,
-        lpNumberOfCharsWritten: LPDWORD, lpReserved: LPVOID,
-    ) -> BOOL;
-    pub fn WriteConsoleInputA(
-        hConsoleInput: HANDLE, lpBuffer: *const INPUT_RECORD, nLength: DWORD,
-        lpNumberOfEventsWritten: LPDWORD,
-    ) -> BOOL;
-    pub fn WriteConsoleInputW(
-        hConsoleInput: HANDLE, lpBuffer: *const INPUT_RECORD, nLength: DWORD,
-        lpNumberOfEventsWritten: LPDWORD,
-    ) -> BOOL;
-    pub fn WriteConsoleOutputA(
-        hConsoleOutput: HANDLE, lpBuffer: *const CHAR_INFO, dwBufferSize: COORD,
-        dwBufferCoord: COORD, lpWriteRegion: PSMALL_RECT,
-    ) -> BOOL;
-    pub fn WriteConsoleOutputAttribute(
-        hConsoleOutput: HANDLE, lpAttribute: *const WORD, nLength: DWORD, dwWriteCoord: COORD,
-        lpNumberOfAttrsWritten: LPDWORD,
-    ) -> BOOL;
-    pub fn WriteConsoleOutputCharacterA(
-        hConsoleOutput: HANDLE, lpCharacter: LPCSTR, nLength: DWORD, dwWriteCoord: COORD,
-        lpNumberOfCharsWritten: LPDWORD,
-    ) -> BOOL;
-    pub fn WriteConsoleOutputCharacterW(
-        hConsoleOutput: HANDLE, lpCharacter: LPCWSTR, nLength: DWORD, dwWriteCoord: COORD,
-        lpNumberOfCharsWritten: LPDWORD,
-    ) -> BOOL;
-    pub fn WriteConsoleOutputW(
-        hConsoleOutput: HANDLE, lpBuffer: *const CHAR_INFO, dwBufferSize: COORD,
-        dwBufferCoord: COORD, lpWriteRegion: PSMALL_RECT,
-    ) -> BOOL;
-    pub fn WriteConsoleW(
-        hConsoleOutput: HANDLE, lpBuffer: *const VOID, nNumberOfCharsToWrite: DWORD,
-        lpNumberOfCharsWritten: LPDWORD, lpReserved: LPVOID,
-    ) -> BOOL;
     pub fn WriteFile(
         hFile: HANDLE, lpBuffer: LPCVOID, nNumberOfBytesToWrite: DWORD,
         lpNumberOfBytesWritten: LPDWORD, lpOverlapped: LPOVERLAPPED,

@@ -205,19 +205,19 @@ macro_rules! ENUM {
     {enum $name:ident { $variant:ident = $value:expr, $($rest:tt)* }} => {
         pub type $name = u32;
         pub const $variant: u32 = $value;
-        ENUM!{@gen $variant, $($rest)*}
+        ENUM!{@gen $name $variant, $($rest)*}
     };
     {enum $name:ident { $variant:ident, $($rest:tt)* }} => {
         ENUM!{enum $name { $variant = 0, $($rest)* }}
     };
-    {@gen $base:ident,} => {};
-    {@gen $base:ident, $variant:ident = $value:expr, $($rest:tt)*} => {
-        pub const $variant: u32 = $value;
-        ENUM!{@gen $variant, $($rest)*}
+    {@gen $name:ident $base:ident,} => {};
+    {@gen $name:ident $base:ident, $variant:ident = $value:expr, $($rest:tt)*} => {
+        pub const $variant: $name = $value;
+        ENUM!{@gen $name $variant, $($rest)*}
     };
-    {@gen $base:ident, $variant:ident, $($rest:tt)*} => {
-        pub const $variant: u32 = $base + 1u32;
-        ENUM!{@gen $variant, $($rest)*}
+    {@gen $name:ident $base:ident, $variant:ident, $($rest:tt)*} => {
+        pub const $variant: $name = $base + 1u32;
+        ENUM!{@gen $name $variant, $($rest)*}
     };
 }
 macro_rules! STRUCT {
@@ -242,4 +242,14 @@ macro_rules! EXTERN {
         }
     });
     (@fix $x:item) => ($x);
+}
+macro_rules! IFDEF {
+    ($($thing:item)*) => ($($thing)*)
+}
+macro_rules! FN {
+    ($cconv:tt fn $func:ident(
+        $($p:ident: $t:ty),*
+    ) -> $ret:ty) => (
+        pub type $func = Option<unsafe extern $cconv fn($($p: $t),*) -> $ret>;
+    );
 }

@@ -6,7 +6,7 @@
 // except according to those terms.
 //! This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed
 //! through the Win32 API.
-#![cfg(feature = "shared.minwindef+um.winnt")]
+#![cfg(feature = "um.winnt")]
 use ctypes::{ __int64, __uint64, c_char, c_int, c_long, c_short, c_ulong, c_void, wchar_t };
 use shared::basetsd::{ DWORD64, KAFFINITY, LONG_PTR, PDWORD64, SIZE_T, ULONG_PTR };
 use shared::guiddef::{ CLSID, GUID };
@@ -14,13 +14,15 @@ use shared::minwindef::{ BYTE, DWORD, PDWORD, ULONG, WORD };
 use vc::excpt::EXCEPTION_DISPOSITION;
 pub const ANYSIZE_ARRAY: usize = 1;
 #[cfg(target_arch = "x86")]
+IFDEF!{
 pub const MAX_NATURAL_ALIGNMENT: usize = 4;
-#[cfg(target_arch = "x86_64")]
-pub const MAX_NATURAL_ALIGNMENT: usize = 8;
-#[cfg(target_arch = "x86")]
 pub const MEMORY_ALLOCATION_ALIGNMENT: usize = 8;
+}
 #[cfg(target_arch = "x86_64")]
+IFDEF!{
+pub const MAX_NATURAL_ALIGNMENT: usize = 8;
 pub const MEMORY_ALLOCATION_ALIGNMENT: usize = 16;
+}
 pub const SYSTEM_CACHE_ALIGNMENT_SIZE: usize = 64;
 pub type PVOID = *mut c_void;
 pub type PVOID64 = u64; // This is a 64-bit pointer, even when in 32-bit
@@ -768,8 +770,13 @@ pub const NLS_VALID_LOCALE_MASK: DWORD = 0x000fffff;
 macro_rules! MAKELCID {
     ($lgid:expr, $srtid:expr) => ((($srtid as DWORD) << 16) | ($lgid as DWORD))
 }
-pub fn MAKELCID(lgid: WORD, srtid: WORD) -> LCID { ((srtid as DWORD) << 16) | (lgid as DWORD) }
-// A few more functions
+pub fn MAKELCID(lgid: LANGID, srtid: WORD) -> LCID { ((srtid as DWORD) << 16) | (lgid as DWORD) }
+pub fn MAKESORTLCID(lgid: LANGID, srtid: WORD, ver: WORD) -> LCID {
+    MAKELCID(lgid, srtid) | ((ver as DWORD) << 20)
+}
+pub fn LANGIDFROMLCID(lcid: LCID) -> LANGID { lcid as LANGID }
+pub fn SORTIDFROMLCID(lcid: LCID) -> WORD { ((lcid >> 16) & 0xf) as WORD }
+pub fn SORTVERSIONFROMLCID(lcid: LCID) -> WORD { ((lcid >> 16) & 0xf) as WORD }
 pub const LOCALE_NAME_MAX_LENGTH: usize = 85;
 pub const LANG_SYSTEM_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_SYS_DEFAULT);
 pub const LANG_USER_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_DEFAULT);
@@ -783,7 +790,7 @@ pub const LOCALE_CUSTOM_UI_DEFAULT: LCID
     = MAKELCID!(MAKELANGID!(LANG_NEUTRAL, SUBLANG_UI_CUSTOM_DEFAULT), SORT_DEFAULT);
 pub const LOCALE_NEUTRAL: LCID
     = MAKELCID!(MAKELANGID!(LANG_NEUTRAL, SUBLANG_NEUTRAL), SORT_DEFAULT);
-pub const LOCALE_USELOCALE_INVARIANTR_DEFAULT: LCID
+pub const LOCALE_INVARIANT: LCID
     = MAKELCID!(MAKELANGID!(LANG_INVARIANT, SUBLANG_NEUTRAL), SORT_DEFAULT);
 pub const LOCALE_TRANSIENT_KEYBOARD1: LCID = 0x2000;
 pub const LOCALE_TRANSIENT_KEYBOARD2: LCID = 0x2400;
@@ -896,7 +903,176 @@ STRUCT!{struct XSAVE_FORMAT { // FIXME align 16
     XmmRegisters: [M128A; 16],
     Reserved4: [BYTE; 96],
 }}
-//3563
+pub type PXSAVE_FORMAT = *mut XSAVE_FORMAT;
+STRUCT!{struct XSAVE_AREA_HEADER { // FIXME align 8
+    Mask: DWORD64,
+    CompactionMask: DWORD64,
+    Reserved2: [DWORD64; 6],
+}}
+pub type PXSAVE_AREA_HEADER = *mut XSAVE_AREA_HEADER;
+STRUCT!{struct XSAVE_AREA { // FIXME align 16
+    LegacyState: XSAVE_FORMAT,
+    Header: XSAVE_AREA_HEADER,
+}}
+pub type PXSAVE_AREA = *mut XSAVE_AREA;
+#[cfg(target_arch = "x86")]
+STRUCT!{struct XSTATE_CONTEXT {
+    Mask: DWORD64,
+    Length: DWORD,
+    Reserved1: DWORD,
+    Area: PXSAVE_AREA,
+    Reserved2: DWORD,
+    Buffer: PVOID,
+    Reserved3: DWORD,
+}}
+#[cfg(target_arch = "x86_64")]
+STRUCT!{struct XSTATE_CONTEXT {
+    Mask: DWORD64,
+    Length: DWORD,
+    Reserved1: DWORD,
+    Area: PXSAVE_AREA,
+    Buffer: PVOID,
+}}
+pub type PXSTATE_CONTEXT = *mut XSTATE_CONTEXT;
+STRUCT!{struct SCOPE_TABLE_AMD64 {
+    Count: DWORD,
+    ScopeRecord: [SCOPE_TABLE_AMD64_ScopeRecord; 1],
+}}
+STRUCT!{struct SCOPE_TABLE_AMD64_ScopeRecord {
+    BeginAddress: DWORD,
+    EndAddress: DWORD,
+    HandlerAddress: DWORD,
+    JumpTarget: DWORD,
+}}
+pub type PSCOPE_TABLE_AMD64 = *mut SCOPE_TABLE_AMD64;
+// Skip interlocked and bit manipulation stuff because it is all intrinsics
+// Use the native Rust equivalents instead
+#[cfg(target_arch = "x86_64")]
+IFDEF!{
+pub const EXCEPTION_READ_FAULT: DWORD = 0;
+pub const EXCEPTION_WRITE_FAULT: DWORD = 1;
+pub const EXCEPTION_EXECUTE_FAULT: DWORD = 8;
+pub const CONTEXT_AMD64: DWORD = 0x00100000;
+pub const CONTEXT_CONTROL: DWORD = CONTEXT_AMD64 | 0x00000001;
+pub const CONTEXT_INTEGER: DWORD = CONTEXT_AMD64 | 0x00000002;
+pub const CONTEXT_SEGMENTS: DWORD = CONTEXT_AMD64 | 0x00000004;
+pub const CONTEXT_FLOATING_POINT: DWORD = CONTEXT_AMD64 | 0x00000008;
+pub const CONTEXT_DEBUG_REGISTERS: DWORD = CONTEXT_AMD64 | 0x00000010;
+pub const CONTEXT_FULL: DWORD = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_FLOATING_POINT;
+pub const CONTEXT_ALL: DWORD = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_SEGMENTS | CONTEXT_FLOATING_POINT | CONTEXT_DEBUG_REGISTERS;
+pub const CONTEXT_XSTATE: DWORD = CONTEXT_AMD64 | 0x00000040;
+pub const CONTEXT_EXCEPTION_ACTIVE: DWORD = 0x08000000;
+pub const CONTEXT_SERVICE_ACTIVE: DWORD = 0x10000000;
+pub const CONTEXT_EXCEPTION_REQUEST: DWORD = 0x40000000;
+pub const CONTEXT_EXCEPTION_REPORTING: DWORD = 0x80000000;
+pub const INITIAL_MXCSR: DWORD = 0x1f80;
+pub const INITIAL_FPCSR: DWORD = 0x027f;
+pub type XMM_SAVE_AREA32 = XSAVE_FORMAT;
+pub type PXMM_SAVE_AREA32 = *mut XSAVE_FORMAT;
+STRUCT!{struct CONTEXT { // FIXME align 16
+    P1Home: DWORD64,
+    P2Home: DWORD64,
+    P3Home: DWORD64,
+    P4Home: DWORD64,
+    P5Home: DWORD64,
+    P6Home: DWORD64,
+    ContextFlags: DWORD,
+    MxCsr: DWORD,
+    SegCs: WORD,
+    SegDs: WORD,
+    SegEs: WORD,
+    SegFs: WORD,
+    SegGs: WORD,
+    SegSs: WORD,
+    EFlags: DWORD,
+    Dr0: DWORD64,
+    Dr1: DWORD64,
+    Dr2: DWORD64,
+    Dr3: DWORD64,
+    Dr6: DWORD64,
+    Dr7: DWORD64,
+    Rax: DWORD64,
+    Rcx: DWORD64,
+    Rdx: DWORD64,
+    Rbx: DWORD64,
+    Rsp: DWORD64,
+    Rbp: DWORD64,
+    Rsi: DWORD64,
+    Rdi: DWORD64,
+    R8: DWORD64,
+    R9: DWORD64,
+    R10: DWORD64,
+    R11: DWORD64,
+    R12: DWORD64,
+    R13: DWORD64,
+    R14: DWORD64,
+    R15: DWORD64,
+    Rip: DWORD64,
+    FltSave: XMM_SAVE_AREA32, // FIXME union
+    VectorRegister: [M128A; 26],
+    VectorControl: DWORD64,
+    DebugControl: DWORD64,
+    LastBranchToRip: DWORD64,
+    LastBranchFromRip: DWORD64,
+    LastExceptionToRip: DWORD64,
+    LastExceptionFromRip: DWORD64,
+}}
+pub type PCONTEXT = *mut CONTEXT;
+pub type RUNTIME_FUNCTION = IMAGE_RUNTIME_FUNCTION_ENTRY;
+pub type PRUNTIME_FUNCTION = *mut IMAGE_RUNTIME_FUNCTION_ENTRY;
+pub type SCOPE_TABLE = SCOPE_TABLE_AMD64;
+pub type PSCOPE_TABLE = *mut SCOPE_TABLE_AMD64;
+pub const RUNTIME_FUNCTION_INDIRECT: DWORD = 0x1;
+pub const UNW_FLAG_NHANDLER: DWORD = 0x0;
+pub const UNW_FLAG_EHANDLER: DWORD = 0x1;
+pub const UNW_FLAG_UHANDLER: DWORD = 0x2;
+pub const UNW_FLAG_CHAININFO: DWORD = 0x4;
+pub const UNW_FLAG_NO_EPILOGUE: DWORD = 0x80000000;
+pub const UNWIND_HISTORY_TABLE_SIZE: usize = 12;
+STRUCT!{struct UNWIND_HISTORY_TABLE_ENTRY {
+    ImageBase: DWORD64,
+    FunctionEntry: PRUNTIME_FUNCTION,
+}}
+pub type PUNWIND_HISTORY_TABLE_ENTRY = *mut UNWIND_HISTORY_TABLE_ENTRY;
+STRUCT!{struct UNWIND_HISTORY_TABLE {
+    Count: DWORD,
+    LocalHint: BYTE,
+    GlobalHint: BYTE,
+    Search: BYTE,
+    Once: BYTE,
+    LowAddress: DWORD64,
+    HighAddress: DWORD64,
+    Entry: [UNWIND_HISTORY_TABLE_ENTRY; UNWIND_HISTORY_TABLE_SIZE],
+}}
+pub type PUNWIND_HISTORY_TABLE = *mut UNWIND_HISTORY_TABLE;
+pub type PGET_RUNTIME_FUNCTION_CALLBACK = Option<unsafe extern "C" fn(
+    ControlPc: DWORD64,
+    Context: PVOID,
+) -> PRUNTIME_FUNCTION>;
+pub type POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK = Option<unsafe extern "C" fn(
+    Process: HANDLE,
+    TableAddress: PVOID,
+    Entries: PDWORD,
+    Functions: *mut PRUNTIME_FUNCTION,
+) -> DWORD>;
+pub const OUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK_EXPORT_NAME: &'static str
+    = "OutOfProcessFunctionTableCallback";
+STRUCT!{struct DISPATCHER_CONTEXT {
+    ControlPc: DWORD64,
+    ImageBase: DWORD64,
+    FunctionEntry: PRUNTIME_FUNCTION,
+    EstablisherFrame: DWORD64,
+    ContextRecord: PCONTEXT,
+    LanguageHandler: PEXCEPTION_ROUTINE,
+    HandlerData: PVOID,
+    HistoryTable: PUNWIND_HISTORY_TABLE,
+    ScopeIndex: DWORD,
+    Fill0: DWORD,
+}}
+pub type PDISPATCHER_CONTEXT = *mut DISPATCHER_CONTEXT;
+
+}
+// 3966
 #[cfg(target_arch = "x86")]
 pub const SIZE_OF_80387_REGISTERS: usize = 80;
 #[cfg(target_arch = "x86")]
@@ -943,82 +1119,9 @@ STRUCT!{struct CONTEXT {
     SegSs: DWORD,
     ExtendedRegisters: [BYTE; MAXIMUM_SUPPORTED_EXTENSION],
 }}
-#[cfg(target_arch = "x86_64")]
-pub type XMM_SAVE_AREA32 = XSAVE_FORMAT;
-pub type PXMM_SAVE_AREA32 = *mut XSAVE_FORMAT;
-// FIXME - Align 16
-#[cfg(target_arch = "x86_64")]
-STRUCT!{struct CONTEXT {
-    P1Home: DWORD64,
-    P2Home: DWORD64,
-    P3Home: DWORD64,
-    P4Home: DWORD64,
-    P5Home: DWORD64,
-    P6Home: DWORD64,
-    ContextFlags: DWORD,
-    MxCsr: DWORD,
-    SegCs: WORD,
-    SegDs: WORD,
-    SegEs: WORD,
-    SegFs: WORD,
-    SegGs: WORD,
-    SegSs: WORD,
-    EFlags: DWORD,
-    Dr0: DWORD64,
-    Dr1: DWORD64,
-    Dr2: DWORD64,
-    Dr3: DWORD64,
-    Dr6: DWORD64,
-    Dr7: DWORD64,
-    Rax: DWORD64,
-    Rcx: DWORD64,
-    Rdx: DWORD64,
-    Rbx: DWORD64,
-    Rsp: DWORD64,
-    Rbp: DWORD64,
-    Rsi: DWORD64,
-    Rdi: DWORD64,
-    R8: DWORD64,
-    R9: DWORD64,
-    R10: DWORD64,
-    R11: DWORD64,
-    R12: DWORD64,
-    R13: DWORD64,
-    R14: DWORD64,
-    R15: DWORD64,
-    Rip: DWORD64,
-    FltSave: XMM_SAVE_AREA32,
-    VectorRegister: [M128A; 26],
-    VectorControl: DWORD64,
-    DebugControl: DWORD64,
-    LastBranchToRip: DWORD64,
-    LastBranchFromRip: DWORD64,
-    LastExceptionToRip: DWORD64,
-    LastExceptionFromRip: DWORD64,
-}}
+#[cfg(target_arch = "x86")]
 pub type PCONTEXT = *mut CONTEXT;
-pub type RUNTIME_FUNCTION = IMAGE_RUNTIME_FUNCTION_ENTRY;
-pub type PRUNTIME_FUNCTION = *mut RUNTIME_FUNCTION;
-pub const UNWIND_HISTORY_TABLE_SIZE: usize = 12;
-STRUCT!{struct UNWIND_HISTORY_TABLE_ENTRY {
-    ImageBase: DWORD64,
-    FunctionEntry: PRUNTIME_FUNCTION,
-}}
-pub type PUNWIND_HISTORY_TABLE_ENTRY = *mut UNWIND_HISTORY_TABLE_ENTRY;
-STRUCT!{struct UNWIND_HISTORY_TABLE {
-    Count: DWORD,
-    LocalHint: BYTE,
-    GlobalHint: BYTE,
-    Search: BYTE,
-    Once: BYTE,
-    LowAddress: DWORD64,
-    HighAddress: DWORD64,
-    Entry: [UNWIND_HISTORY_TABLE_ENTRY; UNWIND_HISTORY_TABLE_SIZE],
-}}
-pub type PUNWIND_HISTORY_TABLE = *mut UNWIND_HISTORY_TABLE;
-pub type PGET_RUNTIME_FUNCTION_CALLBACK = Option<unsafe extern "system" fn(
-    ControlPc: DWORD64, Context: PVOID,
-) -> PRUNTIME_FUNCTION>;
+
 STRUCT!{struct KNONVOLATILE_CONTEXT_POINTERS_u1 {
     Xmm0: PM128A,
     Xmm1: PM128A,
@@ -1455,6 +1558,22 @@ ENUM!{enum JOBOBJECTINFOCLASS {
     JobObjectReserved7Information,
     JobObjectReserved8Information,
     JobObjectReserved9Information,
+    JobObjectReserved10Information,
+    JobObjectReserved11Information,
+    JobObjectReserved12Information,
+    JobObjectReserved13Information,
+    JobObjectReserved14Information = 31,
+    JobObjectNetRateControlInformation,
+    JobObjectNotificationLimitInformation2,
+    JobObjectLimitViolationInformation2,
+    JobObjectCreateSilo,
+    JobObjectSiloBasicInformation,
+    JobObjectReserved15Information = 37,
+    JobObjectReserved16Information,
+    JobObjectReserved17Information,
+    JobObjectReserved18Information,
+    JobObjectReserved19Information = 41,
+    JobObjectReserved20Information,
     MaxJobObjectInfoClass,
 }}
 //12063

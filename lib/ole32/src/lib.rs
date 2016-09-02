@@ -73,7 +73,6 @@ extern "system" {
     // pub fn CoGetInterceptor();
     // pub fn CoGetInterceptorFromTypeInfo();
     // pub fn CoGetInterfaceAndReleaseStream();
-    pub fn CoGetMalloc(dwMemContext: DWORD, ppMalloc: *mut LPMALLOC) -> HRESULT;
     // pub fn CoGetMarshalSizeMax();
     // pub fn CoGetObject();
     pub fn CoGetObjectContext(riid: REFIID, ppv: *mut LPVOID) -> HRESULT;
