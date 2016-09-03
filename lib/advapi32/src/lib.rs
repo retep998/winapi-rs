@@ -410,8 +410,12 @@ extern "system" {
     // pub fn GetEventLogInformation();
     // pub fn GetExplicitEntriesFromAclA();
     // pub fn GetExplicitEntriesFromAclW();
-    // pub fn GetFileSecurityA();
-    // pub fn GetFileSecurityW();
+    pub fn GetFileSecurityW(lpFileName: LPCWSTR, RequestedInformation: SECURITY_INFORMATION,
+    pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: DWORD, lpnLengthNeeded: LPDWORD,
+    ) -> BOOL;
+    pub fn GetFileSecurityA(lpFileName: LPCSTR, RequestedInformation: SECURITY_INFORMATION,
+    pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: DWORD, lpnLengthNeeded: LPDWORD,
+    ) -> BOOL;
     // pub fn GetInformationCodeAuthzLevelW();
     // pub fn GetInformationCodeAuthzPolicyW();
     // pub fn GetInheritanceSourceA();

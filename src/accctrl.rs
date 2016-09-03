@@ -121,6 +121,8 @@ pub type PEXPLICIT_ACCESS=PEXPLICIT_ACCESSA;
 // #endif
 // } TRUSTEE_A, *PTRUSTEE_A, TRUSTEEA, *PTRUSTEEA;
 
+///The original definition of _TRUSTEE_A in the Windows API contains a pre-compiler statement
+///checking for the use of the midl Compiler. This statement has not been translated into this API
 STRUCT!{struct _TRUSTEE_A {
     pMultipleTrustee: *mut _TRUSTEE_A,
     MultipleTrusteeOperation: MULTIPLE_TRUSTEE_OPERATION,
@@ -201,33 +203,6 @@ pub type TRUSTEE=TRUSTEEA;
 #[cfg(not(unicode))]
 pub type PTRUSTEE=PTRUSTEEA;
 
-//
-// Definition: EXPLICIT_ACCESS
-// This structure is used to pass access control entry information into and out
-// of the system using the API defined in this document.
-// grfAccessPermissions - This contains the access permissions to assign for the
-//                     trustee.  It is in the form of an NT access mask.
-// grfAccessMode - This field defines how the permissions are to be applied for
-//                 the trustee.
-// grfInheritance - For containers, this field defines how the access control
-//                  entry is/(is requested) to be inherited on
-//                  objects/sub-containers created within the container.
-// Trustee - This field contains the definition of the trustee account the
-//           explicit access applies to.
-//
-
-
-
-//
-// Definition: TRUSTEE_TYPE
-// This enumerated type specifies the type of trustee account for the trustee
-// returned by the API described in this document.
-// TRUSTEE_IS_UNKNOWN - The trustee is an unknown, but not necessarily invalid
-//                      type.  This field is not validated on input to the APIs
-//                      that take Trustees.
-// TRUSTEE_IS_USER      The trustee account is a user account.
-// TRUSTEE_IS_GROUP     The trustee account is a group account.
-//
 
 // typedef enum _TRUSTEE_TYPE
 // {
@@ -255,13 +230,6 @@ ENUM!{enum TRUSTEE_TYPE {
     TRUSTEE_IS_COMPUTER,
 }}
 
-//
-// Definition: TRUSTEE_FORM
-// This enumerated type specifies the form the trustee identifier is in for a
-// particular trustee.
-// TRUSTEE_IS_SID       The trustee is identified with a SID rather than with a name.
-// TRUSTEE_IS_NAME      The trustee is identified with a name.
-//
 
 // typedef enum _TRUSTEE_FORM
 // {
@@ -281,15 +249,6 @@ ENUM!{enum TRUSTEE_FORM {
 }}
 
 
-//
-// Definition: MULTIPLE_TRUSTEE_OPERATION
-// If the trustee is a multiple trustee, this enumerated type specifies the type.
-// TRUSTEE_IS_IMPERSONATE       The trustee is an impersonate trustee and the multiple
-//                          trustee field in the trustee points to another trustee
-//                          that is a trustee for the server that will be doing the
-//                          impersonation.
-//
-//
 // typedef enum _MULTIPLE_TRUSTEE_OPERATION
 // {
 //     NO_MULTIPLE_TRUSTEE,
