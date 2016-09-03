@@ -129,7 +129,6 @@ STRUCT!{struct _TRUSTEE_A {
     ptstrName: ::LPSTR,
 }}
 
-
 pub type TRUSTEE_A = _TRUSTEE_A;
 pub type PTRUSTEE_A = *mut _TRUSTEE_A;
 pub type TRUSTEEA = _TRUSTEE_A;
