@@ -129,6 +129,19 @@ extern "system" {
     // pub fn ConvertSecurityDescriptorToAccessW();
     // pub fn ConvertSecurityDescriptorToStringSecurityDescriptorA();
     // pub fn ConvertSecurityDescriptorToStringSecurityDescriptorW();
+
+    pub fn ConvertSecurityDescriptorToStringSecurityDescriptorA(
+        SecurityDescriptor: PSECURITY_DESCRIPTOR,RequestedStringSDRevision ::DWORD,
+        SecurityInformation: SECURITY_INFORMATION, StringSecurityDescriptor *mut LPSTR,
+        StringSecurityDescriptorLen: PULONG,
+    ) -> BOOL;
+
+    pub fn ConvertSecurityDescriptorToStringSecurityDescriptorW(
+        SecurityDescriptor: PSECURITY_DESCRIPTOR,RequestedStringSDRevision ::DWORD,
+        SecurityInformation: SECURITY_INFORMATION, StringSecurityDescriptor *mut LPWSTR,
+        StringSecurityDescriptorLen: PULONG,
+    ) -> BOOL;
+
     // pub fn ConvertSidToStringSidA();
     // pub fn ConvertSidToStringSidW();
     // pub fn ConvertStringSDToSDDomainA();
