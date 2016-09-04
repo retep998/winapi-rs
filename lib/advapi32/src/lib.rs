@@ -127,8 +127,6 @@ extern "system" {
     // pub fn ConvertSecurityDescriptorToAccessNamedA();
     // pub fn ConvertSecurityDescriptorToAccessNamedW();
     // pub fn ConvertSecurityDescriptorToAccessW();
-    // pub fn ConvertSecurityDescriptorToStringSecurityDescriptorA();
-    // pub fn ConvertSecurityDescriptorToStringSecurityDescriptorW();
 
     pub fn ConvertSecurityDescriptorToStringSecurityDescriptorA(
         SecurityDescriptor: PSECURITY_DESCRIPTOR,RequestedStringSDRevision: DWORD,
