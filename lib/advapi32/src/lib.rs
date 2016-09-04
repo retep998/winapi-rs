@@ -131,14 +131,14 @@ extern "system" {
     // pub fn ConvertSecurityDescriptorToStringSecurityDescriptorW();
 
     pub fn ConvertSecurityDescriptorToStringSecurityDescriptorA(
-        SecurityDescriptor: PSECURITY_DESCRIPTOR,RequestedStringSDRevision ::DWORD,
-        SecurityInformation: SECURITY_INFORMATION, StringSecurityDescriptor *mut LPSTR,
+        SecurityDescriptor: PSECURITY_DESCRIPTOR,RequestedStringSDRevision: DWORD,
+        SecurityInformation: SECURITY_INFORMATION, StringSecurityDescriptor: *mut LPSTR,
         StringSecurityDescriptorLen: PULONG,
     ) -> BOOL;
 
     pub fn ConvertSecurityDescriptorToStringSecurityDescriptorW(
-        SecurityDescriptor: PSECURITY_DESCRIPTOR,RequestedStringSDRevision ::DWORD,
-        SecurityInformation: SECURITY_INFORMATION, StringSecurityDescriptor *mut LPWSTR,
+        SecurityDescriptor: PSECURITY_DESCRIPTOR,RequestedStringSDRevision: DWORD,
+        SecurityInformation: SECURITY_INFORMATION, StringSecurityDescriptor: *mut LPWSTR,
         StringSecurityDescriptorLen: PULONG,
     ) -> BOOL;
 
