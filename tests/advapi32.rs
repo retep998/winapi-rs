@@ -93,4 +93,11 @@ fn functions() {
     bb(StartServiceCtrlDispatcherA);
     bb(StartServiceCtrlDispatcherW);
     bb(GetSecurityInfo);
+    bb(ConvertSecurityDescriptorToStringSecurityDescriptorA);
+    bb(ConvertSecurityDescriptorToStringSecurityDescriptorW);
+    bb(GetFileSecurityW);
+    bb(GetFileSecurityA);
+    bb(GetNamedSecurityInfoA);
+    bb(GetNamedSecurityInfoW);
+    bb(GetSecurityInfo);
 }
