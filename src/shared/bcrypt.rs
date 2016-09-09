@@ -10,6 +10,7 @@ use shared::minwindef::{ PUCHAR, UCHAR, ULONG, USHORT };
 use um::winnt::{ LONG, LPCWSTR, LPWSTR, PVOID, PWSTR, ULONGLONG };
 pub type NTSTATUS = LONG;
 pub type PNTSTATUS = *mut NTSTATUS;
+#[inline]
 pub fn BCRYPT_SUCCESS(Status: NTSTATUS) -> bool { Status >= 0 }
 pub const BCRYPT_OBJECT_ALIGNMENT: usize = 16;
 pub const BCRYPT_KDF_HASH: &'static str = "HASH";

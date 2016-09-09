@@ -227,7 +227,10 @@ macro_rules! STRUCT {
             $(pub $field: $ftype,)+
         }
         impl Copy for $name {}
-        impl Clone for $name { fn clone(&self) -> $name { *self } }
+        impl Clone for $name {
+            #[inline]
+            fn clone(&self) -> $name { *self }
+        }
     };
 }
 macro_rules! EXTERN {

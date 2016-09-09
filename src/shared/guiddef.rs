@@ -29,6 +29,7 @@ pub type REFGUID = *const GUID;
 pub type REFIID = *const IID;
 pub type REFCLSID = *const IID;
 pub type REFFMTID = *const IID;
+#[inline]
 pub fn IsEqualGUID(g1: &GUID, g2: &GUID) -> bool {
     (g1.Data1, g1.Data2, g1.Data3, g1.Data4) == (g2.Data1, g2.Data2, g2.Data3, g2.Data4)
 }

@@ -763,19 +763,27 @@ pub const SORT_HUNGARIAN_TECHNICAL: WORD = 0x1;
 pub const SORT_GEORGIAN_TRADITIONAL: WORD = 0x0;
 pub const SORT_GEORGIAN_MODERN: WORD = 0x1;
 macro_rules! MAKELANGID { ($p:expr, $s:expr) => (($s << 10) | $p) }
+#[inline]
 pub fn MAKELANGID(p: WORD, s: WORD) -> LANGID { (s << 10) | p }
+#[inline]
 pub fn PRIMARYLANGID(lgid: LANGID) -> WORD { lgid & 0x3ff }
+#[inline]
 pub fn SUBLANGID(lgid: LANGID) -> WORD { lgid >> 10 }
 pub const NLS_VALID_LOCALE_MASK: DWORD = 0x000fffff;
 macro_rules! MAKELCID {
     ($lgid:expr, $srtid:expr) => ((($srtid as DWORD) << 16) | ($lgid as DWORD))
 }
+#[inline]
 pub fn MAKELCID(lgid: LANGID, srtid: WORD) -> LCID { ((srtid as DWORD) << 16) | (lgid as DWORD) }
+#[inline]
 pub fn MAKESORTLCID(lgid: LANGID, srtid: WORD, ver: WORD) -> LCID {
     MAKELCID(lgid, srtid) | ((ver as DWORD) << 20)
 }
+#[inline]
 pub fn LANGIDFROMLCID(lcid: LCID) -> LANGID { lcid as LANGID }
+#[inline]
 pub fn SORTIDFROMLCID(lcid: LCID) -> WORD { ((lcid >> 16) & 0xf) as WORD }
+#[inline]
 pub fn SORTVERSIONFROMLCID(lcid: LCID) -> WORD { ((lcid >> 16) & 0xf) as WORD }
 pub const LOCALE_NAME_MAX_LENGTH: usize = 85;
 pub const LANG_SYSTEM_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_SYS_DEFAULT);
