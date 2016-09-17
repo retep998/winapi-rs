@@ -961,10 +961,16 @@ extern "system" {
     // pub fn SetInformationCodeAuthzLevelW();
     // pub fn SetInformationCodeAuthzPolicyW();
     // pub fn SetKernelObjectSecurity();
-    // pub fn SetNamedSecurityInfoA();
+    pub fn SetNamedSecurityInfoA(pObjectName: LPSTR, ObjectType: SE_OBJECT_TYPE,
+        SecurityInfo: SECURITY_INFORMATION, psidOwner: PSID, psidGroup: PSID, pDacl: PACL,
+        pSacl: PACL
+    ) -> DWORD;
+    pub fn SetNamedSecurityInfoW(pObjectName: LPWSTR, ObjectType: SE_OBJECT_TYPE,
+        SecurityInfo: SECURITY_INFORMATION, psidOwner: PSID, psidGroup: PSID, pDacl: PACL,
+        pSacl: PACL
+    ) -> DWORD;
     // pub fn SetNamedSecurityInfoExA();
     // pub fn SetNamedSecurityInfoExW();
-    // pub fn SetNamedSecurityInfoW();
     // pub fn SetPrivateObjectSecurity();
     // pub fn SetPrivateObjectSecurityEx();
     // pub fn SetSecurityAccessMask();
