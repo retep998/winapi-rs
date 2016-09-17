@@ -127,8 +127,19 @@ extern "system" {
     // pub fn ConvertSecurityDescriptorToAccessNamedA();
     // pub fn ConvertSecurityDescriptorToAccessNamedW();
     // pub fn ConvertSecurityDescriptorToAccessW();
-    // pub fn ConvertSecurityDescriptorToStringSecurityDescriptorA();
-    // pub fn ConvertSecurityDescriptorToStringSecurityDescriptorW();
+
+    pub fn ConvertSecurityDescriptorToStringSecurityDescriptorA(
+        SecurityDescriptor: PSECURITY_DESCRIPTOR,RequestedStringSDRevision: DWORD,
+        SecurityInformation: SECURITY_INFORMATION, StringSecurityDescriptor: *mut LPSTR,
+        StringSecurityDescriptorLen: PULONG,
+    ) -> BOOL;
+
+    pub fn ConvertSecurityDescriptorToStringSecurityDescriptorW(
+        SecurityDescriptor: PSECURITY_DESCRIPTOR,RequestedStringSDRevision: DWORD,
+        SecurityInformation: SECURITY_INFORMATION, StringSecurityDescriptor: *mut LPWSTR,
+        StringSecurityDescriptorLen: PULONG,
+    ) -> BOOL;
+
     // pub fn ConvertSidToStringSidA();
     // pub fn ConvertSidToStringSidW();
     // pub fn ConvertStringSDToSDDomainA();
@@ -410,8 +421,12 @@ extern "system" {
     // pub fn GetEventLogInformation();
     // pub fn GetExplicitEntriesFromAclA();
     // pub fn GetExplicitEntriesFromAclW();
-    // pub fn GetFileSecurityA();
-    // pub fn GetFileSecurityW();
+    pub fn GetFileSecurityW(lpFileName: LPCWSTR, RequestedInformation: SECURITY_INFORMATION,
+    pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: DWORD, lpnLengthNeeded: LPDWORD,
+    ) -> BOOL;
+    pub fn GetFileSecurityA(lpFileName: LPCSTR, RequestedInformation: SECURITY_INFORMATION,
+    pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: DWORD, lpnLengthNeeded: LPDWORD,
+    ) -> BOOL;
     // pub fn GetInformationCodeAuthzLevelW();
     // pub fn GetInformationCodeAuthzPolicyW();
     // pub fn GetInheritanceSourceA();
@@ -426,10 +441,18 @@ extern "system" {
     // pub fn GetMultipleTrusteeOperationA();
     // pub fn GetMultipleTrusteeOperationW();
     // pub fn GetMultipleTrusteeW();
-    // pub fn GetNamedSecurityInfoA();
+    pub fn GetNamedSecurityInfoA(
+       pObjectName: LPCSTR, ObjectType: SE_OBJECT_TYPE, SecurityInfo: SECURITY_INFORMATION,
+        ppsidOwner: *mut PSID, ppsidGroup: *mut PSID, ppDacl: *mut PACL,
+        ppSacl: *mut PACL, ppSecurityDescriptor: *mut PSECURITY_DESCRIPTOR,
+    ) -> DWORD;
     // pub fn GetNamedSecurityInfoExA();
     // pub fn GetNamedSecurityInfoExW();
-    // pub fn GetNamedSecurityInfoW();
+    pub fn GetNamedSecurityInfoW(
+       pObjectName: LPCWSTR, ObjectType: SE_OBJECT_TYPE, SecurityInfo: SECURITY_INFORMATION,
+        ppsidOwner: *mut PSID, ppsidGroup: *mut PSID, ppDacl: *mut PACL,
+        ppSacl: *mut PACL, ppSecurityDescriptor: *mut PSECURITY_DESCRIPTOR,
+    ) -> DWORD;
     // pub fn GetNumberOfEventLogRecords();
     // pub fn GetOldestEventLogRecord();
     // pub fn GetOverlappedAccessResults();
@@ -441,7 +464,11 @@ extern "system" {
     // pub fn GetSecurityDescriptorOwner();
     // pub fn GetSecurityDescriptorRMControl();
     // pub fn GetSecurityDescriptorSacl();
-    // pub fn GetSecurityInfo();
+    pub fn GetSecurityInfo(
+        handle: HANDLE, ObjectType: SE_OBJECT_TYPE, SecurityInfo: SECURITY_INFORMATION,
+        ppsidOwner: *mut PSID, ppsidGroup: *mut PSID, ppDacl: *mut PACL,
+        ppSacl: *mut PACL, ppSecurityDescriptor: *mut PSECURITY_DESCRIPTOR,
+    ) -> DWORD;
     // pub fn GetSecurityInfoExA();
     // pub fn GetSecurityInfoExW();
     // pub fn GetServiceDisplayNameA();
@@ -498,12 +525,32 @@ extern "system" {
     // pub fn LogonUserExExW();
     // pub fn LogonUserExW();
     // pub fn LogonUserW();
-    // pub fn LookupAccountNameA();
-    // pub fn LookupAccountNameW();
-    // pub fn LookupAccountSidA();
-    // pub fn LookupAccountSidW();
-    // pub fn LookupPrivilegeDisplayNameA();
-    // pub fn LookupPrivilegeDisplayNameW();
+    pub fn LookupAccountNameA(
+        lpSystemName: LPCSTR, lpAccountName: LPCSTR, Sid: PSID, cbSid: LPDWORD,
+        ReferencedDomainName: LPSTR, cchReferencedDomainName: LPDWORD, peUse: PSID_NAME_USE,
+    ) -> BOOL;
+    pub fn LookupAccountNameW(
+        lpSystemName: LPCWSTR, lpAccountName: LPCWSTR, Sid: PSID, cbSid: LPDWORD,
+        ReferencedDomainName: LPCWSTR, cchReferencedDomainName: LPDWORD, peUse: PSID_NAME_USE,
+    ) -> BOOL;
+    pub fn LookupAccountSidA(
+        lpSystemName: LPCWSTR, Sid: PSID, Name: LPSTR, cchName: LPDWORD,
+        ReferencedDomainName: LPSTR, cchReferencedDomainName: LPDWORD,
+        peUse: PSID_NAME_USE,
+    ) -> BOOL;
+    pub fn LookupAccountSidW(
+        lpSystemName: LPCWSTR, Sid: PSID, Name: LPCWSTR, cchName: LPDWORD,
+        ReferencedDomainName: LPCWSTR, cchReferencedDomainName: LPDWORD,
+        peUse: PSID_NAME_USE,
+    ) -> BOOL;
+    pub fn LookupPrivilegeDisplayNameA(
+        lpSystemName: LPCSTR, lpName: LPCSTR, lpDisplayName: LPSTR, cchDisplayName: LPDWORD,
+        lpLanguageId: LPDWORD,
+    ) -> BOOL;
+    pub fn LookupPrivilegeDisplayNameW(
+        lpSystemName: LPCWSTR, lpName: LPCWSTR, lpDisplayName: LPWSTR, cchDisplayName: LPDWORD,
+        lpLanguageId: LPDWORD,
+    ) -> BOOL;
     pub fn LookupPrivilegeNameA(
         lpSystemName: LPCSTR, lpLuid: PLUID, lpName: LPSTR, cchName: LPDWORD,
     ) -> BOOL;
@@ -901,8 +948,12 @@ extern "system" {
     // pub fn SetEncryptedFileMetadata();
     // pub fn SetEntriesInAccessListA();
     // pub fn SetEntriesInAccessListW();
-    // pub fn SetEntriesInAclA();
-    // pub fn SetEntriesInAclW();
+    pub fn SetEntriesInAclA(cCountOfExplicitEntries: ULONG,
+        pListOfExplicitEntries: PEXPLICIT_ACCESS_A, OldAcl: PACL, NewAcl: PACL,
+    ) -> DWORD;
+    pub fn SetEntriesInAclW(cCountOfExplicitEntries: ULONG,
+        pListOfExplicitEntries: PEXPLICIT_ACCESS_W, OldAcl: PACL, NewAcl: PACL,
+    ) -> DWORD;
     // pub fn SetEntriesInAuditListA();
     // pub fn SetEntriesInAuditListW();
     // pub fn SetFileSecurityA();
@@ -910,10 +961,16 @@ extern "system" {
     // pub fn SetInformationCodeAuthzLevelW();
     // pub fn SetInformationCodeAuthzPolicyW();
     // pub fn SetKernelObjectSecurity();
-    // pub fn SetNamedSecurityInfoA();
+    pub fn SetNamedSecurityInfoA(pObjectName: LPSTR, ObjectType: SE_OBJECT_TYPE,
+        SecurityInfo: SECURITY_INFORMATION, psidOwner: PSID, psidGroup: PSID, pDacl: PACL,
+        pSacl: PACL
+    ) -> DWORD;
+    pub fn SetNamedSecurityInfoW(pObjectName: LPWSTR, ObjectType: SE_OBJECT_TYPE,
+        SecurityInfo: SECURITY_INFORMATION, psidOwner: PSID, psidGroup: PSID, pDacl: PACL,
+        pSacl: PACL
+    ) -> DWORD;
     // pub fn SetNamedSecurityInfoExA();
     // pub fn SetNamedSecurityInfoExW();
-    // pub fn SetNamedSecurityInfoW();
     // pub fn SetPrivateObjectSecurity();
     // pub fn SetPrivateObjectSecurityEx();
     // pub fn SetSecurityAccessMask();

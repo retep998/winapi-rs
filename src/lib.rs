@@ -24,6 +24,7 @@ pub use std::os::raw::{
     c_float,
     c_double,
 };
+pub use accctrl::*;
 pub use activation::*;
 pub use audioclient::*;
 pub use audiosessiontypes::*;
@@ -189,6 +190,7 @@ pub use xinput::*;
 // Modules
 //-------------------------------------------------------------------------------------------------
 #[macro_use] mod macros;
+pub mod accctrl;
 pub mod activation;
 pub mod audioclient;
 pub mod audiosessiontypes;
