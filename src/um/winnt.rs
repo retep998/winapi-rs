@@ -196,10 +196,12 @@ pub const MAXLONG: LONG = 0x7fffffff;
 pub const MAXBYTE: BYTE = 0xff;
 pub const MAXWORD: WORD = 0xffff;
 pub const MAXDWORD: DWORD = 0xffffffff;
-pub type PEXCEPTION_ROUTINE = Option<unsafe extern "system" fn(
-    ExceptionRecord: *mut EXCEPTION_RECORD, EstablisherFrame: PVOID,
-    ContextRecord: *mut CONTEXT, DispatcherContext: PVOID,
-) -> EXCEPTION_DISPOSITION>;
+FN!{stdcall PEXCEPTION_ROUTINE(
+    ExceptionRecord: *mut EXCEPTION_RECORD,
+    EstablisherFrame: PVOID,
+    ContextRecord: *mut CONTEXT,
+    DispatcherContext: PVOID
+) -> EXCEPTION_DISPOSITION}
 pub const VER_SERVER_NT: DWORD = 0x80000000;
 pub const VER_WORKSTATION_NT: DWORD = 0x40000000;
 pub const VER_SUITE_SMALLBUSINESS: DWORD = 0x00000001;
@@ -763,19 +765,27 @@ pub const SORT_HUNGARIAN_TECHNICAL: WORD = 0x1;
 pub const SORT_GEORGIAN_TRADITIONAL: WORD = 0x0;
 pub const SORT_GEORGIAN_MODERN: WORD = 0x1;
 macro_rules! MAKELANGID { ($p:expr, $s:expr) => (($s << 10) | $p) }
+#[inline]
 pub fn MAKELANGID(p: WORD, s: WORD) -> LANGID { (s << 10) | p }
+#[inline]
 pub fn PRIMARYLANGID(lgid: LANGID) -> WORD { lgid & 0x3ff }
+#[inline]
 pub fn SUBLANGID(lgid: LANGID) -> WORD { lgid >> 10 }
 pub const NLS_VALID_LOCALE_MASK: DWORD = 0x000fffff;
 macro_rules! MAKELCID {
     ($lgid:expr, $srtid:expr) => ((($srtid as DWORD) << 16) | ($lgid as DWORD))
 }
+#[inline]
 pub fn MAKELCID(lgid: LANGID, srtid: WORD) -> LCID { ((srtid as DWORD) << 16) | (lgid as DWORD) }
+#[inline]
 pub fn MAKESORTLCID(lgid: LANGID, srtid: WORD, ver: WORD) -> LCID {
     MAKELCID(lgid, srtid) | ((ver as DWORD) << 20)
 }
+#[inline]
 pub fn LANGIDFROMLCID(lcid: LCID) -> LANGID { lcid as LANGID }
+#[inline]
 pub fn SORTIDFROMLCID(lcid: LCID) -> WORD { ((lcid >> 16) & 0xf) as WORD }
+#[inline]
 pub fn SORTVERSIONFROMLCID(lcid: LCID) -> WORD { ((lcid >> 16) & 0xf) as WORD }
 pub const LOCALE_NAME_MAX_LENGTH: usize = 85;
 pub const LANG_SYSTEM_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_SYS_DEFAULT);
@@ -1045,16 +1055,16 @@ STRUCT!{struct UNWIND_HISTORY_TABLE {
     Entry: [UNWIND_HISTORY_TABLE_ENTRY; UNWIND_HISTORY_TABLE_SIZE],
 }}
 pub type PUNWIND_HISTORY_TABLE = *mut UNWIND_HISTORY_TABLE;
-pub type PGET_RUNTIME_FUNCTION_CALLBACK = Option<unsafe extern "C" fn(
+FN!{cdecl PGET_RUNTIME_FUNCTION_CALLBACK(
     ControlPc: DWORD64,
-    Context: PVOID,
-) -> PRUNTIME_FUNCTION>;
-pub type POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK = Option<unsafe extern "C" fn(
+    Context: PVOID
+) -> PRUNTIME_FUNCTION}
+FN!{cdecl POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK(
     Process: HANDLE,
     TableAddress: PVOID,
     Entries: PDWORD,
-    Functions: *mut PRUNTIME_FUNCTION,
-) -> DWORD>;
+    Functions: *mut PRUNTIME_FUNCTION
+) -> DWORD}
 pub const OUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK_EXPORT_NAME: &'static str
     = "OutOfProcessFunctionTableCallback";
 STRUCT!{struct DISPATCHER_CONTEXT {
@@ -2205,10 +2215,10 @@ pub const RTL_CONDITION_VARIABLE_INIT: RTL_CONDITION_VARIABLE = RTL_CONDITION_VA
     Ptr: 0 as PVOID
 };
 //18204
-pub type PAPCFUNC = Option<unsafe extern "system" fn(Parameter: ULONG_PTR)>;
-pub type PVECTORED_EXCEPTION_HANDLER = Option<unsafe extern "system" fn(
-    ExceptionInfo: *mut EXCEPTION_POINTERS,
-) -> LONG>;
+FN!{stdcall PAPCFUNC(Parameter: ULONG_PTR) -> ()}
+FN!{stdcall PVECTORED_EXCEPTION_HANDLER(
+    ExceptionInfo: *mut EXCEPTION_POINTERS
+) -> LONG}
 ENUM!{enum HEAP_INFORMATION_CLASS {
     HeapCompatibilityInformation = 0,
     HeapEnableTerminationOnCorruption = 1,
@@ -2231,14 +2241,15 @@ pub const WT_EXECUTELONGFUNCTION: ULONG = 0x00000010;
 pub const WT_EXECUTEINPERSISTENTIOTHREAD: ULONG = 0x00000040;
 pub const WT_EXECUTEINPERSISTENTTHREAD: ULONG = 0x00000080;
 pub const WT_TRANSFER_IMPERSONATION: ULONG = 0x00000100;
-pub type WAITORTIMERCALLBACKFUNC = Option<unsafe extern "system" fn(PVOID, BOOLEAN)>;
-pub type WORKERCALLBACKFUNC = Option<unsafe extern "system" fn(PVOID)>;
-pub type APC_CALLBACK_FUNCTION = Option<unsafe extern "system" fn(DWORD, PVOID, PVOID)>;
+FN!{stdcall WAITORTIMERCALLBACKFUNC(PVOID, BOOLEAN) -> ()}
+FN!{stdcall WORKERCALLBACKFUNC(PVOID) -> ()}
+FN!{stdcall APC_CALLBACK_FUNCTION(DWORD, PVOID, PVOID) -> ()}
 pub type WAITORTIMERCALLBACK = WAITORTIMERCALLBACKFUNC;
-pub type PFLS_CALLBACK_FUNCTION = Option<unsafe extern "system" fn(lpFlsData: PVOID)>;
-pub type PSECURE_MEMORY_CACHE_CALLBACK = Option<unsafe extern "system" fn(
-    Addr: PVOID, Range: SIZE_T,
-) -> BOOLEAN>;
+FN!{stdcall PFLS_CALLBACK_FUNCTION(lpFlsData: PVOID) -> ()}
+FN!{stdcall PSECURE_MEMORY_CACHE_CALLBACK(
+    Addr: PVOID,
+    Range: SIZE_T
+) -> BOOLEAN}
 pub const WT_EXECUTEINLONGTHREAD: ULONG = 0x00000010;
 pub const WT_EXECUTEDELETEWAIT: ULONG = 0x00000008;
 //18570
@@ -2340,22 +2351,22 @@ ENUM!{enum TP_CALLBACK_PRIORITY {
     TP_CALLBACK_PRIORITY_INVALID,
     TP_CALLBACK_PRIORITY_COUNT = 4,
 }}
-pub type PTP_CLEANUP_GROUP_CANCEL_CALLBACK = Option<unsafe extern "system" fn(
-    ObjectContext: PVOID, CleanupContext: PVOID,
-)>;
-pub type PTP_SIMPLE_CALLBACK = Option<unsafe extern "system" fn(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID,
-)>;
-pub type PTP_WORK_CALLBACK = Option<unsafe extern "system" fn(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Work: PTP_WORK,
-)>;
-pub type PTP_TIMER_CALLBACK = Option<unsafe extern "system" fn(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Timer: PTP_TIMER,
-)>;
+FN!{stdcall PTP_CLEANUP_GROUP_CANCEL_CALLBACK(
+    ObjectContext: PVOID, CleanupContext: PVOID
+) -> ()}
+FN!{stdcall PTP_SIMPLE_CALLBACK(
+    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID
+) -> ()}
+FN!{stdcall PTP_WORK_CALLBACK(
+    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Work: PTP_WORK
+) -> ()}
+FN!{stdcall PTP_TIMER_CALLBACK(
+    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Timer: PTP_TIMER
+) -> ()}
 pub type TP_WAIT_RESULT = DWORD;
-pub type PTP_WAIT_CALLBACK = Option<unsafe extern "system" fn(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Wait: PTP_WAIT, WaitResult: TP_WAIT_RESULT,
-)>;
+FN!{stdcall PTP_WAIT_CALLBACK(
+    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Wait: PTP_WAIT, WaitResult: TP_WAIT_RESULT
+) -> ()}
 pub type TP_VERSION = DWORD;
 pub type PTP_VERSION = *mut DWORD;
 STRUCT!{struct TP_POOL_STACK_INFORMATION {
@@ -2420,9 +2431,9 @@ ENUM!{enum RTL_UMS_SCHEDULER_REASON {
     UmsSchedulerThreadBlocked,
     UmsSchedulerThreadYield,
 }}
-pub type PRTL_UMS_SCHEDULER_ENTRY_POINT = Option<unsafe extern "system" fn(
-    Reason: RTL_UMS_SCHEDULER_REASON, ActivationPayload: ULONG_PTR, SchedulerParam: PVOID,
-)>;
+FN!{stdcall PRTL_UMS_SCHEDULER_ENTRY_POINT(
+    Reason: RTL_UMS_SCHEDULER_REASON, ActivationPayload: ULONG_PTR, SchedulerParam: PVOID
+) -> ()}
 ENUM!{enum FIRMWARE_TYPE {
     FirmwareTypeUnknown,
     FirmwareTypeBios,

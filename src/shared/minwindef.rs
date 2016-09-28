@@ -45,21 +45,27 @@ pub type PUINT = *mut c_uint;
 pub type WPARAM = UINT_PTR;
 pub type LPARAM = LONG_PTR;
 pub type LRESULT = LONG_PTR;
+#[inline]
 pub fn MAKEWORD(a: BYTE, b: BYTE) -> WORD {
     (a as WORD) | ((b as WORD) << 8)
 }
+#[inline]
 pub fn MAKELONG(a: WORD, b: WORD) -> LONG {
     ((a as DWORD) | ((b as DWORD) << 16)) as LONG
 }
+#[inline]
 pub fn LOWORD(l: DWORD) -> WORD {
     (l & 0xffff) as WORD
 }
+#[inline]
 pub fn HIWORD(l: DWORD) -> WORD {
     ((l >> 16) & 0xffff) as WORD
 }
+#[inline]
 pub fn LOBYTE(l: WORD) -> BYTE {
     (l & 0xff) as BYTE
 }
+#[inline]
 pub fn HIBYTE(l: WORD) -> BYTE {
     ((l >> 8) & 0xff) as BYTE
 }

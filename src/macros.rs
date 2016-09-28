@@ -227,7 +227,10 @@ macro_rules! STRUCT {
             $(pub $field: $ftype,)+
         }
         impl Copy for $name {}
-        impl Clone for $name { fn clone(&self) -> $name { *self } }
+        impl Clone for $name {
+            #[inline]
+            fn clone(&self) -> $name { *self }
+        }
     };
 }
 macro_rules! EXTERN {
@@ -247,9 +250,16 @@ macro_rules! IFDEF {
     ($($thing:item)*) => ($($thing)*)
 }
 macro_rules! FN {
-    ($cconv:tt fn $func:ident(
-        $($p:ident: $t:ty),*
-    ) -> $ret:ty) => (
-        pub type $func = Option<unsafe extern $cconv fn($($p: $t),*) -> $ret>;
+    (stdcall $func:ident($($t:ty),*) -> $ret:ty) => (
+        pub type $func = Option<unsafe extern "stdcall" fn($($t),*) -> $ret>;
+    );
+    (stdcall $func:ident($($p:ident: $t:ty),*) -> $ret:ty) => (
+        pub type $func = Option<unsafe extern "stdcall" fn($($p: $t),*) -> $ret>;
+    );
+    (cdecl $func:ident($($t:ty),*) -> $ret:ty) => (
+        pub type $func = Option<unsafe extern "cdecl" fn($($t),*) -> $ret>;
+    );
+    (cdecl $func:ident($($p:ident: $t:ty),*) -> $ret:ty) => (
+        pub type $func = Option<unsafe extern "cdecl" fn($($p: $t),*) -> $ret>;
     );
 }
