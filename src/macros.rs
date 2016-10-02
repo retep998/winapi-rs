@@ -232,6 +232,18 @@ macro_rules! STRUCT {
             fn clone(&self) -> $name { *self }
         }
     };
+    {$(#[$attrs:meta])* struct $name:ident;} => {
+        #[repr(C)] $(#[$attrs])*
+        pub struct $name;
+        impl Copy for $name {}
+        impl Clone for $name {
+            #[inline]
+            fn clone(&self) -> $name { *self }
+        }
+    };
+    {@debug $x:item} => {
+        STRUCT!{#[derive(Debug)] $x}
+    };
 }
 macro_rules! EXTERN {
     ($lib:tt $cconv:tt fn $func:ident(

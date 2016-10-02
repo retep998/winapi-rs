@@ -482,12 +482,9 @@ interface ICreateTypeInfo(ICreateTypeInfoVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 // FIXME: Implement these interfaces
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICreateTypeInfo2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICreateTypeLib;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICreateTypeLib2;
+STRUCT!{@debug struct ICreateTypeInfo2;}
+STRUCT!{@debug struct ICreateTypeLib;}
+STRUCT!{@debug struct ICreateTypeLib2;}
 pub type LPDISPATCH = *mut IDispatch;
 pub const DISPID_UNKNOWN: ::INT = -1;
 pub const DISPID_VALUE: ::INT = 0;
@@ -515,10 +512,8 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 // FIXME: Implement these interfaces
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IEnumVARIANT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeComp;
+STRUCT!{@debug struct IEnumVARIANT;}
+STRUCT!{@debug struct ITypeComp;}
 RIDL!(
 interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeAttr(&mut self, ppTypeAttr: *mut *mut TYPEATTR) -> ::HRESULT,
@@ -564,27 +559,15 @@ interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 // FIXME: Implement these interfaces
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeInfo2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeLib;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeLib2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeChangeEvents;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IErrorInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICreateErrorInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ISupportErrorInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeFactory;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeMarshal;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IRecordInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IErrorLog;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPropertyBag;
+STRUCT!{@debug struct ITypeInfo2;}
+STRUCT!{@debug struct ITypeLib;}
+STRUCT!{@debug struct ITypeLib2;}
+STRUCT!{@debug struct ITypeChangeEvents;}
+STRUCT!{@debug struct IErrorInfo;}
+STRUCT!{@debug struct ICreateErrorInfo;}
+STRUCT!{@debug struct ISupportErrorInfo;}
+STRUCT!{@debug struct ITypeFactory;}
+STRUCT!{@debug struct ITypeMarshal;}
+STRUCT!{@debug struct IRecordInfo;}
+STRUCT!{@debug struct IErrorLog;}
+STRUCT!{@debug struct IPropertyBag;}
