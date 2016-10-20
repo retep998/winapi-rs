@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! This module defines the 32-Bit Windows Base APIs
-#![cfg(feature = "um.minwinbase")]
 use shared::basetsd::ULONG_PTR;
 use shared::minwindef::{
     BOOL, BYTE, DWORD, FILETIME, HMODULE, LPVOID, MAX_PATH, UINT, ULONG, WORD,

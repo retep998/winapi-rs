@@ -14,59 +14,59 @@ build = "build.rs"
 [features]
 std = []
 everything = [ "headers", "libraries" ]
-headers = ["headers.shared", "headers.um", "headers.vc"]
-"headers.shared" = [
-    "shared.basetsd",
-    "shared.bcrypt",
-    "shared.cderr",
-    "shared.d3d9caps",
-    "shared.d3d9types",
-    "shared.guiddef",
-    "shared.minwindef",
-    "shared.ntdef",
-    "shared.ntstatus",
-    "shared.rpcndr",
-    "shared.windef",
-    "shared.wtypesbase"
+headers = ["headers-shared", "headers-um", "headers-vc"]
+"headers-shared" = [
+    "shared-basetsd",
+    "shared-bcrypt",
+    "shared-cderr",
+    "shared-d3d9caps",
+    "shared-d3d9types",
+    "shared-guiddef",
+    "shared-minwindef",
+    "shared-ntdef",
+    "shared-ntstatus",
+    "shared-rpcndr",
+    "shared-windef",
+    "shared-wtypesbase"
 ]
-"shared.basetsd" = []
-"shared.bcrypt" = ["shared.minwindef", "um.winnt"]
-"shared.cderr" = ["shared.minwindef"]
-"shared.d3d9caps" = ["shared.d3d9types", "shared.guiddef", "shared.minwindef"]
-"shared.d3d9types" = ["shared.basetsd", "shared.guiddef", "shared.minwindef", "shared.windef"]
-"shared.guiddef" = []
-"shared.minwindef" = ["shared.basetsd", "shared.ntdef"]
-"shared.ntdef" = ["shared.basetsd"]
-"shared.ntstatus" = ["shared.ntdef"]
-"shared.rpcndr" = []
-"shared.windef" = ["shared.minwindef", "um.winnt"]
-"shared.wtypesbase" = ["shared.minwindef", "shared.rpcndr", "um.winnt"]
-"headers.um" = [
-    "um.cguid",
-    "um.combaseapi",
-    "um.consoleapi",
-    "um.minwinbase",
-    "um.objidlbase",
-    "um.unknwnbase",
-    "um.wincon",
-    "um.wingdi",
-    "um.winnt"
+"shared-basetsd" = []
+"shared-bcrypt" = ["shared-minwindef", "um-winnt"]
+"shared-cderr" = ["shared-minwindef"]
+"shared-d3d9caps" = ["shared-d3d9types", "shared-guiddef", "shared-minwindef", "um-winnt"]
+"shared-d3d9types" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-winnt", "shared-windef"]
+"shared-guiddef" = []
+"shared-minwindef" = ["shared-basetsd", "shared-ntdef"]
+"shared-ntdef" = ["shared-basetsd"]
+"shared-ntstatus" = ["shared-ntdef"]
+"shared-rpcndr" = []
+"shared-windef" = ["shared-minwindef", "um-winnt"]
+"shared-wtypesbase" = ["shared-minwindef", "shared-rpcndr", "um-winnt"]
+"headers-um" = [
+    "um-cguid",
+    "um-combaseapi",
+    "um-consoleapi",
+    "um-minwinbase",
+    "um-objidlbase",
+    "um-unknwnbase",
+    "um-wincon",
+    "um-wingdi",
+    "um-winnt"
 ]
-"um.cguid" = ["shared.guiddef"]
-"um.combaseapi" = ["shared.basetsd", "shared.minwindef", "shared.wtypesbase", "um.objidlbase"]
-"um.consoleapi" = ["shared.minwindef", "um.wincon", "um.winnt"]
-"um.minwinbase" = ["shared.ntstatus"]
-"um.objidlbase" = ["shared.guiddef", "shared.minwindef", "shared.wtypesbase", "um.unknwnbase", "um.winnt"]
-"um.unknwnbase" = ["shared.guiddef", "shared.minwindef", "um.winnt"]
-"um.wincon" = ["shared.minwindef", "shared.windef", "um.minwinbase", "um.wingdi", "um.winnt"]
-"um.wingdi" = ["shared.basetsd", "shared.minwindef", "shared.windef", "um.winnt"]
-"um.winnt" = ["shared.basetsd", "shared.guiddef", "shared.minwindef", "vc.excpt"]
-"headers.vc" = [
-    "vc.excpt",
-    "vc.vcruntime"
+"um-cguid" = ["shared-guiddef"]
+"um-combaseapi" = ["shared-basetsd", "shared-minwindef", "shared-wtypesbase", "um-objidlbase", "ole32"]
+"um-consoleapi" = ["shared-minwindef", "um-wincon", "um-winnt", "kernel32"]
+"um-minwinbase" = ["shared-ntstatus"]
+"um-objidlbase" = ["shared-guiddef", "shared-minwindef", "shared-wtypesbase", "um-unknwnbase", "um-winnt"]
+"um-unknwnbase" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
+"um-wincon" = ["shared-minwindef", "shared-windef", "um-minwinbase", "um-wingdi", "um-winnt", "kernel32"]
+"um-wingdi" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-winnt"]
+"um-winnt" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "vc-excpt"]
+"headers-vc" = [
+    "vc-excpt",
+    "vc-vcruntime"
 ]
-"vc.excpt" = []
-"vc.vcruntime" = []
+"vc-excpt" = []
+"vc-vcruntime" = []
 libraries = [
     "kernel32",
     "ole32"

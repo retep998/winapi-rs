@@ -5,17 +5,13 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Base Component Object Model defintions.
-#![cfg(feature = "um.combaseapi")]
 use shared::basetsd::UINT64;
 use shared::minwindef::DWORD;
 use shared::wtypesbase::{
     CLSCTX, CLSCTX_INPROC_HANDLER, CLSCTX_INPROC_SERVER, CLSCTX_LOCAL_SERVER, CLSCTX_REMOTE_SERVER,
 };
-#[cfg(feature = "ole32")]
-IFDEF!{
 use um::objidlbase::LPMALLOC;
 use um::winnt::HRESULT;
-}
 pub const CLSCTX_INPROC: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER;
 pub const CLSCTX_ALL: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER | CLSCTX_LOCAL_SERVER
     | CLSCTX_REMOTE_SERVER;

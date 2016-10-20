@@ -6,7 +6,6 @@
 // except according to those terms.
 // Done as of 10.0.14393.0
 // Some of these definitions are commented out because I could not find their value
-#![cfg(feature = "um.cguid")]
 use shared::guiddef::GUID;
 DEFINE_GUID!{GUID_NULL,
     0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}

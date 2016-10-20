@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! GDI procedure declarations, constant definitions and macros
-#![cfg(feature = "um.wingdi")]
 use ctypes::{ c_char, c_int, c_long, c_short, c_ushort };
 use shared::basetsd::ULONG_PTR;
 use shared::minwindef::{ BOOL, BYTE, DWORD, FLOAT, HMETAFILE, LPARAM, LPVOID, MAX_PATH, UINT, ULONG, USHORT, WORD };

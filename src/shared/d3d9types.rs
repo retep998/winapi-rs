@@ -6,7 +6,6 @@
 // except according to those terms.
 //! Direct3D capabilities include file
 // Done as of 10.0.14393.0
-#![cfg(feature = "shared.d3d9types")]
 use ctypes::{ c_char, c_float, c_void };
 use shared::basetsd::UINT64;
 use shared::guiddef::GUID;

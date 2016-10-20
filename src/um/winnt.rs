@@ -6,7 +6,6 @@
 // except according to those terms.
 //! This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed
 //! through the Win32 API.
-#![cfg(feature = "um.winnt")]
 use ctypes::{ __int64, __uint64, c_char, c_int, c_long, c_short, c_ulong, c_void, wchar_t };
 use shared::basetsd::{ DWORD64, KAFFINITY, LONG_PTR, PDWORD64, SIZE_T, ULONG_PTR };
 use shared::guiddef::{ CLSID, GUID };

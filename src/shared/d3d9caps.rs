@@ -6,7 +6,6 @@
 // except according to those terms.
 //! Direct3D capabilities include file
 // Done as of 10.0.14393.0
-#![cfg(feature = "shared.d3d9caps")]
 use ctypes::c_float;
 use shared::d3d9types::D3DDEVTYPE;
 use shared::guiddef::GUID;

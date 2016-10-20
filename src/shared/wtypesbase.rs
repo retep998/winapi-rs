@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 // Done as of 10.0.14393.0
-#![cfg(feature = "shared.wtypesbase")]
 use ctypes::{ c_double, c_short, c_uchar, c_ushort };
 use shared::minwindef::{ BYTE, DWORD };
 use shared::rpcndr::{ boolean, byte, hyper };

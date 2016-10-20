@@ -6,7 +6,6 @@
 // except according to those terms.
 //! Basic Windows Type Definitions
 // Done as of 10.0.14393.0
-#![cfg(feature = "shared.windef")]
 use ctypes::c_void;
 use shared::minwindef::{ DWORD, HFILE, WORD };
 use um::winnt::{ LONG, SHORT };

@@ -157,8 +157,7 @@ macro_rules! RIDL {
         fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
     ),+}) => (
         impl $interface {
-            #[inline]
-            $(pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
+            $(#[inline] pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
                 ((*self.lpVtbl).$method)(self $(,$p)*)
             })+
         }

@@ -6,7 +6,6 @@
 // except according to those terms.
 //! Basic Windows Type Definitions for minwin partition
 // Done as of 10.0.14393.0
-#![cfg(feature = "shared.minwindef")]
 use ctypes::{ c_char, c_float, c_int, c_long, c_uchar, c_uint,  c_ulong, c_ushort, c_void };
 use shared::basetsd::{ LONG_PTR, UINT_PTR };
 use shared::ntdef::{ HANDLE, LONG };

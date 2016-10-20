@@ -7,19 +7,12 @@
 //! This module contains the public data structures, data types, and procedures exported by the NT
 //! console subsystem.
 // Done as of 10.0.14393.0
-#![cfg(feature = "um.wincon")]
 use ctypes::c_void;
-use shared::minwindef::{ BOOL, DWORD, UINT, ULONG, WORD };
-use shared::windef::COLORREF;
-use um::wingdi::LF_FACESIZE;
-use um::winnt::{ CHAR, SHORT, WCHAR };
-#[cfg(feature = "kernel32")]
-IFDEF!{
-use shared::minwindef::{ LPDWORD, LPVOID, LPWORD };
-use shared::windef::HWND;
+use shared::minwindef::{ BOOL, DWORD, LPDWORD, LPVOID, LPWORD, UINT, ULONG, WORD };
+use shared::windef::{ COLORREF, HWND };
 use um::minwinbase::SECURITY_ATTRIBUTES;
-use um::winnt::{ HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR };
-}
+use um::wingdi::LF_FACESIZE;
+use um::winnt::{ CHAR, HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, SHORT, WCHAR };
 STRUCT!{struct COORD {
     X: SHORT,
     Y: SHORT,

@@ -5,12 +5,12 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Headers for user mode only
-pub mod cguid;
-pub mod combaseapi;
-pub mod consoleapi;
-pub mod minwinbase;
-pub mod objidlbase;
-pub mod unknwnbase;
-pub mod wincon;
-pub mod wingdi;
-pub mod winnt;
+#[cfg(feature = "um-cguid")] pub mod cguid;
+#[cfg(feature = "um-combaseapi")] pub mod combaseapi;
+#[cfg(feature = "um-consoleapi")] pub mod consoleapi;
+#[cfg(feature = "um-minwinbase")] pub mod minwinbase;
+#[cfg(feature = "um-objidlbase")] pub mod objidlbase;
+#[cfg(feature = "um-unknwnbase")] pub mod unknwnbase;
+#[cfg(feature = "um-wincon")] pub mod wincon;
+#[cfg(feature = "um-wingdi")] pub mod wingdi;
+#[cfg(feature = "um-winnt")] pub mod winnt;

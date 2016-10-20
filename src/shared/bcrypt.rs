@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Cryptographic Primitive API Prototypes and Definitions
-#![cfg(feature = "shared.bcrypt")]
 use shared::minwindef::{ PUCHAR, UCHAR, ULONG, USHORT };
 use um::winnt::{ LONG, LPCWSTR, LPWSTR, PVOID, PWSTR, ULONGLONG };
 pub type NTSTATUS = LONG;

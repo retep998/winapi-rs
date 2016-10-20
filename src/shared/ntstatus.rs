@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Constant definitions for the NTSTATUS values.
-#![cfg(feature = "shared.ntstatus")]
 use shared::ntdef::NTSTATUS;
 pub const STATUS_WAIT_0: NTSTATUS = 0x00000000;
 pub const FACILITY_VSM: NTSTATUS = 0x45;

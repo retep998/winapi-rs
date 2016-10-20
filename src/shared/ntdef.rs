@@ -5,9 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Type definitions for the basic types.
-#![cfg(feature = "shared.ntdef")]
 use ctypes::{
-    __int64, c_char, c_double, c_int, c_long, c_schar, c_short, c_uchar, c_ulong, c_ushort, c_void, wchar_t
+    __int64, __uint64, c_char, c_double, c_int, c_long, c_schar, c_short, c_uchar, c_ulong, c_ushort, c_void, wchar_t
 };
 use shared::basetsd::KAFFINITY;
 #[cfg(target_arch = "x86")]
@@ -156,4 +155,26 @@ pub type PLOGICAL = *mut ULONG;
 pub type NTSTATUS = LONG;
 pub type PNTSTATUS = *mut NTSTATUS;
 pub type PCNTSTATUS = *const NTSTATUS;
+// NT_SUCCESS and stuff
+pub const APPLICATION_ERROR_MASK: HRESULT = 0x20000000;
+pub const ERROR_SEVERITY_SUCCESS: HRESULT = 0x00000000;
+pub const ERROR_SEVERITY_INFORMATIONAL: HRESULT = 0x40000000;
+pub const ERROR_SEVERITY_WARNING: HRESULT = 0x80000000u32 as i32;
+pub const ERROR_SEVERITY_ERROR: HRESULT = 0xC0000000u32 as i32;
+// Weird TIME definitions
+STRUCT!{struct FLOAT128 {
+    LowPart: __int64,
+    HighPart: __int64,
+}}
+pub type PFLOAT128 = *mut FLOAT128;
+pub type LONGLONG = __int64;
+pub type ULONGLONG = __uint64;
+pub const MAXLONGLONG: LONGLONG = 0x7fffffffffffffff;
+pub type PLONGLONG = *mut LONGLONG;
+pub type PULONGLONG = *mut ULONGLONG;
+pub type USN = LONGLONG;
+pub type LARGE_INTEGER = LONGLONG;
+pub type PLARGE_INTEGER = *mut LARGE_INTEGER;
+pub type ULARGE_INTEGER = ULONGLONG;
+pub type PULARGE_INTEGER= *mut ULARGE_INTEGER;
 // TODO the rest
