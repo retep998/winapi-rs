@@ -1025,6 +1025,38 @@ STRUCT!{struct WINDOWPLACEMENT {
 }}
 pub type PWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
 pub type LPWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
+STRUCT!{struct WNDCLASSEXA {
+    cbSize: ::UINT,
+    style: ::UINT,
+    lpfnWndProc: WNDPROC,
+    cbClsExtra: ::c_int,
+    cbWndExtra: ::c_int,
+    hInstance: ::HINSTANCE,
+    hIcon: ::HICON,
+    hCursor: ::HCURSOR,
+    hbrBackground: ::HBRUSH,
+    lpszMenuName: ::LPCSTR,
+    lpszClassName: ::LPCSTR,
+    hIconSm: ::HICON,
+}}
+pub type PWNDCLASSEXA = *mut WNDCLASSEXA;
+pub type NPWNDCLASSEXA = *mut WNDCLASSEXA;
+pub type LPWNDCLASSEXA = *mut WNDCLASSEXA;
+STRUCT!{struct WNDCLASSA {
+    style: ::UINT,
+    lpfnWndProc: WNDPROC,
+    cbClsExtra: ::c_int,
+    cbWndExtra: ::c_int,
+    hInstance: ::HINSTANCE,
+    hIcon: ::HICON,
+    hCursor: ::HCURSOR,
+    hbrBackground: ::HBRUSH,
+    lpszMenuName: ::LPCSTR,
+    lpszClassName: ::LPCSTR,
+}}
+pub type PWNDCLASSA = *mut WNDCLASSA;
+pub type NPWNDCLASSA = *mut WNDCLASSA;
+pub type LPWNDCLASSA = *mut WNDCLASSA;
 STRUCT!{struct WNDCLASSEXW {
     cbSize: ::UINT,
     style: ::UINT,
