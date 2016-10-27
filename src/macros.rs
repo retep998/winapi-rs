@@ -233,11 +233,19 @@ macro_rules! STRUCT {
     };
 }
 macro_rules! EXTERN {
-    ($lib:tt $cconv:tt fn $func:ident(
+    (stdcall fn $func:ident(
         $($p:ident: $t:ty),*
     ) -> $ret:ty) => (EXTERN!{@fix
-        #[cfg(feature = $lib)]
-        extern $cconv {
+        extern "stdcall" {
+            pub fn $func(
+                $($p: $t),*
+            ) -> $ret;
+        }
+    });
+    (cdecl fn $func:ident(
+        $($p:ident: $t:ty),*
+    ) -> $ret:ty) => (EXTERN!{@fix
+        extern "cdecl" {
             pub fn $func(
                 $($p: $t),*
             ) -> $ret;

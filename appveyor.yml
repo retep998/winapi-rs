@@ -13,7 +13,7 @@ install:
   - rustc -vV
   - cargo -vV
 build_script:
-  - cargo build --features headers
+  - cargo build
   - cargo build --features everything
 test_script:
   - cargo test --features everything

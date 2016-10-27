@@ -28,7 +28,7 @@ ENUM!{enum REGCLS {
 ENUM!{enum COINITBASE {
     COINITBASE_MULTITHREADED = 0x0,
 }}
-EXTERN!{"ole32" "stdcall" fn CoGetMalloc(
+EXTERN!{stdcall fn CoGetMalloc(
     dwMemContext: DWORD,
     ppMalloc: *mut LPMALLOC
 ) -> HRESULT}

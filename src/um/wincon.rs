@@ -198,109 +198,109 @@ pub const ENABLE_WRAP_AT_EOL_OUTPUT: DWORD = 0x0002;
 pub const ENABLE_VIRTUAL_TERMINAL_PROCESSING: DWORD = 0x0004;
 pub const DISABLE_NEWLINE_AUTO_RETURN: DWORD = 0x0008;
 pub const ENABLE_LVB_GRID_WORLDWIDE: DWORD = 0x0010;
-EXTERN!{"kernel32" "stdcall" fn PeekConsoleInputW(
+EXTERN!{stdcall fn PeekConsoleInputW(
     hConsoleInput: HANDLE,
     lpBuffer: PINPUT_RECORD,
     nLength: DWORD,
     lpNumberOfEventsRead: LPDWORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn WriteConsoleInputA(
+EXTERN!{stdcall fn WriteConsoleInputA(
     hConsoleInput: HANDLE,
     lpBuffer: *const INPUT_RECORD,
     nLength: DWORD,
     lpNumberOfEventsWritten: LPDWORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn WriteConsoleInputW(
+EXTERN!{stdcall fn WriteConsoleInputW(
     hConsoleInput: HANDLE,
     lpBuffer: *const INPUT_RECORD,
     nLength: DWORD,
     lpNumberOfEventsWritten: LPDWORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn ReadConsoleOutputA(
+EXTERN!{stdcall fn ReadConsoleOutputA(
     hConsoleOutput: HANDLE,
     lpBuffer: PCHAR_INFO,
     dwBufferSize: COORD,
     dwBufferCoord: COORD,
     lpReadRegion: PSMALL_RECT
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn ReadConsoleOutputW(
+EXTERN!{stdcall fn ReadConsoleOutputW(
     hConsoleOutput: HANDLE,
     lpBuffer: PCHAR_INFO,
     dwBufferSize: COORD,
     dwBufferCoord: COORD,
     lpReadRegion: PSMALL_RECT
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn WriteConsoleOutputA(
+EXTERN!{stdcall fn WriteConsoleOutputA(
     hConsoleOutput: HANDLE,
     lpBuffer: *const CHAR_INFO,
     dwBufferSize: COORD,
     dwBufferCoord: COORD,
     lpWriteRegion: PSMALL_RECT
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn WriteConsoleOutputW(
+EXTERN!{stdcall fn WriteConsoleOutputW(
     hConsoleOutput: HANDLE,
     lpBuffer: *const CHAR_INFO,
     dwBufferSize: COORD,
     dwBufferCoord: COORD,
     lpWriteRegion: PSMALL_RECT
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn ReadConsoleOutputCharacterA(
+EXTERN!{stdcall fn ReadConsoleOutputCharacterA(
     hConsoleOutput: HANDLE,
     lpCharacter: LPSTR,
     nLength: DWORD,
     dwReadCoord: COORD,
     lpNumberOfCharsRead: LPDWORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn ReadConsoleOutputCharacterW(
+EXTERN!{stdcall fn ReadConsoleOutputCharacterW(
     hConsoleOutput: HANDLE,
     lpCharacter: LPWSTR,
     nLength: DWORD,
     dwReadCoord: COORD,
     lpNumberOfCharsRead: LPDWORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn ReadConsoleOutputAttribute(
+EXTERN!{stdcall fn ReadConsoleOutputAttribute(
     hConsoleOutput: HANDLE,
     lpAttribute: LPWORD,
     nLength: DWORD,
     dwReadCoord: COORD,
     lpNumberOfAttrsRead: LPDWORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn WriteConsoleOutputCharacterA(
+EXTERN!{stdcall fn WriteConsoleOutputCharacterA(
     hConsoleOutput: HANDLE,
     lpCharacter: LPCSTR,
     nLength: DWORD,
     dwWriteCoord: COORD,
     lpNumberOfCharsWritten: LPDWORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn WriteConsoleOutputCharacterW(
+EXTERN!{stdcall fn WriteConsoleOutputCharacterW(
     hConsoleOutput: HANDLE,
     lpCharacter: LPCWSTR,
     nLength: DWORD,
     dwWriteCoord: COORD,
     lpNumberOfCharsWritten: LPDWORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn WriteConsoleOutputAttribute(
+EXTERN!{stdcall fn WriteConsoleOutputAttribute(
     hConsoleOutput: HANDLE,
     lpAttribute: *const WORD,
     nLength: DWORD,
     dwWriteCoord: COORD,
     lpNumberOfAttrsWritten: LPDWORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn FillConsoleOutputCharacterA(
+EXTERN!{stdcall fn FillConsoleOutputCharacterA(
     hConsoleOutput: HANDLE,
     cCharacter: CHAR,
     nLength: DWORD,
     dwWriteCoord: COORD,
     lpNumberOfCharsWritten: LPDWORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn FillConsoleOutputCharacterW(
+EXTERN!{stdcall fn FillConsoleOutputCharacterW(
     hConsoleOutput: HANDLE,
     cCharacter: WCHAR,
     nLength: DWORD,
     dwWriteCoord: COORD,
     lpNumberOfCharsWritten: LPDWORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn FillConsoleOutputAttribute(
+EXTERN!{stdcall fn FillConsoleOutputAttribute(
     hConsoleOutput: HANDLE,
     wAttribute: WORD,
     nLength: DWORD,
@@ -309,126 +309,126 @@ EXTERN!{"kernel32" "stdcall" fn FillConsoleOutputAttribute(
 ) -> BOOL}
 pub const CONSOLE_REAL_OUTPUT_HANDLE: *mut c_void = -2isize as *mut c_void;
 pub const CONSOLE_REAL_INPUT_HANDLE: *mut c_void = -3isize as *mut c_void;
-EXTERN!{"kernel32" "stdcall" fn GetConsoleScreenBufferInfo(
+EXTERN!{stdcall fn GetConsoleScreenBufferInfo(
     hConsoleOutput: HANDLE,
     lpConsoleScreenBufferInfo: PCONSOLE_SCREEN_BUFFER_INFO
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleScreenBufferInfoEx(
+EXTERN!{stdcall fn GetConsoleScreenBufferInfoEx(
     hConsoleOutput: HANDLE,
     lpConsoleScreenBufferInfoEx: PCONSOLE_SCREEN_BUFFER_INFOEX
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn SetConsoleScreenBufferInfoEx(
+EXTERN!{stdcall fn SetConsoleScreenBufferInfoEx(
     hConsoleOutput: HANDLE,
     lpConsoleScreenBufferInfoEx: PCONSOLE_SCREEN_BUFFER_INFOEX
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn GetLargestConsoleWindowSize(
+EXTERN!{stdcall fn GetLargestConsoleWindowSize(
     hConsoleOutput: HANDLE
 ) -> COORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleCursorInfo(
+EXTERN!{stdcall fn GetConsoleCursorInfo(
     hConsoleOutput: HANDLE,
     lpConsoleCursorInfo: PCONSOLE_CURSOR_INFO
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn GetCurrentConsoleFont(
+EXTERN!{stdcall fn GetCurrentConsoleFont(
     hConsoleOutput: HANDLE,
     bMaximumWindow: BOOL,
     lpConsoleCurrentFont: PCONSOLE_FONT_INFO
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn GetCurrentConsoleFontEx(
+EXTERN!{stdcall fn GetCurrentConsoleFontEx(
     hConsoleOutput: HANDLE,
     bMaximumWindow: BOOL,
     lpConsoleCurrentFontEx: PCONSOLE_FONT_INFOEX
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn SetCurrentConsoleFontEx(
+EXTERN!{stdcall fn SetCurrentConsoleFontEx(
     hConsoleOutput: HANDLE,
     bMaximumWindow: BOOL,
     lpConsoleCurrentFontEx: PCONSOLE_FONT_INFOEX
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleHistoryInfo(
+EXTERN!{stdcall fn GetConsoleHistoryInfo(
     lpConsoleHistoryInfo: PCONSOLE_HISTORY_INFO
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn SetConsoleHistoryInfo(
+EXTERN!{stdcall fn SetConsoleHistoryInfo(
     lpConsoleHistoryInfo: PCONSOLE_HISTORY_INFO
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleFontSize(
+EXTERN!{stdcall fn GetConsoleFontSize(
     hConsoleOutput: HANDLE,
     nFont: DWORD
 ) -> COORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleSelectionInfo(
+EXTERN!{stdcall fn GetConsoleSelectionInfo(
     lpConsoleSelectionInfo: PCONSOLE_SELECTION_INFO
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn GetNumberOfConsoleMouseButtons(
+EXTERN!{stdcall fn GetNumberOfConsoleMouseButtons(
     lpNumberOfMouseButtons: LPDWORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn SetConsoleActiveScreenBuffer(
+EXTERN!{stdcall fn SetConsoleActiveScreenBuffer(
     hConsoleOutput: HANDLE
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn FlushConsoleInputBuffer(
+EXTERN!{stdcall fn FlushConsoleInputBuffer(
     hConsoleInput: HANDLE
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn SetConsoleScreenBufferSize(
+EXTERN!{stdcall fn SetConsoleScreenBufferSize(
     hConsoleOutput: HANDLE,
     dwSize: COORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn SetConsoleCursorPosition(
+EXTERN!{stdcall fn SetConsoleCursorPosition(
     hConsoleOutput: HANDLE,
     dwCursorPosition: COORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn SetConsoleCursorInfo(
+EXTERN!{stdcall fn SetConsoleCursorInfo(
     hConsoleOutput: HANDLE,
     lpConsoleCursorInfo: *const CONSOLE_CURSOR_INFO
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn ScrollConsoleScreenBufferA(
+EXTERN!{stdcall fn ScrollConsoleScreenBufferA(
     hConsoleOutput: HANDLE,
     lpScrollRectangle: *const SMALL_RECT,
     lpClipRectangle: *const SMALL_RECT,
     dwDestinationOrigin: COORD,
     lpFill: *const CHAR_INFO
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn ScrollConsoleScreenBufferW(
+EXTERN!{stdcall fn ScrollConsoleScreenBufferW(
     hConsoleOutput: HANDLE,
     lpScrollRectangle: *const SMALL_RECT,
     lpClipRectangle: *const SMALL_RECT,
     dwDestinationOrigin: COORD,
     lpFill: *const CHAR_INFO
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn SetConsoleWindowInfo(
+EXTERN!{stdcall fn SetConsoleWindowInfo(
     hConsoleOutput: HANDLE,
     bAbsolute: BOOL,
     lpConsoleWindow: *const SMALL_RECT
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn SetConsoleTextAttribute(
+EXTERN!{stdcall fn SetConsoleTextAttribute(
     hConsoleOutput: HANDLE,
     wAttributes: WORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn GenerateConsoleCtrlEvent(
+EXTERN!{stdcall fn GenerateConsoleCtrlEvent(
     dwCtrlEvent: DWORD,
     dwProcessGroupId: DWORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn FreeConsole() -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn AttachConsole(
+EXTERN!{stdcall fn FreeConsole() -> BOOL}
+EXTERN!{stdcall fn AttachConsole(
     dwProcessId: DWORD
 ) -> BOOL}
 pub const ATTACH_PARENT_PROCESS: DWORD = 0xFFFFFFFF;
-EXTERN!{"kernel32" "stdcall" fn GetConsoleTitleA(
+EXTERN!{stdcall fn GetConsoleTitleA(
     lpConsoleTitle: LPSTR,
     nSize: DWORD
 ) -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleTitleW(
+EXTERN!{stdcall fn GetConsoleTitleW(
     lpConsoleTitle: LPWSTR,
     nSize: DWORD
 ) -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleOriginalTitleA(
+EXTERN!{stdcall fn GetConsoleOriginalTitleA(
     lpConsoleTitle: LPSTR,
     nSize: DWORD
 ) -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleOriginalTitleW(
+EXTERN!{stdcall fn GetConsoleOriginalTitleW(
     lpConsoleTitle: LPWSTR,
     nSize: DWORD
 ) -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn SetConsoleTitleA(
+EXTERN!{stdcall fn SetConsoleTitleA(
     lpConsoleTitle: LPCSTR
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn SetConsoleTitleW(
+EXTERN!{stdcall fn SetConsoleTitleW(
     lpConsoleTitle: LPCWSTR
 ) -> BOOL}
 STRUCT!{struct CONSOLE_READCONSOLE_CONTROL {
@@ -439,81 +439,81 @@ STRUCT!{struct CONSOLE_READCONSOLE_CONTROL {
 }}
 pub type PCONSOLE_READCONSOLE_CONTROL = *mut CONSOLE_READCONSOLE_CONTROL;
 pub const CONSOLE_TEXTMODE_BUFFER: DWORD = 1;
-EXTERN!{"kernel32" "stdcall" fn CreateConsoleScreenBuffer(
+EXTERN!{stdcall fn CreateConsoleScreenBuffer(
     dwDesiredAccess: DWORD,
     dwShareMode: DWORD,
     lpSecurityAttributes: *const SECURITY_ATTRIBUTES,
     dwFlags: DWORD,
     lpScreenBufferData: LPVOID
 ) -> HANDLE}
-EXTERN!{"kernel32" "stdcall" fn SetConsoleCP(
+EXTERN!{stdcall fn SetConsoleCP(
     wCodePageID: UINT
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn SetConsoleOutputCP(
+EXTERN!{stdcall fn SetConsoleOutputCP(
     wCodePageID: UINT
 ) -> BOOL}
 pub const CONSOLE_FULLSCREEN: DWORD = 1;
 pub const CONSOLE_FULLSCREEN_HARDWARE: DWORD = 2;
-EXTERN!{"kernel32" "stdcall" fn GetConsoleDisplayMode(
+EXTERN!{stdcall fn GetConsoleDisplayMode(
     lpModeFlags: LPDWORD
 ) -> BOOL}
 pub const CONSOLE_FULLSCREEN_MODE: DWORD = 1;
 pub const CONSOLE_WINDOWED_MODE: DWORD = 2;
-EXTERN!{"kernel32" "stdcall" fn SetConsoleDisplayMode(
+EXTERN!{stdcall fn SetConsoleDisplayMode(
     hConsoleOutput: HANDLE,
     dwFlags: DWORD,
     lpNewScreenBufferDimensions: PCOORD
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleWindow() -> HWND}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleProcessList(
+EXTERN!{stdcall fn GetConsoleWindow() -> HWND}
+EXTERN!{stdcall fn GetConsoleProcessList(
     lpdwProcessList: LPDWORD,
     dwProcessCount: DWORD
 ) -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn AddConsoleAliasA(
+EXTERN!{stdcall fn AddConsoleAliasA(
     Source: LPSTR,
     Target: LPSTR,
     ExeName: LPSTR
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn AddConsoleAliasW(
+EXTERN!{stdcall fn AddConsoleAliasW(
     Source: LPWSTR,
     Target: LPWSTR,
     ExeName: LPWSTR
 ) -> BOOL}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleAliasA(
+EXTERN!{stdcall fn GetConsoleAliasA(
     Source: LPSTR,
     TargetBuffer: LPSTR,
     TargetBufferLength: DWORD,
     ExeName: LPSTR
 ) -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleAliasW(
+EXTERN!{stdcall fn GetConsoleAliasW(
     Source: LPWSTR,
     TargetBuffer: LPWSTR,
     TargetBufferLength: DWORD,
     ExeName: LPWSTR
 ) -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleAliasesLengthA(
+EXTERN!{stdcall fn GetConsoleAliasesLengthA(
     ExeName: LPSTR
 ) -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleAliasesLengthW(
+EXTERN!{stdcall fn GetConsoleAliasesLengthW(
     ExeName: LPWSTR
 ) -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleAliasExesLengthA() -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleAliasExesLengthW() -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleAliasesA(
+EXTERN!{stdcall fn GetConsoleAliasExesLengthA() -> DWORD}
+EXTERN!{stdcall fn GetConsoleAliasExesLengthW() -> DWORD}
+EXTERN!{stdcall fn GetConsoleAliasesA(
     AliasBuffer: LPSTR,
     AliasBufferLength: DWORD,
     ExeName: LPSTR
 ) -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleAliasesW(
+EXTERN!{stdcall fn GetConsoleAliasesW(
     AliasBuffer: LPWSTR,
     AliasBufferLength: DWORD,
     ExeName: LPWSTR
 ) -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleAliasExesA(
+EXTERN!{stdcall fn GetConsoleAliasExesA(
     ExeNameBuffer: LPSTR,
     ExeNameBufferLength: DWORD
 ) -> DWORD}
-EXTERN!{"kernel32" "stdcall" fn GetConsoleAliasExesW(
+EXTERN!{stdcall fn GetConsoleAliasExesW(
     ExeNameBuffer: LPWSTR,
     ExeNameBufferLength: DWORD
 ) -> DWORD}
