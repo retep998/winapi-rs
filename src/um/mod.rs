@@ -9,6 +9,7 @@
 #[cfg(feature = "um-combaseapi")] pub mod combaseapi;
 #[cfg(feature = "um-consoleapi")] pub mod consoleapi;
 #[cfg(feature = "um-minwinbase")] pub mod minwinbase;
+#[cfg(feature = "um-ncrypt")] pub mod ncrypt;
 #[cfg(feature = "um-objidlbase")] pub mod objidlbase;
 #[cfg(feature = "um-unknwnbase")] pub mod unknwnbase;
 #[cfg(feature = "um-wincon")] pub mod wincon;

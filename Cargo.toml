@@ -31,6 +31,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
     "shared-ntdef",
     "shared-ntstatus",
     "shared-rpcndr",
+    "shared-sspi",
     "shared-windef",
     "shared-wtypesbase"
 ]
@@ -44,6 +45,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
 "shared-ntdef" = ["shared-basetsd"]
 "shared-ntstatus" = ["shared-ntdef"]
 "shared-rpcndr" = []
+"shared-sspi" = ["shared-ntdef"]
 "shared-windef" = ["shared-minwindef", "um-winnt"]
 "shared-wtypesbase" = ["shared-minwindef", "shared-rpcndr", "um-winnt"]
 "headers-um" = [
@@ -51,6 +53,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
     "um-combaseapi",
     "um-consoleapi",
     "um-minwinbase",
+    "um-ncrypt",
     "um-objidlbase",
     "um-unknwnbase",
     "um-wincon",
@@ -61,6 +64,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
 "um-combaseapi" = ["shared-basetsd", "shared-minwindef", "shared-wtypesbase", "um-objidlbase", "ole32"]
 "um-consoleapi" = ["shared-minwindef", "um-wincon", "um-winnt", "kernel32"]
 "um-minwinbase" = ["shared-ntstatus"]
+"um-ncrypt" = ["shared-basetsd", "shared-sspi", "ncrypt"]
 "um-objidlbase" = ["shared-guiddef", "shared-minwindef", "shared-wtypesbase", "um-unknwnbase", "um-winnt"]
 "um-unknwnbase" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
 "um-wincon" = ["shared-minwindef", "shared-windef", "um-minwinbase", "um-wingdi", "um-winnt", "kernel32"]
@@ -74,7 +78,9 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
 "vc-vcruntime" = []
 libraries = [
     "kernel32",
+    "ncrypt",
     "ole32"
 ]
 "kernel32" = []
 "ole32" = []
+"ncrypt" = []

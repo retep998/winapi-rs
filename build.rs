@@ -7,7 +7,8 @@
 use std::env::var;
 const LIBS: &'static [&'static str] = &[
     "kernel32",
-    "ole32"
+    "ncrypt",
+    "ole32",
 ];
 fn main() {
     let target = var("TARGET").unwrap();

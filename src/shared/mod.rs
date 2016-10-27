@@ -15,5 +15,6 @@
 #[cfg(feature = "shared-ntstatus")] pub mod ntstatus;
 #[cfg(feature = "shared-ntdef")] pub mod ntdef;
 #[cfg(feature = "shared-rpcndr")] pub mod rpcndr;
+#[cfg(feature = "shared-sspi")]  pub mod sspi;
 #[cfg(feature = "shared-windef")] pub mod windef;
 #[cfg(feature = "shared-wtypesbase")] pub mod wtypesbase;
