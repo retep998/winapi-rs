@@ -5,16 +5,16 @@
 ##Line length
 
 * The maximum line length for `winapi-rs` is 99, and is strictly enforced.
-* Avoid line breaks when possible, but if you cannot make it fit, add line breaks as late as possible (for example, between 80 and 95).
+* Avoid line breaks when possible, but if you cannot make it fit, add line breaks as late as possible.
+* When breaking on binary operators, put the operator at the beginning of the new line.
 
 ##Functions
 
-* First parameter is the name of the library that the function is from.
-* Second parameter is the 32-bit calling convention.
+* First parameter is the 32-bit calling convention.
 * One parameter per line.
 
 ```Rust
-EXTERN!{"ole32" "stdcall" fn CoGetMalloc(
+EXTERN!{stdcall fn CoGetMalloc(
     dwMemContext: DWORD,
     ppMalloc: *mut LPMALLOC
 ) -> HRESULT}
