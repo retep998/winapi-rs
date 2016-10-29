@@ -6,7 +6,6 @@ rust:
   - nightly
 script:
   - cargo build
-  - cargo package
   - cargo test
   - cargo doc
 notifications:
