@@ -2,440 +2,223 @@
 // Licensed under the MIT License <LICENSE.md>
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
 //Terrible forward declarations that need to be filled in
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IContextMenu;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IContextMenu2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IContextMenu3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IExecuteCommand;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPersistFolder;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IRunnableTask;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellTaskScheduler;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IQueryCodePage;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPersistFolder2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPersistFolder3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPersistIDList;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IEnumIDList;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IEnumFullIDList;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFileSyncMergeHandler;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IObjectWithFolderEnumMode;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IParseAndCreateItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellFolder;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IEnumExtraSearch;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellFolder2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFolderViewOptions;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellView;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellView2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellView3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFolderView;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ISearchBoxInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFolderView2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFolderViewSettings;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPreviewHandlerVisuals;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IVisualProperties;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICommDlgBrowser;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICommDlgBrowser2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICommDlgBrowser3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IColumnManager;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFolderFilterSite;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFolderFilter;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IInputObjectSite;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IInputObject;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IInputObject2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellIcon;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellBrowser;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IProfferService;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellItem2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellItemImageFactory;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IUserAccountChangeCallback;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IEnumShellItems;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITransferAdviseSink;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITransferSource;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IEnumResources;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellItemResources;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITransferDestination;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IStreamAsync;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IStreamUnbufferedInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IInitializeWithItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IObjectWithSelection;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IObjectWithBackReferences;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPropertyUI;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICategoryProvider;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICategorizer;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDropTargetHelper;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDragSourceHelper;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDragSourceHelper2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellLinkA;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellLinkW;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellLinkDataList;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IResolveShellLink;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IActionProgressDialog;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IHWEventHandler;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IHWEventHandler2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IQueryCancelAutoPlay;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDynamicHWHandler;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IActionProgress;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellExtInit;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellPropSheetExt;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IRemoteComputer;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IQueryContinue;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IObjectWithCancelEvent;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IUserNotification;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IUserNotificationCallback;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IUserNotification2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IItemNameLimits;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ISearchFolderItemFactory;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IExtractImage;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IExtractImage2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IThumbnailHandlerFactory;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IParentAndItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDockingWindow;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDeskBand;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDeskBandInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDeskBand2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITaskbarList;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITaskbarList2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITaskbarList3;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITaskbarList4;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IStartMenuPinnedList;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICDBurn;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IWizardSite;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IWizardExtension;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IWebWizardExtension;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPublishingWizard;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFolderViewHost;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IExplorerBrowserEvents;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IExplorerBrowser;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IAccessibleObject;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IResultsFolder;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IEnumObjects;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IOperationsProgressDialog;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IIOCancelInformation;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFileOperation;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IObjectProvider;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INamespaceWalkCB;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INamespaceWalkCB2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INamespaceWalk;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IAutoCompleteDropDown;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IBandSite;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICDBurnExt;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IContextMenuSite;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IEnumReadyCallback;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IEnumerableView;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IInsertItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMenuBand;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFolderBandPriv;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IRegTreeItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IImageRecompress;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDeskBar;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMenuPopup;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFileIsInUse;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IApplicationAssociationRegistration;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IApplicationAssociationRegistrationUI;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDelegateFolder;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IBrowserFrameOptions;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INewWindowManager;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IAttachmentExecute;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellMenuCallback;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellMenu;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellRunDll;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IKnownFolder;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IKnownFolderManager;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ISharingConfigurationManager;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPreviousVersionsInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IRelatedItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IIdentityName;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDelegateItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICurrentItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITransferMediumItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IUseToBrowseItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDisplayItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IViewStateIdentityItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPreviewItem;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDestinationStreamFactory;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INewMenuClient;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IInitializeWithBindCtx;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INameSpaceTreeControl;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INameSpaceTreeControl2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INameSpaceTreeControlEvents;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INameSpaceTreeControlDropHandler;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INameSpaceTreeAccessible;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INameSpaceTreeControlCustomDraw;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct INameSpaceTreeControlFolderCapabilities;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPreviewHandler;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPreviewHandlerFrame;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITrayDeskBand;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IBandHost;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IExplorerPaneVisibility;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IContextMenuCB;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDefaultExtractIconInit;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IExplorerCommand;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IExplorerCommandState;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IInitializeCommand;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IEnumExplorerCommand;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IExplorerCommandProvider;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMarkupCallback;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IControlMarkup;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IInitializeNetworkFolder;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IOpenControlPanel;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IComputerInfoChangeNotify;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFileSystemBindData;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFileSystemBindData2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICustomDestinationList;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IApplicationDestinations;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IApplicationDocumentLists;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IObjectWithAppUserModelID;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IObjectWithProgID;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IUpdateIDList;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDesktopGadget;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDesktopWallpaper;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IHomeGroup;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IInitializeWithPropertyStore;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IOpenSearchSource;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IShellLibrary;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDefaultFolderMenuInitialize;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IApplicationActivationManager;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IAssocHandlerInvoker;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IAssocHandler;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IEnumAssocHandlers;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDataObjectProvider;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IDataTransferManagerInterop;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFrameworkInputPaneHandler;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IFrameworkInputPane;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IAccessibilityDockingServiceCallback;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IAccessibilityDockingService;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IAppVisibilityEvents;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IAppVisibility;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPackageExecutionStateChangeNotification;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPackageDebugSettings;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ISuspensionDependencyManager;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IExecuteCommandApplicationHostEnvironment;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IExecuteCommandHost;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IApplicationDesignModeSettings;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IApplicationDesignModeSettings2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ILaunchTargetMonitor;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ILaunchSourceViewSizePreference;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ILaunchTargetViewSizePreference;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ILaunchSourceAppUserModelId;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IInitializeWithWindow;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IHandlerInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IHandlerActivationHost;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IContactManagerInterop;
+STRUCT!{@debug struct IContextMenu;}
+STRUCT!{@debug struct IContextMenu2;}
+STRUCT!{@debug struct IContextMenu3;}
+STRUCT!{@debug struct IExecuteCommand;}
+STRUCT!{@debug struct IPersistFolder;}
+STRUCT!{@debug struct IRunnableTask;}
+STRUCT!{@debug struct IShellTaskScheduler;}
+STRUCT!{@debug struct IQueryCodePage;}
+STRUCT!{@debug struct IPersistFolder2;}
+STRUCT!{@debug struct IPersistFolder3;}
+STRUCT!{@debug struct IPersistIDList;}
+STRUCT!{@debug struct IEnumIDList;}
+STRUCT!{@debug struct IEnumFullIDList;}
+STRUCT!{@debug struct IFileSyncMergeHandler;}
+STRUCT!{@debug struct IObjectWithFolderEnumMode;}
+STRUCT!{@debug struct IParseAndCreateItem;}
+STRUCT!{@debug struct IShellFolder;}
+STRUCT!{@debug struct IEnumExtraSearch;}
+STRUCT!{@debug struct IShellFolder2;}
+STRUCT!{@debug struct IFolderViewOptions;}
+STRUCT!{@debug struct IShellView;}
+STRUCT!{@debug struct IShellView2;}
+STRUCT!{@debug struct IShellView3;}
+STRUCT!{@debug struct IFolderView;}
+STRUCT!{@debug struct ISearchBoxInfo;}
+STRUCT!{@debug struct IFolderView2;}
+STRUCT!{@debug struct IFolderViewSettings;}
+STRUCT!{@debug struct IPreviewHandlerVisuals;}
+STRUCT!{@debug struct IVisualProperties;}
+STRUCT!{@debug struct ICommDlgBrowser;}
+STRUCT!{@debug struct ICommDlgBrowser2;}
+STRUCT!{@debug struct ICommDlgBrowser3;}
+STRUCT!{@debug struct IColumnManager;}
+STRUCT!{@debug struct IFolderFilterSite;}
+STRUCT!{@debug struct IFolderFilter;}
+STRUCT!{@debug struct IInputObjectSite;}
+STRUCT!{@debug struct IInputObject;}
+STRUCT!{@debug struct IInputObject2;}
+STRUCT!{@debug struct IShellIcon;}
+STRUCT!{@debug struct IShellBrowser;}
+STRUCT!{@debug struct IProfferService;}
+STRUCT!{@debug struct IShellItem2;}
+STRUCT!{@debug struct IShellItemImageFactory;}
+STRUCT!{@debug struct IUserAccountChangeCallback;}
+STRUCT!{@debug struct IEnumShellItems;}
+STRUCT!{@debug struct ITransferAdviseSink;}
+STRUCT!{@debug struct ITransferSource;}
+STRUCT!{@debug struct IEnumResources;}
+STRUCT!{@debug struct IShellItemResources;}
+STRUCT!{@debug struct ITransferDestination;}
+STRUCT!{@debug struct IStreamAsync;}
+STRUCT!{@debug struct IStreamUnbufferedInfo;}
+STRUCT!{@debug struct IInitializeWithItem;}
+STRUCT!{@debug struct IObjectWithSelection;}
+STRUCT!{@debug struct IObjectWithBackReferences;}
+STRUCT!{@debug struct IPropertyUI;}
+STRUCT!{@debug struct ICategoryProvider;}
+STRUCT!{@debug struct ICategorizer;}
+STRUCT!{@debug struct IDropTargetHelper;}
+STRUCT!{@debug struct IDragSourceHelper;}
+STRUCT!{@debug struct IDragSourceHelper2;}
+STRUCT!{@debug struct IShellLinkA;}
+STRUCT!{@debug struct IShellLinkW;}
+STRUCT!{@debug struct IShellLinkDataList;}
+STRUCT!{@debug struct IResolveShellLink;}
+STRUCT!{@debug struct IActionProgressDialog;}
+STRUCT!{@debug struct IHWEventHandler;}
+STRUCT!{@debug struct IHWEventHandler2;}
+STRUCT!{@debug struct IQueryCancelAutoPlay;}
+STRUCT!{@debug struct IDynamicHWHandler;}
+STRUCT!{@debug struct IActionProgress;}
+STRUCT!{@debug struct IShellExtInit;}
+STRUCT!{@debug struct IShellPropSheetExt;}
+STRUCT!{@debug struct IRemoteComputer;}
+STRUCT!{@debug struct IQueryContinue;}
+STRUCT!{@debug struct IObjectWithCancelEvent;}
+STRUCT!{@debug struct IUserNotification;}
+STRUCT!{@debug struct IUserNotificationCallback;}
+STRUCT!{@debug struct IUserNotification2;}
+STRUCT!{@debug struct IItemNameLimits;}
+STRUCT!{@debug struct ISearchFolderItemFactory;}
+STRUCT!{@debug struct IExtractImage;}
+STRUCT!{@debug struct IExtractImage2;}
+STRUCT!{@debug struct IThumbnailHandlerFactory;}
+STRUCT!{@debug struct IParentAndItem;}
+STRUCT!{@debug struct IDockingWindow;}
+STRUCT!{@debug struct IDeskBand;}
+STRUCT!{@debug struct IDeskBandInfo;}
+STRUCT!{@debug struct IDeskBand2;}
+STRUCT!{@debug struct ITaskbarList;}
+STRUCT!{@debug struct ITaskbarList2;}
+STRUCT!{@debug struct ITaskbarList3;}
+STRUCT!{@debug struct ITaskbarList4;}
+STRUCT!{@debug struct IStartMenuPinnedList;}
+STRUCT!{@debug struct ICDBurn;}
+STRUCT!{@debug struct IWizardSite;}
+STRUCT!{@debug struct IWizardExtension;}
+STRUCT!{@debug struct IWebWizardExtension;}
+STRUCT!{@debug struct IPublishingWizard;}
+STRUCT!{@debug struct IFolderViewHost;}
+STRUCT!{@debug struct IExplorerBrowserEvents;}
+STRUCT!{@debug struct IExplorerBrowser;}
+STRUCT!{@debug struct IAccessibleObject;}
+STRUCT!{@debug struct IResultsFolder;}
+STRUCT!{@debug struct IEnumObjects;}
+STRUCT!{@debug struct IOperationsProgressDialog;}
+STRUCT!{@debug struct IIOCancelInformation;}
+STRUCT!{@debug struct IFileOperation;}
+STRUCT!{@debug struct IObjectProvider;}
+STRUCT!{@debug struct INamespaceWalkCB;}
+STRUCT!{@debug struct INamespaceWalkCB2;}
+STRUCT!{@debug struct INamespaceWalk;}
+STRUCT!{@debug struct IAutoCompleteDropDown;}
+STRUCT!{@debug struct IBandSite;}
+STRUCT!{@debug struct ICDBurnExt;}
+STRUCT!{@debug struct IContextMenuSite;}
+STRUCT!{@debug struct IEnumReadyCallback;}
+STRUCT!{@debug struct IEnumerableView;}
+STRUCT!{@debug struct IInsertItem;}
+STRUCT!{@debug struct IMenuBand;}
+STRUCT!{@debug struct IFolderBandPriv;}
+STRUCT!{@debug struct IRegTreeItem;}
+STRUCT!{@debug struct IImageRecompress;}
+STRUCT!{@debug struct IDeskBar;}
+STRUCT!{@debug struct IMenuPopup;}
+STRUCT!{@debug struct IFileIsInUse;}
+STRUCT!{@debug struct IApplicationAssociationRegistration;}
+STRUCT!{@debug struct IApplicationAssociationRegistrationUI;}
+STRUCT!{@debug struct IDelegateFolder;}
+STRUCT!{@debug struct IBrowserFrameOptions;}
+STRUCT!{@debug struct INewWindowManager;}
+STRUCT!{@debug struct IAttachmentExecute;}
+STRUCT!{@debug struct IShellMenuCallback;}
+STRUCT!{@debug struct IShellMenu;}
+STRUCT!{@debug struct IShellRunDll;}
+STRUCT!{@debug struct IKnownFolder;}
+STRUCT!{@debug struct IKnownFolderManager;}
+STRUCT!{@debug struct ISharingConfigurationManager;}
+STRUCT!{@debug struct IPreviousVersionsInfo;}
+STRUCT!{@debug struct IRelatedItem;}
+STRUCT!{@debug struct IIdentityName;}
+STRUCT!{@debug struct IDelegateItem;}
+STRUCT!{@debug struct ICurrentItem;}
+STRUCT!{@debug struct ITransferMediumItem;}
+STRUCT!{@debug struct IUseToBrowseItem;}
+STRUCT!{@debug struct IDisplayItem;}
+STRUCT!{@debug struct IViewStateIdentityItem;}
+STRUCT!{@debug struct IPreviewItem;}
+STRUCT!{@debug struct IDestinationStreamFactory;}
+STRUCT!{@debug struct INewMenuClient;}
+STRUCT!{@debug struct IInitializeWithBindCtx;}
+STRUCT!{@debug struct INameSpaceTreeControl;}
+STRUCT!{@debug struct INameSpaceTreeControl2;}
+STRUCT!{@debug struct INameSpaceTreeControlEvents;}
+STRUCT!{@debug struct INameSpaceTreeControlDropHandler;}
+STRUCT!{@debug struct INameSpaceTreeAccessible;}
+STRUCT!{@debug struct INameSpaceTreeControlCustomDraw;}
+STRUCT!{@debug struct INameSpaceTreeControlFolderCapabilities;}
+STRUCT!{@debug struct IPreviewHandler;}
+STRUCT!{@debug struct IPreviewHandlerFrame;}
+STRUCT!{@debug struct ITrayDeskBand;}
+STRUCT!{@debug struct IBandHost;}
+STRUCT!{@debug struct IExplorerPaneVisibility;}
+STRUCT!{@debug struct IContextMenuCB;}
+STRUCT!{@debug struct IDefaultExtractIconInit;}
+STRUCT!{@debug struct IExplorerCommand;}
+STRUCT!{@debug struct IExplorerCommandState;}
+STRUCT!{@debug struct IInitializeCommand;}
+STRUCT!{@debug struct IEnumExplorerCommand;}
+STRUCT!{@debug struct IExplorerCommandProvider;}
+STRUCT!{@debug struct IMarkupCallback;}
+STRUCT!{@debug struct IControlMarkup;}
+STRUCT!{@debug struct IInitializeNetworkFolder;}
+STRUCT!{@debug struct IOpenControlPanel;}
+STRUCT!{@debug struct IComputerInfoChangeNotify;}
+STRUCT!{@debug struct IFileSystemBindData;}
+STRUCT!{@debug struct IFileSystemBindData2;}
+STRUCT!{@debug struct ICustomDestinationList;}
+STRUCT!{@debug struct IApplicationDestinations;}
+STRUCT!{@debug struct IApplicationDocumentLists;}
+STRUCT!{@debug struct IObjectWithAppUserModelID;}
+STRUCT!{@debug struct IObjectWithProgID;}
+STRUCT!{@debug struct IUpdateIDList;}
+STRUCT!{@debug struct IDesktopGadget;}
+STRUCT!{@debug struct IDesktopWallpaper;}
+STRUCT!{@debug struct IHomeGroup;}
+STRUCT!{@debug struct IInitializeWithPropertyStore;}
+STRUCT!{@debug struct IOpenSearchSource;}
+STRUCT!{@debug struct IShellLibrary;}
+STRUCT!{@debug struct IDefaultFolderMenuInitialize;}
+STRUCT!{@debug struct IApplicationActivationManager;}
+STRUCT!{@debug struct IAssocHandlerInvoker;}
+STRUCT!{@debug struct IAssocHandler;}
+STRUCT!{@debug struct IEnumAssocHandlers;}
+STRUCT!{@debug struct IDataObjectProvider;}
+STRUCT!{@debug struct IDataTransferManagerInterop;}
+STRUCT!{@debug struct IFrameworkInputPaneHandler;}
+STRUCT!{@debug struct IFrameworkInputPane;}
+STRUCT!{@debug struct IAccessibilityDockingServiceCallback;}
+STRUCT!{@debug struct IAccessibilityDockingService;}
+STRUCT!{@debug struct IAppVisibilityEvents;}
+STRUCT!{@debug struct IAppVisibility;}
+STRUCT!{@debug struct IPackageExecutionStateChangeNotification;}
+STRUCT!{@debug struct IPackageDebugSettings;}
+STRUCT!{@debug struct ISuspensionDependencyManager;}
+STRUCT!{@debug struct IExecuteCommandApplicationHostEnvironment;}
+STRUCT!{@debug struct IExecuteCommandHost;}
+STRUCT!{@debug struct IApplicationDesignModeSettings;}
+STRUCT!{@debug struct IApplicationDesignModeSettings2;}
+STRUCT!{@debug struct ILaunchTargetMonitor;}
+STRUCT!{@debug struct ILaunchSourceViewSizePreference;}
+STRUCT!{@debug struct ILaunchTargetViewSizePreference;}
+STRUCT!{@debug struct ILaunchSourceAppUserModelId;}
+STRUCT!{@debug struct IInitializeWithWindow;}
+STRUCT!{@debug struct IHandlerInfo;}
+STRUCT!{@debug struct IHandlerActivationHost;}
+STRUCT!{@debug struct IContactManagerInterop;}
 //4498
 pub type SFGAOF = ::ULONG;
 //9466
