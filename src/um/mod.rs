@@ -23,3 +23,5 @@
 #[cfg(feature = "um-winnt")] pub mod winnt;
 #[cfg(feature = "um-winreg")] pub mod winreg;
 #[cfg(feature = "um-winuser")] pub mod winuser;
+#[cfg(feature = "um-xinput")] pub mod xinput;
+
