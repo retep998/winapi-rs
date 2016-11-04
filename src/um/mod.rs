@@ -13,6 +13,7 @@
 #[cfg(feature = "um-minwinbase")] pub mod minwinbase;
 #[cfg(feature = "um-ncrypt")] pub mod ncrypt;
 #[cfg(feature = "um-objidlbase")] pub mod objidlbase;
+#[cfg(feature = "um-shellapi")] pub mod shellapi;
 #[cfg(feature = "um-unknwnbase")] pub mod unknwnbase;
 #[cfg(feature = "um-winbase")] pub mod winbase;
 #[cfg(feature = "um-wincon")] pub mod wincon;
