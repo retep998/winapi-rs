@@ -18,4 +18,5 @@
 #[cfg(feature = "shared-rpcndr")] pub mod rpcndr;
 #[cfg(feature = "shared-sspi")]  pub mod sspi;
 #[cfg(feature = "shared-windef")] pub mod windef;
+#[cfg(feature = "shared-winerror")] pub mod winerror;
 #[cfg(feature = "shared-wtypesbase")] pub mod wtypesbase;
