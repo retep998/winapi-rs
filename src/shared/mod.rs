@@ -21,4 +21,5 @@
 #[cfg(feature = "shared-windef")] pub mod windef;
 #[cfg(feature = "shared-windowsx")] pub mod windowsx;
 #[cfg(feature = "shared-winerror")] pub mod winerror;
+#[cfg(feature = "shared-wtypes")] pub mod wtypes;
 #[cfg(feature = "shared-wtypesbase")] pub mod wtypesbase;

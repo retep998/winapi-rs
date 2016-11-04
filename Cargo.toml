@@ -37,6 +37,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
     "shared-windef",
     "shared-windowsx",
     "shared-winerror",
+    "shared-wtypes",
     "shared-wtypesbase",
 ]
 "shared-basetsd" = []
@@ -55,6 +56,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
 "shared-windef" = ["shared-minwindef", "um-winnt"]
 "shared-windowsx" = ["shared-minwindef"]
 "shared-winerror" = ["shared-minwindef"]
+"shared-wtypes" = ["shared-wtypesbase", "um-winnt"]
 "shared-wtypesbase" = ["shared-minwindef", "shared-rpcndr", "um-winnt"]
 "headers-um" = [
     "um-cfgmgr32",
