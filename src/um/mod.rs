@@ -19,6 +19,7 @@
 #[cfg(feature = "um-wincon")] pub mod wincon;
 #[cfg(feature = "um-winevt")] pub mod winevt;
 #[cfg(feature = "um-wingdi")] pub mod wingdi;
+#[cfg(feature = "um-winioctl")] pub mod winioctl;
 #[cfg(feature = "um-winnt")] pub mod winnt;
 #[cfg(feature = "um-winreg")] pub mod winreg;
 #[cfg(feature = "um-winuser")] pub mod winuser;
