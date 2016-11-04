@@ -1,6 +1,11 @@
 // Copyright © 2015, Connor Hilarides
 // Licensed under the MIT License <LICENSE.md>
 //! Mappings for the contents of wstypes.h
+use ctypes::{c_short, c_ushort, c_double};
+use shared::minwindef::{BYTE, USHORT, ULONG};
+use shared::wtypesbase::{FLAGGED_WORD_BLOB, OLECHAR};
+use um::winnt::{LONGLONG, ULONGLONG};
+
 ENUM!{enum VARENUM {
     VT_EMPTY = 0,
     VT_NULL = 1,
@@ -55,21 +60,21 @@ ENUM!{enum VARENUM {
 }}
 pub const VT_ILLEGALMASKED: VARENUM = VT_BSTR_BLOB;
 pub const VT_TYPEMASK: VARENUM = VT_BSTR_BLOB;
-pub type DATE = ::c_double;
+pub type DATE = c_double;
 STRUCT!{struct CY {
-    int64: ::LONGLONG,
+    int64: LONGLONG,
 }}
 STRUCT!{struct DECIMAL {
-    wReserved: ::USHORT,
-    scale: ::BYTE,
-    sign: ::BYTE,
-    Hi32: ::ULONG,
-    Lo64: ::ULONGLONG,
+    wReserved: USHORT,
+    scale: BYTE,
+    sign: BYTE,
+    Hi32: ULONG,
+    Lo64: ULONGLONG,
 }}
-pub const DECIMAL_NEG: ::BYTE = 0x80;
+pub const DECIMAL_NEG: BYTE = 0x80;
 pub type LPDECIMAL = *mut DECIMAL;
-pub type VARTYPE = ::c_ushort;
-pub type wireBSTR = *mut ::FLAGGED_WORD_BLOB;
-pub type BSTR = *mut ::OLECHAR;
+pub type VARTYPE = c_ushort;
+pub type wireBSTR = *mut FLAGGED_WORD_BLOB;
+pub type BSTR = *mut OLECHAR;
 pub type LPBSTR = *mut BSTR;
-pub type VARIANT_BOOL = ::c_short;
+pub type VARIANT_BOOL = c_short;

@@ -1,8 +1,11 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! Windows Events API
-pub type EVT_HANDLE = ::HANDLE;
-pub type PEVT_HANDLE = *mut ::HANDLE;
+use shared::minwindef::{DWORD};
+use um::winnt::{HANDLE};
+
+pub type EVT_HANDLE = HANDLE;
+pub type PEVT_HANDLE = *mut HANDLE;
 ENUM!{enum EVT_VARIANT_TYPE {
     EvtVarTypeNull = 0,
     EvtVarTypeString = 1,
@@ -29,12 +32,12 @@ ENUM!{enum EVT_VARIANT_TYPE {
     EvtVarTypeEvtHandle = 32,
     EvtVarTypeEvtXml = 35,
 }}
-pub const EVT_VARIANT_TYPE_MASK: ::DWORD = 0x7f;
-pub const EVT_VARIANT_TYPE_ARRAY: ::DWORD = 128;
+pub const EVT_VARIANT_TYPE_MASK: DWORD = 0x7f;
+pub const EVT_VARIANT_TYPE_ARRAY: DWORD = 128;
 STRUCT!{struct EVT_VARIANT {
     u: u64,
-    Count: ::DWORD,
-    Type: ::DWORD,
+    Count: DWORD,
+    Type: DWORD,
 }}
 // TODO - All the UNION! for each variant
 // TODO - The rest of this header

@@ -19,6 +19,7 @@ extern crate std as core;
 pub mod shared;
 pub mod um;
 pub mod vc;
+pub mod winrt;
 
 /// Built in primitive types provided by the C language
 pub mod ctypes {
