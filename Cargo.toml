@@ -19,7 +19,7 @@ winapi-x86_64-pc-windows-gnu = { version = "0.3", path = "x86_64" }
 [features]
 std = []
 everything = [ "headers", "libraries" ]
-headers = ["headers-shared", "headers-um", "headers-vc"]
+headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "headers-shared" = [
     "shared-basetsd",
     "shared-bcrypt",
@@ -104,6 +104,14 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
 ]
 "vc-excpt" = []
 "vc-vcruntime" = []
+"headers-winrt" = [
+    "winrt-activation",
+    "winrt-hstring",
+    "winrt-inspectable",
+]
+"winrt-activation" = ["um-winnt", "winrt-inspectable"]
+"winrt-hstring" = ["um-winnt"]
+"winrt-inspectable" = ["shared-guiddef", "shared-minwindef", "um-unknwnbase", "um-winnt", "winrt-hstring"]
 libraries = [
     "kernel32",
     "ncrypt",
