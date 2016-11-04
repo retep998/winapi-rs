@@ -17,6 +17,7 @@ winapi-i686-pc-windows-gnu = { version = "0.3", path = "i686" }
 winapi-x86_64-pc-windows-gnu = { version = "0.3", path = "x86_64" }
 
 [features]
+default = ["um-cfgmgr32"]
 std = []
 everything = [ "headers", "libraries" ]
 headers = ["headers-shared", "headers-um", "headers-vc"]
@@ -24,6 +25,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
     "shared-basetsd",
     "shared-bcrypt",
     "shared-cderr",
+    "shared-cfg",
     "shared-d3d9caps",
     "shared-d3d9types",
     "shared-guiddef",
@@ -33,11 +35,12 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
     "shared-rpcndr",
     "shared-sspi",
     "shared-windef",
-    "shared-wtypesbase"
+    "shared-wtypesbase",
 ]
 "shared-basetsd" = []
 "shared-bcrypt" = ["shared-minwindef", "um-winnt"]
 "shared-cderr" = ["shared-minwindef"]
+"shared-cfg" = ["um-cfgmgr32"]
 "shared-d3d9caps" = ["shared-d3d9types", "shared-guiddef", "shared-minwindef", "um-winnt"]
 "shared-d3d9types" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-winnt", "shared-windef"]
 "shared-guiddef" = []
@@ -49,6 +52,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
 "shared-windef" = ["shared-minwindef", "um-winnt"]
 "shared-wtypesbase" = ["shared-minwindef", "shared-rpcndr", "um-winnt"]
 "headers-um" = [
+    "um-cfgmgr32",
     "um-cguid",
     "um-combaseapi",
     "um-consoleapi",
@@ -60,6 +64,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
     "um-wingdi",
     "um-winnt"
 ]
+"um-cfgmgr32" = ["shared-minwindef", "um-winnt", "shared-basetsd", "shared-guiddef"]
 "um-cguid" = ["shared-guiddef"]
 "um-combaseapi" = ["shared-basetsd", "shared-minwindef", "shared-wtypesbase", "um-objidlbase", "ole32"]
 "um-consoleapi" = ["shared-minwindef", "um-wincon", "um-winnt", "kernel32"]

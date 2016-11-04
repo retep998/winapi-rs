@@ -8,12 +8,13 @@
 #[cfg(feature = "shared-basetsd")] pub mod basetsd;
 #[cfg(feature = "shared-bcrypt")] pub mod bcrypt;
 #[cfg(feature = "shared-cderr")] pub mod cderr;
+#[cfg(feature = "shared-cfg")] pub mod cfg;
 #[cfg(feature = "shared-d3d9caps")] pub mod d3d9caps;
 #[cfg(feature = "shared-d3d9types")] pub mod d3d9types;
 #[cfg(feature = "shared-guiddef")] pub mod guiddef;
 #[cfg(feature = "shared-minwindef")] pub mod minwindef;
-#[cfg(feature = "shared-ntstatus")] pub mod ntstatus;
 #[cfg(feature = "shared-ntdef")] pub mod ntdef;
+#[cfg(feature = "shared-ntstatus")] pub mod ntstatus;
 #[cfg(feature = "shared-rpcndr")] pub mod rpcndr;
 #[cfg(feature = "shared-sspi")]  pub mod sspi;
 #[cfg(feature = "shared-windef")] pub mod windef;

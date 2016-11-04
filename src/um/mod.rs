@@ -5,6 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Headers for user mode only
+#[cfg(feature = "um-cfgmgr32")] pub mod cfgmgr32;
 #[cfg(feature = "um-cguid")] pub mod cguid;
 #[cfg(feature = "um-combaseapi")] pub mod combaseapi;
 #[cfg(feature = "um-consoleapi")] pub mod consoleapi;
