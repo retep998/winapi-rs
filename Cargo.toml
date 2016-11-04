@@ -62,6 +62,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "um-cfgmgr32",
     "um-cguid",
     "um-combaseapi",
+    "um-commctrl",
     "um-consoleapi",
     "um-dbghelp",
     "um-minwinbase",
@@ -82,6 +83,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "um-cfgmgr32" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-winnt"]
 "um-cguid" = ["shared-guiddef"]
 "um-combaseapi" = ["shared-basetsd", "shared-minwindef", "shared-wtypesbase", "um-objidlbase", "ole32"]
+"um-commctrl" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "shared-windef", "um-minwinbase", "um-objidlbase", "um-winnt", "um-winuser", "vc-vcruntime"]
 "um-consoleapi" = ["shared-minwindef", "um-wincon", "um-winnt", "kernel32"]
 "um-dbghelp" = ["shared-basetsd","shared-guiddef", "shared-minwindef", "um-winnt", "vc-vcruntime"]
 "um-minwinbase" = ["shared-ntstatus"]
