@@ -34,6 +34,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
     "shared-rpcndr",
     "shared-sspi",
     "shared-windef",
+    "shared-windowsx",
     "shared-winerror",
     "shared-wtypesbase",
 ]
@@ -50,6 +51,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
 "shared-rpcndr" = []
 "shared-sspi" = ["shared-ntdef"]
 "shared-windef" = ["shared-minwindef", "um-winnt"]
+"shared-windowsx" = ["shared-minwindef"]
 "shared-winerror" = ["shared-minwindef"]
 "shared-wtypesbase" = ["shared-minwindef", "shared-rpcndr", "um-winnt"]
 "headers-um" = [
