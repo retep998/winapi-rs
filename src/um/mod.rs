@@ -18,3 +18,4 @@
 #[cfg(feature = "um-wincon")] pub mod wincon;
 #[cfg(feature = "um-wingdi")] pub mod wingdi;
 #[cfg(feature = "um-winnt")] pub mod winnt;
+#[cfg(feature = "um-winuser")] pub mod winuser;
