@@ -1,6 +1,9 @@
 // Copyright © 2016, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
-use super::*;
+use shared::basetsd::{DWORD_PTR};
+use shared::minwindef::{DWORD, HKEY};
+use um::winnt::{LPSTR, LPWSTR, ACCESS_MASK};
+
 pub type REGSAM = ACCESS_MASK;
 STRUCT!{struct VALENTA {
     ve_valuename: LPSTR,
