@@ -17,7 +17,6 @@ winapi-i686-pc-windows-gnu = { version = "0.3", path = "i686" }
 winapi-x86_64-pc-windows-gnu = { version = "0.3", path = "x86_64" }
 
 [features]
-default = ["um-cfgmgr32"]
 std = []
 everything = [ "headers", "libraries" ]
 headers = ["headers-shared", "headers-um", "headers-vc"]
