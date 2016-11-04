@@ -14,6 +14,7 @@
 #[cfg(feature = "um-ncrypt")] pub mod ncrypt;
 #[cfg(feature = "um-objidlbase")] pub mod objidlbase;
 #[cfg(feature = "um-unknwnbase")] pub mod unknwnbase;
+#[cfg(feature = "um-winbase")] pub mod winbase;
 #[cfg(feature = "um-wincon")] pub mod wincon;
 #[cfg(feature = "um-wingdi")] pub mod wingdi;
 #[cfg(feature = "um-winnt")] pub mod winnt;

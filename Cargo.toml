@@ -62,6 +62,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
     "um-ncrypt",
     "um-objidlbase",
     "um-unknwnbase",
+    "um-winbase",
     "um-wincon",
     "um-wingdi",
     "um-winnt"
@@ -75,6 +76,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
 "um-ncrypt" = ["shared-basetsd", "shared-sspi", "ncrypt"]
 "um-objidlbase" = ["shared-guiddef", "shared-minwindef", "shared-wtypesbase", "um-unknwnbase", "um-winnt"]
 "um-unknwnbase" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
+"um-winbase" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-cfgmgr32", "um-winnt"]
 "um-wincon" = ["shared-minwindef", "shared-windef", "um-minwinbase", "um-wingdi", "um-winnt", "kernel32"]
 "um-wingdi" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-winnt"]
 "um-winnt" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "vc-excpt"]
