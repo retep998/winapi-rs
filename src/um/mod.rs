@@ -16,6 +16,7 @@
 #[cfg(feature = "um-unknwnbase")] pub mod unknwnbase;
 #[cfg(feature = "um-winbase")] pub mod winbase;
 #[cfg(feature = "um-wincon")] pub mod wincon;
+#[cfg(feature = "um-winevt")] pub mod winevt;
 #[cfg(feature = "um-wingdi")] pub mod wingdi;
 #[cfg(feature = "um-winnt")] pub mod winnt;
 #[cfg(feature = "um-winreg")] pub mod winreg;

@@ -64,6 +64,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
     "um-unknwnbase",
     "um-winbase",
     "um-wincon",
+    "um-winevt",
     "um-wingdi",
     "um-winnt",
     "um-winreg",
@@ -80,6 +81,7 @@ headers = ["headers-shared", "headers-um", "headers-vc"]
 "um-unknwnbase" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
 "um-winbase" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-cfgmgr32", "um-winnt"]
 "um-wincon" = ["shared-minwindef", "shared-windef", "um-minwinbase", "um-wingdi", "um-winnt", "kernel32"]
+"um-winevt" = ["shared-minwindef", "um-winnt"]
 "um-wingdi" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-winnt"]
 "um-winnt" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "vc-excpt"]
 "um-winreg" = ["shared-basetsd", "shared-minwindef", "um-winnt"]
