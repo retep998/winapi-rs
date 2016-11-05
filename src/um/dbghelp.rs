@@ -4,11 +4,14 @@
 use shared::basetsd::{DWORD64, ULONG64};
 use shared::minwindef::{BOOL, ULONG, USHORT, UCHAR, PUCHAR, WORD, DWORD, LPDWORD};
 use um::winnt::{
-    PVOID, PSTR, PWSTR, PCWSTR, PCSTR, WCHAR, CHAR,HANDLE, BOOLEAN, PIMAGE_NT_HEADERS64,
-    PIMAGE_SECTION_HEADER, LIST_ENTRY 
+    PVOID, PSTR, PWSTR, PCWSTR, PCSTR, WCHAR, CHAR,HANDLE, BOOLEAN, PIMAGE_SECTION_HEADER,
+    LIST_ENTRY 
 };
 use vc::vcruntime::{size_t};
 use shared::guiddef::{GUID};
+
+#[cfg(target_arch = "x86_64")]
+use um::winnt::{PIMAGE_NT_HEADERS64};
 
 #[cfg(target_arch = "x86")]
 use shared::minwindef::{PDWORD};
@@ -16,7 +19,7 @@ use shared::minwindef::{PDWORD};
 #[cfg(target_arch = "x86")]
 use um::winnt::{
     PIMAGE_NT_HEADERS32, PIMAGE_FUNCTION_ENTRY, PFPO_DATA, PIMAGE_COFF_SYMBOLS_HEADER,
-    PIMAGE_DEBUG_DIRECTORY, PIMAGE_COFF_SYMBOLS_HEADER, PIMAGE_DEBUG_DIRECTORY,
+    PIMAGE_DEBUG_DIRECTORY
 };
 
 #[cfg(target_arch = "x86_64")]
