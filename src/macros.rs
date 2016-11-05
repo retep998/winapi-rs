@@ -85,19 +85,19 @@ macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
 macro_rules! RIDL {
     (interface $interface:ident ($vtbl:ident) {$(
         fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
-    ),+}) => (
+    ),*}) => (
         #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $vtbl {
             $(pub $method: unsafe extern "system" fn(
                 This: *mut $interface
                 $(,$p: $t)*
-            ) -> $rtr),+
+            ) -> $rtr),*
         }
         #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
-        RIDL!{@impl $interface {$(fn $method(&mut self $(,$p: $t)*) -> $rtr),+}}
+        RIDL!{@impl $interface {$(fn $method(&mut self $(,$p: $t)*) -> $rtr),*}}
     );
     (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {
     }) => (
@@ -155,11 +155,11 @@ macro_rules! RIDL {
     );
     (@impl $interface:ident {$(
         fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
-    ),+}) => (
+    ),*}) => (
         impl $interface {
             $(#[inline] pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
                 ((*self.lpVtbl).$method)(self $(,$p)*)
-            })+
+            })*
         }
     );
 }

@@ -482,12 +482,9 @@ interface ICreateTypeInfo(ICreateTypeInfoVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 // FIXME: Implement these interfaces
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICreateTypeInfo2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICreateTypeLib;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICreateTypeLib2;
+RIDL!(interface ICreateTypeInfo2(ICreateTypeInfo2Vtbl) {});
+RIDL!(interface ICreateTypeLib(ICreateTypeLibVtbl) {});
+RIDL!(interface ICreateTypeLib2(ICreateTypeLib2Vtbl) {});
 pub type LPDISPATCH = *mut IDispatch;
 pub const DISPID_UNKNOWN: ::INT = -1;
 pub const DISPID_VALUE: ::INT = 0;
@@ -515,10 +512,8 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 // FIXME: Implement these interfaces
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IEnumVARIANT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeComp;
+RIDL!(interface IEnumVARIANT(IEnumVARIANTVtbl) {});
+RIDL!(interface ITypeComp(ITypeCompVtbl) {});
 RIDL!(
 interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeAttr(&mut self, ppTypeAttr: *mut *mut TYPEATTR) -> ::HRESULT,
@@ -564,27 +559,15 @@ interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 // FIXME: Implement these interfaces
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeInfo2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeLib;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeLib2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeChangeEvents;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IErrorInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICreateErrorInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ISupportErrorInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeFactory;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeMarshal;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IRecordInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IErrorLog;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPropertyBag;
+RIDL!(interface ITypeInfo2(ITypeInfo2Vtbl) {});
+RIDL!(interface ITypeLib(ITypeLibVtbl) {});
+RIDL!(interface ITypeLib2(ITypeLib2Vtbl) {});
+RIDL!(interface ITypeChangeEvents(ITypeChangeEventsVtbl) {});
+RIDL!(interface IErrorInfo(IErrorInfoVtbl) {});
+RIDL!(interface ICreateErrorInfo(ICreateErrorInfoVtbl) {});
+RIDL!(interface ISupportErrorInfo(ISupportErrorInfoVtbl) {});
+RIDL!(interface ITypeFactory(ITypeFactoryVtbl) {});
+RIDL!(interface ITypeMarshal(ITypeMarshalVtbl) {});
+RIDL!(interface IRecordInfo(IRecordInfoVtbl) {});
+RIDL!(interface IErrorLog(IErrorLogVtbl) {});
+RIDL!(interface IPropertyBag(IPropertyBagVtbl) {});
