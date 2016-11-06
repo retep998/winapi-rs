@@ -59,6 +59,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "shared-wtypes" = ["shared-wtypesbase", "um-winnt"]
 "shared-wtypesbase" = ["shared-minwindef", "shared-rpcndr", "um-winnt"]
 "headers-um" = [
+    "um-audiosessiontypes",
     "um-cfgmgr32",
     "um-cguid",
     "um-combaseapi",
@@ -80,6 +81,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "um-winuser",
     "um-xinput",
 ]
+"um-audiosessiontypes" = ["shared-minwindef"]
 "um-cfgmgr32" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-winnt"]
 "um-cguid" = ["shared-guiddef"]
 "um-combaseapi" = ["shared-basetsd", "shared-minwindef", "shared-wtypesbase", "um-objidlbase", "ole32"]
