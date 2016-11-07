@@ -9,6 +9,7 @@ const LIBS: &'static [&'static str] = &[
     "kernel32",
     "ncrypt",
     "ole32",
+    "wininet",
 ];
 fn main() {
     let target = var("TARGET").unwrap();
