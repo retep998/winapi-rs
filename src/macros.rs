@@ -19,7 +19,7 @@ macro_rules! MAKE_SCODE {
 }
 macro_rules! HIDP_ERROR_CODES {
     ($sev:expr, $code:expr) => {
-        ($sev << 28) | (::FACILITY_HID_ERROR_CODE << 16) | $code
+        ($sev << 28) | (FACILITY_HID_ERROR_CODE << 16) | $code
     }
 }
 macro_rules! MAKEFOURCC {
@@ -47,32 +47,32 @@ macro_rules! CTL_CODE {
 }
 macro_rules! HID_CTL_CODE {
     ($id:expr) => {
-        CTL_CODE!(::FILE_DEVICE_KEYBOARD, $id, ::METHOD_NEITHER, ::FILE_ANY_ACCESS)
+        CTL_CODE!(FILE_DEVICE_KEYBOARD, $id, METHOD_NEITHER, FILE_ANY_ACCESS)
     }
 }
 macro_rules! HID_BUFFER_CTL_CODE {
     ($id:expr) => {
-        CTL_CODE!(::FILE_DEVICE_KEYBOARD, $id, ::METHOD_BUFFERED, ::FILE_ANY_ACCESS)
+        CTL_CODE!(FILE_DEVICE_KEYBOARD, $id, METHOD_BUFFERED, FILE_ANY_ACCESS)
     }
 }
 macro_rules! HID_IN_CTL_CODE {
     ($id:expr) => {
-        CTL_CODE!(::FILE_DEVICE_KEYBOARD, $id, ::METHOD_IN_DIRECT, ::FILE_ANY_ACCESS)
+        CTL_CODE!(FILE_DEVICE_KEYBOARD, $id, METHOD_IN_DIRECT, FILE_ANY_ACCESS)
     }
 }
 macro_rules! HID_OUT_CTL_CODE {
     ($id:expr) => {
-        CTL_CODE!(::FILE_DEVICE_KEYBOARD, $id, ::METHOD_OUT_DIRECT, ::FILE_ANY_ACCESS)
+        CTL_CODE!(FILE_DEVICE_KEYBOARD, $id, METHOD_OUT_DIRECT, FILE_ANY_ACCESS)
     }
 }
 macro_rules! AUDCLNT_ERR {
     ($n:expr) => {
-        MAKE_HRESULT!(::SEVERITY_ERROR, ::FACILITY_AUDCLNT, $n)
+        MAKE_HRESULT!(SEVERITY_ERROR, FACILITY_AUDCLNT, $n)
     };
 }
 macro_rules! AUDCLNT_SUCCESS {
     ($n:expr) => {
-        MAKE_SCODE!(::SEVERITY_SUCCESS, ::FACILITY_AUDCLNT, $n)
+        MAKE_SCODE!(SEVERITY_SUCCESS, FACILITY_AUDCLNT, $n)
     };
 }
 macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {

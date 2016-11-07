@@ -16,6 +16,15 @@ winapi-i686-pc-windows-gnu = { version = "0.3", path = "i686" }
 [target.x86_64-pc-windows-gnu.dependencies]
 winapi-x86_64-pc-windows-gnu = { version = "0.3", path = "x86_64" }
 
+# ================= Cyclic Dependencies =================
+# Features found with cyclic dependencies so far have been
+# removed from eachother's dependencies. When a solution is
+# found they will need to be added back.
+#
+# The list so far:
+# um-d2d1 <--> um-dwrite
+#
+
 [features]
 std = []
 everything = [ "headers", "libraries" ]
@@ -25,10 +34,26 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "shared-bcrypt",
     "shared-cderr",
     "shared-cfg",
+    "shared-d3d9",
     "shared-d3d9caps",
     "shared-d3d9types",
+    "shared-devpropdef",
+    "shared-dxgi",
+    "shared-dxgi1_2",
+    "shared-dxgi1_3",
+    "shared-dxgi1_4",
+    "shared-dxgiformat",
+    "shared-dxgitype",
     "shared-guiddef",
+    "shared-hidclass",
+    "shared-hidpi",
+    "shared-hidsdi",
+    "shared-hidusage",
+    "shared-inaddr",
+    "shared-ksmedia",
+    "shared-lmcons",
     "shared-minwindef",
+    "shared-mmreg",
     "shared-ntdef",
     "shared-ntstatus",
     "shared-rpcndr",
@@ -44,10 +69,26 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "shared-bcrypt" = ["shared-minwindef", "um-winnt"]
 "shared-cderr" = ["shared-minwindef"]
 "shared-cfg" = ["um-cfgmgr32"]
+"shared-d3d9" = ["shared-basetsd", "shared-d3d9caps", "shared-d3d9types", "shared-guiddef", "shared-minwindef", "shared-windef", "um-unknwnbase", "um-wingdi", "um-winnt"]
 "shared-d3d9caps" = ["shared-d3d9types", "shared-guiddef", "shared-minwindef", "um-winnt"]
 "shared-d3d9types" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-winnt", "shared-windef"]
+"shared-devpropdef" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
+"shared-dxgi" = ["shared-basetsd", "shared-dxgiformat", "shared-dxgitype", "shared-guiddef", "shared-minwindef", "shared-windef", "um-unknwnbase", "um-winnt"]
+"shared-dxgi1_2" = ["shared-basetsd", "shared-dxgi", "shared-dxgiformat", "shared-dxgitype", "shared-guiddef", "shared-minwindef", "shared-windef", "um-minwinbase", "um-unknwnbase", "um-winnt"]
+"shared-dxgi1_3" = ["shared-dxgi", "shared-dxgi1_2", "shared-dxgiformat", "shared-minwindef", "shared-windef", "um-unknwnbase", "um-winnt"]
+"shared-dxgi1_4" = ["shared-basetsd", "shared-dxgi1_2", "shared-dxgi1_3", "shared-dxgiformat", "shared-dxgitype", "shared-guiddef", "shared-minwindef", "um-unknwnbase", "um-winnt"]
+"shared-dxgiformat" = []
+"shared-dxgitype" = ["shared-minwindef", "shared-dxgiformat", "shared-d3d9types"]
 "shared-guiddef" = []
+"shared-hidclass" = ["shared-guiddef", "shared-minwindef", "um-winioctl", "um-winnt"]
+"shared-hidpi" = ["shared-hidusage", "shared-minwindef", "shared-ntdef", "shared-ntstatus", "um-winnt"]
+"shared-hidsdi" = ["shared-minwindef", "um-winnt"]
+"shared-hidusage" = ["shared-minwindef"]
+"shared-inaddr" = ["shared-minwindef"]
+"shared-ksmedia" = ["shared-guiddef"]
+"shared-lmcons" = ["shared-minwindef", "um-winnt"]
 "shared-minwindef" = ["shared-basetsd", "shared-ntdef"]
+"shared-mmreg" = ["shared-guiddef", "shared-minwindef"]
 "shared-ntdef" = ["shared-basetsd"]
 "shared-ntstatus" = ["shared-ntdef"]
 "shared-rpcndr" = []
@@ -59,20 +100,65 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "shared-wtypes" = ["shared-wtypesbase", "um-winnt"]
 "shared-wtypesbase" = ["shared-minwindef", "shared-rpcndr", "um-winnt"]
 "headers-um" = [
+    "um-audioclient",
     "um-audiosessiontypes",
     "um-cfgmgr32",
     "um-cguid",
     "um-combaseapi",
     "um-commctrl",
+    "um-commdlg",
     "um-consoleapi",
+    "um-corsym",
+    "um-d2d1",
+    "um-d2dbasetypes",
+    "um-d3d10shader",
+    "um-d3d11",
+    "um-d3d11shader",
+    "um-d3d12",
+    "um-d3d12sdklayers",
+    "um-d3d12shader",
+    "um-d3dcommon",
+    "um-d3dcompiler",
     "um-dbghelp",
+    "um-dcommon",
+    "um-docobj",
+    "um-dpapi",
+    "um-dsgetdc",
+    "um-dsound",
+    "um-dsrole",
+    "um-dwmapi",
+    "um-dwrite",
+    "um-errhandlingapi",
+    "um-fileapi",
+    "um-heapapi",
+    "um-http",
+    "um-imm",
+    "um-libloaderapi",
+    "um-lmaccess",
+    "um-lmdfs",
+    "um-lmerrlog",
+    "um-lmjoin",
+    "um-lsalookup",
+    "um-memoryapi",
+    "um-minschannel",
     "um-minwinbase",
+    "um-mmdeviceapi",
+    "um-mmsystem",
     "um-ncrypt",
+    "um-oaidl",
     "um-objidlbase",
+    "um-pdh",
+    "um-propidl",
+    "um-propsys",
+    "um-prsht",
     "um-shellapi",
+    "um-strmif",
     "um-unknwnbase",
+    "um-vsserror",
     "um-winbase",
+    "um-wincodec",
     "um-wincon",
+    "um-wincrypt",
     "um-winevt",
     "um-wingdi",
     "um-wininet",
@@ -80,30 +166,77 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "um-winioctl",
     "um-winnt",
     "um-winreg",
+    "um-winsock2",
     "um-winuser",
     "um-xinput",
 ]
+"um-audioclient" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "shared-mmreg", "shared-winerror", "shared-wtypesbase", "um-audiosessiontypes", "um-strmif", "um-unknwnbase", "um-winnt"]
 "um-audiosessiontypes" = ["shared-minwindef"]
 "um-cfgmgr32" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-winnt"]
 "um-cguid" = ["shared-guiddef"]
 "um-combaseapi" = ["shared-basetsd", "shared-minwindef", "shared-wtypesbase", "um-objidlbase", "ole32"]
 "um-commctrl" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "shared-windef", "um-minwinbase", "um-objidlbase", "um-winnt", "um-winuser", "vc-vcruntime"]
+"um-commdlg" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-prsht", "um-unknwnbase", "um-wingdi", "um-winnt", "um-winuser"]
 "um-consoleapi" = ["shared-minwindef", "um-wincon", "um-winnt", "kernel32"]
+"um-corsym" = ["shared-basetsd", "shared-guiddef", "um-objidlbase", "um-unknwnbase", "um-winnt"]
+"um-d2d1" = ["shared-basetsd", "shared-dxgi", "shared-guiddef", "shared-minwindef", "shared-windef", "um-d2dbasetypes", "um-d3dcommon", "um-dcommon", "um-unknwnbase", "um-wincodec", "um-winnt"]
+"um-d2dbasetypes" = ["shared-basetsd", "shared-d3d9types", "shared-minwindef", "shared-windef"]
+"um-d3d10shader" = ["shared-minwindef", "um-d3dcommon", "um-unknwnbase", "um-winnt"]
+"um-d3d11" = ["shared-basetsd", "shared-dxgiformat", "shared-dxgitype", "shared-guiddef", "shared-minwindef", "shared-windef", "um-d3dcommon", "um-unknwnbase", "um-winnt"]
+"um-d3d11shader" = ["shared-basetsd", "shared-minwindef", "um-d3dcommon", "um-unknwnbase", "um-winnt"]
+"um-d3d12" = ["shared-basetsd", "shared-dxgiformat", "shared-dxgitype", "shared-guiddef", "shared-minwindef", "shared-ntdef", "shared-windef", "um-d3dcommon", "um-minwinbase", "um-unknwnbase", "um-winnt"]
+"um-d3d12sdklayers" = ["shared-basetsd", "shared-minwindef", "um-d3d12", "um-unknwnbase", "um-winnt"]
+"um-d3d12shader" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-d3dcommon", "um-unknwnbase", "um-winnt"]
+"um-d3dcommon" = ["shared-basetsd", "shared-minwindef", "um-unknwnbase", "um-winnt"]
+"um-d3dcompiler" = ["shared-basetsd", "shared-minwindef", "um-d3dcommon"]
 "um-dbghelp" = ["shared-basetsd","shared-guiddef", "shared-minwindef", "um-winnt", "vc-vcruntime"]
+"um-dcommon" = ["shared-dxgiformat"]
+"um-docobj" = ["shared-guiddef", "shared-minwindef", "um-oaidl", "um-unknwnbase", "um-winnt"]
+"um-dpapi" = ["shared-minwindef", "shared-windef", "um-winnt"]
+"um-dsgetdc" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
+"um-dsound" = ["shared-guiddef", "shared-minwindef", "shared-windef", "shared-winerror", "um-mmsystem", "um-unknwnbase", "um-winnt"]
+"um-dsrole" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
+"um-dwmapi" = ["shared-minwindef"]
+"um-dwrite" = ["shared-basetsd", "shared-minwindef", "shared-windef", "shared-winerror", "um-dcommon", "um-unknwnbase", "um-wingdi", "um-winnt"]
+"um-errhandlingapi" = ["um-winnt"]
+"um-fileapi" = ["shared-minwindef", "um-minwinbase", "um-winnt"]
+"um-heapapi" = ["shared-basetsd", "shared-minwindef"]
+"um-http" = ["shared-guiddef", "shared-minwindef", "shared-sspi", "um-winnt", "um-winsock2"]
+"um-imm" = []
+"um-libloaderapi" = ["shared-basetsd", "shared-minwindef", "um-winnt"]
+"um-lmaccess" = ["shared-guiddef", "shared-lmcons", "shared-minwindef", "um-winnt"]
+"um-lmdfs" = ["shared-minwindef", "shared-guiddef", "um-winnt"]
+"um-lmerrlog" = ["shared-minwindef", "um-winnt"]
+"um-lmjoin" = ["shared-minwindef", "um-winnt"]
+"um-lsalookup" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
+"um-memoryapi" = ["shared-basetsd", "shared-minwindef", "um-winnt"]
+"um-minschannel" = ["shared-guiddef", "shared-minwindef", "um-wincrypt", "um-winnt"]
 "um-minwinbase" = ["shared-ntstatus"]
+"um-mmdeviceapi" = ["shared-guiddef", "shared-minwindef", "um-propidl", "um-propsys", "um-unknwnbase", "um-winnt"]
+"um-mmsystem" = ["shared-basetsd", "shared-minwindef", "shared-mmreg", "um-winnt"]
 "um-ncrypt" = ["shared-basetsd", "shared-sspi", "ncrypt"]
+"um-oaidl" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "shared-wtypes", "shared-wtypesbase", "um-unknwnbase", "um-winnt"]
 "um-objidlbase" = ["shared-guiddef", "shared-minwindef", "shared-wtypesbase", "um-unknwnbase", "um-winnt"]
+"um-pdh" = ["shared-minwindef", "shared-wtypesbase", "um-winnt"]
+"um-propidl" = ["shared-minwindef", "shared-wtypes"]
+"um-propsys" = ["um-unknwnbase"]
+"um-prsht" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-winnt", "um-winuser"]
 "um-shellapi" = ["shared-guiddef", "shared-minwindef", "shared-windef", "um-winnt"]
+"um-strmif" = ["um-winnt"]
 "um-unknwnbase" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
+"um-vsserror" = ["um-winnt"]
 "um-winbase" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-cfgmgr32", "um-winnt"]
+"um-wincodec" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-dcommon", "um-unknwnbase", "um-winnt"]
 "um-wincon" = ["shared-minwindef", "shared-windef", "um-minwinbase", "um-wingdi", "um-winnt", "kernel32"]
+"um-wincrypt" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-ncrypt", "um-winnt", "vc-vcruntime"]
 "um-winevt" = ["shared-minwindef", "um-winnt"]
 "um-wingdi" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-winnt"]
-"um-winioctl" = ["shared-minwindef", "um-winnt"]
 "um-wininet" = ["shared-basetsd", "shared-minwindef", "shared-ntdef", "shared-windef", "um-minwinbase", "um-winineti", "um-winnt", "wininet"]
 "um-winineti" = ["shared-minwindef"]
+"um-winioctl" = ["shared-minwindef", "um-winnt"]
 "um-winnt" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "vc-excpt"]
 "um-winreg" = ["shared-basetsd", "shared-minwindef", "um-winnt"]
+"um-winsock2" = ["shared-guiddef", "shared-inaddr", "shared-minwindef", "um-winnt", "vc-vcruntime"]
 "um-winuser" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-wingdi", "um-winnt"]
 "um-xinput" = ["shared-minwindef", "um-winnt"]
 "headers-vc" = [
