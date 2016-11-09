@@ -75,6 +75,8 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "um-wincon",
     "um-winevt",
     "um-wingdi",
+    "um-wininet",
+    "um-winineti",
     "um-winioctl",
     "um-winnt",
     "um-winreg",
@@ -98,6 +100,8 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "um-winevt" = ["shared-minwindef", "um-winnt"]
 "um-wingdi" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-winnt"]
 "um-winioctl" = ["shared-minwindef", "um-winnt"]
+"um-wininet" = ["shared-basetsd", "shared-minwindef", "shared-ntdef", "shared-windef", "um-minwinbase", "um-winineti", "um-winnt", "wininet"]
+"um-winineti" = ["shared-minwindef"]
 "um-winnt" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "vc-excpt"]
 "um-winreg" = ["shared-basetsd", "shared-minwindef", "um-winnt"]
 "um-winuser" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-wingdi", "um-winnt"]
@@ -119,8 +123,10 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 libraries = [
     "kernel32",
     "ncrypt",
-    "ole32"
+    "ole32",
+    "wininet",
 ]
 "kernel32" = []
 "ole32" = []
 "ncrypt" = []
+"wininet" = []

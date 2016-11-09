@@ -22,6 +22,8 @@
 #[cfg(feature = "um-winevt")] pub mod winevt;
 #[cfg(feature = "um-wingdi")] pub mod wingdi;
 #[cfg(feature = "um-winioctl")] pub mod winioctl;
+#[cfg(feature = "um-wininet")] pub mod wininet;
+#[cfg(feature = "um-winineti")] pub mod winineti;
 #[cfg(feature = "um-winnt")] pub mod winnt;
 #[cfg(feature = "um-winreg")] pub mod winreg;
 #[cfg(feature = "um-winuser")] pub mod winuser;
