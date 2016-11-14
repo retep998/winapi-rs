@@ -153,6 +153,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "um-propsys",
     "um-prsht",
     "um-shellapi",
+    "um-spapidef",
     "um-strmif",
     "um-unknwnbase",
     "um-vsserror",
@@ -224,6 +225,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "um-propsys" = ["um-unknwnbase"]
 "um-prsht" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-winnt", "um-winuser"]
 "um-shellapi" = ["shared-guiddef", "shared-minwindef", "shared-windef", "um-winnt"]
+"um-spapidef" = ["shared-minwindef", "um-winnt"]
 "um-strmif" = ["um-winnt"]
 "um-unknwnbase" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
 "um-vsserror" = ["um-winnt"]

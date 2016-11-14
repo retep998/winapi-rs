@@ -58,6 +58,7 @@
 #[cfg(feature = "um-propsys")] pub mod propsys;
 #[cfg(feature = "um-prsht")] pub mod prsht;
 #[cfg(feature = "um-shellapi")] pub mod shellapi;
+#[cfg(feature = "um-spapidef")] pub mod spapidef;
 #[cfg(feature = "um-strmif")] pub mod strmif;
 #[cfg(feature = "um-unknwnbase")] pub mod unknwnbase;
 #[cfg(feature = "um-vsserror")] pub mod vsserror;
