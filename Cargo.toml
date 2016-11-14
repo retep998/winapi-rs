@@ -152,6 +152,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "um-propidl",
     "um-propsys",
     "um-prsht",
+    "um-setupapi",
     "um-shellapi",
     "um-spapidef",
     "um-strmif",
@@ -224,6 +225,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "um-propidl" = ["shared-minwindef", "shared-wtypes"]
 "um-propsys" = ["um-unknwnbase"]
 "um-prsht" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-winnt", "um-winuser"]
+"um-setupapi" = ["shared-basetsd", "shared-devpropdef", "shared-guiddef", "shared-minwindef", "shared-windef", "um-commctrl", "um-prsht", "um-spapidef", "um-winnt", "um-winreg", "setupapi"]
 "um-shellapi" = ["shared-guiddef", "shared-minwindef", "shared-windef", "um-winnt"]
 "um-spapidef" = ["shared-minwindef", "um-winnt"]
 "um-strmif" = ["um-winnt"]
@@ -261,9 +263,11 @@ libraries = [
     "kernel32",
     "ncrypt",
     "ole32",
+    "setupapi",
     "wininet",
 ]
 "kernel32" = []
 "ole32" = []
 "ncrypt" = []
+"setupapi" = []
 "wininet" = []
