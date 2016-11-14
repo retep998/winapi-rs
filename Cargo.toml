@@ -37,6 +37,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "shared-d3d9",
     "shared-d3d9caps",
     "shared-d3d9types",
+    "shared-devguid",
     "shared-devpropdef",
     "shared-dxgi",
     "shared-dxgi1_2",
@@ -72,6 +73,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "shared-d3d9" = ["shared-basetsd", "shared-d3d9caps", "shared-d3d9types", "shared-guiddef", "shared-minwindef", "shared-windef", "um-unknwnbase", "um-wingdi", "um-winnt"]
 "shared-d3d9caps" = ["shared-d3d9types", "shared-guiddef", "shared-minwindef", "um-winnt"]
 "shared-d3d9types" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-winnt", "shared-windef"]
+"shared-devguid" = ["shared-guiddef"]
 "shared-devpropdef" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
 "shared-dxgi" = ["shared-basetsd", "shared-dxgiformat", "shared-dxgitype", "shared-guiddef", "shared-minwindef", "shared-windef", "um-unknwnbase", "um-winnt"]
 "shared-dxgi1_2" = ["shared-basetsd", "shared-dxgi", "shared-dxgiformat", "shared-dxgitype", "shared-guiddef", "shared-minwindef", "shared-windef", "um-minwinbase", "um-unknwnbase", "um-winnt"]
