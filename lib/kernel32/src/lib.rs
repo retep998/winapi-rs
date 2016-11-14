@@ -111,7 +111,6 @@ extern "system" {
     ) -> BOOL;
     pub fn ClearCommBreak(hFile: HANDLE) -> BOOL;
     pub fn ClearCommError(hFile: HANDLE, lpErrors: LPDWORD, lpStat: LPCOMSTAT) -> BOOL;
-    pub fn CloseHandle(hObject: HANDLE) -> BOOL;
     // pub fn ClosePackageInfo();
     pub fn ClosePrivateNamespace(Handle: HANDLE, Flags: ULONG) -> BOOLEAN;
     // pub fn CloseState();
@@ -497,10 +496,6 @@ extern "system" {
     ) -> BOOL;
     pub fn DosDateTimeToFileTime(wFatDate: WORD, wFatTime: WORD, lpFileTime: LPFILETIME) -> BOOL;
     // pub fn DosPathToSessionPathW();
-    pub fn DuplicateHandle(
-        hSourceProcessHandle: HANDLE, hSourceHandle: HANDLE, hTargetProcessHandle: HANDLE,
-        lpTargetHandle: LPHANDLE, dwDesiredAccess: DWORD, bInheritHandle: BOOL, dwOptions: DWORD,
-    ) -> BOOL;
     pub fn EnableThreadProfiling(
         ThreadHandle: HANDLE, Flags: DWORD, HardwareCounters: DWORD64,
         PerformanceDataHandle: *mut HANDLE,
@@ -1027,7 +1022,6 @@ extern "system" {
     pub fn GetGeoInfoW(
         Location: GEOID, GeoType: GEOTYPE, lpGeoData: LPWSTR, cchData: c_int, LangId: LANGID,
     ) -> c_int;
-    pub fn GetHandleInformation(hObject: HANDLE, lpdwFlags: LPDWORD) -> BOOL;
     pub fn GetLargePageMinimum() -> SIZE_T;
     pub fn GetLastError() -> DWORD;
     pub fn GetLocalTime(lpSystemTime: LPSYSTEMTIME);
@@ -2162,7 +2156,6 @@ extern "system" {
         lpName: LPCWSTR, lpGuid: LPCWSTR, pValue: PVOID, nSize: DWORD,
     ) -> BOOL;
     pub fn SetHandleCount(uNumber: UINT) -> UINT;
-    pub fn SetHandleInformation(hObject: HANDLE, dwMask: DWORD, dwFlags: DWORD) -> BOOL;
     pub fn SetInformationJobObject(
         hJob: HANDLE, JobObjectInformationClass: JOBOBJECTINFOCLASS,
         lpJobObjectInformation: LPVOID, cbJobObjectInformationLength: DWORD,
