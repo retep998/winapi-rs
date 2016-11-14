@@ -35,6 +35,7 @@
 #[cfg(feature = "um-dwrite")] pub mod dwrite;
 #[cfg(feature = "um-errhandlingapi")] pub mod errhandlingapi;
 #[cfg(feature = "um-fileapi")] pub mod fileapi;
+#[cfg(feature = "um-handleapi")] pub mod handleapi;
 #[cfg(feature = "um-heapapi")] pub mod heapapi;
 #[cfg(feature = "um-http")] pub mod http;
 #[cfg(feature = "um-imm")] pub mod imm;

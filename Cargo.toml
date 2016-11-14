@@ -130,6 +130,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "um-dwrite",
     "um-errhandlingapi",
     "um-fileapi",
+    "um-handleapi",
     "um-heapapi",
     "um-http",
     "um-imm",
@@ -200,6 +201,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "um-dwrite" = ["shared-basetsd", "shared-minwindef", "shared-windef", "shared-winerror", "um-dcommon", "um-unknwnbase", "um-wingdi", "um-winnt"]
 "um-errhandlingapi" = ["um-winnt"]
 "um-fileapi" = ["shared-minwindef", "um-minwinbase", "um-winnt"]
+"um-handleapi" = ["um-winnt"]
 "um-heapapi" = ["shared-basetsd", "shared-minwindef"]
 "um-http" = ["shared-guiddef", "shared-minwindef", "shared-sspi", "um-winnt", "um-winsock2"]
 "um-imm" = []

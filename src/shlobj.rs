@@ -1,6 +1,5 @@
 // Copyright © 2015, Peter Atashian, skdltmxn
 // Licensed under the MIT License <LICENSE.md>
-pub const INVALID_HANDLE_VALUE: ::HANDLE = -1isize as ::HANDLE;
 pub type GPFIDL_FLAGS = ::c_int;
 ENUM!{enum KNOWN_FOLDER_FLAG {
     KF_FLAG_DEFAULT = 0x00000000,
