@@ -21,6 +21,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("d3d9caps", &["d3d9types", "guiddef", "minwindef", "winnt"], &[]),
     ("d3d9types", &["basetsd", "guiddef", "minwindef", "windef", "winnt"], &[]),
     ("devguid", &[], &[]),
+    ("devpkey", &["devpropdef", "guiddef"], &[]),
     ("devpropdef", &["guiddef", "minwindef", "winnt"], &[]),
     ("dxgi", &["basetsd", "dxgiformat", "dxgitype", "guiddef", "minwindef", "unknwnbase", "windef", "winnt"], &[]),
     ("dxgi1_2", &["basetsd", "dxgi", "dxgiformat", "dxgitype", "guiddef", "minwinbase", "minwindef", "unknwnbase", "windef", "winnt"], &[]),
