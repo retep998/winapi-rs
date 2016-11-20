@@ -1,7 +1,7 @@
 // Copyright © 2015, skdltmxn
 // Licensed under the MIT License <LICENSE.md>
 //! Defines property types and keys for the Plug and Play Device Property API
-use shared::guiddef::{GUID};
+use shared::guiddef::{GUID, IsEqualGUID};
 use shared::minwindef::{ULONG};
 use um::winnt::{PVOID, PCWSTR, CHAR};
 
@@ -54,6 +54,10 @@ STRUCT!{struct DEVPROPKEY {
     pid: DEVPROPID,
 }}
 pub type PDEVPROPKEY = *mut DEVPROPKEY;
+#[inline]
+pub fn IsEqualDevPropKey(a: &DEVPROPKEY, b: &DEVPROPKEY) -> bool {
+    (a.pid == b.pid) && IsEqualGUID(&a.fmtid, &b.fmtid)
+}
 ENUM!{enum DEVPROPSTORE {
     DEVPROP_STORE_SYSTEM,
     DEVPROP_STORE_USER,
