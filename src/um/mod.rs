@@ -5,6 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Headers for user mode only
+
+pub mod gl;
+
 #[cfg(feature = "um-audioclient")] pub mod audioclient;
 #[cfg(feature = "um-audiosessiontypes")] pub mod audiosessiontypes;
 #[cfg(feature = "um-cfgmgr32")] pub mod cfgmgr32;
@@ -50,6 +53,8 @@
 #[cfg(feature = "um-minwinbase")] pub mod minwinbase;
 #[cfg(feature = "um-mmdeviceapi")] pub mod mmdeviceapi;
 #[cfg(feature = "um-mmsystem")] pub mod mmsystem;
+#[cfg(feature = "um-mscat")] pub mod mscat;
+#[cfg(feature = "um-mssip")] pub mod mssip;
 #[cfg(feature = "um-ncrypt")] pub mod ncrypt;
 #[cfg(feature = "um-oaidl")] pub mod oaidl;
 #[cfg(feature = "um-objidlbase")] pub mod objidlbase;
