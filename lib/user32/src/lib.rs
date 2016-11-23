@@ -1107,3 +1107,20 @@ extern "system" {
     // pub fn wvsprintfA();
     // pub fn wvsprintfW();
 }
+
+#[cfg(any(target_arch = "i686", target_arch = "x86"))]
+pub use self::GetClassLongA as GetClassLongPtrA;
+#[cfg(any(target_arch = "i686", target_arch = "x86"))]
+pub use self::GetClassLongW as GetClassLongPtrW;
+#[cfg(any(target_arch = "i686", target_arch = "x86"))]
+pub use self::GetWindowLongA as GetWindowLongPtrA;
+#[cfg(any(target_arch = "i686", target_arch = "x86"))]
+pub use self::GetWindowLongW as GetWindowLongPtrW;
+#[cfg(any(target_arch = "i686", target_arch = "x86"))]
+pub use self::SetClassLongA as SetClassLongPtrA;
+#[cfg(any(target_arch = "i686", target_arch = "x86"))]
+pub use self::SetClassLongW as SetClassLongPtrW;
+#[cfg(any(target_arch = "i686", target_arch = "x86"))]
+pub use self::SetWindowLongA as SetWindowLongPtrA;
+#[cfg(any(target_arch = "i686", target_arch = "x86"))]
+pub use self::SetWindowLongW as SetWindowLongPtrW;
