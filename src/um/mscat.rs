@@ -1,6 +1,13 @@
 // Copyright © 2015, skdltmxn
 // Licensed under the MIT License <LICENSE.md>
 //! Microsoft Internet Security Catalog API Prototypes and Definitions
+
+use shared::guiddef::GUID;
+use shared::minwindef::DWORD;
+use um::mssip::SIP_INDIRECT_DATA;
+use um::wincrypt::{HCRYPTMSG, HCRYPTPROV, CRYPT_ATTR_BLOB};
+use um::winnt::{HANDLE, LPWSTR};
+
 STRUCT!{struct CRYPTCATSTORE {
     cbStruct: DWORD,
     dwPublicVersion: DWORD,

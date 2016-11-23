@@ -146,6 +146,8 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "um-minwinbase",
     "um-mmdeviceapi",
     "um-mmsystem",
+    "um-mscat",
+    "um-mssip",
     "um-ncrypt",
     "um-oaidl",
     "um-objidlbase",
@@ -218,6 +220,8 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "um-minwinbase" = ["shared-ntstatus"]
 "um-mmdeviceapi" = ["shared-guiddef", "shared-minwindef", "um-propidl", "um-propsys", "um-unknwnbase", "um-winnt"]
 "um-mmsystem" = ["shared-basetsd", "shared-minwindef", "shared-mmreg", "um-winnt"]
+"um-mscat" = ["shared-guiddef", "shared-minwindef", "um-mssip", "um-wincrypt", "um-winnt"]
+"um-mssip" = ["shared-guiddef", "shared-minwindef", "um-winnt", "um-wincrypt"]
 "um-ncrypt" = ["shared-basetsd", "shared-sspi", "ncrypt"]
 "um-oaidl" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "shared-wtypes", "shared-wtypesbase", "um-unknwnbase", "um-winnt"]
 "um-objidlbase" = ["shared-guiddef", "shared-minwindef", "shared-wtypesbase", "um-unknwnbase", "um-winnt"]
