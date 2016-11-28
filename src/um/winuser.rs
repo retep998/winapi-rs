@@ -2447,10 +2447,10 @@ pub const TPM_WORKAREA: UINT = 0x10000;
 
 // ANIMATIONINFO and related fields
 STRUCT!{struct ANIMATIONINFO {
-    cbSize: ::UINT,
-    iMinAnimate: ::c_int,
+    cbSize: UINT,
+    iMinAnimate: c_int,
 }}
 pub type LPANIMATIONINFO = *mut ANIMATIONINFO;
-pub const SPIF_UPDATEINIFILE: ::UINT = 0x0001;
-pub const SPIF_SENDWININICHANGE: ::UINT = 0x0002;
-pub const SPIF_SENDCHANGE: ::UINT = SPIF_SENDWININICHANGE;
+pub const SPIF_UPDATEINIFILE: UINT = 0x0001;
+pub const SPIF_SENDWININICHANGE: UINT = 0x0002;
+pub const SPIF_SENDCHANGE: UINT = SPIF_SENDWININICHANGE;
