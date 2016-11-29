@@ -471,7 +471,52 @@ interface IShellItem(IShellItemVtbl): IUnknown(IUnknownVtbl) {
 );
 //11963
 pub type IFileOperationProgressSink = ::IUnknown; // TODO
-pub type IShellItemArray = ::IUnknown; // TODO
+ENUM!{enum GETPROPERTYSTOREFLAGS {
+    GPS_DEFAULT = 0,
+    GPS_HANDLERPROPERTIESONLY   = 0x1,
+    GPS_READWRITE = 0x2,
+    GPS_TEMPORARY = 0x4,
+    GPS_FASTPROPERTIESONLY = 0x8,
+    GPS_OPENSLOWITEM = 0x10,
+    GPS_DELAYCREATION = 0x20,
+    GPS_BESTEFFORT = 0x40,
+    GPS_NO_OPLOCK = 0x80,
+    GPS_PREFERQUERYPROPERTIES = 0x100,
+    GPS_EXTRINSICPROPERTIES = 0x200,
+    GPS_EXTRINSICPROPERTIESONLY = 0x400,
+    GPS_MASK_VALID = 0x7ff,
+}}
+ENUM!{enum SIATTRIBFLAGS {
+    SIATTRIBFLAGS_AND = 0x1,
+    SIATTRIBFLAGS_OR = 0x2,
+    SIATTRIBFLAGS_APPCOMPAT = 0x3,
+    SIATTRIBFLAGS_MASK = 0x3,
+    SIATTRIBFLAGS_ALLITEMS = 0x4000,
+}}
+STRUCT!{struct PROPERTYKEY {
+    fmtid: ::GUID,
+    pid: ::DWORD,
+}}
+pub type REFPROPERTYKEY = *mut PROPERTYKEY;
+RIDL!(
+interface IShellItemArray(IShellItemArrayVtbl): IUnknown(IUnknownVtbl) {
+    fn BindToHandler(
+        &mut self, pbc: *mut ::IBindCtx, bhid: ::REFGUID, riid: ::REFIID, ppvOut: *mut *mut ::c_void
+    ) -> ::HRESULT,
+    fn GetPropertyStore(
+        &mut self, flags: GETPROPERTYSTOREFLAGS, riid: ::REFIID, ppv: *mut *mut ::c_void
+    ) -> ::HRESULT,
+    fn GetPropertyDescriptionList(
+        &mut self, keyType: REFPROPERTYKEY, riid: ::REFIID, ppv: *mut *mut ::c_void
+    ) -> ::HRESULT,
+    fn GetAttributes(
+        &mut self, AttribFlags: SIATTRIBFLAGS, sfgaoMask: SFGAOF, psfgaoAttribs: *mut SFGAOF
+    ) -> ::HRESULT,
+    fn GetCount(&mut self, pdwNumItems: *mut ::DWORD) -> ::HRESULT,
+    fn GetItemAt(&mut self, dwIndex: ::DWORD, ppsi: *mut *mut IShellItem) -> ::HRESULT,
+    fn EnumItems(&mut self, ppenumShellItems: *mut *mut IEnumShellItems) -> ::HRESULT
+}
+);
 //20869
 RIDL!(
 interface IModalWindow(IModalWindowVtbl): IUnknown(IUnknownVtbl) {
