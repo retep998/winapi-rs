@@ -6,6 +6,7 @@
 // except according to those terms.
 use std::env::var;
 const LIBS: &'static [&'static str] = &[
+    "avrt",
     "kernel32",
     "ncrypt",
     "ole32",

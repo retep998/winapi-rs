@@ -10,6 +10,7 @@ pub mod gl;
 
 #[cfg(feature = "um-audioclient")] pub mod audioclient;
 #[cfg(feature = "um-audiosessiontypes")] pub mod audiosessiontypes;
+#[cfg(feature = "um-avrt")] pub mod avrt;
 #[cfg(feature = "um-cfgmgr32")] pub mod cfgmgr32;
 #[cfg(feature = "um-cguid")] pub mod cguid;
 #[cfg(feature = "um-combaseapi")] pub mod combaseapi;

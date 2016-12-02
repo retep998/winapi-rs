@@ -102,6 +102,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "headers-um" = [
     "um-audioclient",
     "um-audiosessiontypes",
+    "um-avrt",
     "um-cfgmgr32",
     "um-cguid",
     "um-combaseapi",
@@ -174,6 +175,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 ]
 "um-audioclient" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "shared-mmreg", "shared-winerror", "shared-wtypesbase", "um-audiosessiontypes", "um-strmif", "um-unknwnbase", "um-winnt"]
 "um-audiosessiontypes" = ["shared-minwindef"]
+"um-avrt" = ["um-winnt", "avrt"]
 "um-cfgmgr32" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-winnt"]
 "um-cguid" = ["shared-guiddef"]
 "um-combaseapi" = ["shared-basetsd", "shared-minwindef", "shared-wtypesbase", "um-objidlbase", "ole32"]
@@ -263,6 +265,7 @@ libraries = [
     "ole32",
     "wininet",
 ]
+"avrt" = []
 "kernel32" = []
 "ole32" = []
 "ncrypt" = []
