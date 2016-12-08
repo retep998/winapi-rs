@@ -51,7 +51,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("windef", &["minwindef", "winnt"], &[]),
     ("windowsx", &["minwindef"], &[]),
     ("winerror", &["minwindef"], &[]),
-    ("wtypes", &["minwindef", "ntdef", "wtypesbase"], &[]),
+    ("wtypes", &["guiddef", "minwindef", "ntdef", "wtypesbase"], &[]),
     ("wtypesbase", &["minwindef", "rpcndr", "winnt"], &[]),
     // ucrt
     // um
@@ -123,6 +123,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("pdh", &["basetsd", "guiddef", "minwindef", "windef", "winnt", "wtypesbase"], &["pdh"]),
     ("processthreadsapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("propidl", &["minwindef", "wtypes"], &[]),
+    ("propkeydef", &["guiddef", "wtypes"], &[]),
     ("propsys", &["unknwnbase"], &[]),
     ("prsht", &["basetsd", "minwindef", "windef", "winnt", "winuser"], &[]),
     ("psapi", &["basetsd", "minwindef", "winnt"], &[]),

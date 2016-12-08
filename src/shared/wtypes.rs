@@ -6,6 +6,7 @@
 // except according to those terms.
 //! Mappings for the contents of wstypes.h
 use ctypes::{c_double, c_short, c_ushort, wchar_t};
+use shared::guiddef::{GUID};
 use shared::minwindef::{BYTE, DWORD, ULONG, USHORT, WORD};
 use shared::ntdef::{LONG, LONGLONG, ULONGLONG};
 use shared::wtypesbase::{FLAGGED_WORD_BLOB, OLECHAR};
@@ -64,6 +65,11 @@ ENUM!{enum VARENUM {
 }}
 pub const VT_ILLEGALMASKED: VARENUM = VT_BSTR_BLOB;
 pub const VT_TYPEMASK: VARENUM = VT_BSTR_BLOB;
+pub type PROPID = ULONG;
+STRUCT!{#[derive(PartialEq, Eq)] struct PROPERTYKEY {
+    fmtid: GUID,
+    pid: DWORD,
+}}
 pub type DATE = c_double;
 STRUCT!{struct CY {
     int64: LONGLONG,

@@ -73,6 +73,7 @@ pub mod gl;
 #[cfg(feature = "pdh")] pub mod pdh;
 #[cfg(feature = "processthreadsapi")] pub mod processthreadsapi;
 #[cfg(feature = "propidl")] pub mod propidl;
+#[cfg(feature = "propkeydef")] pub mod propkeydef;
 #[cfg(feature = "propsys")] pub mod propsys;
 #[cfg(feature = "prsht")] pub mod prsht;
 #[cfg(feature = "psapi")] pub mod psapi;
