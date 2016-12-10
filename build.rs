@@ -46,6 +46,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("rpcndr", &[], &[]),
     ("sspi", &["ntdef"], &[]),
     ("usb", &["minwindef", "winnt"], &[]),
+    ("usbiodef", &["guiddef", "minwindef", "winioctl", "winnt"], &[]),
     ("windef", &["minwindef", "winnt"], &[]),
     ("windowsx", &["minwindef"], &[]),
     ("winerror", &["minwindef"], &[]),

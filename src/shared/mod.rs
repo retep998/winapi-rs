@@ -39,6 +39,7 @@
 #[cfg(feature = "rpcndr")] pub mod rpcndr;
 #[cfg(feature = "sspi")]  pub mod sspi;
 #[cfg(feature = "usb")] pub mod usb;
+#[cfg(feature = "usbiodef")] pub mod usbiodef;
 #[cfg(feature = "windef")] pub mod windef;
 #[cfg(feature = "windowsx")] pub mod windowsx;
 #[cfg(feature = "winerror")] pub mod winerror;
