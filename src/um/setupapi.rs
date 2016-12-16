@@ -2910,7 +2910,7 @@ EXTERN!{stdcall fn SetupDiSetDevicePropertyW(
     DeviceInfoData: PSP_DEVINFO_DATA,
     PropertyKey: *const DEVPROPKEY,
     PropertyType: DEVPROPTYPE,
-    PropertyBuffer: PBYTE,
+    PropertyBuffer: *const BYTE,
     PropertyBufferSize: DWORD,
     Flags: DWORD
 ) -> BOOL}
@@ -2937,7 +2937,7 @@ EXTERN!{stdcall fn SetupDiSetDeviceInterfacePropertyW(
     DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
     PropertyKey: *const DEVPROPKEY,
     PropertyType: DEVPROPTYPE,
-    PropertyBuffer: PBYTE,
+    PropertyBuffer: *const BYTE,
     PropertyBufferSize: DWORD,
     Flags: DWORD
 ) -> BOOL}
@@ -2982,7 +2982,7 @@ EXTERN!{stdcall fn SetupDiSetClassPropertyW(
     ClassGuid: *const GUID,
     PropertyKey: *const DEVPROPKEY,
     PropertyType: DEVPROPTYPE,
-    PropertyBuffer: PBYTE,
+    PropertyBuffer: *const BYTE,
     PropertyBufferSize: DWORD,
     Flags: DWORD
 ) -> BOOL}
@@ -2990,7 +2990,7 @@ EXTERN!{stdcall fn SetupDiSetClassPropertyExW(
     ClassGuid: *const GUID,
     PropertyKey: *const DEVPROPKEY,
     PropertyType: DEVPROPTYPE,
-    PropertyBuffer: PBYTE,
+    PropertyBuffer: *const BYTE,
     PropertyBufferSize: DWORD,
     Flags: DWORD,
     MachineName: PCWSTR,
@@ -3402,8 +3402,8 @@ EXTERN!{stdcall fn SetupDiGetActualSectionToInstallW(
 EXTERN!{stdcall fn SetupDiGetActualSectionToInstallExA(
     InfHandle: HINF,
     InfSectionName: PCSTR,
-    InfSectionWithExt: PSTR,
     AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
+    InfSectionWithExt: PSTR,
     InfSectionWithExtSize: DWORD,
     RequiredSize: PDWORD,
     Extension: *mut PSTR,
@@ -3412,8 +3412,8 @@ EXTERN!{stdcall fn SetupDiGetActualSectionToInstallExA(
 EXTERN!{stdcall fn SetupDiGetActualSectionToInstallExW(
     InfHandle: HINF,
     InfSectionName: PCWSTR,
-    InfSectionWithExt: PWSTR,
     AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
+    InfSectionWithExt: PWSTR,
     InfSectionWithExtSize: DWORD,
     RequiredSize: PDWORD,
     Extension: *mut PWSTR,
