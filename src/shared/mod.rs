@@ -13,6 +13,7 @@
 #[cfg(feature = "shared-d3d9caps")] pub mod d3d9caps;
 #[cfg(feature = "shared-d3d9types")] pub mod d3d9types;
 #[cfg(feature = "shared-devpropdef")] pub mod devpropdef;
+#[cfg(feature = "shared-devguid")] pub mod devguid;
 #[cfg(feature = "shared-dxgi")] pub mod dxgi;
 #[cfg(feature = "shared-dxgi1_2")] pub mod dxgi1_2;
 #[cfg(feature = "shared-dxgi1_3")] pub mod dxgi1_3;
