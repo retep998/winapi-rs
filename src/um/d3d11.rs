@@ -2669,7 +2669,7 @@ ENUM!{enum D3D11_CREATE_DEVICE_FLAG {
     D3D11_CREATE_DEVICE_VIDEO_SUPPORT = 0x800,
 }}
 pub const D3D11_SDK_VERSION: DWORD = 7;
-
+#[inline]
 pub fn D3D11CalcSubresource(MipSlice: UINT, ArraySlice: UINT, MipLevels: UINT) -> UINT {
     MipSlice + ArraySlice * MipLevels
 }

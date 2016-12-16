@@ -1924,6 +1924,7 @@ pub type MONITORENUMPROC = Option<unsafe extern "system" fn(
 ) -> BOOL>;
 //14098
 DECLARE_HANDLE!(HRAWINPUT, HRAWINPUT__);
+#[inline]
 pub fn GET_RAWINPUT_CODE_WPARAM(wParam: WPARAM) -> WPARAM { wParam & 0xff }
 pub const RIM_INPUT: WPARAM = 0;
 pub const RIM_INPUTSINK: WPARAM = 1;
@@ -2003,17 +2004,6 @@ STRUCT!{struct RAWINPUT {
 UNION!(RAWINPUT, mouse, mouse, mouse_mut, RAWMOUSE);
 UNION!(RAWINPUT, mouse, keyboard, keyboard_mut, RAWKEYBOARD);
 UNION!(RAWINPUT, mouse, hid, hid_mut, RAWHID);
-// TODO - Replace std methods or remove this test entirely
-// #[test]
-// fn test_RAWINPUT() {
-//     use std::mem::{size_of, align_of};
-//     assert!(size_of::<RAWMOUSE>() >= size_of::<RAWMOUSE>());
-//     assert!(size_of::<RAWMOUSE>() >= size_of::<RAWKEYBOARD>());
-//     assert!(size_of::<RAWMOUSE>() >= size_of::<RAWHID>());
-//     assert!(align_of::<RAWMOUSE>() >= align_of::<RAWMOUSE>());
-//     assert!(align_of::<RAWMOUSE>() >= align_of::<RAWKEYBOARD>());
-//     assert!(align_of::<RAWMOUSE>() >= align_of::<RAWHID>());
-// }
 pub type PRAWINPUT = *mut RAWINPUT;
 pub type LPRAWINPUT = *mut RAWINPUT;
 pub const RID_INPUT: DWORD = 0x10000003;
@@ -2053,18 +2043,6 @@ STRUCT!{struct RID_DEVICE_INFO {
 UNION!(RID_DEVICE_INFO, keyboard, mouse, mouse_mut, RID_DEVICE_INFO_MOUSE);
 UNION!(RID_DEVICE_INFO, keyboard, keyboard, keyboard_mut, RID_DEVICE_INFO_KEYBOARD);
 UNION!(RID_DEVICE_INFO, keyboard, hid, hid_mut, RID_DEVICE_INFO_HID);
-// TODO - Replace std methods or remove this test entirely
-// #[test]
-// fn test_RID_DEVICE_INFO() {
-//     use std::mem::{size_of, align_of};
-//     assert!(size_of::<RID_DEVICE_INFO_KEYBOARD>() >= size_of::<RID_DEVICE_INFO_MOUSE>());
-//     assert!(size_of::<RID_DEVICE_INFO_KEYBOARD>() >= size_of::<RID_DEVICE_INFO_KEYBOARD>());
-//     assert!(size_of::<RID_DEVICE_INFO_KEYBOARD>() >= size_of::<RID_DEVICE_INFO_HID>());
-//     assert!(align_of::<RID_DEVICE_INFO_KEYBOARD>() >= align_of::<RID_DEVICE_INFO_MOUSE>());
-//     assert!(align_of::<RID_DEVICE_INFO_KEYBOARD>()
-//         >= align_of::<RID_DEVICE_INFO_KEYBOARD>());
-//     assert!(align_of::<RID_DEVICE_INFO_KEYBOARD>() >= align_of::<RID_DEVICE_INFO_HID>());
-// }
 pub type PRID_DEVICE_INFO = *mut RID_DEVICE_INFO;
 pub type LPRID_DEVICE_INFO = *mut RID_DEVICE_INFO;
 STRUCT!{struct RAWINPUTDEVICE {
@@ -2195,15 +2173,15 @@ STRUCT!{struct HELPINFO {
     MousePos: POINT,
 }}
 pub type LPHELPINFO = *mut HELPINFO;
-#[allow(trivial_numeric_casts)]
+#[inline]
 pub fn GET_WHEEL_DELTA_WPARAM(wParam: WPARAM) -> c_short {
     HIWORD(wParam as DWORD) as c_short
 }
-#[allow(trivial_numeric_casts)]
+#[inline]
 pub fn GET_KEYSTATE_WPARAM(wparam: WPARAM) -> c_int {
     LOWORD(wparam as DWORD) as c_short as c_int
 }
-#[allow(trivial_numeric_casts)]
+#[inline]
 pub fn GET_XBUTTON_WPARAM(wparam: WPARAM) -> c_int {
     HIWORD(wparam as DWORD) as c_int
 }

@@ -66,5 +66,4 @@ interface IMMDeviceCollection(IMMDeviceCollectionVtbl): IUnknown(IUnknownVtbl) {
     fn Item(&mut self, nDevice: UINT, ppDevice: *mut *mut IMMDevice) -> HRESULT
 }
 );
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IMMNotificationClient;
+pub enum IMMNotificationClient {} // FIXME

@@ -494,13 +494,7 @@ interface ICreateTypeInfo(ICreateTypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn LayOut(&mut self) -> HRESULT
 }
 );
-// FIXME: Implement these interfaces
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICreateTypeInfo2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICreateTypeLib;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICreateTypeLib2;
+
 pub type LPDISPATCH = *mut IDispatch;
 pub const DISPID_UNKNOWN: INT = -1;
 pub const DISPID_VALUE: INT = 0;
@@ -527,11 +521,9 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT
 }
 );
-// FIXME: Implement these interfaces
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IEnumVARIANT;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeComp;
+pub enum IRecordInfo {} // FIXME
+pub enum ITypeComp {} // FIXME
+pub enum ITypeLib {} // FIXME
 RIDL!(
 interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeAttr(&mut self, ppTypeAttr: *mut *mut TYPEATTR) -> HRESULT,
@@ -576,28 +568,3 @@ interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn ReleaseVarDesc(&mut self, pVarDesc: *mut VARDESC) -> ()
 }
 );
-// FIXME: Implement these interfaces
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeInfo2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeLib;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeLib2;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeChangeEvents;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IErrorInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ICreateErrorInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ISupportErrorInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeFactory;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct ITypeMarshal;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IRecordInfo;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IErrorLog;
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IPropertyBag;
