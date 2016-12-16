@@ -18,7 +18,8 @@ extern "system" {
     // pub fn DwmGetGraphicsStreamClient();
     // pub fn DwmGetGraphicsStreamTransformHint();
     // pub fn DwmGetTransportAttributes();
-    // pub fn DwmGetWindowAttribute();
+    pub fn DwmGetWindowAttribute(hWnd: HWND, dwAttribute: DWORD, pvAttribute: LPVOID,
+                                 cbAttribute: DWORD) -> HRESULT;
     // pub fn DwmInvalidateIconicBitmaps();
     // pub fn DwmIsCompositionEnabled();
     // pub fn DwmModifyPreviousDxFrameDuration();
