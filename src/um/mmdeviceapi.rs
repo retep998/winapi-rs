@@ -99,9 +99,7 @@ DEFINE_GUID!(DEVINTERFACE_MIDI_OUTPUT,
 DEFINE_GUID!(DEVINTERFACE_MIDI_INPUT,
     0x504be32c, 0xccf6, 0x4d2c, 0xb7, 0x3f, 0x6f, 0x8b, 0x37, 0x47, 0xe2, 0x2b);
 
-DEFINE_GUID!(IID_IMMNotificationClient,
-    0x7991EEC9, 0x7E89, 0x4D85, 0x83, 0x90, 0x6C, 0x70, 0x3C, 0xEC, 0x60, 0xC0);
-RIDL!(
+RIDL!(#[uuid(0x7991eec9, 0x7e89, 0x4d85, 0x83, 0x90, 0x6c, 0x70, 0x3c, 0xec, 0x60, 0xc0)]
 interface IMMNotificationClient(IMMNotificationClientVtbl): IUnknown(IUnknownVtbl) {
     fn OnDeviceStateChanged( 
         pwstrDeviceId: LPCWSTR,
@@ -155,9 +153,7 @@ interface IMMDeviceCollection(IMMDeviceCollectionVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }
 );
-DEFINE_GUID!(IID_IMMEndpoint,
-    0x1BE09788, 0x6894, 0x4089, 0x85, 0x86, 0x9A, 0x2A, 0x6C, 0x26, 0x5A, 0xC5);
-RIDL!(
+RIDL!(#[uuid(0x1be09788, 0x6894, 0x4089, 0x85, 0x86, 0x9a, 0x2a, 0x6c, 0x26, 0x5a, 0xc5)]
 interface IMMEndpoint(IMMEndpointVtbl): IUnknown(IUnknownVtbl) {
     fn GetDataFlow(
         pDataFlow: *mut EDataFlow,
@@ -188,9 +184,7 @@ interface IMMDeviceEnumerator(IMMDeviceEnumeratorVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }
 );
-DEFINE_GUID!(IID_IMMDeviceActivator,
-    0x3B0D0EA4, 0xD0A9, 0x4B0E, 0x93, 0x5B, 0x09, 0x51, 0x67, 0x46, 0xFA, 0xC0);
-RIDL!(
+RIDL!(#[uuid(0x3b0d0ea4, 0xd0a9, 0x4b0e, 0x93, 0x5b, 0x09, 0x51, 0x67, 0x46, 0xfa, 0xc0)]
 interface IMMDeviceActivator(IMMDeviceActivatorVtbl): IUnknown(IUnknownVtbl) {
     fn Activate( 
         iid: REFIID,
@@ -200,18 +194,14 @@ interface IMMDeviceActivator(IMMDeviceActivatorVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }
 );
-DEFINE_GUID!(IID_IActivateAudioInterfaceCompletionHandler,
-    0x41D949AB, 0x9862, 0x444A, 0x80, 0xF6, 0xC2, 0x61, 0x33, 0x4D, 0xA5, 0xEB);
-RIDL!(
+RIDL!(#[uuid(0x41d949ab, 0x9862, 0x444a, 0x80, 0xf6, 0xc2, 0x61, 0x33, 0x4d, 0xa5, 0xeb)]
 interface IActivateAudioInterfaceCompletionHandler(IActivateAudioInterfaceCompletionHandlerVtbl): IUnknown(IUnknownVtbl) {
     fn ActivateCompleted(
         activateOperation: *mut IActivateAudioInterfaceAsyncOperation,
     ) -> HRESULT,
 }
 );
-DEFINE_GUID!(IID_IActivateAudioInterfaceAsyncOperation,
-    0x72A22D78, 0xCDE4, 0x431D, 0xB8, 0xCC, 0x84, 0x3A, 0x71, 0x19, 0x9B, 0x6D);
-RIDL!(
+RIDL!(#[uuid(0x72a22d78, 0xcde4, 0x431d, 0xb8, 0xcc, 0x84, 0x3a, 0x71, 0x19, 0x9b, 0x6d)]
 interface IActivateAudioInterfaceAsyncOperation(IActivateAudioInterfaceAsyncOperationVtbl): IUnknown(IUnknownVtbl) {
     fn GetActivateResult( 
         activateResult: *mut HRESULT,
