@@ -5,13 +5,14 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
-use shared::basetsd::{UINT64};
+use ctypes::c_void;
+use shared::basetsd::UINT64;
 use shared::guiddef::{CLSID, REFIID};
-use shared::minwindef::{DWORD, FILETIME};
+use shared::minwindef::{BOOL, DWORD, FILETIME, ULONG};
 use shared::wtypesbase::{OLECHAR, LPOLESTR};
 use um::objidlbase::{IEnumString, IStream};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HRESULT, VOID};
+use um::winnt::{HRESULT, ULARGE_INTEGER, VOID};
 //8402
 STRUCT!{struct BIND_OPTS {
     cbStruct: DWORD,
@@ -57,7 +58,23 @@ interface IBindCtx(IBindCtxVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 //8681
-pub type IEnumMoniker = IUnknown; // TODO
+RIDL!(
+#[uuid(0x00000102, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IEnumMoniker(IEnumMonikerVtbl): IUnknown(IUnknownVtbl) {
+    fn Next( 
+        celt: ULONG,
+        rgelt: *mut *mut IMoniker,
+        pceltFetched: *mut ULONG
+    ) -> HRESULT,
+    fn Skip( 
+        celt: ULONG
+    ) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone( 
+        ppenum: *mut *mut IEnumMoniker
+    ) -> HRESULT
+}
+);
 //8958
 RIDL!(
 #[uuid(0x00000010, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
@@ -91,24 +108,124 @@ interface IRunningObjectTable(IRunningObjectTableVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT
 }
 );
+//9125
+RIDL!(
+#[uuid(0x0000010c, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IPersist(IPersistVtbl): IUnknown(IUnknownVtbl) {
+    fn GetClassID( 
+        pClassID: *mut CLSID
+    ) -> HRESULT
+}
+);
+//9207
+RIDL!(
+#[uuid(0x00000109, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IPersistStream(IPersistStreamVtbl): IPersist(IPersistVtbl) {
+    fn IsDirty() -> HRESULT,
+    fn Load( 
+        pStm: *mut IStream
+    ) -> HRESULT,
+    fn Save( 
+        pStm: *mut IStream,
+        fClearDirty: BOOL
+    ) -> HRESULT,
+    fn GetSizeMax( 
+        pcbSize: *mut ULARGE_INTEGER
+    ) -> HRESULT
+}
+);
 //9350
-pub type IMoniker = IUnknown; // TODO
-pub type EOLE_AUTHENTICATION_CAPABILITIES = DWORD;
-pub const EOAC_NONE: DWORD = 0;
-pub const EOAC_MUTUAL_AUTH: DWORD = 0x1;
-pub const EOAC_STATIC_CLOAKING: DWORD = 0x20;
-pub const EOAC_DYNAMIC_CLOAKING: DWORD = 0x40;
-pub const EOAC_ANY_AUTHORITY: DWORD = 0x80;
-pub const EOAC_MAKE_FULLSIC: DWORD = 0x100;
-pub const EOAC_DEFAULT: DWORD = 0x800;
-pub const EOAC_SECURE_REFS: DWORD = 0x2;
-pub const EOAC_ACCESS_CONTROL: DWORD = 0x4;
-pub const EOAC_APPID: DWORD = 0x8;
-pub const EOAC_DYNAMIC: DWORD = 0x10;
-pub const EOAC_REQUIRE_FULLSIC: DWORD = 0x200;
-pub const EOAC_AUTO_IMPERSONATE: DWORD = 0x400;
-pub const EOAC_NO_CUSTOM_MARSHAL: DWORD = 0x2000;
-pub const EOAC_DISABLE_AAA: DWORD = 0x1000;
+RIDL!(
+#[uuid(0x0000000f, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IMoniker(IMonikerVtbl): IPersistStream(IPersistStreamVtbl) {
+    fn BindToObject( 
+        pbc: *mut IBindCtx,
+        pmkToLeft: *mut IMoniker,
+        riidResult: REFIID,
+        ppvResult: *mut *mut c_void
+    ) -> HRESULT,
+    fn BindToStorage( 
+        pbc: *mut IBindCtx,
+        pmkToLeft: *mut IMoniker,
+        riid: REFIID,
+        ppvObj: *mut *mut c_void
+    ) -> HRESULT,
+    fn Reduce( 
+        pbc: *mut IBindCtx,
+        dwReduceHowFar: DWORD,
+        ppmkToLeft: *mut *mut IMoniker,
+        ppmkReduced: *mut *mut IMoniker
+    ) -> HRESULT,
+    fn ComposeWith( 
+        pmkRight: *mut IMoniker,
+        fOnlyIfNotGeneric: BOOL,
+        ppmkComposite: *mut *mut IMoniker
+    ) -> HRESULT,
+    fn Enum( 
+        fForward: BOOL,
+        ppenumMoniker: *mut *mut IEnumMoniker
+    ) -> HRESULT,
+    fn IsEqual( 
+        pmkOtherMoniker: *mut IMoniker
+    ) -> HRESULT,
+    fn Hash( 
+        pdwHash: *mut DWORD
+    ) -> HRESULT,
+    fn IsRunning( 
+        pbc: *mut IBindCtx,
+        pmkToLeft: *mut IMoniker,
+        pmkNewlyRunning: *mut IMoniker
+    ) -> HRESULT,
+    fn GetTimeOfLastChange( 
+        pbc: *mut IBindCtx,
+        pmkToLeft: *mut IMoniker,
+        pFileTime: *mut FILETIME
+    ) -> HRESULT,
+    fn Inverse( 
+        ppmk: *mut *mut IMoniker
+    ) -> HRESULT,
+    fn CommonPrefixWith( 
+        pmkOther: *mut IMoniker,
+        ppmkPrefix: *mut *mut IMoniker
+    ) -> HRESULT,
+    fn RelativePathTo( 
+        pmkOther: *mut IMoniker,
+        ppmkRelPath: *mut *mut IMoniker
+    ) -> HRESULT,
+    fn GetDisplayName( 
+        pbc: *mut IBindCtx,
+        pmkToLeft: *mut IMoniker,
+        ppszDisplayName: *mut LPOLESTR
+    ) -> HRESULT,
+    fn ParseDisplayName( 
+        pbc: *mut IBindCtx,
+        pmkToLeft: *mut IMoniker,
+        pszDisplayName: LPOLESTR,
+        pchEaten: *mut ULONG,
+        ppmkOut: *mut *mut IMoniker
+    ) -> HRESULT,
+    fn IsSystemMoniker( 
+        pdwMksys: *mut DWORD
+    ) -> HRESULT
+}
+);
+ENUM!{enum EOLE_AUTHENTICATION_CAPABILITIES {
+    EOAC_NONE = 0,
+    EOAC_MUTUAL_AUTH = 0x1,
+    EOAC_STATIC_CLOAKING = 0x20,
+    EOAC_DYNAMIC_CLOAKING = 0x40,
+    EOAC_ANY_AUTHORITY = 0x80,
+    EOAC_MAKE_FULLSIC = 0x100,
+    EOAC_DEFAULT = 0x800,
+    EOAC_SECURE_REFS = 0x2,
+    EOAC_ACCESS_CONTROL = 0x4,
+    EOAC_APPID = 0x8,
+    EOAC_DYNAMIC = 0x10,
+    EOAC_REQUIRE_FULLSIC = 0x200,
+    EOAC_AUTO_IMPERSONATE = 0x400,
+    EOAC_NO_CUSTOM_MARSHAL = 0x2000,
+    EOAC_DISABLE_AAA = 0x1000,
+}}
 STRUCT!{struct SOLE_AUTHENTICATION_SERVICE {
     dwAuthnSvc: DWORD,
     dwAuthzSvc: DWORD,
@@ -130,35 +247,35 @@ RIDL!(
 interface IMarshal(IMarshalVtbl): IUnknown(IUnknownVtbl) {
     fn GetUnmarshalClass(
         riid: REFIID,
-        pv: *const VOID,
+        pv: *mut c_void,
         dwDestContext: DWORD,
-        pvDestContext: *const VOID,
+        pvDestContext: *mut c_void,
         mshlflags: DWORD,
         pCid: *mut CLSID
     ) -> HRESULT,
     fn GetMarshalSizeMax(
         riid: REFIID,
-        pv: *const VOID,
+        pv: *mut c_void,
         dwDestContext: DWORD,
-        pvDestContext: *const VOID,
+        pvDestContext: *mut c_void,
         mshlflags: DWORD,
         pSize: *mut DWORD
     ) -> HRESULT,
     fn MarshalInterface(
-        pStm: *const IStream,
+        pStm: *mut IStream,
         riid: REFIID,
-        pv: *const VOID,
+        pv: *mut c_void,
         dwDestContext: DWORD,
-        pvDestContext: *const VOID,
+        pvDestContext: *mut c_void,
         mshlflags: DWORD
     ) -> HRESULT,
     fn UnmarshalInterface(
-        pStm: *const IStream,
+        pStm: *mut IStream,
         riid: REFIID,
-        ppv: *mut *mut VOID
+        ppv: *mut *mut c_void
     ) -> HRESULT,
     fn ReleaseMarshalData(
-        pStm: *const IStream
+        pStm: *mut IStream
     ) -> HRESULT,
     fn DisconnectObject(
         dwReserved: DWORD

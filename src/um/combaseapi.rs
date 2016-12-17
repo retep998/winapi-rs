@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Base Component Object Model defintions.
-use ctypes::{c_void};
+use ctypes::c_void;
 use shared::basetsd::{SIZE_T, UINT64, ULONG_PTR};
 use shared::guiddef::{GUID, LPCLSID, REFCLSID, REFIID};
 use shared::minwindef::{BOOL, DWORD, HGLOBAL, LPDWORD, LPVOID};
@@ -148,12 +148,12 @@ EXTERN!{stdcall fn CoInitializeSecurity(
     pSecDesc: PSECURITY_DESCRIPTOR,
     cAuthSvc: LONG,
     asAuthSvc: *mut SOLE_AUTHENTICATION_SERVICE,
-    pReserved1: LPVOID,
+    pReserved1: *mut c_void,
     dwAuthnLevel: DWORD,
     dwImpLevel: DWORD,
-    pAuthList: LPVOID,
+    pAuthList: *mut c_void,
     dwCapabilities: DWORD,
-    pReserved3: LPVOID
+    pReserved3: *mut c_void
 ) -> HRESULT}
     // pub fn CoGetCallContext();
     // pub fn CoQueryProxyBlanket();
