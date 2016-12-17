@@ -6,14 +6,21 @@
 // except according to those terms
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
 // Done as of 10.0.14393.
-use ctypes::{c_void};
+use ctypes::c_void;
 use shared::guiddef::{GUID, REFIID};
 use shared::minwindef::{DWORD, LPARAM, LPVOID, UINT};
-use shared::wtypes::{PROPERTYKEY};
-use um::propidl::{PROPVARIANT};
-use um::propsys::{IPropertyStore};
+// use shared::winerror::{ERROR_NOT_FOUND, ERROR_UNSUPPORTED_TYPE, HRESULT_FROM_WIN32};
+use shared::wtypes::PROPERTYKEY;
+use um::propidl::PROPVARIANT;
+use um::propsys::IPropertyStore;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR};
+
+#[repr(C)]
+pub struct MMDeviceEnumerator;
+
+// pub const E_NOTFOUND: HRESULT = HRESULT_FROM_WIN32(ERROR_NOT_FOUND);
+// pub const E_UNSUPPORTED_TYPE: HRESULT = HRESULT_FROM_WIN32(ERROR_UNSUPPORTED_TYPE);
 pub const DEVICE_STATE_ACTIVE: DWORD = 0x00000001;
 pub const DEVICE_STATE_DISABLED: DWORD = 0x00000002;
 pub const DEVICE_STATE_NOTPRESENT: DWORD = 0x00000004;
