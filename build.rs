@@ -126,7 +126,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("wingdi", &["basetsd", "minwindef", "windef", "winnt"], &[]),
     ("wininet", &["basetsd", "minwinbase", "minwindef", "ntdef", "windef", "winineti", "winnt"], &["wininet"]),
     ("winineti", &["minwindef"], &[]),
-    ("winioctl", &["minwindef", "winnt"], &[]),
+    ("winioctl", &["devpropdef", "guiddef", "minwindef", "winnt"], &[]),
     ("winnt", &["basetsd", "excpt", "guiddef", "minwindef"], &[]),
     ("winreg", &["basetsd", "minwindef", "winnt"], &[]),
     ("winsock2", &["guiddef", "inaddr", "minwindef", "vcruntime", "winnt"], &[]),
