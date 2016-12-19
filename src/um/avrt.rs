@@ -6,9 +6,7 @@
 // except according to those terms.
 
 use shared::minwindef::{BOOL, LPDWORD, PULONG};
-
 use shared::guiddef::GUID;
-
 use um::winnt::{HANDLE, PLARGE_INTEGER, LONGLONG, PHANDLE, LPCWSTR, LPCSTR};
 
 ENUM!{enum AVRT_PRIORITY {
@@ -21,61 +19,79 @@ ENUM!{enum AVRT_PRIORITY {
 
 pub const THREAD_ORDER_GROUP_INFINITE_TIMEOUT: LONGLONG = -1;
 
-FN!(stdcall AvSetMmThreadCharacteristicsA(TaskName: LPCSTR,
-                                         TaskIndex: LPDWORD)
-                                         -> HANDLE);
+EXTERN!{stdcall fn AvSetMmThreadCharacteristicsA(
+    TaskName: LPCSTR,
+    TaskIndex: LPDWORD
+) -> HANDLE}
 
-FN!(stdcall AvSetMmThreadCharacteristicsW(TaskName: LPCSTR,
-                                         TaskIndex: LPDWORD)
-                                         -> HANDLE);
+EXTERN!{stdcall fn AvSetMmThreadCharacteristicsW(
+    TaskName: LPCSTR,
+    TaskIndex: LPDWORD
+) -> HANDLE}
 
-FN!(stdcall AvSetMmMaxThreadCharacteristicsA(FirstTask: LPCSTR,
-                                            SecondTask: LPCSTR,
-                                            TaskIndex: LPDWORD)
-                                            -> HANDLE);
+EXTERN!{stdcall fn AvSetMmMaxThreadCharacteristicsA(
+    FirstTask: LPCSTR,
+    SecondTask: LPCSTR,
+    TaskIndex: LPDWORD
+) -> HANDLE}
 
-FN!(stdcall AvSetMmMaxThreadCharacteristicsW(FirstTask: LPCWSTR,
-                                            SecondTask: LPCWSTR,
-                                            TaskIndex: LPDWORD)
-                                            -> HANDLE);
+EXTERN!{stdcall fn AvSetMmMaxThreadCharacteristicsW(
+    FirstTask: LPCWSTR,
+    SecondTask: LPCWSTR,
+    TaskIndex: LPDWORD
+) -> HANDLE}
 
-FN!(stdcall AvRevertMmThreadCharacteristics(avrt_handle: HANDLE) -> BOOL);
+EXTERN!{stdcall fn AvRevertMmThreadCharacteristics(
+    avrt_handle: HANDLE
+) -> BOOL}
 
-FN!( stdcall AvSetMmThreadPriority(AvrtHandle: HANDLE,
-                                 Priority: AVRT_PRIORITY)
-                                 -> BOOL);
+EXTERN!{stdcall fn AvSetMmThreadPriority(
+    AvrtHandle: HANDLE,
+    Priority: AVRT_PRIORITY
+) -> BOOL}
 
-FN!( stdcall AvRtCreateThreadOrderingGroup(Context: PHANDLE,
-                                         Period: PLARGE_INTEGER,
-                                         ThreadOrderingGuid: *mut GUID,
-                                         Timeout: PLARGE_INTEGER)
-                                         -> BOOL);
+EXTERN!{stdcall fn AvRtCreateThreadOrderingGroup(
+    Context: PHANDLE,
+    Period: PLARGE_INTEGER,
+    ThreadOrderingGuid: *mut GUID,
+    Timeout: PLARGE_INTEGER
+) -> BOOL}
 
-FN!( stdcall AvRtCreateThreadOrderingGroupExA(Context: PHANDLE,
-                                            Period: PLARGE_INTEGER,
-                                            ThreadOrderingGuid: *mut GUID,
-                                            Timeout: PLARGE_INTEGER,
-                                            TaskName: LPCSTR)
-                                            -> BOOL);
+EXTERN!{stdcall fn AvRtCreateThreadOrderingGroupExA(
+    Context: PHANDLE,
+    Period: PLARGE_INTEGER,
+    ThreadOrderingGuid: *mut GUID,
+    Timeout: PLARGE_INTEGER,
+    TaskName: LPCSTR
+)-> BOOL}
 
-FN!( stdcall AvRtCreateThreadOrderingGroupExW(Context: PHANDLE,
-                                            Period: PLARGE_INTEGER,
-                                            ThreadOrderingGuid: *mut GUID,
-                                            Timeout: PLARGE_INTEGER,
-                                            TaskName: LPCWSTR)
-                                            -> BOOL);
+EXTERN!{stdcall fn AvRtCreateThreadOrderingGroupExW(
+    Context: PHANDLE,
+    Period: PLARGE_INTEGER,
+    ThreadOrderingGuid: *mut GUID,
+    Timeout: PLARGE_INTEGER,
+    TaskName: LPCWSTR
+) -> BOOL}
 
-FN!( stdcall AvRtJoinThreadOrderingGroup(Context: PHANDLE,
-                                       ThreadOrderingGuid: *mut GUID,
-                                       Before: BOOL)
-                                       -> BOOL);
+EXTERN!{stdcall fn AvRtJoinThreadOrderingGroup(
+    Context: PHANDLE,
+    ThreadOrderingGuid: *mut GUID,
+    Before: BOOL
+) -> BOOL}
 
-FN!( stdcall AvRtWaitOnThreadOrderingGroup(Context: HANDLE) -> BOOL);
+EXTERN!{stdcall fn AvRtWaitOnThreadOrderingGroup(
+    Context: HANDLE
+) -> BOOL}
 
-FN!( stdcall AvRtLeaveThreadOrderingGroup(Context: HANDLE) -> BOOL);
+EXTERN!{stdcall fn AvRtLeaveThreadOrderingGroup(
+    Context: HANDLE
+) -> BOOL}
 
-FN!( stdcall AvRtDeleteThreadOrderingGroup(Context: HANDLE) -> BOOL);
+EXTERN!{stdcall fn AvRtDeleteThreadOrderingGroup(
+    Context: HANDLE
+) -> BOOL}
 
-FN!( stdcall AvQuerySystemResponsiveness(AvrtHandle: HANDLE,
-                                       SystemResponsivenessValue: PULONG)
-                                       -> BOOL);
+EXTERN!{stdcall fn AvQuerySystemResponsiveness(
+    AvrtHandle: HANDLE,
+    SystemResponsivenessValue: PULONG
+) -> BOOL}
