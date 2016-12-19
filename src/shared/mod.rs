@@ -33,6 +33,7 @@
 #[cfg(feature = "lmcons")] pub mod lmcons;
 #[cfg(feature = "minwindef")] pub mod minwindef;
 #[cfg(feature = "mmreg")] pub mod mmreg;
+#[cfg(feature = "ntddser")] pub mod ntddser;
 #[cfg(feature = "ntdef")] pub mod ntdef;
 #[cfg(feature = "ntstatus")] pub mod ntstatus;
 #[cfg(feature = "rpcndr")] pub mod rpcndr;

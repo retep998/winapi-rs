@@ -40,6 +40,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("lmcons", &["minwindef", "winnt"], &[]),
     ("minwindef", &["basetsd", "ntdef"], &[]),
     ("mmreg", &["guiddef", "minwindef"], &[]),
+    ("ntddser", &["guiddef", "devpropdef"], &[]),
     ("ntdef", &["basetsd"], &[]),
     ("ntstatus", &["ntdef"], &[]),
     ("rpcndr", &[], &[]),
