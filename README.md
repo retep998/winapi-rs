@@ -26,7 +26,7 @@ main.rs:
 #[cfg(windows)] extern crate user32;
 
 #[cfg(windows)]
-fn show_message() -> Result<(), String> {
+fn show_message() -> Result<(), std::io::Error> {
     use std::ffi::OsStr;
     use std::io::Error;
     use std::iter::once;
@@ -39,7 +39,7 @@ fn show_message() -> Result<(), String> {
         user32::MessageBoxW(null_mut(), wide.as_ptr(), wide.as_ptr(), winapi::MB_OK)
     };
     if ret == 0 {
-        Err(format!("Failed: {:?}", Error::last_os_error()))
+        Err(Error::last_os_error())
     }
     else {
         Ok(())
@@ -47,7 +47,7 @@ fn show_message() -> Result<(), String> {
 }
 
 #[cfg(not(windows))]
-fn show_message() -> Result<(), String> {
+fn show_message() -> Result<(), std::io::Error> {
     println!("Hello, world!");
     Ok(())
 }
