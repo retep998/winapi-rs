@@ -1,4 +1,4 @@
-# winapi-rs [![Build status](https://ci.appveyor.com/api/projects/status/i47oonf5e7qm5utq/branch/master?svg=true)](https://ci.appveyor.com/project/retep998/winapi-rs/branch/master) [![Build Status](https://travis-ci.org/retep998/winapi-rs.svg?branch=master)](https://travis-ci.org/retep998/winapi-rs) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/retep998/winapi-rs) [![Crates.io](https://img.shields.io/crates/v/winapi.svg)](https://crates.io/crates/winapi) #
+# winapi-rs [![Build status](https://ci.appveyor.com/api/projects/status/i47oonf5e7qm5utq/branch/master?svg=true)](https://ci.appveyor.com/project/retep998/winapi-rs/branch/master) [![Build Status](https://travis-ci.org/retep998/winapi-rs.svg?branch=master)](https://travis-ci.org/retep998/winapi-rs) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/retep998/winapi-rs) [![Crates.io](https://img.shields.io/crates/v/winapi.svg)](https://crates.io/crates/winapi) ![Lines of Code](https://tokei.rs/b1/github/retep998/winapi-rs) ![100% unsafe](https://img.shields.io/badge/unsafe-100%25-blue.svg) #
 
 [Documentation](https://retep998.github.io/doc/winapi/)
 
@@ -8,7 +8,7 @@ This crate provides raw FFI bindings to all of Windows API. They are gathered by
 
 If this crate is missing something you need, feel free to create an issue, open a pull request, or contact me via [other means](http://www.rustaceans.org/retep998).
 
-This crate depends on Rust 1.6 on Windows. On other platforms this crate is a no-op and should compile with Rust 1.0.
+This crate depends on Rust 1.6 or newer on Windows. On other platforms this crate is a no-op and should compile with Rust 1.0 or newer.
 
 This branch is for winapi 0.3 which is a work in progress rewrite and as such is not suitable for production use. Please use winapi 0.2 in the meantime.
 

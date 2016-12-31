@@ -168,11 +168,11 @@ macro_rules! UNION {
         impl $base {
             #[inline]
             pub unsafe fn $variant(&self) -> &$fieldtype {
-                &*(self as *const _ as *const _)
+                &*(&self.$field as *const _ as *const _)
             }
             #[inline]
             pub unsafe fn $variantmut(&mut self) -> &mut $fieldtype {
-                &mut *(self as *mut _ as *mut _)
+                &mut *(&mut self.$field as *mut _ as *mut _)
             }
         }
     }
