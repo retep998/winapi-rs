@@ -53,6 +53,6 @@ fn show_message() -> Result<(), std::io::Error> {
 }
 
 fn main() {
-  show_message().expect("failed to show message");
+    show_message().expect("failed to show message");
 }
 ```
