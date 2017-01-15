@@ -53,6 +53,8 @@ pub mod gl;
 #[cfg(feature = "um-minwinbase")] pub mod minwinbase;
 #[cfg(feature = "um-mmdeviceapi")] pub mod mmdeviceapi;
 #[cfg(feature = "um-mmsystem")] pub mod mmsystem;
+#[cfg(feature = "um-mscat")] pub mod mscat;
+#[cfg(feature = "um-mssip")] pub mod mssip;
 #[cfg(feature = "um-ncrypt")] pub mod ncrypt;
 #[cfg(feature = "um-oaidl")] pub mod oaidl;
 #[cfg(feature = "um-objidlbase")] pub mod objidlbase;
