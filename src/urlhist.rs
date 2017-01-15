@@ -25,31 +25,31 @@ STRUCT!{struct STATURL {
 }}
 pub type LPSTATURL = *mut STATURL;
 RIDL!{interface IEnumSTATURL(IEnumSTATURLVtbl): IUnknown(IUnknownVtbl) {
-    fn Next(&mut self, celt: ::ULONG, rgelt: LPSTATURL, pceltFetched: *mut ::ULONG) -> ::HRESULT,
-    fn Skip(&mut self, celt: ::ULONG) -> ::HRESULT,
-    fn Reset(&mut self) -> ::HRESULT,
-    fn Clone(&mut self, ppenum: *mut *mut ::IEnumSTATURL) -> ::HRESULT,
-    fn SetFilter(&mut self, poszFilter: ::LPCOLESTR, dwFlags: ::DWORD) -> ::HRESULT
+    fn Next(&self, celt: ::ULONG, rgelt: LPSTATURL, pceltFetched: *mut ::ULONG) -> ::HRESULT,
+    fn Skip(&self, celt: ::ULONG) -> ::HRESULT,
+    fn Reset(&self) -> ::HRESULT,
+    fn Clone(&self, ppenum: *mut *mut ::IEnumSTATURL) -> ::HRESULT,
+    fn SetFilter(&self, poszFilter: ::LPCOLESTR, dwFlags: ::DWORD) -> ::HRESULT
 }}
 pub type LPURLHISTORYSTG = *mut IUrlHistoryStg;
 RIDL!{interface IUrlHistoryStg(IUrlHistoryStgVtbl): IUnknown(IUnknownVtbl) {
-    fn AddUrl(&mut self, pocsUrl: ::LPCOLESTR) -> ::HRESULT,
-    fn DeleteUrl(&mut self, pocsUrl: ::LPCOLESTR, dwFlags: ::DWORD) -> ::HRESULT,
+    fn AddUrl(&self, pocsUrl: ::LPCOLESTR) -> ::HRESULT,
+    fn DeleteUrl(&self, pocsUrl: ::LPCOLESTR, dwFlags: ::DWORD) -> ::HRESULT,
     fn QueryUrl(
-        &mut self, pocsUrl: ::LPCOLESTR, dwFlags: ::DWORD, lpSTATURL: LPSTATURL
+        &self, pocsUrl: ::LPCOLESTR, dwFlags: ::DWORD, lpSTATURL: LPSTATURL
     ) -> ::HRESULT,
     fn BindToObject(
-        &mut self, pocsUrl: ::LPCOLESTR, riid: ::REFIID, ppvOut: *mut *mut ::c_void
+        &self, pocsUrl: ::LPCOLESTR, riid: ::REFIID, ppvOut: *mut *mut ::c_void
     ) -> ::HRESULT,
-    fn EnumUrls(&mut self, ppEnum: *mut *mut ::IEnumSTATURL) -> ::HRESULT
+    fn EnumUrls(&self, ppEnum: *mut *mut ::IEnumSTATURL) -> ::HRESULT
 }}
 pub type LPURLHISTORYSTG2 = *mut IUrlHistoryStg2;
 RIDL!{interface IUrlHistoryStg2(IUrlHistoryStg2Vtbl): IUrlHistoryStg(IUrlHistoryStgVtbl) {
     fn AddUrlAndNotify(
-        &mut self, pocsUrl: ::LPCOLESTR, pocsTitle: ::LPCOLESTR, dwFlags: ::DWORD,
+        &self, pocsUrl: ::LPCOLESTR, pocsTitle: ::LPCOLESTR, dwFlags: ::DWORD,
         fWriteHistory: ::BOOL, poctNotify: *mut ::IOleCommandTarget, punkISFolder: *mut ::IUnknown
     ) -> ::HRESULT,
-    fn ClearHistory(&mut self) -> ::HRESULT
+    fn ClearHistory(&self) -> ::HRESULT
 }}
 pub type LPURLHISTORYNOTIFY = *mut IUrlHistoryNotify;
 RIDL!{interface IUrlHistoryNotify(IUrlHistoryNotifyVtbl):

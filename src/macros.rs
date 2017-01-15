@@ -84,49 +84,37 @@ macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
 }
 macro_rules! RIDL {
     (interface $interface:ident ($vtbl:ident) {$(
-        fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
+        fn $method:ident(&self $(,$p:ident : $t:ty)*) -> $rtr:ty
     ),+}) => (
-        #[repr(C)] #[allow(missing_copy_implementations)]
+        #[repr(C)]
         pub struct $vtbl {
             $(pub $method: unsafe extern "system" fn(
                 This: *mut $interface
                 $(,$p: $t)*
             ) -> $rtr),+
         }
-        #[repr(C)] #[allow(missing_copy_implementations)]
+        #[repr(C)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
-        RIDL!{@impl $interface {$(fn $method(&mut self $(,$p: $t)*) -> $rtr),+}}
+        RIDL!{@impl $interface {$(fn $method(&self $(,$p: $t)*) -> $rtr),+}}
     );
     (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {
     }) => (
-        #[repr(C)] #[allow(missing_copy_implementations)]
+        #[repr(C)]
         pub struct $vtbl {
             pub parent: $pvtbl
         }
-        #[repr(C)] #[allow(missing_copy_implementations)]
+        #[repr(C)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
-        impl $crate::core::ops::Deref for $interface {
-            type Target = $pinterface;
-            #[inline]
-            fn deref(&self) -> &$pinterface {
-                unsafe { &*(self as *const _ as *const _) }
-            }
-        }
-        impl $crate::core::ops::DerefMut for $interface {
-            #[inline]
-            fn deref_mut(&mut self) -> &mut $pinterface {
-                unsafe { &mut *(self as *mut _ as *mut _) }
-            }
-        }
+        RIDL!{@deref $interface $pinterface}
     );
     (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
-        fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
+        fn $method:ident(&self $(,$p:ident : $t:ty)*) -> $rtr:ty
     ),+}) => (
-        #[repr(C)] #[allow(missing_copy_implementations)]
+        #[repr(C)]
         pub struct $vtbl {
             pub parent: $pvtbl
             $(,pub $method: unsafe extern "system" fn(
@@ -134,32 +122,65 @@ macro_rules! RIDL {
                 $(,$p: $t)*
             ) -> $rtr)+
         }
-        #[repr(C)] #[allow(missing_copy_implementations)]
+        #[repr(C)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
-        RIDL!{@impl $interface {$(fn $method(&mut self $(,$p: $t)*) -> $rtr),+}}
+        RIDL!{@impl $interface {$(fn $method(&self $(,$p: $t)*) -> $rtr),+}}
+        RIDL!{@deref $interface $pinterface}
+    );
+    (#[uuid($($uuid:expr),+)]
+    interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
+        fn $method:ident(&self $(,$p:ident : $t:ty)*) -> $rtr:ty
+    ),+}) => (
+        #[repr(C)]
+        pub struct $vtbl {
+            pub parent: $pvtbl
+            $(,pub $method: unsafe extern "system" fn(
+                This: *mut $interface
+                $(,$p: $t)*
+            ) -> $rtr)+
+        }
+        #[repr(C)]
+        pub struct $interface {
+            pub lpVtbl: *const $vtbl
+        }
+        RIDL!{@impl $interface {$(fn $method(&self $(,$p: $t)*) -> $rtr),+}}
+        RIDL!{@deref $interface $pinterface}
+        RIDL!{@uuid $interface $($uuid),+}
+    );
+    (@deref $interface:ident $pinterface:ident) => (
         impl $crate::core::ops::Deref for $interface {
             type Target = $pinterface;
             #[inline]
             fn deref(&self) -> &$pinterface {
-                unsafe { &*(self as *const _ as *const _) }
-            }
-        }
-        impl $crate::core::ops::DerefMut for $interface {
-            #[inline]
-            fn deref_mut(&mut self) -> &mut $pinterface {
-                unsafe { &mut *(self as *mut _ as *mut _) }
+                unsafe { &*(self as *const $interface as *const $pinterface) }
             }
         }
     );
     (@impl $interface:ident {$(
-        fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
+        fn $method:ident(&self $(,$p:ident : $t:ty)*) -> $rtr:ty
     ),+}) => (
         impl $interface {
-            $(#[inline] pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
-                ((*self.lpVtbl).$method)(self $(,$p)*)
+            $(#[inline] pub unsafe fn $method(&self $(,$p: $t)*) -> $rtr {
+                ((*self.lpVtbl).$method)(self as *const _ as *mut _ $(,$p)*)
             })+
+        }
+    );
+    (@uuid $interface:ident
+        $l:expr, $w1:expr, $w2:expr,
+        $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr, $b6:expr, $b7:expr, $b8:expr
+    ) => (
+        impl ::Interface for $interface {
+            #[inline]
+            fn uuidof() -> ::shared::guiddef::GUID {
+                ::shared::guiddef::GUID {
+                    Data1: $l,
+                    Data2: $w1,
+                    Data3: $w2,
+                    Data4: [$b1, $b2, $b3, $b4, $b5, $b6, $b7, $b8],
+                }
+            }
         }
     );
 }

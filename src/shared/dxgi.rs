@@ -90,73 +90,73 @@ STRUCT!{struct DXGI_SWAP_CHAIN_DESC {
 RIDL!(
 interface IDXGIObject(IDXGIObjectVtbl): IUnknown(IUnknownVtbl) {
     fn SetPrivateData(
-        &mut self, Name: REFGUID, DataSize: UINT, pData: *const c_void
+        &self, Name: REFGUID, DataSize: UINT, pData: *const c_void
     ) -> HRESULT,
-    fn SetPrivateDataInterface(&mut self, Name: REFGUID, pUnknown: *const IUnknown) -> HRESULT,
+    fn SetPrivateDataInterface(&self, Name: REFGUID, pUnknown: *const IUnknown) -> HRESULT,
     fn GetPrivateData(
-        &mut self, Name: REFGUID, pDataSize: *mut UINT, pData: *mut c_void
+        &self, Name: REFGUID, pDataSize: *mut UINT, pData: *mut c_void
     ) -> HRESULT,
     fn GetParent(
-        &mut self, riid: REFIID, ppParent: *mut *mut c_void
+        &self, riid: REFIID, ppParent: *mut *mut c_void
     ) -> HRESULT
 });
 RIDL!(
 interface IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl): IDXGIObject(IDXGIObjectVtbl) {
-    fn GetDevice(&mut self, riid: REFIID, ppDevice: *mut *mut c_void) -> HRESULT
+    fn GetDevice(&self, riid: REFIID, ppDevice: *mut *mut c_void) -> HRESULT
 });
 RIDL!(
 interface IDXGIResource(IDXGIResourceVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl) {
-    fn GetSharedHandle(&mut self, pSharedHandle: *mut HANDLE) -> HRESULT,
-    fn GetUsage(&mut self, pUsage: *mut DXGI_USAGE) -> HRESULT,
-    fn SetEvictionPriority(&mut self, EvictionPriority: UINT) -> HRESULT,
-    fn GetEvictionPriority(&mut self, pEvictionPriority: *mut UINT) -> HRESULT
+    fn GetSharedHandle(&self, pSharedHandle: *mut HANDLE) -> HRESULT,
+    fn GetUsage(&self, pUsage: *mut DXGI_USAGE) -> HRESULT,
+    fn SetEvictionPriority(&self, EvictionPriority: UINT) -> HRESULT,
+    fn GetEvictionPriority(&self, pEvictionPriority: *mut UINT) -> HRESULT
 });
 RIDL!(
 interface IDXGIKeyedMutex(IDXGIKeyedMutexVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl) {
-    fn AcquireSync(&mut self, Key: UINT64, dwMilliseconds: DWORD) -> HRESULT,
-    fn ReleaseSync(&mut self, Key: UINT64) -> HRESULT
+    fn AcquireSync(&self, Key: UINT64, dwMilliseconds: DWORD) -> HRESULT,
+    fn ReleaseSync(&self, Key: UINT64) -> HRESULT
 });
 RIDL!(
 interface IDXGISurface(IDXGISurfaceVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut DXGI_SURFACE_DESC) -> HRESULT,
-    fn Map(&mut self, pLockedRect: *mut DXGI_MAPPED_RECT, MapFlags: UINT) -> HRESULT,
-    fn Unmap(&mut self) -> HRESULT
+    fn GetDesc(&self, pDesc: *mut DXGI_SURFACE_DESC) -> HRESULT,
+    fn Map(&self, pLockedRect: *mut DXGI_MAPPED_RECT, MapFlags: UINT) -> HRESULT,
+    fn Unmap(&self) -> HRESULT
 });
 RIDL!(
 interface IDXGISurface1(IDXGISurface1Vtbl): IDXGISurface(IDXGISurfaceVtbl) {
-    fn GetDC(&mut self, Discard: BOOL, phdc: *mut HDC) -> HRESULT,
-    fn ReleaseDC(&mut self, pDirtyRect: *mut RECT) -> HRESULT
+    fn GetDC(&self, Discard: BOOL, phdc: *mut HDC) -> HRESULT,
+    fn ReleaseDC(&self, pDirtyRect: *mut RECT) -> HRESULT
 });
 RIDL!(
 interface IDXGIAdapter(IDXGIAdapterVtbl): IDXGIObject(IDXGIObjectVtbl) {
-    fn EnumOutputs(&mut self, Output: UINT, ppOutput: *mut *mut IDXGIOutput) -> HRESULT,
-    fn GetDesc(&mut self, pDesc: *mut DXGI_ADAPTER_DESC) -> HRESULT,
+    fn EnumOutputs(&self, Output: UINT, ppOutput: *mut *mut IDXGIOutput) -> HRESULT,
+    fn GetDesc(&self, pDesc: *mut DXGI_ADAPTER_DESC) -> HRESULT,
     fn CheckInterfaceSupport(
-        &mut self, InterfaceName: REFGUID, pUMDVersion: *mut LARGE_INTEGER
+        &self, InterfaceName: REFGUID, pUMDVersion: *mut LARGE_INTEGER
     ) -> HRESULT
 });
 RIDL!(
 interface IDXGIOutput(IDXGIOutputVtbl): IDXGIObject(IDXGIObjectVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut DXGI_OUTPUT_DESC) -> HRESULT,
+    fn GetDesc(&self, pDesc: *mut DXGI_OUTPUT_DESC) -> HRESULT,
     fn GetDisplayModeList(
-        &mut self, EnumFormat: DXGI_FORMAT, Flags: UINT, pNumModes: *mut UINT,
+        &self, EnumFormat: DXGI_FORMAT, Flags: UINT, pNumModes: *mut UINT,
         pDesc: *mut DXGI_MODE_DESC
     ) -> HRESULT,
     fn FindClosestMatchingMode(
-        &mut self, pModeToMatch: *const DXGI_MODE_DESC, pClosestMatch: *mut DXGI_MODE_DESC,
+        &self, pModeToMatch: *const DXGI_MODE_DESC, pClosestMatch: *mut DXGI_MODE_DESC,
         pConcernedDevice: *mut IUnknown
     ) -> HRESULT,
-    fn WaitForVBlank(&mut self) -> HRESULT,
-    fn TakeOwnership(&mut self, pDevice: *mut IUnknown, Exclusive: BOOL) -> HRESULT,
-    fn ReleaseOwnership(&mut self) -> (),
+    fn WaitForVBlank(&self) -> HRESULT,
+    fn TakeOwnership(&self, pDevice: *mut IUnknown, Exclusive: BOOL) -> HRESULT,
+    fn ReleaseOwnership(&self) -> (),
     fn GetGammaControlCapabilities(
-        &mut self, pGammaCaps: *mut DXGI_GAMMA_CONTROL_CAPABILITIES
+        &self, pGammaCaps: *mut DXGI_GAMMA_CONTROL_CAPABILITIES
     ) -> HRESULT,
-    fn SetGammaControl(&mut self, pArray: *const DXGI_GAMMA_CONTROL) -> HRESULT,
-    fn GetGammaControl(&mut self, pArray: *mut DXGI_GAMMA_CONTROL) -> HRESULT,
-    fn SetDisplaySurface(&mut self, pScanoutSurface: *mut IDXGISurface) -> HRESULT,
-    fn GetDisplaySurfaceData(&mut self, pDestination: *mut IDXGISurface) -> HRESULT,
-    fn GetFrameStatistics(&mut self, pStats: *mut DXGI_FRAME_STATISTICS) -> HRESULT
+    fn SetGammaControl(&self, pArray: *const DXGI_GAMMA_CONTROL) -> HRESULT,
+    fn GetGammaControl(&self, pArray: *mut DXGI_GAMMA_CONTROL) -> HRESULT,
+    fn SetDisplaySurface(&self, pScanoutSurface: *mut IDXGISurface) -> HRESULT,
+    fn GetDisplaySurfaceData(&self, pDestination: *mut IDXGISurface) -> HRESULT,
+    fn GetFrameStatistics(&self, pStats: *mut DXGI_FRAME_STATISTICS) -> HRESULT
 });
 pub const DXGI_MAX_SWAP_CHAIN_BUFFERS: DWORD = 16;
 pub const DXGI_PRESENT_TEST: DWORD = 0x00000001;
@@ -169,50 +169,50 @@ pub const DXGI_PRESENT_RESTRICT_TO_OUTPUT: DWORD = 0x00000040;
 pub const DXGI_PRESENT_USE_DURATION: DWORD = 0x00000100;
 RIDL!(
 interface IDXGISwapChain(IDXGISwapChainVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl) {
-    fn Present(&mut self, SyncInterval: UINT, Flags: UINT) -> HRESULT,
+    fn Present(&self, SyncInterval: UINT, Flags: UINT) -> HRESULT,
     fn GetBuffer(
-        &mut self, Buffer: UINT, riid: REFIID, ppSurface: *mut *mut c_void
+        &self, Buffer: UINT, riid: REFIID, ppSurface: *mut *mut c_void
     ) -> HRESULT,
-    fn SetFullscreenState(&mut self, Fullscreen: BOOL, pTarget: *mut IDXGIOutput) -> HRESULT,
+    fn SetFullscreenState(&self, Fullscreen: BOOL, pTarget: *mut IDXGIOutput) -> HRESULT,
     fn GetFullscreenState(
-        &mut self, pFullscreen: *mut BOOL, ppTarget: *mut *mut IDXGIOutput
+        &self, pFullscreen: *mut BOOL, ppTarget: *mut *mut IDXGIOutput
     ) -> HRESULT,
-    fn GetDesc(&mut self, pDesc: *mut DXGI_SWAP_CHAIN_DESC) -> HRESULT,
+    fn GetDesc(&self, pDesc: *mut DXGI_SWAP_CHAIN_DESC) -> HRESULT,
     fn ResizeBuffers(
-        &mut self, BufferCount: UINT, Width: UINT, Height: UINT, NewFormat: DXGI_FORMAT,
+        &self, BufferCount: UINT, Width: UINT, Height: UINT, NewFormat: DXGI_FORMAT,
         SwapChainFlags: UINT
     ) -> HRESULT,
-    fn ResizeTarget(&mut self, pNewTargetParameters: *const DXGI_MODE_DESC) -> HRESULT,
-    fn GetContainingOutput(&mut self, ppOutput: *mut *mut IDXGIOutput) -> HRESULT,
-    fn GetFrameStatistics(&mut self, pStats: *mut DXGI_FRAME_STATISTICS) -> HRESULT,
-    fn GetLastPresentCount(&mut self, pLastPresentCount: *mut UINT) -> HRESULT
+    fn ResizeTarget(&self, pNewTargetParameters: *const DXGI_MODE_DESC) -> HRESULT,
+    fn GetContainingOutput(&self, ppOutput: *mut *mut IDXGIOutput) -> HRESULT,
+    fn GetFrameStatistics(&self, pStats: *mut DXGI_FRAME_STATISTICS) -> HRESULT,
+    fn GetLastPresentCount(&self, pLastPresentCount: *mut UINT) -> HRESULT
 });
 RIDL!(
 interface IDXGIFactory(IDXGIFactoryVtbl): IDXGIObject(IDXGIObjectVtbl) {
-    fn EnumAdapters(&mut self, Adapter: UINT, ppAdapter: *mut *mut IDXGIAdapter) -> HRESULT,
-    fn MakeWindowAssociation(&mut self, WindowHandle: HWND, Flags: UINT) -> HRESULT,
-    fn GetWindowAssociation(&mut self, pWindowHandle: *mut HWND) -> HRESULT,
+    fn EnumAdapters(&self, Adapter: UINT, ppAdapter: *mut *mut IDXGIAdapter) -> HRESULT,
+    fn MakeWindowAssociation(&self, WindowHandle: HWND, Flags: UINT) -> HRESULT,
+    fn GetWindowAssociation(&self, pWindowHandle: *mut HWND) -> HRESULT,
     fn CreateSwapChain(
-        &mut self, pDevice: *mut IUnknown, pDesc: *mut DXGI_SWAP_CHAIN_DESC,
+        &self, pDevice: *mut IUnknown, pDesc: *mut DXGI_SWAP_CHAIN_DESC,
         ppSwapChain: *mut *mut IDXGISwapChain
     ) -> HRESULT,
     fn CreateSoftwareAdapter(
-        &mut self, Module: HMODULE, ppAdapter: *mut *mut IDXGIAdapter
+        &self, Module: HMODULE, ppAdapter: *mut *mut IDXGIAdapter
     ) -> HRESULT
 });
 RIDL!(
 interface IDXGIDevice(IDXGIDeviceVtbl): IDXGIObject(IDXGIObjectVtbl) {
-    fn GetAdapter(&mut self, pAdapter: *mut *mut IDXGIAdapter) -> HRESULT,
+    fn GetAdapter(&self, pAdapter: *mut *mut IDXGIAdapter) -> HRESULT,
     fn CreateSurface(
-        &mut self, pDesc: *const DXGI_SURFACE_DESC, NumSurfaces: UINT, Usage: DXGI_USAGE,
+        &self, pDesc: *const DXGI_SURFACE_DESC, NumSurfaces: UINT, Usage: DXGI_USAGE,
         pSharedResource: *const DXGI_SHARED_RESOURCE, ppSurface: *mut *mut IDXGISurface
     ) -> HRESULT,
     fn QueryResourceResidency(
-        &mut self, ppResources: *const *mut IUnknown, pResidencyStatus: *mut DXGI_RESIDENCY,
+        &self, ppResources: *const *mut IUnknown, pResidencyStatus: *mut DXGI_RESIDENCY,
         NumResources: UINT
     ) -> HRESULT,
-    fn SetGPUThreadPriority(&mut self, Priority: INT) -> HRESULT,
-    fn GetGPUThreadPriority(&mut self, pPriority: *mut INT) -> HRESULT
+    fn SetGPUThreadPriority(&self, Priority: INT) -> HRESULT,
+    fn GetGPUThreadPriority(&self, pPriority: *mut INT) -> HRESULT
 });
 ENUM!{enum DXGI_ADAPTER_FLAG {
     DXGI_ADAPTER_FLAG_NONE,
@@ -237,15 +237,15 @@ STRUCT!{struct DXGI_DISPLAY_COLOR_SPACE {
 }}
 RIDL!(
 interface IDXGIFactory1(IDXGIFactory1Vtbl): IDXGIFactory(IDXGIFactoryVtbl) {
-    fn EnumAdapters1(&mut self, Adapter: UINT, ppAdapter: *mut *mut IDXGIAdapter1) -> HRESULT,
-    fn IsCurrent(&mut self) -> BOOL
+    fn EnumAdapters1(&self, Adapter: UINT, ppAdapter: *mut *mut IDXGIAdapter1) -> HRESULT,
+    fn IsCurrent(&self) -> BOOL
 });
 RIDL!(
 interface IDXGIAdapter1(IDXGIAdapter1Vtbl): IDXGIAdapter(IDXGIAdapterVtbl) {
-    fn GetDesc1(&mut self, pDesc: *mut DXGI_ADAPTER_DESC1) -> HRESULT
+    fn GetDesc1(&self, pDesc: *mut DXGI_ADAPTER_DESC1) -> HRESULT
 });
 RIDL!(
 interface IDXGIDevice1(IDXGIDevice1Vtbl): IDXGIDevice(IDXGIDeviceVtbl) {
-    fn SetMaximumFrameLatency(&mut self, MaxLatency: UINT) -> HRESULT,
-    fn GetMaximumFrameLatency(&mut self, pMaxLatency: *mut UINT) -> HRESULT
+    fn SetMaximumFrameLatency(&self, MaxLatency: UINT) -> HRESULT,
+    fn GetMaximumFrameLatency(&self, pMaxLatency: *mut UINT) -> HRESULT
 });

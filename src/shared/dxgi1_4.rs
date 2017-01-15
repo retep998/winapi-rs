@@ -39,56 +39,56 @@ STRUCT!{struct DXGI_QUERY_VIDEO_MEMORY_INFO {
 RIDL!(
 interface IDXGIAdapter3(IDXGIAdapter3Vtbl): IDXGIAdapter2(IDXGIAdapter2Vtbl) {
     fn RegisterHardwareContentProtectionTeardownStatusEvent(
-        &mut self, hEvent: HANDLE, pdwCookie: *mut DWORD
+        &self, hEvent: HANDLE, pdwCookie: *mut DWORD
     ) -> HRESULT,
     fn UnregisterHardwareContentProtectionTeardownStatus(
-        &mut self, dwCookie: DWORD
+        &self, dwCookie: DWORD
     ) -> (),
     fn QueryVideoMemoryInfo(
-        &mut self, NodeIndex: UINT, MemorySegmentGroup: DXGI_MEMORY_SEGMENT_GROUP,
+        &self, NodeIndex: UINT, MemorySegmentGroup: DXGI_MEMORY_SEGMENT_GROUP,
         pVideoMemoryInfo: *mut DXGI_QUERY_VIDEO_MEMORY_INFO
     ) -> HRESULT,
     fn SetVideoMemoryReservation(
-        &mut self, NodeIndex: UINT, MemorySegmentGroup: DXGI_MEMORY_SEGMENT_GROUP,
+        &self, NodeIndex: UINT, MemorySegmentGroup: DXGI_MEMORY_SEGMENT_GROUP,
         Reservation: UINT64
     ) -> HRESULT,
     fn RegisterVideoMemoryBudgetChangeNotificationEvent(
-        &mut self, hEvent: HANDLE, pdwCookie: *mut DWORD
+        &self, hEvent: HANDLE, pdwCookie: *mut DWORD
     ) -> HRESULT,
     fn UnregisterVideoMemoryBudgetChangeNotification(
-        &mut self, dwCookie: DWORD
+        &self, dwCookie: DWORD
     ) -> ()
 });
 
 RIDL!(
 interface IDXGIFactory4(IDXGIFactory4Vtbl): IDXGIFactory3(IDXGIFactory3Vtbl) {
     fn EnumAdapterByLuid(
-        &mut self, AdapterLuid: LUID, riid: REFGUID, ppvAdapter: *mut *mut c_void
+        &self, AdapterLuid: LUID, riid: REFGUID, ppvAdapter: *mut *mut c_void
     ) -> HRESULT,
     fn EnumWarpAdapter(
-        &mut self, riid: REFGUID, ppvAdapter: *mut *mut c_void
+        &self, riid: REFGUID, ppvAdapter: *mut *mut c_void
     ) -> HRESULT
 });
 
 RIDL!(
 interface IDXGIOutput4(IDXGIOutput4Vtbl): IDXGIOutput3(IDXGIOutput3Vtbl) {
     fn CheckOverlayColorSpaceSupport(
-        &mut self, Format: DXGI_FORMAT, ColorSpace: DXGI_COLOR_SPACE_TYPE,
+        &self, Format: DXGI_FORMAT, ColorSpace: DXGI_COLOR_SPACE_TYPE,
         pConcernedDevice: *mut IUnknown, pFlags: *mut UINT
     ) -> HRESULT
 });
 
 RIDL!(
 interface IDXGISwapChain3(IDXGISwapChain3Vtbl): IDXGISwapChain2(IDXGISwapChain2Vtbl) {
-    fn GetCurrentBackBufferIndex(&mut self) -> UINT,
+    fn GetCurrentBackBufferIndex(&self) -> UINT,
     fn CheckColorSpaceSupport(
-        &mut self, ColorSpace: DXGI_COLOR_SPACE_TYPE, pColorSpaceSupport: *mut UINT
+        &self, ColorSpace: DXGI_COLOR_SPACE_TYPE, pColorSpaceSupport: *mut UINT
     ) -> HRESULT,
     fn SetColorSpace1(
-        &mut self, ColorSpace: DXGI_COLOR_SPACE_TYPE
+        &self, ColorSpace: DXGI_COLOR_SPACE_TYPE
     ) -> HRESULT,
     fn ResizeBuffers1(
-        &mut self, BufferCount: UINT, Width: UINT, Height: UINT, Format: DXGI_FORMAT,
+        &self, BufferCount: UINT, Width: UINT, Height: UINT, Format: DXGI_FORMAT,
         SwapChainFlags: UINT, pCreationNodeMask: *const UINT,
         ppPresentQueue: *mut *mut IUnknown
     ) -> HRESULT

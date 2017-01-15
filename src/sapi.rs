@@ -137,146 +137,146 @@ pub const SP_MAX_PRON_LENGTH: i32 = 384;
 pub const SP_EMULATE_RESULT: i32 = 0x40000000;
 RIDL!(
 interface ISpNotifyCallback(ISpNotifyCallbackVtbl) {
-    fn NotifyCallback(&mut self, wParam: ::WPARAM, lParam: ::LPARAM) -> ::HRESULT
+    fn NotifyCallback(&self, wParam: ::WPARAM, lParam: ::LPARAM) -> ::HRESULT
 }
 );
 pub type SPNOTIFYCALLBACK = unsafe extern "system" fn(wParam: ::WPARAM, lParam: ::LPARAM);
 RIDL!(
 interface ISpNotifySource(ISpNotifySourceVtbl): IUnknown(IUnknownVtbl) {
-    fn SetNotifySink(&mut self, pNotifySink: *mut ISpNotifySink) -> ::HRESULT,
+    fn SetNotifySink(&self, pNotifySink: *mut ISpNotifySink) -> ::HRESULT,
     fn SetNotifyWindowMessage(
-        &mut self, hWnd: ::HWND, Msg: ::UINT, wParam: ::WPARAM, lParam: ::LPARAM
+        &self, hWnd: ::HWND, Msg: ::UINT, wParam: ::WPARAM, lParam: ::LPARAM
     ) -> ::HRESULT,
     fn SetNotifyCallbackFunction(
-        &mut self, pfnCallback: SPNOTIFYCALLBACK, wParam: ::WPARAM, lParam: ::LPARAM
+        &self, pfnCallback: SPNOTIFYCALLBACK, wParam: ::WPARAM, lParam: ::LPARAM
     ) -> ::HRESULT,
     fn SetNotifyCallbackInterface(
-        &mut self, pSpCallback: *mut ISpNotifyCallback, wParam: ::WPARAM, lParam: ::LPARAM
+        &self, pSpCallback: *mut ISpNotifyCallback, wParam: ::WPARAM, lParam: ::LPARAM
     ) -> ::HRESULT,
-    fn SetNotifyWin32Event(&mut self) -> ::HRESULT,
-    fn WaitForNotifyEvent(&mut self, dwMilliseconds: ::DWORD) -> ::HRESULT,
-    fn GetNotifyEventHandle(&mut self) -> ::HANDLE
+    fn SetNotifyWin32Event(&self) -> ::HRESULT,
+    fn WaitForNotifyEvent(&self, dwMilliseconds: ::DWORD) -> ::HRESULT,
+    fn GetNotifyEventHandle(&self) -> ::HANDLE
 }
 );
 RIDL!(
 interface ISpNotifySink(ISpNotifySinkVtbl): IUnknown(IUnknownVtbl) {
-    fn Notify(&mut self) -> ::HRESULT
+    fn Notify(&self) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpNotifyTranslator(ISpNotifyTranslatorVtbl): ISpNotifySink(ISpNotifySinkVtbl) {
     fn InitWindowMessage(
-        &mut self, hWnd: ::HWND, Msg: ::UINT, wParam: ::WPARAM, lParam: ::LPARAM
+        &self, hWnd: ::HWND, Msg: ::UINT, wParam: ::WPARAM, lParam: ::LPARAM
     ) -> ::HRESULT,
     fn InitCallback(
-        &mut self, pfnCallback: SPNOTIFYCALLBACK, wParam: ::WPARAM, lParam: ::LPARAM
+        &self, pfnCallback: SPNOTIFYCALLBACK, wParam: ::WPARAM, lParam: ::LPARAM
     ) -> ::HRESULT,
     fn InitSpNotifyCallback(
-        &mut self, pSpCallback: *mut ISpNotifyCallback, wParam: ::WPARAM, lParam: ::LPARAM
+        &self, pSpCallback: *mut ISpNotifyCallback, wParam: ::WPARAM, lParam: ::LPARAM
     ) -> ::HRESULT,
-    fn InitWin32Event(&mut self, hEvent: ::HANDLE, fCloseHandleOnRelease: ::BOOL) -> ::HRESULT,
-    fn Wait(&mut self, dwMilliseconds: ::DWORD) -> ::HRESULT,
-    fn GetEventHandle(&mut self) -> ::HANDLE
+    fn InitWin32Event(&self, hEvent: ::HANDLE, fCloseHandleOnRelease: ::BOOL) -> ::HRESULT,
+    fn Wait(&self, dwMilliseconds: ::DWORD) -> ::HRESULT,
+    fn GetEventHandle(&self) -> ::HANDLE
 }
 );
 RIDL!(
 interface ISpDataKey(ISpDataKeyVtbl): IUnknown(IUnknownVtbl) {
     fn SetData(
-        &mut self, pszValueName: ::LPCWSTR, cbData: ::ULONG, pData: *const ::BYTE
+        &self, pszValueName: ::LPCWSTR, cbData: ::ULONG, pData: *const ::BYTE
     ) -> ::HRESULT,
     fn GetData(
-        &mut self, pszValueName: ::LPCWSTR, pcbData: *mut ::ULONG, pData: *mut ::BYTE
+        &self, pszValueName: ::LPCWSTR, pcbData: *mut ::ULONG, pData: *mut ::BYTE
     ) -> ::HRESULT,
-    fn SetStringValue(&mut self, pszValueName: ::LPCWSTR, pszValue: ::LPCWSTR) -> ::HRESULT,
-    fn GetStringValue(&mut self, pszValueName: ::LPCWSTR, ppszValue: *mut ::LPWSTR) -> ::HRESULT,
-    fn SetDWORD(&mut self, pszValueName: ::LPCWSTR, dwValue: ::DWORD) -> ::HRESULT,
-    fn GetDWORD(&mut self, pszValueName: ::LPCWSTR, pdwValue: *mut ::DWORD) -> ::HRESULT,
-    fn OpenKey(&mut self, pszSubKeyName: ::LPCWSTR, ppSubKey: *mut *mut ISpDataKey) -> ::HRESULT,
-    fn CreateKey(&mut self, pszSubKey: ::LPCWSTR, ppSubKey: *mut *mut ISpDataKey) -> ::HRESULT,
-    fn DeleteKey(&mut self, pszSubKey: ::LPCWSTR) -> ::HRESULT,
-    fn DeleteValue(&mut self, pszValueName: ::LPCWSTR) -> ::HRESULT,
-    fn EnumKeys(&mut self, Index: ::ULONG, ppszSubKeyName: *mut ::LPWSTR) -> ::HRESULT,
-    fn EnumValues(&mut self, Index: ::ULONG, ppszValueName: *mut ::LPWSTR) -> ::HRESULT
+    fn SetStringValue(&self, pszValueName: ::LPCWSTR, pszValue: ::LPCWSTR) -> ::HRESULT,
+    fn GetStringValue(&self, pszValueName: ::LPCWSTR, ppszValue: *mut ::LPWSTR) -> ::HRESULT,
+    fn SetDWORD(&self, pszValueName: ::LPCWSTR, dwValue: ::DWORD) -> ::HRESULT,
+    fn GetDWORD(&self, pszValueName: ::LPCWSTR, pdwValue: *mut ::DWORD) -> ::HRESULT,
+    fn OpenKey(&self, pszSubKeyName: ::LPCWSTR, ppSubKey: *mut *mut ISpDataKey) -> ::HRESULT,
+    fn CreateKey(&self, pszSubKey: ::LPCWSTR, ppSubKey: *mut *mut ISpDataKey) -> ::HRESULT,
+    fn DeleteKey(&self, pszSubKey: ::LPCWSTR) -> ::HRESULT,
+    fn DeleteValue(&self, pszValueName: ::LPCWSTR) -> ::HRESULT,
+    fn EnumKeys(&self, Index: ::ULONG, ppszSubKeyName: *mut ::LPWSTR) -> ::HRESULT,
+    fn EnumValues(&self, Index: ::ULONG, ppszValueName: *mut ::LPWSTR) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpRegDataKey(ISpRegDataKeyVtbl): ISpDataKey(ISpDataKeyVtbl) {
-    fn SetKey(&mut self, hkey: ::HKEY, fReadOnly: ::BOOL) -> ::HRESULT
+    fn SetKey(&self, hkey: ::HKEY, fReadOnly: ::BOOL) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpObjectTokenCategory(ISpObjectTokenCategoryVtbl): ISpDataKey(ISpDataKeyVtbl) {
-    fn SetId(&mut self, pszCategoryId: ::LPCWSTR, fCreateIfNotExist: ::BOOL) -> ::HRESULT,
-    fn GetId(&mut self, ppszCoMemCategoryId: *mut ::LPWSTR) -> ::HRESULT,
+    fn SetId(&self, pszCategoryId: ::LPCWSTR, fCreateIfNotExist: ::BOOL) -> ::HRESULT,
+    fn GetId(&self, ppszCoMemCategoryId: *mut ::LPWSTR) -> ::HRESULT,
     fn GetDataKey(
-        &mut self, spdkl: SPDATAKEYLOCATION, pppDataKey: *mut *mut ISpDataKey
+        &self, spdkl: SPDATAKEYLOCATION, pppDataKey: *mut *mut ISpDataKey
     ) -> ::HRESULT,
     fn EnumTokens(
-        &mut self, pzsReqAttribs: ::LPCWSTR, pszOptAttribs: ::LPCWSTR,
+        &self, pzsReqAttribs: ::LPCWSTR, pszOptAttribs: ::LPCWSTR,
         ppEnum: *mut *mut IEnumSpObjectTokens
     ) -> ::HRESULT,
-    fn SetDefaultTokenId(&mut self, pszTokenId: ::LPCWSTR) -> ::HRESULT,
-    fn GetDefaultTokenId(&mut self, ppszCoMemTokenId: *mut ::LPWSTR) -> ::HRESULT
+    fn SetDefaultTokenId(&self, pszTokenId: ::LPCWSTR) -> ::HRESULT,
+    fn GetDefaultTokenId(&self, ppszCoMemTokenId: *mut ::LPWSTR) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpObjectToken(ISpObjectTokenVtbl): ISpDataKey(ISpDataKeyVtbl) {
     fn SetId(
-        &mut self, pszCategoryId: ::LPCWSTR, pszTokenId: ::LPCWSTR, fCreateIfNotExist: ::BOOL
+        &self, pszCategoryId: ::LPCWSTR, pszTokenId: ::LPCWSTR, fCreateIfNotExist: ::BOOL
     ) -> ::HRESULT,
-    fn GetId(&mut self, ppszCoMemTokenId: *mut ::LPWSTR) -> ::HRESULT,
-    fn GetCategory(&mut self, ppTokenCategory: *mut *mut ISpObjectTokenCategory) -> ::HRESULT,
+    fn GetId(&self, ppszCoMemTokenId: *mut ::LPWSTR) -> ::HRESULT,
+    fn GetCategory(&self, ppTokenCategory: *mut *mut ISpObjectTokenCategory) -> ::HRESULT,
     fn CreateInstance(
-        &mut self, pUnkOuter: *mut ::IUnknown, dwClsContext: ::DWORD, riid: ::REFIID,
+        &self, pUnkOuter: *mut ::IUnknown, dwClsContext: ::DWORD, riid: ::REFIID,
         ppvObject: *mut *mut ::c_void
     ) -> ::HRESULT,
     fn GetStorageFileName(
-        &mut self, clsidCaller: ::REFCLSID, pszValueName: ::LPCWSTR,
+        &self, clsidCaller: ::REFCLSID, pszValueName: ::LPCWSTR,
         pszFileNameSpecifier: ::LPCWSTR, nFolder: ::ULONG, ppszFilePath: *mut ::LPWSTR
     ) -> ::HRESULT,
-    fn RemoveStorageFileName(&mut self, pszKeyName: ::LPCWSTR, fDeleteFile: ::BOOL) -> ::HRESULT,
-    fn Remove(&mut self, pclsidCaller: *const ::CLSID) -> ::HRESULT,
+    fn RemoveStorageFileName(&self, pszKeyName: ::LPCWSTR, fDeleteFile: ::BOOL) -> ::HRESULT,
+    fn Remove(&self, pclsidCaller: *const ::CLSID) -> ::HRESULT,
     fn IsUISupported(
-        &mut self, pszTypeOfUI: ::LPCWSTR, pvExtraData: *mut ::c_void, cbExtraData: ::ULONG,
+        &self, pszTypeOfUI: ::LPCWSTR, pvExtraData: *mut ::c_void, cbExtraData: ::ULONG,
         punkObject: *mut ::IUnknown, pfSupported: *mut ::BOOL
     ) -> ::HRESULT,
     fn DisplayUI(
-        &mut self, hwndParent: ::HWND, pszTitle: ::LPCWSTR, pszTypeOfUI: ::LPCWSTR,
+        &self, hwndParent: ::HWND, pszTitle: ::LPCWSTR, pszTypeOfUI: ::LPCWSTR,
         pvExtraData: *mut ::c_void, cbExtraData: ::ULONG, punkObject: *mut ::IUnknown
     ) -> ::HRESULT,
-    fn MatchesAttributes(&mut self, pszAttributes: ::LPCWSTR, pfMatches: *mut ::BOOL) -> ::HRESULT
+    fn MatchesAttributes(&self, pszAttributes: ::LPCWSTR, pfMatches: *mut ::BOOL) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpObjectTokenInit(ISpObjectTokenInitVtbl): ISpObjectToken(ISpObjectTokenVtbl) {
     fn InitFromDataKey(
-        &mut self, pszCategoryId: ::LPCWSTR, pszTokenId: ::LPCWSTR, pDataKey: *mut ISpDataKey
+        &self, pszCategoryId: ::LPCWSTR, pszTokenId: ::LPCWSTR, pDataKey: *mut ISpDataKey
     ) -> ::HRESULT
 }
 );
 RIDL!(
 interface IEnumSpObjectTokens(IEnumSpObjectTokensVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
-        &mut self, celt: ::ULONG, pelt: *mut *mut ISpObjectToken, pceltFetched: *mut ::ULONG
+        &self, celt: ::ULONG, pelt: *mut *mut ISpObjectToken, pceltFetched: *mut ::ULONG
     ) -> ::HRESULT,
-    fn Skip(&mut self, celt: ::ULONG) -> ::HRESULT,
-    fn Reset(&mut self) -> ::HRESULT,
-    fn Clone(&mut self, ppEnum: *mut *mut IEnumSpObjectTokens) -> ::HRESULT,
-    fn Item(&mut self, Index: ::ULONG, ppToken: *mut *mut ISpObjectToken) -> ::HRESULT,
-    fn GetCount(&mut self, pCount: *mut ::ULONG) -> ::HRESULT
+    fn Skip(&self, celt: ::ULONG) -> ::HRESULT,
+    fn Reset(&self) -> ::HRESULT,
+    fn Clone(&self, ppEnum: *mut *mut IEnumSpObjectTokens) -> ::HRESULT,
+    fn Item(&self, Index: ::ULONG, ppToken: *mut *mut ISpObjectToken) -> ::HRESULT,
+    fn GetCount(&self, pCount: *mut ::ULONG) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpObjectWithToken(ISpObjectWithTokenVtbl): IUnknown(IUnknownVtbl) {
-    fn SetObjectToken(&mut self, pToken: *mut ISpObjectToken) -> ::HRESULT,
-    fn GetObjectToken(&mut self, ppToken: *mut *mut ISpObjectToken) -> ::HRESULT
+    fn SetObjectToken(&self, pToken: *mut ISpObjectToken) -> ::HRESULT,
+    fn GetObjectToken(&self, ppToken: *mut *mut ISpObjectToken) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpResourceManager(ISpResourceManagerVtbl): IServiceProvider(IServiceProviderVtbl) {
-    fn SetObject(&mut self, guidServiceId: ::REFGUID, pUnkObject: *mut ::IUnknown) -> ::HRESULT,
+    fn SetObject(&self, guidServiceId: ::REFGUID, pUnkObject: *mut ::IUnknown) -> ::HRESULT,
     fn GetObject(
-        &mut self, guidServiceId: ::REFGUID, ObjectCLSID: ::REFCLSID, ObjectIID: ::REFIID,
+        &self, guidServiceId: ::REFGUID, ObjectCLSID: ::REFCLSID, ObjectIID: ::REFIID,
         fReleaseWhenLastExternalRefReleased: ::BOOL, ppObject: *mut *mut ::c_void
     ) -> ::HRESULT
 }
@@ -424,31 +424,31 @@ STRUCT!{struct SPEVENTSOURCEINFO {
 RIDL!(
 interface ISpEventSource(ISpEventSourceVtbl): ISpNotifySource(ISpNotifySourceVtbl) {
     fn SetInterest(
-        &mut self, ullEventInterest: ::ULONGLONG, ullQueuedInterest: ::ULONGLONG
+        &self, ullEventInterest: ::ULONGLONG, ullQueuedInterest: ::ULONGLONG
     ) -> ::HRESULT,
     fn GetEvents(
-        &mut self, ulCount: ::ULONG, pEventArray: *mut SPEVENT, pulFetched: *mut ::ULONG
+        &self, ulCount: ::ULONG, pEventArray: *mut SPEVENT, pulFetched: *mut ::ULONG
     ) -> ::HRESULT,
-    fn GetInfo(&mut self, pInfo: *mut SPEVENTSOURCEINFO) -> ::HRESULT
+    fn GetInfo(&self, pInfo: *mut SPEVENTSOURCEINFO) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpEventSource2(ISpEventSource2Vtbl): ISpEventSource(ISpEventSourceVtbl) {
     fn GetEventsEx(
-        &mut self, ulCount: ::ULONG, pEventArray: *mut SPEVENTEX, pulFetched: *mut ::ULONG
+        &self, ulCount: ::ULONG, pEventArray: *mut SPEVENTEX, pulFetched: *mut ::ULONG
     ) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpEventSink(ISpEventSinkVtbl): IUnknown(IUnknownVtbl) {
-    fn AddEvents(&mut self, pEventArray: *const SPEVENT, ulCount: ::ULONG) -> ::HRESULT,
-    fn GetEventInterest(&mut self, pullEventInterest: *mut ::ULONGLONG) -> ::HRESULT
+    fn AddEvents(&self, pEventArray: *const SPEVENT, ulCount: ::ULONG) -> ::HRESULT,
+    fn GetEventInterest(&self, pullEventInterest: *mut ::ULONGLONG) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpStreamFormat(ISpStreamFormatVtbl): IStream(IStreamVtbl) {
     fn GetFormat(
-        &mut self, pguidFormatId: *mut ::GUID, ppCoMemWaveFormatEx: *mut *mut ::WAVEFORMATEX
+        &self, pguidFormatId: *mut ::GUID, ppCoMemWaveFormatEx: *mut *mut ::WAVEFORMATEX
     ) -> ::HRESULT
 }
 );
@@ -462,35 +462,35 @@ ENUM!{enum SPFILEMODE {
 RIDL!(
 interface ISpStream(ISpStreamVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
     fn SetBaseStream(
-        &mut self, pStream: *mut ::IStream, rguidFormat: ::REFGUID,
+        &self, pStream: *mut ::IStream, rguidFormat: ::REFGUID,
         pWaveFormatEx: *const ::WAVEFORMATEX
     ) -> ::HRESULT,
-    fn GetBaseStream(&mut self, ppStream: *mut *mut ::IStream) -> ::HRESULT,
+    fn GetBaseStream(&self, ppStream: *mut *mut ::IStream) -> ::HRESULT,
     fn BindToFile(
-        &mut self, pszFileName: ::LPCWSTR, eMode: SPFILEMODE, pFormatId: *const ::GUID,
+        &self, pszFileName: ::LPCWSTR, eMode: SPFILEMODE, pFormatId: *const ::GUID,
         pWaveFormatEx: *const ::WAVEFORMATEX, ullEventInterest: ::ULONGLONG
     ) -> ::HRESULT,
-    fn Close(&mut self) -> ::HRESULT
+    fn Close(&self) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpStreamFormatConverter(ISpStreamFormatConverterVtbl)
     : ISpStreamFormat(ISpStreamFormatVtbl) {
     fn SetBaseStream(
-        &mut self, pStream: *mut ISpStreamFormat, fSetFormatToBaseStreamFormat: ::BOOL,
+        &self, pStream: *mut ISpStreamFormat, fSetFormatToBaseStreamFormat: ::BOOL,
         fWriteToBaseStream: ::BOOL
     ) -> ::HRESULT,
-    fn GetBaseStream(&mut self, ppStream: *mut *mut ISpStreamFormat) -> ::HRESULT,
+    fn GetBaseStream(&self, ppStream: *mut *mut ISpStreamFormat) -> ::HRESULT,
     fn SetFormat(
-        &mut self, rguidFormatIdOfConvertedStream: ::REFGUID,
+        &self, rguidFormatIdOfConvertedStream: ::REFGUID,
         pWaveFormatExOfConvertedStream: *const ::WAVEFORMATEX
     ) -> ::HRESULT,
-    fn ResetSeekPosition(&mut self) -> ::HRESULT,
+    fn ResetSeekPosition(&self) -> ::HRESULT,
     fn ScaleConvertedToBaseOffset(
-        &mut self, ullOffsetConvertedStream: ::ULONGLONG, pullOffsetBaseStream: *mut ::ULONGLONG
+        &self, ullOffsetConvertedStream: ::ULONGLONG, pullOffsetBaseStream: *mut ::ULONGLONG
     ) -> ::HRESULT,
     fn ScaleBaseToConvertedOffset(
-        &mut self, ullOffsetBaseStream: ::ULONGLONG, pullOffsetConvertedStream: *mut ::ULONGLONG
+        &self, ullOffsetBaseStream: ::ULONGLONG, pullOffsetConvertedStream: *mut ::ULONGLONG
     ) -> ::HRESULT
 }
 );
@@ -516,36 +516,36 @@ STRUCT!{struct SPAUDIOBUFFERINFO {
 }}
 RIDL!(
 interface ISpAudio(ISpAudioVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
-    fn SetState(&mut self, NewState: SPAUDIOSTATE, ullReserved: ::ULONGLONG) -> ::HRESULT,
+    fn SetState(&self, NewState: SPAUDIOSTATE, ullReserved: ::ULONGLONG) -> ::HRESULT,
     fn SetFormat(
-        &mut self, rguidFmtId: ::REFGUID, pWaveFormatEx: *const ::WAVEFORMATEX
+        &self, rguidFmtId: ::REFGUID, pWaveFormatEx: *const ::WAVEFORMATEX
     ) -> ::HRESULT,
-    fn GetStatus(&mut self, pStatus: *mut SPAUDIOSTATUS) -> ::HRESULT,
-    fn SetBufferInfo(&mut self, pBuffInfo: *const SPAUDIOBUFFERINFO) -> ::HRESULT,
-    fn GetBufferInfo(&mut self, pBuffInfo: *mut SPAUDIOBUFFERINFO) -> ::HRESULT,
+    fn GetStatus(&self, pStatus: *mut SPAUDIOSTATUS) -> ::HRESULT,
+    fn SetBufferInfo(&self, pBuffInfo: *const SPAUDIOBUFFERINFO) -> ::HRESULT,
+    fn GetBufferInfo(&self, pBuffInfo: *mut SPAUDIOBUFFERINFO) -> ::HRESULT,
     fn GetDefaultFormat(
-        &mut self, pFormatId: *mut ::GUID, ppCoMemWaveFormatEx: *mut *mut ::WAVEFORMATEX
+        &self, pFormatId: *mut ::GUID, ppCoMemWaveFormatEx: *mut *mut ::WAVEFORMATEX
     ) -> ::HRESULT,
-    fn EventHandle(&mut self) -> ::HANDLE,
-    fn GetVolumeLevel(&mut self, pLevel: *mut ::ULONG) -> ::HRESULT,
-    fn SetVolumeLevel(&mut self, Level: ::ULONG) -> ::HRESULT,
-    fn GetBufferNotifySize(&mut self, pcbSize: *mut ::ULONG) -> ::HRESULT,
-    fn SetBufferNotifySize(&mut self, cbSize: ::ULONG) -> ::HRESULT
+    fn EventHandle(&self) -> ::HANDLE,
+    fn GetVolumeLevel(&self, pLevel: *mut ::ULONG) -> ::HRESULT,
+    fn SetVolumeLevel(&self, Level: ::ULONG) -> ::HRESULT,
+    fn GetBufferNotifySize(&self, pcbSize: *mut ::ULONG) -> ::HRESULT,
+    fn SetBufferNotifySize(&self, cbSize: ::ULONG) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpMMSysAudio(ISpMMSysAudioVtbl): ISpAudio(ISpAudioVtbl) {
-    fn GetDeviceId(&mut self, puDeviceId: *mut ::UINT) -> ::HRESULT,
-    fn SetDeviceId(&mut self, uDeviceId: ::UINT) -> ::HRESULT,
-    fn GetMMHandle(&mut self, pHandle: *mut *mut ::c_void) -> ::HRESULT,
-    fn GetLineId(&mut self, puLineId: *mut ::UINT) -> ::HRESULT,
-    fn SetLineId(&mut self, uLineId: ::UINT) -> ::HRESULT
+    fn GetDeviceId(&self, puDeviceId: *mut ::UINT) -> ::HRESULT,
+    fn SetDeviceId(&self, uDeviceId: ::UINT) -> ::HRESULT,
+    fn GetMMHandle(&self, pHandle: *mut *mut ::c_void) -> ::HRESULT,
+    fn GetLineId(&self, puLineId: *mut ::UINT) -> ::HRESULT,
+    fn SetLineId(&self, uLineId: ::UINT) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpTranscript(ISpTranscriptVtbl): IUnknown(IUnknownVtbl) {
-    fn GetTranscript(&mut self, ppszTranscript: *mut ::LPWSTR) -> ::HRESULT,
-    fn AppendTranscript(&mut self, pszTranscript: ::LPCWSTR) -> ::HRESULT
+    fn GetTranscript(&self, ppszTranscript: *mut ::LPWSTR) -> ::HRESULT,
+    fn AppendTranscript(&self, pszTranscript: ::LPCWSTR) -> ::HRESULT
 }
 );
 ENUM!{enum SPDISPLYATTRIBUTES {
@@ -805,30 +805,30 @@ STRUCT!{struct SPWORDLIST {
 RIDL!(
 interface ISpLexicon(ISpLexiconVtbl): IUnknown(IUnknownVtbl) {
     fn GetPronunciations(
-        &mut self, pszWord: ::LPCWSTR, LangID: ::WORD, dwFlags: ::DWORD,
+        &self, pszWord: ::LPCWSTR, LangID: ::WORD, dwFlags: ::DWORD,
         pWordPronunciationList: *mut SPWORDPRONUNCIATIONLIST
     ) -> ::HRESULT,
     fn AddPronunciation(
-        &mut self, pszWord: ::LPCWSTR, LangID: ::WORD, ePartOfSpeech: SPPARTOFSPEECH,
+        &self, pszWord: ::LPCWSTR, LangID: ::WORD, ePartOfSpeech: SPPARTOFSPEECH,
         pszPronunciation: PCSPPHONEID
     ) -> ::HRESULT,
     fn RemovePronunciation(
-        &mut self, pszWord: ::LPCWSTR, LangID: ::WORD, ePartOfSpeech: SPPARTOFSPEECH,
+        &self, pszWord: ::LPCWSTR, LangID: ::WORD, ePartOfSpeech: SPPARTOFSPEECH,
         pszPronunciation: PCSPPHONEID
     ) -> ::HRESULT,
-    fn GetGeneration(&mut self, pdwGeneration: *mut ::DWORD) -> ::HRESULT,
+    fn GetGeneration(&self, pdwGeneration: *mut ::DWORD) -> ::HRESULT,
     fn GetGenerationChange(
-        &mut self, dwFlags: ::DWORD, pdwGeneration: *mut ::DWORD, pWordList: *mut SPWORDLIST
+        &self, dwFlags: ::DWORD, pdwGeneration: *mut ::DWORD, pWordList: *mut SPWORDLIST
     ) -> ::HRESULT,
     fn GetWords(
-        &mut self, dwFlags: ::DWORD, pdwGeneration: *mut ::DWORD, pdwCookie: *mut ::DWORD,
+        &self, dwFlags: ::DWORD, pdwGeneration: *mut ::DWORD, pdwCookie: *mut ::DWORD,
         pWordList: *mut SPWORDLIST
     ) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpContainerLexicon(ISpContainerLexiconVtbl): ISpLexicon(ISpLexiconVtbl) {
-    fn AddLexicon(&mut self, pAddLexicon: *mut ISpLexicon, dwFlags: ::DWORD) -> ::HRESULT
+    fn AddLexicon(&self, pAddLexicon: *mut ISpLexicon, dwFlags: ::DWORD) -> ::HRESULT
 }
 );
 ENUM!{enum SPSHORTCUTTYPE {
@@ -856,57 +856,57 @@ STRUCT!{struct SPSHORTCUTPAIRLIST {
 RIDL!(
 interface ISpShortcut(ISpShortcutVtbl): IUnknown(IUnknownVtbl) {
     fn AddShortcut(
-        &mut self, pszDisplay: ::LPCWSTR, LangID: ::WORD, pszSpoken: ::LPCWSTR,
+        &self, pszDisplay: ::LPCWSTR, LangID: ::WORD, pszSpoken: ::LPCWSTR,
         shType: SPSHORTCUTTYPE
     ) -> ::HRESULT,
     fn RemoveShortcut(
-        &mut self, pszDisplay: ::LPCWSTR, LangID: ::WORD, pszSpoken: ::LPCWSTR,
+        &self, pszDisplay: ::LPCWSTR, LangID: ::WORD, pszSpoken: ::LPCWSTR,
         shType: SPSHORTCUTTYPE
     ) -> ::HRESULT,
     fn GetShortcuts(
-        &mut self, LangId: ::WORD, pShortcutpairList: *mut SPSHORTCUTPAIRLIST
+        &self, LangId: ::WORD, pShortcutpairList: *mut SPSHORTCUTPAIRLIST
     ) -> ::HRESULT,
-    fn GetGeneration(&mut self, pdwGeneration: *mut ::DWORD) -> ::HRESULT,
+    fn GetGeneration(&self, pdwGeneration: *mut ::DWORD) -> ::HRESULT,
     fn GetWordsFromGenerationChange(
-        &mut self, pdwGeneration: *mut ::DWORD, pWordList: *mut SPWORDLIST
+        &self, pdwGeneration: *mut ::DWORD, pWordList: *mut SPWORDLIST
     ) -> ::HRESULT,
     fn GetWords(
-        &mut self, pdwGeneration: *mut ::DWORD, pdwCookie: *mut ::DWORD, pWordList: *mut SPWORDLIST
+        &self, pdwGeneration: *mut ::DWORD, pdwCookie: *mut ::DWORD, pWordList: *mut SPWORDLIST
     ) -> ::HRESULT,
     fn GetShortcutsForGeneration(
-        &mut self, pdwGeneration: *mut ::DWORD, pdwCookie: *mut ::DWORD,
+        &self, pdwGeneration: *mut ::DWORD, pdwCookie: *mut ::DWORD,
         pShortcutpairList: *mut SPSHORTCUTPAIRLIST
     ) -> ::HRESULT,
     fn GetGenerationChange(
-        &mut self, pdwGeneration: *mut ::DWORD, pShortcutpairList: *mut SPSHORTCUTPAIRLIST
+        &self, pdwGeneration: *mut ::DWORD, pShortcutpairList: *mut SPSHORTCUTPAIRLIST
     ) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpPhoneConverter(ISpPhoneConverterVtbl): ISpObjectWithToken(ISpObjectWithTokenVtbl) {
-    fn PhoneToId(&mut self, pszPhone: ::LPCWSTR, pId: *mut SPPHONEID) -> ::HRESULT,
-    fn IdToPhone(&mut self, pId: PCSPPHONEID, pszPhone: *mut ::WCHAR) -> ::HRESULT
+    fn PhoneToId(&self, pszPhone: ::LPCWSTR, pId: *mut SPPHONEID) -> ::HRESULT,
+    fn IdToPhone(&self, pId: PCSPPHONEID, pszPhone: *mut ::WCHAR) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpPhoneticAlphabetConverter(ISpPhoneticAlphabetConverterVtbl): IUnknown(IUnknownVtbl) {
-    fn GetLangId(&mut self, pLangID: *mut ::WORD) -> ::HRESULT,
-    fn SetLangId(&mut self, LangID: *mut ::WORD) -> ::HRESULT,
+    fn GetLangId(&self, pLangID: *mut ::WORD) -> ::HRESULT,
+    fn SetLangId(&self, LangID: *mut ::WORD) -> ::HRESULT,
     fn SAPI2UPS(
-        &mut self, pszSAPIId: *const SPPHONEID, pszUPSId: *mut SPPHONEID, cMaxLength: ::DWORD
+        &self, pszSAPIId: *const SPPHONEID, pszUPSId: *mut SPPHONEID, cMaxLength: ::DWORD
     ) -> ::HRESULT,
     fn UPS2SAPI(
-        &mut self, pszUPSId: *const SPPHONEID, pszSAPIId: *mut SPPHONEID, cMaxLength: ::DWORD
+        &self, pszUPSId: *const SPPHONEID, pszSAPIId: *mut SPPHONEID, cMaxLength: ::DWORD
     ) -> ::HRESULT,
     fn GetMaxConvertLength(
-        &mut self, cSrcLength: ::DWORD, bSAPI2UPS: ::BOOL, pcMaxDestLength: *mut ::DWORD
+        &self, cSrcLength: ::DWORD, bSAPI2UPS: ::BOOL, pcMaxDestLength: *mut ::DWORD
     ) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpPhoneticAlphabetSelection(ISpPhoneticAlphabetSelectionVtbl): IUnknown(IUnknownVtbl) {
-    fn IsAlphabetUPS(&mut self, pfIsUPS: *mut ::BOOL) -> ::HRESULT,
-    fn SetAlphabetToUPS(&mut self, fForceUPS: ::BOOL) -> ::HRESULT
+    fn IsAlphabetUPS(&self, pfIsUPS: *mut ::BOOL) -> ::HRESULT,
+    fn SetAlphabetToUPS(&self, fForceUPS: ::BOOL) -> ::HRESULT
 }
 );
 STRUCT!{struct SPVPITCH {
@@ -991,43 +991,43 @@ pub const SPF_VOICE_MASK: i32 =
 pub const SPF_UNUSED_FLAGS: i32 = !SPF_VOICE_MASK;
 RIDL!(
 interface ISpVoice(ISpVoiceVtbl): ISpEventSource(ISpEventSourceVtbl) {
-    fn SetOutput(&mut self, pUnkOutput: *mut ::IUnknown, fAllowFormatChanges: ::BOOL) -> ::HRESULT,
-    fn GetOutputObjectToken(&mut self, ppObjectToken: *mut *mut ISpObjectToken) -> ::HRESULT,
-    fn GetOutputStream(&mut self, ppStream: *mut *mut ISpStreamFormat) -> ::HRESULT,
-    fn Pause(&mut self) -> ::HRESULT,
-    fn Resume(&mut self) -> ::HRESULT,
-    fn SetVoice(&mut self, pToken: *mut ISpObjectToken) -> ::HRESULT,
-    fn GetVoice(&mut self, ppToken: *mut *mut ISpObjectToken) -> ::HRESULT,
+    fn SetOutput(&self, pUnkOutput: *mut ::IUnknown, fAllowFormatChanges: ::BOOL) -> ::HRESULT,
+    fn GetOutputObjectToken(&self, ppObjectToken: *mut *mut ISpObjectToken) -> ::HRESULT,
+    fn GetOutputStream(&self, ppStream: *mut *mut ISpStreamFormat) -> ::HRESULT,
+    fn Pause(&self) -> ::HRESULT,
+    fn Resume(&self) -> ::HRESULT,
+    fn SetVoice(&self, pToken: *mut ISpObjectToken) -> ::HRESULT,
+    fn GetVoice(&self, ppToken: *mut *mut ISpObjectToken) -> ::HRESULT,
     fn Speak(
-        &mut self, pwcs: ::LPCWSTR, dwFlags: ::DWORD, pulStreamNumber: *mut ::ULONG
+        &self, pwcs: ::LPCWSTR, dwFlags: ::DWORD, pulStreamNumber: *mut ::ULONG
     ) -> ::HRESULT,
     fn SpeakStream(
-        &mut self, pStream: *mut ::IStream, dwFlags: ::DWORD, pulStreamNumber: *mut ::ULONG
+        &self, pStream: *mut ::IStream, dwFlags: ::DWORD, pulStreamNumber: *mut ::ULONG
     ) -> ::HRESULT,
     fn GetStatus(
-        &mut self, pStatus: *mut SPVOICESTATUS, ppszLastBookmark: *mut ::LPWSTR
+        &self, pStatus: *mut SPVOICESTATUS, ppszLastBookmark: *mut ::LPWSTR
     ) -> ::HRESULT,
     fn Skip(
-        &mut self, pItemType: ::LPCWSTR, lNumItems: ::c_long, pulNumSkipped: *mut ::ULONG
+        &self, pItemType: ::LPCWSTR, lNumItems: ::c_long, pulNumSkipped: *mut ::ULONG
     ) -> ::HRESULT,
-    fn SetPriority(&mut self, ePriority: SPVPRIORITY) -> ::HRESULT,
-    fn GetPriority(&mut self, pePriority: *mut SPVPRIORITY) -> ::HRESULT,
-    fn SetAlertBoundary(&mut self, eBoundary: SPEVENTENUM) -> ::HRESULT,
-    fn GetAlertBoundary(&mut self, peBoundary: *mut SPEVENTENUM) -> ::HRESULT,
-    fn SetRate(&mut self, RateAdjust: ::c_long) -> ::HRESULT,
-    fn GetRate(&mut self, pRateAdjust: *mut ::c_long) -> ::HRESULT,
-    fn SetVolume(&mut self, usVolume: ::USHORT) -> ::HRESULT,
-    fn GetVolume(&mut self, pusVolume: *mut ::USHORT) -> ::HRESULT,
-    fn WaitUntilDone(&mut self, msTimeout: ::ULONG) -> ::HRESULT,
-    fn SetSyncSpeakTimeout(&mut self, msTimeout: ::ULONG) -> ::HRESULT,
-    fn GetSyncSpeakTimeout(&mut self, pmsTimeout: *mut ::ULONG) -> ::HRESULT,
-    fn SpeakCompleteEvent(&mut self) -> ::HANDLE,
+    fn SetPriority(&self, ePriority: SPVPRIORITY) -> ::HRESULT,
+    fn GetPriority(&self, pePriority: *mut SPVPRIORITY) -> ::HRESULT,
+    fn SetAlertBoundary(&self, eBoundary: SPEVENTENUM) -> ::HRESULT,
+    fn GetAlertBoundary(&self, peBoundary: *mut SPEVENTENUM) -> ::HRESULT,
+    fn SetRate(&self, RateAdjust: ::c_long) -> ::HRESULT,
+    fn GetRate(&self, pRateAdjust: *mut ::c_long) -> ::HRESULT,
+    fn SetVolume(&self, usVolume: ::USHORT) -> ::HRESULT,
+    fn GetVolume(&self, pusVolume: *mut ::USHORT) -> ::HRESULT,
+    fn WaitUntilDone(&self, msTimeout: ::ULONG) -> ::HRESULT,
+    fn SetSyncSpeakTimeout(&self, msTimeout: ::ULONG) -> ::HRESULT,
+    fn GetSyncSpeakTimeout(&self, pmsTimeout: *mut ::ULONG) -> ::HRESULT,
+    fn SpeakCompleteEvent(&self) -> ::HANDLE,
     fn IsUISupported(
-        &mut self, pszTypeOfUI: ::LPCWSTR, pvExtraData: *mut ::c_void, cbExtraData: ::ULONG,
+        &self, pszTypeOfUI: ::LPCWSTR, pvExtraData: *mut ::c_void, cbExtraData: ::ULONG,
         pfSupported: *mut ::BOOL
     ) -> ::HRESULT,
     fn DisplayUI(
-        &mut self, hwndParent: ::HWND, pszTitle: ::LPCWSTR, pszTypeOfUI: ::LPCWSTR,
+        &self, hwndParent: ::HWND, pszTitle: ::LPCWSTR, pszTypeOfUI: ::LPCWSTR,
         pvExtraData: *mut ::c_void, cbExtraData: ::ULONG
     ) -> ::HRESULT
 }
@@ -1038,22 +1038,22 @@ DEFINE_GUID!(
 );
 RIDL!(
 interface ISpPhrase(ISpPhraseVtbl): IUnknown(IUnknownVtbl) {
-    fn GetPhrase(&mut self, ppCoMemPhrase: *mut *mut SPPHRASE) -> ::HRESULT,
-    fn GetSerializedPhrase(&mut self, ppCoMemPhrase: *mut *mut SPSERIALIZEDPHRASE) -> ::HRESULT,
+    fn GetPhrase(&self, ppCoMemPhrase: *mut *mut SPPHRASE) -> ::HRESULT,
+    fn GetSerializedPhrase(&self, ppCoMemPhrase: *mut *mut SPSERIALIZEDPHRASE) -> ::HRESULT,
     fn GetText(
-        &mut self, ulStart: ::ULONG, ulCount: ::ULONG, fUseTextReplacements: ::BOOL,
+        &self, ulStart: ::ULONG, ulCount: ::ULONG, fUseTextReplacements: ::BOOL,
         ppszCoMemText: *mut ::LPWSTR, pbDisplayAttributes: *mut ::BYTE
     ) -> ::HRESULT,
-    fn Discard(&mut self, dwValueTypes: ::DWORD) -> ::HRESULT
+    fn Discard(&self, dwValueTypes: ::DWORD) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpPhraseAlt(ISpPhraseAltVtbl): ISpPhrase(ISpPhraseVtbl) {
     fn GetAltInfo(
-        &mut self, pParent: *mut *mut ISpPhrase, pulStartElementInParent: *mut ::ULONG,
+        &self, pParent: *mut *mut ISpPhrase, pulStartElementInParent: *mut ::ULONG,
         pcElementsInParent: *mut ::ULONG, pcElementsInAlt: *mut ::ULONG
     ) -> ::HRESULT,
-    fn Commit(&mut self) -> ::HRESULT
+    fn Commit(&self) -> ::HRESULT
 }
 );
 ENUM!{enum SPXMLRESULTOPTIONS {
@@ -1063,11 +1063,11 @@ ENUM!{enum SPXMLRESULTOPTIONS {
 RIDL!(
 interface ISpPhrase2(ISpPhrase2Vtbl): ISpPhrase(ISpPhraseVtbl) {
     fn GetXMLResult(
-        &mut self, ppszCoMemXMLResult: *mut ::LPWSTR, Options: SPXMLRESULTOPTIONS
+        &self, ppszCoMemXMLResult: *mut ::LPWSTR, Options: SPXMLRESULTOPTIONS
     ) -> ::HRESULT,
-    fn GetXMLErrorInfo(&mut self, pSemanticErrorInfo: *mut SPSEMANTICERRORINFO) -> ::HRESULT,
+    fn GetXMLErrorInfo(&self, pSemanticErrorInfo: *mut SPSEMANTICERRORINFO) -> ::HRESULT,
     fn GetAudio(
-        &mut self, ulStartElement: ::ULONG, cElements: ::ULONG, ppStream: *mut *mut ISpStreamFormat
+        &self, ulStartElement: ::ULONG, cElements: ::ULONG, ppStream: *mut *mut ISpStreamFormat
     ) -> ::HRESULT
 }
 );
@@ -1082,23 +1082,23 @@ STRUCT!{struct SPSERIALIZEDRESULT {
 }}
 RIDL!(
 interface ISpRecoResult(ISpRecoResultVtbl): ISpPhrase(ISpPhraseVtbl) {
-    fn GetResultTimes(&mut self, pTimes: *mut SPRECORESULTTIMES) -> ::HRESULT,
+    fn GetResultTimes(&self, pTimes: *mut SPRECORESULTTIMES) -> ::HRESULT,
     fn GetAlternates(
-        &mut self, ulStartElement: ::ULONG, cElements: ::ULONG, ulRequestCount: ::ULONG,
+        &self, ulStartElement: ::ULONG, cElements: ::ULONG, ulRequestCount: ::ULONG,
         ppPhrases: *mut *mut ISpPhraseAlt, pcPhrasesReturned: *mut ::ULONG
     ) -> ::HRESULT,
     fn GetAudio(
-        &mut self, ulStartElement: ::ULONG, cElements: ::ULONG, ppStream: *mut *mut ISpStreamFormat
+        &self, ulStartElement: ::ULONG, cElements: ::ULONG, ppStream: *mut *mut ISpStreamFormat
     ) -> ::HRESULT,
     fn SpeakAudio(
-        &mut self, ulStartElement: ::ULONG, cElements: ::ULONG, dwFlags: ::DWORD,
+        &self, ulStartElement: ::ULONG, cElements: ::ULONG, dwFlags: ::DWORD,
         pulStreamNumber: *mut ::ULONG
     ) -> ::HRESULT,
-    fn Serialize(&mut self, ppCoMemSerializedResult: *mut *mut SPSERIALIZEDRESULT) -> ::HRESULT,
+    fn Serialize(&self, ppCoMemSerializedResult: *mut *mut SPSERIALIZEDRESULT) -> ::HRESULT,
     fn ScaleAudio(
-        &mut self, pAudioFormatId: *const ::GUID, pWaveFormatEx: *const ::WAVEFORMATEX
+        &self, pAudioFormatId: *const ::GUID, pWaveFormatEx: *const ::WAVEFORMATEX
     ) -> ::HRESULT,
-    fn GetRecoContext(&mut self, ppRecoContext: *mut *mut ISpRecoContext) -> ::HRESULT
+    fn GetRecoContext(&self, ppRecoContext: *mut *mut ISpRecoContext) -> ::HRESULT
 }
 );
 ENUM!{enum SPCOMMITFLAGS {
@@ -1109,21 +1109,21 @@ ENUM!{enum SPCOMMITFLAGS {
 RIDL!(
 interface ISpRecoResult2(ISpRecoResult2Vtbl): ISpRecoResult(ISpRecoResultVtbl) {
     fn CommitAlternate(
-        &mut self, pPhraseAlt: *mut ISpPhraseAlt, ppNewResult: *mut *mut ISpRecoResult
+        &self, pPhraseAlt: *mut ISpPhraseAlt, ppNewResult: *mut *mut ISpRecoResult
     ) -> ::HRESULT,
     fn CommitText(
-        &mut self, ulStartElement: ::ULONG, cElements: ::ULONG, pszCorrectedData: ::LPCWSTR,
+        &self, ulStartElement: ::ULONG, cElements: ::ULONG, pszCorrectedData: ::LPCWSTR,
         eCommitFlags: ::DWORD
     ) -> ::HRESULT,
-    fn SetTextFeedback(&mut self, pszFeedback: ::LPCWSTR, fSuccessful: ::BOOL) -> ::HRESULT
+    fn SetTextFeedback(&self, pszFeedback: ::LPCWSTR, fSuccessful: ::BOOL) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpXMLRecoResult(ISpXMLRecoResultVtbl): ISpRecoResult(ISpRecoResultVtbl) {
     fn GetXMLResult(
-        &mut self, ppszCoMemXMLResult: *mut ::LPWSTR, Options: SPXMLRESULTOPTIONS
+        &self, ppszCoMemXMLResult: *mut ::LPWSTR, Options: SPXMLRESULTOPTIONS
     ) -> ::HRESULT,
-    fn GetXMLErrorInfo(&mut self, pSemanticErrorInfo: *mut SPSEMANTICERRORINFO) -> ::HRESULT
+    fn GetXMLErrorInfo(&self, pSemanticErrorInfo: *mut SPSEMANTICERRORINFO) -> ::HRESULT
 }
 );
 STRUCT!{struct SPTEXTSELECTIONINFO {
@@ -1182,27 +1182,27 @@ ENUM!{enum SPCFGRULEATTRIBUTES {
 }}
 RIDL!(
 interface ISpGrammarBuilder(ISpGrammarBuilderVtbl): IUnknown(IUnknownVtbl) {
-    fn ResetGrammar(&mut self, NewLanguage: ::WORD) -> ::HRESULT,
+    fn ResetGrammar(&self, NewLanguage: ::WORD) -> ::HRESULT,
     fn GetRule(
-        &mut self, pszRuleName: ::LPCWSTR, dwRuleId: ::DWORD, dwAttributes: ::DWORD,
+        &self, pszRuleName: ::LPCWSTR, dwRuleId: ::DWORD, dwAttributes: ::DWORD,
         fCreateIfNotExist: ::BOOL, phInitialState: *mut SPSTATEHANDLE
     ) -> ::HRESULT,
-    fn ClearRule(&mut self, hState: SPSTATEHANDLE) -> ::HRESULT,
-    fn CreateNewState(&mut self, hState: SPSTATEHANDLE, phState: *mut SPSTATEHANDLE) -> ::HRESULT,
+    fn ClearRule(&self, hState: SPSTATEHANDLE) -> ::HRESULT,
+    fn CreateNewState(&self, hState: SPSTATEHANDLE, phState: *mut SPSTATEHANDLE) -> ::HRESULT,
     fn AddWordTransition(
-        &mut self, hFromState: SPSTATEHANDLE, hToState: SPSTATEHANDLE, psz: ::LPCWSTR,
+        &self, hFromState: SPSTATEHANDLE, hToState: SPSTATEHANDLE, psz: ::LPCWSTR,
         pszSeparators: ::LPCWSTR, eWordType: SPGRAMMARWORDTYPE, Weight: ::c_float,
         pPropInfo: *const SPPROPERTYINFO
     ) -> ::HRESULT,
     fn AddRuleTransition(
-        &mut self, hFromState: SPSTATEHANDLE, hToState: SPSTATEHANDLE, hRule: SPSTATEHANDLE,
+        &self, hFromState: SPSTATEHANDLE, hToState: SPSTATEHANDLE, hRule: SPSTATEHANDLE,
         Weight: ::c_float, pPropInfo: *const SPPROPERTYINFO
     ) -> ::HRESULT,
     fn AddResource(
-        &mut self, hRuleState: SPSTATEHANDLE, pszResourceName: ::LPCWSTR,
+        &self, hRuleState: SPSTATEHANDLE, pszResourceName: ::LPCWSTR,
         pszResourceValue: ::LPCWSTR
     ) -> ::HRESULT,
-    fn Commit(&mut self, dwReserved: ::DWORD) -> ::HRESULT
+    fn Commit(&self, dwReserved: ::DWORD) -> ::HRESULT
 }
 );
 ENUM!{enum SPLOADOPTIONS {
@@ -1211,40 +1211,40 @@ ENUM!{enum SPLOADOPTIONS {
 }}
 RIDL!(
 interface ISpRecoGrammar(ISpRecoGrammarVtbl): ISpGrammarBuilder(ISpGrammarBuilderVtbl) {
-    fn GetGrammarId(&mut self, pullGrammarId: *mut ::ULONGLONG) -> ::HRESULT,
-    fn GetRecoContext(&mut self, ppRecoCtxt: *mut *mut ISpRecoContext) -> ::HRESULT,
-    fn LoadCmdFromFile(&mut self, pszFileName: ::LPCWSTR, Options: SPLOADOPTIONS) -> ::HRESULT,
+    fn GetGrammarId(&self, pullGrammarId: *mut ::ULONGLONG) -> ::HRESULT,
+    fn GetRecoContext(&self, ppRecoCtxt: *mut *mut ISpRecoContext) -> ::HRESULT,
+    fn LoadCmdFromFile(&self, pszFileName: ::LPCWSTR, Options: SPLOADOPTIONS) -> ::HRESULT,
     fn LoadCmdFromObject(
-        &mut self, rcid: ::REFCLSID, pszGrammarName: ::LPCWSTR, Options: SPLOADOPTIONS
+        &self, rcid: ::REFCLSID, pszGrammarName: ::LPCWSTR, Options: SPLOADOPTIONS
     ) -> ::HRESULT,
     fn LoadCmdFromResource(
-        &mut self, hModule: ::HMODULE, pszResourceName: ::LPCWSTR, pszResourceType: ::LPCWSTR,
+        &self, hModule: ::HMODULE, pszResourceName: ::LPCWSTR, pszResourceType: ::LPCWSTR,
         wLanguage: ::WORD, Options: SPLOADOPTIONS
     ) -> ::HRESULT,
     fn LoadCmdFromMemory(
-        &mut self, pGrammar: *const SPBINARYGRAMMAR, Options: SPLOADOPTIONS
+        &self, pGrammar: *const SPBINARYGRAMMAR, Options: SPLOADOPTIONS
     ) -> ::HRESULT,
     fn LoadCmdFromProprietaryGrammar(
-        &mut self, rguidParam: ::REFGUID, pszStringParam: ::LPCWSTR, pvDataPrarm: *const ::c_void,
+        &self, rguidParam: ::REFGUID, pszStringParam: ::LPCWSTR, pvDataPrarm: *const ::c_void,
         cbDataSize: ::ULONG, Options: SPLOADOPTIONS
     ) -> ::HRESULT,
     fn SetRuleState(
-        &mut self, pszName: ::LPCWSTR, pReserved: *mut ::c_void, NewState: SPRULESTATE
+        &self, pszName: ::LPCWSTR, pReserved: *mut ::c_void, NewState: SPRULESTATE
     ) -> ::HRESULT,
-    fn SetRuleIdState(&mut self, ulRuleId: ::ULONG, NewState: SPRULESTATE) -> ::HRESULT,
-    fn LoadDictation(&mut self, pszTopicName: ::LPCWSTR, Options: SPLOADOPTIONS) -> ::HRESULT,
-    fn UnloadDictation(&mut self) -> ::HRESULT,
-    fn SetDictationState(&mut self, NewState: SPRULESTATE) -> ::HRESULT,
+    fn SetRuleIdState(&self, ulRuleId: ::ULONG, NewState: SPRULESTATE) -> ::HRESULT,
+    fn LoadDictation(&self, pszTopicName: ::LPCWSTR, Options: SPLOADOPTIONS) -> ::HRESULT,
+    fn UnloadDictation(&self) -> ::HRESULT,
+    fn SetDictationState(&self, NewState: SPRULESTATE) -> ::HRESULT,
     fn SetWordSequenceData(
-        &mut self, pText: *const ::WCHAR, cchText: ::ULONG, pInfo: *const SPTEXTSELECTIONINFO
+        &self, pText: *const ::WCHAR, cchText: ::ULONG, pInfo: *const SPTEXTSELECTIONINFO
     ) -> ::HRESULT,
-    fn SetTextSelection(&mut self, pInfo: *const SPTEXTSELECTIONINFO) -> ::HRESULT,
+    fn SetTextSelection(&self, pInfo: *const SPTEXTSELECTIONINFO) -> ::HRESULT,
     fn IsPronounceable(
-        &mut self, pszWord: ::LPCWSTR, pWordPronounceable: *mut SPWORDPRONOUNCEABLE
+        &self, pszWord: ::LPCWSTR, pWordPronounceable: *mut SPWORDPRONOUNCEABLE
     ) -> ::HRESULT,
-    fn SetGrammarState(&mut self, eGrammarState: SPGRAMMARSTATE) -> ::HRESULT,
-    fn SaveCmd(&mut self, pStream: *mut ::IStream, ppszCoMemErrorText: *mut ::LPWSTR) -> ::HRESULT,
-    fn GetGrammarState(&mut self, peGrammarState: *mut SPGRAMMARSTATE) -> ::HRESULT
+    fn SetGrammarState(&self, eGrammarState: SPGRAMMARSTATE) -> ::HRESULT,
+    fn SaveCmd(&self, pStream: *mut ::IStream, ppszCoMemErrorText: *mut ::LPWSTR) -> ::HRESULT,
+    fn GetGrammarState(&self, peGrammarState: *mut SPGRAMMARSTATE) -> ::HRESULT
 }
 );
 ENUM!{enum SPMATCHINGMODE {
@@ -1262,48 +1262,48 @@ ENUM!{enum PHONETICALPHABET {
 RIDL!(
 interface ISpGrammarBuilder2(ISpGrammarBuilder2Vtbl): IUnknown(IUnknownVtbl) {
     fn AddTextSubset(
-        &mut self, hFromState: SPSTATEHANDLE, hToState: SPSTATEHANDLE, psz: ::LPCWSTR,
+        &self, hFromState: SPSTATEHANDLE, hToState: SPSTATEHANDLE, psz: ::LPCWSTR,
         eMatchMode: SPMATCHINGMODE
     ) -> ::HRESULT,
-    fn SetPhoneticAlphabet(&mut self, phoneticALphabet: PHONETICALPHABET) -> ::HRESULT
+    fn SetPhoneticAlphabet(&self, phoneticALphabet: PHONETICALPHABET) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpRecoGrammar2(ISpRecoGrammar2Vtbl): IUnknown(IUnknownVtbl) {
-    fn GetRules(&mut self, ppCoMemRules: *mut *mut SPRULE, puNumRules: *mut ::UINT) -> ::HRESULT,
+    fn GetRules(&self, ppCoMemRules: *mut *mut SPRULE, puNumRules: *mut ::UINT) -> ::HRESULT,
     fn LoadCmdFromFile2(
-        &mut self, pszFileName: ::LPCWSTR, Options: SPLOADOPTIONS, pszSharingUri: ::LPCWSTR,
+        &self, pszFileName: ::LPCWSTR, Options: SPLOADOPTIONS, pszSharingUri: ::LPCWSTR,
         pszBaseUri: ::LPCWSTR
     ) -> ::HRESULT,
     fn LoadCmdFromMemory2(
-        &mut self, pGrammar: *const SPBINARYGRAMMAR, Options: SPLOADOPTIONS,
+        &self, pGrammar: *const SPBINARYGRAMMAR, Options: SPLOADOPTIONS,
         pszSharingUri: ::LPCWSTR, pszBaseUri: ::LPCWSTR
     ) -> ::HRESULT,
     fn SetRulePriority(
-        &mut self, pszRuleName: ::LPCWSTR, ulRuleId: ::ULONG, nRulePriority: ::c_int
+        &self, pszRuleName: ::LPCWSTR, ulRuleId: ::ULONG, nRulePriority: ::c_int
     ) -> ::HRESULT,
     fn SetRuleWeight(
-        &mut self, pszRuleName: ::LPCWSTR, ulRuleId: ::ULONG, flWeight: ::c_float
+        &self, pszRuleName: ::LPCWSTR, ulRuleId: ::ULONG, flWeight: ::c_float
     ) -> ::HRESULT,
-    fn SetDictationWeight(&mut self, flWeight: ::c_float) -> ::HRESULT,
-    fn SetGrammarLoader(&mut self, pLoader: *mut ISpeechResourceLoader) -> ::HRESULT,
+    fn SetDictationWeight(&self, flWeight: ::c_float) -> ::HRESULT,
+    fn SetGrammarLoader(&self, pLoader: *mut ISpeechResourceLoader) -> ::HRESULT,
     fn SetSMLSecurityManager(
-        &mut self, pSMLSecurityManager: *mut ::IInternetSecurityManager
+        &self, pSMLSecurityManager: *mut ::IInternetSecurityManager
     ) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpeechResourceLoader(ISpeechResourceLoaderVtbl): IDispatch(IDispatchVtbl) {
     fn LoadResource(
-        &mut self, bstrResourceUri: ::BSTR, fAlwaysReload: ::VARIANT_BOOL,
+        &self, bstrResourceUri: ::BSTR, fAlwaysReload: ::VARIANT_BOOL,
         pStream: *mut *mut ::IUnknown, pbstrMIMEType: *mut ::BSTR, pfModified: *mut ::VARIANT_BOOL,
         pbstrRedirectUrl: *mut ::BSTR
     ) -> ::HRESULT,
     fn GetLocalCopy(
-        &mut self, bstrResourceUri: ::BSTR, pbstrLocalPath: *mut ::BSTR,
+        &self, bstrResourceUri: ::BSTR, pbstrLocalPath: *mut ::BSTR,
         pbstrMIMEType: *mut ::BSTR, pbstrRedirectUrl: *mut ::BSTR
     ) -> ::HRESULT,
-    fn ReleaseLocalCopy(&mut self, pbstrLocalPath: ::BSTR) -> ::HRESULT
+    fn ReleaseLocalCopy(&self, pbstrLocalPath: ::BSTR) -> ::HRESULT
 }
 );
 STRUCT!{struct SPRECOCONTEXTSTATUS {
@@ -1324,37 +1324,37 @@ ENUM!{enum SPAUDIOOPTIONS {
 }}
 RIDL!(
 interface ISpRecoContext(ISpRecoContextVtbl): ISpEventSource(ISpEventSourceVtbl) {
-    fn GetRecognizer(&mut self, ppRecognizer: *mut *mut ISpRecognizer) -> ::HRESULT,
+    fn GetRecognizer(&self, ppRecognizer: *mut *mut ISpRecognizer) -> ::HRESULT,
     fn CreateGrammer(
-        &mut self, ullGrammarId: ::ULONGLONG, ppGrammar: *mut *mut ISpRecoGrammar
+        &self, ullGrammarId: ::ULONGLONG, ppGrammar: *mut *mut ISpRecoGrammar
     ) -> ::HRESULT,
-    fn GetStatus(&mut self, pState: *mut SPRECOCONTEXTSTATUS) -> ::HRESULT,
-    fn GetMaxAlternates(&mut self, pcAlternates: *mut ::ULONG) -> ::HRESULT,
-    fn SetMaxAlternates(&mut self, cAlternates: ::ULONG) -> ::HRESULT,
+    fn GetStatus(&self, pState: *mut SPRECOCONTEXTSTATUS) -> ::HRESULT,
+    fn GetMaxAlternates(&self, pcAlternates: *mut ::ULONG) -> ::HRESULT,
+    fn SetMaxAlternates(&self, cAlternates: ::ULONG) -> ::HRESULT,
     fn SetAudioOptions(
-        &mut self, Options: SPAUDIOOPTIONS, pAudioFormatId: *const ::GUID,
+        &self, Options: SPAUDIOOPTIONS, pAudioFormatId: *const ::GUID,
         pWaveFormatEx: *const ::WAVEFORMATEX
     ) -> ::HRESULT,
     fn GetAudioOptions(
-        &mut self, pOptions: *mut SPAUDIOOPTIONS, pAudioFormatId: *mut ::GUID,
+        &self, pOptions: *mut SPAUDIOOPTIONS, pAudioFormatId: *mut ::GUID,
         ppCoMemWFEX: *mut *mut ::WAVEFORMATEX
     ) -> ::HRESULT,
     fn DeserializeResult(
-        &mut self, pSerializedResult: *const SPSERIALIZEDRESULT, ppResult: *mut *mut ISpRecoResult
+        &self, pSerializedResult: *const SPSERIALIZEDRESULT, ppResult: *mut *mut ISpRecoResult
     ) -> ::HRESULT,
     fn Bookmark(
-        &mut self, Options: SPBOOKMARKOPTIONS, ullStreamPosition: ::ULONGLONG,
+        &self, Options: SPBOOKMARKOPTIONS, ullStreamPosition: ::ULONGLONG,
         lparamEvent: ::LPARAM
     ) -> ::HRESULT,
-    fn SetAdaptionData(&mut self, pAdaptionData: ::LPCWSTR, cch: ::ULONG) -> ::HRESULT,
-    fn Pause(&mut self, dwReserved: ::DWORD) -> ::HRESULT,
-    fn Resume(&mut self, dwReserved: ::DWORD) -> ::HRESULT,
-    fn SetVoice(&mut self, pVoice: *mut ISpVoice, fAllowFormatChanges: ::BOOL) -> ::HRESULT,
-    fn GetVoice(&mut self, ppVoice: *mut *mut ISpVoice) -> ::HRESULT,
-    fn SetVoicePurgeEvent(&mut self, ullEventIntereset: ::ULONGLONG) -> ::HRESULT,
-    fn GetVoicePurgeEvent(&mut self, pullEventIntereset: *mut ::ULONGLONG) -> ::HRESULT,
-    fn SetContextState(&mut self, eContextState: SPCONTEXTSTATE) -> ::HRESULT,
-    fn GetContextState(&mut self, peContextState: *mut SPCONTEXTSTATE) -> ::HRESULT
+    fn SetAdaptionData(&self, pAdaptionData: ::LPCWSTR, cch: ::ULONG) -> ::HRESULT,
+    fn Pause(&self, dwReserved: ::DWORD) -> ::HRESULT,
+    fn Resume(&self, dwReserved: ::DWORD) -> ::HRESULT,
+    fn SetVoice(&self, pVoice: *mut ISpVoice, fAllowFormatChanges: ::BOOL) -> ::HRESULT,
+    fn GetVoice(&self, ppVoice: *mut *mut ISpVoice) -> ::HRESULT,
+    fn SetVoicePurgeEvent(&self, ullEventIntereset: ::ULONGLONG) -> ::HRESULT,
+    fn GetVoicePurgeEvent(&self, pullEventIntereset: *mut ::ULONGLONG) -> ::HRESULT,
+    fn SetContextState(&self, eContextState: SPCONTEXTSTATE) -> ::HRESULT,
+    fn GetContextState(&self, peContextState: *mut SPCONTEXTSTATE) -> ::HRESULT
 }
 );
 ENUM!{enum SPGRAMMAROPTIONS {
@@ -1390,20 +1390,20 @@ ENUM!{enum SPADAPTATIONRELEVANCE {
 }}
 RIDL!(
 interface ISpRecoContext2(ISpRecoContext2Vtbl): IUnknown(IUnknownVtbl) {
-    fn SetGrammarOptions(&mut self, eGrammarOptions: ::DWORD) -> ::HRESULT,
-    fn GetGrammarOptions(&mut self, peGrammarOptions: *mut ::DWORD) -> ::HRESULT,
+    fn SetGrammarOptions(&self, eGrammarOptions: ::DWORD) -> ::HRESULT,
+    fn GetGrammarOptions(&self, peGrammarOptions: *mut ::DWORD) -> ::HRESULT,
     fn SetAdaptationData2(
-        &mut self, pAdaptationData: ::LPCWSTR, cch: ::ULONG, pTopicName: ::LPCWSTR,
+        &self, pAdaptationData: ::LPCWSTR, cch: ::ULONG, pTopicName: ::LPCWSTR,
         eAdaptationSettings: ::DWORD, eRelevance: SPADAPTATIONRELEVANCE
     ) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpProperties(ISpPropertiesVtbl): IUnknown(IUnknownVtbl) {
-    fn SetPropertyNum(&mut self, pName: ::LPCWSTR, lValue: ::LONG) -> ::HRESULT,
-    fn GetPropertyNum(&mut self, pName: ::LPCWSTR, plValue: *mut ::LONG) -> ::HRESULT,
-    fn SetPropertyString(&mut self, pName: ::LPCWSTR, pValue: ::LPCWSTR) -> ::HRESULT,
-    fn GetPropertyString(&mut self, pName: ::LPCWSTR, ppCoMemValue: *mut ::LPWSTR) -> ::HRESULT
+    fn SetPropertyNum(&self, pName: ::LPCWSTR, lValue: ::LONG) -> ::HRESULT,
+    fn GetPropertyNum(&self, pName: ::LPCWSTR, plValue: *mut ::LONG) -> ::HRESULT,
+    fn SetPropertyString(&self, pName: ::LPCWSTR, pValue: ::LPCWSTR) -> ::HRESULT,
+    fn GetPropertyString(&self, pName: ::LPCWSTR, ppCoMemValue: *mut ::LPWSTR) -> ::HRESULT
 }
 );
 STRUCT!{struct SPRECOGNIZERSTATUS {
@@ -1430,52 +1430,52 @@ ENUM!{enum SPRECOSTATE {
 }}
 RIDL!(
 interface ISpRecognizer(ISpRecognizerVtbl): ISpProperties(ISpPropertiesVtbl) {
-    fn SetRecognizer(&mut self, pRecognizer: *mut ISpObjectToken) -> ::HRESULT,
-    fn GetRecognizer(&mut self, ppRecognizer: *mut *mut ISpObjectToken) -> ::HRESULT,
-    fn SetInput(&mut self, pUnkInput: *mut ::IUnknown, fAllowFormatChanges: ::BOOL) -> ::HRESULT,
-    fn GetInputObjectToken(&mut self, ppToken: *mut *mut ISpObjectToken) -> ::HRESULT,
-    fn GetInputStream(&mut self, ppStream: *mut *mut ISpStreamFormat) -> ::HRESULT,
-    fn CreateRecoContext(&mut self, ppNewCtxt: *mut *mut ISpRecoContext) -> ::HRESULT,
-    fn GetRecoProfile(&mut self, ppToken: *mut *mut ISpObjectToken) -> ::HRESULT,
-    fn SetRecoProfile(&mut self, pToken: *mut ISpObjectToken) -> ::HRESULT,
-    fn IsSharedInstance(&mut self) -> ::HRESULT,
-    fn GetRecoState(&mut self, pState: *mut SPRECOSTATE) -> ::HRESULT,
-    fn SetRecoState(&mut self, NewState: SPRECOSTATE) -> ::HRESULT,
-    fn GetStatus(&mut self, pStatus: *mut SPRECOGNIZERSTATUS) -> ::HRESULT,
+    fn SetRecognizer(&self, pRecognizer: *mut ISpObjectToken) -> ::HRESULT,
+    fn GetRecognizer(&self, ppRecognizer: *mut *mut ISpObjectToken) -> ::HRESULT,
+    fn SetInput(&self, pUnkInput: *mut ::IUnknown, fAllowFormatChanges: ::BOOL) -> ::HRESULT,
+    fn GetInputObjectToken(&self, ppToken: *mut *mut ISpObjectToken) -> ::HRESULT,
+    fn GetInputStream(&self, ppStream: *mut *mut ISpStreamFormat) -> ::HRESULT,
+    fn CreateRecoContext(&self, ppNewCtxt: *mut *mut ISpRecoContext) -> ::HRESULT,
+    fn GetRecoProfile(&self, ppToken: *mut *mut ISpObjectToken) -> ::HRESULT,
+    fn SetRecoProfile(&self, pToken: *mut ISpObjectToken) -> ::HRESULT,
+    fn IsSharedInstance(&self) -> ::HRESULT,
+    fn GetRecoState(&self, pState: *mut SPRECOSTATE) -> ::HRESULT,
+    fn SetRecoState(&self, NewState: SPRECOSTATE) -> ::HRESULT,
+    fn GetStatus(&self, pStatus: *mut SPRECOGNIZERSTATUS) -> ::HRESULT,
     fn GetFormat(
-        &mut self, WaveFormatType: SPSTREAMFORMATTYPE, pFormatId: *mut ::GUID,
+        &self, WaveFormatType: SPSTREAMFORMATTYPE, pFormatId: *mut ::GUID,
         ppCoMemWFEX: *mut ::WAVEFORMATEX
     ) -> ::HRESULT,
     fn IsUISupported(
-        &mut self, pszTypeOfUI: ::LPCWSTR, pvExtraData: *mut ::c_void, cbExtraData: ::ULONG,
+        &self, pszTypeOfUI: ::LPCWSTR, pvExtraData: *mut ::c_void, cbExtraData: ::ULONG,
         pfSupported: *mut ::BOOL
     ) -> ::HRESULT,
     fn DisplayUI(
-        &mut self, hwndParent: ::HWND, pszTitle: ::LPCWSTR, pszTypeOfUI: ::LPCWSTR,
+        &self, hwndParent: ::HWND, pszTitle: ::LPCWSTR, pszTypeOfUI: ::LPCWSTR,
         pvExtraData: *mut ::c_void, cbExtraData: ::ULONG
     ) -> ::HRESULT,
-    fn EmulateRecognition(&mut self, pPhrase: *mut ISpPhrase) -> ::HRESULT
+    fn EmulateRecognition(&self, pPhrase: *mut ISpPhrase) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpSerializeState(ISpSerializeStateVtbl): IUnknown(IUnknownVtbl) {
     fn GetSerializedState(
-        &mut self, ppbData: *mut *mut ::BYTE, pulSize: *mut ::ULONG, dwReserved: ::DWORD
+        &self, ppbData: *mut *mut ::BYTE, pulSize: *mut ::ULONG, dwReserved: ::DWORD
     ) -> ::HRESULT,
     fn SetSerializedState(
-        &mut self, pbData: *mut ::BYTE, ulSize: ::ULONG, dwReserved: ::DWORD
+        &self, pbData: *mut ::BYTE, ulSize: ::ULONG, dwReserved: ::DWORD
     ) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpRecognizer2(ISpRecognizer2Vtbl): IUnknown(IUnknownVtbl) {
     fn EmulateRecognitionEx(
-        &mut self, pPhrase: *mut ISpPhrase, dwCompareFlags: ::DWORD
+        &self, pPhrase: *mut ISpPhrase, dwCompareFlags: ::DWORD
     ) -> ::HRESULT,
     fn SetTrainingState(
-        &mut self, fDoingTraining: ::BOOL, fAdaptFromTrainingData: ::BOOL
+        &self, fDoingTraining: ::BOOL, fAdaptFromTrainingData: ::BOOL
     ) -> ::HRESULT,
-    fn ResetAcousticModelAdaptation(&mut self) -> ::HRESULT
+    fn ResetAcousticModelAdaptation(&self) -> ::HRESULT
 }
 );
 ENUM!{enum SPCATEGORYTYPE {
@@ -1487,16 +1487,16 @@ ENUM!{enum SPCATEGORYTYPE {
 }}
 RIDL!(
 interface ISpRecoCategory(ISpRecoCategoryVtbl): IUnknown(IUnknownVtbl) {
-    fn GetType(&mut self, peCategoryType: *mut SPCATEGORYTYPE) -> ::HRESULT
+    fn GetType(&self, peCategoryType: *mut SPCATEGORYTYPE) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpRecognizer3(ISpRecognizer3Vtbl): IUnknown(IUnknownVtbl) {
     fn GetCategory(
-        &mut self, categoryType: SPCATEGORYTYPE, ppCategory: *mut *mut ISpRecoCategory
+        &self, categoryType: SPCATEGORYTYPE, ppCategory: *mut *mut ISpRecoCategory
     ) -> ::HRESULT,
-    fn SetActiveCategory(&mut self, pCategory: *mut ISpRecoCategory) -> ::HRESULT,
-    fn GetActiveCategory(&mut self, ppCategory: *mut *mut ISpRecoCategory) -> ::HRESULT
+    fn SetActiveCategory(&self, pCategory: *mut ISpRecoCategory) -> ::HRESULT,
+    fn GetActiveCategory(&self, ppCategory: *mut *mut ISpRecoCategory) -> ::HRESULT
 }
 );
 STRUCT!{struct SPNORMALIZATIONLIST {
@@ -1506,11 +1506,11 @@ STRUCT!{struct SPNORMALIZATIONLIST {
 RIDL!(
 interface ISpEnginePronunciation(ISpEnginePronunciationVtbl): IUnknown(IUnknownVtbl) {
     fn Normalize(
-        &mut self, pszWord: ::LPCWSTR, pszLeftContext: ::LPCWSTR, pszRightContext: ::LPCWSTR,
+        &self, pszWord: ::LPCWSTR, pszLeftContext: ::LPCWSTR, pszRightContext: ::LPCWSTR,
         LangID: ::WORD, pNormalizationList: *mut SPNORMALIZATIONLIST
     ) -> ::HRESULT,
     fn GetPronunciations(
-        &mut self, pszWord: ::LPCWSTR, pszLeftContext: ::LPCWSTR, pszRightContext: ::LPCWSTR,
+        &self, pszWord: ::LPCWSTR, pszLeftContext: ::LPCWSTR, pszRightContext: ::LPCWSTR,
         LangID: ::WORD, pEnginePronunciationList: *mut SPWORDPRONUNCIATIONLIST
     ) -> ::HRESULT
 }
@@ -1527,10 +1527,10 @@ STRUCT!{struct SPDISPLAYPHRASE {
 RIDL!(
 interface ISpDisplayAlternates(ISpDisplayAlternatesVtbl): IUnknown(IUnknownVtbl) {
     fn GetDisplayAlternates(
-        &mut self, pPhrase: *const SPDISPLAYPHRASE, cRequestCount: ::ULONG,
+        &self, pPhrase: *const SPDISPLAYPHRASE, cRequestCount: ::ULONG,
         ppCoMemPhrases: *mut *mut SPDISPLAYPHRASE, pcPhrasesReturned: *mut ::ULONG
     ) -> ::HRESULT,
-    fn SetFullStopTrailSpace(&mut self, ulTrailSpace: ::ULONG) -> ::HRESULT
+    fn SetFullStopTrailSpace(&self, ulTrailSpace: ::ULONG) -> ::HRESULT
 }
 );
 pub type SpeechLanguageId = ::c_long;
@@ -2313,119 +2313,119 @@ ENUM!{enum DISPID_SpeechPhoneConverter {
 }}
 RIDL!(
 interface ISpeechDataKey(ISpeechDataKeyVtbl): IDispatch(IDispatchVtbl) {
-    fn SetBinaryValue(&mut self, ValueName: ::BSTR, Value: ::VARIANT) -> ::HRESULT,
-    fn GetBinaryValue(&mut self, ValueName: ::BSTR, Value: *mut ::VARIANT) -> ::HRESULT,
-    fn SetStringValue(&mut self, ValueName: ::BSTR, Value: ::BSTR) -> ::HRESULT,
-    fn GetStringValue(&mut self, ValueName: ::BSTR, Value: *mut ::BSTR) -> ::HRESULT,
-    fn SetLongValue(&mut self, ValueName: ::BSTR, Value: ::c_long) -> ::HRESULT,
-    fn GetLongValue(&mut self, ValueName: ::BSTR, Value: *mut ::c_long) -> ::HRESULT,
-    fn OpenKey(&mut self, SubKeyName: ::BSTR, SubKey: *mut *mut ISpeechDataKey) -> ::HRESULT,
-    fn CreateKey(&mut self, SubKeyName: ::BSTR, SubKey: *mut *mut ISpeechDataKey) -> ::HRESULT,
-    fn DeleteKey(&mut self, SubKeyName: ::BSTR) -> ::HRESULT,
-    fn DeleteValue(&mut self, ValueName: ::BSTR) -> ::HRESULT,
-    fn EnumKeys(&mut self, Index: ::c_long, SubKeyName: *mut ::BSTR) -> ::HRESULT,
-    fn EnumValues(&mut self, Index: ::c_long, ValueName: *mut ::BSTR) -> ::HRESULT
+    fn SetBinaryValue(&self, ValueName: ::BSTR, Value: ::VARIANT) -> ::HRESULT,
+    fn GetBinaryValue(&self, ValueName: ::BSTR, Value: *mut ::VARIANT) -> ::HRESULT,
+    fn SetStringValue(&self, ValueName: ::BSTR, Value: ::BSTR) -> ::HRESULT,
+    fn GetStringValue(&self, ValueName: ::BSTR, Value: *mut ::BSTR) -> ::HRESULT,
+    fn SetLongValue(&self, ValueName: ::BSTR, Value: ::c_long) -> ::HRESULT,
+    fn GetLongValue(&self, ValueName: ::BSTR, Value: *mut ::c_long) -> ::HRESULT,
+    fn OpenKey(&self, SubKeyName: ::BSTR, SubKey: *mut *mut ISpeechDataKey) -> ::HRESULT,
+    fn CreateKey(&self, SubKeyName: ::BSTR, SubKey: *mut *mut ISpeechDataKey) -> ::HRESULT,
+    fn DeleteKey(&self, SubKeyName: ::BSTR) -> ::HRESULT,
+    fn DeleteValue(&self, ValueName: ::BSTR) -> ::HRESULT,
+    fn EnumKeys(&self, Index: ::c_long, SubKeyName: *mut ::BSTR) -> ::HRESULT,
+    fn EnumValues(&self, Index: ::c_long, ValueName: *mut ::BSTR) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpeechObjectToken(ISpeechObjectTokenVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Id(&mut self, ObjectId: *mut ::BSTR) -> ::HRESULT,
-    fn get_DataKey(&mut self, DataKey: *mut *mut ISpeechDataKey) -> ::HRESULT,
-    fn get_Category(&mut self, Category: *mut *mut ISpeechObjectTokenCategory) -> ::HRESULT,
-    fn GetDescription(&mut self, Locale: ::c_long, Description: *mut ::BSTR) -> ::HRESULT,
+    fn get_Id(&self, ObjectId: *mut ::BSTR) -> ::HRESULT,
+    fn get_DataKey(&self, DataKey: *mut *mut ISpeechDataKey) -> ::HRESULT,
+    fn get_Category(&self, Category: *mut *mut ISpeechObjectTokenCategory) -> ::HRESULT,
+    fn GetDescription(&self, Locale: ::c_long, Description: *mut ::BSTR) -> ::HRESULT,
     fn SetId(
-        &mut self, Id: ::BSTR, CategoryId: ::BSTR, CreateIfNotExist: ::VARIANT_BOOL
+        &self, Id: ::BSTR, CategoryId: ::BSTR, CreateIfNotExist: ::VARIANT_BOOL
     ) -> ::HRESULT,
-    fn GetAttribute(&mut self, AttributeName: ::BSTR, AttributeValue: *mut ::BSTR) -> ::HRESULT,
+    fn GetAttribute(&self, AttributeName: ::BSTR, AttributeValue: *mut ::BSTR) -> ::HRESULT,
     fn CreateInstance(
-        &mut self, pUnkOuter: *mut ::IUnknown, ClsContext: SpeechTokenContext,
+        &self, pUnkOuter: *mut ::IUnknown, ClsContext: SpeechTokenContext,
         Object: *mut *mut ::IUnknown
     ) -> ::HRESULT,
-    fn Remove(&mut self, ObjectStorageCLSID: ::BSTR) -> ::HRESULT,
+    fn Remove(&self, ObjectStorageCLSID: ::BSTR) -> ::HRESULT,
     fn GetStorageFileName(
-        &mut self, ObjectStorageCLSID: ::BSTR, KeyName: ::BSTR, FileName: ::BSTR, Folder: ::BSTR,
+        &self, ObjectStorageCLSID: ::BSTR, KeyName: ::BSTR, FileName: ::BSTR, Folder: ::BSTR,
         FilePath: *mut ::BSTR
     ) -> ::HRESULT,
     fn RemoveStorageFileName(
-        &mut self, ObjectStorageCLSID: ::BSTR, KeyName: ::BSTR, DeleteFile: ::VARIANT_BOOL
+        &self, ObjectStorageCLSID: ::BSTR, KeyName: ::BSTR, DeleteFile: ::VARIANT_BOOL
     ) -> ::HRESULT,
     fn IsUISupported(
-        &mut self, TypeOfUI: ::BSTR, ExtraData: *const ::VARIANT, Object: *mut ::IUnknown,
+        &self, TypeOfUI: ::BSTR, ExtraData: *const ::VARIANT, Object: *mut ::IUnknown,
         Supported: *mut ::VARIANT_BOOL
     ) -> ::HRESULT,
     fn DisplayUI(
-        &mut self, hWnd: ::c_long, Title: ::BSTR, TypeOfUI: ::BSTR, ExtraData: *const ::VARIANT,
+        &self, hWnd: ::c_long, Title: ::BSTR, TypeOfUI: ::BSTR, ExtraData: *const ::VARIANT,
         Object: *mut ::IUnknown
     ) -> ::HRESULT,
-    fn MatchesAttributes(&mut self, Attributes: ::BSTR, Matches: *mut ::VARIANT_BOOL) -> ::HRESULT
+    fn MatchesAttributes(&self, Attributes: ::BSTR, Matches: *mut ::VARIANT_BOOL) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpeechObjectTokens(ISpeechObjectTokensVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Count(&mut self, Count: *mut ::c_long) -> ::HRESULT,
-    fn Item(&mut self, Index: ::c_long, Token: *mut *mut ISpeechObjectToken) -> ::HRESULT,
-    fn get__NewEnum(&mut self, ppEnumVARIANT: *mut *mut ::IUnknown) -> ::HRESULT
+    fn get_Count(&self, Count: *mut ::c_long) -> ::HRESULT,
+    fn Item(&self, Index: ::c_long, Token: *mut *mut ISpeechObjectToken) -> ::HRESULT,
+    fn get__NewEnum(&self, ppEnumVARIANT: *mut *mut ::IUnknown) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpeechObjectTokenCategory(ISpeechObjectTokenCategoryVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Id(&mut self, Id: *mut ::BSTR) -> ::HRESULT,
-    fn put_Default(&mut self, TokenId: ::BSTR) -> ::HRESULT,
-    fn get_Default(&mut self, TokenId: *mut ::BSTR) -> ::HRESULT,
-    fn SetId(&mut self, Id: ::BSTR, CreateIfNotExist: ::VARIANT_BOOL) -> ::HRESULT,
+    fn get_Id(&self, Id: *mut ::BSTR) -> ::HRESULT,
+    fn put_Default(&self, TokenId: ::BSTR) -> ::HRESULT,
+    fn get_Default(&self, TokenId: *mut ::BSTR) -> ::HRESULT,
+    fn SetId(&self, Id: ::BSTR, CreateIfNotExist: ::VARIANT_BOOL) -> ::HRESULT,
     fn GetDataKey(
-        &mut self, Location: SpeechDataKeyLocation, DataKey: *mut *mut ISpeechDataKey
+        &self, Location: SpeechDataKeyLocation, DataKey: *mut *mut ISpeechDataKey
     ) -> ::HRESULT,
     fn EnumerateTokens(
-        &mut self, RequiredAttributes: ::BSTR, OptionalAttributes: ::BSTR,
+        &self, RequiredAttributes: ::BSTR, OptionalAttributes: ::BSTR,
         Tokens: *mut *mut ISpeechObjectTokens
     ) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpeechAudioBufferInfo(ISpeechAudioBufferInfoVtbl): IDispatch(IDispatchVtbl) {
-    fn get_MinNotification(&mut self, MinNotification: *mut ::c_long) -> ::HRESULT,
-    fn put_MinNotification(&mut self, MinNotification: ::c_long) -> ::HRESULT,
-    fn get_BufferSize(&mut self, BufferSize: *mut ::c_long) -> ::HRESULT,
-    fn put_BufferSize(&mut self, BufferSize: ::c_long) -> ::HRESULT,
-    fn get_EventBias(&mut self, EventBias: *mut ::c_long) -> ::HRESULT,
-    fn put_EventBias(&mut self, EventBias: ::c_long) -> ::HRESULT
+    fn get_MinNotification(&self, MinNotification: *mut ::c_long) -> ::HRESULT,
+    fn put_MinNotification(&self, MinNotification: ::c_long) -> ::HRESULT,
+    fn get_BufferSize(&self, BufferSize: *mut ::c_long) -> ::HRESULT,
+    fn put_BufferSize(&self, BufferSize: ::c_long) -> ::HRESULT,
+    fn get_EventBias(&self, EventBias: *mut ::c_long) -> ::HRESULT,
+    fn put_EventBias(&self, EventBias: ::c_long) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpeechAudioStatus(ISpeechAudioStatusVtbl): IDispatch(IDispatchVtbl) {
-    fn get_FreeBufferSpace(&mut self, FreeBufferSpace: *mut ::c_long) -> ::HRESULT,
-    fn get_NonBlockingIO(&mut self, NonBlockingIO: *mut ::c_long) -> ::HRESULT,
-    fn get_State(&mut self, State: *mut SpeechAudioState) -> ::HRESULT,
-    fn get_CurrentSeekPosition(&mut self, CurrentSeekPosition: *mut ::VARIANT) -> ::HRESULT,
-    fn get_CurrentDevicePosition(&mut self, CurrentDevicePosition: *mut ::VARIANT) -> ::HRESULT
+    fn get_FreeBufferSpace(&self, FreeBufferSpace: *mut ::c_long) -> ::HRESULT,
+    fn get_NonBlockingIO(&self, NonBlockingIO: *mut ::c_long) -> ::HRESULT,
+    fn get_State(&self, State: *mut SpeechAudioState) -> ::HRESULT,
+    fn get_CurrentSeekPosition(&self, CurrentSeekPosition: *mut ::VARIANT) -> ::HRESULT,
+    fn get_CurrentDevicePosition(&self, CurrentDevicePosition: *mut ::VARIANT) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpeechAudioFormat(ISpeechAudioFormatVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Type(&mut self, AudioFormat: *mut SpeechAudioFormatType) -> ::HRESULT,
-    fn put_Type(&mut self, AudioFormat: SpeechAudioFormatType) -> ::HRESULT,
-    fn get_Guid(&mut self, Guid: *mut ::BSTR) -> ::HRESULT,
-    fn put_Guid(&mut self, Guid: ::BSTR) -> ::HRESULT,
-    fn GetWaveFormatEx(&mut self, SpeechWaveFormatEx: *mut *mut ISpeechWaveFormatEx) -> ::HRESULT,
-    fn SetWaveFormatEx(&mut self, SpeechWaveFormatEx: *mut ISpeechWaveFormatEx) -> ::HRESULT
+    fn get_Type(&self, AudioFormat: *mut SpeechAudioFormatType) -> ::HRESULT,
+    fn put_Type(&self, AudioFormat: SpeechAudioFormatType) -> ::HRESULT,
+    fn get_Guid(&self, Guid: *mut ::BSTR) -> ::HRESULT,
+    fn put_Guid(&self, Guid: ::BSTR) -> ::HRESULT,
+    fn GetWaveFormatEx(&self, SpeechWaveFormatEx: *mut *mut ISpeechWaveFormatEx) -> ::HRESULT,
+    fn SetWaveFormatEx(&self, SpeechWaveFormatEx: *mut ISpeechWaveFormatEx) -> ::HRESULT
 }
 );
 RIDL!(
 interface ISpeechWaveFormatEx(ISpeechWaveFormatExVtbl): IDispatch(IDispatchVtbl) {
-    fn get_FormatTag(&mut self, FormatTag: *mut ::c_short) -> ::HRESULT,
-    fn put_FormatTag(&mut self, FormatTag: ::c_short) -> ::HRESULT,
-    fn get_Channels(&mut self, Channels: *mut ::c_short) -> ::HRESULT,
-    fn put_Channels(&mut self, Channels: ::c_short) -> ::HRESULT,
-    fn get_SamplesPerSec(&mut self, SamplesPerSec: *mut ::c_long) -> ::HRESULT,
-    fn put_SamplesPerSec(&mut self, SamplesPerSec: ::c_long) -> ::HRESULT,
-    fn get_AvgBytesPerSec(&mut self, AvgBytesPerSec: *mut ::c_long) -> ::HRESULT,
-    fn put_AvgBytesPerSec(&mut self, AvgBytesPerSec: ::c_long) -> ::HRESULT,
-    fn get_BlockAlign(&mut self, BlockAlign: *mut ::c_short) -> ::HRESULT,
-    fn put_BlockAlign(&mut self, BlockAlign: ::c_short) -> ::HRESULT,
-    fn get_BitsPerSample(&mut self, BitsPerSample: *mut ::c_short) -> ::HRESULT,
-    fn put_BitsPerSample(&mut self, BitsPerSample: ::c_short) -> ::HRESULT,
-    fn get_ExtraData(&mut self, ExtraData: *mut ::VARIANT) -> ::HRESULT,
-    fn put_ExtraData(&mut self, ExtraData: ::VARIANT) -> ::HRESULT
+    fn get_FormatTag(&self, FormatTag: *mut ::c_short) -> ::HRESULT,
+    fn put_FormatTag(&self, FormatTag: ::c_short) -> ::HRESULT,
+    fn get_Channels(&self, Channels: *mut ::c_short) -> ::HRESULT,
+    fn put_Channels(&self, Channels: ::c_short) -> ::HRESULT,
+    fn get_SamplesPerSec(&self, SamplesPerSec: *mut ::c_long) -> ::HRESULT,
+    fn put_SamplesPerSec(&self, SamplesPerSec: ::c_long) -> ::HRESULT,
+    fn get_AvgBytesPerSec(&self, AvgBytesPerSec: *mut ::c_long) -> ::HRESULT,
+    fn put_AvgBytesPerSec(&self, AvgBytesPerSec: ::c_long) -> ::HRESULT,
+    fn get_BlockAlign(&self, BlockAlign: *mut ::c_short) -> ::HRESULT,
+    fn put_BlockAlign(&self, BlockAlign: ::c_short) -> ::HRESULT,
+    fn get_BitsPerSample(&self, BitsPerSample: *mut ::c_short) -> ::HRESULT,
+    fn put_BitsPerSample(&self, BitsPerSample: ::c_short) -> ::HRESULT,
+    fn get_ExtraData(&self, ExtraData: *mut ::VARIANT) -> ::HRESULT,
+    fn put_ExtraData(&self, ExtraData: ::VARIANT) -> ::HRESULT
 }
 );

@@ -10,7 +10,6 @@
 #![recursion_limit = "128"]
 #![cfg_attr(not(feature = "std"), no_std)]
 
-
 #[cfg(feature = "std")]
 extern crate std as core;
 
@@ -49,4 +48,8 @@ pub mod ctypes {
     pub type __int64 = i64;
     pub type __uint64 = u64;
     pub type wchar_t = u16;
+}
+#[cfg(feature = "shared-guiddef")]
+pub trait Interface {
+    fn uuidof() -> shared::guiddef::GUID;
 }

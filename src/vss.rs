@@ -240,17 +240,17 @@ type PVSS_OBJECT_PROP = *mut VSS_OBJECT_PROP;
 RIDL!(
 interface IVssEnumObject(IVssEnumObjectVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
-        &mut self, celt: ::ULONG, rgelt: *mut ::VSS_OBJECT_PROP, pceltFetched: *mut ::ULONG
+        &self, celt: ::ULONG, rgelt: *mut ::VSS_OBJECT_PROP, pceltFetched: *mut ::ULONG
     ) -> ::HRESULT,
-    fn Skip(&mut self, celt: ::ULONG) -> ::HRESULT,
-    fn Reset(&mut self) -> ::HRESULT,
-    fn Clone(&mut self, ppenum: *mut *mut ::IVssEnumObject) -> ::HRESULT
+    fn Skip(&self, celt: ::ULONG) -> ::HRESULT,
+    fn Reset(&self) -> ::HRESULT,
+    fn Clone(&self, ppenum: *mut *mut ::IVssEnumObject) -> ::HRESULT
 }
 );
 RIDL!(
 interface IVssAsync(IVssAsyncVtbl): IUnknown(IUnknownVtbl) {
-    fn Cancel(&mut self) -> ::HRESULT,
-    fn Wait(&mut self, dwMilliseconds: ::DWORD) -> ::HRESULT,
-    fn QueryStatus(&mut self, pHrResult: *mut ::HRESULT, pReserved: *mut ::INT) -> ::HRESULT
+    fn Cancel(&self) -> ::HRESULT,
+    fn Wait(&self, dwMilliseconds: ::DWORD) -> ::HRESULT,
+    fn QueryStatus(&self, pHrResult: *mut ::HRESULT, pReserved: *mut ::INT) -> ::HRESULT
 }
 );

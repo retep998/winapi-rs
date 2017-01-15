@@ -55,38 +55,38 @@ STRUCT!{struct DSBUFFERDESC {
 pub type LPCDSBUFFERDESC = *const DSBUFFERDESC;
 RIDL!(
 interface IDirectSoundBuffer(IDirectSoundBufferVtbl): IUnknown(IUnknownVtbl) {
-    fn GetCaps(&mut self, pDSBufferCaps: LPDSBCAPS) -> HRESULT,
+    fn GetCaps(&self, pDSBufferCaps: LPDSBCAPS) -> HRESULT,
     fn GetCurrentPosition(
-        &mut self, pdwCurrentPlayCursor: LPDWORD, pdwCurrentWriteCursor: LPDWORD
+        &self, pdwCurrentPlayCursor: LPDWORD, pdwCurrentWriteCursor: LPDWORD
     ) -> HRESULT,
     fn GetFormat(
-        &mut self, pwfxFormat: LPWAVEFORMATEX, dwSizeAllocated: DWORD,
+        &self, pwfxFormat: LPWAVEFORMATEX, dwSizeAllocated: DWORD,
         pdwSizeWritten: LPDWORD
     ) -> HRESULT,
-    fn GetVolume(&mut self, plVolume: LPLONG) -> HRESULT,
-    fn GetPan(&mut self, plPan: LPLONG) -> HRESULT,
-    fn GetFrequency(&mut self, pdwFrequency: LPDWORD) -> HRESULT,
-    fn GetStatus(&mut self, pdwStatus: LPDWORD) -> HRESULT,
+    fn GetVolume(&self, plVolume: LPLONG) -> HRESULT,
+    fn GetPan(&self, plPan: LPLONG) -> HRESULT,
+    fn GetFrequency(&self, pdwFrequency: LPDWORD) -> HRESULT,
+    fn GetStatus(&self, pdwStatus: LPDWORD) -> HRESULT,
     fn Initialize(
-        &mut self, pDirectSound: LPDIRECTSOUND, pcDSBufferDesc: LPCDSBUFFERDESC
+        &self, pDirectSound: LPDIRECTSOUND, pcDSBufferDesc: LPCDSBUFFERDESC
     ) -> HRESULT,
     fn Lock(
-        &mut self, dwOffset: DWORD, dwBytes: DWORD, ppvAudioPtr1: *mut LPVOID,
+        &self, dwOffset: DWORD, dwBytes: DWORD, ppvAudioPtr1: *mut LPVOID,
         pdwAudioBytes1: LPDWORD, ppvAudioPtr2: *mut LPVOID, pdwAudioBytes2: LPDWORD,
         dwFlags: DWORD
     ) -> HRESULT,
-    fn Play(&mut self, dwReserved1: DWORD, dwPriority: DWORD, dwFlags: DWORD) -> HRESULT,
-    fn SetCurrentPosition(&mut self, dwNewPosition: DWORD) -> HRESULT,
-    fn SetFormat(&mut self, pcfxFormat: LPCWAVEFORMATEX) -> HRESULT,
-    fn SetVolume(&mut self, lVolume: LONG) -> HRESULT,
-    fn SetPan(&mut self, lPan: LONG) -> HRESULT,
-    fn SetFrequency(&mut self, dwFrequency: DWORD) -> HRESULT,
-    fn Stop(&mut self) -> HRESULT,
+    fn Play(&self, dwReserved1: DWORD, dwPriority: DWORD, dwFlags: DWORD) -> HRESULT,
+    fn SetCurrentPosition(&self, dwNewPosition: DWORD) -> HRESULT,
+    fn SetFormat(&self, pcfxFormat: LPCWAVEFORMATEX) -> HRESULT,
+    fn SetVolume(&self, lVolume: LONG) -> HRESULT,
+    fn SetPan(&self, lPan: LONG) -> HRESULT,
+    fn SetFrequency(&self, dwFrequency: DWORD) -> HRESULT,
+    fn Stop(&self) -> HRESULT,
     fn Unlock(
-        &mut self, pvAudioPtr1: LPVOID, dwAudioBytes1: DWORD, pvAudioPtr2: LPVOID,
+        &self, pvAudioPtr1: LPVOID, dwAudioBytes1: DWORD, pvAudioPtr2: LPVOID,
         dwAudioBytes2: DWORD
     ) -> HRESULT,
-    fn Restore(&mut self) -> HRESULT
+    fn Restore(&self) -> HRESULT
 }
 );
 pub type LPDIRECTSOUNDBUFFER = *mut IDirectSoundBuffer;
@@ -94,19 +94,19 @@ RIDL!(
 interface IDirectSound(IDirectSoundVtbl): IUnknown(IUnknownVtbl)
 {
     fn CreateSoundBuffer(
-        &mut self, pcDSBufferDesc: LPCDSBUFFERDESC, ppDSBuffer: *mut LPDIRECTSOUNDBUFFER,
+        &self, pcDSBufferDesc: LPCDSBUFFERDESC, ppDSBuffer: *mut LPDIRECTSOUNDBUFFER,
         pUnkOuter: LPUNKNOWN
     ) -> HRESULT,
-    fn GetCaps(&mut self, pDSCaps: LPDSCAPS) -> HRESULT,
+    fn GetCaps(&self, pDSCaps: LPDSCAPS) -> HRESULT,
     fn DuplicateSoundBuffer(
-        &mut self, pDSBufferOriginal: LPDIRECTSOUNDBUFFER,
+        &self, pDSBufferOriginal: LPDIRECTSOUNDBUFFER,
         ppDSBufferDuplicate: *mut LPDIRECTSOUNDBUFFER
     ) -> HRESULT,
-    fn SetCooperativeLevel(&mut self, hWnd: HWND, dwLevel: DWORD) -> HRESULT,
-    fn Compact(&mut self) -> HRESULT,
-    fn GetSpeakerConfig(&mut self, pdwSpeakerConfig: LPDWORD) -> HRESULT,
-    fn SetSpeakerConfig(&mut self, dwSpeakerConfig: DWORD) -> HRESULT,
-    fn Initialize(&mut self, pcGuidDevice: LPCGUID) -> HRESULT
+    fn SetCooperativeLevel(&self, hWnd: HWND, dwLevel: DWORD) -> HRESULT,
+    fn Compact(&self) -> HRESULT,
+    fn GetSpeakerConfig(&self, pdwSpeakerConfig: LPDWORD) -> HRESULT,
+    fn SetSpeakerConfig(&self, dwSpeakerConfig: DWORD) -> HRESULT,
+    fn Initialize(&self, pcGuidDevice: LPCGUID) -> HRESULT
 }
 );
 pub type LPDIRECTSOUND = *mut IDirectSound;

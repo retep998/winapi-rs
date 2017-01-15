@@ -32,38 +32,38 @@ DEFINE_GUID!(IID_IMMDeviceEnumerator, 0xA95664D2, 0x9614, 0x4F35,
 RIDL!(
 interface IMMDevice(IMMDeviceVtbl): IUnknown(IUnknownVtbl) {
     fn Activate(
-        &mut self, iid: REFIID, dwClsCtx: DWORD, pActivationParams: *mut PROPVARIANT,
+        &self, iid: REFIID, dwClsCtx: DWORD, pActivationParams: *mut PROPVARIANT,
         ppInterface: *mut LPVOID
     ) -> HRESULT,
     fn OpenPropertyStore(
-        &mut self, stgmAccess: DWORD, ppProperties: *mut *mut IPropertyStore
+        &self, stgmAccess: DWORD, ppProperties: *mut *mut IPropertyStore
     ) -> HRESULT,
-    fn GetId(&mut self, ppstrId: *mut LPWSTR) -> HRESULT,
-    fn GetState(&mut self, pdwState: *mut DWORD) -> HRESULT
+    fn GetId(&self, ppstrId: *mut LPWSTR) -> HRESULT,
+    fn GetState(&self, pdwState: *mut DWORD) -> HRESULT
 }
 );
 RIDL!(
 interface IMMDeviceEnumerator(IMMDeviceEnumeratorVtbl): IUnknown(IUnknownVtbl) {
     fn EnumAudioEndpoints(
-        &mut self, dataFlow: EDataFlow, dwStateMask: DWORD,
+        &self, dataFlow: EDataFlow, dwStateMask: DWORD,
         ppDevices: *mut *mut IMMDeviceCollection
     ) -> HRESULT,
     fn GetDefaultAudioEndpoint(
-        &mut self, dataFlow: EDataFlow, role: ERole, ppEndpoint: *mut *mut IMMDevice
+        &self, dataFlow: EDataFlow, role: ERole, ppEndpoint: *mut *mut IMMDevice
     ) -> HRESULT,
-    fn GetDevice(&mut self, pwstrId: LPCWSTR, ppDevices: *mut *mut IMMDevice) -> HRESULT,
+    fn GetDevice(&self, pwstrId: LPCWSTR, ppDevices: *mut *mut IMMDevice) -> HRESULT,
     fn RegisterEndpointNotificationCallback(
-        &mut self, pClient: *mut IMMNotificationClient
+        &self, pClient: *mut IMMNotificationClient
     ) -> HRESULT,
     fn UnregisterEndpointNotificationCallback(
-        &mut self, pClient: *mut IMMNotificationClient
+        &self, pClient: *mut IMMNotificationClient
     ) -> HRESULT
 }
 );
 RIDL!(
 interface IMMDeviceCollection(IMMDeviceCollectionVtbl): IUnknown(IUnknownVtbl) {
-    fn GetCount(&mut self, pcDevices: *const UINT) -> HRESULT,
-    fn Item(&mut self, nDevice: UINT, ppDevice: *mut *mut IMMDevice) -> HRESULT
+    fn GetCount(&self, pcDevices: *const UINT) -> HRESULT,
+    fn Item(&self, nDevice: UINT, ppDevice: *mut *mut IMMDevice) -> HRESULT
 }
 );
 pub enum IMMNotificationClient {} // FIXME

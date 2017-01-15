@@ -56,41 +56,41 @@ STRUCT!{struct DXGI_MATRIX_3X2_F {
 RIDL!(
 interface IDXGIDecodeSwapChain(IDXGIDecodeSwapChainVtbl): IUnknown(IUnknownVtbl) {
     fn PresentBuffer(
-        &mut self, BufferToPresent: UINT, SyncInterval: UINT, Flags: UINT
+        &self, BufferToPresent: UINT, SyncInterval: UINT, Flags: UINT
     ) -> HRESULT,
-    fn SetSourceRect(&mut self, pRect: *const RECT) -> HRESULT,
-    fn SetTargetRect(&mut self, pRect: *const RECT) -> HRESULT,
-    fn SetDestSize(&mut self, Width: UINT, Height: UINT) -> HRESULT,
-    fn GetSourceRect(&mut self, pRect: *mut RECT) -> HRESULT,
-    fn GetTargetRect(&mut self, pRect: *mut RECT) -> HRESULT,
+    fn SetSourceRect(&self, pRect: *const RECT) -> HRESULT,
+    fn SetTargetRect(&self, pRect: *const RECT) -> HRESULT,
+    fn SetDestSize(&self, Width: UINT, Height: UINT) -> HRESULT,
+    fn GetSourceRect(&self, pRect: *mut RECT) -> HRESULT,
+    fn GetTargetRect(&self, pRect: *mut RECT) -> HRESULT,
     fn GetDestSize(
-        &mut self, pWidth: *mut UINT, pHeight: *mut UINT
+        &self, pWidth: *mut UINT, pHeight: *mut UINT
     ) -> HRESULT,
     fn SetColorSpace(
-        &mut self, ColorSpace: DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS
+        &self, ColorSpace: DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS
     ) -> HRESULT,
-    fn GetColorSpace(&mut self) -> DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS
+    fn GetColorSpace(&self) -> DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS
 });
 
 RIDL!(
 interface IDXGIDevice3(IDXGIDevice3Vtbl): IDXGIDevice2(IDXGIDevice2Vtbl) {
-    fn Trim(&mut self) -> ()
+    fn Trim(&self) -> ()
 });
 
 RIDL!(
 interface IDXGIFactory3(IDXGIFactory3Vtbl): IDXGIFactory2(IDXGIFactory2Vtbl) {
-    fn GetCreationFlags(&mut self) -> UINT
+    fn GetCreationFlags(&self) -> UINT
 });
 
 RIDL!(
 interface IDXGIFactoryMedia(IDXGIFactoryMediaVtbl): IUnknown(IUnknownVtbl) {
     fn CreateSwapChainForCompositionSurfaceHandle(
-        &mut self, pDevice: *mut IUnknown, hSurface: HANDLE,
+        &self, pDevice: *mut IUnknown, hSurface: HANDLE,
         pDesc: *const DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput: *mut IDXGIOutput,
         ppSwapChain: *mut *mut IDXGISwapChain1
     ) -> HRESULT,
     fn CreateDecodeSwapChainForCompositionSurfaceHandle(
-        &mut self, pDevice: *mut IUnknown, hSurface: HANDLE,
+        &self, pDevice: *mut IUnknown, hSurface: HANDLE,
         pDesc: *mut DXGI_DECODE_SWAP_CHAIN_DESC, pYuvDecodeBuffers: *mut IDXGIResource,
         pRestrictToOutput: *mut IDXGIOutput, ppSwapChain: *mut *mut IDXGIDecodeSwapChain
     ) -> HRESULT
@@ -98,42 +98,42 @@ interface IDXGIFactoryMedia(IDXGIFactoryMediaVtbl): IUnknown(IUnknownVtbl) {
 
 RIDL!(
 interface IDXGIOutput2(IDXGIOutput2Vtbl): IDXGIOutput1(IDXGIOutput1Vtbl) {
-    fn SupportsOverlays(&mut self) -> BOOL
+    fn SupportsOverlays(&self) -> BOOL
 });
 
 RIDL!(
 interface IDXGIOutput3(IDXGIOutput3Vtbl): IDXGIOutput2(IDXGIOutput2Vtbl) {
     fn CheckOverlaySupport(
-        &mut self, EnumFormat: DXGI_FORMAT, pConcernedDevice: *mut IUnknown,
+        &self, EnumFormat: DXGI_FORMAT, pConcernedDevice: *mut IUnknown,
         pFlags: *mut UINT
     ) -> HRESULT
 });
 
 RIDL!(
 interface IDXGISwapChain2(IDXGISwapChain2Vtbl): IDXGISwapChain1(IDXGISwapChain1Vtbl) {
-    fn SetSourceSize(&mut self, Width: UINT, Height: UINT) -> HRESULT,
+    fn SetSourceSize(&self, Width: UINT, Height: UINT) -> HRESULT,
     fn GetSourceSize(
-        &mut self, pWidth: *mut UINT, pHeight: *mut UINT
+        &self, pWidth: *mut UINT, pHeight: *mut UINT
     ) -> HRESULT,
-    fn SetMaximumFrameLatency(&mut self, MaxLatency: UINT) -> HRESULT,
-    fn GetMaximumFrameLatency(&mut self, pMaxLatency: *mut UINT) -> HRESULT,
-    fn GetFrameLatencyWaitableObject(&mut self) -> HANDLE,
+    fn SetMaximumFrameLatency(&self, MaxLatency: UINT) -> HRESULT,
+    fn GetMaximumFrameLatency(&self, pMaxLatency: *mut UINT) -> HRESULT,
+    fn GetFrameLatencyWaitableObject(&self) -> HANDLE,
     fn SetMatrixTransform(
-        &mut self, pMatrix: *const DXGI_MATRIX_3X2_F
+        &self, pMatrix: *const DXGI_MATRIX_3X2_F
     ) -> HRESULT,
     fn GetMatrixTransform(
-        &mut self, pMatrix: *mut DXGI_MATRIX_3X2_F
+        &self, pMatrix: *mut DXGI_MATRIX_3X2_F
     ) -> HRESULT
 });
 
 RIDL!(
 interface IDXGISwapChainMedia(IDXGISwapChainMediaVtbl): IUnknown(IUnknownVtbl) {
     fn GetFrameStatisticsMedia(
-        &mut self, pStats: *mut DXGI_FRAME_STATISTICS_MEDIA
+        &self, pStats: *mut DXGI_FRAME_STATISTICS_MEDIA
     ) -> HRESULT,
-    fn SetPresentDuration(&mut self, Duration: UINT) -> HRESULT,
+    fn SetPresentDuration(&self, Duration: UINT) -> HRESULT,
     fn CheckPresentDurationSupport(
-        &mut self, DesiredPresentDuration: UINT, pClosestSmallerPresentDuration: *mut UINT,
+        &self, DesiredPresentDuration: UINT, pClosestSmallerPresentDuration: *mut UINT,
         pClosestLargerPresentDuration: *mut UINT
     ) -> HRESULT
 });

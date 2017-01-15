@@ -57,11 +57,11 @@ ENUM!{enum CorSymVarFlag {
 RIDL!(
 interface ISymUnmanagedBinder(ISymUnmanagedBinderVtbl): IUnknown(IUnknownVtbl) {
     fn GetReaderForFile(
-        &mut self, importer: *mut IUnknown, fileName: *const WCHAR, searchPath: *const WCHAR,
+        &self, importer: *mut IUnknown, fileName: *const WCHAR, searchPath: *const WCHAR,
         pRetVal: *mut *mut ISymUnmanagedReader
     ) -> HRESULT,
     fn GetReaderFromStream(
-        &mut self, importer: *mut IUnknown, pstream: *mut IStream,
+        &self, importer: *mut IUnknown, pstream: *mut IStream,
         pRetVal: *mut *mut ISymUnmanagedReader
     ) -> HRESULT
 }
@@ -76,7 +76,7 @@ RIDL!(
 interface ISymUnmanagedBinder2(ISymUnmanagedBinder2Vtbl):
     ISymUnmanagedBinder(ISymUnmanagedBinderVtbl) {
     fn GetReaderForFile2(
-        &mut self, importer: *mut IUnknown, fileName: *const WCHAR, searchPath: *const WCHAR,
+        &self, importer: *mut IUnknown, fileName: *const WCHAR, searchPath: *const WCHAR,
         searchPolicy: ULONG32, pRetVal: *mut *mut ISymUnmanagedReader
     ) -> HRESULT
 }

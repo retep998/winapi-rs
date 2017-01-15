@@ -281,463 +281,463 @@ STRUCT!{struct D2D1_FACTORY_OPTIONS {
 }}
 RIDL!(
 interface ID2D1Resource(ID2D1ResourceVtbl): IUnknown(IUnknownVtbl) {
-    fn GetFactory(&mut self, factory: *mut *mut ID2D1Factory) -> ()
+    fn GetFactory(&self, factory: *mut *mut ID2D1Factory) -> ()
 });
 RIDL!(
 interface ID2D1Image(ID2D1ImageVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
 });
 RIDL!(
 interface ID2D1Bitmap(ID2D1BitmapVtbl): ID2D1Image(ID2D1ImageVtbl) {
-    fn GetSize(&mut self, ret: *mut D2D1_SIZE_F) -> *mut D2D1_SIZE_F, // FIXME: ABI issue
-    fn GetPixelSize(&mut self, ret: *mut D2D1_SIZE_U) -> *mut D2D1_SIZE_U, // FIXME: ABI issue
+    fn GetSize(&self, ret: *mut D2D1_SIZE_F) -> *mut D2D1_SIZE_F, // FIXME: ABI issue
+    fn GetPixelSize(&self, ret: *mut D2D1_SIZE_U) -> *mut D2D1_SIZE_U, // FIXME: ABI issue
     fn GetPixelFormat(
-        &mut self, ret: *mut D2D1_PIXEL_FORMAT
+        &self, ret: *mut D2D1_PIXEL_FORMAT
     ) -> *mut D2D1_PIXEL_FORMAT, // FIXME: ABI issue
-    fn GetDpi(&mut self, dpiX: *mut FLOAT, dpiY: *mut FLOAT) -> (),
+    fn GetDpi(&self, dpiX: *mut FLOAT, dpiY: *mut FLOAT) -> (),
     fn CopyFromBitmap(
-        &mut self, destPoint: *const D2D1_POINT_2U, bitmap: *mut ID2D1Bitmap,
+        &self, destPoint: *const D2D1_POINT_2U, bitmap: *mut ID2D1Bitmap,
         srcRect: *const D2D1_RECT_U
     ) -> HRESULT,
     fn CopyFromRenderTarget(
-        &mut self, destPoint: *const D2D1_POINT_2U, renderTarget: *mut ID2D1RenderTarget,
+        &self, destPoint: *const D2D1_POINT_2U, renderTarget: *mut ID2D1RenderTarget,
         srcRect: *const D2D1_RECT_U
     ) -> HRESULT,
     fn CopyFromMemory(
-        &mut self, dstRect: *const D2D1_RECT_U, srcData: *const c_void, pitch: UINT32
+        &self, dstRect: *const D2D1_RECT_U, srcData: *const c_void, pitch: UINT32
     ) -> HRESULT
 });
 RIDL!(
 interface ID2D1GradientStopCollection(ID2D1GradientStopCollectionVtbl)
     : ID2D1Resource(ID2D1ResourceVtbl) {
-    fn GetGradientStopCount(&mut self) -> UINT32,
+    fn GetGradientStopCount(&self) -> UINT32,
     fn GetGradientStops(
-        &mut self, gradientStops: *mut D2D1_GRADIENT_STOP, gradientStopsCount: UINT32
+        &self, gradientStops: *mut D2D1_GRADIENT_STOP, gradientStopsCount: UINT32
     ) -> (),
-    fn GetColorInterpolationGamma(&mut self) -> D2D1_GAMMA,
-    fn GetExtendMode(&mut self) -> D2D1_EXTEND_MODE
+    fn GetColorInterpolationGamma(&self) -> D2D1_GAMMA,
+    fn GetExtendMode(&self) -> D2D1_EXTEND_MODE
 });
 RIDL!(
 interface ID2D1Brush(ID2D1BrushVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
-    fn SetOpacity(&mut self, opacity: FLOAT) -> (),
-    fn SetTransform(&mut self, transform: *const D2D1_MATRIX_3X2_F) -> (),
-    fn GetOpacity(&mut self) -> FLOAT,
-    fn GetTransform(&mut self, transform: *mut D2D1_MATRIX_3X2_F) -> ()
+    fn SetOpacity(&self, opacity: FLOAT) -> (),
+    fn SetTransform(&self, transform: *const D2D1_MATRIX_3X2_F) -> (),
+    fn GetOpacity(&self) -> FLOAT,
+    fn GetTransform(&self, transform: *mut D2D1_MATRIX_3X2_F) -> ()
 });
 RIDL!(
 interface ID2D1BitmapBrush(ID2D1BitmapBrushVtbl): ID2D1Brush(ID2D1BrushVtbl) {
-    fn SetExtendModeX(&mut self, extendModeX: D2D1_EXTEND_MODE) -> (),
-    fn SetExtendModeY(&mut self, extendModeY: D2D1_EXTEND_MODE) -> (),
-    fn SetInterpolationMode(&mut self, interpolationMode: D2D1_BITMAP_INTERPOLATION_MODE) -> (),
-    fn SetBitmap(&mut self, bitmap: *mut ID2D1Bitmap) -> (),
-    fn GetExtendModeX(&mut self) -> D2D1_EXTEND_MODE,
-    fn GetExtendModeY(&mut self) -> D2D1_EXTEND_MODE,
-    fn GetInterpolationMode(&mut self) -> D2D1_BITMAP_INTERPOLATION_MODE,
-    fn GetBitmap(&mut self, bitmap: *mut *mut ID2D1Bitmap) -> ()
+    fn SetExtendModeX(&self, extendModeX: D2D1_EXTEND_MODE) -> (),
+    fn SetExtendModeY(&self, extendModeY: D2D1_EXTEND_MODE) -> (),
+    fn SetInterpolationMode(&self, interpolationMode: D2D1_BITMAP_INTERPOLATION_MODE) -> (),
+    fn SetBitmap(&self, bitmap: *mut ID2D1Bitmap) -> (),
+    fn GetExtendModeX(&self) -> D2D1_EXTEND_MODE,
+    fn GetExtendModeY(&self) -> D2D1_EXTEND_MODE,
+    fn GetInterpolationMode(&self) -> D2D1_BITMAP_INTERPOLATION_MODE,
+    fn GetBitmap(&self, bitmap: *mut *mut ID2D1Bitmap) -> ()
 });
 RIDL!(
 interface ID2D1SolidColorBrush(ID2D1SolidColorBrushVtbl): ID2D1Brush(ID2D1BrushVtbl) {
-    fn SetColor(&mut self, color: *const D2D1_COLOR_F) -> (),
-    fn GetColor(&mut self, color: *mut D2D1_COLOR_F) -> *mut D2D1_COLOR_F
+    fn SetColor(&self, color: *const D2D1_COLOR_F) -> (),
+    fn GetColor(&self, color: *mut D2D1_COLOR_F) -> *mut D2D1_COLOR_F
 });
 RIDL!(
 interface ID2D1LinearGradientBrush(ID2D1LinearGradientBrushVtbl): ID2D1Brush(ID2D1BrushVtbl) {
-    fn SetStartPoint(&mut self, startPoint: D2D1_POINT_2F) -> (),
-    fn SetEndPoint(&mut self, endPoint: D2D1_POINT_2F) -> (),
-    fn GetStartPoint(&mut self, ret: *mut D2D1_POINT_2F) -> *mut D2D1_POINT_2F, // FIXME ABI issue
-    fn GetEndPoint(&mut self, ret: *mut D2D1_POINT_2F) -> *mut D2D1_POINT_2F, // FIXME ABI issue
+    fn SetStartPoint(&self, startPoint: D2D1_POINT_2F) -> (),
+    fn SetEndPoint(&self, endPoint: D2D1_POINT_2F) -> (),
+    fn GetStartPoint(&self, ret: *mut D2D1_POINT_2F) -> *mut D2D1_POINT_2F, // FIXME ABI issue
+    fn GetEndPoint(&self, ret: *mut D2D1_POINT_2F) -> *mut D2D1_POINT_2F, // FIXME ABI issue
     fn GetGradientStopCollection(
-        &mut self, gradientStopCollection: *mut *mut ID2D1GradientStopCollection
+        &self, gradientStopCollection: *mut *mut ID2D1GradientStopCollection
     ) -> ()
 });
 RIDL!(
 interface ID2D1RadialGradientBrush(ID2D1RadialGradientBrushVtbl): ID2D1Brush(ID2D1BrushVtbl) {
-    fn SetCenter(&mut self, center: D2D1_POINT_2F) -> (),
-    fn SetGradientOriginOffset(&mut self, gradientOriginOffset: D2D1_POINT_2F) -> (),
-    fn SetRadiusX(&mut self, radiusX: FLOAT) -> (),
-    fn SetRadiusY(&mut self, radiusY: FLOAT) -> (),
-    fn GetCenter(&mut self, ret: *mut D2D1_POINT_2F) -> *mut D2D1_POINT_2F, // FIXME ABI issue
+    fn SetCenter(&self, center: D2D1_POINT_2F) -> (),
+    fn SetGradientOriginOffset(&self, gradientOriginOffset: D2D1_POINT_2F) -> (),
+    fn SetRadiusX(&self, radiusX: FLOAT) -> (),
+    fn SetRadiusY(&self, radiusY: FLOAT) -> (),
+    fn GetCenter(&self, ret: *mut D2D1_POINT_2F) -> *mut D2D1_POINT_2F, // FIXME ABI issue
     fn GetGradientOriginOffset(
-        &mut self, ret: *mut D2D1_POINT_2F
+        &self, ret: *mut D2D1_POINT_2F
     ) -> *mut D2D1_POINT_2F, // FIXME ABI issue
-    fn GetRadiusX(&mut self) -> FLOAT,
-    fn GetRadiusY(&mut self) -> FLOAT,
+    fn GetRadiusX(&self) -> FLOAT,
+    fn GetRadiusY(&self) -> FLOAT,
     fn GetGradientStopCollection(
-        &mut self, gradientStopCollection: *mut *mut ID2D1GradientStopCollection
+        &self, gradientStopCollection: *mut *mut ID2D1GradientStopCollection
     ) -> ()
 });
 RIDL!(
 interface ID2D1StrokeStyle(ID2D1StrokeStyleVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
-    fn GetStartCap(&mut self) -> D2D1_CAP_STYLE,
-    fn GetEndCap(&mut self) -> D2D1_CAP_STYLE,
-    fn GetDashCap(&mut self) -> D2D1_CAP_STYLE,
-    fn GetMiterLimit(&mut self) -> FLOAT,
-    fn GetLineJoin(&mut self) -> D2D1_LINE_JOIN,
-    fn GetDashOffset(&mut self) -> FLOAT,
-    fn GetDashStyle(&mut self) -> D2D1_DASH_STYLE,
-    fn GetDashesCount(&mut self) -> UINT32,
-    fn GetDashes(&mut self, dashes: *mut FLOAT, dashesCount: UINT32) -> ()
+    fn GetStartCap(&self) -> D2D1_CAP_STYLE,
+    fn GetEndCap(&self) -> D2D1_CAP_STYLE,
+    fn GetDashCap(&self) -> D2D1_CAP_STYLE,
+    fn GetMiterLimit(&self) -> FLOAT,
+    fn GetLineJoin(&self) -> D2D1_LINE_JOIN,
+    fn GetDashOffset(&self) -> FLOAT,
+    fn GetDashStyle(&self) -> D2D1_DASH_STYLE,
+    fn GetDashesCount(&self) -> UINT32,
+    fn GetDashes(&self, dashes: *mut FLOAT, dashesCount: UINT32) -> ()
 });
 RIDL!(
 interface ID2D1Geometry(ID2D1GeometryVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
     fn GetBounds(
-        &mut self, worldTransform: *const D2D1_MATRIX_3X2_F, bounds: *mut D2D1_RECT_F
+        &self, worldTransform: *const D2D1_MATRIX_3X2_F, bounds: *mut D2D1_RECT_F
     ) -> HRESULT,
     fn GetWidenedBounds(
-        &mut self, strokeWidth: FLOAT, strokeStyle: *mut ID2D1StrokeStyle,
+        &self, strokeWidth: FLOAT, strokeStyle: *mut ID2D1StrokeStyle,
         worldTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
         bounds: *mut D2D1_RECT_F
     ) -> HRESULT,
     fn StrokeContainsPoint(
-        &mut self, point: D2D1_POINT_2F, strokeWidth: FLOAT, strokeStyle: *mut ID2D1StrokeStyle,
+        &self, point: D2D1_POINT_2F, strokeWidth: FLOAT, strokeStyle: *mut ID2D1StrokeStyle,
         worldTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
         contains: *mut BOOL
     ) -> HRESULT,
     fn FillContainsPoint(
-        &mut self, point: D2D1_POINT_2F, worldTransform: *const D2D1_MATRIX_3X2_F,
+        &self, point: D2D1_POINT_2F, worldTransform: *const D2D1_MATRIX_3X2_F,
         flatteningTolerance: FLOAT, contains: *mut BOOL
     ) -> HRESULT,
     fn CompareWithGeometry(
-        &mut self, inputGeometry: *mut ID2D1Geometry,
+        &self, inputGeometry: *mut ID2D1Geometry,
         inputGeometryTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
         relation: *mut D2D1_GEOMETRY_RELATION
     ) -> HRESULT,
     fn Simplify(
-        &mut self, simplificationOption: D2D1_GEOMETRY_SIMPLIFICATION_OPTION,
+        &self, simplificationOption: D2D1_GEOMETRY_SIMPLIFICATION_OPTION,
         worldTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
         geometrySink: *mut ID2D1SimplifiedGeometrySink
     ) -> HRESULT,
     fn Tessellate(
-        &mut self, worldTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
+        &self, worldTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
         tessellationSink: *mut ID2D1TessellationSink
     ) -> HRESULT,
     fn CombineWithGeometry(
-        &mut self, inputGeometry: *mut ID2D1Geometry, combineMode: D2D1_COMBINE_MODE,
+        &self, inputGeometry: *mut ID2D1Geometry, combineMode: D2D1_COMBINE_MODE,
         inputGeometryTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
         geometrySink: *mut ID2D1SimplifiedGeometrySink
     ) -> HRESULT,
     fn Outline(
-        &mut self, worldTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
+        &self, worldTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
         geometrySink: *mut ID2D1SimplifiedGeometrySink
     ) -> HRESULT,
     fn ComputeArea(
-        &mut self, worldTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
+        &self, worldTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
         area: *mut FLOAT
     ) -> HRESULT,
     fn ComputeLength(
-        &mut self, worldTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
+        &self, worldTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
         length: *mut FLOAT
     ) -> HRESULT,
     fn ComputePointAtLength(
-        &mut self, length: FLOAT, worldTransform: *const D2D1_MATRIX_3X2_F,
+        &self, length: FLOAT, worldTransform: *const D2D1_MATRIX_3X2_F,
         flatteningTolerance: FLOAT, point: *mut D2D1_POINT_2F,
         unitTangentVector: *mut D2D1_POINT_2F
     ) -> HRESULT,
     fn Widen(
-        &mut self, strokeWidth: FLOAT, strokeStyle: *mut ID2D1StrokeStyle,
+        &self, strokeWidth: FLOAT, strokeStyle: *mut ID2D1StrokeStyle,
         worldTransform: *const D2D1_MATRIX_3X2_F, flatteningTolerance: FLOAT,
         geometrySink: *mut ID2D1SimplifiedGeometrySink
     ) -> HRESULT
 });
 RIDL!(
 interface ID2D1RectangleGeometry(ID2D1RectangleGeometryVtbl): ID2D1Geometry(ID2D1GeometryVtbl) {
-    fn GetRect(&mut self, rect: *mut D2D1_RECT_F) -> ()
+    fn GetRect(&self, rect: *mut D2D1_RECT_F) -> ()
 });
 RIDL!(
 interface ID2D1RoundedRectangleGeometry(ID2D1RoundedRectangleGeometryVtbl)
     : ID2D1Geometry(ID2D1GeometryVtbl) {
-    fn GetRoundedRect(&mut self, roundedRect: *mut D2D1_ROUNDED_RECT) -> ()
+    fn GetRoundedRect(&self, roundedRect: *mut D2D1_ROUNDED_RECT) -> ()
 });
 RIDL!(
 interface ID2D1EllipseGeometry(ID2D1EllipseGeometryVtbl): ID2D1Geometry(ID2D1GeometryVtbl) {
-    fn GetEllipse(&mut self, ellipse: *mut D2D1_ELLIPSE) -> ()
+    fn GetEllipse(&self, ellipse: *mut D2D1_ELLIPSE) -> ()
 });
 RIDL!(
 interface ID2D1GeometryGroup(ID2D1GeometryGroupVtbl): ID2D1Geometry(ID2D1GeometryVtbl) {
-    fn GetFillMode(&mut self) -> D2D1_FILL_MODE,
-    fn GetSourceGeometryCount(&mut self) -> UINT32,
+    fn GetFillMode(&self) -> D2D1_FILL_MODE,
+    fn GetSourceGeometryCount(&self) -> UINT32,
     fn GetSourceGeometries(
-        &mut self, geometries: *mut *mut ID2D1Geometry, geometriesCount: UINT32
+        &self, geometries: *mut *mut ID2D1Geometry, geometriesCount: UINT32
     ) -> ()
 });
 RIDL!(
 interface ID2D1TransformedGeometry(ID2D1TransformedGeometryVtbl)
     : ID2D1Geometry(ID2D1GeometryVtbl) {
-    fn GetSourceGeometry(&mut self, sourceGeometry: *mut *mut ID2D1Geometry) -> (),
-    fn GetTransform(&mut self, transform: *mut D2D1_MATRIX_3X2_F) -> ()
+    fn GetSourceGeometry(&self, sourceGeometry: *mut *mut ID2D1Geometry) -> (),
+    fn GetTransform(&self, transform: *mut D2D1_MATRIX_3X2_F) -> ()
 });
 RIDL!(
 interface ID2D1SimplifiedGeometrySink(ID2D1SimplifiedGeometrySinkVtbl): IUnknown(IUnknownVtbl) {
-    fn SetFillMode(&mut self, fillMode: D2D1_FILL_MODE) -> (),
-    fn SetSegmentFlags(&mut self, vertexFlags: D2D1_PATH_SEGMENT) -> (),
-    fn BeginFigure(&mut self, startPoint: D2D1_POINT_2F, figureBegin: D2D1_FIGURE_BEGIN) -> (),
-    fn AddLines(&mut self, points: *const D2D1_POINT_2F, pointsCount: UINT32) -> (),
-    fn AddBeziers(&mut self, beziers: *const D2D1_BEZIER_SEGMENT, beziersCount: UINT32) -> (),
-    fn EndFigure(&mut self, figureEnd: D2D1_FIGURE_END) -> (),
-    fn Close(&mut self) -> HRESULT
+    fn SetFillMode(&self, fillMode: D2D1_FILL_MODE) -> (),
+    fn SetSegmentFlags(&self, vertexFlags: D2D1_PATH_SEGMENT) -> (),
+    fn BeginFigure(&self, startPoint: D2D1_POINT_2F, figureBegin: D2D1_FIGURE_BEGIN) -> (),
+    fn AddLines(&self, points: *const D2D1_POINT_2F, pointsCount: UINT32) -> (),
+    fn AddBeziers(&self, beziers: *const D2D1_BEZIER_SEGMENT, beziersCount: UINT32) -> (),
+    fn EndFigure(&self, figureEnd: D2D1_FIGURE_END) -> (),
+    fn Close(&self) -> HRESULT
 });
 RIDL!(
 interface ID2D1GeometrySink(ID2D1GeometrySinkVtbl)
     : ID2D1SimplifiedGeometrySink(ID2D1SimplifiedGeometrySinkVtbl) {
-    fn AddLine(&mut self, point: D2D1_POINT_2F) -> (),
-    fn AddBezier(&mut self, bezier: *const D2D1_BEZIER_SEGMENT) -> (),
-    fn AddQuadraticBezier(&mut self, bezier: *const D2D1_QUADRATIC_BEZIER_SEGMENT) -> (),
+    fn AddLine(&self, point: D2D1_POINT_2F) -> (),
+    fn AddBezier(&self, bezier: *const D2D1_BEZIER_SEGMENT) -> (),
+    fn AddQuadraticBezier(&self, bezier: *const D2D1_QUADRATIC_BEZIER_SEGMENT) -> (),
     fn AddQuadraticBeziers(
-        &mut self, beziers: *const D2D1_QUADRATIC_BEZIER_SEGMENT, beziersCount: UINT32
+        &self, beziers: *const D2D1_QUADRATIC_BEZIER_SEGMENT, beziersCount: UINT32
     ) -> (),
-    fn AddArc(&mut self, arc: *const D2D1_ARC_SEGMENT) -> ()
+    fn AddArc(&self, arc: *const D2D1_ARC_SEGMENT) -> ()
 });
 RIDL!(
 interface ID2D1TessellationSink(ID2D1TessellationSinkVtbl): IUnknown(IUnknownVtbl) {
-    fn AddTriangles(&mut self, triangles: *const D2D1_TRIANGLE, triangleCount: UINT32) -> (),
-    fn Close(&mut self) -> HRESULT
+    fn AddTriangles(&self, triangles: *const D2D1_TRIANGLE, triangleCount: UINT32) -> (),
+    fn Close(&self) -> HRESULT
 });
 RIDL!(
 interface ID2D1PathGeometry(ID2D1PathGeometryVtbl): ID2D1Geometry(ID2D1GeometryVtbl) {
-    fn Open(&mut self, geometrySink: *mut *mut ID2D1GeometrySink) -> HRESULT,
-    fn Stream(&mut self, geometrySink: *mut ID2D1GeometrySink) -> HRESULT,
-    fn GetSegmentCount(&mut self, count: *mut UINT32) -> HRESULT,
-    fn GetFigureCount(&mut self, count: *mut UINT32) -> HRESULT
+    fn Open(&self, geometrySink: *mut *mut ID2D1GeometrySink) -> HRESULT,
+    fn Stream(&self, geometrySink: *mut ID2D1GeometrySink) -> HRESULT,
+    fn GetSegmentCount(&self, count: *mut UINT32) -> HRESULT,
+    fn GetFigureCount(&self, count: *mut UINT32) -> HRESULT
 });
 RIDL!(
 interface ID2D1Mesh(ID2D1MeshVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
-    fn Open(&mut self, tessellationSink: *mut *mut ID2D1TessellationSink) -> HRESULT
+    fn Open(&self, tessellationSink: *mut *mut ID2D1TessellationSink) -> HRESULT
 });
 RIDL!(
 interface ID2D1Layer(ID2D1LayerVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
-    fn GetSize(&mut self, ret: *mut D2D1_SIZE_F) -> *mut D2D1_SIZE_F // FIXME: ABI issue
+    fn GetSize(&self, ret: *mut D2D1_SIZE_F) -> *mut D2D1_SIZE_F // FIXME: ABI issue
 });
 RIDL!(
 interface ID2D1DrawingStateBlock(ID2D1DrawingStateBlockVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
-    fn GetDescription(&mut self, stateDescription: *mut D2D1_DRAWING_STATE_DESCRIPTION) -> (),
-    fn SetDescription(&mut self, stateDescription: *const D2D1_DRAWING_STATE_DESCRIPTION) -> (),
+    fn GetDescription(&self, stateDescription: *mut D2D1_DRAWING_STATE_DESCRIPTION) -> (),
+    fn SetDescription(&self, stateDescription: *const D2D1_DRAWING_STATE_DESCRIPTION) -> (),
     fn SetTextRenderingParams(
-        &mut self, textRenderingParams: *mut IDWriteRenderingParams
+        &self, textRenderingParams: *mut IDWriteRenderingParams
     ) -> (),
     fn GetTextRenderingParams(
-        &mut self, textRenderingParams: *mut *mut IDWriteRenderingParams
+        &self, textRenderingParams: *mut *mut IDWriteRenderingParams
     ) -> ()
 });
 RIDL!(
 interface ID2D1RenderTarget(ID2D1RenderTargetVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
     fn CreateBitmap(
-        &mut self, size: D2D1_SIZE_U, srcData: *const c_void, pitch: UINT32,
+        &self, size: D2D1_SIZE_U, srcData: *const c_void, pitch: UINT32,
         bitmapProperties: *const D2D1_BITMAP_PROPERTIES, bitmap: *mut *mut ID2D1Bitmap
     ) -> HRESULT,
     fn CreateBitmapFromWicBitmap(
-        &mut self, wicBitmapSource: *mut IWICBitmapSource,
+        &self, wicBitmapSource: *mut IWICBitmapSource,
         bitmapProperties: *const D2D1_BITMAP_PROPERTIES, bitmap: *mut *mut ID2D1Bitmap
     ) -> HRESULT,
     fn CreateSharedBitmap(
-        &mut self, riid: REFIID, data: *const c_void,
+        &self, riid: REFIID, data: *const c_void,
         bitmapProperties: *const D2D1_BITMAP_PROPERTIES, bitmap: *mut *mut ID2D1Bitmap
     ) -> HRESULT,
     fn CreateBitmapBrush(
-        &mut self, bitmap: *mut ID2D1Bitmap,
+        &self, bitmap: *mut ID2D1Bitmap,
         bitmapBrushProperties: *const D2D1_BITMAP_BRUSH_PROPERTIES,
         brushProperties: *const D2D1_BRUSH_PROPERTIES, bitmapBrush: *mut *mut ID2D1BitmapBrush
     ) -> HRESULT,
     fn CreateSolidColorBrush(
-        &mut self, color: *const D2D1_COLOR_F, brushProperties: *const D2D1_BRUSH_PROPERTIES,
+        &self, color: *const D2D1_COLOR_F, brushProperties: *const D2D1_BRUSH_PROPERTIES,
         solidColorBrush: *mut *mut ID2D1SolidColorBrush
     ) -> HRESULT,
     fn CreateGradientStopCollection(
-        &mut self, gradientStops: *const D2D1_GRADIENT_STOP, gradientStopsCount: UINT32,
+        &self, gradientStops: *const D2D1_GRADIENT_STOP, gradientStopsCount: UINT32,
         colorInterpolationGamma: D2D1_GAMMA, extendMode: D2D1_EXTEND_MODE,
         gradientStopCollection: *mut *mut ID2D1GradientStopCollection
     ) -> HRESULT,
     fn CreateLinearGradientBrush(
-        &mut self, linearGradientBrushProperties: *const D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES,
+        &self, linearGradientBrushProperties: *const D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES,
         brushProperties: *const D2D1_BRUSH_PROPERTIES,
         gradientStopCollection: *mut ID2D1GradientStopCollection,
         linearGradientBrush: *mut *mut ID2D1LinearGradientBrush
     ) -> HRESULT,
     fn CreateRadialGradientBrush(
-        &mut self, radialGradientBrushProperties: *const D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES,
+        &self, radialGradientBrushProperties: *const D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES,
         brushProperties: *const D2D1_BRUSH_PROPERTIES,
         gradientStopCollection: *mut ID2D1GradientStopCollection,
         radialGradientBrush: *mut *mut ID2D1RadialGradientBrush
     ) -> HRESULT,
     fn CreateCompatibleRenderTarget(
-        &mut self, desiredSize: *const D2D1_SIZE_F, desiredPixelSize: *const D2D1_SIZE_U,
+        &self, desiredSize: *const D2D1_SIZE_F, desiredPixelSize: *const D2D1_SIZE_U,
         desiredFormat: *const D2D1_PIXEL_FORMAT, options: D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS,
         bitmapRenderTarget: *mut *mut ID2D1BitmapRenderTarget
     ) -> HRESULT,
-    fn CreateLayer(&mut self, size: *const D2D1_SIZE_F, layer: *mut *mut ID2D1Layer) -> HRESULT,
-    fn CreateMesh(&mut self, mesh: *mut *mut ID2D1Mesh) -> HRESULT,
+    fn CreateLayer(&self, size: *const D2D1_SIZE_F, layer: *mut *mut ID2D1Layer) -> HRESULT,
+    fn CreateMesh(&self, mesh: *mut *mut ID2D1Mesh) -> HRESULT,
     fn DrawLine(
-        &mut self, point0: D2D1_POINT_2F, point1: D2D1_POINT_2F, brush: *mut ID2D1Brush,
+        &self, point0: D2D1_POINT_2F, point1: D2D1_POINT_2F, brush: *mut ID2D1Brush,
         strokeWidth: FLOAT, strokeStype: *mut ID2D1StrokeStyle
     ) -> (),
     fn DrawRectangle(
-        &mut self, rect: *const D2D1_RECT_F, brush: *mut ID2D1Brush,
+        &self, rect: *const D2D1_RECT_F, brush: *mut ID2D1Brush,
         strokeWidth: FLOAT, strokeStyle: *mut ID2D1StrokeStyle
     ) -> (),
     fn FillRectangle(
-        &mut self, rect: *const D2D1_RECT_F, brush: *mut ID2D1Brush
+        &self, rect: *const D2D1_RECT_F, brush: *mut ID2D1Brush
     ) -> (),
     fn DrawRoundedRectangle(
-        &mut self, roundedRect: *const D2D1_ROUNDED_RECT, brush: *mut ID2D1Brush,
+        &self, roundedRect: *const D2D1_ROUNDED_RECT, brush: *mut ID2D1Brush,
         strokeWidth: FLOAT, strokeStyle: *mut ID2D1StrokeStyle
     ) -> (),
     fn FillRoundedRectangle(
-        &mut self, roundedRect: *const D2D1_ROUNDED_RECT, brush: *mut ID2D1Brush
+        &self, roundedRect: *const D2D1_ROUNDED_RECT, brush: *mut ID2D1Brush
     ) -> (),
     fn DrawEllipse(
-        &mut self, ellipse: *const D2D1_ELLIPSE, brush: *mut ID2D1Brush,
+        &self, ellipse: *const D2D1_ELLIPSE, brush: *mut ID2D1Brush,
         strokeWidth: FLOAT, strokeStyle: *mut ID2D1StrokeStyle
     ) -> (),
     fn FillEllipse(
-        &mut self, ellipse: *const D2D1_ELLIPSE, brush: *mut ID2D1Brush
+        &self, ellipse: *const D2D1_ELLIPSE, brush: *mut ID2D1Brush
     ) -> (),
     fn DrawGeometry(
-        &mut self, geometry: *mut ID2D1Geometry, brush: *mut ID2D1Brush,
+        &self, geometry: *mut ID2D1Geometry, brush: *mut ID2D1Brush,
         strokeWidth: FLOAT, strokeStyle: *mut ID2D1StrokeStyle
     ) -> (),
     fn FillGeometry(
-        &mut self, geometry: *mut ID2D1Geometry, brush: *mut ID2D1Brush,
+        &self, geometry: *mut ID2D1Geometry, brush: *mut ID2D1Brush,
         opacityBrush: *mut ID2D1Brush
     ) -> (),
     fn FillMesh(
-        &mut self, mesh: *mut ID2D1Mesh, brush: *const ID2D1Brush
+        &self, mesh: *mut ID2D1Mesh, brush: *const ID2D1Brush
     ) -> (),
     fn FillOpacityMask(
-        &mut self, opacityMask: *mut ID2D1Bitmap, brush: *mut ID2D1Brush,
+        &self, opacityMask: *mut ID2D1Bitmap, brush: *mut ID2D1Brush,
         content: D2D1_OPACITY_MASK_CONTENT, destinationRectangle: *const D2D1_RECT_F,
         sourceRectangle: *const D2D1_RECT_F
     ) -> (),
     fn DrawBitmap(
-        &mut self, bitmap: *mut ID2D1Bitmap, destinationRectangle: *const D2D1_RECT_F,
+        &self, bitmap: *mut ID2D1Bitmap, destinationRectangle: *const D2D1_RECT_F,
         opacity: FLOAT, interpolationMode: D2D1_BITMAP_INTERPOLATION_MODE,
         sourceRectangle: *const D2D1_RECT_F
     ) -> (),
     fn DrawText(
-        &mut self, string: *const WCHAR, stringLength: UINT32,
+        &self, string: *const WCHAR, stringLength: UINT32,
         textFormat: *mut IDWriteTextFormat, layoutRect: *const D2D1_RECT_F,
         defaultForegroundBrush: *mut ID2D1Brush, options: D2D1_DRAW_TEXT_OPTIONS,
         measuringMode: DWRITE_MEASURING_MODE
     ) -> (),
     fn DrawTextLayout(
-        &mut self, origin: D2D1_POINT_2F, textLayout: *mut IDWriteTextLayout,
+        &self, origin: D2D1_POINT_2F, textLayout: *mut IDWriteTextLayout,
         defaultForegroundBrush: *mut ID2D1Brush, options: D2D1_DRAW_TEXT_OPTIONS
     ) -> (),
     fn DrawGlyphRun(
-        &mut self, baselineOrigin: D2D1_POINT_2F, glyphRun: *const DWRITE_GLYPH_RUN,
+        &self, baselineOrigin: D2D1_POINT_2F, glyphRun: *const DWRITE_GLYPH_RUN,
         foregroundBrush: *mut ID2D1Brush, measuringMode: DWRITE_MEASURING_MODE
     ) -> (),
-    fn SetTransform(&mut self, transform: *const D2D1_MATRIX_3X2_F) -> (),
-    fn GetTransform(&mut self, transform: *mut D2D1_MATRIX_3X2_F) -> (),
-    fn SetAntialiasMode(&mut self, antialiasMode: D2D1_ANTIALIAS_MODE) -> (),
-    fn GetAntialiasMode(&mut self) -> D2D1_ANTIALIAS_MODE,
-    fn SetTextAntialiasMode(&mut self, textAntialiasMode: D2D1_TEXT_ANTIALIAS_MODE) -> (),
-    fn GetTextAntialiasMode(&mut self) -> D2D1_TEXT_ANTIALIAS_MODE,
+    fn SetTransform(&self, transform: *const D2D1_MATRIX_3X2_F) -> (),
+    fn GetTransform(&self, transform: *mut D2D1_MATRIX_3X2_F) -> (),
+    fn SetAntialiasMode(&self, antialiasMode: D2D1_ANTIALIAS_MODE) -> (),
+    fn GetAntialiasMode(&self) -> D2D1_ANTIALIAS_MODE,
+    fn SetTextAntialiasMode(&self, textAntialiasMode: D2D1_TEXT_ANTIALIAS_MODE) -> (),
+    fn GetTextAntialiasMode(&self) -> D2D1_TEXT_ANTIALIAS_MODE,
     fn SetTextRenderingParams(
-        &mut self, textRenderingParams: *mut IDWriteRenderingParams
+        &self, textRenderingParams: *mut IDWriteRenderingParams
     ) -> (),
     fn GetTextRenderingParams(
-        &mut self, textRenderingParams: *mut *mut IDWriteRenderingParams
+        &self, textRenderingParams: *mut *mut IDWriteRenderingParams
     ) -> (),
-    fn SetTags(&mut self, tag1: D2D1_TAG, tag2: D2D1_TAG) -> (),
-    fn GetTags(&mut self, tag1: *mut D2D1_TAG, tag2: *mut D2D1_TAG) -> (),
+    fn SetTags(&self, tag1: D2D1_TAG, tag2: D2D1_TAG) -> (),
+    fn GetTags(&self, tag1: *mut D2D1_TAG, tag2: *mut D2D1_TAG) -> (),
     fn PushLayer(
-        &mut self, layerParameters: *const D2D1_LAYER_PARAMETERS, layer: *mut ID2D1Layer
+        &self, layerParameters: *const D2D1_LAYER_PARAMETERS, layer: *mut ID2D1Layer
     ) -> (),
-    fn PopLayer(&mut self) -> (),
-    fn Flush(&mut self, tag1: *mut D2D1_TAG, tag2: *mut D2D1_TAG) -> HRESULT,
-    fn SaveDrawingState(&mut self, drawingStateBlock: *mut ID2D1DrawingStateBlock) -> (),
-    fn RestoreDrawingState(&mut self, drawingStateBlock: *mut ID2D1DrawingStateBlock) -> (),
+    fn PopLayer(&self) -> (),
+    fn Flush(&self, tag1: *mut D2D1_TAG, tag2: *mut D2D1_TAG) -> HRESULT,
+    fn SaveDrawingState(&self, drawingStateBlock: *mut ID2D1DrawingStateBlock) -> (),
+    fn RestoreDrawingState(&self, drawingStateBlock: *mut ID2D1DrawingStateBlock) -> (),
     fn PushAxisAlignedClip(
-        &mut self, clipRect: *const D2D1_RECT_F, antialiasMode: D2D1_ANTIALIAS_MODE
+        &self, clipRect: *const D2D1_RECT_F, antialiasMode: D2D1_ANTIALIAS_MODE
     ) -> (),
-    fn PopAxisAlignedClip(&mut self) -> (),
-    fn Clear(&mut self, clearColor: *const D2D1_COLOR_F) -> (),
-    fn BeginDraw(&mut self) -> (),
-    fn EndDraw(&mut self, tag1: *mut D2D1_TAG, tag2: *mut D2D1_TAG) -> HRESULT,
+    fn PopAxisAlignedClip(&self) -> (),
+    fn Clear(&self, clearColor: *const D2D1_COLOR_F) -> (),
+    fn BeginDraw(&self) -> (),
+    fn EndDraw(&self, tag1: *mut D2D1_TAG, tag2: *mut D2D1_TAG) -> HRESULT,
     fn GetPixelFormat(
-        &mut self, ret: *mut D2D1_PIXEL_FORMAT
+        &self, ret: *mut D2D1_PIXEL_FORMAT
     ) -> *mut D2D1_PIXEL_FORMAT, // FIXME: ABI issue
-    fn SetDpi(&mut self, dpiX: FLOAT, dpiY: FLOAT) -> (),
-    fn GetDpi(&mut self, dpiX: *mut FLOAT, dpiY: *mut FLOAT) -> (),
-    fn GetSize(&mut self, ret: *mut D2D1_SIZE_F) -> *mut D2D1_SIZE_F, // FIXME: ABI issue
-    fn GetPixelSize(&mut self, ret: *mut D2D1_SIZE_U) -> *mut D2D1_SIZE_U, // FIXME: ABI issue
-    fn GetMaximumBitmapSize(&mut self) -> UINT32,
+    fn SetDpi(&self, dpiX: FLOAT, dpiY: FLOAT) -> (),
+    fn GetDpi(&self, dpiX: *mut FLOAT, dpiY: *mut FLOAT) -> (),
+    fn GetSize(&self, ret: *mut D2D1_SIZE_F) -> *mut D2D1_SIZE_F, // FIXME: ABI issue
+    fn GetPixelSize(&self, ret: *mut D2D1_SIZE_U) -> *mut D2D1_SIZE_U, // FIXME: ABI issue
+    fn GetMaximumBitmapSize(&self) -> UINT32,
     fn IsSupported(
-        &mut self, renderTargetProperties: *const D2D1_RENDER_TARGET_PROPERTIES
+        &self, renderTargetProperties: *const D2D1_RENDER_TARGET_PROPERTIES
     ) -> BOOL
 });
 RIDL!(
 interface ID2D1BitmapRenderTarget(ID2D1BitmapRenderTargetVtbl)
     : ID2D1RenderTarget(ID2D1RenderTargetVtbl) {
-    fn GetBitmap(&mut self, bitmap: *mut *mut ID2D1Bitmap) -> HRESULT
+    fn GetBitmap(&self, bitmap: *mut *mut ID2D1Bitmap) -> HRESULT
 });
 RIDL!(
 interface ID2D1HwndRenderTarget(ID2D1HwndRenderTargetVtbl)
     : ID2D1RenderTarget(ID2D1RenderTargetVtbl) {
-    fn CheckWindowState(&mut self) -> D2D1_WINDOW_STATE,
-    fn Resize(&mut self, pixelSize: *const D2D1_SIZE_U) -> HRESULT,
-    fn GetHwnd(&mut self) -> HWND
+    fn CheckWindowState(&self) -> D2D1_WINDOW_STATE,
+    fn Resize(&self, pixelSize: *const D2D1_SIZE_U) -> HRESULT,
+    fn GetHwnd(&self) -> HWND
 });
 RIDL!(
 interface ID2D1GdiInteropRenderTarget(ID2D1GdiInteropRenderTargetVtbl): IUnknown(IUnknownVtbl) {
-    fn GetDC(&mut self, mode: D2D1_DC_INITIALIZE_MODE, hdc: *mut HDC) -> HRESULT,
-    fn ReleaseDC(&mut self, update: *const RECT) -> HRESULT
+    fn GetDC(&self, mode: D2D1_DC_INITIALIZE_MODE, hdc: *mut HDC) -> HRESULT,
+    fn ReleaseDC(&self, update: *const RECT) -> HRESULT
 });
 RIDL!(
 interface ID2D1DCRenderTarget(ID2D1DCRenderTargetVtbl): ID2D1RenderTarget(ID2D1RenderTargetVtbl) {
-    fn BindDC(&mut self, hDC: HDC, pSubRect: *const RECT) -> HRESULT
+    fn BindDC(&self, hDC: HDC, pSubRect: *const RECT) -> HRESULT
 });
 RIDL!(
 interface ID2D1Factory(ID2D1FactoryVtbl): IUnknown(IUnknownVtbl) {
-    fn ReloadSystemMetrics(&mut self) -> HRESULT,
-    fn GetDesktopDpi(&mut self, dpiX: *mut FLOAT, dpiY: *mut FLOAT) -> (),
+    fn ReloadSystemMetrics(&self) -> HRESULT,
+    fn GetDesktopDpi(&self, dpiX: *mut FLOAT, dpiY: *mut FLOAT) -> (),
     fn CreateRectangleGeometry(
-        &mut self, rectangle: *const D2D1_RECT_F,
+        &self, rectangle: *const D2D1_RECT_F,
         rectangleGeometry: *mut *mut ID2D1RectangleGeometry
     ) -> HRESULT,
     fn CreateRoundedRectangleGeometry(
-        &mut self, roundedRectangle: *const D2D1_ROUNDED_RECT,
+        &self, roundedRectangle: *const D2D1_ROUNDED_RECT,
         roundedRectangleGeometry: *mut *mut ID2D1RoundedRectangleGeometry
     ) -> HRESULT,
     fn CreateEllipseGeometry(
-        &mut self, ellipse: *const D2D1_ELLIPSE,
+        &self, ellipse: *const D2D1_ELLIPSE,
         ellipseGeometry: *mut *mut ID2D1EllipseGeometry
     ) -> HRESULT,
     fn CreateGeometryGroup(
-        &mut self, fillMode: D2D1_FILL_MODE, geometries: *mut *mut ID2D1Geometry,
+        &self, fillMode: D2D1_FILL_MODE, geometries: *mut *mut ID2D1Geometry,
         geometriesCount: UINT32, geometryGroup: *mut *mut ID2D1GeometryGroup
     ) -> HRESULT,
     fn CreateTransformedGeometry(
-        &mut self, sourceGeometry: *mut ID2D1Geometry, transform: *const D2D1_MATRIX_3X2_F,
+        &self, sourceGeometry: *mut ID2D1Geometry, transform: *const D2D1_MATRIX_3X2_F,
         transformedGeometry: *mut *mut ID2D1TransformedGeometry
     ) -> HRESULT,
     fn CreatePathGeometry(
-        &mut self, pathGeometry: *mut *mut ID2D1PathGeometry
+        &self, pathGeometry: *mut *mut ID2D1PathGeometry
     ) -> HRESULT,
     fn CreateStrokeStyle(
-        &mut self, strokeStyleProperties: *const D2D1_STROKE_STYLE_PROPERTIES,
+        &self, strokeStyleProperties: *const D2D1_STROKE_STYLE_PROPERTIES,
         dashes: *const FLOAT, dashesCount: UINT32, strokeStyle: *mut *mut ID2D1StrokeStyle
     ) -> HRESULT,
     fn CreateDrawingStateBlock(
-        &mut self, drawingStateDescription: *const D2D1_DRAWING_STATE_DESCRIPTION,
+        &self, drawingStateDescription: *const D2D1_DRAWING_STATE_DESCRIPTION,
         textRenderingParams: *mut IDWriteRenderingParams,
         drawingStateBlock: *mut *mut ID2D1DrawingStateBlock
     ) -> HRESULT,
     fn CreateWicBitmapRenderTarget(
-        &mut self, target: *mut IWICBitmap,
+        &self, target: *mut IWICBitmap,
         renderTargetProperties: *const D2D1_RENDER_TARGET_PROPERTIES,
         renderTarget: *mut *mut ID2D1RenderTarget
     ) -> HRESULT,
     fn CreateHwndRenderTarget(
-        &mut self, renderTargetProperties: *const D2D1_RENDER_TARGET_PROPERTIES,
+        &self, renderTargetProperties: *const D2D1_RENDER_TARGET_PROPERTIES,
         hwndRenderTargetProperties: *const D2D1_HWND_RENDER_TARGET_PROPERTIES,
         hwndRenderTarget: *mut *mut ID2D1HwndRenderTarget
     ) -> HRESULT,
     fn CreateDxgiSurfaceRenderTarget(
-        &mut self, dxgiSurface: *mut IDXGISurface,
+        &self, dxgiSurface: *mut IDXGISurface,
         renderTargetProperties: *const D2D1_RENDER_TARGET_PROPERTIES,
         renderTarget: *mut *mut ID2D1RenderTarget
     ) -> HRESULT,
     fn CreateDCRenderTarget(
-        &mut self, renderTargetProperties: *const D2D1_RENDER_TARGET_PROPERTIES,
+        &self, renderTargetProperties: *const D2D1_RENDER_TARGET_PROPERTIES,
         dcRenderTarget: *mut *mut ID2D1DCRenderTarget
     ) -> HRESULT
 });

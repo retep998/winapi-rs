@@ -376,8 +376,8 @@ STRUCT!{struct D3D_SHADER_MACRO {
 pub type LPD3D_SHADER_MACRO = *mut D3D_SHADER_MACRO;
 RIDL!(
 interface ID3D10Blob(ID3D10BlobVtbl): IUnknown(IUnknownVtbl) {
-    fn GetBufferPointer(&mut self) -> LPVOID,
-    fn GetBufferSize(&mut self) -> SIZE_T
+    fn GetBufferPointer(&self) -> LPVOID,
+    fn GetBufferSize(&self) -> SIZE_T
 }
 );
 pub type LPD3D10BLOB = *mut ID3D10Blob;
@@ -392,10 +392,10 @@ pub const D3D10_INCLUDE_SYSTEM: D3D_INCLUDE_TYPE = D3D_INCLUDE_SYSTEM;
 RIDL!(
 interface ID3DInclude(ID3DIncludeVtbl) {
     fn Open(
-        &mut self, IncludeType: D3D_INCLUDE_TYPE, pFileName: LPCSTR, pParentData: LPCVOID,
+        &self, IncludeType: D3D_INCLUDE_TYPE, pFileName: LPCSTR, pParentData: LPCVOID,
         ppData: *mut LPCVOID, pBytes: *mut UINT
     ) -> HRESULT,
-    fn Close(&mut self, pData: LPCVOID) -> HRESULT
+    fn Close(&self, pData: LPCVOID) -> HRESULT
 }
 );
 pub type LPD3DINCLUDE = *mut ID3DInclude;

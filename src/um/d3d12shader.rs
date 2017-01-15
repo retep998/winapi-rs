@@ -173,139 +173,139 @@ STRUCT!{struct D3D12_SIGNATURE_PARAMETER_DESC {
 
 RIDL!(
 interface ID3D12FunctionParameterReflection(ID3D12FunctionParameterReflectionVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D12_PARAMETER_DESC) -> HRESULT
+    fn GetDesc(&self, pDesc: *mut D3D12_PARAMETER_DESC) -> HRESULT
 });
 
 RIDL!(
 interface ID3D12FunctionReflection(ID3D12FunctionReflectionVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D12_FUNCTION_DESC) -> HRESULT,
+    fn GetDesc(&self, pDesc: *mut D3D12_FUNCTION_DESC) -> HRESULT,
     fn GetConstantBufferByIndex(
-        &mut self, BufferIndex: UINT
+        &self, BufferIndex: UINT
     ) -> *mut ID3D12ShaderReflectionConstantBuffer,
     fn GetConstantBufferByName(
-        &mut self, Name: LPCSTR
+        &self, Name: LPCSTR
     ) -> *mut ID3D12ShaderReflectionConstantBuffer,
     fn GetResourceBindingDesc(
-        &mut self, ResourceIndex: UINT, pDesc: *mut D3D12_SHADER_INPUT_BIND_DESC
+        &self, ResourceIndex: UINT, pDesc: *mut D3D12_SHADER_INPUT_BIND_DESC
     ) -> HRESULT,
     fn GetVariableByName(
-        &mut self, Name: LPCSTR
+        &self, Name: LPCSTR
     ) -> *mut ID3D12ShaderReflectionVariable,
     fn GetResourceBindingDescByName(
-        &mut self, Name: LPCSTR, pDesc: *mut D3D12_SHADER_INPUT_BIND_DESC
+        &self, Name: LPCSTR, pDesc: *mut D3D12_SHADER_INPUT_BIND_DESC
     ) -> HRESULT,
     fn GetFunctionParameter(
-        &mut self, ParameterIndex: INT
+        &self, ParameterIndex: INT
     ) -> *mut ID3D12FunctionParameterReflection
 });
 
 RIDL!(
 interface ID3D12LibraryReflection(ID3D12LibraryReflectionVtbl): IUnknown(IUnknownVtbl) {
     fn QueryInterface(
-        &mut self, iid: *const IID, ppv: *mut LPVOID
+        &self, iid: *const IID, ppv: *mut LPVOID
     ) -> HRESULT,
-    fn AddRef(&mut self) -> ULONG,
-    fn Release(&mut self) -> ULONG,
-    fn GetDesc(&mut self, pDesc: *mut D3D12_LIBRARY_DESC) -> HRESULT,
+    fn AddRef(&self) -> ULONG,
+    fn Release(&self) -> ULONG,
+    fn GetDesc(&self, pDesc: *mut D3D12_LIBRARY_DESC) -> HRESULT,
     fn GetFunctionByIndex(
-        &mut self, FunctionIndex: INT
+        &self, FunctionIndex: INT
     ) -> *mut ID3D12FunctionReflection
 });
 
 RIDL!(
 interface ID3D12ShaderReflectionConstantBuffer(ID3D12ShaderReflectionConstantBufferVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D12_SHADER_BUFFER_DESC) -> HRESULT,
+    fn GetDesc(&self, pDesc: *mut D3D12_SHADER_BUFFER_DESC) -> HRESULT,
     fn GetVariableByIndex(
-        &mut self, Index: UINT
+        &self, Index: UINT
     ) -> *mut ID3D12ShaderReflectionVariable,
     fn GetVariableByName(
-        &mut self, Name: LPCSTR
+        &self, Name: LPCSTR
     ) -> *mut ID3D12ShaderReflectionVariable
 });
 
 RIDL!(
 interface ID3D12ShaderReflectionType(ID3D12ShaderReflectionTypeVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D12_SHADER_TYPE_DESC) -> HRESULT,
+    fn GetDesc(&self, pDesc: *mut D3D12_SHADER_TYPE_DESC) -> HRESULT,
     fn GetMemberTypeByIndex(
-        &mut self, Index: UINT
+        &self, Index: UINT
     ) -> *mut ID3D12ShaderReflectionType,
     fn GetMemberTypeByName(
-        &mut self, Name: LPCSTR
+        &self, Name: LPCSTR
     ) -> *mut ID3D12ShaderReflectionType,
-    fn GetMemberTypeName(&mut self, Index: UINT) -> LPCSTR,
+    fn GetMemberTypeName(&self, Index: UINT) -> LPCSTR,
     fn IsEqual(
-        &mut self, pType: *mut ID3D12ShaderReflectionType
+        &self, pType: *mut ID3D12ShaderReflectionType
     ) -> HRESULT,
-    fn GetSubType(&mut self) -> *mut ID3D12ShaderReflectionType,
-    fn GetBaseClass(&mut self) -> *mut ID3D12ShaderReflectionType,
-    fn GetNumInterfaces(&mut self) -> UINT,
+    fn GetSubType(&self) -> *mut ID3D12ShaderReflectionType,
+    fn GetBaseClass(&self) -> *mut ID3D12ShaderReflectionType,
+    fn GetNumInterfaces(&self) -> UINT,
     fn GetInterfaceByIndex(
-        &mut self, uIndex: UINT
+        &self, uIndex: UINT
     ) -> *mut ID3D12ShaderReflectionType,
     fn IsOfType(
-        &mut self, pType: *mut ID3D12ShaderReflectionType
+        &self, pType: *mut ID3D12ShaderReflectionType
     ) -> HRESULT,
     fn ImplementsInterface(
-        &mut self, pBase: *mut ID3D12ShaderReflectionType
+        &self, pBase: *mut ID3D12ShaderReflectionType
     ) -> HRESULT
 });
 
 RIDL!(
 interface ID3D12ShaderReflectionVariable(ID3D12ShaderReflectionVariableVtbl) {
     fn GetDesc(
-        &mut self, pDesc: *mut D3D12_SHADER_VARIABLE_DESC
+        &self, pDesc: *mut D3D12_SHADER_VARIABLE_DESC
     ) -> HRESULT,
-    fn GetType(&mut self) -> *mut ID3D12ShaderReflectionType,
-    fn GetBuffer(&mut self) -> *mut ID3D12ShaderReflectionConstantBuffer,
-    fn GetInterfaceSlot(&mut self, uArrayIndex: UINT) -> UINT
+    fn GetType(&self) -> *mut ID3D12ShaderReflectionType,
+    fn GetBuffer(&self) -> *mut ID3D12ShaderReflectionConstantBuffer,
+    fn GetInterfaceSlot(&self, uArrayIndex: UINT) -> UINT
 });
 
 RIDL!(
 interface ID3D12ShaderReflection(ID3D12ShaderReflectionVtbl): IUnknown(IUnknownVtbl) {
     fn QueryInterface(
-        &mut self, iid: *const IID, ppv: *mut LPVOID
+        &self, iid: *const IID, ppv: *mut LPVOID
     ) -> HRESULT,
-    fn AddRef(&mut self) -> ULONG,
-    fn Release(&mut self) -> ULONG,
-    fn GetDesc(&mut self, pDesc: *mut D3D12_SHADER_DESC) -> HRESULT,
+    fn AddRef(&self) -> ULONG,
+    fn Release(&self) -> ULONG,
+    fn GetDesc(&self, pDesc: *mut D3D12_SHADER_DESC) -> HRESULT,
     fn GetConstantBufferByIndex(
-        &mut self, Index: UINT
+        &self, Index: UINT
     ) -> *mut ID3D12ShaderReflectionConstantBuffer,
     fn GetConstantBufferByName(
-        &mut self, Name: LPCSTR
+        &self, Name: LPCSTR
     ) -> *mut ID3D12ShaderReflectionConstantBuffer,
     fn GetResourceBindingDesc(
-        &mut self, ResourceIndex: UINT, pDesc: *mut D3D12_SHADER_INPUT_BIND_DESC
+        &self, ResourceIndex: UINT, pDesc: *mut D3D12_SHADER_INPUT_BIND_DESC
     ) -> HRESULT,
     fn GetInputParameterDesc(
-        &mut self, ParameterIndex: UINT, pDesc: *mut D3D12_SIGNATURE_PARAMETER_DESC
+        &self, ParameterIndex: UINT, pDesc: *mut D3D12_SIGNATURE_PARAMETER_DESC
     ) -> HRESULT,
     fn GetOutputParameterDesc(
-        &mut self, ParameterIndex: UINT, pDesc: *mut D3D12_SIGNATURE_PARAMETER_DESC
+        &self, ParameterIndex: UINT, pDesc: *mut D3D12_SIGNATURE_PARAMETER_DESC
     ) -> HRESULT,
     fn GetPatchConstantParameterDesc(
-        &mut self, ParameterIndex: UINT, pDesc: *mut D3D12_SIGNATURE_PARAMETER_DESC
+        &self, ParameterIndex: UINT, pDesc: *mut D3D12_SIGNATURE_PARAMETER_DESC
     ) -> HRESULT,
     fn GetVariableByName(
-        &mut self, Name: LPCSTR
+        &self, Name: LPCSTR
     ) -> *mut ID3D12ShaderReflectionVariable,
     fn GetResourceBindingDescByName(
-        &mut self, Name: LPCSTR, pDesc: *mut D3D12_SHADER_INPUT_BIND_DESC
+        &self, Name: LPCSTR, pDesc: *mut D3D12_SHADER_INPUT_BIND_DESC
     ) -> HRESULT,
-    fn GetMovInstructionCount(&mut self) -> UINT,
-    fn GetMovcInstructionCount(&mut self) -> UINT,
-    fn GetConversionInstructionCount(&mut self) -> UINT,
-    fn GetBitwiseInstructionCount(&mut self) -> UINT,
-    fn GetGSInputPrimitive(&mut self) -> D3D_PRIMITIVE,
-    fn IsSampleFrequencyShader(&mut self) -> BOOL,
-    fn GetNumInterfaceSlots(&mut self) -> UINT,
+    fn GetMovInstructionCount(&self) -> UINT,
+    fn GetMovcInstructionCount(&self) -> UINT,
+    fn GetConversionInstructionCount(&self) -> UINT,
+    fn GetBitwiseInstructionCount(&self) -> UINT,
+    fn GetGSInputPrimitive(&self) -> D3D_PRIMITIVE,
+    fn IsSampleFrequencyShader(&self) -> BOOL,
+    fn GetNumInterfaceSlots(&self) -> UINT,
     fn GetMinFeatureLevel(
-        &mut self, pLevel: *mut D3D_FEATURE_LEVEL
+        &self, pLevel: *mut D3D_FEATURE_LEVEL
     ) -> HRESULT,
     fn GetThreadGroupSize(
-        &mut self, pSizeX: *mut UINT, pSizeY: *mut UINT, pSizeZ: *mut UINT
+        &self, pSizeX: *mut UINT, pSizeY: *mut UINT, pSizeZ: *mut UINT
     ) -> UINT,
-    fn GetRequiresFlags(&mut self) -> UINT64
+    fn GetRequiresFlags(&self) -> UINT64
 });
 
 pub type D3D12_CBUFFER_TYPE = D3D_CBUFFER_TYPE;

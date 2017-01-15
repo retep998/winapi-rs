@@ -281,42 +281,42 @@ STRUCT!{struct WICBitmapPlane {
 RIDL!(
 interface IWICPalette(IWICPaletteVtbl): IUnknown(IUnknownVtbl) {
     fn InitializePredefined(
-        &mut self, ePaletteType: WICBitmapPaletteType, fAddTransparentColor: BOOL
+        &self, ePaletteType: WICBitmapPaletteType, fAddTransparentColor: BOOL
     ) -> HRESULT,
-    fn InitializeCustom(&mut self, pColors: *mut WICColor, cCount: UINT) -> HRESULT,
+    fn InitializeCustom(&self, pColors: *mut WICColor, cCount: UINT) -> HRESULT,
     fn InitializeFromBitmap(
-        &mut self, pISurface: *mut IWICBitmapSource, cCount: UINT, fAddTransparentColor: BOOL
+        &self, pISurface: *mut IWICBitmapSource, cCount: UINT, fAddTransparentColor: BOOL
     ) -> HRESULT,
-    fn InitializeFromPalette(&mut self, pIPalette: *mut IWICPalette) -> HRESULT,
-    fn GetType(&mut self, pePaletteType: *mut WICBitmapPaletteType) -> HRESULT,
-    fn GetColorCount(&mut self, pcCount: *mut UINT) -> HRESULT,
+    fn InitializeFromPalette(&self, pIPalette: *mut IWICPalette) -> HRESULT,
+    fn GetType(&self, pePaletteType: *mut WICBitmapPaletteType) -> HRESULT,
+    fn GetColorCount(&self, pcCount: *mut UINT) -> HRESULT,
     fn GetColors(
-        &mut self, cCount: UINT, pColros: *mut WICColor, pcActualColors: *mut UINT
+        &self, cCount: UINT, pColros: *mut WICColor, pcActualColors: *mut UINT
     ) -> HRESULT,
-    fn IsBlackWhite(&mut self, pfIsBlackWhite: *mut BOOL) -> HRESULT,
-    fn IsGrayscale(&mut self, pfIsGrayscale: *mut BOOL) -> HRESULT,
-    fn HasAlpha(&mut self, pfHasAlpha: *mut BOOL) -> HRESULT
+    fn IsBlackWhite(&self, pfIsBlackWhite: *mut BOOL) -> HRESULT,
+    fn IsGrayscale(&self, pfIsGrayscale: *mut BOOL) -> HRESULT,
+    fn HasAlpha(&self, pfHasAlpha: *mut BOOL) -> HRESULT
 });
 RIDL!(
 interface IWICBitmapSource(IWICBitmapSourceVtbl): IUnknown(IUnknownVtbl) {
-    fn GetSize(&mut self, puiWidth: *mut UINT, puiHeight: UINT) -> HRESULT,
-    fn GetPixelFormat(&mut self, pPixelFormat: *mut WICPixelFormatGUID) -> HRESULT,
-    fn GetResolution(&mut self, pDpiX: *mut f64, pDpiY: *mut f64) -> HRESULT,
-    fn CopyPalette(&mut self, pIPalette: *mut IWICPalette) -> HRESULT,
+    fn GetSize(&self, puiWidth: *mut UINT, puiHeight: UINT) -> HRESULT,
+    fn GetPixelFormat(&self, pPixelFormat: *mut WICPixelFormatGUID) -> HRESULT,
+    fn GetResolution(&self, pDpiX: *mut f64, pDpiY: *mut f64) -> HRESULT,
+    fn CopyPalette(&self, pIPalette: *mut IWICPalette) -> HRESULT,
     fn CopyPixels(
-        &mut self, prc: *const WICRect, cbStride: UINT, cbBufferSize: UINT,
+        &self, prc: *const WICRect, cbStride: UINT, cbBufferSize: UINT,
         pbBuffer: *mut BYTE
     ) -> HRESULT
 });
 RIDL!(
 interface IWICFormatConverter(IWICFormatConverterVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
-        &mut self, pISource: *mut IWICBitmapSource, dstFormat: REFWICPixelFormatGUID,
+        &self, pISource: *mut IWICBitmapSource, dstFormat: REFWICPixelFormatGUID,
         dither: WICBitmapDitherType, pIPalette: *mut IWICPalette, alphaThreasholdPercent: f64,
         paletteTranslate: WICBitmapPaletteType
     ) -> HRESULT,
     fn CanConvert(
-        &mut self, srcPixelFormat: REFWICPixelFormatGUID, dstPixelFormat: REFWICPixelFormatGUID,
+        &self, srcPixelFormat: REFWICPixelFormatGUID, dstPixelFormat: REFWICPixelFormatGUID,
         pfCanConvert: *mut BOOL
     ) -> HRESULT
 });
@@ -324,47 +324,47 @@ RIDL!(
 interface IWICPlanarFormatConverter(IWICPlanarFormatConverterVtbl)
     : IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
-        &mut self, ppPlanes: *mut *mut IWICBitmapSource, cPlanes: UINT,
+        &self, ppPlanes: *mut *mut IWICBitmapSource, cPlanes: UINT,
         dstFormat: REFWICPixelFormatGUID, dither: WICBitmapDitherType, pIPalette: *mut IWICPalette,
         alphaThreasholdPercent: f64, paletteTranslate: WICBitmapPaletteType
     ) -> HRESULT,
     fn CanConvert(
-        &mut self, pSrcPixelFormats: *const WICPixelFormatGUID, cSrcPlanes: UINT,
+        &self, pSrcPixelFormats: *const WICPixelFormatGUID, cSrcPlanes: UINT,
         dstPixelFormat: REFWICPixelFormatGUID, pfCanConvert: *mut BOOL
     ) -> HRESULT
 });
 RIDL!(
 interface IWICBitmapScaler(IWICBitmapScalerVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
-        &mut self, pISource: *mut IWICBitmapSource, uiWidth: UINT, uiHeight: UINT,
+        &self, pISource: *mut IWICBitmapSource, uiWidth: UINT, uiHeight: UINT,
         mode: WICBitmapInterpolationMode
     ) -> HRESULT
 });
 RIDL!(
 interface IWICBitmapClipper(IWICBitmapClipperVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
-    fn Initialize(&mut self, pISource: *mut IWICBitmapSource, prc: *const WICRect) -> HRESULT
+    fn Initialize(&self, pISource: *mut IWICBitmapSource, prc: *const WICRect) -> HRESULT
 });
 RIDL!(
 interface IWICBitmapFlipRotator(IWICBitmapFlipRotatorVtbl)
     : IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
-        &mut self, pISource: *mut IWICBitmapSource, options: WICBitmapTransformOptions
+        &self, pISource: *mut IWICBitmapSource, options: WICBitmapTransformOptions
     ) -> HRESULT
 });
 RIDL!(
 interface IWICBitmapLock(IWICBitmapLockVtbl): IUnknown(IUnknownVtbl) {
-    fn GetSize(&mut self, puiWidth: *mut UINT, puiHeight: *mut UINT) -> HRESULT,
-    fn GetStride(&mut self, pcbStride: *mut UINT) -> HRESULT,
+    fn GetSize(&self, puiWidth: *mut UINT, puiHeight: *mut UINT) -> HRESULT,
+    fn GetStride(&self, pcbStride: *mut UINT) -> HRESULT,
     fn GetDataPointer(
-        &mut self, pcbBufferSize: *mut UINT, ppbData: *mut WICInProcPointer
+        &self, pcbBufferSize: *mut UINT, ppbData: *mut WICInProcPointer
     ) -> HRESULT,
-    fn GetPixelFormat(&mut self, pPixelFormat: *mut WICPixelFormatGUID) -> HRESULT
+    fn GetPixelFormat(&self, pPixelFormat: *mut WICPixelFormatGUID) -> HRESULT
 });
 RIDL!(
 interface IWICBitmap(IWICBitmapVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Lock(
-        &mut self, prcLock: *const WICRect, flags: DWORD, ppILock: *mut *mut IWICBitmapLock
+        &self, prcLock: *const WICRect, flags: DWORD, ppILock: *mut *mut IWICBitmapLock
     ) -> HRESULT,
-    fn SetPalette(&mut self, pIPalette: *mut IWICPalette) -> HRESULT,
-    fn SetResolution(&mut self, dpiX: f64, dpiY: f64) -> HRESULT
+    fn SetPalette(&self, pIPalette: *mut IWICPalette) -> HRESULT,
+    fn SetResolution(&self, dpiX: f64, dpiY: f64) -> HRESULT
 });

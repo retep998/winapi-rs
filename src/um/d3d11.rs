@@ -541,14 +541,14 @@ STRUCT!{struct D3D11_BOX {
     back: UINT,
 }}
 RIDL!{interface ID3D11DeviceChild(ID3D11DeviceChildVtbl): IUnknown(IUnknownVtbl) {
-    fn GetDevice(&mut self, ppDevice: *mut *mut ID3D11Device) -> (),
+    fn GetDevice(&self, ppDevice: *mut *mut ID3D11Device) -> (),
     fn GetPrivateData(
-        &mut self, guid: REFGUID, pDataSize: *mut UINT, pData: *mut c_void
+        &self, guid: REFGUID, pDataSize: *mut UINT, pData: *mut c_void
     ) -> HRESULT,
     fn SetPrivateData(
-        &mut self, guid: REFGUID, DataSize: UINT, pData: *const c_void
+        &self, guid: REFGUID, DataSize: UINT, pData: *const c_void
     ) -> HRESULT,
-    fn SetPrivateDataInterface(&mut self, guid: REFGUID, pData: *const IUnknown) -> HRESULT
+    fn SetPrivateDataInterface(&self, guid: REFGUID, pData: *const IUnknown) -> HRESULT
 }}
 ENUM!{enum D3D11_COMPARISON_FUNC {
     D3D11_COMPARISON_NEVER = 1,
@@ -592,7 +592,7 @@ STRUCT!{struct D3D11_DEPTH_STENCIL_DESC {
 }}
 RIDL!{interface ID3D11DepthStencilState(ID3D11DepthStencilStateVtbl)
     : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_DEPTH_STENCIL_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_DEPTH_STENCIL_DESC) -> ()
 }}
 ENUM!{enum D3D11_BLEND {
     D3D11_BLEND_ZERO = 1,
@@ -644,7 +644,7 @@ STRUCT!{struct D3D11_BLEND_DESC {
     RenderTarget: [D3D11_RENDER_TARGET_BLEND_DESC; 8],
 }}
 RIDL!{interface ID3D11BlendState(ID3D11BlendStateVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_BLEND_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_BLEND_DESC) -> ()
 }}
 STRUCT!{struct D3D11_RASTERIZER_DESC {
     FillMode: D3D11_FILL_MODE,
@@ -660,7 +660,7 @@ STRUCT!{struct D3D11_RASTERIZER_DESC {
 }}
 RIDL!{interface ID3D11RasterizerState(ID3D11RasterizerStateVtbl)
     : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_RASTERIZER_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_RASTERIZER_DESC) -> ()
 }}
 STRUCT!{struct D3D11_SUBRESOURCE_DATA {
     pSysMem: *const c_void,
@@ -673,9 +673,9 @@ STRUCT!{struct D3D11_MAPPED_SUBRESOURCE {
     DepthPitch: UINT,
 }}
 RIDL!{interface ID3D11Resource(ID3D11ResourceVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
-    fn GetType(&mut self, pResourceDimension: *mut D3D11_RESOURCE_DIMENSION) -> (),
-    fn SetEvictionPriority(&mut self, EvictionPriority: UINT) -> (),
-    fn GetEvictionPriority(&mut self) -> UINT
+    fn GetType(&self, pResourceDimension: *mut D3D11_RESOURCE_DIMENSION) -> (),
+    fn SetEvictionPriority(&self, EvictionPriority: UINT) -> (),
+    fn GetEvictionPriority(&self) -> UINT
 }}
 STRUCT!{struct D3D11_BUFFER_DESC {
     ByteWidth: UINT,
@@ -686,7 +686,7 @@ STRUCT!{struct D3D11_BUFFER_DESC {
     StructureByteStride: UINT,
 }}
 RIDL!{interface ID3D11Buffer(ID3D11BufferVtbl): ID3D11Resource(ID3D11ResourceVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_BUFFER_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_BUFFER_DESC) -> ()
 }}
 STRUCT!{struct D3D11_TEXTURE1D_DESC {
     Width: UINT,
@@ -699,7 +699,7 @@ STRUCT!{struct D3D11_TEXTURE1D_DESC {
     MiscFlags: UINT,
 }}
 RIDL!{interface ID3D11Texture1D(ID3D11Texture1DVtbl): ID3D11Resource(ID3D11ResourceVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_TEXTURE1D_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_TEXTURE1D_DESC) -> ()
 }}
 STRUCT!{struct D3D11_TEXTURE2D_DESC {
     Width: UINT,
@@ -714,7 +714,7 @@ STRUCT!{struct D3D11_TEXTURE2D_DESC {
     MiscFlags: UINT,
 }}
 RIDL!{interface ID3D11Texture2D(ID3D11Texture2DVtbl): ID3D11Resource(ID3D11ResourceVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_TEXTURE2D_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_TEXTURE2D_DESC) -> ()
 }}
 STRUCT!{struct D3D11_TEXTURE3D_DESC {
     Width: UINT,
@@ -728,7 +728,7 @@ STRUCT!{struct D3D11_TEXTURE3D_DESC {
     MiscFlags: UINT,
 }}
 RIDL!{interface ID3D11Texture3D(ID3D11Texture3DVtbl): ID3D11Resource(ID3D11ResourceVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_TEXTURE3D_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_TEXTURE3D_DESC) -> ()
 }}
 ENUM!{enum D3D11_TEXTURECUBE_FACE {
     D3D11_TEXTURECUBE_FACE_POSITIVE_X = 0,
@@ -739,7 +739,7 @@ ENUM!{enum D3D11_TEXTURECUBE_FACE {
     D3D11_TEXTURECUBE_FACE_NEGATIVE_Z = 5,
 }}
 RIDL!{interface ID3D11View(ID3D11ViewVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
-    fn GetResource(&mut self, ppResource: *mut *mut ID3D11Resource) -> ()
+    fn GetResource(&self, ppResource: *mut *mut ID3D11Resource) -> ()
 }}
 STRUCT!{struct D3D11_BUFFER_SRV {
     u1: UINT,
@@ -819,7 +819,7 @@ UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, TextureCubeArray, TextureCubeArray_mu
     D3D11_TEXCUBE_ARRAY_SRV}
 UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, BufferEx, BufferEx_mut, D3D11_BUFFEREX_SRV}
 RIDL!{interface ID3D11ShaderResourceView(ID3D11ShaderResourceViewVtbl): ID3D11View(ID3D11ViewVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_SHADER_RESOURCE_VIEW_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_SHADER_RESOURCE_VIEW_DESC) -> ()
 }}
 STRUCT!{struct D3D11_BUFFER_RTV {
     u1: UINT,
@@ -874,7 +874,7 @@ UNION!{D3D11_RENDER_TARGET_VIEW_DESC, u, Texture2DMSArray,Texture2DMSArray_mut,
     D3D11_TEX2DMS_ARRAY_RTV}
 UNION!{D3D11_RENDER_TARGET_VIEW_DESC, u, Texture3D, Texture3D_mut, D3D11_TEX3D_RTV}
 RIDL!{interface ID3D11RenderTargetView(ID3D11RenderTargetViewVtbl): ID3D11View(ID3D11ViewVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_RENDER_TARGET_VIEW_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_RENDER_TARGET_VIEW_DESC) -> ()
 }}
 STRUCT!{struct D3D11_TEX1D_DSV {
     MipSlice: UINT,
@@ -919,7 +919,7 @@ UNION!{D3D11_DEPTH_STENCIL_VIEW_DESC, u, Texture2DMS, Texture2DMS_mut, D3D11_TEX
 UNION!{D3D11_DEPTH_STENCIL_VIEW_DESC, u, Texture2DMSArray, Texture2DMSArray_mut,
     D3D11_TEX2DMS_ARRAY_DSV}
 RIDL!{interface ID3D11DepthStencilView(ID3D11DepthStencilViewVtbl): ID3D11View(ID3D11ViewVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_DEPTH_STENCIL_VIEW_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_DEPTH_STENCIL_VIEW_DESC) -> ()
 }}
 ENUM!{enum D3D11_BUFFER_UAV_FLAG {
     D3D11_BUFFER_UAV_FLAG_RAW = 0x1,
@@ -966,7 +966,7 @@ UNION!{D3D11_UNORDERED_ACCESS_VIEW_DESC, u, Texture2DArray, Texture2DArray_mut,
     D3D11_TEX2D_ARRAY_UAV}
 UNION!{D3D11_UNORDERED_ACCESS_VIEW_DESC, u, Texture3D, Texture3D_mut, D3D11_TEX3D_UAV}
 RIDL!{interface ID3D11UnorderedAccessView(ID3D11UnorderedAccessViewVtbl): ID3D11View(ID3D11ViewVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_UNORDERED_ACCESS_VIEW_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_UNORDERED_ACCESS_VIEW_DESC) -> ()
 }}
 RIDL!{interface ID3D11VertexShader(ID3D11VertexShaderVtbl)
     : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
@@ -1058,7 +1058,7 @@ STRUCT!{struct D3D11_SAMPLER_DESC {
     MaxLOD: FLOAT,
 }}
 RIDL!{interface ID3D11SamplerState(ID3D11SamplerStateVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_SAMPLER_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_SAMPLER_DESC) -> ()
 }}
 ENUM!{enum D3D11_FORMAT_SUPPORT {
     D3D11_FORMAT_SUPPORT_BUFFER = 0x1,
@@ -1108,7 +1108,7 @@ ENUM!{enum D3D11_FORMAT_SUPPORT2 {
     D3D11_FORMAT_SUPPORT2_MULTIPLANE_OVERLAY = 0x4000,
 }}
 RIDL!{interface ID3D11Asynchronous(ID3D11AsynchronousVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
-    fn GetDataSize(&mut self) -> UINT
+    fn GetDataSize(&self) -> UINT
 }}
 ENUM!{enum D3D11_ASYNC_GETDATA_FLAG {
     D3D11_ASYNC_GETDATA_DONOTFLUSH = 0x1,
@@ -1139,7 +1139,7 @@ STRUCT!{struct D3D11_QUERY_DESC {
     MiscFlags: UINT,
 }}
 RIDL!{interface ID3D11Query(ID3D11QueryVtbl): ID3D11Asynchronous(ID3D11AsynchronousVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_QUERY_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_QUERY_DESC) -> ()
 }}
 RIDL!{interface ID3D11Predicate(ID3D11PredicateVtbl): ID3D11Query(ID3D11QueryVtbl) {}}
 STRUCT!{struct D3D11_QUERY_DATA_TIMESTAMP_DISJOINT {
@@ -1182,7 +1182,7 @@ STRUCT!{struct D3D11_COUNTER_INFO {
     NumDetectableParallelUnits: UINT8,
 }}
 RIDL!{interface ID3D11Counter(ID3D11CounterVtbl): ID3D11Asynchronous(ID3D11AsynchronousVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_COUNTER_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_COUNTER_DESC) -> ()
 }}
 ENUM!{enum D3D11_STANDARD_MULTISAMPLE_QUALITY_LEVELS {
     D3D11_STANDARD_MULTISAMPLE_PATTERN = 0xffffffff,
@@ -1203,22 +1203,22 @@ STRUCT!{struct D3D11_CLASS_INSTANCE_DESC {
     Created: BOOL,
 }}
 RIDL!{interface ID3D11ClassInstance(ID3D11ClassInstanceVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
-    fn GetClassLinkage(&mut self, ppLinkage: *mut *mut ID3D11ClassLinkage) -> (),
-    fn GetDesc(&mut self, pDesc: *mut D3D11_CLASS_INSTANCE_DESC) -> (),
-    fn GetInstanceName(&mut self, pInstanceName: LPSTR, pBufferLength: *mut SIZE_T) -> (),
-    fn GetTypeName(&mut self, pTypeName: LPSTR, pBufferLength: *mut SIZE_T) -> ()
+    fn GetClassLinkage(&self, ppLinkage: *mut *mut ID3D11ClassLinkage) -> (),
+    fn GetDesc(&self, pDesc: *mut D3D11_CLASS_INSTANCE_DESC) -> (),
+    fn GetInstanceName(&self, pInstanceName: LPSTR, pBufferLength: *mut SIZE_T) -> (),
+    fn GetTypeName(&self, pTypeName: LPSTR, pBufferLength: *mut SIZE_T) -> ()
 }}
 RIDL!{interface ID3D11ClassLinkage(ID3D11ClassLinkageVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetClassInstance(
-        &mut self, GetClassInstance: LPCSTR, InstanceIndex: UINT,
+        &self, GetClassInstance: LPCSTR, InstanceIndex: UINT,
         ppInstance: *mut *mut ID3D11ClassInstance
     ) -> HRESULT,
     fn CreateClassInstance(
-        &mut self, pClassTypeName: LPCSTR, ConstantBufferOffset: UINT, ConstantVectorOffset: UINT, TextureOffset: UINT, SamplerOffset: UINT, ppInstance: *mut *mut ID3D11ClassInstance
+        &self, pClassTypeName: LPCSTR, ConstantBufferOffset: UINT, ConstantVectorOffset: UINT, TextureOffset: UINT, SamplerOffset: UINT, ppInstance: *mut *mut ID3D11ClassInstance
     ) -> HRESULT
 }}
 RIDL!{interface ID3D11CommandList(ID3D11CommandListVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
-    fn GetContextFlags(&mut self) -> UINT
+    fn GetContextFlags(&self) -> UINT
 }}
 ENUM!{enum D3D11_FEATURE {
     D3D11_FEATURE_THREADING = 0,
@@ -1339,330 +1339,330 @@ STRUCT!{struct D3D11_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT {
 }}
 RIDL!{interface ID3D11DeviceContext(ID3D11DeviceContextVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn VSSetConstantBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *const *mut ID3D11Buffer
+        &self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *const *mut ID3D11Buffer
     ) -> (),
     fn PSSetShaderResources(
-        &mut self, StartSlot: UINT, NumViews: UINT,
+        &self, StartSlot: UINT, NumViews: UINT,
         ppShaderResourceViews: *const *mut ID3D11ShaderResourceView
     ) -> (),
     fn PSSetShader(
-        &mut self, pPixelShader: *mut ID3D11PixelShader,
+        &self, pPixelShader: *mut ID3D11PixelShader,
         ppClassInstances: *const *mut ID3D11ClassInstance, NumClassInstances: UINT
     ) -> (),
     fn PSSetSamplers(
-        &mut self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *const *mut ID3D11SamplerState
+        &self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *const *mut ID3D11SamplerState
     ) -> (),
     fn VSSetShader(
-        &mut self, pVertexShader: *mut ID3D11VertexShader,
+        &self, pVertexShader: *mut ID3D11VertexShader,
         ppClassInstances: *const *mut ID3D11ClassInstance, NumClassInstances: UINT
     ) -> (),
     fn DrawIndexed(
-        &mut self, IndexCount: UINT, StartIndexLocation: UINT, BaseVertexLocation: INT
+        &self, IndexCount: UINT, StartIndexLocation: UINT, BaseVertexLocation: INT
     ) -> (),
-    fn Draw(&mut self, VertexCount: UINT, StartVertexLocation: UINT) -> (),
+    fn Draw(&self, VertexCount: UINT, StartVertexLocation: UINT) -> (),
     fn Map(
-        &mut self, pResource: *mut ID3D11Resource, Subresource: UINT, MapType: D3D11_MAP,
+        &self, pResource: *mut ID3D11Resource, Subresource: UINT, MapType: D3D11_MAP,
         MapFlags: UINT, pMappedResource: *mut D3D11_MAPPED_SUBRESOURCE
     ) -> HRESULT,
-    fn Unmap(&mut self, pResource: *mut ID3D11Resource, Subresource: UINT) -> (),
+    fn Unmap(&self, pResource: *mut ID3D11Resource, Subresource: UINT) -> (),
     fn PSSetConstantBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *const *mut ID3D11Buffer
+        &self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *const *mut ID3D11Buffer
     ) -> (),
-    fn IASetInputLayout(&mut self, pInputLayout: *mut ID3D11InputLayout) -> (),
+    fn IASetInputLayout(&self, pInputLayout: *mut ID3D11InputLayout) -> (),
     fn IASetVertexBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppVertexBuffers: *const *mut ID3D11Buffer,
+        &self, StartSlot: UINT, NumBuffers: UINT, ppVertexBuffers: *const *mut ID3D11Buffer,
         pStrides: *const UINT, pOffsets: *const UINT
     ) -> (),
     fn IASetIndexBuffer(
-        &mut self, pIndexBuffer: *mut ID3D11Buffer, Format: DXGI_FORMAT, Offset: UINT
+        &self, pIndexBuffer: *mut ID3D11Buffer, Format: DXGI_FORMAT, Offset: UINT
     ) -> (),
     fn DrawIndexedInstanced(
-        &mut self, IndexCountPerInstance: UINT, InstanceCount: UINT, StartIndexLocation: UINT,
+        &self, IndexCountPerInstance: UINT, InstanceCount: UINT, StartIndexLocation: UINT,
         BaseVertexLocation: INT, StartInstanceLocation: UINT
     ) -> (),
     fn DrawInstanced(
-        &mut self, VertexCountPerInstance: UINT, InstanceCount: UINT, StartVertexLocation: UINT,
+        &self, VertexCountPerInstance: UINT, InstanceCount: UINT, StartVertexLocation: UINT,
         StartInstanceLocation: UINT
     ) -> (),
     fn GSSetConstantBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *const *mut ID3D11Buffer
+        &self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *const *mut ID3D11Buffer
     ) -> (),
     fn GSSetShader(
-        &mut self, pShader: *mut ID3D11GeometryShader,
+        &self, pShader: *mut ID3D11GeometryShader,
         ppClassInstances: *const *mut ID3D11ClassInstance, NumClassInstances: UINT
     ) -> (),
-    fn IASetPrimitiveTopology(&mut self, Topology: D3D11_PRIMITIVE_TOPOLOGY) -> (),
+    fn IASetPrimitiveTopology(&self, Topology: D3D11_PRIMITIVE_TOPOLOGY) -> (),
     fn VSSetShaderResources(
-        &mut self, StartSlot: UINT, NumViews: UINT,
+        &self, StartSlot: UINT, NumViews: UINT,
         ppShaderResourceViews: *const *mut ID3D11ShaderResourceView
     ) -> (),
     fn VSSetSamplers(
-        &mut self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *const *mut ID3D11SamplerState
+        &self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *const *mut ID3D11SamplerState
     ) -> (),
-    fn Begin(&mut self, pAsync: *mut ID3D11Asynchronous) -> (),
-    fn End(&mut self, pAsync: *mut ID3D11Asynchronous) -> (),
+    fn Begin(&self, pAsync: *mut ID3D11Asynchronous) -> (),
+    fn End(&self, pAsync: *mut ID3D11Asynchronous) -> (),
     fn GetData(
-        &mut self,  pAsync: *mut ID3D11Asynchronous, pData: *mut c_void, DataSize: UINT,
+        &self,  pAsync: *mut ID3D11Asynchronous, pData: *mut c_void, DataSize: UINT,
         GetDataFlags: UINT
     ) -> HRESULT,
     fn SetPredication(
-        &mut self, pPredicate: *mut ID3D11Predicate, PredicateValue: BOOL
+        &self, pPredicate: *mut ID3D11Predicate, PredicateValue: BOOL
     ) -> (),
     fn GSSetShaderResources(
-        &mut self, StartSlot: UINT, NumViews: UINT,
+        &self, StartSlot: UINT, NumViews: UINT,
         ppShaderResourceViews: *const *mut ID3D11ShaderResourceView
     ) -> (),
     fn GSSetSamplers(
-        &mut self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *const *mut ID3D11SamplerState
+        &self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *const *mut ID3D11SamplerState
     ) -> (),
     fn OMSetRenderTargets(
-        &mut self, NumViews: UINT, ppRenderTargetViews: *const *mut ID3D11RenderTargetView,
+        &self, NumViews: UINT, ppRenderTargetViews: *const *mut ID3D11RenderTargetView,
         pDepthStencilView: *mut ID3D11DepthStencilView
     ) -> (),
     fn OMSetRenderTargetsAndUnorderedAccessViews(
-        &mut self, NumRTVs: UINT, ppRenderTargetViews: *const *mut ID3D11RenderTargetView,
+        &self, NumRTVs: UINT, ppRenderTargetViews: *const *mut ID3D11RenderTargetView,
         pDepthStencilView: *mut ID3D11DepthStencilView, UAVStartSlot: UINT, NumUAVs: UINT,
         ppUnorderedAccessViews: *const *mut ID3D11UnorderedAccessView,
         pUAVInitialCounts: *const UINT
     ) -> (),
     fn OMSetBlendState(
-        &mut self, pBlendState: *mut ID3D11BlendState, BlendFactor: &[FLOAT; 4], SampleMask: UINT
+        &self, pBlendState: *mut ID3D11BlendState, BlendFactor: &[FLOAT; 4], SampleMask: UINT
     ) -> (),
     fn OMSetDepthStencilState(
-        &mut self, pDepthStencilState: *mut ID3D11DepthStencilState, StencilRef: UINT
+        &self, pDepthStencilState: *mut ID3D11DepthStencilState, StencilRef: UINT
     ) -> (),
     fn SOSetTargets(
-        &mut self, NumBuffers: UINT, ppSOTargets: *const *mut ID3D11Buffer, pOffsets: *const UINT
+        &self, NumBuffers: UINT, ppSOTargets: *const *mut ID3D11Buffer, pOffsets: *const UINT
     ) -> (),
-    fn DrawAuto(&mut self) -> (),
+    fn DrawAuto(&self) -> (),
     fn DrawIndexedInstancedIndirect(
-        &mut self, pBufferForArgs: *mut ID3D11Buffer, AlignedByteOffsetForArgs: UINT
+        &self, pBufferForArgs: *mut ID3D11Buffer, AlignedByteOffsetForArgs: UINT
     ) -> (),
     fn DrawInstancedIndirect(
-        &mut self, pBufferForArgs: *mut ID3D11Buffer, AlignedByteOffsetForArgs: UINT
+        &self, pBufferForArgs: *mut ID3D11Buffer, AlignedByteOffsetForArgs: UINT
     ) -> (),
     fn Dispatch(
-        &mut self, ThreadGroupCountX: UINT, ThreadGroupCountY: UINT, ThreadGroupCountZ: UINT
+        &self, ThreadGroupCountX: UINT, ThreadGroupCountY: UINT, ThreadGroupCountZ: UINT
     ) -> (),
     fn DispatchIndirect(
-        &mut self, pBufferForArgs: *mut ID3D11Buffer, AlignedByteOffsetForArgs: UINT
+        &self, pBufferForArgs: *mut ID3D11Buffer, AlignedByteOffsetForArgs: UINT
     ) -> (),
-    fn RSSetState(&mut self, pRasterizerState: *mut ID3D11RasterizerState) -> (),
-    fn RSSetViewports(&mut self, NumViewports: UINT, pViewports: *const D3D11_VIEWPORT) -> (),
-    fn RSSetScissorRects(&mut self, NumRects: UINT, pRects: *const D3D11_RECT) -> (),
+    fn RSSetState(&self, pRasterizerState: *mut ID3D11RasterizerState) -> (),
+    fn RSSetViewports(&self, NumViewports: UINT, pViewports: *const D3D11_VIEWPORT) -> (),
+    fn RSSetScissorRects(&self, NumRects: UINT, pRects: *const D3D11_RECT) -> (),
     fn CopySubresourceRegion(
-        &mut self, pDstResource: *mut ID3D11Resource, DstSubresource: UINT, DstX: UINT, DstY: UINT,
+        &self, pDstResource: *mut ID3D11Resource, DstSubresource: UINT, DstX: UINT, DstY: UINT,
         DstZ: UINT, pSrcResource: *mut ID3D11Resource, SrcSubresource: UINT,
         pSrcBox: *const D3D11_BOX
     ) -> (),
     fn CopyResource(
-        &mut self, pDstResource: *mut ID3D11Resource, pSrcResource: *mut ID3D11Resource
+        &self, pDstResource: *mut ID3D11Resource, pSrcResource: *mut ID3D11Resource
     ) -> (),
     fn UpdateSubresource(
-        &mut self, pDstResource: *mut ID3D11Resource, DstSubresource: UINT,
+        &self, pDstResource: *mut ID3D11Resource, DstSubresource: UINT,
         pDstBox: *const D3D11_BOX, pSrcData: *const c_void, SrcRowPitch: UINT, SrcDepthPitch: UINT
     ) -> (),
     fn CopyStructureCount(
-        &mut self, pDstBuffer: *mut ID3D11Buffer, DstAlignedByteOffset: UINT,
+        &self, pDstBuffer: *mut ID3D11Buffer, DstAlignedByteOffset: UINT,
         pSrcView: *mut ID3D11UnorderedAccessView
     ) -> (),
     fn ClearRenderTargetView(
-        &mut self, pRenderTargetView: *mut ID3D11RenderTargetView, ColorRGBA: &[FLOAT; 4]
+        &self, pRenderTargetView: *mut ID3D11RenderTargetView, ColorRGBA: &[FLOAT; 4]
     ) -> (),
     fn ClearUnorderedAccessViewUint(
-        &mut self, pUnorderedAccessView: *mut ID3D11UnorderedAccessView, Values: &[UINT; 4]
+        &self, pUnorderedAccessView: *mut ID3D11UnorderedAccessView, Values: &[UINT; 4]
     ) -> (),
     fn ClearUnorderedAccessViewFloat(
-        &mut self, pUnorderedAccessView: *mut ID3D11UnorderedAccessView, Values: &[FLOAT; 4]
+        &self, pUnorderedAccessView: *mut ID3D11UnorderedAccessView, Values: &[FLOAT; 4]
     ) -> (),
     fn ClearDepthStencilView(
-        &mut self, pDepthStencilView: *mut ID3D11DepthStencilView, ClearFlags: UINT, Depth: FLOAT,
+        &self, pDepthStencilView: *mut ID3D11DepthStencilView, ClearFlags: UINT, Depth: FLOAT,
         Stencil: UINT8
     ) -> (),
-    fn GenerateMips(&mut self, pShaderResourceView: *mut ID3D11ShaderResourceView) -> (),
-    fn SetResourceMinLOD(&mut self, pResource: *mut ID3D11Resource, MinLOD: FLOAT) -> (),
-    fn GetResourceMinLOD(&mut self, pResource: *mut ID3D11Resource) -> FLOAT,
+    fn GenerateMips(&self, pShaderResourceView: *mut ID3D11ShaderResourceView) -> (),
+    fn SetResourceMinLOD(&self, pResource: *mut ID3D11Resource, MinLOD: FLOAT) -> (),
+    fn GetResourceMinLOD(&self, pResource: *mut ID3D11Resource) -> FLOAT,
     fn ResolveSubresource(
-        &mut self, pDstResource: *mut ID3D11Resource, DstSubresource: UINT,
+        &self, pDstResource: *mut ID3D11Resource, DstSubresource: UINT,
         pSrcResource: *mut ID3D11Resource, SrcSubresource: UINT, Format: DXGI_FORMAT
     ) -> (),
     fn ExecuteCommandList(
-        &mut self, pCommandList: *mut ID3D11CommandList,
+        &self, pCommandList: *mut ID3D11CommandList,
         RestoreContextState: BOOL
     ) -> (),
     fn HSSetShaderResources(
-        &mut self, StartSlot: UINT, NumViews: UINT,
+        &self, StartSlot: UINT, NumViews: UINT,
         ppShaderResourceViews: *const *mut ID3D11ShaderResourceView
     ) -> (),
     fn HSSetShader(
-        &mut self, pHullShader: *mut ID3D11HullShader,
+        &self, pHullShader: *mut ID3D11HullShader,
         ppClassInstances: *const *mut ID3D11ClassInstance, NumClassInstances: UINT
     ) -> (),
     fn HSSetSamplers(
-        &mut self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *const *mut ID3D11SamplerState
+        &self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *const *mut ID3D11SamplerState
     ) -> (),
     fn HSSetConstantBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *const *mut ID3D11Buffer
+        &self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *const *mut ID3D11Buffer
     ) -> (),
     fn DSSetShaderResources(
-        &mut self, StartSlot: UINT, NumViews: UINT,
+        &self, StartSlot: UINT, NumViews: UINT,
         ppShaderResourceViews: *const *mut ID3D11ShaderResourceView
     ) -> (),
     fn DSSetShader(
-        &mut self, pDomainShader: *mut ID3D11DomainShader,
+        &self, pDomainShader: *mut ID3D11DomainShader,
         ppClassInstances: *const *mut ID3D11ClassInstance, NumClassInstances: UINT
     ) -> (),
     fn DSSetSamplers(
-        &mut self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *const *mut ID3D11SamplerState
+        &self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *const *mut ID3D11SamplerState
     ) -> (),
     fn DSSetConstantBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *const *mut ID3D11Buffer
+        &self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *const *mut ID3D11Buffer
     ) -> (),
     fn CSSetShaderResources(
-        &mut self, StartSlot: UINT, NumViews: UINT,
+        &self, StartSlot: UINT, NumViews: UINT,
         ppShaderResourceViews: *const *mut ID3D11ShaderResourceView
     ) -> (),
     fn CSSetUnorderedAccessViews(
-        &mut self, StartSlot: UINT, NumUAVs: UINT,
+        &self, StartSlot: UINT, NumUAVs: UINT,
         ppUnorderedAccessViews: *const *mut ID3D11UnorderedAccessView
     ) -> (),
     fn CSSetShader(
-        &mut self, pComputeShader: *mut ID3D11ComputeShader,
+        &self, pComputeShader: *mut ID3D11ComputeShader,
         ppClassInstances: *const *mut ID3D11ClassInstance, NumClassInstances: UINT
     ) -> (),
     fn CSSetSamplers(
-        &mut self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *const *mut ID3D11SamplerState
+        &self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *const *mut ID3D11SamplerState
     ) -> (),
     fn CSSetConstantBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *const *mut ID3D11Buffer
+        &self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *const *mut ID3D11Buffer
     ) -> (),
     fn VSGetConstantBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *mut *mut ID3D11Buffer
+        &self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *mut *mut ID3D11Buffer
     ) -> (),
     fn PSGetShaderResources(
-        &mut self, StartSlot: UINT, NumViews: UINT,
+        &self, StartSlot: UINT, NumViews: UINT,
         ppShaderResourceViews: *mut *mut ID3D11ShaderResourceView
     ) -> (),
     fn PSGetShader(
-        &mut self, ppPixelShader: *mut *mut ID3D11PixelShader,
+        &self, ppPixelShader: *mut *mut ID3D11PixelShader,
         ppClassInstances: *mut *mut ID3D11ClassInstance, pNumClassInstances: *mut UINT
     ) -> (),
     fn PSGetSamplers(
-        &mut self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *mut *mut ID3D11SamplerState
+        &self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *mut *mut ID3D11SamplerState
     ) -> (),
     fn VSGetShader(
-        &mut self, ppVertexShader: *mut *mut ID3D11VertexShader,
+        &self, ppVertexShader: *mut *mut ID3D11VertexShader,
         ppClassInstances: *mut *mut ID3D11ClassInstance, pNumClassInstances: *mut UINT
     ) -> (),
     fn PSGetConstantBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *mut *mut ID3D11Buffer
+        &self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *mut *mut ID3D11Buffer
     ) -> (),
-    fn IAGetInputLayout(&mut self, ppInputLayout: *mut *mut ID3D11InputLayout) -> (),
+    fn IAGetInputLayout(&self, ppInputLayout: *mut *mut ID3D11InputLayout) -> (),
     fn IAGetVertexBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppVertexBuffers: *mut *mut ID3D11Buffer,
+        &self, StartSlot: UINT, NumBuffers: UINT, ppVertexBuffers: *mut *mut ID3D11Buffer,
         pStrides: *mut UINT, pOffsets: *mut UINT
     ) -> (),
     fn IAGetIndexBuffer(
-        &mut self, pIndexBuffer: *mut *mut ID3D11Buffer, Format: *mut DXGI_FORMAT,
+        &self, pIndexBuffer: *mut *mut ID3D11Buffer, Format: *mut DXGI_FORMAT,
         Offset: *mut UINT
     ) -> (),
     fn GSGetConstantBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *mut *mut ID3D11Buffer
+        &self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *mut *mut ID3D11Buffer
     ) -> (),
     fn GSGetShader(
-        &mut self, ppGeometryShader: *mut *mut ID3D11GeometryShader,
+        &self, ppGeometryShader: *mut *mut ID3D11GeometryShader,
         ppClassInstances: *mut *mut ID3D11ClassInstance, pNumClassInstances: *mut UINT
     ) -> (),
-    fn IAGetPrimitiveTopology(&mut self, pTopology: *mut D3D11_PRIMITIVE_TOPOLOGY) -> (),
+    fn IAGetPrimitiveTopology(&self, pTopology: *mut D3D11_PRIMITIVE_TOPOLOGY) -> (),
     fn VSGetShaderResources(
-        &mut self, StartSlot: UINT, NumViews: UINT,
+        &self, StartSlot: UINT, NumViews: UINT,
         ppShaderResourceViews: *mut *mut ID3D11ShaderResourceView
     ) -> (),
     fn VSGetSamplers(
-        &mut self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *mut *mut ID3D11SamplerState
+        &self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *mut *mut ID3D11SamplerState
     ) -> (),
     fn GetPredication(
-        &mut self, ppPredicate: *mut *mut ID3D11Predicate, pPredicateValue: *mut BOOL
+        &self, ppPredicate: *mut *mut ID3D11Predicate, pPredicateValue: *mut BOOL
     ) -> (),
     fn GSGetShaderResources(
-        &mut self, StartSlot: UINT, NumViews: UINT,
+        &self, StartSlot: UINT, NumViews: UINT,
         ppShaderResourceViews: *mut *mut ID3D11ShaderResourceView
     ) -> (),
     fn GSGetSamplers(
-        &mut self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *mut *mut ID3D11SamplerState
+        &self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *mut *mut ID3D11SamplerState
     ) -> (),
     fn OMGetRenderTargets(
-        &mut self, NumViews: UINT, ppRenderTargetViews: *mut *mut ID3D11RenderTargetView,
+        &self, NumViews: UINT, ppRenderTargetViews: *mut *mut ID3D11RenderTargetView,
         ppDepthStencilView: *mut *mut ID3D11DepthStencilView
     ) -> (),
     fn OMGetRenderTargetsAndUnorderedAccessViews(
-        &mut self, NumRTVs: UINT, ppRenderTargetViews: *mut *mut ID3D11RenderTargetView,
+        &self, NumRTVs: UINT, ppRenderTargetViews: *mut *mut ID3D11RenderTargetView,
         ppDepthStencilView: *mut *mut ID3D11DepthStencilView, UAVStartSlot: UINT,
         ppUnorderedAccessViews: *mut *mut ID3D11UnorderedAccessView
     ) -> (),
     fn OMGetBlendState(
-        &mut self, ppBlendState: *mut *mut ID3D11BlendState, BlendFactor: &mut [FLOAT; 4],
+        &self, ppBlendState: *mut *mut ID3D11BlendState, BlendFactor: &mut [FLOAT; 4],
         pSampleMask: *mut UINT
     ) -> (),
     fn OMGetDepthStencilState(
-        &mut self, ppDepthStencilState: *mut *mut ID3D11DepthStencilState, pStencilRef: *mut UINT
+        &self, ppDepthStencilState: *mut *mut ID3D11DepthStencilState, pStencilRef: *mut UINT
     ) -> (),
-    fn SOGetTargets(&mut self, NumBuffers: UINT, ppSOTargets: *mut *mut ID3D11Buffer) -> (),
-    fn RSGetState(&mut self, ppRasterizerState: *mut *mut ID3D11RasterizerState) -> (),
-    fn RSGetViewports(&mut self, pNumViewports: *mut UINT, pViewports: *mut D3D11_VIEWPORT) -> (),
-    fn RSGetScissorRects(&mut self, pNumRects: *mut UINT, pRects: *mut D3D11_RECT) -> (),
+    fn SOGetTargets(&self, NumBuffers: UINT, ppSOTargets: *mut *mut ID3D11Buffer) -> (),
+    fn RSGetState(&self, ppRasterizerState: *mut *mut ID3D11RasterizerState) -> (),
+    fn RSGetViewports(&self, pNumViewports: *mut UINT, pViewports: *mut D3D11_VIEWPORT) -> (),
+    fn RSGetScissorRects(&self, pNumRects: *mut UINT, pRects: *mut D3D11_RECT) -> (),
     fn HSGetShaderResources(
-        &mut self, StartSlot: UINT, NumViews: UINT,
+        &self, StartSlot: UINT, NumViews: UINT,
         ppShaderResourceViews: *mut *mut ID3D11ShaderResourceView
     ) -> (),
     fn HSGetShader(
-        &mut self, ppHullShader: *mut *mut ID3D11HullShader,
+        &self, ppHullShader: *mut *mut ID3D11HullShader,
         ppClassInstances: *mut *mut ID3D11ClassInstance, pNumClassInstances: *mut UINT
     ) -> (),
     fn HSGetSamplers(
-        &mut self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *mut *mut ID3D11SamplerState
+        &self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *mut *mut ID3D11SamplerState
     ) -> (),
     fn HSGetConstantBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *mut *mut ID3D11Buffer
+        &self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *mut *mut ID3D11Buffer
     ) -> (),
     fn DSGetShaderResources(
-        &mut self, StartSlot: UINT, NumViews: UINT,
+        &self, StartSlot: UINT, NumViews: UINT,
         ppShaderResourceViews: *mut *mut ID3D11ShaderResourceView
     ) -> (),
     fn DSGetShader(
-        &mut self, ppDomainShader: *mut *mut ID3D11DomainShader,
+        &self, ppDomainShader: *mut *mut ID3D11DomainShader,
         ppClassInstances: *mut *mut ID3D11ClassInstance, pNumClassInstances: *mut UINT
     ) -> (),
     fn DSGetSamplers(
-        &mut self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *mut *mut ID3D11SamplerState
+        &self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *mut *mut ID3D11SamplerState
     ) -> (),
     fn DSGetConstantBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *mut *mut ID3D11Buffer
+        &self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *mut *mut ID3D11Buffer
     ) -> (),
     fn CSGetShaderResources(
-        &mut self, StartSlot: UINT, NumViews: UINT,
+        &self, StartSlot: UINT, NumViews: UINT,
         ppShaderResourceViews: *mut *mut ID3D11ShaderResourceView
     ) -> (),
     fn CSGetUnorderedAccessViews(
-        &mut self, StartSlot: UINT, NumUAVs: UINT,
+        &self, StartSlot: UINT, NumUAVs: UINT,
         ppUnorderedAccessViews: *mut *mut ID3D11UnorderedAccessView
     ) -> (),
     fn CSGetShader(
-        &mut self, ppComputeShader: *mut *mut ID3D11ComputeShader,
+        &self, ppComputeShader: *mut *mut ID3D11ComputeShader,
         ppClassInstances: *mut *mut ID3D11ClassInstance, pNumClassInstances: *mut UINT
     ) -> (),
     fn CSGetSamplers(
-        &mut self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *mut *mut ID3D11SamplerState
+        &self, StartSlot: UINT, NumSamplers: UINT, ppSamplers: *mut *mut ID3D11SamplerState
     ) -> (),
     fn CSGetConstantBuffers(
-        &mut self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *mut *mut ID3D11Buffer
+        &self, StartSlot: UINT, NumBuffers: UINT, ppConstantBuffers: *mut *mut ID3D11Buffer
     ) -> (),
-    fn ClearState(&mut self) -> (),
-    fn Flush(&mut self) -> (),
-    fn GetType(&mut self) -> D3D11_DEVICE_CONTEXT_TYPE,
-    fn GetContextFlags(&mut self) -> UINT,
+    fn ClearState(&self) -> (),
+    fn Flush(&self) -> (),
+    fn GetType(&self) -> D3D11_DEVICE_CONTEXT_TYPE,
+    fn GetContextFlags(&self) -> UINT,
     fn FinishCommandList(
-        &mut self, RestoreDeferredContextState: BOOL, ppCommandList: *mut *mut ID3D11CommandList
+        &self, RestoreDeferredContextState: BOOL, ppCommandList: *mut *mut ID3D11CommandList
     ) -> HRESULT
 }}
 STRUCT!{struct D3D11_VIDEO_DECODER_DESC {
@@ -1737,10 +1737,10 @@ STRUCT!{struct D3D11_VIDEO_DECODER_EXTENSION {
 }}
 RIDL!{interface ID3D11VideoDecoder(ID3D11VideoDecoderVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetCreationParameters(
-        &mut self, pVideoDesc: *mut D3D11_VIDEO_DECODER_DESC,
+        &self, pVideoDesc: *mut D3D11_VIDEO_DECODER_DESC,
         pConfig: *mut D3D11_VIDEO_DECODER_CONFIG
     ) -> HRESULT,
-    fn GetDriverHandle(&mut self, pDriverHandle: *mut HANDLE) -> HRESULT
+    fn GetDriverHandle(&self, pDriverHandle: *mut HANDLE) -> HRESULT
 }}
 ENUM!{enum D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT {
     D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT_INPUT = 0x1,
@@ -1905,19 +1905,19 @@ STRUCT!{struct D3D11_VIDEO_PROCESSOR_CONTENT_DESC {
 RIDL!{interface ID3D11VideoProcessorEnumerator(ID3D11VideoProcessorEnumeratorVtbl)
     : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetVideoProcessorContentDesc(
-        &mut self, pContentDesc: *mut D3D11_VIDEO_PROCESSOR_CONTENT_DESC
+        &self, pContentDesc: *mut D3D11_VIDEO_PROCESSOR_CONTENT_DESC
     ) -> HRESULT,
-    fn CheckVideoProcessorFormat(&mut self, Format: DXGI_FORMAT, pFlags: *mut UINT) -> HRESULT,
-    fn GetVideoProcessorCaps(&mut self, pCaps: *mut D3D11_VIDEO_PROCESSOR_CAPS) -> HRESULT,
+    fn CheckVideoProcessorFormat(&self, Format: DXGI_FORMAT, pFlags: *mut UINT) -> HRESULT,
+    fn GetVideoProcessorCaps(&self, pCaps: *mut D3D11_VIDEO_PROCESSOR_CAPS) -> HRESULT,
     fn GetVideoProcessorRateConversionCaps(
-        &mut self, TypeIndex: UINT, pCaps: *mut D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS
+        &self, TypeIndex: UINT, pCaps: *mut D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS
     ) -> HRESULT,
     fn GetVideoProcessorCustomRate(
-        &mut self, TypeIndex: UINT, CustomRateIndex: UINT,
+        &self, TypeIndex: UINT, CustomRateIndex: UINT,
         pRate: *mut D3D11_VIDEO_PROCESSOR_CUSTOM_RATE
     ) -> HRESULT,
     fn GetVideoProcessorFilterRange(
-        &mut self, Filter: D3D11_VIDEO_PROCESSOR_FILTER,
+        &self, Filter: D3D11_VIDEO_PROCESSOR_FILTER,
         Range: *mut D3D11_VIDEO_PROCESSOR_FILTER_RANGE
     ) -> HRESULT
 }}
@@ -2000,9 +2000,9 @@ STRUCT!{struct D3D11_VIDEO_PROCESSOR_STREAM {
 }}
 RIDL!{interface ID3D11VideoProcessor(ID3D11VideoProcessorVtbl)
     : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
-    fn GetContentDesc(&mut self, pDesc: *mut D3D11_VIDEO_PROCESSOR_CONTENT_DESC) -> (),
+    fn GetContentDesc(&self, pDesc: *mut D3D11_VIDEO_PROCESSOR_CONTENT_DESC) -> (),
     fn GetRateConversionCaps(
-        &mut self, pCaps: *mut D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS
+        &self, pCaps: *mut D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS
     ) -> ()
 }}
 STRUCT!{struct D3D11_OMAC {
@@ -2015,9 +2015,9 @@ ENUM!{enum D3D11_AUTHENTICATED_CHANNEL_TYPE {
 }}
 RIDL!{interface ID3D11AuthenticatedChannel(ID3D11AuthenticatedChannelVtbl)
     : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
-    fn GetCertificateSize(&mut self, pCertificateSize: *mut UINT) -> HRESULT,
-    fn GetCertificate(&mut self, CertificateSize: UINT, pCertificate: *mut BYTE) -> HRESULT,
-    fn GetChannelHandle(&mut self, pChannelHandle: *mut HANDLE) -> ()
+    fn GetCertificateSize(&self, pCertificateSize: *mut UINT) -> HRESULT,
+    fn GetCertificate(&self, CertificateSize: UINT, pCertificate: *mut BYTE) -> HRESULT,
+    fn GetChannelHandle(&self, pChannelHandle: *mut HANDLE) -> ()
 }}
 STRUCT!{struct D3D11_AUTHENTICATED_QUERY_INPUT {
     QueryType: GUID,
@@ -2179,11 +2179,11 @@ STRUCT!{struct D3D11_AUTHENTICATED_CONFIGURE_ACCESSIBLE_ENCRYPTION_INPUT {
     EncryptionGuid: GUID,
 }}
 RIDL!{interface ID3D11CryptoSession(ID3D11CryptoSessionVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
-    fn GetCryptoType(&mut self, pCryptoType: *mut GUID) -> (),
-    fn GetDecoderProfile(&mut self, pDecoderProfile: *mut GUID) -> (),
-    fn GetCertificateSize(&mut self, pCertificateSize: *mut UINT) -> HRESULT,
-    fn GetCertificate(&mut self, CertificateSize: UINT, pCertificate: *mut BYTE) -> HRESULT,
-    fn GetCryptoSessionHandle(&mut self, pCertificate: *mut HANDLE) -> ()
+    fn GetCryptoType(&self, pCryptoType: *mut GUID) -> (),
+    fn GetDecoderProfile(&self, pDecoderProfile: *mut GUID) -> (),
+    fn GetCertificateSize(&self, pCertificateSize: *mut UINT) -> HRESULT,
+    fn GetCertificate(&self, CertificateSize: UINT, pCertificate: *mut BYTE) -> HRESULT,
+    fn GetCryptoSessionHandle(&self, pCertificate: *mut HANDLE) -> ()
 }}
 ENUM!{enum D3D11_VDOV_DIMENSION {
     D3D11_VDOV_DIMENSION_UNKNOWN = 0,
@@ -2199,7 +2199,7 @@ STRUCT!{struct D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC {
 }}
 RIDL!{interface ID3D11VideoDecoderOutputView(ID3D11VideoDecoderOutputViewVtbl)
     : ID3D11View(ID3D11ViewVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC) -> ()
 }}
 ENUM!{enum D3D11_VPIV_DIMENSION {
     D3D11_VPIV_DIMENSION_UNKNOWN = 0,
@@ -2216,7 +2216,7 @@ STRUCT!{struct D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC {
 }}
 RIDL!{interface ID3D11VideoProcessorInputView(ID3D11VideoProcessorInputViewVtbl)
     : ID3D11View(ID3D11ViewVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC) -> ()
 }}
 ENUM!{enum D3D11_VPOV_DIMENSION {
     D3D11_VPOV_DIMENSION_UNKNOWN = 0,
@@ -2240,422 +2240,422 @@ UNION!{D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC, u, Texture2DArray, Texture2DArray
     D3D11_TEX2D_ARRAY_VPOV}
 RIDL!{interface ID3D11VideoProcessorOutputView(ID3D11VideoProcessorOutputViewVtbl)
     : ID3D11View(ID3D11ViewVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC) -> ()
+    fn GetDesc(&self, pDesc: *mut D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC) -> ()
 }}
 RIDL!{interface ID3D11VideoContext(ID3D11VideoContextVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetDecoderBuffer(
-        &mut self, pDecoder: *mut ID3D11VideoDecoder, Type:  D3D11_VIDEO_DECODER_BUFFER_TYPE,
+        &self, pDecoder: *mut ID3D11VideoDecoder, Type:  D3D11_VIDEO_DECODER_BUFFER_TYPE,
         pBufferSize: *mut UINT, ppBuffer: *mut *mut c_void
     ) -> HRESULT,
     fn ReleaseDecoderBuffer(
-        &mut self, pDecoder: *mut ID3D11VideoDecoder, Type:  D3D11_VIDEO_DECODER_BUFFER_TYPE
+        &self, pDecoder: *mut ID3D11VideoDecoder, Type:  D3D11_VIDEO_DECODER_BUFFER_TYPE
     ) -> HRESULT,
     fn DecoderBeginFrame(
-        &mut self, pDecoder: *mut ID3D11VideoDecoder, pView: *mut ID3D11VideoDecoderOutputView,
+        &self, pDecoder: *mut ID3D11VideoDecoder, pView: *mut ID3D11VideoDecoderOutputView,
         ContentKeySize: UINT, pContentKey: *const c_void
     ) -> HRESULT,
-    fn DecoderEndFrame(&mut self, pDecoder: *mut ID3D11VideoDecoder) -> HRESULT,
+    fn DecoderEndFrame(&self, pDecoder: *mut ID3D11VideoDecoder) -> HRESULT,
     fn SubmitDecoderBuffers(
-        &mut self, pDecoder: *mut ID3D11VideoDecoder, NumBuffers: UINT,
+        &self, pDecoder: *mut ID3D11VideoDecoder, NumBuffers: UINT,
         pBufferDesc: *const D3D11_VIDEO_DECODER_BUFFER_DESC
     ) -> HRESULT,
     fn DecoderExtension(
-        &mut self, pDecoder: *mut ID3D11VideoDecoder,
+        &self, pDecoder: *mut ID3D11VideoDecoder,
         pExtensionData: *const D3D11_VIDEO_DECODER_EXTENSION
     ) -> HRESULT,
     fn VideoProcessorSetOutputTargetRect(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, Enable: BOOL, pRect: *const RECT
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, Enable: BOOL, pRect: *const RECT
     ) -> (),
     fn VideoProcessorSetOutputBackgroundColor(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, YCbCr: BOOL, pRect: *const RECT
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, YCbCr: BOOL, pRect: *const RECT
     ) -> (),
     fn VideoProcessorSetOutputColorSpace(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor,
         pColorSpace: *const D3D11_VIDEO_PROCESSOR_COLOR_SPACE
     ) -> HRESULT,
     fn VideoProcessorSetOutputAlphaFillMode(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor,
         AlphaFillMode: D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, StreamIndex: UINT
     ) -> (),
     fn VideoProcessorSetOutputConstriction(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, Enable: BOOL, Size: SIZE
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, Enable: BOOL, Size: SIZE
     ) -> (),
     fn VideoProcessorSetOutputStereoMode(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, Enable: BOOL
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, Enable: BOOL
     ) -> (),
     fn VideoProcessorSetOutputExtension(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, pExtensionGuid: *const GUID,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, pExtensionGuid: *const GUID,
         DataSize: UINT, pData: *mut c_void
     ) -> HRESULT,
     fn VideoProcessorGetOutputTargetRect(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, Enabled: *mut BOOL, pRect: *mut RECT
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, Enabled: *mut BOOL, pRect: *mut RECT
     ) -> (),
     fn VideoProcessorGetOutputBackgroundColor(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, pYCbCr: *mut BOOL,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, pYCbCr: *mut BOOL,
         pColor: *mut D3D11_VIDEO_COLOR
     ) -> (),
     fn VideoProcessorGetOutputColorSpace(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor,
         pColorSpace: *mut D3D11_VIDEO_PROCESSOR_COLOR_SPACE
     ) -> (),
     fn VideoProcessorGetOutputAlphaFillMode(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor,
         pAlphaFillMode: *mut D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, pStreamIndex: *mut UINT
     ) -> (),
     fn VideoProcessorGetOutputConstriction(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, pEnabled: *mut BOOL,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, pEnabled: *mut BOOL,
         pSize: *mut SIZE
     ) -> (),
     fn VideoProcessorGetOutputStereoMode(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, pEnabled: *mut BOOL
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, pEnabled: *mut BOOL
     ) -> (),
     fn VideoProcessorGetOutputExtension(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, pExtensionGuid: *const GUID,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, pExtensionGuid: *const GUID,
         DataSize: UINT, pData: *mut c_void
     ) -> HRESULT,
     fn VideoProcessorSetStreamFrameFormat(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         FrameFormat: D3D11_VIDEO_FRAME_FORMAT
     ) -> (),
     fn VideoProcessorSetStreamColorSpace(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pColorSpace: *const D3D11_VIDEO_PROCESSOR_COLOR_SPACE
     ) -> (),
     fn VideoProcessorSetStreamOutputRate(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         OutputRate: D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, RepeatFrame: BOOL,
         pCustomRate: *const DXGI_RATIONAL
     ) -> (),
     fn VideoProcessorSetStreamSourceRect(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
         pRect: *const RECT
     ) -> (),
     fn VideoProcessorSetStreamDestRect(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
         pRect: *const RECT
     ) -> (),
     fn VideoProcessorSetStreamAlpha(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
         Alpha: FLOAT
     ) -> (),
     fn VideoProcessorSetStreamPalette(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Count: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Count: UINT,
         pEntries: *const UINT
     ) -> (),
     fn VideoProcessorSetStreamPixelAspectRatio(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
         pSourceAspectRatio: *const DXGI_RATIONAL, pDestinationAspectRatio: *const DXGI_RATIONAL
     ) -> (),
     fn VideoProcessorSetStreamLumaKey(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
         Lower: FLOAT, Upper: FLOAT
     ) -> (),
     fn VideoProcessorSetStreamStereoFormat(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
         Format: D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, LeftViewFrame0: BOOL, BaseViewFrame0: BOOL,
         FlipMode: D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE
     ) -> (),
     fn VideoProcessorSetStreamAutoProcessingMode(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL
     ) -> (),
     fn VideoProcessorSetStreamFilter(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         Filter: D3D11_VIDEO_PROCESSOR_FILTER, Enable: BOOL, Level: c_int
     ) -> (),
     fn VideoProcessorSetStreamExtension(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pExtensionGuid: *const GUID, DataSize: UINT, pData: *mut c_void
     ) -> HRESULT,
     fn VideoProcessorGetStreamFrameFormat(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pFrameFormat: *mut D3D11_VIDEO_FRAME_FORMAT
     ) -> (),
     fn VideoProcessorGetStreamColorSpace(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pColorSpace: *mut D3D11_VIDEO_PROCESSOR_COLOR_SPACE
     ) -> (),
     fn VideoProcessorGetStreamOutputRate(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pOutputRate: *mut D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, pRepeatFrame: *mut BOOL,
         pCustomRate: *mut DXGI_RATIONAL
     ) -> (),
     fn VideoProcessorGetStreamSourceRect(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pEnabled: *mut BOOL, pRect: *mut RECT
     ) -> (),
     fn VideoProcessorGetStreamDestRect(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pEnabled: *mut BOOL, pRect: *mut RECT
     ) -> (),
     fn VideoProcessorGetStreamAlpha(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pEnabled: *mut BOOL, pAlpha: *mut FLOAT
     ) -> (),
     fn VideoProcessorGetStreamPalette(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Count: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Count: UINT,
         pEntries: *mut UINT
     ) -> (),
     fn VideoProcessorGetStreamPixelAspectRatio(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pEnabled: *mut BOOL, pSourceAspectRatio: *mut DXGI_RATIONAL,
         pDestinationAspectRatio: *mut DXGI_RATIONAL
     ) -> (),
     fn VideoProcessorGetStreamLumaKey(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pEnabled: *mut BOOL, pLower: *mut FLOAT, pUpper: *mut FLOAT
     ) -> (),
     fn VideoProcessorGetStreamStereoFormat(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pEnabled: *mut BOOL, pFormat: *mut D3D11_VIDEO_PROCESSOR_STEREO_FORMAT,
         pLeftViewFrame0: *mut BOOL, pBaseViewFrame0: *mut BOOL,
         pFlipMode: *mut D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, MonoOffset: *mut c_int
     ) -> (),
     fn VideoProcessorGetStreamAutoProcessingMode(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pEnabled: *mut BOOL
     ) -> (),
     fn VideoProcessorGetStreamFilter(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         Filter: D3D11_VIDEO_PROCESSOR_FILTER, pEnabled: *mut BOOL, pLevel: *mut c_int
     ) -> (),
     fn VideoProcessorGetStreamExtension(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pExtensionGuid: *const GUID, DataSize: UINT, pData: *mut c_void
     ) -> HRESULT,
     fn VideoProcessorBlt(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor,
         pView: *mut ID3D11VideoProcessorOutputView, OutputFrame: UINT, StreamCount: UINT,
         pStreams: *const D3D11_VIDEO_PROCESSOR_STREAM
     ) -> HRESULT,
     fn NegotiateCryptoSessionKeyExchange(
-        &mut self, pCryptoSession: *mut ID3D11CryptoSession, DataSize: UINT, pData: *mut c_void
+        &self, pCryptoSession: *mut ID3D11CryptoSession, DataSize: UINT, pData: *mut c_void
     ) -> HRESULT,
     fn EncryptionBlt(
-        &mut self, pCryptoSession: *mut ID3D11CryptoSession, pSrcSurface: *mut ID3D11Texture2D,
+        &self, pCryptoSession: *mut ID3D11CryptoSession, pSrcSurface: *mut ID3D11Texture2D,
         pDstSurface: *mut ID3D11Texture2D, IVSize: UINT, pIV: *mut c_void
     ) -> HRESULT,
     fn DecryptionBlt(
-        &mut self, pCryptoSession: *mut ID3D11CryptoSession, pSrcSurface: *mut ID3D11Texture2D,
+        &self, pCryptoSession: *mut ID3D11CryptoSession, pSrcSurface: *mut ID3D11Texture2D,
         pDstSurface: *mut ID3D11Texture2D, pEncryptedBlockInfo: *mut D3D11_ENCRYPTED_BLOCK_INFO,
         ContentKeySize: UINT, pContentKey: *const c_void, IVSize: UINT, pIV: *mut c_void
     ) -> HRESULT,
     fn StartSessionKeyRefresh(
-        &mut self, pCryptoSession: *mut ID3D11CryptoSession, RandomNumberSize: UINT,
+        &self, pCryptoSession: *mut ID3D11CryptoSession, RandomNumberSize: UINT,
         pRandomNumber: *mut c_void
     ) -> HRESULT,
-    fn FinishSessionKeyRefresh(&mut self, pCryptoSession: *mut ID3D11CryptoSession) -> HRESULT,
+    fn FinishSessionKeyRefresh(&self, pCryptoSession: *mut ID3D11CryptoSession) -> HRESULT,
     fn GetEncryptionBltKey(
-        &mut self, pCryptoSession: *mut ID3D11CryptoSession, KeySize: UINT,
+        &self, pCryptoSession: *mut ID3D11CryptoSession, KeySize: UINT,
         pReadbackKey: *mut c_void
     ) -> HRESULT,
     fn NegotiateAuthenticatedChannelKeyExchange(
-        &mut self, pChannel: *mut ID3D11AuthenticatedChannel, DataSize: UINT, pData: *mut c_void
+        &self, pChannel: *mut ID3D11AuthenticatedChannel, DataSize: UINT, pData: *mut c_void
     ) -> HRESULT,
     fn QueryAuthenticatedChannel(
-        &mut self, pChannel: *mut ID3D11AuthenticatedChannel, InputSize: UINT,
+        &self, pChannel: *mut ID3D11AuthenticatedChannel, InputSize: UINT,
         pInput: *const c_void, OutputSize: UINT, pOutput: *mut c_void
     ) -> HRESULT,
     fn ConfigureAuthenticatedChannel(
-        &mut self, pChannel: *mut ID3D11AuthenticatedChannel, InputSize: UINT,
+        &self, pChannel: *mut ID3D11AuthenticatedChannel, InputSize: UINT,
         pInput: *const c_void, pOutput: *mut D3D11_AUTHENTICATED_CONFIGURE_OUTPUT
     ) -> HRESULT,
     fn VideoProcessorSetStreamRotation(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT, Enable: BOOL,
         Rotation: D3D11_VIDEO_PROCESSOR_ROTATION
     ) -> HRESULT,
     fn VideoProcessorGetStreamRotation(
-        &mut self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
+        &self, pVideoProcessor: *mut ID3D11VideoProcessor, StreamIndex: UINT,
         pEnable: *mut BOOL, pRotation: *mut D3D11_VIDEO_PROCESSOR_ROTATION
     ) -> HRESULT
 }}
 RIDL!{interface ID3D11VideoDevice(ID3D11VideoDeviceVtbl): IUnknown(IUnknownVtbl) {
     fn CreateVideoDecoder(
-        &mut self, pVideoDesc: *const D3D11_VIDEO_DECODER_DESC,
+        &self, pVideoDesc: *const D3D11_VIDEO_DECODER_DESC,
         pConfig: *const D3D11_VIDEO_DECODER_CONFIG, ppDecoder: *mut *mut ID3D11VideoDecoder
     ) -> HRESULT,
     fn CreateVideoProcessor(
-        &mut self, pEnum: *mut ID3D11VideoProcessorEnumerator, RateConversionIndex: UINT,
+        &self, pEnum: *mut ID3D11VideoProcessorEnumerator, RateConversionIndex: UINT,
         ppVideoProcessor: *mut *mut ID3D11VideoProcessor
     ) -> HRESULT,
     fn CreateAuthenticatedChannel(
-        &mut self, ChannelType: D3D11_AUTHENTICATED_CHANNEL_TYPE,
+        &self, ChannelType: D3D11_AUTHENTICATED_CHANNEL_TYPE,
         ppAuthenticatedChannel: *mut *mut ID3D11AuthenticatedChannel
     ) -> HRESULT,
     fn CreateCryptoSession(
-        &mut self, pCryptoType: *const GUID, pDecoderProfile: *const GUID,
+        &self, pCryptoType: *const GUID, pDecoderProfile: *const GUID,
         pKeyExchangeType: *const GUID, ppCryptoSession: *mut *mut ID3D11CryptoSession
     ) -> HRESULT,
     fn CreateVideoDecoderOutputView(
-        &mut self, pResource: *mut ID3D11Resource,
+        &self, pResource: *mut ID3D11Resource,
         pDesc: *const D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC,
         ppVDOVView: *mut *mut ID3D11VideoDecoderOutputView
     ) -> HRESULT,
     fn CreateVideoProcessorInputView(
-        &mut self, pResource: *mut ID3D11Resource, pEnum: *mut ID3D11VideoProcessorEnumerator,
+        &self, pResource: *mut ID3D11Resource, pEnum: *mut ID3D11VideoProcessorEnumerator,
         pDesc: *const D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC,
         ppVPIView: *mut *mut ID3D11VideoProcessorInputView
     ) -> HRESULT,
     fn CreateVideoProcessorOutputView(
-        &mut self, pResource: *mut ID3D11Resource, pEnum: *mut ID3D11VideoProcessorEnumerator,
+        &self, pResource: *mut ID3D11Resource, pEnum: *mut ID3D11VideoProcessorEnumerator,
         pDesc: *const D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC,
         ppVPOView: *mut *mut ID3D11VideoProcessorOutputView
     ) -> HRESULT,
     fn CreateVideoProcessorEnumerator(
-        &mut self, pDesc: *const D3D11_VIDEO_PROCESSOR_CONTENT_DESC,
+        &self, pDesc: *const D3D11_VIDEO_PROCESSOR_CONTENT_DESC,
         ppEnum: *mut *mut ID3D11VideoProcessorEnumerator
     ) -> HRESULT,
-    fn GetVideoDecoderProfileCount(&mut self) -> UINT,
-    fn GetVideoDecoderProfile(&mut self, Index: UINT, pDecoderProfile: *mut GUID) -> HRESULT,
+    fn GetVideoDecoderProfileCount(&self) -> UINT,
+    fn GetVideoDecoderProfile(&self, Index: UINT, pDecoderProfile: *mut GUID) -> HRESULT,
     fn CheckVideoDecoderFormat(
-        &mut self, pDecoderProfile: *const GUID, Format: DXGI_FORMAT, pSupported: *mut BOOL
+        &self, pDecoderProfile: *const GUID, Format: DXGI_FORMAT, pSupported: *mut BOOL
     ) -> HRESULT,
     fn GetVideoDecoderConfigCount(
-        &mut self, pDesc: *const D3D11_VIDEO_DECODER_DESC, pCount: *mut UINT
+        &self, pDesc: *const D3D11_VIDEO_DECODER_DESC, pCount: *mut UINT
     ) -> HRESULT,
     fn GetVideoDecoderConfig(
-        &mut self, pDesc: *const D3D11_VIDEO_DECODER_DESC, Index: UINT,
+        &self, pDesc: *const D3D11_VIDEO_DECODER_DESC, Index: UINT,
         pConfig: *mut D3D11_VIDEO_DECODER_CONFIG
     ) -> HRESULT,
     fn GetContentProtectionCaps(
-        &mut self, pCryptoType: *const GUID, pDecoderProfile: *const GUID,
+        &self, pCryptoType: *const GUID, pDecoderProfile: *const GUID,
         pCaps: *mut D3D11_VIDEO_CONTENT_PROTECTION_CAPS
     ) -> HRESULT,
     fn CheckCryptoKeyExchange(
-        &mut self, pCryptoType: *const GUID, pDecoderProfile: *const GUID, Index: UINT,
+        &self, pCryptoType: *const GUID, pDecoderProfile: *const GUID, Index: UINT,
         pKeyExchangeType: *mut GUID
     ) -> HRESULT,
-    fn SetPrivateData( &mut self, guid: REFGUID, DataSize: UINT, pData: *const c_void) -> HRESULT,
-    fn SetPrivateDataInterface(&mut self, guid: REFGUID, pData: *const IUnknown) -> HRESULT
+    fn SetPrivateData( &self, guid: REFGUID, DataSize: UINT, pData: *const c_void) -> HRESULT,
+    fn SetPrivateDataInterface(&self, guid: REFGUID, pData: *const IUnknown) -> HRESULT
 }}
 RIDL!{interface ID3D11Device(ID3D11DeviceVtbl): IUnknown(IUnknownVtbl) {
     fn CreateBuffer(
-        &mut self, pDesc: *const D3D11_BUFFER_DESC, pInitialData: *const D3D11_SUBRESOURCE_DATA,
+        &self, pDesc: *const D3D11_BUFFER_DESC, pInitialData: *const D3D11_SUBRESOURCE_DATA,
         ppBuffer: *mut *mut ID3D11Buffer
     ) -> HRESULT,
     fn CreateTexture1D(
-        &mut self, pDesc: *const D3D11_TEXTURE1D_DESC, pInitialData: *const D3D11_SUBRESOURCE_DATA,
+        &self, pDesc: *const D3D11_TEXTURE1D_DESC, pInitialData: *const D3D11_SUBRESOURCE_DATA,
         ppTexture1D: *mut *mut ID3D11Texture1D
     ) ->  HRESULT,
     fn CreateTexture2D(
-        &mut self, pDesc: *const D3D11_TEXTURE2D_DESC, pInitialData: *const D3D11_SUBRESOURCE_DATA,
+        &self, pDesc: *const D3D11_TEXTURE2D_DESC, pInitialData: *const D3D11_SUBRESOURCE_DATA,
         ppTexture2D: *mut *mut ID3D11Texture2D
     ) -> HRESULT,
     fn CreateTexture3D(
-        &mut self, pDesc: *const D3D11_TEXTURE3D_DESC, pInitialData: *const D3D11_SUBRESOURCE_DATA,
+        &self, pDesc: *const D3D11_TEXTURE3D_DESC, pInitialData: *const D3D11_SUBRESOURCE_DATA,
         ppTexture3D: *mut *mut ID3D11Texture3D
     ) -> HRESULT,
     fn CreateShaderResourceView(
-        &mut self, pResource: *mut ID3D11Resource, pDesc: *const D3D11_SHADER_RESOURCE_VIEW_DESC,
+        &self, pResource: *mut ID3D11Resource, pDesc: *const D3D11_SHADER_RESOURCE_VIEW_DESC,
         ppSRView: *mut *mut ID3D11ShaderResourceView
     ) -> HRESULT,
     fn CreateUnorderedAccessView(
-        &mut self, pResource: *mut ID3D11Resource, pDesc: *const D3D11_UNORDERED_ACCESS_VIEW_DESC,
+        &self, pResource: *mut ID3D11Resource, pDesc: *const D3D11_UNORDERED_ACCESS_VIEW_DESC,
         ppUAView: *mut *mut ID3D11UnorderedAccessView
     ) -> HRESULT,
     fn CreateRenderTargetView(
-        &mut self, pResource: *mut ID3D11Resource, pDesc: *const D3D11_RENDER_TARGET_VIEW_DESC,
+        &self, pResource: *mut ID3D11Resource, pDesc: *const D3D11_RENDER_TARGET_VIEW_DESC,
         ppRTView: *mut *mut ID3D11RenderTargetView
     ) -> HRESULT,
     fn CreateDepthStencilView(
-        &mut self, pResource: *mut ID3D11Resource, pDesc: *const D3D11_DEPTH_STENCIL_VIEW_DESC,
+        &self, pResource: *mut ID3D11Resource, pDesc: *const D3D11_DEPTH_STENCIL_VIEW_DESC,
         ppDepthStencilView: *mut *mut ID3D11DepthStencilView
     ) -> HRESULT,
     fn CreateInputLayout(
-        &mut self, pInputElementDescs: *const D3D11_INPUT_ELEMENT_DESC, NumElements: UINT,
+        &self, pInputElementDescs: *const D3D11_INPUT_ELEMENT_DESC, NumElements: UINT,
         pShaderBytecodeWithInputSignature: *const c_void, BytecodeLength: SIZE_T,
         ppInputLayout: *mut *mut ID3D11InputLayout
     ) -> HRESULT,
     fn CreateVertexShader(
-        &mut self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
+        &self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
         pClassLinkage: *mut ID3D11ClassLinkage, ppVertexShader: *mut *mut ID3D11VertexShader
     ) -> HRESULT,
     fn CreateGeometryShader(
-        &mut self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
+        &self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
         pClassLinkage: *mut ID3D11ClassLinkage, ppGeometryShader: *mut *mut ID3D11GeometryShader
     ) -> HRESULT,
     fn CreateGeometryShaderWithStreamOutput(
-        &mut self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
+        &self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
         pSODeclaration: *const D3D11_SO_DECLARATION_ENTRY, NumEntries: UINT,
         pBufferStrides: *const UINT, NumStrides: UINT, RasterizedStream: UINT,
         pClassLinkage: *mut ID3D11ClassLinkage, ppGeometryShader: *mut *mut ID3D11GeometryShader
     ) -> HRESULT,
     fn CreatePixelShader(
-        &mut self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
+        &self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
         pClassLinkage: *mut ID3D11ClassLinkage, ppPixelShader: *mut *mut ID3D11PixelShader
     ) -> HRESULT,
     fn CreateHullShader(
-        &mut self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
+        &self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
         pClassLinkage: *mut ID3D11ClassLinkage, ppHullShader: *mut *mut ID3D11HullShader
     ) -> HRESULT,
     fn CreateDomainShader(
-        &mut self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
+        &self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
         pClassLinkage: *mut ID3D11ClassLinkage, ppDomainShader: *mut *mut ID3D11DomainShader
     ) -> HRESULT,
     fn CreateComputeShader(
-        &mut self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
+        &self, pShaderBytecode: *const c_void, BytecodeLength: SIZE_T,
         pClassLinkage: *mut ID3D11ClassLinkage, ppComputeShader: *mut *mut ID3D11ComputeShader
     ) -> HRESULT,
-    fn CreateClassLinkage(&mut self, ppLinkage: *mut *mut ID3D11ClassLinkage) -> HRESULT,
+    fn CreateClassLinkage(&self, ppLinkage: *mut *mut ID3D11ClassLinkage) -> HRESULT,
     fn CreateBlendState(
-        &mut self, pBlendStateDesc: *const D3D11_BLEND_DESC,
+        &self, pBlendStateDesc: *const D3D11_BLEND_DESC,
         ppBlendState: *mut *mut ID3D11BlendState
     ) -> HRESULT,
     fn CreateDepthStencilState(
-        &mut self, pDepthStencilDesc: *const D3D11_DEPTH_STENCIL_DESC,
+        &self, pDepthStencilDesc: *const D3D11_DEPTH_STENCIL_DESC,
         ppDepthStencilState: *mut *mut ID3D11DepthStencilState
     ) -> HRESULT,
     fn CreateRasterizerState(
-        &mut self, pRasterizerDesc: *const D3D11_RASTERIZER_DESC,
+        &self, pRasterizerDesc: *const D3D11_RASTERIZER_DESC,
         ppRasterizerState: *mut *mut ID3D11RasterizerState
     ) -> HRESULT,
     fn CreateSamplerState(
-        &mut self, pSamplerDesc: *const D3D11_SAMPLER_DESC,
+        &self, pSamplerDesc: *const D3D11_SAMPLER_DESC,
         ppSamplerState: *mut *mut ID3D11SamplerState
     ) -> HRESULT,
     fn CreateQuery(
-        &mut self, pQueryDesc: *const D3D11_QUERY_DESC, ppQuery: *mut *mut ID3D11Query
+        &self, pQueryDesc: *const D3D11_QUERY_DESC, ppQuery: *mut *mut ID3D11Query
     ) -> HRESULT,
     fn CreatePredicate(
-        &mut self, pPredicateDesc: *const D3D11_QUERY_DESC, ppPredicate: *mut *mut ID3D11Predicate
+        &self, pPredicateDesc: *const D3D11_QUERY_DESC, ppPredicate: *mut *mut ID3D11Predicate
     ) -> HRESULT,
     fn CreateCounter(
-        &mut self, pCounterDesc: *const D3D11_COUNTER_DESC, ppCounter: *mut *mut ID3D11Counter
+        &self, pCounterDesc: *const D3D11_COUNTER_DESC, ppCounter: *mut *mut ID3D11Counter
     ) -> HRESULT,
     fn CreateDeferredContext(
-        &mut self, ContextFlags: UINT, ppDeferredContext: *mut *mut ID3D11DeviceContext
+        &self, ContextFlags: UINT, ppDeferredContext: *mut *mut ID3D11DeviceContext
     ) -> HRESULT,
     fn OpenSharedResource(
-        &mut self, hResource: HANDLE, ReturnedInterface: REFIID, ppResource: *mut *mut c_void
+        &self, hResource: HANDLE, ReturnedInterface: REFIID, ppResource: *mut *mut c_void
     ) -> HRESULT,
     fn CheckFormatSupport(
-        &mut self, Format: DXGI_FORMAT, pFormatSupport: *mut UINT
+        &self, Format: DXGI_FORMAT, pFormatSupport: *mut UINT
     ) -> HRESULT,
     fn CheckMultisampleQualityLevels(
-        &mut self, Format: DXGI_FORMAT, SampleCount: UINT, pNumQualityLevels: *mut UINT
+        &self, Format: DXGI_FORMAT, SampleCount: UINT, pNumQualityLevels: *mut UINT
     ) -> HRESULT,
-    fn CheckCounterInfo(&mut self, pCounterInfo: *mut D3D11_COUNTER_INFO) -> (),
+    fn CheckCounterInfo(&self, pCounterInfo: *mut D3D11_COUNTER_INFO) -> (),
     fn CheckCounter(
-        &mut self, pDesc: *const D3D11_COUNTER_DESC, pType: *mut D3D11_COUNTER_TYPE,
+        &self, pDesc: *const D3D11_COUNTER_DESC, pType: *mut D3D11_COUNTER_TYPE,
         pActiveCounters: *mut UINT, szName: LPSTR, pNameLength: *mut UINT, szUnits: LPSTR,
         pUnitsLength: *mut UINT, szDescription: LPSTR, pDescriptionLength: *mut UINT
     ) -> HRESULT,
     fn CheckFeatureSupport(
-        &mut self, Feature: D3D11_FEATURE, pFeatureSupportData: *mut c_void,
+        &self, Feature: D3D11_FEATURE, pFeatureSupportData: *mut c_void,
         FeatureSupportDataSize: UINT
     ) -> HRESULT,
     fn GetPrivateData(
-        &mut self, guid: REFGUID, pDataSize: *mut UINT, pData: *mut c_void
+        &self, guid: REFGUID, pDataSize: *mut UINT, pData: *mut c_void
     ) -> HRESULT,
     fn SetPrivateData(
-        &mut self, guid: REFGUID, DataSize: UINT, pData: *const c_void
+        &self, guid: REFGUID, DataSize: UINT, pData: *const c_void
     ) -> HRESULT,
-    fn SetPrivateDataInterface(&mut self, guid: REFGUID, pData: *const IUnknown) -> HRESULT,
-    fn GetFeatureLevel(&mut self) -> D3D_FEATURE_LEVEL,
-    fn GetCreationFlags(&mut self) -> UINT,
-    fn GetDeviceRemovedReason(&mut self) -> HRESULT,
-    fn GetImmediateContext(&mut self, ppImmediateContext: *mut *mut ID3D11DeviceContext) -> (),
-    fn SetExceptionMode(&mut self, RaiseFlags: UINT) -> HRESULT,
-    fn GetExceptionMode(&mut self) -> UINT
+    fn SetPrivateDataInterface(&self, guid: REFGUID, pData: *const IUnknown) -> HRESULT,
+    fn GetFeatureLevel(&self) -> D3D_FEATURE_LEVEL,
+    fn GetCreationFlags(&self) -> UINT,
+    fn GetDeviceRemovedReason(&self) -> HRESULT,
+    fn GetImmediateContext(&self, ppImmediateContext: *mut *mut ID3D11DeviceContext) -> (),
+    fn SetExceptionMode(&self, RaiseFlags: UINT) -> HRESULT,
+    fn GetExceptionMode(&self) -> UINT
 }}
 ENUM!{enum D3D11_CREATE_DEVICE_FLAG {
     D3D11_CREATE_DEVICE_SINGLETHREADED = 0x1,

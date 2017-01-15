@@ -181,152 +181,152 @@ STRUCT!{struct D3D11_PARAMETER_DESC {
     FirstOutComponent: UINT,
 }}
 RIDL!{interface ID3D11ShaderReflectionType(ID3D11ShaderReflectionTypeVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_SHADER_TYPE_DESC) -> HRESULT,
-    fn GetMemberTypeByIndex(&mut self, Index: UINT) -> *mut ID3D11ShaderReflectionType,
-    fn GetMemberTypeByName(&mut self, Name: LPCSTR) -> *mut ID3D11ShaderReflectionType,
-    fn GetMemberTypeName(&mut self, Index: UINT) -> LPCSTR,
-    fn IsEqual(&mut self, pType: *mut ID3D11ShaderReflectionType) -> HRESULT,
-    fn GetSubType(&mut self) -> *mut ID3D11ShaderReflectionType,
-    fn GetBaseClass(&mut self) -> *mut ID3D11ShaderReflectionType,
-    fn GetNumInterfaces(&mut self) -> UINT,
-    fn GetInterfaceByIndex(&mut self, uIndex: UINT) -> *mut ID3D11ShaderReflectionType,
-    fn IsOfType(&mut self, pType: *mut ID3D11ShaderReflectionType) -> HRESULT,
-    fn ImplementsInterface(&mut self, pBase: *mut ID3D11ShaderReflectionType) -> HRESULT
+    fn GetDesc(&self, pDesc: *mut D3D11_SHADER_TYPE_DESC) -> HRESULT,
+    fn GetMemberTypeByIndex(&self, Index: UINT) -> *mut ID3D11ShaderReflectionType,
+    fn GetMemberTypeByName(&self, Name: LPCSTR) -> *mut ID3D11ShaderReflectionType,
+    fn GetMemberTypeName(&self, Index: UINT) -> LPCSTR,
+    fn IsEqual(&self, pType: *mut ID3D11ShaderReflectionType) -> HRESULT,
+    fn GetSubType(&self) -> *mut ID3D11ShaderReflectionType,
+    fn GetBaseClass(&self) -> *mut ID3D11ShaderReflectionType,
+    fn GetNumInterfaces(&self) -> UINT,
+    fn GetInterfaceByIndex(&self, uIndex: UINT) -> *mut ID3D11ShaderReflectionType,
+    fn IsOfType(&self, pType: *mut ID3D11ShaderReflectionType) -> HRESULT,
+    fn ImplementsInterface(&self, pBase: *mut ID3D11ShaderReflectionType) -> HRESULT
 }}
 RIDL!{interface ID3D11ShaderReflectionVariable(ID3D11ShaderReflectionVariableVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_SHADER_VARIABLE_DESC) -> HRESULT,
-    fn GetType(&mut self) -> *mut ID3D11ShaderReflectionType,
-    fn GetBuffer(&mut self) -> *mut ID3D11ShaderReflectionConstantBuffer,
-    fn GetInterfaceSlot(&mut self, uArrayIndex: UINT) -> UINT
+    fn GetDesc(&self, pDesc: *mut D3D11_SHADER_VARIABLE_DESC) -> HRESULT,
+    fn GetType(&self) -> *mut ID3D11ShaderReflectionType,
+    fn GetBuffer(&self) -> *mut ID3D11ShaderReflectionConstantBuffer,
+    fn GetInterfaceSlot(&self, uArrayIndex: UINT) -> UINT
 }}
 RIDL!{interface ID3D11ShaderReflectionConstantBuffer(ID3D11ShaderReflectionConstantBufferVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_SHADER_BUFFER_DESC) -> HRESULT,
-    fn GetVariableByIndex(&mut self, Index: UINT) -> *mut ID3D11ShaderReflectionVariable,
-    fn GetVariableByName(&mut self, Name: LPCSTR) -> *mut ID3D11ShaderReflectionVariable
+    fn GetDesc(&self, pDesc: *mut D3D11_SHADER_BUFFER_DESC) -> HRESULT,
+    fn GetVariableByIndex(&self, Index: UINT) -> *mut ID3D11ShaderReflectionVariable,
+    fn GetVariableByName(&self, Name: LPCSTR) -> *mut ID3D11ShaderReflectionVariable
 }}
 RIDL!{interface ID3D11ShaderReflection(ID3D11ShaderReflectionVtbl): IUnknown(IUnknownVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_SHADER_DESC) -> HRESULT,
+    fn GetDesc(&self, pDesc: *mut D3D11_SHADER_DESC) -> HRESULT,
     fn GetConstantBufferByIndex(
-        &mut self, Index: UINT
+        &self, Index: UINT
     ) -> *mut ID3D11ShaderReflectionConstantBuffer,
     fn GetConstantBufferByName(
-        &mut self, Name: LPCSTR
+        &self, Name: LPCSTR
     ) -> *mut ID3D11ShaderReflectionConstantBuffer,
     fn GetResourceBindingDesc(
-        &mut self, ResourceIndex: UINT, pDesc: *mut D3D11_SHADER_INPUT_BIND_DESC
+        &self, ResourceIndex: UINT, pDesc: *mut D3D11_SHADER_INPUT_BIND_DESC
     ) -> HRESULT,
     fn GetInputParameterDesc(
-        &mut self, ParameterIndex: UINT, pDesc: *mut D3D11_SIGNATURE_PARAMETER_DESC
+        &self, ParameterIndex: UINT, pDesc: *mut D3D11_SIGNATURE_PARAMETER_DESC
     ) -> HRESULT,
     fn GetOutputParameterDesc(
-        &mut self, ParameterIndex: UINT, pDesc: *mut D3D11_SIGNATURE_PARAMETER_DESC
+        &self, ParameterIndex: UINT, pDesc: *mut D3D11_SIGNATURE_PARAMETER_DESC
     ) -> HRESULT,
     fn GetPatchConstantParameterDesc(
-        &mut self, ParameterIndex: UINT, pDesc: *mut D3D11_SIGNATURE_PARAMETER_DESC
+        &self, ParameterIndex: UINT, pDesc: *mut D3D11_SIGNATURE_PARAMETER_DESC
     ) -> HRESULT,
-    fn GetVariableByName(&mut self, Name: LPCSTR) -> *mut ID3D11ShaderReflectionVariable,
+    fn GetVariableByName(&self, Name: LPCSTR) -> *mut ID3D11ShaderReflectionVariable,
     fn GetResourceBindingDescByName(
-        &mut self, Name: LPCSTR, pDesc: *mut D3D11_SHADER_INPUT_BIND_DESC
+        &self, Name: LPCSTR, pDesc: *mut D3D11_SHADER_INPUT_BIND_DESC
     ) -> HRESULT,
-    fn GetMovInstructionCount(&mut self) -> UINT,
-    fn GetMovcInstructionCount(&mut self) -> UINT,
-    fn GetConversionInstructionCount(&mut self) -> UINT,
-    fn GetBitwiseInstructionCount(&mut self) -> UINT,
-    fn GetGSInputPrimitive(&mut self) -> D3D_PRIMITIVE,
-    fn IsSampleFrequencyShader(&mut self) -> BOOL,
-    fn GetNumInterfaceSlots(&mut self) -> UINT,
-    fn GetMinFeatureLevel(&mut self, pLevel: *mut D3D_FEATURE_LEVEL) -> HRESULT,
+    fn GetMovInstructionCount(&self) -> UINT,
+    fn GetMovcInstructionCount(&self) -> UINT,
+    fn GetConversionInstructionCount(&self) -> UINT,
+    fn GetBitwiseInstructionCount(&self) -> UINT,
+    fn GetGSInputPrimitive(&self) -> D3D_PRIMITIVE,
+    fn IsSampleFrequencyShader(&self) -> BOOL,
+    fn GetNumInterfaceSlots(&self) -> UINT,
+    fn GetMinFeatureLevel(&self, pLevel: *mut D3D_FEATURE_LEVEL) -> HRESULT,
     fn GetThreadGroupSize(
-        &mut self, pSizeX: *mut UINT, pSizeY: *mut UINT, pSizeZ: *mut UINT
+        &self, pSizeX: *mut UINT, pSizeY: *mut UINT, pSizeZ: *mut UINT
     ) -> UINT,
-    fn GetRequiresFlags(&mut self) -> UINT64
+    fn GetRequiresFlags(&self) -> UINT64
 }}
 RIDL!{interface ID3D11LibraryReflection(ID3D11LibraryReflectionVtbl): IUnknown(IUnknownVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_LIBRARY_DESC) -> HRESULT,
-    fn GetFunctionByIndex(&mut self, FunctionIndex: INT) -> *mut ID3D11FunctionReflection
+    fn GetDesc(&self, pDesc: *mut D3D11_LIBRARY_DESC) -> HRESULT,
+    fn GetFunctionByIndex(&self, FunctionIndex: INT) -> *mut ID3D11FunctionReflection
 }}
 RIDL!{interface ID3D11FunctionReflection(ID3D11FunctionReflectionVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_FUNCTION_DESC) -> HRESULT,
+    fn GetDesc(&self, pDesc: *mut D3D11_FUNCTION_DESC) -> HRESULT,
     fn GetConstantBufferByIndex(
-        &mut self, BufferIndex: UINT
+        &self, BufferIndex: UINT
     ) -> *mut ID3D11ShaderReflectionConstantBuffer,
     fn GetConstantBufferByName(
-        &mut self, Name: LPCSTR
+        &self, Name: LPCSTR
     ) -> *mut ID3D11ShaderReflectionConstantBuffer,
     fn GetResourceBindingDesc(
-        &mut self, ResourceIndex: UINT, pDesc: *mut D3D11_SHADER_INPUT_BIND_DESC
+        &self, ResourceIndex: UINT, pDesc: *mut D3D11_SHADER_INPUT_BIND_DESC
     ) -> HRESULT,
-    fn GetVariableByName(&mut self, Name: LPCSTR) -> *mut ID3D11ShaderReflectionVariable,
+    fn GetVariableByName(&self, Name: LPCSTR) -> *mut ID3D11ShaderReflectionVariable,
     fn GetResourceBindingDescByName(
-        &mut self, Name: LPCSTR, pDesc: *mut D3D11_SHADER_INPUT_BIND_DESC
+        &self, Name: LPCSTR, pDesc: *mut D3D11_SHADER_INPUT_BIND_DESC
     ) -> HRESULT,
     fn GetFunctionParameter(
-        &mut self, ParameterIndex: INT
+        &self, ParameterIndex: INT
     ) -> *mut ID3D11FunctionParameterReflection
 }}
 RIDL!{interface ID3D11FunctionParameterReflection(ID3D11FunctionParameterReflectionVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D11_PARAMETER_DESC) -> HRESULT
+    fn GetDesc(&self, pDesc: *mut D3D11_PARAMETER_DESC) -> HRESULT
 }}
 RIDL!{interface ID3D11Module(ID3D11ModuleVtbl): IUnknown(IUnknownVtbl) {
     fn CreateInstance(
-        &mut self, pNamespace: LPCSTR, ppModuleInstance: *mut *mut ID3D11ModuleInstance
+        &self, pNamespace: LPCSTR, ppModuleInstance: *mut *mut ID3D11ModuleInstance
     ) -> HRESULT
 }}
 RIDL!{interface ID3D11ModuleInstance(ID3D11ModuleInstanceVtbl): IUnknown(IUnknownVtbl) {
-    fn BindConstantBuffer(&mut self, uSrcSlot: UINT, uDstSlot: UINT, cbDstOffset: UINT) -> HRESULT,
+    fn BindConstantBuffer(&self, uSrcSlot: UINT, uDstSlot: UINT, cbDstOffset: UINT) -> HRESULT,
     fn BindConstantBufferByName(
-        &mut self, pName: LPCSTR, uDstSlot: UINT, cbDstOffset: UINT
+        &self, pName: LPCSTR, uDstSlot: UINT, cbDstOffset: UINT
     ) -> HRESULT,
-    fn BindResource(&mut self, uSrcSlot: UINT, uDstSlot: UINT, uCount: UINT) -> HRESULT,
-    fn BindResourceByName(&mut self, pName: LPCSTR, uDstSlot: UINT, uCount: UINT) -> HRESULT,
-    fn BindSampler(&mut self, uSrcSlot: UINT, uDstSlot: UINT, uCount: UINT) -> HRESULT,
-    fn BindSamplerByName(&mut self, pName: LPCSTR, uDstSlot: UINT, uCount: UINT) -> HRESULT,
-    fn BindUnorderedAccessView(&mut self, uSrcSlot: UINT, uDstSlot: UINT, uCount: UINT) -> HRESULT,
+    fn BindResource(&self, uSrcSlot: UINT, uDstSlot: UINT, uCount: UINT) -> HRESULT,
+    fn BindResourceByName(&self, pName: LPCSTR, uDstSlot: UINT, uCount: UINT) -> HRESULT,
+    fn BindSampler(&self, uSrcSlot: UINT, uDstSlot: UINT, uCount: UINT) -> HRESULT,
+    fn BindSamplerByName(&self, pName: LPCSTR, uDstSlot: UINT, uCount: UINT) -> HRESULT,
+    fn BindUnorderedAccessView(&self, uSrcSlot: UINT, uDstSlot: UINT, uCount: UINT) -> HRESULT,
     fn BindUnorderedAccessViewByName(
-        &mut self, pName: LPCSTR, uDstSlot: UINT, uCount: UINT
+        &self, pName: LPCSTR, uDstSlot: UINT, uCount: UINT
     ) -> HRESULT,
     fn BindResourceAsUnorderedAccessView(
-        &mut self, uSrcSrvSlot: UINT, uDstUavSlot: UINT, uCount: UINT
+        &self, uSrcSrvSlot: UINT, uDstUavSlot: UINT, uCount: UINT
     ) -> HRESULT,
     fn BindResourceAsUnorderedAccessViewByName(
-        &mut self, pSrvName: LPCSTR, uDstUavSlot: UINT, uCount: UINT
+        &self, pSrvName: LPCSTR, uDstUavSlot: UINT, uCount: UINT
     ) -> HRESULT
 }}
 RIDL!{interface ID3D11Linker(ID3D11LinkerVtbl): IUnknown(IUnknownVtbl) {
     fn Link(
-        &mut self, pEntry: *mut ID3D11ModuleInstance, pEntryName: LPCSTR, pTargetName: LPCSTR,
+        &self, pEntry: *mut ID3D11ModuleInstance, pEntryName: LPCSTR, pTargetName: LPCSTR,
         uFlags: UINT, ppShaderBlob: *mut *mut ID3DBlob, ppErrorBuffer: *mut *mut ID3DBlob
     ) -> HRESULT,
-    fn UseLibrary(&mut self, pLibraryMI: *mut ID3D11ModuleInstance) -> HRESULT,
-    fn AddClipPlaneFromCBuffer(&mut self, uCBufferSlot: UINT, uCBufferEntry: UINT) -> HRESULT
+    fn UseLibrary(&self, pLibraryMI: *mut ID3D11ModuleInstance) -> HRESULT,
+    fn AddClipPlaneFromCBuffer(&self, uCBufferSlot: UINT, uCBufferEntry: UINT) -> HRESULT
 }}
 RIDL!{interface ID3D11LinkingNode(ID3D11LinkingNodeVtbl): IUnknown(IUnknownVtbl) {}}
 RIDL!{interface ID3D11FunctionLinkingGraph(ID3D11FunctionLinkingGraphVtbl): IUnknown(IUnknownVtbl) {
     fn CreateModuleInstance(
-        &mut self, ppModuleInstance: *mut *mut ID3D11ModuleInstance,
+        &self, ppModuleInstance: *mut *mut ID3D11ModuleInstance,
         ppErrorBuffer: *mut *mut ID3DBlob
     ) -> HRESULT,
     fn SetInputSignature(
-        &mut self, pInputParameters: *const D3D11_PARAMETER_DESC, cInputParameters: UINT,
+        &self, pInputParameters: *const D3D11_PARAMETER_DESC, cInputParameters: UINT,
         ppInputNode: *mut *mut ID3D11LinkingNode
     ) -> HRESULT,
     fn SetOutputSignature(
-        &mut self, pOutputParameters: *const D3D11_PARAMETER_DESC, cOutputParameters: UINT,
+        &self, pOutputParameters: *const D3D11_PARAMETER_DESC, cOutputParameters: UINT,
         ppOutputNode: *mut *mut ID3D11LinkingNode
     ) -> HRESULT,
     fn CallFunction(
-        &mut self, pModuleInstanceNamespace: LPCSTR,
+        &self, pModuleInstanceNamespace: LPCSTR,
         pModuleWithFunctionPrototype: *mut ID3D11Module, pFunctionName: LPCSTR,
         ppCallNode: *mut *mut ID3D11LinkingNode
     ) -> HRESULT,
     fn PassValue(
-        &mut self, pSrcNode: *mut ID3D11LinkingNode, SrcParameterIndex: INT,
+        &self, pSrcNode: *mut ID3D11LinkingNode, SrcParameterIndex: INT,
         pDstNode: *mut ID3D11LinkingNode, DstParameterIndex: INT
     ) -> HRESULT,
     fn PassValueWithSwizzle(
-        &mut self, pSrcNode: *mut ID3D11LinkingNode, SrcParameterIndex: INT, pSrcSwizzle: LPCSTR,
+        &self, pSrcNode: *mut ID3D11LinkingNode, SrcParameterIndex: INT, pSrcSwizzle: LPCSTR,
         pDstNode: *mut ID3D11LinkingNode, DstParameterIndex: INT, pDstSwizzle: LPCSTR
     ) -> HRESULT,
-    fn GetLastError(&mut self, ppErrorBuffer: *mut *mut ID3DBlob) -> HRESULT,
-    fn GenerateHlsl(&mut self, uFlags: UINT, ppBuffer: *mut *mut ID3DBlob) -> HRESULT
+    fn GetLastError(&self, ppErrorBuffer: *mut *mut ID3DBlob) -> HRESULT,
+    fn GenerateHlsl(&self, uFlags: UINT, ppBuffer: *mut *mut ID3DBlob) -> HRESULT
 }}

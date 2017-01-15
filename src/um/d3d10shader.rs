@@ -84,35 +84,35 @@ STRUCT!{struct D3D10_SIGNATURE_PARAMETER_DESC {
     ReadWriteMask: BYTE,
 }}
 RIDL!{interface ID3D10ShaderReflectionType(ID3D10ShaderReflectionTypeVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D10_SHADER_TYPE_DESC) -> HRESULT,
-    fn GetMemberTypeByIndex(&mut self, Index: UINT) -> *mut ID3D10ShaderReflectionType,
-    fn GetMemberTypeByName(&mut self, Name: LPCSTR) -> *mut ID3D10ShaderReflectionType,
-    fn GetMemberTypeName(&mut self, Index: UINT) -> LPCSTR
+    fn GetDesc(&self, pDesc: *mut D3D10_SHADER_TYPE_DESC) -> HRESULT,
+    fn GetMemberTypeByIndex(&self, Index: UINT) -> *mut ID3D10ShaderReflectionType,
+    fn GetMemberTypeByName(&self, Name: LPCSTR) -> *mut ID3D10ShaderReflectionType,
+    fn GetMemberTypeName(&self, Index: UINT) -> LPCSTR
 }}
 RIDL!{interface ID3D10ShaderReflectionVariable(ID3D10ShaderReflectionVariableVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D10_SHADER_VARIABLE_DESC) -> HRESULT,
-    fn GetType(&mut self) -> *mut ID3D10ShaderReflectionType
+    fn GetDesc(&self, pDesc: *mut D3D10_SHADER_VARIABLE_DESC) -> HRESULT,
+    fn GetType(&self) -> *mut ID3D10ShaderReflectionType
 }}
 RIDL!{interface ID3D10ShaderReflectionConstantBuffer(ID3D10ShaderReflectionConstantBufferVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D10_SHADER_BUFFER_DESC) -> HRESULT,
-    fn GetVariableByIndex(&mut self, Index: UINT) -> *mut ID3D10ShaderReflectionVariable,
-    fn GetVariableByName(&mut self, Name: LPCSTR) -> *mut ID3D10ShaderReflectionVariable
+    fn GetDesc(&self, pDesc: *mut D3D10_SHADER_BUFFER_DESC) -> HRESULT,
+    fn GetVariableByIndex(&self, Index: UINT) -> *mut ID3D10ShaderReflectionVariable,
+    fn GetVariableByName(&self, Name: LPCSTR) -> *mut ID3D10ShaderReflectionVariable
 }}
 RIDL!{interface ID3D10ShaderReflection(ID3D10ShaderReflectionVtbl): IUnknown(IUnknownVtbl) {
-    fn GetDesc(&mut self, pDesc: *mut D3D10_SHADER_DESC) -> HRESULT,
+    fn GetDesc(&self, pDesc: *mut D3D10_SHADER_DESC) -> HRESULT,
     fn GetConstantBufferByIndex(
-        &mut self, Index: UINT
+        &self, Index: UINT
     ) -> *mut ID3D10ShaderReflectionConstantBuffer,
     fn GetConstantBufferByName(
-        &mut self, Name: LPCSTR
+        &self, Name: LPCSTR
     ) -> *mut ID3D10ShaderReflectionConstantBuffer,
     fn GetResourceBindingDesc(
-        &mut self, ResourceIndex: UINT, pDesc: *mut D3D10_SHADER_INPUT_BIND_DESC
+        &self, ResourceIndex: UINT, pDesc: *mut D3D10_SHADER_INPUT_BIND_DESC
     ) -> HRESULT,
     fn GetInputParameterDesc(
-        &mut self, ParameterIndex: UINT, pDesc: *mut D3D10_SIGNATURE_PARAMETER_DESC
+        &self, ParameterIndex: UINT, pDesc: *mut D3D10_SIGNATURE_PARAMETER_DESC
     ) -> HRESULT,
     fn GetOutputParameterDesc(
-        &mut self, ParameterIndex: UINT, pDesc: *mut D3D10_SIGNATURE_PARAMETER_DESC
+        &self, ParameterIndex: UINT, pDesc: *mut D3D10_SIGNATURE_PARAMETER_DESC
     ) -> HRESULT
 }}
