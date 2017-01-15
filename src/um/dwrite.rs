@@ -98,6 +98,14 @@ ENUM!{enum DWRITE_INFORMATIONAL_STRING_ID {
     DWRITE_INFORMATIONAL_STRING_DESIGN_SCRIPT_LANGUAGE_TAG,
     DWRITE_INFORMATIONAL_STRING_SUPPORTED_SCRIPT_LANGUAGE_TAG,
 }}
+ENUM!{enum DWRITE_FACTORY_TYPE {
+    DWRITE_FACTORY_TYPE_SHARED,
+    DWRITE_FACTORY_TYPE_ISOLATED,
+}}
+ENUM!{enum DWRITE_OUTLINE_THRESHOLD {
+    DWRITE_OUTLINE_THRESHOLD_ANTIALIASED,
+    DWRITE_OUTLINE_THRESHOLD_ALIASED,
+}}
 STRUCT!{struct DWRITE_FONT_METRICS {
     designUnitsPerEm: UINT16,
     ascent: UINT16,
@@ -109,6 +117,31 @@ STRUCT!{struct DWRITE_FONT_METRICS {
     underlineThickness: UINT16,
     strikethroughPosition: INT16,
     strikethroughThickness: UINT16,
+}}
+STRUCT!{struct DWRITE_FONT_METRICS1 {
+    designUnitsPerEm: ::UINT16,
+    ascent: ::UINT16,
+    descent: ::UINT16,
+    lineGap: ::INT16,
+    capHeight: ::UINT16,
+    xHeight: ::UINT16,
+    underlinePosition: ::INT16,
+    underlineThickness: ::UINT16,
+    strikethroughPosition: ::INT16,
+    strikethroughThickness: ::UINT16,
+    glyphBoxLeft: ::INT16,
+    glyphBoxTop: ::INT16,
+    glyphBoxRight: ::INT16,
+    glyphBoxBottom: ::INT16,
+    subscriptPositionX: ::INT16,
+    subscriptPositionY: ::INT16,
+    subscriptSizeX: ::INT16,
+    subscriptSizeY: ::INT16,
+    superscriptPositionX: ::INT16,
+    superscriptPositionY: ::INT16,
+    superscriptSizeX: ::INT16,
+    superscriptSizeY: ::INT16,
+    hasTypographicMetrics: ::BOOL,
 }}
 STRUCT!{struct DWRITE_GLYPH_METRICS {
     leftSideBearing: INT32,
@@ -123,9 +156,14 @@ STRUCT!{struct DWRITE_GLYPH_OFFSET {
     advanceOffset: FLOAT,
     ascenderOffset: FLOAT,
 }}
-ENUM!{enum DWRITE_FACTORY_TYPE {
-    DWRITE_FACTORY_TYPE_SHARED,
-    DWRITE_FACTORY_TYPE_ISOLATED,
+STRUCT!{struct DWRITE_UNICODE_RANGE {
+    first: ::UINT32,
+    last: ::UINT32,
+}}
+STRUCT!{struct DWRITE_CARET_METRICS {
+    slopeRise: ::INT16,
+    slopeRun: ::INT16,
+    offset: ::INT16,
 }}
 #[inline]
 pub fn DWRITE_MAKE_OPENTYPE_TAG(a: u8, b: u8, c: u8, d: u8) -> u32 {
@@ -250,6 +288,43 @@ RIDL!{interface IDWriteFontFace(IDWriteFontFaceVtbl): IUnknown(IUnknownVtbl) {
         useGdiNatrual: BOOL, glyphIndices: *const UINT16, glyphCount: UINT32,
         glyphMetrics: *mut DWRITE_GLYPH_METRICS, isSideways: BOOL
     ) -> HRESULT
+}}
+RIDL!{interface IDWriteFontFace1(IDWriteFontFace1Vtbl): IDWriteFontFace(IDWriteFontFaceVtbl) {
+    fn GetMetrics(&mut self, fontFaceMetrics: *mut DWRITE_FONT_METRICS1) -> (),
+    fn GetGdiCompatibleMetrics(
+        &mut self, emSize: ::FLOAT, pixelsPerDip: ::FLOAT, transform: *const DWRITE_MATRIX,
+        fontFaceMetrics: *mut DWRITE_FONT_METRICS1
+    ) -> ::HRESULT,
+    fn GetCaretMetrics(&mut self, caretMetrics: *mut DWRITE_CARET_METRICS) -> (),
+    fn GetUnicodeRanges(&mut self, maxRangeCount: ::UINT32, unicodeRanges: *mut DWRITE_UNICODE_RANGE,
+                        actualRangeCount: *mut ::UINT32
+    ) -> ::HRESULT,
+    fn IsMonoSpacedFont(&mut self) -> ::BOOL,
+    fn GetDesignGlyphAdvances(
+        &mut self, glyphCount: ::UINT32, glyphIndices: *const ::UINT16,
+        glyphAdvances: *mut ::INT32, isSideways: ::BOOL
+    ) -> ::HRESULT,
+    fn GetGdiCompatibleGlyphAdvance(
+        &mut self, emSize: ::FLOAT, pixelsPerDip: ::FLOAT, transform: *const DWRITE_MATRIX,
+        useGdiNatural: ::BOOL, isSideways: ::BOOL, glyphCount: ::UINT32,
+        glyphIndices: *const ::UINT16, glyphAdvances: *mut ::INT32
+    ) -> ::HRESULT,
+    fn GetKerningPairAdjustments(
+        &mut self, glyphCount: ::UINT32, glyphIndices: *const ::UINT16,
+        glyphAdvanceAdjustments: *mut ::INT32
+    ) -> ::HRESULT,
+    fn HasKerningPairs(&mut self) -> ::BOOL,
+    fn GetRecommendedRenderingMode(
+        &mut self, fontEmSize: ::FLOAT, dpiX: ::FLOAT, dpiY: ::FLOAT,
+        transform: *const DWRITE_MATRIX, isSideways: ::BOOL,
+        outlineThreshold: DWRITE_OUTLINE_THRESHOLD,
+        measuringMode: ::DWRITE_MEASURING_MODE,
+        renderingMode: *mut DWRITE_RENDERING_MODE
+    ) -> ::HRESULT,
+    fn GetVerticalGlyphVariants(
+        &mut self, nominalGlyphIndices: *const ::UINT16, verticalGlyphIndices: *mut ::UINT16
+    ) -> ::HRESULT,
+    fn HasVerticalGlyphVariants(&mut self) -> ::BOOL
 }}
 RIDL!{interface IDWriteFontCollectionLoader(IDWriteFontCollectionLoaderVtbl):
         IUnknown(IUnknownVtbl) {
