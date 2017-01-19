@@ -2479,3 +2479,15 @@ STRUCT!{struct MENUINFO {
 }}
 pub type LPMENUINFO = *mut MENUINFO;
 pub type LPCMENUINFO = *const MENUINFO;
+
+pub const GCW_ATOM: c_int = -32;
+pub const GCL_CBCLSEXTRA: c_int = -20;
+pub const GCL_CBWNDEXTRA: c_int = -18;
+pub const GCL_HBRBACKGROUND: c_int = -10;
+pub const GCL_HCURSOR: c_int = -12;
+pub const GCL_HICON: c_int = -14;
+pub const GCL_HICONSM: c_int = -34;
+pub const GCL_HMODULE: c_int = -16;
+pub const GCL_MENUNAME: c_int = -8;
+pub const GCL_STYLE: c_int = -26;
+pub const GCL_WNDPROC: c_int = -24;
