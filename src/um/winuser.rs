@@ -245,7 +245,7 @@ pub const LB_OKAY: LRESULT = 0;
 pub const LB_ERR: LRESULT = -1;
 pub const LB_ERRSPACE: LRESULT = -2;
 
-// pub const LBN_ERRSPACE: WORD = -2;
+pub const LBN_ERRSPACE: WORD = -2i16 as WORD;
 pub const LBN_SELCHANGE: WORD = 1;
 pub const LBN_DBLCLK: WORD = 2;
 pub const LBN_SELCANCEL: WORD = 3;
@@ -318,7 +318,7 @@ pub const CB_OKAY: LRESULT = 0;
 pub const CB_ERR: LRESULT = -1;
 pub const CB_ERRSPACE: LRESULT = -2;
 
-// pub const CBN_ERRSPACE: WORD = -1;
+pub const CBN_ERRSPACE: WORD = -1i16 as WORD;
 pub const CBN_SELCHANGE: WORD = 1;
 pub const CBN_DBLCLK: WORD = 2;
 pub const CBN_SETFOCUS: WORD = 3;
