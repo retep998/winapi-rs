@@ -281,42 +281,42 @@ STRUCT!{struct WICBitmapPlane {
 RIDL!(
 interface IWICPalette(IWICPaletteVtbl): IUnknown(IUnknownVtbl) {
     fn InitializePredefined(
-        &self, ePaletteType: WICBitmapPaletteType, fAddTransparentColor: BOOL
+        ePaletteType: WICBitmapPaletteType, fAddTransparentColor: BOOL
     ) -> HRESULT,
-    fn InitializeCustom(&self, pColors: *mut WICColor, cCount: UINT) -> HRESULT,
+    fn InitializeCustom(pColors: *mut WICColor, cCount: UINT) -> HRESULT,
     fn InitializeFromBitmap(
-        &self, pISurface: *mut IWICBitmapSource, cCount: UINT, fAddTransparentColor: BOOL
+        pISurface: *mut IWICBitmapSource, cCount: UINT, fAddTransparentColor: BOOL
     ) -> HRESULT,
-    fn InitializeFromPalette(&self, pIPalette: *mut IWICPalette) -> HRESULT,
-    fn GetType(&self, pePaletteType: *mut WICBitmapPaletteType) -> HRESULT,
-    fn GetColorCount(&self, pcCount: *mut UINT) -> HRESULT,
+    fn InitializeFromPalette(pIPalette: *mut IWICPalette) -> HRESULT,
+    fn GetType(pePaletteType: *mut WICBitmapPaletteType) -> HRESULT,
+    fn GetColorCount(pcCount: *mut UINT) -> HRESULT,
     fn GetColors(
-        &self, cCount: UINT, pColros: *mut WICColor, pcActualColors: *mut UINT
+        cCount: UINT, pColros: *mut WICColor, pcActualColors: *mut UINT
     ) -> HRESULT,
-    fn IsBlackWhite(&self, pfIsBlackWhite: *mut BOOL) -> HRESULT,
-    fn IsGrayscale(&self, pfIsGrayscale: *mut BOOL) -> HRESULT,
-    fn HasAlpha(&self, pfHasAlpha: *mut BOOL) -> HRESULT
+    fn IsBlackWhite(pfIsBlackWhite: *mut BOOL) -> HRESULT,
+    fn IsGrayscale(pfIsGrayscale: *mut BOOL) -> HRESULT,
+    fn HasAlpha(pfHasAlpha: *mut BOOL) -> HRESULT
 });
 RIDL!(
 interface IWICBitmapSource(IWICBitmapSourceVtbl): IUnknown(IUnknownVtbl) {
-    fn GetSize(&self, puiWidth: *mut UINT, puiHeight: UINT) -> HRESULT,
-    fn GetPixelFormat(&self, pPixelFormat: *mut WICPixelFormatGUID) -> HRESULT,
-    fn GetResolution(&self, pDpiX: *mut f64, pDpiY: *mut f64) -> HRESULT,
-    fn CopyPalette(&self, pIPalette: *mut IWICPalette) -> HRESULT,
+    fn GetSize(puiWidth: *mut UINT, puiHeight: UINT) -> HRESULT,
+    fn GetPixelFormat(pPixelFormat: *mut WICPixelFormatGUID) -> HRESULT,
+    fn GetResolution(pDpiX: *mut f64, pDpiY: *mut f64) -> HRESULT,
+    fn CopyPalette(pIPalette: *mut IWICPalette) -> HRESULT,
     fn CopyPixels(
-        &self, prc: *const WICRect, cbStride: UINT, cbBufferSize: UINT,
+        prc: *const WICRect, cbStride: UINT, cbBufferSize: UINT,
         pbBuffer: *mut BYTE
     ) -> HRESULT
 });
 RIDL!(
 interface IWICFormatConverter(IWICFormatConverterVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
-        &self, pISource: *mut IWICBitmapSource, dstFormat: REFWICPixelFormatGUID,
+        pISource: *mut IWICBitmapSource, dstFormat: REFWICPixelFormatGUID,
         dither: WICBitmapDitherType, pIPalette: *mut IWICPalette, alphaThreasholdPercent: f64,
         paletteTranslate: WICBitmapPaletteType
     ) -> HRESULT,
     fn CanConvert(
-        &self, srcPixelFormat: REFWICPixelFormatGUID, dstPixelFormat: REFWICPixelFormatGUID,
+        srcPixelFormat: REFWICPixelFormatGUID, dstPixelFormat: REFWICPixelFormatGUID,
         pfCanConvert: *mut BOOL
     ) -> HRESULT
 });
@@ -324,47 +324,47 @@ RIDL!(
 interface IWICPlanarFormatConverter(IWICPlanarFormatConverterVtbl)
     : IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
-        &self, ppPlanes: *mut *mut IWICBitmapSource, cPlanes: UINT,
+        ppPlanes: *mut *mut IWICBitmapSource, cPlanes: UINT,
         dstFormat: REFWICPixelFormatGUID, dither: WICBitmapDitherType, pIPalette: *mut IWICPalette,
         alphaThreasholdPercent: f64, paletteTranslate: WICBitmapPaletteType
     ) -> HRESULT,
     fn CanConvert(
-        &self, pSrcPixelFormats: *const WICPixelFormatGUID, cSrcPlanes: UINT,
+        pSrcPixelFormats: *const WICPixelFormatGUID, cSrcPlanes: UINT,
         dstPixelFormat: REFWICPixelFormatGUID, pfCanConvert: *mut BOOL
     ) -> HRESULT
 });
 RIDL!(
 interface IWICBitmapScaler(IWICBitmapScalerVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
-        &self, pISource: *mut IWICBitmapSource, uiWidth: UINT, uiHeight: UINT,
+        pISource: *mut IWICBitmapSource, uiWidth: UINT, uiHeight: UINT,
         mode: WICBitmapInterpolationMode
     ) -> HRESULT
 });
 RIDL!(
 interface IWICBitmapClipper(IWICBitmapClipperVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
-    fn Initialize(&self, pISource: *mut IWICBitmapSource, prc: *const WICRect) -> HRESULT
+    fn Initialize(pISource: *mut IWICBitmapSource, prc: *const WICRect) -> HRESULT
 });
 RIDL!(
 interface IWICBitmapFlipRotator(IWICBitmapFlipRotatorVtbl)
     : IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
-        &self, pISource: *mut IWICBitmapSource, options: WICBitmapTransformOptions
+        pISource: *mut IWICBitmapSource, options: WICBitmapTransformOptions
     ) -> HRESULT
 });
 RIDL!(
 interface IWICBitmapLock(IWICBitmapLockVtbl): IUnknown(IUnknownVtbl) {
-    fn GetSize(&self, puiWidth: *mut UINT, puiHeight: *mut UINT) -> HRESULT,
-    fn GetStride(&self, pcbStride: *mut UINT) -> HRESULT,
+    fn GetSize(puiWidth: *mut UINT, puiHeight: *mut UINT) -> HRESULT,
+    fn GetStride(pcbStride: *mut UINT) -> HRESULT,
     fn GetDataPointer(
-        &self, pcbBufferSize: *mut UINT, ppbData: *mut WICInProcPointer
+        pcbBufferSize: *mut UINT, ppbData: *mut WICInProcPointer
     ) -> HRESULT,
-    fn GetPixelFormat(&self, pPixelFormat: *mut WICPixelFormatGUID) -> HRESULT
+    fn GetPixelFormat(pPixelFormat: *mut WICPixelFormatGUID) -> HRESULT
 });
 RIDL!(
 interface IWICBitmap(IWICBitmapVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Lock(
-        &self, prcLock: *const WICRect, flags: DWORD, ppILock: *mut *mut IWICBitmapLock
+        prcLock: *const WICRect, flags: DWORD, ppILock: *mut *mut IWICBitmapLock
     ) -> HRESULT,
-    fn SetPalette(&self, pIPalette: *mut IWICPalette) -> HRESULT,
-    fn SetResolution(&self, dpiX: f64, dpiY: f64) -> HRESULT
+    fn SetPalette(pIPalette: *mut IWICPalette) -> HRESULT,
+    fn SetResolution(dpiX: f64, dpiY: f64) -> HRESULT
 });

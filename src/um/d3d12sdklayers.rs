@@ -8,7 +8,7 @@ use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
 
 RIDL!{interface ID3D12Debug(ID3D12DebugVtbl): IUnknown(IUnknownVtbl) {
-    fn EnableDebugLayer(&self) -> ()
+    fn EnableDebugLayer() -> ()
 }}
 ENUM!{enum D3D12_DEBUG_FEATURE {
     D3D12_DEBUG_FEATURE_NONE = 0,
@@ -22,21 +22,21 @@ ENUM!{enum D3D12_RLDO_FLAGS {
     D3D12_RLDO_IGNORE_INTERNAL = 0x4,
 }}
 RIDL!{interface ID3D12DebugDevice(ID3D12DebugDeviceVtbl): IUnknown(IUnknownVtbl) {
-    fn SetFeatureMask(&self, Mask: D3D12_DEBUG_FEATURE) -> HRESULT,
-    fn GetFeatureMask(&self) -> D3D12_DEBUG_FEATURE,
-    fn ReportLiveDeviceObjects(&self, Flags: D3D12_RLDO_FLAGS) -> HRESULT
+    fn SetFeatureMask(Mask: D3D12_DEBUG_FEATURE) -> HRESULT,
+    fn GetFeatureMask() -> D3D12_DEBUG_FEATURE,
+    fn ReportLiveDeviceObjects(Flags: D3D12_RLDO_FLAGS) -> HRESULT
 }}
 RIDL!{interface ID3D12DebugCommandQueue(ID3D12DebugCommandQueueVtbl): IUnknown(IUnknownVtbl) {
     fn AssertResourceState(
-        &self, pResource: *mut ID3D12Resource, Subresource: UINT, State: UINT
+        pResource: *mut ID3D12Resource, Subresource: UINT, State: UINT
     ) -> BOOL
 }}
 RIDL!{interface ID3D12DebugCommandList(ID3D12DebugCommandListVtbl): IUnknown(IUnknownVtbl) {
     fn AssertResourceState(
-        &self, pResource: *mut ID3D12Resource, Subresource: UINT, State: UINT
+        pResource: *mut ID3D12Resource, Subresource: UINT, State: UINT
     ) -> BOOL,
-    fn SetFeatureMask(&self, Mask: D3D12_DEBUG_FEATURE) -> HRESULT,
-    fn GetFeatureMask(&self) -> D3D12_DEBUG_FEATURE
+    fn SetFeatureMask(Mask: D3D12_DEBUG_FEATURE) -> HRESULT,
+    fn GetFeatureMask() -> D3D12_DEBUG_FEATURE
 }}
 ENUM!{enum D3D12_MESSAGE_CATEGORY {
     D3D12_MESSAGE_CATEGORY_APPLICATION_DEFINED = 0,
@@ -1016,55 +1016,55 @@ STRUCT!{struct D3D12_INFO_QUEUE_FILTER {
 }}
 pub const D3D12_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT: UINT = 1024;
 RIDL!{interface ID3D12InfoQueue(ID3D12InfoQueueVtbl): IUnknown(IUnknownVtbl) {
-    fn SetMessageCountLimit(&self, MessageCountLimit: UINT64) -> HRESULT,
-    fn ClearStoredMessages(&self) -> (),
+    fn SetMessageCountLimit(MessageCountLimit: UINT64) -> HRESULT,
+    fn ClearStoredMessages() -> (),
     fn GetMessage(
-        &self, MessageIndex: UINT64, pMessage: *mut D3D12_MESSAGE,
+        MessageIndex: UINT64, pMessage: *mut D3D12_MESSAGE,
         pMessageByteLength: *mut SIZE_T
     ) -> HRESULT,
-    fn GetNumMessagesAllowedByStorageFilter(&self) -> UINT64,
-    fn GetNumMessagesDeniedByStorageFilter(&self) -> UINT64,
-    fn GetNumStoredMessages(&self) -> UINT64,
-    fn GetNumStoredMessagesAllowedByRetrievalFilter(&self) -> UINT64,
-    fn GetNumMessagesDiscardedByMessageCountLimit(&self) -> UINT64,
-    fn GetMessageCountLimit(&self) -> UINT64,
-    fn AddStorageFilterEntries(&self, pFilter: *mut D3D12_INFO_QUEUE_FILTER) -> HRESULT,
+    fn GetNumMessagesAllowedByStorageFilter() -> UINT64,
+    fn GetNumMessagesDeniedByStorageFilter() -> UINT64,
+    fn GetNumStoredMessages() -> UINT64,
+    fn GetNumStoredMessagesAllowedByRetrievalFilter() -> UINT64,
+    fn GetNumMessagesDiscardedByMessageCountLimit() -> UINT64,
+    fn GetMessageCountLimit() -> UINT64,
+    fn AddStorageFilterEntries(pFilter: *mut D3D12_INFO_QUEUE_FILTER) -> HRESULT,
     fn GetStorageFilter(
-        &self, pFilter: *mut D3D12_INFO_QUEUE_FILTER, pFilterByteLength: *mut SIZE_T
+        pFilter: *mut D3D12_INFO_QUEUE_FILTER, pFilterByteLength: *mut SIZE_T
     ) -> HRESULT,
-    fn ClearStorageFilter(&self) -> (),
-    fn PushEmptyStorageFilter(&self) -> HRESULT,
-    fn PushCopyOfStorageFilter(&self) -> HRESULT,
-    fn PushStorageFilter(&self, pFilter: *mut D3D12_INFO_QUEUE_FILTER) -> HRESULT,
-    fn PopStorageFilter(&self) -> (),
-    fn GetStorageFilterStackSize(&self) -> UINT,
-    fn AddRetrievalFilterEntries(&self, pFilter: *mut D3D12_INFO_QUEUE_FILTER) -> HRESULT,
+    fn ClearStorageFilter() -> (),
+    fn PushEmptyStorageFilter() -> HRESULT,
+    fn PushCopyOfStorageFilter() -> HRESULT,
+    fn PushStorageFilter(pFilter: *mut D3D12_INFO_QUEUE_FILTER) -> HRESULT,
+    fn PopStorageFilter() -> (),
+    fn GetStorageFilterStackSize() -> UINT,
+    fn AddRetrievalFilterEntries(pFilter: *mut D3D12_INFO_QUEUE_FILTER) -> HRESULT,
     fn GetRetrievalFilter(
-        &self, pFilter: *mut D3D12_INFO_QUEUE_FILTER, pFilterByteLength: *mut SIZE_T
+        pFilter: *mut D3D12_INFO_QUEUE_FILTER, pFilterByteLength: *mut SIZE_T
     ) -> HRESULT,
-    fn ClearRetrievalFilter(&self) -> (),
-    fn PushEmptyRetrievalFilter(&self) -> HRESULT,
-    fn PushCopyOfRetrievalFilter(&self) -> HRESULT,
-    fn PushRetrievalFilter(&self, pFilter: *mut D3D12_INFO_QUEUE_FILTER) -> HRESULT,
-    fn PopRetrievalFilter(&self) -> (),
-    fn GetRetrievalFilterStackSize(&self) -> UINT,
+    fn ClearRetrievalFilter() -> (),
+    fn PushEmptyRetrievalFilter() -> HRESULT,
+    fn PushCopyOfRetrievalFilter() -> HRESULT,
+    fn PushRetrievalFilter(pFilter: *mut D3D12_INFO_QUEUE_FILTER) -> HRESULT,
+    fn PopRetrievalFilter() -> (),
+    fn GetRetrievalFilterStackSize() -> UINT,
     fn AddMessage(
-        &self, Category: D3D12_MESSAGE_CATEGORY, Severity: D3D12_MESSAGE_SEVERITY,
+        Category: D3D12_MESSAGE_CATEGORY, Severity: D3D12_MESSAGE_SEVERITY,
         ID: D3D12_MESSAGE_ID, pDescription: LPCSTR
     ) -> HRESULT,
     fn AddApplicationMessage(
-        &self, Severity: D3D12_MESSAGE_SEVERITY, pDescription: LPCSTR
+        Severity: D3D12_MESSAGE_SEVERITY, pDescription: LPCSTR
     ) -> HRESULT,
     fn SetBreakOnCategory(
-        &self, Category: D3D12_MESSAGE_CATEGORY, bEnable: BOOL
+        Category: D3D12_MESSAGE_CATEGORY, bEnable: BOOL
     ) -> HRESULT,
     fn SetBreakOnSeverity(
-        &self, Severity: D3D12_MESSAGE_SEVERITY, bEnable: BOOL
+        Severity: D3D12_MESSAGE_SEVERITY, bEnable: BOOL
     ) -> HRESULT,
-    fn SetBreakOnID(&self, ID: D3D12_MESSAGE_ID, bEnable: BOOL) -> HRESULT,
-    fn GetBreakOnCategory(&self, Category: D3D12_MESSAGE_CATEGORY) -> BOOL,
-    fn GetBreakOnSeverity(&self, Severity: D3D12_MESSAGE_SEVERITY) -> BOOL,
-    fn GetBreakOnID(&self, ID: D3D12_MESSAGE_ID) -> BOOL,
-    fn SetMuteDebugOutput(&self, bMute: BOOL) -> (),
-    fn GetMuteDebugOutput(&self) -> BOOL
+    fn SetBreakOnID(ID: D3D12_MESSAGE_ID, bEnable: BOOL) -> HRESULT,
+    fn GetBreakOnCategory(Category: D3D12_MESSAGE_CATEGORY) -> BOOL,
+    fn GetBreakOnSeverity(Severity: D3D12_MESSAGE_SEVERITY) -> BOOL,
+    fn GetBreakOnID(ID: D3D12_MESSAGE_ID) -> BOOL,
+    fn SetMuteDebugOutput(bMute: BOOL) -> (),
+    fn GetMuteDebugOutput() -> BOOL
 }}

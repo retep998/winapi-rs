@@ -32,7 +32,7 @@ macro_rules! DEFINE_GUID {
         $name:ident, $l:expr, $w1:expr, $w2:expr,
         $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr, $b6:expr, $b7:expr, $b8:expr
     ) => {
-        pub const $name: GUID = GUID {
+        pub const $name: $crate::shared::guiddef::GUID = $crate::shared::guiddef::GUID {
             Data1: $l,
             Data2: $w1,
             Data3: $w2,
@@ -83,69 +83,73 @@ macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
     }
 }
 macro_rules! RIDL {
-    (interface $interface:ident ($vtbl:ident) {$(
-        fn $method:ident(&self $(,$p:ident : $t:ty)*) -> $rtr:ty
+    (#[uuid($($uuid:expr),+)]
+    interface $interface:ident ($vtbl:ident) {$(
+        fn $method:ident($($p:ident : $t:ty),*) -> $rtr:ty
     ),+}) => (
         #[repr(C)]
         pub struct $vtbl {
             $(pub $method: unsafe extern "system" fn(
-                This: *mut $interface
-                $(,$p: $t)*
+                This: *mut $interface,
+                $($p: $t),*
             ) -> $rtr),+
         }
         #[repr(C)]
         pub struct $interface {
-            pub lpVtbl: *const $vtbl
+            pub lpVtbl: *const $vtbl,
         }
-        RIDL!{@impl $interface {$(fn $method(&self $(,$p: $t)*) -> $rtr),+}}
+        RIDL!{@impl $interface {$(fn $method($($p: $t),*) -> $rtr),+}}
+        RIDL!{@uuid $interface $($uuid),+}
     );
-    (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {
+    (#[uuid($($uuid:expr),+)]
+    interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {
     }) => (
         #[repr(C)]
         pub struct $vtbl {
-            pub parent: $pvtbl
+            pub parent: $pvtbl,
         }
         #[repr(C)]
         pub struct $interface {
-            pub lpVtbl: *const $vtbl
+            pub lpVtbl: *const $vtbl,
         }
         RIDL!{@deref $interface $pinterface}
+        RIDL!{@uuid $interface $($uuid),+}
     );
     (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
-        fn $method:ident(&self $(,$p:ident : $t:ty)*) -> $rtr:ty
+        fn $method:ident($($p:ident : $t:ty),*) -> $rtr:ty
     ),+}) => (
         #[repr(C)]
         pub struct $vtbl {
             pub parent: $pvtbl
             $(,pub $method: unsafe extern "system" fn(
-                This: *mut $interface
-                $(,$p: $t)*
+                This: *mut $interface,
+                $($p: $t),*
             ) -> $rtr)+
         }
         #[repr(C)]
         pub struct $interface {
-            pub lpVtbl: *const $vtbl
+            pub lpVtbl: *const $vtbl,
         }
-        RIDL!{@impl $interface {$(fn $method(&self $(,$p: $t)*) -> $rtr),+}}
+        RIDL!{@impl $interface {$(fn $method($($p: $t),*) -> $rtr),+}}
         RIDL!{@deref $interface $pinterface}
     );
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
-        fn $method:ident(&self $(,$p:ident : $t:ty)*) -> $rtr:ty
+        fn $method:ident($($p:ident : $t:ty),*) -> $rtr:ty
     ),+}) => (
         #[repr(C)]
         pub struct $vtbl {
             pub parent: $pvtbl
             $(,pub $method: unsafe extern "system" fn(
-                This: *mut $interface
-                $(,$p: $t)*
+                This: *mut $interface,
+                $($p: $t),*
             ) -> $rtr)+
         }
         #[repr(C)]
         pub struct $interface {
-            pub lpVtbl: *const $vtbl
+            pub lpVtbl: *const $vtbl,
         }
-        RIDL!{@impl $interface {$(fn $method(&self $(,$p: $t)*) -> $rtr),+}}
+        RIDL!{@impl $interface {$(fn $method($($p: $t),*) -> $rtr),+}}
         RIDL!{@deref $interface $pinterface}
         RIDL!{@uuid $interface $($uuid),+}
     );
@@ -159,11 +163,11 @@ macro_rules! RIDL {
         }
     );
     (@impl $interface:ident {$(
-        fn $method:ident(&self $(,$p:ident : $t:ty)*) -> $rtr:ty
+        fn $method:ident($($p:ident : $t:ty),*) -> $rtr:ty
     ),+}) => (
         impl $interface {
             $(#[inline] pub unsafe fn $method(&self $(,$p: $t)*) -> $rtr {
-                ((*self.lpVtbl).$method)(self as *const _ as *mut _ $(,$p)*)
+                ((*self.lpVtbl).$method)(self as *const _ as *mut _, $($p),*)
             })+
         }
     );
@@ -173,8 +177,8 @@ macro_rules! RIDL {
     ) => (
         impl ::Interface for $interface {
             #[inline]
-            fn uuidof() -> ::shared::guiddef::GUID {
-                ::shared::guiddef::GUID {
+            fn uuidof() -> $crate::shared::guiddef::GUID {
+                $crate::shared::guiddef::GUID {
                     Data1: $l,
                     Data2: $w1,
                     Data3: $w2,

@@ -67,125 +67,125 @@ pub const VSS_CF_APP_ROLLBACK_RECOVERY: ::DWORD = 0x00000002;
 pub const VSS_CF_NOT_SYSTEM_STATE: ::DWORD = 0x00000004;
 RIDL!(
 interface IVssWMFiledesc(IVssWMFiledescVtbl): IUnknown(IUnknownVtbl) {
-    fn GetPath(&self, pbstrPath: *mut ::BSTR) -> ::HRESULT,
-    fn GetFilespec(&self, pbstrFilespec: *mut ::BSTR) -> ::HRESULT,
-    fn GetRecursive(&self, pbRecursive: *mut bool) -> ::HRESULT,
-    fn GetAlternateLocation(&self, pbstrAlternateLocation: *mut ::BSTR) -> ::HRESULT,
-    fn GetBackupTypeMask(&self, pdwTypeMask: *mut ::DWORD) -> ::HRESULT
+    fn GetPath(pbstrPath: *mut ::BSTR) -> ::HRESULT,
+    fn GetFilespec(pbstrFilespec: *mut ::BSTR) -> ::HRESULT,
+    fn GetRecursive(pbRecursive: *mut bool) -> ::HRESULT,
+    fn GetAlternateLocation(pbstrAlternateLocation: *mut ::BSTR) -> ::HRESULT,
+    fn GetBackupTypeMask(pdwTypeMask: *mut ::DWORD) -> ::HRESULT
 }
 );
 RIDL!(
 interface IVssWMDependency(IVssWMDependencyVtbl): IUnknown(IUnknownVtbl) {
-    fn GetWriterId(&self, pWriterId: *mut ::VSS_ID) -> ::HRESULT,
-    fn GetLogicalPath(&self, pbstrLogicalPath: *mut ::BSTR) -> ::HRESULT,
-    fn GetComponentName(&self, pbstrComponentName: *mut ::BSTR) -> ::HRESULT
+    fn GetWriterId(pWriterId: *mut ::VSS_ID) -> ::HRESULT,
+    fn GetLogicalPath(pbstrLogicalPath: *mut ::BSTR) -> ::HRESULT,
+    fn GetComponentName(pbstrComponentName: *mut ::BSTR) -> ::HRESULT
 }
 );
 RIDL!(
 interface IVssComponent(IVssComponentVtbl): IUnknown(IUnknownVtbl) {
-    fn GetLogicalPath(&self, pbstrPath: *mut ::BSTR) -> ::HRESULT,
-    fn GetComponentType(&self, pct: *mut ::VSS_COMPONENT_TYPE) -> ::HRESULT,
-    fn GetComponentName(&self, pbstrName: *mut ::BSTR) -> ::HRESULT,
-    fn GetBackupSucceeded(&self, pbSucceeded: *mut bool) -> ::HRESULT,
-    fn GetAlternateLocationMappingCount(&self, pcMappings: *mut ::UINT) -> ::HRESULT,
+    fn GetLogicalPath(pbstrPath: *mut ::BSTR) -> ::HRESULT,
+    fn GetComponentType(pct: *mut ::VSS_COMPONENT_TYPE) -> ::HRESULT,
+    fn GetComponentName(pbstrName: *mut ::BSTR) -> ::HRESULT,
+    fn GetBackupSucceeded(pbSucceeded: *mut bool) -> ::HRESULT,
+    fn GetAlternateLocationMappingCount(pcMappings: *mut ::UINT) -> ::HRESULT,
     fn GetAlternateLocationMapping(
-        &self, iMapping: ::UINT, ppFiledesc: *mut *mut ::IVssWMFiledesc
+        iMapping: ::UINT, ppFiledesc: *mut *mut ::IVssWMFiledesc
     ) -> ::HRESULT,
-    fn SetBackupMetadata(&self, wszData: ::LPCWSTR) -> ::HRESULT,
-    fn GetBackupMetadata(&self, pbstrData: *mut ::BSTR) -> ::HRESULT,
+    fn SetBackupMetadata(wszData: ::LPCWSTR) -> ::HRESULT,
+    fn GetBackupMetadata(pbstrData: *mut ::BSTR) -> ::HRESULT,
     fn AddPartialFile(
-        &self, wszPath: ::LPCWSTR, wszFilename: ::LPCWSTR, wszRanges: ::LPCWSTR,
+        wszPath: ::LPCWSTR, wszFilename: ::LPCWSTR, wszRanges: ::LPCWSTR,
         wszMetadata: ::LPCWSTR
     ) -> ::HRESULT,
-    fn GetPartialFileCount(&self, pcPartialFiles: *mut ::UINT) -> ::HRESULT,
+    fn GetPartialFileCount(pcPartialFiles: *mut ::UINT) -> ::HRESULT,
     fn GetPartialFile(
-        &self, iPartialFile: ::UINT, pbstrPath: *mut ::BSTR, pbstrFilename: *mut ::BSTR,
+        iPartialFile: ::UINT, pbstrPath: *mut ::BSTR, pbstrFilename: *mut ::BSTR,
         pbstrRange: *mut ::BSTR, pbstrMetadata: *mut ::BSTR
     ) -> ::HRESULT,
-    fn IsSelectedForRestore(&self, pbSelectedForRestore: *mut bool) -> ::HRESULT,
-    fn GetAdditionalRestores(&self, pbAdditionalRestores: *mut bool) -> ::HRESULT,
-    fn GetNewTargetCount(&self, pcNewTarget: *mut ::UINT) -> ::HRESULT,
+    fn IsSelectedForRestore(pbSelectedForRestore: *mut bool) -> ::HRESULT,
+    fn GetAdditionalRestores(pbAdditionalRestores: *mut bool) -> ::HRESULT,
+    fn GetNewTargetCount(pcNewTarget: *mut ::UINT) -> ::HRESULT,
     fn GetNewTarget(
-        &self, iNewTarget: ::UINT, ppFiledesc: *mut *mut ::IVssWMFiledesc
+        iNewTarget: ::UINT, ppFiledesc: *mut *mut ::IVssWMFiledesc
     ) -> ::HRESULT,
     fn AddDirectedTarget(
-        &self, wszSourcePath: ::LPCWSTR, wszSourceFilename: ::LPCWSTR,
+        wszSourcePath: ::LPCWSTR, wszSourceFilename: ::LPCWSTR,
         wszSourceRangeList: ::LPCWSTR, wszDestinationPath: ::LPCWSTR,
         wszDestinationFilename: ::LPCWSTR, wszDestinationRangeList: ::LPCWSTR
     ) -> ::HRESULT,
-    fn GetDirectedTargetCount(&self, pcDirectedTarget: *mut ::UINT) -> ::HRESULT,
+    fn GetDirectedTargetCount(pcDirectedTarget: *mut ::UINT) -> ::HRESULT,
     fn GetDirectedTarget(
-        &self, iDirectedTarget: ::UINT, pbstrSourcePath: *mut ::BSTR,
+        iDirectedTarget: ::UINT, pbstrSourcePath: *mut ::BSTR,
         pbstrSourceFileName: *mut ::BSTR, pbstrSourceRangeList: *mut ::BSTR,
         pbstrDestinationPath: *mut ::BSTR, pbstrDestinationFilename: *mut ::BSTR,
         pbstrDestinationRangeList: *mut ::BSTR
     ) -> ::HRESULT,
-    fn SetRestoreMetadata(&self, wszRestoreMetadata: ::LPCWSTR) -> ::HRESULT,
-    fn GetRestoreMetadata(&self, pbstrRestoreMetadata: *mut ::BSTR) -> ::HRESULT,
-    fn SetRestoreTarget(&self, target: ::VSS_RESTORE_TARGET) -> ::HRESULT,
-    fn GetRestoreTarget(&self, pTarget: *mut ::VSS_RESTORE_TARGET) -> ::HRESULT,
-    fn SetPreRestoreFailureMsg(&self, wszPreRestoreFailureMsg: ::LPCWSTR) -> ::HRESULT,
-    fn GetPreRestoreFailureMsg(&self, pbstrPreRestoreFailureMsg: *mut ::BSTR) -> ::HRESULT,
-    fn SetPostRestoreFailureMsg(&self, wszPostRestoreFailureMsg: ::LPCWSTR) -> ::HRESULT,
-    fn GetPostRestoreFailureMsg(&self, pbstrPostRestoreFailureMsg: *mut ::BSTR) -> ::HRESULT,
-    fn SetBackupStamp(&self, wszBackupStamp: ::LPCWSTR) -> ::HRESULT,
-    fn GetBackupStamp(&self, pbstrBackupStamp: *mut ::BSTR) -> ::HRESULT,
-    fn GetPreviousBackupStamp(&self, pbstrBackupStamp: *mut ::BSTR) -> ::HRESULT,
-    fn GetBackupOptions(&self, pbstrBackupOptions: *mut ::BSTR) -> ::HRESULT,
-    fn GetRestoreOptions(&self, pbstrRestoreOptions: *mut ::BSTR) -> ::HRESULT,
-    fn GetRestoreSubcomponentCount(&self, pcRestoreSubcomponent: *mut ::UINT) -> ::HRESULT,
+    fn SetRestoreMetadata(wszRestoreMetadata: ::LPCWSTR) -> ::HRESULT,
+    fn GetRestoreMetadata(pbstrRestoreMetadata: *mut ::BSTR) -> ::HRESULT,
+    fn SetRestoreTarget(target: ::VSS_RESTORE_TARGET) -> ::HRESULT,
+    fn GetRestoreTarget(pTarget: *mut ::VSS_RESTORE_TARGET) -> ::HRESULT,
+    fn SetPreRestoreFailureMsg(wszPreRestoreFailureMsg: ::LPCWSTR) -> ::HRESULT,
+    fn GetPreRestoreFailureMsg(pbstrPreRestoreFailureMsg: *mut ::BSTR) -> ::HRESULT,
+    fn SetPostRestoreFailureMsg(wszPostRestoreFailureMsg: ::LPCWSTR) -> ::HRESULT,
+    fn GetPostRestoreFailureMsg(pbstrPostRestoreFailureMsg: *mut ::BSTR) -> ::HRESULT,
+    fn SetBackupStamp(wszBackupStamp: ::LPCWSTR) -> ::HRESULT,
+    fn GetBackupStamp(pbstrBackupStamp: *mut ::BSTR) -> ::HRESULT,
+    fn GetPreviousBackupStamp(pbstrBackupStamp: *mut ::BSTR) -> ::HRESULT,
+    fn GetBackupOptions(pbstrBackupOptions: *mut ::BSTR) -> ::HRESULT,
+    fn GetRestoreOptions(pbstrRestoreOptions: *mut ::BSTR) -> ::HRESULT,
+    fn GetRestoreSubcomponentCount(pcRestoreSubcomponent: *mut ::UINT) -> ::HRESULT,
     fn GetRestoreSubcomponent(
-        &self, iComponent: ::UINT, pbstrLogicalPath: *mut ::BSTR,
+        iComponent: ::UINT, pbstrLogicalPath: *mut ::BSTR,
         pbstrComponentName: *mut ::BSTR, pbRepair: *mut bool
     ) -> ::HRESULT,
-    fn GetFileRestoreStatus(&self, pStatus: *mut VSS_FILE_RESTORE_STATUS) -> ::HRESULT,
+    fn GetFileRestoreStatus(pStatus: *mut VSS_FILE_RESTORE_STATUS) -> ::HRESULT,
     fn AddDifferencedFilesByLastModifyTime(
-        &self, wszPath: ::LPCWSTR, wszFilespec: ::LPCWSTR, bRecursive: ::BOOL,
+        wszPath: ::LPCWSTR, wszFilespec: ::LPCWSTR, bRecursive: ::BOOL,
         ftLastModifyTime: ::FILETIME
     ) -> ::HRESULT,
     fn AddDifferencedFilesByLastModifyLSN(
-        &self, wszPath: ::LPCWSTR, wszFilespec: ::LPCWSTR, bRecursive: ::BOOL,
+        wszPath: ::LPCWSTR, wszFilespec: ::LPCWSTR, bRecursive: ::BOOL,
         bstrLsnString: ::BSTR
     ) -> ::HRESULT,
-    fn GetDifferencedFilesCount(&self, pcDifferencedFiles: *mut ::UINT) -> ::HRESULT,
+    fn GetDifferencedFilesCount(pcDifferencedFiles: *mut ::UINT) -> ::HRESULT,
     fn GetDifferencedFile(
-        &self, iDifferencedFile: ::UINT, pbstrPath: *mut ::BSTR, pbstrFilespec: *mut ::BSTR,
+        iDifferencedFile: ::UINT, pbstrPath: *mut ::BSTR, pbstrFilespec: *mut ::BSTR,
         pbRecursive: *mut ::BOOL, pbstrLsnString: *mut ::BSTR, pftLastModifyTime: *mut ::FILETIME
     ) -> ::HRESULT
 }
 );
 RIDL!(
 interface IVssWriterComponents(IVssWriterComponentsVtbl) {
-    fn GetComponentCount(&self, pcComponents: *mut ::UINT) -> ::HRESULT,
+    fn GetComponentCount(pcComponents: *mut ::UINT) -> ::HRESULT,
     fn GetWriterInfo(
-        &self, pidInstance: *mut ::VSS_ID, pidWriter: *mut ::VSS_ID
+        pidInstance: *mut ::VSS_ID, pidWriter: *mut ::VSS_ID
     ) -> ::HRESULT,
     fn GetComponent(
-        &self, iComponent: ::UINT, ppComponent: *mut *mut ::IVssComponent
+        iComponent: ::UINT, ppComponent: *mut *mut ::IVssComponent
     ) -> ::HRESULT
 }
 );
 RIDL!(
 interface IVssComponentEx(IVssComponentExVtbl): IVssComponent(IVssComponentVtbl) {
-    fn SetPrepareForBackupFailureMsg(&self, wszFailureMsg: ::LPCWSTR) -> ::HRESULT,
-    fn SetPostSnapshotFailureMsg(&self, wszFailureMsg: ::LPCWSTR) -> ::HRESULT,
-    fn GetPrepareForBackupFailureMsg(&self, pbstrFailureMsg: *mut ::BSTR) -> ::HRESULT,
-    fn GetPostSnapshotFailureMsg(&self, pbstrFailureMsg: *mut ::BSTR) -> ::HRESULT,
-    fn GetAuthoritativeRestore(&self, pbAuth: *mut bool) -> ::HRESULT,
+    fn SetPrepareForBackupFailureMsg(wszFailureMsg: ::LPCWSTR) -> ::HRESULT,
+    fn SetPostSnapshotFailureMsg(wszFailureMsg: ::LPCWSTR) -> ::HRESULT,
+    fn GetPrepareForBackupFailureMsg(pbstrFailureMsg: *mut ::BSTR) -> ::HRESULT,
+    fn GetPostSnapshotFailureMsg(pbstrFailureMsg: *mut ::BSTR) -> ::HRESULT,
+    fn GetAuthoritativeRestore(pbAuth: *mut bool) -> ::HRESULT,
     fn GetRollForward(
-        &self, pRollType: *mut ::VSS_ROLLFORWARD_TYPE, pbstrPoint: *mut ::BSTR
+        pRollType: *mut ::VSS_ROLLFORWARD_TYPE, pbstrPoint: *mut ::BSTR
     ) -> ::HRESULT,
-    fn GetRestoreName(&self, pbstrName: *mut ::BSTR) -> ::HRESULT
+    fn GetRestoreName(pbstrName: *mut ::BSTR) -> ::HRESULT
 }
 );
 RIDL!(
 interface IVssComponentEx2(IVssComponentEx2Vtbl): IVssComponentEx(IVssComponentExVtbl) {
     fn SetFailure(
-        &self, hr: ::HRESULT, hrApplication: ::HRESULT, wszApplicationMessage: ::LPCWSTR,
+        hr: ::HRESULT, hrApplication: ::HRESULT, wszApplicationMessage: ::LPCWSTR,
         dwReserved: ::DWORD
     ) -> ::HRESULT,
     fn GetFailure(
-        &self, phr: *mut ::HRESULT, phrApplication: *mut ::HRESULT,
+        phr: *mut ::HRESULT, phrApplication: *mut ::HRESULT,
         pbstrApplicationMessage: *mut ::BSTR, pdwReserved: *mut ::DWORD
     ) -> ::HRESULT
 }
@@ -193,43 +193,43 @@ interface IVssComponentEx2(IVssComponentEx2Vtbl): IVssComponentEx(IVssComponentE
 RIDL!(
 interface IVssCreateWriterMetadata(IVssCreateWriterMetadataVtbl) {
     fn AddIncludeFiles(
-        &self, wszPath: ::LPCWSTR, wszFilespec: ::LPCWSTR, bRecursive: bool,
+        wszPath: ::LPCWSTR, wszFilespec: ::LPCWSTR, bRecursive: bool,
         wszAlternateLocation: ::LPCWSTR
     ) -> ::HRESULT,
     fn AddExcludeFiles(
-        &self, wszPath: ::LPCWSTR, wszFilespec: ::LPCWSTR, bRecursive: bool
+        wszPath: ::LPCWSTR, wszFilespec: ::LPCWSTR, bRecursive: bool
     ) -> ::HRESULT,
     fn AddComponent(
-        &self, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
+        ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
         wszComponentName: ::LPCWSTR, wszCaption: ::LPCWSTR, pbIcon: *const ::BYTE, cbIcon: ::UINT,
         bRestoreMetadata: bool, bNotifyOnBackupComplete: bool, bSelectableForRestore: bool,
         dwComponentFlags: ::DWORD
     ) -> ::HRESULT,
     fn AddDatabaseFiles(
-        &self, wszLogicalPath: ::LPCWSTR, wszDatabaseName: ::LPCWSTR, wszPath: ::LPCWSTR,
+        wszLogicalPath: ::LPCWSTR, wszDatabaseName: ::LPCWSTR, wszPath: ::LPCWSTR,
         wszFilespec: ::LPCWSTR, dwBackupTypeMask: ::DWORD
     ) -> ::HRESULT,
-    fn AddDatabaseLogFiles(&self, wszLogicalPath: ::LPCWSTR, wszDatabaseName: ::LPCWSTR,
+    fn AddDatabaseLogFiles(wszLogicalPath: ::LPCWSTR, wszDatabaseName: ::LPCWSTR,
         wszPath: ::LPCWSTR, wszFilespec: ::LPCWSTR, dwBackupTypeMask: ::DWORD
     ) -> ::HRESULT,
-    fn AddFilesToFileGroup(&self, wszLogicalPath: ::LPCWSTR, wszGroupName: ::LPCWSTR,
+    fn AddFilesToFileGroup(wszLogicalPath: ::LPCWSTR, wszGroupName: ::LPCWSTR,
         wszPath: ::LPCWSTR, wszFilespec: ::LPCWSTR, bRecursive: bool,
         wszAlternateLocation: ::LPCWSTR, dwBackupTypeMask: ::DWORD
     ) -> ::HRESULT,
-    fn SetRestoreMethod(&self, method: ::VSS_RESTOREMETHOD_ENUM, wszService: ::LPCWSTR,
+    fn SetRestoreMethod(method: ::VSS_RESTOREMETHOD_ENUM, wszService: ::LPCWSTR,
         wszUserProcedure: ::LPCWSTR, writerRestore: ::VSS_WRITERRESTORE_ENUM,
         bRebootRequired: bool
     ) -> ::HRESULT,
-    fn AddAlternateLocationMapping(&self, wszSourcePath: ::LPCWSTR,
+    fn AddAlternateLocationMapping(wszSourcePath: ::LPCWSTR,
         wszSourceFilespec: ::LPCWSTR, bRecursive: bool, wszDestination: ::LPCWSTR
     ) -> ::HRESULT,
-    fn AddComponentDependency(&self, wszForLogicalPath: ::LPCWSTR,
+    fn AddComponentDependency(wszForLogicalPath: ::LPCWSTR,
         wszForComponentName: ::LPCWSTR, onWriterId: ::VSS_ID, wszOnLogicalPath: ::LPCWSTR,
         wszOnComponentName: ::LPCWSTR
     ) -> ::HRESULT,
-    fn SetBackupSchema(&self, dwSchemaMask: ::DWORD) -> ::HRESULT,
-    fn GetDocument(&self, pDoc: *mut *mut ::VOID) -> ::HRESULT, //TODO IXMLDOMDocument
-    fn SaveAsXML(&self, pbstrXML: *mut ::BSTR) -> ::HRESULT
+    fn SetBackupSchema(dwSchemaMask: ::DWORD) -> ::HRESULT,
+    fn GetDocument(pDoc: *mut *mut ::VOID) -> ::HRESULT, //TODO IXMLDOMDocument
+    fn SaveAsXML(pbstrXML: *mut ::BSTR) -> ::HRESULT
 }
 );
 //IVssCreateWriterMetadataEx

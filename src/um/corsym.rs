@@ -1,8 +1,11 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms
 //! Common Language Runtime Debugging Symbol Reader/Writer/Binder Interfaces
 use shared::basetsd::{ULONG32};
-use shared::guiddef::{GUID};
 use um::objidlbase::{IStream};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{WCHAR, HRESULT};
@@ -57,11 +60,11 @@ ENUM!{enum CorSymVarFlag {
 RIDL!(
 interface ISymUnmanagedBinder(ISymUnmanagedBinderVtbl): IUnknown(IUnknownVtbl) {
     fn GetReaderForFile(
-        &self, importer: *mut IUnknown, fileName: *const WCHAR, searchPath: *const WCHAR,
+        importer: *mut IUnknown, fileName: *const WCHAR, searchPath: *const WCHAR,
         pRetVal: *mut *mut ISymUnmanagedReader
     ) -> HRESULT,
     fn GetReaderFromStream(
-        &self, importer: *mut IUnknown, pstream: *mut IStream,
+        importer: *mut IUnknown, pstream: *mut IStream,
         pRetVal: *mut *mut ISymUnmanagedReader
     ) -> HRESULT
 }
@@ -76,7 +79,7 @@ RIDL!(
 interface ISymUnmanagedBinder2(ISymUnmanagedBinder2Vtbl):
     ISymUnmanagedBinder(ISymUnmanagedBinderVtbl) {
     fn GetReaderForFile2(
-        &self, importer: *mut IUnknown, fileName: *const WCHAR, searchPath: *const WCHAR,
+        importer: *mut IUnknown, fileName: *const WCHAR, searchPath: *const WCHAR,
         searchPolicy: ULONG32, pRetVal: *mut *mut ISymUnmanagedReader
     ) -> HRESULT
 }

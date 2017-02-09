@@ -20,6 +20,7 @@ pub mod gl;
 #[cfg(feature = "um-corsym")] pub mod corsym;
 #[cfg(feature = "um-d2d1")] pub mod d2d1;
 #[cfg(feature = "um-d2dbasetypes")] pub mod d2dbasetypes;
+#[cfg(feature = "um-d3d10")] pub mod d3d10;
 #[cfg(feature = "um-d3d10shader")] pub mod d3d10shader;
 #[cfg(feature = "um-d3d11")] pub mod d3d11;
 #[cfg(feature = "um-d3d11shader")] pub mod d3d11shader;

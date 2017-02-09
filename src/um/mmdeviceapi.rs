@@ -1,7 +1,11 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
-use shared::guiddef::{GUID, REFIID};
+use shared::guiddef::{REFIID};
 use shared::minwindef::{UINT, DWORD, LPVOID};
 use um::propidl::{PROPVARIANT};
 use um::propsys::{IPropertyStore};
@@ -32,38 +36,38 @@ DEFINE_GUID!(IID_IMMDeviceEnumerator, 0xA95664D2, 0x9614, 0x4F35,
 RIDL!(
 interface IMMDevice(IMMDeviceVtbl): IUnknown(IUnknownVtbl) {
     fn Activate(
-        &self, iid: REFIID, dwClsCtx: DWORD, pActivationParams: *mut PROPVARIANT,
+        iid: REFIID, dwClsCtx: DWORD, pActivationParams: *mut PROPVARIANT,
         ppInterface: *mut LPVOID
     ) -> HRESULT,
     fn OpenPropertyStore(
-        &self, stgmAccess: DWORD, ppProperties: *mut *mut IPropertyStore
+        stgmAccess: DWORD, ppProperties: *mut *mut IPropertyStore
     ) -> HRESULT,
-    fn GetId(&self, ppstrId: *mut LPWSTR) -> HRESULT,
-    fn GetState(&self, pdwState: *mut DWORD) -> HRESULT
+    fn GetId(ppstrId: *mut LPWSTR) -> HRESULT,
+    fn GetState(pdwState: *mut DWORD) -> HRESULT
 }
 );
 RIDL!(
 interface IMMDeviceEnumerator(IMMDeviceEnumeratorVtbl): IUnknown(IUnknownVtbl) {
     fn EnumAudioEndpoints(
-        &self, dataFlow: EDataFlow, dwStateMask: DWORD,
+        dataFlow: EDataFlow, dwStateMask: DWORD,
         ppDevices: *mut *mut IMMDeviceCollection
     ) -> HRESULT,
     fn GetDefaultAudioEndpoint(
-        &self, dataFlow: EDataFlow, role: ERole, ppEndpoint: *mut *mut IMMDevice
+        dataFlow: EDataFlow, role: ERole, ppEndpoint: *mut *mut IMMDevice
     ) -> HRESULT,
-    fn GetDevice(&self, pwstrId: LPCWSTR, ppDevices: *mut *mut IMMDevice) -> HRESULT,
+    fn GetDevice(pwstrId: LPCWSTR, ppDevices: *mut *mut IMMDevice) -> HRESULT,
     fn RegisterEndpointNotificationCallback(
-        &self, pClient: *mut IMMNotificationClient
+        pClient: *mut IMMNotificationClient
     ) -> HRESULT,
     fn UnregisterEndpointNotificationCallback(
-        &self, pClient: *mut IMMNotificationClient
+        pClient: *mut IMMNotificationClient
     ) -> HRESULT
 }
 );
 RIDL!(
 interface IMMDeviceCollection(IMMDeviceCollectionVtbl): IUnknown(IUnknownVtbl) {
-    fn GetCount(&self, pcDevices: *const UINT) -> HRESULT,
-    fn Item(&self, nDevice: UINT, ppDevice: *mut *mut IMMDevice) -> HRESULT
+    fn GetCount(pcDevices: *const UINT) -> HRESULT,
+    fn Item(nDevice: UINT, ppDevice: *mut *mut IMMDevice) -> HRESULT
 }
 );
 pub enum IMMNotificationClient {} // FIXME

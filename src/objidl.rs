@@ -12,16 +12,16 @@ pub type LPBIND_OPTS = *mut BIND_OPTS;
 //8479
 RIDL!(
 interface IBindCtx(IBindCtxVtbl): IUnknown(IUnknownVtbl) {
-    fn RegisterObjectBound(&self, punk: *mut ::IUnknown) -> ::HRESULT,
-    fn RevokeObjectBound(&self, punk: *mut ::IUnknown) -> ::HRESULT,
+    fn RegisterObjectBound(punk: *mut ::IUnknown) -> ::HRESULT,
+    fn RevokeObjectBound(punk: *mut ::IUnknown) -> ::HRESULT,
     fn ReleaseBoundObjects(&self) -> ::HRESULT,
-    fn SetBindOptions(&self, pbindopts: *mut BIND_OPTS) -> ::HRESULT,
-    fn GetBindOptions(&self, pbindopts: *mut BIND_OPTS) -> ::HRESULT,
-    fn GetRunningObjectTable(&self, pprot: *mut *mut IRunningObjectTable) -> ::HRESULT,
-    fn RegisterObjectParam(&self, pszKey: ::LPOLESTR, punk: *mut ::IUnknown) -> ::HRESULT,
-    fn GetObjectParam(&self, pszKey: ::LPOLESTR, ppunk: *mut *mut ::IUnknown) -> ::HRESULT,
-    fn EnumObjectParam(&self, ppenum: *mut *mut ::IEnumString) -> ::HRESULT,
-    fn RevokeObjectParam(&self, pszKey: ::LPOLESTR) -> ::HRESULT
+    fn SetBindOptions(pbindopts: *mut BIND_OPTS) -> ::HRESULT,
+    fn GetBindOptions(pbindopts: *mut BIND_OPTS) -> ::HRESULT,
+    fn GetRunningObjectTable(pprot: *mut *mut IRunningObjectTable) -> ::HRESULT,
+    fn RegisterObjectParam(pszKey: ::LPOLESTR, punk: *mut ::IUnknown) -> ::HRESULT,
+    fn GetObjectParam(pszKey: ::LPOLESTR, ppunk: *mut *mut ::IUnknown) -> ::HRESULT,
+    fn EnumObjectParam(ppenum: *mut *mut ::IEnumString) -> ::HRESULT,
+    fn RevokeObjectParam(pszKey: ::LPOLESTR) -> ::HRESULT
 }
 );
 //8681
@@ -30,19 +30,19 @@ pub type IEnumMoniker = ::IUnknown; // TODO
 RIDL!(
 interface IRunningObjectTable(IRunningObjectTableVtbl): IUnknown(IUnknownVtbl) {
     fn Register(
-        &self, grfFlags: ::DWORD, punkObject: *mut ::IUnknown, pmkObjectName: *mut IMoniker,
+        grfFlags: ::DWORD, punkObject: *mut ::IUnknown, pmkObjectName: *mut IMoniker,
         pdwRegister: *mut ::DWORD
     ) -> ::HRESULT,
-    fn Revoke(&self, dwRegister: ::DWORD) -> ::HRESULT,
-    fn IsRunning(&self, pmkObjectName: *mut IMoniker) -> ::HRESULT,
+    fn Revoke(dwRegister: ::DWORD) -> ::HRESULT,
+    fn IsRunning(pmkObjectName: *mut IMoniker) -> ::HRESULT,
     fn GetObject(
-        &self, pmkObjectName: *mut IMoniker, ppunkObject: *mut *mut ::IUnknown
+        pmkObjectName: *mut IMoniker, ppunkObject: *mut *mut ::IUnknown
     ) -> ::HRESULT,
-    fn NoteChangeTime(&self, dwRegister: ::DWORD, pfiletime: *mut ::FILETIME) -> ::HRESULT,
+    fn NoteChangeTime(dwRegister: ::DWORD, pfiletime: *mut ::FILETIME) -> ::HRESULT,
     fn GetTimeOfLastChange(
-        &self, pmkObjectName: *mut IMoniker, pfiletime: *mut ::FILETIME
+        pmkObjectName: *mut IMoniker, pfiletime: *mut ::FILETIME
     ) -> ::HRESULT,
-    fn EnumRunning(&self, ppenumMoniker: *mut *mut IEnumMoniker) -> ::HRESULT
+    fn EnumRunning(ppenumMoniker: *mut *mut IEnumMoniker) -> ::HRESULT
 }
 );
 //9350
@@ -72,29 +72,29 @@ STRUCT!{struct SOLE_AUTHENTICATION_SERVICE {
 
 RIDL!(
 interface IApartmentShutdown(IApartmentShutdownVtbl): IUnknown(IUnknownVtbl) {
-    fn OnUninitialize(&self, ui64ApartmentIdentifier: ::UINT64) -> ::VOID
+    fn OnUninitialize(ui64ApartmentIdentifier: ::UINT64) -> ::VOID
 }
 );
 
 RIDL!(
 interface IMarshal(IMarshalVtbl): IUnknown(IUnknownVtbl) {
     fn GetUnmarshalClass(
-        &self, riid: ::REFIID, pv: *const ::VOID, dwDestContext: ::DWORD,
+        riid: ::REFIID, pv: *const ::VOID, dwDestContext: ::DWORD,
         pvDestContext: *const ::VOID, mshlflags: ::DWORD, pCid: *mut ::CLSID
     ) -> ::HRESULT,
     fn GetMarshalSizeMax(
-        &self, riid: ::REFIID, pv: *const ::VOID, dwDestContext: ::DWORD,
+        riid: ::REFIID, pv: *const ::VOID, dwDestContext: ::DWORD,
         pvDestContext: *const ::VOID, mshlflags: ::DWORD, pSize: *mut ::DWORD
     ) -> ::HRESULT,
     fn MarshalInterface(
-        &self, pStm: *const ::IStream, riid: ::REFIID, pv: *const ::VOID,
+        pStm: *const ::IStream, riid: ::REFIID, pv: *const ::VOID,
         dwDestContext: ::DWORD, pvDestContext: *const ::VOID,
         mshlflags: ::DWORD
     ) -> ::HRESULT,
     fn UnmarshalInterface(
-        &self, pStm: *const ::IStream, riid: ::REFIID, ppv: *mut *mut ::VOID
+        pStm: *const ::IStream, riid: ::REFIID, ppv: *mut *mut ::VOID
     ) -> ::HRESULT,
-    fn ReleaseMarshalData(&self, pStm: *const ::IStream) -> ::HRESULT,
-    fn DisconnectObject(&self, dwReserved: ::DWORD) -> ::HRESULT
+    fn ReleaseMarshalData(pStm: *const ::IStream) -> ::HRESULT,
+    fn DisconnectObject(dwReserved: ::DWORD) -> ::HRESULT
 }
 );

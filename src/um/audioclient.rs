@@ -1,8 +1,12 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
 use shared::basetsd::{UINT32};
-use shared::guiddef::{GUID, REFIID, LPCGUID};
+use shared::guiddef::{REFIID, LPCGUID};
 use shared::minwindef::{LPVOID, BYTE, DWORD};
 use shared::mmreg::{WAVEFORMATEX};
 use shared::winerror::{SEVERITY_SUCCESS, SEVERITY_ERROR, FACILITY_AUDCLNT};
@@ -54,29 +58,29 @@ DEFINE_GUID!(IID_IAudioRenderClient, 0xF294ACFC, 0x3146, 0x4483,
     0xA7, 0xBF, 0xAD, 0xDC, 0xA7, 0xC2, 0x60, 0xE2);
 RIDL!{interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
     fn Initialize(
-        &self, ShareMode: AUDCLNT_SHAREMODE, StreamFlags: DWORD,
+        ShareMode: AUDCLNT_SHAREMODE, StreamFlags: DWORD,
         hnsBufferDuration: REFERENCE_TIME, hnsPeriodicity: REFERENCE_TIME,
         pFormat: *const WAVEFORMATEX, AudioSessionGuid: LPCGUID
     ) -> HRESULT,
-    fn GetBufferSize(&self, pNumBufferFrames: *mut UINT32) -> HRESULT,
-    fn GetStreamLatency(&self, phnsLatency: *mut REFERENCE_TIME) -> HRESULT,
-    fn GetCurrentPadding(&self, pNumPaddingFrames: *mut UINT32) -> HRESULT,
+    fn GetBufferSize(pNumBufferFrames: *mut UINT32) -> HRESULT,
+    fn GetStreamLatency(phnsLatency: *mut REFERENCE_TIME) -> HRESULT,
+    fn GetCurrentPadding(pNumPaddingFrames: *mut UINT32) -> HRESULT,
     fn IsFormatSupported(
-        &self, ShareMode: AUDCLNT_SHAREMODE, pFormat: *const WAVEFORMATEX,
+        ShareMode: AUDCLNT_SHAREMODE, pFormat: *const WAVEFORMATEX,
         ppClosestMatch: *mut *mut WAVEFORMATEX
     ) -> HRESULT,
-    fn GetMixFormat(&self, ppDeviceFormat: *mut *mut WAVEFORMATEX) -> HRESULT,
+    fn GetMixFormat(ppDeviceFormat: *mut *mut WAVEFORMATEX) -> HRESULT,
     fn GetDevicePeriod(
-        &self, phnsDefaultDevicePeriod: *mut REFERENCE_TIME,
+        phnsDefaultDevicePeriod: *mut REFERENCE_TIME,
         phnsMinimumDevicePeriod: *mut REFERENCE_TIME
     ) -> HRESULT,
-    fn Start(&self) -> HRESULT,
-    fn Stop(&self) -> HRESULT,
-    fn Reset(&self) -> HRESULT,
-    fn SetEventHandle(&self, eventHandle: HANDLE) -> HRESULT,
-    fn GetService(&self, riid: REFIID, ppv: *mut LPVOID) -> HRESULT
+    fn Start() -> HRESULT,
+    fn Stop() -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn SetEventHandle(eventHandle: HANDLE) -> HRESULT,
+    fn GetService(riid: REFIID, ppv: *mut LPVOID) -> HRESULT
 }}
 RIDL!{interface IAudioRenderClient(IAudioRenderClientVtbl): IUnknown(IUnknownVtbl) {
-    fn GetBuffer(&self, NumFramesRequested: UINT32, ppData: *mut *mut BYTE) -> HRESULT,
-    fn ReleaseBuffer(&self, NumFramesWritten: UINT32, dwFlags: DWORD) -> HRESULT
+    fn GetBuffer(NumFramesRequested: UINT32, ppData: *mut *mut BYTE) -> HRESULT,
+    fn ReleaseBuffer(NumFramesWritten: UINT32, dwFlags: DWORD) -> HRESULT
 }}

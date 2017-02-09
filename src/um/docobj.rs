@@ -19,11 +19,11 @@ STRUCT!{struct OLECMDTEXT {
 }}
 RIDL!{interface IOleCommandTarget(IOleCommandTargetVtbl): IUnknown(IUnknownVtbl) {
     fn QueryStatus(
-        &self, pguidCmdGroup: *const GUID, cCmds: ULONG, prgCmds: *mut OLECMD,
+        pguidCmdGroup: *const GUID, cCmds: ULONG, prgCmds: *mut OLECMD,
         pCmdText: *mut OLECMDTEXT
     ) -> HRESULT,
     fn Exec(
-        &self, pguidCmdGroup: *const  GUID, nCmdID: DWORD, nCmdexecopt: DWORD,
+        pguidCmdGroup: *const  GUID, nCmdID: DWORD, nCmdexecopt: DWORD,
         pvaIn: *mut VARIANT, pvaOut: *mut VARIANT
     ) -> HRESULT
 }}

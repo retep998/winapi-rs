@@ -5,7 +5,7 @@ pub type LPSERVICEPROVIDER = *mut IServiceProvider;
 RIDL!(
 interface IServiceProvider(IServiceProviderVtbl): IUnknown(IUnknownVtbl) {
     fn QueryService(
-        &self, guidService: ::REFGUID, riid: ::REFIID, ppvObject: *mut *mut ::c_void
+        guidService: ::REFGUID, riid: ::REFIID, ppvObject: *mut *mut ::c_void
     ) -> ::HRESULT
 }
 );

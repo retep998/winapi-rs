@@ -13,7 +13,7 @@ ENUM!{enum TrustLevel {
     FullTrust,
 }}
 RIDL!{interface IInspectable(IInspectableVtbl): IUnknown(IUnknownVtbl) {
-    fn GetIids(&self, iidCount: *mut  ULONG, iids: *mut *mut  IID) ->  HRESULT,
-    fn GetRuntimeClassName(&self, className: *mut  HSTRING) ->  HRESULT,
-    fn GetTrustLevel(&self, trustLevel: *mut TrustLevel) ->  HRESULT
+    fn GetIids(iidCount: *mut  ULONG, iids: *mut *mut  IID) ->  HRESULT,
+    fn GetRuntimeClassName(className: *mut  HSTRING) ->  HRESULT,
+    fn GetTrustLevel(trustLevel: *mut TrustLevel) ->  HRESULT
 }}

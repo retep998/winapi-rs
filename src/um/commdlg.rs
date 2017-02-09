@@ -416,19 +416,19 @@ STRUCT!{struct PRINTDLGW {
 pub type LPPRINTDLGW = *mut PRINTDLGW;
 RIDL!(
 interface IPrintDialogCallback(IPrintDialogCallbackVtbl) : IUnknown(IUnknownVtbl) {
-    fn InitDone(&self) -> HRESULT,
-    fn SelectionChange(&self) -> HRESULT,
+    fn InitDone() -> HRESULT,
+    fn SelectionChange() -> HRESULT,
     fn HandleMessage(
-        &self, hDlg: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM,
+        hDlg: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM,
         pResult: *mut LRESULT
     ) -> HRESULT
 }
 );
 RIDL!(
 interface IPrintDialogServices(IPrintDialogServicesVtbl) : IUnknown(IUnknownVtbl) {
-    fn GetCurrentDevMode(&self, pDevMode: LPDEVMODEW, pcbSize: *mut UINT) -> HRESULT,
-    fn GetCurrentPrinterName(&self, pPrinterName: LPWSTR, pcchSize: *mut UINT) -> HRESULT,
-    fn GetCurrentPortName(&self, pPortName: LPWSTR, pcchSize: *mut UINT) -> HRESULT
+    fn GetCurrentDevMode(pDevMode: LPDEVMODEW, pcbSize: *mut UINT) -> HRESULT,
+    fn GetCurrentPrinterName(pPrinterName: LPWSTR, pcchSize: *mut UINT) -> HRESULT,
+    fn GetCurrentPortName(pPortName: LPWSTR, pcchSize: *mut UINT) -> HRESULT
 }
 );
 STRUCT!{struct PRINTPAGERANGE {

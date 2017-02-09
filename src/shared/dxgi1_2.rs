@@ -153,60 +153,60 @@ STRUCT!{struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC {
 
 RIDL!(
 interface IDXGIAdapter2(IDXGIAdapter2Vtbl): IDXGIAdapter1(IDXGIAdapter1Vtbl) {
-    fn GetDesc2(&self, pDesc: *mut DXGI_ADAPTER_DESC2) -> HRESULT
+    fn GetDesc2(pDesc: *mut DXGI_ADAPTER_DESC2) -> HRESULT
 });
 
 RIDL!(
 interface IDXGIDevice2(IDXGIDevice2Vtbl): IDXGIDevice1(IDXGIDevice1Vtbl) {
     fn OfferResources(
-        &self, NumResources: UINT, ppResources: *mut *mut IDXGIResource,
+        NumResources: UINT, ppResources: *mut *mut IDXGIResource,
         Priority: DXGI_OFFER_RESOURCE_PRIORITY
     ) -> HRESULT,
     fn ReclaimResources(
-        &self, NumResources: UINT, ppResources: *mut *mut IDXGIResource,
+        NumResources: UINT, ppResources: *mut *mut IDXGIResource,
         pDiscarded: *mut BOOL
     ) -> HRESULT,
-    fn EnqueueSetEvent(&self, hEvent: HANDLE) -> HRESULT
+    fn EnqueueSetEvent(hEvent: HANDLE) -> HRESULT
 });
 
 RIDL!(
 interface IDXGIDisplayControl(IDXGIDisplayControlVtbl): IUnknown(IUnknownVtbl) {
-    fn IsStereoEnabled(&self) -> BOOL,
-    fn SetStereoEnabled(&self, enabled: BOOL) -> ()
+    fn IsStereoEnabled() -> BOOL,
+    fn SetStereoEnabled(enabled: BOOL) -> ()
 });
 
 RIDL!(
 interface IDXGIFactory2(IDXGIFactory2Vtbl): IDXGIFactory1(IDXGIFactory1Vtbl) {
-    fn IsWindowedStereoEnabled(&self) -> BOOL,
+    fn IsWindowedStereoEnabled() -> BOOL,
     fn CreateSwapChainForHwnd(
-        &self, pDevice: *mut IUnknown, hWnd: HWND, pDesc: *const DXGI_SWAP_CHAIN_DESC1,
+        pDevice: *mut IUnknown, hWnd: HWND, pDesc: *const DXGI_SWAP_CHAIN_DESC1,
         pFullscreenDesc: *const DXGI_SWAP_CHAIN_FULLSCREEN_DESC,
         pRestrictToOutput: *mut IDXGIOutput, ppSwapChain: *mut *mut IDXGISwapChain1
     ) -> HRESULT,
     fn CreateSwapChainForCoreWindow(
-        &self, pDevice: *mut IUnknown, pWindow: *mut IUnknown,
+        pDevice: *mut IUnknown, pWindow: *mut IUnknown,
         pDesc: *const DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput: *mut IDXGIOutput,
         ppSwapChain: *mut *mut IDXGISwapChain1
     ) -> HRESULT,
     fn GetSharedResourceAdapterLuid(
-        &self, hResource: HANDLE, pLuid: *mut LUID
+        hResource: HANDLE, pLuid: *mut LUID
     ) -> HRESULT,
     fn RegisterStereoStatusWindow(
-        &self, WindowHandle: HWND, wMsg: UINT, pdwCookie: *mut DWORD
+        WindowHandle: HWND, wMsg: UINT, pdwCookie: *mut DWORD
     ) -> HRESULT,
     fn RegisterStereoStatusEvent(
-        &self, hEvent: HANDLE, pdwCookie: *mut DWORD
+        hEvent: HANDLE, pdwCookie: *mut DWORD
     ) -> HRESULT,
-    fn UnregisterStereoStatus(&self, dwCookie: DWORD) -> (),
+    fn UnregisterStereoStatus(dwCookie: DWORD) -> (),
     fn RegisterOcclusionStatusWindow(
-        &self, WindowHandle: HWND, wMsg: UINT, pdwCookie: *mut DWORD
+        WindowHandle: HWND, wMsg: UINT, pdwCookie: *mut DWORD
     ) -> HRESULT,
     fn RegisterOcclusionStatusEvent(
-        &self, hEvent: HANDLE, pdwCookie: *mut DWORD
+        hEvent: HANDLE, pdwCookie: *mut DWORD
     ) -> HRESULT,
-    fn UnregisterOcclusionStatus(&self, dwCookie: DWORD) -> (),
+    fn UnregisterOcclusionStatus(dwCookie: DWORD) -> (),
     fn CreateSwapChainForComposition(
-        &self, pDevice: *mut IUnknown, pDesc: *const DXGI_SWAP_CHAIN_DESC1,
+        pDevice: *mut IUnknown, pDesc: *const DXGI_SWAP_CHAIN_DESC1,
         pRestrictToOutput: *mut IDXGIOutput, ppSwapChain: *mut *mut IDXGISwapChain1
     ) -> HRESULT
 });
@@ -214,56 +214,56 @@ interface IDXGIFactory2(IDXGIFactory2Vtbl): IDXGIFactory1(IDXGIFactory1Vtbl) {
 RIDL!(
 interface IDXGIOutput1(IDXGIOutput1Vtbl): IDXGIOutput(IDXGIOutputVtbl) {
     fn GetDisplayModeList1(
-        &self, EnumFormat: DXGI_FORMAT, Flags: UINT, pNumModes: *mut UINT,
+        EnumFormat: DXGI_FORMAT, Flags: UINT, pNumModes: *mut UINT,
         pDesc: *mut DXGI_MODE_DESC1
     ) -> HRESULT,
     fn FindClosestMatchingMode1(
-        &self, pModeToMatch: *const DXGI_MODE_DESC1, pClosestMatch: *mut DXGI_MODE_DESC1,
+        pModeToMatch: *const DXGI_MODE_DESC1, pClosestMatch: *mut DXGI_MODE_DESC1,
         pConcernedDevice: *mut IUnknown
     ) -> HRESULT,
     fn GetDisplaySurfaceData1(
-        &self, pDestination: *mut IDXGIResource
+        pDestination: *mut IDXGIResource
     ) -> HRESULT,
     fn DuplicateOutput(
-        &self, pDevice: *mut IUnknown,
+        pDevice: *mut IUnknown,
         ppOutputDuplication: *mut *mut IDXGIOutputDuplication
     ) -> HRESULT
 });
 
 RIDL!(
 interface IDXGIOutputDuplication(IDXGIOutputDuplicationVtbl): IDXGIObject(IDXGIObjectVtbl) {
-    fn GetDesc(&self, pDesc: *mut DXGI_OUTDUPL_DESC) -> (),
+    fn GetDesc(pDesc: *mut DXGI_OUTDUPL_DESC) -> (),
     fn AcquireNextFrame(
-        &self, TimeoutInMilliseconds: UINT, pFrameInfo: *mut DXGI_OUTDUPL_FRAME_INFO,
+        TimeoutInMilliseconds: UINT, pFrameInfo: *mut DXGI_OUTDUPL_FRAME_INFO,
         ppDesktopResource: *mut *mut IDXGIResource
     ) -> HRESULT,
     fn GetFrameDirtyRects(
-        &self, DirtyRectsBufferSize: UINT, pDirtyRectsBuffer: *mut RECT,
+        DirtyRectsBufferSize: UINT, pDirtyRectsBuffer: *mut RECT,
         pDirtyRectsBufferSizeRequired: *mut UINT
     ) -> HRESULT,
     fn GetFrameMoveRects(
-        &self, MoveRectsBufferSize: UINT, pMoveRectBuffer: *mut DXGI_OUTDUPL_MOVE_RECT,
+        MoveRectsBufferSize: UINT, pMoveRectBuffer: *mut DXGI_OUTDUPL_MOVE_RECT,
         pMoveRectsBufferSizeRequired: *mut UINT
     ) -> HRESULT,
     fn GetFramePointerShape(
-        &self, PointerShapeBufferSize: UINT, pPointerShapeBuffer: *mut c_void,
+        PointerShapeBufferSize: UINT, pPointerShapeBuffer: *mut c_void,
         pPointerShapeBufferSizeRequired: *mut UINT,
         pPointerShapeInfo: *mut DXGI_OUTDUPL_POINTER_SHAPE_INFO
     ) -> HRESULT,
     fn MapDesktopSurface(
-        &self, pLockedRect: *mut DXGI_MAPPED_RECT
+        pLockedRect: *mut DXGI_MAPPED_RECT
     ) -> HRESULT,
-    fn UnMapDesktopSurface(&self) -> HRESULT,
-    fn ReleaseFrame(&self) -> HRESULT
+    fn UnMapDesktopSurface() -> HRESULT,
+    fn ReleaseFrame() -> HRESULT
 });
 
 RIDL!(
 interface IDXGIResource1(IDXGIResource1Vtbl): IDXGIResource(IDXGIResourceVtbl) {
     fn CreateSubresourceSurface(
-        &self, index: UINT, ppSurface: *mut *mut IDXGISurface2
+        index: UINT, ppSurface: *mut *mut IDXGISurface2
     ) -> HRESULT,
     fn CreateSharedHandle(
-        &self, pAttributes: *const SECURITY_ATTRIBUTES, dwAccess: DWORD, lpName: LPCWSTR,
+        pAttributes: *const SECURITY_ATTRIBUTES, dwAccess: DWORD, lpName: LPCWSTR,
         pHandle: *mut HANDLE
     ) -> HRESULT
 });
@@ -271,33 +271,33 @@ interface IDXGIResource1(IDXGIResource1Vtbl): IDXGIResource(IDXGIResourceVtbl) {
 RIDL!(
 interface IDXGISurface2(IDXGISurface2Vtbl): IDXGISurface1(IDXGISurface1Vtbl) {
     fn GetResource(
-        &self, riid: REFGUID, ppParentResource: *mut *mut c_void,
+        riid: REFGUID, ppParentResource: *mut *mut c_void,
         pSubresourceIndex: *mut UINT
     ) -> HRESULT
 });
 
 RIDL!(
 interface IDXGISwapChain1(IDXGISwapChain1Vtbl): IDXGISwapChain(IDXGISwapChainVtbl) {
-    fn GetDesc1(&self, pDesc: *mut DXGI_SWAP_CHAIN_DESC1) -> HRESULT,
+    fn GetDesc1(pDesc: *mut DXGI_SWAP_CHAIN_DESC1) -> HRESULT,
     fn GetFullscreenDesc(
-        &self, pDesc: *mut DXGI_SWAP_CHAIN_FULLSCREEN_DESC
+        pDesc: *mut DXGI_SWAP_CHAIN_FULLSCREEN_DESC
     ) -> HRESULT,
-    fn GetHwnd(&self, pHwnd: *mut HWND) -> HRESULT,
+    fn GetHwnd(pHwnd: *mut HWND) -> HRESULT,
     fn GetCoreWindow(
-        &self, refiid: REFGUID, ppUnk: *mut *mut c_void
+        refiid: REFGUID, ppUnk: *mut *mut c_void
     ) -> HRESULT,
     fn Present1(
-        &self, SyncInterval: UINT, PresentFlags: UINT,
+        SyncInterval: UINT, PresentFlags: UINT,
         pPresentParameters: *const DXGI_PRESENT_PARAMETERS
     ) -> HRESULT,
-    fn IsTemporaryMonoSupported(&self) -> BOOL,
+    fn IsTemporaryMonoSupported() -> BOOL,
     fn GetRestrictToOutput(
-        &self, ppRestrictToOutput: *mut *mut IDXGIOutput
+        ppRestrictToOutput: *mut *mut IDXGIOutput
     ) -> HRESULT,
-    fn SetBackgroundColor(&self, pColor: *const DXGI_RGBA) -> HRESULT,
-    fn GetBackgroundColor(&self, pColor: *mut DXGI_RGBA) -> HRESULT,
-    fn SetRotation(&self, Rotation: DXGI_MODE_ROTATION) -> HRESULT,
-    fn GetRotation(&self, pRotation: *mut DXGI_MODE_ROTATION) -> HRESULT
+    fn SetBackgroundColor(pColor: *const DXGI_RGBA) -> HRESULT,
+    fn GetBackgroundColor(pColor: *mut DXGI_RGBA) -> HRESULT,
+    fn SetRotation(Rotation: DXGI_MODE_ROTATION) -> HRESULT,
+    fn GetRotation(pRotation: *mut DXGI_MODE_ROTATION) -> HRESULT
 });
 
 pub type DXGI_OFFER_RESOURCE_PRIORITY = _DXGI_OFFER_RESOURCE_PRIORITY;

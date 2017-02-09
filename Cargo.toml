@@ -114,6 +114,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "um-corsym",
     "um-d2d1",
     "um-d2dbasetypes",
+    "um-d3d10",
     "um-d3d10shader",
     "um-d3d11",
     "um-d3d11shader",
@@ -191,7 +192,8 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "um-corsym" = ["shared-basetsd", "shared-guiddef", "um-objidlbase", "um-unknwnbase", "um-winnt"]
 "um-d2d1" = ["shared-basetsd", "shared-dxgi", "shared-guiddef", "shared-minwindef", "shared-windef", "um-d2dbasetypes", "um-d3dcommon", "um-dcommon", "um-unknwnbase", "um-wincodec", "um-winnt"]
 "um-d2dbasetypes" = ["shared-basetsd", "shared-d3d9types", "shared-minwindef", "shared-windef"]
-"um-d3d10shader" = ["shared-minwindef", "um-d3dcommon", "um-unknwnbase", "um-winnt"]
+"um-d3d10" = ["um-d3dcommon"]
+"um-d3d10shader" = ["shared-minwindef", "um-d3d10", "um-d3dcommon", "um-unknwnbase", "um-winnt"]
 "um-d3d11" = ["shared-basetsd", "shared-dxgiformat", "shared-dxgitype", "shared-guiddef", "shared-minwindef", "shared-windef", "um-d3dcommon", "um-unknwnbase", "um-winnt"]
 "um-d3d11shader" = ["shared-basetsd", "shared-minwindef", "um-d3dcommon", "um-unknwnbase", "um-winnt"]
 "um-d3d12" = ["shared-basetsd", "shared-dxgiformat", "shared-dxgitype", "shared-guiddef", "shared-minwindef", "shared-ntdef", "shared-windef", "um-d3dcommon", "um-minwinbase", "um-unknwnbase", "um-winnt"]

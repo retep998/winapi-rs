@@ -461,12 +461,12 @@ ENUM!{enum SICHINTF {
 RIDL!(
 interface IShellItem(IShellItemVtbl): IUnknown(IUnknownVtbl) {
     fn BindToHandler(
-        &self, pbc: *mut ::IBindCtx, bhid: ::REFGUID, riid: ::REFIID, ppv: *mut *mut ::c_void
+        pbc: *mut ::IBindCtx, bhid: ::REFGUID, riid: ::REFIID, ppv: *mut *mut ::c_void
     ) -> ::HRESULT,
-    fn GetParent(&self, ppsi: *mut *mut IShellItem) -> ::HRESULT,
-    fn GetDisplayName(&self, sigdnName: SIGDN, ppszName: *mut ::LPWSTR) -> ::HRESULT,
-    fn GetAttributes(&self, sfgaoMask: SFGAOF, psfgaoAttribs: *mut SFGAOF) -> ::HRESULT,
-    fn Compare(&self, psi: *mut IShellItem, hint: SICHINTF, piOrder: *mut ::c_int) -> ::HRESULT
+    fn GetParent(ppsi: *mut *mut IShellItem) -> ::HRESULT,
+    fn GetDisplayName(sigdnName: SIGDN, ppszName: *mut ::LPWSTR) -> ::HRESULT,
+    fn GetAttributes(sfgaoMask: SFGAOF, psfgaoAttribs: *mut SFGAOF) -> ::HRESULT,
+    fn Compare(psi: *mut IShellItem, hint: SICHINTF, piOrder: *mut ::c_int) -> ::HRESULT
 }
 );
 //11963
@@ -501,26 +501,26 @@ pub type REFPROPERTYKEY = *mut PROPERTYKEY;
 RIDL!(
 interface IShellItemArray(IShellItemArrayVtbl): IUnknown(IUnknownVtbl) {
     fn BindToHandler(
-        &self, pbc: *mut ::IBindCtx, bhid: ::REFGUID, riid: ::REFIID, ppvOut: *mut *mut ::c_void
+        pbc: *mut ::IBindCtx, bhid: ::REFGUID, riid: ::REFIID, ppvOut: *mut *mut ::c_void
     ) -> ::HRESULT,
     fn GetPropertyStore(
-        &self, flags: GETPROPERTYSTOREFLAGS, riid: ::REFIID, ppv: *mut *mut ::c_void
+        flags: GETPROPERTYSTOREFLAGS, riid: ::REFIID, ppv: *mut *mut ::c_void
     ) -> ::HRESULT,
     fn GetPropertyDescriptionList(
-        &self, keyType: REFPROPERTYKEY, riid: ::REFIID, ppv: *mut *mut ::c_void
+        keyType: REFPROPERTYKEY, riid: ::REFIID, ppv: *mut *mut ::c_void
     ) -> ::HRESULT,
     fn GetAttributes(
-        &self, AttribFlags: SIATTRIBFLAGS, sfgaoMask: SFGAOF, psfgaoAttribs: *mut SFGAOF
+        AttribFlags: SIATTRIBFLAGS, sfgaoMask: SFGAOF, psfgaoAttribs: *mut SFGAOF
     ) -> ::HRESULT,
-    fn GetCount(&self, pdwNumItems: *mut ::DWORD) -> ::HRESULT,
-    fn GetItemAt(&self, dwIndex: ::DWORD, ppsi: *mut *mut IShellItem) -> ::HRESULT,
-    fn EnumItems(&self, ppenumShellItems: *mut *mut IEnumShellItems) -> ::HRESULT
+    fn GetCount(pdwNumItems: *mut ::DWORD) -> ::HRESULT,
+    fn GetItemAt(dwIndex: ::DWORD, ppsi: *mut *mut IShellItem) -> ::HRESULT,
+    fn EnumItems(ppenumShellItems: *mut *mut IEnumShellItems) -> ::HRESULT
 }
 );
 //20869
 RIDL!(
 interface IModalWindow(IModalWindowVtbl): IUnknown(IUnknownVtbl) {
-    fn Show(&self, hwndOwner: ::HWND) -> ::HRESULT
+    fn Show(hwndOwner: ::HWND) -> ::HRESULT
 }
 );
 //22307
@@ -540,17 +540,17 @@ ENUM!{enum FDAP {
 }}
 RIDL!(
 interface IFileDialogEvents(IFileDialogEventsVtbl): IUnknown(IUnknownVtbl) {
-    fn OnFileOk(&self, pfd: *mut IFileDialog) -> ::HRESULT,
-    fn OnFolderChanging(&self, pfd: *mut IFileDialog, psiFolder: *mut IShellItem) -> ::HRESULT,
-    fn OnFolderChange(&self, pfd: *mut IFileDialog) -> ::HRESULT,
-    fn OnSelectionChange(&self, pfd: *mut IFileDialog) -> ::HRESULT,
+    fn OnFileOk(pfd: *mut IFileDialog) -> ::HRESULT,
+    fn OnFolderChanging(pfd: *mut IFileDialog, psiFolder: *mut IShellItem) -> ::HRESULT,
+    fn OnFolderChange(pfd: *mut IFileDialog) -> ::HRESULT,
+    fn OnSelectionChange(pfd: *mut IFileDialog) -> ::HRESULT,
     fn OnShareViolation(
-        &self, pfd: *mut IFileDialog, psi: *mut IShellItem,
+        pfd: *mut IFileDialog, psi: *mut IShellItem,
         pResponse: *mut FDE_SHAREVIOLATION_RESPONSE
     ) -> ::HRESULT,
-    fn OnTypeChange(&self, pfd: *mut IFileDialog) -> ::HRESULT,
+    fn OnTypeChange(pfd: *mut IFileDialog) -> ::HRESULT,
     fn OnOverwrite(
-        &self, pfd: *mut IFileDialog, psi: *mut IShellItem,
+        pfd: *mut IFileDialog, psi: *mut IShellItem,
         pResponse: *mut FDE_OVERWRITE_RESPONSE
     ) -> ::HRESULT
 }
@@ -582,50 +582,50 @@ ENUM!{enum FILEOPENDIALOGOPTIONS {
 RIDL!(
 interface IFileDialog(IFileDialogVtbl): IModalWindow(IModalWindowVtbl) {
     fn SetFileTypes(
-        &self, cFileTypes: ::UINT, rgFilterSpec: *const ::COMDLG_FILTERSPEC
+        cFileTypes: ::UINT, rgFilterSpec: *const ::COMDLG_FILTERSPEC
     ) -> ::HRESULT,
-    fn SetFileTypeIndex(&self, iFileType: ::UINT) -> ::HRESULT,
-    fn GetFileTypeIndex(&self, piFileType: *mut ::UINT) -> ::HRESULT,
-    fn Advise(&self, pfde: *mut IFileDialogEvents, pdwCookie: *mut ::DWORD) -> ::HRESULT,
-    fn Unadvise(&self, dwCookie: ::DWORD) -> ::HRESULT,
-    fn SetOptions(&self, fos: FILEOPENDIALOGOPTIONS) -> ::HRESULT,
-    fn GetOptions(&self, pfos: *mut FILEOPENDIALOGOPTIONS) -> ::HRESULT,
-    fn SetDefaultFolder(&self, psi: *mut IShellItem) -> ::HRESULT,
-    fn SetFolder(&self, psi: *mut IShellItem) -> ::HRESULT,
-    fn GetFolder(&self, ppsi: *mut *mut IShellItem) -> ::HRESULT,
-    fn GetCurrentSelection(&self, ppsi: *mut *mut IShellItem) -> ::HRESULT,
-    fn SetFileName(&self, pszName: ::LPCWSTR) -> ::HRESULT,
-    fn GetFileName(&self, pszName: *mut ::LPWSTR) -> ::HRESULT,
-    fn SetTitle(&self, pszTitle: ::LPCWSTR) -> ::HRESULT,
-    fn SetOkButtonLabel(&self, pszText: ::LPCWSTR) -> ::HRESULT,
-    fn SetFileNameLabel(&self, pszLabel: ::LPCWSTR) -> ::HRESULT,
-    fn GetResult(&self, ppsi: *mut *mut IShellItem) -> ::HRESULT,
-    fn AddPlace(&self, psi: *mut IShellItem, fdap: FDAP) -> ::HRESULT,
-    fn SetDefaultExtension(&self, pszDefaultExtension: ::LPCWSTR) -> ::HRESULT,
-    fn Close(&self, hr: ::HRESULT) -> ::HRESULT,
-    fn SetClientGuid(&self, guid: ::REFGUID) -> ::HRESULT,
+    fn SetFileTypeIndex(iFileType: ::UINT) -> ::HRESULT,
+    fn GetFileTypeIndex(piFileType: *mut ::UINT) -> ::HRESULT,
+    fn Advise(pfde: *mut IFileDialogEvents, pdwCookie: *mut ::DWORD) -> ::HRESULT,
+    fn Unadvise(dwCookie: ::DWORD) -> ::HRESULT,
+    fn SetOptions(fos: FILEOPENDIALOGOPTIONS) -> ::HRESULT,
+    fn GetOptions(pfos: *mut FILEOPENDIALOGOPTIONS) -> ::HRESULT,
+    fn SetDefaultFolder(psi: *mut IShellItem) -> ::HRESULT,
+    fn SetFolder(psi: *mut IShellItem) -> ::HRESULT,
+    fn GetFolder(ppsi: *mut *mut IShellItem) -> ::HRESULT,
+    fn GetCurrentSelection(ppsi: *mut *mut IShellItem) -> ::HRESULT,
+    fn SetFileName(pszName: ::LPCWSTR) -> ::HRESULT,
+    fn GetFileName(pszName: *mut ::LPWSTR) -> ::HRESULT,
+    fn SetTitle(pszTitle: ::LPCWSTR) -> ::HRESULT,
+    fn SetOkButtonLabel(pszText: ::LPCWSTR) -> ::HRESULT,
+    fn SetFileNameLabel(pszLabel: ::LPCWSTR) -> ::HRESULT,
+    fn GetResult(ppsi: *mut *mut IShellItem) -> ::HRESULT,
+    fn AddPlace(psi: *mut IShellItem, fdap: FDAP) -> ::HRESULT,
+    fn SetDefaultExtension(pszDefaultExtension: ::LPCWSTR) -> ::HRESULT,
+    fn Close(hr: ::HRESULT) -> ::HRESULT,
+    fn SetClientGuid(guid: ::REFGUID) -> ::HRESULT,
     fn ClearClientData(&self) -> ::HRESULT,
-    fn SetFilter(&self, pFilter: *mut IShellItemFilter) -> ::HRESULT
+    fn SetFilter(pFilter: *mut IShellItemFilter) -> ::HRESULT
 }
 );
 RIDL!(
 interface IFileSaveDialog(IFileSaveDialogVtbl): IFileDialog(IFileDialogVtbl) {
-    fn SetSaveAsItem(&self, psi: *mut IShellItem) -> ::HRESULT,
-    fn SetProperties(&self, pStore: *mut ::IPropertyStore) -> ::HRESULT,
+    fn SetSaveAsItem(psi: *mut IShellItem) -> ::HRESULT,
+    fn SetProperties(pStore: *mut ::IPropertyStore) -> ::HRESULT,
     fn SetCollectedProperties(
-        &self, pList: *mut ::IPropertyDescriptionList, fAppendDefault: ::BOOL
+        pList: *mut ::IPropertyDescriptionList, fAppendDefault: ::BOOL
     ) -> ::HRESULT,
-    fn GetProperties(&self, ppStore: *mut *mut ::IPropertyStore) -> ::HRESULT,
+    fn GetProperties(ppStore: *mut *mut ::IPropertyStore) -> ::HRESULT,
     fn ApplyProperties(
-        &self, psi: *mut IShellItem, pStore: *mut ::IPropertyStore, hwnd: ::HWND,
+        psi: *mut IShellItem, pStore: *mut ::IPropertyStore, hwnd: ::HWND,
         pSink: *mut IFileOperationProgressSink
     ) -> ::HRESULT
 }
 );
 RIDL!(
 interface IFileOpenDialog(IFileOpenDialogVtbl): IFileDialog(IFileDialogVtbl) {
-    fn GetResults(&self, ppenum: *mut *mut IShellItemArray) -> ::HRESULT,
-    fn GetSelectedItems(&self, ppsai: *mut *mut IShellItemArray) -> ::HRESULT
+    fn GetResults(ppenum: *mut *mut IShellItemArray) -> ::HRESULT,
+    fn GetSelectedItems(ppsai: *mut *mut IShellItemArray) -> ::HRESULT
 }
 );
 ENUM!{enum CDCONTROLSTATE {
@@ -636,61 +636,61 @@ ENUM!{enum CDCONTROLSTATE {
 }}
 RIDL!(
 interface IFileDialogCustomize(IFileDialogCustomizeVtbl): IUnknown(IUnknownVtbl) {
-    fn EnableOpenDropDown(&self, dwIDCtl: ::DWORD) -> ::HRESULT,
-    fn AddMenu(&self, dwIDCtl: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT,
-    fn AddPushButton(&self, dwIDCtl: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT,
-    fn AddComboBox(&self, dwIDCtl: ::DWORD) -> ::HRESULT,
-    fn AddRadioButtonList(&self, dwIDCtl: ::DWORD) -> ::HRESULT,
+    fn EnableOpenDropDown(dwIDCtl: ::DWORD) -> ::HRESULT,
+    fn AddMenu(dwIDCtl: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT,
+    fn AddPushButton(dwIDCtl: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT,
+    fn AddComboBox(dwIDCtl: ::DWORD) -> ::HRESULT,
+    fn AddRadioButtonList(dwIDCtl: ::DWORD) -> ::HRESULT,
     fn AddCheckButton(
-        &self, dwIDCtl: ::DWORD, pszLabel: ::LPCWSTR, bChecked: ::BOOL
+        dwIDCtl: ::DWORD, pszLabel: ::LPCWSTR, bChecked: ::BOOL
     ) -> ::HRESULT,
-    fn AddEditBox(&self, dwIDCtl: ::DWORD, pszText: ::LPCWSTR) -> ::HRESULT,
-    fn AddSeparator(&self, dwIDCtl: ::DWORD) -> ::HRESULT,
-    fn AddText(&self, dwIDCtl: ::DWORD, pszText: ::LPCWSTR) -> ::HRESULT,
-    fn SetControlLabel(&self, dwIDCtl: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT,
-    fn GetControlState(&self, dwIDCtl: ::DWORD, pdwState: *mut CDCONTROLSTATE) -> ::HRESULT,
-    fn SetControlState(&self, dwIDCtl: ::DWORD, dwState: CDCONTROLSTATE) -> ::HRESULT,
-    fn GetEditBoxText(&self, dwIDCtl: ::DWORD, ppszText: *mut *mut ::WCHAR) -> ::HRESULT,
-    fn SetEditBoxText(&self, dwIDCtl: ::DWORD, pszText: ::LPCWSTR) -> ::HRESULT,
-    fn GetCheckButtonState(&self, dwIDCtl: ::DWORD, pbChecked: *mut ::BOOL) -> ::HRESULT,
-    fn SetCheckButtonState(&self, dwIDCtl: ::DWORD, bChecked: ::BOOL) -> ::HRESULT,
+    fn AddEditBox(dwIDCtl: ::DWORD, pszText: ::LPCWSTR) -> ::HRESULT,
+    fn AddSeparator(dwIDCtl: ::DWORD) -> ::HRESULT,
+    fn AddText(dwIDCtl: ::DWORD, pszText: ::LPCWSTR) -> ::HRESULT,
+    fn SetControlLabel(dwIDCtl: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT,
+    fn GetControlState(dwIDCtl: ::DWORD, pdwState: *mut CDCONTROLSTATE) -> ::HRESULT,
+    fn SetControlState(dwIDCtl: ::DWORD, dwState: CDCONTROLSTATE) -> ::HRESULT,
+    fn GetEditBoxText(dwIDCtl: ::DWORD, ppszText: *mut *mut ::WCHAR) -> ::HRESULT,
+    fn SetEditBoxText(dwIDCtl: ::DWORD, pszText: ::LPCWSTR) -> ::HRESULT,
+    fn GetCheckButtonState(dwIDCtl: ::DWORD, pbChecked: *mut ::BOOL) -> ::HRESULT,
+    fn SetCheckButtonState(dwIDCtl: ::DWORD, bChecked: ::BOOL) -> ::HRESULT,
     fn AddControlItem(
-        &self, dwIDCtl: ::DWORD, dwIDItem: ::DWORD, pszLabel: ::LPCWSTR
+        dwIDCtl: ::DWORD, dwIDItem: ::DWORD, pszLabel: ::LPCWSTR
     ) -> ::HRESULT,
-    fn RemoveControlItem(&self, dwIDCtl: ::DWORD, dwIDItem: ::DWORD) -> ::HRESULT,
-    fn RemoveAllControlItems(&self, dwIDCtl: ::DWORD) -> ::HRESULT,
+    fn RemoveControlItem(dwIDCtl: ::DWORD, dwIDItem: ::DWORD) -> ::HRESULT,
+    fn RemoveAllControlItems(dwIDCtl: ::DWORD) -> ::HRESULT,
     fn GetControlItemState(
-        &self, dwIDCtl: ::DWORD, dwIDItem: ::DWORD, pdwState: *mut CDCONTROLSTATE
+        dwIDCtl: ::DWORD, dwIDItem: ::DWORD, pdwState: *mut CDCONTROLSTATE
     ) -> ::HRESULT,
     fn SetControlItemState(
-        &self, dwIDCtl: ::DWORD, dwIDItem: ::DWORD, dwState: CDCONTROLSTATE
+        dwIDCtl: ::DWORD, dwIDItem: ::DWORD, dwState: CDCONTROLSTATE
     ) -> ::HRESULT,
-    fn GetSelectedControlItem(&self, dwIDCtl: ::DWORD, pdwIDItem: *mut ::DWORD) -> ::HRESULT,
-    fn SetSelectedControlItem(&self, dwIDCtl: ::DWORD, dwIDItem: ::DWORD) -> ::HRESULT,
-    fn StartVisualGroup(&self, dwIDCtl: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT,
+    fn GetSelectedControlItem(dwIDCtl: ::DWORD, pdwIDItem: *mut ::DWORD) -> ::HRESULT,
+    fn SetSelectedControlItem(dwIDCtl: ::DWORD, dwIDItem: ::DWORD) -> ::HRESULT,
+    fn StartVisualGroup(dwIDCtl: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT,
     fn EndVisualGroup(&self) -> ::HRESULT,
-    fn MakeProminent(&self, dwIDCtl: ::DWORD) -> ::HRESULT,
-    fn SetControlItemText(&self, dwIDCtl: ::DWORD, dwIDItem: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT
+    fn MakeProminent(dwIDCtl: ::DWORD) -> ::HRESULT,
+    fn SetControlItemText(dwIDCtl: ::DWORD, dwIDItem: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT
 }
 );
 RIDL!(
 interface IFileDialogControlEvents(IFileDialogControlEventsVtbl): IUnknown(IUnknownVtbl) {
     fn OnItemSelected(
-        &self, pfdc: *mut IFileDialogCustomize, dwIDCtl: ::DWORD, dwIDItem: ::DWORD
+        pfdc: *mut IFileDialogCustomize, dwIDCtl: ::DWORD, dwIDItem: ::DWORD
     ) -> ::HRESULT,
-    fn OnButtonClicked(&self, pfdc: *mut IFileDialogCustomize, dwIDCtl: ::DWORD) -> ::HRESULT,
+    fn OnButtonClicked(pfdc: *mut IFileDialogCustomize, dwIDCtl: ::DWORD) -> ::HRESULT,
     fn OnCheckButtonToggled(
-        &self, pfdc: *mut IFileDialogCustomize, dwIDCtl: ::DWORD, bChecked: ::BOOL
+        pfdc: *mut IFileDialogCustomize, dwIDCtl: ::DWORD, bChecked: ::BOOL
     ) -> ::HRESULT,
     fn OnControlActivating(
-        &self, pfdc: *mut IFileDialogCustomize, dwIDCtl: ::DWORD
+        pfdc: *mut IFileDialogCustomize, dwIDCtl: ::DWORD
     ) -> ::HRESULT
 }
 );
 RIDL!(
 interface IFileDialog2(IFileDialog2Vtbl): IFileDialog(IFileDialogVtbl) {
-    fn SetCancelButtonLabel(&self, pszLabel: ::LPCWSTR) -> ::HRESULT,
-    fn SetNavigationRoot(&self, psi: IShellItem) -> ::HRESULT
+    fn SetCancelButtonLabel(pszLabel: ::LPCWSTR) -> ::HRESULT,
+    fn SetNavigationRoot(psi: IShellItem) -> ::HRESULT
 }
 );
 //27457

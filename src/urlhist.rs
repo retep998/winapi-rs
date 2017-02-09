@@ -25,28 +25,28 @@ STRUCT!{struct STATURL {
 }}
 pub type LPSTATURL = *mut STATURL;
 RIDL!{interface IEnumSTATURL(IEnumSTATURLVtbl): IUnknown(IUnknownVtbl) {
-    fn Next(&self, celt: ::ULONG, rgelt: LPSTATURL, pceltFetched: *mut ::ULONG) -> ::HRESULT,
-    fn Skip(&self, celt: ::ULONG) -> ::HRESULT,
+    fn Next(celt: ::ULONG, rgelt: LPSTATURL, pceltFetched: *mut ::ULONG) -> ::HRESULT,
+    fn Skip(celt: ::ULONG) -> ::HRESULT,
     fn Reset(&self) -> ::HRESULT,
-    fn Clone(&self, ppenum: *mut *mut ::IEnumSTATURL) -> ::HRESULT,
-    fn SetFilter(&self, poszFilter: ::LPCOLESTR, dwFlags: ::DWORD) -> ::HRESULT
+    fn Clone(ppenum: *mut *mut ::IEnumSTATURL) -> ::HRESULT,
+    fn SetFilter(poszFilter: ::LPCOLESTR, dwFlags: ::DWORD) -> ::HRESULT
 }}
 pub type LPURLHISTORYSTG = *mut IUrlHistoryStg;
 RIDL!{interface IUrlHistoryStg(IUrlHistoryStgVtbl): IUnknown(IUnknownVtbl) {
-    fn AddUrl(&self, pocsUrl: ::LPCOLESTR) -> ::HRESULT,
-    fn DeleteUrl(&self, pocsUrl: ::LPCOLESTR, dwFlags: ::DWORD) -> ::HRESULT,
+    fn AddUrl(pocsUrl: ::LPCOLESTR) -> ::HRESULT,
+    fn DeleteUrl(pocsUrl: ::LPCOLESTR, dwFlags: ::DWORD) -> ::HRESULT,
     fn QueryUrl(
-        &self, pocsUrl: ::LPCOLESTR, dwFlags: ::DWORD, lpSTATURL: LPSTATURL
+        pocsUrl: ::LPCOLESTR, dwFlags: ::DWORD, lpSTATURL: LPSTATURL
     ) -> ::HRESULT,
     fn BindToObject(
-        &self, pocsUrl: ::LPCOLESTR, riid: ::REFIID, ppvOut: *mut *mut ::c_void
+        pocsUrl: ::LPCOLESTR, riid: ::REFIID, ppvOut: *mut *mut ::c_void
     ) -> ::HRESULT,
-    fn EnumUrls(&self, ppEnum: *mut *mut ::IEnumSTATURL) -> ::HRESULT
+    fn EnumUrls(ppEnum: *mut *mut ::IEnumSTATURL) -> ::HRESULT
 }}
 pub type LPURLHISTORYSTG2 = *mut IUrlHistoryStg2;
 RIDL!{interface IUrlHistoryStg2(IUrlHistoryStg2Vtbl): IUrlHistoryStg(IUrlHistoryStgVtbl) {
     fn AddUrlAndNotify(
-        &self, pocsUrl: ::LPCOLESTR, pocsTitle: ::LPCOLESTR, dwFlags: ::DWORD,
+        pocsUrl: ::LPCOLESTR, pocsTitle: ::LPCOLESTR, dwFlags: ::DWORD,
         fWriteHistory: ::BOOL, poctNotify: *mut ::IOleCommandTarget, punkISFolder: *mut ::IUnknown
     ) -> ::HRESULT,
     fn ClearHistory(&self) -> ::HRESULT
