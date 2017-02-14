@@ -103,7 +103,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("ncrypt", &["basetsd", "sspi"], &["ncrypt"]),
     ("oaidl", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypes", "wtypesbase"], &[]),
     ("objidlbase", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
-    ("pdh", &["minwindef", "winnt", "wtypesbase"], &[]),
+    ("pdh", &["basetsd", "guiddef", "minwindef", "winnt", "wtypesbase", "windef"], &["pdh"]),
     ("processthreadsapi", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("propidl", &["minwindef", "wtypes"], &[]),
     ("propsys", &["unknwnbase"], &[]),
