@@ -9,7 +9,7 @@
 use ctypes::c_void;
 use shared::basetsd::{ DWORD64, PDWORD64, SIZE_T, ULONG_PTR };
 use shared::guiddef::CLSID;
-use shared::minwindef::{ BYTE, DWORD, PDWORD, ULONG, WORD };
+use shared::minwindef::{ BYTE, DWORD, ULONG, WORD };
 use vc::excpt::EXCEPTION_DISPOSITION;
 pub const ANYSIZE_ARRAY: usize = 1;
 pub use shared::ntdef::{
@@ -978,7 +978,7 @@ FN!{cdecl PGET_RUNTIME_FUNCTION_CALLBACK(
 FN!{cdecl POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK(
     Process: HANDLE,
     TableAddress: PVOID,
-    Entries: PDWORD,
+    Entries: shared::minwindef::PDWORD,
     Functions: *mut PRUNTIME_FUNCTION
 ) -> DWORD}
 pub const OUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK_EXPORT_NAME: &'static str
