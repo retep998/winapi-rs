@@ -978,7 +978,7 @@ FN!{cdecl PGET_RUNTIME_FUNCTION_CALLBACK(
 FN!{cdecl POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK(
     Process: HANDLE,
     TableAddress: PVOID,
-    Entries: shared::minwindef::PDWORD,
+    Entries: ::shared::minwindef::PDWORD,
     Functions: *mut PRUNTIME_FUNCTION
 ) -> DWORD}
 pub const OUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK_EXPORT_NAME: &'static str
