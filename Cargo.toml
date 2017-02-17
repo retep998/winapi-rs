@@ -32,6 +32,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "headers-shared" = [
     "shared-basetsd",
     "shared-bcrypt",
+    "shared-bugcodes",
     "shared-cderr",
     "shared-cfg",
     "shared-d3d9",
@@ -68,6 +69,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 ]
 "shared-basetsd" = []
 "shared-bcrypt" = ["shared-minwindef", "um-winnt"]
+"shared-bugcodes" = ["shared-ntdef"]
 "shared-cderr" = ["shared-minwindef"]
 "shared-cfg" = ["um-cfgmgr32"]
 "shared-d3d9" = ["shared-basetsd", "shared-d3d9caps", "shared-d3d9types", "shared-guiddef", "shared-minwindef", "shared-windef", "um-unknwnbase", "um-wingdi", "um-winnt"]
