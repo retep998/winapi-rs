@@ -14,7 +14,7 @@ RIDL!(
 interface IBindCtx(IBindCtxVtbl): IUnknown(IUnknownVtbl) {
     fn RegisterObjectBound(punk: *mut ::IUnknown) -> ::HRESULT,
     fn RevokeObjectBound(punk: *mut ::IUnknown) -> ::HRESULT,
-    fn ReleaseBoundObjects(&self) -> ::HRESULT,
+    fn ReleaseBoundObjects() -> ::HRESULT,
     fn SetBindOptions(pbindopts: *mut BIND_OPTS) -> ::HRESULT,
     fn GetBindOptions(pbindopts: *mut BIND_OPTS) -> ::HRESULT,
     fn GetRunningObjectTable(pprot: *mut *mut IRunningObjectTable) -> ::HRESULT,

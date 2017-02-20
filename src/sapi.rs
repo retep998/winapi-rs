@@ -153,14 +153,14 @@ interface ISpNotifySource(ISpNotifySourceVtbl): IUnknown(IUnknownVtbl) {
     fn SetNotifyCallbackInterface(
         pSpCallback: *mut ISpNotifyCallback, wParam: ::WPARAM, lParam: ::LPARAM
     ) -> ::HRESULT,
-    fn SetNotifyWin32Event(&self) -> ::HRESULT,
+    fn SetNotifyWin32Event() -> ::HRESULT,
     fn WaitForNotifyEvent(dwMilliseconds: ::DWORD) -> ::HRESULT,
-    fn GetNotifyEventHandle(&self) -> ::HANDLE
+    fn GetNotifyEventHandle() -> ::HANDLE
 }
 );
 RIDL!(
 interface ISpNotifySink(ISpNotifySinkVtbl): IUnknown(IUnknownVtbl) {
-    fn Notify(&self) -> ::HRESULT
+    fn Notify() -> ::HRESULT
 }
 );
 RIDL!(
@@ -176,7 +176,7 @@ interface ISpNotifyTranslator(ISpNotifyTranslatorVtbl): ISpNotifySink(ISpNotifyS
     ) -> ::HRESULT,
     fn InitWin32Event(hEvent: ::HANDLE, fCloseHandleOnRelease: ::BOOL) -> ::HRESULT,
     fn Wait(dwMilliseconds: ::DWORD) -> ::HRESULT,
-    fn GetEventHandle(&self) -> ::HANDLE
+    fn GetEventHandle() -> ::HANDLE
 }
 );
 RIDL!(
@@ -260,7 +260,7 @@ interface IEnumSpObjectTokens(IEnumSpObjectTokensVtbl): IUnknown(IUnknownVtbl) {
         celt: ::ULONG, pelt: *mut *mut ISpObjectToken, pceltFetched: *mut ::ULONG
     ) -> ::HRESULT,
     fn Skip(celt: ::ULONG) -> ::HRESULT,
-    fn Reset(&self) -> ::HRESULT,
+    fn Reset() -> ::HRESULT,
     fn Clone(ppEnum: *mut *mut IEnumSpObjectTokens) -> ::HRESULT,
     fn Item(Index: ::ULONG, ppToken: *mut *mut ISpObjectToken) -> ::HRESULT,
     fn GetCount(pCount: *mut ::ULONG) -> ::HRESULT
@@ -470,7 +470,7 @@ interface ISpStream(ISpStreamVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
         pszFileName: ::LPCWSTR, eMode: SPFILEMODE, pFormatId: *const ::GUID,
         pWaveFormatEx: *const ::WAVEFORMATEX, ullEventInterest: ::ULONGLONG
     ) -> ::HRESULT,
-    fn Close(&self) -> ::HRESULT
+    fn Close() -> ::HRESULT
 }
 );
 RIDL!(
@@ -485,7 +485,7 @@ interface ISpStreamFormatConverter(ISpStreamFormatConverterVtbl)
         rguidFormatIdOfConvertedStream: ::REFGUID,
         pWaveFormatExOfConvertedStream: *const ::WAVEFORMATEX
     ) -> ::HRESULT,
-    fn ResetSeekPosition(&self) -> ::HRESULT,
+    fn ResetSeekPosition() -> ::HRESULT,
     fn ScaleConvertedToBaseOffset(
         ullOffsetConvertedStream: ::ULONGLONG, pullOffsetBaseStream: *mut ::ULONGLONG
     ) -> ::HRESULT,
@@ -526,7 +526,7 @@ interface ISpAudio(ISpAudioVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
     fn GetDefaultFormat(
         pFormatId: *mut ::GUID, ppCoMemWaveFormatEx: *mut *mut ::WAVEFORMATEX
     ) -> ::HRESULT,
-    fn EventHandle(&self) -> ::HANDLE,
+    fn EventHandle() -> ::HANDLE,
     fn GetVolumeLevel(pLevel: *mut ::ULONG) -> ::HRESULT,
     fn SetVolumeLevel(Level: ::ULONG) -> ::HRESULT,
     fn GetBufferNotifySize(pcbSize: *mut ::ULONG) -> ::HRESULT,
@@ -994,8 +994,8 @@ interface ISpVoice(ISpVoiceVtbl): ISpEventSource(ISpEventSourceVtbl) {
     fn SetOutput(pUnkOutput: *mut ::IUnknown, fAllowFormatChanges: ::BOOL) -> ::HRESULT,
     fn GetOutputObjectToken(ppObjectToken: *mut *mut ISpObjectToken) -> ::HRESULT,
     fn GetOutputStream(ppStream: *mut *mut ISpStreamFormat) -> ::HRESULT,
-    fn Pause(&self) -> ::HRESULT,
-    fn Resume(&self) -> ::HRESULT,
+    fn Pause() -> ::HRESULT,
+    fn Resume() -> ::HRESULT,
     fn SetVoice(pToken: *mut ISpObjectToken) -> ::HRESULT,
     fn GetVoice(ppToken: *mut *mut ISpObjectToken) -> ::HRESULT,
     fn Speak(
@@ -1021,7 +1021,7 @@ interface ISpVoice(ISpVoiceVtbl): ISpEventSource(ISpEventSourceVtbl) {
     fn WaitUntilDone(msTimeout: ::ULONG) -> ::HRESULT,
     fn SetSyncSpeakTimeout(msTimeout: ::ULONG) -> ::HRESULT,
     fn GetSyncSpeakTimeout(pmsTimeout: *mut ::ULONG) -> ::HRESULT,
-    fn SpeakCompleteEvent(&self) -> ::HANDLE,
+    fn SpeakCompleteEvent() -> ::HANDLE,
     fn IsUISupported(
         pszTypeOfUI: ::LPCWSTR, pvExtraData: *mut ::c_void, cbExtraData: ::ULONG,
         pfSupported: *mut ::BOOL
@@ -1053,7 +1053,7 @@ interface ISpPhraseAlt(ISpPhraseAltVtbl): ISpPhrase(ISpPhraseVtbl) {
         pParent: *mut *mut ISpPhrase, pulStartElementInParent: *mut ::ULONG,
         pcElementsInParent: *mut ::ULONG, pcElementsInAlt: *mut ::ULONG
     ) -> ::HRESULT,
-    fn Commit(&self) -> ::HRESULT
+    fn Commit() -> ::HRESULT
 }
 );
 ENUM!{enum SPXMLRESULTOPTIONS {
@@ -1233,7 +1233,7 @@ interface ISpRecoGrammar(ISpRecoGrammarVtbl): ISpGrammarBuilder(ISpGrammarBuilde
     ) -> ::HRESULT,
     fn SetRuleIdState(ulRuleId: ::ULONG, NewState: SPRULESTATE) -> ::HRESULT,
     fn LoadDictation(pszTopicName: ::LPCWSTR, Options: SPLOADOPTIONS) -> ::HRESULT,
-    fn UnloadDictation(&self) -> ::HRESULT,
+    fn UnloadDictation() -> ::HRESULT,
     fn SetDictationState(NewState: SPRULESTATE) -> ::HRESULT,
     fn SetWordSequenceData(
         pText: *const ::WCHAR, cchText: ::ULONG, pInfo: *const SPTEXTSELECTIONINFO
@@ -1438,7 +1438,7 @@ interface ISpRecognizer(ISpRecognizerVtbl): ISpProperties(ISpPropertiesVtbl) {
     fn CreateRecoContext(ppNewCtxt: *mut *mut ISpRecoContext) -> ::HRESULT,
     fn GetRecoProfile(ppToken: *mut *mut ISpObjectToken) -> ::HRESULT,
     fn SetRecoProfile(pToken: *mut ISpObjectToken) -> ::HRESULT,
-    fn IsSharedInstance(&self) -> ::HRESULT,
+    fn IsSharedInstance() -> ::HRESULT,
     fn GetRecoState(pState: *mut SPRECOSTATE) -> ::HRESULT,
     fn SetRecoState(NewState: SPRECOSTATE) -> ::HRESULT,
     fn GetStatus(pStatus: *mut SPRECOGNIZERSTATUS) -> ::HRESULT,
@@ -1475,7 +1475,7 @@ interface ISpRecognizer2(ISpRecognizer2Vtbl): IUnknown(IUnknownVtbl) {
     fn SetTrainingState(
         fDoingTraining: ::BOOL, fAdaptFromTrainingData: ::BOOL
     ) -> ::HRESULT,
-    fn ResetAcousticModelAdaptation(&self) -> ::HRESULT
+    fn ResetAcousticModelAdaptation() -> ::HRESULT
 }
 );
 ENUM!{enum SPCATEGORYTYPE {

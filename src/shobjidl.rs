@@ -604,7 +604,7 @@ interface IFileDialog(IFileDialogVtbl): IModalWindow(IModalWindowVtbl) {
     fn SetDefaultExtension(pszDefaultExtension: ::LPCWSTR) -> ::HRESULT,
     fn Close(hr: ::HRESULT) -> ::HRESULT,
     fn SetClientGuid(guid: ::REFGUID) -> ::HRESULT,
-    fn ClearClientData(&self) -> ::HRESULT,
+    fn ClearClientData() -> ::HRESULT,
     fn SetFilter(pFilter: *mut IShellItemFilter) -> ::HRESULT
 }
 );
@@ -668,7 +668,7 @@ interface IFileDialogCustomize(IFileDialogCustomizeVtbl): IUnknown(IUnknownVtbl)
     fn GetSelectedControlItem(dwIDCtl: ::DWORD, pdwIDItem: *mut ::DWORD) -> ::HRESULT,
     fn SetSelectedControlItem(dwIDCtl: ::DWORD, dwIDItem: ::DWORD) -> ::HRESULT,
     fn StartVisualGroup(dwIDCtl: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT,
-    fn EndVisualGroup(&self) -> ::HRESULT,
+    fn EndVisualGroup() -> ::HRESULT,
     fn MakeProminent(dwIDCtl: ::DWORD) -> ::HRESULT,
     fn SetControlItemText(dwIDCtl: ::DWORD, dwIDItem: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT
 }

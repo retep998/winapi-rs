@@ -2223,7 +2223,6 @@ ENUM!{enum HEAP_INFORMATION_CLASS {
     HeapEnableTerminationOnCorruption = 1,
     HeapOptimizeResources = 3,
 }}
-//pub use selfHEAP_INFORMATION_CLASS*;
 pub const HEAP_OPTIMIZE_RESOURCES_CURRENT_VERSION: DWORD = 1;
 STRUCT!{struct HEAP_OPTIMIZE_RESOURCES_INFORMATION {
     Version: DWORD,

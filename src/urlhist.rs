@@ -27,7 +27,7 @@ pub type LPSTATURL = *mut STATURL;
 RIDL!{interface IEnumSTATURL(IEnumSTATURLVtbl): IUnknown(IUnknownVtbl) {
     fn Next(celt: ::ULONG, rgelt: LPSTATURL, pceltFetched: *mut ::ULONG) -> ::HRESULT,
     fn Skip(celt: ::ULONG) -> ::HRESULT,
-    fn Reset(&self) -> ::HRESULT,
+    fn Reset() -> ::HRESULT,
     fn Clone(ppenum: *mut *mut ::IEnumSTATURL) -> ::HRESULT,
     fn SetFilter(poszFilter: ::LPCOLESTR, dwFlags: ::DWORD) -> ::HRESULT
 }}
@@ -49,7 +49,7 @@ RIDL!{interface IUrlHistoryStg2(IUrlHistoryStg2Vtbl): IUrlHistoryStg(IUrlHistory
         pocsUrl: ::LPCOLESTR, pocsTitle: ::LPCOLESTR, dwFlags: ::DWORD,
         fWriteHistory: ::BOOL, poctNotify: *mut ::IOleCommandTarget, punkISFolder: *mut ::IUnknown
     ) -> ::HRESULT,
-    fn ClearHistory(&self) -> ::HRESULT
+    fn ClearHistory() -> ::HRESULT
 }}
 pub type LPURLHISTORYNOTIFY = *mut IUrlHistoryNotify;
 RIDL!{interface IUrlHistoryNotify(IUrlHistoryNotifyVtbl):

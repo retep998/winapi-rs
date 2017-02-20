@@ -126,16 +126,16 @@ interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl)
         iWriter: ::UINT, pidInstance: *mut ::VSS_ID,
         ppMetadata: *mut *mut IVssExamineWriterMetadata
     ) -> ::HRESULT,
-    fn FreeWriterMetadata(&self) -> ::HRESULT,
+    fn FreeWriterMetadata() -> ::HRESULT,
     fn AddComponent(
         instanceId: ::VSS_ID, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE,
         wszLogicalPath: ::LPCWSTR, wszComponentName: ::LPCWSTR
     ) -> ::HRESULT,
     fn PrepareForBackup(ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
-    fn AbortBackup(&self) -> ::HRESULT,
+    fn AbortBackup() -> ::HRESULT,
     fn GatherWriterStatus(ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
     fn GetWriterStatusCount(pcWriters: *mut ::UINT) -> ::HRESULT,
-    fn FreeWriterStatus(&self) -> ::HRESULT,
+    fn FreeWriterStatus() -> ::HRESULT,
     fn GetWriterStatus(
         iWriter: ::UINT, pidInstance: *mut ::VSS_ID, pidWriter: *mut ::VSS_ID,
         pbstrWriter: *mut ::BSTR, pnStatus: *mut ::VSS_WRITER_STATE,
