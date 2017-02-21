@@ -36,7 +36,7 @@ STRUCT!{struct DXGI_QUERY_VIDEO_MEMORY_INFO {
     CurrentReservation: UINT64,
 }}
 
-RIDL!(#[uuid(0x645967A4, 0x1392, 0x4310, 0xA7, 0x98, 0x80, 0x53, 0xCE, 0x3E, 0x93, 0xFD)]
+RIDL!(#[uuid(0x645967a4, 0x1392, 0x4310, 0xa7, 0x98, 0x80, 0x53, 0xce, 0x3e, 0x93, 0xfd)]
 interface IDXGIAdapter3(IDXGIAdapter3Vtbl): IDXGIAdapter2(IDXGIAdapter2Vtbl) {
     fn RegisterHardwareContentProtectionTeardownStatusEvent(
         hEvent: HANDLE, pdwCookie: *mut DWORD
@@ -70,7 +70,7 @@ interface IDXGIFactory4(IDXGIFactory4Vtbl): IDXGIFactory3(IDXGIFactory3Vtbl) {
     ) -> HRESULT
 });
 
-RIDL!(#[uuid(0xdc7dca35, 0x2196, 0x414d, 0x9F, 0x53, 0x61, 0x78, 0x84, 0x03, 0x2a, 0x60)]
+RIDL!(#[uuid(0xdc7dca35, 0x2196, 0x414d, 0x9f, 0x53, 0x61, 0x78, 0x84, 0x03, 0x2a, 0x60)]
 interface IDXGIOutput4(IDXGIOutput4Vtbl): IDXGIOutput3(IDXGIOutput3Vtbl) {
     fn CheckOverlayColorSpaceSupport(
         Format: DXGI_FORMAT, ColorSpace: DXGI_COLOR_SPACE_TYPE,

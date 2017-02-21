@@ -845,7 +845,7 @@ STRUCT!{struct DWRITE_HIT_TEST_METRICS {
     isText: BOOL,
     isTrimmed: BOOL,
 }}
-RIDL!{#[uuid(0x8339FDE3, 0x106F, 0x47ab, 0x83, 0x73, 0x1C, 0x62, 0x95, 0xEB, 0x10, 0xB3)]
+RIDL!{#[uuid(0x8339fde3, 0x106f, 0x47ab, 0x83, 0x73, 0x1c, 0x62, 0x95, 0xeb, 0x10, 0xb3)]
 interface IDWriteInlineObject(IDWriteInlineObjectVtbl): IUnknown(IUnknownVtbl) {
     fn Draw(
         clientDrawingContext: *mut c_void, renderer: *mut IDWriteTextRenderer,

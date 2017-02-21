@@ -682,7 +682,7 @@ interface IFileDialogCustomize(IFileDialogCustomizeVtbl): IUnknown(IUnknownVtbl)
 }
 );
 RIDL!(
-#[uuid(0x36116642, 0xD713, 0x4b97, 0x9B, 0x83, 0x74, 0x84, 0xA9, 0xD0, 0x04, 0x33)]
+#[uuid(0x36116642, 0xd713, 0x4b97, 0x9b, 0x83, 0x74, 0x84, 0xa9, 0xd0, 0x04, 0x33)]
 interface IFileDialogControlEvents(IFileDialogControlEventsVtbl): IUnknown(IUnknownVtbl) {
     fn OnItemSelected(
         pfdc: *mut IFileDialogCustomize, dwIDCtl: ::DWORD, dwIDItem: ::DWORD

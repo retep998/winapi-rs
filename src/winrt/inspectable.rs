@@ -12,7 +12,7 @@ ENUM!{enum TrustLevel {
     PartialTrust,
     FullTrust,
 }}
-RIDL!{#[uuid(0xAF86E2E0, 0xB12D, 0x4c6a, 0x9C, 0x5A, 0xD7, 0xAA, 0x65, 0x10, 0x1E, 0x90)]
+RIDL!{#[uuid(0xaf86e2e0, 0xb12d, 0x4c6a, 0x9c, 0x5a, 0xd7, 0xaa, 0x65, 0x10, 0x1e, 0x90)]
 interface IInspectable(IInspectableVtbl): IUnknown(IUnknownVtbl) {
     fn GetIids(iidCount: *mut  ULONG, iids: *mut *mut  IID) ->  HRESULT,
     fn GetRuntimeClassName(className: *mut  HSTRING) ->  HRESULT,

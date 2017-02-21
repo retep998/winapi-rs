@@ -122,7 +122,7 @@ interface IDXGISurface(IDXGISurfaceVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObj
     fn Map(pLockedRect: *mut DXGI_MAPPED_RECT, MapFlags: UINT) -> HRESULT,
     fn Unmap() -> HRESULT
 });
-RIDL!(#[uuid(0x4AE63092, 0x6327, 0x4c1b, 0x80, 0xAE, 0xBF, 0xE1, 0x2E, 0xA3, 0x2B, 0x86)]
+RIDL!(#[uuid(0x4ae63092, 0x6327, 0x4c1b, 0x80, 0xae, 0xbf, 0xe1, 0x2e, 0xa3, 0x2b, 0x86)]
 interface IDXGISurface1(IDXGISurface1Vtbl): IDXGISurface(IDXGISurfaceVtbl) {
     fn GetDC(Discard: BOOL, phdc: *mut HDC) -> HRESULT,
     fn ReleaseDC(pDirtyRect: *mut RECT) -> HRESULT

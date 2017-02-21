@@ -2324,7 +2324,7 @@ interface ID3D12Resource(ID3D12ResourceVtbl): ID3D12Pageable(ID3D12PageableVtbl)
     ) -> HRESULT
 });
 
-RIDL!(#[uuid(0x34AB647B, 0x3CC8, 0x46AC, 0x84, 0x1B, 0xC0, 0x96, 0x56, 0x45, 0xC0, 0x46)]
+RIDL!(#[uuid(0x34ab647b, 0x3cc8, 0x46ac, 0x84, 0x1b, 0xc0, 0x96, 0x56, 0x45, 0xc0, 0x46)]
 interface ID3D12RootSignatureDeserializer(ID3D12RootSignatureDeserializerVtbl): IUnknown(IUnknownVtbl) {
     fn GetRootSignatureDesc() -> *const D3D12_ROOT_SIGNATURE_DESC
 });

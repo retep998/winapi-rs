@@ -2250,7 +2250,7 @@ STRUCT!{struct D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC {
     ViewDimension: D3D11_VPIV_DIMENSION,
     Texture2D: D3D11_TEX2D_VPIV,
 }}
-RIDL!{#[uuid(0x11EC5A5F, 0x51DC, 0x4945, 0xAB, 0x34, 0x6E, 0x8C, 0x21, 0x30, 0x0E, 0xA5)]
+RIDL!{#[uuid(0x11ec5a5f, 0x51dc, 0x4945, 0xab, 0x34, 0x6e, 0x8c, 0x21, 0x30, 0x0e, 0xa5)]
 interface ID3D11VideoProcessorInputView(ID3D11VideoProcessorInputViewVtbl)
     : ID3D11View(ID3D11ViewVtbl) {
     fn GetDesc(pDesc: *mut D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC) -> ()

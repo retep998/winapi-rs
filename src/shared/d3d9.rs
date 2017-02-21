@@ -563,7 +563,7 @@ pub const D3DCREATE_ENABLE_PRESENTSTATS: DWORD = 0x4000;
 pub const D3DCREATE_DISABLE_PRESENTSTATS: DWORD = 0x8000;
 pub const D3DCREATE_SCREENSAVER: DWORD = 0x10000000;
 pub const D3DADAPTER_DEFAULT: DWORD = 0;
-RIDL!(#[uuid(0x02177241, 0x69FC, 0x400C, 0x8F, 0xF1, 0x93, 0xA4, 0x4D, 0xF6, 0x86, 0x1D)]
+RIDL!(#[uuid(0x02177241, 0x69fc, 0x400c, 0x8f, 0xf1, 0x93, 0xa4, 0x4d, 0xf6, 0x86, 0x1d)]
 interface IDirect3D9Ex(IDirect3D9ExVtbl): IDirect3D9(IDirect3D9Vtbl) {
     fn GetAdapterModeCountEx(
         Adapter: UINT, pFilter: *const D3DDISPLAYMODEFILTER
