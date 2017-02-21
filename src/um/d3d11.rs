@@ -884,7 +884,8 @@ UNION!{D3D11_RENDER_TARGET_VIEW_DESC, u, Texture2DMS, Texture2DMS_mut, D3D11_TEX
 UNION!{D3D11_RENDER_TARGET_VIEW_DESC, u, Texture2DMSArray,Texture2DMSArray_mut,
     D3D11_TEX2DMS_ARRAY_RTV}
 UNION!{D3D11_RENDER_TARGET_VIEW_DESC, u, Texture3D, Texture3D_mut, D3D11_TEX3D_RTV}
-RIDL!{interface ID3D11RenderTargetView(ID3D11RenderTargetViewVtbl): ID3D11View(ID3D11ViewVtbl) {
+RIDL!{#[uuid(0xdfdba067, 0x0b8d, 0x4865, 0x87, 0x5b, 0xd7, 0xb4, 0x51, 0x6c, 0xc1, 0x64)]
+interface ID3D11RenderTargetView(ID3D11RenderTargetViewVtbl): ID3D11View(ID3D11ViewVtbl) {
     fn GetDesc(pDesc: *mut D3D11_RENDER_TARGET_VIEW_DESC) -> ()
 }}
 STRUCT!{struct D3D11_TEX1D_DSV {
@@ -1160,7 +1161,8 @@ STRUCT!{struct D3D11_QUERY_DESC {
     Query: D3D11_QUERY,
     MiscFlags: UINT,
 }}
-RIDL!{interface ID3D11Query(ID3D11QueryVtbl): ID3D11Asynchronous(ID3D11AsynchronousVtbl) {
+RIDL!{#[uuid(0xd6c00747, 0x87b7, 0x425e, 0xb8, 0x4d, 0x44, 0xd1, 0x08, 0x56, 0x0a, 0xfd)]
+interface ID3D11Query(ID3D11QueryVtbl): ID3D11Asynchronous(ID3D11AsynchronousVtbl) {
     fn GetDesc(pDesc: *mut D3D11_QUERY_DESC) -> ()
 }}
 RIDL!{#[uuid(0x9eb576dd, 0x9f77, 0x4d86, 0x81, 0xaa, 0x8b, 0xab, 0x5f, 0xe4, 0x90, 0xe2)]
@@ -2248,7 +2250,8 @@ STRUCT!{struct D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC {
     ViewDimension: D3D11_VPIV_DIMENSION,
     Texture2D: D3D11_TEX2D_VPIV,
 }}
-RIDL!{interface ID3D11VideoProcessorInputView(ID3D11VideoProcessorInputViewVtbl)
+RIDL!{#[uuid(0x11EC5A5F, 0x51DC, 0x4945, 0xAB, 0x34, 0x6E, 0x8C, 0x21, 0x30, 0x0E, 0xA5)]
+interface ID3D11VideoProcessorInputView(ID3D11VideoProcessorInputViewVtbl)
     : ID3D11View(ID3D11ViewVtbl) {
     fn GetDesc(pDesc: *mut D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC) -> ()
 }}
