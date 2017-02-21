@@ -464,7 +464,7 @@ STRUCT!{struct CUSTDATA {
 }}
 pub type LPCUSTDATA = *mut CUSTDATA;
 pub type LPCREATETYPEINFO = *mut ICreateTypeInfo;
-RIDL!(
+RIDL!(#[uuid(0x00020405, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ICreateTypeInfo(ICreateTypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn SetGuid(guid: REFGUID) -> HRESULT,
     fn SetTypeFlags(uTypeFlags: UINT) -> HRESULT,
@@ -504,7 +504,7 @@ pub const DISPID_EVALUATE: INT = -5;
 pub const DISPID_CONSTRUCTOR: INT = -6;
 pub const DISPID_DESTRUCTOR: INT = -7;
 pub const DISPID_COLLECT: INT = -8;
-RIDL!(
+RIDL!(#[uuid(0x00020400, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeInfoCount(pctinfo: *mut UINT) -> HRESULT,
     fn GetTypeInfo(
@@ -524,7 +524,7 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
 pub enum IRecordInfo {} // FIXME
 pub enum ITypeComp {} // FIXME
 pub enum ITypeLib {} // FIXME
-RIDL!(
+RIDL!(#[uuid(0x00020401, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeAttr(ppTypeAttr: *mut *mut TYPEATTR) -> HRESULT,
     fn GetTypeComp(ppTComp: *mut *mut ITypeComp) -> HRESULT,

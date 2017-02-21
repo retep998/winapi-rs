@@ -36,7 +36,7 @@ STRUCT!{struct DXGI_QUERY_VIDEO_MEMORY_INFO {
     CurrentReservation: UINT64,
 }}
 
-RIDL!(
+RIDL!(#[uuid(0x645967A4, 0x1392, 0x4310, 0xA7, 0x98, 0x80, 0x53, 0xCE, 0x3E, 0x93, 0xFD)]
 interface IDXGIAdapter3(IDXGIAdapter3Vtbl): IDXGIAdapter2(IDXGIAdapter2Vtbl) {
     fn RegisterHardwareContentProtectionTeardownStatusEvent(
         hEvent: HANDLE, pdwCookie: *mut DWORD
@@ -60,7 +60,7 @@ interface IDXGIAdapter3(IDXGIAdapter3Vtbl): IDXGIAdapter2(IDXGIAdapter2Vtbl) {
     ) -> ()
 });
 
-RIDL!(
+RIDL!(#[uuid(0x1bc6ea02, 0xef36, 0x464f, 0xbf, 0x0c, 0x21, 0xca, 0x39, 0xe5, 0x16, 0x8a)]
 interface IDXGIFactory4(IDXGIFactory4Vtbl): IDXGIFactory3(IDXGIFactory3Vtbl) {
     fn EnumAdapterByLuid(
         AdapterLuid: LUID, riid: REFGUID, ppvAdapter: *mut *mut c_void
@@ -70,7 +70,7 @@ interface IDXGIFactory4(IDXGIFactory4Vtbl): IDXGIFactory3(IDXGIFactory3Vtbl) {
     ) -> HRESULT
 });
 
-RIDL!(
+RIDL!(#[uuid(0xdc7dca35, 0x2196, 0x414d, 0x9F, 0x53, 0x61, 0x78, 0x84, 0x03, 0x2a, 0x60)]
 interface IDXGIOutput4(IDXGIOutput4Vtbl): IDXGIOutput3(IDXGIOutput3Vtbl) {
     fn CheckOverlayColorSpaceSupport(
         Format: DXGI_FORMAT, ColorSpace: DXGI_COLOR_SPACE_TYPE,
@@ -78,7 +78,7 @@ interface IDXGIOutput4(IDXGIOutput4Vtbl): IDXGIOutput3(IDXGIOutput3Vtbl) {
     ) -> HRESULT
 });
 
-RIDL!(
+RIDL!(#[uuid(0x94d99bdb, 0xf1f8, 0x4ab0, 0xb2, 0x36, 0x7d, 0xa0, 0x17, 0x0e, 0xda, 0xb1)]
 interface IDXGISwapChain3(IDXGISwapChain3Vtbl): IDXGISwapChain2(IDXGISwapChain2Vtbl) {
     fn GetCurrentBackBufferIndex() -> UINT,
     fn CheckColorSpaceSupport(

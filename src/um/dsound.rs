@@ -53,7 +53,7 @@ STRUCT!{struct DSBUFFERDESC {
     guid3DAlgorithm: GUID,
 }}
 pub type LPCDSBUFFERDESC = *const DSBUFFERDESC;
-RIDL!(
+RIDL!(#[uuid(0x279AFA85, 0x4981, 0x11CE, 0xA5, 0x21, 0x00, 0x20, 0xAF, 0x0B, 0xE5, 0x60)]
 interface IDirectSoundBuffer(IDirectSoundBufferVtbl): IUnknown(IUnknownVtbl) {
     fn GetCaps(pDSBufferCaps: LPDSBCAPS) -> HRESULT,
     fn GetCurrentPosition(
@@ -90,7 +90,7 @@ interface IDirectSoundBuffer(IDirectSoundBufferVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 pub type LPDIRECTSOUNDBUFFER = *mut IDirectSoundBuffer;
-RIDL!(
+RIDL!(#[uuid(0x279AFA83, 0x4981, 0x11CE, 0xA5, 0x21, 0x00, 0x20, 0xAF, 0x0B, 0xE5, 0x60)]
 interface IDirectSound(IDirectSoundVtbl): IUnknown(IUnknownVtbl)
 {
     fn CreateSoundBuffer(

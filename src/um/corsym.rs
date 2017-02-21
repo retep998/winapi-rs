@@ -57,7 +57,7 @@ ENUM!{enum CorSymAddrKind {
 ENUM!{enum CorSymVarFlag {
     VAR_IS_COMP_GEN = 1,
 }}
-RIDL!(
+RIDL!(#[uuid(0xAA544D42, 0x28CB, 0x11d3, 0xBD, 0x22, 0x00, 0x00, 0xF8, 0x08, 0x49, 0xBD)]
 interface ISymUnmanagedBinder(ISymUnmanagedBinderVtbl): IUnknown(IUnknownVtbl) {
     fn GetReaderForFile(
         importer: *mut IUnknown, fileName: *const WCHAR, searchPath: *const WCHAR,
@@ -75,7 +75,7 @@ ENUM!{enum CorSymSearchPolicyAttributes {
     AllowOriginalPathAccess = 0x4,
     AllowReferencePathAccess = 0x8,
 }}
-RIDL!(
+RIDL!(#[uuid(0xACCEE350, 0x89AF, 0x4ccb, 0x8B, 0x40, 0x1C, 0x2C, 0x4C, 0x6F, 0x94, 0x34)]
 interface ISymUnmanagedBinder2(ISymUnmanagedBinder2Vtbl):
     ISymUnmanagedBinder(ISymUnmanagedBinderVtbl) {
     fn GetReaderForFile2(

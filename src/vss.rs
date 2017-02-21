@@ -238,6 +238,7 @@ STRUCT!{struct VSS_OBJECT_PROP {
 }}
 type PVSS_OBJECT_PROP = *mut VSS_OBJECT_PROP;
 RIDL!(
+#[uuid(0xAE1C7110, 0x2F60, 0x11d3, 0x8A, 0x39, 0x00, 0xC0, 0x4F, 0x72, 0xD8, 0xE3)]
 interface IVssEnumObject(IVssEnumObjectVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ::ULONG, rgelt: *mut ::VSS_OBJECT_PROP, pceltFetched: *mut ::ULONG
@@ -248,6 +249,7 @@ interface IVssEnumObject(IVssEnumObjectVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x507C37B4, 0xCF5B, 0x4e95, 0xB0, 0xAF, 0x14, 0xEB, 0x97, 0x67, 0x46, 0x7E)]
 interface IVssAsync(IVssAsyncVtbl): IUnknown(IUnknownVtbl) {
     fn Cancel() -> ::HRESULT,
     fn Wait(dwMilliseconds: ::DWORD) -> ::HRESULT,

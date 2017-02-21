@@ -142,6 +142,7 @@ interface ISpNotifyCallback(ISpNotifyCallbackVtbl) {
 );
 pub type SPNOTIFYCALLBACK = unsafe extern "system" fn(wParam: ::WPARAM, lParam: ::LPARAM);
 RIDL!(
+#[uuid(0x5EFF4AEF, 0x8487, 0x11D2, 0x96, 0x1C, 0x00, 0xC0, 0x4F, 0x8E, 0xE6, 0x28)]
 interface ISpNotifySource(ISpNotifySourceVtbl): IUnknown(IUnknownVtbl) {
     fn SetNotifySink(pNotifySink: *mut ISpNotifySink) -> ::HRESULT,
     fn SetNotifyWindowMessage(
@@ -159,11 +160,13 @@ interface ISpNotifySource(ISpNotifySourceVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x259684DC, 0x37C3, 0x11D2, 0x96, 0x03, 0x00, 0xC0, 0x4F, 0x8E, 0xE6, 0x28)]
 interface ISpNotifySink(ISpNotifySinkVtbl): IUnknown(IUnknownVtbl) {
     fn Notify() -> ::HRESULT
 }
 );
 RIDL!(
+#[uuid(0xACA16614, 0x5D3D, 0x11D2, 0x96, 0x0E, 0x00, 0xC0, 0x4F, 0x8E, 0xE6, 0x28)]
 interface ISpNotifyTranslator(ISpNotifyTranslatorVtbl): ISpNotifySink(ISpNotifySinkVtbl) {
     fn InitWindowMessage(
         hWnd: ::HWND, Msg: ::UINT, wParam: ::WPARAM, lParam: ::LPARAM
@@ -180,6 +183,7 @@ interface ISpNotifyTranslator(ISpNotifyTranslatorVtbl): ISpNotifySink(ISpNotifyS
 }
 );
 RIDL!(
+#[uuid(0x14056581, 0xE16C, 0x11D2, 0xBB, 0x90, 0x00, 0xC0, 0x4F, 0x8E, 0xE6, 0xC0)]
 interface ISpDataKey(ISpDataKeyVtbl): IUnknown(IUnknownVtbl) {
     fn SetData(
         pszValueName: ::LPCWSTR, cbData: ::ULONG, pData: *const ::BYTE
@@ -200,11 +204,13 @@ interface ISpDataKey(ISpDataKeyVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x92A66E2B, 0xC830, 0x4149, 0x83, 0xDF, 0x6F, 0xC2, 0xBA, 0x1E, 0x7A, 0x5B)]
 interface ISpRegDataKey(ISpRegDataKeyVtbl): ISpDataKey(ISpDataKeyVtbl) {
     fn SetKey(hkey: ::HKEY, fReadOnly: ::BOOL) -> ::HRESULT
 }
 );
 RIDL!(
+#[uuid(0x2D3D3845, 0x39AF, 0x4850, 0xBB, 0xF9, 0x40, 0xB4, 0x97, 0x80, 0x01, 0x1D)]
 interface ISpObjectTokenCategory(ISpObjectTokenCategoryVtbl): ISpDataKey(ISpDataKeyVtbl) {
     fn SetId(pszCategoryId: ::LPCWSTR, fCreateIfNotExist: ::BOOL) -> ::HRESULT,
     fn GetId(ppszCoMemCategoryId: *mut ::LPWSTR) -> ::HRESULT,
@@ -220,6 +226,7 @@ interface ISpObjectTokenCategory(ISpObjectTokenCategoryVtbl): ISpDataKey(ISpData
 }
 );
 RIDL!(
+#[uuid(0x14056589, 0xE16C, 0x11D2, 0xBB, 0x90, 0x00, 0xC0, 0x4F, 0x8E, 0xE6, 0xC0)]
 interface ISpObjectToken(ISpObjectTokenVtbl): ISpDataKey(ISpDataKeyVtbl) {
     fn SetId(
         pszCategoryId: ::LPCWSTR, pszTokenId: ::LPCWSTR, fCreateIfNotExist: ::BOOL
@@ -248,6 +255,7 @@ interface ISpObjectToken(ISpObjectTokenVtbl): ISpDataKey(ISpDataKeyVtbl) {
 }
 );
 RIDL!(
+#[uuid(0xB8AAB0CF, 0x346F, 0x49D8, 0x94, 0x99, 0xC8, 0xB0, 0x3F, 0x16, 0x1D, 0x51)]
 interface ISpObjectTokenInit(ISpObjectTokenInitVtbl): ISpObjectToken(ISpObjectTokenVtbl) {
     fn InitFromDataKey(
         pszCategoryId: ::LPCWSTR, pszTokenId: ::LPCWSTR, pDataKey: *mut ISpDataKey
@@ -255,6 +263,7 @@ interface ISpObjectTokenInit(ISpObjectTokenInitVtbl): ISpObjectToken(ISpObjectTo
 }
 );
 RIDL!(
+#[uuid(0x06B64F9E, 0x7FDA, 0x11D2, 0xB4, 0xF2, 0x00, 0xC0, 0x4F, 0x79, 0x73, 0x96)]
 interface IEnumSpObjectTokens(IEnumSpObjectTokensVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ::ULONG, pelt: *mut *mut ISpObjectToken, pceltFetched: *mut ::ULONG
@@ -267,12 +276,14 @@ interface IEnumSpObjectTokens(IEnumSpObjectTokensVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x5B559F40, 0xE952, 0x11D2, 0xBB, 0x91, 0x00, 0xC0, 0x4F, 0x8E, 0xE6, 0xC0)]
 interface ISpObjectWithToken(ISpObjectWithTokenVtbl): IUnknown(IUnknownVtbl) {
     fn SetObjectToken(pToken: *mut ISpObjectToken) -> ::HRESULT,
     fn GetObjectToken(ppToken: *mut *mut ISpObjectToken) -> ::HRESULT
 }
 );
 RIDL!(
+#[uuid(0x93384E18, 0x5014, 0x43D5, 0xAD, 0xBB, 0xA7, 0x8E, 0x05, 0x59, 0x26, 0xBD)]
 interface ISpResourceManager(ISpResourceManagerVtbl): IServiceProvider(IServiceProviderVtbl) {
     fn SetObject(guidServiceId: ::REFGUID, pUnkObject: *mut ::IUnknown) -> ::HRESULT,
     fn GetObject(
@@ -422,6 +433,7 @@ STRUCT!{struct SPEVENTSOURCEINFO {
     ulCount: ::ULONG,
 }}
 RIDL!(
+#[uuid(0xBE7A9CCE, 0x5F9E, 0x11D2, 0x96, 0x0F, 0x00, 0xC0, 0x4F, 0x8E, 0xE6, 0x28)]
 interface ISpEventSource(ISpEventSourceVtbl): ISpNotifySource(ISpNotifySourceVtbl) {
     fn SetInterest(
         ullEventInterest: ::ULONGLONG, ullQueuedInterest: ::ULONGLONG
@@ -433,6 +445,7 @@ interface ISpEventSource(ISpEventSourceVtbl): ISpNotifySource(ISpNotifySourceVtb
 }
 );
 RIDL!(
+#[uuid(0x2373A435, 0x6A4B, 0x429e, 0xA6, 0xAC, 0xD4, 0x23, 0x1A, 0x61, 0x97, 0x5B)]
 interface ISpEventSource2(ISpEventSource2Vtbl): ISpEventSource(ISpEventSourceVtbl) {
     fn GetEventsEx(
         ulCount: ::ULONG, pEventArray: *mut SPEVENTEX, pulFetched: *mut ::ULONG
@@ -440,12 +453,14 @@ interface ISpEventSource2(ISpEventSource2Vtbl): ISpEventSource(ISpEventSourceVtb
 }
 );
 RIDL!(
+#[uuid(0xBE7A9CC9, 0x5F9E, 0x11D2, 0x96, 0x0F, 0x00, 0xC0, 0x4F, 0x8E, 0xE6, 0x28)]
 interface ISpEventSink(ISpEventSinkVtbl): IUnknown(IUnknownVtbl) {
     fn AddEvents(pEventArray: *const SPEVENT, ulCount: ::ULONG) -> ::HRESULT,
     fn GetEventInterest(pullEventInterest: *mut ::ULONGLONG) -> ::HRESULT
 }
 );
 RIDL!(
+#[uuid(0xBED530BE, 0x2606, 0x4F4D, 0xA1, 0xC0, 0x54, 0xC5, 0xCD, 0xA5, 0x56, 0x6F)]
 interface ISpStreamFormat(ISpStreamFormatVtbl): IStream(IStreamVtbl) {
     fn GetFormat(
         pguidFormatId: *mut ::GUID, ppCoMemWaveFormatEx: *mut *mut ::WAVEFORMATEX
@@ -460,6 +475,7 @@ ENUM!{enum SPFILEMODE {
     SPFM_NUM_MODES = 4,
 }}
 RIDL!(
+#[uuid(0x12E3CCA9, 0x7518, 0x44C5, 0xA5, 0xE7, 0xBA, 0x5A, 0x79, 0xCB, 0x92, 0x9E)]
 interface ISpStream(ISpStreamVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
     fn SetBaseStream(
         pStream: *mut ::IStream, rguidFormat: ::REFGUID,
@@ -474,6 +490,7 @@ interface ISpStream(ISpStreamVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x678A932C, 0xEA71, 0x4446, 0x9B, 0x41, 0x78, 0xFD, 0xA6, 0x28, 0x0A, 0x29)]
 interface ISpStreamFormatConverter(ISpStreamFormatConverterVtbl)
     : ISpStreamFormat(ISpStreamFormatVtbl) {
     fn SetBaseStream(
@@ -515,6 +532,7 @@ STRUCT!{struct SPAUDIOBUFFERINFO {
     ulMsEventBias: ::ULONG,
 }}
 RIDL!(
+#[uuid(0xC05C768F, 0xFAE8, 0x4EC2, 0x8E, 0x07, 0x33, 0x83, 0x21, 0xC1, 0x24, 0x52)]
 interface ISpAudio(ISpAudioVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
     fn SetState(NewState: SPAUDIOSTATE, ullReserved: ::ULONGLONG) -> ::HRESULT,
     fn SetFormat(
@@ -534,6 +552,7 @@ interface ISpAudio(ISpAudioVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x15806F6E, 0x1D70, 0x4B48, 0x98, 0xE6, 0x3B, 0x1A, 0x00, 0x75, 0x09, 0xAB)]
 interface ISpMMSysAudio(ISpMMSysAudioVtbl): ISpAudio(ISpAudioVtbl) {
     fn GetDeviceId(puDeviceId: *mut ::UINT) -> ::HRESULT,
     fn SetDeviceId(uDeviceId: ::UINT) -> ::HRESULT,
@@ -543,6 +562,7 @@ interface ISpMMSysAudio(ISpMMSysAudioVtbl): ISpAudio(ISpAudioVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x10F63BCE, 0x201A, 0x11D3, 0xAC, 0x70, 0x00, 0xC0, 0x4F, 0x8E, 0xE6, 0xC0)]
 interface ISpTranscript(ISpTranscriptVtbl): IUnknown(IUnknownVtbl) {
     fn GetTranscript(ppszTranscript: *mut ::LPWSTR) -> ::HRESULT,
     fn AppendTranscript(pszTranscript: ::LPCWSTR) -> ::HRESULT
@@ -803,6 +823,7 @@ STRUCT!{struct SPWORDLIST {
     pFirstWord: *mut SPWORD,
 }}
 RIDL!(
+#[uuid(0xDA41A7C2, 0x5383, 0x4DB2, 0x91, 0x6B, 0x6C, 0x17, 0x19, 0xE3, 0xDB, 0x58)]
 interface ISpLexicon(ISpLexiconVtbl): IUnknown(IUnknownVtbl) {
     fn GetPronunciations(
         pszWord: ::LPCWSTR, LangID: ::WORD, dwFlags: ::DWORD,
@@ -827,6 +848,7 @@ interface ISpLexicon(ISpLexiconVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x8565572F, 0xC094, 0x41CC, 0xB5, 0x6E, 0x10, 0xBD, 0x9C, 0x3F, 0xF0, 0x44)]
 interface ISpContainerLexicon(ISpContainerLexiconVtbl): ISpLexicon(ISpLexiconVtbl) {
     fn AddLexicon(pAddLexicon: *mut ISpLexicon, dwFlags: ::DWORD) -> ::HRESULT
 }
@@ -854,6 +876,7 @@ STRUCT!{struct SPSHORTCUTPAIRLIST {
     pFirstShortcutPair: *mut SPSHORTCUTPAIR,
 }}
 RIDL!(
+#[uuid(0x3DF681E2, 0xEA56, 0x11D9, 0x8B, 0xDE, 0xF6, 0x6B, 0xAD, 0x1E, 0x3F, 0x3A)]
 interface ISpShortcut(ISpShortcutVtbl): IUnknown(IUnknownVtbl) {
     fn AddShortcut(
         pszDisplay: ::LPCWSTR, LangID: ::WORD, pszSpoken: ::LPCWSTR,
@@ -883,12 +906,14 @@ interface ISpShortcut(ISpShortcutVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x8445C581, 0x0CAC, 0x4A38, 0xAB, 0xFE, 0x9B, 0x2C, 0xE2, 0x82, 0x64, 0x55)]
 interface ISpPhoneConverter(ISpPhoneConverterVtbl): ISpObjectWithToken(ISpObjectWithTokenVtbl) {
     fn PhoneToId(pszPhone: ::LPCWSTR, pId: *mut SPPHONEID) -> ::HRESULT,
     fn IdToPhone(pId: PCSPPHONEID, pszPhone: *mut ::WCHAR) -> ::HRESULT
 }
 );
 RIDL!(
+#[uuid(0x133ADCD4, 0x19B4, 0x4020, 0x9F, 0xDC, 0x84, 0x2E, 0x78, 0x25, 0x3B, 0x17)]
 interface ISpPhoneticAlphabetConverter(ISpPhoneticAlphabetConverterVtbl): IUnknown(IUnknownVtbl) {
     fn GetLangId(pLangID: *mut ::WORD) -> ::HRESULT,
     fn SetLangId(LangID: *mut ::WORD) -> ::HRESULT,
@@ -904,6 +929,7 @@ interface ISpPhoneticAlphabetConverter(ISpPhoneticAlphabetConverterVtbl): IUnkno
 }
 );
 RIDL!(
+#[uuid(0xB2745EFD, 0x42CE, 0x48ca, 0x81, 0xF1, 0xA9, 0x6E, 0x02, 0x53, 0x8A, 0x90)]
 interface ISpPhoneticAlphabetSelection(ISpPhoneticAlphabetSelectionVtbl): IUnknown(IUnknownVtbl) {
     fn IsAlphabetUPS(pfIsUPS: *mut ::BOOL) -> ::HRESULT,
     fn SetAlphabetToUPS(fForceUPS: ::BOOL) -> ::HRESULT
@@ -990,6 +1016,7 @@ pub const SPF_VOICE_MASK: i32 =
     SPF_IS_NOT_XML as i32 | SPF_NLP_MASK as i32 | SPF_PERSIST_XML as i32 | SPF_PARSE_MASK;
 pub const SPF_UNUSED_FLAGS: i32 = !SPF_VOICE_MASK;
 RIDL!(
+#[uuid(0x6C44DF74, 0x72B9, 0x4992, 0xA1, 0xEC, 0xEF, 0x99, 0x6E, 0x04, 0x22, 0xD4)]
 interface ISpVoice(ISpVoiceVtbl): ISpEventSource(ISpEventSourceVtbl) {
     fn SetOutput(pUnkOutput: *mut ::IUnknown, fAllowFormatChanges: ::BOOL) -> ::HRESULT,
     fn GetOutputObjectToken(ppObjectToken: *mut *mut ISpObjectToken) -> ::HRESULT,
@@ -1037,6 +1064,7 @@ DEFINE_GUID!(
     0x6C44DF74, 0x72B9, 0x4992, 0xA1, 0xEC, 0xEF, 0x99, 0x6E, 0x04, 0x22, 0xD4
 );
 RIDL!(
+#[uuid(0x1A5C0354, 0xB621, 0x4b5a, 0x87, 0x91, 0xD3, 0x06, 0xED, 0x37, 0x9E, 0x53)]
 interface ISpPhrase(ISpPhraseVtbl): IUnknown(IUnknownVtbl) {
     fn GetPhrase(ppCoMemPhrase: *mut *mut SPPHRASE) -> ::HRESULT,
     fn GetSerializedPhrase(ppCoMemPhrase: *mut *mut SPSERIALIZEDPHRASE) -> ::HRESULT,
@@ -1048,6 +1076,7 @@ interface ISpPhrase(ISpPhraseVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x8FCEBC98, 0x4E49, 0x4067, 0x9C, 0x6C, 0xD8, 0x6A, 0x0E, 0x09, 0x2E, 0x3D)]
 interface ISpPhraseAlt(ISpPhraseAltVtbl): ISpPhrase(ISpPhraseVtbl) {
     fn GetAltInfo(
         pParent: *mut *mut ISpPhrase, pulStartElementInParent: *mut ::ULONG,
@@ -1061,6 +1090,7 @@ ENUM!{enum SPXMLRESULTOPTIONS {
     SPXRO_Alternates_SML = 1,
 }}
 RIDL!(
+#[uuid(0xF264DA52, 0xE457, 0x4696, 0xB8, 0x56, 0xA7, 0x37, 0xB7, 0x17, 0xAF, 0x79)]
 interface ISpPhrase2(ISpPhrase2Vtbl): ISpPhrase(ISpPhraseVtbl) {
     fn GetXMLResult(
         ppszCoMemXMLResult: *mut ::LPWSTR, Options: SPXMLRESULTOPTIONS
@@ -1081,6 +1111,7 @@ STRUCT!{struct SPSERIALIZEDRESULT {
     ulSerializedSize: ::ULONG,
 }}
 RIDL!(
+#[uuid(0x20B053BE, 0xE235, 0x43cd, 0x9A, 0x2A, 0x8D, 0x17, 0xA4, 0x8B, 0x78, 0x42)]
 interface ISpRecoResult(ISpRecoResultVtbl): ISpPhrase(ISpPhraseVtbl) {
     fn GetResultTimes(pTimes: *mut SPRECORESULTTIMES) -> ::HRESULT,
     fn GetAlternates(
@@ -1107,6 +1138,7 @@ ENUM!{enum SPCOMMITFLAGS {
     SPCF_DEFINITE_CORRECTION = 1 << 1,
 }}
 RIDL!(
+#[uuid(0x27CAC6C4, 0x88F2, 0x41f2, 0x88, 0x17, 0x0C, 0x95, 0xE5, 0x9F, 0x1E, 0x6E)]
 interface ISpRecoResult2(ISpRecoResult2Vtbl): ISpRecoResult(ISpRecoResultVtbl) {
     fn CommitAlternate(
         pPhraseAlt: *mut ISpPhraseAlt, ppNewResult: *mut *mut ISpRecoResult
@@ -1119,6 +1151,7 @@ interface ISpRecoResult2(ISpRecoResult2Vtbl): ISpRecoResult(ISpRecoResultVtbl) {
 }
 );
 RIDL!(
+#[uuid(0xAE39362B, 0x45A8, 0x4074, 0x9B, 0x9E, 0xCC, 0xF4, 0x9A, 0xA2, 0xD0, 0xB6)]
 interface ISpXMLRecoResult(ISpXMLRecoResultVtbl): ISpRecoResult(ISpRecoResultVtbl) {
     fn GetXMLResult(
         ppszCoMemXMLResult: *mut ::LPWSTR, Options: SPXMLRESULTOPTIONS
@@ -1181,6 +1214,7 @@ ENUM!{enum SPCFGRULEATTRIBUTES {
     SPRAF_UserDelimited = 1 << 17,
 }}
 RIDL!(
+#[uuid(0x8137828F, 0x591A, 0x4A42, 0xBE, 0x58, 0x49, 0xEA, 0x7E, 0xBA, 0xAC, 0x68)]
 interface ISpGrammarBuilder(ISpGrammarBuilderVtbl): IUnknown(IUnknownVtbl) {
     fn ResetGrammar(NewLanguage: ::WORD) -> ::HRESULT,
     fn GetRule(
@@ -1210,6 +1244,7 @@ ENUM!{enum SPLOADOPTIONS {
     SPLO_DYNAMIC = 1,
 }}
 RIDL!(
+#[uuid(0x2177DB29, 0x7F45, 0x47D0, 0x85, 0x54, 0x06, 0x7E, 0x91, 0xC8, 0x05, 0x02)]
 interface ISpRecoGrammar(ISpRecoGrammarVtbl): ISpGrammarBuilder(ISpGrammarBuilderVtbl) {
     fn GetGrammarId(pullGrammarId: *mut ::ULONGLONG) -> ::HRESULT,
     fn GetRecoContext(ppRecoCtxt: *mut *mut ISpRecoContext) -> ::HRESULT,
@@ -1260,6 +1295,7 @@ ENUM!{enum PHONETICALPHABET {
     PA_Sapi = 2,
 }}
 RIDL!(
+#[uuid(0x8AB10026, 0x20CC, 0x4b20, 0x8C, 0x22, 0xA4, 0x9C, 0x9B, 0xA7, 0x8F, 0x60)]
 interface ISpGrammarBuilder2(ISpGrammarBuilder2Vtbl): IUnknown(IUnknownVtbl) {
     fn AddTextSubset(
         hFromState: SPSTATEHANDLE, hToState: SPSTATEHANDLE, psz: ::LPCWSTR,
@@ -1269,6 +1305,7 @@ interface ISpGrammarBuilder2(ISpGrammarBuilder2Vtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x4B37BC9E, 0x9ED6, 0x44a3, 0x93, 0xD3, 0x18, 0xF0, 0x22, 0xB7, 0x9E, 0xC3)]
 interface ISpRecoGrammar2(ISpRecoGrammar2Vtbl): IUnknown(IUnknownVtbl) {
     fn GetRules(ppCoMemRules: *mut *mut SPRULE, puNumRules: *mut ::UINT) -> ::HRESULT,
     fn LoadCmdFromFile2(
@@ -1293,6 +1330,7 @@ interface ISpRecoGrammar2(ISpRecoGrammar2Vtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(
+#[uuid(0xB9AC5783, 0xFCD0, 0x4b21, 0xB1, 0x19, 0xB4, 0xF8, 0xDA, 0x8F, 0xD2, 0xC3)]
 interface ISpeechResourceLoader(ISpeechResourceLoaderVtbl): IDispatch(IDispatchVtbl) {
     fn LoadResource(
         bstrResourceUri: ::BSTR, fAlwaysReload: ::VARIANT_BOOL,
@@ -1323,6 +1361,7 @@ ENUM!{enum SPAUDIOOPTIONS {
     SPAO_RETAIN_AUDIO = 1 << 0,
 }}
 RIDL!(
+#[uuid(0xF740A62F, 0x7C15, 0x489E, 0x82, 0x34, 0x94, 0x0A, 0x33, 0xD9, 0x27, 0x2D)]
 interface ISpRecoContext(ISpRecoContextVtbl): ISpEventSource(ISpEventSourceVtbl) {
     fn GetRecognizer(ppRecognizer: *mut *mut ISpRecognizer) -> ::HRESULT,
     fn CreateGrammer(
@@ -1389,6 +1428,7 @@ ENUM!{enum SPADAPTATIONRELEVANCE {
     SPAR_High = 3,
 }}
 RIDL!(
+#[uuid(0xBEAD311C, 0x52FF, 0x437f, 0x94, 0x64, 0x6B, 0x21, 0x05, 0x4C, 0xA7, 0x3D)]
 interface ISpRecoContext2(ISpRecoContext2Vtbl): IUnknown(IUnknownVtbl) {
     fn SetGrammarOptions(eGrammarOptions: ::DWORD) -> ::HRESULT,
     fn GetGrammarOptions(peGrammarOptions: *mut ::DWORD) -> ::HRESULT,
@@ -1399,6 +1439,7 @@ interface ISpRecoContext2(ISpRecoContext2Vtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x5B4FB971, 0xB115, 0x4DE1, 0xAD, 0x97, 0xE4, 0x82, 0xE3, 0xBF, 0x6E, 0xE4)]
 interface ISpProperties(ISpPropertiesVtbl): IUnknown(IUnknownVtbl) {
     fn SetPropertyNum(pName: ::LPCWSTR, lValue: ::LONG) -> ::HRESULT,
     fn GetPropertyNum(pName: ::LPCWSTR, plValue: *mut ::LONG) -> ::HRESULT,
@@ -1429,6 +1470,7 @@ ENUM!{enum SPRECOSTATE {
     SPRST_NUM_STATES = 4,
 }}
 RIDL!(
+#[uuid(0xC2B5F241, 0xDAA0, 0x4507, 0x9E, 0x16, 0x5A, 0x1E, 0xAA, 0x2B, 0x7A, 0x5C)]
 interface ISpRecognizer(ISpRecognizerVtbl): ISpProperties(ISpPropertiesVtbl) {
     fn SetRecognizer(pRecognizer: *mut ISpObjectToken) -> ::HRESULT,
     fn GetRecognizer(ppRecognizer: *mut *mut ISpObjectToken) -> ::HRESULT,
@@ -1458,6 +1500,7 @@ interface ISpRecognizer(ISpRecognizerVtbl): ISpProperties(ISpPropertiesVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x21B501A0, 0x0EC7, 0x46c9, 0x92, 0xC3, 0xA2, 0xBC, 0x78, 0x4C, 0x54, 0xB9)]
 interface ISpSerializeState(ISpSerializeStateVtbl): IUnknown(IUnknownVtbl) {
     fn GetSerializedState(
         ppbData: *mut *mut ::BYTE, pulSize: *mut ::ULONG, dwReserved: ::DWORD
@@ -1468,6 +1511,7 @@ interface ISpSerializeState(ISpSerializeStateVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x8FC6D974, 0xC81E, 0x4098, 0x93, 0xC5, 0x01, 0x47, 0xF6, 0x1E, 0xD4, 0xD3)]
 interface ISpRecognizer2(ISpRecognizer2Vtbl): IUnknown(IUnknownVtbl) {
     fn EmulateRecognitionEx(
         pPhrase: *mut ISpPhrase, dwCompareFlags: ::DWORD
@@ -1486,11 +1530,13 @@ ENUM!{enum SPCATEGORYTYPE {
     SPCT_SUB_DICTATION,
 }}
 RIDL!(
+#[uuid(0xDA0CD0F9, 0x14A2, 0x4f09, 0x8C, 0x2A, 0x85, 0xCC, 0x48, 0x97, 0x93, 0x45)]
 interface ISpRecoCategory(ISpRecoCategoryVtbl): IUnknown(IUnknownVtbl) {
     fn GetType(peCategoryType: *mut SPCATEGORYTYPE) -> ::HRESULT
 }
 );
 RIDL!(
+#[uuid(0xDF1B943C, 0x5838, 0x4AA2, 0x87, 0x06, 0xD7, 0xCD, 0x5B, 0x33, 0x34, 0x99)]
 interface ISpRecognizer3(ISpRecognizer3Vtbl): IUnknown(IUnknownVtbl) {
     fn GetCategory(
         categoryType: SPCATEGORYTYPE, ppCategory: *mut *mut ISpRecoCategory
@@ -1504,6 +1550,7 @@ STRUCT!{struct SPNORMALIZATIONLIST {
     ppszzNormalizedList: *mut *mut ::WCHAR,
 }}
 RIDL!(
+#[uuid(0xC360CE4B, 0x76D1, 0x4214, 0xAD, 0x68, 0x52, 0x65, 0x7D, 0x50, 0x83, 0xDA)]
 interface ISpEnginePronunciation(ISpEnginePronunciationVtbl): IUnknown(IUnknownVtbl) {
     fn Normalize(
         pszWord: ::LPCWSTR, pszLeftContext: ::LPCWSTR, pszRightContext: ::LPCWSTR,
@@ -1525,6 +1572,7 @@ STRUCT!{struct SPDISPLAYPHRASE {
     pTokens: *mut SPDISPLAYTOKEN,
 }}
 RIDL!(
+#[uuid(0xC8D7C7E2, 0x0DDE, 0x44b7, 0xAF, 0xE3, 0xB0, 0xC9, 0x91, 0xFB, 0xEB, 0x5E)]
 interface ISpDisplayAlternates(ISpDisplayAlternatesVtbl): IUnknown(IUnknownVtbl) {
     fn GetDisplayAlternates(
         pPhrase: *const SPDISPLAYPHRASE, cRequestCount: ::ULONG,
@@ -2312,6 +2360,7 @@ ENUM!{enum DISPID_SpeechPhoneConverter {
     DISPID_SPCIdToPhone,
 }}
 RIDL!(
+#[uuid(0xCE17C09B, 0x4EFA, 0x44d5, 0xA4, 0xC9, 0x59, 0xD9, 0x58, 0x5A, 0xB0, 0xCD)]
 interface ISpeechDataKey(ISpeechDataKeyVtbl): IDispatch(IDispatchVtbl) {
     fn SetBinaryValue(ValueName: ::BSTR, Value: ::VARIANT) -> ::HRESULT,
     fn GetBinaryValue(ValueName: ::BSTR, Value: *mut ::VARIANT) -> ::HRESULT,
@@ -2328,6 +2377,7 @@ interface ISpeechDataKey(ISpeechDataKeyVtbl): IDispatch(IDispatchVtbl) {
 }
 );
 RIDL!(
+#[uuid(0xC74A3ADC, 0xB727, 0x4500, 0xA8, 0x4A, 0xB5, 0x26, 0x72, 0x1C, 0x8B, 0x8C)]
 interface ISpeechObjectToken(ISpeechObjectTokenVtbl): IDispatch(IDispatchVtbl) {
     fn get_Id(ObjectId: *mut ::BSTR) -> ::HRESULT,
     fn get_DataKey(DataKey: *mut *mut ISpeechDataKey) -> ::HRESULT,
@@ -2361,6 +2411,7 @@ interface ISpeechObjectToken(ISpeechObjectTokenVtbl): IDispatch(IDispatchVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x9285B776, 0x2E7B, 0x4bc0, 0xB5, 0x3E, 0x58, 0x0E, 0xB6, 0xFA, 0x96, 0x7F)]
 interface ISpeechObjectTokens(ISpeechObjectTokensVtbl): IDispatch(IDispatchVtbl) {
     fn get_Count(Count: *mut ::c_long) -> ::HRESULT,
     fn Item(Index: ::c_long, Token: *mut *mut ISpeechObjectToken) -> ::HRESULT,
@@ -2368,6 +2419,7 @@ interface ISpeechObjectTokens(ISpeechObjectTokensVtbl): IDispatch(IDispatchVtbl)
 }
 );
 RIDL!(
+#[uuid(0xCA7EAC50, 0x2D01, 0x4145, 0x86, 0xD4, 0x5A, 0xE7, 0xD7, 0x0F, 0x44, 0x69)]
 interface ISpeechObjectTokenCategory(ISpeechObjectTokenCategoryVtbl): IDispatch(IDispatchVtbl) {
     fn get_Id(Id: *mut ::BSTR) -> ::HRESULT,
     fn put_Default(TokenId: ::BSTR) -> ::HRESULT,
@@ -2383,6 +2435,7 @@ interface ISpeechObjectTokenCategory(ISpeechObjectTokenCategoryVtbl): IDispatch(
 }
 );
 RIDL!(
+#[uuid(0x11B103D8, 0x1142, 0x4edf, 0xA0, 0x93, 0x82, 0xFB, 0x39, 0x15, 0xF8, 0xCC)]
 interface ISpeechAudioBufferInfo(ISpeechAudioBufferInfoVtbl): IDispatch(IDispatchVtbl) {
     fn get_MinNotification(MinNotification: *mut ::c_long) -> ::HRESULT,
     fn put_MinNotification(MinNotification: ::c_long) -> ::HRESULT,
@@ -2393,6 +2446,7 @@ interface ISpeechAudioBufferInfo(ISpeechAudioBufferInfoVtbl): IDispatch(IDispatc
 }
 );
 RIDL!(
+#[uuid(0xC62D9C91, 0x7458, 0x47f6, 0x86, 0x2D, 0x1E, 0xF8, 0x6F, 0xB0, 0xB2, 0x78)]
 interface ISpeechAudioStatus(ISpeechAudioStatusVtbl): IDispatch(IDispatchVtbl) {
     fn get_FreeBufferSpace(FreeBufferSpace: *mut ::c_long) -> ::HRESULT,
     fn get_NonBlockingIO(NonBlockingIO: *mut ::c_long) -> ::HRESULT,
@@ -2402,6 +2456,7 @@ interface ISpeechAudioStatus(ISpeechAudioStatusVtbl): IDispatch(IDispatchVtbl) {
 }
 );
 RIDL!(
+#[uuid(0xE6E9C590, 0x3E18, 0x40e3, 0x82, 0x99, 0x06, 0x1F, 0x98, 0xBD, 0xE7, 0xC7)]
 interface ISpeechAudioFormat(ISpeechAudioFormatVtbl): IDispatch(IDispatchVtbl) {
     fn get_Type(AudioFormat: *mut SpeechAudioFormatType) -> ::HRESULT,
     fn put_Type(AudioFormat: SpeechAudioFormatType) -> ::HRESULT,
@@ -2412,6 +2467,7 @@ interface ISpeechAudioFormat(ISpeechAudioFormatVtbl): IDispatch(IDispatchVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x7A1EF0D5, 0x1581, 0x4741, 0x88, 0xE4, 0x20, 0x9A, 0x49, 0xF1, 0x1A, 0x10)]
 interface ISpeechWaveFormatEx(ISpeechWaveFormatExVtbl): IDispatch(IDispatchVtbl) {
     fn get_FormatTag(FormatTag: *mut ::c_short) -> ::HRESULT,
     fn put_FormatTag(FormatTag: ::c_short) -> ::HRESULT,

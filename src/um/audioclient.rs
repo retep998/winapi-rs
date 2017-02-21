@@ -56,7 +56,8 @@ DEFINE_GUID!(IID_IAudioClient, 0x1CB9AD4C, 0xDBFA, 0x4c32,
     0xB1, 0x78, 0xC2, 0xF5, 0x68, 0xA7, 0x03, 0xB2);
 DEFINE_GUID!(IID_IAudioRenderClient, 0xF294ACFC, 0x3146, 0x4483,
     0xA7, 0xBF, 0xAD, 0xDC, 0xA7, 0xC2, 0x60, 0xE2);
-RIDL!{interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{#[uuid(0x1CB9AD4C, 0xDBFA, 0x4c32, 0xB1, 0x78, 0xC2, 0xF5, 0x68, 0xA7, 0x03, 0xB2)]
+interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
     fn Initialize(
         ShareMode: AUDCLNT_SHAREMODE, StreamFlags: DWORD,
         hnsBufferDuration: REFERENCE_TIME, hnsPeriodicity: REFERENCE_TIME,
@@ -80,7 +81,8 @@ RIDL!{interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
     fn SetEventHandle(eventHandle: HANDLE) -> HRESULT,
     fn GetService(riid: REFIID, ppv: *mut LPVOID) -> HRESULT
 }}
-RIDL!{interface IAudioRenderClient(IAudioRenderClientVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{#[uuid(0xF294ACFC, 0x3146, 0x4483, 0xA7, 0xBF, 0xAD, 0xDC, 0xA7, 0xC2, 0x60, 0xE2)]
+interface IAudioRenderClient(IAudioRenderClientVtbl): IUnknown(IUnknownVtbl) {
     fn GetBuffer(NumFramesRequested: UINT32, ppData: *mut *mut BYTE) -> HRESULT,
     fn ReleaseBuffer(NumFramesWritten: UINT32, dwFlags: DWORD) -> HRESULT
 }}

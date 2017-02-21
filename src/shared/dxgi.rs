@@ -87,7 +87,7 @@ STRUCT!{struct DXGI_SWAP_CHAIN_DESC {
     SwapEffect: DXGI_SWAP_EFFECT,
     Flags: UINT,
 }}
-RIDL!(
+RIDL!(#[uuid(0xaec22fb8, 0x76f3, 0x4639, 0x9b, 0xe0, 0x28, 0xeb, 0x43, 0xa6, 0x7a, 0x2e)]
 interface IDXGIObject(IDXGIObjectVtbl): IUnknown(IUnknownVtbl) {
     fn SetPrivateData(
         Name: REFGUID, DataSize: UINT, pData: *const c_void
@@ -100,34 +100,34 @@ interface IDXGIObject(IDXGIObjectVtbl): IUnknown(IUnknownVtbl) {
         riid: REFIID, ppParent: *mut *mut c_void
     ) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x3d3e0379, 0xf9de, 0x4d58, 0xbb, 0x6c, 0x18, 0xd6, 0x29, 0x92, 0xf1, 0xa6)]
 interface IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn GetDevice(riid: REFIID, ppDevice: *mut *mut c_void) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x035f3ab4, 0x482e, 0x4e50, 0xb4, 0x1f, 0x8a, 0x7f, 0x8b, 0xd8, 0x96, 0x0b)]
 interface IDXGIResource(IDXGIResourceVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl) {
     fn GetSharedHandle(pSharedHandle: *mut HANDLE) -> HRESULT,
     fn GetUsage(pUsage: *mut DXGI_USAGE) -> HRESULT,
     fn SetEvictionPriority(EvictionPriority: UINT) -> HRESULT,
     fn GetEvictionPriority(pEvictionPriority: *mut UINT) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x9d8e1289, 0xd7b3, 0x465f, 0x81, 0x26, 0x25, 0x0e, 0x34, 0x9a, 0xf8, 0x5d)]
 interface IDXGIKeyedMutex(IDXGIKeyedMutexVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl) {
     fn AcquireSync(Key: UINT64, dwMilliseconds: DWORD) -> HRESULT,
     fn ReleaseSync(Key: UINT64) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0xcafcb56c, 0x6ac3, 0x4889, 0xbf, 0x47, 0x9e, 0x23, 0xbb, 0xd2, 0x60, 0xec)]
 interface IDXGISurface(IDXGISurfaceVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl) {
     fn GetDesc(pDesc: *mut DXGI_SURFACE_DESC) -> HRESULT,
     fn Map(pLockedRect: *mut DXGI_MAPPED_RECT, MapFlags: UINT) -> HRESULT,
     fn Unmap() -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x4AE63092, 0x6327, 0x4c1b, 0x80, 0xAE, 0xBF, 0xE1, 0x2E, 0xA3, 0x2B, 0x86)]
 interface IDXGISurface1(IDXGISurface1Vtbl): IDXGISurface(IDXGISurfaceVtbl) {
     fn GetDC(Discard: BOOL, phdc: *mut HDC) -> HRESULT,
     fn ReleaseDC(pDirtyRect: *mut RECT) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x2411e7e1, 0x12ac, 0x4ccf, 0xbd, 0x14, 0x97, 0x98, 0xe8, 0x53, 0x4d, 0xc0)]
 interface IDXGIAdapter(IDXGIAdapterVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn EnumOutputs(Output: UINT, ppOutput: *mut *mut IDXGIOutput) -> HRESULT,
     fn GetDesc(pDesc: *mut DXGI_ADAPTER_DESC) -> HRESULT,
@@ -135,7 +135,7 @@ interface IDXGIAdapter(IDXGIAdapterVtbl): IDXGIObject(IDXGIObjectVtbl) {
         InterfaceName: REFGUID, pUMDVersion: *mut LARGE_INTEGER
     ) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0xae02eedb, 0xc735, 0x4690, 0x8d, 0x52, 0x5a, 0x8d, 0xc2, 0x02, 0x13, 0xaa)]
 interface IDXGIOutput(IDXGIOutputVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn GetDesc(pDesc: *mut DXGI_OUTPUT_DESC) -> HRESULT,
     fn GetDisplayModeList(
@@ -167,7 +167,7 @@ pub const DXGI_PRESENT_STEREO_PREFER_RIGHT: DWORD = 0x00000010;
 pub const DXGI_PRESENT_STEREO_TEMPORARY_MONO: DWORD = 0x00000020;
 pub const DXGI_PRESENT_RESTRICT_TO_OUTPUT: DWORD = 0x00000040;
 pub const DXGI_PRESENT_USE_DURATION: DWORD = 0x00000100;
-RIDL!(
+RIDL!(#[uuid(0x310d36a0, 0xd2e7, 0x4c0a, 0xaa, 0x04, 0x6a, 0x9d, 0x23, 0xb8, 0x88, 0x6a)]
 interface IDXGISwapChain(IDXGISwapChainVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl) {
     fn Present(SyncInterval: UINT, Flags: UINT) -> HRESULT,
     fn GetBuffer(
@@ -187,7 +187,7 @@ interface IDXGISwapChain(IDXGISwapChainVtbl): IDXGIDeviceSubObject(IDXGIDeviceSu
     fn GetFrameStatistics(pStats: *mut DXGI_FRAME_STATISTICS) -> HRESULT,
     fn GetLastPresentCount(pLastPresentCount: *mut UINT) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x7b7166ec, 0x21c7, 0x44ae, 0xb2, 0x1a, 0xc9, 0xae, 0x32, 0x1a, 0xe3, 0x69)]
 interface IDXGIFactory(IDXGIFactoryVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn EnumAdapters(Adapter: UINT, ppAdapter: *mut *mut IDXGIAdapter) -> HRESULT,
     fn MakeWindowAssociation(WindowHandle: HWND, Flags: UINT) -> HRESULT,
@@ -200,7 +200,7 @@ interface IDXGIFactory(IDXGIFactoryVtbl): IDXGIObject(IDXGIObjectVtbl) {
         Module: HMODULE, ppAdapter: *mut *mut IDXGIAdapter
     ) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x54ec77fa, 0x1377, 0x44e6, 0x8c, 0x32, 0x88, 0xfd, 0x5f, 0x44, 0xc8, 0x4c)]
 interface IDXGIDevice(IDXGIDeviceVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn GetAdapter(pAdapter: *mut *mut IDXGIAdapter) -> HRESULT,
     fn CreateSurface(
@@ -235,16 +235,16 @@ STRUCT!{struct DXGI_DISPLAY_COLOR_SPACE {
     PrimaryCoordinates: [[FLOAT; 2]; 8],
     WhitePoints: [[FLOAT; 2]; 16],
 }}
-RIDL!(
+RIDL!(#[uuid(0x770aae78, 0xf26f, 0x4dba, 0xa8, 0x29, 0x25, 0x3c, 0x83, 0xd1, 0xb3, 0x87)]
 interface IDXGIFactory1(IDXGIFactory1Vtbl): IDXGIFactory(IDXGIFactoryVtbl) {
     fn EnumAdapters1(Adapter: UINT, ppAdapter: *mut *mut IDXGIAdapter1) -> HRESULT,
     fn IsCurrent() -> BOOL
 });
-RIDL!(
+RIDL!(#[uuid(0x29038f61, 0x3839, 0x4626, 0x91, 0xfd, 0x08, 0x68, 0x79, 0x01, 0x1a, 0x05)]
 interface IDXGIAdapter1(IDXGIAdapter1Vtbl): IDXGIAdapter(IDXGIAdapterVtbl) {
     fn GetDesc1(pDesc: *mut DXGI_ADAPTER_DESC1) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x77db970f, 0x6276, 0x48ba, 0xba, 0x28, 0x07, 0x01, 0x43, 0xb4, 0x39, 0x2c)]
 interface IDXGIDevice1(IDXGIDevice1Vtbl): IDXGIDevice(IDXGIDeviceVtbl) {
     fn SetMaximumFrameLatency(MaxLatency: UINT) -> HRESULT,
     fn GetMaximumFrameLatency(pMaxLatency: *mut UINT) -> HRESULT

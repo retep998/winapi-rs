@@ -459,6 +459,7 @@ ENUM!{enum SICHINTF {
 }}
 //9498
 RIDL!(
+#[uuid(0x43826d1e, 0xe718, 0x42ee, 0xbc, 0x55, 0xa1, 0xe2, 0x61, 0xc3, 0x7b, 0xfe)]
 interface IShellItem(IShellItemVtbl): IUnknown(IUnknownVtbl) {
     fn BindToHandler(
         pbc: *mut ::IBindCtx, bhid: ::REFGUID, riid: ::REFIID, ppv: *mut *mut ::c_void
@@ -499,6 +500,7 @@ STRUCT!{struct PROPERTYKEY {
 }}
 pub type REFPROPERTYKEY = *mut PROPERTYKEY;
 RIDL!(
+#[uuid(0xb63ea76d, 0x1f85, 0x456f, 0xa1, 0x9c, 0x48, 0x15, 0x9e, 0xfa, 0x85, 0x8b)]
 interface IShellItemArray(IShellItemArrayVtbl): IUnknown(IUnknownVtbl) {
     fn BindToHandler(
         pbc: *mut ::IBindCtx, bhid: ::REFGUID, riid: ::REFIID, ppvOut: *mut *mut ::c_void
@@ -519,6 +521,7 @@ interface IShellItemArray(IShellItemArrayVtbl): IUnknown(IUnknownVtbl) {
 );
 //20869
 RIDL!(
+#[uuid(0xb4db1657, 0x70d7, 0x485e, 0x8e, 0x3e, 0x6f, 0xcb, 0x5a, 0x5c, 0x18, 0x02)]
 interface IModalWindow(IModalWindowVtbl): IUnknown(IUnknownVtbl) {
     fn Show(hwndOwner: ::HWND) -> ::HRESULT
 }
@@ -539,6 +542,7 @@ ENUM!{enum FDAP {
     FDAP_TOP = 1,
 }}
 RIDL!(
+#[uuid(0x973510db, 0x7d7f, 0x452b, 0x89, 0x75, 0x74, 0xa8, 0x58, 0x28, 0xd3, 0x54)]
 interface IFileDialogEvents(IFileDialogEventsVtbl): IUnknown(IUnknownVtbl) {
     fn OnFileOk(pfd: *mut IFileDialog) -> ::HRESULT,
     fn OnFolderChanging(pfd: *mut IFileDialog, psiFolder: *mut IShellItem) -> ::HRESULT,
@@ -580,6 +584,7 @@ ENUM!{enum FILEOPENDIALOGOPTIONS {
     FOS_SUPPORTSTREAMABLEITEMS = 0x80000000,
 }}
 RIDL!(
+#[uuid(0x42f85136, 0xdb7e, 0x439c, 0x85, 0xf1, 0xe4, 0x07, 0x5d, 0x13, 0x5f, 0xc8)]
 interface IFileDialog(IFileDialogVtbl): IModalWindow(IModalWindowVtbl) {
     fn SetFileTypes(
         cFileTypes: ::UINT, rgFilterSpec: *const ::COMDLG_FILTERSPEC
@@ -609,6 +614,7 @@ interface IFileDialog(IFileDialogVtbl): IModalWindow(IModalWindowVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x84bccd23, 0x5fde, 0x4cdb, 0xae, 0xa4, 0xaf, 0x64, 0xb8, 0x3d, 0x78, 0xab)]
 interface IFileSaveDialog(IFileSaveDialogVtbl): IFileDialog(IFileDialogVtbl) {
     fn SetSaveAsItem(psi: *mut IShellItem) -> ::HRESULT,
     fn SetProperties(pStore: *mut ::IPropertyStore) -> ::HRESULT,
@@ -623,6 +629,7 @@ interface IFileSaveDialog(IFileSaveDialogVtbl): IFileDialog(IFileDialogVtbl) {
 }
 );
 RIDL!(
+#[uuid(0xd57c7288, 0xd4ad, 0x4768, 0xbe, 0x02, 0x9d, 0x96, 0x95, 0x32, 0xd9, 0x60)]
 interface IFileOpenDialog(IFileOpenDialogVtbl): IFileDialog(IFileDialogVtbl) {
     fn GetResults(ppenum: *mut *mut IShellItemArray) -> ::HRESULT,
     fn GetSelectedItems(ppsai: *mut *mut IShellItemArray) -> ::HRESULT
@@ -635,6 +642,7 @@ ENUM!{enum CDCONTROLSTATE {
     CDCS_ENABLEDVISIBLE = 0x00000003,
 }}
 RIDL!(
+#[uuid(0xe6fdd21a, 0x163f, 0x4975, 0x9c, 0x8c, 0xa6, 0x9f, 0x1b, 0xa3, 0x70, 0x34)]
 interface IFileDialogCustomize(IFileDialogCustomizeVtbl): IUnknown(IUnknownVtbl) {
     fn EnableOpenDropDown(dwIDCtl: ::DWORD) -> ::HRESULT,
     fn AddMenu(dwIDCtl: ::DWORD, pszLabel: ::LPCWSTR) -> ::HRESULT,
@@ -674,6 +682,7 @@ interface IFileDialogCustomize(IFileDialogCustomizeVtbl): IUnknown(IUnknownVtbl)
 }
 );
 RIDL!(
+#[uuid(0x36116642, 0xD713, 0x4b97, 0x9B, 0x83, 0x74, 0x84, 0xA9, 0xD0, 0x04, 0x33)]
 interface IFileDialogControlEvents(IFileDialogControlEventsVtbl): IUnknown(IUnknownVtbl) {
     fn OnItemSelected(
         pfdc: *mut IFileDialogCustomize, dwIDCtl: ::DWORD, dwIDItem: ::DWORD
@@ -688,6 +697,7 @@ interface IFileDialogControlEvents(IFileDialogControlEventsVtbl): IUnknown(IUnkn
 }
 );
 RIDL!(
+#[uuid(0x61744fc7, 0x85b5, 0x4791, 0xa9, 0xb0, 0x27, 0x22, 0x76, 0x30, 0x9b, 0x13)]
 interface IFileDialog2(IFileDialog2Vtbl): IFileDialog(IFileDialogVtbl) {
     fn SetCancelButtonLabel(pszLabel: ::LPCWSTR) -> ::HRESULT,
     fn SetNavigationRoot(psi: IShellItem) -> ::HRESULT
