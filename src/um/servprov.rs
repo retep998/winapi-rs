@@ -17,8 +17,8 @@ interface IServiceProvider(IServiceProviderVtbl): IUnknown(IUnknownVtbl) {
         ppvObject: *mut *mut c_void
     ) -> HRESULT,
     fn RemoteQueryService(
-    	guidService: REFGUID,
-    	riid: REFIID,
-    	ppvObject: *mut *mut IUnknown
-	) -> HRESULT
+        guidService: REFGUID,
+        riid: REFIID,
+        ppvObject: *mut *mut IUnknown
+    ) -> HRESULT
 });
