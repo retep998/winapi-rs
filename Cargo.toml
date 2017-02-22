@@ -159,11 +159,14 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "um-propidl",
     "um-propsys",
     "um-prsht",
+    "um-sapi",
+    "um-servprov",
     "um-setupapi",
     "um-shellapi",
     "um-spapidef",
     "um-strmif",
     "um-unknwnbase",
+    "um-urlmon",
     "um-vsserror",
     "um-winbase",
     "um-wincodec",
@@ -237,11 +240,14 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "um-propidl" = ["shared-minwindef", "shared-wtypes"]
 "um-propsys" = ["um-unknwnbase"]
 "um-prsht" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-winnt", "um-winuser"]
+"um-sapi" = ["shared-guiddef", "shared-minwindef", "shared-mmreg", "shared-windef", "shared-wtypes", "um-oaidl", "um-objidlbase", "um-servprov", "um-unknwnbase", "um-urlmon", "um-winnt"]
+"um-servprov" = ["shared-guiddef", "um-unknwnbase", "um-winnt"]
 "um-setupapi" = ["shared-basetsd", "shared-devpropdef", "shared-guiddef", "shared-minwindef", "shared-windef", "um-commctrl", "um-prsht", "um-spapidef", "um-winnt", "um-winreg", "setupapi"]
 "um-shellapi" = ["shared-guiddef", "shared-minwindef", "shared-windef", "um-winnt"]
 "um-spapidef" = ["shared-minwindef", "um-winnt"]
 "um-strmif" = ["um-winnt"]
 "um-unknwnbase" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
+"um-urlmon" = ["shared-minwindef", "um-unknwnbase", "um-winnt"]
 "um-vsserror" = ["um-winnt"]
 "um-winbase" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-cfgmgr32", "um-winnt"]
 "um-wincodec" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-dcommon", "um-unknwnbase", "um-winnt"]
