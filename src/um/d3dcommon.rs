@@ -374,7 +374,7 @@ STRUCT!{struct D3D_SHADER_MACRO {
     Definition: LPCSTR,
 }}
 pub type LPD3D_SHADER_MACRO = *mut D3D_SHADER_MACRO;
-RIDL!(
+RIDL!(#[uuid(0x8ba5fb08, 0x5195, 0x40e2, 0xac, 0x58, 0xd, 0x98, 0x9c, 0x3a, 0x1, 0x2)]
 interface ID3D10Blob(ID3D10BlobVtbl): IUnknown(IUnknownVtbl) {
     fn GetBufferPointer() -> LPVOID,
     fn GetBufferSize() -> SIZE_T

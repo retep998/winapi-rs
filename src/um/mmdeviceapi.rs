@@ -33,7 +33,7 @@ DEFINE_GUID!(CLSID_MMDeviceEnumerator, 0xBCDE0395, 0xE52F, 0x467C,
     0x8E, 0x3D, 0xC4, 0x57, 0x92, 0x91, 0x69, 0x2E);
 DEFINE_GUID!(IID_IMMDeviceEnumerator, 0xA95664D2, 0x9614, 0x4F35,
     0xA7, 0x46, 0xDE, 0x8D, 0xB6, 0x36, 0x17, 0xE6);
-RIDL!(
+RIDL!(#[uuid(0xd666063f, 0x1587, 0x4e43, 0x81, 0xf1, 0xb9, 0x48, 0xe8, 0x07, 0x36, 0x3f)]
 interface IMMDevice(IMMDeviceVtbl): IUnknown(IUnknownVtbl) {
     fn Activate(
         iid: REFIID, dwClsCtx: DWORD, pActivationParams: *mut PROPVARIANT,
@@ -46,7 +46,7 @@ interface IMMDevice(IMMDeviceVtbl): IUnknown(IUnknownVtbl) {
     fn GetState(pdwState: *mut DWORD) -> HRESULT
 }
 );
-RIDL!(
+RIDL!(#[uuid(0xa95664d2, 0x9614, 0x4f35, 0xa7, 0x46, 0xde, 0x8d, 0xb6, 0x36, 0x17, 0xe6)]
 interface IMMDeviceEnumerator(IMMDeviceEnumeratorVtbl): IUnknown(IUnknownVtbl) {
     fn EnumAudioEndpoints(
         dataFlow: EDataFlow, dwStateMask: DWORD,
@@ -64,7 +64,7 @@ interface IMMDeviceEnumerator(IMMDeviceEnumeratorVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT
 }
 );
-RIDL!(
+RIDL!(#[uuid(0x0bd7a1be, 0x7a1a, 0x44db, 0x83, 0x97, 0xcc, 0x53, 0x92, 0x38, 0x7b, 0x5e)]
 interface IMMDeviceCollection(IMMDeviceCollectionVtbl): IUnknown(IUnknownVtbl) {
     fn GetCount(pcDevices: *const UINT) -> HRESULT,
     fn Item(nDevice: UINT, ppDevice: *mut *mut IMMDevice) -> HRESULT

@@ -11,6 +11,7 @@ STRUCT!{struct BIND_OPTS {
 pub type LPBIND_OPTS = *mut BIND_OPTS;
 //8479
 RIDL!(
+#[uuid(0x0000000e, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IBindCtx(IBindCtxVtbl): IUnknown(IUnknownVtbl) {
     fn RegisterObjectBound(punk: *mut ::IUnknown) -> ::HRESULT,
     fn RevokeObjectBound(punk: *mut ::IUnknown) -> ::HRESULT,
@@ -28,6 +29,7 @@ interface IBindCtx(IBindCtxVtbl): IUnknown(IUnknownVtbl) {
 pub type IEnumMoniker = ::IUnknown; // TODO
 //8958
 RIDL!(
+#[uuid(0x00000010, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IRunningObjectTable(IRunningObjectTableVtbl): IUnknown(IUnknownVtbl) {
     fn Register(
         grfFlags: ::DWORD, punkObject: *mut ::IUnknown, pmkObjectName: *mut IMoniker,
@@ -71,12 +73,14 @@ STRUCT!{struct SOLE_AUTHENTICATION_SERVICE {
 }}
 
 RIDL!(
+#[uuid(0xa2f05a09, 0x27a2, 0x42b5, 0xbc, 0x0e, 0xac, 0x16, 0x3e, 0xf4, 0x9d, 0x9b)]
 interface IApartmentShutdown(IApartmentShutdownVtbl): IUnknown(IUnknownVtbl) {
     fn OnUninitialize(ui64ApartmentIdentifier: ::UINT64) -> ::VOID
 }
 );
 
 RIDL!(
+#[uuid(0x00000003, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IMarshal(IMarshalVtbl): IUnknown(IUnknownVtbl) {
     fn GetUnmarshalClass(
         riid: ::REFIID, pv: *const ::VOID, dwDestContext: ::DWORD,

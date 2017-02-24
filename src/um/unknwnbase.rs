@@ -15,7 +15,8 @@ interface IUnknown(IUnknownVtbl) {
     fn Release() -> ULONG
 }}
 pub type LPUNKNOWN = *mut IUnknown;
-RIDL!{interface AsyncIUnknown(AsyncIUnknownVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{#[uuid(0x000e0000, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface AsyncIUnknown(AsyncIUnknownVtbl): IUnknown(IUnknownVtbl) {
     fn Begin_QueryInterface(riid: REFIID) -> HRESULT,
     fn Finish_QueryInterface(ppvObject: *mut *mut c_void) -> HRESULT,
     fn Begin_AddRef() -> HRESULT,
@@ -23,7 +24,8 @@ RIDL!{interface AsyncIUnknown(AsyncIUnknownVtbl): IUnknown(IUnknownVtbl) {
     fn Begin_Release() -> HRESULT,
     fn Finish_Release() -> ULONG
 }}
-RIDL!{interface IClassFactory(IClassFactoryVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{#[uuid(0x00000001, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IClassFactory(IClassFactoryVtbl): IUnknown(IUnknownVtbl) {
     fn CreateInstance(
         pUnkOuter: *mut IUnknown, riid: REFIID, ppvObject: *mut *mut c_void
     ) -> HRESULT,

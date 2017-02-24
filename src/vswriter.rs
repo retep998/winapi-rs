@@ -82,6 +82,7 @@ interface IVssWMDependency(IVssWMDependencyVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(
+#[uuid(0xd2c72c96, 0xc121, 0x4518, 0xb6, 0x27, 0xe5, 0xa9, 0x3d, 0x01, 0x0e, 0xad)]
 interface IVssComponent(IVssComponentVtbl): IUnknown(IUnknownVtbl) {
     fn GetLogicalPath(pbstrPath: *mut ::BSTR) -> ::HRESULT,
     fn GetComponentType(pct: *mut ::VSS_COMPONENT_TYPE) -> ::HRESULT,
@@ -166,6 +167,7 @@ interface IVssWriterComponents(IVssWriterComponentsVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x156c8b5e, 0xf131, 0x4bd7, 0x9c, 0x97, 0xd1, 0x92, 0x3b, 0xe7, 0xe1, 0xfa)]
 interface IVssComponentEx(IVssComponentExVtbl): IVssComponent(IVssComponentVtbl) {
     fn SetPrepareForBackupFailureMsg(wszFailureMsg: ::LPCWSTR) -> ::HRESULT,
     fn SetPostSnapshotFailureMsg(wszFailureMsg: ::LPCWSTR) -> ::HRESULT,
@@ -179,6 +181,7 @@ interface IVssComponentEx(IVssComponentExVtbl): IVssComponent(IVssComponentVtbl)
 }
 );
 RIDL!(
+#[uuid(0x3b5be0f2, 0x07a9, 0x4e4b, 0xbd, 0xd3, 0xcf, 0xdc, 0x8e, 0x2c, 0x0d, 0x2d)]
 interface IVssComponentEx2(IVssComponentEx2Vtbl): IVssComponentEx(IVssComponentExVtbl) {
     fn SetFailure(
         hr: ::HRESULT, hrApplication: ::HRESULT, wszApplicationMessage: ::LPCWSTR,
