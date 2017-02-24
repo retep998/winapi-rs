@@ -1,8 +1,7 @@
 // Copyright © 2016; Dmitry Roschin
 // Licensed under the MIT License <LICENSE.md>
 use shared::basetsd::{UINT64};
-use shared::guiddef::{IID};
-use shared::minwindef::{UINT, ULONG, LPVOID, BOOL, INT, BYTE};
+use shared::minwindef::{UINT, LPVOID, BOOL, INT, BYTE};
 use um::d3dcommon::*;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
