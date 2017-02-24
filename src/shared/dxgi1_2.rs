@@ -151,12 +151,12 @@ STRUCT!{struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC {
     Windowed: BOOL,
 }}
 
-RIDL!(
+RIDL!(#[uuid(0x0aa1ae0a, 0xfa0e, 0x4b84, 0x86, 0x44, 0xe0, 0x5f, 0xf8, 0xe5, 0xac, 0xb5)]
 interface IDXGIAdapter2(IDXGIAdapter2Vtbl): IDXGIAdapter1(IDXGIAdapter1Vtbl) {
     fn GetDesc2(pDesc: *mut DXGI_ADAPTER_DESC2) -> HRESULT
 });
 
-RIDL!(
+RIDL!(#[uuid(0x05008617, 0xfbfd, 0x4051, 0xa7, 0x90, 0x14, 0x48, 0x84, 0xb4, 0xf6, 0xa9)]
 interface IDXGIDevice2(IDXGIDevice2Vtbl): IDXGIDevice1(IDXGIDevice1Vtbl) {
     fn OfferResources(
         NumResources: UINT, ppResources: *mut *mut IDXGIResource,
@@ -169,13 +169,13 @@ interface IDXGIDevice2(IDXGIDevice2Vtbl): IDXGIDevice1(IDXGIDevice1Vtbl) {
     fn EnqueueSetEvent(hEvent: HANDLE) -> HRESULT
 });
 
-RIDL!(
+RIDL!(#[uuid(0xea9dbf1a, 0xc88e, 0x4486, 0x85, 0x4a, 0x98, 0xaa, 0x01, 0x38, 0xf3, 0x0c)]
 interface IDXGIDisplayControl(IDXGIDisplayControlVtbl): IUnknown(IUnknownVtbl) {
     fn IsStereoEnabled() -> BOOL,
     fn SetStereoEnabled(enabled: BOOL) -> ()
 });
 
-RIDL!(
+RIDL!(#[uuid(0x50c83a1c, 0xe072, 0x4c48, 0x87, 0xb0, 0x36, 0x30, 0xfa, 0x36, 0xa6, 0xd0)]
 interface IDXGIFactory2(IDXGIFactory2Vtbl): IDXGIFactory1(IDXGIFactory1Vtbl) {
     fn IsWindowedStereoEnabled() -> BOOL,
     fn CreateSwapChainForHwnd(
@@ -211,7 +211,7 @@ interface IDXGIFactory2(IDXGIFactory2Vtbl): IDXGIFactory1(IDXGIFactory1Vtbl) {
     ) -> HRESULT
 });
 
-RIDL!(
+RIDL!(#[uuid(0x00cddea8, 0x939b, 0x4b83, 0xa3, 0x40, 0xa6, 0x85, 0x22, 0x66, 0x66, 0xcc)]
 interface IDXGIOutput1(IDXGIOutput1Vtbl): IDXGIOutput(IDXGIOutputVtbl) {
     fn GetDisplayModeList1(
         EnumFormat: DXGI_FORMAT, Flags: UINT, pNumModes: *mut UINT,
@@ -230,7 +230,7 @@ interface IDXGIOutput1(IDXGIOutput1Vtbl): IDXGIOutput(IDXGIOutputVtbl) {
     ) -> HRESULT
 });
 
-RIDL!(
+RIDL!(#[uuid(0x191cfac3, 0xa341, 0x470d, 0xb2, 0x6e, 0xa8, 0x64, 0xf4, 0x28, 0x31, 0x9c)]
 interface IDXGIOutputDuplication(IDXGIOutputDuplicationVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn GetDesc(pDesc: *mut DXGI_OUTDUPL_DESC) -> (),
     fn AcquireNextFrame(
@@ -257,7 +257,7 @@ interface IDXGIOutputDuplication(IDXGIOutputDuplicationVtbl): IDXGIObject(IDXGIO
     fn ReleaseFrame() -> HRESULT
 });
 
-RIDL!(
+RIDL!(#[uuid(0x30961379, 0x4609, 0x4a41, 0x99, 0x8e, 0x54, 0xfe, 0x56, 0x7e, 0xe0, 0xc1)]
 interface IDXGIResource1(IDXGIResource1Vtbl): IDXGIResource(IDXGIResourceVtbl) {
     fn CreateSubresourceSurface(
         index: UINT, ppSurface: *mut *mut IDXGISurface2
@@ -268,7 +268,7 @@ interface IDXGIResource1(IDXGIResource1Vtbl): IDXGIResource(IDXGIResourceVtbl) {
     ) -> HRESULT
 });
 
-RIDL!(
+RIDL!(#[uuid(0xaba496dd, 0xb617, 0x4cb8, 0xa8, 0x66, 0xbc, 0x44, 0xd7, 0xeb, 0x1f, 0xa2)]
 interface IDXGISurface2(IDXGISurface2Vtbl): IDXGISurface1(IDXGISurface1Vtbl) {
     fn GetResource(
         riid: REFGUID, ppParentResource: *mut *mut c_void,
@@ -276,7 +276,7 @@ interface IDXGISurface2(IDXGISurface2Vtbl): IDXGISurface1(IDXGISurface1Vtbl) {
     ) -> HRESULT
 });
 
-RIDL!(
+RIDL!(#[uuid(0x790a45f7, 0x0d42, 0x4876, 0x98, 0x3a, 0x0a, 0x55, 0xcf, 0xe6, 0xf4, 0xaa)]
 interface IDXGISwapChain1(IDXGISwapChain1Vtbl): IDXGISwapChain(IDXGISwapChainVtbl) {
     fn GetDesc1(pDesc: *mut DXGI_SWAP_CHAIN_DESC1) -> HRESULT,
     fn GetFullscreenDesc(

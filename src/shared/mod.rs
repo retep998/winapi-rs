@@ -7,6 +7,7 @@
 //! Headers shared between user mode and kernel mode
 #[cfg(feature = "shared-basetsd")] pub mod basetsd;
 #[cfg(feature = "shared-bcrypt")] pub mod bcrypt;
+#[cfg(feature = "shared-bugcodes")] pub mod bugcodes;
 #[cfg(feature = "shared-cderr")] pub mod cderr;
 #[cfg(feature = "shared-cfg")] pub mod cfg;
 #[cfg(feature = "shared-d3d9")] pub mod d3d9;

@@ -199,7 +199,7 @@ interface ID3D12FunctionReflection(ID3D12FunctionReflectionVtbl) {
     ) -> *mut ID3D12FunctionParameterReflection
 }}
 
-RIDL!(
+RIDL!(#[uuid(0x8e349d19, 0x54db, 0x4a56, 0x9d, 0xc9, 0x11, 0x9d, 0x87, 0xbd, 0xb8, 0x4)]
 interface ID3D12LibraryReflection(ID3D12LibraryReflectionVtbl): IUnknown(IUnknownVtbl) {
     fn QueryInterface(
         iid: *const IID, ppv: *mut LPVOID
@@ -260,7 +260,7 @@ interface ID3D12ShaderReflectionVariable(ID3D12ShaderReflectionVariableVtbl) {
     fn GetInterfaceSlot(uArrayIndex: UINT) -> UINT
 }}
 
-RIDL!(
+RIDL!(#[uuid(0x5a58797d, 0xa72c, 0x478d, 0x8b, 0xa2, 0xef, 0xc6, 0xb0, 0xef, 0xe8, 0x8e)]
 interface ID3D12ShaderReflection(ID3D12ShaderReflectionVtbl): IUnknown(IUnknownVtbl) {
     fn QueryInterface(
         iid: *const IID, ppv: *mut LPVOID

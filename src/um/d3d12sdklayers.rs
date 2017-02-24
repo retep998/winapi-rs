@@ -7,7 +7,8 @@ use um::d3d12::{ID3D12Resource};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
 
-RIDL!{interface ID3D12Debug(ID3D12DebugVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{#[uuid(0x344488b7, 0x6846, 0x474b, 0xb9, 0x89, 0xf0, 0x27, 0x44, 0x82, 0x45, 0xe0)]
+interface ID3D12Debug(ID3D12DebugVtbl): IUnknown(IUnknownVtbl) {
     fn EnableDebugLayer() -> ()
 }}
 ENUM!{enum D3D12_DEBUG_FEATURE {
@@ -21,17 +22,20 @@ ENUM!{enum D3D12_RLDO_FLAGS {
     D3D12_RLDO_DETAIL = 0x2,
     D3D12_RLDO_IGNORE_INTERNAL = 0x4,
 }}
-RIDL!{interface ID3D12DebugDevice(ID3D12DebugDeviceVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{#[uuid(0x3febd6dd, 0x4973, 0x4787, 0x81, 0x94, 0xe4, 0x5f, 0x9e, 0x28, 0x92, 0x3e)]
+interface ID3D12DebugDevice(ID3D12DebugDeviceVtbl): IUnknown(IUnknownVtbl) {
     fn SetFeatureMask(Mask: D3D12_DEBUG_FEATURE) -> HRESULT,
     fn GetFeatureMask() -> D3D12_DEBUG_FEATURE,
     fn ReportLiveDeviceObjects(Flags: D3D12_RLDO_FLAGS) -> HRESULT
 }}
-RIDL!{interface ID3D12DebugCommandQueue(ID3D12DebugCommandQueueVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{#[uuid(0x09e0bf36, 0x54ac, 0x484f, 0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3a)]
+interface ID3D12DebugCommandQueue(ID3D12DebugCommandQueueVtbl): IUnknown(IUnknownVtbl) {
     fn AssertResourceState(
         pResource: *mut ID3D12Resource, Subresource: UINT, State: UINT
     ) -> BOOL
 }}
-RIDL!{interface ID3D12DebugCommandList(ID3D12DebugCommandListVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{#[uuid(0x09e0bf36, 0x54ac, 0x484f, 0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3f)]
+interface ID3D12DebugCommandList(ID3D12DebugCommandListVtbl): IUnknown(IUnknownVtbl) {
     fn AssertResourceState(
         pResource: *mut ID3D12Resource, Subresource: UINT, State: UINT
     ) -> BOOL,
@@ -1015,7 +1019,8 @@ STRUCT!{struct D3D12_INFO_QUEUE_FILTER {
     DenyList: D3D12_INFO_QUEUE_FILTER_DESC,
 }}
 pub const D3D12_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT: UINT = 1024;
-RIDL!{interface ID3D12InfoQueue(ID3D12InfoQueueVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{#[uuid(0x0742a90b, 0xc387, 0x483f, 0xb9, 0x46, 0x30, 0xa7, 0xe4, 0xe6, 0x14, 0x58)]
+interface ID3D12InfoQueue(ID3D12InfoQueueVtbl): IUnknown(IUnknownVtbl) {
     fn SetMessageCountLimit(MessageCountLimit: UINT64) -> HRESULT,
     fn ClearStoredMessages() -> (),
     fn GetMessage(

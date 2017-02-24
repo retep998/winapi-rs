@@ -11,7 +11,8 @@ use shared::minwindef::{ DWORD, FILETIME, ULONG };
 use shared::wtypesbase::{ LPOLESTR };
 use um::unknwnbase::{ IUnknown, IUnknownVtbl };
 use um::winnt::{ HRESULT, LARGE_INTEGER, ULARGE_INTEGER };
-RIDL!{interface IMalloc(IMallocVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{#[uuid(0x00000002, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IMalloc(IMallocVtbl): IUnknown(IUnknownVtbl) {
     fn Alloc(cb: SIZE_T) -> *mut c_void,
     fn Realloc(pv: *mut c_void, cb: SIZE_T) -> *mut c_void,
     fn Free(pv: *mut c_void) -> (),
@@ -36,7 +37,7 @@ STRUCT!{struct STATSTG {
 //1945
 pub type IEnumString = IUnknown; // TODO
 //2075
-RIDL!(
+RIDL!(#[uuid(0x0c733a30, 0x2a1c, 0x11ce, 0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d)]
 interface ISequentialStream(ISequentialStreamVtbl): IUnknown(IUnknownVtbl) {
     fn Read(pv: *mut c_void, cb: ULONG, pcbRead: *mut ULONG) -> HRESULT,
     fn Write(pv: *const c_void, cb: ULONG, pcbWritten: *mut ULONG) -> HRESULT
@@ -59,7 +60,7 @@ ENUM!{enum LOCKTYPE {
     LOCK_ONLYONCE = 4,
 }}
 //2255
-RIDL!(
+RIDL!(#[uuid(0x0000000c, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IStream(IStreamVtbl): ISequentialStream(ISequentialStreamVtbl) {
     fn Seek(
         dlibMove: LARGE_INTEGER, dwOrigin: DWORD,

@@ -44,6 +44,7 @@ interface IVssWMComponent(IVssWMComponentVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(
+#[uuid(0x902fcf7f, 0xb7fd, 0x42f8, 0x81, 0xf1, 0xb2, 0xe4, 0x00, 0xb1, 0xe5, 0xbd)]
 interface IVssExamineWriterMetadata(IVssExamineWriterMetadataVtbl): IUnknown(IUnknownVtbl) {
     fn GetIdentity(
         pidInstance: *mut ::VSS_ID, pidWriter: *mut ::VSS_ID,
@@ -77,6 +78,7 @@ interface IVssExamineWriterMetadata(IVssExamineWriterMetadataVtbl): IUnknown(IUn
 }
 );
 RIDL!(
+#[uuid(0x0c0e5ec0, 0xca44, 0x472b, 0xb7, 0x02, 0xe6, 0x52, 0xdb, 0x1c, 0x04, 0x51)]
 interface IVssExamineWriterMetadataEx(IVssExamineWriterMetadataExVtbl):
     IVssExamineWriterMetadata(IVssExamineWriterMetadataVtbl) {
     fn GetIdentityEx(
@@ -87,6 +89,7 @@ interface IVssExamineWriterMetadataEx(IVssExamineWriterMetadataExVtbl):
 }
 );
 RIDL!(
+#[uuid(0xce115780, 0xa611, 0x431b, 0xb5, 0x7f, 0xc3, 0x83, 0x03, 0xab, 0x6a, 0xee)]
 interface IVssExamineWriterMetadataEx2(IVssExamineWriterMetadataEx2Vtbl):
     IVssExamineWriterMetadataEx(IVssExamineWriterMetadataExVtbl) {
     fn GetVersion(
@@ -108,6 +111,7 @@ pub struct IVssWriterComponentsExtVtbl {
     pub parent2: ::IUnknownVtbl,
 }
 RIDL!(
+#[uuid(0x665c1d5f, 0xc218, 0x414d, 0xa0, 0x5d, 0x7f, 0xef, 0x5f, 0x9d, 0x5c, 0x86)]
 interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl) {
     fn GetWriterComponentsCount(pcComponents: *mut ::UINT) -> ::HRESULT,
     fn GetWriterComponents(
@@ -233,6 +237,7 @@ interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl)
 }
 );
 RIDL!(
+#[uuid(0x963f03ad, 0x9e4c, 0x4a34, 0xac, 0x15, 0xe4, 0xb6, 0x17, 0x4e, 0x50, 0x36)]
 interface IVssBackupComponentsEx(IVssBackupComponentsExVtbl):
     IVssBackupComponents(IVssBackupComponentsVtbl) {
     fn GetWriterMetadataEx(
@@ -246,6 +251,7 @@ interface IVssBackupComponentsEx(IVssBackupComponentsExVtbl):
 }
 );
 RIDL!(
+#[uuid(0xacfe2b3a, 0x22c9, 0x4ef8, 0xbd, 0x03, 0x2f, 0x9c, 0xa2, 0x30, 0x08, 0x4e)]
 interface IVssBackupComponentsEx2(IVssBackupComponentsEx2Vtbl):
     IVssBackupComponentsEx(IVssBackupComponentsExVtbl) {
     fn UnexposeSnapshot(snapshotId: ::VSS_ID) -> ::HRESULT,
@@ -276,6 +282,7 @@ interface IVssBackupComponentsEx2(IVssBackupComponentsEx2Vtbl):
 }
 );
 RIDL!(
+#[uuid(0xc191bfbc, 0xb602, 0x4675, 0x8b, 0xd1, 0x67, 0xd6, 0x42, 0xf5, 0x29, 0xd5)]
 interface IVssBackupComponentsEx3(IVssBackupComponentsEx3Vtbl):
     IVssBackupComponentsEx2(IVssBackupComponentsEx2Vtbl) {
     fn GetWriterStatusEx(
@@ -292,6 +299,7 @@ interface IVssBackupComponentsEx3(IVssBackupComponentsEx3Vtbl):
 }
 );
 RIDL!(
+#[uuid(0xf434c2fd, 0xb553, 0x4961, 0xa9, 0xf9, 0xa8, 0xe9, 0x0b, 0x67, 0x3e, 0x53)]
 interface IVssBackupComponentsEx4(IVssBackupComponentsEx4Vtbl):
     IVssBackupComponentsEx3(IVssBackupComponentsEx3Vtbl) {
     fn GetRootAndLogicalPrefixPaths(

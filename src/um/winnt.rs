@@ -2757,6 +2757,28 @@ STRUCT!{struct WOW64_LDT_ENTRY {
 UNION!(WOW64_LDT_ENTRY, HighWord, Bytes, Bytes_mut, WOW64_LDT_ENTRY_Bytes);
 UNION!(WOW64_LDT_ENTRY, HighWord, Bits, Bits_mut, WOW64_LDT_ENTRY_Bits);
 pub type PWOW64_LDT_ENTRY = *mut WOW64_LDT_ENTRY;
+STRUCT!{struct IMAGE_DOS_HEADER {
+   e_magic: WORD,
+   e_cblp: WORD,
+   e_cp: WORD,
+   e_crlc: WORD,
+   e_cparhdr: WORD,
+   e_minalloc: WORD,
+   e_maxalloc: WORD,
+   e_ss: WORD,
+   e_sp: WORD,
+   e_csum: WORD,
+   e_ip: WORD,
+   e_cs: WORD,
+   e_lfarlc: WORD,
+   e_ovno: WORD,
+   e_res: [WORD; 4],
+   e_oemid: WORD,
+   e_oeminfo: WORD,
+   e_res2: [WORD; 10],
+   e_lfanew: LONG,
+}}
+pub type PIMAGE_DOS_HEADER = *mut IMAGE_DOS_HEADER;
 pub const DLL_PROCESS_ATTACH: DWORD = 1;
 pub const DLL_THREAD_ATTACH: DWORD = 2;
 pub const DLL_THREAD_DETACH: DWORD = 3;

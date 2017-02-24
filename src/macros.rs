@@ -115,24 +115,6 @@ macro_rules! RIDL {
         RIDL!{@deref $interface $pinterface}
         RIDL!{@uuid $interface $($uuid),+}
     );
-    (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
-        fn $method:ident($($p:ident : $t:ty),*) -> $rtr:ty
-    ),+}) => (
-        #[repr(C)]
-        pub struct $vtbl {
-            pub parent: $pvtbl
-            $(,pub $method: unsafe extern "system" fn(
-                This: *mut $interface,
-                $($p: $t),*
-            ) -> $rtr)+
-        }
-        #[repr(C)]
-        pub struct $interface {
-            pub lpVtbl: *const $vtbl,
-        }
-        RIDL!{@impl $interface {$(fn $method($($p: $t),*) -> $rtr),+}}
-        RIDL!{@deref $interface $pinterface}
-    );
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
         fn $method:ident($($p:ident : $t:ty),*) -> $rtr:ty

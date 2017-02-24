@@ -278,7 +278,7 @@ STRUCT!{struct WICBitmapPlane {
     cbStride: UINT,
     cbBufferSize: UINT,
 }}
-RIDL!(
+RIDL!(#[uuid(0x00000040, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICPalette(IWICPaletteVtbl): IUnknown(IUnknownVtbl) {
     fn InitializePredefined(
         ePaletteType: WICBitmapPaletteType, fAddTransparentColor: BOOL
@@ -297,7 +297,7 @@ interface IWICPalette(IWICPaletteVtbl): IUnknown(IUnknownVtbl) {
     fn IsGrayscale(pfIsGrayscale: *mut BOOL) -> HRESULT,
     fn HasAlpha(pfHasAlpha: *mut BOOL) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x00000120, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmapSource(IWICBitmapSourceVtbl): IUnknown(IUnknownVtbl) {
     fn GetSize(puiWidth: *mut UINT, puiHeight: UINT) -> HRESULT,
     fn GetPixelFormat(pPixelFormat: *mut WICPixelFormatGUID) -> HRESULT,
@@ -308,7 +308,7 @@ interface IWICBitmapSource(IWICBitmapSourceVtbl): IUnknown(IUnknownVtbl) {
         pbBuffer: *mut BYTE
     ) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x00000301, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICFormatConverter(IWICFormatConverterVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
         pISource: *mut IWICBitmapSource, dstFormat: REFWICPixelFormatGUID,
@@ -320,7 +320,7 @@ interface IWICFormatConverter(IWICFormatConverterVtbl): IWICBitmapSource(IWICBit
         pfCanConvert: *mut BOOL
     ) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0xbebee9cb, 0x83b0, 0x4dcc, 0x81, 0x32, 0xb0, 0xaa, 0xa5, 0x5e, 0xac, 0x96)]
 interface IWICPlanarFormatConverter(IWICPlanarFormatConverterVtbl)
     : IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
@@ -333,25 +333,25 @@ interface IWICPlanarFormatConverter(IWICPlanarFormatConverterVtbl)
         dstPixelFormat: REFWICPixelFormatGUID, pfCanConvert: *mut BOOL
     ) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x00000302, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmapScaler(IWICBitmapScalerVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
         pISource: *mut IWICBitmapSource, uiWidth: UINT, uiHeight: UINT,
         mode: WICBitmapInterpolationMode
     ) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0xe4fbcf03, 0x223d, 0x4e81, 0x93, 0x33, 0xd6, 0x35, 0x55, 0x6d, 0xd1, 0xb5)]
 interface IWICBitmapClipper(IWICBitmapClipperVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(pISource: *mut IWICBitmapSource, prc: *const WICRect) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x5009834f, 0x2d6a, 0x41ce, 0x9e, 0x1b, 0x17, 0xc5, 0xaf, 0xf7, 0xa7, 0x82)]
 interface IWICBitmapFlipRotator(IWICBitmapFlipRotatorVtbl)
     : IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
         pISource: *mut IWICBitmapSource, options: WICBitmapTransformOptions
     ) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x00000123, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmapLock(IWICBitmapLockVtbl): IUnknown(IUnknownVtbl) {
     fn GetSize(puiWidth: *mut UINT, puiHeight: *mut UINT) -> HRESULT,
     fn GetStride(pcbStride: *mut UINT) -> HRESULT,
@@ -360,7 +360,7 @@ interface IWICBitmapLock(IWICBitmapLockVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
     fn GetPixelFormat(pPixelFormat: *mut WICPixelFormatGUID) -> HRESULT
 });
-RIDL!(
+RIDL!(#[uuid(0x00000121, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmap(IWICBitmapVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Lock(
         prcLock: *const WICRect, flags: DWORD, ppILock: *mut *mut IWICBitmapLock
