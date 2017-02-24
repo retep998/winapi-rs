@@ -59,7 +59,6 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "shared-mmreg",
     "shared-ntdef",
     "shared-ntstatus",
-    "shared-rpcdce",
     "shared-rpcndr",
     "shared-sspi",
     "shared-usb",
@@ -97,7 +96,6 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "shared-mmreg" = ["shared-guiddef", "shared-minwindef"]
 "shared-ntdef" = ["shared-basetsd"]
 "shared-ntstatus" = ["shared-ntdef"]
-"shared-rpcdce" = []
 "shared-rpcndr" = []
 "shared-sspi" = ["shared-ntdef"]
 "shared-usb" = ["shared-minwindef", "um-winnt"]
@@ -249,11 +247,11 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "um-propidl" = ["shared-minwindef", "shared-wtypes"]
 "um-propsys" = ["um-unknwnbase"]
 "um-prsht" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-winnt", "um-winuser"]
-"um-sapi" = ["shared-guiddef", "shared-minwindef", "shared-rpcdce", "um-sapi53", "um-unknwnbase", "um-winnt"]
-"um-sapi51" = ["shared-guiddef", "shared-minwindef", "shared-mmreg", "shared-rpcdce", "shared-windef", "um-oaidl", "um-objidlbase", "um-servprov", "um-unknwnbase", "um-winnt"]
-"um-sapi53" = ["shared-guiddef", "shared-minwindef", "shared-rpcdce", "shared-wtypes", "um-oaidl", "um-sapi51", "um-unknwnbase", "um-urlmon", "um-winnt"]
-"um-sapiddk" = ["shared-guiddef", "shared-minwindef", "shared-rpcdce", "um-sapi", "um-sapiddk51", "um-unknwnbase", "um-winnt"]
-"um-sapiddk51" = ["shared-guiddef", "shared-minwindef", "shared-mmreg", "shared-rpcdce", "shared-windef", "um-oaidl", "um-sapi", "um-unknwnbase", "um-winnt"]
+"um-sapi" = ["shared-guiddef", "shared-minwindef", "um-sapi53", "um-unknwnbase", "um-winnt"]
+"um-sapi51" = ["shared-guiddef", "shared-minwindef", "shared-mmreg", "shared-windef", "um-oaidl", "um-objidlbase", "um-servprov", "um-unknwnbase", "um-winnt"]
+"um-sapi53" = ["shared-guiddef", "shared-minwindef", "shared-wtypes", "um-oaidl", "um-sapi51", "um-unknwnbase", "um-urlmon", "um-winnt"]
+"um-sapiddk" = ["shared-guiddef", "shared-minwindef", "um-sapi", "um-sapiddk51", "um-unknwnbase", "um-winnt"]
+"um-sapiddk51" = ["shared-guiddef", "shared-minwindef", "shared-mmreg", "shared-windef", "um-oaidl", "um-sapi", "um-unknwnbase", "um-winnt"]
 "um-servprov" = ["shared-guiddef", "um-unknwnbase", "um-winnt"]
 "um-setupapi" = ["shared-basetsd", "shared-devpropdef", "shared-guiddef", "shared-minwindef", "shared-windef", "um-commctrl", "um-prsht", "um-spapidef", "um-winnt", "um-winreg", "setupapi"]
 "um-shellapi" = ["shared-guiddef", "shared-minwindef", "shared-windef", "um-winnt"]

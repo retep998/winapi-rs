@@ -8,7 +8,6 @@ use ctypes::{c_char, c_float, c_long, c_void};
 use shared::guiddef::{CLSID, GUID, IID, REFGUID};
 use shared::minwindef::{BOOL, BYTE, DWORD, ULONG, USHORT, WORD};
 use shared::mmreg::WAVEFORMATEX;
-use shared::rpcdce::RPC_IF_HANDLE;
 use shared::windef::HWND;
 use um::oaidl::VARIANT;
 use um::objidlbase::IStream;
@@ -17,10 +16,6 @@ use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HANDLE, HRESULT, LONG, LPCWSTR, LPWSTR, PVOID, ULONGLONG, WCHAR};
 pub const SPRECOEXTENSION: &'static str = "RecoExtension";
 pub const SPALTERNATESCLSID: &'static str = "AlternatesCLSID";
-extern {
-    pub static __MIDL_itf_sapiddk51_0000_0000_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk51_0000_0000_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0xf8e690f0, 0x39cb, 0x4843, 0xb8, 0xd7, 0xc8, 0x46, 0x96, 0xe1, 0x11, 0x9d)]
 interface ISpTokenUI(ISpTokenUIVtbl): IUnknown(IUnknownVtbl) {
     fn IsUISupported(
@@ -66,10 +61,6 @@ DECLARE_HANDLE!(SPRECOCONTEXTHANDLE, SPRECOCONTEXTHANDLE__);
 DECLARE_HANDLE!(SPPHRASERULEHANDLE, SPPHRASERULEHANDLE__);
 DECLARE_HANDLE!(SPPHRASEPROPERTYHANDLE, SPPHRASEPROPERTYHANDLE__);
 DECLARE_HANDLE!(SPTRANSITIONID, SPTRANSITIONID__);
-extern {
-    pub static __MIDL_itf_sapiddk51_0000_0002_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk51_0000_0002_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0xf4711347, 0xe608, 0x11d2, 0xa0, 0x86, 0x00, 0xc0, 0x4f, 0x8e, 0xf9, 0xb5)]
 interface ISpErrorLog(ISpErrorLogVtbl): IUnknown(IUnknownVtbl) {
     fn AddError(
@@ -129,10 +120,6 @@ interface ISpPhraseBuilder(ISpPhraseBuilderVtbl): ISpPhrase(ISpPhraseVtbl) {
 });
 pub type ISpTask = *mut c_void;
 pub type ISpThreadTask = *mut c_void;
-extern {
-    pub static __MIDL_itf_sapiddk51_0000_0007_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk51_0000_0007_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0xa6be4d73, 0x4403, 0x4358, 0xb2, 0x2d, 0x03, 0x46, 0xe2, 0x3b, 0x17, 0x64)]
 interface ISpThreadControl(ISpThreadControlVtbl): ISpNotifySink(ISpNotifySinkVtbl) {
     fn StartThread(
@@ -158,10 +145,6 @@ STRUCT!{struct SPTMTHREADINFO {
     ulConcurrencyLimit: ULONG,
     ulMaxQuickAllocThreads: ULONG,
 }}
-extern {
-    pub static __MIDL_itf_sapiddk51_0000_0008_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk51_0000_0008_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0x2baeef81, 0x2ca3, 0x4331, 0x98, 0xf3, 0x26, 0xec, 0x5a, 0xbe, 0xfb, 0x03)]
 interface ISpTaskManager(ISpTaskManagerVtbl): IUnknown(IUnknownVtbl) {
     fn SetThreadPoolInfo(pPoolInfo: *const SPTMTHREADINFO) -> HRESULT,
@@ -200,10 +183,6 @@ ENUM!{enum SPVESACTIONS {
     SPVES_RATE     = 1 << 2,
     SPVES_VOLUME   = 1 << 3,
 }}
-extern {
-    pub static __MIDL_itf_sapiddk51_0000_0009_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk51_0000_0009_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0x9880499b, 0xcce9, 0x11d2, 0xb5, 0x03, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96)]
 interface ISpTTSEngineSite(ISpTTSEngineSiteVtbl): ISpEventSink(ISpEventSinkVtbl) {
     fn GetActions() -> DWORD,
@@ -227,10 +206,6 @@ STRUCT!{struct SPVTEXTFRAG {
     ulTextLen: ULONG,
     ulTextSrcOffset: ULONG,
 }}
-extern {
-    pub static __MIDL_itf_sapiddk51_0000_0010_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk51_0000_0010_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0xa74d7c8e, 0x4cc5, 0x4f2f, 0xa6, 0xeb, 0x80, 0x4d, 0xee, 0x18, 0x50, 0x0e)]
 interface ISpTTSEngine(ISpTTSEngineVtbl): IUnknown(IUnknownVtbl) {
     fn Speak(
@@ -300,10 +275,6 @@ STRUCT!{struct SPPATHENTRY {
     hTransition: SPTRANSITIONID,
     elem: SPPHRASEELEMENT,
 }}
-extern {
-    pub static __MIDL_itf_sapiddk51_0000_0011_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk51_0000_0011_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0x6a6ffad8, 0x78b6, 0x473d, 0xb8, 0x44, 0x98, 0x15, 0x2e, 0x4f, 0xb1, 0x6b)]
 interface ISpCFGInterpreterSite(ISpCFGInterpreterSiteVtbl): IUnknown(IUnknownVtbl) {
     fn AddTextReplacement(pReplace: *mut SPPHRASEREPLACEMENT) -> HRESULT,
@@ -380,10 +351,6 @@ STRUCT!{struct SPPARSEINFO {
     pSREnginePrivateData: *const BYTE,
     fHypothesis: BOOL,
 }}
-extern {
-    pub static __MIDL_itf_sapiddk51_0000_0013_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk51_0000_0013_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0x3b414aec, 0x720c, 0x4883, 0xb9, 0xef, 0x17, 0x8c, 0xd3, 0x94, 0xfb, 0x3a)]
 interface ISpSREngineSite(ISpSREngineSiteVtbl): IUnknown(IUnknownVtbl) {
     fn Read(
@@ -451,10 +418,6 @@ ENUM!{enum SPPROPSRC {
     SPPROPSRC_RECO_CTX,
     SPPROPSRC_RECO_GRAMMAR,
 }}
-extern {
-    pub static __MIDL_itf_sapiddk51_0000_0014_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk51_0000_0014_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0x2f472991, 0x854b, 0x4465, 0xb6, 0x13, 0xfb, 0xaf, 0xb3, 0xad, 0x8e, 0xd8)]
 interface ISpSREngine(ISpSREngineVtbl): IUnknown(IUnknownVtbl) {
     fn SetSite(pSite: *mut ISpSREngineSite) -> HRESULT,
@@ -600,10 +563,6 @@ STRUCT!{struct SPPHRASEALTREQUEST {
     pPhrase: *mut ISpPhrase,
     pRecoContext: *mut ISpRecoContext,
 }}
-extern {
-    pub static __MIDL_itf_sapiddk51_0000_0015_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk51_0000_0015_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0x8e7c791e, 0x4467, 0x11d3, 0x97, 0x23, 0x00, 0xc0, 0x4f, 0x72, 0xdb, 0x08)]
 interface _ISpPrivateEngineCall(_ISpPrivateEngineCallVtbl): IUnknown(IUnknownVtbl) {
     fn CallEngine(
@@ -625,6 +584,4 @@ extern {
     pub static CLSID_SpITNProcessor: CLSID;
     pub static CLSID_SpGrammarCompiler: CLSID;
     pub static CLSID_SpGramCompBackend: CLSID;
-    pub static __MIDL_itf_sapiddk51_0000_0017_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk51_0000_0017_v0_0_s_ifspec: RPC_IF_HANDLE;
 }

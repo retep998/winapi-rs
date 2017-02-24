@@ -11,7 +11,6 @@ use shared::minwindef::{
     BOOL, BYTE, DWORD, FILETIME, HKEY, HMODULE, LPARAM, UINT, ULONG, USHORT, WORD, WPARAM
 };
 use shared::mmreg::WAVEFORMATEX;
-use shared::rpcdce::RPC_IF_HANDLE;
 use shared::windef::HWND;
 use um::oaidl::VARIANT;
 use um::objidlbase::{IStream, IStreamVtbl};
@@ -159,10 +158,6 @@ pub struct ISpNotifyCallback; // TODO
     ) -> HRESULT
 });*/
 FN!(stdcall SPNOTIFYCALLBACK(wParam: WPARAM, lParam: LPARAM) -> ());
-extern {
-    pub static __MIDL_itf_sapi51_0000_0000_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi51_0000_0000_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0x5eff4aef, 0x8487, 0x11d2, 0x96, 0x1c, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0x28)]
 interface ISpNotifySource(ISpNotifySourceVtbl): IUnknown(IUnknownVtbl) {
     fn SetNotifySink(pNotifySink: *mut ISpNotifySink) -> HRESULT,
@@ -506,10 +501,6 @@ STRUCT!{struct SPEVENTSOURCEINFO {
     ullQueuedInterest: ULONGLONG,
     ulCount: ULONG,
 }}
-extern {
-    pub static __MIDL_itf_sapi51_0000_0011_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi51_0000_0011_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0xbe7a9cce, 0x5f9e, 0x11d2, 0x96, 0x0f, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0x28)]
 interface ISpEventSource(ISpEventSourceVtbl): ISpNotifySource(ISpNotifySourceVtbl) {
     fn SetInterest(
@@ -545,10 +536,6 @@ ENUM!{enum SPFILEMODE {
     SPFM_CREATE_ALWAYS,
     SPFM_NUM_MODES,
 }}
-extern {
-    pub static __MIDL_itf_sapi51_0000_0014_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi51_0000_0014_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0x12e3cca9, 0x7518, 0x44c5, 0xa5, 0xe7, 0xba, 0x5a, 0x79, 0xcb, 0x92, 0x9e)]
 interface ISpStream(ISpStreamVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
     fn SetBaseStream(
@@ -609,10 +596,6 @@ STRUCT!{struct SPAUDIOBUFFERINFO {
     ulMsBufferSize: ULONG,
     ulMsEventBias: ULONG,
 }}
-extern {
-    pub static __MIDL_itf_sapi51_0000_0016_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi51_0000_0016_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0xc05c768f, 0xfae8, 0x4ec2, 0x8e, 0x07, 0x33, 0x83, 0x21, 0xc1, 0x24, 0x52)]
 interface ISpAudio(ISpAudioVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
     fn SetState(
@@ -828,10 +811,6 @@ STRUCT!{struct SPWORDLIST {
     pvBuffer: *mut BYTE,
     pFirstWord: *mut SPWORD,
 }}
-extern {
-    pub static __MIDL_itf_sapi51_0000_0019_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi51_0000_0019_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0xda41a7c2, 0x5383, 0x4db2, 0x91, 0x6b, 0x6c, 0x17, 0x19, 0xe3, 0xdb, 0x58)]
 interface ISpLexicon(ISpLexiconVtbl): IUnknown(IUnknownVtbl) {
     fn GetPronunciations(
@@ -959,10 +938,6 @@ pub const SPF_VOICE_MASK: i32 = SPF_ASYNC as i32 | SPF_PURGEBEFORESPEAK as i32
     | SPF_IS_FILENAME as i32 | SPF_IS_XML as i32 | SPF_IS_NOT_XML as i32
     | SPF_NLP_MASK as i32 | SPF_PERSIST_XML as i32;
 pub const SPF_UNUSED_FLAGS: i32 = !SPF_VOICE_MASK;
-extern {
-    pub static __MIDL_itf_sapi51_0000_0022_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi51_0000_0022_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0x6c44df74, 0x72b9, 0x4992, 0xa1, 0xec, 0xef, 0x99, 0x6e, 0x04, 0x22, 0xd4)]
 interface ISpVoice(ISpVoiceVtbl): ISpEventSource(ISpEventSourceVtbl) {
     fn SetOutput(
@@ -1052,10 +1027,6 @@ STRUCT!{struct SPRECORESULTTIMES {
 STRUCT!{struct SPSERIALIZEDRESULT {
     ulSerializedSize: ULONG,
 }}
-extern {
-    pub static __MIDL_itf_sapi51_0000_0025_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi51_0000_0025_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0x20b053be, 0xe235, 0x43cd, 0x9a, 0x2a, 0x8d, 0x17, 0xa4, 0x8b, 0x78, 0x42)]
 interface ISpRecoResult(ISpRecoResultVtbl): ISpPhrase(ISpPhraseVtbl) {
     fn GetResultTimes(pTimes: *mut SPRECORESULTTIMES) -> HRESULT,
@@ -1135,10 +1106,6 @@ ENUM!{enum SPCFGRULEATTRIBUTES {
     SPRAF_Dynamic = 1 << 5,
     SPRAF_AutoPause = 1 << 16,
 }}
-extern {
-    pub static __MIDL_itf_sapi51_0000_0026_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi51_0000_0026_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0x8137828f, 0x591a, 0x4a42, 0xbe, 0x58, 0x49, 0xea, 0x7e, 0xba, 0xac, 0x68)]
 interface ISpGrammarBuilder(ISpGrammarBuilderVtbl): IUnknown(IUnknownVtbl) {
     fn ResetGrammar(NewLanguage: WORD) -> HRESULT,
@@ -1181,10 +1148,6 @@ ENUM!{enum SPLOADOPTIONS {
     SPLO_STATIC = 0,
     SPLO_DYNAMIC = 1,
 }}
-extern {
-    pub static __MIDL_itf_sapi51_0000_0027_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi51_0000_0027_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0x2177db29, 0x7f45, 0x47d0, 0x85, 0x54, 0x06, 0x7e, 0x91, 0xc8, 0x05, 0x02)]
 interface ISpRecoGrammar(ISpRecoGrammarVtbl): ISpGrammarBuilder(ISpGrammarBuilderVtbl) {
     fn GetGrammarId(pullGrammarId: *mut ULONGLONG) -> HRESULT,
@@ -1262,10 +1225,6 @@ ENUM!{enum SPAUDIOOPTIONS {
     SPAO_NONE = 0,
     SPAO_RETAIN_AUDIO = 1 << 0,
 }}
-extern {
-    pub static __MIDL_itf_sapi51_0000_0028_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi51_0000_0028_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0xf740a62f, 0x7c15, 0x489e, 0x82, 0x34, 0x94, 0x0a, 0x33, 0xd9, 0x27, 0x2d)]
 interface ISpRecoContext(ISpRecoContextVtbl): ISpEventSource(ISpEventSourceVtbl) {
     fn GetRecognizer(ppRecognizer: *mut *mut ISpRecognizer) -> HRESULT,
@@ -1331,10 +1290,6 @@ interface ISpProperties(ISpPropertiesVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT
 });
 pub const SP_MAX_LANGIDS: ULONG = 20;
-extern {
-    pub static __MIDL_itf_sapi51_0000_0030_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi51_0000_0030_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 STRUCT!{struct SPRECOGNIZERSTATUS {
     AudioStatus: SPAUDIOSTATUS,
     ullRecognitionStreamPos: ULONGLONG,

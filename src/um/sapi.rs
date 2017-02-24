@@ -7,7 +7,6 @@
 //! SAPI 5.4 definitions
 use shared::guiddef::GUID;
 use shared::minwindef::{BYTE, ULONG, WORD};
-use shared::rpcdce::RPC_IF_HANDLE;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPWSTR, ULONGLONG};
 pub use um::sapi53::{
@@ -146,12 +145,6 @@ pub use um::sapi53::{
     SP_EMULATE_RESULT,
     ISpNotifyCallback,
     SPNOTIFYCALLBACK,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0000_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0000_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpNotifySource, ISpNotifySourceVtbl,
     ISpNotifySink, ISpNotifySinkVtbl,
     ISpNotifyTranslator, ISpNotifyTranslatorVtbl,
@@ -263,12 +256,6 @@ pub use um::sapi53::{
     SP_VISEME_20,
     SP_VISEME_21,
     SPEVENTSOURCEINFO,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0011_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0011_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpEventSource, ISpEventSourceVtbl,
     ISpEventSource2, ISpEventSource2Vtbl,
     ISpEventSink, ISpEventSinkVtbl,
@@ -278,13 +265,7 @@ pub use um::sapi53::{
     SPFM_OPEN_READWRITE,
     SPFM_CREATE,
     SPFM_CREATE_ALWAYS,
-    SPFM_NUM_MODES
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0015_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0015_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
+    SPFM_NUM_MODES,
     ISpStream, ISpStreamVtbl,
     ISpStreamFormatConverter, ISpStreamFormatConverterVtbl,
     SPAUDIOSTATE,
@@ -293,13 +274,7 @@ pub use um::sapi53::{
     SPAS_PAUSE,
     SPAS_RUN,
     SPAUDIOSTATUS,
-    SPAUDIOBUFFERINFO
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0017_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0017_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
+    SPAUDIOBUFFERINFO,
     ISpAudio, ISpAudioVtbl,
     ISpMMSysAudio, ISpMMSysAudioVtbl,
     ISpTranscript, ISpTranscriptVtbl,
@@ -428,12 +403,6 @@ pub use um::sapi53::{
     SPWORDPRONUNCIATIONLIST,
     SPWORD,
     SPWORDLIST,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0020_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0020_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpLexicon, ISpLexiconVtbl,
     ISpContainerLexicon, ISpContainerLexiconVtbl,
     SPSHORTCUTTYPE,
@@ -447,12 +416,6 @@ pub use um::sapi53::{
     SPPS_RESERVED4,
     SPSHORTCUTPAIR,
     SPSHORTCUTPAIRLIST,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0022_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0022_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpShortcut, ISpShortcutVtbl,
     ISpPhoneConverter, ISpPhoneConverterVtbl,
     ISpPhoneticAlphabetConverter, ISpPhoneticAlphabetConverterVtbl,
@@ -497,44 +460,20 @@ pub use um::sapi53::{
     SPF_PARSE_MASK,
     SPF_VOICE_MASK,
     SPF_UNUSED_FLAGS,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0026_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0026_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpVoice, ISpVoiceVtbl,
     ISpPhrase, ISpPhraseVtbl,
     ISpPhraseAlt, ISpPhraseAltVtbl,
     SPXMLRESULTOPTIONS,
     SPXRO_SML,
     SPXRO_Alternates_SML,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0029_v0_0_c_ifspe: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0029_v0_0_s_ifspe: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpPhrase2, ISpPhrase2Vtbl,
     SPRECORESULTTIMES,
     SPSERIALIZEDRESULT,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0030_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0030_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpRecoResult, ISpRecoResultVtbl,
     SPCOMMITFLAGS,
     SPCF_NONE,
     SPCF_ADD_TO_USER_LEXICON,
     SPCF_DEFINITE_CORRECTION,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0031_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0031_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpRecoResult2, ISpRecoResult2Vtbl,
     ISpXMLRecoResult, ISpXMLRecoResultVtbl,
     SPTEXTSELECTIONINFO,
@@ -565,22 +504,10 @@ pub use um::sapi53::{
     SPRAF_Root,
     SPRAF_AutoPause,
     SPRAF_UserDelimited,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0033_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0033_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpGrammarBuilder, ISpGrammarBuilderVtbl,
     SPLOADOPTIONS,
     SPLO_STATIC,
     SPLO_DYNAMIC,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0034_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0034_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpRecoGrammar, ISpRecoGrammarVtbl,
     SPMATCHINGMODE,
     AllWords,
@@ -592,20 +519,8 @@ pub use um::sapi53::{
     PA_Ipa,
     PA_Ups,
     PA_Sapi,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0035_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0035_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpGrammarBuilder2, ISpGrammarBuilder2Vtbl,
-//  SPRP_NORMAL,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0036_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0036_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
+// TODO: SPRP_NORMAL,
     ISpRecoGrammar2, ISpRecoGrammar2Vtbl,
     ISpeechResourceLoader, ISpeechResourceLoaderVtbl,
     SPRECOCONTEXTSTATUS,
@@ -617,12 +532,6 @@ pub use um::sapi53::{
     SPAUDIOOPTIONS,
     SPAO_NONE,
     SPAO_RETAIN_AUDIO,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0038_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0038_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpRecoContext, ISpRecoContextVtbl,
     SPGRAMMAROPTIONS,
     SPGO_SAPI,
@@ -650,12 +559,6 @@ pub use um::sapi53::{
     SPAR_Low,
     SPAR_Medium,
     SPAR_High,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0039_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0039_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpRecoContext2, ISpRecoContext2Vtbl,
     ISpProperties, ISpPropertiesVtbl,
     SP_MAX_LANGIDS,
@@ -670,12 +573,6 @@ pub use um::sapi53::{
     SPRST_ACTIVE_ALWAYS,
     SPRST_INACTIVE_WITH_PURGE,
     SPRST_NUM_STATES,
-};
-extern {
-    pub static __MIDL_itf_sapi_0000_0041_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0041_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{
     ISpRecognizer, ISpRecognizerVtbl,
     ISpSerializeState, ISpSerializeStateVtbl,
     ISpRecognizer2, ISpRecognizer2Vtbl,
@@ -687,10 +584,6 @@ ENUM!{enum SPCATEGORYTYPE {
     SPCT_SUB_COMMAND,
     SPCT_SUB_DICTATION,
 }}
-extern {
-    pub static __MIDL_itf_sapi_0000_0044_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0044_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0xda0cd0f9, 0x14a2, 0x4f09, 0x8c, 0x2a, 0x85, 0xcc, 0x48, 0x97, 0x93, 0x45)]
 interface ISpRecoCategory(ISpRecoCategoryVtbl): IUnknown(IUnknownVtbl) {
     fn GetType(peCategoryType: *mut SPCATEGORYTYPE) -> HRESULT
@@ -704,18 +597,10 @@ interface ISpRecognizer3(ISpRecognizer3Vtbl): IUnknown(IUnknownVtbl) {
     fn SetActiveCategory(pCategory: *mut ISpRecoCategory) -> HRESULT,
     fn GetActiveCategory(ppCategory: *mut *mut ISpRecoCategory) -> HRESULT
 });
-pub use um::sapi53::SPNORMALIZATIONLIST;
-extern {
-    pub static __MIDL_itf_sapi_0000_0046_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0046_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 pub use um::sapi53::{
+    SPNORMALIZATIONLIST,
     ISpEnginePronunciation, ISpEnginePronunciationVtbl,
     SPDISPLAYTOKEN,
     SPDISPLAYPHRASE,
+    ISpDisplayAlternates, ISpDisplayAlternatesVtbl,
 };
-extern {
-    pub static __MIDL_itf_sapi_0000_0045_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapi_0000_0045_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapi53::{ISpDisplayAlternates, ISpDisplayAlternatesVtbl};

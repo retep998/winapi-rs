@@ -7,7 +7,6 @@
 use ctypes::{c_float, c_int, c_void};
 use shared::guiddef::CLSID;
 use shared::minwindef::{BOOL, DWORD, ULONG};
-use shared::rpcdce::RPC_IF_HANDLE;
 use um::sapi::*;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, ULONGLONG, WCHAR};
@@ -16,10 +15,6 @@ pub use um::sapiddk51::{
     SPALTERNATESCLSID,
 };
 pub const SR_LOCALIZED_DESCRIPTION: &'static str = "Description";
-extern {
-    pub static __MIDL_itf_sapiddk_0000_0000_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk_0000_0000_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 pub use um::sapiddk51::{
     ISpTokenUI, ISpTokenUIVtbl,
     ISpObjectTokenEnumBuilder, ISpObjectTokenEnumBuilderVtbl,
@@ -30,12 +25,6 @@ pub use um::sapiddk51::{
     SPPHRASERULEHANDLE,
     SPPHRASEPROPERTYHANDLE,
     SPTRANSITIONID,
-};
-extern {
-    pub static __MIDL_itf_sapiddk_0000_0002_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk_0000_0002_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapiddk51::{
     ISpErrorLog, ISpErrorLogVtbl,
     ISpGrammarCompiler, ISpGrammarCompilerVtbl,
     ISpGramCompBackend, ISpGramCompBackendVtbl,
@@ -43,20 +32,8 @@ pub use um::sapiddk51::{
     ISpPhraseBuilder, ISpPhraseBuilderVtbl,
     ISpTask,
     ISpThreadTask,
-};
-extern {
-    pub static __MIDL_itf_sapiddk_0000_0007_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk_0000_0007_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapiddk51::{
     ISpThreadControl, ISpThreadControlVtbl,
     SPTMTHREADINFO,
-};
-extern {
-    pub static __MIDL_itf_sapiddk_0000_0008_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk_0000_0008_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapiddk51::{
     ISpTaskManager, ISpTaskManagerVtbl,
     SPVSKIPTYPE,
     SPVST_SENTENCE,
@@ -66,20 +43,8 @@ pub use um::sapiddk51::{
     SPVES_SKIP,
     SPVES_RATE,
     SPVES_VOLUME,
-};
-extern {
-    pub static __MIDL_itf_sapiddk_0000_0009_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk_0000_0009_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapiddk51::{
     ISpTTSEngineSite, ISpTTSEngineSiteVtbl,
     SPVTEXTFRAG,
-};
-extern {
-    pub static __MIDL_itf_sapiddk_0000_0010_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk_0000_0010_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapiddk51::{
     ISpTTSEngine, ISpTTSEngineVtbl,
     SPWORDENTRY,
     SPRULEENTRY,
@@ -94,12 +59,6 @@ pub use um::sapiddk51::{
     SPTRANSITIONPROPERTY,
     SPSTATEINFO,
     SPPATHENTRY,
-};
-extern {
-    pub static __MIDL_itf_sapiddk_0000_0011_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk_0000_0011_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapiddk51::{
     ISpCFGInterpreterSite, ISpCFGInterpreterSiteVtbl,
     ISpCFGInterpreter, ISpCFGInterpreterVtbl,
     SPCFGNOTIFY,
@@ -144,12 +103,8 @@ pub use um::sapiddk51::{
     SPRULEINFOOPT,
     SPRIO_NONE,
     SPPARSEINFO,
+    ISpSREngineSite, ISpSREngineSiteVtbl,
 };
-extern {
-    pub static __MIDL_itf_sapiddk_0000_0013_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk_0000_0013_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapiddk51::{ISpSREngineSite, ISpSREngineSiteVtbl};
 RIDL!(#[uuid(0x7bc6e012, 0x684a, 0x493e, 0xbd, 0xd4, 0x2b, 0xf5, 0xfb, 0xf4, 0x8c, 0xfe)]
 interface ISpSREngineSite2(ISpSREngineSite2Vtbl) : ISpSREngineSite(ISpSREngineSiteVtbl) {
     fn AddEventEx(
@@ -172,12 +127,8 @@ pub use um::sapiddk51::{
     SPPROPSRC_RECO_INST,
     SPPROPSRC_RECO_CTX,
     SPPROPSRC_RECO_GRAMMAR,
+    ISpSREngine, ISpSREngineVtbl,
 };
-extern {
-    pub static __MIDL_itf_sapiddk_0000_0015_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk_0000_0015_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
-pub use um::sapiddk51::{ISpSREngine, ISpSREngineVtbl};
 RIDL!(#[uuid(0x7ba627d8, 0x33f9, 0x4375, 0x90, 0xc5, 0x99, 0x85, 0xae, 0xe5, 0xed, 0xe5)]
 interface ISpSREngine2(ISpSREngine2Vtbl): ISpSREngine(ISpSREngineVtbl) {
     fn PrivateCallImmediate(
@@ -234,10 +185,6 @@ interface ISpSREngine2(ISpSREngine2Vtbl): ISpSREngine(ISpSREngineVtbl) {
     ) -> HRESULT
 });
 pub use um::sapiddk51::SPPHRASEALTREQUEST;
-extern {
-    pub static __MIDL_itf_sapiddk_0000_0017_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk_0000_0017_v0_0_s_ifspec: RPC_IF_HANDLE;
-}
 RIDL!(#[uuid(0xfece8294, 0x2be1, 0x408f, 0x8e, 0x68, 0x2d, 0xe3, 0x77, 0x09, 0x2f, 0x0e)]
 interface ISpSRAlternates(ISpSRAlternatesVtbl): IUnknown(IUnknownVtbl) {
     fn GetAlternates(
@@ -288,7 +235,3 @@ extern {
     pub static CLSID_SpW3CGrammarCompiler: CLSID;
 }
 pub use um::sapiddk51::CLSID_SpGramCompBackend;
-extern {
-    pub static __MIDL_itf_sapiddk_0000_0022_v0_0_c_ifspec: RPC_IF_HANDLE;
-    pub static __MIDL_itf_sapiddk_0000_0022_v0_0_s_ifspec: RPC_IF_HANDLE;
-}

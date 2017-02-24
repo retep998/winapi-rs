@@ -33,7 +33,6 @@
 #[cfg(feature = "shared-mmreg")] pub mod mmreg;
 #[cfg(feature = "shared-ntdef")] pub mod ntdef;
 #[cfg(feature = "shared-ntstatus")] pub mod ntstatus;
-#[cfg(feature = "shared-rpcdce")] pub mod rpcdce;
 #[cfg(feature = "shared-rpcndr")] pub mod rpcndr;
 #[cfg(feature = "shared-sspi")]  pub mod sspi;
 #[cfg(feature = "shared-usb")] pub mod usb;
