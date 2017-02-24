@@ -7,6 +7,7 @@ documentation = "https://retep998.github.io/doc/winapi/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["windows", "ffi", "win32", "com", "directx"]
+categories = ["os::windows-apis"]
 license = "MIT/Apache-2.0"
 include = ["src/**/*", "Cargo.toml", "LICENSE-MIT", "LICENSE-APACHE", "build.rs", "README.md"]
 build = "build.rs"
