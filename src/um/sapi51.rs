@@ -153,13 +153,13 @@ pub const SP_HIGH_CONFIDENCE: c_char = 1;
 pub const DEFAULT_WEIGHT: c_float = 1.0;
 pub const SP_MAX_WORD_LENGTH: ULONG = 128;
 pub const SP_MAX_PRON_LENGTH: ULONG = 384;
-pub struct ISpNotifyCallback; // TODO
-/*RIDL!(interface ISpNotifyCallback(ISpNotifyCallbackVtbl) {
+RIDL!(#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
+interface ISpNotifyCallback(ISpNotifyCallbackVtbl) {
     fn NotifyCallback(
         wParam: WPARAM,
         lParam: LPARAM
     ) -> HRESULT
-});*/
+});
 FN!(stdcall SPNOTIFYCALLBACK(wParam: WPARAM, lParam: LPARAM) -> ());
 RIDL!(#[uuid(0x5eff4aef, 0x8487, 0x11d2, 0x96, 0x1c, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0x28)]
 interface ISpNotifySource(ISpNotifySourceVtbl): IUnknown(IUnknownVtbl) {
@@ -421,39 +421,45 @@ ENUM!{enum SPEVENTENUM {
     SPEI_RESERVED2 = 33,
     SPEI_RESERVED3 = 63,
 }}
-pub const SPFEI_FLAGCHECK: u64 = (1 << SPEI_RESERVED1 as u64) | (1 << SPEI_RESERVED2 as u64);
-pub const SPFEI_ALL_TTS_EVENTS: u64 = 0x000000000000FFFE | SPFEI_FLAGCHECK;
-pub const SPFEI_ALL_SR_EVENTS: u64 = 0x003FFFFC00000000 | SPFEI_FLAGCHECK;
-pub const SPFEI_ALL_EVENTS: u64 = 0xEFFFFFFFFFFFFFFF;
+pub const SPFEI_FLAGCHECK: ULONGLONG = (1 << SPEI_RESERVED1) | (1 << SPEI_RESERVED2);
+pub const SPFEI_ALL_TTS_EVENTS: ULONGLONG = 0x000000000000FFFE | SPFEI_FLAGCHECK;
+pub const SPFEI_ALL_SR_EVENTS: ULONGLONG = 0x003FFFFC00000000 | SPFEI_FLAGCHECK;
+pub const SPFEI_ALL_EVENTS: ULONGLONG = 0xEFFFFFFFFFFFFFFF;
 #[inline]
 pub fn SPFEI(SPEI_ord: SPEVENTENUM) -> ULONGLONG {
     (1 << SPEI_ord as ULONGLONG) | SPFEI_FLAGCHECK
 }
-// TODO: Use BITFIELD! for eEventId and elParamType?
 STRUCT!{struct SPEVENT {
-    eEventId: WORD,
-    elParamType: WORD,
+    bitfields: DWORD,
     ulStreamNum: ULONG,
     ullAudioStreamOffset: ULONGLONG,
     wParam: WPARAM,
     lParam: LPARAM,
 }}
+BITFIELD!{SPEVENT bitfields: SPEVENTENUM [ eEventId set_eEventId[0..16], ]}
+BITFIELD!{SPEVENT bitfields: SPEVENTLPARAMTYPE [ elParamType set_elParamType[16..32], ]}
 STRUCT!{struct SPSERIALIZEDEVENT {
-    eEventId: WORD,
-    elParamType: WORD,
+    bitfields: DWORD,
     ulStreamNum: ULONG,
     ullAudioStreamOffset: ULONGLONG,
     SerializedwParam: ULONG,
     SerializedlParam: LONG,
 }}
+BITFIELD!{SPSERIALIZEDEVENT bitfields: SPEVENTENUM [ eEventId set_eEventId[0..16], ]}
+BITFIELD!{SPSERIALIZEDEVENT bitfields: SPEVENTLPARAMTYPE [ elParamType set_elParamType[16..32], ]}
 STRUCT!{struct SPSERIALIZEDEVENT64 {
-    eEventId: WORD,
-    elParamType: WORD,
+    bitfields: DWORD,
     ulStreamNum: ULONG,
     ullAudioStreamOffset: ULONGLONG,
     SerializedwParam: ULONGLONG,
     SerializedlParam: LONGLONG,
 }}
+BITFIELD!{SPSERIALIZEDEVENT64 bitfields: SPEVENTENUM [
+    eEventId set_eEventId[0..16],
+]}
+BITFIELD!{SPSERIALIZEDEVENT64 bitfields: SPEVENTLPARAMTYPE [
+    elParamType set_elParamType[16..32],
+]}
 ENUM!{enum SPINTERFERENCE {
     SPINTERFERENCE_NONE = 0,
     SPINTERFERENCE_NOISE,

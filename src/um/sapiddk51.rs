@@ -256,7 +256,9 @@ STRUCT!{struct SPTRANSITIONENTRY {
     hRule: SPRULEHANDLE,
     pvClientRuleContext: *mut c_void,
 }}
-// TODO: UNION! for SPTRANSITIONENTRY
+UNION!{SPTRANSITIONENTRY, hRuleInitialState, hWord, hWord_mut, SPWORDHANDLE}
+UNION!{SPTRANSITIONENTRY, hRule, pvClientWordContext, pvClientWordContext_mut, *mut c_void}
+UNION!{SPTRANSITIONENTRY, hRuleInitialState, pvGrammarCookie, pvGrammarCookie_mut, *mut c_void}
 STRUCT!{struct SPTRANSITIONPROPERTY {
     pszName: LPCWSTR,
     ulId: ULONG,
