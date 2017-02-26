@@ -45,6 +45,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "shared-dxgi1_2",
     "shared-dxgi1_3",
     "shared-dxgi1_4",
+    "shared-dxgi1_5",
     "shared-dxgiformat",
     "shared-dxgitype",
     "shared-guiddef",
@@ -82,6 +83,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "shared-dxgi1_2" = ["shared-basetsd", "shared-dxgi", "shared-dxgiformat", "shared-dxgitype", "shared-guiddef", "shared-minwindef", "shared-windef", "um-minwinbase", "um-unknwnbase", "um-winnt"]
 "shared-dxgi1_3" = ["shared-dxgi", "shared-dxgi1_2", "shared-dxgiformat", "shared-minwindef", "shared-windef", "um-unknwnbase", "um-winnt"]
 "shared-dxgi1_4" = ["shared-basetsd", "shared-dxgi1_2", "shared-dxgi1_3", "shared-dxgiformat", "shared-dxgitype", "shared-guiddef", "shared-minwindef", "um-unknwnbase", "um-winnt"]
+"shared-dxgi1_5" = ["shared-dxgi1_4"]
 "shared-dxgiformat" = []
 "shared-dxgitype" = ["shared-minwindef", "shared-dxgiformat", "shared-d3d9types"]
 "shared-guiddef" = []

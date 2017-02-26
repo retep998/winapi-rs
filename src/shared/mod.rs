@@ -19,6 +19,7 @@
 #[cfg(feature = "shared-dxgi1_2")] pub mod dxgi1_2;
 #[cfg(feature = "shared-dxgi1_3")] pub mod dxgi1_3;
 #[cfg(feature = "shared-dxgi1_4")] pub mod dxgi1_4;
+#[cfg(feature = "shared-dxgi1_5")] pub mod dxgi1_5;
 #[cfg(feature = "shared-dxgiformat")] pub mod dxgiformat;
 #[cfg(feature = "shared-dxgitype")] pub mod dxgitype;
 #[cfg(feature = "shared-guiddef")] pub mod guiddef;
