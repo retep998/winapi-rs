@@ -20,13 +20,8 @@ extern "system" {
     // pub fn DAD_ShowDragImage();
     // pub fn DoEnvironmentSubstA();
     // pub fn DoEnvironmentSubstW();
-    pub fn DragAcceptFiles(hWnd: HWND, fAccept: BOOL);
-    pub fn DragFinish(hDrop: HDROP);
     // pub fn DragQueryFile();
-    pub fn DragQueryFileA(hDrop: HDROP, iFile: UINT, lpszFile: LPSTR, cch: UINT) -> UINT;
     // pub fn DragQueryFileAorW();
-    pub fn DragQueryFileW(hDrop: HDROP, iFile: UINT, lpszFile: LPWSTR, cch: UINT) -> UINT;
-    pub fn DragQueryPoint(hDrop: HDROP, lppt: *mut POINT) -> BOOL;
     // pub fn DriveType();
     // pub fn DuplicateIcon();
     // pub fn ExtractAssociatedIconA();
@@ -302,25 +297,15 @@ extern "system" {
     // pub fn SetCurrentProcessExplicitAppUserModelID();
     // pub fn ShellAboutA();
     // pub fn ShellAboutW();
-    pub fn ShellExecuteA(
-        hwnd: HWND, lpOperation: LPCSTR, lpFile: LPCSTR, lpParameters: LPCSTR, lpDirectory: LPCSTR,
-        nShowCmd: c_int
-    ) -> HINSTANCE;
     // pub fn ShellExecuteEx();
     // pub fn ShellExecuteExA();
     // pub fn ShellExecuteExW();
-    pub fn ShellExecuteW(
-        hwnd: HWND, lpOperation: LPCWSTR, lpFile: LPCWSTR, lpParameters: LPCWSTR,
-        lpDirectory: LPCWSTR, nShowCmd: c_int
-    ) -> HINSTANCE;
     // pub fn ShellHookProc();
     // pub fn Shell_GetCachedImageIndex();
     // pub fn Shell_GetCachedImageIndexA();
     // pub fn Shell_GetCachedImageIndexW();
     // pub fn Shell_GetImageLists();
     // pub fn Shell_MergeMenus();
-     pub fn Shell_NotifyIconA(dwMessage: DWORD, lpData: PNOTIFYICONDATAA) -> BOOL;
-     pub fn Shell_NotifyIconW(dwMessage: DWORD, lpData: PNOTIFYICONDATAW) -> BOOL;
     // pub fn Shell_NotifyIconGetRect();
     // pub fn SignalFileOpen();
     // pub fn StgMakeUniqueName();
