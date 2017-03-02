@@ -5,8 +5,8 @@
 use shared::guiddef::GUID;
 use shared::minwindef::{BOOL, BYTE, DWORD, LPVOID};
 use um::mscat::{CRYPTCATMEMBER, CRYPTCATSTORE};
-use um::winnt::{HANDLE, LPCWSTR, PWSTR, WCHAR};
 use um::wincrypt::{CRYPT_ALGORITHM_IDENTIFIER, CRYPT_ATTRIBUTE_TYPE_VALUE, CRYPT_HASH_BLOB, HCRYPTPROV};
+use um::winnt::{HANDLE, LPCWSTR, PWSTR, WCHAR};
 
 STRUCT!{struct SIP_SUBJECTINFO {
     cbSize: DWORD,

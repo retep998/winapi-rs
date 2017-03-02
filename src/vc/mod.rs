@@ -5,5 +5,5 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Headers that come with VC. Notably, these are not part of the Windows SDK.
-#[cfg(feature = "vc-excpt")] pub mod excpt;
-#[cfg(feature = "vc-vcruntime")] pub mod vcruntime;
+#[cfg(feature = "excpt")] pub mod excpt;
+#[cfg(feature = "vcruntime")] pub mod vcruntime;

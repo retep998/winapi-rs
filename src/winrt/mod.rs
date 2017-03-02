@@ -4,6 +4,6 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-#[cfg(feature = "winrt-activation")] pub mod activation;
-#[cfg(feature = "winrt-hstring")] pub mod hstring;
-#[cfg(feature = "winrt-inspectable")] pub mod inspectable;
+#[cfg(feature = "activation")] pub mod activation;
+#[cfg(feature = "hstring")] pub mod hstring;
+#[cfg(feature = "inspectable")] pub mod inspectable;

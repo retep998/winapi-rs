@@ -1,8 +1,8 @@
 // Copyright © 2015, skdltmxn
 // Licensed under the MIT License <LICENSE.md>
 // This file contains structures, function prototypes, and definitions for the NetDfs API
-use shared::minwindef::{ULONG, DWORD, USHORT};
 use shared::guiddef::{GUID};
+use shared::minwindef::{ULONG, DWORD, USHORT};
 use um::winnt::{LPWSTR, ULONGLONG, PSECURITY_DESCRIPTOR};
 
 pub const DFS_VOLUME_STATES: DWORD = 0xF;

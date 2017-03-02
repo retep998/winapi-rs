@@ -7,7 +7,7 @@
 #![cfg(windows)]
 extern crate winapi;
 use std::mem::{size_of, align_of};
-#[cfg(all(target_arch = "x86", feature = "shared-d3d9caps"))] #[test]
+#[cfg(all(target_arch = "x86", feature = "d3d9caps"))] #[test]
 fn shared_d3d9caps() {
     use winapi::shared::d3d9caps::*;
     assert_eq!(size_of::<D3DVSHADERCAPS2_0>(), 16);
@@ -22,7 +22,7 @@ fn shared_d3d9caps() {
     assert_eq!(size_of::<D3DCAPS9>(), 304);
     assert_eq!(align_of::<D3DCAPS9>(), 4);
 }
-#[cfg(all(target_arch = "x86_64", feature = "shared-d3d9caps"))] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "d3d9caps"))] #[test]
 fn shared_d3d9caps() {
     use winapi::shared::d3d9caps::*;
     assert_eq!(size_of::<D3DVSHADERCAPS2_0>(), 16);
@@ -36,7 +36,7 @@ fn shared_d3d9caps() {
     assert_eq!(size_of::<D3DCAPS9>(), 304);
     assert_eq!(align_of::<D3DCAPS9>(), 4);
 }
-#[cfg(all(target_arch = "x86", feature = "shared-d3d9types"))] #[test]
+#[cfg(all(target_arch = "x86", feature = "d3d9types"))] #[test]
 fn shared_d3d9types() {
     use winapi::shared::d3d9types::*;
     assert_eq!(size_of::<D3DVECTOR>(), 12);
@@ -187,7 +187,7 @@ fn shared_d3d9types() {
     // FIXME packed(4)
     // assert_eq!(align_of::<D3DAES_CTR_IV>(), 4);
 }
-#[cfg(all(target_arch = "x86_64", feature = "shared-d3d9types"))] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "d3d9types"))] #[test]
 fn shared_d3d9types() {
     use winapi::shared::d3d9types::*;
     assert_eq!(size_of::<D3DVECTOR>(), 12);
@@ -333,31 +333,31 @@ fn shared_d3d9types() {
     assert_eq!(size_of::<D3DAES_CTR_IV>(), 16);
     assert_eq!(align_of::<D3DAES_CTR_IV>(), 8);
 }
-#[cfg(all(target_arch = "x86", feature = "shared-guiddef"))] #[test]
+#[cfg(all(target_arch = "x86", feature = "guiddef"))] #[test]
 fn shared_guiddef() {
     use winapi::shared::guiddef::*;
     assert_eq!(size_of::<GUID>(), 16);
     assert_eq!(align_of::<GUID>(), 4);
 }
-#[cfg(all(target_arch = "x86_64", feature = "shared-guiddef"))] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "guiddef"))] #[test]
 fn shared_guiddef() {
     use winapi::shared::guiddef::*;
     assert_eq!(size_of::<GUID>(), 16);
     assert_eq!(align_of::<GUID>(), 4);
 }
-#[cfg(all(target_arch = "x86", feature = "shared-minwindef"))] #[test]
+#[cfg(all(target_arch = "x86", feature = "minwindef"))] #[test]
 fn shared_minwindef() {
     use winapi::shared::minwindef::*;
     assert_eq!(size_of::<FILETIME>(), 8);
     assert_eq!(align_of::<FILETIME>(), 4);
 }
-#[cfg(all(target_arch = "x86_64", feature = "shared-minwindef"))] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "minwindef"))] #[test]
 fn shared_minwindef() {
     use winapi::shared::minwindef::*;
     assert_eq!(size_of::<FILETIME>(), 8);
     assert_eq!(align_of::<FILETIME>(), 4);
 }
-#[cfg(all(target_arch = "x86", feature = "shared-windef"))] #[test]
+#[cfg(all(target_arch = "x86", feature = "windef"))] #[test]
 fn shared_windef() {
     use winapi::shared::windef::*;
     assert_eq!(size_of::<RECT>(), 16);
@@ -373,7 +373,7 @@ fn shared_windef() {
     assert_eq!(size_of::<POINTS>(), 4);
     assert_eq!(align_of::<POINTS>(), 2);
 }
-#[cfg(all(target_arch = "x86_64", feature = "shared-windef"))] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "windef"))] #[test]
 fn shared_windef() {
     use winapi::shared::windef::*;
     assert_eq!(size_of::<RECT>(), 16);
@@ -389,7 +389,7 @@ fn shared_windef() {
     assert_eq!(size_of::<POINTS>(), 4);
     assert_eq!(align_of::<POINTS>(), 2);
 }
-#[cfg(all(target_arch = "x86", feature = "um-wininet"))] #[test]
+#[cfg(all(target_arch = "x86", feature = "wininet"))] #[test]
 fn um_wininet() {
     use winapi::um::wininet::*;
     assert_eq!(size_of::<INTERNET_ASYNC_RESULT>(), 8);
@@ -495,7 +495,7 @@ fn um_wininet() {
     assert_eq!(size_of::<AutoProxyHelperFunctions>(), 4);
     assert_eq!(align_of::<AutoProxyHelperFunctions>(), 4);
 }
-#[cfg(all(target_arch = "x86_64", feature = "um-wininet"))] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "wininet"))] #[test]
 fn um_wininet() {
     use winapi::um::wininet::*;
     assert_eq!(size_of::<INTERNET_ASYNC_RESULT>(), 16);
@@ -601,7 +601,7 @@ fn um_wininet() {
     assert_eq!(size_of::<AutoProxyHelperFunctions>(), 8);
     assert_eq!(align_of::<AutoProxyHelperFunctions>(), 8);
 }
-#[cfg(all(target_arch = "x86", feature = "shared-wtypesbase"))] #[test]
+#[cfg(all(target_arch = "x86", feature = "wtypesbase"))] #[test]
 fn shared_wtypesbase() {
     use winapi::shared::wtypesbase::*;
     assert_eq!(size_of::<COAUTHIDENTITY>(), 28);
@@ -629,7 +629,7 @@ fn shared_wtypesbase() {
     assert_eq!(size_of::<BLOB>(), 8);
     assert_eq!(align_of::<BLOB>(), 4);
 }
-#[cfg(all(target_arch = "x86_64", feature = "shared-wtypesbase"))] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "wtypesbase"))] #[test]
 fn shared_wtypesbase() {
     use winapi::shared::wtypesbase::*;
     assert_eq!(size_of::<COAUTHIDENTITY>(), 48);

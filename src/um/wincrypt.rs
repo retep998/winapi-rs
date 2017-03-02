@@ -6,8 +6,8 @@ use shared::basetsd::{ULONG_PTR};
 use shared::guiddef::{GUID};
 use shared::minwindef::*;
 use um::ncrypt::{NCRYPT_KEY_HANDLE};
-use um::winnt::{LPCSTR, LPCWSTR, LPSTR, HANDLE, LPWSTR, LONG, WCHAR, CHAR};
 use vc::vcruntime::{size_t};
+use um::winnt::{LPCSTR, LPCWSTR, LPSTR, HANDLE, LPWSTR, LONG, WCHAR, CHAR};
 
 //108
 pub const ALG_CLASS_ANY: ALG_ID = 0;
