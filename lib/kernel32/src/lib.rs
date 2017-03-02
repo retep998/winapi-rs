@@ -1894,7 +1894,6 @@ extern "system" {
         UmsThreadInformation: PVOID, UmsThreadInformationLength: ULONG, ReturnLength: PULONG,
     ) -> BOOL;
     pub fn QueryUnbiasedInterruptTime(UnbiasedTime: PULONGLONG) -> BOOL;
-    pub fn QueueUserAPC(pfnAPC: PAPCFUNC, hThread: HANDLE, dwData: ULONG_PTR) -> DWORD;
     pub fn QueueUserWorkItem(
         Function: LPTHREAD_START_ROUTINE, Context: PVOID, Flags: ULONG,
     ) -> BOOL;

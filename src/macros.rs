@@ -206,11 +206,11 @@ macro_rules! BITFIELD {
 macro_rules! ENUM {
     {enum $name:ident { $($variant:ident = $value:expr,)+ }} => {
         pub type $name = u32;
-        $(pub const $variant: u32 = $value;)+
+        $(pub const $variant: $name = $value;)+
     };
     {enum $name:ident { $variant:ident = $value:expr, $($rest:tt)* }} => {
         pub type $name = u32;
-        pub const $variant: u32 = $value;
+        pub const $variant: $name = $value;
         ENUM!{@gen $name $variant, $($rest)*}
     };
     {enum $name:ident { $variant:ident, $($rest:tt)* }} => {

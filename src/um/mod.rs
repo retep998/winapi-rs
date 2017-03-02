@@ -61,6 +61,7 @@ pub mod gl;
 #[cfg(feature = "um-oaidl")] pub mod oaidl;
 #[cfg(feature = "um-objidlbase")] pub mod objidlbase;
 #[cfg(feature = "um-pdh")] pub mod pdh;
+#[cfg(feature = "um-processthreadsapi")] pub mod processthreadsapi;
 #[cfg(feature = "um-propidl")] pub mod propidl;
 #[cfg(feature = "um-propsys")] pub mod propsys;
 #[cfg(feature = "um-prsht")] pub mod prsht;

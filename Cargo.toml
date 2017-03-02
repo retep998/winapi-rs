@@ -161,6 +161,7 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
     "um-oaidl",
     "um-objidlbase",
     "um-pdh",
+    "um-processthreadsapi",
     "um-propidl",
     "um-propsys",
     "um-prsht",
@@ -239,11 +240,12 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "um-oaidl" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "shared-wtypes", "shared-wtypesbase", "um-unknwnbase", "um-winnt"]
 "um-objidlbase" = ["shared-guiddef", "shared-minwindef", "shared-wtypesbase", "um-unknwnbase", "um-winnt"]
 "um-pdh" = ["shared-minwindef", "shared-wtypesbase", "um-winnt"]
+"um-processthreadsapi" = ["shared-basetsd", "shared-minwindef", "um-winnt", "kernel32"]
 "um-propidl" = ["shared-minwindef", "shared-wtypes"]
 "um-propsys" = ["um-unknwnbase"]
 "um-prsht" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-winnt", "um-winuser"]
 "um-setupapi" = ["shared-basetsd", "shared-devpropdef", "shared-guiddef", "shared-minwindef", "shared-windef", "um-commctrl", "um-prsht", "um-spapidef", "um-winnt", "um-winreg", "setupapi"]
-"um-shellapi" = ["shared-guiddef", "shared-minwindef", "shared-windef", "um-winnt"]
+"um-shellapi" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "shared-windef", "um-minwinbase", "um-processthreadsapi", "um-winnt", "um-winuser", "shell32", "shlwapi"]
 "um-spapidef" = ["shared-minwindef", "um-winnt"]
 "um-strmif" = ["um-winnt"]
 "um-unknwnbase" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
@@ -277,10 +279,12 @@ headers = ["headers-shared", "headers-um", "headers-vc", "headers-winrt"]
 "winrt-hstring" = ["um-winnt"]
 "winrt-inspectable" = ["shared-guiddef", "shared-minwindef", "um-unknwnbase", "um-winnt", "winrt-hstring"]
 libraries = [
+    "avrt",
     "kernel32",
     "ncrypt",
     "ole32",
     "setupapi",
+    "shell32",
     "wininet",
 ]
 "avrt" = []
@@ -288,4 +292,6 @@ libraries = [
 "ole32" = []
 "ncrypt" = []
 "setupapi" = []
+"shell32" = []
+"shlwapi" = []
 "wininet" = []
