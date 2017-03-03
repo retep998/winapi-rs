@@ -5,6 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 
+#[cfg(windows)]
 #[test]
 fn check_imports() {
     use std::collections::HashMap;
