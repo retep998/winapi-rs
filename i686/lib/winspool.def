@@ -1,0 +1,208 @@
+LIBRARY WINSPOOL.DRV
+EXPORTS
+AddPerMachineConnectionA@16 @206
+AddPerMachineConnectionW@16 @207
+DeletePerMachineConnectionA@8 @208
+DeletePerMachineConnectionW@8 @209
+EnumPerMachineConnectionsA@20 @210
+EnumPerMachineConnectionsW@20 @211
+EnumPrinterPropertySheets@16 @100
+ExternalConnectToLd64In32Server@4 @224
+ForceUnloadDriver@4 @215
+GetDefaultPrinterA@8 @201
+GetDefaultPrinterW@8 @203
+GetPrintClassObject@12 @251
+LoadPrinterDriver@4 @212
+PrintUICreateInstance@8 @228
+PrintUIWebPnpEntry@4 @226
+PrintUIWebPnpPostEntry@16 @227
+PublishPrinterA@24 @216
+PublishPrinterW@24 @217
+RefCntLoadDriver@16 @213
+RefCntUnloadDriver@8 @214
+RouterFreeBidiResponseContainer@4 @223
+SendRecvBidiData@16 @222
+SetDefaultPrinterA@4 @202
+SetDefaultPrinterW@4 @204
+SetPrintExecutionData@12 @254
+SetWinspoolOptions@8 @253
+SplReadPrinter@12 @205
+SpoolerSetPolicy@20 @250
+AbortPrinter@4
+AddFormA@12
+AddFormW@12
+AddJobA@20
+AddJobW@20
+AddMonitorA@12
+AddMonitorW@12
+AddPortA@12
+AddPortExA@16
+AddPortExW@16
+AddPortW@12
+AddPrintProcessorA@16
+AddPrintProcessorW@16
+AddPrintProvidorA@12
+AddPrintProvidorW@12
+AddPrinterA@12
+AddPrinterConnection2A@16
+AddPrinterConnection2W@16
+AddPrinterConnectionA@4
+AddPrinterConnectionW@4
+AddPrinterDriverA@12
+AddPrinterDriverExA@16
+AddPrinterDriverExW@16
+AddPrinterDriverW@12
+AddPrinterW@12
+AdvancedDocumentPropertiesA@20
+AdvancedDocumentPropertiesW@20
+ClosePrinter@4
+CloseSpoolFileHandle@8
+CommitSpoolData@12
+ConfigurePortA@12
+ConfigurePortW@12
+ConnectToPrinterDlg@8
+CorePrinterDriverInstalledA@44
+CorePrinterDriverInstalledW@44
+CreatePrintAsyncNotifyChannel@24
+CreatePrinterIC@8
+DEVICECAPABILITIES@20
+DeleteFormA@8
+DeleteFormW@8
+DeleteJobNamedProperty@12
+DeleteMonitorA@12
+DeleteMonitorW@12
+DeletePortA@12
+DeletePortW@12
+DeletePrintProcessorA@12
+DeletePrintProcessorW@12
+DeletePrintProvidorA@12
+DeletePrintProvidorW@12
+DeletePrinter@4
+DeletePrinterConnectionA@4
+DeletePrinterConnectionW@4
+DeletePrinterDataA@8
+DeletePrinterDataExA@12
+DeletePrinterDataExW@12
+DeletePrinterDataW@8
+DeletePrinterDriverA@12
+DeletePrinterDriverExA@20
+DeletePrinterDriverExW@20
+DeletePrinterDriverPackageA@12
+DeletePrinterDriverPackageW@12
+DeletePrinterDriverW@12
+DeletePrinterIC@4
+DeletePrinterKeyA@8
+DeletePrinterKeyW@8
+DevQueryPrint@12
+DevQueryPrintEx@4
+DeviceCapabilities@20
+DeviceCapabilitiesA@20
+DeviceCapabilitiesW@20
+DevicePropertySheets@8
+DocumentPropertiesA@24
+DocumentPropertiesW@24
+DocumentPropertySheets@8
+EXTDEVICEMODE@32
+EndDocPrinter@4
+EndPagePrinter@4
+EnumFormsA@24
+EnumFormsW@24
+EnumJobNamedProperties@16
+EnumJobsA@32
+EnumJobsW@32
+EnumMonitorsA@24
+EnumMonitorsW@24
+EnumPortsA@24
+EnumPortsW@24
+EnumPrintProcessorDatatypesA@28
+EnumPrintProcessorDatatypesW@28
+EnumPrintProcessorsA@28
+EnumPrintProcessorsW@28
+EnumPrinterDataA@36
+EnumPrinterDataExA@24
+EnumPrinterDataExW@24
+EnumPrinterDataW@36
+EnumPrinterDriversA@28
+EnumPrinterDriversW@28
+EnumPrinterKeyA@20
+EnumPrinterKeyW@20
+EnumPrintersA@28
+EnumPrintersW@28
+ExtDeviceMode@32
+FindClosePrinterChangeNotification@4
+FindFirstPrinterChangeNotification@16
+FindNextPrinterChangeNotification@16
+FlushPrinter@20
+FreePrintNamedPropertyArray@8
+FreePrintPropertyValue@4
+FreePrinterNotifyInfo@4
+GetCorePrinterDriversA@20
+GetCorePrinterDriversW@20
+GetFormA@24
+GetFormW@24
+GetJobA@24
+GetJobNamedPropertyValue@16
+GetJobW@24
+GetPrintExecutionData@4
+GetPrintOutputInfo@16
+GetPrintProcessorDirectoryA@24
+GetPrintProcessorDirectoryW@24
+GetPrinterA@20
+GetPrinterDataA@24
+GetPrinterDataExA@28
+GetPrinterDataExW@28
+GetPrinterDataW@24
+GetPrinterDriver2A@28
+GetPrinterDriver2W@28
+GetPrinterDriverA@24
+GetPrinterDriverDirectoryA@24
+GetPrinterDriverDirectoryW@24
+GetPrinterDriverPackagePathA@28
+GetPrinterDriverPackagePathW@28
+GetPrinterDriverW@24
+GetPrinterW@20
+GetSpoolFileHandle@4
+InstallPrinterDriverFromPackageA@20
+InstallPrinterDriverFromPackageW@20
+IsValidDevmodeA@8
+IsValidDevmodeW@8
+OpenPrinter2A@16
+OpenPrinter2W@16
+OpenPrinterA@12
+OpenPrinterW@12
+PlayGdiScriptOnPrinterIC@24
+PrinterMessageBoxA@24
+PrinterMessageBoxW@24
+PrinterProperties@8
+ReadPrinter@16
+RegisterForPrintAsyncNotifications@24
+ReportJobProcessingProgress@16
+ResetPrinterA@8
+ResetPrinterW@8
+ScheduleJob@8
+SeekPrinter@24
+SetFormA@16
+SetFormW@16
+SetJobA@20
+SetJobNamedProperty@12
+SetJobW@20
+SetPortA@16
+SetPortW@16
+SetPrinterA@16
+SetPrinterDataA@20
+SetPrinterDataExA@24
+SetPrinterDataExW@24
+SetPrinterDataW@20
+SetPrinterW@16
+SplDriverUnloadComplete@4
+SpoolerPrinterEvent@20
+StartDocDlgA@8
+StartDocPrinterA@12
+StartDocPrinterW@12
+StartPagePrinter@4
+UnRegisterForPrintAsyncNotifications@4
+UploadPrinterDriverPackageA@28
+UploadPrinterDriverPackageW@28
+WaitForPrinterChange@8
+WritePrinter@16
+XcvDataW@32

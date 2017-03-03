@@ -1,0 +1,22 @@
+LIBRARY AVRT.dll
+EXPORTS
+AvCreateTaskIndex@12
+AvQuerySystemResponsiveness@8
+AvQueryTaskIndexValue@8
+AvRevertMmThreadCharacteristics@4
+AvRtCreateThreadOrderingGroup@16
+AvRtCreateThreadOrderingGroupExA@20
+AvRtCreateThreadOrderingGroupExW@20
+AvRtDeleteThreadOrderingGroup@4
+AvRtJoinThreadOrderingGroup@12
+AvRtLeaveThreadOrderingGroup@4
+AvRtWaitOnThreadOrderingGroup@4
+AvSetMmMaxThreadCharacteristicsA@12
+AvSetMmMaxThreadCharacteristicsW@12
+AvSetMmThreadCharacteristicsA@8
+AvSetMmThreadCharacteristicsW@8
+AvSetMmThreadPriority@8
+AvSetMultimediaMode@8
+AvTaskIndexYield@12
+AvTaskIndexYieldCancel@4
+AvThreadOpenTaskIndex@4
