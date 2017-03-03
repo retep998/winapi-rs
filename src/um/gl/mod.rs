@@ -6,4 +6,4 @@
 // except according to those terms.
 //! Headers for user mode only
 
-#[cfg(feature = "um-gl")] pub mod gl;
+#[cfg(feature = "gl-gl")] pub mod gl;

@@ -4,9 +4,8 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
-use shared::minwindef::{BOOL, LPDWORD, PULONG};
 use shared::guiddef::GUID;
+use shared::minwindef::{BOOL, LPDWORD, PULONG};
 use um::winnt::{HANDLE, PLARGE_INTEGER, LONGLONG, PHANDLE, LPCWSTR, LPCSTR};
 
 ENUM!{enum AVRT_PRIORITY {

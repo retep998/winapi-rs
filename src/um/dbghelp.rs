@@ -2,13 +2,13 @@
 // Licensed under the MIT License <LICENSE.md>
 //! DbgHelp include file
 use shared::basetsd::{DWORD64, ULONG64};
+use shared::guiddef::{GUID};
 use shared::minwindef::{BOOL, ULONG, USHORT, UCHAR, PUCHAR, WORD, DWORD, LPDWORD};
 use um::winnt::{
     PVOID, PSTR, PWSTR, PCWSTR, PCSTR, WCHAR, CHAR,HANDLE, BOOLEAN, PIMAGE_SECTION_HEADER,
-    LIST_ENTRY 
+    LIST_ENTRY
 };
 use vc::vcruntime::{size_t};
-use shared::guiddef::{GUID};
 
 #[cfg(target_arch = "x86_64")]
 use um::winnt::{PIMAGE_NT_HEADERS64};
