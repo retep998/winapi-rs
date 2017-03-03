@@ -1,0 +1,13 @@
+LIBRARY VSSAPI.DLL
+EXPORTS
+CreateVssBackupComponentsInternal@4
+CreateVssExamineWriterMetadataInternal@8
+CreateVssExpressWriterInternal@4
+CreateVssSnapshotSetDescription@24
+CreateWriter@8
+CreateWriterEx@8
+GetProviderMgmtInterfaceInternal@36
+IsVolumeSnapshottedInternal@12
+LoadVssSnapshotSetDescription@24
+ShouldBlockRevertInternal@8
+VssFreeSnapshotPropertiesInternal@4
