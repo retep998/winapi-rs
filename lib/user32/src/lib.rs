@@ -873,7 +873,7 @@ extern "system" {
     pub fn RegisterWindowMessageW(lpString: LPCWSTR) -> UINT;
     pub fn ReleaseCapture() -> BOOL;
     pub fn ReleaseDC(hWnd: HWND, hDC: HDC) -> c_int;
-    // pub fn RemoveClipboardFormatListener();
+    pub fn RemoveClipboardFormatListener(hWnd: HWND) -> BOOL;
     // pub fn RemoveMenu();
     pub fn RemovePropA(hWnd: HWND, lpStr: LPCSTR) -> HANDLE;
     pub fn RemovePropW(hWnd: HWND, lpStr: LPCWSTR) -> HANDLE;
