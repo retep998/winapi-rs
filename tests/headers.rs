@@ -37,34 +37,52 @@ fn check_imports() {
         *errors += 1;
     }
 
-    fn check_file_deps<P: AsRef<Path>>(p: P, files_deps: &HashMap<String, Vec<String>>,
-                                       errors: &mut u32) {
+    fn check_file_deps<P: AsRef<Path>>(p: P, files_deps: &mut HashMap<String, Vec<String>>,
+                                       errors: &mut u32, level: u32) {
         let r_p = p.as_ref();
-        let filename = r_p.file_name().unwrap().to_str().unwrap().to_owned();
-        let entry = files_deps.get(&filename);
-        if let Some(entry) = entry {
-            let file_content = read_file(r_p);
-            for line in file_content.lines() {
-                if line.starts_with("use ") {
-                    let include: Vec<&str> = line.split("::").skip(1).collect();
-                    if include.len() < 2 || include[0].starts_with('{') {
-                        continue
+        let filename = if level < 2 {
+            r_p.file_name().unwrap().to_str().unwrap().to_owned()
+        } else {
+            let values: Vec<String> = r_p.iter()
+                                         .skip(1)
+                                         .map(|x| x.to_str().unwrap().to_owned())
+                                         .collect();
+            values[values.len() - 2..].join("-")
+        };
+        {
+            let entry = files_deps.get(&filename);
+            if let Some(entry) = entry {
+                let file_content = read_file(r_p);
+                for line in file_content.lines() {
+                    if line.starts_with("use ") {
+                        let include: Vec<&str> = line.split("::").skip(1).collect();
+                        if include.len() < 2 || include[0].starts_with('{') {
+                            continue
+                        }
+                        let include = if include.len() > 2 {
+                            include[..include.len() - 1].join("-").to_owned()
+                        } else {
+                            include[0].to_owned()
+                        };
+                        check_if_in_build(&r_p, &include, &entry, errors);
                     }
-                    check_if_in_build(&r_p, &include[0], &entry, errors);
                 }
+            } else {
+                return
             }
         }
+        files_deps.remove(&filename);
     }
 
-    fn read_dirs<P: AsRef<Path>>(dir: P, files_deps: &HashMap<String, Vec<String>>,
-                                 errors: &mut u32) {
+    fn read_dirs<P: AsRef<Path>>(dir: P, files_deps: &mut HashMap<String, Vec<String>>,
+                                 errors: &mut u32, level: u32) {
         for entry in read_dir(dir).expect("read_dir failed") {
             let entry = entry.expect("entry failed");
             let path = entry.path();
             if path.is_dir() {
-                read_dirs(path, files_deps, errors);
+                read_dirs(path, files_deps, errors, level + 1);
             } else {
-                check_file_deps(path, files_deps, errors);
+                check_file_deps(path, files_deps, errors, level);
             }
         }
     }
@@ -91,6 +109,12 @@ fn check_imports() {
         }
     }
     let mut errors = 0;
-    read_dirs("src", &files_deps, &mut errors);
+    read_dirs("src", &mut files_deps, &mut errors, 0);
     assert!(errors == 0, "Missing declaration(s) found");
+    let keys: Vec<&String> = files_deps.keys().collect();
+    if !keys.is_empty() {
+        io::stderr().write(format!("file(s) not found: {:?}\n",
+                                   keys).as_bytes()).expect("stderr::write failed");
+        panic!();
+    }
 }
