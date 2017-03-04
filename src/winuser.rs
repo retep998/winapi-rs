@@ -2392,3 +2392,17 @@ pub const TPM_VERNEGANIMATION: ::UINT = 0x2000;
 pub const TPM_NOANIMATION: ::UINT = 0x4000;
 pub const TPM_LAYOUTRTL: ::UINT = 0x8000;
 pub const TPM_WORKAREA: ::UINT = 0x10000;
+
+// Dialog Box Command IDs
+pub const IDOK: ::c_int = 1;
+pub const IDCANCEL: ::c_int = 2;
+pub const IDABORT: ::c_int = 3;
+pub const IDRETRY: ::c_int = 4;
+pub const IDIGNORE: ::c_int = 5;
+pub const IDYES: ::c_int = 6;
+pub const IDNO: ::c_int = 7;
+pub const IDCLOSE: ::c_int = 8;
+pub const IDHELP: ::c_int = 9;
+pub const IDTRYAGAIN: ::c_int = 10;
+pub const IDCONTINUE: ::c_int = 11;
+pub const IDTIMEOUT: ::c_int = 32000;
