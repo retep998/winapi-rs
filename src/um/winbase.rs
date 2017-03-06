@@ -287,6 +287,11 @@ pub const CLRDTR: DWORD = 6;
 pub const RESETDEV: DWORD = 7;
 pub const SETBREAK: DWORD = 8;
 pub const CLRBREAK: DWORD = 9;
+//804
+pub const MS_CTS_ON: DWORD = 0x0010;
+pub const MS_DSR_ON: DWORD = 0x0020;
+pub const MS_RING_ON: DWORD = 0x0040;
+pub const MS_RLSD_ON: DWORD = 0x0080;
 //1729
 pub const SEM_FAILCRITICALERRORS: UINT = 0x0001;
 pub const SEM_NOGPFAULTERRORBOX: UINT = 0x0002;
