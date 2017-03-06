@@ -118,6 +118,13 @@ BITFIELD!(COMSTAT BitFields: DWORD [
     fReserved set_fReserved[7..32],
 ]);
 pub type LPCOMSTAT = *mut COMSTAT;
+pub const DTR_CONTROL_DISABLE: DWORD = 0x00;
+pub const DTR_CONTROL_ENABLE: DWORD = 0x01;
+pub const DTR_CONTROL_HANDSHAKE: DWORD = 0x02;
+pub const RTS_CONTROL_DISABLE: DWORD = 0x00;
+pub const RTS_CONTROL_ENABLE: DWORD = 0x01;
+pub const RTS_CONTROL_HANDSHAKE: DWORD = 0x02;
+pub const RTS_CONTROL_TOGGLE: DWORD = 0x03;
 //460
 STRUCT!{struct DCB {
     DCBlength: DWORD,
@@ -254,6 +261,22 @@ pub const ONE5STOPBITS: DWORD = 1;
 pub const TWOSTOPBITS: DWORD = 2;
 pub const IGNORE: DWORD = 0;
 pub const INFINITE: DWORD = 0xFFFFFFFF;
+//718
+pub const CBR_110: DWORD = 110;
+pub const CBR_300: DWORD = 300;
+pub const CBR_600: DWORD = 600;
+pub const CBR_1200: DWORD = 1200;
+pub const CBR_2400: DWORD = 2400;
+pub const CBR_4800: DWORD = 4800;
+pub const CBR_9600: DWORD = 9600;
+pub const CBR_14400: DWORD = 14400;
+pub const CBR_19200: DWORD = 19200;
+pub const CBR_38400: DWORD = 38400;
+pub const CBR_56000: DWORD = 56000;
+pub const CBR_57600: DWORD = 57600;
+pub const CBR_115200: DWORD = 115200;
+pub const CBR_128000: DWORD = 128000;
+pub const CBR_256000: DWORD = 256000;
 //1729
 pub const SEM_FAILCRITICALERRORS: UINT = 0x0001;
 pub const SEM_NOGPFAULTERRORBOX: UINT = 0x0002;
