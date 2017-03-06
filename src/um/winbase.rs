@@ -277,6 +277,16 @@ pub const CBR_57600: DWORD = 57600;
 pub const CBR_115200: DWORD = 115200;
 pub const CBR_128000: DWORD = 128000;
 pub const CBR_256000: DWORD = 256000;
+//781
+pub const SETXOFF: DWORD = 1;
+pub const SETXON: DWORD = 2;
+pub const SETRTS: DWORD = 3;
+pub const CLRRTS: DWORD = 4;
+pub const SETDTR: DWORD = 5;
+pub const CLRDTR: DWORD = 6;
+pub const RESETDEV: DWORD = 7;
+pub const SETBREAK: DWORD = 8;
+pub const CLRBREAK: DWORD = 9;
 //1729
 pub const SEM_FAILCRITICALERRORS: UINT = 0x0001;
 pub const SEM_NOGPFAULTERRORBOX: UINT = 0x0002;
