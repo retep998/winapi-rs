@@ -126,10 +126,12 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("winnt", &["basetsd", "excpt", "guiddef", "minwindef"], &[]),
     ("winreg", &["basetsd", "minwindef", "winnt"], &[]),
     ("winsock2", &["guiddef", "inaddr", "minwindef", "vcruntime", "winnt"], &[]),
-    ("winuser", &["basetsd", "minwindef", "windef", "wingdi", "winnt"], &[]),
+    ("winuser", &["basetsd", "guiddef", "limits", "minwinbase", "minwindef", "vadefs", "windef", "wingdi", "winnt"], &[]),
     ("xinput", &["minwindef", "winnt"], &[]),
     // vc
     ("excpt", &[], &[]),
+    ("limits", &[], &[]),
+    ("vadefs", &[], &[]),
     ("vcruntime", &[], &[]),
     // winrt
     ("activation", &["inspectable", "winnt"], &[]),

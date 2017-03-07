@@ -82,6 +82,7 @@ macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
         }
     }
 }
+#[macro_export]
 macro_rules! RIDL {
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) {$(
@@ -203,6 +204,7 @@ macro_rules! BITFIELD {
         )+}
     }
 }
+#[macro_export]
 macro_rules! ENUM {
     {enum $name:ident { $($variant:ident = $value:expr,)+ }} => {
         pub type $name = u32;
@@ -226,6 +228,7 @@ macro_rules! ENUM {
         ENUM!{@gen $name $variant, $($rest)*}
     };
 }
+#[macro_export]
 macro_rules! STRUCT {
     {$(#[$attrs:meta])* struct $name:ident { $($field:ident: $ftype:ty,)+ }} => {
         #[repr(C)] $(#[$attrs])*
