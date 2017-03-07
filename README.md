@@ -16,28 +16,43 @@ This branch is for winapi 0.3 which is a work in progress rewrite and as such is
 
 Cargo.toml:
 ```toml
-[dependencies]
+[target.'cfg(windows)'.dependencies]
 winapi = "0.2"
 user32-sys = "0.2"
 ```
 main.rs:
 ```Rust
-extern crate winapi;
-extern crate user32;
-use std::ffi::OsStr;
-use std::io::Error;
-use std::iter::once;
-use std::os::windows::ffi::OsStrExt;
-use std::ptr::null_mut;
+#[cfg(windows)] extern crate winapi;
+#[cfg(windows)] extern crate user32;
 
-fn main() {
+#[cfg(windows)]
+fn show_message() -> Result<(), std::io::Error> {
+    use std::ffi::OsStr;
+    use std::io::Error;
+    use std::iter::once;
+    use std::os::windows::ffi::OsStrExt;
+    use std::ptr::null_mut;
+
     let msg = "Hello, world!";
     let wide: Vec<u16> = OsStr::new(msg).encode_wide().chain(once(0)).collect();
     let ret = unsafe {
         user32::MessageBoxW(null_mut(), wide.as_ptr(), wide.as_ptr(), winapi::MB_OK)
     };
     if ret == 0 {
-        println!("Failed: {:?}", Error::last_os_error());
+        Err(Error::last_os_error())
     }
+    else {
+        Ok(())
+    }
+}
+
+#[cfg(not(windows))]
+fn show_message() -> Result<(), std::io::Error> {
+    println!("Hello, world!");
+    Ok(())
+}
+
+fn main() {
+    show_message().expect("failed to show message");
 }
 ```
