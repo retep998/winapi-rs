@@ -146,6 +146,8 @@ winuser = []
 xinput = []
 #vc
 excpt = []
+limits = []
+vadefs = []
 vcruntime = []
 #winrt
 activation = []
