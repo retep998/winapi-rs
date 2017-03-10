@@ -4,7 +4,7 @@ use ctypes::{c_void};
 use shared::basetsd::{UINT64, SIZE_T, UINT16, UINT8, LONG_PTR};
 use shared::dxgiformat::{DXGI_FORMAT};
 use shared::dxgitype::{DXGI_SAMPLE_DESC};
-use shared::guiddef::{REFGUID};
+use shared::guiddef::{REFGUID, REFIID};
 use shared::minwindef::{UINT, FLOAT, INT, BOOL, LPCVOID, DWORD, BYTE};
 use shared::ntdef::{DOUBLE};
 use shared::windef::{RECT};
@@ -2103,8 +2103,9 @@ interface ID3D12Fence(ID3D12FenceVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
     fn Signal(Value: UINT64) -> HRESULT
 });
 
-RIDL!(#[uuid(0x5b160d0f, 0xac1b, 0x4185, 0x8b, 0xa8, 0xb3, 0xae, 0x42, 0xa5, 0xa4, 0x55)]
-interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12CommandList(ID3D12CommandListVtbl) {
+RIDL!{#[uuid(0x5b160d0f, 0xac1b, 0x4185, 0x8b, 0xa8, 0xb3, 0xae, 0x42, 0xa5, 0xa4, 0x55)]
+interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl):
+    ID3D12CommandList(ID3D12CommandListVtbl) {
     fn Close() -> HRESULT,
     fn Reset(
         pAllocator: *mut ID3D12CommandAllocator,
@@ -2275,7 +2276,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         pArgumentBuffer: *mut ID3D12Resource, ArgumentBufferOffset: UINT64,
         pCountBuffer: *mut ID3D12Resource, CountBufferOffset: UINT64
     ) -> ()
-});
+}}
 
 RIDL!(#[uuid(0x6b3b2502, 0x6e51, 0x45b3, 0x90, 0xee, 0x98, 0x84, 0x26, 0x5e, 0x8d, 0xf3)]
 interface ID3D12Heap(ID3D12HeapVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
@@ -2324,14 +2325,31 @@ interface ID3D12Resource(ID3D12ResourceVtbl): ID3D12Pageable(ID3D12PageableVtbl)
     ) -> HRESULT
 });
 
-RIDL!(#[uuid(0x34ab647b, 0x3cc8, 0x46ac, 0x84, 0x1b, 0xc0, 0x96, 0x56, 0x45, 0xc0, 0x46)]
-interface ID3D12RootSignatureDeserializer(ID3D12RootSignatureDeserializerVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{#[uuid(0x34ab647b, 0x3cc8, 0x46ac, 0x84, 0x1b, 0xc0, 0x96, 0x56, 0x45, 0xc0, 0x46)]
+interface ID3D12RootSignatureDeserializer(ID3D12RootSignatureDeserializerVtbl):
+    IUnknown(IUnknownVtbl) {
     fn GetRootSignatureDesc() -> *const D3D12_ROOT_SIGNATURE_DESC
-});
+}}
 
-
-
-pub type PFN_D3D12_CREATE_DEVICE = extern "system" fn (_ : *mut IUnknown, _ : D3D_FEATURE_LEVEL, _ : REFGUID, _ : *mut *mut c_void) -> HRESULT;
-pub type PFN_D3D12_CREATE_ROOT_SIGNATURE_DESERIALIZER = extern "system" fn (pSrcData: LPCVOID, SrcDataSizeInBytes: SIZE_T, pRootSignatureDeserializerInterface: REFGUID, ppRootSignatureDeserializer: *mut *mut c_void) -> HRESULT;
-pub type PFN_D3D12_GET_DEBUG_INTERFACE = extern "system" fn (_ : REFGUID, _ : *mut *mut c_void) -> HRESULT;
-pub type PFN_D3D12_SERIALIZE_ROOT_SIGNATURE = extern "system" fn (pRootSignature: *const D3D12_ROOT_SIGNATURE_DESC, Version: D3D_ROOT_SIGNATURE_VERSION, ppBlob: *mut *mut ID3DBlob, ppErrorBlob: *mut *mut ID3DBlob) -> HRESULT;
+FN!{stdcall PFN_D3D12_CREATE_DEVICE(
+    *mut IUnknown,
+    D3D_FEATURE_LEVEL,
+    REFIID,
+    *mut *mut c_void
+) -> HRESULT}
+FN!{stdcall PFN_D3D12_CREATE_ROOT_SIGNATURE_DESERIALIZER(
+    pSrcData: LPCVOID,
+    SrcDataSizeInBytes: SIZE_T,
+    pRootSignatureDeserializerInterface: REFIID,
+    ppRootSignatureDeserializer: *mut *mut c_void
+) -> HRESULT}
+FN!{stdcall PFN_D3D12_GET_DEBUG_INTERFACE(
+    REFIID,
+    *mut *mut c_void
+) -> HRESULT}
+FN!{stdcall PFN_D3D12_SERIALIZE_ROOT_SIGNATURE(
+    pRootSignature: *const D3D12_ROOT_SIGNATURE_DESC,
+    Version: D3D_ROOT_SIGNATURE_VERSION,
+    ppBlob: *mut *mut ID3DBlob,
+    ppErrorBlob: *mut *mut ID3DBlob
+) -> HRESULT}

@@ -255,7 +255,6 @@ extern "system" {
         hInstance: HINSTANCE, lpTemplateName: LPCWSTR, hWndParent: HWND, lpDialogFunc: DLGPROC,
         dwInitParam: LPARAM,
     ) -> INT_PTR;
-    // pub fn DisableProcessWindowsGhosting();
     pub fn DispatchMessageA(lpmsg: *const MSG) -> LRESULT;
     pub fn DispatchMessageW(lpmsg: *const MSG) -> LRESULT;
     // pub fn DisplayConfigGetDeviceInfo();
@@ -709,7 +708,6 @@ extern "system" {
     pub fn MapWindowPoints(hWndFrom: HWND, hWndTo: HWND, lpPoints: LPPOINT, cPoints: UINT) -> c_int;
     pub fn MenuItemFromPoint(hWnd: HWND, hMenu: HMENU, ptScreen: POINT) -> c_int;
     pub fn MessageBeep(uType: UINT) -> BOOL;
-    pub fn MessageBoxA(hWnd: HWND, lpText: LPCSTR, lpCaption: LPCSTR, uType: UINT) -> c_int;
     pub fn MessageBoxExA(
         hWnd: HWND, lpText: LPCSTR, lpCaption: LPCSTR, uType: UINT, wLanguageId: WORD,
     ) -> c_int;
@@ -720,7 +718,6 @@ extern "system" {
     pub fn MessageBoxIndirectW(lpmbp: *const MSGBOXPARAMSW) -> c_int;
     // pub fn MessageBoxTimeoutA();
     // pub fn MessageBoxTimeoutW();
-    pub fn MessageBoxW(hWnd: HWND, lpText: LPCWSTR, lpCaption: LPCWSTR, uType: UINT) -> c_int;
     pub fn ModifyMenuA(
         hMnu: HMENU, uPosition: UINT, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR,
     ) -> BOOL;
@@ -814,8 +811,6 @@ extern "system" {
     // pub fn RegisterSuspendResumeNotification();
     // pub fn RegisterTouchHitTestingWindow();
     pub fn RegisterTouchWindow(hWnd: HWND, flags: ULONG) -> BOOL;
-    pub fn RegisterWindowMessageA(lpString: LPCSTR) -> UINT;
-    pub fn RegisterWindowMessageW(lpString: LPCWSTR) -> UINT;
     pub fn ReleaseCapture() -> BOOL;
     pub fn ReleaseDC(hWnd: HWND, hDC: HDC) -> c_int;
     // pub fn RemoveClipboardFormatListener();

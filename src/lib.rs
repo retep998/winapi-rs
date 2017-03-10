@@ -8,10 +8,14 @@
 #![allow(bad_style)]
 #![deny(overflowing_literals, unused_qualifications, unused)]
 #![recursion_limit = "128"]
-#![cfg_attr(not(feature = "std"), no_std)]
+#![no_std]
 
 #[cfg(feature = "std")]
-extern crate std as core;
+extern crate std;
+
+// Hack for exported macros
+#[doc(hidden)]
+pub extern crate core as _core;
 
 // Modules
 #[macro_use] mod macros;

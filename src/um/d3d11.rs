@@ -1238,11 +1238,17 @@ interface ID3D11ClassInstance(ID3D11ClassInstanceVtbl): ID3D11DeviceChild(ID3D11
 RIDL!{#[uuid(0xddf57cba, 0x9543, 0x46e4, 0xa1, 0x2b, 0xf2, 0x07, 0xa0, 0xfe, 0x7f, 0xed)]
 interface ID3D11ClassLinkage(ID3D11ClassLinkageVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetClassInstance(
-        GetClassInstance: LPCSTR, InstanceIndex: UINT,
+        GetClassInstance: LPCSTR,
+        InstanceIndex: UINT,
         ppInstance: *mut *mut ID3D11ClassInstance
     ) -> HRESULT,
     fn CreateClassInstance(
-        pClassTypeName: LPCSTR, ConstantBufferOffset: UINT, ConstantVectorOffset: UINT, TextureOffset: UINT, SamplerOffset: UINT, ppInstance: *mut *mut ID3D11ClassInstance
+        pClassTypeName: LPCSTR,
+        ConstantBufferOffset: UINT,
+        ConstantVectorOffset: UINT,
+        TextureOffset: UINT,
+        SamplerOffset: UINT,
+        ppInstance: *mut *mut ID3D11ClassInstance
     ) -> HRESULT
 }}
 RIDL!{#[uuid(0xa24bc4d1, 0x769e, 0x43f7, 0x80, 0x13, 0x98, 0xff, 0x56, 0x6c, 0x18, 0xe2)]

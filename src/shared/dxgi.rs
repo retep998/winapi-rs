@@ -4,7 +4,10 @@
 use ctypes::{c_void};
 use shared::basetsd::{UINT64, SIZE_T};
 use shared::dxgiformat::{DXGI_FORMAT};
-use shared::dxgitype::{DXGI_USAGE, DXGI_MODE_DESC, DXGI_GAMMA_CONTROL_CAPABILITIES, DXGI_GAMMA_CONTROL, DXGI_MODE_ROTATION, DXGI_SAMPLE_DESC};
+use shared::dxgitype::{
+    DXGI_USAGE, DXGI_MODE_DESC, DXGI_GAMMA_CONTROL_CAPABILITIES, DXGI_GAMMA_CONTROL,
+    DXGI_MODE_ROTATION, DXGI_SAMPLE_DESC,
+};
 use shared::guiddef::{REFIID, REFGUID};
 use shared::minwindef::{UINT, BOOL, FLOAT, HMODULE, DWORD, BYTE};
 use shared::windef::{HWND, HDC, RECT, HMONITOR};

@@ -7,7 +7,9 @@
 //! GDI procedure declarations, constant definitions and macros
 use ctypes::{ c_char, c_int, c_long, c_short, c_ushort };
 use shared::basetsd::ULONG_PTR;
-use shared::minwindef::{ BOOL, BYTE, DWORD, FLOAT, HMETAFILE, LPARAM, LPVOID, MAX_PATH, UINT, ULONG, USHORT, WORD };
+use shared::minwindef::{
+    BOOL, BYTE, DWORD, FLOAT, HMETAFILE, LPARAM, LPVOID, MAX_PATH, UINT, ULONG, USHORT, WORD,
+};
 use shared::windef::{ COLORREF, HDC, HGDIOBJ, POINT, RECT, RECTL, SIZEL };
 use um::winnt::{ CHAR, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PSTR, SHORT, VOID, WCHAR };
 pub const R2_BLACK: c_int = 1;

@@ -11,7 +11,10 @@ use shared::dxgi::{IDXGISurface};
 use shared::guiddef::{REFIID};
 use shared::minwindef::{FLOAT, BOOL, DWORD};
 use shared::windef::{HWND, HDC, RECT};
-use um::d2dbasetypes::{D2D_POINT_2U, D2D_POINT_2F, D2D_RECT_F, D2D_RECT_U, D2D_SIZE_F, D2D_SIZE_U, D2D_COLOR_F, D2D_MATRIX_3X2_F};
+use um::d2dbasetypes::{
+    D2D_POINT_2U, D2D_POINT_2F, D2D_RECT_F, D2D_RECT_U, D2D_SIZE_F, D2D_SIZE_U, D2D_COLOR_F,
+    D2D_MATRIX_3X2_F,
+};
 use um::d3dcommon::{D3D_FEATURE_LEVEL_9_1, D3D_FEATURE_LEVEL_10_0};
 use um::dcommon::{D2D1_PIXEL_FORMAT, DWRITE_MEASURING_MODE};
 use um::dwrite::{IDWriteRenderingParams, IDWriteTextLayout, IDWriteTextFormat, DWRITE_GLYPH_RUN};

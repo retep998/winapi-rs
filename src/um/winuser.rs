@@ -9,15 +9,18 @@ use ctypes::{c_int, c_short};
 use shared::basetsd::{ULONG_PTR, INT_PTR, UINT_PTR, DWORD_PTR};
 use shared::guiddef::{GUID};
 use shared::minwindef::{
-    BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HWINSTA, LOWORD, LPARAM, LPDWORD, LPVOID, LRESULT, UCHAR, UINT, ULONG, USHORT, WORD, WPARAM,
+    BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HWINSTA, LOWORD, LPARAM, LPDWORD, LPVOID, LRESULT,
+    UCHAR, UINT, ULONG, USHORT, WORD, WPARAM,
 };
 use shared::windef::{
-    HBITMAP, HBRUSH, HCURSOR, HDC, HDESK, HICON, HMENU, HMONITOR, HWINEVENTHOOK, HWND, LPRECT, POINT, RECT,
+    HBITMAP, HBRUSH, HCURSOR, HDC, HDESK, HICON, HMENU, HMONITOR, HWINEVENTHOOK, HWND, LPRECT,
+    POINT, RECT,
 };
 use um::minwinbase::{LPSECURITY_ATTRIBUTES};
 use um::wingdi::{DEVMODEA, DEVMODEW, LOGFONTW, LOGFONTA};
 use um::winnt::{
-    ACCESS_MASK, CHAR, HANDLE, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PSECURITY_DESCRIPTOR,PSECURITY_INFORMATION, PVOID, VOID, WCHAR,
+    ACCESS_MASK, CHAR, HANDLE, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PSECURITY_DESCRIPTOR,
+    PSECURITY_INFORMATION, PVOID, VOID, WCHAR,
 };
 use vc::limits::{UINT_MAX};
 use vc::vadefs::{va_list};
@@ -117,12 +120,15 @@ pub type WINSTAENUMPROCA = NAMEENUMPROCA;
 pub type DESKTOPENUMPROCA = NAMEENUMPROCA;
 pub type WINSTAENUMPROCW = NAMEENUMPROCW;
 pub type DESKTOPENUMPROCW = NAMEENUMPROCW;
+#[inline]
 pub fn IS_INTRESOURCE(r: ULONG_PTR) -> bool {
     (r >> 16) == 0
 }
+#[inline]
 pub fn MAKEINTRESOURCEA(i: WORD) -> LPSTR {
     i as ULONG_PTR as LPSTR
 }
+#[inline]
 pub fn MAKEINTRESOURCEW(i: WORD) -> LPWSTR {
     i as ULONG_PTR as LPWSTR
 }
@@ -583,9 +589,11 @@ pub const FAPPCOMMAND_MOUSE: WORD = 0x8000;
 pub const FAPPCOMMAND_KEY: WORD = 0;
 pub const FAPPCOMMAND_OEM: WORD = 0x1000;
 pub const FAPPCOMMAND_MASK: WORD = 0xF000;
+#[inline]
 pub fn GET_APPCOMMAND_LPARAM(lParam: LPARAM) -> c_short {
     (HIWORD(lParam as DWORD) & !FAPPCOMMAND_MASK) as c_short
 }
+#[inline]
 pub fn GET_DEVICE_LPARAM(lParam: LPARAM) -> WORD {
     HIWORD(lParam as DWORD) & FAPPCOMMAND_MASK
 }
@@ -1159,7 +1167,8 @@ STRUCT!{struct MDINEXTMENU {
     hwndNext: HWND,
 }}
 pub type PMDINEXTMENU = *mut MDINEXTMENU;
-pub type LPMDINEXTMENU = *mut MDINEXTMENU;pub const WM_NOTIFY: UINT = 0x004E;
+pub type LPMDINEXTMENU = *mut MDINEXTMENU;
+pub const WM_NOTIFY: UINT = 0x004E;
 pub const WM_INPUTLANGCHANGEREQUEST: UINT = 0x0050;
 pub const WM_INPUTLANGCHANGE: UINT = 0x0051;
 pub const WM_TCARD: UINT = 0x0052;
@@ -1268,16 +1277,20 @@ pub const WM_XBUTTONDBLCLK: UINT = 0x020D;
 pub const WM_MOUSEHWHEEL: UINT = 0x020E;
 pub const WM_MOUSELAST: UINT = 0x020E;
 pub const WHEEL_DELTA: c_short = 120;
+#[inline]
 pub fn GET_WHEEL_DELTA_WPARAM(wParam: WPARAM) -> c_short {
      HIWORD(wParam as DWORD) as c_short
 }
 pub const WHEEL_PAGESCROLL: UINT = UINT_MAX;
+#[inline]
 pub fn GET_KEYSTATE_WPARAM(wParam: WPARAM) -> WORD {
     LOWORD(wParam as DWORD)
 }
+#[inline]
 pub fn GET_NCHITTEST_WPARAM(wParam: WPARAM) -> c_short {
     LOWORD(wParam as DWORD) as c_short
 }
+#[inline]
 pub fn GET_XBUTTON_WPARAM(wParam: WPARAM) -> WORD {
     HIWORD(wParam as DWORD)
 }
@@ -1454,7 +1467,55 @@ pub const MA_NOACTIVATEANDEAT: UINT = 4;
 pub const ICON_SMALL: UINT = 0;
 pub const ICON_BIG: UINT = 1;
 pub const ICON_SMALL2: UINT = 2;
-
+extern "stdcall" {
+    pub fn RegisterWindowMessageA(
+        lpString: LPCSTR,
+    ) -> UINT;
+    pub fn RegisterWindowMessageW(
+        lpString: LPCWSTR,
+    ) -> UINT;
+}
+pub const SIZE_RESTORED: WPARAM = 0;
+pub const SIZE_MINIMIZED: WPARAM = 1;
+pub const SIZE_MAXIMIZED: WPARAM = 2;
+pub const SIZE_MAXSHOW: WPARAM = 3;
+pub const SIZE_MAXHIDE: WPARAM = 4;
+pub const SIZENORMAL: WPARAM = SIZE_RESTORED;
+pub const SIZEICONIC: WPARAM = SIZE_MINIMIZED;
+pub const SIZEFULLSCREEN: WPARAM = SIZE_MAXIMIZED;
+pub const SIZEZOOMSHOW: WPARAM = SIZE_MAXSHOW;
+pub const SIZEZOOMHIDE: WPARAM = SIZE_MAXHIDE;
+STRUCT!{struct WINDOWPOS {
+    hwnd: HWND,
+    hwndInsertAfter: HWND,
+    x: c_int,
+    y: c_int,
+    cx: c_int,
+    cy: c_int,
+    flags: UINT,
+}}
+pub type LPWINDOWPOS = *mut WINDOWPOS;
+pub type PWINDOWPOS = *mut WINDOWPOS;
+STRUCT!{struct NCCALCSIZE_PARAMS {
+    rgrc: [RECT; 3],
+    lppos: PWINDOWPOS,
+}}
+pub type LPNCCALCSIZE_PARAMS = *mut NCCALCSIZE_PARAMS;
+/******CUTOFF******/
+extern "stdcall" {
+    pub fn MessageBoxA(
+        hWnd: HWND,
+        lpText: LPCSTR,
+        lpCaption: LPCSTR,
+        uType: UINT,
+    ) -> c_int;
+    pub fn MessageBoxW(
+        hWnd: HWND,
+        lpText: LPCWSTR,
+        lpCaption: LPCWSTR,
+        uType: UINT,
+    ) -> c_int;
+}
 // Edit Control Styles
 //
 pub const ES_LEFT: DWORD = 0x0000;
@@ -2020,23 +2081,6 @@ pub const SWP_NOREPOSITION: UINT = SWP_NOOWNERZORDER;
 pub const SWP_DEFERERASE: UINT = 0x2000;
 pub const SWP_ASYNCWINDOWPOS: UINT = 0x4000;
 
-pub const SIZE_RESTORED: UINT = 0;
-pub const SIZE_MINIMIZED: UINT = 1;
-pub const SIZE_MAXIMIZED: UINT = 2;
-pub const SIZE_MAXSHOW: UINT = 3;
-pub const SIZE_MAXHIDE: UINT = 4;
-pub const SIZENORMAL: UINT = SIZE_RESTORED;
-pub const SIZEICONIC: UINT = SIZE_MINIMIZED;
-pub const SIZEFULLSCREEN: UINT = SIZE_MAXIMIZED;
-pub const SIZEZOOMSHOW: UINT = SIZE_MAXSHOW;
-pub const SIZEZOOMHIDE: UINT = SIZE_MAXHIDE;
-STRUCT!{struct NCCALCSIZE_PARAMS {
-    rgrc: [RECT; 3],
-    lppos: PWINDOWPOS,
-}}
-pub type PNCCALCSIZE_PARAMS = *mut NCCALCSIZE_PARAMS;
-pub type NPNCCALCSIZE_PARAMS = *mut NCCALCSIZE_PARAMS;
-pub type LPNCCALCSIZE_PARAMS = *mut NCCALCSIZE_PARAMS;
 pub const WVR_ALIGNTOP: UINT = 0x0010;
 pub const WVR_ALIGNLEFT: UINT = 0x0020;
 pub const WVR_ALIGNBOTTOM: UINT = 0x0040;
@@ -2070,7 +2114,8 @@ pub const WS_TILED: DWORD = WS_OVERLAPPED;
 pub const WS_ICONIC: DWORD = WS_MINIMIZE;
 pub const WS_SIZEBOX: DWORD = WS_THICKFRAME;
 pub const WS_TILEDWINDOW: DWORD = WS_OVERLAPPEDWINDOW;
-pub const WS_OVERLAPPEDWINDOW: DWORD = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+pub const WS_OVERLAPPEDWINDOW: DWORD = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+    | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
 pub const WS_POPUPWINDOW: DWORD = WS_POPUP | WS_BORDER | WS_SYSMENU;
 pub const WS_CHILDWINDOW: DWORD = WS_CHILD;
 pub const WS_EX_DLGMODALFRAME: DWORD = 0x00000001;
@@ -2180,18 +2225,6 @@ STRUCT!{struct TRACKMOUSEEVENT {
     dwHoverTime: DWORD,
 }}
 pub type LPTRACKMOUSEEVENT = *mut TRACKMOUSEEVENT;
-//2575
-STRUCT!{struct WINDOWPOS {
-    hwnd: HWND,
-    hwndInsertAfter: HWND,
-    x: c_int,
-    y: c_int,
-    cx: c_int,
-    cy: c_int,
-    flags: UINT,
-}}
-pub type LPWINDOWPOS = *mut WINDOWPOS;
-pub type PWINDOWPOS = *mut WINDOWPOS;
 //3082
 STRUCT!{struct CREATESTRUCTA {
     lpCreateParams: LPVOID,

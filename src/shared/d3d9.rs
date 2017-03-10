@@ -413,20 +413,21 @@ interface IDirect3DPixelShader9(IDirect3DPixelShader9Vtbl): IUnknown(IUnknownVtb
 );
 pub type LPDIRECT3DPIXELSHADER9 = *mut IDirect3DPixelShader9;
 pub type PDIRECT3DPIXELSHADER9 = *mut IDirect3DPixelShader9;
-RIDL!(#[uuid(0x580ca87e, 0x1d3c, 0x4d54, 0x99, 0x1d, 0xb7, 0xd3, 0xe3, 0xc2, 0x98, 0xce)]
-interface IDirect3DBaseTexture9(IDirect3DBaseTexture9Vtbl): IDirect3DResource9(IDirect3DResource9Vtbl) {
+RIDL!{#[uuid(0x580ca87e, 0x1d3c, 0x4d54, 0x99, 0x1d, 0xb7, 0xd3, 0xe3, 0xc2, 0x98, 0xce)]
+interface IDirect3DBaseTexture9(IDirect3DBaseTexture9Vtbl):
+    IDirect3DResource9(IDirect3DResource9Vtbl) {
     fn SetLOD(LODNew: DWORD) -> DWORD,
     fn GetLOD() -> DWORD,
     fn GetLevelCount() -> DWORD,
     fn SetAutoGenFilterType(FilterType: D3DTEXTUREFILTERTYPE) -> HRESULT,
     fn GetAutoGenFilterType() -> D3DTEXTUREFILTERTYPE,
     fn GenerateMipSubLevels() -> ()
-}
-);
+}}
 pub type LPDIRECT3DBASETEXTURE9 = *mut IDirect3DBaseTexture9;
 pub type PDIRECT3DBASETEXTURE9 = *mut IDirect3DBaseTexture9;
-RIDL!(#[uuid(0x85c31227, 0x3de5, 0x4f00, 0x9b, 0x3a, 0xf1, 0x1a, 0xc3, 0x8c, 0x18, 0xb5)]
-interface IDirect3DTexture9(IDirect3DTexture9Vtbl): IDirect3DBaseTexture9(IDirect3DBaseTexture9Vtbl) {
+RIDL!{#[uuid(0x85c31227, 0x3de5, 0x4f00, 0x9b, 0x3a, 0xf1, 0x1a, 0xc3, 0x8c, 0x18, 0xb5)]
+interface IDirect3DTexture9(IDirect3DTexture9Vtbl):
+    IDirect3DBaseTexture9(IDirect3DBaseTexture9Vtbl) {
     fn GetLevelDesc(Level: UINT, pDesc: *mut D3DSURFACE_DESC) -> HRESULT,
     fn GetSurfaceLevel(
         Level: UINT, ppSurfaceLevel: *mut *mut IDirect3DSurface9
@@ -437,12 +438,12 @@ interface IDirect3DTexture9(IDirect3DTexture9Vtbl): IDirect3DBaseTexture9(IDirec
     ) -> HRESULT,
     fn UnlockRect(Level: UINT) -> HRESULT,
     fn AddDirtyRect(pDirtyRect: *const RECT) -> HRESULT
-}
-);
+}}
 pub type LPDIRECT3DTEXTURE9 = *mut IDirect3DTexture9;
 pub type PDIRECT3DTEXTURE9 = *mut IDirect3DTexture9;
-RIDL!(#[uuid(0x2518526c, 0xe789, 0x4111, 0xa7, 0xb9, 0x47, 0xef, 0x32, 0x8d, 0x13, 0xe6)]
-interface IDirect3DVolumeTexture9(IDirect3DVolumeTexture9Vtbl): IDirect3DBaseTexture9(IDirect3DBaseTexture9Vtbl) {
+RIDL!{#[uuid(0x2518526c, 0xe789, 0x4111, 0xa7, 0xb9, 0x47, 0xef, 0x32, 0x8d, 0x13, 0xe6)]
+interface IDirect3DVolumeTexture9(IDirect3DVolumeTexture9Vtbl):
+    IDirect3DBaseTexture9(IDirect3DBaseTexture9Vtbl) {
     fn GetLevelDesc(Level: UINT, pDesc: *mut D3DVOLUME_DESC) -> HRESULT,
     fn GetVolumeLevel(
         Level: UINT, ppVolumeLevel: *mut *mut IDirect3DVolume9
@@ -453,12 +454,12 @@ interface IDirect3DVolumeTexture9(IDirect3DVolumeTexture9Vtbl): IDirect3DBaseTex
     ) -> HRESULT,
     fn UnlockBox(Level: UINT) -> HRESULT,
     fn AddDirtyBox(pDirtyBox: *const D3DBOX) -> HRESULT
-}
-);
+}}
 pub type LPDIRECT3DVOLUMETEXTURE9 = *mut IDirect3DVolumeTexture9;
 pub type PDIRECT3DVOLUMETEXTURE9 = *mut IDirect3DVolumeTexture9;
-RIDL!(#[uuid(0xfff32f81, 0xd953, 0x473a, 0x92, 0x23, 0x93, 0xd6, 0x52, 0xab, 0xa9, 0x3f)]
-interface IDirect3DCubeTexture9(IDirect3DCubeTexture9Vtbl): IDirect3DBaseTexture9(IDirect3DBaseTexture9Vtbl) {
+RIDL!{#[uuid(0xfff32f81, 0xd953, 0x473a, 0x92, 0x23, 0x93, 0xd6, 0x52, 0xab, 0xa9, 0x3f)]
+interface IDirect3DCubeTexture9(IDirect3DCubeTexture9Vtbl):
+    IDirect3DBaseTexture9(IDirect3DBaseTexture9Vtbl) {
     fn GetLevelDesc(Level: UINT, pDesc: *mut D3DSURFACE_DESC) -> HRESULT,
     fn GetCubeMapSurface(
         FaceType: D3DCUBEMAP_FACES, Level: UINT,
@@ -472,35 +473,34 @@ interface IDirect3DCubeTexture9(IDirect3DCubeTexture9Vtbl): IDirect3DBaseTexture
     fn AddDirtyRect(
         FaceType: D3DCUBEMAP_FACES, pDirtyRect: *const RECT
     ) -> HRESULT
-}
-);
+}}
 pub type LPDIRECT3DCUBETEXTURE9 = *mut IDirect3DCubeTexture9;
 pub type PDIRECT3DCUBETEXTURE9 = *mut IDirect3DCubeTexture9;
-RIDL!(#[uuid(0xb64bb1b5, 0xfd70, 0x4df6, 0xbf, 0x91, 0x19, 0xd0, 0xa1, 0x24, 0x55, 0xe3)]
-interface IDirect3DVertexBuffer9(IDirect3DVertexBuffer9Vtbl): IDirect3DResource9(IDirect3DResource9Vtbl) {
+RIDL!{#[uuid(0xb64bb1b5, 0xfd70, 0x4df6, 0xbf, 0x91, 0x19, 0xd0, 0xa1, 0x24, 0x55, 0xe3)]
+interface IDirect3DVertexBuffer9(IDirect3DVertexBuffer9Vtbl):
+    IDirect3DResource9(IDirect3DResource9Vtbl) {
     fn Lock(
         OffsetToLock: UINT, SizeToLock: UINT, ppbData: *mut *mut VOID,
         Flags: DWORD
     ) -> HRESULT,
     fn Unlock() -> HRESULT,
     fn GetDesc(pDesc: *mut D3DVERTEXBUFFER_DESC) -> HRESULT
-}
-);
+}}
 pub type LPDIRECT3DVERTEXBUFFER9 = *mut IDirect3DVertexBuffer9;
 pub type PDIRECT3DVERTEXBUFFER9 = *mut IDirect3DVertexBuffer9;
-RIDL!(#[uuid(0x7c9dd65e, 0xd3f7, 0x4529, 0xac, 0xee, 0x78, 0x58, 0x30, 0xac, 0xde, 0x35)]
-interface IDirect3DIndexBuffer9(IDirect3DIndexBuffer9Vtbl): IDirect3DResource9(IDirect3DResource9Vtbl) {
+RIDL!{#[uuid(0x7c9dd65e, 0xd3f7, 0x4529, 0xac, 0xee, 0x78, 0x58, 0x30, 0xac, 0xde, 0x35)]
+interface IDirect3DIndexBuffer9(IDirect3DIndexBuffer9Vtbl):
+    IDirect3DResource9(IDirect3DResource9Vtbl) {
     fn Lock(
         OffsetToLock: UINT, SizeToLock: UINT, ppbData: *mut *mut VOID,
         Flags: DWORD
     ) -> HRESULT,
     fn Unlock() -> HRESULT,
     fn GetDesc(pDesc: *mut D3DINDEXBUFFER_DESC) -> HRESULT
-}
-);
+}}
 pub type LPDIRECT3DINDEXBUFFER9 = *mut IDirect3DIndexBuffer9;
 pub type PDIRECT3DINDEXBUFFER9 = *mut IDirect3DIndexBuffer9;
-RIDL!(#[uuid(0xcfbaf3a, 0x9ff6, 0x429a, 0x99, 0xb3, 0xa2, 0x79, 0x6a, 0xf8, 0xb8, 0x9b)]
+RIDL!{#[uuid(0xcfbaf3a, 0x9ff6, 0x429a, 0x99, 0xb3, 0xa2, 0x79, 0x6a, 0xf8, 0xb8, 0x9b)]
 interface IDirect3DSurface9(IDirect3DSurface9Vtbl): IDirect3DResource9(IDirect3DResource9Vtbl) {
     fn GetContainer(riid: *const IID, ppContainer: *mut *mut VOID) -> HRESULT,
     fn GetDesc(pDesc: *mut D3DSURFACE_DESC) -> HRESULT,
@@ -510,11 +510,10 @@ interface IDirect3DSurface9(IDirect3DSurface9Vtbl): IDirect3DResource9(IDirect3D
     fn UnlockRect() -> HRESULT,
     fn GetDC(phdc: *mut HDC) -> HRESULT,
     fn ReleaseDC(hdc: HDC) -> HRESULT
-}
-);
+}}
 pub type LPDIRECT3DSURFACE9 = *mut IDirect3DSurface9;
 pub type PDIRECT3DSURFACE9 = *mut IDirect3DSurface9;
-RIDL!(#[uuid(0x24f416e6, 0x1f67, 0x4aa7, 0xb8, 0x8e, 0xd3, 0x3f, 0x6f, 0x31, 0x28, 0xa1)]
+RIDL!{#[uuid(0x24f416e6, 0x1f67, 0x4aa7, 0xb8, 0x8e, 0xd3, 0x3f, 0x6f, 0x31, 0x28, 0xa1)]
 interface IDirect3DVolume9(IDirect3DVolume9Vtbl): IUnknown(IUnknownVtbl) {
     fn GetDevice(ppDevice: *mut *mut IDirect3DDevice9) -> HRESULT,
     fn SetPrivateData(
@@ -531,11 +530,10 @@ interface IDirect3DVolume9(IDirect3DVolume9Vtbl): IUnknown(IUnknownVtbl) {
         pLockedVolume: *mut D3DLOCKED_BOX, pBox: *const D3DBOX, Flags: DWORD
     ) -> HRESULT,
     fn UnlockBox() -> HRESULT
-}
-);
+}}
 pub type LPDIRECT3DVOLUME9 = *mut IDirect3DVolume9;
 pub type PDIRECT3DVOLUME9 = *mut IDirect3DVolume9;
-RIDL!(#[uuid(0xd9771460, 0xa695, 0x4f26, 0xbb, 0xd3, 0x27, 0xb8, 0x40, 0xb5, 0x41, 0xcc)]
+RIDL!{#[uuid(0xd9771460, 0xa695, 0x4f26, 0xbb, 0xd3, 0x27, 0xb8, 0x40, 0xb5, 0x41, 0xcc)]
 interface IDirect3DQuery9(IDirect3DQuery9Vtbl): IUnknown(IUnknownVtbl) {
     fn GetDevice(ppDevice: *mut *mut IDirect3DDevice9) -> HRESULT,
     fn GetType() -> D3DRESOURCETYPE,
@@ -544,8 +542,7 @@ interface IDirect3DQuery9(IDirect3DQuery9Vtbl): IUnknown(IUnknownVtbl) {
     fn GetData(
         pData: *mut VOID, dwSize: DWORD, dwGetDataFlags: DWORD
     ) -> HRESULT
-}
-);
+}}
 pub type LPDIRECT3DQUERY9 = *mut IDirect3DQuery9;
 pub type PDIRECT3DQUERY9 = *mut IDirect3DQuery9;
 pub const D3DCREATE_FPU_PRESERVE: DWORD = 0x2;
@@ -563,7 +560,7 @@ pub const D3DCREATE_ENABLE_PRESENTSTATS: DWORD = 0x4000;
 pub const D3DCREATE_DISABLE_PRESENTSTATS: DWORD = 0x8000;
 pub const D3DCREATE_SCREENSAVER: DWORD = 0x10000000;
 pub const D3DADAPTER_DEFAULT: DWORD = 0;
-RIDL!(#[uuid(0x02177241, 0x69fc, 0x400c, 0x8f, 0xf1, 0x93, 0xa4, 0x4d, 0xf6, 0x86, 0x1d)]
+RIDL!{#[uuid(0x02177241, 0x69fc, 0x400c, 0x8f, 0xf1, 0x93, 0xa4, 0x4d, 0xf6, 0x86, 0x1d)]
 interface IDirect3D9Ex(IDirect3D9ExVtbl): IDirect3D9(IDirect3D9Vtbl) {
     fn GetAdapterModeCountEx(
         Adapter: UINT, pFilter: *const D3DDISPLAYMODEFILTER
@@ -583,11 +580,10 @@ interface IDirect3D9Ex(IDirect3D9ExVtbl): IDirect3D9(IDirect3D9Vtbl) {
         ppReturnedDeviceInterface: *mut *mut IDirect3DDevice9Ex
     ) -> HRESULT,
     fn GetAdapterLUID(Adapter: UINT, pLUID: *mut LUID) -> HRESULT
-}
-);
+}}
 pub type LPDIRECT3D9EX = *mut IDirect3D9Ex;
 pub type PDIRECT3D9EX = *mut IDirect3D9Ex;
-RIDL!(#[uuid(0xb18b10ce, 0x2649, 0x405a, 0x87, 0xf, 0x95, 0xf7, 0x77, 0xd4, 0x31, 0x3a)]
+RIDL!{#[uuid(0xb18b10ce, 0x2649, 0x405a, 0x87, 0xf, 0x95, 0xf7, 0x77, 0xd4, 0x31, 0x3a)]
 interface IDirect3DDevice9Ex(IDirect3DDevice9ExVtbl): IDirect3DDevice9(IDirect3DDevice9Vtbl) {
     fn SetConvolutionMonoKernel(
         width: UINT, height: UINT, rows: *mut FLOAT, columns: *mut FLOAT
@@ -633,33 +629,31 @@ interface IDirect3DDevice9Ex(IDirect3DDevice9ExVtbl): IDirect3DDevice9(IDirect3D
         iSwapChain: UINT, pMode: *mut D3DDISPLAYMODEEX,
         pRotation: *mut D3DDISPLAYROTATION
     ) -> HRESULT
-}
-);
+}}
 pub type LPDIRECT3DDEVICE9EX = *mut IDirect3DDevice9Ex;
 pub type PDIRECT3DDEVICE9EX = *mut IDirect3DDevice9Ex;
-RIDL!(#[uuid(0x91886caf, 0x1c3d, 0x4d2e, 0xa0, 0xab, 0x3e, 0x4c, 0x7d, 0x8d, 0x33, 0x3)]
-interface IDirect3DSwapChain9Ex(IDirect3DSwapChain9ExVtbl): IDirect3DSwapChain9(IDirect3DSwapChain9Vtbl) {
+RIDL!{#[uuid(0x91886caf, 0x1c3d, 0x4d2e, 0xa0, 0xab, 0x3e, 0x4c, 0x7d, 0x8d, 0x33, 0x3)]
+interface IDirect3DSwapChain9Ex(IDirect3DSwapChain9ExVtbl):
+    IDirect3DSwapChain9(IDirect3DSwapChain9Vtbl) {
     fn GetLastPresentCount(pLastPresentCount: *mut UINT) -> HRESULT,
     fn GetPresentStats(pPresentationStatistics: *mut D3DPRESENTSTATS) -> HRESULT,
     fn GetDisplayModeEx(
         pMode: *mut D3DDISPLAYMODEEX, pRotation: *mut D3DDISPLAYROTATION
     ) -> HRESULT
-}
-);
+}}
 pub type LPDIRECT3DSWAPCHAIN9EX = *mut IDirect3DSwapChain9Ex;
 pub type PDIRECT3DSWAPCHAIN9EX = *mut IDirect3DSwapChain9Ex;
-RIDL!(#[uuid(0x187aeb13, 0xaaf5, 0x4c59, 0x87, 0x6d, 0xe0, 0x59, 0x8, 0x8c, 0xd, 0xf8)]
+RIDL!{#[uuid(0x187aeb13, 0xaaf5, 0x4c59, 0x87, 0x6d, 0xe0, 0x59, 0x8, 0x8c, 0xd, 0xf8)]
 interface IDirect3D9ExOverlayExtension(IDirect3D9ExOverlayExtensionVtbl): IUnknown(IUnknownVtbl) {
     fn CheckDeviceOverlayType(
         Adapter: UINT, DevType: D3DDEVTYPE, OverlayWidth: UINT,
         OverlayHeight: UINT, OverlayFormat: D3DFORMAT, pDisplayMode: *mut D3DDISPLAYMODEEX,
         DisplayRotation: D3DDISPLAYROTATION, pOverlayCaps: *mut D3DOVERLAYCAPS
     ) -> HRESULT
-}
-);
+}}
 pub type LPDIRECT3D9EXOVERLAYEXTENSION = *mut IDirect3D9ExOverlayExtension;
 pub type PDIRECT3D9EXOVERLAYEXTENSION = *mut IDirect3D9ExOverlayExtension;
-RIDL!(#[uuid(0x26dc4561, 0xa1ee, 0x4ae7, 0x96, 0xda, 0x11, 0x8a, 0x36, 0xc0, 0xec, 0x95)]
+RIDL!{#[uuid(0x26dc4561, 0xa1ee, 0x4ae7, 0x96, 0xda, 0x11, 0x8a, 0x36, 0xc0, 0xec, 0x95)]
 interface IDirect3DDevice9Video(IDirect3DDevice9VideoVtbl): IUnknown(IUnknownVtbl) {
     fn GetContentProtectionCaps(
         pCryptoType: *const GUID, pDecodeProfile: *const GUID,
@@ -674,12 +668,12 @@ interface IDirect3DDevice9Video(IDirect3DDevice9VideoVtbl): IUnknown(IUnknownVtb
         pCryptoType: *const GUID, pDecodeProfile: *const GUID,
         ppCryptoSession: *mut *mut IDirect3DCryptoSession9, pCryptoHandle: *mut HANDLE
     ) -> HRESULT
-}
-);
+}}
 pub type LPDIRECT3DDEVICE9VIDEO = *mut IDirect3DDevice9Video;
 pub type PDIRECT3DDEVICE9VIDEO = *mut IDirect3DDevice9Video;
 RIDL!(#[uuid(0xff24beee, 0xda21, 0x4beb, 0x98, 0xb5, 0xd2, 0xf8, 0x99, 0xf9, 0x8a, 0xf9)]
-interface IDirect3DAuthenticatedChannel9(IDirect3DAuthenticatedChannel9Vtbl): IUnknown(IUnknownVtbl) {
+interface IDirect3DAuthenticatedChannel9(IDirect3DAuthenticatedChannel9Vtbl):
+    IUnknown(IUnknownVtbl) {
     fn GetCertificateSize(pCertificateSize: *mut UINT) -> HRESULT,
     fn GetCertificate(CertifacteSize: UINT, ppCertificate: *mut BYTE) -> HRESULT,
     fn NegotiateKeyExchange(DataSize: UINT, pData: *mut VOID) -> HRESULT,

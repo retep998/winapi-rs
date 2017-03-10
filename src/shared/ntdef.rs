@@ -6,7 +6,8 @@
 // except according to those terms.
 //! Type definitions for the basic types.
 use ctypes::{
-    __int64, __uint64, c_char, c_double, c_int, c_long, c_schar, c_short, c_uchar, c_ulong, c_ushort, c_void, wchar_t
+    __int64, __uint64, c_char, c_double, c_int, c_long, c_schar, c_short, c_uchar, c_ulong,
+    c_ushort, c_void, wchar_t,
 };
 use shared::basetsd::KAFFINITY;
 #[cfg(target_arch = "x86")]

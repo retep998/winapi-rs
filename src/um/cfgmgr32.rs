@@ -4,7 +4,9 @@
 use shared::basetsd::{DWORD_PTR, ULONG32, ULONG64, ULONG_PTR};
 use shared::guiddef::{GUID};
 use shared::minwindef::{BYTE, DWORD, MAX_PATH, ULONG, WORD};
-use um::winnt::{DWORDLONG, ULONGLONG, WCHAR, ANYSIZE_ARRAY, LONG, CHAR, LARGE_INTEGER, HANDLE, VOID, PVOID};
+use um::winnt::{
+    DWORDLONG, ULONGLONG, WCHAR, ANYSIZE_ARRAY, LONG, CHAR, LARGE_INTEGER, HANDLE, VOID, PVOID,
+};
 
 pub type PCVOID = *const VOID;
 pub const MAX_DEVICE_ID_LEN: usize = 200;
@@ -647,9 +649,9 @@ STRUCT!{struct CM_NOTIFY_FILTER {
     Reserved: DWORD,
     u: [BYTE; 400],
 }}
-UNION!(CM_NOTIFY_FILTER, u, DeviceInterface, DeviceInterface_mut, CM_NOTIFY_FILTER_DeviceInterface);
-UNION!(CM_NOTIFY_FILTER, u, DeviceHandle, DeviceHandle_mut, CM_NOTIFY_FILTER_DeviceHandle);
-UNION!(CM_NOTIFY_FILTER, u, DeviceInstance, DeviceInstance_mut, CM_NOTIFY_FILTER_DeviceInstance);
+UNION!{CM_NOTIFY_FILTER, u, DeviceInterface, DeviceInterface_mut, CM_NOTIFY_FILTER_DeviceInterface}
+UNION!{CM_NOTIFY_FILTER, u, DeviceHandle, DeviceHandle_mut, CM_NOTIFY_FILTER_DeviceHandle}
+UNION!{CM_NOTIFY_FILTER, u, DeviceInstance, DeviceInstance_mut, CM_NOTIFY_FILTER_DeviceInstance}
 pub type PCM_NOTIFY_FILTER = *mut CM_NOTIFY_FILTER;
 ENUM!{enum CM_NOTIFY_ACTION {
     CM_NOTIFY_ACTION_DEVICEINTERFACEARRIVAL = 0,
@@ -688,9 +690,10 @@ UNION!(
     CM_NOTIFY_EVENT_DATA_DeviceInterface
 );
 UNION!(CM_NOTIFY_EVENT_DATA, u, DeviceHandle, DeviceHandle_mut, CM_NOTIFY_EVENT_DATA_DeviceHandle);
-UNION!(
-    CM_NOTIFY_EVENT_DATA, u, DeviceInstance, DeviceInstance_mut, CM_NOTIFY_EVENT_DATA_DeviceInstance
-);
+UNION!{
+    CM_NOTIFY_EVENT_DATA, u, DeviceInstance, DeviceInstance_mut,
+    CM_NOTIFY_EVENT_DATA_DeviceInstance
+}
 pub type PCM_NOTIFY_EVENT_DATA = *mut CM_NOTIFY_EVENT_DATA;
 pub type PCM_NOTIFY_CALLBACK = Option<unsafe extern "system" fn(
     hNotify: HCMNOTIFICATION, Context: PVOID, Action: CM_NOTIFY_ACTION,
