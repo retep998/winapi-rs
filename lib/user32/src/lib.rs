@@ -290,11 +290,8 @@ extern "system" {
     pub fn DrawAnimatedRects(
         hwnd: HWND, idAni: c_int, lprcFrom: *const RECT, lprcTo: *const RECT,
     ) -> BOOL;
-    pub fn DrawCaption(hwnd: HWND, hdc: HDC, lprect: *const RECT, flags: UINT) -> BOOL;
-    pub fn DrawEdge(hdc: HDC, qrc: LPRECT, edge: UINT, grfFlags: UINT) -> BOOL;
     pub fn DrawFocusRect(hDC: HDC, lprc: *const RECT) -> BOOL;
     // pub fn DrawFrame();
-    pub fn DrawFrameControl(hdc: HDC, lprc: LPRECT, uType: UINT, uState: UINT) -> BOOL;
     pub fn DrawIcon(hDC: HDC, x: c_int, y: c_int, hIcon: HICON) -> BOOL;
     pub fn DrawIconEx(
         hdc: HDC, xLeft: c_int, yTop: c_int, hIcon: HICON, cxWidth: c_int, cyWidth: c_int,
@@ -983,7 +980,6 @@ extern "system" {
         wVirtKey: UINT, wScanCode: UINT, lpKeyState: *const BYTE, lwszBuff: LPWSTR, cchBuff: c_int,
         wFlags: UINT
     ) -> c_int;
-    pub fn TrackMouseEvent(lpEventTrack: LPTRACKMOUSEEVENT) -> BOOL;
     pub fn TrackPopupMenu(
         hMenu: HMENU, uFlags: UINT, x: INT, y: INT, nReserved: INT, hWnd: HWND,
         prcRect: *const RECT,
