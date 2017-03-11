@@ -82,7 +82,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dwmapi", &["minwindef"], &[]),
     ("dwrite", &["basetsd", "d2d1", "dcommon", "minwindef", "unknwnbase", "windef", "winerror", "wingdi", "winnt"], &[]),
     ("errhandlingapi", &["winnt"], &[]),
-    ("fileapi", &["minwinbase", "winnt"], &[]),
+    ("fileapi", &["minwinbase", "minwindef", "winnt"], &[]),
     ("handleapi", &["minwindef", "winnt"], &["kernel32"]),
     ("heapapi", &["basetsd", "minwindef"], &[]),
     ("http", &["guiddef", "minwindef", "sspi", "winnt", "winsock2"], &[]),
