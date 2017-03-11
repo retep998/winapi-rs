@@ -56,7 +56,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("avrt", &["guiddef", "minwindef", "winnt"], &["avrt"]),
     ("cfgmgr32", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
     ("cguid", &[], &[]),
-    ("combaseapi", &["basetsd", "minwindef", "objidl", "objidlbase", "winnt", "wtypesbase"], &["ole32"]),
+    ("combaseapi", &["basetsd", "guiddef", "minwindef", "objidl", "objidlbase", "unknwnbase", "winnt", "wtypesbase"], &["ole32"]),
     ("commctrl", &["basetsd", "guiddef", "minwinbase", "minwindef", "objidlbase", "vcruntime", "windef", "winnt", "winuser"], &[]),
     ("commdlg", &["basetsd", "minwindef", "prsht", "unknwnbase", "windef", "wingdi", "winnt", "winuser"], &[]),
     ("consoleapi", &["minwindef", "wincon", "winnt"], &["kernel32"]),
