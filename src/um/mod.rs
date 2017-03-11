@@ -57,6 +57,8 @@ pub mod gl;
 #[cfg(feature = "mssip")] pub mod mssip;
 #[cfg(feature = "ncrypt")] pub mod ncrypt;
 #[cfg(feature = "oaidl")] pub mod oaidl;
+#[cfg(feature = "objbase")] pub mod objbase;
+#[cfg(feature = "objidl")] pub mod objidl;
 #[cfg(feature = "objidlbase")] pub mod objidlbase;
 #[cfg(feature = "pdh")] pub mod pdh;
 #[cfg(feature = "processthreadsapi")] pub mod processthreadsapi;
