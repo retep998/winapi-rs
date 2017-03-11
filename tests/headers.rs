@@ -25,16 +25,18 @@ fn check_imports() {
         content
     }
 
-    fn check_if_in_build<P: Debug>(path: &P, include: &str, entries: &[String], errors: &mut u32) {
+    fn check_if_in_build<P: Debug>(path: &P, include: &str, entries: &[String],
+                                   errors: &mut u32) -> bool {
         for entry in entries {
             if &include == &entry {
-                return
+                return true
             }
         }
         io::stderr().write(format!("{:?}: include not found: \"{}\"\n",
                                    path,
                                    include).as_bytes()).expect("stderr::write failed");
         *errors += 1;
+        false
     }
 
     fn check_file_deps<P: AsRef<Path>>(p: P, files_deps: &mut HashMap<String, Vec<String>>,
@@ -49,9 +51,10 @@ fn check_imports() {
                                          .collect();
             values[values.len() - 2..].join("-")
         };
+        let mut found: Vec<String> = Vec::new();
         {
-            let entry = files_deps.get(&filename);
-            if let Some(entry) = entry {
+            let entry = files_deps.get_mut(&filename);
+            if let Some(entries) = entry {
                 let file_content = read_file(r_p);
                 for line in file_content.lines() {
                     if line.starts_with("use ") {
@@ -64,7 +67,24 @@ fn check_imports() {
                         } else {
                             include[0].to_owned()
                         };
-                        check_if_in_build(&r_p, &include, &entry, errors);
+                        if check_if_in_build(&r_p, &include, &entries, errors) &&
+                           found.iter().find(|x| **x == include).is_none() {
+                            found.push(include);
+                        }
+                    }
+                }
+                if found.len() != entries.len() {
+                    for found in found {
+                        if let Some(pos) = entries.iter().position(|x| **x == found) {
+                            entries.remove(pos);
+                        }
+                    }
+                    if !entries.is_empty() {
+                        io::stderr().write(format!("{}: include not used: {:?}\n",
+                                                   filename,
+                                                   entries).as_bytes())
+                                    .expect("stderr::write failed");
+                        *errors += 1;
                     }
                 }
             } else {
@@ -105,12 +125,14 @@ fn check_imports() {
             let parts: Vec<&str> = line.split("&[").collect();
             files_deps.insert(format!("{}.rs", get_between_quotes(parts[0])),
                               parts[1].split(',')
-                                      .map(|x| get_between_quotes(x).to_owned()).collect());
+                                      .map(|x| get_between_quotes(x).to_owned())
+                                      .filter(|x| !x.is_empty())
+                                      .collect());
         }
     }
     let mut errors = 0;
     read_dirs("src", &mut files_deps, &mut errors, 0);
-    assert!(errors == 0, "Missing declaration(s) found");
+    assert!(errors == 0, "Missing or extra declaration(s) found");
     let keys: Vec<&String> = files_deps.keys().collect();
     if !keys.is_empty() {
         io::stderr().write(format!("file(s) not found: {:?}\n",
