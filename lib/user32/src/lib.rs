@@ -472,11 +472,15 @@ extern "system" {
     // pub fn GetMenuCheckMarkDimensions();
     // pub fn GetMenuContextHelpId();
     // pub fn GetMenuDefaultItem();
-    // pub fn GetMenuInfo();
-    // pub fn GetMenuItemCount();
-    // pub fn GetMenuItemID();
-    // pub fn GetMenuItemInfoA();
-    // pub fn GetMenuItemInfoW();
+    pub fn GetMenuInfo(hMenu: HMENU, lpcmi: LPMENUINFO) -> BOOL;
+    pub fn GetMenuItemCount(hMenu: HMENU) -> c_int;
+    pub fn GetMenuItemID(hMenu: HMENU, nPos: c_int) -> UINT;
+    pub fn GetMenuItemInfoA(
+        hMenu: HMENU, uItem: UINT, fByPosition: BOOL, lpmii: LPMENUITEMINFOA
+    ) -> BOOL;
+    pub fn GetMenuItemInfoW(
+        hMenu: HMENU, uItem: UINT, fByPosition: BOOL, lpmii: LPMENUITEMINFOW
+    ) -> BOOL;
     // pub fn GetMenuItemRect();
     // pub fn GetMenuState();
     // pub fn GetMenuStringA();
@@ -886,7 +890,7 @@ extern "system" {
     pub fn SetMenu(hWnd: HWND, hMenu: HMENU) -> BOOL;
     // pub fn SetMenuContextHelpId();
     // pub fn SetMenuDefaultItem();
-    // pub fn SetMenuInfo();
+    pub fn SetMenuInfo(hMenu: HMENU, lpcmi: LPCMENUINFO) -> BOOL;
     // pub fn SetMenuItemBitmaps();
     // pub fn SetMenuItemInfoA();
     // pub fn SetMenuItemInfoW();
