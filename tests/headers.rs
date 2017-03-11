@@ -104,13 +104,16 @@ fn check_imports() {
                 break;
             }
             let parts: Vec<&str> = line.split("&[").collect();
-            let deps = parts[1].split(',').map(|x| get_between_quotes(x).to_owned()).collect();
-            files_deps.insert(format!("{}.rs", get_between_quotes(parts[0])), deps);
+            files_deps.insert(format!("{}.rs", get_between_quotes(parts[0])),
+                              parts[1].split(',')
+                                      .map(|x| get_between_quotes(x).to_owned())
+                                      .filter(|x| !x.is_empty())
+                                      .collect());
         }
     }
     let mut errors = 0;
     read_dirs("src", &mut files_deps, &mut errors, 0);
-    assert!(errors == 0, "Missing declaration(s) found");
+    assert!(errors == 0, "Missing or extra declaration(s) found");
     let keys: Vec<&String> = files_deps.keys().collect();
     if !keys.is_empty() {
         writeln!(&mut io::stderr(), "file(s) not found: {:?}\n", keys).unwrap();
