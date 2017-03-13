@@ -44,7 +44,7 @@ ENUM!{ enum _DXGI_OFFER_RESOURCE_PRIORITY {
     DXGI_OFFER_RESOURCE_PRIORITY_HIGH = 3,
 }}
 
-STRUCT!{nodebug struct DXGI_ADAPTER_DESC2 {
+STRUCT!{struct DXGI_ADAPTER_DESC2 {
     Description: [::WCHAR; 128],
     VendorId: ::UINT,
     DeviceId: ::UINT,

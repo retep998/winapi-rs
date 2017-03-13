@@ -579,7 +579,7 @@ extern "system" {
     pub fn GetScrollPos(hWnd: HWND, nBar: c_int) -> c_int;
     pub fn GetScrollRange(hWnd: HWND, nBar: c_int, lpMinPos: LPINT, lpMaxPos: LPINT) -> BOOL;
     pub fn GetShellWindow() -> HWND;
-    // pub fn GetSubMenu();
+    pub fn GetSubMenu(hMenu: HMENU, nPos: INT) -> HMENU;
     pub fn GetSysColor(nIndex: c_int) -> DWORD;
     pub fn GetSysColorBrush(nIndex: c_int) -> HBRUSH;
     pub fn GetSystemMenu(hWnd: HWND, bRevert: BOOL) -> HMENU;
@@ -1051,8 +1051,13 @@ extern "system" {
     ) -> c_int;
     // pub fn ToUnicodeEx();
     pub fn TrackMouseEvent(lpEventTrack: LPTRACKMOUSEEVENT) -> BOOL;
-    // pub fn TrackPopupMenu();
-    // pub fn TrackPopupMenuEx();
+    pub fn TrackPopupMenu(
+        hMenu: HMENU, uFlags: UINT, x: INT, y: INT, nReserved: INT, hWnd: HWND,
+        prcRect: *const RECT,
+    ) -> BOOL;
+    pub fn TrackPopupMenuEx(
+        hMenu: HMENU, uFlags: UINT, x: INT, y: INT, hwnd: HWND, lptpm: LPTPMPARAMS,
+    ) -> BOOL;
     // pub fn TranslateAccelerator();
     // pub fn TranslateAcceleratorA();
     // pub fn TranslateAcceleratorW();

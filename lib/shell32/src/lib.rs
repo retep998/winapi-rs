@@ -319,10 +319,9 @@ extern "system" {
     // pub fn Shell_GetCachedImageIndexW();
     // pub fn Shell_GetImageLists();
     // pub fn Shell_MergeMenus();
-    // pub fn Shell_NotifyIcon();
-    // pub fn Shell_NotifyIconA();
+     pub fn Shell_NotifyIconA(dwMessage: DWORD, lpData: PNOTIFYICONDATAA) -> BOOL;
+     pub fn Shell_NotifyIconW(dwMessage: DWORD, lpData: PNOTIFYICONDATAW) -> BOOL;
     // pub fn Shell_NotifyIconGetRect();
-    // pub fn Shell_NotifyIconW();
     // pub fn SignalFileOpen();
     // pub fn StgMakeUniqueName();
     // pub fn WOWShellExecute();

@@ -87,7 +87,7 @@ STRUCT!{struct SOCKET_ADDRESS {
 }}
 pub type PSOCKET_ADDRESS = *mut SOCKET_ADDRESS;
 pub type LPSOCKET_ADDRESS = *mut SOCKET_ADDRESS;
-STRUCT!{nodebug struct SOCKET_ADDRESS_LIST {
+STRUCT!{struct SOCKET_ADDRESS_LIST {
     iAddressCount: ::INT,
     Address: [SOCKET_ADDRESS; 0],
 }}
@@ -101,7 +101,7 @@ STRUCT!{struct CSADDR_INFO {
 }}
 pub type PCSADDR_INFO = *mut CSADDR_INFO;
 pub type LPCSADDR_INFO = *mut CSADDR_INFO;
-STRUCT!{nodebug struct SOCKADDR_STORAGE_LH {
+STRUCT!{struct SOCKADDR_STORAGE_LH {
     ss_family: ADDRESS_FAMILY,
     __ss_pad1: [::CHAR; 6],
     __ss_align: ::__int64,
@@ -109,7 +109,7 @@ STRUCT!{nodebug struct SOCKADDR_STORAGE_LH {
 }}
 pub type PSOCKADDR_STORAGE_LH = *mut SOCKADDR_STORAGE_LH;
 pub type LPSOCKADDR_STORAGE_LH = *mut SOCKADDR_STORAGE_LH;
-STRUCT!{nodebug struct SOCKADDR_STORAGE_XP {
+STRUCT!{struct SOCKADDR_STORAGE_XP {
     ss_family: ::c_short,
     __ss_pad1: [::CHAR; 6],
     __ss_align: ::__int64,

@@ -1297,7 +1297,7 @@ pub type TOOLTIPTEXTW = NMTTDISPINFOW;
 pub type TOOLTIPTEXTA = NMTTDISPINFOA;
 pub type LPTOOLTIPTEXTA = LPNMTTDISPINFOA;
 pub type LPTOOLTIPTEXTW = LPNMTTDISPINFOW;
-STRUCT!{nodebug struct NMTTDISPINFOA {
+STRUCT!{struct NMTTDISPINFOA {
     hdr: ::NMHDR,
     lpszText: ::LPSTR,
     szText: [::c_char; 80],
@@ -1306,7 +1306,7 @@ STRUCT!{nodebug struct NMTTDISPINFOA {
     lParam: ::LPARAM,
 }}
 pub type LPNMTTDISPINFOA = *mut NMTTDISPINFOA;
-STRUCT!{nodebug struct NMTTDISPINFOW {
+STRUCT!{struct NMTTDISPINFOW {
     hdr: ::NMHDR,
     lpszText: ::LPWSTR,
     szText: [::WCHAR; 80],
@@ -1548,7 +1548,7 @@ pub const LIS_ENABLED: ::UINT = 0x00000002;
 pub const LIS_VISITED: ::UINT = 0x00000004;
 pub const LIS_HOTTRACK: ::UINT = 0x00000008;
 pub const LIS_DEFAULTCOLORS: ::UINT = 0x00000010;
-STRUCT!{nodebug struct LITEM {
+STRUCT!{struct LITEM {
     mask: ::UINT,
     iLink: ::c_int,
     state: ::UINT,
@@ -1557,12 +1557,12 @@ STRUCT!{nodebug struct LITEM {
     szUrl: [::WCHAR; L_MAX_URL_LENGTH],
 }}
 pub type PLITEM = *mut LITEM;
-STRUCT!{nodebug struct LHITTESTINFO {
+STRUCT!{struct LHITTESTINFO {
     pt: ::POINT,
     item: LITEM,
 }}
 pub type PLHITTESTINFO = *mut LHITTESTINFO;
-STRUCT!{nodebug struct NMLINK {
+STRUCT!{struct NMLINK {
     hdr: ::NMHDR,
     item: LITEM,
 }}
@@ -2052,7 +2052,7 @@ pub const LVM_SORTGROUPS: ::UINT = LVM_FIRST + 158;
 pub type PFNLVGROUPCOMPARE = Option<unsafe extern "system" fn(
     ::c_int, ::c_int, *mut ::c_void,
 ) -> ::c_int>;
-STRUCT!{nodebug struct LVINSERTGROUPSORTED {
+STRUCT!{struct LVINSERTGROUPSORTED {
     pfnGroupCompare: PFNLVGROUPCOMPARE,
     pvData: *mut ::c_void,
     lvGroup: LVGROUP,
@@ -2286,7 +2286,7 @@ STRUCT!{struct NMLVKEYDOWN {
 }}
 pub type LPNMLVKEYDOWN = *mut NMLVKEYDOWN;
 pub const LVN_MARQUEEBEGIN: ::UINT = LVN_FIRST - 56;
-STRUCT!{nodebug struct NMLVLINK {
+STRUCT!{struct NMLVLINK {
     hdr: ::NMHDR,
     link: LITEM,
     iItem: ::c_int,
@@ -2333,7 +2333,7 @@ pub const LVN_BEGINSCROLL: ::UINT = LVN_FIRST - 80;
 pub const LVN_ENDSCROLL: ::UINT = LVN_FIRST - 81;
 pub const LVN_LINKCLICK: ::UINT = LVN_FIRST - 84;
 pub const EMF_CENTERED: ::DWORD = 0x00000001;
-STRUCT!{nodebug struct NMLVEMPTYMARKUP {
+STRUCT!{struct NMLVEMPTYMARKUP {
     hdr: ::NMHDR,
     dwFlags: ::DWORD,
     szMarkup: [::WCHAR; L_MAX_URL_LENGTH],
@@ -2599,7 +2599,7 @@ pub type PFNTVCOMPARE = Option<unsafe extern "system" fn(
 ) -> ::c_int>;
 pub type LPTV_SORTCB = LPTVSORTCB;
 pub type TV_SORTCB = TVSORTCB;
-STRUCT!{nodebug struct TVSORTCB {
+STRUCT!{struct TVSORTCB {
     hParent: HTREEITEM,
     lpfnCompare: PFNTVCOMPARE,
     lParam: ::LPARAM,
@@ -2817,21 +2817,21 @@ pub const CBENF_RETURN: ::c_int = 2;
 pub const CBENF_ESCAPE: ::c_int = 3;
 pub const CBENF_DROPDOWN: ::c_int = 4;
 pub const CBEMAXSTRLEN: usize = 260;
-STRUCT!{nodebug struct NMCBEDRAGBEGINW {
+STRUCT!{struct NMCBEDRAGBEGINW {
     hdr: ::NMHDR,
     iItemid: ::c_int,
     szText: [::WCHAR; CBEMAXSTRLEN],
 }}
 pub type PNMCBEDRAGBEGINW = *mut NMCBEDRAGBEGINW;
 pub type LPNMCBEDRAGBEGINW = *mut NMCBEDRAGBEGINW;
-STRUCT!{nodebug struct NMCBEDRAGBEGINA {
+STRUCT!{struct NMCBEDRAGBEGINA {
     hdr: ::NMHDR,
     iItemid: ::c_int,
     szText: [::c_char; CBEMAXSTRLEN],
 }}
 pub type PNMCBEDRAGBEGINA = *mut NMCBEDRAGBEGINA;
 pub type LPNMCBEDRAGBEGINA = *mut NMCBEDRAGBEGINA;
-STRUCT!{nodebug struct NMCBEENDEDITW {
+STRUCT!{struct NMCBEENDEDITW {
     hdr: ::NMHDR,
     fChanged: ::BOOL,
     iNewSelection: ::c_int,
@@ -2840,7 +2840,7 @@ STRUCT!{nodebug struct NMCBEENDEDITW {
 }}
 pub type PNMCBEENDEDITW = *mut NMCBEENDEDITW;
 pub type LPNMCBEENDEDITW = *mut NMCBEENDEDITW;
-STRUCT!{nodebug struct NMCBEENDEDITA {
+STRUCT!{struct NMCBEENDEDITA {
     hdr: ::NMHDR,
     fChanged: ::BOOL,
     iNewSelection: ::c_int,
@@ -3201,7 +3201,7 @@ STRUCT!{struct NMDATETIMEWMKEYDOWNW {
 pub type LPNMDATETIMEWMKEYDOWNW = *mut NMDATETIMEWMKEYDOWNW;
 pub const DTN_FORMATA: ::UINT = DTN_FIRST2 - 3;
 pub const DTN_FORMATW: ::UINT = DTN_FIRST - 3;
-STRUCT!{nodebug struct NMDATETIMEFORMATA {
+STRUCT!{struct NMDATETIMEFORMATA {
     nmhdr: ::NMHDR,
     pszFormat: ::LPCSTR,
     st: ::SYSTEMTIME,
@@ -3209,7 +3209,7 @@ STRUCT!{nodebug struct NMDATETIMEFORMATA {
     szDisplay: [::CHAR; 64],
 }}
 pub type LPNMDATETIMEFORMATA = *mut NMDATETIMEFORMATA;
-STRUCT!{nodebug struct NMDATETIMEFORMATW {
+STRUCT!{struct NMDATETIMEFORMATW {
     nmhdr: ::NMHDR,
     pszFormat: ::LPCWSTR,
     st: ::SYSTEMTIME,
@@ -3403,7 +3403,7 @@ pub const CB_GETCUEBANNER: ::UINT = CBM_FIRST + 4;
 pub type PFTASKDIALOGCALLBACK = Option<unsafe extern "system" fn(
     hwnd: ::HWND, msg: ::UINT, wParam: ::WPARAM, lParam: ::LPARAM, lpRefData: ::LONG_PTR,
 ) -> ::HRESULT>;
-FLAGS!{enum TASKDIALOG_FLAGS {
+ENUM!{enum TASKDIALOG_FLAGS {
     TDF_ENABLE_HYPERLINKS = 0x0001,
     TDF_USE_HICON_MAIN = 0x0002,
     TDF_USE_HICON_FOOTER = 0x0004,
@@ -3467,7 +3467,7 @@ ENUM!{enum TASKDIALOG_ICON_ELEMENTS {
     TDIE_ICON_MAIN,
     TDIE_ICON_FOOTER,
 }}
-FLAGS!{enum TASKDIALOG_COMMON_BUTTON_FLAGS {
+ENUM!{enum TASKDIALOG_COMMON_BUTTON_FLAGS {
     TDCBF_OK_BUTTON = 0x0001,
     TDCBF_YES_BUTTON = 0x0002,
     TDCBF_NO_BUTTON = 0x0004,
@@ -3475,7 +3475,7 @@ FLAGS!{enum TASKDIALOG_COMMON_BUTTON_FLAGS {
     TDCBF_RETRY_BUTTON = 0x0010,
     TDCBF_CLOSE_BUTTON = 0x0020,
 }}
-STRUCT!{nodebug struct TASKDIALOGCONFIG {
+STRUCT!{struct TASKDIALOGCONFIG {
     cbSize: ::UINT,
     hwndParent: ::HWND,
     hInstance: ::HINSTANCE,

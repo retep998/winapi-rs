@@ -1,7 +1,7 @@
 // Copyright © 2015, skdltmxn
 // Licensed under the MIT License <LICENSE.md>
 //! Defines the process snapshot API
-FLAGS!{enum PSS_CAPTURE_FLAGS {
+ENUM!{enum PSS_CAPTURE_FLAGS {
     PSS_CAPTURE_NONE = 0x00000000,
     PSS_CAPTURE_VA_CLONE = 0x00000001,
     PSS_CAPTURE_RESERVED_00000002 = 0x00000002,
@@ -39,7 +39,7 @@ ENUM!{enum PSS_WALK_INFORMATION_CLASS {
     PSS_WALK_HANDLES = 2,
     PSS_WALK_THREADS = 3,
 }}
-FLAGS!{enum PSS_DUPLICATE_FLAGS {
+ENUM!{enum PSS_DUPLICATE_FLAGS {
     PSS_DUPLICATE_NONE = 0x00,
     PSS_DUPLICATE_CLOSE_SOURCE = 0x01,
 }}
@@ -51,7 +51,7 @@ pub type pAllocRoutine = Option<unsafe extern "system" fn(
 pub type pFreeRoutine = Option<unsafe extern "system" fn(
     Context: *mut ::c_void, Address: *mut ::c_void,
 )>;
-STRUCT!{nodebug struct PSS_ALLOCATOR {
+STRUCT!{struct PSS_ALLOCATOR {
     Context: *mut ::c_void,
     AllocRoutine: pAllocRoutine,
     FreeRoutine: pFreeRoutine,

@@ -405,7 +405,7 @@ STRUCT!{struct PROV_ENUMALGS {
     dwNameLen: ::DWORD,
     szName: [::CHAR; 20],
 }}
-STRUCT!{nodebug struct PROV_ENUMALGS_EX {
+STRUCT!{struct PROV_ENUMALGS_EX {
     aiAlgid: ALG_ID,
     dwDefaultLen: ::DWORD,
     dwMinLen: ::DWORD,
@@ -462,12 +462,12 @@ STRUCT!{struct KEY_TYPE_SUBTYPE {
     Subtype: ::GUID,
 }}
 pub type PKEY_TYPE_SUBTYPE = *mut KEY_TYPE_SUBTYPE;
-STRUCT!{nodebug struct CERT_FORTEZZA_DATA_PROP {
+STRUCT!{struct CERT_FORTEZZA_DATA_PROP {
     SerialNumber: [::c_uchar; 8],
     CertIndex: ::c_int,
     CertLabel: [::c_uchar; 36],
 }}
-STRUCT!{nodebug struct CRYPT_RC4_KEY_STATE {
+STRUCT!{struct CRYPT_RC4_KEY_STATE {
     Key: [::c_uchar; 16],
     SBox: [::c_uchar; 256],
     i: ::c_uchar,
@@ -876,7 +876,7 @@ pub type PCRYPT_RESOLVE_HCRYPTPROV_FUNC = Option<unsafe extern "system" fn(
     pPrivateKeyInfo: *mut CRYPT_PRIVATE_KEY_INFO, phCryptProv: *mut HCRYPTPROV,
     pVoidResolveFunc: ::LPVOID,
 ) -> ::BOOL>;
-STRUCT!{nodebug struct CRYPT_PKCS8_IMPORT_PARAMS {
+STRUCT!{struct CRYPT_PKCS8_IMPORT_PARAMS {
     PrivateKey: CRYPT_DIGEST_BLOB,
     pResolvehCryptProvFunc: PCRYPT_RESOLVE_HCRYPTPROV_FUNC,
     pVoidResolveFunc: ::LPVOID,
@@ -886,7 +886,7 @@ STRUCT!{nodebug struct CRYPT_PKCS8_IMPORT_PARAMS {
 pub type PCRYPT_PKCS8_IMPORT_PARAMS = *mut CRYPT_PKCS8_IMPORT_PARAMS;
 pub type CRYPT_PRIVATE_KEY_BLOB_AND_PARAMS = CRYPT_PKCS8_IMPORT_PARAMS;
 pub type PPCRYPT_PRIVATE_KEY_BLOB_AND_PARAMS = *mut CRYPT_PKCS8_IMPORT_PARAMS;
-STRUCT!{nodebug struct CRYPT_PKCS8_EXPORT_PARAMS {
+STRUCT!{struct CRYPT_PKCS8_EXPORT_PARAMS {
     hCryptProv: HCRYPTPROV,
     dwKeySpec: ::DWORD,
     pszPrivateKeyObjId: ::LPSTR,
@@ -1050,7 +1050,7 @@ pub const CRYPT_FORMAT_SEMICOLON: ::DWORD = CRYPT_FORMAT_RDN_SEMICOLON;
 pub const CRYPT_FORMAT_CRLF: ::DWORD = CRYPT_FORMAT_RDN_CRLF;
 pub type PFN_CRYPT_ALLOC = Option<unsafe extern "system" fn(cbSize: ::size_t)>;
 pub type PFN_CRYPT_FREE = Option<unsafe extern "system" fn(pv: ::LPVOID)>;
-STRUCT!{nodebug struct CRYPT_ENCODE_PARA {
+STRUCT!{struct CRYPT_ENCODE_PARA {
     cbSize: ::DWORD,
     pfnAlloc: PFN_CRYPT_ALLOC,
     pfnFree: PFN_CRYPT_FREE,
@@ -1071,7 +1071,7 @@ pub const CRYPT_ENCODE_ENABLE_PUNYCODE_FLAG: ::DWORD = 0x20000;
 pub const CRYPT_ENCODE_ENABLE_UTF8PERCENT_FLAG: ::DWORD = 0x40000;
 pub const CRYPT_ENCODE_ENABLE_IA5CONVERSION_FLAG: ::DWORD = CRYPT_ENCODE_ENABLE_PUNYCODE_FLAG
     | CRYPT_ENCODE_ENABLE_UTF8PERCENT_FLAG;
-STRUCT!{nodebug struct CRYPT_DECODE_PARA {
+STRUCT!{struct CRYPT_DECODE_PARA {
     cbSize: ::DWORD,
     pfnAlloc: PFN_CRYPT_ALLOC,
     pfnFree: PFN_CRYPT_FREE,
@@ -1743,6 +1743,14 @@ STRUCT!{struct CERT_SERVER_OCSP_RESPONSE_CONTEXT {
 }}
 pub type PCERT_SERVER_OCSP_RESPONSE_CONTEXT = *mut CERT_SERVER_OCSP_RESPONSE_CONTEXT;
 pub type PCCERT_SERVER_OCSP_RESPONSE_CONTEXT = *const CERT_SERVER_OCSP_RESPONSE_CONTEXT;
+
+pub const CERT_CHAIN_CACHE_END_CERT: ::DWORD = 0x00000001;
+pub const CERT_CHAIN_THREAD_STORE_SYNC: ::DWORD = 0x00000002;
+pub const CERT_CHAIN_CACHE_ONLY_URL_RETRIEVAL: ::DWORD = 0x00000004;
+pub const CERT_CHAIN_USE_LOCAL_MACHINE_STORE: ::DWORD = 0x00000008;
+pub const CERT_CHAIN_ENABLE_CACHE_AUTO_UPDATE: ::DWORD = 0x00000010;
+pub const CERT_CHAIN_ENABLE_SHARE_STORE: ::DWORD = 0x00000020;
+
 STRUCT!{struct CERT_CHAIN_ENGINE_CONFIG {
     cbSize: ::DWORD,
     hRestrictedRoot: HCERTSTORE,
@@ -1766,7 +1774,7 @@ pub type HCERTCHAINENGINE = ::HANDLE;
 pub type PFN_CERT_CREATE_CONTEXT_SORT_FUNC = Option<unsafe extern "system" fn(
     cbTotalEncoded: ::DWORD, cbRemainEncoded: ::DWORD, cEntry: ::DWORD, pvSort: *mut ::c_void
 ) -> ::BOOL>;
-STRUCT!{nodebug struct CERT_CREATE_CONTEXT_PARA {
+STRUCT!{struct CERT_CREATE_CONTEXT_PARA {
     cbSize: ::DWORD,
     pfnFree: PFN_CRYPT_FREE,
     pvFree: *mut ::c_void,
@@ -1890,6 +1898,8 @@ UNION!(
 UNION!(CERT_STRONG_SIGN_PARA, pvInfo, pszOID, pszOID_mut, ::LPSTR);
 pub type PCERT_STRONG_SIGN_PARA = *mut CERT_STRONG_SIGN_PARA;
 pub type PCCERT_STRONG_SIGN_PARA = *const CERT_STRONG_SIGN_PARA;
+pub const USAGE_MATCH_TYPE_AND: ::DWORD = 0x00000000;
+pub const USAGE_MATCH_TYPE_OR: ::DWORD = 0x00000001;
 STRUCT!{struct CERT_USAGE_MATCH {
     dwType: ::DWORD,
     Usage: CERT_ENHKEY_USAGE,
@@ -2016,7 +2026,7 @@ pub type PFN_CRYPT_GET_SIGNER_CERTIFICATE = Option<unsafe extern "system" fn(
     pvGetArg: *mut ::c_void, dwCertEncodingType: ::DWORD, pSignerId: PCERT_INFO,
     hMsgCertStore: HCERTSTORE,
 ) -> PCCERT_CONTEXT>;
-STRUCT!{nodebug struct CRYPT_VERIFY_MESSAGE_PARA {
+STRUCT!{struct CRYPT_VERIFY_MESSAGE_PARA {
     cbSize: ::DWORD,
     dwMsgAndCertEncodingType: ::DWORD,
     hCryptProv: HCRYPTPROV_LEGACY,
@@ -2104,7 +2114,7 @@ pub type PCMSG_SIGNED_ENCODE_INFO = *mut CMSG_SIGNED_ENCODE_INFO;
 pub type PFN_CMSG_STREAM_OUTPUT = Option<unsafe extern "system" fn(
     pvArg: *const ::c_void, pbData: *mut ::BYTE, cbData: ::DWORD, fFinal: ::BOOL,
 ) -> ::BOOL>;
-STRUCT!{nodebug struct CMSG_STREAM_INFO {
+STRUCT!{struct CMSG_STREAM_INFO {
     cbContent: ::DWORD,
     pfnStreamOutput: PFN_CMSG_STREAM_OUTPUT,
     pvArg: *mut ::c_void,
@@ -2180,3 +2190,31 @@ STRUCT!{struct CRYPT_KEY_VERIFY_MESSAGE_PARA {
     hCryptProv: HCRYPTPROV_LEGACY,
 }}
 pub type PCRYPT_KEY_VERIFY_MESSAGE_PARA = *mut CRYPT_KEY_VERIFY_MESSAGE_PARA;
+STRUCT!{struct HTTPSPolicyCallbackData {
+    cbSize: ::DWORD,
+    dwAuthType: ::DWORD,
+    fdwChecks: ::DWORD,
+    pwszServerName: *mut ::WCHAR,
+}}
+pub type PHTTPSPolicyCallbackData = *mut HTTPSPolicyCallbackData;
+pub type SSL_EXTRA_CERT_CHAIN_POLICY_PARA = HTTPSPolicyCallbackData;
+pub type PSSL_EXTRA_CERT_CHAIN_POLICY_PARA = *mut HTTPSPolicyCallbackData;
+pub const AUTHTYPE_CLIENT: ::DWORD = 1;
+pub const AUTHTYPE_SERVER: ::DWORD = 2;
+pub const CTL_ENTRY_FROM_PROP_CHAIN_FLAG: ::DWORD = 0x1;
+pub const CMSG_ENCODE_SORTED_CTL_FLAG: ::DWORD = 0x1;
+pub const CMSG_ENCODE_HASHED_SUBJECT_IDENTIFIER_FLAG: ::DWORD = 0x2;
+pub const PKCS12_INCLUDE_EXTENDED_PROPERTIES: ::DWORD = 0x10;
+pub const PKCS12_IMPORT_SILENT: ::DWORD = 0x40;
+pub const CRYPT_USER_KEYSET: ::DWORD = 0x1000;
+pub const PKCS12_PREFER_CNG_KSP: ::DWORD = 0x100;
+pub const PKCS12_ALWAYS_CNG_KSP: ::DWORD = 0x200;
+pub const PKCS12_ALLOW_OVERWRITE_KEY: ::DWORD = 0x4000;
+pub const PKCS12_NO_PERSIST_KEY: ::DWORD = 0x8000;
+
+pub const CRYPT_ACQUIRE_CACHE_FLAG: ::DWORD = 0x00000001;
+pub const CRYPT_ACQUIRE_USE_PROV_INFO_FLAG: ::DWORD = 0x00000002;
+pub const CRYPT_ACQUIRE_COMPARE_KEY_FLAG: ::DWORD = 0x00000004;
+pub const CRYPT_ACQUIRE_NO_HEALING: ::DWORD = 0x00000008;
+pub const CRYPT_ACQUIRE_SILENT_FLAG: ::DWORD = 0x00000040;
+pub const CRYPT_ACQUIRE_WINDOW_HANDLE_FLAG: ::DWORD = 0x00000080;

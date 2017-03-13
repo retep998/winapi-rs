@@ -8,6 +8,16 @@ pub const CP_THREAD_ACP: ::DWORD = 3;
 pub const CP_SYMBOL: ::DWORD = 42;
 pub const CP_UTF7: ::DWORD = 65000;
 pub const CP_UTF8: ::DWORD = 65001;
+pub const MB_PRECOMPOSED: ::DWORD = 0x00000001;
+pub const MB_COMPOSITE: ::DWORD = 0x00000002;
+pub const MB_USEGLYPHCHARS: ::DWORD = 0x00000004;
+pub const MB_ERR_INVALID_CHARS: ::DWORD = 0x00000008;
+pub const WC_COMPOSITECHECK: ::DWORD = 0x00000200;
+pub const WC_DISCARDNS: ::DWORD = 0x00000010;
+pub const WC_SEPCHARS: ::DWORD = 0x00000020;
+pub const WC_DEFAULTCHAR: ::DWORD = 0x00000040;
+pub const WC_ERR_INVALID_CHARS: ::DWORD = 0x00000080;
+pub const WC_NO_BEST_FIT_CHARS: ::DWORD = 0x00000400;
 pub const MAX_LEADBYTES: usize = 12;
 pub const MAX_DEFAULTCHAR: usize = 2;
 pub type LGRPID = ::DWORD;
@@ -75,7 +85,7 @@ STRUCT!{struct CPINFO {
     LeadByte: [::BYTE; MAX_LEADBYTES],
 }}
 pub type LPCPINFO = *mut CPINFO;
-STRUCT!{nodebug struct CPINFOEXA {
+STRUCT!{struct CPINFOEXA {
     MaxCharSize: ::UINT,
     DefaultChar: [::BYTE; MAX_DEFAULTCHAR],
     LeadByte: [::BYTE; MAX_LEADBYTES],
@@ -84,7 +94,7 @@ STRUCT!{nodebug struct CPINFOEXA {
     CodePageName: [::CHAR; ::MAX_PATH],
 }}
 pub type LPCPINFOEXA = *mut CPINFOEXA;
-STRUCT!{nodebug struct CPINFOEXW {
+STRUCT!{struct CPINFOEXW {
     MaxCharSize: ::UINT,
     DefaultChar: [::BYTE; MAX_DEFAULTCHAR],
     LeadByte: [::BYTE; MAX_LEADBYTES],

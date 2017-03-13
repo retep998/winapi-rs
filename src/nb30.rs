@@ -5,7 +5,7 @@ pub const NCBNAMSZ: usize = 16;
 pub const MAX_LANA: usize = 254;
 pub type PFPOST = Option<unsafe extern "system" fn(*mut NCB)>;
 #[cfg(target_arch="x86_64")]
-STRUCT!{nodebug struct NCB {
+STRUCT!{struct NCB {
     ncb_command: ::UCHAR,
     ncb_retcode: ::UCHAR,
     ncb_lsn: ::UCHAR,
@@ -23,7 +23,7 @@ STRUCT!{nodebug struct NCB {
     ncb_event: ::HANDLE,
 }}
 #[cfg(target_arch="x86")]
-STRUCT!{nodebug struct NCB {
+STRUCT!{struct NCB {
     ncb_command: ::UCHAR,
     ncb_retcode: ::UCHAR,
     ncb_lsn: ::UCHAR,
@@ -107,7 +107,7 @@ pub const SESSION_ESTABLISHED: ::UCHAR = 0x03;
 pub const HANGUP_PENDING: ::UCHAR = 0x04;
 pub const HANGUP_COMPLETE: ::UCHAR = 0x05;
 pub const SESSION_ABORTED: ::UCHAR = 0x06;
-STRUCT!{nodebug struct LANA_ENUM {
+STRUCT!{struct LANA_ENUM {
     length: ::UCHAR,
     lana: [::UCHAR; MAX_LANA + 1],
 }}

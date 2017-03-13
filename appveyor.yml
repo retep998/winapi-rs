@@ -4,8 +4,9 @@ environment:
   - TARGET: nightly-i686-pc-windows-msvc
   - TARGET: nightly-x86_64-pc-windows-gnu
   - TARGET: nightly-i686-pc-windows-gnu
-  - TARGET: 1.4.0-x86_64-pc-windows-gnu
+  - TARGET: 1.6.0-x86_64-pc-windows-gnu
 install:
+  - ps: if (ls -r . -fi "*.rs" | sls "`t") { throw "Found tab character" }
   - ps: Start-FileDownload "https://static.rust-lang.org/dist/rust-${env:TARGET}.exe" -FileName "rust-install.exe"
   - ps: .\rust-install.exe /VERYSILENT /NORESTART /DIR="C:\rust" | Out-Null
   - ps: $env:PATH="$env:PATH;C:\rust\bin"
@@ -13,6 +14,6 @@ install:
   - cargo -vV
 build_script:
   - cargo build
-  - cargo package
+  - cargo build --features everything
 test_script:
-  - cargo test
+  - cargo test --features everything

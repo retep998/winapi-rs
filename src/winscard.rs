@@ -17,7 +17,7 @@ pub const SCARD_SCOPE_SYSTEM: ::DWORD = 2;
 pub const SCARD_PROVIDER_PRIMARY: ::DWORD = 1;
 pub const SCARD_PROVIDER_CSP: ::DWORD = 2;
 pub const SCARD_PROVIDER_KSP: ::DWORD = 3;
-STRUCT!{nodebug struct SCARD_READERSTATEA {
+STRUCT!{struct SCARD_READERSTATEA {
     szReader: ::LPCSTR,
     pvUserData: ::LPVOID,
     dwCurrentState: ::DWORD,
@@ -27,7 +27,7 @@ STRUCT!{nodebug struct SCARD_READERSTATEA {
 }}
 pub type PSCARD_READERSTATEA = *mut SCARD_READERSTATEA;
 pub type LPSCARD_READERSTATEA = *mut SCARD_READERSTATEA;
-STRUCT!{nodebug struct SCARD_READERSTATEW {
+STRUCT!{struct SCARD_READERSTATEW {
     szReader: ::LPCWSTR,
     pvUserData: ::LPVOID,
     dwCurrentState: ::DWORD,
@@ -55,7 +55,7 @@ pub const SCARD_STATE_EXCLUSIVE: ::DWORD = 0x00000080;
 pub const SCARD_STATE_INUSE: ::DWORD = 0x00000100;
 pub const SCARD_STATE_MUTE: ::DWORD = 0x00000200;
 pub const SCARD_STATE_UNPOWERED: ::DWORD = 0x00000400;
-STRUCT!{nodebug struct SCARD_ATRMASK {
+STRUCT!{struct SCARD_ATRMASK {
     cbAtr: ::DWORD,
     rgbAtr: [::BYTE; 36],
     rgbMask: [::BYTE; 36],
@@ -84,7 +84,7 @@ pub type LPOCNCHKPROC = Option<unsafe extern "system" fn(
     SCARDCONTEXT, SCARDHANDLE, ::PVOID,
 ) -> ::BOOL>;
 pub type LPOCNDSCPROC = Option<unsafe extern "system" fn(SCARDCONTEXT, SCARDHANDLE, ::PVOID)>;
-STRUCT!{nodebug struct OPENCARD_SEARCH_CRITERIAA {
+STRUCT!{struct OPENCARD_SEARCH_CRITERIAA {
     dwStructSize: ::DWORD,
     lpstrGroupNames: ::LPSTR,
     nMaxGroupNames: ::DWORD,
@@ -101,7 +101,7 @@ STRUCT!{nodebug struct OPENCARD_SEARCH_CRITERIAA {
 }}
 pub type POPENCARD_SEARCH_CRITERIAA = *mut OPENCARD_SEARCH_CRITERIAA;
 pub type LPOPENCARD_SEARCH_CRITERIAA = *mut OPENCARD_SEARCH_CRITERIAA;
-STRUCT!{nodebug struct OPENCARD_SEARCH_CRITERIAW {
+STRUCT!{struct OPENCARD_SEARCH_CRITERIAW {
     dwStructSize: ::DWORD,
     lpstrGroupNames: ::LPWSTR,
     nMaxGroupNames: ::DWORD,
@@ -118,7 +118,7 @@ STRUCT!{nodebug struct OPENCARD_SEARCH_CRITERIAW {
 }}
 pub type POPENCARD_SEARCH_CRITERIAW = *mut OPENCARD_SEARCH_CRITERIAW;
 pub type LPOPENCARD_SEARCH_CRITERIAW = *mut OPENCARD_SEARCH_CRITERIAW;
-STRUCT!{nodebug struct OPENCARDNAME_EXA {
+STRUCT!{struct OPENCARDNAME_EXA {
     dwStructSize: ::DWORD,
     hSCardContext: SCARDCONTEXT,
     hwndOwner: ::HWND,
@@ -140,7 +140,7 @@ STRUCT!{nodebug struct OPENCARDNAME_EXA {
 }}
 pub type POPENCARDNAME_EXA = *mut OPENCARDNAME_EXA;
 pub type LPOPENCARDNAME_EXA = *mut OPENCARDNAME_EXA;
-STRUCT!{nodebug struct OPENCARDNAME_EXW {
+STRUCT!{struct OPENCARDNAME_EXW {
     dwStructSize: ::DWORD,
     hSCardContext: SCARDCONTEXT,
     hwndOwner: ::HWND,
@@ -205,7 +205,7 @@ STRUCT!{struct READER_SEL_RESPONSE {
     cchCardNameLength: ::DWORD,
 }}
 pub type PREADER_SEL_RESPONSE = *mut READER_SEL_RESPONSE;
-STRUCT!{nodebug struct OPENCARDNAMEA {
+STRUCT!{struct OPENCARDNAMEA {
     dwStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hSCardContext: SCARDCONTEXT,
@@ -232,7 +232,7 @@ STRUCT!{nodebug struct OPENCARDNAMEA {
 }}
 pub type POPENCARDNAMEA = *mut OPENCARDNAMEA;
 pub type LPOPENCARDNAMEA = *mut OPENCARDNAMEA;
-STRUCT!{nodebug struct OPENCARDNAMEW {
+STRUCT!{struct OPENCARDNAMEW {
     dwStructSize: ::DWORD,
     hwndOwner: ::HWND,
     hSCardContext: SCARDCONTEXT,

@@ -91,7 +91,7 @@ pub type pCryptSIPVerifyIndirectData = Option<unsafe extern "system" fn(
 pub type pCryptSIPRemoveSignedDataMsg = Option<unsafe extern "system" fn(
     pSubjectInfo: *mut SIP_SUBJECTINFO, dwIndex: ::DWORD,
 ) -> ::BOOL>;
-STRUCT!{nodebug struct SIP_DISPATCH_INFO {
+STRUCT!{struct SIP_DISPATCH_INFO {
     cbSize: ::DWORD,
     hSIP: ::HANDLE,
     pfGet: pCryptSIPGetSignedDataMsg,

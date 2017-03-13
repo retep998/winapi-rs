@@ -48,13 +48,13 @@ pub type PSP_ALTPLATFORM_INFO_V1 = *mut SP_ALTPLATFORM_INFO_V1;
 pub type SP_ALTPLATFORM_INFO = SP_ALTPLATFORM_INFO_V2;
 pub type PSP_ALTPLATFORM_INFO = PSP_ALTPLATFORM_INFO_V2;
 pub const SP_ALTPLATFORM_FLAGS_VERSION_RANGE: ::WORD = 0x0001;
-STRUCT!{nodebug struct SP_ORIGINAL_FILE_INFO_A {
+STRUCT!{struct SP_ORIGINAL_FILE_INFO_A {
     cbSize: ::DWORD,
     OriginalInfName: [::CHAR; ::MAX_PATH],
     OriginalCatalogName: [::CHAR; ::MAX_PATH],
 }}
 pub type PSP_ORIGINAL_FILE_INFO_A = *mut SP_ORIGINAL_FILE_INFO_A;
-STRUCT!{nodebug struct SP_ORIGINAL_FILE_INFO_W {
+STRUCT!{struct SP_ORIGINAL_FILE_INFO_W {
     cbSize: ::DWORD,
     OriginalInfName: [::WCHAR; ::MAX_PATH],
     OriginalCatalogName: [::WCHAR; ::MAX_PATH],
@@ -232,7 +232,7 @@ STRUCT!{struct CABINET_INFO_W {
     CabinetNumber: ::USHORT,
 }}
 pub type PCABINET_INFO_W = *mut CABINET_INFO_W;
-STRUCT!{nodebug struct FILE_IN_CABINET_INFO_A {
+STRUCT!{struct FILE_IN_CABINET_INFO_A {
     NameInCabinet: ::PCSTR,
     FileSize: ::DWORD,
     Win32Error: ::DWORD,
@@ -242,7 +242,7 @@ STRUCT!{nodebug struct FILE_IN_CABINET_INFO_A {
     FullTargetName: [::CHAR; ::MAX_PATH],
 }}
 pub type PFILE_IN_CABINET_INFO_A = *mut FILE_IN_CABINET_INFO_A;
-STRUCT!{nodebug struct FILE_IN_CABINET_INFO_W {
+STRUCT!{struct FILE_IN_CABINET_INFO_W {
     NameInCabinet: ::PCWSTR,
     FileSize: ::DWORD,
     Win32Error: ::DWORD,
@@ -338,14 +338,14 @@ STRUCT!{struct SP_DEVICE_INTERFACE_DETAIL_DATA_W {
     DevicePath: [::WCHAR; ::ANYSIZE_ARRAY],
 }}
 pub type PSP_DEVICE_INTERFACE_DETAIL_DATA_W = *mut SP_DEVICE_INTERFACE_DETAIL_DATA_W;
-STRUCT!{nodebug struct SP_DEVINFO_LIST_DETAIL_DATA_A {
+STRUCT!{struct SP_DEVINFO_LIST_DETAIL_DATA_A {
     cbSize: ::DWORD,
     ClassGuid: ::GUID,
     RemoteMachineHandle: ::HANDLE,
     RemoteMachineName: [::CHAR; SP_MAX_MACHINENAME_LENGTH],
 }}
 pub type PSP_DEVINFO_LIST_DETAIL_DATA_A = *mut SP_DEVINFO_LIST_DETAIL_DATA_A;
-STRUCT!{nodebug struct SP_DEVINFO_LIST_DETAIL_DATA_W {
+STRUCT!{struct SP_DEVINFO_LIST_DETAIL_DATA_W {
     cbSize: ::DWORD,
     ClassGuid: ::GUID,
     RemoteMachineHandle: ::HANDLE,
@@ -396,7 +396,7 @@ pub const DIF_FINISHINSTALL_ACTION: DI_FUNCTION = 0x0000002A;
 pub const DIF_RESERVED2: DI_FUNCTION = 0x00000030;
 pub const DIF_MOVEDEVICE: DI_FUNCTION = 0x0000000E;
 pub type DI_FUNCTION = ::UINT;
-STRUCT!{nodebug struct SP_DEVINSTALL_PARAMS_A {
+STRUCT!{struct SP_DEVINSTALL_PARAMS_A {
     cbSize: ::DWORD,
     Flags: ::DWORD,
     FlagsEx: ::DWORD,
@@ -409,7 +409,7 @@ STRUCT!{nodebug struct SP_DEVINSTALL_PARAMS_A {
     DriverPath: [::CHAR; ::MAX_PATH],
 }}
 pub type PSP_DEVINSTALL_PARAMS_A = *mut SP_DEVINSTALL_PARAMS_A;
-STRUCT!{nodebug struct SP_DEVINSTALL_PARAMS_W {
+STRUCT!{struct SP_DEVINSTALL_PARAMS_W {
     cbSize: ::DWORD,
     Flags: ::DWORD,
     FlagsEx: ::DWORD,
@@ -530,7 +530,7 @@ STRUCT!{struct SP_UNREMOVEDEVICE_PARAMS {
 }}
 pub type PSP_UNREMOVEDEVICE_PARAMS = *mut SP_UNREMOVEDEVICE_PARAMS;
 pub const DI_UNREMOVEDEVICE_CONFIGSPECIFIC: ::DWORD = 0x00000002;
-STRUCT!{nodebug struct SP_SELECTDEVICE_PARAMS_A {
+STRUCT!{struct SP_SELECTDEVICE_PARAMS_A {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     Title: [::CHAR; MAX_TITLE_LEN],
     Instructions: [::CHAR; MAX_INSTRUCTION_LEN],
@@ -539,7 +539,7 @@ STRUCT!{nodebug struct SP_SELECTDEVICE_PARAMS_A {
     Reserved: [::BYTE; 2],
 }}
 pub type PSP_SELECTDEVICE_PARAMS_A = *mut SP_SELECTDEVICE_PARAMS_A;
-STRUCT!{nodebug struct SP_SELECTDEVICE_PARAMS_W {
+STRUCT!{struct SP_SELECTDEVICE_PARAMS_W {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     Title: [::WCHAR; MAX_TITLE_LEN],
     Instructions: [::WCHAR; MAX_INSTRUCTION_LEN],
@@ -550,7 +550,7 @@ pub type PSP_SELECTDEVICE_PARAMS_W = *mut SP_SELECTDEVICE_PARAMS_W;
 pub type PDETECT_PROGRESS_NOTIFY = Option<unsafe extern "system" fn(
     ProgressNotifyParam: ::PVOID, DetectComplete: ::DWORD,
 ) -> ::BOOL>;
-STRUCT!{nodebug struct SP_DETECTDEVICE_PARAMS {
+STRUCT!{struct SP_DETECTDEVICE_PARAMS {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     DetectProgressNotify: PDETECT_PROGRESS_NOTIFY,
     ProgressNotifyParam: ::PVOID,
@@ -611,29 +611,29 @@ STRUCT!{struct SP_NEWDEVICEWIZARD_DATA {
 pub type PSP_NEWDEVICEWIZARD_DATA = *mut SP_NEWDEVICEWIZARD_DATA;
 pub type SP_ADDPROPERTYPAGE_DATA = SP_NEWDEVICEWIZARD_DATA;
 pub type PSP_ADDPROPERTYPAGE_DATA = PSP_NEWDEVICEWIZARD_DATA;
-STRUCT!{nodebug struct SP_TROUBLESHOOTER_PARAMS_A {
+STRUCT!{struct SP_TROUBLESHOOTER_PARAMS_A {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     ChmFile: [::CHAR; ::MAX_PATH],
     HtmlTroubleShooter: [::CHAR; ::MAX_PATH],
 }}
 pub type PSP_TROUBLESHOOTER_PARAMS_A = *mut SP_TROUBLESHOOTER_PARAMS_A;
-STRUCT!{nodebug struct SP_TROUBLESHOOTER_PARAMS_W {
+STRUCT!{struct SP_TROUBLESHOOTER_PARAMS_W {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     ChmFile: [::WCHAR; ::MAX_PATH],
     HtmlTroubleShooter: [::WCHAR; ::MAX_PATH],
 }}
 pub type PSP_TROUBLESHOOTER_PARAMS_W = *mut SP_TROUBLESHOOTER_PARAMS_W;
-STRUCT!{nodebug struct SP_POWERMESSAGEWAKE_PARAMS_A {
+STRUCT!{struct SP_POWERMESSAGEWAKE_PARAMS_A {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     PowerMessageWake: [::CHAR; LINE_LEN * 2],
 }}
 pub type PSP_POWERMESSAGEWAKE_PARAMS_A = *mut SP_POWERMESSAGEWAKE_PARAMS_A;
-STRUCT!{nodebug struct SP_POWERMESSAGEWAKE_PARAMS_W {
+STRUCT!{struct SP_POWERMESSAGEWAKE_PARAMS_W {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     PowerMessageWake: [::WCHAR; LINE_LEN * 2],
 }}
 pub type PSP_POWERMESSAGEWAKE_PARAMS_W = *mut SP_POWERMESSAGEWAKE_PARAMS_W;
-STRUCT!{nodebug struct SP_DRVINFO_DATA_V2_A {
+STRUCT!{struct SP_DRVINFO_DATA_V2_A {
     cbSize: ::DWORD,
     DriverType: ::DWORD,
     Reserved: ::ULONG_PTR,
@@ -644,7 +644,7 @@ STRUCT!{nodebug struct SP_DRVINFO_DATA_V2_A {
     DriverVersion: ::DWORDLONG,
 }}
 pub type PSP_DRVINFO_DATA_V2_A = *mut SP_DRVINFO_DATA_V2_A;
-STRUCT!{nodebug struct SP_DRVINFO_DATA_V2_W {
+STRUCT!{struct SP_DRVINFO_DATA_V2_W {
     cbSize: ::DWORD,
     DriverType: ::DWORD,
     Reserved: ::ULONG_PTR,
@@ -655,7 +655,7 @@ STRUCT!{nodebug struct SP_DRVINFO_DATA_V2_W {
     DriverVersion: ::DWORDLONG,
 }}
 pub type PSP_DRVINFO_DATA_V2_W = *mut SP_DRVINFO_DATA_V2_W;
-STRUCT!{nodebug struct SP_DRVINFO_DATA_V1_A {
+STRUCT!{struct SP_DRVINFO_DATA_V1_A {
     cbSize: ::DWORD,
     DriverType: ::DWORD,
     Reserved: ::ULONG_PTR,
@@ -664,7 +664,7 @@ STRUCT!{nodebug struct SP_DRVINFO_DATA_V1_A {
     ProviderName: [::CHAR; LINE_LEN],
 }}
 pub type PSP_DRVINFO_DATA_V1_A = *mut SP_DRVINFO_DATA_V1_A;
-STRUCT!{nodebug struct SP_DRVINFO_DATA_V1_W {
+STRUCT!{struct SP_DRVINFO_DATA_V1_W {
     cbSize: ::DWORD,
     DriverType: ::DWORD,
     Reserved: ::ULONG_PTR,
@@ -677,7 +677,7 @@ pub type SP_DRVINFO_DATA_A = SP_DRVINFO_DATA_V2_A;
 pub type PSP_DRVINFO_DATA_A = PSP_DRVINFO_DATA_V2_A;
 pub type SP_DRVINFO_DATA_W = SP_DRVINFO_DATA_V2_W;
 pub type PSP_DRVINFO_DATA_W = PSP_DRVINFO_DATA_V2_W;
-STRUCT!{nodebug struct SP_DRVINFO_DETAIL_DATA_A {
+STRUCT!{struct SP_DRVINFO_DETAIL_DATA_A {
     cbSize: ::DWORD,
     InfDate: ::FILETIME,
     CompatIDsOffset: ::DWORD,
@@ -689,7 +689,7 @@ STRUCT!{nodebug struct SP_DRVINFO_DETAIL_DATA_A {
     HardwareID: [::CHAR; ::ANYSIZE_ARRAY],
 }}
 pub type PSP_DRVINFO_DETAIL_DATA_A = *mut SP_DRVINFO_DETAIL_DATA_A;
-STRUCT!{nodebug struct SP_DRVINFO_DETAIL_DATA_W {
+STRUCT!{struct SP_DRVINFO_DETAIL_DATA_W {
     cbSize: ::DWORD,
     InfDate: ::FILETIME,
     CompatIDsOffset: ::DWORD,
@@ -767,27 +767,27 @@ pub type PSP_PROPSHEETPAGE_REQUEST = *mut SP_PROPSHEETPAGE_REQUEST;
 pub const SPPSR_SELECT_DEVICE_RESOURCES: ::DWORD = 1;
 pub const SPPSR_ENUM_BASIC_DEVICE_PROPERTIES: ::DWORD = 2;
 pub const SPPSR_ENUM_ADV_DEVICE_PROPERTIES: ::DWORD = 3;
-STRUCT!{nodebug struct SP_BACKUP_QUEUE_PARAMS_V2_A {
+STRUCT!{struct SP_BACKUP_QUEUE_PARAMS_V2_A {
     cbSize: ::DWORD,
     FullInfPath: [::CHAR; ::MAX_PATH],
     FilenameOffset: ::INT,
     ReinstallInstance: [::CHAR; ::MAX_PATH],
 }}
 pub type PSP_BACKUP_QUEUE_PARAMS_V2_A = *mut SP_BACKUP_QUEUE_PARAMS_V2_A;
-STRUCT!{nodebug struct SP_BACKUP_QUEUE_PARAMS_V2_W {
+STRUCT!{struct SP_BACKUP_QUEUE_PARAMS_V2_W {
     cbSize: ::DWORD,
     FullInfPath: [::WCHAR; ::MAX_PATH],
     FilenameOffset: ::INT,
     ReinstallInstance: [::WCHAR; ::MAX_PATH],
 }}
 pub type PSP_BACKUP_QUEUE_PARAMS_V2_W = *mut SP_BACKUP_QUEUE_PARAMS_V2_W;
-STRUCT!{nodebug struct SP_BACKUP_QUEUE_PARAMS_V1_A {
+STRUCT!{struct SP_BACKUP_QUEUE_PARAMS_V1_A {
     cbSize: ::DWORD,
     FullInfPath: [::CHAR; ::MAX_PATH],
     FilenameOffset: ::INT,
 }}
 pub type PSP_BACKUP_QUEUE_PARAMS_V1_A = *mut SP_BACKUP_QUEUE_PARAMS_V1_A;
-STRUCT!{nodebug struct SP_BACKUP_QUEUE_PARAMS_V1_W {
+STRUCT!{struct SP_BACKUP_QUEUE_PARAMS_V1_W {
     cbSize: ::DWORD,
     FullInfPath: [::WCHAR; ::MAX_PATH],
     FilenameOffset: ::INT,
@@ -1252,21 +1252,21 @@ pub const IDI_DISABLED_OVL: ::c_int = 501;
 pub const IDI_FORCED_OVL: ::c_int = 502;
 pub const SPWPT_SELECTDEVICE: ::DWORD = 0x00000001;
 pub const SPWP_USE_DEVINFO_DATA: ::DWORD = 0x00000001;
-STRUCT!{nodebug struct SP_INF_SIGNER_INFO_V1_A {
+STRUCT!{struct SP_INF_SIGNER_INFO_V1_A {
     cbSize: ::DWORD,
     CatalogFile: [::CHAR; ::MAX_PATH],
     DigitalSigner: [::CHAR; ::MAX_PATH],
     DigitalSignerVersion: [::CHAR; ::MAX_PATH],
 }}
 pub type PSP_INF_SIGNER_INFO_V1_A = *mut SP_INF_SIGNER_INFO_V1_A;
-STRUCT!{nodebug struct SP_INF_SIGNER_INFO_V1_W {
+STRUCT!{struct SP_INF_SIGNER_INFO_V1_W {
     cbSize: ::DWORD,
     CatalogFile: [::WCHAR; ::MAX_PATH],
     DigitalSigner: [::WCHAR; ::MAX_PATH],
     DigitalSignerVersion: [::WCHAR; ::MAX_PATH],
 }}
 pub type PSP_INF_SIGNER_INFO_V1_W = *mut SP_INF_SIGNER_INFO_V1_W;
-STRUCT!{nodebug struct SP_INF_SIGNER_INFO_V2_A {
+STRUCT!{struct SP_INF_SIGNER_INFO_V2_A {
     cbSize: ::DWORD,
     CatalogFile: [::CHAR; ::MAX_PATH],
     DigitalSigner: [::CHAR; ::MAX_PATH],
@@ -1274,7 +1274,7 @@ STRUCT!{nodebug struct SP_INF_SIGNER_INFO_V2_A {
     SignerScore: ::DWORD,
 }}
 pub type PSP_INF_SIGNER_INFO_V2_A = *mut SP_INF_SIGNER_INFO_V2_A;
-STRUCT!{nodebug struct SP_INF_SIGNER_INFO_V2_W {
+STRUCT!{struct SP_INF_SIGNER_INFO_V2_W {
     cbSize: ::DWORD,
     CatalogFile: [::WCHAR; ::MAX_PATH],
     DigitalSigner: [::WCHAR; ::MAX_PATH],

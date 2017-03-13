@@ -330,7 +330,7 @@ pub const SPEI_MIN_TTS: SPEVENTENUM = SPEI_START_INPUT_STREAM;
 pub const SPEI_MAX_TTS: SPEVENTENUM = SPEI_TTS_PRIVATE;
 pub const SPEI_MIN_SR: SPEVENTENUM = SPEI_END_SR_STREAM;
 pub const SPEI_MAX_SR: SPEVENTENUM = SPEI_RESERVED6;
-pub const SPFEI_FLAGCHECK: u64 = (1 << SPEI_RESERVED1.0 as u64) | (1 << SPEI_RESERVED2.0 as u64);
+pub const SPFEI_FLAGCHECK: u64 = (1 << SPEI_RESERVED1 as u64) | (1 << SPEI_RESERVED2 as u64);
 pub const SPFEI_ALL_TTS_EVENTS: u64 = 0x000000000000FFFE | SPFEI_FLAGCHECK;
 pub const SPFEI_ALL_SR_EVENTS: u64 = 0x003FFFFC00000000 | SPFEI_FLAGCHECK;
 pub const SPFEI_ALL_EVENTS: u64 = 0xEFFFFFFFFFFFFFFF;
@@ -383,12 +383,12 @@ ENUM!{enum SPINTERFERENCE {
     SPINTERFERENCE_LATENCY_TRUNCATE_BEGIN = 8,
     SPINTERFERENCE_LATENCY_TRUNCATE_END = 9,
 }}
-FLAGS!{enum SPENDSRSTREAMFLAGS {
+ENUM!{enum SPENDSRSTREAMFLAGS {
     SPESF_NONE = 0,
     SPESF_STREAM_RELEASED = 1 << 0,
     SPESF_EMULATED = 1 << 1,
 }}
-FLAGS!{enum SPVFEATURE {
+ENUM!{enum SPVFEATURE {
     SPVFEATURE_STRESSED = 1 << 0,
     SPVFEATURE_EMPHASIS = 1 << 1,
 }}
@@ -548,7 +548,7 @@ interface ISpTranscript(ISpTranscriptVtbl): IUnknown(IUnknownVtbl) {
     fn AppendTranscript(&mut self, pszTranscript: ::LPCWSTR) -> ::HRESULT
 }
 );
-FLAGS!{enum SPDISPLYATTRIBUTES {
+ENUM!{enum SPDISPLYATTRIBUTES {
     SPAF_ONE_TRAILING_SPACE = 0x2,
     SPAF_TWO_TRAILING_SPACES = 0x4,
     SPAF_CONSUME_LEADING_SPACES = 0x8,
@@ -694,7 +694,7 @@ STRUCT!{struct SPRULE {
     ulRuleId: ::ULONG,
     dwAttributes: ::DWORD,
 }}
-FLAGS!{enum SPVALUETYPE {
+ENUM!{enum SPVALUETYPE {
     SPDF_PROPERTY = 0x1,
     SPDF_REPLACEMENT = 0x2,
     SPDF_RULE = 0x4,
@@ -714,7 +714,7 @@ ENUM!{enum SPPHRASERNG {
 pub const SP_GETWHOLEPHRASE: SPPHRASERNG = SPPR_ALL_ELEMENTS;
 pub const SPRR_ALL_ELEMENTS: SPPHRASERNG = SPPR_ALL_ELEMENTS;
 DECLARE_HANDLE!(SPSTATEHANDLE, SPSTATEHANDLE__);
-FLAGS!{enum SPRECOEVENTFLAGS {
+ENUM!{enum SPRECOEVENTFLAGS {
     SPREF_AutoPause = 1 << 0,
     SPREF_Emulated = 1 << 1,
     SPREF_SMLTimeout = 1 << 2,
@@ -735,7 +735,7 @@ ENUM!{enum SPPARTOFSPEECH {
     SPPS_LMA = 0x7000,
     SPPS_SuppressWord = 0xf000,
 }}
-FLAGS!{enum SPLEXICONTYPE {
+ENUM!{enum SPLEXICONTYPE {
     eLEXTYPE_USER = 1 << 0,
     eLEXTYPE_APP = 1 << 1,
     eLEXTYPE_VENDORLEXICON = 1 << 2,
@@ -769,11 +769,11 @@ FLAGS!{enum SPLEXICONTYPE {
     eLEXTYPE_PRIVATE19 = 1 << 30,
     eLEXTYPE_PRIVATE20 = 1 << 31,
 }}
-FLAGS!{enum SPWORDTYPE {
+ENUM!{enum SPWORDTYPE {
     eWORDTYPE_ADDED = 1 << 0,
     eWORDTYPE_DELETED = 1 << 1,
 }}
-FLAGS!{enum SPPRONUNCIATIONFLAGS {
+ENUM!{enum SPPRONUNCIATIONFLAGS {
     ePRONFLAG_USED = 1 << 0,
 }}
 STRUCT!{struct SPWORDPRONUNCIATION {
@@ -970,7 +970,7 @@ STRUCT!{struct SPVOICESTATUS {
     dwReserved1: ::DWORD,
     dwReserved2: ::DWORD,
 }}
-FLAGS!{enum SPEAKFLAGS {
+ENUM!{enum SPEAKFLAGS {
     SPF_DEFAULT = 0,
     SPF_ASYNC = 1 << 0,
     SPF_PURGEBEFORESPEAK = 1 << 1,
@@ -984,10 +984,10 @@ FLAGS!{enum SPEAKFLAGS {
 }}
 pub const SPF_PARSE_AUTODETECT: SPEAKFLAGS = SPF_DEFAULT;
 pub const SPF_NLP_MASK: SPEAKFLAGS = SPF_NLP_SPEAK_PUNC;
-pub const SPF_PARSE_MASK: i32 = SPF_PARSE_SAPI.0 as i32 | SPF_PARSE_SSML.0 as i32;
+pub const SPF_PARSE_MASK: i32 = SPF_PARSE_SAPI as i32 | SPF_PARSE_SSML as i32;
 pub const SPF_VOICE_MASK: i32 =
-    SPF_ASYNC.0 as i32 | SPF_PURGEBEFORESPEAK.0 as i32 | SPF_IS_FILENAME.0 as i32 | SPF_IS_XML.0 as i32 |
-    SPF_IS_NOT_XML.0 as i32 | SPF_NLP_MASK.0 as i32 | SPF_PERSIST_XML.0 as i32 | SPF_PARSE_MASK;
+    SPF_ASYNC as i32 | SPF_PURGEBEFORESPEAK as i32 | SPF_IS_FILENAME as i32 | SPF_IS_XML as i32 |
+    SPF_IS_NOT_XML as i32 | SPF_NLP_MASK as i32 | SPF_PERSIST_XML as i32 | SPF_PARSE_MASK;
 pub const SPF_UNUSED_FLAGS: i32 = !SPF_VOICE_MASK;
 RIDL!(
 interface ISpVoice(ISpVoiceVtbl): ISpEventSource(ISpEventSourceVtbl) {
@@ -1101,7 +1101,7 @@ interface ISpRecoResult(ISpRecoResultVtbl): ISpPhrase(ISpPhraseVtbl) {
     fn GetRecoContext(&mut self, ppRecoContext: *mut *mut ISpRecoContext) -> ::HRESULT
 }
 );
-FLAGS!{enum SPCOMMITFLAGS {
+ENUM!{enum SPCOMMITFLAGS {
     SPCF_NONE = 0,
     SPCF_ADD_TO_USER_LEXICON = 1 << 0,
     SPCF_DEFINITE_CORRECTION = 1 << 1,
@@ -1169,7 +1169,7 @@ STRUCT!{struct SPPROPERTYINFO {
     pszValue: ::LPCWSTR,
     vValue: ::VARIANT,
 }}
-FLAGS!{enum SPCFGRULEATTRIBUTES {
+ENUM!{enum SPCFGRULEATTRIBUTES {
     SPRAF_TopLevel = 1 << 0,
     SPRAF_Active = 1 << 1,
     SPRAF_Export = 1 << 2,
@@ -1306,19 +1306,19 @@ interface ISpeechResourceLoader(ISpeechResourceLoaderVtbl): IDispatch(IDispatchV
     fn ReleaseLocalCopy(&mut self, pbstrLocalPath: ::BSTR) -> ::HRESULT
 }
 );
-STRUCT!{nodebug struct SPRECOCONTEXTSTATUS {
+STRUCT!{struct SPRECOCONTEXTSTATUS {
     eInterference: SPINTERFERENCE,
     szRequestTypeOfUI: [::WCHAR; 255],
     dwReserved1: ::DWORD,
     dwReserved2: ::DWORD,
 }}
-FLAGS!{enum SPBOOKMARKOPTIONS {
+ENUM!{enum SPBOOKMARKOPTIONS {
     SPBO_NONE = 0,
     SPBO_PAUSE = 1 << 0,
     SPBO_AHEAD = 1 << 1,
     SPBO_TIME_UNITS = 1 << 2,
 }}
-FLAGS!{enum SPAUDIOOPTIONS {
+ENUM!{enum SPAUDIOOPTIONS {
     SPAO_NONE = 0,
     SPAO_RETAIN_AUDIO = 1 << 0,
 }}
@@ -1357,7 +1357,7 @@ interface ISpRecoContext(ISpRecoContextVtbl): ISpEventSource(ISpEventSourceVtbl)
     fn GetContextState(&mut self, peContextState: *mut SPCONTEXTSTATE) -> ::HRESULT
 }
 );
-FLAGS!{enum SPGRAMMAROPTIONS {
+ENUM!{enum SPGRAMMAROPTIONS {
     SPGO_SAPI = 0x1,
     SPGO_SRGS = 0x2,
     SPGO_UPS = 0x4,
@@ -1365,8 +1365,8 @@ FLAGS!{enum SPGRAMMAROPTIONS {
     SPGO_SRGS_W3C_SCRIPT = 0x100,
     SPGO_SRGS_STG_SCRIPT = 0x200,
     SPGO_SRGS_SCRIPT =
-        SPGO_SRGS.0 | SPGO_SRGS_MS_SCRIPT.0 | SPGO_SRGS_W3C_SCRIPT.0 |
-             SPGO_SRGS_STG_SCRIPT.0,
+        SPGO_SRGS | SPGO_SRGS_MS_SCRIPT | SPGO_SRGS_W3C_SCRIPT |
+             SPGO_SRGS_STG_SCRIPT,
     SPGO_FILE = 0x10,
     SPGO_HTTP = 0x20,
     SPGO_RES = 0x40,
@@ -1374,7 +1374,7 @@ FLAGS!{enum SPGRAMMAROPTIONS {
     SPGO_DEFAULT = 0x3fb,
     SPGO_ALL = 0x3ff,
 }}
-FLAGS!{enum SPADAPTATIONSETTINGS {
+ENUM!{enum SPADAPTATIONSETTINGS {
     SPADS_Default = 0,
     SPADS_CurrentRecognizer = 0x1,
     SPADS_RecoProfile = 0x2,
@@ -1564,10 +1564,10 @@ ENUM!{enum DISPID_SpeechObjectToken {
     DISPID_SOTMatchesAttributes,
 }}
 ENUM!{enum SpeechDataKeyLocation {
-    SDKLDefaultLocation = SPDKL_DefaultLocation.0,
-    SDKLCurrentUser = SPDKL_CurrentUser.0,
-    SDKLLocalMachine = SPDKL_LocalMachine.0,
-    SDKLCurrentConfig = SPDKL_CurrentConfig.0,
+    SDKLDefaultLocation = SPDKL_DefaultLocation,
+    SDKLCurrentUser = SPDKL_CurrentUser,
+    SDKLLocalMachine = SPDKL_LocalMachine,
+    SDKLCurrentConfig = SPDKL_CurrentConfig,
 }}
 ENUM!{enum SpeechTokenContext {
     STCInprocServer = ::CLSCTX_INPROC_SERVER,
@@ -1680,9 +1680,9 @@ ENUM!{enum DISPID_SpeechBaseStream {
     DISPID_SBSSeek,
 }}
 ENUM!{enum SpeechStreamSeekPositionType {
-    SSSPTRelativeToStart = ::STREAM_SEEK_SET.0,
-    SSSPTRelativeToCurrentPosition = ::STREAM_SEEK_CUR.0,
-    SSSPTRelativeToEnd = ::STREAM_SEEK_END.0,
+    SSSPTRelativeToStart = ::STREAM_SEEK_SET,
+    SSSPTRelativeToCurrentPosition = ::STREAM_SEEK_CUR,
+    SSSPTRelativeToEnd = ::STREAM_SEEK_END,
 }}
 ENUM!{enum DISPID_SpeechAudio {
     DISPID_SAStatus = 200,
@@ -1694,10 +1694,10 @@ ENUM!{enum DISPID_SpeechAudio {
     DISPID_SASetState,
 }}
 ENUM!{enum SpeechAudioState {
-    SASClosed = SPAS_CLOSED.0,
-    SASStop = SPAS_STOP.0,
-    SASPause = SPAS_PAUSE.0,
-    SASRun = SPAS_RUN.0,
+    SASClosed = SPAS_CLOSED,
+    SASStop = SPAS_STOP,
+    SASPause = SPAS_PAUSE,
+    SASRun = SPAS_RUN,
 }}
 ENUM!{enum DISPID_SpeechMMSysAudio {
     DISPID_SMSADeviceId = 300,
@@ -1709,10 +1709,10 @@ ENUM!{enum DISPID_SpeechFileStream {
     DISPID_SFSClose,
 }}
 ENUM!{enum SpeechStreamFileMode {
-    SSFMOpenForRead = SPFM_OPEN_READONLY.0,
-    SSFMOpenReadWrite = SPFM_OPEN_READWRITE.0,
-    SSFMCreate = SPFM_CREATE.0,
-    SSFMCreateForWrite = SPFM_CREATE_ALWAYS.0,
+    SSFMOpenForRead = SPFM_OPEN_READONLY,
+    SSFMOpenReadWrite = SPFM_OPEN_READWRITE,
+    SSFMCreate = SPFM_CREATE,
+    SSFMCreateForWrite = SPFM_CREATE_ALWAYS,
 }}
 ENUM!{enum DISPID_SpeechCustomStream {
     DISPID_SCSBaseStream = 100,
@@ -1767,28 +1767,28 @@ ENUM!{enum DISPID_SpeechVoice {
     DISPID_SVDisplayUI,
 }}
 ENUM!{enum SpeechVoicePriority {
-    SVPNormal = SPVPRI_NORMAL.0,
-    SVPAlert = SPVPRI_ALERT.0,
-    SVPOver = SPVPRI_OVER.0,
+    SVPNormal = SPVPRI_NORMAL,
+    SVPAlert = SPVPRI_ALERT,
+    SVPOver = SPVPRI_OVER,
 }}
-FLAGS!{enum SpeechVoiceSpeakFlags {
-    SVSFDefault = SPF_DEFAULT.0,
-    SVSFlagsAsync = SPF_ASYNC.0,
-    SVSFPurgeBeforeSpeak = SPF_PURGEBEFORESPEAK.0,
-    SVSFIsFilename = SPF_IS_FILENAME.0,
-    SVSFIsXML = SPF_IS_XML.0,
-    SVSFIsNotXML = SPF_IS_NOT_XML.0,
-    SVSFPersistXML = SPF_PERSIST_XML.0,
-    SVSFNLPSpeakPunc = SPF_NLP_SPEAK_PUNC.0,
-    SVSFParseSapi = SPF_PARSE_SAPI.0,
-    SVSFParseSsml = SPF_PARSE_SSML.0,
+ENUM!{enum SpeechVoiceSpeakFlags {
+    SVSFDefault = SPF_DEFAULT,
+    SVSFlagsAsync = SPF_ASYNC,
+    SVSFPurgeBeforeSpeak = SPF_PURGEBEFORESPEAK,
+    SVSFIsFilename = SPF_IS_FILENAME,
+    SVSFIsXML = SPF_IS_XML,
+    SVSFIsNotXML = SPF_IS_NOT_XML,
+    SVSFPersistXML = SPF_PERSIST_XML,
+    SVSFNLPSpeakPunc = SPF_NLP_SPEAK_PUNC,
+    SVSFParseSapi = SPF_PARSE_SAPI,
+    SVSFParseSsml = SPF_PARSE_SSML,
     SVSFParseMask = SPF_PARSE_MASK as u32,
     SVSFVoiceMask = SPF_VOICE_MASK as u32,
     SVSFUnusedFlags = SPF_UNUSED_FLAGS as u32,
 }}
 pub const SVSFParseAutodetect: SpeechVoiceSpeakFlags = SVSFDefault;
 pub const SVSFNLPMask: SpeechVoiceSpeakFlags = SVSFNLPSpeakPunc;
-FLAGS!{enum SpeechVoiceEvents {
+ENUM!{enum SpeechVoiceEvents {
     SVEStartInputStream = 1 << 1,
     SVEEndInputStream = 1 << 2,
     SVEVoiceChange = 1 << 3,
@@ -1816,8 +1816,8 @@ ENUM!{enum DISPID_SpeechVoiceStatus {
     DISPID_SVSVisemeId,
 }}
 ENUM!{enum SpeechRunState {
-    SRSEDone = SPRS_DONE.0,
-    SRSEIsSpeaking = SPRS_IS_SPEAKING.0,
+    SRSEDone = SPRS_DONE,
+    SRSEIsSpeaking = SPRS_IS_SPEAKING,
 }}
 ENUM!{enum SpeechVisemeType {
     SVP_0 = 0,
@@ -1845,8 +1845,8 @@ ENUM!{enum SpeechVisemeType {
 }}
 ENUM!{enum SpeechVisemeFeature {
     SVF_None = 0,
-    SVF_Stressed = SPVFEATURE_STRESSED.0,
-    SVF_Emphasis = SPVFEATURE_EMPHASIS.0,
+    SVF_Stressed = SPVFEATURE_STRESSED,
+    SVF_Emphasis = SPVFEATURE_EMPHASIS,
 }}
 ENUM!{enum DISPID_SpeechVoiceEvent {
     DISPID_SVEStreamStart = 1,
@@ -1883,28 +1883,28 @@ ENUM!{enum DISPID_SpeechRecognizer {
     DISPID_SVGetProfiles,
 }}
 ENUM!{enum SpeechRecognizerState {
-    SRSInactive = SPRST_INACTIVE.0,
-    SRSActive = SPRST_ACTIVE.0,
-    SRSActiveAlways = SPRST_ACTIVE_ALWAYS.0,
-    SRSInactiveWithPurge = SPRST_INACTIVE_WITH_PURGE.0,
+    SRSInactive = SPRST_INACTIVE,
+    SRSActive = SPRST_ACTIVE,
+    SRSActiveAlways = SPRST_ACTIVE_ALWAYS,
+    SRSInactiveWithPurge = SPRST_INACTIVE_WITH_PURGE,
 }}
 ENUM!{enum SpeechDisplayAttributes {
     SDA_No_Trailing_Space = 0,
-    SDA_One_Trailing_Space = SPAF_ONE_TRAILING_SPACE.0,
-    SDA_Two_Trailing_Spaces = SPAF_TWO_TRAILING_SPACES.0,
-    SDA_Consume_Leading_Spaces = SPAF_CONSUME_LEADING_SPACES.0,
+    SDA_One_Trailing_Space = SPAF_ONE_TRAILING_SPACE,
+    SDA_Two_Trailing_Spaces = SPAF_TWO_TRAILING_SPACES,
+    SDA_Consume_Leading_Spaces = SPAF_CONSUME_LEADING_SPACES,
 }}
 ENUM!{enum SpeechFormatType {
-    SFTInput = SPWF_INPUT.0,
-    SFTSREngine = SPWF_SRENGINE.0,
+    SFTInput = SPWF_INPUT,
+    SFTSREngine = SPWF_SRENGINE,
 }}
-FLAGS!{enum SpeechEmulationCompareFlags {
+ENUM!{enum SpeechEmulationCompareFlags {
     SECFIgnoreCase = 0x1,
     SECFIgnoreKanaType = 0x10000,
     SECFIgnoreWidth = 0x20000,
     SECFNoSpecialChars = 0x20000000,
     SECFEmulateResult = 0x40000000,
-    SECFDefault = SECFIgnoreCase.0 | SECFIgnoreKanaType.0 | SECFIgnoreWidth.0,
+    SECFDefault = SECFIgnoreCase | SECFIgnoreKanaType | SECFIgnoreWidth,
 }}
 ENUM!{enum DISPID_SpeechRecognizerStatus {
     DISPID_SRSAudioStatus = 1,
@@ -1934,23 +1934,23 @@ ENUM!{enum DISPID_SpeechRecoContext {
     DISPID_SRCSetAdaptationData,
 }}
 ENUM!{enum SpeechRetainedAudioOptions {
-    SRAONone = SPAO_NONE.0,
-    SRAORetainAudio = SPAO_RETAIN_AUDIO.0,
+    SRAONone = SPAO_NONE,
+    SRAORetainAudio = SPAO_RETAIN_AUDIO,
 }}
 ENUM!{enum SpeechBookmarkOptions {
-    SBONone = SPBO_NONE.0,
-    SBOPause = SPBO_PAUSE.0,
+    SBONone = SPBO_NONE,
+    SBOPause = SPBO_PAUSE,
 }}
 ENUM!{enum SpeechInterference {
-    SINone = SPINTERFERENCE_NONE.0,
-    SINoise = SPINTERFERENCE_NOISE.0,
-    SINoSignal = SPINTERFERENCE_NOSIGNAL.0,
-    SITooLoud = SPINTERFERENCE_TOOLOUD.0,
-    SITooQuiet = SPINTERFERENCE_TOOQUIET.0,
-    SITooFast = SPINTERFERENCE_TOOFAST.0,
-    SITooSlow = SPINTERFERENCE_TOOSLOW.0,
+    SINone = SPINTERFERENCE_NONE,
+    SINoise = SPINTERFERENCE_NOISE,
+    SINoSignal = SPINTERFERENCE_NOSIGNAL,
+    SITooLoud = SPINTERFERENCE_TOOLOUD,
+    SITooQuiet = SPINTERFERENCE_TOOQUIET,
+    SITooFast = SPINTERFERENCE_TOOFAST,
+    SITooSlow = SPINTERFERENCE_TOOSLOW,
 }}
-FLAGS!{enum SpeechRecoEvents {
+ENUM!{enum SpeechRecoEvents {
     SREStreamEnd = 1 << 0,
     SRESoundStart = 1 << 1,
     SRESoundEnd = 1 << 2,
@@ -1972,8 +1972,8 @@ FLAGS!{enum SpeechRecoEvents {
     SREAllEvents = 0x5ffff,
 }}
 ENUM!{enum SpeechRecoContextState {
-    SRCS_Disabled = SPCS_DISABLED.0,
-    SRCS_Enabled = SPCS_ENABLED.0,
+    SRCS_Disabled = SPCS_DISABLED,
+    SRCS_Enabled = SPCS_ENABLED,
 }}
 ENUM!{enum DISPIDSPRG {
     DISPID_SRGId = 1,
@@ -1997,39 +1997,39 @@ ENUM!{enum DISPIDSPRG {
     DISPID_SRGIsPronounceable,
 }}
 ENUM!{enum SpeechLoadOption {
-    SLOStatic = SPLO_STATIC.0,
-    SLODynamic = SPLO_DYNAMIC.0,
+    SLOStatic = SPLO_STATIC,
+    SLODynamic = SPLO_DYNAMIC,
 }}
 ENUM!{enum SpeechWordPronounceable {
-    SWPUnknownWordUnpronounceable = SPWP_UNKNOWN_WORD_UNPRONOUNCEABLE.0,
-    SWPUnknownWordPronounceable = SPWP_UNKNOWN_WORD_PRONOUNCEABLE.0,
-    SWPKnownWordPronounceable = SPWP_KNOWN_WORD_PRONOUNCEABLE.0,
+    SWPUnknownWordUnpronounceable = SPWP_UNKNOWN_WORD_UNPRONOUNCEABLE,
+    SWPUnknownWordPronounceable = SPWP_UNKNOWN_WORD_PRONOUNCEABLE,
+    SWPKnownWordPronounceable = SPWP_KNOWN_WORD_PRONOUNCEABLE,
 }}
 ENUM!{enum SpeechGrammarState {
-    SGSEnabled = SPGS_ENABLED.0,
-    SGSDisabled = SPGS_DISABLED.0,
-    SGSExclusive = SPGS_EXCLUSIVE.0,
+    SGSEnabled = SPGS_ENABLED,
+    SGSDisabled = SPGS_DISABLED,
+    SGSExclusive = SPGS_EXCLUSIVE,
 }}
 ENUM!{enum SpeechRuleState {
-    SGDSInactive = SPRS_INACTIVE.0,
-    SGDSActive = SPRS_ACTIVE.0,
-    SGDSActiveWithAutoPause = SPRS_ACTIVE_WITH_AUTO_PAUSE.0,
-    SGDSActiveUserDelimited = SPRS_ACTIVE_USER_DELIMITED.0,
+    SGDSInactive = SPRS_INACTIVE,
+    SGDSActive = SPRS_ACTIVE,
+    SGDSActiveWithAutoPause = SPRS_ACTIVE_WITH_AUTO_PAUSE,
+    SGDSActiveUserDelimited = SPRS_ACTIVE_USER_DELIMITED,
 }}
 ENUM!{enum SpeechRuleAttributes {
-    SRATopLevel = SPRAF_TopLevel.0,
-    SRADefaultToActive = SPRAF_Active.0,
-    SRAExport = SPRAF_Export.0,
-    SRAImport = SPRAF_Import.0,
-    SRAInterpreter = SPRAF_Interpreter.0,
-    SRADynamic = SPRAF_Dynamic.0,
-    SRARoot = SPRAF_Root.0,
+    SRATopLevel = SPRAF_TopLevel,
+    SRADefaultToActive = SPRAF_Active,
+    SRAExport = SPRAF_Export,
+    SRAImport = SPRAF_Import,
+    SRAInterpreter = SPRAF_Interpreter,
+    SRADynamic = SPRAF_Dynamic,
+    SRARoot = SPRAF_Root,
 }}
 ENUM!{enum SpeechGrammarWordType {
-    SGDisplay = SPWT_DISPLAY.0,
-    SGLexical = SPWT_LEXICAL.0,
-    SGPronounciation = SPWT_PRONUNCIATION.0,
-    SGLexicalNoSpecialChars = SPWT_LEXICAL_NO_SPECIAL_CHARS.0,
+    SGDisplay = SPWT_DISPLAY,
+    SGLexical = SPWT_LEXICAL,
+    SGPronounciation = SPWT_PRONUNCIATION,
+    SGLexicalNoSpecialChars = SPWT_LEXICAL_NO_SPECIAL_CHARS,
 }}
 ENUM!{enum DISPID_SpeechRecoContextEvents {
     DISPID_SRCEStartStream = 1,
@@ -2053,11 +2053,11 @@ ENUM!{enum DISPID_SpeechRecoContextEvents {
 }}
 ENUM!{enum SpeechRecognitionType {
     SRTStandard = 0,
-    SRTAutopause = SPREF_AutoPause.0,
-    SRTEmulated = SPREF_Emulated.0,
-    SRTSMLTimeout = SPREF_SMLTimeout.0,
-    SRTExtendableParse = SPREF_ExtendableParse.0,
-    SRTReSent = SPREF_ReSent.0,
+    SRTAutopause = SPREF_AutoPause,
+    SRTEmulated = SPREF_Emulated,
+    SRTSMLTimeout = SPREF_SMLTimeout,
+    SRTExtendableParse = SPREF_ExtendableParse,
+    SRTReSent = SPREF_ReSent,
 }}
 ENUM!{enum DISPID_SpeechGrammarRule {
     DISPID_SGRAttributes = 1,
@@ -2131,15 +2131,15 @@ ENUM!{enum DISPID_SpeechRecoResult {
     DISPID_SRRDiscardResultInfo,
 }}
 ENUM!{enum SpeechDiscardType {
-    SDTProperty = SPDF_PROPERTY.0,
-    SDTReplacement = SPDF_REPLACEMENT.0,
-    SDTRule = SPDF_RULE.0,
-    SDTDisplayText = SPDF_DISPLAYTEXT.0,
-    SDTLexicalForm = SPDF_LEXICALFORM.0,
-    SDTPronunciation = SPDF_PRONUNCIATION.0,
-    SDTAudio = SPDF_AUDIO.0,
-    SDTAlternates = SPDF_ALTERNATES.0,
-    SDTAll = SPDF_ALL.0,
+    SDTProperty = SPDF_PROPERTY,
+    SDTReplacement = SPDF_REPLACEMENT,
+    SDTRule = SPDF_RULE,
+    SDTDisplayText = SPDF_DISPLAYTEXT,
+    SDTLexicalForm = SPDF_LEXICALFORM,
+    SDTPronunciation = SPDF_PRONUNCIATION,
+    SDTAudio = SPDF_AUDIO,
+    SDTAlternates = SPDF_ALTERNATES,
+    SDTAll = SPDF_ALL,
 }}
 ENUM!{enum DISPID_SpeechXMLRecoResult {
     DISPID_SRRGetXMLResult,
@@ -2265,19 +2265,19 @@ ENUM!{enum DISPID_SpeechLexicon {
     DISPID_SLGetGenerationChange,
 }}
 ENUM!{enum SpeechLexiconType {
-    SLTUser = eLEXTYPE_USER.0,
-    SLTApp = eLEXTYPE_APP.0,
+    SLTUser = eLEXTYPE_USER,
+    SLTApp = eLEXTYPE_APP,
 }}
 ENUM!{enum SpeechPartOfSpeech {
-    SPSNotOverriden = SPPS_NotOverriden.0,
-    SPSUnknown = SPPS_Unknown.0,
-    SPSNoun = SPPS_Noun.0,
-    SPSVerb = SPPS_Verb.0,
-    SPSModifier = SPPS_Modifier.0,
-    SPSFunction = SPPS_Function.0,
-    SPSInterjection = SPPS_Interjection.0,
-    SPSLMA = SPPS_LMA.0,
-    SPSSuppressWord = SPPS_SuppressWord.0,
+    SPSNotOverriden = SPPS_NotOverriden,
+    SPSUnknown = SPPS_Unknown,
+    SPSNoun = SPPS_Noun,
+    SPSVerb = SPPS_Verb,
+    SPSModifier = SPPS_Modifier,
+    SPSFunction = SPPS_Function,
+    SPSInterjection = SPPS_Interjection,
+    SPSLMA = SPPS_LMA,
+    SPSSuppressWord = SPPS_SuppressWord,
 }}
 ENUM!{enum DISPID_SpeechLexiconWords {
     DISPID_SLWsCount = 1,
@@ -2285,8 +2285,8 @@ ENUM!{enum DISPID_SpeechLexiconWords {
     DISPID_SLWs_NewEnum = ::DISPID_NEWENUM as u32,
 }}
 ENUM!{enum SpeechWordType {
-    SWTAdded = eWORDTYPE_ADDED.0,
-    SWTDeleted = eWORDTYPE_DELETED.0,
+    SWTAdded = eWORDTYPE_ADDED,
+    SWTDeleted = eWORDTYPE_DELETED,
 }}
 ENUM!{enum DISPID_SpeechLexiconWord {
     DISPID_SLWLangId = 1,

@@ -12,7 +12,7 @@ STRUCT!{struct DXGI_MAPPED_RECT {
     Pitch: ::INT,
     pBits: *mut ::BYTE,
 }}
-STRUCT!{nodebug struct DXGI_ADAPTER_DESC {
+STRUCT!{struct DXGI_ADAPTER_DESC {
     Description: [::WCHAR; 128],
     VectorId: ::UINT,
     DeviceId: ::UINT,
@@ -23,7 +23,7 @@ STRUCT!{nodebug struct DXGI_ADAPTER_DESC {
     SharedSystemMemory: ::SIZE_T,
     AdapterLuid: ::LUID,
 }}
-STRUCT!{nodebug struct DXGI_OUTPUT_DESC {
+STRUCT!{struct DXGI_OUTPUT_DESC {
     DeviceName: [::WCHAR; 32],
     DesktopCoordinates: ::RECT,
     AttachedToDesktop: ::BOOL,
@@ -53,8 +53,9 @@ ENUM!{enum DXGI_SWAP_EFFECT {
     DXGI_SWAP_EFFECT_DISCARD = 0,
     DXGI_SWAP_EFFECT_SEQUENTIAL = 1,
     DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL = 3,
+    DXGI_SWAP_EFFECT_FLIP_DISCARD = 4,
 }}
-FLAGS!{enum DXGI_SWAP_CHAIN_FLAG {
+ENUM!{enum DXGI_SWAP_CHAIN_FLAG {
     DXGI_SWAP_CHAIN_FLAG_NONPREROTATED = 1,
     DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH = 2,
     DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE = 4,
@@ -208,7 +209,7 @@ ENUM!{enum DXGI_ADAPTER_FLAG {
     DXGI_ADAPTER_FLAG_REMOTE,
     DXGI_ADAPTER_FLAG_SOFTWARE,
 }}
-STRUCT!{nodebug struct DXGI_ADAPTER_DESC1 {
+STRUCT!{struct DXGI_ADAPTER_DESC1 {
     Description: [::WCHAR; 128],
     VendorId: ::UINT,
     DeviceId: ::UINT,

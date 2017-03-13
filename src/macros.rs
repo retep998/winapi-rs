@@ -24,16 +24,15 @@ macro_rules! HIDP_ERROR_CODES {
 }
 macro_rules! MAKEFOURCC {
     ($a:expr, $b:expr, $c:expr, $d:expr) => {
-        ($a as i32) | (($b as i32) << 8) | (($c as i32) << 16) | (($d as i32) << 24)
+        ($a as u32) | (($b as u32) << 8) | (($c as u32) << 16) | (($d as u32) << 24)
     }
 }
-#[macro_export]
 macro_rules! DEFINE_GUID {
     (
-        $name:ident, $l:expr, $w1:expr, $w2:expr, $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr,
-        $b6:expr, $b7:expr, $b8:expr
+        $name:ident, $l:expr, $w1:expr, $w2:expr,
+        $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr, $b6:expr, $b7:expr, $b8:expr
     ) => {
-        pub const $name: $crate::GUID = $crate::GUID {
+        pub const $name: GUID = GUID {
             Data1: $l,
             Data2: $w1,
             Data3: $w2,
@@ -78,15 +77,15 @@ macro_rules! AUDCLNT_SUCCESS {
 }
 macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
     ($major:expr, $minor:expr) => {
-        ::BCRYPT_INTERFACE_VERSION { MajorVersion: $major, MinorVersion: $minor }
+        $crate::shared::bcrypt::BCRYPT_INTERFACE_VERSION {
+            MajorVersion: $major, MinorVersion: $minor,
+        }
     }
 }
 macro_rules! RIDL {
-    (interface $interface:ident ($vtbl:ident)
-        {$(
-            fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
-        ),+}
-    ) => {
+    (interface $interface:ident ($vtbl:ident) {$(
+        fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
+    ),+}) => (
         #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $vtbl {
             $(pub $method: unsafe extern "system" fn(
@@ -94,89 +93,86 @@ macro_rules! RIDL {
                 $(,$p: $t)*
             ) -> $rtr),+
         }
-        #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
+        #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
-        impl $interface {
-            #[inline]
-            $(pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
-                ((*self.lpVtbl).$method)(self $(,$p)*)
-            })+
-        }
-    };
+        RIDL!{@impl $interface {$(fn $method(&mut self $(,$p: $t)*) -> $rtr),+}}
+    );
     (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {
-    }) => {
+    }) => (
         #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $vtbl {
-            pub parent: ::$pvtbl
+            pub parent: $pvtbl
         }
-        #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
+        #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
-        impl ::std::ops::Deref for $interface {
-            type Target = ::$pinterface;
+        impl $crate::core::ops::Deref for $interface {
+            type Target = $pinterface;
             #[inline]
-            fn deref(&self) -> &::$pinterface {
-                unsafe { ::std::mem::transmute(self) }
+            fn deref(&self) -> &$pinterface {
+                unsafe { &*(self as *const _ as *const _) }
             }
         }
-        impl ::std::ops::DerefMut for $interface {
+        impl $crate::core::ops::DerefMut for $interface {
             #[inline]
-            fn deref_mut(&mut self) -> &mut ::$pinterface {
-                unsafe { ::std::mem::transmute(self) }
+            fn deref_mut(&mut self) -> &mut $pinterface {
+                unsafe { &mut *(self as *mut _ as *mut _) }
             }
         }
-    };
-    (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident)
-        {$(
-            fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
-        ),+}
-    ) => {
+    );
+    (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
+        fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
+    ),+}) => (
         #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $vtbl {
-            pub parent: ::$pvtbl
+            pub parent: $pvtbl
             $(,pub $method: unsafe extern "system" fn(
                 This: *mut $interface
                 $(,$p: $t)*
             ) -> $rtr)+
         }
-        #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
+        #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
-        impl $interface {
+        RIDL!{@impl $interface {$(fn $method(&mut self $(,$p: $t)*) -> $rtr),+}}
+        impl $crate::core::ops::Deref for $interface {
+            type Target = $pinterface;
             #[inline]
-            $(pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
+            fn deref(&self) -> &$pinterface {
+                unsafe { &*(self as *const _ as *const _) }
+            }
+        }
+        impl $crate::core::ops::DerefMut for $interface {
+            #[inline]
+            fn deref_mut(&mut self) -> &mut $pinterface {
+                unsafe { &mut *(self as *mut _ as *mut _) }
+            }
+        }
+    );
+    (@impl $interface:ident {$(
+        fn $method:ident(&mut self $(,$p:ident : $t:ty)*) -> $rtr:ty
+    ),+}) => (
+        impl $interface {
+            $(#[inline] pub unsafe fn $method(&mut self $(,$p: $t)*) -> $rtr {
                 ((*self.lpVtbl).$method)(self $(,$p)*)
             })+
         }
-        impl ::std::ops::Deref for $interface {
-            type Target = ::$pinterface;
-            #[inline]
-            fn deref(&self) -> &::$pinterface {
-                unsafe { ::std::mem::transmute(self) }
-            }
-        }
-        impl ::std::ops::DerefMut for $interface {
-            #[inline]
-            fn deref_mut(&mut self) -> &mut ::$pinterface {
-                unsafe { ::std::mem::transmute(self) }
-            }
-        }
-    };
+    );
 }
 macro_rules! UNION {
     ($base:ident, $field:ident, $variant:ident, $variantmut:ident, $fieldtype:ty) => {
         impl $base {
             #[inline]
             pub unsafe fn $variant(&self) -> &$fieldtype {
-                ::std::mem::transmute(&self.$field)
+                &*(self as *const _ as *const _)
             }
             #[inline]
             pub unsafe fn $variantmut(&mut self) -> &mut $fieldtype {
-                ::std::mem::transmute(&mut self.$field)
+                &mut *(self as *mut _ as *mut _)
             }
         }
     }
@@ -188,7 +184,7 @@ macro_rules! BITFIELD {
         impl $base {$(
             #[inline]
             pub fn $thing(&self) -> $fieldtype {
-                let size = ::std::mem::size_of::<$fieldtype>() * 8;
+                let size = $crate::core::mem::size_of::<$fieldtype>() * 8;
                 self.$field << (size - $r.end) >> (size - $r.end + $r.start)
             }
             #[inline]
@@ -202,67 +198,75 @@ macro_rules! BITFIELD {
 }
 macro_rules! ENUM {
     {enum $name:ident { $($variant:ident = $value:expr,)+ }} => {
-        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
-        pub struct $name(pub u32);
-        $(pub const $variant: $name = $name($value);)+
+        pub type $name = u32;
+        $(pub const $variant: u32 = $value;)+
     };
     {enum $name:ident { $variant:ident = $value:expr, $($rest:tt)* }} => {
-        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
-        pub struct $name(pub u32);
-        pub const $variant: $name = $name($value);
-        ENUM!{@gen $name, $variant, $($rest)*}
+        pub type $name = u32;
+        pub const $variant: u32 = $value;
+        ENUM!{@gen $name $variant, $($rest)*}
     };
     {enum $name:ident { $variant:ident, $($rest:tt)* }} => {
         ENUM!{enum $name { $variant = 0, $($rest)* }}
     };
-    {@gen $name:ident, $base:ident,} => {};
-    {@gen $name:ident, $base:ident, $variant:ident = $value:expr, $($rest:tt)*} => {
-        pub const $variant: $name = $name($value);
-        ENUM!{@gen $name, $variant, $($rest)*}
+    {@gen $name:ident $base:ident,} => {};
+    {@gen $name:ident $base:ident, $variant:ident = $value:expr, $($rest:tt)*} => {
+        pub const $variant: $name = $value;
+        ENUM!{@gen $name $variant, $($rest)*}
     };
-    {@gen $name:ident, $base:ident, $variant:ident, $($rest:tt)*} => {
-        pub const $variant: $name = $name($base.0 + 1u32);
-        ENUM!{@gen $name, $variant, $($rest)*}
+    {@gen $name:ident $base:ident, $variant:ident, $($rest:tt)*} => {
+        pub const $variant: $name = $base + 1u32;
+        ENUM!{@gen $name $variant, $($rest)*}
     };
-}
-macro_rules! FLAGS {
-    {enum $name:ident { $($variant:ident = $value:expr,)+ }} => {
-        #[repr(C)] #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
-        pub struct $name(pub u32);
-        $(pub const $variant: $name = $name($value);)+
-        impl ::std::ops::BitAnd<$name> for $name {
-            type Output = $name;
-            fn bitand(self, o: $name) -> $name { $name(self.0 & o.0) }
-        }
-        impl ::std::ops::BitOr<$name> for $name {
-            type Output = $name;
-            fn bitor(self, o: $name) -> $name { $name(self.0 | o.0) }
-        }
-        impl ::std::ops::BitXor<$name> for $name {
-            type Output = $name;
-            fn bitxor(self, o: $name) -> $name { $name(self.0 ^ o.0) }
-        }
-        impl ::std::ops::Not for $name {
-            type Output = $name;
-            fn not(self) -> $name { $name(!self.0) }
-        }
-    }
 }
 macro_rules! STRUCT {
-    {$(#[$attrs:meta])* nodebug struct $name:ident { $($field:ident: $ftype:ty,)+ }} => {
+    {$(#[$attrs:meta])* struct $name:ident { $($field:ident: $ftype:ty,)+ }} => {
         #[repr(C)] $(#[$attrs])*
         pub struct $name {
             $(pub $field: $ftype,)+
         }
         impl Copy for $name {}
-        impl Clone for $name { fn clone(&self) -> $name { *self } }
-    };
-    {$(#[$attrs:meta])* struct $name:ident { $($field:ident: $ftype:ty,)+ }} => {
-        #[repr(C)] #[derive(Debug)] $(#[$attrs])*
-        pub struct $name {
-            $(pub $field: $ftype,)+
+        impl Clone for $name {
+            #[inline]
+            fn clone(&self) -> $name { *self }
         }
-        impl Copy for $name {}
-        impl Clone for $name { fn clone(&self) -> $name { *self } }
     };
+}
+macro_rules! EXTERN {
+    (stdcall fn $func:ident(
+        $($p:ident: $t:ty),*
+    ) -> $ret:ty) => (EXTERN!{@fix
+        extern "stdcall" {
+            pub fn $func(
+                $($p: $t),*
+            ) -> $ret;
+        }
+    });
+    (cdecl fn $func:ident(
+        $($p:ident: $t:ty),*
+    ) -> $ret:ty) => (EXTERN!{@fix
+        extern "cdecl" {
+            pub fn $func(
+                $($p: $t),*
+            ) -> $ret;
+        }
+    });
+    (@fix $x:item) => ($x);
+}
+macro_rules! IFDEF {
+    ($($thing:item)*) => ($($thing)*)
+}
+macro_rules! FN {
+    (stdcall $func:ident($($t:ty),*) -> $ret:ty) => (
+        pub type $func = Option<unsafe extern "stdcall" fn($($t),*) -> $ret>;
+    );
+    (stdcall $func:ident($($p:ident: $t:ty),*) -> $ret:ty) => (
+        pub type $func = Option<unsafe extern "stdcall" fn($($p: $t),*) -> $ret>;
+    );
+    (cdecl $func:ident($($t:ty),*) -> $ret:ty) => (
+        pub type $func = Option<unsafe extern "cdecl" fn($($t),*) -> $ret>;
+    );
+    (cdecl $func:ident($($p:ident: $t:ty),*) -> $ret:ty) => (
+        pub type $func = Option<unsafe extern "cdecl" fn($($p: $t),*) -> $ret>;
+    );
 }
