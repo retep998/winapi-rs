@@ -1,0 +1,11 @@
+LIBRARY mgmtapi.dll
+EXPORTS
+SnmpMgrClose@4
+SnmpMgrCtl@28
+SnmpMgrGetTrap@24
+SnmpMgrGetTrapEx@32
+SnmpMgrOidToStr@8
+SnmpMgrOpen@16
+SnmpMgrRequest@20
+SnmpMgrStrToOid@8
+SnmpMgrTrapListen@4

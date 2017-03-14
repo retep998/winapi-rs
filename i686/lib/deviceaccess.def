@@ -1,0 +1,3 @@
+LIBRARY deviceaccess.dll
+EXPORTS
+CreateDeviceAccessInstance@12

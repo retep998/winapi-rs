@@ -1,0 +1,8 @@
+LIBRARY ACLUI.dll
+EXPORTS
+CreateSecurityPage @1
+EditConditionalAceClaims @5
+EditResourceCondition @4
+EditSecurity @2
+EditSecurityAdvanced @3
+IID_ISecurityInformation @16

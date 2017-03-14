@@ -1,0 +1,4 @@
+LIBRARY XPSPRINT.DLL
+EXPORTS
+StartXpsPrintJob@40
+StartXpsPrintJob1@28

@@ -1,0 +1,5 @@
+LIBRARY wlanui.dll
+EXPORTS
+WLFreeProfile
+WLFreeProfileXml
+WlanUIEditProfile

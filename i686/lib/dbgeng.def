@@ -1,0 +1,6 @@
+LIBRARY dbgeng.dll
+EXPORTS
+DebugConnect@12
+DebugConnectWide@12
+DebugCreate@8
+DebugCreateEx@12

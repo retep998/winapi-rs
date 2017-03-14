@@ -1,0 +1,21 @@
+LIBRARY SHDOCVW.dll
+EXPORTS
+AddUrlToFavorites@16
+DllRegisterWindowClasses@4
+DoAddToFavDlg@24
+DoAddToFavDlgW@24
+DoFileDownload@4
+DoFileDownloadEx@8
+DoOrganizeFavDlg@8
+DoOrganizeFavDlgW@8
+DoPrivacyDlg@16
+HlinkFindFrame@8
+HlinkFrameNavigate@20
+HlinkFrameNavigateNHL@24
+ImportPrivacySettings@12
+OpenURL@16
+SHGetIDispatchForFolder@8
+SetQueryNetSessionCount@4
+SoftwareUpdateMessageBox@16
+URLQualifyA@12
+URLQualifyW@12

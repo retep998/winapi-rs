@@ -1,0 +1,13 @@
+LIBRARY CommsDirectAccessClient.dll
+EXPORTS
+PoomDataServiceClient_EnableTestMode@0
+PoomDataServiceClient_FreeEnumerator@4
+PoomDataServiceClient_FreeObject@4
+PoomDataServiceClient_GetObjectsEnumerator@8
+PoomDataServiceClient_Init@0
+PoomDataServiceClient_MoveNext@16
+QueryInstantMessagingStatus@16
+RCSeLogRequestForState@0
+RCSeRequestCapability@8
+RCSeSetCallback@8
+RCSeSetCapability@8

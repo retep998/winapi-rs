@@ -20,7 +20,7 @@ use um::winnt::{
 };
 use um::winuser::{WM_USER};
 DECLARE_HANDLE!(HDROP, HDROP__);
-extern "stdcall" {
+extern "system" {
     pub fn DragQueryFileA(
         hDrop: HDROP,
         iFile: UINT,
@@ -171,7 +171,7 @@ STRUCT!{struct APPBARDATA {
     lParam: LPARAM,
 }}
 pub type PAPPBARDATA = *mut APPBARDATA;
-extern "stdcall" {
+extern "system" {
     pub fn SHAppBarMessage(
         dwMessage: DWORD,
         pData: PAPPBARDATA,
@@ -248,7 +248,7 @@ STRUCT!{struct SHFILEOPSTRUCTW {
     lpszProgressTitle: PCWSTR,
 }}
 pub type LPSHFILEOPSTRUCTW = *mut SHFILEOPSTRUCTW;
-extern "stdcall" {
+extern "system" {
     pub fn SHFileOperationA(
         lpFileOp: LPSHFILEOPSTRUCTA,
     ) -> c_int;
@@ -342,7 +342,7 @@ STRUCT!{struct SHELLEXECUTEINFOW {
     hProcess: HANDLE,
 }}
 pub type LPSHELLEXECUTEINFOW = *mut SHELLEXECUTEINFOW;
-extern "stdcall" {
+extern "system" {
     pub fn ShellExecuteExA(
         pExecInfo: *mut SHELLEXECUTEINFOA,
     ) -> BOOL;
@@ -366,7 +366,7 @@ STRUCT!{struct SHCREATEPROCESSINFOW {
     lpProcessInformation: LPPROCESS_INFORMATION,
 }}
 pub type PSHCREATEPROCESSINFOW = *mut SHCREATEPROCESSINFOW;
-extern "stdcall" {
+extern "system" {
     pub fn SHCreateProcessAsUserW(
         pscpi: PSHCREATEPROCESSINFOW,
     ) -> BOOL;
@@ -396,7 +396,7 @@ STRUCT!{struct ASSOCIATIONELEMENT {
     hkClass: HKEY,
     pszClass: PCWSTR,
 }}
-extern "stdcall" {
+extern "system" {
     pub fn AssocCreateForClasses(
         rgClasses: *const ASSOCIATIONELEMENT,
         cClasses: ULONG,
@@ -413,7 +413,7 @@ pub type LPSHQUERYRBINFO = *mut SHQUERYRBINFO;
 pub const SHERB_NOCONFIRMATION: DWORD = 0x00000001;
 pub const SHERB_NOPROGRESSUI: DWORD = 0x00000002;
 pub const SHERB_NOSOUND: DWORD = 0x00000004;
-extern "stdcall" {
+extern "system" {
     pub fn SHQueryRecycleBinA(
         pszRootPath: LPCSTR,
         pSHQueryRBInfo: LPSHQUERYRBINFO,
@@ -442,7 +442,7 @@ ENUM!{enum QUERY_USER_NOTIFICATION_STATE {
     QUNS_QUIET_TIME = 6,
     QUNS_APP = 7,
 }}
-extern "stdcall" {
+extern "system" {
     pub fn SHQueryUserNotificationState(
         pquns: *mut QUERY_USER_NOTIFICATION_STATE,
     ) -> HRESULT;
@@ -578,7 +578,7 @@ pub const SHGFI_PIDL: DWORD = 0x000000008;
 pub const SHGFI_USEFILEATTRIBUTES: DWORD = 0x000000010;
 pub const SHGFI_ADDOVERLAYS: DWORD = 0x000000020;
 pub const SHGFI_OVERLAYINDEX: DWORD = 0x000000040;
-extern "stdcall" {
+extern "system" {
     pub fn SHGetFileInfoA(
         pszPath: LPCSTR,
         dwFileAttributes: DWORD,
@@ -706,7 +706,7 @@ ENUM!{enum SHSTOCKICONID {
     SIID_MAX_ICONS = 181,
 }}
 pub const SIID_INVALID: SHSTOCKICONID = -1i32 as u32;
-extern "stdcall" {
+extern "system" {
     pub fn SHGetStockIconInfo(
         siid: SHSTOCKICONID,
         uFlags: UINT,
@@ -753,7 +753,7 @@ pub const PRINTACTION_TESTPAGE: DWORD = 4;
 pub const PRINTACTION_OPENNETPRN: DWORD = 5;
 pub const PRINTACTION_DOCUMENTDEFAULTS: DWORD = 6;
 pub const PRINTACTION_SERVERPROPERTIES: DWORD = 7;
-extern "stdcall" {
+extern "system" {
     pub fn SHInvokePrinterCommandA(
         hwnd: HWND,
         uAction: UINT,
@@ -786,7 +786,7 @@ STRUCT!{struct OPEN_PRINTER_PROPS_INFOW {
 }}
 pub type POPEN_PRINTER_PROPS_INFOW = *mut OPEN_PRINTER_PROPS_INFOW;
 pub const PRINT_PROP_FORCE_NAME: DWORD = 0x01;
-extern "stdcall" {
+extern "system" {
     pub fn SHLoadNonloadedIconOverlayIdentifiers() -> HRESULT;
     pub fn SHIsFileAvailableOffline(
         pwszPath: PCWSTR,
@@ -796,7 +796,7 @@ extern "stdcall" {
 pub const OFFLINE_STATUS_LOCAL: DWORD = 0x0001;
 pub const OFFLINE_STATUS_REMOTE: DWORD = 0x0002;
 pub const OFFLINE_STATUS_INCOMPLETE: DWORD = 0x0004;
-extern "stdcall" {
+extern "system" {
     pub fn SHSetLocalizedName(
         pszPath: PCWSTR,
         pszResModule: PCWSTR,
@@ -830,7 +830,7 @@ extern "C" {
         ...
     ) -> c_int;
 }
-extern "stdcall" {
+extern "system" {
     pub fn IsLFNDriveA(
         pszPath: LPCSTR,
     ) -> BOOL;
@@ -899,7 +899,7 @@ FN!{stdcall PFNSHOWSHAREFOLDERUIW(
     pszPath: PCWSTR
 ) -> HRESULT}
 pub const WC_NETADDRESS: &'static str = "msctls_netaddress";
-extern "stdcall" {
+extern "system" {
     pub fn InitNetworkAddressControl() -> BOOL;
     pub fn SHGetDriveMedia(
         pszDrive: PCWSTR,

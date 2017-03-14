@@ -1,0 +1,6 @@
+LIBRARY QUARTZ.dll
+EXPORTS
+AMGetErrorTextA
+AMGetErrorTextW
+AmpFactorToDB
+DBToAmpFactor

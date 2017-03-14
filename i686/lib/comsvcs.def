@@ -1,0 +1,19 @@
+LIBRARY comsvcs.dll
+EXPORTS
+CreateActivityInMTA@8 @7
+DllUnregisterServerWeReallyMeanIt@0 @6
+CoCreateActivity@12
+CoEnterServiceDomain@4
+CoLeaveServiceDomain@4
+CoLoadServices@16
+ComSvcsExceptionFilter@12
+ComSvcsLogError@16
+DispManGetContext@8
+GetMTAThreadPoolMetrics@4
+GetManagedExtensions@4
+GetObjectContext
+GetTrkSvrObject@8
+MTSCreateActivity@8
+MiniDumpW@16
+RecycleSurrogate
+SafeRef

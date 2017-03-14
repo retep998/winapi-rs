@@ -1,0 +1,19 @@
+LIBRARY infocardapi.dll
+EXPORTS
+CloseCryptoHandle@4
+Decrypt@24
+Encrypt@24
+FreeToken@4
+GenerateDerivedKey@40
+GetBrowserToken@16
+GetCryptoTransform@32
+GetKeyedHash@8
+GetToken@16
+HashCore@12
+HashFinal@20
+ImportInformationCard@4
+ManageCardSpace@0
+SignHash@24
+TransformBlock@20
+TransformFinalBlock@20
+VerifyHash@28

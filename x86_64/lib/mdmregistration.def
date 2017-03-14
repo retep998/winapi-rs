@@ -1,0 +1,10 @@
+LIBRARY MDMRegistration.DLL
+EXPORTS
+DiscoverManagementService
+DiscoverManagementServiceEx
+GetManagementAppHyperlink
+IsDeviceRegisteredWithManagement
+IsManagementRegistrationAllowed
+RegisterDeviceWithManagement
+SetManagedExternally
+UnregisterDeviceWithManagement

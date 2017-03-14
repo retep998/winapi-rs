@@ -1,0 +1,17 @@
+LIBRARY msdelta.dll
+EXPORTS
+ApplyDeltaA@20
+ApplyDeltaB@36
+ApplyDeltaProvidedB@40
+ApplyDeltaW@20
+CreateDeltaA@64
+CreateDeltaB@96
+CreateDeltaW@64
+DeltaFree@4
+DeltaNormalizeProvidedB@36
+GetDeltaInfoA@8
+GetDeltaInfoB@16
+GetDeltaInfoW@8
+GetDeltaSignatureA@20
+GetDeltaSignatureB@28
+GetDeltaSignatureW@20

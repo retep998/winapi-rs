@@ -1,0 +1,8 @@
+LIBRARY WDSMC.dll
+EXPORTS
+WdsTransportServerAllocateBuffer
+WdsTransportServerCompleteRead
+WdsTransportServerFreeBuffer
+WdsTransportServerRegisterCallback
+WdsTransportServerTrace
+WdsTransportServerTraceV

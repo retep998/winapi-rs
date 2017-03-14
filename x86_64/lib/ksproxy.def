@@ -1,0 +1,8 @@
+LIBRARY ksproxy.ax
+EXPORTS
+KsGetMediaType
+KsGetMediaTypeCount
+KsGetMultiplePinFactoryItems
+KsOpenDefaultDevice
+KsResolveRequiredAttributes
+KsSynchronousDeviceControl

@@ -246,7 +246,7 @@ macro_rules! EXTERN {
     (stdcall fn $func:ident(
         $($p:ident: $t:ty),*
     ) -> $ret:ty) => (EXTERN!{@fix
-        extern "stdcall" {
+        extern "system" {
             pub fn $func(
                 $($p: $t),*
             ) -> $ret;
@@ -255,7 +255,7 @@ macro_rules! EXTERN {
     (cdecl fn $func:ident(
         $($p:ident: $t:ty),*
     ) -> $ret:ty) => (EXTERN!{@fix
-        extern "cdecl" {
+        extern "C" {
             pub fn $func(
                 $($p: $t),*
             ) -> $ret;
@@ -268,15 +268,15 @@ macro_rules! IFDEF {
 }
 macro_rules! FN {
     (stdcall $func:ident($($t:ty),*) -> $ret:ty) => (
-        pub type $func = Option<unsafe extern "stdcall" fn($($t),*) -> $ret>;
+        pub type $func = Option<unsafe extern "system" fn($($t),*) -> $ret>;
     );
     (stdcall $func:ident($($p:ident: $t:ty),*) -> $ret:ty) => (
-        pub type $func = Option<unsafe extern "stdcall" fn($($p: $t),*) -> $ret>;
+        pub type $func = Option<unsafe extern "system" fn($($p: $t),*) -> $ret>;
     );
     (cdecl $func:ident($($t:ty),*) -> $ret:ty) => (
-        pub type $func = Option<unsafe extern "cdecl" fn($($t),*) -> $ret>;
+        pub type $func = Option<unsafe extern "C" fn($($t),*) -> $ret>;
     );
     (cdecl $func:ident($($p:ident: $t:ty),*) -> $ret:ty) => (
-        pub type $func = Option<unsafe extern "cdecl" fn($($p: $t),*) -> $ret>;
+        pub type $func = Option<unsafe extern "C" fn($($p: $t),*) -> $ret>;
     );
 }

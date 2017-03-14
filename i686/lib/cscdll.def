@@ -1,0 +1,20 @@
+LIBRARY CSCDLL.dll
+EXPORTS
+CSCDeleteW@4 @45
+CSCDisconnectPath@4 @73
+CSCDoEnableDisable@4 @14
+CSCEnumForStatsExW@12 @55
+CSCEnumForStatsW@12 @49
+CSCFindClose@4 @10
+CSCFindFirstFileForSidW@28 @60
+CSCFindFirstFileW@24 @43
+CSCFindNextFileW@24 @44
+CSCIsCSCEnabled@0 @9
+CSCIsPathOffline@8 @75
+CSCIsServerOfflineW@8 @50
+CSCPinFileW@20 @40
+CSCQueryFileStatusW@16 @42
+CSCSetMaxSpace@8 @11
+CSCTransitionPathOnline@4 @76
+CSCTransitionServerOnlineW@4 @52
+CSCUnpinFileW@20 @41

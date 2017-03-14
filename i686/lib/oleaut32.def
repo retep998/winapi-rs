@@ -395,3 +395,8 @@ VariantTimeToDosDateTime@16 @13
 VariantTimeToSystemTime@12 @185
 VectorFromBstr@8 @413
 OACreateTypeLib2@12
+SafeArrayAddRef@8
+SafeArrayReleaseData@4
+SafeArrayReleaseDescriptor@4
+SysAddRefString@4
+SysReleaseString@4

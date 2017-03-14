@@ -1,0 +1,4 @@
+LIBRARY fxsutility.DLL
+EXPORTS
+CanSendToFaxRecipient@0
+SendToFaxRecipient@8

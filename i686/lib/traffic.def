@@ -1,0 +1,24 @@
+LIBRARY TRAFFIC.dll
+EXPORTS
+TcAddFilter@12
+TcAddFlow@20
+TcCloseInterface@4
+TcDeleteFilter@4
+TcDeleteFlow@4
+TcDeregisterClient@4
+TcEnumerateFlows@20
+TcEnumerateInterfaces@12
+TcGetFlowNameA@12
+TcGetFlowNameW@12
+TcGetInterfaceList@12
+TcModifyFlow@8
+TcOpenInterfaceA@16
+TcOpenInterfaceW@16
+TcQueryFlowA@16
+TcQueryFlowW@16
+TcQueryInterface@20
+TcRegisterClient@16
+TcSetFlowA@16
+TcSetFlowW@16
+TcSetInterface@16
+TcSetSocketFlow@8

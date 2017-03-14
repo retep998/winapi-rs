@@ -1,0 +1,6 @@
+LIBRARY RpcProxy.dll
+EXPORTS
+GetExtensionVersion@4
+GetFilterVersion@4
+HttpExtensionProc@4
+HttpFilterProc@12

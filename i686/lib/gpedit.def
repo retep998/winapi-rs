@@ -1,0 +1,12 @@
+LIBRARY GPEDIT.DLL
+EXPORTS
+CreateRSOPQuery@8 @100
+FreeRSOPQuery@4 @101
+FreeRSOPQueryResults@8 @102
+RunRSOPQuery@12 @103
+BrowseForGPO@4
+CreateGPOLink@12
+DeleteAllGPOLinks@4
+DeleteGPOLink@8
+ExportRSoPData@8
+ImportRSoPData@8

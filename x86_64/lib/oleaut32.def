@@ -403,6 +403,11 @@ LPSAFEARRAY_UserMarshal64
 LPSAFEARRAY_UserSize64
 LPSAFEARRAY_UserUnmarshal64
 OACreateTypeLib2
+SafeArrayAddRef
+SafeArrayReleaseData
+SafeArrayReleaseDescriptor
+SysAddRefString
+SysReleaseString
 VARIANT_UserFree64
 VARIANT_UserMarshal64
 VARIANT_UserSize64

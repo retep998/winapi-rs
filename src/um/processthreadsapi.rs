@@ -59,7 +59,7 @@ STRUCT!{struct STARTUPINFOW {
     hStdError: HANDLE,
 }}
 pub type LPSTARTUPINFOW = *mut STARTUPINFOW;
-extern "stdcall" {
+extern "system" {
     pub fn QueueUserAPC(
         pfnAPC: PAPCFUNC,
         hThread: HANDLE,

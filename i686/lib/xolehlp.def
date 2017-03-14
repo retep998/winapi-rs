@@ -1,0 +1,7 @@
+LIBRARY XOLEHLP.dll
+EXPORTS
+DtcGetTransactionManager @5
+DtcGetTransactionManagerC @7
+DtcGetTransactionManagerEx
+DtcGetTransactionManagerExA
+DtcGetTransactionManagerExW

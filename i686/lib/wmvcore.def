@@ -1,0 +1,15 @@
+LIBRARY WMVCore.DLL
+EXPORTS
+WMCreateBackupRestorer@8
+WMCreateEditor@4
+WMCreateIndexer@4
+WMCreateProfileManager@4
+WMCreateReader@12
+WMCreateReaderPriv@4
+WMCreateSyncReader@12
+WMCreateWriter@8
+WMCreateWriterFileSink@4
+WMCreateWriterNetworkSink@4
+WMCreateWriterPriv@4
+WMCreateWriterPushSink@4
+WMIsContentProtected@8

@@ -1,0 +1,4 @@
+LIBRARY mfsrcsnk.dll
+EXPORTS
+MFCreateAVIMediaSink
+MFCreateWAVEMediaSink

@@ -1,0 +1,6 @@
+LIBRARY MrmSupport.dll
+EXPORTS
+CreateResourceIndexer@12
+DestroyIndexedResults@12
+DestroyResourceIndexer@4
+IndexFilePath@20
