@@ -6,7 +6,7 @@
 // except according to those terms.
 use ctypes::c_void;
 use shared::guiddef::REFIID;
-use shared::minwindef::{ BOOL, ULONG };
+use shared::minwindef::{BOOL, ULONG};
 use um::winnt::HRESULT;
 RIDL!{#[uuid(0x00000000, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IUnknown(IUnknownVtbl) {
@@ -30,4 +30,15 @@ interface IClassFactory(IClassFactoryVtbl): IUnknown(IUnknownVtbl) {
         pUnkOuter: *mut IUnknown, riid: REFIID, ppvObject: *mut *mut c_void
     ) -> HRESULT,
     fn LockServer(fLock: BOOL) -> HRESULT
+}}
+RIDL!{#[uuid(0x00000100, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IEnumUnknown(IEnumUnknownVtbl): IUnknown(IUnknownVtbl) {
+    fn Next( 
+        celt: ULONG,
+        rgelt: *mut *mut IUnknown,
+        pceltFetched: *mut ULONG
+    ) -> HRESULT,
+    fn Skip(celt: ULONG) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(ppenum: *mut *mut IEnumUnknown) -> HRESULT
 }}
