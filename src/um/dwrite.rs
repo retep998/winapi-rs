@@ -3,6 +3,7 @@
 //! DirectX Typography Services public API definitions.
 use ctypes::{c_void};
 use shared::basetsd::{INT32, INT16, UINT64, UINT32, UINT16, UINT8};
+use shared::guiddef::{IID};
 use shared::minwindef::{FLOAT, BOOL, BYTE, FILETIME};
 use shared::windef::{HMONITOR, RECT, HDC, COLORREF, SIZE};
 use shared::winerror::{SEVERITY_ERROR};
@@ -1156,6 +1157,11 @@ interface IDWriteFactory(IDWriteFactoryVtbl): IUnknown(IUnknownVtbl) {
         baselineOriginY: FLOAT, glyphRunAnalysis: *mut *mut IDWriteGlyphRunAnalysis
     ) -> HRESULT
 }}
+EXTERN!{stdcall fn DWriteCreateFactory(
+    factoryType: DWRITE_FACTORY_TYPE,
+    iid: *const IID,
+    factory: *mut *mut IUnknown
+) -> HRESULT}
 pub const FACILITY_DWRITE: HRESULT = 0x898;
 pub const DWRITE_ERR_BASE: HRESULT = 0x5000;
 #[inline]
