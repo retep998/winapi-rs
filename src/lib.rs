@@ -13,7 +13,7 @@
 #[cfg(feature = "std")]
 extern crate std;
 
-// Hack for exported macros
+/// Hack for exported macros
 #[doc(hidden)]
 pub extern crate core as _core;
 

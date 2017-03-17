@@ -123,7 +123,7 @@ extern "system" {
         nIconIndex: UINT,
     ) -> HICON;
 }
-STRUCT!{struct DRAGINFOA {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct DRAGINFOA {
     uSize: UINT,
     pt: POINT,
     fNC: BOOL,
@@ -131,7 +131,7 @@ STRUCT!{struct DRAGINFOA {
     grfKeyState: DWORD,
 }}
 pub type LPDRAGINFOA = *mut DRAGINFOA;
-STRUCT!{struct DRAGINFOW {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct DRAGINFOW {
     uSize: UINT,
     pt: POINT,
     fNC: BOOL,
@@ -162,7 +162,7 @@ pub const ABE_LEFT: UINT = 0;
 pub const ABE_TOP: UINT = 1;
 pub const ABE_RIGHT: UINT = 2;
 pub const ABE_BOTTOM: UINT = 3;
-STRUCT!{struct APPBARDATA {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct APPBARDATA {
     cbSize: DWORD,
     hWnd: HWND,
     uCallbackMessage: UINT,
@@ -226,7 +226,7 @@ pub const PO_RENAME: WORD = 0x0014;
 pub const PO_PORTCHANGE: WORD = 0x0020;
 pub const PO_REN_PORT: WORD = 0x0034;
 pub type PRINTEROP_FLAGS = WORD;
-STRUCT!{struct SHFILEOPSTRUCTA {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEOPSTRUCTA {
     hwnd: HWND,
     wFunc: UINT,
     pFrom: PCZZSTR,
@@ -237,7 +237,7 @@ STRUCT!{struct SHFILEOPSTRUCTA {
     lpszProgressTitle: PCSTR,
 }}
 pub type LPSHFILEOPSTRUCTA = *mut SHFILEOPSTRUCTA;
-STRUCT!{struct SHFILEOPSTRUCTW {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEOPSTRUCTW {
     hwnd: HWND,
     wFunc: UINT,
     pFrom: PCZZWSTR,
@@ -259,14 +259,14 @@ extern "system" {
         hNameMappings: HANDLE,
     );
 }
-STRUCT!{struct SHNAMEMAPPINGA {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHNAMEMAPPINGA {
     pszOldPath: LPSTR,
     pszNewPath: LPSTR,
     cchOldPath: c_int,
     cchNewPath: c_int,
 }}
 pub type LPSHNAMEMAPPINGA = *mut SHNAMEMAPPINGA;
-STRUCT!{struct SHNAMEMAPPINGW {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHNAMEMAPPINGW {
     pszOldPath: LPWSTR,
     pszNewPath: LPWSTR,
     cchOldPath: c_int,
@@ -306,7 +306,7 @@ pub const SEE_MASK_NOQUERYCLASSSTORE: DWORD = 0x01000000;
 pub const SEE_MASK_WAITFORINPUTIDLE: DWORD = 0x02000000;
 pub const SEE_MASK_FLAG_LOG_USAGE: DWORD = 0x04000000;
 pub const SEE_MASK_FLAG_HINST_IS_SITE: DWORD = 0x08000000;
-STRUCT!{struct SHELLEXECUTEINFOA {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHELLEXECUTEINFOA {
     cbSize: DWORD,
     fMask: ULONG,
     hwnd: HWND,
@@ -324,7 +324,7 @@ STRUCT!{struct SHELLEXECUTEINFOA {
     hProcess: HANDLE,
 }}
 pub type LPSHELLEXECUTEINFOA = *mut SHELLEXECUTEINFOA;
-STRUCT!{struct SHELLEXECUTEINFOW {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHELLEXECUTEINFOW {
     cbSize: DWORD,
     fMask: ULONG,
     hwnd: HWND,
@@ -350,7 +350,7 @@ extern "system" {
         pExecInfo: *mut SHELLEXECUTEINFOW,
     ) -> BOOL;
 }
-STRUCT!{struct SHCREATEPROCESSINFOW {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHCREATEPROCESSINFOW {
     cbSize: DWORD,
     fMask: ULONG,
     hwnd: HWND,
@@ -391,7 +391,7 @@ ENUM!{enum ASSOCCLASS {
     ASSOCCLASS_FIXED_PROGID_STR,
     ASSOCCLASS_PROTOCOL_STR,
 }}
-STRUCT!{struct ASSOCIATIONELEMENT {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct ASSOCIATIONELEMENT {
     ac: ASSOCCLASS,
     hkClass: HKEY,
     pszClass: PCWSTR,
@@ -404,7 +404,7 @@ extern "system" {
         ppv: *mut *mut c_void,
     ) -> HRESULT;
 }
-STRUCT!{struct SHQUERYRBINFO {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHQUERYRBINFO {
     cbSize: DWORD,
     i64Size: __int64,
     i64NumItems: __int64,
@@ -452,7 +452,7 @@ extern "system" {
         ppv: *mut *mut c_void,
     ) -> HRESULT;
 }
-STRUCT!{struct NOTIFYICONDATAA {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONDATAA {
     cbSize: DWORD,
     hWnd: HWND,
     uID: UINT,
@@ -471,7 +471,7 @@ STRUCT!{struct NOTIFYICONDATAA {
 }}
 UNION!{NOTIFYICONDATAA, uTimeout, uVersion, uVersion_mut, UINT}
 pub type PNOTIFYICONDATAA = *mut NOTIFYICONDATAA;
-STRUCT!{struct NOTIFYICONDATAW {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONDATAW {
     cbSize: DWORD,
     hWnd: HWND,
     uID: UINT,
@@ -525,7 +525,7 @@ pub const NIIF_ICON_MASK: DWORD = 0x0000000F;
 pub const NIIF_NOSOUND: DWORD = 0x00000010;
 pub const NIIF_LARGE_ICON: DWORD = 0x00000020;
 pub const NIIF_RESPECT_QUIET_TIME: DWORD = 0x00000080;
-STRUCT!{struct NOTIFYICONIDENTIFIER {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONIDENTIFIER {
     cbSize: DWORD,
     hWnd: HWND,
     uID: UINT,
@@ -546,14 +546,14 @@ extern "system" {
         iconLocation: *mut RECT,
     ) -> HRESULT;
 }
-STRUCT!{struct SHFILEINFOA {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEINFOA {
     hIcon: HICON,
     iIcon: c_int,
     dwAttributes: DWORD,
     szDisplayName: [CHAR; MAX_PATH],
     szTypeName: [CHAR; 80],
 }}
-STRUCT!{struct SHFILEINFOW {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEINFOW {
     hIcon: HICON,
     iIcon: c_int,
     dwAttributes: DWORD,
@@ -594,7 +594,7 @@ extern "system" {
         uFlags: UINT,
     ) -> DWORD_PTR;
 }
-STRUCT!{struct SHSTOCKICONINFO {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHSTOCKICONINFO {
     cbSize: DWORD,
     hIcon: HICON,
     iSysImageIndex: c_int,
@@ -769,7 +769,7 @@ extern "system" {
         fModal: BOOL,
     ) -> BOOL;
 }
-STRUCT!{struct OPEN_PRINTER_PROPS_INFOA {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct OPEN_PRINTER_PROPS_INFOA {
     dwSize: DWORD,
     pszSheetName: LPSTR,
     uSheetIndex: UINT,
@@ -777,7 +777,7 @@ STRUCT!{struct OPEN_PRINTER_PROPS_INFOA {
     bModal: BOOL,
 }}
 pub type POPEN_PRINTER_PROPS_INFOA = *mut OPEN_PRINTER_PROPS_INFOA;
-STRUCT!{struct OPEN_PRINTER_PROPS_INFOW {
+STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct OPEN_PRINTER_PROPS_INFOW {
     dwSize: DWORD,
     pszSheetName: LPWSTR,
     uSheetIndex: UINT,
@@ -901,6 +901,14 @@ FN!{stdcall PFNSHOWSHAREFOLDERUIW(
 pub const WC_NETADDRESS: &'static str = "msctls_netaddress";
 extern "system" {
     pub fn InitNetworkAddressControl() -> BOOL;
+}
+// STRUCT!{struct NC_ADDRESS {
+//     pAddrInfo: *mut NET_ADDRESS_INFO,
+//     PortNumber: USHORT,
+//     PrefixLength: BYTE,
+// }}
+// pub type PNC_ADDRESS = *mut NC_ADDRESS;
+extern "system" {
     pub fn SHGetDriveMedia(
         pszDrive: PCWSTR,
         pdwMediaContent: *mut DWORD,
