@@ -1,4 +1,4 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -13,7 +13,7 @@ ENUM!{enum EXCEPTION_DISPOSITION {
     ExceptionNestedException,
     ExceptionCollidedUnwind,
 }}
-// While there are functions defined here in `excpt.h`, they are actually intriscs which have
+// While there are functions defined here in `excpt.h`, they are actually intrinsics which have
 // special black magic in the msvc compiler. Thus bindings cannot be provided for them.
 pub const EXCEPTION_EXECUTE_HANDLER: i32 = 1;
 pub const EXCEPTION_CONTINUE_SEARCH: i32 = 0;

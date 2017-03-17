@@ -6,7 +6,6 @@ rust:
   - nightly
 script:
   - cargo build
-  - cargo test
   - cargo doc
 notifications:
   email: false

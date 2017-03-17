@@ -1,5 +1,9 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Macros to make things easier to define
 macro_rules! DECLARE_HANDLE {
     ($name:ident, $inner:ident) => {
@@ -172,18 +176,41 @@ macro_rules! RIDL {
     );
 }
 macro_rules! UNION {
-    ($base:ident, $field:ident, $variant:ident, $variantmut:ident, $fieldtype:ty) => {
+    ($base:ident, $field:ident, $variant:ident, $variant_mut:ident, $fieldtype:ty) => (
         impl $base {
             #[inline]
             pub unsafe fn $variant(&self) -> &$fieldtype {
                 &*(&self.$field as *const _ as *const _)
             }
             #[inline]
-            pub unsafe fn $variantmut(&mut self) -> &mut $fieldtype {
+            pub unsafe fn $variant_mut(&mut self) -> &mut $fieldtype {
                 &mut *(&mut self.$field as *mut _ as *mut _)
             }
         }
-    }
+    );
+}
+macro_rules! UNION2 {
+    (union $name:ident {
+        $storage:ty,
+        $($variant:ident $variant_mut:ident: $ftype:ty,)+
+    }) => (
+        pub struct $name(pub $storage);
+        impl Copy for $name {}
+        impl Clone for $name {
+            #[inline]
+            fn clone(&self) -> $name { *self }
+        }
+        impl $name {$(
+            #[inline]
+            pub unsafe fn $variant(&self) -> &$ftype {
+                &*(self as *const _ as *const $ftype)
+            }
+            #[inline]
+            pub unsafe fn $variant_mut(&mut self) -> &mut $ftype {
+                &mut *(self as *mut _ as *mut $ftype)
+            }
+        )+}
+    );
 }
 macro_rules! BITFIELD {
     ($base:ident $field:ident: $fieldtype:ty [
@@ -230,7 +257,9 @@ macro_rules! ENUM {
 }
 #[macro_export]
 macro_rules! STRUCT {
-    {$(#[$attrs:meta])* struct $name:ident { $($field:ident: $ftype:ty,)+ }} => {
+    ($(#[$attrs:meta])* struct $name:ident {
+        $($field:ident: $ftype:ty,)+
+    }) => (
         #[repr(C)] $(#[$attrs])*
         pub struct $name {
             $(pub $field: $ftype,)+
@@ -240,7 +269,7 @@ macro_rules! STRUCT {
             #[inline]
             fn clone(&self) -> $name { *self }
         }
-    };
+    );
 }
 macro_rules! EXTERN {
     (stdcall fn $func:ident(

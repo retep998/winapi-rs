@@ -1,6 +1,9 @@
-// Copyright © 2016, Klavs Madsen
-// Licensed under the MIT License <LICENSE.md>
-
+// Copyright © 2016-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Common Performance Data Helper definitions
 
 use shared::basetsd::DWORD_PTR;
@@ -214,7 +217,7 @@ UNION!(PDH_COUNTER_INFO_W, info_union, inner, inner_mut, PDH_COUNTER_INFO_INNER_
 
 UNION!(PDH_FMT_COUNTERVALUE, largeValue, largeValue, largeValue_mut, LONGLONG);
 UNION!(PDH_FMT_COUNTERVALUE, largeValue, longValue, longValue_mut, LONG);
-UNION!(PDH_FMT_COUNTERVALUE, largeValue, doubleValue, doubleValue_mut, DOUBLE); 
+UNION!(PDH_FMT_COUNTERVALUE, largeValue, doubleValue, doubleValue_mut, DOUBLE);
 UNION!(PDH_FMT_COUNTERVALUE, largeValue, AnsiStringValue, AnsiStringValue_mut, LPCSTR);
 UNION!(PDH_FMT_COUNTERVALUE, largeValue, WideStringValue, WideStringValue_mut, LPCWSTR);
 
