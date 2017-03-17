@@ -7,7 +7,7 @@
 #![cfg(windows)]
 extern crate winapi;
 use std::mem::{size_of, align_of};
-#[cfg(all(target_arch = "x86", feature = "shared-d3d9caps"))] #[test]
+#[cfg(all(target_arch = "x86", feature = "d3d9caps"))] #[test]
 fn shared_d3d9caps() {
     use winapi::shared::d3d9caps::*;
     assert_eq!(size_of::<D3DVSHADERCAPS2_0>(), 16);
@@ -22,7 +22,7 @@ fn shared_d3d9caps() {
     assert_eq!(size_of::<D3DCAPS9>(), 304);
     assert_eq!(align_of::<D3DCAPS9>(), 4);
 }
-#[cfg(all(target_arch = "x86_64", feature = "shared-d3d9caps"))] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "d3d9caps"))] #[test]
 fn shared_d3d9caps() {
     use winapi::shared::d3d9caps::*;
     assert_eq!(size_of::<D3DVSHADERCAPS2_0>(), 16);
@@ -36,7 +36,7 @@ fn shared_d3d9caps() {
     assert_eq!(size_of::<D3DCAPS9>(), 304);
     assert_eq!(align_of::<D3DCAPS9>(), 4);
 }
-#[cfg(all(target_arch = "x86", feature = "shared-d3d9types"))] #[test]
+#[cfg(all(target_arch = "x86", feature = "d3d9types"))] #[test]
 fn shared_d3d9types() {
     use winapi::shared::d3d9types::*;
     assert_eq!(size_of::<D3DVECTOR>(), 12);
@@ -187,7 +187,7 @@ fn shared_d3d9types() {
     // FIXME packed(4)
     // assert_eq!(align_of::<D3DAES_CTR_IV>(), 4);
 }
-#[cfg(all(target_arch = "x86_64", feature = "shared-d3d9types"))] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "d3d9types"))] #[test]
 fn shared_d3d9types() {
     use winapi::shared::d3d9types::*;
     assert_eq!(size_of::<D3DVECTOR>(), 12);
@@ -333,31 +333,31 @@ fn shared_d3d9types() {
     assert_eq!(size_of::<D3DAES_CTR_IV>(), 16);
     assert_eq!(align_of::<D3DAES_CTR_IV>(), 8);
 }
-#[cfg(all(target_arch = "x86", feature = "shared-guiddef"))] #[test]
+#[cfg(all(target_arch = "x86", feature = "guiddef"))] #[test]
 fn shared_guiddef() {
     use winapi::shared::guiddef::*;
     assert_eq!(size_of::<GUID>(), 16);
     assert_eq!(align_of::<GUID>(), 4);
 }
-#[cfg(all(target_arch = "x86_64", feature = "shared-guiddef"))] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "guiddef"))] #[test]
 fn shared_guiddef() {
     use winapi::shared::guiddef::*;
     assert_eq!(size_of::<GUID>(), 16);
     assert_eq!(align_of::<GUID>(), 4);
 }
-#[cfg(all(target_arch = "x86", feature = "shared-minwindef"))] #[test]
+#[cfg(all(target_arch = "x86", feature = "minwindef"))] #[test]
 fn shared_minwindef() {
     use winapi::shared::minwindef::*;
     assert_eq!(size_of::<FILETIME>(), 8);
     assert_eq!(align_of::<FILETIME>(), 4);
 }
-#[cfg(all(target_arch = "x86_64", feature = "shared-minwindef"))] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "minwindef"))] #[test]
 fn shared_minwindef() {
     use winapi::shared::minwindef::*;
     assert_eq!(size_of::<FILETIME>(), 8);
     assert_eq!(align_of::<FILETIME>(), 4);
 }
-#[cfg(all(target_arch = "x86", feature = "shared-windef"))] #[test]
+#[cfg(all(target_arch = "x86", feature = "windef"))] #[test]
 fn shared_windef() {
     use winapi::shared::windef::*;
     assert_eq!(size_of::<RECT>(), 16);
@@ -373,7 +373,7 @@ fn shared_windef() {
     assert_eq!(size_of::<POINTS>(), 4);
     assert_eq!(align_of::<POINTS>(), 2);
 }
-#[cfg(all(target_arch = "x86_64", feature = "shared-windef"))] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "windef"))] #[test]
 fn shared_windef() {
     use winapi::shared::windef::*;
     assert_eq!(size_of::<RECT>(), 16);
@@ -389,7 +389,219 @@ fn shared_windef() {
     assert_eq!(size_of::<POINTS>(), 4);
     assert_eq!(align_of::<POINTS>(), 2);
 }
-#[cfg(all(target_arch = "x86", feature = "shared-wtypesbase"))] #[test]
+#[cfg(all(target_arch = "x86", feature = "wininet"))] #[test]
+fn um_wininet() {
+    use winapi::um::wininet::*;
+    assert_eq!(size_of::<INTERNET_ASYNC_RESULT>(), 8);
+    assert_eq!(align_of::<INTERNET_ASYNC_RESULT>(), 4);
+    assert_eq!(size_of::<INTERNET_DIAGNOSTIC_SOCKET_INFO>(), 16);
+    assert_eq!(align_of::<INTERNET_DIAGNOSTIC_SOCKET_INFO>(), 4);
+    assert_eq!(size_of::<INTERNET_PROXY_INFO>(), 12);
+    assert_eq!(align_of::<INTERNET_PROXY_INFO>(), 4);
+    assert_eq!(size_of::<INTERNET_PER_CONN_OPTIONA>(), 12);
+    assert_eq!(align_of::<INTERNET_PER_CONN_OPTIONA>(), 4);
+    assert_eq!(size_of::<INTERNET_PER_CONN_OPTIONA>(), 12);
+    assert_eq!(align_of::<INTERNET_PER_CONN_OPTIONA>(), 4);
+    assert_eq!(size_of::<INTERNET_PER_CONN_OPTIONW>(), 12);
+    assert_eq!(align_of::<INTERNET_PER_CONN_OPTIONW>(), 4);
+    assert_eq!(size_of::<INTERNET_PER_CONN_OPTIONW>(), 12);
+    assert_eq!(align_of::<INTERNET_PER_CONN_OPTIONW>(), 4);
+    assert_eq!(size_of::<INTERNET_PER_CONN_OPTION_LISTA>(), 20);
+    assert_eq!(align_of::<INTERNET_PER_CONN_OPTION_LISTA>(), 4);
+    assert_eq!(size_of::<INTERNET_PER_CONN_OPTION_LISTW>(), 20);
+    assert_eq!(align_of::<INTERNET_PER_CONN_OPTION_LISTW>(), 4);
+    assert_eq!(size_of::<INTERNET_VERSION_INFO>(), 8);
+    assert_eq!(align_of::<INTERNET_VERSION_INFO>(), 4);
+    assert_eq!(size_of::<HTTP_VERSION_INFO>(), 8);
+    assert_eq!(align_of::<HTTP_VERSION_INFO>(), 4);
+    assert_eq!(size_of::<INTERNET_CONNECTED_INFO>(), 8);
+    assert_eq!(align_of::<INTERNET_CONNECTED_INFO>(), 4);
+    assert_eq!(size_of::<URL_COMPONENTSA>(), 60);
+    assert_eq!(align_of::<URL_COMPONENTSA>(), 4);
+    assert_eq!(size_of::<URL_COMPONENTSW>(), 60);
+    assert_eq!(align_of::<URL_COMPONENTSW>(), 4);
+    assert_eq!(size_of::<INTERNET_CERTIFICATE_INFO>(), 40);
+    assert_eq!(align_of::<INTERNET_CERTIFICATE_INFO>(), 4);
+    assert_eq!(size_of::<INTERNET_BUFFERSA>(), 40);
+    assert_eq!(align_of::<INTERNET_BUFFERSA>(), 4);
+    assert_eq!(size_of::<INTERNET_BUFFERSW>(), 40);
+    assert_eq!(align_of::<INTERNET_BUFFERSW>(), 4);
+    assert_eq!(size_of::<IncomingCookieState>(), 28);
+    assert_eq!(align_of::<IncomingCookieState>(), 4);
+    assert_eq!(size_of::<OutgoingCookieState>(), 12);
+    assert_eq!(align_of::<OutgoingCookieState>(), 4);
+    assert_eq!(size_of::<InternetCookieHistory>(), 16);
+    assert_eq!(align_of::<InternetCookieHistory>(), 4);
+    assert_eq!(size_of::<CookieDecision>(), 8);
+    assert_eq!(align_of::<CookieDecision>(), 4);
+    assert_eq!(size_of::<GOPHER_FIND_DATAA>(), 808);
+    assert_eq!(align_of::<GOPHER_FIND_DATAA>(), 4);
+    assert_eq!(size_of::<GOPHER_FIND_DATAW>(), 1588);
+    assert_eq!(align_of::<GOPHER_FIND_DATAW>(), 4);
+    assert_eq!(size_of::<GOPHER_ADMIN_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(align_of::<GOPHER_ADMIN_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_MOD_DATE_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(align_of::<GOPHER_MOD_DATE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_TTL_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_TTL_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_SCORE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_SCORE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(align_of::<GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_SITE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_SITE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_ORGANIZATION_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_ORGANIZATION_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_LOCATION_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_LOCATION_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE>(), 24);
+    assert_eq!(align_of::<GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_TIMEZONE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_TIMEZONE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_PROVIDER_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_PROVIDER_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_VERSION_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_VERSION_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_ABSTRACT_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(align_of::<GOPHER_ABSTRACT_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_VIEW_ATTRIBUTE_TYPE>(), 12);
+    assert_eq!(align_of::<GOPHER_VIEW_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_VERONICA_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_VERONICA_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_ASK_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(align_of::<GOPHER_ASK_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_UNKNOWN_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_UNKNOWN_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_ATTRIBUTE_TYPE>(), 32); // FIXME
+    assert_eq!(align_of::<GOPHER_ATTRIBUTE_TYPE>(), 4); // FIXME
+    assert_eq!(size_of::<INTERNET_COOKIE2>(), 32);
+    assert_eq!(align_of::<INTERNET_COOKIE2>(), 4);
+    assert_eq!(size_of::<INTERNET_AUTH_NOTIFY_DATA>(), 16);
+    assert_eq!(align_of::<INTERNET_AUTH_NOTIFY_DATA>(), 4);
+    assert_eq!(size_of::<INTERNET_CACHE_ENTRY_INFOA>(), 80);
+    assert_eq!(align_of::<INTERNET_CACHE_ENTRY_INFOA>(), 4);
+    assert_eq!(size_of::<INTERNET_CACHE_ENTRY_INFOW>(), 80);
+    assert_eq!(align_of::<INTERNET_CACHE_ENTRY_INFOW>(), 4);
+    assert_eq!(size_of::<INTERNET_CACHE_TIMESTAMPS>(), 16);
+    assert_eq!(align_of::<INTERNET_CACHE_TIMESTAMPS>(), 4);
+    assert_eq!(size_of::<INTERNET_CACHE_GROUP_INFOA>(), 156);
+    assert_eq!(align_of::<INTERNET_CACHE_GROUP_INFOA>(), 4);
+    assert_eq!(size_of::<INTERNET_CACHE_GROUP_INFOW>(), 276);
+    assert_eq!(align_of::<INTERNET_CACHE_GROUP_INFOW>(), 4);
+    assert_eq!(size_of::<AutoProxyHelperVtbl>(), 36);
+    assert_eq!(align_of::<AutoProxyHelperVtbl>(), 4);
+    assert_eq!(size_of::<AUTO_PROXY_SCRIPT_BUFFER>(), 12);
+    assert_eq!(align_of::<AUTO_PROXY_SCRIPT_BUFFER>(), 4);
+    assert_eq!(size_of::<AutoProxyHelperFunctions>(), 4);
+    assert_eq!(align_of::<AutoProxyHelperFunctions>(), 4);
+}
+#[cfg(all(target_arch = "x86_64", feature = "wininet"))] #[test]
+fn um_wininet() {
+    use winapi::um::wininet::*;
+    assert_eq!(size_of::<INTERNET_ASYNC_RESULT>(), 16);
+    assert_eq!(align_of::<INTERNET_ASYNC_RESULT>(), 8);
+    assert_eq!(size_of::<INTERNET_DIAGNOSTIC_SOCKET_INFO>(), 24);
+    assert_eq!(align_of::<INTERNET_DIAGNOSTIC_SOCKET_INFO>(), 8);
+    assert_eq!(size_of::<INTERNET_PROXY_INFO>(), 24);
+    assert_eq!(align_of::<INTERNET_PROXY_INFO>(), 8);
+    assert_eq!(size_of::<INTERNET_PER_CONN_OPTIONA>(), 16);
+    assert_eq!(align_of::<INTERNET_PER_CONN_OPTIONA>(), 8);
+    assert_eq!(size_of::<INTERNET_PER_CONN_OPTIONA>(), 16);
+    assert_eq!(align_of::<INTERNET_PER_CONN_OPTIONA>(), 8);
+    assert_eq!(size_of::<INTERNET_PER_CONN_OPTIONW>(), 16);
+    assert_eq!(align_of::<INTERNET_PER_CONN_OPTIONW>(), 8);
+    assert_eq!(size_of::<INTERNET_PER_CONN_OPTIONW>(), 16);
+    assert_eq!(align_of::<INTERNET_PER_CONN_OPTIONW>(), 8);
+    assert_eq!(size_of::<INTERNET_PER_CONN_OPTION_LISTA>(), 32);
+    assert_eq!(align_of::<INTERNET_PER_CONN_OPTION_LISTA>(), 8);
+    assert_eq!(size_of::<INTERNET_PER_CONN_OPTION_LISTW>(), 32);
+    assert_eq!(align_of::<INTERNET_PER_CONN_OPTION_LISTW>(), 8);
+    assert_eq!(size_of::<INTERNET_VERSION_INFO>(), 8);
+    assert_eq!(align_of::<INTERNET_VERSION_INFO>(), 4);
+    assert_eq!(size_of::<HTTP_VERSION_INFO>(), 8);
+    assert_eq!(align_of::<HTTP_VERSION_INFO>(), 4);
+    assert_eq!(size_of::<INTERNET_CONNECTED_INFO>(), 8);
+    assert_eq!(align_of::<INTERNET_CONNECTED_INFO>(), 4);
+    assert_eq!(size_of::<URL_COMPONENTSA>(), 104);
+    assert_eq!(align_of::<URL_COMPONENTSA>(), 8);
+    assert_eq!(size_of::<URL_COMPONENTSW>(), 104);
+    assert_eq!(align_of::<URL_COMPONENTSW>(), 8);
+    assert_eq!(size_of::<INTERNET_CERTIFICATE_INFO>(), 64);
+    assert_eq!(align_of::<INTERNET_CERTIFICATE_INFO>(), 8);
+    assert_eq!(size_of::<INTERNET_BUFFERSA>(), 56);
+    assert_eq!(align_of::<INTERNET_BUFFERSA>(), 8);
+    assert_eq!(size_of::<INTERNET_BUFFERSW>(), 56);
+    assert_eq!(align_of::<INTERNET_BUFFERSW>(), 8);
+    assert_eq!(size_of::<IncomingCookieState>(), 32);
+    assert_eq!(align_of::<IncomingCookieState>(), 8);
+    assert_eq!(size_of::<OutgoingCookieState>(), 16);
+    assert_eq!(align_of::<OutgoingCookieState>(), 8);
+    assert_eq!(size_of::<InternetCookieHistory>(), 16);
+    assert_eq!(align_of::<InternetCookieHistory>(), 4);
+    assert_eq!(size_of::<CookieDecision>(), 8);
+    assert_eq!(align_of::<CookieDecision>(), 4);
+    assert_eq!(size_of::<GOPHER_FIND_DATAA>(), 808);
+    assert_eq!(align_of::<GOPHER_FIND_DATAA>(), 4);
+    assert_eq!(size_of::<GOPHER_FIND_DATAW>(), 1588);
+    assert_eq!(align_of::<GOPHER_FIND_DATAW>(), 4);
+    assert_eq!(size_of::<GOPHER_ADMIN_ATTRIBUTE_TYPE>(), 16);
+    assert_eq!(align_of::<GOPHER_ADMIN_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(size_of::<GOPHER_MOD_DATE_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(align_of::<GOPHER_MOD_DATE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_TTL_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_TTL_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_SCORE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_SCORE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(align_of::<GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_SITE_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(align_of::<GOPHER_SITE_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(size_of::<GOPHER_ORGANIZATION_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(align_of::<GOPHER_ORGANIZATION_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(size_of::<GOPHER_LOCATION_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(align_of::<GOPHER_LOCATION_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(size_of::<GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE>(), 24);
+    assert_eq!(align_of::<GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_TIMEZONE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_TIMEZONE_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_PROVIDER_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(align_of::<GOPHER_PROVIDER_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(size_of::<GOPHER_VERSION_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(align_of::<GOPHER_VERSION_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(size_of::<GOPHER_ABSTRACT_ATTRIBUTE_TYPE>(), 16);
+    assert_eq!(align_of::<GOPHER_ABSTRACT_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(size_of::<GOPHER_VIEW_ATTRIBUTE_TYPE>(), 24);
+    assert_eq!(align_of::<GOPHER_VIEW_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(size_of::<GOPHER_VERONICA_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(align_of::<GOPHER_VERONICA_ATTRIBUTE_TYPE>(), 4);
+    assert_eq!(size_of::<GOPHER_ASK_ATTRIBUTE_TYPE>(), 16);
+    assert_eq!(align_of::<GOPHER_ASK_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(size_of::<GOPHER_UNKNOWN_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(align_of::<GOPHER_UNKNOWN_ATTRIBUTE_TYPE>(), 8);
+    assert_eq!(size_of::<GOPHER_ATTRIBUTE_TYPE>(), 32); // FIXME
+    assert_eq!(align_of::<GOPHER_ATTRIBUTE_TYPE>(), 8); // FIXME
+    assert_eq!(size_of::<INTERNET_COOKIE2>(), 48);
+    assert_eq!(align_of::<INTERNET_COOKIE2>(), 8);
+    assert_eq!(size_of::<INTERNET_AUTH_NOTIFY_DATA>(), 24);
+    assert_eq!(align_of::<INTERNET_AUTH_NOTIFY_DATA>(), 8);
+    assert_eq!(size_of::<INTERNET_CACHE_ENTRY_INFOA>(), 112);
+    assert_eq!(align_of::<INTERNET_CACHE_ENTRY_INFOA>(), 8);
+    assert_eq!(size_of::<INTERNET_CACHE_ENTRY_INFOW>(), 112);
+    assert_eq!(align_of::<INTERNET_CACHE_ENTRY_INFOW>(), 8);
+    assert_eq!(size_of::<INTERNET_CACHE_TIMESTAMPS>(), 16);
+    assert_eq!(align_of::<INTERNET_CACHE_TIMESTAMPS>(), 4);
+    assert_eq!(size_of::<INTERNET_CACHE_GROUP_INFOA>(), 156);
+    assert_eq!(align_of::<INTERNET_CACHE_GROUP_INFOA>(), 4);
+    assert_eq!(size_of::<INTERNET_CACHE_GROUP_INFOW>(), 276);
+    assert_eq!(align_of::<INTERNET_CACHE_GROUP_INFOW>(), 4);
+    assert_eq!(size_of::<AutoProxyHelperVtbl>(), 72);
+    assert_eq!(align_of::<AutoProxyHelperVtbl>(), 8);
+    assert_eq!(size_of::<AUTO_PROXY_SCRIPT_BUFFER>(), 24);
+    assert_eq!(align_of::<AUTO_PROXY_SCRIPT_BUFFER>(), 8);
+    assert_eq!(size_of::<AutoProxyHelperFunctions>(), 8);
+    assert_eq!(align_of::<AutoProxyHelperFunctions>(), 8);
+}
+#[cfg(all(target_arch = "x86", feature = "wtypesbase"))] #[test]
 fn shared_wtypesbase() {
     use winapi::shared::wtypesbase::*;
     assert_eq!(size_of::<COAUTHIDENTITY>(), 28);
@@ -417,7 +629,7 @@ fn shared_wtypesbase() {
     assert_eq!(size_of::<BLOB>(), 8);
     assert_eq!(align_of::<BLOB>(), 4);
 }
-#[cfg(all(target_arch = "x86_64", feature = "shared-wtypesbase"))] #[test]
+#[cfg(all(target_arch = "x86_64", feature = "wtypesbase"))] #[test]
 fn shared_wtypesbase() {
     use winapi::shared::wtypesbase::*;
     assert_eq!(size_of::<COAUTHIDENTITY>(), 48);

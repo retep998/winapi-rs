@@ -1,0 +1,32 @@
+LIBRARY dwmapi.dll
+EXPORTS
+DwmEnableComposition @102
+DwmAttachMilContent
+DwmDefWindowProc
+DwmDetachMilContent
+DwmEnableBlurBehindWindow
+DwmEnableMMCSS
+DwmExtendFrameIntoClientArea
+DwmFlush
+DwmGetColorizationColor
+DwmGetCompositionTimingInfo
+DwmGetGraphicsStreamClient
+DwmGetGraphicsStreamTransformHint
+DwmGetTransportAttributes
+DwmGetWindowAttribute
+DwmInvalidateIconicBitmaps
+DwmIsCompositionEnabled
+DwmModifyPreviousDxFrameDuration
+DwmQueryThumbnailSourceSize
+DwmRegisterThumbnail
+DwmRenderGesture
+DwmSetDxFrameDuration
+DwmSetIconicLivePreviewBitmap
+DwmSetIconicThumbnail
+DwmSetPresentParameters
+DwmSetWindowAttribute
+DwmShowContact
+DwmTetherContact
+DwmTransitionOwnedWindow
+DwmUnregisterThumbnail
+DwmUpdateThumbnailProperties

@@ -26,8 +26,3 @@ STRUCT!{struct USB_INTERFACE_DESCRIPTOR {
     iInterface: ::UCHAR,
 }}
 pub type PUSB_INTERFACE_DESCRIPTOR = *mut USB_INTERFACE_DESCRIPTOR;
-#[test]
-fn test_USB_INTERFACE_DESCRIPTOR_size() {
-    use std::mem::size_of;
-    assert_eq!(size_of::<USB_INTERFACE_DESCRIPTOR>(), 9)
-}

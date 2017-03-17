@@ -6,7 +6,8 @@
 // except according to those terms.
 //! Type definitions for the basic types.
 use ctypes::{
-    __int64, __uint64, c_char, c_double, c_int, c_long, c_schar, c_short, c_uchar, c_ulong, c_ushort, c_void, wchar_t
+    __int64, __uint64, c_char, c_double, c_int, c_long, c_schar, c_short, c_uchar, c_ulong,
+    c_ushort, c_void, wchar_t,
 };
 use shared::basetsd::KAFFINITY;
 #[cfg(target_arch = "x86")]
@@ -35,6 +36,7 @@ pub type LPCWCH = *const WCHAR;
 pub type PCWCH = *const WCHAR;
 pub type NWPSTR = *mut WCHAR;
 pub type LPWSTR = *mut WCHAR;
+pub type LPTSTR = LPSTR;
 pub type PWSTR = *mut WCHAR;
 pub type PZPWSTR = *mut PWSTR;
 pub type PCZPWSTR = *const PWSTR;
@@ -81,6 +83,7 @@ pub type PSTR = *mut CHAR;
 pub type PZPSTR = *mut PSTR;
 pub type PCZPSTR = *const PSTR;
 pub type LPCSTR = *const CHAR;
+pub type LPCTSTR = LPCSTR;
 pub type PCSTR = *const CHAR;
 pub type PZPCSTR = *mut PCSTR;
 pub type PCZPCSTR = *const PCSTR;

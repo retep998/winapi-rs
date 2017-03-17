@@ -34,8 +34,3 @@ STRUCT!{#[repr(packed)] struct USB_CONFIGURATION_DESCRIPTOR {
     MaxPower: ::UCHAR,
 }}
 pub type PUSB_CONFIGURATION_DESCRIPTOR = *mut USB_CONFIGURATION_DESCRIPTOR;
-#[test]
-fn test_USB_CONFIGURATION_DESCRIPTOR_size() {
-    use std::mem::size_of;
-    assert_eq!(size_of::<USB_CONFIGURATION_DESCRIPTOR>(), 9)
-}

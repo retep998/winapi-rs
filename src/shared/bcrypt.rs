@@ -6,7 +6,7 @@
 // except according to those terms.
 //! Cryptographic Primitive API Prototypes and Definitions
 use shared::minwindef::{ PUCHAR, UCHAR, ULONG, USHORT };
-use um::winnt::{ LONG, LPCWSTR, LPWSTR, PVOID, PWSTR, ULONGLONG };
+use shared::ntdef::{ LONG, LPCWSTR, LPWSTR, PVOID, PWSTR, ULONGLONG };
 pub type NTSTATUS = LONG;
 pub type PNTSTATUS = *mut NTSTATUS;
 #[inline]

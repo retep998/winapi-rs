@@ -7,9 +7,14 @@ documentation = "https://retep998.github.io/doc/winapi/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["windows", "ffi", "win32", "com", "directx"]
+categories = ["external-ffi-bindings", "no-std", "os::windows-apis"]
 license = "MIT/Apache-2.0"
 include = ["src/**/*", "Cargo.toml", "LICENSE-MIT", "LICENSE-APACHE", "build.rs", "README.md"]
 build = "build.rs"
+
+[badges]
+travis-ci = { repository = "retep998/winapi-rs", branch = "master" }
+appveyor = { repository = "retep998/winapi-rs", branch = "master", service = "github" }
 
 [target.i686-pc-windows-gnu.dependencies]
 winapi-i686-pc-windows-gnu = { version = "0.3", path = "i686" }
@@ -18,69 +23,135 @@ winapi-x86_64-pc-windows-gnu = { version = "0.3", path = "x86_64" }
 
 [features]
 std = []
-everything = [ "headers", "libraries" ]
-headers = ["headers-shared", "headers-um", "headers-vc"]
-"headers-shared" = [
-    "shared-basetsd",
-    "shared-bcrypt",
-    "shared-cderr",
-    "shared-d3d9caps",
-    "shared-d3d9types",
-    "shared-guiddef",
-    "shared-minwindef",
-    "shared-ntdef",
-    "shared-ntstatus",
-    "shared-rpcndr",
-    "shared-sspi",
-    "shared-windef",
-    "shared-wtypesbase"
-]
-"shared-basetsd" = []
-"shared-bcrypt" = ["shared-minwindef", "um-winnt"]
-"shared-cderr" = ["shared-minwindef"]
-"shared-d3d9caps" = ["shared-d3d9types", "shared-guiddef", "shared-minwindef", "um-winnt"]
-"shared-d3d9types" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "um-winnt", "shared-windef"]
-"shared-guiddef" = []
-"shared-minwindef" = ["shared-basetsd", "shared-ntdef"]
-"shared-ntdef" = ["shared-basetsd"]
-"shared-ntstatus" = ["shared-ntdef"]
-"shared-rpcndr" = []
-"shared-sspi" = ["shared-ntdef"]
-"shared-windef" = ["shared-minwindef", "um-winnt"]
-"shared-wtypesbase" = ["shared-minwindef", "shared-rpcndr", "um-winnt"]
-"headers-um" = [
-    "um-cguid",
-    "um-combaseapi",
-    "um-consoleapi",
-    "um-minwinbase",
-    "um-ncrypt",
-    "um-objidlbase",
-    "um-unknwnbase",
-    "um-wincon",
-    "um-wingdi",
-    "um-winnt"
-]
-"um-cguid" = ["shared-guiddef"]
-"um-combaseapi" = ["shared-basetsd", "shared-minwindef", "shared-wtypesbase", "um-objidlbase", "ole32"]
-"um-consoleapi" = ["shared-minwindef", "um-wincon", "um-winnt", "kernel32"]
-"um-minwinbase" = ["shared-ntstatus"]
-"um-ncrypt" = ["shared-basetsd", "shared-sspi", "ncrypt"]
-"um-objidlbase" = ["shared-guiddef", "shared-minwindef", "shared-wtypesbase", "um-unknwnbase", "um-winnt"]
-"um-unknwnbase" = ["shared-guiddef", "shared-minwindef", "um-winnt"]
-"um-wincon" = ["shared-minwindef", "shared-windef", "um-minwinbase", "um-wingdi", "um-winnt", "kernel32"]
-"um-wingdi" = ["shared-basetsd", "shared-minwindef", "shared-windef", "um-winnt"]
-"um-winnt" = ["shared-basetsd", "shared-guiddef", "shared-minwindef", "vc-excpt"]
-"headers-vc" = [
-    "vc-excpt",
-    "vc-vcruntime"
-]
-"vc-excpt" = []
-"vc-vcruntime" = []
-libraries = [
-    "kernel32",
-    "ncrypt",
-    "ole32"
-]
-"kernel32" = []
-"ole32" = []
-"ncrypt" = []
+everything = []
+#km
+#mmos
+#shared
+basetsd = []
+bcrypt = []
+bugcodes = []
+cderr = []
+cfg = []
+d3d9 = []
+d3d9caps = []
+d3d9types = []
+devguid = []
+devpropdef = []
+dxgi = []
+dxgi1_2 = []
+dxgi1_3 = []
+dxgi1_4 = []
+dxgi1_5 = []
+dxgiformat = []
+dxgitype = []
+guiddef = []
+hidclass = []
+hidpi = []
+hidsdi = []
+hidusage = []
+inaddr = []
+ksmedia = []
+lmcons = []
+minwindef = []
+mmreg = []
+ntdef = []
+ntstatus = []
+rpcndr = []
+sspi = []
+usb = []
+windef = []
+windowsx = []
+winerror = []
+wtypes = []
+wtypesbase = []
+#ucrt
+#um
+"gl-gl" = []
+audioclient = []
+audiosessiontypes = []
+avrt = []
+cfgmgr32 = []
+cguid = []
+combaseapi = []
+commctrl = []
+commdlg = []
+consoleapi = []
+corsym = []
+d2d1 = []
+d2dbasetypes = []
+d3d10 = []
+d3d10shader = []
+d3d11 = []
+d3d11shader = []
+d3d12 = []
+d3d12sdklayers = []
+d3d12shader = []
+d3dcommon = []
+d3dcompiler = []
+dbghelp = []
+dcommon = []
+docobj = []
+dpapi = []
+dsgetdc = []
+dsound = []
+dsrole = []
+dwmapi = []
+dwrite = []
+errhandlingapi = []
+fileapi = []
+handleapi = []
+heapapi = []
+http = []
+imm = []
+libloaderapi = []
+lmaccess = []
+lmdfs = []
+lmerrlog = []
+lmjoin = []
+lsalookup = []
+memoryapi = []
+minschannel = []
+minwinbase = []
+mmdeviceapi = []
+mmsystem = []
+mscat = []
+mssip = []
+ncrypt = []
+oaidl = []
+objbase = []
+objidl = []
+objidlbase = []
+pdh = []
+processthreadsapi = []
+propidl = []
+propsys = []
+prsht = []
+setupapi = []
+shellapi = []
+spapidef = []
+strmif = []
+unknwnbase = []
+vsserror = []
+winbase = []
+wincodec = []
+wincon = []
+wincrypt = []
+winevt = []
+wingdi = []
+wininet = []
+winineti = []
+winioctl = []
+winnt = []
+winreg = []
+winsock2 = []
+winuser = []
+xinput = []
+#vc
+excpt = []
+limits = []
+vadefs = []
+vcruntime = []
+#winrt
+activation = []
+hstring = []
+inspectable = []
