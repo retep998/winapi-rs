@@ -8,6 +8,7 @@
 
 use ctypes::{ c_void, wchar_t };
 use shared::basetsd::{ UINT16, UINT32, UINT8 };
+use shared::d3d9types::{ D3DCOLORVALUE };
 use shared::minwindef::{ BOOL, FLOAT };
 use um::dcommon::{ DWRITE_MEASURING_MODE };
 use um::dwrite::{ DWRITE_FONT_FEATURE_TAG, DWRITE_FONT_STRETCH,
@@ -158,22 +159,6 @@ interface IDWriteFontFallbackBuilder(IDWriteFontFallbackBuilderVtbl):
         fontFallback: *mut *mut IDWriteFontFallback
     ) -> HRESULT
 }}
-
-STRUCT!{struct D3DCOLORVALUE {
-    u1: FLOAT,
-    u2: FLOAT,
-    u3: FLOAT,
-    u4: FLOAT,
-}}
-
-UNION!(D3DCOLORVALUE, u1, r, r_mut, FLOAT);
-UNION!(D3DCOLORVALUE, u1, dvR, dvR_mut, FLOAT);
-UNION!(D3DCOLORVALUE, u2, g, g_mut, FLOAT);
-UNION!(D3DCOLORVALUE, u2, dvG, dvG_mut, FLOAT);
-UNION!(D3DCOLORVALUE, u3, b, b_mut, FLOAT);
-UNION!(D3DCOLORVALUE, u3, dvB, dvB_mut, FLOAT);
-UNION!(D3DCOLORVALUE, u4, a, a_mut, FLOAT);
-UNION!(D3DCOLORVALUE, u4, dvA, dvA_mut, FLOAT);
 
 pub type DWRITE_COLOR_F = D3DCOLORVALUE;
 RIDL!{#[uuid(0x29748ed6, 0x8c9c, 0x4a6a, 0xbe, 0x0b, 0xd9, 0x12, 0xe8, 0x53, 0x89, 0x44)]
