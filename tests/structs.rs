@@ -1,4 +1,4 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -656,4 +656,96 @@ fn shared_wtypesbase() {
     assert_eq!(align_of::<HYPER_SIZEDARR>(), 8);
     assert_eq!(size_of::<BLOB>(), 16);
     assert_eq!(align_of::<BLOB>(), 8);
+}
+#[cfg(all(target_arch = "x86", feature = "shellapi"))] #[test]
+fn um_shellapi() {
+    use winapi::um::shellapi::*;
+    assert_eq!(size_of::<DRAGINFOA>(), 24);
+    assert_eq!(align_of::<DRAGINFOA>(), 1);
+    assert_eq!(size_of::<DRAGINFOW>(), 24);
+    assert_eq!(align_of::<DRAGINFOW>(), 1);
+    assert_eq!(size_of::<APPBARDATA>(), 36);
+    assert_eq!(align_of::<APPBARDATA>(), 1);
+    assert_eq!(size_of::<SHFILEOPSTRUCTA>(), 30);
+    assert_eq!(align_of::<SHFILEOPSTRUCTA>(), 1);
+    assert_eq!(size_of::<SHFILEOPSTRUCTW>(), 30);
+    assert_eq!(align_of::<SHFILEOPSTRUCTW>(), 1);
+    assert_eq!(size_of::<SHNAMEMAPPINGA>(), 16);
+    assert_eq!(align_of::<SHNAMEMAPPINGA>(), 1);
+    assert_eq!(size_of::<SHNAMEMAPPINGW>(), 16);
+    assert_eq!(align_of::<SHNAMEMAPPINGW>(), 1);
+    assert_eq!(size_of::<SHELLEXECUTEINFOA>(), 60);
+    assert_eq!(align_of::<SHELLEXECUTEINFOA>(), 1);
+    assert_eq!(size_of::<SHELLEXECUTEINFOW>(), 60);
+    assert_eq!(align_of::<SHELLEXECUTEINFOW>(), 1);
+    assert_eq!(size_of::<SHCREATEPROCESSINFOW>(), 52);
+    assert_eq!(align_of::<SHCREATEPROCESSINFOW>(), 1);
+    assert_eq!(size_of::<ASSOCIATIONELEMENT>(), 12);
+    assert_eq!(align_of::<ASSOCIATIONELEMENT>(), 1);
+    assert_eq!(size_of::<SHQUERYRBINFO>(), 20);
+    assert_eq!(align_of::<SHQUERYRBINFO>(), 1);
+    assert_eq!(size_of::<NOTIFYICONDATAA>(), 508);
+    assert_eq!(align_of::<NOTIFYICONDATAA>(), 1);
+    assert_eq!(size_of::<NOTIFYICONDATAW>(), 956);
+    assert_eq!(align_of::<NOTIFYICONDATAW>(), 1);
+    assert_eq!(size_of::<NOTIFYICONIDENTIFIER>(), 28);
+    assert_eq!(align_of::<NOTIFYICONIDENTIFIER>(), 1);
+    assert_eq!(size_of::<SHFILEINFOA>(), 352);
+    assert_eq!(align_of::<SHFILEINFOA>(), 1);
+    assert_eq!(size_of::<SHFILEINFOW>(), 692);
+    assert_eq!(align_of::<SHFILEINFOW>(), 1);
+    assert_eq!(size_of::<SHSTOCKICONINFO>(), 536);
+    assert_eq!(align_of::<SHSTOCKICONINFO>(), 1);
+    assert_eq!(size_of::<OPEN_PRINTER_PROPS_INFOA>(), 20);
+    assert_eq!(align_of::<OPEN_PRINTER_PROPS_INFOA>(), 1);
+    assert_eq!(size_of::<OPEN_PRINTER_PROPS_INFOW>(), 20);
+    assert_eq!(align_of::<OPEN_PRINTER_PROPS_INFOW>(), 1);
+    // assert_eq!(size_of::<NC_ADDRESS>(), 8);
+    // assert_eq!(align_of::<NC_ADDRESS>(), 4);
+}
+#[cfg(all(target_arch = "x86_64", feature = "shellapi"))] #[test]
+fn um_shellapi() {
+    use winapi::um::shellapi::*;
+    assert_eq!(size_of::<DRAGINFOA>(), 32);
+    assert_eq!(align_of::<DRAGINFOA>(), 8);
+    assert_eq!(size_of::<DRAGINFOW>(), 32);
+    assert_eq!(align_of::<DRAGINFOW>(), 8);
+    assert_eq!(size_of::<APPBARDATA>(), 48);
+    assert_eq!(align_of::<APPBARDATA>(), 8);
+    assert_eq!(size_of::<SHFILEOPSTRUCTA>(), 56);
+    assert_eq!(align_of::<SHFILEOPSTRUCTA>(), 8);
+    assert_eq!(size_of::<SHFILEOPSTRUCTW>(), 56);
+    assert_eq!(align_of::<SHFILEOPSTRUCTW>(), 8);
+    assert_eq!(size_of::<SHNAMEMAPPINGA>(), 24);
+    assert_eq!(align_of::<SHNAMEMAPPINGA>(), 8);
+    assert_eq!(size_of::<SHNAMEMAPPINGW>(), 24);
+    assert_eq!(align_of::<SHNAMEMAPPINGW>(), 8);
+    assert_eq!(size_of::<SHELLEXECUTEINFOA>(), 112);
+    assert_eq!(align_of::<SHELLEXECUTEINFOA>(), 8);
+    assert_eq!(size_of::<SHELLEXECUTEINFOW>(), 112);
+    assert_eq!(align_of::<SHELLEXECUTEINFOW>(), 8);
+    assert_eq!(size_of::<SHCREATEPROCESSINFOW>(), 88);
+    assert_eq!(align_of::<SHCREATEPROCESSINFOW>(), 8);
+    assert_eq!(size_of::<ASSOCIATIONELEMENT>(), 24);
+    assert_eq!(align_of::<ASSOCIATIONELEMENT>(), 8);
+    assert_eq!(size_of::<SHQUERYRBINFO>(), 24);
+    assert_eq!(align_of::<SHQUERYRBINFO>(), 8);
+    assert_eq!(size_of::<NOTIFYICONDATAA>(), 528);
+    assert_eq!(align_of::<NOTIFYICONDATAA>(), 8);
+    assert_eq!(size_of::<NOTIFYICONDATAW>(), 976);
+    assert_eq!(align_of::<NOTIFYICONDATAW>(), 8);
+    assert_eq!(size_of::<NOTIFYICONIDENTIFIER>(), 40);
+    assert_eq!(align_of::<NOTIFYICONIDENTIFIER>(), 8);
+    assert_eq!(size_of::<SHFILEINFOA>(), 360);
+    assert_eq!(align_of::<SHFILEINFOA>(), 8);
+    assert_eq!(size_of::<SHFILEINFOW>(), 696);
+    assert_eq!(align_of::<SHFILEINFOW>(), 8);
+    assert_eq!(size_of::<SHSTOCKICONINFO>(), 544);
+    assert_eq!(align_of::<SHSTOCKICONINFO>(), 8);
+    assert_eq!(size_of::<OPEN_PRINTER_PROPS_INFOA>(), 32);
+    assert_eq!(align_of::<OPEN_PRINTER_PROPS_INFOA>(), 8);
+    assert_eq!(size_of::<OPEN_PRINTER_PROPS_INFOW>(), 32);
+    assert_eq!(align_of::<OPEN_PRINTER_PROPS_INFOW>(), 8);
+    // assert_eq!(size_of::<NC_ADDRESS>(), 16);
+    // assert_eq!(align_of::<NC_ADDRESS>(), 8);
 }

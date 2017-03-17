@@ -1,4 +1,4 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -61,16 +61,16 @@ interface IBindCtx(IBindCtxVtbl): IUnknown(IUnknownVtbl) {
 RIDL!(
 #[uuid(0x00000102, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IEnumMoniker(IEnumMonikerVtbl): IUnknown(IUnknownVtbl) {
-    fn Next( 
+    fn Next(
         celt: ULONG,
         rgelt: *mut *mut IMoniker,
         pceltFetched: *mut ULONG
     ) -> HRESULT,
-    fn Skip( 
+    fn Skip(
         celt: ULONG
     ) -> HRESULT,
     fn Reset() -> HRESULT,
-    fn Clone( 
+    fn Clone(
         ppenum: *mut *mut IEnumMoniker
     ) -> HRESULT
 }
@@ -112,7 +112,7 @@ interface IRunningObjectTable(IRunningObjectTableVtbl): IUnknown(IUnknownVtbl) {
 RIDL!(
 #[uuid(0x0000010c, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IPersist(IPersistVtbl): IUnknown(IUnknownVtbl) {
-    fn GetClassID( 
+    fn GetClassID(
         pClassID: *mut CLSID
     ) -> HRESULT
 }
@@ -122,14 +122,14 @@ RIDL!(
 #[uuid(0x00000109, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IPersistStream(IPersistStreamVtbl): IPersist(IPersistVtbl) {
     fn IsDirty() -> HRESULT,
-    fn Load( 
+    fn Load(
         pStm: *mut IStream
     ) -> HRESULT,
-    fn Save( 
+    fn Save(
         pStm: *mut IStream,
         fClearDirty: BOOL
     ) -> HRESULT,
-    fn GetSizeMax( 
+    fn GetSizeMax(
         pcbSize: *mut ULARGE_INTEGER
     ) -> HRESULT
 }
@@ -138,73 +138,73 @@ interface IPersistStream(IPersistStreamVtbl): IPersist(IPersistVtbl) {
 RIDL!(
 #[uuid(0x0000000f, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IMoniker(IMonikerVtbl): IPersistStream(IPersistStreamVtbl) {
-    fn BindToObject( 
+    fn BindToObject(
         pbc: *mut IBindCtx,
         pmkToLeft: *mut IMoniker,
         riidResult: REFIID,
         ppvResult: *mut *mut c_void
     ) -> HRESULT,
-    fn BindToStorage( 
+    fn BindToStorage(
         pbc: *mut IBindCtx,
         pmkToLeft: *mut IMoniker,
         riid: REFIID,
         ppvObj: *mut *mut c_void
     ) -> HRESULT,
-    fn Reduce( 
+    fn Reduce(
         pbc: *mut IBindCtx,
         dwReduceHowFar: DWORD,
         ppmkToLeft: *mut *mut IMoniker,
         ppmkReduced: *mut *mut IMoniker
     ) -> HRESULT,
-    fn ComposeWith( 
+    fn ComposeWith(
         pmkRight: *mut IMoniker,
         fOnlyIfNotGeneric: BOOL,
         ppmkComposite: *mut *mut IMoniker
     ) -> HRESULT,
-    fn Enum( 
+    fn Enum(
         fForward: BOOL,
         ppenumMoniker: *mut *mut IEnumMoniker
     ) -> HRESULT,
-    fn IsEqual( 
+    fn IsEqual(
         pmkOtherMoniker: *mut IMoniker
     ) -> HRESULT,
-    fn Hash( 
+    fn Hash(
         pdwHash: *mut DWORD
     ) -> HRESULT,
-    fn IsRunning( 
+    fn IsRunning(
         pbc: *mut IBindCtx,
         pmkToLeft: *mut IMoniker,
         pmkNewlyRunning: *mut IMoniker
     ) -> HRESULT,
-    fn GetTimeOfLastChange( 
+    fn GetTimeOfLastChange(
         pbc: *mut IBindCtx,
         pmkToLeft: *mut IMoniker,
         pFileTime: *mut FILETIME
     ) -> HRESULT,
-    fn Inverse( 
+    fn Inverse(
         ppmk: *mut *mut IMoniker
     ) -> HRESULT,
-    fn CommonPrefixWith( 
+    fn CommonPrefixWith(
         pmkOther: *mut IMoniker,
         ppmkPrefix: *mut *mut IMoniker
     ) -> HRESULT,
-    fn RelativePathTo( 
+    fn RelativePathTo(
         pmkOther: *mut IMoniker,
         ppmkRelPath: *mut *mut IMoniker
     ) -> HRESULT,
-    fn GetDisplayName( 
+    fn GetDisplayName(
         pbc: *mut IBindCtx,
         pmkToLeft: *mut IMoniker,
         ppszDisplayName: *mut LPOLESTR
     ) -> HRESULT,
-    fn ParseDisplayName( 
+    fn ParseDisplayName(
         pbc: *mut IBindCtx,
         pmkToLeft: *mut IMoniker,
         pszDisplayName: LPOLESTR,
         pchEaten: *mut ULONG,
         ppmkOut: *mut *mut IMoniker
     ) -> HRESULT,
-    fn IsSystemMoniker( 
+    fn IsSystemMoniker(
         pdwMksys: *mut DWORD
     ) -> HRESULT
 }
