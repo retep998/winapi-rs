@@ -6,9 +6,9 @@
 // except according to those terms.
 //! FFI bindings to psapi.
 
-use shared::basetsd::{ULONG_PTR, SIZE_T};
-use shared::minwindef::{BOOL, DWORD, LPDWORD, PDWORD, HMODULE, LPVOID};
-use um::winnt::{LPWSTR, LPCWSTR, LPSTR, LPCSTR, HANDLE, PVOID};
+use shared::basetsd::{SIZE_T, ULONG_PTR};
+use shared::minwindef::{BOOL, DWORD, HMODULE, LPDWORD, LPVOID, PDWORD};
+use um::winnt::{HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PVOID};
 
 pub type LPMODULEINFO = *mut MODULEINFO;
 pub type PPSAPI_WORKING_SET_INFORMATION = *mut PSAPI_WORKING_SET_INFORMATION;
