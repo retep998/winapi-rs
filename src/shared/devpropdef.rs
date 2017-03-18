@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Defines property types and keys for the Plug and Play Device Property API
-use shared::guiddef::{GUID};
+use shared::guiddef::{GUID, IsEqualGUID};
 use shared::minwindef::{ULONG};
 use um::winnt::{PVOID, PCWSTR, CHAR};
 
@@ -58,6 +58,10 @@ STRUCT!{struct DEVPROPKEY {
     pid: DEVPROPID,
 }}
 pub type PDEVPROPKEY = *mut DEVPROPKEY;
+#[inline]
+pub fn IsEqualDevPropKey(a: &DEVPROPKEY, b: &DEVPROPKEY) -> bool {
+    (a.pid == b.pid) && IsEqualGUID(&a.fmtid, &b.fmtid)
+}
 ENUM!{enum DEVPROPSTORE {
     DEVPROP_STORE_SYSTEM,
     DEVPROP_STORE_USER,
