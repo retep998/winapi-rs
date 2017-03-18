@@ -73,6 +73,8 @@ STRUCT!{struct DEVPROPCOMPKEY {
     LocaleName: PCWSTR,
 }}
 pub type PDEVPROPCOMPKEY = *mut DEVPROPCOMPKEY;
+// IsEqualLocaleName
+// IsEqualDevPropCompKey
 STRUCT!{struct DEVPROPERTY {
     CompKey: DEVPROPCOMPKEY,
     Type: DEVPROPTYPE,

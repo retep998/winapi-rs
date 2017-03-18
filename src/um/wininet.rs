@@ -1820,9 +1820,7 @@ EXTERN!{stdcall fn InternetCheckConnectionW(
     dwFlags: DWORD,
     dwReserved: DWORD
 ) -> BOOL}
-EXTERN!{stdcall fn InternetClearAllPerSiteCookieDecisions(
-
-) -> BOOL}
+EXTERN!{stdcall fn InternetClearAllPerSiteCookieDecisions() -> BOOL}
 EXTERN!{stdcall fn InternetCloseHandle(
     hInternet: HINTERNET
 ) -> BOOL}
