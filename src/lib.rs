@@ -53,7 +53,6 @@ pub mod ctypes {
     pub type __uint64 = u64;
     pub type wchar_t = u16;
 }
-#[cfg(feature = "guiddef")]
 pub trait Interface {
     fn uuidof() -> shared::guiddef::GUID;
 }
