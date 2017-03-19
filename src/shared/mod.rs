@@ -13,6 +13,7 @@
 #[cfg(feature = "d3d9")] pub mod d3d9;
 #[cfg(feature = "d3d9caps")] pub mod d3d9caps;
 #[cfg(feature = "d3d9types")] pub mod d3d9types;
+#[cfg(feature = "devpkey")] pub mod devpkey;
 #[cfg(feature = "devpropdef")] pub mod devpropdef;
 #[cfg(feature = "devguid")] pub mod devguid;
 #[cfg(feature = "dxgi")] pub mod dxgi;
@@ -22,7 +23,7 @@
 #[cfg(feature = "dxgi1_5")] pub mod dxgi1_5;
 #[cfg(feature = "dxgiformat")] pub mod dxgiformat;
 #[cfg(feature = "dxgitype")] pub mod dxgitype;
-#[cfg(feature = "guiddef")] pub mod guiddef;
+pub mod guiddef;
 #[cfg(feature = "hidclass")] pub mod hidclass;
 #[cfg(feature = "hidpi")] pub mod hidpi;
 #[cfg(feature = "hidsdi")] pub mod hidsdi;
@@ -33,11 +34,13 @@
 #[cfg(feature = "lmcons")] pub mod lmcons;
 #[cfg(feature = "minwindef")] pub mod minwindef;
 #[cfg(feature = "mmreg")] pub mod mmreg;
+#[cfg(feature = "ntddser")] pub mod ntddser;
 #[cfg(feature = "ntdef")] pub mod ntdef;
 #[cfg(feature = "ntstatus")] pub mod ntstatus;
 #[cfg(feature = "rpcndr")] pub mod rpcndr;
 #[cfg(feature = "sspi")]  pub mod sspi;
 #[cfg(feature = "usb")] pub mod usb;
+#[cfg(feature = "usbiodef")] pub mod usbiodef;
 #[cfg(feature = "windef")] pub mod windef;
 #[cfg(feature = "windowsx")] pub mod windowsx;
 #[cfg(feature = "winerror")] pub mod winerror;
