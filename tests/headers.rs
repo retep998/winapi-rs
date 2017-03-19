@@ -70,8 +70,8 @@ fn check_file_deps<P: AsRef<Path>>(
                 } else {
                     include[0].to_owned()
                 };
-                if check_if_in_build(&r_p, &include, &entries, errors) &&
-                   found.iter().find(|x| **x == include).is_none() {
+                if check_if_in_build(&r_p, &include, &entries, errors)
+                    && found.iter().find(|x| **x == include).is_none() {
                     found.push(include);
                 }
             }
@@ -83,7 +83,7 @@ fn check_file_deps<P: AsRef<Path>>(
                 }
                 if !entries.is_empty() {
                     writeln!(&mut io::stderr(), "{}: include not used: {:?}", filename, entries)
-                            .expect("stderr::write failed");
+                        .expect("stderr::write failed");
                     *errors += 1;
                 }
             }

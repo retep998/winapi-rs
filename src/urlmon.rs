@@ -6,5 +6,4 @@
 // except according to those terms.
 //! Mappings for the contents of Urlmon.h
 // FIXME: Implement these interfaces
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct IInternetSecurityManager;
+pub enum IInternetSecurityManager {}

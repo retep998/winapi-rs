@@ -83,5 +83,4 @@ interface ISymUnmanagedBinder2(ISymUnmanagedBinder2Vtbl):
     ) -> HRESULT
 }
 );
-#[derive(Clone, Copy)]
-pub struct ISymUnmanagedReader;
+pub enum ISymUnmanagedReader {} // TODO
