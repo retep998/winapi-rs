@@ -4,7 +4,6 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
-// Done as of 10.0.14393.0
 // Some of these definitions are commented out because I could not find their value
 DEFINE_GUID!{GUID_NULL,
     0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}

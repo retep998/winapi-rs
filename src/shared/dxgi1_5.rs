@@ -5,19 +5,19 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of dxgi1_5.h
-
 use ctypes::c_void;
 use shared::basetsd::UINT16;
 use shared::dxgi::IDXGIResource;
 use shared::dxgi1_2::{DXGI_OFFER_RESOURCE_PRIORITY, IDXGIOutputDuplication};
 use shared::dxgi1_3::{IDXGIDevice3, IDXGIDevice3Vtbl};
-use shared::dxgi1_4::{IDXGIOutput4, IDXGIOutput4Vtbl, IDXGISwapChain3, IDXGISwapChain3Vtbl,
-                      IDXGIFactory4, IDXGIFactory4Vtbl};
+use shared::dxgi1_4::{
+    IDXGIFactory4, IDXGIFactory4Vtbl, IDXGIOutput4, IDXGIOutput4Vtbl, IDXGISwapChain3,
+    IDXGISwapChain3Vtbl,
+};
 use shared::dxgiformat::DXGI_FORMAT;
 use shared::minwindef::UINT;
 use um::unknwnbase::IUnknown;
 use um::winnt::HRESULT;
-
 RIDL!(#[uuid(0x80A07424, 0xAB52, 0x42EB, 0x83, 0x3C, 0x0C, 0x42, 0xFD, 0x28, 0x2D, 0x98)]
 interface IDXGIOutput5(IDXGIOutput5Vtbl): IDXGIOutput4(IDXGIOutput4Vtbl) {
     fn DuplicateOutput1(
@@ -29,7 +29,7 @@ interface IDXGIOutput5(IDXGIOutput5Vtbl): IDXGIOutput4(IDXGIOutput4Vtbl) {
     )-> HRESULT
 });
 
-ENUM!{ enum DXGI_HDR_METADATA_TYPE {
+ENUM!{enum DXGI_HDR_METADATA_TYPE {
     DXGI_HDR_METADATA_TYPE_NONE = 0,
     DXGI_HDR_METADATA_TYPE_HDR10 = 1,
 }}
@@ -54,11 +54,11 @@ interface IDXGISwapChain4(IDXGISwapChain4Vtbl): IDXGISwapChain3(IDXGISwapChain3V
     )-> HRESULT
 });
 
-ENUM!{ enum DXGI_OFFER_RESOURCE_FLAGS {
+ENUM!{enum DXGI_OFFER_RESOURCE_FLAGS {
     DXGI_OFFER_RESOURCE_FLAG_ALLOW_DECOMMIT = 0x1,
 }}
 
-ENUM!{ enum DXGI_RECLAIM_RESOURCE_RESULTS {
+ENUM!{enum DXGI_RECLAIM_RESOURCE_RESULTS {
     DXGI_RECLAIM_RESOURCE_RESULT_OK = 0,
     DXGI_RECLAIM_RESOURCE_RESULT_DISCARDED = 1,
     DXGI_RECLAIM_RESOURCE_RESULT_NOT_COMMITTED = 2,
@@ -79,7 +79,7 @@ interface IDXGIDevice4(IDXGIDevice4Vtbl): IDXGIDevice3(IDXGIDevice3Vtbl) {
     ) -> HRESULT
 });
 
-ENUM!{ enum DXGI_FEATURE {
+ENUM!{enum DXGI_FEATURE {
     DXGI_FEATURE_PRESENT_ALLOW_TEARING = 0,
 }}
 

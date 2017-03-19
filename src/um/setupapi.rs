@@ -5,25 +5,23 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Public header file for Windows NT Setup and Device Installer services Dll.
-// Done as of 10.0.14393.
-use ctypes::{c_int};
+use ctypes::c_int;
 use shared::basetsd::{DWORD_PTR, UINT_PTR, ULONG_PTR};
 use shared::devpropdef::{DEVPROPKEY, DEVPROPTYPE};
 use shared::guiddef::{GUID, LPGUID};
 use shared::minwindef::{
-    BOOL, BYTE, DWORD, FILETIME, HKEY, HINSTANCE, INT, LPARAM, LPCVOID, LPDWORD, MAX_PATH, PBOOL,
-    PBYTE, PDWORD, PINT, PUINT, UINT, USHORT, WORD
+    BOOL, BYTE, DWORD, FILETIME, HINSTANCE, HKEY, INT, LPARAM, LPCVOID, LPDWORD, MAX_PATH, PBOOL,
+    PBYTE, PDWORD, PINT, PUINT, UINT, USHORT, WORD,
 };
 use shared::windef::{HDC, HICON, HWND, RECT};
-use um::commctrl::{HIMAGELIST};
-use um::prsht::{LPPROPSHEETHEADERA, LPPROPSHEETHEADERW, HPROPSHEETPAGE};
-use um::spapidef::{SP_LOG_TOKEN};
+use um::commctrl::HIMAGELIST;
+use um::prsht::{HPROPSHEETPAGE, LPPROPSHEETHEADERA, LPPROPSHEETHEADERW};
+use um::spapidef::SP_LOG_TOKEN;
 use um::winnt::{
-    ANYSIZE_ARRAY, CHAR, DWORDLONG, HANDLE, LONG, LONGLONG, LPCSTR, LPCWSTR, PCSTR, PCWSTR, PSTR,
-    PVOID, PWSTR, VOID, WCHAR, APPLICATION_ERROR_MASK, ERROR_SEVERITY_ERROR
+    ANYSIZE_ARRAY, APPLICATION_ERROR_MASK, CHAR, DWORDLONG, ERROR_SEVERITY_ERROR, HANDLE, LONG,
+    LONGLONG, LPCSTR, LPCWSTR, PCSTR, PCWSTR, PSTR, PVOID, PWSTR, VOID, WCHAR,
 };
-use um::winreg::{REGSAM};
-
+use um::winreg::REGSAM;
 pub const LINE_LEN: usize = 256;
 pub const MAX_INF_STRING_LENGTH: usize = 4096;
 pub const MAX_INF_SECTION_NAME_LENGTH: usize = 255;

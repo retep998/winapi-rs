@@ -4,13 +4,12 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use ctypes::{c_char};
-use shared::basetsd::{UINT64, SIZE_T};
+use ctypes::c_char;
+use shared::basetsd::{SIZE_T, UINT64};
 use shared::minwindef::{BOOL, UINT};
-use um::d3d12::{ID3D12Resource};
+use um::d3d12::ID3D12Resource;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
-
 RIDL!{#[uuid(0x344488b7, 0x6846, 0x474b, 0xb9, 0x89, 0xf0, 0x27, 0x44, 0x82, 0x45, 0xe0)]
 interface ID3D12Debug(ID3D12DebugVtbl): IUnknown(IUnknownVtbl) {
     fn EnableDebugLayer() -> ()

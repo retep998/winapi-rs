@@ -5,19 +5,18 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of OAIdl.h
-use shared::basetsd::{ULONG_PTR};
-use shared::guiddef::{REFIID, GUID, IID, REFGUID};
-use shared::minwindef::{DWORD, INT, UINT, WORD, FLOAT, BYTE, USHORT, ULONG};
+use shared::basetsd::ULONG_PTR;
+use shared::guiddef::{GUID, IID, REFGUID, REFIID};
+use shared::minwindef::{BYTE, DWORD, FLOAT, INT, UINT, ULONG, USHORT, WORD};
 use shared::wtypes::{
-    BSTR, VARIANT_BOOL, CY, DATE, wireBSTR, DECIMAL, VARTYPE, VT_BSTR, VT_UNKNOWN, VT_DISPATCH,
-    VT_VARIANT, VT_RECORD, VT_ERROR, VT_I1, VT_I2, VT_I4, VT_I8, VT_RESERVED
+    BSTR, CY, DATE, DECIMAL, VARIANT_BOOL, VARTYPE, VT_BSTR, VT_DISPATCH, VT_ERROR, VT_I1, VT_I2,
+    VT_I4, VT_I8, VT_RECORD, VT_RESERVED, VT_UNKNOWN, VT_VARIANT, wireBSTR,
 };
 use shared::wtypesbase::{
-    SCODE, WORD_SIZEDARR, DWORD_SIZEDARR, BYTE_SIZEDARR, HYPER_SIZEDARR, LPOLESTR, DOUBLE
+    BYTE_SIZEDARR, DOUBLE, DWORD_SIZEDARR, HYPER_SIZEDARR, LPOLESTR, SCODE, WORD_SIZEDARR,
 };
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{PVOID, HRESULT, LONG, LONGLONG, ULONGLONG, CHAR, SHORT, LCID};
-
+use um::winnt::{CHAR, HRESULT, LCID, LONG, LONGLONG, PVOID, SHORT, ULONGLONG};
 pub type wireBRECORD = *mut _wireBRECORD;
 pub type wireVARIANT = *mut _wireVARIANT;
 STRUCT!{struct SAFEARRAYBOUND {
@@ -408,7 +407,7 @@ pub type LPVARDESC = *mut VARDESC;
 ENUM!{enum TYPEFLAGS {
     TYPEFLAG_FAPPOBJECT = 0x1,
     TYPEFLAG_FCANCREATE = 0x2,
-    TYPEFLAG_FLICENSED  = 0x4,
+    TYPEFLAG_FLICENSED = 0x4,
     TYPEFLAG_FPREDECLID = 0x8,
     TYPEFLAG_FHIDDEN = 0x10,
     TYPEFLAG_FCONTROL = 0x20,

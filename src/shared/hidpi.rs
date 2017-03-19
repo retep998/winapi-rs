@@ -4,12 +4,11 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::hidusage::{USAGE};
-use shared::minwindef::{ULONG, UCHAR, USHORT, PUCHAR};
-use shared::ntdef::{NTSTATUS};
-use shared::ntstatus::{FACILITY_HID_ERROR_CODE};
-use um::winnt::{PVOID, PCHAR, BOOLEAN, LONG};
-
+use shared::hidusage::USAGE;
+use shared::minwindef::{PUCHAR, UCHAR, ULONG, USHORT};
+use shared::ntdef::NTSTATUS;
+use shared::ntstatus::FACILITY_HID_ERROR_CODE;
+use um::winnt::{BOOLEAN, LONG, PCHAR, PVOID};
 pub const HIDP_LINK_COLLECTION_ROOT: USHORT = -1i16 as u16;
 pub const HIDP_LINK_COLLECTION_UNSPECIFIED: USHORT = 0;
 ENUM!{enum HIDP_REPORT_TYPE {

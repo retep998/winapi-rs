@@ -8,7 +8,6 @@
 use shared::guiddef::{GUID};
 use shared::minwindef::{ULONG, USHORT};
 use um::winnt::{PVOID, PSID, SID_NAME_USE, HANDLE, PWSTR, PCHAR, LONG, ACCESS_MASK};
-
 STRUCT!{struct LSA_UNICODE_STRING {
     Length: USHORT,
     MaximumLength: USHORT,

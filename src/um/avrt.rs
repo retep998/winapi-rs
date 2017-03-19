@@ -6,8 +6,7 @@
 // except according to those terms.
 use shared::guiddef::GUID;
 use shared::minwindef::{BOOL, LPDWORD, PULONG};
-use um::winnt::{HANDLE, PLARGE_INTEGER, LONGLONG, PHANDLE, LPCWSTR, LPCSTR};
-
+use um::winnt::{HANDLE, LONGLONG, LPCSTR, LPCWSTR, PHANDLE, PLARGE_INTEGER};
 ENUM!{enum AVRT_PRIORITY {
     AVRT_PRIORITY_VERYLOW = -2i32 as u32,
     AVRT_PRIORITY_LOW = -1i32 as u32,

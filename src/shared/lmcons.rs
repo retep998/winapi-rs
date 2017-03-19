@@ -5,9 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! This file contains constants used throughout the LAN Manager API header files.
-use shared::minwindef::{DWORD};
-use um::winnt::{LPWSTR, LPCWSTR};
-
+use shared::minwindef::DWORD;
+use um::winnt::{LPCWSTR, LPWSTR};
 pub const CNLEN: DWORD = 15;
 pub const LM20_CNLEN: DWORD = 15;
 pub const DNLEN: DWORD = CNLEN;

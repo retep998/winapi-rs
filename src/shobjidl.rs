@@ -478,7 +478,7 @@ interface IShellItem(IShellItemVtbl): IUnknown(IUnknownVtbl) {
 pub type IFileOperationProgressSink = ::IUnknown; // TODO
 ENUM!{enum GETPROPERTYSTOREFLAGS {
     GPS_DEFAULT = 0,
-    GPS_HANDLERPROPERTIESONLY   = 0x1,
+    GPS_HANDLERPROPERTIESONLY = 0x1,
     GPS_READWRITE = 0x2,
     GPS_TEMPORARY = 0x4,
     GPS_FASTPROPERTIESONLY = 0x8,

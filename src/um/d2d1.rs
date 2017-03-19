@@ -5,23 +5,22 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 //! Mappings for the contents of d2d1.h
-use ctypes::{c_void};
-use shared::basetsd::{UINT64, UINT32};
-use shared::dxgi::{IDXGISurface};
-use shared::guiddef::{REFIID};
-use shared::minwindef::{FLOAT, BOOL, DWORD};
-use shared::windef::{HWND, HDC, RECT};
+use ctypes::c_void;
+use shared::basetsd::{UINT32, UINT64};
+use shared::dxgi::IDXGISurface;
+use shared::guiddef::REFIID;
+use shared::minwindef::{BOOL, DWORD, FLOAT};
+use shared::windef::{HDC, HWND, RECT};
 use um::d2dbasetypes::{
-    D2D_POINT_2U, D2D_POINT_2F, D2D_RECT_F, D2D_RECT_U, D2D_SIZE_F, D2D_SIZE_U, D2D_COLOR_F,
-    D2D_MATRIX_3X2_F,
+    D2D_COLOR_F, D2D_MATRIX_3X2_F, D2D_POINT_2F, D2D_POINT_2U, D2D_RECT_F, D2D_RECT_U, D2D_SIZE_F,
+    D2D_SIZE_U,
 };
-use um::d3dcommon::{D3D_FEATURE_LEVEL_9_1, D3D_FEATURE_LEVEL_10_0};
+use um::d3dcommon::{D3D_FEATURE_LEVEL_10_0, D3D_FEATURE_LEVEL_9_1};
 use um::dcommon::{D2D1_PIXEL_FORMAT, DWRITE_MEASURING_MODE};
-use um::dwrite::{IDWriteRenderingParams, IDWriteTextLayout, IDWriteTextFormat, DWRITE_GLYPH_RUN};
+use um::dwrite::{DWRITE_GLYPH_RUN, IDWriteRenderingParams, IDWriteTextFormat, IDWriteTextLayout};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::wincodec::{IWICBitmap, IWICBitmapSource};
 use um::winnt::{HRESULT, WCHAR};
-
 // Types confirmed affected by the ABI issue:
 // D2D1_SIZE_F, D2D1_SIZE_U, D2D1_COLOR_F, D2D1_PIXEL_FORMAT, D2D1_POINT_2F
 pub const D2D1_DEFAULT_FLATTENING_TOLERANCE: FLOAT = 0.25;

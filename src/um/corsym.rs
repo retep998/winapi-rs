@@ -5,11 +5,10 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 //! Common Language Runtime Debugging Symbol Reader/Writer/Binder Interfaces
-use shared::basetsd::{ULONG32};
-use um::objidlbase::{IStream};
+use shared::basetsd::ULONG32;
+use um::objidlbase::IStream;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{WCHAR, HRESULT};
-
+use um::winnt::{HRESULT, WCHAR};
 DEFINE_GUID!(CorSym_LanguageType_C, 0x63a08714, 0xfc37, 0x11d2,
     0x90, 0x4c, 0x0, 0xc0, 0x4f, 0xa3, 0x02, 0xa1);
 DEFINE_GUID!(CorSym_LanguageType_CPlusPlus, 0x3a12d0b7, 0xc26c, 0x11d0,
@@ -38,7 +37,7 @@ DEFINE_GUID!(CorSym_DocumentType_Text, 0x5a869d0b, 0x6611, 0x11d3,
     0xbd, 0x2a, 0x0, 0x0, 0xf8, 0x8, 0x49, 0xbd);
 DEFINE_GUID!(CorSym_DocumentType_MC, 0xeb40cb65, 0x3c1f, 0x4352,
     0x9d, 0x7b, 0xba, 0xf, 0xc4, 0x7a, 0x9d, 0x77);
-DEFINE_GUID!(CorSym_SourceHash_MD5,  0x406ea660, 0x64cf, 0x4c82,
+DEFINE_GUID!(CorSym_SourceHash_MD5, 0x406ea660, 0x64cf, 0x4c82,
     0xb6, 0xf0, 0x42, 0xd4, 0x81, 0x72, 0xa7, 0x99);
 DEFINE_GUID!(CorSym_SourceHash_SHA1, 0xff1816ec, 0xaa5e, 0x4d10,
     0x87, 0xf7, 0x6f, 0x49, 0x63, 0x83, 0x34, 0x60);

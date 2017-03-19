@@ -4,9 +4,8 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::guiddef::{GUID};
+use shared::guiddef::GUID;
 use shared::minwindef::{DWORD, WORD};
-
 pub const WAVE_FORMAT_UNKNOWN: WORD = 0x0000;
 pub const WAVE_FORMAT_PCM: WORD = 0x0001;
 pub const WAVE_FORMAT_ADPCM: WORD = 0x0002;

@@ -6,8 +6,7 @@
 // except according to those terms.
 //! Macro APIs, window message crackers, and control APIs
 use ctypes::{c_int, c_short};
-use shared::minwindef::{DWORD, LOWORD, HIWORD, LPARAM};
-
+use shared::minwindef::{DWORD, HIWORD, LOWORD, LPARAM};
 //1233
 #[inline]
 pub fn GET_X_LPARAM(lp: LPARAM) -> c_int {

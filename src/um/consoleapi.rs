@@ -5,10 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! ApiSet Contract for api-ms-win-core-console-l1
-// Done as of 10.0.14393.0
-use shared::minwindef::{ BOOL, DWORD, LPDWORD, LPVOID, UINT };
-use um::wincon::{ PCONSOLE_READCONSOLE_CONTROL, PHANDLER_ROUTINE, PINPUT_RECORD };
-use um::winnt::{ HANDLE, VOID };
+use shared::minwindef::{BOOL, DWORD, LPDWORD, LPVOID, UINT};
+use um::wincon::{PCONSOLE_READCONSOLE_CONTROL, PHANDLER_ROUTINE, PINPUT_RECORD};
+use um::winnt::{HANDLE, VOID};
 EXTERN!{stdcall fn AllocConsole() -> BOOL}
 EXTERN!{stdcall fn GetConsoleCP() -> UINT}
 EXTERN!{stdcall fn GetConsoleMode(
@@ -67,7 +66,7 @@ EXTERN!{stdcall fn WriteConsoleA(
     lpNumberOfCharsWritten: LPDWORD,
     lpReserved: LPVOID
 ) -> BOOL}
-EXTERN!{stdcall  fn WriteConsoleW(
+EXTERN!{stdcall fn WriteConsoleW(
     hConsoleOutput: HANDLE,
     lpBuffer: *const VOID,
     nNumberOfCharsToWrite: DWORD,

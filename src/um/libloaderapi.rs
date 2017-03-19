@@ -5,10 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! ApiSet Contract for api-ms-win-core-libraryloader-l1
-use shared::basetsd::{LONG_PTR};
+use shared::basetsd::LONG_PTR;
 use shared::minwindef::{BOOL, HMODULE, WORD};
-use um::winnt::{LPSTR, LPCWSTR, LPCSTR, LPWSTR, PVOID};
-
+use um::winnt::{LPCSTR, LPCWSTR, LPSTR, LPWSTR, PVOID};
 pub type DLL_DIRECTORY_COOKIE = PVOID;
 pub type PDLL_DIRECTORY_COOKIE = *mut PVOID;
 pub type ENUMRESLANGPROCA = Option<unsafe extern "system" fn(

@@ -7,29 +7,28 @@
 //! Mappings for the contents of dxgi1_3.h
 use shared::dxgi::{IDXGIOutput, IDXGIResource};
 use shared::dxgi1_2::{
-    IDXGISwapChain1, IDXGIFactory2, IDXGIFactory2Vtbl, IDXGIDevice2, IDXGIDevice2Vtbl,
-    IDXGISwapChain1Vtbl, IDXGIOutput1, IDXGIOutput1Vtbl, DXGI_SWAP_CHAIN_DESC1
+    DXGI_SWAP_CHAIN_DESC1, IDXGIDevice2, IDXGIDevice2Vtbl, IDXGIFactory2, IDXGIFactory2Vtbl,
+    IDXGIOutput1, IDXGIOutput1Vtbl, IDXGISwapChain1, IDXGISwapChain1Vtbl,
 };
-use shared::dxgiformat::{DXGI_FORMAT};
-use shared::minwindef::{UINT, BOOL, FLOAT};
-use shared::windef::{RECT};
+use shared::dxgiformat::DXGI_FORMAT;
+use shared::minwindef::{BOOL, FLOAT, UINT};
+use shared::windef::RECT;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HRESULT, HANDLE, LARGE_INTEGER};
-
-ENUM!{ enum DXGI_FRAME_PRESENTATION_MODE {
+use um::winnt::{HANDLE, HRESULT, LARGE_INTEGER};
+ENUM!{enum DXGI_FRAME_PRESENTATION_MODE {
     DXGI_FRAME_PRESENTATION_MODE_COMPOSED = 0,
     DXGI_FRAME_PRESENTATION_MODE_OVERLAY = 1,
     DXGI_FRAME_PRESENTATION_MODE_NONE = 2,
     DXGI_FRAME_PRESENTATION_MODE_COMPOSITION_FAILURE = 3,
 }}
 
-ENUM!{ enum DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS {
+ENUM!{enum DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS {
     DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_NOMINAL_RANGE = 0x1,
     DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_BT709 = 0x2,
     DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_xvYCC = 0x4,
 }}
 
-ENUM!{ enum DXGI_OVERLAY_SUPPORT_FLAG {
+ENUM!{enum DXGI_OVERLAY_SUPPORT_FLAG {
     DXGI_OVERLAY_SUPPORT_FLAG_DIRECT = 0x1,
     DXGI_OVERLAY_SUPPORT_FLAG_SCALING = 0x2,
 }}

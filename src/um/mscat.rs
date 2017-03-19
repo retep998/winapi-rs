@@ -5,13 +5,11 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Microsoft Internet Security Catalog API Prototypes and Definitions
-
 use shared::guiddef::GUID;
 use shared::minwindef::DWORD;
 use um::mssip::SIP_INDIRECT_DATA;
-use um::wincrypt::{HCRYPTMSG, HCRYPTPROV, CRYPT_ATTR_BLOB};
+use um::wincrypt::{CRYPT_ATTR_BLOB, HCRYPTMSG, HCRYPTPROV};
 use um::winnt::{HANDLE, LPWSTR};
-
 STRUCT!{struct CRYPTCATSTORE {
     cbStruct: DWORD,
     dwPublicVersion: DWORD,

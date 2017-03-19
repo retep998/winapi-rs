@@ -9,7 +9,7 @@ use ctypes::c_void;
 use shared::basetsd::UINT64;
 use shared::guiddef::{CLSID, REFIID};
 use shared::minwindef::{BOOL, DWORD, FILETIME, ULONG};
-use shared::wtypesbase::{OLECHAR, LPOLESTR};
+use shared::wtypesbase::{LPOLESTR, OLECHAR};
 use um::objidlbase::{IEnumString, IStream};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, ULARGE_INTEGER, VOID};

@@ -6,7 +6,6 @@
 // except according to those terms.
 //! ApiSet Contract for api-ms-win-core-errorhandling-l1
 use um::winnt::{EXCEPTION_POINTERS, LONG};
-
 pub type PTOP_LEVEL_EXCEPTION_FILTER = Option<unsafe extern "system" fn(
     ExceptionInfo: *mut EXCEPTION_POINTERS,
 ) -> LONG>;

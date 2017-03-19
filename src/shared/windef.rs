@@ -5,10 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Basic Windows Type Definitions
-// Done as of 10.0.14393.0
 use ctypes::c_void;
-use shared::minwindef::{ DWORD, HFILE, WORD };
-use um::winnt::{ LONG, SHORT };
+use shared::minwindef::{DWORD, HFILE, WORD};
+use um::winnt::{LONG, SHORT};
 DECLARE_HANDLE!(HWND, HWND__);
 DECLARE_HANDLE!(HHOOK, HHOOK__);
 pub type HGDIOBJ = *mut c_void;

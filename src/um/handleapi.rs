@@ -5,10 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! handleapi include file
-// Done as of 10.0.14393.0
 use shared::minwindef::{BOOL, DWORD, LPDWORD, LPHANDLE};
 use um::winnt::HANDLE;
-
 pub const INVALID_HANDLE_VALUE: HANDLE = -1isize as HANDLE;
 EXTERN!{stdcall fn CloseHandle(
     hObject: HANDLE

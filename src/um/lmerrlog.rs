@@ -5,8 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use shared::minwindef::{DWORD, LPBYTE};
-use um::winnt::{LPWSTR};
-
+use um::winnt::LPWSTR;
 STRUCT!{struct ERROR_LOG {
     el_len: DWORD,
     el_reserved: DWORD,
@@ -125,7 +124,7 @@ pub const NELOG_NetlogonRequireSignOrSealError: DWORD = ERRLOG_BASE + 127;
 pub const NELOG_UPS_PowerOut: DWORD = ERRLOG_BASE + 130;
 pub const NELOG_UPS_Shutdown: DWORD = ERRLOG_BASE + 131;
 pub const NELOG_UPS_CmdFileError: DWORD = ERRLOG_BASE + 132;
-pub const NELOG_UPS_CannotOpenDriver: DWORD = ERRLOG_BASE+133;
+pub const NELOG_UPS_CannotOpenDriver: DWORD = ERRLOG_BASE + 133;
 pub const NELOG_UPS_PowerBack: DWORD = ERRLOG_BASE + 134;
 pub const NELOG_UPS_CmdFileConfig: DWORD = ERRLOG_BASE + 135;
 pub const NELOG_UPS_CmdFileExec: DWORD = ERRLOG_BASE + 136;

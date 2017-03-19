@@ -5,9 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! USB Definitions.
-use shared::minwindef::{ULONG};
-use um::winnt::{LONG};
-
+use shared::minwindef::ULONG;
+use um::winnt::LONG;
 ENUM!{enum USBD_PIPE_TYPE {
     UsbdPipeTypeControl,
     UsbdPipeTypeIsochronous,

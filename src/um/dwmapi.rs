@@ -5,8 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Procedure declarations, constant definitions, and macros for the NLS component.
-use shared::minwindef::{BOOL, HRGN, DWORD};
-
+use shared::minwindef::{BOOL, DWORD, HRGN};
 STRUCT!{struct DWM_BLURBEHIND {
     dwFlags: DWORD,
     fEnable: BOOL,

@@ -5,20 +5,20 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 //! SHELL.DLL functions, types, and definitions
-use ctypes::{c_int, c_void, __int64};
+use ctypes::{__int64, c_int, c_void};
 use shared::basetsd::{DWORD_PTR, UINT_PTR};
 use shared::guiddef::{GUID, REFIID};
 use shared::minwindef::{
-    BOOL, DWORD, FILETIME, HKEY, HINSTANCE, INT, LPARAM, LPVOID, MAX_PATH, UINT, ULONG, WORD,
+    BOOL, DWORD, FILETIME, HINSTANCE, HKEY, INT, LPARAM, LPVOID, MAX_PATH, UINT, ULONG, WORD,
 };
-use shared::windef::{HWND, HICON, POINT, RECT};
-use um::minwinbase::{LPSECURITY_ATTRIBUTES};
+use shared::windef::{HICON, HWND, POINT, RECT};
+use um::minwinbase::LPSECURITY_ATTRIBUTES;
 use um::processthreadsapi::{LPPROCESS_INFORMATION, LPSTARTUPINFOW};
 use um::winnt::{
     CHAR, HANDLE, HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PCSTR, PCWSTR, PCZZSTR, PCZZWSTR, PWSTR,
     PZZSTR, PZZWSTR, ULARGE_INTEGER, WCHAR,
 };
-use um::winuser::{WM_USER};
+use um::winuser::WM_USER;
 DECLARE_HANDLE!(HDROP, HDROP__);
 extern "system" {
     pub fn DragQueryFileA(

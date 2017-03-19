@@ -18,7 +18,8 @@ extern crate std;
 pub extern crate core as _core;
 
 // Modules
-#[macro_use] mod macros;
+#[macro_use]
+mod macros;
 pub mod shared;
 pub mod um;
 pub mod vc;

@@ -5,9 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! error code definitions for the Win32 API functions
-use ctypes::{c_long};
-use shared::minwindef::{DWORD};
-
+use ctypes::c_long;
+use shared::minwindef::DWORD;
 #[inline]
 pub fn SUCCEEDED(hr: HRESULT) -> bool {
     hr >= 0

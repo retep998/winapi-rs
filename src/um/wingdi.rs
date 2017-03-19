@@ -5,13 +5,12 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! GDI procedure declarations, constant definitions and macros
-use ctypes::{ c_char, c_int, c_long, c_short, c_ushort };
+use ctypes::{c_char, c_int, c_long, c_short, c_ushort};
 use shared::basetsd::ULONG_PTR;
-use shared::minwindef::{
-    BOOL, BYTE, DWORD, FLOAT, HMETAFILE, LPARAM, LPVOID, MAX_PATH, UINT, ULONG, USHORT, WORD,
-};
-use shared::windef::{ COLORREF, HDC, HGDIOBJ, POINT, RECT, RECTL, SIZEL };
-use um::winnt::{ CHAR, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PSTR, SHORT, VOID, WCHAR };
+use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, HMETAFILE, LPARAM, LPVOID, MAX_PATH, UINT, ULONG,
+                        USHORT, WORD};
+use shared::windef::{COLORREF, HDC, HGDIOBJ, POINT, RECT, RECTL, SIZEL};
+use um::winnt::{CHAR, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PSTR, SHORT, VOID, WCHAR};
 pub const R2_BLACK: c_int = 1;
 pub const R2_NOTMERGEPEN: c_int = 2;
 pub const R2_MASKNOTPEN: c_int = 3;
@@ -395,8 +394,8 @@ STRUCT!{struct LOGFONTW {
 pub type LPLOGFONTW = *mut LOGFONTW;
 //1595
 #[inline]
-pub fn RGB (r: BYTE, g: BYTE, b: BYTE) -> COLORREF {
-  r as COLORREF | ((g as COLORREF) << 8) | ((b as COLORREF) << 16)
+pub fn RGB(r: BYTE, g: BYTE, b: BYTE) -> COLORREF {
+    r as COLORREF | ((g as COLORREF) << 8) | ((b as COLORREF) << 16)
 }
 //
 pub const DRIVERVERSION: c_int = 0;
@@ -669,7 +668,8 @@ pub const SYSTEM_FIXED_FONT: c_int = 16;
 pub const DEFAULT_GUI_FONT: c_int = 17;
 pub const DC_BRUSH: c_int = 18;
 pub const DC_PEN: c_int = 19;
-pub const STOCK_LAST: c_int = 19;pub const PS_SOLID: c_int = 0;
+pub const STOCK_LAST: c_int = 19;
+pub const PS_SOLID: c_int = 0;
 pub const PS_DASH: c_int = 1;
 pub const PS_DOT: c_int = 2;
 pub const PS_DASHDOT: c_int = 3;

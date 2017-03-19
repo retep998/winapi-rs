@@ -38,7 +38,7 @@ pub mod guiddef;
 #[cfg(feature = "ntdef")] pub mod ntdef;
 #[cfg(feature = "ntstatus")] pub mod ntstatus;
 #[cfg(feature = "rpcndr")] pub mod rpcndr;
-#[cfg(feature = "sspi")]  pub mod sspi;
+#[cfg(feature = "sspi")] pub mod sspi;
 #[cfg(feature = "usb")] pub mod usb;
 #[cfg(feature = "usbiodef")] pub mod usbiodef;
 #[cfg(feature = "windef")] pub mod windef;

@@ -5,9 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Windows Events API
-use shared::minwindef::{DWORD};
-use um::winnt::{HANDLE};
-
+use shared::minwindef::DWORD;
+use um::winnt::HANDLE;
 pub type EVT_HANDLE = HANDLE;
 pub type PEVT_HANDLE = *mut HANDLE;
 ENUM!{enum EVT_VARIANT_TYPE {

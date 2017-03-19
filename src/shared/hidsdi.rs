@@ -4,9 +4,8 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::minwindef::{USHORT, ULONG};
-use um::winnt::{PVOID};
-
+use shared::minwindef::{ULONG, USHORT};
+use um::winnt::PVOID;
 STRUCT!{struct HIDD_CONFIGURATION {
     cookie: PVOID,
     size: ULONG,

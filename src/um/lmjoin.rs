@@ -5,9 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 // Definitions and prototypes for the Net setup apis
-use shared::minwindef::{DWORD};
-use um::winnt::{LPWSTR, LPCWSTR};
-
+use shared::minwindef::DWORD;
+use um::winnt::{LPCWSTR, LPWSTR};
 ENUM!{enum NETSETUP_NAME_TYPE {
     NetSetupUnknown = 0,
     NetSetupMachine,

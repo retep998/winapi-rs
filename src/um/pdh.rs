@@ -5,14 +5,12 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Common Performance Data Helper definitions
-
 use shared::basetsd::DWORD_PTR;
 use shared::guiddef::GUID;
 use shared::minwindef::{BOOL, DWORD, FILETIME, LPDWORD, UCHAR};
 use shared::windef::HWND;
 use shared::wtypesbase::DOUBLE;
-use um::winnt::{LPWSTR, LPCWSTR, LPSTR, LPCSTR, LONGLONG, LONG, HANDLE, BOOLEAN};
-
+use um::winnt::{BOOLEAN, HANDLE, LONG, LONGLONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR};
 pub const PDH_FMT_RAW: DWORD = 0x00000010;
 pub const PDH_FMT_ANSI: DWORD = 0x00000020;
 pub const PDH_FMT_UNICODE: DWORD = 0x00000040;

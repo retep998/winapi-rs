@@ -5,8 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Public header file for Windows NT Setup and Device Installer services Dlls
-use shared::minwindef::{DWORD};
-use um::winnt::{DWORDLONG};
+use shared::minwindef::DWORD;
+use um::winnt::DWORDLONG;
 pub type SP_LOG_TOKEN = DWORDLONG;
 pub type PSP_LOG_TOKEN = *mut DWORDLONG;
 pub const LOGTOKEN_TYPE_MASK: SP_LOG_TOKEN = 3;
