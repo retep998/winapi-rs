@@ -1,4 +1,4 @@
-macro_rules! basic_isolation_aware {
+macro_rules! wrapper_isolation_aware {
     () => ();
     (
         pub fn $isolation_aware_fn_name:ident($($param:ident: $param_ty:ty),*) $(-> $ret:ty)*
@@ -12,7 +12,7 @@ macro_rules! basic_isolation_aware {
         pub unsafe extern "system" fn $isolation_aware_fn_name($($param: $param_ty),*) $(-> $ret)* {
             #[cfg(target_pointer_width = "64")]
             {
-                ::$fn_name($($param),*)
+                $crate::$fn_name($($param),*)
             }
             #[cfg(not(target_pointer_width = "64"))]
             {
@@ -32,11 +32,13 @@ macro_rules! basic_isolation_aware {
             }
         }
 
-        basic_isolation_aware!{$($rest)*}
+        wrapper_isolation_aware!{$($rest)*}
     };
 }
 
-macro_rules! lib_isolation_aware {
+#[macro_export]
+#[doc(hidden)]
+macro_rules! __winapi_basic_isolation_aware {
     () => ();
     (
         pub fn $isolation_aware_fn_name:ident($($param:ident: $param_ty:ty),*) $(-> $ret:ty)*
@@ -49,7 +51,7 @@ macro_rules! lib_isolation_aware {
         #[allow(non_snake_case)]
         pub unsafe extern "system" fn $isolation_aware_fn_name($($param: $param_ty),*) $(-> $ret)* {
             if let Some(ulp_cookie) = isolation_aware_prepare() {
-                let result = ::$fn_name($($param),*);
+                let result = $crate::$fn_name($($param),*);
                 isolation_aware_finish(ulp_cookie, result == $default_ret);
                 result
             } else {
@@ -57,17 +59,18 @@ macro_rules! lib_isolation_aware {
             }
         }
 
-        lib_isolation_aware!{$($rest)*}
+        __winapi_basic_isolation_aware!{$($rest)*}
     };
 }
 
 #[macro_export]
 macro_rules! isolation_aware_kernel32 {
     () => {mod __ia_kernel32_inner {
-        use winapi::*;
+        extern crate winapi as __ia_kernel32_inner_winapi;
+        use self::__ia_kernel32_inner_winapi::*;
         use std::{mem, ptr};
 
-        basic_isolation_aware!{
+        wrapper_isolation_aware!{
             pub fn IsolationAwareCreateActCtxW(pcActCtx: PCACTCTXW) -> HANDLE
                 where normal_ident = CreateActCtxW,
                       default_ret = INVALID_HANDLE_VALUE;
@@ -112,16 +115,16 @@ macro_rules! isolation_aware_kernel32 {
             static mut WINBASE_MODULE: HMODULE = 0 as HMODULE;
 
             if WINBASE_MODULE == 0 as HMODULE {
-                WINBASE_MODULE = ::GetModuleHandleW(KERNEL32_DLL.as_ptr());
+                WINBASE_MODULE = $crate::GetModuleHandleW(KERNEL32_DLL.as_ptr());
                 if WINBASE_MODULE == 0 as HMODULE {
                     return ptr::null();
                 }
             }
 
-            ::GetProcAddress(WINBASE_MODULE, proc_name)
+            $crate::GetProcAddress(WINBASE_MODULE, proc_name)
         }
 
-        lib_isolation_aware!{
+        __winapi_basic_isolation_aware!{
             pub fn IsolationAwareLoadLibraryExA(
                 lpLibFileName: LPCSTR, hFile: HANDLE, dwFlags: DWORD
             ) -> HMODULE
@@ -184,7 +187,7 @@ macro_rules! isolation_aware_kernel32 {
 
                 // Do we need to call this function indirectly on 32-bit? The offical headers do,
                 // but some testing should be done to see if it's actually warranted.
-                let get_module_handle_result = ::GetModuleHandleExW(
+                let get_module_handle_result = $crate::GetModuleHandleExW(
                     GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT |
                     GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS,
                     &ISOLATION_AWARE_HANDLE as *const _ as LPCWSTR,
@@ -196,7 +199,7 @@ macro_rules! isolation_aware_kernel32 {
                 }
 
                 let mut self_module_path: [WCHAR; MAX_PATH + 1] = [0; MAX_PATH + 1];
-                let get_file_name_result = ::GetModuleFileNameW(
+                let get_file_name_result = $crate::GetModuleFileNameW(
                     self_hmod,
                     self_module_path.as_mut_ptr(),
                     self_module_path.len() as DWORD
@@ -204,7 +207,7 @@ macro_rules! isolation_aware_kernel32 {
                 if get_file_name_result == 0 ||
                    get_file_name_result >= self_module_path.len() as DWORD
                 {
-                    ::SetLastError(ERROR_BUFFER_OVERFLOW);
+                    $crate::SetLastError(ERROR_BUFFER_OVERFLOW);
                     return false;
                 }
 
@@ -222,7 +225,7 @@ macro_rules! isolation_aware_kernel32 {
 
                 context_basic_info.act_ctx = IsolationAwareCreateActCtxW(&mut act_ctx);
                 if context_basic_info.act_ctx == INVALID_HANDLE_VALUE {
-                    let last_error = ::GetLastError();
+                    let last_error = $crate::GetLastError();
                     if last_error != ERROR_RESOURCE_DATA_NOT_FOUND &&
                        last_error != ERROR_RESOURCE_TYPE_NOT_FOUND &&
                        last_error != ERROR_RESOURCE_LANG_NOT_FOUND &&
@@ -262,7 +265,7 @@ macro_rules! isolation_aware_kernel32 {
                     COMCTL32_DLL.as_ptr(),
                     &mut ctx_keyed_data
                 ) {
-                    ::LoadLibraryW(COMCTL32_DLL.as_ptr());
+                    $crate::LoadLibraryW(COMCTL32_DLL.as_ptr());
                 }
 
                 IsolationAwareDeactivateActCtx(0, ulp_cookie);
@@ -284,7 +287,7 @@ macro_rules! isolation_aware_kernel32 {
             if succeeded {
                 Some(ulp_cookie)
             } else {
-                let last_error = ::GetLastError();
+                let last_error = $crate::GetLastError();
                 if last_error == ERROR_PROC_NOT_FOUND ||
                    last_error == ERROR_MOD_NOT_FOUND ||
                    last_error == ERROR_CALL_NOT_IMPLEMENTED ||
@@ -301,10 +304,10 @@ macro_rules! isolation_aware_kernel32 {
 
         unsafe fn isolation_aware_finish(ulp_cookie: ULONG_PTR, call_successful: bool) {
             if ISOLATION_AWARE_INIT_FAILED == false {
-                let last_error = if call_successful {::GetLastError()} else {NO_ERROR};
+                let last_error = if call_successful {$crate::GetLastError()} else {NO_ERROR};
                 IsolationAwareDeactivateActCtx(0, ulp_cookie);
                 if call_successful {
-                    ::SetLastError(last_error);
+                    $crate::SetLastError(last_error);
                 }
             }
         }
