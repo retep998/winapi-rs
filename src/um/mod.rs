@@ -60,6 +60,7 @@ pub mod gl;
 #[cfg(feature = "objbase")] pub mod objbase;
 #[cfg(feature = "objidl")] pub mod objidl;
 #[cfg(feature = "objidlbase")] pub mod objidlbase;
+#[cfg(feature = "oleauto")] pub mod oleauto;
 #[cfg(feature = "pdh")] pub mod pdh;
 #[cfg(feature = "processthreadsapi")] pub mod processthreadsapi;
 #[cfg(feature = "propidl")] pub mod propidl;
