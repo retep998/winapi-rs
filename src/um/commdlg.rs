@@ -5,21 +5,23 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! 32-Bit Common Dialog APIs
-use ctypes::{c_void};
-use shared::basetsd::{UINT_PTR};
+use ctypes::c_void;
+use shared::basetsd::UINT_PTR;
 use shared::minwindef::{
-    LPVOID, UINT, WPARAM, LPARAM, INT, WORD, DWORD, LRESULT, HINSTANCE, HGLOBAL
+    DWORD, HGLOBAL, HINSTANCE, INT, LPARAM, LPVOID, LRESULT, UINT, WORD, WPARAM,
 };
-use shared::windef::{HWND, HDC, POINT, RECT, COLORREF};
-use um::prsht::{HPROPSHEETPAGE};
+use shared::windef::{COLORREF, HDC, HWND, POINT, RECT};
+use um::prsht::HPROPSHEETPAGE;
 use um::unknwnbase::{IUnknown, IUnknownVtbl, LPUNKNOWN};
-use um::wingdi::{LPDEVMODEW, LPLOGFONTW, LPLOGFONTA, DM_COPIES, DM_COLLATE};
-use um::winnt::{LPCSTR, LPSTR, LPWSTR, LPCWSTR, HRESULT};
-use um::winuser::{WM_USER, NMHDR};
-
-pub type LPOFNHOOKPROC = Option<unsafe extern "system" fn(
-    HWND, UINT, WPARAM, LPARAM,
-) -> UINT_PTR>;
+use um::wingdi::{DM_COLLATE, DM_COPIES, LPDEVMODEW, LPLOGFONTA, LPLOGFONTW};
+use um::winnt::{HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR};
+use um::winuser::{NMHDR, WM_USER};
+FN!{stdcall LPOFNHOOKPROC(
+    HWND,
+    UINT,
+    WPARAM,
+    LPARAM
+) -> UINT_PTR}
 STRUCT!{struct OPENFILENAME_NT4A {
     lStructSize: DWORD,
     hwndOwner: HWND,

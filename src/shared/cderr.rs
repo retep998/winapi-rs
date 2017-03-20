@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Common dialog error return codes
-// Done as of 10.0.14393.0
 use shared::minwindef::DWORD;
 pub const CDERR_DIALOGFAILURE: DWORD = 0xFFFF;
 pub const CDERR_GENERALCODES: DWORD = 0x0000;

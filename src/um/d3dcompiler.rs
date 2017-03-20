@@ -7,7 +7,6 @@
 use shared::basetsd::{SIZE_T};
 use shared::minwindef::{DWORD, LPCVOID};
 use um::d3dcommon::{ID3DInclude};
-
 pub const D3DCOMPILER_DLL: &'static str = "d3dcompiler_47.dll";
 pub const D3D_COMPILER_VERSION: DWORD = 47;
 pub const D3DCOMPILE_DEBUG: DWORD = 1 << 0;

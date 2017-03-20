@@ -5,8 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of dcommon.h
-use shared::dxgiformat::{DXGI_FORMAT};
-
+use shared::dxgiformat::DXGI_FORMAT;
 ENUM!{enum DWRITE_MEASURING_MODE {
     DWRITE_MEASURING_MODE_NATURAL = 0,
     DWRITE_MEASURING_MODE_GDI_CLASSIC = 1,

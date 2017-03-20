@@ -8,7 +8,6 @@
 
 // Currently, this only contains `INTERNET_FLAG_BGUPDATE`, which is needed to correctly define
 // `wininet::INTERNET_FLAGS_MASK`.
-
 use shared::minwindef::DWORD;
 pub const INTERNET_FLAG_BGUPDATE: DWORD = 0x00000008;
 

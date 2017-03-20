@@ -6,13 +6,12 @@
 // except according to those terms.
 //! This module contains the public data structures, data types, and procedures exported by the NT
 //! console subsystem.
-// Done as of 10.0.14393.0
 use ctypes::c_void;
-use shared::minwindef::{ BOOL, DWORD, LPDWORD, LPVOID, LPWORD, UINT, ULONG, WORD };
-use shared::windef::{ COLORREF, HWND };
+use shared::minwindef::{BOOL, DWORD, LPDWORD, LPVOID, LPWORD, UINT, ULONG, WORD};
+use shared::windef::{COLORREF, HWND};
 use um::minwinbase::SECURITY_ATTRIBUTES;
 use um::wingdi::LF_FACESIZE;
-use um::winnt::{ CHAR, HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, SHORT, WCHAR };
+use um::winnt::{CHAR, HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, SHORT, WCHAR};
 STRUCT!{struct COORD {
     X: SHORT,
     Y: SHORT,

@@ -6,12 +6,11 @@
 // except according to those terms.
 //! user APIs for the Configuration Manager
 use shared::basetsd::{DWORD_PTR, ULONG32, ULONG64, ULONG_PTR};
-use shared::guiddef::{GUID};
+use shared::guiddef::GUID;
 use shared::minwindef::{BYTE, DWORD, MAX_PATH, ULONG, WORD};
 use um::winnt::{
-    DWORDLONG, ULONGLONG, WCHAR, ANYSIZE_ARRAY, LONG, CHAR, LARGE_INTEGER, HANDLE, VOID, PVOID,
+    ANYSIZE_ARRAY, CHAR, DWORDLONG, HANDLE, LARGE_INTEGER, LONG, PVOID, ULONGLONG, VOID, WCHAR,
 };
-
 pub type PCVOID = *const VOID;
 pub const MAX_DEVICE_ID_LEN: usize = 200;
 pub const MAX_DEVNODE_ID_LEN: usize = MAX_DEVICE_ID_LEN;

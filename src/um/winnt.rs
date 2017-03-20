@@ -6,10 +6,10 @@
 // except according to those terms.
 //! This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed
 //! through the Win32 API.
-use ctypes::{ __int64, __uint64, c_char, c_int, c_long, c_short, c_ulong, c_void, wchar_t };
-use shared::basetsd::{ DWORD64, KAFFINITY, LONG_PTR, PDWORD64, SIZE_T, ULONG_PTR };
-use shared::guiddef::{ CLSID, GUID };
-use shared::minwindef::{ BYTE, DWORD, PDWORD, ULONG, WORD };
+use ctypes::{__int64, __uint64, c_char, c_int, c_long, c_short, c_ulong, c_void, wchar_t};
+use shared::basetsd::{DWORD64, KAFFINITY, LONG_PTR, PDWORD64, SIZE_T, ULONG_PTR};
+use shared::guiddef::{CLSID, GUID};
+use shared::minwindef::{BYTE, DWORD, PDWORD, ULONG, WORD};
 use vc::excpt::EXCEPTION_DISPOSITION;
 pub const ANYSIZE_ARRAY: usize = 1;
 #[cfg(target_arch = "x86")]
@@ -45,11 +45,11 @@ pub type LPUWSTR = *mut WCHAR; // Unaligned pointer
 pub type PUWSTR = *mut WCHAR; // Unaligned pointer
 pub type LPCWSTR = *const WCHAR;
 pub type PCWSTR = *const WCHAR;
-pub type PZPCWSTR= *mut PCWSTR;
+pub type PZPCWSTR = *mut PCWSTR;
 pub type PCZPCWSTR = *const PCWSTR;
 pub type LPCUWSTR = *const WCHAR; // Unaligned pointer
 pub type PCUWSTR = *const WCHAR; // Unaligned pointer
-pub type PZZWSTR= *mut WCHAR;
+pub type PZZWSTR = *mut WCHAR;
 pub type PCZZWSTR = *const WCHAR;
 pub type PUZZWSTR = *mut WCHAR; // Unaligned pointer
 pub type PCUZZWSTR = *const WCHAR; // Unaligned pointer
@@ -146,7 +146,7 @@ pub type USN = LONGLONG;
 pub type LARGE_INTEGER = LONGLONG;
 pub type PLARGE_INTEGER = *mut LARGE_INTEGER;
 pub type ULARGE_INTEGER = ULONGLONG;
-pub type PULARGE_INTEGER= *mut ULARGE_INTEGER;
+pub type PULARGE_INTEGER = *mut ULARGE_INTEGER;
 pub type RTL_REFERENCE_COUNT = LONG_PTR;
 pub type PRTL_REFERENCE_COUNT = *mut LONG_PTR;
 STRUCT!{struct LUID {
@@ -765,27 +765,41 @@ pub const SORT_GEORGIAN_TRADITIONAL: WORD = 0x0;
 pub const SORT_GEORGIAN_MODERN: WORD = 0x1;
 macro_rules! MAKELANGID { ($p:expr, $s:expr) => (($s << 10) | $p) }
 #[inline]
-pub fn MAKELANGID(p: WORD, s: WORD) -> LANGID { (s << 10) | p }
+pub fn MAKELANGID(p: WORD, s: WORD) -> LANGID {
+    (s << 10) | p
+}
 #[inline]
-pub fn PRIMARYLANGID(lgid: LANGID) -> WORD { lgid & 0x3ff }
+pub fn PRIMARYLANGID(lgid: LANGID) -> WORD {
+    lgid & 0x3ff
+}
 #[inline]
-pub fn SUBLANGID(lgid: LANGID) -> WORD { lgid >> 10 }
+pub fn SUBLANGID(lgid: LANGID) -> WORD {
+    lgid >> 10
+}
 pub const NLS_VALID_LOCALE_MASK: DWORD = 0x000fffff;
 macro_rules! MAKELCID {
     ($lgid:expr, $srtid:expr) => ((($srtid as DWORD) << 16) | ($lgid as DWORD))
 }
 #[inline]
-pub fn MAKELCID(lgid: LANGID, srtid: WORD) -> LCID { ((srtid as DWORD) << 16) | (lgid as DWORD) }
+pub fn MAKELCID(lgid: LANGID, srtid: WORD) -> LCID {
+    ((srtid as DWORD) << 16) | (lgid as DWORD)
+}
 #[inline]
 pub fn MAKESORTLCID(lgid: LANGID, srtid: WORD, ver: WORD) -> LCID {
     MAKELCID(lgid, srtid) | ((ver as DWORD) << 20)
 }
 #[inline]
-pub fn LANGIDFROMLCID(lcid: LCID) -> LANGID { lcid as LANGID }
+pub fn LANGIDFROMLCID(lcid: LCID) -> LANGID {
+    lcid as LANGID
+}
 #[inline]
-pub fn SORTIDFROMLCID(lcid: LCID) -> WORD { ((lcid >> 16) & 0xf) as WORD }
+pub fn SORTIDFROMLCID(lcid: LCID) -> WORD {
+    ((lcid >> 16) & 0xf) as WORD
+}
 #[inline]
-pub fn SORTVERSIONFROMLCID(lcid: LCID) -> WORD { ((lcid >> 16) & 0xf) as WORD }
+pub fn SORTVERSIONFROMLCID(lcid: LCID) -> WORD {
+    ((lcid >> 16) & 0xf) as WORD
+}
 pub const LOCALE_NAME_MAX_LENGTH: usize = 85;
 pub const LANG_SYSTEM_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_SYS_DEFAULT);
 pub const LANG_USER_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_DEFAULT);
@@ -2422,8 +2436,8 @@ pub type PRTL_RUN_ONCE = *mut RTL_RUN_ONCE;
 ENUM!{enum RTL_UMS_THREAD_INFO_CLASS {
     UmsThreadInvalidInfoClass = 0,
     UmsThreadUserContext,
-    UmsThreadPriority,              // Reserved
-    UmsThreadAffinity,              // Reserved
+    UmsThreadPriority, // Reserved
+    UmsThreadAffinity, // Reserved
     UmsThreadTeb,
     UmsThreadIsSuspended,
     UmsThreadIsTerminated,

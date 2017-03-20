@@ -4,25 +4,13 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
-use shared::minwindef::{UINT, BYTE, LPVOID};
-use um::d3d10::{
-    D3D10_PRIMITIVE_TOPOLOGY,
-    D3D10_SRV_DIMENSION,
-};
+use shared::minwindef::{BYTE, LPVOID, UINT};
+use um::d3d10::{D3D10_PRIMITIVE_TOPOLOGY, D3D10_SRV_DIMENSION};
 use um::d3dcommon::{
-    D3D_CBUFFER_TYPE,
-    D3D_INCLUDE_TYPE,
-    D3D_NAME,
-    D3D_REGISTER_COMPONENT_TYPE,
-    D3D_RESOURCE_RETURN_TYPE,
-    D3D_SHADER_CBUFFER_FLAGS,
-    D3D_SHADER_INPUT_FLAGS,
-    D3D_SHADER_INPUT_TYPE,
-    D3D_SHADER_MACRO,
-    D3D_SHADER_VARIABLE_CLASS,
-    D3D_SHADER_VARIABLE_FLAGS,
-    D3D_SHADER_VARIABLE_TYPE,
-    ID3DInclude,
+    D3D_CBUFFER_TYPE, D3D_INCLUDE_TYPE, D3D_NAME, D3D_REGISTER_COMPONENT_TYPE,
+    D3D_RESOURCE_RETURN_TYPE, D3D_SHADER_CBUFFER_FLAGS, D3D_SHADER_INPUT_FLAGS,
+    D3D_SHADER_INPUT_TYPE, D3D_SHADER_MACRO, D3D_SHADER_VARIABLE_CLASS, D3D_SHADER_VARIABLE_FLAGS,
+    D3D_SHADER_VARIABLE_TYPE, ID3DInclude,
 };
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
@@ -146,7 +134,7 @@ STRUCT!{struct D3D10_SIGNATURE_PARAMETER_DESC {
     Mask: BYTE,
     ReadWriteMask: BYTE,
 }}
-pub type LPD3D10SHADERREFLECTIONTYPE= *mut ID3D10ShaderReflectionType;
+pub type LPD3D10SHADERREFLECTIONTYPE = *mut ID3D10ShaderReflectionType;
 DEFINE_GUID!{IID_ID3D10ShaderReflectionType,
     0xc530ad7d, 0x9b16, 0x4395, 0xa9, 0x79, 0xba, 0x2e, 0xcf, 0xf8, 0x3a, 0xdd}
 RIDL!{#[uuid(0xc530ad7d, 0x9b16, 0x4395, 0xa9, 0x79, 0xba, 0x2e, 0xcf, 0xf8, 0x3a, 0xdd)]

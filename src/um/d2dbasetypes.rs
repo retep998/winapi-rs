@@ -9,7 +9,6 @@ use shared::basetsd::{UINT32};
 use shared::d3d9types::{D3DCOLORVALUE};
 use shared::minwindef::{FLOAT};
 use shared::windef::{POINT, RECT};
-
 STRUCT!{struct D2D_POINT_2U {
     x: UINT32,
     y: UINT32,

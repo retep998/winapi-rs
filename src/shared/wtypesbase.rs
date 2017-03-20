@@ -4,11 +4,10 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-// Done as of 10.0.14393.0
-use ctypes::{ c_double, c_short, c_uchar, c_ushort };
-use shared::minwindef::{ BYTE, DWORD };
-use shared::rpcndr::{ boolean, byte, hyper };
-use um::winnt::{ LONG, LPWSTR, WCHAR };
+use ctypes::{c_double, c_short, c_uchar, c_ushort};
+use shared::minwindef::{BYTE, DWORD};
+use shared::rpcndr::{boolean, byte, hyper};
+use um::winnt::{LONG, LPWSTR, WCHAR};
 pub type OLECHAR = WCHAR;
 pub type LPOLESTR = *mut OLECHAR;
 pub type LPCOLESTR = *const OLECHAR;

@@ -5,10 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Component object model defintions
-use shared::minwindef::{LPVOID};
-use um::combaseapi::{COINITBASE_MULTITHREADED};
-use um::winnt::{HRESULT};
-
+use shared::minwindef::LPVOID;
+use um::combaseapi::COINITBASE_MULTITHREADED;
+use um::winnt::HRESULT;
 ENUM!{enum COINIT {
     COINIT_APARTMENTTHREADED = 0x2,
     COINIT_MULTITHREADED = COINITBASE_MULTITHREADED,

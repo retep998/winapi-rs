@@ -4,8 +4,7 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::minwindef::{USHORT};
-
+use shared::minwindef::USHORT;
 pub type USAGE = USHORT;
 pub type PUSAGE = *mut USAGE;
 pub const HID_USAGE_PAGE_UNDEFINED: USAGE = 0x00;

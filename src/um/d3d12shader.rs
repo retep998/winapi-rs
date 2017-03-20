@@ -4,12 +4,17 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::basetsd::{UINT64};
-use shared::minwindef::{UINT, LPVOID, BOOL, INT, BYTE};
-use um::d3dcommon::*;
+
+use shared::basetsd::UINT64;
+use shared::minwindef::{BOOL, BYTE, INT, LPVOID, UINT};
+use um::d3dcommon::{
+    D3D_CBUFFER_TYPE, D3D_FEATURE_LEVEL, D3D_INTERPOLATION_MODE, D3D_MIN_PRECISION, D3D_NAME,
+    D3D_PARAMETER_FLAGS, D3D_PRIMITIVE, D3D_PRIMITIVE_TOPOLOGY, D3D_REGISTER_COMPONENT_TYPE,
+    D3D_RESOURCE_RETURN_TYPE, D3D_SHADER_INPUT_TYPE, D3D_SHADER_VARIABLE_CLASS, D3D_SHADER_VARIABLE_TYPE, D3D_SRV_DIMENSION, D3D_TESSELLATOR_DOMAIN,
+    D3D_TESSELLATOR_OUTPUT_PRIMITIVE, D3D_TESSELLATOR_PARTITIONING,
+};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
-
 ENUM!{enum D3D12_SHADER_VERSION_TYPE {
     D3D12_SHVER_PIXEL_SHADER = 0x0,
     D3D12_SHVER_VERTEX_SHADER = 0x1,

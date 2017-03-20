@@ -5,9 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! ApiSet Contract for api-ms-win-core-heap-l1
-use shared::basetsd::{SIZE_T};
-use shared::minwindef::{DWORD};
-
+use shared::basetsd::SIZE_T;
+use shared::minwindef::DWORD;
 STRUCT!{struct HEAP_SUMMARY {
     cb: DWORD,
     cbAllocated: SIZE_T,

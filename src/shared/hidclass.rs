@@ -4,14 +4,13 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::guiddef::{GUID};
-use shared::minwindef::{ULONG, USHORT, UCHAR, PUCHAR, DWORD};
+use shared::guiddef::GUID;
+use shared::minwindef::{DWORD, PUCHAR, UCHAR, ULONG, USHORT};
 use um::winioctl::{
-    METHOD_IN_DIRECT, METHOD_OUT_DIRECT, METHOD_NEITHER, METHOD_BUFFERED, FILE_ANY_ACCESS,
-    FILE_DEVICE_KEYBOARD
+    FILE_ANY_ACCESS, FILE_DEVICE_KEYBOARD, METHOD_BUFFERED, METHOD_IN_DIRECT, METHOD_NEITHER,
+    METHOD_OUT_DIRECT,
 };
-use um::winnt::{BOOLEAN};
-
+use um::winnt::BOOLEAN;
 DEFINE_GUID!{GUID_DEVINTERFACE_HID,
     0x4D1E55B2, 0xF16F, 0x11CF, 0x88, 0xCB, 0x00, 0x11, 0x11, 0x00, 0x00, 0x30}
 pub const GUID_CLASS_INPUT: GUID = GUID_DEVINTERFACE_HID;

@@ -6,7 +6,7 @@
 // except according to those terms.
 use ctypes::c_void;
 use shared::guiddef::REFIID;
-use shared::minwindef::{ BOOL, ULONG };
+use shared::minwindef::{BOOL, ULONG};
 use um::winnt::HRESULT;
 RIDL!{#[uuid(0x00000000, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IUnknown(IUnknownVtbl) {

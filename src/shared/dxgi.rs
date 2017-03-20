@@ -5,19 +5,18 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of dxgi.h
-use ctypes::{c_void};
-use shared::basetsd::{UINT64, SIZE_T};
-use shared::dxgiformat::{DXGI_FORMAT};
+use ctypes::c_void;
+use shared::basetsd::{SIZE_T, UINT64};
+use shared::dxgiformat::DXGI_FORMAT;
 use shared::dxgitype::{
-    DXGI_USAGE, DXGI_MODE_DESC, DXGI_GAMMA_CONTROL_CAPABILITIES, DXGI_GAMMA_CONTROL,
-    DXGI_MODE_ROTATION, DXGI_SAMPLE_DESC,
+    DXGI_GAMMA_CONTROL, DXGI_GAMMA_CONTROL_CAPABILITIES, DXGI_MODE_DESC, DXGI_MODE_ROTATION,
+    DXGI_SAMPLE_DESC, DXGI_USAGE,
 };
-use shared::guiddef::{REFIID, REFGUID};
-use shared::minwindef::{UINT, BOOL, FLOAT, HMODULE, DWORD, BYTE};
-use shared::windef::{HWND, HDC, RECT, HMONITOR};
+use shared::guiddef::{REFGUID, REFIID};
+use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, HMODULE, UINT};
+use shared::windef::{HDC, HMONITOR, HWND, RECT};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HRESULT, LUID, WCHAR, INT, LARGE_INTEGER, HANDLE};
-
+use um::winnt::{HANDLE, HRESULT, INT, LARGE_INTEGER, LUID, WCHAR};
 STRUCT!{struct DXGI_FRAME_STATISTICS {
     PresentCount: UINT,
     PresentRefreshCount: UINT,

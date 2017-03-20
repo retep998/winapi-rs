@@ -6,12 +6,11 @@
 // except according to those terms.
 //! Interface for the Windows Property Sheet Pages
 use ctypes::{c_int, c_short};
-use shared::basetsd::{INT_PTR};
-use shared::minwindef::{LPVOID, UINT, DWORD, HINSTANCE, WPARAM, LPARAM, LRESULT, BOOL};
-use shared::windef::{HWND, HICON, HBITMAP, HPALETTE};
-use um::winnt::{LPCSTR, LPCWSTR, HANDLE};
-use um::winuser::{DLGPROC, WM_USER, NMHDR, LPCDLGTEMPLATEA};
-
+use shared::basetsd::INT_PTR;
+use shared::minwindef::{BOOL, DWORD, HINSTANCE, LPARAM, LPVOID, LRESULT, UINT, WPARAM};
+use shared::windef::{HBITMAP, HICON, HPALETTE, HWND};
+use um::winnt::{HANDLE, LPCSTR, LPCWSTR};
+use um::winuser::{DLGPROC, LPCDLGTEMPLATEA, NMHDR, WM_USER};
 pub enum PSP {}
 pub type HPROPSHEETPAGE = *mut PSP;
 pub type LPFNPSPCALLBACKA = Option<unsafe extern "system" fn(

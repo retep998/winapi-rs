@@ -5,10 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Contains public interfaces to query the network roles of workstations, servers, and DCs
-use shared::guiddef::{GUID};
-use shared::minwindef::{ULONG};
-use um::winnt::{LPWSTR};
-
+use shared::guiddef::GUID;
+use shared::minwindef::ULONG;
+use um::winnt::LPWSTR;
 ENUM!{enum DSROLE_MACHINE_ROLE {
     DsRole_RoleStandaloneWorkstation,
     DsRole_RoleMemberWorkstation,

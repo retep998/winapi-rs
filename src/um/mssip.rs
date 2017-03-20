@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Microsoft SIP Provider Prototypes and Definitions
-
 use shared::guiddef::GUID;
 use shared::minwindef::{BOOL, BYTE, DWORD, LPVOID};
 use um::mscat::{CRYPTCATMEMBER, CRYPTCATSTORE};
@@ -13,7 +12,6 @@ use um::wincrypt::{
     CRYPT_ALGORITHM_IDENTIFIER, CRYPT_ATTRIBUTE_TYPE_VALUE, CRYPT_HASH_BLOB, HCRYPTPROV,
 };
 use um::winnt::{HANDLE, LPCWSTR, PWSTR, WCHAR};
-
 STRUCT!{struct SIP_SUBJECTINFO {
     cbSize: DWORD,
     pgSubjectType: *mut GUID,

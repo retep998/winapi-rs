@@ -5,10 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Data Protection API Prototypes and Definitions
-use shared::minwindef::{DWORD};
-use shared::windef::{HWND};
-use um::winnt::{LPCWSTR};
-
+use shared::minwindef::DWORD;
+use shared::windef::HWND;
+use um::winnt::LPCWSTR;
 pub const szFORCE_KEY_PROTECTION: &'static str = "ForceKeyProtection";
 STRUCT!{struct CRYPTPROTECT_PROMPTSTRUCT {
     cbSize: DWORD,

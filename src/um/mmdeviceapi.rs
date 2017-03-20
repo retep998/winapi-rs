@@ -5,13 +5,12 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
-use shared::guiddef::{REFIID};
-use shared::minwindef::{UINT, DWORD, LPVOID};
-use um::propidl::{PROPVARIANT};
-use um::propsys::{IPropertyStore};
+use shared::guiddef::REFIID;
+use shared::minwindef::{DWORD, LPVOID, UINT};
+use um::propidl::PROPVARIANT;
+use um::propsys::IPropertyStore;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR};
-
 pub const DEVICE_STATE_ACTIVE: DWORD = 0x00000001;
 pub const DEVICE_STATE_DISABLED: DWORD = 0x00000002;
 pub const DEVICE_STATE_NOTPRESENT: DWORD = 0x00000004;

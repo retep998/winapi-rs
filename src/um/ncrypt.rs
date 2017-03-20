@@ -6,7 +6,6 @@
 // except according to those terms.
 use shared::basetsd::ULONG_PTR;
 use shared::sspi::SECURITY_STATUS;
-
 pub type NCRYPT_HANDLE = ULONG_PTR;
 pub type NCRYPT_PROV_HANDLE = ULONG_PTR;
 pub type NCRYPT_KEY_HANDLE = ULONG_PTR;

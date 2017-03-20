@@ -5,17 +5,16 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! DirectX Typography Services public API definitions.
-use ctypes::{c_void};
-use shared::basetsd::{INT32, INT16, UINT64, UINT32, UINT16, UINT8};
-use shared::minwindef::{FLOAT, BOOL, BYTE, FILETIME};
-use shared::windef::{HMONITOR, RECT, HDC, COLORREF, SIZE};
-use shared::winerror::{SEVERITY_ERROR};
-use um::d2d1::{ID2D1SimplifiedGeometrySink};
-use um::dcommon::{DWRITE_MEASURING_MODE};
+use ctypes::c_void;
+use shared::basetsd::{INT16, INT32, UINT16, UINT32, UINT64, UINT8};
+use shared::minwindef::{BOOL, BYTE, FILETIME, FLOAT};
+use shared::windef::{COLORREF, HDC, HMONITOR, RECT, SIZE};
+use shared::winerror::SEVERITY_ERROR;
+use um::d2d1::ID2D1SimplifiedGeometrySink;
+use um::dcommon::DWRITE_MEASURING_MODE;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::wingdi::{LOGFONTW};
+use um::wingdi::LOGFONTW;
 use um::winnt::{HRESULT, WCHAR};
-
 ENUM!{enum DWRITE_FONT_FILE_TYPE {
     DWRITE_FONT_FILE_TYPE_UNKNOWN,
     DWRITE_FONT_FILE_TYPE_CFF,

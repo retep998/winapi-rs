@@ -6,13 +6,12 @@
 // except according to those terms.
 //! DSound procedure declarations, constant definitions and macros
 use shared::guiddef::{GUID, LPCGUID};
-use shared::minwindef::{DWORD, LPVOID, LPDWORD, LPLONG};
-use shared::windef::{HWND};
-use shared::winerror::{S_OK, E_FAIL};
+use shared::minwindef::{DWORD, LPDWORD, LPLONG, LPVOID};
+use shared::windef::HWND;
+use shared::winerror::{E_FAIL, S_OK};
 use um::mmsystem::{LPCWAVEFORMATEX, LPWAVEFORMATEX};
 use um::unknwnbase::{IUnknown, IUnknownVtbl, LPUNKNOWN};
 use um::winnt::{HRESULT, LONG};
-
 STRUCT!{struct DSCAPS {
     dwSize: DWORD,
     dwFlags: DWORD,

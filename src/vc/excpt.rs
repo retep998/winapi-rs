@@ -6,7 +6,6 @@
 // except according to those terms.
 //! The declarations of the compiler-dependent intrinsics, support functions, and keywords which
 //! implement the structured exception handling extensions.
-// Done as of VC 14
 ENUM!{enum EXCEPTION_DISPOSITION {
     ExceptionContinueExecution,
     ExceptionContinueSearch,

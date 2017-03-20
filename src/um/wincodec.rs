@@ -5,13 +5,12 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of wincodec.h
-use shared::basetsd::{UINT32};
-use shared::guiddef::{REFGUID, GUID};
-use shared::minwindef::{DWORD, UINT, INT, BOOL, FLOAT, BYTE, ULONG};
-use um::dcommon::{D2D1_PIXEL_FORMAT};
+use shared::basetsd::UINT32;
+use shared::guiddef::{GUID, REFGUID};
+use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, UINT, ULONG};
+use um::dcommon::D2D1_PIXEL_FORMAT;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, ULARGE_INTEGER};
-
 pub type WICColor = UINT32;
 pub type WICInProcPointer = *mut BYTE;
 pub type REFWICPixelFormatGUID = REFGUID;

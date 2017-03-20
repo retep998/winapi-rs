@@ -6,9 +6,8 @@
 // except according to those terms.
 //! Defines property types and keys for the Plug and Play Device Property API
 use shared::guiddef::{GUID, IsEqualGUID};
-use shared::minwindef::{ULONG};
-use um::winnt::{PVOID, PCWSTR, CHAR};
-
+use shared::minwindef::ULONG;
+use um::winnt::{CHAR, PCWSTR, PVOID};
 pub type DEVPROPTYPE = ULONG;
 pub type PDEVPROPTYPE = *mut ULONG;
 pub const DEVPROP_TYPEMOD_ARRAY: DEVPROPTYPE = 0x00001000;

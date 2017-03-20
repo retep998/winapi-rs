@@ -6,26 +6,22 @@
 // except according to those terms.
 //! DbgHelp include file
 use shared::basetsd::{DWORD64, ULONG64};
-use shared::guiddef::{GUID};
-use shared::minwindef::{BOOL, ULONG, USHORT, UCHAR, PUCHAR, WORD, DWORD, LPDWORD};
+use shared::guiddef::GUID;
+use shared::minwindef::{BOOL, DWORD, LPDWORD, PUCHAR, UCHAR, ULONG, USHORT, WORD};
+#[cfg(target_arch = "x86")]
+use shared::minwindef::PDWORD;
 use um::winnt::{
-    PVOID, PSTR, PWSTR, PCWSTR, PCSTR, WCHAR, CHAR,HANDLE, BOOLEAN, PIMAGE_SECTION_HEADER,
-    LIST_ENTRY
+    BOOLEAN, CHAR, HANDLE, LIST_ENTRY, PCSTR, PCWSTR, PIMAGE_SECTION_HEADER, PSTR, PVOID, PWSTR,
+    WCHAR,
 };
-use vc::vcruntime::{size_t};
-
+#[cfg(target_arch = "x86")]
+use um::winnt::{
+    PFPO_DATA, PIMAGE_COFF_SYMBOLS_HEADER, PIMAGE_DEBUG_DIRECTORY, PIMAGE_FUNCTION_ENTRY,
+    PIMAGE_NT_HEADERS32,
+};
 #[cfg(target_arch = "x86_64")]
-use um::winnt::{PIMAGE_NT_HEADERS64};
-
-#[cfg(target_arch = "x86")]
-use shared::minwindef::{PDWORD};
-
-#[cfg(target_arch = "x86")]
-use um::winnt::{
-    PIMAGE_NT_HEADERS32, PIMAGE_FUNCTION_ENTRY, PFPO_DATA, PIMAGE_COFF_SYMBOLS_HEADER,
-    PIMAGE_DEBUG_DIRECTORY
-};
-
+use um::winnt::PIMAGE_NT_HEADERS64;
+use vc::vcruntime::size_t;
 #[cfg(target_arch = "x86_64")]
 STRUCT!{struct LOADED_IMAGE {
     ModuleName: PSTR,

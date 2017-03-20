@@ -5,11 +5,10 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Direct3D capabilities include file
-// Done as of 10.0.14393.0
 use ctypes::c_float;
 use shared::d3d9types::D3DDEVTYPE;
 use shared::guiddef::GUID;
-use shared::minwindef::{ DWORD, INT, UINT };
+use shared::minwindef::{DWORD, INT, UINT};
 use um::winnt::ULONGLONG;
 STRUCT!{struct D3DVSHADERCAPS2_0 {
     Caps: DWORD,

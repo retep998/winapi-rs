@@ -4,10 +4,9 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::basetsd::{DWORD_PTR};
+use shared::basetsd::DWORD_PTR;
 use shared::minwindef::{DWORD, HKEY};
-use um::winnt::{LPSTR, LPWSTR, ACCESS_MASK};
-
+use um::winnt::{ACCESS_MASK, LPSTR, LPWSTR};
 pub type REGSAM = ACCESS_MASK;
 STRUCT!{struct VALENTA {
     ve_valuename: LPSTR,

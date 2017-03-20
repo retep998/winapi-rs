@@ -14,7 +14,6 @@ use shared::windef::{RECT, SIZE};
 use um::d3dcommon::{D3D_SRV_DIMENSION, D3D_PRIMITIVE, D3D_FEATURE_LEVEL, D3D_PRIMITIVE_TOPOLOGY};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPSTR, LPCSTR, ULONGLONG, HANDLE};
-
 pub const D3D11_16BIT_INDEX_STRIP_CUT_VALUE: DWORD = 0xffff;
 pub const D3D11_32BIT_INDEX_STRIP_CUT_VALUE: DWORD = 0xffffffff;
 pub const D3D11_8BIT_INDEX_STRIP_CUT_VALUE: DWORD = 0xff;
@@ -814,7 +813,7 @@ STRUCT!{struct D3D11_TEX2DMS_ARRAY_SRV {
 }}
 STRUCT!{struct D3D11_SHADER_RESOURCE_VIEW_DESC {
     Format: DXGI_FORMAT,
-    ViewDimension:  D3D11_SRV_DIMENSION,
+    ViewDimension: D3D11_SRV_DIMENSION,
     u: [UINT; 4],
 }}
 UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, Buffer, Buffer_mut, D3D11_BUFFER_SRV}
@@ -1071,7 +1070,7 @@ ENUM!{enum D3D11_TEXTURE_ADDRESS_MODE {
     D3D11_TEXTURE_ADDRESS_MIRROR_ONCE = 5,
 }}
 STRUCT!{struct D3D11_SAMPLER_DESC {
-    Filter:  D3D11_FILTER,
+    Filter: D3D11_FILTER,
     AddressU: D3D11_TEXTURE_ADDRESS_MODE,
     AddressV: D3D11_TEXTURE_ADDRESS_MODE,
     AddressW: D3D11_TEXTURE_ADDRESS_MODE,
@@ -2112,7 +2111,7 @@ STRUCT!{struct D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_INPU
 ENUM!{enum D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE {
     DD3D11_PROCESSIDTYPE_UNKNOWN = 0,
     DD3D11_PROCESSIDTYPE_DWM = 1,
-    DD3D11_PROCESSIDTYPE_HANDLE  = 2,
+    DD3D11_PROCESSIDTYPE_HANDLE = 2,
 }}
 STRUCT!{struct D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_OUTPUT {
     Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,
@@ -2293,11 +2292,11 @@ interface ID3D11VideoProcessorOutputView(ID3D11VideoProcessorOutputViewVtbl)
 RIDL!{#[uuid(0x61f21c45, 0x3c0e, 0x4a74, 0x9c, 0xea, 0x67, 0x10, 0x0d, 0x9a, 0xd5, 0xe4)]
 interface ID3D11VideoContext(ID3D11VideoContextVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetDecoderBuffer(
-        pDecoder: *mut ID3D11VideoDecoder, Type:  D3D11_VIDEO_DECODER_BUFFER_TYPE,
+        pDecoder: *mut ID3D11VideoDecoder, Type: D3D11_VIDEO_DECODER_BUFFER_TYPE,
         pBufferSize: *mut UINT, ppBuffer: *mut *mut c_void
     ) -> HRESULT,
     fn ReleaseDecoderBuffer(
-        pDecoder: *mut ID3D11VideoDecoder, Type:  D3D11_VIDEO_DECODER_BUFFER_TYPE
+        pDecoder: *mut ID3D11VideoDecoder, Type: D3D11_VIDEO_DECODER_BUFFER_TYPE
     ) -> HRESULT,
     fn DecoderBeginFrame(
         pDecoder: *mut ID3D11VideoDecoder, pView: *mut ID3D11VideoDecoderOutputView,
@@ -2586,7 +2585,7 @@ interface ID3D11Device(ID3D11DeviceVtbl): IUnknown(IUnknownVtbl) {
     fn CreateTexture1D(
         pDesc: *const D3D11_TEXTURE1D_DESC, pInitialData: *const D3D11_SUBRESOURCE_DATA,
         ppTexture1D: *mut *mut ID3D11Texture1D
-    ) ->  HRESULT,
+    ) -> HRESULT,
     fn CreateTexture2D(
         pDesc: *const D3D11_TEXTURE2D_DESC, pInitialData: *const D3D11_SUBRESOURCE_DATA,
         ppTexture2D: *mut *mut ID3D11Texture2D

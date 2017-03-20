@@ -5,11 +5,10 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! MM procedure declarations, constant definitions and macros
-use shared::basetsd::{DWORD_PTR};
-use shared::minwindef::{WORD, DWORD, BYTE, UINT};
-use shared::mmreg::{WAVEFORMATEX};
-use um::winnt::{WCHAR, LPSTR};
-
+use shared::basetsd::DWORD_PTR;
+use shared::minwindef::{BYTE, DWORD, UINT, WORD};
+use shared::mmreg::WAVEFORMATEX;
+use um::winnt::{LPSTR, WCHAR};
 //109 (Win 7 SDK)
 pub type MMVERSION = UINT;
 pub type MMRESULT = UINT;

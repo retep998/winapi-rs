@@ -7,7 +7,6 @@
 //! XInput procedure declarations, constant definitions and macros
 use shared::minwindef::{BYTE, WORD, DWORD};
 use um::winnt::{WCHAR, SHORT};
-
 pub const XINPUT_DEVTYPE_GAMEPAD: BYTE = 0x01;
 pub const XINPUT_DEVSUBTYPE_GAMEPAD: BYTE = 0x01;
 pub const XINPUT_DEVSUBTYPE_WHEEL: BYTE = 0x02;

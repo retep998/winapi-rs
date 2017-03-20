@@ -4,13 +4,12 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use ctypes::{wchar_t};
-use shared::guiddef::{GUID};
+use ctypes::wchar_t;
+use shared::guiddef::GUID;
 use shared::minwindef::{DWORD, ULONG};
-use um::oaidl::{VARIANT};
+use um::oaidl::VARIANT;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HRESULT};
-
+use um::winnt::HRESULT;
 STRUCT!{struct OLECMD {
     cmdID: ULONG,
     cmdf: DWORD,
@@ -28,7 +27,7 @@ interface IOleCommandTarget(IOleCommandTargetVtbl): IUnknown(IUnknownVtbl) {
         pCmdText: *mut OLECMDTEXT
     ) -> HRESULT,
     fn Exec(
-        pguidCmdGroup: *const  GUID, nCmdID: DWORD, nCmdexecopt: DWORD,
+        pguidCmdGroup: *const GUID, nCmdID: DWORD, nCmdexecopt: DWORD,
         pvaIn: *mut VARIANT, pvaOut: *mut VARIANT
     ) -> HRESULT
 }}

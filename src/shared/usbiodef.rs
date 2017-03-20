@@ -5,12 +5,12 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 //! Common header file for all USB IOCTLs defined for
-//! the core stack.  We define them in this single header file
+//! the core stack. We define them in this single header file
 //! so that we can maintain backward compatibilty with older
 //! versions of the stack.
 use shared::guiddef::GUID;
 use shared::minwindef::ULONG;
-use um::winioctl::{FILE_DEVICE_UNKNOWN, METHOD_BUFFERED, METHOD_NEITHER, FILE_ANY_ACCESS};
+use um::winioctl::{FILE_ANY_ACCESS, FILE_DEVICE_UNKNOWN, METHOD_BUFFERED, METHOD_NEITHER};
 use um::winnt::PVOID;
 pub const USB_SUBMIT_URB: ULONG = 0;
 pub const USB_RESET_PORT: ULONG = 1;

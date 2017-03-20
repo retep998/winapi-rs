@@ -5,8 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 //! ApiSet Contract for api-ms-win-core-processthreads-l1
-use ctypes::{c_void};
-use shared::basetsd::{ULONG_PTR};
+use ctypes::c_void;
+use shared::basetsd::ULONG_PTR;
 use shared::minwindef::{DWORD, LPBYTE, WORD};
 use um::winnt::{HANDLE, LPSTR, LPWSTR, PAPCFUNC};
 STRUCT!{struct PROCESS_INFORMATION {

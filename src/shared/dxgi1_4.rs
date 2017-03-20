@@ -5,30 +5,29 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of dxgi1_4.h
-use ctypes::{c_void};
-use shared::basetsd::{UINT64};
+use ctypes::c_void;
+use shared::basetsd::UINT64;
 use shared::dxgi1_2::{IDXGIAdapter2, IDXGIAdapter2Vtbl};
 use shared::dxgi1_3::{
-    IDXGIFactory3, IDXGIFactory3Vtbl, IDXGISwapChain2, IDXGISwapChain2Vtbl, IDXGIOutput3Vtbl,
-    IDXGIOutput3
+    IDXGIFactory3, IDXGIFactory3Vtbl, IDXGIOutput3, IDXGIOutput3Vtbl, IDXGISwapChain2,
+    IDXGISwapChain2Vtbl,
 };
-use shared::dxgiformat::{DXGI_FORMAT};
-use shared::dxgitype::{DXGI_COLOR_SPACE_TYPE};
-use shared::guiddef::{REFGUID};
-use shared::minwindef::{UINT, DWORD};
-use um::unknwnbase::{IUnknown};
-use um::winnt::{HRESULT, LUID, HANDLE};
-
-ENUM!{ enum DXGI_MEMORY_SEGMENT_GROUP {
+use shared::dxgiformat::DXGI_FORMAT;
+use shared::dxgitype::DXGI_COLOR_SPACE_TYPE;
+use shared::guiddef::REFGUID;
+use shared::minwindef::{DWORD, UINT};
+use um::unknwnbase::IUnknown;
+use um::winnt::{HANDLE, HRESULT, LUID};
+ENUM!{enum DXGI_MEMORY_SEGMENT_GROUP {
     DXGI_MEMORY_SEGMENT_GROUP_LOCAL = 0,
     DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL = 1,
 }}
 
-ENUM!{ enum DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG {
+ENUM!{enum DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG {
     DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_PRESENT = 0x1,
 }}
 
-ENUM!{ enum DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG {
+ENUM!{enum DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG {
     DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_PRESENT = 0x1,
     DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT = 0x2,
 }}

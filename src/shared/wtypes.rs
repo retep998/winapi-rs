@@ -5,11 +5,10 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of wstypes.h
-use ctypes::{c_short, c_ushort, c_double};
-use shared::minwindef::{BYTE, USHORT, ULONG};
+use ctypes::{c_double, c_short, c_ushort};
+use shared::minwindef::{BYTE, ULONG, USHORT};
 use shared::wtypesbase::{FLAGGED_WORD_BLOB, OLECHAR};
 use um::winnt::{LONGLONG, ULONGLONG};
-
 ENUM!{enum VARENUM {
     VT_EMPTY = 0,
     VT_NULL = 1,

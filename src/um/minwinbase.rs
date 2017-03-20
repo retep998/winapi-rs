@@ -6,9 +6,7 @@
 // except according to those terms
 //! This module defines the 32-Bit Windows Base APIs
 use shared::basetsd::ULONG_PTR;
-use shared::minwindef::{
-    BOOL, BYTE, DWORD, FILETIME, HMODULE, LPVOID, MAX_PATH, UINT, ULONG, WORD,
-};
+use shared::minwindef::{BOOL, BYTE, DWORD, FILETIME, HMODULE, LPVOID, MAX_PATH, UINT, ULONG, WORD};
 use shared::ntstatus::{
     STATUS_ACCESS_VIOLATION, STATUS_ARRAY_BOUNDS_EXCEEDED, STATUS_BREAKPOINT,
     STATUS_CONTROL_C_EXIT, STATUS_DATATYPE_MISALIGNMENT, STATUS_FLOAT_DENORMAL_OPERAND,
@@ -257,14 +255,14 @@ STRUCT!{struct RIP_INFO {
     dwType: DWORD,
 }}
 pub type LPRIP_INFO = *mut RIP_INFO;
-#[cfg(target_arch="x86_64")]
+#[cfg(target_arch = "x86_64")]
 STRUCT!{struct DEBUG_EVENT {
     dwDebugEventCode: DWORD,
     dwProcessId: DWORD,
     dwThreadId: DWORD,
     u: [u64; 20],
 }}
-#[cfg(target_arch="x86")]
+#[cfg(target_arch = "x86")]
 STRUCT!{struct DEBUG_EVENT {
     dwDebugEventCode: DWORD,
     dwProcessId: DWORD,

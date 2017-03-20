@@ -6,15 +6,15 @@
 // except according to those terms.
 //! This module defines the 32-Bit Windows Base APIs
 use ctypes::{c_char, c_void};
-use shared::basetsd::{SIZE_T};
-use shared::guiddef::{GUID};
-use shared::minwindef::{WORD, DWORD, UINT, ULONG, HMODULE, USHORT, BOOL, BYTE, LPVOID};
-use um::cfgmgr32::{MAX_PROFILE_LEN};
+use shared::basetsd::SIZE_T;
+use shared::guiddef::GUID;
+use shared::minwindef::{BOOL, BYTE, DWORD, HMODULE, LPVOID, UINT, ULONG, USHORT, WORD};
+use um::cfgmgr32::MAX_PROFILE_LEN;
 use um::winnt::{
     CHAR, FILE_ID_128, HANDLE, HRESULT, LANGID, LARGE_INTEGER, LPCSTR, LPCWSTR, MAXLONG,
     PRTL_UMS_SCHEDULER_ENTRY_POINT, PVOID, RTL_UMS_THREAD_INFO_CLASS, STATUS_ABANDONED_WAIT_0,
     STATUS_USER_APC, STATUS_WAIT_0, THREAD_BASE_PRIORITY_IDLE, THREAD_BASE_PRIORITY_LOWRT,
-    THREAD_BASE_PRIORITY_MAX, THREAD_BASE_PRIORITY_MIN, ULARGE_INTEGER, WCHAR
+    THREAD_BASE_PRIORITY_MAX, THREAD_BASE_PRIORITY_MIN, ULARGE_INTEGER, WCHAR,
 };
 
 pub const FILE_BEGIN: DWORD = 0;
@@ -413,13 +413,13 @@ STRUCT!{struct COPYFILE2_MESSAGE_Error {
     uliTotalFileSize: ULARGE_INTEGER,
     uliTotalBytesTransferred: ULARGE_INTEGER,
 }}
-#[cfg(target_arch="x86")]
+#[cfg(target_arch = "x86")]
 STRUCT!{struct COPYFILE2_MESSAGE {
     Type: COPYFILE2_MESSAGE_TYPE,
     dwPadding: DWORD,
     Info: [u64; 8],
 }}
-#[cfg(target_arch="x86_64")]
+#[cfg(target_arch = "x86_64")]
 STRUCT!{struct COPYFILE2_MESSAGE {
     Type: COPYFILE2_MESSAGE_TYPE,
     dwPadding: DWORD,

@@ -5,14 +5,15 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Cryptographic API Prototypes and Definitions
-use ctypes::{c_void, c_uchar, c_int, c_uint};
-use shared::basetsd::{ULONG_PTR};
-use shared::guiddef::{GUID};
-use shared::minwindef::*;
-use um::ncrypt::{NCRYPT_KEY_HANDLE};
-use vc::vcruntime::{size_t};
-use um::winnt::{LPCSTR, LPCWSTR, LPSTR, HANDLE, LPWSTR, LONG, WCHAR, CHAR};
-
+use ctypes::{c_int, c_uchar, c_uint, c_void};
+use shared::basetsd::ULONG_PTR;
+use shared::guiddef::GUID;
+use shared::minwindef::{
+    BOOL, BYTE, DWORD, FALSE, FILETIME, LPFILETIME, LPVOID, PFILETIME, TRUE, WORD,
+};
+use um::ncrypt::NCRYPT_KEY_HANDLE;
+use um::winnt::{CHAR, HANDLE, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, WCHAR};
+use vc::vcruntime::size_t;
 //108
 pub const ALG_CLASS_ANY: ALG_ID = 0;
 pub const ALG_CLASS_SIGNATURE: ALG_ID = 1 << 13;

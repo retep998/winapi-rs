@@ -18,14 +18,14 @@ use shared::windef::{
     COLORREF, HACCEL, HBITMAP, HBRUSH, HCURSOR, HDC, HDESK, HICON, HMENU, HMONITOR, HWINEVENTHOOK,
     HWND, LPRECT, POINT, RECT,
 };
-use um::minwinbase::{LPSECURITY_ATTRIBUTES};
+use um::minwinbase::LPSECURITY_ATTRIBUTES;
 use um::wingdi::{BLENDFUNCTION, DEVMODEA, DEVMODEW, LOGFONTA, LOGFONTW};
 use um::winnt::{
     ACCESS_MASK, BOOLEAN, CHAR, HANDLE, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, LUID,
     PSECURITY_DESCRIPTOR, PSECURITY_INFORMATION, PVOID, SHORT, VOID, WCHAR,
 };
-use vc::limits::{UINT_MAX};
-use vc::vadefs::{va_list};
+use vc::limits::UINT_MAX;
+use vc::vadefs::va_list;
 pub type HDWP = HANDLE;
 pub type MENUTEMPLATEA = VOID;
 pub type MENUTEMPLATEW = VOID;
@@ -4072,15 +4072,15 @@ pub const SS_PATHELLIPSIS: DWORD = 0x00008000;
 pub const SS_WORDELLIPSIS: DWORD = 0x0000C000;
 pub const SS_ELLIPSISMASK: DWORD = 0x0000C000;
 
-pub const STM_SETICON: UINT  = 0x0170;
-pub const STM_GETICON: UINT  = 0x0171;
-pub const STM_SETIMAGE: UINT  = 0x0172;
-pub const STM_GETIMAGE: UINT  = 0x0173;
-pub const STN_CLICKED: WORD  = 0;
-pub const STN_DBLCLK: WORD  = 1;
-pub const STN_ENABLE: WORD  = 2;
-pub const STN_DISABLE: WORD  = 3;
-pub const STM_MSGMAX: WORD  = 0x0174;
+pub const STM_SETICON: UINT = 0x0170;
+pub const STM_GETICON: UINT = 0x0171;
+pub const STM_SETIMAGE: UINT = 0x0172;
+pub const STM_GETIMAGE: UINT = 0x0173;
+pub const STN_CLICKED: WORD = 0;
+pub const STN_DBLCLK: WORD = 1;
+pub const STN_ENABLE: WORD = 2;
+pub const STN_DISABLE: WORD = 3;
+pub const STM_MSGMAX: WORD = 0x0174;
 
 pub const DS_ABSALIGN: DWORD = 0x01;
 pub const DS_SYSMODAL: DWORD = 0x02;

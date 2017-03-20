@@ -460,15 +460,15 @@ STRUCT!{struct RPC_CLIENT_INFORMATION1 {
 }}
 pub type PRPC_CLIENT_INFORMATION1 = *mut RPC_CLIENT_INFORMATION1;
 pub type RPC_EP_INQ_HANDLE = *mut ::I_RPC_HANDLE;
-pub const  RPC_C_EP_ALL_ELTS: ::c_ulong = 0;
-pub const  RPC_C_EP_MATCH_BY_IF: ::c_ulong = 1;
-pub const  RPC_C_EP_MATCH_BY_OBJ: ::c_ulong = 2;
-pub const  RPC_C_EP_MATCH_BY_BOTH: ::c_ulong = 3;
-pub const  RPC_C_VERS_ALL: ::c_ulong = 1;
-pub const  RPC_C_VERS_COMPATIBLE: ::c_ulong = 2;
-pub const  RPC_C_VERS_EXACT: ::c_ulong = 3;
-pub const  RPC_C_VERS_MAJOR_ONLY: ::c_ulong = 4;
-pub const  RPC_C_VERS_UPTO: ::c_ulong = 5;
+pub const RPC_C_EP_ALL_ELTS: ::c_ulong = 0;
+pub const RPC_C_EP_MATCH_BY_IF: ::c_ulong = 1;
+pub const RPC_C_EP_MATCH_BY_OBJ: ::c_ulong = 2;
+pub const RPC_C_EP_MATCH_BY_BOTH: ::c_ulong = 3;
+pub const RPC_C_VERS_ALL: ::c_ulong = 1;
+pub const RPC_C_VERS_COMPATIBLE: ::c_ulong = 2;
+pub const RPC_C_VERS_EXACT: ::c_ulong = 3;
+pub const RPC_C_VERS_MAJOR_ONLY: ::c_ulong = 4;
+pub const RPC_C_VERS_UPTO: ::c_ulong = 5;
 pub type RPC_MGMT_AUTHORIZATION_FN = Option<unsafe extern "system" fn(
     ClientBinding: RPC_BINDING_HANDLE, RequestedMgmtOperation: ::c_ulong,
     Status: *mut ::RPC_STATUS,
