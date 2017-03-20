@@ -6,7 +6,6 @@
 // except according to those terms.
 //! Mappings for the content of dwrite_3.h
 
-use ctypes::{ c_void };
 use shared::basetsd::{ UINT16, UINT32, UINT64 };
 use shared::minwindef::{ BOOL, FILETIME, FLOAT };
 use um::dcommon::{ DWRITE_MEASURING_MODE };
@@ -240,7 +239,7 @@ interface IDWriteFontFace3(IDWriteFontFace3Vtbl):
     fn GetFontFaceReference(
         fontFaceReference: *mut *mut IDWriteFontFaceReference
     ) -> HRESULT,
-    fn GetPanose(panose: *mut DWRITE_PANOSE) -> c_void,
+    fn GetPanose(panose: *mut DWRITE_PANOSE) -> (),
     fn GetWeight() -> DWRITE_FONT_WEIGHT,
     fn GetStretch() -> DWRITE_FONT_STRETCH,
     fn GetStyle() -> DWRITE_FONT_STYLE,
@@ -288,7 +287,7 @@ interface IDWriteFontDownloadListener(IDWriteFontDownloadListenerVtbl):
     fn DownloadCompleted(
         downloadQueue: *mut IDWriteFontDownloadQueue, context: *mut IUnknown,
         downloadResult: HRESULT
-    ) -> c_void
+    ) -> ()
 }}
 
 RIDL!{#[uuid(0xb71e6052, 0x5aea, 0x4fa3, 0x83, 0x2e, 0xf6, 0x0d, 0x43, 0x1f, 0x7e, 0x91)]

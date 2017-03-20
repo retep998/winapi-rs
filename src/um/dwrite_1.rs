@@ -6,7 +6,6 @@
 // except according to those terms.
 //! Mappings for the content of dwrite_1.h
 
-use ctypes::{ c_void };
 use shared::basetsd::{ INT16, INT32, UINT16, UINT32, UINT8 };
 use shared::minwindef::{ BOOL, FLOAT };
 use um::dcommon::{ DWRITE_MEASURING_MODE };
@@ -511,7 +510,6 @@ STRUCT!{struct DWRITE_UNICODE_RANGE {
     last: UINT32,
 }}
 
-IFDEF!{
 STRUCT!{struct DWRITE_SCRIPT_PROPERTIES {
     isoScriptCode: UINT32,
     isoScriptNumber: UINT32,
@@ -529,9 +527,7 @@ BITFIELD!{DWRITE_SCRIPT_PROPERTIES bitfield0: UINT32 [
     isCursiveWriting set_isCursiveWriting[6..7],
     reserved set_reserved[7..32],
 ]}
-}
 
-IFDEF!{
 STRUCT!{struct DWRITE_JUSTIFICATION_OPPORTUNITY {
     expansionMinimum: FLOAT,
     expansionMaximum: FLOAT,
@@ -547,7 +543,6 @@ BITFIELD!{DWRITE_JUSTIFICATION_OPPORTUNITY bitfield0: UINT32 [
     applyToTrailingEdge set_applyToTrailingEdge[19..20],
     reserved set_reserved[20..32],
 ]}
-}
 
 RIDL!{#[uuid(0x30572f99, 0xdac6, 0x41db, 0xa1, 0x6e, 0x04, 0x86, 0x30, 0x7e, 0x60, 0x6a)]
 interface IDWriteFactory1(IDWriteFactory1Vtbl): 
@@ -565,12 +560,12 @@ interface IDWriteFactory1(IDWriteFactory1Vtbl):
 RIDL!{#[uuid(0xa71efdb4, 0x9fdb, 0x4838, 0xad, 0x90, 0xcf, 0xc3, 0xbe, 0x8c, 0x3d, 0xaf)]
 interface IDWriteFontFace1(IDWriteFontFace1Vtbl): 
     IDWriteFontFace(IDWriteFontFaceVtbl) {
-    fn GetMetrics(fontMetrics: *mut DWRITE_FONT_METRICS1) -> c_void,
+    fn GetMetrics(fontMetrics: *mut DWRITE_FONT_METRICS1) -> (),
     fn GetGdiCompatibleMetrics(
         emSize: FLOAT, pixelsPerDip: FLOAT, transform: *const DWRITE_MATRIX,
         fontMetrics: *mut DWRITE_FONT_METRICS1
     ) -> HRESULT,
-    fn GetCaretMetrics(caretMetrics: *mut DWRITE_CARET_METRICS) -> c_void,
+    fn GetCaretMetrics(caretMetrics: *mut DWRITE_CARET_METRICS) -> (),
     fn GetUnicodeRanges(
         maxRangeCount: UINT32, unicodeRanges: *mut DWRITE_UNICODE_RANGE,
         actualRangeCount: *mut UINT32
@@ -602,8 +597,8 @@ interface IDWriteFontFace1(IDWriteFontFace1Vtbl):
 
 RIDL!{#[uuid(0xacd16696, 0x8c14, 0x4f5d, 0x87, 0x7e, 0xfe, 0x3f, 0xc1, 0xd3, 0x27, 0x38)]
 interface IDWriteFont1(IDWriteFont1Vtbl): IDWriteFont(IDWriteFontVtbl) {
-    fn GetMetrics(fontMetrics: *mut DWRITE_FONT_METRICS1) -> c_void,
-    fn GetPanose(panose: *mut DWRITE_PANOSE) -> c_void,
+    fn GetMetrics(fontMetrics: *mut DWRITE_FONT_METRICS1) -> (),
+    fn GetPanose(panose: *mut DWRITE_PANOSE) -> (),
     fn GetUnicodeRanges(
         maxRangeCount: UINT32, unicodeRanges: *mut DWRITE_UNICODE_RANGE,
         actualRangeCount: *mut UINT32

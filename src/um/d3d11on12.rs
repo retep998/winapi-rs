@@ -15,18 +15,18 @@ use um::d3dcommon::{ D3D_FEATURE_LEVEL };
 use um::unknwnbase::{ IUnknown, IUnknownVtbl };
 use um::winnt::{ HRESULT };
 
-pub type PFN_D3D11ON12_CREATE_DEVICE = Option<unsafe extern "system" fn(
+FN!{stdcall PFN_D3D11ON12_CREATE_DEVICE(
     *mut IUnknown,
     UINT,
     *const D3D_FEATURE_LEVEL,
-    FeatureLevels: UINT,
+    UINT,
     *mut *mut IUnknown,
-    NumQueues: UINT,
+    UINT,
     UINT,
     *mut *mut ID3D11Device,
     *mut *mut ID3D11DeviceContext,
     *mut D3D_FEATURE_LEVEL
-    ) -> HRESULT>;
+    ) -> HRESULT}
 EXTERN!{stdcall fn D3D11On12CreateDevice(
     pDevice: *mut IUnknown,
     Flags: UINT,
@@ -55,10 +55,10 @@ interface ID3D11On12Device(ID3D11On12DeviceVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
     fn ReleaseWrappedResources(
         ppResources: *mut *mut ID3D11Resource, NumResources: UINT
-    ) -> c_void,
+    ) -> (),
     fn AcquireWrappedResources(
         ppResources: *mut *mut ID3D11Resource, NumResources: UINT
-    ) -> c_void
+    ) -> ()
 }}
 
 DEFINE_GUID!{IID_ID3D11On12Device,
