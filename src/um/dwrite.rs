@@ -1,5 +1,9 @@
-// Copyright © 2015, Connor Hilarides
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! DirectX Typography Services public API definitions.
 use ctypes::c_void;
 use shared::basetsd::{INT16, INT32, UINT16, UINT32, UINT64, UINT8};
@@ -1155,11 +1159,6 @@ interface IDWriteFactory(IDWriteFactoryVtbl): IUnknown(IUnknownVtbl) {
         baselineOriginY: FLOAT, glyphRunAnalysis: *mut *mut IDWriteGlyphRunAnalysis
     ) -> HRESULT
 }}
-EXTERN!{stdcall fn DWriteCreateFactory(
-    factoryType: DWRITE_FACTORY_TYPE,
-    iid: *const IID,
-    factory: *mut *mut IUnknown
-) -> HRESULT}
 pub const FACILITY_DWRITE: HRESULT = 0x898;
 pub const DWRITE_ERR_BASE: HRESULT = 0x5000;
 #[inline]
