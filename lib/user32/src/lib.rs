@@ -2,7 +2,13 @@
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to user32.
 #![cfg(windows)]
+
+pub mod isolation_aware;
+
 extern crate winapi;
+#[cfg(test)]
+#[cfg_attr(test, macro_use)]
+extern crate kernel32;
 use winapi::*;
 extern "system" {
     pub fn ActivateKeyboardLayout(hkl: HKL, flags: UINT) -> HKL;
