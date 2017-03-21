@@ -1,4 +1,6 @@
-macro_rules! wrapper_isolation_aware {
+#[macro_export]
+#[doc(hidden)]
+macro_rules! __winapi_wrapper_isolation_aware {
     () => ();
     (
         pub fn $isolation_aware_fn_name:ident($($param:ident: $param_ty:ty),*) $(-> $ret:ty)*
@@ -32,15 +34,18 @@ macro_rules! wrapper_isolation_aware {
             }
         }
 
-        wrapper_isolation_aware!{$($rest)*}
+        __winapi_wrapper_isolation_aware!{$($rest)*}
     };
 }
 
 #[macro_export]
 #[doc(hidden)]
 macro_rules! __winapi_basic_isolation_aware {
-    () => ();
+    (crate_root = $crate_root:ident; ia_kernel32 = $($p:ident)::+;) => ();
     (
+        crate_root = $crate_root:ident;
+        ia_kernel32 = $($p:ident)::+;
+
         pub fn $isolation_aware_fn_name:ident($($param:ident: $param_ty:ty),*) $(-> $ret:ty)*
             where normal_ident = $fn_name:ident,
                   default_ret = $default_ret:expr;
@@ -50,16 +55,21 @@ macro_rules! __winapi_basic_isolation_aware {
         #[inline]
         #[allow(non_snake_case)]
         pub unsafe extern "system" fn $isolation_aware_fn_name($($param: $param_ty),*) $(-> $ret)* {
-            if let Some(ulp_cookie) = isolation_aware_prepare() {
-                let result = $crate::$fn_name($($param),*);
-                isolation_aware_finish(ulp_cookie, result == $default_ret);
+            if let Some(ulp_cookie) = $($p::)+isolation_aware_prepare() {
+                let result = $crate_root::$fn_name($($param),*);
+                $($p::)+isolation_aware_finish(ulp_cookie, result == $default_ret);
                 result
             } else {
                 $default_ret
             }
         }
 
-        __winapi_basic_isolation_aware!{$($rest)*}
+        __winapi_basic_isolation_aware!{
+            crate_root = $crate_root;
+            ia_kernel32 = $($p)::+;
+
+            $($rest)*
+        }
     };
 }
 
@@ -70,7 +80,7 @@ macro_rules! isolation_aware_kernel32 {
         use self::__ia_kernel32_inner_winapi::*;
         use std::{mem, ptr};
 
-        wrapper_isolation_aware!{
+        __winapi_wrapper_isolation_aware!{
             pub fn IsolationAwareCreateActCtxW(pcActCtx: PCACTCTXW) -> HANDLE
                 where normal_ident = CreateActCtxW,
                       default_ret = INVALID_HANDLE_VALUE;
@@ -125,22 +135,24 @@ macro_rules! isolation_aware_kernel32 {
         }
 
         __winapi_basic_isolation_aware!{
+            crate_root = $crate;
+            ia_kernel32 = self;
             pub fn IsolationAwareLoadLibraryExA(
                 lpLibFileName: LPCSTR, hFile: HANDLE, dwFlags: DWORD
             ) -> HMODULE
-                    where normal_ident = LoadLibraryExA,
-                          default_ret = ptr::null_mut();
+                where normal_ident = LoadLibraryExA,
+                      default_ret = ptr::null_mut();
             pub fn IsolationAwareLoadLibraryExW(
                 lpLibFileName: LPCWSTR, hFile: HANDLE, dwFlags: DWORD
             ) -> HMODULE
-                    where normal_ident = LoadLibraryExW,
-                          default_ret = ptr::null_mut();
+                where normal_ident = LoadLibraryExW,
+                      default_ret = ptr::null_mut();
             pub fn IsolationAwareLoadLibraryA(lpLibFileName: LPCSTR) -> HMODULE
-                    where normal_ident = LoadLibraryA,
-                          default_ret = ptr::null_mut();
+                where normal_ident = LoadLibraryA,
+                      default_ret = ptr::null_mut();
             pub fn IsolationAwareLoadLibraryW(lpLibFileName: LPCWSTR) -> HMODULE
-                    where normal_ident = LoadLibraryW,
-                          default_ret = ptr::null_mut();
+                where normal_ident = LoadLibraryW,
+                      default_ret = ptr::null_mut();
         }
 
 
@@ -274,7 +286,8 @@ macro_rules! isolation_aware_kernel32 {
             true
         }
 
-        unsafe fn isolation_aware_prepare() -> Option<ULONG_PTR> {
+        #[doc(hidden)]
+        pub unsafe fn isolation_aware_prepare() -> Option<ULONG_PTR> {
             let mut ulp_cookie = 0;
             // If cleanup is ever implemented, don't call `isolation_aware_init_inner` or
             // `IsolationAwareActivateActCtx` after cleanup.
@@ -302,7 +315,8 @@ macro_rules! isolation_aware_kernel32 {
             }
         }
 
-        unsafe fn isolation_aware_finish(ulp_cookie: ULONG_PTR, call_successful: bool) {
+        #[doc(hidden)]
+        pub unsafe fn isolation_aware_finish(ulp_cookie: ULONG_PTR, call_successful: bool) {
             if ISOLATION_AWARE_INIT_FAILED == false {
                 let last_error = if call_successful {$crate::GetLastError()} else {NO_ERROR};
                 IsolationAwareDeactivateActCtx(0, ulp_cookie);
