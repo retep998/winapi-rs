@@ -6,7 +6,7 @@
 // except according to those terms.
 //! ApiSet Contract for api-ms-win-core-libraryloader-l1
 use shared::basetsd::LONG_PTR;
-use shared::minwindef::{BOOL, HMODULE, WORD};
+use shared::minwindef::{BOOL, DWORD, HMODULE, WORD};
 use um::winnt::{LPCSTR, LPCWSTR, LPSTR, LPWSTR, PVOID};
 pub type DLL_DIRECTORY_COOKIE = PVOID;
 pub type PDLL_DIRECTORY_COOKIE = *mut PVOID;
@@ -28,3 +28,21 @@ pub type ENUMRESTYPEPROCA = Option<unsafe extern "system" fn(
 pub type ENUMRESTYPEPROCW = Option<unsafe extern "system" fn(
     hModule: HMODULE, lpType: LPWSTR, lParam: LONG_PTR,
 ) -> BOOL>;
+extern "system" {
+    pub fn GetModuleHandleA(
+        lpModuleName: LPCSTR,
+    ) -> HMODULE;
+    pub fn GetModuleHandleW(
+        lpModuleName: LPCWSTR,
+    ) -> HMODULE;
+    pub fn GetModuleHandleExA(
+        dwFlags: DWORD,
+        lpModuleName: LPCSTR,
+        phModule: *mut HMODULE,
+    ) -> BOOL;
+    pub fn GetModuleHandleExW(
+        dwFlags: DWORD,
+        lpModuleName: LPCWSTR,
+        phModule: *mut HMODULE,
+    ) -> BOOL;
+}

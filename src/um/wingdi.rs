@@ -9,7 +9,7 @@ use ctypes::{c_char, c_int, c_long, c_short, c_ushort};
 use shared::basetsd::ULONG_PTR;
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, HMETAFILE, LPARAM, LPVOID, MAX_PATH, UINT, ULONG,
                         USHORT, WORD};
-use shared::windef::{COLORREF, HDC, HGDIOBJ, POINT, RECT, RECTL, SIZEL};
+use shared::windef::{COLORREF, HBRUSH, HDC, HGDIOBJ, POINT, RECT, RECTL, SIZEL};
 use um::winnt::{CHAR, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PSTR, SHORT, VOID, WCHAR};
 pub const R2_BLACK: c_int = 1;
 pub const R2_NOTMERGEPEN: c_int = 2;
@@ -1256,3 +1256,8 @@ pub const NULLREGION: c_int = 1;
 pub const SIMPLEREGION: c_int = 2;
 pub const COMPLEXREGION: c_int = 3;
 pub const RGN_ERROR: c_int = ERROR;
+extern "system" {
+    pub fn CreateSolidBrush(
+        color: COLORREF,
+    ) -> HBRUSH;
+}

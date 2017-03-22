@@ -400,8 +400,6 @@ extern "system" {
     pub fn LoadCursorFromFileA(lpFileName: LPCSTR) -> HCURSOR;
     pub fn LoadCursorFromFileW(lpFileName: LPCWSTR) -> HCURSOR;
     pub fn LoadCursorW(hInstance: HINSTANCE, lpCursorName: LPCWSTR) -> HCURSOR;
-    pub fn LoadIconA(hInstance: HINSTANCE, lpIconName: LPCSTR) -> HICON;
-    pub fn LoadIconW(hInstance: HINSTANCE, lpIconName: LPCWSTR) -> HICON;
     pub fn LoadImageA(
         hInst: HINSTANCE, name: LPCSTR, type_: UINT, cx: c_int, cy: c_int, fuLoad: UINT,
     ) -> HANDLE;
