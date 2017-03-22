@@ -1,55 +1,4 @@
 #[macro_export]
-#[doc(hidden)]
-macro_rules! __winapi_comctl_isolation_aware {
-    (ia_kernel32 = $($p:ident)::+;) => ();
-    (
-        ia_kernel32 = $($p:ident)::+;
-
-        pub fn $isolation_aware_fn_name:ident($($param:ident: $param_ty:ty),*) $(-> $ret:ty)*
-            where normal_ident = $fn_name:ident,
-                  default_ret = $default_ret:expr;
-
-        $($rest:tt)*
-    ) => {
-        #[inline]
-        #[allow(non_snake_case)]
-        pub unsafe extern "system" fn $isolation_aware_fn_name($($param: $param_ty),*) $(-> $ret)* {
-            extern "system" fn default_pfn($(_: $param_ty),*) $(-> $ret)* {
-                panic!("Attempted to call un-initialized function")
-            }
-
-            type FnType = extern "system" fn($($param_ty),*) $(-> $ret)*;
-            static mut PFN: FnType = default_pfn;
-
-            if let Some(ulp_cookie) = $($p::)+isolation_aware_prepare() {
-                if PFN as *const () == default_pfn as FnType as *const () {
-                    let pfn = load_comctl_fn(concat!(stringify!($fn_name), "\0").as_ptr() as *const c_char);
-
-                    if pfn != ptr::null() {
-                        PFN = mem::transmute(pfn);
-                    } else {
-                        $($p::)+isolation_aware_finish(ulp_cookie, true);
-                        return $default_ret;
-                    }
-                }
-
-                let ret = PFN($($param),*);
-                $($p::)+isolation_aware_finish(ulp_cookie, false);
-                ret
-            } else {
-                $default_ret
-            }
-        }
-
-        __winapi_comctl_isolation_aware!{
-            ia_kernel32 = $($p)::+;
-
-            $($rest)*
-        }
-    }
-}
-
-#[macro_export]
 macro_rules! isolation_aware_comctl32 {
     (mod_ia_kernel32 = $($p:ident)::+) => {mod __ia_comctl32_inner {
         #![allow(dead_code)]
@@ -59,7 +8,7 @@ macro_rules! isolation_aware_comctl32 {
         extern crate kernel32 as __kernel32;
         use std::{ptr, mem};
 
-        __winapi_comctl_isolation_aware!{
+        __winapi_comstar_isolation_aware!{
             ia_kernel32 = $($p)::+;
 
             pub fn IsolationAwareCreateMappedBitmap(
@@ -298,7 +247,7 @@ macro_rules! isolation_aware_comctl32 {
                       default_ret = S_OK;
         }
         // Split into two invocations to avoid macro recursion errors
-        __winapi_comctl_isolation_aware!{
+        __winapi_comstar_isolation_aware!{
             ia_kernel32 = $($p)::+;
 
             pub fn IsolationAwareImageList_Add(
