@@ -3,7 +3,7 @@
 //! FFI bindings to kernel32.
 #![cfg(windows)]
 
-pub mod isolation_aware;
+mod isolation_aware;
 
 extern crate winapi;
 use winapi::*;

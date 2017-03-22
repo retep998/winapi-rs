@@ -3,7 +3,7 @@
 //! FFI bindings to comctl32.
 #![cfg(windows)]
 
-pub mod isolation_aware;
+mod isolation_aware;
 
 extern crate winapi;
 #[cfg(test)]
