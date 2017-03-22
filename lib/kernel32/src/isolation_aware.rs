@@ -76,6 +76,7 @@ macro_rules! __winapi_basic_isolation_aware {
 #[macro_export]
 macro_rules! isolation_aware_kernel32 {
     () => {mod __ia_kernel32_inner {
+        #![allow(dead_code)]
         extern crate winapi as __ia_kernel32_inner_winapi;
         use self::__ia_kernel32_inner_winapi::*;
         use std::{mem, ptr};

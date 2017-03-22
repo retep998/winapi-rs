@@ -1,14 +1,14 @@
 #[macro_export]
 macro_rules! isolation_aware_user32 {
     (mod_ia_kernel32 = $($p:ident)::+) => {mod __ia_user32_inner {
+        #![allow(dead_code)]
         extern crate winapi as __ia_user32_inner_winapi;
         use self::__ia_user32_inner_winapi::*;
-        use super::*;
         use std::ptr;
 
         __winapi_basic_isolation_aware!{
             crate_root = $crate;
-            ia_kernel32 = $($p)::+;
+            ia_kernel32 = super::$($p)::+;
             pub fn IsolationAwareCreateDialogIndirectParamA(
                 hInstance: HINSTANCE, lpTemplate: LPCDLGTEMPLATEA, hWndParent: HWND,
                 lpDialogFunc: DLGPROC, dwInitParam: LPARAM

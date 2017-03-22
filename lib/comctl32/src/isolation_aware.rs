@@ -52,15 +52,15 @@ macro_rules! __winapi_comctl_isolation_aware {
 #[macro_export]
 macro_rules! isolation_aware_comctl32 {
     (mod_ia_kernel32 = $($p:ident)::+) => {mod __ia_comctl32_inner {
+        #![allow(dead_code)]
         extern crate winapi as __ia_kernel32_inner_winapi;
         use self::__ia_kernel32_inner_winapi::*;
-        use super::*;
-        use $($p)::+ as ia_kernel32;
+        use super::$($p)::+ as ia_kernel32;
         extern crate kernel32 as __kernel32;
         use std::{ptr, mem};
 
         __winapi_comctl_isolation_aware!{
-            ia_kernel32 = $($p)::+;
+            ia_kernel32 = super::$($p)::+;
 
             pub fn IsolationAwareCreateMappedBitmap(
                 hInstance: HINSTANCE, idBitmap: INT_PTR, wFlags: UINT, lpColorMap: LPCOLORMAP,
@@ -299,7 +299,7 @@ macro_rules! isolation_aware_comctl32 {
         }
         // Split into two invocations to avoid macro recursion errors
         __winapi_comctl_isolation_aware!{
-            ia_kernel32 = $($p)::+;
+            ia_kernel32 = super::$($p)::+;
 
             pub fn IsolationAwareImageList_Add(
                 himl: HIMAGELIST, hbmImage: HBITMAP, hbmMask: HBITMAP
