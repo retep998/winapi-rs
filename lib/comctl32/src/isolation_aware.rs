@@ -22,7 +22,7 @@ macro_rules! __winapi_comctl_isolation_aware {
             static mut PFN: FnType = default_pfn;
 
             if let Some(ulp_cookie) = $($p::)+isolation_aware_prepare() {
-                if PFN as *const usize == &default_pfn as *const _ as *const usize {
+                if PFN as *const () == default_pfn as FnType as *const () {
                     let pfn = load_comctl_fn(concat!(stringify!($fn_name), "\0").as_ptr() as *const c_char);
 
                     if pfn != ptr::null() {
