@@ -8,7 +8,7 @@ macro_rules! isolation_aware_user32 {
 
         __winapi_basic_isolation_aware!{
             crate_root = $crate;
-            ia_kernel32 = super::$($p)::+;
+            ia_kernel32 = ::$($p)::+;
             pub fn IsolationAwareCreateDialogIndirectParamA(
                 hInstance: HINSTANCE, lpTemplate: LPCDLGTEMPLATEA, hWndParent: HWND,
                 lpDialogFunc: DLGPROC, dwInitParam: LPARAM
@@ -878,4 +878,4 @@ pub mod ia_kernel32 {
 }
 
 #[cfg(test)]
-isolation_aware_user32!(mod_ia_kernel32 = self::ia_kernel32);
+isolation_aware_user32!(mod_ia_kernel32 = isolation_aware::ia_kernel32);

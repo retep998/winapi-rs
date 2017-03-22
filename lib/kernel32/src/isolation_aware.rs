@@ -41,10 +41,10 @@ macro_rules! __winbase_wrapper_isolation_aware {
 #[macro_export]
 #[doc(hidden)]
 macro_rules! __winapi_basic_isolation_aware {
-    (crate_root = $crate_root:ident; ia_kernel32 = $($p:ident)::+;) => ();
+    (crate_root = $crate_root:ident; ia_kernel32 = $p:path;) => ();
     (
         crate_root = $crate_root:ident;
-        ia_kernel32 = $($p:ident)::+;
+        ia_kernel32 = $p:path;
 
         pub fn $isolation_aware_fn_name:ident($($param:ident: $param_ty:ty),*) $(-> $ret:ty)*
             where normal_ident = $fn_name:ident,
@@ -55,9 +55,11 @@ macro_rules! __winapi_basic_isolation_aware {
         #[inline]
         #[allow(non_snake_case)]
         pub unsafe extern "system" fn $isolation_aware_fn_name($($param: $param_ty),*) $(-> $ret)* {
-            if let Some(ulp_cookie) = $($p::)+isolation_aware_prepare() {
+            use $p::{isolation_aware_prepare, isolation_aware_finish};
+
+            if let Some(ulp_cookie) = isolation_aware_prepare() {
                 let result = $crate_root::$fn_name($($param),*);
-                $($p::)+isolation_aware_finish(ulp_cookie, result == $default_ret);
+                isolation_aware_finish(ulp_cookie, result == $default_ret);
                 result
             } else {
                 $default_ret
@@ -66,7 +68,7 @@ macro_rules! __winapi_basic_isolation_aware {
 
         __winapi_basic_isolation_aware!{
             crate_root = $crate_root;
-            ia_kernel32 = $($p)::+;
+            ia_kernel32 = $p;
 
             $($rest)*
         }
