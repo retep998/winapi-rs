@@ -75,7 +75,53 @@ macro_rules! __winapi_basic_isolation_aware {
 
 #[macro_export]
 macro_rules! isolation_aware_kernel32 {
-    () => {mod __ia_kernel32_inner {
+    () => {isolation_aware_kernel32!{{
+        const GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT: DWORD = 0x00000002;
+        const GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS: DWORD = 0x00000004;
+
+        let mut self_hmod = ptr::null_mut();
+
+        // Do we need to call this function indirectly on 32-bit? The offical headers do,
+        // but some testing should be done to see if it's actually warranted.
+        let get_module_handle_result = $crate::GetModuleHandleExW(
+            GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT |
+            GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS,
+            &ISOLATION_AWARE_HANDLE as *const _ as LPCWSTR,
+            &mut self_hmod
+        );
+
+        if FALSE == get_module_handle_result {
+            return false;
+        }
+
+        let mut self_module_path: [WCHAR; MAX_PATH + 1] = [0; MAX_PATH + 1];
+        let get_file_name_result = $crate::GetModuleFileNameW(
+            self_hmod,
+            self_module_path.as_mut_ptr(),
+            self_module_path.len() as DWORD
+        );
+        if get_file_name_result == 0 ||
+           get_file_name_result >= self_module_path.len() as DWORD
+        {
+            $crate::SetLastError(ERROR_BUFFER_OVERFLOW);
+            return false;
+        }
+
+        const ACTCTX_FLAG_HMODULE_VALID: DWORD = 0x00000080;
+        const ACTCTX_FLAG_RESOURCE_NAME_VALID: DWORD = 0x00000008;
+
+        let mut act_ctx = ACTCTXW {
+            cbSize: mem::size_of::<ACTCTXW>() as ULONG,
+            dwFlags: ACTCTX_FLAG_RESOURCE_NAME_VALID | ACTCTX_FLAG_HMODULE_VALID,
+            lpSource: self_module_path.as_mut_ptr(),
+            lpResourceName: 124 as ULONG_PTR as LPCWSTR,
+            hModule: self_hmod,
+            ..mem::zeroed()
+        };
+
+        IsolationAwareCreateActCtxW(&mut act_ctx)
+    }}};
+    ($create_activation_ctx:expr) => {mod __ia_kernel32_inner {
         #![allow(dead_code)]
         extern crate winapi as __ia_kernel32_inner_winapi;
         use self::__ia_kernel32_inner_winapi::*;
@@ -198,50 +244,8 @@ macro_rules! isolation_aware_kernel32 {
             }
 
             if context_basic_info.act_ctx == ptr::null_mut() {
-                const GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT: DWORD = 0x00000002;
-                const GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS: DWORD = 0x00000004;
+                context_basic_info.act_ctx = $create_activation_ctx;
 
-                let mut self_hmod = ptr::null_mut();
-
-                // Do we need to call this function indirectly on 32-bit? The offical headers do,
-                // but some testing should be done to see if it's actually warranted.
-                let get_module_handle_result = $crate::GetModuleHandleExW(
-                    GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT |
-                    GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS,
-                    &ISOLATION_AWARE_HANDLE as *const _ as LPCWSTR,
-                    &mut self_hmod
-                );
-
-                if FALSE == get_module_handle_result {
-                    return false;
-                }
-
-                let mut self_module_path: [WCHAR; MAX_PATH + 1] = [0; MAX_PATH + 1];
-                let get_file_name_result = $crate::GetModuleFileNameW(
-                    self_hmod,
-                    self_module_path.as_mut_ptr(),
-                    self_module_path.len() as DWORD
-                );
-                if get_file_name_result == 0 ||
-                   get_file_name_result >= self_module_path.len() as DWORD
-                {
-                    $crate::SetLastError(ERROR_BUFFER_OVERFLOW);
-                    return false;
-                }
-
-                const ACTCTX_FLAG_HMODULE_VALID: DWORD = 0x00000080;
-                const ACTCTX_FLAG_RESOURCE_NAME_VALID: DWORD = 0x00000008;
-
-                let mut act_ctx = ACTCTXW {
-                    cbSize: mem::size_of::<ACTCTXW>() as ULONG,
-                    dwFlags: ACTCTX_FLAG_RESOURCE_NAME_VALID | ACTCTX_FLAG_HMODULE_VALID,
-                    lpSource: self_module_path.as_mut_ptr(),
-                    lpResourceName: 3 as ULONG_PTR as LPCWSTR,
-                    hModule: self_hmod,
-                    ..mem::zeroed()
-                };
-
-                context_basic_info.act_ctx = IsolationAwareCreateActCtxW(&mut act_ctx);
                 if context_basic_info.act_ctx == INVALID_HANDLE_VALUE {
                     let last_error = $crate::GetLastError();
                     if last_error != ERROR_RESOURCE_DATA_NOT_FOUND &&
