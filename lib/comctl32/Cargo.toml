@@ -13,5 +13,7 @@ build = "build.rs"
 name = "comctl32"
 [dependencies]
 winapi = { version = "0.2.5", path = "../.." }
+[dev-dependencies]
+kernel32-sys = { version = "0.2", path = "../kernel32" }
 [build-dependencies]
 winapi-build = { version = "0.1.1", path = "../../build" }

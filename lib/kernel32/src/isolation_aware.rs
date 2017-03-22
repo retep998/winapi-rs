@@ -1,6 +1,6 @@
 #[macro_export]
 #[doc(hidden)]
-macro_rules! __winapi_wrapper_isolation_aware {
+macro_rules! __winbase_wrapper_isolation_aware {
     () => ();
     (
         pub fn $isolation_aware_fn_name:ident($($param:ident: $param_ty:ty),*) $(-> $ret:ty)*
@@ -34,7 +34,7 @@ macro_rules! __winapi_wrapper_isolation_aware {
             }
         }
 
-        __winapi_wrapper_isolation_aware!{$($rest)*}
+        __winbase_wrapper_isolation_aware!{$($rest)*}
     };
 }
 
@@ -80,7 +80,7 @@ macro_rules! isolation_aware_kernel32 {
         use self::__ia_kernel32_inner_winapi::*;
         use std::{mem, ptr};
 
-        __winapi_wrapper_isolation_aware!{
+        __winbase_wrapper_isolation_aware!{
             pub fn IsolationAwareCreateActCtxW(pcActCtx: PCACTCTXW) -> HANDLE
                 where normal_ident = CreateActCtxW,
                       default_ret = INVALID_HANDLE_VALUE;
@@ -165,6 +165,11 @@ macro_rules! isolation_aware_kernel32 {
         static mut ISOLATION_AWARE_HANDLE: HANDLE = INVALID_HANDLE_VALUE;
         static mut ISOLATION_AWARE_INIT_FAILED: bool = false; // IsolationAwarePrivateT_SqbjaYRiRY
         static mut ISOLATION_AWARE_CTX_CREATED: bool = false;
+
+        #[inline]
+        pub unsafe fn isolation_aware_init_failed() -> bool {
+            ISOLATION_AWARE_INIT_FAILED
+        }
 
         #[inline]
         unsafe fn isolation_aware_init_inner() -> bool {
@@ -310,17 +315,18 @@ macro_rules! isolation_aware_kernel32 {
                     ISOLATION_AWARE_INIT_FAILED = true;
                     Some(ulp_cookie)
                 } else {
+                    assert_eq!(0, ulp_cookie);
                     None
                 }
             }
         }
 
         #[doc(hidden)]
-        pub unsafe fn isolation_aware_finish(ulp_cookie: ULONG_PTR, call_successful: bool) {
+        pub unsafe fn isolation_aware_finish(ulp_cookie: ULONG_PTR, preserve_last_err: bool) {
             if ISOLATION_AWARE_INIT_FAILED == false {
-                let last_error = if call_successful {$crate::GetLastError()} else {NO_ERROR};
+                let last_error = if preserve_last_err {$crate::GetLastError()} else {NO_ERROR};
                 IsolationAwareDeactivateActCtx(0, ulp_cookie);
-                if call_successful {
+                if preserve_last_err {
                     $crate::SetLastError(last_error);
                 }
             }

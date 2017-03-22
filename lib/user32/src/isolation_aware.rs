@@ -1,3 +1,4 @@
+#[macro_export]
 macro_rules! isolation_aware_user32 {
     (mod_ia_kernel32 = $($p:ident)::+) => {mod __ia_user32_inner {
         extern crate winapi as __ia_user32_inner_winapi;
