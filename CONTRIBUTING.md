@@ -14,10 +14,16 @@
 * One parameter per line.
 
 ```Rust
-EXTERN!{stdcall fn CoGetMalloc(
-    dwMemContext: DWORD,
-    ppMalloc: *mut LPMALLOC
-) -> HRESULT}
+extern "system" {
+    pub fn GetProcessTimes(
+        hProcess: HANDLE,
+        lpCreationTime: LPFILETIME,
+        lpExitTime: LPFILETIME,
+        lpKernelTime: LPFILETIME,
+        lpUserTime: LPFILETIME,
+    ) -> BOOL;
+    pub fn GetCurrentProcess() -> HANDLE;
+}
 ```
 
 ##Constants
@@ -56,5 +62,6 @@ pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
 ##Organization of code
 
 * All definitions go into the source file that directly maps to the header the definition is from.
-** Stuff in `winrt` is special and has its own namespaced organization.
+** Stuff in `src/winrt` is special and has its own namespaced organization.
 * Definitions are defined in the same order as they are in the original header.
+* The `lib` folder is legacy from 0.2 and will eventually disappear once all definitions have been moved to their correct locations.
