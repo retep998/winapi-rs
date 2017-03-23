@@ -8,11 +8,15 @@
 use shared::basetsd::ULONG_PTR;
 use shared::guiddef::{GUID, IID, REFGUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, UINT, ULONG, USHORT, WORD};
-use shared::wtypes::{BSTR, CY, DATE, DECIMAL, VARIANT_BOOL, VARTYPE, VT_BSTR, VT_DISPATCH, VT_ERROR,
-                     VT_I1, VT_I2, VT_I4, VT_I8, VT_RECORD, VT_RESERVED, VT_UNKNOWN, VT_VARIANT,
-                     wireBSTR};
-use shared::wtypesbase::{BYTE_SIZEDARR, DOUBLE, DWORD_SIZEDARR, HYPER_SIZEDARR, LPOLESTR, LPCOLESTR,
-                         SCODE, WORD_SIZEDARR};
+use shared::wtypes::{
+    BSTR, CY, DATE, DECIMAL, VARIANT_BOOL, VARTYPE, VT_BSTR, VT_DISPATCH, VT_ERROR,
+    VT_I1, VT_I2, VT_I4, VT_I8, VT_RECORD, VT_RESERVED, VT_UNKNOWN, VT_VARIANT,
+    wireBSTR
+};
+use shared::wtypesbase::{
+    BYTE_SIZEDARR, DOUBLE, DWORD_SIZEDARR, HYPER_SIZEDARR, LPOLESTR, LPCOLESTR,
+    SCODE, WORD_SIZEDARR
+};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{CHAR, HRESULT, LCID, LONG, LONGLONG, PVOID, SHORT, ULONGLONG};
 pub type wireBRECORD = *mut _wireBRECORD;
