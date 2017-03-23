@@ -67,7 +67,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("consoleapi", &["minwindef", "wincon", "winnt"], &["kernel32"]),
     ("corsym", &["basetsd", "objidlbase", "unknwnbase", "winnt"], &[]),
     ("d2d1", &["basetsd", "d2dbasetypes", "d3dcommon", "dcommon", "dwrite", "dxgi", "guiddef", "minwindef", "unknwnbase", "wincodec", "windef", "winnt"], &[]),
-    ("d2d1_1", &["documenttarget", "d2d1", "d2d1effectauthor"], &["d2d1"]),
+    ("d2d1_1", &["basetsd", "minwindef", "guiddef", "dxgiformat", "dxgi", "objidlbase", "winnt", "unknwnbase", "wincodec", "documenttarget", "dcommon", "dwrite", "d2dbasetypes", "d2d1", "d2d1effectauthor"], &["d2d1"]),
     ("d2d1effects", &[], &[]),
     ("d2d1effectauthor", &["basetsd", "minwindef", "ntdef", "unknwnbase"], &[]),
     ("d2dbasetypes", &["basetsd", "d3d9types", "minwindef", "windef"], &[]),
