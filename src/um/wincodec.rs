@@ -1514,52 +1514,41 @@ interface IWICImagingFactory2(IWICImagingFactory2Vtbl) : IWICImagingFactory(IWIC
     ) -> HRESULT
 });
 
-EXTERN!{stdcall fn WICConvertBitmapSource(
-     dstFormat: REFWICPixelFormatGUID,
-     pISrc: *const IWICBitmapSource,
-     ppIDst: *mut *mut IWICBitmapSource
-) -> HRESULT}
-
-EXTERN!{stdcall fn WICCreateBitmapFromSection(
-     width: UINT,
-     height: UINT,
-     pixelFormat: REFWICPixelFormatGUID,
-     hSection: HANDLE,
-     stride: UINT,
-     offset: UINT,
-     ppIBitmap: *mut *mut IWICBitmap
-) -> HRESULT}
-
-EXTERN!{stdcall fn WICCreateBitmapFromSectionEx(
-     width: UINT,
-     height: UINT,
-     pixelFormat: REFWICPixelFormatGUID,
-     hSection: HANDLE,
-     stride: UINT,
-     offset: UINT,
-     desiredAccessLevel: WICSectionAccessLevel,
-     ppIBitmap: *mut *mut IWICBitmap
-) -> HRESULT}
-
-EXTERN!{stdcall fn WICMapGuidToShortName(
-    guid: REFGUID,
-    cchName: UINT,
-    wzName: *mut WCHAR,
-    pcchActual: *mut UINT
-) -> HRESULT}
-
-EXTERN!{stdcall fn WICMapShortNameToGuid(
-    wzName: PCWSTR,
-    pguid: *mut GUID
-) -> HRESULT}
-
-EXTERN!{stdcall fn WICMapSchemaToName(
-    guidMetadataFormat: REFGUID,
-    pwzSchema: LPWSTR,
-    cchName: UINT,
-    wzName: *mut WCHAR,
-    pcchActual: *mut UINT
-) -> HRESULT}
+extern "system" {
+    pub fn WICConvertBitmapSource(dstFormat: REFWICPixelFormatGUID,
+                                  pISrc: *const IWICBitmapSource,
+                                  ppIDst: *mut *mut IWICBitmapSource)
+                                  -> HRESULT;
+    pub fn WICCreateBitmapFromSection(width: UINT,
+                                      height: UINT,
+                                      pixelFormat: REFWICPixelFormatGUID,
+                                      hSection: HANDLE,
+                                      stride: UINT,
+                                      offset: UINT,
+                                      ppIBitmap: *mut *mut IWICBitmap)
+                                      -> HRESULT;
+    pub fn WICCreateBitmapFromSectionEx(width: UINT,
+                                        height: UINT,
+                                        pixelFormat: REFWICPixelFormatGUID,
+                                        hSection: HANDLE,
+                                        stride: UINT,
+                                        offset: UINT,
+                                        desiredAccessLevel: WICSectionAccessLevel,
+                                        ppIBitmap: *mut *mut IWICBitmap)
+                                        -> HRESULT;
+    pub fn WICMapGuidToShortName(guid: REFGUID,
+                                 cchName: UINT,
+                                 wzName: *mut WCHAR,
+                                 pcchActual: *mut UINT)
+                                 -> HRESULT;
+    pub fn WICMapShortNameToGuid(wzName: PCWSTR, pguid: *mut GUID) -> HRESULT;
+    pub fn WICMapSchemaToName(guidMetadataFormat: REFGUID,
+                              pwzSchema: LPWSTR,
+                              cchName: UINT,
+                              wzName: *mut WCHAR,
+                              pcchActual: *mut UINT)
+                              -> HRESULT;
+}
 
 pub const FACILITY_WINCODEC_ERR: HRESULT = 0x898;
 pub const WINCODEC_ERR_BASE: HRESULT = 0x2000;

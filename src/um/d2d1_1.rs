@@ -836,36 +836,20 @@ interface ID2D1Multithread(ID2D1MultithreadVtbl): IUnknown(IUnknownVtbl) {
     fn Leave() -> c_void
 });
 
-EXTERN!{stdcall fn D2D1CreateDevice(
-    dxgiDevice: *const IDXGIDevice,
-    creationProperties: *const D2D1_CREATION_PROPERTIES,
-    d2dDevice: *mut *mut ID2D1Device
-) -> HRESULT}
-
-EXTERN!{stdcall fn D2D1CreateDeviceContext(
-    dxgiSurface: *const IDXGISurface,
-    creationProperties: *const D2D1_CREATION_PROPERTIES,
-    d2dDeviceContext: *mut *mut ID2D1DeviceContext
-) -> HRESULT}
-
-EXTERN!{stdcall fn D2D1ConvertColorSpace(
-    sourceColorSpace: D2D1_COLOR_SPACE,
-    destinationColorSpace: D2D1_COLOR_SPACE,
-    color: *const D2D1_COLOR_F
-) -> D2D1_COLOR_F}
-
-EXTERN!{stdcall fn D2D1SinCos(
-    angle: FLOAT,
-    s: *mut FLOAT,
-    c: *mut FLOAT
-) -> c_void}
-
-EXTERN!{stdcall fn D2D1Tan(
-    angle: FLOAT
-) -> FLOAT}
-
-EXTERN!{stdcall fn D2D1Vec3Length(
-    x: FLOAT,
-    y: FLOAT,
-    z: FLOAT
-) -> FLOAT}
+extern "system" {
+    pub fn D2D1CreateDevice(dxgiDevice: *const IDXGIDevice,
+                            creationProperties: *const D2D1_CREATION_PROPERTIES,
+                            d2dDevice: *mut *mut ID2D1Device)
+                            -> HRESULT;
+    pub fn D2D1CreateDeviceContext(dxgiSurface: *const IDXGISurface,
+                                   creationProperties: *const D2D1_CREATION_PROPERTIES,
+                                   d2dDeviceContext: *mut *mut ID2D1DeviceContext)
+                                   -> HRESULT;
+    pub fn D2D1ConvertColorSpace(sourceColorSpace: D2D1_COLOR_SPACE,
+                                 destinationColorSpace: D2D1_COLOR_SPACE,
+                                 color: *const D2D1_COLOR_F)
+                                 -> D2D1_COLOR_F;
+    pub fn D2D1SinCos(angle: FLOAT, s: *mut FLOAT, c: *mut FLOAT) -> c_void;
+    pub fn D2D1Tan(angle: FLOAT) -> FLOAT;
+    pub fn D2D1Vec3Length(x: FLOAT, y: FLOAT, z: FLOAT) -> FLOAT;
+}
