@@ -20,7 +20,7 @@ FN!{stdcall LPOFNHOOKPROC(
     HWND,
     UINT,
     WPARAM,
-    LPARAM
+    LPARAM,
 ) -> UINT_PTR}
 STRUCT!{struct OPENFILENAME_NT4A {
     lStructSize: DWORD,
@@ -425,16 +425,28 @@ interface IPrintDialogCallback(IPrintDialogCallbackVtbl) : IUnknown(IUnknownVtbl
     fn InitDone() -> HRESULT,
     fn SelectionChange() -> HRESULT,
     fn HandleMessage(
-        hDlg: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM,
-        pResult: *mut LRESULT
-    ) -> HRESULT
+        hDlg: HWND,
+        uMsg: UINT,
+        wParam: WPARAM,
+        lParam: LPARAM,
+        pResult: *mut LRESULT,
+    ) -> HRESULT,
 }
 );
 RIDL!(#[uuid(0x509aaeda, 0x5639, 0x11d1, 0xb6, 0xa1, 0x0, 0x0, 0xf8, 0x75, 0x7b, 0xf9)]
 interface IPrintDialogServices(IPrintDialogServicesVtbl) : IUnknown(IUnknownVtbl) {
-    fn GetCurrentDevMode(pDevMode: LPDEVMODEW, pcbSize: *mut UINT) -> HRESULT,
-    fn GetCurrentPrinterName(pPrinterName: LPWSTR, pcchSize: *mut UINT) -> HRESULT,
-    fn GetCurrentPortName(pPortName: LPWSTR, pcchSize: *mut UINT) -> HRESULT
+    fn GetCurrentDevMode(
+        pDevMode: LPDEVMODEW,
+        pcbSize: *mut UINT,
+    ) -> HRESULT,
+    fn GetCurrentPrinterName(
+        pPrinterName: LPWSTR,
+        pcchSize: *mut UINT,
+    ) -> HRESULT,
+    fn GetCurrentPortName(
+        pPortName: LPWSTR,
+        pcchSize: *mut UINT,
+    ) -> HRESULT,
 }
 );
 STRUCT!{struct PRINTPAGERANGE {

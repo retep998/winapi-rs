@@ -245,18 +245,29 @@ RIDL!(
 #[uuid(0xae1c7110, 0x2f60, 0x11d3, 0x8a, 0x39, 0x00, 0xc0, 0x4f, 0x72, 0xd8, 0xe3)]
 interface IVssEnumObject(IVssEnumObjectVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
-        celt: ::ULONG, rgelt: *mut ::VSS_OBJECT_PROP, pceltFetched: *mut ::ULONG
+        celt: ::ULONG,
+        rgelt: *mut ::VSS_OBJECT_PROP,
+        pceltFetched: *mut ::ULONG,
     ) -> ::HRESULT,
-    fn Skip(celt: ::ULONG) -> ::HRESULT,
+    fn Skip(
+        celt: ::ULONG,
+    ) -> ::HRESULT,
     fn Reset() -> ::HRESULT,
-    fn Clone(ppenum: *mut *mut ::IVssEnumObject) -> ::HRESULT
+    fn Clone(
+        ppenum: *mut *mut ::IVssEnumObject,
+    ) -> ::HRESULT,
 }
 );
 RIDL!(
 #[uuid(0x507c37b4, 0xcf5b, 0x4e95, 0xb0, 0xaf, 0x14, 0xeb, 0x97, 0x67, 0x46, 0x7e)]
 interface IVssAsync(IVssAsyncVtbl): IUnknown(IUnknownVtbl) {
     fn Cancel() -> ::HRESULT,
-    fn Wait(dwMilliseconds: ::DWORD) -> ::HRESULT,
-    fn QueryStatus(pHrResult: *mut ::HRESULT, pReserved: *mut ::INT) -> ::HRESULT
+    fn Wait(
+        dwMilliseconds: ::DWORD,
+    ) -> ::HRESULT,
+    fn QueryStatus(
+        pHrResult: *mut ::HRESULT,
+        pReserved: *mut ::INT,
+    ) -> ::HRESULT,
 }
 );

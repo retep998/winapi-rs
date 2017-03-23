@@ -33,52 +33,79 @@ STRUCT!{struct VSS_COMPONENTINFO {
 pub type PVSSCOMPONENTINFO = *const ::VSS_COMPONENTINFO;
 RIDL!(
 interface IVssWMComponent(IVssWMComponentVtbl): IUnknown(IUnknownVtbl) {
-    fn GetComponentInfo(ppInfo: *mut ::PVSSCOMPONENTINFO) -> ::HRESULT,
-    fn FreeComponentInfo(pInfo: ::PVSSCOMPONENTINFO) -> ::HRESULT,
-    fn GetFile(iFile: ::UINT, ppFiledesc: *mut *mut ::IVssWMFiledesc) -> ::HRESULT,
+    fn GetComponentInfo(
+        ppInfo: *mut ::PVSSCOMPONENTINFO,
+    ) -> ::HRESULT,
+    fn FreeComponentInfo(
+        pInfo: ::PVSSCOMPONENTINFO,
+    ) -> ::HRESULT,
+    fn GetFile(
+        iFile: ::UINT,
+        ppFiledesc: *mut *mut ::IVssWMFiledesc,
+    ) -> ::HRESULT,
     fn GetDatabaseFile(
-        iDBFile: ::UINT, ppFiledesc: *mut *mut ::IVssWMFiledesc
+        iDBFile: ::UINT,
+        ppFiledesc: *mut *mut ::IVssWMFiledesc,
     ) -> ::HRESULT,
     fn GetDatabaseLogFile(
-        iDbLogFile: ::UINT, ppFiledesc: *mut *mut ::IVssWMFiledesc
+        iDbLogFile: ::UINT,
+        ppFiledesc: *mut *mut ::IVssWMFiledesc,
     ) -> ::HRESULT,
     fn GetDependency(
-        iDependency: ::UINT, ppDependency: *mut *mut ::IVssWMDependency
-    ) -> ::HRESULT
+        iDependency: ::UINT,
+        ppDependency: *mut *mut ::IVssWMDependency,
+    ) -> ::HRESULT,
 }
 );
 RIDL!(
 #[uuid(0x902fcf7f, 0xb7fd, 0x42f8, 0x81, 0xf1, 0xb2, 0xe4, 0x00, 0xb1, 0xe5, 0xbd)]
 interface IVssExamineWriterMetadata(IVssExamineWriterMetadataVtbl): IUnknown(IUnknownVtbl) {
     fn GetIdentity(
-        pidInstance: *mut ::VSS_ID, pidWriter: *mut ::VSS_ID,
-        pbstrWriterName: *mut ::BSTR, pUsage: *mut ::VSS_USAGE_TYPE,
-        pSource: *mut ::VSS_SOURCE_TYPE
+        pidInstance: *mut ::VSS_ID,
+        pidWriter: *mut ::VSS_ID,
+        pbstrWriterName: *mut ::BSTR,
+        pUsage: *mut ::VSS_USAGE_TYPE,
+        pSource: *mut ::VSS_SOURCE_TYPE,
     ) -> ::HRESULT,
     fn GetFileCounts(pcIncludeFiles: *mut ::UINT, pcExcludeFiles: *mut ::UINT,
-        pcComponents: *mut ::UINT
+        pcComponents: *mut ::UINT,
     ) -> ::HRESULT,
     fn GetIncludeFile(
-        iFile: ::UINT, ppFiledesc: *mut *mut ::IVssWMFiledesc
+        iFile: ::UINT,
+        ppFiledesc: *mut *mut ::IVssWMFiledesc,
     ) -> ::HRESULT,
     fn GetExcludeFile(
-        iFile: ::UINT, ppFiledesc: *mut *mut ::IVssWMFiledesc
+        iFile: ::UINT,
+        ppFiledesc: *mut *mut ::IVssWMFiledesc,
     ) -> ::HRESULT,
     fn GetComponent(
-        iComponent: ::UINT, ppComponent: *mut *mut ::IVssWMComponent
+        iComponent: ::UINT,
+        ppComponent: *mut *mut ::IVssWMComponent,
     ) -> ::HRESULT,
     fn GetRestoreMethod(
-        pMethod: *mut ::VSS_RESTOREMETHOD_ENUM, pbstrService: *mut ::BSTR,
-        pbstrUserProcedure: *mut ::BSTR, pwriterRestore: *mut ::VSS_WRITERRESTORE_ENUM,
-        pbRebootRequired: *mut bool, pcMappings: *mut ::UINT
+        pMethod: *mut ::VSS_RESTOREMETHOD_ENUM,
+        pbstrService: *mut ::BSTR,
+        pbstrUserProcedure: *mut ::BSTR,
+        pwriterRestore: *mut ::VSS_WRITERRESTORE_ENUM,
+        pbRebootRequired: *mut bool,
+        pcMappings: *mut ::UINT,
     ) -> ::HRESULT,
     fn GetAlternateLocationMapping(
-        iMapping: ::UINT, ppFiledesc: *mut *mut ::IVssWMFiledesc
+        iMapping: ::UINT,
+        ppFiledesc: *mut *mut ::IVssWMFiledesc,
     ) -> ::HRESULT,
-    fn GetBackupSchema(pdwSchemaMask: *mut ::DWORD) -> ::HRESULT,
-    fn GetDocument(pDoc: *mut ::c_void) -> ::HRESULT, //TODO IXMLDOMDocument
-    fn SaveAsXML(pbstrXML: *mut ::BSTR) -> ::HRESULT,
-    fn LoadFromXML(pbstrXML: *mut ::BSTR) -> ::HRESULT
+    fn GetBackupSchema(
+        pdwSchemaMask: *mut ::DWORD,
+    ) -> ::HRESULT,
+    fn GetDocument(
+        pDoc: *mut ::c_void,
+    ) -> ::HRESULT, //TODO IXMLDOMDocument,
+    fn SaveAsXML(
+        pbstrXML: *mut ::BSTR,
+    ) -> ::HRESULT,
+    fn LoadFromXML(
+        pbstrXML: *mut ::BSTR,
+    ) -> ::HRESULT,
 }
 );
 RIDL!(
@@ -86,10 +113,13 @@ RIDL!(
 interface IVssExamineWriterMetadataEx(IVssExamineWriterMetadataExVtbl):
     IVssExamineWriterMetadata(IVssExamineWriterMetadataVtbl) {
     fn GetIdentityEx(
-        pidInstance: *mut ::VSS_ID, pidWriter: *mut ::VSS_ID,
-        pbstrWriterName: *mut ::BSTR, pbstrInstanceName: *mut ::BSTR,
-        pUsage: *mut ::VSS_USAGE_TYPE, pSource: *mut ::VSS_SOURCE_TYPE
-    ) -> ::HRESULT
+        pidInstance: *mut ::VSS_ID,
+        pidWriter: *mut ::VSS_ID,
+        pbstrWriterName: *mut ::BSTR,
+        pbstrInstanceName: *mut ::BSTR,
+        pUsage: *mut ::VSS_USAGE_TYPE,
+        pSource: *mut ::VSS_SOURCE_TYPE,
+    ) -> ::HRESULT,
 }
 );
 RIDL!(
@@ -97,12 +127,16 @@ RIDL!(
 interface IVssExamineWriterMetadataEx2(IVssExamineWriterMetadataEx2Vtbl):
     IVssExamineWriterMetadataEx(IVssExamineWriterMetadataExVtbl) {
     fn GetVersion(
-        pdwMajorVersion: *mut ::DWORD, pdwMinorVersion: *mut ::DWORD
+        pdwMajorVersion: *mut ::DWORD,
+        pdwMinorVersion: *mut ::DWORD,
     ) -> ::HRESULT,
-    fn GetExcludeFromSnapshotCount(pcExcludedFromSnapshot: *mut ::UINT) -> ::HRESULT,
+    fn GetExcludeFromSnapshotCount(
+        pcExcludedFromSnapshot: *mut ::UINT,
+    ) -> ::HRESULT,
     fn GetExcludeFromSnapshotFile(
-        iFile: ::UINT, ppFiledesc: *mut *mut ::IVssWMFiledesc
-    ) -> ::HRESULT
+        iFile: ::UINT,
+        ppFiledesc: *mut *mut ::IVssWMFiledesc,
+    ) -> ::HRESULT,
 }
 );
 #[repr(C)]
@@ -117,127 +151,229 @@ pub struct IVssWriterComponentsExtVtbl {
 RIDL!(
 #[uuid(0x665c1d5f, 0xc218, 0x414d, 0xa0, 0x5d, 0x7f, 0xef, 0x5f, 0x9d, 0x5c, 0x86)]
 interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl) {
-    fn GetWriterComponentsCount(pcComponents: *mut ::UINT) -> ::HRESULT,
+    fn GetWriterComponentsCount(
+        pcComponents: *mut ::UINT,
+    ) -> ::HRESULT,
     fn GetWriterComponents(
-        iWriter: ::UINT, ppWriter: *mut *mut IVssWriterComponentsExt
+        iWriter: ::UINT,
+        ppWriter: *mut *mut IVssWriterComponentsExt,
     ) -> ::HRESULT,
-    fn InitializeForBackup(bstrXML: ::BSTR) -> ::HRESULT,
+    fn InitializeForBackup(
+        bstrXML: ::BSTR,
+    ) -> ::HRESULT,
     fn SetBackupState(
-        bSelectComponents: bool, bBackupBootableSystemState: bool,
-        backupType: ::VSS_BACKUP_TYPE, bPartialFileSupport: bool
+        bSelectComponents: bool,
+        bBackupBootableSystemState: bool,
+        backupType: ::VSS_BACKUP_TYPE,
+        bPartialFileSupport: bool,
     ) -> ::HRESULT,
-    fn InitializeForRestore(bstrXML: ::BSTR) -> ::HRESULT,
-    fn SetRestoreState(restoreType: ::VSS_RESTORE_TYPE) -> ::HRESULT,
-    fn GatherWriterMetadata(pAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
-    fn GetWriterMetadataCount(pcWriters: *mut ::UINT) -> ::HRESULT,
+    fn InitializeForRestore(
+        bstrXML: ::BSTR,
+    ) -> ::HRESULT,
+    fn SetRestoreState(
+        restoreType: ::VSS_RESTORE_TYPE,
+    ) -> ::HRESULT,
+    fn GatherWriterMetadata(
+        pAsync: *mut *mut ::IVssAsync,
+    ) -> ::HRESULT,
+    fn GetWriterMetadataCount(
+        pcWriters: *mut ::UINT,
+    ) -> ::HRESULT,
     fn GetWriterMetadata(
-        iWriter: ::UINT, pidInstance: *mut ::VSS_ID,
-        ppMetadata: *mut *mut IVssExamineWriterMetadata
+        iWriter: ::UINT,
+        pidInstance: *mut ::VSS_ID,
+        ppMetadata: *mut *mut IVssExamineWriterMetadata,
     ) -> ::HRESULT,
     fn FreeWriterMetadata() -> ::HRESULT,
     fn AddComponent(
-        instanceId: ::VSS_ID, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE,
-        wszLogicalPath: ::LPCWSTR, wszComponentName: ::LPCWSTR
+        instanceId: ::VSS_ID,
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
     ) -> ::HRESULT,
-    fn PrepareForBackup(ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
+    fn PrepareForBackup(
+        ppAsync: *mut *mut ::IVssAsync,
+    ) -> ::HRESULT,
     fn AbortBackup() -> ::HRESULT,
-    fn GatherWriterStatus(ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
-    fn GetWriterStatusCount(pcWriters: *mut ::UINT) -> ::HRESULT,
+    fn GatherWriterStatus(
+        ppAsync: *mut *mut ::IVssAsync,
+    ) -> ::HRESULT,
+    fn GetWriterStatusCount(
+        pcWriters: *mut ::UINT,
+    ) -> ::HRESULT,
     fn FreeWriterStatus() -> ::HRESULT,
     fn GetWriterStatus(
-        iWriter: ::UINT, pidInstance: *mut ::VSS_ID, pidWriter: *mut ::VSS_ID,
-        pbstrWriter: *mut ::BSTR, pnStatus: *mut ::VSS_WRITER_STATE,
-        phResultFailure: *mut ::HRESULT
+        iWriter: ::UINT,
+        pidInstance: *mut ::VSS_ID,
+        pidWriter: *mut ::VSS_ID,
+        pbstrWriter: *mut ::BSTR,
+        pnStatus: *mut ::VSS_WRITER_STATE,
+        phResultFailure: *mut ::HRESULT,
     ) -> ::HRESULT,
     fn SetBackupSucceeded(
-        instanceId: ::VSS_ID, writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE,
-        wszLogicalPath: ::LPCWSTR, wszComponentName: ::LPCWSTR, bSucceded: bool
+        instanceId: ::VSS_ID,
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        bSucceded: bool,
     ) -> ::HRESULT,
     fn SetBackupOptions(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, wszBackupOptions: ::LPCWSTR
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        wszBackupOptions: ::LPCWSTR,
     ) -> ::HRESULT,
     fn SetSelectedForRestore(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, bSelectedForRestore: bool
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        bSelectedForRestore: bool,
     ) -> ::HRESULT,
     fn SetRestoreOptions(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, wszRestoreOptions: ::LPCWSTR
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        wszRestoreOptions: ::LPCWSTR,
     ) -> ::HRESULT,
     fn SetAdditionalRestores(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, bAdditionalRestores: bool
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        bAdditionalRestores: bool,
     ) -> ::HRESULT,
     fn SetPreviousBackupStamp(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, wszPreviousBackupStamp: ::LPCWSTR
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        wszPreviousBackupStamp: ::LPCWSTR,
     ) -> ::HRESULT,
-    fn SaveAsXML(pbstrXML: *mut ::BSTR) -> ::HRESULT,
-    fn BackupComplete(ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
+    fn SaveAsXML(
+        pbstrXML: *mut ::BSTR,
+    ) -> ::HRESULT,
+    fn BackupComplete(
+        ppAsync: *mut *mut ::IVssAsync,
+    ) -> ::HRESULT,
     fn AddAlternativeLocationMapping(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, wszPath: ::LPCWSTR, wszFilespec: ::LPCWSTR, bRecursive: bool,
-        wszDestination: ::LPCWSTR
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        wszPath: ::LPCWSTR,
+        wszFilespec: ::LPCWSTR,
+        bRecursive: bool,
+        wszDestination: ::LPCWSTR,
     ) -> ::HRESULT,
     fn AddRestoreSubcomponent(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, wszSubComponentLogicalPath: ::LPCWSTR,
-        wszSubComponentName: ::LPCWSTR, bRepair: bool
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        wszSubComponentLogicalPath: ::LPCWSTR,
+        wszSubComponentName: ::LPCWSTR,
+        bRepair: bool,
     ) -> ::HRESULT,
     fn SetFileRestoreStatus(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, status: ::VSS_FILE_RESTORE_STATUS
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        status: ::VSS_FILE_RESTORE_STATUS,
     ) -> ::HRESULT,
     fn AddNewTarget(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, wszPath: ::LPCWSTR, wszFileName: ::LPCWSTR, bRecursive: bool,
-        wszAlternatePath: ::LPCWSTR
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        wszPath: ::LPCWSTR,
+        wszFileName: ::LPCWSTR,
+        bRecursive: bool,
+        wszAlternatePath: ::LPCWSTR,
     ) -> ::HRESULT,
     fn SetRangesFilePath(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, iPartialFile: ::UINT, wszRangesFile: ::LPCWSTR
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        iPartialFile: ::UINT,
+        wszRangesFile: ::LPCWSTR,
     ) -> ::HRESULT,
-    fn PreRestore(ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
-    fn PostRestore(ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
-    fn SetContext(lContext: ::LONG) -> ::HRESULT,
-    fn StartSnapshotSet(pSnapshotSetId: *mut ::VSS_ID) -> ::HRESULT,
+    fn PreRestore(
+        ppAsync: *mut *mut ::IVssAsync,
+    ) -> ::HRESULT,
+    fn PostRestore(
+        ppAsync: *mut *mut ::IVssAsync,
+    ) -> ::HRESULT,
+    fn SetContext(
+        lContext: ::LONG,
+    ) -> ::HRESULT,
+    fn StartSnapshotSet(
+        pSnapshotSetId: *mut ::VSS_ID,
+    ) -> ::HRESULT,
     fn AddToSnapshotSet(
-        pwszVolumeName: ::VSS_PWSZ, ProviderId: ::VSS_ID, pidSnapshot: *mut ::VSS_ID
+        pwszVolumeName: ::VSS_PWSZ,
+        ProviderId: ::VSS_ID,
+        pidSnapshot: *mut ::VSS_ID,
     ) -> ::HRESULT,
-    fn DoSnapshotSet(ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
+    fn DoSnapshotSet(
+        ppAsync: *mut *mut ::IVssAsync,
+    ) -> ::HRESULT,
     fn DeleteSnapshots(
-        SourceObjectId: ::VSS_ID, eSourceObjectType: ::VSS_OBJECT_TYPE,
-        bForceDelete: ::BOOL, plDeletedSnapshots: *mut ::LONG, pNondeletedSnapshotID: *mut ::VSS_ID
+        SourceObjectId: ::VSS_ID,
+        eSourceObjectType: ::VSS_OBJECT_TYPE,
+        bForceDelete: ::BOOL,
+        plDeletedSnapshots: *mut ::LONG,
+        pNondeletedSnapshotID: *mut ::VSS_ID,
     ) -> ::HRESULT,
-    fn ImportSnapshots(ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
-    fn BreakSnapshotSet(SnapshotSetId: ::VSS_ID) -> ::HRESULT,
+    fn ImportSnapshots(
+        ppAsync: *mut *mut ::IVssAsync,
+    ) -> ::HRESULT,
+    fn BreakSnapshotSet(
+        SnapshotSetId: ::VSS_ID,
+    ) -> ::HRESULT,
     fn GetSnapshotProperties(
         SnapshotId: ::VSS_ID,
-        pProp: *mut ::VSS_SNAPSHOT_PROP
+        pProp: *mut ::VSS_SNAPSHOT_PROP,
     ) -> ::HRESULT,
     fn Query(QueriedObjectId: ::VSS_ID, eQueriedObjectType: ::VSS_OBJECT_TYPE,
-        eReturnedObjectsType: ::VSS_OBJECT_TYPE, ppEnum: *mut *mut ::IVssEnumObject) -> ::HRESULT,
+        eReturnedObjectsType: ::VSS_OBJECT_TYPE,
+        ppEnum: *mut *mut ::IVssEnumObject) -> ::HRESULT,
     fn IsVolumeSupported(
-        ProviderId: ::VSS_ID, pwszVolumeName: ::VSS_PWSZ,
-        pbSupportedByThisProvider: *mut ::BOOL
+        ProviderId: ::VSS_ID,
+        pwszVolumeName: ::VSS_PWSZ,
+        pbSupportedByThisProvider: *mut ::BOOL,
     ) -> ::HRESULT,
     fn DisableWriterClasses(
-        rgWriterClassId: *const ::VSS_ID, cClassId: ::UINT
+        rgWriterClassId: *const ::VSS_ID,
+        cClassId: ::UINT,
     ) -> ::HRESULT,
     fn EnableWriterClasses(
-        rgWriterClassId: *const ::VSS_ID, cClassId: ::UINT
+        rgWriterClassId: *const ::VSS_ID,
+        cClassId: ::UINT,
     ) -> ::HRESULT,
     fn DisableWriterInstances(
-        rgWriterInstanceId: *const ::VSS_ID, cInstanceId: ::UINT
+        rgWriterInstanceId: *const ::VSS_ID,
+        cInstanceId: ::UINT,
     ) -> ::HRESULT,
     fn ExposeSnapshot(SnapshotId: ::VSS_ID, wszPathFromRoot: ::VSS_PWSZ,
-        lAttributes: ::LONG, wszExpose: ::VSS_PWSZ, pwszExposed: ::VSS_PWSZ
+        lAttributes: ::LONG,
+        wszExpose: ::VSS_PWSZ,
+        pwszExposed: ::VSS_PWSZ,
     ) -> ::HRESULT,
-    fn RevertToSnapshot(SnapshotId: ::VSS_ID, bForceDismount: ::BOOL) -> ::HRESULT,
+    fn RevertToSnapshot(
+        SnapshotId: ::VSS_ID,
+        bForceDismount: ::BOOL,
+    ) -> ::HRESULT,
     fn QueryRevertStatus(
-        pwszVolume: ::VSS_PWSZ, ppAsync: *mut *mut ::IVssAsync
-    ) -> ::HRESULT
+        pwszVolume: ::VSS_PWSZ,
+        ppAsync: *mut *mut ::IVssAsync,
+    ) -> ::HRESULT,
 }
 );
 RIDL!(
@@ -245,44 +381,64 @@ RIDL!(
 interface IVssBackupComponentsEx(IVssBackupComponentsExVtbl):
     IVssBackupComponents(IVssBackupComponentsVtbl) {
     fn GetWriterMetadataEx(
-        iWriter: ::UINT, pidInstance: *mut ::VSS_ID,
-        ppMetadata: *mut *mut ::IVssExamineWriterMetadataEx
+        iWriter: ::UINT,
+        pidInstance: *mut ::VSS_ID,
+        ppMetadata: *mut *mut ::IVssExamineWriterMetadataEx,
     ) -> ::HRESULT,
     fn SetSelectedForRestoreEx(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, bSelectedForRestore: bool, instanceId: ::VSS_ID
-    ) -> ::HRESULT
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        bSelectedForRestore: bool,
+        instanceId: ::VSS_ID,
+    ) -> ::HRESULT,
 }
 );
 RIDL!(
 #[uuid(0xacfe2b3a, 0x22c9, 0x4ef8, 0xbd, 0x03, 0x2f, 0x9c, 0xa2, 0x30, 0x08, 0x4e)]
 interface IVssBackupComponentsEx2(IVssBackupComponentsEx2Vtbl):
     IVssBackupComponentsEx(IVssBackupComponentsExVtbl) {
-    fn UnexposeSnapshot(snapshotId: ::VSS_ID) -> ::HRESULT,
+    fn UnexposeSnapshot(
+        snapshotId: ::VSS_ID,
+    ) -> ::HRESULT,
     fn SetAuthoritativeRestore(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, bAuth: bool
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        bAuth: bool,
     ) -> ::HRESULT,
     fn SetRollForward(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, rollType: ::VSS_ROLLFORWARD_TYPE,
-        wszRollForwardPoint: ::LPCWSTR
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        rollType: ::VSS_ROLLFORWARD_TYPE,
+        wszRollForwardPoint: ::LPCWSTR,
     ) -> ::HRESULT,
     fn SetRestoreName(
-        writerId: ::VSS_ID, ct: ::VSS_COMPONENT_TYPE, wszLogicalPath: ::LPCWSTR,
-        wszComponentName: ::LPCWSTR, wszRestoreName: ::LPCWSTR
+        writerId: ::VSS_ID,
+        ct: ::VSS_COMPONENT_TYPE,
+        wszLogicalPath: ::LPCWSTR,
+        wszComponentName: ::LPCWSTR,
+        wszRestoreName: ::LPCWSTR,
     ) -> ::HRESULT,
     fn BreakSnapshotSetEx(
-        SnapshotSetID: ::VSS_ID, dwBreakFlags: ::DWORD, ppAsync: *mut *mut ::IVssAsync
+        SnapshotSetID: ::VSS_ID,
+        dwBreakFlags: ::DWORD,
+        ppAsync: *mut *mut ::IVssAsync,
     ) -> ::HRESULT,
     fn PreFastRecovery(
-        SnapshotSetID: ::VSS_ID, dwPreFastRecoveryFlags: ::DWORD,
-        ppAsync: *mut *mut ::IVssAsync
+        SnapshotSetID: ::VSS_ID,
+        dwPreFastRecoveryFlags: ::DWORD,
+        ppAsync: *mut *mut ::IVssAsync,
     ) -> ::HRESULT,
     fn FastRecovery(
-        SnapshotSetID: ::VSS_ID, dwFastRecoveryFlags: ::DWORD,
-        ppAsync: *mut *mut ::IVssAsync
-    ) -> ::HRESULT
+        SnapshotSetID: ::VSS_ID,
+        dwFastRecoveryFlags: ::DWORD,
+        ppAsync: *mut *mut ::IVssAsync,
+    ) -> ::HRESULT,
 }
 );
 RIDL!(
@@ -290,16 +446,27 @@ RIDL!(
 interface IVssBackupComponentsEx3(IVssBackupComponentsEx3Vtbl):
     IVssBackupComponentsEx2(IVssBackupComponentsEx2Vtbl) {
     fn GetWriterStatusEx(
-        iWriter: ::UINT, pidInstance: *mut ::VSS_ID, pidWriter: *mut ::VSS_ID,
-        pbstrWriter: *mut ::BSTR, pnStatus: *mut ::VSS_WRITER_STATE,
-        phrFailureWriter: *mut ::HRESULT, phrApplication: *mut ::HRESULT,
-        pbstrApplicationMessage: *mut ::BSTR
+        iWriter: ::UINT,
+        pidInstance: *mut ::VSS_ID,
+        pidWriter: *mut ::VSS_ID,
+        pbstrWriter: *mut ::BSTR,
+        pnStatus: *mut ::VSS_WRITER_STATE,
+        phrFailureWriter: *mut ::HRESULT,
+        phrApplication: *mut ::HRESULT,
+        pbstrApplicationMessage: *mut ::BSTR,
     ) -> ::HRESULT,
     fn AddSnapshotToRecoverySet(
-        snapshotId: ::VSS_ID, dwFlags: ::DWORD, pwszDestinationVolume: ::VSS_PWSZ
+        snapshotId: ::VSS_ID,
+        dwFlags: ::DWORD,
+        pwszDestinationVolume: ::VSS_PWSZ,
     ) -> ::HRESULT,
-    fn RecoverSet(dwFlags: ::DWORD, ppAsync: *mut *mut ::IVssAsync) -> ::HRESULT,
-    fn GetSessionId(idSession: *mut ::VSS_ID) -> ::HRESULT
+    fn RecoverSet(
+        dwFlags: ::DWORD,
+        ppAsync: *mut *mut ::IVssAsync,
+    ) -> ::HRESULT,
+    fn GetSessionId(
+        idSession: *mut ::VSS_ID,
+    ) -> ::HRESULT,
 }
 );
 RIDL!(
@@ -307,9 +474,11 @@ RIDL!(
 interface IVssBackupComponentsEx4(IVssBackupComponentsEx4Vtbl):
     IVssBackupComponentsEx3(IVssBackupComponentsEx3Vtbl) {
     fn GetRootAndLogicalPrefixPaths(
-        pwszFilePath: ::VSS_PWSZ, ppwszRootPath: *mut ::VSS_PWSZ,
-        ppwszLogicalPrefix: *mut ::VSS_PWSZ, bNormalizeFQDNforRootPath: ::BOOL
-    ) -> ::HRESULT
+        pwszFilePath: ::VSS_PWSZ,
+        ppwszRootPath: *mut ::VSS_PWSZ,
+        ppwszLogicalPrefix: *mut ::VSS_PWSZ,
+        bNormalizeFQDNforRootPath: ::BOOL,
+    ) -> ::HRESULT,
 }
 );
 pub const VSS_SW_BOOTABLE_STATE: ::DWORD = 1;

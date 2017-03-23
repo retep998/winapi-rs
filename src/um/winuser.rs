@@ -35,88 +35,88 @@ FN!{stdcall WNDPROC(
     HWND,
     UINT,
     WPARAM,
-    LPARAM
+    LPARAM,
 ) -> LRESULT}
 FN!{stdcall DLGPROC(
     HWND,
     UINT,
     WPARAM,
-    LPARAM
+    LPARAM,
 ) -> INT_PTR}
 FN!{stdcall TIMERPROC(
     HWND,
     UINT,
     UINT_PTR,
-    DWORD
+    DWORD,
 ) -> ()}
 FN!{stdcall GRAYSTRINGPROC(
     HDC,
     LPARAM,
-    c_int
+    c_int,
 ) -> BOOL}
 FN!{stdcall WNDENUMPROC(
     HWND,
-    LPARAM
+    LPARAM,
 ) -> BOOL}
 FN!{stdcall HOOKPROC(
     code: c_int,
     wParam: WPARAM,
-    lParam: LPARAM
+    lParam: LPARAM,
 ) -> LRESULT}
 FN!{stdcall SENDASYNCPROC(
     HWND,
     UINT,
     ULONG_PTR,
-    LRESULT
+    LRESULT,
 ) -> ()}
 FN!{stdcall PROPENUMPROCA(
     HWND,
     LPCSTR,
-    HANDLE
+    HANDLE,
 ) -> BOOL}
 FN!{stdcall PROPENUMPROCW(
     HWND,
     LPCWSTR,
-    HANDLE
+    HANDLE,
 ) -> BOOL}
 FN!{stdcall PROPENUMPROCEXA(
     HWND,
     LPSTR,
     HANDLE,
-    ULONG_PTR
+    ULONG_PTR,
 ) -> BOOL}
 FN!{stdcall PROPENUMPROCEXW(
     HWND,
     LPWSTR,
     HANDLE,
-    ULONG_PTR
+    ULONG_PTR,
 ) -> BOOL}
 FN!{stdcall EDITWORDBREAKPROCA(
     lpch: LPSTR,
     ichCurrent: c_int,
     cch: c_int,
-    code: c_int
+    code: c_int,
 ) -> c_int}
 FN!{stdcall EDITWORDBREAKPROCW(
     lpch: LPWSTR,
     ichCurrent: c_int,
     cch: c_int,
-    code: c_int
+    code: c_int,
 ) -> c_int}
 FN!{stdcall DRAWSTATEPROC(
     hdc: HDC,
     lData: LPARAM,
     wData: WPARAM,
     cx: c_int,
-    cy: c_int
+    cy: c_int,
 ) -> BOOL}
 FN!{stdcall NAMEENUMPROCA(
     LPSTR,
-    LPARAM
+    LPARAM,
 ) -> BOOL}
 FN!{stdcall NAMEENUMPROCW(
     LPWSTR,
-    LPARAM
+    LPARAM,
 ) -> BOOL}
 pub type WINSTAENUMPROCA = NAMEENUMPROCA;
 pub type DESKTOPENUMPROCA = NAMEENUMPROCA;
@@ -2264,7 +2264,7 @@ extern "system" {
 pub const CW_USEDEFAULT: c_int = 0x80000000u32 as i32;
 pub const HWND_DESKTOP: HWND = 0 as HWND;
 FN!{stdcall PREGISTERCLASSNAMEW(
-    LPCWSTR
+    LPCWSTR,
 ) -> BOOLEAN}
 extern "system" {
     pub fn CreateWindowExA(
@@ -2943,7 +2943,7 @@ extern "system" {
         lpKeyState: *const BYTE,
         lwszBuff: LPWSTR,
         cchBuff: c_int,
-        wFlags: UINT
+        wFlags: UINT,
     ) -> c_int;
     pub fn OemKeyScan(
         wOemChar: WORD,
@@ -5231,9 +5231,11 @@ extern "system" {
         uType: UINT,
     ) -> c_int;
     pub fn LoadIconA(
-        hInstance: HINSTANCE, lpIconName: LPCSTR,
+        hInstance: HINSTANCE,
+        lpIconName: LPCSTR,
     ) -> HICON;
     pub fn LoadIconW(
-        hInstance: HINSTANCE, lpIconName: LPCWSTR,
+        hInstance: HINSTANCE,
+        lpIconName: LPCWSTR,
     ) -> HICON;
 }

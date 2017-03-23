@@ -59,13 +59,16 @@ ENUM!{enum CorSymVarFlag {
 RIDL!(#[uuid(0xaa544d42, 0x28cb, 0x11d3, 0xbd, 0x22, 0x00, 0x00, 0xf8, 0x08, 0x49, 0xbd)]
 interface ISymUnmanagedBinder(ISymUnmanagedBinderVtbl): IUnknown(IUnknownVtbl) {
     fn GetReaderForFile(
-        importer: *mut IUnknown, fileName: *const WCHAR, searchPath: *const WCHAR,
-        pRetVal: *mut *mut ISymUnmanagedReader
+        importer: *mut IUnknown,
+        fileName: *const WCHAR,
+        searchPath: *const WCHAR,
+        pRetVal: *mut *mut ISymUnmanagedReader,
     ) -> HRESULT,
     fn GetReaderFromStream(
-        importer: *mut IUnknown, pstream: *mut IStream,
-        pRetVal: *mut *mut ISymUnmanagedReader
-    ) -> HRESULT
+        importer: *mut IUnknown,
+        pstream: *mut IStream,
+        pRetVal: *mut *mut ISymUnmanagedReader,
+    ) -> HRESULT,
 }
 );
 ENUM!{enum CorSymSearchPolicyAttributes {
@@ -78,9 +81,12 @@ RIDL!(#[uuid(0xaccee350, 0x89af, 0x4ccb, 0x8b, 0x40, 0x1c, 0x2c, 0x4c, 0x6f, 0x9
 interface ISymUnmanagedBinder2(ISymUnmanagedBinder2Vtbl):
     ISymUnmanagedBinder(ISymUnmanagedBinderVtbl) {
     fn GetReaderForFile2(
-        importer: *mut IUnknown, fileName: *const WCHAR, searchPath: *const WCHAR,
-        searchPolicy: ULONG32, pRetVal: *mut *mut ISymUnmanagedReader
-    ) -> HRESULT
+        importer: *mut IUnknown,
+        fileName: *const WCHAR,
+        searchPath: *const WCHAR,
+        searchPolicy: ULONG32,
+        pRetVal: *mut *mut ISymUnmanagedReader,
+    ) -> HRESULT,
 }
 );
 pub enum ISymUnmanagedReader {} // TODO

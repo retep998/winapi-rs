@@ -26,35 +26,35 @@ RIDL!(
 #[uuid(0x0000000e, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IBindCtx(IBindCtxVtbl): IUnknown(IUnknownVtbl) {
     fn RegisterObjectBound(
-        punk: *mut IUnknown
+        punk: *mut IUnknown,
     ) -> HRESULT,
     fn RevokeObjectBound(
-        punk: *mut IUnknown
+        punk: *mut IUnknown,
     ) -> HRESULT,
     fn ReleaseBoundObjects() -> HRESULT,
     fn SetBindOptions(
-        pbindopts: *mut BIND_OPTS
+        pbindopts: *mut BIND_OPTS,
     ) -> HRESULT,
     fn GetBindOptions(
-        pbindopts: *mut BIND_OPTS
+        pbindopts: *mut BIND_OPTS,
     ) -> HRESULT,
     fn GetRunningObjectTable(
-        pprot: *mut *mut IRunningObjectTable
+        pprot: *mut *mut IRunningObjectTable,
     ) -> HRESULT,
     fn RegisterObjectParam(
         pszKey: LPOLESTR,
-        punk: *mut IUnknown
+        punk: *mut IUnknown,
     ) -> HRESULT,
     fn GetObjectParam(
         pszKey: LPOLESTR,
-        ppunk: *mut *mut IUnknown
+        ppunk: *mut *mut IUnknown,
     ) -> HRESULT,
     fn EnumObjectParam(
-        ppenum: *mut *mut IEnumString
+        ppenum: *mut *mut IEnumString,
     ) -> HRESULT,
     fn RevokeObjectParam(
-        pszKey: LPOLESTR
-    ) -> HRESULT
+        pszKey: LPOLESTR,
+    ) -> HRESULT,
 }
 );
 //8681
@@ -64,15 +64,15 @@ interface IEnumMoniker(IEnumMonikerVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
         rgelt: *mut *mut IMoniker,
-        pceltFetched: *mut ULONG
+        pceltFetched: *mut ULONG,
     ) -> HRESULT,
     fn Skip(
-        celt: ULONG
+        celt: ULONG,
     ) -> HRESULT,
     fn Reset() -> HRESULT,
     fn Clone(
-        ppenum: *mut *mut IEnumMoniker
-    ) -> HRESULT
+        ppenum: *mut *mut IEnumMoniker,
+    ) -> HRESULT,
 }
 );
 //8958
@@ -83,29 +83,29 @@ interface IRunningObjectTable(IRunningObjectTableVtbl): IUnknown(IUnknownVtbl) {
         grfFlags: DWORD,
         punkObject: *mut IUnknown,
         pmkObjectName: *mut IMoniker,
-        pdwRegister: *mut DWORD
+        pdwRegister: *mut DWORD,
     ) -> HRESULT,
     fn Revoke(
-        dwRegister: DWORD
+        dwRegister: DWORD,
     ) -> HRESULT,
     fn IsRunning(
-        pmkObjectName: *mut IMoniker
+        pmkObjectName: *mut IMoniker,
     ) -> HRESULT,
     fn GetObject(
         pmkObjectName: *mut IMoniker,
-        ppunkObject: *mut *mut IUnknown
+        ppunkObject: *mut *mut IUnknown,
     ) -> HRESULT,
     fn NoteChangeTime(
         dwRegister: DWORD,
-        pfiletime: *mut FILETIME
+        pfiletime: *mut FILETIME,
     ) -> HRESULT,
     fn GetTimeOfLastChange(
         pmkObjectName: *mut IMoniker,
-        pfiletime: *mut FILETIME
+        pfiletime: *mut FILETIME,
     ) -> HRESULT,
     fn EnumRunning(
-        ppenumMoniker: *mut *mut IEnumMoniker
-    ) -> HRESULT
+        ppenumMoniker: *mut *mut IEnumMoniker,
+    ) -> HRESULT,
 }
 );
 //9125
@@ -113,8 +113,8 @@ RIDL!(
 #[uuid(0x0000010c, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IPersist(IPersistVtbl): IUnknown(IUnknownVtbl) {
     fn GetClassID(
-        pClassID: *mut CLSID
-    ) -> HRESULT
+        pClassID: *mut CLSID,
+    ) -> HRESULT,
 }
 );
 //9207
@@ -123,15 +123,15 @@ RIDL!(
 interface IPersistStream(IPersistStreamVtbl): IPersist(IPersistVtbl) {
     fn IsDirty() -> HRESULT,
     fn Load(
-        pStm: *mut IStream
+        pStm: *mut IStream,
     ) -> HRESULT,
     fn Save(
         pStm: *mut IStream,
-        fClearDirty: BOOL
+        fClearDirty: BOOL,
     ) -> HRESULT,
     fn GetSizeMax(
-        pcbSize: *mut ULARGE_INTEGER
-    ) -> HRESULT
+        pcbSize: *mut ULARGE_INTEGER,
+    ) -> HRESULT,
 }
 );
 //9350
@@ -142,71 +142,71 @@ interface IMoniker(IMonikerVtbl): IPersistStream(IPersistStreamVtbl) {
         pbc: *mut IBindCtx,
         pmkToLeft: *mut IMoniker,
         riidResult: REFIID,
-        ppvResult: *mut *mut c_void
+        ppvResult: *mut *mut c_void,
     ) -> HRESULT,
     fn BindToStorage(
         pbc: *mut IBindCtx,
         pmkToLeft: *mut IMoniker,
         riid: REFIID,
-        ppvObj: *mut *mut c_void
+        ppvObj: *mut *mut c_void,
     ) -> HRESULT,
     fn Reduce(
         pbc: *mut IBindCtx,
         dwReduceHowFar: DWORD,
         ppmkToLeft: *mut *mut IMoniker,
-        ppmkReduced: *mut *mut IMoniker
+        ppmkReduced: *mut *mut IMoniker,
     ) -> HRESULT,
     fn ComposeWith(
         pmkRight: *mut IMoniker,
         fOnlyIfNotGeneric: BOOL,
-        ppmkComposite: *mut *mut IMoniker
+        ppmkComposite: *mut *mut IMoniker,
     ) -> HRESULT,
     fn Enum(
         fForward: BOOL,
-        ppenumMoniker: *mut *mut IEnumMoniker
+        ppenumMoniker: *mut *mut IEnumMoniker,
     ) -> HRESULT,
     fn IsEqual(
-        pmkOtherMoniker: *mut IMoniker
+        pmkOtherMoniker: *mut IMoniker,
     ) -> HRESULT,
     fn Hash(
-        pdwHash: *mut DWORD
+        pdwHash: *mut DWORD,
     ) -> HRESULT,
     fn IsRunning(
         pbc: *mut IBindCtx,
         pmkToLeft: *mut IMoniker,
-        pmkNewlyRunning: *mut IMoniker
+        pmkNewlyRunning: *mut IMoniker,
     ) -> HRESULT,
     fn GetTimeOfLastChange(
         pbc: *mut IBindCtx,
         pmkToLeft: *mut IMoniker,
-        pFileTime: *mut FILETIME
+        pFileTime: *mut FILETIME,
     ) -> HRESULT,
     fn Inverse(
-        ppmk: *mut *mut IMoniker
+        ppmk: *mut *mut IMoniker,
     ) -> HRESULT,
     fn CommonPrefixWith(
         pmkOther: *mut IMoniker,
-        ppmkPrefix: *mut *mut IMoniker
+        ppmkPrefix: *mut *mut IMoniker,
     ) -> HRESULT,
     fn RelativePathTo(
         pmkOther: *mut IMoniker,
-        ppmkRelPath: *mut *mut IMoniker
+        ppmkRelPath: *mut *mut IMoniker,
     ) -> HRESULT,
     fn GetDisplayName(
         pbc: *mut IBindCtx,
         pmkToLeft: *mut IMoniker,
-        ppszDisplayName: *mut LPOLESTR
+        ppszDisplayName: *mut LPOLESTR,
     ) -> HRESULT,
     fn ParseDisplayName(
         pbc: *mut IBindCtx,
         pmkToLeft: *mut IMoniker,
         pszDisplayName: LPOLESTR,
         pchEaten: *mut ULONG,
-        ppmkOut: *mut *mut IMoniker
+        ppmkOut: *mut *mut IMoniker,
     ) -> HRESULT,
     fn IsSystemMoniker(
-        pdwMksys: *mut DWORD
-    ) -> HRESULT
+        pdwMksys: *mut DWORD,
+    ) -> HRESULT,
 }
 );
 ENUM!{enum EOLE_AUTHENTICATION_CAPABILITIES {
@@ -237,8 +237,8 @@ RIDL!(
 #[uuid(0xa2f05a09, 0x27a2, 0x42b5, 0xbc, 0x0e, 0xac, 0x16, 0x3e, 0xf4, 0x9d, 0x9b)]
 interface IApartmentShutdown(IApartmentShutdownVtbl): IUnknown(IUnknownVtbl) {
     fn OnUninitialize(
-        ui64ApartmentIdentifier: UINT64
-    ) -> VOID
+        ui64ApartmentIdentifier: UINT64,
+    ) -> VOID,
 }
 );
 
@@ -251,7 +251,7 @@ interface IMarshal(IMarshalVtbl): IUnknown(IUnknownVtbl) {
         dwDestContext: DWORD,
         pvDestContext: *mut c_void,
         mshlflags: DWORD,
-        pCid: *mut CLSID
+        pCid: *mut CLSID,
     ) -> HRESULT,
     fn GetMarshalSizeMax(
         riid: REFIID,
@@ -259,7 +259,7 @@ interface IMarshal(IMarshalVtbl): IUnknown(IUnknownVtbl) {
         dwDestContext: DWORD,
         pvDestContext: *mut c_void,
         mshlflags: DWORD,
-        pSize: *mut DWORD
+        pSize: *mut DWORD,
     ) -> HRESULT,
     fn MarshalInterface(
         pStm: *mut IStream,
@@ -267,18 +267,18 @@ interface IMarshal(IMarshalVtbl): IUnknown(IUnknownVtbl) {
         pv: *mut c_void,
         dwDestContext: DWORD,
         pvDestContext: *mut c_void,
-        mshlflags: DWORD
+        mshlflags: DWORD,
     ) -> HRESULT,
     fn UnmarshalInterface(
         pStm: *mut IStream,
         riid: REFIID,
-        ppv: *mut *mut c_void
+        ppv: *mut *mut c_void,
     ) -> HRESULT,
     fn ReleaseMarshalData(
-        pStm: *mut IStream
+        pStm: *mut IStream,
     ) -> HRESULT,
     fn DisconnectObject(
-        dwReserved: DWORD
-    ) -> HRESULT
+        dwReserved: DWORD,
+    ) -> HRESULT,
 }
 );

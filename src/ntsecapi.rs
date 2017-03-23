@@ -613,11 +613,15 @@ pub const DOMAIN_PASSWORD_STORE_CLEARTEXT: ULONG = 0x00000010;
 pub const DOMAIN_REFUSE_PASSWORD_CHANGE: ULONG = 0x00000020;
 pub const DOMAIN_NO_LM_OWF_CHANGE: ULONG = 0x00000040;
 pub type PSAM_PASSWORD_NOTIFICATION_ROUTINE = Option<unsafe extern "system" fn(
-    UserName: PUNICODE_STRING, RelativeId: ULONG, NewPassword: PUNICODE_STRING,
+    UserName: PUNICODE_STRING,
+    RelativeId: ULONG,
+    NewPassword: PUNICODE_STRING,
 ) -> NTSTATUS>;
 pub type PSAM_INIT_NOTIFICATION_ROUTINE = Option<unsafe extern "system" fn() -> BOOLEAN>;
 pub type PSAM_PASSWORD_FILTER_ROUTINE = Option<unsafe extern "system" fn(
-    AccountName: PUNICODE_STRING, FullName: PUNICODE_STRING, Password: PUNICODE_STRING,
+    AccountName: PUNICODE_STRING,
+    FullName: PUNICODE_STRING,
+    Password: PUNICODE_STRING,
     SetOperation: BOOLEAN,
 ) -> BOOLEAN>;
 ENUM!{enum MSV1_0_LOGON_SUBMIT_TYPE {

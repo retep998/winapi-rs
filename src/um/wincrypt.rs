@@ -878,15 +878,22 @@ STRUCT!{struct CRYPT_ENCRYPTED_PRIVATE_KEY_INFO {
 }}
 pub type PCRYPT_ENCRYPTED_PRIVATE_KEY_INFO = *mut CRYPT_ENCRYPTED_PRIVATE_KEY_INFO;
 pub type PCRYPT_DECRYPT_PRIVATE_KEY_FUNC = Option<unsafe extern "system" fn(
-    Algorithm: CRYPT_ALGORITHM_IDENTIFIER, EncryptedPrivateKey: CRYPT_DATA_BLOB,
-    pbClearTextKey: *mut BYTE, pcbClearTextKey: *mut DWORD, pVoidDecryptFunc: LPVOID,
+    Algorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    EncryptedPrivateKey: CRYPT_DATA_BLOB,
+    pbClearTextKey: *mut BYTE,
+    pcbClearTextKey: *mut DWORD,
+    pVoidDecryptFunc: LPVOID,
 ) -> BOOL>;
 pub type PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC = Option<unsafe extern "system" fn(
-    Algorithm: *mut CRYPT_ALGORITHM_IDENTIFIER, pClearTextPrivateKey: *mut CRYPT_DATA_BLOB,
-    pbEncryptedKey: *mut BYTE, pcbEncryptedKey: *mut DWORD, pVoidEncryptFunc: LPVOID,
+    Algorithm: *mut CRYPT_ALGORITHM_IDENTIFIER,
+    pClearTextPrivateKey: *mut CRYPT_DATA_BLOB,
+    pbEncryptedKey: *mut BYTE,
+    pcbEncryptedKey: *mut DWORD,
+    pVoidEncryptFunc: LPVOID,
 ) -> BOOL>;
 pub type PCRYPT_RESOLVE_HCRYPTPROV_FUNC = Option<unsafe extern "system" fn(
-    pPrivateKeyInfo: *mut CRYPT_PRIVATE_KEY_INFO, phCryptProv: *mut HCRYPTPROV,
+    pPrivateKeyInfo: *mut CRYPT_PRIVATE_KEY_INFO,
+    phCryptProv: *mut HCRYPTPROV,
     pVoidResolveFunc: LPVOID,
 ) -> BOOL>;
 STRUCT!{struct CRYPT_PKCS8_IMPORT_PARAMS {
@@ -1785,7 +1792,10 @@ pub type PCERT_CHAIN_ENGINE_CONFIG = *mut CERT_CHAIN_ENGINE_CONFIG;
 // 18748
 pub type HCERTCHAINENGINE = HANDLE;
 pub type PFN_CERT_CREATE_CONTEXT_SORT_FUNC = Option<unsafe extern "system" fn(
-    cbTotalEncoded: DWORD, cbRemainEncoded: DWORD, cEntry: DWORD, pvSort: *mut c_void
+    cbTotalEncoded: DWORD,
+    cbRemainEncoded: DWORD,
+    cEntry: DWORD,
+    pvSort: *mut c_void,
 ) -> BOOL>;
 STRUCT!{struct CERT_CREATE_CONTEXT_PARA {
     cbSize: DWORD,
@@ -1881,17 +1891,27 @@ STRUCT!{struct CERT_SYSTEM_STORE_INFO {
 pub type PCERT_SYSTEM_STORE_INFO = *mut CERT_SYSTEM_STORE_INFO;
 //13401
 pub type PFN_CERT_ENUM_SYSTEM_STORE_LOCATION = Option<unsafe extern "system" fn(
-    pwszStoreLocation: LPCWSTR, dwFlags: DWORD, pvReserved: *mut c_void, pvArg: *mut c_void,
+    pwszStoreLocation: LPCWSTR,
+    dwFlags: DWORD,
+    pvReserved: *mut c_void,
+    pvArg: *mut c_void,
 ) -> BOOL>;
 //13408
 pub type PFN_CERT_ENUM_SYSTEM_STORE = Option<unsafe extern "system" fn(
-    pvSystemStore: *const c_void, dwFlags: DWORD, pStoreInfo: PCERT_SYSTEM_STORE_INFO,
-    pvReserved: *mut c_void, pvArg: *mut c_void,
+    pvSystemStore: *const c_void,
+    dwFlags: DWORD,
+    pStoreInfo: PCERT_SYSTEM_STORE_INFO,
+    pvReserved: *mut c_void,
+    pvArg: *mut c_void,
 ) -> BOOL>;
 //13416
 pub type PFN_CERT_ENUM_PHYSICAL_STORE = Option<unsafe extern "system" fn(
-    pvSystemStore: *const c_void, dwFlags: DWORD, pwszStoreName: LPCWSTR,
-    pStoreInfo: PCERT_PHYSICAL_STORE_INFO, pvReserved: *mut c_void, pvArg: *mut c_void,
+    pvSystemStore: *const c_void,
+    dwFlags: DWORD,
+    pwszStoreName: LPCWSTR,
+    pStoreInfo: PCERT_PHYSICAL_STORE_INFO,
+    pvReserved: *mut c_void,
+    pvArg: *mut c_void,
 ) -> BOOL>;
 STRUCT!{struct CERT_STRONG_SIGN_SERIALIZED_INFO {
     dwFlags: DWORD,
@@ -2036,7 +2056,9 @@ STRUCT!{struct CRYPT_DECRYPT_MESSAGE_PARA {
 }}
 pub type PCRYPT_DECRYPT_MESSAGE_PARA = *mut CRYPT_DECRYPT_MESSAGE_PARA;
 pub type PFN_CRYPT_GET_SIGNER_CERTIFICATE = Option<unsafe extern "system" fn(
-    pvGetArg: *mut c_void, dwCertEncodingType: DWORD, pSignerId: PCERT_INFO,
+    pvGetArg: *mut c_void,
+    dwCertEncodingType: DWORD,
+    pSignerId: PCERT_INFO,
     hMsgCertStore: HCERTSTORE,
 ) -> PCCERT_CONTEXT>;
 STRUCT!{struct CRYPT_VERIFY_MESSAGE_PARA {
@@ -2064,25 +2086,38 @@ pub type PCRYPT_OID_INFO = *mut CRYPT_OID_INFO;
 pub type PCCRYPT_OID_INFO = *const CRYPT_OID_INFO;
 //18004
 pub type PFN_CRYPT_ENUM_KEYID_PROP = Option<unsafe extern "system" fn(
-    pKeyIdentifier: *const CRYPT_HASH_BLOB, dwFlags: DWORD, pvReserved: *mut c_void,
-    pvArg: *mut c_void, cProp: DWORD, rgdwPropId: *mut DWORD, rgpvData: *mut *mut c_void,
+    pKeyIdentifier: *const CRYPT_HASH_BLOB,
+    dwFlags: DWORD,
+    pvReserved: *mut c_void,
+    pvArg: *mut c_void,
+    cProp: DWORD,
+    rgdwPropId: *mut DWORD,
+    rgpvData: *mut *mut c_void,
     rgcbData: *mut DWORD,
 ) -> BOOL>;
 //6379
 pub type PFN_CRYPT_ENUM_OID_FUNC = Option<unsafe extern "system" fn(
-    dwEncodingType: DWORD, pszFuncName: LPCSTR, pszOID: LPCSTR, cValue: DWORD,
-    rgdwValueType: *const DWORD, rgpwszValueName: *const LPCWSTR,
-    rgpbValueData: *const *const BYTE, rgcbValueData: *const DWORD, pvArg: *mut c_void,
+    dwEncodingType: DWORD,
+    pszFuncName: LPCSTR,
+    pszOID: LPCSTR,
+    cValue: DWORD,
+    rgdwValueType: *const DWORD,
+    rgpwszValueName: *const LPCWSTR,
+    rgpbValueData: *const *const BYTE,
+    rgcbValueData: *const DWORD,
+    pvArg: *mut c_void,
 ) -> BOOL>;
 //6675
 pub type PFN_CRYPT_ENUM_OID_INFO = Option<unsafe extern "system" fn(
-    pInfo: PCCRYPT_OID_INFO, pvArg: *mut c_void,
+    pInfo: PCCRYPT_OID_INFO,
+    pvArg: *mut c_void,
 ) -> BOOL>;
 //6022
 pub type HCRYPTOIDFUNCSET = *mut c_void;
 pub type HCRYPTOIDFUNCADDR = *mut c_void;
 pub type PFN_CRYPT_ASYNC_PARAM_FREE_FUNC = Option<unsafe extern "system" fn(
-    pszParamOid: LPSTR, pvParam: LPVOID,
+    pszParamOid: LPSTR,
+    pvParam: LPVOID,
 )>;
 STRUCT!{struct CRYPT_HASH_MESSAGE_PARA {
     cbSize: DWORD,
@@ -2125,7 +2160,10 @@ STRUCT!{struct CMSG_SIGNED_ENCODE_INFO {
 pub type PCMSG_SIGNED_ENCODE_INFO = *mut CMSG_SIGNED_ENCODE_INFO;
 //7393
 pub type PFN_CMSG_STREAM_OUTPUT = Option<unsafe extern "system" fn(
-    pvArg: *const c_void, pbData: *mut BYTE, cbData: DWORD, fFinal: BOOL,
+    pvArg: *const c_void,
+    pbData: *mut BYTE,
+    cbData: DWORD,
+    fFinal: BOOL,
 ) -> BOOL>;
 STRUCT!{struct CMSG_STREAM_INFO {
     cbContent: DWORD,

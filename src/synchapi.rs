@@ -11,8 +11,12 @@ pub type SYNCHRONIZATION_BARRIER = ::RTL_BARRIER;
 pub type PSYNCHRONIZATION_BARRIER = ::PRTL_BARRIER;
 pub type LPSYNCHRONIZATION_BARRIER = ::PRTL_BARRIER;
 pub type PINIT_ONCE_FN = Option<unsafe extern "system" fn(
-    InitOnce: ::PINIT_ONCE, Parameter: ::PVOID, Context: *mut ::PVOID,
+    InitOnce: ::PINIT_ONCE,
+    Parameter: ::PVOID,
+    Context: *mut ::PVOID,
 ) -> ::BOOL>;
 pub type PTIMERAPCROUTINE = Option<unsafe extern "system" fn(
-    lpArgToCompletionRoutine: ::LPVOID, dwTimerLowValue: ::DWORD, dwTimerHighValue: ::DWORD,
+    lpArgToCompletionRoutine: ::LPVOID,
+    dwTimerLowValue: ::DWORD,
+    dwTimerHighValue: ::DWORD,
 )>;

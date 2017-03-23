@@ -182,10 +182,12 @@ STRUCT!{struct SERVICE_STATUS {
 pub type LPSERVICE_STATUS = *mut SERVICE_STATUS;
 //848
 pub type LPSERVICE_MAIN_FUNCTIONW = Option<unsafe extern "system" fn(
-    dwNumServicesArgs: ::DWORD, lpServiceArgVectors: *mut ::LPWSTR,
+    dwNumServicesArgs: ::DWORD,
+    lpServiceArgVectors: *mut ::LPWSTR,
 )>;
 pub type LPSERVICE_MAIN_FUNCTIONA = Option<unsafe extern "system" fn(
-    dwNumServicesArgs: ::DWORD, lpServiceArgVectors: *mut ::LPSTR,
+    dwNumServicesArgs: ::DWORD,
+    lpServiceArgVectors: *mut ::LPSTR,
 )>;
 STRUCT!{struct SERVICE_TABLE_ENTRYA {
     lpServiceName: ::LPCSTR,
@@ -200,5 +202,8 @@ pub type LPSERVICE_TABLE_ENTRYW = *mut SERVICE_TABLE_ENTRYW;
 //900
 pub type LPHANDLER_FUNCTION = Option<unsafe extern "system" fn(dwControl: ::DWORD)>;
 pub type LPHANDLER_FUNCTION_EX = Option<unsafe extern "system" fn(
-    dwControl: ::DWORD, dwEventType: ::DWORD, lpEventData: ::LPVOID, lpContext: ::LPVOID,
+    dwControl: ::DWORD,
+    dwEventType: ::DWORD,
+    lpEventData: ::LPVOID,
+    lpContext: ::LPVOID,
 ) -> ::DWORD>;

@@ -163,8 +163,11 @@ pub const WINHTTP_OPTION_PROXY_USERNAME: ::DWORD = 0x1002;
 pub const WINHTTP_OPTION_PROXY_PASSWORD: ::DWORD = 0x1003;
 //552
 pub type WINHTTP_STATUS_CALLBACK = Option<unsafe extern "system" fn(
-    hInternet: HINTERNET, dwContext: ::DWORD_PTR, dwInternetStatus: ::DWORD,
-    lpvStatusInformation: ::LPVOID, dwStatusInformationLength: ::DWORD,
+    hInternet: HINTERNET,
+    dwContext: ::DWORD_PTR,
+    dwInternetStatus: ::DWORD,
+    lpvStatusInformation: ::LPVOID,
+    dwStatusInformationLength: ::DWORD,
 )>;
 pub type LPWINHTTP_STATUS_CALLBACK = *mut WINHTTP_STATUS_CALLBACK;
 pub const WINHTTP_CALLBACK_STATUS_RESOLVING_NAME: ::DWORD = 0x00000001;

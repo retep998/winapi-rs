@@ -86,10 +86,13 @@ STRUCT!{struct RPC_POLICY {
 }}
 pub type PRPC_POLICY = *mut RPC_POLICY;
 pub type RPC_OBJECT_INQ_FN = Option<unsafe extern "system" fn(
-    ObjectUuid: *mut UUID, TypeUuid: *mut UUID, Status: *mut ::RPC_STATUS,
+    ObjectUuid: *mut UUID,
+    TypeUuid: *mut UUID,
+    Status: *mut ::RPC_STATUS,
 )>;
 pub type RPC_IF_CALLBACK_FN = Option<unsafe extern "system" fn(
-    InterfaceUuid: RPC_IF_HANDLE, Context: *mut ::c_void,
+    InterfaceUuid: RPC_IF_HANDLE,
+    Context: *mut ::c_void,
 ) -> ::RPC_STATUS>;
 pub type RPC_SECURITY_CALLBACK_FN = Option<unsafe extern "system" fn(Context: *mut ::c_void)>;
 pub type RPC_MGR_EPV = ::c_void;
@@ -438,10 +441,18 @@ ENUM!{enum RPC_HTTP_REDIRECTOR_STAGE {
     RPCHTTP_RS_INTERFACE,
 }}
 pub type RPC_NEW_HTTP_PROXY_CHANNEL = Option<unsafe extern "system" fn(
-    RedirectorStage: RPC_HTTP_REDIRECTOR_STAGE, ServerName: RPC_WSTR, ServerPort: RPC_WSTR,
-    RemoteUser: RPC_WSTR, AuthType: RPC_WSTR, ResourceUuid: *mut ::c_void,
-    SessionId: *mut ::c_void, Interface: *mut ::c_void, Reserved: *mut ::c_void, Flags: ::c_ulong,
-    NewServerName: *mut RPC_WSTR, NewServerPort: *mut RPC_WSTR,
+    RedirectorStage: RPC_HTTP_REDIRECTOR_STAGE,
+    ServerName: RPC_WSTR,
+    ServerPort: RPC_WSTR,
+    RemoteUser: RPC_WSTR,
+    AuthType: RPC_WSTR,
+    ResourceUuid: *mut ::c_void,
+    SessionId: *mut ::c_void,
+    Interface: *mut ::c_void,
+    Reserved: *mut ::c_void,
+    Flags: ::c_ulong,
+    NewServerName: *mut RPC_WSTR,
+    NewServerPort: *mut RPC_WSTR,
 ) -> ::RPC_STATUS>;
 pub type RPC_HTTP_PROXY_FREE_STRING = Option<unsafe extern "system" fn(String: RPC_WSTR)>;
 pub const RPC_C_AUTHZ_NONE: ::DWORD = 0;
@@ -449,7 +460,10 @@ pub const RPC_C_AUTHZ_NAME: ::DWORD = 1;
 pub const RPC_C_AUTHZ_DCE: ::DWORD = 2;
 pub const RPC_C_AUTHZ_DEFAULT: ::DWORD = 0xffffffff;
 pub type RPC_AUTH_KEY_RETRIEVAL_FN = Option<unsafe extern "system" fn(
-    Arg: *mut ::c_void, ServerPrincName: RPC_WSTR, KeyVer: ::c_ulong, Key: *mut *mut ::c_void,
+    Arg: *mut ::c_void,
+    ServerPrincName: RPC_WSTR,
+    KeyVer: ::c_ulong,
+    Key: *mut *mut ::c_void,
     Status: *mut ::RPC_STATUS,
 )>;
 STRUCT!{struct RPC_CLIENT_INFORMATION1 {
@@ -470,7 +484,8 @@ pub const RPC_C_VERS_EXACT: ::c_ulong = 3;
 pub const RPC_C_VERS_MAJOR_ONLY: ::c_ulong = 4;
 pub const RPC_C_VERS_UPTO: ::c_ulong = 5;
 pub type RPC_MGMT_AUTHORIZATION_FN = Option<unsafe extern "system" fn(
-    ClientBinding: RPC_BINDING_HANDLE, RequestedMgmtOperation: ::c_ulong,
+    ClientBinding: RPC_BINDING_HANDLE,
+    RequestedMgmtOperation: ::c_ulong,
     Status: *mut ::RPC_STATUS,
 ) -> ::c_int>;
 pub const RPC_C_MGMT_INQ_IF_IDS: ::c_ulong = 0;
@@ -535,5 +550,7 @@ STRUCT!{struct RPC_INTERFACE_TEMPLATEW {
 }}
 pub type PRPC_INTERFACE_TEMPLATEW = *mut RPC_INTERFACE_TEMPLATEW;
 pub type RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN = Option<unsafe extern "system" fn(
-    IfGroup: RPC_INTERFACE_GROUP, IdleCallbackContext: *mut ::c_void, IsGroupIdle: ::c_ulong,
+    IfGroup: RPC_INTERFACE_GROUP,
+    IdleCallbackContext: *mut ::c_void,
+    IsGroupIdle: ::c_ulong,
 )>;
