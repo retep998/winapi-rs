@@ -21,6 +21,17 @@ interface IMalloc(IMallocVtbl): IUnknown(IUnknownVtbl) {
     fn HeapMinimize() -> ()
 }}
 pub type LPMALLOC = *mut IMalloc;
+RIDL!{#[uuid(0x00000100, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IEnumUnknown(IEnumUnknownVtbl): IUnknown(IUnknownVtbl) {
+    fn Next( 
+        celt: ULONG,
+        rgelt: *mut *mut IUnknown,
+        pceltFetched: *mut ULONG
+    ) -> HRESULT,
+    fn Skip(celt: ULONG) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(ppenum: *mut *mut IEnumUnknown) -> HRESULT
+}}
 STRUCT!{struct STATSTG {
     pwcsName: LPOLESTR,
     type_: DWORD,
