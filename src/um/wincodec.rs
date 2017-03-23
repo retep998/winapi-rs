@@ -1,11 +1,10 @@
-// Copyright © 2016-2017 winapi-rs developers
+// Copyright © 2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of wincodec.h
-#![allow(overflowing_literals, unused_qualifications, unused)]
 
 use ctypes::c_double;
 use shared::basetsd::{UINT32, ULONG_PTR};
@@ -13,7 +12,7 @@ use shared::minwindef::{DWORD, UINT, INT, BOOL, FLOAT, BYTE, ULONG, LPVOID};
 use shared::windef::{HBITMAP, HPALETTE, HICON};
 use shared::winerror::{HRESULT, E_FAIL, E_INVALIDARG, SEVERITY_ERROR, E_OUTOFMEMORY, E_NOTIMPL,
                        E_ABORT, E_ACCESSDENIED};
-use shared::ntdef::{LONG, LPCWSTR, LPWSTR, PVOID, PWSTR, PCWSTR, WCHAR, ULONGLONG};
+use shared::ntdef::{LPCWSTR, LPWSTR, PCWSTR, WCHAR};
 use shared::guiddef::{REFGUID, GUID, CLSID, REFCLSID};
 use shared::dxgiformat::DXGI_FORMAT;
 use shared::dxgitype::{DXGI_JPEG_AC_HUFFMAN_TABLE, DXGI_JPEG_DC_HUFFMAN_TABLE,
@@ -1554,7 +1553,7 @@ pub const FACILITY_WINCODEC_ERR: HRESULT = 0x898;
 pub const WINCODEC_ERR_BASE: HRESULT = 0x2000;
 
 /// intsafe.h, 0x216 = 534 = ERROR_ARITHMETIC_OVERFLOW
-pub const INTSAFE_E_ARITHMETIC_OVERFLOW: HRESULT = 0x80070216;
+pub const INTSAFE_E_ARITHMETIC_OVERFLOW: HRESULT = 0x80070216u32 as HRESULT;
 
 #[inline]
 pub fn MAKE_WINCODECHR(severity: HRESULT, code: HRESULT) -> HRESULT {
