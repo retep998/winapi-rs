@@ -4,16 +4,16 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use ctypes::{c_void, c_int, c_float, c_long};
-use shared::basetsd::{SIZE_T, UINT8, UINT64};
+use ctypes::{c_float, c_int, c_long, c_void};
+use shared::basetsd::{SIZE_T, UINT64, UINT8};
 use shared::dxgiformat::{DXGI_FORMAT};
 use shared::dxgitype::{DXGI_RATIONAL, DXGI_SAMPLE_DESC};
-use shared::guiddef::{REFGUID, REFIID, GUID};
-use shared::minwindef::{DWORD, UINT, BOOL, FLOAT, BYTE, INT, USHORT};
+use shared::guiddef::{GUID, REFGUID, REFIID};
+use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, UINT, USHORT};
 use shared::windef::{RECT, SIZE};
-use um::d3dcommon::{D3D_SRV_DIMENSION, D3D_PRIMITIVE, D3D_FEATURE_LEVEL, D3D_PRIMITIVE_TOPOLOGY};
+use um::d3dcommon::{D3D_FEATURE_LEVEL, D3D_PRIMITIVE, D3D_PRIMITIVE_TOPOLOGY, D3D_SRV_DIMENSION};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HRESULT, LPSTR, LPCSTR, ULONGLONG, HANDLE};
+use um::winnt::{HANDLE, HRESULT, LPCSTR, LPSTR, ULONGLONG};
 pub const D3D11_16BIT_INDEX_STRIP_CUT_VALUE: DWORD = 0xffff;
 pub const D3D11_32BIT_INDEX_STRIP_CUT_VALUE: DWORD = 0xffffffff;
 pub const D3D11_8BIT_INDEX_STRIP_CUT_VALUE: DWORD = 0xff;
