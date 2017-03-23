@@ -290,27 +290,6 @@ macro_rules! STRUCT {
         }
     );
 }
-macro_rules! EXTERN {
-    (stdcall fn $func:ident(
-        $($p:ident: $t:ty),*
-    ) -> $ret:ty) => (EXTERN!{@fix
-        extern "system" {
-            pub fn $func(
-                $($p: $t),*
-            ) -> $ret;
-        }
-    });
-    (cdecl fn $func:ident(
-        $($p:ident: $t:ty),*
-    ) -> $ret:ty) => (EXTERN!{@fix
-        extern "C" {
-            pub fn $func(
-                $($p: $t),*
-            ) -> $ret;
-        }
-    });
-    (@fix $x:item) => ($x);
-}
 macro_rules! IFDEF {
     ($($thing:item)*) => ($($thing)*)
 }

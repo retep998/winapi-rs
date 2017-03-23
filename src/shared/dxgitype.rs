@@ -7,8 +7,7 @@
 //! Mappings for the contents of dxgitype.h
 use shared::d3d9types::D3DCOLORVALUE;
 use shared::dxgiformat::DXGI_FORMAT;
-use shared::minwindef::{UINT, BOOL, DWORD, BYTE};
-
+use shared::minwindef::{BOOL, BYTE, DWORD, UINT};
 pub const DXGI_CPU_ACCESS_NONE: DWORD = 0;
 pub const DXGI_CPU_ACCESS_DYNAMIC: DWORD = 1;
 pub const DXGI_CPU_ACCESS_READ_WRITE: DWORD = 2;

@@ -16,7 +16,11 @@ ENUM!{enum COINIT {
 }}
 
     // pub fn CoBuildVersion();
-EXTERN!{stdcall fn CoInitialize(pvReserved: LPVOID) -> HRESULT}
+extern "system" {
+    pub fn CoInitialize(
+        pvReserved: LPVOID,
+    ) -> HRESULT;
+}
     // pub fn CoRegisterMallocSpy();
     // pub fn CoRevokeMallocSpy();
 

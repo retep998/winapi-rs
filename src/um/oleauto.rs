@@ -13,15 +13,14 @@ use um::winnt::{HRESULT, LONG};
 
 pub type DISPID = LONG;
 pub type MEMBERID = DISPID;
-
-EXTERN!{stdcall fn SysAllocString(
-    psz: *const OLECHAR
-) -> BSTR}
-
-EXTERN!{stdcall fn SysFreeString(
-    bstrString: BSTR
-) -> ()}
-
+extern "system" {
+    pub fn SysAllocString(
+        psz: *const OLECHAR,
+    ) -> BSTR;
+    pub fn SysFreeString(
+        bstrString: BSTR,
+    ) -> ();
+}
 pub const MEMBERID_NIL: MEMBERID = DISPID_UNKNOWN;
 
 ENUM!{enum REGKIND {
@@ -29,9 +28,10 @@ ENUM!{enum REGKIND {
     REGKIND_REGISTER,
     REGKIND_NONE,
 }}
-
-EXTERN!{stdcall fn LoadTypeLibEx(
-    szFile: LPCOLESTR,
-    regKind: REGKIND,
-    pptlib: *mut *mut ITypeLib
-) -> HRESULT}
+extern "system" {
+    pub fn LoadTypeLibEx(
+        szFile: LPCOLESTR,
+        regKind: REGKIND,
+        pptlib: *mut *mut ITypeLib,
+    ) -> HRESULT;
+}

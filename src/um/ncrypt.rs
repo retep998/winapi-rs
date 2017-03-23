@@ -11,6 +11,8 @@ pub type NCRYPT_PROV_HANDLE = ULONG_PTR;
 pub type NCRYPT_KEY_HANDLE = ULONG_PTR;
 pub type NCRYPT_HASH_HANDLE = ULONG_PTR;
 pub type NCRYPT_SECRET_HANDLE = ULONG_PTR;
-EXTERN!{stdcall fn NCryptFreeObject(
-    hObject: NCRYPT_HANDLE
-) -> SECURITY_STATUS}
+extern "system" {
+    pub fn NCryptFreeObject(
+        hObject: NCRYPT_HANDLE,
+    ) -> SECURITY_STATUS;
+}
