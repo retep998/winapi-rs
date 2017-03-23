@@ -20,16 +20,18 @@ use um::documenttarget::IPrintDocumentPackageTarget;
 use um::dcommon::{D2D1_PIXEL_FORMAT, DWRITE_MEASURING_MODE};
 use um::dwrite::{DWRITE_GLYPH_RUN, DWRITE_GLYPH_RUN_DESCRIPTION, IDWriteRenderingParams};
 use um::d2dbasetypes::D2D_SIZE_F;
-use um::d2d1::{D2D1_SIZE_U, D2D1_RECT_F, D2D1_POINT_2F, D2D1_EXTEND_MODE, D2D1_CAP_STYLE,
-               D2D1_LINE_JOIN, D2D1_DASH_STYLE, D2D1_ANTIALIAS_MODE, D2D1_MATRIX_3X2_F,
-               D2D1_TEXT_ANTIALIAS_MODE, D2D1_TAG, D2D1_DEBUG_LEVEL, D2D1_COLOR_F,
-               D2D1_GRADIENT_STOP, D2D1_BRUSH_PROPERTIES, ID2D1Geometry, ID2D1Brush, ID2D1BrushVtbl,
-               ID2D1Resource, ID2D1ResourceVtbl, ID2D1StrokeStyle, ID2D1StrokeStyleVtbl,
-               ID2D1Bitmap, ID2D1BitmapVtbl, ID2D1Mesh, ID2D1Image, ID2D1ImageVtbl, ID2D1Layer,
-               ID2D1BitmapBrush, ID2D1BitmapBrushVtbl, ID2D1PathGeometry, ID2D1PathGeometryVtbl,
-               ID2D1GradientStopCollection, ID2D1GradientStopCollectionVtbl, ID2D1DrawingStateBlock,
-               ID2D1DrawingStateBlockVtbl, ID2D1RenderTarget, ID2D1RenderTargetVtbl, ID2D1Factory,
-               ID2D1FactoryVtbl};
+use um::d2d1::{
+    D2D1_SIZE_U, D2D1_RECT_F, D2D1_POINT_2F, D2D1_EXTEND_MODE, D2D1_CAP_STYLE,
+    D2D1_LINE_JOIN, D2D1_DASH_STYLE, D2D1_ANTIALIAS_MODE, D2D1_MATRIX_3X2_F,
+    D2D1_TEXT_ANTIALIAS_MODE, D2D1_TAG, D2D1_DEBUG_LEVEL, D2D1_COLOR_F,
+    D2D1_GRADIENT_STOP, D2D1_BRUSH_PROPERTIES, ID2D1Geometry, ID2D1Brush, ID2D1BrushVtbl,
+    ID2D1Resource, ID2D1ResourceVtbl, ID2D1StrokeStyle, ID2D1StrokeStyleVtbl,
+    ID2D1Bitmap, ID2D1BitmapVtbl, ID2D1Mesh, ID2D1Image, ID2D1ImageVtbl, ID2D1Layer,
+    ID2D1BitmapBrush, ID2D1BitmapBrushVtbl, ID2D1PathGeometry, ID2D1PathGeometryVtbl,
+    ID2D1GradientStopCollection, ID2D1GradientStopCollectionVtbl, ID2D1DrawingStateBlock,
+    ID2D1DrawingStateBlockVtbl, ID2D1RenderTarget, ID2D1RenderTargetVtbl, ID2D1Factory,
+    ID2D1FactoryVtbl
+};
 use um::d2d1effectauthor::D2D1_PROPERTY_BINDING;
 
 FN!{stdcall PD2D1_EFFECT_FACTORY(
@@ -447,16 +449,16 @@ interface ID2D1PrintControl(ID2D1PrintControlVtbl): IUnknown(IUnknownVtbl) {
 
 RIDL!(#[uuid(0xfe9e984d, 0x3f95, 0x407c, 0xb5, 0xdb, 0xcb, 0x94, 0xd4, 0xe8, 0xf8, 0x7c)]
 interface ID2D1ImageBrush(ID2D1ImageBrushVtbl): ID2D1Brush(ID2D1BrushVtbl) {
-    fn SetImage            (image: *const ID2D1Image     ) -> c_void,
-    fn SetExtendModeX      (extendModeX: D2D1_EXTEND_MODE) -> c_void,
-    fn SetExtendModeY      (extendModeY: D2D1_EXTEND_MODE) -> c_void,
+    fn SetImage(image: *const ID2D1Image) -> c_void,
+    fn SetExtendModeX(extendModeX: D2D1_EXTEND_MODE) -> c_void,
+    fn SetExtendModeY(extendModeY: D2D1_EXTEND_MODE) -> c_void,
     fn SetInterpolationMode(interpolationMode: D2D1_INTERPOLATION_MODE) -> c_void,
-    fn SetSourceRectangle  (sourceRectangle: *const D2D1_RECT_F) -> c_void,
-    fn GetImage            (image: *mut *mut ID2D1Image) -> c_void,
-    fn GetExtendModeX      () -> D2D1_EXTEND_MODE,
-    fn GetExtendModeY      () -> D2D1_EXTEND_MODE,
+    fn SetSourceRectangle(sourceRectangle: *const D2D1_RECT_F) -> c_void,
+    fn GetImage(image: *mut *mut ID2D1Image) -> c_void,
+    fn GetExtendModeX() -> D2D1_EXTEND_MODE,
+    fn GetExtendModeY() -> D2D1_EXTEND_MODE,
     fn GetInterpolationMode() -> D2D1_INTERPOLATION_MODE,
-    fn GetSourceRectangle  (sourceRectangle: *mut D2D1_RECT_F) -> c_void
+    fn GetSourceRectangle(sourceRectangle: *mut D2D1_RECT_F) -> c_void
 });
 
 RIDL!(#[uuid(0x41343a53, 0xe41a, 0x49a2, 0x91, 0xcd, 0x21, 0x79, 0x3b, 0xbb, 0x62, 0xe5)]
@@ -490,8 +492,8 @@ interface ID2D1Properties(ID2D1PropertiesVtbl): IUnknown(IUnknownVtbl) {
         nameCount: UINT32
     ) -> HRESULT,
     fn GetPropertyNameLength(index: UINT32) -> UINT32,
-    fn GetType              (index: UINT32) -> D2D1_PROPERTY_TYPE,
-    fn GetPropertyIndex     (name: PCWSTR)  -> UINT32,
+    fn GetType(index: UINT32) -> D2D1_PROPERTY_TYPE,
+    fn GetPropertyIndex(name: PCWSTR)  -> UINT32,
     fn SetValueByName(
         name: PCWSTR,
         prop_type: D2D1_PROPERTY_TYPE,
