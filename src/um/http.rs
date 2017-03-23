@@ -306,32 +306,32 @@ pub const HTTP_VERSION_UNKNOWN: HTTP_VERSION = HTTP_VERSION { MajorVersion: 0, M
 pub const HTTP_VERSION_0_9: HTTP_VERSION = HTTP_VERSION { MajorVersion: 0, MinorVersion: 9 };
 pub const HTTP_VERSION_1_0: HTTP_VERSION = HTTP_VERSION { MajorVersion: 1, MinorVersion: 0 };
 pub const HTTP_VERSION_1_1: HTTP_VERSION = HTTP_VERSION { MajorVersion: 1, MinorVersion: 1 };
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn HTTP_SET_VERSION(mut version: HTTP_VERSION, major: USHORT, minor: USHORT) {
     version.MajorVersion = major;
     version.MinorVersion = minor;
 }
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn HTTP_EQUAL_VERSION(version: HTTP_VERSION, major: USHORT, minor: USHORT) -> bool {
     version.MajorVersion == major && version.MinorVersion == minor
 }
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn HTTP_GREATER_VERSION(version: HTTP_VERSION, major: USHORT, minor: USHORT) -> bool {
     version.MajorVersion > major || (version.MajorVersion == major && version.MinorVersion > minor)
 }
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn HTTP_LESS_VERSION(version: HTTP_VERSION, major: USHORT, minor: USHORT) -> bool {
     version.MajorVersion < major || (version.MajorVersion == major && version.MinorVersion < minor)
 }
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn HTTP_NOT_EQUAL_VERSION(version: HTTP_VERSION, major: USHORT, minor: USHORT) -> bool {
     !HTTP_EQUAL_VERSION(version, major, minor)
 }
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn HTTP_GREATER_EQUAL_VERSION(version: HTTP_VERSION, major: USHORT, minor: USHORT) -> bool {
     !HTTP_LESS_VERSION(version, major, minor)
 }
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn HTTP_LESS_EQUAL_VERSION(version: HTTP_VERSION, major: USHORT, minor: USHORT) -> bool {
     !HTTP_GREATER_VERSION(version, major, minor)
 }
@@ -686,21 +686,21 @@ pub const HTTPAPI_VERSION_2: HTTPAPI_VERSION = HTTPAPI_VERSION {
 pub const HTTPAPI_VERSION_1: HTTPAPI_VERSION = HTTPAPI_VERSION {
     HttpApiMajorVersion: 1, HttpApiMinorVersion: 0,
 };
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn HTTPAPI_EQUAL_VERSION(version: HTTPAPI_VERSION, major: USHORT, minor: USHORT) -> bool {
     version.HttpApiMajorVersion == major && version.HttpApiMinorVersion == minor
 }
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn HTTPAPI_GREATER_VERSION(version: HTTPAPI_VERSION, major: USHORT, minor: USHORT) -> bool {
     version.HttpApiMajorVersion > major ||
     (version.HttpApiMajorVersion == major && version.HttpApiMinorVersion > minor)
 }
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn HTTPAPI_LESS_VERSION(version: HTTPAPI_VERSION, major: USHORT, minor: USHORT) -> bool {
     version.HttpApiMajorVersion < major ||
     (version.HttpApiMajorVersion == major && version.HttpApiMinorVersion < minor)
 }
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn HTTPAPI_VERSION_GREATER_OR_EQUAL(
     version: HTTPAPI_VERSION, major: USHORT, minor: USHORT
 ) -> bool {

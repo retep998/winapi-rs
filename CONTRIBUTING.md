@@ -9,6 +9,22 @@
 * Avoid line breaks when possible, but if you cannot make it fit, add line breaks as late as possible.
 * When breaking on binary operators, put the operator at the beginning of the new line.
 
+##Imports
+
+* Imports should be in asciibetical order.
+
+```Rust
+use shared::basetsd::UINT64;
+use shared::minwindef::{BOOL, BYTE, INT, LPVOID, UINT};
+use um::d3dcommon::{
+    D3D_CBUFFER_TYPE, D3D_FEATURE_LEVEL, D3D_INTERPOLATION_MODE, D3D_MIN_PRECISION, D3D_NAME,
+    D3D_PARAMETER_FLAGS, D3D_PRIMITIVE, D3D_PRIMITIVE_TOPOLOGY, D3D_REGISTER_COMPONENT_TYPE,
+    D3D_RESOURCE_RETURN_TYPE, D3D_SHADER_INPUT_TYPE, D3D_SHADER_VARIABLE_CLASS,
+    D3D_SHADER_VARIABLE_TYPE, D3D_SRV_DIMENSION, D3D_TESSELLATOR_DOMAIN,
+    D3D_TESSELLATOR_OUTPUT_PRIMITIVE, D3D_TESSELLATOR_PARTITIONING, ID3DBlob,
+};
+```
+
 ##Extern functions
 
 * First parameter is the 32-bit calling convention.

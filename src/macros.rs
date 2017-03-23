@@ -7,7 +7,7 @@
 //! Macros to make things easier to define
 macro_rules! DECLARE_HANDLE {
     ($name:ident, $inner:ident) => {
-        #[allow(missing_copy_implementations)] pub enum $inner { }
+        pub enum $inner {}
         pub type $name = *mut $inner;
     };
 }
