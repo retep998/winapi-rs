@@ -6,10 +6,9 @@
 // except according to those terms.
 //! Mappings for the contents of wstypes.h
 use ctypes::{c_short, c_ushort, c_double, wchar_t};
-use shared::ntdef::LONG;
 use shared::minwindef::{BYTE, USHORT, ULONG, WORD, DWORD};
+use shared::ntdef::{LONG, LONGLONG, ULONGLONG};
 use shared::wtypesbase::{FLAGGED_WORD_BLOB, OLECHAR};
-use um::winnt::{LONGLONG, ULONGLONG};
 
 ENUM!{enum VARENUM {
     VT_EMPTY = 0,

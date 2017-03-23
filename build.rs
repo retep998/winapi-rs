@@ -51,7 +51,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("windef", &["minwindef", "winnt"], &[]),
     ("windowsx", &["minwindef"], &[]),
     ("winerror", &["minwindef"], &[]),
-    ("wtypes", &["minwindef", "winnt", "wtypesbase"], &[]),
+    ("wtypes", &["minwindef", "ntdef", "wtypesbase"], &[]),
     ("wtypesbase", &["minwindef", "rpcndr", "winnt"], &[]),
     // ucrt
     // um
