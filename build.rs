@@ -114,7 +114,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("objbase", &["minwindef", "combaseapi", "winnt"], &["ole32"]),
     ("objidl", &["basetsd", "guiddef", "minwindef", "wtypesbase", "objidlbase", "unknwnbase", "winnt"], &[]),
     ("objidlbase", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
-    ("ocidl", &["basetsd", "minwindef", "wtypesbase", "wtypes", "ntdef", "guiddef", "unknwnbase", "oaidl"], &[]),
+    ("ocidl", &["minwindef", "wtypesbase", "wtypes", "ntdef", "guiddef", "unknwnbase", "oaidl"], &[]),
     ("oleauto", &["oaidl", "winnt", "wtypes", "wtypesbase"], &["oleaut32"]),
     ("pdh", &["basetsd", "guiddef", "minwindef", "winnt", "wtypesbase", "windef"], &["pdh"]),
     ("processthreadsapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
