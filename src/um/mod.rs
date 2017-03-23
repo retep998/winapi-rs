@@ -65,6 +65,7 @@ pub mod gl;
 #[cfg(feature = "propidl")] pub mod propidl;
 #[cfg(feature = "propsys")] pub mod propsys;
 #[cfg(feature = "prsht")] pub mod prsht;
+#[cfg(feature = "psapi")] pub mod psapi;
 #[cfg(feature = "setupapi")] pub mod setupapi;
 #[cfg(feature = "shellapi")] pub mod shellapi;
 #[cfg(feature = "spapidef")] pub mod spapidef;
