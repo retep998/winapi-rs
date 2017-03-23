@@ -55,6 +55,13 @@ FN!{stdcall NAMEENUMPROCA(
 pub const CLSCTX_INPROC: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER;
 ```
 
+##GUIDs
+
+```Rust
+DEFINE_GUID!{GUID_DEVCLASS_SENSOR,
+    0x5175d334, 0xc371, 0x4806, 0xb3, 0xba, 0x71, 0xfd, 0x53, 0xc9, 0x25, 0x8d}
+```
+
 ##Structs
 
 * One field per line.
@@ -75,6 +82,28 @@ STRUCT!{struct GROUP_AFFINITY {
 pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
 ```
 
+##COM interfaces
+
+```Rust
+RIDL!{#[uuid(0x6d4865fe, 0x0ab8, 0x4d91, 0x8f, 0x62, 0x5d, 0xd6, 0xbe, 0x34, 0xa3, 0xe0)]
+interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtbl) {
+    fn ReadFileFragment(
+        fragmentStart: *mut *const c_void,
+        fileOffset: UINT64,
+        fragmentSize: UINT64,
+        fragmentContext: *mut *mut c_void
+    ) -> HRESULT,
+    fn ReleaseFileFragment(
+        fragmentContext: *mut c_void
+    ) -> (),
+    fn GetFileSize(
+        fileSize: *mut UINT64
+    ) -> HRESULT,
+    fn GetLastWriteTime(
+        lastWriteTime: *mut UINT64
+    ) -> HRESULT
+}}
+```
 
 ##Organization of code
 
