@@ -3875,21 +3875,6 @@ extern "system" {
 
 /******CUTOFF******/
 
-
-extern "system" {
-    pub fn MessageBoxA(
-        hWnd: HWND,
-        lpText: LPCSTR,
-        lpCaption: LPCSTR,
-        uType: UINT,
-    ) -> c_int;
-    pub fn MessageBoxW(
-        hWnd: HWND,
-        lpText: LPCWSTR,
-        lpCaption: LPCWSTR,
-        uType: UINT,
-    ) -> c_int;
-}
 // Edit Control Styles
 //
 pub const ES_LEFT: DWORD = 0x0000;
@@ -5232,3 +5217,23 @@ STRUCT!{struct MENUINFO {
 }}
 pub type LPMENUINFO = *mut MENUINFO;
 pub type LPCMENUINFO = *const MENUINFO;
+extern "system" {
+    pub fn MessageBoxA(
+        hWnd: HWND,
+        lpText: LPCSTR,
+        lpCaption: LPCSTR,
+        uType: UINT,
+    ) -> c_int;
+    pub fn MessageBoxW(
+        hWnd: HWND,
+        lpText: LPCWSTR,
+        lpCaption: LPCWSTR,
+        uType: UINT,
+    ) -> c_int;
+    pub fn LoadIconA(
+        hInstance: HINSTANCE, lpIconName: LPCSTR,
+    ) -> HICON;
+    pub fn LoadIconW(
+        hInstance: HINSTANCE, lpIconName: LPCWSTR,
+    ) -> HICON;
+}

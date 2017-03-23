@@ -33,88 +33,91 @@ ENUM!{enum REGCLS {
 ENUM!{enum COINITBASE {
     COINITBASE_MULTITHREADED = 0x0,
 }}
-EXTERN!{stdcall fn CoGetMalloc(
-    dwMemContext: DWORD,
-    ppMalloc: *mut LPMALLOC
-) -> HRESULT}
-EXTERN!{stdcall fn CreateStreamOnHGlobal(
-    hGlobal: HGLOBAL,
-    fDeleteOnRelease: BOOL,
-    ppstm: *mut LPSTREAM
-) -> HRESULT}
-EXTERN!{stdcall fn GetHGlobalFromStream(
-    pstm: LPSTREAM,
-    phglobal: *mut HGLOBAL
-) -> HRESULT}
-EXTERN!{stdcall fn CoUninitialize(
-) -> VOID}
-EXTERN!{stdcall fn CoGetCurrentProcess(
-) -> DWORD}
-EXTERN!{stdcall fn CoInitializeEx(
-    pvReserved: LPVOID,
-    dwCoInit: DWORD
-) -> HRESULT}
-EXTERN!{stdcall fn CoGetCallerTID(
-    lpdwTID: LPDWORD
-) -> HRESULT}
-EXTERN!{stdcall fn CoGetCurrentLogicalThreadId(
-    pguid: *mut GUID
-) -> HRESULT}
-EXTERN!{stdcall fn CoGetContextToken(
-    pToken: *mut ULONG_PTR
-) -> HRESULT}
-EXTERN!{stdcall fn CoGetDefaultContext(
-    aptType: APTTYPE,
-    riid: REFIID,
-    ppv: *mut *mut c_void
-) -> HRESULT}
-EXTERN!{stdcall fn CoGetApartmentType(
-    pAptType: *mut APTTYPE,
-    pAptQualifier: *mut APTTYPEQUALIFIER
-) -> HRESULT}
+extern "system" {
+    pub fn CoGetMalloc(
+        dwMemContext: DWORD,
+        ppMalloc: *mut LPMALLOC,
+    ) -> HRESULT;
+    pub fn CreateStreamOnHGlobal(
+        hGlobal: HGLOBAL,
+        fDeleteOnRelease: BOOL,
+        ppstm: *mut LPSTREAM,
+    ) -> HRESULT;
+    pub fn GetHGlobalFromStream(
+        pstm: LPSTREAM,
+        phglobal: *mut HGLOBAL,
+    ) -> HRESULT;
+    pub fn CoUninitialize() -> VOID;
+    pub fn CoGetCurrentProcess() -> DWORD;
+    pub fn CoInitializeEx(
+        pvReserved: LPVOID,
+        dwCoInit: DWORD,
+    ) -> HRESULT;
+    pub fn CoGetCallerTID(
+        lpdwTID: LPDWORD,
+    ) -> HRESULT;
+    pub fn CoGetCurrentLogicalThreadId(
+        pguid: *mut GUID,
+    ) -> HRESULT;
+    pub fn CoGetContextToken(
+        pToken: *mut ULONG_PTR,
+    ) -> HRESULT;
+    pub fn CoGetDefaultContext(
+        aptType: APTTYPE,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn CoGetApartmentType(
+        pAptType: *mut APTTYPE,
+        pAptQualifier: *mut APTTYPEQUALIFIER,
+    ) -> HRESULT;
+}
 STRUCT!{struct ServerInformation {
     dwServerPid: DWORD,
     dwServerTid: DWORD,
     ui64ServerAddress: UINT64,
 }}
 pub type PServerInformation = *mut ServerInformation;
-EXTERN!{stdcall fn CoDecodeProxy(
-    dwClientPid: DWORD,
-    ui64ProxyAddress: UINT64,
-    pServerInformation: PServerInformation
-) -> HRESULT}
+extern "system" {
+    pub fn CoDecodeProxy(
+        dwClientPid: DWORD,
+        ui64ProxyAddress: UINT64,
+        pServerInformation: PServerInformation,
+    ) -> HRESULT;
+}
 DECLARE_HANDLE!(CO_MTA_USAGE_COOKIE, CO_MTA_USAGE_COOKIE__);
-
-EXTERN!{stdcall fn CoIncrementMTAUsage(
-    pCookie: *mut CO_MTA_USAGE_COOKIE
-) -> HRESULT}
-EXTERN!{stdcall fn CoDecrementMTAUsage(
-    Cookie: CO_MTA_USAGE_COOKIE
-) -> HRESULT}
-EXTERN!{stdcall fn CoAllowUnmarshalerCLSID(
-    clsid: REFCLSID
-) -> HRESULT}
-EXTERN!{stdcall fn CoGetObjectContext(
-    riid: REFIID,
-    ppv: *mut LPVOID
-) -> HRESULT}
-EXTERN!{stdcall fn CoGetClassObject(
-    rclsid: REFCLSID,
-    dwClsContext: DWORD,
-    pvReserved: LPVOID,
-    riid: REFIID,
-    ppv: *mut LPVOID
-) -> HRESULT}
-EXTERN!{stdcall fn CoRegisterClassObject(
-    rclsid: REFCLSID,
-    pUnk: LPUNKNOWN,
-    dwClsContext: DWORD,
-    flags: DWORD,
-    lpdwRegister: LPDWORD
-) -> HRESULT}
-EXTERN!{stdcall fn CoRevokeClassObject(
-    dwRegister: DWORD
-) -> HRESULT}
+extern "system" {
+    pub fn CoIncrementMTAUsage(
+        pCookie: *mut CO_MTA_USAGE_COOKIE,
+    ) -> HRESULT;
+    pub fn CoDecrementMTAUsage(
+        Cookie: CO_MTA_USAGE_COOKIE,
+    ) -> HRESULT;
+    pub fn CoAllowUnmarshalerCLSID(
+        clsid: REFCLSID,
+    ) -> HRESULT;
+    pub fn CoGetObjectContext(
+        riid: REFIID,
+        ppv: *mut LPVOID,
+    ) -> HRESULT;
+    pub fn CoGetClassObject(
+        rclsid: REFCLSID,
+        dwClsContext: DWORD,
+        pvReserved: LPVOID,
+        riid: REFIID,
+        ppv: *mut LPVOID,
+    ) -> HRESULT;
+    pub fn CoRegisterClassObject(
+        rclsid: REFCLSID,
+        pUnk: LPUNKNOWN,
+        dwClsContext: DWORD,
+        flags: DWORD,
+        lpdwRegister: LPDWORD,
+    ) -> HRESULT;
+    pub fn CoRevokeClassObject(
+        dwRegister: DWORD,
+    ) -> HRESULT;
+}
     // pub fn CoResumeClassObjects() -> HRESULT;
     // pub fn CoSuspendClassObjects() -> HRESULT;
 
@@ -144,17 +147,19 @@ ENUM!{enum STDMSHLFLAGS {
     // pub fn CoFreeUnusedLibraries();
     // pub fn CoFreeUnusedLibrariesEx();
     // pub fn CoDisconnectContext();
-EXTERN!{stdcall fn CoInitializeSecurity(
-    pSecDesc: PSECURITY_DESCRIPTOR,
-    cAuthSvc: LONG,
-    asAuthSvc: *mut SOLE_AUTHENTICATION_SERVICE,
-    pReserved1: *mut c_void,
-    dwAuthnLevel: DWORD,
-    dwImpLevel: DWORD,
-    pAuthList: *mut c_void,
-    dwCapabilities: DWORD,
-    pReserved3: *mut c_void
-) -> HRESULT}
+extern "system" {
+    pub fn CoInitializeSecurity(
+        pSecDesc: PSECURITY_DESCRIPTOR,
+        cAuthSvc: LONG,
+        asAuthSvc: *mut SOLE_AUTHENTICATION_SERVICE,
+        pReserved1: *mut c_void,
+        dwAuthnLevel: DWORD,
+        dwImpLevel: DWORD,
+        pAuthList: *mut c_void,
+        dwCapabilities: DWORD,
+        pReserved3: *mut c_void,
+    ) -> HRESULT;
+}
     // pub fn CoGetCallContext();
     // pub fn CoQueryProxyBlanket();
     // pub fn CoSetProxyBlanket();
@@ -169,13 +174,15 @@ EXTERN!{stdcall fn CoInitializeSecurity(
 // #define COM_RIGHTS_EXECUTE_REMOTE 4
 // #define COM_RIGHTS_ACTIVATE_LOCAL 8
 // #define COM_RIGHTS_ACTIVATE_REMOTE 16
-EXTERN!{stdcall fn CoCreateInstance(
-    rclsid: REFCLSID,
-    pUnkOuter: LPUNKNOWN,
-    dwClsContext: DWORD,
-    riid: REFIID,
-    ppv: *mut LPVOID
-) -> HRESULT}
+extern "system" {
+    pub fn CoCreateInstance(
+        rclsid: REFCLSID,
+        pUnkOuter: LPUNKNOWN,
+        dwClsContext: DWORD,
+        riid: REFIID,
+        ppv: *mut LPVOID,
+    ) -> HRESULT;
+}
     // pub fn CoCreateInstanceEx();
     // pub fn CoRegisterActivationFilter();
     // pub fn CoCreateInstanceFromApp();
@@ -190,10 +197,12 @@ EXTERN!{stdcall fn CoCreateInstance(
     // pub fn StringFromIID();
     // pub fn IIDFromString();
     // pub fn ProgIDFromCLSID();
-EXTERN!{stdcall fn CLSIDFromProgID(
-    lpszProgID: LPCOLESTR,
-    lpclsid: LPCLSID
-) -> HRESULT}
+extern "system" {
+    pub fn CLSIDFromProgID(
+        lpszProgID: LPCOLESTR,
+        lpclsid: LPCLSID,
+    ) -> HRESULT;
+}
     // pub fn StringFromGUID2();
     // pub fn CoCreateGuid();
     // pub fn PropVariantCopy();
@@ -224,20 +233,21 @@ ENUM!{enum AgileReferenceOptions {
     // pub fn RoGetAgileReference();
 // typedef HRESULT (STDAPICALLTYPE * LPFNGETCLASSOBJECT) (REFCLSID, REFIID, LPVOID *);
 // typedef HRESULT (STDAPICALLTYPE * LPFNCANUNLOADNOW)(void);
-EXTERN!{stdcall fn DllGetClassObject(
-    rclsid: REFCLSID,
-    riid: REFIID,
-    ppv: *mut LPVOID
-) -> HRESULT}
-EXTERN!{stdcall fn DllCanUnloadNow(
-) -> HRESULT}
-EXTERN!{stdcall fn CoTaskMemAlloc(
-    cb: SIZE_T
-) -> LPVOID}
-EXTERN!{stdcall fn CoTaskMemRealloc(
-    pv: LPVOID,
-    cb: SIZE_T
-) -> LPVOID}
-EXTERN!{stdcall fn CoTaskMemFree(
-    pv: LPVOID
-) -> VOID}
+extern "system" {
+    pub fn DllGetClassObject(
+        rclsid: REFCLSID,
+        riid: REFIID,
+        ppv: *mut LPVOID,
+    ) -> HRESULT;
+    pub fn DllCanUnloadNow() -> HRESULT;
+    pub fn CoTaskMemAlloc(
+        cb: SIZE_T,
+    ) -> LPVOID;
+    pub fn CoTaskMemRealloc(
+        pv: LPVOID,
+        cb: SIZE_T,
+    ) -> LPVOID;
+    pub fn CoTaskMemFree(
+        pv: LPVOID,
+    ) -> VOID;
+}

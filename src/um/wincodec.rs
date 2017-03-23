@@ -56,7 +56,6 @@ ENUM!{enum WICComponentEnumerateOptions {
     WICComponentEnumerateUnsigned = 0x40000000,
     WICComponentEnumerateBuiltInOnly = 0x20000000,
 }}
-#[allow(unused_qualifications)]
 STRUCT!{struct WICBitmapPattern {
     Position: ULARGE_INTEGER,
     Length: ULONG,
@@ -258,7 +257,6 @@ ENUM!{enum WICPlanarOptions {
     WICPlanarOptionsDefault = 0,
     WICPlanarOptionsPreserveSubsampling = 0x1,
 }}
-#[allow(unused_qualifications)]
 STRUCT!{struct WICImageParameters {
     PixelFormat: D2D1_PIXEL_FORMAT,
     DpiX: FLOAT,
@@ -268,13 +266,11 @@ STRUCT!{struct WICImageParameters {
     PixelWidth: FLOAT,
     PixelHeight: FLOAT,
 }}
-#[allow(unused_qualifications)]
 STRUCT!{struct WICBitmapPlaneDescription {
     Format: WICPixelFormatGUID,
     Width: UINT,
     Height: UINT,
 }}
-#[allow(unused_qualifications)]
 STRUCT!{struct WICBitmapPlane {
     Format: WICPixelFormatGUID,
     pbBuffer: *mut BYTE,

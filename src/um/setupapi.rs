@@ -983,339 +983,344 @@ pub const ERROR_INTERFACE_DEVICE_REMOVED: DWORD = ERROR_DEVICE_INTERFACE_REMOVED
 pub const ERROR_NO_SUCH_INTERFACE_DEVICE: DWORD = ERROR_NO_SUCH_DEVICE_INTERFACE;
 pub const ERROR_NOT_INSTALLED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
     | 0x1000;
-EXTERN!{stdcall fn SetupGetInfInformationA(
-    InfSpec: LPCVOID,
-    SearchControl: DWORD,
-    ReturnBuffer: PSP_INF_INFORMATION,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetInfInformationW(
-    InfSpec: LPCVOID,
-    SearchControl: DWORD,
-    ReturnBuffer: PSP_INF_INFORMATION,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupGetInfInformationA(
+        InfSpec: LPCVOID,
+        SearchControl: DWORD,
+        ReturnBuffer: PSP_INF_INFORMATION,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetInfInformationW(
+        InfSpec: LPCVOID,
+        SearchControl: DWORD,
+        ReturnBuffer: PSP_INF_INFORMATION,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+}
 pub const INFINFO_INF_SPEC_IS_HINF: DWORD = 1;
 pub const INFINFO_INF_NAME_IS_ABSOLUTE: DWORD = 2;
 pub const INFINFO_DEFAULT_SEARCH: DWORD = 3;
 pub const INFINFO_REVERSE_DEFAULT_SEARCH: DWORD = 4;
 pub const INFINFO_INF_PATH_LIST_SEARCH: DWORD = 5;
-EXTERN!{stdcall fn SetupQueryInfFileInformationA(
-    InfInformation: PSP_INF_INFORMATION,
-    InfIndex: UINT,
-    ReturnBuffer: PSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueryInfFileInformationW(
-    InfInformation: PSP_INF_INFORMATION,
-    InfIndex: UINT,
-    ReturnBuffer: PWSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueryInfOriginalFileInformationA(
-    InfInformation: PSP_INF_INFORMATION,
-    InfIndex: UINT,
-    AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
-    OriginalFileInfo: PSP_ORIGINAL_FILE_INFO_A
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueryInfOriginalFileInformationW(
-    InfInformation: PSP_INF_INFORMATION,
-    InfIndex: UINT,
-    AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
-    OriginalFileInfo: PSP_ORIGINAL_FILE_INFO_W
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueryInfVersionInformationA(
-    InfInformation: PSP_INF_INFORMATION,
-    InfIndex: UINT,
-    Key: PCSTR,
-    ReturnBuffer: PSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueryInfVersionInformationW(
-    InfInformation: PSP_INF_INFORMATION,
-    InfIndex: UINT,
-    Key: PCWSTR,
-    ReturnBuffer: PWSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetInfDriverStoreLocationA(
-    FileName: PCSTR,
-    AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
-    LocaleName: PCSTR,
-    ReturnBuffer: PSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetInfDriverStoreLocationW(
-    FileName: PCWSTR,
-    AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
-    LocaleName: PCWSTR,
-    ReturnBuffer: PWSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetInfPublishedNameA(
-    DriverStoreLocation: PCSTR,
-    ReturnBuffer: PSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetInfPublishedNameW(
-    DriverStoreLocation: PCWSTR,
-    ReturnBuffer: PWSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetInfFileListA(
-    DirectoryPath: PCSTR,
-    InfStyle: DWORD,
-    ReturnBuffer: PSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetInfFileListW(
-    DirectoryPath: PCWSTR,
-    InfStyle: DWORD,
-    ReturnBuffer: PWSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupOpenInfFileW(
-    FileName: PCWSTR,
-    InfClass: PCWSTR,
-    InfStyle: DWORD,
-    ErrorLine: PUINT
-) -> HINF}
-EXTERN!{stdcall fn SetupOpenInfFileA(
-    FileName: PCSTR,
-    InfClass: PCSTR,
-    InfStyle: DWORD,
-    ErrorLine: PUINT
-) -> HINF}
-EXTERN!{stdcall fn SetupOpenMasterInf(
-) -> HINF}
-EXTERN!{stdcall fn SetupOpenAppendInfFileW(
-    FileName: PCWSTR,
-    InfHandle: HINF,
-    ErrorLine: PUINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupOpenAppendInfFileA(
-    FileName: PCSTR,
-    InfHandle: HINF,
-    ErrorLine: PUINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupCloseInfFile(
-    InfHandle: HINF
-) -> VOID}
-EXTERN!{stdcall fn SetupFindFirstLineA(
-    InfHandle: HINF,
-    Section: PCSTR,
-    Key: PCSTR,
-    Context: PINFCONTEXT
-) -> BOOL}
-EXTERN!{stdcall fn SetupFindFirstLineW(
-    InfHandle: HINF,
-    Section: PCWSTR,
-    Key: PCWSTR,
-    Context: PINFCONTEXT
-) -> BOOL}
-EXTERN!{stdcall fn SetupFindNextLine(
-    ContextIn: PINFCONTEXT,
-    ContextOut: PINFCONTEXT
-) -> BOOL}
-EXTERN!{stdcall fn SetupFindNextMatchLineA(
-    ContextIn: PINFCONTEXT,
-    Key: PCSTR,
-    ContextOut: PINFCONTEXT
-) -> BOOL}
-EXTERN!{stdcall fn SetupFindNextMatchLineW(
-    ContextIn: PINFCONTEXT,
-    Key: PCWSTR,
-    ContextOut: PINFCONTEXT
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetLineByIndexA(
-    InfHandle: HINF,
-    Section: PCSTR,
-    Index: DWORD,
-    Context: PINFCONTEXT
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetLineByIndexW(
-    InfHandle: HINF,
-    Section: PCWSTR,
-    Index: DWORD,
-    Context: PINFCONTEXT
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetLineCountA(
-    InfHandle: HINF,
-    Section: PCSTR
-) -> LONG}
-EXTERN!{stdcall fn SetupGetLineCountW(
-    InfHandle: HINF,
-    Section: PCWSTR
-) -> LONG}
-EXTERN!{stdcall fn SetupGetLineTextA(
-    Context: PINFCONTEXT,
-    InfHandle: HINF,
-    Section: PCSTR,
-    Key: PCSTR,
-    ReturnBuffer: PSTR,
-    ReturnBufferSize: DWORD,
-    ReturnBufferSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetLineTextW(
-    Context: PINFCONTEXT,
-    InfHandle: HINF,
-    Section: PCWSTR,
-    Key: PCWSTR,
-    ReturnBuffer: PWSTR,
-    ReturnBufferSize: DWORD,
-    ReturnBufferSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetFieldCount(
-    Context: PINFCONTEXT
-) -> DWORD}
-EXTERN!{stdcall fn SetupGetStringFieldA(
-    Context: PINFCONTEXT,
-    FieldIndex: DWORD,
-    ReturnBuffer: PSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetStringFieldW(
-    Context: PINFCONTEXT,
-    FieldIndex: DWORD,
-    ReturnBuffer: PWSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetIntField(
-    Context: PINFCONTEXT,
-    FieldIndex: DWORD,
-    IntegerValue: PINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetMultiSzFieldA(
-    Context: PINFCONTEXT,
-    FieldIndex: DWORD,
-    ReturnBuffer: PSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetMultiSzFieldW(
-    Context: PINFCONTEXT,
-    FieldIndex: DWORD,
-    ReturnBuffer: PWSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetBinaryField(
-    Context: PINFCONTEXT,
-    FieldIndex: DWORD,
-    ReturnBuffer: PBYTE,
-    ReturnBufferSize: DWORD,
-    RequiredSize: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetFileCompressionInfoA(
-    SourceFileName: PCSTR,
-    ActualSourceFileName: *mut PSTR,
-    SourceFileSize: PDWORD,
-    TargetFileSize: PDWORD,
-    CompressionType: PUINT
-) -> DWORD}
-EXTERN!{stdcall fn SetupGetFileCompressionInfoW(
-    SourceFileName: PCWSTR,
-    ActualSourceFileName: *mut PWSTR,
-    SourceFileSize: PDWORD,
-    TargetFileSize: PDWORD,
-    CompressionType: PUINT
-) -> DWORD}
-EXTERN!{stdcall fn SetupGetFileCompressionInfoExA(
-    SourceFileName: PCSTR,
-    ActualSourceFileNameBuffer: PSTR,
-    ActualSourceFileNameBufferLen: DWORD,
-    RequiredBufferLen: PDWORD,
-    SourceFileSize: PDWORD,
-    TargetFileSize: PDWORD,
-    CompressionType: PUINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetFileCompressionInfoExW(
-    SourceFileName: PCWSTR,
-    ActualSourceFileNameBuffer: PWSTR,
-    ActualSourceFileNameBufferLen: DWORD,
-    RequiredBufferLen: PDWORD,
-    SourceFileSize: PDWORD,
-    TargetFileSize: PDWORD,
-    CompressionType: PUINT
-) -> BOOL}
+extern "system" {
+    pub fn SetupQueryInfFileInformationA(
+        InfInformation: PSP_INF_INFORMATION,
+        InfIndex: UINT,
+        ReturnBuffer: PSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupQueryInfFileInformationW(
+        InfInformation: PSP_INF_INFORMATION,
+        InfIndex: UINT,
+        ReturnBuffer: PWSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupQueryInfOriginalFileInformationA(
+        InfInformation: PSP_INF_INFORMATION,
+        InfIndex: UINT,
+        AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
+        OriginalFileInfo: PSP_ORIGINAL_FILE_INFO_A,
+    ) -> BOOL;
+    pub fn SetupQueryInfOriginalFileInformationW(
+        InfInformation: PSP_INF_INFORMATION,
+        InfIndex: UINT,
+        AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
+        OriginalFileInfo: PSP_ORIGINAL_FILE_INFO_W,
+    ) -> BOOL;
+    pub fn SetupQueryInfVersionInformationA(
+        InfInformation: PSP_INF_INFORMATION,
+        InfIndex: UINT,
+        Key: PCSTR,
+        ReturnBuffer: PSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupQueryInfVersionInformationW(
+        InfInformation: PSP_INF_INFORMATION,
+        InfIndex: UINT,
+        Key: PCWSTR,
+        ReturnBuffer: PWSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetInfDriverStoreLocationA(
+        FileName: PCSTR,
+        AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
+        LocaleName: PCSTR,
+        ReturnBuffer: PSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetInfDriverStoreLocationW(
+        FileName: PCWSTR,
+        AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
+        LocaleName: PCWSTR,
+        ReturnBuffer: PWSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetInfPublishedNameA(
+        DriverStoreLocation: PCSTR,
+        ReturnBuffer: PSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetInfPublishedNameW(
+        DriverStoreLocation: PCWSTR,
+        ReturnBuffer: PWSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetInfFileListA(
+        DirectoryPath: PCSTR,
+        InfStyle: DWORD,
+        ReturnBuffer: PSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetInfFileListW(
+        DirectoryPath: PCWSTR,
+        InfStyle: DWORD,
+        ReturnBuffer: PWSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupOpenInfFileW(
+        FileName: PCWSTR,
+        InfClass: PCWSTR,
+        InfStyle: DWORD,
+        ErrorLine: PUINT,
+    ) -> HINF;
+    pub fn SetupOpenInfFileA(
+        FileName: PCSTR,
+        InfClass: PCSTR,
+        InfStyle: DWORD,
+        ErrorLine: PUINT,
+    ) -> HINF;
+    pub fn SetupOpenMasterInf() -> HINF;
+    pub fn SetupOpenAppendInfFileW(
+        FileName: PCWSTR,
+        InfHandle: HINF,
+        ErrorLine: PUINT,
+    ) -> BOOL;
+    pub fn SetupOpenAppendInfFileA(
+        FileName: PCSTR,
+        InfHandle: HINF,
+        ErrorLine: PUINT,
+    ) -> BOOL;
+    pub fn SetupCloseInfFile(
+        InfHandle: HINF,
+    ) -> VOID;
+    pub fn SetupFindFirstLineA(
+        InfHandle: HINF,
+        Section: PCSTR,
+        Key: PCSTR,
+        Context: PINFCONTEXT,
+    ) -> BOOL;
+    pub fn SetupFindFirstLineW(
+        InfHandle: HINF,
+        Section: PCWSTR,
+        Key: PCWSTR,
+        Context: PINFCONTEXT,
+    ) -> BOOL;
+    pub fn SetupFindNextLine(
+        ContextIn: PINFCONTEXT,
+        ContextOut: PINFCONTEXT,
+    ) -> BOOL;
+    pub fn SetupFindNextMatchLineA(
+        ContextIn: PINFCONTEXT,
+        Key: PCSTR,
+        ContextOut: PINFCONTEXT,
+    ) -> BOOL;
+    pub fn SetupFindNextMatchLineW(
+        ContextIn: PINFCONTEXT,
+        Key: PCWSTR,
+        ContextOut: PINFCONTEXT,
+    ) -> BOOL;
+    pub fn SetupGetLineByIndexA(
+        InfHandle: HINF,
+        Section: PCSTR,
+        Index: DWORD,
+        Context: PINFCONTEXT,
+    ) -> BOOL;
+    pub fn SetupGetLineByIndexW(
+        InfHandle: HINF,
+        Section: PCWSTR,
+        Index: DWORD,
+        Context: PINFCONTEXT,
+    ) -> BOOL;
+    pub fn SetupGetLineCountA(
+        InfHandle: HINF,
+        Section: PCSTR,
+    ) -> LONG;
+    pub fn SetupGetLineCountW(
+        InfHandle: HINF,
+        Section: PCWSTR,
+    ) -> LONG;
+    pub fn SetupGetLineTextA(
+        Context: PINFCONTEXT,
+        InfHandle: HINF,
+        Section: PCSTR,
+        Key: PCSTR,
+        ReturnBuffer: PSTR,
+        ReturnBufferSize: DWORD,
+        ReturnBufferSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetLineTextW(
+        Context: PINFCONTEXT,
+        InfHandle: HINF,
+        Section: PCWSTR,
+        Key: PCWSTR,
+        ReturnBuffer: PWSTR,
+        ReturnBufferSize: DWORD,
+        ReturnBufferSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetFieldCount(
+        Context: PINFCONTEXT,
+    ) -> DWORD;
+    pub fn SetupGetStringFieldA(
+        Context: PINFCONTEXT,
+        FieldIndex: DWORD,
+        ReturnBuffer: PSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetStringFieldW(
+        Context: PINFCONTEXT,
+        FieldIndex: DWORD,
+        ReturnBuffer: PWSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetIntField(
+        Context: PINFCONTEXT,
+        FieldIndex: DWORD,
+        IntegerValue: PINT,
+    ) -> BOOL;
+    pub fn SetupGetMultiSzFieldA(
+        Context: PINFCONTEXT,
+        FieldIndex: DWORD,
+        ReturnBuffer: PSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: LPDWORD,
+    ) -> BOOL;
+    pub fn SetupGetMultiSzFieldW(
+        Context: PINFCONTEXT,
+        FieldIndex: DWORD,
+        ReturnBuffer: PWSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: LPDWORD,
+    ) -> BOOL;
+    pub fn SetupGetBinaryField(
+        Context: PINFCONTEXT,
+        FieldIndex: DWORD,
+        ReturnBuffer: PBYTE,
+        ReturnBufferSize: DWORD,
+        RequiredSize: LPDWORD,
+    ) -> BOOL;
+    pub fn SetupGetFileCompressionInfoA(
+        SourceFileName: PCSTR,
+        ActualSourceFileName: *mut PSTR,
+        SourceFileSize: PDWORD,
+        TargetFileSize: PDWORD,
+        CompressionType: PUINT,
+    ) -> DWORD;
+    pub fn SetupGetFileCompressionInfoW(
+        SourceFileName: PCWSTR,
+        ActualSourceFileName: *mut PWSTR,
+        SourceFileSize: PDWORD,
+        TargetFileSize: PDWORD,
+        CompressionType: PUINT,
+    ) -> DWORD;
+    pub fn SetupGetFileCompressionInfoExA(
+        SourceFileName: PCSTR,
+        ActualSourceFileNameBuffer: PSTR,
+        ActualSourceFileNameBufferLen: DWORD,
+        RequiredBufferLen: PDWORD,
+        SourceFileSize: PDWORD,
+        TargetFileSize: PDWORD,
+        CompressionType: PUINT,
+    ) -> BOOL;
+    pub fn SetupGetFileCompressionInfoExW(
+        SourceFileName: PCWSTR,
+        ActualSourceFileNameBuffer: PWSTR,
+        ActualSourceFileNameBufferLen: DWORD,
+        RequiredBufferLen: PDWORD,
+        SourceFileSize: PDWORD,
+        TargetFileSize: PDWORD,
+        CompressionType: PUINT,
+    ) -> BOOL;
+}
 pub const FILE_COMPRESSION_NONE: UINT = 0;
 pub const FILE_COMPRESSION_WINLZA: UINT = 1;
 pub const FILE_COMPRESSION_MSZIP: UINT = 2;
 pub const FILE_COMPRESSION_NTCAB: UINT = 3;
-EXTERN!{stdcall fn SetupDecompressOrCopyFileA(
-    SourceFileName: PCSTR,
-    TargetFileName: PCSTR,
-    CompressionType: PUINT
-) -> DWORD}
-EXTERN!{stdcall fn SetupDecompressOrCopyFileW(
-    SourceFileName: PCWSTR,
-    TargetFileName: PCWSTR,
-    CompressionType: PUINT
-) -> DWORD}
-EXTERN!{stdcall fn SetupGetSourceFileLocationA(
-    InfHandle: HINF,
-    InfContext: PINFCONTEXT,
-    FileName: PCSTR,
-    SourceId: PUINT,
-    ReturnBuffer: PSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetSourceFileLocationW(
-    InfHandle: HINF,
-    InfContext: PINFCONTEXT,
-    FileName: PCWSTR,
-    SourceId: PUINT,
-    ReturnBuffer: PWSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetSourceFileSizeA(
-    InfHandle: HINF,
-    InfContext: PINFCONTEXT,
-    FileName: PCSTR,
-    Section: PCSTR,
-    FileSize: PDWORD,
-    RoundingFactor: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetSourceFileSizeW(
-    InfHandle: HINF,
-    InfContext: PINFCONTEXT,
-    FileName: PCWSTR,
-    Section: PCWSTR,
-    FileSize: PDWORD,
-    RoundingFactor: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetTargetPathA(
-    InfHandle: HINF,
-    InfContext: PINFCONTEXT,
-    Section: PCSTR,
-    ReturnBuffer: PSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetTargetPathW(
-    InfHandle: HINF,
-    InfContext: PINFCONTEXT,
-    Section: PCWSTR,
-    ReturnBuffer: PWSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupDecompressOrCopyFileA(
+        SourceFileName: PCSTR,
+        TargetFileName: PCSTR,
+        CompressionType: PUINT,
+    ) -> DWORD;
+    pub fn SetupDecompressOrCopyFileW(
+        SourceFileName: PCWSTR,
+        TargetFileName: PCWSTR,
+        CompressionType: PUINT,
+    ) -> DWORD;
+    pub fn SetupGetSourceFileLocationA(
+        InfHandle: HINF,
+        InfContext: PINFCONTEXT,
+        FileName: PCSTR,
+        SourceId: PUINT,
+        ReturnBuffer: PSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetSourceFileLocationW(
+        InfHandle: HINF,
+        InfContext: PINFCONTEXT,
+        FileName: PCWSTR,
+        SourceId: PUINT,
+        ReturnBuffer: PWSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetSourceFileSizeA(
+        InfHandle: HINF,
+        InfContext: PINFCONTEXT,
+        FileName: PCSTR,
+        Section: PCSTR,
+        FileSize: PDWORD,
+        RoundingFactor: UINT,
+    ) -> BOOL;
+    pub fn SetupGetSourceFileSizeW(
+        InfHandle: HINF,
+        InfContext: PINFCONTEXT,
+        FileName: PCWSTR,
+        Section: PCWSTR,
+        FileSize: PDWORD,
+        RoundingFactor: UINT,
+    ) -> BOOL;
+    pub fn SetupGetTargetPathA(
+        InfHandle: HINF,
+        InfContext: PINFCONTEXT,
+        Section: PCSTR,
+        ReturnBuffer: PSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetTargetPathW(
+        InfHandle: HINF,
+        InfContext: PINFCONTEXT,
+        Section: PCWSTR,
+        ReturnBuffer: PWSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+}
 pub const SRCLIST_TEMPORARY: DWORD = 0x00000001;
 pub const SRCLIST_NOBROWSE: DWORD = 0x00000002;
 pub const SRCLIST_SYSTEM: DWORD = 0x00000010;
@@ -1324,148 +1329,149 @@ pub const SRCLIST_SYSIFADMIN: DWORD = 0x00000040;
 pub const SRCLIST_SUBDIRS: DWORD = 0x00000100;
 pub const SRCLIST_APPEND: DWORD = 0x00000200;
 pub const SRCLIST_NOSTRIPPLATFORM: DWORD = 0x00000400;
-EXTERN!{stdcall fn SetupSetSourceListA(
-    Flags: DWORD,
-    SourceList: *mut PCSTR,
-    SourceCount: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupSetSourceListW(
-    Flags: DWORD,
-    SourceList: *mut PCWSTR,
-    SourceCount: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupCancelTemporarySourceList(
-) -> BOOL}
-EXTERN!{stdcall fn SetupAddToSourceListA(
-    Flags: DWORD,
-    Source: PCSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupAddToSourceListW(
-    Flags: DWORD,
-    Source: PCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupRemoveFromSourceListA(
-    Flags: DWORD,
-    Source: PCSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupRemoveFromSourceListW(
-    Flags: DWORD,
-    Source: PCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupQuerySourceListA(
-    Flags: DWORD,
-    List: *mut *mut PCSTR,
-    Count: PUINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupQuerySourceListW(
-    Flags: DWORD,
-    List: *mut *mut PCWSTR,
-    Count: PUINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupFreeSourceListA(
-    List: *mut *mut PCSTR,
-    Count: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupFreeSourceListW(
-    List: *mut *mut PCWSTR,
-    Count: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupPromptForDiskA(
-    hwndParent: HWND,
-    DialogTitle: PCSTR,
-    DiskName: PCSTR,
-    PathToSource: PCSTR,
-    FileSought: PCSTR,
-    TagFile: PCSTR,
-    DiskPromptStyle: DWORD,
-    PathBuffer: PSTR,
-    PathBufferSize: DWORD,
-    PathRequiredSize: PDWORD
-) -> UINT}
-EXTERN!{stdcall fn SetupPromptForDiskW(
-    hwndParent: HWND,
-    DialogTitle: PCWSTR,
-    DiskName: PCWSTR,
-    PathToSource: PCWSTR,
-    FileSought: PCWSTR,
-    TagFile: PCWSTR,
-    DiskPromptStyle: DWORD,
-    PathBuffer: PWSTR,
-    PathBufferSize: DWORD,
-    PathRequiredSize: PDWORD
-) -> UINT}
-EXTERN!{stdcall fn SetupCopyErrorA(
-    hwndParent: HWND,
-    DialogTitle: PCSTR,
-    DiskName: PCSTR,
-    PathToSource: PCSTR,
-    SourceFile: PCSTR,
-    TargetPathFile: PCSTR,
-    Win32ErrorCode: UINT,
-    Style: DWORD,
-    PathBuffer: PSTR,
-    PathBufferSize: DWORD,
-    PathRequiredSize: PDWORD
-) -> UINT}
-EXTERN!{stdcall fn SetupCopyErrorW(
-    hwndParent: HWND,
-    DialogTitle: PCWSTR,
-    DiskName: PCWSTR,
-    PathToSource: PCWSTR,
-    SourceFile: PCWSTR,
-    TargetPathFile: PCWSTR,
-    Win32ErrorCode: UINT,
-    Style: DWORD,
-    PathBuffer: PWSTR,
-    PathBufferSize: DWORD,
-    PathRequiredSize: PDWORD
-) -> UINT}
-EXTERN!{stdcall fn SetupRenameErrorA(
-    hwndParent: HWND,
-    DialogTitle: PCSTR,
-    SourceFile: PCSTR,
-    TargetFile: PCSTR,
-    Win32ErrorCode: UINT,
-    Style: DWORD
-) -> UINT}
-EXTERN!{stdcall fn SetupRenameErrorW(
-    hwndParent: HWND,
-    DialogTitle: PCWSTR,
-    SourceFile: PCWSTR,
-    TargetFile: PCWSTR,
-    Win32ErrorCode: UINT,
-    Style: DWORD
-) -> UINT}
-EXTERN!{stdcall fn SetupDeleteErrorA(
-    hwndParent: HWND,
-    DialogTitle: PCSTR,
-    File: PCSTR,
-    Win32ErrorCode: UINT,
-    Style: DWORD
-) -> UINT}
-EXTERN!{stdcall fn SetupDeleteErrorW(
-    hwndParent: HWND,
-    DialogTitle: PCWSTR,
-    File: PCWSTR,
-    Win32ErrorCode: UINT,
-    Style: DWORD
-) -> UINT}
-EXTERN!{stdcall fn SetupBackupErrorA(
-    hwndParent: HWND,
-    DialogTitle: PCSTR,
-    SourceFile: PCSTR,
-    TargetFile: PCSTR,
-    Win32ErrorCode: UINT,
-    Style: DWORD
-) -> UINT}
-EXTERN!{stdcall fn SetupBackupErrorW(
-    hwndParent: HWND,
-    DialogTitle: PCWSTR,
-    SourceFile: PCWSTR,
-    TargetFile: PCWSTR,
-    Win32ErrorCode: UINT,
-    Style: DWORD
-) -> UINT}
+extern "system" {
+    pub fn SetupSetSourceListA(
+        Flags: DWORD,
+        SourceList: *mut PCSTR,
+        SourceCount: UINT,
+    ) -> BOOL;
+    pub fn SetupSetSourceListW(
+        Flags: DWORD,
+        SourceList: *mut PCWSTR,
+        SourceCount: UINT,
+    ) -> BOOL;
+    pub fn SetupCancelTemporarySourceList() -> BOOL;
+    pub fn SetupAddToSourceListA(
+        Flags: DWORD,
+        Source: PCSTR,
+    ) -> BOOL;
+    pub fn SetupAddToSourceListW(
+        Flags: DWORD,
+        Source: PCWSTR,
+    ) -> BOOL;
+    pub fn SetupRemoveFromSourceListA(
+        Flags: DWORD,
+        Source: PCSTR,
+    ) -> BOOL;
+    pub fn SetupRemoveFromSourceListW(
+        Flags: DWORD,
+        Source: PCWSTR,
+    ) -> BOOL;
+    pub fn SetupQuerySourceListA(
+        Flags: DWORD,
+        List: *mut *mut PCSTR,
+        Count: PUINT,
+    ) -> BOOL;
+    pub fn SetupQuerySourceListW(
+        Flags: DWORD,
+        List: *mut *mut PCWSTR,
+        Count: PUINT,
+    ) -> BOOL;
+    pub fn SetupFreeSourceListA(
+        List: *mut *mut PCSTR,
+        Count: UINT,
+    ) -> BOOL;
+    pub fn SetupFreeSourceListW(
+        List: *mut *mut PCWSTR,
+        Count: UINT,
+    ) -> BOOL;
+    pub fn SetupPromptForDiskA(
+        hwndParent: HWND,
+        DialogTitle: PCSTR,
+        DiskName: PCSTR,
+        PathToSource: PCSTR,
+        FileSought: PCSTR,
+        TagFile: PCSTR,
+        DiskPromptStyle: DWORD,
+        PathBuffer: PSTR,
+        PathBufferSize: DWORD,
+        PathRequiredSize: PDWORD,
+    ) -> UINT;
+    pub fn SetupPromptForDiskW(
+        hwndParent: HWND,
+        DialogTitle: PCWSTR,
+        DiskName: PCWSTR,
+        PathToSource: PCWSTR,
+        FileSought: PCWSTR,
+        TagFile: PCWSTR,
+        DiskPromptStyle: DWORD,
+        PathBuffer: PWSTR,
+        PathBufferSize: DWORD,
+        PathRequiredSize: PDWORD,
+    ) -> UINT;
+    pub fn SetupCopyErrorA(
+        hwndParent: HWND,
+        DialogTitle: PCSTR,
+        DiskName: PCSTR,
+        PathToSource: PCSTR,
+        SourceFile: PCSTR,
+        TargetPathFile: PCSTR,
+        Win32ErrorCode: UINT,
+        Style: DWORD,
+        PathBuffer: PSTR,
+        PathBufferSize: DWORD,
+        PathRequiredSize: PDWORD,
+    ) -> UINT;
+    pub fn SetupCopyErrorW(
+        hwndParent: HWND,
+        DialogTitle: PCWSTR,
+        DiskName: PCWSTR,
+        PathToSource: PCWSTR,
+        SourceFile: PCWSTR,
+        TargetPathFile: PCWSTR,
+        Win32ErrorCode: UINT,
+        Style: DWORD,
+        PathBuffer: PWSTR,
+        PathBufferSize: DWORD,
+        PathRequiredSize: PDWORD,
+    ) -> UINT;
+    pub fn SetupRenameErrorA(
+        hwndParent: HWND,
+        DialogTitle: PCSTR,
+        SourceFile: PCSTR,
+        TargetFile: PCSTR,
+        Win32ErrorCode: UINT,
+        Style: DWORD,
+    ) -> UINT;
+    pub fn SetupRenameErrorW(
+        hwndParent: HWND,
+        DialogTitle: PCWSTR,
+        SourceFile: PCWSTR,
+        TargetFile: PCWSTR,
+        Win32ErrorCode: UINT,
+        Style: DWORD,
+    ) -> UINT;
+    pub fn SetupDeleteErrorA(
+        hwndParent: HWND,
+        DialogTitle: PCSTR,
+        File: PCSTR,
+        Win32ErrorCode: UINT,
+        Style: DWORD,
+    ) -> UINT;
+    pub fn SetupDeleteErrorW(
+        hwndParent: HWND,
+        DialogTitle: PCWSTR,
+        File: PCWSTR,
+        Win32ErrorCode: UINT,
+        Style: DWORD,
+    ) -> UINT;
+    pub fn SetupBackupErrorA(
+        hwndParent: HWND,
+        DialogTitle: PCSTR,
+        SourceFile: PCSTR,
+        TargetFile: PCSTR,
+        Win32ErrorCode: UINT,
+        Style: DWORD,
+    ) -> UINT;
+    pub fn SetupBackupErrorW(
+        hwndParent: HWND,
+        DialogTitle: PCWSTR,
+        SourceFile: PCWSTR,
+        TargetFile: PCWSTR,
+        Win32ErrorCode: UINT,
+        Style: DWORD,
+    ) -> UINT;
+}
 pub const IDF_NOBROWSE: DWORD = 0x00000001;
 pub const IDF_NOSKIP: DWORD = 0x00000002;
 pub const IDF_NODETAILS: DWORD = 0x00000004;
@@ -1482,97 +1488,103 @@ pub const DPROMPT_CANCEL: UINT = 1;
 pub const DPROMPT_SKIPFILE: UINT = 2;
 pub const DPROMPT_BUFFERTOOSMALL: UINT = 3;
 pub const DPROMPT_OUTOFMEMORY: UINT = 4;
-EXTERN!{stdcall fn SetupSetDirectoryIdA(
-    InfHandle: HINF,
-    Id: DWORD,
-    Directory: PCSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupSetDirectoryIdW(
-    InfHandle: HINF,
-    Id: DWORD,
-    Directory: PCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupSetDirectoryIdExA(
-    InfHandle: HINF,
-    Id: DWORD,
-    Directory: PCSTR,
-    Flags: DWORD,
-    Reserved1: DWORD,
-    Reserved2: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupSetDirectoryIdExW(
-    InfHandle: HINF,
-    Id: DWORD,
-    Directory: PCWSTR,
-    Flags: DWORD,
-    Reserved1: DWORD,
-    Reserved2: PVOID
-) -> BOOL}
+extern "system" {
+    pub fn SetupSetDirectoryIdA(
+        InfHandle: HINF,
+        Id: DWORD,
+        Directory: PCSTR,
+    ) -> BOOL;
+    pub fn SetupSetDirectoryIdW(
+        InfHandle: HINF,
+        Id: DWORD,
+        Directory: PCWSTR,
+    ) -> BOOL;
+    pub fn SetupSetDirectoryIdExA(
+        InfHandle: HINF,
+        Id: DWORD,
+        Directory: PCSTR,
+        Flags: DWORD,
+        Reserved1: DWORD,
+        Reserved2: PVOID,
+    ) -> BOOL;
+    pub fn SetupSetDirectoryIdExW(
+        InfHandle: HINF,
+        Id: DWORD,
+        Directory: PCWSTR,
+        Flags: DWORD,
+        Reserved1: DWORD,
+        Reserved2: PVOID,
+    ) -> BOOL;
+}
 pub const SETDIRID_NOT_FULL_PATH: DWORD = 0x00000001;
-EXTERN!{stdcall fn SetupGetSourceInfoA(
-    InfHandle: HINF,
-    SourceId: UINT,
-    InfoDesired: UINT,
-    ReturnBuffer: PSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetSourceInfoW(
-    InfHandle: HINF,
-    SourceId: UINT,
-    InfoDesired: UINT,
-    ReturnBuffer: PWSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupGetSourceInfoA(
+        InfHandle: HINF,
+        SourceId: UINT,
+        InfoDesired: UINT,
+        ReturnBuffer: PSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupGetSourceInfoW(
+        InfHandle: HINF,
+        SourceId: UINT,
+        InfoDesired: UINT,
+        ReturnBuffer: PWSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+}
 pub const SRCINFO_PATH: UINT = 1;
 pub const SRCINFO_TAGFILE: UINT = 2;
 pub const SRCINFO_DESCRIPTION: UINT = 3;
 pub const SRCINFO_FLAGS: UINT = 4;
 pub const SRCINFO_TAGFILE2: UINT = 4;
 pub const SRC_FLAGS_CABFILE: UINT = 0x0010;
-EXTERN!{stdcall fn SetupInstallFileA(
-    InfHandle: HINF,
-    InfContext: PINFCONTEXT,
-    SourceFile: PCSTR,
-    SourcePathRoot: PCSTR,
-    DestinationName: PCSTR,
-    CopyStyle: DWORD,
-    CopyMsgHandler: PSP_FILE_CALLBACK_A,
-    Context: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupInstallFileW(
-    InfHandle: HINF,
-    InfContext: PINFCONTEXT,
-    SourceFile: PCWSTR,
-    SourcePathRoot: PCWSTR,
-    DestinationName: PCWSTR,
-    CopyStyle: DWORD,
-    CopyMsgHandler: PSP_FILE_CALLBACK_W,
-    Context: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupInstallFileExA(
-    InfHandle: HINF,
-    InfContext: PINFCONTEXT,
-    SourceFile: PCSTR,
-    SourcePathRoot: PCSTR,
-    DestinationName: PCSTR,
-    CopyStyle: DWORD,
-    CopyMsgHandler: PSP_FILE_CALLBACK_A,
-    Context: PVOID,
-    FileWasInUse: PBOOL
-) -> BOOL}
-EXTERN!{stdcall fn SetupInstallFileExW(
-    InfHandle: HINF,
-    InfContext: PINFCONTEXT,
-    SourceFile: PCWSTR,
-    SourcePathRoot: PCWSTR,
-    DestinationName: PCWSTR,
-    CopyStyle: DWORD,
-    CopyMsgHandler: PSP_FILE_CALLBACK_W,
-    Context: PVOID,
-    FileWasInUse: PBOOL
-) -> BOOL}
+extern "system" {
+    pub fn SetupInstallFileA(
+        InfHandle: HINF,
+        InfContext: PINFCONTEXT,
+        SourceFile: PCSTR,
+        SourcePathRoot: PCSTR,
+        DestinationName: PCSTR,
+        CopyStyle: DWORD,
+        CopyMsgHandler: PSP_FILE_CALLBACK_A,
+        Context: PVOID,
+    ) -> BOOL;
+    pub fn SetupInstallFileW(
+        InfHandle: HINF,
+        InfContext: PINFCONTEXT,
+        SourceFile: PCWSTR,
+        SourcePathRoot: PCWSTR,
+        DestinationName: PCWSTR,
+        CopyStyle: DWORD,
+        CopyMsgHandler: PSP_FILE_CALLBACK_W,
+        Context: PVOID,
+    ) -> BOOL;
+    pub fn SetupInstallFileExA(
+        InfHandle: HINF,
+        InfContext: PINFCONTEXT,
+        SourceFile: PCSTR,
+        SourcePathRoot: PCSTR,
+        DestinationName: PCSTR,
+        CopyStyle: DWORD,
+        CopyMsgHandler: PSP_FILE_CALLBACK_A,
+        Context: PVOID,
+        FileWasInUse: PBOOL,
+    ) -> BOOL;
+    pub fn SetupInstallFileExW(
+        InfHandle: HINF,
+        InfContext: PINFCONTEXT,
+        SourceFile: PCWSTR,
+        SourcePathRoot: PCWSTR,
+        DestinationName: PCWSTR,
+        CopyStyle: DWORD,
+        CopyMsgHandler: PSP_FILE_CALLBACK_W,
+        Context: PVOID,
+        FileWasInUse: PBOOL,
+    ) -> BOOL;
+}
 pub const SP_COPY_DELETESOURCE: DWORD = 0x0000001;
 pub const SP_COPY_REPLACEONLY: DWORD = 0x0000002;
 pub const SP_COPY_NEWER: DWORD = 0x0000004;
@@ -1606,163 +1618,165 @@ pub const SP_BACKUP_BACKUPPASS: DWORD = 0x00000001;
 pub const SP_BACKUP_DEMANDPASS: DWORD = 0x00000002;
 pub const SP_BACKUP_SPECIAL: DWORD = 0x00000004;
 pub const SP_BACKUP_BOOTFILE: DWORD = 0x00000008;
-EXTERN!{stdcall fn SetupOpenFileQueue(
-) -> HSPFILEQ}
-EXTERN!{stdcall fn SetupCloseFileQueue(
-    QueueHandle: HSPFILEQ
-) -> BOOL}
-EXTERN!{stdcall fn SetupSetFileQueueAlternatePlatformA(
-    QueueHandle: HSPFILEQ,
-    AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
-    AlternateDefaultCatalogFile: PCSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupSetFileQueueAlternatePlatformW(
-    QueueHandle: HSPFILEQ,
-    AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
-    AlternateDefaultCatalogFile: PCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupSetPlatformPathOverrideA(
-    Override: PCSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupSetPlatformPathOverrideW(
-    Override: PCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueCopyA(
-    QueueHandle: HSPFILEQ,
-    SourceRootPath: PCSTR,
-    SourcePath: PCSTR,
-    SourceFilename: PCSTR,
-    SourceDescription: PCSTR,
-    SourceTagfile: PCSTR,
-    TargetDirectory: PCSTR,
-    TargetFilename: PCSTR,
-    CopyStyle: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueCopyW(
-    QueueHandle: HSPFILEQ,
-    SourceRootPath: PCWSTR,
-    SourcePath: PCWSTR,
-    SourceFilename: PCWSTR,
-    SourceDescription: PCWSTR,
-    SourceTagfile: PCWSTR,
-    TargetDirectory: PCWSTR,
-    TargetFilename: PCWSTR,
-    CopyStyle: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueCopyIndirectA(
-    CopyParams: PSP_FILE_COPY_PARAMS_A
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueCopyIndirectW(
-    CopyParams: PSP_FILE_COPY_PARAMS_W
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueDefaultCopyA(
-    QueueHandle: HSPFILEQ,
-    InfHandle: HINF,
-    SourceRootPath: PCSTR,
-    SourceFilename: PCSTR,
-    TargetFilename: PCSTR,
-    CopyStyle: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueDefaultCopyW(
-    QueueHandle: HSPFILEQ,
-    InfHandle: HINF,
-    SourceRootPath: PCWSTR,
-    SourceFilename: PCWSTR,
-    TargetFilename: PCWSTR,
-    CopyStyle: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueCopySectionA(
-    QueueHandle: HSPFILEQ,
-    SourceRootPath: PCSTR,
-    InfHandle: HINF,
-    ListInfHandle: HINF,
-    Section: PCSTR,
-    CopyStyle: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueCopySectionW(
-    QueueHandle: HSPFILEQ,
-    SourceRootPath: PCWSTR,
-    InfHandle: HINF,
-    ListInfHandle: HINF,
-    Section: PCWSTR,
-    CopyStyle: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueDeleteA(
-    QueueHandle: HSPFILEQ,
-    PathPart1: PCSTR,
-    PathPart2: PCSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueDeleteW(
-    QueueHandle: HSPFILEQ,
-    PathPart1: PCWSTR,
-    PathPart2: PCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueDeleteSectionA(
-    QueueHandle: HSPFILEQ,
-    InfHandle: HINF,
-    ListInfHandle: HINF,
-    Section: PCSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueDeleteSectionW(
-    QueueHandle: HSPFILEQ,
-    InfHandle: HINF,
-    ListInfHandle: HINF,
-    Section: PCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueRenameA(
-    QueueHandle: HSPFILEQ,
-    SourcePath: PCSTR,
-    SourceFilename: PCSTR,
-    TargetPath: PCSTR,
-    TargetFilename: PCSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueRenameW(
-    QueueHandle: HSPFILEQ,
-    SourcePath: PCWSTR,
-    SourceFilename: PCWSTR,
-    TargetPath: PCWSTR,
-    TargetFilename: PCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueRenameSectionA(
-    QueueHandle: HSPFILEQ,
-    InfHandle: HINF,
-    ListInfHandle: HINF,
-    Section: PCSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueueRenameSectionW(
-    QueueHandle: HSPFILEQ,
-    InfHandle: HINF,
-    ListInfHandle: HINF,
-    Section: PCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupCommitFileQueueA(
-    Owner: HWND,
-    QueueHandle: HSPFILEQ,
-    MsgHandler: PSP_FILE_CALLBACK_A,
-    Context: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupCommitFileQueueW(
-    Owner: HWND,
-    QueueHandle: HSPFILEQ,
-    MsgHandler: PSP_FILE_CALLBACK_W,
-    Context: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupScanFileQueueA(
-    FileQueue: HSPFILEQ,
-    Flags: DWORD,
-    Window: HWND,
-    CallbackRoutine: PSP_FILE_CALLBACK_A,
-    CallbackContext: PVOID,
-    Result: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupScanFileQueueW(
-    FileQueue: HSPFILEQ,
-    Flags: DWORD,
-    Window: HWND,
-    CallbackRoutine: PSP_FILE_CALLBACK_W,
-    CallbackContext: PVOID,
-    Result: PDWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupOpenFileQueue(
+    ) -> HSPFILEQ;
+    pub fn SetupCloseFileQueue(
+        QueueHandle: HSPFILEQ,
+    ) -> BOOL;
+    pub fn SetupSetFileQueueAlternatePlatformA(
+        QueueHandle: HSPFILEQ,
+        AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
+        AlternateDefaultCatalogFile: PCSTR,
+    ) -> BOOL;
+    pub fn SetupSetFileQueueAlternatePlatformW(
+        QueueHandle: HSPFILEQ,
+        AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
+        AlternateDefaultCatalogFile: PCWSTR,
+    ) -> BOOL;
+    pub fn SetupSetPlatformPathOverrideA(
+        Override: PCSTR,
+    ) -> BOOL;
+    pub fn SetupSetPlatformPathOverrideW(
+        Override: PCWSTR,
+    ) -> BOOL;
+    pub fn SetupQueueCopyA(
+        QueueHandle: HSPFILEQ,
+        SourceRootPath: PCSTR,
+        SourcePath: PCSTR,
+        SourceFilename: PCSTR,
+        SourceDescription: PCSTR,
+        SourceTagfile: PCSTR,
+        TargetDirectory: PCSTR,
+        TargetFilename: PCSTR,
+        CopyStyle: DWORD,
+    ) -> BOOL;
+    pub fn SetupQueueCopyW(
+        QueueHandle: HSPFILEQ,
+        SourceRootPath: PCWSTR,
+        SourcePath: PCWSTR,
+        SourceFilename: PCWSTR,
+        SourceDescription: PCWSTR,
+        SourceTagfile: PCWSTR,
+        TargetDirectory: PCWSTR,
+        TargetFilename: PCWSTR,
+        CopyStyle: DWORD,
+    ) -> BOOL;
+    pub fn SetupQueueCopyIndirectA(
+        CopyParams: PSP_FILE_COPY_PARAMS_A,
+    ) -> BOOL;
+    pub fn SetupQueueCopyIndirectW(
+        CopyParams: PSP_FILE_COPY_PARAMS_W,
+    ) -> BOOL;
+    pub fn SetupQueueDefaultCopyA(
+        QueueHandle: HSPFILEQ,
+        InfHandle: HINF,
+        SourceRootPath: PCSTR,
+        SourceFilename: PCSTR,
+        TargetFilename: PCSTR,
+        CopyStyle: DWORD,
+    ) -> BOOL;
+    pub fn SetupQueueDefaultCopyW(
+        QueueHandle: HSPFILEQ,
+        InfHandle: HINF,
+        SourceRootPath: PCWSTR,
+        SourceFilename: PCWSTR,
+        TargetFilename: PCWSTR,
+        CopyStyle: DWORD,
+    ) -> BOOL;
+    pub fn SetupQueueCopySectionA(
+        QueueHandle: HSPFILEQ,
+        SourceRootPath: PCSTR,
+        InfHandle: HINF,
+        ListInfHandle: HINF,
+        Section: PCSTR,
+        CopyStyle: DWORD,
+    ) -> BOOL;
+    pub fn SetupQueueCopySectionW(
+        QueueHandle: HSPFILEQ,
+        SourceRootPath: PCWSTR,
+        InfHandle: HINF,
+        ListInfHandle: HINF,
+        Section: PCWSTR,
+        CopyStyle: DWORD,
+    ) -> BOOL;
+    pub fn SetupQueueDeleteA(
+        QueueHandle: HSPFILEQ,
+        PathPart1: PCSTR,
+        PathPart2: PCSTR,
+    ) -> BOOL;
+    pub fn SetupQueueDeleteW(
+        QueueHandle: HSPFILEQ,
+        PathPart1: PCWSTR,
+        PathPart2: PCWSTR,
+    ) -> BOOL;
+    pub fn SetupQueueDeleteSectionA(
+        QueueHandle: HSPFILEQ,
+        InfHandle: HINF,
+        ListInfHandle: HINF,
+        Section: PCSTR,
+    ) -> BOOL;
+    pub fn SetupQueueDeleteSectionW(
+        QueueHandle: HSPFILEQ,
+        InfHandle: HINF,
+        ListInfHandle: HINF,
+        Section: PCWSTR,
+    ) -> BOOL;
+    pub fn SetupQueueRenameA(
+        QueueHandle: HSPFILEQ,
+        SourcePath: PCSTR,
+        SourceFilename: PCSTR,
+        TargetPath: PCSTR,
+        TargetFilename: PCSTR,
+    ) -> BOOL;
+    pub fn SetupQueueRenameW(
+        QueueHandle: HSPFILEQ,
+        SourcePath: PCWSTR,
+        SourceFilename: PCWSTR,
+        TargetPath: PCWSTR,
+        TargetFilename: PCWSTR,
+    ) -> BOOL;
+    pub fn SetupQueueRenameSectionA(
+        QueueHandle: HSPFILEQ,
+        InfHandle: HINF,
+        ListInfHandle: HINF,
+        Section: PCSTR,
+    ) -> BOOL;
+    pub fn SetupQueueRenameSectionW(
+        QueueHandle: HSPFILEQ,
+        InfHandle: HINF,
+        ListInfHandle: HINF,
+        Section: PCWSTR,
+    ) -> BOOL;
+    pub fn SetupCommitFileQueueA(
+        Owner: HWND,
+        QueueHandle: HSPFILEQ,
+        MsgHandler: PSP_FILE_CALLBACK_A,
+        Context: PVOID,
+    ) -> BOOL;
+    pub fn SetupCommitFileQueueW(
+        Owner: HWND,
+        QueueHandle: HSPFILEQ,
+        MsgHandler: PSP_FILE_CALLBACK_W,
+        Context: PVOID,
+    ) -> BOOL;
+    pub fn SetupScanFileQueueA(
+        FileQueue: HSPFILEQ,
+        Flags: DWORD,
+        Window: HWND,
+        CallbackRoutine: PSP_FILE_CALLBACK_A,
+        CallbackContext: PVOID,
+        Result: PDWORD,
+    ) -> BOOL;
+    pub fn SetupScanFileQueueW(
+        FileQueue: HSPFILEQ,
+        Flags: DWORD,
+        Window: HWND,
+        CallbackRoutine: PSP_FILE_CALLBACK_W,
+        CallbackContext: PVOID,
+        Result: PDWORD,
+    ) -> BOOL;
+}
 pub const SPQ_SCAN_FILE_PRESENCE: DWORD = 0x00000001;
 pub const SPQ_SCAN_FILE_VALIDITY: DWORD = 0x00000002;
 pub const SPQ_SCAN_USE_CALLBACK: DWORD = 0x00000004;
@@ -1775,20 +1789,22 @@ pub const SPQ_SCAN_FILE_PRESENCE_WITHOUT_SOURCE: DWORD = 0x00000100;
 pub const SPQ_SCAN_FILE_COMPARISON: DWORD = 0x00000200;
 pub const SPQ_SCAN_ACTIVATE_DRP: DWORD = 0x00000400;
 pub const SPQ_DELAYED_COPY: DWORD = 0x00000001;
-EXTERN!{stdcall fn SetupGetFileQueueCount(
-    FileQueue: HSPFILEQ,
-    SubQueueFileOp: UINT,
-    NumOperations: PUINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetFileQueueFlags(
-    FileQueue: HSPFILEQ,
-    Flags: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupSetFileQueueFlags(
-    FileQueue: HSPFILEQ,
-    FlagMask: DWORD,
-    Flags: DWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupGetFileQueueCount(
+        FileQueue: HSPFILEQ,
+        SubQueueFileOp: UINT,
+        NumOperations: PUINT,
+    ) -> BOOL;
+    pub fn SetupGetFileQueueFlags(
+        FileQueue: HSPFILEQ,
+        Flags: PDWORD,
+    ) -> BOOL;
+    pub fn SetupSetFileQueueFlags(
+        FileQueue: HSPFILEQ,
+        FlagMask: DWORD,
+        Flags: DWORD,
+    ) -> BOOL;
+}
 pub const SPQ_FLAG_BACKUP_AWARE: DWORD = 0x00000001;
 pub const SPQ_FLAG_ABORT_IF_UNSIGNED: DWORD = 0x00000002;
 pub const SPQ_FLAG_FILES_MODIFIED: DWORD = 0x00000004;
@@ -1798,253 +1814,261 @@ pub const SPOST_NONE: DWORD = 0;
 pub const SPOST_PATH: DWORD = 1;
 pub const SPOST_URL: DWORD = 2;
 pub const SPOST_MAX: DWORD = 3;
-EXTERN!{stdcall fn SetupCopyOEMInfA(
-    SourceInfFileName: PCSTR,
-    OEMSourceMediaLocation: PCSTR,
-    OEMSourceMediaType: DWORD,
-    CopyStyle: DWORD,
-    DestinationInfFileName: PSTR,
-    DestinationInfFileNameSize: DWORD,
-    RequiredSize: PDWORD,
-    DestinationInfFileNameComponent: *mut PSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupCopyOEMInfW(
-    SourceInfFileName: PCWSTR,
-    OEMSourceMediaLocation: PCWSTR,
-    OEMSourceMediaType: DWORD,
-    CopyStyle: DWORD,
-    DestinationInfFileName: PWSTR,
-    DestinationInfFileNameSize: DWORD,
-    RequiredSize: PDWORD,
-    DestinationInfFileNameComponent: *mut PWSTR
-) -> BOOL}
+extern "system" {
+    pub fn SetupCopyOEMInfA(
+        SourceInfFileName: PCSTR,
+        OEMSourceMediaLocation: PCSTR,
+        OEMSourceMediaType: DWORD,
+        CopyStyle: DWORD,
+        DestinationInfFileName: PSTR,
+        DestinationInfFileNameSize: DWORD,
+        RequiredSize: PDWORD,
+        DestinationInfFileNameComponent: *mut PSTR,
+    ) -> BOOL;
+    pub fn SetupCopyOEMInfW(
+        SourceInfFileName: PCWSTR,
+        OEMSourceMediaLocation: PCWSTR,
+        OEMSourceMediaType: DWORD,
+        CopyStyle: DWORD,
+        DestinationInfFileName: PWSTR,
+        DestinationInfFileNameSize: DWORD,
+        RequiredSize: PDWORD,
+        DestinationInfFileNameComponent: *mut PWSTR,
+    ) -> BOOL;
+}
 pub const SUOI_FORCEDELETE: DWORD = 0x00000001;
 pub const SUOI_INTERNAL1: DWORD = 0x00000002;
-EXTERN!{stdcall fn SetupUninstallOEMInfA(
-    InfFileName: PCSTR,
-    Flags: DWORD,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupUninstallOEMInfW(
-    InfFileName: PCWSTR,
-    Flags: DWORD,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupUninstallNewlyCopiedInfs(
-    FileQueue: HSPFILEQ,
-    Flags: DWORD,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupCreateDiskSpaceListA(
-    Reserved1: PVOID,
-    Reserved2: DWORD,
-    Flags: UINT
-) -> HDSKSPC}
-EXTERN!{stdcall fn SetupCreateDiskSpaceListW(
-    Reserved1: PVOID,
-    Reserved2: DWORD,
-    Flags: UINT
-) -> HDSKSPC}
+extern "system" {
+    pub fn SetupUninstallOEMInfA(
+        InfFileName: PCSTR,
+        Flags: DWORD,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupUninstallOEMInfW(
+        InfFileName: PCWSTR,
+        Flags: DWORD,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupUninstallNewlyCopiedInfs(
+        FileQueue: HSPFILEQ,
+        Flags: DWORD,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupCreateDiskSpaceListA(
+        Reserved1: PVOID,
+        Reserved2: DWORD,
+        Flags: UINT,
+    ) -> HDSKSPC;
+    pub fn SetupCreateDiskSpaceListW(
+        Reserved1: PVOID,
+        Reserved2: DWORD,
+        Flags: UINT,
+    ) -> HDSKSPC;
+}
 pub const SPDSL_IGNORE_DISK: UINT = 0x00000001;
 pub const SPDSL_DISALLOW_NEGATIVE_ADJUST: UINT = 0x00000002;
-EXTERN!{stdcall fn SetupDuplicateDiskSpaceListA(
-    DiskSpace: HDSKSPC,
-    Reserved1: PVOID,
-    Reserved2: DWORD,
-    Flags: UINT
-) -> HDSKSPC}
-EXTERN!{stdcall fn SetupDuplicateDiskSpaceListW(
-    DiskSpace: HDSKSPC,
-    Reserved1: PVOID,
-    Reserved2: DWORD,
-    Flags: UINT
-) -> HDSKSPC}
-EXTERN!{stdcall fn SetupDestroyDiskSpaceList(
-    DiskSpace: HDSKSPC
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueryDrivesInDiskSpaceListA(
-    DiskSpace: HDSKSPC,
-    ReturnBuffer: PSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueryDrivesInDiskSpaceListW(
-    DiskSpace: HDSKSPC,
-    ReturnBuffer: PWSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupQuerySpaceRequiredOnDriveA(
-    DiskSpace: HDSKSPC,
-    DriveSpec: PCSTR,
-    SpaceRequired: *mut LONGLONG,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupQuerySpaceRequiredOnDriveW(
-    DiskSpace: HDSKSPC,
-    DriveSpec: PCWSTR,
-    SpaceRequired: *mut LONGLONG,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupAdjustDiskSpaceListA(
-    DiskSpace: HDSKSPC,
-    DriveRoot: LPCSTR,
-    Amount: LONGLONG,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupAdjustDiskSpaceListW(
-    DiskSpace: HDSKSPC,
-    DriveRoot: LPCWSTR,
-    Amount: LONGLONG,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupAddToDiskSpaceListA(
-    DiskSpace: HDSKSPC,
-    TargetFilespec: PCSTR,
-    FileSize: LONGLONG,
-    Operation: UINT,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupAddToDiskSpaceListW(
-    DiskSpace: HDSKSPC,
-    TargetFilespec: PCWSTR,
-    FileSize: LONGLONG,
-    Operation: UINT,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupAddSectionToDiskSpaceListA(
-    DiskSpace: HDSKSPC,
-    InfHandle: HINF,
-    ListInfHandle: HINF,
-    SectionName: PCSTR,
-    Operation: UINT,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupAddSectionToDiskSpaceListW(
-    DiskSpace: HDSKSPC,
-    InfHandle: HINF,
-    ListInfHandle: HINF,
-    SectionName: PCWSTR,
-    Operation: UINT,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupAddInstallSectionToDiskSpaceListA(
-    DiskSpace: HDSKSPC,
-    InfHandle: HINF,
-    LayoutInfHandle: HINF,
-    SectionName: PCSTR,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupAddInstallSectionToDiskSpaceListW(
-    DiskSpace: HDSKSPC,
-    InfHandle: HINF,
-    LayoutInfHandle: HINF,
-    SectionName: PCWSTR,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupRemoveFromDiskSpaceListA(
-    DiskSpace: HDSKSPC,
-    TargetFilespec: PCSTR,
-    Operation: UINT,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupRemoveFromDiskSpaceListW(
-    DiskSpace: HDSKSPC,
-    TargetFilespec: PCWSTR,
-    Operation: UINT,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupRemoveSectionFromDiskSpaceListA(
-    DiskSpace: HDSKSPC,
-    InfHandle: HINF,
-    ListInfHandle: HINF,
-    SectionName: PCSTR,
-    Operation: UINT,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupRemoveSectionFromDiskSpaceListW(
-    DiskSpace: HDSKSPC,
-    InfHandle: HINF,
-    ListInfHandle: HINF,
-    SectionName: PCWSTR,
-    Operation: UINT,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupRemoveInstallSectionFromDiskSpaceListA(
-    DiskSpace: HDSKSPC,
-    InfHandle: HINF,
-    LayoutInfHandle: HINF,
-    SectionName: PCSTR,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupRemoveInstallSectionFromDiskSpaceListW(
-    DiskSpace: HDSKSPC,
-    InfHandle: HINF,
-    LayoutInfHandle: HINF,
-    SectionName: PCWSTR,
-    Reserved1: PVOID,
-    Reserved2: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupIterateCabinetA(
-    CabinetFile: PCSTR,
-    Reserved: DWORD,
-    MsgHandler: PSP_FILE_CALLBACK_A,
-    Context: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupIterateCabinetW(
-    CabinetFile: PCWSTR,
-    Reserved: DWORD,
-    MsgHandler: PSP_FILE_CALLBACK_W,
-    Context: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupPromptReboot(
-    FileQueue: HSPFILEQ,
-    Owner: HWND,
-    ScanOnly: BOOL
-) -> INT}
+extern "system" {
+    pub fn SetupDuplicateDiskSpaceListA(
+        DiskSpace: HDSKSPC,
+        Reserved1: PVOID,
+        Reserved2: DWORD,
+        Flags: UINT,
+    ) -> HDSKSPC;
+    pub fn SetupDuplicateDiskSpaceListW(
+        DiskSpace: HDSKSPC,
+        Reserved1: PVOID,
+        Reserved2: DWORD,
+        Flags: UINT,
+    ) -> HDSKSPC;
+    pub fn SetupDestroyDiskSpaceList(
+        DiskSpace: HDSKSPC,
+    ) -> BOOL;
+    pub fn SetupQueryDrivesInDiskSpaceListA(
+        DiskSpace: HDSKSPC,
+        ReturnBuffer: PSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupQueryDrivesInDiskSpaceListW(
+        DiskSpace: HDSKSPC,
+        ReturnBuffer: PWSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupQuerySpaceRequiredOnDriveA(
+        DiskSpace: HDSKSPC,
+        DriveSpec: PCSTR,
+        SpaceRequired: *mut LONGLONG,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupQuerySpaceRequiredOnDriveW(
+        DiskSpace: HDSKSPC,
+        DriveSpec: PCWSTR,
+        SpaceRequired: *mut LONGLONG,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupAdjustDiskSpaceListA(
+        DiskSpace: HDSKSPC,
+        DriveRoot: LPCSTR,
+        Amount: LONGLONG,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupAdjustDiskSpaceListW(
+        DiskSpace: HDSKSPC,
+        DriveRoot: LPCWSTR,
+        Amount: LONGLONG,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupAddToDiskSpaceListA(
+        DiskSpace: HDSKSPC,
+        TargetFilespec: PCSTR,
+        FileSize: LONGLONG,
+        Operation: UINT,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupAddToDiskSpaceListW(
+        DiskSpace: HDSKSPC,
+        TargetFilespec: PCWSTR,
+        FileSize: LONGLONG,
+        Operation: UINT,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupAddSectionToDiskSpaceListA(
+        DiskSpace: HDSKSPC,
+        InfHandle: HINF,
+        ListInfHandle: HINF,
+        SectionName: PCSTR,
+        Operation: UINT,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupAddSectionToDiskSpaceListW(
+        DiskSpace: HDSKSPC,
+        InfHandle: HINF,
+        ListInfHandle: HINF,
+        SectionName: PCWSTR,
+        Operation: UINT,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupAddInstallSectionToDiskSpaceListA(
+        DiskSpace: HDSKSPC,
+        InfHandle: HINF,
+        LayoutInfHandle: HINF,
+        SectionName: PCSTR,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupAddInstallSectionToDiskSpaceListW(
+        DiskSpace: HDSKSPC,
+        InfHandle: HINF,
+        LayoutInfHandle: HINF,
+        SectionName: PCWSTR,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupRemoveFromDiskSpaceListA(
+        DiskSpace: HDSKSPC,
+        TargetFilespec: PCSTR,
+        Operation: UINT,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupRemoveFromDiskSpaceListW(
+        DiskSpace: HDSKSPC,
+        TargetFilespec: PCWSTR,
+        Operation: UINT,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupRemoveSectionFromDiskSpaceListA(
+        DiskSpace: HDSKSPC,
+        InfHandle: HINF,
+        ListInfHandle: HINF,
+        SectionName: PCSTR,
+        Operation: UINT,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupRemoveSectionFromDiskSpaceListW(
+        DiskSpace: HDSKSPC,
+        InfHandle: HINF,
+        ListInfHandle: HINF,
+        SectionName: PCWSTR,
+        Operation: UINT,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupRemoveInstallSectionFromDiskSpaceListA(
+        DiskSpace: HDSKSPC,
+        InfHandle: HINF,
+        LayoutInfHandle: HINF,
+        SectionName: PCSTR,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupRemoveInstallSectionFromDiskSpaceListW(
+        DiskSpace: HDSKSPC,
+        InfHandle: HINF,
+        LayoutInfHandle: HINF,
+        SectionName: PCWSTR,
+        Reserved1: PVOID,
+        Reserved2: UINT,
+    ) -> BOOL;
+    pub fn SetupIterateCabinetA(
+        CabinetFile: PCSTR,
+        Reserved: DWORD,
+        MsgHandler: PSP_FILE_CALLBACK_A,
+        Context: PVOID,
+    ) -> BOOL;
+    pub fn SetupIterateCabinetW(
+        CabinetFile: PCWSTR,
+        Reserved: DWORD,
+        MsgHandler: PSP_FILE_CALLBACK_W,
+        Context: PVOID,
+    ) -> BOOL;
+    pub fn SetupPromptReboot(
+        FileQueue: HSPFILEQ,
+        Owner: HWND,
+        ScanOnly: BOOL,
+    ) -> INT;
+}
 pub const SPFILEQ_FILE_IN_USE: INT = 0x00000001;
 pub const SPFILEQ_REBOOT_RECOMMENDED: INT = 0x00000002;
 pub const SPFILEQ_REBOOT_IN_PROGRESS: INT = 0x00000004;
-EXTERN!{stdcall fn SetupInitDefaultQueueCallback(
-    OwnerWindow: HWND
-) -> PVOID}
-EXTERN!{stdcall fn SetupInitDefaultQueueCallbackEx(
-    OwnerWindow: HWND,
-    AlternateProgressWindow: HWND,
-    ProgressMessage: UINT,
-    Reserved1: DWORD,
-    Reserved2: PVOID
-) -> PVOID}
-EXTERN!{stdcall fn SetupTermDefaultQueueCallback(
-    Context: PVOID
-) -> VOID}
-EXTERN!{stdcall fn SetupDefaultQueueCallbackA(
-    Context: PVOID,
-    Notification: UINT,
-    Param1: UINT_PTR,
-    Param2: UINT_PTR
-) -> UINT}
-EXTERN!{stdcall fn SetupDefaultQueueCallbackW(
-    Context: PVOID,
-    Notification: UINT,
-    Param1: UINT_PTR,
-    Param2: UINT_PTR
-) -> UINT}
+extern "system" {
+    pub fn SetupInitDefaultQueueCallback(
+        OwnerWindow: HWND,
+    ) -> PVOID;
+    pub fn SetupInitDefaultQueueCallbackEx(
+        OwnerWindow: HWND,
+        AlternateProgressWindow: HWND,
+        ProgressMessage: UINT,
+        Reserved1: DWORD,
+        Reserved2: PVOID,
+    ) -> PVOID;
+    pub fn SetupTermDefaultQueueCallback(
+        Context: PVOID,
+    ) -> VOID;
+    pub fn SetupDefaultQueueCallbackA(
+        Context: PVOID,
+        Notification: UINT,
+        Param1: UINT_PTR,
+        Param2: UINT_PTR,
+    ) -> UINT;
+    pub fn SetupDefaultQueueCallbackW(
+        Context: PVOID,
+        Notification: UINT,
+        Param1: UINT_PTR,
+        Param2: UINT_PTR,
+    ) -> UINT;
+}
 pub const FLG_ADDREG_DELREG_BIT: DWORD = 0x00008000;
 pub const FLG_ADDREG_BINVALUETYPE: DWORD = 0x00000001;
 pub const FLG_ADDREG_NOCLOBBER: DWORD = 0x00000002;
@@ -2094,32 +2118,34 @@ pub const FLG_ADDPROPERTY_APPEND: DWORD = 0x00000004;
 pub const FLG_ADDPROPERTY_OR: DWORD = 0x00000008;
 pub const FLG_ADDPROPERTY_AND: DWORD = 0x00000010;
 pub const FLG_DELPROPERTY_MULTI_SZ_DELSTRING: DWORD = 0x00000001;
-EXTERN!{stdcall fn SetupInstallFromInfSectionA(
-    Owner: HWND,
-    InfHandle: HINF,
-    SectionName: PCSTR,
-    Flags: UINT,
-    RelativeKeyRoot: HKEY,
-    SourceRootPath: PCSTR,
-    CopyFlags: UINT,
-    MsgHandler: PSP_FILE_CALLBACK_A,
-    Context: PVOID,
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupInstallFromInfSectionW(
-    Owner: HWND,
-    InfHandle: HINF,
-    SectionName: PCWSTR,
-    Flags: UINT,
-    RelativeKeyRoot: HKEY,
-    SourceRootPath: PCWSTR,
-    CopyFlags: UINT,
-    MsgHandler: PSP_FILE_CALLBACK_W,
-    Context: PVOID,
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
+extern "system" {
+    pub fn SetupInstallFromInfSectionA(
+        Owner: HWND,
+        InfHandle: HINF,
+        SectionName: PCSTR,
+        Flags: UINT,
+        RelativeKeyRoot: HKEY,
+        SourceRootPath: PCSTR,
+        CopyFlags: UINT,
+        MsgHandler: PSP_FILE_CALLBACK_A,
+        Context: PVOID,
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupInstallFromInfSectionW(
+        Owner: HWND,
+        InfHandle: HINF,
+        SectionName: PCWSTR,
+        Flags: UINT,
+        RelativeKeyRoot: HKEY,
+        SourceRootPath: PCWSTR,
+        CopyFlags: UINT,
+        MsgHandler: PSP_FILE_CALLBACK_W,
+        Context: PVOID,
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+}
 pub const SPINST_LOGCONFIG: UINT = 0x00000001;
 pub const SPINST_INIFILES: UINT = 0x00000002;
 pub const SPINST_REGISTRY: UINT = 0x00000004;
@@ -2137,22 +2163,24 @@ pub const SPINST_LOGCONFIG_IS_FORCED: UINT = 0x00020000;
 pub const SPINST_LOGCONFIGS_ARE_OVERRIDES: UINT = 0x00040000;
 pub const SPINST_REGISTERCALLBACKAWARE: UINT = 0x00080000;
 pub const SPINST_DEVICEINSTALL: UINT = 0x00100000;
-EXTERN!{stdcall fn SetupInstallFilesFromInfSectionA(
-    InfHandle: HINF,
-    LayoutInfHandle: HINF,
-    FileQueue: HSPFILEQ,
-    SectionName: PCSTR,
-    SourceRootPath: PCSTR,
-    CopyFlags: UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupInstallFilesFromInfSectionW(
-    InfHandle: HINF,
-    LayoutInfHandle: HINF,
-    FileQueue: HSPFILEQ,
-    SectionName: PCWSTR,
-    SourceRootPath: PCWSTR,
-    CopyFlags: UINT
-) -> BOOL}
+extern "system" {
+    pub fn SetupInstallFilesFromInfSectionA(
+        InfHandle: HINF,
+        LayoutInfHandle: HINF,
+        FileQueue: HSPFILEQ,
+        SectionName: PCSTR,
+        SourceRootPath: PCSTR,
+        CopyFlags: UINT,
+    ) -> BOOL;
+    pub fn SetupInstallFilesFromInfSectionW(
+        InfHandle: HINF,
+        LayoutInfHandle: HINF,
+        FileQueue: HSPFILEQ,
+        SectionName: PCWSTR,
+        SourceRootPath: PCWSTR,
+        CopyFlags: UINT,
+    ) -> BOOL;
+}
 pub const SPSVCINST_TAGTOFRONT: DWORD = 0x00000001;
 pub const SPSVCINST_ASSOCSERVICE: DWORD = 0x00000002;
 pub const SPSVCINST_DELETEEVENTLOGENTRY: DWORD = 0x00000004;
@@ -2166,94 +2194,102 @@ pub const SPSVCINST_STOPSERVICE: DWORD = 0x00000200;
 pub const SPSVCINST_CLOBBER_SECURITY: DWORD = 0x00000400;
 pub const SPSVCINST_STARTSERVICE: DWORD = 0x00000800;
 pub const SPSVCINST_NOCLOBBER_REQUIREDPRIVILEGES: DWORD = 0x00001000;
-EXTERN!{stdcall fn SetupInstallServicesFromInfSectionA(
-    InfHandle: HINF,
-    SectionName: PCSTR,
-    Flags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupInstallServicesFromInfSectionW(
-    InfHandle: HINF,
-    SectionName: PCWSTR,
-    Flags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupInstallServicesFromInfSectionExA(
-    InfHandle: HINF,
-    SectionName: PCSTR,
-    Flags: DWORD,
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    Reserved1: PVOID,
-    Reserved2: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupInstallServicesFromInfSectionExW(
-    InfHandle: HINF,
-    SectionName: PCWSTR,
-    Flags: DWORD,
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    Reserved1: PVOID,
-    Reserved2: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn InstallHinfSectionA(
-    Window: HWND,
-    ModuleHandle: HINSTANCE,
-    CommandLine: PCSTR,
-    ShowCommand: INT
-) -> VOID}
-EXTERN!{stdcall fn InstallHinfSectionW(
-    Window: HWND,
-    ModuleHandle: HINSTANCE,
-    CommandLine: PCWSTR,
-    ShowCommand: INT
-) -> VOID}
+extern "system" {
+    pub fn SetupInstallServicesFromInfSectionA(
+        InfHandle: HINF,
+        SectionName: PCSTR,
+        Flags: DWORD,
+    ) -> BOOL;
+    pub fn SetupInstallServicesFromInfSectionW(
+        InfHandle: HINF,
+        SectionName: PCWSTR,
+        Flags: DWORD,
+    ) -> BOOL;
+    pub fn SetupInstallServicesFromInfSectionExA(
+        InfHandle: HINF,
+        SectionName: PCSTR,
+        Flags: DWORD,
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        Reserved1: PVOID,
+        Reserved2: PVOID,
+    ) -> BOOL;
+    pub fn SetupInstallServicesFromInfSectionExW(
+        InfHandle: HINF,
+        SectionName: PCWSTR,
+        Flags: DWORD,
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        Reserved1: PVOID,
+        Reserved2: PVOID,
+    ) -> BOOL;
+    pub fn InstallHinfSectionA(
+        Window: HWND,
+        ModuleHandle: HINSTANCE,
+        CommandLine: PCSTR,
+        ShowCommand: INT,
+    ) -> VOID;
+    pub fn InstallHinfSectionW(
+        Window: HWND,
+        ModuleHandle: HINSTANCE,
+        CommandLine: PCWSTR,
+        ShowCommand: INT,
+    ) -> VOID;
+}
 pub type HSPFILELOG = PVOID;
-EXTERN!{stdcall fn SetupInitializeFileLogA(
-    LogFileName: PCSTR,
-    Flags: DWORD
-) -> HSPFILELOG}
-EXTERN!{stdcall fn SetupInitializeFileLogW(
-    LogFileName: PCWSTR,
-    Flags: DWORD
-) -> HSPFILELOG}
+extern "system" {
+    pub fn SetupInitializeFileLogA(
+        LogFileName: PCSTR,
+        Flags: DWORD,
+    ) -> HSPFILELOG;
+    pub fn SetupInitializeFileLogW(
+        LogFileName: PCWSTR,
+        Flags: DWORD,
+    ) -> HSPFILELOG;
+}
 pub const SPFILELOG_SYSTEMLOG: DWORD = 0x00000001;
 pub const SPFILELOG_FORCENEW: DWORD = 0x00000002;
 pub const SPFILELOG_QUERYONLY: DWORD = 0x00000004;
-EXTERN!{stdcall fn SetupTerminateFileLog(
-    FileLogHandle: HSPFILELOG
-) -> BOOL}
-EXTERN!{stdcall fn SetupLogFileA(
-    FileLogHandle: HSPFILELOG,
-    LogSectionName: PCSTR,
-    SourceFilename: PCSTR,
-    TargetFilename: PCSTR,
-    Checksum: DWORD,
-    DiskTagfile: PCSTR,
-    DiskDescription: PCSTR,
-    OtherInfo: PCSTR,
-    Flags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupLogFileW(
-    FileLogHandle: HSPFILELOG,
-    LogSectionName: PCWSTR,
-    SourceFilename: PCWSTR,
-    TargetFilename: PCWSTR,
-    Checksum: DWORD,
-    DiskTagfile: PCWSTR,
-    DiskDescription: PCWSTR,
-    OtherInfo: PCWSTR,
-    Flags: DWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupTerminateFileLog(
+        FileLogHandle: HSPFILELOG,
+    ) -> BOOL;
+    pub fn SetupLogFileA(
+        FileLogHandle: HSPFILELOG,
+        LogSectionName: PCSTR,
+        SourceFilename: PCSTR,
+        TargetFilename: PCSTR,
+        Checksum: DWORD,
+        DiskTagfile: PCSTR,
+        DiskDescription: PCSTR,
+        OtherInfo: PCSTR,
+        Flags: DWORD,
+    ) -> BOOL;
+    pub fn SetupLogFileW(
+        FileLogHandle: HSPFILELOG,
+        LogSectionName: PCWSTR,
+        SourceFilename: PCWSTR,
+        TargetFilename: PCWSTR,
+        Checksum: DWORD,
+        DiskTagfile: PCWSTR,
+        DiskDescription: PCWSTR,
+        OtherInfo: PCWSTR,
+        Flags: DWORD,
+    ) -> BOOL;
+}
 pub const SPFILELOG_OEMFILE: DWORD = 0x00000001;
-EXTERN!{stdcall fn SetupRemoveFileLogEntryA(
-    FileLogHandle: HSPFILELOG,
-    LogSectionName: PCSTR,
-    TargetFilename: PCSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupRemoveFileLogEntryW(
-    FileLogHandle: HSPFILELOG,
-    LogSectionName: PCWSTR,
-    TargetFilename: PCWSTR
-) -> BOOL}
+extern "system" {
+    pub fn SetupRemoveFileLogEntryA(
+        FileLogHandle: HSPFILELOG,
+        LogSectionName: PCSTR,
+        TargetFilename: PCSTR,
+    ) -> BOOL;
+    pub fn SetupRemoveFileLogEntryW(
+        FileLogHandle: HSPFILELOG,
+        LogSectionName: PCWSTR,
+        TargetFilename: PCWSTR,
+    ) -> BOOL;
+}
 ENUM!{enum SetupFileLogInfo {
     SetupFileLogSourceFilename,
     SetupFileLogChecksum,
@@ -2262,709 +2298,730 @@ ENUM!{enum SetupFileLogInfo {
     SetupFileLogOtherInfo,
     SetupFileLogMax,
 }}
-EXTERN!{stdcall fn SetupQueryFileLogA(
-    FileLogHandle: HSPFILELOG,
-    LogSectionName: PCSTR,
-    TargetFilename: PCSTR,
-    DesiredInfo: SetupFileLogInfo,
-    DataOut: PSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupQueryFileLogW(
-    FileLogHandle: HSPFILELOG,
-    LogSectionName: PCWSTR,
-    TargetFilename: PCWSTR,
-    DesiredInfo: SetupFileLogInfo,
-    DataOut: PWSTR,
-    ReturnBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupQueryFileLogA(
+        FileLogHandle: HSPFILELOG,
+        LogSectionName: PCSTR,
+        TargetFilename: PCSTR,
+        DesiredInfo: SetupFileLogInfo,
+        DataOut: PSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupQueryFileLogW(
+        FileLogHandle: HSPFILELOG,
+        LogSectionName: PCWSTR,
+        TargetFilename: PCWSTR,
+        DesiredInfo: SetupFileLogInfo,
+        DataOut: PWSTR,
+        ReturnBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+}
 pub type LogSeverity = DWORD;
 pub const LogSevInformation: LogSeverity = 0x00000000;
 pub const LogSevWarning: LogSeverity = 0x00000001;
 pub const LogSevError: LogSeverity = 0x00000002;
 pub const LogSevFatalError: LogSeverity = 0x00000003;
 pub const LogSevMaximum: LogSeverity = 0x00000004;
-EXTERN!{stdcall fn SetupOpenLog(
-    Erase: BOOL
-) -> BOOL}
-EXTERN!{stdcall fn SetupLogErrorA(
-    MessageString: LPCSTR,
-    Severity: LogSeverity
-) -> BOOL}
-EXTERN!{stdcall fn SetupLogErrorW(
-    MessageString: LPCWSTR,
-    Severity: LogSeverity
-) -> BOOL}
-EXTERN!{stdcall fn SetupCloseLog(
-) -> VOID}
-EXTERN!{stdcall fn SetupGetThreadLogToken(
-) -> SP_LOG_TOKEN}
-EXTERN!{stdcall fn SetupSetThreadLogToken(
-    LogToken: SP_LOG_TOKEN
-) -> VOID}
-//EXTERN!{stdcall fn SetupWriteTextLog(
-// ) -> VOID}
-//EXTERN!{stdcall fn SetupWriteTextLogError(
-// ) -> VOID}
-EXTERN!{stdcall fn SetupWriteTextLogInfLine(
-    LogToken: SP_LOG_TOKEN,
-    Flags: DWORD,
-    InfHandle: HINF,
-    Context: PINFCONTEXT
-) -> VOID}
-EXTERN!{stdcall fn SetupGetBackupInformationA(
-    QueueHandle: HSPFILEQ,
-    BackupParams: PSP_BACKUP_QUEUE_PARAMS_A
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetBackupInformationW(
-    QueueHandle: HSPFILEQ,
-    BackupParams: PSP_BACKUP_QUEUE_PARAMS_W
-) -> BOOL}
-EXTERN!{stdcall fn SetupPrepareQueueForRestoreA(
-    QueueHandle: HSPFILEQ,
-    BackupPath: PCSTR,
-    RestoreFlags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupPrepareQueueForRestoreW(
-    QueueHandle: HSPFILEQ,
-    BackupPath: PCWSTR,
-    RestoreFlags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupSetNonInteractiveMode(
-    NonInteractiveFlag: BOOL
-) -> BOOL}
-EXTERN!{stdcall fn SetupGetNonInteractiveMode(
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiCreateDeviceInfoList(
-    ClassGuid: *const GUID,
-    hwndParent: HWND
-) -> HDEVINFO}
-EXTERN!{stdcall fn SetupDiCreateDeviceInfoListExA(
-    ClassGuid: *const GUID,
-    hwndParent: HWND,
-    MachineName: PCSTR,
-    Reserved: PVOID
-) -> HDEVINFO}
-EXTERN!{stdcall fn SetupDiCreateDeviceInfoListExW(
-    ClassGuid: *const GUID,
-    hwndParent: HWND,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> HDEVINFO}
-EXTERN!{stdcall fn SetupDiGetDeviceInfoListClass(
-    DeviceInfoSet: HDEVINFO,
-    ClassGuid: LPGUID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDeviceInfoListDetailA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoSetDetailData: PSP_DEVINFO_LIST_DETAIL_DATA_A
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDeviceInfoListDetailW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoSetDetailData: PSP_DEVINFO_LIST_DETAIL_DATA_W
-) -> BOOL}
+extern "system" {
+    pub fn SetupOpenLog(
+        Erase: BOOL,
+    ) -> BOOL;
+    pub fn SetupLogErrorA(
+        MessageString: LPCSTR,
+        Severity: LogSeverity,
+    ) -> BOOL;
+    pub fn SetupLogErrorW(
+        MessageString: LPCWSTR,
+        Severity: LogSeverity,
+    ) -> BOOL;
+    pub fn SetupCloseLog() -> VOID;
+    pub fn SetupGetThreadLogToken() -> SP_LOG_TOKEN;
+    pub fn SetupSetThreadLogToken(
+        LogToken: SP_LOG_TOKEN,
+    ) -> VOID;
+}
+//pub fn SetupWriteTextLog() -> VOID;
+//pub fn SetupWriteTextLogError() -> VOID;
+extern "system" {
+    pub fn SetupWriteTextLogInfLine(
+        LogToken: SP_LOG_TOKEN,
+        Flags: DWORD,
+        InfHandle: HINF,
+        Context: PINFCONTEXT,
+    ) -> VOID;
+    pub fn SetupGetBackupInformationA(
+        QueueHandle: HSPFILEQ,
+        BackupParams: PSP_BACKUP_QUEUE_PARAMS_A,
+    ) -> BOOL;
+    pub fn SetupGetBackupInformationW(
+        QueueHandle: HSPFILEQ,
+        BackupParams: PSP_BACKUP_QUEUE_PARAMS_W,
+    ) -> BOOL;
+    pub fn SetupPrepareQueueForRestoreA(
+        QueueHandle: HSPFILEQ,
+        BackupPath: PCSTR,
+        RestoreFlags: DWORD,
+    ) -> BOOL;
+    pub fn SetupPrepareQueueForRestoreW(
+        QueueHandle: HSPFILEQ,
+        BackupPath: PCWSTR,
+        RestoreFlags: DWORD,
+    ) -> BOOL;
+    pub fn SetupSetNonInteractiveMode(
+        NonInteractiveFlag: BOOL,
+    ) -> BOOL;
+    pub fn SetupGetNonInteractiveMode() -> BOOL;
+    pub fn SetupDiCreateDeviceInfoList(
+        ClassGuid: *const GUID,
+        hwndParent: HWND,
+    ) -> HDEVINFO;
+    pub fn SetupDiCreateDeviceInfoListExA(
+        ClassGuid: *const GUID,
+        hwndParent: HWND,
+        MachineName: PCSTR,
+        Reserved: PVOID,
+    ) -> HDEVINFO;
+    pub fn SetupDiCreateDeviceInfoListExW(
+        ClassGuid: *const GUID,
+        hwndParent: HWND,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> HDEVINFO;
+    pub fn SetupDiGetDeviceInfoListClass(
+        DeviceInfoSet: HDEVINFO,
+        ClassGuid: LPGUID,
+    ) -> BOOL;
+    pub fn SetupDiGetDeviceInfoListDetailA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoSetDetailData: PSP_DEVINFO_LIST_DETAIL_DATA_A,
+    ) -> BOOL;
+    pub fn SetupDiGetDeviceInfoListDetailW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoSetDetailData: PSP_DEVINFO_LIST_DETAIL_DATA_W,
+    ) -> BOOL;
+}
 pub const DICD_GENERATE_ID: DWORD = 0x00000001;
 pub const DICD_INHERIT_CLASSDRVS: DWORD = 0x00000002;
-EXTERN!{stdcall fn SetupDiCreateDeviceInfoA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceName: PCSTR,
-    ClassGuid: *const GUID,
-    DeviceDescription: PCSTR,
-    hwndParent: HWND,
-    CreationFlags: DWORD,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiCreateDeviceInfoW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceName: PCWSTR,
-    ClassGuid: *const GUID,
-    DeviceDescription: PCWSTR,
-    hwndParent: HWND,
-    CreationFlags: DWORD,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiCreateDeviceInfoA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceName: PCSTR,
+        ClassGuid: *const GUID,
+        DeviceDescription: PCSTR,
+        hwndParent: HWND,
+        CreationFlags: DWORD,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiCreateDeviceInfoW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceName: PCWSTR,
+        ClassGuid: *const GUID,
+        DeviceDescription: PCWSTR,
+        hwndParent: HWND,
+        CreationFlags: DWORD,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+}
 pub const DIOD_INHERIT_CLASSDRVS: DWORD = 0x00000002;
 pub const DIOD_CANCEL_REMOVE: DWORD = 0x00000004;
-EXTERN!{stdcall fn SetupDiOpenDeviceInfoA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInstanceId: PCSTR,
-    hwndParent: HWND,
-    OpenFlags: DWORD,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiOpenDeviceInfoW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInstanceId: PCWSTR,
-    hwndParent: HWND,
-    OpenFlags: DWORD,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDeviceInstanceIdA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DeviceInstanceId: PSTR,
-    DeviceInstanceIdSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDeviceInstanceIdW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DeviceInstanceId: PWSTR,
-    DeviceInstanceIdSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiDeleteDeviceInfo(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiEnumDeviceInfo(
-    DeviceInfoSet: HDEVINFO,
-    MemberIndex: DWORD,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiDestroyDeviceInfoList(
-    DeviceInfoSet: HDEVINFO
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiEnumDeviceInterfaces(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    InterfaceClassGuid: *const GUID,
-    MemberIndex: DWORD,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiCreateDeviceInterfaceA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    InterfaceClassGuid: *const GUID,
-    ReferenceString: PCSTR,
-    CreationFlags: DWORD,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiCreateDeviceInterfaceW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    InterfaceClassGuid: *const GUID,
-    ReferenceString: PCWSTR,
-    CreationFlags: DWORD,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiOpenDeviceInfoA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInstanceId: PCSTR,
+        hwndParent: HWND,
+        OpenFlags: DWORD,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiOpenDeviceInfoW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInstanceId: PCWSTR,
+        hwndParent: HWND,
+        OpenFlags: DWORD,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiGetDeviceInstanceIdA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DeviceInstanceId: PSTR,
+        DeviceInstanceIdSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetDeviceInstanceIdW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DeviceInstanceId: PWSTR,
+        DeviceInstanceIdSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiDeleteDeviceInfo(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiEnumDeviceInfo(
+        DeviceInfoSet: HDEVINFO,
+        MemberIndex: DWORD,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiDestroyDeviceInfoList(
+        DeviceInfoSet: HDEVINFO,
+    ) -> BOOL;
+    pub fn SetupDiEnumDeviceInterfaces(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        InterfaceClassGuid: *const GUID,
+        MemberIndex: DWORD,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+    ) -> BOOL;
+    pub fn SetupDiCreateDeviceInterfaceA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        InterfaceClassGuid: *const GUID,
+        ReferenceString: PCSTR,
+        CreationFlags: DWORD,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+    ) -> BOOL;
+    pub fn SetupDiCreateDeviceInterfaceW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        InterfaceClassGuid: *const GUID,
+        ReferenceString: PCWSTR,
+        CreationFlags: DWORD,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+    ) -> BOOL;
+}
 pub const DIODI_NO_ADD: DWORD = 0x00000001;
-EXTERN!{stdcall fn SetupDiOpenDeviceInterfaceA(
-    DeviceInfoSet: HDEVINFO,
-    DevicePath: PCSTR,
-    OpenFlags: DWORD,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiOpenDeviceInterfaceW(
-    DeviceInfoSet: HDEVINFO,
-    DevicePath: PCWSTR,
-    OpenFlags: DWORD,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDeviceInterfaceAlias(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
-    AliasInterfaceClassGuid: *const GUID,
-    AliasDeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiDeleteDeviceInterfaceData(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiRemoveDeviceInterface(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDeviceInterfaceDetailA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
-    DeviceInterfaceDetailData: PSP_DEVICE_INTERFACE_DETAIL_DATA_A,
-    DeviceInterfaceDetailDataSize: DWORD,
-    RequiredSize: PDWORD,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDeviceInterfaceDetailW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
-    DeviceInterfaceDetailData: PSP_DEVICE_INTERFACE_DETAIL_DATA_W,
-    DeviceInterfaceDetailDataSize: DWORD,
-    RequiredSize: PDWORD,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiInstallDeviceInterfaces(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetDeviceInterfaceDefault(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    Flags: DWORD,
-    Reserved: PVOID
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiOpenDeviceInterfaceA(
+        DeviceInfoSet: HDEVINFO,
+        DevicePath: PCSTR,
+        OpenFlags: DWORD,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+    ) -> BOOL;
+    pub fn SetupDiOpenDeviceInterfaceW(
+        DeviceInfoSet: HDEVINFO,
+        DevicePath: PCWSTR,
+        OpenFlags: DWORD,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+    ) -> BOOL;
+    pub fn SetupDiGetDeviceInterfaceAlias(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+        AliasInterfaceClassGuid: *const GUID,
+        AliasDeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+    ) -> BOOL;
+    pub fn SetupDiDeleteDeviceInterfaceData(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+    ) -> BOOL;
+    pub fn SetupDiRemoveDeviceInterface(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+    ) -> BOOL;
+    pub fn SetupDiGetDeviceInterfaceDetailA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+        DeviceInterfaceDetailData: PSP_DEVICE_INTERFACE_DETAIL_DATA_A,
+        DeviceInterfaceDetailDataSize: DWORD,
+        RequiredSize: PDWORD,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiGetDeviceInterfaceDetailW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+        DeviceInterfaceDetailData: PSP_DEVICE_INTERFACE_DETAIL_DATA_W,
+        DeviceInterfaceDetailDataSize: DWORD,
+        RequiredSize: PDWORD,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiInstallDeviceInterfaces(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiSetDeviceInterfaceDefault(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        Flags: DWORD,
+        Reserved: PVOID,
+    ) -> BOOL;
+}
 pub const SPRDI_FIND_DUPS: DWORD = 0x00000001;
-EXTERN!{stdcall fn SetupDiRegisterDeviceInfo(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    Flags: DWORD,
-    CompareProc: PSP_DETSIG_CMPPROC,
-    CompareContext: PVOID,
-    DupDeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiRegisterDeviceInfo(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        Flags: DWORD,
+        CompareProc: PSP_DETSIG_CMPPROC,
+        CompareContext: PVOID,
+        DupDeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+}
 pub const SPDIT_NODRIVER: DWORD = 0x00000000;
 pub const SPDIT_CLASSDRIVER: DWORD = 0x00000001;
 pub const SPDIT_COMPATDRIVER: DWORD = 0x00000002;
-EXTERN!{stdcall fn SetupDiBuildDriverInfoList(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverType: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiCancelDriverInfoSearch(
-    DeviceInfoSet: HDEVINFO
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiEnumDriverInfoA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverType: DWORD,
-    MemberIndex: DWORD,
-    DriverInfoData: PSP_DRVINFO_DATA_A
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiEnumDriverInfoW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverType: DWORD,
-    MemberIndex: DWORD,
-    DriverInfoData: PSP_DRVINFO_DATA_W
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetSelectedDriverA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverInfoData: PSP_DRVINFO_DATA_A
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetSelectedDriverW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverInfoData: PSP_DRVINFO_DATA_W
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetSelectedDriverA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverInfoData: PSP_DRVINFO_DATA_A
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetSelectedDriverW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverInfoData: PSP_DRVINFO_DATA_W
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDriverInfoDetailA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverInfoData: PSP_DRVINFO_DATA_A,
-    DriverInfoDetailData: PSP_DRVINFO_DETAIL_DATA_A,
-    DriverInfoDetailDataSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDriverInfoDetailW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverInfoData: PSP_DRVINFO_DATA_W,
-    DriverInfoDetailData: PSP_DRVINFO_DETAIL_DATA_W,
-    DriverInfoDetailDataSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiDestroyDriverInfoList(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverType: DWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiBuildDriverInfoList(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverType: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiCancelDriverInfoSearch(
+        DeviceInfoSet: HDEVINFO,
+    ) -> BOOL;
+    pub fn SetupDiEnumDriverInfoA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverType: DWORD,
+        MemberIndex: DWORD,
+        DriverInfoData: PSP_DRVINFO_DATA_A,
+    ) -> BOOL;
+    pub fn SetupDiEnumDriverInfoW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverType: DWORD,
+        MemberIndex: DWORD,
+        DriverInfoData: PSP_DRVINFO_DATA_W,
+    ) -> BOOL;
+    pub fn SetupDiGetSelectedDriverA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverInfoData: PSP_DRVINFO_DATA_A,
+    ) -> BOOL;
+    pub fn SetupDiGetSelectedDriverW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverInfoData: PSP_DRVINFO_DATA_W,
+    ) -> BOOL;
+    pub fn SetupDiSetSelectedDriverA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverInfoData: PSP_DRVINFO_DATA_A,
+    ) -> BOOL;
+    pub fn SetupDiSetSelectedDriverW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverInfoData: PSP_DRVINFO_DATA_W,
+    ) -> BOOL;
+    pub fn SetupDiGetDriverInfoDetailA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverInfoData: PSP_DRVINFO_DATA_A,
+        DriverInfoDetailData: PSP_DRVINFO_DETAIL_DATA_A,
+        DriverInfoDetailDataSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetDriverInfoDetailW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverInfoData: PSP_DRVINFO_DATA_W,
+        DriverInfoDetailData: PSP_DRVINFO_DETAIL_DATA_W,
+        DriverInfoDetailDataSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiDestroyDriverInfoList(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverType: DWORD,
+    ) -> BOOL;
+}
 pub const DIGCF_DEFAULT: DWORD = 0x00000001;
 pub const DIGCF_PRESENT: DWORD = 0x00000002;
 pub const DIGCF_ALLCLASSES: DWORD = 0x00000004;
 pub const DIGCF_PROFILE: DWORD = 0x00000008;
 pub const DIGCF_DEVICEINTERFACE: DWORD = 0x00000010;
-EXTERN!{stdcall fn SetupDiGetClassDevsA(
-    ClassGuid: *const GUID,
-    Enumerator: PCSTR,
-    hwndParent: HWND,
-    Flags: DWORD
-) -> HDEVINFO}
-EXTERN!{stdcall fn SetupDiGetClassDevsW(
-    ClassGuid: *const GUID,
-    Enumerator: PCWSTR,
-    hwndParent: HWND,
-    Flags: DWORD
-) -> HDEVINFO}
-EXTERN!{stdcall fn SetupDiGetClassDevsExA(
-    ClassGuid: *const GUID,
-    Enumerator: PCSTR,
-    hwndParent: HWND,
-    Flags: DWORD,
-    DeviceInfoSet: HDEVINFO,
-    MachineName: PCSTR,
-    Reserved: PVOID
-) -> HDEVINFO}
-EXTERN!{stdcall fn SetupDiGetClassDevsExW(
-    ClassGuid: *const GUID,
-    Enumerator: PCWSTR,
-    hwndParent: HWND,
-    Flags: DWORD,
-    DeviceInfoSet: HDEVINFO,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> HDEVINFO}
-EXTERN!{stdcall fn SetupDiGetINFClassA(
-    InfName: PCSTR,
-    ClassGuid: LPGUID,
-    ClassName: PSTR,
-    ClassNameSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetINFClassW(
-    InfName: PCWSTR,
-    ClassGuid: LPGUID,
-    ClassName: PWSTR,
-    ClassNameSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiGetClassDevsA(
+        ClassGuid: *const GUID,
+        Enumerator: PCSTR,
+        hwndParent: HWND,
+        Flags: DWORD,
+    ) -> HDEVINFO;
+    pub fn SetupDiGetClassDevsW(
+        ClassGuid: *const GUID,
+        Enumerator: PCWSTR,
+        hwndParent: HWND,
+        Flags: DWORD,
+    ) -> HDEVINFO;
+    pub fn SetupDiGetClassDevsExA(
+        ClassGuid: *const GUID,
+        Enumerator: PCSTR,
+        hwndParent: HWND,
+        Flags: DWORD,
+        DeviceInfoSet: HDEVINFO,
+        MachineName: PCSTR,
+        Reserved: PVOID,
+    ) -> HDEVINFO;
+    pub fn SetupDiGetClassDevsExW(
+        ClassGuid: *const GUID,
+        Enumerator: PCWSTR,
+        hwndParent: HWND,
+        Flags: DWORD,
+        DeviceInfoSet: HDEVINFO,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> HDEVINFO;
+    pub fn SetupDiGetINFClassA(
+        InfName: PCSTR,
+        ClassGuid: LPGUID,
+        ClassName: PSTR,
+        ClassNameSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetINFClassW(
+        InfName: PCWSTR,
+        ClassGuid: LPGUID,
+        ClassName: PWSTR,
+        ClassNameSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+}
 pub const DIBCI_NOINSTALLCLASS: DWORD = 0x00000001;
 pub const DIBCI_NODISPLAYCLASS: DWORD = 0x00000002;
-EXTERN!{stdcall fn SetupDiBuildClassInfoList(
-    Flags: DWORD,
-    ClassGuidList: LPGUID,
-    ClassGuidListSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiBuildClassInfoListExA(
-    Flags: DWORD,
-    ClassGuidList: LPGUID,
-    ClassGuidListSize: DWORD,
-    RequiredSize: PDWORD,
-    MachineName: PCSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiBuildClassInfoListExW(
-    Flags: DWORD,
-    ClassGuidList: LPGUID,
-    ClassGuidListSize: DWORD,
-    RequiredSize: PDWORD,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassDescriptionA(
-    ClassGuid: *const GUID,
-    ClassDescription: PSTR,
-    ClassDescriptionSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassDescriptionW(
-    ClassGuid: *const GUID,
-    ClassDescription: PWSTR,
-    ClassDescriptionSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassDescriptionExA(
-    ClassGuid: *const GUID,
-    ClassDescription: PSTR,
-    ClassDescriptionSize: DWORD,
-    RequiredSize: PDWORD,
-    MachineName: PCSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassDescriptionExW(
-    ClassGuid: *const GUID,
-    ClassDescription: PWSTR,
-    ClassDescriptionSize: DWORD,
-    RequiredSize: PDWORD,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiCallClassInstaller(
-    InstallFunction: DI_FUNCTION,
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSelectDevice(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSelectBestCompatDrv(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiInstallDevice(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiInstallDriverFiles(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiRegisterCoDeviceInstallers(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiRemoveDevice(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiUnremoveDevice(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiRestartDevices(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiChangeState(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiInstallClassA(
-    hwndParent: HWND,
-    InfFileName: PCSTR,
-    Flags: DWORD,
-    FileQueue: HSPFILEQ
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiInstallClassW(
-    hwndParent: HWND,
-    InfFileName: PCWSTR,
-    Flags: DWORD,
-    FileQueue: HSPFILEQ
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiInstallClassExA(
-    hwndParent: HWND,
-    InfFileName: PCSTR,
-    Flags: DWORD,
-    FileQueue: HSPFILEQ,
-    InterfaceClassGuid: *const GUID,
-    Reserved1: PVOID,
-    Reserved2: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiInstallClassExW(
-    hwndParent: HWND,
-    InfFileName: PCWSTR,
-    Flags: DWORD,
-    FileQueue: HSPFILEQ,
-    InterfaceClassGuid: *const GUID,
-    Reserved1: PVOID,
-    Reserved2: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiOpenClassRegKey(
-    ClassGuid: *const GUID,
-    samDesired: REGSAM
-) -> HKEY}
+extern "system" {
+    pub fn SetupDiBuildClassInfoList(
+        Flags: DWORD,
+        ClassGuidList: LPGUID,
+        ClassGuidListSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiBuildClassInfoListExA(
+        Flags: DWORD,
+        ClassGuidList: LPGUID,
+        ClassGuidListSize: DWORD,
+        RequiredSize: PDWORD,
+        MachineName: PCSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiBuildClassInfoListExW(
+        Flags: DWORD,
+        ClassGuidList: LPGUID,
+        ClassGuidListSize: DWORD,
+        RequiredSize: PDWORD,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetClassDescriptionA(
+        ClassGuid: *const GUID,
+        ClassDescription: PSTR,
+        ClassDescriptionSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetClassDescriptionW(
+        ClassGuid: *const GUID,
+        ClassDescription: PWSTR,
+        ClassDescriptionSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetClassDescriptionExA(
+        ClassGuid: *const GUID,
+        ClassDescription: PSTR,
+        ClassDescriptionSize: DWORD,
+        RequiredSize: PDWORD,
+        MachineName: PCSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetClassDescriptionExW(
+        ClassGuid: *const GUID,
+        ClassDescription: PWSTR,
+        ClassDescriptionSize: DWORD,
+        RequiredSize: PDWORD,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiCallClassInstaller(
+        InstallFunction: DI_FUNCTION,
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiSelectDevice(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiSelectBestCompatDrv(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiInstallDevice(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiInstallDriverFiles(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiRegisterCoDeviceInstallers(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiRemoveDevice(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiUnremoveDevice(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiRestartDevices(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiChangeState(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiInstallClassA(
+        hwndParent: HWND,
+        InfFileName: PCSTR,
+        Flags: DWORD,
+        FileQueue: HSPFILEQ,
+    ) -> BOOL;
+    pub fn SetupDiInstallClassW(
+        hwndParent: HWND,
+        InfFileName: PCWSTR,
+        Flags: DWORD,
+        FileQueue: HSPFILEQ,
+    ) -> BOOL;
+    pub fn SetupDiInstallClassExA(
+        hwndParent: HWND,
+        InfFileName: PCSTR,
+        Flags: DWORD,
+        FileQueue: HSPFILEQ,
+        InterfaceClassGuid: *const GUID,
+        Reserved1: PVOID,
+        Reserved2: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiInstallClassExW(
+        hwndParent: HWND,
+        InfFileName: PCWSTR,
+        Flags: DWORD,
+        FileQueue: HSPFILEQ,
+        InterfaceClassGuid: *const GUID,
+        Reserved1: PVOID,
+        Reserved2: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiOpenClassRegKey(
+        ClassGuid: *const GUID,
+        samDesired: REGSAM,
+    ) -> HKEY;
+}
 pub const DIOCR_INSTALLER: DWORD = 0x00000001;
 pub const DIOCR_INTERFACE: DWORD = 0x00000002;
-EXTERN!{stdcall fn SetupDiOpenClassRegKeyExA(
-    ClassGuid: *const GUID,
-    samDesired: REGSAM,
-    Flags: DWORD,
-    MachineName: PCSTR,
-    Reserved: PVOID
-) -> HKEY}
-EXTERN!{stdcall fn SetupDiOpenClassRegKeyExW(
-    ClassGuid: *const GUID,
-    samDesired: REGSAM,
-    Flags: DWORD,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> HKEY}
-EXTERN!{stdcall fn SetupDiCreateDeviceInterfaceRegKeyA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
-    Reserved: DWORD,
-    samDesired: REGSAM,
-    InfHandle: HINF,
-    InfSectionName: PCSTR
-) -> HKEY}
-EXTERN!{stdcall fn SetupDiCreateDeviceInterfaceRegKeyW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
-    Reserved: DWORD,
-    samDesired: REGSAM,
-    InfHandle: HINF,
-    InfSectionName: PCWSTR
-) -> HKEY}
-EXTERN!{stdcall fn SetupDiOpenDeviceInterfaceRegKey(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
-    Reserved: DWORD,
-    samDesired: REGSAM
-) -> HKEY}
-EXTERN!{stdcall fn SetupDiDeleteDeviceInterfaceRegKey(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
-    Reserved: DWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiOpenClassRegKeyExA(
+        ClassGuid: *const GUID,
+        samDesired: REGSAM,
+        Flags: DWORD,
+        MachineName: PCSTR,
+        Reserved: PVOID,
+    ) -> HKEY;
+    pub fn SetupDiOpenClassRegKeyExW(
+        ClassGuid: *const GUID,
+        samDesired: REGSAM,
+        Flags: DWORD,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> HKEY;
+    pub fn SetupDiCreateDeviceInterfaceRegKeyA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+        Reserved: DWORD,
+        samDesired: REGSAM,
+        InfHandle: HINF,
+        InfSectionName: PCSTR,
+    ) -> HKEY;
+    pub fn SetupDiCreateDeviceInterfaceRegKeyW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+        Reserved: DWORD,
+        samDesired: REGSAM,
+        InfHandle: HINF,
+        InfSectionName: PCWSTR,
+    ) -> HKEY;
+    pub fn SetupDiOpenDeviceInterfaceRegKey(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+        Reserved: DWORD,
+        samDesired: REGSAM,
+    ) -> HKEY;
+    pub fn SetupDiDeleteDeviceInterfaceRegKey(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+        Reserved: DWORD,
+    ) -> BOOL;
+}
 pub const DIREG_DEV: DWORD = 0x00000001;
 pub const DIREG_DRV: DWORD = 0x00000002;
 pub const DIREG_BOTH: DWORD = 0x00000004;
-EXTERN!{stdcall fn SetupDiCreateDevRegKeyA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    Scope: DWORD,
-    HwProfile: DWORD,
-    KeyType: DWORD,
-    InfHandle: HINF,
-    InfSectionName: PCSTR
-) -> HKEY}
-EXTERN!{stdcall fn SetupDiCreateDevRegKeyW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    Scope: DWORD,
-    HwProfile: DWORD,
-    KeyType: DWORD,
-    InfHandle: HINF,
-    InfSectionName: PCWSTR
-) -> HKEY}
-EXTERN!{stdcall fn SetupDiOpenDevRegKey(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    Scope: DWORD,
-    HwProfile: DWORD,
-    KeyType: DWORD,
-    samDesired: REGSAM
-) -> HKEY}
-EXTERN!{stdcall fn SetupDiDeleteDevRegKey(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    Scope: DWORD,
-    HwProfile: DWORD,
-    KeyType: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetHwProfileList(
-    HwProfileList: PDWORD,
-    HwProfileListSize: DWORD,
-    RequiredSize: PDWORD,
-    CurrentlyActiveIndex: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetHwProfileListExA(
-    HwProfileList: PDWORD,
-    HwProfileListSize: DWORD,
-    RequiredSize: PDWORD,
-    CurrentlyActiveIndex: PDWORD,
-    MachineName: PCSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetHwProfileListExW(
-    HwProfileList: PDWORD,
-    HwProfileListSize: DWORD,
-    RequiredSize: PDWORD,
-    CurrentlyActiveIndex: PDWORD,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDevicePropertyKeys(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    PropertyKeyArray: *mut DEVPROPKEY,
-    PropertyKeyCount: DWORD,
-    RequiredPropertyKeyCount: PDWORD,
-    Flags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDevicePropertyW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    PropertyKey: *const DEVPROPKEY,
-    PropertyType: *mut DEVPROPTYPE,
-    PropertyBuffer: PBYTE,
-    PropertyBufferSize: DWORD,
-    RequiredSize: PDWORD,
-    Flags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetDevicePropertyW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    PropertyKey: *const DEVPROPKEY,
-    PropertyType: DEVPROPTYPE,
-    PropertyBuffer: *const BYTE,
-    PropertyBufferSize: DWORD,
-    Flags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDeviceInterfacePropertyKeys(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
-    PropertyKeyArray: *mut DEVPROPKEY,
-    PropertyKeyCount: DWORD,
-    RequiredPropertyKeyCount: PDWORD,
-    Flags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDeviceInterfacePropertyW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
-    PropertyKey: *const DEVPROPKEY,
-    PropertyType: *mut DEVPROPTYPE,
-    PropertyBuffer: PBYTE,
-    PropertyBufferSize: DWORD,
-    RequiredSize: PDWORD,
-    Flags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetDeviceInterfacePropertyW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
-    PropertyKey: *const DEVPROPKEY,
-    PropertyType: DEVPROPTYPE,
-    PropertyBuffer: *const BYTE,
-    PropertyBufferSize: DWORD,
-    Flags: DWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiCreateDevRegKeyA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        Scope: DWORD,
+        HwProfile: DWORD,
+        KeyType: DWORD,
+        InfHandle: HINF,
+        InfSectionName: PCSTR,
+    ) -> HKEY;
+    pub fn SetupDiCreateDevRegKeyW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        Scope: DWORD,
+        HwProfile: DWORD,
+        KeyType: DWORD,
+        InfHandle: HINF,
+        InfSectionName: PCWSTR,
+    ) -> HKEY;
+    pub fn SetupDiOpenDevRegKey(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        Scope: DWORD,
+        HwProfile: DWORD,
+        KeyType: DWORD,
+        samDesired: REGSAM,
+    ) -> HKEY;
+    pub fn SetupDiDeleteDevRegKey(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        Scope: DWORD,
+        HwProfile: DWORD,
+        KeyType: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetHwProfileList(
+        HwProfileList: PDWORD,
+        HwProfileListSize: DWORD,
+        RequiredSize: PDWORD,
+        CurrentlyActiveIndex: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetHwProfileListExA(
+        HwProfileList: PDWORD,
+        HwProfileListSize: DWORD,
+        RequiredSize: PDWORD,
+        CurrentlyActiveIndex: PDWORD,
+        MachineName: PCSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetHwProfileListExW(
+        HwProfileList: PDWORD,
+        HwProfileListSize: DWORD,
+        RequiredSize: PDWORD,
+        CurrentlyActiveIndex: PDWORD,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetDevicePropertyKeys(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        PropertyKeyArray: *mut DEVPROPKEY,
+        PropertyKeyCount: DWORD,
+        RequiredPropertyKeyCount: PDWORD,
+        Flags: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetDevicePropertyW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        PropertyKey: *const DEVPROPKEY,
+        PropertyType: *mut DEVPROPTYPE,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: DWORD,
+        RequiredSize: PDWORD,
+        Flags: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiSetDevicePropertyW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        PropertyKey: *const DEVPROPKEY,
+        PropertyType: DEVPROPTYPE,
+        PropertyBuffer: *const BYTE,
+        PropertyBufferSize: DWORD,
+        Flags: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetDeviceInterfacePropertyKeys(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+        PropertyKeyArray: *mut DEVPROPKEY,
+        PropertyKeyCount: DWORD,
+        RequiredPropertyKeyCount: PDWORD,
+        Flags: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetDeviceInterfacePropertyW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+        PropertyKey: *const DEVPROPKEY,
+        PropertyType: *mut DEVPROPTYPE,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: DWORD,
+        RequiredSize: PDWORD,
+        Flags: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiSetDeviceInterfacePropertyW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInterfaceData: PSP_DEVICE_INTERFACE_DATA,
+        PropertyKey: *const DEVPROPKEY,
+        PropertyType: DEVPROPTYPE,
+        PropertyBuffer: *const BYTE,
+        PropertyBufferSize: DWORD,
+        Flags: DWORD,
+    ) -> BOOL;
+}
 pub const DICLASSPROP_INSTALLER: DWORD = 0x00000001;
 pub const DICLASSPROP_INTERFACE: DWORD = 0x00000002;
-EXTERN!{stdcall fn SetupDiGetClassPropertyKeys(
-    ClassGuid: *const GUID,
-    PropertyKeyArray: *mut DEVPROPKEY,
-    PropertyKeyCount: DWORD,
-    RequiredPropertyKeyCount: PDWORD,
-    Flags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassPropertyKeysExW(
-    ClassGuid: *const GUID,
-    PropertyKeyArray: *mut DEVPROPKEY,
-    PropertyKeyCount: DWORD,
-    RequiredPropertyKeyCount: PDWORD,
-    Flags: DWORD,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassPropertyW(
-    ClassGuid: *const GUID,
-    PropertyKey: *const DEVPROPKEY,
-    PropertyType: *mut DEVPROPTYPE,
-    PropertyBuffer: PBYTE,
-    PropertyBufferSize: DWORD,
-    RequiredSize: PDWORD,
-    Flags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassPropertyExW(
-    ClassGuid: *const GUID,
-    PropertyKey: *const DEVPROPKEY,
-    PropertyType: *mut DEVPROPTYPE,
-    PropertyBuffer: PBYTE,
-    PropertyBufferSize: DWORD,
-    RequiredSize: PDWORD,
-    Flags: DWORD,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetClassPropertyW(
-    ClassGuid: *const GUID,
-    PropertyKey: *const DEVPROPKEY,
-    PropertyType: DEVPROPTYPE,
-    PropertyBuffer: *const BYTE,
-    PropertyBufferSize: DWORD,
-    Flags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetClassPropertyExW(
-    ClassGuid: *const GUID,
-    PropertyKey: *const DEVPROPKEY,
-    PropertyType: DEVPROPTYPE,
-    PropertyBuffer: *const BYTE,
-    PropertyBufferSize: DWORD,
-    Flags: DWORD,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiGetClassPropertyKeys(
+        ClassGuid: *const GUID,
+        PropertyKeyArray: *mut DEVPROPKEY,
+        PropertyKeyCount: DWORD,
+        RequiredPropertyKeyCount: PDWORD,
+        Flags: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetClassPropertyKeysExW(
+        ClassGuid: *const GUID,
+        PropertyKeyArray: *mut DEVPROPKEY,
+        PropertyKeyCount: DWORD,
+        RequiredPropertyKeyCount: PDWORD,
+        Flags: DWORD,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetClassPropertyW(
+        ClassGuid: *const GUID,
+        PropertyKey: *const DEVPROPKEY,
+        PropertyType: *mut DEVPROPTYPE,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: DWORD,
+        RequiredSize: PDWORD,
+        Flags: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetClassPropertyExW(
+        ClassGuid: *const GUID,
+        PropertyKey: *const DEVPROPKEY,
+        PropertyType: *mut DEVPROPTYPE,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: DWORD,
+        RequiredSize: PDWORD,
+        Flags: DWORD,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiSetClassPropertyW(
+        ClassGuid: *const GUID,
+        PropertyKey: *const DEVPROPKEY,
+        PropertyType: DEVPROPTYPE,
+        PropertyBuffer: *const BYTE,
+        PropertyBufferSize: DWORD,
+        Flags: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiSetClassPropertyExW(
+        ClassGuid: *const GUID,
+        PropertyKey: *const DEVPROPKEY,
+        PropertyType: DEVPROPTYPE,
+        PropertyBuffer: *const BYTE,
+        PropertyBufferSize: DWORD,
+        Flags: DWORD,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+}
 pub const SPDRP_DEVICEDESC: DWORD = 0x00000000;
 pub const SPDRP_HARDWAREID: DWORD = 0x00000001;
 pub const SPDRP_COMPATIBLEIDS: DWORD = 0x00000002;
@@ -3011,211 +3068,217 @@ pub const SPCRP_DEVTYPE: DWORD = 0x00000019;
 pub const SPCRP_EXCLUSIVE: DWORD = 0x0000001A;
 pub const SPCRP_CHARACTERISTICS: DWORD = 0x0000001B;
 pub const SPCRP_MAXIMUM_PROPERTY: DWORD = 0x0000001C;
-EXTERN!{stdcall fn SetupDiGetDeviceRegistryPropertyA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    Property: DWORD,
-    PropertyRegDataType: PDWORD,
-    PropertyBuffer: PBYTE,
-    PropertyBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDeviceRegistryPropertyW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    Property: DWORD,
-    PropertyRegDataType: PDWORD,
-    PropertyBuffer: PBYTE,
-    PropertyBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassRegistryPropertyA(
-    ClassGuid: *const GUID,
-    Property: DWORD,
-    PropertyRegDataType: PDWORD,
-    PropertyBuffer: PBYTE,
-    PropertyBufferSize: DWORD,
-    RequiredSize: PDWORD,
-    MachineName: PCSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassRegistryPropertyW(
-    ClassGuid: *const GUID,
-    Property: DWORD,
-    PropertyRegDataType: PDWORD,
-    PropertyBuffer: PBYTE,
-    PropertyBufferSize: DWORD,
-    RequiredSize: PDWORD,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetDeviceRegistryPropertyA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    Property: DWORD,
-    PropertyBuffer: *const BYTE,
-    PropertyBufferSize: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetDeviceRegistryPropertyW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    Property: DWORD,
-    PropertyBuffer: *const BYTE,
-    PropertyBufferSize: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetClassRegistryPropertyA(
-    ClassGuid: *const GUID,
-    Property: DWORD,
-    PropertyBuffer: *const BYTE,
-    PropertyBufferSize: DWORD,
-    MachineName: PCSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetClassRegistryPropertyW(
-    ClassGuid: *const GUID,
-    Property: DWORD,
-    PropertyBuffer: *const BYTE,
-    PropertyBufferSize: DWORD,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDeviceInstallParamsA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DeviceInstallParams: PSP_DEVINSTALL_PARAMS_A
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDeviceInstallParamsW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DeviceInstallParams: PSP_DEVINSTALL_PARAMS_W
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassInstallParamsA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    ClassInstallParams: PSP_CLASSINSTALL_HEADER,
-    ClassInstallParamsSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassInstallParamsW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    ClassInstallParams: PSP_CLASSINSTALL_HEADER,
-    ClassInstallParamsSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetDeviceInstallParamsA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DeviceInstallParams: PSP_DEVINSTALL_PARAMS_A
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetDeviceInstallParamsW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DeviceInstallParams: PSP_DEVINSTALL_PARAMS_W
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetClassInstallParamsA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    ClassInstallParams: PSP_CLASSINSTALL_HEADER,
-    ClassInstallParamsSize: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetClassInstallParamsW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    ClassInstallParams: PSP_CLASSINSTALL_HEADER,
-    ClassInstallParamsSize: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDriverInstallParamsA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverInfoData: PSP_DRVINFO_DATA_A,
-    DriverInstallParams: PSP_DRVINSTALL_PARAMS
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetDriverInstallParamsW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverInfoData: PSP_DRVINFO_DATA_W,
-    DriverInstallParams: PSP_DRVINSTALL_PARAMS
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetDriverInstallParamsA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverInfoData: PSP_DRVINFO_DATA_A,
-    DriverInstallParams: PSP_DRVINSTALL_PARAMS
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetDriverInstallParamsW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    DriverInfoData: PSP_DRVINFO_DATA_W,
-    DriverInstallParams: PSP_DRVINSTALL_PARAMS
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiLoadClassIcon(
-    ClassGuid: *const GUID,
-    LargeIcon: *mut HICON,
-    MiniIconIndex: PINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiLoadDeviceIcon(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    cxIcon: UINT,
-    cyIcon: UINT,
-    Flags: DWORD,
-    hIcon: *mut HICON
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiGetDeviceRegistryPropertyA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        Property: DWORD,
+        PropertyRegDataType: PDWORD,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetDeviceRegistryPropertyW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        Property: DWORD,
+        PropertyRegDataType: PDWORD,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetClassRegistryPropertyA(
+        ClassGuid: *const GUID,
+        Property: DWORD,
+        PropertyRegDataType: PDWORD,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: DWORD,
+        RequiredSize: PDWORD,
+        MachineName: PCSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetClassRegistryPropertyW(
+        ClassGuid: *const GUID,
+        Property: DWORD,
+        PropertyRegDataType: PDWORD,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: DWORD,
+        RequiredSize: PDWORD,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiSetDeviceRegistryPropertyA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        Property: DWORD,
+        PropertyBuffer: *const BYTE,
+        PropertyBufferSize: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiSetDeviceRegistryPropertyW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        Property: DWORD,
+        PropertyBuffer: *const BYTE,
+        PropertyBufferSize: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiSetClassRegistryPropertyA(
+        ClassGuid: *const GUID,
+        Property: DWORD,
+        PropertyBuffer: *const BYTE,
+        PropertyBufferSize: DWORD,
+        MachineName: PCSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiSetClassRegistryPropertyW(
+        ClassGuid: *const GUID,
+        Property: DWORD,
+        PropertyBuffer: *const BYTE,
+        PropertyBufferSize: DWORD,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetDeviceInstallParamsA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DeviceInstallParams: PSP_DEVINSTALL_PARAMS_A,
+    ) -> BOOL;
+    pub fn SetupDiGetDeviceInstallParamsW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DeviceInstallParams: PSP_DEVINSTALL_PARAMS_W,
+    ) -> BOOL;
+    pub fn SetupDiGetClassInstallParamsA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        ClassInstallParams: PSP_CLASSINSTALL_HEADER,
+        ClassInstallParamsSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetClassInstallParamsW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        ClassInstallParams: PSP_CLASSINSTALL_HEADER,
+        ClassInstallParamsSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiSetDeviceInstallParamsA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DeviceInstallParams: PSP_DEVINSTALL_PARAMS_A,
+    ) -> BOOL;
+    pub fn SetupDiSetDeviceInstallParamsW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DeviceInstallParams: PSP_DEVINSTALL_PARAMS_W,
+    ) -> BOOL;
+    pub fn SetupDiSetClassInstallParamsA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        ClassInstallParams: PSP_CLASSINSTALL_HEADER,
+        ClassInstallParamsSize: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiSetClassInstallParamsW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        ClassInstallParams: PSP_CLASSINSTALL_HEADER,
+        ClassInstallParamsSize: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetDriverInstallParamsA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverInfoData: PSP_DRVINFO_DATA_A,
+        DriverInstallParams: PSP_DRVINSTALL_PARAMS,
+    ) -> BOOL;
+    pub fn SetupDiGetDriverInstallParamsW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverInfoData: PSP_DRVINFO_DATA_W,
+        DriverInstallParams: PSP_DRVINSTALL_PARAMS,
+    ) -> BOOL;
+    pub fn SetupDiSetDriverInstallParamsA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverInfoData: PSP_DRVINFO_DATA_A,
+        DriverInstallParams: PSP_DRVINSTALL_PARAMS,
+    ) -> BOOL;
+    pub fn SetupDiSetDriverInstallParamsW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        DriverInfoData: PSP_DRVINFO_DATA_W,
+        DriverInstallParams: PSP_DRVINSTALL_PARAMS,
+    ) -> BOOL;
+    pub fn SetupDiLoadClassIcon(
+        ClassGuid: *const GUID,
+        LargeIcon: *mut HICON,
+        MiniIconIndex: PINT,
+    ) -> BOOL;
+    pub fn SetupDiLoadDeviceIcon(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        cxIcon: UINT,
+        cyIcon: UINT,
+        Flags: DWORD,
+        hIcon: *mut HICON,
+    ) -> BOOL;
+}
 pub const DMI_MASK: DWORD = 0x00000001;
 pub const DMI_BKCOLOR: DWORD = 0x00000002;
 pub const DMI_USERECT: DWORD = 0x00000004;
-EXTERN!{stdcall fn SetupDiDrawMiniIcon(
-    hdc: HDC,
-    rc: RECT,
-    MiniIconIndex: INT,
-    Flags: DWORD
-) -> INT}
-EXTERN!{stdcall fn SetupDiGetClassBitmapIndex(
-    ClassGuid: *const GUID,
-    MiniIconIndex: PINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassImageList(
-    ClassImageListData: PSP_CLASSIMAGELIST_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassImageListExA(
-    ClassImageListData: PSP_CLASSIMAGELIST_DATA,
-    MachineName: PCSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassImageListExW(
-    ClassImageListData: PSP_CLASSIMAGELIST_DATA,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassImageIndex(
-    ClassImageListData: PSP_CLASSIMAGELIST_DATA,
-    ClassGuid: *const GUID,
-    ImageIndex: PINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiDestroyClassImageList(
-    ClassImageListData: PSP_CLASSIMAGELIST_DATA
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiDrawMiniIcon(
+        hdc: HDC,
+        rc: RECT,
+        MiniIconIndex: INT,
+        Flags: DWORD,
+    ) -> INT;
+    pub fn SetupDiGetClassBitmapIndex(
+        ClassGuid: *const GUID,
+        MiniIconIndex: PINT,
+    ) -> BOOL;
+    pub fn SetupDiGetClassImageList(
+        ClassImageListData: PSP_CLASSIMAGELIST_DATA,
+    ) -> BOOL;
+    pub fn SetupDiGetClassImageListExA(
+        ClassImageListData: PSP_CLASSIMAGELIST_DATA,
+        MachineName: PCSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetClassImageListExW(
+        ClassImageListData: PSP_CLASSIMAGELIST_DATA,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetClassImageIndex(
+        ClassImageListData: PSP_CLASSIMAGELIST_DATA,
+        ClassGuid: *const GUID,
+        ImageIndex: PINT,
+    ) -> BOOL;
+    pub fn SetupDiDestroyClassImageList(
+        ClassImageListData: PSP_CLASSIMAGELIST_DATA,
+    ) -> BOOL;
+}
 pub const DIGCDP_FLAG_BASIC: DWORD = 0x00000001;
 pub const DIGCDP_FLAG_ADVANCED: DWORD = 0x00000002;
 pub const DIGCDP_FLAG_REMOTE_BASIC: DWORD = 0x00000003;
 pub const DIGCDP_FLAG_REMOTE_ADVANCED: DWORD = 0x00000004;
-EXTERN!{stdcall fn SetupDiGetClassDevPropertySheetsA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    PropertySheetHeader: LPPROPSHEETHEADERA,
-    PropertySheetHeaderPageListSize: DWORD,
-    RequiredSize: PDWORD,
-    PropertySheetType: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetClassDevPropertySheetsW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    PropertySheetHeader: LPPROPSHEETHEADERW,
-    PropertySheetHeaderPageListSize: DWORD,
-    RequiredSize: PDWORD,
-    PropertySheetType: DWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiGetClassDevPropertySheetsA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        PropertySheetHeader: LPPROPSHEETHEADERA,
+        PropertySheetHeaderPageListSize: DWORD,
+        RequiredSize: PDWORD,
+        PropertySheetType: DWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetClassDevPropertySheetsW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        PropertySheetHeader: LPPROPSHEETHEADERW,
+        PropertySheetHeaderPageListSize: DWORD,
+        RequiredSize: PDWORD,
+        PropertySheetType: DWORD,
+    ) -> BOOL;
+}
 pub const IDI_RESOURCEFIRST: c_int = 159;
 pub const IDI_RESOURCE: c_int = 159;
 pub const IDI_RESOURCELAST: c_int = 161;
@@ -3227,182 +3290,186 @@ pub const IDI_CLASSICON_OVERLAYLAST: c_int = 502;
 pub const IDI_PROBLEM_OVL: c_int = 500;
 pub const IDI_DISABLED_OVL: c_int = 501;
 pub const IDI_FORCED_OVL: c_int = 502;
-EXTERN!{stdcall fn SetupDiAskForOEMDisk(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSelectOEMDrv(
-    hwndParent: HWND,
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiClassNameFromGuidA(
-    ClassGuid: *const GUID,
-    ClassName: PSTR,
-    ClassNameSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiClassNameFromGuidW(
-    ClassGuid: *const GUID,
-    ClassName: PWSTR,
-    ClassNameSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiClassNameFromGuidExA(
-    ClassGuid: *const GUID,
-    ClassName: PSTR,
-    ClassNameSize: DWORD,
-    RequiredSize: PDWORD,
-    MachineName: PCSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiClassNameFromGuidExW(
-    ClassGuid: *const GUID,
-    ClassName: PWSTR,
-    ClassNameSize: DWORD,
-    RequiredSize: PDWORD,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiClassGuidsFromNameA(
-    ClassName: PCSTR,
-    ClassGuidList: LPGUID,
-    ClassGuidListSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiClassGuidsFromNameW(
-    ClassName: PCWSTR,
-    ClassGuidList: LPGUID,
-    ClassGuidListSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiClassGuidsFromNameExA(
-    ClassName: PCSTR,
-    ClassGuidList: LPGUID,
-    ClassGuidListSize: DWORD,
-    RequiredSize: PDWORD,
-    MachineName: PCSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiClassGuidsFromNameExW(
-    ClassName: PCWSTR,
-    ClassGuidList: LPGUID,
-    ClassGuidListSize: DWORD,
-    RequiredSize: PDWORD,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetHwProfileFriendlyNameA(
-    HwProfile: DWORD,
-    FriendlyName: PSTR,
-    FriendlyNameSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetHwProfileFriendlyNameW(
-    HwProfile: DWORD,
-    FriendlyName: PWSTR,
-    FriendlyNameSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetHwProfileFriendlyNameExA(
-    HwProfile: DWORD,
-    FriendlyName: PSTR,
-    FriendlyNameSize: DWORD,
-    RequiredSize: PDWORD,
-    MachineName: PCSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetHwProfileFriendlyNameExW(
-    HwProfile: DWORD,
-    FriendlyName: PWSTR,
-    FriendlyNameSize: DWORD,
-    RequiredSize: PDWORD,
-    MachineName: PCWSTR,
-    Reserved: PVOID
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiAskForOEMDisk(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiSelectOEMDrv(
+        hwndParent: HWND,
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiClassNameFromGuidA(
+        ClassGuid: *const GUID,
+        ClassName: PSTR,
+        ClassNameSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiClassNameFromGuidW(
+        ClassGuid: *const GUID,
+        ClassName: PWSTR,
+        ClassNameSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiClassNameFromGuidExA(
+        ClassGuid: *const GUID,
+        ClassName: PSTR,
+        ClassNameSize: DWORD,
+        RequiredSize: PDWORD,
+        MachineName: PCSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiClassNameFromGuidExW(
+        ClassGuid: *const GUID,
+        ClassName: PWSTR,
+        ClassNameSize: DWORD,
+        RequiredSize: PDWORD,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiClassGuidsFromNameA(
+        ClassName: PCSTR,
+        ClassGuidList: LPGUID,
+        ClassGuidListSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiClassGuidsFromNameW(
+        ClassName: PCWSTR,
+        ClassGuidList: LPGUID,
+        ClassGuidListSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiClassGuidsFromNameExA(
+        ClassName: PCSTR,
+        ClassGuidList: LPGUID,
+        ClassGuidListSize: DWORD,
+        RequiredSize: PDWORD,
+        MachineName: PCSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiClassGuidsFromNameExW(
+        ClassName: PCWSTR,
+        ClassGuidList: LPGUID,
+        ClassGuidListSize: DWORD,
+        RequiredSize: PDWORD,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetHwProfileFriendlyNameA(
+        HwProfile: DWORD,
+        FriendlyName: PSTR,
+        FriendlyNameSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetHwProfileFriendlyNameW(
+        HwProfile: DWORD,
+        FriendlyName: PWSTR,
+        FriendlyNameSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetHwProfileFriendlyNameExA(
+        HwProfile: DWORD,
+        FriendlyName: PSTR,
+        FriendlyNameSize: DWORD,
+        RequiredSize: PDWORD,
+        MachineName: PCSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetHwProfileFriendlyNameExW(
+        HwProfile: DWORD,
+        FriendlyName: PWSTR,
+        FriendlyNameSize: DWORD,
+        RequiredSize: PDWORD,
+        MachineName: PCWSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+}
 pub const SPWPT_SELECTDEVICE: DWORD = 0x00000001;
 pub const SPWP_USE_DEVINFO_DATA: DWORD = 0x00000001;
-EXTERN!{stdcall fn SetupDiGetWizardPage(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    InstallWizardData: PSP_INSTALLWIZARD_DATA,
-    PageType: DWORD,
-    Flags: DWORD
-) -> HPROPSHEETPAGE}
-EXTERN!{stdcall fn SetupDiGetSelectedDevice(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiSetSelectedDevice(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetActualModelsSectionA(
-    Context: PINFCONTEXT,
-    AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
-    InfSectionWithExt: PSTR,
-    InfSectionWithExtSize: DWORD,
-    RequiredSize: PDWORD,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetActualModelsSectionW(
-    Context: PINFCONTEXT,
-    AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
-    InfSectionWithExt: PWSTR,
-    InfSectionWithExtSize: DWORD,
-    RequiredSize: PDWORD,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetActualSectionToInstallA(
-    InfHandle: HINF,
-    InfSectionName: PCSTR,
-    InfSectionWithExt: PSTR,
-    InfSectionWithExtSize: DWORD,
-    RequiredSize: PDWORD,
-    Extension: *mut PSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetActualSectionToInstallW(
-    InfHandle: HINF,
-    InfSectionName: PCWSTR,
-    InfSectionWithExt: PWSTR,
-    InfSectionWithExtSize: DWORD,
-    RequiredSize: PDWORD,
-    Extension: *mut PWSTR
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetActualSectionToInstallExA(
-    InfHandle: HINF,
-    InfSectionName: PCSTR,
-    AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
-    InfSectionWithExt: PSTR,
-    InfSectionWithExtSize: DWORD,
-    RequiredSize: PDWORD,
-    Extension: *mut PSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetActualSectionToInstallExW(
-    InfHandle: HINF,
-    InfSectionName: PCWSTR,
-    AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
-    InfSectionWithExt: PWSTR,
-    InfSectionWithExtSize: DWORD,
-    RequiredSize: PDWORD,
-    Extension: *mut PWSTR,
-    Reserved: PVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetupEnumInfSectionsA(
-    InfHandle: HINF,
-    Index: UINT,
-    Buffer: PSTR,
-    Size: UINT,
-    SizeNeeded: *mut UINT
-) -> BOOL}
-EXTERN!{stdcall fn SetupEnumInfSectionsW(
-    InfHandle: HINF,
-    Index: UINT,
-    Buffer: PWSTR,
-    Size: UINT,
-    SizeNeeded: *mut UINT
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiGetWizardPage(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        InstallWizardData: PSP_INSTALLWIZARD_DATA,
+        PageType: DWORD,
+        Flags: DWORD,
+    ) -> HPROPSHEETPAGE;
+    pub fn SetupDiGetSelectedDevice(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiSetSelectedDevice(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+    ) -> BOOL;
+    pub fn SetupDiGetActualModelsSectionA(
+        Context: PINFCONTEXT,
+        AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
+        InfSectionWithExt: PSTR,
+        InfSectionWithExtSize: DWORD,
+        RequiredSize: PDWORD,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetActualModelsSectionW(
+        Context: PINFCONTEXT,
+        AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
+        InfSectionWithExt: PWSTR,
+        InfSectionWithExtSize: DWORD,
+        RequiredSize: PDWORD,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetActualSectionToInstallA(
+        InfHandle: HINF,
+        InfSectionName: PCSTR,
+        InfSectionWithExt: PSTR,
+        InfSectionWithExtSize: DWORD,
+        RequiredSize: PDWORD,
+        Extension: *mut PSTR,
+    ) -> BOOL;
+    pub fn SetupDiGetActualSectionToInstallW(
+        InfHandle: HINF,
+        InfSectionName: PCWSTR,
+        InfSectionWithExt: PWSTR,
+        InfSectionWithExtSize: DWORD,
+        RequiredSize: PDWORD,
+        Extension: *mut PWSTR,
+    ) -> BOOL;
+    pub fn SetupDiGetActualSectionToInstallExA(
+        InfHandle: HINF,
+        InfSectionName: PCSTR,
+        AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
+        InfSectionWithExt: PSTR,
+        InfSectionWithExtSize: DWORD,
+        RequiredSize: PDWORD,
+        Extension: *mut PSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupDiGetActualSectionToInstallExW(
+        InfHandle: HINF,
+        InfSectionName: PCWSTR,
+        AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
+        InfSectionWithExt: PWSTR,
+        InfSectionWithExtSize: DWORD,
+        RequiredSize: PDWORD,
+        Extension: *mut PWSTR,
+        Reserved: PVOID,
+    ) -> BOOL;
+    pub fn SetupEnumInfSectionsA(
+        InfHandle: HINF,
+        Index: UINT,
+        Buffer: PSTR,
+        Size: UINT,
+        SizeNeeded: *mut UINT,
+    ) -> BOOL;
+    pub fn SetupEnumInfSectionsW(
+        InfHandle: HINF,
+        Index: UINT,
+        Buffer: PWSTR,
+        Size: UINT,
+        SizeNeeded: *mut UINT,
+    ) -> BOOL;
+}
 STRUCT!{struct SP_INF_SIGNER_INFO_V1_A {
     cbSize: DWORD,
     CatalogFile: [CHAR; MAX_PATH],
@@ -3448,45 +3515,51 @@ pub type SP_INF_SIGNER_INFO_A = SP_INF_SIGNER_INFO_V2_A;
 pub type PSP_INF_SIGNER_INFO_A = PSP_INF_SIGNER_INFO_V2_A;
 pub type SP_INF_SIGNER_INFO_W = SP_INF_SIGNER_INFO_V2_W;
 pub type PSP_INF_SIGNER_INFO_W = PSP_INF_SIGNER_INFO_V2_W;
-EXTERN!{stdcall fn SetupVerifyInfFileA(
-    InfName: PCSTR,
-    AltPlatformInfo: PSP_ALTPLATFORM_INFO,
-    InfSignerInfo: PSP_INF_SIGNER_INFO_A
-) -> BOOL}
-EXTERN!{stdcall fn SetupVerifyInfFileW(
-    InfName: PCWSTR,
-    AltPlatformInfo: PSP_ALTPLATFORM_INFO,
-    InfSignerInfo: PSP_INF_SIGNER_INFO_W
-) -> BOOL}
+extern "system" {
+    pub fn SetupVerifyInfFileA(
+        InfName: PCSTR,
+        AltPlatformInfo: PSP_ALTPLATFORM_INFO,
+        InfSignerInfo: PSP_INF_SIGNER_INFO_A,
+    ) -> BOOL;
+    pub fn SetupVerifyInfFileW(
+        InfName: PCWSTR,
+        AltPlatformInfo: PSP_ALTPLATFORM_INFO,
+        InfSignerInfo: PSP_INF_SIGNER_INFO_W,
+    ) -> BOOL;
+}
 pub const DICUSTOMDEVPROP_MERGE_MULTISZ: DWORD = 0x00000001;
-EXTERN!{stdcall fn SetupDiGetCustomDevicePropertyA(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    CustomPropertyName: PCSTR,
-    Flags: DWORD,
-    PropertyRegDataType: PDWORD,
-    PropertyBuffer: PBYTE,
-    PropertyBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupDiGetCustomDevicePropertyW(
-    DeviceInfoSet: HDEVINFO,
-    DeviceInfoData: PSP_DEVINFO_DATA,
-    CustomPropertyName: PCWSTR,
-    Flags: DWORD,
-    PropertyRegDataType: PDWORD,
-    PropertyBuffer: PBYTE,
-    PropertyBufferSize: DWORD,
-    RequiredSize: PDWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupDiGetCustomDevicePropertyA(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        CustomPropertyName: PCSTR,
+        Flags: DWORD,
+        PropertyRegDataType: PDWORD,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+    pub fn SetupDiGetCustomDevicePropertyW(
+        DeviceInfoSet: HDEVINFO,
+        DeviceInfoData: PSP_DEVINFO_DATA,
+        CustomPropertyName: PCWSTR,
+        Flags: DWORD,
+        PropertyRegDataType: PDWORD,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: DWORD,
+        RequiredSize: PDWORD,
+    ) -> BOOL;
+}
 pub const SCWMI_CLOBBER_SECURITY: DWORD = 0x00000001;
-EXTERN!{stdcall fn SetupConfigureWmiFromInfSectionA(
-    InfHandle: HINF,
-    SectionName: PCSTR,
-    Flags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetupConfigureWmiFromInfSectionW(
-    InfHandle: HINF,
-    SectionName: PCWSTR,
-    Flags: DWORD
-) -> BOOL}
+extern "system" {
+    pub fn SetupConfigureWmiFromInfSectionA(
+        InfHandle: HINF,
+        SectionName: PCSTR,
+        Flags: DWORD,
+    ) -> BOOL;
+    pub fn SetupConfigureWmiFromInfSectionW(
+        InfHandle: HINF,
+        SectionName: PCWSTR,
+        Flags: DWORD,
+    ) -> BOOL;
+}

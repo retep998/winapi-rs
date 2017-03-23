@@ -7,7 +7,7 @@
 //! Macros to make things easier to define
 macro_rules! DECLARE_HANDLE {
     ($name:ident, $inner:ident) => {
-        #[allow(missing_copy_implementations)] pub enum $inner { }
+        pub enum $inner {}
         pub type $name = *mut $inner;
     };
 }
@@ -289,27 +289,6 @@ macro_rules! STRUCT {
             fn clone(&self) -> $name { *self }
         }
     );
-}
-macro_rules! EXTERN {
-    (stdcall fn $func:ident(
-        $($p:ident: $t:ty),*
-    ) -> $ret:ty) => (EXTERN!{@fix
-        extern "system" {
-            pub fn $func(
-                $($p: $t),*
-            ) -> $ret;
-        }
-    });
-    (cdecl fn $func:ident(
-        $($p:ident: $t:ty),*
-    ) -> $ret:ty) => (EXTERN!{@fix
-        extern "C" {
-            pub fn $func(
-                $($p: $t),*
-            ) -> $ret;
-        }
-    });
-    (@fix $x:item) => ($x);
 }
 macro_rules! IFDEF {
     ($($thing:item)*) => ($($thing)*)

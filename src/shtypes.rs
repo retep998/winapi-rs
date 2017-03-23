@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
-#[repr(C)] #[allow(missing_copy_implementations)]
+#[repr(C)]
 pub struct SHITEMID {
     pub cb: ::USHORT,
     pub abID: [::BYTE; 0],

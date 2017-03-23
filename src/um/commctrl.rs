@@ -279,7 +279,7 @@ pub const ILD_ROP: UINT = 0x00000040;
 pub const ILD_BLEND25: UINT = 0x00000002;
 pub const ILD_BLEND50: UINT = 0x00000004;
 pub const ILD_OVERLAYMASK: UINT = 0x00000F00;
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn INDEXTOOVERLAYMASK(i: UINT) -> UINT {
     i << 8
 }
@@ -1640,7 +1640,7 @@ pub const LVIS_GLOW: UINT = 0x0010;
 pub const LVIS_ACTIVATING: UINT = 0x0020;
 pub const LVIS_OVERLAYMASK: UINT = 0x0F00;
 pub const LVIS_STATEIMAGEMASK: UINT = 0xF000;
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn INDEXTOSTATEIMAGEMASK(i: UINT) -> UINT {
     i << 12
 }
@@ -3271,11 +3271,11 @@ STRUCT!{struct NMIPADDRESS {
     iValue: c_int,
 }}
 pub type LPNMIPADDRESS = *mut NMIPADDRESS;
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn MAKEIPRANGE(low: BYTE, high: BYTE) -> LPARAM {
     (high << 8 + low) as LPARAM
 }
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn MAKEIPADDRESS(b1: DWORD, b2: DWORD, b3: DWORD, b4: DWORD) -> LPARAM {
     ((b1 << 24) + (b2 << 16) + (b3 << 8) + b4) as LPARAM
 }
