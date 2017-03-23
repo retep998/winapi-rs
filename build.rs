@@ -87,14 +87,10 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dsrole", &["guiddef", "minwindef", "winnt"], &[]),
     ("dwmapi", &["minwindef"], &[]),
     ("dwrite", &["basetsd", "d2d1", "dcommon", "minwindef", "unknwnbase", "windef", "winerror", "wingdi", "winnt"], &[]),
-<<<<<<< HEAD
     ("dwrite_1", &["basetsd", "dcommon", "dwrite", "minwindef", "winnt"], &[]),
     ("dwrite_2", &["basetsd", "d3d9types", "dcommon", "dwrite", "dwrite_1", "minwindef", "unknwnbase", "winnt"], &[]),
     ("dwrite_3", &["basetsd", "dcommon", "dwrite", "dwrite_1", "dwrite_2", "minwindef", "unknwnbase", "wingdi", "winnt"], &[]),
-    ("errhandlingapi", &["winnt"], &[]),
-=======
     ("errhandlingapi", &["basetsd", "minwindef", "winnt"], &[]),
->>>>>>> 96c9334207e0cf0b8da535455e29eda46d675bbb
     ("fileapi", &["minwinbase", "minwindef", "winnt"], &[]),
     ("handleapi", &["minwindef", "winnt"], &["kernel32"]),
     ("heapapi", &["basetsd", "minwindef"], &[]),
