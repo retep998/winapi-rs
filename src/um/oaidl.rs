@@ -7,7 +7,7 @@
 //! Mappings for the contents of OAIdl.h
 use shared::basetsd::ULONG_PTR;
 use shared::guiddef::{GUID, IID, REFGUID, REFIID};
-use shared::minwindef::{BYTE, DWORD, FLOAT, INT, UINT, ULONG, USHORT, WORD};
+use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, UINT, ULONG, USHORT, WORD};
 use shared::wtypes::{
     BSTR, CY, DATE, DECIMAL, VARIANT_BOOL, VARTYPE, VT_BSTR, VT_DISPATCH, VT_ERROR, VT_I1, VT_I2,
     VT_I4, VT_I8, VT_RECORD, VT_RESERVED, VT_UNKNOWN, VT_VARIANT, wireBSTR,
@@ -526,7 +526,53 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
 );
 pub enum IRecordInfo {} // FIXME
 pub enum ITypeComp {} // FIXME
-pub enum ITypeLib {} // FIXME
+
+ENUM!{enum SYSKIND {
+    SYS_WIN16 = 0,
+    SYS_WIN32,
+    SYS_MAC,
+    SYS_WIN64,
+}}
+
+STRUCT!{struct TLIBATTR {
+    guid: GUID,
+    lcid: LCID,
+    syskind: SYSKIND,
+    wMajorVerNum: WORD,
+    wMinorVerNum: WORD,
+    wLibFlags: WORD,
+}}
+
+RIDL!{#[uuid(0x00020402, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface ITypeLib(ITypeLibVtbl): IUnknown(IUnknownVtbl) {
+    fn GetTypeInfoCount() -> UINT,
+    fn GetTypeInfo(index: UINT, ppTInfo: *mut *mut ITypeInfo) -> HRESULT,
+    fn GetTypeInfoType(index: UINT, pTKind: *mut TYPEKIND) -> HRESULT,
+    fn GetTypeInfoOfGuid(guid: REFGUID, ppTInfo: *mut *mut ITypeInfo) -> HRESULT,
+    fn GetLibAttr(ppTLibAttr: *mut *mut TLIBATTR) -> HRESULT,
+    fn GetTypeComp(ppTComp: *mut *mut ITypeComp) -> HRESULT,
+    fn GetDocumentation(
+        index: INT,
+        pbstrName: *mut BSTR,
+        pBstrDocString: *mut BSTR,
+        pdwHelpContext: *mut DWORD,
+        pBstrHelpFile: *mut BSTR
+    ) -> HRESULT,
+    fn IsName(
+        szNameBuf: LPOLESTR,
+        lHashVal: ULONG,
+        pfName: *mut BOOL
+    ) -> HRESULT,
+    fn FindName(
+        szNameBuf: LPOLESTR,
+        lHashVal: ULONG,
+        ppTInfo: *mut *mut ITypeInfo,
+        rgMemId: *mut MEMBERID,
+        pcFound: *mut USHORT
+    ) -> HRESULT,
+    fn ReleaseTLibAttr(pTLibAttr: *const TLIBATTR) -> HRESULT
+}}
+
 RIDL!(#[uuid(0x00020401, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeAttr(ppTypeAttr: *mut *mut TYPEATTR) -> HRESULT,
