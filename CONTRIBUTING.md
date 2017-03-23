@@ -1,6 +1,7 @@
 #Guidelines
 
 * Never get definitions from MinGW headers or MSDN. Always stick to the Windows SDK headers, in particular the latest Windows 10 SDK.
+* Definitions which depend on whether `UNICODE` is defined should not be included. It is the user's responsibility to explicitly choose between `W` and `A` functions (and they should always choose `W`).
 
 ##Line length
 
@@ -8,7 +9,7 @@
 * Avoid line breaks when possible, but if you cannot make it fit, add line breaks as late as possible.
 * When breaking on binary operators, put the operator at the beginning of the new line.
 
-##Functions
+##Extern functions
 
 * First parameter is the 32-bit calling convention.
 * One parameter per line.
@@ -24,6 +25,22 @@ extern "system" {
     ) -> BOOL;
     pub fn GetCurrentProcess() -> HANDLE;
 }
+```
+
+##Function pointers
+
+```Rust
+FN!{stdcall DRAWSTATEPROC(
+    hdc: HDC,
+    lData: LPARAM,
+    wData: WPARAM,
+    cx: c_int,
+    cy: c_int
+) -> BOOL}
+FN!{stdcall NAMEENUMPROCA(
+    LPSTR,
+    LPARAM
+) -> BOOL}
 ```
 
 ##Constants

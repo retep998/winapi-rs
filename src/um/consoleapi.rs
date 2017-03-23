@@ -8,68 +8,70 @@
 use shared::minwindef::{BOOL, DWORD, LPDWORD, LPVOID, UINT};
 use um::wincon::{PCONSOLE_READCONSOLE_CONTROL, PHANDLER_ROUTINE, PINPUT_RECORD};
 use um::winnt::{HANDLE, VOID};
-EXTERN!{stdcall fn AllocConsole() -> BOOL}
-EXTERN!{stdcall fn GetConsoleCP() -> UINT}
-EXTERN!{stdcall fn GetConsoleMode(
-    hConsoleHandle: HANDLE,
-    lpMode: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn GetConsoleOutputCP() -> UINT}
-EXTERN!{stdcall fn GetNumberOfConsoleInputEvents(
-    hConsoleInput: HANDLE,
-    lpNumberOfEvents: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn PeekConsoleInputA(
-    hConsoleInput: HANDLE,
-    lpBuffer: PINPUT_RECORD,
-    nLength: DWORD,
-    lpNumberOfEventsRead: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn ReadConsoleA(
-    hConsoleInput: HANDLE,
-    lpBuffer: LPVOID,
-    nNumberOfCharsToRead: DWORD,
-    lpNumberOfCharsRead: LPDWORD,
-    pInputControl: PCONSOLE_READCONSOLE_CONTROL
-) -> BOOL}
-EXTERN!{stdcall fn ReadConsoleW(
-    hConsoleInput: HANDLE,
-    lpBuffer: LPVOID,
-    nNumberOfCharsToRead: DWORD,
-    lpNumberOfCharsRead: LPDWORD,
-    pInputControl: PCONSOLE_READCONSOLE_CONTROL
-) -> BOOL}
-EXTERN!{stdcall fn ReadConsoleInputA(
-    hConsoleInput: HANDLE,
-    lpBuffer: PINPUT_RECORD,
-    nLength: DWORD,
-    lpNumberOfEventsRead: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn ReadConsoleInputW(
-    hConsoleInput: HANDLE,
-    lpBuffer: PINPUT_RECORD,
-    nLength: DWORD,
-    lpNumberOfEventsRead: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetConsoleCtrlHandler(
-    HandlerRoutine: PHANDLER_ROUTINE,
-    Add: BOOL
-) -> BOOL}
-EXTERN!{stdcall fn SetConsoleMode(
-    hConsoleHandle: HANDLE,
-    dwMode: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn WriteConsoleA(
-    hConsoleOutput: HANDLE,
-    lpBuffer: *const VOID,
-    nNumberOfCharsToWrite: DWORD,
-    lpNumberOfCharsWritten: LPDWORD,
-    lpReserved: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn WriteConsoleW(
-    hConsoleOutput: HANDLE,
-    lpBuffer: *const VOID,
-    nNumberOfCharsToWrite: DWORD,
-    lpNumberOfCharsWritten: LPDWORD,
-    lpReserved: LPVOID
-) -> BOOL}
+extern "system" {
+    pub fn AllocConsole() -> BOOL;
+    pub fn GetConsoleCP() -> UINT;
+    pub fn GetConsoleMode(
+        hConsoleHandle: HANDLE,
+        lpMode: LPDWORD,
+    ) -> BOOL;
+    pub fn GetConsoleOutputCP() -> UINT;
+    pub fn GetNumberOfConsoleInputEvents(
+        hConsoleInput: HANDLE,
+        lpNumberOfEvents: LPDWORD,
+    ) -> BOOL;
+    pub fn PeekConsoleInputA(
+        hConsoleInput: HANDLE,
+        lpBuffer: PINPUT_RECORD,
+        nLength: DWORD,
+        lpNumberOfEventsRead: LPDWORD,
+    ) -> BOOL;
+    pub fn ReadConsoleA(
+        hConsoleInput: HANDLE,
+        lpBuffer: LPVOID,
+        nNumberOfCharsToRead: DWORD,
+        lpNumberOfCharsRead: LPDWORD,
+        pInputControl: PCONSOLE_READCONSOLE_CONTROL,
+    ) -> BOOL;
+    pub fn ReadConsoleW(
+        hConsoleInput: HANDLE,
+        lpBuffer: LPVOID,
+        nNumberOfCharsToRead: DWORD,
+        lpNumberOfCharsRead: LPDWORD,
+        pInputControl: PCONSOLE_READCONSOLE_CONTROL,
+    ) -> BOOL;
+    pub fn ReadConsoleInputA(
+        hConsoleInput: HANDLE,
+        lpBuffer: PINPUT_RECORD,
+        nLength: DWORD,
+        lpNumberOfEventsRead: LPDWORD,
+    ) -> BOOL;
+    pub fn ReadConsoleInputW(
+        hConsoleInput: HANDLE,
+        lpBuffer: PINPUT_RECORD,
+        nLength: DWORD,
+        lpNumberOfEventsRead: LPDWORD,
+    ) -> BOOL;
+    pub fn SetConsoleCtrlHandler(
+        HandlerRoutine: PHANDLER_ROUTINE,
+        Add: BOOL,
+    ) -> BOOL;
+    pub fn SetConsoleMode(
+        hConsoleHandle: HANDLE,
+        dwMode: DWORD,
+    ) -> BOOL;
+    pub fn WriteConsoleA(
+        hConsoleOutput: HANDLE,
+        lpBuffer: *const VOID,
+        nNumberOfCharsToWrite: DWORD,
+        lpNumberOfCharsWritten: LPDWORD,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn WriteConsoleW(
+        hConsoleOutput: HANDLE,
+        lpBuffer: *const VOID,
+        nNumberOfCharsToWrite: DWORD,
+        lpNumberOfCharsWritten: LPDWORD,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+}
