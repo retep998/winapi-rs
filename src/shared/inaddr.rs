@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! IPv4 Internet address
-use shared::minwindef::{ULONG, UCHAR, USHORT};
+use shared::minwindef::{UCHAR, ULONG, USHORT};
 STRUCT!{struct in_addr_S_un_b {
     s_b1: UCHAR,
     s_b2: UCHAR,
