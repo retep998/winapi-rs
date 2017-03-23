@@ -6,28 +6,28 @@
 // except according to those terms.
 //! Mappings for the content of dwrite_3.h
 
-use shared::basetsd::{ UINT16, UINT32, UINT64 };
-use shared::minwindef::{ BOOL, FILETIME, FLOAT };
-use um::dcommon::{ DWRITE_MEASURING_MODE };
-use um::dwrite::{ DWRITE_FONT_SIMULATIONS, DWRITE_FONT_STRETCH,
-    DWRITE_FONT_STYLE, DWRITE_FONT_WEIGHT, DWRITE_GLYPH_RUN,
-    DWRITE_INFORMATIONAL_STRING_ID, DWRITE_LINE_SPACING_METHOD, DWRITE_MATRIX,
-    DWRITE_PIXEL_GEOMETRY, IDWriteFont, IDWriteFontCollection,
-    IDWriteFontCollectionVtbl, IDWriteFontFace, IDWriteFontFamily,
-    IDWriteFontFamilyVtbl, IDWriteFontFile, IDWriteFontList,
-    IDWriteFontListVtbl, IDWriteGdiInterop, IDWriteGdiInteropVtbl,
-    IDWriteGlyphRunAnalysis, IDWriteLocalizedStrings, IDWriteRenderingParams };
-use um::dwrite_1::{ DWRITE_OUTLINE_THRESHOLD, DWRITE_PANOSE,
-    DWRITE_TEXT_ANTIALIAS_MODE };
-use um::dwrite_2::{ DWRITE_GRID_FIT_MODE, IDWriteFactory2, IDWriteFactory2Vtbl,
-    IDWriteFont2, IDWriteFont2Vtbl, IDWriteFontFace2, IDWriteFontFace2Vtbl,
-    IDWriteRenderingParams2, IDWriteRenderingParams2Vtbl, IDWriteTextFormat1,
-    IDWriteTextFormat1Vtbl, IDWriteTextLayout2, IDWriteTextLayout2Vtbl };
-use um::unknwnbase::{ IUnknown, IUnknownVtbl };
-use um::wingdi::{ FONTSIGNATURE, LOGFONTW };
-use um::winnt::{ HRESULT, WCHAR };
+use shared::basetsd::{UINT16, UINT32, UINT64};
+use shared::minwindef::{BOOL, FILETIME, FLOAT};
+use um::dcommon::DWRITE_MEASURING_MODE;
+use um::dwrite::{
+    DWRITE_FONT_SIMULATIONS, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, DWRITE_FONT_WEIGHT,
+    DWRITE_GLYPH_RUN, DWRITE_INFORMATIONAL_STRING_ID, DWRITE_LINE_SPACING_METHOD, DWRITE_MATRIX,
+    DWRITE_PIXEL_GEOMETRY, IDWriteFont, IDWriteFontCollection, IDWriteFontCollectionVtbl,
+    IDWriteFontFace, IDWriteFontFamily, IDWriteFontFamilyVtbl, IDWriteFontFile, IDWriteFontList,
+    IDWriteFontListVtbl, IDWriteGdiInterop, IDWriteGdiInteropVtbl, IDWriteGlyphRunAnalysis,
+    IDWriteLocalizedStrings, IDWriteRenderingParams,
+};
+use um::dwrite_1::{DWRITE_OUTLINE_THRESHOLD, DWRITE_PANOSE, DWRITE_TEXT_ANTIALIAS_MODE};
+use um::dwrite_2::{
+    DWRITE_GRID_FIT_MODE, IDWriteFactory2, IDWriteFactory2Vtbl, IDWriteFont2, IDWriteFont2Vtbl,
+    IDWriteFontFace2, IDWriteFontFace2Vtbl, IDWriteRenderingParams2, IDWriteRenderingParams2Vtbl,
+    IDWriteTextFormat1, IDWriteTextFormat1Vtbl, IDWriteTextLayout2, IDWriteTextLayout2Vtbl,
+};
+use um::unknwnbase::{IUnknown, IUnknownVtbl};
+use um::wingdi::{FONTSIGNATURE, LOGFONTW};
+use um::winnt::{HRESULT, WCHAR};
 
-ENUM!{ enum DWRITE_FONT_PROPERTY_ID {
+ENUM!{enum DWRITE_FONT_PROPERTY_ID {
     DWRITE_FONT_PROPERTY_ID_NONE = 0x0, // 0
     DWRITE_FONT_PROPERTY_ID_FAMILY_NAME = 0x1, // 1
     DWRITE_FONT_PROPERTY_ID_PREFERRED_FAMILY_NAME = 0x2, // 2
@@ -50,13 +50,13 @@ STRUCT!{struct DWRITE_FONT_PROPERTY {
     localeName: *const WCHAR,
 }}
 
-ENUM!{ enum DWRITE_LOCALITY {
+ENUM!{enum DWRITE_LOCALITY {
     DWRITE_LOCALITY_REMOTE = 0x0, // 0
     DWRITE_LOCALITY_PARTIAL = 0x1, // 1
     DWRITE_LOCALITY_LOCAL = 0x2, // 2
 }}
 
-ENUM!{ enum DWRITE_RENDERING_MODE1 {
+ENUM!{enum DWRITE_RENDERING_MODE1 {
     DWRITE_RENDERING_MODE1_DEFAULT = 0x0, // 0
     DWRITE_RENDERING_MODE1_ALIASED = 0x1, // 1
     DWRITE_RENDERING_MODE1_GDI_CLASSIC = 0x2, // 2
@@ -74,92 +74,111 @@ interface IDWriteRenderingParams3(IDWriteRenderingParams3Vtbl):
 }}
 
 RIDL!{#[uuid(0x9a1b41c3, 0xd3bb, 0x466a, 0x87, 0xfc, 0xfe, 0x67, 0x55, 0x6a, 0x3b, 0x65)]
-interface IDWriteFactory3(IDWriteFactory3Vtbl): 
-    IDWriteFactory2(IDWriteFactory2Vtbl) {
+interface IDWriteFactory3(IDWriteFactory3Vtbl): IDWriteFactory2(IDWriteFactory2Vtbl) {
     fn CreateGlyphRunAnalysis(
-        glyphRun: *const DWRITE_GLYPH_RUN, transform: *const DWRITE_MATRIX,
-        renderingMode: DWRITE_RENDERING_MODE1, measuringMode: DWRITE_MEASURING_MODE,
-        gridFitMode: DWRITE_GRID_FIT_MODE, antialiasMode: DWRITE_TEXT_ANTIALIAS_MODE,
-        baselineOriginX: FLOAT, baselineOriginY: FLOAT,
+        glyphRun: *const DWRITE_GLYPH_RUN,
+        transform: *const DWRITE_MATRIX,
+        renderingMode: DWRITE_RENDERING_MODE1,
+        measuringMode: DWRITE_MEASURING_MODE,
+        gridFitMode: DWRITE_GRID_FIT_MODE,
+        antialiasMode: DWRITE_TEXT_ANTIALIAS_MODE,
+        baselineOriginX: FLOAT,
+        baselineOriginY: FLOAT,
         glyphRunAnalysis: *mut *mut IDWriteGlyphRunAnalysis
     ) -> HRESULT,
     fn CreateCustomRenderingParams(
-        gamma: FLOAT, enhancedContrast: FLOAT, grayscaleEnhancedContrast: FLOAT,
-        clearTypeLevel: FLOAT, pixelGeometry: DWRITE_PIXEL_GEOMETRY,
-        renderingMode: DWRITE_RENDERING_MODE1, gridFitMode: DWRITE_GRID_FIT_MODE,
+        gamma: FLOAT,
+        enhancedContrast: FLOAT,
+        grayscaleEnhancedContrast: FLOAT,
+        clearTypeLevel: FLOAT,
+        pixelGeometry: DWRITE_PIXEL_GEOMETRY,
+        renderingMode: DWRITE_RENDERING_MODE1,
+        gridFitMode: DWRITE_GRID_FIT_MODE,
         renderingParams: *mut *mut IDWriteRenderingParams3
     ) -> HRESULT,
     fn CreateFontFaceReference(
-        filePath: *const WCHAR, lastWriteTime: *const FILETIME, faceIndex: UINT32,
+        filePath: *const WCHAR,
+        lastWriteTime: *const FILETIME,
+        faceIndex: UINT32,
         fontSimulations: DWRITE_FONT_SIMULATIONS,
         fontFaceReference: *mut *mut IDWriteFontFaceReference
     ) -> HRESULT,
     fn CreateFontFaceReference1(
-        fontFile: *mut IDWriteFontFile, faceIndex: UINT32,
+        fontFile: *mut IDWriteFontFile,
+        faceIndex: UINT32,
         fontSimulations: DWRITE_FONT_SIMULATIONS,
         fontFaceReference: *mut *mut IDWriteFontFaceReference
     ) -> HRESULT,
     fn GetSystemFontSet(fontSet: *mut *mut IDWriteFontSet) -> HRESULT,
-    fn CreateFontSetBuilder(
-        fontSetBuilder: *mut *mut IDWriteFontSetBuilder
-    ) -> HRESULT,
+    fn CreateFontSetBuilder(fontSetBuilder: *mut *mut IDWriteFontSetBuilder) -> HRESULT,
     fn CreateFontCollectionFromFontSet(
-        fontSet: *mut IDWriteFontSet, fontCollection: *mut *mut IDWriteFontCollection1
+        fontSet: *mut IDWriteFontSet,
+        fontCollection: *mut *mut IDWriteFontCollection1
     ) -> HRESULT,
     fn GetSystemFontCollection(
-        includeDownloadableFonts: BOOL, fontCollection: *mut *mut IDWriteFontCollection1,
+        includeDownloadableFonts: BOOL,
+        fontCollection: *mut *mut IDWriteFontCollection1,
         checkForUpdates: BOOL
     ) -> HRESULT,
-    fn GetFontDownloadQueue(
-        fontDownloadQueue: *mut *mut IDWriteFontDownloadQueue
-    ) -> HRESULT
+    fn GetFontDownloadQueue(fontDownloadQueue: *mut *mut IDWriteFontDownloadQueue) -> HRESULT
 }}
 
 RIDL!{#[uuid(0x53585141, 0xd9f8, 0x4095, 0x83, 0x21, 0xd7, 0x3c, 0xf6, 0xbd, 0x11, 0x6b)]
 interface IDWriteFontSet(IDWriteFontSetVtbl): IUnknown(IUnknownVtbl) {
     fn GetFontCount() -> UINT32,
     fn GetFontFaceReference(
-        listIndex: UINT32, fontFaceReference: *mut *mut IDWriteFontFaceReference
+        listIndex: UINT32,
+        fontFaceReference: *mut *mut IDWriteFontFaceReference
     ) -> HRESULT,
     fn FindFontFaceReference(
-        fontFaceReference: *mut IDWriteFontFaceReference, listIndex: *mut UINT32,
+        fontFaceReference: *mut IDWriteFontFaceReference,
+        listIndex: *mut UINT32,
         exists: *mut BOOL
     ) -> HRESULT,
     fn FindFontFace(
-        fontFace: *mut IDWriteFontFace, listIndex: *mut UINT32, exists: *mut BOOL
+        fontFace: *mut IDWriteFontFace,
+        listIndex: *mut UINT32,
+        exists: *mut BOOL
     ) -> HRESULT,
     fn GetPropertyValues(
-        listIndex: UINT32, propertyId: DWRITE_FONT_PROPERTY_ID, exists: *mut BOOL,
+        listIndex: UINT32,
+        propertyId: DWRITE_FONT_PROPERTY_ID,
+        exists: *mut BOOL,
         values: *mut *mut IDWriteLocalizedStrings
     ) -> HRESULT,
     fn GetPropertyValues1(
-        propertyID: DWRITE_FONT_PROPERTY_ID, preferredLocaleNames: *const WCHAR,
+        propertyID: DWRITE_FONT_PROPERTY_ID,
+        preferredLocaleNames: *const WCHAR,
         values: *mut *mut IDWriteStringList
     ) -> HRESULT,
     fn GetPropertyValues2(
-        propertyID: DWRITE_FONT_PROPERTY_ID, values: *mut *mut IDWriteStringList
+        propertyID: DWRITE_FONT_PROPERTY_ID,
+        values: *mut *mut IDWriteStringList
     ) -> HRESULT,
     fn GetPropertyOccurrenceCount(
-        property: *const DWRITE_FONT_PROPERTY, propertyOccurrenceCount: *mut UINT32
+        property: *const DWRITE_FONT_PROPERTY,
+        propertyOccurrenceCount: *mut UINT32
     ) -> HRESULT,
     fn GetMatchingFonts(
-        properties: *const DWRITE_FONT_PROPERTY, propertyCount: UINT32,
+        properties: *const DWRITE_FONT_PROPERTY,
+        propertyCount: UINT32,
         filteredSet: *mut *mut IDWriteFontSet
     ) -> HRESULT,
     fn GetMatchingFonts1(
-        familyName: *const WCHAR, fontWeight: DWRITE_FONT_WEIGHT, fontStretch: DWRITE_FONT_STRETCH,
-        fontStyle: DWRITE_FONT_STYLE, filteredSet: *mut *mut IDWriteFontSet
+        familyName: *const WCHAR,
+        fontWeight: DWRITE_FONT_WEIGHT,
+        fontStretch: DWRITE_FONT_STRETCH,
+        fontStyle: DWRITE_FONT_STYLE,
+        filteredSet: *mut *mut IDWriteFontSet
     ) -> HRESULT
 }}
 
 RIDL!{#[uuid(0x2f642afe, 0x9c68, 0x4f40, 0xb8, 0xbe, 0x45, 0x74, 0x01, 0xaf, 0xcb, 0x3d)]
-interface IDWriteFontSetBuilder(IDWriteFontSetBuilderVtbl): 
-    IUnknown(IUnknownVtbl) {
-    fn AddFontFaceReference(
-        fontFaceReference: *mut IDWriteFontFaceReference
-    ) -> HRESULT,
+interface IDWriteFontSetBuilder(IDWriteFontSetBuilderVtbl): IUnknown(IUnknownVtbl) {
+    fn AddFontFaceReference(fontFaceReference: *mut IDWriteFontFaceReference) -> HRESULT,
     fn AddFontFaceReference1(
-        fontFaceReference: *mut IDWriteFontFaceReference, properties: *const DWRITE_FONT_PROPERTY,
+        fontFaceReference: *mut IDWriteFontFaceReference,
+        properties: *const DWRITE_FONT_PROPERTY,
         propertyCount: UINT32
     ) -> HRESULT,
     fn AddFontSet(fontSet: *mut IDWriteFontSet) -> HRESULT,
@@ -171,7 +190,8 @@ interface IDWriteFontCollection1(IDWriteFontCollection1Vtbl):
     IDWriteFontCollection(IDWriteFontCollectionVtbl) {
     fn GetFontSet(fontSet: *mut *mut IDWriteFontSet) -> HRESULT,
     fn GetFontFamily(
-        index: UINT32, fontFamily: *mut *mut IDWriteFontFamily1
+        index: UINT32,
+        fontFamily: *mut *mut IDWriteFontFamily1
     ) -> HRESULT
 }}
 
@@ -179,19 +199,26 @@ RIDL!{#[uuid(0xda20d8ef, 0x812a, 0x4c43, 0x98, 0x02, 0x62, 0xec, 0x4a, 0xbd, 0x7
 interface IDWriteFontFamily1(IDWriteFontFamily1Vtbl): 
     IDWriteFontFamily(IDWriteFontFamilyVtbl) {
     fn GetFontLocality(listIndex: UINT32) -> DWRITE_LOCALITY,
-    fn GetFont(listIndex: UINT32, font: *mut *mut IDWriteFont3) -> HRESULT,
+    fn GetFont(
+        listIndex: UINT32,
+        font: *mut *mut IDWriteFont3
+    ) -> HRESULT,
     fn GetFontFaceReference(
-        listIndex: UINT32, fontFaceReference: *mut *mut IDWriteFontFaceReference
+        listIndex: UINT32,
+        fontFaceReference: *mut *mut IDWriteFontFaceReference
     ) -> HRESULT
 }}
 
 RIDL!{#[uuid(0xda20d8ef, 0x812a, 0x4c43, 0x98, 0x02, 0x62, 0xec, 0x4a, 0xbd, 0x7a, 0xde)]
-interface IDWriteFontList1(IDWriteFontList1Vtbl): 
-    IDWriteFontList(IDWriteFontListVtbl) {
+interface IDWriteFontList1(IDWriteFontList1Vtbl): IDWriteFontList(IDWriteFontListVtbl) {
     fn GetFontLocality(listIndex: UINT32) -> DWRITE_LOCALITY,
-    fn GetFont(listIndex: UINT32, font: *mut *mut IDWriteFont3) -> HRESULT,
+    fn GetFont(
+        listIndex: UINT32,
+        font: *mut *mut IDWriteFont3
+    ) -> HRESULT,
     fn GetFontFaceReference(
-        listIndex: UINT32, fontFaceReference: *mut *mut IDWriteFontFaceReference
+        listIndex: UINT32,
+        fontFaceReference: *mut *mut IDWriteFontFaceReference
     ) -> HRESULT
 }}
 
@@ -200,7 +227,8 @@ interface IDWriteFontFaceReference(IDWriteFontFaceReferenceVtbl):
     IUnknown(IUnknownVtbl) {
     fn CreateFontFace(fontFace: *mut *mut IDWriteFontFace3) -> HRESULT,
     fn CreateFontFaceWithSimulations(
-        fontFaceSimulationFlags: DWRITE_FONT_SIMULATIONS, fontFace: *mut *mut IDWriteFontFace3
+        fontFaceSimulationFlags: DWRITE_FONT_SIMULATIONS,
+        fontFace: *mut *mut IDWriteFontFace3
     ) -> HRESULT,
     fn Equals(fontFaceReference: *mut IDWriteFontFaceReference) -> BOOL,
     fn GetFontFaceIndex() -> UINT32,
@@ -212,13 +240,16 @@ interface IDWriteFontFaceReference(IDWriteFontFaceReferenceVtbl):
     fn GetLocality() -> DWRITE_LOCALITY,
     fn EnqueueFontDownloadRequest() -> HRESULT,
     fn EnqueueCharacterDownloadRequest(
-        characters: *const WCHAR, characterCount: UINT32
+        characters: *const WCHAR,
+        characterCount: UINT32
     ) -> HRESULT,
     fn EnqueueGlyphDownloadRequest(
-        glyphIndices: *const UINT16, glyphCount: UINT32
+        glyphIndices: *const UINT16,
+        glyphCount: UINT32
     ) -> HRESULT,
     fn EnqueueFileFragmentDownloadRequest(
-        fileOffset: UINT64, fragmentSize: UINT64
+        fileOffset: UINT64,
+        fragmentSize: UINT64
     ) -> HRESULT
 }}
 
@@ -226,9 +257,7 @@ RIDL!{#[uuid(0x29748ed6, 0x8c9c, 0x4a6a, 0xbe, 0x0b, 0xd9, 0x12, 0xe8, 0x53, 0x8
 interface IDWriteFont3(IDWriteFont3Vtbl): IDWriteFont2(IDWriteFont2Vtbl) {
     fn CreateFontFace(fontFace: *mut *mut IDWriteFontFace3) -> HRESULT,
     fn Equals(font: *mut IDWriteFont) -> BOOL,
-    fn GetFontFaceReference(
-        fontFaceReference: *mut *mut IDWriteFontFaceReference
-    ) -> HRESULT,
+    fn GetFontFaceReference(fontFaceReference: *mut *mut IDWriteFontFaceReference) -> HRESULT,
     fn HasCharacter(unicodeValue: UINT32) -> BOOL,
     fn GetLocality() -> DWRITE_LOCALITY
 }}
@@ -236,9 +265,7 @@ interface IDWriteFont3(IDWriteFont3Vtbl): IDWriteFont2(IDWriteFont2Vtbl) {
 RIDL!{#[uuid(0xd37d7598, 0x09be, 0x4222, 0xa2, 0x36, 0x20, 0x81, 0x34, 0x1c, 0xc1, 0xf2)]
 interface IDWriteFontFace3(IDWriteFontFace3Vtbl): 
     IDWriteFontFace2(IDWriteFontFace2Vtbl) {
-    fn GetFontFaceReference(
-        fontFaceReference: *mut *mut IDWriteFontFaceReference
-    ) -> HRESULT,
+    fn GetFontFaceReference(fontFaceReference: *mut *mut IDWriteFontFaceReference) -> HRESULT,
     fn GetPanose(panose: *mut DWRITE_PANOSE) -> (),
     fn GetWeight() -> DWRITE_FONT_WEIGHT,
     fn GetStretch() -> DWRITE_FONT_STRETCH,
@@ -247,23 +274,34 @@ interface IDWriteFontFace3(IDWriteFontFace3Vtbl):
     fn GetFaceNames(names: *mut *mut IDWriteLocalizedStrings) -> HRESULT,
     fn GetInformationalStrings(
         informationalStringID: DWRITE_INFORMATIONAL_STRING_ID,
-        informationalStrings: *mut *mut IDWriteLocalizedStrings, exists: *mut BOOL
+        informationalStrings: *mut *mut IDWriteLocalizedStrings,
+        exists: *mut BOOL
     ) -> HRESULT,
     fn HasCharacter(unicodeValue: UINT32) -> BOOL,
     fn GetRecommendedRenderingMode(
-        fontEmSize: FLOAT, dpiX: FLOAT, dpiY: FLOAT, transform: *const DWRITE_MATRIX,
-        isSideways: BOOL, outlineThreshold: DWRITE_OUTLINE_THRESHOLD,
-        measuringMode: DWRITE_MEASURING_MODE, renderingParams: *mut IDWriteRenderingParams,
-        renderingMode: *mut DWRITE_RENDERING_MODE1, gridFitMode: *mut DWRITE_GRID_FIT_MODE
+        fontEmSize: FLOAT,
+        dpiX: FLOAT,
+        dpiY: FLOAT,
+        transform: *const DWRITE_MATRIX,
+        isSideways: BOOL,
+        outlineThreshold: DWRITE_OUTLINE_THRESHOLD,
+        measuringMode: DWRITE_MEASURING_MODE,
+        renderingParams: *mut IDWriteRenderingParams,
+        renderingMode: *mut DWRITE_RENDERING_MODE1,
+        gridFitMode: *mut DWRITE_GRID_FIT_MODE
     ) -> HRESULT,
     fn IsCharacterLocal(unicodeValue: UINT32) -> BOOL,
     fn IsGlyphLocal(glyphId: UINT16) -> BOOL,
     fn AreCharactersLocal(
-        characters: *const WCHAR, characterCount: UINT32, enqueueIfNotLocal: BOOL,
+        characters: *const WCHAR,
+        characterCount: UINT32,
+        enqueueIfNotLocal: BOOL,
         isLocal: *mut BOOL
     ) -> HRESULT,
     fn AreGlyphsLocal(
-        glyphIndices: *const UINT16, glyphCount: UINT32, enqueueIfNotLocal: BOOL,
+        glyphIndices: *const UINT16,
+        glyphCount: UINT32,
+        enqueueIfNotLocal: BOOL,
         isLocal: *mut BOOL
     ) -> HRESULT
 }}
@@ -271,13 +309,23 @@ interface IDWriteFontFace3(IDWriteFontFace3Vtbl):
 RIDL!{#[uuid(0xcfee3140, 0x1157, 0x47ca, 0x8b, 0x85, 0x31, 0xbf, 0xcf, 0x3f, 0x2d, 0x0e)]
 interface IDWriteStringList(IDWriteStringListVtbl): IUnknown(IUnknownVtbl) {
     fn GetCount() -> UINT32,
-    fn GetLocaleNameLength(listIndex: UINT32, length: *mut UINT32) -> HRESULT,
-    fn GetLocaleName(
-        listIndex: UINT32, localeName: *mut WCHAR, size: UINT32
+    fn GetLocaleNameLength(
+        listIndex: UINT32,
+        length: *mut UINT32
     ) -> HRESULT,
-    fn GetStringLength(listIndex: UINT32, length: *mut UINT32) -> HRESULT,
+    fn GetLocaleName(
+        listIndex: UINT32,
+        localeName: *mut WCHAR,
+        size: UINT32
+    ) -> HRESULT,
+    fn GetStringLength(
+        listIndex: UINT32,
+        length: *mut UINT32
+    ) -> HRESULT,
     fn GetString(
-        listIndex: UINT32, stringBuffer: *mut WCHAR, stringBufferSize: UINT32
+        listIndex: UINT32,
+        stringBuffer: *mut WCHAR,
+        stringBufferSize: UINT32
     ) -> HRESULT
 }}
 
@@ -285,7 +333,8 @@ RIDL!{#[uuid(0xb06fe5b9, 0x43ec, 0x4393, 0x88, 0x1b, 0xdb, 0xe4, 0xdc, 0x72, 0xf
 interface IDWriteFontDownloadListener(IDWriteFontDownloadListenerVtbl): 
     IUnknown(IUnknownVtbl) {
     fn DownloadCompleted(
-        downloadQueue: *mut IDWriteFontDownloadQueue, context: *mut IUnknown,
+        downloadQueue: *mut IDWriteFontDownloadQueue,
+        context: *mut IUnknown,
         downloadResult: HRESULT
     ) -> ()
 }}
@@ -294,7 +343,8 @@ RIDL!{#[uuid(0xb71e6052, 0x5aea, 0x4fa3, 0x83, 0x2e, 0xf6, 0x0d, 0x43, 0x1f, 0x7
 interface IDWriteFontDownloadQueue(IDWriteFontDownloadQueueVtbl): 
     IUnknown(IUnknownVtbl) {
     fn AddListener(
-        listener: *mut IDWriteFontDownloadListener, token: *mut UINT32
+        listener: *mut IDWriteFontDownloadListener,
+        token: *mut UINT32
     ) -> HRESULT,
     fn RemoveListener(token: UINT32) -> HRESULT,
     fn IsEmpty() -> BOOL,
@@ -307,17 +357,21 @@ RIDL!{#[uuid(0x4556be70, 0x3abd, 0x4f70, 0x90, 0xbe, 0x42, 0x17, 0x80, 0xa6, 0xf
 interface IDWriteGdiInterop1(IDWriteGdiInterop1Vtbl): 
     IDWriteGdiInterop(IDWriteGdiInteropVtbl) {
     fn CreateFontFromLOGFONT(
-        logFont: *const LOGFONTW, fontCollection: *mut IDWriteFontCollection,
+        logFont: *const LOGFONTW,
+        fontCollection: *mut IDWriteFontCollection,
         font: *mut *mut IDWriteFont
     ) -> HRESULT,
     fn GetFontSignature(
-        font: *mut IDWriteFont, fontSignature: *mut FONTSIGNATURE
+        font: *mut IDWriteFont,
+        fontSignature: *mut FONTSIGNATURE
     ) -> HRESULT,
     fn GetFontSignature1(
-        fontFace: *mut IDWriteFontFace, fontSignature: *mut FONTSIGNATURE
+        fontFace: *mut IDWriteFontFace,
+        fontSignature: *mut FONTSIGNATURE
     ) -> HRESULT,
     fn GetMatchingFontsByLOGFONT(
-        logFont: *const LOGFONTW, fontSet: *mut IDWriteFontSet,
+        logFont: *const LOGFONTW,
+        fontSet: *mut IDWriteFontSet,
         filteredSet: *mut *mut IDWriteFontSet
     ) -> HRESULT
 }}
@@ -333,7 +387,7 @@ STRUCT!{struct DWRITE_LINE_METRICS1 {
     leadingAfter: FLOAT,
 }}
 
-ENUM!{ enum DWRITE_FONT_LINE_GAP_USAGE {
+ENUM!{enum DWRITE_FONT_LINE_GAP_USAGE {
     DWRITE_FONT_LINE_GAP_USAGE_DEFAULT = 0x0, // 0
     DWRITE_FONT_LINE_GAP_USAGE_DISABLED = 0x1, // 1
     DWRITE_FONT_LINE_GAP_USAGE_ENABLED = 0x2, // 2
@@ -350,9 +404,7 @@ STRUCT!{struct DWRITE_LINE_SPACING {
 RIDL!{#[uuid(0xf67e0edd, 0x9e3d, 0x4ecc, 0x8c, 0x32, 0x41, 0x83, 0x25, 0x3d, 0xfe, 0x70)]
 interface IDWriteTextFormat2(IDWriteTextFormat2Vtbl): 
     IDWriteTextFormat1(IDWriteTextFormat1Vtbl) {
-    fn SetLineSpacing(
-        lineSpacingOptions: *const DWRITE_LINE_SPACING
-    ) -> HRESULT,
+    fn SetLineSpacing(lineSpacingOptions: *const DWRITE_LINE_SPACING) -> HRESULT,
     fn GetLineSpacing(lineSpacingOptions: *mut DWRITE_LINE_SPACING) -> HRESULT
 }}
 
@@ -360,12 +412,12 @@ RIDL!{#[uuid(0x07ddcd52, 0x020e, 0x4de8, 0xac, 0x33, 0x6c, 0x95, 0x3d, 0x83, 0xf
 interface IDWriteTextLayout3(IDWriteTextLayout3Vtbl): 
     IDWriteTextLayout2(IDWriteTextLayout2Vtbl) {
     fn InvalidateLayout() -> HRESULT,
-    fn SetLineSpacing(
-        lineSpacingOptions: *const DWRITE_LINE_SPACING
-    ) -> HRESULT,
+    fn SetLineSpacing(lineSpacingOptions: *const DWRITE_LINE_SPACING) -> HRESULT,
     fn GetLineSpacing(lineSpacingOptions: *mut DWRITE_LINE_SPACING) -> HRESULT,
     fn GetLineMetrics(
-        lineMetrics: *mut DWRITE_LINE_METRICS1, maxLineCount: UINT32, actualLineCount: *mut UINT32
+        lineMetrics: *mut DWRITE_LINE_METRICS1,
+        maxLineCount: UINT32,
+        actualLineCount: *mut UINT32
     ) -> HRESULT
 }}
 

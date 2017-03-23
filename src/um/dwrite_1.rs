@@ -6,22 +6,21 @@
 // except according to those terms.
 //! Mappings for the content of dwrite_1.h
 
-use shared::basetsd::{ INT16, INT32, UINT16, UINT32, UINT8 };
-use shared::minwindef::{ BOOL, FLOAT };
-use um::dcommon::{ DWRITE_MEASURING_MODE };
-use um::dwrite::{ DWRITE_GLYPH_OFFSET, DWRITE_MATRIX, DWRITE_PIXEL_GEOMETRY,
-    DWRITE_RENDERING_MODE, DWRITE_SCRIPT_ANALYSIS,
-    DWRITE_SHAPING_GLYPH_PROPERTIES, DWRITE_TEXT_RANGE,
-    IDWriteBitmapRenderTarget, IDWriteBitmapRenderTargetVtbl, IDWriteFactory,
-    IDWriteFactoryVtbl, IDWriteFont, IDWriteFontCollection, IDWriteFontFace,
-    IDWriteFontFaceVtbl, IDWriteFontVtbl, IDWriteRenderingParams,
-    IDWriteRenderingParamsVtbl, IDWriteTextAnalysisSink,
-    IDWriteTextAnalysisSinkVtbl, IDWriteTextAnalysisSource,
-    IDWriteTextAnalysisSourceVtbl, IDWriteTextAnalyzer, IDWriteTextAnalyzerVtbl,
-    IDWriteTextLayout, IDWriteTextLayoutVtbl };
-use um::winnt::{ HRESULT, WCHAR };
+use shared::basetsd::{INT16, INT32, UINT16, UINT32, UINT8};
+use shared::minwindef::{BOOL, FLOAT};
+use um::dcommon::DWRITE_MEASURING_MODE;
+use um::dwrite::{
+    DWRITE_GLYPH_OFFSET, DWRITE_MATRIX, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE,
+    DWRITE_SCRIPT_ANALYSIS, DWRITE_SHAPING_GLYPH_PROPERTIES, DWRITE_TEXT_RANGE,
+    IDWriteBitmapRenderTarget, IDWriteBitmapRenderTargetVtbl, IDWriteFactory, IDWriteFactoryVtbl,
+    IDWriteFont, IDWriteFontCollection, IDWriteFontFace, IDWriteFontFaceVtbl, IDWriteFontVtbl,
+    IDWriteRenderingParams, IDWriteRenderingParamsVtbl, IDWriteTextAnalysisSink,
+    IDWriteTextAnalysisSinkVtbl, IDWriteTextAnalysisSource, IDWriteTextAnalysisSourceVtbl,
+    IDWriteTextAnalyzer, IDWriteTextAnalyzerVtbl, IDWriteTextLayout, IDWriteTextLayoutVtbl,
+};
+use um::winnt::{HRESULT, WCHAR};
 
-ENUM!{ enum DWRITE_PANOSE_FAMILY {
+ENUM!{enum DWRITE_PANOSE_FAMILY {
     DWRITE_PANOSE_FAMILY_ANY = 0x0, // 0
     DWRITE_PANOSE_FAMILY_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_FAMILY_TEXT_DISPLAY = 0x2, // 2
@@ -31,7 +30,7 @@ ENUM!{ enum DWRITE_PANOSE_FAMILY {
     DWRITE_PANOSE_FAMILY_PICTORIAL = 0x5, // 5
 }}
 
-ENUM!{ enum DWRITE_PANOSE_SERIF_STYLE {
+ENUM!{enum DWRITE_PANOSE_SERIF_STYLE {
     DWRITE_PANOSE_SERIF_STYLE_ANY = 0x0, // 0
     DWRITE_PANOSE_SERIF_STYLE_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_SERIF_STYLE_COVE = 0x2, // 2
@@ -53,7 +52,7 @@ ENUM!{ enum DWRITE_PANOSE_SERIF_STYLE {
     DWRITE_PANOSE_SERIF_STYLE_BONE = 0x8, // 8
 }}
 
-ENUM!{ enum DWRITE_PANOSE_WEIGHT {
+ENUM!{enum DWRITE_PANOSE_WEIGHT {
     DWRITE_PANOSE_WEIGHT_ANY = 0x0, // 0
     DWRITE_PANOSE_WEIGHT_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_WEIGHT_VERY_LIGHT = 0x2, // 2
@@ -69,7 +68,7 @@ ENUM!{ enum DWRITE_PANOSE_WEIGHT {
     DWRITE_PANOSE_WEIGHT_NORD = 0xB, // 11
 }}
 
-ENUM!{ enum DWRITE_PANOSE_PROPORTION {
+ENUM!{enum DWRITE_PANOSE_PROPORTION {
     DWRITE_PANOSE_PROPORTION_ANY = 0x0, // 0
     DWRITE_PANOSE_PROPORTION_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_PROPORTION_OLD_STYLE = 0x2, // 2
@@ -82,7 +81,7 @@ ENUM!{ enum DWRITE_PANOSE_PROPORTION {
     DWRITE_PANOSE_PROPORTION_MONOSPACED = 0x9, // 9
 }}
 
-ENUM!{ enum DWRITE_PANOSE_CONTRAST {
+ENUM!{enum DWRITE_PANOSE_CONTRAST {
     DWRITE_PANOSE_CONTRAST_ANY = 0x0, // 0
     DWRITE_PANOSE_CONTRAST_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_CONTRAST_NONE = 0x2, // 2
@@ -99,7 +98,7 @@ ENUM!{ enum DWRITE_PANOSE_CONTRAST {
     DWRITE_PANOSE_CONTRAST_BROKEN = 0xD, // 13
 }}
 
-ENUM!{ enum DWRITE_PANOSE_STROKE_VARIATION {
+ENUM!{enum DWRITE_PANOSE_STROKE_VARIATION {
     DWRITE_PANOSE_STROKE_VARIATION_ANY = 0x0, // 0
     DWRITE_PANOSE_STROKE_VARIATION_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_STROKE_VARIATION_NO_VARIATION = 0x2, // 2
@@ -113,7 +112,7 @@ ENUM!{ enum DWRITE_PANOSE_STROKE_VARIATION {
     DWRITE_PANOSE_STROKE_VARIATION_INSTANT_HORIZONTAL = 0xA, // 10
 }}
 
-ENUM!{ enum DWRITE_PANOSE_ARM_STYLE {
+ENUM!{enum DWRITE_PANOSE_ARM_STYLE {
     DWRITE_PANOSE_ARM_STYLE_ANY = 0x0, // 0
     DWRITE_PANOSE_ARM_STYLE_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_ARM_STYLE_STRAIGHT_ARMS_HORIZONTAL = 0x2, // 2
@@ -135,7 +134,7 @@ ENUM!{ enum DWRITE_PANOSE_ARM_STYLE {
     DWRITE_PANOSE_ARM_STYLE_BENT_ARMS_DOUBLE_SERIF = 0xB, // 11
 }}
 
-ENUM!{ enum DWRITE_PANOSE_LETTERFORM {
+ENUM!{enum DWRITE_PANOSE_LETTERFORM {
     DWRITE_PANOSE_LETTERFORM_ANY = 0x0, // 0
     DWRITE_PANOSE_LETTERFORM_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_LETTERFORM_NORMAL_CONTACT = 0x2, // 2
@@ -154,7 +153,7 @@ ENUM!{ enum DWRITE_PANOSE_LETTERFORM {
     DWRITE_PANOSE_LETTERFORM_OBLIQUE_SQUARE = 0xF, // 15
 }}
 
-ENUM!{ enum DWRITE_PANOSE_MIDLINE {
+ENUM!{enum DWRITE_PANOSE_MIDLINE {
     DWRITE_PANOSE_MIDLINE_ANY = 0x0, // 0
     DWRITE_PANOSE_MIDLINE_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_MIDLINE_STANDARD_TRIMMED = 0x2, // 2
@@ -171,7 +170,7 @@ ENUM!{ enum DWRITE_PANOSE_MIDLINE {
     DWRITE_PANOSE_MIDLINE_LOW_SERIFED = 0xD, // 13
 }}
 
-ENUM!{ enum DWRITE_PANOSE_XHEIGHT {
+ENUM!{enum DWRITE_PANOSE_XHEIGHT {
     DWRITE_PANOSE_XHEIGHT_ANY = 0x0, // 0
     DWRITE_PANOSE_XHEIGHT_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_XHEIGHT_CONSTANT_SMALL = 0x2, // 2
@@ -184,7 +183,7 @@ ENUM!{ enum DWRITE_PANOSE_XHEIGHT {
     DWRITE_PANOSE_XHEIGHT_DUCKING_STD = 0x6, // 6
 }}
 
-ENUM!{ enum DWRITE_PANOSE_TOOL_KIND {
+ENUM!{enum DWRITE_PANOSE_TOOL_KIND {
     DWRITE_PANOSE_TOOL_KIND_ANY = 0x0, // 0
     DWRITE_PANOSE_TOOL_KIND_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_TOOL_KIND_FLAT_NIB = 0x2, // 2
@@ -197,14 +196,14 @@ ENUM!{ enum DWRITE_PANOSE_TOOL_KIND {
     DWRITE_PANOSE_TOOL_KIND_WILD_BRUSH = 0x9, // 9
 }}
 
-ENUM!{ enum DWRITE_PANOSE_SPACING {
+ENUM!{enum DWRITE_PANOSE_SPACING {
     DWRITE_PANOSE_SPACING_ANY = 0x0, // 0
     DWRITE_PANOSE_SPACING_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_SPACING_PROPORTIONAL_SPACED = 0x2, // 2
     DWRITE_PANOSE_SPACING_MONOSPACED = 0x3, // 3
 }}
 
-ENUM!{ enum DWRITE_PANOSE_ASPECT_RATIO {
+ENUM!{enum DWRITE_PANOSE_ASPECT_RATIO {
     DWRITE_PANOSE_ASPECT_RATIO_ANY = 0x0, // 0
     DWRITE_PANOSE_ASPECT_RATIO_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_ASPECT_RATIO_VERY_CONDENSED = 0x2, // 2
@@ -214,7 +213,7 @@ ENUM!{ enum DWRITE_PANOSE_ASPECT_RATIO {
     DWRITE_PANOSE_ASPECT_RATIO_VERY_EXPANDED = 0x6, // 6
 }}
 
-ENUM!{ enum DWRITE_PANOSE_SCRIPT_TOPOLOGY {
+ENUM!{enum DWRITE_PANOSE_SCRIPT_TOPOLOGY {
     DWRITE_PANOSE_SCRIPT_TOPOLOGY_ANY = 0x0, // 0
     DWRITE_PANOSE_SCRIPT_TOPOLOGY_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_SCRIPT_TOPOLOGY_ROMAN_DISCONNECTED = 0x2, // 2
@@ -228,7 +227,7 @@ ENUM!{ enum DWRITE_PANOSE_SCRIPT_TOPOLOGY {
     DWRITE_PANOSE_SCRIPT_TOPOLOGY_BLACKLETTER_CONNECTED = 0xA, // 10
 }}
 
-ENUM!{ enum DWRITE_PANOSE_SCRIPT_FORM {
+ENUM!{enum DWRITE_PANOSE_SCRIPT_FORM {
     DWRITE_PANOSE_SCRIPT_FORM_ANY = 0x0, // 0
     DWRITE_PANOSE_SCRIPT_FORM_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_SCRIPT_FORM_UPRIGHT_NO_WRAPPING = 0x2, // 2
@@ -245,7 +244,7 @@ ENUM!{ enum DWRITE_PANOSE_SCRIPT_FORM {
     DWRITE_PANOSE_SCRIPT_FORM_EXAGGERATED_EXTREME_WRAPPING = 0xD, // 13
 }}
 
-ENUM!{ enum DWRITE_PANOSE_FINIALS {
+ENUM!{enum DWRITE_PANOSE_FINIALS {
     DWRITE_PANOSE_FINIALS_ANY = 0x0, // 0
     DWRITE_PANOSE_FINIALS_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_FINIALS_NONE_NO_LOOPS = 0x2, // 2
@@ -262,7 +261,7 @@ ENUM!{ enum DWRITE_PANOSE_FINIALS {
     DWRITE_PANOSE_FINIALS_ROUND_OPEN_LOOPS = 0xD, // 13
 }}
 
-ENUM!{ enum DWRITE_PANOSE_XASCENT {
+ENUM!{enum DWRITE_PANOSE_XASCENT {
     DWRITE_PANOSE_XASCENT_ANY = 0x0, // 0
     DWRITE_PANOSE_XASCENT_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_XASCENT_VERY_LOW = 0x2, // 2
@@ -272,7 +271,7 @@ ENUM!{ enum DWRITE_PANOSE_XASCENT {
     DWRITE_PANOSE_XASCENT_VERY_HIGH = 0x6, // 6
 }}
 
-ENUM!{ enum DWRITE_PANOSE_DECORATIVE_CLASS {
+ENUM!{enum DWRITE_PANOSE_DECORATIVE_CLASS {
     DWRITE_PANOSE_DECORATIVE_CLASS_ANY = 0x0, // 0
     DWRITE_PANOSE_DECORATIVE_CLASS_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_DECORATIVE_CLASS_DERIVATIVE = 0x2, // 2
@@ -288,7 +287,7 @@ ENUM!{ enum DWRITE_PANOSE_DECORATIVE_CLASS {
     DWRITE_PANOSE_DECORATIVE_CLASS_MONTAGE = 0xC, // 12
 }}
 
-ENUM!{ enum DWRITE_PANOSE_ASPECT {
+ENUM!{enum DWRITE_PANOSE_ASPECT {
     DWRITE_PANOSE_ASPECT_ANY = 0x0, // 0
     DWRITE_PANOSE_ASPECT_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_ASPECT_SUPER_CONDENSED = 0x2, // 2
@@ -301,7 +300,7 @@ ENUM!{ enum DWRITE_PANOSE_ASPECT {
     DWRITE_PANOSE_ASPECT_MONOSPACED = 0x9, // 9
 }}
 
-ENUM!{ enum DWRITE_PANOSE_FILL {
+ENUM!{enum DWRITE_PANOSE_FILL {
     DWRITE_PANOSE_FILL_ANY = 0x0, // 0
     DWRITE_PANOSE_FILL_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_FILL_STANDARD_SOLID_FILL = 0x2, // 2
@@ -312,7 +311,7 @@ ENUM!{ enum DWRITE_PANOSE_FILL {
     DWRITE_PANOSE_FILL_DRAWN_DISTRESSED = 0x7, // 7
 }}
 
-ENUM!{ enum DWRITE_PANOSE_LINING {
+ENUM!{enum DWRITE_PANOSE_LINING {
     DWRITE_PANOSE_LINING_ANY = 0x0, // 0
     DWRITE_PANOSE_LINING_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_LINING_NONE = 0x2, // 2
@@ -324,7 +323,7 @@ ENUM!{ enum DWRITE_PANOSE_LINING {
     DWRITE_PANOSE_LINING_BACKDROP = 0x8, // 8
 }}
 
-ENUM!{ enum DWRITE_PANOSE_DECORATIVE_TOPOLOGY {
+ENUM!{enum DWRITE_PANOSE_DECORATIVE_TOPOLOGY {
     DWRITE_PANOSE_DECORATIVE_TOPOLOGY_ANY = 0x0, // 0
     DWRITE_PANOSE_DECORATIVE_TOPOLOGY_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_DECORATIVE_TOPOLOGY_STANDARD = 0x2, // 2
@@ -343,7 +342,7 @@ ENUM!{ enum DWRITE_PANOSE_DECORATIVE_TOPOLOGY {
     DWRITE_PANOSE_DECORATIVE_TOPOLOGY_SWASH_VARIANCE = 0xF, // 15
 }}
 
-ENUM!{ enum DWRITE_PANOSE_CHARACTER_RANGES {
+ENUM!{enum DWRITE_PANOSE_CHARACTER_RANGES {
     DWRITE_PANOSE_CHARACTER_RANGES_ANY = 0x0, // 0
     DWRITE_PANOSE_CHARACTER_RANGES_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_CHARACTER_RANGES_EXTENDED_COLLECTION = 0x2, // 2
@@ -352,7 +351,7 @@ ENUM!{ enum DWRITE_PANOSE_CHARACTER_RANGES {
     DWRITE_PANOSE_CHARACTER_RANGES_SMALL_CAPS = 0x5, // 5
 }}
 
-ENUM!{ enum DWRITE_PANOSE_SYMBOL_KIND {
+ENUM!{enum DWRITE_PANOSE_SYMBOL_KIND {
     DWRITE_PANOSE_SYMBOL_KIND_ANY = 0x0, // 0
     DWRITE_PANOSE_SYMBOL_KIND_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_SYMBOL_KIND_MONTAGES = 0x2, // 2
@@ -368,7 +367,7 @@ ENUM!{ enum DWRITE_PANOSE_SYMBOL_KIND {
     DWRITE_PANOSE_SYMBOL_KIND_INDUSTRY_SPECIFIC = 0xC, // 12
 }}
 
-ENUM!{ enum DWRITE_PANOSE_SYMBOL_ASPECT_RATIO {
+ENUM!{enum DWRITE_PANOSE_SYMBOL_ASPECT_RATIO {
     DWRITE_PANOSE_SYMBOL_ASPECT_RATIO_ANY = 0x0, // 0
     DWRITE_PANOSE_SYMBOL_ASPECT_RATIO_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_SYMBOL_ASPECT_RATIO_NO_WIDTH = 0x2, // 2
@@ -381,12 +380,12 @@ ENUM!{ enum DWRITE_PANOSE_SYMBOL_ASPECT_RATIO {
     DWRITE_PANOSE_SYMBOL_ASPECT_RATIO_VERY_NARROW = 0x9, // 9
 }}
 
-ENUM!{ enum DWRITE_OUTLINE_THRESHOLD {
+ENUM!{enum DWRITE_OUTLINE_THRESHOLD {
     DWRITE_OUTLINE_THRESHOLD_ANTIALIASED = 0x0, // 0
     DWRITE_OUTLINE_THRESHOLD_ALIASED = 0x1, // 1
 }}
 
-ENUM!{ enum DWRITE_BASELINE {
+ENUM!{enum DWRITE_BASELINE {
     DWRITE_BASELINE_DEFAULT = 0x0, // 0
     DWRITE_BASELINE_ROMAN = 0x1, // 1
     DWRITE_BASELINE_CENTRAL = 0x2, // 2
@@ -398,12 +397,12 @@ ENUM!{ enum DWRITE_BASELINE {
     DWRITE_BASELINE_MAXIMUM = 0x8, // 8
 }}
 
-ENUM!{ enum DWRITE_VERTICAL_GLYPH_ORIENTATION {
+ENUM!{enum DWRITE_VERTICAL_GLYPH_ORIENTATION {
     DWRITE_VERTICAL_GLYPH_ORIENTATION_DEFAULT = 0x0, // 0
     DWRITE_VERTICAL_GLYPH_ORIENTATION_STACKED = 0x1, // 1
 }}
 
-ENUM!{ enum DWRITE_GLYPH_ORIENTATION_ANGLE {
+ENUM!{enum DWRITE_GLYPH_ORIENTATION_ANGLE {
     DWRITE_GLYPH_ORIENTATION_ANGLE_0_DEGREES = 0x0, // 0
     DWRITE_GLYPH_ORIENTATION_ANGLE_90_DEGREES = 0x1, // 1
     DWRITE_GLYPH_ORIENTATION_ANGLE_180_DEGREES = 0x2, // 2
@@ -545,52 +544,74 @@ BITFIELD!{DWRITE_JUSTIFICATION_OPPORTUNITY bitfield0: UINT32 [
 ]}
 
 RIDL!{#[uuid(0x30572f99, 0xdac6, 0x41db, 0xa1, 0x6e, 0x04, 0x86, 0x30, 0x7e, 0x60, 0x6a)]
-interface IDWriteFactory1(IDWriteFactory1Vtbl): 
-    IDWriteFactory(IDWriteFactoryVtbl) {
+interface IDWriteFactory1(IDWriteFactory1Vtbl): IDWriteFactory(IDWriteFactoryVtbl) {
     fn GetEudcFontCollection(
-        fontCollection: *mut *mut IDWriteFontCollection, checkForUpdates: BOOL
+        fontCollection: *mut *mut IDWriteFontCollection,
+        checkForUpdates: BOOL
     ) -> HRESULT,
     fn CreateCustomRenderingParams(
-        gamma: FLOAT, enhancedContrast: FLOAT, enhancedContrastGrayscale: FLOAT,
-        clearTypeLevel: FLOAT, pixelGeometry: DWRITE_PIXEL_GEOMETRY,
-        renderingMode: DWRITE_RENDERING_MODE, renderingParams: *mut *mut IDWriteRenderingParams1
+        gamma: FLOAT,
+        enhancedContrast: FLOAT,
+        enhancedContrastGrayscale: FLOAT,
+        clearTypeLevel: FLOAT,
+        pixelGeometry: DWRITE_PIXEL_GEOMETRY,
+        renderingMode: DWRITE_RENDERING_MODE,
+        renderingParams: *mut *mut IDWriteRenderingParams1
     ) -> HRESULT
 }}
 
 RIDL!{#[uuid(0xa71efdb4, 0x9fdb, 0x4838, 0xad, 0x90, 0xcf, 0xc3, 0xbe, 0x8c, 0x3d, 0xaf)]
-interface IDWriteFontFace1(IDWriteFontFace1Vtbl): 
-    IDWriteFontFace(IDWriteFontFaceVtbl) {
+interface IDWriteFontFace1(IDWriteFontFace1Vtbl): IDWriteFontFace(IDWriteFontFaceVtbl) {
     fn GetMetrics(fontMetrics: *mut DWRITE_FONT_METRICS1) -> (),
     fn GetGdiCompatibleMetrics(
-        emSize: FLOAT, pixelsPerDip: FLOAT, transform: *const DWRITE_MATRIX,
+        emSize: FLOAT,
+        pixelsPerDip: FLOAT,
+        transform: *const DWRITE_MATRIX,
         fontMetrics: *mut DWRITE_FONT_METRICS1
     ) -> HRESULT,
     fn GetCaretMetrics(caretMetrics: *mut DWRITE_CARET_METRICS) -> (),
     fn GetUnicodeRanges(
-        maxRangeCount: UINT32, unicodeRanges: *mut DWRITE_UNICODE_RANGE,
+        maxRangeCount: UINT32,
+        unicodeRanges: *mut DWRITE_UNICODE_RANGE,
         actualRangeCount: *mut UINT32
     ) -> HRESULT,
     fn IsMonospacedFont() -> BOOL,
     fn GetDesignGlyphAdvances(
-        glyphCount: UINT32, glyphIndices: *const UINT16, glyphAdvances: *mut INT32,
+        glyphCount: UINT32,
+        glyphIndices: *const UINT16,
+        glyphAdvances: *mut INT32,
         isSideways: BOOL
     ) -> HRESULT,
     fn GetGdiCompatibleGlyphAdvances(
-        emSize: FLOAT, pixelsPerDip: FLOAT, transform: *const DWRITE_MATRIX, useGdiNatural: BOOL,
-        isSideways: BOOL, glyphCount: UINT32, glyphIndices: *const UINT16,
+        emSize: FLOAT,
+        pixelsPerDip: FLOAT,
+        transform: *const DWRITE_MATRIX,
+        useGdiNatural: BOOL,
+        isSideways: BOOL,
+        glyphCount: UINT32,
+        glyphIndices: *const UINT16,
         glyphAdvances: *mut INT32
     ) -> HRESULT,
     fn GetKerningPairAdjustments(
-        glyphCount: UINT32, glyphIndices: *const UINT16, glyphAdvanceAdjustments: *mut INT32
+        glyphCount: UINT32,
+        glyphIndices: *const UINT16,
+        glyphAdvanceAdjustments: *mut INT32
     ) -> HRESULT,
     fn HasKerningPairs() -> BOOL,
     fn GetRecommendedRenderingMode(
-        fontEmSize: FLOAT, dpiX: FLOAT, dpiY: FLOAT, transform: *const DWRITE_MATRIX,
-        isSideways: BOOL, outlineThreshold: DWRITE_OUTLINE_THRESHOLD,
-        measuringMode: DWRITE_MEASURING_MODE, renderingMode: *mut DWRITE_RENDERING_MODE
+        fontEmSize: FLOAT,
+        dpiX: FLOAT,
+        dpiY: FLOAT,
+        transform: *const DWRITE_MATRIX,
+        isSideways: BOOL,
+        outlineThreshold: DWRITE_OUTLINE_THRESHOLD,
+        measuringMode: DWRITE_MEASURING_MODE,
+        renderingMode: *mut DWRITE_RENDERING_MODE
     ) -> HRESULT,
     fn GetVerticalGlyphVariants(
-        glyphCount: UINT32, nominalGlyphIndices: *const UINT16, verticalGlyphIndices: *mut UINT16
+        glyphCount: UINT32,
+        nominalGlyphIndices: *const UINT16,
+        verticalGlyphIndices: *mut UINT16
     ) -> HRESULT,
     fn HasVerticalGlyphVariants() -> BOOL
 }}
@@ -600,7 +621,8 @@ interface IDWriteFont1(IDWriteFont1Vtbl): IDWriteFont(IDWriteFontVtbl) {
     fn GetMetrics(fontMetrics: *mut DWRITE_FONT_METRICS1) -> (),
     fn GetPanose(panose: *mut DWRITE_PANOSE) -> (),
     fn GetUnicodeRanges(
-        maxRangeCount: UINT32, unicodeRanges: *mut DWRITE_UNICODE_RANGE,
+        maxRangeCount: UINT32,
+        unicodeRanges: *mut DWRITE_UNICODE_RANGE,
         actualRangeCount: *mut UINT32
     ) -> HRESULT,
     fn IsMonospacedFont() -> BOOL
@@ -616,52 +638,89 @@ RIDL!{#[uuid(0x80dad800, 0xe21f, 0x4e83, 0x96, 0xce, 0xbf, 0xcc, 0xe5, 0x00, 0xd
 interface IDWriteTextAnalyzer1(IDWriteTextAnalyzer1Vtbl): 
     IDWriteTextAnalyzer(IDWriteTextAnalyzerVtbl) {
     fn ApplyCharacterSpacing(
-        leadingSpacing: FLOAT, trailingSpacing: FLOAT, minimumAdvanceWidth: FLOAT,
-        textLength: UINT32, glyphCount: UINT32, clusterMap: *const UINT16,
-        glyphAdvances: *const FLOAT, glyphOffsets: *const DWRITE_GLYPH_OFFSET,
-        glyphProperties: *const DWRITE_SHAPING_GLYPH_PROPERTIES, modifiedGlyphAdvances: *mut FLOAT,
+        leadingSpacing: FLOAT,
+        trailingSpacing: FLOAT,
+        minimumAdvanceWidth: FLOAT,
+        textLength: UINT32,
+        glyphCount: UINT32,
+        clusterMap: *const UINT16,
+        glyphAdvances: *const FLOAT,
+        glyphOffsets: *const DWRITE_GLYPH_OFFSET,
+        glyphProperties: *const DWRITE_SHAPING_GLYPH_PROPERTIES,
+        modifiedGlyphAdvances: *mut FLOAT,
         modifiedGlyphOffsets: *mut DWRITE_GLYPH_OFFSET
     ) -> HRESULT,
     fn GetBaseline(
-        fontFace: *mut IDWriteFontFace, baseline: DWRITE_BASELINE, isVertical: BOOL,
-        isSimulationAllowed: BOOL, scriptAnalysis: DWRITE_SCRIPT_ANALYSIS,
-        localeName: *const WCHAR, baselineCoordinate: *mut INT32, exists: *mut BOOL
+        fontFace: *mut IDWriteFontFace,
+        baseline: DWRITE_BASELINE,
+        isVertical: BOOL,
+        isSimulationAllowed: BOOL,
+        scriptAnalysis: DWRITE_SCRIPT_ANALYSIS,
+        localeName: *const WCHAR,
+        baselineCoordinate: *mut INT32,
+        exists: *mut BOOL
     ) -> HRESULT,
     fn AnalyzeVerticalGlyphOrientation(
-        analysisSource: *mut IDWriteTextAnalysisSource1, textPosition: UINT32, textLength: UINT32,
+        analysisSource: *mut IDWriteTextAnalysisSource1,
+        textPosition: UINT32,
+        textLength: UINT32,
         analysisSink: *mut IDWriteTextAnalysisSink1
     ) -> HRESULT,
     fn GetGlyphOrientationTransform(
-        glyphOrientationAngle: DWRITE_GLYPH_ORIENTATION_ANGLE, isSideways: BOOL,
+        glyphOrientationAngle: DWRITE_GLYPH_ORIENTATION_ANGLE,
+        isSideways: BOOL,
         transform: *mut DWRITE_MATRIX
     ) -> HRESULT,
     fn GetScriptProperties(
-        scriptAnalysis: DWRITE_SCRIPT_ANALYSIS, scriptProperties: *mut DWRITE_SCRIPT_PROPERTIES
+        scriptAnalysis: DWRITE_SCRIPT_ANALYSIS,
+        scriptProperties: *mut DWRITE_SCRIPT_PROPERTIES
     ) -> HRESULT,
     fn GetTextComplexity(
-        textString: *const WCHAR, textLength: UINT32, fontFace: *mut IDWriteFontFace,
-        isTextSimple: *mut BOOL, textLengthRead: *mut UINT32, glyphIndices: *mut UINT16
+        textString: *const WCHAR,
+        textLength: UINT32,
+        fontFace: *mut IDWriteFontFace,
+        isTextSimple: *mut BOOL,
+        textLengthRead: *mut UINT32,
+        glyphIndices: *mut UINT16
     ) -> HRESULT,
     fn GetJustificationOpportunities(
-        fontFace: *mut IDWriteFontFace, fontEmSize: FLOAT, scriptAnalysis: DWRITE_SCRIPT_ANALYSIS,
-        textLength: UINT32, glyphCount: UINT32, textString: *const WCHAR,
-        clusterMap: *const UINT16, glyphProperties: *const DWRITE_SHAPING_GLYPH_PROPERTIES,
+        fontFace: *mut IDWriteFontFace,
+        fontEmSize: FLOAT,
+        scriptAnalysis: DWRITE_SCRIPT_ANALYSIS,
+        textLength: UINT32,
+        glyphCount: UINT32,
+        textString: *const WCHAR,
+        clusterMap: *const UINT16,
+        glyphProperties: *const DWRITE_SHAPING_GLYPH_PROPERTIES,
         justificationOpportunities: *mut DWRITE_JUSTIFICATION_OPPORTUNITY
     ) -> HRESULT,
     fn JustifyGlyphAdvances(
-        lineWidth: FLOAT, glyphCount: UINT32,
+        lineWidth: FLOAT,
+        glyphCount: UINT32,
         justificationOpportunities: *const DWRITE_JUSTIFICATION_OPPORTUNITY,
-        glyphAdvances: *const FLOAT, glyphOffsets: *const DWRITE_GLYPH_OFFSET,
-        justifiedGlyphAdvances: *mut FLOAT, justifiedGlyphOffsets: *mut DWRITE_GLYPH_OFFSET
+        glyphAdvances: *const FLOAT,
+        glyphOffsets: *const DWRITE_GLYPH_OFFSET,
+        justifiedGlyphAdvances: *mut FLOAT,
+        justifiedGlyphOffsets: *mut DWRITE_GLYPH_OFFSET
     ) -> HRESULT,
     fn GetJustifiedGlyphs(
-        fontFace: *mut IDWriteFontFace, fontEmSize: FLOAT, scriptAnalysis: DWRITE_SCRIPT_ANALYSIS,
-        textLength: UINT32, glyphCount: UINT32, maxGlyphCount: UINT32, clusterMap: *const UINT16,
-        glyphIndices: *const UINT16, glyphAdvances: *const FLOAT,
-        justifiedGlyphAdvances: *const FLOAT, justifiedGlyphOffsets: *const DWRITE_GLYPH_OFFSET,
-        glyphProperties: *const DWRITE_SHAPING_GLYPH_PROPERTIES, actualGlyphCount: *mut UINT32,
-        modifiedClusterMap: *mut UINT16, modifiedGlyphIndices: *mut UINT16,
-        modifiedGlyphAdvances: *mut FLOAT, modifiedGlyphOffsets: *mut DWRITE_GLYPH_OFFSET
+        fontFace: *mut IDWriteFontFace,
+        fontEmSize: FLOAT,
+        scriptAnalysis: DWRITE_SCRIPT_ANALYSIS,
+        textLength: UINT32,
+        glyphCount: UINT32,
+        maxGlyphCount: UINT32,
+        clusterMap: *const UINT16,
+        glyphIndices: *const UINT16,
+        glyphAdvances: *const FLOAT,
+        justifiedGlyphAdvances: *const FLOAT,
+        justifiedGlyphOffsets: *const DWRITE_GLYPH_OFFSET,
+        glyphProperties: *const DWRITE_SHAPING_GLYPH_PROPERTIES,
+        actualGlyphCount: *mut UINT32,
+        modifiedClusterMap: *mut UINT16,
+        modifiedGlyphIndices: *mut UINT16,
+        modifiedGlyphAdvances: *mut FLOAT,
+        modifiedGlyphOffsets: *mut DWRITE_GLYPH_OFFSET
     ) -> HRESULT
 }}
 
@@ -669,8 +728,10 @@ RIDL!{#[uuid(0x639cfad8, 0x0fb4, 0x4b21, 0xa5, 0x8a, 0x06, 0x79, 0x20, 0x12, 0x0
 interface IDWriteTextAnalysisSource1(IDWriteTextAnalysisSource1Vtbl): 
     IDWriteTextAnalysisSource(IDWriteTextAnalysisSourceVtbl) {
     fn GetVerticalGlyphOrientation(
-        textPosition: UINT32, textLength: *mut UINT32,
-        glyphOrientation: *mut DWRITE_VERTICAL_GLYPH_ORIENTATION, bidiLevel: *mut UINT8
+        textPosition: UINT32,
+        textLength: *mut UINT32,
+        glyphOrientation: *mut DWRITE_VERTICAL_GLYPH_ORIENTATION,
+        bidiLevel: *mut UINT8
     ) -> HRESULT
 }}
 
@@ -678,9 +739,12 @@ RIDL!{#[uuid(0xb0d941a0, 0x85e7, 0x4d8b, 0x9f, 0xd3, 0x5c, 0xed, 0x99, 0x34, 0x4
 interface IDWriteTextAnalysisSink1(IDWriteTextAnalysisSink1Vtbl): 
     IDWriteTextAnalysisSink(IDWriteTextAnalysisSinkVtbl) {
     fn SetGlyphOrientation(
-        textPosition: UINT32, textLength: UINT32,
-        glyphOrientationAngle: DWRITE_GLYPH_ORIENTATION_ANGLE, adjustedBidiLevel: UINT8,
-        isSideways: BOOL, isRightToLeft: BOOL
+        textPosition: UINT32,
+        textLength: UINT32,
+        glyphOrientationAngle: DWRITE_GLYPH_ORIENTATION_ANGLE,
+        adjustedBidiLevel: UINT8,
+        isSideways: BOOL,
+        isRightToLeft: BOOL
     ) -> HRESULT
 }}
 
@@ -688,22 +752,30 @@ RIDL!{#[uuid(0x9064d822, 0x80a7, 0x465c, 0xa9, 0x86, 0xdf, 0x65, 0xf7, 0x8b, 0x8
 interface IDWriteTextLayout1(IDWriteTextLayout1Vtbl): 
     IDWriteTextLayout(IDWriteTextLayoutVtbl) {
     fn SetPairKerning(
-        isPairKerningEnabled: BOOL, textRange: DWRITE_TEXT_RANGE
+        isPairKerningEnabled: BOOL,
+        textRange: DWRITE_TEXT_RANGE
     ) -> HRESULT,
     fn GetPairKerning(
-        currentPosition: UINT32, isPairKerningEnabled: *mut BOOL, textRange: *mut DWRITE_TEXT_RANGE
+        currentPosition: UINT32,
+        isPairKerningEnabled: *mut BOOL,
+        textRange: *mut DWRITE_TEXT_RANGE
     ) -> HRESULT,
     fn SetCharacterSpacing(
-        leadingSpacing: FLOAT, trailingSpacing: FLOAT, minimumAdvanceWidth: FLOAT,
+        leadingSpacing: FLOAT,
+        trailingSpacing: FLOAT,
+        minimumAdvanceWidth: FLOAT,
         textRange: DWRITE_TEXT_RANGE
     ) -> HRESULT,
     fn GetCharacterSpacing(
-        currentPosition: UINT32, leadingSpacing: *mut FLOAT, trailingSpacing: *mut FLOAT,
-        minimumAdvanceWidth: *mut FLOAT, textRange: *mut DWRITE_TEXT_RANGE
+        currentPosition: UINT32,
+        leadingSpacing: *mut FLOAT,
+        trailingSpacing: *mut FLOAT,
+        minimumAdvanceWidth: *mut FLOAT,
+        textRange: *mut DWRITE_TEXT_RANGE
     ) -> HRESULT
 }}
 
-ENUM!{ enum DWRITE_TEXT_ANTIALIAS_MODE {
+ENUM!{enum DWRITE_TEXT_ANTIALIAS_MODE {
     DWRITE_TEXT_ANTIALIAS_MODE_CLEARTYPE = 0x0, // 0
     DWRITE_TEXT_ANTIALIAS_MODE_GRAYSCALE = 0x1, // 1
 }}
@@ -712,8 +784,6 @@ RIDL!{#[uuid(0x791e8298, 0x3ef3, 0x4230, 0x98, 0x80, 0xc9, 0xbd, 0xec, 0xc4, 0x2
 interface IDWriteBitmapRenderTarget1(IDWriteBitmapRenderTarget1Vtbl): 
     IDWriteBitmapRenderTarget(IDWriteBitmapRenderTargetVtbl) {
     fn GetTextAntialiasMode() -> DWRITE_TEXT_ANTIALIAS_MODE,
-    fn SetTextAntialiasMode(
-        antialiasMode: DWRITE_TEXT_ANTIALIAS_MODE
-    ) -> HRESULT
+    fn SetTextAntialiasMode(antialiasMode: DWRITE_TEXT_ANTIALIAS_MODE) -> HRESULT
 }}
 
