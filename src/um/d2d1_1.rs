@@ -35,7 +35,7 @@ use um::d2d1::{
 use um::d2d1effectauthor::D2D1_PROPERTY_BINDING;
 
 FN!{stdcall PD2D1_EFFECT_FACTORY(
-    effectImpl: *mut *mut IUnknown
+    effectImpl: *mut *mut IUnknown,
 ) -> HRESULT}
 
 pub use um::d2dbasetypes::D2D_RECT_L as D2D1_RECT_L;
@@ -308,18 +308,18 @@ interface ID2D1GdiMetafileSink(ID2D1GdiMetafileSinkVtbl): IUnknown(IUnknownVtbl)
     fn ProcessRecord(
         recordType: DWORD,
         recordData: *const c_void,
-        recordDataSize: DWORD 
-    ) -> HRESULT
+        recordDataSize: DWORD,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x2f543dc3, 0xcfc1, 0x4211, 0x86, 0x4f, 0xcf, 0xd9, 0x1c, 0x6f, 0x33, 0x95)]
 interface ID2D1GdiMetafile(ID2D1GdiMetafileVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
     fn Stream(
-        sink: *const ID2D1GdiMetafileSink 
+        sink: *const ID2D1GdiMetafileSink,
     ) -> HRESULT,
     fn GetBounds(
-        bounds: *mut D2D1_RECT_F 
-    ) -> HRESULT
+        bounds: *mut D2D1_RECT_F,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x54d7898a, 0xa061, 0x40a7, 0xbe, 0xc7, 0xe4, 0x65, 0xbc, 0xba, 0x2c, 0x4f)]
@@ -327,55 +327,55 @@ interface ID2D1CommandSink(ID2D1CommandSinkVtbl): IUnknown(IUnknownVtbl) {
     fn BeginDraw() -> HRESULT,
     fn EndDraw() -> HRESULT,
     fn SetAntialiasMode(
-        antialiasMode: D2D1_ANTIALIAS_MODE 
+        antialiasMode: D2D1_ANTIALIAS_MODE,
     ) -> HRESULT,
     fn SetTags(
         tag1: D2D1_TAG,
-        tag2: D2D1_TAG 
+        tag2: D2D1_TAG,
     ) -> HRESULT,
     fn SetTextAntialiasMode(
-        textAntialiasMode: D2D1_TEXT_ANTIALIAS_MODE 
+        textAntialiasMode: D2D1_TEXT_ANTIALIAS_MODE,
     ) -> HRESULT,
     fn SetTextRenderingParams(
-        textRenderingParams: *const IDWriteRenderingParams 
+        textRenderingParams: *const IDWriteRenderingParams,
     ) -> HRESULT,
     fn SetTransform(
-        transform: *const D2D1_MATRIX_3X2_F 
+        transform: *const D2D1_MATRIX_3X2_F,
     ) -> HRESULT,
     fn SetPrimitiveBlend(
-        primitiveBlend: D2D1_PRIMITIVE_BLEND
+        primitiveBlend: D2D1_PRIMITIVE_BLEND,
     ) -> HRESULT,
     fn SetUnitMode(
-        unitMode: D2D1_UNIT_MODE
+        unitMode: D2D1_UNIT_MODE,
     ) -> HRESULT,
     fn Clear(
-        color: *const D2D1_COLOR_F 
+        color: *const D2D1_COLOR_F,
     ) -> HRESULT,
     fn DrawGlyphRun(
         baselineOrigin: D2D1_POINT_2F,
         glyphRun: *const DWRITE_GLYPH_RUN,
         glyphRunDescription: *const DWRITE_GLYPH_RUN_DESCRIPTION,
         foregroundBrush: *const ID2D1Brush,
-        measuringMode: DWRITE_MEASURING_MODE
+        measuringMode: DWRITE_MEASURING_MODE,
     ) -> HRESULT,
     fn DrawLine(
         point0: D2D1_POINT_2F,
         point1: D2D1_POINT_2F,
         brush: *const ID2D1Brush,
         strokeWidth: FLOAT,
-        strokeStyle: *const ID2D1StrokeStyle 
+        strokeStyle: *const ID2D1StrokeStyle,
     ) -> HRESULT,
     fn DrawGeometry(
         geometry: *const ID2D1Geometry,
         brush: *const ID2D1Brush,
         strokeWidth: FLOAT,
-        strokeStyle: *const ID2D1StrokeStyle 
+        strokeStyle: *const ID2D1StrokeStyle,
     ) -> HRESULT,
     fn DrawRectangle(
         rect: *const D2D1_RECT_F,
         brush: *const ID2D1Brush,
         strokeWidth: FLOAT,
-        strokeStyle: *const ID2D1StrokeStyle 
+        strokeStyle: *const ID2D1StrokeStyle,
     ) -> HRESULT,
     fn DrawBitmap(
         bitmap: *const ID2D1Bitmap,
@@ -383,56 +383,56 @@ interface ID2D1CommandSink(ID2D1CommandSinkVtbl): IUnknown(IUnknownVtbl) {
         opacity: FLOAT,
         interpolationMode: D2D1_INTERPOLATION_MODE,
         sourceRectangle: *const D2D1_RECT_F,
-        perspectiveTransform: *const D2D1_MATRIX_4X4_F 
+        perspectiveTransform: *const D2D1_MATRIX_4X4_F,
     ) -> HRESULT,
     fn DrawImage(
         image: *const ID2D1Image,
         targetOffset: *const D2D1_POINT_2F,
         imageRectangle: *const D2D1_RECT_F,
         interpolationMode: D2D1_INTERPOLATION_MODE,
-        compositeMode: D2D1_COMPOSITE_MODE
+        compositeMode: D2D1_COMPOSITE_MODE,
     ) -> HRESULT,
     fn DrawGdiMetafile(
         gdiMetafile: *const ID2D1GdiMetafile,
-        targetOffset: *const D2D1_POINT_2F 
+        targetOffset: *const D2D1_POINT_2F,
     ) -> HRESULT,
     fn FillMesh(
         mesh: *const ID2D1Mesh,
-        brush: *const ID2D1Brush 
+        brush: *const ID2D1Brush,
     ) -> HRESULT,
     fn FillOpacityMask(
         opacityMask: *const ID2D1Bitmap,
         brush: *const ID2D1Brush,
         destinationRectangle: *const D2D1_RECT_F,
-        sourceRectangle: *const D2D1_RECT_F 
+        sourceRectangle: *const D2D1_RECT_F,
     ) -> HRESULT,
     fn FillGeometry(
         geometry: *const ID2D1Geometry,
         brush: *const ID2D1Brush,
-        opacityBrush: *const ID2D1Brush 
+        opacityBrush: *const ID2D1Brush,
     ) -> HRESULT,
     fn FillRectangle(
         rect: *const D2D1_RECT_F,
-        brush: *const ID2D1Brush 
+        brush: *const ID2D1Brush,
     ) -> HRESULT,
     fn PushAxisAlignedClip(
         clipRect: *const D2D1_RECT_F,
-        antialiasMode: D2D1_ANTIALIAS_MODE 
+        antialiasMode: D2D1_ANTIALIAS_MODE,
     ) -> HRESULT,
     fn PushLayer(
         layerParameters1: *const D2D1_LAYER_PARAMETERS1,
-        layer: *const ID2D1Layer 
+        layer: *const ID2D1Layer,
     ) -> HRESULT,
     fn PopAxisAlignedClip() -> HRESULT,
-    fn PopLayer() -> HRESULT
+    fn PopLayer() -> HRESULT,
 });
 
 RIDL!(#[uuid(0xb4f34a19, 0x2383, 0x4d76, 0x94, 0xf6, 0xec, 0x34, 0x36, 0x57, 0xc3, 0xdc)]
 interface ID2D1CommandList(ID2D1CommandListVtbl): ID2D1Image(ID2D1ImageVtbl) {
     fn Stream(
-        sink: *const ID2D1CommandSink 
+        sink: *const ID2D1CommandSink,
     ) -> HRESULT,
-    fn Close() -> HRESULT
+    fn Close() -> HRESULT,
 });
 
 RIDL!(#[uuid(0x2c1d867d, 0xc290, 0x41c8, 0xae, 0x7e, 0x34, 0xa9, 0x87, 0x02, 0xe9, 0xa5)]
@@ -442,34 +442,50 @@ interface ID2D1PrintControl(ID2D1PrintControlVtbl): IUnknown(IUnknownVtbl) {
         pageSize: D2D_SIZE_F,
         pagePrintTicketStream: *const IStream,
         tag1: *mut D2D1_TAG,
-        tag2: *mut D2D1_TAG
+        tag2: *mut D2D1_TAG,
     ) -> HRESULT,
-    fn Close() -> HRESULT
+    fn Close() -> HRESULT,
 });
 
 RIDL!(#[uuid(0xfe9e984d, 0x3f95, 0x407c, 0xb5, 0xdb, 0xcb, 0x94, 0xd4, 0xe8, 0xf8, 0x7c)]
 interface ID2D1ImageBrush(ID2D1ImageBrushVtbl): ID2D1Brush(ID2D1BrushVtbl) {
-    fn SetImage(image: *const ID2D1Image) -> c_void,
-    fn SetExtendModeX(extendModeX: D2D1_EXTEND_MODE) -> c_void,
-    fn SetExtendModeY(extendModeY: D2D1_EXTEND_MODE) -> c_void,
-    fn SetInterpolationMode(interpolationMode: D2D1_INTERPOLATION_MODE) -> c_void,
-    fn SetSourceRectangle(sourceRectangle: *const D2D1_RECT_F) -> c_void,
-    fn GetImage(image: *mut *mut ID2D1Image) -> c_void,
+    fn SetImage(
+        image: *const ID2D1Image,
+    ) -> c_void,
+    fn SetExtendModeX(
+        extendModeX: D2D1_EXTEND_MODE,
+    ) -> c_void,
+    fn SetExtendModeY(
+        extendModeY: D2D1_EXTEND_MODE,
+    ) -> c_void,
+    fn SetInterpolationMode(
+        interpolationMode: D2D1_INTERPOLATION_MODE,
+    ) -> c_void,
+    fn SetSourceRectangle(
+        sourceRectangle: *const D2D1_RECT_F,
+    ) -> c_void,
+    fn GetImage(
+        image: *mut *mut ID2D1Image,
+    ) -> c_void,
     fn GetExtendModeX() -> D2D1_EXTEND_MODE,
     fn GetExtendModeY() -> D2D1_EXTEND_MODE,
     fn GetInterpolationMode() -> D2D1_INTERPOLATION_MODE,
-    fn GetSourceRectangle(sourceRectangle: *mut D2D1_RECT_F) -> c_void
+    fn GetSourceRectangle(
+        sourceRectangle: *mut D2D1_RECT_F,
+    ) -> c_void,
 });
 
 RIDL!(#[uuid(0x41343a53, 0xe41a, 0x49a2, 0x91, 0xcd, 0x21, 0x79, 0x3b, 0xbb, 0x62, 0xe5)]
 interface ID2D1BitmapBrush1(ID2D1BitmapBrush1Vtbl): ID2D1BitmapBrush(ID2D1BitmapBrushVtbl) {
-    fn SetInterpolationMode1(interpolationMode: D2D1_INTERPOLATION_MODE) -> c_void,
-    fn GetInterpolationMode1() -> D2D1_INTERPOLATION_MODE
+    fn SetInterpolationMode1(
+        interpolationMode: D2D1_INTERPOLATION_MODE,
+    ) -> c_void,
+    fn GetInterpolationMode1() -> D2D1_INTERPOLATION_MODE,
 });
 
 RIDL!(#[uuid(0x10a72a66, 0xe91c, 0x43f4, 0x99, 0x3f, 0xdd, 0xf4, 0xb8, 0x2b, 0x0b, 0x4a)]
 interface ID2D1StrokeStyle1(ID2D1StrokeStyle1Vtbl): ID2D1StrokeStyle(ID2D1StrokeStyleVtbl) {
-    fn GetStrokeTransformType() -> D2D1_STROKE_TRANSFORM_TYPE
+    fn GetStrokeTransformType() -> D2D1_STROKE_TRANSFORM_TYPE,
 });
 
 RIDL!(#[uuid(0x62baa2d2, 0xab54, 0x41b7, 0xb8, 0x72, 0x78, 0x7e, 0x01, 0x06, 0xa4, 0x21)]
@@ -479,8 +495,8 @@ interface ID2D1PathGeometry1(ID2D1PathGeometry1Vtbl): ID2D1PathGeometry(ID2D1Pat
         startSegment: UINT32,
         worldTransform: *const D2D1_MATRIX_3X2_F,
         flatteningTolerance: FLOAT,
-        pointDescription: *mut D2D1_POINT_DESCRIPTION 
-    ) -> HRESULT  
+        pointDescription: *mut D2D1_POINT_DESCRIPTION,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x483473d7, 0xcd46, 0x4f9d, 0x9d, 0x3a, 0x31, 0x12, 0xaa, 0x80, 0x15, 0x9d)]
@@ -489,40 +505,48 @@ interface ID2D1Properties(ID2D1PropertiesVtbl): IUnknown(IUnknownVtbl) {
     fn GetPropertyName(
         index: UINT32,
         name: PWSTR,
-        nameCount: UINT32
+        nameCount: UINT32,
     ) -> HRESULT,
-    fn GetPropertyNameLength(index: UINT32) -> UINT32,
-    fn GetType(index: UINT32) -> D2D1_PROPERTY_TYPE,
-    fn GetPropertyIndex(name: PCWSTR)  -> UINT32,
+    fn GetPropertyNameLength(
+        index: UINT32,
+    ) -> UINT32,
+    fn GetType(
+        index: UINT32,
+    ) -> D2D1_PROPERTY_TYPE,
+    fn GetPropertyIndex(
+        name: PCWSTR,
+    )  -> UINT32,
     fn SetValueByName(
         name: PCWSTR,
         prop_type: D2D1_PROPERTY_TYPE,
         data: *const BYTE,
-        dataSize: UINT32
+        dataSize: UINT32,
     ) -> HRESULT,
     fn SetValue(
         index: UINT32,
         prop_type: D2D1_PROPERTY_TYPE,
         data: *const BYTE,
-        dataSize: UINT32
+        dataSize: UINT32,
     ) -> HRESULT,
     fn GetValueByName(
         name: PCWSTR,
         prop_type: D2D1_PROPERTY_TYPE,
         data: *mut BYTE,
-        dataSize: UINT32
+        dataSize: UINT32,
     ) -> HRESULT,
     fn GetValue(
         index: UINT32,
         prop_type: D2D1_PROPERTY_TYPE,
         data: *mut BYTE,
-        dataSize: UINT32
+        dataSize: UINT32,
     ) -> HRESULT,
-    fn GetValueSize(index: UINT32) -> UINT32,
+    fn GetValueSize(
+        index: UINT32,
+    ) -> UINT32,
     fn GetSubProperties(
         index: UINT32,
-        subProperties: *mut *mut ID2D1Properties 
-    ) -> HRESULT   
+        subProperties: *mut *mut ID2D1Properties,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x28211a43, 0x7d89, 0x476f, 0x81, 0x81, 0x2d, 0x61, 0x59, 0xb2, 0x20, 0xad)]
@@ -530,35 +554,35 @@ interface ID2D1Effect(ID2D1EffectVtbl): ID2D1Properties(ID2D1PropertiesVtbl) {
     fn SetInput(
         index: UINT32,
         input: *const ID2D1Image,
-        invalidate: BOOL 
+        invalidate: BOOL,
     ) -> c_void,
     fn SetInputCount(
-        inputCount: UINT32
+        inputCount: UINT32,
     ) -> HRESULT,
     fn GetInput(
         index: UINT32,
-        input: *mut *mut ID2D1Image 
+        input: *mut *mut ID2D1Image,
     ) -> c_void,
     fn GetInputCount() -> UINT32,
     fn GetOutput(
-        outputImage: *mut *mut ID2D1Image 
-    ) -> c_void
+        outputImage: *mut *mut ID2D1Image,
+    ) -> c_void,
 });
 
 RIDL!(#[uuid(0xa898a84c, 0x3873, 0x4588, 0xb0, 0x8b, 0xeb, 0xbf, 0x97, 0x8d, 0xf0, 0x41)]
 interface ID2D1Bitmap1(ID2D1Bitmap1Vtbl): ID2D1Bitmap(ID2D1BitmapVtbl) {
     fn GetColorContext(
-        colorContext: *mut *mut ID2D1ColorContext 
+        colorContext: *mut *mut ID2D1ColorContext,
     ) -> c_void,
     fn GetOptions() -> D2D1_BITMAP_OPTIONS,
     fn GetSurface(
-        dxgiSurface: *mut *mut IDXGISurface 
+        dxgiSurface: *mut *mut IDXGISurface,
     ) -> HRESULT,
     fn Map(
         options: D2D1_MAP_OPTIONS,
-        mappedRect: *mut D2D1_MAPPED_RECT 
+        mappedRect: *mut D2D1_MAPPED_RECT,
     ) -> HRESULT,
-    fn Unmap() -> HRESULT
+    fn Unmap() -> HRESULT,
 });
 
 RIDL!(#[uuid(0x1c4820bb, 0x5771, 0x4518, 0xa5, 0x81, 0x2f, 0xe4, 0xdd, 0x0e, 0xc6, 0x57)]
@@ -567,30 +591,30 @@ interface ID2D1ColorContext(ID2D1ColorContextVtbl): ID2D1Resource(ID2D1ResourceV
     fn GetProfileSize() -> UINT32,
     fn GetProfile(
         profile: *mut BYTE,
-        profileSize: UINT32
-    ) -> HRESULT
+        profileSize: UINT32,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xae1572f4, 0x5dd0, 0x4777, 0x99, 0x8b, 0x92, 0x79, 0x47, 0x2a, 0xe6, 0x3b)]
 interface ID2D1GradientStopCollection1(ID2D1GradientStopCollection1Vtbl): ID2D1GradientStopCollection(ID2D1GradientStopCollectionVtbl) {
     fn GetGradientStops1(
         gradientStops: *mut D2D1_GRADIENT_STOP,
-        gradientStopsCount: UINT32
+        gradientStopsCount: UINT32,
     ) -> c_void,
     fn GetPreInterpolationSpace() -> D2D1_COLOR_SPACE,
     fn GetPostInterpolationSpace() -> D2D1_COLOR_SPACE,
     fn GetBufferPrecision() -> D2D1_BUFFER_PRECISION,
-    fn GetColorInterpolationMode() -> D2D1_COLOR_INTERPOLATION_MODE
+    fn GetColorInterpolationMode() -> D2D1_COLOR_INTERPOLATION_MODE,
 });
 
 RIDL!(#[uuid(0x689f1f85, 0xc72e, 0x4e33, 0x8f, 0x19, 0x85, 0x75, 0x4e, 0xfd, 0x5a, 0xce)]
 interface ID2D1DrawingStateBlock1(ID2D1DrawingStateBlock1Vtbl): ID2D1DrawingStateBlock(ID2D1DrawingStateBlockVtbl) {
     fn GetDescription(
-        stateDescription: *mut D2D1_DRAWING_STATE_DESCRIPTION1 
+        stateDescription: *mut D2D1_DRAWING_STATE_DESCRIPTION1,
     ) -> c_void,
     fn SetDescription(
-        stateDescription: *const D2D1_DRAWING_STATE_DESCRIPTION1 
-    ) -> c_void
+        stateDescription: *const D2D1_DRAWING_STATE_DESCRIPTION1,
+    ) -> c_void,
 });
 
 RIDL!(#[uuid(0xe8f7fe7a, 0x191c, 0x466d, 0xad, 0x95, 0x97, 0x56, 0x78, 0xbd, 0xa9, 0x98)]
@@ -600,35 +624,35 @@ interface ID2D1DeviceContext(ID2D1DeviceContextVtbl): ID2D1RenderTarget(ID2D1Ren
         sourceData: *const c_void,
         pitch: UINT32,
         bitmapProperties: *const D2D1_BITMAP_PROPERTIES1,
-        bitmap: *mut *mut ID2D1Bitmap1 
+        bitmap: *mut *mut ID2D1Bitmap1,
     ) -> HRESULT,
     fn CreateBitmapFromWicBitmap(
         wicBitmapSource: *const IWICBitmapSource,
         bitmapProperties: *const D2D1_BITMAP_PROPERTIES1,
-        bitmap: *mut *mut ID2D1Bitmap1 
+        bitmap: *mut *mut ID2D1Bitmap1,
     ) -> HRESULT,
     fn CreateColorContext(
         space: D2D1_COLOR_SPACE,
         profile: *const BYTE,
         profileSize: UINT32,
-        colorContext: *mut *mut ID2D1ColorContext 
+        colorContext: *mut *mut ID2D1ColorContext,
     ) -> HRESULT,
     fn CreateColorContextFromFilename(
         filename: PCWSTR,
-        colorContext: *mut *mut ID2D1ColorContext 
+        colorContext: *mut *mut ID2D1ColorContext,
     ) -> HRESULT,
     fn CreateColorContextFromWicColorContext(
         wicColorContext: *const IWICColorContext,
-        colorContext: *mut *mut ID2D1ColorContext 
+        colorContext: *mut *mut ID2D1ColorContext,
     ) -> HRESULT,
     fn CreateBitmapFromDxgiSurface(
         surface: *const IDXGISurface,
         bitmapProperties: *const D2D1_BITMAP_PROPERTIES1,
-        bitmap: *mut *mut ID2D1Bitmap1 
+        bitmap: *mut *mut ID2D1Bitmap1,
     ) -> HRESULT,
     fn CreateEffect(
         effectId: REFCLSID,
-        effect: *mut *mut ID2D1Effect 
+        effect: *mut *mut ID2D1Effect,
     ) -> HRESULT,
     fn CreateGradientStopCollection(
         straightAlphaGradientStops: *const D2D1_GRADIENT_STOP,
@@ -638,64 +662,64 @@ interface ID2D1DeviceContext(ID2D1DeviceContextVtbl): ID2D1RenderTarget(ID2D1Ren
         bufferPrecision: D2D1_BUFFER_PRECISION,
         extendMode: D2D1_EXTEND_MODE,
         colorInterpolationMode: D2D1_COLOR_INTERPOLATION_MODE,
-        gradientStopCollection1: *mut *mut ID2D1GradientStopCollection1 
+        gradientStopCollection1: *mut *mut ID2D1GradientStopCollection1,
     ) -> HRESULT,
     fn CreateImageBrush(
         image: *const ID2D1Image,
         imageBrushProperties: *const D2D1_IMAGE_BRUSH_PROPERTIES,
         brushProperties: *const D2D1_BRUSH_PROPERTIES,
-        imageBrush: *mut *mut ID2D1ImageBrush 
+        imageBrush: *mut *mut ID2D1ImageBrush,
     ) -> HRESULT,
     fn CreateBitmapBrush(
         bitmap: *const ID2D1Bitmap,
         bitmapBrushProperties: *const D2D1_BITMAP_BRUSH_PROPERTIES1,
         brushProperties: *const D2D1_BRUSH_PROPERTIES,
-        bitmapBrush: *mut *mut ID2D1BitmapBrush1 
+        bitmapBrush: *mut *mut ID2D1BitmapBrush1,
     ) -> HRESULT,
     fn CreateCommandList(
-        commandList: *mut *mut ID2D1CommandList 
+        commandList: *mut *mut ID2D1CommandList,
     ) -> HRESULT,
     fn IsDxgiFormatSupported(
-        format: DXGI_FORMAT
+        format: DXGI_FORMAT,
     ) -> BOOL,
     fn IsBufferPrecisionSupported(
-        bufferPrecision: D2D1_BUFFER_PRECISION
+        bufferPrecision: D2D1_BUFFER_PRECISION,
     ) -> BOOL,
     fn GetImageLocalBounds(
         image: *const ID2D1Image,
-        localBounds: *mut D2D1_RECT_F 
+        localBounds: *mut D2D1_RECT_F,
     ) -> HRESULT,
     fn GetImageWorldBounds(
         image: *const ID2D1Image,
-        worldBounds: *mut D2D1_RECT_F 
+        worldBounds: *mut D2D1_RECT_F,
     ) -> HRESULT,
     fn GetGlyphRunWorldBounds(
         baselineOrigin: D2D1_POINT_2F,
         glyphRun: *const DWRITE_GLYPH_RUN,
         measuringMode: DWRITE_MEASURING_MODE,
-        bounds: *mut D2D1_RECT_F 
+        bounds: *mut D2D1_RECT_F,
     ) -> HRESULT,
     fn GetDevice(
-        device: *mut *mut ID2D1Device 
+        device: *mut *mut ID2D1Device,
     ) -> c_void,
     fn SetTarget(
-        image: *const ID2D1Image 
+        image: *const ID2D1Image,
     ) -> c_void,
     fn GetTarget(
-        image: *mut *mut ID2D1Image 
+        image: *mut *mut ID2D1Image,
     ) -> c_void,
     fn SetRenderingControls(
-        renderingControls: *const D2D1_RENDERING_CONTROLS 
+        renderingControls: *const D2D1_RENDERING_CONTROLS,
     ) -> c_void,
     fn GetRenderingControls(
-        renderingControls: *mut D2D1_RENDERING_CONTROLS 
+        renderingControls: *mut D2D1_RENDERING_CONTROLS,
     ) -> c_void,
     fn SetPrimitiveBlend(
-        primitiveBlend: D2D1_PRIMITIVE_BLEND
+        primitiveBlend: D2D1_PRIMITIVE_BLEND,
     ) -> c_void,
     fn GetPrimitiveBlend() -> D2D1_PRIMITIVE_BLEND,
     fn SetUnitMode(
-        unitMode: D2D1_UNIT_MODE
+        unitMode: D2D1_UNIT_MODE,
     ) -> c_void,
     fn GetUnitMode() -> D2D1_UNIT_MODE,
     fn DrawGlyphRun(
@@ -703,18 +727,18 @@ interface ID2D1DeviceContext(ID2D1DeviceContextVtbl): ID2D1RenderTarget(ID2D1Ren
         glyphRun: *const DWRITE_GLYPH_RUN,
         glyphRunDescription: *const DWRITE_GLYPH_RUN_DESCRIPTION,
         foregroundBrush: *const ID2D1Brush,
-        measuringMode: DWRITE_MEASURING_MODE 
+        measuringMode: DWRITE_MEASURING_MODE,
     ) -> c_void,
     fn DrawImage(
         image: *const ID2D1Image,
         targetOffset: *const D2D1_POINT_2F,
         imageRectangle: *const D2D1_RECT_F,
         interpolationMode: D2D1_INTERPOLATION_MODE,
-        compositeMode: D2D1_COMPOSITE_MODE 
+        compositeMode: D2D1_COMPOSITE_MODE,
     ) -> c_void,
     fn DrawGdiMetafile(
         gdiMetafile: *const ID2D1GdiMetafile,
-        targetOffset: *const D2D1_POINT_2F
+        targetOffset: *const D2D1_POINT_2F,
     ) -> c_void,
     fn DrawBitmap(
         bitmap: *const ID2D1Bitmap,
@@ -722,120 +746,120 @@ interface ID2D1DeviceContext(ID2D1DeviceContextVtbl): ID2D1RenderTarget(ID2D1Ren
         opacity: FLOAT,
         interpolationMode: D2D1_INTERPOLATION_MODE,
         sourceRectangle: *const D2D1_RECT_F,
-        perspectiveTransform: *const D2D1_MATRIX_4X4_F
+        perspectiveTransform: *const D2D1_MATRIX_4X4_F,
     ) -> c_void,
     fn PushLayer(
         layerParameters: *const D2D1_LAYER_PARAMETERS1,
-        layer: *const ID2D1Layer 
+        layer: *const ID2D1Layer,
     ) -> c_void,
     fn InvalidateEffectInputRectangle(
         effect: *const ID2D1Effect,
         input: UINT32,
-        inputRectangle: *const D2D1_RECT_F 
+        inputRectangle: *const D2D1_RECT_F,
     ) -> HRESULT,
     fn GetEffectInvalidRectangleCount(
         effect: *const ID2D1Effect,
-        rectangleCount: *mut UINT32 
+        rectangleCount: *mut UINT32,
     ) -> HRESULT,
     fn GetEffectInvalidRectangles(
         effect: *const ID2D1Effect,
         rectangles: *mut D2D1_RECT_F,
-        rectanglesCount: UINT32
+        rectanglesCount: UINT32,
     ) -> HRESULT,
     fn GetEffectRequiredInputRectangles(
         renderEffect: *const ID2D1Effect,
         renderImageRectangle: *const D2D1_RECT_F,
         inputDescriptions: *const D2D1_EFFECT_INPUT_DESCRIPTION,
         requiredInputRects: *mut D2D1_RECT_F,
-        inputCount: UINT32
+        inputCount: UINT32,
     ) -> HRESULT,
     fn FillOpacityMask(
         opacityMask: *const ID2D1Bitmap,
         brush: *const ID2D1Brush,
         destinationRectangle: *const D2D1_RECT_F,
-        sourceRectangle: *const D2D1_RECT_F
-    ) -> c_void
+        sourceRectangle: *const D2D1_RECT_F,
+    ) -> c_void,
 });
 
 RIDL!(#[uuid(0x47dd575d, 0xac05, 0x4cdd, 0x80, 0x49, 0x9b, 0x02, 0xcd, 0x16, 0xf4, 0x4c)]
 interface ID2D1Device(ID2D1DeviceVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
     fn CreateDeviceContext(
         options: D2D1_DEVICE_CONTEXT_OPTIONS,
-        deviceContext: *mut *mut ID2D1DeviceContext 
+        deviceContext: *mut *mut ID2D1DeviceContext,
     ) -> HRESULT,
     fn CreatePrintControl(
         wicFactory: *const IWICImagingFactory,
         documentTarget: *const IPrintDocumentPackageTarget,
         printControlProperties: *const D2D1_PRINT_CONTROL_PROPERTIES,
-        printControl: *mut *mut ID2D1PrintControl 
+        printControl: *mut *mut ID2D1PrintControl,
     ) -> HRESULT,
     fn SetMaximumTextureMemory(
-        maximumInBytes: UINT64
+        maximumInBytes: UINT64,
     ) -> c_void,
     fn GetMaximumTextureMemory() -> UINT64,
     fn ClearResources(
-        millisecondsSinceUse: UINT32
-    ) -> c_void
+        millisecondsSinceUse: UINT32,
+    ) -> c_void,
 });
 
 RIDL!(#[uuid(0xbb12d362, 0xdaee, 0x4b9a, 0xaa, 0x1d, 0x14, 0xba, 0x40, 0x1c, 0xfa, 0x1f)]
 interface ID2D1Factory1(ID2D1Factory1Vtbl): ID2D1Factory(ID2D1FactoryVtbl) {
     fn CreateDevice(
         dxgiDevice: *const IDXGIDevice,
-        d2dDevice: *mut *mut ID2D1Device 
+        d2dDevice: *mut *mut ID2D1Device,
     ) -> HRESULT,
     fn CreateStrokeStyle(
         strokeStyleProperties: *const D2D1_STROKE_STYLE_PROPERTIES1,
         dashes: *const FLOAT,
         dashesCount: UINT32,
-        strokeStyle: *mut *mut ID2D1StrokeStyle1 
+        strokeStyle: *mut *mut ID2D1StrokeStyle1,
     ) -> HRESULT,
     fn CreatePathGeometry(
-        pathGeometry: *mut *mut ID2D1PathGeometry1 
+        pathGeometry: *mut *mut ID2D1PathGeometry1,
     ) -> HRESULT,
     fn CreateDrawingStateBlock(
         drawingStateDescription: *const D2D1_DRAWING_STATE_DESCRIPTION1,
         textRenderingParams: *const IDWriteRenderingParams,
-        drawingStateBlock: *mut *mut ID2D1DrawingStateBlock1 
+        drawingStateBlock: *mut *mut ID2D1DrawingStateBlock1,
     ) -> HRESULT,
     fn CreateGdiMetafile(
         metafileStream: *const IStream,
-        metafile: *mut *mut ID2D1GdiMetafile 
+        metafile: *mut *mut ID2D1GdiMetafile,
     ) -> HRESULT,
     fn RegisterEffectFromStream(
         classId: REFCLSID,
         propertyXml: *const IStream,
         bindings: *const D2D1_PROPERTY_BINDING,
         bindingsCount: UINT32,
-        effectFactory: PD2D1_EFFECT_FACTORY
+        effectFactory: PD2D1_EFFECT_FACTORY,
     ) -> HRESULT,
     fn RegisterEffectFromString(
         classId: REFCLSID,
         propertyXml: PCWSTR,
         bindings: *const D2D1_PROPERTY_BINDING,
         bindingsCount: UINT32,
-        effectFactory: PD2D1_EFFECT_FACTORY  
+        effectFactory: PD2D1_EFFECT_FACTORY,
     ) -> HRESULT,
     fn UnregisterEffect(
-        classId: REFCLSID 
+        classId: REFCLSID,
     ) -> HRESULT,
     fn GetRegisteredEffects(
         effects: *mut CLSID,
         effectsCount: UINT32,
         effectsReturned: *mut UINT32,
-        effectsRegistered: *mut UINT32 
+        effectsRegistered: *mut UINT32,
     ) -> HRESULT,
     fn GetEffectProperties(
         effectId: REFCLSID,
-        properties: *mut *mut ID2D1Properties 
-    ) -> HRESULT
+        properties: *mut *mut ID2D1Properties,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x31e6e7bc, 0xe0ff, 0x4d46, 0x8c, 0x64, 0xa0, 0xa8, 0xc4, 0x1c, 0x15, 0xd3)]
 interface ID2D1Multithread(ID2D1MultithreadVtbl): IUnknown(IUnknownVtbl) {
     fn GetMultithreadProtected() -> BOOL,
     fn Enter() -> c_void,
-    fn Leave() -> c_void
+    fn Leave() -> c_void,
 });
 
 extern "system" {

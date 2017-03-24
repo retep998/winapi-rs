@@ -39,27 +39,27 @@ interface IPropertyBag2(IPropertyBag2Vtbl): IUnknown(IUnknownVtbl) {
         pPropBag: *const PROPBAG2,
         pErrLog: *const IErrorLog,
         pvarValue: *mut VARIANT,
-        phrError: *mut HRESULT
+        phrError: *mut HRESULT,
     ) -> HRESULT,
     fn Write(
         cProperties: ULONG,
         pPropBag: *const PROPBAG2,
-        pvarValue: *const VARIANT
+        pvarValue: *const VARIANT,
     ) -> HRESULT,
     fn CountProperties(
-        pcProperties: *mut ULONG
+        pcProperties: *mut ULONG,
     ) -> HRESULT,
     fn GetPropertyInfo(
         iProperty: ULONG,
         cProperties: ULONG,
         pPropBag: *mut PROPBAG2,
-        pcProperties: *mut ULONG
+        pcProperties: *mut ULONG,
     ) -> HRESULT,
     fn LoadObject(
         pstrName: LPCOLESTR,
         dwHint: DWORD,
         pUnkObject: *const IUnknown,
-        pErrLog: *const IErrorLog
-    ) -> HRESULT
+        pErrLog: *const IErrorLog,
+    ) -> HRESULT,
 });
 pub type LPPROPERTYBAG2 = *mut IPropertyBag2;

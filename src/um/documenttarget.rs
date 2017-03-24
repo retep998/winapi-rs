@@ -16,12 +16,12 @@ RIDL!{#[uuid(0x1b8efec4, 0x3019, 0x4c27, 0x96, 0x4e, 0x36, 0x72, 0x02, 0x15, 0x6
 interface IPrintDocumentPackageTarget(IPrintDocumentPackageTargetVtbl): IUnknown(IUnknownVtbl) {
     fn GetPackageTargetTypes(
         targetCount: *mut UINT32,
-        targetTypes: *mut *mut GUID
+        targetTypes: *mut *mut GUID,
     ) -> HRESULT,
     fn GetPackageTarget(
         guidTargetType: REFGUID,
         riid: REFIID,
-        ppvTarget: *mut *mut c_void
+        ppvTarget: *mut *mut c_void,
     ) -> HRESULT,
-    fn Cancel() -> HRESULT
+    fn Cancel() -> HRESULT,
 }}

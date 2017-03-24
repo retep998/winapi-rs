@@ -706,64 +706,64 @@ RIDL!(#[uuid(0x00000040, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xf
 interface IWICPalette(IWICPaletteVtbl): IUnknown(IUnknownVtbl) {
     fn InitializePredefined(
         ePaletteType: WICBitmapPaletteType,
-        fAddTransparentColor: BOOL
+        fAddTransparentColor: BOOL,
     ) -> HRESULT,
     fn InitializeCustom(
         pColors: *const WICColor,
-        cCount: UINT
+        cCount: UINT,
     ) -> HRESULT,
     fn InitializeFromBitmap(
         pISurface: *const IWICBitmapSource,
         cCount: UINT,
-        fAddTransparentColor: BOOL
+        fAddTransparentColor: BOOL,
     ) -> HRESULT,
     fn InitializeFromPalette(
-        pIPalette: *const IWICPalette
+        pIPalette: *const IWICPalette,
     ) -> HRESULT,
     fn GetType(
-        pePaletteType: *mut WICBitmapPaletteType
+        pePaletteType: *mut WICBitmapPaletteType,
     ) -> HRESULT,
     fn GetColorCount(
-        pcCount: *mut UINT
+        pcCount: *mut UINT,
     ) -> HRESULT,
     fn GetColors(
         cCount: UINT,
         pColors: *mut WICColor,
-        pcActualColors: *mut UINT
+        pcActualColors: *mut UINT,
     ) -> HRESULT,
     fn IsBlackWhite(
-        pfIsBlackWhite: *mut BOOL
+        pfIsBlackWhite: *mut BOOL,
     ) -> HRESULT,
     fn IsGrayscale(
-        pfIsGrayscale: *mut BOOL
+        pfIsGrayscale: *mut BOOL,
     ) -> HRESULT,
     fn HasAlpha(
-        pfHasAlpha: *mut BOOL
-    ) -> HRESULT
+        pfHasAlpha: *mut BOOL,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x00000120, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmapSource(IWICBitmapSourceVtbl): IUnknown(IUnknownVtbl) {
     fn GetSize(
         puiWidth: *mut UINT,
-        puiHeight: *mut UINT
+        puiHeight: *mut UINT,
     ) -> HRESULT,
     fn GetPixelFormat(
-        pPixelFormat: *mut WICPixelFormatGUID
+        pPixelFormat: *mut WICPixelFormatGUID,
     ) -> HRESULT,
     fn GetResolution(
         pDpiX: *mut c_double,
-        pDpiY: *mut c_double
+        pDpiY: *mut c_double,
     ) -> HRESULT,
     fn CopyPalette(
-        pIPalette: *const IWICPalette
+        pIPalette: *const IWICPalette,
     ) -> HRESULT,
     fn CopyPixels(
         prc: *const WICRect,
         cbStride: UINT,
         cbBufferSize: UINT,
-        pbBuffer: *mut BYTE
-    ) -> HRESULT
+        pbBuffer: *mut BYTE,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x00000301, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
@@ -774,13 +774,13 @@ interface IWICFormatConverter(IWICFormatConverterVtbl): IWICBitmapSource(IWICBit
         dither: WICBitmapDitherType,
         pIPalette: *const IWICPalette,
         alphaThresholdPercent: c_double,
-        paletteTranslate: WICBitmapPaletteType
+        paletteTranslate: WICBitmapPaletteType,
     ) -> HRESULT,
     fn CanConvert(
         srcPixelFormat: REFWICPixelFormatGUID,
         dstPixelFormat: REFWICPixelFormatGUID,
-        pfCanConvert: *mut BOOL
-    ) -> HRESULT
+        pfCanConvert: *mut BOOL,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xbebee9cb, 0x83b0, 0x4dcc, 0x81, 0x32, 0xb0, 0xaa, 0xa5, 0x5e, 0xac, 0x96)]
@@ -792,14 +792,14 @@ interface IWICPlanarFormatConverter(IWICPlanarFormatConverterVtbl): IWICBitmapSo
         dither: WICBitmapDitherType,
         pIPalette: *const IWICPalette,
         alphaThresholdPercent: c_double,
-        paletteTranslate: WICBitmapPaletteType
+        paletteTranslate: WICBitmapPaletteType,
     ) -> HRESULT,
     fn CanConvert(
         pSrcPixelFormats: *const WICPixelFormatGUID,
         cSrcPlanes: UINT,
         dstPixelFormat: REFWICPixelFormatGUID,
-        pfCanConvert: *mut BOOL
-    ) -> HRESULT
+        pfCanConvert: *mut BOOL,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x00000302, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
@@ -808,42 +808,42 @@ interface IWICBitmapScaler(IWICBitmapScalerVtbl): IWICBitmapSource(IWICBitmapSou
         pISource: *const IWICBitmapSource,
         uiWidth: UINT,
         uiHeight: UINT,
-        mode: WICBitmapInterpolationMode
-    ) -> HRESULT
+        mode: WICBitmapInterpolationMode,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xe4fbcf03, 0x223d, 0x4e81, 0x93, 0x33, 0xd6, 0x35, 0x55, 0x6d, 0xd1, 0xb5)]
 interface IWICBitmapClipper(IWICBitmapClipperVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
         pISource: *const IWICBitmapSource,
-        prc: *const WICRect
-    ) -> HRESULT
+        prc: *const WICRect,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x5009834f, 0x2d6a, 0x41ce, 0x9e, 0x1b, 0x17, 0xc5, 0xaf, 0xf7, 0xa7, 0x82)]
 interface IWICBitmapFlipRotator(IWICBitmapFlipRotatorVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
         pISource: *const IWICBitmapSource,
-        options: WICBitmapTransformOptions
-    ) -> HRESULT
+        options: WICBitmapTransformOptions,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x00000123, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmapLock(IWICBitmapLockVtbl): IUnknown(IUnknownVtbl) {
     fn GetSize(
         puiWidth: *mut UINT,
-        puiHeight: *mut UINT
+        puiHeight: *mut UINT,
     ) -> HRESULT,
     fn GetStride(
-        pcbStride: *mut UINT
+        pcbStride: *mut UINT,
     ) -> HRESULT,
     fn GetDataPointer(
         pcbBufferSize: *mut UINT,
-        ppbData: *mut WICInProcPointer
+        ppbData: *mut WICInProcPointer,
     ) -> HRESULT,
     fn GetPixelFormat(
-        pPixelFormat: *mut WICPixelFormatGUID
-    ) -> HRESULT
+        pPixelFormat: *mut WICPixelFormatGUID,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x00000121, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
@@ -851,40 +851,40 @@ interface IWICBitmap(IWICBitmapVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Lock(
         prcLock: *const WICRect,
         flags: DWORD,
-        ppILock: *mut *mut IWICBitmapLock
+        ppILock: *mut *mut IWICBitmapLock,
     ) -> HRESULT,
     fn SetPalette(
-        pIPalette: *const IWICPalette
+        pIPalette: *const IWICPalette,
     ) -> HRESULT,
     fn SetResolution(
         dpiX: c_double,
-        dpiY: c_double
-    ) -> HRESULT
+        dpiY: c_double,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x3c613a02, 0x34b2, 0x44ea, 0x9a, 0x7c, 0x45, 0xae, 0xa9, 0xc6, 0xfd, 0x6d)]
 interface IWICColorContext(IWICColorContextVtbl): IUnknown(IUnknownVtbl) {
     fn InitializeFromFilename(
-        wzFilename: LPCWSTR
+        wzFilename: LPCWSTR,
     ) -> HRESULT,
     fn InitializeFromMemory(
         pbBuffer: *const BYTE,
-        cbBufferSize: UINT
+        cbBufferSize: UINT,
     ) -> HRESULT,
     fn InitializeFromExifColorSpace(
-        value: UINT
+        value: UINT,
     ) -> HRESULT,
     fn GetType(
-        pType: *mut WICColorContextType
+        pType: *mut WICColorContextType,
     ) -> HRESULT,
     fn GetProfileBytes(
         cbBuffer: UINT,
         pbBuffer: *mut BYTE,
-        pcbActual: *mut UINT
+        pcbActual: *mut UINT,
     ) -> HRESULT,
     fn GetExifColorSpace(
-        pValue: *mut UINT
-    ) -> HRESULT
+        pValue: *mut UINT,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xb66f034f, 0xd0e2, 0x40ab, 0xb4, 0x36, 0x6d, 0xe3, 0x9e, 0x32, 0x1a, 0x94)]
@@ -893,8 +893,8 @@ interface IWICColorTransform(IWICColorTransformVtbl): IWICBitmapSource(IWICBitma
          pIBitmapSource: *const IWICBitmapSource,
          pIContextSource: *const IWICColorContext,
          pIContextDest: *const IWICColorContext,
-         pixelFmtDest: REFWICPixelFormatGUID
-    ) -> HRESULT
+         pixelFmtDest: REFWICPixelFormatGUID,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xb84e2c09, 0x78c9, 0x4ac4, 0x8b, 0xd3, 0x52, 0x4a, 0xe1, 0x66, 0x3a, 0x2f)]
@@ -902,28 +902,28 @@ interface IWICFastMetadataEncoder(IWICFastMetadataEncoderVtbl): IUnknown(IUnknow
     fn Commit(
     ) -> HRESULT,
     fn GetMetadataQueryWriter(
-        ppIMetadataQueryWriter: *mut *mut IWICMetadataQueryWriter
-    ) -> HRESULT
+        ppIMetadataQueryWriter: *mut *mut IWICMetadataQueryWriter,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x135ff860, 0x22b7, 0x4ddf, 0xb0, 0xf6, 0x21, 0x8f, 0x4f, 0x29, 0x9a, 0x43)]
 interface IWICStream(IWICStreamVtbl): IStream(IStreamVtbl) {
     fn InitializeFromIStream(
-        pIStream: *const IStream
+        pIStream: *const IStream,
     ) -> HRESULT,
     fn InitializeFromFilename(
         wzFileName: LPCWSTR,
-        dwDesiredAccess: DWORD
+        dwDesiredAccess: DWORD,
     ) -> HRESULT,
     fn InitializeFromMemory(
         pbBuffer: WICInProcPointer,
-        cbBufferSize: DWORD
+        cbBufferSize: DWORD,
     ) -> HRESULT,
     fn InitializeFromIStreamRegion(
         pIStream: *const IStream,
         ulOffset: ULARGE_INTEGER,
-        ulMaxSize: ULARGE_INTEGER
-    ) -> HRESULT
+        ulMaxSize: ULARGE_INTEGER,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xdc2bb46d, 0x3f07, 0x481e, 0x86, 0x25, 0x22, 0x0c, 0x4a, 0xed, 0xbb, 0x33)]
@@ -933,124 +933,124 @@ interface IWICEnumMetadataItem(IWICEnumMetadataItemVtbl): IUnknown(IUnknownVtbl)
         rgeltSchema: *mut PROPVARIANT,
         rgeltId: *mut PROPVARIANT,
         rgeltValue: *mut PROPVARIANT,
-        pceltFetched: *mut ULONG
+        pceltFetched: *mut ULONG,
      ) -> HRESULT,
     fn Skip(
-        celt: ULONG
+        celt: ULONG,
     ) -> HRESULT,
     fn Reset() -> HRESULT,
     fn Clone(
-        ppIEnumMetadataItem: *mut *mut IWICEnumMetadataItem
-    ) -> HRESULT
+        ppIEnumMetadataItem: *mut *mut IWICEnumMetadataItem,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x30989668, 0xe1c9, 0x4597, 0xb3, 0x95, 0x45, 0x8e, 0xed, 0xb8, 0x08, 0xdf)]
 interface IWICMetadataQueryReader(IWICMetadataQueryReaderVtbl): IUnknown(IUnknownVtbl) {
     fn GetContainerFormat(
-        pguidContainerFormat: *mut GUID
+        pguidContainerFormat: *mut GUID,
     ) -> HRESULT,
     fn GetLocation(
         cchMaxLength: UINT,
         wzNamespace: *mut WCHAR,
-        pcchActualLength: *mut UINT
+        pcchActualLength: *mut UINT,
     ) -> HRESULT,
     fn GetMetadataByName(
         wzName: LPCWSTR,
-        pvarValue: *mut PROPVARIANT
+        pvarValue: *mut PROPVARIANT,
     ) -> HRESULT,
     fn GetEnumerator(
-        ppIEnumString: *mut *mut IEnumString
-    ) -> HRESULT
+        ppIEnumString: *mut *mut IEnumString,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xa721791a, 0x0def, 0x4d06, 0xbd, 0x91, 0x21, 0x18, 0xbf, 0x1d, 0xb1, 0x0b)]
 interface IWICMetadataQueryWriter(IWICMetadataQueryWriterVtbl): IWICMetadataQueryReader(IWICMetadataQueryReaderVtbl) {
     fn SetMetadataByName(
        wzName: LPCWSTR,
-       pvarValue: *const PROPVARIANT
+       pvarValue: *const PROPVARIANT,
     ) -> HRESULT,
     fn RemoveMetadataByName(
-       wzName: LPCWSTR
-    ) -> HRESULT
+       wzName: LPCWSTR,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x00000103, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmapEncoder(IWICBitmapEncoderVtbl): IUnknown(IUnknownVtbl) {
     fn Initialize(
         pIStream: *const IStream,
-        cacheOption: WICBitmapEncoderCacheOption
+        cacheOption: WICBitmapEncoderCacheOption,
     ) -> HRESULT,
     fn GetContainerFormat(
-        pguidContainerFormat: *mut GUID
+        pguidContainerFormat: *mut GUID,
     ) -> HRESULT,
     fn GetEncoderInfo(
-        ppIEncoderInfo: *mut *mut IWICBitmapEncoderInfo
+        ppIEncoderInfo: *mut *mut IWICBitmapEncoderInfo,
     ) -> HRESULT,
     fn SetColorContexts(
         cCount: UINT,
-        ppIColorContext: *const *const IWICColorContext
+        ppIColorContext: *const *const IWICColorContext,
     ) -> HRESULT,
     fn SetPalette(
-        pIPalette: *const IWICPalette
+        pIPalette: *const IWICPalette,
     ) -> HRESULT,
     fn SetThumbnail(
-        pIThumbnail: *const IWICBitmapSource
+        pIThumbnail: *const IWICBitmapSource,
     ) -> HRESULT,
     fn SetPreview(
-        pIPreview: *const IWICBitmapSource
+        pIPreview: *const IWICBitmapSource,
     ) -> HRESULT,
     fn CreateNewFrame(
         ppIFrameEncode: *mut *mut IWICBitmapFrameEncode,
-        ppIEncoderOptions: *mut *mut IPropertyBag2
+        ppIEncoderOptions: *mut *mut IPropertyBag2,
     ) -> HRESULT,
     fn Commit(
     ) -> HRESULT,
     fn GetMetadataQueryWriter(
-        ppIMetadataQueryWriter: *mut *mut IWICMetadataQueryWriter
-    ) -> HRESULT
+        ppIMetadataQueryWriter: *mut *mut IWICMetadataQueryWriter,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x00000105, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmapFrameEncode(IWICBitmapFrameEncodeVtbl): IUnknown(IUnknownVtbl) {
     fn Initialize(
-        pIEncoderOptions: *const IPropertyBag2
+        pIEncoderOptions: *const IPropertyBag2,
     ) -> HRESULT,
     fn SetSize(
         uiWidth: UINT,
-        uiHeight: UINT
+        uiHeight: UINT,
     ) -> HRESULT,
     fn SetResolution(
         dpiX: c_double,
-        dpiY: c_double
+        dpiY: c_double,
     ) -> HRESULT,
     fn SetPixelFormat(
-        pPixelFormat: *mut WICPixelFormatGUID
+        pPixelFormat: *mut WICPixelFormatGUID,
     ) -> HRESULT,
     fn SetColorContexts(
         cCount: UINT,
-        ppIColorContext: *const *const IWICColorContext
+        ppIColorContext: *const *const IWICColorContext,
     ) -> HRESULT,
     fn SetPalette(
-        pIPalette: *const IWICPalette
+        pIPalette: *const IWICPalette,
     ) -> HRESULT,
     fn SetThumbnail(
-        pIThumbnail: *const IWICBitmapSource
+        pIThumbnail: *const IWICBitmapSource,
     ) -> HRESULT,
     fn WritePixels(
         lineCount: UINT,
         cbStride: UINT,
         cbBufferSize: UINT,
-        pbPixels: *const BYTE
+        pbPixels: *const BYTE,
     ) -> HRESULT,
     fn WriteSource(
         pIBitmapSource: *const IWICBitmapSource,
-        prc: *const WICRect
+        prc: *const WICRect,
     ) -> HRESULT,
     fn Commit(
     ) -> HRESULT,
     fn GetMetadataQueryWriter(
-        ppIMetadataQueryWriter: *mut *mut IWICMetadataQueryWriter
-    ) -> HRESULT
+        ppIMetadataQueryWriter: *mut *mut IWICMetadataQueryWriter,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xf928b7b8, 0x2221, 0x40c1, 0xb7, 0x2e, 0x7e, 0x82, 0xf1, 0x97, 0x4d, 0x1a)]
@@ -1058,13 +1058,13 @@ interface IWICPlanarBitmapFrameEncode(IWICPlanarBitmapFrameEncodeVtbl): IUnknown
     fn WritePixels(
         lineCount: UINT,
         pPlanes: *const WICBitmapPlane,
-        cPlanes: UINT
+        cPlanes: UINT,
     ) -> HRESULT,
     fn WriteSource(
         ppPlanes: *const *const IWICBitmapSource,
         cPlanes: UINT,
-        prcSource: *const WICRect
-    ) -> HRESULT
+        prcSource: *const WICRect,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x04c75bf8, 0x3ce1, 0x473b, 0xac, 0xc5, 0x3c, 0xc4, 0xf5, 0xe9, 0x49, 0x99)]
@@ -1072,60 +1072,60 @@ interface IWICImageEncoder(IWICImageEncoderVtbl) : IUnknown(IUnknownVtbl){
     fn WriteFrame(
         pImage: *const ID2D1Image,
         pFrameEncode: *const IWICBitmapFrameEncode,
-        pImageParameters: *const WICImageParameters
+        pImageParameters: *const WICImageParameters,
     ) -> HRESULT,
     fn WriteFrameThumbnail(
         pImage: *const ID2D1Image,
         pFrameEncode: *const IWICBitmapFrameEncode,
-        pImageParameters: *const WICImageParameters
+        pImageParameters: *const WICImageParameters,
     ) -> HRESULT,
     fn WriteThumbnail(
         pImage: *const ID2D1Image,
         pEncoder: *const IWICBitmapEncoder,
-        pImageParameters: *const WICImageParameters
-    ) -> HRESULT
+        pImageParameters: *const WICImageParameters,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x9edde9e7, 0x8dee, 0x47ea, 0x99, 0xdf, 0xe6, 0xfa, 0xf2, 0xed, 0x44, 0xbf)]
 interface IWICBitmapDecoder(IWICBitmapDecoderVtbl): IUnknown(IUnknownVtbl) {
     fn QueryCapability(
         pIStream: *const IStream,
-        pdwCapability: *mut DWORD
+        pdwCapability: *mut DWORD,
     ) -> HRESULT,
     fn Initialize(
         pIStream: *const IStream,
-        cacheOptions: WICDecodeOptions
+        cacheOptions: WICDecodeOptions,
     ) -> HRESULT,
     fn GetContainerFormat(
-        pguidContainerFormat: *mut GUID
+        pguidContainerFormat: *mut GUID,
     ) -> HRESULT,
     fn GetDecoderInfo(
-        ppIDecoderInfo: *mut *mut IWICBitmapDecoderInfo
+        ppIDecoderInfo: *mut *mut IWICBitmapDecoderInfo,
     ) -> HRESULT,
     fn CopyPalette(
-        pIPalette: *const IWICPalette
+        pIPalette: *const IWICPalette,
     ) -> HRESULT,
     fn GetMetadataQueryReader(
-        ppIMetadataQueryReader: *mut *mut IWICMetadataQueryReader
+        ppIMetadataQueryReader: *mut *mut IWICMetadataQueryReader,
     ) -> HRESULT,
     fn GetPreview(
-        ppIBitmapSource: *mut *mut IWICBitmapSource
+        ppIBitmapSource: *mut *mut IWICBitmapSource,
     ) -> HRESULT,
     fn GetColorContexts(
         cCount: UINT,
         ppIColorContexts: *mut *mut IWICColorContext,
-        pcActualCount: *mut UINT
+        pcActualCount: *mut UINT,
     ) -> HRESULT,
     fn GetThumbnail(
-        ppIThumbnail: *mut *mut IWICBitmapSource
+        ppIThumbnail: *mut *mut IWICBitmapSource,
     ) -> HRESULT,
     fn GetFrameCount(
-        pCount: *mut UINT
+        pCount: *mut UINT,
     ) -> HRESULT,
     fn GetFrame(
         index: UINT,
-        ppIBitmapFrame: *mut *mut IWICBitmapFrameDecode
-    ) -> HRESULT
+        ppIBitmapFrame: *mut *mut IWICBitmapFrameDecode,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x3b16811b, 0x6a43, 0x4ec9, 0xb7, 0x13, 0x3d, 0x5a, 0x0c, 0x13, 0xb9, 0x40)]
@@ -1138,19 +1138,19 @@ interface IWICBitmapSourceTransform(IWICBitmapSourceTransformVtbl): IUnknown(IUn
        dstTransform: WICBitmapTransformOptions,
        nStride: UINT,
        cbBufferSize: UINT,
-       pbBuffer: *mut BYTE
+       pbBuffer: *mut BYTE,
     ) -> HRESULT,
     fn GetClosestSize(
        puiWidth: *mut UINT,
-       puiHeight: *mut UINT
+       puiHeight: *mut UINT,
     ) -> HRESULT,
     fn GetClosestPixelFormat(
-       pguidDstFormat: *mut WICPixelFormatGUID
+       pguidDstFormat: *mut WICPixelFormatGUID,
     ) -> HRESULT,
     fn DoesSupportTransform(
        dstTransform: WICBitmapTransformOptions,
-       pfIsSupported: *mut BOOL
-    ) -> HRESULT
+       pfIsSupported: *mut BOOL,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x3aff9cce, 0xbe95, 0x4303, 0xb9, 0x27, 0xe7, 0xd1, 0x6f, 0xf4, 0xa6, 0x13)]
@@ -1163,7 +1163,7 @@ interface IWICPlanarBitmapSourceTransform(IWICPlanarBitmapSourceTransformVtbl): 
         pguidDstFormats: *const WICPixelFormatGUID,
         pPlaneDescriptions: *mut WICBitmapPlaneDescription,
         cPlanes: UINT,
-        pfIsSupported: *mut BOOL
+        pfIsSupported: *mut BOOL,
     ) -> HRESULT,
     fn CopyPixels(
         prcSource: *const WICRect,
@@ -1172,36 +1172,36 @@ interface IWICPlanarBitmapSourceTransform(IWICPlanarBitmapSourceTransformVtbl): 
         dstTransform: WICBitmapTransformOptions,
         dstPlanarOptions: WICPlanarOptions,
         pDstPlanes: *const WICBitmapPlane,
-        cPlanes: UINT
-    ) -> HRESULT
+        cPlanes: UINT,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x3b16811b, 0x6a43, 0x4ec9, 0xa8, 0x13, 0x3d, 0x93, 0x0c, 0x13, 0xb9, 0x40)]
 interface IWICBitmapFrameDecode(IWICBitmapFrameDecodeVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
    fn GetMetadataQueryReader(
-       ppIMetadataQueryReader: *mut *mut IWICMetadataQueryReader
+       ppIMetadataQueryReader: *mut *mut IWICMetadataQueryReader,
    ) -> HRESULT,
    fn GetColorContexts(
         cCount: UINT,
         ppIColorContexts: *mut *mut IWICColorContext,
-        pcActualCount: *mut UINT
+        pcActualCount: *mut UINT,
    ) -> HRESULT,
    fn GetThumbnail(
-       ppIThumbnail: *mut *mut IWICBitmapSource
-   ) -> HRESULT
+       ppIThumbnail: *mut *mut IWICBitmapSource,
+   ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xdaac296f, 0x7aa5, 0x4dbf, 0x8d, 0x15, 0x22, 0x5c, 0x59, 0x76, 0xf8, 0x91)]
 interface IWICProgressiveLevelControl(IWICProgressiveLevelControlVtbl): IUnknown(IUnknownVtbl) {
     fn GetLevelCount(
-        pcLevels: *mut UINT
+        pcLevels: *mut UINT,
     ) -> HRESULT,
     fn GetCurrentLevel(
-        pnLevel: *mut UINT
+        pnLevel: *mut UINT,
     ) -> HRESULT,
     fn SetCurrentLevel(
-        nLevel: UINT
-    ) -> HRESULT
+        nLevel: UINT,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x4776f9cd, 0x9517, 0x45fa, 0xbf, 0x24, 0xe8, 0x9c, 0x5e, 0xc5, 0xc6, 0x0c)]
@@ -1209,15 +1209,15 @@ interface IWICProgressCallback(IWICProgressCallbackVtbl): IUnknown(IUnknownVtbl)
     fn Notify(
         uFrameNum: ULONG,
         operation: WICProgressOperation,
-        dblProgress: c_double
-    ) -> HRESULT
+        dblProgress: c_double,
+    ) -> HRESULT,
 });
 
 FN!{stdcall PFNProgressNotification(
     pvData: LPVOID,
     uFrameNum: ULONG,
     operation: WICProgressOperation,
-    dblProgress: c_double
+    dblProgress: c_double,
 ) -> HRESULT}
 
 RIDL!(#[uuid(0x64c1024e, 0xc3cf, 0x4462, 0x80, 0x78, 0x88, 0xc2, 0xb1, 0x1c, 0x46, 0xd9)]
@@ -1225,44 +1225,44 @@ interface IWICBitmapCodecProgressNotification(IWICBitmapCodecProgressNotificatio
     fn RegisterProgressNotification(
             pfnProgressNotification: PFNProgressNotification,
             pvData: LPVOID,
-            dwProgressFlags: DWORD
-    ) -> HRESULT
+            dwProgressFlags: DWORD,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x23bc3f0a, 0x698b, 0x4357, 0x88, 0x6b, 0xf2, 0x4d, 0x50, 0x67, 0x13, 0x34)]
 interface IWICComponentInfo(IWICComponentInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetComponentType(
-        pType: *mut WICComponentType
+        pType: *mut WICComponentType,
     ) -> HRESULT,
     fn GetCLSID(
-        pclsid: *mut CLSID
+        pclsid: *mut CLSID,
     ) -> HRESULT,
     fn GetSigningStatus(
-        pStatus: *mut DWORD
+        pStatus: *mut DWORD,
     ) -> HRESULT,
     fn GetAuthor(
         cchAuthor: UINT,
         wzAuthor: *mut WCHAR,
-        pcchActual: *mut UINT
+        pcchActual: *mut UINT,
     ) -> HRESULT,
     fn GetVendorGUID(
-        pguidVendor: *mut GUID
+        pguidVendor: *mut GUID,
     ) -> HRESULT,
     fn GetVersion(
         cchVersion: UINT,
         wzVersion: *mut WCHAR,
-        pcchActual: *mut UINT
+        pcchActual: *mut UINT,
     ) -> HRESULT,
     fn GetSpecVersion(
         cchSpecVersion: UINT,
         wzSpecVersion: *mut WCHAR,
-        pcchActual: *mut UINT
+        pcchActual: *mut UINT,
     ) -> HRESULT,
     fn GetFriendlyName(
         cchFriendlyName: UINT,
         wzFriendlyName: *mut WCHAR,
-        pcchActual: *mut UINT
-    ) -> HRESULT
+        pcchActual: *mut UINT,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x9f34fb65, 0x13f4, 0x4f15, 0xbc, 0x57, 0x37, 0x26, 0xb5, 0xe5, 0x3d, 0x9f)]
@@ -1270,71 +1270,71 @@ interface IWICFormatConverterInfo(IWICFormatConverterInfoVtbl): IWICComponentInf
     fn GetPixelFormats(
         cFormats: UINT,
         pPixelFormatGUIDs: *mut WICPixelFormatGUID,
-        pcActual: *mut UINT
+        pcActual: *mut UINT,
     ) -> HRESULT,
     fn CreateInstance(
-        ppIConverter: *mut *mut IWICFormatConverter
-    ) -> HRESULT
+        ppIConverter: *mut *mut IWICFormatConverter,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xe87a44c4, 0xb76e, 0x4c47, 0x8b, 0x09, 0x29, 0x8e, 0xb1, 0x2a, 0x27, 0x14)]
 interface IWICBitmapCodecInfo(IWICBitmapCodecInfoVtbl): IWICComponentInfo(IWICComponentInfoVtbl) {
     fn GetContainerFormat(
-        pguidContainerFormat: *mut GUID
+        pguidContainerFormat: *mut GUID,
     ) -> HRESULT,
     fn GetPixelFormats(
         cFormats: UINT,
         pguidPixelFormats: *mut GUID,
-        pcActual: *mut UINT
+        pcActual: *mut UINT,
     ) -> HRESULT,
     fn GetColorManagementVersion(
         cchColorManagementVersion: UINT,
         wzColorManagementVersion: *mut WCHAR,
-        pcchActual: *mut UINT
+        pcchActual: *mut UINT,
     ) -> HRESULT,
     fn GetDeviceManufacturer(
         cchDeviceManufacturer: UINT,
         wzDeviceManufacturer: *mut WCHAR,
-        pcchActual: *mut UINT
+        pcchActual: *mut UINT,
     ) -> HRESULT,
     fn GetDeviceModels(
         cchDeviceModels: UINT,
         wzDeviceModels: *mut WCHAR,
-        pcchActual: *mut UINT
+        pcchActual: *mut UINT,
     ) -> HRESULT,
     fn GetMimeTypes(
         cchMimeTypes: UINT,
         wzMimeTypes: *mut WCHAR,
-        pcchActual: *mut UINT
+        pcchActual: *mut UINT,
     ) -> HRESULT,
     fn GetFileExtensions(
         cchFileExtensions: UINT,
         wzFileExtensions: *mut WCHAR,
-        pcchActual: *mut UINT
+        pcchActual: *mut UINT,
     ) -> HRESULT,
     fn DoesSupportAnimation(
-        pfSupportAnimation: *mut BOOL
+        pfSupportAnimation: *mut BOOL,
     ) -> HRESULT,
     fn DoesSupportChromakey(
-        pfSupportChromakey: *mut BOOL
+        pfSupportChromakey: *mut BOOL,
     ) -> HRESULT,
     fn DoesSupportLossless(
-        pfSupportLossless: *mut BOOL
+        pfSupportLossless: *mut BOOL,
     ) -> HRESULT,
     fn DoesSupportMultiframe(
-        pfSupportMultiframe: *mut BOOL
+        pfSupportMultiframe: *mut BOOL,
     ) -> HRESULT,
     fn MatchesMimeType(
         wzMimeType: LPCWSTR,
-        pfMatches: *mut BOOL
-    ) -> HRESULT
+        pfMatches: *mut BOOL,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x94c9b4ee, 0xa09f, 0x4f92, 0x8a, 0x1e, 0x4a, 0x9b, 0xce, 0x7e, 0x76, 0xfb)]
 interface IWICBitmapEncoderInfo(IWICBitmapEncoderInfoVtbl): IWICBitmapCodecInfo(IWICBitmapCodecInfoVtbl) {
     fn CreateInstance(
-        ppIBitmapEncoder: *mut *mut IWICBitmapEncoder
-    ) -> HRESULT
+        ppIBitmapEncoder: *mut *mut IWICBitmapEncoder,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xd8cd007f, 0xd08f, 0x4191, 0x9b, 0xfc, 0x23, 0x6e, 0xa7, 0xf0, 0xe4, 0xb5)]
@@ -1343,47 +1343,47 @@ interface IWICBitmapDecoderInfo(IWICBitmapDecoderInfoVtbl): IWICBitmapCodecInfo(
         cbSizePatterns: UINT,
         pPatterns: *mut WICBitmapPattern,
         pcPatterns: *mut UINT,
-        pcbPatternsActual: *mut UINT
+        pcbPatternsActual: *mut UINT,
     ) -> HRESULT,
     fn MatchesPattern(
         pIStream: *const IStream,
-        pfMatches: *mut BOOL
+        pfMatches: *mut BOOL,
     ) -> HRESULT,
     fn CreateInstance(
-        ppIBitmapDecoder: *mut *mut IWICBitmapDecoder
-    ) -> HRESULT
+        ppIBitmapDecoder: *mut *mut IWICBitmapDecoder,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xe8eda601, 0x3d48, 0x431a, 0xab, 0x44, 0x69, 0x05, 0x9b, 0xe8, 0x8b, 0xbe)]
 interface IWICPixelFormatInfo(IWICPixelFormatInfoVtbl): IWICComponentInfo(IWICComponentInfoVtbl) {
     fn GetFormatGUID(
-        pFormat: *mut GUID
+        pFormat: *mut GUID,
     ) -> HRESULT,
     fn GetColorContext(
-        ppIColorContext: *mut *mut IWICColorContext
+        ppIColorContext: *mut *mut IWICColorContext,
     ) -> HRESULT,
     fn GetBitsPerPixel(
-        puiBitsPerPixel: *mut UINT
+        puiBitsPerPixel: *mut UINT,
     ) -> HRESULT,
     fn GetChannelCount(
-        puiChannelCount: *mut UINT
+        puiChannelCount: *mut UINT,
     ) -> HRESULT,
     fn GetChannelMask(
         uiChannelIndex: UINT,
         cbMaskBuffer: UINT,
         pbMaskBuffer: *mut BYTE,
-        pcbActual: *mut UINT
-    ) -> HRESULT
+        pcbActual: *mut UINT,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xa9db33a2, 0xaf5f, 0x43c7, 0xb6, 0x79, 0x74, 0xf5, 0x98, 0x4b, 0x5a, 0xa4)]
 interface IWICPixelFormatInfo2(IWICPixelFormatInfo2Vtbl): IWICPixelFormatInfo(IWICPixelFormatInfoVtbl) {
     fn SupportsTransparency(
-        pfSupportsTransparency: *mut BOOL
+        pfSupportsTransparency: *mut BOOL,
     ) -> HRESULT,
     fn GetNumericRepresentation(
-        pNumericRepresentation: *mut WICPixelFormatNumericRepresentation
-    ) -> HRESULT
+        pNumericRepresentation: *mut WICPixelFormatNumericRepresentation,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xec5ec8a9, 0xc395, 0x4314, 0x9c, 0x77, 0x54, 0xd7, 0xa9, 0x35, 0xff, 0x70)]
@@ -1393,69 +1393,69 @@ interface IWICImagingFactory(IWICImagingFactoryVtbl): IUnknown(IUnknownVtbl) {
         pguidVendor: *const GUID,
         dwDesiredAccess: DWORD,
         metadataOptions: WICDecodeOptions,
-        ppIDecoder: *mut *mut IWICBitmapDecoder
+        ppIDecoder: *mut *mut IWICBitmapDecoder,
     ) -> HRESULT,
     fn CreateDecoderFromStream(
         pIStream: *const IStream,
         pguidVendor: *const GUID,
         metadataOptions: WICDecodeOptions,
-        ppIDecoder: *mut *mut IWICBitmapDecoder
+        ppIDecoder: *mut *mut IWICBitmapDecoder,
     ) -> HRESULT,
     fn CreateDecoderFromFileHandle(
         hFile: ULONG_PTR,
         pguidVendor: *const GUID,
         metadataOptions: WICDecodeOptions,
-        ppIDecoder: *mut *mut IWICBitmapDecoder
+        ppIDecoder: *mut *mut IWICBitmapDecoder,
     ) -> HRESULT,
     fn CreateComponentInfo(
         clsidComponent: REFCLSID,
-        ppIInfo: *mut *mut IWICComponentInfo
+        ppIInfo: *mut *mut IWICComponentInfo,
     ) -> HRESULT,
     fn CreateDecoder(
         guidContainerFormat: REFGUID,
         pguidVendor: *const GUID,
-        ppIDecoder: *mut *mut IWICBitmapDecoder
+        ppIDecoder: *mut *mut IWICBitmapDecoder,
     ) -> HRESULT,
     fn CreateEncoder(
         guidContainerFormat: REFGUID,
         pguidVendor: *const GUID,
-        ppIEncoder: *mut *mut IWICBitmapEncoder
+        ppIEncoder: *mut *mut IWICBitmapEncoder,
     ) -> HRESULT,
     fn CreatePalette(
-        ppIPalette: *mut *mut IWICPalette
+        ppIPalette: *mut *mut IWICPalette,
     ) -> HRESULT,
     fn CreateFormatConverter(
-        ppIFormatConverter: *mut *mut IWICFormatConverter
+        ppIFormatConverter: *mut *mut IWICFormatConverter,
     ) -> HRESULT,
     fn CreateBitmapScaler(
-        ppIBitmapScaler: *mut *mut IWICBitmapScaler
+        ppIBitmapScaler: *mut *mut IWICBitmapScaler,
     ) -> HRESULT,
     fn CreateBitmapClipper(
-        ppIBitmapClipper: *mut *mut IWICBitmapClipper
+        ppIBitmapClipper: *mut *mut IWICBitmapClipper,
     ) -> HRESULT,
     fn CreateBitmapFlipRotator(
-        ppIBitmapFlipRotator: *mut *mut IWICBitmapFlipRotator
+        ppIBitmapFlipRotator: *mut *mut IWICBitmapFlipRotator,
     ) -> HRESULT,
     fn CreateStream(
-        ppIWICStream: *mut *mut IWICStream
+        ppIWICStream: *mut *mut IWICStream,
     ) -> HRESULT,
     fn CreateColorContext(
-        ppIWICColorContext: *mut *mut IWICColorContext
+        ppIWICColorContext: *mut *mut IWICColorContext,
     ) -> HRESULT,
     fn CreateColorTransformer(
-        ppIWICColorTransform: *mut *mut IWICColorTransform
+        ppIWICColorTransform: *mut *mut IWICColorTransform,
     ) -> HRESULT,
     fn CreateBitmap(
         uiWidth: UINT,
         uiHeight: UINT,
         pixelFormat: REFWICPixelFormatGUID,
         option: WICBitmapCreateCacheOption,
-        ppIBitmap: *mut *mut IWICBitmap
+        ppIBitmap: *mut *mut IWICBitmap,
     ) -> HRESULT,
     fn CreateBitmapFromSource(
         pIBitmapSource: *const IWICBitmapSource,
         option: WICBitmapCreateCacheOption,
-        ppIBitmap: *mut *mut IWICBitmap
+        ppIBitmap: *mut *mut IWICBitmap,
     ) -> HRESULT,
     fn CreateBitmapFromSourceRect(
         pIBitmapSource: *const IWICBitmapSource,
@@ -1463,7 +1463,7 @@ interface IWICImagingFactory(IWICImagingFactoryVtbl): IUnknown(IUnknownVtbl) {
         y: UINT,
         width: UINT,
         height: UINT,
-        ppIBitmap: *mut *mut IWICBitmap
+        ppIBitmap: *mut *mut IWICBitmap,
     ) -> HRESULT,
     fn CreateBitmapFromMemory(
         uiWidth: UINT,
@@ -1472,56 +1472,56 @@ interface IWICImagingFactory(IWICImagingFactoryVtbl): IUnknown(IUnknownVtbl) {
         cbStride: UINT,
         cbBufferSize: UINT,
         pbBuffer: *const BYTE,
-        ppIBitmap: *mut *mut IWICBitmap
+        ppIBitmap: *mut *mut IWICBitmap,
     ) -> HRESULT,
     fn CreateBitmapFromHBITMAP(
         hBitmap: HBITMAP,
         hPalette: HPALETTE,
         options: WICBitmapAlphaChannelOption,
-        ppIBitmap: *mut *mut IWICBitmap
+        ppIBitmap: *mut *mut IWICBitmap,
     ) -> HRESULT,
     fn CreateBitmapFromHICON(
         hIcon: HICON,
-        ppIBitmap: *mut *mut IWICBitmap
+        ppIBitmap: *mut *mut IWICBitmap,
     ) -> HRESULT,
     fn CreateComponentEnumerator(
         componentTypes: DWORD,
         options: DWORD,
-        ppIEnumUnknown: *mut *mut IEnumUnknown
+        ppIEnumUnknown: *mut *mut IEnumUnknown,
     ) -> HRESULT,
     fn CreateFastMetadataEncoderFromDecoder(
         pIDecoder: *const IWICBitmapDecoder,
-        ppIFastEncoder: *mut *mut IWICFastMetadataEncoder
+        ppIFastEncoder: *mut *mut IWICFastMetadataEncoder,
     ) -> HRESULT,
     fn CreateFastMetadataEncoderFromFrameDecode(
         pIFrameDecoder: *const IWICBitmapFrameDecode,
-        ppIFastEncoder: *mut *mut IWICFastMetadataEncoder
+        ppIFastEncoder: *mut *mut IWICFastMetadataEncoder,
     ) -> HRESULT,
     fn CreateQueryWriter(
         guidMetadataFormat: REFGUID,
         pguidVendor: *const GUID,
-        ppIQueryWriter: *mut *mut IWICMetadataQueryWriter
+        ppIQueryWriter: *mut *mut IWICMetadataQueryWriter,
     ) -> HRESULT,
     fn CreateQueryWriterFromReader(
         pIQueryReader: *const IWICMetadataQueryReader,
         pguidVendor: *const GUID,
-        ppIQueryWriter: *mut *mut IWICMetadataQueryWriter
-    ) -> HRESULT
+        ppIQueryWriter: *mut *mut IWICMetadataQueryWriter,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x7b816b45, 0x1996, 0x4476, 0xb1, 0x32, 0xde, 0x9e, 0x24, 0x7c, 0x8a, 0xf0)]
 interface IWICImagingFactory2(IWICImagingFactory2Vtbl) : IWICImagingFactory(IWICImagingFactoryVtbl){
     fn CreateImageEncoder(
         pD2DDevice: *const ID2D1Device,
-        ppWICImageEncoder: *mut *mut IWICImageEncoder
-    ) -> HRESULT
+        ppWICImageEncoder: *mut *mut IWICImageEncoder,
+    ) -> HRESULT,
 });
 
 extern "system" {
     pub fn WICConvertBitmapSource(
         dstFormat: REFWICPixelFormatGUID,
         pISrc: *const IWICBitmapSource,
-        ppIDst: *mut *mut IWICBitmapSource
+        ppIDst: *mut *mut IWICBitmapSource,
     ) -> HRESULT;
 
     pub fn WICCreateBitmapFromSection(
@@ -1531,7 +1531,7 @@ extern "system" {
         hSection: HANDLE,
         stride: UINT,
         offset: UINT,
-        ppIBitmap: *mut *mut IWICBitmap
+        ppIBitmap: *mut *mut IWICBitmap,
     ) -> HRESULT;
 
     pub fn WICCreateBitmapFromSectionEx(
@@ -1542,19 +1542,19 @@ extern "system" {
         stride: UINT,
         offset: UINT,
         desiredAccessLevel: WICSectionAccessLevel,
-        ppIBitmap: *mut *mut IWICBitmap
+        ppIBitmap: *mut *mut IWICBitmap,
     ) -> HRESULT;
 
     pub fn WICMapGuidToShortName(
         guid: REFGUID,
         cchName: UINT,
         wzName: *mut WCHAR,
-        pcchActual: *mut UINT
+        pcchActual: *mut UINT,
     ) -> HRESULT;
 
     pub fn WICMapShortNameToGuid(
         wzName: PCWSTR,
-        pguid: *mut GUID
+        pguid: *mut GUID,
     ) -> HRESULT;
 
     pub fn WICMapSchemaToName(
@@ -1562,7 +1562,7 @@ extern "system" {
         pwzSchema: LPWSTR,
         cchName: UINT,
         wzName: *mut WCHAR,
-        pcchActual: *mut UINT
+        pcchActual: *mut UINT,
     ) -> HRESULT;
 
 }
@@ -1714,117 +1714,117 @@ pub const WICRawChangeNotification_RenderMode: UINT = 0x00002000;
 RIDL!(#[uuid(0x95c75a6e, 0x3e8c, 0x4ec2, 0x85, 0xa8, 0xae, 0xbc, 0xc5, 0x51, 0xe5, 0x9b)]
 interface IWICDevelopRawNotificationCallback(IWICDevelopRawNotificationCallbackVtbl): IUnknown(IUnknownVtbl) {
     fn Notify(
-        NotificationMask: UINT
-    ) -> HRESULT
+        NotificationMask: UINT,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0xfbec5e44, 0xf7be, 0x4b65, 0xb7, 0xf8, 0xc0, 0xc8, 0x1f, 0xef, 0x02, 0x6d)]
 interface IWICDevelopRaw(IWICDevelopRawVtbl): IWICBitmapFrameDecode(IWICBitmapFrameDecodeVtbl) {
     fn QueryRawCapabilitiesInfo(
-        pInfo: *mut WICRawCapabilitiesInfo
+        pInfo: *mut WICRawCapabilitiesInfo,
     ) -> HRESULT,
     fn LoadParameterSet(
-        ParameterSet: WICRawParameterSet
+        ParameterSet: WICRawParameterSet,
     ) -> HRESULT,
     fn GetCurrentParameterSet(
-        ppCurrentParameterSet: *mut *mut IPropertyBag2
+        ppCurrentParameterSet: *mut *mut IPropertyBag2,
     ) -> HRESULT,
     fn SetExposureCompensation(
-        ev: c_double
+        ev: c_double,
     ) -> HRESULT,
     fn GetExposureCompensation(
-        pEV: *mut c_double
+        pEV: *mut c_double,
     ) -> HRESULT,
     fn SetWhitePointRGB(
         Red: UINT,
         Green: UINT,
-        Blue: UINT
+        Blue: UINT,
     ) -> HRESULT,
     fn GetWhitePointRGB(
         pRed: *mut UINT,
         pGreen: *mut UINT,
-        pBlue: *mut UINT
+        pBlue: *mut UINT,
     ) -> HRESULT,
     fn SetNamedWhitePoint(
-        WhitePoint: WICNamedWhitePoint
+        WhitePoint: WICNamedWhitePoint,
     ) -> HRESULT,
     fn GetNamedWhitePoint(
-        pWhitePoint: *mut WICNamedWhitePoint
+        pWhitePoint: *mut WICNamedWhitePoint,
     ) -> HRESULT,
     fn SetWhitePointKelvin(
-        WhitePointKelvin: UINT
+        WhitePointKelvin: UINT,
     ) -> HRESULT,
     fn GetWhitePointKelvin(
-        pWhitePointKelvin: *mut UINT
+        pWhitePointKelvin: *mut UINT,
     ) -> HRESULT,
     fn GetKelvinRangeInfo(
         pMinKelvinTemp: *mut UINT,
         pMaxKelvinTemp: *mut UINT,
-        pKelvinTempStepValue: *mut UINT
+        pKelvinTempStepValue: *mut UINT,
     ) -> HRESULT,
     fn SetContrast(
-        Contrast: c_double
+        Contrast: c_double,
     ) -> HRESULT,
     fn GetContrast(
-        pContrast: *mut c_double
+        pContrast: *mut c_double,
     ) -> HRESULT,
     fn SetGamma(
-        Gamma: c_double
+        Gamma: c_double,
     ) -> HRESULT,
     fn GetGamma(
-        pGamma: *mut c_double
+        pGamma: *mut c_double,
     ) -> HRESULT,
     fn SetSharpness(
-        Sharpness: c_double
+        Sharpness: c_double,
     ) -> HRESULT,
     fn GetSharpness(
-        pSharpness: *mut c_double
+        pSharpness: *mut c_double,
     ) -> HRESULT,
     fn SetSaturation(
-        Saturation: c_double
+        Saturation: c_double,
     ) -> HRESULT,
     fn GetSaturation(
-        pSaturation: *mut c_double
+        pSaturation: *mut c_double,
     ) -> HRESULT,
     fn SetTint(
-        Tint: c_double
+        Tint: c_double,
     ) -> HRESULT,
     fn GetTint(
-        pTint: *mut c_double
+        pTint: *mut c_double,
     ) -> HRESULT,
     fn SetNoiseReduction(
-        NoiseReduction: c_double
+        NoiseReduction: c_double,
     ) -> HRESULT,
     fn GetNoiseReduction(
-        pNoiseReduction: *mut c_double
+        pNoiseReduction: *mut c_double,
     ) -> HRESULT,
     fn SetDestinationColorContext(
-        pColorContext: *const IWICColorContext
+        pColorContext: *const IWICColorContext,
     ) -> HRESULT,
     fn SetToneCurve(
         cbToneCurveSize: UINT,
-        pToneCurve: *const WICRawToneCurve
+        pToneCurve: *const WICRawToneCurve,
     ) -> HRESULT,
     fn GetToneCurve(
         cbToneCurveBufferSize: UINT,
         pToneCurve: *mut WICRawToneCurve,
-        pcbActualToneCurveBufferSize: *mut UINT
+        pcbActualToneCurveBufferSize: *mut UINT,
     ) -> HRESULT,
     fn SetRotation(
-        Rotation: c_double
+        Rotation: c_double,
     ) -> HRESULT,
     fn GetRotation(
-        pRotation: *mut c_double
+        pRotation: *mut c_double,
     ) -> HRESULT,
     fn SetRenderMode(
-        RenderMode: WICRawRenderMode
+        RenderMode: WICRawRenderMode,
     ) -> HRESULT,
     fn GetRenderMode(
-        pRenderMode: *mut WICRawRenderMode
+        pRenderMode: *mut WICRawRenderMode,
     ) -> HRESULT,
     fn SetNotificationCallback(
-        pCallback: *const IWICDevelopRawNotificationCallback
-    ) -> HRESULT
+        pCallback: *const IWICDevelopRawNotificationCallback,
+    ) -> HRESULT,
 });
 
 ENUM!{enum WICDdsDimension {
@@ -1858,30 +1858,30 @@ STRUCT!{struct WICDdsParameters {
 RIDL!(#[uuid(0x409cd537, 0x8532, 0x40cb, 0x97, 0x74, 0xe2, 0xfe, 0xb2, 0xdf, 0x4e, 0x9c)]
 interface IWICDdsDecoder(IWICDdsDecoderVtbl): IUnknown(IUnknownVtbl) {
     fn GetParameters(
-        pParameters: *mut WICDdsParameters
+        pParameters: *mut WICDdsParameters,
     ) -> HRESULT,
     fn GetFrame(
         arrayIndex: UINT,
         mipLevel: UINT,
         sliceIndex: UINT,
-        ppIBitmapFrame: *mut *mut IWICBitmapFrameDecode
-    ) -> HRESULT
+        ppIBitmapFrame: *mut *mut IWICBitmapFrameDecode,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x5cacdb4c, 0x407e, 0x41b3, 0xb9, 0x36, 0xd0, 0xf0, 0x10, 0xcd, 0x67, 0x32)]
 interface IWICDdsEncoder(IWICDdsEncoderVtbl): IUnknown(IUnknownVtbl) {
     fn SetParameters(
-        pParameters: *const WICDdsParameters
+        pParameters: *const WICDdsParameters,
     ) -> HRESULT,
     fn GetParameters(
-        pParameters: *mut WICDdsParameters
+        pParameters: *mut WICDdsParameters,
     ) -> HRESULT,
     fn CreateNewFrame(
         ppIFrameEncode: *mut *mut IWICBitmapFrameEncode,
         pArrayIndex: *mut UINT,
         pMipLevel: *mut UINT,
-        pSliceIndex: *mut UINT
-    ) -> HRESULT
+        pSliceIndex: *mut UINT,
+    ) -> HRESULT,
 });
 
 STRUCT!{struct WICDdsFormatInfo {
@@ -1895,64 +1895,64 @@ RIDL!(#[uuid(0x3d4c0c61, 0x18a4, 0x41e4, 0xbd, 0x80, 0x48, 0x1a, 0x4f, 0xc9, 0xf
 interface IWICDdsFrameDecode(IWICDdsFrameDecodeVtbl): IUnknown(IUnknownVtbl) {
     fn GetSizeInBlocks(
         pWidthInBlocks: *mut UINT,
-        pHeightInBlocks: *mut UINT
+        pHeightInBlocks: *mut UINT,
     ) -> HRESULT,
     fn GetFormatInfo(
-        pFormatInfo: *mut WICDdsFormatInfo
+        pFormatInfo: *mut WICDdsFormatInfo,
     ) -> HRESULT,
     fn CopyBlocks(
         prcBoundsInBlocks: *const WICRect,
         cbStride: UINT,
         cbBufferSize: UINT,
-        pbBuffer: *mut BYTE
-    ) -> HRESULT
+        pbBuffer: *mut BYTE,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x8939f66e, 0xc46a, 0x4c21, 0xa9, 0xd1, 0x98, 0xb3, 0x27, 0xce, 0x16, 0x79)]
 interface IWICJpegFrameDecode(IWICJpegFrameDecodeVtbl): IUnknown(IUnknownVtbl) {
     fn DoesSupportIndexing(
-        pfIndexingSupported: *mut BOOL
+        pfIndexingSupported: *mut BOOL,
     ) -> HRESULT,
     fn SetIndexing(
         options: WICJpegIndexingOptions,
-        horizontalIntervalSize: UINT
+        horizontalIntervalSize: UINT,
     ) -> HRESULT,
     fn ClearIndexing() -> HRESULT,
     fn GetAcHuffmanTable(
         scanIndex: UINT,
         tableIndex: UINT,
-        pAcHuffmanTable: *mut DXGI_JPEG_AC_HUFFMAN_TABLE
+        pAcHuffmanTable: *mut DXGI_JPEG_AC_HUFFMAN_TABLE,
     ) -> HRESULT,
     fn GetDcHuffmanTable(
         scanIndex: UINT,
         tableIndex: UINT,
-        pDcHuffmanTable: *mut DXGI_JPEG_DC_HUFFMAN_TABLE
+        pDcHuffmanTable: *mut DXGI_JPEG_DC_HUFFMAN_TABLE,
     ) -> HRESULT,
     fn GetQuantizationTable(
         scanIndex: UINT,
         tableIndex: UINT,
-        pQuantizationTable: *mut DXGI_JPEG_QUANTIZATION_TABLE
+        pQuantizationTable: *mut DXGI_JPEG_QUANTIZATION_TABLE,
     ) -> HRESULT,
     fn GetFrameHeader(
-        pFrameHeader: *mut WICJpegFrameHeader
+        pFrameHeader: *mut WICJpegFrameHeader,
     ) -> HRESULT,
     fn GetScanHeader(
         scanIndex: UINT,
-        pScanHeader: *mut WICJpegScanHeader
+        pScanHeader: *mut WICJpegScanHeader,
     ) -> HRESULT,
     fn CopyScan(
         scanIndex: UINT,
         scanOffset: UINT,
         cbScanData: UINT,
         pbScanData: *mut BYTE,
-        pcbScanDataActual: *mut UINT
+        pcbScanDataActual: *mut UINT,
     ) -> HRESULT,
     fn CopyMinimalStream(
         streamOffset: UINT,
         cbStreamData: UINT,
         pbStreamData: *mut BYTE,
-        pcbStreamDataActual: *mut UINT
-    ) -> HRESULT
+        pcbStreamDataActual: *mut UINT,
+    ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x2f0c601f, 0xd2c6, 0x468c, 0xab, 0xfa, 0x49, 0x49, 0x5d, 0x98, 0x3e, 0xd1)]
@@ -1960,20 +1960,20 @@ interface IWICJpegFrameEncode(IWICJpegFrameEncodeVtbl): IUnknown(IUnknownVtbl) {
     fn GetAcHuffmanTable(
         scanIndex: UINT,
         tableIndex: UINT,
-        pAcHuffmanTable: *mut DXGI_JPEG_AC_HUFFMAN_TABLE
+        pAcHuffmanTable: *mut DXGI_JPEG_AC_HUFFMAN_TABLE,
     ) -> HRESULT,
     fn GetDcHuffmanTable(
         scanIndex: UINT,
         tableIndex: UINT,
-        pDcHuffmanTable: *mut DXGI_JPEG_DC_HUFFMAN_TABLE
+        pDcHuffmanTable: *mut DXGI_JPEG_DC_HUFFMAN_TABLE,
     ) -> HRESULT,
     fn GetQuantizationTable(
         scanIndex: UINT,
         tableIndex: UINT,
-        pQuantizationTable: *mut DXGI_JPEG_QUANTIZATION_TABLE
+        pQuantizationTable: *mut DXGI_JPEG_QUANTIZATION_TABLE,
     ) -> HRESULT,
     fn WriteScan(
         cbScanData: UINT,
-        pbScanData: *const BYTE
-    ) -> HRESULT
+        pbScanData: *const BYTE,
+    ) -> HRESULT,
 });
