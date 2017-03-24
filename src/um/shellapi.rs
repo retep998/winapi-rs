@@ -892,11 +892,11 @@ pub const SHIL_SYSSMALL: DWORD = 3;
 pub const SHIL_JUMBO: DWORD = 4;
 pub const SHIL_LAST: DWORD = SHIL_JUMBO;
 FN!{stdcall PFNCANSHAREFOLDERW(
-    pszPath: PCWSTR
+    pszPath: PCWSTR,
 ) -> HRESULT}
 FN!{stdcall PFNSHOWSHAREFOLDERUIW(
     hwndParent: HWND,
-    pszPath: PCWSTR
+    pszPath: PCWSTR,
 ) -> HRESULT}
 pub const WC_NETADDRESS: &'static str = "msctls_netaddress";
 extern "system" {

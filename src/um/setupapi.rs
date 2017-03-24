@@ -145,13 +145,13 @@ pub type PSP_FILE_CALLBACK_A = Option<unsafe extern "system" fn(
     Context: PVOID,
     Notification: UINT,
     Param1: UINT_PTR,
-    Param2: UINT_PTR
+    Param2: UINT_PTR,
 ) -> UINT>;
 pub type PSP_FILE_CALLBACK_W = Option<unsafe extern "system" fn(
     Context: PVOID,
     Notification: UINT,
     Param1: UINT_PTR,
-    Param2: UINT_PTR
+    Param2: UINT_PTR,
 ) -> UINT>;
 pub const SPFILENOTIFY_STARTQUEUE: UINT = 0x00000001;
 pub const SPFILENOTIFY_ENDQUEUE: UINT = 0x00000002;
@@ -592,7 +592,7 @@ STRUCT!{struct SP_SELECTDEVICE_PARAMS_W {
 pub type PSP_SELECTDEVICE_PARAMS_W = *mut SP_SELECTDEVICE_PARAMS_W;
 pub type PDETECT_PROGRESS_NOTIFY = Option<unsafe extern "system" fn(
     ProgressNotifyParam: PVOID,
-    DetectComplete: DWORD
+    DetectComplete: DWORD,
 ) -> BOOL>;
 STRUCT!{struct SP_DETECTDEVICE_PARAMS {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
@@ -793,7 +793,7 @@ pub type PSP_DETSIG_CMPPROC = Option<unsafe extern "system" fn(
     DeviceInfoSet: HDEVINFO,
     NewDeviceData: PSP_DEVINFO_DATA,
     ExistingDeviceData: PSP_DEVINFO_DATA,
-    CompareContext: PVOID
+    CompareContext: PVOID,
 ) -> DWORD>;
 STRUCT!{struct COINSTALLER_CONTEXT_DATA {
     PostProcessing: BOOL,

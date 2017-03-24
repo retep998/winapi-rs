@@ -354,7 +354,7 @@ pub type LPD3D_SHADER_MACRO = *mut D3D_SHADER_MACRO;
 RIDL!(#[uuid(0x8ba5fb08, 0x5195, 0x40e2, 0xac, 0x58, 0xd, 0x98, 0x9c, 0x3a, 0x1, 0x2)]
 interface ID3D10Blob(ID3D10BlobVtbl): IUnknown(IUnknownVtbl) {
     fn GetBufferPointer() -> LPVOID,
-    fn GetBufferSize() -> SIZE_T
+    fn GetBufferSize() -> SIZE_T,
 }
 );
 pub type LPD3D10BLOB = *mut ID3D10Blob;
@@ -369,10 +369,15 @@ pub const D3D10_INCLUDE_SYSTEM: D3D_INCLUDE_TYPE = D3D_INCLUDE_SYSTEM;
 RIDL!{#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
 interface ID3DInclude(ID3DIncludeVtbl) {
     fn Open(
-        IncludeType: D3D_INCLUDE_TYPE, pFileName: LPCSTR, pParentData: LPCVOID,
-        ppData: *mut LPCVOID, pBytes: *mut UINT
+        IncludeType: D3D_INCLUDE_TYPE,
+        pFileName: LPCSTR,
+        pParentData: LPCVOID,
+        ppData: *mut LPCVOID,
+        pBytes: *mut UINT,
     ) -> HRESULT,
-    fn Close(pData: LPCVOID) -> HRESULT
+    fn Close(
+        pData: LPCVOID,
+    ) -> HRESULT,
 }}
 pub type LPD3DINCLUDE = *mut ID3DInclude;
 ENUM!{enum D3D_SHADER_VARIABLE_CLASS {

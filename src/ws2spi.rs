@@ -18,26 +18,39 @@ STRUCT!{struct WSATHREADID {
 }}
 pub type LPWSATHREADID = *mut WSATHREADID;
 pub type LPNSPV2STARTUP = Option<unsafe extern "system" fn(
-    lpProviderId: ::LPGUID, ppvClientSessionArg: *mut ::LPVOID,
+    lpProviderId: ::LPGUID,
+    ppvClientSessionArg: *mut ::LPVOID,
 ) -> ::INT>;
 pub type LPNSPV2CLEANUP = Option<unsafe extern "system" fn(
-    lpProviderId: ::LPGUID, pvClientSessionArg: ::LPVOID,
+    lpProviderId: ::LPGUID,
+    pvClientSessionArg: ::LPVOID,
 ) -> ::INT>;
 pub type LPNSPV2LOOKUPSERVICEBEGIN = Option<unsafe extern "system" fn(
-    lpProviderId: ::LPGUID, lpqsRestrictions: ::LPWSAQUERYSET2W, dwControlFlags: ::DWORD,
-    lpvClientSessionArg: ::LPVOID, lphLookup: ::LPHANDLE,
+    lpProviderId: ::LPGUID,
+    lpqsRestrictions: ::LPWSAQUERYSET2W,
+    dwControlFlags: ::DWORD,
+    lpvClientSessionArg: ::LPVOID,
+    lphLookup: ::LPHANDLE,
 ) -> ::INT>;
 pub type LPNSPV2LOOKUPSERVICENEXTEX = Option<unsafe extern "system" fn(
-    hAsyncCall: ::HANDLE, hLookup: ::HANDLE, dwControlFlags: ::DWORD, lpdwBufferLength: ::LPDWORD,
-    lpqsResults: ::LPWSAQUERYSET2W
+    hAsyncCall: ::HANDLE,
+    hLookup: ::HANDLE,
+    dwControlFlags: ::DWORD,
+    lpdwBufferLength: ::LPDWORD,
+    lpqsResults: ::LPWSAQUERYSET2W,
 )>;
 pub type LPNSPV2LOOKUPSERVICEEND = Option<unsafe extern "system" fn(hLookup: ::HANDLE) -> ::INT>;
 pub type LPNSPV2SETSERVICEEX = Option<unsafe extern "system" fn(
-    hAsyncCall: ::HANDLE, lpProviderId: ::LPGUID, lpqsRegInfo: ::LPWSAQUERYSET2W,
-    essOperation: ::WSAESETSERVICEOP, dwControlFlags: ::DWORD, lpvClientSessionArg: ::LPVOID,
+    hAsyncCall: ::HANDLE,
+    lpProviderId: ::LPGUID,
+    lpqsRegInfo: ::LPWSAQUERYSET2W,
+    essOperation: ::WSAESETSERVICEOP,
+    dwControlFlags: ::DWORD,
+    lpvClientSessionArg: ::LPVOID,
 )>;
 pub type LPNSPV2CLIENTSESSIONRUNDOWN = Option<unsafe extern "system" fn(
-    lpProviderId: ::LPGUID, pvClientSessionArg: ::LPVOID,
+    lpProviderId: ::LPGUID,
+    pvClientSessionArg: ::LPVOID,
 )>;
 STRUCT!{struct NSPV2_ROUTINE {
     cbSize: ::DWORD,

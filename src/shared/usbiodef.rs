@@ -103,7 +103,9 @@ pub fn USB_KERNEL_CTL_BUFFERED(id: ULONG) -> ULONG {
     CTL_CODE!(FILE_DEVICE_USB, id, METHOD_BUFFERED, FILE_ANY_ACCESS)
 }
 // No calling convention was specified in the code
-FN!{stdcall USB_IDLE_CALLBACK(Context: PVOID) -> ()}
+FN!{stdcall USB_IDLE_CALLBACK(
+    Context: PVOID,
+) -> ()}
 STRUCT!{struct USB_IDLE_CALLBACK_INFO {
     IdleCallback: USB_IDLE_CALLBACK,
     IdleContext: PVOID,

@@ -556,7 +556,10 @@ STRUCT!{struct SecPkgContext_ApplicationProtocol {
 }}
 pub type PSecPkgContext_ApplicationProtocol = *mut SecPkgContext_ApplicationProtocol;
 pub type SEC_GET_KEY_FN = Option<unsafe extern "system" fn(
-    Arg: *mut ::c_void, Principal: *mut ::c_void, KeyVer: ::c_ulong, Key: *mut *mut ::c_void,
+    Arg: *mut ::c_void,
+    Principal: *mut ::c_void,
+    KeyVer: ::c_ulong,
+    Key: *mut *mut ::c_void,
     Status: *mut SECURITY_STATUS,
 )>;
 pub const SECPKG_CONTEXT_EXPORT_RESET_NEW: ::c_ulong = 0x00000001;

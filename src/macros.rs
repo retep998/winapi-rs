@@ -109,20 +109,20 @@ macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
 macro_rules! RIDL {
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) {$(
-        fn $method:ident($($p:ident : $t:ty),*) -> $rtr:ty
-    ),+}) => (
+        fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
+    )+}) => (
         #[repr(C)]
         pub struct $vtbl {
             $(pub $method: unsafe extern "system" fn(
                 This: *mut $interface,
                 $($p: $t),*
-            ) -> $rtr),+
+            ) -> $rtr,)+
         }
         #[repr(C)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl,
         }
-        RIDL!{@impl $interface {$(fn $method($($p: $t),*) -> $rtr),+}}
+        RIDL!{@impl $interface {$(fn $method($($p: $t,)*) -> $rtr,)+}}
         RIDL!{@uuid $interface $($uuid),+}
     );
     (#[uuid($($uuid:expr),+)]
@@ -141,21 +141,21 @@ macro_rules! RIDL {
     );
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
-        fn $method:ident($($p:ident : $t:ty),*) -> $rtr:ty
-    ),+}) => (
+        fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
+    )+}) => (
         #[repr(C)]
         pub struct $vtbl {
-            pub parent: $pvtbl
-            $(,pub $method: unsafe extern "system" fn(
+            pub parent: $pvtbl,
+            $(pub $method: unsafe extern "system" fn(
                 This: *mut $interface,
-                $($p: $t),*
-            ) -> $rtr)+
+                $($p: $t,)*
+            ) -> $rtr,)+
         }
         #[repr(C)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl,
         }
-        RIDL!{@impl $interface {$(fn $method($($p: $t),*) -> $rtr),+}}
+        RIDL!{@impl $interface {$(fn $method($($p: $t,)*) -> $rtr,)+}}
         RIDL!{@deref $interface $pinterface}
         RIDL!{@uuid $interface $($uuid),+}
     );
@@ -169,11 +169,11 @@ macro_rules! RIDL {
         }
     );
     (@impl $interface:ident {$(
-        fn $method:ident($($p:ident : $t:ty),*) -> $rtr:ty
-    ),+}) => (
+        fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
+    )+}) => (
         impl $interface {
-            $(#[inline] pub unsafe fn $method(&self $(,$p: $t)*) -> $rtr {
-                ((*self.lpVtbl).$method)(self as *const _ as *mut _, $($p),*)
+            $(#[inline] pub unsafe fn $method(&self, $($p: $t,)*) -> $rtr {
+                ((*self.lpVtbl).$method)(self as *const _ as *mut _, $($p,)*)
             })+
         }
     );
@@ -294,16 +294,16 @@ macro_rules! IFDEF {
     ($($thing:item)*) => ($($thing)*)
 }
 macro_rules! FN {
-    (stdcall $func:ident($($t:ty),*) -> $ret:ty) => (
-        pub type $func = Option<unsafe extern "system" fn($($t),*) -> $ret>;
+    (stdcall $func:ident($($t:ty,)*) -> $ret:ty) => (
+        pub type $func = Option<unsafe extern "system" fn($($t,)*) -> $ret>;
     );
-    (stdcall $func:ident($($p:ident: $t:ty),*) -> $ret:ty) => (
-        pub type $func = Option<unsafe extern "system" fn($($p: $t),*) -> $ret>;
+    (stdcall $func:ident($($p:ident: $t:ty,)*) -> $ret:ty) => (
+        pub type $func = Option<unsafe extern "system" fn($($p: $t,)*) -> $ret>;
     );
-    (cdecl $func:ident($($t:ty),*) -> $ret:ty) => (
-        pub type $func = Option<unsafe extern "C" fn($($t),*) -> $ret>;
+    (cdecl $func:ident($($t:ty,)*) -> $ret:ty) => (
+        pub type $func = Option<unsafe extern "C" fn($($t,)*) -> $ret>;
     );
-    (cdecl $func:ident($($p:ident: $t:ty),*) -> $ret:ty) => (
-        pub type $func = Option<unsafe extern "C" fn($($p: $t),*) -> $ret>;
+    (cdecl $func:ident($($p:ident: $t:ty,)*) -> $ret:ty) => (
+        pub type $func = Option<unsafe extern "C" fn($($p: $t,)*) -> $ret>;
     );
 }

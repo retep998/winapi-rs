@@ -6,7 +6,9 @@
 // except according to those terms.
 //! WinSock2 Extension for TCP/IP protocols
 pub type LPLOOKUPSERVICE_COMPLETION_ROUTINE = Option<unsafe extern "system" fn(
-    dwError: ::DWORD, dwBytes: ::DWORD, lpOverlapped: ::LPWSAOVERLAPPED,
+    dwError: ::DWORD,
+    dwBytes: ::DWORD,
+    lpOverlapped: ::LPWSAOVERLAPPED,
 )>;
 pub type socklen_t = ::c_int;
 STRUCT!{struct ip_mreq {

@@ -681,10 +681,12 @@ STRUCT!{struct HTTPAPI_VERSION {
 }}
 pub type PHTTPAPI_VERSION = *mut HTTPAPI_VERSION;
 pub const HTTPAPI_VERSION_2: HTTPAPI_VERSION = HTTPAPI_VERSION {
-    HttpApiMajorVersion: 2, HttpApiMinorVersion: 0,
+    HttpApiMajorVersion: 2,
+    HttpApiMinorVersion: 0,
 };
 pub const HTTPAPI_VERSION_1: HTTPAPI_VERSION = HTTPAPI_VERSION {
-    HttpApiMajorVersion: 1, HttpApiMinorVersion: 0,
+    HttpApiMajorVersion: 1,
+    HttpApiMinorVersion: 0,
 };
 #[inline]
 pub fn HTTPAPI_EQUAL_VERSION(version: HTTPAPI_VERSION, major: USHORT, minor: USHORT) -> bool {
@@ -702,7 +704,9 @@ pub fn HTTPAPI_LESS_VERSION(version: HTTPAPI_VERSION, major: USHORT, minor: USHO
 }
 #[inline]
 pub fn HTTPAPI_VERSION_GREATER_OR_EQUAL(
-    version: HTTPAPI_VERSION, major: USHORT, minor: USHORT
+    version: HTTPAPI_VERSION,
+    major: USHORT,
+    minor: USHORT
 ) -> bool {
     !HTTPAPI_LESS_VERSION(version, major, minor)
 }

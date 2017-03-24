@@ -326,9 +326,15 @@ pub const STARTF_PREVENTPINNING: DWORD = 0x00002000;
 pub const STARTF_UNTRUSTEDSOURCE: DWORD = 0x00008000;
 //5002
 pub type LPPROGRESS_ROUTINE = Option<unsafe extern "system" fn(
-    TotalFileSize: LARGE_INTEGER, TotalBytesTransferred: LARGE_INTEGER,
-    StreamSize: LARGE_INTEGER, StreamBytesTransferred: LARGE_INTEGER, dwStreamNumber: DWORD,
-    dwCallbackReason: DWORD, hSourceFile: HANDLE, hDestinationFile: HANDLE, lpData: LPVOID,
+    TotalFileSize: LARGE_INTEGER,
+    TotalBytesTransferred: LARGE_INTEGER,
+    StreamSize: LARGE_INTEGER,
+    StreamBytesTransferred: LARGE_INTEGER,
+    dwStreamNumber: DWORD,
+    dwCallbackReason: DWORD,
+    hSourceFile: HANDLE,
+    hDestinationFile: HANDLE,
+    lpData: LPVOID,
 ) -> DWORD>;
 //5095
 ENUM!{enum COPYFILE2_MESSAGE_TYPE {
@@ -433,7 +439,8 @@ UNION!{COPYFILE2_MESSAGE, Info, StreamFinished, StreamFinished_mut,
 UNION!{COPYFILE2_MESSAGE, Info, PollContinue, PollContinue_mut, COPYFILE2_MESSAGE_PollContinue}
 UNION!{COPYFILE2_MESSAGE, Info, Error, Error_mut, COPYFILE2_MESSAGE_Error}
 pub type PCOPYFILE2_PROGRESS_ROUTINE = Option<unsafe extern "system" fn(
-    pMessage: *const COPYFILE2_MESSAGE, pvCallbackContext: PVOID,
+    pMessage: *const COPYFILE2_MESSAGE,
+    pvCallbackContext: PVOID,
 ) -> COPYFILE2_MESSAGE_ACTION>;
 STRUCT!{struct COPYFILE2_EXTENDED_PARAMETERS {
     dwSize: DWORD,
@@ -569,7 +576,7 @@ ENUM!{enum PIPE_ATTRIBUTE_TYPE {
     PipeHandleAttribute,
 }}
 pub type APPLICATION_RECOVERY_CALLBACK = Option<unsafe extern "system" fn(
-    pvParameter: PVOID
+    pvParameter: PVOID,
 ) -> DWORD>;
 STRUCT!{struct SYSTEM_POWER_STATUS {
     ACLineStatus: BYTE,

@@ -2615,7 +2615,9 @@ STRUCT!{struct TVGETITEMPARTRECTINFO {
 }}
 pub const TVM_GETITEMPARTRECT: UINT = TV_FIRST + 72;
 pub type PFNTVCOMPARE = Option<unsafe extern "system" fn(
-    lParam1: LPARAM, lParam2: LPARAM, lParamSort: LPARAM,
+    lParam1: LPARAM,
+    lParam2: LPARAM,
+    lParamSort: LPARAM,
 ) -> c_int>;
 pub type LPTV_SORTCB = LPTVSORTCB;
 pub type TV_SORTCB = TVSORTCB;
@@ -3421,7 +3423,11 @@ pub const CB_GETMINVISIBLE: UINT = CBM_FIRST + 2;
 pub const CB_SETCUEBANNER: UINT = CBM_FIRST + 3;
 pub const CB_GETCUEBANNER: UINT = CBM_FIRST + 4;
 pub type PFTASKDIALOGCALLBACK = Option<unsafe extern "system" fn(
-    hwnd: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM, lpRefData: LONG_PTR,
+    hwnd: HWND,
+    msg: UINT,
+    wParam: WPARAM,
+    lParam: LPARAM,
+    lpRefData: LONG_PTR,
 ) -> HRESULT>;
 ENUM!{enum TASKDIALOG_FLAGS {
     TDF_ENABLE_HYPERLINKS = 0x0001,
@@ -3526,16 +3532,22 @@ UNION!(TASKDIALOGCONFIG, hFooterIcon, pszFooterIcon, pszFooterIcon_mut, PCWSTR);
 pub const DA_LAST: c_int = 0x7FFFFFFF;
 pub const DA_ERR: c_int = -1;
 pub type PFNDAENUMCALLBACK = Option<unsafe extern "system" fn(
-    p: *mut c_void, pData: *mut c_void,
+    p: *mut c_void,
+    pData: *mut c_void,
 ) -> c_int>;
 pub type PFNDAENUMCALLBACKCONST = Option<unsafe extern "system" fn(
-    p: *const c_void, pData: *mut c_void,
+    p: *const c_void,
+    pData: *mut c_void,
 ) -> c_int>;
 pub type PFNDACOMPARE = Option<unsafe extern "system" fn(
-    p1: *mut c_void, p2: *mut c_void, lParam: LPARAM,
+    p1: *mut c_void,
+    p2: *mut c_void,
+    lParam: LPARAM,
 ) -> c_int>;
 pub type PFNDACOMPARECONST = Option<unsafe extern "system" fn(
-    p1: *const c_void, p2: *const c_void, lParam: LPARAM,
+    p1: *const c_void,
+    p2: *const c_void,
+    lParam: LPARAM,
 ) -> c_int>;
 pub enum DSA {}
 pub type HDSA = *mut DSA;
@@ -3552,17 +3564,25 @@ STRUCT!{struct DPASTREAMINFO {
     pvItem: *mut c_void,
 }}
 pub type PFNDPASTREAM = Option<unsafe extern "system" fn(
-    pinfo: *mut DPASTREAMINFO, pstream: *mut IStream, pvInstData: *mut c_void,
+    pinfo: *mut DPASTREAMINFO,
+    pstream: *mut IStream,
+    pvInstData: *mut c_void,
 ) -> HRESULT>;
 pub const DPAM_SORTED: DWORD = 0x00000001;
 pub const DPAM_NORMAL: DWORD = 0x00000002;
 pub const DPAM_UNION: DWORD = 0x00000004;
 pub const DPAM_INTERSECT: DWORD = 0x00000008;
 pub type PFNDPAMERGE = Option<unsafe extern "system" fn(
-    uMsg: UINT, pvDest: *mut c_void, pvSrc: *mut c_void, lParam: LPARAM,
+    uMsg: UINT,
+    pvDest: *mut c_void,
+    pvSrc: *mut c_void,
+    lParam: LPARAM,
 ) -> *mut c_void>;
 pub type PFNDPAMERGECONST = Option<unsafe extern "system" fn(
-    uMsg: UINT, pvDest: *const c_void, pvSrc: *const c_void, lParam: LPARAM,
+    uMsg: UINT,
+    pvDest: *const c_void,
+    pvSrc: *const c_void,
+    lParam: LPARAM,
 ) -> *const c_void>;
 pub const DPAMM_MERGE: UINT = 1;
 pub const DPAMM_DELETE: UINT = 2;
@@ -3593,6 +3613,10 @@ pub const FSB_FLAT_MODE: INT_PTR = 2;
 pub const FSB_ENCARTA_MODE: INT_PTR = 1;
 pub const FSB_REGULAR_MODE: INT_PTR = 0;
 pub type SUBCLASSPROC = Option<unsafe extern "system" fn(
-    hWnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM, uIdSubclass: UINT_PTR,
+    hWnd: HWND,
+    uMsg: UINT,
+    wParam: WPARAM,
+    lParam: LPARAM,
+    uIdSubclass: UINT_PTR,
     dwRefData: DWORD_PTR,
 ) -> LRESULT>;

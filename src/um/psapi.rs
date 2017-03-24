@@ -23,12 +23,12 @@ pub type PPROCESS_MEMORY_COUNTERS_EX = *mut PROCESS_MEMORY_COUNTERS_EX;
 FN!{stdcall PENUM_PAGE_FILE_CALLBACKA(
     pContext: LPVOID,
     pPageFileInfo: PENUM_PAGE_FILE_INFORMATION,
-    lpFilename: LPCSTR
+    lpFilename: LPCSTR,
 ) -> BOOL}
 FN!{stdcall PENUM_PAGE_FILE_CALLBACKW(
     pContext: LPVOID,
     pPageFileInfo: PENUM_PAGE_FILE_INFORMATION,
-    lpFilename: LPCWSTR
+    lpFilename: LPCWSTR,
 ) -> BOOL}
 
 pub const LIST_MODULES_DEFAULT: DWORD = 0x0;

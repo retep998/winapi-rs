@@ -14,10 +14,14 @@ use um::winuser::{DLGPROC, LPCDLGTEMPLATEA, NMHDR, WM_USER};
 pub enum PSP {}
 pub type HPROPSHEETPAGE = *mut PSP;
 pub type LPFNPSPCALLBACKA = Option<unsafe extern "system" fn(
-    hwnd: HWND, uMsg: UINT, ppsp: *mut PROPSHEETPAGEA,
+    hwnd: HWND,
+    uMsg: UINT,
+    ppsp: *mut PROPSHEETPAGEA,
 ) -> UINT>;
 pub type LPFNPSPCALLBACKW = Option<unsafe extern "system" fn(
-    hwnd: HWND, uMsg: UINT, ppsp: *mut PROPSHEETPAGEW,
+    hwnd: HWND,
+    uMsg: UINT,
+    ppsp: *mut PROPSHEETPAGEW,
 ) -> UINT>;
 pub const PSP_DEFAULT: DWORD = 0x00000000;
 pub const PSP_DLGINDIRECT: DWORD = 0x00000001;
