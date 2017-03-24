@@ -10,13 +10,17 @@ use ctypes::c_double;
 use shared::basetsd::{UINT32, ULONG_PTR};
 use shared::minwindef::{DWORD, UINT, INT, BOOL, FLOAT, BYTE, ULONG, LPVOID};
 use shared::windef::{HBITMAP, HPALETTE, HICON};
-use shared::winerror::{HRESULT, E_FAIL, E_INVALIDARG, SEVERITY_ERROR, E_OUTOFMEMORY, E_NOTIMPL,
-                       E_ABORT, E_ACCESSDENIED};
+use shared::winerror::{
+    HRESULT, E_FAIL, E_INVALIDARG, SEVERITY_ERROR, E_OUTOFMEMORY, E_NOTIMPL,
+    E_ABORT, E_ACCESSDENIED
+};
 use shared::ntdef::{LPCWSTR, LPWSTR, PCWSTR, WCHAR};
 use shared::guiddef::{REFGUID, GUID, CLSID, REFCLSID};
 use shared::dxgiformat::DXGI_FORMAT;
-use shared::dxgitype::{DXGI_JPEG_AC_HUFFMAN_TABLE, DXGI_JPEG_DC_HUFFMAN_TABLE,
-                       DXGI_JPEG_QUANTIZATION_TABLE};
+use shared::dxgitype::{
+    DXGI_JPEG_AC_HUFFMAN_TABLE, DXGI_JPEG_DC_HUFFMAN_TABLE,
+    DXGI_JPEG_QUANTIZATION_TABLE
+};
 use um::winnt::{HANDLE, ULARGE_INTEGER};
 use um::propidl::PROPVARIANT;
 use um::objidlbase::{IStream, IStreamVtbl, IEnumString, IEnumUnknown};
