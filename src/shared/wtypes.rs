@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of wstypes.h
-use ctypes::{c_short, c_ushort, c_double, wchar_t};
+use ctypes::{c_short, c_double, c_ushort, wchar_t};
 use shared::minwindef::{BYTE, USHORT, ULONG, WORD, DWORD};
 use shared::ntdef::{LONG, LONGLONG, ULONGLONG};
 use shared::wtypesbase::{FLAGGED_WORD_BLOB, OLECHAR};
