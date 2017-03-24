@@ -12,8 +12,9 @@ ENUM!{enum RO_INIT_TYPE {
 pub enum RO_REGISTRATION_COOKIE__ {}
 pub type RO_REGISTRATION_COOKIE = *mut RO_REGISTRATION_COOKIE__;
 
-pub type PFNGETACTIVATIONFACTORY = Option<unsafe extern "system" fn(
-    ::HSTRING, *mut *mut ::IActivationFactory,
-) -> ::HRESULT>;
+FN!{stdcall PFNGETACTIVATIONFACTORY(
+    ::HSTRING,
+    *mut *mut ::IActivationFactory,
+) -> ::HRESULT}
 
 DECLARE_HANDLE!(APARTMENT_SHUTDOWN_REGISTRATION_COOKIE, APARTMENT_SHUTDOWN_REGISTRATION_COOKIE__);

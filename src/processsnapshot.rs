@@ -49,14 +49,14 @@ ENUM!{enum PSS_DUPLICATE_FLAGS {
 }}
 DECLARE_HANDLE!(HPSS, HPSS__);
 DECLARE_HANDLE!(HPSSWALK, HPSSWALK__);
-pub type pAllocRoutine = Option<unsafe extern "system" fn(
+FN!{stdcall pAllocRoutine(
     Context: *mut ::c_void,
     Size: ::DWORD,
-) -> *mut ::c_void>;
-pub type pFreeRoutine = Option<unsafe extern "system" fn(
+) -> *mut ::c_void}
+FN!{stdcall pFreeRoutine(
     Context: *mut ::c_void,
     Address: *mut ::c_void,
-)>;
+) -> ()}
 STRUCT!{struct PSS_ALLOCATOR {
     Context: *mut ::c_void,
     AllocRoutine: pAllocRoutine,

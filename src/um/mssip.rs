@@ -84,33 +84,33 @@ STRUCT!{struct SIP_CAP_SET_V3 {
 UNION!(SIP_CAP_SET_V3, dwFlags, dwReserved, dwReserved_mut, DWORD);
 pub type PSIP_CAP_SET_V3 = *mut SIP_CAP_SET_V3;
 pub type SIP_CAP_SET = PSIP_CAP_SET_V3;
-pub type pCryptSIPGetSignedDataMsg = Option<unsafe extern "system" fn(
+FN!{stdcall pCryptSIPGetSignedDataMsg(
     pSubjectInfo: *mut SIP_SUBJECTINFO,
     pdwEncodingType: *mut DWORD,
     dwIndex: DWORD,
     pcbSignedDataMsg: *mut DWORD,
     pbSignedDataMsg: *mut BYTE,
-) -> BOOL>;
-pub type pCryptSIPPutSignedDataMsg = Option<unsafe extern "system" fn(
+) -> BOOL}
+FN!{stdcall pCryptSIPPutSignedDataMsg(
     pSubjectInfo: *mut SIP_SUBJECTINFO,
     dwEncodingType: DWORD,
     pdwIndex: *mut DWORD,
     cbSignedDataMsg: DWORD,
     pbSignedDataMsg: *mut BYTE,
-) -> BOOL>;
-pub type pCryptSIPCreateIndirectData = Option<unsafe extern "system" fn(
+) -> BOOL}
+FN!{stdcall pCryptSIPCreateIndirectData(
     pSubjectInfo: *mut SIP_SUBJECTINFO,
     pcbIndirectData: *mut DWORD,
     pIndirectData: *mut SIP_INDIRECT_DATA,
-) -> BOOL>;
-pub type pCryptSIPVerifyIndirectData = Option<unsafe extern "system" fn(
+) -> BOOL}
+FN!{stdcall pCryptSIPVerifyIndirectData(
     pSubjectInfo: *mut SIP_SUBJECTINFO,
     pIndirectData: *mut SIP_INDIRECT_DATA,
-) -> BOOL>;
-pub type pCryptSIPRemoveSignedDataMsg = Option<unsafe extern "system" fn(
+) -> BOOL}
+FN!{stdcall pCryptSIPRemoveSignedDataMsg(
     pSubjectInfo: *mut SIP_SUBJECTINFO,
     dwIndex: DWORD,
-) -> BOOL>;
+) -> BOOL}
 STRUCT!{struct SIP_DISPATCH_INFO {
     cbSize: DWORD,
     hSIP: HANDLE,

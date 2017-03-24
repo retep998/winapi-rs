@@ -4349,10 +4349,18 @@ pub const MFS_UNCHECKED: UINT = MF_UNCHECKED;
 pub const MFS_UNHILITE: UINT = MF_UNHILITE;
 pub const MFS_DEFAULT: UINT = MF_DEFAULT;
 
-pub type MSGBOXCALLBACK = Option<unsafe extern "system" fn(LPHELPINFO)>;
-pub type WINEVENTPROC = Option<unsafe extern "system" fn(
-    HWINEVENTHOOK, DWORD, HWND, LONG, LONG, DWORD, DWORD,
-)>;
+FN!{stdcall MSGBOXCALLBACK(
+    LPHELPINFO,
+) -> ()}
+FN!{stdcall WINEVENTPROC(
+    HWINEVENTHOOK,
+    DWORD,
+    HWND,
+    LONG,
+    LONG,
+    DWORD,
+    DWORD,
+) -> ()}
 
 STRUCT!{struct SCROLLBARINFO {
     cbSize: DWORD,
@@ -4788,9 +4796,12 @@ STRUCT!{struct MONITORINFOEXW {
 }}
 pub type LPMONITORINFOEXW = *mut MONITORINFOEXW;
 //12971
-pub type MONITORENUMPROC = Option<unsafe extern "system" fn(
-    HMONITOR, HDC, LPRECT, LPARAM,
-) -> BOOL>;
+FN!{stdcall MONITORENUMPROC(
+    HMONITOR,
+    HDC,
+    LPRECT,
+    LPARAM,
+) -> BOOL}
 //14098
 DECLARE_HANDLE!(HRAWINPUT, HRAWINPUT__);
 #[inline]

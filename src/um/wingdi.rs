@@ -833,10 +833,16 @@ STRUCT!{struct COLORADJUSTMENT {
 pub type PCOLORADJUSTMENT = *mut COLORADJUSTMENT;
 pub type LPCOLORADJUSTMENT = *mut COLORADJUSTMENT;
 FN!{stdcall OLDFONTENUMPROCA(
-    *const LOGFONTA, *const VOID, DWORD, LPARAM,
+    *const LOGFONTA,
+    *const VOID,
+    DWORD,
+    LPARAM,
 ) -> c_int}
 FN!{stdcall OLDFONTENUMPROCW(
-    *const LOGFONTW, *const VOID, DWORD, LPARAM,
+    *const LOGFONTW,
+    *const VOID,
+    DWORD,
+    LPARAM,
 ) -> c_int}
 pub type FONTENUMPROCA = OLDFONTENUMPROCA;
 pub type FONTENUMPROCW = OLDFONTENUMPROCW;

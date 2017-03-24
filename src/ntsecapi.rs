@@ -612,18 +612,18 @@ pub const DOMAIN_LOCKOUT_ADMINS: ULONG = 0x00000008;
 pub const DOMAIN_PASSWORD_STORE_CLEARTEXT: ULONG = 0x00000010;
 pub const DOMAIN_REFUSE_PASSWORD_CHANGE: ULONG = 0x00000020;
 pub const DOMAIN_NO_LM_OWF_CHANGE: ULONG = 0x00000040;
-pub type PSAM_PASSWORD_NOTIFICATION_ROUTINE = Option<unsafe extern "system" fn(
+FN!{stdcall PSAM_PASSWORD_NOTIFICATION_ROUTINE(
     UserName: PUNICODE_STRING,
     RelativeId: ULONG,
     NewPassword: PUNICODE_STRING,
-) -> NTSTATUS>;
-pub type PSAM_INIT_NOTIFICATION_ROUTINE = Option<unsafe extern "system" fn() -> BOOLEAN>;
-pub type PSAM_PASSWORD_FILTER_ROUTINE = Option<unsafe extern "system" fn(
+) -> NTSTATUS}
+FN!{stdcall PSAM_INIT_NOTIFICATION_ROUTINE() -> BOOLEAN}
+FN!{stdcall PSAM_PASSWORD_FILTER_ROUTINE(
     AccountName: PUNICODE_STRING,
     FullName: PUNICODE_STRING,
     Password: PUNICODE_STRING,
     SetOperation: BOOLEAN,
-) -> BOOLEAN>;
+) -> BOOLEAN}
 ENUM!{enum MSV1_0_LOGON_SUBMIT_TYPE {
     MsV1_0InteractiveLogon = 2,
     MsV1_0Lm20Logon,

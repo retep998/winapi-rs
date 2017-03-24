@@ -340,7 +340,9 @@ STRUCT!{struct EXCEPINFO {
     bstrHelpFile: BSTR,
     dwHelpContext: DWORD,
     pvReserved: PVOID,
-    pfnDeferredFillIn: Option<unsafe extern "system" fn(einfo: *mut EXCEPINFO) -> HRESULT>,
+    pfnDeferredFillIn: FN!{stdcall(
+        einfo: *mut EXCEPINFO,
+    ) -> HRESULT},
     scode: SCODE,
 }}
 ENUM!{enum CALLCONV {

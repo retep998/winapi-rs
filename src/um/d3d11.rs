@@ -1538,7 +1538,9 @@ interface ID3D11DeviceContext(ID3D11DeviceContextVtbl): ID3D11DeviceChild(ID3D11
         pAsync: *mut ID3D11Asynchronous,
     ) -> (),
     fn GetData(
-         pAsync: *mut ID3D11Asynchronous, pData: *mut c_void, DataSize: UINT,
+         pAsync: *mut ID3D11Asynchronous,
+         pData: *mut c_void,
+         DataSize: UINT,
         GetDataFlags: UINT,
     ) -> HRESULT,
     fn SetPredication(
@@ -2967,7 +2969,9 @@ interface ID3D11VideoDevice(ID3D11VideoDeviceVtbl): IUnknown(IUnknownVtbl) {
         pKeyExchangeType: *mut GUID,
     ) -> HRESULT,
     fn SetPrivateData(
-         guid: REFGUID, DataSize: UINT, pData: *const c_void,
+         guid: REFGUID,
+         DataSize: UINT,
+         pData: *const c_void,
     ) -> HRESULT,
     fn SetPrivateDataInterface(
         guid: REFGUID,
