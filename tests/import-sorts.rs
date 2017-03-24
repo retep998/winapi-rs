@@ -114,8 +114,8 @@ fn check_import_sorting<P: AsRef<Path>>(
             if i >= imports[pos + 1].1.len() - 1 || imports[pos].1[i] > imports[pos + 1].1[i] {
                 writeln!(&mut io::stderr(), "[{}:{}] \"use {}\" should be after \"use {}\"",
                          s_path,
-                         imports[pos].1.join("::"),
                          imports[pos].0,
+                         imports[pos].1.join("::"),
                          imports[pos + 1].1.join("::")).unwrap();
                 *errors += 1;
             }
