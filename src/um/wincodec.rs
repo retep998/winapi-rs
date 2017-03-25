@@ -346,10 +346,10 @@ ENUM!{enum WICDecodeOptions {
 }}
 
 ENUM!{enum WICBitmapEncoderCacheOption {
-   WICBitmapEncoderCacheInMemory = 0x00000000,
-   WICBitmapEncoderCacheTempFile = 0x00000001,
-   WICBitmapEncoderNoCache = 0x00000002,
-   WICBITMAPENCODERCACHEOPTION_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICBitmapEncoderCacheInMemory = 0x00000000,
+    WICBitmapEncoderCacheTempFile = 0x00000001,
+    WICBitmapEncoderNoCache = 0x00000002,
+    WICBITMAPENCODERCACHEOPTION_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
 
 ENUM!{enum WICComponentType {
@@ -439,9 +439,9 @@ ENUM!{enum WICBitmapTransformOptions {
 }}
 
 ENUM!{enum WICBitmapLockFlags {
-   WICBitmapLockRead = 0x00000001,
-   WICBitmapLockWrite = 0x00000002,
-   WICBITMAPLOCKFLAGS_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICBitmapLockRead = 0x00000001,
+    WICBitmapLockWrite = 0x00000002,
+    WICBITMAPLOCKFLAGS_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
 
 ENUM!{enum WICBitmapDecoderCapabilities {
@@ -633,15 +633,15 @@ ENUM!{enum WICPixelFormatNumericRepresentation {
 }}
 
 ENUM!{enum WICPlanarOptions {
-   WICPlanarOptionsDefault = 0x00000000,
-   WICPlanarOptionsPreserveSubsampling = 0x00000001,
-   WICPLANAROPTIONS_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICPlanarOptionsDefault = 0x00000000,
+    WICPlanarOptionsPreserveSubsampling = 0x00000001,
+    WICPLANAROPTIONS_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
 
 ENUM!{enum WICJpegIndexingOptions {
-   WICJpegIndexingOptionsGenerateOnDemand = 0x00000000,
-   WICJpegIndexingOptionsGenerateOnLoad = 0x00000001,
-   WICJpegIndexingOptions_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICJpegIndexingOptionsGenerateOnDemand = 0x00000000,
+    WICJpegIndexingOptionsGenerateOnLoad = 0x00000001,
+    WICJpegIndexingOptions_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
 
 ENUM!{enum WICJpegTransferMatrix {
@@ -1178,15 +1178,15 @@ interface IWICPlanarBitmapSourceTransform(IWICPlanarBitmapSourceTransformVtbl): 
 
 RIDL!(#[uuid(0x3b16811b, 0x6a43, 0x4ec9, 0xa8, 0x13, 0x3d, 0x93, 0x0c, 0x13, 0xb9, 0x40)]
 interface IWICBitmapFrameDecode(IWICBitmapFrameDecodeVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
-   fn GetMetadataQueryReader(
+    fn GetMetadataQueryReader(
        ppIMetadataQueryReader: *mut *mut IWICMetadataQueryReader,
    ) -> HRESULT,
-   fn GetColorContexts(
+    fn GetColorContexts(
         cCount: UINT,
         ppIColorContexts: *mut *mut IWICColorContext,
         pcActualCount: *mut UINT,
    ) -> HRESULT,
-   fn GetThumbnail(
+    fn GetThumbnail(
        ppIThumbnail: *mut *mut IWICBitmapSource,
    ) -> HRESULT,
 });
