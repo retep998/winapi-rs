@@ -147,7 +147,10 @@ interface ISpNotifyCallback(ISpNotifyCallbackVtbl) {
     ) -> ::HRESULT,
 }
 );
-pub type SPNOTIFYCALLBACK = unsafe extern "system" fn(wParam: ::WPARAM, lParam: ::LPARAM);
+FN!{stdcall SPNOTIFYCALLBACK(
+    wParam: ::WPARAM,
+    lParam: ::LPARAM,
+) -> ()}
 RIDL!(
 #[uuid(0x5eff4aef, 0x8487, 0x11d2, 0x96, 0x1c, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0x28)]
 interface ISpNotifySource(ISpNotifySourceVtbl): IUnknown(IUnknownVtbl) {

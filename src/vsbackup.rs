@@ -67,7 +67,9 @@ interface IVssExamineWriterMetadata(IVssExamineWriterMetadataVtbl): IUnknown(IUn
         pUsage: *mut ::VSS_USAGE_TYPE,
         pSource: *mut ::VSS_SOURCE_TYPE,
     ) -> ::HRESULT,
-    fn GetFileCounts(pcIncludeFiles: *mut ::UINT, pcExcludeFiles: *mut ::UINT,
+    fn GetFileCounts(
+        pcIncludeFiles: *mut ::UINT,
+        pcExcludeFiles: *mut ::UINT,
         pcComponents: *mut ::UINT,
     ) -> ::HRESULT,
     fn GetIncludeFile(
@@ -341,9 +343,12 @@ interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl)
         SnapshotId: ::VSS_ID,
         pProp: *mut ::VSS_SNAPSHOT_PROP,
     ) -> ::HRESULT,
-    fn Query(QueriedObjectId: ::VSS_ID, eQueriedObjectType: ::VSS_OBJECT_TYPE,
+    fn Query(
+        QueriedObjectId: ::VSS_ID,
+        eQueriedObjectType: ::VSS_OBJECT_TYPE,
         eReturnedObjectsType: ::VSS_OBJECT_TYPE,
-        ppEnum: *mut *mut ::IVssEnumObject) -> ::HRESULT,
+        ppEnum: *mut *mut ::IVssEnumObject,
+    ) -> ::HRESULT,
     fn IsVolumeSupported(
         ProviderId: ::VSS_ID,
         pwszVolumeName: ::VSS_PWSZ,
@@ -361,7 +366,9 @@ interface IVssBackupComponents(IVssBackupComponentsVtbl): IUnknown(IUnknownVtbl)
         rgWriterInstanceId: *const ::VSS_ID,
         cInstanceId: ::UINT,
     ) -> ::HRESULT,
-    fn ExposeSnapshot(SnapshotId: ::VSS_ID, wszPathFromRoot: ::VSS_PWSZ,
+    fn ExposeSnapshot(
+        SnapshotId: ::VSS_ID,
+        wszPathFromRoot: ::VSS_PWSZ,
         lAttributes: ::LONG,
         wszExpose: ::VSS_PWSZ,
         pwszExposed: ::VSS_PWSZ,

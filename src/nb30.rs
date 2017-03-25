@@ -7,7 +7,9 @@
 // This module contains the definitions for portable NetBIOS 3.0 support.
 pub const NCBNAMSZ: usize = 16;
 pub const MAX_LANA: usize = 254;
-pub type PFPOST = Option<unsafe extern "system" fn(*mut NCB)>;
+FN!{stdcall PFPOST(
+    *mut NCB,
+) -> ()}
 #[cfg(target_arch = "x86_64")]
 STRUCT!{struct NCB {
     ncb_command: UCHAR,

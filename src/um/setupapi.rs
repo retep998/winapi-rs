@@ -141,18 +141,18 @@ pub const DIRID_PROGRAM_FILES_COMMONX86: DWORD = 16428;
 pub const DIRID_COMMON_TEMPLATES: DWORD = 16429;
 pub const DIRID_COMMON_DOCUMENTS: DWORD = 16430;
 pub const DIRID_USER: DWORD = 0x8000;
-pub type PSP_FILE_CALLBACK_A = Option<unsafe extern "system" fn(
+FN!{stdcall PSP_FILE_CALLBACK_A(
     Context: PVOID,
     Notification: UINT,
     Param1: UINT_PTR,
     Param2: UINT_PTR,
-) -> UINT>;
-pub type PSP_FILE_CALLBACK_W = Option<unsafe extern "system" fn(
+) -> UINT}
+FN!{stdcall PSP_FILE_CALLBACK_W(
     Context: PVOID,
     Notification: UINT,
     Param1: UINT_PTR,
     Param2: UINT_PTR,
-) -> UINT>;
+) -> UINT}
 pub const SPFILENOTIFY_STARTQUEUE: UINT = 0x00000001;
 pub const SPFILENOTIFY_ENDQUEUE: UINT = 0x00000002;
 pub const SPFILENOTIFY_STARTSUBQUEUE: UINT = 0x00000003;
@@ -590,10 +590,10 @@ STRUCT!{struct SP_SELECTDEVICE_PARAMS_W {
     SubTitle: [WCHAR; MAX_SUBTITLE_LEN],
 }}
 pub type PSP_SELECTDEVICE_PARAMS_W = *mut SP_SELECTDEVICE_PARAMS_W;
-pub type PDETECT_PROGRESS_NOTIFY = Option<unsafe extern "system" fn(
+FN!{stdcall PDETECT_PROGRESS_NOTIFY(
     ProgressNotifyParam: PVOID,
     DetectComplete: DWORD,
-) -> BOOL>;
+) -> BOOL}
 STRUCT!{struct SP_DETECTDEVICE_PARAMS {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     DetectProgressNotify: PDETECT_PROGRESS_NOTIFY,
@@ -789,12 +789,12 @@ pub const DRIVER_HARDWAREID_RANK: DWORD = 0x00000FFF;
 pub const DRIVER_HARDWAREID_MASK: DWORD = 0x80000FFF;
 pub const DRIVER_UNTRUSTED_RANK: DWORD = 0x80000000;
 pub const DRIVER_W9X_SUSPECT_RANK: DWORD = 0xC0000000;
-pub type PSP_DETSIG_CMPPROC = Option<unsafe extern "system" fn(
+FN!{stdcall PSP_DETSIG_CMPPROC(
     DeviceInfoSet: HDEVINFO,
     NewDeviceData: PSP_DEVINFO_DATA,
     ExistingDeviceData: PSP_DEVINFO_DATA,
     CompareContext: PVOID,
-) -> DWORD>;
+) -> DWORD}
 STRUCT!{struct COINSTALLER_CONTEXT_DATA {
     PostProcessing: BOOL,
     InstallResult: DWORD,

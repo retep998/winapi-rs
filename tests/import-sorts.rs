@@ -24,6 +24,7 @@ fn check_inner_imports(
     errors: &mut u32
 ) {
     if imports.len() > 1 {
+        let mut issues = false;
         for pos in 0..imports.len() - 1 {
             if imports[pos] == "self" {
                 continue
@@ -36,7 +37,15 @@ fn check_inner_imports(
                          imports[pos],
                          imports[pos + 1]).unwrap();
                 *errors += 1;
+                issues = true;
             }
+        }
+        if issues == true {
+            let mut sorted = imports.to_vec();
+            sorted.sort();
+            writeln!(&mut io::stderr(), "==> Correct imports: \"use {}{{{}}};\"",
+                     line.split('{').next().unwrap(),
+                     sorted.join(", ")).unwrap();
         }
     }
 }
@@ -114,8 +123,8 @@ fn check_import_sorting<P: AsRef<Path>>(
             if i >= imports[pos + 1].1.len() - 1 || imports[pos].1[i] > imports[pos + 1].1[i] {
                 writeln!(&mut io::stderr(), "[{}:{}] \"use {}\" should be after \"use {}\"",
                          s_path,
-                         imports[pos].1.join("::"),
                          imports[pos].0,
+                         imports[pos].1.join("::"),
                          imports[pos + 1].1.join("::")).unwrap();
                 *errors += 1;
             }
@@ -142,5 +151,6 @@ fn read_dirs<P: AsRef<Path>>(
 fn check_imports_sorting() {
     let mut errors = 0;
     read_dirs("src", &mut errors);
+    check_import_sorting("build.rs", &mut errors);
     assert!(errors == 0, "Not sorted import(s) found");
 }

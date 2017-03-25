@@ -4,6 +4,9 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-pub type PINSPECT_HSTRING_CALLBACK = Option<unsafe extern "system" fn(
-    *const ::VOID, ::UINT_PTR, ::UINT32, *mut ::BYTE,
-) -> ::HRESULT>;
+FN!{stdcall PINSPECT_HSTRING_CALLBACK(
+    *const ::VOID,
+    ::UINT_PTR,
+    ::UINT32,
+    *mut ::BYTE,
+) -> ::HRESULT}

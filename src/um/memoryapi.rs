@@ -25,4 +25,4 @@ STRUCT!{struct WIN32_MEMORY_RANGE_ENTRY {
     NumberOfBytes: SIZE_T,
 }}
 pub type PWIN32_MEMORY_RANGE_ENTRY = *mut WIN32_MEMORY_RANGE_ENTRY;
-pub type PBAD_MEMORY_CALLBACK_ROUTINE = Option<unsafe extern "system" fn()>;
+FN!{stdcall PBAD_MEMORY_CALLBACK_ROUTINE() -> ()}

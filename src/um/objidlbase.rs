@@ -34,7 +34,7 @@ interface IMalloc(IMallocVtbl): IUnknown(IUnknownVtbl) {
 pub type LPMALLOC = *mut IMalloc;
 RIDL!{#[uuid(0x00000100, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IEnumUnknown(IEnumUnknownVtbl): IUnknown(IUnknownVtbl) {
-    fn Next( 
+    fn Next(
         celt: ULONG,
         rgelt: *mut *mut IUnknown,
         pceltFetched: *mut ULONG,

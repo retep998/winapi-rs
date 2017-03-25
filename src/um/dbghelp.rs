@@ -60,34 +60,34 @@ pub const MAX_SYM_NAME: usize = 2000;
 pub const ERROR_IMAGE_NOT_STRIPPED: DWORD = 0x8800;
 pub const ERROR_NO_DBG_POINTER: DWORD = 0x8801;
 pub const ERROR_NO_PDB_POINTER: DWORD = 0x8802;
-pub type PFIND_DEBUG_FILE_CALLBACK = Option<unsafe extern "system" fn(
+FN!{stdcall PFIND_DEBUG_FILE_CALLBACK(
     FileHandle: HANDLE,
     FileName: PCSTR,
     CallerData: PVOID,
-) -> BOOL>;
-pub type PFIND_DEBUG_FILE_CALLBACKW = Option<unsafe extern "system" fn(
+) -> BOOL}
+FN!{stdcall PFIND_DEBUG_FILE_CALLBACKW(
     FileHandle: HANDLE,
     FileName: PCWSTR,
     CallerData: PVOID,
-) -> BOOL>;
-pub type PFINDFILEINPATHCALLBACK = Option<unsafe extern "system" fn(
+) -> BOOL}
+FN!{stdcall PFINDFILEINPATHCALLBACK(
     filename: PCSTR,
     context: PVOID,
-) -> BOOL>;
-pub type PFINDFILEINPATHCALLBACKW = Option<unsafe extern "system" fn(
+) -> BOOL}
+FN!{stdcall PFINDFILEINPATHCALLBACKW(
     filename: PCWSTR,
     context: PVOID,
-) -> BOOL>;
-pub type PFIND_EXE_FILE_CALLBACK = Option<unsafe extern "system" fn(
+) -> BOOL}
+FN!{stdcall PFIND_EXE_FILE_CALLBACK(
     FileHandle: HANDLE,
     FileName: PCSTR,
     CallerData: PVOID,
-) -> BOOL>;
-pub type PFIND_EXE_FILE_CALLBACKW = Option<unsafe extern "system" fn(
+) -> BOOL}
+FN!{stdcall PFIND_EXE_FILE_CALLBACKW(
     FileHandle: HANDLE,
     FileName: PCWSTR,
     CallerData: PVOID,
-) -> BOOL>;
+) -> BOOL}
 #[cfg(target_arch = "x86")]
 STRUCT!{struct IMAGE_DEBUG_INFORMATION {
     List: LIST_ENTRY,
@@ -124,14 +124,14 @@ STRUCT!{struct IMAGE_DEBUG_INFORMATION {
 }}
 #[cfg(target_arch = "x86")]
 pub type PIMAGE_DEBUG_INFORMATION = *mut IMAGE_DEBUG_INFORMATION;
-pub type PENUMDIRTREE_CALLBACK = Option<unsafe extern "system" fn(
+FN!{stdcall PENUMDIRTREE_CALLBACK(
     FilePath: PCSTR,
     CallerData: PVOID,
-) -> BOOL>;
-pub type PENUMDIRTREE_CALLBACKW = Option<unsafe extern "system" fn(
+) -> BOOL}
+FN!{stdcall PENUMDIRTREE_CALLBACKW(
     FilePath: PCWSTR,
     CallerData: PVOID,
-) -> BOOL>;
+) -> BOOL}
 pub const UNDNAME_COMPLETE: DWORD = 0x0000;
 pub const UNDNAME_NO_LEADING_UNDERSCORES: DWORD = 0x0001;
 pub const UNDNAME_NO_MS_KEYWORDS: DWORD = 0x0002;
@@ -288,26 +288,26 @@ STRUCT!{struct STACKFRAME {
 }}
 #[cfg(target_arch = "x86")]
 pub type LPSTACKFRAME = *mut STACKFRAME;
-pub type PREAD_PROCESS_MEMORY_ROUTINE64 = Option<unsafe extern "system" fn(
+FN!{stdcall PREAD_PROCESS_MEMORY_ROUTINE64(
     hProcess: HANDLE,
     qwBaseAddress: DWORD64,
     lpBuffer: PVOID,
     nSize: DWORD,
     lpNumberOfBytesRead: LPDWORD,
-) -> BOOL>;
-pub type PFUNCTION_TABLE_ACCESS_ROUTINE64 = Option<unsafe extern "system" fn(
+) -> BOOL}
+FN!{stdcall PFUNCTION_TABLE_ACCESS_ROUTINE64(
     ahProcess: HANDLE,
     AddrBase: DWORD64,
-) -> PVOID>;
-pub type PGET_MODULE_BASE_ROUTINE64 = Option<unsafe extern "system" fn(
+) -> PVOID}
+FN!{stdcall PGET_MODULE_BASE_ROUTINE64(
     hProcess: HANDLE,
     Address: DWORD64,
-) -> DWORD64>;
-pub type PTRANSLATE_ADDRESS_ROUTINE64 = Option<unsafe extern "system" fn(
+) -> DWORD64}
+FN!{stdcall PTRANSLATE_ADDRESS_ROUTINE64(
     hProcess: HANDLE,
     hThread: HANDLE,
     lpaddr: LPADDRESS64,
-) -> DWORD64>;
+) -> DWORD64}
 pub const SYM_STKWALK_DEFAULT: DWORD = 0x00000000;
 pub const SYM_STKWALK_FORCE_FRAMEPTR: DWORD = 0x00000001;
 #[cfg(target_arch = "x86_64")]
@@ -319,29 +319,29 @@ pub type PGET_MODULE_BASE_ROUTINE = PGET_MODULE_BASE_ROUTINE64;
 #[cfg(target_arch = "x86_64")]
 pub type PTRANSLATE_ADDRESS_ROUTINE = PTRANSLATE_ADDRESS_ROUTINE64;
 #[cfg(target_arch = "x86")]
-pub type PREAD_PROCESS_MEMORY_ROUTINE = Option<unsafe extern "system" fn(
+FN!{stdcall PREAD_PROCESS_MEMORY_ROUTINE(
     hProcess: HANDLE,
     qwBaseAddress: DWORD,
     lpBuffer: PVOID,
     nSize: DWORD,
     lpNumberOfBytesRead: PDWORD,
-) -> BOOL>;
+) -> BOOL}
 #[cfg(target_arch = "x86")]
-pub type PFUNCTION_TABLE_ACCESS_ROUTINE = Option<unsafe extern "system" fn(
+FN!{stdcall PFUNCTION_TABLE_ACCESS_ROUTINE(
     ahProcess: HANDLE,
     AddrBase: DWORD,
-) -> PVOID>;
+) -> PVOID}
 #[cfg(target_arch = "x86")]
-pub type PGET_MODULE_BASE_ROUTINE = Option<unsafe extern "system" fn(
+FN!{stdcall PGET_MODULE_BASE_ROUTINE(
     hProcess: HANDLE,
     Address: DWORD,
-) -> DWORD>;
+) -> DWORD}
 #[cfg(target_arch = "x86")]
-pub type PTRANSLATE_ADDRESS_ROUTINE = Option<unsafe extern "system" fn(
+FN!{stdcall PTRANSLATE_ADDRESS_ROUTINE(
     hProcess: HANDLE,
     hThread: HANDLE,
     lpaddr: LPADDRESS,
-) -> DWORD>;
+) -> DWORD}
 pub const API_VERSION_NUMBER: USHORT = 12;
 STRUCT!{struct API_VERSION {
     MajorVersion: USHORT,

@@ -193,7 +193,7 @@ STRUCT!{struct WSAPROTOCOL_INFOW {
     szProtocol: [::WCHAR; WSAPROTOCOL_LEN + 1],
 }}
 pub type LPWSAPROTOCOL_INFOW = *mut WSAPROTOCOL_INFOW;
-pub type LPCONDITIONPROC = Option<unsafe extern "system" fn(
+FN!{stdcall LPCONDITIONPROC(
     lpCallerId: ::LPWSABUF,
     lpCallerData: ::LPWSABUF,
     lpSQOS: LPQOS,
@@ -202,13 +202,13 @@ pub type LPCONDITIONPROC = Option<unsafe extern "system" fn(
     lpCalleeData: ::LPWSABUF,
     g: *mut GROUP,
     dwCallbackData: ::DWORD,
-) -> ::c_int>;
-pub type LPWSAOVERLAPPED_COMPLETION_ROUTINE = Option<unsafe extern "system" fn(
+) -> ::c_int}
+FN!{stdcall LPWSAOVERLAPPED_COMPLETION_ROUTINE(
     dwError: ::DWORD,
     cbTransferred: ::DWORD,
     lpOverlapped: LPWSAOVERLAPPED,
     dwFlags: ::DWORD,
-)>;
+) -> ()}
 ENUM!{enum WSACOMPLETIONTYPE {
     NSP_NOTIFY_IMMEDIATELY = 0,
     NSP_NOTIFY_HWND,

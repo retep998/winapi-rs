@@ -357,8 +357,10 @@ interface IDWriteFontFace1(IDWriteFontFace1Vtbl): IDWriteFontFace(IDWriteFontFac
     fn GetCaretMetrics(
         caretMetrics: *mut DWRITE_CARET_METRICS,
     ) -> (),
-    fn GetUnicodeRanges(maxRangeCount: UINT32, unicodeRanges: *mut DWRITE_UNICODE_RANGE,
-                        actualRangeCount: *mut UINT32,
+    fn GetUnicodeRanges(
+        maxRangeCount: UINT32,
+        unicodeRanges: *mut DWRITE_UNICODE_RANGE,
+        actualRangeCount: *mut UINT32,
     ) -> HRESULT,
     fn IsMonoSpacedFont() -> BOOL,
     fn GetDesignGlyphAdvances(
