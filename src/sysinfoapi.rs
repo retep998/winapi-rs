@@ -43,8 +43,3 @@ ENUM!{enum COMPUTER_NAME_FORMAT {
     ComputerNamePhysicalDnsFullyQualified,
     ComputerNameMax,
 }}
-pub type INIT_ONCE = ::RTL_RUN_ONCE;
-pub type PINIT_ONCE = ::PRTL_RUN_ONCE;
-pub type LPINIT_ONCE = ::PRTL_RUN_ONCE;
-pub type CONDITION_VARIABLE = ::RTL_CONDITION_VARIABLE;
-pub type PCONDITION_VARIABLE = *mut CONDITION_VARIABLE;
