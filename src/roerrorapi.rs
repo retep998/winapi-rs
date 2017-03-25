@@ -12,6 +12,9 @@ ENUM!{enum RO_ERROR_REPORTING_FLAGS {
     RO_ERROR_REPORTING_SUPPRESSSETERRORINFO = 0x00000008,
 }}
 
-pub type PINSPECT_MEMORY_CALLBACK = Option<unsafe extern "system" fn(
-    *const ::VOID, ::UINT_PTR, ::UINT32, *mut ::BYTE,
-) -> ::HRESULT>;
+FN!{stdcall PINSPECT_MEMORY_CALLBACK(
+    *const ::VOID,
+    ::UINT_PTR,
+    ::UINT32,
+    *mut ::BYTE,
+) -> ::HRESULT}

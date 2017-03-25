@@ -340,7 +340,9 @@ STRUCT!{struct EXCEPINFO {
     bstrHelpFile: BSTR,
     dwHelpContext: DWORD,
     pvReserved: PVOID,
-    pfnDeferredFillIn: Option<unsafe extern "system" fn(einfo: *mut EXCEPINFO) -> HRESULT>,
+    pfnDeferredFillIn: Option<unsafe extern "system" fn(
+        einfo: *mut EXCEPINFO,
+    ) -> HRESULT>,
     scode: SCODE,
 }}
 ENUM!{enum CALLCONV {
@@ -469,32 +471,84 @@ pub type LPCUSTDATA = *mut CUSTDATA;
 pub type LPCREATETYPEINFO = *mut ICreateTypeInfo;
 RIDL!(#[uuid(0x00020405, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ICreateTypeInfo(ICreateTypeInfoVtbl): IUnknown(IUnknownVtbl) {
-    fn SetGuid(guid: REFGUID) -> HRESULT,
-    fn SetTypeFlags(uTypeFlags: UINT) -> HRESULT,
-    fn SetDocString(pStrDoc: LPOLESTR) -> HRESULT,
-    fn SetHelpContext(dwHelpContext: DWORD) -> HRESULT,
-    fn SetVersion(wMajorVerNum: WORD, wMinorVerNum: WORD) -> HRESULT,
-    fn AddRefTypeInfo(pTInfo: *mut ITypeInfo) -> HRESULT,
-    fn AddFuncDesc(index: UINT, pFuncDesc: *mut FUNCDESC) -> HRESULT,
-    fn SetImplTypeFlags(index: UINT, implTypeFlags: INT) -> HRESULT,
-    fn SetAlignment(cbAlignment: WORD) -> HRESULT,
-    fn SetSchema(pStrSchema: LPOLESTR) -> HRESULT,
-    fn AddVarDesc(index: UINT, pVarDesc: *mut VARDESC) -> HRESULT,
+    fn SetGuid(
+        guid: REFGUID,
+    ) -> HRESULT,
+    fn SetTypeFlags(
+        uTypeFlags: UINT,
+    ) -> HRESULT,
+    fn SetDocString(
+        pStrDoc: LPOLESTR,
+    ) -> HRESULT,
+    fn SetHelpContext(
+        dwHelpContext: DWORD,
+    ) -> HRESULT,
+    fn SetVersion(
+        wMajorVerNum: WORD,
+        wMinorVerNum: WORD,
+    ) -> HRESULT,
+    fn AddRefTypeInfo(
+        pTInfo: *mut ITypeInfo,
+    ) -> HRESULT,
+    fn AddFuncDesc(
+        index: UINT,
+        pFuncDesc: *mut FUNCDESC,
+    ) -> HRESULT,
+    fn SetImplTypeFlags(
+        index: UINT,
+        implTypeFlags: INT,
+    ) -> HRESULT,
+    fn SetAlignment(
+        cbAlignment: WORD,
+    ) -> HRESULT,
+    fn SetSchema(
+        pStrSchema: LPOLESTR,
+    ) -> HRESULT,
+    fn AddVarDesc(
+        index: UINT,
+        pVarDesc: *mut VARDESC,
+    ) -> HRESULT,
     fn SetFuncAndParamNames(
-        index: UINT, rgszNames: *mut LPOLESTR, cNames: UINT
+        index: UINT,
+        rgszNames: *mut LPOLESTR,
+        cNames: UINT,
     ) -> HRESULT,
-    fn SetVarName(index: UINT, szName: LPOLESTR) -> HRESULT,
-    fn SetTypeDescAlias(pTDescAlias: *mut TYPEDESC) -> HRESULT,
+    fn SetVarName(
+        index: UINT,
+        szName: LPOLESTR,
+    ) -> HRESULT,
+    fn SetTypeDescAlias(
+        pTDescAlias: *mut TYPEDESC,
+    ) -> HRESULT,
     fn DefineFuncAsDllEntry(
-        index: UINT, szDllName: LPOLESTR, szProcName: LPOLESTR
+        index: UINT,
+        szDllName: LPOLESTR,
+        szProcName: LPOLESTR,
     ) -> HRESULT,
-    fn SetFuncDocString(index: UINT, szDocString: LPOLESTR) -> HRESULT,
-    fn SetVarDocString(index: UINT, szDocString: LPOLESTR) -> HRESULT,
-    fn SetFuncHelpContext(index: UINT, dwHelpContext: DWORD) -> HRESULT,
-    fn SetVarHelpContext(index: UINT, dwHelpContext: DWORD) -> HRESULT,
-    fn SetMops(index: UINT, bstrMops: BSTR) -> HRESULT,
-    fn SetTypeIdldesc(pIdlDesc: *mut IDLDESC) -> HRESULT,
-    fn LayOut() -> HRESULT
+    fn SetFuncDocString(
+        index: UINT,
+        szDocString: LPOLESTR,
+    ) -> HRESULT,
+    fn SetVarDocString(
+        index: UINT,
+        szDocString: LPOLESTR,
+    ) -> HRESULT,
+    fn SetFuncHelpContext(
+        index: UINT,
+        dwHelpContext: DWORD,
+    ) -> HRESULT,
+    fn SetVarHelpContext(
+        index: UINT,
+        dwHelpContext: DWORD,
+    ) -> HRESULT,
+    fn SetMops(
+        index: UINT,
+        bstrMops: BSTR,
+    ) -> HRESULT,
+    fn SetTypeIdldesc(
+        pIdlDesc: *mut IDLDESC,
+    ) -> HRESULT,
+    fn LayOut() -> HRESULT,
 }
 );
 
@@ -509,19 +563,31 @@ pub const DISPID_DESTRUCTOR: INT = -7;
 pub const DISPID_COLLECT: INT = -8;
 RIDL!(#[uuid(0x00020400, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
-    fn GetTypeInfoCount(pctinfo: *mut UINT) -> HRESULT,
+    fn GetTypeInfoCount(
+        pctinfo: *mut UINT,
+    ) -> HRESULT,
     fn GetTypeInfo(
-        iTInfo: UINT, lcid: LCID, ppTInfo: *mut *mut ITypeInfo
+        iTInfo: UINT,
+        lcid: LCID,
+        ppTInfo: *mut *mut ITypeInfo,
     ) -> HRESULT,
     fn GetIDsOfNames(
-        riid: REFIID, rgszNames: *mut LPOLESTR, cNames: UINT, lcid: LCID,
-        rgDispId: *mut DISPID
+        riid: REFIID,
+        rgszNames: *mut LPOLESTR,
+        cNames: UINT,
+        lcid: LCID,
+        rgDispId: *mut DISPID,
     ) -> HRESULT,
     fn Invoke(
-        dispIdMember: DISPID, riid: REFIID, lcid: LCID, wFlags: WORD,
-        pDispParams: *mut DISPPARAMS, pVarResult: *mut VARIANT, pExcepInfo: *mut EXCEPINFO,
-        puArgErr: *mut UINT
-    ) -> HRESULT
+        dispIdMember: DISPID,
+        riid: REFIID,
+        lcid: LCID,
+        wFlags: WORD,
+        pDispParams: *mut DISPPARAMS,
+        pVarResult: *mut VARIANT,
+        pExcepInfo: *mut EXCEPINFO,
+        puArgErr: *mut UINT,
+    ) -> HRESULT,
 }
 );
 pub enum IRecordInfo {} // FIXME
@@ -546,74 +612,136 @@ STRUCT!{struct TLIBATTR {
 RIDL!{#[uuid(0x00020402, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ITypeLib(ITypeLibVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeInfoCount() -> UINT,
-    fn GetTypeInfo(index: UINT, ppTInfo: *mut *mut ITypeInfo) -> HRESULT,
-    fn GetTypeInfoType(index: UINT, pTKind: *mut TYPEKIND) -> HRESULT,
-    fn GetTypeInfoOfGuid(guid: REFGUID, ppTInfo: *mut *mut ITypeInfo) -> HRESULT,
-    fn GetLibAttr(ppTLibAttr: *mut *mut TLIBATTR) -> HRESULT,
-    fn GetTypeComp(ppTComp: *mut *mut ITypeComp) -> HRESULT,
+    fn GetTypeInfo(
+        index: UINT,
+        ppTInfo: *mut *mut ITypeInfo,
+    ) -> HRESULT,
+    fn GetTypeInfoType(
+        index: UINT,
+        pTKind: *mut TYPEKIND,
+    ) -> HRESULT,
+    fn GetTypeInfoOfGuid(
+        guid: REFGUID,
+        ppTInfo: *mut *mut ITypeInfo,
+    ) -> HRESULT,
+    fn GetLibAttr(
+        ppTLibAttr: *mut *mut TLIBATTR,
+    ) -> HRESULT,
+    fn GetTypeComp(
+        ppTComp: *mut *mut ITypeComp,
+    ) -> HRESULT,
     fn GetDocumentation(
         index: INT,
         pbstrName: *mut BSTR,
         pBstrDocString: *mut BSTR,
         pdwHelpContext: *mut DWORD,
-        pBstrHelpFile: *mut BSTR
+        pBstrHelpFile: *mut BSTR,
     ) -> HRESULT,
     fn IsName(
         szNameBuf: LPOLESTR,
         lHashVal: ULONG,
-        pfName: *mut BOOL
+        pfName: *mut BOOL,
     ) -> HRESULT,
     fn FindName(
         szNameBuf: LPOLESTR,
         lHashVal: ULONG,
         ppTInfo: *mut *mut ITypeInfo,
         rgMemId: *mut MEMBERID,
-        pcFound: *mut USHORT
+        pcFound: *mut USHORT,
     ) -> HRESULT,
-    fn ReleaseTLibAttr(pTLibAttr: *const TLIBATTR) -> HRESULT
+    fn ReleaseTLibAttr(
+        pTLibAttr: *const TLIBATTR,
+    ) -> HRESULT,
 }}
 
 RIDL!(#[uuid(0x00020401, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
-    fn GetTypeAttr(ppTypeAttr: *mut *mut TYPEATTR) -> HRESULT,
-    fn GetTypeComp(ppTComp: *mut *mut ITypeComp) -> HRESULT,
-    fn GetFuncDesc(index: UINT, ppFunDesc: *mut *mut FUNCDESC) -> HRESULT,
-    fn GetVarDesc(index: UINT, pPVarDesc: *mut *mut VARDESC) -> HRESULT,
-    fn GetNames(
-        memid: MEMBERID, rgBstrNames: *mut BSTR, cMaxNames: UINT,
-        pcNames: *mut UINT
+    fn GetTypeAttr(
+        ppTypeAttr: *mut *mut TYPEATTR,
     ) -> HRESULT,
-    fn GetRefTypeOfImplType(index: UINT, pRefType: *mut HREFTYPE) -> HRESULT,
-    fn GetImplTypeFlags(index: UINT, pImplTypeFlags: *mut INT) -> HRESULT,
+    fn GetTypeComp(
+        ppTComp: *mut *mut ITypeComp,
+    ) -> HRESULT,
+    fn GetFuncDesc(
+        index: UINT,
+        ppFunDesc: *mut *mut FUNCDESC,
+    ) -> HRESULT,
+    fn GetVarDesc(
+        index: UINT,
+        pPVarDesc: *mut *mut VARDESC,
+    ) -> HRESULT,
+    fn GetNames(
+        memid: MEMBERID,
+        rgBstrNames: *mut BSTR,
+        cMaxNames: UINT,
+        pcNames: *mut UINT,
+    ) -> HRESULT,
+    fn GetRefTypeOfImplType(
+        index: UINT,
+        pRefType: *mut HREFTYPE,
+    ) -> HRESULT,
+    fn GetImplTypeFlags(
+        index: UINT,
+        pImplTypeFlags: *mut INT,
+    ) -> HRESULT,
     fn GetIDsOfNames(
-        rgszNames: *mut LPOLESTR, cNames: UINT, pMemId: *mut MEMBERID
+        rgszNames: *mut LPOLESTR,
+        cNames: UINT,
+        pMemId: *mut MEMBERID,
     ) -> HRESULT,
     fn Invoke(
-        pvInstance: PVOID, memid: MEMBERID, wFlags: WORD,
-        pDispParams: *mut DISPPARAMS, pVarResult: *mut VARIANT, pExcepInfo: *mut EXCEPINFO,
-        puArgErr: *mut UINT
+        pvInstance: PVOID,
+        memid: MEMBERID,
+        wFlags: WORD,
+        pDispParams: *mut DISPPARAMS,
+        pVarResult: *mut VARIANT,
+        pExcepInfo: *mut EXCEPINFO,
+        puArgErr: *mut UINT,
     ) -> HRESULT,
     fn GetDocumentation(
-        memid: MEMBERID, pBstrName: *mut BSTR, pBstrDocString: *mut BSTR,
-        pdwHelpContext: *mut DWORD, pBstrHelpFile: *mut BSTR
+        memid: MEMBERID,
+        pBstrName: *mut BSTR,
+        pBstrDocString: *mut BSTR,
+        pdwHelpContext: *mut DWORD,
+        pBstrHelpFile: *mut BSTR,
     ) -> HRESULT,
     fn GetDllEntry(
-        memid: MEMBERID, invKind: INVOKEKIND, pBstrDllName: *mut BSTR,
-        pBstrName: *mut BSTR, pwOrdinal: *mut WORD
+        memid: MEMBERID,
+        invKind: INVOKEKIND,
+        pBstrDllName: *mut BSTR,
+        pBstrName: *mut BSTR,
+        pwOrdinal: *mut WORD,
     ) -> HRESULT,
-    fn GetRefTypeInfo(hRefType: HREFTYPE, ppTInfo: *mut *mut ITypeInfo) -> HRESULT,
+    fn GetRefTypeInfo(
+        hRefType: HREFTYPE,
+        ppTInfo: *mut *mut ITypeInfo,
+    ) -> HRESULT,
     fn AddressOfMember(
-        memid: MEMBERID, invKind: INVOKEKIND, ppv: *mut PVOID
+        memid: MEMBERID,
+        invKind: INVOKEKIND,
+        ppv: *mut PVOID,
     ) -> HRESULT,
     fn CreateInstance(
-        pUnkOuter: *mut IUnknown, riid: REFIID, ppvObj: *mut PVOID
+        pUnkOuter: *mut IUnknown,
+        riid: REFIID,
+        ppvObj: *mut PVOID,
     ) -> HRESULT,
-    fn GetMops(memid: MEMBERID, pBstrMops: *mut BSTR) -> HRESULT,
+    fn GetMops(
+        memid: MEMBERID,
+        pBstrMops: *mut BSTR,
+    ) -> HRESULT,
     fn GetContainingTypeLib(
-        ppTLib: *mut *mut ITypeLib, pIndex: *mut UINT
+        ppTLib: *mut *mut ITypeLib,
+        pIndex: *mut UINT,
     ) -> HRESULT,
-    fn ReleaseTypeAttr(pTypeAttr: *mut TYPEATTR) -> (),
-    fn ReleaseFuncDesc(pFuncDesc: *mut FUNCDESC) -> (),
-    fn ReleaseVarDesc(pVarDesc: *mut VARDESC) -> ()
+    fn ReleaseTypeAttr(
+        pTypeAttr: *mut TYPEATTR,
+    ) -> (),
+    fn ReleaseFuncDesc(
+        pFuncDesc: *mut FUNCDESC,
+    ) -> (),
+    fn ReleaseVarDesc(
+        pVarDesc: *mut VARDESC,
+    ) -> (),
 }
 );

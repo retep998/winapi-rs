@@ -10,9 +10,13 @@ pub type PSRWLOCK = *mut ::RTL_SRWLOCK;
 pub type SYNCHRONIZATION_BARRIER = ::RTL_BARRIER;
 pub type PSYNCHRONIZATION_BARRIER = ::PRTL_BARRIER;
 pub type LPSYNCHRONIZATION_BARRIER = ::PRTL_BARRIER;
-pub type PINIT_ONCE_FN = Option<unsafe extern "system" fn(
-    InitOnce: ::PINIT_ONCE, Parameter: ::PVOID, Context: *mut ::PVOID,
-) -> ::BOOL>;
-pub type PTIMERAPCROUTINE = Option<unsafe extern "system" fn(
-    lpArgToCompletionRoutine: ::LPVOID, dwTimerLowValue: ::DWORD, dwTimerHighValue: ::DWORD,
-)>;
+FN!{stdcall PINIT_ONCE_FN(
+    InitOnce: ::PINIT_ONCE,
+    Parameter: ::PVOID,
+    Context: *mut ::PVOID,
+) -> ::BOOL}
+FN!{stdcall PTIMERAPCROUTINE(
+    lpArgToCompletionRoutine: ::LPVOID,
+    dwTimerLowValue: ::DWORD,
+    dwTimerHighValue: ::DWORD,
+) -> ()}

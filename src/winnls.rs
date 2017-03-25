@@ -54,35 +54,89 @@ ENUM!{enum NORM_FORM {
     NormalizationKC = 0x5,
     NormalizationKD = 0x6,
 }}
-pub type LANGUAGEGROUP_ENUMPROCA = Option<unsafe extern "system" fn(
-    ::LGRPID, ::LPSTR, ::LPSTR, ::DWORD, ::LONG_PTR,
-) -> ::BOOL>;
-pub type LANGGROUPLOCALE_ENUMPROCA = Option<unsafe extern "system" fn(
-    ::LGRPID, ::LCID, ::LPSTR, ::LONG_PTR,
-) -> ::BOOL>;
-pub type UILANGUAGE_ENUMPROCA = Option<unsafe extern "system" fn(::LPSTR, ::LONG_PTR) -> ::BOOL>;
-pub type CODEPAGE_ENUMPROCA = Option<unsafe extern "system" fn(::LPSTR) -> ::BOOL>;
-pub type DATEFMT_ENUMPROCA = Option<unsafe extern "system" fn(::LPSTR) -> ::BOOL>;
-pub type DATEFMT_ENUMPROCEXA = Option<unsafe extern "system" fn(::LPSTR, ::CALID) -> ::BOOL>;
-pub type TIMEFMT_ENUMPROCA = Option<unsafe extern "system" fn(::LPSTR) -> ::BOOL>;
-pub type CALINFO_ENUMPROCA = Option<unsafe extern "system" fn(::LPSTR) -> ::BOOL>;
-pub type CALINFO_ENUMPROCEXA = Option<unsafe extern "system" fn(::LPSTR, ::CALID) -> ::BOOL>;
-pub type LOCALE_ENUMPROCA = Option<unsafe extern "system" fn(::LPSTR) -> ::BOOL>;
-pub type LOCALE_ENUMPROCW = Option<unsafe extern "system" fn(::LPWSTR) -> ::BOOL>;
-pub type LANGUAGEGROUP_ENUMPROCW = Option<unsafe extern "system" fn(
-    ::LGRPID, ::LPWSTR, ::LPWSTR, ::DWORD, ::LONG_PTR,
-) -> ::BOOL>;
-pub type LANGGROUPLOCALE_ENUMPROCW = Option<unsafe extern "system" fn(
-    ::LGRPID, ::LCID, ::LPWSTR, ::LONG_PTR,
-) -> ::BOOL>;
-pub type UILANGUAGE_ENUMPROCW = Option<unsafe extern "system" fn(::LPWSTR, ::LONG_PTR) -> ::BOOL>;
-pub type CODEPAGE_ENUMPROCW = Option<unsafe extern "system" fn(::LPWSTR) -> ::BOOL>;
-pub type DATEFMT_ENUMPROCW = Option<unsafe extern "system" fn(::LPWSTR) -> ::BOOL>;
-pub type DATEFMT_ENUMPROCEXW = Option<unsafe extern "system" fn(::LPWSTR, ::CALID) -> ::BOOL>;
-pub type TIMEFMT_ENUMPROCW = Option<unsafe extern "system" fn(::LPWSTR) -> ::BOOL>;
-pub type CALINFO_ENUMPROCW = Option<unsafe extern "system" fn(::LPWSTR) -> ::BOOL>;
-pub type CALINFO_ENUMPROCEXW = Option<unsafe extern "system" fn(::LPWSTR, ::CALID) -> ::BOOL>;
-pub type GEO_ENUMPROC = Option<unsafe extern "system" fn(GEOID) -> ::BOOL>;
+FN!{stdcall LANGUAGEGROUP_ENUMPROCA(
+    ::LGRPID,
+    ::LPSTR,
+    ::LPSTR,
+    ::DWORD,
+    ::LONG_PTR,
+) -> ::BOOL}
+FN!{stdcall LANGGROUPLOCALE_ENUMPROCA(
+    ::LGRPID,
+    ::LCID,
+    ::LPSTR,
+    ::LONG_PTR,
+) -> ::BOOL}
+FN!{stdcall UILANGUAGE_ENUMPROCA(
+    ::LPSTR,
+    ::LONG_PTR,
+) -> ::BOOL}
+FN!{stdcall CODEPAGE_ENUMPROCA(
+    ::LPSTR,
+) -> ::BOOL}
+FN!{stdcall DATEFMT_ENUMPROCA(
+    ::LPSTR,
+) -> ::BOOL}
+FN!{stdcall DATEFMT_ENUMPROCEXA(
+    ::LPSTR,
+    ::CALID,
+) -> ::BOOL}
+FN!{stdcall TIMEFMT_ENUMPROCA(
+    ::LPSTR,
+) -> ::BOOL}
+FN!{stdcall CALINFO_ENUMPROCA(
+    ::LPSTR,
+) -> ::BOOL}
+FN!{stdcall CALINFO_ENUMPROCEXA(
+    ::LPSTR,
+    ::CALID,
+) -> ::BOOL}
+FN!{stdcall LOCALE_ENUMPROCA(
+    ::LPSTR,
+) -> ::BOOL}
+FN!{stdcall LOCALE_ENUMPROCW(
+    ::LPWSTR,
+) -> ::BOOL}
+FN!{stdcall LANGUAGEGROUP_ENUMPROCW(
+    ::LGRPID,
+    ::LPWSTR,
+    ::LPWSTR,
+    ::DWORD,
+    ::LONG_PTR,
+) -> ::BOOL}
+FN!{stdcall LANGGROUPLOCALE_ENUMPROCW(
+    ::LGRPID,
+    ::LCID,
+    ::LPWSTR,
+    ::LONG_PTR,
+) -> ::BOOL}
+FN!{stdcall UILANGUAGE_ENUMPROCW(
+    ::LPWSTR,
+    ::LONG_PTR,
+) -> ::BOOL}
+FN!{stdcall CODEPAGE_ENUMPROCW(
+    ::LPWSTR,
+) -> ::BOOL}
+FN!{stdcall DATEFMT_ENUMPROCW(
+    ::LPWSTR,
+) -> ::BOOL}
+FN!{stdcall DATEFMT_ENUMPROCEXW(
+    ::LPWSTR,
+    ::CALID,
+) -> ::BOOL}
+FN!{stdcall TIMEFMT_ENUMPROCW(
+    ::LPWSTR,
+) -> ::BOOL}
+FN!{stdcall CALINFO_ENUMPROCW(
+    ::LPWSTR,
+) -> ::BOOL}
+FN!{stdcall CALINFO_ENUMPROCEXW(
+    ::LPWSTR,
+    ::CALID,
+) -> ::BOOL}
+FN!{stdcall GEO_ENUMPROC(
+    GEOID,
+) -> ::BOOL}
 STRUCT!{struct CPINFO {
     MaxCharSize: ::UINT,
     DefaultChar: [::BYTE; MAX_DEFAULTCHAR],
@@ -164,15 +218,23 @@ STRUCT!{struct FILEMUIINFO {
     abBuffer: [::BYTE; 8],
 }}
 pub type PFILEMUIINFO = *mut FILEMUIINFO;
-pub type CALINFO_ENUMPROCEXEX = Option<unsafe extern "system" fn(
-    ::LPWSTR, ::CALID, ::LPWSTR, ::LPARAM,
-) -> ::BOOL>;
-pub type DATEFMT_ENUMPROCEXEX = Option<unsafe extern "system" fn(
-    ::LPWSTR, ::CALID, ::LPARAM,
-) -> ::BOOL>;
-pub type TIMEFMT_ENUMPROCEX = Option<unsafe extern "system" fn(
-    ::LPWSTR, ::LPARAM,
-) -> ::BOOL>;
-pub type LOCALE_ENUMPROCEX = Option<unsafe extern "system" fn(
-    ::LPWSTR, ::DWORD, ::LPARAM,
-) -> ::BOOL>;
+FN!{stdcall CALINFO_ENUMPROCEXEX(
+    ::LPWSTR,
+    ::CALID,
+    ::LPWSTR,
+    ::LPARAM,
+) -> ::BOOL}
+FN!{stdcall DATEFMT_ENUMPROCEXEX(
+    ::LPWSTR,
+    ::CALID,
+    ::LPARAM,
+) -> ::BOOL}
+FN!{stdcall TIMEFMT_ENUMPROCEX(
+    ::LPWSTR,
+    ::LPARAM,
+) -> ::BOOL}
+FN!{stdcall LOCALE_ENUMPROCEX(
+    ::LPWSTR,
+    ::DWORD,
+    ::LPARAM,
+) -> ::BOOL}

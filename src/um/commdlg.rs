@@ -20,7 +20,7 @@ FN!{stdcall LPOFNHOOKPROC(
     HWND,
     UINT,
     WPARAM,
-    LPARAM
+    LPARAM,
 ) -> UINT_PTR}
 STRUCT!{struct OPENFILENAME_NT4A {
     lStructSize: DWORD,
@@ -150,9 +150,12 @@ pub const OFN_EX_NOPLACESBAR: DWORD = 0x00000001;
 pub const OFN_SHAREFALLTHROUGH: UINT_PTR = 2;
 pub const OFN_SHARENOWARN: UINT_PTR = 1;
 pub const OFN_SHAREWARN: UINT_PTR = 0;
-pub type LPCCHOOKPROC = Option<unsafe extern "system" fn(
-    HWND, UINT, WPARAM, LPARAM,
-) -> UINT_PTR>;
+FN!{stdcall LPCCHOOKPROC(
+    HWND,
+    UINT,
+    WPARAM,
+    LPARAM,
+) -> UINT_PTR}
 STRUCT!{struct OFNOTIFYA {
     hdr: NMHDR,
     lpOFN: LPOPENFILENAMEA,
@@ -231,9 +234,12 @@ pub const CC_ENABLETEMPLATE: DWORD = 0x00000020;
 pub const CC_ENABLETEMPLATEHANDLE: DWORD = 0x00000040;
 pub const CC_SOLIDCOLOR: DWORD = 0x00000080;
 pub const CC_ANYCOLOR: DWORD = 0x00000100;
-pub type LPFRHOOKPROC = Option<unsafe extern "system" fn(
-    HWND, UINT, WPARAM, LPARAM,
-) -> UINT_PTR>;
+FN!{stdcall LPFRHOOKPROC(
+    HWND,
+    UINT,
+    WPARAM,
+    LPARAM,
+) -> UINT_PTR}
 STRUCT!{struct FINDREPLACEA {
     lStructSize: DWORD,
     hwndOwner: HWND,
@@ -283,9 +289,12 @@ pub const FR_RAW: DWORD = 0x00020000;
 pub const FR_MATCHDIAC: DWORD = 0x20000000;
 pub const FR_MATCHKASHIDA: DWORD = 0x40000000;
 pub const FR_MATCHALEFHAMZA: DWORD = 0x80000000;
-pub type LPCFHOOKPROC = Option<unsafe extern "system" fn(
-    HWND, UINT, WPARAM, LPARAM,
-) -> UINT_PTR>;
+FN!{stdcall LPCFHOOKPROC(
+    HWND,
+    UINT,
+    WPARAM,
+    LPARAM,
+) -> UINT_PTR}
 STRUCT!{struct CHOOSEFONTA {
     lStructSize: DWORD,
     hwndOwner: HWND,
@@ -370,12 +379,18 @@ pub const CD_LBSELNOITEMS: WORD = -1i16 as WORD;
 pub const CD_LBSELCHANGE: WORD = 0;
 pub const CD_LBSELSUB: WORD = 1;
 pub const CD_LBSELADD: WORD = 2;
-pub type LPPRINTHOOKPROC = Option<unsafe extern "system" fn(
-    HWND, UINT, WPARAM, LPARAM,
-) -> UINT_PTR>;
-pub type LPSETUPHOOKPROC = Option<unsafe extern "system" fn(
-    HWND, UINT, WPARAM, LPARAM,
-) -> UINT_PTR>;
+FN!{stdcall LPPRINTHOOKPROC(
+    HWND,
+    UINT,
+    WPARAM,
+    LPARAM,
+) -> UINT_PTR}
+FN!{stdcall LPSETUPHOOKPROC(
+    HWND,
+    UINT,
+    WPARAM,
+    LPARAM,
+) -> UINT_PTR}
 STRUCT!{struct PRINTDLGA {
     lStructSize: DWORD,
     hwndOwner: HWND,
@@ -425,16 +440,28 @@ interface IPrintDialogCallback(IPrintDialogCallbackVtbl) : IUnknown(IUnknownVtbl
     fn InitDone() -> HRESULT,
     fn SelectionChange() -> HRESULT,
     fn HandleMessage(
-        hDlg: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM,
-        pResult: *mut LRESULT
-    ) -> HRESULT
+        hDlg: HWND,
+        uMsg: UINT,
+        wParam: WPARAM,
+        lParam: LPARAM,
+        pResult: *mut LRESULT,
+    ) -> HRESULT,
 }
 );
 RIDL!(#[uuid(0x509aaeda, 0x5639, 0x11d1, 0xb6, 0xa1, 0x0, 0x0, 0xf8, 0x75, 0x7b, 0xf9)]
 interface IPrintDialogServices(IPrintDialogServicesVtbl) : IUnknown(IUnknownVtbl) {
-    fn GetCurrentDevMode(pDevMode: LPDEVMODEW, pcbSize: *mut UINT) -> HRESULT,
-    fn GetCurrentPrinterName(pPrinterName: LPWSTR, pcchSize: *mut UINT) -> HRESULT,
-    fn GetCurrentPortName(pPortName: LPWSTR, pcchSize: *mut UINT) -> HRESULT
+    fn GetCurrentDevMode(
+        pDevMode: LPDEVMODEW,
+        pcbSize: *mut UINT,
+    ) -> HRESULT,
+    fn GetCurrentPrinterName(
+        pPrinterName: LPWSTR,
+        pcchSize: *mut UINT,
+    ) -> HRESULT,
+    fn GetCurrentPortName(
+        pPortName: LPWSTR,
+        pcchSize: *mut UINT,
+    ) -> HRESULT,
 }
 );
 STRUCT!{struct PRINTPAGERANGE {
@@ -540,12 +567,18 @@ pub const WM_PSD_MARGINRECT: UINT = WM_USER + 3;
 pub const WM_PSD_GREEKTEXTRECT: UINT = WM_USER + 4;
 pub const WM_PSD_ENVSTAMPRECT: UINT = WM_USER + 5;
 pub const WM_PSD_YAFULLPAGERECT: UINT = WM_USER + 6;
-pub type LPPAGEPAINTHOOK = Option<unsafe extern "system" fn(
-    HWND, UINT, WPARAM, LPARAM,
-) -> UINT_PTR>;
-pub type LPPAGESETUPHOOK = Option<unsafe extern "system" fn(
-    HWND, UINT, WPARAM, LPARAM,
-) -> UINT_PTR>;
+FN!{stdcall LPPAGEPAINTHOOK(
+    HWND,
+    UINT,
+    WPARAM,
+    LPARAM,
+) -> UINT_PTR}
+FN!{stdcall LPPAGESETUPHOOK(
+    HWND,
+    UINT,
+    WPARAM,
+    LPARAM,
+) -> UINT_PTR}
 STRUCT!{struct PAGESETUPDLGA {
     lStructSize: DWORD,
     hwndOwner: HWND,

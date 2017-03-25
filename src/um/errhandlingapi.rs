@@ -12,7 +12,7 @@ use um::winnt::{
     PVECTORED_EXCEPTION_HANDLER, PVOID,
 };
 FN!{stdcall PTOP_LEVEL_EXCEPTION_FILTER(
-    ExceptionInfo: *mut EXCEPTION_POINTERS
+    ExceptionInfo: *mut EXCEPTION_POINTERS,
 ) -> LONG}
 pub type LPTOP_LEVEL_EXCEPTION_FILTER = PTOP_LEVEL_EXCEPTION_FILTER;
 extern "system" {

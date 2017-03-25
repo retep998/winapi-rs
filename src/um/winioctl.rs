@@ -6,8 +6,8 @@
 // except according to those terms.
 //! This module defines the 32-Bit Windows Device I/O control codes.
 use shared::devpropdef::DEVPROPKEY;
-use shared::minwindef::{DWORD, BYTE, WORD};
-use um::winnt::{LARGE_INTEGER, WCHAR, HANDLE, FILE_READ_DATA, FILE_WRITE_DATA, ANYSIZE_ARRAY};
+use shared::minwindef::{BYTE, DWORD, WORD};
+use um::winnt::{ANYSIZE_ARRAY, FILE_READ_DATA, FILE_WRITE_DATA, HANDLE, LARGE_INTEGER, WCHAR};
 DEFINE_GUID!{GUID_DEVINTERFACE_DISK,
     0x53f56307, 0xb6bf, 0x11d0, 0x94, 0xf2, 0x00, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b}
 DEFINE_GUID!{GUID_DEVINTERFACE_CDROM,

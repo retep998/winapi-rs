@@ -76,11 +76,13 @@ pub const SECURITY_EFFECTIVE_ONLY: DWORD = 0x00080000;
 pub const SECURITY_SQOS_PRESENT: DWORD = 0x00100000;
 pub const SECURITY_VALID_SQOS_FLAGS: DWORD = 0x001F0000;
 //282
-pub type PFIBER_START_ROUTINE = Option<unsafe extern "system" fn(lpFiberParameter: LPVOID)>;
+FN!{stdcall PFIBER_START_ROUTINE(
+    lpFiberParameter: LPVOID,
+) -> ()}
 pub type LPFIBER_START_ROUTINE = PFIBER_START_ROUTINE;
-pub type PFIBER_CALLOUT_ROUTINE = Option<unsafe extern "system" fn(
+FN!{stdcall PFIBER_CALLOUT_ROUTINE(
     lpParameter: LPVOID,
-) -> LPVOID>;
+) -> LPVOID}
 //299
 pub type LPLDT_ENTRY = LPVOID; // TODO - fix this for 32-bit
 //405
@@ -325,11 +327,17 @@ pub const STARTF_TITLEISAPPID: DWORD = 0x00001000;
 pub const STARTF_PREVENTPINNING: DWORD = 0x00002000;
 pub const STARTF_UNTRUSTEDSOURCE: DWORD = 0x00008000;
 //5002
-pub type LPPROGRESS_ROUTINE = Option<unsafe extern "system" fn(
-    TotalFileSize: LARGE_INTEGER, TotalBytesTransferred: LARGE_INTEGER,
-    StreamSize: LARGE_INTEGER, StreamBytesTransferred: LARGE_INTEGER, dwStreamNumber: DWORD,
-    dwCallbackReason: DWORD, hSourceFile: HANDLE, hDestinationFile: HANDLE, lpData: LPVOID,
-) -> DWORD>;
+FN!{stdcall LPPROGRESS_ROUTINE(
+    TotalFileSize: LARGE_INTEGER,
+    TotalBytesTransferred: LARGE_INTEGER,
+    StreamSize: LARGE_INTEGER,
+    StreamBytesTransferred: LARGE_INTEGER,
+    dwStreamNumber: DWORD,
+    dwCallbackReason: DWORD,
+    hSourceFile: HANDLE,
+    hDestinationFile: HANDLE,
+    lpData: LPVOID,
+) -> DWORD}
 //5095
 ENUM!{enum COPYFILE2_MESSAGE_TYPE {
     COPYFILE2_CALLBACK_NONE = 0,
@@ -432,9 +440,10 @@ UNION!{COPYFILE2_MESSAGE, Info, StreamFinished, StreamFinished_mut,
     COPYFILE2_MESSAGE_StreamFinished}
 UNION!{COPYFILE2_MESSAGE, Info, PollContinue, PollContinue_mut, COPYFILE2_MESSAGE_PollContinue}
 UNION!{COPYFILE2_MESSAGE, Info, Error, Error_mut, COPYFILE2_MESSAGE_Error}
-pub type PCOPYFILE2_PROGRESS_ROUTINE = Option<unsafe extern "system" fn(
-    pMessage: *const COPYFILE2_MESSAGE, pvCallbackContext: PVOID,
-) -> COPYFILE2_MESSAGE_ACTION>;
+FN!{stdcall PCOPYFILE2_PROGRESS_ROUTINE(
+    pMessage: *const COPYFILE2_MESSAGE,
+    pvCallbackContext: PVOID,
+) -> COPYFILE2_MESSAGE_ACTION}
 STRUCT!{struct COPYFILE2_EXTENDED_PARAMETERS {
     dwSize: DWORD,
     dwCopyFlags: DWORD,
@@ -568,9 +577,9 @@ ENUM!{enum PIPE_ATTRIBUTE_TYPE {
     PipeConnectionAttribute,
     PipeHandleAttribute,
 }}
-pub type APPLICATION_RECOVERY_CALLBACK = Option<unsafe extern "system" fn(
-    pvParameter: PVOID
-) -> DWORD>;
+FN!{stdcall APPLICATION_RECOVERY_CALLBACK(
+    pvParameter: PVOID,
+) -> DWORD}
 STRUCT!{struct SYSTEM_POWER_STATUS {
     ACLineStatus: BYTE,
     BatteryFlag: BYTE,

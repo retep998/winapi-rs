@@ -23,11 +23,16 @@ STRUCT!{struct OLECMDTEXT {
 RIDL!{#[uuid(0xb722bccb, 0x4e68, 0x101b, 0xa2, 0xbc, 0x00, 0xaa, 0x00, 0x40, 0x47, 0x70)]
 interface IOleCommandTarget(IOleCommandTargetVtbl): IUnknown(IUnknownVtbl) {
     fn QueryStatus(
-        pguidCmdGroup: *const GUID, cCmds: ULONG, prgCmds: *mut OLECMD,
-        pCmdText: *mut OLECMDTEXT
+        pguidCmdGroup: *const GUID,
+        cCmds: ULONG,
+        prgCmds: *mut OLECMD,
+        pCmdText: *mut OLECMDTEXT,
     ) -> HRESULT,
     fn Exec(
-        pguidCmdGroup: *const GUID, nCmdID: DWORD, nCmdexecopt: DWORD,
-        pvaIn: *mut VARIANT, pvaOut: *mut VARIANT
-    ) -> HRESULT
+        pguidCmdGroup: *const GUID,
+        nCmdID: DWORD,
+        nCmdexecopt: DWORD,
+        pvaIn: *mut VARIANT,
+        pvaOut: *mut VARIANT,
+    ) -> HRESULT,
 }}

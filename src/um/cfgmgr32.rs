@@ -698,10 +698,13 @@ UNION!{
     CM_NOTIFY_EVENT_DATA_DeviceInstance
 }
 pub type PCM_NOTIFY_EVENT_DATA = *mut CM_NOTIFY_EVENT_DATA;
-pub type PCM_NOTIFY_CALLBACK = Option<unsafe extern "system" fn(
-    hNotify: HCMNOTIFICATION, Context: PVOID, Action: CM_NOTIFY_ACTION,
-    EventData: PCM_NOTIFY_EVENT_DATA, EventDataSize: DWORD,
-) -> DWORD>;
+FN!{stdcall PCM_NOTIFY_CALLBACK(
+    hNotify: HCMNOTIFICATION,
+    Context: PVOID,
+    Action: CM_NOTIFY_ACTION,
+    EventData: PCM_NOTIFY_EVENT_DATA,
+    EventDataSize: DWORD,
+) -> DWORD}
 pub const CR_SUCCESS: CONFIGRET = 0x00000000;
 pub const CR_DEFAULT: CONFIGRET = 0x00000001;
 pub const CR_OUT_OF_MEMORY: CONFIGRET = 0x00000002;

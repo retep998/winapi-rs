@@ -5,9 +5,11 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! WinSock2 Extension for TCP/IP protocols
-pub type LPLOOKUPSERVICE_COMPLETION_ROUTINE = Option<unsafe extern "system" fn(
-    dwError: ::DWORD, dwBytes: ::DWORD, lpOverlapped: ::LPWSAOVERLAPPED,
-)>;
+FN!{stdcall LPLOOKUPSERVICE_COMPLETION_ROUTINE(
+    dwError: ::DWORD,
+    dwBytes: ::DWORD,
+    lpOverlapped: ::LPWSAOVERLAPPED,
+) -> ()}
 pub type socklen_t = ::c_int;
 STRUCT!{struct ip_mreq {
     imr_multiaddr: ::in_addr,

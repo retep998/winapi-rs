@@ -199,7 +199,7 @@ FN!{stdcall PEXCEPTION_ROUTINE(
     ExceptionRecord: *mut EXCEPTION_RECORD,
     EstablisherFrame: PVOID,
     ContextRecord: *mut CONTEXT,
-    DispatcherContext: PVOID
+    DispatcherContext: PVOID,
 ) -> EXCEPTION_DISPOSITION}
 pub const VER_SERVER_NT: DWORD = 0x80000000;
 pub const VER_WORKSTATION_NT: DWORD = 0x40000000;
@@ -1071,13 +1071,13 @@ STRUCT!{struct UNWIND_HISTORY_TABLE {
 pub type PUNWIND_HISTORY_TABLE = *mut UNWIND_HISTORY_TABLE;
 FN!{cdecl PGET_RUNTIME_FUNCTION_CALLBACK(
     ControlPc: DWORD64,
-    Context: PVOID
+    Context: PVOID,
 ) -> PRUNTIME_FUNCTION}
 FN!{cdecl POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK(
     Process: HANDLE,
     TableAddress: PVOID,
     Entries: PDWORD,
-    Functions: *mut PRUNTIME_FUNCTION
+    Functions: *mut PRUNTIME_FUNCTION,
 ) -> DWORD}
 pub const OUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK_EXPORT_NAME: &'static str
     = "OutOfProcessFunctionTableCallback";
@@ -2230,12 +2230,14 @@ STRUCT!{struct RTL_CONDITION_VARIABLE {
 }}
 pub type PRTL_CONDITION_VARIABLE = *mut RTL_CONDITION_VARIABLE;
 pub const RTL_CONDITION_VARIABLE_INIT: RTL_CONDITION_VARIABLE = RTL_CONDITION_VARIABLE {
-    Ptr: 0 as PVOID
+    Ptr: 0 as PVOID,
 };
 //18204
-FN!{stdcall PAPCFUNC(Parameter: ULONG_PTR) -> ()}
+FN!{stdcall PAPCFUNC(
+    Parameter: ULONG_PTR,
+) -> ()}
 FN!{stdcall PVECTORED_EXCEPTION_HANDLER(
-    ExceptionInfo: *mut EXCEPTION_POINTERS
+    ExceptionInfo: *mut EXCEPTION_POINTERS,
 ) -> LONG}
 ENUM!{enum HEAP_INFORMATION_CLASS {
     HeapCompatibilityInformation = 0,
@@ -2258,14 +2260,25 @@ pub const WT_EXECUTELONGFUNCTION: ULONG = 0x00000010;
 pub const WT_EXECUTEINPERSISTENTIOTHREAD: ULONG = 0x00000040;
 pub const WT_EXECUTEINPERSISTENTTHREAD: ULONG = 0x00000080;
 pub const WT_TRANSFER_IMPERSONATION: ULONG = 0x00000100;
-FN!{stdcall WAITORTIMERCALLBACKFUNC(PVOID, BOOLEAN) -> ()}
-FN!{stdcall WORKERCALLBACKFUNC(PVOID) -> ()}
-FN!{stdcall APC_CALLBACK_FUNCTION(DWORD, PVOID, PVOID) -> ()}
+FN!{stdcall WAITORTIMERCALLBACKFUNC(
+    PVOID,
+    BOOLEAN,
+) -> ()}
+FN!{stdcall WORKERCALLBACKFUNC(
+    PVOID,
+) -> ()}
+FN!{stdcall APC_CALLBACK_FUNCTION(
+    DWORD,
+    PVOID,
+    PVOID,
+) -> ()}
 pub type WAITORTIMERCALLBACK = WAITORTIMERCALLBACKFUNC;
-FN!{stdcall PFLS_CALLBACK_FUNCTION(lpFlsData: PVOID) -> ()}
+FN!{stdcall PFLS_CALLBACK_FUNCTION(
+    lpFlsData: PVOID,
+) -> ()}
 FN!{stdcall PSECURE_MEMORY_CACHE_CALLBACK(
     Addr: PVOID,
-    Range: SIZE_T
+    Range: SIZE_T,
 ) -> BOOLEAN}
 pub const WT_EXECUTEINLONGTHREAD: ULONG = 0x00000010;
 pub const WT_EXECUTEDELETEWAIT: ULONG = 0x00000008;
@@ -2369,20 +2382,29 @@ ENUM!{enum TP_CALLBACK_PRIORITY {
     TP_CALLBACK_PRIORITY_COUNT = 4,
 }}
 FN!{stdcall PTP_CLEANUP_GROUP_CANCEL_CALLBACK(
-    ObjectContext: PVOID, CleanupContext: PVOID
+    ObjectContext: PVOID,
+    CleanupContext: PVOID,
 ) -> ()}
 FN!{stdcall PTP_SIMPLE_CALLBACK(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID
+    Instance: PTP_CALLBACK_INSTANCE,
+    Context: PVOID,
 ) -> ()}
 FN!{stdcall PTP_WORK_CALLBACK(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Work: PTP_WORK
+    Instance: PTP_CALLBACK_INSTANCE,
+    Context: PVOID,
+    Work: PTP_WORK,
 ) -> ()}
 FN!{stdcall PTP_TIMER_CALLBACK(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Timer: PTP_TIMER
+    Instance: PTP_CALLBACK_INSTANCE,
+    Context: PVOID,
+    Timer: PTP_TIMER,
 ) -> ()}
 pub type TP_WAIT_RESULT = DWORD;
 FN!{stdcall PTP_WAIT_CALLBACK(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Wait: PTP_WAIT, WaitResult: TP_WAIT_RESULT
+    Instance: PTP_CALLBACK_INSTANCE,
+    Context: PVOID,
+    Wait: PTP_WAIT,
+    WaitResult: TP_WAIT_RESULT,
 ) -> ()}
 pub type TP_VERSION = DWORD;
 pub type PTP_VERSION = *mut DWORD;
@@ -2449,7 +2471,9 @@ ENUM!{enum RTL_UMS_SCHEDULER_REASON {
     UmsSchedulerThreadYield,
 }}
 FN!{stdcall PRTL_UMS_SCHEDULER_ENTRY_POINT(
-    Reason: RTL_UMS_SCHEDULER_REASON, ActivationPayload: ULONG_PTR, SchedulerParam: PVOID
+    Reason: RTL_UMS_SCHEDULER_REASON,
+    ActivationPayload: ULONG_PTR,
+    SchedulerParam: PVOID,
 ) -> ()}
 ENUM!{enum FIRMWARE_TYPE {
     FirmwareTypeUnknown,

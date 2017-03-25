@@ -483,7 +483,11 @@ pub type PABCFLOAT = *mut ABCFLOAT;
 pub type NPABCFLOAT = *mut ABCFLOAT;
 pub type LPABCFLOAT = *mut ABCFLOAT;
 //3581
-FN!{stdcall LINEDDAPROC(c_int, c_int, LPARAM) -> ()}
+FN!{stdcall LINEDDAPROC(
+    c_int,
+    c_int,
+    LPARAM,
+) -> ()}
 STRUCT!{struct XFORM {
     eM11: FLOAT,
     eM12: FLOAT,
@@ -829,10 +833,16 @@ STRUCT!{struct COLORADJUSTMENT {
 pub type PCOLORADJUSTMENT = *mut COLORADJUSTMENT;
 pub type LPCOLORADJUSTMENT = *mut COLORADJUSTMENT;
 FN!{stdcall OLDFONTENUMPROCA(
-    *const LOGFONTA, *const VOID, DWORD, LPARAM
+    *const LOGFONTA,
+    *const VOID,
+    DWORD,
+    LPARAM,
 ) -> c_int}
 FN!{stdcall OLDFONTENUMPROCW(
-    *const LOGFONTW, *const VOID, DWORD, LPARAM
+    *const LOGFONTW,
+    *const VOID,
+    DWORD,
+    LPARAM,
 ) -> c_int}
 pub type FONTENUMPROCA = OLDFONTENUMPROCA;
 pub type FONTENUMPROCW = OLDFONTENUMPROCW;
@@ -851,7 +861,10 @@ STRUCT!{struct GLYPHSET {
 }}
 pub type PGLYPHSET = *mut GLYPHSET;
 pub type LPGLYPHSET = *mut GLYPHSET;
-FN!{stdcall ABORTPROC(HDC, c_int) -> BOOL}
+FN!{stdcall ABORTPROC(
+    HDC,
+    c_int,
+) -> BOOL}
 STRUCT!{struct DOCINFOA {
     cbSize: c_int,
     lpszDocName: LPCSTR,
@@ -868,8 +881,14 @@ STRUCT!{struct DOCINFOW {
     fwType: DWORD,
 }}
 pub type LPDOCINFOW = *mut DOCINFOW;
-FN!{stdcall ICMENUMPROCA(LPSTR, LPARAM) -> c_int}
-FN!{stdcall ICMENUMPROCW(LPWSTR, LPARAM) -> c_int}
+FN!{stdcall ICMENUMPROCA(
+    LPSTR,
+    LPARAM,
+) -> c_int}
+FN!{stdcall ICMENUMPROCW(
+    LPWSTR,
+    LPARAM,
+) -> c_int}
 STRUCT!{struct HANDLETABLE {
     objectHandle: [HGDIOBJ; 1],
 }}
@@ -883,9 +902,16 @@ STRUCT!{struct METARECORD {
 pub type PMETARECORD = *mut METARECORD;
 pub type LPMETARECORD = *mut METARECORD;
 FN!{stdcall MFENUMPROC(
-    hdc: HDC, lpht: *mut HANDLETABLE, lpMR: *mut METARECORD, nObj: c_int, param: LPARAM
+    hdc: HDC,
+    lpht: *mut HANDLETABLE,
+    lpMR: *mut METARECORD,
+    nObj: c_int,
+    param: LPARAM,
 ) -> c_int}
-FN!{stdcall GOBJENUMPROC(LPVOID, LPARAM) -> c_int}
+FN!{stdcall GOBJENUMPROC(
+    LPVOID,
+    LPARAM,
+) -> c_int}
 STRUCT!{struct GCP_RESULTSA {
     lStructSize: DWORD,
     lpOutString: LPSTR,
@@ -1179,7 +1205,11 @@ pub type PEXTLOGPEN = *mut EXTLOGPEN;
 pub type NPEXTLOGPEN = *mut EXTLOGPEN;
 pub type LPEXTLOGPEN = *mut EXTLOGPEN;
 FN!{stdcall ENHMFENUMPROC(
-    hdc: HDC, lpht: HANDLETABLE, lpmr: *const ENHMETARECORD, nHandles: c_int, data: LPARAM
+    hdc: HDC,
+    lpht: HANDLETABLE,
+    lpmr: *const ENHMETARECORD,
+    nHandles: c_int,
+    data: LPARAM,
 ) -> c_int}
 /* Metafile Functions */
 pub const META_SETBKCOLOR: WORD = 0x0201;

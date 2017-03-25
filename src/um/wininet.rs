@@ -475,7 +475,11 @@ pub const AUTODIAL_MODE_NEVER: DWORD = 1;
 pub const AUTODIAL_MODE_ALWAYS: DWORD = 2;
 pub const AUTODIAL_MODE_NO_NETWORK_PRESENT: DWORD = 4;
 FN!{stdcall INTERNET_STATUS_CALLBACK(
-    HINTERNET, DWORD_PTR, DWORD, LPVOID, DWORD
+    HINTERNET,
+    DWORD_PTR,
+    DWORD,
+    LPVOID,
+    DWORD,
 ) -> ()}
 pub type LPINTERNET_STATUS_CALLBACK = *mut INTERNET_STATUS_CALLBACK;
 pub const INTERNET_STATUS_RESOLVING_NAME: DWORD = 10;
@@ -811,7 +815,8 @@ pub const GOPHER_ATTRIBUTE_ID_VIEW: DWORD = GOPHER_ATTRIBUTE_ID_BASE + 23;
 pub const GOPHER_ATTRIBUTE_ID_TREEWALK: DWORD = GOPHER_ATTRIBUTE_ID_BASE + 24;
 pub const GOPHER_ATTRIBUTE_ID_UNKNOWN: DWORD = GOPHER_ATTRIBUTE_ID_BASE + 25;
 FN!{stdcall GOPHER_ATTRIBUTE_ENUMERATOR(
-    LPGOPHER_ATTRIBUTE_TYPE, DWORD
+    LPGOPHER_ATTRIBUTE_TYPE,
+    DWORD,
 ) -> BOOL}
 pub const HTTP_MAJOR_VERSION: DWORD = 1;
 pub const HTTP_MINOR_VERSION: DWORD = 0;
@@ -999,7 +1004,11 @@ pub const FLAGS_ERROR_UI_FLAGS_CHANGE_OPTIONS: DWORD = 0x02;
 pub const FLAGS_ERROR_UI_FLAGS_GENERATE_DATA: DWORD = 0x04;
 pub const FLAGS_ERROR_UI_FLAGS_NO_UI: DWORD = 0x08;
 pub const FLAGS_ERROR_UI_SERIALIZE_DIALOGS: DWORD = 0x10;
-FN!{stdcall PFN_AUTH_NOTIFY(DWORD_PTR, DWORD, LPVOID) -> DWORD}
+FN!{stdcall PFN_AUTH_NOTIFY(
+    DWORD_PTR,
+    DWORD,
+    LPVOID,
+) -> DWORD}
 STRUCT!{struct INTERNET_AUTH_NOTIFY_DATA {
     cbStruct: DWORD,
     dwOptions: DWORD,
@@ -1223,15 +1232,44 @@ pub const INTERNET_AUTODIAL_FLAGS_MASK: DWORD = INTERNET_AUTODIAL_FORCE_ONLINE
 pub const PROXY_AUTO_DETECT_TYPE_DHCP: DWORD = 1;
 pub const PROXY_AUTO_DETECT_TYPE_DNS_A: DWORD = 2;
 STRUCT!{struct AutoProxyHelperVtbl {
-    IsResolvable: Option<unsafe extern "system" fn(LPSTR) -> BOOL>,
-    GetIPAddress: Option<unsafe extern "system" fn(LPSTR, LPDWORD) -> DWORD>,
-    ResolveHostName: Option<unsafe extern "system" fn(LPSTR, LPSTR, LPDWORD) -> DWORD>,
-    IsInNet: Option<unsafe extern "system" fn(LPSTR, LPSTR, LPSTR) -> BOOL>,
-    IsResolvableEx: Option<unsafe extern "system" fn(LPSTR) -> BOOL>,
-    GetIPAddressEx: Option<unsafe extern "system" fn(LPSTR, LPDWORD) -> DWORD>,
-    ResolveHostNameEx: Option<unsafe extern "system" fn(LPSTR, LPSTR, LPDWORD) -> DWORD>,
-    IsInNetEx: Option<unsafe extern "system" fn(LPSTR, LPSTR) -> BOOL>,
-    SortIpList: Option<unsafe extern "system" fn(LPSTR, LPSTR, LPDWORD) -> DWORD>,
+    IsResolvable: Option<unsafe extern "system" fn(
+        lpszHost: LPSTR,
+    ) -> BOOL>,
+    GetIPAddress: Option<unsafe extern "system" fn(
+        lpszIPAddress: LPSTR,
+        lpdwIPAddressSize: LPDWORD,
+    ) -> DWORD>,
+    ResolveHostName: Option<unsafe extern "system" fn(
+        lpszHostName: LPSTR,
+        lpszIPAddress: LPSTR,
+        lpdwIPAddressSize: LPDWORD,
+    ) -> DWORD>,
+    IsInNet: Option<unsafe extern "system" fn(
+        lpszIPAddress: LPSTR,
+        lpszDest: LPSTR,
+        lpszMask: LPSTR,
+    ) -> BOOL>,
+    IsResolvableEx: Option<unsafe extern "system" fn(
+        lpszHost: LPSTR,
+    ) -> BOOL>,
+    GetIPAddressEx: Option<unsafe extern "system" fn(
+        lpszIPAddress: LPSTR,
+        lpdwIPAddressSize: LPDWORD,
+    ) -> DWORD>,
+    ResolveHostNameEx: Option<unsafe extern "system" fn(
+        lpszHostName: LPSTR,
+        lpszIPAddress: LPSTR,
+        lpdwIPAddressSize: LPDWORD,
+    ) -> DWORD>,
+    IsInNetEx: Option<unsafe extern "system" fn(
+        lpszIPAddress: LPSTR,
+        lpszIPPrefix: LPSTR,
+    ) -> BOOL>,
+    SortIpList: Option<unsafe extern "system" fn(
+        lpszIPAddressList: LPSTR,
+        lpszIPSortedList: LPSTR,
+        lpdwIPSortedListSize: LPDWORD,
+    ) -> DWORD>,
 }}
 STRUCT!{struct AUTO_PROXY_SCRIPT_BUFFER {
     dwStructSize: DWORD,
@@ -1243,13 +1281,23 @@ STRUCT!{struct AutoProxyHelperFunctions {
     lpVtbl: *const AutoProxyHelperVtbl,
 }}
 FN!{stdcall pfnInternetInitializeAutoProxyDll(
-    DWORD, LPSTR, LPSTR, *mut AutoProxyHelperFunctions, LPAUTO_PROXY_SCRIPT_BUFFER
+    DWORD,
+    LPSTR,
+    LPSTR,
+    *mut AutoProxyHelperFunctions,
+    LPAUTO_PROXY_SCRIPT_BUFFER,
 ) -> BOOL}
 FN!{stdcall pfnInternetDeInitializeAutoProxyDll(
-    LPSTR, DWORD
+    LPSTR,
+    DWORD,
 ) -> BOOL}
 FN!{stdcall pfnInternetGetProxyInfo(
-    LPCSTR, DWORD, LPSTR, DWORD, *mut LPSTR, LPDWORD
+    LPCSTR,
+    DWORD,
+    LPSTR,
+    DWORD,
+    *mut LPSTR,
+    LPDWORD,
 ) -> BOOL}
 ENUM!{enum WPAD_CACHE_DELETE {
     WPAD_CACHE_DELETE_CURRENT = 0x0,
@@ -1263,7 +1311,10 @@ pub const INTERNET_RAS_INSTALLED: DWORD = 0x10;
 pub const INTERNET_CONNECTION_OFFLINE: DWORD = 0x20;
 pub const INTERNET_CONNECTION_CONFIGURED: DWORD = 0x40;
 FN!{stdcall PFN_DIAL_HANDLER(
-    HWND, LPCSTR, DWORD, LPDWORD
+    HWND,
+    LPCSTR,
+    DWORD,
+    LPDWORD,
 ) -> DWORD}
 pub const INTERNET_CUSTOMDIAL_CONNECT: DWORD = 0;
 pub const INTERNET_CUSTOMDIAL_UNATTENDED: DWORD = 1;

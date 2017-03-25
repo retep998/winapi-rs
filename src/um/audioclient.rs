@@ -58,30 +58,53 @@ DEFINE_GUID!{IID_IAudioRenderClient,
 RIDL!{#[uuid(0x1cb9ad4c, 0xdbfa, 0x4c32, 0xb1, 0x78, 0xc2, 0xf5, 0x68, 0xa7, 0x03, 0xb2)]
 interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
     fn Initialize(
-        ShareMode: AUDCLNT_SHAREMODE, StreamFlags: DWORD,
-        hnsBufferDuration: REFERENCE_TIME, hnsPeriodicity: REFERENCE_TIME,
-        pFormat: *const WAVEFORMATEX, AudioSessionGuid: LPCGUID
+        ShareMode: AUDCLNT_SHAREMODE,
+        StreamFlags: DWORD,
+        hnsBufferDuration: REFERENCE_TIME,
+        hnsPeriodicity: REFERENCE_TIME,
+        pFormat: *const WAVEFORMATEX,
+        AudioSessionGuid: LPCGUID,
     ) -> HRESULT,
-    fn GetBufferSize(pNumBufferFrames: *mut UINT32) -> HRESULT,
-    fn GetStreamLatency(phnsLatency: *mut REFERENCE_TIME) -> HRESULT,
-    fn GetCurrentPadding(pNumPaddingFrames: *mut UINT32) -> HRESULT,
+    fn GetBufferSize(
+        pNumBufferFrames: *mut UINT32,
+    ) -> HRESULT,
+    fn GetStreamLatency(
+        phnsLatency: *mut REFERENCE_TIME,
+    ) -> HRESULT,
+    fn GetCurrentPadding(
+        pNumPaddingFrames: *mut UINT32,
+    ) -> HRESULT,
     fn IsFormatSupported(
-        ShareMode: AUDCLNT_SHAREMODE, pFormat: *const WAVEFORMATEX,
-        ppClosestMatch: *mut *mut WAVEFORMATEX
+        ShareMode: AUDCLNT_SHAREMODE,
+        pFormat: *const WAVEFORMATEX,
+        ppClosestMatch: *mut *mut WAVEFORMATEX,
     ) -> HRESULT,
-    fn GetMixFormat(ppDeviceFormat: *mut *mut WAVEFORMATEX) -> HRESULT,
+    fn GetMixFormat(
+        ppDeviceFormat: *mut *mut WAVEFORMATEX,
+    ) -> HRESULT,
     fn GetDevicePeriod(
         phnsDefaultDevicePeriod: *mut REFERENCE_TIME,
-        phnsMinimumDevicePeriod: *mut REFERENCE_TIME
+        phnsMinimumDevicePeriod: *mut REFERENCE_TIME,
     ) -> HRESULT,
     fn Start() -> HRESULT,
     fn Stop() -> HRESULT,
     fn Reset() -> HRESULT,
-    fn SetEventHandle(eventHandle: HANDLE) -> HRESULT,
-    fn GetService(riid: REFIID, ppv: *mut LPVOID) -> HRESULT
+    fn SetEventHandle(
+        eventHandle: HANDLE,
+    ) -> HRESULT,
+    fn GetService(
+        riid: REFIID,
+        ppv: *mut LPVOID,
+    ) -> HRESULT,
 }}
 RIDL!{#[uuid(0xf294acfc, 0x3146, 0x4483, 0xa7, 0xbf, 0xad, 0xdc, 0xa7, 0xc2, 0x60, 0xe2)]
 interface IAudioRenderClient(IAudioRenderClientVtbl): IUnknown(IUnknownVtbl) {
-    fn GetBuffer(NumFramesRequested: UINT32, ppData: *mut *mut BYTE) -> HRESULT,
-    fn ReleaseBuffer(NumFramesWritten: UINT32, dwFlags: DWORD) -> HRESULT
+    fn GetBuffer(
+        NumFramesRequested: UINT32,
+        ppData: *mut *mut BYTE,
+    ) -> HRESULT,
+    fn ReleaseBuffer(
+        NumFramesWritten: UINT32,
+        dwFlags: DWORD,
+    ) -> HRESULT,
 }}

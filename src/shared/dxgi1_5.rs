@@ -25,8 +25,8 @@ interface IDXGIOutput5(IDXGIOutput5Vtbl): IDXGIOutput4(IDXGIOutput4Vtbl) {
         Flags: UINT,
         SupportedFormatsCount: UINT,
         pSupportedFormats: *const DXGI_FORMAT,
-        ppOutputDuplication: *mut *mut IDXGIOutputDuplication
-    )-> HRESULT
+        ppOutputDuplication: *mut *mut IDXGIOutputDuplication,
+    )-> HRESULT,
 });
 
 ENUM!{enum DXGI_HDR_METADATA_TYPE {
@@ -50,8 +50,8 @@ interface IDXGISwapChain4(IDXGISwapChain4Vtbl): IDXGISwapChain3(IDXGISwapChain3V
     fn SetHDRMetaData(
         Type: DXGI_HDR_METADATA_TYPE,
         Size: UINT,
-        pMetaData: *mut c_void
-    )-> HRESULT
+        pMetaData: *mut c_void,
+    )-> HRESULT,
 });
 
 ENUM!{enum DXGI_OFFER_RESOURCE_FLAGS {
@@ -70,13 +70,13 @@ interface IDXGIDevice4(IDXGIDevice4Vtbl): IDXGIDevice3(IDXGIDevice3Vtbl) {
         NumResources: UINT,
         ppResources: *mut *mut IDXGIResource,
         Priority: DXGI_OFFER_RESOURCE_PRIORITY,
-        Flags: UINT
+        Flags: UINT,
     ) -> HRESULT,
     fn ReclaimResources1(
         NumResources: UINT,
         ppResources: *mut *mut IDXGIResource,
-        pResults: *mut DXGI_RECLAIM_RESOURCE_RESULTS
-    ) -> HRESULT
+        pResults: *mut DXGI_RECLAIM_RESOURCE_RESULTS,
+    ) -> HRESULT,
 });
 
 ENUM!{enum DXGI_FEATURE {
@@ -88,8 +88,8 @@ interface IDXGIFactory5(IDXGIFactory5Vtbl): IDXGIFactory4(IDXGIFactory4Vtbl) {
     fn CheckFeatureSupport(
         Feature: DXGI_FEATURE,
         pFeatureSupportData: *mut c_void,
-        FeatureSupportDataSize: UINT
-    ) -> HRESULT
+        FeatureSupportDataSize: UINT,
+    ) -> HRESULT,
 });
 
 DEFINE_GUID!{IID_IDXGIOutput5,
