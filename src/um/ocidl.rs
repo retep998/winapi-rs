@@ -7,13 +7,13 @@
 
 // TODO:It is a minimal implementation.
 
-use shared::minwindef::{ULONG, DWORD};
-use shared::wtypesbase::{LPOLESTR, LPCOLESTR};
-use shared::wtypes::{VARTYPE, CLIPFORMAT};
-use shared::ntdef::HRESULT;
 use shared::guiddef::CLSID;
+use shared::minwindef::{DWORD, ULONG};
+use shared::ntdef::HRESULT;
+use shared::wtypes::{CLIPFORMAT, VARTYPE};
+use shared::wtypesbase::{LPCOLESTR, LPOLESTR};
+use um::oaidl::{IErrorLog, VARIANT};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::oaidl::{VARIANT, IErrorLog};
 
 ENUM!{enum PROPBAG2_TYPE {
     PROPBAG2_TYPE_UNDEFINED = 0,

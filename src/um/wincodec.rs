@@ -8,27 +8,27 @@
 
 use ctypes::c_double;
 use shared::basetsd::{UINT32, ULONG_PTR};
-use shared::minwindef::{DWORD, UINT, INT, BOOL, FLOAT, BYTE, ULONG, LPVOID};
-use shared::windef::{HBITMAP, HPALETTE, HICON};
-use shared::winerror::{
-    HRESULT, E_FAIL, E_INVALIDARG, SEVERITY_ERROR, E_OUTOFMEMORY, E_NOTIMPL,
-    E_ABORT, E_ACCESSDENIED
-};
-use shared::ntdef::{LPCWSTR, LPWSTR, PCWSTR, WCHAR};
-use shared::guiddef::{REFGUID, GUID, CLSID, REFCLSID};
 use shared::dxgiformat::DXGI_FORMAT;
 use shared::dxgitype::{
     DXGI_JPEG_AC_HUFFMAN_TABLE, DXGI_JPEG_DC_HUFFMAN_TABLE,
     DXGI_JPEG_QUANTIZATION_TABLE
 };
-use um::winnt::{HANDLE, ULARGE_INTEGER};
-use um::propidl::PROPVARIANT;
-use um::objidlbase::{IStream, IStreamVtbl, IEnumString, IEnumUnknown};
-use um::ocidl::IPropertyBag2;
-use um::dcommon::D2D1_PIXEL_FORMAT;
-use um::unknwnbase::{IUnknown, IUnknownVtbl};
+use shared::guiddef::{CLSID, GUID, REFCLSID, REFGUID};
+use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, LPVOID, UINT, ULONG};
+use shared::ntdef::{LPCWSTR, LPWSTR, PCWSTR, WCHAR};
+use shared::windef::{HBITMAP, HICON, HPALETTE};
+use shared::winerror::{
+    HRESULT, E_FAIL, E_INVALIDARG, SEVERITY_ERROR, E_OUTOFMEMORY, E_NOTIMPL,
+    E_ABORT, E_ACCESSDENIED
+};
 use um::d2d1::ID2D1Image;
 use um::d2d1_1::ID2D1Device;
+use um::dcommon::D2D1_PIXEL_FORMAT;
+use um::objidlbase::{IEnumString, IEnumUnknown, IStream, IStreamVtbl};
+use um::ocidl::IPropertyBag2;
+use um::propidl::PROPVARIANT;
+use um::unknwnbase::{IUnknown, IUnknownVtbl};
+use um::winnt::{HANDLE, ULARGE_INTEGER};
 
 DEFINE_GUID!{CLSID_WICImagingFactory,
     0xcacaf262, 0x9370, 0x4615, 0xa1, 0x3b, 0x9f, 0x55, 0x39, 0xda, 0x4c, 0xa}

@@ -8,18 +8,10 @@
 
 use ctypes::c_void;
 use shared::basetsd::{UINT32, UINT64};
-use shared::minwindef::{FLOAT, BYTE, DWORD, BOOL};
-use shared::guiddef::{REFCLSID, CLSID};
+use shared::dxgi::{IDXGIDevice, IDXGISurface};
 use shared::dxgiformat::DXGI_FORMAT;
-use shared::dxgi::{IDXGISurface, IDXGIDevice};
-use um::objidlbase::IStream;
-use um::winnt::{HRESULT, PWSTR, PCWSTR};
-use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::wincodec::{IWICBitmapSource, IWICColorContext, IWICImagingFactory};
-use um::documenttarget::IPrintDocumentPackageTarget;
-use um::dcommon::{D2D1_PIXEL_FORMAT, DWRITE_MEASURING_MODE};
-use um::dwrite::{DWRITE_GLYPH_RUN, DWRITE_GLYPH_RUN_DESCRIPTION, IDWriteRenderingParams};
-use um::d2dbasetypes::D2D_SIZE_F;
+use shared::guiddef::{CLSID, REFCLSID};
+use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT};
 use um::d2d1::{
     D2D1_SIZE_U, D2D1_RECT_F, D2D1_POINT_2F, D2D1_EXTEND_MODE, D2D1_CAP_STYLE,
     D2D1_LINE_JOIN, D2D1_DASH_STYLE, D2D1_ANTIALIAS_MODE, D2D1_MATRIX_3X2_F,
@@ -33,6 +25,14 @@ use um::d2d1::{
     ID2D1FactoryVtbl
 };
 use um::d2d1effectauthor::D2D1_PROPERTY_BINDING;
+use um::d2dbasetypes::D2D_SIZE_F;
+use um::dcommon::{D2D1_PIXEL_FORMAT, DWRITE_MEASURING_MODE};
+use um::documenttarget::IPrintDocumentPackageTarget;
+use um::dwrite::{DWRITE_GLYPH_RUN, DWRITE_GLYPH_RUN_DESCRIPTION, IDWriteRenderingParams};
+use um::objidlbase::IStream;
+use um::unknwnbase::{IUnknown, IUnknownVtbl};
+use um::wincodec::{IWICBitmapSource, IWICColorContext, IWICImagingFactory};
+use um::winnt::{HRESULT, PCWSTR, PWSTR};
 
 FN!{stdcall PD2D1_EFFECT_FACTORY(
     effectImpl: *mut *mut IUnknown,

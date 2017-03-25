@@ -8,8 +8,8 @@
 // TODO:It is a minimal implementation.
 use ctypes::c_void;
 use shared::basetsd::UINT32;
-use shared::ntdef::HRESULT;
 use shared::guiddef::{GUID, REFGUID, REFIID};
+use shared::ntdef::HRESULT;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 
 RIDL!{#[uuid(0x1b8efec4, 0x3019, 0x4c27, 0x96, 0x4e, 0x36, 0x72, 0x02, 0x15, 0x69, 0x06)]
