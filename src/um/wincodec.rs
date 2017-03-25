@@ -966,11 +966,11 @@ interface IWICMetadataQueryReader(IWICMetadataQueryReaderVtbl): IUnknown(IUnknow
 RIDL!(#[uuid(0xa721791a, 0x0def, 0x4d06, 0xbd, 0x91, 0x21, 0x18, 0xbf, 0x1d, 0xb1, 0x0b)]
 interface IWICMetadataQueryWriter(IWICMetadataQueryWriterVtbl): IWICMetadataQueryReader(IWICMetadataQueryReaderVtbl) {
     fn SetMetadataByName(
-       wzName: LPCWSTR,
-       pvarValue: *const PROPVARIANT,
+        wzName: LPCWSTR,
+        pvarValue: *const PROPVARIANT,
     ) -> HRESULT,
     fn RemoveMetadataByName(
-       wzName: LPCWSTR,
+        wzName: LPCWSTR,
     ) -> HRESULT,
 });
 
@@ -1131,25 +1131,25 @@ interface IWICBitmapDecoder(IWICBitmapDecoderVtbl): IUnknown(IUnknownVtbl) {
 RIDL!(#[uuid(0x3b16811b, 0x6a43, 0x4ec9, 0xb7, 0x13, 0x3d, 0x5a, 0x0c, 0x13, 0xb9, 0x40)]
 interface IWICBitmapSourceTransform(IWICBitmapSourceTransformVtbl): IUnknown(IUnknownVtbl) {
     fn CopyPixels(
-       prc: *const WICRect,
-       uiWidth: UINT,
-       uiHeight: UINT,
-       pguidDstFormat: *const WICPixelFormatGUID,
-       dstTransform: WICBitmapTransformOptions,
-       nStride: UINT,
-       cbBufferSize: UINT,
-       pbBuffer: *mut BYTE,
+        prc: *const WICRect,
+        uiWidth: UINT,
+        uiHeight: UINT,
+        pguidDstFormat: *const WICPixelFormatGUID,
+        dstTransform: WICBitmapTransformOptions,
+        nStride: UINT,
+        cbBufferSize: UINT,
+        pbBuffer: *mut BYTE,
     ) -> HRESULT,
     fn GetClosestSize(
-       puiWidth: *mut UINT,
-       puiHeight: *mut UINT,
+        puiWidth: *mut UINT,
+        puiHeight: *mut UINT,
     ) -> HRESULT,
     fn GetClosestPixelFormat(
-       pguidDstFormat: *mut WICPixelFormatGUID,
+        pguidDstFormat: *mut WICPixelFormatGUID,
     ) -> HRESULT,
     fn DoesSupportTransform(
-       dstTransform: WICBitmapTransformOptions,
-       pfIsSupported: *mut BOOL,
+        dstTransform: WICBitmapTransformOptions,
+        pfIsSupported: *mut BOOL,
     ) -> HRESULT,
 });
 
@@ -1179,7 +1179,7 @@ interface IWICPlanarBitmapSourceTransform(IWICPlanarBitmapSourceTransformVtbl): 
 RIDL!(#[uuid(0x3b16811b, 0x6a43, 0x4ec9, 0xa8, 0x13, 0x3d, 0x93, 0x0c, 0x13, 0xb9, 0x40)]
 interface IWICBitmapFrameDecode(IWICBitmapFrameDecodeVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn GetMetadataQueryReader(
-       ppIMetadataQueryReader: *mut *mut IWICMetadataQueryReader,
+        ppIMetadataQueryReader: *mut *mut IWICMetadataQueryReader,
    ) -> HRESULT,
     fn GetColorContexts(
         cCount: UINT,
@@ -1187,7 +1187,7 @@ interface IWICBitmapFrameDecode(IWICBitmapFrameDecodeVtbl): IWICBitmapSource(IWI
         pcActualCount: *mut UINT,
    ) -> HRESULT,
     fn GetThumbnail(
-       ppIThumbnail: *mut *mut IWICBitmapSource,
+        ppIThumbnail: *mut *mut IWICBitmapSource,
    ) -> HRESULT,
 });
 
