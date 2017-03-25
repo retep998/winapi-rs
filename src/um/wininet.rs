@@ -1232,44 +1232,44 @@ pub const INTERNET_AUTODIAL_FLAGS_MASK: DWORD = INTERNET_AUTODIAL_FORCE_ONLINE
 pub const PROXY_AUTO_DETECT_TYPE_DHCP: DWORD = 1;
 pub const PROXY_AUTO_DETECT_TYPE_DNS_A: DWORD = 2;
 STRUCT!{struct AutoProxyHelperVtbl {
-    IsResolvable: FN!{stdcall(
+    IsResolvable: Option<unsafe extern "system" fn(
         lpszHost: LPSTR,
-    ) -> BOOL},
-    GetIPAddress: FN!{stdcall(
+    ) -> BOOL>,
+    GetIPAddress: Option<unsafe extern "system" fn(
         lpszIPAddress: LPSTR,
         lpdwIPAddressSize: LPDWORD,
-    ) -> DWORD},
-    ResolveHostName: FN!{stdcall(
+    ) -> DWORD>,
+    ResolveHostName: Option<unsafe extern "system" fn(
         lpszHostName: LPSTR,
         lpszIPAddress: LPSTR,
         lpdwIPAddressSize: LPDWORD,
-    ) -> DWORD},
-    IsInNet: FN!{stdcall(
+    ) -> DWORD>,
+    IsInNet: Option<unsafe extern "system" fn(
         lpszIPAddress: LPSTR,
         lpszDest: LPSTR,
         lpszMask: LPSTR,
-    ) -> BOOL},
-    IsResolvableEx: FN!{stdcall(
+    ) -> BOOL>,
+    IsResolvableEx: Option<unsafe extern "system" fn(
         lpszHost: LPSTR,
-    ) -> BOOL},
-    GetIPAddressEx: FN!{stdcall(
+    ) -> BOOL>,
+    GetIPAddressEx: Option<unsafe extern "system" fn(
         lpszIPAddress: LPSTR,
         lpdwIPAddressSize: LPDWORD,
-    ) -> DWORD},
-    ResolveHostNameEx: FN!{stdcall(
+    ) -> DWORD>,
+    ResolveHostNameEx: Option<unsafe extern "system" fn(
         lpszHostName: LPSTR,
         lpszIPAddress: LPSTR,
         lpdwIPAddressSize: LPDWORD,
-    ) -> DWORD},
-    IsInNetEx: FN!{stdcall(
+    ) -> DWORD>,
+    IsInNetEx: Option<unsafe extern "system" fn(
         lpszIPAddress: LPSTR,
         lpszIPPrefix: LPSTR,
-    ) -> BOOL},
-    SortIpList: FN!{stdcall(
+    ) -> BOOL>,
+    SortIpList: Option<unsafe extern "system" fn(
         lpszIPAddressList: LPSTR,
         lpszIPSortedList: LPSTR,
         lpdwIPSortedListSize: LPDWORD,
-    ) -> DWORD},
+    ) -> DWORD>,
 }}
 STRUCT!{struct AUTO_PROXY_SCRIPT_BUFFER {
     dwStructSize: DWORD,

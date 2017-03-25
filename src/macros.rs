@@ -294,18 +294,6 @@ macro_rules! IFDEF {
     ($($thing:item)*) => ($($thing)*)
 }
 macro_rules! FN {
-    (stdcall($($t:ty,)*) -> $ret:ty) => (
-        Option<unsafe extern "system" fn($($t,)*) -> $ret>
-    );
-    (stdcall($($p:ident: $t:ty,)*) -> $ret:ty) => (
-        Option<unsafe extern "system" fn($($p: $t,)*) -> $ret>
-    );
-    (cdecl($($t:ty,)*) -> $ret:ty) => (
-        Option<unsafe extern "C" fn($($t,)*) -> $ret>
-    );
-    (cdecl($($p:ident: $t:ty,)*) -> $ret:ty) => (
-        Option<unsafe extern "C" fn($($p: $t,)*) -> $ret>
-    );
     (stdcall $func:ident($($t:ty,)*) -> $ret:ty) => (
         pub type $func = Option<unsafe extern "system" fn($($t,)*) -> $ret>;
     );
