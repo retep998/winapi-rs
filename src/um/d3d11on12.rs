@@ -25,20 +25,22 @@ FN!{stdcall PFN_D3D11ON12_CREATE_DEVICE(
     UINT,
     *mut *mut ID3D11Device,
     *mut *mut ID3D11DeviceContext,
-    *mut D3D_FEATURE_LEVEL
-    ) -> HRESULT}
-EXTERN!{stdcall fn D3D11On12CreateDevice(
-    pDevice: *mut IUnknown,
-    Flags: UINT,
-    pFeatureLevels: *const D3D_FEATURE_LEVEL,
-    FeatureLevels: UINT,
-    ppCommandQueues: *mut *mut IUnknown,
-    NumQueues: UINT,
-    NodeMask: UINT,
-    ppDevice: *mut *mut ID3D11Device,
-    ppImmediateContext: *mut *mut ID3D11DeviceContext,
-    pChosenFeatureLevel: *mut D3D_FEATURE_LEVEL
+    *mut D3D_FEATURE_LEVEL,
 ) -> HRESULT}
+extern "system"{
+    pub fn D3D11On12CreateDevice(
+        pDevice: *mut IUnknown,
+        Flags: UINT,
+        pFeatureLevels: *const D3D_FEATURE_LEVEL,
+        FeatureLevels: UINT,
+        ppCommandQueues: *mut *mut IUnknown,
+        NumQueues: UINT,
+        NodeMask: UINT,
+        ppDevice: *mut *mut ID3D11Device,
+        ppImmediateContext: *mut *mut ID3D11DeviceContext,
+        pChosenFeatureLevel: *mut D3D_FEATURE_LEVEL
+    ) -> HRESULT;
+}
 STRUCT!{struct D3D11_RESOURCE_FLAGS {
     BindFlags: UINT,
     MiscFlags: UINT,
@@ -54,16 +56,16 @@ interface ID3D11On12Device(ID3D11On12DeviceVtbl): IUnknown(IUnknownVtbl) {
         InState: D3D12_RESOURCE_STATES,
         OutState: D3D12_RESOURCE_STATES,
         riid: *const IID,
-        ppResource11: *mut *mut c_void
+        ppResource11: *mut *mut c_void,
     ) -> HRESULT,
     fn ReleaseWrappedResources(
         ppResources: *mut *mut ID3D11Resource,
-        NumResources: UINT
+        NumResources: UINT,
     ) -> (),
     fn AcquireWrappedResources(
         ppResources: *mut *mut ID3D11Resource,
-        NumResources: UINT
-    ) -> ()
+        NumResources: UINT,
+    ) -> (),
 }}
 
 DEFINE_GUID!{IID_ID3D11On12Device,

@@ -547,7 +547,7 @@ RIDL!{#[uuid(0x30572f99, 0xdac6, 0x41db, 0xa1, 0x6e, 0x04, 0x86, 0x30, 0x7e, 0x6
 interface IDWriteFactory1(IDWriteFactory1Vtbl): IDWriteFactory(IDWriteFactoryVtbl) {
     fn GetEudcFontCollection(
         fontCollection: *mut *mut IDWriteFontCollection,
-        checkForUpdates: BOOL
+        checkForUpdates: BOOL,
     ) -> HRESULT,
     fn CreateCustomRenderingParams(
         gamma: FLOAT,
@@ -556,31 +556,31 @@ interface IDWriteFactory1(IDWriteFactory1Vtbl): IDWriteFactory(IDWriteFactoryVtb
         clearTypeLevel: FLOAT,
         pixelGeometry: DWRITE_PIXEL_GEOMETRY,
         renderingMode: DWRITE_RENDERING_MODE,
-        renderingParams: *mut *mut IDWriteRenderingParams1
-    ) -> HRESULT
+        renderingParams: *mut *mut IDWriteRenderingParams1,
+    ) -> HRESULT,
 }}
 
 RIDL!{#[uuid(0xa71efdb4, 0x9fdb, 0x4838, 0xad, 0x90, 0xcf, 0xc3, 0xbe, 0x8c, 0x3d, 0xaf)]
 interface IDWriteFontFace1(IDWriteFontFace1Vtbl): IDWriteFontFace(IDWriteFontFaceVtbl) {
-    fn GetMetrics(fontMetrics: *mut DWRITE_FONT_METRICS1) -> (),
+    fn GetMetrics(fontMetrics: *mut DWRITE_FONT_METRICS1,) -> (),
     fn GetGdiCompatibleMetrics(
         emSize: FLOAT,
         pixelsPerDip: FLOAT,
         transform: *const DWRITE_MATRIX,
-        fontMetrics: *mut DWRITE_FONT_METRICS1
+        fontMetrics: *mut DWRITE_FONT_METRICS1,
     ) -> HRESULT,
-    fn GetCaretMetrics(caretMetrics: *mut DWRITE_CARET_METRICS) -> (),
+    fn GetCaretMetrics(caretMetrics: *mut DWRITE_CARET_METRICS,) -> (),
     fn GetUnicodeRanges(
         maxRangeCount: UINT32,
         unicodeRanges: *mut DWRITE_UNICODE_RANGE,
-        actualRangeCount: *mut UINT32
+        actualRangeCount: *mut UINT32,
     ) -> HRESULT,
     fn IsMonospacedFont() -> BOOL,
     fn GetDesignGlyphAdvances(
         glyphCount: UINT32,
         glyphIndices: *const UINT16,
         glyphAdvances: *mut INT32,
-        isSideways: BOOL
+        isSideways: BOOL,
     ) -> HRESULT,
     fn GetGdiCompatibleGlyphAdvances(
         emSize: FLOAT,
@@ -590,12 +590,12 @@ interface IDWriteFontFace1(IDWriteFontFace1Vtbl): IDWriteFontFace(IDWriteFontFac
         isSideways: BOOL,
         glyphCount: UINT32,
         glyphIndices: *const UINT16,
-        glyphAdvances: *mut INT32
+        glyphAdvances: *mut INT32,
     ) -> HRESULT,
     fn GetKerningPairAdjustments(
         glyphCount: UINT32,
         glyphIndices: *const UINT16,
-        glyphAdvanceAdjustments: *mut INT32
+        glyphAdvanceAdjustments: *mut INT32,
     ) -> HRESULT,
     fn HasKerningPairs() -> BOOL,
     fn GetRecommendedRenderingMode(
@@ -606,32 +606,32 @@ interface IDWriteFontFace1(IDWriteFontFace1Vtbl): IDWriteFontFace(IDWriteFontFac
         isSideways: BOOL,
         outlineThreshold: DWRITE_OUTLINE_THRESHOLD,
         measuringMode: DWRITE_MEASURING_MODE,
-        renderingMode: *mut DWRITE_RENDERING_MODE
+        renderingMode: *mut DWRITE_RENDERING_MODE,
     ) -> HRESULT,
     fn GetVerticalGlyphVariants(
         glyphCount: UINT32,
         nominalGlyphIndices: *const UINT16,
-        verticalGlyphIndices: *mut UINT16
+        verticalGlyphIndices: *mut UINT16,
     ) -> HRESULT,
-    fn HasVerticalGlyphVariants() -> BOOL
+    fn HasVerticalGlyphVariants() -> BOOL,
 }}
 
 RIDL!{#[uuid(0xacd16696, 0x8c14, 0x4f5d, 0x87, 0x7e, 0xfe, 0x3f, 0xc1, 0xd3, 0x27, 0x38)]
 interface IDWriteFont1(IDWriteFont1Vtbl): IDWriteFont(IDWriteFontVtbl) {
-    fn GetMetrics(fontMetrics: *mut DWRITE_FONT_METRICS1) -> (),
-    fn GetPanose(panose: *mut DWRITE_PANOSE) -> (),
+    fn GetMetrics(fontMetrics: *mut DWRITE_FONT_METRICS1,) -> (),
+    fn GetPanose(panose: *mut DWRITE_PANOSE,) -> (),
     fn GetUnicodeRanges(
         maxRangeCount: UINT32,
         unicodeRanges: *mut DWRITE_UNICODE_RANGE,
-        actualRangeCount: *mut UINT32
+        actualRangeCount: *mut UINT32,
     ) -> HRESULT,
-    fn IsMonospacedFont() -> BOOL
+    fn IsMonospacedFont() -> BOOL,
 }}
 
 RIDL!{#[uuid(0x94413cf4, 0xa6fc, 0x4248, 0x8b, 0x50, 0x66, 0x74, 0x34, 0x8f, 0xca, 0xd3)]
 interface IDWriteRenderingParams1(IDWriteRenderingParams1Vtbl): 
     IDWriteRenderingParams(IDWriteRenderingParamsVtbl) {
-    fn GetGrayscaleEnhancedContrast() -> FLOAT
+    fn GetGrayscaleEnhancedContrast() -> FLOAT,
 }}
 
 RIDL!{#[uuid(0x80dad800, 0xe21f, 0x4e83, 0x96, 0xce, 0xbf, 0xcc, 0xe5, 0x00, 0xdb, 0x7c)]
@@ -648,7 +648,7 @@ interface IDWriteTextAnalyzer1(IDWriteTextAnalyzer1Vtbl):
         glyphOffsets: *const DWRITE_GLYPH_OFFSET,
         glyphProperties: *const DWRITE_SHAPING_GLYPH_PROPERTIES,
         modifiedGlyphAdvances: *mut FLOAT,
-        modifiedGlyphOffsets: *mut DWRITE_GLYPH_OFFSET
+        modifiedGlyphOffsets: *mut DWRITE_GLYPH_OFFSET,
     ) -> HRESULT,
     fn GetBaseline(
         fontFace: *mut IDWriteFontFace,
@@ -658,22 +658,22 @@ interface IDWriteTextAnalyzer1(IDWriteTextAnalyzer1Vtbl):
         scriptAnalysis: DWRITE_SCRIPT_ANALYSIS,
         localeName: *const WCHAR,
         baselineCoordinate: *mut INT32,
-        exists: *mut BOOL
+        exists: *mut BOOL,
     ) -> HRESULT,
     fn AnalyzeVerticalGlyphOrientation(
         analysisSource: *mut IDWriteTextAnalysisSource1,
         textPosition: UINT32,
         textLength: UINT32,
-        analysisSink: *mut IDWriteTextAnalysisSink1
+        analysisSink: *mut IDWriteTextAnalysisSink1,
     ) -> HRESULT,
     fn GetGlyphOrientationTransform(
         glyphOrientationAngle: DWRITE_GLYPH_ORIENTATION_ANGLE,
         isSideways: BOOL,
-        transform: *mut DWRITE_MATRIX
+        transform: *mut DWRITE_MATRIX,
     ) -> HRESULT,
     fn GetScriptProperties(
         scriptAnalysis: DWRITE_SCRIPT_ANALYSIS,
-        scriptProperties: *mut DWRITE_SCRIPT_PROPERTIES
+        scriptProperties: *mut DWRITE_SCRIPT_PROPERTIES,
     ) -> HRESULT,
     fn GetTextComplexity(
         textString: *const WCHAR,
@@ -681,7 +681,7 @@ interface IDWriteTextAnalyzer1(IDWriteTextAnalyzer1Vtbl):
         fontFace: *mut IDWriteFontFace,
         isTextSimple: *mut BOOL,
         textLengthRead: *mut UINT32,
-        glyphIndices: *mut UINT16
+        glyphIndices: *mut UINT16,
     ) -> HRESULT,
     fn GetJustificationOpportunities(
         fontFace: *mut IDWriteFontFace,
@@ -692,7 +692,7 @@ interface IDWriteTextAnalyzer1(IDWriteTextAnalyzer1Vtbl):
         textString: *const WCHAR,
         clusterMap: *const UINT16,
         glyphProperties: *const DWRITE_SHAPING_GLYPH_PROPERTIES,
-        justificationOpportunities: *mut DWRITE_JUSTIFICATION_OPPORTUNITY
+        justificationOpportunities: *mut DWRITE_JUSTIFICATION_OPPORTUNITY,
     ) -> HRESULT,
     fn JustifyGlyphAdvances(
         lineWidth: FLOAT,
@@ -701,7 +701,7 @@ interface IDWriteTextAnalyzer1(IDWriteTextAnalyzer1Vtbl):
         glyphAdvances: *const FLOAT,
         glyphOffsets: *const DWRITE_GLYPH_OFFSET,
         justifiedGlyphAdvances: *mut FLOAT,
-        justifiedGlyphOffsets: *mut DWRITE_GLYPH_OFFSET
+        justifiedGlyphOffsets: *mut DWRITE_GLYPH_OFFSET,
     ) -> HRESULT,
     fn GetJustifiedGlyphs(
         fontFace: *mut IDWriteFontFace,
@@ -720,8 +720,8 @@ interface IDWriteTextAnalyzer1(IDWriteTextAnalyzer1Vtbl):
         modifiedClusterMap: *mut UINT16,
         modifiedGlyphIndices: *mut UINT16,
         modifiedGlyphAdvances: *mut FLOAT,
-        modifiedGlyphOffsets: *mut DWRITE_GLYPH_OFFSET
-    ) -> HRESULT
+        modifiedGlyphOffsets: *mut DWRITE_GLYPH_OFFSET,
+    ) -> HRESULT,
 }}
 
 RIDL!{#[uuid(0x639cfad8, 0x0fb4, 0x4b21, 0xa5, 0x8a, 0x06, 0x79, 0x20, 0x12, 0x00, 0x09)]
@@ -731,8 +731,8 @@ interface IDWriteTextAnalysisSource1(IDWriteTextAnalysisSource1Vtbl):
         textPosition: UINT32,
         textLength: *mut UINT32,
         glyphOrientation: *mut DWRITE_VERTICAL_GLYPH_ORIENTATION,
-        bidiLevel: *mut UINT8
-    ) -> HRESULT
+        bidiLevel: *mut UINT8,
+    ) -> HRESULT,
 }}
 
 RIDL!{#[uuid(0xb0d941a0, 0x85e7, 0x4d8b, 0x9f, 0xd3, 0x5c, 0xed, 0x99, 0x34, 0x48, 0x2a)]
@@ -744,8 +744,8 @@ interface IDWriteTextAnalysisSink1(IDWriteTextAnalysisSink1Vtbl):
         glyphOrientationAngle: DWRITE_GLYPH_ORIENTATION_ANGLE,
         adjustedBidiLevel: UINT8,
         isSideways: BOOL,
-        isRightToLeft: BOOL
-    ) -> HRESULT
+        isRightToLeft: BOOL,
+    ) -> HRESULT,
 }}
 
 RIDL!{#[uuid(0x9064d822, 0x80a7, 0x465c, 0xa9, 0x86, 0xdf, 0x65, 0xf7, 0x8b, 0x8f, 0xeb)]
@@ -753,26 +753,26 @@ interface IDWriteTextLayout1(IDWriteTextLayout1Vtbl):
     IDWriteTextLayout(IDWriteTextLayoutVtbl) {
     fn SetPairKerning(
         isPairKerningEnabled: BOOL,
-        textRange: DWRITE_TEXT_RANGE
+        textRange: DWRITE_TEXT_RANGE,
     ) -> HRESULT,
     fn GetPairKerning(
         currentPosition: UINT32,
         isPairKerningEnabled: *mut BOOL,
-        textRange: *mut DWRITE_TEXT_RANGE
+        textRange: *mut DWRITE_TEXT_RANGE,
     ) -> HRESULT,
     fn SetCharacterSpacing(
         leadingSpacing: FLOAT,
         trailingSpacing: FLOAT,
         minimumAdvanceWidth: FLOAT,
-        textRange: DWRITE_TEXT_RANGE
+        textRange: DWRITE_TEXT_RANGE,
     ) -> HRESULT,
     fn GetCharacterSpacing(
         currentPosition: UINT32,
         leadingSpacing: *mut FLOAT,
         trailingSpacing: *mut FLOAT,
         minimumAdvanceWidth: *mut FLOAT,
-        textRange: *mut DWRITE_TEXT_RANGE
-    ) -> HRESULT
+        textRange: *mut DWRITE_TEXT_RANGE,
+    ) -> HRESULT,
 }}
 
 ENUM!{enum DWRITE_TEXT_ANTIALIAS_MODE {
@@ -784,6 +784,6 @@ RIDL!{#[uuid(0x791e8298, 0x3ef3, 0x4230, 0x98, 0x80, 0xc9, 0xbd, 0xec, 0xc4, 0x2
 interface IDWriteBitmapRenderTarget1(IDWriteBitmapRenderTarget1Vtbl): 
     IDWriteBitmapRenderTarget(IDWriteBitmapRenderTargetVtbl) {
     fn GetTextAntialiasMode() -> DWRITE_TEXT_ANTIALIAS_MODE,
-    fn SetTextAntialiasMode(antialiasMode: DWRITE_TEXT_ANTIALIAS_MODE) -> HRESULT
+    fn SetTextAntialiasMode(antialiasMode: DWRITE_TEXT_ANTIALIAS_MODE,) -> HRESULT,
 }}
 
