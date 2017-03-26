@@ -71,6 +71,7 @@ pub mod gl;
 #[cfg(feature = "ocidl")] pub mod ocidl;
 #[cfg(feature = "oleauto")] pub mod oleauto;
 #[cfg(feature = "pdh")] pub mod pdh;
+#[cfg(feature = "processsnapshot")] pub mod processsnapshot;
 #[cfg(feature = "processthreadsapi")] pub mod processthreadsapi;
 #[cfg(feature = "propidl")] pub mod propidl;
 #[cfg(feature = "propsys")] pub mod propsys;
