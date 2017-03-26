@@ -29,5 +29,7 @@ pub type REFCLSID = *const IID;
 pub type REFFMTID = *const IID;
 #[inline]
 pub fn IsEqualGUID(g1: &GUID, g2: &GUID) -> bool {
-    (g1.Data1, g1.Data2, g1.Data3, g1.Data4) == (g2.Data1, g2.Data2, g2.Data3, g2.Data4)
+    let a = unsafe { &*(g1 as *const _ as *const [u32; 4]) };
+    let b = unsafe { &*(g2 as *const _ as *const [u32; 4]) };
+    a[0] == b[0] && a[1] == b[1] && a[2] == b[2] && a[3] == b[3]
 }

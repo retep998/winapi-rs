@@ -629,13 +629,13 @@ interface IDWriteFont1(IDWriteFont1Vtbl): IDWriteFont(IDWriteFontVtbl) {
 }}
 
 RIDL!{#[uuid(0x94413cf4, 0xa6fc, 0x4248, 0x8b, 0x50, 0x66, 0x74, 0x34, 0x8f, 0xca, 0xd3)]
-interface IDWriteRenderingParams1(IDWriteRenderingParams1Vtbl): 
+interface IDWriteRenderingParams1(IDWriteRenderingParams1Vtbl):
     IDWriteRenderingParams(IDWriteRenderingParamsVtbl) {
     fn GetGrayscaleEnhancedContrast() -> FLOAT,
 }}
 
 RIDL!{#[uuid(0x80dad800, 0xe21f, 0x4e83, 0x96, 0xce, 0xbf, 0xcc, 0xe5, 0x00, 0xdb, 0x7c)]
-interface IDWriteTextAnalyzer1(IDWriteTextAnalyzer1Vtbl): 
+interface IDWriteTextAnalyzer1(IDWriteTextAnalyzer1Vtbl):
     IDWriteTextAnalyzer(IDWriteTextAnalyzerVtbl) {
     fn ApplyCharacterSpacing(
         leadingSpacing: FLOAT,
@@ -725,7 +725,7 @@ interface IDWriteTextAnalyzer1(IDWriteTextAnalyzer1Vtbl):
 }}
 
 RIDL!{#[uuid(0x639cfad8, 0x0fb4, 0x4b21, 0xa5, 0x8a, 0x06, 0x79, 0x20, 0x12, 0x00, 0x09)]
-interface IDWriteTextAnalysisSource1(IDWriteTextAnalysisSource1Vtbl): 
+interface IDWriteTextAnalysisSource1(IDWriteTextAnalysisSource1Vtbl):
     IDWriteTextAnalysisSource(IDWriteTextAnalysisSourceVtbl) {
     fn GetVerticalGlyphOrientation(
         textPosition: UINT32,
@@ -736,7 +736,7 @@ interface IDWriteTextAnalysisSource1(IDWriteTextAnalysisSource1Vtbl):
 }}
 
 RIDL!{#[uuid(0xb0d941a0, 0x85e7, 0x4d8b, 0x9f, 0xd3, 0x5c, 0xed, 0x99, 0x34, 0x48, 0x2a)]
-interface IDWriteTextAnalysisSink1(IDWriteTextAnalysisSink1Vtbl): 
+interface IDWriteTextAnalysisSink1(IDWriteTextAnalysisSink1Vtbl):
     IDWriteTextAnalysisSink(IDWriteTextAnalysisSinkVtbl) {
     fn SetGlyphOrientation(
         textPosition: UINT32,
@@ -749,7 +749,7 @@ interface IDWriteTextAnalysisSink1(IDWriteTextAnalysisSink1Vtbl):
 }}
 
 RIDL!{#[uuid(0x9064d822, 0x80a7, 0x465c, 0xa9, 0x86, 0xdf, 0x65, 0xf7, 0x8b, 0x8f, 0xeb)]
-interface IDWriteTextLayout1(IDWriteTextLayout1Vtbl): 
+interface IDWriteTextLayout1(IDWriteTextLayout1Vtbl):
     IDWriteTextLayout(IDWriteTextLayoutVtbl) {
     fn SetPairKerning(
         isPairKerningEnabled: BOOL,
@@ -781,7 +781,7 @@ ENUM!{enum DWRITE_TEXT_ANTIALIAS_MODE {
 }}
 
 RIDL!{#[uuid(0x791e8298, 0x3ef3, 0x4230, 0x98, 0x80, 0xc9, 0xbd, 0xec, 0xc4, 0x20, 0x64)]
-interface IDWriteBitmapRenderTarget1(IDWriteBitmapRenderTarget1Vtbl): 
+interface IDWriteBitmapRenderTarget1(IDWriteBitmapRenderTarget1Vtbl):
     IDWriteBitmapRenderTarget(IDWriteBitmapRenderTargetVtbl) {
     fn GetTextAntialiasMode() -> DWRITE_TEXT_ANTIALIAS_MODE,
     fn SetTextAntialiasMode(antialiasMode: DWRITE_TEXT_ANTIALIAS_MODE,) -> HRESULT,

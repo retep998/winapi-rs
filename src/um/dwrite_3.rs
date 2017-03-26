@@ -68,7 +68,7 @@ ENUM!{enum DWRITE_RENDERING_MODE1 {
 }}
 
 RIDL!{#[uuid(0xb7924baa, 0x391b, 0x412a, 0x8c, 0x5c, 0xe4, 0x4c, 0xc2, 0xd8, 0x67, 0xdc)]
-interface IDWriteRenderingParams3(IDWriteRenderingParams3Vtbl): 
+interface IDWriteRenderingParams3(IDWriteRenderingParams3Vtbl):
     IDWriteRenderingParams2(IDWriteRenderingParams2Vtbl) {
     fn GetRenderingMode1() -> DWRITE_RENDERING_MODE1,
 }}
@@ -186,7 +186,7 @@ interface IDWriteFontSetBuilder(IDWriteFontSetBuilderVtbl): IUnknown(IUnknownVtb
 }}
 
 RIDL!{#[uuid(0x53585141, 0xd9f8, 0x4095, 0x83, 0x21, 0xd7, 0x3c, 0xf6, 0xbd, 0x11, 0x6c)]
-interface IDWriteFontCollection1(IDWriteFontCollection1Vtbl): 
+interface IDWriteFontCollection1(IDWriteFontCollection1Vtbl):
     IDWriteFontCollection(IDWriteFontCollectionVtbl) {
     fn GetFontSet(fontSet: *mut *mut IDWriteFontSet,) -> HRESULT,
     fn GetFontFamily(
@@ -196,7 +196,7 @@ interface IDWriteFontCollection1(IDWriteFontCollection1Vtbl):
 }}
 
 RIDL!{#[uuid(0xda20d8ef, 0x812a, 0x4c43, 0x98, 0x02, 0x62, 0xec, 0x4a, 0xbd, 0x7a, 0xdf)]
-interface IDWriteFontFamily1(IDWriteFontFamily1Vtbl): 
+interface IDWriteFontFamily1(IDWriteFontFamily1Vtbl):
     IDWriteFontFamily(IDWriteFontFamilyVtbl) {
     fn GetFontLocality(listIndex: UINT32,) -> DWRITE_LOCALITY,
     fn GetFont(
@@ -223,7 +223,7 @@ interface IDWriteFontList1(IDWriteFontList1Vtbl): IDWriteFontList(IDWriteFontLis
 }}
 
 RIDL!{#[uuid(0x5e7fa7ca, 0xdde3, 0x424c, 0x89, 0xf0, 0x9f, 0xcd, 0x6f, 0xed, 0x58, 0xcd)]
-interface IDWriteFontFaceReference(IDWriteFontFaceReferenceVtbl): 
+interface IDWriteFontFaceReference(IDWriteFontFaceReferenceVtbl):
     IUnknown(IUnknownVtbl) {
     fn CreateFontFace(fontFace: *mut *mut IDWriteFontFace3,) -> HRESULT,
     fn CreateFontFaceWithSimulations(
@@ -263,7 +263,7 @@ interface IDWriteFont3(IDWriteFont3Vtbl): IDWriteFont2(IDWriteFont2Vtbl) {
 }}
 
 RIDL!{#[uuid(0xd37d7598, 0x09be, 0x4222, 0xa2, 0x36, 0x20, 0x81, 0x34, 0x1c, 0xc1, 0xf2)]
-interface IDWriteFontFace3(IDWriteFontFace3Vtbl): 
+interface IDWriteFontFace3(IDWriteFontFace3Vtbl):
     IDWriteFontFace2(IDWriteFontFace2Vtbl) {
     fn GetFontFaceReference(fontFaceReference: *mut *mut IDWriteFontFaceReference,) -> HRESULT,
     fn GetPanose(panose: *mut DWRITE_PANOSE,) -> (),
@@ -330,7 +330,7 @@ interface IDWriteStringList(IDWriteStringListVtbl): IUnknown(IUnknownVtbl) {
 }}
 
 RIDL!{#[uuid(0xb06fe5b9, 0x43ec, 0x4393, 0x88, 0x1b, 0xdb, 0xe4, 0xdc, 0x72, 0xfd, 0xa7)]
-interface IDWriteFontDownloadListener(IDWriteFontDownloadListenerVtbl): 
+interface IDWriteFontDownloadListener(IDWriteFontDownloadListenerVtbl):
     IUnknown(IUnknownVtbl) {
     fn DownloadCompleted(
         downloadQueue: *mut IDWriteFontDownloadQueue,
@@ -340,7 +340,7 @@ interface IDWriteFontDownloadListener(IDWriteFontDownloadListenerVtbl):
 }}
 
 RIDL!{#[uuid(0xb71e6052, 0x5aea, 0x4fa3, 0x83, 0x2e, 0xf6, 0x0d, 0x43, 0x1f, 0x7e, 0x91)]
-interface IDWriteFontDownloadQueue(IDWriteFontDownloadQueueVtbl): 
+interface IDWriteFontDownloadQueue(IDWriteFontDownloadQueueVtbl):
     IUnknown(IUnknownVtbl) {
     fn AddListener(
         listener: *mut IDWriteFontDownloadListener,
@@ -354,7 +354,7 @@ interface IDWriteFontDownloadQueue(IDWriteFontDownloadQueueVtbl):
 }}
 
 RIDL!{#[uuid(0x4556be70, 0x3abd, 0x4f70, 0x90, 0xbe, 0x42, 0x17, 0x80, 0xa6, 0xf5, 0x15)]
-interface IDWriteGdiInterop1(IDWriteGdiInterop1Vtbl): 
+interface IDWriteGdiInterop1(IDWriteGdiInterop1Vtbl):
     IDWriteGdiInterop(IDWriteGdiInteropVtbl) {
     fn CreateFontFromLOGFONT(
         logFont: *const LOGFONTW,
@@ -402,14 +402,14 @@ STRUCT!{struct DWRITE_LINE_SPACING {
 }}
 
 RIDL!{#[uuid(0xf67e0edd, 0x9e3d, 0x4ecc, 0x8c, 0x32, 0x41, 0x83, 0x25, 0x3d, 0xfe, 0x70)]
-interface IDWriteTextFormat2(IDWriteTextFormat2Vtbl): 
+interface IDWriteTextFormat2(IDWriteTextFormat2Vtbl):
     IDWriteTextFormat1(IDWriteTextFormat1Vtbl) {
     fn SetLineSpacing(lineSpacingOptions: *const DWRITE_LINE_SPACING,) -> HRESULT,
     fn GetLineSpacing(lineSpacingOptions: *mut DWRITE_LINE_SPACING,) -> HRESULT,
 }}
 
 RIDL!{#[uuid(0x07ddcd52, 0x020e, 0x4de8, 0xac, 0x33, 0x6c, 0x95, 0x3d, 0x83, 0xf9, 0x2d)]
-interface IDWriteTextLayout3(IDWriteTextLayout3Vtbl): 
+interface IDWriteTextLayout3(IDWriteTextLayout3Vtbl):
     IDWriteTextLayout2(IDWriteTextLayout2Vtbl) {
     fn InvalidateLayout() -> HRESULT,
     fn SetLineSpacing(lineSpacingOptions: *const DWRITE_LINE_SPACING,) -> HRESULT,

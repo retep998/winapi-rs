@@ -7,8 +7,9 @@
 //! GDI procedure declarations, constant definitions and macros
 use ctypes::{c_char, c_int, c_long, c_short, c_ushort};
 use shared::basetsd::ULONG_PTR;
-use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, HMETAFILE, LPARAM, LPVOID, MAX_PATH, UINT, ULONG,
-                        USHORT, WORD};
+use shared::minwindef::{
+    BOOL, BYTE, DWORD, FLOAT, HMETAFILE, LPARAM, LPVOID, MAX_PATH, UINT, ULONG, USHORT, WORD,
+};
 use shared::windef::{COLORREF, HBRUSH, HDC, HGDIOBJ, POINT, RECT, RECTL, SIZEL};
 use um::winnt::{CHAR, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PSTR, SHORT, VOID, WCHAR};
 pub const R2_BLACK: c_int = 1;
@@ -1049,9 +1050,9 @@ STRUCT!{struct GLYPHMETRICS {
 }}
 pub type LPGLYPHMETRICS = *mut GLYPHMETRICS;
 STRUCT!{struct KERNINGPAIR {
-     wFirst: WORD,
-     wSecond: WORD,
-     iKernAmount: c_int,
+    wFirst: WORD,
+    wSecond: WORD,
+    iKernAmount: c_int,
 }}
 pub type LPKERNINGPAIR = *mut KERNINGPAIR;
 STRUCT!{struct PANOSE {

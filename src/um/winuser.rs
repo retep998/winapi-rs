@@ -1281,7 +1281,7 @@ pub const WM_MOUSELAST: UINT = 0x020E;
 pub const WHEEL_DELTA: c_short = 120;
 #[inline]
 pub fn GET_WHEEL_DELTA_WPARAM(wParam: WPARAM) -> c_short {
-     HIWORD(wParam as DWORD) as c_short
+    HIWORD(wParam as DWORD) as c_short
 }
 pub const WHEEL_PAGESCROLL: UINT = UINT_MAX;
 #[inline]
