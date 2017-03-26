@@ -9,11 +9,13 @@ use shared::basetsd::ULONG_PTR;
 use shared::guiddef::{GUID, IID, REFGUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, UINT, ULONG, USHORT, WORD};
 use shared::wtypes::{
-    BSTR, CY, DATE, DECIMAL, VARIANT_BOOL, VARTYPE, VT_BSTR, VT_DISPATCH, VT_ERROR, VT_I1, VT_I2,
-    VT_I4, VT_I8, VT_RECORD, VT_RESERVED, VT_UNKNOWN, VT_VARIANT, wireBSTR,
+    BSTR, CY, DATE, DECIMAL, VARIANT_BOOL, VARTYPE, VT_BSTR, VT_DISPATCH, VT_ERROR,
+    VT_I1, VT_I2, VT_I4, VT_I8, VT_RECORD, VT_RESERVED, VT_UNKNOWN, VT_VARIANT,
+    wireBSTR
 };
 use shared::wtypesbase::{
-    BYTE_SIZEDARR, DOUBLE, DWORD_SIZEDARR, HYPER_SIZEDARR, LPOLESTR, SCODE, WORD_SIZEDARR,
+    BYTE_SIZEDARR, DOUBLE, DWORD_SIZEDARR, HYPER_SIZEDARR, LPOLESTR, LPCOLESTR,
+    SCODE, WORD_SIZEDARR
 };
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{CHAR, HRESULT, LCID, LONG, LONGLONG, PVOID, SHORT, ULONGLONG};
@@ -745,3 +747,12 @@ interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     ) -> (),
 }
 );
+
+RIDL!(#[uuid(0x3127ca40, 0x446e, 0x11ce, 0x81, 0x35, 0x00, 0xaa, 0x00, 0x4b, 0xb8, 0x51)]
+interface IErrorLog(IErrorLogVtbl): IUnknown(IUnknownVtbl) {
+    fn AddError(
+        pszPropName: LPCOLESTR,
+        pExcepInfo: *const EXCEPINFO,
+    ) -> HRESULT,
+});
+pub type LPERRORLOG = *mut IErrorLog;

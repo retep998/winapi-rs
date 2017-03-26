@@ -18,7 +18,7 @@ use shared::dxgiformat::DXGI_FORMAT;
 use shared::minwindef::UINT;
 use um::unknwnbase::IUnknown;
 use um::winnt::HRESULT;
-RIDL!(#[uuid(0x80A07424, 0xAB52, 0x42EB, 0x83, 0x3C, 0x0C, 0x42, 0xFD, 0x28, 0x2D, 0x98)]
+RIDL!(#[uuid(0x80a07424, 0xab52, 0x42eb, 0x83, 0x3c, 0x0c, 0x42, 0xfd, 0x28, 0x2d, 0x98)]
 interface IDXGIOutput5(IDXGIOutput5Vtbl): IDXGIOutput4(IDXGIOutput4Vtbl) {
     fn DuplicateOutput1(
         pDevice: *mut IUnknown,
@@ -45,7 +45,7 @@ STRUCT!{struct DXGI_HDR_METADATA_HDR10 {
     MaxFrameAverageLightLevel: UINT16,
 }}
 
-RIDL!(#[uuid(0x3D585D5A, 0xBD4A, 0x489E, 0xB1, 0xF4, 0x3D, 0xBC, 0xB6, 0x45, 0x2F, 0xFB)]
+RIDL!(#[uuid(0x3d585d5a, 0xbd4a, 0x489e, 0xb1, 0xf4, 0x3d, 0xbc, 0xb6, 0x45, 0x2f, 0xfb)]
 interface IDXGISwapChain4(IDXGISwapChain4Vtbl): IDXGISwapChain3(IDXGISwapChain3Vtbl) {
     fn SetHDRMetaData(
         Type: DXGI_HDR_METADATA_TYPE,
@@ -64,7 +64,7 @@ ENUM!{enum DXGI_RECLAIM_RESOURCE_RESULTS {
     DXGI_RECLAIM_RESOURCE_RESULT_NOT_COMMITTED = 2,
 }}
 
-RIDL!(#[uuid(0x95B4F95F, 0xD8DA, 0x4CA4, 0x9E, 0xE6, 0x3B, 0x76, 0xD5, 0x96, 0x8A, 0x10)]
+RIDL!(#[uuid(0x95b4f95f, 0xd8da, 0x4ca4, 0x9e, 0xe6, 0x3b, 0x76, 0xd5, 0x96, 0x8a, 0x10)]
 interface IDXGIDevice4(IDXGIDevice4Vtbl): IDXGIDevice3(IDXGIDevice3Vtbl) {
     fn OfferResources1(
         NumResources: UINT,
