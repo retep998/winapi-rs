@@ -13,6 +13,7 @@
 #[cfg(feature = "d3d9")] pub mod d3d9;
 #[cfg(feature = "d3d9caps")] pub mod d3d9caps;
 #[cfg(feature = "d3d9types")] pub mod d3d9types;
+#[cfg(feature = "dcomptypes")] pub mod dcomptypes;
 #[cfg(feature = "devpkey")] pub mod devpkey;
 #[cfg(feature = "devpropdef")] pub mod devpropdef;
 #[cfg(feature = "devguid")] pub mod devguid;

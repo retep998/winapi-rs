@@ -33,6 +33,8 @@ pub mod gl;
 #[cfg(feature = "d3dcompiler")] pub mod d3dcompiler;
 #[cfg(feature = "dbghelp")] pub mod dbghelp;
 #[cfg(feature = "dcommon")] pub mod dcommon;
+#[cfg(feature = "dcomp")] pub mod dcomp;
+#[cfg(feature = "dcompanimation")] pub mod dcompanimation;
 #[cfg(feature = "docobj")] pub mod docobj;
 #[cfg(feature = "documenttarget")] pub mod documenttarget;
 #[cfg(feature = "dpapi")] pub mod dpapi;
