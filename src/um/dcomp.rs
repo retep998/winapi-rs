@@ -88,17 +88,17 @@ interface IDCompositionDevice(IDCompositionDeviceVtbl): IUnknown(IUnknownVtbl) {
     fn CreateTargetForHwnd(
         hwnd: HWND ,
         topmost: BOOL ,
-        target: *mut *mut IDCompositionTarget  
+        target: *mut *mut IDCompositionTarget
     ) -> HRESULT,
     fn CreateVisual(
-        visual: *mut *mut IDCompositionVisual 
+        visual: *mut *mut IDCompositionVisual
     ) -> HRESULT,
     fn CreateSurface(
         width: UINT ,
         height: UINT ,
         pixelFormat: DXGI_FORMAT ,
         alphaMode: DXGI_ALPHA_MODE ,
-        surface: *mut *mut IDCompositionSurface 
+        surface: *mut *mut IDCompositionSurface
     ) -> HRESULT,
     fn CreateVirtualSurface(
         initialWidth: UINT ,
@@ -116,19 +116,19 @@ interface IDCompositionDevice(IDCompositionDeviceVtbl): IUnknown(IUnknownVtbl) {
         mutsurface: *mut *mut IUnknown
     ) -> HRESULT,
     fn CreateTranslateTransform(
-        translateTransform: *mut *mut IDCompositionTranslateTransform 
+        translateTransform: *mut *mut IDCompositionTranslateTransform
     ) -> HRESULT,
     fn CreateScaleTransform(
-        scaleTransform: *mut *mut IDCompositionScaleTransform 
+        scaleTransform: *mut *mut IDCompositionScaleTransform
     ) -> HRESULT,
     fn CreateRotateTransform(
-        rotateTransform: *mut *mut IDCompositionRotateTransform 
+        rotateTransform: *mut *mut IDCompositionRotateTransform
     ) -> HRESULT,
     fn CreateSkewTransform(
-        skewTransform: *mut *mut IDCompositionSkewTransform 
+        skewTransform: *mut *mut IDCompositionSkewTransform
     ) -> HRESULT,
     fn CreateMatrixTransform(
-        matrixTransform: *mut *mut IDCompositionMatrixTransform 
+        matrixTransform: *mut *mut IDCompositionMatrixTransform
     ) -> HRESULT,
     fn CreateTransformGroup(
         transforms: *const *const IDCompositionTransform,
