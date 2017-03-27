@@ -7,32 +7,30 @@
 //! Mappings for the contents of dcomp.h
 
 use ctypes::{c_float, c_int, c_void};
-use shared::minwindef::{BOOL, DWORD, UINT};
-use shared::guiddef::REFIID;
-use shared::ntdef::HANDLE;
-use shared::windef::{HWND, POINT, RECT};
-use shared::dxgiformat::DXGI_FORMAT;
-use shared::dxgi::IDXGIDevice;
-use shared::dxgi1_2::DXGI_ALPHA_MODE;
 use shared::d3d9types::D3DMATRIX;
 use shared::dcomptypes::{
-    DCOMPOSITION_FRAME_STATISTICS, DCOMPOSITION_BITMAP_INTERPOLATION_MODE,
-    DCOMPOSITION_BORDER_MODE, DCOMPOSITION_COMPOSITE_MODE,
-    DCOMPOSITION_OPACITY_MODE, DCOMPOSITION_BACKFACE_VISIBILITY,
-    DCOMPOSITION_DEPTH_MODE
+    DCOMPOSITION_BACKFACE_VISIBILITY, DCOMPOSITION_BITMAP_INTERPOLATION_MODE,
+    DCOMPOSITION_BORDER_MODE, DCOMPOSITION_COMPOSITE_MODE, DCOMPOSITION_DEPTH_MODE,
+    DCOMPOSITION_FRAME_STATISTICS, DCOMPOSITION_OPACITY_MODE
 };
-use um::winnt::HRESULT;
-use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::minwinbase::SECURITY_ATTRIBUTES;
-use um::d3dcommon::D3D_FEATURE_LEVEL;
-use um::d2dbasetypes::{D2D_MATRIX_3X2_F, D2D_MATRIX_4X4_F, D2D_RECT_F};
+use shared::dxgi::IDXGIDevice;
+use shared::dxgi1_2::DXGI_ALPHA_MODE;
+use shared::dxgiformat::DXGI_FORMAT;
+use shared::guiddef::REFIID;
+use shared::minwindef::{BOOL, DWORD, UINT};
+use shared::ntdef::{HANDLE, HRESULT};
+use shared::windef::{HWND, POINT, RECT};
 use um::d2d1::{D2D1_COLOR_F, D2D1_MATRIX_3X2_F};
-use um::d2d1_1::{D2D1_VECTOR_2F, D2D1_VECTOR_4F, D2D1_MATRIX_5X4_F, D2D1_COMPOSITE_MODE};
+use um::d2d1_1::{D2D1_COMPOSITE_MODE, D2D1_MATRIX_5X4_F, D2D1_VECTOR_2F, D2D1_VECTOR_4F};
 use um::d2d1effects::{
-    D2D1_BORDER_MODE, D2D1_COLORMATRIX_ALPHA_MODE, D2D1_TURBULENCE_NOISE,
-    D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE, D2D1_BLEND_MODE
+    D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE, D2D1_BLEND_MODE, D2D1_BORDER_MODE,
+    D2D1_COLORMATRIX_ALPHA_MODE, D2D1_TURBULENCE_NOISE
 };
+use um::d2dbasetypes::{D2D_MATRIX_3X2_F, D2D_MATRIX_4X4_F, D2D_RECT_F};
+use um::d3dcommon::D3D_FEATURE_LEVEL;
 use um::dcompanimation::IDCompositionAnimation;
+use um::minwinbase::SECURITY_ATTRIBUTES;
+use um::unknwnbase::{IUnknown, IUnknownVtbl};
 
 extern "system" {
     pub fn DCompositionCreateDevice(
