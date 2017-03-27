@@ -7,7 +7,7 @@
 //! Mappings for the contents of dcompanimation.h
 
 use ctypes::{c_double, c_float};
-use shared::ntdef::{LARGE_INTEGER, HRESULT};
+use shared::ntdef::{HRESULT, LARGE_INTEGER};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 
 RIDL!(#[uuid(0xcbfd91d9, 0x51b2, 0x45e4, 0xb3, 0xde, 0xd1, 0x9c, 0xcf, 0xb8, 0x63, 0xc5)]
