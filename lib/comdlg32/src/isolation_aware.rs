@@ -1,6 +1,24 @@
+/// Create isolation-aware comdlg32 bindings.
+///
+/// # Usage
+///
+/// ```ignore
+/// mod isolation_aware {
+///     pub mod kernel32 {
+///         isolation_aware_kernel32!();
+///     }
+///
+///     pub mod comdlg32 {
+///         isolation_aware_comdlg32!(isolation_aware::kernel32);
+///     }
+/// }
+/// ```
+///
+/// This is used similarly to the `isolation_aware_kernel32!()` macro, but takes a path to the
+/// `kernel32` module from the crate root.
 #[macro_export]
 macro_rules! isolation_aware_comdlg32 {
-    (mod_ia_kernel32 = $($p:ident)::+) => {mod __ia_comdlg32_inner {
+    ($($p:ident)::+) => {mod __ia_comdlg32_inner {
         #![allow(dead_code)]
         extern crate winapi as __ia_kernel32_inner_winapi;
         use self::__ia_kernel32_inner_winapi::*;
@@ -115,4 +133,4 @@ pub mod ia_kernel32 {
 }
 
 #[cfg(test)]
-isolation_aware_comdlg32!(mod_ia_kernel32 = isolation_aware::ia_kernel32);
+isolation_aware_comdlg32!(isolation_aware::ia_kernel32);

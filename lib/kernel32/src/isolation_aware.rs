@@ -100,7 +100,9 @@ macro_rules! __winapi_comstar_isolation_aware {
 
             if let Some(ulp_cookie) = ::$($p::)+isolation_aware_prepare() {
                 if PFN as *const () == default_pfn as FnType as *const () {
-                    let pfn = load_comctl_fn(concat!(stringify!($fn_name), "\0").as_ptr() as *const c_char);
+                    let pfn = load_comctl_fn(
+                        concat!(stringify!($fn_name), "\0").as_ptr() as *const c_char
+                    );
 
                     if pfn != ptr::null() {
                         PFN = mem::transmute(pfn);
@@ -126,6 +128,28 @@ macro_rules! __winapi_comstar_isolation_aware {
     }
 }
 
+/// Create [isolation-aware][] kernel32 bindings.
+///
+/// # Usage
+///
+/// ```ignore
+/// mod kernel32 {
+///     isolation_aware_kernel32!();
+/// }
+/// ```
+///
+/// Generally, this macro should be invoked in its own module, and it shouldn't be invoked more than
+/// once in a crate. Nothing particularly bad will happen if it's invoked multiple times, but it
+/// would add a bit of unnecessary resource waste.
+///
+/// # Forms
+/// * `isolation_aware_kernel32!()`: Generate isolation-aware functions using the `RT_MANIFEST`
+///   manifest specified in the invoking crate's resource file.
+/// * `isolation_aware_kernel32!($create_activation_ctx)`: Generate isolation-aware functions using
+///   the [activation context][] handle returned by the `$create_activation_ctx` expression.
+///
+/// [activation context]: https://msdn.microsoft.com/en-us/library/windows/desktop/aa374166.aspx
+/// [isolation-aware]: https://msdn.microsoft.com/en-us/library/windows/desktop/aa375197.aspx
 #[macro_export]
 macro_rules! isolation_aware_kernel32 {
     () => {isolation_aware_kernel32!{{
