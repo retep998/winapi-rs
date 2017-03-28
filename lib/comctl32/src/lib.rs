@@ -2,7 +2,13 @@
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to comctl32.
 #![cfg(windows)]
+
+mod isolation_aware;
+
 extern crate winapi;
+#[cfg(test)]
+#[cfg_attr(test, macro_use)]
+extern crate kernel32;
 use winapi::*;
 extern "system" {
     pub fn AddMRUStringW(hMRU: HANDLE, szString: LPCWSTR) -> c_int;

@@ -2,6 +2,9 @@
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to kernel32.
 #![cfg(windows)]
+
+mod isolation_aware;
+
 extern crate winapi;
 use winapi::*;
 extern "system" {
