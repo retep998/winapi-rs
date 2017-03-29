@@ -84,6 +84,7 @@ pub mod gl;
 #[cfg(feature = "unknwnbase")] pub mod unknwnbase;
 #[cfg(feature = "vsserror")] pub mod vsserror;
 #[cfg(feature = "winbase")] pub mod winbase;
+#[cfg(feature = "wincred")] pub mod wincred;
 #[cfg(feature = "wincodec")] pub mod wincodec;
 #[cfg(feature = "wincon")] pub mod wincon;
 #[cfg(feature = "wincrypt")] pub mod wincrypt;
