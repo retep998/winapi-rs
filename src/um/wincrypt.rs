@@ -1070,7 +1070,7 @@ pub const CRYPT_FORMAT_SEMICOLON: DWORD = CRYPT_FORMAT_RDN_SEMICOLON;
 pub const CRYPT_FORMAT_CRLF: DWORD = CRYPT_FORMAT_RDN_CRLF;
 FN!{stdcall PFN_CRYPT_ALLOC(
     cbSize: size_t,
-) -> ()}
+) -> LPVOID}
 FN!{stdcall PFN_CRYPT_FREE(
     pv: LPVOID,
 ) -> ()}
