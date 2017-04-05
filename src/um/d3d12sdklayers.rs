@@ -1197,7 +1197,7 @@ STRUCT!{struct D3D12_MESSAGE {
     Category: D3D12_MESSAGE_CATEGORY,
     Severity: D3D12_MESSAGE_SEVERITY,
     ID: D3D12_MESSAGE_ID,
-    pDescription: *mut u8,
+    pDescription: *const u8,
     DescriptionByteLength: SIZE_T,
 }}
 
