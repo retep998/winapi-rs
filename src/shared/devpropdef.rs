@@ -1,10 +1,13 @@
-// Copyright © 2015, skdltmxn
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Defines property types and keys for the Plug and Play Device Property API
-use shared::guiddef::{GUID};
-use shared::minwindef::{ULONG};
-use um::winnt::{PVOID, PCWSTR, CHAR};
-
+use shared::guiddef::{GUID, IsEqualGUID};
+use shared::minwindef::ULONG;
+use um::winnt::{CHAR, PCWSTR, PVOID};
 pub type DEVPROPTYPE = ULONG;
 pub type PDEVPROPTYPE = *mut ULONG;
 pub const DEVPROP_TYPEMOD_ARRAY: DEVPROPTYPE = 0x00001000;
@@ -54,6 +57,10 @@ STRUCT!{struct DEVPROPKEY {
     pid: DEVPROPID,
 }}
 pub type PDEVPROPKEY = *mut DEVPROPKEY;
+#[inline]
+pub fn IsEqualDevPropKey(a: &DEVPROPKEY, b: &DEVPROPKEY) -> bool {
+    (a.pid == b.pid) && IsEqualGUID(&a.fmtid, &b.fmtid)
+}
 ENUM!{enum DEVPROPSTORE {
     DEVPROP_STORE_SYSTEM,
     DEVPROP_STORE_USER,
@@ -65,6 +72,8 @@ STRUCT!{struct DEVPROPCOMPKEY {
     LocaleName: PCWSTR,
 }}
 pub type PDEVPROPCOMPKEY = *mut DEVPROPCOMPKEY;
+// IsEqualLocaleName
+// IsEqualDevPropCompKey
 STRUCT!{struct DEVPROPERTY {
     CompKey: DEVPROPCOMPKEY,
     Type: DEVPROPTYPE,

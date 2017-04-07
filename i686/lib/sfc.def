@@ -1,0 +1,18 @@
+LIBRARY sfc.dll
+EXPORTS
+SfcClose@4 @4
+SfcConnectToServer@4 @3
+SfcFileException@12 @5
+SfcInitProt@28 @1
+SfcInitiateScan@8 @6
+SfcInstallProtectedFiles@28 @7
+SfcTerminateWatcherThread@0 @2
+SfpDeleteCatalog@8 @9
+SfpInstallCatalog@12 @8
+SRSetRestorePoint@8
+SRSetRestorePointA@8
+SRSetRestorePointW@8
+SfcGetNextProtectedFile@8
+SfcIsFileProtected@8
+SfcIsKeyProtected@12
+SfpVerifyFile@12

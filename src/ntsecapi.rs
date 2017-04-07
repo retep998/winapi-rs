@@ -1,5 +1,9 @@
-// Copyright © 2015, skdltmxn
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! This module defines the Local Security Authority APIs.
 DEFINE_GUID!(Audit_System_SecurityStateChange, 0x0cce9210, 0x69ae, 0x11d9,
     0xbe, 0xd3, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30);
@@ -608,14 +612,18 @@ pub const DOMAIN_LOCKOUT_ADMINS: ULONG = 0x00000008;
 pub const DOMAIN_PASSWORD_STORE_CLEARTEXT: ULONG = 0x00000010;
 pub const DOMAIN_REFUSE_PASSWORD_CHANGE: ULONG = 0x00000020;
 pub const DOMAIN_NO_LM_OWF_CHANGE: ULONG = 0x00000040;
-pub type PSAM_PASSWORD_NOTIFICATION_ROUTINE = Option<unsafe extern "system" fn(
-    UserName: PUNICODE_STRING, RelativeId: ULONG, NewPassword: PUNICODE_STRING,
-) -> NTSTATUS>;
-pub type PSAM_INIT_NOTIFICATION_ROUTINE = Option<unsafe extern "system" fn() -> BOOLEAN>;
-pub type PSAM_PASSWORD_FILTER_ROUTINE = Option<unsafe extern "system" fn(
-    AccountName: PUNICODE_STRING, FullName: PUNICODE_STRING, Password: PUNICODE_STRING,
+FN!{stdcall PSAM_PASSWORD_NOTIFICATION_ROUTINE(
+    UserName: PUNICODE_STRING,
+    RelativeId: ULONG,
+    NewPassword: PUNICODE_STRING,
+) -> NTSTATUS}
+FN!{stdcall PSAM_INIT_NOTIFICATION_ROUTINE() -> BOOLEAN}
+FN!{stdcall PSAM_PASSWORD_FILTER_ROUTINE(
+    AccountName: PUNICODE_STRING,
+    FullName: PUNICODE_STRING,
+    Password: PUNICODE_STRING,
     SetOperation: BOOLEAN,
-) -> BOOLEAN>;
+) -> BOOLEAN}
 ENUM!{enum MSV1_0_LOGON_SUBMIT_TYPE {
     MsV1_0InteractiveLogon = 2,
     MsV1_0Lm20Logon,

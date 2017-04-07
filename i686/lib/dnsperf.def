@@ -1,0 +1,5 @@
+LIBRARY dnsperf.dll
+EXPORTS
+CloseDnsPerformanceData@0 @3
+CollectDnsPerformanceData@16 @2
+OpenDnsPerformanceData@4 @1

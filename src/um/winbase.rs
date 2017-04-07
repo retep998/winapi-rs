@@ -1,16 +1,20 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! This module defines the 32-Bit Windows Base APIs
 use ctypes::{c_char, c_void};
-use shared::basetsd::{SIZE_T};
-use shared::guiddef::{GUID};
-use shared::minwindef::{WORD, DWORD, UINT, ULONG, HMODULE, USHORT, BOOL, BYTE, LPVOID};
-use um::cfgmgr32::{MAX_PROFILE_LEN};
+use shared::basetsd::SIZE_T;
+use shared::guiddef::GUID;
+use shared::minwindef::{BOOL, BYTE, DWORD, HMODULE, LPVOID, UINT, ULONG, USHORT, WORD};
+use um::cfgmgr32::MAX_PROFILE_LEN;
 use um::winnt::{
     CHAR, FILE_ID_128, HANDLE, HRESULT, LANGID, LARGE_INTEGER, LPCSTR, LPCWSTR, MAXLONG,
     PRTL_UMS_SCHEDULER_ENTRY_POINT, PVOID, RTL_UMS_THREAD_INFO_CLASS, STATUS_ABANDONED_WAIT_0,
     STATUS_USER_APC, STATUS_WAIT_0, THREAD_BASE_PRIORITY_IDLE, THREAD_BASE_PRIORITY_LOWRT,
-    THREAD_BASE_PRIORITY_MAX, THREAD_BASE_PRIORITY_MIN, ULARGE_INTEGER, WCHAR
+    THREAD_BASE_PRIORITY_MAX, THREAD_BASE_PRIORITY_MIN, ULARGE_INTEGER, WCHAR,
 };
 
 pub const FILE_BEGIN: DWORD = 0;
@@ -72,11 +76,13 @@ pub const SECURITY_EFFECTIVE_ONLY: DWORD = 0x00080000;
 pub const SECURITY_SQOS_PRESENT: DWORD = 0x00100000;
 pub const SECURITY_VALID_SQOS_FLAGS: DWORD = 0x001F0000;
 //282
-pub type PFIBER_START_ROUTINE = Option<unsafe extern "system" fn(lpFiberParameter: LPVOID)>;
+FN!{stdcall PFIBER_START_ROUTINE(
+    lpFiberParameter: LPVOID,
+) -> ()}
 pub type LPFIBER_START_ROUTINE = PFIBER_START_ROUTINE;
-pub type PFIBER_CALLOUT_ROUTINE = Option<unsafe extern "system" fn(
+FN!{stdcall PFIBER_CALLOUT_ROUTINE(
     lpParameter: LPVOID,
-) -> LPVOID>;
+) -> LPVOID}
 //299
 pub type LPLDT_ENTRY = LPVOID; // TODO - fix this for 32-bit
 //405
@@ -118,6 +124,13 @@ BITFIELD!(COMSTAT BitFields: DWORD [
     fReserved set_fReserved[7..32],
 ]);
 pub type LPCOMSTAT = *mut COMSTAT;
+pub const DTR_CONTROL_DISABLE: DWORD = 0x00;
+pub const DTR_CONTROL_ENABLE: DWORD = 0x01;
+pub const DTR_CONTROL_HANDSHAKE: DWORD = 0x02;
+pub const RTS_CONTROL_DISABLE: DWORD = 0x00;
+pub const RTS_CONTROL_ENABLE: DWORD = 0x01;
+pub const RTS_CONTROL_HANDSHAKE: DWORD = 0x02;
+pub const RTS_CONTROL_TOGGLE: DWORD = 0x03;
 //460
 STRUCT!{struct DCB {
     DCBlength: DWORD,
@@ -244,16 +257,47 @@ pub const FILE_TYPE_REMOTE: DWORD = 0x8000;
 pub const STD_INPUT_HANDLE: DWORD = 0xFFFFFFF6;
 pub const STD_OUTPUT_HANDLE: DWORD = 0xFFFFFFF5;
 pub const STD_ERROR_HANDLE: DWORD = 0xFFFFFFF4;
-pub const NOPARITY: DWORD = 0;
-pub const ODDPARITY: DWORD = 1;
-pub const EVENPARITY: DWORD = 2;
-pub const MARKPARITY: DWORD = 3;
-pub const SPACEPARITY: DWORD = 4;
-pub const ONESTOPBIT: DWORD = 0;
-pub const ONE5STOPBITS: DWORD = 1;
-pub const TWOSTOPBITS: DWORD = 2;
+pub const NOPARITY: BYTE = 0;
+pub const ODDPARITY: BYTE = 1;
+pub const EVENPARITY: BYTE = 2;
+pub const MARKPARITY: BYTE = 3;
+pub const SPACEPARITY: BYTE = 4;
+pub const ONESTOPBIT: BYTE = 0;
+pub const ONE5STOPBITS: BYTE = 1;
+pub const TWOSTOPBITS: BYTE = 2;
 pub const IGNORE: DWORD = 0;
 pub const INFINITE: DWORD = 0xFFFFFFFF;
+//718
+pub const CBR_110: DWORD = 110;
+pub const CBR_300: DWORD = 300;
+pub const CBR_600: DWORD = 600;
+pub const CBR_1200: DWORD = 1200;
+pub const CBR_2400: DWORD = 2400;
+pub const CBR_4800: DWORD = 4800;
+pub const CBR_9600: DWORD = 9600;
+pub const CBR_14400: DWORD = 14400;
+pub const CBR_19200: DWORD = 19200;
+pub const CBR_38400: DWORD = 38400;
+pub const CBR_56000: DWORD = 56000;
+pub const CBR_57600: DWORD = 57600;
+pub const CBR_115200: DWORD = 115200;
+pub const CBR_128000: DWORD = 128000;
+pub const CBR_256000: DWORD = 256000;
+//781
+pub const SETXOFF: DWORD = 1;
+pub const SETXON: DWORD = 2;
+pub const SETRTS: DWORD = 3;
+pub const CLRRTS: DWORD = 4;
+pub const SETDTR: DWORD = 5;
+pub const CLRDTR: DWORD = 6;
+pub const RESETDEV: DWORD = 7;
+pub const SETBREAK: DWORD = 8;
+pub const CLRBREAK: DWORD = 9;
+//804
+pub const MS_CTS_ON: DWORD = 0x0010;
+pub const MS_DSR_ON: DWORD = 0x0020;
+pub const MS_RING_ON: DWORD = 0x0040;
+pub const MS_RLSD_ON: DWORD = 0x0080;
 //1729
 pub const SEM_FAILCRITICALERRORS: UINT = 0x0001;
 pub const SEM_NOGPFAULTERRORBOX: UINT = 0x0002;
@@ -283,11 +327,17 @@ pub const STARTF_TITLEISAPPID: DWORD = 0x00001000;
 pub const STARTF_PREVENTPINNING: DWORD = 0x00002000;
 pub const STARTF_UNTRUSTEDSOURCE: DWORD = 0x00008000;
 //5002
-pub type LPPROGRESS_ROUTINE = Option<unsafe extern "system" fn(
-    TotalFileSize: LARGE_INTEGER, TotalBytesTransferred: LARGE_INTEGER,
-    StreamSize: LARGE_INTEGER, StreamBytesTransferred: LARGE_INTEGER, dwStreamNumber: DWORD,
-    dwCallbackReason: DWORD, hSourceFile: HANDLE, hDestinationFile: HANDLE, lpData: LPVOID,
-) -> DWORD>;
+FN!{stdcall LPPROGRESS_ROUTINE(
+    TotalFileSize: LARGE_INTEGER,
+    TotalBytesTransferred: LARGE_INTEGER,
+    StreamSize: LARGE_INTEGER,
+    StreamBytesTransferred: LARGE_INTEGER,
+    dwStreamNumber: DWORD,
+    dwCallbackReason: DWORD,
+    hSourceFile: HANDLE,
+    hDestinationFile: HANDLE,
+    lpData: LPVOID,
+) -> DWORD}
 //5095
 ENUM!{enum COPYFILE2_MESSAGE_TYPE {
     COPYFILE2_CALLBACK_NONE = 0,
@@ -371,13 +421,13 @@ STRUCT!{struct COPYFILE2_MESSAGE_Error {
     uliTotalFileSize: ULARGE_INTEGER,
     uliTotalBytesTransferred: ULARGE_INTEGER,
 }}
-#[cfg(target_arch="x86")]
+#[cfg(target_arch = "x86")]
 STRUCT!{struct COPYFILE2_MESSAGE {
     Type: COPYFILE2_MESSAGE_TYPE,
     dwPadding: DWORD,
     Info: [u64; 8],
 }}
-#[cfg(target_arch="x86_64")]
+#[cfg(target_arch = "x86_64")]
 STRUCT!{struct COPYFILE2_MESSAGE {
     Type: COPYFILE2_MESSAGE_TYPE,
     dwPadding: DWORD,
@@ -390,9 +440,10 @@ UNION!{COPYFILE2_MESSAGE, Info, StreamFinished, StreamFinished_mut,
     COPYFILE2_MESSAGE_StreamFinished}
 UNION!{COPYFILE2_MESSAGE, Info, PollContinue, PollContinue_mut, COPYFILE2_MESSAGE_PollContinue}
 UNION!{COPYFILE2_MESSAGE, Info, Error, Error_mut, COPYFILE2_MESSAGE_Error}
-pub type PCOPYFILE2_PROGRESS_ROUTINE = Option<unsafe extern "system" fn(
-    pMessage: *const COPYFILE2_MESSAGE, pvCallbackContext: PVOID,
-) -> COPYFILE2_MESSAGE_ACTION>;
+FN!{stdcall PCOPYFILE2_PROGRESS_ROUTINE(
+    pMessage: *const COPYFILE2_MESSAGE,
+    pvCallbackContext: PVOID,
+) -> COPYFILE2_MESSAGE_ACTION}
 STRUCT!{struct COPYFILE2_EXTENDED_PARAMETERS {
     dwSize: DWORD,
     dwCopyFlags: DWORD,
@@ -526,9 +577,9 @@ ENUM!{enum PIPE_ATTRIBUTE_TYPE {
     PipeConnectionAttribute,
     PipeHandleAttribute,
 }}
-pub type APPLICATION_RECOVERY_CALLBACK = Option<unsafe extern "system" fn(
-    pvParameter: PVOID
-) -> DWORD>;
+FN!{stdcall APPLICATION_RECOVERY_CALLBACK(
+    pvParameter: PVOID,
+) -> DWORD}
 STRUCT!{struct SYSTEM_POWER_STATUS {
     ACLineStatus: BYTE,
     BatteryFlag: BYTE,

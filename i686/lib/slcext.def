@@ -1,0 +1,11 @@
+LIBRARY slcext.dll
+EXPORTS
+SLAcquireGenuineTicket@20
+SLActivateProduct@28
+SLGetPackageProductKey@12
+SLGetPackageProperties@16
+SLGetPackageToken@16
+SLGetReferralInformation@20
+SLGetServerStatus@20
+SLInstallPackage@24
+SLUninstallPackage@20

@@ -1,11 +1,16 @@
-// Copyright © 2015, skdltmxn
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! user APIs for the Configuration Manager
 use shared::basetsd::{DWORD_PTR, ULONG32, ULONG64, ULONG_PTR};
-use shared::guiddef::{GUID};
+use shared::guiddef::GUID;
 use shared::minwindef::{BYTE, DWORD, MAX_PATH, ULONG, WORD};
-use um::winnt::{DWORDLONG, ULONGLONG, WCHAR, ANYSIZE_ARRAY, LONG, CHAR, LARGE_INTEGER, HANDLE, VOID, PVOID};
-
+use um::winnt::{
+    ANYSIZE_ARRAY, CHAR, DWORDLONG, HANDLE, LARGE_INTEGER, LONG, PVOID, ULONGLONG, VOID, WCHAR,
+};
 pub type PCVOID = *const VOID;
 pub const MAX_DEVICE_ID_LEN: usize = 200;
 pub const MAX_DEVNODE_ID_LEN: usize = MAX_DEVICE_ID_LEN;
@@ -647,9 +652,9 @@ STRUCT!{struct CM_NOTIFY_FILTER {
     Reserved: DWORD,
     u: [BYTE; 400],
 }}
-UNION!(CM_NOTIFY_FILTER, u, DeviceInterface, DeviceInterface_mut, CM_NOTIFY_FILTER_DeviceInterface);
-UNION!(CM_NOTIFY_FILTER, u, DeviceHandle, DeviceHandle_mut, CM_NOTIFY_FILTER_DeviceHandle);
-UNION!(CM_NOTIFY_FILTER, u, DeviceInstance, DeviceInstance_mut, CM_NOTIFY_FILTER_DeviceInstance);
+UNION!{CM_NOTIFY_FILTER, u, DeviceInterface, DeviceInterface_mut, CM_NOTIFY_FILTER_DeviceInterface}
+UNION!{CM_NOTIFY_FILTER, u, DeviceHandle, DeviceHandle_mut, CM_NOTIFY_FILTER_DeviceHandle}
+UNION!{CM_NOTIFY_FILTER, u, DeviceInstance, DeviceInstance_mut, CM_NOTIFY_FILTER_DeviceInstance}
 pub type PCM_NOTIFY_FILTER = *mut CM_NOTIFY_FILTER;
 ENUM!{enum CM_NOTIFY_ACTION {
     CM_NOTIFY_ACTION_DEVICEINTERFACEARRIVAL = 0,
@@ -688,14 +693,18 @@ UNION!(
     CM_NOTIFY_EVENT_DATA_DeviceInterface
 );
 UNION!(CM_NOTIFY_EVENT_DATA, u, DeviceHandle, DeviceHandle_mut, CM_NOTIFY_EVENT_DATA_DeviceHandle);
-UNION!(
-    CM_NOTIFY_EVENT_DATA, u, DeviceInstance, DeviceInstance_mut, CM_NOTIFY_EVENT_DATA_DeviceInstance
-);
+UNION!{
+    CM_NOTIFY_EVENT_DATA, u, DeviceInstance, DeviceInstance_mut,
+    CM_NOTIFY_EVENT_DATA_DeviceInstance
+}
 pub type PCM_NOTIFY_EVENT_DATA = *mut CM_NOTIFY_EVENT_DATA;
-pub type PCM_NOTIFY_CALLBACK = Option<unsafe extern "system" fn(
-    hNotify: HCMNOTIFICATION, Context: PVOID, Action: CM_NOTIFY_ACTION,
-    EventData: PCM_NOTIFY_EVENT_DATA, EventDataSize: DWORD,
-) -> DWORD>;
+FN!{stdcall PCM_NOTIFY_CALLBACK(
+    hNotify: HCMNOTIFICATION,
+    Context: PVOID,
+    Action: CM_NOTIFY_ACTION,
+    EventData: PCM_NOTIFY_EVENT_DATA,
+    EventDataSize: DWORD,
+) -> DWORD}
 pub const CR_SUCCESS: CONFIGRET = 0x00000000;
 pub const CR_DEFAULT: CONFIGRET = 0x00000001;
 pub const CR_OUT_OF_MEMORY: CONFIGRET = 0x00000002;

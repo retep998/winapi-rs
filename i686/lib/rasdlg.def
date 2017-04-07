@@ -1,0 +1,25 @@
+LIBRARY RASDLG.dll
+EXPORTS
+GetRasDialOutProtocols@0
+RasAutodialQueryDlgA@20
+RasAutodialQueryDlgW@20
+RasDialDlgA@16
+RasDialDlgW@16
+RasEntryDlgA@12
+RasEntryDlgW@12
+RasPhonebookDlgA@12
+RasPhonebookDlgW@12
+RasSrvAddPropPages@20
+RasSrvAllowConnectionsConfig@4
+RasSrvCleanupService@0
+RasSrvEnumConnections@12
+RasSrvHangupConnection@4
+RasSrvInitializeService@0
+RasSrvIsConnectionConnected@8
+RasSrvIsICConfigured@4
+RasSrvIsServiceRunning@4
+RasUserEnableManualDial@12
+RasUserGetManualDial@12
+RasUserPrefsDlg@4
+RouterEntryDlgA@16
+RouterEntryDlgW@16

@@ -1,0 +1,7 @@
+LIBRARY dpx.dll
+EXPORTS
+DpxFreeMemory@4
+DpxNewJob@8
+DpxNewJobEx@12
+DpxRestoreJob@8
+DpxRestoreJobEx@12

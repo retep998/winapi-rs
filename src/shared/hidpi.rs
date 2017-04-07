@@ -1,23 +1,52 @@
-// Copyright © 2015, Peter Atashian and Alex Daniel Jones
-// Licensed under the MIT License <LICENSE.md>
-use shared::hidusage::{USAGE};
-use shared::minwindef::{ULONG, UCHAR, USHORT, PUCHAR};
-use shared::ntdef::{NTSTATUS};
-use shared::ntstatus::{FACILITY_HID_ERROR_CODE};
-use um::winnt::{PVOID, PCHAR, BOOLEAN, LONG};
-
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
+use shared::hidusage::USAGE;
+use shared::minwindef::{PUCHAR, UCHAR, ULONG, USHORT};
+use shared::ntdef::NTSTATUS;
+use shared::ntstatus::FACILITY_HID_ERROR_CODE;
+use um::winnt::{BOOLEAN, LONG, PCHAR, PVOID};
 pub const HIDP_LINK_COLLECTION_ROOT: USHORT = -1i16 as u16;
 pub const HIDP_LINK_COLLECTION_UNSPECIFIED: USHORT = 0;
 ENUM!{enum HIDP_REPORT_TYPE {
-  HidP_Input,
-  HidP_Output,
-  HidP_Feature,
+    HidP_Input,
+    HidP_Output,
+    HidP_Feature,
 }}
 STRUCT!{struct USAGE_AND_PAGE {
     Usage: USAGE,
     UsagePage: USAGE,
 }}
 pub type PUSAGE_AND_PAGE = *mut USAGE_AND_PAGE;
+// HidP_IsSameUsageAndPage
+STRUCT!{struct HIDP_CAPS_Range {
+    UsageMin: USAGE,
+    UsageMax: USAGE,
+    StringMin: USHORT,
+    StringMax: USHORT,
+    DesignatorMin: USHORT,
+    DesignatorMax: USHORT,
+    DataIndexMin: USHORT,
+    DataIndexMax: USHORT,
+}}
+STRUCT!{struct HIDP_CAPS_NotRange {
+    Usage: USAGE,
+    Reserved1: USAGE,
+    StringIndex: USHORT,
+    Reserved2: USHORT,
+    DesignatorIndex: USHORT,
+    Reserved3: USHORT,
+    DataIndex: USHORT,
+    Reserved4: USHORT,
+}}
+UNION2!{union HIDP_CAPS_u {
+    [u16; 8],
+    Range Range_mut: HIDP_CAPS_Range,
+    NotRange NotRange_mut: HIDP_CAPS_NotRange,
+}}
 STRUCT!{struct HIDP_BUTTON_CAPS {
     UsagePage: USAGE,
     ReportID: UCHAR,
@@ -31,31 +60,9 @@ STRUCT!{struct HIDP_BUTTON_CAPS {
     IsDesignatorRange: BOOLEAN,
     IsAbsolute: BOOLEAN,
     Reserved: [ULONG; 10],
-    S_un: [u16; 8],
+    u: HIDP_CAPS_u,
 }}
-UNION!{HIDP_BUTTON_CAPS, S_un, Range, Range_mut, HIDP_RANGE_STRUCT}
-UNION!{HIDP_BUTTON_CAPS, S_un, NotRange, NotRange_mut, HIDP_NOTRANGE_STRUCT}
 pub type PHIDP_BUTTON_CAPS = *mut HIDP_BUTTON_CAPS;
-STRUCT!{struct HIDP_RANGE_STRUCT {
-    UsageMin: USAGE,
-    UsageMax: USAGE,
-    StringMin: USHORT,
-    StringMax: USHORT,
-    DesignatorMin: USHORT,
-    DesignatorMax: USHORT,
-    DataIndexMin: USHORT,
-    DataIndexMax: USHORT,
-}}
-STRUCT!{struct HIDP_NOTRANGE_STRUCT {
-    Usage: USAGE,
-    Reserved1: USAGE,
-    StringIndex: USHORT,
-    Reserved2: USHORT,
-    DesignatorIndex: USHORT,
-    Reserved3: USHORT,
-    DataIndex: USHORT,
-    Reserved4: USHORT,
-}}
 STRUCT!{struct HIDP_VALUE_CAPS {
     UsagePage: USAGE,
     ReportID: UCHAR,
@@ -79,10 +86,8 @@ STRUCT!{struct HIDP_VALUE_CAPS {
     LogicalMax: LONG,
     PhysicalMin: LONG,
     PhysicalMax: LONG,
-    S_un: [u16; 8],
+    u: HIDP_CAPS_u,
 }}
-UNION!{HIDP_VALUE_CAPS, S_un, Range, Range_mut, HIDP_RANGE_STRUCT}
-UNION!{HIDP_VALUE_CAPS, S_un, NotRange, NotRange_mut, HIDP_NOTRANGE_STRUCT}
 pub type PHIDP_VALUE_CAPS = *mut HIDP_VALUE_CAPS;
 STRUCT!{struct HIDP_LINK_COLLECTION_NODE {
     LinkUsage: USAGE,
@@ -100,7 +105,7 @@ BITFIELD!{HIDP_LINK_COLLECTION_NODE bit_fields: ULONG [
 ]}
 pub type PHIDP_LINK_COLLECTION_NODE = *mut HIDP_LINK_COLLECTION_NODE;
 pub type PHIDP_REPORT_DESCRIPTOR = PUCHAR;
-pub enum HIDP_PREPARSED_DATA{}
+pub enum HIDP_PREPARSED_DATA {}
 pub type PHIDP_PREPARSED_DATA = *mut HIDP_PREPARSED_DATA;
 STRUCT!{struct HIDP_CAPS {
     Usage: USAGE,
@@ -121,13 +126,16 @@ STRUCT!{struct HIDP_CAPS {
     NumberFeatureDataIndices: USHORT,
 }}
 pub type PHIDP_CAPS = *mut HIDP_CAPS;
+UNION2!{union HIDP_DATA_u {
+    [u32; 1],
+    RawValue RawValue_mut: ULONG,
+    On On_mut: BOOLEAN,
+}}
 STRUCT!{struct HIDP_DATA {
     DataIndex: USHORT,
     Reserved: USHORT,
-    S_un: [u32; 1],
+    u: HIDP_DATA_u,
 }}
-UNION!{HIDP_DATA, S_un, RawValue, RawValue_mut, ULONG}
-UNION!{HIDP_DATA, S_un, On, On_mut, BOOLEAN}
 pub type PHIDP_DATA = *mut HIDP_DATA;
 STRUCT!{struct HIDP_UNKNOWN_TOKEN {
     Token: UCHAR,
@@ -163,9 +171,11 @@ BITFIELD!{HIDP_KEYBOARD_MODIFIER_STATE ul: ULONG [
     NumLock set_NumLock[10..11],
 ]}
 pub type PHIDP_KEYBOARD_MODIFIER_STATE = *mut HIDP_KEYBOARD_MODIFIER_STATE;
-pub type PHIDP_INSERT_SCANCODES = Option<unsafe extern "C" fn(
-    Context: PVOID, NewScanCodes: PCHAR, Length: ULONG,
-) -> BOOLEAN>;
+FN!{stdcall PHIDP_INSERT_SCANCODES(
+    Context: PVOID,
+    NewScanCodes: PCHAR,
+    Length: ULONG,
+) -> BOOLEAN}
 pub const HIDP_STATUS_SUCCESS: NTSTATUS = HIDP_ERROR_CODES!(0x0, 0);
 pub const HIDP_STATUS_NULL: NTSTATUS = HIDP_ERROR_CODES!(0x8, 1);
 pub const HIDP_STATUS_INVALID_PREPARSED_DATA: NTSTATUS = HIDP_ERROR_CODES!(0xC, 1);

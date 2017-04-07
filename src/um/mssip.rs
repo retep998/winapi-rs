@@ -1,13 +1,17 @@
-// Copyright © 2015, skdltmxn
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Microsoft SIP Provider Prototypes and Definitions
-
 use shared::guiddef::GUID;
 use shared::minwindef::{BOOL, BYTE, DWORD, LPVOID};
 use um::mscat::{CRYPTCATMEMBER, CRYPTCATSTORE};
+use um::wincrypt::{
+    CRYPT_ALGORITHM_IDENTIFIER, CRYPT_ATTRIBUTE_TYPE_VALUE, CRYPT_HASH_BLOB, HCRYPTPROV,
+};
 use um::winnt::{HANDLE, LPCWSTR, PWSTR, WCHAR};
-use um::wincrypt::{CRYPT_ALGORITHM_IDENTIFIER, CRYPT_ATTRIBUTE_TYPE_VALUE, CRYPT_HASH_BLOB, HCRYPTPROV};
-
 STRUCT!{struct SIP_SUBJECTINFO {
     cbSize: DWORD,
     pgSubjectType: *mut GUID,
@@ -80,24 +84,33 @@ STRUCT!{struct SIP_CAP_SET_V3 {
 UNION!(SIP_CAP_SET_V3, dwFlags, dwReserved, dwReserved_mut, DWORD);
 pub type PSIP_CAP_SET_V3 = *mut SIP_CAP_SET_V3;
 pub type SIP_CAP_SET = PSIP_CAP_SET_V3;
-pub type pCryptSIPGetSignedDataMsg = Option<unsafe extern "system" fn(
-    pSubjectInfo: *mut SIP_SUBJECTINFO, pdwEncodingType: *mut DWORD, dwIndex: DWORD,
-    pcbSignedDataMsg: *mut DWORD, pbSignedDataMsg: *mut BYTE,
-) -> BOOL>;
-pub type pCryptSIPPutSignedDataMsg = Option<unsafe extern "system" fn(
-    pSubjectInfo: *mut SIP_SUBJECTINFO, dwEncodingType: DWORD, pdwIndex: *mut DWORD,
-    cbSignedDataMsg: DWORD, pbSignedDataMsg: *mut BYTE,
-) -> BOOL>;
-pub type pCryptSIPCreateIndirectData = Option<unsafe extern "system" fn(
-    pSubjectInfo: *mut SIP_SUBJECTINFO, pcbIndirectData: *mut DWORD,
+FN!{stdcall pCryptSIPGetSignedDataMsg(
+    pSubjectInfo: *mut SIP_SUBJECTINFO,
+    pdwEncodingType: *mut DWORD,
+    dwIndex: DWORD,
+    pcbSignedDataMsg: *mut DWORD,
+    pbSignedDataMsg: *mut BYTE,
+) -> BOOL}
+FN!{stdcall pCryptSIPPutSignedDataMsg(
+    pSubjectInfo: *mut SIP_SUBJECTINFO,
+    dwEncodingType: DWORD,
+    pdwIndex: *mut DWORD,
+    cbSignedDataMsg: DWORD,
+    pbSignedDataMsg: *mut BYTE,
+) -> BOOL}
+FN!{stdcall pCryptSIPCreateIndirectData(
+    pSubjectInfo: *mut SIP_SUBJECTINFO,
+    pcbIndirectData: *mut DWORD,
     pIndirectData: *mut SIP_INDIRECT_DATA,
-) -> BOOL>;
-pub type pCryptSIPVerifyIndirectData = Option<unsafe extern "system" fn(
-    pSubjectInfo: *mut SIP_SUBJECTINFO, pIndirectData: *mut SIP_INDIRECT_DATA,
-) -> BOOL>;
-pub type pCryptSIPRemoveSignedDataMsg = Option<unsafe extern "system" fn(
-    pSubjectInfo: *mut SIP_SUBJECTINFO, dwIndex: DWORD,
-) -> BOOL>;
+) -> BOOL}
+FN!{stdcall pCryptSIPVerifyIndirectData(
+    pSubjectInfo: *mut SIP_SUBJECTINFO,
+    pIndirectData: *mut SIP_INDIRECT_DATA,
+) -> BOOL}
+FN!{stdcall pCryptSIPRemoveSignedDataMsg(
+    pSubjectInfo: *mut SIP_SUBJECTINFO,
+    dwIndex: DWORD,
+) -> BOOL}
 STRUCT!{struct SIP_DISPATCH_INFO {
     cbSize: DWORD,
     hSIP: HANDLE,

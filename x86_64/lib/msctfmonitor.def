@@ -1,0 +1,5 @@
+LIBRARY MsCtfMonitor.DLL
+EXPORTS
+DoMsCtfMonitor
+InitLocalMsCtfMonitor
+UninitLocalMsCtfMonitor

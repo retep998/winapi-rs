@@ -1,5 +1,9 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Security Support Provider Interface Prototypes and structure definitions
 pub type SEC_WCHAR = ::WCHAR;
 pub type SEC_CHAR = ::CHAR;
@@ -551,40 +555,81 @@ STRUCT!{struct SecPkgContext_ApplicationProtocol {
     ProtocolId: [::c_uchar; MAX_PROTOCOL_ID_SIZE],
 }}
 pub type PSecPkgContext_ApplicationProtocol = *mut SecPkgContext_ApplicationProtocol;
-pub type SEC_GET_KEY_FN = Option<unsafe extern "system" fn(
-    Arg: *mut ::c_void, Principal: *mut ::c_void, KeyVer: ::c_ulong, Key: *mut *mut ::c_void,
+FN!{stdcall SEC_GET_KEY_FN(
+    Arg: *mut ::c_void,
+    Principal: *mut ::c_void,
+    KeyVer: ::c_ulong,
+    Key: *mut *mut ::c_void,
     Status: *mut SECURITY_STATUS,
-)>;
+) -> ()}
 pub const SECPKG_CONTEXT_EXPORT_RESET_NEW: ::c_ulong = 0x00000001;
 pub const SECPKG_CONTEXT_EXPORT_DELETE_OLD: ::c_ulong = 0x00000002;
 pub const SECPKG_CONTEXT_EXPORT_TO_KERNEL: ::c_ulong = 0x00000004;
-pub type ACQUIRE_CREDENTIALS_HANDLE_FN_W = Option<unsafe extern "system" fn(
-    *mut SEC_WCHAR, *mut SEC_WCHAR, ::c_ulong, *mut ::c_void, *mut ::c_void, SEC_GET_KEY_FN,
-    *mut ::c_void, PCredHandle, PTimeStamp,
-) -> SECURITY_STATUS>;
-pub type ACQUIRE_CREDENTIALS_HANDLE_FN_A = Option<unsafe extern "system" fn(
-    *mut SEC_CHAR, *mut SEC_CHAR, ::c_ulong, *mut ::c_void, *mut ::c_void, SEC_GET_KEY_FN,
-    *mut ::c_void, PCredHandle, PTimeStamp,
-) -> SECURITY_STATUS>;
-pub type FREE_CREDENTIALS_HANDLE_FN = Option<unsafe extern "system" fn(
+FN!{stdcall ACQUIRE_CREDENTIALS_HANDLE_FN_W(
+    *mut SEC_WCHAR,
+    *mut SEC_WCHAR,
+    ::c_ulong,
+    *mut ::c_void,
+    *mut ::c_void,
+    SEC_GET_KEY_FN,
+    *mut ::c_void,
     PCredHandle,
-) -> SECURITY_STATUS>;
-pub type ADD_CREDENTIALS_FN_W = Option<unsafe extern "system" fn(
-    PCredHandle, *mut SEC_WCHAR, *mut SEC_WCHAR, ::c_ulong, *mut ::c_void, SEC_GET_KEY_FN,
-    *mut ::c_void, PTimeStamp,
-) -> SECURITY_STATUS>;
-pub type ADD_CREDENTIALS_FN_A = Option<unsafe extern "system" fn(
-    PCredHandle, *mut SEC_CHAR, *mut SEC_CHAR, ::c_ulong, *mut ::c_void, SEC_GET_KEY_FN,
-    *mut ::c_void, PTimeStamp,
-) -> SECURITY_STATUS>;
-pub type CHANGE_PASSWORD_FN_W = Option<unsafe extern "system" fn(
-    *mut SEC_WCHAR, *mut SEC_WCHAR, *mut SEC_WCHAR, *mut SEC_WCHAR, *mut SEC_WCHAR, ::BOOLEAN,
-    ::c_ulong, PSecBufferDesc,
-) -> SECURITY_STATUS>;
-pub type CHANGE_PASSWORD_FN_A = Option<unsafe extern "system" fn(
-    *mut SEC_CHAR, *mut SEC_CHAR, *mut SEC_CHAR, *mut SEC_CHAR, *mut SEC_CHAR, ::BOOLEAN,
-    ::c_ulong, PSecBufferDesc,
-) -> SECURITY_STATUS>;
+    PTimeStamp,
+) -> SECURITY_STATUS}
+FN!{stdcall ACQUIRE_CREDENTIALS_HANDLE_FN_A(
+    *mut SEC_CHAR,
+    *mut SEC_CHAR,
+    ::c_ulong,
+    *mut ::c_void,
+    *mut ::c_void,
+    SEC_GET_KEY_FN,
+    *mut ::c_void,
+    PCredHandle,
+    PTimeStamp,
+) -> SECURITY_STATUS}
+FN!{stdcall FREE_CREDENTIALS_HANDLE_FN(
+    PCredHandle,
+) -> SECURITY_STATUS}
+FN!{stdcall ADD_CREDENTIALS_FN_W(
+    PCredHandle,
+    *mut SEC_WCHAR,
+    *mut SEC_WCHAR,
+    ::c_ulong,
+    *mut ::c_void,
+    SEC_GET_KEY_FN,
+    *mut ::c_void,
+    PTimeStamp,
+) -> SECURITY_STATUS}
+FN!{stdcall ADD_CREDENTIALS_FN_A(
+    PCredHandle,
+    *mut SEC_CHAR,
+    *mut SEC_CHAR,
+    ::c_ulong,
+    *mut ::c_void,
+    SEC_GET_KEY_FN,
+    *mut ::c_void,
+    PTimeStamp,
+) -> SECURITY_STATUS}
+FN!{stdcall CHANGE_PASSWORD_FN_W(
+    *mut SEC_WCHAR,
+    *mut SEC_WCHAR,
+    *mut SEC_WCHAR,
+    *mut SEC_WCHAR,
+    *mut SEC_WCHAR,
+    ::BOOLEAN,
+    ::c_ulong,
+    PSecBufferDesc,
+) -> SECURITY_STATUS}
+FN!{stdcall CHANGE_PASSWORD_FN_A(
+    *mut SEC_CHAR,
+    *mut SEC_CHAR,
+    *mut SEC_CHAR,
+    *mut SEC_CHAR,
+    *mut SEC_CHAR,
+    ::BOOLEAN,
+    ::c_ulong,
+    PSecBufferDesc,
+) -> SECURITY_STATUS}
 //1844
 ENUM!{enum SecDelegationType {
     SecFull,

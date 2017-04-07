@@ -1,10 +1,13 @@
-// Copyright © 2015, skdltmxn
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! This file contains structures, function prototypes, and definitions for the DsGetDcName API.
-use shared::guiddef::{GUID};
-use shared::minwindef::{ULONG};
-use um::winnt::{LPWSTR, LPSTR, PSID};
-
+use shared::guiddef::GUID;
+use shared::minwindef::ULONG;
+use um::winnt::{LPSTR, LPWSTR, PSID};
 pub const DS_FORCE_REDISCOVERY: ULONG = 0x00000001;
 pub const DS_DIRECTORY_SERVICE_REQUIRED: ULONG = 0x00000010;
 pub const DS_DIRECTORY_SERVICE_PREFERRED: ULONG = 0x00000020;

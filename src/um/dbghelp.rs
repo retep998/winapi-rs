@@ -1,27 +1,27 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! DbgHelp include file
 use shared::basetsd::{DWORD64, ULONG64};
-use shared::minwindef::{BOOL, ULONG, USHORT, UCHAR, PUCHAR, WORD, DWORD, LPDWORD};
+use shared::guiddef::GUID;
+use shared::minwindef::{BOOL, DWORD, LPDWORD, PUCHAR, UCHAR, ULONG, USHORT, WORD};
+#[cfg(target_arch = "x86")]
+use shared::minwindef::PDWORD;
 use um::winnt::{
-    PVOID, PSTR, PWSTR, PCWSTR, PCSTR, WCHAR, CHAR,HANDLE, BOOLEAN, PIMAGE_SECTION_HEADER,
-    LIST_ENTRY 
+    BOOLEAN, CHAR, HANDLE, LIST_ENTRY, PCSTR, PCWSTR, PIMAGE_SECTION_HEADER, PSTR, PVOID, PWSTR,
+    WCHAR,
 };
-use vc::vcruntime::{size_t};
-use shared::guiddef::{GUID};
-
+#[cfg(target_arch = "x86")]
+use um::winnt::{
+    PFPO_DATA, PIMAGE_COFF_SYMBOLS_HEADER, PIMAGE_DEBUG_DIRECTORY, PIMAGE_FUNCTION_ENTRY,
+    PIMAGE_NT_HEADERS32,
+};
 #[cfg(target_arch = "x86_64")]
-use um::winnt::{PIMAGE_NT_HEADERS64};
-
-#[cfg(target_arch = "x86")]
-use shared::minwindef::{PDWORD};
-
-#[cfg(target_arch = "x86")]
-use um::winnt::{
-    PIMAGE_NT_HEADERS32, PIMAGE_FUNCTION_ENTRY, PFPO_DATA, PIMAGE_COFF_SYMBOLS_HEADER,
-    PIMAGE_DEBUG_DIRECTORY
-};
-
+use um::winnt::PIMAGE_NT_HEADERS64;
+use vc::vcruntime::size_t;
 #[cfg(target_arch = "x86_64")]
 STRUCT!{struct LOADED_IMAGE {
     ModuleName: PSTR,
@@ -60,24 +60,34 @@ pub const MAX_SYM_NAME: usize = 2000;
 pub const ERROR_IMAGE_NOT_STRIPPED: DWORD = 0x8800;
 pub const ERROR_NO_DBG_POINTER: DWORD = 0x8801;
 pub const ERROR_NO_PDB_POINTER: DWORD = 0x8802;
-pub type PFIND_DEBUG_FILE_CALLBACK = Option<unsafe extern "system" fn(
-    FileHandle: HANDLE, FileName: PCSTR, CallerData: PVOID,
-) -> BOOL>;
-pub type PFIND_DEBUG_FILE_CALLBACKW = Option<unsafe extern "system" fn(
-    FileHandle: HANDLE, FileName: PCWSTR, CallerData: PVOID,
-) -> BOOL>;
-pub type PFINDFILEINPATHCALLBACK = Option<unsafe extern "system" fn(
-    filename: PCSTR, context: PVOID,
-) -> BOOL>;
-pub type PFINDFILEINPATHCALLBACKW = Option<unsafe extern "system" fn(
-    filename: PCWSTR, context: PVOID,
-) -> BOOL>;
-pub type PFIND_EXE_FILE_CALLBACK = Option<unsafe extern "system" fn(
-    FileHandle: HANDLE, FileName: PCSTR, CallerData: PVOID,
-) -> BOOL>;
-pub type PFIND_EXE_FILE_CALLBACKW = Option<unsafe extern "system" fn(
-    FileHandle: HANDLE, FileName: PCWSTR, CallerData: PVOID,
-) -> BOOL>;
+FN!{stdcall PFIND_DEBUG_FILE_CALLBACK(
+    FileHandle: HANDLE,
+    FileName: PCSTR,
+    CallerData: PVOID,
+) -> BOOL}
+FN!{stdcall PFIND_DEBUG_FILE_CALLBACKW(
+    FileHandle: HANDLE,
+    FileName: PCWSTR,
+    CallerData: PVOID,
+) -> BOOL}
+FN!{stdcall PFINDFILEINPATHCALLBACK(
+    filename: PCSTR,
+    context: PVOID,
+) -> BOOL}
+FN!{stdcall PFINDFILEINPATHCALLBACKW(
+    filename: PCWSTR,
+    context: PVOID,
+) -> BOOL}
+FN!{stdcall PFIND_EXE_FILE_CALLBACK(
+    FileHandle: HANDLE,
+    FileName: PCSTR,
+    CallerData: PVOID,
+) -> BOOL}
+FN!{stdcall PFIND_EXE_FILE_CALLBACKW(
+    FileHandle: HANDLE,
+    FileName: PCWSTR,
+    CallerData: PVOID,
+) -> BOOL}
 #[cfg(target_arch = "x86")]
 STRUCT!{struct IMAGE_DEBUG_INFORMATION {
     List: LIST_ENTRY,
@@ -114,12 +124,14 @@ STRUCT!{struct IMAGE_DEBUG_INFORMATION {
 }}
 #[cfg(target_arch = "x86")]
 pub type PIMAGE_DEBUG_INFORMATION = *mut IMAGE_DEBUG_INFORMATION;
-pub type PENUMDIRTREE_CALLBACK = Option<unsafe extern "system" fn(
-    FilePath: PCSTR, CallerData: PVOID,
-) -> BOOL>;
-pub type PENUMDIRTREE_CALLBACKW = Option<unsafe extern "system" fn(
-    FilePath: PCWSTR, CallerData: PVOID,
-) -> BOOL>;
+FN!{stdcall PENUMDIRTREE_CALLBACK(
+    FilePath: PCSTR,
+    CallerData: PVOID,
+) -> BOOL}
+FN!{stdcall PENUMDIRTREE_CALLBACKW(
+    FilePath: PCWSTR,
+    CallerData: PVOID,
+) -> BOOL}
 pub const UNDNAME_COMPLETE: DWORD = 0x0000;
 pub const UNDNAME_NO_LEADING_UNDERSCORES: DWORD = 0x0001;
 pub const UNDNAME_NO_MS_KEYWORDS: DWORD = 0x0002;
@@ -276,19 +288,26 @@ STRUCT!{struct STACKFRAME {
 }}
 #[cfg(target_arch = "x86")]
 pub type LPSTACKFRAME = *mut STACKFRAME;
-pub type PREAD_PROCESS_MEMORY_ROUTINE64 = Option<unsafe extern "system" fn(
-    hProcess: HANDLE, qwBaseAddress: DWORD64, lpBuffer: PVOID, nSize: DWORD,
+FN!{stdcall PREAD_PROCESS_MEMORY_ROUTINE64(
+    hProcess: HANDLE,
+    qwBaseAddress: DWORD64,
+    lpBuffer: PVOID,
+    nSize: DWORD,
     lpNumberOfBytesRead: LPDWORD,
-) -> BOOL>;
-pub type PFUNCTION_TABLE_ACCESS_ROUTINE64 = Option<unsafe extern "system" fn(
-    ahProcess: HANDLE, AddrBase: DWORD64,
-) -> PVOID>;
-pub type PGET_MODULE_BASE_ROUTINE64 = Option<unsafe extern "system" fn(
-    hProcess: HANDLE, Address: DWORD64,
-) -> DWORD64>;
-pub type PTRANSLATE_ADDRESS_ROUTINE64 = Option<unsafe extern "system" fn(
-    hProcess: HANDLE, hThread: HANDLE, lpaddr: LPADDRESS64,
-) -> DWORD64>;
+) -> BOOL}
+FN!{stdcall PFUNCTION_TABLE_ACCESS_ROUTINE64(
+    ahProcess: HANDLE,
+    AddrBase: DWORD64,
+) -> PVOID}
+FN!{stdcall PGET_MODULE_BASE_ROUTINE64(
+    hProcess: HANDLE,
+    Address: DWORD64,
+) -> DWORD64}
+FN!{stdcall PTRANSLATE_ADDRESS_ROUTINE64(
+    hProcess: HANDLE,
+    hThread: HANDLE,
+    lpaddr: LPADDRESS64,
+) -> DWORD64}
 pub const SYM_STKWALK_DEFAULT: DWORD = 0x00000000;
 pub const SYM_STKWALK_FORCE_FRAMEPTR: DWORD = 0x00000001;
 #[cfg(target_arch = "x86_64")]
@@ -300,22 +319,29 @@ pub type PGET_MODULE_BASE_ROUTINE = PGET_MODULE_BASE_ROUTINE64;
 #[cfg(target_arch = "x86_64")]
 pub type PTRANSLATE_ADDRESS_ROUTINE = PTRANSLATE_ADDRESS_ROUTINE64;
 #[cfg(target_arch = "x86")]
-pub type PREAD_PROCESS_MEMORY_ROUTINE = Option<unsafe extern "system" fn(
-    hProcess: HANDLE, qwBaseAddress: DWORD, lpBuffer: PVOID, nSize: DWORD,
+FN!{stdcall PREAD_PROCESS_MEMORY_ROUTINE(
+    hProcess: HANDLE,
+    qwBaseAddress: DWORD,
+    lpBuffer: PVOID,
+    nSize: DWORD,
     lpNumberOfBytesRead: PDWORD,
-) -> BOOL>;
+) -> BOOL}
 #[cfg(target_arch = "x86")]
-pub type PFUNCTION_TABLE_ACCESS_ROUTINE = Option<unsafe extern "system" fn(
-    ahProcess: HANDLE, AddrBase: DWORD,
-) -> PVOID>;
+FN!{stdcall PFUNCTION_TABLE_ACCESS_ROUTINE(
+    ahProcess: HANDLE,
+    AddrBase: DWORD,
+) -> PVOID}
 #[cfg(target_arch = "x86")]
-pub type PGET_MODULE_BASE_ROUTINE = Option<unsafe extern "system" fn(
-    hProcess: HANDLE, Address: DWORD,
-) -> DWORD>;
+FN!{stdcall PGET_MODULE_BASE_ROUTINE(
+    hProcess: HANDLE,
+    Address: DWORD,
+) -> DWORD}
 #[cfg(target_arch = "x86")]
-pub type PTRANSLATE_ADDRESS_ROUTINE = Option<unsafe extern "system" fn(
-    hProcess: HANDLE, hThread: HANDLE, lpaddr: LPADDRESS,
-) -> DWORD>;
+FN!{stdcall PTRANSLATE_ADDRESS_ROUTINE(
+    hProcess: HANDLE,
+    hThread: HANDLE,
+    lpaddr: LPADDRESS,
+) -> DWORD}
 pub const API_VERSION_NUMBER: USHORT = 12;
 STRUCT!{struct API_VERSION {
     MajorVersion: USHORT,

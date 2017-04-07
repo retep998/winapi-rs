@@ -1,14 +1,17 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! DSound procedure declarations, constant definitions and macros
 use shared::guiddef::{GUID, LPCGUID};
-use shared::minwindef::{DWORD, LPVOID, LPDWORD, LPLONG};
-use shared::windef::{HWND};
-use shared::winerror::{S_OK, E_FAIL};
+use shared::minwindef::{DWORD, LPDWORD, LPLONG, LPVOID};
+use shared::windef::HWND;
+use shared::winerror::{E_FAIL, S_OK};
 use um::mmsystem::{LPCWAVEFORMATEX, LPWAVEFORMATEX};
 use um::unknwnbase::{IUnknown, IUnknownVtbl, LPUNKNOWN};
 use um::winnt::{HRESULT, LONG};
-
 STRUCT!{struct DSCAPS {
     dwSize: DWORD,
     dwFlags: DWORD,
@@ -55,38 +58,71 @@ STRUCT!{struct DSBUFFERDESC {
 pub type LPCDSBUFFERDESC = *const DSBUFFERDESC;
 RIDL!(#[uuid(0x279afa85, 0x4981, 0x11ce, 0xa5, 0x21, 0x00, 0x20, 0xaf, 0x0b, 0xe5, 0x60)]
 interface IDirectSoundBuffer(IDirectSoundBufferVtbl): IUnknown(IUnknownVtbl) {
-    fn GetCaps(pDSBufferCaps: LPDSBCAPS) -> HRESULT,
+    fn GetCaps(
+        pDSBufferCaps: LPDSBCAPS,
+    ) -> HRESULT,
     fn GetCurrentPosition(
-        pdwCurrentPlayCursor: LPDWORD, pdwCurrentWriteCursor: LPDWORD
+        pdwCurrentPlayCursor: LPDWORD,
+        pdwCurrentWriteCursor: LPDWORD,
     ) -> HRESULT,
     fn GetFormat(
-        pwfxFormat: LPWAVEFORMATEX, dwSizeAllocated: DWORD,
-        pdwSizeWritten: LPDWORD
+        pwfxFormat: LPWAVEFORMATEX,
+        dwSizeAllocated: DWORD,
+        pdwSizeWritten: LPDWORD,
     ) -> HRESULT,
-    fn GetVolume(plVolume: LPLONG) -> HRESULT,
-    fn GetPan(plPan: LPLONG) -> HRESULT,
-    fn GetFrequency(pdwFrequency: LPDWORD) -> HRESULT,
-    fn GetStatus(pdwStatus: LPDWORD) -> HRESULT,
+    fn GetVolume(
+        plVolume: LPLONG,
+    ) -> HRESULT,
+    fn GetPan(
+        plPan: LPLONG,
+    ) -> HRESULT,
+    fn GetFrequency(
+        pdwFrequency: LPDWORD,
+    ) -> HRESULT,
+    fn GetStatus(
+        pdwStatus: LPDWORD,
+    ) -> HRESULT,
     fn Initialize(
-        pDirectSound: LPDIRECTSOUND, pcDSBufferDesc: LPCDSBUFFERDESC
+        pDirectSound: LPDIRECTSOUND,
+        pcDSBufferDesc: LPCDSBUFFERDESC,
     ) -> HRESULT,
     fn Lock(
-        dwOffset: DWORD, dwBytes: DWORD, ppvAudioPtr1: *mut LPVOID,
-        pdwAudioBytes1: LPDWORD, ppvAudioPtr2: *mut LPVOID, pdwAudioBytes2: LPDWORD,
-        dwFlags: DWORD
+        dwOffset: DWORD,
+        dwBytes: DWORD,
+        ppvAudioPtr1: *mut LPVOID,
+        pdwAudioBytes1: LPDWORD,
+        ppvAudioPtr2: *mut LPVOID,
+        pdwAudioBytes2: LPDWORD,
+        dwFlags: DWORD,
     ) -> HRESULT,
-    fn Play(dwReserved1: DWORD, dwPriority: DWORD, dwFlags: DWORD) -> HRESULT,
-    fn SetCurrentPosition(dwNewPosition: DWORD) -> HRESULT,
-    fn SetFormat(pcfxFormat: LPCWAVEFORMATEX) -> HRESULT,
-    fn SetVolume(lVolume: LONG) -> HRESULT,
-    fn SetPan(lPan: LONG) -> HRESULT,
-    fn SetFrequency(dwFrequency: DWORD) -> HRESULT,
+    fn Play(
+        dwReserved1: DWORD,
+        dwPriority: DWORD,
+        dwFlags: DWORD,
+    ) -> HRESULT,
+    fn SetCurrentPosition(
+        dwNewPosition: DWORD,
+    ) -> HRESULT,
+    fn SetFormat(
+        pcfxFormat: LPCWAVEFORMATEX,
+    ) -> HRESULT,
+    fn SetVolume(
+        lVolume: LONG,
+    ) -> HRESULT,
+    fn SetPan(
+        lPan: LONG,
+    ) -> HRESULT,
+    fn SetFrequency(
+        dwFrequency: DWORD,
+    ) -> HRESULT,
     fn Stop() -> HRESULT,
     fn Unlock(
-        pvAudioPtr1: LPVOID, dwAudioBytes1: DWORD, pvAudioPtr2: LPVOID,
-        dwAudioBytes2: DWORD
+        pvAudioPtr1: LPVOID,
+        dwAudioBytes1: DWORD,
+        pvAudioPtr2: LPVOID,
+        dwAudioBytes2: DWORD,
     ) -> HRESULT,
-    fn Restore() -> HRESULT
+    fn Restore() -> HRESULT,
 }
 );
 pub type LPDIRECTSOUNDBUFFER = *mut IDirectSoundBuffer;
@@ -94,19 +130,31 @@ RIDL!(#[uuid(0x279afa83, 0x4981, 0x11ce, 0xa5, 0x21, 0x00, 0x20, 0xaf, 0x0b, 0xe
 interface IDirectSound(IDirectSoundVtbl): IUnknown(IUnknownVtbl)
 {
     fn CreateSoundBuffer(
-        pcDSBufferDesc: LPCDSBUFFERDESC, ppDSBuffer: *mut LPDIRECTSOUNDBUFFER,
-        pUnkOuter: LPUNKNOWN
+        pcDSBufferDesc: LPCDSBUFFERDESC,
+        ppDSBuffer: *mut LPDIRECTSOUNDBUFFER,
+        pUnkOuter: LPUNKNOWN,
     ) -> HRESULT,
-    fn GetCaps(pDSCaps: LPDSCAPS) -> HRESULT,
+    fn GetCaps(
+        pDSCaps: LPDSCAPS,
+    ) -> HRESULT,
     fn DuplicateSoundBuffer(
         pDSBufferOriginal: LPDIRECTSOUNDBUFFER,
-        ppDSBufferDuplicate: *mut LPDIRECTSOUNDBUFFER
+        ppDSBufferDuplicate: *mut LPDIRECTSOUNDBUFFER,
     ) -> HRESULT,
-    fn SetCooperativeLevel(hWnd: HWND, dwLevel: DWORD) -> HRESULT,
+    fn SetCooperativeLevel(
+        hWnd: HWND,
+        dwLevel: DWORD,
+    ) -> HRESULT,
     fn Compact() -> HRESULT,
-    fn GetSpeakerConfig(pdwSpeakerConfig: LPDWORD) -> HRESULT,
-    fn SetSpeakerConfig(dwSpeakerConfig: DWORD) -> HRESULT,
-    fn Initialize(pcGuidDevice: LPCGUID) -> HRESULT
+    fn GetSpeakerConfig(
+        pdwSpeakerConfig: LPDWORD,
+    ) -> HRESULT,
+    fn SetSpeakerConfig(
+        dwSpeakerConfig: DWORD,
+    ) -> HRESULT,
+    fn Initialize(
+        pcGuidDevice: LPCGUID,
+    ) -> HRESULT,
 }
 );
 pub type LPDIRECTSOUND = *mut IDirectSound;

@@ -1,0 +1,21 @@
+LIBRARY srpapi.dll
+EXPORTS
+AiEvaluatePlugin@20
+AppIDDecodeAttributeString@8
+AppIDEncodeAttributeString@12
+AppIDFreeAttributeString@4
+SrpCloseThreadNetworkContext@4
+SrpCreateThreadNetworkContext@8
+SrpDisablePermissiveModeFileEncryption@0
+SrpDoesPolicyAllowAppExecution@8
+SrpEnablePermissiveModeFileEncryption@4
+SrpGetAllowedEnterprises@12
+SrpGetAppxFqbnFromPackageFullName@8
+SrpGetEnterpriseIds@16
+SrpGetEnterprisePolicy@8
+SrpInheritEnterpriseContext@16
+SrpInheritOriginClaim@12
+SrpIsAllowed@4
+SrpIsTokenService@8
+SrpRestoreEnterpriseContext@4
+SrpSetTokenEnterpriseId@8

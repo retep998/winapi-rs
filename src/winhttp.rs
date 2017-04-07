@@ -1,5 +1,9 @@
-// Copyright © 2015, skdltmxn
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Windows HTTP Services API constant definitions and macros
 //54
 pub type HINTERNET = ::LPVOID;
@@ -158,10 +162,13 @@ pub const WINHTTP_OPTION_PASSWORD: ::DWORD = 0x1001;
 pub const WINHTTP_OPTION_PROXY_USERNAME: ::DWORD = 0x1002;
 pub const WINHTTP_OPTION_PROXY_PASSWORD: ::DWORD = 0x1003;
 //552
-pub type WINHTTP_STATUS_CALLBACK = Option<unsafe extern "system" fn(
-    hInternet: HINTERNET, dwContext: ::DWORD_PTR, dwInternetStatus: ::DWORD,
-    lpvStatusInformation: ::LPVOID, dwStatusInformationLength: ::DWORD,
-)>;
+FN!{stdcall WINHTTP_STATUS_CALLBACK(
+    hInternet: HINTERNET,
+    dwContext: ::DWORD_PTR,
+    dwInternetStatus: ::DWORD,
+    lpvStatusInformation: ::LPVOID,
+    dwStatusInformationLength: ::DWORD,
+) -> ()}
 pub type LPWINHTTP_STATUS_CALLBACK = *mut WINHTTP_STATUS_CALLBACK;
 pub const WINHTTP_CALLBACK_STATUS_RESOLVING_NAME: ::DWORD = 0x00000001;
 pub const WINHTTP_CALLBACK_STATUS_NAME_RESOLVED: ::DWORD = 0x00000002;

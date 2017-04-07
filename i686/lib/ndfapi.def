@@ -1,0 +1,20 @@
+LIBRARY NDFAPI.DLL
+EXPORTS
+NdfCancelIncident@4
+NdfCloseIncident@4
+NdfCreateConnectivityIncident@4
+NdfCreateDNSIncident@12
+NdfCreateGroupingIncident@28
+NdfCreateInboundIncident@28
+NdfCreateIncident@16
+NdfCreateNetConnectionIncident@20
+NdfCreatePnrpIncident@20
+NdfCreateSharingIncident@8
+NdfCreateWebIncident@8
+NdfCreateWebIncidentEx@16
+NdfCreateWinSockIncident@24
+NdfDiagnoseIncident@20
+NdfExecuteDiagnosis@8
+NdfGetTraceFile@8
+NdfRepairIncident@12
+NdfRepairIncidentEx@16

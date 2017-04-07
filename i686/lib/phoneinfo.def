@@ -1,0 +1,12 @@
+LIBRARY PHONEINFO.dll
+EXPORTS
+GetPhoneBuildInfo@4
+GetPhoneBuildString@8
+GetPhoneTier@4
+GetPhoneVersion@4
+LookupDisplayDiagonal@4
+LookupFeatureKey@8
+QueryFeatureStatus@8
+QueryPhoneInformation@16
+SetFeatureStatus@8
+SetPhoneFriendlyName@4

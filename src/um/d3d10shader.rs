@@ -4,25 +4,13 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
-use shared::minwindef::{UINT, BYTE, LPVOID};
-use um::d3d10::{
-    D3D10_PRIMITIVE_TOPOLOGY,
-    D3D10_SRV_DIMENSION,
-};
+use shared::minwindef::{BYTE, LPVOID, UINT};
+use um::d3d10::{D3D10_PRIMITIVE_TOPOLOGY, D3D10_SRV_DIMENSION};
 use um::d3dcommon::{
-    D3D_CBUFFER_TYPE,
-    D3D_INCLUDE_TYPE,
-    D3D_NAME,
-    D3D_REGISTER_COMPONENT_TYPE,
-    D3D_RESOURCE_RETURN_TYPE,
-    D3D_SHADER_CBUFFER_FLAGS,
-    D3D_SHADER_INPUT_FLAGS,
-    D3D_SHADER_INPUT_TYPE,
-    D3D_SHADER_MACRO,
-    D3D_SHADER_VARIABLE_CLASS,
-    D3D_SHADER_VARIABLE_FLAGS,
-    D3D_SHADER_VARIABLE_TYPE,
-    ID3DInclude,
+    D3D_CBUFFER_TYPE, D3D_INCLUDE_TYPE, D3D_NAME, D3D_REGISTER_COMPONENT_TYPE,
+    D3D_RESOURCE_RETURN_TYPE, D3D_SHADER_CBUFFER_FLAGS, D3D_SHADER_INPUT_FLAGS,
+    D3D_SHADER_INPUT_TYPE, D3D_SHADER_MACRO, D3D_SHADER_VARIABLE_CLASS, D3D_SHADER_VARIABLE_FLAGS,
+    D3D_SHADER_VARIABLE_TYPE, ID3DInclude,
 };
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
@@ -146,23 +134,23 @@ STRUCT!{struct D3D10_SIGNATURE_PARAMETER_DESC {
     Mask: BYTE,
     ReadWriteMask: BYTE,
 }}
-pub type LPD3D10SHADERREFLECTIONTYPE= *mut ID3D10ShaderReflectionType;
+pub type LPD3D10SHADERREFLECTIONTYPE = *mut ID3D10ShaderReflectionType;
 DEFINE_GUID!{IID_ID3D10ShaderReflectionType,
     0xc530ad7d, 0x9b16, 0x4395, 0xa9, 0x79, 0xba, 0x2e, 0xcf, 0xf8, 0x3a, 0xdd}
 RIDL!{#[uuid(0xc530ad7d, 0x9b16, 0x4395, 0xa9, 0x79, 0xba, 0x2e, 0xcf, 0xf8, 0x3a, 0xdd)]
 interface ID3D10ShaderReflectionType(ID3D10ShaderReflectionTypeVtbl) {
     fn GetDesc(
-        pDesc: *mut D3D10_SHADER_TYPE_DESC
+        pDesc: *mut D3D10_SHADER_TYPE_DESC,
     ) -> HRESULT,
     fn GetMemberTypeByIndex(
-        Index: UINT
+        Index: UINT,
     ) -> *mut ID3D10ShaderReflectionType,
     fn GetMemberTypeByName(
-        Name: LPCSTR
+        Name: LPCSTR,
     ) -> *mut ID3D10ShaderReflectionType,
     fn GetMemberTypeName(
-        Index: UINT
-    ) -> LPCSTR
+        Index: UINT,
+    ) -> LPCSTR,
 }}
 pub type LPD3D10SHADERREFLECTIONVARIABLE = *mut ID3D10ShaderReflectionVariable;
 DEFINE_GUID!{IID_ID3D10ShaderReflectionVariable,
@@ -170,9 +158,9 @@ DEFINE_GUID!{IID_ID3D10ShaderReflectionVariable,
 RIDL!{#[uuid(0x1bf63c95, 0x2650, 0x405d, 0x99, 0xc1, 0x36, 0x36, 0xbd, 0x1d, 0xa0, 0xa1)]
 interface ID3D10ShaderReflectionVariable(ID3D10ShaderReflectionVariableVtbl) {
     fn GetDesc(
-        pDesc: *mut D3D10_SHADER_VARIABLE_DESC
+        pDesc: *mut D3D10_SHADER_VARIABLE_DESC,
     ) -> HRESULT,
-    fn GetType() -> *mut ID3D10ShaderReflectionType
+    fn GetType() -> *mut ID3D10ShaderReflectionType,
 }}
 pub type LPD3D10SHADERREFLECTIONCONSTANTBUFFER = *mut ID3D10ShaderReflectionConstantBuffer;
 DEFINE_GUID!{IID_ID3D10ShaderReflectionConstantBuffer,
@@ -180,14 +168,14 @@ DEFINE_GUID!{IID_ID3D10ShaderReflectionConstantBuffer,
 RIDL!{#[uuid(0x66c66a94, 0xdddd, 0x4b62, 0xa6, 0x6a, 0xf0, 0xda, 0x33, 0xc2, 0xb4, 0xd0)]
 interface ID3D10ShaderReflectionConstantBuffer(ID3D10ShaderReflectionConstantBufferVtbl) {
     fn GetDesc(
-        pDesc: *mut D3D10_SHADER_BUFFER_DESC
+        pDesc: *mut D3D10_SHADER_BUFFER_DESC,
     ) -> HRESULT,
     fn GetVariableByIndex(
-        Index: UINT
+        Index: UINT,
     ) -> *mut ID3D10ShaderReflectionVariable,
     fn GetVariableByName(
-        Name: LPCSTR
-    ) -> *mut ID3D10ShaderReflectionVariable
+        Name: LPCSTR,
+    ) -> *mut ID3D10ShaderReflectionVariable,
 }}
 pub type LPD3D10SHADERREFLECTION = *mut ID3D10ShaderReflection;
 DEFINE_GUID!{IID_ID3D10ShaderReflection,
@@ -195,25 +183,25 @@ DEFINE_GUID!{IID_ID3D10ShaderReflection,
 RIDL!{#[uuid(0xd40e20b6, 0xf8f7, 0x42ad, 0xab, 0x20, 0x4b, 0xaf, 0x8f, 0x15, 0xdf, 0xaa)]
 interface ID3D10ShaderReflection(ID3D10ShaderReflectionVtbl): IUnknown(IUnknownVtbl) {
     fn GetDesc(
-        pDesc: *mut D3D10_SHADER_DESC
+        pDesc: *mut D3D10_SHADER_DESC,
     ) -> HRESULT,
     fn GetConstantBufferByIndex(
-        Index: UINT
+        Index: UINT,
     ) -> *mut ID3D10ShaderReflectionConstantBuffer,
     fn GetConstantBufferByName(
-        Name: LPCSTR
+        Name: LPCSTR,
     ) -> *mut ID3D10ShaderReflectionConstantBuffer,
     fn GetResourceBindingDesc(
         ResourceIndex: UINT,
-        pDesc: *mut D3D10_SHADER_INPUT_BIND_DESC
+        pDesc: *mut D3D10_SHADER_INPUT_BIND_DESC,
     ) -> HRESULT,
     fn GetInputParameterDesc(
         ParameterIndex: UINT,
-        pDesc: *mut D3D10_SIGNATURE_PARAMETER_DESC
+        pDesc: *mut D3D10_SIGNATURE_PARAMETER_DESC,
     ) -> HRESULT,
     fn GetOutputParameterDesc(
         ParameterIndex: UINT,
-        pDesc: *mut D3D10_SIGNATURE_PARAMETER_DESC
-    ) -> HRESULT
+        pDesc: *mut D3D10_SIGNATURE_PARAMETER_DESC,
+    ) -> HRESULT,
 }}
 // TODO Some functions

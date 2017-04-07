@@ -1,0 +1,11 @@
+LIBRARY drtprov.dll
+EXPORTS
+DrtCreateDerivedKey@8
+DrtCreateDerivedKeySecurityProvider@12
+DrtCreateDnsBootstrapResolver@12
+DrtCreateNullSecurityProvider@4
+DrtCreatePnrpBootstrapResolver@20
+DrtDeleteDerivedKeySecurityProvider@4
+DrtDeleteDnsBootstrapResolver@4
+DrtDeleteNullSecurityProvider@4
+DrtDeletePnrpBootstrapResolver@4

@@ -6,9 +6,7 @@
 // except according to those terms
 //! This module defines the 32-Bit Windows Base APIs
 use shared::basetsd::ULONG_PTR;
-use shared::minwindef::{
-    BOOL, BYTE, DWORD, FILETIME, HMODULE, LPVOID, MAX_PATH, UINT, ULONG, WORD,
-};
+use shared::minwindef::{BOOL, BYTE, DWORD, FILETIME, HMODULE, LPVOID, MAX_PATH, UINT, ULONG, WORD};
 use shared::ntstatus::{
     STATUS_ACCESS_VIOLATION, STATUS_ARRAY_BOUNDS_EXCEEDED, STATUS_BREAKPOINT,
     STATUS_CONTROL_C_EXIT, STATUS_DATATYPE_MISALIGNMENT, STATUS_FLOAT_DENORMAL_OPERAND,
@@ -144,7 +142,7 @@ pub type LPCRITICAL_SECTION_DEBUG = PRTL_CRITICAL_SECTION_DEBUG;
 FN!{stdcall LPOVERLAPPED_COMPLETION_ROUTINE(
     dwErrorCode: DWORD,
     dwNumberOfBytesTransfered: DWORD,
-    lpOverlapped: LPOVERLAPPED
+    lpOverlapped: LPOVERLAPPED,
 ) -> ()}
 pub const LOCKFILE_FAIL_IMMEDIATELY: DWORD = 0x00000001;
 pub const LOCKFILE_EXCLUSIVE_LOCK: DWORD = 0x00000002;
@@ -198,7 +196,7 @@ pub const UNLOAD_DLL_DEBUG_EVENT: DWORD = 7;
 pub const OUTPUT_DEBUG_STRING_EVENT: DWORD = 8;
 pub const RIP_EVENT: DWORD = 9;
 FN!{stdcall PTHREAD_START_ROUTINE(
-    lpThreadParameter: LPVOID
+    lpThreadParameter: LPVOID,
 ) -> DWORD}
 pub type LPTHREAD_START_ROUTINE = PTHREAD_START_ROUTINE;
 STRUCT!{struct EXCEPTION_DEBUG_INFO {
@@ -257,14 +255,14 @@ STRUCT!{struct RIP_INFO {
     dwType: DWORD,
 }}
 pub type LPRIP_INFO = *mut RIP_INFO;
-#[cfg(target_arch="x86_64")]
+#[cfg(target_arch = "x86_64")]
 STRUCT!{struct DEBUG_EVENT {
     dwDebugEventCode: DWORD,
     dwProcessId: DWORD,
     dwThreadId: DWORD,
     u: [u64; 20],
 }}
-#[cfg(target_arch="x86")]
+#[cfg(target_arch = "x86")]
 STRUCT!{struct DEBUG_EVENT {
     dwDebugEventCode: DWORD,
     dwProcessId: DWORD,

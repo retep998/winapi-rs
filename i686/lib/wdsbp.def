@@ -1,0 +1,9 @@
+LIBRARY WDSBP.dll
+EXPORTS
+WdsBpAddOption@16
+WdsBpCloseHandle@4
+WdsBpGetOptionBuffer@16
+WdsBpInitialize@8
+WdsBpParseInitialize@16
+WdsBpParseInitializev6@16
+WdsBpQueryOption@20

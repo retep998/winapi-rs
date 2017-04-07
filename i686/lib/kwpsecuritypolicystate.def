@@ -1,0 +1,9 @@
+LIBRARY KSecExt.SYS
+EXPORTS
+AppContainerPrivilegesEnabledExt@20
+CiQueryLoadLegacyDisplayDriversExt@4
+GetDeviceSecurityPolicyState@4
+KAddTrustedExecutable@4
+QueryUpdateFileEaAllowedExt@4
+SeCodeIntegrityCacheExt@12
+SeQuerySigningPolicyExt@28

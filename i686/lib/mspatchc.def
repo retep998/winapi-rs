@@ -1,0 +1,16 @@
+LIBRARY mspatchc.dll
+EXPORTS
+CreatePatchFileA@20
+CreatePatchFileByHandles@20
+CreatePatchFileByHandlesEx@32
+CreatePatchFileExA@32
+CreatePatchFileExW@32
+CreatePatchFileW@20
+ExtractPatchHeaderToFileA@8
+ExtractPatchHeaderToFileByHandles@8
+ExtractPatchHeaderToFileW@8
+GetFilePatchSignatureA@36
+GetFilePatchSignatureByBuffer@40
+GetFilePatchSignatureByHandle@36
+GetFilePatchSignatureW@36
+NormalizeFileForPatchSignature@40

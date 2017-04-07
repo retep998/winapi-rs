@@ -1,0 +1,8 @@
+LIBRARY CSCAPI.dll
+EXPORTS
+CscSearchApiGetInterface@12
+OfflineFilesEnable@8
+OfflineFilesGetShareCachingMode@8
+OfflineFilesQueryStatus@8
+OfflineFilesQueryStatusEx@12
+OfflineFilesStart@0

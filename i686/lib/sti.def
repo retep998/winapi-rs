@@ -1,0 +1,6 @@
+LIBRARY STI.dll
+EXPORTS
+MigrateRegisteredSTIAppsForWIAEvents@16
+SelectDeviceDialog2@4
+StiCreateInstance@16
+StiCreateInstanceW@16

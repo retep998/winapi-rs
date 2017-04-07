@@ -1,4 +1,4 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -6,10 +6,10 @@
 // except according to those terms.
 //! This module defines the 32-Bit Windows types and constants that are defined by NT, but exposed
 //! through the Win32 API.
-use ctypes::{ __int64, __uint64, c_char, c_int, c_long, c_short, c_ulong, c_void, wchar_t };
-use shared::basetsd::{ DWORD64, KAFFINITY, LONG_PTR, PDWORD64, SIZE_T, ULONG_PTR };
-use shared::guiddef::{ CLSID, GUID };
-use shared::minwindef::{ BYTE, DWORD, PDWORD, ULONG, WORD };
+use ctypes::{__int64, __uint64, c_char, c_int, c_long, c_short, c_ulong, c_void, wchar_t};
+use shared::basetsd::{DWORD64, KAFFINITY, LONG_PTR, PDWORD64, SIZE_T, ULONG_PTR};
+use shared::guiddef::{CLSID, GUID};
+use shared::minwindef::{BYTE, DWORD, PDWORD, ULONG, WORD};
 use vc::excpt::EXCEPTION_DISPOSITION;
 pub const ANYSIZE_ARRAY: usize = 1;
 #[cfg(target_arch = "x86")]
@@ -45,11 +45,11 @@ pub type LPUWSTR = *mut WCHAR; // Unaligned pointer
 pub type PUWSTR = *mut WCHAR; // Unaligned pointer
 pub type LPCWSTR = *const WCHAR;
 pub type PCWSTR = *const WCHAR;
-pub type PZPCWSTR= *mut PCWSTR;
+pub type PZPCWSTR = *mut PCWSTR;
 pub type PCZPCWSTR = *const PCWSTR;
 pub type LPCUWSTR = *const WCHAR; // Unaligned pointer
 pub type PCUWSTR = *const WCHAR; // Unaligned pointer
-pub type PZZWSTR= *mut WCHAR;
+pub type PZZWSTR = *mut WCHAR;
 pub type PCZZWSTR = *const WCHAR;
 pub type PUZZWSTR = *mut WCHAR; // Unaligned pointer
 pub type PCUZZWSTR = *const WCHAR; // Unaligned pointer
@@ -146,7 +146,7 @@ pub type USN = LONGLONG;
 pub type LARGE_INTEGER = LONGLONG;
 pub type PLARGE_INTEGER = *mut LARGE_INTEGER;
 pub type ULARGE_INTEGER = ULONGLONG;
-pub type PULARGE_INTEGER= *mut ULARGE_INTEGER;
+pub type PULARGE_INTEGER = *mut ULARGE_INTEGER;
 pub type RTL_REFERENCE_COUNT = LONG_PTR;
 pub type PRTL_REFERENCE_COUNT = *mut LONG_PTR;
 STRUCT!{struct LUID {
@@ -199,7 +199,7 @@ FN!{stdcall PEXCEPTION_ROUTINE(
     ExceptionRecord: *mut EXCEPTION_RECORD,
     EstablisherFrame: PVOID,
     ContextRecord: *mut CONTEXT,
-    DispatcherContext: PVOID
+    DispatcherContext: PVOID,
 ) -> EXCEPTION_DISPOSITION}
 pub const VER_SERVER_NT: DWORD = 0x80000000;
 pub const VER_WORKSTATION_NT: DWORD = 0x40000000;
@@ -765,27 +765,41 @@ pub const SORT_GEORGIAN_TRADITIONAL: WORD = 0x0;
 pub const SORT_GEORGIAN_MODERN: WORD = 0x1;
 macro_rules! MAKELANGID { ($p:expr, $s:expr) => (($s << 10) | $p) }
 #[inline]
-pub fn MAKELANGID(p: WORD, s: WORD) -> LANGID { (s << 10) | p }
+pub fn MAKELANGID(p: WORD, s: WORD) -> LANGID {
+    (s << 10) | p
+}
 #[inline]
-pub fn PRIMARYLANGID(lgid: LANGID) -> WORD { lgid & 0x3ff }
+pub fn PRIMARYLANGID(lgid: LANGID) -> WORD {
+    lgid & 0x3ff
+}
 #[inline]
-pub fn SUBLANGID(lgid: LANGID) -> WORD { lgid >> 10 }
+pub fn SUBLANGID(lgid: LANGID) -> WORD {
+    lgid >> 10
+}
 pub const NLS_VALID_LOCALE_MASK: DWORD = 0x000fffff;
 macro_rules! MAKELCID {
     ($lgid:expr, $srtid:expr) => ((($srtid as DWORD) << 16) | ($lgid as DWORD))
 }
 #[inline]
-pub fn MAKELCID(lgid: LANGID, srtid: WORD) -> LCID { ((srtid as DWORD) << 16) | (lgid as DWORD) }
+pub fn MAKELCID(lgid: LANGID, srtid: WORD) -> LCID {
+    ((srtid as DWORD) << 16) | (lgid as DWORD)
+}
 #[inline]
 pub fn MAKESORTLCID(lgid: LANGID, srtid: WORD, ver: WORD) -> LCID {
     MAKELCID(lgid, srtid) | ((ver as DWORD) << 20)
 }
 #[inline]
-pub fn LANGIDFROMLCID(lcid: LCID) -> LANGID { lcid as LANGID }
+pub fn LANGIDFROMLCID(lcid: LCID) -> LANGID {
+    lcid as LANGID
+}
 #[inline]
-pub fn SORTIDFROMLCID(lcid: LCID) -> WORD { ((lcid >> 16) & 0xf) as WORD }
+pub fn SORTIDFROMLCID(lcid: LCID) -> WORD {
+    ((lcid >> 16) & 0xf) as WORD
+}
 #[inline]
-pub fn SORTVERSIONFROMLCID(lcid: LCID) -> WORD { ((lcid >> 16) & 0xf) as WORD }
+pub fn SORTVERSIONFROMLCID(lcid: LCID) -> WORD {
+    ((lcid >> 16) & 0xf) as WORD
+}
 pub const LOCALE_NAME_MAX_LENGTH: usize = 85;
 pub const LANG_SYSTEM_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_SYS_DEFAULT);
 pub const LANG_USER_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_DEFAULT);
@@ -968,7 +982,8 @@ pub const CONTEXT_SEGMENTS: DWORD = CONTEXT_AMD64 | 0x00000004;
 pub const CONTEXT_FLOATING_POINT: DWORD = CONTEXT_AMD64 | 0x00000008;
 pub const CONTEXT_DEBUG_REGISTERS: DWORD = CONTEXT_AMD64 | 0x00000010;
 pub const CONTEXT_FULL: DWORD = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_FLOATING_POINT;
-pub const CONTEXT_ALL: DWORD = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_SEGMENTS | CONTEXT_FLOATING_POINT | CONTEXT_DEBUG_REGISTERS;
+pub const CONTEXT_ALL: DWORD = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_SEGMENTS
+    | CONTEXT_FLOATING_POINT | CONTEXT_DEBUG_REGISTERS;
 pub const CONTEXT_XSTATE: DWORD = CONTEXT_AMD64 | 0x00000040;
 pub const CONTEXT_EXCEPTION_ACTIVE: DWORD = 0x08000000;
 pub const CONTEXT_SERVICE_ACTIVE: DWORD = 0x10000000;
@@ -1056,13 +1071,13 @@ STRUCT!{struct UNWIND_HISTORY_TABLE {
 pub type PUNWIND_HISTORY_TABLE = *mut UNWIND_HISTORY_TABLE;
 FN!{cdecl PGET_RUNTIME_FUNCTION_CALLBACK(
     ControlPc: DWORD64,
-    Context: PVOID
+    Context: PVOID,
 ) -> PRUNTIME_FUNCTION}
 FN!{cdecl POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK(
     Process: HANDLE,
     TableAddress: PVOID,
     Entries: PDWORD,
-    Functions: *mut PRUNTIME_FUNCTION
+    Functions: *mut PRUNTIME_FUNCTION,
 ) -> DWORD}
 pub const OUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK_EXPORT_NAME: &'static str
     = "OutOfProcessFunctionTableCallback";
@@ -1268,7 +1283,8 @@ pub const SE_PRIVILEGE_ENABLED_BY_DEFAULT: DWORD = 0x00000001;
 pub const SE_PRIVILEGE_ENABLED: DWORD = 0x00000002;
 pub const SE_PRIVILEGE_REMOVED: DWORD = 0x00000004;
 pub const SE_PRIVILEGE_USED_FOR_ACCESS: DWORD = 0x80000000;
-pub const SE_PRIVILEGE_VALID_ATTRIBUTES: DWORD = SE_PRIVILEGE_ENABLED_BY_DEFAULT | SE_PRIVILEGE_ENABLED | SE_PRIVILEGE_REMOVED | SE_PRIVILEGE_USED_FOR_ACCESS;
+pub const SE_PRIVILEGE_VALID_ATTRIBUTES: DWORD = SE_PRIVILEGE_ENABLED_BY_DEFAULT
+    | SE_PRIVILEGE_ENABLED | SE_PRIVILEGE_REMOVED | SE_PRIVILEGE_USED_FOR_ACCESS;
 pub const PRIVILEGE_SET_ALL_NECESSARY: DWORD = 1;
 //10689
 pub const TOKEN_ASSIGN_PRIMARY: DWORD = 0x0001;
@@ -2190,7 +2206,10 @@ pub const RTL_CRITICAL_SECTION_FLAG_STATIC_INIT: ULONG_PTR = 0x04000000;
 pub const RTL_CRITICAL_SECTION_FLAG_RESOURCE_TYPE: ULONG_PTR = 0x08000000;
 pub const RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO: ULONG_PTR = 0x10000000;
 pub const RTL_CRITICAL_SECTION_ALL_FLAG_BITS: ULONG_PTR = 0xFF000000;
-pub const RTL_CRITICAL_SECTION_FLAG_RESERVED: ULONG_PTR = RTL_CRITICAL_SECTION_ALL_FLAG_BITS & !(RTL_CRITICAL_SECTION_FLAG_NO_DEBUG_INFO | RTL_CRITICAL_SECTION_FLAG_DYNAMIC_SPIN | RTL_CRITICAL_SECTION_FLAG_STATIC_INIT | RTL_CRITICAL_SECTION_FLAG_RESOURCE_TYPE | RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO);
+pub const RTL_CRITICAL_SECTION_FLAG_RESERVED: ULONG_PTR = RTL_CRITICAL_SECTION_ALL_FLAG_BITS
+    & !(RTL_CRITICAL_SECTION_FLAG_NO_DEBUG_INFO | RTL_CRITICAL_SECTION_FLAG_DYNAMIC_SPIN
+        | RTL_CRITICAL_SECTION_FLAG_STATIC_INIT | RTL_CRITICAL_SECTION_FLAG_RESOURCE_TYPE
+        | RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO);
 pub const RTL_CRITICAL_SECTION_DEBUG_FLAG_STATIC_INIT: DWORD = 0x00000001;
 STRUCT!{struct RTL_CRITICAL_SECTION {
     DebugInfo: PRTL_CRITICAL_SECTION_DEBUG,
@@ -2211,12 +2230,14 @@ STRUCT!{struct RTL_CONDITION_VARIABLE {
 }}
 pub type PRTL_CONDITION_VARIABLE = *mut RTL_CONDITION_VARIABLE;
 pub const RTL_CONDITION_VARIABLE_INIT: RTL_CONDITION_VARIABLE = RTL_CONDITION_VARIABLE {
-    Ptr: 0 as PVOID
+    Ptr: 0 as PVOID,
 };
 //18204
-FN!{stdcall PAPCFUNC(Parameter: ULONG_PTR) -> ()}
+FN!{stdcall PAPCFUNC(
+    Parameter: ULONG_PTR,
+) -> ()}
 FN!{stdcall PVECTORED_EXCEPTION_HANDLER(
-    ExceptionInfo: *mut EXCEPTION_POINTERS
+    ExceptionInfo: *mut EXCEPTION_POINTERS,
 ) -> LONG}
 ENUM!{enum HEAP_INFORMATION_CLASS {
     HeapCompatibilityInformation = 0,
@@ -2239,14 +2260,25 @@ pub const WT_EXECUTELONGFUNCTION: ULONG = 0x00000010;
 pub const WT_EXECUTEINPERSISTENTIOTHREAD: ULONG = 0x00000040;
 pub const WT_EXECUTEINPERSISTENTTHREAD: ULONG = 0x00000080;
 pub const WT_TRANSFER_IMPERSONATION: ULONG = 0x00000100;
-FN!{stdcall WAITORTIMERCALLBACKFUNC(PVOID, BOOLEAN) -> ()}
-FN!{stdcall WORKERCALLBACKFUNC(PVOID) -> ()}
-FN!{stdcall APC_CALLBACK_FUNCTION(DWORD, PVOID, PVOID) -> ()}
+FN!{stdcall WAITORTIMERCALLBACKFUNC(
+    PVOID,
+    BOOLEAN,
+) -> ()}
+FN!{stdcall WORKERCALLBACKFUNC(
+    PVOID,
+) -> ()}
+FN!{stdcall APC_CALLBACK_FUNCTION(
+    DWORD,
+    PVOID,
+    PVOID,
+) -> ()}
 pub type WAITORTIMERCALLBACK = WAITORTIMERCALLBACKFUNC;
-FN!{stdcall PFLS_CALLBACK_FUNCTION(lpFlsData: PVOID) -> ()}
+FN!{stdcall PFLS_CALLBACK_FUNCTION(
+    lpFlsData: PVOID,
+) -> ()}
 FN!{stdcall PSECURE_MEMORY_CACHE_CALLBACK(
     Addr: PVOID,
-    Range: SIZE_T
+    Range: SIZE_T,
 ) -> BOOLEAN}
 pub const WT_EXECUTEINLONGTHREAD: ULONG = 0x00000010;
 pub const WT_EXECUTEDELETEWAIT: ULONG = 0x00000008;
@@ -2350,20 +2382,29 @@ ENUM!{enum TP_CALLBACK_PRIORITY {
     TP_CALLBACK_PRIORITY_COUNT = 4,
 }}
 FN!{stdcall PTP_CLEANUP_GROUP_CANCEL_CALLBACK(
-    ObjectContext: PVOID, CleanupContext: PVOID
+    ObjectContext: PVOID,
+    CleanupContext: PVOID,
 ) -> ()}
 FN!{stdcall PTP_SIMPLE_CALLBACK(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID
+    Instance: PTP_CALLBACK_INSTANCE,
+    Context: PVOID,
 ) -> ()}
 FN!{stdcall PTP_WORK_CALLBACK(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Work: PTP_WORK
+    Instance: PTP_CALLBACK_INSTANCE,
+    Context: PVOID,
+    Work: PTP_WORK,
 ) -> ()}
 FN!{stdcall PTP_TIMER_CALLBACK(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Timer: PTP_TIMER
+    Instance: PTP_CALLBACK_INSTANCE,
+    Context: PVOID,
+    Timer: PTP_TIMER,
 ) -> ()}
 pub type TP_WAIT_RESULT = DWORD;
 FN!{stdcall PTP_WAIT_CALLBACK(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Wait: PTP_WAIT, WaitResult: TP_WAIT_RESULT
+    Instance: PTP_CALLBACK_INSTANCE,
+    Context: PVOID,
+    Wait: PTP_WAIT,
+    WaitResult: TP_WAIT_RESULT,
 ) -> ()}
 pub type TP_VERSION = DWORD;
 pub type PTP_VERSION = *mut DWORD;
@@ -2417,8 +2458,8 @@ pub type PRTL_RUN_ONCE = *mut RTL_RUN_ONCE;
 ENUM!{enum RTL_UMS_THREAD_INFO_CLASS {
     UmsThreadInvalidInfoClass = 0,
     UmsThreadUserContext,
-    UmsThreadPriority,              // Reserved
-    UmsThreadAffinity,              // Reserved
+    UmsThreadPriority, // Reserved
+    UmsThreadAffinity, // Reserved
     UmsThreadTeb,
     UmsThreadIsSuspended,
     UmsThreadIsTerminated,
@@ -2430,7 +2471,9 @@ ENUM!{enum RTL_UMS_SCHEDULER_REASON {
     UmsSchedulerThreadYield,
 }}
 FN!{stdcall PRTL_UMS_SCHEDULER_ENTRY_POINT(
-    Reason: RTL_UMS_SCHEDULER_REASON, ActivationPayload: ULONG_PTR, SchedulerParam: PVOID
+    Reason: RTL_UMS_SCHEDULER_REASON,
+    ActivationPayload: ULONG_PTR,
+    SchedulerParam: PVOID,
 ) -> ()}
 ENUM!{enum FIRMWARE_TYPE {
     FirmwareTypeUnknown,
@@ -2758,25 +2801,25 @@ UNION!(WOW64_LDT_ENTRY, HighWord, Bytes, Bytes_mut, WOW64_LDT_ENTRY_Bytes);
 UNION!(WOW64_LDT_ENTRY, HighWord, Bits, Bits_mut, WOW64_LDT_ENTRY_Bits);
 pub type PWOW64_LDT_ENTRY = *mut WOW64_LDT_ENTRY;
 STRUCT!{struct IMAGE_DOS_HEADER {
-   e_magic: WORD,
-   e_cblp: WORD,
-   e_cp: WORD,
-   e_crlc: WORD,
-   e_cparhdr: WORD,
-   e_minalloc: WORD,
-   e_maxalloc: WORD,
-   e_ss: WORD,
-   e_sp: WORD,
-   e_csum: WORD,
-   e_ip: WORD,
-   e_cs: WORD,
-   e_lfarlc: WORD,
-   e_ovno: WORD,
-   e_res: [WORD; 4],
-   e_oemid: WORD,
-   e_oeminfo: WORD,
-   e_res2: [WORD; 10],
-   e_lfanew: LONG,
+    e_magic: WORD,
+    e_cblp: WORD,
+    e_cp: WORD,
+    e_crlc: WORD,
+    e_cparhdr: WORD,
+    e_minalloc: WORD,
+    e_maxalloc: WORD,
+    e_ss: WORD,
+    e_sp: WORD,
+    e_csum: WORD,
+    e_ip: WORD,
+    e_cs: WORD,
+    e_lfarlc: WORD,
+    e_ovno: WORD,
+    e_res: [WORD; 4],
+    e_oemid: WORD,
+    e_oeminfo: WORD,
+    e_res2: [WORD; 10],
+    e_lfanew: LONG,
 }}
 pub type PIMAGE_DOS_HEADER = *mut IMAGE_DOS_HEADER;
 pub const DLL_PROCESS_ATTACH: DWORD = 1;

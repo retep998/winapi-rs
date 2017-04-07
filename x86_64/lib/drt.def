@@ -1,0 +1,18 @@
+LIBRARY drt.dll
+EXPORTS
+DrtClose
+DrtContinueSearch
+DrtEndSearch
+DrtGetEventData
+DrtGetEventDataSize
+DrtGetInstanceName
+DrtGetInstanceNameSize
+DrtGetSearchPath
+DrtGetSearchPathSize
+DrtGetSearchResult
+DrtGetSearchResultSize
+DrtOpen
+DrtRegisterKey
+DrtStartSearch
+DrtUnregisterKey
+DrtUpdateKey

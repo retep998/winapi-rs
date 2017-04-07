@@ -1,0 +1,5 @@
+LIBRARY DMProcessXMLFiltered.dll
+EXPORTS
+DMProcessConfigXML
+DMProcessConfigXMLFiltered
+MdmProcessConfigXmlWithAttributes

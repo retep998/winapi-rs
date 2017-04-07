@@ -1,15 +1,17 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! GDI procedure declarations, constant definitions and macros
-use ctypes::{ c_char, c_int, c_long, c_short, c_ushort };
+use ctypes::{c_char, c_int, c_long, c_short, c_ushort};
 use shared::basetsd::ULONG_PTR;
-use shared::minwindef::{ BOOL, BYTE, DWORD, FLOAT, HMETAFILE, LPARAM, LPVOID, MAX_PATH, UINT, ULONG, USHORT, WORD };
-use shared::windef::{ COLORREF, HDC, HGDIOBJ, POINT, RECT, RECTL, SIZEL };
-use um::winnt::{ CHAR, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PSTR, SHORT, VOID, WCHAR };
+use shared::minwindef::{
+    BOOL, BYTE, DWORD, FLOAT, HMETAFILE, LPARAM, LPVOID, MAX_PATH, UINT, ULONG, USHORT, WORD,
+};
+use shared::windef::{COLORREF, HBRUSH, HDC, HGDIOBJ, POINT, RECT, RECTL, SIZEL};
+use um::winnt::{CHAR, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PSTR, SHORT, VOID, WCHAR};
 pub const R2_BLACK: c_int = 1;
 pub const R2_NOTMERGEPEN: c_int = 2;
 pub const R2_MASKNOTPEN: c_int = 3;
@@ -393,8 +395,8 @@ STRUCT!{struct LOGFONTW {
 pub type LPLOGFONTW = *mut LOGFONTW;
 //1595
 #[inline]
-pub fn RGB (r: BYTE, g: BYTE, b: BYTE) -> COLORREF {
-  r as COLORREF | ((g as COLORREF) << 8) | ((b as COLORREF) << 16)
+pub fn RGB(r: BYTE, g: BYTE, b: BYTE) -> COLORREF {
+    r as COLORREF | ((g as COLORREF) << 8) | ((b as COLORREF) << 16)
 }
 //
 pub const DRIVERVERSION: c_int = 0;
@@ -482,7 +484,11 @@ pub type PABCFLOAT = *mut ABCFLOAT;
 pub type NPABCFLOAT = *mut ABCFLOAT;
 pub type LPABCFLOAT = *mut ABCFLOAT;
 //3581
-FN!{stdcall LINEDDAPROC(c_int, c_int, LPARAM) -> ()}
+FN!{stdcall LINEDDAPROC(
+    c_int,
+    c_int,
+    LPARAM,
+) -> ()}
 STRUCT!{struct XFORM {
     eM11: FLOAT,
     eM12: FLOAT,
@@ -667,7 +673,8 @@ pub const SYSTEM_FIXED_FONT: c_int = 16;
 pub const DEFAULT_GUI_FONT: c_int = 17;
 pub const DC_BRUSH: c_int = 18;
 pub const DC_PEN: c_int = 19;
-pub const STOCK_LAST: c_int = 19;pub const PS_SOLID: c_int = 0;
+pub const STOCK_LAST: c_int = 19;
+pub const PS_SOLID: c_int = 0;
 pub const PS_DASH: c_int = 1;
 pub const PS_DOT: c_int = 2;
 pub const PS_DASHDOT: c_int = 3;
@@ -827,10 +834,16 @@ STRUCT!{struct COLORADJUSTMENT {
 pub type PCOLORADJUSTMENT = *mut COLORADJUSTMENT;
 pub type LPCOLORADJUSTMENT = *mut COLORADJUSTMENT;
 FN!{stdcall OLDFONTENUMPROCA(
-    *const LOGFONTA, *const VOID, DWORD, LPARAM
+    *const LOGFONTA,
+    *const VOID,
+    DWORD,
+    LPARAM,
 ) -> c_int}
 FN!{stdcall OLDFONTENUMPROCW(
-    *const LOGFONTW, *const VOID, DWORD, LPARAM
+    *const LOGFONTW,
+    *const VOID,
+    DWORD,
+    LPARAM,
 ) -> c_int}
 pub type FONTENUMPROCA = OLDFONTENUMPROCA;
 pub type FONTENUMPROCW = OLDFONTENUMPROCW;
@@ -849,7 +862,10 @@ STRUCT!{struct GLYPHSET {
 }}
 pub type PGLYPHSET = *mut GLYPHSET;
 pub type LPGLYPHSET = *mut GLYPHSET;
-FN!{stdcall ABORTPROC(HDC, c_int) -> BOOL}
+FN!{stdcall ABORTPROC(
+    HDC,
+    c_int,
+) -> BOOL}
 STRUCT!{struct DOCINFOA {
     cbSize: c_int,
     lpszDocName: LPCSTR,
@@ -866,8 +882,14 @@ STRUCT!{struct DOCINFOW {
     fwType: DWORD,
 }}
 pub type LPDOCINFOW = *mut DOCINFOW;
-FN!{stdcall ICMENUMPROCA(LPSTR, LPARAM) -> c_int}
-FN!{stdcall ICMENUMPROCW(LPWSTR, LPARAM) -> c_int}
+FN!{stdcall ICMENUMPROCA(
+    LPSTR,
+    LPARAM,
+) -> c_int}
+FN!{stdcall ICMENUMPROCW(
+    LPWSTR,
+    LPARAM,
+) -> c_int}
 STRUCT!{struct HANDLETABLE {
     objectHandle: [HGDIOBJ; 1],
 }}
@@ -881,9 +903,16 @@ STRUCT!{struct METARECORD {
 pub type PMETARECORD = *mut METARECORD;
 pub type LPMETARECORD = *mut METARECORD;
 FN!{stdcall MFENUMPROC(
-    hdc: HDC, lpht: *mut HANDLETABLE, lpMR: *mut METARECORD, nObj: c_int, param: LPARAM
+    hdc: HDC,
+    lpht: *mut HANDLETABLE,
+    lpMR: *mut METARECORD,
+    nObj: c_int,
+    param: LPARAM,
 ) -> c_int}
-FN!{stdcall GOBJENUMPROC(LPVOID, LPARAM) -> c_int}
+FN!{stdcall GOBJENUMPROC(
+    LPVOID,
+    LPARAM,
+) -> c_int}
 STRUCT!{struct GCP_RESULTSA {
     lStructSize: DWORD,
     lpOutString: LPSTR,
@@ -1021,9 +1050,9 @@ STRUCT!{struct GLYPHMETRICS {
 }}
 pub type LPGLYPHMETRICS = *mut GLYPHMETRICS;
 STRUCT!{struct KERNINGPAIR {
-     wFirst: WORD,
-     wSecond: WORD,
-     iKernAmount: c_int,
+    wFirst: WORD,
+    wSecond: WORD,
+    iKernAmount: c_int,
 }}
 pub type LPKERNINGPAIR = *mut KERNINGPAIR;
 STRUCT!{struct PANOSE {
@@ -1177,7 +1206,11 @@ pub type PEXTLOGPEN = *mut EXTLOGPEN;
 pub type NPEXTLOGPEN = *mut EXTLOGPEN;
 pub type LPEXTLOGPEN = *mut EXTLOGPEN;
 FN!{stdcall ENHMFENUMPROC(
-    hdc: HDC, lpht: HANDLETABLE, lpmr: *const ENHMETARECORD, nHandles: c_int, data: LPARAM
+    hdc: HDC,
+    lpht: HANDLETABLE,
+    lpmr: *const ENHMETARECORD,
+    nHandles: c_int,
+    data: LPARAM,
 ) -> c_int}
 /* Metafile Functions */
 pub const META_SETBKCOLOR: WORD = 0x0201;
@@ -1254,3 +1287,8 @@ pub const NULLREGION: c_int = 1;
 pub const SIMPLEREGION: c_int = 2;
 pub const COMPLEXREGION: c_int = 3;
 pub const RGN_ERROR: c_int = ERROR;
+extern "system" {
+    pub fn CreateSolidBrush(
+        color: COLORREF,
+    ) -> HBRUSH;
+}

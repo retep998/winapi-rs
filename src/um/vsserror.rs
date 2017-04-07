@@ -1,8 +1,11 @@
-// Copyright © 2015, Brian Vincent
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! VSS Error header file
-use um::winnt::{HRESULT};
-
+use um::winnt::HRESULT;
 pub const VSS_E_BAD_STATE: HRESULT = 0x80042301u32 as i32;
 pub const VSS_E_UNEXPECTED: HRESULT = 0x80042302u32 as i32;
 pub const VSS_E_PROVIDER_ALREADY_REGISTERED: HRESULT = 0x80042303u32 as i32;

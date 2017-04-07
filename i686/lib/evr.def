@@ -1,0 +1,11 @@
+LIBRARY EVR.dll
+EXPORTS
+MFCreateVideoMixer@16
+MFCreateVideoMixerAndPresenter@24
+MFCreateVideoOTA@8
+MFCreateVideoPresenter@16
+MFCreateVideoPresenter2@16
+MFCreateVideoSampleAllocator@8
+MFCreateVideoSampleFromSurface@8
+MFGetPlaneSize@16
+MFIsFormatYUV@4

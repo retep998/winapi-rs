@@ -1,0 +1,9 @@
+LIBRARY inseng.dll
+EXPORTS
+CheckForVersionConflict@0
+CheckTrust@12
+CheckTrustEx@20
+DownloadFile@20
+GetICifFileFromFile@8
+GetICifRWFileFromFile@8
+PurgeDownloadDirectory@4

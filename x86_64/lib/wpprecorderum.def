@@ -1,0 +1,6 @@
+LIBRARY WppRecorderUM.dll
+EXPORTS
+WppAutoLogGetDefaultHandle
+WppAutoLogStart
+WppAutoLogStop
+WppAutoLogTrace

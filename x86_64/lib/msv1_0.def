@@ -1,0 +1,18 @@
+LIBRARY msv1_0.dll
+EXPORTS
+SpInitialize @1
+SpInstanceInit @32
+DllMain
+LsaApCallPackage
+LsaApCallPackagePassthrough
+LsaApCallPackageUntrusted
+LsaApInitializePackage
+LsaApLogonTerminated
+LsaApLogonUserEx2
+Msv1_0ExportSubAuthenticationRoutine
+Msv1_0SubAuthenticationPresent
+MsvGetLogonAttemptCount
+MsvIsIpAddressLocal
+MsvSamLogoff
+MsvSamValidate
+MsvValidateTarget

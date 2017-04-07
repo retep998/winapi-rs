@@ -1,5 +1,9 @@
-// Copyright © 2015, skdltmxn
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Definitions to be used with the WinSock service provider
 pub const WSPDESCRIPTION_LEN: usize = 255;
 STRUCT!{struct WSPDATA {
@@ -13,28 +17,43 @@ STRUCT!{struct WSATHREADID {
     Reserved: ::DWORD_PTR,
 }}
 pub type LPWSATHREADID = *mut WSATHREADID;
-pub type LPNSPV2STARTUP = Option<unsafe extern "system" fn(
-    lpProviderId: ::LPGUID, ppvClientSessionArg: *mut ::LPVOID,
-) -> ::INT>;
-pub type LPNSPV2CLEANUP = Option<unsafe extern "system" fn(
-    lpProviderId: ::LPGUID, pvClientSessionArg: ::LPVOID,
-) -> ::INT>;
-pub type LPNSPV2LOOKUPSERVICEBEGIN = Option<unsafe extern "system" fn(
-    lpProviderId: ::LPGUID, lpqsRestrictions: ::LPWSAQUERYSET2W, dwControlFlags: ::DWORD,
-    lpvClientSessionArg: ::LPVOID, lphLookup: ::LPHANDLE,
-) -> ::INT>;
-pub type LPNSPV2LOOKUPSERVICENEXTEX = Option<unsafe extern "system" fn(
-    hAsyncCall: ::HANDLE, hLookup: ::HANDLE, dwControlFlags: ::DWORD, lpdwBufferLength: ::LPDWORD,
-    lpqsResults: ::LPWSAQUERYSET2W
-)>;
-pub type LPNSPV2LOOKUPSERVICEEND = Option<unsafe extern "system" fn(hLookup: ::HANDLE) -> ::INT>;
-pub type LPNSPV2SETSERVICEEX = Option<unsafe extern "system" fn(
-    hAsyncCall: ::HANDLE, lpProviderId: ::LPGUID, lpqsRegInfo: ::LPWSAQUERYSET2W,
-    essOperation: ::WSAESETSERVICEOP, dwControlFlags: ::DWORD, lpvClientSessionArg: ::LPVOID,
-)>;
-pub type LPNSPV2CLIENTSESSIONRUNDOWN = Option<unsafe extern "system" fn(
-    lpProviderId: ::LPGUID, pvClientSessionArg: ::LPVOID,
-)>;
+FN!{stdcall LPNSPV2STARTUP(
+    lpProviderId: ::LPGUID,
+    ppvClientSessionArg: *mut ::LPVOID,
+) -> ::INT}
+FN!{stdcall LPNSPV2CLEANUP(
+    lpProviderId: ::LPGUID,
+    pvClientSessionArg: ::LPVOID,
+) -> ::INT}
+FN!{stdcall LPNSPV2LOOKUPSERVICEBEGIN(
+    lpProviderId: ::LPGUID,
+    lpqsRestrictions: ::LPWSAQUERYSET2W,
+    dwControlFlags: ::DWORD,
+    lpvClientSessionArg: ::LPVOID,
+    lphLookup: ::LPHANDLE,
+) -> ::INT}
+FN!{stdcall LPNSPV2LOOKUPSERVICENEXTEX(
+    hAsyncCall: ::HANDLE,
+    hLookup: ::HANDLE,
+    dwControlFlags: ::DWORD,
+    lpdwBufferLength: ::LPDWORD,
+    lpqsResults: ::LPWSAQUERYSET2W,
+) -> ()}
+FN!{stdcall LPNSPV2LOOKUPSERVICEEND(
+    hLookup: ::HANDLE,
+) -> ::INT}
+FN!{stdcall LPNSPV2SETSERVICEEX(
+    hAsyncCall: ::HANDLE,
+    lpProviderId: ::LPGUID,
+    lpqsRegInfo: ::LPWSAQUERYSET2W,
+    essOperation: ::WSAESETSERVICEOP,
+    dwControlFlags: ::DWORD,
+    lpvClientSessionArg: ::LPVOID,
+) -> ()}
+FN!{stdcall LPNSPV2CLIENTSESSIONRUNDOWN(
+    lpProviderId: ::LPGUID,
+    pvClientSessionArg: ::LPVOID,
+) -> ()}
 STRUCT!{struct NSPV2_ROUTINE {
     cbSize: ::DWORD,
     dwMajorVersion: ::DWORD,

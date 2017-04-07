@@ -1,0 +1,11 @@
+LIBRARY MFGPHONE.dll
+EXPORTS
+MfgPhoneDial
+MfgPhoneEndCall
+MfgPhoneGetSimLineCount
+MfgPhoneGetSimLineDetail
+MfgPhoneGetSpeaker
+MfgPhoneInitialize
+MfgPhoneSetSimLineEventNotifyCallback
+MfgPhoneSetSpeaker
+MfgPhoneUninitialize

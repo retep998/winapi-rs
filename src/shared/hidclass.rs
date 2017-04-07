@@ -1,18 +1,23 @@
-// Copyright © 2015, Peter Atashian and Alex Daniel Jones
-// Licensed under the MIT License <LICENSE.md>
-use shared::guiddef::{GUID};
-use shared::minwindef::{ULONG, USHORT, UCHAR, PUCHAR, DWORD};
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
+use shared::guiddef::GUID;
+use shared::minwindef::{DWORD, PUCHAR, UCHAR, ULONG, USHORT};
 use um::winioctl::{
-    METHOD_IN_DIRECT, METHOD_OUT_DIRECT, METHOD_NEITHER, METHOD_BUFFERED, FILE_ANY_ACCESS,
-    FILE_DEVICE_KEYBOARD
+    FILE_ANY_ACCESS, FILE_DEVICE_KEYBOARD, METHOD_BUFFERED, METHOD_IN_DIRECT, METHOD_NEITHER,
+    METHOD_OUT_DIRECT,
 };
-use um::winnt::{BOOLEAN};
-
-DEFINE_GUID!{GUID_DEVINTERFACE_HID, 0x4D1E55B2, 0xF16F, 0x11CF,
-    0x88, 0xCB, 0x00, 0x11, 0x11, 0x00, 0x00, 0x30}
+use um::winnt::BOOLEAN;
+DEFINE_GUID!{GUID_DEVINTERFACE_HID,
+    0x4D1E55B2, 0xF16F, 0x11CF, 0x88, 0xCB, 0x00, 0x11, 0x11, 0x00, 0x00, 0x30}
 pub const GUID_CLASS_INPUT: GUID = GUID_DEVINTERFACE_HID;
-DEFINE_GUID!{GUID_HID_INTERFACE_NOTIFY, 0x2c4e2e88, 0x25e6, 0x4c33, 0x88, 0x2f, 0x3d, 0x82, 0xe6, 0x07, 0x36, 0x81}
-DEFINE_GUID!{GUID_HID_INTERFACE_HIDPARSE, 0xf5c315a5, 0x69ac, 0x4bc2, 0x92, 0x79, 0xd0, 0xb6, 0x45, 0x76, 0xf4, 0x4b}
+DEFINE_GUID!{GUID_HID_INTERFACE_NOTIFY,
+    0x2c4e2e88, 0x25e6, 0x4c33, 0x88, 0x2f, 0x3d, 0x82, 0xe6, 0x07, 0x36, 0x81}
+DEFINE_GUID!{GUID_HID_INTERFACE_HIDPARSE,
+    0xf5c315a5, 0x69ac, 0x4bc2, 0x92, 0x79, 0xd0, 0xb6, 0x45, 0x76, 0xf4, 0x4b}
 // FIXME devpropkey stuff
 pub const HID_REVISION: DWORD = 0x00000001;
 pub const IOCTL_HID_GET_DRIVER_CONFIG: DWORD = HID_BUFFER_CTL_CODE!(100);

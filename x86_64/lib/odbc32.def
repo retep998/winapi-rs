@@ -1,0 +1,177 @@
+LIBRARY ODBC32.dll
+EXPORTS
+ODBCGetTryWaitValue @84
+ODBCQualifyFileDSNW @301
+ODBCSetTryWaitValue @86
+SQLAllocConnect @1
+SQLAllocEnv @2
+SQLAllocHandle @24
+SQLAllocHandleStd @77
+SQLAllocStmt @3
+SQLBindCol @4
+SQLBindParam @25
+SQLBindParameter @72
+SQLBrowseConnect @55
+SQLBrowseConnectA @255
+SQLBrowseConnectW @155
+SQLBulkOperations @78
+SQLCancel @5
+SQLCloseCursor @26
+SQLColAttribute @27
+SQLColAttributeA @227
+SQLColAttributeW @127
+SQLColAttributes @6
+SQLColAttributesA @206
+SQLColAttributesW @106
+SQLColumnPrivileges @56
+SQLColumnPrivilegesA @256
+SQLColumnPrivilegesW @156
+SQLColumns @40
+SQLColumnsA @240
+SQLColumnsW @140
+SQLConnect @7
+SQLConnectA @207
+SQLConnectW @107
+SQLCopyDesc @28
+SQLDataSources @57
+SQLDataSourcesA @257
+SQLDataSourcesW @157
+SQLDescribeCol @8
+SQLDescribeColA @208
+SQLDescribeColW @108
+SQLDescribeParam @58
+SQLDisconnect @9
+SQLDriverConnect @41
+SQLDriverConnectA @241
+SQLDriverConnectW @141
+SQLDrivers @71
+SQLDriversA @271
+SQLDriversW @171
+SQLEndTran @29
+SQLError @10
+SQLErrorA @210
+SQLErrorW @110
+SQLExecDirect @11
+SQLExecDirectA @211
+SQLExecDirectW @111
+SQLExecute @12
+SQLExtendedFetch @59
+SQLFetch @13
+SQLFetchScroll @30
+SQLForeignKeys @60
+SQLForeignKeysA @260
+SQLForeignKeysW @160
+SQLFreeConnect @14
+SQLFreeEnv @15
+SQLFreeHandle @31
+SQLFreeStmt @16
+SQLGetConnectAttr @32
+SQLGetConnectAttrA @232
+SQLGetConnectAttrW @132
+SQLGetConnectOption @42
+SQLGetConnectOptionA @242
+SQLGetConnectOptionW @142
+SQLGetCursorName @17
+SQLGetCursorNameA @217
+SQLGetCursorNameW @117
+SQLGetData @43
+SQLGetDescField @33
+SQLGetDescFieldA @233
+SQLGetDescFieldW @133
+SQLGetDescRec @34
+SQLGetDescRecA @234
+SQLGetDescRecW @134
+SQLGetDiagField @35
+SQLGetDiagFieldA @235
+SQLGetDiagFieldW @135
+SQLGetDiagRec @36
+SQLGetDiagRecA @236
+SQLGetDiagRecW @136
+SQLGetEnvAttr @37
+SQLGetFunctions @44
+SQLGetInfo @45
+SQLGetInfoA @245
+SQLGetInfoW @145
+SQLGetStmtAttr @38
+SQLGetStmtAttrA @238
+SQLGetStmtAttrW @138
+SQLGetStmtOption @46
+SQLGetTypeInfo @47
+SQLGetTypeInfoA @247
+SQLGetTypeInfoW @147
+SQLMoreResults @61
+SQLNativeSql @62
+SQLNativeSqlA @262
+SQLNativeSqlW @162
+SQLNumParams @63
+SQLNumResultCols @18
+SQLParamData @48
+SQLParamOptions @64
+SQLPrepare @19
+SQLPrepareA @219
+SQLPrepareW @119
+SQLPrimaryKeys @65
+SQLPrimaryKeysA @265
+SQLPrimaryKeysW @165
+SQLProcedureColumns @66
+SQLProcedureColumnsA @266
+SQLProcedureColumnsW @166
+SQLProcedures @67
+SQLProceduresA @267
+SQLProceduresW @167
+SQLPutData @49
+SQLRowCount @20
+SQLSetConnectAttr @39
+SQLSetConnectAttrA @239
+SQLSetConnectAttrW @139
+SQLSetConnectOption @50
+SQLSetConnectOptionA @250
+SQLSetConnectOptionW @150
+SQLSetCursorName @21
+SQLSetCursorNameA @221
+SQLSetCursorNameW @121
+SQLSetDescField @73
+SQLSetDescFieldA @273
+SQLSetDescFieldW @173
+SQLSetDescRec @74
+SQLSetEnvAttr @75
+SQLSetParam @22
+SQLSetPos @68
+SQLSetScrollOptions @69
+SQLSetStmtAttr @76
+SQLSetStmtAttrA @276
+SQLSetStmtAttrW @176
+SQLSetStmtOption @51
+SQLSpecialColumns @52
+SQLSpecialColumnsA @252
+SQLSpecialColumnsW @152
+SQLStatistics @53
+SQLStatisticsA @253
+SQLStatisticsW @153
+SQLTablePrivileges @70
+SQLTablePrivilegesA @270
+SQLTablePrivilegesW @170
+SQLTables @54
+SQLTablesA @254
+SQLTablesW @154
+SQLTransact @23
+CloseODBCPerfData
+CollectODBCPerfData
+CursorLibLockDbc
+CursorLibLockDesc
+CursorLibLockStmt
+CursorLibTransact
+DllBidEntryPoint
+GetODBCSharedData
+LockHandle
+ODBCInternalConnectW
+OpenODBCPerfData
+PostComponentError
+PostODBCComponentError
+PostODBCError
+SQLCancelHandle
+SQLCompleteAsync
+SearchStatusCode
+VFreeErrors
+VRetrieveDriverErrorsRowCol
+ValidateErrorQueue

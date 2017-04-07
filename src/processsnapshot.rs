@@ -1,5 +1,9 @@
-// Copyright © 2015, skdltmxn
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Defines the process snapshot API
 ENUM!{enum PSS_CAPTURE_FLAGS {
     PSS_CAPTURE_NONE = 0x00000000,
@@ -45,12 +49,14 @@ ENUM!{enum PSS_DUPLICATE_FLAGS {
 }}
 DECLARE_HANDLE!(HPSS, HPSS__);
 DECLARE_HANDLE!(HPSSWALK, HPSSWALK__);
-pub type pAllocRoutine = Option<unsafe extern "system" fn(
-    Context: *mut ::c_void, Size: ::DWORD,
-) -> *mut ::c_void>;
-pub type pFreeRoutine = Option<unsafe extern "system" fn(
-    Context: *mut ::c_void, Address: *mut ::c_void,
-)>;
+FN!{stdcall pAllocRoutine(
+    Context: *mut ::c_void,
+    Size: ::DWORD,
+) -> *mut ::c_void}
+FN!{stdcall pFreeRoutine(
+    Context: *mut ::c_void,
+    Address: *mut ::c_void,
+) -> ()}
 STRUCT!{struct PSS_ALLOCATOR {
     Context: *mut ::c_void,
     AllocRoutine: pAllocRoutine,

@@ -1,0 +1,18 @@
+LIBRARY efswrt.dll
+EXPORTS
+DpmBufferFree
+DpmProtectSecretToIdentity
+DpmStreamClose
+DpmStreamOpenToProtectToIdentity
+DpmStreamOpenToUnprotect
+DpmStreamUpdate
+DpmUnprotectSecret
+EnterpriseDataCopyProtection
+EnterpriseDataGetStatus
+EnterpriseDataProtect
+EnterpriseDataRevoke
+FreeIdentityProtectorList
+GetEnterpriseActionForCopy
+ProtectFileToEnterpriseIdentity
+ProtectFileToIdentity
+QueryIdentityProtectors

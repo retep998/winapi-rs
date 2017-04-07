@@ -1,11 +1,14 @@
-// Copyright © 2015, Connor Hilarides
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Mappings for the contents of d2dbasetypes.h
 use shared::basetsd::{UINT32};
 use shared::d3d9types::{D3DCOLORVALUE};
 use shared::minwindef::{FLOAT};
 use shared::windef::{POINT, RECT};
-
 STRUCT!{struct D2D_POINT_2U {
     x: UINT32,
     y: UINT32,

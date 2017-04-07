@@ -1,0 +1,4 @@
+LIBRARY Windows.UI.dll
+EXPORTS
+CreateControlInput @1601
+CreateControlInputEx @1603

@@ -1,0 +1,17 @@
+LIBRARY eappcfg.dll
+EXPORTS
+EapHostPeerConfigBlob2Xml@36
+EapHostPeerConfigXml2Blob@24
+EapHostPeerCreateMethodConfiguration@32
+EapHostPeerCredentialsXml2Blob@32
+EapHostPeerFreeErrorMemory@4
+EapHostPeerFreeMemory@4
+EapHostPeerGetMethodProperties@52
+EapHostPeerGetMethods@8
+EapHostPeerInvokeConfigUI@44
+EapHostPeerInvokeIdentityUI@64
+EapHostPeerInvokeInteractiveUI@24
+EapHostPeerQueryCredentialInputFields@40
+EapHostPeerQueryInteractiveUIInputFields@28
+EapHostPeerQueryUIBlobFromInteractiveUIInputFields@36
+EapHostPeerQueryUserBlobFromCredentialInputFields@48

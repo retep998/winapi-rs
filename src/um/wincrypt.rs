@@ -1,14 +1,19 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Cryptographic API Prototypes and Definitions
-use ctypes::{c_void, c_uchar, c_int, c_uint};
-use shared::basetsd::{ULONG_PTR};
-use shared::guiddef::{GUID};
-use shared::minwindef::*;
-use um::ncrypt::{NCRYPT_KEY_HANDLE};
-use um::winnt::{LPCSTR, LPCWSTR, LPSTR, HANDLE, LPWSTR, LONG, WCHAR, CHAR};
-use vc::vcruntime::{size_t};
-
+use ctypes::{c_int, c_uchar, c_uint, c_void};
+use shared::basetsd::ULONG_PTR;
+use shared::guiddef::GUID;
+use shared::minwindef::{
+    BOOL, BYTE, DWORD, FALSE, FILETIME, LPFILETIME, LPVOID, PFILETIME, TRUE, WORD,
+};
+use um::ncrypt::NCRYPT_KEY_HANDLE;
+use um::winnt::{CHAR, HANDLE, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, WCHAR};
+use vc::vcruntime::size_t;
 //108
 pub const ALG_CLASS_ANY: ALG_ID = 0;
 pub const ALG_CLASS_SIGNATURE: ALG_ID = 1 << 13;
@@ -872,18 +877,25 @@ STRUCT!{struct CRYPT_ENCRYPTED_PRIVATE_KEY_INFO {
     EncryptedPrivateKey: CRYPT_DATA_BLOB,
 }}
 pub type PCRYPT_ENCRYPTED_PRIVATE_KEY_INFO = *mut CRYPT_ENCRYPTED_PRIVATE_KEY_INFO;
-pub type PCRYPT_DECRYPT_PRIVATE_KEY_FUNC = Option<unsafe extern "system" fn(
-    Algorithm: CRYPT_ALGORITHM_IDENTIFIER, EncryptedPrivateKey: CRYPT_DATA_BLOB,
-    pbClearTextKey: *mut BYTE, pcbClearTextKey: *mut DWORD, pVoidDecryptFunc: LPVOID,
-) -> BOOL>;
-pub type PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC = Option<unsafe extern "system" fn(
-    Algorithm: *mut CRYPT_ALGORITHM_IDENTIFIER, pClearTextPrivateKey: *mut CRYPT_DATA_BLOB,
-    pbEncryptedKey: *mut BYTE, pcbEncryptedKey: *mut DWORD, pVoidEncryptFunc: LPVOID,
-) -> BOOL>;
-pub type PCRYPT_RESOLVE_HCRYPTPROV_FUNC = Option<unsafe extern "system" fn(
-    pPrivateKeyInfo: *mut CRYPT_PRIVATE_KEY_INFO, phCryptProv: *mut HCRYPTPROV,
+FN!{stdcall PCRYPT_DECRYPT_PRIVATE_KEY_FUNC(
+    Algorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    EncryptedPrivateKey: CRYPT_DATA_BLOB,
+    pbClearTextKey: *mut BYTE,
+    pcbClearTextKey: *mut DWORD,
+    pVoidDecryptFunc: LPVOID,
+) -> BOOL}
+FN!{stdcall PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC(
+    Algorithm: *mut CRYPT_ALGORITHM_IDENTIFIER,
+    pClearTextPrivateKey: *mut CRYPT_DATA_BLOB,
+    pbEncryptedKey: *mut BYTE,
+    pcbEncryptedKey: *mut DWORD,
+    pVoidEncryptFunc: LPVOID,
+) -> BOOL}
+FN!{stdcall PCRYPT_RESOLVE_HCRYPTPROV_FUNC(
+    pPrivateKeyInfo: *mut CRYPT_PRIVATE_KEY_INFO,
+    phCryptProv: *mut HCRYPTPROV,
     pVoidResolveFunc: LPVOID,
-) -> BOOL>;
+) -> BOOL}
 STRUCT!{struct CRYPT_PKCS8_IMPORT_PARAMS {
     PrivateKey: CRYPT_DIGEST_BLOB,
     pResolvehCryptProvFunc: PCRYPT_RESOLVE_HCRYPTPROV_FUNC,
@@ -1056,8 +1068,12 @@ pub const CRYPT_FORMAT_RDN_REVERSE: DWORD = 0x0800;
 pub const CRYPT_FORMAT_COMMA: DWORD = 0x1000;
 pub const CRYPT_FORMAT_SEMICOLON: DWORD = CRYPT_FORMAT_RDN_SEMICOLON;
 pub const CRYPT_FORMAT_CRLF: DWORD = CRYPT_FORMAT_RDN_CRLF;
-pub type PFN_CRYPT_ALLOC = Option<unsafe extern "system" fn(cbSize: size_t)>;
-pub type PFN_CRYPT_FREE = Option<unsafe extern "system" fn(pv: LPVOID)>;
+FN!{stdcall PFN_CRYPT_ALLOC(
+    cbSize: size_t,
+) -> ()}
+FN!{stdcall PFN_CRYPT_FREE(
+    pv: LPVOID,
+) -> ()}
 STRUCT!{struct CRYPT_ENCODE_PARA {
     cbSize: DWORD,
     pfnAlloc: PFN_CRYPT_ALLOC,
@@ -1779,9 +1795,12 @@ STRUCT!{struct CERT_CHAIN_ENGINE_CONFIG {
 pub type PCERT_CHAIN_ENGINE_CONFIG = *mut CERT_CHAIN_ENGINE_CONFIG;
 // 18748
 pub type HCERTCHAINENGINE = HANDLE;
-pub type PFN_CERT_CREATE_CONTEXT_SORT_FUNC = Option<unsafe extern "system" fn(
-    cbTotalEncoded: DWORD, cbRemainEncoded: DWORD, cEntry: DWORD, pvSort: *mut c_void
-) -> BOOL>;
+FN!{stdcall PFN_CERT_CREATE_CONTEXT_SORT_FUNC(
+    cbTotalEncoded: DWORD,
+    cbRemainEncoded: DWORD,
+    cEntry: DWORD,
+    pvSort: *mut c_void,
+) -> BOOL}
 STRUCT!{struct CERT_CREATE_CONTEXT_PARA {
     cbSize: DWORD,
     pfnFree: PFN_CRYPT_FREE,
@@ -1875,19 +1894,29 @@ STRUCT!{struct CERT_SYSTEM_STORE_INFO {
 }}
 pub type PCERT_SYSTEM_STORE_INFO = *mut CERT_SYSTEM_STORE_INFO;
 //13401
-pub type PFN_CERT_ENUM_SYSTEM_STORE_LOCATION = Option<unsafe extern "system" fn(
-    pwszStoreLocation: LPCWSTR, dwFlags: DWORD, pvReserved: *mut c_void, pvArg: *mut c_void,
-) -> BOOL>;
+FN!{stdcall PFN_CERT_ENUM_SYSTEM_STORE_LOCATION(
+    pwszStoreLocation: LPCWSTR,
+    dwFlags: DWORD,
+    pvReserved: *mut c_void,
+    pvArg: *mut c_void,
+) -> BOOL}
 //13408
-pub type PFN_CERT_ENUM_SYSTEM_STORE = Option<unsafe extern "system" fn(
-    pvSystemStore: *const c_void, dwFlags: DWORD, pStoreInfo: PCERT_SYSTEM_STORE_INFO,
-    pvReserved: *mut c_void, pvArg: *mut c_void,
-) -> BOOL>;
+FN!{stdcall PFN_CERT_ENUM_SYSTEM_STORE(
+    pvSystemStore: *const c_void,
+    dwFlags: DWORD,
+    pStoreInfo: PCERT_SYSTEM_STORE_INFO,
+    pvReserved: *mut c_void,
+    pvArg: *mut c_void,
+) -> BOOL}
 //13416
-pub type PFN_CERT_ENUM_PHYSICAL_STORE = Option<unsafe extern "system" fn(
-    pvSystemStore: *const c_void, dwFlags: DWORD, pwszStoreName: LPCWSTR,
-    pStoreInfo: PCERT_PHYSICAL_STORE_INFO, pvReserved: *mut c_void, pvArg: *mut c_void,
-) -> BOOL>;
+FN!{stdcall PFN_CERT_ENUM_PHYSICAL_STORE(
+    pvSystemStore: *const c_void,
+    dwFlags: DWORD,
+    pwszStoreName: LPCWSTR,
+    pStoreInfo: PCERT_PHYSICAL_STORE_INFO,
+    pvReserved: *mut c_void,
+    pvArg: *mut c_void,
+) -> BOOL}
 STRUCT!{struct CERT_STRONG_SIGN_SERIALIZED_INFO {
     dwFlags: DWORD,
     pwszCNGSignHashAlgids: LPWSTR,
@@ -2030,10 +2059,12 @@ STRUCT!{struct CRYPT_DECRYPT_MESSAGE_PARA {
     dwFlags: DWORD,
 }}
 pub type PCRYPT_DECRYPT_MESSAGE_PARA = *mut CRYPT_DECRYPT_MESSAGE_PARA;
-pub type PFN_CRYPT_GET_SIGNER_CERTIFICATE = Option<unsafe extern "system" fn(
-    pvGetArg: *mut c_void, dwCertEncodingType: DWORD, pSignerId: PCERT_INFO,
+FN!{stdcall PFN_CRYPT_GET_SIGNER_CERTIFICATE(
+    pvGetArg: *mut c_void,
+    dwCertEncodingType: DWORD,
+    pSignerId: PCERT_INFO,
     hMsgCertStore: HCERTSTORE,
-) -> PCCERT_CONTEXT>;
+) -> PCCERT_CONTEXT}
 STRUCT!{struct CRYPT_VERIFY_MESSAGE_PARA {
     cbSize: DWORD,
     dwMsgAndCertEncodingType: DWORD,
@@ -2058,27 +2089,40 @@ UNION!(CRYPT_OID_INFO, dwValue, dwLength, dwLength_mut, DWORD);
 pub type PCRYPT_OID_INFO = *mut CRYPT_OID_INFO;
 pub type PCCRYPT_OID_INFO = *const CRYPT_OID_INFO;
 //18004
-pub type PFN_CRYPT_ENUM_KEYID_PROP = Option<unsafe extern "system" fn(
-    pKeyIdentifier: *const CRYPT_HASH_BLOB, dwFlags: DWORD, pvReserved: *mut c_void,
-    pvArg: *mut c_void, cProp: DWORD, rgdwPropId: *mut DWORD, rgpvData: *mut *mut c_void,
+FN!{stdcall PFN_CRYPT_ENUM_KEYID_PROP(
+    pKeyIdentifier: *const CRYPT_HASH_BLOB,
+    dwFlags: DWORD,
+    pvReserved: *mut c_void,
+    pvArg: *mut c_void,
+    cProp: DWORD,
+    rgdwPropId: *mut DWORD,
+    rgpvData: *mut *mut c_void,
     rgcbData: *mut DWORD,
-) -> BOOL>;
+) -> BOOL}
 //6379
-pub type PFN_CRYPT_ENUM_OID_FUNC = Option<unsafe extern "system" fn(
-    dwEncodingType: DWORD, pszFuncName: LPCSTR, pszOID: LPCSTR, cValue: DWORD,
-    rgdwValueType: *const DWORD, rgpwszValueName: *const LPCWSTR,
-    rgpbValueData: *const *const BYTE, rgcbValueData: *const DWORD, pvArg: *mut c_void,
-) -> BOOL>;
+FN!{stdcall PFN_CRYPT_ENUM_OID_FUNC(
+    dwEncodingType: DWORD,
+    pszFuncName: LPCSTR,
+    pszOID: LPCSTR,
+    cValue: DWORD,
+    rgdwValueType: *const DWORD,
+    rgpwszValueName: *const LPCWSTR,
+    rgpbValueData: *const *const BYTE,
+    rgcbValueData: *const DWORD,
+    pvArg: *mut c_void,
+) -> BOOL}
 //6675
-pub type PFN_CRYPT_ENUM_OID_INFO = Option<unsafe extern "system" fn(
-    pInfo: PCCRYPT_OID_INFO, pvArg: *mut c_void,
-) -> BOOL>;
+FN!{stdcall PFN_CRYPT_ENUM_OID_INFO(
+    pInfo: PCCRYPT_OID_INFO,
+    pvArg: *mut c_void,
+) -> BOOL}
 //6022
 pub type HCRYPTOIDFUNCSET = *mut c_void;
 pub type HCRYPTOIDFUNCADDR = *mut c_void;
-pub type PFN_CRYPT_ASYNC_PARAM_FREE_FUNC = Option<unsafe extern "system" fn(
-    pszParamOid: LPSTR, pvParam: LPVOID,
-)>;
+FN!{stdcall PFN_CRYPT_ASYNC_PARAM_FREE_FUNC(
+    pszParamOid: LPSTR,
+    pvParam: LPVOID,
+) -> ()}
 STRUCT!{struct CRYPT_HASH_MESSAGE_PARA {
     cbSize: DWORD,
     dwMsgEncodingType: DWORD,
@@ -2119,9 +2163,12 @@ STRUCT!{struct CMSG_SIGNED_ENCODE_INFO {
 }}
 pub type PCMSG_SIGNED_ENCODE_INFO = *mut CMSG_SIGNED_ENCODE_INFO;
 //7393
-pub type PFN_CMSG_STREAM_OUTPUT = Option<unsafe extern "system" fn(
-    pvArg: *const c_void, pbData: *mut BYTE, cbData: DWORD, fFinal: BOOL,
-) -> BOOL>;
+FN!{stdcall PFN_CMSG_STREAM_OUTPUT(
+    pvArg: *const c_void,
+    pbData: *mut BYTE,
+    cbData: DWORD,
+    fFinal: BOOL,
+) -> BOOL}
 STRUCT!{struct CMSG_STREAM_INFO {
     cbContent: DWORD,
     pfnStreamOutput: PFN_CMSG_STREAM_OUTPUT,

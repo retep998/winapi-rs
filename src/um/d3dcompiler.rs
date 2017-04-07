@@ -1,9 +1,12 @@
-// Copyright © 2016, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2016-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 use shared::basetsd::{SIZE_T};
 use shared::minwindef::{DWORD, LPCVOID};
 use um::d3dcommon::{ID3DInclude};
-
 pub const D3DCOMPILER_DLL: &'static str = "d3dcompiler_47.dll";
 pub const D3D_COMPILER_VERSION: DWORD = 47;
 pub const D3DCOMPILE_DEBUG: DWORD = 1 << 0;

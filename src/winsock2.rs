@@ -1,5 +1,9 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! definitions to be used with the WinSock 2 DLL and WinSock 2 applications.
 //!
 //! This header file corresponds to version 2.2.x of the WinSock API specification.
@@ -34,14 +38,14 @@ STRUCT!{struct netent {
     n_addrtype: ::c_short,
     n_net: u_long,
 }}
-#[cfg(target_arch="x86")]
+#[cfg(target_arch = "x86")]
 STRUCT!{struct servent {
     s_name: *mut ::c_char,
     s_aliases: *mut *mut ::c_char,
     s_port: ::c_short,
     s_proto: *mut ::c_char,
 }}
-#[cfg(target_arch="x86_64")]
+#[cfg(target_arch = "x86_64")]
 STRUCT!{struct servent {
     s_name: *mut ::c_char,
     s_aliases: *mut *mut ::c_char,
@@ -55,7 +59,7 @@ STRUCT!{struct protoent {
 }}
 pub const WSADESCRIPTION_LEN: usize = 256;
 pub const WSASYS_STATUS_LEN: usize = 128;
-#[cfg(target_arch="x86")]
+#[cfg(target_arch = "x86")]
 STRUCT!{struct WSADATA {
     wVersion: ::WORD,
     wHighVersion: ::WORD,
@@ -65,7 +69,7 @@ STRUCT!{struct WSADATA {
     iMaxUdpDg: ::c_ushort,
     lpVendorInfo: *mut ::c_char,
 }}
-#[cfg(target_arch="x86_64")]
+#[cfg(target_arch = "x86_64")]
 STRUCT!{struct WSADATA {
     wVersion: ::WORD,
     wHighVersion: ::WORD,
@@ -189,13 +193,22 @@ STRUCT!{struct WSAPROTOCOL_INFOW {
     szProtocol: [::WCHAR; WSAPROTOCOL_LEN + 1],
 }}
 pub type LPWSAPROTOCOL_INFOW = *mut WSAPROTOCOL_INFOW;
-pub type LPCONDITIONPROC = Option<unsafe extern "system" fn(
-    lpCallerId: ::LPWSABUF, lpCallerData: ::LPWSABUF, lpSQOS: LPQOS, lpGQOS: LPQOS,
-    lpCalleeId: ::LPWSABUF, lpCalleeData: ::LPWSABUF, g: *mut GROUP, dwCallbackData: ::DWORD,
-) -> ::c_int>;
-pub type LPWSAOVERLAPPED_COMPLETION_ROUTINE = Option<unsafe extern "system" fn(
-    dwError: ::DWORD, cbTransferred: ::DWORD, lpOverlapped: LPWSAOVERLAPPED, dwFlags: ::DWORD,
-)>;
+FN!{stdcall LPCONDITIONPROC(
+    lpCallerId: ::LPWSABUF,
+    lpCallerData: ::LPWSABUF,
+    lpSQOS: LPQOS,
+    lpGQOS: LPQOS,
+    lpCalleeId: ::LPWSABUF,
+    lpCalleeData: ::LPWSABUF,
+    g: *mut GROUP,
+    dwCallbackData: ::DWORD,
+) -> ::c_int}
+FN!{stdcall LPWSAOVERLAPPED_COMPLETION_ROUTINE(
+    dwError: ::DWORD,
+    cbTransferred: ::DWORD,
+    lpOverlapped: LPWSAOVERLAPPED,
+    dwFlags: ::DWORD,
+) -> ()}
 ENUM!{enum WSACOMPLETIONTYPE {
     NSP_NOTIFY_IMMEDIATELY = 0,
     NSP_NOTIFY_HWND,
@@ -222,12 +235,12 @@ STRUCT!{struct WSACOMPLETION_Port {
     hPort: ::HANDLE,
     Key: ::ULONG_PTR,
 }}
-#[cfg(target_arch="x86")]
+#[cfg(target_arch = "x86")]
 STRUCT!{struct WSACOMPLETION {
     Type: WSACOMPLETIONTYPE,
     Parameters: [u8; 12],
 }}
-#[cfg(target_arch="x86_64")]
+#[cfg(target_arch = "x86_64")]
 STRUCT!{struct WSACOMPLETION {
     Type: WSACOMPLETIONTYPE,
     Parameters: [u8; 24],

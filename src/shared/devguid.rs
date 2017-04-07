@@ -3,9 +3,8 @@
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
-// except according to those terms
+// except according to those terms.
 //! Defines GUIDs for device classes used in Plug & Play.
-// Done as of 10.0.14393.0
 DEFINE_GUID!{GUID_DEVCLASS_1394,
     0x6bdd1fc1, 0x810f, 0x11d0, 0xbe, 0xc7, 0x08, 0x00, 0x2b, 0xe2, 0x09, 0x2f}
 DEFINE_GUID!{GUID_DEVCLASS_1394DEBUG,

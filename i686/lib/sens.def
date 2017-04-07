@@ -1,0 +1,5 @@
+LIBRARY Sens.dll
+EXPORTS
+SensNotifyNetconEvent@4
+SensNotifyRasEvent@4
+SensNotifyWinlogonEvent@4

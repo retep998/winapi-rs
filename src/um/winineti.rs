@@ -1,4 +1,4 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -8,7 +8,6 @@
 
 // Currently, this only contains `INTERNET_FLAG_BGUPDATE`, which is needed to correctly define
 // `wininet::INTERNET_FLAGS_MASK`.
-
 use shared::minwindef::DWORD;
 pub const INTERNET_FLAG_BGUPDATE: DWORD = 0x00000008;
 

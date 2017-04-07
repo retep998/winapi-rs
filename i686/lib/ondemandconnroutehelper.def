@@ -1,0 +1,8 @@
+LIBRARY OnDemandConnRouteHelper.DLL
+EXPORTS
+OnDemandAddRouteRequest@16
+OnDemandGetRoutingHint@8
+OnDemandRegisterNotification@12
+OnDemandRemoveMatchingRoute@8
+OnDemandRemoveRouteRequest@4
+OnDemandUnRegisterNotification@4

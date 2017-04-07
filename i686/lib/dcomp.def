@@ -1,0 +1,8 @@
+LIBRARY dcomp.dll
+EXPORTS
+DCompositionAttachMouseDragToHwnd@12
+DCompositionAttachMouseWheelToHwnd@12
+DCompositionCreateDevice@12
+DCompositionCreateDevice2@12
+DCompositionCreateDevice3@12
+DCompositionCreateSurfaceHandle@12
