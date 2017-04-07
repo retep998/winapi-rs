@@ -1,0 +1,11 @@
+LIBRARY txfw32.dll
+EXPORTS
+TxfGetThreadMiniVersionForCreate
+TxfLogCreateFileReadContext
+TxfLogCreateRangeReadContext
+TxfLogDestroyReadContext
+TxfLogReadRecords
+TxfLogRecordGetFileName
+TxfLogRecordGetGenericType
+TxfReadMetadataInfo
+TxfSetThreadMiniVersionForCreate

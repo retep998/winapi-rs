@@ -1,0 +1,5 @@
+LIBRARY mtxex.dll
+EXPORTS
+GetObjectContext
+MTSCreateActivity@8
+SafeRef

@@ -1,0 +1,7 @@
+LIBRARY InputInjection.dll
+EXPORTS
+ApiInjectButtonEvent@8
+ApiInjectEnableExclusive@8
+ApiInjectInitialize@0
+ApiInjectTouchEvent@4
+ApiInjectUninitialize@0

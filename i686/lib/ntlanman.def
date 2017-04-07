@@ -1,0 +1,20 @@
+LIBRARY NTLANMAN.dll
+EXPORTS
+NPAddConnection3@20 @38
+NPAddConnection@12 @17
+NPCancelConnection@8 @18
+NPCloseEnum@4 @35
+NPFormatNetworkName@20 @36
+NPGetCaps@4 @13
+NPGetConnection3@16 @54
+NPGetConnectionPerformance@8 @49
+NPGetResourceInformation@16 @52
+NPGetResourceParent@12 @41
+NPGetUser@12 @16
+DllMain@12
+I_SystemFocusDialog@28
+QueryAppInstanceVersion@16
+RegisterAppInstance@12
+RegisterAppInstanceVersion@20
+ResetAllAppInstanceVersions@0
+SetAppInstanceCsvFlags@12

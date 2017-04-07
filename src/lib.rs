@@ -1,4 +1,4 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -8,13 +8,18 @@
 #![allow(bad_style)]
 #![deny(overflowing_literals, unused_qualifications, unused)]
 #![recursion_limit = "128"]
-#![cfg_attr(not(feature = "std"), no_std)]
+#![no_std]
 
 #[cfg(feature = "std")]
-extern crate std as core;
+extern crate std;
+
+/// Hack for exported macros
+#[doc(hidden)]
+pub extern crate core as _core;
 
 // Modules
-#[macro_use] mod macros;
+#[macro_use]
+mod macros;
 pub mod shared;
 pub mod um;
 pub mod vc;
@@ -49,7 +54,6 @@ pub mod ctypes {
     pub type __uint64 = u64;
     pub type wchar_t = u16;
 }
-#[cfg(feature = "shared-guiddef")]
 pub trait Interface {
     fn uuidof() -> shared::guiddef::GUID;
 }

@@ -1,11 +1,14 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Public Definitions for MIN SCHANNEL Security Provider
-use shared::guiddef::{GUID};
-use shared::minwindef::{DWORD, BOOL};
-use um::wincrypt::{ALG_ID};
-use um::winnt::{LPWSTR};
-
+use shared::guiddef::GUID;
+use shared::minwindef::{BOOL, DWORD};
+use um::wincrypt::ALG_ID;
+use um::winnt::LPWSTR;
 pub const SECPKG_ATTR_ISSUER_LIST: DWORD = 0x50;
 pub const SECPKG_ATTR_REMOTE_CRED: DWORD = 0x51;
 pub const SECPKG_ATTR_LOCAL_CRED: DWORD = 0x52;

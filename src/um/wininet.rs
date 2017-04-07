@@ -1,4 +1,4 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -11,15 +11,14 @@ use shared::minwindef::{
     BOOL, DWORD, FALSE, FILETIME, INT, LPBYTE,
     LPCVOID, LPDWORD, LPVOID, PBYTE, PDWORD, TRUE, WORD,
 };
-use shared::ntdef::{ LONG, LONGLONG, PLONG };
+use shared::ntdef::{LONG, LONGLONG, PLONG};
 use shared::windef::HWND;
-use um::minwinbase::{ LPWIN32_FIND_DATAA, LPWIN32_FIND_DATAW, SYSTEMTIME };
+use um::minwinbase::{LPWIN32_FIND_DATAA, LPWIN32_FIND_DATAW, SYSTEMTIME};
 use um::winineti::INTERNET_FLAG_BGUPDATE;
 use um::winnt::{
     CHAR, DWORDLONG, HANDLE, LPCSTR, LPCWSTR,
     LPSTR, LPWSTR, PCWSTR, PSTR, PWSTR, WCHAR,
 };
-
 pub type HINTERNET = LPVOID;
 pub type LPHINTERNET = *mut HINTERNET;
 pub type INTERNET_PORT = WORD;
@@ -476,7 +475,11 @@ pub const AUTODIAL_MODE_NEVER: DWORD = 1;
 pub const AUTODIAL_MODE_ALWAYS: DWORD = 2;
 pub const AUTODIAL_MODE_NO_NETWORK_PRESENT: DWORD = 4;
 FN!{stdcall INTERNET_STATUS_CALLBACK(
-    HINTERNET, DWORD_PTR, DWORD, LPVOID, DWORD
+    HINTERNET,
+    DWORD_PTR,
+    DWORD,
+    LPVOID,
+    DWORD,
 ) -> ()}
 pub type LPINTERNET_STATUS_CALLBACK = *mut INTERNET_STATUS_CALLBACK;
 pub const INTERNET_STATUS_RESOLVING_NAME: DWORD = 10;
@@ -511,13 +514,13 @@ pub const INTERNET_STATE_DISCONNECTED_BY_USER: DWORD = 0x00000010;
 pub const INTERNET_STATE_IDLE: DWORD = 0x00000100;
 pub const INTERNET_STATE_BUSY: DWORD = 0x00000200;
 ENUM!{enum InternetCookieState {
-    COOKIE_STATE_UNKNOWN        = 0x0,
-    COOKIE_STATE_ACCEPT         = 0x1,
-    COOKIE_STATE_PROMPT         = 0x2,
-    COOKIE_STATE_LEASH          = 0x3,
-    COOKIE_STATE_DOWNGRADE      = 0x4,
-    COOKIE_STATE_REJECT         = 0x5,
-    COOKIE_STATE_MAX            = COOKIE_STATE_REJECT,
+    COOKIE_STATE_UNKNOWN = 0x0,
+    COOKIE_STATE_ACCEPT = 0x1,
+    COOKIE_STATE_PROMPT = 0x2,
+    COOKIE_STATE_LEASH = 0x3,
+    COOKIE_STATE_DOWNGRADE = 0x4,
+    COOKIE_STATE_REJECT = 0x5,
+    COOKIE_STATE_MAX = COOKIE_STATE_REJECT,
 }}
 STRUCT!{struct IncomingCookieState {
     cSession: c_int,
@@ -812,7 +815,8 @@ pub const GOPHER_ATTRIBUTE_ID_VIEW: DWORD = GOPHER_ATTRIBUTE_ID_BASE + 23;
 pub const GOPHER_ATTRIBUTE_ID_TREEWALK: DWORD = GOPHER_ATTRIBUTE_ID_BASE + 24;
 pub const GOPHER_ATTRIBUTE_ID_UNKNOWN: DWORD = GOPHER_ATTRIBUTE_ID_BASE + 25;
 FN!{stdcall GOPHER_ATTRIBUTE_ENUMERATOR(
-    LPGOPHER_ATTRIBUTE_TYPE, DWORD
+    LPGOPHER_ATTRIBUTE_TYPE,
+    DWORD,
 ) -> BOOL}
 pub const HTTP_MAJOR_VERSION: DWORD = 1;
 pub const HTTP_MINOR_VERSION: DWORD = 0;
@@ -1000,7 +1004,11 @@ pub const FLAGS_ERROR_UI_FLAGS_CHANGE_OPTIONS: DWORD = 0x02;
 pub const FLAGS_ERROR_UI_FLAGS_GENERATE_DATA: DWORD = 0x04;
 pub const FLAGS_ERROR_UI_FLAGS_NO_UI: DWORD = 0x08;
 pub const FLAGS_ERROR_UI_SERIALIZE_DIALOGS: DWORD = 0x10;
-FN!{stdcall PFN_AUTH_NOTIFY(DWORD_PTR, DWORD, LPVOID) -> DWORD}
+FN!{stdcall PFN_AUTH_NOTIFY(
+    DWORD_PTR,
+    DWORD,
+    LPVOID,
+) -> DWORD}
 STRUCT!{struct INTERNET_AUTH_NOTIFY_DATA {
     cbStruct: DWORD,
     dwOptions: DWORD,
@@ -1224,15 +1232,44 @@ pub const INTERNET_AUTODIAL_FLAGS_MASK: DWORD = INTERNET_AUTODIAL_FORCE_ONLINE
 pub const PROXY_AUTO_DETECT_TYPE_DHCP: DWORD = 1;
 pub const PROXY_AUTO_DETECT_TYPE_DNS_A: DWORD = 2;
 STRUCT!{struct AutoProxyHelperVtbl {
-    IsResolvable: Option<unsafe extern "system" fn(LPSTR) -> BOOL>,
-    GetIPAddress: Option<unsafe extern "system" fn(LPSTR, LPDWORD) -> DWORD>,
-    ResolveHostName: Option<unsafe extern "system" fn(LPSTR, LPSTR, LPDWORD) -> DWORD>,
-    IsInNet: Option<unsafe extern "system" fn(LPSTR, LPSTR, LPSTR) -> BOOL>,
-    IsResolvableEx: Option<unsafe extern "system" fn(LPSTR) -> BOOL>,
-    GetIPAddressEx: Option<unsafe extern "system" fn(LPSTR, LPDWORD) -> DWORD>,
-    ResolveHostNameEx: Option<unsafe extern "system" fn(LPSTR, LPSTR, LPDWORD) -> DWORD>,
-    IsInNetEx: Option<unsafe extern "system" fn(LPSTR, LPSTR) -> BOOL>,
-    SortIpList: Option<unsafe extern "system" fn(LPSTR, LPSTR, LPDWORD) -> DWORD>,
+    IsResolvable: Option<unsafe extern "system" fn(
+        lpszHost: LPSTR,
+    ) -> BOOL>,
+    GetIPAddress: Option<unsafe extern "system" fn(
+        lpszIPAddress: LPSTR,
+        lpdwIPAddressSize: LPDWORD,
+    ) -> DWORD>,
+    ResolveHostName: Option<unsafe extern "system" fn(
+        lpszHostName: LPSTR,
+        lpszIPAddress: LPSTR,
+        lpdwIPAddressSize: LPDWORD,
+    ) -> DWORD>,
+    IsInNet: Option<unsafe extern "system" fn(
+        lpszIPAddress: LPSTR,
+        lpszDest: LPSTR,
+        lpszMask: LPSTR,
+    ) -> BOOL>,
+    IsResolvableEx: Option<unsafe extern "system" fn(
+        lpszHost: LPSTR,
+    ) -> BOOL>,
+    GetIPAddressEx: Option<unsafe extern "system" fn(
+        lpszIPAddress: LPSTR,
+        lpdwIPAddressSize: LPDWORD,
+    ) -> DWORD>,
+    ResolveHostNameEx: Option<unsafe extern "system" fn(
+        lpszHostName: LPSTR,
+        lpszIPAddress: LPSTR,
+        lpdwIPAddressSize: LPDWORD,
+    ) -> DWORD>,
+    IsInNetEx: Option<unsafe extern "system" fn(
+        lpszIPAddress: LPSTR,
+        lpszIPPrefix: LPSTR,
+    ) -> BOOL>,
+    SortIpList: Option<unsafe extern "system" fn(
+        lpszIPAddressList: LPSTR,
+        lpszIPSortedList: LPSTR,
+        lpdwIPSortedListSize: LPDWORD,
+    ) -> DWORD>,
 }}
 STRUCT!{struct AUTO_PROXY_SCRIPT_BUFFER {
     dwStructSize: DWORD,
@@ -1244,13 +1281,23 @@ STRUCT!{struct AutoProxyHelperFunctions {
     lpVtbl: *const AutoProxyHelperVtbl,
 }}
 FN!{stdcall pfnInternetInitializeAutoProxyDll(
-    DWORD, LPSTR, LPSTR, *mut AutoProxyHelperFunctions, LPAUTO_PROXY_SCRIPT_BUFFER
+    DWORD,
+    LPSTR,
+    LPSTR,
+    *mut AutoProxyHelperFunctions,
+    LPAUTO_PROXY_SCRIPT_BUFFER,
 ) -> BOOL}
 FN!{stdcall pfnInternetDeInitializeAutoProxyDll(
-    LPSTR, DWORD
+    LPSTR,
+    DWORD,
 ) -> BOOL}
 FN!{stdcall pfnInternetGetProxyInfo(
-    LPCSTR, DWORD, LPSTR, DWORD, *mut LPSTR, LPDWORD
+    LPCSTR,
+    DWORD,
+    LPSTR,
+    DWORD,
+    *mut LPSTR,
+    LPDWORD,
 ) -> BOOL}
 ENUM!{enum WPAD_CACHE_DELETE {
     WPAD_CACHE_DELETE_CURRENT = 0x0,
@@ -1264,7 +1311,10 @@ pub const INTERNET_RAS_INSTALLED: DWORD = 0x10;
 pub const INTERNET_CONNECTION_OFFLINE: DWORD = 0x20;
 pub const INTERNET_CONNECTION_CONFIGURED: DWORD = 0x40;
 FN!{stdcall PFN_DIAL_HANDLER(
-    HWND, LPCSTR, DWORD, LPDWORD
+    HWND,
+    LPCSTR,
+    DWORD,
+    LPDWORD,
 ) -> DWORD}
 pub const INTERNET_CUSTOMDIAL_CONNECT: DWORD = 0;
 pub const INTERNET_CUSTOMDIAL_UNATTENDED: DWORD = 1;
@@ -1294,1035 +1344,1034 @@ pub const PRIVACY_TEMPLATE_ADVANCED: DWORD = 101;
 pub const PRIVACY_TEMPLATE_MAX: DWORD = PRIVACY_TEMPLATE_LOW;
 pub const PRIVACY_TYPE_FIRST_PARTY: DWORD = 0;
 pub const PRIVACY_TYPE_THIRD_PARTY: DWORD = 1;
-
-EXTERN!{stdcall fn CommitUrlCacheEntryA(
-    lpszUrlName: LPCSTR,
-    lpszLocalFileName: LPCSTR,
-    ExpireTime: FILETIME,
-    LastModifiedTime: FILETIME,
-    CacheEntryType: DWORD,
-    lpHeaderInfo: LPBYTE,
-    cchHeaderInfo: DWORD,
-    lpszFileExtension: LPCSTR,
-    lpszOriginalUrl: LPCSTR
-) -> BOOL}
-EXTERN!{stdcall fn CommitUrlCacheEntryW(
-    lpszUrlName: LPCWSTR,
-    lpszLocalFileName: LPCWSTR,
-    ExpireTime: FILETIME,
-    LastModifiedTime: FILETIME,
-    CacheEntryType: DWORD,
-    lpszHeaderInfo: LPWSTR,
-    cchHeaderInfo: DWORD,
-    lpszFileExtension: LPCWSTR,
-    lpszOriginalUrl: LPCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn CreateMD5SSOHash (
-    pszChallengeInfo: PWSTR,
-    pwszRealm: PWSTR,
-    pwszTarget: PWSTR,
-    pbHexHash: PBYTE
-) -> BOOL}
-EXTERN!{stdcall fn CreateUrlCacheEntryA(
-    lpszUrlName: LPCSTR,
-    dwExpectedFileSize: DWORD,
-    lpszFileExtension: LPCSTR,
-    lpszFileName: LPSTR,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn CreateUrlCacheEntryW(
-    lpszUrlName: LPCWSTR,
-    dwExpectedFileSize: DWORD,
-    lpszFileExtension: LPCWSTR,
-    lpszFileName: LPWSTR,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn CreateUrlCacheGroup(
-    dwFlags: DWORD,
-    lpReserved: LPVOID
-) -> GROUPID}
-EXTERN!{stdcall fn DeleteUrlCacheEntryA(
-    lpszUrlName: LPCSTR
-) -> BOOL}
-EXTERN!{stdcall fn DeleteUrlCacheEntryW(
-    lpszUrlName: LPCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn DeleteUrlCacheGroup(
-    GroupId: GROUPID,
-    dwFlags: DWORD,
-    lpReserved: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn DeleteWpadCacheForNetworks(
-    arg0: WPAD_CACHE_DELETE
-) -> BOOL}
-EXTERN!{stdcall fn DetectAutoProxyUrl(
-    pszAutoProxyUrl: PSTR,
-    cchAutoProxyUrl: DWORD,
-    dwDetectFlags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn FindCloseUrlCache(
-    hEnumHandle: HANDLE
-) -> BOOL}
-EXTERN!{stdcall fn FindFirstUrlCacheEntryA(
-    lpszUrlSearchPattern: LPCSTR,
-    lpFirstCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
-    lpcbCacheEntryInfo: LPDWORD
-) -> HANDLE}
-EXTERN!{stdcall fn FindFirstUrlCacheEntryExA(
-    lpszUrlSearchPattern: LPCSTR,
-    dwFlags: DWORD,
-    dwFilter: DWORD,
-    GroupId: GROUPID,
-    lpFirstCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
-    lpcbCacheEntryInfo: LPDWORD,
-    lpGroupAttributes: LPVOID,
-    lpcbGroupAttributes: LPDWORD,
-    lpReserved: LPVOID
-) -> HANDLE}
-EXTERN!{stdcall fn FindFirstUrlCacheEntryExW(
-    lpszUrlSearchPattern: LPCWSTR,
-    dwFlags: DWORD,
-    dwFilter: DWORD,
-    GroupId: GROUPID,
-    lpFirstCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
-    lpcbCacheEntryInfo: LPDWORD,
-    lpGroupAttributes: LPVOID,
-    lpcbGroupAttributes: LPDWORD,
-    lpReserved: LPVOID
-) -> HANDLE}
-EXTERN!{stdcall fn FindFirstUrlCacheEntryW(
-    lpszUrlSearchPattern: LPCWSTR,
-    lpFirstCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
-    lpcbCacheEntryInfo: LPDWORD
-) -> HANDLE}
-EXTERN!{stdcall fn FindFirstUrlCacheGroup(
-    dwFlags: DWORD,
-    dwFilter: DWORD,
-    lpSearchCondition: LPVOID,
-    dwSearchCondition: DWORD,
-    lpGroupId: *mut GROUPID,
-    lpReserved: LPVOID
-) -> HANDLE}
-EXTERN!{stdcall fn FindNextUrlCacheEntryA(
-    hEnumHandle: HANDLE,
-    lpNextCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
-    lpcbCacheEntryInfo: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn FindNextUrlCacheEntryExA(
-    hEnumHandle: HANDLE,
-    lpNextCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
-    lpcbCacheEntryInfo: LPDWORD,
-    lpGroupAttributes: LPVOID,
-    lpcbGroupAttributes: LPDWORD,
-    lpReserved: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn FindNextUrlCacheEntryExW(
-    hEnumHandle: HANDLE,
-    lpNextCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
-    lpcbCacheEntryInfo: LPDWORD,
-    lpGroupAttributes: LPVOID,
-    lpcbGroupAttributes: LPDWORD,
-    lpReserved: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn FindNextUrlCacheEntryW(
-    hEnumHandle: HANDLE,
-    lpNextCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
-    lpcbCacheEntryInfo: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn FindNextUrlCacheGroup(
-    hFind: HANDLE,
-    lpGroupId: *mut GROUPID,
-    lpReserved: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn FtpCommandA(
-    hConnect: HINTERNET,
-    fExpectResponse: BOOL,
-    dwFlags: DWORD,
-    lpszCommand: LPCSTR,
-    dwContext: DWORD_PTR,
-    phFtpCommand: *mut HINTERNET
-) -> BOOL}
-EXTERN!{stdcall fn FtpCommandW(
-    hConnect: HINTERNET,
-    fExpectResponse: BOOL,
-    dwFlags: DWORD,
-    lpszCommand: LPCWSTR,
-    dwContext: DWORD_PTR,
-    phFtpCommand: *mut HINTERNET
-) -> BOOL}
-EXTERN!{stdcall fn FtpCreateDirectoryA(
-    hConnect: HINTERNET,
-    lpszDirectory: LPCSTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpCreateDirectoryW(
-    hConnect: HINTERNET,
-    lpszDirectory: LPCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpDeleteFileA(
-    hConnect: HINTERNET,
-    lpszFileName: LPCSTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpDeleteFileW(
-    hConnect: HINTERNET,
-    lpszFileName: LPCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpFindFirstFileA(
-    hConnect: HINTERNET,
-    lpszSearchFile: LPCSTR,
-    lpFindFileData: LPWIN32_FIND_DATAA,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn FtpFindFirstFileW(
-    hConnect: HINTERNET,
-    lpszSearchFile: LPCWSTR,
-    lpFindFileData: LPWIN32_FIND_DATAW,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn FtpGetCurrentDirectoryA(
-    hConnect: HINTERNET,
-    lpszCurrentDirectory: LPSTR,
-    lpdwCurrentDirectory: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn FtpGetCurrentDirectoryW(
-    hConnect: HINTERNET,
-    lpszCurrentDirectory: LPWSTR,
-    lpdwCurrentDirectory: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn FtpGetFileA(
-    hConnect: HINTERNET,
-    lpszRemoteFile: LPCSTR,
-    lpszNewFile: LPCSTR,
-    fFailIfExists: BOOL,
-    dwFlagsAndAttributes: DWORD,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpGetFileEx(
-    hFtpSession: HINTERNET,
-    lpszRemoteFile: LPCSTR,
-    lpszNewFile: LPCWSTR,
-    fFailIfExists: BOOL,
-    dwFlagsAndAttributes: DWORD,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpGetFileSize(
-    hFile: HINTERNET,
-    lpdwFileSizeHigh: LPDWORD
-) -> DWORD}
-EXTERN!{stdcall fn FtpGetFileW(
-    hConnect: HINTERNET,
-    lpszRemoteFile: LPCWSTR,
-    lpszNewFile: LPCWSTR,
-    fFailIfExists: BOOL,
-    dwFlagsAndAttributes: DWORD,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpOpenFileA(
-    hConnect: HINTERNET,
-    lpszFileName: LPCSTR,
-    dwAccess: DWORD,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn FtpOpenFileW(
-    hConnect: HINTERNET,
-    lpszFileName: LPCWSTR,
-    dwAccess: DWORD,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn FtpPutFileA(
-    hConnect: HINTERNET,
-    lpszLocalFile: LPCSTR,
-    lpszNewRemoteFile: LPCSTR,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpPutFileEx(
-    hFtpSession: HINTERNET,
-    lpszLocalFile: LPCWSTR,
-    lpszNewRemoteFile: LPCSTR,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpPutFileW(
-    hConnect: HINTERNET,
-    lpszLocalFile: LPCWSTR,
-    lpszNewRemoteFile: LPCWSTR,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpRemoveDirectoryA(
-    hConnect: HINTERNET,
-    lpszDirectory: LPCSTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpRemoveDirectoryW(
-    hConnect: HINTERNET,
-    lpszDirectory: LPCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpRenameFileA(
-    hConnect: HINTERNET,
-    lpszExisting: LPCSTR,
-    lpszNew: LPCSTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpRenameFileW(
-    hConnect: HINTERNET,
-    lpszExisting: LPCWSTR,
-    lpszNew: LPCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpSetCurrentDirectoryA(
-    hConnect: HINTERNET,
-    lpszDirectory: LPCSTR
-) -> BOOL}
-EXTERN!{stdcall fn FtpSetCurrentDirectoryW(
-    hConnect: HINTERNET,
-    lpszDirectory: LPCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn GetUrlCacheEntryInfoA(
-    lpszUrlName: LPCSTR,
-    lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
-    lpcbCacheEntryInfo: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn GetUrlCacheEntryInfoExA(
-    lpszUrl: LPCSTR,
-    lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
-    lpcbCacheEntryInfo: LPDWORD,
-    lpszRedirectUrl: LPSTR,
-    lpcbRedirectUrl: LPDWORD,
-    lpReserved: LPVOID,
-    dwFlags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn GetUrlCacheEntryInfoExW(
-    lpszUrl: LPCWSTR,
-    lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
-    lpcbCacheEntryInfo: LPDWORD,
-    lpszRedirectUrl: LPWSTR,
-    lpcbRedirectUrl: LPDWORD,
-    lpReserved: LPVOID,
-    dwFlags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn GetUrlCacheEntryInfoW(
-    lpszUrlName: LPCWSTR,
-    lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
-    lpcbCacheEntryInfo: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn GetUrlCacheGroupAttributeA(
-    gid: GROUPID,
-    dwFlags: DWORD,
-    dwAttributes: DWORD,
-    lpGroupInfo: LPINTERNET_CACHE_GROUP_INFOA,
-    lpcbGroupInfo: LPDWORD,
-    lpReserved: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn GetUrlCacheGroupAttributeW(
-    gid: GROUPID,
-    dwFlags: DWORD,
-    dwAttributes: DWORD,
-    lpGroupInfo: LPINTERNET_CACHE_GROUP_INFOW,
-    lpcbGroupInfo: LPDWORD,
-    lpReserved: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn GopherCreateLocatorA(
-    lpszHost: LPCSTR,
-    nServerPort: INTERNET_PORT,
-    lpszDisplayString: LPCSTR,
-    lpszSelectorString: LPCSTR,
-    dwGopherType: DWORD,
-    lpszLocator: LPSTR,
-    lpdwBufferLength: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn GopherCreateLocatorW(
-    lpszHost: LPCWSTR,
-    nServerPort: INTERNET_PORT,
-    lpszDisplayString: LPCWSTR,
-    lpszSelectorString: LPCWSTR,
-    dwGopherType: DWORD,
-    lpszLocator: LPWSTR,
-    lpdwBufferLength: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn GopherFindFirstFileA(
-    hConnect: HINTERNET,
-    lpszLocator: LPCSTR,
-    lpszSearchString: LPCSTR,
-    lpFindData: LPGOPHER_FIND_DATAA,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn GopherFindFirstFileW(
-    hConnect: HINTERNET,
-    lpszLocator: LPCWSTR,
-    lpszSearchString: LPCWSTR,
-    lpFindData: LPGOPHER_FIND_DATAW,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn GopherGetAttributeA(
-    hConnect: HINTERNET,
-    lpszLocator: LPCSTR,
-    lpszAttributeName: LPCSTR,
-    lpBuffer: LPBYTE,
-    dwBufferLength: DWORD,
-    lpdwCharactersReturned: LPDWORD,
-    lpfnEnumerator: GOPHER_ATTRIBUTE_ENUMERATOR,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn GopherGetAttributeW(
-    hConnect: HINTERNET,
-    lpszLocator: LPCWSTR,
-    lpszAttributeName: LPCWSTR,
-    lpBuffer: LPBYTE,
-    dwBufferLength: DWORD,
-    lpdwCharactersReturned: LPDWORD,
-    lpfnEnumerator: GOPHER_ATTRIBUTE_ENUMERATOR,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn GopherGetLocatorTypeA(
-    lpszLocator: LPCSTR,
-    lpdwGopherType: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn GopherGetLocatorTypeW(
-    lpszLocator: LPCWSTR,
-    lpdwGopherType: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn GopherOpenFileA(
-    hConnect: HINTERNET,
-    lpszLocator: LPCSTR,
-    lpszView: LPCSTR,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn GopherOpenFileW(
-    hConnect: HINTERNET,
-    lpszLocator: LPCWSTR,
-    lpszView: LPCWSTR,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn HttpAddRequestHeadersA(
-    hRequest: HINTERNET,
-    lpszHeaders: LPCSTR,
-    dwHeadersLength: DWORD,
-    dwModifiers: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn HttpAddRequestHeadersW(
-    hRequest: HINTERNET,
-    lpszHeaders: LPCWSTR,
-    dwHeadersLength: DWORD,
-    dwModifiers: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn HttpEndRequestA(
-    hRequest: HINTERNET,
-    lpBuffersOut: LPINTERNET_BUFFERSA,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn HttpEndRequestW(
-    hRequest: HINTERNET,
-    lpBuffersOut: LPINTERNET_BUFFERSW,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn HttpOpenRequestA(
-    hConnect: HINTERNET,
-    lpszVerb: LPCSTR,
-    lpszObjectName: LPCSTR,
-    lpszVersion: LPCSTR,
-    lpszReferrer: LPCSTR,
-    lplpszAcceptTypes: *mut LPCSTR,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn HttpOpenRequestW(
-    hConnect: HINTERNET,
-    lpszVerb: LPCWSTR,
-    lpszObjectName: LPCWSTR,
-    lpszVersion: LPCWSTR,
-    lpszReferrer: LPCWSTR,
-    lplpszAcceptTypes: *mut LPCWSTR,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn HttpQueryInfoA(
-    hRequest: HINTERNET,
-    dwInfoLevel: DWORD,
-    lpBuffer: LPVOID,
-    lpdwBufferLength: LPDWORD,
-    lpdwIndex: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn HttpQueryInfoW(
-    hRequest: HINTERNET,
-    dwInfoLevel: DWORD,
-    lpBuffer: LPVOID,
-    lpdwBufferLength: LPDWORD,
-    lpdwIndex: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn HttpSendRequestA(
-    hRequest: HINTERNET,
-    lpszHeaders: LPCSTR,
-    dwHeadersLength: DWORD,
-    lpOptional: LPVOID,
-    dwOptionalLength: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn HttpSendRequestExA(
-    hRequest: HINTERNET,
-    lpBuffersIn: LPINTERNET_BUFFERSA,
-    lpBuffersOut: LPINTERNET_BUFFERSA,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn HttpSendRequestExW(
-    hRequest: HINTERNET,
-    lpBuffersIn: LPINTERNET_BUFFERSW,
-    lpBuffersOut: LPINTERNET_BUFFERSW,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn HttpSendRequestW(
-    hRequest: HINTERNET,
-    lpszHeaders: LPCWSTR,
-    dwHeadersLength: DWORD,
-    lpOptional: LPVOID,
-    dwOptionalLength: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetAttemptConnect(
-    dwReserved: DWORD
-) -> DWORD}
-EXTERN!{stdcall fn InternetAutodial(
-    dwFlags: DWORD,
-    hwndParent: HWND
-) -> BOOL}
-EXTERN!{stdcall fn InternetAutodialHangup(
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetCanonicalizeUrlA(
-    lpszUrl: LPCSTR,
-    lpszBuffer: LPSTR,
-    lpdwBufferLength: LPDWORD,
-    dwFlags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetCanonicalizeUrlW(
-    lpszUrl: LPCWSTR,
-    lpszBuffer: LPWSTR,
-    lpdwBufferLength: LPDWORD,
-    dwFlags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetCheckConnectionA(
-    lpszUrl: LPCSTR,
-    dwFlags: DWORD,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetCheckConnectionW(
-    lpszUrl: LPCWSTR,
-    dwFlags: DWORD,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetClearAllPerSiteCookieDecisions(
-    
-) -> BOOL}
-EXTERN!{stdcall fn InternetCloseHandle(
-    hInternet: HINTERNET
-) -> BOOL}
-EXTERN!{stdcall fn InternetCombineUrlA(
-    lpszBaseUrl: LPCSTR,
-    lpszRelativeUrl: LPCSTR,
-    lpszBuffer: LPSTR,
-    lpdwBufferLength: LPDWORD,
-    dwFlags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetCombineUrlW(
-    lpszBaseUrl: LPCWSTR,
-    lpszRelativeUrl: LPCWSTR,
-    lpszBuffer: LPWSTR,
-    lpdwBufferLength: LPDWORD,
-    dwFlags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetConfirmZoneCrossingA(
-    hWnd: HWND,
-    szUrlPrev: LPSTR,
-    szUrlNew: LPSTR,
-    bPost: BOOL
-) -> DWORD}
-EXTERN!{stdcall fn InternetConfirmZoneCrossingW(
-    hWnd: HWND,
-    szUrlPrev: LPWSTR,
-    szUrlNew: LPWSTR,
-    bPost: BOOL
-) -> DWORD}
-EXTERN!{stdcall fn InternetConnectA(
-    hInternet: HINTERNET,
-    lpszServerName: LPCSTR,
-    nServerPort: INTERNET_PORT,
-    lpszUserName: LPCSTR,
-    lpszPassword: LPCSTR,
-    dwService: DWORD,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn InternetConnectW(
-    hInternet: HINTERNET,
-    lpszServerName: LPCWSTR,
-    nServerPort: INTERNET_PORT,
-    lpszUserName: LPCWSTR,
-    lpszPassword: LPCWSTR,
-    dwService: DWORD,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn InternetCrackUrlA(
-    lpszUrl: LPCSTR,
-     dwUrlLength: DWORD,
-     dwFlags: DWORD,
-     lpUrlComponents: LPURL_COMPONENTSA
-) -> BOOL}
-EXTERN!{stdcall fn InternetCrackUrlW(
-    lpszUrl: LPCWSTR,
-     dwUrlLength: DWORD,
-     dwFlags: DWORD,
-     lpUrlComponents: LPURL_COMPONENTSW
-) -> BOOL}
-EXTERN!{stdcall fn InternetCreateUrlA(
-    lpUrlComponents: LPURL_COMPONENTSA,
-     dwFlags: DWORD,
-     lpszUrl: LPSTR,
-     lpdwUrlLength: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetCreateUrlW(
-    lpUrlComponents: LPURL_COMPONENTSW,
-     dwFlags: DWORD,
-     lpszUrl: LPWSTR,
-     lpdwUrlLength: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetDialA(
-    hwndParent: HWND,
-    lpszConnectoid: LPSTR,
-    dwFlags: DWORD,
-    lpdwConnection: *mut DWORD_PTR,
-    dwReserved: DWORD
-) -> DWORD}
-EXTERN!{stdcall fn InternetDialW(
-    hwndParent: HWND,
-    lpszConnectoid: LPWSTR,
-    dwFlags: DWORD,
-    lpdwConnection: *mut DWORD_PTR,
-    dwReserved: DWORD
-) -> DWORD}
-EXTERN!{stdcall fn InternetEnumPerSiteCookieDecisionA(
-    pszSiteName: LPSTR,
-    pcSiteNameSize: *mut u32,
-    pdwDecision: *mut u32,
-    dwIndex: u32
-) -> BOOL}
-EXTERN!{stdcall fn InternetEnumPerSiteCookieDecisionW(
-    pszSiteName: LPWSTR,
-    pcSiteNameSize: *mut u32,
-    pdwDecision: *mut u32,
-    dwIndex: u32
-) -> BOOL}
-EXTERN!{stdcall fn InternetErrorDlg(
-    hWnd: HWND,
-    hRequest: HINTERNET,
-    dwError: DWORD,
-    dwFlags: DWORD,
-    lppvData: *mut LPVOID
-) -> DWORD}
-EXTERN!{stdcall fn InternetFindNextFileA(
-    hFind: HINTERNET,
-    lpvFindData: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn InternetFindNextFileW(
-    hFind: HINTERNET,
-    lpvFindData: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn InternetFreeCookies(
-    pCookies: *mut INTERNET_COOKIE2,
-    dwCookieCount: DWORD
-) -> ()}
-EXTERN!{stdcall fn InternetGetConnectedState(
-    lpdwFlags: LPDWORD,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetGetConnectedStateExA(
-    lpdwFlags: LPDWORD,
-    lpszConnectionName: LPSTR,
-    cchNameLen: DWORD,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetGetConnectedStateExW(
-    lpdwFlags: LPDWORD,
-    lpszConnectionName: LPWSTR,
-    cchNameLen: DWORD,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetGetCookieA(
-    lpszUrl: LPCSTR,
-    lpszCookieName: LPCSTR,
-    lpszCookieData: LPSTR,
-    lpdwSize: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetGetCookieEx2(
-    pcwszUrl: PCWSTR,
-    pcwszCookieName: PCWSTR,
-    dwFlags: DWORD,
-    ppCookies: *mut *mut INTERNET_COOKIE2,
-    pdwCookieCount: PDWORD
-) -> DWORD}
-EXTERN!{stdcall fn InternetGetCookieExA(
-    lpszUrl: LPCSTR,
-    lpszCookieName: LPCSTR,
-    lpszCookieData: LPSTR,
-    lpdwSize: LPDWORD,
-    dwFlags: DWORD,
-    lpReserved: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn InternetGetCookieExW(
-    lpszUrl: LPCWSTR,
-    lpszCookieName: LPCWSTR,
-    lpszCookieData: LPWSTR,
-    lpdwSize: LPDWORD,
-    dwFlags: DWORD,
-    lpReserved: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn InternetGetCookieW(
-    lpszUrl: LPCWSTR,
-    lpszCookieName: LPCWSTR,
-    lpszCookieData: LPWSTR,
-    lpdwSize: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetGetLastResponseInfoA(
-    lpdwError: LPDWORD,
-    lpszBuffer: LPSTR,
-    lpdwBufferLength: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetGetLastResponseInfoW(
-    lpdwError: LPDWORD,
-    lpszBuffer: LPWSTR,
-    lpdwBufferLength: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetGetPerSiteCookieDecisionA(
-    pchHostName: LPCSTR,
-    pResult: *mut u32
-) -> BOOL}
-EXTERN!{stdcall fn InternetGetPerSiteCookieDecisionW(
-    pchHostName: LPCWSTR,
-    pResult: *mut u32
-) -> BOOL}
-EXTERN!{stdcall fn InternetGoOnlineA(
-    lpszURL: LPCSTR,
-    hwndParent: HWND,
-    dwFlags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetGoOnlineW(
-    lpszURL: LPCWSTR,
-    hwndParent: HWND,
-    dwFlags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetHangUp(
-    dwConnection: DWORD_PTR,
-    dwReserved: DWORD
-) -> DWORD}
-EXTERN!{stdcall fn InternetInitializeAutoProxyDll(
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetLockRequestFile(
-    hInternet: HINTERNET,
-    lphLockRequestInfo: *mut HANDLE
-) -> BOOL}
-EXTERN!{stdcall fn InternetOpenA(
-    lpszAgent: LPCSTR,
-    dwAccessType: DWORD,
-    lpszProxy: LPCSTR,
-    lpszProxyBypass: LPCSTR,
-    dwFlags: DWORD
-) -> HINTERNET}
-EXTERN!{stdcall fn InternetOpenUrlA(
-    hInternet: HINTERNET,
-    lpszUrl: LPCSTR,
-    lpszHeaders: LPCSTR,
-    dwHeadersLength: DWORD,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn InternetOpenUrlW(
-    hInternet: HINTERNET,
-    lpszUrl: LPCWSTR,
-    lpszHeaders: LPCWSTR,
-    dwHeadersLength: DWORD,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> HINTERNET}
-EXTERN!{stdcall fn InternetOpenW(
-    lpszAgent: LPCWSTR,
-    dwAccessType: DWORD,
-    lpszProxy: LPCWSTR,
-    lpszProxyBypass: LPCWSTR,
-    dwFlags: DWORD
-) -> HINTERNET}
-EXTERN!{stdcall fn InternetQueryDataAvailable(
-    hFile: HINTERNET,
-    lpdwNumberOfBytesAvailable: LPDWORD,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn InternetQueryOptionA(
-    hInternet: HINTERNET,
-    dwOption: DWORD,
-    lpBuffer: LPVOID,
-    lpdwBufferLength: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetQueryOptionW(
-    hInternet: HINTERNET,
-    dwOption: DWORD,
-    lpBuffer: LPVOID,
-    lpdwBufferLength: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetReadFile(
-    hFile: HINTERNET,
-    lpBuffer: LPVOID,
-    dwNumberOfBytesToRead: DWORD,
-    lpdwNumberOfBytesRead: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetReadFileExA(
-    hFile: HINTERNET,
-    lpBuffersOut: LPINTERNET_BUFFERSA,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn InternetReadFileExW(
-    hFile: HINTERNET,
-    lpBuffersOut: LPINTERNET_BUFFERSW,
-    dwFlags: DWORD,
-    dwContext: DWORD_PTR
-) -> BOOL}
-EXTERN!{stdcall fn InternetSetCookieA(
-    lpszUrl: LPCSTR,
-    lpszCookieName: LPCSTR,
-    lpszCookieData: LPCSTR
-) -> BOOL}
-EXTERN!{stdcall fn InternetSetCookieEx2(
-    pcwszUrl: PCWSTR,
-    pCookie: *const INTERNET_COOKIE2,
-    pcwszP3PPolicy: PCWSTR,
-    dwFlags: DWORD,
-    pdwCookieState: PDWORD
-) -> DWORD}
-EXTERN!{stdcall fn InternetSetCookieExA(
-    lpszUrl: LPCSTR,
-    lpszCookieName: LPCSTR,
-    lpszCookieData: LPCSTR,
-    dwFlags: DWORD,
-    dwReserved: DWORD_PTR
-) -> DWORD}
-EXTERN!{stdcall fn InternetSetCookieExW(
-    lpszUrl: LPCWSTR,
-    lpszCookieName: LPCWSTR,
-    lpszCookieData: LPCWSTR,
-    dwFlags: DWORD,
-    dwReserved: DWORD_PTR
-) -> DWORD}
-EXTERN!{stdcall fn InternetSetCookieW(
-    lpszUrl: LPCWSTR,
-    lpszCookieName: LPCWSTR,
-    lpszCookieData: LPCWSTR
-) -> BOOL}
-EXTERN!{stdcall fn InternetSetDialStateA(
-    lpszConnectoid: LPCSTR,
-    dwState: DWORD,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetSetDialStateW(
-    lpszConnectoid: LPCWSTR,
-    dwState: DWORD,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetSetFilePointer(
-    hFile: HINTERNET,
-    lDistanceToMove: LONG,
-    lpDistanceToMoveHigh: PLONG,
-    dwMoveMethod: DWORD,
-    dwContext: DWORD_PTR
-) -> DWORD}
-EXTERN!{stdcall fn InternetSetOptionA(
-    hInternet: HINTERNET,
-    dwOption: DWORD,
-    lpBuffer: LPVOID,
-    dwBufferLength: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetSetOptionExA(
-    hInternet: HINTERNET,
-    dwOption: DWORD,
-    lpBuffer: LPVOID,
-    dwBufferLength: DWORD,
-    dwFlags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetSetOptionExW(
-    hInternet: HINTERNET,
-    dwOption: DWORD,
-    lpBuffer: LPVOID,
-    dwBufferLength: DWORD,
-    dwFlags: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetSetOptionW(
-    hInternet: HINTERNET,
-    dwOption: DWORD,
-    lpBuffer: LPVOID,
-    dwBufferLength: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetSetPerSiteCookieDecisionA(
-    pchHostName: LPCSTR,
-    dwDecision: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetSetPerSiteCookieDecisionW(
-    pchHostName: LPCWSTR,
-    dwDecision: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetSetStatusCallbackA(
-    hInternet: HINTERNET,
-    lpfnInternetCallback: INTERNET_STATUS_CALLBACK
-) -> INTERNET_STATUS_CALLBACK}
-EXTERN!{stdcall fn InternetSetStatusCallbackW(
-    hInternet: HINTERNET,
-    lpfnInternetCallback: INTERNET_STATUS_CALLBACK
-) -> INTERNET_STATUS_CALLBACK}
-EXTERN!{stdcall fn InternetTimeFromSystemTimeA(
-    pst: *const SYSTEMTIME,
-    dwRFC: DWORD,
-    lpszTime: LPSTR,
-    cbTime: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetTimeFromSystemTimeW(
-    pst: *const SYSTEMTIME,
-    dwRFC: DWORD,
-    lpszTime: LPWSTR,
-    cbTime: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetTimeToSystemTimeA(
-    lpszTime: LPCSTR,
-    pst: *mut SYSTEMTIME,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetTimeToSystemTimeW(
-    lpszTime: LPCWSTR,
-    pst: *mut SYSTEMTIME,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn InternetUnlockRequestFile(
-    hLockRequestInfo: HANDLE
-) -> BOOL}
-EXTERN!{stdcall fn InternetWriteFile(
-    hFile: HINTERNET,
-    lpBuffer: LPCVOID,
-    dwNumberOfBytesToWrite: DWORD,
-    lpdwNumberOfBytesWritten: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn PrivacyGetZonePreferenceW(
-    dwZone: DWORD,
-    dwType: DWORD,
-    pdwTemplate: LPDWORD,
-    pszBuffer: LPWSTR,
-    pdwBufferLength: LPDWORD
-) -> DWORD}
-EXTERN!{stdcall fn PrivacySetZonePreferenceW(
-    dwZone: DWORD,
-    dwType: DWORD,
-    dwTemplate: DWORD,
-    pszPreference: LPCWSTR
-) -> DWORD}
-EXTERN!{stdcall fn ReadUrlCacheEntryStream(
-    hUrlCacheStream: HANDLE,
-    dwLocation: DWORD,
-    lpBuffer: LPVOID,
-    lpdwLen: LPDWORD,
-    Reserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn ReadUrlCacheEntryStreamEx(
-    hUrlCacheStream: HANDLE,
-    qwLocation: DWORDLONG,
-    lpBuffer: LPVOID,
-    lpdwLen: LPDWORD
-) -> BOOL}
-EXTERN!{stdcall fn ResumeSuspendedDownload(
-    hRequest: HINTERNET,
-    dwResultCode: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn RetrieveUrlCacheEntryFileA(
-    lpszUrlName: LPCSTR,
-    lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
-    lpcbCacheEntryInfo: LPDWORD,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn RetrieveUrlCacheEntryFileW(
-    lpszUrlName: LPCWSTR,
-    lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
-    lpcbCacheEntryInfo: LPDWORD,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn RetrieveUrlCacheEntryStreamA(
-    lpszUrlName: LPCSTR,
-    lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
-    lpcbCacheEntryInfo: LPDWORD,
-    fRandomRead: BOOL,
-    dwReserved: DWORD
-) -> HANDLE}
-EXTERN!{stdcall fn RetrieveUrlCacheEntryStreamW(
-    lpszUrlName: LPCWSTR,
-    lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
-    lpcbCacheEntryInfo: LPDWORD,
-    fRandomRead: BOOL,
-    dwReserved: DWORD
-) -> HANDLE}
-EXTERN!{stdcall fn SetUrlCacheEntryGroupA(
-    lpszUrlName: LPCSTR,
-    dwFlags: DWORD,
-    GroupId: GROUPID,
-    pbGroupAttributes: LPBYTE,
-    cbGroupAttributes: DWORD,
-    lpReserved: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetUrlCacheEntryGroupW(
-    lpszUrlName: LPCWSTR,
-    dwFlags: DWORD,
-    GroupId: GROUPID,
-    pbGroupAttributes: LPBYTE,
-    cbGroupAttributes: DWORD,
-    lpReserved: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetUrlCacheEntryInfoA(
-    lpszUrlName: LPCSTR,
-    lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
-    dwFieldControl: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetUrlCacheEntryInfoW(
-    lpszUrlName: LPCWSTR,
-    lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
-    dwFieldControl: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn SetUrlCacheGroupAttributeA(
-    gid: GROUPID,
-    dwFlags: DWORD,
-    dwAttributes: DWORD,
-    lpGroupInfo: LPINTERNET_CACHE_GROUP_INFOA,
-    lpReserved: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn SetUrlCacheGroupAttributeW(
-    gid: GROUPID,
-    dwFlags: DWORD,
-    dwAttributes: DWORD,
-    lpGroupInfo: LPINTERNET_CACHE_GROUP_INFOW,
-    lpReserved: LPVOID
-) -> BOOL}
-EXTERN!{stdcall fn UnlockUrlCacheEntryFileA(
-    lpszUrlName: LPCSTR,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn UnlockUrlCacheEntryFileW(
-    lpszUrlName: LPCWSTR,
-    dwReserved: DWORD
-) -> BOOL}
-EXTERN!{stdcall fn UnlockUrlCacheEntryStream(
-    hUrlCacheStream: HANDLE,
-    Reserved: DWORD
-) -> BOOL}
+extern "system" {
+    pub fn CommitUrlCacheEntryA(
+        lpszUrlName: LPCSTR,
+        lpszLocalFileName: LPCSTR,
+        ExpireTime: FILETIME,
+        LastModifiedTime: FILETIME,
+        CacheEntryType: DWORD,
+        lpHeaderInfo: LPBYTE,
+        cchHeaderInfo: DWORD,
+        lpszFileExtension: LPCSTR,
+        lpszOriginalUrl: LPCSTR,
+    ) -> BOOL;
+    pub fn CommitUrlCacheEntryW(
+        lpszUrlName: LPCWSTR,
+        lpszLocalFileName: LPCWSTR,
+        ExpireTime: FILETIME,
+        LastModifiedTime: FILETIME,
+        CacheEntryType: DWORD,
+        lpszHeaderInfo: LPWSTR,
+        cchHeaderInfo: DWORD,
+        lpszFileExtension: LPCWSTR,
+        lpszOriginalUrl: LPCWSTR,
+    ) -> BOOL;
+    pub fn CreateMD5SSOHash (
+        pszChallengeInfo: PWSTR,
+        pwszRealm: PWSTR,
+        pwszTarget: PWSTR,
+        pbHexHash: PBYTE,
+    ) -> BOOL;
+    pub fn CreateUrlCacheEntryA(
+        lpszUrlName: LPCSTR,
+        dwExpectedFileSize: DWORD,
+        lpszFileExtension: LPCSTR,
+        lpszFileName: LPSTR,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn CreateUrlCacheEntryW(
+        lpszUrlName: LPCWSTR,
+        dwExpectedFileSize: DWORD,
+        lpszFileExtension: LPCWSTR,
+        lpszFileName: LPWSTR,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn CreateUrlCacheGroup(
+        dwFlags: DWORD,
+        lpReserved: LPVOID,
+    ) -> GROUPID;
+    pub fn DeleteUrlCacheEntryA(
+        lpszUrlName: LPCSTR,
+    ) -> BOOL;
+    pub fn DeleteUrlCacheEntryW(
+        lpszUrlName: LPCWSTR,
+    ) -> BOOL;
+    pub fn DeleteUrlCacheGroup(
+        GroupId: GROUPID,
+        dwFlags: DWORD,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn DeleteWpadCacheForNetworks(
+        arg0: WPAD_CACHE_DELETE,
+    ) -> BOOL;
+    pub fn DetectAutoProxyUrl(
+        pszAutoProxyUrl: PSTR,
+        cchAutoProxyUrl: DWORD,
+        dwDetectFlags: DWORD,
+    ) -> BOOL;
+    pub fn FindCloseUrlCache(
+        hEnumHandle: HANDLE,
+    ) -> BOOL;
+    pub fn FindFirstUrlCacheEntryA(
+        lpszUrlSearchPattern: LPCSTR,
+        lpFirstCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
+        lpcbCacheEntryInfo: LPDWORD,
+    ) -> HANDLE;
+    pub fn FindFirstUrlCacheEntryExA(
+        lpszUrlSearchPattern: LPCSTR,
+        dwFlags: DWORD,
+        dwFilter: DWORD,
+        GroupId: GROUPID,
+        lpFirstCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
+        lpcbCacheEntryInfo: LPDWORD,
+        lpGroupAttributes: LPVOID,
+        lpcbGroupAttributes: LPDWORD,
+        lpReserved: LPVOID,
+    ) -> HANDLE;
+    pub fn FindFirstUrlCacheEntryExW(
+        lpszUrlSearchPattern: LPCWSTR,
+        dwFlags: DWORD,
+        dwFilter: DWORD,
+        GroupId: GROUPID,
+        lpFirstCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
+        lpcbCacheEntryInfo: LPDWORD,
+        lpGroupAttributes: LPVOID,
+        lpcbGroupAttributes: LPDWORD,
+        lpReserved: LPVOID,
+    ) -> HANDLE;
+    pub fn FindFirstUrlCacheEntryW(
+        lpszUrlSearchPattern: LPCWSTR,
+        lpFirstCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
+        lpcbCacheEntryInfo: LPDWORD,
+    ) -> HANDLE;
+    pub fn FindFirstUrlCacheGroup(
+        dwFlags: DWORD,
+        dwFilter: DWORD,
+        lpSearchCondition: LPVOID,
+        dwSearchCondition: DWORD,
+        lpGroupId: *mut GROUPID,
+        lpReserved: LPVOID,
+    ) -> HANDLE;
+    pub fn FindNextUrlCacheEntryA(
+        hEnumHandle: HANDLE,
+        lpNextCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
+        lpcbCacheEntryInfo: LPDWORD,
+    ) -> BOOL;
+    pub fn FindNextUrlCacheEntryExA(
+        hEnumHandle: HANDLE,
+        lpNextCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
+        lpcbCacheEntryInfo: LPDWORD,
+        lpGroupAttributes: LPVOID,
+        lpcbGroupAttributes: LPDWORD,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn FindNextUrlCacheEntryExW(
+        hEnumHandle: HANDLE,
+        lpNextCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
+        lpcbCacheEntryInfo: LPDWORD,
+        lpGroupAttributes: LPVOID,
+        lpcbGroupAttributes: LPDWORD,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn FindNextUrlCacheEntryW(
+        hEnumHandle: HANDLE,
+        lpNextCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
+        lpcbCacheEntryInfo: LPDWORD,
+    ) -> BOOL;
+    pub fn FindNextUrlCacheGroup(
+        hFind: HANDLE,
+        lpGroupId: *mut GROUPID,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn FtpCommandA(
+        hConnect: HINTERNET,
+        fExpectResponse: BOOL,
+        dwFlags: DWORD,
+        lpszCommand: LPCSTR,
+        dwContext: DWORD_PTR,
+        phFtpCommand: *mut HINTERNET,
+    ) -> BOOL;
+    pub fn FtpCommandW(
+        hConnect: HINTERNET,
+        fExpectResponse: BOOL,
+        dwFlags: DWORD,
+        lpszCommand: LPCWSTR,
+        dwContext: DWORD_PTR,
+        phFtpCommand: *mut HINTERNET,
+    ) -> BOOL;
+    pub fn FtpCreateDirectoryA(
+        hConnect: HINTERNET,
+        lpszDirectory: LPCSTR,
+    ) -> BOOL;
+    pub fn FtpCreateDirectoryW(
+        hConnect: HINTERNET,
+        lpszDirectory: LPCWSTR,
+    ) -> BOOL;
+    pub fn FtpDeleteFileA(
+        hConnect: HINTERNET,
+        lpszFileName: LPCSTR,
+    ) -> BOOL;
+    pub fn FtpDeleteFileW(
+        hConnect: HINTERNET,
+        lpszFileName: LPCWSTR,
+    ) -> BOOL;
+    pub fn FtpFindFirstFileA(
+        hConnect: HINTERNET,
+        lpszSearchFile: LPCSTR,
+        lpFindFileData: LPWIN32_FIND_DATAA,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn FtpFindFirstFileW(
+        hConnect: HINTERNET,
+        lpszSearchFile: LPCWSTR,
+        lpFindFileData: LPWIN32_FIND_DATAW,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn FtpGetCurrentDirectoryA(
+        hConnect: HINTERNET,
+        lpszCurrentDirectory: LPSTR,
+        lpdwCurrentDirectory: LPDWORD,
+    ) -> BOOL;
+    pub fn FtpGetCurrentDirectoryW(
+        hConnect: HINTERNET,
+        lpszCurrentDirectory: LPWSTR,
+        lpdwCurrentDirectory: LPDWORD,
+    ) -> BOOL;
+    pub fn FtpGetFileA(
+        hConnect: HINTERNET,
+        lpszRemoteFile: LPCSTR,
+        lpszNewFile: LPCSTR,
+        fFailIfExists: BOOL,
+        dwFlagsAndAttributes: DWORD,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn FtpGetFileEx(
+        hFtpSession: HINTERNET,
+        lpszRemoteFile: LPCSTR,
+        lpszNewFile: LPCWSTR,
+        fFailIfExists: BOOL,
+        dwFlagsAndAttributes: DWORD,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn FtpGetFileSize(
+        hFile: HINTERNET,
+        lpdwFileSizeHigh: LPDWORD,
+    ) -> DWORD;
+    pub fn FtpGetFileW(
+        hConnect: HINTERNET,
+        lpszRemoteFile: LPCWSTR,
+        lpszNewFile: LPCWSTR,
+        fFailIfExists: BOOL,
+        dwFlagsAndAttributes: DWORD,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn FtpOpenFileA(
+        hConnect: HINTERNET,
+        lpszFileName: LPCSTR,
+        dwAccess: DWORD,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn FtpOpenFileW(
+        hConnect: HINTERNET,
+        lpszFileName: LPCWSTR,
+        dwAccess: DWORD,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn FtpPutFileA(
+        hConnect: HINTERNET,
+        lpszLocalFile: LPCSTR,
+        lpszNewRemoteFile: LPCSTR,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn FtpPutFileEx(
+        hFtpSession: HINTERNET,
+        lpszLocalFile: LPCWSTR,
+        lpszNewRemoteFile: LPCSTR,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn FtpPutFileW(
+        hConnect: HINTERNET,
+        lpszLocalFile: LPCWSTR,
+        lpszNewRemoteFile: LPCWSTR,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn FtpRemoveDirectoryA(
+        hConnect: HINTERNET,
+        lpszDirectory: LPCSTR,
+    ) -> BOOL;
+    pub fn FtpRemoveDirectoryW(
+        hConnect: HINTERNET,
+        lpszDirectory: LPCWSTR,
+    ) -> BOOL;
+    pub fn FtpRenameFileA(
+        hConnect: HINTERNET,
+        lpszExisting: LPCSTR,
+        lpszNew: LPCSTR,
+    ) -> BOOL;
+    pub fn FtpRenameFileW(
+        hConnect: HINTERNET,
+        lpszExisting: LPCWSTR,
+        lpszNew: LPCWSTR,
+    ) -> BOOL;
+    pub fn FtpSetCurrentDirectoryA(
+        hConnect: HINTERNET,
+        lpszDirectory: LPCSTR,
+    ) -> BOOL;
+    pub fn FtpSetCurrentDirectoryW(
+        hConnect: HINTERNET,
+        lpszDirectory: LPCWSTR,
+    ) -> BOOL;
+    pub fn GetUrlCacheEntryInfoA(
+        lpszUrlName: LPCSTR,
+        lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
+        lpcbCacheEntryInfo: LPDWORD,
+    ) -> BOOL;
+    pub fn GetUrlCacheEntryInfoExA(
+        lpszUrl: LPCSTR,
+        lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
+        lpcbCacheEntryInfo: LPDWORD,
+        lpszRedirectUrl: LPSTR,
+        lpcbRedirectUrl: LPDWORD,
+        lpReserved: LPVOID,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn GetUrlCacheEntryInfoExW(
+        lpszUrl: LPCWSTR,
+        lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
+        lpcbCacheEntryInfo: LPDWORD,
+        lpszRedirectUrl: LPWSTR,
+        lpcbRedirectUrl: LPDWORD,
+        lpReserved: LPVOID,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn GetUrlCacheEntryInfoW(
+        lpszUrlName: LPCWSTR,
+        lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
+        lpcbCacheEntryInfo: LPDWORD,
+    ) -> BOOL;
+    pub fn GetUrlCacheGroupAttributeA(
+        gid: GROUPID,
+        dwFlags: DWORD,
+        dwAttributes: DWORD,
+        lpGroupInfo: LPINTERNET_CACHE_GROUP_INFOA,
+        lpcbGroupInfo: LPDWORD,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn GetUrlCacheGroupAttributeW(
+        gid: GROUPID,
+        dwFlags: DWORD,
+        dwAttributes: DWORD,
+        lpGroupInfo: LPINTERNET_CACHE_GROUP_INFOW,
+        lpcbGroupInfo: LPDWORD,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn GopherCreateLocatorA(
+        lpszHost: LPCSTR,
+        nServerPort: INTERNET_PORT,
+        lpszDisplayString: LPCSTR,
+        lpszSelectorString: LPCSTR,
+        dwGopherType: DWORD,
+        lpszLocator: LPSTR,
+        lpdwBufferLength: LPDWORD,
+    ) -> BOOL;
+    pub fn GopherCreateLocatorW(
+        lpszHost: LPCWSTR,
+        nServerPort: INTERNET_PORT,
+        lpszDisplayString: LPCWSTR,
+        lpszSelectorString: LPCWSTR,
+        dwGopherType: DWORD,
+        lpszLocator: LPWSTR,
+        lpdwBufferLength: LPDWORD,
+    ) -> BOOL;
+    pub fn GopherFindFirstFileA(
+        hConnect: HINTERNET,
+        lpszLocator: LPCSTR,
+        lpszSearchString: LPCSTR,
+        lpFindData: LPGOPHER_FIND_DATAA,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn GopherFindFirstFileW(
+        hConnect: HINTERNET,
+        lpszLocator: LPCWSTR,
+        lpszSearchString: LPCWSTR,
+        lpFindData: LPGOPHER_FIND_DATAW,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn GopherGetAttributeA(
+        hConnect: HINTERNET,
+        lpszLocator: LPCSTR,
+        lpszAttributeName: LPCSTR,
+        lpBuffer: LPBYTE,
+        dwBufferLength: DWORD,
+        lpdwCharactersReturned: LPDWORD,
+        lpfnEnumerator: GOPHER_ATTRIBUTE_ENUMERATOR,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn GopherGetAttributeW(
+        hConnect: HINTERNET,
+        lpszLocator: LPCWSTR,
+        lpszAttributeName: LPCWSTR,
+        lpBuffer: LPBYTE,
+        dwBufferLength: DWORD,
+        lpdwCharactersReturned: LPDWORD,
+        lpfnEnumerator: GOPHER_ATTRIBUTE_ENUMERATOR,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn GopherGetLocatorTypeA(
+        lpszLocator: LPCSTR,
+        lpdwGopherType: LPDWORD,
+    ) -> BOOL;
+    pub fn GopherGetLocatorTypeW(
+        lpszLocator: LPCWSTR,
+        lpdwGopherType: LPDWORD,
+    ) -> BOOL;
+    pub fn GopherOpenFileA(
+        hConnect: HINTERNET,
+        lpszLocator: LPCSTR,
+        lpszView: LPCSTR,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn GopherOpenFileW(
+        hConnect: HINTERNET,
+        lpszLocator: LPCWSTR,
+        lpszView: LPCWSTR,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn HttpAddRequestHeadersA(
+        hRequest: HINTERNET,
+        lpszHeaders: LPCSTR,
+        dwHeadersLength: DWORD,
+        dwModifiers: DWORD,
+    ) -> BOOL;
+    pub fn HttpAddRequestHeadersW(
+        hRequest: HINTERNET,
+        lpszHeaders: LPCWSTR,
+        dwHeadersLength: DWORD,
+        dwModifiers: DWORD,
+    ) -> BOOL;
+    pub fn HttpEndRequestA(
+        hRequest: HINTERNET,
+        lpBuffersOut: LPINTERNET_BUFFERSA,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn HttpEndRequestW(
+        hRequest: HINTERNET,
+        lpBuffersOut: LPINTERNET_BUFFERSW,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn HttpOpenRequestA(
+        hConnect: HINTERNET,
+        lpszVerb: LPCSTR,
+        lpszObjectName: LPCSTR,
+        lpszVersion: LPCSTR,
+        lpszReferrer: LPCSTR,
+        lplpszAcceptTypes: *mut LPCSTR,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn HttpOpenRequestW(
+        hConnect: HINTERNET,
+        lpszVerb: LPCWSTR,
+        lpszObjectName: LPCWSTR,
+        lpszVersion: LPCWSTR,
+        lpszReferrer: LPCWSTR,
+        lplpszAcceptTypes: *mut LPCWSTR,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn HttpQueryInfoA(
+        hRequest: HINTERNET,
+        dwInfoLevel: DWORD,
+        lpBuffer: LPVOID,
+        lpdwBufferLength: LPDWORD,
+        lpdwIndex: LPDWORD,
+    ) -> BOOL;
+    pub fn HttpQueryInfoW(
+        hRequest: HINTERNET,
+        dwInfoLevel: DWORD,
+        lpBuffer: LPVOID,
+        lpdwBufferLength: LPDWORD,
+        lpdwIndex: LPDWORD,
+    ) -> BOOL;
+    pub fn HttpSendRequestA(
+        hRequest: HINTERNET,
+        lpszHeaders: LPCSTR,
+        dwHeadersLength: DWORD,
+        lpOptional: LPVOID,
+        dwOptionalLength: DWORD,
+    ) -> BOOL;
+    pub fn HttpSendRequestExA(
+        hRequest: HINTERNET,
+        lpBuffersIn: LPINTERNET_BUFFERSA,
+        lpBuffersOut: LPINTERNET_BUFFERSA,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn HttpSendRequestExW(
+        hRequest: HINTERNET,
+        lpBuffersIn: LPINTERNET_BUFFERSW,
+        lpBuffersOut: LPINTERNET_BUFFERSW,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn HttpSendRequestW(
+        hRequest: HINTERNET,
+        lpszHeaders: LPCWSTR,
+        dwHeadersLength: DWORD,
+        lpOptional: LPVOID,
+        dwOptionalLength: DWORD,
+    ) -> BOOL;
+    pub fn InternetAttemptConnect(
+        dwReserved: DWORD,
+    ) -> DWORD;
+    pub fn InternetAutodial(
+        dwFlags: DWORD,
+        hwndParent: HWND,
+    ) -> BOOL;
+    pub fn InternetAutodialHangup(
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn InternetCanonicalizeUrlA(
+        lpszUrl: LPCSTR,
+        lpszBuffer: LPSTR,
+        lpdwBufferLength: LPDWORD,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn InternetCanonicalizeUrlW(
+        lpszUrl: LPCWSTR,
+        lpszBuffer: LPWSTR,
+        lpdwBufferLength: LPDWORD,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn InternetCheckConnectionA(
+        lpszUrl: LPCSTR,
+        dwFlags: DWORD,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn InternetCheckConnectionW(
+        lpszUrl: LPCWSTR,
+        dwFlags: DWORD,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn InternetClearAllPerSiteCookieDecisions() -> BOOL;
+    pub fn InternetCloseHandle(
+        hInternet: HINTERNET,
+    ) -> BOOL;
+    pub fn InternetCombineUrlA(
+        lpszBaseUrl: LPCSTR,
+        lpszRelativeUrl: LPCSTR,
+        lpszBuffer: LPSTR,
+        lpdwBufferLength: LPDWORD,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn InternetCombineUrlW(
+        lpszBaseUrl: LPCWSTR,
+        lpszRelativeUrl: LPCWSTR,
+        lpszBuffer: LPWSTR,
+        lpdwBufferLength: LPDWORD,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn InternetConfirmZoneCrossingA(
+        hWnd: HWND,
+        szUrlPrev: LPSTR,
+        szUrlNew: LPSTR,
+        bPost: BOOL,
+    ) -> DWORD;
+    pub fn InternetConfirmZoneCrossingW(
+        hWnd: HWND,
+        szUrlPrev: LPWSTR,
+        szUrlNew: LPWSTR,
+        bPost: BOOL,
+    ) -> DWORD;
+    pub fn InternetConnectA(
+        hInternet: HINTERNET,
+        lpszServerName: LPCSTR,
+        nServerPort: INTERNET_PORT,
+        lpszUserName: LPCSTR,
+        lpszPassword: LPCSTR,
+        dwService: DWORD,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn InternetConnectW(
+        hInternet: HINTERNET,
+        lpszServerName: LPCWSTR,
+        nServerPort: INTERNET_PORT,
+        lpszUserName: LPCWSTR,
+        lpszPassword: LPCWSTR,
+        dwService: DWORD,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn InternetCrackUrlA(
+        lpszUrl: LPCSTR,
+        dwUrlLength: DWORD,
+        dwFlags: DWORD,
+        lpUrlComponents: LPURL_COMPONENTSA,
+    ) -> BOOL;
+    pub fn InternetCrackUrlW(
+        lpszUrl: LPCWSTR,
+        dwUrlLength: DWORD,
+        dwFlags: DWORD,
+        lpUrlComponents: LPURL_COMPONENTSW,
+    ) -> BOOL;
+    pub fn InternetCreateUrlA(
+        lpUrlComponents: LPURL_COMPONENTSA,
+        dwFlags: DWORD,
+        lpszUrl: LPSTR,
+        lpdwUrlLength: LPDWORD,
+    ) -> BOOL;
+    pub fn InternetCreateUrlW(
+        lpUrlComponents: LPURL_COMPONENTSW,
+        dwFlags: DWORD,
+        lpszUrl: LPWSTR,
+        lpdwUrlLength: LPDWORD,
+    ) -> BOOL;
+    pub fn InternetDialA(
+        hwndParent: HWND,
+        lpszConnectoid: LPSTR,
+        dwFlags: DWORD,
+        lpdwConnection: *mut DWORD_PTR,
+        dwReserved: DWORD,
+    ) -> DWORD;
+    pub fn InternetDialW(
+        hwndParent: HWND,
+        lpszConnectoid: LPWSTR,
+        dwFlags: DWORD,
+        lpdwConnection: *mut DWORD_PTR,
+        dwReserved: DWORD,
+    ) -> DWORD;
+    pub fn InternetEnumPerSiteCookieDecisionA(
+        pszSiteName: LPSTR,
+        pcSiteNameSize: *mut u32,
+        pdwDecision: *mut u32,
+        dwIndex: u32,
+    ) -> BOOL;
+    pub fn InternetEnumPerSiteCookieDecisionW(
+        pszSiteName: LPWSTR,
+        pcSiteNameSize: *mut u32,
+        pdwDecision: *mut u32,
+        dwIndex: u32,
+    ) -> BOOL;
+    pub fn InternetErrorDlg(
+        hWnd: HWND,
+        hRequest: HINTERNET,
+        dwError: DWORD,
+        dwFlags: DWORD,
+        lppvData: *mut LPVOID,
+    ) -> DWORD;
+    pub fn InternetFindNextFileA(
+        hFind: HINTERNET,
+        lpvFindData: LPVOID,
+    ) -> BOOL;
+    pub fn InternetFindNextFileW(
+        hFind: HINTERNET,
+        lpvFindData: LPVOID,
+    ) -> BOOL;
+    pub fn InternetFreeCookies(
+        pCookies: *mut INTERNET_COOKIE2,
+        dwCookieCount: DWORD,
+    ) -> ();
+    pub fn InternetGetConnectedState(
+        lpdwFlags: LPDWORD,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn InternetGetConnectedStateExA(
+        lpdwFlags: LPDWORD,
+        lpszConnectionName: LPSTR,
+        cchNameLen: DWORD,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn InternetGetConnectedStateExW(
+        lpdwFlags: LPDWORD,
+        lpszConnectionName: LPWSTR,
+        cchNameLen: DWORD,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn InternetGetCookieA(
+        lpszUrl: LPCSTR,
+        lpszCookieName: LPCSTR,
+        lpszCookieData: LPSTR,
+        lpdwSize: LPDWORD,
+    ) -> BOOL;
+    pub fn InternetGetCookieEx2(
+        pcwszUrl: PCWSTR,
+        pcwszCookieName: PCWSTR,
+        dwFlags: DWORD,
+        ppCookies: *mut *mut INTERNET_COOKIE2,
+        pdwCookieCount: PDWORD,
+    ) -> DWORD;
+    pub fn InternetGetCookieExA(
+        lpszUrl: LPCSTR,
+        lpszCookieName: LPCSTR,
+        lpszCookieData: LPSTR,
+        lpdwSize: LPDWORD,
+        dwFlags: DWORD,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn InternetGetCookieExW(
+        lpszUrl: LPCWSTR,
+        lpszCookieName: LPCWSTR,
+        lpszCookieData: LPWSTR,
+        lpdwSize: LPDWORD,
+        dwFlags: DWORD,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn InternetGetCookieW(
+        lpszUrl: LPCWSTR,
+        lpszCookieName: LPCWSTR,
+        lpszCookieData: LPWSTR,
+        lpdwSize: LPDWORD,
+    ) -> BOOL;
+    pub fn InternetGetLastResponseInfoA(
+        lpdwError: LPDWORD,
+        lpszBuffer: LPSTR,
+        lpdwBufferLength: LPDWORD,
+    ) -> BOOL;
+    pub fn InternetGetLastResponseInfoW(
+        lpdwError: LPDWORD,
+        lpszBuffer: LPWSTR,
+        lpdwBufferLength: LPDWORD,
+    ) -> BOOL;
+    pub fn InternetGetPerSiteCookieDecisionA(
+        pchHostName: LPCSTR,
+        pResult: *mut u32,
+    ) -> BOOL;
+    pub fn InternetGetPerSiteCookieDecisionW(
+        pchHostName: LPCWSTR,
+        pResult: *mut u32,
+    ) -> BOOL;
+    pub fn InternetGoOnlineA(
+        lpszURL: LPCSTR,
+        hwndParent: HWND,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn InternetGoOnlineW(
+        lpszURL: LPCWSTR,
+        hwndParent: HWND,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn InternetHangUp(
+        dwConnection: DWORD_PTR,
+        dwReserved: DWORD,
+    ) -> DWORD;
+    pub fn InternetInitializeAutoProxyDll(
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn InternetLockRequestFile(
+        hInternet: HINTERNET,
+        lphLockRequestInfo: *mut HANDLE,
+    ) -> BOOL;
+    pub fn InternetOpenA(
+        lpszAgent: LPCSTR,
+        dwAccessType: DWORD,
+        lpszProxy: LPCSTR,
+        lpszProxyBypass: LPCSTR,
+        dwFlags: DWORD,
+    ) -> HINTERNET;
+    pub fn InternetOpenUrlA(
+        hInternet: HINTERNET,
+        lpszUrl: LPCSTR,
+        lpszHeaders: LPCSTR,
+        dwHeadersLength: DWORD,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn InternetOpenUrlW(
+        hInternet: HINTERNET,
+        lpszUrl: LPCWSTR,
+        lpszHeaders: LPCWSTR,
+        dwHeadersLength: DWORD,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn InternetOpenW(
+        lpszAgent: LPCWSTR,
+        dwAccessType: DWORD,
+        lpszProxy: LPCWSTR,
+        lpszProxyBypass: LPCWSTR,
+        dwFlags: DWORD,
+    ) -> HINTERNET;
+    pub fn InternetQueryDataAvailable(
+        hFile: HINTERNET,
+        lpdwNumberOfBytesAvailable: LPDWORD,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn InternetQueryOptionA(
+        hInternet: HINTERNET,
+        dwOption: DWORD,
+        lpBuffer: LPVOID,
+        lpdwBufferLength: LPDWORD,
+    ) -> BOOL;
+    pub fn InternetQueryOptionW(
+        hInternet: HINTERNET,
+        dwOption: DWORD,
+        lpBuffer: LPVOID,
+        lpdwBufferLength: LPDWORD,
+    ) -> BOOL;
+    pub fn InternetReadFile(
+        hFile: HINTERNET,
+        lpBuffer: LPVOID,
+        dwNumberOfBytesToRead: DWORD,
+        lpdwNumberOfBytesRead: LPDWORD,
+    ) -> BOOL;
+    pub fn InternetReadFileExA(
+        hFile: HINTERNET,
+        lpBuffersOut: LPINTERNET_BUFFERSA,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn InternetReadFileExW(
+        hFile: HINTERNET,
+        lpBuffersOut: LPINTERNET_BUFFERSW,
+        dwFlags: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn InternetSetCookieA(
+        lpszUrl: LPCSTR,
+        lpszCookieName: LPCSTR,
+        lpszCookieData: LPCSTR,
+    ) -> BOOL;
+    pub fn InternetSetCookieEx2(
+        pcwszUrl: PCWSTR,
+        pCookie: *const INTERNET_COOKIE2,
+        pcwszP3PPolicy: PCWSTR,
+        dwFlags: DWORD,
+        pdwCookieState: PDWORD,
+    ) -> DWORD;
+    pub fn InternetSetCookieExA(
+        lpszUrl: LPCSTR,
+        lpszCookieName: LPCSTR,
+        lpszCookieData: LPCSTR,
+        dwFlags: DWORD,
+        dwReserved: DWORD_PTR,
+    ) -> DWORD;
+    pub fn InternetSetCookieExW(
+        lpszUrl: LPCWSTR,
+        lpszCookieName: LPCWSTR,
+        lpszCookieData: LPCWSTR,
+        dwFlags: DWORD,
+        dwReserved: DWORD_PTR,
+    ) -> DWORD;
+    pub fn InternetSetCookieW(
+        lpszUrl: LPCWSTR,
+        lpszCookieName: LPCWSTR,
+        lpszCookieData: LPCWSTR,
+    ) -> BOOL;
+    pub fn InternetSetDialStateA(
+        lpszConnectoid: LPCSTR,
+        dwState: DWORD,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn InternetSetDialStateW(
+        lpszConnectoid: LPCWSTR,
+        dwState: DWORD,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn InternetSetFilePointer(
+        hFile: HINTERNET,
+        lDistanceToMove: LONG,
+        lpDistanceToMoveHigh: PLONG,
+        dwMoveMethod: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> DWORD;
+    pub fn InternetSetOptionA(
+        hInternet: HINTERNET,
+        dwOption: DWORD,
+        lpBuffer: LPVOID,
+        dwBufferLength: DWORD,
+    ) -> BOOL;
+    pub fn InternetSetOptionExA(
+        hInternet: HINTERNET,
+        dwOption: DWORD,
+        lpBuffer: LPVOID,
+        dwBufferLength: DWORD,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn InternetSetOptionExW(
+        hInternet: HINTERNET,
+        dwOption: DWORD,
+        lpBuffer: LPVOID,
+        dwBufferLength: DWORD,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn InternetSetOptionW(
+        hInternet: HINTERNET,
+        dwOption: DWORD,
+        lpBuffer: LPVOID,
+        dwBufferLength: DWORD,
+    ) -> BOOL;
+    pub fn InternetSetPerSiteCookieDecisionA(
+        pchHostName: LPCSTR,
+        dwDecision: DWORD,
+    ) -> BOOL;
+    pub fn InternetSetPerSiteCookieDecisionW(
+        pchHostName: LPCWSTR,
+        dwDecision: DWORD,
+    ) -> BOOL;
+    pub fn InternetSetStatusCallbackA(
+        hInternet: HINTERNET,
+        lpfnInternetCallback: INTERNET_STATUS_CALLBACK,
+    ) -> INTERNET_STATUS_CALLBACK;
+    pub fn InternetSetStatusCallbackW(
+        hInternet: HINTERNET,
+        lpfnInternetCallback: INTERNET_STATUS_CALLBACK,
+    ) -> INTERNET_STATUS_CALLBACK;
+    pub fn InternetTimeFromSystemTimeA(
+        pst: *const SYSTEMTIME,
+        dwRFC: DWORD,
+        lpszTime: LPSTR,
+        cbTime: DWORD,
+    ) -> BOOL;
+    pub fn InternetTimeFromSystemTimeW(
+        pst: *const SYSTEMTIME,
+        dwRFC: DWORD,
+        lpszTime: LPWSTR,
+        cbTime: DWORD,
+    ) -> BOOL;
+    pub fn InternetTimeToSystemTimeA(
+        lpszTime: LPCSTR,
+        pst: *mut SYSTEMTIME,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn InternetTimeToSystemTimeW(
+        lpszTime: LPCWSTR,
+        pst: *mut SYSTEMTIME,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn InternetUnlockRequestFile(
+        hLockRequestInfo: HANDLE,
+    ) -> BOOL;
+    pub fn InternetWriteFile(
+        hFile: HINTERNET,
+        lpBuffer: LPCVOID,
+        dwNumberOfBytesToWrite: DWORD,
+        lpdwNumberOfBytesWritten: LPDWORD,
+    ) -> BOOL;
+    pub fn PrivacyGetZonePreferenceW(
+        dwZone: DWORD,
+        dwType: DWORD,
+        pdwTemplate: LPDWORD,
+        pszBuffer: LPWSTR,
+        pdwBufferLength: LPDWORD,
+    ) -> DWORD;
+    pub fn PrivacySetZonePreferenceW(
+        dwZone: DWORD,
+        dwType: DWORD,
+        dwTemplate: DWORD,
+        pszPreference: LPCWSTR,
+    ) -> DWORD;
+    pub fn ReadUrlCacheEntryStream(
+        hUrlCacheStream: HANDLE,
+        dwLocation: DWORD,
+        lpBuffer: LPVOID,
+        lpdwLen: LPDWORD,
+        Reserved: DWORD,
+    ) -> BOOL;
+    pub fn ReadUrlCacheEntryStreamEx(
+        hUrlCacheStream: HANDLE,
+        qwLocation: DWORDLONG,
+        lpBuffer: LPVOID,
+        lpdwLen: LPDWORD,
+    ) -> BOOL;
+    pub fn ResumeSuspendedDownload(
+        hRequest: HINTERNET,
+        dwResultCode: DWORD,
+    ) -> BOOL;
+    pub fn RetrieveUrlCacheEntryFileA(
+        lpszUrlName: LPCSTR,
+        lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
+        lpcbCacheEntryInfo: LPDWORD,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn RetrieveUrlCacheEntryFileW(
+        lpszUrlName: LPCWSTR,
+        lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
+        lpcbCacheEntryInfo: LPDWORD,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn RetrieveUrlCacheEntryStreamA(
+        lpszUrlName: LPCSTR,
+        lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
+        lpcbCacheEntryInfo: LPDWORD,
+        fRandomRead: BOOL,
+        dwReserved: DWORD,
+    ) -> HANDLE;
+    pub fn RetrieveUrlCacheEntryStreamW(
+        lpszUrlName: LPCWSTR,
+        lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
+        lpcbCacheEntryInfo: LPDWORD,
+        fRandomRead: BOOL,
+        dwReserved: DWORD,
+    ) -> HANDLE;
+    pub fn SetUrlCacheEntryGroupA(
+        lpszUrlName: LPCSTR,
+        dwFlags: DWORD,
+        GroupId: GROUPID,
+        pbGroupAttributes: LPBYTE,
+        cbGroupAttributes: DWORD,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn SetUrlCacheEntryGroupW(
+        lpszUrlName: LPCWSTR,
+        dwFlags: DWORD,
+        GroupId: GROUPID,
+        pbGroupAttributes: LPBYTE,
+        cbGroupAttributes: DWORD,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn SetUrlCacheEntryInfoA(
+        lpszUrlName: LPCSTR,
+        lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
+        dwFieldControl: DWORD,
+    ) -> BOOL;
+    pub fn SetUrlCacheEntryInfoW(
+        lpszUrlName: LPCWSTR,
+        lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOW,
+        dwFieldControl: DWORD,
+    ) -> BOOL;
+    pub fn SetUrlCacheGroupAttributeA(
+        gid: GROUPID,
+        dwFlags: DWORD,
+        dwAttributes: DWORD,
+        lpGroupInfo: LPINTERNET_CACHE_GROUP_INFOA,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn SetUrlCacheGroupAttributeW(
+        gid: GROUPID,
+        dwFlags: DWORD,
+        dwAttributes: DWORD,
+        lpGroupInfo: LPINTERNET_CACHE_GROUP_INFOW,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn UnlockUrlCacheEntryFileA(
+        lpszUrlName: LPCSTR,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn UnlockUrlCacheEntryFileW(
+        lpszUrlName: LPCWSTR,
+        dwReserved: DWORD,
+    ) -> BOOL;
+    pub fn UnlockUrlCacheEntryStream(
+        hUrlCacheStream: HANDLE,
+        Reserved: DWORD,
+    ) -> BOOL;
+}

@@ -1,0 +1,18 @@
+LIBRARY APPMGMTS.dll
+EXPORTS
+CsCreateClassStore
+CsEnumApps
+CsGetAppCategories
+CsGetClassAccess
+CsGetClassStore
+CsGetClassStorePath
+CsRegisterAppCategory
+CsServerGetClassStore
+CsUnregisterAppCategory
+GenerateGroupPolicy
+IID_IClassAdmin
+ProcessGroupPolicyObjectsEx
+ReleaseAppCategoryInfoList
+ReleasePackageDetail
+ReleasePackageInfo
+ServiceMain

@@ -1,5 +1,9 @@
-// Copyright © 2015, skdltmxn
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Data Protection API Prototypes and Definitions
 // This header file provides the definitions and symbols necessary for an
 // Application or Smart Card Service Provider to access the Smartcard Subsystem.
@@ -74,16 +78,28 @@ pub const SC_DLG_NO_UI: ::DWORD = 0x02;
 pub const SC_DLG_FORCE_UI: ::DWORD = 0x04;
 pub const SCERR_NOCARDNAME: ::DWORD = 0x4000;
 pub const SCERR_NOGUIDS: ::DWORD = 0x8000;
-pub type LPOCNCONNPROCA = Option<unsafe extern "system" fn(
-    SCARDCONTEXT, ::LPSTR, ::LPSTR, ::PVOID,
-) -> SCARDHANDLE>;
-pub type LPOCNCONNPROCW = Option<unsafe extern "system" fn(
-    SCARDCONTEXT, ::LPWSTR, ::LPWSTR, ::PVOID,
-) -> SCARDHANDLE>;
-pub type LPOCNCHKPROC = Option<unsafe extern "system" fn(
-    SCARDCONTEXT, SCARDHANDLE, ::PVOID,
-) -> ::BOOL>;
-pub type LPOCNDSCPROC = Option<unsafe extern "system" fn(SCARDCONTEXT, SCARDHANDLE, ::PVOID)>;
+FN!{stdcall LPOCNCONNPROCA(
+    SCARDCONTEXT,
+    ::LPSTR,
+    ::LPSTR,
+    ::PVOID,
+) -> SCARDHANDLE}
+FN!{stdcall LPOCNCONNPROCW(
+    SCARDCONTEXT,
+    ::LPWSTR,
+    ::LPWSTR,
+    ::PVOID,
+) -> SCARDHANDLE}
+FN!{stdcall LPOCNCHKPROC(
+    SCARDCONTEXT,
+    SCARDHANDLE,
+    ::PVOID,
+) -> ::BOOL}
+FN!{stdcall LPOCNDSCPROC(
+    SCARDCONTEXT,
+    SCARDHANDLE,
+    ::PVOID,
+) -> ()}
 STRUCT!{struct OPENCARD_SEARCH_CRITERIAA {
     dwStructSize: ::DWORD,
     lpstrGroupNames: ::LPSTR,

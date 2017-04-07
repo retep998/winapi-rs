@@ -1,4 +1,4 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -9,7 +9,7 @@
 use ctypes::c_void;
 use shared::basetsd::{ DWORD64, PDWORD64, SIZE_T, ULONG_PTR };
 use shared::guiddef::CLSID;
-use shared::minwindef::{ BYTE, DWORD, ULONG, WORD };
+use shared::minwindef::{ BYTE, DWORD, PDWORD, ULONG, WORD };
 use vc::excpt::EXCEPTION_DISPOSITION;
 pub const ANYSIZE_ARRAY: usize = 1;
 pub use shared::ntdef::{
@@ -133,7 +133,7 @@ FN!{stdcall PEXCEPTION_ROUTINE(
     ExceptionRecord: *mut EXCEPTION_RECORD,
     EstablisherFrame: PVOID,
     ContextRecord: *mut CONTEXT,
-    DispatcherContext: PVOID
+    DispatcherContext: PVOID,
 ) -> EXCEPTION_DISPOSITION}
 pub use shared::ntdef::{
     VER_SERVER_NT,
@@ -885,7 +885,8 @@ pub const CONTEXT_SEGMENTS: DWORD = CONTEXT_AMD64 | 0x00000004;
 pub const CONTEXT_FLOATING_POINT: DWORD = CONTEXT_AMD64 | 0x00000008;
 pub const CONTEXT_DEBUG_REGISTERS: DWORD = CONTEXT_AMD64 | 0x00000010;
 pub const CONTEXT_FULL: DWORD = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_FLOATING_POINT;
-pub const CONTEXT_ALL: DWORD = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_SEGMENTS | CONTEXT_FLOATING_POINT | CONTEXT_DEBUG_REGISTERS;
+pub const CONTEXT_ALL: DWORD = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_SEGMENTS
+    | CONTEXT_FLOATING_POINT | CONTEXT_DEBUG_REGISTERS;
 pub const CONTEXT_XSTATE: DWORD = CONTEXT_AMD64 | 0x00000040;
 pub const CONTEXT_EXCEPTION_ACTIVE: DWORD = 0x08000000;
 pub const CONTEXT_SERVICE_ACTIVE: DWORD = 0x10000000;
@@ -973,13 +974,13 @@ STRUCT!{struct UNWIND_HISTORY_TABLE {
 pub type PUNWIND_HISTORY_TABLE = *mut UNWIND_HISTORY_TABLE;
 FN!{cdecl PGET_RUNTIME_FUNCTION_CALLBACK(
     ControlPc: DWORD64,
-    Context: PVOID
+    Context: PVOID,
 ) -> PRUNTIME_FUNCTION}
 FN!{cdecl POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK(
     Process: HANDLE,
     TableAddress: PVOID,
-    Entries: ::shared::minwindef::PDWORD,
-    Functions: *mut PRUNTIME_FUNCTION
+    Entries: PDWORD,
+    Functions: *mut PRUNTIME_FUNCTION,
 ) -> DWORD}
 pub const OUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK_EXPORT_NAME: &'static str
     = "OutOfProcessFunctionTableCallback";
@@ -1185,7 +1186,8 @@ pub const SE_PRIVILEGE_ENABLED_BY_DEFAULT: DWORD = 0x00000001;
 pub const SE_PRIVILEGE_ENABLED: DWORD = 0x00000002;
 pub const SE_PRIVILEGE_REMOVED: DWORD = 0x00000004;
 pub const SE_PRIVILEGE_USED_FOR_ACCESS: DWORD = 0x80000000;
-pub const SE_PRIVILEGE_VALID_ATTRIBUTES: DWORD = SE_PRIVILEGE_ENABLED_BY_DEFAULT | SE_PRIVILEGE_ENABLED | SE_PRIVILEGE_REMOVED | SE_PRIVILEGE_USED_FOR_ACCESS;
+pub const SE_PRIVILEGE_VALID_ATTRIBUTES: DWORD = SE_PRIVILEGE_ENABLED_BY_DEFAULT
+    | SE_PRIVILEGE_ENABLED | SE_PRIVILEGE_REMOVED | SE_PRIVILEGE_USED_FOR_ACCESS;
 pub const PRIVILEGE_SET_ALL_NECESSARY: DWORD = 1;
 //10689
 pub const TOKEN_ASSIGN_PRIMARY: DWORD = 0x0001;
@@ -2107,7 +2109,10 @@ pub const RTL_CRITICAL_SECTION_FLAG_STATIC_INIT: ULONG_PTR = 0x04000000;
 pub const RTL_CRITICAL_SECTION_FLAG_RESOURCE_TYPE: ULONG_PTR = 0x08000000;
 pub const RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO: ULONG_PTR = 0x10000000;
 pub const RTL_CRITICAL_SECTION_ALL_FLAG_BITS: ULONG_PTR = 0xFF000000;
-pub const RTL_CRITICAL_SECTION_FLAG_RESERVED: ULONG_PTR = RTL_CRITICAL_SECTION_ALL_FLAG_BITS & !(RTL_CRITICAL_SECTION_FLAG_NO_DEBUG_INFO | RTL_CRITICAL_SECTION_FLAG_DYNAMIC_SPIN | RTL_CRITICAL_SECTION_FLAG_STATIC_INIT | RTL_CRITICAL_SECTION_FLAG_RESOURCE_TYPE | RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO);
+pub const RTL_CRITICAL_SECTION_FLAG_RESERVED: ULONG_PTR = RTL_CRITICAL_SECTION_ALL_FLAG_BITS
+    & !(RTL_CRITICAL_SECTION_FLAG_NO_DEBUG_INFO | RTL_CRITICAL_SECTION_FLAG_DYNAMIC_SPIN
+        | RTL_CRITICAL_SECTION_FLAG_STATIC_INIT | RTL_CRITICAL_SECTION_FLAG_RESOURCE_TYPE
+        | RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO);
 pub const RTL_CRITICAL_SECTION_DEBUG_FLAG_STATIC_INIT: DWORD = 0x00000001;
 STRUCT!{struct RTL_CRITICAL_SECTION {
     DebugInfo: PRTL_CRITICAL_SECTION_DEBUG,
@@ -2128,19 +2133,20 @@ STRUCT!{struct RTL_CONDITION_VARIABLE {
 }}
 pub type PRTL_CONDITION_VARIABLE = *mut RTL_CONDITION_VARIABLE;
 pub const RTL_CONDITION_VARIABLE_INIT: RTL_CONDITION_VARIABLE = RTL_CONDITION_VARIABLE {
-    Ptr: 0 as PVOID
+    Ptr: 0 as PVOID,
 };
 //18204
-FN!{stdcall PAPCFUNC(Parameter: ULONG_PTR) -> ()}
+FN!{stdcall PAPCFUNC(
+    Parameter: ULONG_PTR,
+) -> ()}
 FN!{stdcall PVECTORED_EXCEPTION_HANDLER(
-    ExceptionInfo: *mut EXCEPTION_POINTERS
+    ExceptionInfo: *mut EXCEPTION_POINTERS,
 ) -> LONG}
 ENUM!{enum HEAP_INFORMATION_CLASS {
     HeapCompatibilityInformation = 0,
     HeapEnableTerminationOnCorruption = 1,
     HeapOptimizeResources = 3,
 }}
-//pub use selfHEAP_INFORMATION_CLASS*;
 pub const HEAP_OPTIMIZE_RESOURCES_CURRENT_VERSION: DWORD = 1;
 STRUCT!{struct HEAP_OPTIMIZE_RESOURCES_INFORMATION {
     Version: DWORD,
@@ -2157,14 +2163,25 @@ pub const WT_EXECUTELONGFUNCTION: ULONG = 0x00000010;
 pub const WT_EXECUTEINPERSISTENTIOTHREAD: ULONG = 0x00000040;
 pub const WT_EXECUTEINPERSISTENTTHREAD: ULONG = 0x00000080;
 pub const WT_TRANSFER_IMPERSONATION: ULONG = 0x00000100;
-FN!{stdcall WAITORTIMERCALLBACKFUNC(PVOID, BOOLEAN) -> ()}
-FN!{stdcall WORKERCALLBACKFUNC(PVOID) -> ()}
-FN!{stdcall APC_CALLBACK_FUNCTION(DWORD, PVOID, PVOID) -> ()}
+FN!{stdcall WAITORTIMERCALLBACKFUNC(
+    PVOID,
+    BOOLEAN,
+) -> ()}
+FN!{stdcall WORKERCALLBACKFUNC(
+    PVOID,
+) -> ()}
+FN!{stdcall APC_CALLBACK_FUNCTION(
+    DWORD,
+    PVOID,
+    PVOID,
+) -> ()}
 pub type WAITORTIMERCALLBACK = WAITORTIMERCALLBACKFUNC;
-FN!{stdcall PFLS_CALLBACK_FUNCTION(lpFlsData: PVOID) -> ()}
+FN!{stdcall PFLS_CALLBACK_FUNCTION(
+    lpFlsData: PVOID,
+) -> ()}
 FN!{stdcall PSECURE_MEMORY_CACHE_CALLBACK(
     Addr: PVOID,
-    Range: SIZE_T
+    Range: SIZE_T,
 ) -> BOOLEAN}
 pub const WT_EXECUTEINLONGTHREAD: ULONG = 0x00000010;
 pub const WT_EXECUTEDELETEWAIT: ULONG = 0x00000008;
@@ -2268,20 +2285,29 @@ ENUM!{enum TP_CALLBACK_PRIORITY {
     TP_CALLBACK_PRIORITY_COUNT = 4,
 }}
 FN!{stdcall PTP_CLEANUP_GROUP_CANCEL_CALLBACK(
-    ObjectContext: PVOID, CleanupContext: PVOID
+    ObjectContext: PVOID,
+    CleanupContext: PVOID,
 ) -> ()}
 FN!{stdcall PTP_SIMPLE_CALLBACK(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID
+    Instance: PTP_CALLBACK_INSTANCE,
+    Context: PVOID,
 ) -> ()}
 FN!{stdcall PTP_WORK_CALLBACK(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Work: PTP_WORK
+    Instance: PTP_CALLBACK_INSTANCE,
+    Context: PVOID,
+    Work: PTP_WORK,
 ) -> ()}
 FN!{stdcall PTP_TIMER_CALLBACK(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Timer: PTP_TIMER
+    Instance: PTP_CALLBACK_INSTANCE,
+    Context: PVOID,
+    Timer: PTP_TIMER,
 ) -> ()}
 pub type TP_WAIT_RESULT = DWORD;
 FN!{stdcall PTP_WAIT_CALLBACK(
-    Instance: PTP_CALLBACK_INSTANCE, Context: PVOID, Wait: PTP_WAIT, WaitResult: TP_WAIT_RESULT
+    Instance: PTP_CALLBACK_INSTANCE,
+    Context: PVOID,
+    Wait: PTP_WAIT,
+    WaitResult: TP_WAIT_RESULT,
 ) -> ()}
 pub type TP_VERSION = DWORD;
 pub type PTP_VERSION = *mut DWORD;
@@ -2335,8 +2361,8 @@ pub type PRTL_RUN_ONCE = *mut RTL_RUN_ONCE;
 ENUM!{enum RTL_UMS_THREAD_INFO_CLASS {
     UmsThreadInvalidInfoClass = 0,
     UmsThreadUserContext,
-    UmsThreadPriority,              // Reserved
-    UmsThreadAffinity,              // Reserved
+    UmsThreadPriority, // Reserved
+    UmsThreadAffinity, // Reserved
     UmsThreadTeb,
     UmsThreadIsSuspended,
     UmsThreadIsTerminated,
@@ -2348,7 +2374,9 @@ ENUM!{enum RTL_UMS_SCHEDULER_REASON {
     UmsSchedulerThreadYield,
 }}
 FN!{stdcall PRTL_UMS_SCHEDULER_ENTRY_POINT(
-    Reason: RTL_UMS_SCHEDULER_REASON, ActivationPayload: ULONG_PTR, SchedulerParam: PVOID
+    Reason: RTL_UMS_SCHEDULER_REASON,
+    ActivationPayload: ULONG_PTR,
+    SchedulerParam: PVOID,
 ) -> ()}
 ENUM!{enum FIRMWARE_TYPE {
     FirmwareTypeUnknown,
@@ -2675,6 +2703,28 @@ STRUCT!{struct WOW64_LDT_ENTRY {
 UNION!(WOW64_LDT_ENTRY, HighWord, Bytes, Bytes_mut, WOW64_LDT_ENTRY_Bytes);
 UNION!(WOW64_LDT_ENTRY, HighWord, Bits, Bits_mut, WOW64_LDT_ENTRY_Bits);
 pub type PWOW64_LDT_ENTRY = *mut WOW64_LDT_ENTRY;
+STRUCT!{struct IMAGE_DOS_HEADER {
+    e_magic: WORD,
+    e_cblp: WORD,
+    e_cp: WORD,
+    e_crlc: WORD,
+    e_cparhdr: WORD,
+    e_minalloc: WORD,
+    e_maxalloc: WORD,
+    e_ss: WORD,
+    e_sp: WORD,
+    e_csum: WORD,
+    e_ip: WORD,
+    e_cs: WORD,
+    e_lfarlc: WORD,
+    e_ovno: WORD,
+    e_res: [WORD; 4],
+    e_oemid: WORD,
+    e_oeminfo: WORD,
+    e_res2: [WORD; 10],
+    e_lfanew: LONG,
+}}
+pub type PIMAGE_DOS_HEADER = *mut IMAGE_DOS_HEADER;
 pub const DLL_PROCESS_ATTACH: DWORD = 1;
 pub const DLL_THREAD_ATTACH: DWORD = 2;
 pub const DLL_THREAD_DETACH: DWORD = 3;

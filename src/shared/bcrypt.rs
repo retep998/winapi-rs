@@ -1,16 +1,18 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Cryptographic Primitive API Prototypes and Definitions
-use shared::minwindef::{ PUCHAR, UCHAR, ULONG, USHORT };
-use um::winnt::{ LONG, LPCWSTR, LPWSTR, PVOID, PWSTR, ULONGLONG };
+use shared::minwindef::{PUCHAR, UCHAR, ULONG, USHORT};
+use shared::ntdef::{LONG, LPCWSTR, LPWSTR, PVOID, PWSTR, ULONGLONG};
 pub type NTSTATUS = LONG;
 pub type PNTSTATUS = *mut NTSTATUS;
 #[inline]
-pub fn BCRYPT_SUCCESS(Status: NTSTATUS) -> bool { Status >= 0 }
+pub fn BCRYPT_SUCCESS(Status: NTSTATUS) -> bool {
+    Status >= 0
+}
 pub const BCRYPT_OBJECT_ALIGNMENT: usize = 16;
 pub const BCRYPT_KDF_HASH: &'static str = "HASH";
 pub const BCRYPT_KDF_HMAC: &'static str = "HMAC";

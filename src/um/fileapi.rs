@@ -1,10 +1,13 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! ApiSet Contract for api-ms-win-core-file-l1
-use shared::minwindef::*;
-use um::minwinbase::{LPSECURITY_ATTRIBUTES};
-use um::winnt::{WCHAR, ULONGLONG, FILE_ID_128, LARGE_INTEGER, HANDLE, BOOLEAN, CCHAR};
-
+use shared::minwindef::{BOOL, DWORD, FILETIME, UCHAR, ULONG, WORD};
+use um::minwinbase::LPSECURITY_ATTRIBUTES;
+use um::winnt::{BOOLEAN, CCHAR, FILE_ID_128, HANDLE, LARGE_INTEGER, ULONGLONG, WCHAR};
 pub const CREATE_NEW: DWORD = 1;
 pub const CREATE_ALWAYS: DWORD = 2;
 pub const OPEN_EXISTING: DWORD = 3;

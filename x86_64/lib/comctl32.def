@@ -1,0 +1,130 @@
+LIBRARY COMCTL32.dll
+EXPORTS
+AddMRUStringW @401
+CreateMRUListW @400
+CreateMappedBitmap @8
+CreateStatusWindowA @6
+CreateToolbar @7
+CreateUpDownControl @16
+DPA_Clone @331
+DPA_Create @328
+DPA_CreateEx @340
+DPA_DeleteAllPtrs @337
+DPA_DeletePtr @336
+DPA_Destroy @329
+DPA_DestroyCallback @386
+DPA_EnumCallback @385
+DPA_GetPtr @332
+DPA_GetPtrIndex @333
+DPA_GetSize @347
+DPA_Grow @330
+DPA_InsertPtr @334
+DPA_LoadStream @9
+DPA_Merge @11
+DPA_SaveStream @10
+DPA_Search @339
+DPA_SetPtr @335
+DPA_Sort @338
+DSA_Clone @343
+DSA_Create @320
+DSA_DeleteAllItems @327
+DSA_DeleteItem @326
+DSA_Destroy @321
+DSA_DestroyCallback @388
+DSA_EnumCallback @387
+DSA_GetItem @322
+DSA_GetItemPtr @323
+DSA_GetSize @348
+DSA_InsertItem @324
+DSA_SetItem @325
+DSA_Sort @346
+DefSubclassProc @413
+DrawInsert @15
+DrawStatusTextA @5
+EnumMRUListW @403
+FreeMRUList @152
+GetEffectiveClientRect @4
+GetWindowSubclass @411
+InitCommonControls @17
+LBItemFromPt @14
+LoadIconMetric @380
+LoadIconWithScaleDown @381
+MakeDragList @13
+MenuHelp @2
+RemoveWindowSubclass @412
+SetWindowSubclass @410
+ShowHideMenuCtl @3
+Str_SetPtrW @236
+TaskDialog @344
+TaskDialogIndirect @345
+CreatePropertySheetPage
+CreatePropertySheetPageA
+CreatePropertySheetPageW
+CreateStatusWindow
+CreateStatusWindowW
+CreateToolbarEx
+DestroyPropertySheetPage
+DrawShadowText
+DrawStatusText
+DrawStatusTextW
+FlatSB_EnableScrollBar
+FlatSB_GetScrollInfo
+FlatSB_GetScrollPos
+FlatSB_GetScrollProp
+FlatSB_GetScrollRange
+FlatSB_SetScrollInfo
+FlatSB_SetScrollPos
+FlatSB_SetScrollProp
+FlatSB_SetScrollRange
+FlatSB_ShowScrollBar
+GetMUILanguage
+HIMAGELIST_QueryInterface
+ImageList_Add
+ImageList_AddIcon
+ImageList_AddMasked
+ImageList_BeginDrag
+ImageList_CoCreateInstance
+ImageList_Copy
+ImageList_Create
+ImageList_Destroy
+ImageList_DragEnter
+ImageList_DragLeave
+ImageList_DragMove
+ImageList_DragShowNolock
+ImageList_Draw
+ImageList_DrawEx
+ImageList_DrawIndirect
+ImageList_Duplicate
+ImageList_EndDrag
+ImageList_GetBkColor
+ImageList_GetDragImage
+ImageList_GetIcon
+ImageList_GetIconSize
+ImageList_GetImageCount
+ImageList_GetImageInfo
+ImageList_GetImageRect
+ImageList_LoadImage
+ImageList_LoadImageA
+ImageList_LoadImageW
+ImageList_Merge
+ImageList_Read
+ImageList_ReadEx
+ImageList_Remove
+ImageList_Replace
+ImageList_ReplaceIcon
+ImageList_SetBkColor
+ImageList_SetDragCursorImage
+ImageList_SetFilter
+ImageList_SetIconSize
+ImageList_SetImageCount
+ImageList_SetOverlayImage
+ImageList_Write
+ImageList_WriteEx
+InitCommonControlsEx
+InitMUILanguage
+InitializeFlatSB
+PropertySheet
+PropertySheetA
+PropertySheetW
+UninitializeFlatSB
+_TrackMouseEvent

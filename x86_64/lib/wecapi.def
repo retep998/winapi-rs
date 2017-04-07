@@ -1,0 +1,17 @@
+LIBRARY WecApi.dll
+EXPORTS
+EcClose
+EcDeleteSubscription
+EcEnumNextSubscription
+EcGetObjectArrayProperty
+EcGetObjectArraySize
+EcGetSubscriptionProperty
+EcGetSubscriptionRunTimeStatus
+EcInsertObjectArrayElement
+EcOpenSubscription
+EcOpenSubscriptionEnum
+EcRemoveObjectArrayElement
+EcRetrySubscription
+EcSaveSubscription
+EcSetObjectArrayProperty
+EcSetSubscriptionProperty

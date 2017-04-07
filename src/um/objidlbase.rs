@@ -1,4 +1,4 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -7,19 +7,46 @@
 use ctypes::{c_int, c_void};
 use shared::basetsd::SIZE_T;
 use shared::guiddef::CLSID;
-use shared::minwindef::{ DWORD, FILETIME, ULONG };
-use shared::wtypesbase::{ LPOLESTR };
-use um::unknwnbase::{ IUnknown, IUnknownVtbl };
-use um::winnt::{ HRESULT, LARGE_INTEGER, ULARGE_INTEGER };
-RIDL!{interface IMalloc(IMallocVtbl): IUnknown(IUnknownVtbl) {
-    fn Alloc(&self, cb: SIZE_T) -> *mut c_void,
-    fn Realloc(&self, pv: *mut c_void, cb: SIZE_T) -> *mut c_void,
-    fn Free(&self, pv: *mut c_void) -> (),
-    fn GetSize(&self, pv: *mut c_void) -> SIZE_T,
-    fn DidAlloc(&self, pv: *mut c_void) -> c_int,
-    fn HeapMinimize(&self) -> ()
+use shared::minwindef::{DWORD, FILETIME, ULONG};
+use shared::wtypesbase::LPOLESTR;
+use um::unknwnbase::{IUnknown, IUnknownVtbl};
+use um::winnt::{HRESULT, LARGE_INTEGER, ULARGE_INTEGER};
+RIDL!{#[uuid(0x00000002, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IMalloc(IMallocVtbl): IUnknown(IUnknownVtbl) {
+    fn Alloc(
+        cb: SIZE_T,
+    ) -> *mut c_void,
+    fn Realloc(
+        pv: *mut c_void,
+        cb: SIZE_T,
+    ) -> *mut c_void,
+    fn Free(
+        pv: *mut c_void,
+    ) -> (),
+    fn GetSize(
+        pv: *mut c_void,
+    ) -> SIZE_T,
+    fn DidAlloc(
+        pv: *mut c_void,
+    ) -> c_int,
+    fn HeapMinimize() -> (),
 }}
 pub type LPMALLOC = *mut IMalloc;
+RIDL!{#[uuid(0x00000100, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IEnumUnknown(IEnumUnknownVtbl): IUnknown(IUnknownVtbl) {
+    fn Next(
+        celt: ULONG,
+        rgelt: *mut *mut IUnknown,
+        pceltFetched: *mut ULONG,
+    ) -> HRESULT,
+    fn Skip(
+        celt: ULONG,
+    ) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(
+        ppenum: *mut *mut IEnumUnknown,
+    ) -> HRESULT,
+}}
 STRUCT!{struct STATSTG {
     pwcsName: LPOLESTR,
     type_: DWORD,
@@ -36,10 +63,18 @@ STRUCT!{struct STATSTG {
 //1945
 pub type IEnumString = IUnknown; // TODO
 //2075
-RIDL!(
+RIDL!(#[uuid(0x0c733a30, 0x2a1c, 0x11ce, 0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d)]
 interface ISequentialStream(ISequentialStreamVtbl): IUnknown(IUnknownVtbl) {
-    fn Read(&self, pv: *mut c_void, cb: ULONG, pcbRead: *mut ULONG) -> HRESULT,
-    fn Write(&self, pv: *const c_void, cb: ULONG, pcbWritten: *mut ULONG) -> HRESULT
+    fn Read(
+        pv: *mut c_void,
+        cb: ULONG,
+        pcbRead: *mut ULONG,
+    ) -> HRESULT,
+    fn Write(
+        pv: *const c_void,
+        cb: ULONG,
+        pcbWritten: *mut ULONG,
+    ) -> HRESULT,
 }
 );
 ENUM!{enum STGTY {
@@ -59,27 +94,43 @@ ENUM!{enum LOCKTYPE {
     LOCK_ONLYONCE = 4,
 }}
 //2255
-RIDL!(
+RIDL!(#[uuid(0x0000000c, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IStream(IStreamVtbl): ISequentialStream(ISequentialStreamVtbl) {
     fn Seek(
-        &self, dlibMove: LARGE_INTEGER, dwOrigin: DWORD,
-        plibNewPosition: *mut ULARGE_INTEGER
+        dlibMove: LARGE_INTEGER,
+        dwOrigin: DWORD,
+        plibNewPosition: *mut ULARGE_INTEGER,
     ) -> HRESULT,
-    fn SetSize(&self, libNewSize: ULARGE_INTEGER) -> HRESULT,
+    fn SetSize(
+        libNewSize: ULARGE_INTEGER,
+    ) -> HRESULT,
     fn CopyTo(
-        &self, pstm: *mut IStream, cb: ULARGE_INTEGER, pcbRead: *mut ULARGE_INTEGER,
-        pcbWritten: *mut ULARGE_INTEGER
+        pstm: *mut IStream,
+        cb: ULARGE_INTEGER,
+        pcbRead: *mut ULARGE_INTEGER,
+        pcbWritten: *mut ULARGE_INTEGER,
     ) -> HRESULT,
-    fn Commit(&self, grfCommitFlags: DWORD) -> HRESULT,
-    fn Revert(&self) -> HRESULT,
+    fn Commit(
+        grfCommitFlags: DWORD,
+    ) -> HRESULT,
+    fn Revert() -> HRESULT,
     fn LockRegion(
-        &self, libOffset: ULARGE_INTEGER, cb: ULARGE_INTEGER, dwLockType: DWORD
+        libOffset: ULARGE_INTEGER,
+        cb: ULARGE_INTEGER,
+        dwLockType: DWORD,
     ) -> HRESULT,
     fn UnlockRegion(
-        &self, libOffset: ULARGE_INTEGER, cb: ULARGE_INTEGER, dwLockType: DWORD
+        libOffset: ULARGE_INTEGER,
+        cb: ULARGE_INTEGER,
+        dwLockType: DWORD,
     ) -> HRESULT,
-    fn Stat(&self, pstatstg: *mut STATSTG, grfStatFlag: DWORD) -> HRESULT,
-    fn Clone(&self, ppstm: *mut *mut IStream) -> HRESULT
+    fn Stat(
+        pstatstg: *mut STATSTG,
+        grfStatFlag: DWORD,
+    ) -> HRESULT,
+    fn Clone(
+        ppstm: *mut *mut IStream,
+    ) -> HRESULT,
 }
 );
 pub type LPSTREAM = *mut IStream;

@@ -1,0 +1,25 @@
+LIBRARY oledlg.dll
+EXPORTS
+OleUIAddVerbMenuA @1
+OleUIBusyA @8
+OleUICanConvertOrActivateAs @2
+OleUIChangeIconA @6
+OleUIChangeSourceA @12
+OleUIConvertA @7
+OleUIEditLinksA @5
+OleUIInsertObjectA @3
+OleUIObjectPropertiesA @11
+OleUIPasteSpecialA @4
+OleUIPromptUserA @10
+OleUIUpdateLinksA @9
+OleUIAddVerbMenuW
+OleUIBusyW
+OleUIChangeIconW
+OleUIChangeSourceW
+OleUIConvertW
+OleUIEditLinksW
+OleUIInsertObjectW
+OleUIObjectPropertiesW
+OleUIPasteSpecialW
+OleUIPromptUserW
+OleUIUpdateLinksW

@@ -1,14 +1,17 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! This file contains the core definitions for the Winsock2 specification that can be used by
 //! both user-mode and kernel mode modules.
-use ctypes::{c_int, c_void, c_char, __int64, c_short};
-use shared::guiddef::{LPGUID};
-use shared::inaddr::{IN_ADDR};
-use shared::minwindef::{INT, ULONG, DWORD, USHORT};
-use um::winnt::{PWSTR, CHAR, PROCESSOR_NUMBER};
-use vc::vcruntime::{size_t};
-
+use ctypes::{__int64, c_char, c_int, c_short, c_void};
+use shared::guiddef::LPGUID;
+use shared::inaddr::IN_ADDR;
+use shared::minwindef::{DWORD, INT, ULONG, USHORT};
+use um::winnt::{CHAR, PROCESSOR_NUMBER, PWSTR};
+use vc::vcruntime::size_t;
 pub type ADDRESS_FAMILY = USHORT;
 pub const AF_UNSPEC: c_int = 0;
 pub const AF_UNIX: c_int = 1;
@@ -167,7 +170,7 @@ pub const SIO_RESERVED_2: DWORD = _WSAIOW!(IOC_WS2, 33);
 pub const SIO_GET_MULTIPLE_EXTENSION_FUNCTION_POINTER: DWORD = _WSAIORW!(IOC_WS2, 36);
 pub const IPPROTO_IP: c_int = 0;
 ENUM!{enum IPPROTO {
-    IPPROTO_HOPOPTS = 0,  // IPv6 Hop-by-Hop options
+    IPPROTO_HOPOPTS = 0, // IPv6 Hop-by-Hop options
     IPPROTO_ICMP = 1,
     IPPROTO_IGMP = 2,
     IPPROTO_GGP = 3,
@@ -197,7 +200,7 @@ ENUM!{enum IPPROTO {
     IPPROTO_SCTP = 132,
     IPPROTO_RAW = 255,
     IPPROTO_MAX = 256,
-    IPPROTO_RESERVED_RAW  = 257,
+    IPPROTO_RESERVED_RAW = 257,
     IPPROTO_RESERVED_IPSEC = 258,
     IPPROTO_RESERVED_IPSECOFFLOAD = 259,
     IPPROTO_RESERVED_WNV = 260,

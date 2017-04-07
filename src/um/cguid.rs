@@ -1,12 +1,10 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
-// except according to those terms.
-// Done as of 10.0.14393.0
+// except according to those terms
 // Some of these definitions are commented out because I could not find their value
-use shared::guiddef::GUID;
 DEFINE_GUID!{GUID_NULL,
     0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
 DEFINE_GUID!{CATID_MARSHALER,

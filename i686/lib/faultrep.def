@@ -1,0 +1,12 @@
+LIBRARY faultrep.dll
+EXPORTS
+ReportActivationHang@12 @1
+AddERExcludedApplicationA@4
+AddERExcludedApplicationW@4
+CancelHangReporting@4
+ReportFault@8
+ReportHang@8
+WerReportHang@8
+WerpGetDebugger@8
+WerpInitiateCrashReporting@32
+WerpLaunchAeDebug@20

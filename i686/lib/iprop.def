@@ -1,0 +1,10 @@
+LIBRARY IPROP.dll
+EXPORTS
+FmtIdToPropStgName
+FreePropVariantArray
+PropStgNameToFmtId
+PropVariantClear
+PropVariantCopy
+StgCreatePropSetStg
+StgCreatePropStg
+StgOpenPropStg

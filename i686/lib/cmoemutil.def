@@ -1,0 +1,10 @@
+LIBRARY CmOemUtil.dll
+EXPORTS
+ActivateCellularConnection@16
+CmUtilSetWiFiActive@4
+CmUtilSetWiFiDormant@4
+DeactivateCellularConnection@4
+GetConnectionInterfaceIndex@8
+IsRestrictBackgroundDataAlways@0
+IsRestrictBackgroundDataNearLimit@0
+IsRestrictBackgroundDataRoaming@0

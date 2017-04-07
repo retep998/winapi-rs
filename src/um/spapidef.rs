@@ -1,14 +1,12 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Public header file for Windows NT Setup and Device Installer services Dlls
-// Done as of 10.0.14393.
-use shared::minwindef::{DWORD};
-use um::winnt::{DWORDLONG};
-
+use shared::minwindef::DWORD;
+use um::winnt::DWORDLONG;
 pub type SP_LOG_TOKEN = DWORDLONG;
 pub type PSP_LOG_TOKEN = *mut DWORDLONG;
 pub const LOGTOKEN_TYPE_MASK: SP_LOG_TOKEN = 3;
@@ -32,9 +30,9 @@ pub const TXTLOG_DEPTH_INCR: DWORD = 0x00020000;
 pub const TXTLOG_DEPTH_DECR: DWORD = 0x00040000;
 pub const TXTLOG_TAB_1: DWORD = 0x00080000;
 pub const TXTLOG_FLUSH_FILE: DWORD = 0x00100000;
-#[inline] #[allow(dead_code)]
+#[inline]
 pub fn TXTLOG_LEVEL(flags: DWORD) -> DWORD {
-    return flags & 0xf;
+    flags & 0xf
 }
 pub const TXTLOG_DEVINST: DWORD = 0x00000001;
 pub const TXTLOG_INF: DWORD = 0x00000002;

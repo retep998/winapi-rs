@@ -1,4 +1,4 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -6,12 +6,13 @@
 // except according to those terms.
 use shared::basetsd::ULONG_PTR;
 use shared::sspi::SECURITY_STATUS;
-
 pub type NCRYPT_HANDLE = ULONG_PTR;
 pub type NCRYPT_PROV_HANDLE = ULONG_PTR;
 pub type NCRYPT_KEY_HANDLE = ULONG_PTR;
 pub type NCRYPT_HASH_HANDLE = ULONG_PTR;
 pub type NCRYPT_SECRET_HANDLE = ULONG_PTR;
-EXTERN!{stdcall fn NCryptFreeObject(
-    hObject: NCRYPT_HANDLE
-) -> SECURITY_STATUS}
+extern "system" {
+    pub fn NCryptFreeObject(
+        hObject: NCRYPT_HANDLE,
+    ) -> SECURITY_STATUS;
+}

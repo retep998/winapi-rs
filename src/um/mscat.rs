@@ -1,13 +1,15 @@
-// Copyright © 2015, skdltmxn
-// Licensed under the MIT License <LICENSE.md>
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 //! Microsoft Internet Security Catalog API Prototypes and Definitions
-
 use shared::guiddef::GUID;
 use shared::minwindef::DWORD;
 use um::mssip::SIP_INDIRECT_DATA;
-use um::wincrypt::{HCRYPTMSG, HCRYPTPROV, CRYPT_ATTR_BLOB};
+use um::wincrypt::{CRYPT_ATTR_BLOB, HCRYPTMSG, HCRYPTPROV};
 use um::winnt::{HANDLE, LPWSTR};
-
 STRUCT!{struct CRYPTCATSTORE {
     cbStruct: DWORD,
     dwPublicVersion: DWORD,

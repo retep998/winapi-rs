@@ -1,0 +1,11 @@
+LIBRARY ImgUtil.dll
+EXPORTS
+ComputeInvCMAP@16
+CreateDDrawSurfaceOnDIB@8
+CreateMIMEMap@4
+DecodeImage@12
+DecodeImageEx@16
+DitherTo8@56
+GetMaxMIMEIDBytes@4
+IdentifyMIMEType@12
+SniffStream@12

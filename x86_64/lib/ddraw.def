@@ -1,0 +1,15 @@
+LIBRARY DDRAW.dll
+EXPORTS
+DDGetAttachedSurfaceLcl
+DDInternalLock
+DDInternalUnlock
+DSoundHelp
+DirectDrawCreate
+DirectDrawCreateClipper
+DirectDrawCreateEx
+DirectDrawEnumerateA
+DirectDrawEnumerateExA
+DirectDrawEnumerateExW
+DirectDrawEnumerateW
+GetDDSurfaceLocal
+GetSurfaceFromDC

@@ -1,12 +1,11 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Type definitions for the basic sized types.
-// Done as of 10.0.14393.0
-use ctypes::{ __int64, __uint64, c_int, c_schar, c_short, c_uchar, c_uint, c_ushort };
+use ctypes::{__int64, __uint64, c_int, c_schar, c_short, c_uchar, c_uint, c_ushort};
 pub type POINTER_64_INT = usize;
 pub type INT8 = c_schar;
 pub type PINT8 = *mut c_schar;

@@ -1,0 +1,4 @@
+LIBRARY audioeng.dll
+EXPORTS
+AERT_Allocate
+AERT_Free

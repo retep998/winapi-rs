@@ -1,0 +1,32 @@
+LIBRARY certadm.dll
+EXPORTS
+CertSrvBackupClose@4 @5
+CertSrvBackupEnd@4 @6
+CertSrvBackupFree@4 @15
+CertSrvBackupGetBackupLogsW@12 @7
+CertSrvBackupGetDatabaseNamesW@12 @8
+CertSrvBackupGetDynamicFileListW@12 @14
+CertSrvBackupOpenFileW@16 @9
+CertSrvBackupPrepareW@16 @10
+CertSrvBackupRead@16 @11
+CertSrvBackupTruncateLogs@4 @12
+CertSrvIsServerOnlineW@8 @13
+CertSrvRestoreEnd@4 @21
+CertSrvRestoreGetDatabaseLocationsW@12 @17
+CertSrvRestorePrepareW@12 @18
+CertSrvRestoreRegisterComplete@8 @20
+CertSrvRestoreRegisterThroughFile@32 @22
+CertSrvRestoreRegisterW@32 @19
+CertSrvServerControlW@16 @16
+CreatePerfObject@4 @203
+CreatePerfObjectWithAlias@8 @209
+DecrementPerfCounter@8 @207
+DeletePerfObject@4 @204
+IncrementPerfCounter@8 @206
+InitPerfMon@4 @201
+ResetPerfObjectList@0 @205
+UninitPerfMon@0 @202
+UpdatePerfCounter@12 @208
+_ClosePerfMon@0
+_CollectPerfMon@16
+_OpenPerfMon@4

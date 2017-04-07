@@ -1,0 +1,6 @@
+LIBRARY COMPSTUI.dll
+EXPORTS
+CommonPropertySheetUIA@16
+CommonPropertySheetUIW@16
+GetCPSUIUserData@4
+SetCPSUIUserData@8

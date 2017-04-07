@@ -1,0 +1,3 @@
+LIBRARY framedyd.dll
+EXPORTS
+_DoCmd@16

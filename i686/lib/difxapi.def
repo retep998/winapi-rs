@@ -1,0 +1,14 @@
+LIBRARY DIFXAPI.dll
+EXPORTS
+DIFXAPISetLogCallbackA@8
+DIFXAPISetLogCallbackW@8
+DriverPackageGetPathA@12
+DriverPackageGetPathW@12
+DriverPackageInstallA@16
+DriverPackageInstallW@16
+DriverPackagePreinstallA@8
+DriverPackagePreinstallW@8
+DriverPackageUninstallA@16
+DriverPackageUninstallW@16
+SetDifxLogCallbackA@8
+SetDifxLogCallbackW@8

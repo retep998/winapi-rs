@@ -1,0 +1,4 @@
+LIBRARY easwrt.dll
+EXPORTS
+EasRegisterEncryptionProvider@4
+EasUnRegisterEncryptionProvider@0

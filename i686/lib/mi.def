@@ -1,0 +1,3 @@
+LIBRARY mi.dll
+EXPORTS
+MI_Application_InitializeV1

@@ -1,14 +1,18 @@
-// Copyright © 2015, Dmitry Roschin
-// Licensed under the MIT License <LICENSE.md>
-use ctypes::{c_char};
-use shared::basetsd::{UINT64, SIZE_T};
+// Copyright © 2015-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
+use ctypes::c_char;
+use shared::basetsd::{SIZE_T, UINT64};
 use shared::minwindef::{BOOL, UINT};
-use um::d3d12::{ID3D12Resource};
+use um::d3d12::ID3D12Resource;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
-
-RIDL!{interface ID3D12Debug(ID3D12DebugVtbl): IUnknown(IUnknownVtbl) {
-    fn EnableDebugLayer(&self) -> ()
+RIDL!{#[uuid(0x344488b7, 0x6846, 0x474b, 0xb9, 0x89, 0xf0, 0x27, 0x44, 0x82, 0x45, 0xe0)]
+interface ID3D12Debug(ID3D12DebugVtbl): IUnknown(IUnknownVtbl) {
+    fn EnableDebugLayer() -> (),
 }}
 ENUM!{enum D3D12_DEBUG_FEATURE {
     D3D12_DEBUG_FEATURE_NONE = 0,
@@ -21,22 +25,35 @@ ENUM!{enum D3D12_RLDO_FLAGS {
     D3D12_RLDO_DETAIL = 0x2,
     D3D12_RLDO_IGNORE_INTERNAL = 0x4,
 }}
-RIDL!{interface ID3D12DebugDevice(ID3D12DebugDeviceVtbl): IUnknown(IUnknownVtbl) {
-    fn SetFeatureMask(&self, Mask: D3D12_DEBUG_FEATURE) -> HRESULT,
-    fn GetFeatureMask(&self) -> D3D12_DEBUG_FEATURE,
-    fn ReportLiveDeviceObjects(&self, Flags: D3D12_RLDO_FLAGS) -> HRESULT
+RIDL!{#[uuid(0x3febd6dd, 0x4973, 0x4787, 0x81, 0x94, 0xe4, 0x5f, 0x9e, 0x28, 0x92, 0x3e)]
+interface ID3D12DebugDevice(ID3D12DebugDeviceVtbl): IUnknown(IUnknownVtbl) {
+    fn SetFeatureMask(
+        Mask: D3D12_DEBUG_FEATURE,
+    ) -> HRESULT,
+    fn GetFeatureMask() -> D3D12_DEBUG_FEATURE,
+    fn ReportLiveDeviceObjects(
+        Flags: D3D12_RLDO_FLAGS,
+    ) -> HRESULT,
 }}
-RIDL!{interface ID3D12DebugCommandQueue(ID3D12DebugCommandQueueVtbl): IUnknown(IUnknownVtbl) {
+RIDL!{#[uuid(0x09e0bf36, 0x54ac, 0x484f, 0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3a)]
+interface ID3D12DebugCommandQueue(ID3D12DebugCommandQueueVtbl): IUnknown(IUnknownVtbl) {
     fn AssertResourceState(
-        &self, pResource: *mut ID3D12Resource, Subresource: UINT, State: UINT
-    ) -> BOOL
-}}
-RIDL!{interface ID3D12DebugCommandList(ID3D12DebugCommandListVtbl): IUnknown(IUnknownVtbl) {
-    fn AssertResourceState(
-        &self, pResource: *mut ID3D12Resource, Subresource: UINT, State: UINT
+        pResource: *mut ID3D12Resource,
+        Subresource: UINT,
+        State: UINT,
     ) -> BOOL,
-    fn SetFeatureMask(&self, Mask: D3D12_DEBUG_FEATURE) -> HRESULT,
-    fn GetFeatureMask(&self) -> D3D12_DEBUG_FEATURE
+}}
+RIDL!{#[uuid(0x09e0bf36, 0x54ac, 0x484f, 0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3f)]
+interface ID3D12DebugCommandList(ID3D12DebugCommandListVtbl): IUnknown(IUnknownVtbl) {
+    fn AssertResourceState(
+        pResource: *mut ID3D12Resource,
+        Subresource: UINT,
+        State: UINT,
+    ) -> BOOL,
+    fn SetFeatureMask(
+        Mask: D3D12_DEBUG_FEATURE,
+    ) -> HRESULT,
+    fn GetFeatureMask() -> D3D12_DEBUG_FEATURE,
 }}
 ENUM!{enum D3D12_MESSAGE_CATEGORY {
     D3D12_MESSAGE_CATEGORY_APPLICATION_DEFINED = 0,
@@ -142,7 +159,8 @@ ENUM!{enum D3D12_MESSAGE_ID {
     D3D12_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDOUTPUTSLOT = 80,
     D3D12_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_ONLYONEELEMENTPERSLOT = 81,
     D3D12_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDCOMPONENTCOUNT = 82,
-    D3D12_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSTARTCOMPONENTANDCOMPONENTCOUNT = 83,
+    D3D12_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSTARTCOMPONENTANDCOMPONENTCOUNT
+        = 83,
     D3D12_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDGAPDEFINITION = 84,
     D3D12_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_REPEATEDOUTPUT = 85,
     D3D12_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDOUTPUTSTREAMSTRIDE = 86,
@@ -477,8 +495,10 @@ ENUM!{enum D3D12_MESSAGE_ID {
     D3D12_MESSAGE_ID_DEVICE_CREATEDOMAINSHADER_SHADEREXTENSIONSNOTSUPPORTED = 415,
     D3D12_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_DOUBLEEXTENSIONSNOTSUPPORTED = 416,
     D3D12_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_SHADEREXTENSIONSNOTSUPPORTED = 417,
-    D3D12_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_DOUBLEEXTENSIONSNOTSUPPORTED = 418,
-    D3D12_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_SHADEREXTENSIONSNOTSUPPORTED = 419,
+    D3D12_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_DOUBLEEXTENSIONSNOTSUPPORTED
+        = 418,
+    D3D12_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_SHADEREXTENSIONSNOTSUPPORTED
+        = 419,
     D3D12_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_DOUBLEEXTENSIONSNOTSUPPORTED = 420,
     D3D12_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_SHADEREXTENSIONSNOTSUPPORTED = 421,
     D3D12_MESSAGE_ID_DEVICE_CREATECOMPUTESHADER_DOUBLEEXTENSIONSNOTSUPPORTED = 422,
@@ -734,7 +754,8 @@ ENUM!{enum D3D12_MESSAGE_ID {
     D3D12_MESSAGE_ID_CREATEGRAPHICSPIPELINESTATE_INVALID_USE_OF_FORCED_SAMPLE_COUNT = 672,
     D3D12_MESSAGE_ID_CREATEGRAPHICSPIPELINESTATE_INVALID_PRIMITIVETOPOLOGY = 673,
     D3D12_MESSAGE_ID_CREATEGRAPHICSPIPELINESTATE_INVALID_SYSTEMVALUE = 674,
-    D3D12_MESSAGE_ID_CREATEGRAPHICSPIPELINESTATE_OM_DUAL_SOURCE_BLENDING_CAN_ONLY_HAVE_RENDER_TARGET_0 = 675,
+    D3D12_MESSAGE_ID_CREATEGRAPHICSPIPELINESTATE_OM_DUAL_SOURCE_BLENDING_CAN_ONLY_HAVE_RENDER_TARGET_0
+        = 675,
     D3D12_MESSAGE_ID_CREATEGRAPHICSPIPELINESTATE_OM_RENDER_TARGET_DOES_NOT_SUPPORT_BLENDING = 676,
     D3D12_MESSAGE_ID_CREATEGRAPHICSPIPELINESTATE_PS_OUTPUT_TYPE_MISMATCH = 677,
     D3D12_MESSAGE_ID_CREATEGRAPHICSPIPELINESTATE_OM_RENDER_TARGET_DOES_NOT_SUPPORT_LOGIC_OPS = 678,
@@ -1015,56 +1036,86 @@ STRUCT!{struct D3D12_INFO_QUEUE_FILTER {
     DenyList: D3D12_INFO_QUEUE_FILTER_DESC,
 }}
 pub const D3D12_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT: UINT = 1024;
-RIDL!{interface ID3D12InfoQueue(ID3D12InfoQueueVtbl): IUnknown(IUnknownVtbl) {
-    fn SetMessageCountLimit(&self, MessageCountLimit: UINT64) -> HRESULT,
-    fn ClearStoredMessages(&self) -> (),
+RIDL!{#[uuid(0x0742a90b, 0xc387, 0x483f, 0xb9, 0x46, 0x30, 0xa7, 0xe4, 0xe6, 0x14, 0x58)]
+interface ID3D12InfoQueue(ID3D12InfoQueueVtbl): IUnknown(IUnknownVtbl) {
+    fn SetMessageCountLimit(
+        MessageCountLimit: UINT64,
+    ) -> HRESULT,
+    fn ClearStoredMessages() -> (),
     fn GetMessage(
-        &self, MessageIndex: UINT64, pMessage: *mut D3D12_MESSAGE,
-        pMessageByteLength: *mut SIZE_T
+        MessageIndex: UINT64,
+        pMessage: *mut D3D12_MESSAGE,
+        pMessageByteLength: *mut SIZE_T,
     ) -> HRESULT,
-    fn GetNumMessagesAllowedByStorageFilter(&self) -> UINT64,
-    fn GetNumMessagesDeniedByStorageFilter(&self) -> UINT64,
-    fn GetNumStoredMessages(&self) -> UINT64,
-    fn GetNumStoredMessagesAllowedByRetrievalFilter(&self) -> UINT64,
-    fn GetNumMessagesDiscardedByMessageCountLimit(&self) -> UINT64,
-    fn GetMessageCountLimit(&self) -> UINT64,
-    fn AddStorageFilterEntries(&self, pFilter: *mut D3D12_INFO_QUEUE_FILTER) -> HRESULT,
+    fn GetNumMessagesAllowedByStorageFilter() -> UINT64,
+    fn GetNumMessagesDeniedByStorageFilter() -> UINT64,
+    fn GetNumStoredMessages() -> UINT64,
+    fn GetNumStoredMessagesAllowedByRetrievalFilter() -> UINT64,
+    fn GetNumMessagesDiscardedByMessageCountLimit() -> UINT64,
+    fn GetMessageCountLimit() -> UINT64,
+    fn AddStorageFilterEntries(
+        pFilter: *mut D3D12_INFO_QUEUE_FILTER,
+    ) -> HRESULT,
     fn GetStorageFilter(
-        &self, pFilter: *mut D3D12_INFO_QUEUE_FILTER, pFilterByteLength: *mut SIZE_T
+        pFilter: *mut D3D12_INFO_QUEUE_FILTER,
+        pFilterByteLength: *mut SIZE_T,
     ) -> HRESULT,
-    fn ClearStorageFilter(&self) -> (),
-    fn PushEmptyStorageFilter(&self) -> HRESULT,
-    fn PushCopyOfStorageFilter(&self) -> HRESULT,
-    fn PushStorageFilter(&self, pFilter: *mut D3D12_INFO_QUEUE_FILTER) -> HRESULT,
-    fn PopStorageFilter(&self) -> (),
-    fn GetStorageFilterStackSize(&self) -> UINT,
-    fn AddRetrievalFilterEntries(&self, pFilter: *mut D3D12_INFO_QUEUE_FILTER) -> HRESULT,
+    fn ClearStorageFilter() -> (),
+    fn PushEmptyStorageFilter() -> HRESULT,
+    fn PushCopyOfStorageFilter() -> HRESULT,
+    fn PushStorageFilter(
+        pFilter: *mut D3D12_INFO_QUEUE_FILTER,
+    ) -> HRESULT,
+    fn PopStorageFilter() -> (),
+    fn GetStorageFilterStackSize() -> UINT,
+    fn AddRetrievalFilterEntries(
+        pFilter: *mut D3D12_INFO_QUEUE_FILTER,
+    ) -> HRESULT,
     fn GetRetrievalFilter(
-        &self, pFilter: *mut D3D12_INFO_QUEUE_FILTER, pFilterByteLength: *mut SIZE_T
+        pFilter: *mut D3D12_INFO_QUEUE_FILTER,
+        pFilterByteLength: *mut SIZE_T,
     ) -> HRESULT,
-    fn ClearRetrievalFilter(&self) -> (),
-    fn PushEmptyRetrievalFilter(&self) -> HRESULT,
-    fn PushCopyOfRetrievalFilter(&self) -> HRESULT,
-    fn PushRetrievalFilter(&self, pFilter: *mut D3D12_INFO_QUEUE_FILTER) -> HRESULT,
-    fn PopRetrievalFilter(&self) -> (),
-    fn GetRetrievalFilterStackSize(&self) -> UINT,
+    fn ClearRetrievalFilter() -> (),
+    fn PushEmptyRetrievalFilter() -> HRESULT,
+    fn PushCopyOfRetrievalFilter() -> HRESULT,
+    fn PushRetrievalFilter(
+        pFilter: *mut D3D12_INFO_QUEUE_FILTER,
+    ) -> HRESULT,
+    fn PopRetrievalFilter() -> (),
+    fn GetRetrievalFilterStackSize() -> UINT,
     fn AddMessage(
-        &self, Category: D3D12_MESSAGE_CATEGORY, Severity: D3D12_MESSAGE_SEVERITY,
-        ID: D3D12_MESSAGE_ID, pDescription: LPCSTR
+        Category: D3D12_MESSAGE_CATEGORY,
+        Severity: D3D12_MESSAGE_SEVERITY,
+        ID: D3D12_MESSAGE_ID,
+        pDescription: LPCSTR,
     ) -> HRESULT,
     fn AddApplicationMessage(
-        &self, Severity: D3D12_MESSAGE_SEVERITY, pDescription: LPCSTR
+        Severity: D3D12_MESSAGE_SEVERITY,
+        pDescription: LPCSTR,
     ) -> HRESULT,
     fn SetBreakOnCategory(
-        &self, Category: D3D12_MESSAGE_CATEGORY, bEnable: BOOL
+        Category: D3D12_MESSAGE_CATEGORY,
+        bEnable: BOOL,
     ) -> HRESULT,
     fn SetBreakOnSeverity(
-        &self, Severity: D3D12_MESSAGE_SEVERITY, bEnable: BOOL
+        Severity: D3D12_MESSAGE_SEVERITY,
+        bEnable: BOOL,
     ) -> HRESULT,
-    fn SetBreakOnID(&self, ID: D3D12_MESSAGE_ID, bEnable: BOOL) -> HRESULT,
-    fn GetBreakOnCategory(&self, Category: D3D12_MESSAGE_CATEGORY) -> BOOL,
-    fn GetBreakOnSeverity(&self, Severity: D3D12_MESSAGE_SEVERITY) -> BOOL,
-    fn GetBreakOnID(&self, ID: D3D12_MESSAGE_ID) -> BOOL,
-    fn SetMuteDebugOutput(&self, bMute: BOOL) -> (),
-    fn GetMuteDebugOutput(&self) -> BOOL
+    fn SetBreakOnID(
+        ID: D3D12_MESSAGE_ID,
+        bEnable: BOOL,
+    ) -> HRESULT,
+    fn GetBreakOnCategory(
+        Category: D3D12_MESSAGE_CATEGORY,
+    ) -> BOOL,
+    fn GetBreakOnSeverity(
+        Severity: D3D12_MESSAGE_SEVERITY,
+    ) -> BOOL,
+    fn GetBreakOnID(
+        ID: D3D12_MESSAGE_ID,
+    ) -> BOOL,
+    fn SetMuteDebugOutput(
+        bMute: BOOL,
+    ) -> (),
+    fn GetMuteDebugOutput() -> BOOL,
 }}

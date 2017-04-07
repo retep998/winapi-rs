@@ -1,0 +1,16 @@
+LIBRARY fhsvcctl.dll
+EXPORTS
+DllMain@12
+FhQueryConfiguredUsersCount@4
+FhServiceBlockBackup@4
+FhServiceClearProtectionState@12
+FhServiceClosePipe@4
+FhServiceEnterMaintenanceMode@8
+FhServiceExitMaintenanceMode@4
+FhServiceMigrationFinished@4
+FhServiceMigrationStarting@4
+FhServiceOpenPipe@8
+FhServiceReloadConfiguration@4
+FhServiceStartBackup@8
+FhServiceStopBackup@8
+FhServiceUnblockBackup@4

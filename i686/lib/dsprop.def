@@ -1,0 +1,12 @@
+LIBRARY dsprop.dll
+EXPORTS
+ADsPropCheckIfWritable@8
+ADsPropCreateNotifyObj@12
+ADsPropGetInitInfo@8
+ADsPropSendErrorMessage@8
+ADsPropSetHwnd@8
+ADsPropSetHwndWithTitle@12
+ADsPropShowErrorDialog@8
+BringSheetToForeground@8
+IsSheetAlreadyUp@4
+PostADsPropSheet@16

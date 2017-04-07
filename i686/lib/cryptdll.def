@@ -1,0 +1,22 @@
+LIBRARY cryptdll.dll
+EXPORTS
+CDBuildIntegrityVect@8
+CDBuildVect@8
+CDFindCommonCSystem@12
+CDFindCommonCSystemWithKey@20
+CDGenerateRandomBits@8
+CDGetIntegrityVect@4
+CDLocateCSystem@8
+CDLocateCheckSum@8
+CDLocateRng@8
+CDRegisterCSystem@4
+CDRegisterCheckSum@4
+CDRegisterRng@4
+HMACwithSHA@24
+KRBFXCF2@44
+MD5Final@4
+MD5Init@4
+MD5Update@12
+PBKDF2@28
+aesCTSDecryptMsg@20
+aesCTSEncryptMsg@20

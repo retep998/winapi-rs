@@ -26,10 +26,6 @@ extern "system" {
         pAcl: PACL, dwAceRevision: DWORD, AceFlags: DWORD, AccessMask: DWORD, pSid: PSID,
     ) -> BOOL;
     pub fn AddSecureMemoryCacheCallback(pfnCallBack: PSECURE_MEMORY_CACHE_CALLBACK) -> BOOL;
-    pub fn AddVectoredContinueHandler(First: ULONG, Handler: PVECTORED_EXCEPTION_HANDLER) -> PVOID;
-    pub fn AddVectoredExceptionHandler(
-        First: ULONG, Handler: PVECTORED_EXCEPTION_HANDLER,
-    ) -> PVOID;
     pub fn AllocateUserPhysicalPages(
         hProcess: HANDLE, NumberOfPages: PULONG_PTR, PageArray: PULONG_PTR,
     ) -> BOOL;
@@ -354,11 +350,6 @@ extern "system" {
         lpCurrentDirectory: LPCWSTR, lpStartupInfo: LPSTARTUPINFOW,
         lpProcessInformation: LPPROCESS_INFORMATION,
     ) -> BOOL;
-    pub fn CreateRemoteThread(
-        hProcess: HANDLE, lpThreadAttributes: LPSECURITY_ATTRIBUTES, dwStackSize: SIZE_T,
-        lpStartAddress: LPTHREAD_START_ROUTINE, lpParameter: LPVOID, dwCreationFlags: DWORD,
-        lpThreadId: LPDWORD,
-    ) -> HANDLE;
     pub fn CreateRemoteThreadEx(
         hProcess: HANDLE, lpThreadAttributes: LPSECURITY_ATTRIBUTES, dwStackSize: SIZE_T,
         lpStartAddress: LPTHREAD_START_ROUTINE, lpParameter: LPVOID, dwCreationFlags: DWORD,
@@ -395,11 +386,6 @@ extern "system" {
     pub fn CreateTapePartition(
         hDevice: HANDLE, dwPartitionMethod: DWORD, dwCount: DWORD, dwSize: DWORD,
     ) -> DWORD;
-    pub fn CreateThread(
-        lpThreadAttributes: LPSECURITY_ATTRIBUTES, dwStackSize: SIZE_T,
-        lpStartAddress: LPTHREAD_START_ROUTINE, lpParameter: LPVOID, dwCreationFlags: DWORD,
-        lpThreadId: LPDWORD,
-    ) -> HANDLE;
     pub fn CreateThreadpool(reserved: PVOID) -> PTP_POOL;
     pub fn CreateThreadpoolCleanupGroup() -> PTP_CLEANUP_GROUP;
     pub fn CreateThreadpoolIo(
@@ -635,12 +621,8 @@ extern "system" {
     pub fn EscapeCommFunction(hFile: HANDLE, dwFunc: DWORD) -> BOOL;
     #[cfg(target_arch = "x86_64")]
     pub fn ExecuteUmsThread(UmsThread: PUMS_CONTEXT) -> BOOL;
-    pub fn ExitProcess(uExitCode: UINT);
-    pub fn ExitThread(dwExitCode: DWORD);
     pub fn ExpandEnvironmentStringsA(lpSrc: LPCSTR, lpDst: LPSTR, nSize: DWORD) -> DWORD;
     pub fn ExpandEnvironmentStringsW(lpSrc: LPCWSTR, lpDst: LPWSTR, nSize: DWORD) -> DWORD;
-    pub fn FatalAppExitA(uAction: UINT, lpMessageText: LPCSTR);
-    pub fn FatalAppExitW(uAction: UINT, lpMessageText: LPCWSTR);
     pub fn FatalExit(ExitCode: c_int);
     pub fn FileTimeToDosDateTime(
         lpFileTime: *const FILETIME, lpFatDate: LPWORD, lpFatTime: LPWORD,
@@ -876,12 +858,8 @@ extern "system" {
     // pub fn GetCurrentPackageId();
     // pub fn GetCurrentPackageInfo();
     // pub fn GetCurrentPackagePath();
-    pub fn GetCurrentProcess() -> HANDLE;
-    pub fn GetCurrentProcessId() -> DWORD;
     pub fn GetCurrentProcessorNumber() -> DWORD;
     pub fn GetCurrentProcessorNumberEx(ProcNumber: PPROCESSOR_NUMBER);
-    pub fn GetCurrentThread() -> HANDLE;
-    pub fn GetCurrentThreadId() -> DWORD;
     pub fn GetCurrentThreadStackLimits(LowLimit: PULONG_PTR, HighLimit: PULONG_PTR);
     #[cfg(target_arch = "x86_64")]
     pub fn GetCurrentUmsThread() -> PUMS_CONTEXT;
@@ -938,9 +916,6 @@ extern "system" {
     pub fn GetEnvironmentVariableA(lpName: LPCSTR, lpBuffer: LPSTR, nSize: DWORD) -> DWORD;
     pub fn GetEnvironmentVariableW(lpName: LPCWSTR, lpBuffer: LPWSTR, nSize: DWORD) -> DWORD;
     // pub fn GetEraNameCountedString();
-    pub fn GetErrorMode() -> UINT;
-    pub fn GetExitCodeProcess(hProcess: HANDLE, lpExitCode: LPDWORD) -> BOOL;
-    pub fn GetExitCodeThread(hThread: HANDLE, lpExitCode: LPDWORD) -> BOOL;
     pub fn GetFileAttributesA(lpFileName: LPCSTR) -> DWORD;
     pub fn GetFileAttributesExA(
         lpFileName: LPCSTR, fInfoLevelId: GET_FILEEX_INFO_LEVELS, lpFileInformation: LPVOID,
@@ -1023,7 +998,6 @@ extern "system" {
         Location: GEOID, GeoType: GEOTYPE, lpGeoData: LPWSTR, cchData: c_int, LangId: LANGID,
     ) -> c_int;
     pub fn GetLargePageMinimum() -> SIZE_T;
-    pub fn GetLastError() -> DWORD;
     pub fn GetLocalTime(lpSystemTime: LPSYSTEMTIME);
     pub fn GetLocaleInfoA(
         Locale: LCID, LCType: LCTYPE, lpLCData: LPSTR, cchData: c_int,
@@ -1068,14 +1042,6 @@ extern "system" {
     pub fn GetModuleFileNameW(
         hModule: HMODULE, lpFilename: LPWSTR, nSize: DWORD,
     ) -> DWORD;
-    pub fn GetModuleHandleA(lpModuleName: LPCSTR) -> HMODULE;
-    pub fn GetModuleHandleExA(
-        dwFlags: DWORD, lpModuleName: LPCSTR, phModule: *mut HMODULE,
-    ) -> BOOL;
-    pub fn GetModuleHandleExW(
-        dwFlags: DWORD, lpModuleName: LPCWSTR, phModule: *mut HMODULE,
-    ) -> BOOL;
-    pub fn GetModuleHandleW(lpModuleName: LPCWSTR) -> HMODULE;
     pub fn GetNLSVersion(
         Function: NLS_FUNCTION, Locale: LCID, lpVersionInformation: LPNLSVERSIONINFO,
     ) -> BOOL;
@@ -1211,10 +1177,6 @@ extern "system" {
     ) -> BOOL;
     pub fn GetProcessPriorityBoost(hProcess: HANDLE, pDisablePriorityBoost: PBOOL) -> BOOL;
     pub fn GetProcessShutdownParameters(lpdwLevel: LPDWORD, lpdwFlags: LPDWORD) -> BOOL;
-    pub fn GetProcessTimes(
-        hProcess: HANDLE, lpCreationTime: LPFILETIME, lpExitTime: LPFILETIME,
-        lpKernelTime: LPFILETIME, lpUserTime: LPFILETIME,
-    ) -> BOOL;
     pub fn GetProcessVersion(ProcessId: DWORD) -> DWORD;
     pub fn GetProcessWorkingSetSize(
         hProcess: HANDLE, lpMinimumWorkingSetSize: PSIZE_T, lpMaximumWorkingSetSize: PSIZE_T,
@@ -1328,7 +1290,6 @@ extern "system" {
     pub fn GetTempPathA(nBufferLength: DWORD, lpBuffer: LPSTR) -> DWORD;
     pub fn GetTempPathW(nBufferLength: DWORD, lpBuffer: LPWSTR) -> DWORD;
     pub fn GetThreadContext(hThread: HANDLE, lpContext: LPCONTEXT) -> BOOL;
-    pub fn GetThreadErrorMode() -> DWORD;
     pub fn GetThreadGroupAffinity(hThread: HANDLE, GroupAffinity: PGROUP_AFFINITY) -> BOOL;
     pub fn GetThreadIOPendingFlag(hThread: HANDLE, lpIOIsPending: PBOOL) -> BOOL;
     pub fn GetThreadId(Thread: HANDLE) -> DWORD;
@@ -1342,8 +1303,6 @@ extern "system" {
         dwFlags: DWORD, pulNumLanguages: PULONG, pwszLanguagesBuffer: PZZWSTR,
         pcchLanguagesBuffer: PULONG,
     ) -> BOOL;
-    pub fn GetThreadPriority(hThread: HANDLE) -> c_int;
-    pub fn GetThreadPriorityBoost(hThread: HANDLE, pDisablePriorityBoost: PBOOL) -> BOOL;
     pub fn GetThreadSelectorEntry(
         hThread: HANDLE, dwSelector: DWORD, lpSelectorEntry: LPLDT_ENTRY,
     ) -> BOOL;
@@ -1782,7 +1741,6 @@ extern "system" {
     pub fn OpenSemaphoreW(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR) -> HANDLE;
     // pub fn OpenState();
     // pub fn OpenStateExplicit();
-    pub fn OpenThread(dwDesiredAccess: DWORD, bInheritHandle: BOOL, dwThreadId: DWORD) -> HANDLE;
     pub fn OpenWaitableTimerA(
         dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpTimerName: LPCSTR,
     ) -> HANDLE;
@@ -1894,17 +1852,9 @@ extern "system" {
         UmsThreadInformation: PVOID, UmsThreadInformationLength: ULONG, ReturnLength: PULONG,
     ) -> BOOL;
     pub fn QueryUnbiasedInterruptTime(UnbiasedTime: PULONGLONG) -> BOOL;
-    pub fn QueueUserAPC(pfnAPC: PAPCFUNC, hThread: HANDLE, dwData: ULONG_PTR) -> DWORD;
     pub fn QueueUserWorkItem(
         Function: LPTHREAD_START_ROUTINE, Context: PVOID, Flags: ULONG,
     ) -> BOOL;
-    pub fn RaiseException(
-        dwExceptionCode: DWORD, dwExceptionFlags: DWORD, nNumberOfArguments: DWORD,
-        lpArguments: *const ULONG_PTR,
-    );
-    pub fn RaiseFailFastException(
-        pExceptionRecord: PEXCEPTION_RECORD, pContextRecord: PCONTEXT, dwFlags: DWORD,
-    );
     pub fn ReOpenFile(
         hOriginalFile: HANDLE, dwDesiredAccess: DWORD, dwShareMode: DWORD, dwFlags: DWORD,
     ) -> HANDLE;
@@ -1967,8 +1917,6 @@ extern "system" {
     // pub fn RemoveLocalAlternateComputerNameA();
     // pub fn RemoveLocalAlternateComputerNameW();
     pub fn RemoveSecureMemoryCacheCallback(pfnCallBack: PSECURE_MEMORY_CACHE_CALLBACK) -> BOOL;
-    pub fn RemoveVectoredContinueHandler(Handle: PVOID) -> ULONG;
-    pub fn RemoveVectoredExceptionHandler(Handle: PVOID) -> ULONG;
     pub fn ReplaceFileA(
         lpReplacedFileName: LPCSTR, lpReplacementFileName: LPCSTR, lpBackupFileName: LPCSTR,
         dwReplaceFlags: DWORD, lpExclude: LPVOID, lpReserved: LPVOID,
@@ -1990,7 +1938,6 @@ extern "system" {
         lpNameToResolve: LPCWSTR, lpLocaleName: LPWSTR, cchLocaleName: c_int,
     ) -> c_int;
     pub fn RestoreLastError(dwErrCode: DWORD);
-    pub fn ResumeThread(hThread: HANDLE) -> DWORD;
     #[cfg(target_arch = "arm")]
     pub fn RtlAddFunctionTable(
         FunctionTable: PRUNTIME_FUNCTION, EntryCount: DWORD, BaseAddress: DWORD,
@@ -2104,7 +2051,6 @@ extern "system" {
     pub fn SetEnvironmentStringsW(NewEnvironment: LPWCH) -> BOOL;
     pub fn SetEnvironmentVariableA(lpName: LPCSTR, lpValue: LPCSTR) -> BOOL;
     pub fn SetEnvironmentVariableW(lpName: LPCWSTR, lpValue: LPCWSTR) -> BOOL;
-    pub fn SetErrorMode(uMode: UINT) -> UINT;
     pub fn SetEvent(hEvent: HANDLE) -> BOOL;
     pub fn SetEventWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, evt: HANDLE);
     pub fn SetFileApisToANSI();
@@ -2160,7 +2106,6 @@ extern "system" {
         hJob: HANDLE, JobObjectInformationClass: JOBOBJECTINFOCLASS,
         lpJobObjectInformation: LPVOID, cbJobObjectInformationLength: DWORD,
     ) -> BOOL;
-    pub fn SetLastError(dwErrCode: DWORD);
     // pub fn SetLocalPrimaryComputerNameA();
     // pub fn SetLocalPrimaryComputerNameW();
     pub fn SetLocalTime(lpSystemTime: *const SYSTEMTIME) -> BOOL;
@@ -2220,7 +2165,6 @@ extern "system" {
     ) -> DWORD;
     pub fn SetThreadAffinityMask(hThread: HANDLE, dwThreadAffinityMask: DWORD_PTR) -> DWORD_PTR;
     pub fn SetThreadContext(hThread: HANDLE, lpContext: *const CONTEXT) -> BOOL;
-    pub fn SetThreadErrorMode(dwNewMode: DWORD, lpOldMode: LPDWORD) -> BOOL;
     pub fn SetThreadExecutionState(esFlags: EXECUTION_STATE) -> EXECUTION_STATE;
     pub fn SetThreadGroupAffinity(
         hThread: HANDLE, GroupAffinity: *const GROUP_AFFINITY,
@@ -2239,8 +2183,6 @@ extern "system" {
     pub fn SetThreadPreferredUILanguages(
         dwFlags: DWORD, pwszLanguagesBuffer: PCZZWSTR, pulNumLanguages: PULONG,
     ) -> BOOL;
-    pub fn SetThreadPriority(hThread: HANDLE, nPriority: c_int) -> BOOL;
-    pub fn SetThreadPriorityBoost(hThread: HANDLE, bDisablePriorityBoost: BOOL) -> BOOL;
     pub fn SetThreadStackGuarantee(StackSizeInBytes: PULONG) -> BOOL;
     pub fn SetThreadUILanguage(LangId: LANGID) -> LANGID;
     pub fn SetThreadpoolStackInformation(
@@ -2268,9 +2210,6 @@ extern "system" {
         UmsThread: PUMS_CONTEXT, UmsThreadInfoClass: UMS_THREAD_INFO_CLASS,
         UmsThreadInformation: PVOID, UmsThreadInformationLength: ULONG,
     ) -> BOOL;
-    pub fn SetUnhandledExceptionFilter(
-        lpTopLevelExceptionFilter: LPTOP_LEVEL_EXCEPTION_FILTER,
-    ) -> LPTOP_LEVEL_EXCEPTION_FILTER;
     pub fn SetUserGeoID(GeoId: GEOID) -> BOOL;
     pub fn SetVolumeLabelA(lpRootPathName: LPCSTR, lpVolumeName: LPCSTR) -> BOOL;
     pub fn SetVolumeLabelW(lpRootPathName: LPCWSTR, lpVolumeName: LPCWSTR) -> BOOL;
@@ -2304,9 +2243,7 @@ extern "system" {
     pub fn SleepEx(dwMilliseconds: DWORD, bAlertable: BOOL) -> DWORD;
     pub fn StartThreadpoolIo(pio: PTP_IO);
     pub fn SubmitThreadpoolWork(pwk: PTP_WORK);
-    pub fn SuspendThread(hThread: HANDLE) -> DWORD;
     pub fn SwitchToFiber(lpFiber: LPVOID);
-    pub fn SwitchToThread() -> BOOL;
     pub fn SystemTimeToFileTime(lpSystemTime: *const SYSTEMTIME, lpFileTime: LPFILETIME) -> BOOL;
     pub fn SystemTimeToTzSpecificLocalTime(
         lpTimeZoneInformation: *const TIME_ZONE_INFORMATION, lpUniversalTime: *const SYSTEMTIME,
@@ -2317,8 +2254,6 @@ extern "system" {
         lpUniversalTime: *const SYSTEMTIME, lpLocalTime: LPSYSTEMTIME,
     ) -> BOOL;
     pub fn TerminateJobObject(hJob: HANDLE, uExitCode: UINT) -> BOOL;
-    pub fn TerminateProcess(hProcess: HANDLE, uExitCode: UINT) -> BOOL;
-    pub fn TerminateThread(hThread: HANDLE, dwExitCode: DWORD) -> BOOL;
     pub fn Thread32First(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
     pub fn Thread32Next(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
     pub fn TlsAlloc() -> DWORD;
@@ -2349,7 +2284,6 @@ extern "system" {
     ) -> BOOL;
     #[cfg(target_arch = "x86_64")]
     pub fn UmsThreadYield(SchedulerParam: PVOID) -> BOOL;
-    pub fn UnhandledExceptionFilter(ExceptionInfo: *mut EXCEPTION_POINTERS) -> LONG;
     pub fn UnlockFile(
         hFile: HANDLE, dwFileOffsetLow: DWORD, dwFileOffsetHigh: DWORD,
         nNumberOfBytesToUnlockLow: DWORD, nNumberOfBytesToUnlockHigh: DWORD,

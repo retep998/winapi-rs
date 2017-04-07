@@ -1,0 +1,26 @@
+LIBRARY NTDSETUP.dll
+EXPORTS
+AdamFetchDemotionInfo@20
+AdamGetCrossRefs@16
+FreeDemotionInfo@4
+NtdsAdamValidateInst@20
+NtdsAdamValidateServiceAccount@8
+NtdsAdamVerifyBind@24
+NtdsCheckMachineAccountFlags@24
+NtdsDemote@8
+NtdsFreeDnsRRInfo@4
+NtdsGetDefaultDnsName@8
+NtdsInstall@16
+NtdsInstallCancel@0
+NtdsInstallReplicateFull@12
+NtdsInstallShutdown@0
+NtdsInstallUndo@0
+NtdsPrepareForDemotion@8
+NtdsPrepareForDemotionUndo@4
+NtdsPrepareForDsUpgrade@8
+NtdsSetReplicaMachineAccount@24
+NtdspConfigRegistry@8
+NtdspDNStoRFC1779Name@12
+NtdspFindSite@8
+NtdspValidateInstallParameters@4
+NtdspVerifyDsEnvironment@8

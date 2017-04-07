@@ -1,0 +1,14 @@
+LIBRARY iashlpr.dll
+EXPORTS
+AllocateAttributes@8
+ConfigureIas@0
+DoRequest@36
+DoRequestAsync@28
+FreeAttributes@8
+GetOptionIas@8
+InitializeIas@4
+MemAllocIas@4
+MemFreeIas@4
+MemReallocIas@8
+SetOptionIas@20
+ShutdownIas@0

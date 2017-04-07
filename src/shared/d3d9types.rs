@@ -1,17 +1,16 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Direct3D capabilities include file
-// Done as of 10.0.14393.0
-use ctypes::{ c_char, c_float, c_void };
+use ctypes::{c_char, c_float, c_void};
 use shared::basetsd::UINT64;
 use shared::guiddef::GUID;
-use shared::minwindef::{ BOOL, BYTE, DWORD, FLOAT, INT, UINT, USHORT, WORD };
+use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, UINT, USHORT, WORD};
 use shared::windef::HWND;
-use um::winnt::{ HANDLE, HRESULT, LARGE_INTEGER, LONG, SHORT };
+use um::winnt::{HANDLE, HRESULT, LARGE_INTEGER, LONG, SHORT};
 pub type D3DCOLOR = DWORD;
 STRUCT!{struct D3DVECTOR {
     x: c_float,

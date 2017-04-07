@@ -1,0 +1,14 @@
+LIBRARY RstrtMgr.DLL
+EXPORTS
+RmAddFilter
+RmCancelCurrentTask
+RmEndSession
+RmGetFilterList
+RmGetList
+RmJoinSession
+RmRegisterResources
+RmRemoveFilter
+RmReserveHeap
+RmRestart
+RmShutdown
+RmStartSession

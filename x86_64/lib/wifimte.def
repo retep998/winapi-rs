@@ -1,0 +1,20 @@
+LIBRARY WiFiMTE.dll
+EXPORTS
+DllMain
+WlanMTEAwake
+WlanMTECloseHandle
+WlanMTEEnumAdapters
+WlanMTEGetVendorInfo
+WlanMTEOpenHandle
+WlanMTEQueryADC
+WlanMTEQueryData
+WlanMTEQueryMacAddress
+WlanMTEQueryPhyTypes
+WlanMTEQuerySelfTestResult
+WlanMTERegisterCallbackHandler
+WlanMTEResetAdapter
+WlanMTERxSignal
+WlanMTESetData
+WlanMTESleep
+WlanMTEStartSelfTest
+WlanMTETxSignal

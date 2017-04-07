@@ -1,4 +1,4 @@
-// Copyright © 2016 winapi-rs developers
+// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -38,6 +38,7 @@ pub type LPCWCH = *const WCHAR;
 pub type PCWCH = *const WCHAR;
 pub type NWPSTR = *mut WCHAR;
 pub type LPWSTR = *mut WCHAR;
+pub type LPTSTR = LPSTR;
 pub type PWSTR = *mut WCHAR;
 pub type PZPWSTR = *mut PWSTR;
 pub type PCZPWSTR = *const PWSTR;
@@ -45,11 +46,11 @@ pub type LPUWSTR = *mut WCHAR; // Unaligned pointer
 pub type PUWSTR = *mut WCHAR; // Unaligned pointer
 pub type LPCWSTR = *const WCHAR;
 pub type PCWSTR = *const WCHAR;
-pub type PZPCWSTR= *mut PCWSTR;
+pub type PZPCWSTR = *mut PCWSTR;
 pub type PCZPCWSTR = *const PCWSTR;
 pub type LPCUWSTR = *const WCHAR; // Unaligned pointer
 pub type PCUWSTR = *const WCHAR; // Unaligned pointer
-pub type PZZWSTR= *mut WCHAR;
+pub type PZZWSTR = *mut WCHAR;
 pub type PCZZWSTR = *const WCHAR;
 pub type PUZZWSTR = *mut WCHAR; // Unaligned pointer
 pub type PCUZZWSTR = *const WCHAR; // Unaligned pointer
@@ -84,6 +85,7 @@ pub type PSTR = *mut CHAR;
 pub type PZPSTR = *mut PSTR;
 pub type PCZPSTR = *const PSTR;
 pub type LPCSTR = *const CHAR;
+pub type LPCTSTR = LPCSTR;
 pub type PCSTR = *const CHAR;
 pub type PZPCSTR = *mut PCSTR;
 pub type PCZPCSTR = *const PCSTR;
