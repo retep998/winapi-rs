@@ -285,8 +285,8 @@ interface ISpEventSource2(ISpEventSource2Vtbl): ISpEventSource(ISpEventSourceVtb
     fn GetEventsEx(
         ulCount: ULONG,
         pEventArray: *mut SPEVENTEX,
-        pulFetched: *mut ULONG
-    ) -> HRESULT
+        pulFetched: *mut ULONG,
+    ) -> HRESULT,
 });
 pub use um::sapi51::{
     ISpEventSink, ISpEventSinkVtbl,
@@ -488,63 +488,73 @@ interface ISpShortcut(ISpShortcutVtbl): IUnknown(IUnknownVtbl) {
         pszDisplay: LPCWSTR,
         LangID: WORD,
         pszSpoken: LPCWSTR,
-        shType: SPSHORTCUTTYPE
+        shType: SPSHORTCUTTYPE,
     ) -> HRESULT,
     fn RemoveShortcut(
         pszDisplay: LPCWSTR,
         LangID: WORD,
         pszSpoken: LPCWSTR,
-        shType: SPSHORTCUTTYPE
+        shType: SPSHORTCUTTYPE,
     ) -> HRESULT,
     fn GetShortcuts(
         LangId: WORD,
-        pShortcutpairList: *mut SPSHORTCUTPAIRLIST
+        pShortcutpairList: *mut SPSHORTCUTPAIRLIST,
     ) -> HRESULT,
-    fn GetGeneration(pdwGeneration: *mut DWORD) -> HRESULT,
+    fn GetGeneration(
+        pdwGeneration: *mut DWORD,
+    ) -> HRESULT,
     fn GetWordsFromGenerationChange(
         pdwGeneration: *mut DWORD,
-        pWordList: *mut SPWORDLIST
+        pWordList: *mut SPWORDLIST,
     ) -> HRESULT,
     fn GetWords(
         pdwGeneration: *mut DWORD,
         pdwCookie: *mut DWORD,
-        pWordList: *mut SPWORDLIST
+        pWordList: *mut SPWORDLIST,
     ) -> HRESULT,
     fn GetShortcutsForGeneration(
         pdwGeneration: *mut DWORD,
         pdwCookie: *mut DWORD,
-        pShortcutpairList: *mut SPSHORTCUTPAIRLIST
+        pShortcutpairList: *mut SPSHORTCUTPAIRLIST,
     ) -> HRESULT,
     fn GetGenerationChange(
         pdwGeneration: *mut DWORD,
-        pShortcutpairList: *mut SPSHORTCUTPAIRLIST
-    ) -> HRESULT
+        pShortcutpairList: *mut SPSHORTCUTPAIRLIST,
+    ) -> HRESULT,
 });
 pub use um::sapi51::{ISpPhoneConverter, ISpPhoneConverterVtbl};
 RIDL!(#[uuid(0x133adcd4, 0x19b4, 0x4020, 0x9f, 0xdc, 0x84, 0x2e, 0x78, 0x25, 0x3b, 0x17)]
 interface ISpPhoneticAlphabetConverter(ISpPhoneticAlphabetConverterVtbl): IUnknown(IUnknownVtbl) {
-    fn GetLangId(pLangID: *mut WORD) -> HRESULT,
-    fn SetLangId(LangID: WORD) -> HRESULT,
+    fn GetLangId(
+        pLangID: *mut WORD,
+    ) -> HRESULT,
+    fn SetLangId(
+        LangID: WORD,
+    ) -> HRESULT,
     fn SAPI2UPS(
         pszSAPIId: *const SPPHONEID,
         pszUPSId: *mut SPPHONEID,
-        cMaxLength: DWORD
+        cMaxLength: DWORD,
     ) -> HRESULT,
     fn UPS2SAPI(
         pszUPSId: *const SPPHONEID,
         pszSAPIId: *mut SPPHONEID,
-        cMaxLength: DWORD
+        cMaxLength: DWORD,
     ) -> HRESULT,
     fn GetMaxConvertLength(
         cSrcLength: DWORD,
         bSAPI2UPS: BOOL,
-        pcMaxDestLength: *mut DWORD
-    ) -> HRESULT
+        pcMaxDestLength: *mut DWORD,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xb2745efd, 0x42ce, 0x48ca, 0x81, 0xf1, 0xa9, 0x6e, 0x02, 0x53, 0x8a, 0x90)]
 interface ISpPhoneticAlphabetSelection(ISpPhoneticAlphabetSelectionVtbl): IUnknown(IUnknownVtbl) {
-    fn IsAlphabetUPS(pfIsUPS: *mut BOOL) -> HRESULT,
-    fn SetAlphabetToUPS(fForceUPS: BOOL) -> HRESULT
+    fn IsAlphabetUPS(
+        pfIsUPS: *mut BOOL,
+    ) -> HRESULT,
+    fn SetAlphabetToUPS(
+        fForceUPS: BOOL,
+    ) -> HRESULT,
 });
 pub use um::sapi51::{
     SPVPITCH,
@@ -601,14 +611,16 @@ RIDL!(#[uuid(0xf264da52, 0xe457, 0x4696, 0xb8, 0x56, 0xa7, 0x37, 0xb7, 0x17, 0xa
 interface ISpPhrase2(ISpPhrase2Vtbl): ISpPhrase(ISpPhraseVtbl) {
     fn GetXMLResult(
         ppszCoMemXMLResult: *mut LPWSTR,
-        Options: SPXMLRESULTOPTIONS
+        Options: SPXMLRESULTOPTIONS,
     ) -> HRESULT,
-    fn GetXMLErrorInfo(pSemanticErrorInfo: *mut SPSEMANTICERRORINFO) -> HRESULT,
+    fn GetXMLErrorInfo(
+        pSemanticErrorInfo: *mut SPSEMANTICERRORINFO,
+    ) -> HRESULT,
     fn GetAudio(
         ulStartElement: ULONG,
         cElements: ULONG,
-        ppStream: *mut *mut ISpStreamFormat
-    ) -> HRESULT
+        ppStream: *mut *mut ISpStreamFormat,
+    ) -> HRESULT,
 });
 pub use um::sapi51::{
     SPRECORESULTTIMES,
@@ -624,26 +636,28 @@ RIDL!(#[uuid(0x27cac6c4, 0x88f2, 0x41f2, 0x88, 0x17, 0x0c, 0x95, 0xe5, 0x9f, 0x1
 interface ISpRecoResult2(ISpRecoResult2Vtbl): ISpRecoResult(ISpRecoResultVtbl) {
     fn CommitAlternate(
         pPhraseAlt: *mut ISpPhraseAlt,
-        ppNewResult: *mut *mut ISpRecoResult
+        ppNewResult: *mut *mut ISpRecoResult,
     ) -> HRESULT,
     fn CommitText(
         ulStartElement: ULONG,
         cElements: ULONG,
         pszCorrectedData: LPCWSTR,
-        eCommitFlags: DWORD
+        eCommitFlags: DWORD,
     ) -> HRESULT,
     fn SetTextFeedback(
         pszFeedback: LPCWSTR,
-        fSuccessful: BOOL
-    ) -> HRESULT
+        fSuccessful: BOOL,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xae39362b, 0x45a8, 0x4074, 0x9b, 0x9e, 0xcc, 0xf4, 0x9a, 0xa2, 0xd0, 0xb6)]
 interface ISpXMLRecoResult(ISpXMLRecoResultVtbl): ISpRecoResult(ISpRecoResultVtbl) {
     fn GetXMLResult(
         ppszCoMemXMLResult: *mut LPWSTR,
-        Options: SPXMLRESULTOPTIONS
+        Options: SPXMLRESULTOPTIONS,
     ) -> HRESULT,
-    fn GetXMLErrorInfo(pSemanticErrorInfo: *mut SPSEMANTICERRORINFO) -> HRESULT
+    fn GetXMLErrorInfo(
+        pSemanticErrorInfo: *mut SPSEMANTICERRORINFO,
+    ) -> HRESULT,
 });
 pub use um::sapi51::{
     SPTEXTSELECTIONINFO,
@@ -714,42 +728,50 @@ interface ISpGrammarBuilder2(ISpGrammarBuilder2Vtbl): IUnknown(IUnknownVtbl) {
         hFromState: SPSTATEHANDLE,
         hToState: SPSTATEHANDLE,
         psz: LPCWSTR,
-        eMatchMode: SPMATCHINGMODE
+        eMatchMode: SPMATCHINGMODE,
     ) -> HRESULT,
-    fn SetPhoneticAlphabet(phoneticALphabet: PHONETICALPHABET) -> HRESULT
+    fn SetPhoneticAlphabet(
+        phoneticALphabet: PHONETICALPHABET,
+    ) -> HRESULT,
 });
 pub const SPRP_NORMAL: i32 = 0; // TODO: Unknown purpose and type
 RIDL!(#[uuid(0x4b37bc9e, 0x9ed6, 0x44a3, 0x93, 0xd3, 0x18, 0xf0, 0x22, 0xb7, 0x9e, 0xc3)]
 interface ISpRecoGrammar2(ISpRecoGrammar2Vtbl): IUnknown(IUnknownVtbl) {
     fn GetRules(
         ppCoMemRules: *mut *mut SPRULE,
-        puNumRules: *mut UINT
+        puNumRules: *mut UINT,
     ) -> HRESULT,
     fn LoadCmdFromFile2(
         pszFileName: LPCWSTR,
         Options: SPLOADOPTIONS,
         pszSharingUri: LPCWSTR,
-        pszBaseUri: LPCWSTR
+        pszBaseUri: LPCWSTR,
     ) -> HRESULT,
     fn LoadCmdFromMemory2(
         pGrammar: *const SPBINARYGRAMMAR,
         Options: SPLOADOPTIONS,
         pszSharingUri: LPCWSTR,
-        pszBaseUri: LPCWSTR
+        pszBaseUri: LPCWSTR,
     ) -> HRESULT,
     fn SetRulePriority(
         pszRuleName: LPCWSTR,
         ulRuleId: ULONG,
-        nRulePriority: c_int
+        nRulePriority: c_int,
     ) -> HRESULT,
     fn SetRuleWeight(
         pszRuleName: LPCWSTR,
         ulRuleId: ULONG,
-        flWeight: c_float
+        flWeight: c_float,
     ) -> HRESULT,
-    fn SetDictationWeight(flWeight: c_float) -> HRESULT,
-    fn SetGrammarLoader(pLoader: *mut ISpeechResourceLoader) -> HRESULT,
-    fn SetSMLSecurityManager(pSMLSecurityManager: *mut IInternetSecurityManager) -> HRESULT
+    fn SetDictationWeight(
+        flWeight: c_float,
+    ) -> HRESULT,
+    fn SetGrammarLoader(
+        pLoader: *mut ISpeechResourceLoader,
+    ) -> HRESULT,
+    fn SetSMLSecurityManager(
+        pSMLSecurityManager: *mut IInternetSecurityManager,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xb9ac5783, 0xfcd0, 0x4b21, 0xb1, 0x19, 0xb4, 0xf8, 0xda, 0x8f, 0xd2, 0xc3)]
 interface ISpeechResourceLoader(ISpeechResourceLoaderVtbl): IDispatch(IDispatchVtbl) {
@@ -759,15 +781,17 @@ interface ISpeechResourceLoader(ISpeechResourceLoaderVtbl): IDispatch(IDispatchV
         pStream: *mut *mut IUnknown,
         pbstrMIMEType: *mut BSTR,
         pfModified: *mut VARIANT_BOOL,
-        pbstrRedirectUrl: *mut BSTR
+        pbstrRedirectUrl: *mut BSTR,
     ) -> HRESULT,
     fn GetLocalCopy(
         bstrResourceUri: BSTR,
         pbstrLocalPath: *mut BSTR,
         pbstrMIMEType: *mut BSTR,
-        pbstrRedirectUrl: *mut BSTR
+        pbstrRedirectUrl: *mut BSTR,
     ) -> HRESULT,
-    fn ReleaseLocalCopy(pbstrLocalPath: BSTR) -> HRESULT
+    fn ReleaseLocalCopy(
+        pbstrLocalPath: BSTR,
+    ) -> HRESULT,
 });
 pub use um::sapi51::{
     SPRECOCONTEXTSTATUS,
@@ -815,15 +839,19 @@ ENUM!{enum SPADAPTATIONRELEVANCE {
 }}
 RIDL!(#[uuid(0xbead311c, 0x52ff, 0x437f, 0x94, 0x64, 0x6b, 0x21, 0x05, 0x4c, 0xa7, 0x3d)]
 interface ISpRecoContext2(ISpRecoContext2Vtbl): IUnknown(IUnknownVtbl) {
-    fn SetGrammarOptions(eGrammarOptions: DWORD) -> HRESULT,
-    fn GetGrammarOptions(peGrammarOptions: *mut DWORD) -> HRESULT,
+    fn SetGrammarOptions(
+        eGrammarOptions: DWORD,
+    ) -> HRESULT,
+    fn GetGrammarOptions(
+        peGrammarOptions: *mut DWORD,
+    ) -> HRESULT,
     fn SetAdaptationData2(
         pAdaptationData: LPCWSTR,
         cch: ULONG,
         pTopicName: LPCWSTR,
         eAdaptationSettings: DWORD,
-        eRelevance: SPADAPTATIONRELEVANCE
-    ) -> HRESULT
+        eRelevance: SPADAPTATIONRELEVANCE,
+    ) -> HRESULT,
 });
 pub use um::sapi51::{
     ISpProperties, ISpPropertiesVtbl,
@@ -846,25 +874,25 @@ interface ISpSerializeState(ISpSerializeStateVtbl): IUnknown(IUnknownVtbl) {
     fn GetSerializedState(
         ppbData: *mut *mut BYTE,
         pulSize: *mut ULONG,
-        dwReserved: DWORD
+        dwReserved: DWORD,
     ) -> HRESULT,
     fn SetSerializedState(
         pbData: *mut BYTE,
         ulSize: ULONG,
-        dwReserved: DWORD
-    ) -> HRESULT
+        dwReserved: DWORD,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x8fc6d974, 0xc81e, 0x4098, 0x93, 0xc5, 0x01, 0x47, 0xf6, 0x1e, 0xd4, 0xd3)]
 interface ISpRecognizer2(ISpRecognizer2Vtbl): IUnknown(IUnknownVtbl) {
     fn EmulateRecognitionEx(
         pPhrase: *mut ISpPhrase,
-        dwCompareFlags: DWORD
+        dwCompareFlags: DWORD,
     ) -> HRESULT,
     fn SetTrainingState(
         fDoingTraining: BOOL,
-        fAdaptFromTrainingData: BOOL
+        fAdaptFromTrainingData: BOOL,
     ) -> HRESULT,
-    fn ResetAcousticModelAdaptation() -> HRESULT
+    fn ResetAcousticModelAdaptation() -> HRESULT,
 });
 STRUCT!{struct SPNORMALIZATIONLIST {
     ulSize: ULONG,
@@ -877,15 +905,15 @@ interface ISpEnginePronunciation(ISpEnginePronunciationVtbl): IUnknown(IUnknownV
         pszLeftContext: LPCWSTR,
         pszRightContext: LPCWSTR,
         LangID: WORD,
-        pNormalizationList: *mut SPNORMALIZATIONLIST
+        pNormalizationList: *mut SPNORMALIZATIONLIST,
     ) -> HRESULT,
     fn GetPronunciations(
         pszWord: LPCWSTR,
         pszLeftContext: LPCWSTR,
         pszRightContext: LPCWSTR,
         LangID: WORD,
-        pEnginePronunciationList: *mut SPWORDPRONUNCIATIONLIST
-    ) -> HRESULT
+        pEnginePronunciationList: *mut SPWORDPRONUNCIATIONLIST,
+    ) -> HRESULT,
 });
 STRUCT!{struct SPDISPLAYTOKEN {
     pszLexical: *const WCHAR,
@@ -902,9 +930,11 @@ interface ISpDisplayAlternates(ISpDisplayAlternatesVtbl): IUnknown(IUnknownVtbl)
         pPhrase: *const SPDISPLAYPHRASE,
         cRequestCount: ULONG,
         ppCoMemPhrases: *mut *mut SPDISPLAYPHRASE,
-        pcPhrasesReturned: *mut ULONG
+        pcPhrasesReturned: *mut ULONG,
     ) -> HRESULT,
-    fn SetFullStopTrailSpace(ulTrailSpace: ULONG) -> HRESULT
+    fn SetFullStopTrailSpace(
+        ulTrailSpace: ULONG,
+    ) -> HRESULT,
 });
 pub use um::sapi51::{
     SpeechLanguageId,
@@ -1652,8 +1682,8 @@ RIDL!(#[uuid(0x8e0a246d, 0xd3c8, 0x45de, 0x86, 0x57, 0x04, 0x29, 0x0c, 0x45, 0x8
 interface ISpeechRecoResult2(ISpeechRecoResult2Vtbl): ISpeechRecoResult(ISpeechRecoResultVtbl) {
     fn SetTextFeedback(
         Feedback: BSTR,
-        WasSuccessful: VARIANT_BOOL
-    ) -> HRESULT
+        WasSuccessful: VARIANT_BOOL,
+    ) -> HRESULT,
 });
 pub use um::sapi51::{
     ISpeechRecoResultTimes, ISpeechRecoResultTimesVtbl,
@@ -1684,7 +1714,7 @@ RIDL!(#[uuid(0xaaec54af, 0x8f85, 0x4924, 0x94, 0x4d, 0xb7, 0x9d, 0x39, 0xd7, 0x2
 interface ISpeechXMLRecoResult(ISpeechXMLRecoResultVtbl): ISpeechRecoResult(ISpeechRecoResultVtbl) {
     fn GetXMLResult(
         Options: SPXMLRESULTOPTIONS,
-        pResult: *mut BSTR
+        pResult: *mut BSTR,
     ) -> HRESULT,
     fn GetXMLErrorInfo(
         LineNumber: *mut c_long,
@@ -1692,38 +1722,52 @@ interface ISpeechXMLRecoResult(ISpeechXMLRecoResultVtbl): ISpeechRecoResult(ISpe
         Source: *mut BSTR,
         Description: *mut BSTR,
         ResultCode: *mut c_long,
-        IsError: *mut VARIANT_BOOL
-    ) -> HRESULT
+        IsError: *mut VARIANT_BOOL,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x6d60eb64, 0xaced, 0x40a6, 0xbb, 0xf3, 0x4e, 0x55, 0x7f, 0x71, 0xde, 0xe2)]
 interface ISpeechRecoResultDispatch(ISpeechRecoResultDispatchVtbl): IDispatch(IDispatchVtbl) {
-    fn get_RecoContext(RecoContext: *mut ISpeechRecoContext) -> HRESULT,
-    fn get_Times(Times: *mut ISpeechRecoResultTimes) -> HRESULT,
-    fn putref_AudioFormat(Format: *mut ISpeechAudioFormat) -> HRESULT,
-    fn get_AudioFormat(Format: *mut *mut ISpeechAudioFormat) -> HRESULT,
-    fn get_PhraseInfo(PhraseInfo: *mut *mut ISpeechPhraseInfo) -> HRESULT,
+    fn get_RecoContext(
+        RecoContext: *mut ISpeechRecoContext,
+    ) -> HRESULT,
+    fn get_Times(
+        Times: *mut ISpeechRecoResultTimes,
+    ) -> HRESULT,
+    fn putref_AudioFormat(
+        Format: *mut ISpeechAudioFormat,
+    ) -> HRESULT,
+    fn get_AudioFormat(
+        Format: *mut *mut ISpeechAudioFormat,
+    ) -> HRESULT,
+    fn get_PhraseInfo(
+        PhraseInfo: *mut *mut ISpeechPhraseInfo,
+    ) -> HRESULT,
     fn Alternates(
         RequestCount: c_long,
         StartElement: c_long,
         Elements: c_long,
-        Alternates: *mut *mut ISpeechPhraseAlternates
+        Alternates: *mut *mut ISpeechPhraseAlternates,
     ) -> HRESULT,
     fn Audio(
         StartElement: c_long,
         Elements: c_long,
-        Stream: *mut *mut ISpeechMemoryStream
+        Stream: *mut *mut ISpeechMemoryStream,
     ) -> HRESULT,
     fn SpeakAudio(
         StartElement: c_long,
         Elements: c_long,
         Flags: SpeechVoiceSpeakFlags,
-        StreamNumber: *mut c_long
+        StreamNumber: *mut c_long,
     ) -> HRESULT,
-    fn SaveToMemory(ResultBlock: *mut VARIANT) -> HRESULT,
-    fn DiscardResultInfo(ValueTypes: SpeechDiscardType) -> HRESULT,
+    fn SaveToMemory(
+        ResultBlock: *mut VARIANT,
+    ) -> HRESULT,
+    fn DiscardResultInfo(
+        ValueTypes: SpeechDiscardType,
+    ) -> HRESULT,
     fn GetXMLResult(
         Options: SPXMLRESULTOPTIONS,
-        pResult: *mut BSTR
+        pResult: *mut BSTR,
     ) -> HRESULT,
     fn GetXMLErrorInfo(
         LineNumber: *mut c_long,
@@ -1731,12 +1775,12 @@ interface ISpeechRecoResultDispatch(ISpeechRecoResultDispatchVtbl): IDispatch(ID
         Source: *mut BSTR,
         Description: *mut BSTR,
         ResultCode: *mut HRESULT,
-        IsError: *mut VARIANT_BOOL
+        IsError: *mut VARIANT_BOOL,
     ) -> HRESULT,
     fn SetTextFeedback(
         Feedback: BSTR,
-        WasSuccessful: VARIANT_BOOL
-    ) -> HRESULT
+        WasSuccessful: VARIANT_BOOL,
+    ) -> HRESULT,
 });
 pub use um::sapi51::{
     ISpeechPhraseInfoBuilder, ISpeechPhraseInfoBuilderVtbl,

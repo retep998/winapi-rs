@@ -15,8 +15,8 @@ interface IInternetSecurityManager(IInternetSecurityManagerVtbl): IUnknown(IUnkn
     fn MapUrlToZone(
         pwszUrl: LPCWSTR,
         pdwZone: *mut DWORD,
-        dwFlags: DWORD
-    ) -> HRESULT
+        dwFlags: DWORD,
+    ) -> HRESULT,
     // TODO: the rest
 });
 // TODO: the rest

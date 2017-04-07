@@ -157,36 +157,42 @@ RIDL!(#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0
 interface ISpNotifyCallback(ISpNotifyCallbackVtbl) {
     fn NotifyCallback(
         wParam: WPARAM,
-        lParam: LPARAM
-    ) -> HRESULT
+        lParam: LPARAM,
+    ) -> HRESULT,
 });
-FN!(stdcall SPNOTIFYCALLBACK(wParam: WPARAM, lParam: LPARAM) -> ());
+FN!(
+        stdcall SPNOTIFYCALLBACK(wParam: WPARAM, lParam: LPARAM,
+    ) -> ());
 RIDL!(#[uuid(0x5eff4aef, 0x8487, 0x11d2, 0x96, 0x1c, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0x28)]
 interface ISpNotifySource(ISpNotifySourceVtbl): IUnknown(IUnknownVtbl) {
-    fn SetNotifySink(pNotifySink: *mut ISpNotifySink) -> HRESULT,
+    fn SetNotifySink(
+        pNotifySink: *mut ISpNotifySink,
+    ) -> HRESULT,
     fn SetNotifyWindowMessage(
         hWnd: HWND,
         Msg: UINT,
         wParam: WPARAM,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> HRESULT,
     fn SetNotifyCallbackFunction(
         pfnCallback: SPNOTIFYCALLBACK,
         wParam: WPARAM,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> HRESULT,
     fn SetNotifyCallbackInterface(
         pSpCallback: *mut ISpNotifyCallback,
         wParam: WPARAM,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> HRESULT,
     fn SetNotifyWin32Event() -> HRESULT,
-    fn WaitForNotifyEvent(dwMilliseconds: DWORD) -> HRESULT,
-    fn GetNotifyEventHandle() -> HANDLE
+    fn WaitForNotifyEvent(
+        dwMilliseconds: DWORD,
+    ) -> HRESULT,
+    fn GetNotifyEventHandle() -> HANDLE,
 });
 RIDL!(#[uuid(0x259684dc, 0x37c3, 0x11d2, 0x96, 0x03, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0x28)]
 interface ISpNotifySink(ISpNotifySinkVtbl): IUnknown(IUnknownVtbl) {
-    fn Notify() -> HRESULT
+    fn Notify() -> HRESULT,
 });
 RIDL!(#[uuid(0xaca16614, 0x5d3d, 0x11d2, 0x96, 0x0e, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0x28)]
 interface ISpNotifyTranslator(ISpNotifyTranslatorVtbl): ISpNotifySink(ISpNotifySinkVtbl) {
@@ -194,131 +200,149 @@ interface ISpNotifyTranslator(ISpNotifyTranslatorVtbl): ISpNotifySink(ISpNotifyS
         hWnd: HWND,
         Msg: UINT,
         wParam: WPARAM,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> HRESULT,
     fn InitCallback(
         pfnCallback: SPNOTIFYCALLBACK,
         wParam: WPARAM,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> HRESULT,
     fn InitSpNotifyCallback(
         pSpCallback: *mut ISpNotifyCallback,
         wParam: WPARAM,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> HRESULT,
     fn InitWin32Event(
         hEvent: HANDLE,
-        fCloseHandleOnRelease: BOOL
+        fCloseHandleOnRelease: BOOL,
     ) -> HRESULT,
-    fn Wait(dwMilliseconds: DWORD) -> HRESULT,
-    fn GetEventHandle() -> HANDLE
+    fn Wait(
+        dwMilliseconds: DWORD,
+    ) -> HRESULT,
+    fn GetEventHandle() -> HANDLE,
 });
 RIDL!(#[uuid(0x14056581, 0xe16c, 0x11d2, 0xbb, 0x90, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0)]
 interface ISpDataKey(ISpDataKeyVtbl): IUnknown(IUnknownVtbl) {
     fn SetData(
         pszValueName: LPCWSTR,
         cbData: ULONG,
-        pData: *const BYTE
+        pData: *const BYTE,
     ) -> HRESULT,
     fn GetData(
         pszValueName: LPCWSTR,
         pcbData: *mut ULONG,
-        pData: *mut BYTE
+        pData: *mut BYTE,
     ) -> HRESULT,
     fn SetStringValue(
         pszValueName: LPCWSTR,
-        pszValue: LPCWSTR
+        pszValue: LPCWSTR,
     ) -> HRESULT,
     fn GetStringValue(
         pszValueName: LPCWSTR,
-        ppszValue: *mut LPWSTR
+        ppszValue: *mut LPWSTR,
     ) -> HRESULT,
     fn SetDWORD(
         pszValueName: LPCWSTR,
-        dwValue: DWORD
+        dwValue: DWORD,
     ) -> HRESULT,
     fn GetDWORD(
         pszValueName: LPCWSTR,
-        pdwValue: *mut DWORD
+        pdwValue: *mut DWORD,
     ) -> HRESULT,
     fn OpenKey(
         pszSubKeyName: LPCWSTR,
-        ppSubKey: *mut *mut ISpDataKey
+        ppSubKey: *mut *mut ISpDataKey,
     ) -> HRESULT,
     fn CreateKey(
         pszSubKey: LPCWSTR,
-        ppSubKey: *mut *mut ISpDataKey
+        ppSubKey: *mut *mut ISpDataKey,
     ) -> HRESULT,
-    fn DeleteKey(pszSubKey: LPCWSTR) -> HRESULT,
-    fn DeleteValue(pszValueName: LPCWSTR) -> HRESULT,
+    fn DeleteKey(
+        pszSubKey: LPCWSTR,
+    ) -> HRESULT,
+    fn DeleteValue(
+        pszValueName: LPCWSTR,
+    ) -> HRESULT,
     fn EnumKeys(
         Index: ULONG,
-        ppszSubKeyName: *mut LPWSTR
+        ppszSubKeyName: *mut LPWSTR,
     ) -> HRESULT,
     fn EnumValues(
         Index: ULONG,
-        ppszValueName: *mut LPWSTR
-    ) -> HRESULT
+        ppszValueName: *mut LPWSTR,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x92a66e2b, 0xc830, 0x4149, 0x83, 0xdf, 0x6f, 0xc2, 0xba, 0x1e, 0x7a, 0x5b)]
 interface ISpRegDataKey(ISpRegDataKeyVtbl): ISpDataKey(ISpDataKeyVtbl) {
     fn SetKey(
         hkey: HKEY,
-        fReadOnly: BOOL
-    ) -> HRESULT
+        fReadOnly: BOOL,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x2d3d3845, 0x39af, 0x4850, 0xbb, 0xf9, 0x40, 0xb4, 0x97, 0x80, 0x01, 0x1d)]
 interface ISpObjectTokenCategory(ISpObjectTokenCategoryVtbl): ISpDataKey(ISpDataKeyVtbl) {
     fn SetId(
         pszCategoryId: LPCWSTR,
-        fCreateIfNotExist: BOOL
+        fCreateIfNotExist: BOOL,
     ) -> HRESULT,
-    fn GetId(ppszCoMemCategoryId: *mut LPWSTR) -> HRESULT,
+    fn GetId(
+        ppszCoMemCategoryId: *mut LPWSTR,
+    ) -> HRESULT,
     fn GetDataKey(
         spdkl: SPDATAKEYLOCATION,
-        pppDataKey: *mut *mut ISpDataKey
+        pppDataKey: *mut *mut ISpDataKey,
     ) -> HRESULT,
     fn EnumTokens(
         pzsReqAttribs: LPCWSTR,
         pszOptAttribs: LPCWSTR,
-        ppEnum: *mut *mut IEnumSpObjectTokens
+        ppEnum: *mut *mut IEnumSpObjectTokens,
     ) -> HRESULT,
-    fn SetDefaultTokenId(pszTokenId: LPCWSTR) -> HRESULT,
-    fn GetDefaultTokenId(ppszCoMemTokenId: *mut LPWSTR) -> HRESULT
+    fn SetDefaultTokenId(
+        pszTokenId: LPCWSTR,
+    ) -> HRESULT,
+    fn GetDefaultTokenId(
+        ppszCoMemTokenId: *mut LPWSTR,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x14056589, 0xe16c, 0x11d2, 0xbb, 0x90, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0)]
 interface ISpObjectToken(ISpObjectTokenVtbl): ISpDataKey(ISpDataKeyVtbl) {
     fn SetId(
         pszCategoryId: LPCWSTR,
         pszTokenId: LPCWSTR,
-        fCreateIfNotExist: BOOL
+        fCreateIfNotExist: BOOL,
     ) -> HRESULT,
-    fn GetId(ppszCoMemTokenId: *mut LPWSTR) -> HRESULT,
-    fn GetCategory(ppTokenCategory: *mut *mut ISpObjectTokenCategory) -> HRESULT,
+    fn GetId(
+        ppszCoMemTokenId: *mut LPWSTR,
+    ) -> HRESULT,
+    fn GetCategory(
+        ppTokenCategory: *mut *mut ISpObjectTokenCategory,
+    ) -> HRESULT,
     fn CreateInstance(
         pUnkOuter: *mut IUnknown,
         dwClsContext: DWORD,
         riid: REFIID,
-        ppvObject: *mut *mut c_void
+        ppvObject: *mut *mut c_void,
     ) -> HRESULT,
     fn GetStorageFileName(
         clsidCaller: REFCLSID,
         pszValueName: LPCWSTR,
         pszFileNameSpecifier: LPCWSTR,
         nFolder: ULONG,
-        ppszFilePath: *mut LPWSTR
+        ppszFilePath: *mut LPWSTR,
     ) -> HRESULT,
     fn RemoveStorageFileName(
         pszKeyName: LPCWSTR,
-        fDeleteFile: BOOL
+        fDeleteFile: BOOL,
     ) -> HRESULT,
-    fn Remove(pclsidCaller: *const CLSID) -> HRESULT,
+    fn Remove(
+        pclsidCaller: *const CLSID,
+    ) -> HRESULT,
     fn IsUISupported(
         pszTypeOfUI: LPCWSTR,
         pvExtraData: *mut c_void,
         cbExtraData: ULONG,
         punkObject: *mut IUnknown,
-        pfSupported: *mut BOOL
+        pfSupported: *mut BOOL,
     ) -> HRESULT,
     fn DisplayUI(
         hwndParent: HWND,
@@ -326,55 +350,65 @@ interface ISpObjectToken(ISpObjectTokenVtbl): ISpDataKey(ISpDataKeyVtbl) {
         pszTypeOfUI: LPCWSTR,
         pvExtraData: *mut c_void,
         cbExtraData: ULONG,
-        punkObject: *mut IUnknown
+        punkObject: *mut IUnknown,
     ) -> HRESULT,
     fn MatchesAttributes(
         pszAttributes: LPCWSTR,
-        pfMatches: *mut BOOL
-    ) -> HRESULT
+        pfMatches: *mut BOOL,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xb8aab0cf, 0x346f, 0x49d8, 0x94, 0x99, 0xc8, 0xb0, 0x3f, 0x16, 0x1d, 0x51)]
 interface ISpObjectTokenInit(ISpObjectTokenInitVtbl): ISpObjectToken(ISpObjectTokenVtbl) {
     fn InitFromDataKey(
         pszCategoryId: LPCWSTR,
         pszTokenId: LPCWSTR,
-        pDataKey: *mut ISpDataKey
-    ) -> HRESULT
+        pDataKey: *mut ISpDataKey,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x06b64f9e, 0x7fda, 0x11d2, 0xb4, 0xf2, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96)]
 interface IEnumSpObjectTokens(IEnumSpObjectTokensVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
         pelt: *mut *mut ISpObjectToken,
-        pceltFetched: *mut ULONG
+        pceltFetched: *mut ULONG,
     ) -> HRESULT,
-    fn Skip(celt: ULONG) -> HRESULT,
+    fn Skip(
+        celt: ULONG,
+    ) -> HRESULT,
     fn Reset() -> HRESULT,
-    fn Clone(ppEnum: *mut *mut IEnumSpObjectTokens) -> HRESULT,
+    fn Clone(
+        ppEnum: *mut *mut IEnumSpObjectTokens,
+    ) -> HRESULT,
     fn Item(
         Index: ULONG,
-        ppToken: *mut *mut ISpObjectToken
+        ppToken: *mut *mut ISpObjectToken,
     ) -> HRESULT,
-    fn GetCount(pCount: *mut ULONG) -> HRESULT
+    fn GetCount(
+        pCount: *mut ULONG,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x5b559f40, 0xe952, 0x11d2, 0xbb, 0x91, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0)]
 interface ISpObjectWithToken(ISpObjectWithTokenVtbl): IUnknown(IUnknownVtbl) {
-    fn SetObjectToken(pToken: *mut ISpObjectToken) -> HRESULT,
-    fn GetObjectToken(ppToken: *mut *mut ISpObjectToken) -> HRESULT
+    fn SetObjectToken(
+        pToken: *mut ISpObjectToken,
+    ) -> HRESULT,
+    fn GetObjectToken(
+        ppToken: *mut *mut ISpObjectToken,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x93384e18, 0x5014, 0x43d5, 0xad, 0xbb, 0xa7, 0x8e, 0x05, 0x59, 0x26, 0xbd)]
 interface ISpResourceManager(ISpResourceManagerVtbl): IServiceProvider(IServiceProviderVtbl) {
     fn SetObject(
         guidServiceId: REFGUID,
-        pUnkObject: *mut IUnknown
+        pUnkObject: *mut IUnknown,
     ) -> HRESULT,
     fn GetObject(
         guidServiceId: REFGUID,
         ObjectCLSID: REFCLSID,
         ObjectIID: REFIID,
         fReleaseWhenLastExternalRefReleased: BOOL,
-        ppObject: *mut *mut c_void
-    ) -> HRESULT
+        ppObject: *mut *mut c_void,
+    ) -> HRESULT,
 });
 ENUM!{enum SPEVENTLPARAMTYPE {
     SPET_LPARAM_IS_UNDEFINED = 0,
@@ -426,7 +460,9 @@ pub const SPFEI_ALL_TTS_EVENTS: ULONGLONG = 0x000000000000FFFE | SPFEI_FLAGCHECK
 pub const SPFEI_ALL_SR_EVENTS: ULONGLONG = 0x003FFFFC00000000 | SPFEI_FLAGCHECK;
 pub const SPFEI_ALL_EVENTS: ULONGLONG = 0xEFFFFFFFFFFFFFFF;
 #[inline]
-pub fn SPFEI(SPEI_ord: SPEVENTENUM) -> ULONGLONG {
+pub fn SPFEI(
+        SPEI_ord: SPEVENTENUM,
+    ) -> ULONGLONG {
     (1 << SPEI_ord as ULONGLONG) | SPFEI_FLAGCHECK
 }
 STRUCT!{struct SPEVENT {
@@ -514,29 +550,33 @@ RIDL!(#[uuid(0xbe7a9cce, 0x5f9e, 0x11d2, 0x96, 0x0f, 0x00, 0xc0, 0x4f, 0x8e, 0xe
 interface ISpEventSource(ISpEventSourceVtbl): ISpNotifySource(ISpNotifySourceVtbl) {
     fn SetInterest(
         ullEventInterest: ULONGLONG,
-        ullQueuedInterest: ULONGLONG
+        ullQueuedInterest: ULONGLONG,
     ) -> HRESULT,
     fn GetEvents(
         ulCount: ULONG,
         pEventArray: *mut SPEVENT,
-        pulFetched: *mut ULONG
+        pulFetched: *mut ULONG,
     ) -> HRESULT,
-    fn GetInfo(pInfo: *mut SPEVENTSOURCEINFO) -> HRESULT
+    fn GetInfo(
+        pInfo: *mut SPEVENTSOURCEINFO,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xbe7a9cc9, 0x5f9e, 0x11d2, 0x96, 0x0f, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0x28)]
 interface ISpEventSink(ISpEventSinkVtbl): IUnknown(IUnknownVtbl) {
     fn AddEvents(
         pEventArray: *const SPEVENT,
-        ulCount: ULONG
+        ulCount: ULONG,
     ) -> HRESULT,
-    fn GetEventInterest(pullEventInterest: *mut ULONGLONG) -> HRESULT
+    fn GetEventInterest(
+        pullEventInterest: *mut ULONGLONG,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xbed530be, 0x2606, 0x4f4d, 0xa1, 0xc0, 0x54, 0xc5, 0xcd, 0xa5, 0x56, 0x6f)]
 interface ISpStreamFormat(ISpStreamFormatVtbl): IStream(IStreamVtbl) {
     fn GetFormat(
         pguidFormatId: *mut GUID,
-        ppCoMemWaveFormatEx: *mut *mut WAVEFORMATEX
-    ) -> HRESULT
+        ppCoMemWaveFormatEx: *mut *mut WAVEFORMATEX,
+    ) -> HRESULT,
 });
 ENUM!{enum SPFILEMODE {
     SPFM_OPEN_READONLY,
@@ -550,17 +590,19 @@ interface ISpStream(ISpStreamVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
     fn SetBaseStream(
         pStream: *mut IStream,
         rguidFormat: REFGUID,
-        pWaveFormatEx: *const WAVEFORMATEX
+        pWaveFormatEx: *const WAVEFORMATEX,
     ) -> HRESULT,
-    fn GetBaseStream(ppStream: *mut *mut IStream) -> HRESULT,
+    fn GetBaseStream(
+        ppStream: *mut *mut IStream,
+    ) -> HRESULT,
     fn BindToFile(
         pszFileName: LPCWSTR,
         eMode: SPFILEMODE,
         pFormatId: *const GUID,
         pWaveFormatEx: *const WAVEFORMATEX,
-        ullEventInterest: ULONGLONG
+        ullEventInterest: ULONGLONG,
     ) -> HRESULT,
-    fn Close() -> HRESULT
+    fn Close() -> HRESULT,
 });
 RIDL!(#[uuid(0x678a932c, 0xea71, 0x4446, 0x9b, 0x41, 0x78, 0xfd, 0xa6, 0x28, 0x0a, 0x29)]
 interface ISpStreamFormatConverter(ISpStreamFormatConverterVtbl)
@@ -568,22 +610,24 @@ interface ISpStreamFormatConverter(ISpStreamFormatConverterVtbl)
     fn SetBaseStream(
         pStream: *mut ISpStreamFormat,
         fSetFormatToBaseStreamFormat: BOOL,
-        fWriteToBaseStream: BOOL
+        fWriteToBaseStream: BOOL,
     ) -> HRESULT,
-    fn GetBaseStream(ppStream: *mut *mut ISpStreamFormat) -> HRESULT,
+    fn GetBaseStream(
+        ppStream: *mut *mut ISpStreamFormat,
+    ) -> HRESULT,
     fn SetFormat(
         rguidFormatIdOfConvertedStream: REFGUID,
-        pWaveFormatExOfConvertedStream: *const WAVEFORMATEX
+        pWaveFormatExOfConvertedStream: *const WAVEFORMATEX,
     ) -> HRESULT,
     fn ResetSeekPosition() -> HRESULT,
     fn ScaleConvertedToBaseOffset(
         ullOffsetConvertedStream: ULONGLONG,
-        pullOffsetBaseStream: *mut ULONGLONG
+        pullOffsetBaseStream: *mut ULONGLONG,
     ) -> HRESULT,
     fn ScaleBaseToConvertedOffset(
         ullOffsetBaseStream: ULONGLONG,
-        pullOffsetConvertedStream: *mut ULONGLONG
-    ) -> HRESULT
+        pullOffsetConvertedStream: *mut ULONGLONG,
+    ) -> HRESULT,
 });
 ENUM!{enum SPAUDIOSTATE {
     SPAS_CLOSED,
@@ -609,37 +653,65 @@ RIDL!(#[uuid(0xc05c768f, 0xfae8, 0x4ec2, 0x8e, 0x07, 0x33, 0x83, 0x21, 0xc1, 0x2
 interface ISpAudio(ISpAudioVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
     fn SetState(
         NewState: SPAUDIOSTATE,
-        ullReserved: ULONGLONG
+        ullReserved: ULONGLONG,
     ) -> HRESULT,
     fn SetFormat(
         rguidFmtId: REFGUID,
-        pWaveFormatEx: *const WAVEFORMATEX
+        pWaveFormatEx: *const WAVEFORMATEX,
     ) -> HRESULT,
-    fn GetStatus(pStatus: *mut SPAUDIOSTATUS) -> HRESULT,
-    fn SetBufferInfo(pBuffInfo: *const SPAUDIOBUFFERINFO) -> HRESULT,
-    fn GetBufferInfo(pBuffInfo: *mut SPAUDIOBUFFERINFO) -> HRESULT,
+    fn GetStatus(
+        pStatus: *mut SPAUDIOSTATUS,
+    ) -> HRESULT,
+    fn SetBufferInfo(
+        pBuffInfo: *const SPAUDIOBUFFERINFO,
+    ) -> HRESULT,
+    fn GetBufferInfo(
+        pBuffInfo: *mut SPAUDIOBUFFERINFO,
+    ) -> HRESULT,
     fn GetDefaultFormat(
         pFormatId: *mut GUID,
-        ppCoMemWaveFormatEx: *mut *mut WAVEFORMATEX
+        ppCoMemWaveFormatEx: *mut *mut WAVEFORMATEX,
     ) -> HRESULT,
     fn EventHandle() -> HANDLE,
-    fn GetVolumeLevel(pLevel: *mut ULONG) -> HRESULT,
-    fn SetVolumeLevel(Level: ULONG) -> HRESULT,
-    fn GetBufferNotifySize(pcbSize: *mut ULONG) -> HRESULT,
-    fn SetBufferNotifySize(cbSize: ULONG) -> HRESULT
+    fn GetVolumeLevel(
+        pLevel: *mut ULONG,
+    ) -> HRESULT,
+    fn SetVolumeLevel(
+        Level: ULONG,
+    ) -> HRESULT,
+    fn GetBufferNotifySize(
+        pcbSize: *mut ULONG,
+    ) -> HRESULT,
+    fn SetBufferNotifySize(
+        cbSize: ULONG,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x15806f6e, 0x1d70, 0x4b48, 0x98, 0xe6, 0x3b, 0x1a, 0x00, 0x75, 0x09, 0xab)]
 interface ISpMMSysAudio(ISpMMSysAudioVtbl): ISpAudio(ISpAudioVtbl) {
-    fn GetDeviceId(puDeviceId: *mut UINT) -> HRESULT,
-    fn SetDeviceId(uDeviceId: UINT) -> HRESULT,
-    fn GetMMHandle(pHandle: *mut *mut c_void) -> HRESULT,
-    fn GetLineId(puLineId: *mut UINT) -> HRESULT,
-    fn SetLineId(uLineId: UINT) -> HRESULT
+    fn GetDeviceId(
+        puDeviceId: *mut UINT,
+    ) -> HRESULT,
+    fn SetDeviceId(
+        uDeviceId: UINT,
+    ) -> HRESULT,
+    fn GetMMHandle(
+        pHandle: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetLineId(
+        puLineId: *mut UINT,
+    ) -> HRESULT,
+    fn SetLineId(
+        uLineId: UINT,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x10f63bce, 0x201a, 0x11d3, 0xac, 0x70, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0)]
 interface ISpTranscript(ISpTranscriptVtbl): IUnknown(IUnknownVtbl) {
-    fn GetTranscript(ppszTranscript: *mut LPWSTR) -> HRESULT,
-    fn AppendTranscript(pszTranscript: LPCWSTR) -> HRESULT
+    fn GetTranscript(
+        ppszTranscript: *mut LPWSTR,
+    ) -> HRESULT,
+    fn AppendTranscript(
+        pszTranscript: LPCWSTR,
+    ) -> HRESULT,
 });
 ENUM!{enum SPDISPLAYATTRIBUTES {
     SPAF_ONE_TRAILING_SPACE = 0x2,
@@ -826,50 +898,52 @@ interface ISpLexicon(ISpLexiconVtbl): IUnknown(IUnknownVtbl) {
         pszWord: LPCWSTR,
         LangID: WORD,
         dwFlags: DWORD,
-        pWordPronunciationList: *mut SPWORDPRONUNCIATIONLIST
+        pWordPronunciationList: *mut SPWORDPRONUNCIATIONLIST,
     ) -> HRESULT,
     fn AddPronunciation(
         pszWord: LPCWSTR,
         LangID: WORD,
         ePartOfSpeech: SPPARTOFSPEECH,
-        pszPronunciation: PCSPPHONEID
+        pszPronunciation: PCSPPHONEID,
     ) -> HRESULT,
     fn RemovePronunciation(
         pszWord: LPCWSTR,
         LangID: WORD,
         ePartOfSpeech: SPPARTOFSPEECH,
-        pszPronunciation: PCSPPHONEID
+        pszPronunciation: PCSPPHONEID,
     ) -> HRESULT,
-    fn GetGeneration(pdwGeneration: *mut DWORD) -> HRESULT,
+    fn GetGeneration(
+        pdwGeneration: *mut DWORD,
+    ) -> HRESULT,
     fn GetGenerationChange(
         dwFlags: DWORD,
         pdwGeneration: *mut DWORD,
-        pWordList: *mut SPWORDLIST
+        pWordList: *mut SPWORDLIST,
     ) -> HRESULT,
     fn GetWords(
         dwFlags: DWORD,
         pdwGeneration: *mut DWORD,
         pdwCookie: *mut DWORD,
-        pWordList: *mut SPWORDLIST
-    ) -> HRESULT
+        pWordList: *mut SPWORDLIST,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x8565572f, 0xc094, 0x41cc, 0xb5, 0x6e, 0x10, 0xbd, 0x9c, 0x3f, 0xf0, 0x44)]
 interface ISpContainerLexicon(ISpContainerLexiconVtbl): ISpLexicon(ISpLexiconVtbl) {
     fn AddLexicon(
         pAddLexicon: *mut ISpLexicon,
-        dwFlags: DWORD
-    ) -> HRESULT
+        dwFlags: DWORD,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x8445c581, 0x0cac, 0x4a38, 0xab, 0xfe, 0x9b, 0x2c, 0xe2, 0x82, 0x64, 0x55)]
 interface ISpPhoneConverter(ISpPhoneConverterVtbl): ISpObjectWithToken(ISpObjectWithTokenVtbl) {
     fn PhoneToId(
         pszPhone: LPCWSTR,
-        pId: *mut SPPHONEID
+        pId: *mut SPPHONEID,
     ) -> HRESULT,
     fn IdToPhone(
         pId: PCSPPHONEID,
-        pszPhone: *mut WCHAR
-    ) -> HRESULT
+        pszPhone: *mut WCHAR,
+    ) -> HRESULT,
 });
 STRUCT!{struct SPVPITCH {
     MiddleAdj: c_long,
@@ -951,71 +1025,107 @@ RIDL!(#[uuid(0x6c44df74, 0x72b9, 0x4992, 0xa1, 0xec, 0xef, 0x99, 0x6e, 0x04, 0x2
 interface ISpVoice(ISpVoiceVtbl): ISpEventSource(ISpEventSourceVtbl) {
     fn SetOutput(
         pUnkOutput: *mut IUnknown,
-        fAllowFormatChanges: BOOL
+        fAllowFormatChanges: BOOL,
     ) -> HRESULT,
-    fn GetOutputObjectToken(ppObjectToken: *mut *mut ISpObjectToken) -> HRESULT,
-    fn GetOutputStream(ppStream: *mut *mut ISpStreamFormat) -> HRESULT,
+    fn GetOutputObjectToken(
+        ppObjectToken: *mut *mut ISpObjectToken,
+    ) -> HRESULT,
+    fn GetOutputStream(
+        ppStream: *mut *mut ISpStreamFormat,
+    ) -> HRESULT,
     fn Pause() -> HRESULT,
     fn Resume() -> HRESULT,
-    fn SetVoice(pToken: *mut ISpObjectToken) -> HRESULT,
-    fn GetVoice(ppToken: *mut *mut ISpObjectToken) -> HRESULT,
+    fn SetVoice(
+        pToken: *mut ISpObjectToken,
+    ) -> HRESULT,
+    fn GetVoice(
+        ppToken: *mut *mut ISpObjectToken,
+    ) -> HRESULT,
     fn Speak(
         pwcs: LPCWSTR,
         dwFlags: DWORD,
-        pulStreamNumber: *mut ULONG
+        pulStreamNumber: *mut ULONG,
     ) -> HRESULT,
     fn SpeakStream(
         pStream: *mut IStream,
         dwFlags: DWORD,
-        pulStreamNumber: *mut ULONG
+        pulStreamNumber: *mut ULONG,
     ) -> HRESULT,
     fn GetStatus(
         pStatus: *mut SPVOICESTATUS,
-        ppszLastBookmark: *mut LPWSTR
+        ppszLastBookmark: *mut LPWSTR,
     ) -> HRESULT,
     fn Skip(
         pItemType: LPCWSTR,
         lNumItems: c_long,
-        pulNumSkipped: *mut ULONG
+        pulNumSkipped: *mut ULONG,
     ) -> HRESULT,
-    fn SetPriority(ePriority: SPVPRIORITY) -> HRESULT,
-    fn GetPriority(pePriority: *mut SPVPRIORITY) -> HRESULT,
-    fn SetAlertBoundary(eBoundary: SPEVENTENUM) -> HRESULT,
-    fn GetAlertBoundary(peBoundary: *mut SPEVENTENUM) -> HRESULT,
-    fn SetRate(RateAdjust: c_long) -> HRESULT,
-    fn GetRate(pRateAdjust: *mut c_long) -> HRESULT,
-    fn SetVolume(usVolume: USHORT) -> HRESULT,
-    fn GetVolume(pusVolume: *mut USHORT) -> HRESULT,
-    fn WaitUntilDone(msTimeout: ULONG) -> HRESULT,
-    fn SetSyncSpeakTimeout(msTimeout: ULONG) -> HRESULT,
-    fn GetSyncSpeakTimeout(pmsTimeout: *mut ULONG) -> HRESULT,
+    fn SetPriority(
+        ePriority: SPVPRIORITY,
+    ) -> HRESULT,
+    fn GetPriority(
+        pePriority: *mut SPVPRIORITY,
+    ) -> HRESULT,
+    fn SetAlertBoundary(
+        eBoundary: SPEVENTENUM,
+    ) -> HRESULT,
+    fn GetAlertBoundary(
+        peBoundary: *mut SPEVENTENUM,
+    ) -> HRESULT,
+    fn SetRate(
+        RateAdjust: c_long,
+    ) -> HRESULT,
+    fn GetRate(
+        pRateAdjust: *mut c_long,
+    ) -> HRESULT,
+    fn SetVolume(
+        usVolume: USHORT,
+    ) -> HRESULT,
+    fn GetVolume(
+        pusVolume: *mut USHORT,
+    ) -> HRESULT,
+    fn WaitUntilDone(
+        msTimeout: ULONG,
+    ) -> HRESULT,
+    fn SetSyncSpeakTimeout(
+        msTimeout: ULONG,
+    ) -> HRESULT,
+    fn GetSyncSpeakTimeout(
+        pmsTimeout: *mut ULONG,
+    ) -> HRESULT,
     fn SpeakCompleteEvent() -> HANDLE,
     fn IsUISupported(
         pszTypeOfUI: LPCWSTR,
         pvExtraData: *mut c_void,
         cbExtraData: ULONG,
-        pfSupported: *mut BOOL
+        pfSupported: *mut BOOL,
     ) -> HRESULT,
     fn DisplayUI(
         hwndParent: HWND,
         pszTitle: LPCWSTR,
         pszTypeOfUI: LPCWSTR,
         pvExtraData: *mut c_void,
-        cbExtraData: ULONG
-    ) -> HRESULT
+        cbExtraData: ULONG,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x1a5c0354, 0xb621, 0x4b5a, 0x87, 0x91, 0xd3, 0x06, 0xed, 0x37, 0x9e, 0x53)]
 interface ISpPhrase(ISpPhraseVtbl): IUnknown(IUnknownVtbl) {
-    fn GetPhrase(ppCoMemPhrase: *mut *mut SPPHRASE) -> HRESULT,
-    fn GetSerializedPhrase(ppCoMemPhrase: *mut *mut SPSERIALIZEDPHRASE) -> HRESULT,
+    fn GetPhrase(
+        ppCoMemPhrase: *mut *mut SPPHRASE,
+    ) -> HRESULT,
+    fn GetSerializedPhrase(
+        ppCoMemPhrase: *mut *mut SPSERIALIZEDPHRASE,
+    ) -> HRESULT,
     fn GetText(
         ulStart: ULONG,
         ulCount: ULONG,
         fUseTextReplacements: BOOL,
         ppszCoMemText: *mut LPWSTR,
-        pbDisplayAttributes: *mut BYTE
+        pbDisplayAttributes: *mut BYTE,
     ) -> HRESULT,
-    fn Discard(dwValueTypes: DWORD) -> HRESULT
+    fn Discard(
+        dwValueTypes: DWORD,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x8fcebc98, 0x4e49, 0x4067, 0x9c, 0x6c, 0xd8, 0x6a, 0x0e, 0x09, 0x2e, 0x3d)]
 interface ISpPhraseAlt(ISpPhraseAltVtbl): ISpPhrase(ISpPhraseVtbl) {
@@ -1023,9 +1133,9 @@ interface ISpPhraseAlt(ISpPhraseAltVtbl): ISpPhrase(ISpPhraseVtbl) {
         pParent: *mut *mut ISpPhrase,
         pulStartElementInParent: *mut ULONG,
         pcElementsInParent: *mut ULONG,
-        pcElementsInAlt: *mut ULONG
+        pcElementsInAlt: *mut ULONG,
     ) -> HRESULT,
-    fn Commit() -> HRESULT
+    fn Commit() -> HRESULT,
 });
 STRUCT!{struct SPRECORESULTTIMES {
     ftStreamTime: FILETIME,
@@ -1038,31 +1148,37 @@ STRUCT!{struct SPSERIALIZEDRESULT {
 }}
 RIDL!(#[uuid(0x20b053be, 0xe235, 0x43cd, 0x9a, 0x2a, 0x8d, 0x17, 0xa4, 0x8b, 0x78, 0x42)]
 interface ISpRecoResult(ISpRecoResultVtbl): ISpPhrase(ISpPhraseVtbl) {
-    fn GetResultTimes(pTimes: *mut SPRECORESULTTIMES) -> HRESULT,
+    fn GetResultTimes(
+        pTimes: *mut SPRECORESULTTIMES,
+    ) -> HRESULT,
     fn GetAlternates(
         ulStartElement: ULONG,
         cElements: ULONG,
         ulRequestCount: ULONG,
         ppPhrases: *mut *mut ISpPhraseAlt,
-        pcPhrasesReturned: *mut ULONG
+        pcPhrasesReturned: *mut ULONG,
     ) -> HRESULT,
     fn GetAudio(
         ulStartElement: ULONG,
         cElements: ULONG,
-        ppStream: *mut *mut ISpStreamFormat
+        ppStream: *mut *mut ISpStreamFormat,
     ) -> HRESULT,
     fn SpeakAudio(
         ulStartElement: ULONG,
         cElements: ULONG,
         dwFlags: DWORD,
-        pulStreamNumber: *mut ULONG
+        pulStreamNumber: *mut ULONG,
     ) -> HRESULT,
-    fn Serialize(ppCoMemSerializedResult: *mut *mut SPSERIALIZEDRESULT) -> HRESULT,
+    fn Serialize(
+        ppCoMemSerializedResult: *mut *mut SPSERIALIZEDRESULT,
+    ) -> HRESULT,
     fn ScaleAudio(
         pAudioFormatId: *const GUID,
-        pWaveFormatEx: *const WAVEFORMATEX
+        pWaveFormatEx: *const WAVEFORMATEX,
     ) -> HRESULT,
-    fn GetRecoContext(ppRecoContext: *mut *mut ISpRecoContext) -> HRESULT
+    fn GetRecoContext(
+        ppRecoContext: *mut *mut ISpRecoContext,
+    ) -> HRESULT,
 });
 STRUCT!{struct SPTEXTSELECTIONINFO {
     ulStartActiveOffset: ULONG,
@@ -1117,18 +1233,22 @@ ENUM!{enum SPCFGRULEATTRIBUTES {
 }}
 RIDL!(#[uuid(0x8137828f, 0x591a, 0x4a42, 0xbe, 0x58, 0x49, 0xea, 0x7e, 0xba, 0xac, 0x68)]
 interface ISpGrammarBuilder(ISpGrammarBuilderVtbl): IUnknown(IUnknownVtbl) {
-    fn ResetGrammar(NewLanguage: WORD) -> HRESULT,
+    fn ResetGrammar(
+        NewLanguage: WORD,
+    ) -> HRESULT,
     fn GetRule(
         pszRuleName: LPCWSTR,
         dwRuleId: DWORD,
         dwAttributes: DWORD,
         fCreateIfNotExist: BOOL,
-        phInitialState: *mut SPSTATEHANDLE
+        phInitialState: *mut SPSTATEHANDLE,
     ) -> HRESULT,
-    fn ClearRule(hState: SPSTATEHANDLE) -> HRESULT,
+    fn ClearRule(
+        hState: SPSTATEHANDLE,
+    ) -> HRESULT,
     fn CreateNewState(
         hState: SPSTATEHANDLE,
-        phState: *mut SPSTATEHANDLE
+        phState: *mut SPSTATEHANDLE,
     ) -> HRESULT,
     fn AddWordTransition(
         hFromState: SPSTATEHANDLE,
@@ -1137,21 +1257,23 @@ interface ISpGrammarBuilder(ISpGrammarBuilderVtbl): IUnknown(IUnknownVtbl) {
         pszSeparators: LPCWSTR,
         eWordType: SPGRAMMARWORDTYPE,
         Weight: c_float,
-        pPropInfo: *const SPPROPERTYINFO
+        pPropInfo: *const SPPROPERTYINFO,
     ) -> HRESULT,
     fn AddRuleTransition(
         hFromState: SPSTATEHANDLE,
         hToState: SPSTATEHANDLE,
         hRule: SPSTATEHANDLE,
         Weight: c_float,
-        pPropInfo: *const SPPROPERTYINFO
+        pPropInfo: *const SPPROPERTYINFO,
     ) -> HRESULT,
     fn AddResource(
         hRuleState: SPSTATEHANDLE,
         pszResourceName: LPCWSTR,
-        pszResourceValue: LPCWSTR
+        pszResourceValue: LPCWSTR,
     ) -> HRESULT,
-    fn Commit(dwReserved: DWORD) -> HRESULT
+    fn Commit(
+        dwReserved: DWORD,
+    ) -> HRESULT,
 });
 ENUM!{enum SPLOADOPTIONS {
     SPLO_STATIC = 0,
@@ -1159,66 +1281,78 @@ ENUM!{enum SPLOADOPTIONS {
 }}
 RIDL!(#[uuid(0x2177db29, 0x7f45, 0x47d0, 0x85, 0x54, 0x06, 0x7e, 0x91, 0xc8, 0x05, 0x02)]
 interface ISpRecoGrammar(ISpRecoGrammarVtbl): ISpGrammarBuilder(ISpGrammarBuilderVtbl) {
-    fn GetGrammarId(pullGrammarId: *mut ULONGLONG) -> HRESULT,
-    fn GetRecoContext(ppRecoCtxt: *mut *mut ISpRecoContext) -> HRESULT,
+    fn GetGrammarId(
+        pullGrammarId: *mut ULONGLONG,
+    ) -> HRESULT,
+    fn GetRecoContext(
+        ppRecoCtxt: *mut *mut ISpRecoContext,
+    ) -> HRESULT,
     fn LoadCmdFromFile(
         pszFileName: LPCWSTR,
-        Options: SPLOADOPTIONS
+        Options: SPLOADOPTIONS,
     ) -> HRESULT,
     fn LoadCmdFromObject(
         rcid: REFCLSID,
         pszGrammarName: LPCWSTR,
-        Options: SPLOADOPTIONS
+        Options: SPLOADOPTIONS,
     ) -> HRESULT,
     fn LoadCmdFromResource(
         hModule: HMODULE,
         pszResourceName: LPCWSTR,
         pszResourceType: LPCWSTR,
         wLanguage: WORD,
-        Options: SPLOADOPTIONS
+        Options: SPLOADOPTIONS,
     ) -> HRESULT,
     fn LoadCmdFromMemory(
         pGrammar: *const SPBINARYGRAMMAR,
-        Options: SPLOADOPTIONS
+        Options: SPLOADOPTIONS,
     ) -> HRESULT,
     fn LoadCmdFromProprietaryGrammar(
         rguidParam: REFGUID,
         pszStringParam: LPCWSTR,
         pvDataPrarm: *const c_void,
         cbDataSize: ULONG,
-        Options: SPLOADOPTIONS
+        Options: SPLOADOPTIONS,
     ) -> HRESULT,
     fn SetRuleState(
         pszName: LPCWSTR,
         pReserved: *mut c_void,
-        NewState: SPRULESTATE
+        NewState: SPRULESTATE,
     ) -> HRESULT,
     fn SetRuleIdState(
         ulRuleId: ULONG,
-        NewState: SPRULESTATE
+        NewState: SPRULESTATE,
     ) -> HRESULT,
     fn LoadDictation(
         pszTopicName: LPCWSTR,
-        Options: SPLOADOPTIONS
+        Options: SPLOADOPTIONS,
     ) -> HRESULT,
     fn UnloadDictation() -> HRESULT,
-    fn SetDictationState(NewState: SPRULESTATE) -> HRESULT,
+    fn SetDictationState(
+        NewState: SPRULESTATE,
+    ) -> HRESULT,
     fn SetWordSequenceData(
         pText: *const WCHAR,
         cchText: ULONG,
-        pInfo: *const SPTEXTSELECTIONINFO
+        pInfo: *const SPTEXTSELECTIONINFO,
     ) -> HRESULT,
-    fn SetTextSelection(pInfo: *const SPTEXTSELECTIONINFO) -> HRESULT,
+    fn SetTextSelection(
+        pInfo: *const SPTEXTSELECTIONINFO,
+    ) -> HRESULT,
     fn IsPronounceable(
         pszWord: LPCWSTR,
-        pWordPronounceable: *mut SPWORDPRONOUNCEABLE
+        pWordPronounceable: *mut SPWORDPRONOUNCEABLE,
     ) -> HRESULT,
-    fn SetGrammarState(eGrammarState: SPGRAMMARSTATE) -> HRESULT,
+    fn SetGrammarState(
+        eGrammarState: SPGRAMMARSTATE,
+    ) -> HRESULT,
     fn SaveCmd(
         pStream: *mut IStream,
-        ppszCoMemErrorText: *mut LPWSTR
+        ppszCoMemErrorText: *mut LPWSTR,
     ) -> HRESULT,
-    fn GetGrammarState(peGrammarState: *mut SPGRAMMARSTATE) -> HRESULT
+    fn GetGrammarState(
+        peGrammarState: *mut SPGRAMMARSTATE,
+    ) -> HRESULT,
 });
 STRUCT!{struct SPRECOCONTEXTSTATUS {
     eInterference: SPINTERFERENCE,
@@ -1236,67 +1370,89 @@ ENUM!{enum SPAUDIOOPTIONS {
 }}
 RIDL!(#[uuid(0xf740a62f, 0x7c15, 0x489e, 0x82, 0x34, 0x94, 0x0a, 0x33, 0xd9, 0x27, 0x2d)]
 interface ISpRecoContext(ISpRecoContextVtbl): ISpEventSource(ISpEventSourceVtbl) {
-    fn GetRecognizer(ppRecognizer: *mut *mut ISpRecognizer) -> HRESULT,
+    fn GetRecognizer(
+        ppRecognizer: *mut *mut ISpRecognizer,
+    ) -> HRESULT,
     fn CreateGrammer(
         ullGrammarId: ULONGLONG,
-        ppGrammar: *mut *mut ISpRecoGrammar
+        ppGrammar: *mut *mut ISpRecoGrammar,
     ) -> HRESULT,
-    fn GetStatus(pState: *mut SPRECOCONTEXTSTATUS) -> HRESULT,
-    fn GetMaxAlternates(pcAlternates: *mut ULONG) -> HRESULT,
-    fn SetMaxAlternates(cAlternates: ULONG) -> HRESULT,
+    fn GetStatus(
+        pState: *mut SPRECOCONTEXTSTATUS,
+    ) -> HRESULT,
+    fn GetMaxAlternates(
+        pcAlternates: *mut ULONG,
+    ) -> HRESULT,
+    fn SetMaxAlternates(
+        cAlternates: ULONG,
+    ) -> HRESULT,
     fn SetAudioOptions(
         Options: SPAUDIOOPTIONS,
         pAudioFormatId: *const GUID,
-        pWaveFormatEx: *const WAVEFORMATEX
+        pWaveFormatEx: *const WAVEFORMATEX,
     ) -> HRESULT,
     fn GetAudioOptions(
         pOptions: *mut SPAUDIOOPTIONS,
         pAudioFormatId: *mut GUID,
-        ppCoMemWFEX: *mut *mut WAVEFORMATEX
+        ppCoMemWFEX: *mut *mut WAVEFORMATEX,
     ) -> HRESULT,
     fn DeserializeResult(
         pSerializedResult: *const SPSERIALIZEDRESULT,
-        ppResult: *mut *mut ISpRecoResult
+        ppResult: *mut *mut ISpRecoResult,
     ) -> HRESULT,
     fn Bookmark(
         Options: SPBOOKMARKOPTIONS,
         ullStreamPosition: ULONGLONG,
-        lparamEvent: LPARAM
+        lparamEvent: LPARAM,
     ) -> HRESULT,
     fn SetAdaptionData(
         pAdaptionData: LPCWSTR,
-        cch: ULONG
+        cch: ULONG,
     ) -> HRESULT,
-    fn Pause(dwReserved: DWORD) -> HRESULT,
-    fn Resume(dwReserved: DWORD) -> HRESULT,
+    fn Pause(
+        dwReserved: DWORD,
+    ) -> HRESULT,
+    fn Resume(
+        dwReserved: DWORD,
+    ) -> HRESULT,
     fn SetVoice(
         pVoice: *mut ISpVoice,
-        fAllowFormatChanges: BOOL
+        fAllowFormatChanges: BOOL,
     ) -> HRESULT,
-    fn GetVoice(ppVoice: *mut *mut ISpVoice) -> HRESULT,
-    fn SetVoicePurgeEvent(ullEventIntereset: ULONGLONG) -> HRESULT,
-    fn GetVoicePurgeEvent(pullEventIntereset: *mut ULONGLONG) -> HRESULT,
-    fn SetContextState(eContextState: SPCONTEXTSTATE) -> HRESULT,
-    fn GetContextState(peContextState: *mut SPCONTEXTSTATE) -> HRESULT
+    fn GetVoice(
+        ppVoice: *mut *mut ISpVoice,
+    ) -> HRESULT,
+    fn SetVoicePurgeEvent(
+        ullEventIntereset: ULONGLONG,
+    ) -> HRESULT,
+    fn GetVoicePurgeEvent(
+        pullEventIntereset: *mut ULONGLONG,
+    ) -> HRESULT,
+    fn SetContextState(
+        eContextState: SPCONTEXTSTATE,
+    ) -> HRESULT,
+    fn GetContextState(
+        peContextState: *mut SPCONTEXTSTATE,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x5b4fb971, 0xb115, 0x4de1, 0xad, 0x97, 0xe4, 0x82, 0xe3, 0xbf, 0x6e, 0xe4)]
 interface ISpProperties(ISpPropertiesVtbl): IUnknown(IUnknownVtbl) {
     fn SetPropertyNum(
         pName: LPCWSTR,
-        lValue: LONG
+        lValue: LONG,
     ) -> HRESULT,
     fn GetPropertyNum(
         pName: LPCWSTR,
-        plValue: *mut LONG
+        plValue: *mut LONG,
     ) -> HRESULT,
     fn SetPropertyString(
         pName: LPCWSTR,
-        pValue: LPCWSTR
+        pValue: LPCWSTR,
     ) -> HRESULT,
     fn GetPropertyString(
         pName: LPCWSTR,
-        ppCoMemValue: *mut LPWSTR
-    ) -> HRESULT
+        ppCoMemValue: *mut LPWSTR,
+    ) -> HRESULT,
 });
 pub const SP_MAX_LANGIDS: ULONG = 20;
 STRUCT!{struct SPRECOGNIZERSTATUS {
@@ -1323,40 +1479,62 @@ ENUM!{enum SPRECOSTATE {
 }}
 RIDL!(#[uuid(0xc2b5f241, 0xdaa0, 0x4507, 0x9e, 0x16, 0x5a, 0x1e, 0xaa, 0x2b, 0x7a, 0x5c)]
 interface ISpRecognizer(ISpRecognizerVtbl): ISpProperties(ISpPropertiesVtbl) {
-    fn SetRecognizer(pRecognizer: *mut ISpObjectToken) -> HRESULT,
-    fn GetRecognizer(ppRecognizer: *mut *mut ISpObjectToken) -> HRESULT,
+    fn SetRecognizer(
+        pRecognizer: *mut ISpObjectToken,
+    ) -> HRESULT,
+    fn GetRecognizer(
+        ppRecognizer: *mut *mut ISpObjectToken,
+    ) -> HRESULT,
     fn SetInput(
         pUnkInput: *mut IUnknown,
-        fAllowFormatChanges: BOOL
+        fAllowFormatChanges: BOOL,
     ) -> HRESULT,
-    fn GetInputObjectToken(ppToken: *mut *mut ISpObjectToken) -> HRESULT,
-    fn GetInputStream(ppStream: *mut *mut ISpStreamFormat) -> HRESULT,
-    fn CreateRecoContext(ppNewCtxt: *mut *mut ISpRecoContext) -> HRESULT,
-    fn GetRecoProfile(ppToken: *mut *mut ISpObjectToken) -> HRESULT,
-    fn SetRecoProfile(pToken: *mut ISpObjectToken) -> HRESULT,
+    fn GetInputObjectToken(
+        ppToken: *mut *mut ISpObjectToken,
+    ) -> HRESULT,
+    fn GetInputStream(
+        ppStream: *mut *mut ISpStreamFormat,
+    ) -> HRESULT,
+    fn CreateRecoContext(
+        ppNewCtxt: *mut *mut ISpRecoContext,
+    ) -> HRESULT,
+    fn GetRecoProfile(
+        ppToken: *mut *mut ISpObjectToken,
+    ) -> HRESULT,
+    fn SetRecoProfile(
+        pToken: *mut ISpObjectToken,
+    ) -> HRESULT,
     fn IsSharedInstance() -> HRESULT,
-    fn GetRecoState(pState: *mut SPRECOSTATE) -> HRESULT,
-    fn SetRecoState(NewState: SPRECOSTATE) -> HRESULT,
-    fn GetStatus(pStatus: *mut SPRECOGNIZERSTATUS) -> HRESULT,
+    fn GetRecoState(
+        pState: *mut SPRECOSTATE,
+    ) -> HRESULT,
+    fn SetRecoState(
+        NewState: SPRECOSTATE,
+    ) -> HRESULT,
+    fn GetStatus(
+        pStatus: *mut SPRECOGNIZERSTATUS,
+    ) -> HRESULT,
     fn GetFormat(
         WaveFormatType: SPSTREAMFORMATTYPE,
         pFormatId: *mut GUID,
-        ppCoMemWFEX: *mut WAVEFORMATEX
+        ppCoMemWFEX: *mut WAVEFORMATEX,
     ) -> HRESULT,
     fn IsUISupported(
         pszTypeOfUI: LPCWSTR,
         pvExtraData: *mut c_void,
         cbExtraData: ULONG,
-        pfSupported: *mut BOOL
+        pfSupported: *mut BOOL,
     ) -> HRESULT,
     fn DisplayUI(
         hwndParent: HWND,
         pszTitle: LPCWSTR,
         pszTypeOfUI: LPCWSTR,
         pvExtraData: *mut c_void,
-        cbExtraData: ULONG
+        cbExtraData: ULONG,
     ) -> HRESULT,
-    fn EmulateRecognition(pPhrase: *mut ISpPhrase) -> HRESULT
+    fn EmulateRecognition(
+        pPhrase: *mut ISpPhrase,
+    ) -> HRESULT,
 });
 pub type SpeechLanguageId = c_long;
 ENUM!{enum DISPID_SpeechDataKey {
@@ -2116,539 +2294,849 @@ RIDL!(#[uuid(0xce17c09b, 0x4efa, 0x44d5, 0xa4, 0xc9, 0x59, 0xd9, 0x58, 0x5a, 0xb
 interface ISpeechDataKey(ISpeechDataKeyVtbl): IDispatch(IDispatchVtbl) {
     fn SetBinaryValue(
         ValueName: BSTR,
-        Value: VARIANT
+        Value: VARIANT,
     ) -> HRESULT,
     fn GetBinaryValue(
         ValueName: BSTR,
-        Value: *mut VARIANT
+        Value: *mut VARIANT,
     ) -> HRESULT,
     fn SetStringValue(
         ValueName: BSTR,
-        Value: BSTR
+        Value: BSTR,
     ) -> HRESULT,
     fn GetStringValue(
         ValueName: BSTR,
-        Value: *mut BSTR
+        Value: *mut BSTR,
     ) -> HRESULT,
     fn SetLongValue(
         ValueName: BSTR,
-        Value: c_long
+        Value: c_long,
     ) -> HRESULT,
     fn GetLongValue(
         ValueName: BSTR,
-        Value: *mut c_long
+        Value: *mut c_long,
     ) -> HRESULT,
     fn OpenKey(
         SubKeyName: BSTR,
-        SubKey: *mut *mut ISpeechDataKey
+        SubKey: *mut *mut ISpeechDataKey,
     ) -> HRESULT,
     fn CreateKey(
         SubKeyName: BSTR,
-        SubKey: *mut *mut ISpeechDataKey
+        SubKey: *mut *mut ISpeechDataKey,
     ) -> HRESULT,
-    fn DeleteKey(SubKeyName: BSTR) -> HRESULT,
-    fn DeleteValue(ValueName: BSTR) -> HRESULT,
+    fn DeleteKey(
+        SubKeyName: BSTR,
+    ) -> HRESULT,
+    fn DeleteValue(
+        ValueName: BSTR,
+    ) -> HRESULT,
     fn EnumKeys(
         Index: c_long,
-        SubKeyName: *mut BSTR
+        SubKeyName: *mut BSTR,
     ) -> HRESULT,
     fn EnumValues(
         Index: c_long,
-        ValueName: *mut BSTR
-    ) -> HRESULT
+        ValueName: *mut BSTR,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xc74a3adc, 0xb727, 0x4500, 0xa8, 0x4a, 0xb5, 0x26, 0x72, 0x1c, 0x8b, 0x8c)]
 interface ISpeechObjectToken(ISpeechObjectTokenVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Id(ObjectId: *mut BSTR) -> HRESULT,
-    fn get_DataKey(DataKey: *mut *mut ISpeechDataKey) -> HRESULT,
-    fn get_Category(Category: *mut *mut ISpeechObjectTokenCategory) -> HRESULT,
+    fn get_Id(
+        ObjectId: *mut BSTR,
+    ) -> HRESULT,
+    fn get_DataKey(
+        DataKey: *mut *mut ISpeechDataKey,
+    ) -> HRESULT,
+    fn get_Category(
+        Category: *mut *mut ISpeechObjectTokenCategory,
+    ) -> HRESULT,
     fn GetDescription(
         Locale: c_long,
-        Description: *mut BSTR
+        Description: *mut BSTR,
     ) -> HRESULT,
     fn SetId(
         Id: BSTR,
         CategoryId: BSTR,
-        CreateIfNotExist: VARIANT_BOOL
+        CreateIfNotExist: VARIANT_BOOL,
     ) -> HRESULT,
     fn GetAttribute(
         AttributeName: BSTR,
-        AttributeValue: *mut BSTR
+        AttributeValue: *mut BSTR,
     ) -> HRESULT,
     fn CreateInstance(
         pUnkOuter: *mut IUnknown,
         ClsContext: SpeechTokenContext,
-        Object: *mut *mut IUnknown
+        Object: *mut *mut IUnknown,
     ) -> HRESULT,
-    fn Remove(ObjectStorageCLSID: BSTR) -> HRESULT,
+    fn Remove(
+        ObjectStorageCLSID: BSTR,
+    ) -> HRESULT,
     fn GetStorageFileName(
         ObjectStorageCLSID: BSTR,
         KeyName: BSTR,
         FileName: BSTR,
         Folder: BSTR,
-        FilePath: *mut BSTR
+        FilePath: *mut BSTR,
     ) -> HRESULT,
     fn RemoveStorageFileName(
         ObjectStorageCLSID: BSTR,
         KeyName: BSTR,
-        DeleteFile: VARIANT_BOOL
+        DeleteFile: VARIANT_BOOL,
     ) -> HRESULT,
     fn IsUISupported(
         TypeOfUI: BSTR,
         ExtraData: *const VARIANT,
         Object: *mut IUnknown,
-        Supported: *mut VARIANT_BOOL
+        Supported: *mut VARIANT_BOOL,
     ) -> HRESULT,
     fn DisplayUI(
         hWnd: c_long,
         Title: BSTR,
         TypeOfUI: BSTR,
         ExtraData: *const VARIANT,
-        Object: *mut IUnknown
+        Object: *mut IUnknown,
     ) -> HRESULT,
     fn MatchesAttributes(
         Attributes: BSTR,
-        Matches: *mut VARIANT_BOOL
-    ) -> HRESULT
+        Matches: *mut VARIANT_BOOL,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x9285b776, 0x2e7b, 0x4bc0, 0xb5, 0x3e, 0x58, 0x0e, 0xb6, 0xfa, 0x96, 0x7f)]
 interface ISpeechObjectTokens(ISpeechObjectTokensVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Count(Count: *mut c_long) -> HRESULT,
+    fn get_Count(
+        Count: *mut c_long,
+    ) -> HRESULT,
     fn Item(
         Index: c_long,
-        Token: *mut *mut ISpeechObjectToken
+        Token: *mut *mut ISpeechObjectToken,
     ) -> HRESULT,
-    fn get__NewEnum(ppEnumVARIANT: *mut *mut IUnknown) -> HRESULT
+    fn get__NewEnum(
+        ppEnumVARIANT: *mut *mut IUnknown,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xca7eac50, 0x2d01, 0x4145, 0x86, 0xd4, 0x5a, 0xe7, 0xd7, 0x0f, 0x44, 0x69)]
 interface ISpeechObjectTokenCategory(ISpeechObjectTokenCategoryVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Id(Id: *mut BSTR) -> HRESULT,
-    fn put_Default(TokenId: BSTR) -> HRESULT,
-    fn get_Default(TokenId: *mut BSTR) -> HRESULT,
+    fn get_Id(
+        Id: *mut BSTR,
+    ) -> HRESULT,
+    fn put_Default(
+        TokenId: BSTR,
+    ) -> HRESULT,
+    fn get_Default(
+        TokenId: *mut BSTR,
+    ) -> HRESULT,
     fn SetId(
         Id: BSTR,
-        CreateIfNotExist: VARIANT_BOOL
+        CreateIfNotExist: VARIANT_BOOL,
     ) -> HRESULT,
     fn GetDataKey(
         Location: SpeechDataKeyLocation,
-        DataKey: *mut *mut ISpeechDataKey
+        DataKey: *mut *mut ISpeechDataKey,
     ) -> HRESULT,
     fn EnumerateTokens(
         RequiredAttributes: BSTR,
         OptionalAttributes: BSTR,
-        Tokens: *mut *mut ISpeechObjectTokens
-    ) -> HRESULT
+        Tokens: *mut *mut ISpeechObjectTokens,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x11b103d8, 0x1142, 0x4edf, 0xa0, 0x93, 0x82, 0xfb, 0x39, 0x15, 0xf8, 0xcc)]
 interface ISpeechAudioBufferInfo(ISpeechAudioBufferInfoVtbl): IDispatch(IDispatchVtbl) {
-    fn get_MinNotification(MinNotification: *mut c_long) -> HRESULT,
-    fn put_MinNotification(MinNotification: c_long) -> HRESULT,
-    fn get_BufferSize(BufferSize: *mut c_long) -> HRESULT,
-    fn put_BufferSize(BufferSize: c_long) -> HRESULT,
-    fn get_EventBias(EventBias: *mut c_long) -> HRESULT,
-    fn put_EventBias(EventBias: c_long) -> HRESULT
+    fn get_MinNotification(
+        MinNotification: *mut c_long,
+    ) -> HRESULT,
+    fn put_MinNotification(
+        MinNotification: c_long,
+    ) -> HRESULT,
+    fn get_BufferSize(
+        BufferSize: *mut c_long,
+    ) -> HRESULT,
+    fn put_BufferSize(
+        BufferSize: c_long,
+    ) -> HRESULT,
+    fn get_EventBias(
+        EventBias: *mut c_long,
+    ) -> HRESULT,
+    fn put_EventBias(
+        EventBias: c_long,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xc62d9c91, 0x7458, 0x47f6, 0x86, 0x2d, 0x1e, 0xf8, 0x6f, 0xb0, 0xb2, 0x78)]
 interface ISpeechAudioStatus(ISpeechAudioStatusVtbl): IDispatch(IDispatchVtbl) {
-    fn get_FreeBufferSpace(FreeBufferSpace: *mut c_long) -> HRESULT,
-    fn get_NonBlockingIO(NonBlockingIO: *mut c_long) -> HRESULT,
-    fn get_State(State: *mut SpeechAudioState) -> HRESULT,
-    fn get_CurrentSeekPosition(CurrentSeekPosition: *mut VARIANT) -> HRESULT,
-    fn get_CurrentDevicePosition(CurrentDevicePosition: *mut VARIANT) -> HRESULT
+    fn get_FreeBufferSpace(
+        FreeBufferSpace: *mut c_long,
+    ) -> HRESULT,
+    fn get_NonBlockingIO(
+        NonBlockingIO: *mut c_long,
+    ) -> HRESULT,
+    fn get_State(
+        State: *mut SpeechAudioState,
+    ) -> HRESULT,
+    fn get_CurrentSeekPosition(
+        CurrentSeekPosition: *mut VARIANT,
+    ) -> HRESULT,
+    fn get_CurrentDevicePosition(
+        CurrentDevicePosition: *mut VARIANT,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xe6e9c590, 0x3e18, 0x40e3, 0x82, 0x99, 0x06, 0x1f, 0x98, 0xbd, 0xe7, 0xc7)]
 interface ISpeechAudioFormat(ISpeechAudioFormatVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Type(AudioFormat: *mut SpeechAudioFormatType) -> HRESULT,
-    fn put_Type(AudioFormat: SpeechAudioFormatType) -> HRESULT,
-    fn get_Guid(Guid: *mut BSTR) -> HRESULT,
-    fn put_Guid(Guid: BSTR) -> HRESULT,
-    fn GetWaveFormatEx(SpeechWaveFormatEx: *mut *mut ISpeechWaveFormatEx) -> HRESULT,
-    fn SetWaveFormatEx(SpeechWaveFormatEx: *mut ISpeechWaveFormatEx) -> HRESULT
+    fn get_Type(
+        AudioFormat: *mut SpeechAudioFormatType,
+    ) -> HRESULT,
+    fn put_Type(
+        AudioFormat: SpeechAudioFormatType,
+    ) -> HRESULT,
+    fn get_Guid(
+        Guid: *mut BSTR,
+    ) -> HRESULT,
+    fn put_Guid(
+        Guid: BSTR,
+    ) -> HRESULT,
+    fn GetWaveFormatEx(
+        SpeechWaveFormatEx: *mut *mut ISpeechWaveFormatEx,
+    ) -> HRESULT,
+    fn SetWaveFormatEx(
+        SpeechWaveFormatEx: *mut ISpeechWaveFormatEx,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x7a1ef0d5, 0x1581, 0x4741, 0x88, 0xe4, 0x20, 0x9a, 0x49, 0xf1, 0x1a, 0x10)]
 interface ISpeechWaveFormatEx(ISpeechWaveFormatExVtbl): IDispatch(IDispatchVtbl) {
-    fn get_FormatTag(FormatTag: *mut c_short) -> HRESULT,
-    fn put_FormatTag(FormatTag: c_short) -> HRESULT,
-    fn get_Channels(Channels: *mut c_short) -> HRESULT,
-    fn put_Channels(Channels: c_short) -> HRESULT,
-    fn get_SamplesPerSec(SamplesPerSec: *mut c_long) -> HRESULT,
-    fn put_SamplesPerSec(SamplesPerSec: c_long) -> HRESULT,
-    fn get_AvgBytesPerSec(AvgBytesPerSec: *mut c_long) -> HRESULT,
-    fn put_AvgBytesPerSec(AvgBytesPerSec: c_long) -> HRESULT,
-    fn get_BlockAlign(BlockAlign: *mut c_short) -> HRESULT,
-    fn put_BlockAlign(BlockAlign: c_short) -> HRESULT,
-    fn get_BitsPerSample(BitsPerSample: *mut c_short) -> HRESULT,
-    fn put_BitsPerSample(BitsPerSample: c_short) -> HRESULT,
-    fn get_ExtraData(ExtraData: *mut VARIANT) -> HRESULT,
-    fn put_ExtraData(ExtraData: VARIANT) -> HRESULT
+    fn get_FormatTag(
+        FormatTag: *mut c_short,
+    ) -> HRESULT,
+    fn put_FormatTag(
+        FormatTag: c_short,
+    ) -> HRESULT,
+    fn get_Channels(
+        Channels: *mut c_short,
+    ) -> HRESULT,
+    fn put_Channels(
+        Channels: c_short,
+    ) -> HRESULT,
+    fn get_SamplesPerSec(
+        SamplesPerSec: *mut c_long,
+    ) -> HRESULT,
+    fn put_SamplesPerSec(
+        SamplesPerSec: c_long,
+    ) -> HRESULT,
+    fn get_AvgBytesPerSec(
+        AvgBytesPerSec: *mut c_long,
+    ) -> HRESULT,
+    fn put_AvgBytesPerSec(
+        AvgBytesPerSec: c_long,
+    ) -> HRESULT,
+    fn get_BlockAlign(
+        BlockAlign: *mut c_short,
+    ) -> HRESULT,
+    fn put_BlockAlign(
+        BlockAlign: c_short,
+    ) -> HRESULT,
+    fn get_BitsPerSample(
+        BitsPerSample: *mut c_short,
+    ) -> HRESULT,
+    fn put_BitsPerSample(
+        BitsPerSample: c_short,
+    ) -> HRESULT,
+    fn get_ExtraData(
+        ExtraData: *mut VARIANT,
+    ) -> HRESULT,
+    fn put_ExtraData(
+        ExtraData: VARIANT,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x6450336f, 0x7d49, 0x4ced, 0x80, 0x97, 0x49, 0xd6, 0xde, 0xe3, 0x72, 0x94)]
 interface ISpeechBaseStream(ISpeechBaseStreamVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Format(AudioFormat: *mut *mut ISpeechAudioFormat) -> HRESULT,
-    fn putref_Format(AudioFormat: *mut ISpeechAudioFormat) -> HRESULT,
+    fn get_Format(
+        AudioFormat: *mut *mut ISpeechAudioFormat,
+    ) -> HRESULT,
+    fn putref_Format(
+        AudioFormat: *mut ISpeechAudioFormat,
+    ) -> HRESULT,
     fn Read(
         Buffer: *mut VARIANT,
         NumberOfBytes: c_long,
-        BytesRead: *mut c_long
+        BytesRead: *mut c_long,
     ) -> HRESULT,
     fn Write(
         Buffer: VARIANT,
-        BytesWritten: *mut c_long
+        BytesWritten: *mut c_long,
     ) -> HRESULT,
     fn Seek(
         Position: VARIANT,
         Origin: SpeechStreamSeekPositionType,
-        NewPosition: *mut VARIANT
-    ) -> HRESULT
+        NewPosition: *mut VARIANT,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xaf67f125, 0xab39, 0x4e93, 0xb4, 0xa2, 0xcc, 0x2e, 0x66, 0xe1, 0x82, 0xa7)]
 interface ISpeechFileStream(ISpeechFileStreamVtbl): ISpeechBaseStream(ISpeechBaseStreamVtbl) {
     fn Open(
         FileName: BSTR,
         FileMode: SpeechStreamFileMode,
-        DoEvents: VARIANT_BOOL
+        DoEvents: VARIANT_BOOL,
     ) -> HRESULT,
-    fn Close() -> HRESULT
+    fn Close() -> HRESULT,
 });
 RIDL!(#[uuid(0xeeb14b68, 0x808b, 0x4abe, 0xa5, 0xea, 0xb5, 0x1d, 0xa7, 0x58, 0x80, 0x08)]
 interface ISpeechMemoryStream(ISpeechMemoryStreamVtbl): ISpeechBaseStream(ISpeechBaseStreamVtbl) {
-    fn SetData(Data: VARIANT) -> HRESULT,
-    fn GetData(pData: *mut VARIANT) -> HRESULT
+    fn SetData(
+        Data: VARIANT,
+    ) -> HRESULT,
+    fn GetData(
+        pData: *mut VARIANT,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x1a9e9f4f, 0x104f, 0x4db8, 0xa1, 0x15, 0xef, 0xd7, 0xfd, 0x0c, 0x97, 0xae)]
 interface ISpeechCustomStream(ISpeechCustomStreamVtbl): ISpeechBaseStream(ISpeechBaseStreamVtbl) {
-    fn get_BaseStream(ppUnkStream: *mut *mut IUnknown) -> HRESULT,
-    fn putref_BaseStream(pUnkStream: *mut IUnknown) -> HRESULT
+    fn get_BaseStream(
+        ppUnkStream: *mut *mut IUnknown,
+    ) -> HRESULT,
+    fn putref_BaseStream(
+        pUnkStream: *mut IUnknown,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xcff8e175, 0x019e, 0x11d3, 0xa0, 0x8e, 0x00, 0xc0, 0x4f, 0x8e, 0xf9, 0xb5)]
 interface ISpeechAudio(ISpeechAudioVtbl): ISpeechBaseStream(ISpeechBaseStreamVtbl) {
-    fn get_Status(Status: *mut *mut ISpeechAudioStatus) -> HRESULT,
-    fn get_BufferInfo(BufferInfo: *mut *mut ISpeechAudioBufferInfo) -> HRESULT,
-    fn get_DefaultFormat(StreamFormat: *mut *mut ISpeechAudioFormat) -> HRESULT,
-    fn get_Volume(Volume: *mut c_long) -> HRESULT,
-    fn put_Volume(Volume: c_long) -> HRESULT,
-    fn get_BufferNotifySize(BufferNotifySize: *mut c_long) -> HRESULT,
-    fn put_BufferNotifySize(BufferNotifySize: c_long) -> HRESULT,
-    fn get_EventHandle(EventHandle: *mut c_long) -> HRESULT,
-    fn SetState(State: SpeechAudioState) -> HRESULT
+    fn get_Status(
+        Status: *mut *mut ISpeechAudioStatus,
+    ) -> HRESULT,
+    fn get_BufferInfo(
+        BufferInfo: *mut *mut ISpeechAudioBufferInfo,
+    ) -> HRESULT,
+    fn get_DefaultFormat(
+        StreamFormat: *mut *mut ISpeechAudioFormat,
+    ) -> HRESULT,
+    fn get_Volume(
+        Volume: *mut c_long,
+    ) -> HRESULT,
+    fn put_Volume(
+        Volume: c_long,
+    ) -> HRESULT,
+    fn get_BufferNotifySize(
+        BufferNotifySize: *mut c_long,
+    ) -> HRESULT,
+    fn put_BufferNotifySize(
+        BufferNotifySize: c_long,
+    ) -> HRESULT,
+    fn get_EventHandle(
+        EventHandle: *mut c_long,
+    ) -> HRESULT,
+    fn SetState(
+        State: SpeechAudioState,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x3c76af6d, 0x1fd7, 0x4831, 0x81, 0xd1, 0x3b, 0x71, 0xd5, 0xa1, 0x3c, 0x44)]
 interface ISpeechMMSysAudio(ISpeechMMSysAudioVtbl): ISpeechAudio(ISpeechAudioVtbl) {
-    fn get_DeviceId(DeviceId: *mut c_long) -> HRESULT,
-    fn put_DeviceId(DeviceId: c_long) -> HRESULT,
-    fn get_LineId(LineId: *mut c_long) -> HRESULT,
-    fn put_LineId(LineId: c_long) -> HRESULT,
-    fn get_MMHandle(Handle: *mut c_long) -> HRESULT
+    fn get_DeviceId(
+        DeviceId: *mut c_long,
+    ) -> HRESULT,
+    fn put_DeviceId(
+        DeviceId: c_long,
+    ) -> HRESULT,
+    fn get_LineId(
+        LineId: *mut c_long,
+    ) -> HRESULT,
+    fn put_LineId(
+        LineId: c_long,
+    ) -> HRESULT,
+    fn get_MMHandle(
+        Handle: *mut c_long,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x269316d8, 0x57bd, 0x11d2, 0x9e, 0xee, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96)]
 interface ISpeechVoice(ISpeechVoiceVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Status(Status: *mut *mut ISpeechVoiceStatus) -> HRESULT,
-    fn get_Voice(Voice: *mut *mut ISpeechObjectToken) -> HRESULT,
-    fn putref_Voice(Voice: *mut ISpeechObjectToken) -> HRESULT,
-    fn get_AudioOutput(AudioOutput: *mut *mut ISpeechObjectToken) -> HRESULT,
-    fn putref_AudioOutput(AudioOutput: *mut ISpeechObjectToken) -> HRESULT,
-    fn get_AudioOutputStream(AudioOutputStream: *mut *mut ISpeechBaseStream) -> HRESULT,
-    fn putref_AudioOutputStream(AudioOutputStream: *mut ISpeechBaseStream) -> HRESULT,
-    fn get_Rate(Rate: *mut c_long) -> HRESULT,
-    fn put_Rate(Rate: c_long) -> HRESULT,
-    fn get_Volume(Volume: *mut c_long) -> HRESULT,
-    fn put_Volume(Volume: c_long) -> HRESULT,
-    fn put_AllowAudioOutputFormatChangesOnNextSet(Allow: VARIANT_BOOL) -> HRESULT,
-    fn get_AllowAudioOutputFormatChangesOnNextSet(Allow: *mut VARIANT_BOOL) -> HRESULT,
-    fn get_EventInterests(EventInterestFlags: *mut SpeechVoiceEvents) -> HRESULT,
-    fn put_EventInterests(EventInterestFlags: SpeechVoiceEvents) -> HRESULT,
-    fn put_Priority(Priority: SpeechVoicePriority) -> HRESULT,
-    fn get_Priority(Priority: *mut SpeechVoicePriority) -> HRESULT,
-    fn put_AlertBoundary(Boundary: SpeechVoiceEvents) -> HRESULT,
-    fn get_AlertBoundary(Boundary: *mut SpeechVoiceEvents) -> HRESULT,
-    fn put_SynchronousSpeakTimeout(msTimeout: c_long) -> HRESULT,
-    fn get_SynchronousSpeakTimeout(msTimeOut: *mut c_long) -> HRESULT,
+    fn get_Status(
+        Status: *mut *mut ISpeechVoiceStatus,
+    ) -> HRESULT,
+    fn get_Voice(
+        Voice: *mut *mut ISpeechObjectToken,
+    ) -> HRESULT,
+    fn putref_Voice(
+        Voice: *mut ISpeechObjectToken,
+    ) -> HRESULT,
+    fn get_AudioOutput(
+        AudioOutput: *mut *mut ISpeechObjectToken,
+    ) -> HRESULT,
+    fn putref_AudioOutput(
+        AudioOutput: *mut ISpeechObjectToken,
+    ) -> HRESULT,
+    fn get_AudioOutputStream(
+        AudioOutputStream: *mut *mut ISpeechBaseStream,
+    ) -> HRESULT,
+    fn putref_AudioOutputStream(
+        AudioOutputStream: *mut ISpeechBaseStream,
+    ) -> HRESULT,
+    fn get_Rate(
+        Rate: *mut c_long,
+    ) -> HRESULT,
+    fn put_Rate(
+        Rate: c_long,
+    ) -> HRESULT,
+    fn get_Volume(
+        Volume: *mut c_long,
+    ) -> HRESULT,
+    fn put_Volume(
+        Volume: c_long,
+    ) -> HRESULT,
+    fn put_AllowAudioOutputFormatChangesOnNextSet(
+        Allow: VARIANT_BOOL,
+    ) -> HRESULT,
+    fn get_AllowAudioOutputFormatChangesOnNextSet(
+        Allow: *mut VARIANT_BOOL,
+    ) -> HRESULT,
+    fn get_EventInterests(
+        EventInterestFlags: *mut SpeechVoiceEvents,
+    ) -> HRESULT,
+    fn put_EventInterests(
+        EventInterestFlags: SpeechVoiceEvents,
+    ) -> HRESULT,
+    fn put_Priority(
+        Priority: SpeechVoicePriority,
+    ) -> HRESULT,
+    fn get_Priority(
+        Priority: *mut SpeechVoicePriority,
+    ) -> HRESULT,
+    fn put_AlertBoundary(
+        Boundary: SpeechVoiceEvents,
+    ) -> HRESULT,
+    fn get_AlertBoundary(
+        Boundary: *mut SpeechVoiceEvents,
+    ) -> HRESULT,
+    fn put_SynchronousSpeakTimeout(
+        msTimeout: c_long,
+    ) -> HRESULT,
+    fn get_SynchronousSpeakTimeout(
+        msTimeOut: *mut c_long,
+    ) -> HRESULT,
     fn Speak(
         Text: BSTR,
         Flags: SpeechVoiceSpeakFlags,
-        StreamNumber: *mut c_long
+        StreamNumber: *mut c_long,
     ) -> HRESULT,
     fn SpeakStream(
         Stream: *mut ISpeechBaseStream,
         Flags: SpeechVoiceSpeakFlags,
-        StreamNumber: *mut c_long
+        StreamNumber: *mut c_long,
     ) -> HRESULT,
     fn Pause() -> HRESULT,
     fn Resume() -> HRESULT,
     fn Skip(
         Type: BSTR,
         NumItems: c_long,
-        NumSkipped: c_long
+        NumSkipped: c_long,
     ) -> HRESULT,
     fn GetVoices(
         RequiredAttributes: BSTR,
         OptionalAttributes: BSTR,
-        ObjectTokens: *mut *mut ISpeechObjectTokens
+        ObjectTokens: *mut *mut ISpeechObjectTokens,
     ) -> HRESULT,
     fn GetAudioOutputs(
         RequiredAttributes: BSTR,
         OptionalAttributes: BSTR,
-        ObjectTokens: *mut *mut ISpeechObjectTokens
+        ObjectTokens: *mut *mut ISpeechObjectTokens,
     ) -> HRESULT,
     fn WaitUntilDone(
         msTimeout: c_long,
-        Done: *mut VARIANT_BOOL
+        Done: *mut VARIANT_BOOL,
     ) -> HRESULT,
-    fn SpeakCompleteEvent(Handle: *mut c_long) -> HRESULT,
+    fn SpeakCompleteEvent(
+        Handle: *mut c_long,
+    ) -> HRESULT,
     fn IsUISupported(
         TypeOfUI: BSTR,
         ExtraData: *const VARIANT,
-        Supported: *mut VARIANT_BOOL
+        Supported: *mut VARIANT_BOOL,
     ) -> HRESULT,
     fn DisplayUI(
         hWndParent: c_long,
         Title: BSTR,
         TypeOfUI: BSTR,
-        ExtraData: *const VARIANT
-    ) -> HRESULT
+        ExtraData: *const VARIANT,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x8be47b07, 0x57f6, 0x11d2, 0x9e, 0xee, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96)]
 interface ISpeechVoiceStatus(ISpeechVoiceStatusVtbl): IDispatch(IDispatchVtbl) {
-    fn get_CurrentStreamNumber(StreamNumber: *mut c_long) -> HRESULT,
-    fn get_LastStreamNumberQueued(StreamNumber: *mut c_long) -> HRESULT,
-    fn get_LastHResult(HResult: *mut c_long) -> HRESULT,
-    fn get_RunningState(State: *mut SpeechRunState) -> HRESULT,
-    fn get_InputWordPosition(Position: *mut c_long) -> HRESULT,
-    fn get_InputWordLength(Length: *mut c_long) -> HRESULT,
-    fn get_InputSentencePosition(Position: *mut c_long) -> HRESULT,
-    fn get_InputSentenceLength(Length: *mut c_long) -> HRESULT,
-    fn get_LastBookmark(Bookmark: *mut BSTR) -> HRESULT,
-    fn get_LastBookmarkId(BookmarkId: *mut c_long) -> HRESULT,
-    fn get_PhonemeId(PhoneId: *mut c_short) -> HRESULT,
-    fn get_VisemeId(VisemeId: *mut c_short) -> HRESULT
+    fn get_CurrentStreamNumber(
+        StreamNumber: *mut c_long,
+    ) -> HRESULT,
+    fn get_LastStreamNumberQueued(
+        StreamNumber: *mut c_long,
+    ) -> HRESULT,
+    fn get_LastHResult(
+        HResult: *mut c_long,
+    ) -> HRESULT,
+    fn get_RunningState(
+        State: *mut SpeechRunState,
+    ) -> HRESULT,
+    fn get_InputWordPosition(
+        Position: *mut c_long,
+    ) -> HRESULT,
+    fn get_InputWordLength(
+        Length: *mut c_long,
+    ) -> HRESULT,
+    fn get_InputSentencePosition(
+        Position: *mut c_long,
+    ) -> HRESULT,
+    fn get_InputSentenceLength(
+        Length: *mut c_long,
+    ) -> HRESULT,
+    fn get_LastBookmark(
+        Bookmark: *mut BSTR,
+    ) -> HRESULT,
+    fn get_LastBookmarkId(
+        BookmarkId: *mut c_long,
+    ) -> HRESULT,
+    fn get_PhonemeId(
+        PhoneId: *mut c_short,
+    ) -> HRESULT,
+    fn get_VisemeId(
+        VisemeId: *mut c_short,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xa372acd1, 0x3bef, 0x4bbd, 0x8f, 0xfb, 0xcb, 0x3e, 0x2b, 0x41, 0x6a, 0xf8)]
 interface _ISpeechVoiceEvents(_ISpeechVoiceEventsVtbl): IDispatch(IDispatchVtbl) {
 });
 RIDL!(#[uuid(0x2d5f1c0c, 0xbd75, 0x4b08, 0x94, 0x78, 0x3b, 0x11, 0xfe, 0xa2, 0x58, 0x6c)]
 interface ISpeechRecognizer(ISpeechRecognizerVtbl): IDispatch(IDispatchVtbl) {
-    fn putref_Recognizer(Recognizer: *mut ISpeechObjectToken) -> HRESULT,
-    fn get_Recognizer(Recognizer: *mut *mut ISpeechObjectToken) -> HRESULT,
-    fn put_AllowAudioInputFormatChangesOnNextSet(Allow: VARIANT_BOOL) -> HRESULT,
-    fn get_AllowAudioInputFormatChangesOnNextSet(Allow: *mut VARIANT_BOOL) -> HRESULT,
-    fn putref_AudioInput(AudioInput: *mut ISpeechObjectToken) -> HRESULT,
-    fn get_AudioInput(AudioInput: *mut *mut ISpeechObjectToken) -> HRESULT,
-    fn putref_AudioInputStream(AudioInputStream: *mut ISpeechBaseStream) -> HRESULT,
-    fn get_AudioInputStream(AudioInputStream: *mut *mut ISpeechBaseStream) -> HRESULT,
-    fn get_IsShared(Shared: *mut VARIANT_BOOL) -> HRESULT,
-    fn put_State(State: SpeechRecognizerState) -> HRESULT,
-    fn get_State(State: *mut SpeechRecognizerState) -> HRESULT,
-    fn get_Status(Status: *mut *mut ISpeechRecognizerStatus) -> HRESULT,
-    fn putref_Profile(Profile: *mut ISpeechObjectToken) -> HRESULT,
-    fn get_Profile(Profile: *mut *mut ISpeechObjectToken) -> HRESULT,
+    fn putref_Recognizer(
+        Recognizer: *mut ISpeechObjectToken,
+    ) -> HRESULT,
+    fn get_Recognizer(
+        Recognizer: *mut *mut ISpeechObjectToken,
+    ) -> HRESULT,
+    fn put_AllowAudioInputFormatChangesOnNextSet(
+        Allow: VARIANT_BOOL,
+    ) -> HRESULT,
+    fn get_AllowAudioInputFormatChangesOnNextSet(
+        Allow: *mut VARIANT_BOOL,
+    ) -> HRESULT,
+    fn putref_AudioInput(
+        AudioInput: *mut ISpeechObjectToken,
+    ) -> HRESULT,
+    fn get_AudioInput(
+        AudioInput: *mut *mut ISpeechObjectToken,
+    ) -> HRESULT,
+    fn putref_AudioInputStream(
+        AudioInputStream: *mut ISpeechBaseStream,
+    ) -> HRESULT,
+    fn get_AudioInputStream(
+        AudioInputStream: *mut *mut ISpeechBaseStream,
+    ) -> HRESULT,
+    fn get_IsShared(
+        Shared: *mut VARIANT_BOOL,
+    ) -> HRESULT,
+    fn put_State(
+        State: SpeechRecognizerState,
+    ) -> HRESULT,
+    fn get_State(
+        State: *mut SpeechRecognizerState,
+    ) -> HRESULT,
+    fn get_Status(
+        Status: *mut *mut ISpeechRecognizerStatus,
+    ) -> HRESULT,
+    fn putref_Profile(
+        Profile: *mut ISpeechObjectToken,
+    ) -> HRESULT,
+    fn get_Profile(
+        Profile: *mut *mut ISpeechObjectToken,
+    ) -> HRESULT,
     fn EmulateRecognition(
         TextElements: VARIANT,
         ElementDisplayAttributes: *mut VARIANT,
-        LanguageId: c_long
+        LanguageId: c_long,
     ) -> HRESULT,
-    fn CreateRecoContext(NewContext: *mut *mut ISpeechRecoContext) -> HRESULT,
+    fn CreateRecoContext(
+        NewContext: *mut *mut ISpeechRecoContext,
+    ) -> HRESULT,
     fn GetFormat(
         Type: SpeechFormatType,
-        Format: *mut *mut ISpeechAudioFormat
+        Format: *mut *mut ISpeechAudioFormat,
     ) -> HRESULT,
     fn SetPropertyNumber(
         Name: BSTR,
         Value: c_long,
-        Supported: *mut VARIANT_BOOL
+        Supported: *mut VARIANT_BOOL,
     ) -> HRESULT,
     fn GetPropertyNumber(
         Name: BSTR,
         Value: *mut c_long,
-        Supported: *mut VARIANT_BOOL
+        Supported: *mut VARIANT_BOOL,
     ) -> HRESULT,
     fn SetPropertyString(
         Name: BSTR,
         Value: BSTR,
-        Supported: *mut VARIANT_BOOL
+        Supported: *mut VARIANT_BOOL,
     ) -> HRESULT,
     fn GetPropertyString(
         Name: BSTR,
         Value: *mut BSTR,
-        Supported: *mut VARIANT_BOOL
+        Supported: *mut VARIANT_BOOL,
     ) -> HRESULT,
     fn IsUISupported(
         TypeOfUI: BSTR,
         ExtraData: *const VARIANT,
-        Supported: *mut VARIANT_BOOL
+        Supported: *mut VARIANT_BOOL,
     ) -> HRESULT,
     fn DisplayUI(
         hWndParent: c_long,
         Title: BSTR,
         TypeOfUI: BSTR,
-        ExtraData: *const VARIANT
+        ExtraData: *const VARIANT,
     ) -> HRESULT,
     fn GetRecognizers(
         RequiredAttributes: BSTR,
         OptionalAttributes: BSTR,
-        ObjectTokens: *mut *mut ISpeechObjectTokens
+        ObjectTokens: *mut *mut ISpeechObjectTokens,
     ) -> HRESULT,
     fn GetAudioInputs(
         RequiredAttributes: BSTR,
         OptionalAttributes: BSTR,
-        ObjectTokens: *mut *mut ISpeechObjectTokens
+        ObjectTokens: *mut *mut ISpeechObjectTokens,
     ) -> HRESULT,
     fn GetProfiles(
         RequiredAttributes: BSTR,
         OptionalAttributes: BSTR,
-        ObjectTokens: *mut *mut ISpeechObjectTokens
-    ) -> HRESULT
+        ObjectTokens: *mut *mut ISpeechObjectTokens,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xbff9e781, 0x53ec, 0x484e, 0xbb, 0x8a, 0x0e, 0x1b, 0x55, 0x51, 0xe3, 0x5c)]
 interface ISpeechRecognizerStatus(ISpeechRecognizerStatusVtbl): IDispatch(IDispatchVtbl) {
-    fn get_AudioStatus(AudioStatus: *mut *mut ISpeechAudioStatus) -> HRESULT,
-    fn get_CurrentStreamPosition(pCurrentStreamPos: *mut VARIANT) -> HRESULT,
-    fn get_CurrentStreamNumber(StreamNumber: *mut c_long) -> HRESULT,
-    fn get_NumberOfActiveRules(NumberOfActiveRules: *mut c_long) -> HRESULT,
-    fn get_ClsidEngine(ClsidEngine: *mut BSTR) -> HRESULT,
-    fn get_SupportedLanguages(SupportedLanguages: *mut VARIANT) -> HRESULT
+    fn get_AudioStatus(
+        AudioStatus: *mut *mut ISpeechAudioStatus,
+    ) -> HRESULT,
+    fn get_CurrentStreamPosition(
+        pCurrentStreamPos: *mut VARIANT,
+    ) -> HRESULT,
+    fn get_CurrentStreamNumber(
+        StreamNumber: *mut c_long,
+    ) -> HRESULT,
+    fn get_NumberOfActiveRules(
+        NumberOfActiveRules: *mut c_long,
+    ) -> HRESULT,
+    fn get_ClsidEngine(
+        ClsidEngine: *mut BSTR,
+    ) -> HRESULT,
+    fn get_SupportedLanguages(
+        SupportedLanguages: *mut VARIANT,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x580aa49d, 0x7e1e, 0x4809, 0xb8, 0xe2, 0x57, 0xda, 0x80, 0x61, 0x04, 0xb8)]
 interface ISpeechRecoContext(ISpeechRecoContextVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Recognizer(Recognizer: *mut *mut ISpeechRecognizer) -> HRESULT,
-    fn get_AudioInputInterferenceStatus(Interference: *mut SpeechInterference) -> HRESULT,
-    fn get_RequestedUIType(UIType: *mut BSTR) -> HRESULT,
-    fn putref_Voice(Voice: *mut ISpeechVoice) -> HRESULT,
-    fn get_Voice(Voice: *mut *mut ISpeechVoice) -> HRESULT,
-    fn put_AllowVoiceFormatMatchingOnNextSet(Allow: VARIANT_BOOL) -> HRESULT,
-    fn get_AllowVoiceFormatMatchingOnNextSet(Allow: *mut VARIANT_BOOL) -> HRESULT,
-    fn put_VoicePurgeEvent(EventInterest: SpeechRecoEvents) -> HRESULT,
-    fn get_VoicePurgeEvent(EventInterest: *mut SpeechRecoEvents) -> HRESULT,
-    fn put_EventInterests(EventInterest: SpeechRecoEvents) -> HRESULT,
-    fn get_EventInterests(EventInterest: *mut SpeechRecoEvents) -> HRESULT,
-    fn put_CmdMaxAlternates(MaxAlternates: c_long) -> HRESULT,
-    fn get_CmdMaxAlternates(MaxAlternates: *mut c_long) -> HRESULT,
-    fn put_State(State: SpeechRecoContextState) -> HRESULT,
-    fn get_State(State: *mut SpeechRecoContextState) -> HRESULT,
-    fn put_RetainedAudio(Option: SpeechRetainedAudioOptions) -> HRESULT,
-    fn get_RetainedAudio(Option: *mut SpeechRetainedAudioOptions) -> HRESULT,
-    fn putref_RetainedAudioFormat(Format: *mut ISpeechAudioFormat) -> HRESULT,
-    fn get_RetainedAudioFormat(Format: *mut *mut ISpeechAudioFormat) -> HRESULT,
+    fn get_Recognizer(
+        Recognizer: *mut *mut ISpeechRecognizer,
+    ) -> HRESULT,
+    fn get_AudioInputInterferenceStatus(
+        Interference: *mut SpeechInterference,
+    ) -> HRESULT,
+    fn get_RequestedUIType(
+        UIType: *mut BSTR,
+    ) -> HRESULT,
+    fn putref_Voice(
+        Voice: *mut ISpeechVoice,
+    ) -> HRESULT,
+    fn get_Voice(
+        Voice: *mut *mut ISpeechVoice,
+    ) -> HRESULT,
+    fn put_AllowVoiceFormatMatchingOnNextSet(
+        Allow: VARIANT_BOOL,
+    ) -> HRESULT,
+    fn get_AllowVoiceFormatMatchingOnNextSet(
+        Allow: *mut VARIANT_BOOL,
+    ) -> HRESULT,
+    fn put_VoicePurgeEvent(
+        EventInterest: SpeechRecoEvents,
+    ) -> HRESULT,
+    fn get_VoicePurgeEvent(
+        EventInterest: *mut SpeechRecoEvents,
+    ) -> HRESULT,
+    fn put_EventInterests(
+        EventInterest: SpeechRecoEvents,
+    ) -> HRESULT,
+    fn get_EventInterests(
+        EventInterest: *mut SpeechRecoEvents,
+    ) -> HRESULT,
+    fn put_CmdMaxAlternates(
+        MaxAlternates: c_long,
+    ) -> HRESULT,
+    fn get_CmdMaxAlternates(
+        MaxAlternates: *mut c_long,
+    ) -> HRESULT,
+    fn put_State(
+        State: SpeechRecoContextState,
+    ) -> HRESULT,
+    fn get_State(
+        State: *mut SpeechRecoContextState,
+    ) -> HRESULT,
+    fn put_RetainedAudio(
+        Option: SpeechRetainedAudioOptions,
+    ) -> HRESULT,
+    fn get_RetainedAudio(
+        Option: *mut SpeechRetainedAudioOptions,
+    ) -> HRESULT,
+    fn putref_RetainedAudioFormat(
+        Format: *mut ISpeechAudioFormat,
+    ) -> HRESULT,
+    fn get_RetainedAudioFormat(
+        Format: *mut *mut ISpeechAudioFormat,
+    ) -> HRESULT,
     fn Pause() -> HRESULT,
     fn Resume() -> HRESULT,
     fn CreateGrammar(
         GrammarId: VARIANT,
-        Grammar: *mut *mut ISpeechRecoGrammar
+        Grammar: *mut *mut ISpeechRecoGrammar,
     ) -> HRESULT,
     fn CreateResultFromMemory(
         ResultBlock: *mut VARIANT,
-        Result: *mut *mut ISpeechRecoResult
+        Result: *mut *mut ISpeechRecoResult,
     ) -> HRESULT,
     fn Bookmark(
         Options: SpeechBookmarkOptions,
         StreamPos: VARIANT,
-        BookmarkId: VARIANT
+        BookmarkId: VARIANT,
     ) -> HRESULT,
-    fn SetAdaptationData(AdaptationString: BSTR) -> HRESULT
+    fn SetAdaptationData(
+        AdaptationString: BSTR,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xb6d6f79f, 0x2158, 0x4e50, 0xb5, 0xbc, 0x9a, 0x9c, 0xcd, 0x85, 0x2a, 0x09)]
 interface ISpeechRecoGrammar(ISpeechRecoGrammarVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Id(Id: *mut VARIANT) -> HRESULT,
-    fn get_RecoContext(RecoContext: *mut *mut ISpeechRecoContext) -> HRESULT,
-    fn put_State(State: SpeechGrammarState) -> HRESULT,
-    fn get_State(State: *mut SpeechGrammarState) -> HRESULT,
-    fn get_Rules(Rules: *mut *mut ISpeechGrammarRules) -> HRESULT,
-    fn Reset(NewLanguage: SpeechLanguageId) -> HRESULT,
+    fn get_Id(
+        Id: *mut VARIANT,
+    ) -> HRESULT,
+    fn get_RecoContext(
+        RecoContext: *mut *mut ISpeechRecoContext,
+    ) -> HRESULT,
+    fn put_State(
+        State: SpeechGrammarState,
+    ) -> HRESULT,
+    fn get_State(
+        State: *mut SpeechGrammarState,
+    ) -> HRESULT,
+    fn get_Rules(
+        Rules: *mut *mut ISpeechGrammarRules,
+    ) -> HRESULT,
+    fn Reset(
+        NewLanguage: SpeechLanguageId,
+    ) -> HRESULT,
     fn CmdLoadFromFile(
         FileName: BSTR,
-        LoadOption: SpeechLoadOption
+        LoadOption: SpeechLoadOption,
     ) -> HRESULT,
     fn CmdLoadFromObject(
         ClassId: BSTR,
         GrammarName: BSTR,
-        LoadOption: SpeechLoadOption
+        LoadOption: SpeechLoadOption,
     ) -> HRESULT,
     fn CmdLoadFromResource(
         hModule: c_long,
         ResourceName: VARIANT,
         ResourceType: VARIANT,
         LanguageId: SpeechLanguageId,
-        LoadOption: SpeechLoadOption
+        LoadOption: SpeechLoadOption,
     ) -> HRESULT,
     fn CmdLoadFromMemory(
         GrammarData: VARIANT,
-        LoadOption: SpeechLoadOption
+        LoadOption: SpeechLoadOption,
     ) -> HRESULT,
     fn CmdLoadFromProprietaryGrammar(
         ProprietaryGuid: BSTR,
         PriorietaryString: BSTR,
         ProprietaryData: VARIANT,
-        LoadOption: SpeechLoadOption
+        LoadOption: SpeechLoadOption,
     ) -> HRESULT,
     fn CmdSetRuleState(
         Name: BSTR,
-        State: SpeechRuleState
+        State: SpeechRuleState,
     ) -> HRESULT,
     fn CmdSetRuleIdState(
         RuleId: c_long,
-        State: SpeechRuleState
+        State: SpeechRuleState,
     ) -> HRESULT,
     fn DictationLoad(
         TopicName: BSTR,
-        LoadOption: SpeechLoadOption
+        LoadOption: SpeechLoadOption,
     ) -> HRESULT,
     fn DictationUnload() -> HRESULT,
-    fn DictationSetState(State: SpeechRuleState) -> HRESULT,
+    fn DictationSetState(
+        State: SpeechRuleState,
+    ) -> HRESULT,
     fn SetWordSequenceData(
         Text: BSTR,
         TextLength: c_long,
-        Info: *mut ISpeechTextSelectionInformation
+        Info: *mut ISpeechTextSelectionInformation,
     ) -> HRESULT,
-    fn SetTextSelection(Info: *mut ISpeechTextSelectionInformation) -> HRESULT,
+    fn SetTextSelection(
+        Info: *mut ISpeechTextSelectionInformation,
+    ) -> HRESULT,
     fn IsPronounceable(
         Word: BSTR,
-        WordPronounceable: *mut SpeechWordPronounceable
-    ) -> HRESULT
+        WordPronounceable: *mut SpeechWordPronounceable,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x7b8fcb42, 0x0e9d, 0x4f00, 0xa0, 0x48, 0x7b, 0x04, 0xd6, 0x17, 0x9d, 0x3d)]
 interface _ISpeechRecoContextEvents(_ISpeechRecoContextEventsVtbl): IDispatch(IDispatchVtbl) {
 });
 RIDL!(#[uuid(0xafe719cf, 0x5dd1, 0x44f2, 0x99, 0x9c, 0x7a, 0x39, 0x9f, 0x1c, 0xfc, 0xcc)]
 interface ISpeechGrammarRule(ISpeechGrammarRuleVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Attributes(Attributes: *mut SpeechRuleAttributes) -> HRESULT,
-    fn get_InitialState(State: *mut *mut ISpeechGrammarRuleState) -> HRESULT,
-    fn get_Name(Name: *mut BSTR) -> HRESULT,
-    fn get_Id(Id: *mut c_long) -> HRESULT,
+    fn get_Attributes(
+        Attributes: *mut SpeechRuleAttributes,
+    ) -> HRESULT,
+    fn get_InitialState(
+        State: *mut *mut ISpeechGrammarRuleState,
+    ) -> HRESULT,
+    fn get_Name(
+        Name: *mut BSTR,
+    ) -> HRESULT,
+    fn get_Id(
+        Id: *mut c_long,
+    ) -> HRESULT,
     fn Clear() -> HRESULT,
     fn AddResource(
         ResourceName: BSTR,
-        ResourceValue: BSTR
+        ResourceValue: BSTR,
     ) -> HRESULT,
-    fn AddState(State: *mut *mut ISpeechGrammarRuleState) -> HRESULT
+    fn AddState(
+        State: *mut *mut ISpeechGrammarRuleState,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x6ffa3b44, 0xfc2d, 0x40d1, 0x8a, 0xfc, 0x32, 0x91, 0x1c, 0x7f, 0x1a, 0xd1)]
 interface ISpeechGrammarRules(ISpeechGrammarRulesVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Count(Count: *mut c_long) -> HRESULT,
+    fn get_Count(
+        Count: *mut c_long,
+    ) -> HRESULT,
     fn FindRule(
         RuleNameOrId: VARIANT,
-        Rule: *mut *mut ISpeechGrammarRule
+        Rule: *mut *mut ISpeechGrammarRule,
     ) -> HRESULT,
     fn Item(
         Index: c_long,
-        Rule: *mut *mut ISpeechGrammarRule
+        Rule: *mut *mut ISpeechGrammarRule,
     ) -> HRESULT,
-    fn get__NewEnum(EnumVARIANT: *mut *mut IUnknown) -> HRESULT,
-    fn get_Dynamic(Dynamic: *mut VARIANT_BOOL) -> HRESULT,
+    fn get__NewEnum(
+        EnumVARIANT: *mut *mut IUnknown,
+    ) -> HRESULT,
+    fn get_Dynamic(
+        Dynamic: *mut VARIANT_BOOL,
+    ) -> HRESULT,
     fn Add(
         RuleName: BSTR,
         Attributes: SpeechRuleAttributes,
         RuleId: c_long,
-        Rule: *mut *mut ISpeechGrammarRule
+        Rule: *mut *mut ISpeechGrammarRule,
     ) -> HRESULT,
     fn Commit() -> HRESULT,
     fn CommitAndSave(
         ErrorText: *mut BSTR,
-        SaveStream: *mut VARIANT
-    ) -> HRESULT
+        SaveStream: *mut VARIANT,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xd4286f2c, 0xee67, 0x45ae, 0xb9, 0x28, 0x28, 0xd6, 0x95, 0x36, 0x2e, 0xda)]
 interface ISpeechGrammarRuleState(ISpeechGrammarRuleStateVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Rule(Rule: *mut *mut ISpeechGrammarRule) -> HRESULT,
-    fn get_Transitions(Transitions: *mut *mut ISpeechGrammarRuleStateTransitions) -> HRESULT,
+    fn get_Rule(
+        Rule: *mut *mut ISpeechGrammarRule,
+    ) -> HRESULT,
+    fn get_Transitions(
+        Transitions: *mut *mut ISpeechGrammarRuleStateTransitions,
+    ) -> HRESULT,
     fn AddWordTransition(
         DestState: *mut ISpeechGrammarRuleState,
         Words: BSTR,
@@ -2657,7 +3145,7 @@ interface ISpeechGrammarRuleState(ISpeechGrammarRuleStateVtbl): IDispatch(IDispa
         PropertyName: BSTR,
         PropertyId: c_long,
         PropertyValue: *mut VARIANT,
-        Weight: c_float
+        Weight: c_float,
     ) -> HRESULT,
     fn AddRuleTransition(
         DestinationState: *mut ISpeechGrammarRuleState,
@@ -2665,7 +3153,7 @@ interface ISpeechGrammarRuleState(ISpeechGrammarRuleStateVtbl): IDispatch(IDispa
         PropertyName: BSTR,
         PropertyId: c_long,
         PropertyValue: *mut VARIANT,
-        Weight: c_float
+        Weight: c_float,
     ) -> HRESULT,
     fn AddSpecialTransition(
         DestinationState: *mut ISpeechGrammarRuleState,
@@ -2673,285 +3161,495 @@ interface ISpeechGrammarRuleState(ISpeechGrammarRuleStateVtbl): IDispatch(IDispa
         PropertyName: BSTR,
         PropertyId: c_long,
         PropertyValue: *mut VARIANT,
-        Weight: c_float
-    ) -> HRESULT
+        Weight: c_float,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xcafd1db1, 0x41d1, 0x4a06, 0x98, 0x63, 0xe2, 0xe8, 0x1d, 0xa1, 0x7a, 0x9a)]
 interface ISpeechGrammarRuleStateTransition(ISpeechGrammarRuleStateTransitionVtbl):
     IDispatch(IDispatchVtbl)
 {
-    fn get_Type(Type: *mut SpeechGrammarRuleStateTransitionType) -> HRESULT,
-    fn get_Text(Text: *mut BSTR) -> HRESULT,
-    fn get_Rule(Rule: *mut *mut ISpeechGrammarRule) -> HRESULT,
-    fn get_Weight(Weight: *mut VARIANT) -> HRESULT,
-    fn get_PropertyName(PropertyName: *mut BSTR) -> HRESULT,
-    fn get_PropertyId(PropertyId: *mut c_long) -> HRESULT,
-    fn get_PropertyValue(PropertyValue: *mut VARIANT) -> HRESULT,
-    fn get_NextState(NextState: *mut *mut ISpeechGrammarRuleState) -> HRESULT
+    fn get_Type(
+        Type: *mut SpeechGrammarRuleStateTransitionType,
+    ) -> HRESULT,
+    fn get_Text(
+        Text: *mut BSTR,
+    ) -> HRESULT,
+    fn get_Rule(
+        Rule: *mut *mut ISpeechGrammarRule,
+    ) -> HRESULT,
+    fn get_Weight(
+        Weight: *mut VARIANT,
+    ) -> HRESULT,
+    fn get_PropertyName(
+        PropertyName: *mut BSTR,
+    ) -> HRESULT,
+    fn get_PropertyId(
+        PropertyId: *mut c_long,
+    ) -> HRESULT,
+    fn get_PropertyValue(
+        PropertyValue: *mut VARIANT,
+    ) -> HRESULT,
+    fn get_NextState(
+        NextState: *mut *mut ISpeechGrammarRuleState,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xeabce657, 0x75bc, 0x44a2, 0xaa, 0x7f, 0xc5, 0x64, 0x76, 0x74, 0x29, 0x63)]
 interface ISpeechGrammarRuleStateTransitions(ISpeechGrammarRuleStateTransitionsVtbl):
     IDispatch(IDispatchVtbl)
 {
-    fn get_Count(Count: *mut c_long) -> HRESULT,
+    fn get_Count(
+        Count: *mut c_long,
+    ) -> HRESULT,
     fn Item(
         Index: c_long,
-        Transition: *mut *mut ISpeechGrammarRuleStateTransition
+        Transition: *mut *mut ISpeechGrammarRuleStateTransition,
     ) -> HRESULT,
-    fn get__NewEnum(EnumVARIANT: *mut *mut IUnknown) -> HRESULT
+    fn get__NewEnum(
+        EnumVARIANT: *mut *mut IUnknown,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x3b9c7e7a, 0x6eee, 0x4ded, 0x90, 0x92, 0x11, 0x65, 0x72, 0x79, 0xad, 0xbe)]
 interface ISpeechTextSelectionInformation(ISpeechTextSelectionInformationVtbl):
     IDispatch(IDispatchVtbl)
 {
-    fn put_ActiveOffset(ActiveOffset: c_long) -> HRESULT,
-    fn get_ActiveOffset(ActiveOffset: *mut c_long) -> HRESULT,
-    fn put_ActiveLength(ActiveLength: c_long) -> HRESULT,
-    fn get_ActiveLength(ActiveLength: *mut c_long) -> HRESULT,
-    fn put_SelectionOffset(SelectionOffset: c_long) -> HRESULT,
-    fn get_SelectionOffset(SelectionOffset: *mut c_long) -> HRESULT,
-    fn put_SelectionLength(SelectionLength: c_long) -> HRESULT,
-    fn get_SelectionLength(SelectionLength: *mut c_long) -> HRESULT
+    fn put_ActiveOffset(
+        ActiveOffset: c_long,
+    ) -> HRESULT,
+    fn get_ActiveOffset(
+        ActiveOffset: *mut c_long,
+    ) -> HRESULT,
+    fn put_ActiveLength(
+        ActiveLength: c_long,
+    ) -> HRESULT,
+    fn get_ActiveLength(
+        ActiveLength: *mut c_long,
+    ) -> HRESULT,
+    fn put_SelectionOffset(
+        SelectionOffset: c_long,
+    ) -> HRESULT,
+    fn get_SelectionOffset(
+        SelectionOffset: *mut c_long,
+    ) -> HRESULT,
+    fn put_SelectionLength(
+        SelectionLength: c_long,
+    ) -> HRESULT,
+    fn get_SelectionLength(
+        SelectionLength: *mut c_long,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xed2879cf, 0xced9, 0x4ee6, 0xa5, 0x34, 0xde, 0x01, 0x91, 0xd5, 0x46, 0x8d)]
 interface ISpeechRecoResult(ISpeechRecoResultVtbl): IDispatch(IDispatchVtbl) {
-    fn get_RecoContext(RecoContext: *mut *mut ISpeechRecoContext) -> HRESULT,
-    fn get_Times(Times: *mut *mut ISpeechRecoResultTimes) -> HRESULT,
-    fn putref_AudioFormat(Format: *mut ISpeechAudioFormat) -> HRESULT,
-    fn get_AudioFormat(Format: *mut *mut ISpeechAudioFormat) -> HRESULT,
-    fn get_PhraseInfo(PhraseInfo: *mut *mut ISpeechPhraseInfo) -> HRESULT,
+    fn get_RecoContext(
+        RecoContext: *mut *mut ISpeechRecoContext,
+    ) -> HRESULT,
+    fn get_Times(
+        Times: *mut *mut ISpeechRecoResultTimes,
+    ) -> HRESULT,
+    fn putref_AudioFormat(
+        Format: *mut ISpeechAudioFormat,
+    ) -> HRESULT,
+    fn get_AudioFormat(
+        Format: *mut *mut ISpeechAudioFormat,
+    ) -> HRESULT,
+    fn get_PhraseInfo(
+        PhraseInfo: *mut *mut ISpeechPhraseInfo,
+    ) -> HRESULT,
     fn Alternates(
         RequestCount: c_long,
         StartElement: c_long,
         Elements: c_long,
-        Alternates: *mut *mut ISpeechPhraseAlternates
+        Alternates: *mut *mut ISpeechPhraseAlternates,
     ) -> HRESULT,
     fn Audio(
         StartElement: c_long,
         Elements: c_long,
-        Stream: *mut *mut ISpeechMemoryStream
+        Stream: *mut *mut ISpeechMemoryStream,
     ) -> HRESULT,
     fn SpeakAudio(
         StartElement: c_long,
         Elements: c_long,
         Flags: SpeechVoiceSpeakFlags,
-        StreamNumber: *mut c_long
+        StreamNumber: *mut c_long,
     ) -> HRESULT,
-    fn SaveToMemory(ResultBlock: *mut VARIANT) -> HRESULT,
-    fn DiscardResultInfo(ValueTypes: SpeechDiscardType) -> HRESULT
+    fn SaveToMemory(
+        ResultBlock: *mut VARIANT,
+    ) -> HRESULT,
+    fn DiscardResultInfo(
+        ValueTypes: SpeechDiscardType,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x62b3b8fb, 0xf6e7, 0x41be, 0xbd, 0xcb, 0x05, 0x6b, 0x1c, 0x29, 0xef, 0xc0)]
 interface ISpeechRecoResultTimes(ISpeechRecoResultTimesVtbl): IDispatch(IDispatchVtbl) {
-    fn get_StreamTime(Time: *mut VARIANT) -> HRESULT,
-    fn get_Length(Length: *mut VARIANT) -> HRESULT,
-    fn get_TickCount(TickCount: *mut c_long) -> HRESULT,
-    fn get_OffsetFromStart(OffsetFromStart: *mut VARIANT) -> HRESULT
+    fn get_StreamTime(
+        Time: *mut VARIANT,
+    ) -> HRESULT,
+    fn get_Length(
+        Length: *mut VARIANT,
+    ) -> HRESULT,
+    fn get_TickCount(
+        TickCount: *mut c_long,
+    ) -> HRESULT,
+    fn get_OffsetFromStart(
+        OffsetFromStart: *mut VARIANT,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x27864a2a, 0x2b9f, 0x4cb8, 0x92, 0xd3, 0x0d, 0x27, 0x22, 0xfd, 0x1e, 0x73)]
 interface ISpeechPhraseAlternate(ISpeechPhraseAlternateVtbl): IDispatch(IDispatchVtbl) {
-    fn get_RecoResult(RecoResult: *mut *mut ISpeechRecoResult) -> HRESULT,
-    fn get_StartElementInResult(StartElement: *mut c_long) -> HRESULT,
-    fn get_NumberOfElementsInResult(NumberOfElements: *mut c_long) -> HRESULT,
-    fn get_PhraseInfo(PhraseInfo: *mut *mut ISpeechPhraseInfo) -> HRESULT,
-    fn Commit() -> HRESULT
+    fn get_RecoResult(
+        RecoResult: *mut *mut ISpeechRecoResult,
+    ) -> HRESULT,
+    fn get_StartElementInResult(
+        StartElement: *mut c_long,
+    ) -> HRESULT,
+    fn get_NumberOfElementsInResult(
+        NumberOfElements: *mut c_long,
+    ) -> HRESULT,
+    fn get_PhraseInfo(
+        PhraseInfo: *mut *mut ISpeechPhraseInfo,
+    ) -> HRESULT,
+    fn Commit() -> HRESULT,
 });
 RIDL!(#[uuid(0xb238b6d5, 0xf276, 0x4c3d, 0xa6, 0xc1, 0x29, 0x74, 0x80, 0x1c, 0x3c, 0xc2)]
 interface ISpeechPhraseAlternates(ISpeechPhraseAlternatesVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Count(Count: *mut c_long) -> HRESULT,
+    fn get_Count(
+        Count: *mut c_long,
+    ) -> HRESULT,
     fn Item(
         Index: c_long,
-        PhraseAlternate: *mut *mut ISpeechPhraseAlternate
+        PhraseAlternate: *mut *mut ISpeechPhraseAlternate,
     ) -> HRESULT,
-    fn get__NewEnum(EnumVARIANT: *mut *mut IUnknown) -> HRESULT
+    fn get__NewEnum(
+        EnumVARIANT: *mut *mut IUnknown,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x961559cf, 0x4e67, 0x4662, 0x8b, 0xf0, 0xd9, 0x3f, 0x1f, 0xcd, 0x61, 0xb3)]
 interface ISpeechPhraseInfo(ISpeechPhraseInfoVtbl): IDispatch(IDispatchVtbl) {
-    fn get_LanguageId(LanguageId: *mut c_long) -> HRESULT,
-    fn get_GrammarId(GrammarId: *mut VARIANT) -> HRESULT,
-    fn get_StartTime(StartTime: *mut VARIANT) -> HRESULT,
-    fn get_AudioStreamPosition(AudioStreamPosition: *mut VARIANT) -> HRESULT,
-    fn get_AudioSizeBytes(pAudioSizeBytes: *mut c_long) -> HRESULT,
-    fn get_RetainedSizeBytes(RetainedSizeBytes: *mut c_long) -> HRESULT,
-    fn get_AudioSizeTime(AudioSizeTime: *mut c_long) -> HRESULT,
-    fn get_Rule(Rule: *mut *mut ISpeechPhraseRule) -> HRESULT,
-    fn get_Properties(Properties: *mut *mut ISpeechPhraseProperties) -> HRESULT,
-    fn get_Elements(Elements: *mut *mut ISpeechPhraseElements) -> HRESULT,
-    fn get_Replacements(Replacements: *mut *mut ISpeechPhraseReplacements) -> HRESULT,
-    fn get_EngineId(EngineIdGuid: *mut BSTR) -> HRESULT,
-    fn get_EnginePrivateData(PrivateData: *mut VARIANT) -> HRESULT,
-    fn SaveToMemory(PhraseBlock: *mut VARIANT) -> HRESULT,
+    fn get_LanguageId(
+        LanguageId: *mut c_long,
+    ) -> HRESULT,
+    fn get_GrammarId(
+        GrammarId: *mut VARIANT,
+    ) -> HRESULT,
+    fn get_StartTime(
+        StartTime: *mut VARIANT,
+    ) -> HRESULT,
+    fn get_AudioStreamPosition(
+        AudioStreamPosition: *mut VARIANT,
+    ) -> HRESULT,
+    fn get_AudioSizeBytes(
+        pAudioSizeBytes: *mut c_long,
+    ) -> HRESULT,
+    fn get_RetainedSizeBytes(
+        RetainedSizeBytes: *mut c_long,
+    ) -> HRESULT,
+    fn get_AudioSizeTime(
+        AudioSizeTime: *mut c_long,
+    ) -> HRESULT,
+    fn get_Rule(
+        Rule: *mut *mut ISpeechPhraseRule,
+    ) -> HRESULT,
+    fn get_Properties(
+        Properties: *mut *mut ISpeechPhraseProperties,
+    ) -> HRESULT,
+    fn get_Elements(
+        Elements: *mut *mut ISpeechPhraseElements,
+    ) -> HRESULT,
+    fn get_Replacements(
+        Replacements: *mut *mut ISpeechPhraseReplacements,
+    ) -> HRESULT,
+    fn get_EngineId(
+        EngineIdGuid: *mut BSTR,
+    ) -> HRESULT,
+    fn get_EnginePrivateData(
+        PrivateData: *mut VARIANT,
+    ) -> HRESULT,
+    fn SaveToMemory(
+        PhraseBlock: *mut VARIANT,
+    ) -> HRESULT,
     fn GetText(
         StartElement: c_long,
         Elements: c_long,
         UseReplacements: VARIANT_BOOL,
-        Text: *mut BSTR
+        Text: *mut BSTR,
     ) -> HRESULT,
     fn GetDisplayAttributes(
         StartElement: c_long,
         Elements: c_long,
         UseReplacements: VARIANT_BOOL,
-        DisplayAttributes: *mut SpeechDisplayAttributes
-    ) -> HRESULT
+        DisplayAttributes: *mut SpeechDisplayAttributes,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xe6176f96, 0xe373, 0x4801, 0xb2, 0x23, 0x3b, 0x62, 0xc0, 0x68, 0xc0, 0xb4)]
 interface ISpeechPhraseElement(ISpeechPhraseElementVtbl): IDispatch(IDispatchVtbl) {
-    fn get_AudioTimeOffset(AudioTimeOffset: *mut c_long) -> HRESULT,
-    fn get_AudioSizeTime(AudioSizeTime: *mut c_long) -> HRESULT,
-    fn get_AudioStreamOffset(AudioStreamOffset: *mut c_long) -> HRESULT,
-    fn get_AudioSizeBytes(AudioSizeBytes: *mut c_long) -> HRESULT,
-    fn get_RetainedStreamOffset(RetainedStreamOffset: *mut c_long) -> HRESULT,
-    fn get_RetainedSizeBytes(RetainedSizeBytes: *mut c_long) -> HRESULT,
-    fn get_DisplayText(DisplayText: *mut BSTR) -> HRESULT,
-    fn get_LexicalForm(LexicalForm: *mut BSTR) -> HRESULT,
-    fn get_Pronunciation(Pronunciation: *mut VARIANT) -> HRESULT,
-    fn get_DisplayAttributes(DisplayAttributes: *mut SpeechDisplayAttributes) -> HRESULT,
-    fn get_RequiredConfidence(RequiredConfidence: *mut SpeechEngineConfidence) -> HRESULT,
-    fn get_ActualConfidence(ActualConfidence: *mut SpeechEngineConfidence) -> HRESULT,
-    fn get_EngineConfidence(EngineConfident: *mut c_float) -> HRESULT
+    fn get_AudioTimeOffset(
+        AudioTimeOffset: *mut c_long,
+    ) -> HRESULT,
+    fn get_AudioSizeTime(
+        AudioSizeTime: *mut c_long,
+    ) -> HRESULT,
+    fn get_AudioStreamOffset(
+        AudioStreamOffset: *mut c_long,
+    ) -> HRESULT,
+    fn get_AudioSizeBytes(
+        AudioSizeBytes: *mut c_long,
+    ) -> HRESULT,
+    fn get_RetainedStreamOffset(
+        RetainedStreamOffset: *mut c_long,
+    ) -> HRESULT,
+    fn get_RetainedSizeBytes(
+        RetainedSizeBytes: *mut c_long,
+    ) -> HRESULT,
+    fn get_DisplayText(
+        DisplayText: *mut BSTR,
+    ) -> HRESULT,
+    fn get_LexicalForm(
+        LexicalForm: *mut BSTR,
+    ) -> HRESULT,
+    fn get_Pronunciation(
+        Pronunciation: *mut VARIANT,
+    ) -> HRESULT,
+    fn get_DisplayAttributes(
+        DisplayAttributes: *mut SpeechDisplayAttributes,
+    ) -> HRESULT,
+    fn get_RequiredConfidence(
+        RequiredConfidence: *mut SpeechEngineConfidence,
+    ) -> HRESULT,
+    fn get_ActualConfidence(
+        ActualConfidence: *mut SpeechEngineConfidence,
+    ) -> HRESULT,
+    fn get_EngineConfidence(
+        EngineConfident: *mut c_float,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x0626b328, 0x3478, 0x467d, 0xa0, 0xb3, 0xd0, 0x85, 0x3b, 0x93, 0xdd, 0xa3)]
 interface ISpeechPhraseElements(ISpeechPhraseElementsVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Count(Count: *mut c_long) -> HRESULT,
+    fn get_Count(
+        Count: *mut c_long,
+    ) -> HRESULT,
     fn Item(
         Index: c_long,
-        Element: *mut *mut ISpeechPhraseElement
+        Element: *mut *mut ISpeechPhraseElement,
     ) -> HRESULT,
-    fn get__NewEnum(EnumVARIANT: *mut *mut IUnknown) -> HRESULT
+    fn get__NewEnum(
+        EnumVARIANT: *mut *mut IUnknown,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x2890a410, 0x53a7, 0x4fb5, 0x94, 0xec, 0x06, 0xd4, 0x99, 0x8e, 0x3d, 0x02)]
 interface ISpeechPhraseReplacement(ISpeechPhraseReplacementVtbl): IDispatch(IDispatchVtbl) {
-    fn get_DisplayAttributes(DisplayAttributes: *mut SpeechDisplayAttributes) -> HRESULT,
-    fn get_Text(Text: *mut BSTR) -> HRESULT,
-    fn get_FirstElement(FirstElement: *mut c_long) -> HRESULT,
-    fn get_NumberOfElements(NumberOfElements: *mut c_long) -> HRESULT
+    fn get_DisplayAttributes(
+        DisplayAttributes: *mut SpeechDisplayAttributes,
+    ) -> HRESULT,
+    fn get_Text(
+        Text: *mut BSTR,
+    ) -> HRESULT,
+    fn get_FirstElement(
+        FirstElement: *mut c_long,
+    ) -> HRESULT,
+    fn get_NumberOfElements(
+        NumberOfElements: *mut c_long,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x38bc662f, 0x2257, 0x4525, 0x95, 0x9e, 0x20, 0x69, 0xd2, 0x59, 0x6c, 0x05)]
 interface ISpeechPhraseReplacements(ISpeechPhraseReplacementsVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Count(Count: *mut c_long) -> HRESULT,
+    fn get_Count(
+        Count: *mut c_long,
+    ) -> HRESULT,
     fn Item(
         Index: c_long,
-        Reps: *mut *mut ISpeechPhraseReplacement
+        Reps: *mut *mut ISpeechPhraseReplacement,
     ) -> HRESULT,
-    fn get__NewEnum(EnumVARIANT: *mut *mut IUnknown) -> HRESULT
+    fn get__NewEnum(
+        EnumVARIANT: *mut *mut IUnknown,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xce563d48, 0x961e, 0x4732, 0xa2, 0xe1, 0x37, 0x8a, 0x42, 0xb4, 0x30, 0xbe)]
 interface ISpeechPhraseProperty(ISpeechPhrasePropertyVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Name(Name: *mut BSTR) -> HRESULT,
-    fn get_Id(Id: *mut c_long) -> HRESULT,
-    fn get_Value(Value: *mut VARIANT) -> HRESULT,
-    fn get_FirstElement(FirstElement: *mut c_long) -> HRESULT,
-    fn get_NumberOfElements(NumberOfElements: *mut c_long) -> HRESULT,
-    fn get_EngineConfidence(Confidence: *mut c_float) -> HRESULT,
-    fn get_Confidence(Confidence: *mut SpeechEngineConfidence) -> HRESULT,
-    fn get_Parent(ParentProperty: *mut *mut ISpeechPhraseProperty) -> HRESULT,
-    fn get_Children(Children: *mut *mut ISpeechPhraseProperties) -> HRESULT
+    fn get_Name(
+        Name: *mut BSTR,
+    ) -> HRESULT,
+    fn get_Id(
+        Id: *mut c_long,
+    ) -> HRESULT,
+    fn get_Value(
+        Value: *mut VARIANT,
+    ) -> HRESULT,
+    fn get_FirstElement(
+        FirstElement: *mut c_long,
+    ) -> HRESULT,
+    fn get_NumberOfElements(
+        NumberOfElements: *mut c_long,
+    ) -> HRESULT,
+    fn get_EngineConfidence(
+        Confidence: *mut c_float,
+    ) -> HRESULT,
+    fn get_Confidence(
+        Confidence: *mut SpeechEngineConfidence,
+    ) -> HRESULT,
+    fn get_Parent(
+        ParentProperty: *mut *mut ISpeechPhraseProperty,
+    ) -> HRESULT,
+    fn get_Children(
+        Children: *mut *mut ISpeechPhraseProperties,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x08166b47, 0x102e, 0x4b23, 0xa5, 0x99, 0xbd, 0xb9, 0x8d, 0xbf, 0xd1, 0xf4)]
 interface ISpeechPhraseProperties(ISpeechPhrasePropertiesVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Count(Count: *mut c_long) -> HRESULT,
+    fn get_Count(
+        Count: *mut c_long,
+    ) -> HRESULT,
     fn Item(
         Index: c_long,
-        Property: *mut *mut ISpeechPhraseProperty
+        Property: *mut *mut ISpeechPhraseProperty,
     ) -> HRESULT,
-    fn get__NewEnum(EnumVARIANT: *mut *mut IUnknown) -> HRESULT
+    fn get__NewEnum(
+        EnumVARIANT: *mut *mut IUnknown,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xa7bfe112, 0xa4a0, 0x48d9, 0xb6, 0x02, 0xc3, 0x13, 0x84, 0x3f, 0x69, 0x64)]
 interface ISpeechPhraseRule(ISpeechPhraseRuleVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Name(Name: *mut BSTR) -> HRESULT,
-    fn get_Id(Id: *mut c_long) -> HRESULT,
-    fn get_FirstElement(FirstElement: *mut c_long) -> HRESULT,
-    fn get_NumberOfElements(NumberOfElements: *mut c_long) -> HRESULT,
-    fn get_Parent(Parent: *mut *mut ISpeechPhraseRule) -> HRESULT,
-    fn get_Children(Children: *mut *mut ISpeechPhraseRules) -> HRESULT,
-    fn get_Confidence(ActualConfidence: *mut SpeechEngineConfidence) -> HRESULT,
-    fn get_EngineConfidence(Confidence: *mut c_float) -> HRESULT
+    fn get_Name(
+        Name: *mut BSTR,
+    ) -> HRESULT,
+    fn get_Id(
+        Id: *mut c_long,
+    ) -> HRESULT,
+    fn get_FirstElement(
+        FirstElement: *mut c_long,
+    ) -> HRESULT,
+    fn get_NumberOfElements(
+        NumberOfElements: *mut c_long,
+    ) -> HRESULT,
+    fn get_Parent(
+        Parent: *mut *mut ISpeechPhraseRule,
+    ) -> HRESULT,
+    fn get_Children(
+        Children: *mut *mut ISpeechPhraseRules,
+    ) -> HRESULT,
+    fn get_Confidence(
+        ActualConfidence: *mut SpeechEngineConfidence,
+    ) -> HRESULT,
+    fn get_EngineConfidence(
+        Confidence: *mut c_float,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x9047d593, 0x01dd, 0x4b72, 0x81, 0xa3, 0xe4, 0xa0, 0xca, 0x69, 0xf4, 0x07)]
 interface ISpeechPhraseRules(ISpeechPhraseRulesVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Count(Count: *mut c_long) -> HRESULT,
+    fn get_Count(
+        Count: *mut c_long,
+    ) -> HRESULT,
     fn Item(
         Index: c_long,
-        Rule: *mut *mut ISpeechPhraseRule
+        Rule: *mut *mut ISpeechPhraseRule,
     ) -> HRESULT,
-    fn get__NewEnum(EnumVARIANT: *mut *mut IUnknown) -> HRESULT
+    fn get__NewEnum(
+        EnumVARIANT: *mut *mut IUnknown,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x3da7627a, 0xc7ae, 0x4b23, 0x87, 0x08, 0x63, 0x8c, 0x50, 0x36, 0x2c, 0x25)]
 interface ISpeechLexicon(ISpeechLexiconVtbl): IDispatch(IDispatchVtbl) {
-    fn get_GenerationId(GenerationId: *mut c_long) -> HRESULT,
+    fn get_GenerationId(
+        GenerationId: *mut c_long,
+    ) -> HRESULT,
     fn GetWords(
         Flags: SpeechLexiconType,
         GenerationID: *mut c_long,
-        Words: *mut *mut ISpeechLexiconWords
+        Words: *mut *mut ISpeechLexiconWords,
     ) -> HRESULT,
     fn AddPronunciation(
         bstrWord: BSTR,
         LangId: SpeechLanguageId,
         PartOfSpeech: SpeechPartOfSpeech,
-        bstrPronunciation: BSTR
+        bstrPronunciation: BSTR,
     ) -> HRESULT,
     fn AddPronunciationByPhoneIds(
         bstrWord: BSTR,
         LangId: SpeechLanguageId,
         PartOfSpeech: SpeechPartOfSpeech,
-        PhoneIds: *mut VARIANT
+        PhoneIds: *mut VARIANT,
     ) -> HRESULT,
     fn RemovePronunciation(
         bstrWord: BSTR,
         LangId: SpeechLanguageId,
         PartOfSpeech: SpeechPartOfSpeech,
-        bstrPronunciation: BSTR
+        bstrPronunciation: BSTR,
     ) -> HRESULT,
     fn RemovePronunciationByPhoneIds(
         bstrWord: BSTR,
         LangId: SpeechLanguageId,
         PartOfSpeech: SpeechPartOfSpeech,
-        PhoneIds: *mut VARIANT
+        PhoneIds: *mut VARIANT,
     ) -> HRESULT,
     fn GetPronunciations(
         bstrWord: BSTR,
         LangId: SpeechLanguageId,
         TypeFlags: SpeechLexiconType,
-        ppPronunciations: *mut *mut ISpeechLexiconPronunciations
+        ppPronunciations: *mut *mut ISpeechLexiconPronunciations,
     ) -> HRESULT,
     fn GetGenerationChange(
         GenerationID: *mut c_long,
-        ppWords: *mut *mut ISpeechLexiconWords
-    ) -> HRESULT
+        ppWords: *mut *mut ISpeechLexiconWords,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x8d199862, 0x415e, 0x47d5, 0xac, 0x4f, 0xfa, 0xa6, 0x08, 0xb4, 0x24, 0xe6)]
 interface ISpeechLexiconWords(ISpeechLexiconWordsVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Count(Count: *mut c_long) -> HRESULT,
+    fn get_Count(
+        Count: *mut c_long,
+    ) -> HRESULT,
     fn Item(
         Index: c_long,
-        Word: *mut *mut ISpeechLexiconWord
+        Word: *mut *mut ISpeechLexiconWord,
     ) -> HRESULT,
-    fn get__NewEnum(EnumVARIANT: *mut *mut IUnknown) -> HRESULT
+    fn get__NewEnum(
+        EnumVARIANT: *mut *mut IUnknown,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x4e5b933c, 0xc9be, 0x48ed, 0x88, 0x42, 0x1e, 0xe5, 0x1b, 0xb1, 0xd4, 0xff)]
 interface ISpeechLexiconWord(ISpeechLexiconWordVtbl): IDispatch(IDispatchVtbl) {
-    fn get_LangId(LangId: *mut SpeechLanguageId) -> HRESULT,
-    fn get_Type(WordType: *mut SpeechWordType) -> HRESULT,
-    fn get_Word(Word: *mut BSTR) -> HRESULT,
-    fn get_Pronunciations(Pronunciations: *mut *mut ISpeechLexiconPronunciations) -> HRESULT
+    fn get_LangId(
+        LangId: *mut SpeechLanguageId,
+    ) -> HRESULT,
+    fn get_Type(
+        WordType: *mut SpeechWordType,
+    ) -> HRESULT,
+    fn get_Word(
+        Word: *mut BSTR,
+    ) -> HRESULT,
+    fn get_Pronunciations(
+        Pronunciations: *mut *mut ISpeechLexiconPronunciations,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x72829128, 0x5682, 0x4704, 0xa0, 0xd4, 0x3e, 0x2b, 0xb6, 0xf2, 0xea, 0xd3)]
 interface ISpeechLexiconPronunciations(ISpeechLexiconPronunciationsVtbl):
     IDispatch(IDispatchVtbl)
 {
-    fn get_Count(Count: *mut c_long) -> HRESULT,
+    fn get_Count(
+        Count: *mut c_long,
+    ) -> HRESULT,
     fn Item(
         Index: c_long,
-        Pronunciation: *mut *mut ISpeechLexiconPronunciation
+        Pronunciation: *mut *mut ISpeechLexiconPronunciation,
     ) -> HRESULT,
-    fn get__NewEnum(EnumVARIANT: *mut *mut IUnknown) -> HRESULT
+    fn get__NewEnum(
+        EnumVARIANT: *mut *mut IUnknown,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x95252c5d, 0x9e43, 0x4f4a, 0x98, 0x99, 0x48, 0xee, 0x73, 0x35, 0x2f, 0x9f)]
 interface ISpeechLexiconPronunciation(ISpeechLexiconPronunciationVtbl): IDispatch(IDispatchVtbl) {
-    fn get_Type(LexiconType: *mut SpeechLexiconType) -> HRESULT,
-    fn get_LangId(LangId: *mut SpeechLanguageId) -> HRESULT,
-    fn get_PartOfSpeech(PartOfSpeech: *mut SpeechPartOfSpeech) -> HRESULT,
-    fn get_PhoneIds(PhoneIds: *mut VARIANT) -> HRESULT,
-    fn get_Symbolic(Symbolic: *mut BSTR) -> HRESULT
+    fn get_Type(
+        LexiconType: *mut SpeechLexiconType,
+    ) -> HRESULT,
+    fn get_LangId(
+        LangId: *mut SpeechLanguageId,
+    ) -> HRESULT,
+    fn get_PartOfSpeech(
+        PartOfSpeech: *mut SpeechPartOfSpeech,
+    ) -> HRESULT,
+    fn get_PhoneIds(
+        PhoneIds: *mut VARIANT,
+    ) -> HRESULT,
+    fn get_Symbolic(
+        Symbolic: *mut BSTR,
+    ) -> HRESULT,
 });
 pub const Speech_Default_Weight: c_float = DEFAULT_WEIGHT;
 pub const Speech_Max_Word_Length: LONG = SP_MAX_WORD_LENGTH as LONG;
@@ -2963,21 +3661,25 @@ RIDL!(#[uuid(0x3b151836, 0xdf3a, 0x4e0a, 0x84, 0x6c, 0xd2, 0xad, 0xc9, 0x33, 0x4
 interface ISpeechPhraseInfoBuilder(ISpeechPhraseInfoBuilderVtbl): IDispatch(IDispatchVtbl) {
     fn RestorePhraseFromMemory(
         PhraseInMemory: *mut VARIANT,
-        PhraseInfo: *mut *mut ISpeechPhraseInfo
-    ) -> HRESULT
+        PhraseInfo: *mut *mut ISpeechPhraseInfo,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xc3e4f353, 0x433f, 0x43d6, 0x89, 0xa1, 0x6a, 0x62, 0xa7, 0x05, 0x4c, 0x3d)]
 interface ISpeechPhoneConverter(ISpeechPhoneConverterVtbl): IDispatch(IDispatchVtbl) {
-    fn get_LanguageId(LanguageId: *mut SpeechLanguageId) -> HRESULT,
-    fn put_LanguageId(LanguageId: SpeechLanguageId) -> HRESULT,
+    fn get_LanguageId(
+        LanguageId: *mut SpeechLanguageId,
+    ) -> HRESULT,
+    fn put_LanguageId(
+        LanguageId: SpeechLanguageId,
+    ) -> HRESULT,
     fn PhoneToId(
         Phonemes: BSTR,
-        IdArray: *mut VARIANT
+        IdArray: *mut VARIANT,
     ) -> HRESULT,
     fn IdToPhone(
         IdArray: VARIANT,
-        Phonemes: *mut BSTR
-    ) -> HRESULT
+        Phonemes: *mut BSTR,
+    ) -> HRESULT,
 });
 extern {
     pub static CLSID_SpNotifyTranslator: CLSID;

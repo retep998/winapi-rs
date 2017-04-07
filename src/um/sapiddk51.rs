@@ -23,7 +23,7 @@ interface ISpTokenUI(ISpTokenUIVtbl): IUnknown(IUnknownVtbl) {
         pvExtraData: *mut c_void,
         cbExtraData: ULONG,
         punkObject: *mut IUnknown,
-        pfSupported: *mut BOOL
+        pfSupported: *mut BOOL,
     ) -> HRESULT,
     fn DisplayUI(
         hwndParent: HWND,
@@ -32,27 +32,31 @@ interface ISpTokenUI(ISpTokenUIVtbl): IUnknown(IUnknownVtbl) {
         pvExtraData: *mut c_void,
         cbExtraData: ULONG,
         pToken: *mut ISpObjectToken,
-        punkObject: *mut IUnknown
-    ) -> HRESULT
+        punkObject: *mut IUnknown,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x06b64f9f, 0x7fda, 0x11d2, 0xb4, 0xf2, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96)]
 interface ISpObjectTokenEnumBuilder(ISpObjectTokenEnumBuilderVtbl):
     IEnumSpObjectTokens(IEnumSpObjectTokensVtbl) {
     fn SetAttribs(
         pszReqAttribs: LPCWSTR,
-        pszOptAttribs: LPCWSTR
+        pszOptAttribs: LPCWSTR,
     ) -> HRESULT,
     fn AddTokens(
         cTokens: ULONG,
-        pToken: *mut *mut ISpObjectToken
+        pToken: *mut *mut ISpObjectToken,
     ) -> HRESULT,
     fn AddTokensFromDataKey(
         pDataKey: *mut ISpDataKey,
         pszSubKey: LPCWSTR,
-        pszCategoryId: LPCWSTR
+        pszCategoryId: LPCWSTR,
     ) -> HRESULT,
-    fn AddTokensFromTokenEnum(pTokenEnum: *mut IEnumSpObjectTokens) -> HRESULT,
-    fn Sort(pszTokenIdToListFirst: LPCWSTR) -> HRESULT
+    fn AddTokensFromTokenEnum(
+        pTokenEnum: *mut IEnumSpObjectTokens,
+    ) -> HRESULT,
+    fn Sort(
+        pszTokenIdToListFirst: LPCWSTR,
+    ) -> HRESULT,
 });
 DECLARE_HANDLE!(SPWORDHANDLE, SPWORDHANDLE__);
 DECLARE_HANDLE!(SPRULEHANDLE, SPRULEHANDLE__);
@@ -68,8 +72,8 @@ interface ISpErrorLog(ISpErrorLogVtbl): IUnknown(IUnknownVtbl) {
         hr: HRESULT,
         pszDescription: LPCWSTR,
         pszHelpFile: LPCWSTR,
-        dwHelpContext: DWORD
-    ) -> HRESULT
+        dwHelpContext: DWORD,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xb1e29d58, 0xa675, 0x11d2, 0x83, 0x02, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0)]
 interface ISpGrammarCompiler(ISpGrammarCompilerVtbl): IUnknown(IUnknownVtbl) {
@@ -79,44 +83,54 @@ interface ISpGrammarCompiler(ISpGrammarCompilerVtbl): IUnknown(IUnknownVtbl) {
         pHeader: *mut IStream,
         pReserved: *mut IUnknown,
         pErrorLog: *mut ISpErrorLog,
-        dwFlags: DWORD
-    ) -> HRESULT
+        dwFlags: DWORD,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x3ddca27c, 0x665c, 0x4786, 0x9f, 0x97, 0x8c, 0x90, 0xc3, 0x48, 0x8b, 0x61)]
 interface ISpGramCompBackend(ISpGramCompBackendVtbl): ISpGrammarBuilder(ISpGrammarBuilderVtbl) {
     fn SetSaveObjects(
         pStream: *mut IStream,
-        pErrorLog: *mut ISpErrorLog
+        pErrorLog: *mut ISpErrorLog,
     ) -> HRESULT,
-    fn InitFromBinaryGrammar(pBinaryData: *const SPBINARYGRAMMAR) -> HRESULT
+    fn InitFromBinaryGrammar(
+        pBinaryData: *const SPBINARYGRAMMAR,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x12d7360f, 0xa1c9, 0x11d3, 0xbc, 0x90, 0x00, 0xc0, 0x4f, 0x72, 0xdf, 0x9f)]
 interface ISpITNProcessor(ISpITNProcessorVtbl): IUnknown(IUnknownVtbl) {
-    fn LoadITNGrammar(pszCLSID: LPWSTR) -> HRESULT,
-    fn ITNPhrase(pPhrase: *mut ISpPhraseBuilder) -> HRESULT
+    fn LoadITNGrammar(
+        pszCLSID: LPWSTR,
+    ) -> HRESULT,
+    fn ITNPhrase(
+        pPhrase: *mut ISpPhraseBuilder,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0x88a3342a, 0x0bed, 0x4834, 0x92, 0x2b, 0x88, 0xd4, 0x31, 0x73, 0x16, 0x2f)]
 interface ISpPhraseBuilder(ISpPhraseBuilderVtbl): ISpPhrase(ISpPhraseVtbl) {
-    fn InitFromPhrase(pPhrase: *const SPPHRASE) -> HRESULT,
-    fn InitFromSerializedPhrase(pPhrase: *const SPSERIALIZEDPHRASE) -> HRESULT,
+    fn InitFromPhrase(
+        pPhrase: *const SPPHRASE,
+    ) -> HRESULT,
+    fn InitFromSerializedPhrase(
+        pPhrase: *const SPSERIALIZEDPHRASE,
+    ) -> HRESULT,
     fn AddElements(
         cElements: ULONG,
-        pElement: *const SPPHRASEELEMENT
+        pElement: *const SPPHRASEELEMENT,
     ) -> HRESULT,
     fn AddRules(
         hParent: SPPHRASERULEHANDLE,
         pRule: *const SPPHRASERULE,
-        phNewRule: *mut SPPHRASERULEHANDLE
+        phNewRule: *mut SPPHRASERULEHANDLE,
     ) -> HRESULT,
     fn AddProperties(
         hParent: SPPHRASEPROPERTYHANDLE,
         pProperty: *const SPPHRASEPROPERTY,
-        phNewProperty: *mut SPPHRASEPROPERTYHANDLE
+        phNewProperty: *mut SPPHRASEPROPERTYHANDLE,
     ) -> HRESULT,
     fn AddReplacements(
         cReplacements: ULONG,
-        pReplacements: *const SPPHRASEREPLACEMENT
-    ) -> HRESULT
+        pReplacements: *const SPPHRASEREPLACEMENT,
+    ) -> HRESULT,
 });
 pub type ISpTask = *mut c_void;
 pub type ISpThreadTask = *mut c_void;
@@ -124,12 +138,12 @@ RIDL!(#[uuid(0xa6be4d73, 0x4403, 0x4358, 0xb2, 0x2d, 0x03, 0x46, 0xe2, 0x3b, 0x1
 interface ISpThreadControl(ISpThreadControlVtbl): ISpNotifySink(ISpNotifySinkVtbl) {
     fn StartThread(
         dwFlags: DWORD,
-        phwnd: *mut HWND
+        phwnd: *mut HWND,
     ) -> HRESULT,
     fn WaitForThreadDone(
         fForceStop: BOOL,
         phrThreadResult: *mut HRESULT,
-        msTimeOut: ULONG
+        msTimeOut: ULONG,
     ) -> HRESULT,
     fn TerminateThread() -> HRESULT,
     fn ThreadHandle() -> HANDLE,
@@ -137,7 +151,7 @@ interface ISpThreadControl(ISpThreadControlVtbl): ISpNotifySink(ISpNotifySinkVtb
     fn NotifyEvent() -> HANDLE,
     fn WindowHandle() -> HWND,
     fn ThreadCompleteEvent() -> HANDLE,
-    fn ExitThreadEvent() -> HANDLE
+    fn ExitThreadEvent() -> HANDLE,
 });
 STRUCT!{struct SPTMTHREADINFO {
     lPoolSize: c_long,
@@ -147,31 +161,35 @@ STRUCT!{struct SPTMTHREADINFO {
 }}
 RIDL!(#[uuid(0x2baeef81, 0x2ca3, 0x4331, 0x98, 0xf3, 0x26, 0xec, 0x5a, 0xbe, 0xfb, 0x03)]
 interface ISpTaskManager(ISpTaskManagerVtbl): IUnknown(IUnknownVtbl) {
-    fn SetThreadPoolInfo(pPoolInfo: *const SPTMTHREADINFO) -> HRESULT,
-    fn GetThreadPoolInfo(pPoolInfo: *mut SPTMTHREADINFO) -> HRESULT,
+    fn SetThreadPoolInfo(
+        pPoolInfo: *const SPTMTHREADINFO,
+    ) -> HRESULT,
+    fn GetThreadPoolInfo(
+        pPoolInfo: *mut SPTMTHREADINFO,
+    ) -> HRESULT,
     fn QueueTask(
         pTask: *mut ISpTask,
         pvTaskData: *mut c_void,
         hCompEvent: HANDLE,
         pdwGroupId: *mut DWORD,
-        pTaskID: *mut DWORD
+        pTaskID: *mut DWORD,
     ) -> HRESULT,
     fn CreateReoccurringTask(
         pTask: *mut ISpTask,
         pvTaskData: *mut c_void,
         hCompEvent: HANDLE,
-        ppTaskCtrl: *mut *mut ISpNotifySink
+        ppTaskCtrl: *mut *mut ISpNotifySink,
     ) -> HRESULT,
     fn CreateThreadControl(
         pTask: *mut ISpThreadTask,
         pvTaskData: *mut c_void,
         nPriority: c_long,
-        ppTaskCtrl: *mut *mut ISpThreadControl
+        ppTaskCtrl: *mut *mut ISpThreadControl,
     ) -> HRESULT,
     fn TerminateTask(
         dwGroupId: DWORD,
-        ulWaitPeriod: ULONG
-    ) -> HRESULT
+        ulWaitPeriod: ULONG,
+    ) -> HRESULT,
 });
 ENUM!{enum SPVSKIPTYPE {
     SPVST_SENTENCE = 1 << 0,
@@ -189,15 +207,20 @@ interface ISpTTSEngineSite(ISpTTSEngineSiteVtbl): ISpEventSink(ISpEventSinkVtbl)
     fn Write(
         pBuff: *const c_void,
         cb: ULONG,
-        pcbWritten: *mut ULONG
+        pcbWritten: *mut ULONG,
     ) -> HRESULT,
-    fn GetRate(pRateAdjust: *mut c_long) -> HRESULT,
-    fn GetVolume(pusVolume: *mut USHORT) -> HRESULT,
+    fn GetRate(
+        pRateAdjust: *mut c_long,
+    ) -> HRESULT,
+    fn GetVolume(pusVolume: *mut USHORT,
+    ) -> HRESULT,
     fn GetSkipInfo(
         peType: *mut SPVSKIPTYPE,
-        plNumItems: *mut c_long
+        plNumItems: *mut c_long,
     ) -> HRESULT,
-    fn CompleteSkip(ulNumSkipped: c_long) -> HRESULT
+    fn CompleteSkip(
+        ulNumSkipped: c_long,
+    ) -> HRESULT,
 });
 STRUCT!{struct SPVTEXTFRAG {
     pNext: *mut SPVTEXTFRAG,
@@ -213,14 +236,14 @@ interface ISpTTSEngine(ISpTTSEngineVtbl): IUnknown(IUnknownVtbl) {
         rguidFormatId: REFGUID,
         pWaveFormatEx: *const WAVEFORMATEX,
         pTextFragList: *const SPVTEXTFRAG,
-        pOutputSite: *mut ISpTTSEngineSite
+        pOutputSite: *mut ISpTTSEngineSite,
     ) -> HRESULT,
     fn GetOutputFormat(
         pTargetFmtId: *const GUID,
         pTargetWaveFormatEx: *const WAVEFORMATEX,
         pOutputFormatId: *mut GUID,
-        ppCoMemOutputWaveFormatEx: *mut WAVEFORMATEX
-    ) -> HRESULT
+        ppCoMemOutputWaveFormatEx: *mut WAVEFORMATEX,
+    ) -> HRESULT,
 });
 STRUCT!{struct SPWORDENTRY {
     hWord: SPWORDHANDLE,
@@ -279,25 +302,29 @@ STRUCT!{struct SPPATHENTRY {
 }}
 RIDL!(#[uuid(0x6a6ffad8, 0x78b6, 0x473d, 0xb8, 0x44, 0x98, 0x15, 0x2e, 0x4f, 0xb1, 0x6b)]
 interface ISpCFGInterpreterSite(ISpCFGInterpreterSiteVtbl): IUnknown(IUnknownVtbl) {
-    fn AddTextReplacement(pReplace: *mut SPPHRASEREPLACEMENT) -> HRESULT,
-    fn AddProperty(pProperty: *const SPPHRASEPROPERTY) -> HRESULT,
+    fn AddTextReplacement(
+        pReplace: *mut SPPHRASEREPLACEMENT,
+    ) -> HRESULT,
+    fn AddProperty(
+        pProperty: *const SPPHRASEPROPERTY,
+    ) -> HRESULT,
     fn GetResourceValue(
         pszResourceName: LPCWSTR,
-        ppCoMemResource: *mut LPWSTR
-    ) -> HRESULT
+        ppCoMemResource: *mut LPWSTR,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xf3d3f926, 0x11fc, 0x11d3, 0xbb, 0x97, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0)]
 interface ISpCFGInterpreter(ISpCFGInterpreterVtbl): IUnknown(IUnknownVtbl) {
     fn InitGrammar(
         pszGrammarName: LPCWSTR,
-        pvGrammarData: *mut *const c_void
+        pvGrammarData: *mut *const c_void,
     ) -> HRESULT,
     fn Interpret(
         pPhrase: *mut ISpPhraseBuilder,
         ulFirstElement: *const ULONG,
         ulCountOfElements: *const ULONG,
-        pSite: *mut ISpCFGInterpreterSite
-    ) -> HRESULT
+        pSite: *mut ISpCFGInterpreterSite,
+    ) -> HRESULT,
 });
 ENUM!{enum SPCFGNOTIFY {
     SPCFGN_ADD,
@@ -358,62 +385,72 @@ interface ISpSREngineSite(ISpSREngineSiteVtbl): IUnknown(IUnknownVtbl) {
     fn Read(
         pv: *mut c_void,
         cb: ULONG,
-        pcbRead: *mut ULONG
+        pcbRead: *mut ULONG,
     ) -> HRESULT,
-    fn DataAvailable(pcb: *mut ULONG) -> HRESULT,
-    fn SetBufferNotifySize(cbSize: ULONG) -> HRESULT,
+    fn DataAvailable(
+        pcb: *mut ULONG,
+    ) -> HRESULT,
+    fn SetBufferNotifySize(
+        cbSize: ULONG,
+    ) -> HRESULT,
     fn ParseFromTransitions(
         pParseInfo: *const SPPARSEINFO,
-        ppNewPhrase: *mut *mut ISpPhraseBuilder
+        ppNewPhrase: *mut *mut ISpPhraseBuilder,
     ) -> HRESULT,
-    fn Recognition(pResultInfo: *const SPRECORESULTINFO) -> HRESULT,
+    fn Recognition(
+        pResultInfo: *const SPRECORESULTINFO,
+    ) -> HRESULT,
     fn AddEvent(
         pEvent: *const SPEVENT,
-        hSAPIRecoContext: SPRECOCONTEXTHANDLE
+        hSAPIRecoContext: SPRECOCONTEXTHANDLE,
     ) -> HRESULT,
-    fn Synchronize(ullProcessedThruPos: ULONGLONG) -> HRESULT,
+    fn Synchronize(
+        ullProcessedThruPos: ULONGLONG,
+    ) -> HRESULT,
     fn GetWordInfo(
         pWordEntry: *mut SPWORDENTRY,
-        Options: SPWORDINFOOPT
+        Options: SPWORDINFOOPT,
     ) -> HRESULT,
     fn SetWordClientContext(
         hWord: SPWORDHANDLE,
-        pvClientContext: *mut c_void
+        pvClientContext: *mut c_void,
     ) -> HRESULT,
     fn GetRuleInfo(
         pRuleEntry: *mut SPRULEENTRY,
-        Options: SPRULEINFOOPT
+        Options: SPRULEINFOOPT,
     ) -> HRESULT,
     fn SetRuleClientContext(
         hRule: SPRULEHANDLE,
-        pvClientContext: *mut c_void
+        pvClientContext: *mut c_void,
     ) -> HRESULT,
     fn GetStateInfo(
         hState: SPSTATEHANDLE,
-        pStateInfo: *mut SPSTATEINFO
+        pStateInfo: *mut SPSTATEINFO,
     ) -> HRESULT,
     fn GetResource(
         hRule: SPRULEHANDLE,
         pszResourceName: LPCWSTR,
-        ppCoMemResource: *mut LPWSTR
+        ppCoMemResource: *mut LPWSTR,
     ) -> HRESULT,
     fn GetTransitionProperty(
         ID: SPTRANSITIONID,
-        ppCoMemProperty: *mut *mut SPTRANSITIONPROPERTY
+        ppCoMemProperty: *mut *mut SPTRANSITIONPROPERTY,
     ) -> HRESULT,
     fn IsAlternate(
         hRule: SPRULEHANDLE,
-        hAltRule: SPRULEHANDLE
+        hAltRule: SPRULEHANDLE,
     ) -> HRESULT,
     fn GetMaxAlternates(
         hRule: SPRULEHANDLE,
-        pulNumAlts: *mut ULONG
+        pulNumAlts: *mut ULONG,
     ) -> HRESULT,
     fn GetContextMaxAlternates(
         hContext: SPRECOCONTEXTHANDLE,
-        pulNumAlts: *mut ULONG
+        pulNumAlts: *mut ULONG,
     ) -> HRESULT,
-    fn UpdateRecoPos(ullCurrentRecoPos: ULONGLONG) -> HRESULT
+    fn UpdateRecoPos(
+        ullCurrentRecoPos: ULONGLONG,
+    ) -> HRESULT,
 });
 ENUM!{enum SPPROPSRC {
     SPPROPSRC_RECO_INST,
@@ -422,12 +459,14 @@ ENUM!{enum SPPROPSRC {
 }}
 RIDL!(#[uuid(0x2f472991, 0x854b, 0x4465, 0xb6, 0x13, 0xfb, 0xaf, 0xb3, 0xad, 0x8e, 0xd8)]
 interface ISpSREngine(ISpSREngineVtbl): IUnknown(IUnknownVtbl) {
-    fn SetSite(pSite: *mut ISpSREngineSite) -> HRESULT,
+    fn SetSite(
+        pSite: *mut ISpSREngineSite,
+    ) -> HRESULT,
     fn GetInputAudioFormat(
         pguidSourceFormatId: *const GUID,
         pSourceWaveFormatEx: *const WAVEFORMATEX,
         pguidDesiredFormatId: *mut GUID,
-        ppCoMemDesiredWaveFormatEx: *mut WAVEFORMATEX
+        ppCoMemDesiredWaveFormatEx: *mut WAVEFORMATEX,
     ) -> HRESULT,
     fn RecognizeStream(
         rguidFmtId: REFGUID,
@@ -437,124 +476,134 @@ interface ISpSREngine(ISpSREngineVtbl): IUnknown(IUnknownVtbl) {
         hExit: HANDLE,
         fNewAudioStream: BOOL,
         fRealTimeAudio: BOOL,
-        pAudioObjectToken: *mut ISpObjectToken
+        pAudioObjectToken: *mut ISpObjectToken,
     ) -> HRESULT,
-    fn SetRecoProfile(pProfile: *mut ISpObjectToken) -> HRESULT,
+    fn SetRecoProfile(
+        pProfile: *mut ISpObjectToken,
+    ) -> HRESULT,
     fn OnCreateGrammar(
         pvEngineRecoContext: *mut c_void,
         hSAPIGrammar: SPGRAMMARHANDLE,
-        ppvEngineGrammarContext: *mut *mut c_void
+        ppvEngineGrammarContext: *mut *mut c_void,
     ) -> HRESULT,
-    fn OnDeleteGrammar(pvEngineGrammar: *mut c_void) -> HRESULT,
+    fn OnDeleteGrammar(
+        pvEngineGrammar: *mut c_void,
+    ) -> HRESULT,
     fn LoadProprietaryGrammar(
         pvEngineGrammar: *mut c_void,
         rguidParam: REFGUID,
         pszStringParam: LPCWSTR,
         pvDataParam: *const c_void,
         ulDataSize: ULONG,
-        Options: SPLOADOPTIONS
+        Options: SPLOADOPTIONS,
     ) -> HRESULT,
-    fn UnloadProprietaryGrammar(pvEngineGrammar: *mut c_void) -> HRESULT,
+    fn UnloadProprietaryGrammar(
+        pvEngineGrammar: *mut c_void,
+    ) -> HRESULT,
     fn SetProprietaryRuleState(
         pvEngineGrammar: *mut c_void,
         pszName: LPCWSTR,
         pReserved: *mut c_void,
         NewState: SPRULESTATE,
-        pcRulesChanged: *mut ULONG
+        pcRulesChanged: *mut ULONG,
     ) -> HRESULT,
     fn SetProprietaryRuleIdState(
         pvEngineGrammar: *mut c_void,
         dwRuleId: DWORD,
-        NewState: SPRULESTATE
+        NewState: SPRULESTATE,
     ) -> HRESULT,
     fn LoadSLM(
         pvEngineGrammar: *mut c_void,
-        pszTopicName: LPCWSTR
+        pszTopicName: LPCWSTR,
     ) -> HRESULT,
-    fn UnloadSLM(pvEngineGrammar: *mut c_void) -> HRESULT,
+    fn UnloadSLM(
+        pvEngineGrammar: *mut c_void,
+    ) -> HRESULT,
     fn SetSLMState(
         pvEngineGrammar: *mut c_void,
-        NewState: SPRULESTATE
+        NewState: SPRULESTATE,
     ) -> HRESULT,
     fn SetWordSequenceData(
         pvEngineGrammar: *mut c_void,
         pText: *const WCHAR,
         cchText: ULONG,
-        pInfo: *const SPTEXTSELECTIONINFO
+        pInfo: *const SPTEXTSELECTIONINFO,
     ) -> HRESULT,
     fn SetTextSelection(
         pvEngineGrammar: *mut c_void,
-        pInfo: *const SPTEXTSELECTIONINFO
+        pInfo: *const SPTEXTSELECTIONINFO,
     ) -> HRESULT,
     fn IsPronounceable(
         pvEngineGrammar: *mut c_void,
         pszWord: LPCWSTR,
-        pWordPronounceable: *mut SPWORDPRONOUNCEABLE
+        pWordPronounceable: *mut SPWORDPRONOUNCEABLE,
     ) -> HRESULT,
     fn OnCreateRecoContext(
         hSAPIRecoContext: SPRECOCONTEXTHANDLE,
-        ppvEngineContext: *mut *mut c_void
+        ppvEngineContext: *mut *mut c_void,
     ) -> HRESULT,
-    fn OnDeleteRecoContext(pvEngineContext: *mut c_void) -> HRESULT,
+    fn OnDeleteRecoContext(
+        pvEngineContext: *mut c_void,
+    ) -> HRESULT,
     fn OnPrivateCall(
         pvEngineContext: *mut c_void,
         pCallFrame: PVOID,
-        ulCallFrameSize: ULONG
+        ulCallFrameSize: ULONG,
     ) -> HRESULT,
     fn SetAdaptationData(
         pvEngineContext: *mut c_void,
         pAdaptationData: *const WCHAR,
-        cch: ULONG
+        cch: ULONG,
     ) -> HRESULT,
     fn SetPropertyNum(
         eSrc: SPPROPSRC,
         pvSrcObj: *mut c_void,
         pName: *const WCHAR,
-        lValue: LONG
+        lValue: LONG,
     ) -> HRESULT,
     fn GetPropertyNum(
         eSrc: SPPROPSRC,
         pvSrcObj: *mut c_void,
         pName: *const WCHAR,
-        lValue: *mut LONG
+        lValue: *mut LONG,
     ) -> HRESULT,
     fn SetPropertyString(
         eSrc: SPPROPSRC,
         pvSrcObj: *mut c_void,
         pName: LPCWSTR,
-        pValue: LPCWSTR
+        pValue: LPCWSTR,
     ) -> HRESULT,
     fn GetPropertyString(
         eSrc: SPPROPSRC,
         pvSrcObj: *mut c_void,
         pName: LPCWSTR,
-        ppCoMemValue: *mut LPWSTR
+        ppCoMemValue: *mut LPWSTR,
     ) -> HRESULT,
     fn SetGrammarState(
         pvEngineGrammar: *mut c_void,
-        eGrammarState: SPGRAMMARSTATE
+        eGrammarState: SPGRAMMARSTATE,
     ) -> HRESULT,
     fn WordNotify(
         Action: SPCFGNOTIFY,
         cWords: ULONG,
-        pWords: *const SPWORDENTRY
+        pWords: *const SPWORDENTRY,
     ) -> HRESULT,
     fn RuleNotify(
         Action: SPCFGNOTIFY,
         cRules: ULONG,
-        pRules: *const SPRULEENTRY
+        pRules: *const SPRULEENTRY,
     ) -> HRESULT,
     fn PrivateCallEx(
         pvEngineContext: *mut c_void,
         pInCallFrame: *const c_void,
         ulInCallFrameSize: ULONG,
         ppvCoMemResponse: *mut *mut c_void,
-        pulResponseSize: *mut ULONG
+        pulResponseSize: *mut ULONG,
     ) -> HRESULT,
     fn SetContextState(
         pvEngineContext: *mut c_void,
-        eContextState: SPCONTEXTSTATE
-    ) -> HRESULT
+        eContextState: SPCONTEXTSTATE,
+    ) -> HRESULT,
 });
 STRUCT!{struct SPPHRASEALTREQUEST {
     ulStartElement: ULONG,
@@ -569,14 +618,14 @@ RIDL!(#[uuid(0x8e7c791e, 0x4467, 0x11d3, 0x97, 0x23, 0x00, 0xc0, 0x4f, 0x72, 0xd
 interface _ISpPrivateEngineCall(_ISpPrivateEngineCallVtbl): IUnknown(IUnknownVtbl) {
     fn CallEngine(
         pCallFrame: *mut c_void,
-        ulCallFrameSize: ULONG
+        ulCallFrameSize: ULONG,
     ) -> HRESULT,
     fn CallEngineEx(
         pInFrame: *const c_void,
         ulInFrameSize: ULONG,
         ppCoMemOutFrame: *mut *mut c_void,
-        pulOutFrameSize: *mut ULONG
-    ) -> HRESULT
+        pulOutFrameSize: *mut ULONG,
+    ) -> HRESULT,
 });
 extern {
     pub static LIBID_SpeechDDKLib: IID;

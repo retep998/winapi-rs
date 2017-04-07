@@ -14,11 +14,11 @@ interface IServiceProvider(IServiceProviderVtbl): IUnknown(IUnknownVtbl) {
     fn QueryService(
         guidService: REFGUID,
         riid: REFIID,
-        ppvObject: *mut *mut c_void
+        ppvObject: *mut *mut c_void,
     ) -> HRESULT,
     fn RemoteQueryService(
         guidService: REFGUID,
         riid: REFIID,
-        ppvObject: *mut *mut IUnknown
-    ) -> HRESULT
+        ppvObject: *mut *mut IUnknown,
+    ) -> HRESULT,
 });
