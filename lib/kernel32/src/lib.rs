@@ -102,8 +102,6 @@ extern "system" {
     pub fn CheckTokenMembershipEx(
         TokenHandle: HANDLE, SidToCheck: PSID, Flags: DWORD, IsMember: PBOOL,
     ) -> BOOL;
-    pub fn ClearCommBreak(hFile: HANDLE) -> BOOL;
-    pub fn ClearCommError(hFile: HANDLE, lpErrors: LPDWORD, lpStat: LPCOMSTAT) -> BOOL;
     // pub fn ClosePackageInfo();
     pub fn ClosePrivateNamespace(Handle: HANDLE, Flags: ULONG) -> BOOLEAN;
     // pub fn CloseState();
@@ -564,7 +562,6 @@ extern "system" {
     // pub fn EnumerateLocalComputerNamesA();
     // pub fn EnumerateLocalComputerNamesW();
     pub fn EraseTape(hDevice: HANDLE, dwEraseType: DWORD, bImmediate: BOOL) -> DWORD;
-    pub fn EscapeCommFunction(hFile: HANDLE, dwFunc: DWORD) -> BOOL;
     #[cfg(target_arch = "x86_64")]
     pub fn ExecuteUmsThread(UmsThread: PUMS_CONTEXT) -> BOOL;
     pub fn ExpandEnvironmentStringsA(lpSrc: LPCSTR, lpDst: LPSTR, nSize: DWORD) -> DWORD;
@@ -759,12 +756,6 @@ extern "system" {
         Locale: LCID, Calendar: CALID, CalType: CALTYPE, lpCalData: LPWSTR, cchData: c_int,
         lpValue: LPDWORD,
     ) -> c_int;
-    pub fn GetCommConfig(hCommDev: HANDLE, lpCC: LPCOMMCONFIG, lpdwSize: LPDWORD) -> BOOL;
-    pub fn GetCommMask(hFile: HANDLE, lpEvtMask: LPDWORD) -> BOOL;
-    pub fn GetCommModemStatus(hFile: HANDLE, lpModemStat: LPDWORD) -> BOOL;
-    pub fn GetCommProperties(hFile: HANDLE, lpCommProp: LPCOMMPROP) -> BOOL;
-    pub fn GetCommState(hFile: HANDLE, lpDCB: LPDCB) -> BOOL;
-    pub fn GetCommTimeouts(hFile: HANDLE, lpCommTimeouts: LPCOMMTIMEOUTS) -> BOOL;
     pub fn GetCommandLineA() -> LPSTR;
     pub fn GetCommandLineW() -> LPWSTR;
     pub fn GetCompressedFileSizeA(lpFileName: LPCSTR, lpFileSizeHigh: LPDWORD) -> DWORD;
@@ -1720,7 +1711,6 @@ extern "system" {
         WalkMarkerHandle: HPSSWALK, Buffer: *mut c_void, BufferLength: DWORD,
     ) -> DWORD;
     pub fn PulseEvent(hEvent: HANDLE) -> BOOL;
-    pub fn PurgeComm(hFile: HANDLE, dwFlags: DWORD) -> BOOL;
     pub fn QueryActCtxSettingsW(
         dwFlags: DWORD, hActCtx: HANDLE, settingsNameSpace: PCWSTR, settingName: PCWSTR,
         pvBuffer: PWSTR, dwBuffer: SIZE_T, pdwWrittenOrRequired: *mut SIZE_T,
@@ -1929,11 +1919,6 @@ extern "system" {
     pub fn SetCalendarInfoW(
         Locale: LCID, Calendar: CALID, CalType: CALTYPE, lpCalData: LPCWSTR,
     ) -> BOOL;
-    pub fn SetCommBreak(hFile: HANDLE) -> BOOL;
-    pub fn SetCommConfig(hCommDev: HANDLE, lpCC: LPCOMMCONFIG, dwSize: DWORD) -> BOOL;
-    pub fn SetCommMask(hFile: HANDLE, dwEvtMask: DWORD) -> BOOL;
-    pub fn SetCommState(hFile: HANDLE, lpDCB: LPDCB) -> BOOL;
-    pub fn SetCommTimeouts(hFile: HANDLE, lpCommTimeouts: LPCOMMTIMEOUTS) -> BOOL;
     pub fn SetComputerNameA(lpComputerName: LPCSTR) -> BOOL;
     pub fn SetComputerNameEx2W(
         NameType: COMPUTER_NAME_FORMAT, Flags: DWORD, lpBuffer: LPCWSTR,
@@ -2122,7 +2107,6 @@ extern "system" {
     pub fn SetVolumeMountPointW(lpszVolumeMountPoint: LPCWSTR, lpszVolumeName: LPCWSTR) -> BOOL;
     #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
     pub fn SetXStateFeaturesMask(Context: PCONTEXT, FeatureMask: DWORD64) -> BOOL;
-    pub fn SetupComm(hFile: HANDLE, dwInQueue: DWORD, dwOutQueue: DWORD) -> BOOL;
     pub fn SizeofResource(hModule: HMODULE, hResInfo: HRSRC) -> DWORD;
     pub fn StartThreadpoolIo(pio: PTP_IO);
     pub fn SubmitThreadpoolWork(pwk: PTP_WORK);
@@ -2150,7 +2134,6 @@ extern "system" {
         hNamedPipe: HANDLE, lpInBuffer: LPVOID, nInBufferSize: DWORD, lpOutBuffer: LPVOID,
         nOutBufferSize: DWORD, lpBytesRead: LPDWORD, lpOverlapped: LPOVERLAPPED,
     ) -> BOOL;
-    pub fn TransmitCommChar(hFile: HANDLE, cChar: c_char) -> BOOL;
     pub fn TrySubmitThreadpoolCallback(
         pfns: PTP_SIMPLE_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
     ) -> BOOL;
@@ -2236,7 +2219,6 @@ extern "system" {
     ) -> SIZE_T;
     pub fn VirtualUnlock(lpAddress: LPVOID, dwSize: SIZE_T) -> BOOL;
     pub fn WTSGetActiveConsoleSessionId() -> DWORD;
-    pub fn WaitCommEvent(hFile: HANDLE, lpEvtMask: LPDWORD, lpOverlapped: LPOVERLAPPED) -> BOOL;
     pub fn WaitForDebugEvent(lpDebugEvent: LPDEBUG_EVENT, dwMilliseconds: DWORD) -> BOOL;
     pub fn WaitForMultipleObjectsEx(
         nCount: DWORD, lpHandles: *const HANDLE, bWaitAll: BOOL, dwMilliseconds: DWORD,

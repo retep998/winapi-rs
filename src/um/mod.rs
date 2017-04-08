@@ -13,6 +13,7 @@ pub mod gl;
 #[cfg(feature = "cguid")] pub mod cguid;
 #[cfg(feature = "combaseapi")] pub mod combaseapi;
 #[cfg(feature = "coml2api")] pub mod coml2api;
+#[cfg(feature = "commapi")] pub mod commapi;
 #[cfg(feature = "commctrl")] pub mod commctrl;
 #[cfg(feature = "commdlg")] pub mod commdlg;
 #[cfg(feature = "consoleapi")] pub mod consoleapi;
