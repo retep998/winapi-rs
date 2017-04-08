@@ -6,10 +6,12 @@
 // except according to those terms.
 //! Mappings for the contents of OleAuto.h
 
+use ctypes::c_uint;
+use shared::minwindef::UINT;
 use shared::wtypes::{BSTR};
 use shared::wtypesbase::{LPCOLESTR, OLECHAR};
 use um::oaidl::{DISPID_UNKNOWN, ITypeLib};
-use um::winnt::{HRESULT, LONG};
+use um::winnt::{HRESULT, INT, LONG, LPCSTR};
 
 pub type DISPID = LONG;
 pub type MEMBERID = DISPID;
@@ -17,9 +19,32 @@ extern "system" {
     pub fn SysAllocString(
         psz: *const OLECHAR,
     ) -> BSTR;
+    pub fn SysReAllocString(
+        pbstr: *mut BSTR,
+        psz: *const OLECHAR,
+    ) -> INT;
+    pub fn SysAllocStringLen(
+        strIn: *const OLECHAR,
+        ui: UINT,
+    ) -> BSTR;
+    pub fn SysReAllocStringLen(
+        pbstr: *mut BSTR,
+        psz: *const OLECHAR,
+        len: c_uint,
+    ) -> INT;
     pub fn SysFreeString(
         bstrString: BSTR,
     ) -> ();
+    pub fn SysStringLen(
+        pbstr: BSTR,
+    ) -> UINT;
+    pub fn SysStringByteLen(
+        bstr: BSTR,
+    ) -> UINT;
+    pub fn SysAllocStringByteLen(
+        psz: LPCSTR,
+        len: UINT,
+    ) -> BSTR;
 }
 pub const MEMBERID_NIL: MEMBERID = DISPID_UNKNOWN;
 

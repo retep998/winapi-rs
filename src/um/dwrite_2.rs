@@ -97,28 +97,50 @@ interface IDWriteTextRenderer1(IDWriteTextRenderer1Vtbl):
 RIDL!{#[uuid(0x5f174b49, 0x0d8b, 0x4cfb, 0x8b, 0xca, 0xf1, 0xcc, 0xe9, 0xd0, 0x6c, 0x67)]
 interface IDWriteTextFormat1(IDWriteTextFormat1Vtbl):
     IDWriteTextFormat(IDWriteTextFormatVtbl) {
-    fn SetVerticalGlyphOrientation(glyphOrientation: DWRITE_VERTICAL_GLYPH_ORIENTATION,) -> HRESULT,
+    fn SetVerticalGlyphOrientation(
+        glyphOrientation: DWRITE_VERTICAL_GLYPH_ORIENTATION,
+    ) -> HRESULT,
     fn GetVerticalGlyphOrientation() -> DWRITE_VERTICAL_GLYPH_ORIENTATION,
-    fn SetLastLineWrapping(isLastLineWrappingEnabled: BOOL,) -> HRESULT,
+    fn SetLastLineWrapping(
+        isLastLineWrappingEnabled: BOOL,
+    ) -> HRESULT,
     fn GetLastLineWrapping() -> BOOL,
-    fn SetOpticalAlignment(opticalAlignment: DWRITE_OPTICAL_ALIGNMENT,) -> HRESULT,
+    fn SetOpticalAlignment(
+        opticalAlignment: DWRITE_OPTICAL_ALIGNMENT,
+    ) -> HRESULT,
     fn GetOpticalAlignment() -> DWRITE_OPTICAL_ALIGNMENT,
-    fn SetFontFallback(fontFallback: *mut IDWriteFontFallback,) -> HRESULT,
-    fn GetFontFallback(fontFallback: *mut *mut IDWriteFontFallback,) -> HRESULT,
+    fn SetFontFallback(
+        fontFallback: *mut IDWriteFontFallback,
+    ) -> HRESULT,
+    fn GetFontFallback(
+        fontFallback: *mut *mut IDWriteFontFallback,
+    ) -> HRESULT,
 }}
 
 RIDL!{#[uuid(0x1093c18f, 0x8d5e, 0x43f0, 0xb0, 0x64, 0x09, 0x17, 0x31, 0x1b, 0x52, 0x5e)]
 interface IDWriteTextLayout2(IDWriteTextLayout2Vtbl):
     IDWriteTextLayout1(IDWriteTextLayout1Vtbl) {
-    fn GetMetrics(textMetrics: *mut DWRITE_TEXT_METRICS1,) -> HRESULT,
-    fn SetVerticalGlyphOrientation(glyphOrientation: DWRITE_VERTICAL_GLYPH_ORIENTATION,) -> HRESULT,
+    fn GetMetrics(
+        textMetrics: *mut DWRITE_TEXT_METRICS1,
+    ) -> HRESULT,
+    fn SetVerticalGlyphOrientation(
+        glyphOrientation: DWRITE_VERTICAL_GLYPH_ORIENTATION,
+    ) -> HRESULT,
     fn GetVerticalGlyphOrientation() -> DWRITE_VERTICAL_GLYPH_ORIENTATION,
-    fn SetLastLineWrapping(isLastLineWrappingEnabled: BOOL,) -> HRESULT,
+    fn SetLastLineWrapping(
+        isLastLineWrappingEnabled: BOOL,
+    ) -> HRESULT,
     fn GetLastLineWrapping() -> BOOL,
-    fn SetOpticalAlignment(opticalAlignment: DWRITE_OPTICAL_ALIGNMENT,) -> HRESULT,
+    fn SetOpticalAlignment(
+        opticalAlignment: DWRITE_OPTICAL_ALIGNMENT,
+    ) -> HRESULT,
     fn GetOpticalAlignment() -> DWRITE_OPTICAL_ALIGNMENT,
-    fn SetFontFallback(fontFallback: *mut IDWriteFontFallback,) -> HRESULT,
-    fn GetFontFallback(fontFallback: *mut *mut IDWriteFontFallback,) -> HRESULT,
+    fn SetFontFallback(
+        fontFallback: *mut IDWriteFontFallback,
+    ) -> HRESULT,
+    fn GetFontFallback(
+        fontFallback: *mut *mut IDWriteFontFallback,
+    ) -> HRESULT,
 }}
 
 RIDL!{#[uuid(0x553a9ff3, 0x5693, 0x4df7, 0xb5, 0x2b, 0x74, 0x80, 0x6f, 0x7f, 0x2e, 0xb9)]
@@ -180,8 +202,12 @@ interface IDWriteFontFallbackBuilder(IDWriteFontFallbackBuilderVtbl):
         baseFamilyName: *const WCHAR,
         scale: FLOAT,
     ) -> HRESULT,
-    fn AddMappings(fontFallback: *mut IDWriteFontFallback,) -> HRESULT,
-    fn CreateFontFallback(fontFallback: *mut *mut IDWriteFontFallback,) -> HRESULT,
+    fn AddMappings(
+        fontFallback: *mut IDWriteFontFallback,
+    ) -> HRESULT,
+    fn CreateFontFallback(
+        fontFallback: *mut *mut IDWriteFontFallback,
+    ) -> HRESULT,
 }}
 
 pub type DWRITE_COLOR_F = D3DCOLORVALUE;
@@ -228,8 +254,12 @@ STRUCT!{struct DWRITE_COLOR_GLYPH_RUN {
 RIDL!{#[uuid(0xd31fbe17, 0xf157, 0x41a2, 0x8d, 0x24, 0xcb, 0x77, 0x9e, 0x05, 0x60, 0xe8)]
 interface IDWriteColorGlyphRunEnumerator(IDWriteColorGlyphRunEnumeratorVtbl):
     IUnknown(IUnknownVtbl) {
-    fn MoveNext(hasRun: *mut BOOL,) -> HRESULT,
-    fn GetCurrentRun(colorGlyphRun: *mut *const DWRITE_COLOR_GLYPH_RUN,) -> HRESULT,
+    fn MoveNext(
+        hasRun: *mut BOOL,
+    ) -> HRESULT,
+    fn GetCurrentRun(
+        colorGlyphRun: *mut *const DWRITE_COLOR_GLYPH_RUN,
+    ) -> HRESULT,
 }}
 
 RIDL!{#[uuid(0xf9d711c3, 0x9777, 0x40ae, 0x87, 0xe8, 0x3e, 0x5a, 0xf9, 0xbf, 0x09, 0x48)]
@@ -240,8 +270,12 @@ interface IDWriteRenderingParams2(IDWriteRenderingParams2Vtbl):
 
 RIDL!{#[uuid(0x0439fc60, 0xca44, 0x4994, 0x8d, 0xee, 0x3a, 0x9a, 0xf7, 0xb7, 0x32, 0xec)]
 interface IDWriteFactory2(IDWriteFactory2Vtbl): IDWriteFactory1(IDWriteFactory1Vtbl) {
-    fn GetSystemFontFallback(fontFallback: *mut *mut IDWriteFontFallback,) -> HRESULT,
-    fn CreateFontFallbackBuilder(fontFallbackBuilder: *mut *mut IDWriteFontFallbackBuilder,) -> HRESULT,
+    fn GetSystemFontFallback(
+        fontFallback: *mut *mut IDWriteFontFallback,
+    ) -> HRESULT,
+    fn CreateFontFallbackBuilder(
+        fontFallbackBuilder: *mut *mut IDWriteFontFallbackBuilder,
+    ) -> HRESULT,
     fn TranslateColorGlyphRun(
         baselineOriginX: FLOAT,
         baselineOriginY: FLOAT,

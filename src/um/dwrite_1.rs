@@ -562,14 +562,18 @@ interface IDWriteFactory1(IDWriteFactory1Vtbl): IDWriteFactory(IDWriteFactoryVtb
 
 RIDL!{#[uuid(0xa71efdb4, 0x9fdb, 0x4838, 0xad, 0x90, 0xcf, 0xc3, 0xbe, 0x8c, 0x3d, 0xaf)]
 interface IDWriteFontFace1(IDWriteFontFace1Vtbl): IDWriteFontFace(IDWriteFontFaceVtbl) {
-    fn GetMetrics(fontMetrics: *mut DWRITE_FONT_METRICS1,) -> (),
+    fn GetMetrics(
+        fontMetrics: *mut DWRITE_FONT_METRICS1,
+    ) -> (),
     fn GetGdiCompatibleMetrics(
         emSize: FLOAT,
         pixelsPerDip: FLOAT,
         transform: *const DWRITE_MATRIX,
         fontMetrics: *mut DWRITE_FONT_METRICS1,
     ) -> HRESULT,
-    fn GetCaretMetrics(caretMetrics: *mut DWRITE_CARET_METRICS,) -> (),
+    fn GetCaretMetrics(
+        caretMetrics: *mut DWRITE_CARET_METRICS,
+    ) -> (),
     fn GetUnicodeRanges(
         maxRangeCount: UINT32,
         unicodeRanges: *mut DWRITE_UNICODE_RANGE,
@@ -618,8 +622,12 @@ interface IDWriteFontFace1(IDWriteFontFace1Vtbl): IDWriteFontFace(IDWriteFontFac
 
 RIDL!{#[uuid(0xacd16696, 0x8c14, 0x4f5d, 0x87, 0x7e, 0xfe, 0x3f, 0xc1, 0xd3, 0x27, 0x38)]
 interface IDWriteFont1(IDWriteFont1Vtbl): IDWriteFont(IDWriteFontVtbl) {
-    fn GetMetrics(fontMetrics: *mut DWRITE_FONT_METRICS1,) -> (),
-    fn GetPanose(panose: *mut DWRITE_PANOSE,) -> (),
+    fn GetMetrics(
+        fontMetrics: *mut DWRITE_FONT_METRICS1,
+    ) -> (),
+    fn GetPanose(
+        panose: *mut DWRITE_PANOSE,
+    ) -> (),
     fn GetUnicodeRanges(
         maxRangeCount: UINT32,
         unicodeRanges: *mut DWRITE_UNICODE_RANGE,
@@ -784,6 +792,8 @@ RIDL!{#[uuid(0x791e8298, 0x3ef3, 0x4230, 0x98, 0x80, 0xc9, 0xbd, 0xec, 0xc4, 0x2
 interface IDWriteBitmapRenderTarget1(IDWriteBitmapRenderTarget1Vtbl):
     IDWriteBitmapRenderTarget(IDWriteBitmapRenderTargetVtbl) {
     fn GetTextAntialiasMode() -> DWRITE_TEXT_ANTIALIAS_MODE,
-    fn SetTextAntialiasMode(antialiasMode: DWRITE_TEXT_ANTIALIAS_MODE,) -> HRESULT,
+    fn SetTextAntialiasMode(
+        antialiasMode: DWRITE_TEXT_ANTIALIAS_MODE,
+    ) -> HRESULT,
 }}
 
