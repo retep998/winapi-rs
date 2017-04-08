@@ -132,6 +132,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("spapidef", &["minwindef", "winnt"], &[]),
     ("strmif", &["winnt"], &[]),
     ("unknwnbase", &["guiddef", "minwindef", "winnt"], &[]),
+    ("urlhist", &["docobj", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
     ("usbspec", &["basetsd", "minwindef"], &[]),
     ("vsserror", &["winnt"], &[]),
     ("winbase", &["basetsd", "cfgmgr32", "guiddef", "minwindef", "winnt"], &[]),

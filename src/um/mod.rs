@@ -82,6 +82,7 @@ pub mod gl;
 #[cfg(feature = "spapidef")] pub mod spapidef;
 #[cfg(feature = "strmif")] pub mod strmif;
 #[cfg(feature = "unknwnbase")] pub mod unknwnbase;
+#[cfg(feature = "urlhist")] pub mod urlhist;
 #[cfg(feature = "usbspec")] pub mod usbspec;
 #[cfg(feature = "vsserror")] pub mod vsserror;
 #[cfg(feature = "winbase")] pub mod winbase;
