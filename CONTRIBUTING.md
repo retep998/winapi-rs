@@ -29,8 +29,7 @@ use um::d3dcommon::{
 
 ## Extern functions
 
-* First parameter is the 32-bit calling convention.
-* One parameter per line.
+* The calling convention specified should be the one for 32bit. Specify `system` for stdcall and `C` for cdecl (and `fastcall` for those couple of fastcall functions out there).
 
 ```Rust
 extern "system" {
