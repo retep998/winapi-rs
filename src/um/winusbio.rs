@@ -4,19 +4,25 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
+
 //! USBIO Definitions.
+
+use shared::minwindef::{UCHAR, ULONG, USHORT};
+use shared::usb::USBD_PIPE_TYPE;
+
 STRUCT!{struct WINUSB_PIPE_INFORMATION {
-    PipeType: ::USBD_PIPE_TYPE,
-    PipeId: ::UCHAR,
-    MaximumPacketSize: ::USHORT,
-    Interval: ::UCHAR,
+    PipeType: USBD_PIPE_TYPE,
+    PipeId: UCHAR,
+    MaximumPacketSize: USHORT,
+    Interval: UCHAR,
 }}
 pub type PWINUSB_PIPE_INFORMATION = *mut WINUSB_PIPE_INFORMATION;
+
 STRUCT!{struct WINUSB_PIPE_INFORMATION_EX {
-    PipeType: ::USBD_PIPE_TYPE,
-    PipeId: ::UCHAR,
-    MaximumPacketSize: ::USHORT,
-    Interval: ::UCHAR,
-    MaximumBytesPerInterval: ::ULONG,
+    PipeType: USBD_PIPE_TYPE,
+    PipeId: UCHAR,
+    MaximumPacketSize: USHORT,
+    Interval: UCHAR,
+    MaximumBytesPerInterval: ULONG,
 }}
 pub type PWINUSB_PIPE_INFORMATION_EX = *mut WINUSB_PIPE_INFORMATION_EX;
