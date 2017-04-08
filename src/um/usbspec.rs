@@ -4,7 +4,12 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
+
 //! USB Spec Definitions.
+
+use shared::basetsd::UINT8;
+use shared::minwindef::{UCHAR, USHORT};
+
 ENUM!{enum USB_DEVICE_SPEED {
     UsbLowSpeed = 0,
     UsbFullSpeed,
@@ -16,10 +21,10 @@ ENUM!{enum USB_DEVICE_TYPE {
     Usb20Device,
 }}
 STRUCT!{struct BM_REQUEST_TYPE {
-    _BM: ::UCHAR,
-    B: ::UCHAR,
+    _BM: UCHAR,
+    B: UCHAR,
 }}
-BITFIELD!{BM_REQUEST_TYPE _BM: ::UINT8 [
+BITFIELD!{BM_REQUEST_TYPE _BM: UINT8 [
     Recipient set_Recipient[0..2],
     Reserved set_Reserved[2..5],
     Type set_Type[5..7],
@@ -28,13 +33,13 @@ BITFIELD!{BM_REQUEST_TYPE _BM: ::UINT8 [
 pub type PBM_REQUEST_TYPE = *mut BM_REQUEST_TYPE;
 
 STRUCT!{#[repr(packed)] struct USB_CONFIGURATION_DESCRIPTOR {
-    bLength: ::UCHAR,
-    bDescriptorType: ::UCHAR,
-    wTotalLength: ::USHORT,
-    bNumInterfaces: ::UCHAR,
-    bConfigurationValue: ::UCHAR,
-    iConfiguration: ::UCHAR,
-    bmAttributes: ::UCHAR,
-    MaxPower: ::UCHAR,
+    bLength: UCHAR,
+    bDescriptorType: UCHAR,
+    wTotalLength: USHORT,
+    bNumInterfaces: UCHAR,
+    bConfigurationValue: UCHAR,
+    iConfiguration: UCHAR,
+    bmAttributes: UCHAR,
+    MaxPower: UCHAR,
 }}
 pub type PUSB_CONFIGURATION_DESCRIPTOR = *mut USB_CONFIGURATION_DESCRIPTOR;
