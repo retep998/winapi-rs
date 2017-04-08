@@ -131,6 +131,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("shellapi", &["basetsd", "guiddef", "minwinbase", "minwindef", "processthreadsapi", "windef", "winnt", "winuser"], &["shell32", "shlwapi"]),
     ("spapidef", &["minwindef", "winnt"], &[]),
     ("strmif", &["winnt"], &[]),
+    ("synchapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32", "synchronization"]),
     ("unknwnbase", &["guiddef", "minwindef", "winnt"], &[]),
     ("vsserror", &["winnt"], &[]),
     ("winbase", &["basetsd", "cfgmgr32", "guiddef", "minwindef", "winnt"], &[]),

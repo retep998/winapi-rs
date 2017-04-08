@@ -5,8 +5,6 @@
 extern crate winapi;
 use winapi::*;
 extern "system" {
-    pub fn AcquireSRWLockExclusive(SRWLock: PSRWLOCK);
-    pub fn AcquireSRWLockShared(SRWLock: PSRWLOCK);
     pub fn ActivateActCtx(hActCtx: HANDLE, lpCookie: *mut ULONG_PTR) -> BOOL;
     pub fn AddAtomA(lpString: LPCSTR) -> ATOM;
     pub fn AddAtomW(lpString: LPCWSTR) -> ATOM;
@@ -83,7 +81,6 @@ extern "system" {
     pub fn CancelSynchronousIo(hThread: HANDLE) -> BOOL;
     pub fn CancelThreadpoolIo(pio: PTP_IO);
     pub fn CancelTimerQueueTimer(TimerQueue: HANDLE, Timer: HANDLE) -> BOOL;
-    pub fn CancelWaitableTimer(hTimer: HANDLE) -> BOOL;
     pub fn CeipIsOptedIn() -> BOOL;
     pub fn ChangeTimerQueueTimer(
         TimerQueue: HANDLE, Timer: HANDLE, DueTime: ULONG, Period: ULONG,
@@ -199,22 +196,6 @@ extern "system" {
     pub fn CreateDirectoryW(
         lpPathName: LPCWSTR, lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
     ) -> BOOL;
-    pub fn CreateEventA(
-        lpEventAttributes: LPSECURITY_ATTRIBUTES, bManualReset: BOOL, bInitialState: BOOL,
-        lpName: LPCSTR,
-    ) -> HANDLE;
-    pub fn CreateEventW(
-        lpEventAttributes: LPSECURITY_ATTRIBUTES, bManualReset: BOOL, bInitialState: BOOL,
-        lpName: LPCWSTR,
-    ) -> HANDLE;
-    pub fn CreateEventExA(
-        lpEventAttributes: LPSECURITY_ATTRIBUTES, lpName: LPCSTR, dwFlags: DWORD,
-        dwDesiredAccess: DWORD,
-    ) -> HANDLE;
-    pub fn CreateEventExW(
-        lpEventAttributes: LPSECURITY_ATTRIBUTES, lpName: LPCWSTR, dwFlags: DWORD,
-        dwDesiredAccess: DWORD,
-    ) -> HANDLE;
     pub fn CreateFiber(
         dwStackSize: SIZE_T, lpStartAddress: LPFIBER_START_ROUTINE, lpParameter: LPVOID,
     ) -> LPVOID;
@@ -301,20 +282,6 @@ extern "system" {
     pub fn CreateMemoryResourceNotification(
         NotificationType: MEMORY_RESOURCE_NOTIFICATION_TYPE,
     ) -> HANDLE;
-    pub fn CreateMutexA(
-        lpMutexAttributes: LPSECURITY_ATTRIBUTES, bInitialOwner: BOOL, lpName: LPCSTR,
-    ) -> HANDLE;
-    pub fn CreateMutexExA(
-        lpMutexAttributes: LPSECURITY_ATTRIBUTES, lpName: LPCSTR, dwFlags: DWORD,
-        dwDesiredAccess: DWORD,
-    ) -> HANDLE;
-    pub fn CreateMutexExW(
-        lpMutexAttributes: LPSECURITY_ATTRIBUTES, lpName: LPCWSTR, dwFlags: DWORD,
-        dwDesiredAccess: DWORD,
-    ) -> HANDLE;
-    pub fn CreateMutexW(
-        lpMutexAttributes: LPSECURITY_ATTRIBUTES, bInitialOwner: BOOL, lpName: LPCWSTR,
-    ) -> HANDLE;
     pub fn CreateNamedPipeA(
         lpName: LPCSTR, dwOpenMode: DWORD, dwPipeMode: DWORD, nMaxInstances: DWORD,
         nOutBufferSize: DWORD, nInBufferSize: DWORD, nDefaultTimeOut: DWORD,
@@ -363,14 +330,6 @@ extern "system" {
         lpSemaphoreAttributes: LPSECURITY_ATTRIBUTES, lInitialCount: LONG, lMaximumCount: LONG,
         lpName: LPCSTR, dwFlags: DWORD, dwDesiredAccess: DWORD,
     ) -> HANDLE;
-    pub fn CreateSemaphoreExW(
-        lpSemaphoreAttributes: LPSECURITY_ATTRIBUTES, lInitialCount: LONG, lMaximumCount: LONG,
-        lpName: LPCWSTR, dwFlags: DWORD, dwDesiredAccess: DWORD,
-    ) -> HANDLE;
-    pub fn CreateSemaphoreW(
-        lpSemaphoreAttributes: LPSECURITY_ATTRIBUTES, lInitialCount: LONG, lMaximumCount: LONG,
-        lpName: LPCWSTR,
-    ) -> HANDLE;
     pub fn CreateSymbolicLinkA(
         lpSymlinkFileName: LPCSTR, lpTargetFileName: LPCSTR, dwFlags: DWORD,
     ) -> BOOLEAN;
@@ -417,13 +376,6 @@ extern "system" {
         lpTimerAttributes: LPSECURITY_ATTRIBUTES, lpTimerName: LPCSTR, dwFlags: DWORD,
         dwDesiredAccess: DWORD,
     ) -> HANDLE;
-    pub fn CreateWaitableTimerExW(
-        lpTimerAttributes: LPSECURITY_ATTRIBUTES, lpTimerName: LPCWSTR, dwFlags: DWORD,
-        dwDesiredAccess: DWORD,
-    ) -> HANDLE;
-    pub fn CreateWaitableTimerW(
-        lpTimerAttributes: LPSECURITY_ATTRIBUTES, bManualReset: BOOL, lpTimerName: LPCWSTR,
-    ) -> HANDLE;
     // pub fn CtrlRoutine();
     pub fn DeactivateActCtx(dwFlags: DWORD, ulCookie: ULONG_PTR) -> BOOL;
     pub fn DebugActiveProcess(dwProcessId: DWORD) -> BOOL;
@@ -438,14 +390,12 @@ extern "system" {
     pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
     pub fn DeleteAtom(nAtom: ATOM) -> ATOM;
     pub fn DeleteBoundaryDescriptor(BoundaryDescriptor: HANDLE);
-    pub fn DeleteCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
     pub fn DeleteFiber(lpFiber: LPVOID);
     pub fn DeleteFileA(lpFileName: LPCSTR) -> BOOL;
     pub fn DeleteFileTransactedA(lpFileName: LPCSTR, hTransaction: HANDLE) -> BOOL;
     pub fn DeleteFileTransactedW(lpFileName: LPCWSTR, hTransaction: HANDLE) -> BOOL;
     pub fn DeleteFileW(lpFileName: LPCWSTR) -> BOOL;
     pub fn DeleteProcThreadAttributeList(lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST);
-    pub fn DeleteSynchronizationBarrier(lpBarrier: LPSYNCHRONIZATION_BARRIER) -> BOOL;
     pub fn DeleteTimerQueue(TimerQueue: HANDLE) -> BOOL;
     pub fn DeleteTimerQueueEx(TimerQueue: HANDLE, CompletionEvent: HANDLE) -> BOOL;
     pub fn DeleteTimerQueueTimer(
@@ -490,10 +440,6 @@ extern "system" {
     pub fn EncodeSystemPointer(Ptr: PVOID) -> PVOID;
     pub fn EndUpdateResourceA(hUpdate: HANDLE, fDiscard: BOOL) -> BOOL;
     pub fn EndUpdateResourceW(hUpdate: HANDLE, fDiscard: BOOL) -> BOOL;
-    pub fn EnterCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
-    pub fn EnterSynchronizationBarrier(
-        lpBarrier: LPSYNCHRONIZATION_BARRIER, dwFlags: DWORD,
-    ) -> BOOL;
     #[cfg(target_arch = "x86_64")]
     pub fn EnterUmsSchedulingMode(SchedulerStartupInfo: PUMS_SCHEDULER_STARTUP_INFO) -> BOOL;
     pub fn EnumCalendarInfoA(
@@ -1445,36 +1391,14 @@ extern "system" {
     pub fn HeapValidate(hHeap: HANDLE, dwFlags: DWORD, lpMem: LPCVOID) -> BOOL;
     pub fn HeapWalk(hHeap: HANDLE, lpEntry: LPPROCESS_HEAP_ENTRY) -> BOOL;
     pub fn InitAtomTable(nSize: DWORD) -> BOOL;
-    pub fn InitOnceBeginInitialize(
-        lpInitOnce: LPINIT_ONCE, dwFlags: DWORD, fPending: PBOOL, lpContext: *mut LPVOID,
-    ) -> BOOL;
-    pub fn InitOnceComplete(
-        lpInitOnce: LPINIT_ONCE, dwFlags: DWORD, lpContext: LPVOID,
-    ) -> BOOL;
-    pub fn InitOnceExecuteOnce(
-        InitOnce: PINIT_ONCE, InitFn: PINIT_ONCE_FN, Parameter: PVOID, Context: *mut LPVOID,
-    ) -> BOOL;
-    pub fn InitOnceInitialize(InitOnce: PINIT_ONCE);
-    pub fn InitializeConditionVariable(ConditionVariable: PCONDITION_VARIABLE);
     pub fn InitializeContext(
         Buffer: PVOID, ContextFlags: DWORD, Context: *mut PCONTEXT, ContextLength: PDWORD,
-    ) -> BOOL;
-    pub fn InitializeCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
-    pub fn InitializeCriticalSectionAndSpinCount(
-        lpCriticalSection: LPCRITICAL_SECTION, dwSpinCount: DWORD,
-    ) -> BOOL;
-    pub fn InitializeCriticalSectionEx(
-        lpCriticalSection: LPCRITICAL_SECTION, dwSpinCount: DWORD, Flags: DWORD,
     ) -> BOOL;
     pub fn InitializeProcThreadAttributeList(
         lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST, dwAttributeCount: DWORD, dwFlags: DWORD,
         lpSize: PSIZE_T,
     ) -> BOOL;
     pub fn InitializeSListHead(ListHead: PSLIST_HEADER);
-    pub fn InitializeSRWLock(SRWLock: PSRWLOCK);
-    pub fn InitializeSynchronizationBarrier(
-        lpBarrier: LPSYNCHRONIZATION_BARRIER, lTotalThreads: LONG, lSpinCount: LONG,
-    ) -> BOOL;
     pub fn InstallELAMCertificateInfo(ELAMFile: HANDLE) -> BOOL;
     #[cfg(target_arch = "x86")]
     pub fn InterlockedCompareExchange(
@@ -1612,7 +1536,6 @@ extern "system" {
         Locale: LCID, dwMapFlags: DWORD, lpSrcStr: LPCWSTR, cchSrc: c_int, lpDestStr: LPWSTR,
         cchDest: c_int,
     ) -> c_int;
-    pub fn LeaveCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
     pub fn LeaveCriticalSectionWhenCallbackReturns(
         pci: PTP_CALLBACK_INSTANCE, pcs: PCRITICAL_SECTION,
     );
@@ -1715,8 +1638,6 @@ extern "system" {
         dwReserved: DWORD, pdwStatusRtrn: PDWORD,
     ) -> BOOL;
     // pub fn OOBEComplete();
-    pub fn OpenEventA(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCSTR) -> HANDLE;
-    pub fn OpenEventW(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR) -> HANDLE;
     pub fn OpenFile(lpFileName: LPCSTR, lpReOpenBuff: LPOFSTRUCT, uStyle: UINT) -> HFILE;
     pub fn OpenFileById(
         hVolumeHint: HANDLE, lpFileId: LPFILE_ID_DESCRIPTOR, dwDesiredAccess: DWORD,
@@ -1732,20 +1653,15 @@ extern "system" {
     pub fn OpenJobObjectA(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCSTR) -> HANDLE;
     pub fn OpenJobObjectW(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR) -> HANDLE;
     pub fn OpenMutexA(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCSTR) -> HANDLE;
-    pub fn OpenMutexW(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR) -> HANDLE;
     // pub fn OpenPackageInfoByFullName();
     pub fn OpenPrivateNamespaceA(lpBoundaryDescriptor: LPVOID, lpAliasPrefix: LPCSTR) -> HANDLE;
     pub fn OpenPrivateNamespaceW(lpBoundaryDescriptor: LPVOID, lpAliasPrefix: LPCWSTR) -> HANDLE;
     pub fn OpenProcess(dwDesiredAccess: DWORD, bInheritHandle: BOOL, dwProcessId: DWORD) -> HANDLE;
     pub fn OpenSemaphoreA(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCSTR) -> HANDLE;
-    pub fn OpenSemaphoreW(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR) -> HANDLE;
     // pub fn OpenState();
     // pub fn OpenStateExplicit();
     pub fn OpenWaitableTimerA(
         dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpTimerName: LPCSTR,
-    ) -> HANDLE;
-    pub fn OpenWaitableTimerW(
-        dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpTimerName: LPCWSTR,
     ) -> HANDLE;
     pub fn OutputDebugStringA(lpOutputString: LPCSTR);
     pub fn OutputDebugStringW(lpOutputString: LPCWSTR);
@@ -1899,13 +1815,7 @@ extern "system" {
     ) -> HANDLE;
     // pub fn RegisterWaitUntilOOBECompleted();
     pub fn ReleaseActCtx(hActCtx: HANDLE);
-    pub fn ReleaseMutex(hMutex: HANDLE) -> BOOL;
     pub fn ReleaseMutexWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, mutex: HANDLE);
-    pub fn ReleaseSRWLockExclusive(SRWLock: PSRWLOCK);
-    pub fn ReleaseSRWLockShared(SRWLock: PSRWLOCK);
-    pub fn ReleaseSemaphore(
-        hSemaphore: HANDLE, lReleaseCount: LONG, lpPreviousCount: LPLONG,
-    ) -> BOOL;
     pub fn ReleaseSemaphoreWhenCallbackReturns(
         pci: PTP_CALLBACK_INSTANCE, sem: HANDLE, crel: DWORD,
     );
@@ -1930,7 +1840,6 @@ extern "system" {
     ) -> BOOL;
     pub fn RequestDeviceWakeup(hDevice: HANDLE) -> BOOL;
     pub fn RequestWakeupLatency(latency: LATENCY_TIME) -> BOOL;
-    pub fn ResetEvent(hEvent: HANDLE) -> BOOL;
     pub fn ResetWriteWatch(lpBaseAddress: LPVOID, dwRegionSize: SIZE_T) -> UINT;
     // pub fn ResolveDelayLoadedAPI();
     // pub fn ResolveDelayLoadsFromDll();
@@ -2033,9 +1942,6 @@ extern "system" {
     pub fn SetComputerNameExW(NameType: COMPUTER_NAME_FORMAT, lpBuffer: LPCWSTR) -> BOOL;
     pub fn SetComputerNameW(lpComputerName: LPCWSTR) -> BOOL;
     // pub fn SetConsoleCursor();
-    pub fn SetCriticalSectionSpinCount(
-        lpCriticalSection: LPCRITICAL_SECTION, dwSpinCount: DWORD,
-    ) -> DWORD;
     pub fn SetCurrentDirectoryA(lpPathName: LPCSTR) -> BOOL;
     pub fn SetCurrentDirectoryW(lpPathName: LPCWSTR) -> BOOL;
     pub fn SetDefaultCommConfigA(lpszName: LPCSTR, lpCC: LPCOMMCONFIG, dwSize: DWORD) -> BOOL;
@@ -2051,7 +1957,6 @@ extern "system" {
     pub fn SetEnvironmentStringsW(NewEnvironment: LPWCH) -> BOOL;
     pub fn SetEnvironmentVariableA(lpName: LPCSTR, lpValue: LPCSTR) -> BOOL;
     pub fn SetEnvironmentVariableW(lpName: LPCWSTR, lpValue: LPCWSTR) -> BOOL;
-    pub fn SetEvent(hEvent: HANDLE) -> BOOL;
     pub fn SetEventWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, evt: HANDLE);
     pub fn SetFileApisToANSI();
     pub fn SetFileApisToOEM();
@@ -2215,32 +2120,10 @@ extern "system" {
     pub fn SetVolumeLabelW(lpRootPathName: LPCWSTR, lpVolumeName: LPCWSTR) -> BOOL;
     pub fn SetVolumeMountPointA(lpszVolumeMountPoint: LPCSTR, lpszVolumeName: LPCSTR) -> BOOL;
     pub fn SetVolumeMountPointW(lpszVolumeMountPoint: LPCWSTR, lpszVolumeName: LPCWSTR) -> BOOL;
-    pub fn SetWaitableTimer(
-        hTimer: HANDLE, lpDueTime: *const LARGE_INTEGER, lPeriod: LONG,
-        pfnCompletionRoutine: PTIMERAPCROUTINE, lpArgToCompletionRoutine: LPVOID, fResume: BOOL,
-    ) -> BOOL;
-    pub fn SetWaitableTimerEx(
-        hTimer: HANDLE, lpDueTime: *const LARGE_INTEGER, lPeriod: LONG,
-        pfnCompletionRoutine: PTIMERAPCROUTINE, lpArgToCompletionRoutine: LPVOID,
-        WakeContext: PREASON_CONTEXT, TolerableDelay: ULONG,
-    ) -> BOOL;
     #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
     pub fn SetXStateFeaturesMask(Context: PCONTEXT, FeatureMask: DWORD64) -> BOOL;
     pub fn SetupComm(hFile: HANDLE, dwInQueue: DWORD, dwOutQueue: DWORD) -> BOOL;
-    pub fn SignalObjectAndWait(
-        hObjectToSignal: HANDLE, hObjectToWaitOn: HANDLE, dwMilliseconds: DWORD, bAlertable: BOOL,
-    ) -> DWORD;
     pub fn SizeofResource(hModule: HMODULE, hResInfo: HRSRC) -> DWORD;
-    pub fn Sleep(dwMilliseconds: DWORD);
-    pub fn SleepConditionVariableCS(
-        ConditionVariable: PCONDITION_VARIABLE, CriticalSection: PCRITICAL_SECTION,
-        dwMilliseconds: DWORD,
-    ) -> BOOL;
-    pub fn SleepConditionVariableSRW(
-        ConditionVariable: PCONDITION_VARIABLE, SRWLock: PSRWLOCK, dwMilliseconds: DWORD,
-        Flags: ULONG,
-    ) -> BOOL;
-    pub fn SleepEx(dwMilliseconds: DWORD, bAlertable: BOOL) -> DWORD;
     pub fn StartThreadpoolIo(pio: PTP_IO);
     pub fn SubmitThreadpoolWork(pwk: PTP_WORK);
     pub fn SwitchToFiber(lpFiber: LPVOID);
@@ -2268,9 +2151,6 @@ extern "system" {
         nOutBufferSize: DWORD, lpBytesRead: LPDWORD, lpOverlapped: LPOVERLAPPED,
     ) -> BOOL;
     pub fn TransmitCommChar(hFile: HANDLE, cChar: c_char) -> BOOL;
-    pub fn TryAcquireSRWLockExclusive(SRWLock: PSRWLOCK) -> BOOLEAN;
-    pub fn TryAcquireSRWLockShared(SRWLock: PSRWLOCK) -> BOOLEAN;
-    pub fn TryEnterCriticalSection(lpCriticalSection: LPCRITICAL_SECTION) -> BOOL;
     pub fn TrySubmitThreadpoolCallback(
         pfns: PTP_SIMPLE_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
     ) -> BOOL;
@@ -2358,16 +2238,9 @@ extern "system" {
     pub fn WTSGetActiveConsoleSessionId() -> DWORD;
     pub fn WaitCommEvent(hFile: HANDLE, lpEvtMask: LPDWORD, lpOverlapped: LPOVERLAPPED) -> BOOL;
     pub fn WaitForDebugEvent(lpDebugEvent: LPDEBUG_EVENT, dwMilliseconds: DWORD) -> BOOL;
-    pub fn WaitForMultipleObjects(
-        nCount: DWORD, lpHandles: *const HANDLE, bWaitAll: BOOL, dwMilliseconds: DWORD,
-    ) -> DWORD;
     pub fn WaitForMultipleObjectsEx(
         nCount: DWORD, lpHandles: *const HANDLE, bWaitAll: BOOL, dwMilliseconds: DWORD,
         bAlertable: BOOL,
-    ) -> DWORD;
-    pub fn WaitForSingleObject(hHandle: HANDLE, dwMilliseconds: DWORD) -> DWORD;
-    pub fn WaitForSingleObjectEx(
-        hHandle: HANDLE, dwMilliseconds: DWORD, bAlertable: BOOL,
     ) -> DWORD;
     pub fn WaitForThreadpoolIoCallbacks(pio: PTP_IO, fCancelPendingCallbacks: BOOL);
     pub fn WaitForThreadpoolTimerCallbacks(pti: PTP_TIMER, fCancelPendingCallbacks: BOOL);
@@ -2375,8 +2248,6 @@ extern "system" {
     pub fn WaitForThreadpoolWorkCallbacks(pwk: PTP_WORK, fCancelPendingCallbacks: BOOL);
     pub fn WaitNamedPipeA(lpNamedPipeName: LPCSTR, nTimeOut: DWORD) -> BOOL;
     pub fn WaitNamedPipeW(lpNamedPipeName: LPCWSTR, nTimeOut: DWORD) -> BOOL;
-    pub fn WakeAllConditionVariable(ConditionVariable: PCONDITION_VARIABLE);
-    pub fn WakeConditionVariable(ConditionVariable: PCONDITION_VARIABLE);
     pub fn WerGetFlags(hProcess: HANDLE, pdwFlags: PDWORD) -> HRESULT;
     pub fn WerRegisterFile(
         pwzFile: PCWSTR, regFileType: WER_REGISTER_FILE_TYPE, dwFlags: DWORD,
