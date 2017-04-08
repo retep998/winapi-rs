@@ -95,5 +95,7 @@ pub mod gl;
 #[cfg(feature = "winnt")] pub mod winnt;
 #[cfg(feature = "winreg")] pub mod winreg;
 #[cfg(feature = "winsock2")] pub mod winsock2;
+#[cfg(feature = "winusb")] pub mod winusb;
+#[cfg(feature = "winusbio")] pub mod winusbio;
 #[cfg(feature = "winuser")] pub mod winuser;
 #[cfg(feature = "xinput")] pub mod xinput;
