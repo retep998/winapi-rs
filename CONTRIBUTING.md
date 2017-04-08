@@ -126,13 +126,13 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
 ## Organization of code
 
 * All definitions go into the source file that directly maps to the header the definition is from.
-** Stuff in `src/winrt` is special and has its own namespaced organization.
+    * Stuff in `src/winrt` is special and has its own namespaced organization.
 * Definitions are defined in the same order as they are in the original header.
 * The `lib` folder is legacy from 0.2 and will eventually disappear once all definitions have been moved to their correct locations.
 
 ## Dealing with duplicates
 
 * Sometimes two headers will define the same thing.
-** If the duplicated thing is a simple typedef or function definition or constant, then duplicate the definition.
-** If the duplicated thing is a struct or COM interface or union, then choose one header to be the canonical source of truth for that definition and publicly re-export the thing from the other header.
+    * If the duplicated thing is a simple typedef or function definition or constant, then duplicate the definition.
+    * If the duplicated thing is a struct or COM interface or union, then choose one header to be the canonical source of truth for that definition and publicly re-export the thing from the other header.
 * Sometimes a COM interface will have two methods with identical names. If the two methods are both named `Foo`, then name them `Foo1` and `Foo2`.
