@@ -95,6 +95,7 @@ pub mod gl;
 #[cfg(feature = "winioctl")] pub mod winioctl;
 #[cfg(feature = "winnt")] pub mod winnt;
 #[cfg(feature = "winreg")] pub mod winreg;
+#[cfg(feature = "winscard")] pub mod winscard;
 #[cfg(feature = "winsock2")] pub mod winsock2;
 #[cfg(feature = "winusb")] pub mod winusb;
 #[cfg(feature = "winusbio")] pub mod winusbio;
