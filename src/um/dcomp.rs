@@ -240,7 +240,8 @@ interface IDCompositionTransform(IDCompositionTransformVtbl): IDCompositionTrans
 });
 
 RIDL!(#[uuid(0x06791122, 0xc6f0, 0x417d, 0x83, 0x23, 0x26, 0x9e, 0x98, 0x7f, 0x59, 0x54)]
-interface IDCompositionTranslateTransform(IDCompositionTranslateTransformVtbl): IDCompositionTransform(IDCompositionTransformVtbl) {
+interface IDCompositionTranslateTransform(IDCompositionTranslateTransformVtbl):
+    IDCompositionTransform(IDCompositionTransformVtbl) {
     fn SetOffsetX1(
         offsetX: c_float,
     ) -> HRESULT,
@@ -256,7 +257,8 @@ interface IDCompositionTranslateTransform(IDCompositionTranslateTransformVtbl): 
 });
 
 RIDL!(#[uuid(0x71fde914, 0x40ef, 0x45ef, 0xbd, 0x51, 0x68, 0xb0, 0x37, 0xc3, 0x39, 0xf9)]
-interface IDCompositionScaleTransform(IDCompositionScaleTransformVtbl): IDCompositionTransform(IDCompositionTransformVtbl) {
+interface IDCompositionScaleTransform(IDCompositionScaleTransformVtbl):
+    IDCompositionTransform(IDCompositionTransformVtbl) {
     fn SetScaleX1(
         scaleX: c_float,
     ) -> HRESULT,
@@ -284,7 +286,8 @@ interface IDCompositionScaleTransform(IDCompositionScaleTransformVtbl): IDCompos
 });
 
 RIDL!(#[uuid(0x641ed83c, 0xae96, 0x46c5, 0x90, 0xdc, 0x32, 0x77, 0x4c, 0xc5, 0xc6, 0xd5)]
-interface IDCompositionRotateTransform(IDCompositionRotateTransformVtbl): IDCompositionTransform(IDCompositionTransformVtbl) {
+interface IDCompositionRotateTransform(IDCompositionRotateTransformVtbl):
+    IDCompositionTransform(IDCompositionTransformVtbl) {
     fn SetAngle1(
         angle: c_float,
     ) -> HRESULT,
@@ -306,7 +309,8 @@ interface IDCompositionRotateTransform(IDCompositionRotateTransformVtbl): IDComp
 });
 
 RIDL!(#[uuid(0xe57aa735, 0xdcdb, 0x4c72, 0x9c, 0x61, 0x05, 0x91, 0xf5, 0x88, 0x89, 0xee)]
-interface IDCompositionSkewTransform(IDCompositionSkewTransformVtbl): IDCompositionTransform(IDCompositionTransformVtbl) {
+interface IDCompositionSkewTransform(IDCompositionSkewTransformVtbl):
+    IDCompositionTransform(IDCompositionTransformVtbl) {
     fn SetAngleX1(
         angleX: c_float,
     ) -> HRESULT,
@@ -334,7 +338,8 @@ interface IDCompositionSkewTransform(IDCompositionSkewTransformVtbl): IDComposit
 });
 
 RIDL!(#[uuid(0x16cdff07, 0xc503, 0x419c, 0x83, 0xf2, 0x09, 0x65, 0xc7, 0xaf, 0x1f, 0xa6)]
-interface IDCompositionMatrixTransform(IDCompositionMatrixTransformVtbl): IDCompositionTransform(IDCompositionTransformVtbl) {
+interface IDCompositionMatrixTransform(IDCompositionMatrixTransformVtbl):
+    IDCompositionTransform(IDCompositionTransformVtbl) {
     fn SetMatrix(
         matrix: *const D2D_MATRIX_3X2_F,
     ) -> HRESULT,
@@ -364,7 +369,8 @@ interface IDCompositionEffectGroup(IDCompositionEffectGroupVtbl): IDCompositionE
 });
 
 RIDL!(#[uuid(0x91636d4b, 0x9ba1, 0x4532, 0xaa, 0xf7, 0xe3, 0x34, 0x49, 0x94, 0xd7, 0x88)]
-interface IDCompositionTranslateTransform3D(IDCompositionTranslateTransform3DVtbl): IDCompositionTransform3D(IDCompositionTransform3DVtbl) {
+interface IDCompositionTranslateTransform3D(IDCompositionTranslateTransform3DVtbl):
+    IDCompositionTransform3D(IDCompositionTransform3DVtbl) {
     fn SetOffsetX1(
         offsetX: c_float,
     ) -> HRESULT,
@@ -386,7 +392,8 @@ interface IDCompositionTranslateTransform3D(IDCompositionTranslateTransform3DVtb
 });
 
 RIDL!(#[uuid(0x2a9e9ead, 0x364b, 0x4b15, 0xa7, 0xc4, 0xa1, 0x99, 0x7f, 0x78, 0xb3, 0x89)]
-interface IDCompositionScaleTransform3D(IDCompositionScaleTransform3DVtbl): IDCompositionTransform3D(IDCompositionTransform3DVtbl) {
+interface IDCompositionScaleTransform3D(IDCompositionScaleTransform3DVtbl):
+    IDCompositionTransform3D(IDCompositionTransform3DVtbl) {
     fn SetScaleX1(
         scaleX: c_float,
     ) -> HRESULT,
@@ -426,7 +433,8 @@ interface IDCompositionScaleTransform3D(IDCompositionScaleTransform3DVtbl): IDCo
 });
 
 RIDL!(#[uuid(0xd8f5b23f, 0xd429, 0x4a91, 0xb5, 0x5a, 0xd2, 0xf4, 0x5f, 0xd7, 0x5b, 0x18)]
-interface IDCompositionRotateTransform3D(IDCompositionRotateTransform3DVtbl): IDCompositionTransform3D(IDCompositionTransform3DVtbl) {
+interface IDCompositionRotateTransform3D(IDCompositionRotateTransform3DVtbl):
+    IDCompositionTransform3D(IDCompositionTransform3DVtbl) {
     fn SetAngle1(
         angle: c_float,
     ) -> HRESULT,
@@ -472,7 +480,8 @@ interface IDCompositionRotateTransform3D(IDCompositionRotateTransform3DVtbl): ID
 });
 
 RIDL!(#[uuid(0x4b3363f0, 0x643b, 0x41b7, 0xb6, 0xe0, 0xcc, 0xf2, 0x2d, 0x34, 0x46, 0x7c)]
-interface IDCompositionMatrixTransform3D(IDCompositionMatrixTransform3DVtbl): IDCompositionTransform3D(IDCompositionTransform3DVtbl) {
+interface IDCompositionMatrixTransform3D(IDCompositionMatrixTransform3DVtbl):
+    IDCompositionTransform3D(IDCompositionTransform3DVtbl) {
     fn SetMatrix(
         matrix: *const D3DMATRIX,
     ) -> HRESULT,
@@ -676,7 +685,8 @@ interface IDCompositionDevice2(IDCompositionDevice2Vtbl): IUnknown(IUnknownVtbl)
 });
 
 RIDL!(#[uuid(0x5f4633fe, 0x1e08, 0x4cb8, 0x8c, 0x75, 0xce, 0x24, 0x33, 0x3f, 0x56, 0x02)]
-interface IDCompositionDesktopDevice(IDCompositionDesktopDeviceVtbl): IDCompositionDevice2(IDCompositionDevice2Vtbl) {
+interface IDCompositionDesktopDevice(IDCompositionDesktopDeviceVtbl):
+    IDCompositionDevice2(IDCompositionDevice2Vtbl) {
     fn CreateTargetForHwnd(
         hwnd: HWND,
         topmost: BOOL,
@@ -817,7 +827,8 @@ interface IDCompositionFilterEffect(IDCompositionFilterEffectVtbl): IDCompositio
 });
 
 RIDL!(#[uuid(0x45d4d0b7, 0x1bd4, 0x454e, 0x88, 0x94, 0x2b, 0xfa, 0x68, 0x44, 0x30, 0x33)]
-interface IDCompositionGaussianBlurEffect(IDCompositionGaussianBlurEffectVtbl): IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
+interface IDCompositionGaussianBlurEffect(IDCompositionGaussianBlurEffectVtbl):
+    IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
     fn SetStandardDeviation1(
         amount: c_float,
     ) -> HRESULT,
@@ -830,7 +841,8 @@ interface IDCompositionGaussianBlurEffect(IDCompositionGaussianBlurEffectVtbl): 
 });
 
 RIDL!(#[uuid(0x6027496e, 0xcb3a, 0x49ab, 0x93, 0x4f, 0xd7, 0x98, 0xda, 0x4f, 0x7d, 0xa6)]
-interface IDCompositionBrightnessEffect(IDCompositionBrightnessEffectVtbl): IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
+interface IDCompositionBrightnessEffect(IDCompositionBrightnessEffectVtbl):
+    IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
     fn SetWhitePoint(
         whitePoint: *const D2D1_VECTOR_2F,
     ) -> HRESULT,
@@ -864,7 +876,8 @@ interface IDCompositionBrightnessEffect(IDCompositionBrightnessEffectVtbl): IDCo
 });
 
 RIDL!(#[uuid(0xc1170a22, 0x3ce2, 0x4966, 0x90, 0xd4, 0x55, 0x40, 0x8b, 0xfc, 0x84, 0xc4)]
-interface IDCompositionColorMatrixEffect(IDCompositionColorMatrixEffectVtbl): IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
+interface IDCompositionColorMatrixEffect(IDCompositionColorMatrixEffectVtbl):
+    IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
     fn SetMatrix(
         matrix: *const D2D1_MATRIX_5X4_F,
     ) -> HRESULT,
@@ -887,7 +900,8 @@ interface IDCompositionColorMatrixEffect(IDCompositionColorMatrixEffectVtbl): ID
 });
 
 RIDL!(#[uuid(0x4ad18ac0, 0xcfd2, 0x4c2f, 0xbb, 0x62, 0x96, 0xe5, 0x4f, 0xdb, 0x68, 0x79)]
-interface IDCompositionShadowEffect(IDCompositionShadowEffectVtbl): IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
+interface IDCompositionShadowEffect(IDCompositionShadowEffectVtbl):
+    IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
     fn SetStandardDeviation1(
         amount: c_float,
     ) -> HRESULT,
@@ -924,7 +938,8 @@ interface IDCompositionShadowEffect(IDCompositionShadowEffectVtbl): IDCompositio
 });
 
 RIDL!(#[uuid(0x6db9f920, 0x0770, 0x4781, 0xb0, 0xc6, 0x38, 0x19, 0x12, 0xf9, 0xd1, 0x67)]
-interface IDCompositionHueRotationEffect(IDCompositionHueRotationEffectVtbl): IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
+interface IDCompositionHueRotationEffect(IDCompositionHueRotationEffectVtbl):
+    IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
     // Changes the angle of rotation
     fn SetAngle1(
         amountDegrees: c_float,
@@ -936,7 +951,8 @@ interface IDCompositionHueRotationEffect(IDCompositionHueRotationEffectVtbl): ID
 });
 
 RIDL!(#[uuid(0xa08debda, 0x3258, 0x4fa4, 0x9f, 0x16, 0x91, 0x74, 0xd3, 0xfe, 0x93, 0xb1)]
-interface IDCompositionSaturationEffect(IDCompositionSaturationEffectVtbl): IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
+interface IDCompositionSaturationEffect(IDCompositionSaturationEffectVtbl):
+    IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
     // Changes the amount of saturation to be applied.
     fn SetSaturation1(
         ratio: c_float,
@@ -948,7 +964,8 @@ interface IDCompositionSaturationEffect(IDCompositionSaturationEffectVtbl): IDCo
 });
 
 RIDL!(#[uuid(0xa6a55bda, 0xc09c, 0x49f3, 0x91, 0x93, 0xa4, 0x19, 0x22, 0xc8, 0x97, 0x15)]
-interface IDCompositionTurbulenceEffect(IDCompositionTurbulenceEffectVtbl): IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
+interface IDCompositionTurbulenceEffect(IDCompositionTurbulenceEffectVtbl):
+    IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
     fn SetOffset(
         offset: *const D2D1_VECTOR_2F,
     ) -> HRESULT,
@@ -973,7 +990,8 @@ interface IDCompositionTurbulenceEffect(IDCompositionTurbulenceEffectVtbl): IDCo
 });
 
 RIDL!(#[uuid(0x4305ee5b, 0xc4a0, 0x4c88, 0x93, 0x85, 0x67, 0x12, 0x4e, 0x01, 0x76, 0x83)]
-interface IDCompositionLinearTransferEffect(IDCompositionLinearTransferEffectVtbl): IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
+interface IDCompositionLinearTransferEffect(IDCompositionLinearTransferEffectVtbl):
+    IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
     fn SetRedYIntercept1(
         redYIntercept: c_float,
     ) -> HRESULT,
@@ -1040,7 +1058,8 @@ interface IDCompositionLinearTransferEffect(IDCompositionLinearTransferEffectVtb
 });
 
 RIDL!(#[uuid(0x9b7e82e2, 0x69c5, 0x4eb4, 0xa5, 0xf5, 0xa7, 0x03, 0x3f, 0x51, 0x32, 0xcd)]
-interface IDCompositionTableTransferEffect(IDCompositionTableTransferEffectVtbl): IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
+interface IDCompositionTableTransferEffect(IDCompositionTableTransferEffectVtbl):
+    IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
     fn SetRedTable(
         tableValues: *const c_float,
         count: UINT,
@@ -1107,21 +1126,24 @@ interface IDCompositionTableTransferEffect(IDCompositionTableTransferEffectVtbl)
 });
 
 RIDL!(#[uuid(0x576616c0, 0xa231, 0x494d, 0xa3, 0x8d, 0x00, 0xfd, 0x5e, 0xc4, 0xdb, 0x46)]
-interface IDCompositionCompositeEffect(IDCompositionCompositeEffectVtbl): IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
+interface IDCompositionCompositeEffect(IDCompositionCompositeEffectVtbl):
+    IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
     fn SetMode(
         mode: D2D1_COMPOSITE_MODE,
     ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x33ecdc0a, 0x578a, 0x4a11, 0x9c, 0x14, 0x0c, 0xb9, 0x05, 0x17, 0xf9, 0xc5)]
-interface IDCompositionBlendEffect(IDCompositionBlendEffectVtbl): IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
+interface IDCompositionBlendEffect(IDCompositionBlendEffectVtbl):
+    IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
     fn SetMode(
         mode: D2D1_BLEND_MODE,
     ) -> HRESULT,
 });
 
 RIDL!(#[uuid(0x3b67dfa8, 0xe3dd, 0x4e61, 0xb6, 0x40, 0x46, 0xc2, 0xf3, 0xd7, 0x39, 0xdc)]
-interface IDCompositionArithmeticCompositeEffect(IDCompositionArithmeticCompositeEffectVtbl): IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
+interface IDCompositionArithmeticCompositeEffect(IDCompositionArithmeticCompositeEffectVtbl):
+    IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
     fn SetCoefficients(
         coefficients: *const D2D1_VECTOR_4F,
     ) -> HRESULT,
@@ -1155,7 +1177,8 @@ interface IDCompositionArithmeticCompositeEffect(IDCompositionArithmeticComposit
 });
 
 RIDL!(#[uuid(0x0b74b9e8, 0xcdd6, 0x492f, 0xbb, 0xbc, 0x5e, 0xd3, 0x21, 0x57, 0x02, 0x6d)]
-interface IDCompositionAffineTransform2DEffect(IDCompositionAffineTransform2DEffectVtbl): IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
+interface IDCompositionAffineTransform2DEffect(IDCompositionAffineTransform2DEffectVtbl):
+    IDCompositionFilterEffect(IDCompositionFilterEffectVtbl) {
     fn SetInterpolationMode(
         interpolationMode: D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE,
     ) -> HRESULT,
