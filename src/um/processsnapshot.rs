@@ -4,7 +4,12 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
+
 //! Defines the process snapshot API
+
+use ctypes::c_void;
+use shared::minwindef::DWORD;
+
 ENUM!{enum PSS_CAPTURE_FLAGS {
     PSS_CAPTURE_NONE = 0x00000000,
     PSS_CAPTURE_VA_CLONE = 0x00000001,
@@ -50,15 +55,15 @@ ENUM!{enum PSS_DUPLICATE_FLAGS {
 DECLARE_HANDLE!(HPSS, HPSS__);
 DECLARE_HANDLE!(HPSSWALK, HPSSWALK__);
 FN!{stdcall pAllocRoutine(
-    Context: *mut ::c_void,
-    Size: ::DWORD,
-) -> *mut ::c_void}
+    Context: *mut c_void,
+    Size: DWORD,
+) -> *mut c_void}
 FN!{stdcall pFreeRoutine(
-    Context: *mut ::c_void,
-    Address: *mut ::c_void,
+    Context: *mut c_void,
+    Address: *mut c_void,
 ) -> ()}
 STRUCT!{struct PSS_ALLOCATOR {
-    Context: *mut ::c_void,
+    Context: *mut c_void,
     AllocRoutine: pAllocRoutine,
     FreeRoutine: pFreeRoutine,
 }}
