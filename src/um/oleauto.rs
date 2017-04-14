@@ -7,14 +7,12 @@
 //! Mappings for the contents of OleAuto.h
 
 use ctypes::c_uint;
-use shared::minwindef::UINT;
-use shared::wtypes::{BSTR};
+use shared::minwindef::{UINT, USHORT, WORD};
+use shared::wtypes::{BSTR, VARTYPE};
 use shared::wtypesbase::{LPCOLESTR, OLECHAR};
-use um::oaidl::{DISPID_UNKNOWN, ITypeLib};
-use um::winnt::{HRESULT, INT, LONG, LPCSTR};
+use um::oaidl::{DISPID_UNKNOWN, ITypeLib, VARIANT, VARIANTARG};
+use um::winnt::{HRESULT, INT, LCID, LONG, LPCSTR};
 
-pub type DISPID = LONG;
-pub type MEMBERID = DISPID;
 extern "system" {
     pub fn SysAllocString(
         psz: *const OLECHAR,
@@ -34,7 +32,7 @@ extern "system" {
     ) -> INT;
     pub fn SysFreeString(
         bstrString: BSTR,
-    ) -> ();
+    );
     pub fn SysStringLen(
         pbstr: BSTR,
     ) -> UINT;
@@ -45,9 +43,41 @@ extern "system" {
         psz: LPCSTR,
         len: UINT,
     ) -> BSTR;
+    pub fn VariantInit(
+        pvarg: *mut VARIANTARG,
+    );
+    pub fn VariantClear(
+        pvarg: *mut VARIANTARG,
+    ) -> HRESULT;
+    pub fn VariantCopy(
+        pvargDest: *mut VARIANTARG,
+        pvargSrc: *const VARIANTARG,
+    ) -> HRESULT;
+    pub fn VariantCopyInd(
+        pvarDest: *mut VARIANT,
+        pvargSrc: *const VARIANTARG,
+    ) -> HRESULT;
+    pub fn VariantChangeType(
+        pvargDest: *mut VARIANTARG,
+        pvarSrc: *const VARIANTARG,
+        wFlags: USHORT,
+        vt: VARTYPE,
+    ) -> HRESULT;
+    pub fn VariantChangeTypeEx(
+        pvargDest: *mut VARIANTARG,
+        pvarSrc: *const VARIANTARG,
+        lcid: LCID,
+        wFlags: USHORT,
+        vt: VARTYPE,
+    ) -> HRESULT;
 }
+pub type DISPID = LONG;
+pub type MEMBERID = DISPID;
 pub const MEMBERID_NIL: MEMBERID = DISPID_UNKNOWN;
-
+pub const DISPATCH_METHOD: WORD = 0x1;
+pub const DISPATCH_PROPERTYGET: WORD = 0x2;
+pub const DISPATCH_PROPERTYPUT: WORD = 0x4;
+pub const DISPATCH_PROPERTYPUTREF: WORD = 0x8;
 ENUM!{enum REGKIND {
     REGKIND_DEFAULT = 0,
     REGKIND_REGISTER,
@@ -56,7 +86,7 @@ ENUM!{enum REGKIND {
 extern "system" {
     pub fn LoadTypeLibEx(
         szFile: LPCOLESTR,
-        regKind: REGKIND,
+        regkind: REGKIND,
         pptlib: *mut *mut ITypeLib,
     ) -> HRESULT;
 }
