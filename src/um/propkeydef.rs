@@ -6,7 +6,7 @@
 // except according to those terms
 // Done as of 10.0.14393.
 use shared::guiddef::{IsEqualIID};
-use shared::wtypes::{PROPID, PROPERTYKEY};
+use shared::wtypes::{PROPERTYKEY, PROPID};
 
 pub const PID_FIRST_USABLE: PROPID = 2;
 
