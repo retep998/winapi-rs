@@ -66,7 +66,7 @@ ENUM!{enum VARENUM {
 pub const VT_ILLEGALMASKED: VARENUM = VT_BSTR_BLOB;
 pub const VT_TYPEMASK: VARENUM = VT_BSTR_BLOB;
 pub type PROPID = ULONG;
-STRUCT!{#[derive(PartialEq, Eq)] struct PROPERTYKEY {
+STRUCT!{struct PROPERTYKEY {
     fmtid: GUID,
     pid: DWORD,
 }}

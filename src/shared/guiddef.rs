@@ -7,7 +7,7 @@
 //! GUID definition
 // Done as of 10.0.14393.0
 use ctypes::{c_uchar, c_ulong, c_ushort};
-STRUCT!{#[derive(PartialEq, Eq)] struct GUID {
+STRUCT!{struct GUID {
     Data1: c_ulong,
     Data2: c_ushort,
     Data3: c_ushort,
