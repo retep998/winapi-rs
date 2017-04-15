@@ -217,13 +217,15 @@ interface IActivateAudioInterfaceAsyncOperation(IActivateAudioInterfaceAsyncOper
 }
 );
 
-EXTERN!{stdcall fn ActivateAudioInterfaceAsync(
-    deviceInterfacePath: LPCWSTR,
-    riid: REFIID,
-    activationParams: *mut PROPVARIANT,
-    completionHandler: *mut IActivateAudioInterfaceCompletionHandler,
-    activationOperation: *mut *mut IActivateAudioInterfaceAsyncOperation,
-) -> HRESULT}
+extern "system" {
+    pub fn ActivateAudioInterfaceAsync(
+        deviceInterfacePath: LPCWSTR,
+        riid: REFIID,
+        activationParams: *mut PROPVARIANT,
+        completionHandler: *mut IActivateAudioInterfaceCompletionHandler,
+        activationOperation: *mut *mut IActivateAudioInterfaceAsyncOperation,
+    ) -> HRESULT;
+}
 STRUCT!{struct AudioExtensionParams {
     AddPageParam: LPARAM,
     pEndpoint: *mut IMMDevice,
