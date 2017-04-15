@@ -16,9 +16,6 @@ use um::propsys::IPropertyStore;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR};
 
-#[repr(C)]
-pub struct MMDeviceEnumerator;
-
 // pub const E_NOTFOUND: HRESULT = HRESULT_FROM_WIN32(ERROR_NOT_FOUND);
 // pub const E_UNSUPPORTED_TYPE: HRESULT = HRESULT_FROM_WIN32(ERROR_UNSUPPORTED_TYPE);
 pub const DEVICE_STATE_ACTIVE: DWORD = 0x00000001;
