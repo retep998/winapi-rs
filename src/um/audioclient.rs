@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
-use shared::basetsd::UINT32;
+use shared::basetsd::{UINT32, UINT64};
 use shared::guiddef::{LPCGUID, REFIID};
 use shared::minwindef::{BYTE, DWORD, LPVOID};
 use shared::mmreg::WAVEFORMATEX;
