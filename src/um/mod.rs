@@ -88,6 +88,7 @@ pub mod gl;
 #[cfg(feature = "usbspec")] pub mod usbspec;
 #[cfg(feature = "vsserror")] pub mod vsserror;
 #[cfg(feature = "winbase")] pub mod winbase;
+#[cfg(feature = "wincred")] pub mod wincred;
 #[cfg(feature = "wincodec")] pub mod wincodec;
 #[cfg(feature = "wincon")] pub mod wincon;
 #[cfg(feature = "wincrypt")] pub mod wincrypt;
