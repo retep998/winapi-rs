@@ -28,6 +28,8 @@ pub type REFGUID = *const GUID;
 pub type REFIID = *const IID;
 pub type REFCLSID = *const IID;
 pub type REFFMTID = *const IID;
+DEFINE_GUID!{IID_NULL,
+    0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
 #[inline]
 pub fn IsEqualGUID(g1: &GUID, g2: &GUID) -> bool {
     let a = unsafe { &*(g1 as *const _ as *const [u32; 4]) };
