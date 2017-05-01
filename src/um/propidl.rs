@@ -13,3 +13,4 @@ STRUCT!{struct PROPVARIANT {
     wReserved3: WORD,
     data: [u8; 16],
 }}
+pub type REFPROPVARIANT = *const PROPVARIANT;
