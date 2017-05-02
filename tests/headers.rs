@@ -59,11 +59,11 @@ fn check_file_deps<P: AsRef<Path>>(
             let file_content = read_file(r_p);
             for line in file_content.lines() {
                 if !line.starts_with("use ") {
-                    continue;
+                    continue
                 }
                 let include: Vec<&str> = line.split("::").skip(1).collect();
                 if include.len() < 2 || include[0].starts_with('{') {
-                    continue;
+                    continue
                 }
                 let include = if include.len() > 2 {
                     include[..include.len() - 1].join("-").to_owned()
@@ -87,8 +87,10 @@ fn check_file_deps<P: AsRef<Path>>(
                     *errors += 1;
                 }
             }
-        } else {
-            return;
+        } else if level > 0 && filename != "mod.rs" && !filename.ends_with("-mod.rs") {
+            writeln!(&mut io::stderr(), "\"{}\" not found in build.rs",
+                     p.as_ref().to_str().unwrap()).unwrap();
+            *errors += 1;
         }
     }
     files_deps.remove(&filename);
