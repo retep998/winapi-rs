@@ -30,6 +30,7 @@ use um::d3dcommon::{
 ## Extern functions
 
 * The calling convention specified should be the one for 32bit. Specify `system` for stdcall and `C` for cdecl (and `fastcall` for those couple of fastcall functions out there).
+* One parameter per line.
 
 ```Rust
 extern "system" {
@@ -98,6 +99,34 @@ STRUCT!{struct GROUP_AFFINITY {
 }}
 pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
 ```
+
+## Unions
+
+* `UNION!` is being deprecated in favor of `UNION2!` in order to more closely align with the new untagged union feature.
+
+```C
+typedef union {
+    USN_RECORD_COMMON_HEADER Header;
+    USN_RECORD_V2 V2;
+    USN_RECORD_V3 V3;
+    USN_RECORD_V4 V4;
+} USN_RECORD_UNION, *PUSN_RECORD_UNION;
+```
+```Rust
+UNION2!{union USN_RECORD_UNION {
+    [u64; 10],
+    Header Header_mut: USN_RECORD_COMMON_HEADER,
+    V2 V2_mut: USN_RECORD_V2,
+    V3 V3_mut: USN_RECORD_V3,
+    V4 V4_mut: USN_RECORD_V4,
+}}
+pub type PUSN_RECORD_UNION = *mut USN_RECORD_UNION;
+```
+
+## Anonymous unions and structs
+
+* If the type `FOO` contains a single anonymous struct or union, give the anonymous struct or union a name of `FOO_s` or `FOO_u` respectively, and the field a name of `s` or `u` respectively.
+* If the type `FOO` contains multiple anonymous structs or unions, append a number, such as `s1: FOO_s1` `s2: FOO_s2` or `u1: FOO_u1` `u2: FOO_u2`.
 
 ## COM interfaces
 
