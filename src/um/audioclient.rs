@@ -119,10 +119,10 @@ interface IAudioCaptureClient(IAudioCaptureClientVtbl): IUnknown(IUnknownVtbl) {
         pu64DevicePosition: *mut UINT64,
         pu64QPCPosition: *mut UINT64,
     ) -> HRESULT,
-    fn GetNextPacketSize(
-        pNumFramesInNextPacket: *mut UINT32,
-    ) -> HRESULT,
     fn ReleaseBuffer(
         NumFramesRead: UINT32,
+    ) -> HRESULT,
+    fn GetNextPacketSize(
+        pNumFramesInNextPacket: *mut UINT32,
     ) -> HRESULT,
 }}
