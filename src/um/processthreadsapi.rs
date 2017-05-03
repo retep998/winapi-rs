@@ -155,3 +155,7 @@ ENUM!{enum THREAD_INFORMATION_CLASS {
     ThreadAbsoluteCpuPriority,
     ThreadInformationClassMax,
 }}
+ENUM!{enum PROCESS_INFORMATION_CLASS {
+    ProcessMemoryPriority,
+    ProcessInformationClassMax,
+}}

@@ -14,7 +14,6 @@ use um::minwinbase::{
     LPOVERLAPPED, LPOVERLAPPED_COMPLETION_ROUTINE, LPSECURITY_ATTRIBUTES, LPWIN32_FIND_DATAA,
     LPWIN32_FIND_DATAW
 };
-use um::winbase::STREAM_INFO_LEVELS;
 use um::winnt::{
     BOOLEAN, CCHAR, FILE_ID_128, FILE_SEGMENT_ELEMENT, HANDLE, LARGE_INTEGER, LONG, LONGLONG,
     LPCSTR, LPCWSTR, LPSTR, LPWCH, LPWSTR, PLARGE_INTEGER, PLONG, PULARGE_INTEGER, PWSTR, ULONGLONG,
@@ -585,6 +584,14 @@ extern "system" {
         lpFileName: LPCWSTR,
         lpFileSizeHigh: LPDWORD
     ) -> DWORD;
+}
+
+ENUM!{enum STREAM_INFO_LEVELS {
+    FindStreamInfoStandard,
+    FindStreamInfoMaxInfoLevel,
+}}
+
+extern "system" {
     pub fn FindFirstStreamW(
         lpFileName: LPCWSTR,
         InfoLevel: STREAM_INFO_LEVELS,
