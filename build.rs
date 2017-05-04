@@ -133,6 +133,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("propsys", &["minwindef", "propidl", "propkeydef", "unknwnbase", "winnt", "wtypes"], &[]),
     ("prsht", &["basetsd", "minwindef", "windef", "winnt", "winuser"], &[]),
     ("psapi", &["basetsd", "minwindef", "winnt"], &[]),
+    ("securitybaseapi", &["minwindef", "winnt"], &["advapi32", "kernel32"]),
     ("setupapi", &["basetsd", "commctrl", "devpropdef", "guiddef", "minwindef", "prsht", "spapidef", "windef", "winnt", "winreg"], &["setupapi"]),
     ("shellapi", &["basetsd", "guiddef", "minwinbase", "minwindef", "processthreadsapi", "windef", "winnt", "winuser"], &["shell32", "shlwapi"]),
     ("spapidef", &["minwindef", "winnt"], &[]),

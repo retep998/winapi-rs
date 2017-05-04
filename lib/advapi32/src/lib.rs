@@ -5,35 +5,8 @@
 extern crate winapi;
 use winapi::*;
 extern "system" {
-    // pub fn AccessCheck();
-    // pub fn AccessCheckAndAuditAlarmW();
-    // pub fn AccessCheckByType();
-    // pub fn AccessCheckByTypeAndAuditAlarmW();
-    // pub fn AccessCheckByTypeResultList();
-    // pub fn AccessCheckByTypeResultListAndAuditAlarmByHandleW();
-    // pub fn AccessCheckByTypeResultListAndAuditAlarmW();
-    // pub fn AddAccessAllowedAce();
-    // pub fn AddAccessAllowedAceEx();
-    // pub fn AddAccessAllowedObjectAce();
-    // pub fn AddAccessDeniedAce();
-    // pub fn AddAccessDeniedAceEx();
-    // pub fn AddAccessDeniedObjectAce();
-    // pub fn AddAce();
-    // pub fn AddAuditAccessAce();
-    // pub fn AddAuditAccessAceEx();
-    // pub fn AddAuditAccessObjectAce();
-    // pub fn AddMandatoryAce();
     // pub fn AddUsersToEncryptedFile();
     // pub fn AddUsersToEncryptedFileEx();
-    // pub fn AdjustTokenGroups();
-    pub fn AdjustTokenPrivileges(
-        TokenHandle: HANDLE, DisableAllPrivileges: BOOL, NewState: PTOKEN_PRIVILEGES,
-        BufferLength: DWORD, PreviousState: PTOKEN_PRIVILEGES, ReturnLength: PDWORD,
-    ) -> BOOL;
-    // pub fn AllocateAndInitializeSid();
-    pub fn AllocateLocallyUniqueId(Luid: PLUID) -> BOOL;
-    pub fn AreAllAccessesGranted(GrantedAccess: DWORD, DesiredAccess: DWORD) -> BOOL;
-    pub fn AreAnyAccessesGranted(GrantedAccess: DWORD, DesiredAccess: DWORD) -> BOOL;
     // pub fn AuditComputeEffectivePolicyBySid();
     // pub fn AuditComputeEffectivePolicyByToken();
     // pub fn AuditEnumerateCategories();
@@ -90,7 +63,6 @@ extern "system" {
     // pub fn ChangeServiceConfig2W();
     // pub fn ChangeServiceConfigA();
     // pub fn ChangeServiceConfigW();
-    // pub fn CheckTokenMembership();
     // pub fn CloseCodeAuthzLevel();
     pub fn CloseServiceHandle(hSCObject: SC_HANDLE) -> BOOL;
     // pub fn CloseThreadWaitChainSession();
@@ -125,15 +97,9 @@ extern "system" {
     // pub fn ConvertStringSecurityDescriptorToSecurityDescriptorW();
     // pub fn ConvertStringSidToSidA();
     // pub fn ConvertStringSidToSidW();
-    // pub fn ConvertToAutoInheritPrivateObjectSecurity();
-    // pub fn CopySid();
     // pub fn CreateCodeAuthzLevel();
-    // pub fn CreatePrivateObjectSecurity();
-    // pub fn CreatePrivateObjectSecurityEx();
-    // pub fn CreatePrivateObjectSecurityWithMultipleInheritance();
     // pub fn CreateProcessAsUserA();
     // pub fn CreateProcessAsUserW();
-    // pub fn CreateRestrictedToken();
     pub fn CreateServiceA(
         hSCManager: SC_HANDLE, lpServiceName: LPCSTR, lpDisplayName: LPCSTR,
         dwDesiredAccess: DWORD, dwServiceType: DWORD, dwStartType: DWORD, dwErrorControl: DWORD,
@@ -147,7 +113,6 @@ extern "system" {
         lpDependencies: LPCWSTR, lpServiceStartName: LPCWSTR, lpPassword: LPCWSTR,
     ) -> SC_HANDLE;
     // pub fn CreateTraceInstanceId();
-    // pub fn CreateWellKnownSid();
     pub fn CredDeleteA(TargetName: LPCSTR, Type: DWORD, Flags: DWORD) -> BOOL;
     pub fn CredDeleteW(TargetName: LPCWSTR, Type: DWORD, Flags: DWORD) -> BOOL;
     // pub fn CredEnumerateA();
@@ -302,12 +267,8 @@ extern "system" {
         hHash: HCRYPTHASH, pbSignature: *const BYTE, dwSigLen: DWORD, hPubKey: HCRYPTKEY,
         szDescription: LPCWSTR, dwFlags: DWORD,
     ) -> BOOL;
-    // pub fn DeleteAce();
     pub fn DeleteService(hService: SC_HANDLE) -> BOOL;
-    // pub fn DestroyPrivateObjectSecurity();
     // pub fn DuplicateEncryptionInfoFile();
-    // pub fn DuplicateToken();
-    // pub fn DuplicateTokenEx();
     // pub fn ElfBackupEventLogFileA();
     // pub fn ElfBackupEventLogFileW();
     // pub fn ElfChangeNotify();
@@ -344,9 +305,6 @@ extern "system" {
     // pub fn EnumServicesStatusW();
     // pub fn EnumerateTraceGuids();
     // pub fn EnumerateTraceGuidsEx();
-    // pub fn EqualDomainSid();
-    // pub fn EqualPrefixSid();
-    // pub fn EqualSid();
     // pub fn EtwLogSysConfigExtension();
     // pub fn EventAccessControl();
     // pub fn EventAccessQuery();
@@ -363,7 +321,6 @@ extern "system" {
     // pub fn EventWriteStartScenario();
     // pub fn EventWriteString();
     // pub fn EventWriteTransfer();
-    // pub fn FindFirstFreeAce();
     // pub fn FlushEfsCache();
     // pub fn FlushTraceA();
     // pub fn FlushTraceW();
@@ -371,11 +328,8 @@ extern "system" {
     // pub fn FreeEncryptedFileMetadata();
     // pub fn FreeEncryptionCertificateHashList();
     // pub fn FreeInheritedFromArray();
-    // pub fn FreeSid();
     // pub fn GetAccessPermissionsForObjectA();
     // pub fn GetAccessPermissionsForObjectW();
-    // pub fn GetAce();
-    // pub fn GetAclInformation();
     // pub fn GetAuditedPermissionsFromAclA();
     // pub fn GetAuditedPermissionsFromAclW();
     // pub fn GetDynamicTimeZoneInformationEffectiveYears();
@@ -384,13 +338,10 @@ extern "system" {
     // pub fn GetEncryptedFileMetadata();
     // pub fn GetExplicitEntriesFromAclA();
     // pub fn GetExplicitEntriesFromAclW();
-    // pub fn GetFileSecurityW();
     // pub fn GetInformationCodeAuthzLevelW();
     // pub fn GetInformationCodeAuthzPolicyW();
     // pub fn GetInheritanceSourceA();
     // pub fn GetInheritanceSourceW();
-    // pub fn GetKernelObjectSecurity();
-    // pub fn GetLengthSid();
     // pub fn GetLocalManagedApplicationData();
     // pub fn GetLocalManagedApplications();
     // pub fn GetManagedApplicationCategories();
@@ -404,14 +355,6 @@ extern "system" {
     // pub fn GetNamedSecurityInfoExW();
     // pub fn GetNamedSecurityInfoW();
     // pub fn GetOverlappedAccessResults();
-    // pub fn GetPrivateObjectSecurity();
-    // pub fn GetSecurityDescriptorControl();
-    // pub fn GetSecurityDescriptorDacl();
-    // pub fn GetSecurityDescriptorGroup();
-    // pub fn GetSecurityDescriptorLength();
-    // pub fn GetSecurityDescriptorOwner();
-    // pub fn GetSecurityDescriptorRMControl();
-    // pub fn GetSecurityDescriptorSacl();
     // pub fn GetSecurityInfo();
     // pub fn GetSecurityInfoExA();
     // pub fn GetSecurityInfoExW();
@@ -419,13 +362,8 @@ extern "system" {
     // pub fn GetServiceDisplayNameW();
     // pub fn GetServiceKeyNameA();
     // pub fn GetServiceKeyNameW();
-    // pub fn GetSidIdentifierAuthority();
-    // pub fn GetSidLengthRequired();
-    // pub fn GetSidSubAuthority();
-    // pub fn GetSidSubAuthorityCount();
     // pub fn GetStringConditionFromBinary();
     // pub fn GetThreadWaitChain();
-    // pub fn GetTokenInformation();
     // pub fn GetTraceEnableFlags();
     // pub fn GetTraceEnableLevel();
     // pub fn GetTraceLoggerHandle();
@@ -435,24 +373,12 @@ extern "system" {
     // pub fn GetTrusteeNameW();
     // pub fn GetTrusteeTypeA();
     // pub fn GetTrusteeTypeW();
-    // pub fn GetWindowsAccountDomainSid();
     // pub fn I_ScSetServiceBitsA();
     // pub fn I_ScSetServiceBitsW();
     // pub fn IdentifyCodeAuthzLevelW();
-    // pub fn ImpersonateAnonymousToken();
-    // pub fn ImpersonateLoggedOnUser();
     // pub fn ImpersonateNamedPipeClient();
-    // pub fn ImpersonateSelf();
-    // pub fn InitializeAcl();
-    // pub fn InitializeSecurityDescriptor();
-    // pub fn InitializeSid();
     // pub fn InstallApplication();
-    // pub fn IsTokenRestricted();
-    // pub fn IsValidAcl();
     // pub fn IsValidRelativeSecurityDescriptor();
-    // pub fn IsValidSecurityDescriptor();
-    // pub fn IsValidSid();
-    // pub fn IsWellKnownSid();
     // pub fn LockServiceDatabase();
     // pub fn LookupSecurityDescriptorPartsA();
     // pub fn LookupSecurityDescriptorPartsW();
@@ -525,18 +451,11 @@ extern "system" {
     // pub fn MIDL_user_free_Ext();
     // pub fn MSChapSrvChangePassword();
     // pub fn MSChapSrvChangePassword2();
-    // pub fn MakeAbsoluteSD();
     // pub fn MakeAbsoluteSD2();
-    // pub fn MakeSelfRelativeSD();
-    // pub fn MapGenericMask();
     // pub fn NotifyBootConfigStatus();
     // pub fn NotifyServiceStatusChange();
     // pub fn NotifyServiceStatusChangeA();
     // pub fn NotifyServiceStatusChangeW();
-    // pub fn ObjectCloseAuditAlarmW();
-    // pub fn ObjectDeleteAuditAlarmW();
-    // pub fn ObjectOpenAuditAlarmW();
-    // pub fn ObjectPrivilegeAuditAlarmW();
     pub fn OpenProcessToken(
         ProcessHandle: HANDLE, DesiredAccess: DWORD, TokenHandle: PHANDLE,
     ) -> BOOL;
@@ -585,13 +504,10 @@ extern "system" {
     // pub fn PerfStartProvider();
     // pub fn PerfStartProviderEx();
     // pub fn PerfStopProvider();
-    // pub fn PrivilegeCheck();
-    // pub fn PrivilegedServiceAuditAlarmW();
     // pub fn ProcessTrace();
     // pub fn QueryAllTracesA();
     // pub fn QueryAllTracesW();
     // pub fn QueryRecoveryAgentsOnEncryptedFile();
-    // pub fn QuerySecurityAccessMask();
     // pub fn QueryServiceConfig2A();
     // pub fn QueryServiceConfig2W();
     // pub fn QueryServiceConfigA();
@@ -629,7 +545,6 @@ extern "system" {
     // pub fn RemoteRegQueryValueWrapper();
     // pub fn RemoveTraceCallback();
     // pub fn RemoveUsersFromEncryptedFile();
-    // pub fn RevertToSelf();
     // pub fn SafeBaseRegGetKeySecurity();
     // pub fn SaferCloseLevel();
     // pub fn SaferComputeTokenFromLevel();
@@ -641,7 +556,6 @@ extern "system" {
     // pub fn SaferSetLevelInformation();
     // pub fn SaferSetPolicyInformation();
     // pub fn SaferiIsExecutableFileType();
-    // pub fn SetAclInformation();
     // pub fn SetEncryptedFileMetadata();
     // pub fn SetEntriesInAccessListA();
     // pub fn SetEntriesInAccessListW();
@@ -649,23 +563,12 @@ extern "system" {
     // pub fn SetEntriesInAclW();
     // pub fn SetEntriesInAuditListA();
     // pub fn SetEntriesInAuditListW();
-    // pub fn SetFileSecurityW();
     // pub fn SetInformationCodeAuthzLevelW();
     // pub fn SetInformationCodeAuthzPolicyW();
-    // pub fn SetKernelObjectSecurity();
     // pub fn SetNamedSecurityInfoA();
     // pub fn SetNamedSecurityInfoExA();
     // pub fn SetNamedSecurityInfoExW();
     // pub fn SetNamedSecurityInfoW();
-    // pub fn SetPrivateObjectSecurity();
-    // pub fn SetPrivateObjectSecurityEx();
-    // pub fn SetSecurityAccessMask();
-    // pub fn SetSecurityDescriptorControl();
-    // pub fn SetSecurityDescriptorDacl();
-    // pub fn SetSecurityDescriptorGroup();
-    // pub fn SetSecurityDescriptorOwner();
-    // pub fn SetSecurityDescriptorRMControl();
-    // pub fn SetSecurityDescriptorSacl();
     // pub fn SetSecurityInfo();
     // pub fn SetSecurityInfoExA();
     // pub fn SetSecurityInfoExW();
@@ -675,7 +578,6 @@ extern "system" {
         hServiceStatus: SERVICE_STATUS_HANDLE, lpServiceStatus: LPSERVICE_STATUS,
     ) -> BOOL;
     // pub fn SetThreadToken();
-    // pub fn SetTokenInformation();
     // pub fn SetTraceCallback();
     // pub fn SetUserFileEncryptionKey();
     // pub fn SetUserFileEncryptionKeyEx();
