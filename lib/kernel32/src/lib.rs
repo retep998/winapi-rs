@@ -8,14 +8,7 @@ extern "system" {
     pub fn AddDllDirectory(NewDirectory: PCWSTR) -> DLL_DIRECTORY_COOKIE;
     // pub fn AddLocalAlternateComputerNameA();
     // pub fn AddLocalAlternateComputerNameW();
-    pub fn AddResourceAttributeAce(
-        pAcl: PACL, dwAceRevision: DWORD, AceFlags: DWORD, AccessMask: DWORD, pSid: PSID,
-        pAttributeInfo: PCLAIM_SECURITY_ATTRIBUTES_INFORMATION, pReturnLength: PDWORD,
-    ) -> BOOL;
     pub fn AddSIDToBoundaryDescriptor(BoundaryDescriptor: *mut HANDLE, RequiredSid: PSID) -> BOOL;
-    pub fn AddScopedPolicyIDAce(
-        pAcl: PACL, dwAceRevision: DWORD, AceFlags: DWORD, AccessMask: DWORD, pSid: PSID,
-    ) -> BOOL;
     pub fn AllocateUserPhysicalPages(
         hProcess: HANDLE, NumberOfPages: PULONG_PTR, PageArray: PULONG_PTR,
     ) -> BOOL;
@@ -45,12 +38,6 @@ extern "system" {
     // pub fn CheckElevation();
     // pub fn CheckElevationEnabled();
     pub fn CheckRemoteDebuggerPresent(hProcess: HANDLE, pbDebuggerPresent: PBOOL) -> BOOL;
-    pub fn CheckTokenCapability(
-        TokenHandle: HANDLE, CapabilitySidToCheck: PSID, HasCapability: PBOOL,
-    ) -> BOOL;
-    pub fn CheckTokenMembershipEx(
-        TokenHandle: HANDLE, SidToCheck: PSID, Flags: DWORD, IsMember: PBOOL,
-    ) -> BOOL;
     // pub fn ClosePackageInfo();
     pub fn ClosePrivateNamespace(Handle: HANDLE, Flags: ULONG) -> BOOLEAN;
     // pub fn CloseState();
@@ -336,10 +323,6 @@ extern "system" {
         hProcess: HANDLE, NumberOfPages: PULONG_PTR, PageArray: PULONG_PTR,
     ) -> BOOL;
     pub fn GetACP() -> UINT;
-    pub fn GetAppContainerAce(
-        Acl: PACL, StartingAceIndex: DWORD, AppContainerAce: *mut PVOID,
-        AppContainerAceIndex: *mut DWORD,
-    ) -> BOOL;
     pub fn GetAppContainerNamedObjectPath(
         Token: HANDLE, AppContainerSid: PSID, ObjectPathLength: ULONG, ObjectPath: LPWSTR,
         ReturnLength: PULONG,
@@ -348,10 +331,6 @@ extern "system" {
     pub fn GetCPInfo(CodePage: UINT, lpCPInfo: LPCPINFO) -> BOOL;
     pub fn GetCPInfoExA(CodePage: UINT, dwFlags: DWORD, lpCPInfoEx: LPCPINFOEXA) -> BOOL;
     pub fn GetCPInfoExW(CodePage: UINT, dwFlags: DWORD, lpCPInfoEx: LPCPINFOEXW) -> BOOL;
-    pub fn GetCachedSigningLevel(
-        File: HANDLE, Flags: PULONG, SigningLevel: PULONG, Thumbprint: PUCHAR,
-        ThumbprintSize: PULONG, ThumbprintAlgorithm: PULONG,
-    ) -> BOOL;
     pub fn GetCalendarInfoA(
         Locale: LCID, Calendar: CALID, CalType: CALTYPE, lpCalData: LPSTR, cchData: c_int,
         lpValue: LPDWORD,
@@ -1059,9 +1038,6 @@ extern "system" {
         lpPath: LPCWSTR, lpFileName: LPCWSTR, lpExtension: LPCWSTR, nBufferLength: DWORD,
         lpBuffer: LPWSTR, lpFilePart: *mut LPWSTR,
     ) -> DWORD;
-    pub fn SetCachedSigningLevel(
-        SourceFiles: PHANDLE, SourceFileCount: ULONG, Flags: ULONG, TargetFile: HANDLE,
-    ) -> BOOL;
     pub fn SetCalendarInfoA(
         Locale: LCID, Calendar: CALID, CalType: CALTYPE, lpCalData: LPCSTR,
     ) -> BOOL;
