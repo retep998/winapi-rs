@@ -37,21 +37,11 @@ extern "system" {
     // pub fn BuildTrusteeWithSidA();
     // pub fn BuildTrusteeWithSidW();
     // pub fn CancelOverlappedAccess();
-    // pub fn ChangeServiceConfig2A();
-    // pub fn ChangeServiceConfig2W();
-    // pub fn ChangeServiceConfigA();
-    // pub fn ChangeServiceConfigW();
     // pub fn CloseCodeAuthzLevel();
-    pub fn CloseServiceHandle(hSCObject: SC_HANDLE) -> BOOL;
     // pub fn CloseThreadWaitChainSession();
     // pub fn CloseTrace();
     // pub fn CommandLineFromMsiDescriptor();
     // pub fn ComputeAccessTokenFromCodeAuthzLevel();
-    pub fn ControlService(
-        hService: SC_HANDLE, dwControl: DWORD, lpServiceStatus: LPSERVICE_STATUS,
-    ) -> BOOL;
-    // pub fn ControlServiceExA();
-    // pub fn ControlServiceExW();
     // pub fn ControlTraceA();
     // pub fn ControlTraceW();
     // pub fn ConvertAccessToSecurityDescriptorA();
@@ -78,18 +68,6 @@ extern "system" {
     // pub fn CreateCodeAuthzLevel();
     // pub fn CreateProcessAsUserA();
     // pub fn CreateProcessAsUserW();
-    pub fn CreateServiceA(
-        hSCManager: SC_HANDLE, lpServiceName: LPCSTR, lpDisplayName: LPCSTR,
-        dwDesiredAccess: DWORD, dwServiceType: DWORD, dwStartType: DWORD, dwErrorControl: DWORD,
-        lpBinaryPathName: LPCSTR, lpLoadOrderGroup: LPCSTR, lpdwTagId: LPDWORD,
-        lpDependencies: LPCSTR, lpServiceStartName: LPCSTR, lpPassword: LPCSTR,
-    ) -> SC_HANDLE;
-    pub fn CreateServiceW(
-        hSCManager: SC_HANDLE, lpServiceName: LPCWSTR, lpDisplayName: LPCWSTR,
-        dwDesiredAccess: DWORD, dwServiceType: DWORD, dwStartType: DWORD, dwErrorControl: DWORD,
-        lpBinaryPathName: LPCWSTR, lpLoadOrderGroup: LPCWSTR, lpdwTagId: LPDWORD,
-        lpDependencies: LPCWSTR, lpServiceStartName: LPCWSTR, lpPassword: LPCWSTR,
-    ) -> SC_HANDLE;
     // pub fn CreateTraceInstanceId();
     pub fn CredDeleteA(TargetName: LPCSTR, Type: DWORD, Flags: DWORD) -> BOOL;
     pub fn CredDeleteW(TargetName: LPCWSTR, Type: DWORD, Flags: DWORD) -> BOOL;
@@ -245,7 +223,6 @@ extern "system" {
         hHash: HCRYPTHASH, pbSignature: *const BYTE, dwSigLen: DWORD, hPubKey: HCRYPTKEY,
         szDescription: LPCWSTR, dwFlags: DWORD,
     ) -> BOOL;
-    pub fn DeleteService(hService: SC_HANDLE) -> BOOL;
     // pub fn DuplicateEncryptionInfoFile();
     // pub fn ElfBackupEventLogFileA();
     // pub fn ElfBackupEventLogFileW();
@@ -273,14 +250,8 @@ extern "system" {
     // pub fn EnableTraceEx2();
     // pub fn EncryptedFileKeyInfo();
     // pub fn EncryptionDisable();
-    // pub fn EnumDependentServicesA();
-    // pub fn EnumDependentServicesW();
     // pub fn EnumDynamicTimeZoneInformation();
     // pub fn EnumServiceGroupW();
-    // pub fn EnumServicesStatusA();
-    // pub fn EnumServicesStatusExA();
-    // pub fn EnumServicesStatusExW();
-    // pub fn EnumServicesStatusW();
     // pub fn EnumerateTraceGuids();
     // pub fn EnumerateTraceGuidsEx();
     // pub fn EtwLogSysConfigExtension();
@@ -336,10 +307,6 @@ extern "system" {
     // pub fn GetSecurityInfo();
     // pub fn GetSecurityInfoExA();
     // pub fn GetSecurityInfoExW();
-    // pub fn GetServiceDisplayNameA();
-    // pub fn GetServiceDisplayNameW();
-    // pub fn GetServiceKeyNameA();
-    // pub fn GetServiceKeyNameW();
     // pub fn GetStringConditionFromBinary();
     // pub fn GetThreadWaitChain();
     // pub fn GetTraceEnableFlags();
@@ -357,7 +324,6 @@ extern "system" {
     // pub fn ImpersonateNamedPipeClient();
     // pub fn InstallApplication();
     // pub fn IsValidRelativeSecurityDescriptor();
-    // pub fn LockServiceDatabase();
     // pub fn LookupSecurityDescriptorPartsA();
     // pub fn LookupSecurityDescriptorPartsW();
     // pub fn LsaAddAccountRights();
@@ -430,26 +396,10 @@ extern "system" {
     // pub fn MSChapSrvChangePassword();
     // pub fn MSChapSrvChangePassword2();
     // pub fn MakeAbsoluteSD2();
-    // pub fn NotifyBootConfigStatus();
     // pub fn NotifyServiceStatusChange();
-    // pub fn NotifyServiceStatusChangeA();
-    // pub fn NotifyServiceStatusChangeW();
     pub fn OpenProcessToken(
         ProcessHandle: HANDLE, DesiredAccess: DWORD, TokenHandle: PHANDLE,
     ) -> BOOL;
-    pub fn OpenSCManagerA(
-        lpMachineName: LPCSTR, lpDatabaseName: LPCSTR, dwDesiredAccess: DWORD,
-    ) -> SC_HANDLE;
-    pub fn OpenSCManagerW(
-        lpMachineName: LPCWSTR, lpDatabaseName: LPCWSTR, dwDesiredAccess: DWORD,
-    ) -> SC_HANDLE;
-    pub fn OpenServiceA(
-        hSCManager: SC_HANDLE, lpServiceName: LPCSTR, dwDesiredAccess: DWORD,
-    ) -> SC_HANDLE;
-    pub fn OpenServiceW(
-        hSCManager: SC_HANDLE, lpServiceName: LPCWSTR, dwDesiredAccess: DWORD,
-    ) -> SC_HANDLE;
-    // pub fn OpenThreadToken();
     // pub fn OpenThreadWaitChainSession();
     // pub fn OpenTraceA();
     // pub fn OpenTraceW();
@@ -486,34 +436,9 @@ extern "system" {
     // pub fn QueryAllTracesA();
     // pub fn QueryAllTracesW();
     // pub fn QueryRecoveryAgentsOnEncryptedFile();
-    // pub fn QueryServiceConfig2A();
-    // pub fn QueryServiceConfig2W();
-    // pub fn QueryServiceConfigA();
-    // pub fn QueryServiceConfigW();
-    // pub fn QueryServiceDynamicInformation();
-    // pub fn QueryServiceLockStatusA();
-    // pub fn QueryServiceLockStatusW();
-    // pub fn QueryServiceObjectSecurity();
-    pub fn QueryServiceStatus(hService: SC_HANDLE, lpServiceStatus: LPSERVICE_STATUS) -> BOOL;
-    pub fn QueryServiceStatusEx(
-        hService: SC_HANDLE, InfoLevel: SC_STATUS_TYPE, lpBuffer: LPBYTE, cbBufSize: DWORD,
-        pcbBytesNeeded: LPDWORD,
-    ) -> BOOL;
     // pub fn QueryTraceA();
     // pub fn QueryTraceW();
     // pub fn QueryUsersOnEncryptedFile();
-    pub fn RegisterServiceCtrlHandlerA(
-        lpServiceName: LPCSTR, lpHandlerProc: LPHANDLER_FUNCTION,
-    ) -> SERVICE_STATUS_HANDLE;
-    pub fn RegisterServiceCtrlHandlerExA(
-        lpServiceName: LPCSTR, lpHandlerProc: LPHANDLER_FUNCTION_EX, lpContext: LPVOID,
-    ) -> SERVICE_STATUS_HANDLE;
-    pub fn RegisterServiceCtrlHandlerExW(
-        lpServiceName: LPCWSTR, lpHandlerProc: LPHANDLER_FUNCTION_EX, lpContext: LPVOID,
-    ) -> SERVICE_STATUS_HANDLE;
-    pub fn RegisterServiceCtrlHandlerW(
-        lpServiceName: LPCWSTR, lpHandlerProc: LPHANDLER_FUNCTION,
-    ) -> SERVICE_STATUS_HANDLE;
     // pub fn RegisterTraceGuidsA();
     // pub fn RegisterTraceGuidsW();
     // pub fn RegisterWaitChainCOMCallback();
@@ -551,18 +476,10 @@ extern "system" {
     // pub fn SetSecurityInfoExA();
     // pub fn SetSecurityInfoExW();
     // pub fn SetServiceBits();
-    // pub fn SetServiceObjectSecurity();
-    pub fn SetServiceStatus(
-        hServiceStatus: SERVICE_STATUS_HANDLE, lpServiceStatus: LPSERVICE_STATUS,
-    ) -> BOOL;
     // pub fn SetThreadToken();
     // pub fn SetTraceCallback();
     // pub fn SetUserFileEncryptionKey();
     // pub fn SetUserFileEncryptionKeyEx();
-    // pub fn StartServiceA();
-    pub fn StartServiceCtrlDispatcherA(lpServiceStartTable: *const SERVICE_TABLE_ENTRYA) -> BOOL;
-    pub fn StartServiceCtrlDispatcherW(lpServiceStartTable: *const SERVICE_TABLE_ENTRYW) -> BOOL;
-    // pub fn StartServiceW();
     // pub fn StartTraceA();
     // pub fn StartTraceW();
     // pub fn StopTraceA();
@@ -617,7 +534,6 @@ extern "system" {
     // pub fn TrusteeAccessToObjectA();
     // pub fn TrusteeAccessToObjectW();
     // pub fn UninstallApplication();
-    // pub fn UnlockServiceDatabase();
     // pub fn UnregisterTraceGuids();
     // pub fn UpdateTraceA();
     // pub fn UpdateTraceW();
