@@ -66,8 +66,6 @@ extern "system" {
     // pub fn ConvertStringSidToSidA();
     // pub fn ConvertStringSidToSidW();
     // pub fn CreateCodeAuthzLevel();
-    // pub fn CreateProcessAsUserA();
-    // pub fn CreateProcessAsUserW();
     // pub fn CreateTraceInstanceId();
     pub fn CredDeleteA(TargetName: LPCSTR, Type: DWORD, Flags: DWORD) -> BOOL;
     pub fn CredDeleteW(TargetName: LPCWSTR, Type: DWORD, Flags: DWORD) -> BOOL;
@@ -397,9 +395,6 @@ extern "system" {
     // pub fn MSChapSrvChangePassword2();
     // pub fn MakeAbsoluteSD2();
     // pub fn NotifyServiceStatusChange();
-    pub fn OpenProcessToken(
-        ProcessHandle: HANDLE, DesiredAccess: DWORD, TokenHandle: PHANDLE,
-    ) -> BOOL;
     // pub fn OpenThreadWaitChainSession();
     // pub fn OpenTraceA();
     // pub fn OpenTraceW();
@@ -476,7 +471,6 @@ extern "system" {
     // pub fn SetSecurityInfoExA();
     // pub fn SetSecurityInfoExW();
     // pub fn SetServiceBits();
-    // pub fn SetThreadToken();
     // pub fn SetTraceCallback();
     // pub fn SetUserFileEncryptionKey();
     // pub fn SetUserFileEncryptionKeyEx();

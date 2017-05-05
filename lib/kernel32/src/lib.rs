@@ -105,24 +105,6 @@ extern "system" {
         lpPrivateNamespaceAttributes: LPSECURITY_ATTRIBUTES, lpBoundaryDescriptor: LPVOID,
         lpAliasPrefix: LPCWSTR,
     ) -> HANDLE;
-    pub fn CreateProcessA(
-        lpApplicationName: LPCSTR, lpCommandLine: LPSTR, lpProcessAttributes: LPSECURITY_ATTRIBUTES,
-        lpThreadAttributes: LPSECURITY_ATTRIBUTES, bInheritHandles: BOOL, dwCreationFlags: DWORD,
-        lpEnvironment: LPVOID, lpCurrentDirectory: LPCSTR, lpStartupInfo: LPSTARTUPINFOA,
-        lpProcessInformation: LPPROCESS_INFORMATION,
-    ) -> BOOL;
-    pub fn CreateProcessW(
-        lpApplicationName: LPCWSTR, lpCommandLine: LPWSTR,
-        lpProcessAttributes: LPSECURITY_ATTRIBUTES, lpThreadAttributes: LPSECURITY_ATTRIBUTES,
-        bInheritHandles: BOOL, dwCreationFlags: DWORD, lpEnvironment: LPVOID,
-        lpCurrentDirectory: LPCWSTR, lpStartupInfo: LPSTARTUPINFOW,
-        lpProcessInformation: LPPROCESS_INFORMATION,
-    ) -> BOOL;
-    pub fn CreateRemoteThreadEx(
-        hProcess: HANDLE, lpThreadAttributes: LPSECURITY_ATTRIBUTES, dwStackSize: SIZE_T,
-        lpStartAddress: LPTHREAD_START_ROUTINE, lpParameter: LPVOID, dwCreationFlags: DWORD,
-        lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST, lpThreadId: LPDWORD,
-    ) -> HANDLE;
     pub fn CreateThreadpool(reserved: PVOID) -> PTP_POOL;
     pub fn CreateThreadpoolCleanupGroup() -> PTP_CLEANUP_GROUP;
     pub fn CreateThreadpoolIo(
@@ -151,7 +133,6 @@ extern "system" {
     pub fn DecodeSystemPointer(Ptr: PVOID) -> PVOID;
     pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
     pub fn DeleteBoundaryDescriptor(BoundaryDescriptor: HANDLE);
-    pub fn DeleteProcThreadAttributeList(lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST);
     pub fn DeleteTimerQueueEx(TimerQueue: HANDLE, CompletionEvent: HANDLE) -> BOOL;
     pub fn DeleteTimerQueueTimer(
         TimerQueue: HANDLE, Timer: HANDLE, CompletionEvent: HANDLE,
@@ -266,8 +247,6 @@ extern "system" {
     pub fn FlsFree(dwFlsIndex: DWORD) -> BOOL;
     pub fn FlsGetValue(dwFlsIndex: DWORD) -> PVOID;
     pub fn FlsSetValue(dwFlsIndex: DWORD, lpFlsData: PVOID) -> BOOL;
-    pub fn FlushInstructionCache(hProcess: HANDLE, lpBaseAddress: LPCVOID, dwSize: SIZE_T) -> BOOL;
-    pub fn FlushProcessWriteBuffers();
     pub fn FlushViewOfFile(lpBaseAddress: LPCVOID, dwNumberOfBytesToFlush: SIZE_T) -> BOOL;
     pub fn FoldStringA(
         dwMapFlags: DWORD, lpSrcStr: LPCSTR, cchSrc: c_int, lpDestStr: LPSTR, cchDest: c_int,
@@ -331,9 +310,6 @@ extern "system" {
     // pub fn GetCurrentPackageId();
     // pub fn GetCurrentPackageInfo();
     // pub fn GetCurrentPackagePath();
-    pub fn GetCurrentProcessorNumber() -> DWORD;
-    pub fn GetCurrentProcessorNumberEx(ProcNumber: PPROCESSOR_NUMBER);
-    pub fn GetCurrentThreadStackLimits(LowLimit: PULONG_PTR, HighLimit: PULONG_PTR);
     pub fn GetDateFormatA(
         Locale: LCID, dwFlags: DWORD, lpDate: *const SYSTEMTIME, lpFormat: LPCSTR, lpDateStr: LPSTR,
         cchDate: c_int,
@@ -449,30 +425,15 @@ extern "system" {
     // pub fn GetPackagePathByFullName();
     // pub fn GetPackagesByPackageFamily();
     pub fn GetPhysicallyInstalledSystemMemory(TotalMemoryInKilobytes: PULONGLONG) -> BOOL;
-    pub fn GetPriorityClass(hProcess: HANDLE) -> DWORD;
     pub fn GetProcessGroupAffinity(
         hProcess: HANDLE, GroupCount: PUSHORT, GroupArray: PUSHORT,
     ) -> BOOL;
-    pub fn GetProcessHandleCount(hProcess: HANDLE, pdwHandleCount: PDWORD) -> BOOL;
     pub fn GetProcessHeap() -> HANDLE;
     pub fn GetProcessHeaps(NumberOfHeaps: DWORD, ProcessHeaps: PHANDLE) -> DWORD;
-    pub fn GetProcessId(Process: HANDLE) -> DWORD;
-    pub fn GetProcessIdOfThread(Thread: HANDLE) -> DWORD;
-    pub fn GetProcessInformation(
-        hProcess: HANDLE, ProcessInformationClass: PROCESS_INFORMATION_CLASS,
-        ProcessInformation: LPVOID, ProcessInformationSize: DWORD,
-    ) -> BOOL;
-    pub fn GetProcessMitigationPolicy(
-        hProcess: HANDLE, MitigationPolicy: PROCESS_MITIGATION_POLICY, lpBuffer: PVOID,
-        dwLength: SIZE_T,
-    ) -> BOOL;
     pub fn GetProcessPreferredUILanguages(
         dwFlags: DWORD, pulNumLanguages: PULONG, pwszLanguagesBuffer: PZZWSTR,
         pcchLanguagesBuffer: PULONG,
     ) -> BOOL;
-    pub fn GetProcessPriorityBoost(hProcess: HANDLE, pDisablePriorityBoost: PBOOL) -> BOOL;
-    pub fn GetProcessShutdownParameters(lpdwLevel: LPDWORD, lpdwFlags: LPDWORD) -> BOOL;
-    pub fn GetProcessVersion(ProcessId: DWORD) -> DWORD;
     pub fn GetProcessWorkingSetSizeEx(
         hProcess: HANDLE, lpMinimumWorkingSetSize: PSIZE_T, lpMaximumWorkingSetSize: PSIZE_T,
         Flags: PDWORD,
@@ -493,7 +454,6 @@ extern "system" {
         ulNumEntriesRemoved: PULONG, dwMilliseconds: DWORD, fAlertable: BOOL,
     ) -> BOOL;
     // pub fn GetStagedPackagePathByFullName();
-    pub fn GetStartupInfoW(lpStartupInfo: LPSTARTUPINFOW);
     // pub fn GetStateFolder();
     pub fn GetStdHandle(nStdHandle: DWORD) -> HANDLE;
     pub fn GetStringScripts(
@@ -536,22 +496,11 @@ extern "system" {
     ) -> BOOL;
     pub fn GetSystemTimeAsFileTime(lpSystemTimeAsFileTime: LPFILETIME);
     pub fn GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime: LPFILETIME);
-    pub fn GetSystemTimes(
-        lpIdleTime: LPFILETIME, lpKernelTime: LPFILETIME, lpUserTime: LPFILETIME,
-    ) -> BOOL;
     pub fn GetSystemWindowsDirectoryA(lpBuffer: LPSTR, uSize: UINT) -> UINT;
     pub fn GetSystemWindowsDirectoryW(lpBuffer: LPWSTR, uSize: UINT) -> UINT;
     pub fn GetSystemWow64DirectoryA(lpBuffer: LPSTR, uSize: UINT) -> UINT;
     pub fn GetSystemWow64DirectoryW(lpBuffer: LPWSTR, uSize: UINT) -> UINT;
-    pub fn GetThreadContext(hThread: HANDLE, lpContext: LPCONTEXT) -> BOOL;
     pub fn GetThreadGroupAffinity(hThread: HANDLE, GroupAffinity: PGROUP_AFFINITY) -> BOOL;
-    pub fn GetThreadIOPendingFlag(hThread: HANDLE, lpIOIsPending: PBOOL) -> BOOL;
-    pub fn GetThreadId(Thread: HANDLE) -> DWORD;
-    pub fn GetThreadIdealProcessorEx(hThread: HANDLE, lpIdealProcessor: PPROCESSOR_NUMBER) -> BOOL;
-    pub fn GetThreadInformation(
-        hThread: HANDLE, ThreadInformationClass: THREAD_INFORMATION_CLASS,
-        ThreadInformation: LPVOID, ThreadInformationSize: DWORD,
-    ) -> BOOL;
     pub fn GetThreadLocale() -> LCID;
     pub fn GetThreadPreferredUILanguages(
         dwFlags: DWORD, pulNumLanguages: PULONG, pwszLanguagesBuffer: PZZWSTR,
@@ -559,10 +508,6 @@ extern "system" {
     ) -> BOOL;
     pub fn GetThreadSelectorEntry(
         hThread: HANDLE, dwSelector: DWORD, lpSelectorEntry: LPLDT_ENTRY,
-    ) -> BOOL;
-    pub fn GetThreadTimes(
-        hThread: HANDLE, lpCreationTime: LPFILETIME, lpExitTime: LPFILETIME,
-        lpKernelTime: LPFILETIME, lpUserTime: LPFILETIME,
     ) -> BOOL;
     pub fn GetThreadUILanguage() -> LANGID;
     pub fn GetTickCount() -> DWORD;
@@ -634,10 +579,6 @@ extern "system" {
     pub fn HeapUnlock(hHeap: HANDLE) -> BOOL;
     pub fn HeapValidate(hHeap: HANDLE, dwFlags: DWORD, lpMem: LPCVOID) -> BOOL;
     pub fn HeapWalk(hHeap: HANDLE, lpEntry: LPPROCESS_HEAP_ENTRY) -> BOOL;
-    pub fn InitializeProcThreadAttributeList(
-        lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST, dwAttributeCount: DWORD, dwFlags: DWORD,
-        lpSize: PSIZE_T,
-    ) -> BOOL;
     pub fn InitializeSListHead(ListHead: PSLIST_HEADER);
     pub fn InstallELAMCertificateInfo(ELAMFile: HANDLE) -> BOOL;
     #[cfg(target_arch = "x86")]
@@ -660,9 +601,7 @@ extern "system" {
         lpString: LPCWSTR, cchStr: INT,
     ) -> BOOL;
     pub fn IsNormalizedString(NormForm: NORM_FORM, lpString: LPCWSTR, cwLength: c_int) -> BOOL;
-    pub fn IsProcessCritical(hProcess: HANDLE, Critical: PBOOL) -> BOOL;
     pub fn IsProcessInJob(ProcessHandle: HANDLE, JobHandle: HANDLE, Result: PBOOL) -> BOOL;
-    pub fn IsProcessorFeaturePresent(ProcessorFeature: DWORD) -> BOOL;
     pub fn IsThreadAFiber() -> BOOL;
     pub fn IsThreadpoolTimerSet(pti: PTP_TIMER) -> BOOL;
     pub fn IsValidCodePage(CodePage: UINT) -> BOOL;
@@ -804,7 +743,6 @@ extern "system" {
     pub fn OpenJobObjectW(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR) -> HANDLE;
     // pub fn OpenPackageInfoByFullName();
     pub fn OpenPrivateNamespaceW(lpBoundaryDescriptor: LPVOID, lpAliasPrefix: LPCWSTR) -> HANDLE;
-    pub fn OpenProcess(dwDesiredAccess: DWORD, bInheritHandle: BOOL, dwProcessId: DWORD) -> HANDLE;
     // pub fn OpenState();
     // pub fn OpenStateExplicit();
     pub fn OutputDebugStringA(lpOutputString: LPCSTR);
@@ -831,7 +769,6 @@ extern "system" {
     pub fn Process32FirstW(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32W) -> BOOL;
     pub fn Process32Next(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
     pub fn Process32NextW(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32W) -> BOOL;
-    pub fn ProcessIdToSessionId(dwProcessId: DWORD, pSessionId: *mut DWORD) -> BOOL;
     pub fn PssCaptureSnapshot(
         ProcessHandle: HANDLE, CaptureFlags: PSS_CAPTURE_FLAGS, ThreadContextFlags: DWORD,
         SnapshotHandle: *mut HPSS,
@@ -876,9 +813,7 @@ extern "system" {
     ) -> BOOL;
     pub fn QueryPerformanceCounter(lpPerformanceCount: *mut LARGE_INTEGER) -> BOOL;
     pub fn QueryPerformanceFrequency(lpFrequency: *mut LARGE_INTEGER) -> BOOL;
-    pub fn QueryProcessAffinityUpdateMode(hProcess: HANDLE, lpdwFlags: LPDWORD) -> BOOL;
     pub fn QueryProcessCycleTime(ProcessHandle: HANDLE, CycleTime: PULONG64) -> BOOL;
-    pub fn QueryProtectedPolicy(PolicyGuid: LPCGUID, PolicyValue: PULONG_PTR) -> BOOL;
     pub fn QueryThreadCycleTime(ThreadHandle: HANDLE, CycleTime: PULONG64) -> BOOL;
     pub fn QueryThreadpoolStackInformation(
         ptpp: PTP_POOL, ptpsi: PTP_POOL_STACK_INFORMATION,
@@ -1024,26 +959,12 @@ extern "system" {
         hNamedPipe: HANDLE, lpMode: LPDWORD, lpMaxCollectionCount: LPDWORD,
         lpCollectDataTimeout: LPDWORD,
     ) -> BOOL;
-    pub fn SetPriorityClass(hProcess: HANDLE, dwPriorityClass: DWORD) -> BOOL;
-    pub fn SetProcessAffinityUpdateMode(hProcess: HANDLE, dwFlags: DWORD) -> BOOL;
-    pub fn SetProcessInformation(
-        hProcess: HANDLE, ProcessInformationClass: PROCESS_INFORMATION_CLASS,
-        ProcessInformation: LPVOID, ProcessInformationSize: DWORD,
-    ) -> BOOL;
-    pub fn SetProcessMitigationPolicy(
-        MitigationPolicy: PROCESS_MITIGATION_POLICY, lpBuffer: PVOID, dwLength: SIZE_T,
-    ) -> BOOL;
     pub fn SetProcessPreferredUILanguages(
         dwFlags: DWORD, pwszLanguagesBuffer: PCZZWSTR, pulNumLanguages: PULONG,
     ) -> BOOL;
-    pub fn SetProcessPriorityBoost(hProcess: HANDLE, bDisablePriorityBoost: BOOL) -> BOOL;
-    pub fn SetProcessShutdownParameters(dwLevel: DWORD, dwFlags: DWORD) -> BOOL;
     pub fn SetProcessWorkingSetSizeEx(
         hProcess: HANDLE, dwMinimumWorkingSetSize: SIZE_T, dwMaximumWorkingSetSize: SIZE_T,
         Flags: DWORD,
-    ) -> BOOL;
-    pub fn SetProtectedPolicy(
-        PolicyGuid: LPCGUID, PolicyValue: ULONG_PTR, OldPolicyValue: PULONG_PTR,
     ) -> BOOL;
     pub fn SetStdHandle(nStdHandle: DWORD, hHandle: HANDLE) -> BOOL;
     pub fn SetStdHandleEx(nStdHandle: DWORD, hHandle: HANDLE, phPrevValue: PHANDLE) -> BOOL;
@@ -1052,25 +973,14 @@ extern "system" {
     ) -> BOOL;
     pub fn SetSystemTime(lpSystemTime: *const SYSTEMTIME) -> BOOL;
     pub fn SetSystemTimeAdjustment(dwTimeAdjustment: DWORD, bTimeAdjustmentDisabled: BOOL) -> BOOL;
-    pub fn SetThreadContext(hThread: HANDLE, lpContext: *const CONTEXT) -> BOOL;
     pub fn SetThreadGroupAffinity(
         hThread: HANDLE, GroupAffinity: *const GROUP_AFFINITY,
         PreviousGroupAffinity: PGROUP_AFFINITY,
     ) -> BOOL;
-    pub fn SetThreadIdealProcessor(hThread: HANDLE, dwIdealProcessor: DWORD) -> DWORD;
-    pub fn SetThreadIdealProcessorEx(
-        hThread: HANDLE, lpIdealProcessor: PPROCESSOR_NUMBER,
-        lpPreviousIdealProcessor: PPROCESSOR_NUMBER,
-    ) -> BOOL;
-    pub fn SetThreadInformation(
-        hThread: HANDLE, ThreadInformationClass: THREAD_INFORMATION_CLASS,
-        ThreadInformation: LPVOID, ThreadInformationSize: DWORD,
-    );
     pub fn SetThreadLocale(Locale: LCID) -> BOOL;
     pub fn SetThreadPreferredUILanguages(
         dwFlags: DWORD, pwszLanguagesBuffer: PCZZWSTR, pulNumLanguages: PULONG,
     ) -> BOOL;
-    pub fn SetThreadStackGuarantee(StackSizeInBytes: PULONG) -> BOOL;
     pub fn SetThreadUILanguage(LangId: LANGID) -> LANGID;
     pub fn SetThreadpoolStackInformation(
         ptpp: PTP_POOL, ptpsi: PTP_POOL_STACK_INFORMATION,
@@ -1103,10 +1013,6 @@ extern "system" {
     pub fn TerminateJobObject(hJob: HANDLE, uExitCode: UINT) -> BOOL;
     pub fn Thread32First(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
     pub fn Thread32Next(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
-    pub fn TlsAlloc() -> DWORD;
-    pub fn TlsFree(dwTlsIndex: DWORD) -> BOOL;
-    pub fn TlsGetValue(dwTlsIndex: DWORD) -> LPVOID;
-    pub fn TlsSetValue(dwTlsIndex: DWORD, lpTlsValue: LPVOID) -> BOOL;
     pub fn Toolhelp32ReadProcessMemory(th32ProcessID: DWORD, lpBaseAddress: LPCVOID,
         lpBuffer: LPVOID, cbRead: SIZE_T, lpNumberOfBytesRead: *mut SIZE_T
     ) -> BOOL;
@@ -1129,10 +1035,6 @@ extern "system" {
     pub fn UnregisterBadMemoryNotification(RegistrationHandle: PVOID) -> BOOL;
     pub fn UnregisterWaitEx(WaitHandle: HANDLE, CompletionEvent: HANDLE) -> BOOL;
     // pub fn UnregisterWaitUntilOOBECompleted();
-    pub fn UpdateProcThreadAttribute(
-        lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST, dwFlags: DWORD, Attribute: DWORD_PTR,
-        lpValue: PVOID, cbSize: SIZE_T, lpPreviousValue: PVOID, lpReturnSize: PSIZE_T,
-    ) -> BOOL;
     pub fn VerLanguageNameA(wLang: DWORD, szLang: LPSTR, cchLang: DWORD) -> DWORD;
     pub fn VerLanguageNameW(wLang: DWORD, szLang: LPWSTR, cchLang: DWORD) -> DWORD;
     pub fn VerSetConditionMask(

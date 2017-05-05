@@ -132,7 +132,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("olectl", &["winerror", "winnt"], &[]),
     ("pdh", &["basetsd", "guiddef", "minwindef", "windef", "winnt", "wtypesbase"], &["pdh"]),
     ("processsnapshot", &["minwindef"], &[]),
-    ("processthreadsapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
+    ("processthreadsapi", &["basetsd", "guiddef", "minwinbase", "minwindef", "winnt"], &["advapi32", "kernel32"]),
     ("propidl", &["minwindef", "wtypes"], &[]),
     ("propkeydef", &["guiddef", "wtypes"], &[]),
     ("propsys", &["minwindef", "propidl", "propkeydef", "unknwnbase", "winnt", "wtypes"], &[]),
