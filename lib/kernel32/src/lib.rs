@@ -5,7 +5,6 @@
 extern crate winapi;
 use winapi::*;
 extern "system" {
-    pub fn AddDllDirectory(NewDirectory: PCWSTR) -> DLL_DIRECTORY_COOKIE;
     // pub fn AddLocalAlternateComputerNameA();
     // pub fn AddLocalAlternateComputerNameW();
     pub fn AddSIDToBoundaryDescriptor(BoundaryDescriptor: *mut HANDLE, RequiredSid: PSID) -> BOOL;
@@ -162,7 +161,6 @@ extern "system" {
         lpOutBuffer: LPVOID, nOutBufferSize: DWORD, lpBytesReturned: LPDWORD,
         lpOverlapped: LPOVERLAPPED,
     ) -> BOOL;
-    pub fn DisableThreadLibraryCalls(hLibModule: HMODULE) -> BOOL;
     pub fn DisassociateCurrentThreadFromCallback(pci: PTP_CALLBACK_INSTANCE);
     pub fn DisconnectNamedPipe(hNamedPipe: HANDLE) -> BOOL;
     pub fn DnsHostnameToComputerNameExW(
@@ -210,33 +208,6 @@ extern "system" {
     pub fn EnumLanguageGroupLocalesW(
         lpLangGroupLocaleEnumProc: LANGGROUPLOCALE_ENUMPROCW, LanguageGroup: LGRPID, dwFlags: DWORD,
         lParam: LONG_PTR,
-    ) -> BOOL;
-    pub fn EnumResourceLanguagesExA(
-        hModule: HMODULE, lpType: LPCSTR, lpName: LPCSTR, lpEnumFunc: ENUMRESLANGPROCA,
-        lParam: LONG_PTR, dwFlags: DWORD, LangId: LANGID,
-    ) -> BOOL;
-    pub fn EnumResourceLanguagesExW(
-        hModule: HMODULE, lpType: LPCWSTR, lpName: LPCWSTR, lpEnumFunc: ENUMRESLANGPROCW,
-        lParam: LONG_PTR, dwFlags: DWORD, LangId: LANGID,
-    ) -> BOOL;
-    pub fn EnumResourceNamesExA(
-        hModule: HMODULE, lpType: LPCSTR, lpEnumFunc: ENUMRESNAMEPROCA, lParam: LONG_PTR,
-        dwFlags: DWORD, LangId: LANGID,
-    ) -> BOOL;
-    pub fn EnumResourceNamesExW(
-        hModule: HMODULE, lpType: LPCWSTR, lpEnumFunc: ENUMRESNAMEPROCW, lParam: LONG_PTR,
-        dwFlags: DWORD, LangId: LANGID,
-    ) -> BOOL;
-    pub fn EnumResourceNamesW(
-        hModule: HMODULE, lpType: LPCWSTR, lpEnumFunc: ENUMRESNAMEPROCW, lParam: LONG_PTR,
-    ) -> BOOL;
-    pub fn EnumResourceTypesExA(
-        hModule: HMODULE, lpEnumFunc: ENUMRESTYPEPROCA, lParam: LONG_PTR, dwFlags: DWORD,
-        LangId: LANGID,
-    ) -> BOOL;
-    pub fn EnumResourceTypesExW(
-        hModule: HMODULE, lpEnumFunc: ENUMRESTYPEPROCW, lParam: LONG_PTR, dwFlags: DWORD,
-        LangId: LANGID,
     ) -> BOOL;
     pub fn EnumSystemCodePagesA(lpCodePageEnumProc: CODEPAGE_ENUMPROCA, dwFlags: DWORD) -> BOOL;
     pub fn EnumSystemCodePagesW(lpCodePageEnumProc: CODEPAGE_ENUMPROCW, dwFlags: DWORD) -> BOOL;
@@ -291,14 +262,6 @@ extern "system" {
         lpVersionInformation: LPNLSVERSIONINFO, lpReserved: LPVOID, sortHandle: LPARAM,
     ) -> c_int;
     // pub fn FindPackagesByPackageFamily();
-    pub fn FindResourceExW(
-        hModule: HMODULE, lpName: LPCWSTR, lpType: LPCWSTR, wLanguage: WORD,
-    ) -> HRSRC;
-    pub fn FindResourceW(hModule: HMODULE, lpName: LPCWSTR, lpType: LPCWSTR) -> HRSRC;
-    pub fn FindStringOrdinal(
-        dwFindStringOrdinalFlags: DWORD, lpStringSource: LPCWSTR, cchSource: c_int,
-        lpStringValue: LPCWSTR, cchValue: c_int, bIgnoreCase: BOOL,
-    ) -> c_int;
     pub fn FlsAlloc(lpCallback: PFLS_CALLBACK_FUNCTION) -> DWORD;
     pub fn FlsFree(dwFlsIndex: DWORD) -> BOOL;
     pub fn FlsGetValue(dwFlsIndex: DWORD) -> PVOID;
@@ -315,10 +278,7 @@ extern "system" {
     // pub fn FormatApplicationUserModelId();
     pub fn FreeEnvironmentStringsA(penv: LPCH) -> BOOL;
     pub fn FreeEnvironmentStringsW(penv: LPWCH) -> BOOL;
-    pub fn FreeLibrary(hLibModule: HMODULE) -> BOOL;
-    pub fn FreeLibraryAndExitThread(hLibModule: HMODULE, dwExitCode: DWORD);
     pub fn FreeLibraryWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, module: HMODULE);
-    pub fn FreeResource(hResData: HGLOBAL) -> BOOL;
     pub fn FreeUserPhysicalPages(
         hProcess: HANDLE, NumberOfPages: PULONG_PTR, PageArray: PULONG_PTR,
     ) -> BOOL;
@@ -437,12 +397,6 @@ extern "system" {
         ReturnedLength: PDWORD,
     ) -> BOOL;
     pub fn GetMemoryErrorHandlingCapabilities(Capabilities: PULONG) -> BOOL;
-    pub fn GetModuleFileNameA(
-        hModule: HMODULE, lpFilename: LPSTR, nSize: DWORD,
-    ) -> DWORD;
-    pub fn GetModuleFileNameW(
-        hModule: HMODULE, lpFilename: LPWSTR, nSize: DWORD,
-    ) -> DWORD;
     pub fn GetNLSVersion(
         Function: NLS_FUNCTION, Locale: LCID, lpVersionInformation: LPNLSVERSIONINFO,
     ) -> BOOL;
@@ -496,7 +450,6 @@ extern "system" {
     // pub fn GetPackagesByPackageFamily();
     pub fn GetPhysicallyInstalledSystemMemory(TotalMemoryInKilobytes: PULONGLONG) -> BOOL;
     pub fn GetPriorityClass(hProcess: HANDLE) -> DWORD;
-    pub fn GetProcAddress(hModule: HMODULE, lpProcName: LPCSTR) -> FARPROC;
     pub fn GetProcessGroupAffinity(
         hProcess: HANDLE, GroupCount: PUSHORT, GroupArray: PUSHORT,
     ) -> BOOL;
@@ -806,16 +759,10 @@ extern "system" {
         pci: PTP_CALLBACK_INSTANCE, pcs: PCRITICAL_SECTION,
     );
     // pub fn LoadAppInitDlls();
-    pub fn LoadLibraryA(lpFileName: LPCSTR) -> HMODULE;
-    pub fn LoadLibraryExA(lpLibFileName: LPCSTR, hFile: HANDLE, dwFlags: DWORD) -> HMODULE;
-    pub fn LoadLibraryExW(lpLibFileName: LPCWSTR, hFile: HANDLE, dwFlags: DWORD) -> HMODULE;
-    pub fn LoadLibraryW(lpFileName: LPCWSTR) -> HMODULE;
-    pub fn LoadResource(hModule: HMODULE, hResInfo: HRSRC) -> HGLOBAL;
     // pub fn LoadStringBaseExW();
     // pub fn LoadStringBaseW();
     pub fn LocalFlags(hMem: HLOCAL) -> UINT;
     pub fn LocaleNameToLCID(lpName: LPCWSTR, dwFlags: DWORD) -> LCID;
-    pub fn LockResource(hResData: HGLOBAL) -> LPVOID;
     pub fn MapUserPhysicalPages(
         VirtualAddress: PVOID, NumberOfPages: ULONG_PTR, PageArray: PULONG_PTR,
     ) -> BOOL;
@@ -956,7 +903,6 @@ extern "system" {
     pub fn ReleaseSemaphoreWhenCallbackReturns(
         pci: PTP_CALLBACK_INSTANCE, sem: HANDLE, crel: DWORD,
     );
-    pub fn RemoveDllDirectory(Cookie: DLL_DIRECTORY_COOKIE) -> BOOL;
     // pub fn RemoveLocalAlternateComputerNameA();
     // pub fn RemoveLocalAlternateComputerNameW();
     pub fn ResetWriteWatch(lpBaseAddress: LPVOID, dwRegionSize: SIZE_T) -> UINT;
@@ -1054,7 +1000,6 @@ extern "system" {
     // pub fn SetConsoleCursor();
     pub fn SetCurrentDirectoryA(lpPathName: LPCSTR) -> BOOL;
     pub fn SetCurrentDirectoryW(lpPathName: LPCWSTR) -> BOOL;
-    pub fn SetDefaultDllDirectories(DirectoryFlags: DWORD) -> BOOL;
     pub fn SetDynamicTimeZoneInformation(
         lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
     ) -> BOOL;
@@ -1144,7 +1089,6 @@ extern "system" {
     ) -> BOOL;
     pub fn SetTimeZoneInformation(lpTimeZoneInformation: *const TIME_ZONE_INFORMATION) -> BOOL;
     pub fn SetUserGeoID(GeoId: GEOID) -> BOOL;
-    pub fn SizeofResource(hModule: HMODULE, hResInfo: HRSRC) -> DWORD;
     pub fn StartThreadpoolIo(pio: PTP_IO);
     pub fn SubmitThreadpoolWork(pwk: PTP_WORK);
     pub fn SystemTimeToFileTime(lpSystemTime: *const SYSTEMTIME, lpFileTime: LPFILETIME) -> BOOL;

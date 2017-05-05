@@ -108,7 +108,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("heapapi", &["basetsd", "minwindef"], &[]),
     ("http", &["guiddef", "minwindef", "sspi", "winnt", "winsock2"], &[]),
     ("imm", &[], &[]),
-    ("libloaderapi", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
+    ("libloaderapi", &["basetsd", "minwindef", "winnt"], &["kernel32", "user32"]),
     ("lmaccess", &["lmcons", "minwindef", "winnt"], &[]),
     ("lmdfs", &["guiddef", "minwindef", "winnt"], &[]),
     ("lmerrlog", &["minwindef", "winnt"], &[]),
