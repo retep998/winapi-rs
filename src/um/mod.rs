@@ -68,6 +68,7 @@ pub mod gl;
 #[cfg(feature = "mscat")] pub mod mscat;
 #[cfg(feature = "mssip")] pub mod mssip;
 #[cfg(feature = "ncrypt")] pub mod ncrypt;
+#[cfg(feature = "ntsecapi")] pub mod ntsecapi;
 #[cfg(feature = "oaidl")] pub mod oaidl;
 #[cfg(feature = "objbase")] pub mod objbase;
 #[cfg(feature = "objidl")] pub mod objidl;
