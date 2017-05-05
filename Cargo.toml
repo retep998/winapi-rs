@@ -190,6 +190,7 @@ winreg = []
 winscard = []
 winsmcrd = []
 winsock2 = []
+winsvc = []
 winuser = []
 xinput = []
 #vc
