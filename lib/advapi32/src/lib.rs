@@ -67,42 +67,6 @@ extern "system" {
     // pub fn ConvertStringSidToSidW();
     // pub fn CreateCodeAuthzLevel();
     // pub fn CreateTraceInstanceId();
-    pub fn CredDeleteA(TargetName: LPCSTR, Type: DWORD, Flags: DWORD) -> BOOL;
-    pub fn CredDeleteW(TargetName: LPCWSTR, Type: DWORD, Flags: DWORD) -> BOOL;
-    // pub fn CredEnumerateA();
-    // pub fn CredEnumerateW();
-    // pub fn CredFindBestCredentialA();
-    // pub fn CredFindBestCredentialW();
-    pub fn CredFree(Buffer: PVOID);
-    // pub fn CredGetSessionTypes();
-    // pub fn CredGetTargetInfoA();
-    // pub fn CredGetTargetInfoW();
-    // pub fn CredIsMarshaledCredentialA();
-    // pub fn CredIsMarshaledCredentialW();
-    // pub fn CredIsProtectedA();
-    // pub fn CredIsProtectedW();
-    // pub fn CredMarshalCredentialA();
-    // pub fn CredMarshalCredentialW();
-    // pub fn CredProtectA();
-    // pub fn CredProtectW();
-    pub fn CredReadA(
-        TargetName: LPCSTR, Type: DWORD, Flags: DWORD, Credential: *mut PCREDENTIALA,
-    ) -> BOOL;
-    // pub fn CredReadDomainCredentialsA();
-    // pub fn CredReadDomainCredentialsW();
-    pub fn CredReadW(
-        TargetName: LPCWSTR, Type: DWORD, Flags: DWORD, Credential: *mut PCREDENTIALW,
-    ) -> BOOL;
-    // pub fn CredRenameA();
-    // pub fn CredRenameW();
-    // pub fn CredUnmarshalCredentialA();
-    // pub fn CredUnmarshalCredentialW();
-    // pub fn CredUnprotectA();
-    // pub fn CredUnprotectW();
-    pub fn CredWriteA(Credential: PCREDENTIALA, Flags: DWORD) -> BOOL;
-    // pub fn CredWriteDomainCredentialsA();
-    // pub fn CredWriteDomainCredentialsW();
-    pub fn CredWriteW(Credential: PCREDENTIALW, Flags: DWORD) -> BOOL;
     pub fn CryptAcquireContextA(
         phProv: *mut HCRYPTPROV, szContainer: LPCSTR, szProvider: LPCSTR, dwProvType: DWORD,
         dwFlags: DWORD,
