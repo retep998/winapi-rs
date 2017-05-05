@@ -100,6 +100,7 @@ pub mod gl;
 #[cfg(feature = "sqlext")] pub mod sqlext;
 #[cfg(feature = "sqltypes")] pub mod sqltypes;
 #[cfg(feature = "sqlucode")] pub mod sqlucode;
+#[cfg(feature = "sspi")] pub mod sspi;
 #[cfg(feature = "strmif")] pub mod strmif;
 #[cfg(feature = "subauth")] pub mod subauth;
 #[cfg(feature = "synchapi")] pub mod synchapi;
