@@ -86,6 +86,7 @@ pub mod gl;
 #[cfg(feature = "setupapi")] pub mod setupapi;
 #[cfg(feature = "shellapi")] pub mod shellapi;
 #[cfg(feature = "spapidef")] pub mod spapidef;
+#[cfg(feature = "sspi")] pub mod sspi;
 #[cfg(feature = "strmif")] pub mod strmif;
 #[cfg(feature = "subauth")] pub mod subauth;
 #[cfg(feature = "synchapi")] pub mod synchapi;
