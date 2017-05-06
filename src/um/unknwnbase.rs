@@ -42,3 +42,14 @@ interface IClassFactory(IClassFactoryVtbl): IUnknown(IUnknownVtbl) {
         fLock: BOOL,
     ) -> HRESULT,
 }}
+RIDL!{#[uuid(0x00000100, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IEnumUnknown(IEnumUnknownVtbl): IUnknown(IUnknownVtbl) {
+    fn Next( 
+        celt: ULONG,
+        rgelt: *mut *mut IUnknown,
+        pceltFetched: *mut ULONG
+    ) -> HRESULT,
+    fn Skip(celt: ULONG) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(ppenum: *mut *mut IEnumUnknown) -> HRESULT
+}}
