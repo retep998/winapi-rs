@@ -101,6 +101,7 @@ pub mod gl;
 #[cfg(feature = "sqltypes")] pub mod sqltypes;
 #[cfg(feature = "sqlucode")] pub mod sqlucode;
 #[cfg(feature = "strmif")] pub mod strmif;
+#[cfg(feature = "subauth")] pub mod subauth;
 #[cfg(feature = "synchapi")] pub mod synchapi;
 #[cfg(feature = "unknwnbase")] pub mod unknwnbase;
 #[cfg(feature = "urlhist")] pub mod urlhist;

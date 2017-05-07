@@ -154,6 +154,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("sqltypes", &["basetsd", "guiddef", "windef"], &[]),
     ("sqlucode", &["sqltypes"], &[]),
     ("strmif", &["winnt"], &[]),
+    ("subauth", &["minwindef", "winnt"], &[]),
     ("synchapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32", "synchronization"]),
     ("unknwnbase", &["guiddef", "minwindef", "winnt"], &[]),
     ("urlhist", &["docobj", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
