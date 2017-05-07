@@ -11,6 +11,8 @@ use std::fs::{File, read_dir};
 use std::io::{self, Read, Write};
 use std::path::Path;
 
+const TO_IGNORE: &'static [&'static str] = &["src/um/sspi.rs"];
+
 fn get_between_quotes(s: &str) -> &str {
     s.split('"').skip(1).next().unwrap_or("")
 }
@@ -38,6 +40,11 @@ fn check_if_in_build<P: Debug>(
     false
 }
 
+fn should_be_ignored(path: &Path) -> bool {
+    let path_str = &path.to_str().unwrap();
+    TO_IGNORE.iter().find(|x| *x == path_str).is_some()
+}
+
 fn check_file_deps<P: AsRef<Path>>(
     p: P,
     files_deps: &mut HashMap<String, Vec<String>>,
@@ -45,6 +52,9 @@ fn check_file_deps<P: AsRef<Path>>(
     level: u32
 ) {
     let r_p = p.as_ref();
+    if should_be_ignored(&r_p) {
+        return
+    }
     let filename = if level < 2 {
         r_p.file_name().unwrap().to_str().unwrap().to_owned()
     } else {
@@ -54,8 +64,7 @@ fn check_file_deps<P: AsRef<Path>>(
     };
     let mut found: Vec<String> = Vec::new();
     {
-        let entry = files_deps.get_mut(&filename);
-        if let Some(entries) = entry {
+        if let Some(entries) = files_deps.get_mut(&filename) {
             let file_content = read_file(r_p);
             for line in file_content.lines() {
                 if !line.starts_with("use ") {

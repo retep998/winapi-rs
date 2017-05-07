@@ -13,16 +13,16 @@ use shared::dxgiformat::DXGI_FORMAT;
 use shared::guiddef::{CLSID, REFCLSID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT};
 use um::d2d1::{
-    D2D1_SIZE_U, D2D1_RECT_F, D2D1_POINT_2F, D2D1_EXTEND_MODE, D2D1_CAP_STYLE,
-    D2D1_LINE_JOIN, D2D1_DASH_STYLE, D2D1_ANTIALIAS_MODE, D2D1_MATRIX_3X2_F,
-    D2D1_TEXT_ANTIALIAS_MODE, D2D1_TAG, D2D1_DEBUG_LEVEL, D2D1_COLOR_F,
-    D2D1_GRADIENT_STOP, D2D1_BRUSH_PROPERTIES, ID2D1Geometry, ID2D1Brush, ID2D1BrushVtbl,
-    ID2D1Resource, ID2D1ResourceVtbl, ID2D1StrokeStyle, ID2D1StrokeStyleVtbl,
-    ID2D1Bitmap, ID2D1BitmapVtbl, ID2D1Mesh, ID2D1Image, ID2D1ImageVtbl, ID2D1Layer,
-    ID2D1BitmapBrush, ID2D1BitmapBrushVtbl, ID2D1PathGeometry, ID2D1PathGeometryVtbl,
-    ID2D1GradientStopCollection, ID2D1GradientStopCollectionVtbl, ID2D1DrawingStateBlock,
-    ID2D1DrawingStateBlockVtbl, ID2D1RenderTarget, ID2D1RenderTargetVtbl, ID2D1Factory,
-    ID2D1FactoryVtbl
+    D2D1_ANTIALIAS_MODE, D2D1_BRUSH_PROPERTIES, D2D1_CAP_STYLE, D2D1_COLOR_F,
+    D2D1_DASH_STYLE, D2D1_DEBUG_LEVEL, D2D1_EXTEND_MODE, D2D1_GRADIENT_STOP,
+    D2D1_LINE_JOIN, D2D1_MATRIX_3X2_F, D2D1_POINT_2F, D2D1_RECT_F, D2D1_SIZE_U,
+    D2D1_TAG, D2D1_TEXT_ANTIALIAS_MODE, ID2D1Bitmap, ID2D1BitmapBrush,
+    ID2D1BitmapBrushVtbl, ID2D1BitmapVtbl, ID2D1Brush, ID2D1BrushVtbl,
+    ID2D1DrawingStateBlock, ID2D1DrawingStateBlockVtbl, ID2D1Factory, ID2D1FactoryVtbl,
+    ID2D1Geometry, ID2D1GradientStopCollection, ID2D1GradientStopCollectionVtbl,
+    ID2D1Image, ID2D1ImageVtbl, ID2D1Layer, ID2D1Mesh, ID2D1PathGeometry,
+    ID2D1PathGeometryVtbl, ID2D1RenderTarget, ID2D1RenderTargetVtbl, ID2D1Resource,
+    ID2D1ResourceVtbl, ID2D1StrokeStyle, ID2D1StrokeStyleVtbl
 };
 use um::d2d1effectauthor::D2D1_PROPERTY_BINDING;
 use um::d2dbasetypes::D2D_SIZE_F;
