@@ -153,6 +153,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("urlmon", &["minwindef", "unknwnbase", "winnt"], &[]),
     ("usbspec", &["basetsd", "minwindef"], &[]),
     ("vsserror", &["winnt"], &[]),
+    ("werapi", &["minwindef", "winnt"], &["kernel32"]),
     ("winbase", &["basetsd", "cfgmgr32", "fileapi", "guiddef", "libloaderapi", "minwinbase", "minwindef", "processthreadsapi", "vadefs", "windef", "winnt"], &["kernel32"]),
     ("wincodec", &["basetsd", "d2d1", "d2d1_1", "dcommon", "dxgiformat", "dxgitype", "guiddef", "minwindef", "ntdef", "objidlbase", "ocidl", "propidl", "unknwnbase", "windef", "winerror", "winnt"], &[]),
     ("wincon", &["minwinbase", "minwindef", "windef", "wingdi", "winnt"], &["kernel32"]),
