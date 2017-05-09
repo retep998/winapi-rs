@@ -3,11 +3,13 @@
 * Never get definitions from MinGW headers or MSDN. Always stick to the Windows SDK headers, in particular the latest Windows 10 SDK.
 * Definitions which depend on whether `UNICODE` is defined should not be included. It is the user's responsibility to explicitly choose between `W` and `A` functions (and they should always choose `W`).
 
-## Line length
+## Newlines and indentation
 
 * The maximum line length for `winapi-rs` is 99, and is strictly enforced.
 * Avoid line breaks when possible, but if you cannot make it fit, add line breaks as late as possible.
 * When breaking on binary operators, put the operator at the beginning of the new line.
+* Do not use aligned indentation. Indentation should always be block indentation.
+* Always use spaces for indentation.
 
 ## Imports
 
@@ -27,7 +29,7 @@ use um::d3dcommon::{
 
 ## Extern functions
 
-* First parameter is the 32-bit calling convention.
+* The calling convention specified should be the one for 32bit. Specify `system` for stdcall and `C` for cdecl (and `fastcall` for those couple of fastcall functions out there).
 * One parameter per line.
 
 ```Rust
@@ -98,6 +100,34 @@ STRUCT!{struct GROUP_AFFINITY {
 pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
 ```
 
+## Unions
+
+* `UNION!` is being deprecated in favor of `UNION2!` in order to more closely align with the new untagged union feature.
+
+```C
+typedef union {
+    USN_RECORD_COMMON_HEADER Header;
+    USN_RECORD_V2 V2;
+    USN_RECORD_V3 V3;
+    USN_RECORD_V4 V4;
+} USN_RECORD_UNION, *PUSN_RECORD_UNION;
+```
+```Rust
+UNION2!{union USN_RECORD_UNION {
+    [u64; 10],
+    Header Header_mut: USN_RECORD_COMMON_HEADER,
+    V2 V2_mut: USN_RECORD_V2,
+    V3 V3_mut: USN_RECORD_V3,
+    V4 V4_mut: USN_RECORD_V4,
+}}
+pub type PUSN_RECORD_UNION = *mut USN_RECORD_UNION;
+```
+
+## Anonymous unions and structs
+
+* If the type `FOO` contains a single anonymous struct or union, give the anonymous struct or union a name of `FOO_s` or `FOO_u` respectively, and the field a name of `s` or `u` respectively.
+* If the type `FOO` contains multiple anonymous structs or unions, append a number, such as `s1: FOO_s1` `s2: FOO_s2` or `u1: FOO_u1` `u2: FOO_u2`.
+
 ## COM interfaces
 
 ```Rust
@@ -124,6 +154,13 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
 ## Organization of code
 
 * All definitions go into the source file that directly maps to the header the definition is from.
-** Stuff in `src/winrt` is special and has its own namespaced organization.
+    * Stuff in `src/winrt` is special and has its own namespaced organization.
 * Definitions are defined in the same order as they are in the original header.
 * The `lib` folder is legacy from 0.2 and will eventually disappear once all definitions have been moved to their correct locations.
+
+## Dealing with duplicates
+
+* Sometimes two headers will define the same thing.
+    * If the duplicated thing is a simple typedef or function definition or constant, then duplicate the definition.
+    * If the duplicated thing is a struct or COM interface or union, then choose one header to be the canonical source of truth for that definition and publicly re-export the thing from the other header.
+* Sometimes a COM interface will have two methods with identical names. If the two methods are both named `Foo`, then name them `Foo1` and `Foo2`.

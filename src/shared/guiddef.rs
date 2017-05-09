@@ -5,6 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! GUID definition
+// Done as of 10.0.14393.0
 use ctypes::{c_uchar, c_ulong, c_ushort};
 STRUCT!{struct GUID {
     Data1: c_ulong,
@@ -27,6 +28,8 @@ pub type REFGUID = *const GUID;
 pub type REFIID = *const IID;
 pub type REFCLSID = *const IID;
 pub type REFFMTID = *const IID;
+DEFINE_GUID!{IID_NULL,
+    0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
 #[inline]
 pub fn IsEqualGUID(g1: &GUID, g2: &GUID) -> bool {
     let a = unsafe { &*(g1 as *const _ as *const [u32; 4]) };

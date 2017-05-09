@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
-use shared::basetsd::UINT32;
+use shared::basetsd::{UINT32, UINT64};
 use shared::guiddef::{LPCGUID, REFIID};
 use shared::minwindef::{BYTE, DWORD, LPVOID};
 use shared::mmreg::WAVEFORMATEX;
@@ -55,6 +55,8 @@ DEFINE_GUID!{IID_IAudioClient,
     0x1CB9AD4C, 0xDBFA, 0x4c32, 0xB1, 0x78, 0xC2, 0xF5, 0x68, 0xA7, 0x03, 0xB2}
 DEFINE_GUID!{IID_IAudioRenderClient,
     0xF294ACFC, 0x3146, 0x4483, 0xA7, 0xBF, 0xAD, 0xDC, 0xA7, 0xC2, 0x60, 0xE2}
+DEFINE_GUID!{IID_IAudioCaptureClient,
+    0xc8adbd64, 0xe71e, 0x48a0, 0xa4, 0xde, 0x18, 0x5c, 0x39, 0x5c, 0xd3, 0x17}
 RIDL!{#[uuid(0x1cb9ad4c, 0xdbfa, 0x4c32, 0xb1, 0x78, 0xc2, 0xf5, 0x68, 0xa7, 0x03, 0xb2)]
 interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
     fn Initialize(
@@ -106,5 +108,21 @@ interface IAudioRenderClient(IAudioRenderClientVtbl): IUnknown(IUnknownVtbl) {
     fn ReleaseBuffer(
         NumFramesWritten: UINT32,
         dwFlags: DWORD,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0xc8adbd64, 0xe71e, 0x48a0, 0xa4, 0xde, 0x18, 0x5c, 0x39, 0x5c, 0xd3, 0x17)]
+interface IAudioCaptureClient(IAudioCaptureClientVtbl): IUnknown(IUnknownVtbl) {
+    fn GetBuffer(
+        ppData: *mut *mut BYTE,
+        pNumFramesToRead: *mut UINT32,
+        pdwFlags: *mut DWORD,
+        pu64DevicePosition: *mut UINT64,
+        pu64QPCPosition: *mut UINT64,
+    ) -> HRESULT,
+    fn ReleaseBuffer(
+        NumFramesRead: UINT32,
+    ) -> HRESULT,
+    fn GetNextPacketSize(
+        pNumFramesInNextPacket: *mut UINT32,
     ) -> HRESULT,
 }}
