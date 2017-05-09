@@ -74,6 +74,7 @@ pub mod gl;
 #[cfg(feature = "objidlbase")] pub mod objidlbase;
 #[cfg(feature = "ocidl")] pub mod ocidl;
 #[cfg(feature = "oleauto")] pub mod oleauto;
+#[cfg(feature = "olectl")] pub mod olectl;
 #[cfg(feature = "pdh")] pub mod pdh;
 #[cfg(feature = "processsnapshot")] pub mod processsnapshot;
 #[cfg(feature = "processthreadsapi")] pub mod processthreadsapi;
