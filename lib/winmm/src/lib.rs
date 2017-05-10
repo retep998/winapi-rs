@@ -122,4 +122,13 @@ extern "system" {
     pub fn midiInReset(hMidiIn: HMIDIIN) -> MMRESULT;
     pub fn midiInGetID(hmi: HMIDIIN, puDeviceID: LPUINT) -> MMRESULT;
     pub fn midiInMessage(deviceID: HMIDIIN, msg: UINT, dw1: DWORD_PTR, dw2: DWORD_PTR) -> MMRESULT;
+    pub fn mciExecute(pszCommand: LPCSTR) -> BOOL;
+    pub fn mciGetCreatorTask(IDDevice: MCIDEVICEID) -> MMRESULT;
+    pub fn mciGetDeviceID(lpszDevice: LPCTSTR) -> MCIDEVICEID;
+    pub fn mciGetDeviceIDFromElementID(dwElementID: DWORD, lpstrType: LPCTSTR) -> MCIDEVICEID;
+    pub fn mciGetErrorString(fdwError: DWORD, lpszErrorText: LPTSTR, cchErrorText: UINT) -> BOOL;
+    pub fn mciGetYieldProc(IDDevice: MCIDEVICEID, lpdwYieldData: LPDWORD) -> YIELDPROC;
+    pub fn mciSendCommand(IDDevice: MCIDEVICEID, uMsg: UINT, fdwCommand: DWORD_PTR, dwParam: DWORD_PTR) -> MCIERROR;
+    pub fn mciSendString(lpszCommand: LPCTSTR, lpszReturnString: LPTSTR, cchReturn: UINT, hwndCallback: HANDLE) -> MCIERROR;
+    pub fn mciSetYieldProc(IDDevice: MCIDEVICEID, yp: YIELDPROC, dwYieldData: DWORD) -> UINT;
 }
