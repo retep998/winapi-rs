@@ -738,6 +738,18 @@ extern "system" {
         cchReturn: UINT,
         hwndCallback: HANDLE
     ) -> MCIERROR;
+    pub fn mciSendStringA(
+        lpszCommand: LPCSTR,
+        lpszReturnString: LPTSTR,
+        cchReturn: UINT,
+        hwndCallback: HANDLE
+    ) -> MCIERROR;
+    pub fn mciSendStringW(
+        lpszCommand: LPCWSTR,
+        lpszReturnString: LPTSTR,
+        cchReturn: UINT,
+        hwndCallback: HANDLE
+    ) -> MCIERROR;
     pub fn mciSetYieldProc(
         IDDevice: MCIDEVICEID,
         yp: YIELDPROC,
