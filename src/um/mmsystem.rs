@@ -6,7 +6,7 @@
 // except according to those terms.
 //! MM procedure declarations, constant definitions and macros
 use shared::basetsd::{DWORD_PTR, UINT_PTR};
-use shared::minwindef::{BOOL, BYTE, DWORD, LPBYTE, LPDWORD, LPWORD, UINT, WORD};
+use shared::minwindef::{BOOL, BYTE, DWORD, HMODULE, LPBYTE, LPDWORD, LPWORD, UINT, WORD};
 use shared::mmreg::WAVEFORMATEX;
 use shared::ntdef::{LPCTSTR, LPTSTR};
 use um::imm::LPUINT;
