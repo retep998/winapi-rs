@@ -6,11 +6,11 @@
 // except according to those terms.
 //! MM procedure declarations, constant definitions and macros
 use shared::basetsd::{DWORD_PTR, UINT_PTR};
-use shared::minwindef::{BOOL, BYTE, DWORD, HMODULE, LPBYTE, LPDWORD, LPWORD, UINT, WORD};
+use shared::minwindef::{BOOL, BYTE, DWORD, HMODULE, LPBYTE, LPDWORD, LPWORD, PDWORD, UINT, WORD};
 use shared::mmreg::WAVEFORMATEX;
 use shared::ntdef::{LPCTSTR, LPTSTR};
 use um::imm::LPUINT;
-use um::winnt::{LPCSTR, LPCWSTR, LPSTR, LPWSTR, PVOID, WCHAR};
+use um::winnt::{HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PVOID, WCHAR};
 //109 (Win 7 SDK)
 pub type MMVERSION = UINT;
 pub type MMRESULT = UINT;
