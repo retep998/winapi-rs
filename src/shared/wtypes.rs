@@ -88,14 +88,14 @@ pub type wireBSTR = *mut FLAGGED_WORD_BLOB;
 pub type BSTR = *mut OLECHAR;
 pub type LPBSTR = *mut BSTR;
 pub type VARIANT_BOOL = c_short;
+UNION2!{union __MIDL_IWinTypes_0001 {
+    [usize; 1],
+    dwValue dwValue_mut: DWORD,
+    pwszName pwszName_mut: *mut wchar_t,
+}}
 STRUCT!{struct userCLIPFORMAT {
     fContext: LONG,
     u: __MIDL_IWinTypes_0001,
 }}
-STRUCT!{struct __MIDL_IWinTypes_0001 {
-    data0: usize,
-}}
-UNION!(__MIDL_IWinTypes_0001, data0, dwValue, dwValue_mut, DWORD);
-UNION!(__MIDL_IWinTypes_0001, data0, pwszName, pwszName_mut, *const wchar_t);
 pub type wireCLIPFORMAT = *const userCLIPFORMAT;
 pub type CLIPFORMAT = WORD;

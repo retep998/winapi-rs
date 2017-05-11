@@ -11,7 +11,7 @@ use shared::basetsd::{
 };
 use shared::guiddef::{GUID, LPCGUID};
 use shared::minwindef::{
-    ATOM, BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HWINSTA, LOWORD, LPARAM, LPBYTE, LPDWORD,
+    ATOM, BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HWINSTA, INT, LOWORD, LPARAM, LPBYTE, LPDWORD,
     LPVOID, LPWORD, LRESULT, PBYTE, PUINT, PULONG, TRUE, UCHAR, UINT, ULONG, USHORT, WORD, WPARAM,
 };
 use shared::windef::{
@@ -3870,8 +3870,25 @@ extern "system" {
         prcRect: *const RECT,
     ) -> BOOL;
 }
-
-
+pub const MNC_IGNORE: DWORD = 0;
+pub const MNC_CLOSE: DWORD = 1;
+pub const MNC_EXECUTE: DWORD = 2;
+pub const MNC_SELECT: DWORD = 3;
+STRUCT!{struct TPMPARAMS {
+    cbSize: UINT,
+    rcExclude: RECT,
+}}
+pub type LPTPMPARAMS = *mut TPMPARAMS;
+extern "system" {
+    pub fn TrackPopupMenuEx(
+        hMenu: HMENU,
+        uFlags: UINT,
+        x: INT,
+        y: INT,
+        hwnd: HWND,
+        lptpm: LPTPMPARAMS,
+    ) -> BOOL;
+}
 
 /******CUTOFF******/
 
@@ -5143,13 +5160,6 @@ pub const SC_MONITORPOWER: WPARAM = 0xF170;
 pub const SC_CONTEXTHELP: WPARAM = 0xF180;
 pub const SC_SEPARATOR: WPARAM = 0xF00F;
 // endif WINVER >= 0x0400
-
-STRUCT!{struct TPMPARAMS {
-    cbSize: UINT,
-    rcExclude: RECT,
-}}
-pub type LPTPMPARAMS = *mut TPMPARAMS;
-
 // Flags for TrackPopupMenu
 pub const TPM_LEFTBUTTON: UINT = 0x0000;
 pub const TPM_RIGHTBUTTON: UINT = 0x0002;
@@ -5249,4 +5259,10 @@ extern "system" {
         hInstance: HINSTANCE,
         lpIconName: LPCWSTR,
     ) -> HICON;
+    pub fn SetActiveWindow(
+        hWnd: HWND,
+    ) -> HWND;
+    pub fn SetForegroundWindow(
+        hWnd: HWND,
+    ) -> BOOL;
 }

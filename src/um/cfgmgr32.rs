@@ -645,16 +645,27 @@ STRUCT!{struct CM_NOTIFY_FILTER_DeviceHandle {
 STRUCT!{struct CM_NOTIFY_FILTER_DeviceInstance {
     InstanceId: [WCHAR; MAX_DEVICE_ID_LEN],
 }}
+#[cfg(target_arch = "x86")]
+UNION2!{union CM_NOTIFY_FILTER_u {
+    [u32; 100],
+    DeviceInterface DeviceInterface_mut: CM_NOTIFY_FILTER_DeviceInterface,
+    DeviceHandle DeviceHandle_mut: CM_NOTIFY_FILTER_DeviceHandle,
+    DeviceInstance DeviceInstance_mut: CM_NOTIFY_FILTER_DeviceInstance,
+}}
+#[cfg(target_arch = "x86_64")]
+UNION2!{union CM_NOTIFY_FILTER_u {
+    [u64; 50],
+    DeviceInterface DeviceInterface_mut: CM_NOTIFY_FILTER_DeviceInterface,
+    DeviceHandle DeviceHandle_mut: CM_NOTIFY_FILTER_DeviceHandle,
+    DeviceInstance DeviceInstance_mut: CM_NOTIFY_FILTER_DeviceInstance,
+}}
 STRUCT!{struct CM_NOTIFY_FILTER {
     cbSize: DWORD,
     Flags: DWORD,
     FilterType: CM_NOTIFY_FILTER_TYPE,
     Reserved: DWORD,
-    u: [BYTE; 400],
+    u: CM_NOTIFY_FILTER_u,
 }}
-UNION!{CM_NOTIFY_FILTER, u, DeviceInterface, DeviceInterface_mut, CM_NOTIFY_FILTER_DeviceInterface}
-UNION!{CM_NOTIFY_FILTER, u, DeviceHandle, DeviceHandle_mut, CM_NOTIFY_FILTER_DeviceHandle}
-UNION!{CM_NOTIFY_FILTER, u, DeviceInstance, DeviceInstance_mut, CM_NOTIFY_FILTER_DeviceInstance}
 pub type PCM_NOTIFY_FILTER = *mut CM_NOTIFY_FILTER;
 ENUM!{enum CM_NOTIFY_ACTION {
     CM_NOTIFY_ACTION_DEVICEINTERFACEARRIVAL = 0,
@@ -683,20 +694,17 @@ STRUCT!{struct CM_NOTIFY_EVENT_DATA_DeviceHandle {
 STRUCT!{struct CM_NOTIFY_EVENT_DATA_DeviceInstance {
     InstanceId: [WCHAR; ANYSIZE_ARRAY],
 }}
+UNION2!{union CM_NOTIFY_EVENT_DATA_u {
+    [u32; 7],
+    DeviceInterface DeviceInterface_mut: CM_NOTIFY_EVENT_DATA_DeviceInterface,
+    DeviceHandle DeviceHandle_mut: CM_NOTIFY_EVENT_DATA_DeviceHandle,
+    DeviceInstance DeviceInstance_mut: CM_NOTIFY_EVENT_DATA_DeviceInstance,
+}}
 STRUCT!{struct CM_NOTIFY_EVENT_DATA {
     FilterType: CM_NOTIFY_FILTER_TYPE,
     Reserved: DWORD,
-    u: [BYTE; 25],
+    u: CM_NOTIFY_EVENT_DATA_u,
 }}
-UNION!(
-    CM_NOTIFY_EVENT_DATA, u, DeviceInterface, DeviceInterface_mut,
-    CM_NOTIFY_EVENT_DATA_DeviceInterface
-);
-UNION!(CM_NOTIFY_EVENT_DATA, u, DeviceHandle, DeviceHandle_mut, CM_NOTIFY_EVENT_DATA_DeviceHandle);
-UNION!{
-    CM_NOTIFY_EVENT_DATA, u, DeviceInstance, DeviceInstance_mut,
-    CM_NOTIFY_EVENT_DATA_DeviceInstance
-}
 pub type PCM_NOTIFY_EVENT_DATA = *mut CM_NOTIFY_EVENT_DATA;
 FN!{stdcall PCM_NOTIFY_CALLBACK(
     hNotify: HCMNOTIFICATION,
