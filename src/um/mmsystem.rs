@@ -8,7 +8,7 @@
 use shared::basetsd::{DWORD_PTR, UINT_PTR};
 use shared::minwindef::{BOOL, BYTE, DWORD, HMODULE, LPBYTE, LPDWORD, LPWORD, PDWORD, UINT, WORD};
 use shared::mmreg::WAVEFORMATEX;
-use shared::ntdef::{LPCTSTR, LPTSTR};
+use shared::ntdef::LPCTSTR;
 use um::imm::LPUINT;
 use um::winnt::{HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PVOID, WCHAR};
 //109 (Win 7 SDK)
@@ -717,9 +717,14 @@ extern "system" {
         dwElementID: DWORD,
         lpstrType: LPCTSTR
     ) -> MCIDEVICEID;
-    pub fn mciGetErrorString(
+    pub fn mciGetErrorStringA(
         fdwError: DWORD,
-        lpszErrorText: LPTSTR,
+        lpszErrorText: LPSTR,
+        cchErrorText: UINT
+    ) -> BOOL;
+    pub fn mciGetErrorStringW(
+        fdwError: DWORD,
+        lpszErrorText: LPWSTR,
         cchErrorText: UINT
     ) -> BOOL;
     pub fn mciGetYieldProc(
@@ -732,21 +737,15 @@ extern "system" {
         fdwCommand: DWORD_PTR,
         dwParam: DWORD_PTR
     ) -> MCIERROR;
-    pub fn mciSendString(
-        lpszCommand: LPCTSTR,
-        lpszReturnString: LPTSTR,
-        cchReturn: UINT,
-        hwndCallback: HANDLE
-    ) -> MCIERROR;
     pub fn mciSendStringA(
         lpszCommand: LPCSTR,
-        lpszReturnString: LPTSTR,
+        lpszReturnString: LPSTR,
         cchReturn: UINT,
         hwndCallback: HANDLE
     ) -> MCIERROR;
     pub fn mciSendStringW(
         lpszCommand: LPCWSTR,
-        lpszReturnString: LPTSTR,
+        lpszReturnString: LPWSTR,
         cchReturn: UINT,
         hwndCallback: HANDLE
     ) -> MCIERROR;
