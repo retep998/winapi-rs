@@ -6,14 +6,10 @@ extern crate winapi;
 use winapi::*;
 extern "system" {
     // pub fn AccessCheck();
-    // pub fn AccessCheckAndAuditAlarmA();
     // pub fn AccessCheckAndAuditAlarmW();
     // pub fn AccessCheckByType();
-    // pub fn AccessCheckByTypeAndAuditAlarmA();
     // pub fn AccessCheckByTypeAndAuditAlarmW();
     // pub fn AccessCheckByTypeResultList();
-    // pub fn AccessCheckByTypeResultListAndAuditAlarmA();
-    // pub fn AccessCheckByTypeResultListAndAuditAlarmByHandleA();
     // pub fn AccessCheckByTypeResultListAndAuditAlarmByHandleW();
     // pub fn AccessCheckByTypeResultListAndAuditAlarmW();
     // pub fn AddAccessAllowedAce();
@@ -26,7 +22,6 @@ extern "system" {
     // pub fn AddAuditAccessAce();
     // pub fn AddAuditAccessAceEx();
     // pub fn AddAuditAccessObjectAce();
-    // pub fn AddConditionalAce();
     // pub fn AddMandatoryAce();
     // pub fn AddUsersToEncryptedFile();
     // pub fn AddUsersToEncryptedFileEx();
@@ -61,8 +56,6 @@ extern "system" {
     // pub fn AuditSetPerUserPolicy();
     // pub fn AuditSetSecurity();
     // pub fn AuditSetSystemPolicy();
-    // pub fn BackupEventLogA();
-    // pub fn BackupEventLogW();
     // pub fn BaseRegCloseKey();
     // pub fn BaseRegCreateKey();
     // pub fn BaseRegDeleteKeyEx();
@@ -98,11 +91,7 @@ extern "system" {
     // pub fn ChangeServiceConfigA();
     // pub fn ChangeServiceConfigW();
     // pub fn CheckTokenMembership();
-    // pub fn ClearEventLogA();
-    // pub fn ClearEventLogW();
     // pub fn CloseCodeAuthzLevel();
-    // pub fn CloseEncryptedFileRaw();
-    // pub fn CloseEventLog();
     pub fn CloseServiceHandle(hSCObject: SC_HANDLE) -> BOOL;
     // pub fn CloseThreadWaitChainSession();
     // pub fn CloseTrace();
@@ -144,8 +133,6 @@ extern "system" {
     // pub fn CreatePrivateObjectSecurityWithMultipleInheritance();
     // pub fn CreateProcessAsUserA();
     // pub fn CreateProcessAsUserW();
-    // pub fn CreateProcessWithLogonW();
-    // pub fn CreateProcessWithTokenW();
     // pub fn CreateRestrictedToken();
     pub fn CreateServiceA(
         hSCManager: SC_HANDLE, lpServiceName: LPCSTR, lpDisplayName: LPCSTR,
@@ -315,11 +302,8 @@ extern "system" {
         hHash: HCRYPTHASH, pbSignature: *const BYTE, dwSigLen: DWORD, hPubKey: HCRYPTKEY,
         szDescription: LPCWSTR, dwFlags: DWORD,
     ) -> BOOL;
-    // pub fn DecryptFileA();
-    // pub fn DecryptFileW();
     // pub fn DeleteAce();
     pub fn DeleteService(hService: SC_HANDLE) -> BOOL;
-    // pub fn DeregisterEventSource();
     // pub fn DestroyPrivateObjectSecurity();
     // pub fn DuplicateEncryptionInfoFile();
     // pub fn DuplicateToken();
@@ -348,8 +332,6 @@ extern "system" {
     // pub fn EnableTrace();
     // pub fn EnableTraceEx();
     // pub fn EnableTraceEx2();
-    // pub fn EncryptFileA();
-    // pub fn EncryptFileW();
     // pub fn EncryptedFileKeyInfo();
     // pub fn EncryptionDisable();
     // pub fn EnumDependentServicesA();
@@ -381,8 +363,6 @@ extern "system" {
     // pub fn EventWriteStartScenario();
     // pub fn EventWriteString();
     // pub fn EventWriteTransfer();
-    // pub fn FileEncryptionStatusA();
-    // pub fn FileEncryptionStatusW();
     // pub fn FindFirstFreeAce();
     // pub fn FlushEfsCache();
     // pub fn FlushTraceA();
@@ -398,16 +378,12 @@ extern "system" {
     // pub fn GetAclInformation();
     // pub fn GetAuditedPermissionsFromAclA();
     // pub fn GetAuditedPermissionsFromAclW();
-    pub fn GetCurrentHwProfileA(lpHwProfileInfo: LPHW_PROFILE_INFOA) -> BOOL;
-    pub fn GetCurrentHwProfileW(lpHwProfileInfo: LPHW_PROFILE_INFOW) -> BOOL;
     // pub fn GetDynamicTimeZoneInformationEffectiveYears();
     // pub fn GetEffectiveRightsFromAclA();
     // pub fn GetEffectiveRightsFromAclW();
     // pub fn GetEncryptedFileMetadata();
-    // pub fn GetEventLogInformation();
     // pub fn GetExplicitEntriesFromAclA();
     // pub fn GetExplicitEntriesFromAclW();
-    // pub fn GetFileSecurityA();
     // pub fn GetFileSecurityW();
     // pub fn GetInformationCodeAuthzLevelW();
     // pub fn GetInformationCodeAuthzPolicyW();
@@ -427,8 +403,6 @@ extern "system" {
     // pub fn GetNamedSecurityInfoExA();
     // pub fn GetNamedSecurityInfoExW();
     // pub fn GetNamedSecurityInfoW();
-    // pub fn GetNumberOfEventLogRecords();
-    // pub fn GetOldestEventLogRecord();
     // pub fn GetOverlappedAccessResults();
     // pub fn GetPrivateObjectSecurity();
     // pub fn GetSecurityDescriptorControl();
@@ -461,8 +435,6 @@ extern "system" {
     // pub fn GetTrusteeNameW();
     // pub fn GetTrusteeTypeA();
     // pub fn GetTrusteeTypeW();
-    pub fn GetUserNameA(lpBuffer: LPSTR, pcbBuffer: LPDWORD) -> BOOL;
-    pub fn GetUserNameW(lpBuffer: LPWSTR, pcbBuffer: LPDWORD) -> BOOL;
     // pub fn GetWindowsAccountDomainSid();
     // pub fn I_ScSetServiceBitsA();
     // pub fn I_ScSetServiceBitsW();
@@ -475,44 +447,13 @@ extern "system" {
     // pub fn InitializeSecurityDescriptor();
     // pub fn InitializeSid();
     // pub fn InstallApplication();
-    // pub fn IsTextUnicode();
     // pub fn IsTokenRestricted();
-    // pub fn IsTokenUntrusted();
     // pub fn IsValidAcl();
     // pub fn IsValidRelativeSecurityDescriptor();
     // pub fn IsValidSecurityDescriptor();
     // pub fn IsValidSid();
     // pub fn IsWellKnownSid();
     // pub fn LockServiceDatabase();
-    // pub fn LogonUserA();
-    // pub fn LogonUserExA();
-    // pub fn LogonUserExExW();
-    // pub fn LogonUserExW();
-    // pub fn LogonUserW();
-    pub fn LookupAccountNameA(
-        lpSystemName: LPCSTR, lpAccountName: LPCSTR, Sid: PSID, 
-        cbSid: LPDWORD, ReferencedDomainName: LPCSTR, peUse: PSID_NAME_USE,
-    ) -> BOOL;
-    pub fn LookupAccountNameW(
-        lpSystemName: LPCWSTR, lpAccountName: LPCWSTR, Sid: PSID, 
-        cbSid: LPDWORD, ReferencedDomainName: LPCWSTR, peUse: PSID_NAME_USE,
-    ) -> BOOL;
-    // pub fn LookupAccountSidA();
-    // pub fn LookupAccountSidW();
-    // pub fn LookupPrivilegeDisplayNameA();
-    // pub fn LookupPrivilegeDisplayNameW();
-    pub fn LookupPrivilegeNameA(
-        lpSystemName: LPCSTR, lpLuid: PLUID, lpName: LPSTR, cchName: LPDWORD,
-    ) -> BOOL;
-    pub fn LookupPrivilegeNameW(
-        lpSystemName: LPCWSTR, lpLuid: PLUID, lpName: LPWSTR, cchName: LPDWORD,
-    ) -> BOOL;
-    pub fn LookupPrivilegeValueA(
-        lpSystemName: LPCSTR, lpName: LPCSTR, lpLuid: PLUID,
-    ) -> BOOL;
-    pub fn LookupPrivilegeValueW(
-        lpSystemName: LPCWSTR, lpName: LPCWSTR, lpLuid: PLUID,
-    ) -> BOOL;
     // pub fn LookupSecurityDescriptorPartsA();
     // pub fn LookupSecurityDescriptorPartsW();
     // pub fn LsaAddAccountRights();
@@ -589,24 +530,13 @@ extern "system" {
     // pub fn MakeSelfRelativeSD();
     // pub fn MapGenericMask();
     // pub fn NotifyBootConfigStatus();
-    // pub fn NotifyChangeEventLog();
     // pub fn NotifyServiceStatusChange();
     // pub fn NotifyServiceStatusChangeA();
     // pub fn NotifyServiceStatusChangeW();
-    // pub fn ObjectCloseAuditAlarmA();
     // pub fn ObjectCloseAuditAlarmW();
-    // pub fn ObjectDeleteAuditAlarmA();
     // pub fn ObjectDeleteAuditAlarmW();
-    // pub fn ObjectOpenAuditAlarmA();
     // pub fn ObjectOpenAuditAlarmW();
-    // pub fn ObjectPrivilegeAuditAlarmA();
     // pub fn ObjectPrivilegeAuditAlarmW();
-    // pub fn OpenBackupEventLogA();
-    // pub fn OpenBackupEventLogW();
-    // pub fn OpenEncryptedFileRawA();
-    // pub fn OpenEncryptedFileRawW();
-    // pub fn OpenEventLogA();
-    // pub fn OpenEventLogW();
     pub fn OpenProcessToken(
         ProcessHandle: HANDLE, DesiredAccess: DWORD, TokenHandle: PHANDLE,
     ) -> BOOL;
@@ -626,8 +556,6 @@ extern "system" {
     // pub fn OpenThreadWaitChainSession();
     // pub fn OpenTraceA();
     // pub fn OpenTraceW();
-    // pub fn OperationEnd();
-    // pub fn OperationStart();
     // pub fn PerfAddCounters();
     // pub fn PerfCloseQueryHandle();
     // pub fn PerfCreateInstance();
@@ -658,7 +586,6 @@ extern "system" {
     // pub fn PerfStartProviderEx();
     // pub fn PerfStopProvider();
     // pub fn PrivilegeCheck();
-    // pub fn PrivilegedServiceAuditAlarmA();
     // pub fn PrivilegedServiceAuditAlarmW();
     // pub fn ProcessTrace();
     // pub fn QueryAllTracesA();
@@ -681,11 +608,6 @@ extern "system" {
     // pub fn QueryTraceA();
     // pub fn QueryTraceW();
     // pub fn QueryUsersOnEncryptedFile();
-    // pub fn ReadEncryptedFileRaw();
-    // pub fn ReadEventLogA();
-    // pub fn ReadEventLogW();
-    // pub fn RegisterEventSourceA();
-    // pub fn RegisterEventSourceW();
     pub fn RegisterServiceCtrlHandlerA(
         lpServiceName: LPCSTR, lpHandlerProc: LPHANDLER_FUNCTION,
     ) -> SERVICE_STATUS_HANDLE;
@@ -707,8 +629,6 @@ extern "system" {
     // pub fn RemoteRegQueryValueWrapper();
     // pub fn RemoveTraceCallback();
     // pub fn RemoveUsersFromEncryptedFile();
-    // pub fn ReportEventA();
-    // pub fn ReportEventW();
     // pub fn RevertToSelf();
     // pub fn SafeBaseRegGetKeySecurity();
     // pub fn SaferCloseLevel();
@@ -729,7 +649,6 @@ extern "system" {
     // pub fn SetEntriesInAclW();
     // pub fn SetEntriesInAuditListA();
     // pub fn SetEntriesInAuditListW();
-    // pub fn SetFileSecurityA();
     // pub fn SetFileSecurityW();
     // pub fn SetInformationCodeAuthzLevelW();
     // pub fn SetInformationCodeAuthzPolicyW();
@@ -825,5 +744,4 @@ extern "system" {
     // pub fn UsePinForEncryptedFilesA();
     // pub fn UsePinForEncryptedFilesW();
     // pub fn WaitServiceState();
-    // pub fn WriteEncryptedFileRaw();
 }
