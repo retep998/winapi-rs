@@ -15,7 +15,7 @@ use um::d2d1_1::{ID2D1DeviceContext, ID2D1DeviceContextVtbl};
 use um::d2d1_1::{ID2D1Device, ID2D1DeviceVtbl};
 use um::d2d1_1::{ID2D1Factory1, ID2D1Factory1Vtbl};
 use um::d2d1_1::{ID2D1CommandSink, ID2D1CommandSinkVtbl};
-use um::winnt::{HANDLE, HRESULT};
+use um::winnt::HRESULT;
 
 ENUM!{enum D2D1_RENDERING_PRIORITY {
     D2D1_RENDERING_PRIORITY_NORMAL = 0,
