@@ -65,8 +65,10 @@ fn check_import_sorting<P: AsRef<Path>>(
         }
         if current_import.is_some() {
             let line = line.trim();
-            if line.ends_with("};") {
+            if line.ends_with(";") || line.ends_with("}") {
                 if let Some(ref current_import) = current_import {
+                    let len = imports.len() - 1;
+                    imports[len].1.push(format!("{{{}}};", current_import.join(", ")));
                     {
                         let last = imports.last().unwrap();
                         check_inner_imports(s_path,
@@ -74,12 +76,14 @@ fn check_import_sorting<P: AsRef<Path>>(
                                             &last.1.join("::"),
                                             &current_import, errors);
                     }
-                    let len = imports.len() - 1;
-                    imports[len].1.push(format!("{{{}}};", current_import.join(", ")));
                 }
                 current_import = None;
             } else if let Some(ref mut current_import) = current_import {
-                current_import.push(line.replace(",", "").trim().to_owned());
+                let new_entries: Vec<String> = line.split(",")
+                                                   .map(|x| x.trim().to_owned())
+                                                   .filter(|x| !x.is_empty())
+                                                   .collect();
+                current_import.extend_from_slice(&new_entries);
             }
         } else {
             let new_entry: Vec<String> = line.split("use ")
@@ -90,24 +94,34 @@ fn check_import_sorting<P: AsRef<Path>>(
                                              .map(|s| s.to_owned())
                                              .collect();
             if let Some(last) = new_entry.last() {
-                if last.ends_with("};") {
+                if last.ends_with(";") || last.ends_with("}") {
                     check_inner_imports(s_path,
                                         pos + 1,
                                         &new_entry.join("::"),
                                         &last.replace("{", "")
                                              .replace("}", "")
                                              .replace(";", "")
-                                             .trim()
                                              .split(",")
                                              .map(|s| s.trim().to_owned())
+                                             .filter(|x| !x.is_empty())
                                              .collect::<Vec<String>>(), errors);
+                    imports.push((pos + 1, new_entry.clone()));
                 } else {
-                    if last.split(',').count() == 0 {
-                        current_import = Some(Vec::new());
-                    }
+                    current_import = Some(last.replace("{", "")
+                                              .replace("}", "")
+                                              .split(',')
+                                              .filter(|x| {
+                                                  let x = x.trim();
+                                                  !x.is_empty() && x != "{" && x != "}"
+                                              })
+                                              .map(|x| x.to_owned())
+                                              .collect());
+                    imports.push((pos + 1, new_entry.iter()
+                                                    .filter(|x| &**x != "{")
+                                                    .map(|x| x.clone())
+                                                    .collect()));
                 }
             }
-            imports.push((pos + 1, new_entry));
         }
     }
     if imports.len() > 1 {
