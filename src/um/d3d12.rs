@@ -1570,23 +1570,21 @@ STRUCT!{struct D3D12_CPU_DESCRIPTOR_HANDLE {
 
 
 
-
+UNION2!{union D3D12_DEPTH_STENCIL_VIEW_DESC_u {
+    [u32; 3],
+    Texture1D Texture1D_mut: D3D12_TEX1D_DSV,
+    Texture1DArray Texture1DArray_mut: D3D12_TEX1D_ARRAY_DSV,
+    Texture2D Texture2D_mut: D3D12_TEX2D_DSV,
+    Texture2DArray Texture2DArray_mut: D3D12_TEX2D_ARRAY_DSV,
+    Texture2DMS Texture2DMS_mut: D3D12_TEX2DMS_DSV,
+    Texture2DMSArray Texture2DMSArray_mut: D3D12_TEX2DMS_ARRAY_DSV,
+}}
 STRUCT!{struct D3D12_DEPTH_STENCIL_VIEW_DESC {
     Format: DXGI_FORMAT,
     ViewDimension: D3D12_DSV_DIMENSION,
     Flags: D3D12_DSV_FLAGS,
-    u: D3D12_TEX1D_ARRAY_DSV,
+    u: D3D12_DEPTH_STENCIL_VIEW_DESC_u,
 }}
-
-UNION!(D3D12_DEPTH_STENCIL_VIEW_DESC, u, Texture2DMSArray, Texture2DMSArray_mut,
-    D3D12_TEX2DMS_ARRAY_DSV);
-UNION!(D3D12_DEPTH_STENCIL_VIEW_DESC, u, Texture2DMS, Texture2DMS_mut, D3D12_TEX2DMS_DSV);
-UNION!(D3D12_DEPTH_STENCIL_VIEW_DESC, u, Texture2DArray, Texture2DArray_mut,
-    D3D12_TEX2D_ARRAY_DSV);
-UNION!(D3D12_DEPTH_STENCIL_VIEW_DESC, u, Texture2D, Texture2D_mut, D3D12_TEX2D_DSV);
-UNION!(D3D12_DEPTH_STENCIL_VIEW_DESC, u, Texture1DArray, Texture1DArray_mut,
-    D3D12_TEX1D_ARRAY_DSV);
-UNION!(D3D12_DEPTH_STENCIL_VIEW_DESC, u, Texture1D, Texture1D_mut, D3D12_TEX1D_DSV);
 
 STRUCT!{struct D3D12_DESCRIPTOR_HEAP_DESC {
     Type: D3D12_DESCRIPTOR_HEAP_TYPE,
@@ -1674,22 +1672,18 @@ STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC_UnorderedAccessView {
     RootParameterIndex: UINT,
 }}
 
+UNION2!{union D3D12_INDIRECT_ARGUMENT_DESC_u {
+    [u32; 3],
+    VertexBuffer VertexBuffer_mut: D3D12_INDIRECT_ARGUMENT_DESC_VertexBuffer,
+    Constant Constant_mut: D3D12_INDIRECT_ARGUMENT_DESC_Constant,
+    ConstantBufferView ConstantBufferView_mut: D3D12_INDIRECT_ARGUMENT_DESC_ConstantBufferView,
+    ShaderResourceView ShaderResourceView_mut: D3D12_INDIRECT_ARGUMENT_DESC_ShaderResourceView,
+    UnorderedAccessView UnorderedAccessView_mut: D3D12_INDIRECT_ARGUMENT_DESC_UnorderedAccessView,
+}}
 STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC {
     Type: D3D12_INDIRECT_ARGUMENT_TYPE,
-    u: D3D12_INDIRECT_ARGUMENT_DESC_Constant,
+    u: D3D12_INDIRECT_ARGUMENT_DESC_u,
 }}
-
-UNION!(D3D12_INDIRECT_ARGUMENT_DESC, u, UnorderedAccessView, UnorderedAccessView_mut,
-    D3D12_INDIRECT_ARGUMENT_DESC_UnorderedAccessView);
-UNION!(D3D12_INDIRECT_ARGUMENT_DESC, u, ShaderResourceView, ShaderResourceView_mut,
-    D3D12_INDIRECT_ARGUMENT_DESC_ShaderResourceView);
-UNION!(D3D12_INDIRECT_ARGUMENT_DESC, u, ConstantBufferView, ConstantBufferView_mut,
-    D3D12_INDIRECT_ARGUMENT_DESC_ConstantBufferView);
-UNION!(D3D12_INDIRECT_ARGUMENT_DESC, u, Constant, Constant_mut,
-    D3D12_INDIRECT_ARGUMENT_DESC_Constant);
-UNION!(D3D12_INDIRECT_ARGUMENT_DESC, u, VertexBuffer, VertexBuffer_mut,
-    D3D12_INDIRECT_ARGUMENT_DESC_VertexBuffer);
-
 
 
 
@@ -1728,25 +1722,22 @@ STRUCT!{struct D3D12_QUERY_HEAP_DESC {
 
 
 
-
+UNION2!{union D3D12_RENDER_TARGET_VIEW_DESC_u {
+    [u64; 2],
+    Buffer Buffer_mut: D3D12_BUFFER_RTV,
+    Texture1D Texture1D_mut: D3D12_TEX1D_RTV,
+    Texture1DArray Texture1DArray_mut: D3D12_TEX1D_ARRAY_RTV,
+    Texture2D Texture2D_mut: D3D12_TEX2D_RTV,
+    Texture2DArray Texture2DArray_mut: D3D12_TEX2D_ARRAY_RTV,
+    Texture2DMS Texture2DMS_mut: D3D12_TEX2DMS_RTV,
+    Texture2DMSArray Texture2DMSArray_mut: D3D12_TEX2DMS_ARRAY_RTV,
+    Texture3D Texture3D_mut: D3D12_TEX3D_RTV,
+}}
 STRUCT!{struct D3D12_RENDER_TARGET_VIEW_DESC {
     Format: DXGI_FORMAT,
     ViewDimension: D3D12_RTV_DIMENSION,
-    u: D3D12_BUFFER_RTV,
+    u: D3D12_RENDER_TARGET_VIEW_DESC_u,
 }}
-
-UNION!(D3D12_RENDER_TARGET_VIEW_DESC, u, Texture3D, Texture3D_mut, D3D12_TEX3D_RTV);
-UNION!(D3D12_RENDER_TARGET_VIEW_DESC, u, Texture2DMSArray, Texture2DMSArray_mut,
-    D3D12_TEX2DMS_ARRAY_RTV);
-UNION!(D3D12_RENDER_TARGET_VIEW_DESC, u, Texture2DMS, Texture2DMS_mut, D3D12_TEX2DMS_RTV);
-UNION!(D3D12_RENDER_TARGET_VIEW_DESC, u, Texture2DArray, Texture2DArray_mut,
-    D3D12_TEX2D_ARRAY_RTV);
-UNION!(D3D12_RENDER_TARGET_VIEW_DESC, u, Texture2D, Texture2D_mut, D3D12_TEX2D_RTV);
-UNION!(D3D12_RENDER_TARGET_VIEW_DESC, u, Texture1DArray, Texture1DArray_mut,
-    D3D12_TEX1D_ARRAY_RTV);
-UNION!(D3D12_RENDER_TARGET_VIEW_DESC, u, Texture1D, Texture1D_mut, D3D12_TEX1D_RTV);
-UNION!(D3D12_RENDER_TARGET_VIEW_DESC, u, Buffer, Buffer_mut, D3D12_BUFFER_RTV);
-
 
 
 
@@ -1768,24 +1759,25 @@ STRUCT!{struct D3D12_ROOT_DESCRIPTOR_TABLE {
     pDescriptorRanges: *const D3D12_DESCRIPTOR_RANGE,
 }}
 
-#[cfg(target_pointer_width = "64")]
+#[cfg(target_arch="x86")]
+UNION2!{union D3D12_ROOT_PARAMETER_u {
+    [u32; 3],
+    DescriptorTable DescriptorTable_mut: D3D12_ROOT_DESCRIPTOR_TABLE,
+    Constants Constants_mut: D3D12_ROOT_CONSTANTS,
+    Descriptor Descriptor_mut: D3D12_ROOT_DESCRIPTOR,
+}}
+#[cfg(target_arch="x86_64")]
+UNION2!{union D3D12_ROOT_PARAMETER_u {
+    [u64; 2],
+    DescriptorTable DescriptorTable_mut: D3D12_ROOT_DESCRIPTOR_TABLE,
+    Constants Constants_mut: D3D12_ROOT_CONSTANTS,
+    Descriptor Descriptor_mut: D3D12_ROOT_DESCRIPTOR,
+}}
 STRUCT!{struct D3D12_ROOT_PARAMETER {
     ParameterType: D3D12_ROOT_PARAMETER_TYPE,
-    u: D3D12_ROOT_DESCRIPTOR_TABLE,
+    u: D3D12_ROOT_PARAMETER_u,
     ShaderVisibility: D3D12_SHADER_VISIBILITY,
 }}
-
-#[cfg(target_pointer_width = "32")]
-STRUCT!{struct D3D12_ROOT_PARAMETER {
-    ParameterType: D3D12_ROOT_PARAMETER_TYPE,
-    u: D3D12_ROOT_CONSTANTS,
-    ShaderVisibility: D3D12_SHADER_VISIBILITY,
-}}
-
-UNION!(D3D12_ROOT_PARAMETER, u, Descriptor, Descriptor_mut, D3D12_ROOT_DESCRIPTOR);
-UNION!(D3D12_ROOT_PARAMETER, u, Constants, Constants_mut, D3D12_ROOT_CONSTANTS);
-UNION!(D3D12_ROOT_PARAMETER, u, DescriptorTable, DescriptorTable_mut,
-    D3D12_ROOT_DESCRIPTOR_TABLE);
 
 STRUCT!{struct D3D12_ROOT_SIGNATURE_DESC {
     NumParameters: UINT,
