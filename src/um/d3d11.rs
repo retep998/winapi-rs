@@ -783,14 +783,20 @@ interface ID3D11View(ID3D11ViewVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
         ppResource: *mut *mut ID3D11Resource,
     ) -> (),
 }}
-STRUCT!{struct D3D11_BUFFER_SRV {
-    u1: UINT,
-    u2: UINT,
+UNION2!{union D3D11_BUFFER_SRV_u1 {
+    [u32; 1],
+    FirstElement FirstElement_mut: UINT,
+    ElementOffset ElementOffset_mut: UINT,
 }}
-UNION!{D3D11_BUFFER_SRV, u1, FirstElement, FirstElement_mut, UINT}
-UNION!{D3D11_BUFFER_SRV, u1, ElementOffset, ElementOffset_mut, UINT}
-UNION!{D3D11_BUFFER_SRV, u2, NumElements, NumElements_mut, UINT}
-UNION!{D3D11_BUFFER_SRV, u2, ElementWidth, ElementWidth_mut, UINT}
+UNION2!{union D3D11_BUFFER_SRV_u2 {
+    [u32; 1],
+    NumElements NumElements_mut: UINT,
+    ElementWidth ElementWidth_mut: UINT,
+}}
+STRUCT!{struct D3D11_BUFFER_SRV {
+    u1: D3D11_BUFFER_SRV_u1,
+    u2: D3D11_BUFFER_SRV_u2,
+}}
 ENUM!{enum D3D11_BUFFEREX_SRV_FLAG {
     D3D11_BUFFEREX_SRV_FLAG_RAW = 0x1,
 }}
@@ -840,40 +846,45 @@ STRUCT!{struct D3D11_TEX2DMS_ARRAY_SRV {
     FirstArraySlice: UINT,
     ArraySize: UINT,
 }}
+UNION2!{union D3D11_SHADER_RESOURCE_VIEW_DESC_u {
+    [u32; 4],
+    Buffer Buffer_mut: D3D11_BUFFER_SRV,
+    Texture1D Texture1D_mut: D3D11_TEX1D_SRV,
+    Texture1DArray Texture1DArray_mut: D3D11_TEX1D_ARRAY_SRV,
+    Texture2D Texture2D_mut: D3D11_TEX2D_SRV,
+    Texture2DArray Texture2DArray_mut: D3D11_TEX2D_ARRAY_SRV,
+    Texture2DMS Texture2DMS_mut: D3D11_TEX2DMS_SRV,
+    Texture2DMSArray Texture2DMSArray_mut: D3D11_TEX2DMS_ARRAY_SRV,
+    Texture3D Texture3D_mut: D3D11_TEX3D_SRV,
+    TextureCube TextureCube_mut: D3D11_TEXCUBE_SRV,
+    TextureCubeArray TextureCubeArray_mut: D3D11_TEXCUBE_ARRAY_SRV,
+    BufferEx BufferEx_mut: D3D11_BUFFEREX_SRV,
+}}
 STRUCT!{struct D3D11_SHADER_RESOURCE_VIEW_DESC {
     Format: DXGI_FORMAT,
     ViewDimension: D3D11_SRV_DIMENSION,
-    u: [UINT; 4],
+    u: D3D11_SHADER_RESOURCE_VIEW_DESC_u,
 }}
-UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, Buffer, Buffer_mut, D3D11_BUFFER_SRV}
-UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, Texture1D, Texture1D_mut, D3D11_TEX1D_SRV}
-UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, Texture1DArray, Texture1DArray_mut,
-    D3D11_TEX1D_ARRAY_SRV}
-UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, Texture2D, Texture2D_mut, D3D11_TEX2D_SRV}
-UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, Texture2DArray, Texture2DArray_mut,
-    D3D11_TEX2D_ARRAY_SRV}
-UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, Texture2DMS, Texture2DMS_mut, D3D11_TEX2DMS_SRV}
-UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, Texture2DMSArray, Texture2DMSArray_mut,
-    D3D11_TEX2DMS_ARRAY_SRV}
-UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, Texture3D, Texture3D_mut, D3D11_TEX3D_SRV}
-UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, TextureCube, TextureCube_mut, D3D11_TEXCUBE_SRV}
-UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, TextureCubeArray, TextureCubeArray_mut,
-    D3D11_TEXCUBE_ARRAY_SRV}
-UNION!{D3D11_SHADER_RESOURCE_VIEW_DESC, u, BufferEx, BufferEx_mut, D3D11_BUFFEREX_SRV}
 RIDL!{#[uuid(0xb0e06fe0, 0x8192, 0x4e1a, 0xb1, 0xca, 0x36, 0xd7, 0x41, 0x47, 0x10, 0xb2)]
 interface ID3D11ShaderResourceView(ID3D11ShaderResourceViewVtbl): ID3D11View(ID3D11ViewVtbl) {
     fn GetDesc(
         pDesc: *mut D3D11_SHADER_RESOURCE_VIEW_DESC,
     ) -> (),
 }}
-STRUCT!{struct D3D11_BUFFER_RTV {
-    u1: UINT,
-    u2: UINT,
+UNION2!{union D3D11_BUFFER_RTV_u1 {
+    [u32; 1],
+    FirstElement FirstElement_mut: UINT,
+    ElementOffset ElementOffset_mut: UINT,
 }}
-UNION!{D3D11_BUFFER_RTV, u1, FirstElement, FirstElement_mut, UINT}
-UNION!{D3D11_BUFFER_RTV, u1, ElementOffset, ElementOffset_mut, UINT}
-UNION!{D3D11_BUFFER_RTV, u2, NumElements, NumElements_mut, UINT}
-UNION!{D3D11_BUFFER_RTV, u2, ElementWidth, ElementWidth_mut, UINT}
+UNION2!{union D3D11_BUFFER_RTV_u2 {
+    [u32; 1],
+    NumElements NumElements_mut: UINT,
+    ElementWidth ElementWidth_mut: UINT,
+}}
+STRUCT!{struct D3D11_BUFFER_RTV {
+    u1: D3D11_BUFFER_RTV_u1,
+    u2: D3D11_BUFFER_RTV_u2,
+}}
 STRUCT!{struct D3D11_TEX1D_RTV {
     MipSlice: UINT,
 }}
@@ -902,22 +913,22 @@ STRUCT!{struct D3D11_TEX3D_RTV {
     FirstWSlice: UINT,
     WSize: UINT,
 }}
+UNION2!{union D3D11_RENDER_TARGET_VIEW_DESC_u {
+    [u32; 3],
+    Buffer Buffer_mut: D3D11_BUFFER_RTV,
+    Texture1D Texture1D_mut: D3D11_TEX1D_RTV,
+    Texture1DArray Texture1DArray_mut: D3D11_TEX1D_ARRAY_RTV,
+    Texture2D Texture2D_mut: D3D11_TEX2D_RTV,
+    Texture2DArray Texture2DArray_mut: D3D11_TEX2D_ARRAY_RTV,
+    Texture2DMS Texture2DMS_mut: D3D11_TEX2DMS_RTV,
+    Texture2DMSArray Texture2DMSArray_mut: D3D11_TEX2DMS_ARRAY_RTV,
+    Texture3D Texture3D_mut: D3D11_TEX3D_RTV,
+}}
 STRUCT!{struct D3D11_RENDER_TARGET_VIEW_DESC {
     Format: DXGI_FORMAT,
     ViewDimension: D3D11_RTV_DIMENSION,
-    u: [UINT; 3],
+    u: D3D11_RENDER_TARGET_VIEW_DESC_u,
 }}
-UNION!{D3D11_RENDER_TARGET_VIEW_DESC, u, Buffer, Buffer_mut, D3D11_BUFFER_RTV}
-UNION!{D3D11_RENDER_TARGET_VIEW_DESC, u, Texture1D, Texture1D_mut, D3D11_TEX1D_RTV}
-UNION!{D3D11_RENDER_TARGET_VIEW_DESC, u, Texture1DArray, Texture1DArray_mut,
-    D3D11_TEX1D_ARRAY_RTV}
-UNION!{D3D11_RENDER_TARGET_VIEW_DESC, u, Texture2D, Texture2D_mut, D3D11_TEX2D_RTV}
-UNION!{D3D11_RENDER_TARGET_VIEW_DESC, u, Texture2DArray, Texture2DArray_mut,
-    D3D11_TEX2D_ARRAY_RTV}
-UNION!{D3D11_RENDER_TARGET_VIEW_DESC, u, Texture2DMS, Texture2DMS_mut, D3D11_TEX2DMS_RTV}
-UNION!{D3D11_RENDER_TARGET_VIEW_DESC, u, Texture2DMSArray,Texture2DMSArray_mut,
-    D3D11_TEX2DMS_ARRAY_RTV}
-UNION!{D3D11_RENDER_TARGET_VIEW_DESC, u, Texture3D, Texture3D_mut, D3D11_TEX3D_RTV}
 RIDL!{#[uuid(0xdfdba067, 0x0b8d, 0x4865, 0x87, 0x5b, 0xd7, 0xb4, 0x51, 0x6c, 0xc1, 0x64)]
 interface ID3D11RenderTargetView(ID3D11RenderTargetViewVtbl): ID3D11View(ID3D11ViewVtbl) {
     fn GetDesc(
@@ -951,21 +962,21 @@ ENUM!{enum D3D11_DSV_FLAG {
     D3D11_DSV_READ_ONLY_DEPTH = 0x1,
     D3D11_DSV_READ_ONLY_STENCIL = 0x2,
 }}
+UNION2!{union D3D11_DEPTH_STENCIL_VIEW_DESC_u {
+    [u32; 3],
+    Texture1D Texture1D_mut: D3D11_TEX1D_DSV,
+    Texture1DArray Texture1DArray_mut: D3D11_TEX1D_ARRAY_DSV,
+    Texture2D Texture2D_mut: D3D11_TEX2D_DSV,
+    Texture2DArray Texture2DArray_mut: D3D11_TEX2D_ARRAY_DSV,
+    Texture2DMS Texture2DMS_mut: D3D11_TEX2DMS_DSV,
+    Texture2DMSArray Texture2DMSArray_mut: D3D11_TEX2DMS_ARRAY_DSV,
+}}
 STRUCT!{struct D3D11_DEPTH_STENCIL_VIEW_DESC {
     Format: DXGI_FORMAT,
     ViewDimension: D3D11_DSV_DIMENSION,
     Flags: UINT,
-    u: [UINT; 3],
+    u: D3D11_DEPTH_STENCIL_VIEW_DESC_u,
 }}
-UNION!{D3D11_DEPTH_STENCIL_VIEW_DESC, u, Texture1D, Texture1D_mut, D3D11_TEX1D_DSV}
-UNION!{D3D11_DEPTH_STENCIL_VIEW_DESC, u, Texture1DArray, Texture1DArray_mut,
-    D3D11_TEX1D_ARRAY_DSV}
-UNION!{D3D11_DEPTH_STENCIL_VIEW_DESC, u, Texture2D, Texture2D_mut, D3D11_TEX2D_DSV}
-UNION!{D3D11_DEPTH_STENCIL_VIEW_DESC, u, Texture2DArray, Texture2DArray_mut,
-    D3D11_TEX2D_ARRAY_DSV}
-UNION!{D3D11_DEPTH_STENCIL_VIEW_DESC, u, Texture2DMS, Texture2DMS_mut, D3D11_TEX2DMS_DSV}
-UNION!{D3D11_DEPTH_STENCIL_VIEW_DESC, u, Texture2DMSArray, Texture2DMSArray_mut,
-    D3D11_TEX2DMS_ARRAY_DSV}
 RIDL!{#[uuid(0x9fdac92a, 0x1876, 0x48c3, 0xaf, 0xad, 0x25, 0xb9, 0x4f, 0x84, 0xa9, 0xb6)]
 interface ID3D11DepthStencilView(ID3D11DepthStencilViewVtbl): ID3D11View(ID3D11ViewVtbl) {
     fn GetDesc(
@@ -1003,19 +1014,20 @@ STRUCT!{struct D3D11_TEX3D_UAV {
     FirstWSlice: UINT,
     WSize: UINT,
 }}
+UNION2!{union D3D11_UNORDERED_ACCESS_VIEW_DESC_u {
+    [u32; 3],
+    Buffer Buffer_mut: D3D11_BUFFER_UAV,
+    Texture1D Texture1D_mut: D3D11_TEX1D_UAV,
+    Texture1DArray Texture1DArray_mut: D3D11_TEX1D_ARRAY_UAV,
+    Texture2D Texture2D_mut: D3D11_TEX2D_UAV,
+    Texture2DArray Texture2DArray_mut: D3D11_TEX2D_ARRAY_UAV,
+    Texture3D Texture3D_mut: D3D11_TEX3D_UAV,
+}}
 STRUCT!{struct D3D11_UNORDERED_ACCESS_VIEW_DESC {
     Format: DXGI_FORMAT,
     ViewDimension: D3D11_UAV_DIMENSION,
-    u: [UINT; 3],
+    u: D3D11_UNORDERED_ACCESS_VIEW_DESC_u,
 }}
-UNION!{D3D11_UNORDERED_ACCESS_VIEW_DESC, u, Buffer, Buffer_mut, D3D11_BUFFER_UAV}
-UNION!{D3D11_UNORDERED_ACCESS_VIEW_DESC, u, Texture1D, Texture1D_mut, D3D11_TEX1D_UAV}
-UNION!{D3D11_UNORDERED_ACCESS_VIEW_DESC, u, Texture1DArray, Texture1DArray_mut,
-    D3D11_TEX1D_ARRAY_UAV}
-UNION!{D3D11_UNORDERED_ACCESS_VIEW_DESC, u, Texture2D, Texture2D_mut, D3D11_TEX2D_UAV}
-UNION!{D3D11_UNORDERED_ACCESS_VIEW_DESC, u, Texture2DArray, Texture2DArray_mut,
-    D3D11_TEX2D_ARRAY_UAV}
-UNION!{D3D11_UNORDERED_ACCESS_VIEW_DESC, u, Texture3D, Texture3D_mut, D3D11_TEX3D_UAV}
 RIDL!{#[uuid(0x28acf509, 0x7f5c, 0x48f6, 0x86, 0x11, 0xf3, 0x16, 0x01, 0x0a, 0x63, 0x80)]
 interface ID3D11UnorderedAccessView(ID3D11UnorderedAccessViewVtbl): ID3D11View(ID3D11ViewVtbl) {
     fn GetDesc(
@@ -2216,11 +2228,11 @@ STRUCT!{struct D3D11_VIDEO_COLOR_YCbCrA {
     Cr: c_float,
     A: c_float,
 }}
-STRUCT!{struct D3D11_VIDEO_COLOR {
-    u: [c_float; 4],
+UNION2!{union D3D11_VIDEO_COLOR {
+    [f32; 4],
+    YCbCr YCbCr_mut: D3D11_VIDEO_COLOR_YCbCrA,
+    RGBA RGBA_mut: D3D11_VIDEO_COLOR_RGBA,
 }}
-UNION!{D3D11_VIDEO_COLOR, u, YCbCr, YCbCr_mut, D3D11_VIDEO_COLOR_YCbCrA}
-UNION!{D3D11_VIDEO_COLOR, u, RGBA, RGBA_mut, D3D11_VIDEO_COLOR_RGBA}
 ENUM!{enum D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE {
     D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_UNDEFINED = 0,
     D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_16_235 = 1,
@@ -2543,13 +2555,15 @@ STRUCT!{struct D3D11_TEX2D_ARRAY_VPOV {
     FirstArraySlice: UINT,
     ArraySize: UINT,
 }}
+UNION2!{union D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_u {
+    [u32; 3],
+    Texture2D Texture2D_mut: D3D11_TEX2D_VPOV,
+    Texture2DArray Texture2DArray_mut: D3D11_TEX2D_ARRAY_VPOV,
+}}
 STRUCT!{struct D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC {
     ViewDimension: D3D11_VPOV_DIMENSION,
-    u: [UINT; 3],
+    u: D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_u,
 }}
-UNION!{D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC, u, Texture2D, Texture2D_mut, D3D11_TEX2D_VPOV}
-UNION!{D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC, u, Texture2DArray, Texture2DArray_mut,
-    D3D11_TEX2D_ARRAY_VPOV}
 RIDL!{#[uuid(0xa048285e, 0x25a9, 0x4527, 0xbd, 0x93, 0xd6, 0x8b, 0x68, 0xc4, 0x42, 0x54)]
 interface ID3D11VideoProcessorOutputView(ID3D11VideoProcessorOutputViewVtbl)
     : ID3D11View(ID3D11ViewVtbl) {

@@ -231,7 +231,8 @@ macro_rules! UNION2 {
         $storage:ty,
         $($variant:ident $variant_mut:ident: $ftype:ty,)+
     }) => (
-        pub struct $name(pub $storage);
+        #[repr(C)]
+        pub struct $name($storage);
         impl Copy for $name {}
         impl Clone for $name {
             #[inline]
