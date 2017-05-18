@@ -67,7 +67,7 @@ fn check_file_deps<P: AsRef<Path>>(
         if let Some(entries) = files_deps.get_mut(&filename) {
             let file_content = read_file(r_p);
             for line in file_content.lines() {
-                if !line.starts_with("use ") {
+                if !line.starts_with("use ") && !line.starts_with("pub use ") {
                     continue
                 }
                 let include: Vec<&str> = line.split("::").skip(1).collect();
