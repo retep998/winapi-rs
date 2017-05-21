@@ -64,6 +64,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("windowsx", &["minwindef"], &[]),
     ("winerror", &["minwindef"], &[]),
     ("winusbio", &["minwindef", "usb"], &[]),
+    ("wmistr", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
     ("wnnc", &["minwindef"], &[]),
     ("ws2def", &["basetsd", "guiddef", "inaddr", "minwindef", "vcruntime", "winnt"], &[]),
     ("ws2ipdef", &["in6addr", "inaddr", "minwindef"], &[]),
