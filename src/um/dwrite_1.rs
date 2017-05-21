@@ -453,7 +453,6 @@ STRUCT!{struct DWRITE_PANOSE_text {
     midline: UINT8,
     xHeight: UINT8,
 }}
-
 STRUCT!{struct DWRITE_PANOSE_script {
     familyKind: UINT8,
     toolKind: UINT8,
@@ -466,7 +465,6 @@ STRUCT!{struct DWRITE_PANOSE_script {
     finials: UINT8,
     xAscent: UINT8,
 }}
-
 STRUCT!{struct DWRITE_PANOSE_decorative {
     familyKind: UINT8,
     decorativeClass: UINT8,
@@ -479,7 +477,6 @@ STRUCT!{struct DWRITE_PANOSE_decorative {
     decorativeTopology: UINT8,
     characterRange: UINT8,
 }}
-
 STRUCT!{struct DWRITE_PANOSE_symbol {
     familyKind: UINT8,
     symbolKind: UINT8,
@@ -492,17 +489,15 @@ STRUCT!{struct DWRITE_PANOSE_symbol {
     aspectRatio163: UINT8,
     aspectRatio211: UINT8,
 }}
-
-STRUCT!{struct DWRITE_PANOSE {
-    u1: [UINT8; 10],
+UNION2!{union DWRITE_PANOSE {
+    [u8; 10],
+    values values_mut: [UINT8; 10],
+    familyKind familyKind_mut: UINT8,
+    text text_mut: DWRITE_PANOSE_text,
+    script script_mut: DWRITE_PANOSE_script,
+    decorative decorative_mut: DWRITE_PANOSE_decorative,
+    symbol symbol_mut: DWRITE_PANOSE_symbol,
 }}
-
-UNION!(DWRITE_PANOSE, u1, values, values_mut, [UINT8; 10]);
-UNION!(DWRITE_PANOSE, u1, familyKind, familyKind_mut, UINT8);
-UNION!(DWRITE_PANOSE, u1, text, text_mut, DWRITE_PANOSE_text);
-UNION!(DWRITE_PANOSE, u1, script, script_mut, DWRITE_PANOSE_script);
-UNION!(DWRITE_PANOSE, u1, decorative, decorative_mut, DWRITE_PANOSE_decorative);
-UNION!(DWRITE_PANOSE, u1, symbol, symbol_mut, DWRITE_PANOSE_symbol);
 
 STRUCT!{struct DWRITE_UNICODE_RANGE {
     first: UINT32,

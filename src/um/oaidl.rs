@@ -8,6 +8,7 @@
 use shared::basetsd::ULONG_PTR;
 use shared::guiddef::{GUID, IID, REFGUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, UINT, ULONG, USHORT, WORD};
+use shared::rpcndr::byte;
 use shared::wtypes::{
     BSTR, CY, DATE, DECIMAL, VARIANT_BOOL, VARTYPE, VT_BSTR, VT_DISPATCH, VT_ERROR,
     VT_I1, VT_I2, VT_I4, VT_I8, VT_RECORD, VT_RESERVED, VT_UNKNOWN, VT_VARIANT,
@@ -19,12 +20,14 @@ use shared::wtypesbase::{
 };
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{CHAR, HRESULT, LCID, LONG, LONGLONG, PVOID, SHORT, ULONGLONG};
-pub type wireBRECORD = *mut _wireBRECORD;
-pub type wireVARIANT = *mut _wireVARIANT;
+pub type CURRENCY = CY;
 STRUCT!{struct SAFEARRAYBOUND {
     cElements: ULONG,
     lLbound: LONG,
 }}
+pub type LPSAFEARRAYBOUND = *mut SAFEARRAYBOUND;
+pub type wireBRECORD = *mut _wireBRECORD;
+pub type wireVARIANT = *mut _wireVARIANT;
 STRUCT!{struct SAFEARR_BSTR {
     Size: ULONG,
     aBstr: *mut wireBSTR,
@@ -63,30 +66,38 @@ ENUM!{enum SF_TYPE {
     SF_RECORD = VT_RECORD,
     SF_HAVEIID = VT_UNKNOWN | VT_RESERVED,
 }}
+#[cfg(target_arch = "x86")]
+UNION2!{union __MIDL_IOleAutomationTypes_0001 {
+    [u32; 6],
+    BstrStr BstrStr_mut: SAFEARR_BSTR,
+    UnknownStr UnknownStr_mut: SAFEARR_UNKNOWN,
+    DispatchStr DispatchStr_mut: SAFEARR_DISPATCH,
+    VariantStr VariantStr_mut: SAFEARR_VARIANT,
+    RecordStr RecordStr_mut: SAFEARR_BRECORD,
+    HaveIidStr HaveIidStr_mut: SAFEARR_HAVEIID,
+    ByteStr ByteStr_mut: BYTE_SIZEDARR,
+    WordStr WordStr_mut: WORD_SIZEDARR,
+    LongStr LongStr_mut: DWORD_SIZEDARR,
+    HyperStr HyperStr_mut: HYPER_SIZEDARR,
+}}
+#[cfg(target_arch = "x86_64")]
+UNION2!{union __MIDL_IOleAutomationTypes_0001 {
+    [u64; 4],
+    BstrStr BstrStr_mut: SAFEARR_BSTR,
+    UnknownStr UnknownStr_mut: SAFEARR_UNKNOWN,
+    DispatchStr DispatchStr_mut: SAFEARR_DISPATCH,
+    VariantStr VariantStr_mut: SAFEARR_VARIANT,
+    RecordStr RecordStr_mut: SAFEARR_BRECORD,
+    HaveIidStr HaveIidStr_mut: SAFEARR_HAVEIID,
+    ByteStr ByteStr_mut: BYTE_SIZEDARR,
+    WordStr WordStr_mut: WORD_SIZEDARR,
+    LongStr LongStr_mut: DWORD_SIZEDARR,
+    HyperStr HyperStr_mut: HYPER_SIZEDARR,
+}}
 STRUCT!{struct SAFEARRAYUNION {
     sfType: ULONG,
     u: __MIDL_IOleAutomationTypes_0001,
 }}
-#[cfg(target_arch = "x86_64")]
-STRUCT!{struct __MIDL_IOleAutomationTypes_0001 {
-    data0: u32,
-    data1: [u32; 6],
-}}
-#[cfg(target_arch = "x86")]
-STRUCT!{struct __MIDL_IOleAutomationTypes_0001 {
-    data0: u32,
-    data1: [u32; 5],
-}}
-UNION!(__MIDL_IOleAutomationTypes_0001, data0, BstrStr, BstrStr_mut, SAFEARR_BSTR);
-UNION!(__MIDL_IOleAutomationTypes_0001, data0, UnknownStr, UnknownStr_mut, SAFEARR_UNKNOWN);
-UNION!(__MIDL_IOleAutomationTypes_0001, data0, DispatchStr, DispatchStr_mut, SAFEARR_DISPATCH);
-UNION!(__MIDL_IOleAutomationTypes_0001, data0, VariantStr, VariantStr_mut, SAFEARR_VARIANT);
-UNION!(__MIDL_IOleAutomationTypes_0001, data0, RecordStr, RecordStr_mut, SAFEARR_BRECORD);
-UNION!(__MIDL_IOleAutomationTypes_0001, data0, HaveIidStr, HaveIidStr_mut, SAFEARR_HAVEIID);
-UNION!(__MIDL_IOleAutomationTypes_0001, data0, ByteStr, ByteStr_mut, BYTE_SIZEDARR);
-UNION!(__MIDL_IOleAutomationTypes_0001, data0, WordStr, WordStr_mut, WORD_SIZEDARR);
-UNION!(__MIDL_IOleAutomationTypes_0001, data0, LongStr, LongStr_mut, DWORD_SIZEDARR);
-UNION!(__MIDL_IOleAutomationTypes_0001, data0, HyperStr, HyperStr_mut, HYPER_SIZEDARR);
 STRUCT!{struct _wireSAFEARRAY {
     cDims: USHORT,
     fFeatures: USHORT,
@@ -118,65 +129,128 @@ pub const FADF_UNKNOWN: DWORD = 0x200;
 pub const FADF_DISPATCH: DWORD = 0x400;
 pub const FADF_VARIANT: DWORD = 0x800;
 pub const FADF_RESERVED: DWORD = 0xf008;
-#[cfg(target_arch = "x86_64")]
-STRUCT!{struct VARIANT {
-    data0: u64,
-    data1: u64,
-    data2: u64,
+STRUCT!{struct __tagBRECORD {
+    pvRecord: PVOID,
+    pRecInfo: *mut IRecordInfo,
 }}
 #[cfg(target_arch = "x86")]
-STRUCT!{struct VARIANT {
-    data0: u64,
-    data1: u32,
-    data2: u32,
+UNION2!{union VARIANT_n3 {
+    [u64; 1],
+    llVal llVal_mut: LONGLONG,
+    lVal lVal_mut: LONG,
+    bVal bVal_mut: BYTE,
+    iVal iVal_mut: SHORT,
+    fltVal fltVal_mut: FLOAT,
+    dblVal dblVal_mut: DOUBLE,
+    boolVal boolVal_mut: VARIANT_BOOL,
+    scode scode_mut: SCODE,
+    cyVal cyVal_mut: CY,
+    date date_mut: DATE,
+    bstrVal bstrVal_mut: BSTR,
+    punkVal punkVal_mut: *mut IUnknown,
+    pdispVal pdispVal_mut: *mut IDispatch,
+    parray parray_mut: *mut SAFEARRAY,
+    pbVal pbVal_mut: *mut BYTE,
+    piVal piVal_mut: *mut SHORT,
+    plVal plVal_mut: *mut LONG,
+    pllVal pllVal_mut: *mut LONGLONG,
+    pfltVal pfltVal_mut: *mut FLOAT,
+    pdblVal pdblVal_mut: *mut DOUBLE,
+    pboolVal pboolVal_mut: *mut VARIANT_BOOL,
+    pscode pscode_mut: *mut SCODE,
+    pcyVal pcyVal_mut: *mut CY,
+    pdate pdate_mut: *mut DATE,
+    pbstrVal pbstrVal_mut: *mut BSTR,
+    ppunkVal ppunkVal_mut: *mut *mut IUnknown,
+    ppdispVal ppdispVal_mut: *mut *mut IDispatch,
+    pparray pparray_mut: *mut *mut SAFEARRAY,
+    pvarVal pvarVal_mut: *mut VARIANT,
+    byref byref_mut: PVOID,
+    cVal cVal_mut: CHAR,
+    uiVal uiVal_mut: USHORT,
+    ulVal ulVal_mut: ULONG,
+    ullVal ullVal_mut: ULONGLONG,
+    intVal intVal_mut: INT,
+    uintVal uintVal_mut: UINT,
+    pdecVal pdecVal_mut: *mut DECIMAL,
+    pcVal pcVal_mut: *mut CHAR,
+    puiVal puiVal_mut: *mut USHORT,
+    pulVal pulVal_mut: *mut ULONG,
+    pullVal pullVal_mut: *mut ULONGLONG,
+    pintVal pintVal_mut: *mut INT,
+    puintVal puintVal_mut: *mut UINT,
+    n4 n4_mut: __tagBRECORD,
 }}
-UNION!(VARIANT, data0, vt, vt_mut, VARTYPE);
-UNION!(VARIANT, data1, llVal, llVal_mut, LONGLONG);
-UNION!(VARIANT, data1, lVal, lVal_mut, LONG);
-UNION!(VARIANT, data1, bVal, bVal_mut, BYTE);
-UNION!(VARIANT, data1, iVal, iVal_mut, SHORT);
-UNION!(VARIANT, data1, fltVal, fltVal_mut, FLOAT);
-UNION!(VARIANT, data1, dblVal, dblVal_mut, DOUBLE);
-UNION!(VARIANT, data1, boolVal, boolVal_mut, VARIANT_BOOL);
-UNION!(VARIANT, data1, scode, scode_mut, SCODE);
-UNION!(VARIANT, data1, cyVal, cyVal_mut, CY);
-UNION!(VARIANT, data1, date, date_mut, DATE);
-UNION!(VARIANT, data1, bstrVal, bstrVal_mut, BSTR);
-UNION!(VARIANT, data1, punkVal, punkVal_mut, *mut IUnknown);
-UNION!(VARIANT, data1, pdispVal, pdispVal_mut, *mut IDispatch);
-UNION!(VARIANT, data1, parray, parray_mut, *mut SAFEARRAY);
-UNION!(VARIANT, data1, pllVal, pllVal_mut, *mut LONGLONG);
-UNION!(VARIANT, data1, plVal, plVal_mut, *mut LONG);
-UNION!(VARIANT, data1, pbVal, pbVal_mut, *mut BYTE);
-UNION!(VARIANT, data1, piVal, piVal_mut, *mut SHORT);
-UNION!(VARIANT, data1, pfltVal, pfltVal_mut, *mut FLOAT);
-UNION!(VARIANT, data1, pdblVal, pdblVal_mut, *mut DOUBLE);
-UNION!(VARIANT, data1, pboolVal, pboolVal_mut, *mut VARIANT_BOOL);
-UNION!(VARIANT, data1, pscode, pscode_mut, *mut SCODE);
-UNION!(VARIANT, data1, pcyVal, pcyVal_mut, *mut CY);
-UNION!(VARIANT, data1, pdate, pdate_mut, *mut DATE);
-UNION!(VARIANT, data1, pbstrVal, pbstrVal_mut, *mut BSTR);
-UNION!(VARIANT, data1, ppunkVal, ppunkVal_mut, *mut *mut IUnknown);
-UNION!(VARIANT, data1, ppdispVal, ppdispVal_mut, *mut *mut IDispatch);
-UNION!(VARIANT, data1, pparray, pparray_mut, *mut *mut SAFEARRAY);
-UNION!(VARIANT, data1, pvarVal, pvarVal_mut, *mut VARIANT);
-UNION!(VARIANT, data1, byref, byref_mut, PVOID);
-UNION!(VARIANT, data1, cVal, cVal_mut, CHAR);
-UNION!(VARIANT, data1, uiVal, uiVal_mut, USHORT);
-UNION!(VARIANT, data1, ulVal, ulVal_mut, ULONG);
-UNION!(VARIANT, data1, ullVal, ullVal_mut, ULONGLONG);
-UNION!(VARIANT, data1, intVal, intVal_mut, INT);
-UNION!(VARIANT, data1, uintVal, uintVal_mut, UINT);
-UNION!(VARIANT, data1, pdecVal, pdecVal_mut, *mut DECIMAL);
-UNION!(VARIANT, data1, pcVal, pcVal_mut, *mut CHAR);
-UNION!(VARIANT, data1, puiVal, puiVal_mut, *mut USHORT);
-UNION!(VARIANT, data1, pulVal, pulVal_mut, *mut ULONG);
-UNION!(VARIANT, data1, pullVal, pullVal_mut, *mut ULONGLONG);
-UNION!(VARIANT, data1, pintVal, pintVal_mut, *mut INT);
-UNION!(VARIANT, data1, puintVal, puintVal_mut, *mut UINT);
-UNION!(VARIANT, data1, pvRecord, pvRecord_mut, PVOID);
-UNION!(VARIANT, data2, pRecInfo, pRecInfo_mut, *mut IRecordInfo);
-UNION!(VARIANT, data0, decVal, decVal_mut, DECIMAL);
+#[cfg(target_arch = "x86_64")]
+UNION2!{union VARIANT_n3 {
+    [u64; 2],
+    llVal llVal_mut: LONGLONG,
+    lVal lVal_mut: LONG,
+    bVal bVal_mut: BYTE,
+    iVal iVal_mut: SHORT,
+    fltVal fltVal_mut: FLOAT,
+    dblVal dblVal_mut: DOUBLE,
+    boolVal boolVal_mut: VARIANT_BOOL,
+    scode scode_mut: SCODE,
+    cyVal cyVal_mut: CY,
+    date date_mut: DATE,
+    bstrVal bstrVal_mut: BSTR,
+    punkVal punkVal_mut: *mut IUnknown,
+    pdispVal pdispVal_mut: *mut IDispatch,
+    parray parray_mut: *mut SAFEARRAY,
+    pbVal pbVal_mut: *mut BYTE,
+    piVal piVal_mut: *mut SHORT,
+    plVal plVal_mut: *mut LONG,
+    pllVal pllVal_mut: *mut LONGLONG,
+    pfltVal pfltVal_mut: *mut FLOAT,
+    pdblVal pdblVal_mut: *mut DOUBLE,
+    pboolVal pboolVal_mut: *mut VARIANT_BOOL,
+    pscode pscode_mut: *mut SCODE,
+    pcyVal pcyVal_mut: *mut CY,
+    pdate pdate_mut: *mut DATE,
+    pbstrVal pbstrVal_mut: *mut BSTR,
+    ppunkVal ppunkVal_mut: *mut *mut IUnknown,
+    ppdispVal ppdispVal_mut: *mut *mut IDispatch,
+    pparray pparray_mut: *mut *mut SAFEARRAY,
+    pvarVal pvarVal_mut: *mut VARIANT,
+    byref byref_mut: PVOID,
+    cVal cVal_mut: CHAR,
+    uiVal uiVal_mut: USHORT,
+    ulVal ulVal_mut: ULONG,
+    ullVal ullVal_mut: ULONGLONG,
+    intVal intVal_mut: INT,
+    uintVal uintVal_mut: UINT,
+    pdecVal pdecVal_mut: *mut DECIMAL,
+    pcVal pcVal_mut: *mut CHAR,
+    puiVal puiVal_mut: *mut USHORT,
+    pulVal pulVal_mut: *mut ULONG,
+    pullVal pullVal_mut: *mut ULONGLONG,
+    pintVal pintVal_mut: *mut INT,
+    puintVal puintVal_mut: *mut UINT,
+    n4 n4_mut: __tagBRECORD,
+}}
+STRUCT!{struct __tagVARIANT {
+    vt: VARTYPE,
+    wReserved1: WORD,
+    wReserved2: WORD,
+    wReserved3: WORD,
+    n3: VARIANT_n3,
+}}
+#[cfg(target_arch = "x86")]
+UNION2!{union VARIANT_n1 {
+    [u64; 2],
+    n2 n2_mut: __tagVARIANT,
+    decVal decVal_mut: DECIMAL,
+}}
+#[cfg(target_arch = "x86_64")]
+UNION2!{union VARIANT_n1 {
+    [u64; 3],
+    n2 n2_mut: __tagVARIANT,
+    decVal decVal_mut: DECIMAL,
+}}
+STRUCT!{struct VARIANT {
+    n1: VARIANT_n1,
+}}
 pub type LPVARIANT = *mut VARIANT;
 pub type VARIANTARG = VARIANT;
 pub type LPVARIANTARG = *mut VARIANT;
@@ -185,7 +259,54 @@ STRUCT!{struct _wireBRECORD {
     fFlags: ULONG,
     clSize: ULONG,
     pRecInfo: *mut IRecordInfo,
-    pRecord: *mut BYTE,
+    pRecord: *mut byte,
+}}
+UNION2!{union _wireVARIANT_u {
+    [u64; 2],
+    llVal llVal_mut: LONGLONG,
+    lVal lVal_mut: LONG,
+    bVal bVal_mut: BYTE,
+    iVal iVal_mut: SHORT,
+    fltVal fltVal_mut: FLOAT,
+    dblVal dblVal_mut: DOUBLE,
+    boolVal boolVal_mut: VARIANT_BOOL,
+    scode scode_mut: SCODE,
+    cyVal cyVal_mut: CY,
+    date date_mut: DATE,
+    bstrVal bstrVal_mut: wireBSTR,
+    punkVal punkVal_mut: *mut IUnknown,
+    pdispVal pdispVal_mut: *mut IDispatch,
+    parray parray_mut: wirePSAFEARRAY,
+    brecVal brecVal_mut: wireBRECORD,
+    pbVal pbVal_mut: *mut BYTE,
+    piVal piVal_mut: *mut SHORT,
+    plVal plVal_mut: *mut LONG,
+    pllVal pllVal_mut: *mut LONGLONG,
+    pfltVal pfltVal_mut: *mut FLOAT,
+    pdblVal pdblVal_mut: *mut DOUBLE,
+    pboolVal pboolVal_mut: *mut VARIANT_BOOL,
+    pscode pscode_mut: *mut SCODE,
+    pcyVal pcyVal_mut: *mut CY,
+    pdate pdate_mut: *mut DATE,
+    pbstrVal pbstrVal_mut: *mut wireBSTR,
+    ppunkVal ppunkVal_mut: *mut *mut IUnknown,
+    ppdispVal ppdispVal_mut: *mut *mut IDispatch,
+    pparray pparray_mut: *mut wirePSAFEARRAY,
+    pvarVal pvarVal_mut: *mut wireVARIANT,
+    cVal cVal_mut: CHAR,
+    uiVal uiVal_mut: USHORT,
+    ulVal ulVal_mut: ULONG,
+    ullVal ullVal_mut: ULONGLONG,
+    intVal intVal_mut: INT,
+    uintVal uintVal_mut: UINT,
+    decVal decVal_mut: DECIMAL,
+    pdecVal pdecVal_mut: *mut DECIMAL,
+    pcVal pcVal_mut: *mut CHAR,
+    puiVal puiVal_mut: *mut USHORT,
+    pulVal pulVal_mut: *mut ULONG,
+    pullVal pullVal_mut: *mut ULONGLONG,
+    pintVal pintVal_mut: *mut INT,
+    puintVal puintVal_mut: *mut UINT,
 }}
 STRUCT!{struct _wireVARIANT {
     clSize: DWORD,
@@ -194,53 +315,8 @@ STRUCT!{struct _wireVARIANT {
     wReserved1: USHORT,
     wReserved2: USHORT,
     wReserved3: USHORT,
-    data0: u64,
-    data1: u64,
+    u: _wireVARIANT_u,
 }}
-UNION!(_wireVARIANT, data0, llVal, llVal_mut, LONGLONG);
-UNION!(_wireVARIANT, data0, lVal, lVal_mut, LONG);
-UNION!(_wireVARIANT, data0, bVal, bVal_mut, BYTE);
-UNION!(_wireVARIANT, data0, iVal, iVal_mut, SHORT);
-UNION!(_wireVARIANT, data0, fltVal, fltVal_mut, FLOAT);
-UNION!(_wireVARIANT, data0, dblVal, dblVal_mut, DOUBLE);
-UNION!(_wireVARIANT, data0, boolVal, boolVal_mut, VARIANT_BOOL);
-UNION!(_wireVARIANT, data0, scode, scode_mut, SCODE);
-UNION!(_wireVARIANT, data0, cyVal, cyVal_mut, CY);
-UNION!(_wireVARIANT, data0, date, date_mut, DATE);
-UNION!(_wireVARIANT, data0, bstrVal, bstrVal_mut, wireBSTR);
-UNION!(_wireVARIANT, data0, punkVal, punkVal_mut, *mut IUnknown);
-UNION!(_wireVARIANT, data0, pdispVal, pdispVal_mut, *mut IDispatch);
-UNION!(_wireVARIANT, data0, parray, parray_mut, wirePSAFEARRAY);
-UNION!(_wireVARIANT, data0, brecVal, brecVal_mut, wireBRECORD);
-UNION!(_wireVARIANT, data0, pllVal, pllVal_mut, *mut LONGLONG);
-UNION!(_wireVARIANT, data0, plVal, plVal_mut, *mut LONG);
-UNION!(_wireVARIANT, data0, pbVal, pbVal_mut, *mut BYTE);
-UNION!(_wireVARIANT, data0, piVal, piVal_mut, *mut SHORT);
-UNION!(_wireVARIANT, data0, pfltVal, pfltVal_mut, *mut FLOAT);
-UNION!(_wireVARIANT, data0, pdblVal, pdblVal_mut, *mut DOUBLE);
-UNION!(_wireVARIANT, data0, pboolVal, pboolVal_mut, *mut VARIANT_BOOL);
-UNION!(_wireVARIANT, data0, pscode, pscode_mut, *mut SCODE);
-UNION!(_wireVARIANT, data0, pcyVal, pcyVal_mut, *mut CY);
-UNION!(_wireVARIANT, data0, pdate, pdate_mut, *mut DATE);
-UNION!(_wireVARIANT, data0, pbstrVal, pbstrVal_mut, *mut wireBSTR);
-UNION!(_wireVARIANT, data0, ppunkVal, ppunkVal_mut, *mut *mut IUnknown);
-UNION!(_wireVARIANT, data0, ppdispVal, ppdispVal_mut, *mut *mut IDispatch);
-UNION!(_wireVARIANT, data0, pparray, pparray_mut, *mut wirePSAFEARRAY);
-UNION!(_wireVARIANT, data0, pvarVal, pvarVal_mut, *mut wireVARIANT);
-UNION!(_wireVARIANT, data0, cVal, cVal_mut, CHAR);
-UNION!(_wireVARIANT, data0, uiVal, uiVal_mut, USHORT);
-UNION!(_wireVARIANT, data0, ulVal, ulVal_mut, ULONG);
-UNION!(_wireVARIANT, data0, ullVal, ullVal_mut, ULONGLONG);
-UNION!(_wireVARIANT, data0, intVal, intVal_mut, INT);
-UNION!(_wireVARIANT, data0, uintVal, uintVal_mut, UINT);
-UNION!(_wireVARIANT, data0, decVal, decVal_mut, DECIMAL);
-UNION!(_wireVARIANT, data0, pcVal, pcVal_mut, *mut CHAR);
-UNION!(_wireVARIANT, data0, puiVal, puiVal_mut, *mut USHORT);
-UNION!(_wireVARIANT, data0, pulVal, pulVal_mut, *mut ULONG);
-UNION!(_wireVARIANT, data0, pullVal, pullVal_mut, *mut ULONGLONG);
-UNION!(_wireVARIANT, data0, pintVal, pintVal_mut, *mut INT);
-UNION!(_wireVARIANT, data0, puintVal, puintVal_mut, *mut UINT);
-UNION!(_wireVARIANT, data0, pdecVal, pdecVal_mut, *mut DECIMAL);
 pub type DISPID = LONG;
 pub type MEMBERID = DISPID;
 pub type HREFTYPE = DWORD;
@@ -255,19 +331,16 @@ ENUM!{enum TYPEKIND {
     TKIND_UNION,
     TKIND_MAX,
 }}
-#[cfg(target_arch = "x86_64")]
+UNION2!{union TYPEDESC_u {
+    [usize; 1],
+    lptdesc lptdesc_mut: *mut TYPEDESC,
+    lpadesc lpadesc_mut: *mut ARRAYDESC,
+    hreftype hreftype_mut: HREFTYPE,
+}}
 STRUCT!{struct TYPEDESC {
-    data: u64,
+    u: TYPEDESC_u,
     vt: VARTYPE,
 }}
-#[cfg(target_arch = "x86")]
-STRUCT!{struct TYPEDESC {
-    data: u32,
-    vt: VARTYPE,
-}}
-UNION!(TYPEDESC, data, lptdesc, lptdesc_mut, *mut TYPEDESC);
-UNION!(TYPEDESC, data, lpadesc, lpadesc_mut, *mut ARRAYDESC);
-UNION!(TYPEDESC, data, hreftype, hreftype_mut, HREFTYPE);
 STRUCT!{struct ARRAYDESC {
     tdescElem: TYPEDESC,
     cDims: USHORT,
@@ -301,11 +374,15 @@ pub const IDLFLAG_FIN: DWORD = PARAMFLAG_FIN;
 pub const IDLFLAG_FOUT: DWORD = PARAMFLAG_FOUT;
 pub const IDLFLAG_FLCID: DWORD = PARAMFLAG_FLCID;
 pub const IDLFLAG_FRETVAL: DWORD = PARAMFLAG_FRETVAL;
+UNION2!{union ELEMDESC_u {
+    [usize; 2],
+    idldesc idldesc_mut: IDLDESC,
+    paramdesc paramdesc_mut: PARAMDESC,
+}}
 STRUCT!{struct ELEMDESC {
     tdesc: TYPEDESC,
-    idldesc: IDLDESC,
+    u: ELEMDESC_u,
 }}
-UNION!(ELEMDESC, idldesc, paramdesc, paramdesc_mut, PARAMDESC);
 pub type LPELEMDESC = *mut ELEMDESC;
 STRUCT!{struct TYPEATTR {
     guid: GUID,
@@ -398,15 +475,19 @@ pub const IMPLTYPEFLAG_FDEFAULT: DWORD = 0x1;
 pub const IMPLTYPEFLAG_FSOURCE: DWORD = 0x2;
 pub const IMPLTYPEFLAG_FRESTRICTED: DWORD = 0x4;
 pub const IMPLTYPEFLAG_FDEFAULTVTABLE: DWORD = 0x8;
+UNION2!{union VARDESC_u {
+    [usize; 1],
+    oInst oInst_mut: ULONG,
+    lpvarValue lpvarValue_mut: *mut VARIANT,
+}}
 STRUCT!{struct VARDESC {
     memid: MEMBERID,
     lpstrSchema: LPOLESTR,
-    lpvarValue: *mut VARIANT,
+    u: VARDESC_u,
     elemdescVar: ELEMDESC,
     wVarFlags: WORD,
     varkind: VARKIND,
 }}
-UNION!(VARDESC, lpvarValue, oInst, oInst_mut, ULONG);
 pub type LPVARDESC = *mut VARDESC;
 ENUM!{enum TYPEFLAGS {
     TYPEFLAG_FAPPOBJECT = 0x1,
@@ -471,7 +552,7 @@ STRUCT!{struct CUSTDATA {
 }}
 pub type LPCUSTDATA = *mut CUSTDATA;
 pub type LPCREATETYPEINFO = *mut ICreateTypeInfo;
-RIDL!(#[uuid(0x00020405, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x00020405, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ICreateTypeInfo(ICreateTypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn SetGuid(
         guid: REFGUID,
@@ -551,9 +632,13 @@ interface ICreateTypeInfo(ICreateTypeInfoVtbl): IUnknown(IUnknownVtbl) {
         pIdlDesc: *mut IDLDESC,
     ) -> HRESULT,
     fn LayOut() -> HRESULT,
-}
-);
-
+}}
+// LPCREATETYPEINFO2
+// ICreateTypeInfo2
+// LPCREATETYPELIB
+// ICreateTypeLib
+// LPCREATETYPELIB2
+// ICreateTypeLib2
 pub type LPDISPATCH = *mut IDispatch;
 pub const DISPID_UNKNOWN: INT = -1;
 pub const DISPID_VALUE: INT = 0;
@@ -563,7 +648,7 @@ pub const DISPID_EVALUATE: INT = -5;
 pub const DISPID_CONSTRUCTOR: INT = -6;
 pub const DISPID_DESTRUCTOR: INT = -7;
 pub const DISPID_COLLECT: INT = -8;
-RIDL!(#[uuid(0x00020400, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x00020400, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeInfoCount(
         pctinfo: *mut UINT,
@@ -590,8 +675,13 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
         pExcepInfo: *mut EXCEPINFO,
         puArgErr: *mut UINT,
     ) -> HRESULT,
-}
-);
+}}
+// IDispatch_RemoteInvoke_Proxy
+// IDispatch_RemoteInvoke_Stub
+// LPENUMVARIANT
+// IEnumVARIANT
+// IEnumVARIANT_RemoteNext_Proxy
+// IEnumVARIANT_RemoteNext_Stub
 pub enum IRecordInfo {} // FIXME
 pub enum ITypeComp {} // FIXME
 
