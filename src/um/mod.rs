@@ -199,6 +199,7 @@ pub mod gl;
 #[cfg(feature = "vss")] pub mod vss;
 #[cfg(feature = "vsserror")] pub mod vsserror;
 #[cfg(feature = "vswriter")] pub mod vswriter;
+#[cfg(feature = "wct")] pub mod wct;
 #[cfg(feature = "werapi")] pub mod werapi;
 #[cfg(feature = "winbase")] pub mod winbase;
 #[cfg(feature = "wincodec")] pub mod wincodec;
