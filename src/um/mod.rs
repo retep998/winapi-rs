@@ -8,6 +8,7 @@
 pub mod gl;
 #[cfg(feature = "accctrl")] pub mod accctrl;
 #[cfg(feature = "aclapi")] pub mod aclapi;
+#[cfg(feature = "appmgmt")] pub mod appmgmt;
 #[cfg(feature = "audioclient")] pub mod audioclient;
 #[cfg(feature = "audiosessiontypes")] pub mod audiosessiontypes;
 #[cfg(feature = "avrt")] pub mod avrt;

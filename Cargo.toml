@@ -96,6 +96,7 @@ wtypesbase = []
 
 accctrl = []
 aclapi = []
+appmgmt = []
 audioclient = []
 audiosessiontypes = []
 avrt = []
