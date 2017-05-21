@@ -26,6 +26,7 @@
 #[cfg(feature = "dxgiformat")] pub mod dxgiformat;
 #[cfg(feature = "dxgitype")] pub mod dxgitype;
 #[cfg(feature = "evntprov")] pub mod evntprov;
+#[cfg(feature = "evntrace")] pub mod evntrace;
 pub mod guiddef;
 #[cfg(feature = "hidclass")] pub mod hidclass;
 #[cfg(feature = "hidpi")] pub mod hidpi;
