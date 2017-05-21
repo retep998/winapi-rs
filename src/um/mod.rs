@@ -224,6 +224,7 @@ pub mod gl;
 #[cfg(feature = "winnls")] pub mod winnls;
 #[cfg(feature = "winnt")] pub mod winnt;
 #[cfg(feature = "winreg")] pub mod winreg;
+#[cfg(feature = "winsafer")] pub mod winsafer;
 #[cfg(feature = "winscard")] pub mod winscard;
 #[cfg(feature = "winsmcrd")] pub mod winsmcrd;
 #[cfg(feature = "winsock2")] pub mod winsock2;
