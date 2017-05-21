@@ -194,6 +194,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("mmsystem", &["basetsd", "minwindef", "mmreg", "winnt"], &[]),
     ("msaatext", &[], &[]),
     ("mscat", &["guiddef", "minwindef", "mssip", "wincrypt", "winnt"], &[]),
+    ("mschapp", &["basetsd", "minwindef", "winnt"], &["advapi32"]),
     ("mssip", &["guiddef", "minwindef", "mscat", "wincrypt", "winnt"], &["crypt32"]),
     ("namedpipeapi", &["minwinbase", "minwindef", "winnt"], &["advapi32", "kernel32"]),
     ("namespaceapi", &["minwinbase", "minwindef", "ntdef", "winnt"], &["kernel32"]),
