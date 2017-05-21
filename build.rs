@@ -71,6 +71,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     // ucrt
     // um
     ("accctrl", &["guiddef", "minwindef", "winbase", "winnt"], &[]),
+    ("aclapi", &["accctrl", "guiddef", "minwindef", "winnt"], &["advapi32"]),
     ("audioclient", &["audiosessiontypes", "basetsd", "guiddef", "minwindef", "mmreg", "strmif", "unknwnbase", "winerror", "winnt", "wtypesbase"], &[]),
     ("audiosessiontypes", &["minwindef"], &[]),
     ("avrt", &["guiddef", "minwindef", "winnt"], &["avrt"]),
