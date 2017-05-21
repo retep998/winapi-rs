@@ -70,6 +70,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("wtypesbase", &["minwindef", "rpcndr", "winnt"], &[]),
     // ucrt
     // um
+    ("accctrl", &["guiddef", "minwindef", "winbase", "winnt"], &[]),
     ("audioclient", &["audiosessiontypes", "basetsd", "guiddef", "minwindef", "mmreg", "strmif", "unknwnbase", "winerror", "winnt", "wtypesbase"], &[]),
     ("audiosessiontypes", &["minwindef"], &[]),
     ("avrt", &["guiddef", "minwindef", "winnt"], &["avrt"]),
