@@ -1,9 +1,14 @@
-// Copyright © 2015, Peter Atashian
-// Licensed under the MIT License <LICENSE.md>
-//! FFI bindings to bcrypt.
-#![cfg(windows)]
-extern crate winapi;
-use winapi::*;
+use shared::bcrypt::{
+    BCryptBufferDesc, BCRYPT_ALG_HANDLE, BCRYPT_ALGORITHM_IDENTIFIER, BCRYPT_HANDLE,
+    BCRYPT_HASH_HANDLE, BCRYPT_KEY_HANDLE, BCRYPT_MULTI_OPERATION_TYPE, BCRYPT_PROVIDER_NAME,
+    BCRYPT_SECRET_HANDLE, PCRYPT_CONTEXT_CONFIG, PCRYPT_CONTEXT_FUNCTION_CONFIG,
+    PCRYPT_CONTEXT_FUNCTION_PROVIDERS, PCRYPT_CONTEXT_FUNCTIONS, PCRYPT_CONTEXTS,
+    PCRYPT_PROVIDER_REFS, PCRYPT_PROVIDER_REG, PCRYPT_PROVIDERS,
+};
+use shared::ntdef::{NTSTATUS, ULONGLONG, PVOID, VOID};
+use shared::minwindef::{PUCHAR, ULONG};
+use um::winnt::{HANDLE, LPCWSTR, BOOLEAN};
+
 extern "system" {
     pub fn BCryptAddContextFunction(
         dwTable: ULONG, pszContext: LPCWSTR, dwInterface: ULONG, pszFunction: LPCWSTR,
