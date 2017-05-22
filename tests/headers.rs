@@ -41,7 +41,7 @@ fn check_if_in_build<P: Debug>(
 }
 
 fn should_be_ignored(path: &Path) -> bool {
-    let path_str = &path.to_str().unwrap();
+    let path_str = &path.to_str().unwrap().replace("\\", "/");
     TO_IGNORE.iter().find(|x| *x == path_str).is_some()
 }
 
