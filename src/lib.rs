@@ -7,6 +7,7 @@
 #![cfg(windows)]
 #![allow(bad_style)]
 #![deny(overflowing_literals, unused_qualifications, unused)]
+#![allow(unused_macros)]
 #![recursion_limit = "128"]
 #![no_std]
 
