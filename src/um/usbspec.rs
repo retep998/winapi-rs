@@ -4,12 +4,9 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
 //! USB Spec Definitions.
-
 use shared::basetsd::UINT8;
 use shared::minwindef::{UCHAR, USHORT};
-
 ENUM!{enum USB_DEVICE_SPEED {
     UsbLowSpeed = 0,
     UsbFullSpeed,
@@ -31,7 +28,6 @@ BITFIELD!{BM_REQUEST_TYPE _BM: UINT8 [
     Dir set_Dir[7..8],
 ]}
 pub type PBM_REQUEST_TYPE = *mut BM_REQUEST_TYPE;
-
 STRUCT!{#[repr(packed)] struct USB_CONFIGURATION_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,

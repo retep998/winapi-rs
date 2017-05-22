@@ -36,17 +36,14 @@ use um::winnt::{
     THREAD_BASE_PRIORITY_MIN, ULARGE_INTEGER, VOID, WAITORTIMERCALLBACK, WCHAR, WOW64_CONTEXT,
 };
 use vc::vadefs::va_list;
-
 pub const FILE_BEGIN: DWORD = 0;
 pub const FILE_CURRENT: DWORD = 1;
 pub const FILE_END: DWORD = 2;
-
 pub const WAIT_FAILED: DWORD = 0xFFFFFFFF;
 pub const WAIT_OBJECT_0: DWORD = STATUS_WAIT_0 as DWORD;
 pub const WAIT_ABANDONED: DWORD = STATUS_ABANDONED_WAIT_0 as DWORD;
 pub const WAIT_ABANDONED_0: DWORD = STATUS_ABANDONED_WAIT_0 as DWORD;
 pub const WAIT_IO_COMPLETION: DWORD = STATUS_USER_APC as DWORD;
-
 pub const FILE_FLAG_WRITE_THROUGH: DWORD = 0x80000000;
 pub const FILE_FLAG_OVERLAPPED: DWORD = 0x40000000;
 pub const FILE_FLAG_NO_BUFFERING: DWORD = 0x20000000;
@@ -60,15 +57,12 @@ pub const FILE_FLAG_OPEN_REPARSE_POINT: DWORD = 0x00200000;
 pub const FILE_FLAG_OPEN_NO_RECALL: DWORD = 0x00100000;
 pub const FILE_FLAG_FIRST_PIPE_INSTANCE: DWORD = 0x00080000;
 pub const FILE_FLAG_OPEN_REQUIRING_OPLOCK: DWORD = 0x00040000;
-
 pub const PROGRESS_CONTINUE: DWORD = 0;
 pub const PROGRESS_CANCEL: DWORD = 1;
 pub const PROGRESS_STOP: DWORD = 2;
 pub const PROGRESS_QUIET: DWORD = 3;
-
 pub const CALLBACK_CHUNK_FINISHED: DWORD = 0x00000000;
 pub const CALLBACK_STREAM_SWITCH: DWORD = 0x00000001;
-
 pub const COPY_FILE_FAIL_IF_EXISTS: DWORD = 0x00000001;
 pub const COPY_FILE_RESTARTABLE: DWORD = 0x00000002;
 pub const COPY_FILE_OPEN_SOURCE_FOR_WRITE: DWORD = 0x00000004;
@@ -78,18 +72,14 @@ pub const COPY_FILE_NO_BUFFERING: DWORD = 0x00001000;
 pub const COPY_FILE_REQUEST_SECURITY_PRIVILEGES: DWORD = 0x00002000;
 pub const COPY_FILE_RESUME_FROM_PAUSE: DWORD = 0x00004000;
 pub const COPY_FILE_NO_OFFLOAD: DWORD = 0x00040000;
-
 pub const REPLACEFILE_WRITE_THROUGH: DWORD = 0x00000001;
 pub const REPLACEFILE_IGNORE_MERGE_ERRORS: DWORD = 0x00000002;
 pub const REPLACEFILE_IGNORE_ACL_ERRORS: DWORD = 0x00000004;
-
 pub const PIPE_ACCESS_INBOUND: DWORD = 0x00000001;
 pub const PIPE_ACCESS_OUTBOUND: DWORD = 0x00000002;
 pub const PIPE_ACCESS_DUPLEX: DWORD = 0x00000003;
-
 pub const PIPE_CLIENT_END: DWORD = 0x00000000;
 pub const PIPE_SERVER_END: DWORD = 0x00000001;
-
 pub const PIPE_WAIT: DWORD = 0x00000000;
 pub const PIPE_NOWAIT: DWORD = 0x00000001;
 pub const PIPE_READMODE_BYTE: DWORD = 0x00000000;
@@ -98,14 +88,11 @@ pub const PIPE_TYPE_BYTE: DWORD = 0x00000000;
 pub const PIPE_TYPE_MESSAGE: DWORD = 0x00000004;
 pub const PIPE_ACCEPT_REMOTE_CLIENTS: DWORD = 0x00000000;
 pub const PIPE_REJECT_REMOTE_CLIENTS: DWORD = 0x00000008;
-
 pub const PIPE_UNLIMITED_INSTANCES: DWORD = 255;
-
 pub const SECURITY_CONTEXT_TRACKING: DWORD = 0x00040000;
 pub const SECURITY_EFFECTIVE_ONLY: DWORD = 0x00080000;
 pub const SECURITY_SQOS_PRESENT: DWORD = 0x00100000;
 pub const SECURITY_VALID_SQOS_FLAGS: DWORD = 0x001F0000;
-
 FN!{stdcall PFIBER_START_ROUTINE(
     lpFiberParameter: LPVOID,
 ) -> ()}
@@ -115,7 +102,6 @@ FN!{stdcall PFIBER_CALLOUT_ROUTINE(
 ) -> LPVOID}
 // FAIL_FAST_*
 pub type LPLDT_ENTRY = LPVOID; // TODO - fix this for 32-bit
-
 //SP_SERIALCOMM
 //PST_*
 // PCF_*
@@ -124,7 +110,6 @@ pub type LPLDT_ENTRY = LPVOID; // TODO - fix this for 32-bit
 // DATABITS_*
 // STOPBITS_*
 // PARITY_*
-
 STRUCT!{struct COMMPROP {
     wPacketLength: WORD,
     wPacketVersion: WORD,
@@ -146,7 +131,6 @@ STRUCT!{struct COMMPROP {
     wcProvChar: [WCHAR; 1],
 }}
 pub type LPCOMMPROP = *mut COMMPROP;
-
 STRUCT!{struct COMSTAT {
     BitFields: DWORD,
     cbInQue: DWORD,
@@ -163,16 +147,13 @@ BITFIELD!(COMSTAT BitFields: DWORD [
     fReserved set_fReserved[7..32],
 ]);
 pub type LPCOMSTAT = *mut COMSTAT;
-
 pub const DTR_CONTROL_DISABLE: DWORD = 0x00;
 pub const DTR_CONTROL_ENABLE: DWORD = 0x01;
 pub const DTR_CONTROL_HANDSHAKE: DWORD = 0x02;
-
 pub const RTS_CONTROL_DISABLE: DWORD = 0x00;
 pub const RTS_CONTROL_ENABLE: DWORD = 0x01;
 pub const RTS_CONTROL_HANDSHAKE: DWORD = 0x02;
 pub const RTS_CONTROL_TOGGLE: DWORD = 0x03;
-
 STRUCT!{struct DCB {
     DCBlength: DWORD,
     BaudRate: DWORD,
@@ -226,7 +207,6 @@ STRUCT!{struct COMMCONFIG {
     wcProviderData: [WCHAR; 1],
 }}
 pub type LPCOMMCONFIG = *mut COMMCONFIG;
-
 // GMEM_*
 STRUCT!{struct MEMORYSTATUS {
     dwLength: DWORD,
@@ -239,9 +219,7 @@ STRUCT!{struct MEMORYSTATUS {
     dwAvailVirtual: SIZE_T,
 }}
 pub type LPMEMORYSTATUS = *mut MEMORYSTATUS;
-
 // NUMA_NO_PREFERRED_NODE
-
 pub const DEBUG_PROCESS: DWORD = 0x00000001;
 pub const DEBUG_ONLY_THIS_PROCESS: DWORD = 0x00000002;
 pub const CREATE_SUSPENDED: DWORD = 0x00000004;
@@ -272,9 +250,7 @@ pub const PROFILE_USER: DWORD = 0x10000000;
 pub const PROFILE_KERNEL: DWORD = 0x20000000;
 pub const PROFILE_SERVER: DWORD = 0x40000000;
 pub const CREATE_IGNORE_SYSTEM_DEFAULT: DWORD = 0x80000000;
-
 // STACK_SIZE_PARAM_IS_A_RESERVATION
-
 pub const THREAD_PRIORITY_LOWEST: DWORD = THREAD_BASE_PRIORITY_MIN;
 pub const THREAD_PRIORITY_BELOW_NORMAL: DWORD = THREAD_PRIORITY_LOWEST + 1;
 pub const THREAD_PRIORITY_NORMAL: DWORD = 0;
@@ -283,15 +259,12 @@ pub const THREAD_PRIORITY_ABOVE_NORMAL: DWORD = THREAD_PRIORITY_HIGHEST - 1;
 pub const THREAD_PRIORITY_ERROR_RETURN: DWORD = MAXLONG as DWORD;
 pub const THREAD_PRIORITY_TIME_CRITICAL: DWORD = THREAD_BASE_PRIORITY_LOWRT;
 pub const THREAD_PRIORITY_IDLE: DWORD = THREAD_BASE_PRIORITY_IDLE;
-
 pub const THREAD_MODE_BACKGROUND_BEGIN: DWORD = 0x00010000;
 pub const THREAD_MODE_BACKGROUND_END: DWORD = 0x00020000;
-
 pub const VOLUME_NAME_DOS: DWORD = 0x0;
 // VOLUME_NAME_*
 // FILE_NAME_*
 // JIT_DEBUG_*
-
 pub const DRIVE_UNKNOWN: DWORD = 0;
 pub const DRIVE_NO_ROOT_DIR: DWORD = 1;
 pub const DRIVE_REMOVABLE: DWORD = 2;
@@ -299,32 +272,25 @@ pub const DRIVE_FIXED: DWORD = 3;
 pub const DRIVE_REMOTE: DWORD = 4;
 pub const DRIVE_CDROM: DWORD = 5;
 pub const DRIVE_RAMDISK: DWORD = 6;
-
 // pub fn GetFreeSpace();
-
 pub const FILE_TYPE_UNKNOWN: DWORD = 0x0000;
 pub const FILE_TYPE_DISK: DWORD = 0x0001;
 pub const FILE_TYPE_CHAR: DWORD = 0x0002;
 pub const FILE_TYPE_PIPE: DWORD = 0x0003;
 pub const FILE_TYPE_REMOTE: DWORD = 0x8000;
-
 pub const STD_INPUT_HANDLE: DWORD = 0xFFFFFFF6;
 pub const STD_OUTPUT_HANDLE: DWORD = 0xFFFFFFF5;
 pub const STD_ERROR_HANDLE: DWORD = 0xFFFFFFF4;
-
 pub const NOPARITY: BYTE = 0;
 pub const ODDPARITY: BYTE = 1;
 pub const EVENPARITY: BYTE = 2;
 pub const MARKPARITY: BYTE = 3;
 pub const SPACEPARITY: BYTE = 4;
-
 pub const ONESTOPBIT: BYTE = 0;
 pub const ONE5STOPBITS: BYTE = 1;
 pub const TWOSTOPBITS: BYTE = 2;
-
 pub const IGNORE: DWORD = 0;
 pub const INFINITE: DWORD = 0xFFFFFFFF;
-
 pub const CBR_110: DWORD = 110;
 pub const CBR_300: DWORD = 300;
 pub const CBR_600: DWORD = 600;
@@ -340,13 +306,9 @@ pub const CBR_57600: DWORD = 57600;
 pub const CBR_115200: DWORD = 115200;
 pub const CBR_128000: DWORD = 128000;
 pub const CBR_256000: DWORD = 256000;
-
 // CE_*
-
 // IE_*
-
 // EV_*
-
 pub const SETXOFF: DWORD = 1;
 pub const SETXON: DWORD = 2;
 pub const SETRTS: DWORD = 3;
@@ -356,22 +318,15 @@ pub const CLRDTR: DWORD = 6;
 pub const RESETDEV: DWORD = 7;
 pub const SETBREAK: DWORD = 8;
 pub const CLRBREAK: DWORD = 9;
-
 // PURGE_*
-
 pub const MS_CTS_ON: DWORD = 0x0010;
 pub const MS_DSR_ON: DWORD = 0x0020;
 pub const MS_RING_ON: DWORD = 0x0040;
 pub const MS_RLSD_ON: DWORD = 0x0080;
-
 // S_*
-
 // NMPWAIT_*
-
 // FS_*
-
 // OF_*
-
 pub const OFS_MAXPATHNAME: usize = 128;
 STRUCT!{struct OFSTRUCT {
     cBytes: BYTE,
@@ -383,7 +338,6 @@ STRUCT!{struct OFSTRUCT {
 }}
 pub type POFSTRUCT = *mut OFSTRUCT;
 pub type LPOFSTRUCT = *mut OFSTRUCT;
-
 extern "system" {
     pub fn GlobalAlloc(
         uFlags: UINT,
@@ -462,9 +416,7 @@ extern "system" {
         uMinFree: UINT
     ) -> SIZE_T;
 }
-
 // SCS_*
-
 extern "system" {
     pub fn GetBinaryTypeA(
         lpApplicationName: LPCSTR,
@@ -546,7 +498,6 @@ extern "system" {
         lpParameter: LPVOID
     ) -> LPVOID;
 }
-
 pub type PUMS_CONTEXT = *mut c_void;
 pub type PUMS_COMPLETION_LIST = *mut c_void;
 pub type UMS_THREAD_INFO_CLASS = RTL_UMS_THREAD_INFO_CLASS;
@@ -575,7 +526,6 @@ UNION!(
     ULONG
 );
 pub type PUMS_SYSTEM_THREAD_INFORMATION = *mut UMS_SYSTEM_THREAD_INFORMATION;
-
 extern "system" {
     #[cfg(target_arch = "x86_64")]
     pub fn CreateUmsCompletionList(
@@ -685,12 +635,10 @@ extern "system" {
         Flags: UCHAR
     ) -> BOOL;
 }
-
 pub const SEM_FAILCRITICALERRORS: UINT = 0x0001;
 pub const SEM_NOGPFAULTERRORBOX: UINT = 0x0002;
 pub const SEM_NOALIGNMENTFAULTEXCEPT: UINT = 0x0004;
 pub const SEM_NOOPENFILEERRORBOX: UINT = 0x8000;
-
 extern "system" {
     pub fn Wow64GetThreadContext(
         hThread: HANDLE,
@@ -834,7 +782,6 @@ extern "system" {
         nDenominator: c_int
     ) -> c_int;
 }
-
 ENUM!{enum DEP_SYSTEM_POLICY_TYPE {
     DEPPolicyAlwaysOff = 0,
     DEPPolicyAlwaysOn,
@@ -842,7 +789,6 @@ ENUM!{enum DEP_SYSTEM_POLICY_TYPE {
     DEPPolicyOptOut,
     DEPTotalPolicyCount,
 }}
-
 extern "system" {
     pub fn GetSystemDEPPolicy() -> DEP_SYSTEM_POLICY_TYPE;
     pub fn GetSystemRegistryQuota(
@@ -878,7 +824,6 @@ extern "system" {
         Arguments: *mut va_list,
     ) -> DWORD;
 }
-
 pub const FORMAT_MESSAGE_IGNORE_INSERTS: DWORD = 0x00000200;
 pub const FORMAT_MESSAGE_FROM_STRING: DWORD = 0x00000400;
 pub const FORMAT_MESSAGE_FROM_HMODULE: DWORD = 0x00000800;
@@ -886,7 +831,6 @@ pub const FORMAT_MESSAGE_FROM_SYSTEM: DWORD = 0x00001000;
 pub const FORMAT_MESSAGE_ARGUMENT_ARRAY: DWORD = 0x00002000;
 pub const FORMAT_MESSAGE_MAX_WIDTH_MASK: DWORD = 0x000000FF;
 pub const FORMAT_MESSAGE_ALLOCATE_BUFFER: DWORD = 0x00000100;
-
 extern "system" {
     pub fn CreateMailslotA(
         lpName: LPCSTR,
@@ -1041,7 +985,6 @@ extern "system" {
     ) -> BOOL;
 }
 //2886
-
 pub const STARTF_USESHOWWINDOW: DWORD = 0x00000001;
 pub const STARTF_USESIZE: DWORD = 0x00000002;
 pub const STARTF_USEPOSITION: DWORD = 0x00000004;
@@ -1056,7 +999,6 @@ pub const STARTF_TITLEISLINKNAME: DWORD = 0x00000800;
 pub const STARTF_TITLEISAPPID: DWORD = 0x00001000;
 pub const STARTF_PREVENTPINNING: DWORD = 0x00002000;
 pub const STARTF_UNTRUSTEDSOURCE: DWORD = 0x00008000;
-
 extern "system" {
     pub fn OpenMutexA(
         dwDesiredAccess: DWORD,
@@ -1142,7 +1084,6 @@ extern "system" {
     ) -> BOOL;
 }
 //3233
-
 extern "system" {
     pub fn GetStartupInfoA(
         lpStartupInfo: LPSTARTUPINFOA
@@ -1670,7 +1611,6 @@ extern "system" {
         bFailIfExists: BOOL
     ) -> BOOL;
 }
-
 FN!{stdcall LPPROGRESS_ROUTINE(
     TotalFileSize: LARGE_INTEGER,
     TotalBytesTransferred: LARGE_INTEGER,
@@ -1682,7 +1622,6 @@ FN!{stdcall LPPROGRESS_ROUTINE(
     hDestinationFile: HANDLE,
     lpData: LPVOID,
 ) -> DWORD}
-
 extern "system" {
     pub fn CopyFileExA(
         lpExistingFileName: LPCSTR,
@@ -1719,7 +1658,6 @@ extern "system" {
         hTransaction: HANDLE,
     ) -> BOOL;
 }
-
 ENUM!{enum COPYFILE2_MESSAGE_TYPE {
     COPYFILE2_CALLBACK_NONE = 0,
     COPYFILE2_CALLBACK_CHUNK_STARTED,
@@ -1747,7 +1685,6 @@ ENUM!{enum COPYFILE2_COPY_PHASE {
     COPYFILE2_PHASE_NAMEGRAFT_COPY,
     COPYFILE2_PHASE_MAX,
 }}
-
 STRUCT!{struct COPYFILE2_MESSAGE_ChunkStarted {
     dwStreamNumber: DWORD,
     dwReserved: DWORD,
@@ -1867,7 +1804,6 @@ STRUCT!{struct COPYFILE2_EXTENDED_PARAMETERS {
     pProgressRoutine: PCOPYFILE2_PROGRESS_ROUTINE,
     pvCallbackContext: PVOID,
 }}
-
 extern "system" {
     pub fn CopyFile2(
         pwszExistingFileName: PCWSTR,
@@ -1923,14 +1859,12 @@ extern "system" {
         hTransaction: HANDLE,
     ) -> BOOL;
 }
-
 pub const MOVEFILE_REPLACE_EXISTING: DWORD = 0x00000001;
 pub const MOVEFILE_COPY_ALLOWED: DWORD = 0x00000002;
 pub const MOVEFILE_DELAY_UNTIL_REBOOT: DWORD = 0x00000004;
 pub const MOVEFILE_WRITE_THROUGH: DWORD = 0x00000008;
 pub const MOVEFILE_CREATE_HARDLINK: DWORD = 0x00000010;
 pub const MOVEFILE_FAIL_IF_NOT_TRACKABLE: DWORD = 0x00000020;
-
 extern "system" {
     pub fn ReplaceFileA(
         lpReplacedFileName: LPCSTR,
@@ -2325,7 +2259,6 @@ extern "system" {
         IntegrityLabel: PSID,
     ) -> BOOL;
 }
-
 pub const HW_PROFILE_GUIDLEN: usize = 39;
 // MAX_PROFILE_LEN
 pub const DOCKINFO_UNDOCKED: DWORD = 0x1;
@@ -2345,7 +2278,6 @@ STRUCT!{struct HW_PROFILE_INFOW {
     szHwProfileName: [WCHAR; MAX_PROFILE_LEN],
 }}
 pub type LPHW_PROFILE_INFOW = *mut HW_PROFILE_INFOW;
-
 extern "system" {
     pub fn GetCurrentHwProfileA(
         lpHwProfileInfo: LPHW_PROFILE_INFOA
@@ -2364,7 +2296,6 @@ extern "system" {
         dwlConditionMask: DWORDLONG,
     ) -> BOOL;
 }
-
 STRUCT!{struct SYSTEM_POWER_STATUS {
     ACLineStatus: BYTE,
     BatteryFlag: BYTE,
@@ -2374,7 +2305,6 @@ STRUCT!{struct SYSTEM_POWER_STATUS {
     BatteryFullLifeTime: DWORD,
 }}
 pub type LPSYSTEM_POWER_STATUS = *mut SYSTEM_POWER_STATUS;
-
 extern "system" {
     pub fn GetSystemPowerStatus(
         lpSystemPowerStatus: LPSYSTEM_POWER_STATUS
@@ -2462,9 +2392,7 @@ extern "system" {
         lpcchReturnLength: PDWORD,
     ) -> BOOL;
 }
-
 // ACTCTX_FLAG_*
-
 STRUCT!{struct ACTCTXA {
     cbSize: ULONG,
     dwFlags: DWORD,
@@ -2491,7 +2419,6 @@ STRUCT!{struct ACTCTXW {
 pub type PACTCTXW = *mut ACTCTXW;
 pub type PCACTCTXA = *const ACTCTXA;
 pub type PCACTCTXW = *const ACTCTXW;
-
 extern "system" {
     pub fn CreateActCtxA(
         pActCtx: PCACTCTXA
@@ -2520,7 +2447,6 @@ extern "system" {
         lphActCtx: *mut HANDLE
     ) -> BOOL;
 }
-
 STRUCT!{struct ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA {
     lpInformation: PVOID,
     lpSectionBase: PVOID,
@@ -2548,7 +2474,6 @@ STRUCT!{struct ACTCTX_SECTION_KEYED_DATA {
 }}
 pub type PACTCTX_SECTION_KEYED_DATA = *mut ACTCTX_SECTION_KEYED_DATA;
 pub type PCACTCTX_SECTION_KEYED_DATA = *const ACTCTX_SECTION_KEYED_DATA;
-
 extern "system" {
     pub fn FindActCtxSectionStringA(
         dwFlags: DWORD,
@@ -2620,14 +2545,11 @@ extern "system" {
         NodeNumber: PUCHAR
     ) -> BOOL;
 }
-
 FN!{stdcall APPLICATION_RECOVERY_CALLBACK(
     pvParameter: PVOID,
 ) -> DWORD}
-
 // RESTART_*
 // RECOVERY_*
-
 extern "system" {
     pub fn RegisterApplicationRecoveryCallback(
         pRecoveyCallback: APPLICATION_RECOVERY_CALLBACK,
@@ -2657,9 +2579,7 @@ extern "system" {
         bSuccess: BOOL
     );
 }
-
 // FILE_BASIC_INFO, etc.
-
 extern "system" {
     pub fn GetFileInformationByHandleEx(
         hFile: HANDLE,
@@ -2668,7 +2588,6 @@ extern "system" {
         dwBufferSize: DWORD,
     ) -> BOOL;
 }
-
 ENUM!{enum FILE_ID_TYPE {
     FileIdType,
     ObjectIdType,
@@ -2695,7 +2614,6 @@ UNION!(
     FILE_ID_128
 );
 pub type LPFILE_ID_DESCRIPTOR = *mut FILE_ID_DESCRIPTOR;
-
 extern "system" {
     pub fn OpenFileById(
         hVolumeHint: HANDLE,

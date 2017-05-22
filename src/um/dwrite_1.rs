@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the content of dwrite_1.h
-
 use shared::basetsd::{INT16, INT32, UINT16, UINT32, UINT8};
 use shared::minwindef::{BOOL, FLOAT};
 use um::dcommon::DWRITE_MEASURING_MODE;
@@ -19,7 +18,6 @@ use um::dwrite::{
     IDWriteTextAnalyzer, IDWriteTextAnalyzerVtbl, IDWriteTextLayout, IDWriteTextLayoutVtbl,
 };
 use um::winnt::{HRESULT, WCHAR};
-
 ENUM!{enum DWRITE_PANOSE_FAMILY {
     DWRITE_PANOSE_FAMILY_ANY = 0x0, // 0
     DWRITE_PANOSE_FAMILY_NO_FIT = 0x1, // 1
@@ -29,7 +27,6 @@ ENUM!{enum DWRITE_PANOSE_FAMILY {
     DWRITE_PANOSE_FAMILY_SYMBOL = 0x5, // 5
     DWRITE_PANOSE_FAMILY_PICTORIAL = 0x5, // 5
 }}
-
 ENUM!{enum DWRITE_PANOSE_SERIF_STYLE {
     DWRITE_PANOSE_SERIF_STYLE_ANY = 0x0, // 0
     DWRITE_PANOSE_SERIF_STYLE_NO_FIT = 0x1, // 1
@@ -51,7 +48,6 @@ ENUM!{enum DWRITE_PANOSE_SERIF_STYLE {
     DWRITE_PANOSE_SERIF_STYLE_PERP_SANS = 0xD, // 13
     DWRITE_PANOSE_SERIF_STYLE_BONE = 0x8, // 8
 }}
-
 ENUM!{enum DWRITE_PANOSE_WEIGHT {
     DWRITE_PANOSE_WEIGHT_ANY = 0x0, // 0
     DWRITE_PANOSE_WEIGHT_NO_FIT = 0x1, // 1
@@ -67,7 +63,6 @@ ENUM!{enum DWRITE_PANOSE_WEIGHT {
     DWRITE_PANOSE_WEIGHT_EXTRA_BLACK = 0xB, // 11
     DWRITE_PANOSE_WEIGHT_NORD = 0xB, // 11
 }}
-
 ENUM!{enum DWRITE_PANOSE_PROPORTION {
     DWRITE_PANOSE_PROPORTION_ANY = 0x0, // 0
     DWRITE_PANOSE_PROPORTION_NO_FIT = 0x1, // 1
@@ -80,7 +75,6 @@ ENUM!{enum DWRITE_PANOSE_PROPORTION {
     DWRITE_PANOSE_PROPORTION_VERY_CONDENSED = 0x8, // 8
     DWRITE_PANOSE_PROPORTION_MONOSPACED = 0x9, // 9
 }}
-
 ENUM!{enum DWRITE_PANOSE_CONTRAST {
     DWRITE_PANOSE_CONTRAST_ANY = 0x0, // 0
     DWRITE_PANOSE_CONTRAST_NO_FIT = 0x1, // 1
@@ -97,7 +91,6 @@ ENUM!{enum DWRITE_PANOSE_CONTRAST {
     DWRITE_PANOSE_CONTRAST_HORIZONTAL_HIGH = 0xC, // 12
     DWRITE_PANOSE_CONTRAST_BROKEN = 0xD, // 13
 }}
-
 ENUM!{enum DWRITE_PANOSE_STROKE_VARIATION {
     DWRITE_PANOSE_STROKE_VARIATION_ANY = 0x0, // 0
     DWRITE_PANOSE_STROKE_VARIATION_NO_FIT = 0x1, // 1
@@ -111,7 +104,6 @@ ENUM!{enum DWRITE_PANOSE_STROKE_VARIATION {
     DWRITE_PANOSE_STROKE_VARIATION_INSTANT_VERTICAL = 0x9, // 9
     DWRITE_PANOSE_STROKE_VARIATION_INSTANT_HORIZONTAL = 0xA, // 10
 }}
-
 ENUM!{enum DWRITE_PANOSE_ARM_STYLE {
     DWRITE_PANOSE_ARM_STYLE_ANY = 0x0, // 0
     DWRITE_PANOSE_ARM_STYLE_NO_FIT = 0x1, // 1
@@ -133,7 +125,6 @@ ENUM!{enum DWRITE_PANOSE_ARM_STYLE {
     DWRITE_PANOSE_ARM_STYLE_BENT_ARMS_SINGLE_SERIF = 0xA, // 10
     DWRITE_PANOSE_ARM_STYLE_BENT_ARMS_DOUBLE_SERIF = 0xB, // 11
 }}
-
 ENUM!{enum DWRITE_PANOSE_LETTERFORM {
     DWRITE_PANOSE_LETTERFORM_ANY = 0x0, // 0
     DWRITE_PANOSE_LETTERFORM_NO_FIT = 0x1, // 1
@@ -152,7 +143,6 @@ ENUM!{enum DWRITE_PANOSE_LETTERFORM {
     DWRITE_PANOSE_LETTERFORM_OBLIQUE_OFF_CENTER = 0xE, // 14
     DWRITE_PANOSE_LETTERFORM_OBLIQUE_SQUARE = 0xF, // 15
 }}
-
 ENUM!{enum DWRITE_PANOSE_MIDLINE {
     DWRITE_PANOSE_MIDLINE_ANY = 0x0, // 0
     DWRITE_PANOSE_MIDLINE_NO_FIT = 0x1, // 1
@@ -169,7 +159,6 @@ ENUM!{enum DWRITE_PANOSE_MIDLINE {
     DWRITE_PANOSE_MIDLINE_LOW_POINTED = 0xC, // 12
     DWRITE_PANOSE_MIDLINE_LOW_SERIFED = 0xD, // 13
 }}
-
 ENUM!{enum DWRITE_PANOSE_XHEIGHT {
     DWRITE_PANOSE_XHEIGHT_ANY = 0x0, // 0
     DWRITE_PANOSE_XHEIGHT_NO_FIT = 0x1, // 1
@@ -182,7 +171,6 @@ ENUM!{enum DWRITE_PANOSE_XHEIGHT {
     DWRITE_PANOSE_XHEIGHT_CONSTANT_STD = 0x3, // 3
     DWRITE_PANOSE_XHEIGHT_DUCKING_STD = 0x6, // 6
 }}
-
 ENUM!{enum DWRITE_PANOSE_TOOL_KIND {
     DWRITE_PANOSE_TOOL_KIND_ANY = 0x0, // 0
     DWRITE_PANOSE_TOOL_KIND_NO_FIT = 0x1, // 1
@@ -195,14 +183,12 @@ ENUM!{enum DWRITE_PANOSE_TOOL_KIND {
     DWRITE_PANOSE_TOOL_KIND_FELT_PEN_BRUSH_TIP = 0x8, // 8
     DWRITE_PANOSE_TOOL_KIND_WILD_BRUSH = 0x9, // 9
 }}
-
 ENUM!{enum DWRITE_PANOSE_SPACING {
     DWRITE_PANOSE_SPACING_ANY = 0x0, // 0
     DWRITE_PANOSE_SPACING_NO_FIT = 0x1, // 1
     DWRITE_PANOSE_SPACING_PROPORTIONAL_SPACED = 0x2, // 2
     DWRITE_PANOSE_SPACING_MONOSPACED = 0x3, // 3
 }}
-
 ENUM!{enum DWRITE_PANOSE_ASPECT_RATIO {
     DWRITE_PANOSE_ASPECT_RATIO_ANY = 0x0, // 0
     DWRITE_PANOSE_ASPECT_RATIO_NO_FIT = 0x1, // 1
@@ -212,7 +198,6 @@ ENUM!{enum DWRITE_PANOSE_ASPECT_RATIO {
     DWRITE_PANOSE_ASPECT_RATIO_EXPANDED = 0x5, // 5
     DWRITE_PANOSE_ASPECT_RATIO_VERY_EXPANDED = 0x6, // 6
 }}
-
 ENUM!{enum DWRITE_PANOSE_SCRIPT_TOPOLOGY {
     DWRITE_PANOSE_SCRIPT_TOPOLOGY_ANY = 0x0, // 0
     DWRITE_PANOSE_SCRIPT_TOPOLOGY_NO_FIT = 0x1, // 1
@@ -226,7 +211,6 @@ ENUM!{enum DWRITE_PANOSE_SCRIPT_TOPOLOGY {
     DWRITE_PANOSE_SCRIPT_TOPOLOGY_BLACKLETTER_TRAILING = 0x9, // 9
     DWRITE_PANOSE_SCRIPT_TOPOLOGY_BLACKLETTER_CONNECTED = 0xA, // 10
 }}
-
 ENUM!{enum DWRITE_PANOSE_SCRIPT_FORM {
     DWRITE_PANOSE_SCRIPT_FORM_ANY = 0x0, // 0
     DWRITE_PANOSE_SCRIPT_FORM_NO_FIT = 0x1, // 1
@@ -243,7 +227,6 @@ ENUM!{enum DWRITE_PANOSE_SCRIPT_FORM {
     DWRITE_PANOSE_SCRIPT_FORM_EXAGGERATED_MORE_WRAPPING = 0xC, // 12
     DWRITE_PANOSE_SCRIPT_FORM_EXAGGERATED_EXTREME_WRAPPING = 0xD, // 13
 }}
-
 ENUM!{enum DWRITE_PANOSE_FINIALS {
     DWRITE_PANOSE_FINIALS_ANY = 0x0, // 0
     DWRITE_PANOSE_FINIALS_NO_FIT = 0x1, // 1
@@ -260,7 +243,6 @@ ENUM!{enum DWRITE_PANOSE_FINIALS {
     DWRITE_PANOSE_FINIALS_ROUND_CLOSED_LOOPS = 0xC, // 12
     DWRITE_PANOSE_FINIALS_ROUND_OPEN_LOOPS = 0xD, // 13
 }}
-
 ENUM!{enum DWRITE_PANOSE_XASCENT {
     DWRITE_PANOSE_XASCENT_ANY = 0x0, // 0
     DWRITE_PANOSE_XASCENT_NO_FIT = 0x1, // 1
@@ -270,7 +252,6 @@ ENUM!{enum DWRITE_PANOSE_XASCENT {
     DWRITE_PANOSE_XASCENT_HIGH = 0x5, // 5
     DWRITE_PANOSE_XASCENT_VERY_HIGH = 0x6, // 6
 }}
-
 ENUM!{enum DWRITE_PANOSE_DECORATIVE_CLASS {
     DWRITE_PANOSE_DECORATIVE_CLASS_ANY = 0x0, // 0
     DWRITE_PANOSE_DECORATIVE_CLASS_NO_FIT = 0x1, // 1
@@ -286,7 +267,6 @@ ENUM!{enum DWRITE_PANOSE_DECORATIVE_CLASS {
     DWRITE_PANOSE_DECORATIVE_CLASS_COLLAGE = 0xB, // 11
     DWRITE_PANOSE_DECORATIVE_CLASS_MONTAGE = 0xC, // 12
 }}
-
 ENUM!{enum DWRITE_PANOSE_ASPECT {
     DWRITE_PANOSE_ASPECT_ANY = 0x0, // 0
     DWRITE_PANOSE_ASPECT_NO_FIT = 0x1, // 1
@@ -299,7 +279,6 @@ ENUM!{enum DWRITE_PANOSE_ASPECT {
     DWRITE_PANOSE_ASPECT_SUPER_EXTENDED = 0x8, // 8
     DWRITE_PANOSE_ASPECT_MONOSPACED = 0x9, // 9
 }}
-
 ENUM!{enum DWRITE_PANOSE_FILL {
     DWRITE_PANOSE_FILL_ANY = 0x0, // 0
     DWRITE_PANOSE_FILL_NO_FIT = 0x1, // 1
@@ -310,7 +289,6 @@ ENUM!{enum DWRITE_PANOSE_FILL {
     DWRITE_PANOSE_FILL_SHAPED_FILL = 0x6, // 6
     DWRITE_PANOSE_FILL_DRAWN_DISTRESSED = 0x7, // 7
 }}
-
 ENUM!{enum DWRITE_PANOSE_LINING {
     DWRITE_PANOSE_LINING_ANY = 0x0, // 0
     DWRITE_PANOSE_LINING_NO_FIT = 0x1, // 1
@@ -322,7 +300,6 @@ ENUM!{enum DWRITE_PANOSE_LINING {
     DWRITE_PANOSE_LINING_RELIEF = 0x7, // 7
     DWRITE_PANOSE_LINING_BACKDROP = 0x8, // 8
 }}
-
 ENUM!{enum DWRITE_PANOSE_DECORATIVE_TOPOLOGY {
     DWRITE_PANOSE_DECORATIVE_TOPOLOGY_ANY = 0x0, // 0
     DWRITE_PANOSE_DECORATIVE_TOPOLOGY_NO_FIT = 0x1, // 1
@@ -341,7 +318,6 @@ ENUM!{enum DWRITE_PANOSE_DECORATIVE_TOPOLOGY {
     DWRITE_PANOSE_DECORATIVE_TOPOLOGY_BLACKLETTER = 0xE, // 14
     DWRITE_PANOSE_DECORATIVE_TOPOLOGY_SWASH_VARIANCE = 0xF, // 15
 }}
-
 ENUM!{enum DWRITE_PANOSE_CHARACTER_RANGES {
     DWRITE_PANOSE_CHARACTER_RANGES_ANY = 0x0, // 0
     DWRITE_PANOSE_CHARACTER_RANGES_NO_FIT = 0x1, // 1
@@ -350,7 +326,6 @@ ENUM!{enum DWRITE_PANOSE_CHARACTER_RANGES {
     DWRITE_PANOSE_CHARACTER_RANGES_NO_LOWER_CASE = 0x4, // 4
     DWRITE_PANOSE_CHARACTER_RANGES_SMALL_CAPS = 0x5, // 5
 }}
-
 ENUM!{enum DWRITE_PANOSE_SYMBOL_KIND {
     DWRITE_PANOSE_SYMBOL_KIND_ANY = 0x0, // 0
     DWRITE_PANOSE_SYMBOL_KIND_NO_FIT = 0x1, // 1
@@ -366,7 +341,6 @@ ENUM!{enum DWRITE_PANOSE_SYMBOL_KIND {
     DWRITE_PANOSE_SYMBOL_KIND_LOGOS = 0xB, // 11
     DWRITE_PANOSE_SYMBOL_KIND_INDUSTRY_SPECIFIC = 0xC, // 12
 }}
-
 ENUM!{enum DWRITE_PANOSE_SYMBOL_ASPECT_RATIO {
     DWRITE_PANOSE_SYMBOL_ASPECT_RATIO_ANY = 0x0, // 0
     DWRITE_PANOSE_SYMBOL_ASPECT_RATIO_NO_FIT = 0x1, // 1
@@ -379,12 +353,10 @@ ENUM!{enum DWRITE_PANOSE_SYMBOL_ASPECT_RATIO {
     DWRITE_PANOSE_SYMBOL_ASPECT_RATIO_NARROW = 0x8, // 8
     DWRITE_PANOSE_SYMBOL_ASPECT_RATIO_VERY_NARROW = 0x9, // 9
 }}
-
 ENUM!{enum DWRITE_OUTLINE_THRESHOLD {
     DWRITE_OUTLINE_THRESHOLD_ANTIALIASED = 0x0, // 0
     DWRITE_OUTLINE_THRESHOLD_ALIASED = 0x1, // 1
 }}
-
 ENUM!{enum DWRITE_BASELINE {
     DWRITE_BASELINE_DEFAULT = 0x0, // 0
     DWRITE_BASELINE_ROMAN = 0x1, // 1
@@ -396,19 +368,16 @@ ENUM!{enum DWRITE_BASELINE {
     DWRITE_BASELINE_MINIMUM = 0x7, // 7
     DWRITE_BASELINE_MAXIMUM = 0x8, // 8
 }}
-
 ENUM!{enum DWRITE_VERTICAL_GLYPH_ORIENTATION {
     DWRITE_VERTICAL_GLYPH_ORIENTATION_DEFAULT = 0x0, // 0
     DWRITE_VERTICAL_GLYPH_ORIENTATION_STACKED = 0x1, // 1
 }}
-
 ENUM!{enum DWRITE_GLYPH_ORIENTATION_ANGLE {
     DWRITE_GLYPH_ORIENTATION_ANGLE_0_DEGREES = 0x0, // 0
     DWRITE_GLYPH_ORIENTATION_ANGLE_90_DEGREES = 0x1, // 1
     DWRITE_GLYPH_ORIENTATION_ANGLE_180_DEGREES = 0x2, // 2
     DWRITE_GLYPH_ORIENTATION_ANGLE_270_DEGREES = 0x3, // 3
 }}
-
 STRUCT!{struct DWRITE_FONT_METRICS1 {
     designUnitsPerEm: UINT16,
     ascent: UINT16,
@@ -434,13 +403,11 @@ STRUCT!{struct DWRITE_FONT_METRICS1 {
     superscriptSizeY: INT16,
     hasTypographicMetrics: BOOL,
 }}
-
 STRUCT!{struct DWRITE_CARET_METRICS {
     slopeRise: INT16,
     slopeRun: INT16,
     offset: INT16,
 }}
-
 STRUCT!{struct DWRITE_PANOSE_text {
     familyKind: UINT8,
     serifStyle: UINT8,
@@ -498,12 +465,10 @@ UNION2!{union DWRITE_PANOSE {
     decorative decorative_mut: DWRITE_PANOSE_decorative,
     symbol symbol_mut: DWRITE_PANOSE_symbol,
 }}
-
 STRUCT!{struct DWRITE_UNICODE_RANGE {
     first: UINT32,
     last: UINT32,
 }}
-
 STRUCT!{struct DWRITE_SCRIPT_PROPERTIES {
     isoScriptCode: UINT32,
     isoScriptNumber: UINT32,
@@ -521,7 +486,6 @@ BITFIELD!{DWRITE_SCRIPT_PROPERTIES bitfield0: UINT32 [
     isCursiveWriting set_isCursiveWriting[6..7],
     reserved set_reserved[7..32],
 ]}
-
 STRUCT!{struct DWRITE_JUSTIFICATION_OPPORTUNITY {
     expansionMinimum: FLOAT,
     expansionMaximum: FLOAT,
@@ -537,7 +501,6 @@ BITFIELD!{DWRITE_JUSTIFICATION_OPPORTUNITY bitfield0: UINT32 [
     applyToTrailingEdge set_applyToTrailingEdge[19..20],
     reserved set_reserved[20..32],
 ]}
-
 RIDL!{#[uuid(0x30572f99, 0xdac6, 0x41db, 0xa1, 0x6e, 0x04, 0x86, 0x30, 0x7e, 0x60, 0x6a)]
 interface IDWriteFactory1(IDWriteFactory1Vtbl): IDWriteFactory(IDWriteFactoryVtbl) {
     fn GetEudcFontCollection(
@@ -554,7 +517,6 @@ interface IDWriteFactory1(IDWriteFactory1Vtbl): IDWriteFactory(IDWriteFactoryVtb
         renderingParams: *mut *mut IDWriteRenderingParams1,
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0xa71efdb4, 0x9fdb, 0x4838, 0xad, 0x90, 0xcf, 0xc3, 0xbe, 0x8c, 0x3d, 0xaf)]
 interface IDWriteFontFace1(IDWriteFontFace1Vtbl): IDWriteFontFace(IDWriteFontFaceVtbl) {
     fn GetMetrics(
@@ -614,7 +576,6 @@ interface IDWriteFontFace1(IDWriteFontFace1Vtbl): IDWriteFontFace(IDWriteFontFac
     ) -> HRESULT,
     fn HasVerticalGlyphVariants() -> BOOL,
 }}
-
 RIDL!{#[uuid(0xacd16696, 0x8c14, 0x4f5d, 0x87, 0x7e, 0xfe, 0x3f, 0xc1, 0xd3, 0x27, 0x38)]
 interface IDWriteFont1(IDWriteFont1Vtbl): IDWriteFont(IDWriteFontVtbl) {
     fn GetMetrics(
@@ -630,13 +591,11 @@ interface IDWriteFont1(IDWriteFont1Vtbl): IDWriteFont(IDWriteFontVtbl) {
     ) -> HRESULT,
     fn IsMonospacedFont() -> BOOL,
 }}
-
 RIDL!{#[uuid(0x94413cf4, 0xa6fc, 0x4248, 0x8b, 0x50, 0x66, 0x74, 0x34, 0x8f, 0xca, 0xd3)]
 interface IDWriteRenderingParams1(IDWriteRenderingParams1Vtbl):
     IDWriteRenderingParams(IDWriteRenderingParamsVtbl) {
     fn GetGrayscaleEnhancedContrast() -> FLOAT,
 }}
-
 RIDL!{#[uuid(0x80dad800, 0xe21f, 0x4e83, 0x96, 0xce, 0xbf, 0xcc, 0xe5, 0x00, 0xdb, 0x7c)]
 interface IDWriteTextAnalyzer1(IDWriteTextAnalyzer1Vtbl):
     IDWriteTextAnalyzer(IDWriteTextAnalyzerVtbl) {
@@ -726,7 +685,6 @@ interface IDWriteTextAnalyzer1(IDWriteTextAnalyzer1Vtbl):
         modifiedGlyphOffsets: *mut DWRITE_GLYPH_OFFSET,
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0x639cfad8, 0x0fb4, 0x4b21, 0xa5, 0x8a, 0x06, 0x79, 0x20, 0x12, 0x00, 0x09)]
 interface IDWriteTextAnalysisSource1(IDWriteTextAnalysisSource1Vtbl):
     IDWriteTextAnalysisSource(IDWriteTextAnalysisSourceVtbl) {
@@ -737,7 +695,6 @@ interface IDWriteTextAnalysisSource1(IDWriteTextAnalysisSource1Vtbl):
         bidiLevel: *mut UINT8,
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0xb0d941a0, 0x85e7, 0x4d8b, 0x9f, 0xd3, 0x5c, 0xed, 0x99, 0x34, 0x48, 0x2a)]
 interface IDWriteTextAnalysisSink1(IDWriteTextAnalysisSink1Vtbl):
     IDWriteTextAnalysisSink(IDWriteTextAnalysisSinkVtbl) {
@@ -750,7 +707,6 @@ interface IDWriteTextAnalysisSink1(IDWriteTextAnalysisSink1Vtbl):
         isRightToLeft: BOOL,
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0x9064d822, 0x80a7, 0x465c, 0xa9, 0x86, 0xdf, 0x65, 0xf7, 0x8b, 0x8f, 0xeb)]
 interface IDWriteTextLayout1(IDWriteTextLayout1Vtbl):
     IDWriteTextLayout(IDWriteTextLayoutVtbl) {
@@ -777,12 +733,10 @@ interface IDWriteTextLayout1(IDWriteTextLayout1Vtbl):
         textRange: *mut DWRITE_TEXT_RANGE,
     ) -> HRESULT,
 }}
-
 ENUM!{enum DWRITE_TEXT_ANTIALIAS_MODE {
     DWRITE_TEXT_ANTIALIAS_MODE_CLEARTYPE = 0x0, // 0
     DWRITE_TEXT_ANTIALIAS_MODE_GRAYSCALE = 0x1, // 1
 }}
-
 RIDL!{#[uuid(0x791e8298, 0x3ef3, 0x4230, 0x98, 0x80, 0xc9, 0xbd, 0xec, 0xc4, 0x20, 0x64)]
 interface IDWriteBitmapRenderTarget1(IDWriteBitmapRenderTarget1Vtbl):
     IDWriteBitmapRenderTarget(IDWriteBitmapRenderTargetVtbl) {
@@ -791,4 +745,3 @@ interface IDWriteBitmapRenderTarget1(IDWriteBitmapRenderTarget1Vtbl):
         antialiasMode: DWRITE_TEXT_ANTIALIAS_MODE,
     ) -> HRESULT,
 }}
-

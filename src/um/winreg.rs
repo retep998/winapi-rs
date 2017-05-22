@@ -48,7 +48,6 @@ pub const RRF_RT_QWORD: DWORD = RRF_RT_REG_BINARY | RRF_RT_REG_QWORD;
 pub const RRF_RT_ANY: DWORD = 0x0000ffff;
 pub const RRF_NOEXPAND: DWORD = 0x10000000;
 pub const RRF_ZEROONFAILURE: DWORD = 0x20000000;
-
 extern "system" {
     pub fn RegCloseKey(
         hKey: HKEY

@@ -4,13 +4,10 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
 //! Authentication API Prototypes and Definitions
-
 use shared::minwindef::{DWORD, FILETIME, LPBYTE, LPDWORD, UCHAR, ULONG};
 use shared::windef::{HBITMAP, HWND};
 use um::winnt::{LPSTR, LPWSTR, PCSTR, PCWSTR};
-
 pub const NERR_BASE: DWORD = 2100;
 pub const NERR_PasswordExpired: DWORD = NERR_BASE+142;
 pub const CRED_MAX_STRING_LENGTH: DWORD = 256;
@@ -43,7 +40,6 @@ pub const CRED_PERSIST_NONE: DWORD = 0;
 pub const CRED_PERSIST_SESSION: DWORD = 1;
 pub const CRED_PERSIST_LOCAL_MACHINE: DWORD = 2;
 pub const CRED_PERSIST_ENTERPRISE: DWORD = 3;
-
 STRUCT!{struct CREDENTIAL_ATTRIBUTEA {
     Keyword: LPSTR,
     Flags: DWORD,
@@ -51,7 +47,6 @@ STRUCT!{struct CREDENTIAL_ATTRIBUTEA {
     Value: LPBYTE,
 }}
 pub type PCREDENTIAL_ATTRIBUTEA = *mut CREDENTIAL_ATTRIBUTEA;
-
 STRUCT!{struct CREDENTIAL_ATTRIBUTEW {
     Keyword: LPWSTR,
     Flags: DWORD,
@@ -59,7 +54,6 @@ STRUCT!{struct CREDENTIAL_ATTRIBUTEW {
     Value: LPBYTE,
 }}
 pub type PCREDENTIAL_ATTRIBUTEW = *mut CREDENTIAL_ATTRIBUTEW;
-
 STRUCT!{struct CREDENTIALA {
     Flags: DWORD,
     Type: DWORD,
@@ -75,7 +69,6 @@ STRUCT!{struct CREDENTIALA {
     UserName: LPSTR,
 }}
 pub type PCREDENTIALA = *mut CREDENTIALA;
-
 STRUCT!{struct CREDENTIALW {
     Flags: DWORD,
     Type: DWORD,
@@ -91,7 +84,6 @@ STRUCT!{struct CREDENTIALW {
     UserName: LPWSTR,
 }}
 pub type PCREDENTIALW = *mut CREDENTIALW;
-
 pub const CRED_TI_SERVER_FORMAT_UNKNOWN: ULONG = 0x0001;
 pub const CRED_TI_DOMAIN_FORMAT_UNKNOWN: ULONG = 0x0002;
 pub const CRED_TI_ONLY_PASSWORD_REQUIRED: ULONG = 0x0004;
@@ -99,7 +91,6 @@ pub const CRED_TI_USERNAME_TARGET: ULONG = 0x0008;
 pub const CRED_TI_CREATE_EXPLICIT_CRED: ULONG = 0x0010;
 pub const CRED_TI_WORKGROUP_MEMBER: ULONG = 0x0020;
 pub const CRED_TI_VALID_FLAGS: ULONG = 0xF07F;
-
 STRUCT!{struct CREDENTIAL_TARGET_INFORMATIONA {
     TargetName: LPSTR,
     NetbiosServerName: LPSTR,
@@ -113,7 +104,6 @@ STRUCT!{struct CREDENTIAL_TARGET_INFORMATIONA {
     CredTypes: LPDWORD,
 }}
 pub type PCREDENTIAL_TARGET_INFORMATIONA = *mut CREDENTIAL_TARGET_INFORMATIONA;
-
 STRUCT!{struct CREDENTIAL_TARGET_INFORMATIONW {
     TargetName: LPWSTR,
     NetbiosServerName: LPWSTR,
@@ -127,26 +117,21 @@ STRUCT!{struct CREDENTIAL_TARGET_INFORMATIONW {
     CredTypes: LPDWORD,
 }}
 pub type PCREDENTIAL_TARGET_INFORMATIONW = *mut CREDENTIAL_TARGET_INFORMATIONW;
-
 pub const CERT_HASH_LENGTH: usize = 20;
-
 STRUCT!{struct CERT_CREDENTIAL_INFO {
     cbSize: ULONG,
     rgbHashOfCert: [UCHAR; CERT_HASH_LENGTH],
 }}
 pub type PCERT_CREDENTIAL_INFO = *mut CERT_CREDENTIAL_INFO;
-
 STRUCT!{struct USERNAME_TARGET_CREDENTIAL_INFO {
     UserName: LPWSTR,
 }}
 pub type PUSERNAME_TARGET_CREDENTIAL_INFO = *mut USERNAME_TARGET_CREDENTIAL_INFO;
-
 STRUCT!{struct BINARY_BLOB_CREDENTIAL_INFO {
     cbBlob: ULONG,
     pbBlob: LPBYTE,
 }}
 pub type PBINARY_BLOB_CREDENTIAL_INFO = *mut BINARY_BLOB_CREDENTIAL_INFO;
-
 ENUM!{enum CRED_MARSHAL_TYPE {
     CertCredential = 1,
     UsernameTargetCredential,
@@ -154,19 +139,16 @@ ENUM!{enum CRED_MARSHAL_TYPE {
     UsernameForPackedCredentials,
 }}
 pub type PCRED_MARSHAL_TYPE = *mut CRED_MARSHAL_TYPE;
-
 ENUM!{enum CRED_PROTECTION_TYPE {
     CredUnprotected,
     CredUserProtection,
     CredTrustedProtection,
 }}
 pub type PCRED_PROTECTION_TYPE = *mut CRED_PROTECTION_TYPE;
-
 pub const CRED_PACK_PROTECTED_CREDENTIALS: DWORD = 0x1;
 pub const CRED_PACK_WOW_BUFFER: DWORD = 0x2;
 pub const CRED_PACK_GENERIC_CREDENTIALS: DWORD = 0x4;
 pub const CRED_PACK_ID_PROVIDER_CREDENTIALS: DWORD = 0x8;
-
 STRUCT!{struct CREDUI_INFOA {
     cbSize: DWORD,
     hwndParent: HWND,
@@ -175,7 +157,6 @@ STRUCT!{struct CREDUI_INFOA {
     hbmBanner: HBITMAP,
 }}
 pub type PCREDUI_INFOA = *mut CREDUI_INFOA;
-
 STRUCT!{struct CREDUI_INFOW {
     cbSize: DWORD,
     hwndParent: HWND,
@@ -184,7 +165,6 @@ STRUCT!{struct CREDUI_INFOW {
     hbmBanner: HBITMAP,
 }}
 pub type PCREDUI_INFOW = *mut CREDUI_INFOW;
-
 pub const CREDUI_MAX_MESSAGE_LENGTH: DWORD = 1024;
 pub const CREDUI_MAX_CAPTION_LENGTH: DWORD = 128;
 pub const CREDUI_MAX_GENERIC_TARGET_LENGTH: DWORD = CRED_MAX_GENERIC_TARGET_NAME_LENGTH;

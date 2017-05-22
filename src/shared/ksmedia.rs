@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 // Licensed under the MIT License <LICENSE.md>
-
 DEFINE_GUID!{KSDATAFORMAT_SUBTYPE_ANALOG,
     0x6DBA3190, 0x67BD, 0x11CF, 0xA0, 0xF7, 0x00, 0x20, 0xAF, 0xD1, 0x56, 0xE4}
 DEFINE_GUID!{KSDATAFORMAT_SUBTYPE_PCM,

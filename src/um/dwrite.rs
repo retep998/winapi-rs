@@ -179,9 +179,6 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
         lastWriteTime: *mut UINT64,
     ) -> HRESULT,
 }}
-
-
-
 ENUM!{enum DWRITE_OUTLINE_THRESHOLD {
     DWRITE_OUTLINE_THRESHOLD_ANTIALIASED,
     DWRITE_OUTLINE_THRESHOLD_ALIASED,

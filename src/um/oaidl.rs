@@ -684,14 +684,12 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
 // IEnumVARIANT_RemoteNext_Stub
 pub enum IRecordInfo {} // FIXME
 pub enum ITypeComp {} // FIXME
-
 ENUM!{enum SYSKIND {
     SYS_WIN16 = 0,
     SYS_WIN32,
     SYS_MAC,
     SYS_WIN64,
 }}
-
 STRUCT!{struct TLIBATTR {
     guid: GUID,
     lcid: LCID,
@@ -700,7 +698,6 @@ STRUCT!{struct TLIBATTR {
     wMinorVerNum: WORD,
     wLibFlags: WORD,
 }}
-
 RIDL!{#[uuid(0x00020402, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ITypeLib(ITypeLibVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeInfoCount() -> UINT,
@@ -745,7 +742,6 @@ interface ITypeLib(ITypeLibVtbl): IUnknown(IUnknownVtbl) {
         pTLibAttr: *const TLIBATTR,
     ) -> HRESULT,
 }}
-
 RIDL!(#[uuid(0x00020401, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeAttr(
@@ -837,7 +833,6 @@ interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     ) -> (),
 }
 );
-
 RIDL!(#[uuid(0x3127ca40, 0x446e, 0x11ce, 0x81, 0x35, 0x00, 0xaa, 0x00, 0x4b, 0xb8, 0x51)]
 interface IErrorLog(IErrorLogVtbl): IUnknown(IUnknownVtbl) {
     fn AddError(

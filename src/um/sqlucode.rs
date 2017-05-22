@@ -5,9 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! This module defines the ODBC Core unicode functions
-
 use um::sqltypes::SQLSMALLINT;
-
 pub const SQL_WCHAR: SQLSMALLINT = -8;
 pub const SQL_WVARCHAR: SQLSMALLINT = -9;
 pub const SQL_WLONGVARCHAR: SQLSMALLINT = -10;

@@ -10,7 +10,6 @@ use shared::guiddef::{GUID};
 use shared::minwindef::{BYTE, DWORD, ULONG, USHORT, WORD};
 use shared::ntdef::{LONG, LONGLONG, ULONGLONG};
 use shared::wtypesbase::{FLAGGED_WORD_BLOB, OLECHAR};
-
 ENUM!{enum VARENUM {
     VT_EMPTY = 0,
     VT_NULL = 1,

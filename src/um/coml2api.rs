@@ -6,7 +6,6 @@
 // except according to those terms
 //! Structured storage, property sets, and related APIs.
 use shared::minwindef::DWORD;
-
 pub const STGM_READ: DWORD = 0x00000000;
 pub const STGM_WRITE: DWORD = 0x00000001;
 pub const STGM_READWRITE: DWORD = 0x00000002;

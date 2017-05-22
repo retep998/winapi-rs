@@ -585,12 +585,10 @@ extern "system" {
         lpFileSizeHigh: LPDWORD
     ) -> DWORD;
 }
-
 ENUM!{enum STREAM_INFO_LEVELS {
     FindStreamInfoStandard,
     FindStreamInfoMaxInfoLevel,
 }}
-
 extern "system" {
     pub fn FindFirstStreamW(
         lpFileName: LPCWSTR,

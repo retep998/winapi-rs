@@ -5,14 +5,12 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of OleAuto.h
-
 use ctypes::c_uint;
 use shared::minwindef::{UINT, USHORT, WORD};
 use shared::wtypes::{BSTR, VARTYPE};
 use shared::wtypesbase::{LPCOLESTR, OLECHAR};
 use um::oaidl::{DISPID_UNKNOWN, ITypeLib, VARIANT, VARIANTARG};
 use um::winnt::{HRESULT, INT, LCID, LONG, LPCSTR};
-
 extern "system" {
     pub fn SysAllocString(
         psz: *const OLECHAR,

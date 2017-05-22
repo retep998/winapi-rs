@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of wincodec.h
-
 use ctypes::c_double;
 use shared::basetsd::{UINT32, ULONG_PTR};
 use shared::dxgiformat::DXGI_FORMAT;
@@ -29,7 +28,6 @@ use um::ocidl::IPropertyBag2;
 use um::propidl::PROPVARIANT;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HANDLE, ULARGE_INTEGER};
-
 DEFINE_GUID!{CLSID_WICImagingFactory,
     0xcacaf262, 0x9370, 0x4615, 0xa1, 0x3b, 0x9f, 0x55, 0x39, 0xda, 0x4c, 0xa}
 DEFINE_GUID!{CLSID_WICImagingFactory1,
@@ -120,26 +118,20 @@ DEFINE_GUID!{CLSID_WICFormatConverterWMPhoto,
     0x9cb5172b, 0xd600, 0x46ba, 0xab, 0x77, 0x77, 0xbb, 0x7e, 0x3a, 0x00, 0xd9}
 DEFINE_GUID!{CLSID_WICPlanarFormatConverter,
     0x184132b8, 0x32f8, 0x4784, 0x91, 0x31, 0xdd, 0x72, 0x24, 0xb2, 0x34, 0x38}
-
 pub type WICColor = UINT32;
-
 STRUCT!{struct WICRect {
     X: INT,
     Y: INT,
     Width: INT,
     Height: INT,
 }}
-
 pub type WICInProcPointer = *mut BYTE;
-
 ENUM!{enum WICColorContextType {
     WICColorContextUninitialized = 0x00000000,
     WICColorContextProfile = 0x00000001,
     WICColorContextExifColorSpace = 0x00000002,
 }}
-
 pub const CODEC_FORCE_DWORD: DWORD = 0x7FFFFFFF;
-
 pub const WIC_JPEG_MAX_COMPONENT_COUNT: UINT = 4;
 pub const WIC_JPEG_MAX_TABLE_INDEX: UINT = 3;
 pub const WIC_JPEG_SAMPLE_FACTORS_ONE: DWORD = 0x00000011;
@@ -151,10 +143,8 @@ pub const WIC_JPEG_QUANTIZATION_BASELINE_ONE: DWORD = 0x00000000;
 pub const WIC_JPEG_QUANTIZATION_BASELINE_THREE: DWORD = 0x00010100;
 pub const WIC_JPEG_HUFFMAN_BASELINE_ONE: DWORD = 0x00000000;
 pub const WIC_JPEG_HUFFMAN_BASELINE_THREE: DWORD = 0x00111100;
-
 pub type REFWICPixelFormatGUID = REFGUID;
 pub type WICPixelFormatGUID = GUID;
-
 DEFINE_GUID!{GUID_WICPixelFormatDontCare,
     0x6fddc324, 0x4e03, 0x4bfe, 0xb1, 0x85, 0x3d, 0x77, 0x76, 0x8d, 0xc9, 0x00}
 DEFINE_GUID!{GUID_WICPixelFormat1bppIndexed,
@@ -331,27 +321,23 @@ DEFINE_GUID!{GUID_WICPixelFormat16bppCbQuantizedDctCoefficients,
     0xD2C4FF61, 0x56A5, 0x49C2, 0x8B, 0x5C, 0x4C, 0x19, 0x25, 0x96, 0x48, 0x37}
 DEFINE_GUID!{GUID_WICPixelFormat16bppCrQuantizedDctCoefficients,
     0x2FE354F0, 0x1680, 0x42D8, 0x92, 0x31, 0xE7, 0x3C, 0x05, 0x65, 0xBF, 0xC1}
-
 ENUM!{enum WICBitmapCreateCacheOption {
     WICBitmapNoCache = 0x00000000,
     WICBitmapCacheOnDemand = 0x00000001,
     WICBitmapCacheOnLoad = 0x00000002,
     WICBITMAPCREATECACHEOPTION_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICDecodeOptions {
     WICDecodeMetadataCacheOnDemand = 0x00000000,
     WICDecodeMetadataCacheOnLoad = 0x00000001,
     WICMETADATACACHEOPTION_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICBitmapEncoderCacheOption {
     WICBitmapEncoderCacheInMemory = 0x00000000,
     WICBitmapEncoderCacheTempFile = 0x00000001,
     WICBitmapEncoderNoCache = 0x00000002,
     WICBITMAPENCODERCACHEOPTION_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICComponentType {
     WICDecoder = 0x00000001,
     WICEncoder = 0x00000002,
@@ -362,7 +348,6 @@ ENUM!{enum WICComponentType {
     WICAllComponents = 0x0000003F,
     WICCOMPONENTTYPE_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICComponentEnumerateOptions {
     WICComponentEnumerateDefault = 0x00000000,
     WICComponentEnumerateRefresh = 0x00000001,
@@ -371,7 +356,6 @@ ENUM!{enum WICComponentEnumerateOptions {
     WICComponentEnumerateBuiltInOnly = 0x20000000,
     WICCOMPONENTENUMERATEOPTIONS_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 STRUCT!{struct WICBitmapPattern {
     Position: ULARGE_INTEGER,
     Length: ULONG,
@@ -379,7 +363,6 @@ STRUCT!{struct WICBitmapPattern {
     Mask: *mut BYTE,
     EndOfStream: BOOL,
 }}
-
 ENUM!{enum WICBitmapInterpolationMode {
     WICBitmapInterpolationModeNearestNeighbor = 0x00000000,
     WICBitmapInterpolationModeLinear = 0x00000001,
@@ -388,7 +371,6 @@ ENUM!{enum WICBitmapInterpolationMode {
     WICBitmapInterpolationModeHighQualityCubic = 0x00000004,
     WICBITMAPINTERPOLATIONMODE_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICBitmapPaletteType {
     WICBitmapPaletteTypeCustom = 0x00000000,
     WICBitmapPaletteTypeMedianCut = 0x00000001,
@@ -406,7 +388,6 @@ ENUM!{enum WICBitmapPaletteType {
     WICBitmapPaletteTypeFixedGray256 = 0x0000000C,
     WICBITMAPPALETTETYPE_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICBitmapDitherType {
     WICBitmapDitherTypeNone = 0x00000000,
     WICBitmapDitherTypeSolid = 0x00000000,
@@ -420,14 +401,12 @@ ENUM!{enum WICBitmapDitherType {
     WICBitmapDitherTypeErrorDiffusion = 0x00000008,
     WICBITMAPDITHERTYPE_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICBitmapAlphaChannelOption {
     WICBitmapUseAlpha = 0x00000000,
     WICBitmapUsePremultipliedAlpha = 0x00000001,
     WICBitmapIgnoreAlpha = 0x00000002,
     WICBITMAPALPHACHANNELOPTIONS_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICBitmapTransformOptions {
     WICBitmapTransformRotate0 = 0x00000000,
     WICBitmapTransformRotate90 = 0x00000001,
@@ -437,13 +416,11 @@ ENUM!{enum WICBitmapTransformOptions {
     WICBitmapTransformFlipVertical = 0x00000010,
     WICBITMAPTRANSFORMOPTIONS_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICBitmapLockFlags {
     WICBitmapLockRead = 0x00000001,
     WICBitmapLockWrite = 0x00000002,
     WICBITMAPLOCKFLAGS_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICBitmapDecoderCapabilities {
     WICBitmapDecoderCapabilitySameEncoder = 0x00000001,
     WICBitmapDecoderCapabilityCanDecodeAllImages = 0x00000002,
@@ -452,14 +429,12 @@ ENUM!{enum WICBitmapDecoderCapabilities {
     WICBitmapDecoderCapabilityCanDecodeThumbnail = 0x00000010,
     WICBITMAPDECODERCAPABILITIES_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICProgressOperation {
     WICProgressOperationCopyPixels = 0x00000001,
     WICProgressOperationWritePixels = 0x00000002,
     WICProgressOperationAll = 0x0000FFFF,
     WICPROGRESSOPERATION_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICProgressNotification {
     WICProgressNotificationBegin = 0x00010000,
     WICProgressNotificationEnd = 0x00020000,
@@ -467,7 +442,6 @@ ENUM!{enum WICProgressNotification {
     WICProgressNotificationAll = 0xFFFF0000,
     WICPROGRESSNOTIFICATION_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICComponentSigning {
     WICComponentSigned = 0x00000001,
     WICComponentUnsigned = 0x00000002,
@@ -475,7 +449,6 @@ ENUM!{enum WICComponentSigning {
     WICComponentDisabled = 0x80000000,
     WICCOMPONENTSIGNING_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICGifLogicalScreenDescriptorProperties {
     WICGifLogicalScreenSignature = 0x00000001,
     WICGifLogicalScreenDescriptorWidth = 0x00000002,
@@ -488,7 +461,6 @@ ENUM!{enum WICGifLogicalScreenDescriptorProperties {
     WICGifLogicalScreenDescriptorPixelAspectRatio = 0x00000009,
     WICGifLogicalScreenDescriptorProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICGifImageDescriptorProperties {
     WICGifImageDescriptorLeft = 0x00000001,
     WICGifImageDescriptorTop = 0x00000002,
@@ -500,7 +472,6 @@ ENUM!{enum WICGifImageDescriptorProperties {
     WICGifImageDescriptorLocalColorTableSize = 0x00000008,
     WICGifImageDescriptorProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICGifGraphicControlExtensionProperties {
     WICGifGraphicControlExtensionDisposal = 0x00000001,
     WICGifGraphicControlExtensionUserInputFlag = 0x00000002,
@@ -509,39 +480,32 @@ ENUM!{enum WICGifGraphicControlExtensionProperties {
     WICGifGraphicControlExtensionTransparentColorIndex = 0x00000005,
     WICGifGraphicControlExtensionProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICGifApplicationExtensionProperties {
     WICGifApplicationExtensionApplication = 0x00000001,
     WICGifApplicationExtensionData = 0x00000002,
     WICGifApplicationExtensionProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICGifCommentExtensionProperties {
     WICGifCommentExtensionText = 0x00000001,
     WICGifCommentExtensionProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICJpegCommentProperties {
     WICJpegCommentText = 0x00000001,
     WICJpegCommentProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICJpegLuminanceProperties {
     WICJpegLuminanceTable = 0x00000001,
     WICJpegLuminanceProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICJpegChrominanceProperties {
     WICJpegChrominanceTable = 0x00000001,
     WICJpegChrominanceProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WIC8BIMIptcProperties {
     WIC8BIMIptcPString = 0x00000000,
     WIC8BIMIptcEmbeddedIPTC = 0x00000001,
     WIC8BIMIptcProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WIC8BIMResolutionInfoProperties {
     WIC8BIMResolutionInfoPString = 0x00000001,
     WIC8BIMResolutionInfoHResolution = 0x00000002,
@@ -552,23 +516,19 @@ ENUM!{enum WIC8BIMResolutionInfoProperties {
     WIC8BIMResolutionInfoHeightUnit = 0x00000007,
     WIC8BIMResolutionInfoProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WIC8BIMIptcDigestProperties {
     WIC8BIMIptcDigestPString = 0x00000001,
     WIC8BIMIptcDigestIptcDigest = 0x00000002,
     WIC8BIMIptcDigestProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICPngGamaProperties {
     WICPngGamaGamma = 0x00000001,
     WICPngGamaProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICPngBkgdProperties {
     WICPngBkgdBackgroundColor = 0x00000001,
     WICPngBkgdProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICPngItxtProperties {
     WICPngItxtKeyword = 0x00000001,
     WICPngItxtCompressionFlag = 0x00000002,
@@ -577,7 +537,6 @@ ENUM!{enum WICPngItxtProperties {
     WICPngItxtText = 0x00000005,
     WICPngItxtProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICPngChrmProperties {
     WICPngChrmWhitePointX = 0x00000001,
     WICPngChrmWhitePointY = 0x00000002,
@@ -589,23 +548,19 @@ ENUM!{enum WICPngChrmProperties {
     WICPngChrmBlueY = 0x0000008,
     WICPngChrmProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICPngHistProperties {
     WICPngHistFrequencies = 0x00000001,
     WICPngHistProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICPngIccpProperties {
     WICPngIccpProfileName = 0x00000001,
     WICPngIccpProfileData = 0x00000002,
     WICPngIccpProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICPngSrgbProperties {
     WICPngSrgbRenderingIntent = 0x00000001,
     WICPngSrgbProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICPngTimeProperties {
     WICPngTimeYear = 0x00000001,
     WICPngTimeMonth = 0x00000002,
@@ -615,13 +570,11 @@ ENUM!{enum WICPngTimeProperties {
     WICPngTimeSecond = 0x00000006,
     WICPngTimeProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICSectionAccessLevel {
     WICSectionAccessLevelRead = 0x00000001,
     WICSectionAccessLevelReadWrite = 0x00000003,
     WICSectionAccessLevel_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICPixelFormatNumericRepresentation {
     WICPixelFormatNumericRepresentationUnspecified = 0x00000000,
     WICPixelFormatNumericRepresentationIndexed = 0x00000001,
@@ -631,32 +584,27 @@ ENUM!{enum WICPixelFormatNumericRepresentation {
     WICPixelFormatNumericRepresentationFloat = 0x00000005,
     WICPixelFormatNumericRepresentation_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICPlanarOptions {
     WICPlanarOptionsDefault = 0x00000000,
     WICPlanarOptionsPreserveSubsampling = 0x00000001,
     WICPLANAROPTIONS_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICJpegIndexingOptions {
     WICJpegIndexingOptionsGenerateOnDemand = 0x00000000,
     WICJpegIndexingOptionsGenerateOnLoad = 0x00000001,
     WICJpegIndexingOptions_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICJpegTransferMatrix {
     WICJpegTransferMatrixIdentity = 0x00000000,
     WICJpegTransferMatrixBT601 = 0x00000001,
     WICJpegTransferMatrix_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICJpegScanType {
     WICJpegScanTypeInterleaved = 0x00000000,
     WICJpegScanTypePlanarComponents = 0x00000001,
     WICJpegScanTypeProgressive = 0x00000002,
     WICJpegScanType_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 STRUCT!{struct WICImageParameters {
     PixelFormat: D2D1_PIXEL_FORMAT,
     DpiX: FLOAT,
@@ -666,20 +614,17 @@ STRUCT!{struct WICImageParameters {
     PixelWidth: UINT32,
     PixelHeight: UINT32,
 }}
-
 STRUCT!{struct WICBitmapPlaneDescription {
     Format: WICPixelFormatGUID,
     Width: UINT,
     Height: UINT,
 }}
-
 STRUCT!{struct WICBitmapPlane {
     Format: WICPixelFormatGUID,
     pbBuffer: *mut BYTE,
     cbStride: UINT,
     cbBufferSize: UINT,
 }}
-
 STRUCT!{struct WICJpegFrameHeader {
     Width: UINT,
     Height: UINT,
@@ -690,7 +635,6 @@ STRUCT!{struct WICJpegFrameHeader {
     SampleFactors: DWORD,
     QuantizationTableIndices: DWORD,
 }}
-
 STRUCT!{struct WICJpegScanHeader {
     cComponents: UINT,
     RestartInterval: UINT,
@@ -701,7 +645,6 @@ STRUCT!{struct WICJpegScanHeader {
     SuccessiveApproximationHigh: BYTE,
     SuccessiveApproximationLow: BYTE,
 }}
-
 RIDL!(#[uuid(0x00000040, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICPalette(IWICPaletteVtbl): IUnknown(IUnknownVtbl) {
     fn InitializePredefined(
@@ -741,7 +684,6 @@ interface IWICPalette(IWICPaletteVtbl): IUnknown(IUnknownVtbl) {
         pfHasAlpha: *mut BOOL,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x00000120, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmapSource(IWICBitmapSourceVtbl): IUnknown(IUnknownVtbl) {
     fn GetSize(
@@ -765,7 +707,6 @@ interface IWICBitmapSource(IWICBitmapSourceVtbl): IUnknown(IUnknownVtbl) {
         pbBuffer: *mut BYTE,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x00000301, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICFormatConverter(IWICFormatConverterVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
@@ -782,7 +723,6 @@ interface IWICFormatConverter(IWICFormatConverterVtbl): IWICBitmapSource(IWICBit
         pfCanConvert: *mut BOOL,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xbebee9cb, 0x83b0, 0x4dcc, 0x81, 0x32, 0xb0, 0xaa, 0xa5, 0x5e, 0xac, 0x96)]
 interface IWICPlanarFormatConverter(IWICPlanarFormatConverterVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
@@ -801,7 +741,6 @@ interface IWICPlanarFormatConverter(IWICPlanarFormatConverterVtbl): IWICBitmapSo
         pfCanConvert: *mut BOOL,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x00000302, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmapScaler(IWICBitmapScalerVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
@@ -811,7 +750,6 @@ interface IWICBitmapScaler(IWICBitmapScalerVtbl): IWICBitmapSource(IWICBitmapSou
         mode: WICBitmapInterpolationMode,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xe4fbcf03, 0x223d, 0x4e81, 0x93, 0x33, 0xd6, 0x35, 0x55, 0x6d, 0xd1, 0xb5)]
 interface IWICBitmapClipper(IWICBitmapClipperVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
@@ -819,7 +757,6 @@ interface IWICBitmapClipper(IWICBitmapClipperVtbl): IWICBitmapSource(IWICBitmapS
         prc: *const WICRect,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x5009834f, 0x2d6a, 0x41ce, 0x9e, 0x1b, 0x17, 0xc5, 0xaf, 0xf7, 0xa7, 0x82)]
 interface IWICBitmapFlipRotator(IWICBitmapFlipRotatorVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
@@ -827,7 +764,6 @@ interface IWICBitmapFlipRotator(IWICBitmapFlipRotatorVtbl): IWICBitmapSource(IWI
         options: WICBitmapTransformOptions,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x00000123, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmapLock(IWICBitmapLockVtbl): IUnknown(IUnknownVtbl) {
     fn GetSize(
@@ -845,7 +781,6 @@ interface IWICBitmapLock(IWICBitmapLockVtbl): IUnknown(IUnknownVtbl) {
         pPixelFormat: *mut WICPixelFormatGUID,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x00000121, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmap(IWICBitmapVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Lock(
@@ -861,7 +796,6 @@ interface IWICBitmap(IWICBitmapVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
         dpiY: c_double,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x3c613a02, 0x34b2, 0x44ea, 0x9a, 0x7c, 0x45, 0xae, 0xa9, 0xc6, 0xfd, 0x6d)]
 interface IWICColorContext(IWICColorContextVtbl): IUnknown(IUnknownVtbl) {
     fn InitializeFromFilename(
@@ -886,7 +820,6 @@ interface IWICColorContext(IWICColorContextVtbl): IUnknown(IUnknownVtbl) {
         pValue: *mut UINT,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xb66f034f, 0xd0e2, 0x40ab, 0xb4, 0x36, 0x6d, 0xe3, 0x9e, 0x32, 0x1a, 0x94)]
 interface IWICColorTransform(IWICColorTransformVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
@@ -896,7 +829,6 @@ interface IWICColorTransform(IWICColorTransformVtbl): IWICBitmapSource(IWICBitma
          pixelFmtDest: REFWICPixelFormatGUID,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xb84e2c09, 0x78c9, 0x4ac4, 0x8b, 0xd3, 0x52, 0x4a, 0xe1, 0x66, 0x3a, 0x2f)]
 interface IWICFastMetadataEncoder(IWICFastMetadataEncoderVtbl): IUnknown(IUnknownVtbl) {
     fn Commit(
@@ -905,7 +837,6 @@ interface IWICFastMetadataEncoder(IWICFastMetadataEncoderVtbl): IUnknown(IUnknow
         ppIMetadataQueryWriter: *mut *mut IWICMetadataQueryWriter,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x135ff860, 0x22b7, 0x4ddf, 0xb0, 0xf6, 0x21, 0x8f, 0x4f, 0x29, 0x9a, 0x43)]
 interface IWICStream(IWICStreamVtbl): IStream(IStreamVtbl) {
     fn InitializeFromIStream(
@@ -925,7 +856,6 @@ interface IWICStream(IWICStreamVtbl): IStream(IStreamVtbl) {
         ulMaxSize: ULARGE_INTEGER,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xdc2bb46d, 0x3f07, 0x481e, 0x86, 0x25, 0x22, 0x0c, 0x4a, 0xed, 0xbb, 0x33)]
 interface IWICEnumMetadataItem(IWICEnumMetadataItemVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
@@ -943,7 +873,6 @@ interface IWICEnumMetadataItem(IWICEnumMetadataItemVtbl): IUnknown(IUnknownVtbl)
         ppIEnumMetadataItem: *mut *mut IWICEnumMetadataItem,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x30989668, 0xe1c9, 0x4597, 0xb3, 0x95, 0x45, 0x8e, 0xed, 0xb8, 0x08, 0xdf)]
 interface IWICMetadataQueryReader(IWICMetadataQueryReaderVtbl): IUnknown(IUnknownVtbl) {
     fn GetContainerFormat(
@@ -962,7 +891,6 @@ interface IWICMetadataQueryReader(IWICMetadataQueryReaderVtbl): IUnknown(IUnknow
         ppIEnumString: *mut *mut IEnumString,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xa721791a, 0x0def, 0x4d06, 0xbd, 0x91, 0x21, 0x18, 0xbf, 0x1d, 0xb1, 0x0b)]
 interface IWICMetadataQueryWriter(IWICMetadataQueryWriterVtbl): IWICMetadataQueryReader(IWICMetadataQueryReaderVtbl) {
     fn SetMetadataByName(
@@ -973,7 +901,6 @@ interface IWICMetadataQueryWriter(IWICMetadataQueryWriterVtbl): IWICMetadataQuer
         wzName: LPCWSTR,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x00000103, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmapEncoder(IWICBitmapEncoderVtbl): IUnknown(IUnknownVtbl) {
     fn Initialize(
@@ -1009,7 +936,6 @@ interface IWICBitmapEncoder(IWICBitmapEncoderVtbl): IUnknown(IUnknownVtbl) {
         ppIMetadataQueryWriter: *mut *mut IWICMetadataQueryWriter,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x00000105, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94)]
 interface IWICBitmapFrameEncode(IWICBitmapFrameEncodeVtbl): IUnknown(IUnknownVtbl) {
     fn Initialize(
@@ -1052,7 +978,6 @@ interface IWICBitmapFrameEncode(IWICBitmapFrameEncodeVtbl): IUnknown(IUnknownVtb
         ppIMetadataQueryWriter: *mut *mut IWICMetadataQueryWriter,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xf928b7b8, 0x2221, 0x40c1, 0xb7, 0x2e, 0x7e, 0x82, 0xf1, 0x97, 0x4d, 0x1a)]
 interface IWICPlanarBitmapFrameEncode(IWICPlanarBitmapFrameEncodeVtbl): IUnknown(IUnknownVtbl) {
     fn WritePixels(
@@ -1066,7 +991,6 @@ interface IWICPlanarBitmapFrameEncode(IWICPlanarBitmapFrameEncodeVtbl): IUnknown
         prcSource: *const WICRect,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x04c75bf8, 0x3ce1, 0x473b, 0xac, 0xc5, 0x3c, 0xc4, 0xf5, 0xe9, 0x49, 0x99)]
 interface IWICImageEncoder(IWICImageEncoderVtbl) : IUnknown(IUnknownVtbl){
     fn WriteFrame(
@@ -1085,7 +1009,6 @@ interface IWICImageEncoder(IWICImageEncoderVtbl) : IUnknown(IUnknownVtbl){
         pImageParameters: *const WICImageParameters,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x9edde9e7, 0x8dee, 0x47ea, 0x99, 0xdf, 0xe6, 0xfa, 0xf2, 0xed, 0x44, 0xbf)]
 interface IWICBitmapDecoder(IWICBitmapDecoderVtbl): IUnknown(IUnknownVtbl) {
     fn QueryCapability(
@@ -1127,7 +1050,6 @@ interface IWICBitmapDecoder(IWICBitmapDecoderVtbl): IUnknown(IUnknownVtbl) {
         ppIBitmapFrame: *mut *mut IWICBitmapFrameDecode,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x3b16811b, 0x6a43, 0x4ec9, 0xb7, 0x13, 0x3d, 0x5a, 0x0c, 0x13, 0xb9, 0x40)]
 interface IWICBitmapSourceTransform(IWICBitmapSourceTransformVtbl): IUnknown(IUnknownVtbl) {
     fn CopyPixels(
@@ -1152,7 +1074,6 @@ interface IWICBitmapSourceTransform(IWICBitmapSourceTransformVtbl): IUnknown(IUn
         pfIsSupported: *mut BOOL,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x3aff9cce, 0xbe95, 0x4303, 0xb9, 0x27, 0xe7, 0xd1, 0x6f, 0xf4, 0xa6, 0x13)]
 interface IWICPlanarBitmapSourceTransform(IWICPlanarBitmapSourceTransformVtbl): IUnknown(IUnknownVtbl) {
     fn DoesSupportTransform(
@@ -1175,7 +1096,6 @@ interface IWICPlanarBitmapSourceTransform(IWICPlanarBitmapSourceTransformVtbl): 
         cPlanes: UINT,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x3b16811b, 0x6a43, 0x4ec9, 0xa8, 0x13, 0x3d, 0x93, 0x0c, 0x13, 0xb9, 0x40)]
 interface IWICBitmapFrameDecode(IWICBitmapFrameDecodeVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn GetMetadataQueryReader(
@@ -1190,7 +1110,6 @@ interface IWICBitmapFrameDecode(IWICBitmapFrameDecodeVtbl): IWICBitmapSource(IWI
         ppIThumbnail: *mut *mut IWICBitmapSource,
    ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xdaac296f, 0x7aa5, 0x4dbf, 0x8d, 0x15, 0x22, 0x5c, 0x59, 0x76, 0xf8, 0x91)]
 interface IWICProgressiveLevelControl(IWICProgressiveLevelControlVtbl): IUnknown(IUnknownVtbl) {
     fn GetLevelCount(
@@ -1203,7 +1122,6 @@ interface IWICProgressiveLevelControl(IWICProgressiveLevelControlVtbl): IUnknown
         nLevel: UINT,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x4776f9cd, 0x9517, 0x45fa, 0xbf, 0x24, 0xe8, 0x9c, 0x5e, 0xc5, 0xc6, 0x0c)]
 interface IWICProgressCallback(IWICProgressCallbackVtbl): IUnknown(IUnknownVtbl) {
     fn Notify(
@@ -1212,14 +1130,12 @@ interface IWICProgressCallback(IWICProgressCallbackVtbl): IUnknown(IUnknownVtbl)
         dblProgress: c_double,
     ) -> HRESULT,
 });
-
 FN!{stdcall PFNProgressNotification(
     pvData: LPVOID,
     uFrameNum: ULONG,
     operation: WICProgressOperation,
     dblProgress: c_double,
 ) -> HRESULT}
-
 RIDL!(#[uuid(0x64c1024e, 0xc3cf, 0x4462, 0x80, 0x78, 0x88, 0xc2, 0xb1, 0x1c, 0x46, 0xd9)]
 interface IWICBitmapCodecProgressNotification(IWICBitmapCodecProgressNotificationVtbl): IUnknown(IUnknownVtbl) {
     fn RegisterProgressNotification(
@@ -1228,7 +1144,6 @@ interface IWICBitmapCodecProgressNotification(IWICBitmapCodecProgressNotificatio
             dwProgressFlags: DWORD,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x23bc3f0a, 0x698b, 0x4357, 0x88, 0x6b, 0xf2, 0x4d, 0x50, 0x67, 0x13, 0x34)]
 interface IWICComponentInfo(IWICComponentInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetComponentType(
@@ -1264,7 +1179,6 @@ interface IWICComponentInfo(IWICComponentInfoVtbl): IUnknown(IUnknownVtbl) {
         pcchActual: *mut UINT,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x9f34fb65, 0x13f4, 0x4f15, 0xbc, 0x57, 0x37, 0x26, 0xb5, 0xe5, 0x3d, 0x9f)]
 interface IWICFormatConverterInfo(IWICFormatConverterInfoVtbl): IWICComponentInfo(IWICComponentInfoVtbl) {
     fn GetPixelFormats(
@@ -1276,7 +1190,6 @@ interface IWICFormatConverterInfo(IWICFormatConverterInfoVtbl): IWICComponentInf
         ppIConverter: *mut *mut IWICFormatConverter,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xe87a44c4, 0xb76e, 0x4c47, 0x8b, 0x09, 0x29, 0x8e, 0xb1, 0x2a, 0x27, 0x14)]
 interface IWICBitmapCodecInfo(IWICBitmapCodecInfoVtbl): IWICComponentInfo(IWICComponentInfoVtbl) {
     fn GetContainerFormat(
@@ -1329,14 +1242,12 @@ interface IWICBitmapCodecInfo(IWICBitmapCodecInfoVtbl): IWICComponentInfo(IWICCo
         pfMatches: *mut BOOL,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x94c9b4ee, 0xa09f, 0x4f92, 0x8a, 0x1e, 0x4a, 0x9b, 0xce, 0x7e, 0x76, 0xfb)]
 interface IWICBitmapEncoderInfo(IWICBitmapEncoderInfoVtbl): IWICBitmapCodecInfo(IWICBitmapCodecInfoVtbl) {
     fn CreateInstance(
         ppIBitmapEncoder: *mut *mut IWICBitmapEncoder,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xd8cd007f, 0xd08f, 0x4191, 0x9b, 0xfc, 0x23, 0x6e, 0xa7, 0xf0, 0xe4, 0xb5)]
 interface IWICBitmapDecoderInfo(IWICBitmapDecoderInfoVtbl): IWICBitmapCodecInfo(IWICBitmapCodecInfoVtbl) {
     fn GetPatterns(
@@ -1353,7 +1264,6 @@ interface IWICBitmapDecoderInfo(IWICBitmapDecoderInfoVtbl): IWICBitmapCodecInfo(
         ppIBitmapDecoder: *mut *mut IWICBitmapDecoder,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xe8eda601, 0x3d48, 0x431a, 0xab, 0x44, 0x69, 0x05, 0x9b, 0xe8, 0x8b, 0xbe)]
 interface IWICPixelFormatInfo(IWICPixelFormatInfoVtbl): IWICComponentInfo(IWICComponentInfoVtbl) {
     fn GetFormatGUID(
@@ -1375,7 +1285,6 @@ interface IWICPixelFormatInfo(IWICPixelFormatInfoVtbl): IWICComponentInfo(IWICCo
         pcbActual: *mut UINT,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xa9db33a2, 0xaf5f, 0x43c7, 0xb6, 0x79, 0x74, 0xf5, 0x98, 0x4b, 0x5a, 0xa4)]
 interface IWICPixelFormatInfo2(IWICPixelFormatInfo2Vtbl): IWICPixelFormatInfo(IWICPixelFormatInfoVtbl) {
     fn SupportsTransparency(
@@ -1385,7 +1294,6 @@ interface IWICPixelFormatInfo2(IWICPixelFormatInfo2Vtbl): IWICPixelFormatInfo(IW
         pNumericRepresentation: *mut WICPixelFormatNumericRepresentation,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xec5ec8a9, 0xc395, 0x4314, 0x9c, 0x77, 0x54, 0xd7, 0xa9, 0x35, 0xff, 0x70)]
 interface IWICImagingFactory(IWICImagingFactoryVtbl): IUnknown(IUnknownVtbl) {
     fn CreateDecoderFromFilename(
@@ -1508,7 +1416,6 @@ interface IWICImagingFactory(IWICImagingFactoryVtbl): IUnknown(IUnknownVtbl) {
         ppIQueryWriter: *mut *mut IWICMetadataQueryWriter,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x7b816b45, 0x1996, 0x4476, 0xb1, 0x32, 0xde, 0x9e, 0x24, 0x7c, 0x8a, 0xf0)]
 interface IWICImagingFactory2(IWICImagingFactory2Vtbl) : IWICImagingFactory(IWICImagingFactoryVtbl){
     fn CreateImageEncoder(
@@ -1516,14 +1423,12 @@ interface IWICImagingFactory2(IWICImagingFactory2Vtbl) : IWICImagingFactory(IWIC
         ppWICImageEncoder: *mut *mut IWICImageEncoder,
     ) -> HRESULT,
 });
-
 extern "system" {
     pub fn WICConvertBitmapSource(
         dstFormat: REFWICPixelFormatGUID,
         pISrc: *const IWICBitmapSource,
         ppIDst: *mut *mut IWICBitmapSource,
     ) -> HRESULT;
-
     pub fn WICCreateBitmapFromSection(
         width: UINT,
         height: UINT,
@@ -1533,7 +1438,6 @@ extern "system" {
         offset: UINT,
         ppIBitmap: *mut *mut IWICBitmap,
     ) -> HRESULT;
-
     pub fn WICCreateBitmapFromSectionEx(
         width: UINT,
         height: UINT,
@@ -1544,19 +1448,16 @@ extern "system" {
         desiredAccessLevel: WICSectionAccessLevel,
         ppIBitmap: *mut *mut IWICBitmap,
     ) -> HRESULT;
-
     pub fn WICMapGuidToShortName(
         guid: REFGUID,
         cchName: UINT,
         wzName: *mut WCHAR,
         pcchActual: *mut UINT,
     ) -> HRESULT;
-
     pub fn WICMapShortNameToGuid(
         wzName: PCWSTR,
         pguid: *mut GUID,
     ) -> HRESULT;
-
     pub fn WICMapSchemaToName(
         guidMetadataFormat: REFGUID,
         pwzSchema: LPWSTR,
@@ -1564,15 +1465,11 @@ extern "system" {
         wzName: *mut WCHAR,
         pcchActual: *mut UINT,
     ) -> HRESULT;
-
 }
-
 pub const FACILITY_WINCODEC_ERR: HRESULT = 0x898;
 pub const WINCODEC_ERR_BASE: HRESULT = 0x2000;
-
 /// intsafe.h, 0x216 = 534 = ERROR_ARITHMETIC_OVERFLOW
 pub const INTSAFE_E_ARITHMETIC_OVERFLOW: HRESULT = 0x80070216u32 as HRESULT;
-
 #[inline]
 pub fn MAKE_WINCODECHR(severity: HRESULT, code: HRESULT) -> HRESULT {
     MAKE_HRESULT!(severity, FACILITY_WINCODEC_ERR, WINCODEC_ERR_BASE + code)
@@ -1588,7 +1485,6 @@ pub const WINCODEC_ERR_NOTIMPLEMENTED: HRESULT = E_NOTIMPL;
 pub const WINCODEC_ERR_ABORTED: HRESULT = E_ABORT;
 pub const WINCODEC_ERR_ACCESSDENIED: HRESULT = E_ACCESSDENIED;
 pub const WINCODEC_ERR_VALUEOVERFLOW: HRESULT = INTSAFE_E_ARITHMETIC_OVERFLOW;
-
 ENUM!{enum WICTiffCompressionOption {
     WICTiffCompressionDontCare = 0x00000000,
     WICTiffCompressionNone = 0x00000001,
@@ -1600,7 +1496,6 @@ ENUM!{enum WICTiffCompressionOption {
     WICTiffCompressionLZWHDifferencing = 0x00000007,
     WICTIFFCOMPRESSIONOPTION_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICJpegYCrCbSubsamplingOption {
     WICJpegYCrCbSubsamplingDefault = 0x00000000,
     WICJpegYCrCbSubsampling420 = 0x00000001,
@@ -1609,7 +1504,6 @@ ENUM!{enum WICJpegYCrCbSubsamplingOption {
     WICJpegYCrCbSubsampling440 = 0x00000004,
     WICJPEGYCRCBSUBSAMPLING_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICPngFilterOption {
     WICPngFilterUnspecified = 0x00000000,
     WICPngFilterNone = 0x00000001,
@@ -1620,7 +1514,6 @@ ENUM!{enum WICPngFilterOption {
     WICPngFilterAdaptive = 0x00000006,
     WICPNGFILTEROPTION_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICNamedWhitePoint {
     WICWhitePointDefault = 0x00000001,
     WICWhitePointDaylight = 0x00000002,
@@ -1635,14 +1528,12 @@ ENUM!{enum WICNamedWhitePoint {
     WICWhitePointAsShot = WICWhitePointDefault,
     WICNAMEDWHITEPOINT_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICRawCapabilities {
     WICRawCapabilityNotSupported = 0x00000000,
     WICRawCapabilityGetSupported = 0x00000001,
     WICRawCapabilityFullySupported = 0x00000002,
     WICRAWCAPABILITIES_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICRawRotationCapabilities {
     WICRawRotationCapabilityNotSupported = 0x00000000,
     WICRawRotationCapabilityGetSupported = 0x00000001,
@@ -1650,7 +1541,6 @@ ENUM!{enum WICRawRotationCapabilities {
     WICRawRotationCapabilityFullySupported = 0x00000003,
     WICRAWROTATIONCAPABILITIES_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 STRUCT!{struct WICRawCapabilitiesInfo {
     cbSize: UINT,
     CodecMajorVersion: UINT,
@@ -1671,31 +1561,26 @@ STRUCT!{struct WICRawCapabilitiesInfo {
     RotationSupport: WICRawRotationCapabilities,
     RenderModeSupport: WICRawCapabilities,
 }}
-
 ENUM!{enum WICRawParameterSet {
     WICAsShotParameterSet = 0x00000001,
     WICUserAdjustedParameterSet = 0x00000002,
     WICAutoAdjustedParameterSet = 0x00000003,
     WICRAWPARAMETERSET_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICRawRenderMode {
     WICRawRenderModeDraft = 0x00000001,
     WICRawRenderModeNormal = 0x00000002,
     WICRawRenderModeBestQuality = 0x00000003,
     WICRAWRENDERMODE_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 STRUCT!{struct WICRawToneCurvePoint {
     Input: c_double,
     Output: c_double,
 }}
-
 STRUCT!{struct WICRawToneCurve {
     cPoints: UINT,
     aPoints: [WICRawToneCurvePoint; 0],
 }}
-
 pub const WICRawChangeNotification_ExposureCompensation: UINT = 0x00000001;
 pub const WICRawChangeNotification_NamedWhitePoint: UINT = 0x00000002;
 pub const WICRawChangeNotification_KelvinWhitePoint: UINT = 0x00000004;
@@ -1710,14 +1595,12 @@ pub const WICRawChangeNotification_DestinationColorContext: UINT = 0x00000400;
 pub const WICRawChangeNotification_ToneCurve: UINT = 0x00000800;
 pub const WICRawChangeNotification_Rotation: UINT = 0x00001000;
 pub const WICRawChangeNotification_RenderMode: UINT = 0x00002000;
-
 RIDL!(#[uuid(0x95c75a6e, 0x3e8c, 0x4ec2, 0x85, 0xa8, 0xae, 0xbc, 0xc5, 0x51, 0xe5, 0x9b)]
 interface IWICDevelopRawNotificationCallback(IWICDevelopRawNotificationCallbackVtbl): IUnknown(IUnknownVtbl) {
     fn Notify(
         NotificationMask: UINT,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xfbec5e44, 0xf7be, 0x4b65, 0xb7, 0xf8, 0xc0, 0xc8, 0x1f, 0xef, 0x02, 0x6d)]
 interface IWICDevelopRaw(IWICDevelopRawVtbl): IWICBitmapFrameDecode(IWICBitmapFrameDecodeVtbl) {
     fn QueryRawCapabilitiesInfo(
@@ -1826,7 +1709,6 @@ interface IWICDevelopRaw(IWICDevelopRawVtbl): IWICBitmapFrameDecode(IWICBitmapFr
         pCallback: *const IWICDevelopRawNotificationCallback,
     ) -> HRESULT,
 });
-
 ENUM!{enum WICDdsDimension {
     WICDdsTexture1D = 0x00000000,
     WICDdsTexture2D = 0x00000001,
@@ -1834,7 +1716,6 @@ ENUM!{enum WICDdsDimension {
     WICDdsTextureCube = 0x00000003,
     WICDDSTEXTURE_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 ENUM!{enum WICDdsAlphaMode {
     WICDdsAlphaModeUnknown = 0x00000000,
     WICDdsAlphaModeStraight = 0x00000001,
@@ -1843,7 +1724,6 @@ ENUM!{enum WICDdsAlphaMode {
     WICDdsAlphaModeCustom = 0x00000004,
     WICDDSALPHAMODE_FORCE_DWORD = CODEC_FORCE_DWORD,
 }}
-
 STRUCT!{struct WICDdsParameters {
     Width: UINT,
     Height: UINT,
@@ -1854,7 +1734,6 @@ STRUCT!{struct WICDdsParameters {
     Dimension: WICDdsDimension,
     AlphaMode: WICDdsAlphaMode,
 }}
-
 RIDL!(#[uuid(0x409cd537, 0x8532, 0x40cb, 0x97, 0x74, 0xe2, 0xfe, 0xb2, 0xdf, 0x4e, 0x9c)]
 interface IWICDdsDecoder(IWICDdsDecoderVtbl): IUnknown(IUnknownVtbl) {
     fn GetParameters(
@@ -1867,7 +1746,6 @@ interface IWICDdsDecoder(IWICDdsDecoderVtbl): IUnknown(IUnknownVtbl) {
         ppIBitmapFrame: *mut *mut IWICBitmapFrameDecode,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x5cacdb4c, 0x407e, 0x41b3, 0xb9, 0x36, 0xd0, 0xf0, 0x10, 0xcd, 0x67, 0x32)]
 interface IWICDdsEncoder(IWICDdsEncoderVtbl): IUnknown(IUnknownVtbl) {
     fn SetParameters(
@@ -1883,14 +1761,12 @@ interface IWICDdsEncoder(IWICDdsEncoderVtbl): IUnknown(IUnknownVtbl) {
         pSliceIndex: *mut UINT,
     ) -> HRESULT,
 });
-
 STRUCT!{struct WICDdsFormatInfo {
     DxgiFormat: DXGI_FORMAT,
     BytesPerBlock: UINT,
     BlockWidth: UINT,
     BlockHeight: UINT,
 }}
-
 RIDL!(#[uuid(0x3d4c0c61, 0x18a4, 0x41e4, 0xbd, 0x80, 0x48, 0x1a, 0x4f, 0xc9, 0xf4, 0x64)]
 interface IWICDdsFrameDecode(IWICDdsFrameDecodeVtbl): IUnknown(IUnknownVtbl) {
     fn GetSizeInBlocks(
@@ -1907,7 +1783,6 @@ interface IWICDdsFrameDecode(IWICDdsFrameDecodeVtbl): IUnknown(IUnknownVtbl) {
         pbBuffer: *mut BYTE,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x8939f66e, 0xc46a, 0x4c21, 0xa9, 0xd1, 0x98, 0xb3, 0x27, 0xce, 0x16, 0x79)]
 interface IWICJpegFrameDecode(IWICJpegFrameDecodeVtbl): IUnknown(IUnknownVtbl) {
     fn DoesSupportIndexing(
@@ -1954,7 +1829,6 @@ interface IWICJpegFrameDecode(IWICJpegFrameDecodeVtbl): IUnknown(IUnknownVtbl) {
         pcbStreamDataActual: *mut UINT,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x2f0c601f, 0xd2c6, 0x468c, 0xab, 0xfa, 0x49, 0x49, 0x5d, 0x98, 0x3e, 0xd1)]
 interface IWICJpegFrameEncode(IWICJpegFrameEncodeVtbl): IUnknown(IUnknownVtbl) {
     fn GetAcHuffmanTable(

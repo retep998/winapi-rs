@@ -15,7 +15,6 @@ use um::propidl::PROPVARIANT;
 use um::propsys::IPropertyStore;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR};
-
 // pub const E_NOTFOUND: HRESULT = HRESULT_FROM_WIN32(ERROR_NOT_FOUND);
 // pub const E_UNSUPPORTED_TYPE: HRESULT = HRESULT_FROM_WIN32(ERROR_UNSUPPORTED_TYPE);
 pub const DEVICE_STATE_ACTIVE: DWORD = 0x00000001;
@@ -23,7 +22,6 @@ pub const DEVICE_STATE_DISABLED: DWORD = 0x00000002;
 pub const DEVICE_STATE_NOTPRESENT: DWORD = 0x00000004;
 pub const DEVICE_STATE_UNPLUGGED: DWORD = 0x00000008;
 pub const DEVICE_STATEMASK_ALL: DWORD = 0x0000000F;
-
 DEFINE_PROPERTYKEY!(PKEY_AudioEndpoint_FormFactor,
     0x1da5d803, 0xd492, 0x4edd, 0x8c, 0x23, 0xe0, 0xc0, 0xff, 0xee, 0x7f, 0x0e, 0); 
 DEFINE_PROPERTYKEY!(PKEY_AudioEndpoint_ControlPanelPageProvider,
@@ -58,14 +56,12 @@ DEFINE_PROPERTYKEY!(PKEY_AudioEndpointSettings_MenuText,
     0x14242002, 0x0320, 0x4de4, 0x95, 0x55, 0xa7, 0xd8, 0x2b, 0x73, 0xc2, 0x86, 0);
 DEFINE_PROPERTYKEY!(PKEY_AudioEndpointSettings_LaunchContract,
     0x14242002, 0x0320, 0x4de4, 0x95, 0x55, 0xa7, 0xd8, 0x2b, 0x73, 0xc2, 0x86, 1);
-
 STRUCT!{struct DIRECTX_AUDIO_ACTIVATION_PARAMS {
     cbDirectXAudioActivationParams: DWORD,
     guidAudioSession: GUID,
     dwAudioStreamFlags: DWORD,
 }}
 pub type PDIRECTX_AUDIO_ACTIVATION_PARAMS = *mut DIRECTX_AUDIO_ACTIVATION_PARAMS;
-
 ENUM!{enum EDataFlow {
     eRender,
     eCapture,
@@ -93,7 +89,6 @@ ENUM!{enum EndpointFormFactor {
     EndpointFormFactor_enum_count,
 }}
 pub const HDMI: EndpointFormFactor = DigitalAudioDisplayDevice;
-
 DEFINE_GUID!(DEVINTERFACE_AUDIO_RENDER,
     0xe6327cad, 0xdcec, 0x4949, 0xae, 0x8a, 0x99, 0x1e, 0x97, 0x6a, 0x79, 0xd2);
 DEFINE_GUID!(DEVINTERFACE_AUDIO_CAPTURE,
@@ -102,7 +97,6 @@ DEFINE_GUID!(DEVINTERFACE_MIDI_OUTPUT,
     0x6dc23320, 0xab33, 0x4ce4, 0x80, 0xd4, 0xbb, 0xb3, 0xeb, 0xbf, 0x28, 0x14);
 DEFINE_GUID!(DEVINTERFACE_MIDI_INPUT,
     0x504be32c, 0xccf6, 0x4d2c, 0xb7, 0x3f, 0x6f, 0x8b, 0x37, 0x47, 0xe2, 0x2b);
-
 RIDL!(#[uuid(0x7991eec9, 0x7e89, 0x4d85, 0x83, 0x90, 0x6c, 0x70, 0x3c, 0xec, 0x60, 0xc0)]
 interface IMMNotificationClient(IMMNotificationClientVtbl): IUnknown(IUnknownVtbl) {
     fn OnDeviceStateChanged( 
@@ -213,7 +207,6 @@ interface IActivateAudioInterfaceAsyncOperation(IActivateAudioInterfaceAsyncOper
     ) -> HRESULT,
 }
 );
-
 extern "system" {
     pub fn ActivateAudioInterfaceAsync(
         deviceInterfacePath: LPCWSTR,
@@ -229,6 +222,5 @@ STRUCT!{struct AudioExtensionParams {
     pPnpInterface: *mut IMMDevice,
     pPnpDevnode: *mut IMMDevice,
 }}
-
 DEFINE_GUID!(CLSID_MMDeviceEnumerator, 0xBCDE0395, 0xE52F, 0x467C,
     0x8E, 0x3D, 0xC4, 0x57, 0x92, 0x91, 0x69, 0x2E);

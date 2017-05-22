@@ -7,7 +7,6 @@
 //! error code definitions for the Win32 API functions
 use ctypes::{c_long, c_ulong};
 use shared::minwindef::DWORD;
-
 #[inline]
 pub fn SUCCEEDED(hr: HRESULT) -> bool {
     hr >= 0

@@ -38,7 +38,6 @@ pub const GL_GREATER: GLenum = 0x0204;
 pub const GL_NOTEQUAL: GLenum = 0x0205;
 pub const GL_GEQUAL: GLenum = 0x0206;
 pub const GL_ALWAYS: GLenum = 0x0207;
-
 // TODO: we're missing about 1500 lines of defines and methods
 // until that time, you can use the excellent GL crate
 // https://github.com/brendanzab/gl-rs

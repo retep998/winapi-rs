@@ -4,9 +4,7 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
 //! Url History Interfaces
-
 use ctypes::c_void;
 use shared::guiddef::REFIID;
 use shared::minwindef::{BOOL, DWORD, FILETIME, ULONG};
@@ -14,7 +12,6 @@ use shared::wtypesbase::LPCOLESTR;
 use um::docobj::{IOleCommandTarget, IOleCommandTargetVtbl};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPWSTR};
-
 pub const STATURL_QUERYFLAG_ISCACHED: DWORD = 0x00010000;
 pub const STATURL_QUERYFLAG_NOURL: DWORD = 0x00020000;
 pub const STATURL_QUERYFLAG_NOTITLE: DWORD = 0x00040000;

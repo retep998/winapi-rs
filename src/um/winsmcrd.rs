@@ -4,12 +4,9 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
 //! Smart Card class/port IOCTL codes.
-
 use shared::minwindef::{BYTE, DWORD, ULONG, WORD};
 use um::winioctl::{FILE_ANY_ACCESS, FILE_DEVICE_SMARTCARD, METHOD_BUFFERED};
-
 pub type UWORD = WORD;
 DEFINE_GUID!(GUID_DEVINTERFACE_SMARTCARD_READER, 0x50DD5230, 0xBA8A, 0x11D1,
     0xBF, 0x5D, 0x00, 0x00, 0xF8, 0x05, 0xF5, 0x30);

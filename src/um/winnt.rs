@@ -1094,7 +1094,6 @@ STRUCT!{struct DISPATCHER_CONTEXT {
     Fill0: DWORD,
 }}
 pub type PDISPATCHER_CONTEXT = *mut DISPATCHER_CONTEXT;
-
 }
 // 3966
 #[cfg(target_arch = "x86")]
@@ -1145,7 +1144,6 @@ STRUCT!{struct CONTEXT {
 }}
 #[cfg(target_arch = "x86")]
 pub type PCONTEXT = *mut CONTEXT;
-
 STRUCT!{struct KNONVOLATILE_CONTEXT_POINTERS_u1 {
     Xmm0: PM128A,
     Xmm1: PM128A,

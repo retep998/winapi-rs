@@ -4,18 +4,14 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
 //! Data Protection API Prototypes and Definitions
-
 // This header file provides the definitions and symbols necessary for an
 // Application or Smart Card Service Provider to access the Smartcard Subsystem.
-
 use shared::basetsd::ULONG_PTR;
 use shared::guiddef::LPCGUID;
 use shared::minwindef::{BOOL, BYTE, DWORD, LPVOID};
 use shared::windef::{HICON, HWND};
 use um::winnt::{LPCSTR, LPCWSTR, LPSTR, LPWSTR, PVOID};
-
 pub type LPCBYTE = *const BYTE;
 pub type SCARDCONTEXT = ULONG_PTR;
 pub type PSCARDCONTEXT = *mut SCARDCONTEXT;

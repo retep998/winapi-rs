@@ -9,7 +9,6 @@ use shared::minwindef::{BOOL, DWORD, LPDWORD};
 use um::minwinbase::LPOVERLAPPED;
 use um::winbase::{LPCOMMCONFIG, LPCOMMPROP, LPCOMMTIMEOUTS, LPCOMSTAT, LPDCB};
 use um::winnt::{HANDLE};
-
 extern "system" {
     pub fn ClearCommBreak(
         hFile: HANDLE
