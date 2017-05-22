@@ -6,7 +6,9 @@
 // except according to those terms.
 //! Defines the process snapshot API
 use ctypes::c_void;
+use shared::basetsd::ULONG_PTR;
 use shared::minwindef::DWORD;
+use um::winnt::HANDLE;
 ENUM!{enum PSS_CAPTURE_FLAGS {
     PSS_CAPTURE_NONE = 0x00000000,
     PSS_CAPTURE_VA_CLONE = 0x00000001,
@@ -64,3 +66,33 @@ STRUCT!{struct PSS_ALLOCATOR {
     AllocRoutine: pAllocRoutine,
     FreeRoutine: pFreeRoutine,
 }}
+
+extern "system" {
+    pub fn PssCaptureSnapshot(
+        ProcessHandle: HANDLE, CaptureFlags: PSS_CAPTURE_FLAGS, ThreadContextFlags: DWORD,
+        SnapshotHandle: *mut HPSS,
+    ) -> DWORD;
+    pub fn PssDuplicateSnapshot(
+        SourceProcessHandle: HANDLE, SnapshotHandle: HPSS, TargetProcessHandle: HANDLE,
+        TargetSnapshotHandle: *mut HPSS, Flags: PSS_DUPLICATE_FLAGS,
+    ) -> DWORD;
+    pub fn PssFreeSnapshot(ProcessHandle: HANDLE, SnapshotHandle: HPSS) -> DWORD;
+    pub fn PssQuerySnapshot(
+        SnapshotHandle: HPSS, InformationClass: PSS_QUERY_INFORMATION_CLASS, Buffer: *mut c_void,
+        BufferLength: DWORD,
+    ) -> DWORD;
+    pub fn PssWalkMarkerCreate(
+        Allocator: *const PSS_ALLOCATOR, WalkMarkerHandle: *mut HPSSWALK,
+    ) -> DWORD;
+    pub fn PssWalkMarkerFree(WalkMarkerHandle: HPSSWALK) -> DWORD;
+    pub fn PssWalkMarkerGetPosition(WalkMarkerHandle: HPSSWALK, Position: *mut ULONG_PTR) -> DWORD;
+    // pub fn PssWalkMarkerRewind();
+    // pub fn PssWalkMarkerSeek();
+    pub fn PssWalkMarkerSeekToBeginning(WalkMarkerHandle: HPSS) -> DWORD;
+    pub fn PssWalkMarkerSetPosition(WalkMarkerHandle: HPSSWALK, Position: ULONG_PTR) -> DWORD;
+    // pub fn PssWalkMarkerTell();
+    pub fn PssWalkSnapshot(
+        SnapshotHandle: HPSS, InformationClass: PSS_WALK_INFORMATION_CLASS,
+        WalkMarkerHandle: HPSSWALK, Buffer: *mut c_void, BufferLength: DWORD,
+    ) -> DWORD;
+}
