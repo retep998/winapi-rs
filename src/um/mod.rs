@@ -86,6 +86,7 @@ pub mod gl;
 #[cfg(feature = "propsys")] pub mod propsys;
 #[cfg(feature = "prsht")] pub mod prsht;
 #[cfg(feature = "psapi")] pub mod psapi;
+#[cfg(feature = "reason")] pub mod reason;
 #[cfg(feature = "sapi")] pub mod sapi;
 #[cfg(feature = "sapi51")] pub mod sapi51;
 #[cfg(feature = "sapi53")] pub mod sapi53;
