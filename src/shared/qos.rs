@@ -5,16 +5,20 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! QoS definitions for NDIS components.
-pub type SERVICETYPE = ::ULONG;
+
+use shared::minwindef::ULONG;
+
+pub type SERVICETYPE = ULONG;
+
 STRUCT!{struct FLOWSPEC {
-    TokenRate: ::ULONG,
-    TokenBucketSize: ::ULONG,
-    PeakBandwidth: ::ULONG,
-    Latency: ::ULONG,
-    DelayVariation: ::ULONG,
+    TokenRate: ULONG,
+    TokenBucketSize: ULONG,
+    PeakBandwidth: ULONG,
+    Latency: ULONG,
+    DelayVariation: ULONG,
     ServiceType: SERVICETYPE,
-    MaxSduSize: ::ULONG,
-    MinimumPolicedSize: ::ULONG,
+    MaxSduSize: ULONG,
+    MinimumPolicedSize: ULONG,
 }}
 pub type PFLOWSPEC = *mut FLOWSPEC;
 pub type LPFLOWSPEC = *mut FLOWSPEC;

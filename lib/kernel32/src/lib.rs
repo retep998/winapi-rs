@@ -1262,20 +1262,6 @@ extern "system" {
     pub fn WaitForThreadpoolWaitCallbacks(pwa: PTP_WAIT, fCancelPendingCallbacks: BOOL);
     pub fn WaitForThreadpoolWorkCallbacks(pwk: PTP_WORK, fCancelPendingCallbacks: BOOL);
     pub fn WaitNamedPipeW(lpNamedPipeName: LPCWSTR, nTimeOut: DWORD) -> BOOL;
-    pub fn WerGetFlags(hProcess: HANDLE, pdwFlags: PDWORD) -> HRESULT;
-    pub fn WerRegisterFile(
-        pwzFile: PCWSTR, regFileType: WER_REGISTER_FILE_TYPE, dwFlags: DWORD,
-    ) -> HRESULT;
-    pub fn WerRegisterMemoryBlock(pvAddress: PVOID, dwSize: DWORD) -> HRESULT;
-    pub fn WerRegisterRuntimeExceptionModule(
-        pwszOutOfProcessCallbackDll: PCWSTR, pContext: PVOID,
-    ) -> HRESULT;
-    pub fn WerSetFlags(dwFlags: DWORD) -> HRESULT;
-    pub fn WerUnregisterFile(pwzFilePath: PCWSTR) -> HRESULT;
-    pub fn WerUnregisterMemoryBlock(pvAddress: PVOID) -> HRESULT;
-    pub fn WerUnregisterRuntimeExceptionModule(
-        pwszOutOfProcessCallbackDll: PCWSTR, pContext: PVOID,
-    ) -> HRESULT;
     // pub fn WerpInitiateRemoteRecovery();
     pub fn WideCharToMultiByte(
       CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWSTR, cchWideChar: c_int,
