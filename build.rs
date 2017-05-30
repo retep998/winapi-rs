@@ -200,6 +200,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("hstring", &["winnt"], &[]),
     ("inspectable", &["guiddef", "hstring", "minwindef", "unknwnbase", "winnt"], &[]),
     ("roapi", &["activation", "hstring", "winnt"], &[]),
+    ("winstring", &["basetsd", "minwindef", "winnt"], &[]),
 ];
 struct Header {
     required: bool,
