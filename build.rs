@@ -193,6 +193,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("activation", &["inspectable", "winnt"], &[]),
     ("hstring", &["winnt"], &[]),
     ("inspectable", &["guiddef", "hstring", "minwindef", "unknwnbase", "winnt"], &[]),
+    ("roapi", &["activation", "hstring", "winnt"], &[]),
 ];
 struct Header {
     required: bool,
