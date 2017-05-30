@@ -5,17 +5,20 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
-#[repr(C)]
-pub struct SHITEMID {
-    pub cb: ::USHORT,
-    pub abID: [::BYTE; 0],
-}
+
+use shared::guiddef::GUID;
+use shared::minwindef::{BYTE, USHORT};
+use um::winnt::LPCWSTR;
+
+STRUCT!{struct SHITEMID {
+    cb: USHORT,
+    abID: [BYTE; 0],
+}}
 pub type LPSHITEMID = *mut SHITEMID;
 pub type LPCSHITEMID = *const SHITEMID;
-#[repr(C)]
-pub struct ITEMIDLIST {
-    pub mkid: SHITEMID,
-}
+STRUCT!{struct ITEMIDLIST {
+    mkid: SHITEMID,
+}}
 pub type ITEMIDLIST_RELATIVE = ITEMIDLIST;
 pub type ITEMID_CHILD = ITEMIDLIST;
 pub type ITEMIDLIST_ABSOLUTE = ITEMIDLIST;
@@ -37,8 +40,8 @@ pub type PCUIDLIST_RELATIVE_ARRAY = *const PCUIDLIST_RELATIVE;
 pub type PCIDLIST_ABSOLUTE_ARRAY = *const PCIDLIST_ABSOLUTE;
 pub type PCUIDLIST_ABSOLUTE_ARRAY = *const PCUIDLIST_ABSOLUTE;
 STRUCT!{struct COMDLG_FILTERSPEC {
-    pszName: ::LPCWSTR,
-    pszSpec: ::LPCWSTR,
+    pszName: LPCWSTR,
+    pszSpec: LPCWSTR,
 }}
-pub type KNOWNFOLDERID = ::GUID;
+pub type KNOWNFOLDERID = GUID;
 pub type REFKNOWNFOLDERID = *const KNOWNFOLDERID;
