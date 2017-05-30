@@ -68,6 +68,7 @@ usbiodef = []
 windef = []
 windowsx = []
 winerror = []
+ws2def = []
 wtypes = []
 wtypesbase = []
 #ucrt

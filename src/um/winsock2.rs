@@ -4,57 +4,107 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-//! This file contains the core definitions for the Winsock2 specification that can be used by
-//! both user-mode and kernel mode modules.
-use ctypes::{__int64, c_char, c_int, c_short, c_void};
-use shared::guiddef::LPGUID;
-use shared::inaddr::IN_ADDR;
-use shared::minwindef::{DWORD, INT, ULONG, USHORT};
-use um::winnt::{CHAR, PROCESSOR_NUMBER, PWSTR};
-use vc::vcruntime::size_t;
-pub type ADDRESS_FAMILY = USHORT;
-pub const AF_UNSPEC: c_int = 0;
-pub const AF_UNIX: c_int = 1;
-pub const AF_INET: c_int = 2;
-pub const AF_IMPLINK: c_int = 3;
-pub const AF_PUP: c_int = 4;
-pub const AF_CHAOS: c_int = 5;
-pub const AF_NS: c_int = 6;
-pub const AF_IPX: c_int = AF_NS;
-pub const AF_ISO: c_int = 7;
-pub const AF_OSI: c_int = AF_ISO;
-pub const AF_ECMA: c_int = 8;
-pub const AF_DATAKIT: c_int = 9;
-pub const AF_CCITT: c_int = 10;
-pub const AF_SNA: c_int = 11;
-pub const AF_DECnet: c_int = 12;
-pub const AF_DLI: c_int = 13;
-pub const AF_LAT: c_int = 14;
-pub const AF_HYLINK: c_int = 15;
-pub const AF_APPLETALK: c_int = 16;
-pub const AF_NETBIOS: c_int = 17;
-pub const AF_VOICEVIEW: c_int = 18;
-pub const AF_FIREFOX: c_int = 19;
-pub const AF_UNKNOWN1: c_int = 20;
-pub const AF_BAN: c_int = 21;
-pub const AF_ATM: c_int = 22;
-pub const AF_INET6: c_int = 23;
-pub const AF_CLUSTER: c_int = 24;
-pub const AF_12844: c_int = 25;
-pub const AF_IRDA: c_int = 26;
-pub const AF_NETDES: c_int = 28;
-pub const AF_TCNPROCESS: c_int = 29;
-pub const AF_TCNMESSAGE: c_int = 30;
-pub const AF_ICLFXBM: c_int = 31;
-pub const AF_BTH: c_int = 32;
-pub const AF_LINK: c_int = 33;
-pub const AF_MAX: c_int = 34;
+//! Definitions to be used with the WinSock 2 DLL and WinSock 2 applications.
+
+use ctypes::{ __uint64, c_char, c_int, c_long, c_short, c_uchar, c_uint, c_ulong, c_ushort};
+use shared::basetsd::{UINT_PTR, ULONG_PTR};
+use shared::guiddef::{GUID, LPGUID};
+use shared::minwindef::{BOOL, DWORD, INT, LPHANDLE, LPVOID, UINT, WORD, WPARAM};
+use shared::qos::FLOWSPEC;
+use shared::windef::HWND;
+use shared::winerror::{
+    ERROR_INVALID_HANDLE, ERROR_INVALID_PARAMETER, ERROR_IO_INCOMPLETE, ERROR_IO_PENDING,
+    ERROR_NOT_ENOUGH_MEMORY, ERROR_OPERATION_ABORTED
+};
+use shared::ws2def::{
+    AF_APPLETALK, AF_ATM, AF_BAN, AF_BTH, AF_CCITT, AF_CHAOS, AF_DATAKIT, AF_DECnet, AF_DLI,
+    AF_ECMA, AF_FIREFOX, AF_HYLINK, AF_IMPLINK, AF_INET, AF_INET6, AF_IPX, AF_ISO, AF_LAT,
+    AF_MAX, AF_NS, AF_OSI, AF_PUP, AF_SNA, AF_UNIX, AF_UNKNOWN1, AF_UNSPEC, AF_VOICEVIEW,
+    LPCSADDR_INFO, LPWSABUF, WSABUF
+};
+use shared::wtypesbase::{BLOB, LPBLOB};
+use um::minwinbase::OVERLAPPED;
+use um::winnt::{CHAR, HANDLE, LPSTR, LPWSTR, SHORT, WCHAR};
+
+pub const WINSOCK_VERSION: WORD = 2 | (2 << 8);
+pub type u_char = c_uchar;
+pub type u_short = c_ushort;
+pub type u_int = c_uint;
+pub type u_long = c_ulong;
+pub type u_int64 = __uint64;
+pub type SOCKET = UINT_PTR;
+pub const FD_SETSIZE: usize = 64;
+STRUCT!{struct fd_set {
+    fd_count: u_int,
+    fd_array: [SOCKET; FD_SETSIZE],
+}}
+STRUCT!{struct timeval {
+    tv_sec: c_long,
+    tv_usec: c_long,
+}}
+pub const FIONBIO: c_ulong = 0x8004667e;
+STRUCT!{struct hostent {
+    h_name: *mut c_char,
+    h_aliases: *mut *mut c_char,
+    h_addrtype: c_short,
+    h_length: c_short,
+    h_addr_list: *mut *mut c_char,
+}}
+STRUCT!{struct netent {
+    n_name: *mut c_char,
+    n_aliases: *mut *mut c_char,
+    n_addrtype: c_short,
+    n_net: u_long,
+}}
+#[cfg(target_arch = "x86")]
+STRUCT!{struct servent {
+    s_name: *mut c_char,
+    s_aliases: *mut *mut c_char,
+    s_port: c_short,
+    s_proto: *mut c_char,
+}}
+#[cfg(target_arch = "x86_64")]
+STRUCT!{struct servent {
+    s_name: *mut c_char,
+    s_aliases: *mut *mut c_char,
+    s_proto: *mut c_char,
+    s_port: c_short,
+}}
+STRUCT!{struct protoent {
+    p_name: *mut c_char,
+    p_aliases: *mut *mut c_char,
+    p_proto: c_short,
+}}
+pub const WSADESCRIPTION_LEN: usize = 256;
+pub const WSASYS_STATUS_LEN: usize = 128;
+#[cfg(target_arch = "x86")]
+STRUCT!{struct WSADATA {
+    wVersion: WORD,
+    wHighVersion: WORD,
+    szDescription: [c_char; WSADESCRIPTION_LEN + 1],
+    szSystemStatus: [c_char; WSASYS_STATUS_LEN + 1],
+    iMaxSockets: c_ushort,
+    iMaxUdpDg: c_ushort,
+    lpVendorInfo: *mut c_char,
+}}
+#[cfg(target_arch = "x86_64")]
+STRUCT!{struct WSADATA {
+    wVersion: WORD,
+    wHighVersion: WORD,
+    iMaxSockets: c_ushort,
+    iMaxUdpDg: c_ushort,
+    lpVendorInfo: *mut c_char,
+    szDescription: [c_char; WSADESCRIPTION_LEN + 1],
+    szSystemStatus: [c_char; WSASYS_STATUS_LEN + 1],
+}}
+pub type LPWSADATA = *mut WSADATA;
+pub const INVALID_SOCKET: SOCKET = !0;
+pub const SOCKET_ERROR: c_int = -1;
 pub const SOCK_STREAM: c_int = 1;
 pub const SOCK_DGRAM: c_int = 2;
 pub const SOCK_RAW: c_int = 3;
 pub const SOCK_RDM: c_int = 4;
 pub const SOCK_SEQPACKET: c_int = 5;
-pub const SOL_SOCKET: c_int = 0xffff;
 pub const SO_DEBUG: c_int = 0x0001;
 pub const SO_ACCEPTCONN: c_int = 0x0002;
 pub const SO_REUSEADDR: c_int = 0x0004;
@@ -74,216 +124,366 @@ pub const SO_SNDTIMEO: c_int = 0x1005;
 pub const SO_RCVTIMEO: c_int = 0x1006;
 pub const SO_ERROR: c_int = 0x1007;
 pub const SO_TYPE: c_int = 0x1008;
-pub const SO_BSP_STATE: c_int = 0x1009;
 pub const SO_GROUP_ID: c_int = 0x2001;
 pub const SO_GROUP_PRIORITY: c_int = 0x2002;
 pub const SO_MAX_MSG_SIZE: c_int = 0x2003;
 pub const SO_CONDITIONAL_ACCEPT: c_int = 0x3002;
-pub const SO_PAUSE_ACCEPT: c_int = 0x3003;
-pub const SO_COMPARTMENT_ID: c_int = 0x3004;
-pub const SO_RANDOMIZE_PORT: c_int = 0x3005;
-pub const SO_PORT_SCALABILITY: c_int = 0x3006;
-pub const WSK_SO_BASE: c_int = 0x4000;
-pub const TCP_NODELAY: c_int = 0x0001;
-STRUCT!{struct SOCKADDR {
-    sa_family: ADDRESS_FAMILY,
-    sa_data: [CHAR; 14],
+STRUCT!{struct sockproto {
+    sp_family: u_short,
+    sp_protocol: u_short,
 }}
-pub type PSOCKADDR = *mut SOCKADDR;
-pub type LPSOCKADDR = *mut SOCKADDR;
-STRUCT!{struct SOCKET_ADDRESS {
-    lpSockaddr: LPSOCKADDR,
-    iSockaddrLength: INT,
+pub const PF_UNSPEC: c_int = AF_UNSPEC;
+pub const PF_UNIX: c_int = AF_UNIX;
+pub const PF_INET: c_int = AF_INET;
+pub const PF_IMPLINK: c_int = AF_IMPLINK;
+pub const PF_PUP: c_int = AF_PUP;
+pub const PF_CHAOS: c_int = AF_CHAOS;
+pub const PF_NS: c_int = AF_NS;
+pub const PF_IPX: c_int = AF_IPX;
+pub const PF_ISO: c_int = AF_ISO;
+pub const PF_OSI: c_int = AF_OSI;
+pub const PF_ECMA: c_int = AF_ECMA;
+pub const PF_DATAKIT: c_int = AF_DATAKIT;
+pub const PF_CCITT: c_int = AF_CCITT;
+pub const PF_SNA: c_int = AF_SNA;
+pub const PF_DECnet: c_int = AF_DECnet;
+pub const PF_DLI: c_int = AF_DLI;
+pub const PF_LAT: c_int = AF_LAT;
+pub const PF_HYLINK: c_int = AF_HYLINK;
+pub const PF_APPLETALK: c_int = AF_APPLETALK;
+pub const PF_VOICEVIEW: c_int = AF_VOICEVIEW;
+pub const PF_FIREFOX: c_int = AF_FIREFOX;
+pub const PF_UNKNOWN1: c_int = AF_UNKNOWN1;
+pub const PF_BAN: c_int = AF_BAN;
+pub const PF_ATM: c_int = AF_ATM;
+pub const PF_INET6: c_int = AF_INET6;
+pub const PF_BTH: c_int = AF_BTH;
+pub const PF_MAX: c_int = AF_MAX;
+STRUCT!{struct linger {
+    l_onoff: u_short,
+    l_linger: u_short,
 }}
-pub type PSOCKET_ADDRESS = *mut SOCKET_ADDRESS;
-pub type LPSOCKET_ADDRESS = *mut SOCKET_ADDRESS;
-STRUCT!{struct SOCKET_ADDRESS_LIST {
-    iAddressCount: INT,
-    Address: [SOCKET_ADDRESS; 0],
+pub const SOL_SOCKET: c_int = 0xffff;
+pub const SOMAXCONN: c_int = 0x7fffffff;
+pub type WSAEVENT = HANDLE;
+pub type LPWSAEVENT = LPHANDLE;
+pub type WSAOVERLAPPED = OVERLAPPED;
+pub type LPWSAOVERLAPPED = *mut OVERLAPPED;
+pub const WSA_IO_PENDING: DWORD = ERROR_IO_PENDING;
+pub const WSA_IO_INCOMPLETE: DWORD = ERROR_IO_INCOMPLETE;
+pub const WSA_INVALID_HANDLE: DWORD = ERROR_INVALID_HANDLE;
+pub const WSA_INVALID_PARAMETER: DWORD = ERROR_INVALID_PARAMETER;
+pub const WSA_NOT_ENOUGH_MEMORY: DWORD = ERROR_NOT_ENOUGH_MEMORY;
+pub const WSA_OPERATION_ABORTED: DWORD = ERROR_OPERATION_ABORTED;
+STRUCT!{struct QOS {
+    SendingFlowspec: FLOWSPEC,
+    FLOWSPEC: FLOWSPEC,
+    ProviderSpecific: WSABUF,
 }}
-pub type PSOCKET_ADDRESS_LIST = *mut SOCKET_ADDRESS_LIST;
-pub type LPSOCKET_ADDRESS_LIST = *mut SOCKET_ADDRESS_LIST;
-STRUCT!{struct CSADDR_INFO {
-    LocalAddr: SOCKET_ADDRESS,
-    RemoteAddr: SOCKET_ADDRESS,
-    iSocketType: INT,
+pub type LPQOS = *mut QOS;
+pub const FD_MAX_EVENTS: usize = 10;
+pub type GROUP = c_uint;
+STRUCT!{struct WSANETWORKEVENTS {
+    lNetworkEvents: c_long,
+    iErrorCode: [c_int; FD_MAX_EVENTS],
+}}
+pub type LPWSANETWORKEVENTS = *mut WSANETWORKEVENTS;
+pub const MAX_PROTOCOL_CHAIN: usize = 7;
+STRUCT!{struct WSAPROTOCOLCHAIN {
+    ChainLen: c_int,
+    ChainEntries: [DWORD; MAX_PROTOCOL_CHAIN],
+}}
+pub type LPWSAPROTOCOLCHAIN = *mut WSAPROTOCOLCHAIN;
+pub const WSAPROTOCOL_LEN: usize = 255;
+STRUCT!{struct WSAPROTOCOL_INFOA {
+    dwServiceFlags1: DWORD,
+    dwServiceFlags2: DWORD,
+    dwServiceFlags3: DWORD,
+    dwServiceFlags4: DWORD,
+    dwServiceFlags5: DWORD,
+    ProviderId: GUID,
+    dwCatalogEntryId: DWORD,
+    ProtocolChain: WSAPROTOCOLCHAIN,
+    iVersion: c_int,
+    iAddressFamily: c_int,
+    iMaxSockAddr: c_int,
+    iMinSockAddr: c_int,
+    iSocketType: c_int,
+    iProtocol: c_int,
+    iProtocolMaxOffset: c_int,
+    iNetworkByteOrder: c_int,
+    iSecurityScheme: c_int,
+    dwMessageSize: DWORD,
+    dwProviderReserved: DWORD,
+    szProtocol: [CHAR; WSAPROTOCOL_LEN + 1],
+}}
+pub type LPWSAPROTOCOL_INFOA = *mut WSAPROTOCOL_INFOA;
+STRUCT!{struct WSAPROTOCOL_INFOW {
+    dwServiceFlags1: DWORD,
+    dwServiceFlags2: DWORD,
+    dwServiceFlags3: DWORD,
+    dwServiceFlags4: DWORD,
+    dwServiceFlags5: DWORD,
+    ProviderId: GUID,
+    dwCatalogEntryId: DWORD,
+    ProtocolChain: WSAPROTOCOLCHAIN,
+    iVersion: c_int,
+    iAddressFamily: c_int,
+    iMaxSockAddr: c_int,
+    iMinSockAddr: c_int,
+    iSocketType: c_int,
+    iProtocol: c_int,
+    iProtocolMaxOffset: c_int,
+    iNetworkByteOrder: c_int,
+    iSecurityScheme: c_int,
+    dwMessageSize: DWORD,
+    dwProviderReserved: DWORD,
+    szProtocol: [WCHAR; WSAPROTOCOL_LEN + 1],
+}}
+pub type LPWSAPROTOCOL_INFOW = *mut WSAPROTOCOL_INFOW;
+FN!{stdcall LPCONDITIONPROC(
+    lpCallerId: LPWSABUF,
+    lpCallerData: LPWSABUF,
+    lpSQOS: LPQOS,
+    lpGQOS: LPQOS,
+    lpCalleeId: LPWSABUF,
+    lpCalleeData: LPWSABUF,
+    g: *mut GROUP,
+    dwCallbackData: DWORD,
+) -> c_int}
+FN!{stdcall LPWSAOVERLAPPED_COMPLETION_ROUTINE(
+    dwError: DWORD,
+    cbTransferred: DWORD,
+    lpOverlapped: LPWSAOVERLAPPED,
+    dwFlags: DWORD,
+) -> ()}
+ENUM!{enum WSACOMPLETIONTYPE {
+    NSP_NOTIFY_IMMEDIATELY = 0,
+    NSP_NOTIFY_HWND,
+    NSP_NOTIFY_EVENT,
+    NSP_NOTIFY_PORT,
+    NSP_NOTIFY_APC,
+}}
+pub type PWSACOMPLETIONTYPE = *mut WSACOMPLETIONTYPE;
+pub type LPWSACOMPLETIONTYPE = *mut WSACOMPLETIONTYPE;
+STRUCT!{struct WSACOMPLETION_WindowMessage {
+    hWnd: HWND,
+    uMsg: UINT,
+    context: WPARAM,
+}}
+STRUCT!{struct WSACOMPLETION_Event {
+    lpOverlapped: LPWSAOVERLAPPED,
+}}
+STRUCT!{struct WSACOMPLETION_Apc {
+    lpOverlapped: LPWSAOVERLAPPED,
+    lpfnCompletionProc: LPWSAOVERLAPPED_COMPLETION_ROUTINE,
+}}
+STRUCT!{struct WSACOMPLETION_Port {
+    lpOverlapped: LPWSAOVERLAPPED,
+    hPort: HANDLE,
+    Key: ULONG_PTR,
+}}
+#[cfg(target_arch = "x86")]
+STRUCT!{struct WSACOMPLETION {
+    Type: WSACOMPLETIONTYPE,
+    Parameters: [u8; 12],
+}}
+#[cfg(target_arch = "x86_64")]
+STRUCT!{struct WSACOMPLETION {
+    Type: WSACOMPLETIONTYPE,
+    Parameters: [u8; 24],
+}}
+UNION!(WSACOMPLETION, Parameters, WindowMessage, WindowMessage_mut, WSACOMPLETION_WindowMessage);
+UNION!(WSACOMPLETION, Parameters, Event, Event_mut, WSACOMPLETION_Event);
+UNION!(WSACOMPLETION, Parameters, Apc, Apc_mut, WSACOMPLETION_Apc);
+UNION!(WSACOMPLETION, Parameters, Port, Port_mut, WSACOMPLETION_Port);
+pub type PWSACOMPLETION = *mut WSACOMPLETION;
+pub type LPWSACOMPLETION = *mut WSACOMPLETION;
+STRUCT!{struct AFPROTOCOLS {
+    iAddressFamily: INT,
     iProtocol: INT,
 }}
-pub type PCSADDR_INFO = *mut CSADDR_INFO;
-pub type LPCSADDR_INFO = *mut CSADDR_INFO;
-STRUCT!{struct SOCKADDR_STORAGE_LH {
-    ss_family: ADDRESS_FAMILY,
-    __ss_pad1: [CHAR; 6],
-    __ss_align: __int64,
-    __ss_pad2: [CHAR; 112],
+pub type PAFPROTOCOLS = *mut AFPROTOCOLS;
+pub type LPAFPROTOCOLS = *mut AFPROTOCOLS;
+ENUM!{enum WSAECOMPARATOR {
+    COMP_EQUAL = 0,
+    COMP_NOTLESS,
 }}
-pub type PSOCKADDR_STORAGE_LH = *mut SOCKADDR_STORAGE_LH;
-pub type LPSOCKADDR_STORAGE_LH = *mut SOCKADDR_STORAGE_LH;
-STRUCT!{struct SOCKADDR_STORAGE_XP {
-    ss_family: c_short,
-    __ss_pad1: [CHAR; 6],
-    __ss_align: __int64,
-    __ss_pad2: [CHAR; 112],
+pub type PWSAECOMPARATOR = *mut WSAECOMPARATOR;
+pub type LPWSAECOMPARATOR = *mut WSAECOMPARATOR;
+STRUCT!{struct WSAVERSION {
+    dwVersion: DWORD,
+    ecHow: WSAECOMPARATOR,
 }}
-pub type PSOCKADDR_STORAGE_XP = *mut SOCKADDR_STORAGE_XP;
-pub type LPSOCKADDR_STORAGE_XP = *mut SOCKADDR_STORAGE_XP;
-pub type SOCKADDR_STORAGE = SOCKADDR_STORAGE_LH;
-pub type PSOCKADDR_STORAGE = *mut SOCKADDR_STORAGE;
-pub type LPSOCKADDR_STORAGE = *mut SOCKADDR_STORAGE;
-STRUCT!{struct SOCKET_PROCESSOR_AFFINITY {
-    Processor: PROCESSOR_NUMBER,
-    NumaNodeId: USHORT,
-    Reserved: USHORT,
+pub type PWSAVERSION = *mut WSAVERSION;
+pub type LPWSAVERSION = *mut WSAVERSION;
+STRUCT!{struct WSAQUERYSETA {
+    dwSize: DWORD,
+    lpszServiceInstanceName: LPSTR,
+    lpServiceClassId: LPGUID,
+    lpVersion: LPWSAVERSION,
+    lpszComment: LPSTR,
+    dwNameSpace: DWORD,
+    lpNSProviderId: LPGUID,
+    lpszContext: LPSTR,
+    dwNumberOfProtocols: DWORD,
+    lpafpProtocols: LPAFPROTOCOLS,
+    lpszQueryString: LPSTR,
+    dwNumberOfCsAddrs: DWORD,
+    lpcsaBuffer: LPCSADDR_INFO,
+    dwOutputFlags: DWORD,
+    lpBlob: LPBLOB,
 }}
-pub type PSOCKET_PROCESSOR_AFFINITY = *mut SOCKET_PROCESSOR_AFFINITY;
-pub const IOC_UNIX: DWORD = 0x00000000;
-pub const IOC_WS2: DWORD = 0x08000000;
-pub const IOC_PROTOCOL: DWORD = 0x10000000;
-pub const IOC_VENDOR: DWORD = 0x18000000;
-pub const IOC_WSK: DWORD = IOC_WS2 | 0x07000000;
-macro_rules! _WSAIO { ($x:expr, $y:expr) => { IOC_VOID | $x | $y } }
-macro_rules! _WSAIOR { ($x:expr, $y:expr) => { IOC_OUT | $x | $y } }
-macro_rules! _WSAIOW { ($x:expr, $y:expr) => { IOC_IN | $x | $y } }
-macro_rules! _WSAIORW { ($x:expr, $y:expr) => { IOC_INOUT | $x | $y } }
-pub const SIO_ASSOCIATE_HANDLE: DWORD = _WSAIOW!(IOC_WS2, 1);
-pub const SIO_ENABLE_CIRCULAR_QUEUEING: DWORD = _WSAIO!(IOC_WS2, 2);
-pub const SIO_FIND_ROUTE: DWORD = _WSAIOR!(IOC_WS2, 3);
-pub const SIO_FLUSH: DWORD = _WSAIO!(IOC_WS2, 4);
-pub const SIO_GET_BROADCAST_ADDRESS: DWORD = _WSAIOR!(IOC_WS2, 5);
-pub const SIO_GET_EXTENSION_FUNCTION_POINTER: DWORD = _WSAIORW!(IOC_WS2, 6);
-pub const SIO_GET_QOS: DWORD = _WSAIORW!(IOC_WS2, 7);
-pub const SIO_GET_GROUP_QOS: DWORD = _WSAIORW!(IOC_WS2, 8);
-pub const SIO_MULTIPOINT_LOOPBACK: DWORD = _WSAIOW!(IOC_WS2, 9);
-pub const SIO_MULTICAST_SCOPE: DWORD = _WSAIOW!(IOC_WS2, 10);
-pub const SIO_SET_QOS: DWORD = _WSAIOW!(IOC_WS2, 11);
-pub const SIO_SET_GROUP_QOS: DWORD = _WSAIOW!(IOC_WS2, 12);
-pub const SIO_TRANSLATE_HANDLE: DWORD = _WSAIORW!(IOC_WS2, 13);
-pub const SIO_ROUTING_INTERFACE_QUERY: DWORD = _WSAIORW!(IOC_WS2, 20);
-pub const SIO_ROUTING_INTERFACE_CHANGE: DWORD = _WSAIOW!(IOC_WS2, 21);
-pub const SIO_ADDRESS_LIST_QUERY: DWORD = _WSAIOR!(IOC_WS2, 22);
-pub const SIO_ADDRESS_LIST_CHANGE: DWORD = _WSAIO!(IOC_WS2, 23);
-pub const SIO_QUERY_TARGET_PNP_HANDLE: DWORD = _WSAIOR!(IOC_WS2, 24);
-pub const SIO_QUERY_RSS_PROCESSOR_INFO: DWORD = _WSAIOR!(IOC_WS2, 37);
-pub const SIO_ADDRESS_LIST_SORT: DWORD = _WSAIORW!(IOC_WS2, 25);
-pub const SIO_RESERVED_1: DWORD = _WSAIOW!(IOC_WS2, 26);
-pub const SIO_RESERVED_2: DWORD = _WSAIOW!(IOC_WS2, 33);
-pub const SIO_GET_MULTIPLE_EXTENSION_FUNCTION_POINTER: DWORD = _WSAIORW!(IOC_WS2, 36);
-pub const IPPROTO_IP: c_int = 0;
-ENUM!{enum IPPROTO {
-    IPPROTO_HOPOPTS = 0, // IPv6 Hop-by-Hop options
-    IPPROTO_ICMP = 1,
-    IPPROTO_IGMP = 2,
-    IPPROTO_GGP = 3,
-    IPPROTO_IPV4 = 4,
-    IPPROTO_ST = 5,
-    IPPROTO_TCP = 6,
-    IPPROTO_CBT = 7,
-    IPPROTO_EGP = 8,
-    IPPROTO_IGP = 9,
-    IPPROTO_PUP = 12,
-    IPPROTO_UDP = 17,
-    IPPROTO_IDP = 22,
-    IPPROTO_RDP = 27,
-    IPPROTO_IPV6 = 41, // IPv6 header
-    IPPROTO_ROUTING = 43, // IPv6 Routing header
-    IPPROTO_FRAGMENT = 44, // IPv6 fragmentation header
-    IPPROTO_ESP = 50, // encapsulating security payload
-    IPPROTO_AH = 51, // authentication header
-    IPPROTO_ICMPV6 = 58, // ICMPv6
-    IPPROTO_NONE = 59, // IPv6 no next header
-    IPPROTO_DSTOPTS = 60, // IPv6 Destination options
-    IPPROTO_ND = 77,
-    IPPROTO_ICLFXBM = 78,
-    IPPROTO_PIM = 103,
-    IPPROTO_PGM = 113,
-    IPPROTO_L2TP = 115,
-    IPPROTO_SCTP = 132,
-    IPPROTO_RAW = 255,
-    IPPROTO_MAX = 256,
-    IPPROTO_RESERVED_RAW = 257,
-    IPPROTO_RESERVED_IPSEC = 258,
-    IPPROTO_RESERVED_IPSECOFFLOAD = 259,
-    IPPROTO_RESERVED_WNV = 260,
-    IPPROTO_RESERVED_MAX = 261,
+pub type PWSAQUERYSETA = *mut WSAQUERYSETA;
+pub type LPWSAQUERYSETA = *mut WSAQUERYSETA;
+STRUCT!{struct WSAQUERYSETW {
+    dwSize: DWORD,
+    lpszServiceInstanceName: LPWSTR,
+    lpServiceClassId: LPGUID,
+    lpVersion: LPWSAVERSION,
+    lpszComment: LPWSTR,
+    dwNameSpace: DWORD,
+    lpNSProviderId: LPGUID,
+    lpszContext: LPWSTR,
+    dwNumberOfProtocols: DWORD,
+    lpafpProtocols: LPAFPROTOCOLS,
+    lpszQueryString: LPWSTR,
+    dwNumberOfCsAddrs: DWORD,
+    lpcsaBuffer: LPCSADDR_INFO,
+    dwOutputFlags: DWORD,
+    lpBlob: LPBLOB,
 }}
-pub type PIPPROTO = *mut IPPROTO;
-STRUCT!{struct SOCKADDR_IN {
-    sin_family: ADDRESS_FAMILY,
-    sin_port: USHORT,
-    sin_addr: IN_ADDR,
-    sin_zero: [CHAR; 8],
+pub type PWSAQUERYSETW = *mut WSAQUERYSETW;
+pub type LPWSAQUERYSETW = *mut WSAQUERYSETW;
+STRUCT!{struct WSAQUERYSET2A {
+    dwSize: DWORD,
+    lpszServiceInstanceName: LPSTR,
+    lpVersion: LPWSAVERSION,
+    lpszComment: LPSTR,
+    dwNameSpace: DWORD,
+    lpNSProviderId: LPGUID,
+    lpszContext: LPSTR,
+    dwNumberOfProtocols: DWORD,
+    lpafpProtocols: LPAFPROTOCOLS,
+    lpszQueryString: LPSTR,
+    dwNumberOfCsAddrs: DWORD,
+    lpcsaBuffer: LPCSADDR_INFO,
+    dwOutputFlags: DWORD,
+    lpBlob: LPBLOB,
 }}
-pub type PSOCKADDR_IN = *mut SOCKADDR_IN;
-//645
-pub const IOCPARM_MASK: DWORD = 0x7f;
-pub const IOC_VOID: DWORD = 0x20000000;
-pub const IOC_OUT: DWORD = 0x40000000;
-pub const IOC_IN: DWORD = 0x80000000;
-pub const IOC_INOUT: DWORD = IOC_IN | IOC_OUT;
-STRUCT!{struct WSABUF {
-    len: ULONG,
-    buf: *mut CHAR,
+pub type PWSAQUERYSET2A = *mut WSAQUERYSET2A;
+pub type LPWSAQUERYSET2A = *mut WSAQUERYSET2A;
+STRUCT!{struct WSAQUERYSET2W {
+    dwSize: DWORD,
+    lpszServiceInstanceName: LPWSTR,
+    lpVersion: LPWSAVERSION,
+    lpszComment: LPWSTR,
+    dwNameSpace: DWORD,
+    lpNSProviderId: LPGUID,
+    lpszContext: LPWSTR,
+    dwNumberOfProtocols: DWORD,
+    lpafpProtocols: LPAFPROTOCOLS,
+    lpszQueryString: LPWSTR,
+    dwNumberOfCsAddrs: DWORD,
+    lpcsaBuffer: LPCSADDR_INFO,
+    dwOutputFlags: DWORD,
+    lpBlob: LPBLOB,
 }}
-pub type LPWSABUF = *mut WSABUF;
-STRUCT!{struct WSAMSG {
-    name: LPSOCKADDR,
-    namelen: INT,
-    lpBuffers: LPWSABUF,
-    dwBufferCount: ULONG,
-    Control: WSABUF,
-    dwFlags: ULONG,
+pub type PWSAQUERYSET2W = *mut WSAQUERYSET2W;
+pub type LPWSAQUERYSET2W = *mut WSAQUERYSET2W;
+ENUM!{enum WSAESETSERVICEOP {
+    RNRSERVICE_REGISTER = 0,
+    RNRSERVICE_DEREGISTER,
+    RNRSERVICE_DELETE,
 }}
-pub type PWSAMSG = *mut WSAMSG;
-pub type LPWSAMSG = *mut WSAMSG;
-STRUCT!{struct ADDRINFOA {
-    ai_flags: c_int,
-    ai_family: c_int,
-    ai_socktype: c_int,
-    ai_protocol: c_int,
-    ai_addrlen: size_t,
-    ai_canonname: *mut c_char,
-    ai_addr: *mut SOCKADDR,
-    ai_next: *mut ADDRINFOA,
+pub type PWSAESETSERVICEOP = *mut WSAESETSERVICEOP;
+pub type LPWSAESETSERVICEOP = *mut WSAESETSERVICEOP;
+STRUCT!{struct WSANSCLASSINFOA {
+    lpszName: LPSTR,
+    dwNameSpace: DWORD,
+    dwValueType: DWORD,
+    dwValueSize: DWORD,
+    lpValue: LPVOID,
 }}
-pub type PADDRINFOA = *mut ADDRINFOA;
-STRUCT!{struct ADDRINFOW {
-    ai_flags: c_int,
-    ai_family: c_int,
-    ai_socktype: c_int,
-    ai_protocol: c_int,
-    ai_addrlen: size_t,
-    ai_canonname: PWSTR,
-    ai_addr: *mut SOCKADDR,
-    ai_next: *mut ADDRINFOW,
+pub type PWSANSCLASSINFOA = *mut WSANSCLASSINFOA;
+pub type LPWSANSCLASSINFOA = *mut WSANSCLASSINFOA;
+STRUCT!{struct WSANSCLASSINFOW {
+    lpszName: LPWSTR,
+    dwNameSpace: DWORD,
+    dwValueType: DWORD,
+    dwValueSize: DWORD,
+    lpValue: LPVOID,
 }}
-pub type PADDRINFOW = *mut ADDRINFOW;
-STRUCT!{struct ADDRINFOEXA {
-    ai_flags: c_int,
-    ai_family: c_int,
-    ai_socktype: c_int,
-    ai_protocol: c_int,
-    ai_addrlen: size_t,
-    ai_canonname: *mut c_char,
-    ai_addr: *mut SOCKADDR,
-    ai_blob: *mut c_void,
-    ai_bloblen: size_t,
-    ai_provider: LPGUID,
-    ai_next: *mut ADDRINFOEXW,
+pub type PWSANSCLASSINFOW = *mut WSANSCLASSINFOW;
+pub type LPWSANSCLASSINFOW = *mut WSANSCLASSINFOW;
+STRUCT!{struct WSASERVICECLASSINFOA {
+    lpServiceClassId: LPGUID,
+    lpszServiceClassName: LPSTR,
+    dwCount: DWORD,
+    lpClassInfos: LPWSANSCLASSINFOA,
 }}
-pub type PADDRINFOEXA = *mut ADDRINFOEXA;
-pub type LPADDRINFOEXA = *mut ADDRINFOEXA;
-STRUCT!{struct ADDRINFOEXW {
-    ai_flags: c_int,
-    ai_family: c_int,
-    ai_socktype: c_int,
-    ai_protocol: c_int,
-    ai_addrlen: size_t,
-    ai_canonname: PWSTR,
-    ai_addr: *mut SOCKADDR,
-    ai_blob: *mut c_void,
-    ai_bloblen: size_t,
-    ai_provider: LPGUID,
-    ai_next: *mut ADDRINFOEXW,
+pub type PWSASERVICECLASSINFOA = *mut WSASERVICECLASSINFOA;
+pub type LPWSASERVICECLASSINFOA = *mut WSASERVICECLASSINFOA;
+STRUCT!{struct WSASERVICECLASSINFOW {
+    lpServiceClassId: LPGUID,
+    lpszServiceClassName: LPWSTR,
+    dwCount: DWORD,
+    lpClassInfos: LPWSANSCLASSINFOW,
 }}
-pub type PADDRINFOEXW = *mut ADDRINFOEXW;
-pub type LPADDRINFOEXW = *mut ADDRINFOEXW;
+pub type PWSASERVICECLASSINFOW = *mut WSASERVICECLASSINFOW;
+pub type LPWSASERVICECLASSINFOW = *mut WSASERVICECLASSINFOW;
+STRUCT!{struct WSANAMESPACE_INFOA {
+    NSProviderId: GUID,
+    dwNameSpace: DWORD,
+    fActive: BOOL,
+    dwVersion: DWORD,
+    lpszIdentifier: LPSTR,
+}}
+pub type PWSANAMESPACE_INFOA = *mut WSANAMESPACE_INFOA;
+pub type LPWSANAMESPACE_INFOA = *mut WSANAMESPACE_INFOA;
+STRUCT!{struct WSANAMESPACE_INFOW {
+    NSProviderId: GUID,
+    dwNameSpace: DWORD,
+    fActive: BOOL,
+    dwVersion: DWORD,
+    lpszIdentifier: LPWSTR,
+}}
+pub type PWSANAMESPACE_INFOW = *mut WSANAMESPACE_INFOW;
+pub type LPWSANAMESPACE_INFOW = *mut WSANAMESPACE_INFOW;
+STRUCT!{struct WSANAMESPACE_INFOEXA {
+    NSProviderId: GUID,
+    dwNameSpace: DWORD,
+    fActive: BOOL,
+    dwVersion: DWORD,
+    lpszIdentifier: LPSTR,
+    ProviderSpecific: BLOB,
+}}
+pub type PWSANAMESPACE_INFOEXA = *mut WSANAMESPACE_INFOEXA;
+pub type LPWSANAMESPACE_INFOEXA = *mut WSANAMESPACE_INFOEXA;
+STRUCT!{struct WSANAMESPACE_INFOEXW {
+    NSProviderId: GUID,
+    dwNameSpace: DWORD,
+    fActive: BOOL,
+    dwVersion: DWORD,
+    lpszIdentifier: LPWSTR,
+    ProviderSpecific: BLOB,
+}}
+pub type PWSANAMESPACE_INFOEXW = *mut WSANAMESPACE_INFOEXW;
+pub type LPWSANAMESPACE_INFOEXW = *mut WSANAMESPACE_INFOEXW;
+pub const POLLRDNORM: SHORT = 0x0100;
+pub const POLLRDBAND: SHORT = 0x0200;
+pub const POLLIN: SHORT = POLLRDNORM | POLLRDBAND;
+pub const POLLPRI: SHORT = 0x0400;
+pub const POLLWRNORM: SHORT = 0x0010;
+pub const POLLOUT: SHORT = POLLWRNORM;
+pub const POLLWRBAND: SHORT = 0x0020;
+pub const POLLERR: SHORT = 0x0001;
+pub const POLLHUP: SHORT = 0x0002;
+pub const POLLNVAL: SHORT = 0x0004;
+STRUCT!{struct WSAPOLLFD {
+    fd: SOCKET,
+    events: SHORT,
+    revents: SHORT,
+}}
+pub type PWSAPOLLFD = *mut WSAPOLLFD;
+pub type LPWSAPOLLFD = *mut WSAPOLLFD;

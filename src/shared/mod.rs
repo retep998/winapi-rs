@@ -46,5 +46,6 @@ pub mod guiddef;
 #[cfg(feature = "windef")] pub mod windef;
 #[cfg(feature = "windowsx")] pub mod windowsx;
 #[cfg(feature = "winerror")] pub mod winerror;
+#[cfg(feature = "ws2def")] pub mod ws2def;
 #[cfg(feature = "wtypes")] pub mod wtypes;
 #[cfg(feature = "wtypesbase")] pub mod wtypesbase;
