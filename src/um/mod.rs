@@ -127,6 +127,7 @@ pub mod gl;
 #[cfg(feature = "wininet")] pub mod wininet;
 #[cfg(feature = "winineti")] pub mod winineti;
 #[cfg(feature = "winioctl")] pub mod winioctl;
+#[cfg(feature = "winnls")] pub mod winnls;
 #[cfg(feature = "winnt")] pub mod winnt;
 #[cfg(feature = "winreg")] pub mod winreg;
 #[cfg(feature = "winscard")] pub mod winscard;
