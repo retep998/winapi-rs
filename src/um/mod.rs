@@ -124,6 +124,7 @@ pub mod gl;
 #[cfg(feature = "wincrypt")] pub mod wincrypt;
 #[cfg(feature = "winevt")] pub mod winevt;
 #[cfg(feature = "wingdi")] pub mod wingdi;
+#[cfg(feature = "winhttp")] pub mod winhttp;
 #[cfg(feature = "wininet")] pub mod wininet;
 #[cfg(feature = "winineti")] pub mod winineti;
 #[cfg(feature = "winioctl")] pub mod winioctl;
