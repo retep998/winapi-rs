@@ -21,7 +21,7 @@ ENUM!{enum PROPBAG2_TYPE {
     PROPBAG2_TYPE_STORAGE = 5,
     PROPBAG2_TYPE_MONIKER = 6,
 }}
-STRUCT!{struct  PROPBAG2 {
+STRUCT!{struct PROPBAG2 {
     dwType: DWORD,
     vt: VARTYPE,
     cfType: CLIPFORMAT,

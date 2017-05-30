@@ -118,6 +118,7 @@ pub type PXINPUT_BATTERY_INFORMATION = *mut XINPUT_BATTERY_INFORMATION;
 STRUCT!{struct XINPUT_KEYSTROKE {
     VirtualKey: WORD,
     Unicode: WCHAR,
+    Flags: WORD,
     UserIndex: BYTE,
     HidCode: BYTE,
 }}

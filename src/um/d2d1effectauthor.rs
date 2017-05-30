@@ -17,8 +17,8 @@ FN!{stdcall PD2D1_PROPERTY_SET_FUNCTION(
 FN!{stdcall PD2D1_PROPERTY_GET_FUNCTION(
     effect: *const IUnknown,
     data: *mut BYTE,
-    dataSize :UINT32,
-    actualSize : *mut UINT32,
+    dataSize: UINT32,
+    actualSize: *mut UINT32,
 ) -> HRESULT}
 STRUCT!{struct D2D1_PROPERTY_BINDING {
     propertyName: PCWSTR,

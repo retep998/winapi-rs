@@ -219,10 +219,12 @@ RIDL!(#[uuid(0xec81b08f, 0xbfcb, 0x4e8d, 0xb1, 0x93, 0xa9, 0x15, 0x58, 0x79, 0x9
 interface IDCompositionEffect(IDCompositionEffectVtbl): IUnknown(IUnknownVtbl) {
 });
 RIDL!(#[uuid(0x71185722, 0x246b, 0x41f2, 0xaa, 0xd1, 0x04, 0x43, 0xf7, 0xf4, 0xbf, 0xc2)]
-interface IDCompositionTransform3D(IDCompositionTransform3DVtbl): IDCompositionEffect(IDCompositionEffectVtbl) {
+interface IDCompositionTransform3D(IDCompositionTransform3DVtbl):
+    IDCompositionEffect(IDCompositionEffectVtbl) {
 });
 RIDL!(#[uuid(0xfd55faa7, 0x37e0, 0x4c20, 0x95, 0xd2, 0x9b, 0xe4, 0x5b, 0xc3, 0x3f, 0x55)]
-interface IDCompositionTransform(IDCompositionTransformVtbl): IDCompositionTransform3D(IDCompositionTransform3DVtbl) {
+interface IDCompositionTransform(IDCompositionTransformVtbl):
+    IDCompositionTransform3D(IDCompositionTransform3DVtbl) {
 });
 RIDL!(#[uuid(0x06791122, 0xc6f0, 0x417d, 0x83, 0x23, 0x26, 0x9e, 0x98, 0x7f, 0x59, 0x54)]
 interface IDCompositionTranslateTransform(IDCompositionTranslateTransformVtbl):
@@ -336,7 +338,8 @@ interface IDCompositionMatrixTransform(IDCompositionMatrixTransformVtbl):
     ) -> HRESULT,
 });
 RIDL!(#[uuid(0xa7929a74, 0xe6b2, 0x4bd6, 0x8b, 0x95, 0x40, 0x40, 0x11, 0x9c, 0xa3, 0x4d)]
-interface IDCompositionEffectGroup(IDCompositionEffectGroupVtbl): IDCompositionEffect(IDCompositionEffectVtbl) {
+interface IDCompositionEffectGroup(IDCompositionEffectGroupVtbl):
+    IDCompositionEffect(IDCompositionEffectVtbl) {
     fn SetOpacity1(
         opacity: c_float,
     ) -> HRESULT,
@@ -476,7 +479,8 @@ RIDL!(#[uuid(0x64ac3703, 0x9d3f, 0x45ec, 0xa1, 0x09, 0x7c, 0xac, 0x0e, 0x7a, 0x1
 interface IDCompositionClip(IDCompositionClipVtbl): IUnknown(IUnknownVtbl) {
 });
 RIDL!(#[uuid(0x9842ad7d, 0xd9cf, 0x4908, 0xae, 0xd7, 0x48, 0xb5, 0x1d, 0xa5, 0xe7, 0xc2)]
-interface IDCompositionRectangleClip(IDCompositionRectangleClipVtbl): IDCompositionClip(IDCompositionClipVtbl) {
+interface IDCompositionRectangleClip(IDCompositionRectangleClipVtbl):
+    IDCompositionClip(IDCompositionClipVtbl) {
     fn SetLeft1(
         left: c_float,
     ) -> HRESULT,
@@ -569,7 +573,8 @@ interface IDCompositionSurface(IDCompositionSurfaceVtbl): IUnknown(IUnknownVtbl)
     ) -> HRESULT,
 });
 RIDL!(#[uuid(0xae471c51, 0x5f53, 0x4a24, 0x8d, 0x3e, 0xd0, 0xc3, 0x9c, 0x30, 0xb3, 0xf0)]
-interface IDCompositionVirtualSurface(IDCompositionVirtualSurfaceVtbl): IDCompositionSurface(IDCompositionSurfaceVtbl) {
+interface IDCompositionVirtualSurface(IDCompositionVirtualSurfaceVtbl):
+    IDCompositionSurface(IDCompositionSurfaceVtbl) {
     fn Resize(
         width: UINT,
         height: UINT,
@@ -694,7 +699,8 @@ interface IDCompositionSurfaceFactory(IDCompositionSurfaceFactoryVtbl): IUnknown
     ) -> HRESULT,
 });
 RIDL!(#[uuid(0xe8de1639, 0x4331, 0x4b26, 0xbc, 0x5f, 0x6a, 0x32, 0x1d, 0x34, 0x7a, 0x85)]
-interface IDCompositionVisual2(IDCompositionVisual2Vtbl): IDCompositionVisual(IDCompositionVisualVtbl) {
+interface IDCompositionVisual2(IDCompositionVisual2Vtbl):
+    IDCompositionVisual(IDCompositionVisualVtbl) {
     fn SetOpacityMode(
         mode: DCOMPOSITION_OPACITY_MODE,
     ) -> HRESULT,
@@ -703,7 +709,8 @@ interface IDCompositionVisual2(IDCompositionVisual2Vtbl): IDCompositionVisual(ID
     ) -> HRESULT,
 });
 RIDL!(#[uuid(0xfed2b808, 0x5eb4, 0x43a0, 0xae, 0xa3, 0x35, 0xf6, 0x52, 0x80, 0xf9, 0x1b)]
-interface IDCompositionVisualDebug(IDCompositionVisualDebugVtbl): IDCompositionVisual2(IDCompositionVisual2Vtbl) {
+interface IDCompositionVisualDebug(IDCompositionVisualDebugVtbl):
+    IDCompositionVisual2(IDCompositionVisual2Vtbl) {
     fn EnableHeatMap(
         color: *const D2D1_COLOR_F,
     ) -> HRESULT,
@@ -712,7 +719,8 @@ interface IDCompositionVisualDebug(IDCompositionVisualDebugVtbl): IDCompositionV
     fn DisableRedrawRegions() -> HRESULT,
 });
 RIDL!(#[uuid(0x2775f462, 0xb6c1, 0x4015, 0xb0, 0xbe, 0xb3, 0xe7, 0xd6, 0xa4, 0x97, 0x6d)]
-interface IDCompositionVisual3(IDCompositionVisual3Vtbl): IDCompositionVisualDebug(IDCompositionVisualDebugVtbl) {
+interface IDCompositionVisual3(IDCompositionVisual3Vtbl):
+    IDCompositionVisualDebug(IDCompositionVisualDebugVtbl) {
     fn SetDepthMode(
         mode: DCOMPOSITION_DEPTH_MODE,
     ) -> HRESULT,
@@ -739,7 +747,8 @@ interface IDCompositionVisual3(IDCompositionVisual3Vtbl): IDCompositionVisualDeb
     ) -> HRESULT,
 });
 RIDL!(#[uuid(0x0987cb06, 0xf916, 0x48bf, 0x8d, 0x35, 0xce, 0x76, 0x41, 0x78, 0x1b, 0xd9)]
-interface IDCompositionDevice3(IDCompositionDevice3Vtbl): IDCompositionDevice2(IDCompositionDevice2Vtbl) {
+interface IDCompositionDevice3(IDCompositionDevice3Vtbl):
+    IDCompositionDevice2(IDCompositionDevice2Vtbl) {
     fn CreateGaussianBlurEffect(
         gaussianBlurEffect: *mut *mut IDCompositionGaussianBlurEffect,
     ) -> HRESULT,
@@ -781,7 +790,8 @@ interface IDCompositionDevice3(IDCompositionDevice3Vtbl): IDCompositionDevice2(I
     ) -> HRESULT,
 });
 RIDL!(#[uuid(0x30c421d5, 0x8cb2, 0x4e9f, 0xb1, 0x33, 0x37, 0xbe, 0x27, 0x0d, 0x4a, 0xc2)]
-interface IDCompositionFilterEffect(IDCompositionFilterEffectVtbl): IDCompositionEffect(IDCompositionEffectVtbl) {
+interface IDCompositionFilterEffect(IDCompositionFilterEffectVtbl):
+    IDCompositionEffect(IDCompositionEffectVtbl) {
     fn SetInput(
         index: UINT,
         input: *const IUnknown,

@@ -141,7 +141,8 @@ pub use um::sapi51::{
     SPWILDCARD,
     SPDICTATION
 };
-pub const SPREG_SAFE_USER_TOKENS: &'static str = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\UserTokens";
+pub const SPREG_SAFE_USER_TOKENS: &'static str
+    = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\UserTokens";
 pub use um::sapi51::{
     SPINFDICTATION,
     SP_LOW_CONFIDENCE,
@@ -1711,7 +1712,8 @@ pub use um::sapi51::{
     SpeechAllElements,
 };
 RIDL!(#[uuid(0xaaec54af, 0x8f85, 0x4924, 0x94, 0x4d, 0xb7, 0x9d, 0x39, 0xd7, 0x2e, 0x19)]
-interface ISpeechXMLRecoResult(ISpeechXMLRecoResultVtbl): ISpeechRecoResult(ISpeechRecoResultVtbl) {
+interface ISpeechXMLRecoResult(ISpeechXMLRecoResultVtbl):
+    ISpeechRecoResult(ISpeechRecoResultVtbl) {
     fn GetXMLResult(
         Options: SPXMLRESULTOPTIONS,
         pResult: *mut BSTR,

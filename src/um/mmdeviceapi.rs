@@ -23,9 +23,9 @@ pub const DEVICE_STATE_NOTPRESENT: DWORD = 0x00000004;
 pub const DEVICE_STATE_UNPLUGGED: DWORD = 0x00000008;
 pub const DEVICE_STATEMASK_ALL: DWORD = 0x0000000F;
 DEFINE_PROPERTYKEY!(PKEY_AudioEndpoint_FormFactor,
-    0x1da5d803, 0xd492, 0x4edd, 0x8c, 0x23, 0xe0, 0xc0, 0xff, 0xee, 0x7f, 0x0e, 0); 
+    0x1da5d803, 0xd492, 0x4edd, 0x8c, 0x23, 0xe0, 0xc0, 0xff, 0xee, 0x7f, 0x0e, 0);
 DEFINE_PROPERTYKEY!(PKEY_AudioEndpoint_ControlPanelPageProvider,
-    0x1da5d803, 0xd492, 0x4edd, 0x8c, 0x23, 0xe0, 0xc0, 0xff, 0xee, 0x7f, 0x0e, 1); 
+    0x1da5d803, 0xd492, 0x4edd, 0x8c, 0x23, 0xe0, 0xc0, 0xff, 0xee, 0x7f, 0x0e, 1);
 DEFINE_PROPERTYKEY!(PKEY_AudioEndpoint_Association,
     0x1da5d803, 0xd492, 0x4edd, 0x8c, 0x23, 0xe0, 0xc0, 0xff, 0xee, 0x7f, 0x0e, 2);
 DEFINE_PROPERTYKEY!(PKEY_AudioEndpoint_PhysicalSpeakers,
@@ -45,9 +45,9 @@ DEFINE_PROPERTYKEY!(PKEY_AudioEndpoint_JackSubType,
 DEFINE_PROPERTYKEY!(PKEY_AudioEndpoint_Default_VolumeInDb,
     0x1da5d803, 0xd492, 0x4edd, 0x8c, 0x23, 0xe0, 0xc0, 0xff, 0xee, 0x7f, 0x0e, 9);
 DEFINE_PROPERTYKEY!(PKEY_AudioEngine_DeviceFormat,
-    0xf19f064d, 0x82c, 0x4e27, 0xbc, 0x73, 0x68, 0x82, 0xa1, 0xbb, 0x8e, 0x4c, 0); 
+    0xf19f064d, 0x82c, 0x4e27, 0xbc, 0x73, 0x68, 0x82, 0xa1, 0xbb, 0x8e, 0x4c, 0);
 DEFINE_PROPERTYKEY!(PKEY_AudioEngine_OEMFormat,
-    0xe4870e26, 0x3cc5, 0x4cd2, 0xba, 0x46, 0xca, 0xa, 0x9a, 0x70, 0xed, 0x4, 3); 
+    0xe4870e26, 0x3cc5, 0x4cd2, 0xba, 0x46, 0xca, 0xa, 0x9a, 0x70, 0xed, 0x4, 3);
 DEFINE_PROPERTYKEY!(PKEY_AudioEndpointLogo_IconEffects,
     0xf1ab780d, 0x2010, 0x4ed3, 0xa3, 0xa6, 0x8b, 0x87, 0xf0, 0xf0, 0xc4, 0x76, 0);
 DEFINE_PROPERTYKEY!(PKEY_AudioEndpointLogo_IconPath,
@@ -99,7 +99,7 @@ DEFINE_GUID!(DEVINTERFACE_MIDI_INPUT,
     0x504be32c, 0xccf6, 0x4d2c, 0xb7, 0x3f, 0x6f, 0x8b, 0x37, 0x47, 0xe2, 0x2b);
 RIDL!(#[uuid(0x7991eec9, 0x7e89, 0x4d85, 0x83, 0x90, 0x6c, 0x70, 0x3c, 0xec, 0x60, 0xc0)]
 interface IMMNotificationClient(IMMNotificationClientVtbl): IUnknown(IUnknownVtbl) {
-    fn OnDeviceStateChanged( 
+    fn OnDeviceStateChanged(
         pwstrDeviceId: LPCWSTR,
         dwNewState: DWORD,
     ) -> HRESULT,
@@ -114,7 +114,7 @@ interface IMMNotificationClient(IMMNotificationClientVtbl): IUnknown(IUnknownVtb
         role: ERole,
         pwstrDefaultDeviceId: LPCWSTR,
     ) -> HRESULT,
-    fn OnPropertyValueChanged( 
+    fn OnPropertyValueChanged(
         pwstrDeviceId: LPCWSTR,
         key: PROPERTYKEY,
     ) -> HRESULT,
@@ -184,7 +184,7 @@ interface IMMDeviceEnumerator(IMMDeviceEnumeratorVtbl): IUnknown(IUnknownVtbl) {
 );
 RIDL!(#[uuid(0x3b0d0ea4, 0xd0a9, 0x4b0e, 0x93, 0x5b, 0x09, 0x51, 0x67, 0x46, 0xfa, 0xc0)]
 interface IMMDeviceActivator(IMMDeviceActivatorVtbl): IUnknown(IUnknownVtbl) {
-    fn Activate( 
+    fn Activate(
         iid: REFIID,
         pDevice: *mut IMMDevice,
         pActivationParams: *mut PROPVARIANT,
@@ -193,15 +193,17 @@ interface IMMDeviceActivator(IMMDeviceActivatorVtbl): IUnknown(IUnknownVtbl) {
 }
 );
 RIDL!(#[uuid(0x41d949ab, 0x9862, 0x444a, 0x80, 0xf6, 0xc2, 0x61, 0x33, 0x4d, 0xa5, 0xeb)]
-interface IActivateAudioInterfaceCompletionHandler(IActivateAudioInterfaceCompletionHandlerVtbl): IUnknown(IUnknownVtbl) {
+interface IActivateAudioInterfaceCompletionHandler(IActivateAudioInterfaceCompletionHandlerVtbl):
+    IUnknown(IUnknownVtbl) {
     fn ActivateCompleted(
         activateOperation: *mut IActivateAudioInterfaceAsyncOperation,
     ) -> HRESULT,
 }
 );
 RIDL!(#[uuid(0x72a22d78, 0xcde4, 0x431d, 0xb8, 0xcc, 0x84, 0x3a, 0x71, 0x19, 0x9b, 0x6d)]
-interface IActivateAudioInterfaceAsyncOperation(IActivateAudioInterfaceAsyncOperationVtbl): IUnknown(IUnknownVtbl) {
-    fn GetActivateResult( 
+interface IActivateAudioInterfaceAsyncOperation(IActivateAudioInterfaceAsyncOperationVtbl):
+    IUnknown(IUnknownVtbl) {
+    fn GetActivateResult(
         activateResult: *mut HRESULT,
         activatedInterface: *mut *mut IUnknown,
     ) -> HRESULT,

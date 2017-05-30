@@ -196,10 +196,10 @@ ENUM!{enum SPVSKIPTYPE {
 }}
 ENUM!{enum SPVESACTIONS {
     SPVES_CONTINUE = 0,
-    SPVES_ABORT    = 1 << 0,
-    SPVES_SKIP     = 1 << 1,
-    SPVES_RATE     = 1 << 2,
-    SPVES_VOLUME   = 1 << 3,
+    SPVES_ABORT = 1 << 0,
+    SPVES_SKIP = 1 << 1,
+    SPVES_RATE = 1 << 2,
+    SPVES_VOLUME = 1 << 3,
 }}
 RIDL!(#[uuid(0x9880499b, 0xcce9, 0x11d2, 0xb5, 0x03, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96)]
 interface ISpTTSEngineSite(ISpTTSEngineSiteVtbl): ISpEventSink(ISpEventSinkVtbl) {
@@ -361,7 +361,7 @@ STRUCT!{struct SPRECORESULTINFO {
     aPhraseAlts: *mut SPPHRASEALT,
     ulNumAlts: ULONG,
 }}
-ENUM!{enum SPWORDINFOOPT{
+ENUM!{enum SPWORDINFOOPT {
     SPWIO_NONE = 0,
     SPWIO_WANT_TEXT = 1,
 }}

@@ -3243,15 +3243,8 @@ STRUCT!{struct USAGE_PROPERTIES {
     physicalMaximum: INT32,
 }}
 pub type PUSAGE_PROPERTIES = *mut USAGE_PROPERTIES;
-#[cfg(target_arch = "x86")]
 UNION2!{union POINTER_TYPE_INFO_u {
-    [u64; 17],
-    touchInfo touchInfo_mut: POINTER_TOUCH_INFO,
-    penInfo penInfo_mut: POINTER_PEN_INFO,
-}}
-#[cfg(target_arch = "x86_64")]
-UNION2!{union POINTER_TYPE_INFO_u {
-    [u64; 18],
+    [u64; 17] [u64; 18],
     touchInfo touchInfo_mut: POINTER_TOUCH_INFO,
     penInfo penInfo_mut: POINTER_PEN_INFO,
 }}
@@ -3889,7 +3882,21 @@ extern "system" {
         lptpm: LPTPMPARAMS,
     ) -> BOOL;
 }
-/******CUTOFF******/
+/*********
+* CUTOFF *
+*********/
+pub const IDOK: c_int = 1;
+pub const IDCANCEL: c_int = 2;
+pub const IDABORT: c_int = 3;
+pub const IDRETRY: c_int = 4;
+pub const IDIGNORE: c_int = 5;
+pub const IDYES: c_int = 6;
+pub const IDNO: c_int = 7;
+pub const IDCLOSE: c_int = 8;
+pub const IDHELP: c_int = 9;
+pub const IDTRYAGAIN: c_int = 10;
+pub const IDCONTINUE: c_int = 11;
+pub const IDTIMEOUT: c_int = 32000;
 // Edit Control Styles
 //
 pub const ES_LEFT: DWORD = 0x0000;

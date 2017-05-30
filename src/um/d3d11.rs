@@ -678,8 +678,8 @@ STRUCT!{struct D3D11_RASTERIZER_DESC {
     AntialiasedLineEnable: BOOL,
 }}
 RIDL!{#[uuid(0x9bb4ab81, 0xab1a, 0x4d8f, 0xb5, 0x06, 0xfc, 0x04, 0x20, 0x0b, 0x6e, 0xe7)]
-interface ID3D11RasterizerState(ID3D11RasterizerStateVtbl)
-    : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
+interface ID3D11RasterizerState(ID3D11RasterizerStateVtbl):
+    ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetDesc(
         pDesc: *mut D3D11_RASTERIZER_DESC,
     ) -> (),
@@ -1035,26 +1035,26 @@ interface ID3D11UnorderedAccessView(ID3D11UnorderedAccessViewVtbl): ID3D11View(I
     ) -> (),
 }}
 RIDL!{#[uuid(0x3b301d64, 0xd678, 0x4289, 0x88, 0x97, 0x22, 0xf8, 0x92, 0x8b, 0x72, 0xf3)]
-interface ID3D11VertexShader(ID3D11VertexShaderVtbl)
-    : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
+interface ID3D11VertexShader(ID3D11VertexShaderVtbl):
+    ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
 RIDL!{#[uuid(0x8e5c6061, 0x628a, 0x4c8e, 0x82, 0x64, 0xbb, 0xe4, 0x5c, 0xb3, 0xd5, 0xdd)]
-interface ID3D11HullShader(ID3D11HullShaderVtbl)
-    : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
+interface ID3D11HullShader(ID3D11HullShaderVtbl):
+    ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
 RIDL!{#[uuid(0xf582c508, 0x0f36, 0x490c, 0x99, 0x77, 0x31, 0xee, 0xce, 0x26, 0x8c, 0xfa)]
-interface ID3D11DomainShader(ID3D11DomainShaderVtbl)
-    : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
+interface ID3D11DomainShader(ID3D11DomainShaderVtbl):
+    ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
 RIDL!{#[uuid(0x38325b96, 0xeffb, 0x4022, 0xba, 0x02, 0x2e, 0x79, 0x5b, 0x70, 0x27, 0x5c)]
-interface ID3D11GeometryShader(ID3D11GeometryShaderVtbl)
-    : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
+interface ID3D11GeometryShader(ID3D11GeometryShaderVtbl):
+    ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
 RIDL!{#[uuid(0xea82e40d, 0x51dc, 0x4f33, 0x93, 0xd4, 0xdb, 0x7c, 0x91, 0x25, 0xae, 0x8c)]
-interface ID3D11PixelShader(ID3D11PixelShaderVtbl)
-    : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
+interface ID3D11PixelShader(ID3D11PixelShaderVtbl):
+    ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
 RIDL!{#[uuid(0x4f5b196e, 0xc2bd, 0x495e, 0xbd, 0x01, 0x1f, 0xde, 0xd3, 0x8e, 0x49, 0x69)]
-interface ID3D11ComputeShader(ID3D11ComputeShaderVtbl)
-    : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
+interface ID3D11ComputeShader(ID3D11ComputeShaderVtbl):
+    ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
 RIDL!{#[uuid(0xe4819ddc, 0x4cf0, 0x4025, 0xbd, 0x26, 0x5d, 0xe8, 0x2a, 0x3e, 0x07, 0xb7)]
-interface ID3D11InputLayout(ID3D11InputLayoutVtbl)
-    : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
+interface ID3D11InputLayout(ID3D11InputLayoutVtbl):
+    ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
 ENUM!{enum D3D11_FILTER {
     D3D11_FILTER_MIN_MAG_MIP_POINT = 0,
     D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR = 0x1,
@@ -2190,8 +2190,8 @@ STRUCT!{struct D3D11_VIDEO_PROCESSOR_CONTENT_DESC {
     Usage: D3D11_VIDEO_USAGE,
 }}
 RIDL!{#[uuid(0x31627037, 0x53ab, 0x4200, 0x90, 0x61, 0x05, 0xfa, 0xa9, 0xab, 0x45, 0xf9)]
-interface ID3D11VideoProcessorEnumerator(ID3D11VideoProcessorEnumeratorVtbl)
-    : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
+interface ID3D11VideoProcessorEnumerator(ID3D11VideoProcessorEnumeratorVtbl):
+    ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetVideoProcessorContentDesc(
         pContentDesc: *mut D3D11_VIDEO_PROCESSOR_CONTENT_DESC,
     ) -> HRESULT,
@@ -2294,8 +2294,8 @@ STRUCT!{struct D3D11_VIDEO_PROCESSOR_STREAM {
     ppFutureSurfacesRight: *mut *mut ID3D11VideoProcessorInputView,
 }}
 RIDL!{#[uuid(0x1d7b0652, 0x185f, 0x41c6, 0x85, 0xce, 0x0c, 0x5b, 0xe3, 0xd4, 0xae, 0x6c)]
-interface ID3D11VideoProcessor(ID3D11VideoProcessorVtbl)
-    : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
+interface ID3D11VideoProcessor(ID3D11VideoProcessorVtbl):
+    ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetContentDesc(
         pDesc: *mut D3D11_VIDEO_PROCESSOR_CONTENT_DESC,
     ) -> (),
@@ -2312,8 +2312,8 @@ ENUM!{enum D3D11_AUTHENTICATED_CHANNEL_TYPE {
     D3D11_AUTHENTICATED_CHANNEL_DRIVER_HARDWARE = 3,
 }}
 RIDL!{#[uuid(0x3015a308, 0xdcbd, 0x47aa, 0xa7, 0x47, 0x19, 0x24, 0x86, 0xd1, 0x4d, 0x4a)]
-interface ID3D11AuthenticatedChannel(ID3D11AuthenticatedChannelVtbl)
-    : ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
+interface ID3D11AuthenticatedChannel(ID3D11AuthenticatedChannelVtbl):
+    ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
     fn GetCertificateSize(
         pCertificateSize: *mut UINT,
     ) -> HRESULT,
@@ -2516,8 +2516,8 @@ STRUCT!{struct D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC {
     Texture2D: D3D11_TEX2D_VDOV,
 }}
 RIDL!{#[uuid(0xc2931aea, 0x2a85, 0x4f20, 0x86, 0x0f, 0xfb, 0xa1, 0xfd, 0x25, 0x6e, 0x18)]
-interface ID3D11VideoDecoderOutputView(ID3D11VideoDecoderOutputViewVtbl)
-    : ID3D11View(ID3D11ViewVtbl) {
+interface ID3D11VideoDecoderOutputView(ID3D11VideoDecoderOutputViewVtbl):
+    ID3D11View(ID3D11ViewVtbl) {
     fn GetDesc(
         pDesc: *mut D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC,
     ) -> (),
@@ -2536,8 +2536,8 @@ STRUCT!{struct D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC {
     Texture2D: D3D11_TEX2D_VPIV,
 }}
 RIDL!{#[uuid(0x11ec5a5f, 0x51dc, 0x4945, 0xab, 0x34, 0x6e, 0x8c, 0x21, 0x30, 0x0e, 0xa5)]
-interface ID3D11VideoProcessorInputView(ID3D11VideoProcessorInputViewVtbl)
-    : ID3D11View(ID3D11ViewVtbl) {
+interface ID3D11VideoProcessorInputView(ID3D11VideoProcessorInputViewVtbl):
+    ID3D11View(ID3D11ViewVtbl) {
     fn GetDesc(
         pDesc: *mut D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC,
     ) -> (),
@@ -2565,8 +2565,8 @@ STRUCT!{struct D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC {
     u: D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_u,
 }}
 RIDL!{#[uuid(0xa048285e, 0x25a9, 0x4527, 0xbd, 0x93, 0xd6, 0x8b, 0x68, 0xc4, 0x42, 0x54)]
-interface ID3D11VideoProcessorOutputView(ID3D11VideoProcessorOutputViewVtbl)
-    : ID3D11View(ID3D11ViewVtbl) {
+interface ID3D11VideoProcessorOutputView(ID3D11VideoProcessorOutputViewVtbl):
+    ID3D11View(ID3D11ViewVtbl) {
     fn GetDesc(
         pDesc: *mut D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC,
     ) -> (),

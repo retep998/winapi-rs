@@ -25,7 +25,7 @@ FN!{stdcall PFN_D3D11ON12_CREATE_DEVICE(
     *mut *mut ID3D11DeviceContext,
     *mut D3D_FEATURE_LEVEL,
 ) -> HRESULT}
-extern "system"{
+extern "system" {
     pub fn D3D11On12CreateDevice(
         pDevice: *mut IUnknown,
         Flags: UINT,

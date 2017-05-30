@@ -115,19 +115,31 @@ extern {
     pub static SPDFID_WaveFormatEx: GUID;
 }
 pub const SPREG_USER_ROOT: &'static str = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Speech";
-pub const SPREG_LOCAL_MACHINE_ROOT: &'static str = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech";
-pub const SPCAT_AUDIOOUT: &'static str = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AudioOutput";
-pub const SPCAT_AUDIOIN: &'static str = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AudioInput";
+pub const SPREG_LOCAL_MACHINE_ROOT: &'static str
+    = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech";
+pub const SPCAT_AUDIOOUT: &'static str
+    = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AudioOutput";
+pub const SPCAT_AUDIOIN: &'static str
+    = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AudioInput";
 pub const SPCAT_VOICES: &'static str = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices";
-pub const SPCAT_RECOGNIZERS: &'static str = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Recognizers";
-pub const SPCAT_APPLEXICONS: &'static str = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AppLexicons";
-pub const SPCAT_PHONECONVERTERS: &'static str = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\PhoneConverters";
-pub const SPCAT_TEXTNORMALIZERS: &'static str = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\TextNormalizers";
-pub const SPCAT_RECOPROFILES: &'static str = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Speech\\RecoProfiles";
-pub const SPMMSYS_AUDIO_IN_TOKEN_ID: &'static str = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AudioInput\\TokenEnums\\MMAudioIn\\";
-pub const SPMMSYS_AUDIO_OUT_TOKEN_ID: &'static str = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AudioOutput\\TokenEnums\\MMAudioOut\\";
-pub const SPCURRENT_USER_LEXICON_TOKEN_ID: &'static str = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Speech\\CurrentUserLexicon";
-pub const SPCURRENT_USER_SHORTCUT_TOKEN_ID: &'static str = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Speech\\CurrentUserShortcut";
+pub const SPCAT_RECOGNIZERS: &'static str
+    = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Recognizers";
+pub const SPCAT_APPLEXICONS: &'static str
+    = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AppLexicons";
+pub const SPCAT_PHONECONVERTERS: &'static str
+    = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\PhoneConverters";
+pub const SPCAT_TEXTNORMALIZERS: &'static str
+    = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\TextNormalizers";
+pub const SPCAT_RECOPROFILES: &'static str
+    = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Speech\\RecoProfiles";
+pub const SPMMSYS_AUDIO_IN_TOKEN_ID: &'static str
+    = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AudioInput\\TokenEnums\\MMAudioIn\\";
+pub const SPMMSYS_AUDIO_OUT_TOKEN_ID: &'static str
+    = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AudioOutput\\TokenEnums\\MMAudioOut\\";
+pub const SPCURRENT_USER_LEXICON_TOKEN_ID: &'static str
+    = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Speech\\CurrentUserLexicon";
+pub const SPCURRENT_USER_SHORTCUT_TOKEN_ID: &'static str
+    = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Speech\\CurrentUserShortcut";
 pub const SPTOKENVALUE_CLSID: &'static str = "CLSID";
 pub const SPTOKENKEY_FILES: &'static str = "Files";
 pub const SPTOKENKEY_UI: &'static str = "UI";
@@ -141,7 +153,8 @@ pub const SPPROP_RESPONSE_SPEED: &'static str = "ResponseSpeed";
 pub const SPPROP_COMPLEX_RESPONSE_SPEED: &'static str = "ComplexResponseSpeed";
 pub const SPPROP_ADAPTATION_ON: &'static str = "AdaptationOn";
 pub const SPPROP_PERSISTED_BACKGROUND_ADAPTATION: &'static str = "PersistedBackgroundAdaptation";
-pub const SPPROP_PERSISTED_LANGUAGE_MODEL_ADAPTATION: &'static str = "PersistedLanguageModelAdaptation";
+pub const SPPROP_PERSISTED_LANGUAGE_MODEL_ADAPTATION: &'static str
+    = "PersistedLanguageModelAdaptation";
 pub const SPPROP_UX_IS_LISTENING: &'static str = "UXIsListening";
 pub const SPTOPIC_SPELLING: &'static str = "Spelling";
 pub const SPWILDCARD: &'static str = "...";
@@ -605,8 +618,8 @@ interface ISpStream(ISpStreamVtbl): ISpStreamFormat(ISpStreamFormatVtbl) {
     fn Close() -> HRESULT,
 });
 RIDL!(#[uuid(0x678a932c, 0xea71, 0x4446, 0x9b, 0x41, 0x78, 0xfd, 0xa6, 0x28, 0x0a, 0x29)]
-interface ISpStreamFormatConverter(ISpStreamFormatConverterVtbl)
-    : ISpStreamFormat(ISpStreamFormatVtbl) {
+interface ISpStreamFormatConverter(ISpStreamFormatConverterVtbl):
+    ISpStreamFormat(ISpStreamFormatVtbl) {
     fn SetBaseStream(
         pStream: *mut ISpStreamFormat,
         fSetFormatToBaseStreamFormat: BOOL,
@@ -1783,7 +1796,7 @@ ENUM!{enum SpeechVoiceSpeakFlags {
     SVSFIsNotXML = SPF_IS_NOT_XML,
     SVSFPersistXML = SPF_PERSIST_XML,
     SVSFNLPSpeakPunc = SPF_NLP_SPEAK_PUNC,
-    SVSFNLPMask =  SPF_NLP_MASK,
+    SVSFNLPMask = SPF_NLP_MASK,
     SVSFVoiceMask = SPF_VOICE_MASK as u32,
     SVSFUnusedFlags = SPF_UNUSED_FLAGS as u32,
 }}
@@ -3166,8 +3179,7 @@ interface ISpeechGrammarRuleState(ISpeechGrammarRuleStateVtbl): IDispatch(IDispa
 });
 RIDL!(#[uuid(0xcafd1db1, 0x41d1, 0x4a06, 0x98, 0x63, 0xe2, 0xe8, 0x1d, 0xa1, 0x7a, 0x9a)]
 interface ISpeechGrammarRuleStateTransition(ISpeechGrammarRuleStateTransitionVtbl):
-    IDispatch(IDispatchVtbl)
-{
+    IDispatch(IDispatchVtbl) {
     fn get_Type(
         Type: *mut SpeechGrammarRuleStateTransitionType,
     ) -> HRESULT,
@@ -3195,8 +3207,7 @@ interface ISpeechGrammarRuleStateTransition(ISpeechGrammarRuleStateTransitionVtb
 });
 RIDL!(#[uuid(0xeabce657, 0x75bc, 0x44a2, 0xaa, 0x7f, 0xc5, 0x64, 0x76, 0x74, 0x29, 0x63)]
 interface ISpeechGrammarRuleStateTransitions(ISpeechGrammarRuleStateTransitionsVtbl):
-    IDispatch(IDispatchVtbl)
-{
+    IDispatch(IDispatchVtbl) {
     fn get_Count(
         Count: *mut c_long,
     ) -> HRESULT,
@@ -3210,8 +3221,7 @@ interface ISpeechGrammarRuleStateTransitions(ISpeechGrammarRuleStateTransitionsV
 });
 RIDL!(#[uuid(0x3b9c7e7a, 0x6eee, 0x4ded, 0x90, 0x92, 0x11, 0x65, 0x72, 0x79, 0xad, 0xbe)]
 interface ISpeechTextSelectionInformation(ISpeechTextSelectionInformationVtbl):
-    IDispatch(IDispatchVtbl)
-{
+    IDispatch(IDispatchVtbl) {
     fn put_ActiveOffset(
         ActiveOffset: c_long,
     ) -> HRESULT,
@@ -3620,8 +3630,7 @@ interface ISpeechLexiconWord(ISpeechLexiconWordVtbl): IDispatch(IDispatchVtbl) {
 });
 RIDL!(#[uuid(0x72829128, 0x5682, 0x4704, 0xa0, 0xd4, 0x3e, 0x2b, 0xb6, 0xf2, 0xea, 0xd3)]
 interface ISpeechLexiconPronunciations(ISpeechLexiconPronunciationsVtbl):
-    IDispatch(IDispatchVtbl)
-{
+    IDispatch(IDispatchVtbl) {
     fn get_Count(
         Count: *mut c_long,
     ) -> HRESULT,

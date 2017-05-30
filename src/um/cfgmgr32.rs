@@ -645,16 +645,8 @@ STRUCT!{struct CM_NOTIFY_FILTER_DeviceHandle {
 STRUCT!{struct CM_NOTIFY_FILTER_DeviceInstance {
     InstanceId: [WCHAR; MAX_DEVICE_ID_LEN],
 }}
-#[cfg(target_arch = "x86")]
 UNION2!{union CM_NOTIFY_FILTER_u {
-    [u32; 100],
-    DeviceInterface DeviceInterface_mut: CM_NOTIFY_FILTER_DeviceInterface,
-    DeviceHandle DeviceHandle_mut: CM_NOTIFY_FILTER_DeviceHandle,
-    DeviceInstance DeviceInstance_mut: CM_NOTIFY_FILTER_DeviceInstance,
-}}
-#[cfg(target_arch = "x86_64")]
-UNION2!{union CM_NOTIFY_FILTER_u {
-    [u64; 50],
+    [u32; 100] [u64; 50],
     DeviceInterface DeviceInterface_mut: CM_NOTIFY_FILTER_DeviceInterface,
     DeviceHandle DeviceHandle_mut: CM_NOTIFY_FILTER_DeviceHandle,
     DeviceInstance DeviceInstance_mut: CM_NOTIFY_FILTER_DeviceInstance,

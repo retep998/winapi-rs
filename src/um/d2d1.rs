@@ -326,8 +326,8 @@ interface ID2D1Bitmap(ID2D1BitmapVtbl): ID2D1Image(ID2D1ImageVtbl) {
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x2cd906a7, 0x12e2, 0x11dc, 0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9)]
-interface ID2D1GradientStopCollection(ID2D1GradientStopCollectionVtbl)
-    : ID2D1Resource(ID2D1ResourceVtbl) {
+interface ID2D1GradientStopCollection(ID2D1GradientStopCollectionVtbl):
+    ID2D1Resource(ID2D1ResourceVtbl) {
     fn GetGradientStopCount() -> UINT32,
     fn GetGradientStops(
         gradientStops: *mut D2D1_GRADIENT_STOP,
@@ -526,8 +526,8 @@ interface ID2D1RectangleGeometry(ID2D1RectangleGeometryVtbl): ID2D1Geometry(ID2D
     ) -> (),
 }}
 RIDL!{#[uuid(0x2cd906a3, 0x12e2, 0x11dc, 0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9)]
-interface ID2D1RoundedRectangleGeometry(ID2D1RoundedRectangleGeometryVtbl)
-    : ID2D1Geometry(ID2D1GeometryVtbl) {
+interface ID2D1RoundedRectangleGeometry(ID2D1RoundedRectangleGeometryVtbl):
+    ID2D1Geometry(ID2D1GeometryVtbl) {
     fn GetRoundedRect(
         roundedRect: *mut D2D1_ROUNDED_RECT,
     ) -> (),
@@ -548,8 +548,8 @@ interface ID2D1GeometryGroup(ID2D1GeometryGroupVtbl): ID2D1Geometry(ID2D1Geometr
     ) -> (),
 }}
 RIDL!{#[uuid(0x2cd906bb, 0x12e2, 0x11dc, 0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9)]
-interface ID2D1TransformedGeometry(ID2D1TransformedGeometryVtbl)
-    : ID2D1Geometry(ID2D1GeometryVtbl) {
+interface ID2D1TransformedGeometry(ID2D1TransformedGeometryVtbl):
+    ID2D1Geometry(ID2D1GeometryVtbl) {
     fn GetSourceGeometry(
         sourceGeometry: *mut *mut ID2D1Geometry,
     ) -> (),
@@ -583,8 +583,8 @@ interface ID2D1SimplifiedGeometrySink(ID2D1SimplifiedGeometrySinkVtbl): IUnknown
     fn Close() -> HRESULT,
 }}
 RIDL!{#[uuid(0x2cd9069f, 0x12e2, 0x11dc, 0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9)]
-interface ID2D1GeometrySink(ID2D1GeometrySinkVtbl)
-    : ID2D1SimplifiedGeometrySink(ID2D1SimplifiedGeometrySinkVtbl) {
+interface ID2D1GeometrySink(ID2D1GeometrySinkVtbl):
+    ID2D1SimplifiedGeometrySink(ID2D1SimplifiedGeometrySinkVtbl) {
     fn AddLine(
         point: D2D1_POINT_2F,
     ) -> (),
@@ -882,15 +882,15 @@ interface ID2D1RenderTarget(ID2D1RenderTargetVtbl): ID2D1Resource(ID2D1ResourceV
     ) -> BOOL,
 }}
 RIDL!{#[uuid(0x2cd90695, 0x12e2, 0x11dc, 0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9)]
-interface ID2D1BitmapRenderTarget(ID2D1BitmapRenderTargetVtbl)
-    : ID2D1RenderTarget(ID2D1RenderTargetVtbl) {
+interface ID2D1BitmapRenderTarget(ID2D1BitmapRenderTargetVtbl):
+    ID2D1RenderTarget(ID2D1RenderTargetVtbl) {
     fn GetBitmap(
         bitmap: *mut *mut ID2D1Bitmap,
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x2cd90698, 0x12e2, 0x11dc, 0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9)]
-interface ID2D1HwndRenderTarget(ID2D1HwndRenderTargetVtbl)
-    : ID2D1RenderTarget(ID2D1RenderTargetVtbl) {
+interface ID2D1HwndRenderTarget(ID2D1HwndRenderTargetVtbl):
+    ID2D1RenderTarget(ID2D1RenderTargetVtbl) {
     fn CheckWindowState() -> D2D1_WINDOW_STATE,
     fn Resize(
         pixelSize: *const D2D1_SIZE_U,

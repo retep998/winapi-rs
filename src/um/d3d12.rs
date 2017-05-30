@@ -1058,16 +1058,8 @@ ENUM!{enum D3D12_RESOURCE_BARRIER_FLAGS {
     D3D12_RESOURCE_BARRIER_FLAG_BEGIN_ONLY = 0x1,
     D3D12_RESOURCE_BARRIER_FLAG_END_ONLY = 0x2,
 }}
-#[cfg(target_arch = "x86")]
 UNION2!{union D3D12_RESOURCE_BARRIER_u {
-    [u32; 4],
-    Transition Transition_mut: D3D12_RESOURCE_TRANSITION_BARRIER,
-    Aliasing Aliasing_mut: D3D12_RESOURCE_ALIASING_BARRIER,
-    UAV UAV_mut: D3D12_RESOURCE_UAV_BARRIER,
-}}
-#[cfg(target_arch = "x86_64")]
-UNION2!{union D3D12_RESOURCE_BARRIER_u {
-    [u64; 3],
+    [u32; 4] [u64; 3],
     Transition Transition_mut: D3D12_RESOURCE_TRANSITION_BARRIER,
     Aliasing Aliasing_mut: D3D12_RESOURCE_ALIASING_BARRIER,
     UAV UAV_mut: D3D12_RESOURCE_UAV_BARRIER,
@@ -1622,16 +1614,8 @@ STRUCT!{struct D3D12_ROOT_DESCRIPTOR_TABLE {
     NumDescriptorRanges: UINT,
     pDescriptorRanges: *const D3D12_DESCRIPTOR_RANGE,
 }}
-#[cfg(target_arch="x86")]
 UNION2!{union D3D12_ROOT_PARAMETER_u {
-    [u32; 3],
-    DescriptorTable DescriptorTable_mut: D3D12_ROOT_DESCRIPTOR_TABLE,
-    Constants Constants_mut: D3D12_ROOT_CONSTANTS,
-    Descriptor Descriptor_mut: D3D12_ROOT_DESCRIPTOR,
-}}
-#[cfg(target_arch="x86_64")]
-UNION2!{union D3D12_ROOT_PARAMETER_u {
-    [u64; 2],
+    [u32; 3] [u64; 2],
     DescriptorTable DescriptorTable_mut: D3D12_ROOT_DESCRIPTOR_TABLE,
     Constants Constants_mut: D3D12_ROOT_CONSTANTS,
     Descriptor Descriptor_mut: D3D12_ROOT_DESCRIPTOR,
@@ -1796,8 +1780,8 @@ interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12Pagea
     ) -> *mut D3D12_COMMAND_QUEUE_DESC,
 });
 RIDL!{#[uuid(0xc36a797c, 0xec80, 0x4f0a, 0x89, 0x85, 0xa7, 0xb2, 0x47, 0x50, 0x82, 0xd1)]
-interface ID3D12CommandSignature(ID3D12CommandSignatureVtbl)
-    : ID3D12Pageable(ID3D12PageableVtbl) {}}
+interface ID3D12CommandSignature(ID3D12CommandSignatureVtbl):
+    ID3D12Pageable(ID3D12PageableVtbl) {}}
 RIDL!(#[uuid(0x8efb471d, 0x616c, 0x4f49, 0x90, 0xf7, 0x12, 0x7b, 0xb7, 0x63, 0xfa, 0x51)]
 interface ID3D12DescriptorHeap(ID3D12DescriptorHeapVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
     fn GetDesc(

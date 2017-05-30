@@ -98,7 +98,7 @@ STRUCT!{struct NMTOOLTIPSCREATED {
 }}
 pub type LPNMTOOLTIPSCREATED = *mut NMTOOLTIPSCREATED;
 STRUCT!{struct NMMOUSE {
-    hdr : NMHDR,
+    hdr: NMHDR,
     dwItemSpec: DWORD_PTR,
     dwItemData: DWORD_PTR,
     pt: POINT,
@@ -2496,15 +2496,8 @@ pub type LPTV_INSERTSTRUCTA = LPTVINSERTSTRUCTA;
 pub type LPTV_INSERTSTRUCTW = LPTVINSERTSTRUCTW;
 pub type TV_INSERTSTRUCTA = TVINSERTSTRUCTA;
 pub type TV_INSERTSTRUCTW = TVINSERTSTRUCTW;
-#[cfg(target_arch = "x86")]
 UNION2!{union TVINSERTSTRUCTA_u {
-    [u32; 15],
-    itemex itemex_mut: TVITEMEXA,
-    item item_mut: TV_ITEMA,
-}}
-#[cfg(target_arch = "x86_64")]
-UNION2!{union TVINSERTSTRUCTA_u {
-    [u64; 10],
+    [u32; 15] [u64; 10],
     itemex itemex_mut: TVITEMEXA,
     item item_mut: TV_ITEMA,
 }}
@@ -2514,15 +2507,8 @@ STRUCT!{struct TVINSERTSTRUCTA {
     u: TVINSERTSTRUCTA_u,
 }}
 pub type LPTVINSERTSTRUCTA = *mut TVINSERTSTRUCTA;
-#[cfg(target_arch = "x86")]
 UNION2!{union TVINSERTSTRUCTW_u {
-    [u32; 15],
-    itemex itemex_mut: TVITEMEXW,
-    item item_mut: TV_ITEMW,
-}}
-#[cfg(target_arch = "x86_64")]
-UNION2!{union TVINSERTSTRUCTW_u {
-    [u64; 10],
+    [u32; 15] [u64; 10],
     itemex itemex_mut: TVITEMEXW,
     item item_mut: TV_ITEMW,
 }}
