@@ -121,6 +121,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("mmsystem", &["basetsd", "minwindef", "mmreg", "winnt"], &[]),
     ("mscat", &["guiddef", "minwindef", "mssip", "wincrypt", "winnt"], &[]),
     ("mssip", &["guiddef", "minwindef", "mscat", "wincrypt", "winnt"], &[]),
+    ("nb30", &["minwindef", "winnt"], &[]),
     ("ncrypt", &["basetsd", "sspi"], &["ncrypt"]),
     ("ntsecapi", &["basetsd", "guiddef", "lsalookup", "minwindef", "ntdef", "sspi", "subauth", "winnt"], &["advapi32"]),
     ("oaidl", &["basetsd", "guiddef", "minwindef", "rpcndr", "unknwnbase", "winnt", "wtypes", "wtypesbase"], &[]),
