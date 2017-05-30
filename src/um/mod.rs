@@ -96,6 +96,7 @@ pub mod gl;
 #[cfg(feature = "servprov")] pub mod servprov;
 #[cfg(feature = "setupapi")] pub mod setupapi;
 #[cfg(feature = "shellapi")] pub mod shellapi;
+#[cfg(feature = "shlobj")] pub mod shlobj;
 #[cfg(feature = "shtypes")] pub mod shtypes;
 #[cfg(feature = "spapidef")] pub mod spapidef;
 #[cfg(feature = "sql")] pub mod sql;
