@@ -50,5 +50,6 @@ pub mod guiddef;
 #[cfg(feature = "winerror")] pub mod winerror;
 #[cfg(feature = "wnnc")] pub mod wnnc;
 #[cfg(feature = "ws2def")] pub mod ws2def;
+#[cfg(feature = "ws2ipdef")] pub mod ws2ipdef;
 #[cfg(feature = "wtypes")] pub mod wtypes;
 #[cfg(feature = "wtypesbase")] pub mod wtypesbase;

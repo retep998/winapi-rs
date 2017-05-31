@@ -57,6 +57,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("winerror", &["minwindef"], &[]),
     ("wnnc", &["minwindef"], &[]),
     ("ws2def", &["guiddef", "inaddr", "minwindef", "vcruntime", "winnt"], &[]),
+    ("ws2ipdef", &["in6addr", "inaddr", "minwindef"], &[]),
     ("wtypes", &["guiddef", "minwindef", "ntdef", "wtypesbase"], &[]),
     ("wtypesbase", &["minwindef", "rpcndr", "winnt"], &[]),
     // ucrt
