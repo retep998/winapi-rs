@@ -5,31 +5,36 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! ApiSet Contract for api-ms-win-core-sysinfo-l1.
+
+use shared::basetsd::DWORD_PTR;
+use shared::minwindef::{DWORD, LPVOID, WORD};
+use um::winnt::DWORDLONG;
+
 STRUCT!{struct SYSTEM_INFO {
-    wProcessorArchitecture: ::WORD,
-    wReserved: ::WORD,
-    dwPageSize: ::DWORD,
-    lpMinimumApplicationAddress: ::LPVOID,
-    lpMaximumApplicationAddress: ::LPVOID,
-    dwActiveProcessorMask: ::DWORD_PTR,
-    dwNumberOfProcessors: ::DWORD,
-    dwProcessorType: ::DWORD,
-    dwAllocationGranularity: ::DWORD,
-    wProcessorLevel: ::WORD,
-    wProcessorRevision: ::WORD,
+    wProcessorArchitecture: WORD,
+    wReserved: WORD,
+    dwPageSize: DWORD,
+    lpMinimumApplicationAddress: LPVOID,
+    lpMaximumApplicationAddress: LPVOID,
+    dwActiveProcessorMask: DWORD_PTR,
+    dwNumberOfProcessors: DWORD,
+    dwProcessorType: DWORD,
+    dwAllocationGranularity: DWORD,
+    wProcessorLevel: WORD,
+    wProcessorRevision: WORD,
 }}
-UNION!(SYSTEM_INFO, wProcessorArchitecture, dwOemId, dwOemId_mut, ::DWORD);
+UNION!(SYSTEM_INFO, wProcessorArchitecture, dwOemId, dwOemId_mut, DWORD);
 pub type LPSYSTEM_INFO = *mut SYSTEM_INFO;
 STRUCT!{struct MEMORYSTATUSEX {
-    dwLength: ::DWORD,
-    dwMemoryLoad: ::DWORD,
-    ullTotalPhys: ::DWORDLONG,
-    ullAvailPhys: ::DWORDLONG,
-    ullTotalPageFile: ::DWORDLONG,
-    ullAvailPageFile: ::DWORDLONG,
-    ullTotalVirtual: ::DWORDLONG,
-    ullAvailVirtual: ::DWORDLONG,
-    ullAvailExtendedVirtual: ::DWORDLONG,
+    dwLength: DWORD,
+    dwMemoryLoad: DWORD,
+    ullTotalPhys: DWORDLONG,
+    ullAvailPhys: DWORDLONG,
+    ullTotalPageFile: DWORDLONG,
+    ullAvailPageFile: DWORDLONG,
+    ullTotalVirtual: DWORDLONG,
+    ullAvailVirtual: DWORDLONG,
+    ullAvailExtendedVirtual: DWORDLONG,
 }}
 pub type LPMEMORYSTATUSEX = *mut MEMORYSTATUSEX;
 ENUM!{enum COMPUTER_NAME_FORMAT {
