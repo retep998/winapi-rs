@@ -16,7 +16,7 @@
 * When breaking on binary operators, put the operator at the beginning of the new line.
 * Do not use aligned indentation. Indentation should always be block indentation.
 * Always use spaces for indentation.
-* Blank lines are evil.
+* Blank lines should be avoided.
 * Files must end with a trailing newline.
 
 ## Imports
@@ -54,6 +54,14 @@ extern "system" {
 }
 ```
 
+## Macros
+
+Some macros have been defined in the Windows APIs (like `EventDataDescCreate`). These should be
+converted to regular Rust functions. They should be specified as `unsafe` and be annotated
+with an `#[inline]` attribute. Additionally they should attempt to list all parameters on a
+single line. If they cannot without exceeding the 99 character limit, they should be specified
+one-per-line (with trailing commas for every one).
+
 ## Function pointers
 
 ```Rust
@@ -73,6 +81,8 @@ FN!{stdcall NAMEENUMPROCA(
 ## Constants
 
 * Convert macro constants to Rust constants.
+* Numeric values should be formatted identically to how they are in the source file (don't convert
+  hex values to decimal, preserve capitalization of hex values, etc.)
 * The type of the constant should depend on where the constant is used. MSDN may help for this.
 
 ```C
@@ -84,6 +94,9 @@ pub const CLSCTX_INPROC: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER;
 
 ## GUIDs
 
+* Numeric values should be formatted identically to how they are in the source file (don't convert
+  hex values to decimal, preserve capitalization of hex values, etc.)
+
 ```Rust
 DEFINE_GUID!{GUID_DEVCLASS_SENSOR,
     0x5175d334, 0xc371, 0x4806, 0xb3, 0xba, 0x71, 0xfd, 0x53, 0xc9, 0x25, 0x8d}
@@ -91,7 +104,7 @@ DEFINE_GUID!{GUID_DEVCLASS_SENSOR,
 
 ## Structs
 
-* One field per line.
+* One field per line (all with trailing commas)
 
 ```C
 typedef struct _GROUP_AFFINITY {
@@ -198,6 +211,8 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
     ) -> HRESULT
 }}
 ```
+
+For COM interfaces without a UUID, a UUID of all-zeroes should be used.
 
 ## Organization of code
 
