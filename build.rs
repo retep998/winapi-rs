@@ -147,6 +147,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("prsht", &["basetsd", "minwindef", "windef", "winnt", "winuser"], &[]),
     ("psapi", &["basetsd", "minwindef", "winnt"], &[]),
     ("reason", &["minwindef"], &[]),
+    ("restrictederrorinfo", &["unknwnbase", "winnt", "wtypes"], &[]),
     ("sapi", &["guiddef", "minwindef", "sapi53", "unknwnbase", "winnt"], &[]),
     ("sapi51", &["guiddef", "minwindef", "mmreg", "oaidl", "objidlbase", "servprov", "unknwnbase", "windef", "winnt", "wtypes", "wtypesbase"], &[]),
     ("sapi53", &["guiddef", "minwindef", "oaidl", "sapi51", "unknwnbase", "urlmon", "winnt", "wtypes"], &[]),
