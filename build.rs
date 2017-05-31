@@ -138,6 +138,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("oleauto", &["minwindef", "oaidl", "winnt", "wtypes", "wtypesbase"], &["oleaut32"]),
     ("olectl", &["winerror", "winnt"], &[]),
     ("pdh", &["basetsd", "guiddef", "minwindef", "windef", "winnt", "wtypesbase"], &["pdh"]),
+    ("playsoundapi", &["minwindef"], &[]),
     ("processsnapshot", &["minwindef"], &[]),
     ("processthreadsapi", &["basetsd", "guiddef", "minwinbase", "minwindef", "winnt"], &["advapi32", "kernel32"]),
     ("propidl", &["minwindef", "wtypes"], &[]),

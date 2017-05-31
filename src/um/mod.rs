@@ -80,6 +80,7 @@ pub mod gl;
 #[cfg(feature = "oleauto")] pub mod oleauto;
 #[cfg(feature = "olectl")] pub mod olectl;
 #[cfg(feature = "pdh")] pub mod pdh;
+#[cfg(feature = "playsoundapi")] pub mod playsoundapi;
 #[cfg(feature = "processsnapshot")] pub mod processsnapshot;
 #[cfg(feature = "processthreadsapi")] pub mod processthreadsapi;
 #[cfg(feature = "propidl")] pub mod propidl;
