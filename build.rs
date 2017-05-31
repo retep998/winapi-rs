@@ -55,6 +55,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("windef", &["minwindef", "winnt"], &[]),
     ("windowsx", &["minwindef"], &[]),
     ("winerror", &["minwindef"], &[]),
+    ("wnnc", &["minwindef"], &[]),
     ("ws2def", &["guiddef", "inaddr", "minwindef", "vcruntime", "winnt"], &[]),
     ("wtypes", &["guiddef", "minwindef", "ntdef", "wtypesbase"], &[]),
     ("wtypesbase", &["minwindef", "rpcndr", "winnt"], &[]),
