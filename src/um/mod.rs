@@ -117,6 +117,7 @@ pub mod gl;
 #[cfg(feature = "usp10")] pub mod usp10;
 #[cfg(feature = "vss")] pub mod vss;
 #[cfg(feature = "vsserror")] pub mod vsserror;
+#[cfg(feature = "vswriter")] pub mod vswriter;
 #[cfg(feature = "werapi")] pub mod werapi;
 #[cfg(feature = "winbase")] pub mod winbase;
 #[cfg(feature = "wincodec")] pub mod wincodec;
