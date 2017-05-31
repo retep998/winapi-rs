@@ -5,11 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! QoS definitions for NDIS components.
-
 use shared::minwindef::ULONG;
-
 pub type SERVICETYPE = ULONG;
-
 STRUCT!{struct FLOWSPEC {
     TokenRate: ULONG,
     TokenBucketSize: ULONG,

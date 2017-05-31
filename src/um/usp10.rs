@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Unicode Complex Script processor API declarations
-
 use ctypes::{c_int, c_long, c_void};
 use shared::minwindef::{BOOL, BYTE, DWORD, UINT, ULONG, WORD};
 use shared::ntdef::LCID;
@@ -13,21 +12,16 @@ use shared::windef::{HDC, RECT, SIZE};
 use shared::winerror::{FACILITY_ITF, SEVERITY_ERROR};
 use um::wingdi::ABC;
 use um::winnt::{HRESULT, LONG, WCHAR};
-
 pub const SCRIPT_UNDEFINED: WORD = 0;
-
 pub const USP_E_SCRIPT_NOT_IN_FONT: HRESULT = MAKE_HRESULT!(
     SEVERITY_ERROR, FACILITY_ITF, 0x200
 );
-
 DECLARE_HANDLE!(SCRIPT_CACHE, SCRIPT_CACHE__);
-
 extern "system" {
     pub fn ScriptFreeCache(
         psc: *mut SCRIPT_CACHE
     ) -> HRESULT;
 }
-
 STRUCT!{struct SCRIPT_CONTROL {
     bit_fields: DWORD,
 }}
@@ -44,7 +38,6 @@ BITFIELD!(SCRIPT_CONTROL bit_fields: DWORD [
     fMergeNeutralItems set_fMergeNeutralItems[24..25],
     fReserved set_fReserved[25..32],
 ]);
-
 STRUCT!{struct SCRIPT_STATE {
     bit_fields: WORD,
 }}
@@ -61,7 +54,6 @@ BITFIELD!(SCRIPT_STATE bit_fields: WORD [
     fReserved set_fReserved[13..14],
     fEngineReserved set_fEngineReserved[14..16],
 ]);
-
 STRUCT!{struct SCRIPT_ANALYSIS {
     bit_fields: WORD,
     s: SCRIPT_STATE,
@@ -79,7 +71,6 @@ STRUCT!{struct SCRIPT_ITEM {
     iCharPos: c_int,
     a: SCRIPT_ANALYSIS,
 }}
-
 extern "system" {
     pub fn ScriptItemize(
         pwcInChars: *const WCHAR,
@@ -97,7 +88,6 @@ extern "system" {
         piLogicalToVisual: *mut c_int,
     ) -> HRESULT;
 }
-
 pub const SCRIPT_JUSTIFY_NONE: WORD = 0;
 pub const SCRIPT_JUSTIFY_ARABIC_BLANK: WORD = 1;
 pub const SCRIPT_JUSTIFY_CHARACTER: WORD = 2;
@@ -114,7 +104,6 @@ pub const SCRIPT_JUSTIFY_ARABIC_BA: WORD = 12;
 pub const SCRIPT_JUSTIFY_ARABIC_BARA: WORD = 13;
 pub const SCRIPT_JUSTIFY_ARABIC_SEEN: WORD = 14;
 pub const SCRIPT_JUSTIFY_ARABIC_SEEN_M: WORD = 15;
-
 STRUCT!{struct SCRIPT_VISATTR {
     bit_fields: WORD,
 }}
@@ -126,7 +115,6 @@ BITFIELD!(SCRIPT_VISATTR bit_fields: WORD [
     fReserved set_fReserved[7..8],
     fShapeReserved set_fShapeReserved[8..16],
 ]);
-
 extern "system" {
     pub fn ScriptShape(
         hdc: HDC,
@@ -141,12 +129,10 @@ extern "system" {
         pcGlyphs: *mut c_int,
     ) -> HRESULT;
 }
-
 STRUCT!{struct GOFFSET {
     du: LONG,
     dv: LONG,
 }}
-
 extern "system" {
     pub fn ScriptPlace(
         hdc: HDC,
@@ -184,7 +170,6 @@ extern "system" {
         piJustify: *mut c_int,
     ) -> HRESULT;
 }
-
 STRUCT!{struct SCRIPT_LOGATTR {
     bit_fields: BYTE,
 }}
@@ -196,7 +181,6 @@ BITFIELD!(SCRIPT_LOGATTR bit_fields: BYTE [
     fInvalid set_fInvalid[4..5],
     fReserved set_fReserved[5..8],
 ]);
-
 extern "system" {
     pub fn ScriptBreak(
         pwcChars: *const WCHAR,
@@ -247,9 +231,7 @@ extern "system" {
         piJustify: *mut c_int,
     ) -> HRESULT;
 }
-
 pub const SGCM_RTL: DWORD = 0x00000001;
-
 extern "system" {
     pub fn ScriptGetCMap(
         hdc: HDC,
@@ -266,7 +248,6 @@ extern "system" {
         pABC: *mut ABC,
     ) -> HRESULT;
 }
-
 STRUCT!{struct SCRIPT_PROPERTIES {
     bit_fields1: DWORD,
     bit_fields2: DWORD,
@@ -290,14 +271,12 @@ BITFIELD!(SCRIPT_PROPERTIES bit_fields2: DWORD [
     fClusterSizeVaries set_fClusterSizeVaries[3..4],
     fRejectInvalid set_fRejectInvalid[4..5],
 ]);
-
 extern "system" {
     pub fn ScriptGetProperties(
         ppSp: *mut *mut *const SCRIPT_PROPERTIES,
         piNumScripts: *mut c_int,
     ) -> HRESULT;
 }
-
 STRUCT!{struct SCRIPT_FONTPROPERTIES {
     cBytes: c_int,
     wgBlank: WORD,
@@ -306,7 +285,6 @@ STRUCT!{struct SCRIPT_FONTPROPERTIES {
     wgKashida: WORD,
     iKashidaWidth: c_int,
 }}
-
 extern "system" {
     pub fn ScriptGetFontProperties(
         hdc: HDC,
@@ -319,7 +297,6 @@ extern "system" {
         tmHeight: *mut c_long,
     ) -> HRESULT;
 }
-
 pub const SSA_PASSWORD: DWORD = 0x00000001;
 pub const SSA_TAB: DWORD = 0x00000002;
 pub const SSA_CLIP: DWORD = 0x00000004;
@@ -341,16 +318,13 @@ pub const SSA_PIDX: DWORD = 0x10000000;
 pub const SSA_LAYOUTRTL: DWORD = 0x20000000;
 pub const SSA_DONTGLYPH: DWORD = 0x40000000;
 pub const SSA_NOKASHIDA: DWORD = 0x80000000;
-
 STRUCT!{struct SCRIPT_TABDEF {
     cTabStops: c_int,
     iScale: c_int,
     pTabStops: *mut c_int,
     iTabOrigin: c_int,
 }}
-
 DECLARE_HANDLE!(SCRIPT_STRING_ANALYSIS, SCRIPT_STRING_ANALYSIS__);
-
 extern "system" {
     pub fn ScriptStringAnalyse(
         hdc: HDC,
@@ -413,11 +387,9 @@ extern "system" {
         fDisabled: BOOL,
     ) -> HRESULT;
 }
-
 pub const SIC_COMPLEX: DWORD = 1;
 pub const SIC_ASCIIDIGIT: DWORD = 2;
 pub const SIC_NEUTRAL: DWORD = 4;
-
 extern "system" {
     pub fn ScriptIsComplex(
         pwcInChars: *const WCHAR,
@@ -425,7 +397,6 @@ extern "system" {
         dwFlags: DWORD
     ) -> HRESULT;
 }
-
 STRUCT!{struct SCRIPT_DIGITSUBSTITUTE {
     bit_fields1: DWORD,
     bit_fields2: DWORD,
@@ -438,19 +409,16 @@ BITFIELD!(SCRIPT_DIGITSUBSTITUTE bit_fields1: DWORD [
 BITFIELD!(SCRIPT_DIGITSUBSTITUTE bit_fields2: DWORD [
     DigitSubstitute set_DigitSubstitute[0..8],
 ]);
-
 extern "system" {
     pub fn ScriptRecordDigitSubstitution(
         Locale: LCID,
         psds: *mut SCRIPT_DIGITSUBSTITUTE,
     ) -> HRESULT;
 }
-
 pub const SCRIPT_DIGITSUBSTITUTE_CONTEXT: BYTE = 0;
 pub const SCRIPT_DIGITSUBSTITUTE_NONE: BYTE = 1;
 pub const SCRIPT_DIGITSUBSTITUTE_NATIONAL: BYTE = 2;
 pub const SCRIPT_DIGITSUBSTITUTE_TRADITIONAL: BYTE = 3;
-
 extern "system" {
     pub fn ScriptApplyDigitSubstitution(
         psds: *const SCRIPT_DIGITSUBSTITUTE,
@@ -458,20 +426,16 @@ extern "system" {
         pss: *mut SCRIPT_STATE,
     ) -> HRESULT;
 }
-
 pub type OPENTYPE_TAG = ULONG;
 pub const SCRIPT_TAG_UNKNOWN: OPENTYPE_TAG = 0x00000000;
-
 STRUCT!{struct OPENTYPE_FEATURE_RECORD {
     tagFeature: OPENTYPE_TAG,
     lParameter: LONG,
 }}
-
 STRUCT!{struct TEXTRANGE_PROPERTIES {
     potfRecords: *mut OPENTYPE_FEATURE_RECORD,
     cotfRecords: c_int,
 }}
-
 STRUCT!{struct SCRIPT_CHARPROP {
     bit_fields: WORD,
 }}
@@ -479,12 +443,10 @@ BITFIELD!(SCRIPT_CHARPROP bit_fields: WORD [
     fCanGlyphAlone set_fCanGlyphAlone[0..1],
     reserved set_reserved[1..16],
 ]);
-
 STRUCT!{struct SCRIPT_GLYPHPROP {
     sva: SCRIPT_VISATTR,
     reserved: WORD,
 }}
-
 extern "system" {
     pub fn ScriptShapeOpenType(
         hdc: HDC,

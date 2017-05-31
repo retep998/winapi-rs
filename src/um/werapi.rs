@@ -5,16 +5,13 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Function prototypes for Windows Error Reporting (WER)
-
 use shared::minwindef::{DWORD, PDWORD};
 use um::winnt::{HANDLE, HRESULT, PCWSTR, PVOID};
-
 ENUM!{enum WER_REGISTER_FILE_TYPE {
     WerRegFileTypeUserDocument = 1,
     WerRegFileTypeOther = 2,
     WerRegFileTypeMax,
 }}
-
 extern "system" {
     pub fn WerRegisterFile(
         pwzFile: PCWSTR,

@@ -5,10 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! OLE Control interfaces
-
 use shared::winerror::{FACILITY_ITF, SEVERITY_ERROR, SEVERITY_SUCCESS};
 use um::winnt::HRESULT;
-
 pub const SELFREG_E_FIRST: HRESULT = MAKE_SCODE!(SEVERITY_ERROR, FACILITY_ITF, 0x0200);
 pub const SELFREG_E_LAST: HRESULT = MAKE_SCODE!(SEVERITY_ERROR, FACILITY_ITF, 0x020F);
 pub const SELFREG_S_FIRST: HRESULT = MAKE_SCODE!(SEVERITY_SUCCESS, FACILITY_ITF, 0x0200);

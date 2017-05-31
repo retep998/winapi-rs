@@ -295,6 +295,7 @@ extern "system" {
         Session: EVT_HANDLE,
         ChannelPath: LPCWSTR,
         TargetFilePath: LPCWSTR,
+        Flags: DWORD,
     ) -> BOOL;
 }
 ENUM!{enum EVT_EXPORTLOG_FLAGS {
@@ -364,6 +365,7 @@ ENUM!{enum EVT_CHANNEL_SID_TYPE {
 extern "system" {
     pub fn EvtOpenChannelEnum(
         Session: EVT_HANDLE,
+        Flags: DWORD,
     ) -> EVT_HANDLE;
     pub fn EvtNextChannelPath(
         ChannelEnum: EVT_HANDLE,

@@ -210,14 +210,14 @@ impl Graph {
     }
     fn identify_required(&mut self) {
         for (name, header) in &mut self.0 {
-            if let Ok(_) = var(&format!("CARGO_FEATURE_{}", name)) {
+            if let Ok(_) = var(&format!("CARGO_FEATURE_{}", name.to_uppercase())) {
                 header.required = true;
                 header.included.set(true);
             }
         }
     }
     fn check_everything(&self) {
-        if let Ok(_) = var("CARGO_FEATURE_everything") {
+        if let Ok(_) = var("CARGO_FEATURE_EVERYTHING") {
             for (_, header) in &self.0 {
                 header.included.set(true);
             }
