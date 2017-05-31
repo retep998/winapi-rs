@@ -40,6 +40,7 @@ pub mod guiddef;
 #[cfg(feature = "ntstatus")] pub mod ntstatus;
 #[cfg(feature = "qos")] pub mod qos;
 #[cfg(feature = "rpc")] pub mod rpc;
+#[cfg(feature = "rpcdce")] pub mod rpcdce;
 #[cfg(feature = "rpcndr")] pub mod rpcndr;
 #[cfg(feature = "sspi")] pub mod sspi;
 #[cfg(feature = "usb")] pub mod usb;
