@@ -114,6 +114,7 @@ pub mod gl;
 #[cfg(feature = "subauth")] pub mod subauth;
 #[cfg(feature = "synchapi")] pub mod synchapi;
 #[cfg(feature = "sysinfoapi")] pub mod sysinfoapi;
+#[cfg(feature = "threadpoolapiset")] pub mod threadpoolapiset;
 #[cfg(feature = "tlhelp32")] pub mod tlhelp32;
 #[cfg(feature = "unknwnbase")] pub mod unknwnbase;
 #[cfg(feature = "urlhist")] pub mod urlhist;

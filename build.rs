@@ -172,6 +172,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("subauth", &["minwindef", "winnt"], &[]),
     ("synchapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32", "synchronization"]),
     ("sysinfoapi", &["basetsd", "minwindef", "winnt"], &[]),
+    ("threadpoolapiset", &["basetsd", "minwindef", "winnt"], &[]),
     ("tlhelp32", &["basetsd", "minwindef", "winnt"], &[]),
     ("unknwnbase", &["guiddef", "minwindef", "winnt"], &[]),
     ("urlhist", &["docobj", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
