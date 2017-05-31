@@ -170,6 +170,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("urlmon", &["minwindef", "unknwnbase", "winnt"], &[]),
     ("usbspec", &["basetsd", "minwindef"], &[]),
     ("usp10", &["minwindef", "ntdef", "windef", "winerror", "wingdi", "winnt"], &["usp10"]),
+    ("vss", &["guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("vsserror", &["winnt"], &[]),
     ("werapi", &["minwindef", "winnt"], &["kernel32"]),
     ("winbase", &["basetsd", "cfgmgr32", "fileapi", "guiddef", "libloaderapi", "minwinbase", "minwindef", "processthreadsapi", "vadefs", "windef", "winnt"], &["kernel32"]),

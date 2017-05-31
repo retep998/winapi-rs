@@ -115,6 +115,7 @@ pub mod gl;
 #[cfg(feature = "urlmon")] pub mod urlmon;
 #[cfg(feature = "usbspec")] pub mod usbspec;
 #[cfg(feature = "usp10")] pub mod usp10;
+#[cfg(feature = "vss")] pub mod vss;
 #[cfg(feature = "vsserror")] pub mod vsserror;
 #[cfg(feature = "werapi")] pub mod werapi;
 #[cfg(feature = "winbase")] pub mod winbase;
