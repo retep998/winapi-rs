@@ -166,6 +166,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("strmif", &["winnt"], &[]),
     ("subauth", &["minwindef", "winnt"], &[]),
     ("synchapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32", "synchronization"]),
+    ("tlhelp32", &["basetsd", "minwindef", "winnt"], &[]),
     ("unknwnbase", &["guiddef", "minwindef", "winnt"], &[]),
     ("urlhist", &["docobj", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
     ("urlmon", &["minwindef", "unknwnbase", "winnt"], &[]),
