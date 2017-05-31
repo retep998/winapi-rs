@@ -115,6 +115,7 @@ pub mod gl;
 #[cfg(feature = "urlmon")] pub mod urlmon;
 #[cfg(feature = "usbspec")] pub mod usbspec;
 #[cfg(feature = "usp10")] pub mod usp10;
+#[cfg(feature = "vsbackup")] pub mod vsbackup;
 #[cfg(feature = "vss")] pub mod vss;
 #[cfg(feature = "vsserror")] pub mod vsserror;
 #[cfg(feature = "vswriter")] pub mod vswriter;
