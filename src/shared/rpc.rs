@@ -4,6 +4,9 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-// Master include file for RPC applications.
-pub type I_RPC_HANDLE = *mut ::c_void;
-pub type RPC_STATUS = ::c_long;
+//! Master include file for RPC applications.
+
+use ctypes::{c_long, c_void};
+
+pub type I_RPC_HANDLE = *mut c_void;
+pub type RPC_STATUS = c_long;

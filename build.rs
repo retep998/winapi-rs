@@ -46,6 +46,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("ntdef", &["basetsd"], &[]),
     ("ntstatus", &["ntdef"], &[]),
     ("qos", &["minwindef"], &[]),
+    ("rpc", &[], &[]),
     ("rpcndr", &[], &[]),
     ("sspi", &["basetsd", "guiddef", "minwindef", "subauth", "wincred", "winnt"], &["credui", "secur32"]),
     ("usb", &["minwindef", "winnt"], &[]),
