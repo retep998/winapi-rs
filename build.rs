@@ -219,6 +219,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("hstring", &["winnt"], &[]),
     ("inspectable", &["guiddef", "hstring", "minwindef", "unknwnbase", "winnt"], &[]),
     ("roapi", &["activation", "hstring", "winnt"], &[]),
+    ("roerrorapi", &["basetsd", "minwindef", "winnt"], &[]),
     ("winstring", &["basetsd", "minwindef", "winnt"], &[]),
 ];
 struct Header {
