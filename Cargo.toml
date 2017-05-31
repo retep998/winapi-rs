@@ -211,6 +211,7 @@ winsock2 = []
 winspool = []
 winsvc = []
 winuser = []
+ws2spi = []
 xinput = []
 #vc
 excpt = []
