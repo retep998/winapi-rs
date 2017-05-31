@@ -29,6 +29,7 @@ pub mod guiddef;
 #[cfg(feature = "hidpi")] pub mod hidpi;
 #[cfg(feature = "hidsdi")] pub mod hidsdi;
 #[cfg(feature = "hidusage")] pub mod hidusage;
+#[cfg(feature = "in6addr")] pub mod in6addr;
 #[cfg(feature = "inaddr")] pub mod inaddr;
 #[cfg(feature = "intsafe")] pub mod intsafe;
 #[cfg(feature = "ksmedia")] pub mod ksmedia;

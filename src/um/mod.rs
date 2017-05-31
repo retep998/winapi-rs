@@ -145,4 +145,5 @@ pub mod gl;
 #[cfg(feature = "winusbio")] pub mod winusbio;
 #[cfg(feature = "winuser")] pub mod winuser;
 #[cfg(feature = "ws2spi")] pub mod ws2spi;
+#[cfg(feature = "ws2tcpip")] pub mod ws2tcpip;
 #[cfg(feature = "xinput")] pub mod xinput;
