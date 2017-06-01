@@ -406,12 +406,6 @@ extern "system" {
     pub fn LoadImageW(
         hInst: HINSTANCE, name: LPCWSTR, type_: UINT, cx: c_int, cy: c_int, fuLoad: UINT,
     ) -> HANDLE;
-    pub fn LoadStringA(
-        hInstance: HINSTANCE, uID: UINT, lpBuffer: LPSTR, cchBufferMax: c_int,
-    ) -> c_int;
-    pub fn LoadStringW(
-        hInstance: HINSTANCE, uID: UINT, lpBuffer: LPWSTR, cchBufferMax: c_int,
-    ) -> c_int;
     pub fn LockSetForegroundWindow(uLockCode: UINT) -> BOOL;
     pub fn LockWindowUpdate(hWndLock: HWND) -> BOOL;
     pub fn LockWorkStation() -> BOOL;
