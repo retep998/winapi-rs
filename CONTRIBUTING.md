@@ -125,8 +125,11 @@ pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
 ## Unions
 
 * `UNION!` is being deprecated in favor of `UNION2!` in order to more closely align with the new
-  untagged union feature.
+  untagged union feature. Note that the `UNION2` macro requires the alignment of the struct to
+  be specified via the datatype of the backing data array. Additionally this alignment can vary
+  for 32- and 64-bit builds and needs to be specified for both if they're different.
 
+Example C union:
 ```C
 typedef union {
     USN_RECORD_COMMON_HEADER Header;
@@ -135,6 +138,9 @@ typedef union {
     USN_RECORD_V4 V4;
 } USN_RECORD_UNION, *PUSN_RECORD_UNION;
 ```
+
+For unions where the alignment matches for 32- and 64-bits the alignment can just be specified
+once:
 ```Rust
 UNION2!{union USN_RECORD_UNION {
     [u64; 10],
@@ -146,10 +152,21 @@ UNION2!{union USN_RECORD_UNION {
 pub type PUSN_RECORD_UNION = *mut USN_RECORD_UNION;
 ```
 
-* The first parameter to `UNION2!` is the storage for that union. It must have both the correct
-  size and alignment. You can use the following C++ code to print out the storage for any union
-  type that can be named. Defining `NONAMELESSUNION` will help with naming anonymous unions.
+Otherwise the alignment needs to specified first for the 32-bit and then the 64-bit builds like:
+```Rust
+UNION2!{union USN_RECORD_UNION {
+    [u32; 20] [u64; 10],
+    Header Header_mut: USN_RECORD_COMMON_HEADER,
+    V2 V2_mut: USN_RECORD_V2,
+    V3 V3_mut: USN_RECORD_V3,
+    V4 V4_mut: USN_RECORD_V4,
+}}
+pub type PUSN_RECORD_UNION = *mut USN_RECORD_UNION;
+```
 
+To determine the alignment compile and run a C++ program on Windows specifying `x` as having the
+datatype that's being tested using the following code to print out the necessary array declaration
+for the `UNION2` macro:
 ```C++
 char const * type_for_alignment(uintptr_t align) {
     switch (align) {
