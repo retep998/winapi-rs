@@ -181,10 +181,11 @@ UNION2!{union D3D12_RESOURCE_BARRIER_u {
 
 ## Anonymous unions and structs
 
-* If the type `FOO` contains a single anonymous struct or union, give the anonymous struct or union
-  a name of `FOO_s` or `FOO_u` respectively, and the field a name of `s` or `u` respectively.
-* If the type `FOO` contains multiple anonymous structs or unions, append a number, such as `s1:
-  FOO_s1` `s2: FOO_s2` or `u1: FOO_u1` `u2: FOO_u2`.
+* If the type `FOO` contains a single anonymous struct or union, give the anonymous struct or
+  union a name of `FOO_s` or `FOO_u` respectively, and the field a name of `s` or `u`
+  respectively.
+* If the type `FOO` contains multiple anonymous structs or unions, append a number, such as:
+  `s1: FOO_s1`/`s2: FOO_s2` or `u1: FOO_u1`/`u2: FOO_u2`.
 
 ## COM interfaces
 
@@ -230,5 +231,5 @@ For COM interfaces without a UUID, a UUID of all-zeroes should be used.
     * If the duplicated thing is a struct or COM interface or union, then choose one header to be
       the canonical source of truth for that definition and publicly re-export the thing from the
       other header.
-* Sometimes a COM interface will have two methods with identical names. If the two methods are both
-  named `Foo`, then name them `Foo1` and `Foo2`.
+* Sometimes a COM interface will have two methods with identical names. If the two methods are
+  both named `Foo`, then name them `Foo1` and `Foo2`.
