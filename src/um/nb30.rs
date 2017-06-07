@@ -4,7 +4,11 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-// This module contains the definitions for portable NetBIOS 3.0 support.
+//! This module contains the definitions for portable NetBIOS 3.0 support.
+
+use shared::minwindef::{DWORD, PUCHAR, UCHAR, ULONG, USHORT, WORD};
+use um::winnt::HANDLE;
+
 pub const NCBNAMSZ: usize = 16;
 pub const MAX_LANA: usize = 254;
 FN!{stdcall PFPOST(

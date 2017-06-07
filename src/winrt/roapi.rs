@@ -4,6 +4,11 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
+
+use um::winnt::HRESULT;
+use winrt::activation::IActivationFactory;
+use winrt::hstring::HSTRING;
+
 ENUM!{enum RO_INIT_TYPE {
     RO_INIT_SINGLETHREADED = 0,
     RO_INIT_MULTITHREADED = 1,
@@ -11,7 +16,7 @@ ENUM!{enum RO_INIT_TYPE {
 pub enum RO_REGISTRATION_COOKIE__ {}
 pub type RO_REGISTRATION_COOKIE = *mut RO_REGISTRATION_COOKIE__;
 FN!{stdcall PFNGETACTIVATIONFACTORY(
-    ::HSTRING,
-    *mut *mut ::IActivationFactory,
-) -> ::HRESULT}
+    HSTRING,
+    *mut *mut IActivationFactory,
+) -> HRESULT}
 DECLARE_HANDLE!(APARTMENT_SHUTDOWN_REGISTRATION_COOKIE, APARTMENT_SHUTDOWN_REGISTRATION_COOKIE__);
