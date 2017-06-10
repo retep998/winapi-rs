@@ -12,6 +12,12 @@ use um::wincrypt::{
     CRYPT_ALGORITHM_IDENTIFIER, CRYPT_ATTRIBUTE_TYPE_VALUE, CRYPT_HASH_BLOB, HCRYPTPROV,
 };
 use um::winnt::{HANDLE, LPCWSTR, PWSTR, WCHAR};
+UNION2!{union SIP_SUBJECTINFO_u {
+    [usize; 1],
+    psFlat psFlat_mut: *mut MS_ADDINFO_FLAT,
+    psCatMember psCatMember_mut: *mut MS_ADDINFO_CATALOGMEMBER,
+    psBlob psBlob_mut: *mut MS_ADDINFO_BLOB,
+}}
 STRUCT!{struct SIP_SUBJECTINFO {
     cbSize: DWORD,
     pgSubjectType: *mut GUID,
@@ -29,11 +35,9 @@ STRUCT!{struct SIP_SUBJECTINFO {
     fdwSecuritySettings: DWORD,
     dwIndex: DWORD,
     dwUnionChoice: DWORD,
-    psFlat: *mut MS_ADDINFO_FLAT,
+    u: SIP_SUBJECTINFO_u,
     pClientData: LPVOID,
 }}
-UNION!(SIP_SUBJECTINFO, psFlat, psCatMember, psCatMember_mut, *mut MS_ADDINFO_CATALOGMEMBER);
-UNION!(SIP_SUBJECTINFO, psFlat, psBlob, psBlob_mut, *mut MS_ADDINFO_BLOB);
 pub type LPSIP_SUBJECTINFO = *mut SIP_SUBJECTINFO;
 STRUCT!{struct MS_ADDINFO_FLAT {
     cbStruct: DWORD,
@@ -75,13 +79,17 @@ STRUCT!{struct SIP_ADD_NEWPROVIDER {
     pwszGetCapFuncName: PWSTR,
 }}
 pub type PSIP_ADD_NEWPROVIDER = *mut SIP_ADD_NEWPROVIDER;
+UNION2!{union SIP_CAP_SET_V3_u {
+    [u32; 1],
+    dwFlags dwFlags_mut: DWORD,
+    dwReserved dwReserved_mut: DWORD,
+}}
 STRUCT!{struct SIP_CAP_SET_V3 {
     cbSize: DWORD,
     dwVersion: DWORD,
     isMultiSign: BOOL,
-    dwFlags: DWORD,
+    u: SIP_CAP_SET_V3_u,
 }}
-UNION!(SIP_CAP_SET_V3, dwFlags, dwReserved, dwReserved_mut, DWORD);
 pub type PSIP_CAP_SET_V3 = *mut SIP_CAP_SET_V3;
 pub type SIP_CAP_SET = PSIP_CAP_SET_V3;
 FN!{stdcall pCryptSIPGetSignedDataMsg(

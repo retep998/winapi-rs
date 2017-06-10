@@ -11,7 +11,7 @@ use shared::basetsd::{
 };
 use shared::guiddef::{GUID, LPCGUID};
 use shared::minwindef::{
-    ATOM, BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HWINSTA, LOWORD, LPARAM, LPBYTE, LPDWORD,
+    ATOM, BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HWINSTA, INT, LOWORD, LPARAM, LPBYTE, LPDWORD,
     LPVOID, LPWORD, LRESULT, PBYTE, PUINT, PULONG, TRUE, UCHAR, UINT, ULONG, USHORT, WORD, WPARAM,
 };
 use shared::windef::{
@@ -3243,15 +3243,8 @@ STRUCT!{struct USAGE_PROPERTIES {
     physicalMaximum: INT32,
 }}
 pub type PUSAGE_PROPERTIES = *mut USAGE_PROPERTIES;
-#[cfg(target_arch = "x86")]
 UNION2!{union POINTER_TYPE_INFO_u {
-    [u64; 17],
-    touchInfo touchInfo_mut: POINTER_TOUCH_INFO,
-    penInfo penInfo_mut: POINTER_PEN_INFO,
-}}
-#[cfg(target_arch = "x86_64")]
-UNION2!{union POINTER_TYPE_INFO_u {
-    [u64; 18],
+    [u64; 17] [u64; 18],
     touchInfo touchInfo_mut: POINTER_TOUCH_INFO,
     penInfo penInfo_mut: POINTER_PEN_INFO,
 }}
@@ -3870,11 +3863,40 @@ extern "system" {
         prcRect: *const RECT,
     ) -> BOOL;
 }
-
-
-
-/******CUTOFF******/
-
+pub const MNC_IGNORE: DWORD = 0;
+pub const MNC_CLOSE: DWORD = 1;
+pub const MNC_EXECUTE: DWORD = 2;
+pub const MNC_SELECT: DWORD = 3;
+STRUCT!{struct TPMPARAMS {
+    cbSize: UINT,
+    rcExclude: RECT,
+}}
+pub type LPTPMPARAMS = *mut TPMPARAMS;
+extern "system" {
+    pub fn TrackPopupMenuEx(
+        hMenu: HMENU,
+        uFlags: UINT,
+        x: INT,
+        y: INT,
+        hwnd: HWND,
+        lptpm: LPTPMPARAMS,
+    ) -> BOOL;
+}
+/*********
+* CUTOFF *
+*********/
+pub const IDOK: c_int = 1;
+pub const IDCANCEL: c_int = 2;
+pub const IDABORT: c_int = 3;
+pub const IDRETRY: c_int = 4;
+pub const IDIGNORE: c_int = 5;
+pub const IDYES: c_int = 6;
+pub const IDNO: c_int = 7;
+pub const IDCLOSE: c_int = 8;
+pub const IDHELP: c_int = 9;
+pub const IDTRYAGAIN: c_int = 10;
+pub const IDCONTINUE: c_int = 11;
+pub const IDTIMEOUT: c_int = 32000;
 // Edit Control Styles
 //
 pub const ES_LEFT: DWORD = 0x0000;
@@ -3891,7 +3913,6 @@ pub const ES_OEMCONVERT: DWORD = 0x0400;
 pub const ES_READONLY: DWORD = 0x0800;
 pub const ES_WANTRETURN: DWORD = 0x1000;
 pub const ES_NUMBER: DWORD = 0x2000;
-
 // Edit Control Notification Codes
 //
 pub const EN_SETFOCUS: WORD = 0x0100;
@@ -3902,23 +3923,18 @@ pub const EN_ERRSPACE: WORD = 0x0500;
 pub const EN_MAXTEXT: WORD = 0x0501;
 pub const EN_HSCROLL: WORD = 0x0601;
 pub const EN_VSCROLL: WORD = 0x0602;
-
 pub const EN_ALIGN_LTR_EC: WORD = 0x0700;
 pub const EN_ALIGN_RTL_EC: WORD = 0x0701;
-
 // Edit control EM_SETMARGIN parameters
 pub const EC_LEFTMARGIN: WORD = 0x0001;
 pub const EC_RIGHTMARGIN: WORD = 0x0002;
 pub const EC_USEFONTINFO: WORD = 0xffff;
-
 // wParam of EM_GET/SETIMESTATUS
 pub const EMSIS_COMPOSITIONSTRING: WORD = 0x0001;
-
 // lParam for EMSIS_COMPOSITIONSTRING
 pub const EIMES_GETCOMPSTRATONCE: WORD = 0x0001;
 pub const EIMES_CANCELCOMPSTRINFOCUS: WORD = 0x0002;
 pub const EIMES_COMPLETECOMPSTRKILLFOCUS: WORD = 0x0004;
-
 // Edit Control Messages
 //
 pub const EM_GETSEL: WORD = 0x00B0;
@@ -3952,23 +3968,19 @@ pub const EM_SETREADONLY: WORD = 0x00CF;
 pub const EM_SETWORDBREAKPROC: WORD = 0x00D0;
 pub const EM_GETWORDBREAKPROC: WORD = 0x00D1;
 pub const EM_GETPASSWORDCHAR: WORD = 0x00D2;
-
 pub const EM_SETMARGINS: WORD = 0x00D3;
 pub const EM_GETMARGINS: WORD = 0x00D4;
 pub const EM_SETLIMITTEXT: WORD = EM_LIMITTEXT;
 pub const EM_GETLIMITTEXT: WORD = 0x00D5;
 pub const EM_POSFROMCHAR: WORD = 0x00D6;
 pub const EM_CHARFROMPOS: WORD = 0x00D7;
-
 pub const EM_SETIMESTATUS: WORD = 0x00D8;
 pub const EM_GETIMESTATUS: WORD = 0x00D9;
-
 // EDITWORDBREAKPROC code values
 //
 pub const WB_LEFT: WORD = 0;
 pub const WB_RIGHT: WORD = 1;
 pub const WB_ISDELIMITER: WORD = 2;
-
 pub const BN_CLICKED: WORD = 0;
 pub const BN_PAINT: WORD = 1;
 pub const BN_HILITE: WORD = 2;
@@ -4008,7 +4020,6 @@ pub const BS_MULTILINE: DWORD = 0x00002000;
 pub const BS_NOTIFY: DWORD = 0x00004000;
 pub const BS_FLAT: DWORD = 0x00008000;
 pub const BS_RIGHTBUTTON: DWORD = BS_LEFTTEXT;
-
 pub const BM_GETCHECK: UINT = 0x00F0;
 pub const BM_SETCHECK: UINT = 0x00F1;
 pub const BM_GETSTATE: UINT = 0x00F2;
@@ -4023,7 +4034,6 @@ pub const BST_CHECKED: WPARAM = 0x0001;
 pub const BST_INDETERMINATE: WPARAM = 0x0002;
 pub const BST_PUSHED: LRESULT = 0x0004;
 pub const BST_FOCUS: LRESULT = 0x0008;
-
 pub const SS_LEFT: DWORD = 0x00000000;
 pub const SS_CENTER: DWORD = 0x00000001;
 pub const SS_RIGHT: DWORD = 0x00000002;
@@ -4056,7 +4066,6 @@ pub const SS_ENDELLIPSIS: DWORD = 0x00004000;
 pub const SS_PATHELLIPSIS: DWORD = 0x00008000;
 pub const SS_WORDELLIPSIS: DWORD = 0x0000C000;
 pub const SS_ELLIPSISMASK: DWORD = 0x0000C000;
-
 pub const STM_SETICON: UINT = 0x0170;
 pub const STM_GETICON: UINT = 0x0171;
 pub const STM_SETIMAGE: UINT = 0x0172;
@@ -4066,7 +4075,6 @@ pub const STN_DBLCLK: WORD = 1;
 pub const STN_ENABLE: WORD = 2;
 pub const STN_DISABLE: WORD = 3;
 pub const STM_MSGMAX: WORD = 0x0174;
-
 pub const DS_ABSALIGN: DWORD = 0x01;
 pub const DS_SYSMODAL: DWORD = 0x02;
 pub const DS_LOCALEDIT: DWORD = 0x20;
@@ -4083,13 +4091,10 @@ pub const DS_CENTERMOUSE: DWORD = 0x1000;
 pub const DS_CONTEXTHELP: DWORD = 0x2000;
 pub const DS_SHELLFONT: DWORD = DS_SETFONT | DS_FIXEDSYS;
 pub const DS_USEPIXELS: DWORD = 0x8000;
-
 pub const DM_GETDEFID: UINT = WM_USER + 0;
 pub const DM_SETDEFID: UINT = WM_USER + 1;
 pub const DM_REPOSITION: UINT = WM_USER + 2;
-
 pub const DC_HASDEFID: WORD = 0x534B;
-
 pub const DLGC_WANTARROWS: LRESULT = 0x0001;
 pub const DLGC_WANTTAB: LRESULT = 0x0002;
 pub const DLGC_WANTALLKEYS: LRESULT = 0x0004;
@@ -4101,18 +4106,15 @@ pub const DLGC_RADIOBUTTON: LRESULT = 0x0040;
 pub const DLGC_WANTCHARS: LRESULT = 0x0080;
 pub const DLGC_STATIC: LRESULT = 0x0100;
 pub const DLGC_BUTTON: LRESULT = 0x2000;
-
 pub const LB_OKAY: LRESULT = 0;
 pub const LB_ERR: LRESULT = -1;
 pub const LB_ERRSPACE: LRESULT = -2;
-
 pub const LBN_ERRSPACE: WORD = -2i16 as WORD;
 pub const LBN_SELCHANGE: WORD = 1;
 pub const LBN_DBLCLK: WORD = 2;
 pub const LBN_SELCANCEL: WORD = 3;
 pub const LBN_SETFOCUS: WORD = 4;
 pub const LBN_KILLFOCUS: WORD = 5;
-
 pub const LB_ADDSTRING: UINT = 0x0180;
 pub const LB_INSERTSTRING: UINT = 0x0181;
 pub const LB_DELETESTRING: UINT = 0x0182;
@@ -4156,7 +4158,6 @@ pub const LB_ITEMFROMPOINT: UINT = 0x01A9;
 pub const LB_MULTIPLEADDSTRING: UINT = 0x01B1;
 pub const LB_GETLISTBOXINFO: UINT = 0x01B2;
 pub const LB_MSGMAX: UINT = 0x01B3;
-
 pub const LBS_NOTIFY: DWORD = 0x0001;
 pub const LBS_SORT: DWORD = 0x0002;
 pub const LBS_NOREDRAW: DWORD = 0x0004;
@@ -4174,11 +4175,9 @@ pub const LBS_NODATA: DWORD = 0x2000;
 pub const LBS_NOSEL: DWORD = 0x4000;
 pub const LBS_COMBOBOX: DWORD = 0x8000;
 pub const LBS_STANDARD: DWORD = LBS_NOTIFY | LBS_SORT | WS_VSCROLL | WS_BORDER;
-
 pub const CB_OKAY: LRESULT = 0;
 pub const CB_ERR: LRESULT = -1;
 pub const CB_ERRSPACE: LRESULT = -2;
-
 pub const CBN_ERRSPACE: WORD = -1i16 as WORD;
 pub const CBN_SELCHANGE: WORD = 1;
 pub const CBN_DBLCLK: WORD = 2;
@@ -4190,7 +4189,6 @@ pub const CBN_DROPDOWN: WORD = 7;
 pub const CBN_CLOSEUP: WORD = 8;
 pub const CBN_SELENDOK: WORD = 9;
 pub const CBN_SELENDCANCEL: WORD = 10;
-
 pub const CBS_SIMPLE: DWORD = 0x0001;
 pub const CBS_DROPDOWN: DWORD = 0x0002;
 pub const CBS_DROPDOWNLIST: DWORD = 0x0003;
@@ -4204,11 +4202,9 @@ pub const CBS_NOINTEGRALHEIGHT: DWORD = 0x0400;
 pub const CBS_DISABLENOSCROLL: DWORD = 0x0800;
 pub const CBS_UPPERCASE: DWORD = 0x2000;
 pub const CBS_LOWERCASE: DWORD = 0x4000;
-
 pub const CB_MULTIPLEADDSTRING: UINT = 0x0163;
 pub const CB_GETCOMBOBOXINFO: UINT = 0x0164;
 pub const CB_MSGMAX: UINT = 0x0165;
-
 pub const SBS_HORZ: DWORD = 0x0000;
 pub const SBS_VERT: DWORD = 0x0001;
 pub const SBS_TOPALIGN: DWORD = 0x0002;
@@ -4219,7 +4215,6 @@ pub const SBS_SIZEBOXTOPLEFTALIGN: DWORD = 0x0002;
 pub const SBS_SIZEBOXBOTTOMRIGHTALIGN: DWORD = 0x0004;
 pub const SBS_SIZEBOX: DWORD = 0x0008;
 pub const SBS_SIZEGRIP: DWORD = 0x0010;
-
 pub const SBM_SETPOS: UINT = 0x00E0;
 pub const SBM_GETPOS: UINT = 0x00E1;
 pub const SBM_SETRANGE: UINT = 0x00E2;
@@ -4229,7 +4224,6 @@ pub const SBM_ENABLE_ARROWS: UINT = 0x00E4;
 pub const SBM_SETSCROLLINFO: UINT = 0x00E9;
 pub const SBM_GETSCROLLINFO: UINT = 0x00EA;
 pub const SBM_GETSCROLLBARINFO: UINT = 0x00EB;
-
 pub const CCHILDREN_SCROLLBAR: usize = 5;
 pub const CDS_UPDATEREGISTRY: DWORD = 0x00000001;
 pub const CDS_TEST: DWORD = 0x00000002;
@@ -4348,7 +4342,6 @@ pub const MFS_ENABLED: UINT = MF_ENABLED;
 pub const MFS_UNCHECKED: UINT = MF_UNCHECKED;
 pub const MFS_UNHILITE: UINT = MF_UNHILITE;
 pub const MFS_DEFAULT: UINT = MF_DEFAULT;
-
 FN!{stdcall MSGBOXCALLBACK(
     LPHELPINFO,
 ) -> ()}
@@ -4361,7 +4354,6 @@ FN!{stdcall WINEVENTPROC(
     DWORD,
     DWORD,
 ) -> ()}
-
 STRUCT!{struct SCROLLBARINFO {
     cbSize: DWORD,
     rcScrollBar: RECT,
@@ -5118,7 +5110,6 @@ pub const NID_EXTERNAL_PEN: UINT = 0x00000008;
 pub const NID_MULTI_INPUT: UINT = 0x00000040;
 pub const NID_READY: UINT = 0x00000080;
 // end if WINVER >= 0x0601
-
 // System Menu Command Values
 //
 pub const SC_SIZE: WPARAM = 0xF000;
@@ -5143,13 +5134,6 @@ pub const SC_MONITORPOWER: WPARAM = 0xF170;
 pub const SC_CONTEXTHELP: WPARAM = 0xF180;
 pub const SC_SEPARATOR: WPARAM = 0xF00F;
 // endif WINVER >= 0x0400
-
-STRUCT!{struct TPMPARAMS {
-    cbSize: UINT,
-    rcExclude: RECT,
-}}
-pub type LPTPMPARAMS = *mut TPMPARAMS;
-
 // Flags for TrackPopupMenu
 pub const TPM_LEFTBUTTON: UINT = 0x0000;
 pub const TPM_RIGHTBUTTON: UINT = 0x0002;
@@ -5171,7 +5155,6 @@ pub const TPM_VERNEGANIMATION: UINT = 0x2000;
 pub const TPM_NOANIMATION: UINT = 0x4000;
 pub const TPM_LAYOUTRTL: UINT = 0x8000;
 pub const TPM_WORKAREA: UINT = 0x10000;
-
 // ANIMATIONINFO and related fields
 STRUCT!{struct ANIMATIONINFO {
     cbSize: UINT,
@@ -5181,7 +5164,6 @@ pub type LPANIMATIONINFO = *mut ANIMATIONINFO;
 pub const SPIF_UPDATEINIFILE: UINT = 0x0001;
 pub const SPIF_SENDWININICHANGE: UINT = 0x0002;
 pub const SPIF_SENDCHANGE: UINT = SPIF_SENDWININICHANGE;
-
 pub const MIIM_BITMAP: UINT = 0x00000080;
 pub const MIIM_CHECKMARKS: UINT = 0x00000008;
 pub const MIIM_DATA: UINT = 0x00000020;
@@ -5191,7 +5173,6 @@ pub const MIIM_STATE: UINT = 0x00000001;
 pub const MIIM_STRING: UINT = 0x00000040;
 pub const MIIM_SUBMENU: UINT = 0x00000004;
 pub const MIIM_TYPE: UINT = 0x00000010;
-
 pub const HBMMENU_MBAR_CLOSE: HBITMAP = 5 as HBITMAP;
 pub const HBMMENU_MBAR_CLOSE_D: HBITMAP = 6 as HBITMAP;
 pub const HBMMENU_MBAR_MINIMIZE: HBITMAP = 3 as HBITMAP;
@@ -5202,21 +5183,18 @@ pub const HBMMENU_POPUP_MAXIMIZE: HBITMAP = 10 as HBITMAP;
 pub const HBMMENU_POPUP_MINIMIZE: HBITMAP = 11 as HBITMAP;
 pub const HBMMENU_POPUP_RESTORE: HBITMAP = 9 as HBITMAP;
 pub const HBMMENU_SYSTEM: HBITMAP = 1 as HBITMAP;
-
 pub const MIM_MAXHEIGHT: UINT = 0x00000001;
 pub const MIM_BACKGROUND: UINT = 0x00000002;
 pub const MIM_HELPID: UINT = 0x00000004;
 pub const MIM_MENUDATA: UINT = 0x00000008;
 pub const MIM_STYLE: UINT = 0x00000010;
 pub const MIM_APPLYTOSUBMENUS: UINT = 0x80000000;
-
 pub const MNS_CHECKORBMP: UINT = 0x04000000;
 pub const MNS_NOTIFYBYPOS: UINT = 0x08000000;
 pub const MNS_AUTODISMISS: UINT = 0x10000000;
 pub const MNS_DRAGDROP: UINT = 0x20000000;
 pub const MNS_MODELESS: UINT = 0x40000000;
 pub const MNS_NOCHECK: UINT = 0x80000000;
-
 STRUCT!{struct MENUINFO {
     cbSize: DWORD,
     fMask: DWORD,
@@ -5249,4 +5227,10 @@ extern "system" {
         hInstance: HINSTANCE,
         lpIconName: LPCWSTR,
     ) -> HICON;
+    pub fn SetActiveWindow(
+        hWnd: HWND,
+    ) -> HWND;
+    pub fn SetForegroundWindow(
+        hWnd: HWND,
+    ) -> BOOL;
 }

@@ -22,23 +22,19 @@ ENUM!{enum DXGI_MEMORY_SEGMENT_GROUP {
     DXGI_MEMORY_SEGMENT_GROUP_LOCAL = 0,
     DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL = 1,
 }}
-
 ENUM!{enum DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG {
     DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_PRESENT = 0x1,
 }}
-
 ENUM!{enum DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG {
     DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_PRESENT = 0x1,
     DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT = 0x2,
 }}
-
 STRUCT!{struct DXGI_QUERY_VIDEO_MEMORY_INFO {
     Budget: UINT64,
     CurrentUsage: UINT64,
     AvailableForReservation: UINT64,
     CurrentReservation: UINT64,
 }}
-
 RIDL!(#[uuid(0x645967a4, 0x1392, 0x4310, 0xa7, 0x98, 0x80, 0x53, 0xce, 0x3e, 0x93, 0xfd)]
 interface IDXGIAdapter3(IDXGIAdapter3Vtbl): IDXGIAdapter2(IDXGIAdapter2Vtbl) {
     fn RegisterHardwareContentProtectionTeardownStatusEvent(
@@ -66,7 +62,6 @@ interface IDXGIAdapter3(IDXGIAdapter3Vtbl): IDXGIAdapter2(IDXGIAdapter2Vtbl) {
         dwCookie: DWORD,
     ) -> (),
 });
-
 RIDL!(#[uuid(0x1bc6ea02, 0xef36, 0x464f, 0xbf, 0x0c, 0x21, 0xca, 0x39, 0xe5, 0x16, 0x8a)]
 interface IDXGIFactory4(IDXGIFactory4Vtbl): IDXGIFactory3(IDXGIFactory3Vtbl) {
     fn EnumAdapterByLuid(
@@ -79,7 +74,6 @@ interface IDXGIFactory4(IDXGIFactory4Vtbl): IDXGIFactory3(IDXGIFactory3Vtbl) {
         ppvAdapter: *mut *mut c_void,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0xdc7dca35, 0x2196, 0x414d, 0x9f, 0x53, 0x61, 0x78, 0x84, 0x03, 0x2a, 0x60)]
 interface IDXGIOutput4(IDXGIOutput4Vtbl): IDXGIOutput3(IDXGIOutput3Vtbl) {
     fn CheckOverlayColorSpaceSupport(
@@ -89,7 +83,6 @@ interface IDXGIOutput4(IDXGIOutput4Vtbl): IDXGIOutput3(IDXGIOutput3Vtbl) {
         pFlags: *mut UINT,
     ) -> HRESULT,
 });
-
 RIDL!(#[uuid(0x94d99bdb, 0xf1f8, 0x4ab0, 0xb2, 0x36, 0x7d, 0xa0, 0x17, 0x0e, 0xda, 0xb1)]
 interface IDXGISwapChain3(IDXGISwapChain3Vtbl): IDXGISwapChain2(IDXGISwapChain2Vtbl) {
     fn GetCurrentBackBufferIndex() -> UINT,

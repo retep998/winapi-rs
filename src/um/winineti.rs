@@ -5,12 +5,10 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Windows Internet Services API procedure declarations, types and constants.
-
 // Currently, this only contains `INTERNET_FLAG_BGUPDATE`, which is needed to correctly define
 // `wininet::INTERNET_FLAGS_MASK`.
 use shared::minwindef::DWORD;
 pub const INTERNET_FLAG_BGUPDATE: DWORD = 0x00000008;
-
 // Functions from wininet.dll that *should* be in this header.
 // pub fn AppCacheCheckManifest();
 // pub fn AppCacheCloseHandle();

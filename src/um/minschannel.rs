@@ -35,21 +35,17 @@ pub const SECPKG_ATTR_SUPPORTED_SIGNATURES: DWORD = 0x66;
 pub const SECPKG_ATTR_REMOTE_CERT_CHAIN: DWORD = 0x67;
 pub const SECPKG_ATTR_UI_INFO: DWORD = 0x68;
 pub const SECPKG_ATTR_EARLY_START: DWORD = 0x69;
-
 STRUCT!{struct SecPkgCred_SupportedAlgs {
     cSupportedAlgs: DWORD,
     palgSupportedAlgs: ALG_ID,
 }}
-
 STRUCT!{struct SecPkgCred_CipherStrengths {
     dwMinimumCipherStrength: DWORD,
     dwMaximumCipherStrength: DWORD,
 }}
-
 STRUCT!{struct SecPkgCred_SupportedProtocols {
     grbitProtocol: DWORD,
 }}
-
 STRUCT!{struct SecPkgCred_ClientCertPolicy {
     dwFlags: DWORD,
     guidPolicyId: GUID,

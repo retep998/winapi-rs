@@ -120,7 +120,6 @@ extern "system" {
 }
     // pub fn CoResumeClassObjects() -> HRESULT;
     // pub fn CoSuspendClassObjects() -> HRESULT;
-
     // pub fn CoAddRefServerProcess();
     // pub fn CoReleaseServerProcess();
     // pub fn CoGetPSClsid();

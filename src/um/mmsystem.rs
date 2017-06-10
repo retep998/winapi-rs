@@ -12,22 +12,6 @@ use um::winnt::{LPSTR, WCHAR};
 //109 (Win 7 SDK)
 pub type MMVERSION = UINT;
 pub type MMRESULT = UINT;
-STRUCT!{struct MMTIME {
-    wType: UINT,
-    u: MMTIME_u,
-}}
-pub type PMMTIME = *mut MMTIME;
-pub type NPMMTIME = *mut MMTIME;
-pub type LPMMTIME = *mut MMTIME;
-STRUCT!{struct MMTIME_u {
-    data: [u8; 8],
-}}
-UNION!(MMTIME_u, data, ms, ms_mut, DWORD);
-UNION!(MMTIME_u, data, sample, sample_mut, DWORD);
-UNION!(MMTIME_u, data, cb, cb_mut, DWORD);
-UNION!(MMTIME_u, data, ticks, ticks_mut, DWORD);
-UNION!(MMTIME_u, data, smpte, smpte_mut, MMTIME_smpte);
-UNION!(MMTIME_u, data, midi, midi_mut, MMTIME_midi);
 STRUCT!{struct MMTIME_smpte {
     hour: BYTE,
     min: BYTE,
@@ -40,6 +24,22 @@ STRUCT!{struct MMTIME_smpte {
 STRUCT!{struct MMTIME_midi {
     songptrpos: DWORD,
 }}
+UNION2!{union MMTIME_u {
+    [u8; 8],
+    ms ms_mut: DWORD,
+    sample sample_mut: DWORD,
+    cb cb_mut: DWORD,
+    ticks ticks_mut: DWORD,
+    smpte smpte_mut: MMTIME_smpte,
+    midi midi_mut: MMTIME_midi,
+}}
+STRUCT!{struct MMTIME {
+    wType: UINT,
+    u: MMTIME_u,
+}}
+pub type PMMTIME = *mut MMTIME;
+pub type NPMMTIME = *mut MMTIME;
+pub type LPMMTIME = *mut MMTIME;
 pub const TIME_MS: UINT = 0x0001;
 pub const TIME_SAMPLES: UINT = 0x0002;
 pub const TIME_BYTES: UINT = 0x0004;

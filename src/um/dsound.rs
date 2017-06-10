@@ -127,8 +127,7 @@ interface IDirectSoundBuffer(IDirectSoundBufferVtbl): IUnknown(IUnknownVtbl) {
 );
 pub type LPDIRECTSOUNDBUFFER = *mut IDirectSoundBuffer;
 RIDL!(#[uuid(0x279afa83, 0x4981, 0x11ce, 0xa5, 0x21, 0x00, 0x20, 0xaf, 0x0b, 0xe5, 0x60)]
-interface IDirectSound(IDirectSoundVtbl): IUnknown(IUnknownVtbl)
-{
+interface IDirectSound(IDirectSoundVtbl): IUnknown(IUnknownVtbl) {
     fn CreateSoundBuffer(
         pcDSBufferDesc: LPCDSBUFFERDESC,
         ppDSBuffer: *mut LPDIRECTSOUNDBUFFER,

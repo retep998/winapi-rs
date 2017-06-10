@@ -7,6 +7,7 @@
 //! DirectX Typography Services public API definitions.
 use ctypes::c_void;
 use shared::basetsd::{INT16, INT32, UINT16, UINT32, UINT64, UINT8};
+use shared::guiddef::REFIID;
 use shared::minwindef::{BOOL, BYTE, FILETIME, FLOAT};
 use shared::windef::{COLORREF, HDC, HMONITOR, RECT, SIZE};
 use shared::winerror::SEVERITY_ERROR;
@@ -178,9 +179,6 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
         lastWriteTime: *mut UINT64,
     ) -> HRESULT,
 }}
-
-
-
 ENUM!{enum DWRITE_OUTLINE_THRESHOLD {
     DWRITE_OUTLINE_THRESHOLD_ANTIALIASED,
     DWRITE_OUTLINE_THRESHOLD_ALIASED,
@@ -1472,4 +1470,9 @@ pub fn MAKE_DWRITE_HR(severity: HRESULT, code: HRESULT) -> HRESULT {
 #[inline]
 pub fn MAKE_DWRITE_HR_ERR(code: HRESULT) -> HRESULT {
     MAKE_DWRITE_HR(SEVERITY_ERROR, code)
+}
+extern "system" {
+    pub fn DWriteCreateFactory(
+        factoryType: DWRITE_FACTORY_TYPE, iid: REFIID, factory: *mut *mut IUnknown,
+    ) -> HRESULT;
 }

@@ -4,13 +4,13 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
 use shared::basetsd::UINT64;
 use shared::minwindef::{BOOL, BYTE, INT, LPVOID, UINT};
 use um::d3dcommon::{
     D3D_CBUFFER_TYPE, D3D_FEATURE_LEVEL, D3D_INTERPOLATION_MODE, D3D_MIN_PRECISION, D3D_NAME,
     D3D_PARAMETER_FLAGS, D3D_PRIMITIVE, D3D_PRIMITIVE_TOPOLOGY, D3D_REGISTER_COMPONENT_TYPE,
-    D3D_RESOURCE_RETURN_TYPE, D3D_SHADER_INPUT_TYPE, D3D_SHADER_VARIABLE_CLASS, D3D_SHADER_VARIABLE_TYPE, D3D_SRV_DIMENSION, D3D_TESSELLATOR_DOMAIN,
+    D3D_RESOURCE_RETURN_TYPE, D3D_SHADER_INPUT_TYPE, D3D_SHADER_VARIABLE_CLASS,
+    D3D_SHADER_VARIABLE_TYPE, D3D_SRV_DIMENSION, D3D_TESSELLATOR_DOMAIN,
     D3D_TESSELLATOR_OUTPUT_PRIMITIVE, D3D_TESSELLATOR_PARTITIONING,
 };
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
@@ -24,7 +24,6 @@ ENUM!{enum D3D12_SHADER_VERSION_TYPE {
     D3D12_SHVER_COMPUTE_SHADER = 0x5,
     D3D12_SHVER_RESERVED0 = 0xFFF0,
 }}
-
 STRUCT!{struct D3D12_FUNCTION_DESC {
     Version: UINT,
     Creator: LPCSTR,
@@ -60,13 +59,11 @@ STRUCT!{struct D3D12_FUNCTION_DESC {
     Has10Level9VertexShader: BOOL,
     Has10Level9PixelShader: BOOL,
 }}
-
 STRUCT!{struct D3D12_LIBRARY_DESC {
     Creator: LPCSTR,
     Flags: UINT,
     FunctionCount: UINT,
 }}
-
 STRUCT!{struct D3D12_PARAMETER_DESC {
     Name: LPCSTR,
     SemanticName: LPCSTR,
@@ -81,7 +78,6 @@ STRUCT!{struct D3D12_PARAMETER_DESC {
     FirstOutRegister: UINT,
     FirstOutComponent: UINT,
 }}
-
 STRUCT!{struct D3D12_SHADER_BUFFER_DESC {
     Name: LPCSTR,
     Type: D3D_CBUFFER_TYPE,
@@ -89,7 +85,6 @@ STRUCT!{struct D3D12_SHADER_BUFFER_DESC {
     Size: UINT,
     uFlags: UINT,
 }}
-
 STRUCT!{struct D3D12_SHADER_DESC {
     Version: UINT,
     Creator: LPCSTR,
@@ -130,7 +125,6 @@ STRUCT!{struct D3D12_SHADER_DESC {
     cInterlockedInstructions: UINT,
     cTextureStoreInstructions: UINT,
 }}
-
 STRUCT!{struct D3D12_SHADER_INPUT_BIND_DESC {
     Name: LPCSTR,
     Type: D3D_SHADER_INPUT_TYPE,
@@ -143,7 +137,6 @@ STRUCT!{struct D3D12_SHADER_INPUT_BIND_DESC {
     Space: UINT,
     uID: UINT,
 }}
-
 STRUCT!{struct D3D12_SHADER_TYPE_DESC {
     Class: D3D_SHADER_VARIABLE_CLASS,
     Type: D3D_SHADER_VARIABLE_TYPE,
@@ -154,7 +147,6 @@ STRUCT!{struct D3D12_SHADER_TYPE_DESC {
     Offset: UINT,
     Name: LPCSTR,
 }}
-
 STRUCT!{struct D3D12_SHADER_VARIABLE_DESC {
     Name: LPCSTR,
     StartOffset: UINT,
@@ -166,7 +158,6 @@ STRUCT!{struct D3D12_SHADER_VARIABLE_DESC {
     StartSampler: UINT,
     SamplerSize: UINT,
 }}
-
 STRUCT!{struct D3D12_SIGNATURE_PARAMETER_DESC {
     SemanticName: LPCSTR,
     SemanticIndex: UINT,
@@ -178,14 +169,12 @@ STRUCT!{struct D3D12_SIGNATURE_PARAMETER_DESC {
     Stream: UINT,
     MinPrecision: D3D_MIN_PRECISION,
 }}
-
 RIDL!{#[uuid(0xec25f42d, 0x7006, 0x4f2b, 0xb3, 0x3e, 0x02, 0xcc, 0x33, 0x75, 0x73, 0x3f)]
 interface ID3D12FunctionParameterReflection(ID3D12FunctionParameterReflectionVtbl) {
     fn GetDesc(
         pDesc: *mut D3D12_PARAMETER_DESC,
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0x1108795c, 0x2772, 0x4ba9, 0xb2, 0xa8, 0xd4, 0x64, 0xdc, 0x7e, 0x27, 0x99)]
 interface ID3D12FunctionReflection(ID3D12FunctionReflectionVtbl) {
     fn GetDesc(
@@ -212,7 +201,6 @@ interface ID3D12FunctionReflection(ID3D12FunctionReflectionVtbl) {
         ParameterIndex: INT,
     ) -> *mut ID3D12FunctionParameterReflection,
 }}
-
 RIDL!(#[uuid(0x8e349d19, 0x54db, 0x4a56, 0x9d, 0xc9, 0x11, 0x9d, 0x87, 0xbd, 0xb8, 0x4)]
 interface ID3D12LibraryReflection(ID3D12LibraryReflectionVtbl): IUnknown(IUnknownVtbl) {
     fn GetDesc(
@@ -222,7 +210,6 @@ interface ID3D12LibraryReflection(ID3D12LibraryReflectionVtbl): IUnknown(IUnknow
         FunctionIndex: INT,
     ) -> *mut ID3D12FunctionReflection,
 });
-
 RIDL!{#[uuid(0xc59598b4, 0x48b3, 0x4869, 0xb9, 0xb1, 0xb1, 0x61, 0x8b, 0x14, 0xa8, 0xb7)]
 interface ID3D12ShaderReflectionConstantBuffer(ID3D12ShaderReflectionConstantBufferVtbl) {
     fn GetDesc(
@@ -235,7 +222,6 @@ interface ID3D12ShaderReflectionConstantBuffer(ID3D12ShaderReflectionConstantBuf
         Name: LPCSTR,
     ) -> *mut ID3D12ShaderReflectionVariable,
 }}
-
 RIDL!{#[uuid(0xe913c351, 0x783d, 0x48ca, 0xa1, 0xd1, 0x4f, 0x30, 0x62, 0x84, 0xad, 0x56)]
 interface ID3D12ShaderReflectionType(ID3D12ShaderReflectionTypeVtbl) {
     fn GetDesc(
@@ -266,7 +252,6 @@ interface ID3D12ShaderReflectionType(ID3D12ShaderReflectionTypeVtbl) {
         pBase: *mut ID3D12ShaderReflectionType,
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0x8337a8a6, 0xa216, 0x444a, 0xb2, 0xf4, 0x31, 0x47, 0x33, 0xa7, 0x3a, 0xea)]
 interface ID3D12ShaderReflectionVariable(ID3D12ShaderReflectionVariableVtbl) {
     fn GetDesc(
@@ -278,7 +263,6 @@ interface ID3D12ShaderReflectionVariable(ID3D12ShaderReflectionVariableVtbl) {
         uArrayIndex: UINT,
     ) -> UINT,
 }}
-
 RIDL!(#[uuid(0x5a58797d, 0xa72c, 0x478d, 0x8b, 0xa2, 0xef, 0xc6, 0xb0, 0xef, 0xe8, 0x8e)]
 interface ID3D12ShaderReflection(ID3D12ShaderReflectionVtbl): IUnknown(IUnknownVtbl) {
     fn GetDesc(
@@ -330,7 +314,6 @@ interface ID3D12ShaderReflection(ID3D12ShaderReflectionVtbl): IUnknown(IUnknownV
     ) -> UINT,
     fn GetRequiresFlags() -> UINT64,
 });
-
 pub type D3D12_CBUFFER_TYPE = D3D_CBUFFER_TYPE;
 pub type D3D12_RESOURCE_RETURN_TYPE = D3D_RESOURCE_RETURN_TYPE;
 pub type D3D12_TESSELLATOR_DOMAIN = D3D_TESSELLATOR_DOMAIN;

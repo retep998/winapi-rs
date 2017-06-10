@@ -46,6 +46,25 @@ macro_rules! DEFINE_GUID {
     }
 }
 #[macro_export]
+macro_rules! DEFINE_PROPERTYKEY {
+    (
+        $name:ident, $l:expr, $w1:expr, $w2:expr,
+        $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr, $b6:expr, $b7:expr, $b8:expr,
+        $pid:expr
+    ) => {
+        pub const $name: $crate::shared::wtypes::PROPERTYKEY
+            = $crate::shared::wtypes::PROPERTYKEY {
+            fmtid: $crate::shared::guiddef::GUID {
+                Data1: $l,
+                Data2: $w1,
+                Data3: $w2,
+                Data4: [$b1, $b2, $b3, $b4, $b5, $b6, $b7, $b8],
+            },
+            pid: $pid,
+        };
+    }
+}
+#[macro_export]
 macro_rules! DEFINE_DEVPROPKEY {
     (
         $name:ident, $l:expr, $w1:expr, $w2:expr,
@@ -210,10 +229,35 @@ macro_rules! UNION {
 }
 macro_rules! UNION2 {
     (union $name:ident {
-        $storage:ty,
+        [$stype:ty; $ssize:expr],
         $($variant:ident $variant_mut:ident: $ftype:ty,)+
     }) => (
-        pub struct $name(pub $storage);
+        #[repr(C)]
+        pub struct $name([$stype; $ssize]);
+        impl Copy for $name {}
+        impl Clone for $name {
+            #[inline]
+            fn clone(&self) -> $name { *self }
+        }
+        impl $name {$(
+            #[inline]
+            pub unsafe fn $variant(&self) -> &$ftype {
+                &*(self as *const _ as *const $ftype)
+            }
+            #[inline]
+            pub unsafe fn $variant_mut(&mut self) -> &mut $ftype {
+                &mut *(self as *mut _ as *mut $ftype)
+            }
+        )+}
+    );
+    (union $name:ident {
+        [$stype32:ty; $ssize32:expr] [$stype64:ty; $ssize64:expr],
+        $($variant:ident $variant_mut:ident: $ftype:ty,)+
+    }) => (
+        #[repr(C)] #[cfg(target_arch = "x86")]
+        pub struct $name([$stype32; $ssize32]);
+        #[repr(C)] #[cfg(target_arch = "x86_64")]
+        pub struct $name([$stype64; $ssize64]);
         impl Copy for $name {}
         impl Clone for $name {
             #[inline]

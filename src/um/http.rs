@@ -8,11 +8,11 @@
 use shared::guiddef::GUID;
 use shared::minwindef::{DWORD, PUCHAR, UCHAR, ULONG, USHORT};
 use shared::sspi::SECURITY_STATUS;
+use shared::ws2def::{PSOCKADDR, SOCKADDR_STORAGE};
 use um::winnt::{
     ANYSIZE_ARRAY, BOOLEAN, HANDLE, PCHAR, PCSTR, PCWSTR, PSECURITY_DESCRIPTOR, PVOID, PWCHAR,
     PWSTR, ULARGE_INTEGER, ULONGLONG,
 };
-use um::winsock2::{PSOCKADDR, SOCKADDR_STORAGE};
 pub const HTTP_INITIALIZE_SERVER: ULONG = 0x00000001;
 pub const HTTP_INITIALIZE_CONFIG: ULONG = 0x00000002;
 pub const HTTP_DEMAND_CBT: ULONG = 0x00000004;
@@ -493,19 +493,17 @@ STRUCT!{struct HTTP_DATA_CHUNK_FromFragmentCacheEx {
     ByteRange: HTTP_BYTE_RANGE,
     pFragmentName: PCWSTR,
 }}
+UNION2!{union HTTP_DATA_CHUNK_u {
+    [u64; 3],
+    FromMemory FromMemory_mut: HTTP_DATA_CHUNK_FromMemory,
+    FromFileHandle FromFileHandle_mut: HTTP_DATA_CHUNK_FromFileHandle,
+    FromFragmentCache FromFragmentCache_mut: HTTP_DATA_CHUNK_FromFragmentCache,
+    FromFragmentCacheEx FromFragmentCacheEx_mut: HTTP_DATA_CHUNK_FromFragmentCacheEx,
+}}
 STRUCT!{struct HTTP_DATA_CHUNK {
     DataChunkType: HTTP_DATA_CHUNK_TYPE,
-    FromFileHandle: HTTP_DATA_CHUNK_FromFileHandle,
+    u: HTTP_DATA_CHUNK_u,
 }}
-UNION!(HTTP_DATA_CHUNK, FromFileHandle, FromMemory, FromMemory_mut, HTTP_DATA_CHUNK_FromMemory);
-UNION!(
-    HTTP_DATA_CHUNK, FromFileHandle, FromFragmentCache, FromFragmentCache_mut,
-    HTTP_DATA_CHUNK_FromFragmentCache
-);
-UNION!(
-    HTTP_DATA_CHUNK, FromFileHandle, FromFragmentCacheEx, FromFragmentCacheEx_mut,
-    HTTP_DATA_CHUNK_FromFragmentCacheEx
-);
 pub type PHTTP_DATA_CHUNK = *mut HTTP_DATA_CHUNK;
 STRUCT!{struct HTTP_REQUEST_HEADERS {
     UnknownHeaderCount: USHORT,

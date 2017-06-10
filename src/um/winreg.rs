@@ -5,8 +5,11 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use shared::basetsd::DWORD_PTR;
-use shared::minwindef::{DWORD, HKEY};
-use um::winnt::{ACCESS_MASK, LPSTR, LPWSTR};
+use shared::minwindef::{
+    BOOL, BYTE, DWORD, HKEY, LPBYTE, LPCVOID, LPDWORD, PBOOL, PFILETIME, PHKEY, ULONG
+};
+use um::minwinbase::LPSECURITY_ATTRIBUTES;
+use um::winnt::{ACCESS_MASK, HANDLE, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PVOID};
 pub type REGSAM = ACCESS_MASK;
 STRUCT!{struct VALENTA {
     ve_valuename: LPSTR,
@@ -45,3 +48,424 @@ pub const RRF_RT_QWORD: DWORD = RRF_RT_REG_BINARY | RRF_RT_REG_QWORD;
 pub const RRF_RT_ANY: DWORD = 0x0000ffff;
 pub const RRF_NOEXPAND: DWORD = 0x10000000;
 pub const RRF_ZEROONFAILURE: DWORD = 0x20000000;
+extern "system" {
+    pub fn RegCloseKey(
+        hKey: HKEY
+    ) -> LONG;
+    pub fn RegOverridePredefKey(
+        hKey: HKEY,
+        hNewHKey: HKEY
+    ) -> LONG;
+    pub fn RegOpenUserClassesRoot(
+        hToken: HANDLE,
+        dwOptions: DWORD,
+        samDesired: REGSAM,
+        phkResult: PHKEY,
+    ) -> LONG;
+    pub fn RegOpenCurrentUser(
+        samDesired: REGSAM,
+        phkResult: PHKEY
+    ) -> LONG;
+    pub fn RegDisablePredefinedCache() -> LONG;
+    pub fn RegDisablePredefinedCacheEx() -> LONG;
+    pub fn RegConnectRegistryA(
+        lpMachineName: LPCSTR,
+        hKey: HKEY,
+        phkResult: PHKEY
+    ) -> LONG;
+    pub fn RegConnectRegistryW(
+        lpMachineName: LPCWSTR,
+        hKey: HKEY,
+        phkResult: PHKEY
+    ) -> LONG;
+    pub fn RegConnectRegistryExA(
+        lpMachineName: LPCSTR,
+        hKey: HKEY,
+        flags: ULONG,
+        phkResult: PHKEY
+    ) -> LONG;
+    pub fn RegConnectRegistryExW(
+        lpMachineName: LPCWSTR,
+        hKey: HKEY,
+        flags: ULONG,
+        phkResult: PHKEY
+    ) -> LONG;
+    pub fn RegCreateKeyA(
+        hKey: HKEY,
+        lpSubKey: LPCSTR,
+        phkResult: PHKEY
+    );
+    pub fn RegCreateKeyW(
+        hKey: HKEY,
+        lpSubKey: LPCWSTR,
+        phkResult: PHKEY
+    );
+    pub fn RegCreateKeyExA(
+        hKey: HKEY,
+        lpSubKey: LPCSTR,
+        Reserved: DWORD,
+        lpClass: LPSTR,
+        dwOptions: DWORD,
+        samDesired: REGSAM,
+        lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+        phkResult: PHKEY,
+        lpdwDisposition: LPDWORD,
+    ) -> LONG;
+    pub fn RegCreateKeyExW(
+        hKey: HKEY,
+        lpSubKey: LPCWSTR,
+        Reserved: DWORD,
+        lpClass: LPWSTR,
+        dwOptions: DWORD,
+        samDesired: REGSAM,
+        lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+        phkResult: PHKEY,
+        lpdwDisposition: LPDWORD,
+    ) -> LONG;
+    pub fn RegCreateKeyTransactedA(
+        hKey: HKEY,
+        lpSubKey: LPCSTR,
+        Reserved: DWORD,
+        lpClass: LPSTR,
+        dwOptions: DWORD,
+        samDesired: REGSAM,
+        lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+        phkResult: PHKEY,
+        lpdwDisposition: LPDWORD,
+        hTransaction: HANDLE,
+        pExtendedParemeter: PVOID,
+    ) -> LONG;
+    pub fn RegCreateKeyTransactedW(
+        hKey: HKEY,
+        lpSubKey: LPCWSTR,
+        Reserved: DWORD,
+        lpClass: LPWSTR,
+        dwOptions: DWORD,
+        samDesired: REGSAM,
+        lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+        phkResult: PHKEY,
+        lpdwDisposition: LPDWORD,
+        hTransaction: HANDLE,
+        pExtendedParemeter: PVOID,
+    ) -> LONG;
+    pub fn RegDeleteKeyA(
+        hKey: HKEY,
+        lpSubKey: LPCSTR
+    ) -> LONG;
+    pub fn RegDeleteKeyW(
+        hKey: HKEY,
+        lpSubKey: LPCWSTR
+    ) -> LONG;
+    pub fn RegDeleteKeyExA(
+        hKey: HKEY,
+        lpSubKey: LPCSTR,
+        samDesired: REGSAM,
+        Reserved: DWORD,
+    ) -> LONG;
+    pub fn RegDeleteKeyExW(
+        hKey: HKEY,
+        lpSubKey: LPCWSTR,
+        samDesired: REGSAM,
+        Reserved: DWORD,
+    ) -> LONG;
+    pub fn RegDeleteKeyTransactedA(
+        hKey: HKEY,
+        lpSubKey: LPCSTR,
+        samDesired: REGSAM,
+        Reserved: DWORD,
+        hTransaction: HANDLE,
+        pExtendedParemeter: PVOID,
+    ) -> LONG;
+    pub fn RegDeleteKeyTransactedW(
+        hKey: HKEY,
+        lpSubKey: LPCWSTR,
+        samDesired: REGSAM,
+        Reserved: DWORD,
+        hTransaction: HANDLE,
+        pExtendedParemeter: PVOID,
+    ) -> LONG;
+    pub fn RegDisableReflectionKey(
+        hBase: HKEY
+    ) -> LONG;
+    pub fn RegEnableReflectionKey(
+        hBase: HKEY
+    ) -> LONG;
+    pub fn RegQueryReflectionKey(
+        hBase: HKEY,
+        bIsReflectionDisabled: PBOOL
+    ) -> LONG;
+    pub fn RegDeleteValueA(
+        hKey: HKEY,
+        lpValueName: LPCSTR
+    ) -> LONG;
+    pub fn RegDeleteValueW(
+        hKey: HKEY,
+        lpValueName: LPCWSTR
+    ) -> LONG;
+    // pub fn RegEnumKeyA();
+    // pub fn RegEnumKeyW();
+    pub fn RegEnumKeyExA(
+        hKey: HKEY,
+        dwIndex: DWORD,
+        lpName: LPSTR,
+        lpcName: LPDWORD,
+        lpReserved: LPDWORD,
+        lpClass: LPSTR,
+        lpcClass: LPDWORD,
+        lpftLastWriteTime: PFILETIME,
+    ) -> LONG;
+    pub fn RegEnumKeyExW(
+        hKey: HKEY,
+        dwIndex: DWORD,
+        lpName: LPWSTR,
+        lpcName: LPDWORD,
+        lpReserved: LPDWORD,
+        lpClass: LPWSTR,
+        lpcClass: LPDWORD,
+        lpftLastWriteTime: PFILETIME,
+    ) -> LONG;
+    pub fn RegEnumValueA(
+        hKey: HKEY,
+        dwIndex: DWORD,
+        lpValueName: LPSTR,
+        lpcchValueName: LPDWORD,
+        lpReserved: LPDWORD,
+        lpType: LPDWORD,
+        lpData: LPBYTE,
+        lpcbData: LPDWORD,
+    ) -> LONG;
+    pub fn RegEnumValueW(
+        hKey: HKEY,
+        dwIndex: DWORD,
+        lpValueName: LPWSTR,
+        lpcchValueName: LPDWORD,
+        lpReserved: LPDWORD,
+        lpType: LPDWORD,
+        lpData: LPBYTE,
+        lpcbData: LPDWORD,
+    ) -> LONG;
+    pub fn RegFlushKey(
+        hKey: HKEY
+    ) -> LONG;
+    // pub fn RegGetKeySecurity();
+    // pub fn RegLoadKeyA();
+    // pub fn RegLoadKeyW();
+    pub fn RegNotifyChangeKeyValue(
+        hKey: HKEY,
+        bWatchSubtree: BOOL,
+        dwNotifyFilter: DWORD,
+        hEvent: HANDLE,
+        fAsynchronous: BOOL,
+    ) -> LONG;
+    // pub fn RegOpenKeyA();
+    // pub fn RegOpenKeyW();
+    pub fn RegOpenKeyExA(
+        hKey: HKEY,
+        lpSubKey: LPCSTR,
+        ulOptions: DWORD,
+        samDesired: REGSAM,
+        phkResult: PHKEY,
+    ) -> LONG;
+    pub fn RegOpenKeyExW(
+        hKey: HKEY,
+        lpSubKey: LPCWSTR,
+        ulOptions: DWORD,
+        samDesired: REGSAM,
+        phkResult: PHKEY,
+    ) -> LONG;
+    pub fn RegOpenKeyTransactedA(
+        hKey: HKEY,
+        lpSubKey: LPCSTR,
+        ulOptions: DWORD,
+        samDesired: REGSAM,
+        phkResult: PHKEY,
+        hTransaction: HANDLE,
+        pExtendedParemeter: PVOID,
+    ) -> LONG;
+    pub fn RegOpenKeyTransactedW(
+        hKey: HKEY,
+        lpSubKey: LPCWSTR,
+        ulOptions: DWORD,
+        samDesired: REGSAM,
+        phkResult: PHKEY,
+        hTransaction: HANDLE,
+        pExtendedParemeter: PVOID,
+    ) -> LONG;
+    pub fn RegQueryInfoKeyA(
+        hKey: HKEY,
+        lpClass: LPSTR,
+        lpcClass: LPDWORD,
+        lpReserved: LPDWORD,
+        lpcSubKeys: LPDWORD,
+        lpcMaxSubKeyLen: LPDWORD,
+        lpcMaxClassLen: LPDWORD,
+        lpcValues: LPDWORD,
+        lpcMaxValueNameLen: LPDWORD,
+        lpcMaxValueLen: LPDWORD,
+        lpcbSecurityDescriptor: LPDWORD,
+        lpftLastWriteTime: PFILETIME,
+    ) -> LONG;
+    pub fn RegQueryInfoKeyW(
+        hKey: HKEY,
+        lpClass: LPWSTR,
+        lpcClass: LPDWORD,
+        lpReserved: LPDWORD,
+        lpcSubKeys: LPDWORD,
+        lpcMaxSubKeyLen: LPDWORD,
+        lpcMaxClassLen: LPDWORD,
+        lpcValues: LPDWORD,
+        lpcMaxValueNameLen: LPDWORD,
+        lpcMaxValueLen: LPDWORD,
+        lpcbSecurityDescriptor: LPDWORD,
+        lpftLastWriteTime: PFILETIME,
+    ) -> LONG;
+    // pub fn RegQueryValueA();
+    // pub fn RegQueryValueW();
+    pub fn RegQueryMultipleValuesA(
+        hKey: HKEY,
+        val_list: PVALENTA,
+        num_vals: DWORD,
+        lpValueBuf: LPSTR,
+        ldwTotsize: LPDWORD,
+    ) -> LONG;
+    pub fn RegQueryMultipleValuesW(
+        hKey: HKEY,
+        val_list: PVALENTW,
+        num_vals: DWORD,
+        lpValueBuf: LPWSTR,
+        ldwTotsize: LPDWORD,
+    ) -> LONG;
+    pub fn RegQueryValueExA(
+        hKey: HKEY,
+        lpValueName: LPCSTR,
+        lpReserved: LPDWORD,
+        lpType: LPDWORD,
+        lpData: LPBYTE,
+        lpcbData: LPDWORD,
+    ) -> LONG;
+    pub fn RegQueryValueExW(
+        hKey: HKEY,
+        lpValueName: LPCWSTR,
+        lpReserved: LPDWORD,
+        lpType: LPDWORD,
+        lpData: LPBYTE,
+        lpcbData: LPDWORD,
+    ) -> LONG;
+    // pub fn RegReplaceKeyA();
+    // pub fn RegReplaceKeyW();
+    // pub fn RegRestoreKeyA();
+    // pub fn RegRestoreKeyW();
+    // pub fn RegRenameKey();
+    // pub fn RegSaveKeyA();
+    // pub fn RegSaveKeyW();
+    // pub fn RegSetKeySecurity();
+    // pub fn RegSetValueA();
+    // pub fn RegSetValueW();
+    pub fn RegSetValueExA(
+        hKey: HKEY,
+        lpValueName: LPCSTR,
+        Reserved: DWORD,
+        dwType: DWORD,
+        lpData: *const BYTE,
+        cbData: DWORD,
+    ) -> LONG;
+    pub fn RegSetValueExW(
+        hKey: HKEY,
+        lpValueName: LPCWSTR,
+        Reserved: DWORD,
+        dwType: DWORD,
+        lpData: *const BYTE,
+        cbData: DWORD,
+    ) -> LONG;
+    // pub fn RegUnLoadKeyA();
+    // pub fn RegUnLoadKeyW();
+    pub fn RegDeleteKeyValueA(
+        hKey: HKEY,
+        lpSubKey: LPCSTR,
+        lpValueName: LPCSTR
+    ) -> LONG;
+    pub fn RegDeleteKeyValueW(
+        hKey: HKEY,
+        lpSubKey: LPCWSTR,
+        lpValueName: LPCWSTR
+    ) -> LONG;
+    pub fn RegSetKeyValueA(
+        hKey: HKEY,
+        lpSubKey: LPCSTR,
+        lpValueName: LPCSTR,
+        dwType: DWORD,
+        lpData: LPCVOID,
+        cbData: DWORD,
+    ) -> LONG;
+    pub fn RegSetKeyValueW(
+        hKey: HKEY,
+        lpSubKey: LPCWSTR,
+        lpValueName: LPCWSTR,
+        dwType: DWORD,
+        lpData: LPCVOID,
+        cbData: DWORD,
+    ) -> LONG;
+    pub fn RegDeleteTreeA(
+        hKey: HKEY,
+        lpSubKey: LPCSTR
+    ) -> LONG;
+    pub fn RegDeleteTreeW(
+        hKey: HKEY,
+        lpSubKey: LPCWSTR
+    ) -> LONG;
+    pub fn RegCopyTreeA(
+        hKeySrc: HKEY,
+        lpSubKey: LPCSTR,
+        hKeyDest: HKEY
+    ) -> LONG;
+    pub fn RegGetValueA(
+        hkey: HKEY,
+        lpSubKey: LPCSTR,
+        lpValue: LPCSTR,
+        dwFlags: DWORD,
+        pdwType: LPDWORD,
+        pvData: PVOID,
+        pcbData: LPDWORD,
+    ) -> LONG;
+    pub fn RegGetValueW(
+        hkey: HKEY,
+        lpSubKey: LPCWSTR,
+        lpValue: LPCWSTR,
+        dwFlags: DWORD,
+        pdwType: LPDWORD,
+        pvData: PVOID,
+        pcbData: LPDWORD,
+    ) -> LONG;
+    pub fn RegCopyTreeW(
+        hKeySrc: HKEY,
+        lpSubKey: LPCWSTR,
+        hKeyDest: HKEY
+    ) -> LONG;
+    // pub fn RegLoadMUIStringA();
+    pub fn RegLoadMUIStringW(
+        hKey: HKEY,
+        pszValue: LPCWSTR,
+        pszOutBuf: LPWSTR,
+        cbOutBuf: DWORD,
+        pcbData: LPDWORD,
+        Flags: DWORD,
+        pszDirectory: LPCWSTR,
+    ) -> LONG;
+    // pub fn RegLoadAppKeyA();
+    // pub fn RegLoadAppKeyW();
+    // pub fn InitiateSystemShutdownA();
+    // pub fn InitiateSystemShutdownW();
+    pub fn AbortSystemShutdownA(
+        lpMachineName: LPCSTR
+    ) -> BOOL;
+    pub fn AbortSystemShutdownW(
+        lpMachineName: LPWSTR
+    ) -> BOOL;
+    // pub fn InitiateSystemShutdownExA();
+    // pub fn InitiateSystemShutdownExW();
+    // pub fn InitiateShutdownA();
+    // pub fn InitiateShutdownW();
+    // pub fn CheckForHiberboot();
+    // pub fn RegSaveKeyExA();
+    // pub fn RegSaveKeyExW();
+}

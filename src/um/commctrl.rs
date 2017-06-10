@@ -98,7 +98,7 @@ STRUCT!{struct NMTOOLTIPSCREATED {
 }}
 pub type LPNMTOOLTIPSCREATED = *mut NMTOOLTIPSCREATED;
 STRUCT!{struct NMMOUSE {
-    hdr : NMHDR,
+    hdr: NMHDR,
     dwItemSpec: DWORD_PTR,
     dwItemData: DWORD_PTR,
     pt: POINT,
@@ -2496,19 +2496,27 @@ pub type LPTV_INSERTSTRUCTA = LPTVINSERTSTRUCTA;
 pub type LPTV_INSERTSTRUCTW = LPTVINSERTSTRUCTW;
 pub type TV_INSERTSTRUCTA = TVINSERTSTRUCTA;
 pub type TV_INSERTSTRUCTW = TVINSERTSTRUCTW;
+UNION2!{union TVINSERTSTRUCTA_u {
+    [u32; 15] [u64; 10],
+    itemex itemex_mut: TVITEMEXA,
+    item item_mut: TV_ITEMA,
+}}
 STRUCT!{struct TVINSERTSTRUCTA {
     hParent: HTREEITEM,
     hInsertAfter: HTREEITEM,
-    itemex: TVITEMEXA,
+    u: TVINSERTSTRUCTA_u,
 }}
-UNION!(TVINSERTSTRUCTA, itemex, item, item_mut, TV_ITEMA);
 pub type LPTVINSERTSTRUCTA = *mut TVINSERTSTRUCTA;
+UNION2!{union TVINSERTSTRUCTW_u {
+    [u32; 15] [u64; 10],
+    itemex itemex_mut: TVITEMEXW,
+    item item_mut: TV_ITEMW,
+}}
 STRUCT!{struct TVINSERTSTRUCTW {
     hParent: HTREEITEM,
     hInsertAfter: HTREEITEM,
-    itemex: TVITEMEXW,
+    u: TVINSERTSTRUCTW_u,
 }}
-UNION!(TVINSERTSTRUCTW, itemex, item, item_mut, TV_ITEMW);
 pub type LPTVINSERTSTRUCTW = *mut TVINSERTSTRUCTW;
 pub const TVM_INSERTITEMA: UINT = TV_FIRST + 0;
 pub const TVM_INSERTITEMW: UINT = TV_FIRST + 50;
@@ -3503,6 +3511,16 @@ ENUM!{enum TASKDIALOG_COMMON_BUTTON_FLAGS {
     TDCBF_RETRY_BUTTON = 0x0010,
     TDCBF_CLOSE_BUTTON = 0x0020,
 }}
+UNION2!{union TASKDIALOGCONFIG_u1 {
+    [u8; 8],
+    hMainIcon hMainIcon_mut: HICON,
+    pszMainIcon pszMainIcon_mut: PCWSTR,
+}}
+UNION2!{union TASKDIALOGCONFIG_u2 {
+    [u8; 8],
+    hFooterIcon hFooterIcon_mut: HICON,
+    pszFooterIcon pszFooterIcon_mut: PCWSTR,
+}}
 STRUCT!{struct TASKDIALOGCONFIG {
     cbSize: UINT,
     hwndParent: HWND,
@@ -3510,7 +3528,7 @@ STRUCT!{struct TASKDIALOGCONFIG {
     dwFlags: TASKDIALOG_FLAGS,
     dwCommonButtons: TASKDIALOG_COMMON_BUTTON_FLAGS,
     pszWindowTitle: PCWSTR,
-    hMainIcon: HICON,
+    u1: TASKDIALOGCONFIG_u1,
     pszMainInstruction: PCWSTR,
     pszContent: PCWSTR,
     cButtons: UINT,
@@ -3523,14 +3541,12 @@ STRUCT!{struct TASKDIALOGCONFIG {
     pszExpandedInformation: PCWSTR,
     pszExpandedControlText: PCWSTR,
     pszCollapsedControlText: PCWSTR,
-    hFooterIcon: HICON,
+    u2: TASKDIALOGCONFIG_u2,
     pszFooter: PCWSTR,
     pfCallback: PFTASKDIALOGCALLBACK,
     lpCallbackData: LONG_PTR,
     cxWidth: UINT,
 }}
-UNION!(TASKDIALOGCONFIG, hMainIcon, pszMainIcon, pszMainIcon_mut, PCWSTR);
-UNION!(TASKDIALOGCONFIG, hFooterIcon, pszFooterIcon, pszFooterIcon_mut, PCWSTR);
 pub const DA_LAST: c_int = 0x7FFFFFFF;
 pub const DA_ERR: c_int = -1;
 FN!{stdcall PFNDAENUMCALLBACK(

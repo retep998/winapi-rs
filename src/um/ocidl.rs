@@ -4,9 +4,7 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
 // TODO:It is a minimal implementation.
-
 use shared::guiddef::CLSID;
 use shared::minwindef::{DWORD, ULONG};
 use shared::ntdef::HRESULT;
@@ -14,7 +12,6 @@ use shared::wtypes::{CLIPFORMAT, VARTYPE};
 use shared::wtypesbase::{LPCOLESTR, LPOLESTR};
 use um::oaidl::{IErrorLog, VARIANT};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-
 ENUM!{enum PROPBAG2_TYPE {
     PROPBAG2_TYPE_UNDEFINED = 0,
     PROPBAG2_TYPE_DATA = 1,
@@ -24,7 +21,7 @@ ENUM!{enum PROPBAG2_TYPE {
     PROPBAG2_TYPE_STORAGE = 5,
     PROPBAG2_TYPE_MONIKER = 6,
 }}
-STRUCT!{struct  PROPBAG2 {
+STRUCT!{struct PROPBAG2 {
     dwType: DWORD,
     vt: VARTYPE,
     cfType: CLIPFORMAT,

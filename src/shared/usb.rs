@@ -13,9 +13,7 @@ ENUM!{enum USBD_PIPE_TYPE {
     UsbdPipeTypeBulk,
     UsbdPipeTypeInterrupt,
 }}
-
 pub type USBD_STATUS = LONG;
-
 STRUCT!{struct USBD_ISO_PACKET_DESCRIPTOR {
     Offset: ULONG,
     Length: ULONG,

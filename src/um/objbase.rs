@@ -14,7 +14,6 @@ ENUM!{enum COINIT {
     COINIT_DISABLE_OLE1DDE = 0x4,
     COINIT_SPEED_OVER_MEMORY = 0x8,
 }}
-
     // pub fn CoBuildVersion();
 extern "system" {
     pub fn CoInitialize(
@@ -23,19 +22,14 @@ extern "system" {
 }
     // pub fn CoRegisterMallocSpy();
     // pub fn CoRevokeMallocSpy();
-
     // pub fn CoRegisterInitializeSpy();
     // pub fn CoRevokeInitializeSpy();
-
     // pub fn CoGetSystemSecurityPermissions();
-
     // pub fn CoLoadLibrary();
     // pub fn CoFreeLibrary();
     // pub fn CoFreeAllLibraries();
-
     // pub fn CoGetInstanceFromFile();
     // pub fn CoGetInstanceFromIStorage();
-
     // pub fn CoAllowSetForegroundWindow();
     // pub fn DcomChannelSetHResult();
     // pub fn CoIsOle1Class();
@@ -48,14 +42,11 @@ extern "system" {
     // pub fn CoTreatAsClass();
     // pub fn CreateDataAdviseHolder();
     // pub fn CreateDataCache();
-
     // pub fn StgOpenAsyncDocfileOnIFillLockBytes();
     // pub fn StgGetIFillLockBytesOnILockBytes();
     // pub fn StgGetIFillLockBytesOnFile();
     // pub fn StgOpenLayoutDocfile();
-
     // pub fn CoInstall();
-
     // pub fn BindMoniker();
     // pub fn CoGetObject();
     // pub fn MkParseDisplayName();
@@ -71,5 +62,4 @@ extern "system" {
     // pub fn CreatePointerMoniker();
     // pub fn CreateObjrefMoniker();
     // pub fn GetRunningObjectTable();
-
     // pub fn CreateStdProgressIndicator();

@@ -12,7 +12,6 @@ STRUCT!{struct DWM_BLURBEHIND {
     hRgnBlur: HRGN,
     fTransitionOnMaximized: BOOL,
 }}
-
 pub const DWMWA_NCRENDERING_ENABLED: DWORD = 1;
 pub const DWMWA_NCRENDERING_POLICY: DWORD = 2;
 pub const DWMWA_TRANSITIONS_FORCEDISABLED: DWORD = 2;
