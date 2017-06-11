@@ -5,19 +5,22 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Type definitions for the basic types.
-use core::{ mem, ptr };
-use ctypes::{ __int64, __uint64, c_char, c_double, c_int, c_long, c_schar, c_short, c_uchar, c_ulong, c_ushort, c_void, wchar_t };
-use shared::basetsd::{KAFFINITY, LONG_PTR, ULONG64};
+use core::{mem, ptr};
+use ctypes::{
+    __int64, __uint64, c_char, c_double, c_int, c_long, c_schar, c_short, c_uchar, c_ulong,
+    c_ushort, c_void, wchar_t
+};
+use shared::basetsd::{KAFFINITY, LONG_PTR, ULONG_PTR, ULONG64};
 use shared::guiddef::GUID;
-#[cfg(target_arch = "x86")]
-IFDEF!{
-pub const MAX_NATURAL_ALIGNMENT: usize = 4;
-pub const MEMORY_ALLOCATION_ALIGNMENT: usize = 8;
-}
-#[cfg(not(target_arch = "x86"))]
+#[cfg(target_arch = "x86_64")]
 IFDEF!{
 pub const MAX_NATURAL_ALIGNMENT: usize = 8;
 pub const MEMORY_ALLOCATION_ALIGNMENT: usize = 16;
+}
+#[cfg(not(target_arch = "x86_64"))]
+IFDEF!{
+pub const MAX_NATURAL_ALIGNMENT: usize = 4;
+pub const MEMORY_ALLOCATION_ALIGNMENT: usize = 8;
 }
 #[cfg(any(target_arch = "x86_64", target_arch = "x86"))]
 pub const SYSTEM_CACHE_ALIGNMENT_SIZE: usize = 64;
@@ -85,7 +88,6 @@ pub type PSTR = *mut CHAR;
 pub type PZPSTR = *mut PSTR;
 pub type PCZPSTR = *const PSTR;
 pub type LPCSTR = *const CHAR;
-pub type LPCTSTR = LPCSTR;
 pub type PCSTR = *const CHAR;
 pub type PZPCSTR = *mut PCSTR;
 pub type PCZPCSTR = *const PCSTR;
@@ -181,7 +183,9 @@ pub const ERROR_SEVERITY_SUCCESS: ULONG = 0x00000000;
 pub const ERROR_SEVERITY_INFORMATIONAL: ULONG = 0x40000000;
 pub const ERROR_SEVERITY_WARNING: ULONG = 0x80000000;
 pub const ERROR_SEVERITY_ERROR: ULONG = 0xC0000000;
-// Weird TIME definitions
+pub type SECURITY_STATUS = c_long;
+pub type TIME = LARGE_INTEGER;
+pub type PTIME = *mut TIME;
 STRUCT!{struct FLOAT128 {
     LowPart: __int64,
     HighPart: __int64,
@@ -193,9 +197,25 @@ pub const MAXLONGLONG: LONGLONG = 0x7fffffffffffffff;
 pub type PLONGLONG = *mut LONGLONG;
 pub type PULONGLONG = *mut ULONGLONG;
 pub type USN = LONGLONG;
-pub type LARGE_INTEGER = LONGLONG;
+UNION2!{union LARGE_INTEGER {
+    [LONGLONG; 1],
+    s s_mut: LARGE_INTEGER_s,
+    QuadPart QuadPart_mut: LONGLONG,
+}}
+STRUCT!{struct LARGE_INTEGER_s {
+    LowPart: ULONG,
+    HighPart: LONG,
+}}
 pub type PLARGE_INTEGER = *mut LARGE_INTEGER;
-pub type ULARGE_INTEGER = ULONGLONG;
+UNION2!{union ULARGE_INTEGER {
+    [ULONGLONG; 1],
+    s s_mut: ULARGE_INTEGER_s,
+    QuadPart QuadPart_mut: ULONGLONG,
+}}
+STRUCT!{struct ULARGE_INTEGER_s {
+    LowPart: ULONG,
+    HighPart: ULONG,
+}}
 pub type PULARGE_INTEGER = *mut ULARGE_INTEGER;
 pub type RTL_REFERENCE_COUNT = LONG_PTR;
 pub type PRTL_REFERENCE_COUNT = *mut RTL_REFERENCE_COUNT;
@@ -224,6 +244,7 @@ ENUM!{enum WAIT_TYPE {
 }}
 pub type PSZ = *mut CHAR;
 pub type PCSZ = *const c_char;
+pub type RTL_STRING_LENGTH_TYPE = USHORT;
 STRUCT!{struct STRING {
     Length: USHORT,
     MaximumLength: USHORT,
@@ -266,8 +287,27 @@ STRUCT!{struct SINGLE_LIST_ENTRY {
     Next: *mut SINGLE_LIST_ENTRY,
 }}
 pub type PSINGLE_LIST_ENTRY = *mut SINGLE_LIST_ENTRY;
-// struct RTL_BALANCED_NODE
-// pub type PRTL_BALANCED_NODE = *mut RTL_BALANCED_NODE;
+STRUCT!{struct RTL_BALANCED_NODE {
+    u: RTL_BALANCED_NODE_u,
+    ParentValue: ULONG_PTR,
+}}
+UNION2!{union RTL_BALANCED_NODE_u {
+    [ULONG_PTR; 2],
+    Children Children_mut: [*mut RTL_BALANCED_NODE; 2],
+    s s_mut: RTL_BALANCED_NODE_s,
+}}
+STRUCT!{struct RTL_BALANCED_NODE_s {
+    Left: *mut RTL_BALANCED_NODE,
+    Right: *mut RTL_BALANCED_NODE,
+}}
+pub const RTL_BALANCED_NODE_RESERVED_PARENT_MASK: ULONG_PTR = 3;
+pub type PRTL_BALANCED_NODE = *mut RTL_BALANCED_NODE;
+#[inline]
+pub unsafe fn RTL_BALANCED_NODE_GET_PARENT_POINTER(Node: PRTL_BALANCED_NODE)
+    -> PRTL_BALANCED_NODE
+{
+    ((*Node).ParentValue & !RTL_BALANCED_NODE_RESERVED_PARENT_MASK) as *mut RTL_BALANCED_NODE
+}
 STRUCT!{struct LIST_ENTRY32 {
     Flink: ULONG,
     Blink: ULONG,
@@ -292,6 +332,11 @@ pub unsafe fn ListEntry64To32(l64: PLIST_ENTRY64, l32: PLIST_ENTRY32) {
     (*l32).Flink = (*l64).Flink as ULONG;
     (*l32).Blink = (*l64).Blink as ULONG;
 }
+STRUCT!{struct WNF_STATE_NAME {
+    Data: [ULONG; 2],
+}}
+pub type PWNF_STATE_NAME = *mut WNF_STATE_NAME;
+pub type PCWNF_STATE_NAME = *const WNF_STATE_NAME;
 STRUCT!{struct STRING32 {
     Length: USHORT,
     MaximumLength: USHORT,
@@ -354,7 +399,13 @@ STRUCT!{struct OBJECT_ATTRIBUTES {
 pub type POBJECT_ATTRIBUTES = *mut OBJECT_ATTRIBUTES;
 pub type PCOBJECT_ATTRIBUTES = *const OBJECT_ATTRIBUTES;
 #[inline]
-pub unsafe fn InitializeObjectAttributes(p: POBJECT_ATTRIBUTES, n: PUNICODE_STRING, a: ULONG, r: HANDLE, s: PVOID) {
+pub unsafe fn InitializeObjectAttributes(
+    p: POBJECT_ATTRIBUTES,
+    n: PUNICODE_STRING,
+    a: ULONG,
+    r: HANDLE,
+    s: PVOID,
+) {
     (*p).Length = mem::size_of::<OBJECT_ATTRIBUTES>() as ULONG;
     (*p).RootDirectory = r;
     (*p).Attributes = a;
@@ -364,8 +415,8 @@ pub unsafe fn InitializeObjectAttributes(p: POBJECT_ATTRIBUTES, n: PUNICODE_STRI
 }
 pub const FALSE: BOOLEAN = 0;
 pub const TRUE: BOOLEAN = 1;
-// NULL
-// NULL64
+pub const NULL: PVOID = 0 as PVOID;
+pub const NULL64: PVOID64 = 0;
 STRUCT!{struct OBJECTID {
     Lineage: GUID,
     Uniquifier: ULONG,
@@ -379,7 +430,7 @@ pub const MAXLONG: LONG = 0x7fffffff;
 pub const MAXUCHAR: UCHAR = 0xff;
 pub const MAXUSHORT: USHORT = 0xffff;
 pub const MAXULONG: ULONG = 0xffffffff;
-// PEXCEPTION_ROUTINE -- Defined in um::winnt because it needs CONTEXT type.
+// PEXCEPTION_ROUTINE: Can't define here, because it needs EXCEPTION_RECORD and CONTEXT.
 pub type KIRQL = UCHAR;
 pub type PKIRQL = *mut KIRQL;
 ENUM!{enum NT_PRODUCT_TYPE {
@@ -982,7 +1033,9 @@ macro_rules! MAKELCID {
     ($lgid:expr, $srtid:expr) => ((($srtid as ULONG) << 16) | ($lgid as ULONG))
 }
 #[inline]
-pub fn MAKELCID(lgid: LANGID, srtid: USHORT) -> LCID { ((srtid as ULONG) << 16) | (lgid as ULONG) }
+pub fn MAKELCID(lgid: LANGID, srtid: USHORT) -> LCID {
+    ((srtid as ULONG) << 16) | (lgid as ULONG)
+}
 #[inline]
 pub fn MAKESORTLCID(lgid: LANGID, srtid: USHORT, ver: USHORT) -> LCID {
     MAKELCID(lgid, srtid) | ((ver as ULONG) << 20)
