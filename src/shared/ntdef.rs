@@ -10,7 +10,7 @@ use ctypes::{
     __int64, __uint64, c_char, c_double, c_int, c_long, c_schar, c_short, c_uchar, c_ulong,
     c_ushort, c_void, wchar_t
 };
-use shared::basetsd::{KAFFINITY, LONG_PTR, ULONG_PTR, ULONG64};
+use shared::basetsd::{KAFFINITY, LONG_PTR, ULONG64, ULONG_PTR};
 use shared::guiddef::GUID;
 #[cfg(target_arch = "x86_64")]
 IFDEF!{
