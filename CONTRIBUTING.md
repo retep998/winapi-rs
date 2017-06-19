@@ -1,15 +1,23 @@
 # Guidelines
 
-* Never get definitions from MinGW headers or MSDN. Always stick to the Windows SDK headers, in particular the latest Windows 10 SDK.
-* Definitions which depend on whether `UNICODE` is defined should not be included. It is the user's responsibility to explicitly choose between `W` and `A` functions (and they should always choose `W`).
+* Never get definitions from MinGW headers or MSDN. Always stick to the Windows SDK headers, in
+  particular the latest Windows 10 SDK.
+* Definitions which depend on whether `UNICODE` is defined should not be included. It is the user's
+  responsibility to explicitly choose between `W` and `A` functions (and they should always choose
+  `W`).
+* For hexadecimal numbers, preserve the casing from the original headers (except for the uuid for
+  `RIDL!`).
 
 ## Newlines and indentation
 
 * The maximum line length for `winapi-rs` is 99, and is strictly enforced.
-* Avoid line breaks when possible, but if you cannot make it fit, add line breaks as late as possible.
+* Avoid line breaks when possible, but if you cannot make it fit, add line breaks as late as
+  possible.
 * When breaking on binary operators, put the operator at the beginning of the new line.
 * Do not use aligned indentation. Indentation should always be block indentation.
 * Always use spaces for indentation.
+* Blank lines are evil.
+* Files must end with a trailing newline.
 
 ## Imports
 
@@ -29,7 +37,8 @@ use um::d3dcommon::{
 
 ## Extern functions
 
-* The calling convention specified should be the one for 32bit. Specify `system` for stdcall and `C` for cdecl (and `fastcall` for those couple of fastcall functions out there).
+* The calling convention specified should be the one for 32bit. Specify `system` for stdcall and
+  `C` for cdecl (and `fastcall` for those couple of fastcall functions out there).
 * One parameter per line.
 
 ```Rust
@@ -53,11 +62,11 @@ FN!{stdcall DRAWSTATEPROC(
     lData: LPARAM,
     wData: WPARAM,
     cx: c_int,
-    cy: c_int
+    cy: c_int,
 ) -> BOOL}
 FN!{stdcall NAMEENUMPROCA(
     LPSTR,
-    LPARAM
+    LPARAM,
 ) -> BOOL}
 ```
 
@@ -102,7 +111,8 @@ pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
 
 ## Unions
 
-* `UNION!` is being deprecated in favor of `UNION2!` in order to more closely align with the new untagged union feature.
+* `UNION!` is being deprecated in favor of `UNION2!` in order to more closely align with the new
+  untagged union feature.
 
 ```C
 typedef union {
@@ -123,12 +133,50 @@ UNION2!{union USN_RECORD_UNION {
 pub type PUSN_RECORD_UNION = *mut USN_RECORD_UNION;
 ```
 
+* The first parameter to `UNION2!` is the storage for that union. It must have both the correct
+  size and alignment. You can use the following C++ code to print out the storage for any union
+  type that can be named. Defining `NONAMELESSUNION` will help with naming anonymous unions.
+
+```C++
+char const * type_for_alignment(uintptr_t align) {
+    switch (align) {
+    case 1: return "u8";
+    case 2: return "u16";
+    case 4: return "u32";
+    case 8: return "u64";
+    default: throw;
+    }
+}
+#define PRINT_UNION(x) cout << "[" << type_for_alignment(alignof(x)) << "; " << sizeof(x) / alignof(x) << "]" << endl;
+int main() {
+    PRINT_UNION(USN_RECORD_UNION);
+}
+```
+
+* Note that sometimes the storage of a union varies based on whether the target is 32bit or 64bit,
+  in which case `UNION2!` allows a second storage to be specified, the first for 32bit and the
+  second for 64bit.
+
+```Rust
+UNION2!{union D3D12_RESOURCE_BARRIER_u {
+    [u32; 4] [u64; 3],
+    Transition Transition_mut: D3D12_RESOURCE_TRANSITION_BARRIER,
+    Aliasing Aliasing_mut: D3D12_RESOURCE_ALIASING_BARRIER,
+    UAV UAV_mut: D3D12_RESOURCE_UAV_BARRIER,
+}}
+```
+
 ## Anonymous unions and structs
 
-* If the type `FOO` contains a single anonymous struct or union, give the anonymous struct or union a name of `FOO_s` or `FOO_u` respectively, and the field a name of `s` or `u` respectively.
-* If the type `FOO` contains multiple anonymous structs or unions, append a number, such as `s1: FOO_s1` `s2: FOO_s2` or `u1: FOO_u1` `u2: FOO_u2`.
+* If the type `FOO` contains a single anonymous struct or union, give the anonymous struct or union
+  a name of `FOO_s` or `FOO_u` respectively, and the field a name of `s` or `u` respectively.
+* If the type `FOO` contains multiple anonymous structs or unions, append a number, such as `s1:
+  FOO_s1` `s2: FOO_s2` or `u1: FOO_u1` `u2: FOO_u2`.
 
 ## COM interfaces
+
+* The uuid should always be lowercase hex.
+* If the COM interface does not have a uuid then use a uuid of all zeroes.
 
 ```Rust
 RIDL!{#[uuid(0x6d4865fe, 0x0ab8, 0x4d91, 0x8f, 0x62, 0x5d, 0xd6, 0xbe, 0x34, 0xa3, 0xe0)]
@@ -137,16 +185,16 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
         fragmentStart: *mut *const c_void,
         fileOffset: UINT64,
         fragmentSize: UINT64,
-        fragmentContext: *mut *mut c_void
+        fragmentContext: *mut *mut c_void,
     ) -> HRESULT,
     fn ReleaseFileFragment(
-        fragmentContext: *mut c_void
+        fragmentContext: *mut c_void,
     ) -> (),
     fn GetFileSize(
-        fileSize: *mut UINT64
+        fileSize: *mut UINT64,
     ) -> HRESULT,
     fn GetLastWriteTime(
-        lastWriteTime: *mut UINT64
+        lastWriteTime: *mut UINT64,
     ) -> HRESULT
 }}
 ```
@@ -156,11 +204,16 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
 * All definitions go into the source file that directly maps to the header the definition is from.
     * Stuff in `src/winrt` is special and has its own namespaced organization.
 * Definitions are defined in the same order as they are in the original header.
-* The `lib` folder is legacy from 0.2 and will eventually disappear once all definitions have been moved to their correct locations.
+* The `lib` folder is legacy from 0.2 and will eventually disappear once all definitions have been
+  moved to their correct locations.
 
 ## Dealing with duplicates
 
 * Sometimes two headers will define the same thing.
-    * If the duplicated thing is a simple typedef or function definition or constant, then duplicate the definition.
-    * If the duplicated thing is a struct or COM interface or union, then choose one header to be the canonical source of truth for that definition and publicly re-export the thing from the other header.
-* Sometimes a COM interface will have two methods with identical names. If the two methods are both named `Foo`, then name them `Foo1` and `Foo2`.
+    * If the duplicated thing is a simple typedef or function definition or constant, then
+      duplicate the definition.
+    * If the duplicated thing is a struct or COM interface or union, then choose one header to be
+      the canonical source of truth for that definition and publicly re-export the thing from the
+      other header.
+* Sometimes a COM interface will have two methods with identical names. If the two methods are both
+  named `Foo`, then name them `Foo1` and `Foo2`.

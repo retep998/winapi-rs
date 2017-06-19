@@ -12,6 +12,10 @@ license = "MIT/Apache-2.0"
 include = ["src/**/*", "Cargo.toml", "LICENSE-MIT", "LICENSE-APACHE", "build.rs", "README.md"]
 build = "build.rs"
 
+[package.metadata.docs.rs]
+features = ["everything"]
+default-target = "x86_64-pc-windows-gnu"
+
 [badges]
 travis-ci = { repository = "retep998/winapi-rs", branch = "master" }
 appveyor = { repository = "retep998/winapi-rs", branch = "master", service = "github" }

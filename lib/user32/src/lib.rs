@@ -9,15 +9,10 @@ extern "system" {
     pub fn AdjustWindowRectEx(
         lpRect: LPRECT, dwStyle: DWORD, bMenu: BOOL, dwExStyle: DWORD,
     ) -> BOOL;
-    pub fn AllowSetForegroundWindow(dwProcessId: DWORD) -> BOOL;
     pub fn ArrangeIconicWindows(hWnd: HWND) -> UINT;
     pub fn BeginPaint(hwnd: HWND, lpPaint: LPPAINTSTRUCT) -> HDC;
     pub fn BlockInput(fBlockIt: BOOL) -> BOOL;
     // pub fn BroadcastSystemMessage();
-    pub fn CalculatePopupWindowPosition(
-        anchorPoint: *const POINT, windowSize: *const SIZE, flags: UINT, excludeRect: *mut RECT,
-        popupWindowPosition: *mut RECT,
-    ) -> BOOL;
     pub fn CallNextHookEx(hhk: HHOOK, nCode: c_int, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
     pub fn CancelShutdown() -> BOOL;
     // pub fn CascadeChildWindows();
@@ -149,43 +144,15 @@ extern "system" {
     pub fn DlgDirSelectExW(
         hwndDlg: HWND, lpString: LPWSTR, chCount: c_int, idListBox: c_int
     ) -> BOOL;
-    pub fn DragDetect(hwnd: HWND, pt: POINT) -> BOOL;
-    pub fn DragObject(
-        hwndParent: HWND, hwndFrom: HWND, fmt: UINT, data: ULONG_PTR, hcur: HCURSOR,
-    ) -> DWORD;
     pub fn DrawFocusRect(hDC: HDC, lprc: *const RECT) -> BOOL;
     // pub fn DrawFrame();
-    pub fn DrawIcon(hDC: HDC, x: c_int, y: c_int, hIcon: HICON) -> BOOL;
     pub fn DrawIconEx(
         hdc: HDC, xLeft: c_int, yTop: c_int, hIcon: HICON, cxWidth: c_int, cyWidth: c_int,
         istepIfAniCur: UINT, hbrFlickerFreeDraw: HBRUSH, diFlags: UINT,
     ) -> BOOL;
-    pub fn DrawStateA(
-        hdc: HDC, hbrFore: HBRUSH, qfnCallBack: DRAWSTATEPROC, lData: LPARAM, wData: WPARAM,
-        x: c_int, y: c_int, cx: c_int, cy: c_int, uFlags: UINT,
-    ) -> BOOL;
-    pub fn DrawStateW(
-        hdc: HDC, hbrFore: HBRUSH, qfnCallBack: DRAWSTATEPROC, lData: LPARAM, wData: WPARAM,
-        x: c_int, y: c_int, cx: c_int, cy: c_int, uFlags: UINT,
-    ) -> BOOL;
-    pub fn DrawTextA(
-        hdc: HDC, lpchText: LPCSTR, cchText: c_int, lprc: LPRECT, format: UINT,
-    ) -> c_int;
-    pub fn DrawTextExA(
-        hdc: HDC, lpchText: LPCSTR, cchText: c_int, lprc: LPRECT, format: UINT,
-        lpdtp: LPDRAWTEXTPARAMS,
-    ) -> c_int;
-    pub fn DrawTextExW(
-        hdc: HDC, lpchText: LPCWSTR, cchText: c_int, lprc: LPRECT, format: UINT,
-        lpdtp: LPDRAWTEXTPARAMS,
-    ) -> c_int;
-    pub fn DrawTextW(
-        hdc: HDC, lpchText: LPCWSTR, cchText: c_int, lprc: LPRECT, format: UINT,
-    ) -> c_int;
     // pub fn EditWndProc();
     pub fn EnableScrollBar(hWnd: HWND, wSBflags: UINT, wArrows: UINT) -> BOOL;
     // pub fn EnableSessionForMMCSS();
-    pub fn EndMenu(hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR) -> BOOL;
     pub fn EndPaint(hWnd: HWND, lpPaint: *const PAINTSTRUCT) -> BOOL;
     pub fn EndTask(hWnd: HWND, fShutDown: BOOL, fForce: BOOL) -> BOOL;
     pub fn EnumChildWindows(
@@ -255,12 +222,9 @@ extern "system" {
     pub fn GetCursor() -> HCURSOR;
     // pub fn GetCursorInfo();
     pub fn GetCursorPos(lpPoint: LPPOINT) -> BOOL;
-    pub fn GetDC(hWnd: HWND) -> HDC;
-    pub fn GetDCEx(hWnd: HWND, hrgnClip: HRGN, flags: DWORD) -> HDC;
     pub fn GetDesktopWindow() -> HWND;
     // pub fn GetDisplayAutoRotationPreferences();
     // pub fn GetDisplayConfigBufferSizes();
-    pub fn GetForegroundWindow() -> HWND;
     // pub fn GetGUIThreadInfo();
     // pub fn GetGestureConfig();
     // pub fn GetGestureExtraArgs();
@@ -275,15 +239,6 @@ extern "system" {
     // pub fn GetListBoxInfo();
     // pub fn GetMenuBarInfo();
     // pub fn GetMenuContextHelpId();
-    // pub fn GetMenuDefaultItem();
-    pub fn GetMenuInfo(hMenu: HMENU, lpcmi: LPMENUINFO) -> BOOL;
-    pub fn GetMenuItemInfoA(
-        hMenu: HMENU, uItem: UINT, fByPosition: BOOL, lpmii: LPMENUITEMINFOA
-    ) -> BOOL;
-    pub fn GetMenuItemInfoW(
-        hMenu: HMENU, uItem: UINT, fByPosition: BOOL, lpmii: LPMENUITEMINFOW
-    ) -> BOOL;
-    // pub fn GetMenuItemRect();
     pub fn GetMonitorInfoA(hMonitor: HMONITOR, lpmi: LPMONITORINFO) -> BOOL;
     pub fn GetMonitorInfoW(hMonitor: HMONITOR, lpmi: LPMONITORINFO) -> BOOL;
     pub fn GetParent(hWnd: HWND) -> HWND;
@@ -320,12 +275,6 @@ extern "system" {
     pub fn GetShellWindow() -> HWND;
     pub fn GetSysColor(nIndex: c_int) -> DWORD;
     pub fn GetSysColorBrush(nIndex: c_int) -> HBRUSH;
-    pub fn GetTabbedTextExtentA(hdc: HDC, lpString: LPCSTR, chCount: c_int, nTabPositions: c_int,
-        lpnTabStopPositions: *const INT
-    ) -> DWORD;
-    pub fn GetTabbedTextExtentW(hdc: HDC, lpString: LPCWSTR, chCount: c_int, nTabPositions: c_int,
-        lpnTabStopPositions: *const INT
-    ) -> DWORD;
     // pub fn GetTitleBarInfo();
     pub fn GetTopWindow(hWnd: HWND) -> HWND;
     pub fn GetUpdateRect(hWnd: HWND, lpRect: LPRECT, bErase: BOOL) -> BOOL;
@@ -356,14 +305,6 @@ extern "system" {
     pub fn GetWindowTextW(hWnd: HWND, lpString: LPWSTR, nMaxCount: c_int) -> c_int;
     pub fn GetWindowThreadProcessId(hWnd: HWND, lpdwProcessId: LPDWORD) -> DWORD;
     pub fn GetWindowWord(hWnd: HWND,nIndex: c_int) -> WORD;
-    pub fn GrayStringA(
-        hDC: HDC, hBrush: HBRUSH, lpOutputFunc: GRAYSTRINGPROC, lpData: LPARAM, nCount: c_int,
-        X: c_int, Y: c_int, nWidth: c_int, nHeight: c_int,
-    ) -> BOOL;
-    pub fn GrayStringW(
-        hDC: HDC, hBrush: HBRUSH, lpOutputFunc: GRAYSTRINGPROC, lpData: LPARAM, nCount: c_int,
-        X: c_int, Y: c_int, nWidth: c_int, nHeight: c_int,
-    ) -> BOOL;
     pub fn HideCaret(hWnd: HWND) -> BOOL;
     // pub fn IMPGetIMEA();
     // pub fn IMPGetIMEW();
@@ -373,12 +314,6 @@ extern "system" {
     // pub fn IMPSetIMEW();
     // pub fn ImpersonateDdeClientWindow();
     pub fn InflateRect(lprc: LPRECT, dx: c_int, dy: c_int) -> BOOL;
-    pub fn InsertMenuItemA(
-        hmenu: HMENU, item: UINT, fByPosition: BOOL, lpmi: LPCMENUITEMINFOA,
-    ) -> BOOL;
-    pub fn InsertMenuItemW(
-        hmenu: HMENU, item: UINT, fByPosition: BOOL, lpmi: LPCMENUITEMINFOW,
-    ) -> BOOL;
     pub fn InternalGetWindowText(hWnd: HWND, pString: LPWSTR, cchMaxCount: c_int) -> c_int;
     pub fn IntersectRect(
         lprcDst: LPRECT, lprcSrc1: *const RECT, lprcSrc2: *const RECT,
@@ -406,7 +341,6 @@ extern "system" {
     pub fn LoadImageW(
         hInst: HINSTANCE, name: LPCWSTR, type_: UINT, cx: c_int, cy: c_int, fuLoad: UINT,
     ) -> HANDLE;
-    pub fn LockSetForegroundWindow(uLockCode: UINT) -> BOOL;
     pub fn LockWindowUpdate(hWndLock: HWND) -> BOOL;
     pub fn LockWorkStation() -> BOOL;
     // pub fn LogicalToPhysicalPoint();
@@ -417,7 +351,6 @@ extern "system" {
     ) -> c_int;
     pub fn MapDialogRect(hDlg: HWND, lpRect: LPRECT) -> BOOL;
     pub fn MapWindowPoints(hWndFrom: HWND, hWndTo: HWND, lpPoints: LPPOINT, cPoints: UINT) -> c_int;
-    pub fn MenuItemFromPoint(hWnd: HWND, hMenu: HMENU, ptScreen: POINT) -> c_int;
     pub fn MessageBeep(uType: UINT) -> BOOL;
     pub fn MessageBoxExA(
         hWnd: HWND, lpText: LPCSTR, lpCaption: LPCSTR, uType: UINT, wLanguageId: WORD,
@@ -435,7 +368,6 @@ extern "system" {
     pub fn NotifyWinEvent(event: DWORD, hwnd: HWND, idObject: LONG, idChild: LONG);
     pub fn OffsetRect(lprc: LPRECT, dx: c_int, dy: c_int) -> BOOL;
     pub fn PackDDElParam(msg: UINT, uiLo: UINT_PTR, uiHi: UINT_PTR) -> LPARAM;
-    pub fn PaintDesktop(hdc: HDC) -> BOOL;
     // pub fn PhysicalToLogicalPoint();
     // pub fn PhysicalToLogicalPointForPerMonitorDPI();
     // pub fn PrivateExtractIconsA();
@@ -480,7 +412,6 @@ extern "system" {
     ) -> c_int;
     // pub fn SendIMEMessageExA();
     // pub fn SendIMEMessageExW();
-    pub fn SetActiveWindow(hWnd: HWND) -> HWND;
     pub fn SetCaretBlinkTime(uMSeconds: UINT) -> BOOL;
     pub fn SetCaretPos(x: c_int, y: c_int) -> BOOL;
     pub fn SetClassLongA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
@@ -496,14 +427,10 @@ extern "system" {
     // pub fn SetDeskWallpaper();
     // pub fn SetDisplayAutoRotationPreferences();
     // pub fn SetDisplayConfig();
-    pub fn SetForegroundWindow(hWnd: HWND) -> BOOL;
     // pub fn SetGestureConfig();
     pub fn SetLastErrorEx(dwErrCode: DWORD, dwType: DWORD);
     // pub fn SetMenuContextHelpId();
     // pub fn SetMenuDefaultItem();
-    pub fn SetMenuInfo(hMenu: HMENU, lpcmi: LPCMENUINFO) -> BOOL;
-    // pub fn SetMenuItemInfoA();
-    // pub fn SetMenuItemInfoW();
     pub fn SetParent(hWndChild: HWND, hWndNewParent: HWND) -> HWND;
     pub fn SetPhysicalCursorPos(x: c_int, y: c_int) -> BOOL;
     // pub fn SetProcessDPIAware();
@@ -555,21 +482,12 @@ extern "system" {
     // pub fn ShutdownBlockReasonQuery();
     // pub fn SoundSentry();
     // pub fn SubtractRect();
-    // pub fn SwitchToThisWindow();
     pub fn SystemParametersInfoA(
         uiAction: UINT, uiParam: UINT, pvParam: PVOID, fWinIni: UINT
     ) -> BOOL;
     pub fn SystemParametersInfoW(
         uiAction: UINT, uiParam: UINT, pvParam: PVOID, fWinIni: UINT
     ) -> BOOL;
-    pub fn TabbedTextOutA(
-        hdc: HDC, x: c_int, y: c_int, lpString: LPCSTR, chCount: c_int, nTabPositions: c_int,
-        lpnTabStopPositions: *const INT, nTabOrigin: c_int,
-    ) -> LONG;
-    pub fn TabbedTextOutW(
-        hdc: HDC, x: c_int, y: c_int, lpString: LPCWSTR, chCount: c_int, nTabPositions: c_int,
-        lpnTabStopPositions: *const INT, nTabOrigin: c_int,
-    ) -> LONG;
     // pub fn TileChildWindows();
     // pub fn TileWindows();
     pub fn TrackPopupMenuEx(
@@ -582,7 +500,6 @@ extern "system" {
     pub fn UnhookWindowsHookEx(hhk: HHOOK) -> BOOL;
     pub fn UnionRect(lprcDst: LPRECT, lprcSrc1: *const RECT, lprcSrc2: *const RECT) -> BOOL;
     pub fn UnpackDDElParam(msg: UINT, lParam: LPARAM, puiLo: PUINT_PTR, puiHi: PUINT_PTR) -> BOOL;
-    pub fn UpdateWindow(hWnd: HWND) -> BOOL;
     pub fn UserHandleGrantAccess(hUserHandle: HANDLE, hJob: HANDLE, bGrant: BOOL) -> BOOL;
     pub fn ValidateRect(hWnd: HWND, lpRect: *const RECT) -> BOOL;
     pub fn ValidateRgn(hWnd: HWND, hRgn: HRGN) -> BOOL;
@@ -591,7 +508,6 @@ extern "system" {
     // pub fn WINNLSGetIMEHotkey();
     pub fn WinHelpA(hWndMain: HWND, lpszHelp: LPCSTR, uCommand: UINT, dwData: ULONG_PTR) -> BOOL;
     pub fn WinHelpW(hWndMain: HWND, lpszHelp: LPCWSTR, uCommand: UINT, dwData: ULONG_PTR) -> BOOL;
-    pub fn WindowFromDC(hDC: HDC) -> HWND;
     // pub fn WindowFromPhysicalPoint();
     pub fn WindowFromPoint(Point: POINT) -> HWND;
     // pub fn wsprintfA();
