@@ -53,7 +53,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("windef", &["minwindef", "winnt"], &[]),
     ("windowsx", &["minwindef"], &[]),
     ("winerror", &["minwindef"], &[]),
-    ("ws2def", &["guiddef", "inaddr", "minwindef", "vcruntime", "winnt"], &[]),
+    ("ws2def", &["basetsd", "guiddef", "inaddr", "minwindef", "vcruntime", "winnt"], &[]),
     ("wtypes", &["guiddef", "minwindef", "ntdef", "wtypesbase"], &[]),
     ("wtypesbase", &["minwindef", "rpcndr", "winnt"], &[]),
     // ucrt
@@ -185,12 +185,13 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("winreg", &["basetsd", "minwinbase", "minwindef", "winnt"], &["advapi32"]),
     ("winscard", &["basetsd", "guiddef", "minwindef", "windef", "winnt"], &[]),
     ("winsmcrd", &["minwindef", "winioctl"], &[]),
-    ("winsock2", &["basetsd", "guiddef", "minwinbase", "minwindef", "qos", "windef", "winerror", "winnt", "ws2def", "wtypesbase"], &[]),
+    ("winsock2", &["basetsd", "guiddef", "inaddr", "minwinbase", "minwindef", "qos", "winbase", "windef", "winerror", "winnt", "ws2def", "wtypesbase"], &["ws2_32"]),
     ("winspool", &["minwindef", "wingdi", "winnt"], &[]),
     ("winsvc", &["minwindef", "winnt"], &["advapi32"]),
     ("winusb", &["minwindef", "winnt"], &[]),
     ("winusbio", &["minwindef", "usb"], &[]),
     ("winuser", &["basetsd", "guiddef", "limits", "minwinbase", "minwindef", "vadefs", "windef", "wingdi", "winnt"], &["user32"]),
+    ("ws2spi", &["basetsd", "guiddef", "minwindef", "vcruntime", "windef", "winnt", "winsock2", "ws2def", "wtypesbase"], &["ws2_32"]),
     ("xinput", &["minwindef", "winnt"], &[]),
     // vc
     ("excpt", &[], &[]),
