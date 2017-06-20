@@ -198,7 +198,7 @@ pub type PLONGLONG = *mut LONGLONG;
 pub type PULONGLONG = *mut ULONGLONG;
 pub type USN = LONGLONG;
 UNION2!{union LARGE_INTEGER {
-    [LONGLONG; 1],
+    [i64; 1],
     s s_mut: LARGE_INTEGER_s,
     QuadPart QuadPart_mut: LONGLONG,
 }}
@@ -208,7 +208,7 @@ STRUCT!{struct LARGE_INTEGER_s {
 }}
 pub type PLARGE_INTEGER = *mut LARGE_INTEGER;
 UNION2!{union ULARGE_INTEGER {
-    [ULONGLONG; 1],
+    [u64; 1],
     s s_mut: ULARGE_INTEGER_s,
     QuadPart QuadPart_mut: ULONGLONG,
 }}
@@ -292,7 +292,7 @@ STRUCT!{struct RTL_BALANCED_NODE {
     ParentValue: ULONG_PTR,
 }}
 UNION2!{union RTL_BALANCED_NODE_u {
-    [ULONG_PTR; 2],
+    [usize; 2],
     Children Children_mut: [*mut RTL_BALANCED_NODE; 2],
     s s_mut: RTL_BALANCED_NODE_s,
 }}
@@ -303,9 +303,9 @@ STRUCT!{struct RTL_BALANCED_NODE_s {
 pub const RTL_BALANCED_NODE_RESERVED_PARENT_MASK: ULONG_PTR = 3;
 pub type PRTL_BALANCED_NODE = *mut RTL_BALANCED_NODE;
 #[inline]
-pub unsafe fn RTL_BALANCED_NODE_GET_PARENT_POINTER(Node: PRTL_BALANCED_NODE)
-    -> PRTL_BALANCED_NODE
-{
+pub unsafe fn RTL_BALANCED_NODE_GET_PARENT_POINTER(
+    Node: PRTL_BALANCED_NODE
+) -> PRTL_BALANCED_NODE {
     ((*Node).ParentValue & !RTL_BALANCED_NODE_RESERVED_PARENT_MASK) as *mut RTL_BALANCED_NODE
 }
 STRUCT!{struct LIST_ENTRY32 {
