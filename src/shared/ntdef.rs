@@ -163,19 +163,19 @@ pub type NTSTATUS = LONG;
 pub type PNTSTATUS = *mut NTSTATUS;
 pub type PCNTSTATUS = *const NTSTATUS;
 #[inline]
-pub fn NT_SUCCESS(Status: NTSTATUS) -> bool {
+pub unsafe fn NT_SUCCESS(Status: NTSTATUS) -> bool {
     Status >= 0
 }
 #[inline]
-pub fn NT_INFORMATION(Status: NTSTATUS) -> bool {
+pub unsafe fn NT_INFORMATION(Status: NTSTATUS) -> bool {
     ((Status as ULONG) >> 30) == 1
 }
 #[inline]
-pub fn NT_WARNING(Status: NTSTATUS) -> bool {
+pub unsafe fn NT_WARNING(Status: NTSTATUS) -> bool {
     ((Status as ULONG) >> 30) == 2
 }
 #[inline]
-pub fn NT_ERROR(Status: NTSTATUS) -> bool {
+pub unsafe fn NT_ERROR(Status: NTSTATUS) -> bool {
     ((Status as ULONG) >> 30) == 3
 }
 pub const APPLICATION_ERROR_MASK: ULONG = 0x20000000;
@@ -1021,31 +1021,37 @@ pub const SORT_HUNGARIAN_DEFAULT: USHORT = 0x0;
 pub const SORT_HUNGARIAN_TECHNICAL: USHORT = 0x1;
 pub const SORT_GEORGIAN_TRADITIONAL: USHORT = 0x0;
 pub const SORT_GEORGIAN_MODERN: USHORT = 0x1;
-macro_rules! MAKELANGID { ($p:expr, $s:expr) => ((($s as USHORT) << 10) | ($p as USHORT)) }
-#[inline]
-pub fn MAKELANGID(p: USHORT, s: USHORT) -> LANGID { (s << 10) | p }
-#[inline]
-pub fn PRIMARYLANGID(lgid: LANGID) -> USHORT { lgid & 0x3ff }
-#[inline]
-pub fn SUBLANGID(lgid: LANGID) -> USHORT { lgid >> 10 }
-pub const NLS_VALID_LOCALE_MASK: ULONG = 0x000fffff;
-macro_rules! MAKELCID {
-    ($lgid:expr, $srtid:expr) => ((($srtid as ULONG) << 16) | ($lgid as ULONG))
+macro_rules! MAKELANGID {
+    ($p:expr, $s:expr) => {
+        (($s as USHORT) << 10) | ($p as USHORT)
+    }
 }
 #[inline]
-pub fn MAKELCID(lgid: LANGID, srtid: USHORT) -> LCID {
+pub unsafe fn MAKELANGID(p: USHORT, s: USHORT) -> LANGID { (s << 10) | p }
+#[inline]
+pub unsafe fn PRIMARYLANGID(lgid: LANGID) -> USHORT { lgid & 0x3ff }
+#[inline]
+pub unsafe fn SUBLANGID(lgid: LANGID) -> USHORT { lgid >> 10 }
+pub const NLS_VALID_LOCALE_MASK: ULONG = 0x000fffff;
+macro_rules! MAKELCID {
+    ($lgid:expr, $srtid:expr) => {
+        (($srtid as ULONG) << 16) | ($lgid as ULONG)
+    }
+}
+#[inline]
+pub unsafe fn MAKELCID(lgid: LANGID, srtid: USHORT) -> LCID {
     ((srtid as ULONG) << 16) | (lgid as ULONG)
 }
 #[inline]
-pub fn MAKESORTLCID(lgid: LANGID, srtid: USHORT, ver: USHORT) -> LCID {
+pub unsafe fn MAKESORTLCID(lgid: LANGID, srtid: USHORT, ver: USHORT) -> LCID {
     MAKELCID(lgid, srtid) | ((ver as ULONG) << 20)
 }
 #[inline]
-pub fn LANGIDFROMLCID(lcid: LCID) -> LANGID { lcid as LANGID }
+pub unsafe fn LANGIDFROMLCID(lcid: LCID) -> LANGID { lcid as LANGID }
 #[inline]
-pub fn SORTIDFROMLCID(lcid: LCID) -> USHORT { ((lcid >> 16) & 0xf) as USHORT }
+pub unsafe fn SORTIDFROMLCID(lcid: LCID) -> USHORT { ((lcid >> 16) & 0xf) as USHORT }
 #[inline]
-pub fn SORTVERSIONFROMLCID(lcid: LCID) -> USHORT { ((lcid >> 16) & 0xf) as USHORT }
+pub unsafe fn SORTVERSIONFROMLCID(lcid: LCID) -> USHORT { ((lcid >> 16) & 0xf) as USHORT }
 pub const LOCALE_NAME_MAX_LENGTH: usize = 85;
 pub const LANG_SYSTEM_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_SYS_DEFAULT);
 pub const LANG_USER_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_DEFAULT);
