@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Type definitions for the basic types.
-use core::{mem, ptr};
 use ctypes::{
     __int64, __uint64, c_char, c_double, c_int, c_long, c_schar, c_short, c_uchar, c_ulong,
     c_ushort, c_void, wchar_t
@@ -163,19 +162,19 @@ pub type NTSTATUS = LONG;
 pub type PNTSTATUS = *mut NTSTATUS;
 pub type PCNTSTATUS = *const NTSTATUS;
 #[inline]
-pub unsafe fn NT_SUCCESS(Status: NTSTATUS) -> bool {
+pub fn NT_SUCCESS(Status: NTSTATUS) -> bool {
     Status >= 0
 }
 #[inline]
-pub unsafe fn NT_INFORMATION(Status: NTSTATUS) -> bool {
+pub fn NT_INFORMATION(Status: NTSTATUS) -> bool {
     ((Status as ULONG) >> 30) == 1
 }
 #[inline]
-pub unsafe fn NT_WARNING(Status: NTSTATUS) -> bool {
+pub fn NT_WARNING(Status: NTSTATUS) -> bool {
     ((Status as ULONG) >> 30) == 2
 }
 #[inline]
-pub unsafe fn NT_ERROR(Status: NTSTATUS) -> bool {
+pub fn NT_ERROR(Status: NTSTATUS) -> bool {
     ((Status as ULONG) >> 30) == 3
 }
 pub const APPLICATION_ERROR_MASK: ULONG = 0x20000000;
@@ -406,12 +405,13 @@ pub unsafe fn InitializeObjectAttributes(
     r: HANDLE,
     s: PVOID,
 ) {
-    (*p).Length = mem::size_of::<OBJECT_ATTRIBUTES>() as ULONG;
+    use core::mem::size_of;
+    (*p).Length = size_of::<OBJECT_ATTRIBUTES>() as ULONG;
     (*p).RootDirectory = r;
     (*p).Attributes = a;
     (*p).ObjectName = n;
     (*p).SecurityDescriptor = s;
-    (*p).SecurityQualityOfService = ptr::null_mut();
+    (*p).SecurityQualityOfService = NULL;
 }
 pub const FALSE: BOOLEAN = 0;
 pub const TRUE: BOOLEAN = 1;
@@ -1027,11 +1027,11 @@ macro_rules! MAKELANGID {
     }
 }
 #[inline]
-pub unsafe fn MAKELANGID(p: USHORT, s: USHORT) -> LANGID { (s << 10) | p }
+pub fn MAKELANGID(p: USHORT, s: USHORT) -> LANGID { (s << 10) | p }
 #[inline]
-pub unsafe fn PRIMARYLANGID(lgid: LANGID) -> USHORT { lgid & 0x3ff }
+pub fn PRIMARYLANGID(lgid: LANGID) -> USHORT { lgid & 0x3ff }
 #[inline]
-pub unsafe fn SUBLANGID(lgid: LANGID) -> USHORT { lgid >> 10 }
+pub fn SUBLANGID(lgid: LANGID) -> USHORT { lgid >> 10 }
 pub const NLS_VALID_LOCALE_MASK: ULONG = 0x000fffff;
 macro_rules! MAKELCID {
     ($lgid:expr, $srtid:expr) => {
@@ -1039,19 +1039,19 @@ macro_rules! MAKELCID {
     }
 }
 #[inline]
-pub unsafe fn MAKELCID(lgid: LANGID, srtid: USHORT) -> LCID {
+pub fn MAKELCID(lgid: LANGID, srtid: USHORT) -> LCID {
     ((srtid as ULONG) << 16) | (lgid as ULONG)
 }
 #[inline]
-pub unsafe fn MAKESORTLCID(lgid: LANGID, srtid: USHORT, ver: USHORT) -> LCID {
+pub fn MAKESORTLCID(lgid: LANGID, srtid: USHORT, ver: USHORT) -> LCID {
     MAKELCID(lgid, srtid) | ((ver as ULONG) << 20)
 }
 #[inline]
-pub unsafe fn LANGIDFROMLCID(lcid: LCID) -> LANGID { lcid as LANGID }
+pub fn LANGIDFROMLCID(lcid: LCID) -> LANGID { lcid as LANGID }
 #[inline]
-pub unsafe fn SORTIDFROMLCID(lcid: LCID) -> USHORT { ((lcid >> 16) & 0xf) as USHORT }
+pub fn SORTIDFROMLCID(lcid: LCID) -> USHORT { ((lcid >> 16) & 0xf) as USHORT }
 #[inline]
-pub unsafe fn SORTVERSIONFROMLCID(lcid: LCID) -> USHORT { ((lcid >> 16) & 0xf) as USHORT }
+pub fn SORTVERSIONFROMLCID(lcid: LCID) -> USHORT { ((lcid >> 16) & 0xf) as USHORT }
 pub const LOCALE_NAME_MAX_LENGTH: usize = 85;
 pub const LANG_SYSTEM_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_SYS_DEFAULT);
 pub const LANG_USER_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_DEFAULT);
