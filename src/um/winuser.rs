@@ -7,8 +7,10 @@
 //! USER procedure declarations, constant definitions and macros
 use ctypes::{c_int, c_long, c_short, c_uint};
 use shared::basetsd::{
-    DWORD_PTR, INT32, INT_PTR, LONG_PTR, PDWORD_PTR, UINT16, UINT32, UINT64, UINT_PTR, ULONG_PTR,
+    DWORD_PTR, INT32, INT_PTR, PDWORD_PTR, UINT16, UINT32, UINT64, UINT_PTR, ULONG_PTR,
 };
+#[cfg(target_arch = "x86_64")]
+use shared::basetsd::LONG_PTR;
 use shared::guiddef::{GUID, LPCGUID};
 use shared::minwindef::{
     ATOM, BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HRGN, HWINSTA, INT, LOWORD, LPARAM, LPBYTE,
@@ -4988,13 +4990,13 @@ extern "system" {
     ) -> LONG_PTR;
 }
 #[cfg(target_arch = "x86")]
-pub use GetWindowLongA as GetWindowLongPtrA;
+pub use self::GetWindowLongA as GetWindowLongPtrA;
 #[cfg(target_arch = "x86")]
-pub use GetWindowLongW as GetWindowLongPtrW;
+pub use self::GetWindowLongW as GetWindowLongPtrW;
 #[cfg(target_arch = "x86")]
-pub use SetWindowLongA as SetWindowLongPtrA;
+pub use self::SetWindowLongA as SetWindowLongPtrA;
 #[cfg(target_arch = "x86")]
-pub use SetWindowLongW as SetWindowLongPtrW;
+pub use self::SetWindowLongW as SetWindowLongPtrW;
 extern "system" {
     pub fn GetClassWord(
         hWnd: HWND,
@@ -5047,13 +5049,13 @@ extern "system" {
     ) -> ULONG_PTR;
 }
 #[cfg(target_arch = "x86")]
-pub use GetClassLongA as GetClassLongPtrA;
+pub use self::GetClassLongA as GetClassLongPtrA;
 #[cfg(target_arch = "x86")]
-pub use GetClassLongW as GetClassLongPtrW;
+pub use self::GetClassLongW as GetClassLongPtrW;
 #[cfg(target_arch = "x86")]
-pub use SetClassLongA as SetClassLongPtrA;
+pub use self::SetClassLongA as SetClassLongPtrA;
 #[cfg(target_arch = "x86")]
-pub use SetClassLongW as SetClassLongPtrW;
+pub use self::SetClassLongW as SetClassLongPtrW;
 /*********
 * CUTOFF *
 *********/
