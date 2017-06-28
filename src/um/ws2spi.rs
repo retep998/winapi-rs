@@ -27,7 +27,7 @@ pub const WSS_OPERATION_IN_PROGRESS: ULONG_PTR = 0x00000103;
 STRUCT!{struct WSPDATA {
     wVersion: WORD,
     wHighVersion: WORD,
-    szDescription: [WCHAR; WSPDESCRIPTION_LEN],
+    szDescription: [WCHAR; WSPDESCRIPTION_LEN + 1],
 }}
 pub type LPWSPDATA = *mut WSPDATA;
 STRUCT!{struct WSATHREADID {
