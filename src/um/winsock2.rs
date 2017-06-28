@@ -51,7 +51,7 @@ STRUCT!{struct fd_set {
 extern "system" {
     pub fn __WSAFDIsSet(
         fd: SOCKET,
-        _: *mut fd_set
+        _: *mut fd_set,
     ) -> c_int;
 }
 STRUCT!{struct timeval {
@@ -361,7 +361,6 @@ pub const NO_RECOVERY: c_int = WSANO_RECOVERY;
 pub const NO_DATA: c_int = WSANO_DATA;
 pub const WSANO_ADDRESS: c_int = WSANO_DATA;
 pub const NO_ADDRESS: c_int = WSANO_ADDRESS;
-
 pub type WSAEVENT = HANDLE;
 pub type LPWSAEVENT = LPHANDLE;
 pub type WSAOVERLAPPED = OVERLAPPED;
@@ -807,34 +806,34 @@ extern "system" {
     pub fn accept(
         s: SOCKET,
         addr: *mut SOCKADDR,
-        addrlen: *mut c_int
+        addrlen: *mut c_int,
     ) -> SOCKET;
     pub fn bind(s: SOCKET,
         name: *const SOCKADDR,
-        namelen: c_int
+        namelen: c_int,
     ) -> c_int;
     pub fn closesocket(
-        s: SOCKET
+        s: SOCKET,
     ) -> c_int;
     pub fn connect(
         s: SOCKET,
         name: *const SOCKADDR,
-        namelen: c_int
+        namelen: c_int,
     ) -> c_int;
     pub fn ioctlsocket(
         s: SOCKET,
         cmd: c_long,
-        argp: *mut u_long
+        argp: *mut u_long,
     ) -> c_int;
     pub fn getpeername(
         s: SOCKET,
         name: *mut SOCKADDR,
-        namelen: *mut c_int
+        namelen: *mut c_int,
     ) -> c_int;
     pub fn getsockname(
         s: SOCKET,
         name: *mut SOCKADDR,
-        namelen: *mut c_int
+        namelen: *mut c_int,
     ) -> c_int;
     pub fn getsockopt(
         s: SOCKET,
@@ -844,16 +843,16 @@ extern "system" {
         optlen: *mut c_int,
     ) -> c_int;
     pub fn htonl(
-        hostlong: u_long
+        hostlong: u_long,
     ) -> u_long;
     pub fn htons(
-        hostshort: u_short
+        hostshort: u_short,
     ) -> u_short;
     pub fn inet_addr(
-        cp: *const c_char
+        cp: *const c_char,
     ) -> c_ulong;
     pub fn inet_ntoa(
-        _in: in_addr
+        _in: in_addr,
     ) -> *mut c_char;
 }
 #[inline]

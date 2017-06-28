@@ -446,7 +446,7 @@ extern "system" {
     #[cfg(target_arch = "x86_64")]
     pub fn WSCDeinstallProvider32(
         lpProviderId: LPGUID,
-        lpErrno: LPINT
+        lpErrno: LPINT,
     ) -> c_int;
     pub fn WSCInstallProvider(
         lpProviderId: LPGUID,
@@ -900,10 +900,10 @@ extern "system" {
         pNSPv2Routine: *const LPCNSPV2_ROUTINE,
     ) -> INT;
     pub fn WSAUnadvertiseProvider(
-        puuidProviderId: *const GUID
+        puuidProviderId: *const GUID,
     ) -> INT;
     pub fn WSAProviderCompleteAsyncCall(
         hAsyncCall: HANDLE,
-        iRetCode: INT
+        iRetCode: INT,
     ) -> INT;
 }
