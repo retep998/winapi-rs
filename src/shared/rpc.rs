@@ -4,12 +4,9 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-//! ApiSet Contract for api-ms-win-core-threadpool-l1.
-FN!{stdcall PTP_WIN32_IO_CALLBACK(
-    Instance: ::PTP_CALLBACK_INSTANCE,
-    Context: ::PVOID,
-    Overlapped: ::PVOID,
-    IoResult: ::ULONG,
-    NumberOfBytesTransferred: ::ULONG_PTR,
-    Io: ::PTP_IO,
-) -> ()}
+//! Master include file for RPC applications.
+
+use ctypes::{c_long, c_void};
+
+pub type I_RPC_HANDLE = *mut c_void;
+pub type RPC_STATUS = c_long;
