@@ -56,6 +56,7 @@ pub mod gl;
 #[cfg(feature = "heapapi")] pub mod heapapi;
 #[cfg(feature = "http")] pub mod http;
 #[cfg(feature = "imm")] pub mod imm;
+#[cfg(feature = "ioapiset")] pub mod ioapiset;
 #[cfg(feature = "libloaderapi")] pub mod libloaderapi;
 #[cfg(feature = "lmaccess")] pub mod lmaccess;
 #[cfg(feature = "lmdfs")] pub mod lmdfs;
