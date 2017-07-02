@@ -128,20 +128,19 @@ macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
 macro_rules! RIDL {
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) {$(
-        fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
+        $(#[$($attrs:tt)*])* fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
     )+}) => (
         #[repr(C)]
         pub struct $vtbl {
-            $(pub $method: unsafe extern "system" fn(
-                This: *mut $interface,
-                $($p: $t),*
-            ) -> $rtr,)+
+            $(pub $method: RIDL!{@func $interface $(#[$($attrs)*])* fn($($p: $t,)*) -> $rtr},)+
         }
         #[repr(C)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl,
         }
-        RIDL!{@impl $interface {$(fn $method($($p: $t,)*) -> $rtr,)+}}
+        impl $interface {
+            $(RIDL!{@method $(#[$($attrs)*])* fn $method($($p: $t,)*) -> $rtr})+
+        }
         RIDL!{@uuid $interface $($uuid),+}
     );
     (#[uuid($($uuid:expr),+)]
@@ -160,21 +159,20 @@ macro_rules! RIDL {
     );
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
-        fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
+        $(#[$($attrs:tt)*])* fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
     )+}) => (
         #[repr(C)]
         pub struct $vtbl {
             pub parent: $pvtbl,
-            $(pub $method: unsafe extern "system" fn(
-                This: *mut $interface,
-                $($p: $t,)*
-            ) -> $rtr,)+
+            $(pub $method: RIDL!{@func $interface $(#[$($attrs)*])* fn($($p: $t,)*) -> $rtr},)+
         }
         #[repr(C)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl,
         }
-        RIDL!{@impl $interface {$(fn $method($($p: $t,)*) -> $rtr,)+}}
+        impl $interface {
+            $(RIDL!{@method $(#[$($attrs)*])* fn $method($($p: $t,)*) -> $rtr})+
+        }
         RIDL!{@deref $interface $pinterface}
         RIDL!{@uuid $interface $($uuid),+}
     );
@@ -187,14 +185,30 @@ macro_rules! RIDL {
             }
         }
     );
-    (@impl $interface:ident {$(
-        fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
-    )+}) => (
-        impl $interface {
-            $(#[inline] pub unsafe fn $method(&self, $($p: $t,)*) -> $rtr {
-                ((*self.lpVtbl).$method)(self as *const _ as *mut _, $($p,)*)
-            })+
+    (@method fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty) => (
+        #[inline] pub unsafe fn $method(&self, $($p: $t,)*) -> $rtr {
+            ((*self.lpVtbl).$method)(self as *const _ as *mut _, $($p,)*)
         }
+    );
+    (@method #[fixme] fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty) => (
+        #[inline] pub unsafe fn $method(&self, $($p: $t,)*) -> $rtr {
+            let mut ret = $crate::_core::mem::uninitialized();
+            ((*self.lpVtbl).$method)(self as *const _ as *mut _, $($p,)* &mut ret);
+            ret
+        }
+    );
+    (@func $interface:ident fn($($p:ident : $t:ty,)*) -> $rtr:ty) => (
+        unsafe extern "system" fn(
+            This: *mut $interface,
+            $($p: $t,)*
+        ) -> $rtr
+    );
+    (@func $interface:ident #[fixme] fn($($p:ident : $t:ty,)*) -> $rtr:ty) => (
+        unsafe extern "system" fn(
+            This: *mut $interface,
+            $($p: $t,)*
+            ret: *mut $rtr,
+        ) -> *mut $rtr
     );
     (@uuid $interface:ident
         $l:expr, $w1:expr, $w2:expr,

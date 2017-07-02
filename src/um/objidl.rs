@@ -12,7 +12,7 @@ use shared::minwindef::{BOOL, DWORD, FILETIME, ULONG};
 use shared::wtypesbase::{LPOLESTR, OLECHAR};
 use um::objidlbase::{IEnumString, IStream};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HRESULT, ULARGE_INTEGER, VOID};
+use um::winnt::{HRESULT, ULARGE_INTEGER};
 //8402
 STRUCT!{struct BIND_OPTS {
     cbStruct: DWORD,
@@ -237,7 +237,7 @@ RIDL!(
 interface IApartmentShutdown(IApartmentShutdownVtbl): IUnknown(IUnknownVtbl) {
     fn OnUninitialize(
         ui64ApartmentIdentifier: UINT64,
-    ) -> VOID,
+    ) -> (),
 }
 );
 RIDL!(

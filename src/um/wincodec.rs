@@ -825,10 +825,10 @@ interface IWICColorContext(IWICColorContextVtbl): IUnknown(IUnknownVtbl) {
 RIDL!(#[uuid(0xb66f034f, 0xd0e2, 0x40ab, 0xb4, 0x36, 0x6d, 0xe3, 0x9e, 0x32, 0x1a, 0x94)]
 interface IWICColorTransform(IWICColorTransformVtbl): IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn Initialize(
-         pIBitmapSource: *const IWICBitmapSource,
-         pIContextSource: *const IWICColorContext,
-         pIContextDest: *const IWICColorContext,
-         pixelFmtDest: REFWICPixelFormatGUID,
+        pIBitmapSource: *const IWICBitmapSource,
+        pIContextSource: *const IWICColorContext,
+        pIContextDest: *const IWICColorContext,
+        pixelFmtDest: REFWICPixelFormatGUID,
     ) -> HRESULT,
 });
 RIDL!(#[uuid(0xb84e2c09, 0x78c9, 0x4ac4, 0x8b, 0xd3, 0x52, 0x4a, 0xe1, 0x66, 0x3a, 0x2f)]
@@ -866,7 +866,7 @@ interface IWICEnumMetadataItem(IWICEnumMetadataItemVtbl): IUnknown(IUnknownVtbl)
         rgeltId: *mut PROPVARIANT,
         rgeltValue: *mut PROPVARIANT,
         pceltFetched: *mut ULONG,
-     ) -> HRESULT,
+    ) -> HRESULT,
     fn Skip(
         celt: ULONG,
     ) -> HRESULT,
@@ -1105,15 +1105,15 @@ interface IWICBitmapFrameDecode(IWICBitmapFrameDecodeVtbl):
     IWICBitmapSource(IWICBitmapSourceVtbl) {
     fn GetMetadataQueryReader(
         ppIMetadataQueryReader: *mut *mut IWICMetadataQueryReader,
-   ) -> HRESULT,
+    ) -> HRESULT,
     fn GetColorContexts(
         cCount: UINT,
         ppIColorContexts: *mut *mut IWICColorContext,
         pcActualCount: *mut UINT,
-   ) -> HRESULT,
+    ) -> HRESULT,
     fn GetThumbnail(
         ppIThumbnail: *mut *mut IWICBitmapSource,
-   ) -> HRESULT,
+    ) -> HRESULT,
 });
 RIDL!(#[uuid(0xdaac296f, 0x7aa5, 0x4dbf, 0x8d, 0x15, 0x22, 0x5c, 0x59, 0x76, 0xf8, 0x91)]
 interface IWICProgressiveLevelControl(IWICProgressiveLevelControlVtbl): IUnknown(IUnknownVtbl) {
@@ -1145,9 +1145,9 @@ RIDL!(#[uuid(0x64c1024e, 0xc3cf, 0x4462, 0x80, 0x78, 0x88, 0xc2, 0xb1, 0x1c, 0x4
 interface IWICBitmapCodecProgressNotification(IWICBitmapCodecProgressNotificationVtbl):
     IUnknown(IUnknownVtbl) {
     fn RegisterProgressNotification(
-            pfnProgressNotification: PFNProgressNotification,
-            pvData: LPVOID,
-            dwProgressFlags: DWORD,
+        pfnProgressNotification: PFNProgressNotification,
+        pvData: LPVOID,
+        dwProgressFlags: DWORD,
     ) -> HRESULT,
 });
 RIDL!(#[uuid(0x23bc3f0a, 0x698b, 0x4357, 0x88, 0x6b, 0xf2, 0x4d, 0x50, 0x67, 0x13, 0x34)]

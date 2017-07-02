@@ -1775,24 +1775,16 @@ interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12Pagea
         pGpuTimestamp: *mut UINT64,
         pCpuTimestamp: *mut UINT64,
     ) -> HRESULT,
-    fn GetDesc(
-        __ret_val: *mut D3D12_COMMAND_QUEUE_DESC,
-    ) -> *mut D3D12_COMMAND_QUEUE_DESC,
+    #[fixme] fn GetDesc() -> D3D12_COMMAND_QUEUE_DESC,
 });
 RIDL!{#[uuid(0xc36a797c, 0xec80, 0x4f0a, 0x89, 0x85, 0xa7, 0xb2, 0x47, 0x50, 0x82, 0xd1)]
 interface ID3D12CommandSignature(ID3D12CommandSignatureVtbl):
     ID3D12Pageable(ID3D12PageableVtbl) {}}
 RIDL!(#[uuid(0x8efb471d, 0x616c, 0x4f49, 0x90, 0xf7, 0x12, 0x7b, 0xb7, 0x63, 0xfa, 0x51)]
 interface ID3D12DescriptorHeap(ID3D12DescriptorHeapVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
-    fn GetDesc(
-        __ret_val: *mut D3D12_DESCRIPTOR_HEAP_DESC,
-    ) -> *mut D3D12_DESCRIPTOR_HEAP_DESC,
-    fn GetCPUDescriptorHandleForHeapStart(
-        __ret_val: *mut D3D12_CPU_DESCRIPTOR_HANDLE,
-    ) -> *mut D3D12_CPU_DESCRIPTOR_HANDLE,
-    fn GetGPUDescriptorHandleForHeapStart(
-        __ret_val: *mut D3D12_GPU_DESCRIPTOR_HANDLE,
-    ) -> *mut D3D12_GPU_DESCRIPTOR_HANDLE,
+    #[fixme] fn GetDesc() -> D3D12_DESCRIPTOR_HEAP_DESC,
+    #[fixme] fn GetCPUDescriptorHandleForHeapStart() -> D3D12_CPU_DESCRIPTOR_HANDLE,
+    #[fixme] fn GetGPUDescriptorHandleForHeapStart() -> D3D12_GPU_DESCRIPTOR_HANDLE,
 });
 RIDL!(#[uuid(0x189819f1, 0x1db6, 0x4b57, 0xbe, 0x54, 0x18, 0x21, 0x33, 0x9b, 0x85, 0xf7)]
 interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
@@ -1889,17 +1881,15 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         SrcDescriptorRangeStart: D3D12_CPU_DESCRIPTOR_HANDLE,
         DescriptorHeapsType: D3D12_DESCRIPTOR_HEAP_TYPE,
     ) -> (),
-    fn GetResourceAllocationInfo(
+    #[fixme] fn GetResourceAllocationInfo(
         visibleMask: UINT,
         numResourceDescs: UINT,
         pResourceDescs: *const D3D12_RESOURCE_DESC,
-        __ret_val: *mut D3D12_RESOURCE_ALLOCATION_INFO,
-    ) -> *mut D3D12_RESOURCE_ALLOCATION_INFO,
-    fn GetCustomHeapProperties(
+    ) -> D3D12_RESOURCE_ALLOCATION_INFO,
+    #[fixme] fn GetCustomHeapProperties(
         nodeMask: UINT,
         heapType: D3D12_HEAP_TYPE,
-        __ret_val: *mut D3D12_HEAP_PROPERTIES,
-    ) -> *mut D3D12_HEAP_PROPERTIES,
+    ) -> D3D12_HEAP_PROPERTIES,
     fn CreateCommittedResource(
         pHeapProperties: *const D3D12_HEAP_PROPERTIES,
         HeapFlags: D3D12_HEAP_FLAGS,
@@ -1995,9 +1985,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         FirstSubresourceTilingToGet: UINT,
         pSubresourceTilingsForNonPackedMips: *mut D3D12_SUBRESOURCE_TILING,
     ) -> (),
-    fn GetAdapterLuid(
-        __ret_val: *mut LUID,
-    ) -> *mut LUID,
+    #[fixme] fn GetAdapterLuid() -> LUID,
 });
 RIDL!(#[uuid(0x0a753dcf, 0xc4d8, 0x4b91, 0xad, 0xf6, 0xbe, 0x5a, 0x60, 0xd9, 0x5a, 0x76)]
 interface ID3D12Fence(ID3D12FenceVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
@@ -2262,9 +2250,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl):
 }}
 RIDL!(#[uuid(0x6b3b2502, 0x6e51, 0x45b3, 0x90, 0xee, 0x98, 0x84, 0x26, 0x5e, 0x8d, 0xf3)]
 interface ID3D12Heap(ID3D12HeapVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
-    fn GetDesc(
-        __ret_val: *mut D3D12_HEAP_DESC,
-    ) -> *mut D3D12_HEAP_DESC,
+    #[fixme] fn GetDesc() -> D3D12_HEAP_DESC,
 });
 RIDL!{#[uuid(0x63ee58fb, 0x1268, 0x4835, 0x86, 0xda, 0xf0, 0x08, 0xce, 0x62, 0xf0, 0xd6)]
 interface ID3D12Pageable(ID3D12PageableVtbl): ID3D12DeviceChild(ID3D12DeviceChildVtbl) {}}
@@ -2287,9 +2273,7 @@ interface ID3D12Resource(ID3D12ResourceVtbl): ID3D12Pageable(ID3D12PageableVtbl)
         Subresource: UINT,
         pWrittenRange: *const D3D12_RANGE,
     ) -> (),
-    fn GetDesc(
-        __ret_val: *mut D3D12_RESOURCE_DESC,
-    ) -> *mut D3D12_RESOURCE_DESC,
+    #[fixme] fn GetDesc() -> D3D12_RESOURCE_DESC,
     fn GetGPUVirtualAddress() -> D3D12_GPU_VIRTUAL_ADDRESS,
     fn WriteToSubresource(
         DstSubresource: UINT,

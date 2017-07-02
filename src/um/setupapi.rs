@@ -19,7 +19,7 @@ use um::prsht::{HPROPSHEETPAGE, LPPROPSHEETHEADERA, LPPROPSHEETHEADERW};
 use um::spapidef::SP_LOG_TOKEN;
 use um::winnt::{
     ANYSIZE_ARRAY, APPLICATION_ERROR_MASK, CHAR, DWORDLONG, ERROR_SEVERITY_ERROR, HANDLE, LONG,
-    LONGLONG, LPCSTR, LPCWSTR, PCSTR, PCWSTR, PSTR, PVOID, PWSTR, VOID, WCHAR,
+    LONGLONG, LPCSTR, LPCWSTR, PCSTR, PCWSTR, PSTR, PVOID, PWSTR, WCHAR,
 };
 use um::winreg::REGSAM;
 pub const LINE_LEN: usize = 256;
@@ -1114,7 +1114,7 @@ extern "system" {
     ) -> BOOL;
     pub fn SetupCloseInfFile(
         InfHandle: HINF,
-    ) -> VOID;
+    ) -> ();
     pub fn SetupFindFirstLineA(
         InfHandle: HINF,
         Section: PCSTR,
@@ -2055,7 +2055,7 @@ extern "system" {
     ) -> PVOID;
     pub fn SetupTermDefaultQueueCallback(
         Context: PVOID,
-    ) -> VOID;
+    ) -> ();
     pub fn SetupDefaultQueueCallbackA(
         Context: PVOID,
         Notification: UINT,
@@ -2228,13 +2228,13 @@ extern "system" {
         ModuleHandle: HINSTANCE,
         CommandLine: PCSTR,
         ShowCommand: INT,
-    ) -> VOID;
+    ) -> ();
     pub fn InstallHinfSectionW(
         Window: HWND,
         ModuleHandle: HINSTANCE,
         CommandLine: PCWSTR,
         ShowCommand: INT,
-    ) -> VOID;
+    ) -> ();
 }
 pub type HSPFILELOG = PVOID;
 extern "system" {
@@ -2336,21 +2336,21 @@ extern "system" {
         MessageString: LPCWSTR,
         Severity: LogSeverity,
     ) -> BOOL;
-    pub fn SetupCloseLog() -> VOID;
+    pub fn SetupCloseLog() -> ();
     pub fn SetupGetThreadLogToken() -> SP_LOG_TOKEN;
     pub fn SetupSetThreadLogToken(
         LogToken: SP_LOG_TOKEN,
-    ) -> VOID;
+    ) -> ();
 }
-//pub fn SetupWriteTextLog() -> VOID;
-//pub fn SetupWriteTextLogError() -> VOID;
+//pub fn SetupWriteTextLog() -> ();
+//pub fn SetupWriteTextLogError() -> ();
 extern "system" {
     pub fn SetupWriteTextLogInfLine(
         LogToken: SP_LOG_TOKEN,
         Flags: DWORD,
         InfHandle: HINF,
         Context: PINFCONTEXT,
-    ) -> VOID;
+    ) -> ();
     pub fn SetupGetBackupInformationA(
         QueueHandle: HSPFILEQ,
         BackupParams: PSP_BACKUP_QUEUE_PARAMS_A,

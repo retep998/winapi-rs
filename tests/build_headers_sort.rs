@@ -22,9 +22,9 @@ fn read_file<P: AsRef<Path>>(p: P) -> String {
 
 fn get_headers(entries: &str) -> Vec<String> {
     entries.split(',')
-           .map(|x| get_between_quotes(x).to_owned())
-           .filter(|x| !x.is_empty())
-           .collect()
+        .map(|x| get_between_quotes(x).to_owned())
+        .filter(|x| !x.is_empty())
+        .collect()
 }
 
 fn check_inner_imports(
