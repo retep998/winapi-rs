@@ -191,10 +191,16 @@ macro_rules! RIDL {
             ret
         }
     );
-    (@vtbl $interface:ident $vtbl:ident ($($fields:tt)*)) => (
-        IFDEF!{#[repr(C)]
+    (@vtbl $interface:ident $vtbl:ident ($($fields:tt)*)
+        $(fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,)*
+    ) => (
+        RIDL!{@item #[repr(C)]
         pub struct $vtbl {
             $($fields)*
+            $(pub $method: unsafe extern "system" fn(
+                This: *mut $interface,
+                $($p: $t,)*
+            ) -> $rtr,)*
         }}
     );
     (@vtbl $interface:ident $vtbl:ident ($($fields:tt)*)
@@ -236,6 +242,7 @@ macro_rules! RIDL {
             }
         }
     );
+    (@item $thing:item) => ($thing);
 }
 macro_rules! UNION {
     ($base:ident, $field:ident, $variant:ident, $variant_mut:ident, $fieldtype:ty) => (
