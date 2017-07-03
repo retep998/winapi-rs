@@ -850,54 +850,33 @@ extern "system" {
     pub fn RtlAddFunctionTable(
         FunctionTable: PRUNTIME_FUNCTION, EntryCount: DWORD, BaseAddress: DWORD,
     ) -> BOOLEAN;
-    #[cfg(target_arch = "x86_64")]
-    pub fn RtlAddFunctionTable(
-        FunctionTable: PRUNTIME_FUNCTION, EntryCount: DWORD, BaseAddress: DWORD64,
-    ) -> BOOLEAN;
-    pub fn RtlCaptureContext(ContextRecord: PCONTEXT);
-    pub fn RtlCaptureStackBackTrace(
-        FramesToSkip: DWORD, FramesToCapture: DWORD, BackTrace: *mut PVOID, BackTraceHash: PDWORD,
-    ) -> WORD;
+
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn RtlCompareMemory(Source1: *const VOID, Source2: *const VOID, Length: SIZE_T) -> SIZE_T;
+
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
     pub fn RtlCopyMemory(Destination: PVOID, Source: *const VOID, Length: SIZE_T);
-    #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn RtlDeleteFunctionTable(FunctionTable: PRUNTIME_FUNCTION) -> BOOLEAN;
+
     // pub fn RtlFillMemory();
     #[cfg(target_arch = "arm")]
     pub fn RtlInstallFunctionTableCallback(
         TableIdentifier: DWORD, BaseAddress: DWORD, Length: DWORD,
         Callback: PGET_RUNTIME_FUNCTION_CALLBACK, Context: PVOID, OutOfProcessCallbackDll: PCWSTR,
     ) -> BOOLEAN;
-    #[cfg(target_arch = "x86_64")]
-    pub fn RtlInstallFunctionTableCallback(
-        TableIdentifier: DWORD64, BaseAddress: DWORD64, Length: DWORD,
-        Callback: PGET_RUNTIME_FUNCTION_CALLBACK, Context: PVOID, OutOfProcessCallbackDll: PCWSTR,
-    ) -> BOOLEAN;
+
     #[cfg(target_arch = "arm")]
     pub fn RtlLookupFunctionEntry(
         ControlPc: ULONG_PTR, ImageBase: PDWORD, HistoryTable: PUNWIND_HISTORY_TABLE,
     ) -> PRUNTIME_FUNCTION;
-    #[cfg(target_arch = "x86_64")]
-    pub fn RtlLookupFunctionEntry(
-        ControlPc: DWORD64, ImageBase: PDWORD64, HistoryTable: PUNWIND_HISTORY_TABLE,
-    ) -> PRUNTIME_FUNCTION;
+
     // pub fn RtlMoveMemory();
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn RtlPcToFileHeader(PcValue: PVOID, BaseOfImage: *mut PVOID) -> PVOID;
+
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
     // pub fn RtlRaiseException();
+
+
     #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn RtlRestoreContext(ContextRecord: PCONTEXT, ExceptionRecord: *mut EXCEPTION_RECORD);
-    pub fn RtlUnwind(
-        TargetFrame: PVOID, TargetIp: PVOID, ExceptionRecord: PEXCEPTION_RECORD, ReturnValue: PVOID,
-    );
-    #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn RtlUnwindEx(
-        TargetFrame: PVOID, TargetIp: PVOID, ExceptionRecord: PEXCEPTION_RECORD, ReturnValue: PVOID,
-        ContextRecord: PCONTEXT, HistoryTable: PUNWIND_HISTORY_TABLE,
-    );
+
     #[cfg(target_arch = "arm")]
     pub fn RtlVirtualUnwind(
         HandlerType: DWORD, ImageBase: DWORD, ControlPc: DWORD, FunctionEntry: PRUNTIME_FUNCTION,
@@ -905,11 +884,7 @@ extern "system" {
         ContextPointers: PKNONVOLATILE_CONTEXT_POINTERS,
     ) -> PEXCEPTION_ROUTINE;
     #[cfg(target_arch = "x86_64")]
-    pub fn RtlVirtualUnwind(
-        HandlerType: DWORD, ImageBase: DWORD64, ControlPc: DWORD64,
-        FunctionEntry: PRUNTIME_FUNCTION, ContextRecord: PCONTEXT, HandlerData: *mut PVOID,
-        EstablisherFrame: PDWORD64, ContextPointers: PKNONVOLATILE_CONTEXT_POINTERS,
-    ) -> PEXCEPTION_ROUTINE;
+
     // pub fn RtlZeroMemory();
     pub fn SearchPathA(
         lpPath: LPCSTR, lpFileName: LPCSTR, lpExtension: LPCSTR, nBufferLength: DWORD,
@@ -1037,9 +1012,6 @@ extern "system" {
     // pub fn UnregisterWaitUntilOOBECompleted();
     pub fn VerLanguageNameA(wLang: DWORD, szLang: LPSTR, cchLang: DWORD) -> DWORD;
     pub fn VerLanguageNameW(wLang: DWORD, szLang: LPWSTR, cchLang: DWORD) -> DWORD;
-    pub fn VerSetConditionMask(
-        ConditionMask: ULONGLONG, TypeMask: DWORD, Condition: BYTE,
-    ) -> ULONGLONG;
     pub fn VerifyScripts(
         dwFlags: DWORD, lpLocaleScripts: LPCWSTR, cchLocaleScripts: c_int, lpTestScripts: LPCWSTR,
         cchTestScripts: c_int,
