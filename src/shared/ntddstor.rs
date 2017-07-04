@@ -8,7 +8,7 @@ use shared::basetsd::ULONG64;
 use shared::devpropdef::DEVPROPKEY;
 use shared::guiddef::GUID;
 use shared::minwindef::{UCHAR, ULONG, USHORT};
-use shared::ntdef::{CHAR, LARGE_INTEGER, LONGLONG, SHORT, ULONGLONG, WCHAR};
+use shared::ntdef::{CHAR, LARGE_INTEGER, LONGLONG, MAXULONG, SHORT, ULONGLONG, WCHAR};
 use um::winioctl::{
     DEVICE_TYPE, FILE_ANY_ACCESS, FILE_DEVICE_MASS_STORAGE, FILE_READ_ACCESS,
     FILE_WRITE_ACCESS, METHOD_BUFFERED,
@@ -1108,8 +1108,7 @@ STRUCT!{struct STORAGE_DEVICE_NUMA_PROPERTY {
     NumaNode: ULONG,
 }}
 pub type PSTORAGE_DEVICE_NUMA_PROPERTY = *mut STORAGE_DEVICE_NUMA_PROPERTY;
-// TODO: Needs shared::ntdef::MAXULONG
-//pub const STORAGE_DEVICE_NUMA_NODE_UNKNOWN: ULONG = MAXULONG;
+pub const STORAGE_DEVICE_NUMA_NODE_UNKNOWN: ULONG = MAXULONG;
 pub const DeviceDsmActionFlag_NonDestructive: ULONG = 0x80000000;
 #[inline]
 pub fn IsDsmActionNonDestructive(_Action: DEVICE_DATA_MANAGEMENT_SET_ACTION) -> BOOLEAN {
