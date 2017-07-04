@@ -705,7 +705,7 @@ pub type PSTORAGE_DEVICE_RESILIENCY_DESCRIPTOR = *mut STORAGE_DEVICE_RESILIENCY_
 ENUM!{enum STORAGE_RPMB_FRAME_TYPE {
     StorageRpmbFrameTypeUnknown = 0,
     StorageRpmbFrameTypeStandard,
-	StorageRpmbFrameTypeMax,
+    StorageRpmbFrameTypeMax,
 }}
 pub type PSTORAGE_RPMB_FRAME_TYPE = *mut STORAGE_RPMB_FRAME_TYPE;
 pub const STORAGE_RPMB_DESCRIPTOR_VERSION_1: ULONG = 1;
