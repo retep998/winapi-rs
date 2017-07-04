@@ -296,15 +296,9 @@ interface ID2D1Image(ID2D1ImageVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
 }}
 RIDL!{#[uuid(0xa2296057, 0xea42, 0x4099, 0x98, 0x3b, 0x53, 0x9f, 0xb6, 0x50, 0x54, 0x26)]
 interface ID2D1Bitmap(ID2D1BitmapVtbl): ID2D1Image(ID2D1ImageVtbl) {
-    fn GetSize(
-        ret: *mut D2D1_SIZE_F,
-    ) -> *mut D2D1_SIZE_F, // FIXME: ABI issue,
-    fn GetPixelSize(
-        ret: *mut D2D1_SIZE_U,
-    ) -> *mut D2D1_SIZE_U, // FIXME: ABI issue,
-    fn GetPixelFormat(
-        ret: *mut D2D1_PIXEL_FORMAT,
-    ) -> *mut D2D1_PIXEL_FORMAT, // FIXME: ABI issue,
+    #[fixme] fn GetSize() -> D2D1_SIZE_F,
+    #[fixme] fn GetPixelSize() -> D2D1_SIZE_U,
+    #[fixme] fn GetPixelFormat() -> D2D1_PIXEL_FORMAT,
     fn GetDpi(
         dpiX: *mut FLOAT,
         dpiY: *mut FLOAT,
@@ -375,9 +369,7 @@ interface ID2D1SolidColorBrush(ID2D1SolidColorBrushVtbl): ID2D1Brush(ID2D1BrushV
     fn SetColor(
         color: *const D2D1_COLOR_F,
     ) -> (),
-    fn GetColor(
-        color: *mut D2D1_COLOR_F,
-    ) -> *mut D2D1_COLOR_F,
+    #[fixme] fn GetColor() -> D2D1_COLOR_F,
 }}
 RIDL!{#[uuid(0x2cd906ab, 0x12e2, 0x11dc, 0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9)]
 interface ID2D1LinearGradientBrush(ID2D1LinearGradientBrushVtbl): ID2D1Brush(ID2D1BrushVtbl) {
@@ -387,12 +379,8 @@ interface ID2D1LinearGradientBrush(ID2D1LinearGradientBrushVtbl): ID2D1Brush(ID2
     fn SetEndPoint(
         endPoint: D2D1_POINT_2F,
     ) -> (),
-    fn GetStartPoint(
-        ret: *mut D2D1_POINT_2F,
-    ) -> *mut D2D1_POINT_2F, // FIXME ABI issue,
-    fn GetEndPoint(
-        ret: *mut D2D1_POINT_2F,
-    ) -> *mut D2D1_POINT_2F, // FIXME ABI issue,
+    #[fixme] fn GetStartPoint() -> D2D1_POINT_2F,
+    #[fixme] fn GetEndPoint() -> D2D1_POINT_2F,
     fn GetGradientStopCollection(
         gradientStopCollection: *mut *mut ID2D1GradientStopCollection,
     ) -> (),
@@ -411,12 +399,8 @@ interface ID2D1RadialGradientBrush(ID2D1RadialGradientBrushVtbl): ID2D1Brush(ID2
     fn SetRadiusY(
         radiusY: FLOAT,
     ) -> (),
-    fn GetCenter(
-        ret: *mut D2D1_POINT_2F,
-    ) -> *mut D2D1_POINT_2F, // FIXME ABI issue,
-    fn GetGradientOriginOffset(
-        ret: *mut D2D1_POINT_2F,
-    ) -> *mut D2D1_POINT_2F, // FIXME ABI issue,
+    #[fixme] fn GetCenter() -> D2D1_POINT_2F,
+    #[fixme] fn GetGradientOriginOffset() -> D2D1_POINT_2F,
     fn GetRadiusX() -> FLOAT,
     fn GetRadiusY() -> FLOAT,
     fn GetGradientStopCollection(
@@ -633,9 +617,7 @@ interface ID2D1Mesh(ID2D1MeshVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
 }}
 RIDL!{#[uuid(0x2cd9069b, 0x12e2, 0x11dc, 0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9)]
 interface ID2D1Layer(ID2D1LayerVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
-    fn GetSize(
-        ret: *mut D2D1_SIZE_F,
-    ) -> *mut D2D1_SIZE_F, // FIXME: ABI issue
+    #[fixme] fn GetSize() -> D2D1_SIZE_F,
 }}
 RIDL!{#[uuid(0x28506e39, 0xebf6, 0x46a1, 0xbb, 0x47, 0xfd, 0x85, 0x56, 0x5a, 0xb9, 0x57)]
 interface ID2D1DrawingStateBlock(ID2D1DrawingStateBlockVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
@@ -859,9 +841,7 @@ interface ID2D1RenderTarget(ID2D1RenderTargetVtbl): ID2D1Resource(ID2D1ResourceV
         tag1: *mut D2D1_TAG,
         tag2: *mut D2D1_TAG,
     ) -> HRESULT,
-    fn GetPixelFormat(
-        ret: *mut D2D1_PIXEL_FORMAT,
-    ) -> *mut D2D1_PIXEL_FORMAT, // FIXME: ABI issue,
+    #[fixme] fn GetPixelFormat() -> D2D1_PIXEL_FORMAT,
     fn SetDpi(
         dpiX: FLOAT,
         dpiY: FLOAT,
@@ -870,12 +850,8 @@ interface ID2D1RenderTarget(ID2D1RenderTargetVtbl): ID2D1Resource(ID2D1ResourceV
         dpiX: *mut FLOAT,
         dpiY: *mut FLOAT,
     ) -> (),
-    fn GetSize(
-        ret: *mut D2D1_SIZE_F,
-    ) -> *mut D2D1_SIZE_F, // FIXME: ABI issue,
-    fn GetPixelSize(
-        ret: *mut D2D1_SIZE_U,
-    ) -> *mut D2D1_SIZE_U, // FIXME: ABI issue,
+    #[fixme] fn GetSize() -> D2D1_SIZE_F,
+    #[fixme] fn GetPixelSize() -> D2D1_SIZE_U,
     fn GetMaximumBitmapSize() -> UINT32,
     fn IsSupported(
         renderTargetProperties: *const D2D1_RENDER_TARGET_PROPERTIES,

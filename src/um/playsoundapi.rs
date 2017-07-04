@@ -4,7 +4,10 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use super::*;
+//! ApiSet Contract for api-ms-win-mm-playsound-l1-1-0
+
+use shared::minwindef::DWORD;
+
 pub const SND_SYNC: DWORD = 0x0000;
 pub const SND_ASYNC: DWORD = 0x0001;
 pub const SND_NODEFAULT: DWORD = 0x0002;
