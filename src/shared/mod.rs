@@ -36,6 +36,7 @@ pub mod guiddef;
 #[cfg(feature = "minwindef")] pub mod minwindef;
 #[cfg(feature = "mmreg")] pub mod mmreg;
 #[cfg(feature = "ntddser")] pub mod ntddser;
+#[cfg(feature = "ntddstor")] pub mod ntddstor;
 #[cfg(feature = "ntdef")] pub mod ntdef;
 #[cfg(feature = "ntstatus")] pub mod ntstatus;
 #[cfg(feature = "qos")] pub mod qos;
