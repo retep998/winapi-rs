@@ -187,7 +187,7 @@ macro_rules! RIDL {
     (@method #[fixme] fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty) => (
         #[inline] pub unsafe fn $method(&self, $($p: $t,)*) -> $rtr {
             let mut ret = $crate::_core::mem::uninitialized();
-            ((*self.lpVtbl).$method)(self as *const _ as *mut _, $($p,)* &mut ret);
+            ((*self.lpVtbl).$method)(self as *const _ as *mut _, &mut ret, $($p,)*);
             ret
         }
     );
@@ -221,8 +221,8 @@ macro_rules! RIDL {
             $($fields)*
             pub $method: unsafe extern "system" fn(
                 This: *mut $interface,
-                $($p: $t,)*
                 ret: *mut $rtr,
+                $($p: $t,)*
             ) -> *mut $rtr,
         ) $($tail)*}
     );
