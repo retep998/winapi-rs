@@ -30,7 +30,7 @@ STRUCT!{struct DXGI_MAPPED_RECT {
 }}
 STRUCT!{struct DXGI_ADAPTER_DESC {
     Description: [WCHAR; 128],
-    VectorId: UINT,
+    VendorId: UINT,
     DeviceId: UINT,
     SubSysId: UINT,
     Revision: UINT,
