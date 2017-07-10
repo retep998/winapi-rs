@@ -123,6 +123,7 @@ pub mod gl;
 #[cfg(feature = "urlhist")] pub mod urlhist;
 #[cfg(feature = "urlmon")] pub mod urlmon;
 #[cfg(feature = "usbspec")] pub mod usbspec;
+#[cfg(feature = "userenv")] pub mod userenv;
 #[cfg(feature = "usp10")] pub mod usp10;
 #[cfg(feature = "vsbackup")] pub mod vsbackup;
 #[cfg(feature = "vss")] pub mod vss;
