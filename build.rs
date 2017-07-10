@@ -102,7 +102,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dpa_dsa", &["basetsd", "minwindef", "winnt"], &["comctl32"]),
     ("dpapi", &["minwindef", "wincrypt", "windef", "winnt"], &["crypt32"]),
     ("dsgetdc", &["guiddef", "minwindef", "winnt"], &[]),
-    ("dsound", &["guiddef", "minwindef", "mmsystem", "unknwnbase", "windef", "winerror", "winnt"], &[]),
+    ("dsound", &["guiddef", "minwindef", "mmsystem", "unknwnbase", "windef", "winerror", "winnt"], &["dsound"]),
     ("dsrole", &["guiddef", "minwindef", "winnt"], &[]),
     ("dwmapi", &["minwindef"], &[]),
     ("dwrite", &["basetsd", "d2d1", "dcommon", "guiddef", "minwindef", "unknwnbase", "windef", "winerror", "wingdi", "winnt"], &["dwrite"]),
