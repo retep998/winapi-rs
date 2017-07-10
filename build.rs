@@ -72,7 +72,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("coml2api", &["minwindef"], &[]),
     ("commapi", &["minwinbase", "minwindef", "winbase", "winnt"], &["kernel32"]),
     ("commctrl", &["basetsd", "commoncontrols", "guiddef", "minwinbase", "minwindef", "vcruntime", "windef", "winnt", "winuser"], &["comctl32"]),
-    ("commdlg", &["basetsd", "minwindef", "prsht", "unknwnbase", "windef", "wingdi", "winnt", "winuser"], &[]),
+    ("commdlg", &["basetsd", "minwindef", "prsht", "unknwnbase", "windef", "wingdi", "winnt", "winuser"], &["comdlg32"]),
     ("commoncontrols", &["commctrl", "guiddef", "minwindef", "unknwnbase", "windef", "winnt"], &["comctl32"]),
     ("consoleapi", &["minwindef", "wincon", "winnt"], &["kernel32"]),
     ("corsym", &["basetsd", "objidlbase", "unknwnbase", "winnt"], &[]),
