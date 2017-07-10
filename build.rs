@@ -210,6 +210,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("winusb", &["minwindef", "winnt"], &[]),
     ("winusbio", &["minwindef", "usb"], &[]),
     ("winuser", &["basetsd", "guiddef", "limits", "minwinbase", "minwindef", "vadefs", "windef", "wingdi", "winnt"], &["user32"]),
+    ("winver", &["minwindef", "winnt"], &["version"]),
     ("ws2spi", &["basetsd", "guiddef", "minwindef", "winnt", "winsock2"], &[]),
     ("ws2tcpip", &["minwindef", "winsock2"], &[]),
     ("xinput", &["minwindef", "winnt"], &[]),
