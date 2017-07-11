@@ -5,8 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! XInput procedure declarations, constant definitions and macros
-use shared::minwindef::{BYTE, DWORD, WORD};
-use um::winnt::{SHORT, WCHAR};
+use shared::guiddef::GUID;
+use shared::minwindef::{BOOL, BYTE, DWORD, UINT, WORD};
+use um::winnt::{LPWSTR, SHORT, WCHAR};
 pub const XINPUT_DEVTYPE_GAMEPAD: BYTE = 0x01;
 pub const XINPUT_DEVSUBTYPE_GAMEPAD: BYTE = 0x01;
 pub const XINPUT_DEVSUBTYPE_WHEEL: BYTE = 0x02;
@@ -123,3 +124,43 @@ STRUCT!{struct XINPUT_KEYSTROKE {
     HidCode: BYTE,
 }}
 pub type PXINPUT_KEYSTROKE = *mut XINPUT_KEYSTROKE;
+extern "system" {
+    pub fn XInputGetState(
+        dwUserIndex: DWORD,
+        pState: *mut XINPUT_STATE,
+    ) -> DWORD;
+    pub fn XInputSetState(
+        dwUserIndex: DWORD,
+        pVibration: *mut XINPUT_VIBRATION,
+    ) -> DWORD;
+    pub fn XInputGetCapabilities(
+        dwUserIndex: DWORD,
+        dwFlags: DWORD,
+        pCapabilities: *mut XINPUT_CAPABILITIES,
+    ) -> DWORD;
+    pub fn XInputEnable(
+        enable: BOOL,
+    );
+    pub fn XInputGetAudioDeviceIds(
+        dwUserIndex: DWORD,
+        pRenderDeviceId: LPWSTR,
+        pRenderCount: *mut UINT,
+        pCaptureDeviceId: LPWSTR,
+        pCaptureCount: *mut UINT,
+    ) -> DWORD;
+    pub fn XInputGetBatteryInformation(
+        dwUserIndex: DWORD,
+        devType: BYTE,
+        pBatteryInformation: *mut XINPUT_BATTERY_INFORMATION,
+    ) -> DWORD;
+    pub fn XInputGetKeystroke(
+        dwUserIndex: DWORD,
+        dwReserved: DWORD,
+        pKeystroke: PXINPUT_KEYSTROKE,
+    ) -> DWORD;
+    pub fn XInputGetDSoundAudioDeviceGuids(
+        dwUserIndex: DWORD,
+        pDSoundRenderGuid: *mut GUID,
+        pDSoundCaptureGuid: *mut GUID,
+    ) -> DWORD;
+}
