@@ -17,7 +17,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("bugcodes", &["ntdef"], &[]),
     ("cderr", &["minwindef"], &[]),
     ("cfg", &["minwindef"], &[]),
-    ("d3d9", &["basetsd", "d3d9caps", "d3d9types", "guiddef", "minwindef", "unknwnbase", "windef", "wingdi", "winnt"], &[]),
+    ("d3d9", &["basetsd", "d3d9caps", "d3d9types", "guiddef", "minwindef", "unknwnbase", "windef", "wingdi", "winnt"], &["d3d9"]),
     ("d3d9caps", &["d3d9types", "guiddef", "minwindef", "winnt"], &[]),
     ("d3d9types", &["basetsd", "guiddef", "minwindef", "windef", "winnt"], &[]),
     ("dcomptypes", &["dxgitype", "minwindef", "winnt"], &[]),
