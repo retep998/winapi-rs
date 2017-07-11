@@ -183,7 +183,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("usbspec", &["basetsd", "minwindef"], &[]),
     ("userenv", &["minwindef", "winnt"], &["userenv"]),
     ("usp10", &["minwindef", "ntdef", "windef", "winerror", "wingdi", "winnt"], &["usp10"]),
-    ("vsbackup", &["minwindef", "unknwnbase", "vss", "vswriter", "winnt", "wtypes"], &[]),
+    ("vsbackup", &["guiddef", "minwindef", "unknwnbase", "vss", "vswriter", "winnt", "wtypes"], &["vssapi"]),
     ("vss", &["guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("vsserror", &["winnt"], &[]),
     ("vswriter", &["minwindef", "unknwnbase", "vss", "winnt", "wtypes"], &[]),
