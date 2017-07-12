@@ -1,0 +1,18 @@
+LIBRARY Cabinet.dll
+EXPORTS
+CloseCompressor@4 @35
+CloseDecompressor@4 @45
+Compress@24 @33
+CreateCompressor@12 @30
+CreateDecompressor@12 @40
+Decompress@24 @43
+FDICopy @22
+FDICreate @20
+FDIDestroy @23
+FDIIsCabinet @21
+QueryCompressorInformation@16 @32
+QueryDecompressorInformation@16 @42
+ResetCompressor@4 @34
+ResetDecompressor@4 @44
+SetCompressorInformation@16 @31
+SetDecompressorInformation@16 @41

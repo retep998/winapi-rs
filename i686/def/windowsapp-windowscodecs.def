@@ -1,0 +1,11 @@
+LIBRARY WindowsCodecs.dll
+EXPORTS
+WICConvertBitmapSource@12
+WICCreateBitmapFromSection@28
+WICCreateBitmapFromSectionEx@32
+WICGetMetadataContentSize@12
+WICMapGuidToShortName@16
+WICMapSchemaToName@20
+WICMapShortNameToGuid@8
+WICMatchMetadataContent@16
+WICSerializeMetadataContent@16

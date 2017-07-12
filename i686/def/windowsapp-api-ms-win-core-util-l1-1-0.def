@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-core-util-l1-1-0.dll
+EXPORTS
+DecodePointer@4
+EncodePointer@4

@@ -1,0 +1,17 @@
+LIBRARY pdh.dll
+EXPORTS
+PdhAddCounterW@16
+PdhAddEnglishCounterW@16
+PdhCloseLog@8
+PdhCloseQuery@4
+PdhCollectQueryData@4
+PdhExpandWildCardPathW@20
+PdhGetCounterInfoW@16
+PdhGetFormattedCounterArrayW@20
+PdhGetFormattedCounterValue@16
+PdhGetRawCounterValue@12
+PdhOpenLogW@28
+PdhOpenQueryW@12
+PdhRemoveCounter@4
+PdhUpdateLogW@8
+PdhValidatePathW@4

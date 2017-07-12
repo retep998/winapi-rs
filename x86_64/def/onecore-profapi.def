@@ -1,0 +1,17 @@
+LIBRARY profapi.dll
+EXPORTS
+CreateAppContainerEnumerator @108
+CreateEnvBlock @101
+DeleteAppContainerEnumerator @110
+DestroyEnvBlock @102
+ExpandEnvStringForUser @103
+GetAppContainerPath @111
+GetAppContainerPathFromSidString @115
+GetAppContainerRegistryHandle @107
+GetAppContainerRegistryHandleFromName @114
+GetAppContainerRegistryPath @112
+GetAppContainerSpecificSubPath @113
+GetBasicProfileFolderPath @104
+GetNextAppContainerSid @109
+LoadProfileBasic @105
+UnloadProfileBasic @106

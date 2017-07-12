@@ -1,0 +1,20 @@
+LIBRARY api-ms-win-core-localization-ansi-l1-1-0.dll
+EXPORTS
+EnumCalendarInfoA
+EnumCalendarInfoExA
+EnumDateFormatsA
+EnumDateFormatsExA
+EnumLanguageGroupLocalesA
+EnumSystemCodePagesA
+EnumSystemLanguageGroupsA
+EnumTimeFormatsA
+EnumUILanguagesA
+FoldStringA
+GetCPInfoExA
+GetCalendarInfoA
+GetCurrencyFormatA
+GetGeoInfoA
+GetNumberFormatA
+GetStringTypeExA
+SetCalendarInfoA
+SetLocaleInfoA

@@ -1,0 +1,5 @@
+LIBRARY dhcpcsvc.DLL
+EXPORTS
+DhcpCApiCleanup@0
+DhcpCApiInitialize@4
+DhcpRequestParams@44
