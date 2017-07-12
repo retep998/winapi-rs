@@ -16,7 +16,7 @@
 * When breaking on binary operators, put the operator at the beginning of the new line.
 * Do not use aligned indentation. Indentation should always be block indentation.
 * Always use spaces for indentation.
-* Blank lines are evil.
+* Blank lines should be avoided.
 * Files must end with a trailing newline.
 
 ## Imports
@@ -54,6 +54,14 @@ extern "system" {
 }
 ```
 
+## Macros
+
+Some macros have been defined in the Windows APIs (like `EventDataDescCreate`). These should be
+converted to regular Rust functions. They should be specified as `unsafe` and be annotated
+with an `#[inline]` attribute. Additionally they should attempt to list all parameters on a
+single line. If they cannot without exceeding the 99 character limit, they should be specified
+one-per-line (with trailing commas for every one).
+
 ## Function pointers
 
 ```Rust
@@ -73,6 +81,8 @@ FN!{stdcall NAMEENUMPROCA(
 ## Constants
 
 * Convert macro constants to Rust constants.
+* Numeric values should be formatted identically to how they are in the source file (don't convert
+  hex values to decimal, preserve capitalization of hex values, etc.)
 * The type of the constant should depend on where the constant is used. MSDN may help for this.
 
 ```C
@@ -84,6 +94,9 @@ pub const CLSCTX_INPROC: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER;
 
 ## GUIDs
 
+* Numeric values should be formatted identically to how they are in the source file (don't convert
+  hex values to decimal, preserve capitalization of hex values, etc.)
+
 ```Rust
 DEFINE_GUID!{GUID_DEVCLASS_SENSOR,
     0x5175d334, 0xc371, 0x4806, 0xb3, 0xba, 0x71, 0xfd, 0x53, 0xc9, 0x25, 0x8d}
@@ -91,7 +104,7 @@ DEFINE_GUID!{GUID_DEVCLASS_SENSOR,
 
 ## Structs
 
-* One field per line.
+* One field per line (all with trailing commas)
 
 ```C
 typedef struct _GROUP_AFFINITY {
@@ -112,8 +125,11 @@ pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
 ## Unions
 
 * `UNION!` is being deprecated in favor of `UNION2!` in order to more closely align with the new
-  untagged union feature.
+  untagged union feature. Note that the `UNION2` macro requires the alignment of the struct to
+  be specified via the datatype of the backing data array. Additionally this alignment can vary
+  for 32- and 64-bit builds and needs to be specified for both if they're different.
 
+Example C union:
 ```C
 typedef union {
     USN_RECORD_COMMON_HEADER Header;
@@ -122,6 +138,9 @@ typedef union {
     USN_RECORD_V4 V4;
 } USN_RECORD_UNION, *PUSN_RECORD_UNION;
 ```
+
+For unions where the alignment matches for 32- and 64-bits the alignment can just be specified
+once:
 ```Rust
 UNION2!{union USN_RECORD_UNION {
     [u64; 10],
@@ -133,10 +152,21 @@ UNION2!{union USN_RECORD_UNION {
 pub type PUSN_RECORD_UNION = *mut USN_RECORD_UNION;
 ```
 
-* The first parameter to `UNION2!` is the storage for that union. It must have both the correct
-  size and alignment. You can use the following C++ code to print out the storage for any union
-  type that can be named. Defining `NONAMELESSUNION` will help with naming anonymous unions.
+Otherwise the alignment needs to specified first for the 32-bit and then the 64-bit builds like:
+```Rust
+UNION2!{union USN_RECORD_UNION {
+    [u32; 20] [u64; 10],
+    Header Header_mut: USN_RECORD_COMMON_HEADER,
+    V2 V2_mut: USN_RECORD_V2,
+    V3 V3_mut: USN_RECORD_V3,
+    V4 V4_mut: USN_RECORD_V4,
+}}
+pub type PUSN_RECORD_UNION = *mut USN_RECORD_UNION;
+```
 
+To determine the alignment compile and run a C++ program on Windows specifying `x` as having the
+datatype that's being tested using the following code to print out the necessary array declaration
+for the `UNION2` macro:
 ```C++
 char const * type_for_alignment(uintptr_t align) {
     switch (align) {
@@ -168,10 +198,11 @@ UNION2!{union D3D12_RESOURCE_BARRIER_u {
 
 ## Anonymous unions and structs
 
-* If the type `FOO` contains a single anonymous struct or union, give the anonymous struct or union
-  a name of `FOO_s` or `FOO_u` respectively, and the field a name of `s` or `u` respectively.
-* If the type `FOO` contains multiple anonymous structs or unions, append a number, such as `s1:
-  FOO_s1` `s2: FOO_s2` or `u1: FOO_u1` `u2: FOO_u2`.
+* If the type `FOO` contains a single anonymous struct or union, give the anonymous struct or
+  union a name of `FOO_s` or `FOO_u` respectively, and the field a name of `s` or `u`
+  respectively.
+* If the type `FOO` contains multiple anonymous structs or unions, append a number, such as:
+  `s1: FOO_s1`/`s2: FOO_s2` or `u1: FOO_u1`/`u2: FOO_u2`.
 
 ## COM interfaces
 
@@ -199,6 +230,8 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
 }}
 ```
 
+For COM interfaces without a UUID, a UUID of all-zeroes should be used.
+
 ## Organization of code
 
 * All definitions go into the source file that directly maps to the header the definition is from.
@@ -215,5 +248,5 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
     * If the duplicated thing is a struct or COM interface or union, then choose one header to be
       the canonical source of truth for that definition and publicly re-export the thing from the
       other header.
-* Sometimes a COM interface will have two methods with identical names. If the two methods are both
-  named `Foo`, then name them `Foo1` and `Foo2`.
+* Sometimes a COM interface will have two methods with identical names. If the two methods are
+  both named `Foo`, then name them `Foo1` and `Foo2`.
