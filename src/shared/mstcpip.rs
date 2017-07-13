@@ -10,7 +10,7 @@ use shared::basetsd::{UINT32, UINT64, ULONG64};
 use shared::guiddef::GUID;
 use shared::in6addr::IN6_ADDR;
 use shared::inaddr::IN_ADDR;
-use shared::minwindef::{DWORD, PUCHAR, PULONG, PUSHORT, UCHAR, ULONG, USHORT};
+use shared::minwindef::{DWORD, PULONG, PUSHORT, UCHAR, ULONG, USHORT};
 use shared::ws2def::{
     INADDR_ANY, INADDR_BROADCAST, INADDR_NONE, IOC_IN, IOC_INOUT, IOC_OUT, IOC_VENDOR, SOCKADDR_IN,
     SOCKADDR_STORAGE,
@@ -297,90 +297,90 @@ pub const IN4ADDR_LOOPBACKPREFIX_LENGTH: usize = 8;
 pub const IN4ADDR_LINKLOCALPREFIX_LENGTH: usize = 16;
 pub const IN4ADDR_MULTICASTPREFIX_LENGTH: usize = 4;
 #[inline]
-pub fn IN4_ADDR_EQUAL(a: *const IN_ADDR, b: *const IN_ADDR) -> bool {
-    unsafe { *(*a).S_un.S_addr() == *(*b).S_un.S_addr() }
+pub fn IN4_ADDR_EQUAL(a: &IN_ADDR, b: &IN_ADDR) -> bool {
+    unsafe { *a.S_un.S_addr() == *b.S_un.S_addr() }
 }
 #[inline]
-pub fn IN4_UNALIGNED_ADDR_EQUAL(a: *const IN_ADDR, b: *const IN_ADDR) -> bool {
-    unsafe { *(*a).S_un.S_addr() == *(*b).S_un.S_addr() }
+pub fn IN4_UNALIGNED_ADDR_EQUAL(a: &IN_ADDR, b: &IN_ADDR) -> bool {
+    unsafe { *a.S_un.S_addr() == *b.S_un.S_addr() }
 }
 #[inline]
-pub fn IN4_IS_ADDR_UNSPECIFIED(a: *const IN_ADDR) -> bool {
-    unsafe { *(*a).S_un.S_addr() == IN4ADDR_ANY }
+pub fn IN4_IS_ADDR_UNSPECIFIED(a: &IN_ADDR) -> bool {
+    unsafe { *a.S_un.S_addr() == IN4ADDR_ANY }
 }
 #[inline]
-pub fn IN4_IS_UNALIGNED_ADDR_UNSPECIFIED(a: *const IN_ADDR) -> bool {
-    unsafe { *(*a).S_un.S_addr() == IN4ADDR_ANY }
+pub fn IN4_IS_UNALIGNED_ADDR_UNSPECIFIED(a: &IN_ADDR) -> bool {
+    unsafe { *a.S_un.S_addr() == IN4ADDR_ANY }
 }
 #[inline]
-pub fn IN4_IS_ADDR_LOOPBACK(a: *const IN_ADDR) -> bool {
-    unsafe { *::core::mem::transmute::<*const IN_ADDR, *const PUCHAR>(a) == 0x7f as PUCHAR }
+pub fn IN4_IS_ADDR_LOOPBACK(a: &IN_ADDR) -> bool {
+    unsafe { a.S_un.S_un_b().s_b1 == 0x7f }
 }
 #[inline]
-pub fn IN4_IS_UNALIGNED_ADDR_LOOPBACK(a: *const IN_ADDR) -> bool {
-    unsafe { *::core::mem::transmute::<*const IN_ADDR, *const PUCHAR>(a) == 0x7f as PUCHAR }
+pub fn IN4_IS_UNALIGNED_ADDR_LOOPBACK(a: &IN_ADDR) -> bool {
+    unsafe { a.S_un.S_un_b().s_b1 == 0x7f }
 }
 #[inline]
-pub fn IN4_IS_ADDR_BROADCAST(a: *const IN_ADDR) -> bool {
-    unsafe { *(*a).S_un.S_addr() == IN4ADDR_BROADCAST }
+pub fn IN4_IS_ADDR_BROADCAST(a: &IN_ADDR) -> bool {
+    unsafe { *a.S_un.S_addr() == IN4ADDR_BROADCAST }
 }
 #[inline]
-pub fn IN4_IS_UNALIGNED_ADDR_BROADCAST(a: *const IN_ADDR) -> bool {
-    unsafe { *(*a).S_un.S_addr() == IN4ADDR_BROADCAST }
+pub fn IN4_IS_UNALIGNED_ADDR_BROADCAST(a: &IN_ADDR) -> bool {
+    unsafe { *a.S_un.S_addr() == IN4ADDR_BROADCAST }
 }
 #[inline]
-pub fn IN4_IS_ADDR_MULTICAST(a: *const IN_ADDR) -> bool {
-    IN4_MULTICAST(unsafe { *(*a).S_un.S_addr() as LONG })
+pub fn IN4_IS_ADDR_MULTICAST(a: &IN_ADDR) -> bool {
+    IN4_MULTICAST(unsafe { *a.S_un.S_addr() as LONG })
 }
 #[inline]
-pub fn IN4_IS_UNALIGNED_ADDR_MULTICAST(a: *const IN_ADDR) -> bool {
-    IN4_MULTICAST(unsafe { *(*a).S_un.S_addr() as LONG })
+pub fn IN4_IS_UNALIGNED_ADDR_MULTICAST(a: &IN_ADDR) -> bool {
+    IN4_MULTICAST(unsafe { *a.S_un.S_addr() as LONG })
 }
 #[inline]
-pub fn IN4_IS_ADDR_LINKLOCAL(a: *const IN_ADDR) -> bool {
-    unsafe { (*(*a).S_un.S_addr() & 0xffff) == 0xfea9 }
+pub fn IN4_IS_ADDR_LINKLOCAL(a: &IN_ADDR) -> bool {
+    unsafe { (*a.S_un.S_addr() & 0xffff) == 0xfea9 }
 }
 #[inline]
-pub fn IN4_IS_UNALIGNED_ADDR_LINKLOCAL(a: *const IN_ADDR) -> bool {
-    unsafe { (*(*a).S_un.S_addr() & 0xffff) == 0xfea9 }
+pub fn IN4_IS_UNALIGNED_ADDR_LINKLOCAL(a: &IN_ADDR) -> bool {
+    unsafe { (*a.S_un.S_addr() & 0xffff) == 0xfea9 }
 }
 #[inline]
-pub fn IN4_IS_ADDR_SITELOCAL(_: *const IN_ADDR) -> bool {
+pub fn IN4_IS_ADDR_SITELOCAL(_: &IN_ADDR) -> bool {
     false
 }
 #[inline]
-pub fn IN4_IS_UNALIGNED_ADDR_SITELOCAL(_: *const IN_ADDR) -> bool {
+pub fn IN4_IS_UNALIGNED_ADDR_SITELOCAL(_: &IN_ADDR) -> bool {
     false
 }
 #[inline]
-pub fn IN4_IS_ADDR_RFC1918(a: *const IN_ADDR) -> bool {
-    let s_addr = unsafe { *(*a).S_un.S_addr() };
+pub fn IN4_IS_ADDR_RFC1918(a: &IN_ADDR) -> bool {
+    let s_addr = unsafe { *a.S_un.S_addr() };
     ((s_addr & 0x00ff) == 0x0a) || ((s_addr & 0xf0ff) == 0x10ac) || ((s_addr & 0xffff) == 0xa8c0)
 }
 #[inline]
-pub fn IN4_IS_UNALIGNED_ADDR_RFC1918(a: *const IN_ADDR) -> bool {
+pub fn IN4_IS_UNALIGNED_ADDR_RFC1918(a: &IN_ADDR) -> bool {
     IN4_IS_ADDR_RFC1918(a)
 }
 #[inline]
-pub fn IN4_IS_ADDR_MC_LINKLOCAL(a: *const IN_ADDR) -> bool {
-    unsafe { (*(*a).S_un.S_addr() & 0xffffff) == 0xe0 }
+pub fn IN4_IS_ADDR_MC_LINKLOCAL(a: &IN_ADDR) -> bool {
+    unsafe { (*a.S_un.S_addr() & 0xffffff) == 0xe0 }
 }
 #[inline]
-pub fn IN4_IS_ADDR_MC_ADMINLOCAL(a: *const IN_ADDR) -> bool {
-    unsafe { (*(*a).S_un.S_addr() & 0xffff) == 0xffef }
+pub fn IN4_IS_ADDR_MC_ADMINLOCAL(a: &IN_ADDR) -> bool {
+    unsafe { (*a.S_un.S_addr() & 0xffff) == 0xffef }
 }
 #[inline]
-pub fn IN4_IS_ADDR_MC_SITELOCAL(a: *const IN_ADDR) -> bool {
-    let first = unsafe { (*(*a).S_un.S_addr() & 0xff) == 0xef };
+pub fn IN4_IS_ADDR_MC_SITELOCAL(a: &IN_ADDR) -> bool {
+    let first = unsafe { (*a.S_un.S_addr() & 0xff) == 0xef };
     first && !IN4_IS_ADDR_MC_ADMINLOCAL(a)
 }
 #[inline]
-pub fn IN4ADDR_ISANY(a: *const SOCKADDR_IN) -> bool {
-    IN4_IS_ADDR_UNSPECIFIED(unsafe { &(*a).sin_addr as *const IN_ADDR })
+pub fn IN4ADDR_ISANY(a: &SOCKADDR_IN) -> bool {
+    IN4_IS_ADDR_UNSPECIFIED(&a.sin_addr)
 }
 #[inline]
-pub fn IN4ADDR_ISLOOPBACK(a: *const SOCKADDR_IN) -> bool {
-    IN4_IS_ADDR_LOOPBACK(unsafe { &(*a).sin_addr as *const IN_ADDR })
+pub fn IN4ADDR_ISLOOPBACK(a: &SOCKADDR_IN) -> bool {
+    IN4_IS_ADDR_LOOPBACK(&a.sin_addr)
 }
 extern "system" {
     pub fn RtlIpv4AddressToStringA(
