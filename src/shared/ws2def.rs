@@ -266,24 +266,24 @@ pub const IN_CLASSA_NET: LONG = 0xff000000;
 pub const IN_CLASSA_NSHIFT: LONG = 24;
 pub const IN_CLASSA_HOST: LONG = 0x00ffffff;
 pub const IN_CLASSA_MAX: LONG = 128;
-#[inline] #[allow(unused_comparisons)]
+#[inline]
 pub fn IN_CLASSB(i: LONG) -> bool {
-    (i & 0xc0000000) == 0x80000000
+    (i as u32 & 0xc0000000) == 0x80000000
 }
 pub const IN_CLASSB_NET: LONG = 0xffff0000;
 pub const IN_CLASSB_NSHIFT: LONG = 16;
 pub const IN_CLASSB_HOST: LONG = 0x0000ffff;
 pub const IN_CLASSB_MAX: LONG = 65536;
-#[inline] #[allow(unused_comparisons)]
+#[inline]
 pub fn IN_CLASSC(i: LONG) -> bool {
-    (i & 0xe0000000) == 0xc0000000
+    (i as u32 & 0xe0000000) == 0xc0000000
 }
 pub const IN_CLASSC_NET: LONG = 0xffffff00;
 pub const IN_CLASSC_NSHIFT: LONG = 8;
 pub const IN_CLASSC_HOST: LONG = 0x000000ff;
-#[inline] #[allow(unused_comparisons)]
+#[inline]
 pub fn IN_CLASSD(i: c_long) -> bool {
-    (i & 0xf0000000) == 0xe0000000
+    (i as u32 & 0xf0000000) == 0xe0000000
 }
 pub const IN_CLASSD_NET: LONG = 0xf0000000;
 pub const IN_CLASSD_NSHIFT: LONG = 28;
