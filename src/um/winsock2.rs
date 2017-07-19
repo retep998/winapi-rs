@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Definitions to be used with the WinSock 2 DLL and WinSock 2 applications.
-#![allow(overflowing_literals)]
 use ctypes::{
     __uint32, __uint64, c_char, c_double, c_float, c_int, c_long, c_short, c_uchar, c_uint,
     c_ulong, c_ushort,
