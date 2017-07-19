@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Core definitions for the Winsock2 specification
-#![allow(overflowing_literals)]
 use ctypes::{__int64, c_char, c_int, c_long, c_short, c_void};
 use shared::basetsd::SIZE_T;
 use shared::guiddef::LPGUID;
