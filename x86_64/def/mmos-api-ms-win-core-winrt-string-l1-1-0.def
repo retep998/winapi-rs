@@ -1,0 +1,25 @@
+LIBRARY api-ms-win-core-winrt-string-l1-1-0.dll
+EXPORTS
+HSTRING_UserFree
+HSTRING_UserMarshal
+HSTRING_UserSize
+HSTRING_UserUnmarshal
+WindowsCompareStringOrdinal
+WindowsConcatString
+WindowsCreateString
+WindowsCreateStringReference
+WindowsDeleteString
+WindowsDeleteStringBuffer
+WindowsDuplicateString
+WindowsGetStringLen
+WindowsGetStringRawBuffer
+WindowsInspectString
+WindowsIsStringEmpty
+WindowsPreallocateStringBuffer
+WindowsPromoteStringBuffer
+WindowsReplaceString
+WindowsStringHasEmbeddedNull
+WindowsSubstring
+WindowsSubstringWithSpecifiedLength
+WindowsTrimStringEnd
+WindowsTrimStringStart

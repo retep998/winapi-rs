@@ -1,0 +1,11 @@
+LIBRARY CompPkgSup.DLL
+EXPORTS
+AreDvdCodecsEnabled
+GetMediaComponentPackageInfo
+GetMediaExtensionCommunicationFactory
+GetServerForPMP
+InstantiateComponentFromPackage
+IsMediaBehaviorEnabled
+RegisterServerForPMP
+RequireNetworkDuringMediaTaskCompletion
+UnregisterServerForPMP

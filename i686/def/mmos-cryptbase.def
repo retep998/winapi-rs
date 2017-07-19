@@ -1,0 +1,13 @@
+LIBRARY CRYPTBASE.dll
+EXPORTS
+SystemFunction001@12
+SystemFunction002@12
+SystemFunction003@8
+SystemFunction004@12
+SystemFunction005@12
+SystemFunction028@8
+SystemFunction029@8
+SystemFunction034@12
+SystemFunction036@8
+SystemFunction040@12
+SystemFunction041@12

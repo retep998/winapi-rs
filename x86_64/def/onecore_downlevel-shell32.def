@@ -1,0 +1,164 @@
+LIBRARY SHELL32.dll
+EXPORTS
+CIDLData_CreateFromIDArray @83
+DAD_AutoScroll @129
+DAD_DragEnterEx2 @22
+DAD_DragLeave @132
+DAD_DragMove @134
+DAD_SetDragImage @136
+ILClone @18
+ILCloneFirst @19
+ILCombine @25
+ILCreateFromPathW @190
+ILFindChild @24
+ILFindLastID @16
+ILFree @155
+ILGetSize @152
+ILIsEqual @21
+ILIsParent @23
+ILLoadFromStreamEx @846
+ILRemoveLastID @17
+ILSaveToStream @27
+IsUserAnAdmin @680
+PathCleanupSpec @171
+PathComparePaths @850
+PathIsExe @43
+PathMakeUniqueName @47
+PathResolve @51
+PathYetAnotherMakeUniqueName @75
+PickIconDlg @62
+RestartDialog @59
+SHAlloc @196
+SHChangeNotification_Lock @644
+SHChangeNotification_Unlock @645
+SHChangeNotifyDeregister @4
+SHChangeNotifyRegister @2
+SHCloneSpecialIDList @89
+SHCoCreateInstance @102
+SHCreateDirectory @165
+SHCreateShellFolderView @256
+SHCreateStdEnumFmtEtc @74
+SHDefExtractIconW @6
+SHDoDragDrop @88
+Shell_GetImageLists @71
+Shell_MergeMenus @67
+SHFlushSFCache @526
+SHFree @195
+SHGetImageList @727
+SHGetRealIDL @98
+SHGetSetSettings @68
+SHILCreateFromPath @28
+SHLimitInputEdit @747
+SHRestricted @100
+SHSetInstanceExplorer @176
+SHSimpleIDListFromPath @162
+Win32DeleteFile @164
+AssocCreateForClasses
+CDefFolderMenu_MergeMenu
+CommandLineToArgvW
+CreateAutoListParser
+CreateStorageItemFromShellItem_FullTrustCaller
+CreateStorageItemFromShellItem_FullTrustCaller_ForPackage
+CreateStorageItemFromShellItem_FullTrustCaller_ForPackage_WithProcessHandle
+CreateStorageItemFromShellItem_FullTrustCaller_UseImplicitFlagsAndPackage
+DragAcceptFiles
+DragFinish
+DragQueryFileA
+DragQueryFileW
+DuplicateIcon
+ExtractAssociatedIconW
+ExtractIconA
+ExtractIconExW
+ExtractIconW
+GetAppPathFromLink
+GetCurrentProcessExplicitAppUserModelID
+GetSettingsEnvironmentInstance
+GetShellItemFromStorageItem
+InitNetworkAddressControl
+IsElevationRequired
+PathIsEqualOrSubFolder
+PathIsTemporaryW
+RegenerateUserEnvironment
+SHAddToRecentDocs
+SHAddToRecentDocsEx
+SHAppBarMessage
+SHApplyPropertiesToItem
+SHBindToFolderIDListParent
+SHBindToFolderIDListParentEx
+SHBindToObject
+SHBindToParent
+SHBrowseForFolderA
+SHBrowseForFolderW
+SHChangeNotify
+SHCreateAssociationRegistration
+SHCreateDataObject
+SHCreateDefaultContextMenu
+SHCreateDefaultExtractIcon
+SHCreateDelegatingTransfer
+SHCreateDirectoryExA
+SHCreateDirectoryExW
+SHCreateItemFromIDList
+SHCreateItemFromParsingName
+SHCreateItemFromRelativeName
+SHCreateItemInKnownFolder
+SHCreateItemWithParent
+SHCreateLinksEx
+SHCreateRelatedItem
+SHCreateShellItem
+SHCreateShellItemArrayFromDataObject
+SHCreateShellItemArrayFromIDLists
+SHCreateShellItemArrayFromShellItem
+SHEmptyRecycleBinW
+SHEnableServiceObject
+SHEvaluateSystemCommandTemplate
+SHExtCoCreateInstance
+SHExtractIconsW
+SHFileOperationA
+SHFileOperationW
+SHGetDataFromIDListW
+SHGetDesktopFolder
+SHGetFileInfoA
+SHGetFileInfoW
+SHGetFolderLocation
+SHGetFolderPathA
+SHGetFolderPathAndSubDirW
+SHGetFolderPathW
+SHGetFolderTypeDescription
+SHGetFolderTypeFromCanonicalName
+SHGetIDListFromObject
+SHGetInstanceExplorer
+SHGetKnownFolderIDList
+SHGetKnownFolderItem
+SHGetKnownFolderPath
+SHGetMalloc
+SHGetNameFromIDList
+SHGetPathFromIDListA
+SHGetPathFromIDListEx
+SHGetPathFromIDListW
+SHGetPropertyStoreForWindow
+SHGetPropertyStoreFromParsingName
+SHGetSpecialFolderLocation
+SHGetSpecialFolderPathA
+SHGetSpecialFolderPathW
+SHGetStockIconInfo
+SHGetTemporaryPropertyForItem
+SHGetThreadUndoManager
+SHGetUserDisplayName
+SHLogILFromFSIL
+SHOpenFolderAndSelectItems
+SHOpenWithDialog
+SHParseDisplayName
+SHQueryUserNotificationState
+SHSetKnownFolderPath
+SHSetLocalizedName
+SHShowManageLibraryUI
+SetCurrentProcessExplicitAppUserModelID
+ShellAboutW
+ShellExecCmdLine
+ShellExecuteA
+ShellExecuteExA
+ShellExecuteExW
+ShellExecuteW
+Shell_GetCachedImageIndexW
+Shell_NotifyIconA
+Shell_NotifyIconW

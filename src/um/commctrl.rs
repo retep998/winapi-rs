@@ -88,28 +88,28 @@ pub const CCM_SETNOTIFYWINDOW: UINT = CCM_FIRST + 9;
 pub const CCM_SETWINDOWTHEME: UINT = CCM_FIRST + 0xb;
 pub const CCM_DPISCALE: UINT = CCM_FIRST + 0xc;
 pub const INFOTIPSIZE: c_int = 1024;
-pub const NM_OUTOFMEMORY: UINT = (NM_FIRST as INT - 1) as UINT;
-pub const NM_CLICK: UINT = (NM_FIRST as INT - 2) as UINT;
-pub const NM_DBLCLK: UINT = (NM_FIRST as INT - 3) as UINT;
-pub const NM_RETURN: UINT = (NM_FIRST as INT - 4) as UINT;
-pub const NM_RCLICK: UINT = (NM_FIRST as INT - 5) as UINT;
-pub const NM_RDBLCLK: UINT = (NM_FIRST as INT - 6) as UINT;
-pub const NM_SETFOCUS: UINT = (NM_FIRST as INT - 7) as UINT;
-pub const NM_KILLFOCUS: UINT = (NM_FIRST as INT - 8) as UINT;
-pub const NM_CUSTOMDRAW: UINT = (NM_FIRST as INT - 12) as UINT;
-pub const NM_HOVER: UINT = (NM_FIRST as INT - 13) as UINT;
-pub const NM_NCHITTEST: UINT = (NM_FIRST as INT - 14) as UINT;
-pub const NM_KEYDOWN: UINT = (NM_FIRST as INT - 15) as UINT;
-pub const NM_RELEASEDCAPTURE: UINT = (NM_FIRST as INT - 16) as UINT;
-pub const NM_SETCURSOR: UINT = (NM_FIRST as INT - 17) as UINT;
-pub const NM_CHAR: UINT = (NM_FIRST as INT - 18) as UINT;
-pub const NM_TOOLTIPSCREATED: UINT = (NM_FIRST as INT - 19) as UINT;
-pub const NM_LDOWN: UINT = (NM_FIRST as INT - 20) as UINT;
-pub const NM_RDOWN: UINT = (NM_FIRST as INT - 21) as UINT;
-pub const NM_THEMECHANGED: UINT = (NM_FIRST as INT - 22) as UINT;
-pub const NM_FONTCHANGED: UINT = (NM_FIRST as INT - 23) as UINT;
-pub const NM_CUSTOMTEXT: UINT = (NM_FIRST as INT - 24) as UINT;
-pub const NM_TVSTATEIMAGECHANGING: UINT = (NM_FIRST as INT - 24) as UINT;
+pub const NM_OUTOFMEMORY: UINT = (NM_FIRST as i32 - 1) as u32;
+pub const NM_CLICK: UINT = (NM_FIRST as i32 - 2) as u32;
+pub const NM_DBLCLK: UINT = (NM_FIRST as i32 - 3) as u32;
+pub const NM_RETURN: UINT = (NM_FIRST as i32 - 4) as u32;
+pub const NM_RCLICK: UINT = (NM_FIRST as i32 - 5) as u32;
+pub const NM_RDBLCLK: UINT = (NM_FIRST as i32 - 6) as u32;
+pub const NM_SETFOCUS: UINT = (NM_FIRST as i32 - 7) as u32;
+pub const NM_KILLFOCUS: UINT = (NM_FIRST as i32 - 8) as u32;
+pub const NM_CUSTOMDRAW: UINT = (NM_FIRST as i32 - 12) as u32;
+pub const NM_HOVER: UINT = (NM_FIRST as i32 - 13) as u32;
+pub const NM_NCHITTEST: UINT = (NM_FIRST as i32 - 14) as u32;
+pub const NM_KEYDOWN: UINT = (NM_FIRST as i32 - 15) as u32;
+pub const NM_RELEASEDCAPTURE: UINT = (NM_FIRST as i32 - 16) as u32;
+pub const NM_SETCURSOR: UINT = (NM_FIRST as i32 - 17) as u32;
+pub const NM_CHAR: UINT = (NM_FIRST as i32 - 18) as u32;
+pub const NM_TOOLTIPSCREATED: UINT = (NM_FIRST as i32 - 19) as u32;
+pub const NM_LDOWN: UINT = (NM_FIRST as i32 - 20) as u32;
+pub const NM_RDOWN: UINT = (NM_FIRST as i32 - 21) as u32;
+pub const NM_THEMECHANGED: UINT = (NM_FIRST as i32 - 22) as u32;
+pub const NM_FONTCHANGED: UINT = (NM_FIRST as i32 - 23) as u32;
+pub const NM_CUSTOMTEXT: UINT = (NM_FIRST as i32 - 24) as u32;
+pub const NM_TVSTATEIMAGECHANGING: UINT = (NM_FIRST as i32 - 24) as u32;
 STRUCT!{struct NMTOOLTIPSCREATED {
     hdr: NMHDR,
     hwndToolTips: HWND,
@@ -158,45 +158,45 @@ STRUCT!{struct NMCUSTOMTEXT {
 }}
 pub type LPNMCUSTOMTEXT = *mut NMCUSTOMTEXT;
 pub const NM_FIRST: UINT = 0;
-pub const NM_LAST: UINT = -99i32 as UINT;
-pub const LVN_FIRST: UINT = -100i32 as UINT;
-pub const LVN_LAST: UINT = -199i32 as UINT;
-pub const HDN_FIRST: UINT = -300i32 as UINT;
-pub const HDN_LAST: UINT = -399i32 as UINT;
-pub const TVN_FIRST: UINT = -400i32 as UINT;
-pub const TVN_LAST: UINT = -499i32 as UINT;
-pub const TTN_FIRST: UINT = -520i32 as UINT;
-pub const TTN_LAST: UINT = -549i32 as UINT;
-pub const TCN_FIRST: UINT = -550i32 as UINT;
-pub const TCN_LAST: UINT = -580i32 as UINT;
-// pub const CDN_FIRST: UINT = 0 - 601;
-// pub const CDN_LAST: UINT = 0 - 699;
-pub const TBN_FIRST: UINT = -700i32 as UINT;
-pub const TBN_LAST: UINT = -720i32 as UINT;
-pub const UDN_FIRST: UINT = -721i32 as UINT;
-pub const UDN_LAST: UINT = -729i32 as UINT;
-pub const DTN_FIRST: UINT = -740i32 as UINT;
-pub const DTN_LAST: UINT = -745i32 as UINT;
-pub const MCN_FIRST: UINT = -746i32 as UINT;
-pub const MCN_LAST: UINT = -752i32 as UINT;
-pub const DTN_FIRST2: UINT = -753i32 as UINT;
-pub const DTN_LAST2: UINT = -799i32 as UINT;
-pub const CBEN_FIRST: UINT = -800i32 as UINT;
-pub const CBEN_LAST: UINT = -830i32 as UINT;
-pub const RBN_FIRST: UINT = -831i32 as UINT;
-pub const RBN_LAST: UINT = -859i32 as UINT;
-pub const IPN_FIRST: UINT = -860i32 as UINT;
-pub const IPN_LAST: UINT = -879i32 as UINT;
-pub const SBN_FIRST: UINT = -880i32 as UINT;
-pub const SBN_LAST: UINT = -899i32 as UINT;
-pub const PGN_FIRST: UINT = -900i32 as UINT;
-pub const PGN_LAST: UINT = -950i32 as UINT;
-pub const WMN_FIRST: UINT = -1000i32 as UINT;
-pub const WMN_LAST: UINT = -1200i32 as UINT;
-pub const BCN_FIRST: UINT = -1250i32 as UINT;
-pub const BCN_LAST: UINT = -1350i32 as UINT;
-pub const TRBN_FIRST: UINT = -1501i32 as UINT;
-pub const TRBN_LAST: UINT = -1519i32 as UINT;
+pub const NM_LAST: UINT = -99i32 as u32;
+pub const LVN_FIRST: UINT = -100i32 as u32;
+pub const LVN_LAST: UINT = -199i32 as u32;
+pub const HDN_FIRST: UINT = -300i32 as u32;
+pub const HDN_LAST: UINT = -399i32 as u32;
+pub const TVN_FIRST: UINT = -400i32 as u32;
+pub const TVN_LAST: UINT = -499i32 as u32;
+pub const TTN_FIRST: UINT = -520i32 as u32;
+pub const TTN_LAST: UINT = -549i32 as u32;
+pub const TCN_FIRST: UINT = -550i32 as u32;
+pub const TCN_LAST: UINT = -580i32 as u32;
+pub const CDN_FIRST: UINT = -601i32 as u32;
+pub const CDN_LAST: UINT = -699i32 as u32;
+pub const TBN_FIRST: UINT = -700i32 as u32;
+pub const TBN_LAST: UINT = -720i32 as u32;
+pub const UDN_FIRST: UINT = -721i32 as u32;
+pub const UDN_LAST: UINT = -729i32 as u32;
+pub const DTN_FIRST: UINT = -740i32 as u32;
+pub const DTN_LAST: UINT = -745i32 as u32;
+pub const MCN_FIRST: UINT = -746i32 as u32;
+pub const MCN_LAST: UINT = -752i32 as u32;
+pub const DTN_FIRST2: UINT = -753i32 as u32;
+pub const DTN_LAST2: UINT = -799i32 as u32;
+pub const CBEN_FIRST: UINT = -800i32 as u32;
+pub const CBEN_LAST: UINT = -830i32 as u32;
+pub const RBN_FIRST: UINT = -831i32 as u32;
+pub const RBN_LAST: UINT = -859i32 as u32;
+pub const IPN_FIRST: UINT = -860i32 as u32;
+pub const IPN_LAST: UINT = -879i32 as u32;
+pub const SBN_FIRST: UINT = -880i32 as u32;
+pub const SBN_LAST: UINT = -899i32 as u32;
+pub const PGN_FIRST: UINT = -900i32 as u32;
+pub const PGN_LAST: UINT = -950i32 as u32;
+pub const WMN_FIRST: UINT = -1000i32 as u32;
+pub const WMN_LAST: UINT = -1200i32 as u32;
+pub const BCN_FIRST: UINT = -1250i32 as u32;
+pub const BCN_LAST: UINT = -1350i32 as u32;
+pub const TRBN_FIRST: UINT = -1501i32 as u32;
+pub const TRBN_LAST: UINT = -1519i32 as u32;
 pub const MSGF_COMMCTRL_BEGINDRAG: c_int = 0x4200;
 pub const MSGF_COMMCTRL_SIZEHEADER: c_int = 0x4201;
 pub const MSGF_COMMCTRL_DRAGSELECT: c_int = 0x4202;
@@ -377,7 +377,7 @@ extern "system" {
         fStyle: UINT,
     ) -> BOOL;
 }
-pub const HBITMAP_CALLBACK: HBITMAP = (0 - 1) as HBITMAP;
+pub const HBITMAP_CALLBACK: HBITMAP = -1isize as HBITMAP;
 
 extern "system" {
     pub fn ImageList_Replace(
@@ -915,7 +915,7 @@ STRUCT!{struct TBADDBITMAP {
     nID: UINT_PTR,
 }}
 pub type LPTBADDBITMAP = *mut TBADDBITMAP;
-pub const HINST_COMMCTRL: HINSTANCE = (0 - 1) as HINSTANCE;
+pub const HINST_COMMCTRL: HINSTANCE = -1isize as HINSTANCE;
 pub const IDB_STD_SMALL_COLOR: WPARAM = 0;
 pub const IDB_STD_LARGE_COLOR: WPARAM = 1;
 pub const IDB_VIEW_SMALL_COLOR: WPARAM = 4;
@@ -2064,8 +2064,8 @@ STRUCT!{struct LVITEMW {
     iGroup: c_int,
 }}
 pub type LPLVITEMW = *mut LVITEMW;
-pub const LPSTR_TEXTCALLBACKW: LPWSTR = (0 - 1) as LPWSTR;
-pub const LPSTR_TEXTCALLBACKA: LPSTR = (0 - 1) as LPSTR;
+pub const LPSTR_TEXTCALLBACKW: LPWSTR = -1isize as LPWSTR;
+pub const LPSTR_TEXTCALLBACKA: LPSTR = -1isize as LPSTR;
 pub const I_IMAGECALLBACK: c_int = -1;
 pub const I_IMAGENONE: c_int = -2;
 pub const I_COLUMNSCALLBACK: UINT = -1i32 as UINT;
@@ -2875,10 +2875,10 @@ STRUCT!{struct TVITEMEXW {
     iReserved: c_int,
 }}
 pub type LPTVITEMEXW = *mut TVITEMEXW;
-pub const TVI_ROOT: HTREEITEM = (0 - 0x10000) as HTREEITEM;
-pub const TVI_FIRST: HTREEITEM = (0 - 0x0FFFF) as HTREEITEM;
-pub const TVI_LAST: HTREEITEM = (0 - 0x0FFFE) as HTREEITEM;
-pub const TVI_SORT: HTREEITEM = (0 - 0x0FFFD) as HTREEITEM;
+pub const TVI_ROOT: HTREEITEM = -0x10000isize as HTREEITEM;
+pub const TVI_FIRST: HTREEITEM = -0x0FFFFisize as HTREEITEM;
+pub const TVI_LAST: HTREEITEM = -0x0FFFEisize as HTREEITEM;
+pub const TVI_SORT: HTREEITEM = -0x0FFFDisize as HTREEITEM;
 pub type LPTV_INSERTSTRUCTA = LPTVINSERTSTRUCTA;
 pub type LPTV_INSERTSTRUCTW = LPTVINSERTSTRUCTW;
 pub type TV_INSERTSTRUCTA = TVINSERTSTRUCTA;
@@ -3818,7 +3818,7 @@ pub const BCM_SETNOTE: UINT = BCM_FIRST + 0x0009;
 pub const BCM_GETNOTE: UINT = BCM_FIRST + 0x000A;
 pub const BCM_GETNOTELENGTH: UINT = BCM_FIRST + 0x000B;
 pub const BCM_SETSHIELD: UINT = BCM_FIRST + 0x000C;
-pub const BCCL_NOGLYPH: HIMAGELIST = (0 - 1) as HIMAGELIST;
+pub const BCCL_NOGLYPH: HIMAGELIST = -1isize as HIMAGELIST;
 STRUCT!{struct NMBCDROPDOWN {
     hdr: NMHDR,
     rcButton: RECT,
@@ -3920,15 +3920,10 @@ ENUM!{enum TASKDIALOG_ICON_ELEMENTS {
     TDIE_ICON_MAIN,
     TDIE_ICON_FOOTER,
 }}
-// compile time evaluation is not possible with current version of compiler
-//pub const TD_WARNING_ICON: LPWSTR = MAKEINTRESOURCEW(-1i32 as u16);
-//pub const TD_ERROR_ICON: LPWSTR = MAKEINTRESOURCEW(-2i32 as u16);
-//pub const TD_INFORMATION_ICON: LPWSTR = MAKEINTRESOURCEW(-3i32 as u16);
-//pub const TD_SHIELD_ICON: LPWSTR = MAKEINTRESOURCEW(-4i32 as u16);
-pub const TD_WARNING_ICON: LPWSTR = -1i32 as LPWSTR;
-pub const TD_ERROR_ICON: LPWSTR = -2i32 as LPWSTR;
-pub const TD_INFORMATION_ICON: LPWSTR = -3i32 as LPWSTR;
-pub const TD_SHIELD_ICON: LPWSTR = -4i32 as LPWSTR;
+pub const TD_WARNING_ICON: LPWSTR = MAKEINTRESOURCE!(-1i16);
+pub const TD_ERROR_ICON: LPWSTR = MAKEINTRESOURCE!(-2i16);
+pub const TD_INFORMATION_ICON: LPWSTR = MAKEINTRESOURCE!(-3i16);
+pub const TD_SHIELD_ICON: LPWSTR = MAKEINTRESOURCE!(-4i16);
 ENUM!{enum TASKDIALOG_COMMON_BUTTON_FLAGS {
     TDCBF_OK_BUTTON = 0x0001,
     TDCBF_YES_BUTTON = 0x0002,

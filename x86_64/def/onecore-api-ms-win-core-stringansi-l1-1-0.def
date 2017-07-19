@@ -1,0 +1,14 @@
+LIBRARY api-ms-win-core-stringansi-l1-1-0.dll
+EXPORTS
+CharLowerA
+CharLowerBuffA
+CharNextA
+CharNextExA
+CharPrevA
+CharPrevExA
+CharUpperA
+CharUpperBuffA
+IsCharAlphaA
+IsCharAlphaNumericA
+IsCharLowerA
+IsCharUpperA

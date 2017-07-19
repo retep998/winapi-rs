@@ -1,0 +1,7 @@
+LIBRARY netutils.dll
+EXPORTS
+NetApiBufferAllocate@8
+NetApiBufferFree@4
+NetApiBufferReallocate@12
+NetApiBufferSize@8
+NetRemoteComputerSupports@12

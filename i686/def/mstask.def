@@ -1,0 +1,24 @@
+LIBRARY mstask.dll
+EXPORTS
+ConvertAtJobsToTasks
+GetNetScheduleAccountInformation
+NetrJobAdd
+NetrJobDel
+NetrJobEnum
+NetrJobGetInfo
+SAGetAccountInformation
+SAGetNSAccountInformation
+SASetAccountInformation
+SASetNSAccountInformation
+SetNetScheduleAccountInformation
+_ConvertAtJobsToTasks@0
+_GetNetScheduleAccountInformation@12
+_NetrJobAdd@12
+_NetrJobDel@12
+_NetrJobEnum@20
+_NetrJobGetInfo@12
+_SAGetAccountInformation@16
+_SAGetNSAccountInformation@12
+_SASetAccountInformation@20
+_SASetNSAccountInformation@12
+_SetNetScheduleAccountInformation@12

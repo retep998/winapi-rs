@@ -1,0 +1,11 @@
+LIBRARY dxgi.dll
+EXPORTS
+CreateDXGIFactory
+CreateDXGIFactory1
+CreateDXGIFactory2
+DXGID3D10CreateDevice
+DXGID3D10CreateLayeredDevice
+DXGID3D10GetLayeredDeviceSize
+DXGID3D10RegisterLayers
+DXGIGetDebugInterface1
+DXGIReportAdapterConfiguration

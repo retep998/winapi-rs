@@ -1,0 +1,6 @@
+LIBRARY api-ms-win-core-heap-obsolete-l1-1-0.dll
+EXPORTS
+GlobalLock
+GlobalReAlloc
+GlobalSize
+GlobalUnlock
