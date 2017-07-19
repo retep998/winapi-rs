@@ -642,10 +642,10 @@ STRUCT!{struct CWPRETSTRUCT {
 pub type PCWPRETSTRUCT = *mut CWPRETSTRUCT;
 pub type NPCWPRETSTRUCT = *mut CWPRETSTRUCT;
 pub type LPCWPRETSTRUCT = *mut CWPRETSTRUCT;
-pub const LLKHF_EXTENDED: DWORD = (KF_EXTENDED >> 8) as DWORD;
+pub const LLKHF_EXTENDED: DWORD = (KF_EXTENDED >> 8) as u32;
 pub const LLKHF_INJECTED: DWORD = 0x00000010;
-pub const LLKHF_ALTDOWN: DWORD = (KF_ALTDOWN >> 8) as DWORD;
-pub const LLKHF_UP: DWORD = (KF_UP >> 8) as DWORD;
+pub const LLKHF_ALTDOWN: DWORD = (KF_ALTDOWN >> 8) as u32;
+pub const LLKHF_UP: DWORD = (KF_UP >> 8) as u32;
 pub const LLKHF_LOWER_IL_INJECTED: DWORD = 0x00000002;
 pub const LLMHF_INJECTED: DWORD = 0x00000001;
 pub const LLMHF_LOWER_IL_INJECTED: DWORD = 0x00000002;
@@ -1154,7 +1154,7 @@ pub const WM_WINDOWPOSCHANGING: UINT = 0x0046;
 pub const WM_WINDOWPOSCHANGED: UINT = 0x0047;
 pub const WM_POWER: UINT = 0x0048;
 pub const PWR_OK: WPARAM = 1;
-pub const PWR_FAIL: WPARAM = -1isize as WPARAM;
+pub const PWR_FAIL: WPARAM = -1isize as usize;
 pub const PWR_SUSPENDREQUEST: WPARAM = 1;
 pub const PWR_SUSPENDRESUME: WPARAM = 2;
 pub const PWR_CRITICALRESUME: WPARAM = 3;
@@ -1747,7 +1747,7 @@ pub const CF_PRIVATEFIRST: UINT = 0x0200;
 pub const CF_PRIVATELAST: UINT = 0x02FF;
 pub const CF_GDIOBJFIRST: UINT = 0x0300;
 pub const CF_GDIOBJLAST: UINT = 0x03FF;
-pub const FVIRTKEY: BYTE = TRUE as BYTE;
+pub const FVIRTKEY: BYTE = TRUE as u8;
 pub const FNOINVERT: BYTE = 0x02;
 pub const FSHIFT: BYTE = 0x04;
 pub const FCONTROL: BYTE = 0x08;
@@ -2264,7 +2264,7 @@ extern "system" {
         lpwcx: LPWNDCLASSEXW,
     ) -> BOOL;
 }
-pub const CW_USEDEFAULT: c_int = 0x80000000u32 as i32;
+pub const CW_USEDEFAULT: c_int = 0x80000000;
 pub const HWND_DESKTOP: HWND = 0 as HWND;
 FN!{stdcall PREGISTERCLASSNAMEW(
     LPCWSTR,
@@ -5283,7 +5283,7 @@ pub const DLGC_BUTTON: LRESULT = 0x2000;
 pub const LB_OKAY: LRESULT = 0;
 pub const LB_ERR: LRESULT = -1;
 pub const LB_ERRSPACE: LRESULT = -2;
-pub const LBN_ERRSPACE: WORD = -2i16 as WORD;
+pub const LBN_ERRSPACE: WORD = -2i16 as u16;
 pub const LBN_SELCHANGE: WORD = 1;
 pub const LBN_DBLCLK: WORD = 2;
 pub const LBN_SELCANCEL: WORD = 3;
@@ -5352,7 +5352,7 @@ pub const LBS_STANDARD: DWORD = LBS_NOTIFY | LBS_SORT | WS_VSCROLL | WS_BORDER;
 pub const CB_OKAY: LRESULT = 0;
 pub const CB_ERR: LRESULT = -1;
 pub const CB_ERRSPACE: LRESULT = -2;
-pub const CBN_ERRSPACE: WORD = -1i16 as WORD;
+pub const CBN_ERRSPACE: WORD = -1i16 as u16;
 pub const CBN_SELCHANGE: WORD = 1;
 pub const CBN_DBLCLK: WORD = 2;
 pub const CBN_SETFOCUS: WORD = 3;
