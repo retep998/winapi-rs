@@ -9,6 +9,8 @@
   `RIDL!`).
 * If an identifier happens to match a Rust keyword, then append an underscore. For example `type`
   would turn into `type_`.
+* Macro invocations at the item level should use `{}`. Macro invocations at the expression level
+  should use `()`.
 
 ## Newlines and indentation
 
@@ -88,6 +90,11 @@ FN!{stdcall NAMEENUMPROCA(
 
 * Convert macro constants to Rust constants.
 * The type of the constant should depend on where the constant is used. MSDN may help for this.
+* If the constant has an unsigned type, but the literal needs to be negative, perform a cast such
+  as `-1i16 as u16`. Use the primitive integer types that correspond to the type of the constant.
+* If the constant is initialized to an expression involving a constant of a different type and a
+  cast must be performed, do the cast using the primitive integer types.
+* If the constant is a pointer that is initialized to a negative literal, do `-1isize as LPFOO`.
 
 ```C
 #define CLSCTX_INPROC           (CLSCTX_INPROC_SERVER|CLSCTX_INPROC_HANDLER)

@@ -137,9 +137,6 @@ pub fn MAKEINTRESOURCEA(i: WORD) -> LPSTR {
 pub fn MAKEINTRESOURCEW(i: WORD) -> LPWSTR {
     i as ULONG_PTR as LPWSTR
 }
-macro_rules! MAKEINTRESOURCE {
-    ($i:expr) => { $i as ULONG_PTR as LPWSTR }
-}
 pub const RT_CURSOR: LPWSTR = MAKEINTRESOURCE!(1);
 pub const RT_BITMAP: LPWSTR = MAKEINTRESOURCE!(2);
 pub const RT_ICON: LPWSTR = MAKEINTRESOURCE!(3);
