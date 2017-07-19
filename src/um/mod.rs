@@ -107,6 +107,7 @@ pub mod gl;
 #[cfg(feature = "shobjidl_core")] pub mod shobjidl_core;
 #[cfg(feature = "shtypes")] pub mod shtypes;
 #[cfg(feature = "spapidef")] pub mod spapidef;
+#[cfg(feature = "sporder")] pub mod sporder;
 #[cfg(feature = "sql")] pub mod sql;
 #[cfg(feature = "sqlext")] pub mod sqlext;
 #[cfg(feature = "sqltypes")] pub mod sqltypes;

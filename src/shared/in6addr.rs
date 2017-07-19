@@ -4,9 +4,7 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
 use shared::minwindef::{UCHAR, USHORT};
-
 UNION2!{union in6_addr_u {
     [u16; 8],
     Byte Byte_mut: [UCHAR; 16],
