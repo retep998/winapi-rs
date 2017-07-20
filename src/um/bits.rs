@@ -9,7 +9,7 @@ use shared::guiddef::{GUID, REFGUID};
 use shared::minwindef::{BOOL, DWORD, FILETIME, ULONG};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR, WCHAR};
-pub const BG_SIZE_UNKNOWN: UINT64 = -1i32 as UINT64;
+pub const BG_SIZE_UNKNOWN: UINT64 = -1i64 as u64;
 STRUCT!{struct BG_FILE_PROGRESS {
     BytesTotal: UINT64,
     BytesTransferred: UINT64,

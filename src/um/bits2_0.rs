@@ -9,7 +9,7 @@ use shared::minwindef::DWORD;
 use um::bits::{IBackgroundCopyFile, IBackgroundCopyFileVtbl};
 use um::bits1_5::{IBackgroundCopyJob2, IBackgroundCopyJob2Vtbl};
 use um::winnt::{HRESULT, LPCWSTR};
-pub const BG_LENGTH_TO_EOF: UINT64 = -1i32 as UINT64;
+pub const BG_LENGTH_TO_EOF: UINT64 = -1i64 as u64;
 STRUCT!{struct BG_FILE_RANGE {
     InitialOffset: UINT64,
     Length: UINT64,
