@@ -1,0 +1,5 @@
+LIBRARY ext-ms-win-core-iuri-l1-1-0.dll
+EXPORTS
+CreateIUriBuilder
+CreateUri
+CreateUriWithFragment

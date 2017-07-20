@@ -1,0 +1,20 @@
+LIBRARY PROPSYS.dll
+EXPORTS
+PropVariantToWinRTPropertyValue @435
+WinRTPropertyValueToPropVariant @436
+InitPropVariantFromCLSID
+InitPropVariantFromFileTime
+InitVariantFromBuffer
+PSCreateAdapterFromPropertyStore
+PSCreateMemoryPropertyStore
+PSCreatePropertyStoreFromObject
+PropVariantChangeType
+PropVariantCompareEx
+PropVariantToBSTR
+PropVariantToBoolean
+PropVariantToGUID
+PropVariantToStringAlloc
+PropVariantToStringWithDefault
+PropVariantToVariant
+VariantToGUID
+VariantToPropVariant

@@ -1,0 +1,11 @@
+LIBRARY NEWDEV.dll
+EXPORTS
+DiInstallDevice
+DiInstallDriverW
+DiUninstallDevice
+DiUninstallDriverW
+InstallWindowsUpdateDriverEx
+InstallWindowsUpdateDrivers
+QueryWindowsUpdateDriverStatus
+UpdateDriverForPlugAndPlayDevicesA
+UpdateDriverForPlugAndPlayDevicesW

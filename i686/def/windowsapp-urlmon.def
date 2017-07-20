@@ -1,0 +1,4 @@
+LIBRARY urlmon.dll
+EXPORTS
+UrlMkGetSessionOption@20
+UrlMkSetSessionOption@16

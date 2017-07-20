@@ -1058,8 +1058,8 @@ extern "system" {
     pub fn WaitNamedPipeW(lpNamedPipeName: LPCWSTR, nTimeOut: DWORD) -> BOOL;
     // pub fn WerpInitiateRemoteRecovery();
     pub fn WideCharToMultiByte(
-      CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWSTR, cchWideChar: c_int,
-      lpMultiByteStr: LPSTR, cbMultiByte: c_int, lpDefaultChar: LPCSTR, lpUsedDefaultChar: LPBOOL,
+        CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWSTR, cchWideChar: c_int,
+        lpMultiByteStr: LPSTR, cbMultiByte: c_int, lpDefaultChar: LPCSTR, lpUsedDefaultChar: LPBOOL,
     ) -> c_int;
     pub fn Wow64DisableWow64FsRedirection(OldValue: *mut PVOID) -> BOOL;
     pub fn Wow64RevertWow64FsRedirection(OlValue: PVOID) -> BOOL;

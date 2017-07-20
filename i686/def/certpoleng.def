@@ -1,0 +1,16 @@
+LIBRARY certpoleng.dll
+EXPORTS
+IntPstGetCertificate@16
+IntPstGetNameIdentifierForCertificate@8
+IntPstGetTrustAnchors@16
+IntPstMapCertificateToProvider@12
+IntPstMapUserCredsToProvider@12
+IntPstValidate@24
+PstAcquirePrivateKey@4
+PstGetCertificateChain@12
+PstGetCertificates@24
+PstGetTrustAnchors@16
+PstGetTrustAnchorsEx@20
+PstGetUserNameForCertificate@8
+PstMapCertificate@12
+PstValidate@24

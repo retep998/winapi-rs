@@ -417,34 +417,34 @@ RIDL!(#[uuid(0xfe9e984d, 0x3f95, 0x407c, 0xb5, 0xdb, 0xcb, 0x94, 0xd4, 0xe8, 0xf
 interface ID2D1ImageBrush(ID2D1ImageBrushVtbl): ID2D1Brush(ID2D1BrushVtbl) {
     fn SetImage(
         image: *const ID2D1Image,
-    ) -> c_void,
+    ) -> (),
     fn SetExtendModeX(
         extendModeX: D2D1_EXTEND_MODE,
-    ) -> c_void,
+    ) -> (),
     fn SetExtendModeY(
         extendModeY: D2D1_EXTEND_MODE,
-    ) -> c_void,
+    ) -> (),
     fn SetInterpolationMode(
         interpolationMode: D2D1_INTERPOLATION_MODE,
-    ) -> c_void,
+    ) -> (),
     fn SetSourceRectangle(
         sourceRectangle: *const D2D1_RECT_F,
-    ) -> c_void,
+    ) -> (),
     fn GetImage(
         image: *mut *mut ID2D1Image,
-    ) -> c_void,
+    ) -> (),
     fn GetExtendModeX() -> D2D1_EXTEND_MODE,
     fn GetExtendModeY() -> D2D1_EXTEND_MODE,
     fn GetInterpolationMode() -> D2D1_INTERPOLATION_MODE,
     fn GetSourceRectangle(
         sourceRectangle: *mut D2D1_RECT_F,
-    ) -> c_void,
+    ) -> (),
 });
 RIDL!(#[uuid(0x41343a53, 0xe41a, 0x49a2, 0x91, 0xcd, 0x21, 0x79, 0x3b, 0xbb, 0x62, 0xe5)]
 interface ID2D1BitmapBrush1(ID2D1BitmapBrush1Vtbl): ID2D1BitmapBrush(ID2D1BitmapBrushVtbl) {
     fn SetInterpolationMode1(
         interpolationMode: D2D1_INTERPOLATION_MODE,
-    ) -> c_void,
+    ) -> (),
     fn GetInterpolationMode1() -> D2D1_INTERPOLATION_MODE,
 });
 RIDL!(#[uuid(0x10a72a66, 0xe91c, 0x43f4, 0x99, 0x3f, 0xdd, 0xf4, 0xb8, 0x2b, 0x0b, 0x4a)]
@@ -516,24 +516,24 @@ interface ID2D1Effect(ID2D1EffectVtbl): ID2D1Properties(ID2D1PropertiesVtbl) {
         index: UINT32,
         input: *const ID2D1Image,
         invalidate: BOOL,
-    ) -> c_void,
+    ) -> (),
     fn SetInputCount(
         inputCount: UINT32,
     ) -> HRESULT,
     fn GetInput(
         index: UINT32,
         input: *mut *mut ID2D1Image,
-    ) -> c_void,
+    ) -> (),
     fn GetInputCount() -> UINT32,
     fn GetOutput(
         outputImage: *mut *mut ID2D1Image,
-    ) -> c_void,
+    ) -> (),
 });
 RIDL!(#[uuid(0xa898a84c, 0x3873, 0x4588, 0xb0, 0x8b, 0xeb, 0xbf, 0x97, 0x8d, 0xf0, 0x41)]
 interface ID2D1Bitmap1(ID2D1Bitmap1Vtbl): ID2D1Bitmap(ID2D1BitmapVtbl) {
     fn GetColorContext(
         colorContext: *mut *mut ID2D1ColorContext,
-    ) -> c_void,
+    ) -> (),
     fn GetOptions() -> D2D1_BITMAP_OPTIONS,
     fn GetSurface(
         dxgiSurface: *mut *mut IDXGISurface,
@@ -559,7 +559,7 @@ interface ID2D1GradientStopCollection1(ID2D1GradientStopCollection1Vtbl):
     fn GetGradientStops1(
         gradientStops: *mut D2D1_GRADIENT_STOP,
         gradientStopsCount: UINT32,
-    ) -> c_void,
+    ) -> (),
     fn GetPreInterpolationSpace() -> D2D1_COLOR_SPACE,
     fn GetPostInterpolationSpace() -> D2D1_COLOR_SPACE,
     fn GetBufferPrecision() -> D2D1_BUFFER_PRECISION,
@@ -570,10 +570,10 @@ interface ID2D1DrawingStateBlock1(ID2D1DrawingStateBlock1Vtbl):
     ID2D1DrawingStateBlock(ID2D1DrawingStateBlockVtbl) {
     fn GetDescription(
         stateDescription: *mut D2D1_DRAWING_STATE_DESCRIPTION1,
-    ) -> c_void,
+    ) -> (),
     fn SetDescription(
         stateDescription: *const D2D1_DRAWING_STATE_DESCRIPTION1,
-    ) -> c_void,
+    ) -> (),
 });
 RIDL!(#[uuid(0xe8f7fe7a, 0x191c, 0x466d, 0xad, 0x95, 0x97, 0x56, 0x78, 0xbd, 0xa9, 0x98)]
 interface ID2D1DeviceContext(ID2D1DeviceContextVtbl): ID2D1RenderTarget(ID2D1RenderTargetVtbl) {
@@ -659,26 +659,26 @@ interface ID2D1DeviceContext(ID2D1DeviceContextVtbl): ID2D1RenderTarget(ID2D1Ren
     ) -> HRESULT,
     fn GetDevice(
         device: *mut *mut ID2D1Device,
-    ) -> c_void,
+    ) -> (),
     fn SetTarget(
         image: *const ID2D1Image,
-    ) -> c_void,
+    ) -> (),
     fn GetTarget(
         image: *mut *mut ID2D1Image,
-    ) -> c_void,
+    ) -> (),
     fn SetRenderingControls(
         renderingControls: *const D2D1_RENDERING_CONTROLS,
-    ) -> c_void,
+    ) -> (),
     fn GetRenderingControls(
         renderingControls: *mut D2D1_RENDERING_CONTROLS,
-    ) -> c_void,
+    ) -> (),
     fn SetPrimitiveBlend(
         primitiveBlend: D2D1_PRIMITIVE_BLEND,
-    ) -> c_void,
+    ) -> (),
     fn GetPrimitiveBlend() -> D2D1_PRIMITIVE_BLEND,
     fn SetUnitMode(
         unitMode: D2D1_UNIT_MODE,
-    ) -> c_void,
+    ) -> (),
     fn GetUnitMode() -> D2D1_UNIT_MODE,
     fn DrawGlyphRun(
         baselineOrigin: D2D1_POINT_2F,
@@ -686,18 +686,18 @@ interface ID2D1DeviceContext(ID2D1DeviceContextVtbl): ID2D1RenderTarget(ID2D1Ren
         glyphRunDescription: *const DWRITE_GLYPH_RUN_DESCRIPTION,
         foregroundBrush: *const ID2D1Brush,
         measuringMode: DWRITE_MEASURING_MODE,
-    ) -> c_void,
+    ) -> (),
     fn DrawImage(
         image: *const ID2D1Image,
         targetOffset: *const D2D1_POINT_2F,
         imageRectangle: *const D2D1_RECT_F,
         interpolationMode: D2D1_INTERPOLATION_MODE,
         compositeMode: D2D1_COMPOSITE_MODE,
-    ) -> c_void,
+    ) -> (),
     fn DrawGdiMetafile(
         gdiMetafile: *const ID2D1GdiMetafile,
         targetOffset: *const D2D1_POINT_2F,
-    ) -> c_void,
+    ) -> (),
     fn DrawBitmap(
         bitmap: *const ID2D1Bitmap,
         destinationRectangle: *const D2D1_RECT_F,
@@ -705,11 +705,11 @@ interface ID2D1DeviceContext(ID2D1DeviceContextVtbl): ID2D1RenderTarget(ID2D1Ren
         interpolationMode: D2D1_INTERPOLATION_MODE,
         sourceRectangle: *const D2D1_RECT_F,
         perspectiveTransform: *const D2D1_MATRIX_4X4_F,
-    ) -> c_void,
+    ) -> (),
     fn PushLayer(
         layerParameters: *const D2D1_LAYER_PARAMETERS1,
         layer: *const ID2D1Layer,
-    ) -> c_void,
+    ) -> (),
     fn InvalidateEffectInputRectangle(
         effect: *const ID2D1Effect,
         input: UINT32,
@@ -736,7 +736,7 @@ interface ID2D1DeviceContext(ID2D1DeviceContextVtbl): ID2D1RenderTarget(ID2D1Ren
         brush: *const ID2D1Brush,
         destinationRectangle: *const D2D1_RECT_F,
         sourceRectangle: *const D2D1_RECT_F,
-    ) -> c_void,
+    ) -> (),
 });
 RIDL!(#[uuid(0x47dd575d, 0xac05, 0x4cdd, 0x80, 0x49, 0x9b, 0x02, 0xcd, 0x16, 0xf4, 0x4c)]
 interface ID2D1Device(ID2D1DeviceVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
@@ -752,11 +752,11 @@ interface ID2D1Device(ID2D1DeviceVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
     ) -> HRESULT,
     fn SetMaximumTextureMemory(
         maximumInBytes: UINT64,
-    ) -> c_void,
+    ) -> (),
     fn GetMaximumTextureMemory() -> UINT64,
     fn ClearResources(
         millisecondsSinceUse: UINT32,
-    ) -> c_void,
+    ) -> (),
 });
 RIDL!(#[uuid(0xbb12d362, 0xdaee, 0x4b9a, 0xaa, 0x1d, 0x14, 0xba, 0x40, 0x1c, 0xfa, 0x1f)]
 interface ID2D1Factory1(ID2D1Factory1Vtbl): ID2D1Factory(ID2D1FactoryVtbl) {
@@ -813,8 +813,8 @@ interface ID2D1Factory1(ID2D1Factory1Vtbl): ID2D1Factory(ID2D1FactoryVtbl) {
 RIDL!(#[uuid(0x31e6e7bc, 0xe0ff, 0x4d46, 0x8c, 0x64, 0xa0, 0xa8, 0xc4, 0x1c, 0x15, 0xd3)]
 interface ID2D1Multithread(ID2D1MultithreadVtbl): IUnknown(IUnknownVtbl) {
     fn GetMultithreadProtected() -> BOOL,
-    fn Enter() -> c_void,
-    fn Leave() -> c_void,
+    fn Enter() -> (),
+    fn Leave() -> (),
 });
 extern "system" {
     pub fn D2D1CreateDevice(
@@ -836,7 +836,7 @@ extern "system" {
         angle: FLOAT,
         s: *mut FLOAT,
         c: *mut FLOAT
-    ) -> c_void;
+    ) -> ();
     pub fn D2D1Tan(
         angle: FLOAT
     ) -> FLOAT;

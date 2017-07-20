@@ -1,0 +1,27 @@
+LIBRARY IPHLPAPI.DLL
+EXPORTS
+CancelMibChangeNotify2@4
+FreeMibTable@4
+GetAdaptersAddresses@20
+GetBestInterfaceEx@8
+GetBestRoute2@28
+GetExtendedTcpTable@24
+GetExtendedUdpTable@24
+GetIcmpStatistics@4
+GetIcmpStatisticsEx@8
+GetIfEntry2@4
+GetIpStatisticsEx@8
+GetNetworkParams@8
+GetPerAdapterInfo@12
+GetTcpStatisticsEx@8
+GetTcpTable@12
+GetUdpStatisticsEx@8
+GetUdpTable@12
+GetUnicastIpAddressTable@8
+Icmp6CreateFile@0
+Icmp6SendEcho2@48
+IcmpCloseHandle@4
+IcmpCreateFile@0
+IcmpSendEcho2@44
+NotifyStableUnicastIpAddressTable@20
+NotifyUnicastIpAddressChange@20

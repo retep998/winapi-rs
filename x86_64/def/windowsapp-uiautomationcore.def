@@ -1,0 +1,5 @@
+LIBRARY UIAutomationCore.DLL
+EXPORTS
+UiaProviderForNonClient
+UiaProviderFromIAccessible
+UiaRaiseAsyncContentLoadedEvent

@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-security-sddl-ansi-l1-1-0.dll
+EXPORTS
+ConvertSidToStringSidA@8
+ConvertStringSidToSidA@8

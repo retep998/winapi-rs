@@ -1,0 +1,10 @@
+LIBRARY api-ms-win-core-windowserrorreporting-l1-1-1.dll
+EXPORTS
+WerGetFlags
+WerRegisterAdditionalProcess
+WerRegisterCustomMetadata
+WerRegisterExcludedMemoryBlock
+WerSetFlags
+WerUnregisterAdditionalProcess
+WerUnregisterCustomMetadata
+WerUnregisterExcludedMemoryBlock
