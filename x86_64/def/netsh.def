@@ -1,0 +1,25 @@
+LIBRARY NETSH.EXE
+EXPORTS
+ConvertGuidToString
+ConvertStringToGuid
+DisplayMessageM
+DisplayMessageToConsole
+FreeQuotedString
+FreeString
+GenericMonitor
+GetEnumString
+InitializeConsole
+MakeQuotedString
+MakeString
+MatchCmdLine
+MatchEnumTag
+MatchTagsInCmdLine
+MatchToken
+PreprocessCommand
+PrintError
+PrintMessage
+PrintMessageFromModule
+ProcessCommand
+RefreshConsole
+RegisterContext
+RegisterHelper

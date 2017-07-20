@@ -1,0 +1,5 @@
+LIBRARY api-ms-win-eventing-consumer-l1-1-0.dll
+EXPORTS
+CloseTrace
+OpenTraceW
+ProcessTrace

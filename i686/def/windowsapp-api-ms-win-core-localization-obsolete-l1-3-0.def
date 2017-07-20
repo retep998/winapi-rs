@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-core-localization-obsolete-l1-3-0.dll
+EXPORTS
+EnumUILanguagesW@12
+GetUserDefaultUILanguage@0

@@ -1,0 +1,17 @@
+LIBRARY d2d1.dll
+EXPORTS
+D2D1ComputeMaximumScaleFactor @12
+D2D1ConvertColorSpace @6
+D2D1CreateDevice @7
+D2D1CreateDeviceContext @8
+D2D1CreateFactory @1
+D2D1GetGradientMeshInteriorPointsFromCoonsPatch @13
+D2D1InvertMatrix @5
+D2D1IsMatrixInvertible @4
+D2D1MakeRotateMatrix @2
+D2D1MakeSkewMatrix @3
+D2D1SinCos @9
+D2D1Tan @10
+D2D1Vec3Length @11
+D2DTkCreateAlgorithmFactory @15
+D2DTkCreateOn12Device @14

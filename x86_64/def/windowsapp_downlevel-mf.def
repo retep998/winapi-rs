@@ -1,0 +1,13 @@
+LIBRARY MF.dll
+EXPORTS
+MFCreateAggregateSource
+MFCreateAudioRendererActivate
+MFCreatePMPMediaSession
+MFCreatePresentationClock
+MFCreateProtectedEnvironmentAccess
+MFCreateTopology
+MFCreateTopologyNode
+MFGetLocalId
+MFGetService
+MFGetSystemId
+MFLoadSignedLibrary

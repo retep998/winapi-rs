@@ -1,0 +1,17 @@
+LIBRARY ext-ms-win-shell32-shellfolders-l1-2-0.dll
+EXPORTS
+PathCleanupSpec
+PathIsExe
+PathMakeUniqueName
+SHFlushSFCache
+SHGetDesktopFolder
+SHGetFileInfoW
+SHGetFolderLocation
+SHGetFolderPathA
+SHGetFolderPathAndSubDirW
+SHGetFolderPathW
+SHGetInstanceExplorer
+SHGetKnownFolderPath
+SHGetSpecialFolderPathA
+SHGetSpecialFolderPathW
+SHSetKnownFolderPath

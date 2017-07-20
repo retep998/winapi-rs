@@ -1,0 +1,12 @@
+LIBRARY RESUTILS.dll
+EXPORTS
+ClusterGetVolumePathName@12
+ClusterIsPathOnSharedVolume@4
+ResUtilEnumResourcesEx@20
+ResUtilFindDwordProperty@16
+ResUtilFindSzProperty@16
+ResUtilFreeParameterBlock@12
+ResUtilGetCoreClusterResources@16
+ResUtilGetResourceName@12
+ResUtilPropertyListFromParameterBlock@24
+ResUtilVerifyPropertyTable@24

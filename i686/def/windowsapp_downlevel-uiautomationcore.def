@@ -1,0 +1,17 @@
+LIBRARY UIAutomationCore.DLL
+EXPORTS
+UiaClientsAreListening@0
+UiaDisconnectAllProviders@0
+UiaDisconnectProvider@4
+UiaGetReservedMixedAttributeValue@4
+UiaGetReservedNotSupportedValue@4
+UiaHostProviderFromHwnd@8
+UiaProviderForNonClient@16
+UiaProviderFromIAccessible@16
+UiaRaiseAsyncContentLoadedEvent@16
+UiaRaiseAutomationEvent@8
+UiaRaiseAutomationPropertyChangedEvent@40
+UiaRaiseChangesEvent@12
+UiaRaiseStructureChangedEvent@16
+UiaRaiseTextEditTextChangedEvent@12
+UiaReturnRawElementProvider@16

@@ -10,9 +10,9 @@ use shared::minwindef::DWORD;
 
 pub const IDO_SHGIOI_SHARE: c_int = 0x0FFFFFFF;
 pub const IDO_SHGIOI_LINK: c_int = 0x0FFFFFFE;
-// Yes, these values are supposed to overflow. Blame Microsoft.
-pub const IDO_SHGIOI_SLOWFILE: c_int = 0xFFFFFFFDu32 as c_int;
-pub const IDO_SHGIOI_DEFAULT: c_int = 0xFFFFFFFCu32 as c_int;
+// Yes, these values are supposed to be 9 digits
+pub const IDO_SHGIOI_SLOWFILE: c_int = 0x0FFFFFFFD;
+pub const IDO_SHGIOI_DEFAULT: c_int = 0x0FFFFFFFC;
 pub const GPFIDL_DEFAULT: GPFIDL_FLAGS = 0x0000;
 pub const GPFIDL_ALTNAME: GPFIDL_FLAGS = 0x0001;
 pub const GPFIDL_UNCPRINTER: GPFIDL_FLAGS = 0x0002;

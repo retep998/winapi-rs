@@ -1,0 +1,301 @@
+LIBRARY SHLWAPI.dll
+EXPORTS
+GetAcceptLanguagesA @14
+GetAcceptLanguagesW @15
+IsCharSpaceW @29
+IsInternetESCEnabled @553
+IsOS @437
+IStream_Copy @568
+IStream_Read @184
+IStream_ReadStr @596
+IStream_Reset @213
+IStream_Size @214
+IStream_Write @212
+IStream_WriteStr @597
+IUnknown_AtomicRelease @169
+IUnknown_GetSite @256
+IUnknown_GetWindow @172
+IUnknown_QueryService @176
+IUnknown_Set @199
+IUnknown_SetSite @174
+MIME_GetExtensionW @331
+ParseURLA @1
+ParseURLW @2
+QISearch @219
+SHAnsiToAnsi @345
+SHAnsiToUnicode @215
+SHCreateMemStream @12
+SHCreateThread @16
+SHCreateThreadWithHandle @615
+SHFillRectClr @197
+SHGetPerScreenResName @533
+SHGlobalCounterIncrement @633
+SHIsChildOrSelf @204
+SHLoadIndirectString @487
+SHQueueUserWorkItem @260
+SHRegGetIntW @280
+SHStringFromGUIDW @24
+SHUnicodeToAnsi @217
+SHUnicodeToUnicode @346
+StrCmpCA @155
+StrCmpCW @156
+StrCmpICA @157
+StrCmpICW @158
+StrCmpNCA @151
+StrCmpNCW @152
+StrCmpNICA @153
+StrCmpNICW @154
+UrlFixupW @462
+AssocCreate
+AssocGetPerceivedType
+AssocIsDangerous
+AssocQueryStringA
+AssocQueryStringW
+GetMenuPosFromID
+HashData
+IUnknown_Exec
+IsCharSpaceA
+PathAddBackslashA
+PathAddBackslashW
+PathAddExtensionA
+PathAddExtensionW
+PathAppendA
+PathAppendW
+PathBuildRootA
+PathBuildRootW
+PathCanonicalizeA
+PathCanonicalizeW
+PathCombineA
+PathCombineW
+PathCommonPrefixA
+PathCommonPrefixW
+PathCompactPathExW
+PathCreateFromUrlA
+PathCreateFromUrlAlloc
+PathCreateFromUrlW
+PathFileExistsA
+PathFileExistsW
+PathFindExtensionA
+PathFindExtensionW
+PathFindFileNameA
+PathFindFileNameW
+PathFindNextComponentA
+PathFindNextComponentW
+PathGetArgsA
+PathGetArgsW
+PathGetCharTypeA
+PathGetCharTypeW
+PathGetDriveNumberA
+PathGetDriveNumberW
+PathIsDirectoryA
+PathIsDirectoryEmptyA
+PathIsDirectoryEmptyW
+PathIsDirectoryW
+PathIsFileSpecA
+PathIsFileSpecW
+PathIsLFNFileSpecA
+PathIsLFNFileSpecW
+PathIsNetworkPathA
+PathIsNetworkPathW
+PathIsPrefixA
+PathIsPrefixW
+PathIsRelativeA
+PathIsRelativeW
+PathIsRootA
+PathIsRootW
+PathIsSameRootA
+PathIsSameRootW
+PathIsUNCA
+PathIsUNCServerA
+PathIsUNCServerShareA
+PathIsUNCServerShareW
+PathIsUNCServerW
+PathIsUNCW
+PathIsURLA
+PathIsURLW
+PathMatchSpecA
+PathMatchSpecExA
+PathMatchSpecExW
+PathMatchSpecW
+PathParseIconLocationA
+PathParseIconLocationW
+PathQuoteSpacesA
+PathQuoteSpacesW
+PathRelativePathToA
+PathRelativePathToW
+PathRemoveArgsW
+PathRemoveBackslashA
+PathRemoveBackslashW
+PathRemoveBlanksA
+PathRemoveBlanksW
+PathRemoveExtensionA
+PathRemoveExtensionW
+PathRemoveFileSpecA
+PathRemoveFileSpecW
+PathRenameExtensionA
+PathRenameExtensionW
+PathSearchAndQualifyA
+PathSearchAndQualifyW
+PathSkipRootA
+PathSkipRootW
+PathStripPathA
+PathStripPathW
+PathStripToRootA
+PathStripToRootW
+PathUnExpandEnvStringsA
+PathUnExpandEnvStringsW
+PathUndecorateW
+PathUnquoteSpacesA
+PathUnquoteSpacesW
+SHCopyKeyA
+SHCopyKeyW
+SHCreateShellPalette
+SHCreateStreamOnFileA
+SHCreateStreamOnFileEx
+SHCreateStreamOnFileW
+SHCreateThreadRef
+SHCreateWorkerWindowW
+SHDeleteEmptyKeyA
+SHDeleteEmptyKeyW
+SHDeleteKeyA
+SHDeleteKeyW
+SHDeleteValueA
+SHDeleteValueW
+SHEnumKeyExA
+SHEnumKeyExW
+SHEnumValueA
+SHEnumValueW
+SHGetInverseCMAP
+SHGetShellKeyEx
+SHGetThreadRef
+SHGetValueA
+SHGetValueW
+SHLoadFromPropertyBag
+SHOpenRegStream2A
+SHOpenRegStream2W
+SHOpenRegStreamA
+SHOpenRegStreamW
+SHPinDllOfCLSID
+SHQueryInfoKeyA
+SHQueryInfoKeyW
+SHQueryValueExA
+SHQueryValueExW
+SHRegCloseUSKey
+SHRegCreateUSKeyA
+SHRegCreateUSKeyW
+SHRegDeleteEmptyUSKeyA
+SHRegDeleteEmptyUSKeyW
+SHRegDeleteUSValueA
+SHRegDeleteUSValueW
+SHRegDuplicateHKey
+SHRegEnumUSKeyA
+SHRegEnumUSKeyW
+SHRegEnumUSValueA
+SHRegEnumUSValueW
+SHRegGetBoolUSValueA
+SHRegGetBoolUSValueW
+SHRegGetPathA
+SHRegGetPathW
+SHRegGetUSValueA
+SHRegGetUSValueW
+SHRegGetValueA
+SHRegGetValueW
+SHRegOpenUSKeyA
+SHRegOpenUSKeyW
+SHRegQueryInfoUSKeyA
+SHRegQueryInfoUSKeyW
+SHRegQueryUSValueA
+SHRegQueryUSValueW
+SHRegSetPathA
+SHRegSetPathW
+SHRegSetUSValueA
+SHRegSetUSValueW
+SHRegWriteUSValueA
+SHRegWriteUSValueW
+SHReleaseThreadRef
+SHSetThreadRef
+SHSetValueA
+SHSetValueW
+SHStrDupA
+SHStrDupW
+SHUnicodeToAnsiCP
+SHWeakReleaseInterface
+ShellMessageBoxA
+ShellMessageBoxW
+StrCSpnA
+StrCSpnIA
+StrCSpnIW
+StrCSpnW
+StrCatBuffA
+StrCatBuffW
+StrCatChainW
+StrChrA
+StrChrIA
+StrChrIW
+StrChrNIW
+StrChrNW
+StrChrW
+StrCmpIW
+StrCmpLogicalW
+StrCmpNA
+StrCmpNIA
+StrCmpNIW
+StrCmpNW
+StrCmpW
+StrCpyNW
+StrDupA
+StrDupW
+StrIsIntlEqualA
+StrIsIntlEqualW
+StrPBrkA
+StrPBrkW
+StrRChrA
+StrRChrIA
+StrRChrIW
+StrRChrW
+StrRStrIA
+StrRStrIW
+StrRetToBufW
+StrRetToStrW
+StrSpnA
+StrSpnW
+StrStrA
+StrStrIA
+StrStrIW
+StrStrNIW
+StrStrNW
+StrStrW
+StrToInt64ExA
+StrToInt64ExW
+StrToIntA
+StrToIntExA
+StrToIntExW
+StrToIntW
+StrTrimA
+StrTrimW
+UrlApplySchemeA
+UrlApplySchemeW
+UrlCanonicalizeA
+UrlCanonicalizeW
+UrlCombineA
+UrlCombineW
+UrlCompareA
+UrlCompareW
+UrlCreateFromPathA
+UrlCreateFromPathW
+UrlEscapeA
+UrlEscapeW
+UrlGetLocationA
+UrlGetLocationW
+UrlGetPartA
+UrlGetPartW
+UrlHashA
+UrlHashW
+UrlIsA
+UrlIsNoHistoryA
+UrlIsNoHistoryW
+UrlIsOpaqueA
+UrlIsOpaqueW
+UrlIsW
+UrlUnescapeA
+UrlUnescapeW

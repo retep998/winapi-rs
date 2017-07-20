@@ -1,0 +1,4 @@
+LIBRARY dxgi.dll
+EXPORTS
+CreateDXGIFactory1
+CreateDXGIFactory2
