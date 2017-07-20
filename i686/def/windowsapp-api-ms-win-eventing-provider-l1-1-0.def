@@ -1,0 +1,10 @@
+LIBRARY api-ms-win-eventing-provider-l1-1-0.dll
+EXPORTS
+EventActivityIdControl@8
+EventRegister@16
+EventSetInformation@20
+EventUnregister@8
+EventWrite@20
+EventWriteEx@40
+EventWriteString@24
+EventWriteTransfer@28

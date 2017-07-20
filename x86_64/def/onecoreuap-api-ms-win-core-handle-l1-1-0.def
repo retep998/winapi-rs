@@ -1,0 +1,7 @@
+LIBRARY api-ms-win-core-handle-l1-1-0.dll
+EXPORTS
+CloseHandle
+CompareObjectHandles
+DuplicateHandle
+GetHandleInformation
+SetHandleInformation

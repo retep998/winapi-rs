@@ -1,0 +1,8 @@
+LIBRARY rstrtmgr.dll
+EXPORTS
+RmEndSession
+RmGetList
+RmRegisterResources
+RmRestart
+RmShutdown
+RmStartSession

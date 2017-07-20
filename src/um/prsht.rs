@@ -181,6 +181,23 @@ pub type LPCPROPSHEETHEADERW = LPCPROPSHEETHEADERW_V2;
 pub const PSCB_INITIALIZED: UINT = 1;
 pub const PSCB_PRECREATE: UINT = 2;
 pub const PSCB_BUTTONPRESSED: UINT = 3;
+extern "system" {
+    pub fn CreatePropertySheetPageA(
+        constPropSheetPagePointer: LPCPROPSHEETPAGEA,
+    ) -> HPROPSHEETPAGE;
+    pub fn CreatePropertySheetPageW(
+        constPropSheetPagePointer: LPCPROPSHEETPAGEW,
+    ) -> HPROPSHEETPAGE;
+    pub fn DestroyPropertySheetPage(
+        hPSPage: HPROPSHEETPAGE,
+    ) -> BOOL;
+    pub fn PropertySheetA(
+        lppsph: LPCPROPSHEETHEADERA,
+    ) -> INT_PTR;
+    pub fn PropertySheetW(
+        lppsph: LPCPROPSHEETHEADERW,
+    ) -> INT_PTR;
+}
 FN!{stdcall LPFNADDPROPSHEETPAGE(
     HPROPSHEETPAGE,
     LPARAM,
@@ -195,8 +212,8 @@ STRUCT!{struct PSHNOTIFY {
     lParam: LPARAM,
 }}
 pub type LPPSHNOTIFY = *mut PSHNOTIFY;
-pub const PSN_FIRST: UINT = -200i32 as UINT;
-pub const PSN_LAST: UINT = -299i32 as UINT;
+pub const PSN_FIRST: UINT = -200i32 as u32;
+pub const PSN_LAST: UINT = -299i32 as u32;
 pub const PSN_SETACTIVE: UINT = PSN_FIRST - 0;
 pub const PSN_KILLACTIVE: UINT = PSN_FIRST - 1;
 pub const PSN_APPLY: UINT = PSN_FIRST - 2;
@@ -230,8 +247,9 @@ pub const PSWIZB_BACK: DWORD = 0x00000001;
 pub const PSWIZB_NEXT: DWORD = 0x00000002;
 pub const PSWIZB_FINISH: DWORD = 0x00000004;
 pub const PSWIZB_DISABLEDFINISH: DWORD = 0x00000008;
-pub const PSWIZB_CANCEL: DWORD = 0x00000008;
 pub const PSWIZBF_ELEVATIONREQUIRED: WPARAM = 0x00000001;
+pub const PSWIZB_CANCEL: DWORD = 0x00000010;
+pub const PSM_PRESSBUTTON: UINT = WM_USER + 113;
 pub const PSBTN_BACK: c_int = 0;
 pub const PSBTN_NEXT: c_int = 1;
 pub const PSBTN_FINISH: c_int = 2;
@@ -240,7 +258,6 @@ pub const PSBTN_APPLYNOW: c_int = 4;
 pub const PSBTN_CANCEL: c_int = 5;
 pub const PSBTN_HELP: c_int = 6;
 pub const PSBTN_MAX: c_int = 6;
-pub const PSM_PRESSBUTTON: UINT = WM_USER + 113;
 pub const PSM_SETCURSELID: UINT = WM_USER + 114;
 pub const PSM_SETFINISHTEXTA: UINT = WM_USER + 115;
 pub const PSM_SETFINISHTEXTW: UINT = WM_USER + 121;
@@ -250,7 +267,7 @@ pub const PSM_GETCURRENTPAGEHWND: UINT = WM_USER + 118;
 pub const PSM_INSERTPAGE: UINT = WM_USER + 119;
 pub const PSM_SETHEADERTITLEA: UINT = WM_USER + 125;
 pub const PSM_SETHEADERTITLEW: UINT = WM_USER + 126;
-pub const PSWIZF_SETCOLOR: UINT = (0 - 1) as UINT;
+pub const PSWIZF_SETCOLOR: UINT = -1i32 as u32;
 pub const PSM_SETHEADERSUBTITLEA: UINT = WM_USER + 127;
 pub const PSM_SETHEADERSUBTITLEW: UINT = WM_USER + 128;
 pub const PSM_HWNDTOINDEX: UINT = WM_USER + 129;

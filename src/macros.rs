@@ -124,6 +124,9 @@ macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
         }
     }
 }
+macro_rules! MAKEINTRESOURCE {
+    ($i:expr) => { $i as u16 as usize as LPWSTR }
+}
 #[macro_export]
 macro_rules! RIDL {
     (#[uuid($($uuid:expr),+)]
@@ -187,7 +190,7 @@ macro_rules! RIDL {
     (@method #[fixme] fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty) => (
         #[inline] pub unsafe fn $method(&self, $($p: $t,)*) -> $rtr {
             let mut ret = $crate::_core::mem::uninitialized();
-            ((*self.lpVtbl).$method)(self as *const _ as *mut _, $($p,)* &mut ret);
+            ((*self.lpVtbl).$method)(self as *const _ as *mut _, &mut ret, $($p,)*);
             ret
         }
     );
@@ -221,8 +224,8 @@ macro_rules! RIDL {
             $($fields)*
             pub $method: unsafe extern "system" fn(
                 This: *mut $interface,
-                $($p: $t,)*
                 ret: *mut $rtr,
+                $($p: $t,)*
             ) -> *mut $rtr,
         ) $($tail)*}
     );

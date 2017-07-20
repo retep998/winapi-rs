@@ -1,0 +1,4 @@
+LIBRARY HrtfApo.dll
+EXPORTS
+CreateHrtfApo@8 @1
+CreateHrtfApoWithOptions@12 @2

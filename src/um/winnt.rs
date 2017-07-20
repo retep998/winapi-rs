@@ -186,11 +186,11 @@ STRUCT!{struct OBJECTID {
     Lineage: GUID,
     Uniquifier: DWORD,
 }}
-pub const MINCHAR: CHAR = 0x80u8 as CHAR;
+pub const MINCHAR: CHAR = 0x80;
 pub const MAXCHAR: CHAR = 0x7f;
-pub const MINSHORT: SHORT = 0x8000u16 as SHORT;
+pub const MINSHORT: SHORT = 0x8000;
 pub const MAXSHORT: SHORT = 0x7fff;
-pub const MINLONG: LONG = 0x80000000u32 as LONG;
+pub const MINLONG: LONG = 0x80000000;
 pub const MAXLONG: LONG = 0x7fffffff;
 pub const MAXBYTE: BYTE = 0xff;
 pub const MAXWORD: WORD = 0xffff;
@@ -1414,8 +1414,8 @@ pub const PROCESS_ALL_ACCESS: DWORD = STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0
 //11007
 pub const THREAD_BASE_PRIORITY_LOWRT: DWORD = 15;
 pub const THREAD_BASE_PRIORITY_MAX: DWORD = 2;
-pub const THREAD_BASE_PRIORITY_MIN: DWORD = -2i32 as DWORD;
-pub const THREAD_BASE_PRIORITY_IDLE: DWORD = -15i32 as DWORD;
+pub const THREAD_BASE_PRIORITY_MIN: DWORD = -2i32 as u32;
+pub const THREAD_BASE_PRIORITY_IDLE: DWORD = -15i32 as u32;
 //11018
 STRUCT!{struct QUOTA_LIMITS {
     PagedPoolLimit: SIZE_T,

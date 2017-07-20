@@ -1,0 +1,10 @@
+LIBRARY OnDemandConnRouteHelper.DLL
+EXPORTS
+FreeInterfaceContextTable
+GetInterfaceContextTableForHostName
+OnDemandAddRouteRequest
+OnDemandGetRoutingHint
+OnDemandRegisterNotification
+OnDemandRemoveMatchingRoute
+OnDemandRemoveRouteRequest
+OnDemandUnRegisterNotification
