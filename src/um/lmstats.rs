@@ -82,5 +82,5 @@ STRUCT!{struct STAT_SERVER_0 {
 pub type PSTAT_SERVER_0 = *mut STAT_SERVER_0;
 pub type LPSTAT_SERVER_0 = *mut STAT_SERVER_0;
 pub const STATSOPT_CLR: DWORD = 1;
-pub const STATS_NO_VALUE: DWORD = -1i32 as DWORD;
-pub const STATS_OVERFLOW: DWORD = -2i32 as DWORD;
+pub const STATS_NO_VALUE: DWORD = -1i32 as u32;
+pub const STATS_OVERFLOW: DWORD = -2i32 as u32;
