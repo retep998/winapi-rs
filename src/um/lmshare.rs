@@ -157,11 +157,24 @@ STRUCT!{struct SHARE_INFO_1503 {
 pub type PSHARE_INFO_1503 = *mut SHARE_INFO_1503;
 pub type LPSHARE_INFO_1503 = *mut SHARE_INFO_1503;
 extern "system" {
-    pub fn NetServerAliasAdd(servername: LMSTR, level: DWORD, buf: LPBYTE) -> NET_API_STATUS;
-    pub fn NetServerAliasDel(servername: LMSTR, level: DWORD, buf: LPBYTE) -> NET_API_STATUS;
+    pub fn NetServerAliasAdd(
+        servername: LMSTR,
+        level: DWORD,
+        buf: LPBYTE,
+    ) -> NET_API_STATUS;
+    pub fn NetServerAliasDel(
+        servername: LMSTR,
+        level: DWORD,
+        buf: LPBYTE,
+    ) -> NET_API_STATUS;
     pub fn NetServerAliasEnum(
-        servername: LMSTR, level: DWORD, bufptr: *mut LPBYTE, prefmaxlen: DWORD,
-        entriesread: LPDWORD, totalentries: LPDWORD, resumehandle: LPDWORD,
+        servername: LMSTR,
+        level: DWORD,
+        bufptr: *mut LPBYTE,
+        prefmaxlen: DWORD,
+        entriesread: LPDWORD,
+        totalentries: LPDWORD,
+        resumehandle: LPDWORD,
     ) -> NET_API_STATUS;
 }
 STRUCT!{struct SERVER_ALIAS_INFO_0 {

@@ -1070,17 +1070,26 @@ extern "system" {
         OutputArg: *mut LPVOID,
     ) -> NET_API_STATUS;
     pub fn NetGetDCName(
-        servername: LPCWSTR, domainname: LPCWSTR, bufptr: *mut LPBYTE,
+        servername: LPCWSTR,
+        domainname: LPCWSTR,
+        bufptr: *mut LPBYTE,
     ) -> NET_API_STATUS;
     pub fn NetGetAnyDCName(
-        servername: LPCWSTR, domainname: LPCWSTR, bufptr: *mut LPBYTE,
+        servername: LPCWSTR,
+        domainname: LPCWSTR,
+        bufptr: *mut LPBYTE,
     ) -> NET_API_STATUS;
     pub fn I_NetLogonControl(
-        ServerName: LPCWSTR, FunctionCode: DWORD, QueryLevel: DWORD,
+        ServerName: LPCWSTR,
+        FunctionCode: DWORD,
+        QueryLevel: DWORD,
         Buffer: *mut LPBYTE,
     ) -> NET_API_STATUS;
     pub fn I_NetLogonControl2(
-        ServerName: LPCWSTR, FunctionCode: DWORD, QueryLevel: DWORD, Data: LPBYTE,
+        ServerName: LPCWSTR,
+        FunctionCode: DWORD,
+        QueryLevel: DWORD,
+        Data: LPBYTE,
         Buffer: *mut LPBYTE,
     ) -> NET_API_STATUS;
 }
