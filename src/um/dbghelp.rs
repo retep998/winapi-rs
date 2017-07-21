@@ -5,14 +5,14 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! DbgHelp include file
-use shared::basetsd::{DWORD64, ULONG64};
+use shared::basetsd::{DWORD64, PDWORD64, ULONG64};
 use shared::guiddef::GUID;
-use shared::minwindef::{BOOL, DWORD, LPDWORD, PUCHAR, UCHAR, ULONG, USHORT, WORD};
-#[cfg(target_arch = "x86")]
-use shared::minwindef::PDWORD;
+use shared::minwindef::{
+    BOOL, DWORD, HMODULE, LPDWORD, PDWORD, PUCHAR, PULONG, UCHAR, ULONG, USHORT, WORD,
+};
 use um::winnt::{
-    BOOLEAN, CHAR, HANDLE, LIST_ENTRY, PCSTR, PCWSTR, PIMAGE_SECTION_HEADER, PSTR, PVOID, PWSTR,
-    WCHAR,
+    BOOLEAN, CHAR, HANDLE, LIST_ENTRY, PCSTR, PCWSTR, PIMAGE_NT_HEADERS, PIMAGE_SECTION_HEADER,
+    PSTR, PVOID, PWSTR, WCHAR,
 };
 #[cfg(target_arch = "x86")]
 use um::winnt::{
@@ -385,3 +385,239 @@ STRUCT!{struct IMAGEHLP_LINEW64 {
     Address: DWORD64,
 }}
 pub type PIMAGEHLP_LINEW64 = *mut IMAGEHLP_LINEW64;
+
+extern "system" {
+    pub fn EnumDirTree(
+        hProcess: HANDLE,
+        RootPath: PCSTR,
+        InputPathName: PCSTR,
+        OutputPathBuffer: PSTR,
+        cb: PENUMDIRTREE_CALLBACK,
+        data: PVOID,
+    ) -> BOOL;
+    pub fn EnumDirTreeW(
+        hProcess: HANDLE,
+        RootPath: PCWSTR,
+        InputPathName: PCWSTR,
+        OutputPathBuffer: PWSTR,
+        cb: PENUMDIRTREE_CALLBACKW,
+        data: PVOID,
+    ) -> BOOL;
+    pub fn FindDebugInfoFile(
+        FileName: PCSTR,
+        SymbolPath: PCSTR,
+        DebugFilePath: PSTR
+    ) -> HANDLE;
+    pub fn FindDebugInfoFileEx(
+        FileName: PCSTR,
+        SymbolPath: PCSTR,
+        DebugFilePath: PSTR,
+        Callback: PFIND_DEBUG_FILE_CALLBACK,
+        CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn FindDebugInfoFileExW(
+        FileName: PCWSTR,
+        SymbolPath: PCWSTR,
+        DebugFilePath: PWSTR,
+        Callback: PFIND_DEBUG_FILE_CALLBACKW,
+        CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn FindExecutableImage(
+        FileName: PCSTR,
+        SymbolPath: PCSTR,
+        ImageFilePath: PSTR
+    ) -> HANDLE;
+    pub fn FindExecutableImageEx(
+        FileName: PCSTR,
+        SymbolPath: PCSTR,
+        ImageFilePath: PSTR,
+        Callback: PFIND_EXE_FILE_CALLBACK,
+        CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn FindExecutableImageExW(
+        FileName: PCWSTR,
+        SymbolPath: PCWSTR,
+        ImageFilePath: PWSTR,
+        Callback: PFIND_EXE_FILE_CALLBACKW,
+        CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn GetTimestampForLoadedLibrary(
+        Module: HMODULE,
+    ) -> DWORD;
+    pub fn ImageDirectoryEntryToData(
+        Base: PVOID,
+        MappedAsImage: BOOLEAN,
+        DirectoryEntry: USHORT,
+        Size: PULONG,
+    ) -> PVOID;
+    pub fn ImageDirectoryEntryToDataEx(
+        Base: PVOID,
+        MappedAsImage: BOOLEAN,
+        DirectoryEntry: USHORT,
+        Size: PULONG,
+        FoundHeader: *mut PIMAGE_SECTION_HEADER,
+    ) -> PVOID;
+    pub fn ImageNtHeader(
+        Base: PVOID,
+    ) -> PIMAGE_NT_HEADERS;
+    pub fn ImagehlpApiVersion() -> LPAPI_VERSION;
+    pub fn ImagehlpApiVersionEx(
+        AppVersion: LPAPI_VERSION,
+    ) -> LPAPI_VERSION;
+    pub fn MakeSureDirectoryPathExists(
+        DirPath: PCSTR,
+    ) -> BOOL;
+    #[cfg(any(target_arch = "x86", target_arch = "arm"))]
+    pub fn MapDebugInformation(
+        FileHandle: HANDLE,
+        FileName: PCSTR,
+        SymbolPath: PCSTR,
+        ImageBase: ULONG,
+    ) -> PIMAGE_DEBUG_INFORMATION;
+    pub fn SearchTreeForFile(
+        RootPath: PCSTR,
+        InputPathName: PCSTR,
+        OutputPathBuffer: PSTR,
+    ) -> BOOL;
+    pub fn SearchTreeForFileW(
+        RootPath: PCWSTR,
+        InputPathName: PCWSTR,
+        OutputPathBuffer: PWSTR,
+    ) -> BOOL;
+    pub fn StackWalk(
+        MachineType: DWORD,
+        hProcess: HANDLE,
+        hThread: HANDLE,
+        StackFrame: LPSTACKFRAME,
+        ContextRecord: PVOID,
+        ReadMemoryRoutine: PREAD_PROCESS_MEMORY_ROUTINE,
+        FunctionTableAccessRoutine: PFUNCTION_TABLE_ACCESS_ROUTINE,
+        GetModuleBaseRoutine: PGET_MODULE_BASE_ROUTINE,
+        TranslateAddress: PTRANSLATE_ADDRESS_ROUTINE,
+    ) -> BOOL;
+    pub fn StackWalk64(
+        MachineType: DWORD,
+        hProcess: HANDLE,
+        hThread: HANDLE,
+        StackFrame: LPSTACKFRAME64,
+        ContextRecord: PVOID,
+        ReadMemoryRoutine: PREAD_PROCESS_MEMORY_ROUTINE64,
+        FunctionTableAccessRoutine: PFUNCTION_TABLE_ACCESS_ROUTINE64,
+        GetModuleBaseRoutine: PGET_MODULE_BASE_ROUTINE64,
+        TranslateAddress: PTRANSLATE_ADDRESS_ROUTINE64,
+    ) -> BOOL;
+    pub fn StackWalkEx(
+        MachineType: DWORD,
+        hProcess: HANDLE,
+        hThread: HANDLE,
+        StackFrame: LPSTACKFRAME64,
+        ContextRecord: PVOID,
+        ReadMemoryRoutine: PREAD_PROCESS_MEMORY_ROUTINE64,
+        FunctionTableAccessRoutine: PFUNCTION_TABLE_ACCESS_ROUTINE64,
+        GetModuleBaseRoutine: PGET_MODULE_BASE_ROUTINE64,
+        TranslateAddress: PTRANSLATE_ADDRESS_ROUTINE64,
+        Flags: DWORD,
+    ) -> BOOL;
+    pub fn SymCleanup(
+        hProcess: HANDLE
+    ) -> BOOL;
+    pub fn SymFindDebugInfoFile(
+        hProcess: HANDLE,
+        FileName: PCSTR,
+        DebugFilePath: PSTR,
+        Callback: PFIND_DEBUG_FILE_CALLBACK,
+        CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn SymFindDebugInfoFileW(
+        hProcess: HANDLE,
+        FileName: PCWSTR,
+        DebugFilePath: PWSTR,
+        Callback: PFIND_DEBUG_FILE_CALLBACKW,
+        CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn SymFindExecutableImage(
+        hProcess: HANDLE,
+        FileName: PCSTR,
+        ImageFilePath: PSTR,
+        Callback: PFIND_EXE_FILE_CALLBACK,
+        CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn SymFindExecutableImageW(
+        hProcess: HANDLE,
+        FileName: PCWSTR,
+        ImageFilePath: PWSTR,
+        Callback: PFIND_EXE_FILE_CALLBACKW,
+        CallerData: PVOID,
+    ) -> HANDLE;
+    pub fn SymFindFileInPath(
+        hprocess: HANDLE,
+        SearchPath: PCSTR,
+        FileName: PCSTR,
+        id: PVOID,
+        two: DWORD,
+        three: DWORD,
+        flags: DWORD,
+        FoundFile: PSTR,
+        callback: PFINDFILEINPATHCALLBACK,
+        context: PVOID,
+    ) -> BOOL;
+    pub fn SymFindFileInPathW(
+        hprocess: HANDLE,
+        SearchPath: PCWSTR,
+        FileName: PCWSTR,
+        id: PVOID,
+        two: DWORD,
+        three: DWORD,
+        flags: DWORD,
+        FoundFile: PWSTR,
+        callback: PFINDFILEINPATHCALLBACKW,
+        context: PVOID,
+    ) -> BOOL;
+    pub fn SymFromAddrW(
+        hProcess: HANDLE,
+        Address: DWORD64,
+        Displacement: PDWORD64,
+        Symbol: PSYMBOL_INFOW,
+    ) -> BOOL;
+    pub fn SymFunctionTableAccess64(
+        hProcess: HANDLE,
+        AddrBase: DWORD64,
+    ) -> PVOID;
+    pub fn SymGetLineFromAddrW64(
+        hProcess: HANDLE,
+        dwAddr: DWORD64,
+        pdwDisplacement: PDWORD,
+        Line: PIMAGEHLP_LINEW64,
+    ) -> BOOL;
+    pub fn SymGetModuleBase64(
+        hProcess: HANDLE,
+        AddrBase: DWORD64,
+    ) -> DWORD64;
+    pub fn SymGetSymFromAddr64(
+        hProcess: HANDLE,
+        Address: DWORD64,
+        Displacement: PDWORD64,
+        Symbol: PIMAGEHLP_SYMBOL64,
+    ) -> BOOL;
+    pub fn SymInitializeW(
+        hProcess: HANDLE,
+        UserSearchPath: PCWSTR,
+        fInvadeProcess: BOOL,
+    ) -> BOOL;
+    pub fn UnDecorateSymbolName(
+        name: PCSTR,
+        outputString: PSTR,
+        maxStringLength: DWORD,
+        flags: DWORD,
+    ) -> DWORD;
+    pub fn UnDecorateSymbolNameW(
+        name: PCWSTR,
+        outputString: PWSTR,
+        maxStringLength: DWORD,
+        flags: DWORD,
+    ) -> DWORD;
+    #[cfg(any(target_arch = "x86", target_arch = "arm"))]
+    pub fn UnmapDebugInformation(
+        DebugInfo: PIMAGE_DEBUG_INFORMATION,
+    ) -> BOOL;
+}
