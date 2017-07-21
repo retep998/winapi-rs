@@ -5,7 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Procedure declarations, constant definitions, and macros for the NLS component.
-use shared::minwindef::{BOOL, DWORD, HRGN};
+use shared::minwindef::{BOOL, DWORD, HRGN, LPVOID};
+use shared::windef::HWND;
+use um::winnt::HRESULT;
 STRUCT!{struct DWM_BLURBEHIND {
     dwFlags: DWORD,
     fEnable: BOOL,
@@ -28,3 +30,43 @@ pub const DWMWA_CLOAK: DWORD = 13;
 pub const DWMWA_CLOAKED: DWORD = 14;
 pub const DWMWA_FREEZE_REPRESENTATION: DWORD = 15;
 pub const DWMWA_LAST: DWORD = 16;
+extern "system" {
+    // pub fn DwmDefWindowProc();
+    pub fn DwmEnableBlurBehindWindow(
+        hWnd: HWND,
+        pBlurBehind: *const DWM_BLURBEHIND,
+    ) -> HRESULT;
+    // pub fn DwmEnableComposition();
+    // pub fn DwmEnableMMCSS();
+    // pub fn DwmExtendFrameIntoClientArea();
+    // pub fn DwmGetColorizationColor();
+    // pub fn DwmGetCompositionTimingInfo();
+    pub fn DwmGetWindowAttribute(
+        hWnd: HWND,
+        dwAttribute: DWORD,
+        pvAttribute: LPVOID,
+        cbAttribute: DWORD,
+    ) -> HRESULT;
+    // pub fn DwmIsCompositionEnabled();
+    // pub fn DwmModifyPreviousDxFrameDuration();
+    // pub fn DwmQueryThumbnailSourceSize();
+    // pub fn DwmRegisterThumbnail();
+    // pub fn DwmSetDxFrameDuration();
+    // pub fn DwmSetPresentParameters();
+    // pub fn DwmSetWindowAttribute();
+    // pub fn DwmUnregisterThumbnail();
+    // pub fn DwmUpdateThumbnailProperties();
+    // pub fn DwmSetIconicThumbnail();
+    // pub fn DwmSetIconicLivePreviewBitmap();
+    // pub fn DwmInvalidateIconicBitmaps();
+    // pub fn DwmAttachMilContent();
+    // pub fn DwmDetachMilContent();
+    // pub fn DwmFlush();
+    // pub fn DwmGetGraphicsStreamTransformHint();
+    // pub fn DwmGetGraphicsStreamClient();
+    // pub fn DwmGetTransportAttributes();
+    // pub fn DwmTransitionOwnedWindow();
+    // pub fn DwmRenderGesture();
+    // pub fn DwmTetherContact();
+    // pub fn DwmShowContact();
+}
