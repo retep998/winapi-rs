@@ -24,9 +24,32 @@ use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, UINT};
 use shared::windef::{HDC, HMONITOR, HWND, POINT, RECT};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::wingdi::{PALETTEENTRY, RGNDATA};
-use um::winnt::{HANDLE, HRESULT, LUID, VOID};
+use um::winnt::{HANDLE, HRESULT, LPCWSTR, LUID, VOID};
 pub const D3D_SDK_VERSION: DWORD = 32;
 pub const D3D9b_SDK_VERSION: DWORD = 31;
+extern "system" {
+    pub fn Direct3DCreate9(
+        SDKVersion: UINT,
+    ) -> *mut IDirect3D9;
+    pub fn D3DPERF_BeginEvent(
+        col: D3DCOLOR,
+        wszName: LPCWSTR,
+    ) -> INT;
+    pub fn D3DPERF_EndEvent() -> INT;
+    pub fn D3DPERF_SetMarker(
+        col: D3DCOLOR,
+        wszName: LPCWSTR,
+    ) -> ();
+    pub fn D3DPERF_SetRegion(
+        col: D3DCOLOR,
+        wszName: LPCWSTR,
+    ) -> ();
+    pub fn D3DPERF_QueryRepeatFrame() -> BOOL;
+    pub fn D3DPERF_SetOptions(
+        dwOptions: DWORD,
+    ) -> ();
+    pub fn D3DPERF_GetStatus() -> DWORD;
+}
 RIDL!(#[uuid(0x81bdcbca, 0x64d4, 0x426d, 0xae, 0x8d, 0xad, 0x1, 0x47, 0xf4, 0x27, 0x5c)]
 interface IDirect3D9(IDirect3D9Vtbl): IUnknown(IUnknownVtbl) {
     fn RegisterSoftwareDevice(
@@ -950,6 +973,12 @@ pub const D3DCREATE_ENABLE_PRESENTSTATS: DWORD = 0x4000;
 pub const D3DCREATE_DISABLE_PRESENTSTATS: DWORD = 0x8000;
 pub const D3DCREATE_SCREENSAVER: DWORD = 0x10000000;
 pub const D3DADAPTER_DEFAULT: DWORD = 0;
+extern "system" {
+    pub fn Direct3DCreate9Ex(
+        SDKVersion: UINT,
+        arg1: *mut *mut IDirect3D9Ex,
+    ) -> HRESULT;
+}
 RIDL!{#[uuid(0x02177241, 0x69fc, 0x400c, 0x8f, 0xf1, 0x93, 0xa4, 0x4d, 0xf6, 0x86, 0x1d)]
 interface IDirect3D9Ex(IDirect3D9ExVtbl): IDirect3D9(IDirect3D9Vtbl) {
     fn GetAdapterModeCountEx(
