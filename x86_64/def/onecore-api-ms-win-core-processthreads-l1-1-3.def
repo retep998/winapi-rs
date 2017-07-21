@@ -1,0 +1,16 @@
+LIBRARY api-ms-win-core-processthreads-l1-1-3.dll
+EXPORTS
+CreateProcessAsUserA
+GetProcessDefaultCpuSets
+GetProcessInformation
+GetProcessShutdownParameters
+GetSystemCpuSetInformation
+GetThreadDescription
+GetThreadSelectedCpuSets
+QueryProtectedPolicy
+SetProcessDefaultCpuSets
+SetProcessInformation
+SetProtectedPolicy
+SetThreadDescription
+SetThreadIdealProcessor
+SetThreadSelectedCpuSets

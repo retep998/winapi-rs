@@ -296,6 +296,16 @@ interface IDXGIFactory(IDXGIFactoryVtbl): IDXGIObject(IDXGIObjectVtbl) {
         ppAdapter: *mut *mut IDXGIAdapter,
     ) -> HRESULT,
 });
+extern "system" {
+    pub fn CreateDXGIFactory(
+        riid: REFIID,
+        ppFactory: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn CreateDXGIFactory1(
+        riid: REFIID,
+        ppFactory: *mut *mut c_void,
+    ) -> HRESULT;
+}
 RIDL!(#[uuid(0x54ec77fa, 0x1377, 0x44e6, 0x8c, 0x32, 0x88, 0xfd, 0x5f, 0x44, 0xc8, 0x4c)]
 interface IDXGIDevice(IDXGIDeviceVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn GetAdapter(

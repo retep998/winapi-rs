@@ -421,11 +421,11 @@ STRUCT!{struct OBJECTID {
     Lineage: GUID,
     Uniquifier: ULONG,
 }}
-pub const MINCHAR: CHAR = 0x80u8 as CHAR;
+pub const MINCHAR: CHAR = 0x80;
 pub const MAXCHAR: CHAR = 0x7f;
-pub const MINSHORT: SHORT = 0x8000u16 as SHORT;
+pub const MINSHORT: SHORT = 0x8000;
 pub const MAXSHORT: SHORT = 0x7fff;
-pub const MINLONG: LONG = 0x80000000u32 as LONG;
+pub const MINLONG: LONG = 0x80000000;
 pub const MAXLONG: LONG = 0x7fffffff;
 pub const MAXUCHAR: UCHAR = 0xff;
 pub const MAXUSHORT: USHORT = 0xffff;

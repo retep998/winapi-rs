@@ -1,0 +1,12 @@
+LIBRARY api-ms-win-core-file-l1-2-2.dll
+EXPORTS
+AreFileApisANSI
+FindFirstFileNameW
+FindFirstStreamW
+FindNextFileNameW
+FindNextStreamW
+GetTempFileNameA
+GetTempPathA
+GetVolumeInformationA
+SetFileApisToANSI
+SetFileApisToOEM

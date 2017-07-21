@@ -1,0 +1,13 @@
+LIBRARY ext-ms-win-uiacore-l1-1-3.dll
+EXPORTS
+UiaClientsAreListening@0
+UiaDisconnectAllProviders@0
+UiaDisconnectProvider@4
+UiaGetReservedMixedAttributeValue@4
+UiaGetReservedNotSupportedValue@4
+UiaLookupId@8
+UiaRaiseAutomationEvent@8
+UiaRaiseAutomationPropertyChangedEvent@40
+UiaRaiseChangesEvent@12
+UiaRaiseStructureChangedEvent@16
+UiaRaiseTextEditTextChangedEvent@12

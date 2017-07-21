@@ -1,0 +1,24 @@
+LIBRARY newdev.dll
+EXPORTS
+DeviceInternetSettingUiW
+DiInstallDevice
+DiInstallDriverA
+DiInstallDriverW
+DiRollbackDriver
+DiShowUpdateDevice
+DiShowUpdateDriver
+DiUninstallDevice
+DiUninstallDriverA
+DiUninstallDriverW
+GetInternetPolicies
+InstallNewDevice
+InstallSelectedDriver
+InstallWindowsUpdateDriver
+InstallWindowsUpdateDriverEx
+InstallWindowsUpdateDrivers
+QueryWindowsUpdateDriverStatus
+SetInternetPolicies
+UpdateDriverForPlugAndPlayDevicesA
+UpdateDriverForPlugAndPlayDevicesW
+pDiDoDeviceInstallAsAdmin
+pDiDoNullDriverInstall

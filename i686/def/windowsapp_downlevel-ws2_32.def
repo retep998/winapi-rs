@@ -1,0 +1,103 @@
+LIBRARY WS2_32.dll
+EXPORTS
+__WSAFDIsSet@8 @151
+accept@12 @1
+bind@12 @2
+closesocket@4 @3
+connect@12 @4
+gethostbyaddr@12 @51
+gethostbyname@4 @52
+gethostname@8 @57
+getpeername@12 @5
+getprotobyname@4 @53
+getprotobynumber@4 @54
+getservbyname@8 @55
+getservbyport@8 @56
+getsockname@12 @6
+getsockopt@20 @7
+htonl@4 @8
+htons@4 @9
+inet_addr@4 @11
+inet_ntoa@4 @12
+ioctlsocket@12 @10
+listen@8 @13
+ntohl@4 @14
+ntohs@4 @15
+recv@16 @16
+recvfrom@24 @17
+select@20 @18
+send@16 @19
+sendto@24 @20
+setsockopt@20 @21
+shutdown@8 @22
+socket@12 @23
+WSACleanup@0 @116
+WSAGetLastError@0 @111
+WSASetLastError@4 @112
+WSAStartup@8 @115
+FreeAddrInfoExW@4
+FreeAddrInfoW@4
+GetAddrInfoExCancel@4
+GetAddrInfoExOverlappedResult@4
+GetAddrInfoExW@40
+GetAddrInfoW@16
+GetHostNameW@8
+GetNameInfoW@28
+InetNtopW@16
+InetPtonW@12
+SetAddrInfoExW@48
+WSAAccept@20
+WSAAddressToStringA@20
+WSAAddressToStringW@20
+WSACloseEvent@4
+WSAConnect@28
+WSAConnectByList@32
+WSAConnectByNameA@36
+WSAConnectByNameW@36
+WSACreateEvent@0
+WSADuplicateSocketA@12
+WSADuplicateSocketW@12
+WSAEnumNameSpaceProvidersA@8
+WSAEnumNameSpaceProvidersExA@8
+WSAEnumNameSpaceProvidersExW@8
+WSAEnumNameSpaceProvidersW@8
+WSAEnumNetworkEvents@12
+WSAEnumProtocolsA@12
+WSAEnumProtocolsW@12
+WSAEventSelect@12
+WSAGetOverlappedResult@20
+WSAGetServiceClassInfoW@16
+WSAGetServiceClassNameByClassIdW@12
+WSAHtonl@12
+WSAHtons@12
+WSAIoctl@36
+WSAJoinLeaf@32
+WSALookupServiceBeginA@12
+WSALookupServiceBeginW@12
+WSALookupServiceEnd@4
+WSALookupServiceNextA@16
+WSALookupServiceNextW@16
+WSANSPIoctl@32
+WSANtohl@12
+WSANtohs@12
+WSAPoll@12
+WSAProviderConfigChange@12
+WSARecv@28
+WSARecvFrom@36
+WSAResetEvent@4
+WSASend@28
+WSASendMsg@24
+WSASendTo@36
+WSASetEvent@4
+WSASetServiceA@12
+WSASetServiceW@12
+WSASocketA@24
+WSASocketW@24
+WSAStringToAddressA@20
+WSAStringToAddressW@20
+WSAWaitForMultipleEvents@20
+freeaddrinfo@4
+getaddrinfo@16
+getnameinfo@28
+inet_ntop@16
+inet_pton@12

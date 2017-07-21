@@ -1,0 +1,14 @@
+LIBRARY OLEACC.dll
+EXPORTS
+AccessibleChildren
+AccessibleObjectFromEvent
+AccessibleObjectFromPoint
+AccessibleObjectFromWindow
+AccessibleObjectFromWindowTimeout
+CreateStdAccessibleObject
+GetProcessHandleFromHwnd
+GetRoleTextW
+LresultFromObject
+ObjectFromLresult
+PropMgrClient_LookupProp
+WindowFromAccessibleObject

@@ -476,7 +476,7 @@ pub const SPFEI_ALL_EVENTS: ULONGLONG = 0xEFFFFFFFFFFFFFFF;
 pub fn SPFEI(
         SPEI_ord: SPEVENTENUM,
     ) -> ULONGLONG {
-    (1 << SPEI_ord as ULONGLONG) | SPFEI_FLAGCHECK
+    (1 << SPEI_ord) | SPFEI_FLAGCHECK
 }
 STRUCT!{struct SPEVENT {
     bitfields: DWORD,
@@ -1219,7 +1219,7 @@ ENUM!{enum SPRULESTATE {
     SPRS_ACTIVE_WITH_AUTO_PAUSE = 3,
 }}
 pub const SP_STREAMPOS_ASAP: ULONGLONG = 0;
-pub const SP_STREAMPOS_REALTIME: ULONGLONG = -1i64 as ULONGLONG;
+pub const SP_STREAMPOS_REALTIME: ULONGLONG = -1i64 as u64;
 pub const SPRULETRANS_TEXTBUFFER: SPSTATEHANDLE = -1isize as SPSTATEHANDLE;
 pub const SPRULETRANS_WILDCARD: SPSTATEHANDLE = -2isize as SPSTATEHANDLE;
 pub const SPRULETRANS_DICTATION: SPSTATEHANDLE = -3isize as SPSTATEHANDLE;
@@ -1467,7 +1467,7 @@ interface ISpProperties(ISpPropertiesVtbl): IUnknown(IUnknownVtbl) {
         ppCoMemValue: *mut LPWSTR,
     ) -> HRESULT,
 });
-pub const SP_MAX_LANGIDS: ULONG = 20;
+pub const SP_MAX_LANGIDS: usize = 20;
 STRUCT!{struct SPRECOGNIZERSTATUS {
     AudioStatus: SPAUDIOSTATUS,
     ullRecognitionStreamPos: ULONGLONG,
@@ -1475,7 +1475,7 @@ STRUCT!{struct SPRECOGNIZERSTATUS {
     ulNumActive: ULONG,
     clsidEngine: CLSID,
     cLangIDs: ULONG,
-    aLangID: [WORD; SP_MAX_LANGIDS as usize],
+    aLangID: [WORD; SP_MAX_LANGIDS],
     ullRecognitionStreamTime: ULONGLONG,
 }}
 ENUM!{enum SPWAVEFORMATTYPE {
@@ -3661,11 +3661,11 @@ interface ISpeechLexiconPronunciation(ISpeechLexiconPronunciationVtbl): IDispatc
     ) -> HRESULT,
 });
 pub const Speech_Default_Weight: c_float = DEFAULT_WEIGHT;
-pub const Speech_Max_Word_Length: LONG = SP_MAX_WORD_LENGTH as LONG;
-pub const Speech_Max_Pron_Length: LONG = SP_MAX_PRON_LENGTH as LONG;
-pub const Speech_StreamPos_Asap: LONG = SP_STREAMPOS_ASAP as LONG;
-pub const Speech_StreamPos_RealTime: LONG = SP_STREAMPOS_REALTIME as LONG;
-pub const SpeechAllElements: LONG = SPPR_ALL_ELEMENTS as LONG;
+pub const Speech_Max_Word_Length: LONG = SP_MAX_WORD_LENGTH as i32;
+pub const Speech_Max_Pron_Length: LONG = SP_MAX_PRON_LENGTH as i32;
+pub const Speech_StreamPos_Asap: LONG = SP_STREAMPOS_ASAP as i32;
+pub const Speech_StreamPos_RealTime: LONG = SP_STREAMPOS_REALTIME as i32;
+pub const SpeechAllElements: LONG = SPPR_ALL_ELEMENTS as i32;
 RIDL!(#[uuid(0x3b151836, 0xdf3a, 0x4e0a, 0x84, 0x6c, 0xd2, 0xad, 0xc9, 0x33, 0x43, 0x33)]
 interface ISpeechPhraseInfoBuilder(ISpeechPhraseInfoBuilderVtbl): IDispatch(IDispatchVtbl) {
     fn RestorePhraseFromMemory(

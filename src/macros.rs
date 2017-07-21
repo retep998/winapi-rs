@@ -124,6 +124,9 @@ macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
         }
     }
 }
+macro_rules! MAKEINTRESOURCE {
+    ($i:expr) => { $i as u16 as usize as LPWSTR }
+}
 #[macro_export]
 macro_rules! RIDL {
     (#[uuid($($uuid:expr),+)]

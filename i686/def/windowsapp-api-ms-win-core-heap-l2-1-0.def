@@ -1,0 +1,7 @@
+LIBRARY api-ms-win-core-heap-l2-1-0.dll
+EXPORTS
+GlobalAlloc@8
+GlobalFree@4
+LocalAlloc@8
+LocalFree@4
+LocalReAlloc@12

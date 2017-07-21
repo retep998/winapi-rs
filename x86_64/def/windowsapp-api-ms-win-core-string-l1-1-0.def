@@ -1,0 +1,8 @@
+LIBRARY api-ms-win-core-string-l1-1-0.dll
+EXPORTS
+CompareStringEx
+CompareStringOrdinal
+GetStringTypeExW
+GetStringTypeW
+MultiByteToWideChar
+WideCharToMultiByte
