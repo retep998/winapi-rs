@@ -16,7 +16,7 @@ This branch is for winapi 0.3 which is a work in progress rewrite and as such is
 
 Cargo.toml:
 ```toml
-[dependencies]
+[target.'cfg(windows)'.dependencies]
 winapi = "0.3"
 ```
 main.rs:
