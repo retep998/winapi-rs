@@ -2176,10 +2176,16 @@ pub type PPRINTER_CONNECTION_INFO_1W = *mut PRINTER_CONNECTION_INFO_1W;
 pub type LPPRINTER_CONNECTION_INFO_1W = *mut PRINTER_CONNECTION_INFO_1W;
 extern "system" {
     pub fn AddPrinterConnection2A(
-        hWnd: HWND, pszName: LPCSTR, dwLevel: DWORD, pConnectionInfo: PVOID,
+        hWnd: HWND,
+        pszName: LPCSTR,
+        dwLevel: DWORD,
+        pConnectionInfo: PVOID,
     ) -> BOOL;
     pub fn AddPrinterConnection2W(
-        hWnd: HWND, pszName: LPCWSTR, dwLevel: DWORD, pConnectionInfo: PVOID,
+        hWnd: HWND,
+        pszName: LPCWSTR,
+        dwLevel: DWORD,
+        pConnectionInfo: PVOID,
     ) -> BOOL;
 }
 pub const IPDFP_COPY_ALL_FILES: DWORD = 0x00000001;
@@ -2329,7 +2335,7 @@ STRUCT!{struct PrintPropertyValue_value_propertyBlob {
     pBuf: LPVOID,
 }}
 UNION2!{union PrintPropertyValue_value {
-    [usize; 2],
+    [u64; 1] [u64; 2],
     propertyByte propertyByte_mut :BYTE,
     propertyString propertyString_mut: PWSTR,
     propertyInt32 propertyInt32_mut: LONG,
