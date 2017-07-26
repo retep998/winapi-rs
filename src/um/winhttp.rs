@@ -5,12 +5,11 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Windows HTTP Services API constant definitions and macros
-
 use ctypes::c_int;
 use shared::basetsd::DWORD_PTR;
-use shared::minwindef::{BOOL, DWORD, LPVOID, WORD};
-use um::winnt::{LPCWSTR, LPWSTR, PWSTR};
-
+use shared::minwindef::{BOOL, DWORD, LPCVOID, LPDWORD, LPVOID, USHORT, WORD};
+use um::minwinbase::SYSTEMTIME;
+use um::winnt::{LPCWSTR, LPWSTR, PCWSTR, PVOID, PWSTR};
 pub type HINTERNET = LPVOID;
 pub type LPHINTERNET = *mut HINTERNET;
 pub type INTERNET_PORT = WORD;
@@ -423,7 +422,176 @@ pub const WINHTTP_RESET_SCRIPT_CACHE: DWORD = 0x00000008;
 pub const WINHTTP_RESET_ALL: DWORD = 0x0000FFFF;
 pub const WINHTTP_RESET_NOTIFY_NETWORK_CHANGED: DWORD = 0x00010000;
 pub const WINHTTP_RESET_OUT_OF_PROC: DWORD = 0x00020000;
-//1393
+extern "system" {
+    pub fn WinHttpSetStatusCallback(
+        hInternet: HINTERNET,
+        lpfnInternetCallback: WINHTTP_STATUS_CALLBACK,
+        dwNotificationFlags: DWORD,
+        dwReserved: DWORD_PTR,
+    ) -> WINHTTP_STATUS_CALLBACK;
+    pub fn WinHttpTimeFromSystemTime(
+        pst: *const SYSTEMTIME,
+        pwszTime: LPWSTR,
+    ) -> BOOL;
+    pub fn WinHttpTimeToSystemTime(
+        pwszTime: LPCWSTR,
+        pst: *mut SYSTEMTIME
+    ) -> BOOL;
+    pub fn WinHttpCrackUrl(
+        pwszUrl: LPCWSTR,
+        dwUrlLength: DWORD,
+        dwFlags: DWORD,
+        lpUrlComponents: LPURL_COMPONENTS,
+    ) -> BOOL;
+    pub fn WinHttpCreateUrl(
+        lpUrlComponents: LPURL_COMPONENTS,
+        dwFlags: DWORD,
+        pwszUrl: LPWSTR,
+        pdwUrlLength: LPDWORD,
+    ) -> BOOL;
+    pub fn WinHttpCheckPlatform() -> BOOL;
+    pub fn WinHttpGetDefaultProxyConfiguration(
+        pProxyInfo: *mut WINHTTP_PROXY_INFO,
+    ) -> BOOL;
+    pub fn WinHttpSetDefaultProxyConfiguration(
+        pProxyInfo: *mut WINHTTP_PROXY_INFO,
+    ) -> BOOL;
+    pub fn WinHttpOpen(
+        pszAgentW: LPCWSTR,
+        dwAccessType: DWORD,
+        pszProxyW: LPCWSTR,
+        pszProxyBypassW: LPCWSTR,
+        dwFlags: DWORD,
+    ) -> HINTERNET;
+    pub fn WinHttpCloseHandle(
+        hInternet: HINTERNET,
+    ) -> BOOL;
+    pub fn WinHttpConnect(
+        hSession: HINTERNET,
+        pswzServerName: LPCWSTR,
+        nServerPort: INTERNET_PORT,
+        dwReserved: DWORD,
+    ) -> HINTERNET;
+    pub fn WinHttpReadData(
+        hRequest: HINTERNET,
+        lpBuffer: LPVOID,
+        dwNumberOfBytesToRead: DWORD,
+        lpdwNumberOfBytesRead: LPDWORD,
+    ) -> BOOL;
+    pub fn WinHttpWriteData(
+        hRequest: HINTERNET,
+        lpBuffer: LPCVOID,
+        dwNumberOfBytesToWrite: DWORD,
+        lpdwNumberOfBytesWritten: LPDWORD,
+    ) -> BOOL;
+    pub fn WinHttpQueryDataAvailable(
+        hRequest: HINTERNET,
+        lpdwNumberOfBytesAvailable: LPDWORD,
+    ) -> BOOL;
+    pub fn WinHttpQueryOption(
+        hInternet: HINTERNET,
+        dwOption: DWORD,
+        lpBuffer: LPVOID,
+        lpdwBufferLength: LPDWORD,
+    ) -> BOOL;
+    pub fn WinHttpSetOption(
+        hInternet: HINTERNET,
+        dwOption: DWORD,
+        lpBuffer: LPVOID,
+        dwBufferLength: DWORD,
+    ) -> BOOL;
+    pub fn WinHttpSetTimeouts(
+        hInternet: HINTERNET,
+        nResolveTimeout: c_int,
+        nConnectTimeout: c_int,
+        nSendTimeout: c_int,
+        nReceiveTimeout: c_int,
+    ) -> BOOL;
+    pub fn WinHttpOpenRequest(
+        hConnect: HINTERNET,
+        pwszVerb: LPCWSTR,
+        pwszObjectName: LPCWSTR,
+        pwszVersion: LPCWSTR,
+        pwszReferrer: LPCWSTR,
+        ppwszAcceptTypes: *mut LPCWSTR,
+        dwFlags: DWORD,
+    ) -> HINTERNET;
+    pub fn WinHttpAddRequestHeaders(
+        hRequest: HINTERNET,
+        lpszHeaders: LPCWSTR,
+        dwHeadersLength: DWORD,
+        dwModifiers: DWORD,
+    ) -> BOOL;
+    pub fn WinHttpSendRequest(
+        hRequest: HINTERNET,
+        lpszHeaders: LPCWSTR,
+        dwHeadersLength: DWORD,
+        lpOptional: LPVOID,
+        dwOptionalLength: DWORD,
+        dwTotalLength: DWORD,
+        dwContext: DWORD_PTR,
+    ) -> BOOL;
+    pub fn WinHttpSetCredentials(
+        hRequest: HINTERNET,
+        AuthTargets: DWORD,
+        AuthScheme: DWORD,
+        pwszUserName: LPCWSTR,
+        pwszPassword: LPCWSTR,
+        pAuthParams: LPVOID,
+    ) -> BOOL;
+    pub fn WinHttpQueryAuthSchemes(
+        hRequest: HINTERNET,
+        lpdwSupportedSchemes: LPDWORD,
+        lpdwFirstScheme: LPDWORD,
+        pdwAuthTarget: LPDWORD,
+    ) -> BOOL;
+    pub fn WinHttpReceiveResponse(
+        hRequest: HINTERNET,
+        lpReserved: LPVOID,
+    ) -> BOOL;
+    pub fn WinHttpQueryHeaders(
+        hRequest: HINTERNET,
+        dwInfoLevel: DWORD,
+        pwszName: LPCWSTR,
+        lpBuffer: LPVOID,
+        lpdwBufferLength: LPDWORD,
+        lpdwIndex: LPDWORD,
+    ) -> BOOL;
+    pub fn WinHttpDetectAutoProxyConfigUrl(
+        dwAutoDetectFlags: DWORD,
+        ppwstrAutoConfigUrl: *mut LPWSTR,
+    ) -> BOOL;
+    pub fn WinHttpGetProxyForUrl(
+        hSession: HINTERNET,
+        lpcwszUrl: LPCWSTR,
+        pAutoProxyOptions: *mut WINHTTP_AUTOPROXY_OPTIONS,
+        pProxyInfo: *mut WINHTTP_PROXY_INFO,
+    ) -> BOOL;
+    pub fn WinHttpCreateProxyResolver(
+        hSession: HINTERNET,
+        phResolver: *mut HINTERNET,
+    ) -> DWORD;
+    pub fn WinHttpGetProxyForUrlEx(
+        hResolver: HINTERNET,
+        pcwszUrl: PCWSTR,
+        pAutoProxyOptions: *mut WINHTTP_AUTOPROXY_OPTIONS,
+        pContext: DWORD_PTR,
+    ) -> DWORD;
+    pub fn WinHttpGetProxyResult(
+        hResolver: HINTERNET,
+        pProxyResult: *mut WINHTTP_PROXY_RESULT,
+    ) -> DWORD;
+    pub fn WinHttpFreeProxyResult(
+        pProxyResult: *mut WINHTTP_PROXY_RESULT,
+    );
+    pub fn WinHttpResetAutoProxy(
+        hSession: HINTERNET,
+        dwFlags: DWORD,
+    ) -> DWORD;
+    pub fn WinHttpGetIEProxyConfigForCurrentUser(
+        pProxyConfig: *mut WINHTTP_CURRENT_USER_IE_PROXY_CONFIG,
+    ) -> BOOL;
+}
 ENUM!{enum WINHTTP_WEB_SOCKET_OPERATION {
     WINHTTP_WEB_SOCKET_SEND_OPERATION = 0,
     WINHTTP_WEB_SOCKET_RECEIVE_OPERATION = 1,
@@ -451,3 +619,41 @@ ENUM!{enum WINHTTP_WEB_SOCKET_CLOSE_STATUS {
     WINHTTP_WEB_SOCKET_SERVER_ERROR_CLOSE_STATUS = 1011,
     WINHTTP_WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS = 1015,
 }}
+extern "system" {
+    pub fn WinHttpWebSocketCompleteUpgrade(
+        hRequest: HINTERNET,
+        pContext: DWORD_PTR,
+    ) -> HINTERNET;
+    pub fn WinHttpWebSocketSend(
+        hWebSocket: HINTERNET,
+        eBufferType: WINHTTP_WEB_SOCKET_BUFFER_TYPE,
+        pvBuffer: PVOID,
+        dwBufferLength: DWORD,
+    ) -> DWORD;
+    pub fn WinHttpWebSocketReceive(
+        hWebSocket: HINTERNET,
+        pvBuffer: PVOID,
+        dwBufferLength: DWORD,
+        pdwBytesRead: *mut DWORD,
+        peBufferType: *mut WINHTTP_WEB_SOCKET_BUFFER_TYPE,
+    ) -> DWORD;
+    pub fn WinHttpWebSocketShutdown(
+        hWebSocket: HINTERNET,
+        usStatus: USHORT,
+        pvReason: PVOID,
+        dwReasonLength: DWORD,
+    ) -> DWORD;
+    pub fn WinHttpWebSocketClose(
+        hWebSocket: HINTERNET,
+        usStatus: USHORT,
+        pvReason: PVOID,
+        dwReasonLength: DWORD,
+    ) -> DWORD;
+    pub fn WinHttpWebSocketQueryCloseStatus(
+        hWebSocket: HINTERNET,
+        pusStatus: *mut USHORT,
+        pvReason: PVOID,
+        dwReasonLength: DWORD,
+        pdwReasonLengthConsumed: *mut DWORD,
+    ) -> DWORD;
+}

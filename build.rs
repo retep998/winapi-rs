@@ -211,7 +211,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("wincrypt", &["basetsd", "bcrypt", "guiddef", "minwinbase", "minwindef", "ncrypt", "vcruntime", "winnt"], &["advapi32", "crypt32", "cryptnet"]),
     ("winevt", &["basetsd", "guiddef", "minwinbase", "minwindef", "vcruntime", "winnt"], &["wevtapi"]),
     ("wingdi", &["basetsd", "minwindef", "windef", "winnt"], &["gdi32", "msimg32", "opengl32", "winspool"]),
-    ("winhttp", &["basetsd", "minwindef", "winnt"], &[]),
+    ("winhttp", &["basetsd", "minwinbase", "minwindef", "winnt"], &["winhttp"]),
     ("wininet", &["basetsd", "minwinbase", "minwindef", "ntdef", "windef", "winineti", "winnt"], &["wininet"]),
     ("winineti", &["minwindef"], &[]),
     ("winioctl", &["devpropdef", "minwindef", "winnt"], &[]),
