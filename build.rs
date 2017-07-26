@@ -93,7 +93,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("d3d12sdklayers", &["basetsd", "d3d12", "minwindef", "unknwnbase", "winnt"], &[]),
     ("d3d12shader", &["basetsd", "d3dcommon", "minwindef", "unknwnbase", "winnt"], &[]),
     ("d3dcommon", &["basetsd", "minwindef", "unknwnbase", "winnt"], &[]),
-    ("d3dcompiler", &["basetsd", "d3dcommon", "minwindef"], &[]),
+    ("d3dcompiler", &["basetsd", "d3d11shader", "d3dcommon", "guiddef", "minwindef", "winnt"], &["d3dcompiler"]),
     ("davclnt", &["minwindef", "winnt"], &["netapi32"]),
     ("dbghelp", &["basetsd", "guiddef", "minwindef", "vcruntime", "winnt"], &[]),
     ("dcommon", &["dxgiformat"], &[]),
