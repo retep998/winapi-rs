@@ -240,9 +240,10 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("activation", &["inspectable", "winnt"], &[]),
     ("hstring", &["winnt"], &[]),
     ("inspectable", &["guiddef", "hstring", "minwindef", "unknwnbase", "winnt"], &[]),
-    ("roapi", &["activation", "hstring", "winnt"], &[]),
-    ("roerrorapi", &["basetsd", "minwindef", "winnt"], &[]),
-    ("winstring", &["basetsd", "minwindef", "winnt"], &[]),
+    ("roapi", &["activation", "basetsd", "guiddef", "hstring", "inspectable", "objidl", "winnt"], &["runtimeobject"]),
+    ("robuffer", &["objidl", "winnt"], &["runtimeobject"]),
+    ("roerrorapi", &["basetsd", "hstring", "minwindef", "restrictederrorinfo", "unknwnbase", "winnt"], &["runtimeobject"]),
+    ("winstring", &["basetsd", "hstring", "minwindef", "winnt"], &["runtimeobject"]),
 ];
 struct Header {
     required: bool,
