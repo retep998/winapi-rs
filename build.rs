@@ -116,7 +116,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("gl-gl", &[], &[]),
     ("handleapi", &["minwindef", "winnt"], &["kernel32"]),
     ("heapapi", &["basetsd", "minwindef"], &[]),
-    ("http", &["guiddef", "minwindef", "sspi", "winnt", "ws2def"], &[]),
+    ("http", &["guiddef", "minwinbase", "minwindef", "sspi", "winnt", "ws2def"], &["winhttp"]),
     ("imm", &[], &[]),
     ("ktmw32", &["guiddef", "minwinbase", "minwindef", "winnt"], &["ktmw32"]),
     ("libloaderapi", &["basetsd", "minwindef", "winnt"], &["kernel32", "user32"]),
