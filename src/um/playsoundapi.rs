@@ -5,9 +5,18 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! ApiSet Contract for api-ms-win-mm-playsound-l1-1-0
-
-use shared::minwindef::DWORD;
-
+use shared::minwindef::{BOOL, DWORD, HMODULE, UINT};
+use um::winnt::{LPCSTR, LPCWSTR};
+extern "system" {
+    pub fn sndPlaySoundA(
+        pszSound: LPCSTR,
+        fuSound: UINT,
+    ) -> BOOL;
+    pub fn sndPlaySoundW(
+        pszSound: LPCWSTR,
+        fuSound: UINT,
+    ) -> BOOL;
+}
 pub const SND_SYNC: DWORD = 0x0000;
 pub const SND_ASYNC: DWORD = 0x0001;
 pub const SND_NODEFAULT: DWORD = 0x0002;
@@ -24,3 +33,15 @@ pub const SND_APPLICATION: DWORD = 0x0080;
 pub const SND_SENTRY: DWORD = 0x00080000;
 pub const SND_RING: DWORD = 0x00100000;
 pub const SND_SYSTEM: DWORD = 0x00200000;
+extern "system" {
+    pub fn PlaySoundA(
+        pszSound: LPCSTR,
+        hmod: HMODULE,
+        fdwSound: DWORD,
+    ) -> BOOL;
+    pub fn PlaySoundW(
+        pszSound: LPCWSTR,
+        hmod: HMODULE,
+        fdwSound: DWORD,
+    ) -> BOOL;
+}
