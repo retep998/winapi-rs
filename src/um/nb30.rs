@@ -5,10 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! This module contains the definitions for portable NetBIOS 3.0 support.
-
 use shared::minwindef::{DWORD, PUCHAR, UCHAR, ULONG, USHORT, WORD};
 use um::winnt::HANDLE;
-
 pub const NCBNAMSZ: usize = 16;
 pub const MAX_LANA: usize = 254;
 FN!{stdcall PFPOST(
@@ -143,6 +141,8 @@ STRUCT!{struct ACTION_HEADER {
     reserved: USHORT,
 }}
 pub type PACTION_HEADER = *mut ACTION_HEADER;
+pub const ALL_TRANSPORTS: ULONG = 0x0000004d;
+pub const MS_NBF: ULONG = 0x46424e4d;
 pub const NCBCALL: UCHAR = 0x10;
 pub const NCBLISTEN: UCHAR = 0x11;
 pub const NCBHANGUP: UCHAR = 0x12;
@@ -208,3 +208,8 @@ pub const NRC_LOCKFAIL: UCHAR = 0x3C;
 pub const NRC_OPENERR: UCHAR = 0x3f;
 pub const NRC_SYSTEM: UCHAR = 0x40;
 pub const NRC_PENDING: UCHAR = 0xff;
+extern "system" {
+    pub fn Netbios(
+        pncb: PNCB,
+    ) -> UCHAR;
+}

@@ -6,8 +6,8 @@
 // except according to those terms.
 //! Contains public interfaces to query the network roles of workstations, servers, and DCs
 use shared::guiddef::GUID;
-use shared::minwindef::ULONG;
-use um::winnt::LPWSTR;
+use shared::minwindef::{DWORD, PBYTE, ULONG};
+use um::winnt::{LPCWSTR, LPWSTR, PVOID};
 ENUM!{enum DSROLE_MACHINE_ROLE {
     DsRole_RoleStandaloneWorkstation,
     DsRole_RoleMemberWorkstation,
@@ -55,3 +55,13 @@ STRUCT!{struct DSROLE_OPERATION_STATE_INFO {
     OperationState: DSROLE_OPERATION_STATE,
 }}
 pub type PDSROLE_OPERATION_STATE_INFO = *mut DSROLE_OPERATION_STATE_INFO;
+extern "system" {
+    pub fn DsRoleGetPrimaryDomainInformation(
+        lpServer: LPCWSTR,
+        InfoLevel: DSROLE_PRIMARY_DOMAIN_INFO_LEVEL,
+        Buffer: *mut PBYTE,
+    ) -> DWORD;
+    pub fn DsRoleFreeMemory(
+        Buffer: PVOID,
+    );
+}
