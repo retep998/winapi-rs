@@ -222,7 +222,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("winnls", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
     ("winnt", &["basetsd", "excpt", "guiddef", "minwindef"], &[]),
     ("winreg", &["basetsd", "minwinbase", "minwindef", "winnt"], &["advapi32"]),
-    ("winscard", &["basetsd", "guiddef", "minwindef", "windef", "winnt"], &[]),
+    ("winscard", &["basetsd", "guiddef", "minwindef", "rpcdce", "windef", "winnt", "winsmcrd"], &["winscard"]),
     ("winsmcrd", &["minwindef", "winioctl"], &[]),
     ("winsock2", &["basetsd", "guiddef", "inaddr", "minwinbase", "minwindef", "qos", "winbase", "windef", "winerror", "winnt", "ws2def", "wtypesbase"], &["ws2_32"]),
     ("winspool", &["guiddef", "minwinbase", "minwindef", "vcruntime", "windef", "winerror", "wingdi", "winnt"], &["winspool"]),
