@@ -154,7 +154,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("objidl", &["basetsd", "guiddef", "minwindef", "objidlbase", "unknwnbase", "winnt", "wtypesbase"], &[]),
     ("objidlbase", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
     ("ocidl", &["guiddef", "minwindef", "ntdef", "oaidl", "unknwnbase", "wtypes", "wtypesbase"], &[]),
-    ("oleauto", &["minwindef", "oaidl", "winnt", "wtypes", "wtypesbase"], &["oleaut32"]),
+    ("oleauto", &["basetsd", "minwinbase", "minwindef", "oaidl", "winnt", "wtypes", "wtypesbase"], &["oleaut32"]),
     ("olectl", &["winerror", "winnt"], &[]),
     ("pdh", &["basetsd", "guiddef", "minwindef", "windef", "winnt", "wtypesbase"], &["pdh"]),
     ("playsoundapi", &["minwindef", "winnt"], &["winmm"]),
