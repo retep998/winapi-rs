@@ -2336,7 +2336,7 @@ STRUCT!{struct PrintPropertyValue_value_propertyBlob {
 }}
 UNION2!{union PrintPropertyValue_value {
     [u64; 1] [u64; 2],
-    propertyByte propertyByte_mut :BYTE,
+    propertyByte propertyByte_mut: BYTE,
     propertyString propertyString_mut: PWSTR,
     propertyInt32 propertyInt32_mut: LONG,
     propertyInt64 propertyInt64_mut: LONGLONG,
