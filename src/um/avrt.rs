@@ -22,7 +22,7 @@ extern "system" {
         TaskIndex: LPDWORD,
     ) -> HANDLE;
     pub fn AvSetMmThreadCharacteristicsW(
-        TaskName: LPCSTR,
+        TaskName: LPCWSTR,
         TaskIndex: LPDWORD,
     ) -> HANDLE;
     pub fn AvSetMmMaxThreadCharacteristicsA(
