@@ -1,0 +1,7 @@
+LIBRARY d3dx10_47.dll
+EXPORTS
+D3DX10CreateEffectFromFileA
+D3DX10CreateShaderResourceViewFromFileA
+D3DX10CreateTextureFromFileA
+D3DX10LoadTextureFromTexture
+D3DX10SaveTextureToFileA

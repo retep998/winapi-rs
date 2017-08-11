@@ -6,8 +6,9 @@
 // except according to those terms.
 // This file contains structures, function prototypes, and definitions for the NetDfs API
 use shared::guiddef::GUID;
-use shared::minwindef::{DWORD, ULONG, USHORT};
-use um::winnt::{LPWSTR, PSECURITY_DESCRIPTOR, ULONGLONG};
+use shared::lmcons::NET_API_STATUS;
+use shared::minwindef::{DWORD, LPBYTE, LPDWORD, ULONG, USHORT};
+use um::winnt::{LPWSTR, PSECURITY_DESCRIPTOR, PWSTR, SECURITY_INFORMATION, ULONGLONG, WCHAR};
 pub const DFS_VOLUME_STATES: DWORD = 0xF;
 pub const DFS_VOLUME_STATE_OK: DWORD = 1;
 pub const DFS_VOLUME_STATE_INCONSISTENT: DWORD = 2;
@@ -45,13 +46,13 @@ STRUCT!{struct DFS_INFO_1 {
 pub type PDFS_INFO_1 = *mut DFS_INFO_1;
 pub type LPDFS_INFO_1 = *mut DFS_INFO_1;
 #[cfg(target_arch = "x86_64")]
+IFDEF!{
 STRUCT!{struct DFS_INFO_1_32 {
     EntryPath: ULONG,
 }}
-#[cfg(target_arch = "x86_64")]
 pub type PDFS_INFO_1_32 = *mut DFS_INFO_1_32;
-#[cfg(target_arch = "x86_64")]
 pub type LPDFS_INFO_1_32 = *mut DFS_INFO_1_32;
+}
 STRUCT!{struct DFS_INFO_2 {
     EntryPath: LPWSTR,
     Comment: LPWSTR,
@@ -61,16 +62,16 @@ STRUCT!{struct DFS_INFO_2 {
 pub type PDFS_INFO_2 = *mut DFS_INFO_2;
 pub type LPDFS_INFO_2 = *mut DFS_INFO_2;
 #[cfg(target_arch = "x86_64")]
+IFDEF!{
 STRUCT!{struct DFS_INFO_2_32 {
     EntryPath: ULONG,
     Comment: ULONG,
     State: DWORD,
     NumberOfStorages: DWORD,
 }}
-#[cfg(target_arch = "x86_64")]
 pub type PDFS_INFO_2_32 = *mut DFS_INFO_2_32;
-#[cfg(target_arch = "x86_64")]
 pub type LPDFS_INFO_2_32 = *mut DFS_INFO_2_32;
+}
 STRUCT!{struct DFS_STORAGE_INFO {
     State: ULONG,
     ServerName: LPWSTR,
@@ -79,15 +80,15 @@ STRUCT!{struct DFS_STORAGE_INFO {
 pub type PDFS_STORAGE_INFO = *mut DFS_STORAGE_INFO;
 pub type LPDFS_STORAGE_INFO = *mut DFS_STORAGE_INFO;
 #[cfg(target_arch = "x86_64")]
+IFDEF!{
 STRUCT!{struct DFS_STORAGE_INFO_0_32 {
     State: ULONG,
     ServerName: ULONG,
     ShareName: ULONG,
 }}
-#[cfg(target_arch = "x86_64")]
 pub type PDFS_STORAGE_INFO_0_32 = *mut DFS_STORAGE_INFO_0_32;
-#[cfg(target_arch = "x86_64")]
 pub type LPDFS_STORAGE_INFO_0_32 = *mut DFS_STORAGE_INFO_0_32;
+}
 STRUCT!{struct DFS_STORAGE_INFO_1 {
     State: ULONG,
     ServerName: LPWSTR,
@@ -106,6 +107,7 @@ STRUCT!{struct DFS_INFO_3 {
 pub type PDFS_INFO_3 = *mut DFS_INFO_3;
 pub type LPDFS_INFO_3 = *mut DFS_INFO_3;
 #[cfg(target_arch = "x86_64")]
+IFDEF!{
 STRUCT!{struct DFS_INFO_3_32 {
     EntryPath: ULONG,
     Comment: ULONG,
@@ -113,10 +115,9 @@ STRUCT!{struct DFS_INFO_3_32 {
     NumberOfStorages: DWORD,
     Storage: ULONG,
 }}
-#[cfg(target_arch = "x86_64")]
 pub type PDFS_INFO_3_32 = *mut DFS_INFO_3_32;
-#[cfg(target_arch = "x86_64")]
 pub type LPDFS_INFO_3_32 = *mut DFS_INFO_3_32;
+}
 STRUCT!{struct DFS_INFO_4 {
     EntryPath: LPWSTR,
     Comment: LPWSTR,
@@ -129,6 +130,7 @@ STRUCT!{struct DFS_INFO_4 {
 pub type PDFS_INFO_4 = *mut DFS_INFO_4;
 pub type LPDFS_INFO_4 = *mut DFS_INFO_4;
 #[cfg(target_arch = "x86_64")]
+IFDEF!{
 STRUCT!{struct DFS_INFO_4_32 {
     EntryPath: ULONG,
     Comment: ULONG,
@@ -138,10 +140,9 @@ STRUCT!{struct DFS_INFO_4_32 {
     NumberOfStorages: DWORD,
     Storage: ULONG,
 }}
-#[cfg(target_arch = "x86_64")]
 pub type PDFS_INFO_4_32 = *mut DFS_INFO_4_32;
-#[cfg(target_arch = "x86_64")]
 pub type LPDFS_INFO_4_32 = *mut DFS_INFO_4_32;
+}
 STRUCT!{struct DFS_INFO_5 {
     EntryPath: LPWSTR,
     Comment: LPWSTR,
@@ -201,16 +202,16 @@ STRUCT!{struct DFS_INFO_9 {
 }}
 pub type PDFS_INFO_9 = *mut DFS_INFO_9;
 pub type LPDFS_INFO_9 = *mut DFS_INFO_9;
+pub const DFS_VALID_PROPERTY_FLAGS: ULONG = DFS_PROPERTY_FLAG_INSITE_REFERRALS
+    | DFS_PROPERTY_FLAG_ROOT_SCALABILITY | DFS_PROPERTY_FLAG_SITE_COSTING
+    | DFS_PROPERTY_FLAG_TARGET_FAILBACK | DFS_PROPERTY_FLAG_CLUSTER_ENABLED
+    | DFS_PROPERTY_FLAG_ABDE;
 pub const DFS_PROPERTY_FLAG_INSITE_REFERRALS: ULONG = 0x00000001;
 pub const DFS_PROPERTY_FLAG_ROOT_SCALABILITY: ULONG = 0x00000002;
 pub const DFS_PROPERTY_FLAG_SITE_COSTING: ULONG = 0x00000004;
 pub const DFS_PROPERTY_FLAG_TARGET_FAILBACK: ULONG = 0x00000008;
 pub const DFS_PROPERTY_FLAG_CLUSTER_ENABLED: ULONG = 0x00000010;
 pub const DFS_PROPERTY_FLAG_ABDE: ULONG = 0x00000020;
-pub const DFS_VALID_PROPERTY_FLAGS: ULONG = DFS_PROPERTY_FLAG_INSITE_REFERRALS
-    | DFS_PROPERTY_FLAG_ROOT_SCALABILITY | DFS_PROPERTY_FLAG_SITE_COSTING
-    | DFS_PROPERTY_FLAG_TARGET_FAILBACK | DFS_PROPERTY_FLAG_CLUSTER_ENABLED
-    | DFS_PROPERTY_FLAG_ABDE;
 STRUCT!{struct DFS_INFO_50 {
     NamespaceMajorVersion: ULONG,
     NamespaceMinorVersion: ULONG,
@@ -287,8 +288,50 @@ STRUCT!{struct DFS_INFO_300 {
 }}
 pub type PDFS_INFO_300 = *mut DFS_INFO_300;
 pub type LPDFS_INFO_300 = *mut DFS_INFO_300;
+extern "system" {
+    pub fn NetDfsAdd(
+        DfsEntryPath: LPWSTR,
+        ServerName: LPWSTR,
+        ShareName: LPWSTR,
+        Comment: LPWSTR,
+        Flags: DWORD,
+    ) -> NET_API_STATUS;
+}
 pub const DFS_ADD_VOLUME: DWORD = 1;
 pub const DFS_RESTORE_VOLUME: DWORD = 2;
+extern "system" {
+    pub fn NetDfsAddStdRoot(
+        ServerName: LPWSTR,
+        RootShare: LPWSTR,
+        Comment: LPWSTR,
+        Flags: DWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsRemoveStdRoot(
+        ServerName: LPWSTR,
+        RootShare: LPWSTR,
+        Flags: DWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsAddFtRoot(
+        ServerName: LPWSTR,
+        RootShare: LPWSTR,
+        FtDfsName: LPWSTR,
+        Comment: LPWSTR,
+        Flags: DWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsRemoveFtRoot(
+        ServerName: LPWSTR,
+        RootShare: LPWSTR,
+        FtDfsName: LPWSTR,
+        Flags: DWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsRemoveFtRootForced(
+        DomainName: LPWSTR,
+        ServerName: LPWSTR,
+        RootShare: LPWSTR,
+        FtDfsName: LPWSTR,
+        Flags: DWORD,
+    ) -> NET_API_STATUS;
+}
 pub const NET_DFS_SETDC_FLAGS: DWORD = 0x00000000;
 pub const NET_DFS_SETDC_TIMEOUT: DWORD = 0x00000001;
 pub const NET_DFS_SETDC_INITPKT: DWORD = 0x00000002;
@@ -305,6 +348,109 @@ STRUCT!{struct DFS_SITELIST_INFO {
 }}
 pub type PDFS_SITELIST_INFO = *mut DFS_SITELIST_INFO;
 pub type LPDFS_SITELIST_INFO = *mut DFS_SITELIST_INFO;
+extern "system" {
+    pub fn NetDfsRemove(
+        DfsEntryPath: LPWSTR,
+        ServerName: LPWSTR,
+        ShareName: LPWSTR,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsEnum(
+        DfsName: LPWSTR,
+        Level: DWORD,
+        PrefMaxLen: DWORD,
+        Buffer: *mut LPBYTE,
+        EntriesRead: LPDWORD,
+        ResumeHandle: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsGetInfo(
+        DfsEntryPath: LPWSTR,
+        ServerName: LPWSTR,
+        ShareName: LPWSTR,
+        Level: DWORD,
+        Buffer: *mut LPBYTE,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsSetInfo(
+        DfsEntryPath: LPWSTR,
+        ServerName: LPWSTR,
+        ShareName: LPWSTR,
+        Level: DWORD,
+        Buffer: LPBYTE,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsGetClientInfo(
+        DfsEntryPath: LPWSTR,
+        ServerName: LPWSTR,
+        ShareName: LPWSTR,
+        Level: DWORD,
+        Buffer: *mut LPBYTE,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsSetClientInfo(
+        DfsEntryPath: LPWSTR,
+        ServerName: LPWSTR,
+        ShareName: LPWSTR,
+        Level: DWORD,
+        Buffer: LPBYTE,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsMove(
+        OldDfsEntryPath: LPWSTR,
+        NewDfsEntryPath: LPWSTR,
+        Flags: ULONG,
+    ) -> NET_API_STATUS;
+}
+pub const DFS_MOVE_FLAG_REPLACE_IF_EXISTS: ULONG = 0x00000001;
+extern "system" {
+    pub fn NetDfsRename(
+        Path: LPWSTR,
+        NewPath: LPWSTR,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsAddRootTarget(
+        pDfsPath: LPWSTR,
+        pTargetPath: LPWSTR,
+        MajorVersion: ULONG,
+        pComment: LPWSTR,
+        Flags: ULONG,
+    ) -> NET_API_STATUS;
+}
+pub const DFS_FORCE_REMOVE: ULONG = 0x80000000;
+extern "system" {
+    pub fn NetDfsRemoveRootTarget(
+        pDfsPath: LPWSTR,
+        pTargetPath: LPWSTR,
+        Flags: DWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsGetSecurity(
+        DfsEntryPath: LPWSTR,
+        SecurityInformation: SECURITY_INFORMATION,
+        ppSecurityDescriptor: *mut PSECURITY_DESCRIPTOR,
+        lpcbSecurityDescriptor: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsSetSecurity(
+        DfsEntryPath: LPWSTR,
+        SecurityInformation: SECURITY_INFORMATION,
+        pSecurityDescriptor: PSECURITY_DESCRIPTOR,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsGetStdContainerSecurity(
+        MachineName: LPWSTR,
+        SecurityInformation: SECURITY_INFORMATION,
+        ppSecurityDescriptor: *mut PSECURITY_DESCRIPTOR,
+        lpcbSecurityDescriptor: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsSetStdContainerSecurity(
+        MachineName: LPWSTR,
+        SecurityInformation: SECURITY_INFORMATION,
+        pSecurityDescriptor: PSECURITY_DESCRIPTOR,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsGetFtContainerSecurity(
+        DomainName: LPWSTR,
+        SecurityInformation: SECURITY_INFORMATION,
+        ppSecurityDescriptor: *mut PSECURITY_DESCRIPTOR,
+        lpcbSecurityDescriptor: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetDfsSetFtContainerSecurity(
+        DomainName: LPWSTR,
+        SecurityInformation: SECURITY_INFORMATION,
+        pSecurityDescriptor: PSECURITY_DESCRIPTOR,
+    ) -> NET_API_STATUS;
+}
 ENUM!{enum DFS_NAMESPACE_VERSION_ORIGIN {
     DFS_NAMESPACE_VERSION_ORIGIN_COMBINED = 0,
     DFS_NAMESPACE_VERSION_ORIGIN_SERVER,
@@ -321,3 +467,18 @@ STRUCT!{struct DFS_SUPPORTED_NAMESPACE_VERSION_INFO {
     StandaloneDfsCapabilities: ULONGLONG,
 }}
 pub type PDFS_SUPPORTED_NAMESPACE_VERSION_INFO = *mut DFS_SUPPORTED_NAMESPACE_VERSION_INFO;
+extern "system" {
+    pub fn NetDfsGetSupportedNamespaceVersion(
+        Origin: DFS_NAMESPACE_VERSION_ORIGIN,
+        pName: PWSTR,
+        ppVersionInfo: *mut PDFS_SUPPORTED_NAMESPACE_VERSION_INFO,
+    ) -> NET_API_STATUS;
+}
+STRUCT!{struct DFS_GET_PKT_ENTRY_STATE_ARG {
+    DfsEntryPathLen: USHORT,
+    ServerNameLen: USHORT,
+    ShareNameLen: USHORT,
+    Level: ULONG,
+    Buffer: [WCHAR; 1],
+}}
+pub type PDFS_GET_PKT_ENTRY_STATE_ARG = *mut DFS_GET_PKT_ENTRY_STATE_ARG;

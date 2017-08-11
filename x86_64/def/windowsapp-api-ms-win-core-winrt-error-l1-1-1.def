@@ -1,0 +1,14 @@
+LIBRARY api-ms-win-core-winrt-error-l1-1-1.dll
+EXPORTS
+GetRestrictedErrorInfo
+RoCaptureErrorContext
+RoFailFastWithErrorContext
+RoGetErrorReportingFlags
+RoOriginateError
+RoOriginateErrorW
+RoOriginateLanguageException
+RoReportUnhandledError
+RoSetErrorReportingFlags
+RoTransformError
+RoTransformErrorW
+SetRestrictedErrorInfo

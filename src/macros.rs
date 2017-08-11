@@ -124,33 +124,31 @@ macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
         }
     }
 }
+macro_rules! MAKEINTRESOURCE {
+    ($i:expr) => { $i as u16 as usize as LPWSTR }
+}
 #[macro_export]
 macro_rules! RIDL {
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) {$(
-        fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
+        $(#[$($attrs:tt)*])* fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
     )+}) => (
-        #[repr(C)]
-        pub struct $vtbl {
-            $(pub $method: unsafe extern "system" fn(
-                This: *mut $interface,
-                $($p: $t),*
-            ) -> $rtr,)+
-        }
+        RIDL!{@vtbl $interface $vtbl () $(
+            $(#[$($attrs)*])* fn $method($($p: $t,)*) -> $rtr,
+        )+}
         #[repr(C)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl,
         }
-        RIDL!{@impl $interface {$(fn $method($($p: $t,)*) -> $rtr,)+}}
+        impl $interface {
+            $(RIDL!{@method $(#[$($attrs)*])* fn $method($($p: $t,)*) -> $rtr})+
+        }
         RIDL!{@uuid $interface $($uuid),+}
     );
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {
     }) => (
-        #[repr(C)]
-        pub struct $vtbl {
-            pub parent: $pvtbl,
-        }
+        RIDL!{@vtbl $interface $vtbl (pub parent: $pvtbl,)}
         #[repr(C)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl,
@@ -160,21 +158,18 @@ macro_rules! RIDL {
     );
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
-        fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
+        $(#[$($attrs:tt)*])* fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
     )+}) => (
-        #[repr(C)]
-        pub struct $vtbl {
-            pub parent: $pvtbl,
-            $(pub $method: unsafe extern "system" fn(
-                This: *mut $interface,
-                $($p: $t,)*
-            ) -> $rtr,)+
-        }
+        RIDL!{@vtbl $interface $vtbl (pub parent: $pvtbl,) $(
+            $(#[$($attrs)*])* fn $method($($p: $t,)*) -> $rtr,
+        )+}
         #[repr(C)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl,
         }
-        RIDL!{@impl $interface {$(fn $method($($p: $t,)*) -> $rtr,)+}}
+        impl $interface {
+            $(RIDL!{@method $(#[$($attrs)*])* fn $method($($p: $t,)*) -> $rtr})+
+        }
         RIDL!{@deref $interface $pinterface}
         RIDL!{@uuid $interface $($uuid),+}
     );
@@ -187,14 +182,52 @@ macro_rules! RIDL {
             }
         }
     );
-    (@impl $interface:ident {$(
-        fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
-    )+}) => (
-        impl $interface {
-            $(#[inline] pub unsafe fn $method(&self, $($p: $t,)*) -> $rtr {
-                ((*self.lpVtbl).$method)(self as *const _ as *mut _, $($p,)*)
-            })+
+    (@method fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty) => (
+        #[inline] pub unsafe fn $method(&self, $($p: $t,)*) -> $rtr {
+            ((*self.lpVtbl).$method)(self as *const _ as *mut _, $($p,)*)
         }
+    );
+    (@method #[fixme] fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty) => (
+        #[inline] pub unsafe fn $method(&self, $($p: $t,)*) -> $rtr {
+            let mut ret = $crate::_core::mem::uninitialized();
+            ((*self.lpVtbl).$method)(self as *const _ as *mut _, &mut ret, $($p,)*);
+            ret
+        }
+    );
+    (@vtbl $interface:ident $vtbl:ident ($($fields:tt)*)
+        $(fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,)*
+    ) => (
+        RIDL!{@item #[repr(C)]
+        pub struct $vtbl {
+            $($fields)*
+            $(pub $method: unsafe extern "system" fn(
+                This: *mut $interface,
+                $($p: $t,)*
+            ) -> $rtr,)*
+        }}
+    );
+    (@vtbl $interface:ident $vtbl:ident ($($fields:tt)*)
+        fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
+    $($tail:tt)*) => (
+        RIDL!{@vtbl $interface $vtbl (
+            $($fields)*
+            pub $method: unsafe extern "system" fn(
+                This: *mut $interface,
+                $($p: $t,)*
+            ) -> $rtr,
+        ) $($tail)*}
+    );
+    (@vtbl $interface:ident $vtbl:ident ($($fields:tt)*)
+        #[fixme] fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
+    $($tail:tt)*) => (
+        RIDL!{@vtbl $interface $vtbl (
+            $($fields)*
+            pub $method: unsafe extern "system" fn(
+                This: *mut $interface,
+                ret: *mut $rtr,
+                $($p: $t,)*
+            ) -> *mut $rtr,
+        ) $($tail)*}
     );
     (@uuid $interface:ident
         $l:expr, $w1:expr, $w2:expr,
@@ -212,6 +245,7 @@ macro_rules! RIDL {
             }
         }
     );
+    (@item $thing:item) => ($thing);
 }
 macro_rules! UNION {
     ($base:ident, $field:ident, $variant:ident, $variant_mut:ident, $fieldtype:ty) => (

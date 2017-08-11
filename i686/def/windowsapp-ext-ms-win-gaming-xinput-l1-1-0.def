@@ -1,0 +1,9 @@
+LIBRARY ext-ms-win-gaming-xinput-l1-1-0.dll
+EXPORTS
+XInputEnable@4
+XInputGetAudioDeviceIds@20
+XInputGetBatteryInformation@12
+XInputGetCapabilities@12
+XInputGetKeystroke@12
+XInputGetState@8
+XInputSetState@8

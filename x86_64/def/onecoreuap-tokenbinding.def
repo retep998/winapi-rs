@@ -1,0 +1,10 @@
+LIBRARY TOKENBINDING.dll
+EXPORTS
+TokenBindingDeleteAllBindings
+TokenBindingDeleteBinding
+TokenBindingGenerateBinding
+TokenBindingGenerateID
+TokenBindingGenerateMessage
+TokenBindingGetKeyTypesClient
+TokenBindingGetKeyTypesServer
+TokenBindingVerifyMessage

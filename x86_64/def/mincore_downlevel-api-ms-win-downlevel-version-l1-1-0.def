@@ -1,0 +1,8 @@
+LIBRARY api-ms-win-downlevel-version-l1-1-0.dll
+EXPORTS
+GetFileVersionInfoExW
+GetFileVersionInfoSizeExW
+VerFindFileA
+VerFindFileW
+VerQueryValueA
+VerQueryValueW

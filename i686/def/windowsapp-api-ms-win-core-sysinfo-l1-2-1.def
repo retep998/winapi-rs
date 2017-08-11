@@ -1,0 +1,13 @@
+LIBRARY api-ms-win-core-sysinfo-l1-2-1.dll
+EXPORTS
+GetLocalTime@4
+GetLogicalProcessorInformation@8
+GetLogicalProcessorInformationEx@12
+GetNativeSystemInfo@4
+GetSystemInfo@4
+GetSystemTime@4
+GetSystemTimeAsFileTime@4
+GetSystemTimePreciseAsFileTime@4
+GetTickCount@0
+GetTickCount64@0
+GlobalMemoryStatusEx@4

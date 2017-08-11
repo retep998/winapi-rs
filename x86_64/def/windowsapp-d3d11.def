@@ -1,0 +1,6 @@
+LIBRARY d3d11.dll
+EXPORTS
+CreateDirect3D11DeviceFromDXGIDevice
+CreateDirect3D11SurfaceFromDXGISurface
+D3D11CreateDevice
+D3D11On12CreateDevice

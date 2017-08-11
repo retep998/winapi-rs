@@ -1,0 +1,16 @@
+LIBRARY api-ms-win-eventing-legacy-l1-1-0.dll
+EXPORTS
+ControlTraceA
+EnableTrace
+EnableTraceEx
+EnumerateTraceGuids
+FlushTraceA
+FlushTraceW
+OpenTraceA
+QueryAllTracesA
+QueryTraceA
+QueryTraceW
+StartTraceA
+StopTraceA
+UpdateTraceA
+UpdateTraceW

@@ -1,0 +1,6 @@
+LIBRARY schedcli.dll
+EXPORTS
+NetScheduleJobAdd
+NetScheduleJobDel
+NetScheduleJobEnum
+NetScheduleJobGetInfo

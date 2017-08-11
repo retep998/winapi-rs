@@ -1,0 +1,6 @@
+LIBRARY D3D10.dll
+EXPORTS
+D3D10CompileShader
+D3D10CreateDevice
+D3D10CreateDeviceAndSwapChain
+D3D10CreateEffectFromMemory

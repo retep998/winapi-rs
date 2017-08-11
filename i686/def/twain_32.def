@@ -1,0 +1,7 @@
+LIBRARY TWAIN_32.dll
+EXPORTS
+AboutDlgProc@16 @4
+ChooseDlgProc@16 @3
+DSM_Entry@24 @1
+InfoHook@12 @6
+WGDlgProc@16 @5
