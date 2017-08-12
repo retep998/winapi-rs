@@ -169,7 +169,8 @@ char const * type_for_alignment(uintptr_t align) {
     default: throw;
     }
 }
-#define PRINT_UNION(x) cout << "[" << type_for_alignment(alignof(x)) << "; " << sizeof(x) / alignof(x) << "]" << endl;
+#define PRINT_UNION(x) cout << "[" << type_for_alignment(alignof(x))\
+    << "; " << sizeof(x) / alignof(x) << "]" << endl;
 int main() {
     PRINT_UNION(USN_RECORD_UNION);
 }
@@ -194,6 +195,34 @@ UNION2!{union D3D12_RESOURCE_BARRIER_u {
   a name of `FOO_s` or `FOO_u` respectively, and the field a name of `s` or `u` respectively.
 * If the type `FOO` contains multiple anonymous structs or unions, append a number, such as `s1:
   FOO_s1` `s2: FOO_s2` or `u1: FOO_u1` `u2: FOO_u2`.
+
+## Union with a primitive field and an anonymous bitfield struct of the same type
+
+```C
+typedef union _USB_HUB_STATUS {
+    USHORT  AsUshort16;
+    struct {
+        USHORT  LocalPowerLost:1;
+        USHORT  OverCurrent:1;
+        USHORT  Reserved:14;
+    };
+} USB_HUB_STATUS, *PUSB_HUB_STATUS;
+```
+
+```Rust
+STRUCT!{struct USB_HUB_STATUS {
+    AsUshort16: USHORT,
+}}
+BITFIELD!{USB_HUB_STATUS AsUshort16: USHORT [
+    LocalPowerLost set_LocalPowerLost[0..1],
+    OverCurrent set_OverCurrent[1..2],
+    Reserved set_Reserved[2..16],
+]}
+```
+
+* If the union is anonymous and the field for it is unnamed, then instead of creating a single
+  field struct, simply inline that field into the containing struct and apply the bitfield to
+  *that*.
 
 ## COM interfaces
 
