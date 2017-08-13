@@ -86,6 +86,7 @@ pub mod gl;
 #[cfg(feature = "mmdeviceapi")] pub mod mmdeviceapi;
 #[cfg(feature = "mmeapi")] pub mod mmeapi;
 #[cfg(feature = "mmsystem")] pub mod mmsystem;
+#[cfg(feature = "msaatext")] pub mod msaatext;
 #[cfg(feature = "mscat")] pub mod mscat;
 #[cfg(feature = "mssip")] pub mod mssip;
 #[cfg(feature = "nb30")] pub mod nb30;
