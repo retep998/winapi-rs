@@ -111,6 +111,7 @@ pub mod gl;
 #[cfg(feature = "psapi")] pub mod psapi;
 #[cfg(feature = "reason")] pub mod reason;
 #[cfg(feature = "restrictederrorinfo")] pub mod restrictederrorinfo;
+#[cfg(feature = "rmxfguid")] pub mod rmxfguid;
 #[cfg(feature = "sapi")] pub mod sapi;
 #[cfg(feature = "sapi51")] pub mod sapi51;
 #[cfg(feature = "sapi53")] pub mod sapi53;
