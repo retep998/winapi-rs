@@ -46,6 +46,7 @@ pub mod gl;
 #[cfg(feature = "dcompanimation")] pub mod dcompanimation;
 #[cfg(feature = "dde")] pub mod dde;
 #[cfg(feature = "ddraw")] pub mod ddraw;
+#[cfg(feature = "ddrawint")] pub mod ddrawint;
 #[cfg(feature = "dinput")] pub mod dinput;
 #[cfg(feature = "dmksctl")] pub mod dmksctl;
 #[cfg(feature = "dmusicc")] pub mod dmusicc;
