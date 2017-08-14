@@ -35,6 +35,7 @@ pub mod gl;
 #[cfg(feature = "d3d10sdklayers")] pub mod d3d10sdklayers;
 #[cfg(feature = "d3d10shader")] pub mod d3d10shader;
 #[cfg(feature = "d3d11")] pub mod d3d11;
+#[cfg(feature = "d3d11_1")] pub mod d3d11_1;
 #[cfg(feature = "d3d11on12")] pub mod d3d11on12;
 #[cfg(feature = "d3d11sdklayers")] pub mod d3d11sdklayers;
 #[cfg(feature = "d3d11shader")] pub mod d3d11shader;
