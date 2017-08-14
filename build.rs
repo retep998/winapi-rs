@@ -120,6 +120,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dwrite_3", &["basetsd", "dcommon", "dwrite", "dwrite_1", "dwrite_2", "minwindef", "unknwnbase", "wingdi", "winnt"], &[]),
     ("dxdiag", &[], &[]),
     ("dxfile", &[], &[]),
+    ("dxgidebug", &[], &[]),
     ("errhandlingapi", &["basetsd", "minwindef", "winnt"], &[]),
     ("fileapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("gl-gl", &[], &["opengl32"]),
