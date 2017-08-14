@@ -47,6 +47,7 @@ pub mod gl;
 #[cfg(feature = "d3d12shader")] pub mod d3d12shader;
 #[cfg(feature = "d3dcommon")] pub mod d3dcommon;
 #[cfg(feature = "d3dcompiler")] pub mod d3dcompiler;
+#[cfg(feature = "d3dx10core")] pub mod d3dx10core;
 #[cfg(feature = "d3dx10mesh")] pub mod d3dx10mesh;
 #[cfg(feature = "davclnt")] pub mod davclnt;
 #[cfg(feature = "dbghelp")] pub mod dbghelp;
