@@ -150,6 +150,7 @@ pub mod gl;
 #[cfg(feature = "subauth")] pub mod subauth;
 #[cfg(feature = "synchapi")] pub mod synchapi;
 #[cfg(feature = "sysinfoapi")] pub mod sysinfoapi;
+#[cfg(feature = "textstor")] pub mod textstor;
 #[cfg(feature = "threadpoolapiset")] pub mod threadpoolapiset;
 #[cfg(feature = "timeapi")] pub mod timeapi;
 #[cfg(feature = "timezoneapi")] pub mod timezoneapi;
