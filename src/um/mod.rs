@@ -155,6 +155,7 @@ pub mod gl;
 #[cfg(feature = "werapi")] pub mod werapi;
 #[cfg(feature = "winbase")] pub mod winbase;
 #[cfg(feature = "wincodec")] pub mod wincodec;
+#[cfg(feature = "wincodecsdk")] pub mod wincodecsdk;
 #[cfg(feature = "wincon")] pub mod wincon;
 #[cfg(feature = "wincred")] pub mod wincred;
 #[cfg(feature = "wincrypt")] pub mod wincrypt;
