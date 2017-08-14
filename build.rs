@@ -100,6 +100,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dcommon", &["dxgiformat"], &[]),
     ("dcomp", &["d2d1", "d2d1_1", "d2d1effects", "d2dbasetypes", "d3d9types", "d3dcommon", "dcompanimation", "dcomptypes", "dxgi", "dxgi1_2", "dxgiformat", "guiddef", "minwinbase", "minwindef", "ntdef", "unknwnbase", "windef"], &["dcomp"]),
     ("dcompanimation", &["ntdef", "unknwnbase"], &[]),
+    ("dinput", &[], &[]),
     ("docobj", &["guiddef", "minwindef", "oaidl", "unknwnbase", "winnt"], &[]),
     ("documenttarget", &["basetsd", "guiddef", "ntdef", "unknwnbase"], &[]),
     ("dpa_dsa", &["basetsd", "minwindef", "winnt"], &["comctl32"]),
