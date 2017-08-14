@@ -57,6 +57,7 @@ pub mod gl;
 #[cfg(feature = "dwrite_1")] pub mod dwrite_1;
 #[cfg(feature = "dwrite_2")] pub mod dwrite_2;
 #[cfg(feature = "dwrite_3")] pub mod dwrite_3;
+#[cfg(feature = "dxdiag")] pub mod dxdiag;
 #[cfg(feature = "dxfile")] pub mod dxfile;
 #[cfg(feature = "errhandlingapi")] pub mod errhandlingapi;
 #[cfg(feature = "fileapi")] pub mod fileapi;
