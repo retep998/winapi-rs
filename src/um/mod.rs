@@ -27,6 +27,7 @@ pub mod gl;
 #[cfg(feature = "d2d1effects_1")] pub mod d2d1effects_1;
 #[cfg(feature = "d2d1effects_2")] pub mod d2d1effects_2;
 #[cfg(feature = "d2dbasetypes")] pub mod d2dbasetypes;
+#[cfg(feature = "d3d")] pub mod d3d;
 #[cfg(feature = "d3d10")] pub mod d3d10;
 #[cfg(feature = "d3d10_1")] pub mod d3d10_1;
 #[cfg(feature = "d3d10_1shader")] pub mod d3d10_1shader;
