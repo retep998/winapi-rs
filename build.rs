@@ -107,6 +107,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dcompanimation", &["ntdef", "unknwnbase"], &[]),
     ("dde", &["basetsd", "minwindef"], &["user32"]),
     ("ddraw", &[], &[]),
+    ("ddrawi", &[], &[]),
     ("ddrawint", &[], &[]),
     ("dinput", &[], &[]),
     ("dmksctl", &[], &[]),
