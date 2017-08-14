@@ -53,6 +53,7 @@ pub mod gl;
 #[cfg(feature = "dsgetdc")] pub mod dsgetdc;
 #[cfg(feature = "dsound")] pub mod dsound;
 #[cfg(feature = "dsrole")] pub mod dsrole;
+#[cfg(feature = "dvp")] pub mod dvp;
 #[cfg(feature = "dwmapi")] pub mod dwmapi;
 #[cfg(feature = "dwrite")] pub mod dwrite;
 #[cfg(feature = "dwrite_1")] pub mod dwrite_1;

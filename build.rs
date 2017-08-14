@@ -112,6 +112,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dsgetdc", &["guiddef", "minwindef", "ntsecapi", "winnt", "ws2def"], &["netapi32"]),
     ("dsound", &["guiddef", "minwindef", "mmsystem", "unknwnbase", "windef", "winerror", "winnt"], &["dsound"]),
     ("dsrole", &["guiddef", "minwindef", "winnt"], &["netapi32"]),
+    ("dvp", &[], &[]),
     ("dwmapi", &["minwindef", "windef", "winnt"], &["dwmapi"]),
     ("dwrite", &["basetsd", "d2d1", "dcommon", "guiddef", "minwindef", "unknwnbase", "windef", "winerror", "wingdi", "winnt"], &["dwrite"]),
     ("dwrite_1", &["basetsd", "dcommon", "dwrite", "minwindef", "winnt"], &[]),
