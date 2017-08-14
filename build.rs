@@ -104,6 +104,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dde", &["basetsd", "minwindef"], &["user32"]),
     ("ddraw", &[], &[]),
     ("dinput", &[], &[]),
+    ("dmksctl", &[], &[]),
     ("dmusicc", &[], &[]),
     ("docobj", &["guiddef", "minwindef", "oaidl", "unknwnbase", "winnt"], &[]),
     ("documenttarget", &["basetsd", "guiddef", "ntdef", "unknwnbase"], &[]),

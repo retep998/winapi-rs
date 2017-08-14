@@ -45,6 +45,7 @@ pub mod gl;
 #[cfg(feature = "dde")] pub mod dde;
 #[cfg(feature = "ddraw")] pub mod ddraw;
 #[cfg(feature = "dinput")] pub mod dinput;
+#[cfg(feature = "dmksctl")] pub mod dmksctl;
 #[cfg(feature = "dmusicc")] pub mod dmusicc;
 #[cfg(feature = "docobj")] pub mod docobj;
 #[cfg(feature = "documenttarget")] pub mod documenttarget;
