@@ -98,6 +98,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("d3d11_1", &[], &[]),
     ("d3d11_2", &[], &[]),
     ("d3d11_3", &[], &[]),
+    ("d3d11_4", &[], &[]),
     ("d3d11on12", &["d3d11", "d3d12", "d3dcommon", "guiddef", "minwindef", "unknwnbase", "winnt"], &["d3d11"]),
     ("d3d11sdklayers", &[], &[]),
     ("d3d11shader", &["basetsd", "d3dcommon", "minwindef", "unknwnbase", "winnt"], &[]),
