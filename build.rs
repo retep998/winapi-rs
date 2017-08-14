@@ -89,6 +89,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("d2dbasetypes", &["basetsd", "d3d9types", "minwindef", "windef"], &[]),
     ("d3d10", &["d3dcommon"], &[]),
     ("d3d10_1", &[], &[]),
+    ("d3d10effect", &[], &[]),
     ("d3d10misc", &[], &[]),
     ("d3d10sdklayers", &[], &[]),
     ("d3d10shader", &["d3d10", "d3dcommon", "minwindef", "unknwnbase", "winnt"], &[]),
