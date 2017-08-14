@@ -43,6 +43,7 @@ pub mod gl;
 #[cfg(feature = "dcomp")] pub mod dcomp;
 #[cfg(feature = "dcompanimation")] pub mod dcompanimation;
 #[cfg(feature = "dinput")] pub mod dinput;
+#[cfg(feature = "dmusicc")] pub mod dmusicc;
 #[cfg(feature = "docobj")] pub mod docobj;
 #[cfg(feature = "documenttarget")] pub mod documenttarget;
 #[cfg(feature = "dpa_dsa")] pub mod dpa_dsa;
