@@ -49,6 +49,7 @@ pub mod gl;
 #[cfg(feature = "d3dcompiler")] pub mod d3dcompiler;
 #[cfg(feature = "d3dcsx")] pub mod d3dcsx;
 #[cfg(feature = "d3dx10core")] pub mod d3dx10core;
+#[cfg(feature = "d3dx10math")] pub mod d3dx10math;
 #[cfg(feature = "d3dx10mesh")] pub mod d3dx10mesh;
 #[cfg(feature = "davclnt")] pub mod davclnt;
 #[cfg(feature = "dbghelp")] pub mod dbghelp;
