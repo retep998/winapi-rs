@@ -9,12 +9,12 @@ repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["windows", "ffi", "win32", "com", "directx"]
 categories = ["external-ffi-bindings", "no-std", "os::windows-apis"]
-include = ["src/**/*", "Cargo.toml", "LICENSE-MIT", "LICENSE-APACHE", "build.rs", "README.md"]
+include = ["/src/**/*", "/Cargo.toml", "/LICENSE-MIT", "/LICENSE-APACHE", "/build.rs", "/README.md"]
 build = "build.rs"
 
 [package.metadata.docs.rs]
 features = ["everything"]
-default-target = "x86_64-pc-windows-gnu"
+default-target = "x86_64-pc-windows-msvc"
 
 [badges]
 travis-ci = { repository = "retep998/winapi-rs", branch = "master" }
