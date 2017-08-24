@@ -195,6 +195,9 @@ UNION2!{union D3D12_RESOURCE_BARRIER_u {
   a name of `FOO_s` or `FOO_u` respectively, and the field a name of `s` or `u` respectively.
 * If the type `FOO` contains multiple anonymous structs or unions, append a number, such as `s1:
   FOO_s1` `s2: FOO_s2` or `u1: FOO_u1` `u2: FOO_u2`.
+* If the field does have a name, such as `Bar`, but still contains an anonymous struct or union
+  then retain the name of `Bar` for the field and name the anonymous struct or union after the
+  field, such as `FOO_Bar`.
 
 ## Union with a primitive field and an anonymous bitfield struct of the same type
 
