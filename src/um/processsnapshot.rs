@@ -66,7 +66,6 @@ STRUCT!{struct PSS_ALLOCATOR {
     AllocRoutine: pAllocRoutine,
     FreeRoutine: pFreeRoutine,
 }}
-
 extern "system" {
     pub fn PssCaptureSnapshot(
         ProcessHandle: HANDLE,
