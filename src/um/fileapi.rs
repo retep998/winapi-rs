@@ -217,6 +217,9 @@ extern "system" {
         lpFileTime: *const FILETIME,
         lpLocalFileTime: LPFILETIME,
     ) -> BOOL;
+    pub fn FindClose(
+        hFindFile: HANDLE
+    ) -> BOOL;
     pub fn FindCloseChangeNotification(
         hChangeHandle: HANDLE
     ) -> BOOL;
