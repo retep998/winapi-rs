@@ -44,6 +44,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("minwindef", &["basetsd", "ntdef"], &[]),
     ("mmreg", &["guiddef", "minwindef"], &[]),
     ("mstcpip", &["basetsd", "guiddef", "in6addr", "inaddr", "minwindef", "winnt", "ws2def"], &["ntdll"]),
+    ("ntddscsi", &["basetsd", "minwindef", "ntdef", "winioctl", "winnt"], &[]),
     ("ntddser", &["devpropdef"], &[]),
     ("ntdef", &["basetsd", "guiddef"], &[]),
     ("ntstatus", &["ntdef"], &[]),
