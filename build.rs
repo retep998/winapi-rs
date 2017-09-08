@@ -67,7 +67,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("audioclient", &["audiosessiontypes", "basetsd", "guiddef", "minwindef", "mmreg", "strmif", "unknwnbase", "winerror", "winnt", "wtypesbase"], &[]),
     ("audiosessiontypes", &["minwindef"], &[]),
     ("avrt", &["guiddef", "minwindef", "winnt"], &["avrt"]),
-    ("cfgmgr32", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
+    ("cfgmgr32", &["basetsd", "cfg", "guiddef", "minwindef", "winnt", "winreg"], &["setupapi"]),
     ("cguid", &[], &[]),
     ("combaseapi", &["basetsd", "guiddef", "minwindef", "objidl", "objidlbase", "unknwnbase", "winnt", "wtypesbase"], &["ole32"]),
     ("coml2api", &["minwindef"], &[]),
