@@ -1,0 +1,401 @@
+LIBRARY SHELL32.dll
+EXPORTS
+CDefFolderMenu_Create2@36 @701
+CIDLData_CreateFromIDArray@16 @83
+DAD_AutoScroll@12 @129
+DAD_DragEnterEx2@16 @22
+DAD_DragEnterEx@12 @131
+DAD_DragLeave@0 @132
+DAD_DragMove@8 @134
+DAD_SetDragImage@8 @136
+DAD_ShowDragImage@4 @137
+DriveType@4 @64
+GetFileNameFromBrowse@28 @63
+ILAppendID@12 @154
+ILClone@4 @18
+ILCloneFirst@4 @19
+ILCombine@8 @25
+ILCreateFromPath@4 @157
+ILCreateFromPathA@4 @189
+ILCreateFromPathW@4 @190
+ILFindChild@8 @24
+ILFindLastID@4 @16
+ILFree@4 @155
+ILGetNext@4 @153
+ILGetSize@4 @152
+ILIsEqual@8 @21
+ILIsParent@12 @23
+ILLoadFromStreamEx@8 @846
+ILRemoveLastID@4 @17
+ILSaveToStream@8 @27
+IsLFNDrive@4 @119
+IsLFNDriveA@4 @41
+IsLFNDriveW@4 @42
+IsNetDrive@4 @66
+IsUserAnAdmin@0 @680
+OpenRegStream@16 @85
+PathCleanupSpec@8 @171
+PathGetShortPath@4 @92
+PathIsExe@4 @43
+PathIsSlowA@8 @240
+PathIsSlowW@8 @239
+PathMakeUniqueName@20 @47
+PathQualify@4 @49
+PathResolve@12 @51
+PathYetAnotherMakeUniqueName@16 @75
+PickIconDlg@16 @62
+PifMgr_CloseProperties@8 @13
+PifMgr_GetProperties@20 @10
+PifMgr_OpenProperties@16 @9
+PifMgr_SetProperties@20 @11
+ReadCabinetState@8 @654
+RealDriveType@8 @524
+RestartDialog@12 @59
+RestartDialogEx@16 @730
+SHAddFromPropSheetExtArray@12 @167
+SHAlloc@4 @196
+SHCLSIDFromString@8 @147
+SHChangeNotification_Lock@16 @644
+SHChangeNotification_Unlock@4 @645
+SHChangeNotifyDeregister@4 @4
+SHChangeNotifyRegister@24 @2
+SHCloneSpecialIDList@12 @89
+SHCoCreateInstance@20 @102
+SHCreateDirectory@8 @165
+SHCreateFileExtractIconW@16 @743
+SHCreatePropSheetExtArray@12 @168
+SHCreateShellFolderView@8 @256
+SHCreateShellFolderViewEx@8 @174
+SHCreateStdEnumFmtEtc@12 @74
+SHDefExtractIconA@24 @3
+SHDefExtractIconW@24 @6
+SHDestroyPropSheetExtArray@4 @169
+SHDoDragDrop@20 @88
+SHFindFiles@8 @90
+SHFind_InitMenuPopup@16 @149
+SHFlushSFCache@0 @526
+SHFree@4 @195
+SHGetAttributesFromDataObject@16 @750
+SHGetImageList@12 @727
+SHGetNewLinkInfoA@20 @179
+SHGetNewLinkInfoW@20 @180
+SHGetRealIDL@12 @98
+SHGetSetFolderCustomSettings@12 @709
+SHGetSetSettings@12 @68
+SHGetSpecialFolderPath@16 @175
+SHHandleUpdateImage@4 @193
+SHILCreateFromPath@12 @28
+SHLimitInputEdit@8 @747
+SHMapPIDLToSystemImageListIndex@12 @77
+SHMultiFileProperties@8 @716
+SHObjectProperties@16 @178
+SHOpenPropSheetW@28 @80
+SHPropStgCreate@32 @685
+SHPropStgReadMultiple@20 @688
+SHPropStgWriteMultiple@24 @689
+SHReplaceFromPropSheetExtArray@16 @170
+SHRestricted@4 @100
+SHSetFolderPathA@16 @231
+SHSetFolderPathW@16 @232
+SHSetInstanceExplorer@4 @176
+SHShellFolderView_Message@12 @73
+SHSimpleIDListFromPath@4 @162
+SHStartNetConnectionDialogW@12 @14
+SHTestTokenMembership@8 @245
+SHUpdateImageA@16 @191
+SHUpdateImageW@16 @192
+SHValidateUNC@12 @173
+Shell_GetCachedImageIndex@12 @72
+Shell_GetImageLists@8 @71
+Shell_MergeMenus@24 @67
+SignalFileOpen@4 @103
+StgMakeUniqueName@20 @682
+Win32DeleteFile@4 @164
+WriteCabinetState@4 @652
+AssocCreateForClasses@16
+AssocGetDetailsOfPropKey@20
+CheckEscapesW@8
+CommandLineToArgvW@8
+DoEnvironmentSubstA@8
+DoEnvironmentSubstW@8
+DragAcceptFiles@8
+DragFinish@4
+DragQueryFile@16
+DragQueryFileA@16
+DragQueryFileAorW@24
+DragQueryFileW@16
+DragQueryPoint@8
+DuplicateIcon@8
+ExtractAssociatedIconA@12
+ExtractAssociatedIconExA@16
+ExtractAssociatedIconExW@16
+ExtractAssociatedIconW@12
+ExtractIconA@12
+ExtractIconEx@20
+ExtractIconExA@20
+ExtractIconExW@20
+ExtractIconW@12
+FindExecutableA@12
+FindExecutableW@12
+GetCurrentProcessExplicitAppUserModelID@4
+InitNetworkAddressControl@0
+SHAddDefaultPropertiesByExt@8
+SHAddToRecentDocs@8
+SHAppBarMessage@8
+SHAssocEnumHandlers@12
+SHAssocEnumHandlersForProtocolByApplication@12
+SHBindToFolderIDListParent@20
+SHBindToFolderIDListParentEx@24
+SHBindToObject@20
+SHBindToParent@16
+SHBrowseForFolder@4
+SHBrowseForFolderA@4
+SHBrowseForFolderW@4
+SHChangeNotify@16
+SHChangeNotifyRegisterThread@4
+SHCoCreateInstanceWorker@20
+SHCreateAssociationRegistration@8
+SHCreateCategoryEnum@44
+SHCreateDataObject@24
+SHCreateDefaultContextMenu@12
+SHCreateDefaultExtractIcon@8
+SHCreateDefaultPropertiesOp@8
+SHCreateDirectoryExA@12
+SHCreateDirectoryExW@12
+SHCreateDrvExtIcon@12
+SHCreateItemFromIDList@12
+SHCreateItemFromParsingName@16
+SHCreateItemFromRelativeName@20
+SHCreateItemInKnownFolder@20
+SHCreateItemWithParent@20
+SHCreateProcessAsUserW@4
+SHCreateQueryCancelAutoPlayMoniker@4
+SHCreateShellItem@16
+SHCreateShellItemArray@20
+SHCreateShellItemArrayFromDataObject@12
+SHCreateShellItemArrayFromIDLists@12
+SHCreateShellItemArrayFromShellItem@12
+SHELL32_AddToBackIconTable@8
+SHELL32_AddToFrontIconTable@16
+SHELL32_AreAllItemsAvailable@12
+SHELL32_BindToFilePlaceholderHandler@16
+SHELL32_CCommonPlacesFolder_CreateInstance@12
+SHELL32_CDBurn_CloseSession@4
+SHELL32_CDBurn_DriveSupportedForDataBurn@4
+SHELL32_CDBurn_Erase@4
+SHELL32_CDBurn_GetCDInfo@12
+SHELL32_CDBurn_GetLiveFSDiscInfo@12
+SHELL32_CDBurn_GetStagingPathOrNormalPath@8
+SHELL32_CDBurn_GetTaskInfo@20
+SHELL32_CDBurn_IsBlankDisc@4
+SHELL32_CDBurn_IsBlankDisc2@4
+SHELL32_CDBurn_IsLiveFS@8
+SHELL32_CDBurn_OnDeviceChange@8
+SHELL32_CDBurn_OnEject@8
+SHELL32_CDBurn_OnMediaChange@8
+SHELL32_CDefFolderMenu_Create2@36
+SHELL32_CDefFolderMenu_Create2Ex@36
+SHELL32_CDefFolderMenu_MergeMenu@16
+SHELL32_CDrivesContextMenu_Create@20
+SHELL32_CDrivesDropTarget_Create@12
+SHELL32_CDrives_CreateSFVCB@8
+SHELL32_CFSDropTarget_CreateInstance@12
+SHELL32_CFSFolderCallback_Create@8
+SHELL32_CFillPropertiesTask_CreateInstance@16
+SHELL32_CLibraryDropTarget_CreateInstance@16
+SHELL32_CLocationContextMenu_Create@16
+SHELL32_CLocationFolderUI_CreateInstance@16
+SHELL32_CMountPoint_DoAutorun@8
+SHELL32_CMountPoint_DoAutorunPrompt@4
+SHELL32_CMountPoint_IsAutoRunDriveAndEnabledByPolicy@4
+SHELL32_CMountPoint_ProcessAutoRunFile@4
+SHELL32_CMountPoint_WantAutorunUI@4
+SHELL32_CMountPoint_WantAutorunUIGetReady@4
+SHELL32_CPL_CategoryIdArrayFromVariant@8
+SHELL32_CPL_IsLegacyCanonicalNameListedUnderKey@8
+SHELL32_CPL_ModifyWowDisplayName@8
+SHELL32_CRecentDocsContextMenu_CreateInstance@12
+SHELL32_CSyncRootManager_CreateInstance@8
+SHELL32_CTransferConfirmation_CreateInstance@12
+SHELL32_CallFileCopyHooks@28
+SHELL32_CanDisplayWin8CopyDialog@0
+SHELL32_CloseAutoplayPrompt@4
+SHELL32_CommandLineFromMsiDescriptor@12
+SHELL32_CopyExtrinsicPropertyStore@8
+SHELL32_CopyFilePlaceholderToNewFile@28
+SHELL32_CopySecondaryTiles@4
+SHELL32_CreateAlternateStreamFileName@12
+SHELL32_CreateConfirmationInterrupt@12
+SHELL32_CreateConflictInterrupt@20
+SHELL32_CreateDefaultOperationDataProvider@8
+SHELL32_CreateFileFolderContextMenu@20
+SHELL32_CreateLinkInfoW@8
+SHELL32_CreatePlaceholderFile@32
+SHELL32_CreateQosRecorder@12
+SHELL32_CreateSharePointView@12
+SHELL32_Create_IEnumUICommand@16
+SHELL32_DestroyLinkInfo@4
+SHELL32_EncryptDirectory@4
+SHELL32_EncryptedFileKeyInfo@12
+SHELL32_EnumCommonTasks@8
+SHELL32_FilePlaceholder_BindToPrimaryStream@28
+SHELL32_FilePlaceholder_CreateInstance@8
+SHELL32_FreeEncryptedFileKeyInfo@4
+SHELL32_GenerateAppID@16
+SHELL32_GetAppIDRoot@16
+SHELL32_GetCommandProviderForFolderType@8
+SHELL32_GetDPIAdjustedLogicalSize@12
+SHELL32_GetDiskCleanupPath@8
+SHELL32_GetFileNameFromBrowse@28
+SHELL32_GetIconOverlayManager@4
+SHELL32_GetLinkInfoData@12
+SHELL32_GetPlaceholderStatesFromFileAttributesAndReparsePointTag@8
+SHELL32_GetRatingBucket@8
+SHELL32_GetSkyDriveNetworkStates@4
+SHELL32_GetSqmableFileName@12
+SHELL32_GetThumbnailAdornerFromFactory@12
+SHELL32_GetThumbnailAdornerFromFactory2@16
+SHELL32_HandleUnrecognizedFileSystem@16
+SHELL32_IconCacheCreate@0
+SHELL32_IconCacheDestroy@4
+SHELL32_IconCacheHandleAssociationChanged@0
+SHELL32_IconCacheRestore@4
+SHELL32_IconCache_AboutToExtractIcons@0
+SHELL32_IconCache_DoneExtractingIcons@0
+SHELL32_IconCache_ExpandEnvAndSearchPath@12
+SHELL32_IconCache_RememberRecentlyExtractedIconsW@20
+SHELL32_IconOverlayManagerInit@0
+SHELL32_IsGetKeyboardLayoutPresent@0
+SHELL32_IsSystemUpgradeInProgress@0
+SHELL32_IsValidLinkInfo@4
+SHELL32_LegacyEnumSpecialTasksByType@8
+SHELL32_LegacyEnumTasks@12
+SHELL32_LookupBackIconIndex@12
+SHELL32_LookupFrontIconIndex@12
+SHELL32_NormalizeRating@8
+SHELL32_NotifyLinkTrackingServiceOfMove@16
+SHELL32_PifMgr_CloseProperties@8
+SHELL32_PifMgr_GetProperties@20
+SHELL32_PifMgr_OpenProperties@16
+SHELL32_PifMgr_SetProperties@20
+SHELL32_Printers_CreateBindInfo@20
+SHELL32_Printjob_GetPidl@8
+SHELL32_PurgeSystemIcon@4
+SHELL32_RefreshOverlayImages@0
+SHELL32_ResolveLinkInfoW@24
+SHELL32_SHAddSparseIcon@12
+SHELL32_SHCreateByValueOperationInterrupt@12
+SHELL32_SHCreateDefaultContextMenu@12
+SHELL32_SHCreateLocalServer@16
+SHELL32_SHCreateShellFolderView@8
+SHELL32_SHDuplicateEncryptionInfoFile@20
+SHELL32_SHEncryptFile@16
+SHELL32_SHFormatDriveAsync@16
+SHELL32_SHGetThreadUndoManager@8
+SHELL32_SHGetUserNameW@8
+SHELL32_SHIsVirtualDevice@4
+SHELL32_SHLaunchPropSheet@12
+SHELL32_SHLogILFromFSIL@4
+SHELL32_SHOpenWithDialog@8
+SHELL32_SHStartNetConnectionDialogW@12
+SHELL32_SHUICommandFromGUID@12
+SHELL32_SendToMenu_InvokeTargetedCommand@16
+SHELL32_SendToMenu_VerifyTargetedCommand@16
+SHELL32_SetPlaceholderReparsePointAttribute@8
+SHELL32_SetPlaceholderReparsePointAttribute2@12
+SHELL32_ShowHideIconOnlyOnDesktop@4
+SHELL32_SimpleRatingToFilterCondition@12
+SHELL32_StampIconForFile@12
+SHELL32_SuspendUndo@4
+SHELL32_TryVirtualDiscImageDriveEject@12
+SHELL32_UpdateFilePlaceholderStates@12
+SHELL32_VerifySaferTrust@8
+SHEmptyRecycleBinA@12
+SHEmptyRecycleBinW@12
+SHEnumerateUnreadMailAccountsW@16
+SHEvaluateSystemCommandTemplate@16
+SHFileOperation@4
+SHFileOperationA@4
+SHFileOperationW@4
+SHFormatDrive@16
+SHFreeNameMappings@4
+SHGetDataFromIDListA@20
+SHGetDataFromIDListW@20
+SHGetDesktopFolder@4
+SHGetDiskFreeSpaceA@16
+SHGetDiskFreeSpaceExA@16
+SHGetDiskFreeSpaceExW@16
+SHGetDriveMedia@8
+SHGetFileInfo@20
+SHGetFileInfoA@20
+SHGetFileInfoW@20
+SHGetFolderLocation@20
+SHGetFolderPathA@20
+SHGetFolderPathAndSubDirA@24
+SHGetFolderPathAndSubDirW@24
+SHGetFolderPathEx@20
+SHGetFolderPathW@20
+SHGetIDListFromObject@8
+SHGetIconOverlayIndexA@8
+SHGetIconOverlayIndexW@8
+SHGetInstanceExplorer@4
+SHGetItemFromDataObject@16
+SHGetItemFromObject@12
+SHGetKnownFolderIDList@16
+SHGetKnownFolderItem@20
+SHGetKnownFolderPath@16
+SHGetLocalizedName@16
+SHGetMalloc@4
+SHGetNameFromIDList@12
+SHGetPathFromIDList@8
+SHGetPathFromIDListA@8
+SHGetPathFromIDListEx@16
+SHGetPathFromIDListW@8
+SHGetPropertyStoreForWindow@12
+SHGetPropertyStoreFromIDList@16
+SHGetPropertyStoreFromParsingName@20
+SHGetSettings@8
+SHGetSpecialFolderLocation@12
+SHGetSpecialFolderPathA@16
+SHGetSpecialFolderPathW@16
+SHGetStockIconInfo@12
+SHGetTemporaryPropertyForItem@12
+SHGetUnreadMailCountW@24
+SHInvokePrinterCommandA@20
+SHInvokePrinterCommandW@20
+SHIsFileAvailableOffline@8
+SHLoadInProc@4
+SHLoadNonloadedIconOverlayIdentifiers@0
+SHOpenFolderAndSelectItems@16
+SHOpenWithDialog@8
+SHParseDisplayName@20
+SHPathPrepareForWriteA@16
+SHPathPrepareForWriteW@16
+SHQueryRecycleBinA@8
+SHQueryRecycleBinW@8
+SHQueryUserNotificationState@4
+SHRemoveLocalizedName@4
+SHResolveLibrary@4
+SHSetDefaultProperties@16
+SHSetKnownFolderPath@16
+SHSetLocalizedName@12
+SHSetTemporaryPropertyForItem@12
+SHSetUnreadMailCountW@12
+SHShowManageLibraryUI@20
+SetCurrentProcessExplicitAppUserModelID@4
+ShellAboutA@16
+ShellAboutW@16
+ShellExecuteA@24
+ShellExecuteEx@4
+ShellExecuteExA@4
+ShellExecuteExW@4
+ShellExecuteW@24
+ShellHookProc@12
+Shell_GetCachedImageIndexA@12
+Shell_GetCachedImageIndexW@12
+Shell_NotifyIcon@8
+Shell_NotifyIconA@8
+Shell_NotifyIconGetRect@8
+Shell_NotifyIconW@8
+UsersLibrariesFolderUI_CreateInstance@16
+WOWShellExecute@28

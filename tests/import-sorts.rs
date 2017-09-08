@@ -127,8 +127,8 @@ fn check_import_sorting<P: AsRef<Path>>(
     if imports.len() > 1 {
         for pos in 0..imports.len() - 1 {
             let mut i = 0;
-            while i < imports[pos].1.len() - 1 && i < imports[pos + 1].1.len() - 1 &&
-                  imports[pos].1[i] == imports[pos + 1].1[i] {
+            while i < imports[pos].1.len() - 1 && i < imports[pos + 1].1.len() - 1
+                && imports[pos].1[i] == imports[pos + 1].1[i] {
                 i += 1;
             }
             if i >= imports[pos].1.len() - 1 {

@@ -1,0 +1,8 @@
+LIBRARY api-ms-win-service-core-l1-1-1.dll
+EXPORTS
+EnumDependentServicesW
+EnumServicesStatusExW
+QueryServiceDynamicInformation
+RegisterServiceCtrlHandlerExW
+SetServiceStatus
+StartServiceCtrlDispatcherW

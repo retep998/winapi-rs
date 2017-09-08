@@ -1,0 +1,103 @@
+LIBRARY WS2_32.dll
+EXPORTS
+__WSAFDIsSet @151
+accept @1
+bind @2
+closesocket @3
+connect @4
+gethostbyaddr @51
+gethostbyname @52
+gethostname @57
+getpeername @5
+getprotobyname @53
+getprotobynumber @54
+getservbyname @55
+getservbyport @56
+getsockname @6
+getsockopt @7
+htonl @8
+htons @9
+inet_addr @11
+inet_ntoa @12
+ioctlsocket @10
+listen @13
+ntohl @14
+ntohs @15
+recv @16
+recvfrom @17
+select @18
+send @19
+sendto @20
+setsockopt @21
+shutdown @22
+socket @23
+WSACleanup @116
+WSAGetLastError @111
+WSASetLastError @112
+WSAStartup @115
+FreeAddrInfoExW
+FreeAddrInfoW
+GetAddrInfoExCancel
+GetAddrInfoExOverlappedResult
+GetAddrInfoExW
+GetAddrInfoW
+GetHostNameW
+GetNameInfoW
+InetNtopW
+InetPtonW
+SetAddrInfoExW
+WSAAccept
+WSAAddressToStringA
+WSAAddressToStringW
+WSACloseEvent
+WSAConnect
+WSAConnectByList
+WSAConnectByNameA
+WSAConnectByNameW
+WSACreateEvent
+WSADuplicateSocketA
+WSADuplicateSocketW
+WSAEnumNameSpaceProvidersA
+WSAEnumNameSpaceProvidersExA
+WSAEnumNameSpaceProvidersExW
+WSAEnumNameSpaceProvidersW
+WSAEnumNetworkEvents
+WSAEnumProtocolsA
+WSAEnumProtocolsW
+WSAEventSelect
+WSAGetOverlappedResult
+WSAGetServiceClassInfoW
+WSAGetServiceClassNameByClassIdW
+WSAHtonl
+WSAHtons
+WSAIoctl
+WSAJoinLeaf
+WSALookupServiceBeginA
+WSALookupServiceBeginW
+WSALookupServiceEnd
+WSALookupServiceNextA
+WSALookupServiceNextW
+WSANSPIoctl
+WSANtohl
+WSANtohs
+WSAPoll
+WSAProviderConfigChange
+WSARecv
+WSARecvFrom
+WSAResetEvent
+WSASend
+WSASendMsg
+WSASendTo
+WSASetEvent
+WSASetServiceA
+WSASetServiceW
+WSASocketA
+WSASocketW
+WSAStringToAddressA
+WSAStringToAddressW
+WSAWaitForMultipleEvents
+freeaddrinfo
+getaddrinfo
+getnameinfo
+inet_ntop
+inet_pton

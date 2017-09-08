@@ -5,8 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 #![cfg(windows)]
-#![deny(overflowing_literals, unused_qualifications, unused)]
-#![allow(bad_style, unused_macros)]
+#![deny(unused, unused_qualifications)]
+#![allow(bad_style, overflowing_literals, unused_macros)]
 #![recursion_limit = "128"]
 #![no_std]
 

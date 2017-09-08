@@ -1,0 +1,4 @@
+LIBRARY DIFXAPI.dll
+EXPORTS
+DriverPackageInstallW
+DriverPackageUninstallW

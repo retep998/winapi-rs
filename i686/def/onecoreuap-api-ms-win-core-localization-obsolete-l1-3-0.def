@@ -1,0 +1,10 @@
+LIBRARY api-ms-win-core-localization-obsolete-l1-3-0.dll
+EXPORTS
+CompareStringA@24
+EnumLanguageGroupLocalesW@16
+EnumSystemLanguageGroupsW@12
+EnumUILanguagesW@12
+GetNumberFormatW@24
+GetStringTypeA@20
+GetSystemDefaultUILanguage@0
+GetUserDefaultUILanguage@0

@@ -1,0 +1,3 @@
+LIBRARY ASYCFILT.dll
+EXPORTS
+FilterCreateInstance@20

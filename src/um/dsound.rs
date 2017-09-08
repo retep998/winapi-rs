@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! DSound procedure declarations, constant definitions and macros
-use shared::guiddef::{GUID, LPCGUID};
+use shared::guiddef::{GUID, LPCGUID, LPGUID};
 use shared::minwindef::{DWORD, LPDWORD, LPLONG, LPVOID};
 use shared::windef::HWND;
 use shared::winerror::{E_FAIL, S_OK};
@@ -185,3 +185,57 @@ pub const DSBPLAY_LOCSOFTWARE: DWORD = 0x00000004;
 pub const DSBPLAY_TERMINATEBY_TIME: DWORD = 0x00000008;
 pub const DSBPLAY_TERMINATEBY_DISTANCE: DWORD = 0x000000010;
 pub const DSBPLAY_TERMINATEBY_PRIORITY: DWORD = 0x000000020;
+extern "system" {
+    pub fn DirectSoundCreate(
+        pcGuidDevice: LPCGUID,
+        ppDS: *mut LPDIRECTSOUND,
+        pUnkOuter: LPUNKNOWN,
+    ) -> HRESULT;
+    // pub fn DirectSoundEnumerateA(
+    //     pDSEnumCallback: LPDSENUMCALLBACKA,
+    //     pContext: LPVOID,
+    // ) -> HRESULT;
+    // pub fn DirectSoundEnumerateW(
+    //     pDSEnumCallback: LPDSENUMCALLBACKW,
+    //     pContext: LPVOID,
+    // ) -> HRESULT;
+    // pub fn DirectSoundCaptureCreate(
+    //     pcGuidDevice: LPCGUID,
+    //     ppDSC: *mut LPDIRECTSOUNDCAPTURE,
+    //     pUnkOuter: LPUNKNOWN,
+    // ) -> HRESULT;
+    // pub fn DirectSoundCaptureEnumerateA(
+    //     pDSEnumCallback: LPDSENUMCALLBACKA,
+    //     pContext: LPVOID,
+    // ) -> HRESULT;
+    // pub fn DirectSoundCaptureEnumerateW(
+    //     pDSEnumCallback: LPDSENUMCALLBACKW,
+    //     pContext: LPVOID,
+    // ) -> HRESULT;
+    // pub fn DirectSoundCreate8(
+    //     pcGuidDevice: LPCGUID,
+    //     ppDS8: *mut LPDIRECTSOUND8,
+    //     pUnkOuter: LPUNKNOWN,
+    // ) -> HRESULT;
+    // pub fn DirectSoundCaptureCreate8(
+    //     pcGuidDevice: LPCGUID,
+    //     ppDSC8: *mut LPDIRECTSOUNDCAPTURE8,
+    //     pUnkOuter: LPUNKNOWN,
+    // ) -> HRESULT;
+    // pub fn DirectSoundFullDuplexCreate(
+    //     pcGuidCaptureDevice: LPCGUID,
+    //     pcGuidRenderDevice: LPCGUID,
+    //     pcDSCBufferDesc: LPCDSCBUFFERDESC,
+    //     pcDSBufferDesc: LPCDSBUFFERDESC,
+    //     hWnd: HWND,
+    //     dwLevel: DWORD,
+    //     ppDSFD: *mut LPDIRECTSOUNDFULLDUPLEX,
+    //     ppDSCBuffer8: *mut LPDIRECTSOUNDCAPTUREBUFFER8,
+    //     ppDSBuffer8: *mut LPDIRECTSOUNDBUFFER8,
+    //     pUnkOuter: LPUNKNOWN,
+    // ) -> HRESULT;
+    pub fn GetDeviceID(
+        pGuidSrc: LPCGUID,
+        pGuidDest: LPGUID,
+    ) -> HRESULT;
+}

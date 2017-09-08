@@ -1,0 +1,9 @@
+LIBRARY OLEPRO32.DLL
+EXPORTS
+OleCreateFontIndirect@12 @253
+OleCreatePictureIndirect@16 @252
+OleCreatePropertyFrame@44 @250
+OleCreatePropertyFrameIndirect@4 @249
+OleIconToCursor@8 @248
+OleLoadPicture@20 @251
+OleTranslateColor@12 @254

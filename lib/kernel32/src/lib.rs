@@ -769,33 +769,6 @@ extern "system" {
     pub fn Process32FirstW(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32W) -> BOOL;
     pub fn Process32Next(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
     pub fn Process32NextW(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32W) -> BOOL;
-    pub fn PssCaptureSnapshot(
-        ProcessHandle: HANDLE, CaptureFlags: PSS_CAPTURE_FLAGS, ThreadContextFlags: DWORD,
-        SnapshotHandle: *mut HPSS,
-    ) -> DWORD;
-    pub fn PssDuplicateSnapshot(
-        SourceProcessHandle: HANDLE, SnapshotHandle: HPSS, TargetProcessHandle: HANDLE,
-        TargetSnapshotHandle: *mut HPSS, Flags: PSS_DUPLICATE_FLAGS,
-    ) -> DWORD;
-    pub fn PssFreeSnapshot(ProcessHandle: HANDLE, SnapshotHandle: HPSS) -> DWORD;
-    pub fn PssQuerySnapshot(
-        SnapshotHandle: HPSS, InformationClass: PSS_QUERY_INFORMATION_CLASS, Buffer: *mut c_void,
-        BufferLength: DWORD,
-    ) -> DWORD;
-    pub fn PssWalkMarkerCreate(
-        Allocator: *const PSS_ALLOCATOR, WalkMarkerHandle: *mut HPSSWALK,
-    ) -> DWORD;
-    pub fn PssWalkMarkerFree(WalkMarkerHandle: HPSSWALK) -> DWORD;
-    pub fn PssWalkMarkerGetPosition(WalkMarkerHandle: HPSSWALK, Position: *mut ULONG_PTR) -> DWORD;
-    // pub fn PssWalkMarkerRewind();
-    // pub fn PssWalkMarkerSeek();
-    pub fn PssWalkMarkerSeekToBeginning(WalkMarkerHandle: HPSS) -> DWORD;
-    pub fn PssWalkMarkerSetPosition(WalkMarkerHandle: HPSSWALK, Position: ULONG_PTR) -> DWORD;
-    // pub fn PssWalkMarkerTell();
-    pub fn PssWalkSnapshot(
-        SnapshotHandle: HPSS, InformationClass: PSS_WALK_INFORMATION_CLASS,
-        WalkMarkerHandle: HPSSWALK, Buffer: *mut c_void, BufferLength: DWORD,
-    ) -> DWORD;
     pub fn QueryDepthSList(ListHead: PSLIST_HEADER) -> USHORT;
     pub fn QueryIdleProcessorCycleTime(
         BufferLength: PULONG, ProcessorIdleCycleTime: PULONG64,
@@ -1086,8 +1059,8 @@ extern "system" {
     pub fn WaitNamedPipeW(lpNamedPipeName: LPCWSTR, nTimeOut: DWORD) -> BOOL;
     // pub fn WerpInitiateRemoteRecovery();
     pub fn WideCharToMultiByte(
-      CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWSTR, cchWideChar: c_int,
-      lpMultiByteStr: LPSTR, cbMultiByte: c_int, lpDefaultChar: LPCSTR, lpUsedDefaultChar: LPBOOL,
+        CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWSTR, cchWideChar: c_int,
+        lpMultiByteStr: LPSTR, cbMultiByte: c_int, lpDefaultChar: LPCSTR, lpUsedDefaultChar: LPBOOL,
     ) -> c_int;
     pub fn Wow64DisableWow64FsRedirection(OldValue: *mut PVOID) -> BOOL;
     pub fn Wow64RevertWow64FsRedirection(OlValue: PVOID) -> BOOL;

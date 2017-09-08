@@ -5,12 +5,14 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of dxgi1_3.h
+use ctypes::c_void;
 use shared::dxgi::{IDXGIOutput, IDXGIResource};
 use shared::dxgi1_2::{
     DXGI_SWAP_CHAIN_DESC1, IDXGIDevice2, IDXGIDevice2Vtbl, IDXGIFactory2, IDXGIFactory2Vtbl,
     IDXGIOutput1, IDXGIOutput1Vtbl, IDXGISwapChain1, IDXGISwapChain1Vtbl,
 };
 use shared::dxgiformat::DXGI_FORMAT;
+use shared::guiddef::REFIID;
 use shared::minwindef::{BOOL, FLOAT, UINT};
 use shared::windef::RECT;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
@@ -82,6 +84,18 @@ interface IDXGIDecodeSwapChain(IDXGIDecodeSwapChainVtbl): IUnknown(IUnknownVtbl)
     ) -> HRESULT,
     fn GetColorSpace() -> DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS,
 });
+extern "system" {
+    pub fn CreateDXGIFactory2(
+        Flags: UINT,
+        riid: REFIID,
+        ppFactory: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn DXGIGetDebugInterface1(
+        Flags: UINT,
+        riid: REFIID,
+        pDebug: *mut *mut c_void,
+    ) -> HRESULT;
+}
 RIDL!(#[uuid(0x6007896c, 0x3244, 0x4afd, 0xbf, 0x18, 0xa6, 0xd3, 0xbe, 0xda, 0x50, 0x23)]
 interface IDXGIDevice3(IDXGIDevice3Vtbl): IDXGIDevice2(IDXGIDevice2Vtbl) {
     fn Trim() -> (),

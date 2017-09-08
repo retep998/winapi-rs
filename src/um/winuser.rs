@@ -9,14 +9,17 @@ use ctypes::{c_int, c_long, c_short, c_uint};
 use shared::basetsd::{
     DWORD_PTR, INT32, INT_PTR, PDWORD_PTR, UINT16, UINT32, UINT64, UINT_PTR, ULONG_PTR,
 };
+#[cfg(target_arch = "x86_64")]
+use shared::basetsd::LONG_PTR;
 use shared::guiddef::{GUID, LPCGUID};
 use shared::minwindef::{
-    ATOM, BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HWINSTA, INT, LOWORD, LPARAM, LPBYTE, LPDWORD,
-    LPVOID, LPWORD, LRESULT, PBYTE, PUINT, PULONG, TRUE, UCHAR, UINT, ULONG, USHORT, WORD, WPARAM,
+    ATOM, BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HRGN, HWINSTA, INT, LOWORD, LPARAM, LPBYTE,
+    LPDWORD, LPINT, LPVOID, LPWORD, LRESULT, PBYTE, PUINT, PULONG, TRUE, UCHAR, UINT, ULONG,
+    USHORT, WORD, WPARAM,
 };
 use shared::windef::{
-    COLORREF, HACCEL, HBITMAP, HBRUSH, HCURSOR, HDC, HDESK, HICON, HMENU, HMONITOR, HWINEVENTHOOK,
-    HWND, LPRECT, POINT, RECT,
+    COLORREF, HACCEL, HBITMAP, HBRUSH, HCURSOR, HDC, HDESK, HICON, HMENU, HMONITOR,
+    HWINEVENTHOOK, HWND, LPPOINT, LPRECT, POINT, RECT,
 };
 use um::minwinbase::LPSECURITY_ATTRIBUTES;
 use um::wingdi::{BLENDFUNCTION, DEVMODEA, DEVMODEW, LOGFONTA, LOGFONTW};
@@ -133,9 +136,6 @@ pub fn MAKEINTRESOURCEA(i: WORD) -> LPSTR {
 #[inline]
 pub fn MAKEINTRESOURCEW(i: WORD) -> LPWSTR {
     i as ULONG_PTR as LPWSTR
-}
-macro_rules! MAKEINTRESOURCE {
-    ($i:expr) => { $i as ULONG_PTR as LPWSTR }
 }
 pub const RT_CURSOR: LPWSTR = MAKEINTRESOURCE!(1);
 pub const RT_BITMAP: LPWSTR = MAKEINTRESOURCE!(2);
@@ -639,10 +639,10 @@ STRUCT!{struct CWPRETSTRUCT {
 pub type PCWPRETSTRUCT = *mut CWPRETSTRUCT;
 pub type NPCWPRETSTRUCT = *mut CWPRETSTRUCT;
 pub type LPCWPRETSTRUCT = *mut CWPRETSTRUCT;
-pub const LLKHF_EXTENDED: DWORD = (KF_EXTENDED >> 8) as DWORD;
+pub const LLKHF_EXTENDED: DWORD = (KF_EXTENDED >> 8) as u32;
 pub const LLKHF_INJECTED: DWORD = 0x00000010;
-pub const LLKHF_ALTDOWN: DWORD = (KF_ALTDOWN >> 8) as DWORD;
-pub const LLKHF_UP: DWORD = (KF_UP >> 8) as DWORD;
+pub const LLKHF_ALTDOWN: DWORD = (KF_ALTDOWN >> 8) as u32;
+pub const LLKHF_UP: DWORD = (KF_UP >> 8) as u32;
 pub const LLKHF_LOWER_IL_INJECTED: DWORD = 0x00000002;
 pub const LLMHF_INJECTED: DWORD = 0x00000001;
 pub const LLMHF_LOWER_IL_INJECTED: DWORD = 0x00000002;
@@ -1151,7 +1151,7 @@ pub const WM_WINDOWPOSCHANGING: UINT = 0x0046;
 pub const WM_WINDOWPOSCHANGED: UINT = 0x0047;
 pub const WM_POWER: UINT = 0x0048;
 pub const PWR_OK: WPARAM = 1;
-pub const PWR_FAIL: WPARAM = -1isize as WPARAM;
+pub const PWR_FAIL: WPARAM = -1isize as usize;
 pub const PWR_SUSPENDREQUEST: WPARAM = 1;
 pub const PWR_SUSPENDRESUME: WPARAM = 2;
 pub const PWR_CRITICALRESUME: WPARAM = 3;
@@ -1744,7 +1744,7 @@ pub const CF_PRIVATEFIRST: UINT = 0x0200;
 pub const CF_PRIVATELAST: UINT = 0x02FF;
 pub const CF_GDIOBJFIRST: UINT = 0x0300;
 pub const CF_GDIOBJLAST: UINT = 0x03FF;
-pub const FVIRTKEY: BYTE = TRUE as BYTE;
+pub const FVIRTKEY: BYTE = TRUE as u8;
 pub const FNOINVERT: BYTE = 0x02;
 pub const FSHIFT: BYTE = 0x04;
 pub const FCONTROL: BYTE = 0x08;
@@ -2261,7 +2261,7 @@ extern "system" {
         lpwcx: LPWNDCLASSEXW,
     ) -> BOOL;
 }
-pub const CW_USEDEFAULT: c_int = 0x80000000u32 as i32;
+pub const CW_USEDEFAULT: c_int = 0x80000000;
 pub const HWND_DESKTOP: HWND = 0 as HWND;
 FN!{stdcall PREGISTERCLASSNAMEW(
     LPCWSTR,
@@ -3881,7 +3881,1178 @@ extern "system" {
         hwnd: HWND,
         lptpm: LPTPMPARAMS,
     ) -> BOOL;
+    pub fn CalculatePopupWindowPosition(
+        anchorPoint: *const POINT,
+        windowSize: *const SIZE,
+        flags: UINT,
+        excludeRect: *mut RECT,
+        popupWindowPosition: *mut RECT,
+    ) -> BOOL;
 }
+pub const MNS_NOCHECK: DWORD = 0x80000000;
+pub const MNS_MODELESS: DWORD = 0x40000000;
+pub const MNS_DRAGDROP: DWORD = 0x20000000;
+pub const MNS_AUTODISMISS: DWORD = 0x10000000;
+pub const MNS_NOTIFYBYPOS: DWORD = 0x08000000;
+pub const MNS_CHECKORBMP: DWORD = 0x04000000;
+pub const MIM_MAXHEIGHT: DWORD = 0x00000001;
+pub const MIM_BACKGROUND: DWORD = 0x00000002;
+pub const MIM_HELPID: DWORD = 0x00000004;
+pub const MIM_MENUDATA: DWORD = 0x00000008;
+pub const MIM_STYLE: DWORD = 0x00000010;
+pub const MIM_APPLYTOSUBMENUS: DWORD = 0x80000000;
+STRUCT!{struct MENUINFO {
+    cbSize: DWORD,
+    fMask: DWORD,
+    dwStyle: DWORD,
+    cyMax: UINT,
+    hbrBack: HBRUSH,
+    dwContextHelpID: DWORD,
+    dwMenuData: ULONG_PTR,
+}}
+pub type LPMENUINFO = *mut MENUINFO;
+pub type LPCMENUINFO = *const MENUINFO;
+extern "system" {
+    pub fn GetMenuInfo(
+        hMenu: HMENU,
+        lpcmi: LPMENUINFO,
+    ) -> BOOL;
+    pub fn SetMenuInfo(
+        hMenu: HMENU,
+        lpcmi: LPCMENUINFO,
+    ) -> BOOL;
+    pub fn EndMenu(
+        hMenu: HMENU,
+        uFlags: UINT,
+        uIDNewItem: UINT_PTR,
+        lpNewItem: LPCSTR,
+    ) -> BOOL;
+}
+pub const MND_CONTINUE: DWORD = 0;
+pub const MND_ENDMENU: DWORD = 1;
+STRUCT!{struct MENUGETOBJECTINFO {
+    dwFlags: DWORD,
+    uPos: UINT,
+    hmenu: HMENU,
+    riid: PVOID,
+    pvObj: PVOID,
+}}
+pub type PMENUGETOBJECTINFO = *mut MENUGETOBJECTINFO;
+pub const MNGOF_TOPGAP: DWORD = 0x00000001;
+pub const MNGOF_BOTTOMGAP: DWORD = 0x00000002;
+pub const MNGO_NOINTERFACE: DWORD = 0x00000000;
+pub const MNGO_NOERROR: DWORD = 0x00000001;
+pub const MIIM_STATE: DWORD = 0x00000001;
+pub const MIIM_ID: DWORD = 0x00000002;
+pub const MIIM_SUBMENU: DWORD = 0x00000004;
+pub const MIIM_CHECKMARKS: DWORD = 0x00000008;
+pub const MIIM_TYPE: DWORD = 0x00000010;
+pub const MIIM_DATA: DWORD = 0x00000020;
+pub const MIIM_STRING: DWORD = 0x00000040;
+pub const MIIM_BITMAP: DWORD = 0x00000080;
+pub const MIIM_FTYPE: DWORD = 0x00000100;
+pub const HBMMENU_CALLBACK: HBITMAP = -1isize as HBITMAP;
+pub const HBMMENU_SYSTEM: HBITMAP = 1 as HBITMAP;
+pub const HBMMENU_MBAR_RESTORE: HBITMAP = 2 as HBITMAP;
+pub const HBMMENU_MBAR_MINIMIZE: HBITMAP = 3 as HBITMAP;
+pub const HBMMENU_MBAR_CLOSE: HBITMAP = 5 as HBITMAP;
+pub const HBMMENU_MBAR_CLOSE_D: HBITMAP = 6 as HBITMAP;
+pub const HBMMENU_MBAR_MINIMIZE_D: HBITMAP = 7 as HBITMAP;
+pub const HBMMENU_POPUP_CLOSE: HBITMAP = 8 as HBITMAP;
+pub const HBMMENU_POPUP_RESTORE: HBITMAP = 9 as HBITMAP;
+pub const HBMMENU_POPUP_MAXIMIZE: HBITMAP = 10 as HBITMAP;
+pub const HBMMENU_POPUP_MINIMIZE: HBITMAP = 11 as HBITMAP;
+STRUCT!{struct MENUITEMINFOA {
+    cbSize: UINT,
+    fMask: UINT,
+    fType: UINT,
+    fState: UINT,
+    wID: UINT,
+    hSubMenu: HMENU,
+    hbmpChecked: HBITMAP,
+    hbmpUnchecked: HBITMAP,
+    dwItemData: ULONG_PTR,
+    dwTypeData: LPSTR,
+    cch: UINT,
+    hbmpItem: HBITMAP,
+}}
+pub type LPMENUITEMINFOA = *mut MENUITEMINFOA;
+pub type LPCMENUITEMINFOA = *const MENUITEMINFOA;
+STRUCT!{struct MENUITEMINFOW {
+    cbSize: UINT,
+    fMask: UINT,
+    fType: UINT,
+    fState: UINT,
+    wID: UINT,
+    hSubMenu: HMENU,
+    hbmpChecked: HBITMAP,
+    hbmpUnchecked: HBITMAP,
+    dwItemData: ULONG_PTR,
+    dwTypeData: LPWSTR,
+    cch: UINT,
+    hbmpItem: HBITMAP,
+}}
+pub type LPMENUITEMINFOW = *mut MENUITEMINFOW;
+pub type LPCMENUITEMINFOW = *const MENUITEMINFOW;
+extern "system" {
+    pub fn InsertMenuItemA(
+        hmenu: HMENU,
+        item: UINT,
+        fByPosition: BOOL,
+        lpmi: LPCMENUITEMINFOA,
+    ) -> BOOL;
+    pub fn InsertMenuItemW(
+        hmenu: HMENU,
+        item: UINT,
+        fByPosition: BOOL,
+        lpmi: LPCMENUITEMINFOW,
+    ) -> BOOL;
+    pub fn GetMenuItemInfoA(
+        hMenu: HMENU,
+        uItem: UINT,
+        fByPosition: BOOL,
+        lpmii: LPMENUITEMINFOA
+    ) -> BOOL;
+    pub fn GetMenuItemInfoW(
+        hMenu: HMENU,
+        uItem: UINT,
+        fByPosition: BOOL,
+        lpmii: LPMENUITEMINFOW
+    ) -> BOOL;
+    pub fn SetMenuItemInfoA(
+        hmenu: HMENU,
+        item: UINT,
+        fByPositon: BOOL,
+        lpmii: LPCMENUITEMINFOA,
+    ) -> BOOL;
+    pub fn SetMenuItemInfoW(
+        hmenu: HMENU,
+        item: UINT,
+        fByPositon: BOOL,
+        lpmii: LPCMENUITEMINFOW,
+    ) -> BOOL;
+}
+pub const GMDI_USEDISABLED: DWORD = 0x0001;
+pub const GMDI_GOINTOPOPUPS: DWORD = 0x0002;
+extern "system" {
+    pub fn GetMenuDefaultItem(
+        hMenu: HMENU,
+        fByPos: UINT,
+        gmdiFlags: UINT,
+    ) -> UINT;
+    pub fn SetMenuDefaultItem(
+        hMenu: HMENU,
+        uItem: UINT,
+        fByPos: UINT,
+    ) -> BOOL;
+    pub fn GetMenuItemRect(
+        hWnd: HWND,
+        hMenu: HMENU,
+        uItem: UINT,
+        lprcItem: LPRECT,
+    ) -> BOOL;
+    pub fn MenuItemFromPoint(
+        hWnd: HWND,
+        hMenu: HMENU,
+        ptScreen: POINT,
+    ) -> c_int;
+}
+pub const TPM_LEFTBUTTON: UINT = 0x0000;
+pub const TPM_RIGHTBUTTON: UINT = 0x0002;
+pub const TPM_LEFTALIGN: UINT = 0x0000;
+pub const TPM_CENTERALIGN: UINT = 0x0004;
+pub const TPM_RIGHTALIGN: UINT = 0x0008;
+pub const TPM_TOPALIGN: UINT = 0x0000;
+pub const TPM_VCENTERALIGN: UINT = 0x0010;
+pub const TPM_BOTTOMALIGN: UINT = 0x0020;
+pub const TPM_HORIZONTAL: UINT = 0x0000;
+pub const TPM_VERTICAL: UINT = 0x0040;
+pub const TPM_NONOTIFY: UINT = 0x0080;
+pub const TPM_RETURNCMD: UINT = 0x0100;
+pub const TPM_RECURSE: UINT = 0x0001;
+pub const TPM_HORPOSANIMATION: UINT = 0x0400;
+pub const TPM_HORNEGANIMATION: UINT = 0x0800;
+pub const TPM_VERPOSANIMATION: UINT = 0x1000;
+pub const TPM_VERNEGANIMATION: UINT = 0x2000;
+pub const TPM_NOANIMATION: UINT = 0x4000;
+pub const TPM_LAYOUTRTL: UINT = 0x8000;
+pub const TPM_WORKAREA: UINT = 0x10000;
+STRUCT!{struct DROPSTRUCT {
+    hwndSource: HWND,
+    hwndSink: HWND,
+    wFmt: DWORD,
+    dwData: ULONG_PTR,
+    ptDrop: POINT,
+    dwControlData: DWORD,
+}}
+pub type PDROPSTRUCT = *mut DROPSTRUCT;
+pub type LPDROPSTRUCT = *mut DROPSTRUCT;
+pub const DOF_EXECUTABLE: DWORD = 0x8001;
+pub const DOF_DOCUMENT: DWORD = 0x8002;
+pub const DOF_DIRECTORY: DWORD = 0x8003;
+pub const DOF_MULTIPLE: DWORD = 0x8004;
+pub const DOF_PROGMAN: DWORD = 0x0001;
+pub const DOF_SHELLDATA: DWORD = 0x0002;
+pub const DO_DROPFILE: DWORD = 0x454C4946;
+pub const DO_PRINTFILE: DWORD = 0x544E5250;
+extern "system" {
+    pub fn DragObject(
+        hwndParent: HWND,
+        hwndFrom: HWND,
+        fmt: UINT,
+        data: ULONG_PTR,
+        hcur: HCURSOR,
+    ) -> DWORD;
+    pub fn DragDetect(
+        hwnd: HWND,
+        pt: POINT,
+    ) -> BOOL;
+    pub fn DrawIcon(
+        hDC: HDC,
+        x: c_int,
+        y: c_int,
+        hIcon: HICON,
+    ) -> BOOL;
+}
+pub const DT_TOP: UINT = 0x00000000;
+pub const DT_LEFT: UINT = 0x00000000;
+pub const DT_CENTER: UINT = 0x00000001;
+pub const DT_RIGHT: UINT = 0x00000002;
+pub const DT_VCENTER: UINT = 0x00000004;
+pub const DT_BOTTOM: UINT = 0x00000008;
+pub const DT_WORDBREAK: UINT = 0x00000010;
+pub const DT_SINGLELINE: UINT = 0x00000020;
+pub const DT_EXPANDTABS: UINT = 0x00000040;
+pub const DT_TABSTOP: UINT = 0x00000080;
+pub const DT_NOCLIP: UINT = 0x00000100;
+pub const DT_EXTERNALLEADING: UINT = 0x00000200;
+pub const DT_CALCRECT: UINT = 0x00000400;
+pub const DT_NOPREFIX: UINT = 0x00000800;
+pub const DT_INTERNAL: UINT = 0x00001000;
+pub const DT_EDITCONTROL: UINT = 0x00002000;
+pub const DT_PATH_ELLIPSIS: UINT = 0x00004000;
+pub const DT_END_ELLIPSIS: UINT = 0x00008000;
+pub const DT_MODIFYSTRING: UINT = 0x00010000;
+pub const DT_RTLREADING: UINT = 0x00020000;
+pub const DT_WORD_ELLIPSIS: UINT = 0x00040000;
+pub const DT_NOFULLWIDTHCHARBREAK: UINT = 0x00080000;
+pub const DT_HIDEPREFIX: UINT = 0x00100000;
+pub const DT_PREFIXONLY: UINT = 0x00200000;
+STRUCT!{struct DRAWTEXTPARAMS {
+    cbSize: UINT,
+    iTabLength: c_int,
+    iLeftMargin: c_int,
+    iRightMargin: c_int,
+    uiLengthDrawn: UINT,
+}}
+pub type LPDRAWTEXTPARAMS = *mut DRAWTEXTPARAMS;
+extern "system" {
+    pub fn DrawTextA(
+        hdc: HDC,
+        lpchText: LPCSTR,
+        cchText: c_int,
+        lprc: LPRECT,
+        format: UINT,
+    ) -> c_int;
+    pub fn DrawTextW(
+        hdc: HDC,
+        lpchText: LPCWSTR,
+        cchText: c_int,
+        lprc: LPRECT,
+        format: UINT,
+    ) -> c_int;
+    pub fn DrawTextExA(
+        hdc: HDC,
+        lpchText: LPCSTR,
+        cchText: c_int,
+        lprc: LPRECT,
+        format: UINT,
+        lpdtp: LPDRAWTEXTPARAMS,
+    ) -> c_int;
+    pub fn DrawTextExW(
+        hdc: HDC,
+        lpchText: LPCWSTR,
+        cchText: c_int,
+        lprc: LPRECT,
+        format: UINT,
+        lpdtp: LPDRAWTEXTPARAMS,
+    ) -> c_int;
+    pub fn GrayStringA(
+        hDC: HDC,
+        hBrush: HBRUSH,
+        lpOutputFunc: GRAYSTRINGPROC,
+        lpData: LPARAM,
+        nCount: c_int,
+        X: c_int,
+        Y: c_int,
+        nWidth: c_int,
+        nHeight: c_int,
+    ) -> BOOL;
+    pub fn GrayStringW(
+        hDC: HDC,
+        hBrush: HBRUSH,
+        lpOutputFunc: GRAYSTRINGPROC,
+        lpData: LPARAM,
+        nCount: c_int,
+        X: c_int,
+        Y: c_int,
+        nWidth: c_int,
+        nHeight: c_int,
+    ) -> BOOL;
+}
+pub const DST_COMPLEX: UINT = 0x0000;
+pub const DST_TEXT: UINT = 0x0001;
+pub const DST_PREFIXTEXT: UINT = 0x0002;
+pub const DST_ICON: UINT = 0x0003;
+pub const DST_BITMAP: UINT = 0x0004;
+pub const DSS_NORMAL: UINT = 0x0000;
+pub const DSS_UNION: UINT = 0x0010;
+pub const DSS_DISABLED: UINT = 0x0020;
+pub const DSS_MONO: UINT = 0x0080;
+pub const DSS_HIDEPREFIX: UINT = 0x0200;
+pub const DSS_PREFIXONLY: UINT = 0x0400;
+pub const DSS_RIGHT: UINT = 0x8000;
+extern "system" {
+    pub fn DrawStateA(
+        hdc: HDC,
+        hbrFore: HBRUSH,
+        qfnCallBack: DRAWSTATEPROC,
+        lData: LPARAM,
+        wData: WPARAM,
+        x: c_int,
+        y: c_int,
+        cx: c_int,
+        cy: c_int,
+        uFlags: UINT,
+    ) -> BOOL;
+    pub fn DrawStateW(
+        hdc: HDC,
+        hbrFore: HBRUSH,
+        qfnCallBack: DRAWSTATEPROC,
+        lData: LPARAM,
+        wData: WPARAM,
+        x: c_int,
+        y: c_int,
+        cx: c_int,
+        cy: c_int,
+        uFlags: UINT,
+    ) -> BOOL;
+    pub fn TabbedTextOutA(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        lpString: LPCSTR,
+        chCount: c_int,
+        nTabPositions: c_int,
+        lpnTabStopPositions: *const INT,
+        nTabOrigin: c_int,
+    ) -> LONG;
+    pub fn TabbedTextOutW(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        lpString: LPCWSTR,
+        chCount: c_int,
+        nTabPositions: c_int,
+        lpnTabStopPositions: *const INT,
+        nTabOrigin: c_int,
+    ) -> LONG;
+    pub fn GetTabbedTextExtentA(
+        hdc: HDC,
+        lpString: LPCSTR,
+        chCount: c_int,
+        nTabPositions: c_int,
+        lpnTabStopPositions: *const INT,
+    ) -> DWORD;
+    pub fn GetTabbedTextExtentW(
+        hdc: HDC,
+        lpString: LPCWSTR,
+        chCount: c_int,
+        nTabPositions: c_int,
+        lpnTabStopPositions: *const INT,
+    ) -> DWORD;
+    pub fn UpdateWindow(
+        hWnd: HWND,
+    ) -> BOOL;
+    pub fn SetActiveWindow(
+        hWnd: HWND,
+    ) -> HWND;
+    pub fn GetForegroundWindow() -> HWND;
+    pub fn PaintDesktop(
+        hdc: HDC,
+    ) -> BOOL;
+    pub fn SwitchToThisWindow(
+        hwnd: HWND,
+        fUnknown: BOOL,
+    );
+    pub fn SetForegroundWindow(
+        hWnd: HWND,
+    ) -> BOOL;
+    pub fn AllowSetForegroundWindow(
+        dwProcessId: DWORD,
+    ) -> BOOL;
+}
+pub const ASFW_ANY: DWORD = -1i32 as u32;
+extern "system" {
+    pub fn LockSetForegroundWindow(
+        uLockCode: UINT,
+    ) -> BOOL;
+}
+pub const LSFW_LOCK: UINT = 1;
+pub const LSFW_UNLOCK: UINT = 2;
+extern "system" {
+    pub fn WindowFromDC(
+        hDC: HDC,
+    ) -> HWND;
+    pub fn GetDC(
+        hWnd: HWND,
+    ) -> HDC;
+    pub fn GetDCEx(
+        hWnd: HWND,
+        hrgnClip: HRGN,
+        flags: DWORD,
+    ) -> HDC;
+}
+pub const DCX_WINDOW: DWORD = 0x00000001;
+pub const DCX_CACHE: DWORD = 0x00000002;
+pub const DCX_NORESETATTRS: DWORD = 0x00000004;
+pub const DCX_CLIPCHILDREN: DWORD = 0x00000008;
+pub const DCX_CLIPSIBLINGS: DWORD = 0x00000010;
+pub const DCX_PARENTCLIP: DWORD = 0x00000020;
+pub const DCX_EXCLUDERGN: DWORD = 0x00000040;
+pub const DCX_INTERSECTRGN: DWORD = 0x00000080;
+pub const DCX_EXCLUDEUPDATE: DWORD = 0x00000100;
+pub const DCX_INTERSECTUPDATE: DWORD = 0x00000200;
+pub const DCX_LOCKWINDOWUPDATE: DWORD = 0x00000400;
+pub const DCX_VALIDATE: DWORD = 0x00200000;
+extern "system" {
+    pub fn GetWindowDC(
+        hWnd: HWND,
+    ) -> HDC;
+    pub fn ReleaseDC(
+        hWnd: HWND,
+        hDC: HDC,
+    ) -> c_int;
+    pub fn BeginPaint(
+        hwnd: HWND,
+        lpPaint: LPPAINTSTRUCT,
+    ) -> HDC;
+    pub fn EndPaint(
+        hWnd: HWND,
+        lpPaint: *const PAINTSTRUCT,
+    ) -> BOOL;
+    pub fn GetUpdateRect(
+        hWnd: HWND,
+        lpRect: LPRECT,
+        bErase: BOOL,
+    ) -> BOOL;
+    pub fn GetUpdateRgn(
+        hWnd: HWND,
+        hRgn: HRGN,
+        bErase: BOOL,
+    ) -> c_int;
+    pub fn SetWindowRgn(
+        hWnd: HWND,
+        hRgn: HRGN,
+        bRedraw: BOOL,
+    ) -> c_int;
+    pub fn GetWindowRgn(
+        hWnd: HWND,
+        hRgn: HRGN,
+    ) -> c_int;
+    pub fn GetWindowRgnBox(
+        hWnd: HWND,
+        lprc: LPRECT,
+    ) -> c_int;
+    pub fn ExcludeUpdateRgn(
+        hDC: HDC,
+        hWnd: HWND,
+    ) -> c_int;
+    pub fn InvalidateRect(
+        hWnd: HWND,
+        lpRect: *const RECT,
+        bErase: BOOL,
+    ) -> BOOL;
+    pub fn ValidateRect(
+        hWnd: HWND,
+        lpRect: *const RECT,
+    ) -> BOOL;
+    pub fn InvalidateRgn(
+        hWnd: HWND,
+        hRgn: HRGN,
+        bErase: BOOL,
+    ) -> BOOL;
+    pub fn ValidateRgn(
+        hWnd: HWND,
+        hRgn: HRGN,
+    ) -> BOOL;
+    pub fn RedrawWindow(
+        hwnd: HWND,
+        lprcUpdate: *const RECT,
+        hrgnUpdate: HRGN,
+        flags: UINT,
+    ) -> BOOL;
+}
+pub const RDW_INVALIDATE: UINT = 0x0001;
+pub const RDW_INTERNALPAINT: UINT = 0x0002;
+pub const RDW_ERASE: UINT = 0x0004;
+pub const RDW_VALIDATE: UINT = 0x0008;
+pub const RDW_NOINTERNALPAINT: UINT = 0x0010;
+pub const RDW_NOERASE: UINT = 0x0020;
+pub const RDW_NOCHILDREN: UINT = 0x0040;
+pub const RDW_ALLCHILDREN: UINT = 0x0080;
+pub const RDW_UPDATENOW: UINT = 0x0100;
+pub const RDW_ERASENOW: UINT = 0x0200;
+pub const RDW_FRAME: UINT = 0x0400;
+pub const RDW_NOFRAME: UINT = 0x0800;
+extern "system" {
+    pub fn LockWindowUpdate(
+        hWndLock: HWND,
+    ) -> BOOL;
+    pub fn ScrollWindow(
+        hWnd: HWND,
+        xAmount: c_int,
+        yAmount: c_int,
+        lpRect: *const RECT,
+        lpClipRect: *const RECT,
+    ) -> BOOL;
+    pub fn ScrollDC(
+        hDC: HDC,
+        dx: c_int,
+        dy: c_int,
+        lprcScroll: *const RECT,
+        lprcClip: *const RECT,
+        hrgnUpdate: HRGN,
+        lprcUpdate: LPRECT,
+    ) -> BOOL;
+    pub fn ScrollWindowEx(
+        hWnd: HWND,
+        dx: c_int,
+        dy: c_int,
+        prcScroll: *const RECT,
+        prcClip: *const RECT,
+        hrgnUpdate: HRGN,
+        prcUpdate: LPRECT,
+        flags: UINT,
+    ) -> c_int;
+}
+pub const SW_SCROLLCHILDREN: UINT = 0x0001;
+pub const SW_INVALIDATE: UINT = 0x0002;
+pub const SW_ERASE: UINT = 0x0004;
+pub const SW_SMOOTHSCROLL: UINT = 0x0010;
+extern "system" {
+    pub fn SetScrollPos(
+        hWnd: HWND,
+        nBar: c_int,
+        nPos: c_int,
+        bRedraw: BOOL,
+    ) -> c_int;
+    pub fn GetScrollPos(
+        hWnd: HWND,
+        nBar: c_int,
+    ) -> c_int;
+    pub fn SetScrollRange(
+        hWnd: HWND,
+        nBar: c_int,
+        nMinPos: c_int,
+        nMaxPos: c_int,
+        bRedraw: BOOL,
+    ) -> BOOL;
+    pub fn GetScrollRange(
+        hWnd: HWND,
+        nBar: c_int,
+        lpMinPos: LPINT,
+        lpMaxPos: LPINT,
+    ) -> BOOL;
+    pub fn ShowScrollBar(
+        hWnd: HWND,
+        wBar: c_int,
+        bShow: BOOL,
+    ) -> BOOL;
+    pub fn EnableScrollBar(
+        hWnd: HWND,
+        wSBflags: UINT,
+        wArrows: UINT,
+    ) -> BOOL;
+}
+pub const ESB_ENABLE_BOTH: UINT = 0x0000;
+pub const ESB_DISABLE_BOTH: UINT = 0x0003;
+pub const ESB_DISABLE_LEFT: UINT = 0x0001;
+pub const ESB_DISABLE_RIGHT: UINT = 0x0002;
+pub const ESB_DISABLE_UP: UINT = 0x0001;
+pub const ESB_DISABLE_DOWN: UINT = 0x0002;
+pub const ESB_DISABLE_LTUP: UINT = ESB_DISABLE_LEFT;
+pub const ESB_DISABLE_RTDN: UINT = ESB_DISABLE_RIGHT;
+extern "system" {
+    pub fn SetPropA(
+        hWnd: HWND,
+        lpString: LPCSTR,
+        hData: HANDLE,
+    ) -> BOOL;
+    pub fn SetPropW(
+        hWnd: HWND,
+        lpString: LPCWSTR,
+        hData: HANDLE,
+    ) -> BOOL;
+    pub fn GetPropA(
+        hwnd: HWND,
+        lpString: LPCSTR,
+    ) -> HANDLE;
+    pub fn GetPropW(
+        hwnd: HWND,
+        lpString: LPCWSTR,
+    ) -> HANDLE;
+    pub fn RemovePropA(
+        hWnd: HWND,
+        lpStr: LPCSTR,
+    ) -> HANDLE;
+    pub fn RemovePropW(
+        hWnd: HWND,
+        lpStr: LPCWSTR,
+    ) -> HANDLE;
+    pub fn EnumPropsExA(
+        hWnd: HWND,
+        lpEnumFunc: PROPENUMPROCA,
+        lParam: LPARAM,
+    ) -> c_int;
+    pub fn EnumPropsExW(
+        hWnd: HWND,
+        lpEnumFunc: PROPENUMPROCW,
+        lParam: LPARAM,
+    ) -> c_int;
+    pub fn EnumPropsA(
+        hWnd: HWND,
+        lpEnumFunc: PROPENUMPROCA,
+    ) -> c_int;
+    pub fn EnumPropsW(
+        hWnd: HWND,
+        lpEnumFunc: PROPENUMPROCW,
+    ) -> c_int;
+    pub fn SetWindowTextA(
+        hWnd: HWND,
+        lpString: LPCSTR,
+    ) -> BOOL;
+    pub fn SetWindowTextW(
+        hWnd: HWND,
+        lpString: LPCWSTR,
+    ) -> BOOL;
+    pub fn GetWindowTextA(
+        hWnd: HWND,
+        lpString: LPSTR,
+        nMaxCount: c_int,
+    ) -> c_int;
+    pub fn GetWindowTextW(
+        hWnd: HWND,
+        lpString: LPWSTR,
+        nMaxCount: c_int,
+    ) -> c_int;
+    pub fn GetWindowTextLengthA(
+        hWnd: HWND,
+    ) -> c_int;
+    pub fn GetWindowTextLengthW(
+        hWnd: HWND,
+    ) -> c_int;
+    pub fn GetClientRect(
+        hWnd: HWND,
+        lpRect: LPRECT,
+    ) -> BOOL;
+    pub fn GetWindowRect(
+        hWnd: HWND,
+        lpRect: LPRECT,
+    ) -> BOOL;
+    pub fn AdjustWindowRect(
+        lpRect: LPRECT,
+        dwStyle: DWORD,
+        bMenu: BOOL,
+    ) -> BOOL;
+    pub fn AdjustWindowRectEx(
+        lpRect: LPRECT,
+        dwStyle: DWORD,
+        bMenu: BOOL,
+        dwExStyle: DWORD,
+    ) -> BOOL;
+    pub fn AdjustWindowRectExForDpi(
+        lpRect: LPRECT,
+        dwStyle: DWORD,
+        bMenu: BOOL,
+        dwExStyle: DWORD,
+        dpi: UINT,
+    ) -> BOOL;
+}
+pub const HELPINFO_WINDOW: UINT = 0x0001;
+pub const HELPINFO_MENUITEM: UINT = 0x0002;
+STRUCT!{struct HELPINFO {
+    cbSize: UINT,
+    iContextType: c_int,
+    iCtrlId: c_int,
+    hItemHandle: HANDLE,
+    dwContextId: DWORD,
+    MousePos: POINT,
+}}
+pub type LPHELPINFO = *mut HELPINFO;
+extern "system" {
+    pub fn SetWindowContextHelpId(
+        _: HWND,
+        _: DWORD,
+    ) -> BOOL;
+    pub fn GetWindowContextHelpId(
+        _: HWND,
+    ) -> DWORD;
+    pub fn SetMenuContextHelpId(
+        _: HMENU,
+        _: DWORD,
+    ) -> BOOL;
+    pub fn GetMenuContextHelpId(
+        _: HMENU,
+    ) -> DWORD;
+}
+pub const MB_OK: UINT = 0x00000000;
+pub const MB_OKCANCEL: UINT = 0x00000001;
+pub const MB_ABORTRETRYIGNORE: UINT = 0x00000002;
+pub const MB_YESNOCANCEL: UINT = 0x00000003;
+pub const MB_YESNO: UINT = 0x00000004;
+pub const MB_RETRYCANCEL: UINT = 0x00000005;
+pub const MB_CANCELTRYCONTINUE: UINT = 0x00000006;
+pub const MB_ICONHAND: UINT = 0x00000010;
+pub const MB_ICONQUESTION: UINT = 0x00000020;
+pub const MB_ICONEXCLAMATION: UINT = 0x00000030;
+pub const MB_ICONASTERISK: UINT = 0x00000040;
+pub const MB_USERICON: UINT = 0x00000080;
+pub const MB_ICONWARNING: UINT = MB_ICONEXCLAMATION;
+pub const MB_ICONERROR: UINT = MB_ICONHAND;
+pub const MB_ICONINFORMATION: UINT = MB_ICONASTERISK;
+pub const MB_ICONSTOP: UINT = MB_ICONHAND;
+pub const MB_DEFBUTTON1: UINT = 0x00000000;
+pub const MB_DEFBUTTON2: UINT = 0x00000100;
+pub const MB_DEFBUTTON3: UINT = 0x00000200;
+pub const MB_DEFBUTTON4: UINT = 0x00000300;
+pub const MB_APPLMODAL: UINT = 0x00000000;
+pub const MB_SYSTEMMODAL: UINT = 0x00001000;
+pub const MB_TASKMODAL: UINT = 0x00002000;
+pub const MB_HELP: UINT = 0x00004000;
+pub const MB_NOFOCUS: UINT = 0x00008000;
+pub const MB_SETFOREGROUND: UINT = 0x00010000;
+pub const MB_DEFAULT_DESKTOP_ONLY: UINT = 0x00020000;
+pub const MB_TOPMOST: UINT = 0x00040000;
+pub const MB_RIGHT: UINT = 0x00080000;
+pub const MB_RTLREADING: UINT = 0x00100000;
+pub const MB_SERVICE_NOTIFICATION: UINT = 0x00200000;
+pub const MB_SERVICE_NOTIFICATION_NT3X: UINT = 0x00040000;
+pub const MB_TYPEMASK: UINT = 0x0000000F;
+pub const MB_ICONMASK: UINT = 0x000000F0;
+pub const MB_DEFMASK: UINT = 0x00000F00;
+pub const MB_MODEMASK: UINT = 0x00003000;
+pub const MB_MISCMASK: UINT = 0x0000C000;
+extern "system" {
+    pub fn MessageBoxA(
+        hWnd: HWND,
+        lpText: LPCSTR,
+        lpCaption: LPCSTR,
+        uType: UINT,
+    ) -> c_int;
+    pub fn MessageBoxW(
+        hWnd: HWND,
+        lpText: LPCWSTR,
+        lpCaption: LPCWSTR,
+        uType: UINT,
+    ) -> c_int;
+    pub fn MessageBoxExA(
+        hWnd: HWND,
+        lpText: LPCSTR,
+        lpCaption: LPCSTR,
+        uType: UINT,
+        wLanguageId: WORD,
+    ) -> c_int;
+    pub fn MessageBoxExW(
+        hWnd: HWND,
+        lpText: LPCWSTR,
+        lpCaption: LPCWSTR,
+        uType: UINT,
+        wLanguageId: WORD,
+    ) -> c_int;
+}
+STRUCT!{struct MSGBOXPARAMSA {
+    cbSize: UINT,
+    hwndOwner: HWND,
+    hInstance: HINSTANCE,
+    lpszText: LPCSTR,
+    lpszCaption: LPCSTR,
+    dwStyle: DWORD,
+    lpszIcon: LPCSTR,
+    dwContextHelpId: DWORD_PTR,
+    lpfnMsgBoxCallback: MSGBOXCALLBACK,
+    dwLanguageId: DWORD,
+}}
+pub type PMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
+pub type LPMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
+STRUCT!{struct MSGBOXPARAMSW {
+    cbSize: UINT,
+    hwndOwner: HWND,
+    hInstance: HINSTANCE,
+    lpszText: LPCWSTR,
+    lpszCaption: LPCWSTR,
+    dwStyle: DWORD,
+    lpszIcon: LPCWSTR,
+    dwContextHelpId: DWORD_PTR,
+    lpfnMsgBoxCallback: MSGBOXCALLBACK,
+    dwLanguageId: DWORD,
+}}
+pub type PMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
+pub type LPMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
+extern "system" {
+    pub fn MessageBoxIndirectA(
+        lpmbp: *const MSGBOXPARAMSA,
+    ) -> c_int;
+    pub fn MessageBoxIndirectW(
+        lpmbp: *const MSGBOXPARAMSW,
+    ) -> c_int;
+    pub fn MessageBeep(
+        uType: UINT,
+    ) -> BOOL;
+    pub fn ShowCursor(
+        bShow: BOOL,
+    ) -> c_int;
+    pub fn SetCursorPos(
+        X: c_int,
+        Y: c_int,
+    ) -> BOOL;
+    pub fn SetPhysicalCursorPos(
+        X: c_int,
+        Y: c_int,
+    ) -> BOOL;
+    pub fn SetCursor(
+        hCursor: HCURSOR,
+    ) -> HCURSOR;
+    pub fn GetCursorPos(
+        lpPoint: LPPOINT,
+    ) -> BOOL;
+    pub fn GetPhysicalCursorPos(
+        lpPoint: LPPOINT,
+    ) -> BOOL;
+    pub fn GetClipCursor(
+        lpRect: LPRECT,
+    ) -> BOOL;
+    pub fn GetCursor() -> HCURSOR;
+    pub fn CreateCaret(
+        hWnd: HWND,
+        hBitmap: HBITMAP,
+        nWidth: c_int,
+        nHeight: c_int,
+    ) -> BOOL;
+    pub fn GetCaretBlinkTime() -> UINT;
+    pub fn SetCaretBlinkTime(
+        uMSeconds: UINT,
+    ) -> BOOL;
+    pub fn DestroyCaret() -> BOOL;
+    pub fn HideCaret(
+        hWnd: HWND,
+    ) -> BOOL;
+    pub fn ShowCaret(
+        hWnd: HWND,
+    ) -> BOOL;
+    pub fn SetCaretPos(
+        X: c_int,
+        Y: c_int,
+    ) -> BOOL;
+    pub fn GetCaretPos(
+        lpPoint: LPPOINT,
+    ) -> BOOL;
+    pub fn ClientToScreen(
+        hWnd: HWND,
+        lpPoint: LPPOINT,
+    ) -> BOOL;
+    pub fn ScreenToClient(
+        hWnd: HWND,
+        lpPoint: LPPOINT,
+    ) -> BOOL;
+    pub fn LogicalToPhysicalPoint(
+        hWnd: HWND,
+        lpPoint: LPPOINT,
+    ) -> BOOL;
+    pub fn PhysicalToLogicalPoint(
+        hWnd: HWND,
+        lpPoint: LPPOINT,
+    ) -> BOOL;
+    pub fn LogicalToPhysicalPointForPerMonitorDPI(
+        hWnd: HWND,
+        lpPoint: LPPOINT,
+    ) -> BOOL;
+    pub fn PhysicalToLogicalPointForPerMonitorDPI(
+        hWnd: HWND,
+        lpPoint: LPPOINT,
+    ) -> BOOL;
+    pub fn MapWindowPoints(
+        hWndFrom: HWND,
+        hWndTo: HWND,
+        lpPoints: LPPOINT,
+        cPoints: UINT,
+    ) -> c_int;
+    pub fn WindowFromPoint(
+        Point: POINT,
+    ) -> HWND;
+    pub fn WindowFromPhysicalPoint(
+        Point: POINT,
+    ) -> HWND;
+    pub fn ChildWindowFromPoint(
+        hWndParent: HWND,
+        point: POINT,
+    ) -> HWND;
+    pub fn ClipCursor(
+        lpRect: *const RECT,
+    ) -> BOOL;
+}
+pub const CWP_ALL: UINT = 0x0000;
+pub const CWP_SKIPINVISIBLE: UINT = 0x0001;
+pub const CWP_SKIPDISABLED: UINT = 0x0002;
+pub const CWP_SKIPTRANSPARENT: UINT = 0x0004;
+extern "system" {
+    pub fn ChildWindowFromPointEx(
+        hwnd: HWND,
+        pt: POINT,
+        flags: UINT,
+    ) -> HWND;
+}
+pub const CTLCOLOR_MSGBOX: c_int = 0;
+pub const CTLCOLOR_EDIT: c_int = 1;
+pub const CTLCOLOR_LISTBOX: c_int = 2;
+pub const CTLCOLOR_BTN: c_int = 3;
+pub const CTLCOLOR_DLG: c_int = 4;
+pub const CTLCOLOR_SCROLLBAR: c_int = 5;
+pub const CTLCOLOR_STATIC: c_int = 6;
+pub const CTLCOLOR_MAX: c_int = 7;
+pub const COLOR_SCROLLBAR: c_int = 0;
+pub const COLOR_BACKGROUND: c_int = 1;
+pub const COLOR_ACTIVECAPTION: c_int = 2;
+pub const COLOR_INACTIVECAPTION: c_int = 3;
+pub const COLOR_MENU: c_int = 4;
+pub const COLOR_WINDOW: c_int = 5;
+pub const COLOR_WINDOWFRAME: c_int = 6;
+pub const COLOR_MENUTEXT: c_int = 7;
+pub const COLOR_WINDOWTEXT: c_int = 8;
+pub const COLOR_CAPTIONTEXT: c_int = 9;
+pub const COLOR_ACTIVEBORDER: c_int = 10;
+pub const COLOR_INACTIVEBORDER: c_int = 11;
+pub const COLOR_APPWORKSPACE: c_int = 12;
+pub const COLOR_HIGHLIGHT: c_int = 13;
+pub const COLOR_HIGHLIGHTTEXT: c_int = 14;
+pub const COLOR_BTNFACE: c_int = 15;
+pub const COLOR_BTNSHADOW: c_int = 16;
+pub const COLOR_GRAYTEXT: c_int = 17;
+pub const COLOR_BTNTEXT: c_int = 18;
+pub const COLOR_INACTIVECAPTIONTEXT: c_int = 19;
+pub const COLOR_BTNHIGHLIGHT: c_int = 20;
+pub const COLOR_3DDKSHADOW: c_int = 21;
+pub const COLOR_3DLIGHT: c_int = 22;
+pub const COLOR_INFOTEXT: c_int = 23;
+pub const COLOR_INFOBK: c_int = 24;
+pub const COLOR_HOTLIGHT: c_int = 26;
+pub const COLOR_GRADIENTACTIVECAPTION: c_int = 27;
+pub const COLOR_GRADIENTINACTIVECAPTION: c_int = 28;
+pub const COLOR_MENUHILIGHT: c_int = 29;
+pub const COLOR_MENUBAR: c_int = 30;
+pub const COLOR_DESKTOP: c_int = COLOR_BACKGROUND;
+pub const COLOR_3DFACE: c_int = COLOR_BTNFACE;
+pub const COLOR_3DSHADOW: c_int = COLOR_BTNSHADOW;
+pub const COLOR_3DHIGHLIGHT: c_int = COLOR_BTNHIGHLIGHT;
+pub const COLOR_3DHILIGHT: c_int = COLOR_BTNHIGHLIGHT;
+pub const COLOR_BTNHILIGHT: c_int = COLOR_BTNHIGHLIGHT;
+extern "system" {
+    pub fn GetSysColor(
+        nIndex: c_int,
+    ) -> DWORD;
+    pub fn GetSysColorBrush(
+        nIndex: c_int,
+    ) -> HBRUSH;
+    pub fn SetSysColors(
+        cElements: c_int,
+        lpaElements: *const INT,
+        lpaRgbValues: *const COLORREF,
+    ) -> BOOL;
+    pub fn DrawFocusRect(
+        hDC: HDC,
+        lprc: *const RECT,
+    ) -> BOOL;
+    pub fn FillRect(
+        hDC: HDC,
+        lprc: *const RECT,
+        hbr: HBRUSH,
+    ) -> c_int;
+    pub fn FrameRect(
+        hDC: HDC,
+        lprc: *const RECT,
+        hbr: HBRUSH,
+    ) -> c_int;
+    pub fn InvertRect(
+        hDC: HDC,
+        lprc: *const RECT,
+    ) -> BOOL;
+    pub fn SetRect(
+        lprc: LPRECT,
+        xLeft: c_int,
+        yTop: c_int,
+        xRight: c_int,
+        yBottom: c_int,
+    ) -> BOOL;
+    pub fn SetRectEmpty(
+        lprc: LPRECT,
+    ) -> BOOL;
+    pub fn CopyRect(
+        lprcDst: LPRECT,
+        lprcSrc: *const RECT,
+    ) -> BOOL;
+    pub fn InflateRect(
+        lprc: LPRECT,
+        dx: c_int,
+        dy: c_int,
+    ) -> BOOL;
+    pub fn IntersectRect(
+        lprcDst: LPRECT,
+        lprcSrc1: *const RECT,
+        lprcSrc2: *const RECT,
+    ) -> BOOL;
+    pub fn UnionRect(
+        lprcDst: LPRECT,
+        lprcSrc1: *const RECT,
+        lprcSrc2: *const RECT,
+    ) -> BOOL;
+    pub fn SubtractRect(
+        lprcDst: LPRECT,
+        lprcSrc1: *const RECT,
+        lprcSrc2: *const RECT,
+    ) -> BOOL;
+    pub fn OffsetRect(
+        lprc: LPRECT,
+        dx: c_int,
+        dy: c_int,
+    ) -> BOOL;
+    pub fn IsRectEmpty(
+        lprc: *const RECT,
+    ) -> BOOL;
+    pub fn EqualRect(
+        lprc1: *const RECT,
+        lprc2: *const RECT,
+    ) -> BOOL;
+    pub fn PtInRect(
+        lprc: *const RECT,
+        pt: POINT,
+    ) -> BOOL;
+    pub fn GetWindowWord(
+        hWnd: HWND,
+        nIndex: c_int,
+    ) -> WORD;
+    pub fn SetWindowWord(
+        hwnd: HWND,
+        nIndex: c_int,
+        wNewWord: WORD,
+    ) -> WORD;
+    pub fn GetWindowLongA(
+        hWnd: HWND,
+        nIndex: c_int,
+    ) -> LONG;
+    pub fn GetWindowLongW(
+        hWnd: HWND,
+        nIndex: c_int,
+    ) -> LONG;
+    pub fn SetWindowLongA(
+        hWnd: HWND,
+        nIndex: c_int,
+        dwNewLong: LONG,
+    ) -> LONG;
+    pub fn SetWindowLongW(
+        hWnd: HWND,
+        nIndex: c_int,
+        dwNewLong: LONG,
+    ) -> LONG;
+    #[cfg(target_arch = "x86_64")]
+    pub fn GetWindowLongPtrA(
+        hWnd: HWND,
+        nIndex: c_int,
+    ) -> LONG_PTR;
+    #[cfg(target_arch = "x86_64")]
+    pub fn GetWindowLongPtrW(
+        hWnd: HWND,
+        nIndex: c_int,
+    ) -> LONG_PTR;
+    #[cfg(target_arch = "x86_64")]
+    pub fn SetWindowLongPtrA(
+        hWnd: HWND,
+        nIndex: c_int,
+        dwNewLong: LONG_PTR,
+    ) -> LONG_PTR;
+    #[cfg(target_arch = "x86_64")]
+    pub fn SetWindowLongPtrW(
+        hWnd: HWND,
+        nIndex: c_int,
+        dwNewLong: LONG_PTR,
+    ) -> LONG_PTR;
+}
+#[cfg(target_arch = "x86")]
+pub use self::GetWindowLongA as GetWindowLongPtrA;
+#[cfg(target_arch = "x86")]
+pub use self::GetWindowLongW as GetWindowLongPtrW;
+#[cfg(target_arch = "x86")]
+pub use self::SetWindowLongA as SetWindowLongPtrA;
+#[cfg(target_arch = "x86")]
+pub use self::SetWindowLongW as SetWindowLongPtrW;
+extern "system" {
+    pub fn GetClassWord(
+        hWnd: HWND,
+        nIndex: c_int,
+    ) -> WORD;
+    pub fn SetClassWord(
+        hWnd: HWND,
+        nIndex: c_int,
+        wNewWord: WORD,
+    ) -> WORD;
+    pub fn GetClassLongA(
+        hWnd: HWND,
+        nIndex: c_int,
+    ) -> DWORD;
+    pub fn GetClassLongW(
+        hWnd: HWND,
+        nIndex: c_int,
+    ) -> DWORD;
+    pub fn SetClassLongA(
+        hWnd: HWND,
+        nIndex: c_int,
+        dwNewLong: LONG,
+    ) -> DWORD;
+    pub fn SetClassLongW(
+        hWnd: HWND,
+        nIndex: c_int,
+        dwNewLong: LONG,
+    ) -> DWORD;
+    #[cfg(target_arch = "x86_64")]
+    pub fn GetClassLongPtrA(
+        hWnd: HWND,
+        nIndex: c_int,
+    ) -> ULONG_PTR;
+    #[cfg(target_arch = "x86_64")]
+    pub fn GetClassLongPtrW(
+        hWnd: HWND,
+        nIndex: c_int,
+    ) -> ULONG_PTR;
+    #[cfg(target_arch = "x86_64")]
+    pub fn SetClassLongPtrA(
+        hWnd: HWND,
+        nIndex: c_int,
+        dwNewLong: LONG_PTR,
+    ) -> ULONG_PTR;
+    #[cfg(target_arch = "x86_64")]
+    pub fn SetClassLongPtrW(
+        hWnd: HWND,
+        nIndex: c_int,
+        dwNewLong: LONG_PTR,
+    ) -> ULONG_PTR;
+}
+#[cfg(target_arch = "x86")]
+pub use self::GetClassLongA as GetClassLongPtrA;
+#[cfg(target_arch = "x86")]
+pub use self::GetClassLongW as GetClassLongPtrW;
+#[cfg(target_arch = "x86")]
+pub use self::SetClassLongA as SetClassLongPtrA;
+#[cfg(target_arch = "x86")]
+pub use self::SetClassLongW as SetClassLongPtrW;
 /*********
 * CUTOFF *
 *********/
@@ -4109,7 +5280,7 @@ pub const DLGC_BUTTON: LRESULT = 0x2000;
 pub const LB_OKAY: LRESULT = 0;
 pub const LB_ERR: LRESULT = -1;
 pub const LB_ERRSPACE: LRESULT = -2;
-pub const LBN_ERRSPACE: WORD = -2i16 as WORD;
+pub const LBN_ERRSPACE: WORD = -2i16 as u16;
 pub const LBN_SELCHANGE: WORD = 1;
 pub const LBN_DBLCLK: WORD = 2;
 pub const LBN_SELCANCEL: WORD = 3;
@@ -4178,7 +5349,7 @@ pub const LBS_STANDARD: DWORD = LBS_NOTIFY | LBS_SORT | WS_VSCROLL | WS_BORDER;
 pub const CB_OKAY: LRESULT = 0;
 pub const CB_ERR: LRESULT = -1;
 pub const CB_ERRSPACE: LRESULT = -2;
-pub const CBN_ERRSPACE: WORD = -1i16 as WORD;
+pub const CBN_ERRSPACE: WORD = -1i16 as u16;
 pub const CBN_SELCHANGE: WORD = 1;
 pub const CBN_DBLCLK: WORD = 2;
 pub const CBN_SETFOCUS: WORD = 3;
@@ -4255,49 +5426,10 @@ pub const GW_OWNER: UINT = 4;
 pub const GW_CHILD: UINT = 5;
 pub const GW_ENABLEDPOPUP: UINT = 6;
 pub const GW_MAX: UINT = 6;
-pub const LSFW_LOCK: UINT = 1;
-pub const LSFW_UNLOCK: UINT = 2;
 pub const MDITILE_VERTICAL: UINT = 0x0000;
 pub const MDITILE_HORIZONTAL: UINT = 0x0001;
 pub const MDITILE_SKIPDISABLED: UINT = 0x0002;
 pub const MDITILE_ZORDER: UINT = 0x0004;
-pub const MB_OK: DWORD = 0x00000000;
-pub const MB_OKCANCEL: DWORD = 0x00000001;
-pub const MB_ABORTRETRYIGNORE: DWORD = 0x00000002;
-pub const MB_YESNOCANCEL: DWORD = 0x00000003;
-pub const MB_YESNO: DWORD = 0x00000004;
-pub const MB_RETRYCANCEL: DWORD = 0x00000005;
-pub const MB_CANCELTRYCONTINUE: DWORD = 0x00000006;
-pub const MB_ICONHAND: DWORD = 0x00000010;
-pub const MB_ICONQUESTION: DWORD = 0x00000020;
-pub const MB_ICONEXCLAMATION: DWORD = 0x00000030;
-pub const MB_ICONASTERISK: DWORD = 0x00000040;
-pub const MB_USERICON: DWORD = 0x00000080;
-pub const MB_ICONWARNING: DWORD = MB_ICONEXCLAMATION;
-pub const MB_ICONERROR: DWORD = MB_ICONHAND;
-pub const MB_ICONINFORMATION: DWORD = MB_ICONASTERISK;
-pub const MB_ICONSTOP: DWORD = MB_ICONHAND;
-pub const MB_DEFBUTTON1: DWORD = 0x00000000;
-pub const MB_DEFBUTTON2: DWORD = 0x00000100;
-pub const MB_DEFBUTTON3: DWORD = 0x00000200;
-pub const MB_DEFBUTTON4: DWORD = 0x00000300;
-pub const MB_APPLMODAL: DWORD = 0x00000000;
-pub const MB_SYSTEMMODAL: DWORD = 0x00001000;
-pub const MB_TASKMODAL: DWORD = 0x00002000;
-pub const MB_HELP: DWORD = 0x00004000;
-pub const MB_NOFOCUS: DWORD = 0x00008000;
-pub const MB_SETFOREGROUND: DWORD = 0x00010000;
-pub const MB_DEFAULT_DESKTOP_ONLY: DWORD = 0x00020000;
-pub const MB_TOPMOST: DWORD = 0x00040000;
-pub const MB_RIGHT: DWORD = 0x00080000;
-pub const MB_RTLREADING: DWORD = 0x00100000;
-pub const MB_SERVICE_NOTIFICATION: DWORD = 0x00200000;
-pub const MB_SERVICE_NOTIFICATION_NT3X: DWORD = 0x00040000;
-pub const MB_TYPEMASK: DWORD = 0x0000000F;
-pub const MB_ICONMASK: DWORD = 0x000000F0;
-pub const MB_DEFMASK: DWORD = 0x00000F00;
-pub const MB_MODEMASK: DWORD = 0x00003000;
-pub const MB_MISCMASK: DWORD = 0x0000C000;
 pub const MF_BITMAP: UINT = 0x00000004;
 pub const MF_CHECKED: UINT = 0x00000008;
 pub const MF_DISABLED: UINT = 0x00000002;
@@ -4395,47 +5527,6 @@ STRUCT!{struct ICONINFO {
 }}
 pub type PICONINFO = *mut ICONINFO;
 //9066
-// Color indexes for use in GetSysColor and SetSysColor
-// 0-18 (after incrementing) are also valid in RegisterClass's WNDCLASS
-pub const COLOR_SCROLLBAR: c_int = 0;
-pub const COLOR_BACKGROUND: c_int = 1;
-pub const COLOR_ACTIVECAPTION: c_int = 2;
-pub const COLOR_INACTIVECAPTION: c_int = 3;
-pub const COLOR_MENU: c_int = 4;
-pub const COLOR_WINDOW: c_int = 5;
-pub const COLOR_WINDOWFRAME: c_int = 6;
-pub const COLOR_MENUTEXT: c_int = 7;
-pub const COLOR_WINDOWTEXT: c_int = 8;
-pub const COLOR_CAPTIONTEXT: c_int = 9;
-pub const COLOR_ACTIVEBORDER: c_int = 10;
-pub const COLOR_INACTIVEBORDER: c_int = 11;
-pub const COLOR_APPWORKSPACE: c_int = 12;
-pub const COLOR_HIGHLIGHT: c_int = 13;
-pub const COLOR_HIGHLIGHTTEXT: c_int = 14;
-pub const COLOR_BTNFACE: c_int = 15;
-pub const COLOR_BTNSHADOW: c_int = 16;
-pub const COLOR_GRAYTEXT: c_int = 17;
-pub const COLOR_BTNTEXT: c_int = 18;
-pub const COLOR_INACTIVECAPTIONTEXT: c_int = 19;
-pub const COLOR_BTNHIGHLIGHT: c_int = 20;
-// Introduced in Windows 95 (winver 0x0400):
-pub const COLOR_3DDKSHADOW: c_int = 21;
-pub const COLOR_3DLIGHT: c_int = 22;
-pub const COLOR_INFOTEXT: c_int = 23;
-pub const COLOR_INFOBK: c_int = 24;
-pub const COLOR_DESKTOP: c_int = COLOR_BACKGROUND;
-pub const COLOR_3DFACE: c_int = COLOR_BTNFACE;
-pub const COLOR_3DSHADOW: c_int = COLOR_BTNSHADOW;
-pub const COLOR_3DHIGHLIGHT: c_int = COLOR_BTNHIGHLIGHT;
-pub const COLOR_3DHILIGHT: c_int = COLOR_BTNHIGHLIGHT;
-pub const COLOR_BTNHILIGHT: c_int = COLOR_BTNHIGHLIGHT;
-// Introduced in Windows 2000 (winver 0x0500)
-pub const COLOR_HOTLIGHT: c_int = 26;
-pub const COLOR_GRADIENTACTIVECAPTION: c_int = 27;
-pub const COLOR_GRADIENTINACTIVECAPTION: c_int = 28;
-// Introduced in Windows XP (winver 0x0501)
-pub const COLOR_MENUHILIGHT: c_int = 29;
-pub const COLOR_MENUBAR: c_int = 30;
 //10069
 pub const IDC_ARROW: LPCWSTR = 32512 as LPCWSTR;
 pub const IDC_IBEAM: LPCWSTR = 32513 as LPCWSTR;
@@ -4949,93 +6040,12 @@ STRUCT!{struct CHANGEFILTERSTRUCT {
     ExtStatus: DWORD,
 }}
 pub type PCHANGEFILTERSTRUCT = *mut CHANGEFILTERSTRUCT;
-STRUCT!{struct DRAWTEXTPARAMS {
-    cbSize: UINT,
-    iTabLength: c_int,
-    iLeftMargin: c_int,
-    iRightMargin: c_int,
-    uiLengthDrawn: UINT,
-}}
-pub type LPDRAWTEXTPARAMS = *mut DRAWTEXTPARAMS;
-STRUCT!{struct MENUITEMINFOA {
-    cbSize: UINT,
-    fMask: UINT,
-    fType: UINT,
-    fState: UINT,
-    wID: UINT,
-    hSubMenu: HMENU,
-    hbmpChecked: HBITMAP,
-    hbmpUnchecked: HBITMAP,
-    dwItemData: ULONG_PTR,
-    dwTypeData: LPSTR,
-    cch: UINT,
-    hbmpItem: HBITMAP,
-}}
-pub type LPMENUITEMINFOA = *mut MENUITEMINFOA;
-pub type LPCMENUITEMINFOA = *const MENUITEMINFOA;
-STRUCT!{struct MENUITEMINFOW {
-    cbSize: UINT,
-    fMask: UINT,
-    fType: UINT,
-    fState: UINT,
-    wID: UINT,
-    hSubMenu: HMENU,
-    hbmpChecked: HBITMAP,
-    hbmpUnchecked: HBITMAP,
-    dwItemData: ULONG_PTR,
-    dwTypeData: LPWSTR,
-    cch: UINT,
-    hbmpItem: HBITMAP,
-}}
-pub type LPMENUITEMINFOW = *mut MENUITEMINFOW;
-pub type LPCMENUITEMINFOW = *const MENUITEMINFOW;
-STRUCT!{struct MSGBOXPARAMSA {
-    cbSize: UINT,
-    hwndOwner: HWND,
-    hInstance: HINSTANCE,
-    lpszText: LPCSTR,
-    lpszCaption: LPCSTR,
-    dwStyle: DWORD,
-    lpszIcon: LPCSTR,
-    dwContextHelpId: DWORD_PTR,
-    lpfnMsgBoxCallback: MSGBOXCALLBACK,
-    dwLanguageId: DWORD,
-}}
-pub type PMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
-pub type LPMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
-STRUCT!{struct MSGBOXPARAMSW {
-    cbSize: UINT,
-    hwndOwner: HWND,
-    hInstance: HINSTANCE,
-    lpszText: LPCWSTR,
-    lpszCaption: LPCWSTR,
-    dwStyle: DWORD,
-    lpszIcon: LPCWSTR,
-    dwContextHelpId: DWORD_PTR,
-    lpfnMsgBoxCallback: MSGBOXCALLBACK,
-    dwLanguageId: DWORD,
-}}
-pub type PMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
-pub type LPMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
-STRUCT!{struct HELPINFO {
-    cbSize: UINT,
-    iContextType: c_int,
-    iCtrlId: c_int,
-    hItemHandle: HANDLE,
-    dwContextId: DWORD,
-    MousePos: POINT,
-}}
-pub type LPHELPINFO = *mut HELPINFO;
 pub const SIF_RANGE: UINT = 0x0001;
 pub const SIF_PAGE: UINT = 0x0002;
 pub const SIF_POS: UINT = 0x0004;
 pub const SIF_DISABLENOSCROLL: UINT = 0x0008;
 pub const SIF_TRACKPOS: UINT = 0x0010;
 pub const SIF_ALL: UINT = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
-pub const SW_SCROLLCHILDREN: UINT = 0x0001;
-pub const SW_INVALIDATE: UINT = 0x0002;
-pub const SW_ERASE: UINT = 0x0004;
-pub const SW_SMOOTHSCROLL: UINT = 0x0010;
 pub const LR_DEFAULTCOLOR: UINT = 0x00000000;
 pub const LR_MONOCHROME: UINT = 0x00000001;
 pub const LR_COLOR: UINT = 0x00000002;
@@ -5053,54 +6063,6 @@ pub const IMAGE_BITMAP: UINT = 0;
 pub const IMAGE_ICON: UINT = 1;
 pub const IMAGE_CURSOR: UINT = 2;
 pub const IMAGE_ENHMETAFILE: UINT = 3;
-pub const DT_TOP: UINT = 0x00000000;
-pub const DT_LEFT: UINT = 0x00000000;
-pub const DT_CENTER: UINT = 0x00000001;
-pub const DT_RIGHT: UINT = 0x00000002;
-pub const DT_VCENTER: UINT = 0x00000004;
-pub const DT_BOTTOM: UINT = 0x00000008;
-pub const DT_WORDBREAK: UINT = 0x00000010;
-pub const DT_SINGLELINE: UINT = 0x00000020;
-pub const DT_EXPANDTABS: UINT = 0x00000040;
-pub const DT_TABSTOP: UINT = 0x00000080;
-pub const DT_NOCLIP: UINT = 0x00000100;
-pub const DT_EXTERNALLEADING: UINT = 0x00000200;
-pub const DT_CALCRECT: UINT = 0x00000400;
-pub const DT_NOPREFIX: UINT = 0x00000800;
-pub const DT_INTERNAL: UINT = 0x00001000;
-pub const DT_EDITCONTROL: UINT = 0x00002000;
-pub const DT_PATH_ELLIPSIS: UINT = 0x00004000;
-pub const DT_END_ELLIPSIS: UINT = 0x00008000;
-pub const DT_MODIFYSTRING: UINT = 0x00010000;
-pub const DT_RTLREADING: UINT = 0x00020000;
-pub const DT_WORD_ELLIPSIS: UINT = 0x00040000;
-pub const DT_NOFULLWIDTHCHARBREAK: UINT = 0x00080000;
-pub const DT_HIDEPREFIX: UINT = 0x00100000;
-pub const DT_PREFIXONLY: UINT = 0x00200000;
-//RedrawWindow() flags
-pub const RDW_INVALIDATE: UINT = 0x0001;
-pub const RDW_INTERNALPAINT: UINT = 0x0002;
-pub const RDW_ERASE: UINT = 0x0004;
-pub const RDW_VALIDATE: UINT = 0x0008;
-pub const RDW_NOINTERNALPAINT: UINT = 0x0010;
-pub const RDW_NOERASE: UINT = 0x0020;
-pub const RDW_NOCHILDREN: UINT = 0x0040;
-pub const RDW_ALLCHILDREN: UINT = 0x0080;
-pub const RDW_UPDATENOW: UINT = 0x0100;
-pub const RDW_ERASENOW: UINT = 0x0200;
-pub const RDW_FRAME: UINT = 0x0400;
-pub const RDW_NOFRAME: UINT = 0x0800;
-/* Image type */
-pub const DST_COMPLEX: UINT = 0x0000;
-pub const DST_TEXT: UINT = 0x0001;
-pub const DST_PREFIXTEXT: UINT = 0x0002;
-pub const DST_ICON: UINT = 0x0003;
-pub const DST_BITMAP: UINT = 0x0004;
-pub const DI_MASK: UINT = 0x0001;
-pub const DI_IMAGE: UINT = 0x0002;
-pub const DI_NORMAL: UINT = 0x0003;
-pub const DI_COMPAT: UINT = 0x0004;
-pub const DI_DEFAULTSIZE: UINT = 0x0008;
 // if WINVER >= 0x0601
 // GetSystemMetrics(SM_DIGITIZER) flag values
 pub const NID_INTEGRATED_TOUCH: UINT = 0x00000001;
@@ -5134,27 +6096,6 @@ pub const SC_MONITORPOWER: WPARAM = 0xF170;
 pub const SC_CONTEXTHELP: WPARAM = 0xF180;
 pub const SC_SEPARATOR: WPARAM = 0xF00F;
 // endif WINVER >= 0x0400
-// Flags for TrackPopupMenu
-pub const TPM_LEFTBUTTON: UINT = 0x0000;
-pub const TPM_RIGHTBUTTON: UINT = 0x0002;
-pub const TPM_LEFTALIGN: UINT = 0x0000;
-pub const TPM_CENTERALIGN: UINT = 0x0004;
-pub const TPM_RIGHTALIGN: UINT = 0x0008;
-pub const TPM_TOPALIGN: UINT = 0x0000;
-pub const TPM_VCENTERALIGN: UINT = 0x0010;
-pub const TPM_BOTTOMALIGN: UINT = 0x0020;
-pub const TPM_HORIZONTAL: UINT = 0x0000;
-pub const TPM_VERTICAL: UINT = 0x0040;
-pub const TPM_NONOTIFY: UINT = 0x0080;
-pub const TPM_RETURNCMD: UINT = 0x0100;
-pub const TPM_RECURSE: UINT = 0x0001;
-pub const TPM_HORPOSANIMATION: UINT = 0x0400;
-pub const TPM_HORNEGANIMATION: UINT = 0x0800;
-pub const TPM_VERPOSANIMATION: UINT = 0x1000;
-pub const TPM_VERNEGANIMATION: UINT = 0x2000;
-pub const TPM_NOANIMATION: UINT = 0x4000;
-pub const TPM_LAYOUTRTL: UINT = 0x8000;
-pub const TPM_WORKAREA: UINT = 0x10000;
 // ANIMATIONINFO and related fields
 STRUCT!{struct ANIMATIONINFO {
     cbSize: UINT,
@@ -5164,61 +6105,7 @@ pub type LPANIMATIONINFO = *mut ANIMATIONINFO;
 pub const SPIF_UPDATEINIFILE: UINT = 0x0001;
 pub const SPIF_SENDWININICHANGE: UINT = 0x0002;
 pub const SPIF_SENDCHANGE: UINT = SPIF_SENDWININICHANGE;
-pub const MIIM_BITMAP: UINT = 0x00000080;
-pub const MIIM_CHECKMARKS: UINT = 0x00000008;
-pub const MIIM_DATA: UINT = 0x00000020;
-pub const MIIM_FTYPE: UINT = 0x00000100;
-pub const MIIM_ID: UINT = 0x00000002;
-pub const MIIM_STATE: UINT = 0x00000001;
-pub const MIIM_STRING: UINT = 0x00000040;
-pub const MIIM_SUBMENU: UINT = 0x00000004;
-pub const MIIM_TYPE: UINT = 0x00000010;
-pub const HBMMENU_MBAR_CLOSE: HBITMAP = 5 as HBITMAP;
-pub const HBMMENU_MBAR_CLOSE_D: HBITMAP = 6 as HBITMAP;
-pub const HBMMENU_MBAR_MINIMIZE: HBITMAP = 3 as HBITMAP;
-pub const HBMMENU_MBAR_MINIMIZE_D: HBITMAP = 7 as HBITMAP;
-pub const HBMMENU_MBAR_RESTORE: HBITMAP = 2 as HBITMAP;
-pub const HBMMENU_POPUP_CLOSE: HBITMAP = 8 as HBITMAP;
-pub const HBMMENU_POPUP_MAXIMIZE: HBITMAP = 10 as HBITMAP;
-pub const HBMMENU_POPUP_MINIMIZE: HBITMAP = 11 as HBITMAP;
-pub const HBMMENU_POPUP_RESTORE: HBITMAP = 9 as HBITMAP;
-pub const HBMMENU_SYSTEM: HBITMAP = 1 as HBITMAP;
-pub const MIM_MAXHEIGHT: UINT = 0x00000001;
-pub const MIM_BACKGROUND: UINT = 0x00000002;
-pub const MIM_HELPID: UINT = 0x00000004;
-pub const MIM_MENUDATA: UINT = 0x00000008;
-pub const MIM_STYLE: UINT = 0x00000010;
-pub const MIM_APPLYTOSUBMENUS: UINT = 0x80000000;
-pub const MNS_CHECKORBMP: UINT = 0x04000000;
-pub const MNS_NOTIFYBYPOS: UINT = 0x08000000;
-pub const MNS_AUTODISMISS: UINT = 0x10000000;
-pub const MNS_DRAGDROP: UINT = 0x20000000;
-pub const MNS_MODELESS: UINT = 0x40000000;
-pub const MNS_NOCHECK: UINT = 0x80000000;
-STRUCT!{struct MENUINFO {
-    cbSize: DWORD,
-    fMask: DWORD,
-    dwStyle: DWORD,
-    cyMax: UINT,
-    hbrBack: HBRUSH,
-    dwContextHelpID: DWORD,
-    dwMenuData: ULONG_PTR,
-}}
-pub type LPMENUINFO = *mut MENUINFO;
-pub type LPCMENUINFO = *const MENUINFO;
 extern "system" {
-    pub fn MessageBoxA(
-        hWnd: HWND,
-        lpText: LPCSTR,
-        lpCaption: LPCSTR,
-        uType: UINT,
-    ) -> c_int;
-    pub fn MessageBoxW(
-        hWnd: HWND,
-        lpText: LPCWSTR,
-        lpCaption: LPCWSTR,
-        uType: UINT,
-    ) -> c_int;
     pub fn LoadIconA(
         hInstance: HINSTANCE,
         lpIconName: LPCSTR,
@@ -5227,10 +6114,4 @@ extern "system" {
         hInstance: HINSTANCE,
         lpIconName: LPCWSTR,
     ) -> HICON;
-    pub fn SetActiveWindow(
-        hWnd: HWND,
-    ) -> HWND;
-    pub fn SetForegroundWindow(
-        hWnd: HWND,
-    ) -> BOOL;
 }

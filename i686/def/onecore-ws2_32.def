@@ -1,0 +1,181 @@
+LIBRARY WS2_32.dll
+EXPORTS
+__WSAFDIsSet@8 @151
+accept@12 @1
+bind@12 @2
+closesocket@4 @3
+connect@12 @4
+gethostbyaddr@12 @51
+gethostbyname@4 @52
+gethostname@8 @57
+getpeername@12 @5
+getprotobyname@4 @53
+getprotobynumber@4 @54
+getservbyname@8 @55
+getservbyport@8 @56
+getsockname@12 @6
+getsockopt@20 @7
+htonl@4 @8
+htons@4 @9
+inet_addr@4 @11
+inet_ntoa@4 @12
+ioctlsocket@12 @10
+listen@8 @13
+ntohl@4 @14
+ntohs@4 @15
+recv@16 @16
+recvfrom@24 @17
+select@20 @18
+send@16 @19
+sendto@24 @20
+setsockopt@20 @21
+shutdown@8 @22
+socket@12 @23
+WEP@0 @500
+WSAAsyncGetHostByAddr@28 @102
+WSAAsyncGetHostByName@20 @103
+WSAAsyncGetProtoByName@20 @105
+WSAAsyncGetProtoByNumber@20 @104
+WSAAsyncGetServByName@24 @107
+WSAAsyncGetServByPort@24 @106
+WSAAsyncSelect@16 @101
+WSACancelAsyncRequest@4 @108
+WSACancelBlockingCall@0 @113
+WSACleanup@0 @116
+WSAGetLastError@0 @111
+WSAIsBlocking@0 @114
+WSASetBlockingHook@4 @109
+WSASetLastError@4 @112
+WSAStartup@8 @115
+WSAUnhookBlockingHook@0 @110
+FreeAddrInfoEx@4
+FreeAddrInfoExW@4
+FreeAddrInfoW@4
+GetAddrInfoExA@40
+GetAddrInfoExCancel@4
+GetAddrInfoExOverlappedResult@4
+GetAddrInfoExW@40
+GetAddrInfoW@16
+GetHostNameW@8
+GetNameInfoW@28
+InetNtopW@16
+InetPtonW@12
+SetAddrInfoExA@48
+SetAddrInfoExW@48
+WPUCompleteOverlappedRequest@20
+WPUGetProviderPathEx@20
+WSAAccept@20
+WSAAddressToStringA@20
+WSAAddressToStringW@20
+WSAAdvertiseProvider@8
+WSACloseEvent@4
+WSAConnect@28
+WSAConnectByList@32
+WSAConnectByNameA@36
+WSAConnectByNameW@36
+WSACreateEvent@0
+WSADuplicateSocketA@12
+WSADuplicateSocketW@12
+WSAEnumNameSpaceProvidersA@8
+WSAEnumNameSpaceProvidersExA@8
+WSAEnumNameSpaceProvidersExW@8
+WSAEnumNameSpaceProvidersW@8
+WSAEnumNetworkEvents@12
+WSAEnumProtocolsA@12
+WSAEnumProtocolsW@12
+WSAEventSelect@12
+WSAGetOverlappedResult@20
+WSAGetQOSByName@12
+WSAGetServiceClassInfoA@16
+WSAGetServiceClassInfoW@16
+WSAGetServiceClassNameByClassIdA@12
+WSAGetServiceClassNameByClassIdW@12
+WSAHtonl@12
+WSAHtons@12
+WSAInstallServiceClassA@4
+WSAInstallServiceClassW@4
+WSAIoctl@36
+WSAJoinLeaf@32
+WSALookupServiceBeginA@12
+WSALookupServiceBeginW@12
+WSALookupServiceEnd@4
+WSALookupServiceNextA@16
+WSALookupServiceNextW@16
+WSANSPIoctl@32
+WSANtohl@12
+WSANtohs@12
+WSAPoll@12
+WSAProviderCompleteAsyncCall@8
+WSAProviderConfigChange@12
+WSARecv@28
+WSARecvDisconnect@8
+WSARecvFrom@36
+WSARemoveServiceClass@4
+WSAResetEvent@4
+WSASend@28
+WSASendDisconnect@8
+WSASendMsg@24
+WSASendTo@36
+WSASetEvent@4
+WSASetServiceA@12
+WSASetServiceW@12
+WSASocketA@24
+WSASocketW@24
+WSAStringToAddressA@20
+WSAStringToAddressW@20
+WSAUnadvertiseProvider@4
+WSAWaitForMultipleEvents@20
+WSCDeinstallProvider@8
+WSCDeinstallProviderEx@12
+WSCEnableNSProvider@8
+WSCEnumProtocols@16
+WSCEnumProtocolsEx@20
+WSCGetApplicationCategory@24
+WSCGetApplicationCategoryEx@28
+WSCGetProviderInfo@24
+WSCGetProviderPath@16
+WSCInstallNameSpace@20
+WSCInstallNameSpaceEx@24
+WSCInstallNameSpaceEx2@28
+WSCInstallProvider@20
+WSCInstallProviderAndChains@32
+WSCInstallProviderEx@28
+WSCSetApplicationCategory@28
+WSCSetApplicationCategoryEx@32
+WSCSetProviderInfo@24
+WSCUnInstallNameSpace@4
+WSCUnInstallNameSpaceEx2@8
+WSCUpdateProvider@20
+WSCUpdateProviderEx@24
+WSCWriteNameSpaceOrder@8
+WSCWriteProviderOrder@8
+WSCWriteProviderOrderEx@12
+WahCloseApcHelper@4
+WahCloseHandleHelper@4
+WahCloseNotificationHandleHelper@4
+WahCloseSocketHandle@8
+WahCloseThread@8
+WahCompleteRequest@20
+WahCreateHandleContextTable@4
+WahCreateNotificationHandle@8
+WahCreateSocketHandle@8
+WahDestroyHandleContextTable@4
+WahDisableNonIFSHandleSupport@0
+WahEnableNonIFSHandleSupport@0
+WahEnumerateHandleContexts@12
+WahInsertHandleContext@8
+WahNotifyAllProcesses@4
+WahOpenApcHelper@4
+WahOpenCurrentThread@8
+WahOpenHandleHelper@4
+WahOpenNotificationHandleHelper@4
+WahQueueUserApc@16
+WahReferenceContextByHandle@8
+WahRemoveHandleContext@8
+WahWaitForNotification@16
+WahWriteLSPEvent@8
+freeaddrinfo@4
+getaddrinfo@16
+getnameinfo@28
+inet_ntop@16
+inet_pton@12

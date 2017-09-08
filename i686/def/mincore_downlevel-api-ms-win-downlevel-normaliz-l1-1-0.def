@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-downlevel-normaliz-l1-1-0.dll
+EXPORTS
+IdnToAscii@20
+IdnToUnicode@20

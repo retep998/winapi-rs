@@ -4,22 +4,78 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
-use ctypes::c_int;
-use shared::minwindef::DWORD;
-
+use ctypes::{c_int, c_void};
+use shared::guiddef::REFIID;
+use shared::minwindef::{BOOL, DWORD, UINT};
+use shared::windef::HWND;
+use um::minwinbase::SECURITY_ATTRIBUTES;
+use um::shtypes::{PCIDLIST_ABSOLUTE, PCUITEMID_CHILD_ARRAY, PIDLIST_ABSOLUTE, REFKNOWNFOLDERID};
+use um::winnt::{HANDLE, HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PCWSTR, PWSTR};
 pub const IDO_SHGIOI_SHARE: c_int = 0x0FFFFFFF;
 pub const IDO_SHGIOI_LINK: c_int = 0x0FFFFFFE;
-// Yes, these values are supposed to overflow. Blame Microsoft.
-pub const IDO_SHGIOI_SLOWFILE: c_int = 0xFFFFFFFDu32 as c_int;
-pub const IDO_SHGIOI_DEFAULT: c_int = 0xFFFFFFFCu32 as c_int;
+// Yes, these values are supposed to be 9 digits
+pub const IDO_SHGIOI_SLOWFILE: c_int = 0x0FFFFFFFD;
+pub const IDO_SHGIOI_DEFAULT: c_int = 0x0FFFFFFFC;
+extern "system" {
+    pub fn SHGetIconOverlayIndexA(
+        pszIconPath: LPCSTR,
+        iIconIndex: c_int,
+    ) -> c_int;
+    pub fn SHGetIconOverlayIndexW(
+        pszIconPath: LPCWSTR,
+        iIconIndex: c_int,
+    ) -> c_int;
+}
 pub const GPFIDL_DEFAULT: GPFIDL_FLAGS = 0x0000;
 pub const GPFIDL_ALTNAME: GPFIDL_FLAGS = 0x0001;
 pub const GPFIDL_UNCPRINTER: GPFIDL_FLAGS = 0x0002;
 pub type GPFIDL_FLAGS = c_int;
+extern "system" {
+    pub fn SHGetPathFromIDListEx(
+        pidl: PCIDLIST_ABSOLUTE,
+        pszPath: PWSTR,
+        cchPath: DWORD,
+        uOpts: GPFIDL_FLAGS,
+    ) -> BOOL;
+    pub fn SHGetPathFromIDListA(
+        pidl: PCIDLIST_ABSOLUTE,
+        pszPath: LPSTR,
+    ) -> BOOL;
+    pub fn SHGetPathFromIDListW(
+        pidl: PCIDLIST_ABSOLUTE,
+        pszPath: LPWSTR,
+    ) -> BOOL;
+    pub fn SHCreateDirectory(
+        hwnd: HWND,
+        pszPath: PCWSTR,
+    ) -> c_int;
+    pub fn SHCreateDirectoryExA(
+        hwnd: HWND,
+        pszPath: LPCSTR,
+        psa: *const SECURITY_ATTRIBUTES,
+    ) -> c_int;
+    pub fn SHCreateDirectoryExW(
+        hwnd: HWND,
+        pszPath: LPCWSTR,
+        psa: *const SECURITY_ATTRIBUTES,
+    ) -> c_int;
+}
 pub const OFASI_EDIT: DWORD = 0x0001;
 pub const OFASI_OPENDESKTOP: DWORD = 0x0002;
-// 1204
+extern "system" {
+    pub fn SHOpenFolderAndSelectItems(
+        pidlFolder: PCIDLIST_ABSOLUTE,
+        cidl: UINT,
+        apidl: PCUITEMID_CHILD_ARRAY,
+        dwFlags: DWORD,
+    ) -> HRESULT;
+    //pub fn SHCreateShellItem(
+    //    pidlParent: PCIDLIST_ABSOLUTE,
+    //    psfParent: *mut IShellFolder,
+    //    pidl: PCUITEMID_CHILD,
+    //    ppsi: *mut *mut IShellItem,
+    //) -> HRESULT;
+}
 pub const CSIDL_DESKTOP: c_int = 0x0000;
 pub const CSIDL_INTERNET: c_int = 0x0001;
 pub const CSIDL_PROGRAMS: c_int = 0x0002;
@@ -83,11 +139,86 @@ pub const CSIDL_FLAG_DONT_UNEXPAND: c_int = 0x2000;
 pub const CSIDL_FLAG_NO_ALIAS: c_int = 0x1000;
 pub const CSIDL_FLAG_PER_USER_INIT: c_int = 0x0800;
 pub const CSIDL_FLAG_MASK: c_int = 0xff00;
-//1312
+extern "system" {
+    pub fn SHGetSpecialFolderLocation(
+        hwnd: HWND,
+        csidl: c_int,
+        ppidl: *mut PIDLIST_ABSOLUTE,
+    ) -> HRESULT;
+    pub fn SHCloneSpecialIDList(
+        hwnd: HWND,
+        csidl: c_int,
+        fCreate: BOOL,
+    ) -> PIDLIST_ABSOLUTE;
+    pub fn SHGetSpecialFolderPathA(
+        hwnd: HWND,
+        pszPath: LPSTR,
+        csidl: c_int,
+        fCreate: BOOL,
+    ) -> BOOL;
+    pub fn SHGetSpecialFolderPathW(
+        hwnd: HWND,
+        pszPath: LPWSTR,
+        csidl: c_int,
+        fCreate: BOOL,
+    ) -> BOOL;
+    pub fn SHFlushSFCache();
+}
 ENUM!{enum SHGFP_TYPE {
     SHGFP_TYPE_CURRENT = 0,
     SHGFP_TYPE_DEFAULT = 1,
 }}
+extern "system" {
+    pub fn SHGetFolderPathA(
+        hwnd: HWND,
+        csidl: c_int,
+        hToken: HANDLE,
+        dwFlags: DWORD,
+        pszPath: LPSTR,
+    ) -> HRESULT;
+    pub fn SHGetFolderPathW(
+        hwnd: HWND,
+        csidl: c_int,
+        hToken: HANDLE,
+        dwFlags: DWORD,
+        pszPath: LPWSTR,
+    ) -> HRESULT;
+    pub fn SHGetFolderLocation(
+        hwnd: HWND,
+        csidl: c_int,
+        hToken: HANDLE,
+        dwFlags: DWORD,
+        ppidl: *mut PIDLIST_ABSOLUTE,
+    ) -> HRESULT;
+    pub fn SHSetFolderPathA(
+        csidl: c_int,
+        hToken: HANDLE,
+        dwFlags: DWORD,
+        pszPath: LPCSTR,
+    ) -> HRESULT;
+    pub fn SHSetFolderPathW(
+        csidl: c_int,
+        hToken: HANDLE,
+        dwFlags: DWORD,
+        pszPath: LPCWSTR,
+    ) -> HRESULT;
+    pub fn SHGetFolderPathAndSubDirA(
+        hwnd: HWND,
+        csidl: c_int,
+        hToken: HANDLE,
+        dwFlags: DWORD,
+        pszSubDir: LPCSTR,
+        pszPath: LPSTR,
+    ) -> HRESULT;
+    pub fn SHGetFolderPathAndSubDirW(
+        hwnd: HWND,
+        csidl: c_int,
+        hToken: HANDLE,
+        dwFlags: DWORD,
+        pszSubDir: LPCWSTR,
+        pszPath: LPWSTR,
+    ) -> HRESULT;
+}
 ENUM!{enum KNOWN_FOLDER_FLAG {
     KF_FLAG_DEFAULT = 0x00000000,
     KF_FLAG_NO_APPCONTAINER_REDIRECTION = 0x00010000,
@@ -101,3 +232,30 @@ ENUM!{enum KNOWN_FOLDER_FLAG {
     KF_FLAG_SIMPLE_IDLIST = 0x00000100,
     KF_FLAG_ALIAS_ONLY = 0x80000000,
 }}
+extern "system" {
+    pub fn SHGetKnownFolderIDList(
+        rfid: REFKNOWNFOLDERID,
+        dwFlags: DWORD,
+        hToken: HANDLE,
+        ppidl: *mut PIDLIST_ABSOLUTE,
+    ) -> HRESULT;
+    pub fn SHSetKnownFolderPath(
+        rfid: REFKNOWNFOLDERID,
+        dwFlags: DWORD,
+        hToken: HANDLE,
+        pszPath: PCWSTR,
+    ) -> HRESULT;
+    pub fn SHGetKnownFolderPath(
+        rfid: REFKNOWNFOLDERID,
+        dwFlags: DWORD,
+        hToken: HANDLE,
+        pszPath: *mut PWSTR,
+    ) -> HRESULT;
+    pub fn SHGetKnownFolderItem(
+        rfid: REFKNOWNFOLDERID,
+        flags: KNOWN_FOLDER_FLAG,
+        hToken: HANDLE,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+}

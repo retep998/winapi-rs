@@ -16,7 +16,7 @@ use shared::wtypesbase::{
 use um::objidl::SOLE_AUTHENTICATION_SERVICE;
 use um::objidlbase::{APTTYPE, APTTYPEQUALIFIER, LPMALLOC, LPSTREAM};
 use um::unknwnbase::LPUNKNOWN;
-use um::winnt::{HRESULT, LONG, PSECURITY_DESCRIPTOR, VOID};
+use um::winnt::{HRESULT, LONG, PSECURITY_DESCRIPTOR};
 pub const CLSCTX_INPROC: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER;
 pub const CLSCTX_ALL: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER | CLSCTX_LOCAL_SERVER
     | CLSCTX_REMOTE_SERVER;
@@ -47,7 +47,7 @@ extern "system" {
         pstm: LPSTREAM,
         phglobal: *mut HGLOBAL,
     ) -> HRESULT;
-    pub fn CoUninitialize() -> VOID;
+    pub fn CoUninitialize() -> ();
     pub fn CoGetCurrentProcess() -> DWORD;
     pub fn CoInitializeEx(
         pvReserved: LPVOID,
@@ -248,5 +248,5 @@ extern "system" {
     ) -> LPVOID;
     pub fn CoTaskMemFree(
         pv: LPVOID,
-    ) -> VOID;
+    ) -> ();
 }

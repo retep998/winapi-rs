@@ -6,9 +6,87 @@
 // except according to those terms
 // This file contains structures, function prototypes, and definitions
 // for the NetUser, NetUserModals, NetGroup, NetAccess, and NetLogon API.
+use shared::basetsd::PDWORD_PTR;
 use shared::lmcons::{ENCRYPTED_PWLEN, NET_API_STATUS, PARMNUM_BASE_INFOLEVEL, PWLEN};
-use shared::minwindef::{BOOL, BYTE, DWORD, FILETIME, LPBYTE, PBYTE, ULONG};
-use um::winnt::{BOOLEAN, LPWSTR, PSID, SID_NAME_USE};
+use shared::minwindef::{BOOL, BYTE, DWORD, FILETIME, LPBYTE, LPDWORD, LPVOID, PBYTE, ULONG};
+use um::winnt::{BOOLEAN, LONG, LPCWSTR, LPWSTR, PSID, PVOID, PZPWSTR, SID_NAME_USE};
+extern "system" {
+    pub fn NetUserAdd(
+        servername: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        parm_err: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetUserEnum(
+        servername: LPCWSTR,
+        level: DWORD,
+        filter: DWORD,
+        bufptr: *mut LPBYTE,
+        prefmaxlen: DWORD,
+        entriesread: LPDWORD,
+        totalentries: LPDWORD,
+        resumehandle: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetUserGetInfo(
+        servername: LPCWSTR,
+        username: LPCWSTR,
+        level: DWORD,
+        bufptr: *mut LPBYTE,
+    ) -> NET_API_STATUS;
+    pub fn NetUserSetInfo(
+        servername: LPCWSTR,
+        username: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        parm_err: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetUserDel(
+        servername: LPCWSTR,
+        username: LPCWSTR,
+    ) -> NET_API_STATUS;
+    pub fn NetUserGetGroups(
+        servername: LPCWSTR,
+        username: LPCWSTR,
+        level: DWORD,
+        bufptr: *mut LPBYTE,
+        prefmaxlen: DWORD,
+        entriesread: LPDWORD,
+        totalentries: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetUserSetGroups(
+        servername: LPCWSTR,
+        username: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        num_entries: DWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetUserGetLocalGroups(
+        servername: LPCWSTR,
+        level: DWORD,
+        flags: DWORD,
+        bufptr: *mut LPBYTE,
+        prefmaxlen: DWORD,
+        entriesread: LPDWORD,
+        totalentries: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetUserModalsGet(
+        servername: LPCWSTR,
+        level: DWORD,
+        bufptr: *mut LPBYTE,
+    ) -> NET_API_STATUS;
+    pub fn NetUserModalsSet(
+        servername: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        parm_err: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetUserChangePassword(
+        domainname: LPCWSTR,
+        username: LPCWSTR,
+        oldpassword: LPCWSTR,
+        newpassword: LPCWSTR,
+    ) -> NET_API_STATUS;
+}
 STRUCT!{struct USER_INFO_0 {
     usri0_name: LPWSTR,
 }}
@@ -492,9 +570,10 @@ pub const USER_PRIMARY_GROUP_INFOLEVEL: DWORD =
     PARMNUM_BASE_INFOLEVEL + USER_PRIMARY_GROUP_PARMNUM;
 pub const USER_HOME_DIR_DRIVE_INFOLEVEL: DWORD =
     PARMNUM_BASE_INFOLEVEL + USER_HOME_DIR_DRIVE_PARMNUM;
-pub const TIMEQ_FOREVER: DWORD = -1i32 as DWORD;
-pub const USER_MAXSTORAGE_UNLIMITED: DWORD = -1i32 as DWORD;
-pub const USER_NO_LOGOFF: DWORD = -1i32 as DWORD;
+pub const NULL_USERSETINFO_PASSWD: &'static str = "              ";
+pub const TIMEQ_FOREVER: DWORD = -1i32 as u32;
+pub const USER_MAXSTORAGE_UNLIMITED: DWORD = -1i32 as u32;
+pub const USER_NO_LOGOFF: DWORD = -1i32 as u32;
 pub const UNITS_PER_DAY: DWORD = 24;
 pub const UNITS_PER_WEEK: DWORD = UNITS_PER_DAY * 7;
 pub const USER_PRIV_MASK: DWORD = 0x3;
@@ -541,6 +620,67 @@ pub const MODALS_PRIMARY_INFOLEVEL: DWORD = PARMNUM_BASE_INFOLEVEL + MODALS_PRIM
 pub const MODALS_DOMAIN_NAME_INFOLEVEL: DWORD =
     PARMNUM_BASE_INFOLEVEL + MODALS_DOMAIN_NAME_PARMNUM;
 pub const MODALS_DOMAIN_ID_INFOLEVEL: DWORD = PARMNUM_BASE_INFOLEVEL + MODALS_DOMAIN_ID_PARMNUM;
+extern "system" {
+    pub fn NetGroupAdd(
+        servername: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        parm_err: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetGroupAddUser(
+        servername: LPCWSTR,
+        GroupName: LPCWSTR,
+        username: LPCWSTR,
+    ) -> NET_API_STATUS;
+    pub fn NetGroupEnum(
+        servername: LPCWSTR,
+        level: DWORD,
+        bufptr: *mut LPBYTE,
+        prefmaxlen: DWORD,
+        entriesread: LPDWORD,
+        totalentries: LPDWORD,
+        resume_handle: PDWORD_PTR,
+    ) -> NET_API_STATUS;
+    pub fn NetGroupGetInfo(
+        servername: LPCWSTR,
+        groupname: LPCWSTR,
+        level: DWORD,
+        bufptr: *mut LPBYTE,
+    ) -> NET_API_STATUS;
+    pub fn NetGroupSetInfo(
+        servername: LPCWSTR,
+        groupname: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        parm_err: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetGroupDel(
+        servername: LPCWSTR,
+        groupname: LPCWSTR,
+    ) -> NET_API_STATUS;
+    pub fn NetGroupDelUser(
+        servername: LPCWSTR,
+        GroupName: LPCWSTR,
+        Username: LPCWSTR,
+    ) -> NET_API_STATUS;
+    pub fn NetGroupGetUsers(
+        servername: LPCWSTR,
+        groupname: LPCWSTR,
+        level: DWORD,
+        bufptr: *mut LPBYTE,
+        prefmaxlen: DWORD,
+        entriesread: LPDWORD,
+        totalentries: LPDWORD,
+        ResumeHandle: PDWORD_PTR,
+    ) -> NET_API_STATUS;
+    pub fn NetGroupSetUsers(
+        servername: LPCWSTR,
+        groupname: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        totalentries: DWORD,
+    ) -> NET_API_STATUS;
+}
 STRUCT!{struct GROUP_INFO_0 {
     grpi0_name: LPWSTR,
 }}
@@ -600,6 +740,81 @@ pub const GROUP_ALL_INFOLEVEL: DWORD = PARMNUM_BASE_INFOLEVEL + GROUP_ALL_PARMNU
 pub const GROUP_NAME_INFOLEVEL: DWORD = PARMNUM_BASE_INFOLEVEL + GROUP_NAME_PARMNUM;
 pub const GROUP_COMMENT_INFOLEVEL: DWORD = PARMNUM_BASE_INFOLEVEL + GROUP_COMMENT_PARMNUM;
 pub const GROUP_ATTRIBUTES_INFOLEVEL: DWORD = PARMNUM_BASE_INFOLEVEL + GROUP_ATTRIBUTES_PARMNUM;
+extern "system" {
+    pub fn NetLocalGroupAdd(
+        servername: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        parm_err: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetLocalGroupAddMember(
+        servername: LPCWSTR,
+        groupname: LPCWSTR,
+        membersid: PSID,
+    ) -> NET_API_STATUS;
+    pub fn NetLocalGroupEnum(
+        servername: LPCWSTR,
+        level: DWORD,
+        bufptr: *mut LPBYTE,
+        prefmaxlen: DWORD,
+        entriesread: LPDWORD,
+        totalentries: LPDWORD,
+        resumehandle: PDWORD_PTR,
+    ) -> NET_API_STATUS;
+    pub fn NetLocalGroupGetInfo(
+        servername: LPCWSTR,
+        groupname: LPCWSTR,
+        level: DWORD,
+        bufptr: *mut LPBYTE,
+    ) -> NET_API_STATUS;
+    pub fn NetLocalGroupSetInfo(
+        servername: LPCWSTR,
+        groupname: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        parm_err: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetLocalGroupDel(
+        servername: LPCWSTR,
+        groupname: LPCWSTR,
+    ) -> NET_API_STATUS;
+    pub fn NetLocalGroupDelMember(
+        servername: LPCWSTR,
+        groupname: LPCWSTR,
+        membersid: PSID,
+    ) -> NET_API_STATUS;
+    pub fn NetLocalGroupGetMembers(
+        servername: LPCWSTR,
+        localgroupname: LPCWSTR,
+        level: DWORD,
+        bufptr: *mut LPBYTE,
+        prefmaxlen: DWORD,
+        entriesread: LPDWORD,
+        totalentries: LPDWORD,
+        resumehandle: PDWORD_PTR,
+    ) -> NET_API_STATUS;
+    pub fn NetLocalGroupSetMembers(
+        servername: LPCWSTR,
+        groupname: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        totalentries: DWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetLocalGroupAddMembers(
+        servername: LPCWSTR,
+        groupname: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        totalentries: DWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetLocalGroupDelMembers(
+        servername: LPCWSTR,
+        groupname: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        totalentries: DWORD,
+    ) -> NET_API_STATUS;
+}
 STRUCT!{struct LOCALGROUP_INFO_0 {
     lgrpi0_name: LPWSTR,
 }}
@@ -647,6 +862,23 @@ pub type PLOCALGROUP_USERS_INFO_0 = *mut LOCALGROUP_USERS_INFO_0;
 pub type LPLOCALGROUP_USERS_INFO_0 = *mut LOCALGROUP_USERS_INFO_0;
 pub const LOCALGROUP_NAME_PARMNUM: DWORD = 1;
 pub const LOCALGROUP_COMMENT_PARMNUM: DWORD = 2;
+extern "system" {
+    pub fn NetQueryDisplayInformation(
+        ServerName: LPCWSTR,
+        Level: DWORD,
+        Index: DWORD,
+        EntriesRequested: DWORD,
+        PreferredMaximumLength: DWORD,
+        ReturnedEntryCount: LPDWORD,
+        SortedBuffer: *mut PVOID,
+    ) -> NET_API_STATUS;
+    pub fn NetGetDisplayInformationIndex(
+        ServerName: LPCWSTR,
+        Level: DWORD,
+        Prefix: LPCWSTR,
+        Index: LPDWORD,
+    ) -> NET_API_STATUS;
+}
 STRUCT!{struct NET_DISPLAY_USER {
     usri1_name: LPWSTR,
     usri1_comment: LPWSTR,
@@ -672,6 +904,48 @@ STRUCT!{struct NET_DISPLAY_GROUP {
     grpi3_next_index: DWORD,
 }}
 pub type PNET_DISPLAY_GROUP = *mut NET_DISPLAY_GROUP;
+extern "system" {
+    pub fn NetAccessAdd(
+        servername: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        parm_err: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetAccessEnum(
+        servername: LPCWSTR,
+        BasePath: LPCWSTR,
+        Recursive: DWORD,
+        level: DWORD,
+        bufptr: *mut LPBYTE,
+        prefmaxlen: DWORD,
+        entriesread: LPDWORD,
+        totalentries: LPDWORD,
+        resume_handle: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetAccessGetInfo(
+        servername: LPCWSTR,
+        resource: LPCWSTR,
+        level: DWORD,
+        bufptr: *mut LPBYTE,
+    ) -> NET_API_STATUS;
+    pub fn NetAccessSetInfo(
+        servername: LPCWSTR,
+        resource: LPCWSTR,
+        level: DWORD,
+        buf: LPBYTE,
+        parm_err: LPDWORD,
+    ) -> NET_API_STATUS;
+    pub fn NetAccessDel(
+        servername: LPCWSTR,
+        resource: LPCWSTR,
+    ) -> NET_API_STATUS;
+    pub fn NetAccessGetUserPerms(
+        servername: LPCWSTR,
+        UGname: LPCWSTR,
+        resource: LPCWSTR,
+        Perms: LPDWORD,
+    ) -> NET_API_STATUS;
+}
 STRUCT!{struct ACCESS_INFO_0 {
     acc0_resource_name: LPWSTR,
 }}
@@ -695,6 +969,7 @@ STRUCT!{struct ACCESS_LIST {
 }}
 pub type PACCESS_LIST = *mut ACCESS_LIST;
 pub type LPACCESS_LIST = *mut ACCESS_LIST;
+pub const MAXPERMENTRIES: DWORD = 64;
 pub const ACCESS_NONE: DWORD = 0;
 pub const ACCESS_ALL: DWORD = ACCESS_READ | ACCESS_WRITE | ACCESS_CREATE | ACCESS_EXEC
     | ACCESS_DELETE | ACCESS_ATRIB | ACCESS_PERM;
@@ -728,6 +1003,7 @@ pub const ACCESS_ATTR_INFOLEVEL: DWORD = PARMNUM_BASE_INFOLEVEL + ACCESS_ATTR_PA
 pub const ACCESS_COUNT_INFOLEVEL: DWORD = PARMNUM_BASE_INFOLEVEL + ACCESS_COUNT_PARMNUM;
 pub const ACCESS_ACCESS_LIST_INFOLEVEL: DWORD =
     PARMNUM_BASE_INFOLEVEL + ACCESS_ACCESS_LIST_PARMNUM;
+pub const ACCESS_LETTERS: &'static str = "RWCXDAP         ";
 ENUM!{enum NET_VALIDATE_PASSWORD_TYPE {
     NetValidateAuthentication = 1,
     NetValidatePasswordChange,
@@ -782,6 +1058,49 @@ STRUCT!{struct NET_VALIDATE_PASSWORD_RESET_INPUT_ARG {
     ClearLockout: BOOLEAN,
 }}
 pub type PNET_VALIDATE_PASSWORD_RESET_INPUT_ARG = *mut NET_VALIDATE_PASSWORD_RESET_INPUT_ARG;
+extern "system" {
+    pub fn NetValidatePasswordPolicy(
+        ServerName: LPCWSTR,
+        Qualifier: LPVOID,
+        ValidationType: NET_VALIDATE_PASSWORD_TYPE,
+        InputArg: LPVOID,
+        OutputArg: *mut LPVOID,
+    ) -> NET_API_STATUS;
+    pub fn NetValidatePasswordPolicyFree(
+        OutputArg: *mut LPVOID,
+    ) -> NET_API_STATUS;
+    pub fn NetGetDCName(
+        servername: LPCWSTR,
+        domainname: LPCWSTR,
+        bufptr: *mut LPBYTE,
+    ) -> NET_API_STATUS;
+    pub fn NetGetAnyDCName(
+        servername: LPCWSTR,
+        domainname: LPCWSTR,
+        bufptr: *mut LPBYTE,
+    ) -> NET_API_STATUS;
+    pub fn I_NetLogonControl(
+        ServerName: LPCWSTR,
+        FunctionCode: DWORD,
+        QueryLevel: DWORD,
+        Buffer: *mut LPBYTE,
+    ) -> NET_API_STATUS;
+    pub fn I_NetLogonControl2(
+        ServerName: LPCWSTR,
+        FunctionCode: DWORD,
+        QueryLevel: DWORD,
+        Data: LPBYTE,
+        Buffer: *mut LPBYTE,
+    ) -> NET_API_STATUS;
+}
+pub type NTSTATUS = LONG;
+pub type PNTSTATUS = *mut LONG;
+extern "system" {
+    pub fn NetEnumerateTrustedDomains(
+        ServerName: LPWSTR,
+        DomainNames: *mut LPWSTR,
+    ) -> NTSTATUS;
+}
 pub const NETLOGON_CONTROL_QUERY: DWORD = 1;
 pub const NETLOGON_CONTROL_REPLICATE: DWORD = 2;
 pub const NETLOGON_CONTROL_SYNCHRONIZE: DWORD = 3;
@@ -794,6 +1113,7 @@ pub const NETLOGON_CONTROL_CHANGE_PASSWORD: DWORD = 9;
 pub const NETLOGON_CONTROL_TC_VERIFY: DWORD = 10;
 pub const NETLOGON_CONTROL_FORCE_DNS_REG: DWORD = 11;
 pub const NETLOGON_CONTROL_QUERY_DNS_REG: DWORD = 12;
+pub const NETLOGON_CONTROL_QUERY_ENC_TYPES: DWORD = 13;
 pub const NETLOGON_CONTROL_UNLOAD_NETLOGON_DLL: DWORD = 0xFFFB;
 pub const NETLOGON_CONTROL_BACKUP_CHANGE_LOG: DWORD = 0xFFFC;
 pub const NETLOGON_CONTROL_TRUNCATE_LOG: DWORD = 0xFFFD;
@@ -834,12 +1154,47 @@ pub const NETLOGON_HAS_IP: DWORD = 0x10;
 pub const NETLOGON_HAS_TIMESERV: DWORD = 0x20;
 pub const NETLOGON_DNS_UPDATE_FAILURE: DWORD = 0x40;
 pub const NETLOGON_VERIFY_STATUS_RETURNED: DWORD = 0x80;
-DEFINE_GUID!(ServiceAccountPasswordGUID, 0x262E99C9, 0x6160, 0x4871,
-    0xAC, 0xEC, 0x4E, 0x61, 0x73, 0x6B, 0x6F, 0x21);
+pub const SERVICE_ACCOUNT_PASSWORD: &'static str = "_SA_{262E99C9-6160-4871-ACEC-4E61736B6F21}";
+pub const SERVICE_ACCOUNT_SECRET_PREFIX: &'static str
+    = "_SC_{262E99C9-6160-4871-ACEC-4E61736B6F21}_";
+DEFINE_GUID!(ServiceAccountPasswordGUID,
+    0x262E99C9, 0x6160, 0x4871, 0xAC, 0xEC, 0x4E, 0x61, 0x73, 0x6B, 0x6F, 0x21);
+extern "system" {
+    pub fn NetAddServiceAccount(
+        ServerName: LPWSTR,
+        AccountName: LPWSTR,
+        Password: LPWSTR,
+        Flags: DWORD,
+    ) -> NTSTATUS;
+}
 pub const SERVICE_ACCOUNT_FLAG_LINK_TO_HOST_ONLY: DWORD = 0x00000001;
 pub const SERVICE_ACCOUNT_FLAG_ADD_AGAINST_RODC: DWORD = 0x00000002;
 pub const SERVICE_ACCOUNT_FLAG_UNLINK_FROM_HOST_ONLY: DWORD = 0x00000001;
 pub const SERVICE_ACCOUNT_FLAG_REMOVE_OFFLINE: DWORD = 0x00000002;
+extern "system" {
+    pub fn NetRemoveServiceAccount(
+        ServerName: LPWSTR,
+        AccountName: LPWSTR,
+        Flags: DWORD,
+    ) -> NTSTATUS;
+    pub fn NetEnumerateServiceAccounts(
+        ServerName: LPWSTR,
+        Flags: DWORD,
+        AccountsCount: *mut DWORD,
+        Accounts: *mut PZPWSTR,
+    ) -> NTSTATUS;
+    pub fn NetIsServiceAccount(
+        ServerName: LPWSTR,
+        AccountName: LPWSTR,
+        IsService: *mut BOOL,
+    ) -> NTSTATUS;
+    pub fn NetQueryServiceAccount(
+        ServerName: LPWSTR,
+        AccountName: LPWSTR,
+        InfoLevel: DWORD,
+        Buffer: *mut PBYTE,
+    ) -> NTSTATUS;
+}
 ENUM!{enum MSA_INFO_LEVEL {
     MsaInfoLevel0 = 0,
     MsaInfoLevelMax,
