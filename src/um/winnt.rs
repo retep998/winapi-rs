@@ -1272,7 +1272,7 @@ BITFIELD!{LDT_ENTRY_Bits Bitfield: DWORD [
     Granularity set_Granularity[23..24],
     BaseHi set_BaseHi[24..32],
 ]}
-UNION2!{union LDT_ENTRY_u {
+UNION2!{union LDT_ENTRY_HighWord {
     [u32; 1],
     Bytes Bytes_mut: LDT_ENTRY_Bytes,
     Bits Bits_mut: LDT_ENTRY_Bits,
@@ -1280,7 +1280,7 @@ UNION2!{union LDT_ENTRY_u {
 STRUCT!{struct LDT_ENTRY {
     LimitLow: WORD,
     BaseLow: WORD,
-    HighWord: LDT_ENTRY_u,
+    HighWord: LDT_ENTRY_HighWord,
 }}
 pub type PLDT_ENTRY = *mut LDT_ENTRY;
 } // IFDEF(x86)
@@ -1367,7 +1367,7 @@ BITFIELD!(WOW64_LDT_ENTRY_Bits BitFields: DWORD [
     Granularity set_Granularity[23..24],
     BaseHi set_BaseHi[24..32],
 ]);
-UNION2!{union WOW64_LDT_ENTRY_u {
+UNION2!{union WOW64_LDT_ENTRY_HighWord {
     [u32; 1],
     Bytes Bytes_mut: WOW64_LDT_ENTRY_Bytes,
     Bits Bits_mut: WOW64_LDT_ENTRY_Bits,
@@ -1375,7 +1375,7 @@ UNION2!{union WOW64_LDT_ENTRY_u {
 STRUCT!{struct WOW64_LDT_ENTRY {
     LimitLow: WORD,
     BaseLow: WORD,
-    HighWord: WOW64_LDT_ENTRY_u,
+    HighWord: WOW64_LDT_ENTRY_HighWord,
 }}
 pub type PWOW64_LDT_ENTRY = *mut WOW64_LDT_ENTRY;
 STRUCT!{struct WOW64_DESCRIPTOR_TABLE_ENTRY {
@@ -1493,7 +1493,7 @@ pub const SECURITY_MAX_SID_SIZE: usize = 12 - 4 + (SID_MAX_SUB_AUTHORITIES as us
 pub const SECURITY_MAX_SID_STRING_CHARACTERS: BYTE = 2 + 4 + 15 + (11 * SID_MAX_SUB_AUTHORITIES)
     + 1;
 UNION2!{union SE_SID {
-    [u8; 68],
+    [u32; 17],
     Sid Sid_mut: SID,
     Buffer Buffer_mut: [BYTE; SECURITY_MAX_SID_SIZE],
 }}
@@ -2389,7 +2389,7 @@ UNION2!{union SE_TOKEN_USER_u1 {
     User User_mut: SID_AND_ATTRIBUTES,
 }}
 UNION2!{union SE_TOKEN_USER_u2 {
-    [u8; 68],
+    [u32; 17],
     Sid Sid_mut: SID,
     Buffer Buffer_mut: [BYTE; SECURITY_MAX_SID_SIZE],
 }}
@@ -2584,8 +2584,8 @@ STRUCT!{struct CLAIM_SECURITY_ATTRIBUTE_V1 {
     Values: CLAIM_SECURITY_ATTRIBUTE_V1_u,
 }}
 pub type PCLAIM_SECURITY_ATTRIBUTE_V1 = *mut CLAIM_SECURITY_ATTRIBUTE_V1;
-UNION2!{union CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_u {
-    [usize; 1],
+UNION2!{union CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values {
+    [u32; 1],
     pInt64 pInt64_mut: [DWORD; ANYSIZE_ARRAY],
     pUint64 pUint64_mut: [DWORD; ANYSIZE_ARRAY],
     ppString ppString_mut: [DWORD; ANYSIZE_ARRAY],
@@ -2598,13 +2598,13 @@ STRUCT!{struct CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 {
     Reserved: WORD,
     Flags: DWORD,
     ValueCount: DWORD,
-    Values: CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_u,
+    Values: CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values,
 }}
 pub type PCLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 = *mut CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1;
 pub const CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1: WORD = 1;
 pub const CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION: WORD =
     CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1;
-UNION2!{union CLAIM_SECURITY_ATTRIBUTES_INFORMATION_u {
+UNION2!{union CLAIM_SECURITY_ATTRIBUTES_INFORMATION_Attribute {
     [usize; 1],
     pAttributeV1 pAttributeV1_mut: PCLAIM_SECURITY_ATTRIBUTE_V1,
 }}
@@ -2612,7 +2612,7 @@ STRUCT!{struct CLAIM_SECURITY_ATTRIBUTES_INFORMATION {
     Version: WORD,
     Reserved: WORD,
     AttributeCount: DWORD,
-    Attribute: CLAIM_SECURITY_ATTRIBUTES_INFORMATION_u,
+    Attribute: CLAIM_SECURITY_ATTRIBUTES_INFORMATION_Attribute,
 }}
 pub type PCLAIM_SECURITY_ATTRIBUTES_INFORMATION = *mut CLAIM_SECURITY_ATTRIBUTES_INFORMATION;
 pub const SECURITY_DYNAMIC_TRACKING: BOOLEAN = TRUE as u8;
@@ -2770,7 +2770,7 @@ STRUCT!{struct NT_TIB32 {
     SubSystemTib: DWORD,
     u: NT_TIB32_u,
     ArbitraryUserPointer: DWORD,
-    _Self: DWORD,
+    Self_: DWORD,
 }}
 pub type PNT_TIB32 = *mut NT_TIB32;
 UNION2!{union NT_TIB64_u {
@@ -2886,24 +2886,16 @@ ENUM!{enum PROCESS_MITIGATION_POLICY {
     MaxProcessMitigationPolicy,
 }}
 pub type PPROCESS_MITIGATION_POLICY = *mut PROCESS_MITIGATION_POLICY;
-STRUCT!{struct PROCESS_MITIGATION_ASLR_POLICY_u_s {
-    BitFields: DWORD,
+STRUCT!{struct PROCESS_MITIGATION_ASLR_POLICY {
+    Flags: DWORD,
 }}
-BITFIELD!(PROCESS_MITIGATION_ASLR_POLICY_u_s BitFields: DWORD [
+BITFIELD!(PROCESS_MITIGATION_ASLR_POLICY Flags: DWORD [
     EnableBottomUpRandomization set_EnableBottomUpRandomization[0..1],
     EnableForceRelocateImages set_EnableForceRelocateImages[1..2],
     EnableHighEntropy set_EnableHighEntropy[2..3],
     DisallowStrippedImages set_DisallowStrippedImages[3..4],
     ReservedFlags set_ReservedFlags[4..32],
 ]);
-UNION2!{union PROCESS_MITIGATION_ASLR_POLICY_u {
-    [u32; 1],
-    Flags Flags_mut: DWORD,
-    s s_mut: PROCESS_MITIGATION_ASLR_POLICY_u_s,
-}}
-STRUCT!{struct PROCESS_MITIGATION_ASLR_POLICY {
-    u: PROCESS_MITIGATION_ASLR_POLICY_u,
-}}
 pub type PPROCESS_MITIGATION_ASLR_POLICY = *mut PROCESS_MITIGATION_ASLR_POLICY;
 STRUCT!{struct PROCESS_MITIGATION_DEP_POLICY_u_s {
     BitFields: DWORD,
@@ -3217,8 +3209,8 @@ UNION2!{union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_u2 {
 UNION2!{union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_u3 {
     [u32; 1],
     RateControlToleranceLimit RateControlToleranceLimit_mut: JOBOBJECT_RATE_CONTROL_TOLERANCE,
-    CpuRateControlToleranceLimit CpuRateControlToleranceLimit_mut
-        : JOBOBJECT_RATE_CONTROL_TOLERANCE,
+    CpuRateControlToleranceLimit CpuRateControlToleranceLimit_mut:
+        JOBOBJECT_RATE_CONTROL_TOLERANCE,
 }}
 STRUCT!{struct JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2 {
     LimitFlags: DWORD,
@@ -3602,21 +3594,6 @@ pub const SYSTEM_CPU_SET_INFORMATION_PARKED: BYTE = 0x1;
 pub const SYSTEM_CPU_SET_INFORMATION_ALLOCATED: BYTE = 0x2;
 pub const SYSTEM_CPU_SET_INFORMATION_ALLOCATED_TO_TARGET_PROCESS: BYTE = 0x4;
 pub const SYSTEM_CPU_SET_INFORMATION_REALTIME: BYTE = 0x8;
-STRUCT!{struct SYSTEM_CPU_SET_INFORMATION_CpuSet_u_s {
-    BitFields: BYTE,
-}}
-BITFIELD!(SYSTEM_CPU_SET_INFORMATION_CpuSet_u_s BitFields: BYTE [
-    Parked set_Parked[0..1],
-    Allocated set_Allocated[1..2],
-    AllocatedToTargetProcess set_AllocatedToTargetProcess[2..3],
-    RealTime set_RealTime[3..4],
-    ReservedFlags set_ReservedFlags[4..8],
-]);
-UNION2!{union SYSTEM_CPU_SET_INFORMATION_CpuSet_u {
-    [u8; 1],
-    AllFlags AllFlags_mut: BYTE,
-    s s_mut: SYSTEM_CPU_SET_INFORMATION_CpuSet_u_s,
-}}
 STRUCT!{struct SYSTEM_CPU_SET_INFORMATION_CpuSet {
     Id: DWORD,
     Group: WORD,
@@ -3625,18 +3602,21 @@ STRUCT!{struct SYSTEM_CPU_SET_INFORMATION_CpuSet {
     LastLevelCacheIndex: BYTE,
     NumaNodeIndex: BYTE,
     EfficiencyClass: BYTE,
-    u: SYSTEM_CPU_SET_INFORMATION_CpuSet_u,
+    AllFlags: BYTE,
     Reserved: DWORD,
     AllocationTag: DWORD64,
 }}
-UNION2!{union SYSTEM_CPU_SET_INFORMATION_u {
-    [u32; 6],
-    CpuSet CpuSet_mut: SYSTEM_CPU_SET_INFORMATION_CpuSet,
-}}
+BITFIELD!(SYSTEM_CPU_SET_INFORMATION_CpuSet AllFlags: BYTE [
+    Parked set_Parked[0..1],
+    Allocated set_Allocated[1..2],
+    AllocatedToTargetProcess set_AllocatedToTargetProcess[2..3],
+    RealTime set_RealTime[3..4],
+    ReservedFlags set_ReservedFlags[4..8],
+]);
 STRUCT!{struct SYSTEM_CPU_SET_INFORMATION {
     Size: DWORD,
     Type: CPU_SET_INFORMATION_TYPE,
-    u: SYSTEM_CPU_SET_INFORMATION_u,
+    CpuSet: SYSTEM_CPU_SET_INFORMATION_CpuSet,
 }}
 pub type PSYSTEM_CPU_SET_INFORMATION = *mut SYSTEM_CPU_SET_INFORMATION;
 STRUCT!{struct SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION {
@@ -3753,29 +3733,21 @@ STRUCT!{struct XSTATE_FEATURE {
     Size: DWORD,
 }}
 pub type PXSTATE_FEATURE = *mut XSTATE_FEATURE;
-STRUCT!{struct XSTATE_CONFIGURATION_u_s {
-    BitFields: DWORD,
-}}
-BITFIELD!(XSTATE_CONFIGURATION_u_s BitFields: DWORD [
-    OptimizedSave set_OptimizedSave[0..1],
-    CompactionEnabled set_CompactionEnabled[1..2],
-]);
-UNION2!{union XSTATE_CONFIGURATION_u {
-    [u32; 1],
-    ControlFlags ControlFlags_mut: DWORD,
-    s s_mut: XSTATE_CONFIGURATION_u_s,
-}}
 STRUCT!{struct XSTATE_CONFIGURATION {
     EnabledFeatures: DWORD64,
     EnabledVolatileFeatures: DWORD64,
     Size: DWORD,
-    u: XSTATE_CONFIGURATION_u,
+    ControlFlags: DWORD,
     Features: [XSTATE_FEATURE; MAXIMUM_XSTATE_FEATURES],
     EnabledSupervisorFeatures: DWORD64,
     AlignedFeatures: DWORD64,
     AllFeatureSize: DWORD,
     AllFeatures: [DWORD; MAXIMUM_XSTATE_FEATURES],
 }}
+BITFIELD!(XSTATE_CONFIGURATION ControlFlags: DWORD [
+    OptimizedSave set_OptimizedSave[0..1],
+    CompactionEnabled set_CompactionEnabled[1..2],
+]);
 pub type PXSTATE_CONFIGURATION = *mut XSTATE_CONFIGURATION;
 STRUCT!{struct MEMORY_BASIC_INFORMATION {
     BaseAddress: PVOID,
@@ -5166,19 +5138,14 @@ STRUCT!{struct PROCESSOR_IDLESTATE_INFO {
     Spare: [BYTE; 2],
 }}
 pub type PPROCESSOR_IDLESTATE_INFO = *mut PROCESSOR_IDLESTATE_INFO;
-STRUCT!{struct PROCESSOR_IDLESTATE_POLICY_Flags_s {
-    BitFields: WORD,
+STRUCT!{struct PROCESSOR_IDLESTATE_POLICY_Flags {
+    AsWORD: WORD,
 }}
-BITFIELD!(PROCESSOR_IDLESTATE_POLICY_Flags_s BitFields: WORD [
+BITFIELD!(PROCESSOR_IDLESTATE_POLICY_Flags AsWORD: WORD [
     AllowScaling set_AllowScaling[0..1],
     Disabled set_Disabled[1..2],
     Reserved set_Reserved[2..16],
 ]);
-UNION2!{union PROCESSOR_IDLESTATE_POLICY_Flags {
-    [u16; 1],
-    AsWORD AsWORD_mut: WORD,
-    s s_mut: PROCESSOR_IDLESTATE_POLICY_Flags_s,
-}}
 STRUCT!{struct PROCESSOR_IDLESTATE_POLICY {
     Revision: WORD,
     Flags: PROCESSOR_IDLESTATE_POLICY_Flags,
