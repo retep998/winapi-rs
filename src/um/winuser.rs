@@ -13,16 +13,18 @@ use shared::basetsd::{
 use shared::basetsd::LONG_PTR;
 use shared::guiddef::{GUID, LPCGUID};
 use shared::minwindef::{
-    ATOM, BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HRGN, HWINSTA, INT, LOWORD, LPARAM, LPBYTE,
-    LPDWORD, LPINT, LPVOID, LPWORD, LRESULT, PBYTE, PUINT, PULONG, TRUE, UCHAR, UINT, ULONG,
+    ATOM, BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HMODULE, HRGN, HWINSTA, INT, LOWORD, LPARAM,
+    LPBYTE, LPDWORD, LPINT, LPVOID, LPWORD, LRESULT, PBYTE, PUINT, PULONG, TRUE, UCHAR, UINT, ULONG,
     USHORT, WORD, WPARAM,
 };
 use shared::windef::{
-    COLORREF, HACCEL, HBITMAP, HBRUSH, HCURSOR, HDC, HDESK, HICON, HMENU, HMONITOR,
-    HWINEVENTHOOK, HWND, LPPOINT, LPRECT, POINT, RECT,
+    COLORREF, HACCEL, HBITMAP, HBRUSH, HCURSOR, HDC, HDESK, HHOOK, HICON, HMENU, HMONITOR,
+    HWINEVENTHOOK, HWND, LPCRECT, LPPOINT, LPRECT, POINT, RECT,
 };
 use um::minwinbase::LPSECURITY_ATTRIBUTES;
-use um::wingdi::{BLENDFUNCTION, DEVMODEA, DEVMODEW, LOGFONTA, LOGFONTW};
+use um::wingdi::{
+    BLENDFUNCTION, DEVMODEA, DEVMODEW, LOGFONTA, LOGFONTW, PDISPLAY_DEVICEA, PDISPLAY_DEVICEW
+};
 use um::winnt::{
     ACCESS_MASK, BOOLEAN, CHAR, HANDLE, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, LUID,
     PSECURITY_DESCRIPTOR, PSECURITY_INFORMATION, PVOID, SHORT, VOID, WCHAR,
@@ -4985,6 +4987,40 @@ extern "system" {
         nIndex: c_int,
         dwNewLong: LONG_PTR,
     ) -> LONG_PTR;
+    pub fn GetDesktopWindow() -> HWND;
+    pub fn GetParent(
+        hWnd: HWND,
+    ) -> HWND;
+    pub fn SetParent(
+        hWndChild: HWND,
+        hWndNewParent: HWND,
+    ) -> HWND;
+    pub fn EnumChildWindows(
+        hwndParent: HWND,
+        lpEnumFunc: WNDENUMPROC,
+        lpParam: LPARAM,
+    ) -> BOOL;
+    pub fn FindWindowA(
+        lpClassName: LPCSTR,
+        lpWindowName: LPCSTR,
+    ) -> HWND;
+    pub fn FindWindowW(
+        lpClassName: LPCWSTR,
+        lpWindowName: LPCWSTR,
+    ) -> HWND;
+    pub fn FindWindowExA(
+        hWndParent: HWND,
+        hWndChildAfter: HWND,
+        lpszClass: LPCSTR,
+        lpszWindow: LPCSTR,
+    ) -> HWND;
+    pub fn FindWindowExW(
+        hWndParent: HWND,
+        hWndChildAfter: HWND,
+        lpszClass: LPCWSTR,
+        lpszWindow: LPCWSTR,
+    ) -> HWND;
+    pub fn GetShellWindow() -> HWND;
 }
 #[cfg(target_arch = "x86")]
 pub use self::GetWindowLongA as GetWindowLongPtrA;
@@ -5246,6 +5282,72 @@ pub const STN_DBLCLK: WORD = 1;
 pub const STN_ENABLE: WORD = 2;
 pub const STN_DISABLE: WORD = 3;
 pub const STM_MSGMAX: WORD = 0x0174;
+extern "system" {
+    pub fn IsDialogMessageA(
+        hDlg: HWND,
+        lpMsg: LPMSG,
+    ) -> BOOL;
+    pub fn IsDialogMessageW(
+        hDlg: HWND,
+        lpMsg: LPMSG,
+    ) -> BOOL;
+    pub fn MapDialogRect(
+        hDlg: HWND,
+        lpRect: LPRECT,
+    ) -> BOOL;
+    pub fn DlgDirListA(
+        hDlg: HWND,
+        lpPathSpec: LPSTR,
+        nIDListBox: c_int,
+        nIDStaticPath: c_int,
+        uFileType: UINT,
+    ) -> c_int;
+    pub fn DlgDirListW(
+        hDlg: HWND,
+        lpPathSpec: LPWSTR,
+        nIDListBox: c_int,
+        nIDStaticPath: c_int,
+        uFileType: UINT,
+    ) -> c_int;
+    pub fn DlgDirSelectExA(
+        hwndDlg: HWND,
+        lpString: LPSTR,
+        chCount: c_int,
+        idListBox: c_int,
+    ) -> BOOL;
+    pub fn DlgDirSelectExW(
+        hwndDlg: HWND,
+        lpString: LPWSTR,
+        chCount: c_int,
+        idListBox: c_int,
+    ) -> BOOL;
+    pub fn DlgDirListComboBoxA(
+        hDlg: HWND,
+        lpPathSpec: LPSTR,
+        nIDComboBox: c_int,
+        nIDStaticPath: c_int,
+        uFiletype: UINT,
+    ) -> c_int;
+    pub fn DlgDirListComboBoxW(
+        hDlg: HWND,
+        lpPathSpec: LPWSTR,
+        nIDComboBox: c_int,
+        nIDStaticPath: c_int,
+        uFiletype: UINT,
+    ) -> c_int;
+    pub fn DlgDirSelectComboBoxExA(
+        hwndDlg: HWND,
+        lpString: LPSTR,
+        cchOut: c_int,
+        idComboBox: c_int,
+    ) -> BOOL;
+    pub fn DlgDirSelectComboBoxExW(
+        hwndDlg: HWND,
+        lpString: LPWSTR,
+        cchOut: c_int,
+        idComboBox: c_int,
+    ) -> BOOL;
+}
 pub const DS_ABSALIGN: DWORD = 0x01;
 pub const DS_SYSMODAL: DWORD = 0x02;
 pub const DS_LOCALEDIT: DWORD = 0x20;
@@ -5395,6 +5497,36 @@ pub const SBM_ENABLE_ARROWS: UINT = 0x00E4;
 pub const SBM_SETSCROLLINFO: UINT = 0x00E9;
 pub const SBM_GETSCROLLINFO: UINT = 0x00EA;
 pub const SBM_GETSCROLLBARINFO: UINT = 0x00EB;
+pub const SIF_RANGE: UINT = 0x0001;
+pub const SIF_PAGE: UINT = 0x0002;
+pub const SIF_POS: UINT = 0x0004;
+pub const SIF_DISABLENOSCROLL: UINT = 0x0008;
+pub const SIF_TRACKPOS: UINT = 0x0010;
+pub const SIF_ALL: UINT = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
+STRUCT!{struct SCROLLINFO {
+    cbSize: UINT,
+    fMask: UINT,
+    nMin: c_int,
+    nMax: c_int,
+    nPage: UINT,
+    nPos: c_int,
+    nTrackPos: c_int,
+}}
+pub type LPSCROLLINFO = *mut SCROLLINFO;
+pub type LPCSCROLLINFO = *const SCROLLINFO;
+extern "system" {
+    pub fn SetScrollInfo(
+        hwnd: HWND,
+        nBar: c_int,
+        lpsi: *const SCROLLINFO,
+        redraw: BOOL,
+    ) -> c_int;
+    pub fn GetScrollInfo(
+        hwnd: HWND,
+        nBar: c_int,
+        lpsi: *mut SCROLLINFO,
+    ) -> BOOL;
+}
 pub const CCHILDREN_SCROLLBAR: usize = 5;
 pub const CDS_UPDATEREGISTRY: DWORD = 0x00000001;
 pub const CDS_TEST: DWORD = 0x00000002;
@@ -5415,9 +5547,182 @@ pub const DISP_CHANGE_NOTUPDATED: LONG = -3;
 pub const DISP_CHANGE_BADFLAGS: LONG = -4;
 pub const DISP_CHANGE_BADPARAM: LONG = -5;
 pub const DISP_CHANGE_BADDUALVIEW: LONG = -6;
+extern "system" {
+    pub fn ChangeDisplaySettingsA(
+        lpDevMode: *mut DEVMODEA,
+        dwFlags: DWORD,
+    ) -> LONG;
+    pub fn ChangeDisplaySettingsW(
+        lpDevMode: *mut DEVMODEW,
+        dwFlags: DWORD,
+    ) -> LONG;
+    pub fn ChangeDisplaySettingsExA(
+        lpszDeviceName: LPCSTR,
+        lpDevMode: *mut DEVMODEA,
+        hwnd: HWND,
+        dwFlags: DWORD,
+        lParam: LPVOID,
+    ) -> LONG;
+    pub fn ChangeDisplaySettingsExW(
+        lpszDeviceName: LPCWSTR,
+        lpDevMode: *mut DEVMODEW,
+        hwnd: HWND,
+        dwFlags: DWORD,
+        lParam: LPVOID,
+    ) -> LONG;
+    pub fn EnumDisplaySettingsA(
+        lpszDeviceName: LPCSTR,
+        iModeNum: DWORD,
+        lpDevMode: *mut DEVMODEA,
+    ) -> BOOL;
+    pub fn EnumDisplaySettingsW(
+        lpszDeviceName: LPCWSTR,
+        iModeNum: DWORD,
+        lpDevMode: *mut DEVMODEW,
+    ) -> BOOL;
+    pub fn EnumDisplaySettingsExA(
+        lpszDeviceName: LPCSTR,
+        iModeNum: DWORD,
+        lpDevMode: *mut DEVMODEA,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn EnumDisplaySettingsExW(
+        lpszDeviceName: LPCWSTR,
+        iModeNum: DWORD,
+        lpDevMode: *mut DEVMODEW,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn EnumDisplayDevicesA(
+        lpDevice: LPCSTR,
+        iDevNum: DWORD,
+        lpDisplayDevice: PDISPLAY_DEVICEA,
+        dwFlags: DWORD,
+    ) -> BOOL;
+    pub fn EnumDisplayDevicesW(
+        lpDevice: LPCWSTR,
+        iDevNum: DWORD,
+        lpDisplayDevice: PDISPLAY_DEVICEW,
+        dwFlags: DWORD,
+    ) -> BOOL;
+}
 pub const EDD_GET_DEVICE_INTERFACE_NAME: DWORD = 0x00000001;
+extern "system" {
+    pub fn SystemParametersInfoA(
+        uiAction: UINT,
+        uiParam: UINT,
+        pvParam: PVOID,
+        fWinIni: UINT,
+    ) -> BOOL;
+    pub fn SystemParametersInfoW(
+        uiAction: UINT,
+        uiParam: UINT,
+        pvParam: PVOID,
+        fWinIni: UINT,
+    ) -> BOOL;
+}
 pub const ENUM_CURRENT_SETTINGS: DWORD = 0xFFFFFFFF;
 pub const ENUM_REGISTRY_SETTINGS: DWORD = 0xFFFFFFFE;
+pub const MDITILE_VERTICAL: UINT = 0x0000;
+pub const MDITILE_HORIZONTAL: UINT = 0x0001;
+pub const MDITILE_SKIPDISABLED: UINT = 0x0002;
+pub const MDITILE_ZORDER: UINT = 0x0004;
+extern "system" {
+    pub fn DefFrameProcA(
+        hwnd: HWND,
+        hwndMDIClient: HWND,
+        uMsg: UINT,
+        wParam: WPARAM,
+        lParam: LPARAM,
+    ) -> LRESULT;
+    pub fn DefFrameProcW(
+        hwnd: HWND,
+        hwndMDIClient: HWND,
+        uMsg: UINT,
+        wParam: WPARAM,
+        lParam: LPARAM,
+    ) -> LRESULT;
+    pub fn DefMDIChildProcA(
+        hwnd: HWND,
+        uMsg: UINT,
+        wParam: WPARAM,
+        lParam: LPARAM,
+    ) -> LRESULT;
+    pub fn DefMDIChildProcW(
+        hwnd: HWND,
+        uMsg: UINT,
+        wParam: WPARAM,
+        lParam: LPARAM,
+    ) -> LRESULT;
+    pub fn ArrangeIconicWindows(
+        hWnd: HWND,
+    ) -> UINT;
+    pub fn CreateMDIWindowA(
+        lpClassName: LPCSTR,
+        lpWindowName: LPCSTR,
+        dwStyle: DWORD,
+        X: c_int,
+        Y: c_int,
+        nWidth: c_int,
+        nHeight: c_int,
+        hWndParent: HWND,
+        hInstance: HINSTANCE,
+        lParam: LPARAM,
+    ) -> HWND;
+    pub fn CreateMDIWindowW(
+        lpClassName: LPCWSTR,
+        lpWindowName: LPCWSTR,
+        dwStyle: DWORD,
+        X: c_int,
+        Y: c_int,
+        nWidth: c_int,
+        nHeight: c_int,
+        hWndParent: HWND,
+        hInstance: HINSTANCE,
+        lParam: LPARAM,
+    ) -> HWND;
+    pub fn CascadeWindows(
+        hwndParent: HWND,
+        wHow: UINT,
+        lpRect: *const RECT,
+        cKids: UINT,
+        lpKids: *const HWND,
+    ) -> WORD;
+    pub fn DeregisterShellHookWindow(
+        hwnd: HWND,
+    ) -> BOOL;
+    pub fn EnumWindows(
+        lpEnumFunc: WNDENUMPROC,
+        lParam: LPARAM,
+    ) -> BOOL;
+    pub fn EnumThreadWindows(
+        dwThreadId: DWORD,
+        lpfn: WNDENUMPROC,
+        lParam: LPARAM,
+    ) -> BOOL;
+    pub fn GetClassNameA(
+        hWnd: HWND,
+        lpClassName: LPCSTR,
+        nMaxCount: c_int,
+    ) -> c_int;
+    pub fn GetClassNameW(
+        hWnd: HWND,
+        lpClassName: LPCWSTR,
+        nMaxCount: c_int,
+    ) -> c_int;
+    pub fn GetTopWindow(
+        hWnd: HWND,
+    ) -> HWND;
+    pub fn GetWindowThreadProcessId(
+        hWnd: HWND,
+        lpdwProcessId: LPDWORD,
+    ) -> DWORD;
+    pub fn IsGUIThread(
+        bConvert: BOOL,
+    ) -> BOOL;
+    pub fn GetLastActivePopup(
+        hWnd: HWND,
+    ) -> HWND;
+}
 pub const GW_HWNDFIRST: UINT = 0;
 pub const GW_HWNDLAST: UINT = 1;
 pub const GW_HWNDNEXT: UINT = 2;
@@ -5426,15 +5731,50 @@ pub const GW_OWNER: UINT = 4;
 pub const GW_CHILD: UINT = 5;
 pub const GW_ENABLEDPOPUP: UINT = 6;
 pub const GW_MAX: UINT = 6;
-pub const MDITILE_VERTICAL: UINT = 0x0000;
-pub const MDITILE_HORIZONTAL: UINT = 0x0001;
-pub const MDITILE_SKIPDISABLED: UINT = 0x0002;
-pub const MDITILE_ZORDER: UINT = 0x0004;
-pub const MF_BITMAP: UINT = 0x00000004;
-pub const MF_CHECKED: UINT = 0x00000008;
-pub const MF_DISABLED: UINT = 0x00000002;
+extern "system" {
+    pub fn GetWindow(
+        hWnd: HWND,
+        uCmd: UINT,
+    ) -> HWND;
+    pub fn SetWindowsHookExA(
+        idHook: c_int,
+        lpfn: HOOKPROC,
+        hmod: HINSTANCE,
+        dwThreadId: DWORD,
+    ) -> HHOOK;
+    pub fn SetWindowsHookExW(
+        idHook: c_int,
+        lpfn: HOOKPROC,
+        hmod: HINSTANCE,
+        dwThreadId: DWORD,
+    ) -> HHOOK;
+    pub fn UnhookWindowsHookEx(
+        hhk: HHOOK,
+    ) -> BOOL;
+    pub fn CallNextHookEx(
+        hhk: HHOOK,
+        nCode: c_int,
+        wParam: WPARAM,
+        lParam: LPARAM,
+    ) -> LRESULT;
+}
+pub const MF_INSERT: UINT = 0x00000000;
+pub const MF_CHANGE: UINT = 0x00000080;
+pub const MF_APPEND: UINT = 0x00000100;
+pub const MF_DELETE: UINT = 0x00000200;
+pub const MF_REMOVE: UINT = 0x00001000;
+pub const MF_BYCOMMAND: UINT = 0x00000000;
+pub const MF_BYPOSITION: UINT = 0x00000400;
+pub const MF_SEPARATOR: UINT = 0x00000800;
 pub const MF_ENABLED: UINT = 0x00000000;
 pub const MF_GRAYED: UINT = 0x00000001;
+pub const MF_DISABLED: UINT = 0x00000002;
+pub const MF_UNCHECKED: UINT = 0x00000000;
+pub const MF_CHECKED: UINT = 0x00000008;
+pub const MF_STRING: UINT = 0x00000000;
+pub const MF_BITMAP: UINT = 0x00000004;
+pub const MF_OWNERDRAW: UINT = 0x00000100;
+pub const MF_POPUP: UINT = 0x00000010;
 pub const MF_MENUBARBREAK: UINT = 0x00000020;
 pub const MF_MENUBREAK: UINT = 0x00000040;
 pub const MF_UNHILITE: UINT = 0x00000000;
@@ -5445,18 +5785,6 @@ pub const MF_HELP: UINT = 0x00004000;
 pub const MF_RIGHTJUSTIFY: UINT = 0x00004000;
 pub const MF_MOUSESELECT: UINT = 0x00008000;
 pub const MF_END: UINT = 0x00000080;
-pub const MF_OWNERDRAW: UINT = 0x00000100;
-pub const MF_POPUP: UINT = 0x00000010;
-pub const MF_INSERT: UINT = 0x00000000;
-pub const MF_CHANGE: UINT = 0x00000080;
-pub const MF_APPEND: UINT = 0x00000100;
-pub const MF_DELETE: UINT = 0x00000200;
-pub const MF_REMOVE: UINT = 0x00001000;
-pub const MF_BYCOMMAND: UINT = 0x00000000;
-pub const MF_BYPOSITION: UINT = 0x00000400;
-pub const MF_SEPARATOR: UINT = 0x00000800;
-pub const MF_STRING: UINT = 0x00000000;
-pub const MF_UNCHECKED: UINT = 0x00000000;
 pub const MFT_STRING: UINT = MF_STRING;
 pub const MFT_BITMAP: UINT = MF_BITMAP;
 pub const MFT_MENUBARBREAK: UINT = MF_MENUBARBREAK;
@@ -5474,6 +5802,15 @@ pub const MFS_ENABLED: UINT = MF_ENABLED;
 pub const MFS_UNCHECKED: UINT = MF_UNCHECKED;
 pub const MFS_UNHILITE: UINT = MF_UNHILITE;
 pub const MFS_DEFAULT: UINT = MF_DEFAULT;
+extern "system" {
+    pub fn CheckMenuRadioItem(
+        hMenu: HMENU,
+        first: UINT,
+        last: UINT,
+        check: UINT,
+        flags: UINT,
+    ) -> BOOL;
+}
 FN!{stdcall MSGBOXCALLBACK(
     LPHELPINFO,
 ) -> ()}
@@ -5497,17 +5834,6 @@ STRUCT!{struct SCROLLBARINFO {
 }}
 pub type PSCROLLBARINFO = *mut SCROLLBARINFO;
 pub type LPSCROLLBARINFO = *mut SCROLLBARINFO;
-STRUCT!{struct SCROLLINFO {
-    cbSize: UINT,
-    fMask: UINT,
-    nMin: c_int,
-    nMax: c_int,
-    nPage: UINT,
-    nPos: c_int,
-    nTrackPos: c_int,
-}}
-pub type LPSCROLLINFO = *mut SCROLLINFO;
-pub type LPCSCROLLINFO = *const SCROLLINFO;
 STRUCT!{struct SIZE {
     cx: LONG,
     cy: LONG,
@@ -5528,6 +5854,62 @@ STRUCT!{struct ICONINFO {
 pub type PICONINFO = *mut ICONINFO;
 //9066
 //10069
+pub const SC_SIZE: WPARAM = 0xF000;
+pub const SC_MOVE: WPARAM = 0xF010;
+pub const SC_MINIMIZE: WPARAM = 0xF020;
+pub const SC_MAXIMIZE: WPARAM = 0xF030;
+pub const SC_NEXTWINDOW: WPARAM = 0xF040;
+pub const SC_PREVWINDOW: WPARAM = 0xF050;
+pub const SC_CLOSE: WPARAM = 0xF060;
+pub const SC_VSCROLL: WPARAM = 0xF070;
+pub const SC_HSCROLL: WPARAM = 0xF080;
+pub const SC_MOUSEMENU: WPARAM = 0xF090;
+pub const SC_KEYMENU: WPARAM = 0xF100;
+pub const SC_ARRANGE: WPARAM = 0xF110;
+pub const SC_RESTORE: WPARAM = 0xF120;
+pub const SC_TASKLIST: WPARAM = 0xF130;
+pub const SC_SCREENSAVE: WPARAM = 0xF140;
+pub const SC_HOTKEY: WPARAM = 0xF150;
+pub const SC_DEFAULT: WPARAM = 0xF160;
+pub const SC_MONITORPOWER: WPARAM = 0xF170;
+pub const SC_CONTEXTHELP: WPARAM = 0xF180;
+pub const SC_SEPARATOR: WPARAM = 0xF00F;
+extern "system" {
+    pub fn LoadBitmapA(
+        hInstance: HINSTANCE,
+        lpBitmapName: LPCSTR,
+    ) -> HBITMAP;
+    pub fn LoadBitmapW(
+        hInstance: HINSTANCE,
+        lpBitmapName: LPCWSTR,
+    ) -> HBITMAP;
+    pub fn LoadCursorA(
+        hInstance: HINSTANCE,
+        lpCursorName: LPCSTR,
+    ) -> HCURSOR;
+    pub fn LoadCursorW(
+        hInstance: HINSTANCE,
+        lpCursorName: LPCWSTR,
+    ) -> HCURSOR;
+    pub fn LoadCursorFromFileA(
+        lpFileName: LPCSTR,
+    ) -> HCURSOR;
+    pub fn LoadCursorFromFileW(
+        lpFileName: LPCWSTR,
+    ) -> HCURSOR;
+    pub fn CreateCursor(
+        hInst: HINSTANCE,
+        xHotSpot: c_int,
+        yHotSpot: c_int,
+        nWidth: c_int,
+        nHeight: c_int,
+        pvAndPlane: *const VOID,
+        pvXORPlane: *const VOID,
+    ) -> HCURSOR;
+    pub fn DestroyCursor(
+        hCursor: HCURSOR,
+    ) -> BOOL;
+}
 pub const IDC_ARROW: LPCWSTR = 32512 as LPCWSTR;
 pub const IDC_IBEAM: LPCWSTR = 32513 as LPCWSTR;
 pub const IDC_WAIT: LPCWSTR = 32514 as LPCWSTR;
@@ -5544,7 +5926,106 @@ pub const IDC_NO: LPCWSTR = 32648 as LPCWSTR;
 pub const IDC_HAND: LPCWSTR = 32649 as LPCWSTR;
 pub const IDC_APPSTARTING: LPCWSTR = 32650 as LPCWSTR;
 pub const IDC_HELP: LPCWSTR = 32651 as LPCWSTR;
-//10492
+extern "system" {
+    pub fn SetSystemCursor(
+        hcur: HCURSOR,
+        id: DWORD,
+    ) -> BOOL;
+    pub fn CreateIcon(
+        hInstance: HINSTANCE,
+        nWidth: c_int,
+        nHeight: c_int,
+        cPlanes: BYTE,
+        cBitsPixel: BYTE,
+        lpbANDbits: *const BYTE,
+        lpbXORbits: *const BYTE,
+    ) -> HICON;
+    pub fn DestroyIcon(
+        hIcon: HICON,
+    ) -> BOOL;
+    pub fn LookupIconIdFromDirectory(
+        presbits: PBYTE,
+        fIcon: BOOL,
+    ) -> c_int;
+    pub fn LookupIconIdFromDirectoryEx(
+        presbits: PBYTE,
+        fIcon: BOOL,
+        cxDesired: c_int,
+        cyDesired: c_int,
+        Flags: UINT,
+    ) -> c_int;
+    pub fn CreateIconFromResource(
+        presbits: PBYTE,
+        dwResSize: DWORD,
+        fIcon: BOOL,
+        dwVer: DWORD,
+    ) -> HICON;
+    pub fn CreateIconFromResourceEx(
+        presbits: PBYTE,
+        dwResSize: DWORD,
+        fIcon: BOOL,
+        dwVer: DWORD,
+        cxDesired: c_int,
+        cyDesired: c_int,
+        Flags: UINT,
+    ) -> HICON;
+}
+pub const IMAGE_BITMAP: UINT = 0;
+pub const IMAGE_ICON: UINT = 1;
+pub const IMAGE_CURSOR: UINT = 2;
+pub const IMAGE_ENHMETAFILE: UINT = 3;
+pub const LR_DEFAULTCOLOR: UINT = 0x00000000;
+pub const LR_MONOCHROME: UINT = 0x00000001;
+pub const LR_COLOR: UINT = 0x00000002;
+pub const LR_COPYRETURNORG: UINT = 0x00000004;
+pub const LR_COPYDELETEORG: UINT = 0x00000008;
+pub const LR_LOADFROMFILE: UINT = 0x00000010;
+pub const LR_LOADTRANSPARENT: UINT = 0x00000020;
+pub const LR_DEFAULTSIZE: UINT = 0x00000040;
+pub const LR_VGACOLOR: UINT = 0x00000080;
+pub const LR_LOADMAP3DCOLORS: UINT = 0x00001000;
+pub const LR_CREATEDIBSECTION: UINT = 0x00002000;
+pub const LR_COPYFROMRESOURCE: UINT = 0x00004000;
+pub const LR_SHARED: UINT = 0x00008000;
+extern "system" {
+    pub fn LoadImageA(
+        hInst: HINSTANCE,
+        name: LPCSTR,
+        type_: UINT,
+        cx: c_int,
+        cy: c_int,
+        fuLoad: UINT,
+    ) -> HANDLE;
+    pub fn LoadImageW(
+        hInst: HINSTANCE,
+        name: LPCWSTR,
+        type_: UINT,
+        cx: c_int,
+        cy: c_int,
+        fuLoad: UINT,
+    ) -> HANDLE;
+    pub fn CopyImage(
+        h: HANDLE,
+        type_: UINT,
+        cx: c_int,
+        cy: c_int,
+        flags: UINT,
+    ) -> HANDLE;
+    pub fn DrawIconEx(
+        hdc: HDC,
+        xLeft: c_int,
+        yTop: c_int,
+        hIcon: HICON,
+        cxWidth: c_int,
+        cyWidth: c_int,
+        istepIfAniCur: UINT,
+        hbrFlickerFreeDraw: HBRUSH,
+        diFlags: UINT,
+    ) -> BOOL;
+    pub fn CreateIconIndirect(
+        piconinfo: PICONINFO,
+    ) -> HICON;
+}
 pub const IDI_APPLICATION: LPCWSTR = 32512 as LPCWSTR;
 pub const IDI_HAND: LPCWSTR = 32513 as LPCWSTR;
 pub const IDI_QUESTION: LPCWSTR = 32514 as LPCWSTR;
@@ -5555,6 +6036,27 @@ pub const IDI_SHIELD: LPCWSTR = 32518 as LPCWSTR;
 pub const IDI_WARNING: LPCWSTR = IDI_EXCLAMATION;
 pub const IDI_ERROR: LPCWSTR = IDI_HAND;
 pub const IDI_INFORMATION: LPCWSTR = IDI_ASTERISK;
+extern "system" {
+    pub fn WinHelpA(
+        hWndMain: HWND,
+        lpszHelp: LPCSTR,
+        uCommand: UINT,
+        dwData: ULONG_PTR,
+    ) -> BOOL;
+    pub fn WinHelpW(
+        hWndMain: HWND,
+        lpszHelp: LPCWSTR,
+        uCommand: UINT,
+        dwData: ULONG_PTR,
+    ) -> BOOL;
+    pub fn CopyIcon(
+        hIcon: HICON,
+    ) -> HICON;
+    pub fn GetIconInfo(
+        hIcon: HICON,
+        piconinfo: PICONINFO,
+    ) -> BOOL;
+}
 pub const SPI_GETBEEP: UINT = 0x0001;
 pub const SPI_SETBEEP: UINT = 0x0002;
 pub const SPI_GETMOUSE: UINT = 0x0003;
@@ -5849,10 +6351,41 @@ STRUCT!{struct NONCLIENTMETRICSW {
 }}
 pub type LPNONCLIENTMETRICSW = *mut NONCLIENTMETRICSW;
 //12869
+extern "system" {
+    pub fn SetLastErrorEx(
+        dwErrCode: DWORD,
+        dwType: DWORD,
+    );
+    pub fn InternalGetWindowText(
+        hWnd: HWND,
+        pString: LPWSTR,
+        cchMaxCount: c_int,
+    ) -> c_int;
+    pub fn EndTask(
+        hWnd: HWND,
+        fShutDown: BOOL,
+        fForce: BOOL,
+    ) -> BOOL;
+    pub fn CancelShutdown() -> BOOL;
+}
 pub const MONITOR_DEFAULTTONULL: DWORD = 0x00000000;
 pub const MONITOR_DEFAULTTOPRIMARY: DWORD = 0x00000001;
 pub const MONITOR_DEFAULTTONEAREST: DWORD = 0x00000002;
 //12900
+extern "system" {
+    pub fn MonitorFromPoint(
+        pt: POINT,
+        dwFlags: DWORD,
+    ) -> HMONITOR;
+    pub fn MonitorFromRect(
+        lprc: LPCRECT,
+        dwFlags: DWORD,
+    ) -> HMONITOR;
+    pub fn MonitorFromWindow(
+        hwnd: HWND,
+        dwFlags: DWORD,
+    ) -> HMONITOR;
+}
 pub const MONITORINFOF_PRIMARY: DWORD = 1;
 pub const CCHDEVICENAME: usize = 32;
 STRUCT!{struct MONITORINFO {
@@ -5879,13 +6412,90 @@ STRUCT!{struct MONITORINFOEXW {
 }}
 pub type LPMONITORINFOEXW = *mut MONITORINFOEXW;
 //12971
+extern "system" {
+    pub fn GetMonitorInfoA(
+        hMonitor: HMONITOR,
+        lpmi: LPMONITORINFO,
+    ) -> BOOL;
+    pub fn GetMonitorInfoW(
+        hMonitor: HMONITOR,
+        lpmi: LPMONITORINFO,
+    ) -> BOOL;
+}
 FN!{stdcall MONITORENUMPROC(
     HMONITOR,
     HDC,
     LPRECT,
     LPARAM,
 ) -> BOOL}
+extern "system" {
+    pub fn EnumDisplayMonitors(
+        hdc: HDC,
+        lprcClip: LPCRECT,
+        lpfnEnum: MONITORENUMPROC,
+        dwData: LPARAM,
+    ) -> BOOL;
+    pub fn NotifyWinEvent(
+        event: DWORD,
+        hwnd: HWND,
+        idObject: LONG,
+        idChild: LONG,
+    );
+    pub fn SetWinEventHook(
+        eventMin: DWORD,
+        eventMax: DWORD,
+        hmodWinEventProc: HMODULE,
+        pfnWinEventProc: WINEVENTPROC,
+        idProcess: DWORD,
+        idThread: DWORD,
+        dwFlags: DWORD,
+    ) -> HWINEVENTHOOK;
+    pub fn IsWinEventHookInstalled(
+        event: DWORD,
+    ) -> BOOL;
+    pub fn UnhookWinEvent(
+        hWinEventHook: HWINEVENTHOOK,
+    ) -> BOOL;
 //14098
+    pub fn BlockInput(
+        fBlockIt: BOOL,
+    ) -> BOOL;
+    pub fn IsProcessDPIAware() -> BOOL;
+    pub fn GetWindowModuleFileNameA(
+        hWnd: HWND,
+        lpszFileName: LPCSTR,
+        cchFileNameMax: UINT,
+    ) -> UINT;
+    pub fn GetWindowModuleFileNameW(
+        hWnd: HWND,
+        lpszFileName: LPWSTR,
+        cchFileNameMax: UINT,
+    ) -> UINT;
+    pub fn GetAncestor(
+        hWnd: HWND,
+        gaFlags: UINT,
+    ) -> HWND;
+    pub fn RealChildWindowFromPoint(
+        hwndParent: HWND,
+        ptParentClientCoords: POINT,
+    ) -> HWND;
+    pub fn RealGetWindowClassA(
+        hwnd: HWND,
+        ptszClassName: LPSTR,
+        cchClassNameMax: UINT,
+    ) -> UINT;
+    pub fn RealGetWindowClassW(
+        hwnd: HWND,
+        ptszClassName: LPWSTR,
+        cchClassNameMax: UINT,
+    ) -> UINT;
+    pub fn LockWorkStation() -> BOOL;
+    pub fn UserHandleGrantAccess(
+        hUserHandle: HANDLE,
+        hJob: HANDLE,
+        bGrant: BOOL,
+    ) -> BOOL;
+}
 DECLARE_HANDLE!(HRAWINPUT, HRAWINPUT__);
 #[inline]
 pub fn GET_RAWINPUT_CODE_WPARAM(wParam: WPARAM) -> WPARAM { wParam & 0xff }
@@ -5971,6 +6581,15 @@ pub type PRAWINPUT = *mut RAWINPUT;
 pub type LPRAWINPUT = *mut RAWINPUT;
 pub const RID_INPUT: DWORD = 0x10000003;
 pub const RID_HEADER: DWORD = 0x10000005;
+extern "system" {
+    pub fn GetRawInputData(
+        hRawInput: HRAWINPUT,
+        uiCommand: UINT,
+        pData: LPVOID,
+        pcbSize: PUINT,
+        cbSizeHeader: UINT,
+    ) -> UINT;
+}
 pub const RIDI_PREPARSEDDATA: DWORD = 0x20000005;
 pub const RIDI_DEVICENAME: DWORD = 0x20000007;
 pub const RIDI_DEVICEINFO: DWORD = 0x2000000b;
@@ -6008,6 +6627,25 @@ UNION!(RID_DEVICE_INFO, keyboard, keyboard, keyboard_mut, RID_DEVICE_INFO_KEYBOA
 UNION!(RID_DEVICE_INFO, keyboard, hid, hid_mut, RID_DEVICE_INFO_HID);
 pub type PRID_DEVICE_INFO = *mut RID_DEVICE_INFO;
 pub type LPRID_DEVICE_INFO = *mut RID_DEVICE_INFO;
+extern "system" {
+    pub fn GetRawInputDeviceInfoA(
+        hDevice: HANDLE,
+        uiCommand: UINT,
+        pData: LPVOID,
+        pcbSize: PUINT,
+    ) -> UINT;
+    pub fn GetRawInputDeviceInfoW(
+        hDevice: HANDLE,
+        uiCommand: UINT,
+        pData: LPVOID,
+        pcbSize: PUINT,
+    ) -> UINT;
+    pub fn GetRawInputBuffer(
+        pData: PRAWINPUT,
+        pcbSize: PUINT,
+        cbSizeHeader: UINT,
+    ) -> UINT;
+}
 STRUCT!{struct RAWINPUTDEVICE {
     usUsagePage: USHORT,
     usUsage: USHORT,
@@ -6030,39 +6668,52 @@ pub const RIDEV_DEVNOTIFY: DWORD = 0x00002000;
 pub const RIDEV_EXMODEMASK: DWORD = 0x000000F0;
 pub const GIDC_ARRIVAL: DWORD = 1;
 pub const GIDC_REMOVAL: DWORD = 2;
+extern "system" {
+    pub fn RegisterRawInputDevices(
+        pRawInputDevices: PCRAWINPUTDEVICE,
+        uiNumDevices: UINT,
+        cbSize: UINT,
+    ) -> BOOL;
+    pub fn GetRegisteredRawInputDevices(
+        pRawInputDevices: PRAWINPUTDEVICE,
+        puiNumDevices: PUINT,
+        cbSize: UINT,
+    ) -> UINT;
+}
 STRUCT!{struct RAWINPUTDEVICELIST {
     hDevice: HANDLE,
     dwType: DWORD,
 }}
 pub type PRAWINPUTDEVICELIST = *mut RAWINPUTDEVICELIST;
+extern "system" {
+    pub fn GetRawInputDeviceList(
+        pRawInputDeviceList: PRAWINPUTDEVICELIST,
+        puiNumDevices: PUINT,
+        cbSize: UINT,
+    ) -> UINT;
+    pub fn DefRawInputProc(
+        paRawInput: *mut PRAWINPUT,
+        nInput: INT,
+        cbSizeHeader: UINT,
+    ) -> LRESULT;
+    pub fn ChangeWindowMessageFilter(
+        message: UINT,
+        dwFlag: DWORD,
+    ) -> BOOL;
+}
 STRUCT!{struct CHANGEFILTERSTRUCT {
     cbSize: DWORD,
     ExtStatus: DWORD,
 }}
+extern "system" {
+    pub fn ChangeWindowMessageFilterEx(
+        hwnd: HWND,
+        message: UINT,
+        action: DWORD,
+        pChangeFilterStruct: PCHANGEFILTERSTRUCT,
+    ) -> BOOL;
+}
 pub type PCHANGEFILTERSTRUCT = *mut CHANGEFILTERSTRUCT;
-pub const SIF_RANGE: UINT = 0x0001;
-pub const SIF_PAGE: UINT = 0x0002;
-pub const SIF_POS: UINT = 0x0004;
-pub const SIF_DISABLENOSCROLL: UINT = 0x0008;
-pub const SIF_TRACKPOS: UINT = 0x0010;
-pub const SIF_ALL: UINT = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
-pub const LR_DEFAULTCOLOR: UINT = 0x00000000;
-pub const LR_MONOCHROME: UINT = 0x00000001;
-pub const LR_COLOR: UINT = 0x00000002;
-pub const LR_COPYRETURNORG: UINT = 0x00000004;
-pub const LR_COPYDELETEORG: UINT = 0x00000008;
-pub const LR_LOADFROMFILE: UINT = 0x00000010;
-pub const LR_LOADTRANSPARENT: UINT = 0x00000020;
-pub const LR_DEFAULTSIZE: UINT = 0x00000040;
-pub const LR_VGACOLOR: UINT = 0x00000080;
-pub const LR_LOADMAP3DCOLORS: UINT = 0x00001000;
-pub const LR_CREATEDIBSECTION: UINT = 0x00002000;
-pub const LR_COPYFROMRESOURCE: UINT = 0x00004000;
-pub const LR_SHARED: UINT = 0x00008000;
-pub const IMAGE_BITMAP: UINT = 0;
-pub const IMAGE_ICON: UINT = 1;
-pub const IMAGE_CURSOR: UINT = 2;
-pub const IMAGE_ENHMETAFILE: UINT = 3;
 // if WINVER >= 0x0601
 // GetSystemMetrics(SM_DIGITIZER) flag values
 pub const NID_INTEGRATED_TOUCH: UINT = 0x00000001;
@@ -6074,29 +6725,6 @@ pub const NID_READY: UINT = 0x00000080;
 // end if WINVER >= 0x0601
 // System Menu Command Values
 //
-pub const SC_SIZE: WPARAM = 0xF000;
-pub const SC_MOVE: WPARAM = 0xF010;
-pub const SC_MINIMIZE: WPARAM = 0xF020;
-pub const SC_MAXIMIZE: WPARAM = 0xF030;
-pub const SC_NEXTWINDOW: WPARAM = 0xF040;
-pub const SC_PREVWINDOW: WPARAM = 0xF050;
-pub const SC_CLOSE: WPARAM = 0xF060;
-pub const SC_VSCROLL: WPARAM = 0xF070;
-pub const SC_HSCROLL: WPARAM = 0xF080;
-pub const SC_MOUSEMENU: WPARAM = 0xF090;
-pub const SC_KEYMENU: WPARAM = 0xF100;
-pub const SC_ARRANGE: WPARAM = 0xF110;
-pub const SC_RESTORE: WPARAM = 0xF120;
-pub const SC_TASKLIST: WPARAM = 0xF130;
-pub const SC_SCREENSAVE: WPARAM = 0xF140;
-pub const SC_HOTKEY: WPARAM = 0xF150;
-// if WINVER >= 0x0400
-pub const SC_DEFAULT: WPARAM = 0xF160;
-pub const SC_MONITORPOWER: WPARAM = 0xF170;
-pub const SC_CONTEXTHELP: WPARAM = 0xF180;
-pub const SC_SEPARATOR: WPARAM = 0xF00F;
-// endif WINVER >= 0x0400
-// ANIMATIONINFO and related fields
 STRUCT!{struct ANIMATIONINFO {
     cbSize: UINT,
     iMinAnimate: c_int,
@@ -6114,4 +6742,7 @@ extern "system" {
         hInstance: HINSTANCE,
         lpIconName: LPCWSTR,
     ) -> HICON;
+    pub fn IsImmersiveProcess(
+        hProcess: HANDLE,
+    ) -> BOOL;
 }
