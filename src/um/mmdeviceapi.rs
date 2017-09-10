@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
-// Done as of 10.0.14393.
 use ctypes::c_void;
 use shared::guiddef::{GUID, REFIID};
 use shared::minwindef::{DWORD, LPARAM, LPVOID, UINT};

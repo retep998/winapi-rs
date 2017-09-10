@@ -954,3 +954,31 @@ interface ID2D1Factory(ID2D1FactoryVtbl): IUnknown(IUnknownVtbl) {
         dcRenderTarget: *mut *mut ID2D1DCRenderTarget,
     ) -> HRESULT,
 }}
+extern "system" {
+    pub fn D2D1CreateFactory(
+        factoryType: D2D1_FACTORY_TYPE,
+        riid: REFIID,
+        pFactoryOptions: *const D2D1_FACTORY_OPTIONS,
+        ppIFactory: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn D2D1MakeRotateMatrix(
+        angle: FLOAT,
+        center: D2D1_POINT_2F,
+        matrix: *mut D2D1_MATRIX_3X2_F,
+    );
+    pub fn D2D1MakeSkewMatrix(
+        angleX: FLOAT,
+        angleY: FLOAT,
+        center: D2D1_POINT_2F,
+        matrix: *mut D2D1_MATRIX_3X2_F,
+    );
+    pub fn D2D1IsMatrixInvertible(
+        matrix: *const D2D1_MATRIX_3X2_F,
+    ) -> BOOL;
+    pub fn D2D1InvertMatrix(
+        matrix: *mut D2D1_MATRIX_3X2_F,
+    ) -> BOOL;
+    pub fn D2D1ComputeMaximumScaleFactor(
+        matrix: *const D2D1_MATRIX_3X2_F,
+    ) -> FLOAT;
+}

@@ -7,6 +7,10 @@
   `W`).
 * For hexadecimal numbers, preserve the casing from the original headers (except for the uuid for
   `RIDL!`).
+* If an identifier happens to match a Rust keyword, then append an underscore. For example `type`
+  would turn into `type_`.
+* Macro invocations at the item level should use `{}`. Macro invocations at the expression level
+  should use `()`.
 
 ## Newlines and indentation
 
@@ -54,6 +58,18 @@ extern "system" {
 }
 ```
 
+## Inline functions and macros
+
+* Inline functions and macros should be translated into Rust functions.
+* These functions should always be marked `#[inline]`.
+* Until constant functions can be defined in the minimum Rust that winapi supports, if a function
+  needs to be called in a constant, then a macro version of the function should be added.
+* Inline functions are allowed to undergo some Rustification because they are not required to match
+  the ABI of the original. Raw pointers can be translated into references, `BOOLEAN` into `bool`,
+  and so on.
+* If the function needs to do unsafe operations, then the function should be marked unsafe. If the
+  function does not do anything unsafe, then it should remain a safe function.
+
 ## Function pointers
 
 ```Rust
@@ -74,6 +90,11 @@ FN!{stdcall NAMEENUMPROCA(
 
 * Convert macro constants to Rust constants.
 * The type of the constant should depend on where the constant is used. MSDN may help for this.
+* If the constant has an unsigned type, but the literal needs to be negative, perform a cast such
+  as `-1i16 as u16`. Use the primitive integer types that correspond to the type of the constant.
+* If the constant is initialized to an expression involving a constant of a different type and a
+  cast must be performed, do the cast using the primitive integer types.
+* If the constant is a pointer that is initialized to a negative literal, do `-1isize as LPFOO`.
 
 ```C
 #define CLSCTX_INPROC           (CLSCTX_INPROC_SERVER|CLSCTX_INPROC_HANDLER)
@@ -135,7 +156,8 @@ pub type PUSN_RECORD_UNION = *mut USN_RECORD_UNION;
 
 * The first parameter to `UNION2!` is the storage for that union. It must have both the correct
   size and alignment. You can use the following C++ code to print out the storage for any union
-  type that can be named. Defining `NONAMELESSUNION` will help with naming anonymous unions.
+  type that can be named. You may need to use a combination of `#define NONAMELESSUNION` and
+  `decltype` in order to name anonymous unions.
 
 ```C++
 char const * type_for_alignment(uintptr_t align) {
@@ -147,7 +169,8 @@ char const * type_for_alignment(uintptr_t align) {
     default: throw;
     }
 }
-#define PRINT_UNION(x) cout << "[" << type_for_alignment(alignof(x)) << "; " << sizeof(x) / alignof(x) << "]" << endl;
+#define PRINT_UNION(x) cout << "[" << type_for_alignment(alignof(x))\
+    << "; " << sizeof(x) / alignof(x) << "]" << endl;
 int main() {
     PRINT_UNION(USN_RECORD_UNION);
 }
@@ -172,6 +195,37 @@ UNION2!{union D3D12_RESOURCE_BARRIER_u {
   a name of `FOO_s` or `FOO_u` respectively, and the field a name of `s` or `u` respectively.
 * If the type `FOO` contains multiple anonymous structs or unions, append a number, such as `s1:
   FOO_s1` `s2: FOO_s2` or `u1: FOO_u1` `u2: FOO_u2`.
+* If the field does have a name, such as `Bar`, but still contains an anonymous struct or union
+  then retain the name of `Bar` for the field and name the anonymous struct or union after the
+  field, such as `FOO_Bar`.
+
+## Union with a primitive field and an anonymous bitfield struct of the same type
+
+```C
+typedef union _USB_HUB_STATUS {
+    USHORT  AsUshort16;
+    struct {
+        USHORT  LocalPowerLost:1;
+        USHORT  OverCurrent:1;
+        USHORT  Reserved:14;
+    };
+} USB_HUB_STATUS, *PUSB_HUB_STATUS;
+```
+
+```Rust
+STRUCT!{struct USB_HUB_STATUS {
+    AsUshort16: USHORT,
+}}
+BITFIELD!{USB_HUB_STATUS AsUshort16: USHORT [
+    LocalPowerLost set_LocalPowerLost[0..1],
+    OverCurrent set_OverCurrent[1..2],
+    Reserved set_Reserved[2..16],
+]}
+```
+
+* If the union is anonymous and the field for it is unnamed, then instead of creating a single
+  field struct, simply inline that field into the containing struct and apply the bitfield to
+  *that*.
 
 ## COM interfaces
 

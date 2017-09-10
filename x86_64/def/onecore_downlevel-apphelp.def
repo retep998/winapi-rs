@@ -1,0 +1,10 @@
+LIBRARY APPHELP.dll
+EXPORTS
+ApphelpCheckShellObject
+SE_COM_AddHook
+SE_COM_AddServer
+SE_COM_Lookup
+SE_GetShimId
+SE_ShimDPF
+SE_WINRT_AddHook
+SE_WINRT_HookObject

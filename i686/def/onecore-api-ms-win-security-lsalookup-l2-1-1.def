@@ -1,0 +1,9 @@
+LIBRARY api-ms-win-security-lsalookup-l2-1-1.dll
+EXPORTS
+LookupAccountNameW@28
+LookupAccountSidW@28
+LookupPrivilegeDisplayNameW@20
+LookupPrivilegeNameW@16
+LookupPrivilegeValueW@12
+LsaEnumerateTrustedDomains@20
+LsaManageSidNameMapping@12

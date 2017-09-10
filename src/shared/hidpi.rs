@@ -4,11 +4,11 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::hidusage::USAGE;
-use shared::minwindef::{PUCHAR, UCHAR, ULONG, USHORT};
+use shared::hidusage::{PUSAGE, USAGE};
+use shared::minwindef::{PUCHAR, PULONG, PUSHORT, UCHAR, ULONG, USHORT};
 use shared::ntdef::NTSTATUS;
 use shared::ntstatus::FACILITY_HID_ERROR_CODE;
-use um::winnt::{BOOLEAN, LONG, PCHAR, PVOID};
+use um::winnt::{BOOLEAN, LONG, PCHAR, PLONG, PVOID};
 pub const HIDP_LINK_COLLECTION_ROOT: USHORT = -1i16 as u16;
 pub const HIDP_LINK_COLLECTION_UNSPECIFIED: USHORT = 0;
 ENUM!{enum HIDP_REPORT_TYPE {
@@ -150,6 +150,202 @@ STRUCT!{struct HIDP_EXTENDED_ATTRIBUTES {
     Data: [ULONG; 1],
 }}
 pub type PHIDP_EXTENDED_ATTRIBUTES = *mut HIDP_EXTENDED_ATTRIBUTES;
+extern "system" {
+    pub fn HidP_GetCaps(
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Capabilities: PHIDP_CAPS,
+    ) -> NTSTATUS;
+    pub fn HidP_GetLinkCollectionNodes(
+        LinkCollectionNodes: PHIDP_LINK_COLLECTION_NODE,
+        LinkCollectionNodesLength: PULONG,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+    ) -> NTSTATUS;
+    pub fn HidP_GetSpecificButtonCaps(
+        ReportType: HIDP_REPORT_TYPE,
+        UsagePage: USAGE,
+        LinkCollection: USHORT,
+        Usage: USAGE,
+        ButtonCaps: PHIDP_BUTTON_CAPS,
+        ButtonCapsLength: PUSHORT,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+    ) -> NTSTATUS;
+    pub fn HidP_GetButtonCaps(
+        ReportType: HIDP_REPORT_TYPE,
+        ButtonCaps: PHIDP_BUTTON_CAPS,
+        ButtonCapsLength: PUSHORT,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+    ) -> NTSTATUS;
+    pub fn HidP_GetSpecificValueCaps(
+        ReportType: HIDP_REPORT_TYPE,
+        UsagePage: USAGE,
+        LinkCollection: USHORT,
+        Usage: USAGE,
+        ValueCaps: PHIDP_VALUE_CAPS,
+        ValueCapsLength: PUSHORT,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+    ) -> NTSTATUS;
+    pub fn HidP_GetValueCaps(
+        ReportType: HIDP_REPORT_TYPE,
+        ValueCaps: PHIDP_VALUE_CAPS,
+        ValueCapsLength: PUSHORT,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+    ) -> NTSTATUS;
+    pub fn HidP_GetExtendedAttributes(
+        ReportType: HIDP_REPORT_TYPE,
+        DataIndex: USHORT,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Attributes: PHIDP_EXTENDED_ATTRIBUTES,
+        LengthAttributes: PULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_InitializeReportForID(
+        ReportType: HIDP_REPORT_TYPE,
+        ReportID: UCHAR,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR,
+        ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_SetData(
+        ReportType: HIDP_REPORT_TYPE,
+        DataList: PHIDP_DATA,
+        DataLength: PULONG,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR,
+        ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_GetData(
+        ReportType: HIDP_REPORT_TYPE,
+        DataList: PHIDP_DATA,
+        DataLength: PULONG,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR,
+        ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_MaxDataListLength(
+        ReportType: HIDP_REPORT_TYPE,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+    ) -> ULONG;
+    pub fn HidP_SetUsages(
+        ReportType: HIDP_REPORT_TYPE,
+        UsagePage: USAGE,
+        LinkCollection: USHORT,
+        UsageList: PUSAGE,
+        UsageLength: PULONG,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR,
+        ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_UnsetUsages(
+        ReportType: HIDP_REPORT_TYPE,
+        UsagePage: USAGE,
+        LinkCollection: USHORT,
+        UsageList: PUSAGE,
+        UsageLength: PULONG,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR,
+        ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_GetUsages(
+        ReportType: HIDP_REPORT_TYPE,
+        UsagePage: USAGE,
+        LinkCollection: USHORT,
+        UsageList: PUSAGE,
+        UsageLength: PULONG,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR,
+        ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_GetUsagesEx(
+        ReportType: HIDP_REPORT_TYPE,
+        LinkCollection: USHORT,
+        ButtonList: PUSAGE_AND_PAGE,
+        UsageLength: *mut ULONG,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR,
+        ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_MaxUsageListLength(
+        ReportType: HIDP_REPORT_TYPE,
+        UsagePage: USAGE,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+    ) -> ULONG;
+    pub fn HidP_SetUsageValue(
+        ReportType: HIDP_REPORT_TYPE,
+        UsagePage: USAGE,
+        LinkCollection: USHORT,
+        Usage: USAGE,
+        UsageValue: ULONG,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR,
+        ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_SetScaledUsageValue(
+        ReportType: HIDP_REPORT_TYPE,
+        UsagePage: USAGE,
+        LinkCollection: USHORT,
+        Usage: USAGE,
+        UsageValue: LONG,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR,
+        ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_SetUsageValueArray(
+        ReportType: HIDP_REPORT_TYPE,
+        UsagePage: USAGE,
+        LinkCollection: USHORT,
+        Usage: USAGE,
+        UsageValue: PCHAR,
+        UsageValueByteLength: USHORT,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR,
+        ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_GetUsageValue(
+        ReportType: HIDP_REPORT_TYPE,
+        UsagePage: USAGE,
+        LinkCollection: USHORT,
+        Usage: USAGE,
+        UsageValue: PULONG,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR,
+        ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_GetScaledUsageValue(
+        ReportType: HIDP_REPORT_TYPE,
+        UsagePage: USAGE,
+        LinkCollection: USHORT,
+        Usage: USAGE,
+        UsageValue: PLONG,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR,
+        ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_GetUsageValueArray(
+        ReportType: HIDP_REPORT_TYPE,
+        UsagePage: USAGE,
+        LinkCollection: USHORT,
+        Usage: USAGE,
+        UsageValue: PCHAR,
+        UsageValueByteLength: USHORT,
+        PreparsedData: PHIDP_PREPARSED_DATA,
+        Report: PCHAR,
+        ReportLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_UsageListDifference(
+        PreviousUsageList: PUSAGE,
+        CurrentUsageList: PUSAGE,
+        BreakUsageList: PUSAGE,
+        MakeUsageList: PUSAGE,
+        UsageListLength: ULONG,
+    ) -> NTSTATUS;
+    pub fn HidP_TranslateUsagesToI8042ScanCodes(
+        ChangedUsageList: PUSAGE,
+        UsageListLength: ULONG,
+        KeyAction: HIDP_KEYBOARD_DIRECTION,
+        ModifierState: PHIDP_KEYBOARD_MODIFIER_STATE,
+        InsertCodesProcedure: PHIDP_INSERT_SCANCODES,
+        InsertCodesContext: PVOID,
+    ) -> NTSTATUS;
+}
 ENUM!{enum HIDP_KEYBOARD_DIRECTION {
     HidP_Keyboard_Break,
     HidP_Keyboard_Make,

@@ -1,0 +1,5 @@
+LIBRARY api-ms-win-gaming-gamemonitor-l1-1-0.dll
+EXPORTS
+EnableActiveGameMonitoring
+ReportGameActivity
+SetGameActivityCorrelationId

@@ -1,0 +1,14 @@
+LIBRARY TDH.dll
+EXPORTS
+TdhEnumerateManifestProviderEvents
+TdhEnumerateProviderFieldInformation
+TdhEnumerateProviders
+TdhFormatProperty
+TdhGetEventInformation
+TdhGetEventMapInformation
+TdhGetManifestEventInformation
+TdhGetProperty
+TdhGetPropertySize
+TdhLoadManifest
+TdhQueryProviderFieldInformation
+TdhUnloadManifest

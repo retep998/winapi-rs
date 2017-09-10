@@ -636,7 +636,7 @@ interface ID3D12Object(ID3D12ObjectVtbl): IUnknown(IUnknownVtbl) {
 RIDL!{#[uuid(0x905db94b, 0xa00c, 0x4140, 0x9d, 0xf5, 0x2b, 0x64, 0xca, 0x9e, 0xa3, 0x57)]
 interface ID3D12DeviceChild(ID3D12DeviceChildVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     fn GetDevice(
-        riid: REFGUID,
+        riid: REFIID,
         ppvDevice: *mut *mut c_void,
     ) -> HRESULT,
 }}
@@ -1747,7 +1747,7 @@ interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12Pagea
     ) -> (),
     fn ExecuteCommandLists(
         NumCommandLists: UINT,
-        ppCommandLists: *mut *mut ID3D12CommandList,
+        ppCommandLists: *const *mut ID3D12CommandList,
     ) -> (),
     fn SetMarker(
         Metadata: UINT,
