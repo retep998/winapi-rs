@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! GUID definition
-// Done as of 10.0.14393.0
 use ctypes::{c_uchar, c_ulong, c_ushort};
 STRUCT!{struct GUID {
     Data1: c_ulong,

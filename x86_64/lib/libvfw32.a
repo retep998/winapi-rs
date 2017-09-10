@@ -1,0 +1,5 @@
+INPUT(
+libvfw32-msvfw32.a
+libvfw32-avicap32.a
+libvfw32-avifil32.a
+)

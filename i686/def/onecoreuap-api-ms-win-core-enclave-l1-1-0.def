@@ -1,0 +1,6 @@
+LIBRARY api-ms-win-core-enclave-l1-1-0.dll
+EXPORTS
+CreateEnclave@32
+InitializeEnclave@20
+IsEnclaveTypeSupported@4
+LoadEnclaveData@36

@@ -1,0 +1,164 @@
+LIBRARY SHELL32.dll
+EXPORTS
+CIDLData_CreateFromIDArray@16 @83
+DAD_AutoScroll@12 @129
+DAD_DragEnterEx2@16 @22
+DAD_DragLeave@0 @132
+DAD_DragMove@8 @134
+DAD_SetDragImage@8 @136
+ILClone@4 @18
+ILCloneFirst@4 @19
+ILCombine@8 @25
+ILCreateFromPathW@4 @190
+ILFindChild@8 @24
+ILFindLastID@4 @16
+ILFree@4 @155
+ILGetSize@4 @152
+ILIsEqual@8 @21
+ILIsParent@12 @23
+ILLoadFromStreamEx@8 @846
+ILRemoveLastID@4 @17
+ILSaveToStream@8 @27
+IsUserAnAdmin@0 @680
+PathCleanupSpec@8 @171
+PathComparePaths@8 @850
+PathIsExe@4 @43
+PathMakeUniqueName@20 @47
+PathResolve@12 @51
+PathYetAnotherMakeUniqueName@16 @75
+PickIconDlg@16 @62
+RestartDialog@12 @59
+SHAlloc@4 @196
+SHChangeNotification_Lock@16 @644
+SHChangeNotification_Unlock@4 @645
+SHChangeNotifyDeregister@4 @4
+SHChangeNotifyRegister@24 @2
+SHCloneSpecialIDList@12 @89
+SHCoCreateInstance@20 @102
+SHCreateDirectory@8 @165
+SHCreateShellFolderView@8 @256
+SHCreateStdEnumFmtEtc@12 @74
+SHDefExtractIconW@24 @6
+SHDoDragDrop@20 @88
+Shell_GetImageLists@8 @71
+Shell_MergeMenus@24 @67
+SHFlushSFCache@0 @526
+SHFree@4 @195
+SHGetImageList@12 @727
+SHGetRealIDL@12 @98
+SHGetSetSettings@12 @68
+SHILCreateFromPath@12 @28
+SHLimitInputEdit@8 @747
+SHRestricted@4 @100
+SHSetInstanceExplorer@4 @176
+SHSimpleIDListFromPath@4 @162
+Win32DeleteFile@4 @164
+AssocCreateForClasses@16
+CDefFolderMenu_MergeMenu@16
+CommandLineToArgvW@8
+CreateAutoListParser@8
+CreateStorageItemFromShellItem_FullTrustCaller@16
+CreateStorageItemFromShellItem_FullTrustCaller_ForPackage@20
+CreateStorageItemFromShellItem_FullTrustCaller_ForPackage_WithProcessHandle@24
+CreateStorageItemFromShellItem_FullTrustCaller_UseImplicitFlagsAndPackage@16
+DragAcceptFiles@8
+DragFinish@4
+DragQueryFileA@16
+DragQueryFileW@16
+DuplicateIcon@8
+ExtractAssociatedIconW@12
+ExtractIconA@12
+ExtractIconExW@20
+ExtractIconW@12
+GetAppPathFromLink@12
+GetCurrentProcessExplicitAppUserModelID@4
+GetSettingsEnvironmentInstance@4
+GetShellItemFromStorageItem@12
+InitNetworkAddressControl@0
+IsElevationRequired@4
+PathIsEqualOrSubFolder@8
+PathIsTemporaryW@4
+RegenerateUserEnvironment@8
+SHAddToRecentDocs@8
+SHAddToRecentDocsEx@12
+SHAppBarMessage@8
+SHApplyPropertiesToItem@16
+SHBindToFolderIDListParent@20
+SHBindToFolderIDListParentEx@24
+SHBindToObject@20
+SHBindToParent@16
+SHBrowseForFolderA@4
+SHBrowseForFolderW@4
+SHChangeNotify@16
+SHCreateAssociationRegistration@8
+SHCreateDataObject@24
+SHCreateDefaultContextMenu@12
+SHCreateDefaultExtractIcon@8
+SHCreateDelegatingTransfer@20
+SHCreateDirectoryExA@12
+SHCreateDirectoryExW@12
+SHCreateItemFromIDList@12
+SHCreateItemFromParsingName@16
+SHCreateItemFromRelativeName@20
+SHCreateItemInKnownFolder@20
+SHCreateItemWithParent@20
+SHCreateLinksEx@28
+SHCreateRelatedItem@12
+SHCreateShellItem@16
+SHCreateShellItemArrayFromDataObject@12
+SHCreateShellItemArrayFromIDLists@12
+SHCreateShellItemArrayFromShellItem@12
+SHEmptyRecycleBinW@12
+SHEnableServiceObject@8
+SHEvaluateSystemCommandTemplate@16
+SHExtCoCreateInstance@24
+SHExtractIconsW@32
+SHFileOperationA@4
+SHFileOperationW@4
+SHGetDataFromIDListW@20
+SHGetDesktopFolder@4
+SHGetFileInfoA@20
+SHGetFileInfoW@20
+SHGetFolderLocation@20
+SHGetFolderPathA@20
+SHGetFolderPathAndSubDirW@24
+SHGetFolderPathW@20
+SHGetFolderTypeDescription@12
+SHGetFolderTypeFromCanonicalName@8
+SHGetIDListFromObject@8
+SHGetInstanceExplorer@4
+SHGetKnownFolderIDList@16
+SHGetKnownFolderItem@20
+SHGetKnownFolderPath@16
+SHGetMalloc@4
+SHGetNameFromIDList@12
+SHGetPathFromIDListA@8
+SHGetPathFromIDListEx@16
+SHGetPathFromIDListW@8
+SHGetPropertyStoreForWindow@12
+SHGetPropertyStoreFromParsingName@20
+SHGetSpecialFolderLocation@12
+SHGetSpecialFolderPathA@16
+SHGetSpecialFolderPathW@16
+SHGetStockIconInfo@12
+SHGetTemporaryPropertyForItem@12
+SHGetThreadUndoManager@8
+SHGetUserDisplayName@8
+SHLogILFromFSIL@4
+SHOpenFolderAndSelectItems@16
+SHOpenWithDialog@8
+SHParseDisplayName@20
+SHQueryUserNotificationState@4
+SHSetKnownFolderPath@16
+SHSetLocalizedName@12
+SHShowManageLibraryUI@20
+SetCurrentProcessExplicitAppUserModelID@4
+ShellAboutW@16
+ShellExecCmdLine@24
+ShellExecuteA@24
+ShellExecuteExA@4
+ShellExecuteExW@4
+ShellExecuteW@24
+Shell_GetCachedImageIndexW@12
+Shell_NotifyIconA@8
+Shell_NotifyIconW@8

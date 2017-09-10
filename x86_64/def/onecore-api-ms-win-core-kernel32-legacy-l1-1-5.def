@@ -1,0 +1,27 @@
+LIBRARY api-ms-win-core-kernel32-legacy-l1-1-5.dll
+EXPORTS
+CopyFileTransactedW
+CreateDirectoryTransactedW
+CreateHardLinkTransactedW
+CreateMailslotW
+CreateSymbolicLinkTransactedW
+DeleteFileTransactedW
+FindFirstFileTransactedW
+GetBinaryTypeA
+GetBinaryTypeW
+GetCompressedFileSizeTransactedW
+GetDllDirectoryW
+GetFullPathNameTransactedW
+GetLongPathNameTransactedW
+GetMailslotInfo
+Module32First
+Module32Next
+MoveFileTransactedW
+OpenFileMappingA
+Process32First
+Process32Next
+RemoveDirectoryTransactedW
+SetFileAttributesTransactedW
+SetTermsrvAppInstallMode
+SetThreadExecutionState
+VerifyVersionInfoA

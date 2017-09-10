@@ -1,0 +1,5 @@
+LIBRARY api-ms-win-oobe-notification-l1-1-0.dll
+EXPORTS
+OOBEComplete@4
+RegisterWaitUntilOOBECompleted@12
+UnregisterWaitUntilOOBECompleted@4

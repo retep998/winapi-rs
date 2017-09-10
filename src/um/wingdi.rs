@@ -8,14 +8,16 @@
 use ctypes::{c_char, c_int, c_long, c_short, c_ushort, c_void};
 use shared::basetsd::{UINT16, UINT32, UINT64, ULONG_PTR};
 use shared::minwindef::{
-    BOOL, BYTE, DWORD, FLOAT, HGLOBAL, HMETAFILE, HRGN, INT, LPARAM, LPVOID, MAX_PATH, UINT, ULONG,
-    USHORT, WORD,
+    BOOL, BYTE, DWORD, FLOAT, HGLOBAL, HMETAFILE, HMODULE, HRGN, INT, LOBYTE, LPARAM, LPBYTE,
+    LPDWORD, LPINT, LPVOID, LPWORD, MAX_PATH, PFLOAT, PROC, UINT, ULONG, USHORT, WORD,
 };
 use shared::windef::{
-    COLORREF, HBITMAP, HBRUSH, HDC, HFONT, HGDIOBJ, HPALETTE, HPEN, POINT, POINTL, RECT, RECTL,
-    SIZEL,
+    COLORREF, HBITMAP, HBRUSH, HCOLORSPACE, HDC, HENHMETAFILE, HFONT, HGDIOBJ, HGLRC, HPALETTE,
+    HPEN, HWND, LPPOINT, LPRECT, LPSIZE, POINT, POINTL, POINTS, RECT, RECTL, SIZEL,
 };
-use um::winnt::{CHAR, HANDLE, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, LUID, PSTR, SHORT, WCHAR};
+use um::winnt::{
+    CHAR, HANDLE, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, LUID, PSTR, PVOID, SHORT, VOID, WCHAR,
+};
 pub const R2_BLACK: c_int = 1;
 pub const R2_NOTMERGEPEN: c_int = 2;
 pub const R2_MASKNOTPEN: c_int = 3;
@@ -436,11 +438,26 @@ pub const ICM_SETDEFAULTPROFILE: UINT = 4;
 pub const ICM_REGISTERICMATCHER: UINT = 5;
 pub const ICM_UNREGISTERICMATCHER: UINT = 6;
 pub const ICM_QUERYMATCH: UINT = 7;
-// GetKValue
-// GetYValue
-// GetMValue
-// GetCValue
-// CMYK
+#[inline]
+pub fn GetKValue(cmyk: COLORREF) -> BYTE {
+    cmyk as BYTE
+}
+#[inline]
+pub fn GetYValue(cmyk: COLORREF) -> BYTE {
+    (cmyk >> 8) as BYTE
+}
+#[inline]
+pub fn GetMValue(cmyk: COLORREF) -> BYTE {
+    (cmyk >> 16) as BYTE
+}
+#[inline]
+pub fn GetCValue(cmyk: COLORREF) -> BYTE {
+    (cmyk >> 24) as BYTE
+}
+#[inline]
+pub fn CMYK(c: BYTE, m: BYTE, y: BYTE, k: BYTE) -> COLORREF {
+    (k as COLORREF) | ((y as COLORREF) << 8) | ((m as COLORREF) << 16) | ((c as COLORREF) << 24)
+}
 pub type FXPT16DOT16 = c_long;
 pub type LPFXPT16DOT16 = *mut c_long;
 pub type FXPT2DOT30 = c_long;
@@ -588,7 +605,10 @@ STRUCT!{struct BITMAPFILEHEADER {
 }}
 pub type LPBITMAPFILEHEADER = *mut BITMAPFILEHEADER;
 pub type PBITMAPFILEHEADER = *mut BITMAPFILEHEADER;
-// MAKEPOINTS
+#[inline]
+pub fn MAKEPOINTS(l: DWORD) -> POINTS {
+    unsafe { ::core::mem::transmute::<DWORD, POINTS>(l) }
+}
 STRUCT!{struct FONTSIGNATURE {
     fsUsb: [DWORD; 4],
     fsCsb: [DWORD; 2],
@@ -1195,14 +1215,29 @@ pub const TRUETYPE_FONTTYPE: DWORD = 0x0004;
 pub fn RGB(r: BYTE, g: BYTE, b: BYTE) -> COLORREF {
     r as COLORREF | ((g as COLORREF) << 8) | ((b as COLORREF) << 16)
 }
-// PALETTERGB
-// PALETTEINDEX
+#[inline]
+pub fn PALETTERGB(r: BYTE, g: BYTE, b: BYTE) -> COLORREF {
+    0x02000000 | RGB(r, g, b)
+}
+#[inline]
+pub fn PALETTEINDEX(i: WORD) -> COLORREF {
+    0x01000000 | i as DWORD
+}
 pub const PC_RESERVED: DWORD = 0x01;
 pub const PC_EXPLICIT: DWORD = 0x02;
 pub const PC_NOCOLLAPSE: DWORD = 0x04;
-// GetRValue
-// GetGValue
-// GetBValue
+#[inline]
+pub fn GetRValue(rgb: COLORREF) -> BYTE {
+    LOBYTE(rgb as WORD)
+}
+#[inline]
+pub fn GetGValue(rgb: COLORREF) -> BYTE {
+    LOBYTE((rgb as WORD) >> 8)
+}
+#[inline]
+pub fn GetBValue(rgb: COLORREF) -> BYTE {
+    LOBYTE((rgb >> 16) as WORD)
+}
 pub const TRANSPARENT: DWORD = 1;
 pub const OPAQUE: DWORD = 2;
 pub const BKMODE_LAST: DWORD = 2;
@@ -2019,6 +2054,7 @@ STRUCT!{struct DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO {
 BITFIELD!{DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO value: UINT32 [
     advancedColorSupported set_advancedColorSupported[0..1],
     advancedColorEnabled set_advancedColorEnabled[1..2],
+    reserved set_reserved[2..32],
 ]}
 STRUCT!{struct DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE {
     header: DISPLAYCONFIG_DEVICE_INFO_HEADER,
@@ -2026,6 +2062,7 @@ STRUCT!{struct DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE {
 }}
 BITFIELD!{DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE value: UINT32 [
     enableAdvancedColor set_enableAdvancedColor[0..1],
+    reserved set_reserved[1..32],
 ]}
 pub const QDC_ALL_PATHS: DWORD = 0x00000001;
 pub const QDC_ONLY_ACTIVE_PATHS: DWORD = 0x00000002;
@@ -2065,6 +2102,7 @@ STRUCT!{struct RGNDATA {
 pub type PRGNDATA = *mut RGNDATA;
 pub type NPRGNDATA = *mut RGNDATA;
 pub type LPRGNDATA = *mut RGNDATA;
+pub const SYSRGN: INT = 4;
 STRUCT!{struct ABC {
     abcA: c_int,
     abcB: UINT,
@@ -2633,9 +2671,606 @@ extern "system" {
         ppfd: LPPIXELFORMATDESCRIPTOR,
     ) -> c_int;
 }
-/*********
-* CUTOFF *
-*********/
+FN!{stdcall LPFNDEVMODE(
+    HWND,
+    HMODULE,
+    LPDEVMODEA,
+    LPSTR,
+    LPSTR,
+    LPDEVMODEA,
+    LPSTR,
+    UINT,
+) -> UINT}
+FN!{stdcall LPFNDEVCAPS(
+    LPSTR,
+    LPSTR,
+    UINT,
+    LPSTR,
+    LPDEVMODEA,
+) -> DWORD}
+pub const DM_UPDATE: DWORD = 1;
+pub const DM_COPY: DWORD = 2;
+pub const DM_PROMPT: DWORD = 4;
+pub const DM_MODIFY: DWORD = 8;
+pub const DM_IN_BUFFER: DWORD = DM_MODIFY;
+pub const DM_IN_PROMPT: DWORD = DM_PROMPT;
+pub const DM_OUT_BUFFER: DWORD = DM_COPY;
+pub const DM_OUT_DEFAULT: DWORD = DM_UPDATE;
+pub const DC_FIELDS: WORD = 1;
+pub const DC_PAPERS: WORD = 2;
+pub const DC_PAPERSIZE: WORD = 3;
+pub const DC_MINEXTENT: WORD = 4;
+pub const DC_MAXEXTENT: WORD = 5;
+pub const DC_BINS: WORD = 6;
+pub const DC_DUPLEX: WORD = 7;
+pub const DC_SIZE: WORD = 8;
+pub const DC_EXTRA: WORD = 9;
+pub const DC_VERSION: WORD = 10;
+pub const DC_DRIVER: WORD = 11;
+pub const DC_BINNAMES: WORD = 12;
+pub const DC_ENUMRESOLUTIONS: WORD = 13;
+pub const DC_FILEDEPENDENCIES: WORD = 14;
+pub const DC_TRUETYPE: WORD = 15;
+pub const DC_PAPERNAMES: WORD = 16;
+pub const DC_ORIENTATION: WORD = 17;
+pub const DC_COPIES: WORD = 18;
+pub const DC_BINADJUST: WORD = 19;
+pub const DC_EMF_COMPLIANT: WORD = 20;
+pub const DC_DATATYPE_PRODUCED: WORD = 21;
+pub const DC_COLLATE: WORD = 22;
+pub const DC_MANUFACTURER: WORD = 23;
+pub const DC_MODEL: WORD = 24;
+pub const DC_PERSONALITY: WORD = 25;
+pub const DC_PRINTRATE: WORD = 26;
+pub const DC_PRINTRATEUNIT: WORD = 27;
+pub const PRINTRATEUNIT_PPM: WORD = 1;
+pub const PRINTRATEUNIT_CPS: WORD = 2;
+pub const PRINTRATEUNIT_LPM: WORD = 3;
+pub const PRINTRATEUNIT_IPM: WORD = 4;
+pub const DC_PRINTERMEM: WORD = 28;
+pub const DC_MEDIAREADY: WORD = 29;
+pub const DC_STAPLE: WORD = 30;
+pub const DC_PRINTRATEPPM: WORD = 31;
+pub const DC_COLORDEVICE: WORD = 32;
+pub const DC_NUP: WORD = 33;
+pub const DC_MEDIATYPENAMES: WORD = 34;
+pub const DC_MEDIATYPES: WORD = 35;
+pub const DCTT_BITMAP: DWORD = 0x0000001;
+pub const DCTT_DOWNLOAD: DWORD = 0x0000002;
+pub const DCTT_SUBDEV: DWORD = 0x0000004;
+pub const DCTT_DOWNLOAD_OUTLINE: DWORD = 0x0000008;
+pub const DCBA_FACEUPNONE: DWORD = 0x0000;
+pub const DCBA_FACEUPCENTER: DWORD = 0x0001;
+pub const DCBA_FACEUPLEFT: DWORD = 0x0002;
+pub const DCBA_FACEUPRIGHT: DWORD = 0x0003;
+pub const DCBA_FACEDOWNNONE: DWORD = 0x0100;
+pub const DCBA_FACEDOWNCENTER: DWORD = 0x0101;
+pub const DCBA_FACEDOWNLEFT: DWORD = 0x0102;
+pub const DCBA_FACEDOWNRIGHT: DWORD = 0x0103;
+extern "system" {
+    pub fn DeviceCapabilitiesA(
+        pDevice: LPCSTR,
+        pPort: LPCSTR,
+        fwCapability: WORD,
+        pOutput: LPSTR,
+        pDevMode: *const DEVMODEA,
+    ) -> c_int;
+    pub fn DeviceCapabilitiesW(
+        pDevice: LPCWSTR,
+        pPort: LPCWSTR,
+        fwCapability: WORD,
+        pOutput: LPWSTR,
+        pDevMode: *const DEVMODEW,
+    ) -> c_int;
+    pub fn DrawEscape(
+        hdc: HDC,
+        iEscape: c_int,
+        cjIn: c_int,
+        lpIn: LPCSTR,
+    ) -> c_int;
+    pub fn Ellipse(
+        hdc: HDC,
+        left: c_int,
+        top: c_int,
+        right: c_int,
+        bottom: c_int,
+    ) -> BOOL;
+    pub fn EnumFontFamiliesExA(
+        hdc: HDC,
+        lpLogfont: LPLOGFONTA,
+        lpProc: FONTENUMPROCA,
+        lParam: LPARAM,
+        dwFlags: DWORD
+    ) -> c_int;
+    pub fn EnumFontFamiliesExW(
+        hdc: HDC,
+        lpLogfont: LPLOGFONTW,
+        lpProc: FONTENUMPROCW,
+        lParam: LPARAM,
+        dwFlags: DWORD
+    ) -> c_int;
+    pub fn EnumFontFamiliesA(
+        hdc: HDC,
+        lpLogfont: LPCSTR,
+        lpProc: FONTENUMPROCA,
+        lParam: LPARAM
+    ) -> c_int;
+    pub fn EnumFontFamiliesW(
+        hdc: HDC,
+        lpLogfont: LPCWSTR,
+        lpProc: FONTENUMPROCW,
+        lParam: LPARAM
+    ) -> c_int;
+    pub fn EnumFontsA(
+        hdc: HDC,
+        lpLogfont: LPCSTR,
+        lpProc: FONTENUMPROCA,
+        lParam: LPARAM
+    ) -> c_int;
+    pub fn EnumFontsW(
+        hdc: HDC,
+        lpLogfont: LPCWSTR,
+        lpProc: FONTENUMPROCW,
+        lParam: LPARAM
+    ) -> c_int;
+    pub fn EnumObjects(
+        hdc: HDC,
+        nType: c_int,
+        lpFunc: GOBJENUMPROC,
+        lParam: LPARAM
+    ) -> c_int;
+    pub fn EqualRgn(
+        hrgn1: HRGN,
+        hrgn2: HRGN,
+    ) -> BOOL;
+    pub fn Escape(
+        hdc: HDC,
+        iEscape: c_int,
+        cjIn: c_int,
+        pvIn: LPCSTR,
+        pvOut: LPVOID,
+    ) -> c_int;
+    pub fn ExtEscape(
+        hdc: HDC,
+        iEscape: c_int,
+        cjInput: c_int,
+        lpInData: LPCSTR,
+        cjOutput: c_int,
+        lpOutData: LPSTR
+    ) -> c_int;
+    pub fn ExcludeClipRect(
+        hdc: HDC,
+        left: c_int,
+        top: c_int,
+        right: c_int,
+        bottom: c_int,
+    ) -> c_int;
+    pub fn ExtCreateRegion(
+        lpx: *const XFORM,
+        nCount: DWORD,
+        lpData: *const RGNDATA,
+    ) -> HRGN;
+    pub fn ExtFloodFill(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        color: COLORREF,
+        utype: UINT,
+    ) -> BOOL;
+    pub fn FillRgn(
+        hdc: HDC,
+        hrgn: HRGN,
+        hbr: HBRUSH,
+    ) -> BOOL;
+    pub fn FloodFill(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        color: COLORREF,
+    ) -> BOOL;
+    pub fn FrameRgn(
+        hdc: HDC,
+        hrgn: HRGN,
+        hbr: HBRUSH,
+        w: c_int,
+        h: c_int,
+    ) -> BOOL;
+    pub fn GetROP2(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn GetAspectRatioFilterEx(
+        hdc: HDC,
+        lpsize: LPSIZE,
+    ) -> BOOL;
+    pub fn GetBkColor(
+        hdc: HDC,
+    ) -> COLORREF;
+    pub fn GetDCBrushColor(
+        hdc: HDC,
+    ) -> COLORREF;
+    pub fn GetDCPenColor(
+        hdc: HDC,
+    ) -> COLORREF;
+    pub fn GetBkMode(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn GetBitmapBits(
+        hbit: HBITMAP,
+        cb: LONG,
+        lpvBits: LPVOID,
+    ) -> LONG;
+    pub fn GetBitmapDimensionEx(
+        hbit: HBITMAP,
+        lpsize: LPSIZE,
+    ) -> BOOL;
+    pub fn GetBoundsRect(
+        hdc: HDC,
+        lprect: LPRECT,
+        flags: UINT,
+    ) -> UINT;
+    pub fn GetBrushOrgEx(
+        hdc: HDC,
+        lppt: LPPOINT,
+    ) -> BOOL;
+    pub fn GetCharWidthA(
+        hdc: HDC,
+        iFirst: UINT,
+        iLast: UINT,
+        lpBuffer: LPINT,
+    ) -> BOOL;
+    pub fn GetCharWidthW(
+        hdc: HDC,
+        iFirst: UINT,
+        iLast: UINT,
+        lpBuffer: LPINT,
+    ) -> BOOL;
+    pub fn GetCharWidth32A(
+        hdc: HDC,
+        iFirst: UINT,
+        iLast: UINT,
+        lpBuffer: LPINT,
+    ) -> BOOL;
+    pub fn GetCharWidth32W(
+        hdc: HDC,
+        iFirst: UINT,
+        iLast: UINT,
+        lpBuffer: LPINT,
+    ) -> BOOL;
+    pub fn GetCharWidthFloatA(
+        hdc: HDC,
+        iFirst: UINT,
+        iLast: UINT,
+        lpBuffer: PFLOAT,
+    ) -> BOOL;
+    pub fn GetCharWidthFloatW(
+        hdc: HDC,
+        iFirst: UINT,
+        iLast: UINT,
+        lpBuffer: PFLOAT,
+    ) -> BOOL;
+    pub fn GetCharABCWidthsA(
+         hdc: HDC,
+        wFirst: UINT,
+        wLast: UINT,
+        lpABC: LPABC,
+    ) -> BOOL;
+    pub fn GetCharABCWidthsW(
+        hdc: HDC,
+        wFirst: UINT,
+        wLast: UINT,
+        lpABC: LPABC,
+    ) -> BOOL;
+    pub fn GetCharABCWidthsFloatA(
+        hdc: HDC,
+        iFirst: UINT,
+        iLast: UINT,
+        lpABC: LPABCFLOAT
+    ) -> BOOL;
+    pub fn GetCharABCWidthsFloatW(
+        hdc: HDC,
+        iFirst: UINT,
+        iLast: UINT,
+        lpABC: LPABCFLOAT
+    ) -> BOOL;
+    pub fn GetClipBox(
+        hdc: HDC,
+        lprect: LPRECT,
+    ) -> c_int;
+    pub fn GetClipRgn(
+        hdc: HDC,
+        hrgn: HRGN,
+    ) -> c_int;
+    pub fn GetMetaRgn(
+        hdc: HDC,
+        hrgn: HRGN,
+    ) -> c_int;
+    pub fn GetCurrentObject(
+        hdc: HDC,
+        tp: UINT,
+    ) -> HGDIOBJ;
+    pub fn GetCurrentPositionEx(
+        hdc: HDC,
+        lppt: LPPOINT,
+    ) -> BOOL;
+    pub fn GetDeviceCaps(
+        hdc: HDC,
+        nIndex: c_int,
+    ) -> c_int;
+    pub fn GetDIBits(
+        hdc: HDC,
+        hbm: HBITMAP,
+        start: UINT,
+        cLines: UINT,
+        lpvBits: LPVOID,
+        lpbmi: LPBITMAPINFO,
+        usage: UINT
+    ) -> c_int;
+    pub fn GetFontData(
+        hdc: HDC,
+        dwTable: DWORD,
+        dwOffset: DWORD,
+        pvBuffer: PVOID,
+        cjBuffer: DWORD
+    ) -> DWORD;
+    pub fn GetGlyphOutlineA(
+        hdc: HDC,
+        uChar: UINT,
+        fuFormat: UINT,
+        lpgm: LPGLYPHMETRICS,
+        cjBuffer: DWORD,
+        pvBuffer: LPVOID,
+        lpmat2: *const MAT2
+    ) -> DWORD;
+    pub fn GetGlyphOutlineW(
+        hdc: HDC,
+        uChar: UINT,
+        fuFormat: UINT,
+        lpgm: LPGLYPHMETRICS,
+        cjBuffer: DWORD,
+        pvBuffer: LPVOID,
+        lpmat2: *const MAT2
+    ) -> DWORD;
+    pub fn GetGraphicsMode(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn GetMapMode(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn GetMetaFileBitsEx(
+        hMF: HMETAFILE,
+        cbBuffer: UINT,
+        lpData: LPVOID,
+    ) -> UINT;
+    pub fn GetMetaFileA(
+        lpName: LPCSTR,
+    ) -> HMETAFILE;
+    pub fn GetMetaFileW(
+        lpName: LPCWSTR,
+    ) -> HMETAFILE;
+    pub fn GetNearestColor(
+        hdc: HDC,
+        color: COLORREF,
+    ) -> COLORREF;
+    pub fn GetNearestPaletteIndex(
+        h: HPALETTE,
+        color: COLORREF,
+    ) -> UINT;
+    pub fn GetObjectType(
+        h: HGDIOBJ,
+    ) -> DWORD;
+    pub fn GetOutlineTextMetricsA(
+        hdc: HDC,
+        cjCopy: UINT,
+        potm: LPOUTLINETEXTMETRICA,
+    ) -> UINT;
+    pub fn GetOutlineTextMetricsW(
+        hdc: HDC,
+        cjCopy: UINT,
+        potm: LPOUTLINETEXTMETRICW,
+    ) -> UINT;
+    pub fn GetPaletteEntries(
+        hpal: HPALETTE,
+        iStart: UINT,
+        cEntries: UINT,
+        pPalEntries: LPPALETTEENTRY
+    ) -> UINT;
+    pub fn GetPixel(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+    ) -> COLORREF;
+    pub fn GetPixelFormat(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn GetPolyFillMode(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn GetRasterizerCaps(
+        lpraststat: LPRASTERIZER_STATUS,
+        cjBytes: UINT,
+    ) -> BOOL;
+    pub fn GetRandomRgn (
+        hdc: HDC,
+        hrgn: HRGN,
+        i: INT,
+    ) -> c_int;
+    pub fn GetRegionData(
+        hrgn: HRGN,
+        nCount: DWORD,
+        lpRgnData: LPRGNDATA,
+    ) -> DWORD;
+    pub fn GetRgnBox(
+        hrgn: HRGN,
+        lprc: LPRECT,
+    ) -> c_int;
+    pub fn GetStockObject(
+        i: c_int,
+    ) -> HGDIOBJ;
+    pub fn GetStretchBltMode(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn GetSystemPaletteEntries(
+        hdc: HDC,
+        iStart: UINT,
+        cEntries: UINT,
+        pPalEntries: LPPALETTEENTRY,
+    ) -> UINT;
+    pub fn GetSystemPaletteUse(
+        hdc: HDC,
+    ) -> UINT;
+    pub fn GetTextCharacterExtra(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn GetTextAlign(
+        hdc: HDC,
+    ) -> UINT;
+    pub fn GetTextColor(
+        hdc: HDC,
+    ) -> COLORREF;
+    pub fn GetTextExtentPointA(
+        hdc: HDC,
+        lpString: LPCSTR,
+        c: c_int,
+        lpsz: LPSIZE,
+    ) -> BOOL;
+    pub fn GetTextExtentPointW(
+        hdc: HDC,
+        lpString: LPCWSTR,
+        c: c_int,
+        lpsz: LPSIZE,
+    ) -> BOOL;
+    pub fn GetTextExtentPoint32A(
+        hdc: HDC,
+        lpString: LPCSTR,
+        c: c_int,
+        psizl: LPSIZE,
+    ) -> BOOL;
+    pub fn GetTextExtentPoint32W(
+        hdc: HDC,
+        lpString: LPCWSTR,
+        c: c_int,
+        psizl: LPSIZE,
+    ) -> BOOL;
+    pub fn GetTextExtentExPointA(
+        hdc: HDC,
+        lpszString: LPCSTR,
+        cchString: c_int,
+        nMaxExtent: c_int,
+        lpnFit: LPINT,
+        lpnDx: LPINT,
+        lpSize: LPSIZE
+    ) -> BOOL;
+    pub fn GetTextExtentExPointW(
+        hdc: HDC,
+        lpszString: LPCWSTR,
+        cchString: c_int,
+        nMaxExtent: c_int,
+        lpnFit: LPINT,
+        lpnDx: LPINT,
+        lpSize: LPSIZE
+    ) -> BOOL;
+    pub fn GetTextCharset(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn GetTextCharsetInfo(
+        hdc: HDC,
+        lpSig: LPFONTSIGNATURE,
+        dwFlags: DWORD,
+    ) -> c_int;
+    pub fn TranslateCharsetInfo(
+        lpSrc: *const DWORD,
+        lpCs: LPCHARSETINFO,
+        dwFlags: DWORD
+    ) -> BOOL;
+    pub fn GetFontLanguageInfo(
+        hdc: HDC,
+    ) -> DWORD;
+    pub fn GetCharacterPlacementA(
+        hdc: HDC,
+        lpString: LPCSTR,
+        nCount: c_int,
+        nMexExtent: c_int,
+        lpResults: LPGCP_RESULTSA,
+        dwFlags: DWORD
+    ) -> DWORD;
+    pub fn GetCharacterPlacementW(
+        hdc: HDC,
+        lpString: LPCWSTR,
+        nCount: c_int,
+        nMexExtent: c_int,
+        lpResults: LPGCP_RESULTSW,
+        dwFlags: DWORD
+    ) -> DWORD;
+}
+STRUCT!{struct WCRANGE {
+    wcLow: WCHAR,
+    cGlyphs: USHORT,
+}}
+pub type PWCRANGE = *mut WCRANGE;
+pub type LPWCRANGE = *mut WCRANGE;
+STRUCT!{struct GLYPHSET {
+    cbThis: DWORD,
+    flAccel: DWORD,
+    cGlyphsSupported: DWORD,
+    cRanges: DWORD,
+    ranges: [WCRANGE;1],
+}}
+pub type PGLYPHSET = *mut GLYPHSET;
+pub type LPGLYPHSET = *mut GLYPHSET;
+pub const GS_8BIT_INDICES: DWORD = 0x00000001;
+pub const GGI_MARK_NONEXISTING_GLYPHS: DWORD = 0x0001;
+extern "system" {
+    pub fn GetFontUnicodeRanges(
+        hdc: HDC,
+        lpgs: LPGLYPHSET,
+    ) -> DWORD;
+    pub fn GetGlyphIndicesA(
+        hdc: HDC,
+        lpstr: LPCSTR,
+        c: c_int,
+        pgi: LPWORD,
+        fl: DWORD,
+    ) -> DWORD;
+    pub fn GetGlyphIndicesW(
+        hdc: HDC,
+        lpstr: LPCWSTR,
+        c: c_int,
+        pgi: LPWORD,
+        fl: DWORD,
+    ) -> DWORD;
+    pub fn GetTextExtentPointI(
+        hdc: HDC,
+        pgiIn: LPWORD,
+        cgi: c_int,
+        psize: LPSIZE,
+    ) -> BOOL;
+    pub fn GetTextExtentExPointI(
+        hdc: HDC,
+        lpwszString: LPWORD,
+        cwchString: c_int,
+        nMaxExtent: c_int,
+        lpnFit: LPINT,
+        lpnDx: LPINT,
+        lpSize: LPSIZE,
+    ) -> BOOL;
+    pub fn GetCharWidthI(
+        hdc: HDC,
+        giFirst: UINT,
+        cgi: UINT,
+        pgi: LPWORD,
+        piWidths: LPINT,
+    ) -> BOOL;
+    pub fn GetCharABCWidthsI(
+        hdc: HDC,
+        giFirst: UINT,
+        cgi: UINT,
+        pgi: LPWORD,
+        pabc: LPABC,
+    ) -> BOOL;
+}
+pub const STAMP_DESIGNVECTOR: DWORD = 0x8000000 + 0x64 + (0x76 << 8);
+pub const STAMP_AXESLIST: DWORD = 0x8000000 + 0x61 + (0x6c << 8);
+pub const STAMP_TRUETYPE_VARIATION: DWORD = 0x8000000 + 0x74 + (0x76 << 8);
 pub const MM_MAX_NUMAXES: usize = 16;
 STRUCT!{struct DESIGNVECTOR {
     dvReserved: DWORD,
@@ -2644,6 +3279,68 @@ STRUCT!{struct DESIGNVECTOR {
 }}
 pub type PDESIGNVECTOR = *mut DESIGNVECTOR;
 pub type LPDESIGNVECTOR = *mut DESIGNVECTOR;
+extern "system" {
+    pub fn AddFontResourceExA(
+        lpszFilename: LPCSTR,
+        fl: DWORD,
+        pdv: PVOID,
+    ) -> c_int;
+    pub fn AddFontResourceExW(
+        lpszFilename: LPCWSTR,
+        fl: DWORD,
+        pdv: PVOID,
+    ) -> c_int;
+    pub fn RemoveFontResourceExA(
+        name: LPCSTR,
+        fl: DWORD,
+        pdv: PVOID,
+    ) -> BOOL;
+    pub fn RemoveFontResourceExW(
+        name: LPCWSTR,
+        fl: DWORD,
+        pdv: PVOID,
+    ) -> BOOL;
+    pub fn AddFontMemResourceEx(
+        pbFont: PVOID,
+        cbSize: DWORD,
+        pdv: PVOID,
+        pcFonts: *mut DWORD,
+    ) -> HANDLE;
+    pub fn RemoveFontMemResourceEx(
+        h: HANDLE,
+    ) -> BOOL;
+}
+pub const FR_PRIVATE: DWORD = 0x10;
+pub const FR_NOT_ENUM: DWORD = 0x20;
+pub const MM_MAX_AXES_NAMELEN: usize = 16;
+STRUCT!{struct AXISINFOA {
+    axMinValue: LONG,
+    axMaxValue: LONG,
+    axAxisName: [BYTE; MM_MAX_AXES_NAMELEN],
+}}
+pub type PAXISINFOA = *mut AXISINFOA;
+pub type LPAXISINFOA = *mut AXISINFOA;
+STRUCT!{struct AXISINFOW {
+    axMinValue: LONG,
+    axMaxValue: LONG,
+    axAxisName: [WCHAR; MM_MAX_AXES_NAMELEN],
+}}
+pub type PAXISINFOW = *mut AXISINFOW;
+pub type LPAXISINFOW = *mut AXISINFOW;
+STRUCT!{struct AXESLISTA {
+    axlReserved: DWORD,
+    axlNumAxes: DWORD,
+    axlAxisInfo: [AXISINFOA; MM_MAX_AXES_NAMELEN],
+}}
+pub type PAXESLISTA = *mut AXESLISTA;
+pub type LPAXESLISTA = *mut AXESLISTA;
+STRUCT!{struct AXESLISTW {
+    axlReserved: DWORD,
+    axlNumAxes: DWORD,
+    axlAxisInfo: [AXISINFOW; MM_MAX_AXES_NAMELEN],
+}}
+pub type PAXESLISTW = *mut AXESLISTW;
+pub type LPAXESLISTW = *mut AXESLISTW;
 STRUCT!{struct ENUMLOGFONTEXDVA {
     elfEnumLogfontEx: ENUMLOGFONTEXA,
     elfDesignVector: DESIGNVECTOR,
@@ -2656,13 +3353,386 @@ STRUCT!{struct ENUMLOGFONTEXDVW {
 }}
 pub type PENUMLOGFONTEXDVW = *mut ENUMLOGFONTEXDVW;
 pub type LPENUMLOGFONTEXDVW = *mut ENUMLOGFONTEXDVW;
-STRUCT!{struct BLENDFUNCTION {
-    BlendOp: BYTE,
-    BlendFlags: BYTE,
-    SourceConstantAlpha: BYTE,
-    AlphaFormat: BYTE,
+extern "system" {
+    pub fn CreateFontIndirectExA(
+        penumlfex: *const ENUMLOGFONTEXDVA,
+    ) -> HFONT;
+    pub fn CreateFontIndirectExW(
+        penumlfex: *const ENUMLOGFONTEXDVW,
+    ) -> HFONT;
+}
+STRUCT!{struct ENUMTEXTMETRICA {
+    etmNewTextMetricEx: NEWTEXTMETRICEXA,
+    etmAxesList: AXESLISTA,
 }}
-pub type PBLENDFUNCTION = *mut BLENDFUNCTION;
+pub type PENUMTEXTMETRICA = *mut ENUMTEXTMETRICA;
+pub type LPENUMTEXTMETRICA = *mut ENUMTEXTMETRICA;
+STRUCT!{struct ENUMTEXTMETRICW {
+    etmNewTextMetricEx: NEWTEXTMETRICEXW,
+    etmAxesList: AXESLISTW,
+}}
+pub type PENUMTEXTMETRICW = *mut ENUMTEXTMETRICW;
+pub type LPENUMTEXTMETRICW = *mut ENUMTEXTMETRICW;
+extern "system" {
+    pub fn GetViewportExtEx(
+        hdc: HDC,
+        lpsize: LPSIZE,
+    ) -> BOOL;
+    pub fn GetViewportOrgEx(
+        hdc: HDC,
+        lppoint: LPPOINT,
+    ) -> BOOL;
+    pub fn GetWindowExtEx(
+        hdc: HDC,
+        lpsize: LPSIZE,
+    ) -> BOOL;
+    pub fn GetWindowOrgEx(
+        hdc: HDC,
+        lppoint: LPPOINT,
+    ) -> BOOL;
+    pub fn IntersectClipRect(
+        hdc: HDC,
+        left: c_int,
+        top: c_int,
+        right: c_int,
+        bottom: c_int,
+    ) -> c_int;
+    pub fn InvertRgn(
+        hdc: HDC,
+        hrgn: HRGN,
+    ) -> BOOL;
+    pub fn LineDDA(
+        nXStart: c_int,
+        nYStart: c_int,
+        nXEnd: c_int,
+        nYEnd: c_int,
+        lpLineFunc: LINEDDAPROC,
+        lpData: LPARAM,
+    ) -> BOOL;
+    pub fn LineTo(
+        hdc: HDC,
+        nXEnd: c_int,
+        nYEnd: c_int,
+    ) -> BOOL;
+    pub fn MaskBlt(
+        hdcDest: HDC,
+        xDest: c_int,
+        yDest: c_int,
+        width: c_int,
+        height: c_int,
+        hdcSrc: HDC,
+        xSrc: c_int,
+        ySrc: c_int,
+        hbmMask: HBITMAP,
+        xMask: c_int,
+        yMask: c_int,
+        rop: DWORD,
+    ) -> BOOL;
+    pub fn PlgBlt(
+        hdcDest: HDC,
+        lpPoint: *const POINT,
+        hdcSrc: HDC,
+        xSrc: c_int,
+        ySrc: c_int,
+        width: c_int,
+        height: c_int,
+        hbmMask: HBITMAP,
+        xMask: c_int,
+        yMask: c_int,
+    ) -> BOOL;
+    pub fn OffsetClipRgn(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+    ) -> c_int;
+    pub fn OffsetRgn(
+        hrgn: HRGN,
+        x: c_int,
+        y: c_int,
+    ) -> c_int;
+    pub fn PatBlt(
+        hdc: HDC,
+        nXLeft: c_int,
+        nYLeft: c_int,
+        nWidth: c_int,
+        nHeight: c_int,
+        dwRop: DWORD,
+    ) -> BOOL;
+    pub fn Pie(
+        hdc: HDC,
+        nLeftRect: c_int,
+        nTopRect: c_int,
+        nRightRect: c_int,
+        nBottomRect: c_int,
+        nXRadial1: c_int,
+        nYRadial1: c_int,
+        nXRadial2: c_int,
+        nYRadial2: c_int,
+    ) -> BOOL;
+    pub fn PlayMetaFile(
+        hdc: HDC,
+        hmf: HMETAFILE,
+    ) -> BOOL;
+    pub fn PaintRgn(
+        hdc: HDC,
+        hrgn: HRGN,
+    ) -> BOOL;
+    pub fn PolyPolygon(
+        hdc: HDC,
+        lpPoints: *const POINT,
+        lpPolyCounts: *const INT,
+        cCount: DWORD,
+    ) -> BOOL;
+    pub fn PtInRegion(
+        hrgn: HRGN,
+        x: c_int,
+        y: c_int,
+    ) -> BOOL;
+    pub fn PtVisible(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+    ) -> BOOL;
+    pub fn RectInRegion(
+        hrgn: HRGN,
+        lprect: *const RECT,
+    ) -> BOOL;
+    pub fn RectVisible(
+        hdc: HDC,
+        lprect: *const RECT,
+    ) -> BOOL;
+    pub fn Rectangle(
+        hdc: HDC,
+        left: c_int,
+        top: c_int,
+        right: c_int,
+        bottom: c_int,
+    ) -> BOOL;
+    pub fn RestoreDC(
+        hdc: HDC,
+        nSavedDC: c_int,
+    ) -> BOOL;
+    pub fn ResetDCA(
+        hdc: HDC,
+        lpdm: *const DEVMODEA,
+    ) -> HDC;
+    pub fn ResetDCW(
+        hdc: HDC,
+        lpdm: *const DEVMODEW,
+    ) -> HDC;
+    pub fn RealizePalette(
+        hdc: HDC,
+    ) -> UINT;
+    pub fn RemoveFontResourceA(
+        lpFileName: LPCSTR,
+    ) -> BOOL;
+    pub fn RemoveFontResourceW(
+        lpFileName: LPCWSTR,
+    ) -> BOOL;
+    pub fn RoundRect(
+        hdc: HDC,
+        nLeftRect: c_int,
+        nTopRect: c_int,
+        nRightRect: c_int,
+        nBottomRect: c_int,
+        nWidth: c_int,
+        nHeight: c_int,
+    ) -> BOOL;
+    pub fn ResizePalette(
+        hpal: HPALETTE,
+        n: UINT,
+    ) -> BOOL;
+    pub fn SaveDC(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn SelectClipRgn(
+        hdc: HDC,
+        hrgn: HRGN,
+    ) -> c_int;
+    pub fn ExtSelectClipRgn(
+        hdc: HDC,
+        hrgn: HRGN,
+        mode: c_int,
+    ) -> c_int;
+    pub fn SetMetaRgn(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn SelectObject(
+        hdc: HDC,
+        h: HGDIOBJ,
+    ) -> HGDIOBJ;
+    pub fn SelectPalette(
+        hdc: HDC,
+        hPal: HPALETTE,
+        bForceBkgd: BOOL,
+    ) -> HPALETTE;
+    pub fn SetBkColor(
+        hdc: HDC,
+        color: COLORREF,
+    ) -> COLORREF;
+    pub fn SetDCBrushColor(
+        hdc: HDC,
+        color: COLORREF,
+    ) -> COLORREF;
+    pub fn SetDCPenColor(
+        hdc: HDC,
+        color: COLORREF,
+    ) -> COLORREF;
+    pub fn SetBkMode(
+        hdc: HDC,
+        mode: c_int,
+    ) -> c_int;
+    pub fn SetBitmapBits(
+        hbm: HBITMAP,
+        cb: DWORD,
+        pvBits: *const VOID,
+    ) -> LONG;
+    pub fn SetBoundsRect(
+        hdc: HDC,
+        lprect: *const RECT,
+        flags: UINT,
+    ) -> UINT;
+    pub fn SetDIBits(
+        hdc: HDC,
+        hbm: HBITMAP,
+        start: UINT,
+        cLines: UINT,
+        lpBits: *const VOID,
+        lpbmi: *const BITMAPINFO,
+        ColorUse: UINT,
+    ) -> c_int;
+    pub fn SetDIBitsToDevice(
+        hdc: HDC,
+        xDest: c_int,
+        yDest: c_int,
+        w: DWORD,
+        h: DWORD,
+        xSrc: c_int,
+        ySrc: c_int,
+        StartScan: UINT,
+        cLines: UINT,
+        lpvBits: *const VOID,
+        lpbmi: *const BITMAPINFO,
+        ColorUse: UINT,
+    ) -> c_int;
+    pub fn SetMapperFlags(
+        hdc: HDC,
+        flags: DWORD,
+    ) -> DWORD;
+    pub fn SetGraphicsMode(
+        hdc: HDC,
+        iMode: c_int,
+    ) -> c_int;
+    pub fn SetMapMode(
+        hdc: HDC,
+        mode: c_int,
+    ) -> c_int;
+    pub fn SetLayout(
+        hdc: HDC,
+        l: DWORD,
+    ) -> DWORD;
+    pub fn GetLayout(
+        hdc: HDC,
+    ) -> DWORD;
+    pub fn SetMetaFileBitsEx(
+        cbBuffer: UINT,
+        lpData: *const BYTE,
+    ) -> HMETAFILE;
+    pub fn SetPaletteEntries(
+        hpal: HPALETTE,
+        iStart: UINT,
+        cEntries: UINT,
+        pPalEntries: *const PALETTEENTRY,
+    ) -> UINT;
+    pub fn SetPixel(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        color: COLORREF,
+    ) -> COLORREF;
+    pub fn SetPixelV(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        color: COLORREF,
+    ) -> BOOL;
+    pub fn SetPixelFormat(
+        hdc: HDC,
+        iPixelFormat: c_int,
+        ppfd: *const PIXELFORMATDESCRIPTOR,
+    ) -> BOOL;
+    pub fn SetPolyFillMode(
+        hdc: HDC,
+        iPolyFillMode: c_int,
+    ) -> c_int;
+    pub fn StretchBlt(
+        hdcDest: HDC,
+        xDest: c_int,
+        yDest: c_int,
+        wDest: c_int,
+        hDest: c_int,
+        hdcSrc: HDC,
+        xSrc: c_int,
+        ySrc: c_int,
+        wSrc: c_int,
+        hSrc: c_int,
+        rop: DWORD,
+    ) -> BOOL;
+    pub fn SetRectRgn(
+        hrgn: HRGN,
+        left: c_int,
+        top: c_int,
+        right: c_int,
+        bottom: c_int,
+    ) -> BOOL;
+    pub fn StretchDIBits(
+        hdc: HDC,
+        XDest: c_int,
+        YDest: c_int,
+        nDestWidth: c_int,
+        nDestHeight: c_int,
+        XSrc: c_int,
+        YSrc: c_int,
+        nSrcWidth: c_int,
+        nSrcHeight: c_int,
+        lpBits: *const VOID,
+        lpBitsInfo: *const BITMAPINFO,
+        iUsage: UINT,
+        dwRop: DWORD,
+    ) -> c_int;
+    pub fn SetROP2(
+        hdc: HDC,
+        rop2: c_int,
+    ) -> c_int;
+    pub fn SetStretchBltMode(
+        hdc: HDC,
+        mode: c_int,
+    ) -> c_int;
+    pub fn SetSystemPaletteUse(
+        hdc: HDC,
+        uuse: UINT,
+    ) -> UINT;
+    pub fn SetTextCharacterExtra(
+        hdc: HDC,
+        extra: c_int,
+    ) -> c_int;
+    pub fn SetTextColor(
+        hdc: HDC,
+        color: COLORREF,
+    ) -> COLORREF;
+    pub fn SetTextAlign(
+        hdc: HDC,
+        align: UINT,
+    ) -> UINT;
+    pub fn SetTextJustification(
+        hdc: HDC,
+        extra: c_int,
+        count: c_int,
+    ) -> BOOL;
+    pub fn UpdateColors(
+        hdc: HDC,
+    ) -> BOOL;
+}
 pub type COLOR16 = c_ushort;
 STRUCT!{struct TRIVERTEX {
     x: LONG,
@@ -2680,6 +3750,340 @@ STRUCT!{struct GRADIENT_RECT {
 }}
 pub type PGRADIENT_RECT = *mut GRADIENT_RECT;
 pub type LPGRADIENT_RECT = *mut GRADIENT_RECT;
+STRUCT!{struct BLENDFUNCTION {
+    BlendOp: BYTE,
+    BlendFlags: BYTE,
+    SourceConstantAlpha: BYTE,
+    AlphaFormat: BYTE,
+}}
+pub type PBLENDFUNCTION = *mut BLENDFUNCTION;
+pub const AC_SRC_OVER: BYTE = 0x00;
+pub const AC_SRC_ALPHA: BYTE = 0x01;
+extern "system" {
+    pub fn AlphaBlend(
+        hdcDest: HDC,
+        xoriginDest: c_int,
+        yoriginDest: c_int,
+        wDest: c_int,
+        hDest: c_int,
+        hdcSrc: HDC,
+        xoriginSrc: c_int,
+        yoriginSrc: c_int,
+        wSrc: c_int,
+        hSrc: c_int,
+        ftn: BLENDFUNCTION,
+    ) -> BOOL;
+    pub fn TransparentBlt(
+        hdcDest: HDC,
+        xoriginDest: c_int,
+        yoriginDest: c_int,
+        wDest: c_int,
+        hDest: c_int,
+        hdcSrc: HDC,
+        xoriginSrc: c_int,
+        yoriginSrc: c_int,
+        wSrc: c_int,
+        hSrc: c_int,
+        crTransparent: UINT,
+    ) -> BOOL;
+}
+pub const GRADIENT_FILL_RECT_H: ULONG = 0x00000000;
+pub const GRADIENT_FILL_RECT_V: ULONG = 0x00000001;
+pub const GRADIENT_FILL_TRIANGLE: ULONG = 0x00000002;
+pub const GRADIENT_FILL_OP_FLAG: ULONG = 0x000000ff;
+extern "system" {
+    pub fn GradientFill(
+        hdc: HDC,
+        pVertex: PTRIVERTEX,
+        nVertex: ULONG,
+        pMesh: PVOID,
+        nMesh: ULONG,
+        ulMode: ULONG,
+    ) -> BOOL;
+    pub fn GdiAlphaBlend(
+        hdcDest: HDC,
+        xoriginDest: c_int,
+        yoriginDest: c_int,
+        wDest: c_int,
+        hDest: c_int,
+        hdcSrc: HDC,
+        xoriginSrc: c_int,
+        yoriginSrc: c_int,
+        wSrc: c_int,
+        hSrc: c_int,
+        ftn: BLENDFUNCTION,
+    ) -> BOOL;
+    pub fn GdiTransparentBlt(
+        hdcDest: HDC,
+        xoriginDest: c_int,
+        yoriginDest: c_int,
+        wDest: c_int,
+        hDest: c_int,
+        hdcSrc: HDC,
+        xoriginSrc: c_int,
+        yoriginSrc: c_int,
+        wSrc: c_int,
+        hSrc: c_int,
+        crTransparent: UINT,
+    ) -> BOOL;
+    pub fn GdiGradientFill(
+        hdc: HDC,
+        pVertex: PTRIVERTEX,
+        nVertex: ULONG,
+        pMesh: PVOID,
+        nCount: ULONG,
+        ulMode: ULONG,
+    ) -> BOOL;
+    pub fn PlayMetaFileRecord(
+        hdc: HDC,
+        lpHandleTable: LPHANDLETABLE,
+        lpMR: LPMETARECORD,
+        noObjs: UINT,
+    ) -> BOOL;
+}
+FN!{stdcall MFENUMPROC(
+    hdc: HDC,
+    lpht: *mut HANDLETABLE,
+    lpMR: *mut METARECORD,
+    nObj: c_int,
+    param: LPARAM,
+) -> c_int}
+extern "system" {
+    pub fn EnumMetaFile(
+        hdc: HDC,
+        hmf: HMETAFILE,
+        mproc: MFENUMPROC,
+        param: LPARAM,
+    ) -> BOOL;
+}
+FN!{stdcall ENHMFENUMPROC(
+    hdc: HDC,
+    lpht: *mut HANDLETABLE,
+    lpmr: *const ENHMETARECORD,
+    nHandles: c_int,
+    data: LPARAM,
+) -> c_int}
+extern "system" {
+    pub fn CloseEnhMetaFile(
+        hdc: HDC,
+    ) -> HENHMETAFILE;
+    pub fn CopyEnhMetaFileA(
+        hemfSrc: HENHMETAFILE,
+        lpszFile: LPCSTR,
+    ) -> HENHMETAFILE;
+    pub fn CopyEnhMetaFileW(
+        hemfSrc: HENHMETAFILE,
+        lpszFile: LPCWSTR,
+    ) -> HENHMETAFILE;
+    pub fn CreateEnhMetaFileA(
+        hdcRef: HDC,
+        lpFilename: LPCSTR,
+        lpRect: *const RECT,
+        lpDescription: LPCSTR,
+    ) -> HDC;
+    pub fn CreateEnhMetaFileW(
+        hdcRef: HDC,
+        lpFilename: LPCWSTR,
+        lpRect: *const RECT,
+        lpDescription: LPCWSTR,
+    ) -> HDC;
+    pub fn DeleteEnhMetaFile(
+        hmf: HENHMETAFILE,
+    ) -> BOOL;
+    pub fn EnumEnhMetaFile(
+        hdc: HDC,
+        hmf: HENHMETAFILE,
+        lpProc: ENHMFENUMPROC,
+        param: LPVOID,
+        lpRect: *const RECT,
+    ) -> BOOL;
+    pub fn GetEnhMetaFileA(
+        lpName: LPCSTR,
+    ) -> HENHMETAFILE;
+    pub fn GetEnhMetaFileW(
+        lpName: LPCWSTR,
+    ) -> HENHMETAFILE;
+    pub fn GetEnhMetaFileBits(
+        hEMF: HENHMETAFILE,
+        nSize: UINT,
+        lpData: LPBYTE,
+    ) -> UINT;
+    pub fn GetEnhMetaFileDescriptionA(
+        hemf: HENHMETAFILE,
+        cchBuffer: UINT,
+        lpDescription: LPSTR,
+    ) -> UINT;
+    pub fn GetEnhMetaFileDescriptionW(
+        hemf: HENHMETAFILE,
+        cchBuffer: UINT,
+        lpDescription: LPWSTR,
+    ) -> UINT;
+    pub fn GetEnhMetaFileHeader(
+        hemf: HENHMETAFILE,
+        nSize: UINT,
+        lpEnhMetaHeader: LPENHMETAHEADER,
+    ) -> UINT;
+    pub fn GetEnhMetaFilePaletteEntries(
+        hemf: HENHMETAFILE,
+        nNumEntries: UINT,
+        lpPaletteEntries: LPPALETTEENTRY,
+    ) -> UINT;
+    pub fn GetEnhMetaFilePixelFormat(
+        hemf: HENHMETAFILE,
+        cbBuffer: UINT,
+        ppfd: *mut PIXELFORMATDESCRIPTOR,
+    ) -> UINT;
+    pub fn GetWinMetaFileBits(
+        hemf: HENHMETAFILE,
+        cbData16: UINT,
+        pData16: LPBYTE,
+        iMapMode: INT,
+        hdcRef: HDC,
+    ) -> UINT;
+    pub fn PlayEnhMetaFile(
+        hdc: HDC,
+        hmf: HENHMETAFILE,
+        lprect: *const RECT,
+    ) -> BOOL;
+    pub fn PlayEnhMetaFileRecord(
+        hdc: HDC,
+        pht: LPHANDLETABLE,
+        pmr: *const ENHMETARECORD,
+        cht: UINT,
+    ) -> BOOL;
+    pub fn SetEnhMetaFileBits(
+        nSize: UINT,
+        pb: *const BYTE,
+    ) -> HENHMETAFILE;
+    pub fn SetWinMetaFileBits(
+        nSize: UINT,
+        lpMeta16Data: *const BYTE,
+        hdcRef: HDC,
+        lpMFP: *const METAFILEPICT,
+    ) -> HENHMETAFILE;
+    pub fn GdiComment(
+        hdc: HDC,
+        nSize: UINT,
+        lpData: *const BYTE,
+    ) -> BOOL;
+    pub fn GetTextMetricsA(
+        hdc: HDC,
+        lptm: LPTEXTMETRICA,
+    ) -> BOOL;
+    pub fn GetTextMetricsW(
+        hdc: HDC,
+        lptm: *mut TEXTMETRICW,
+    ) -> BOOL;
+}
+STRUCT!{struct DIBSECTION {
+    dsBm: BITMAP,
+    dsBmih: BITMAPINFOHEADER,
+    dsBitfields: [DWORD; 3],
+    dshSection: HANDLE,
+    dsOffset: DWORD,
+}}
+pub type PDIBSECTION = *mut DIBSECTION;
+pub type LPDIBSECTION = *mut DIBSECTION;
+extern "system" {
+    pub fn AngleArc(
+        hdc: HDC,
+        X: c_int,
+        Y: c_int,
+        dwRadius: DWORD,
+        eStartAngle: FLOAT,
+        eSweepAngle: FLOAT,
+    ) -> BOOL;
+    pub fn PolyPolyline(
+        hdc: HDC,
+        lppt: *const POINT,
+        lpdwPolyPoints: *const DWORD,
+        cCount: DWORD,
+    ) -> BOOL;
+    pub fn GetWorldTransform(
+        hdc: HDC,
+        lpxf: LPXFORM,
+    ) -> BOOL;
+    pub fn SetWorldTransform(
+        hdc: HDC,
+        lpxf: *const XFORM,
+    ) -> BOOL;
+    pub fn ModifyWorldTransform(
+        hdc: HDC,
+        lpxf: *const XFORM,
+        mode: DWORD,
+    ) -> BOOL;
+    pub fn CombineTransform(
+        lpxformResult: LPXFORM,
+        lpxform1: *const XFORM,
+        lpxform2: *const XFORM,
+    ) -> BOOL;
+}
+#[inline]
+pub fn GDI_WIDTHBYTES(bits: DWORD) -> DWORD {
+    ((bits + 31) & !31) / 8
+}
+#[inline]
+pub fn GDI_DIBWIDTHBYTES(bi: &BITMAPINFOHEADER) -> DWORD {
+    GDI_WIDTHBYTES((bi.biWidth as DWORD) * (bi.biBitCount as DWORD))
+}
+#[inline]
+pub fn GDI__DIBSIZE(bi: &BITMAPINFOHEADER) -> DWORD {
+    GDI_DIBWIDTHBYTES(bi) * bi.biHeight as DWORD
+}
+#[inline]
+pub fn GDI_DIBSIZE(bi: &BITMAPINFOHEADER) -> DWORD {
+    if bi.biHeight < 0 {
+        GDI__DIBSIZE(bi) * -1i32 as DWORD
+    } else {
+        GDI__DIBSIZE(bi)
+    }
+}
+extern "system" {
+    pub fn CreateDIBSection(
+        hdc: HDC,
+        lpbmi: *const BITMAPINFO,
+        usage: UINT,
+        ppvBits: *mut *mut c_void,
+        hSection: HANDLE,
+        offset: DWORD,
+    ) -> HBITMAP;
+    pub fn GetDIBColorTable(
+        hdc: HDC,
+        iStart: UINT,
+        cEntries: UINT,
+        prgbq: *mut RGBQUAD,
+    ) -> UINT;
+    pub fn SetDIBColorTable(
+        hdc: HDC,
+        iStart: UINT,
+        cEntries: UINT,
+        prgbq: *const RGBQUAD,
+    ) -> UINT;
+}
+pub const CA_NEGATIVE: WORD = 0x0001;
+pub const CA_LOG_FILTER: WORD = 0x0002;
+pub const ILLUMINANT_DEVICE_DEFAULT: WORD = 0;
+pub const ILLUMINANT_A: WORD = 1;
+pub const ILLUMINANT_B: WORD = 2;
+pub const ILLUMINANT_C: WORD = 3;
+pub const ILLUMINANT_D50: WORD = 4;
+pub const ILLUMINANT_D55: WORD = 5;
+pub const ILLUMINANT_D65: WORD = 6;
+pub const ILLUMINANT_D75: WORD = 7;
+pub const ILLUMINANT_F2: WORD = 8;
+pub const ILLUMINANT_MAX_INDEX: WORD = ILLUMINANT_F2;
+pub const ILLUMINANT_TUNGSTEN: WORD = ILLUMINANT_A;
+pub const ILLUMINANT_DAYLIGHT: WORD = ILLUMINANT_C;
+pub const ILLUMINANT_FLUORESCENT: WORD = ILLUMINANT_F2;
+pub const ILLUMINANT_NTSC: WORD = ILLUMINANT_C;
+pub const RGB_GAMMA_MIN: WORD = 02500;
+pub const RGB_GAMMA_MAX: WORD = 65000;
+pub const REFERENCE_WHITE_MIN: WORD = 6000;
+pub const REFERENCE_WHITE_MAX: WORD = 10000;
+pub const REFERENCE_BLACK_MIN: WORD = 0;
+pub const REFERENCE_BLACK_MAX: WORD = 4000;
+pub const COLOR_ADJ_MIN: SHORT = -100;
+pub const COLOR_ADJ_MAX: SHORT = 100;
 STRUCT!{struct COLORADJUSTMENT {
     caSize: WORD,
     caFlags: WORD,
@@ -2696,21 +4100,19 @@ STRUCT!{struct COLORADJUSTMENT {
 }}
 pub type PCOLORADJUSTMENT = *mut COLORADJUSTMENT;
 pub type LPCOLORADJUSTMENT = *mut COLORADJUSTMENT;
-STRUCT!{struct WCRANGE {
-    wcLow: WCHAR,
-    cGlyphs: USHORT,
-}}
-pub type PWCRANGE = *mut WCRANGE;
-pub type LPWCRANGE = *mut WCRANGE;
-STRUCT!{struct GLYPHSET {
-    cbThis: DWORD,
-    flAccel: DWORD,
-    cGlyphsSupported: DWORD,
-    cRanges: DWORD,
-    ranges: [WCRANGE;1],
-}}
-pub type PGLYPHSET = *mut GLYPHSET;
-pub type LPGLYPHSET = *mut GLYPHSET;
+extern "system" {
+    pub fn SetColorAdjustment(
+        hdc: HDC,
+        lpca: *const COLORADJUSTMENT,
+    ) -> BOOL;
+    pub fn GetColorAdjustment(
+        hdc: HDC,
+        lpca: LPCOLORADJUSTMENT,
+    ) -> BOOL;
+    pub fn CreateHalftonePalette(
+        hdc: HDC,
+    ) -> HPALETTE;
+}
 FN!{stdcall ABORTPROC(
     HDC,
     c_int,
@@ -2731,6 +4133,327 @@ STRUCT!{struct DOCINFOW {
     fwType: DWORD,
 }}
 pub type LPDOCINFOW = *mut DOCINFOW;
+pub const DI_APPBANDING: DWORD = 0x00000001;
+pub const DI_ROPS_READ_DESTINATION: DWORD = 0x00000002;
+extern "system" {
+    pub fn StartDocA(
+        hdc: HDC,
+        lpdi: *const DOCINFOA,
+    ) -> c_int;
+    pub fn StartDocW(
+        hdc: HDC,
+        lpdi: *const DOCINFOW,
+    ) -> c_int;
+    pub fn EndDoc(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn StartPage(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn EndPage(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn AbortDoc(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn SetAbortProc(
+        hdc: HDC,
+        aproc: ABORTPROC,
+    ) -> c_int;
+    pub fn AbortPath(
+        hdc: HDC,
+    ) -> BOOL;
+    pub fn ArcTo(
+        hdc: HDC,
+        nLeftRect: c_int,
+        nTopRect: c_int,
+        nRightRect: c_int,
+        nBottomRect: c_int,
+        nXRadial1: c_int,
+        nYRadial1: c_int,
+        nXRadial2: c_int,
+        nYRadial2: c_int,
+    ) -> BOOL;
+    pub fn BeginPath(
+        hdc: HDC,
+    ) -> BOOL;
+    pub fn CloseFigure(
+        hdc: HDC,
+    ) -> BOOL;
+    pub fn EndPath(
+        hdc: HDC,
+    ) -> BOOL;
+    pub fn FillPath(
+        hdc: HDC,
+    ) -> BOOL;
+    pub fn FlattenPath(
+        hdc: HDC,
+    ) -> BOOL;
+    pub fn GetPath(
+        hdc: HDC,
+        apt: LPPOINT,
+        aj: LPBYTE,
+        cpt: c_int,
+    ) -> c_int;
+    pub fn PathToRegion(
+        hdc: HDC,
+    ) -> HRGN;
+    pub fn PolyDraw(
+        hdc: HDC,
+        lppt: *const POINT,
+        lpbTypes: *const BYTE,
+        cCount: c_int,
+    ) -> BOOL;
+    pub fn SelectClipPath(
+        hdc: HDC,
+        mode: c_int,
+    ) -> BOOL;
+    pub fn SetArcDirection(
+        hdc: HDC,
+        ArcDirection: c_int,
+    ) -> c_int;
+    pub fn SetMiterLimit(
+        hdc: HDC,
+        limit: FLOAT,
+        old: PFLOAT,
+    ) -> BOOL;
+    pub fn StrokeAndFillPath(
+        hdc: HDC,
+    ) -> BOOL;
+    pub fn StrokePath(
+        hdc: HDC,
+    ) -> BOOL;
+    pub fn WidenPath(
+        hdc: HDC,
+    ) -> BOOL;
+    pub fn ExtCreatePen(
+        iPenStyle: DWORD,
+        cWidth: DWORD,
+        plbrush: *const LOGBRUSH,
+        cStyle: DWORD,
+        pstyle: *const DWORD,
+    ) -> HPEN;
+    pub fn GetMiterLimit(
+        hdc: HDC,
+        plimit: PFLOAT,
+    ) -> BOOL;
+    pub fn GetArcDirection(
+        hdc: HDC,
+    ) -> c_int;
+    pub fn GetObjectA(
+        h: HANDLE,
+        c: c_int,
+        pv: LPVOID,
+    ) -> c_int;
+    pub fn GetObjectW(
+        h: HANDLE,
+        c: c_int,
+        pv: LPVOID,
+    ) -> c_int;
+    pub fn MoveToEx(
+        hdc: HDC,
+        X: c_int,
+        Y: c_int,
+        lpPoint:LPPOINT,
+    ) -> BOOL;
+    pub fn TextOutA(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        lpString: LPCSTR,
+        c: c_int,
+    ) -> BOOL;
+    pub fn TextOutW(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        lpString: LPCWSTR,
+        c: c_int,
+    ) -> BOOL;
+    pub fn ExtTextOutA(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        options: UINT,
+        lprect: *const RECT,
+        lpString: LPCSTR,
+        c: UINT,
+        lpDx: *const INT,
+    ) -> BOOL;
+    pub fn ExtTextOutW(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        options: UINT,
+        lprect: *const RECT,
+        lpString: LPCWSTR,
+        c: UINT,
+        lpDx: *const INT,
+    ) -> BOOL;
+    pub fn PolyTextOutA(
+        hdc: HDC,
+        ppt: *const POLYTEXTA,
+        nstrings: c_int,
+    ) -> BOOL;
+    pub fn PolyTextOutW(
+        hdc: HDC,
+        ppt: *const POLYTEXTW,
+        nstrings: c_int,
+    ) -> BOOL;
+    pub fn CreatePolygonRgn(
+        lppt: *const POINT,
+        cPoints: c_int,
+        fnPolyFillMode: c_int,
+    ) -> HRGN;
+    pub fn DPtoLP(
+        hdc: HDC,
+        lppt: *mut POINT,
+        c: c_int,
+    ) -> BOOL;
+    pub fn LPtoDP(
+        hdc: HDC,
+        lppt: LPPOINT,
+        c: c_int,
+    ) -> BOOL;
+    pub fn Polygon(
+        hdc: HDC,
+        lpPoints: *const POINT,
+        nCount: c_int,
+    ) -> BOOL;
+    pub fn Polyline(
+        hdc: HDC,
+        lppt: *const POINT,
+        cCount: c_int,
+    ) -> BOOL;
+    pub fn PolyBezier(
+        hdc: HDC,
+        lppt: *const POINT,
+        cPoints: DWORD,
+    ) -> BOOL;
+    pub fn PolyBezierTo(
+        hdc: HDC,
+        lppt: *const POINT,
+        cPoints: DWORD,
+    ) -> BOOL;
+    pub fn PolylineTo(
+        hdc: HDC,
+        lppt: *const POINT,
+        cCount: DWORD,
+    ) -> BOOL;
+    pub fn SetViewportExtEx(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        lpsz: LPSIZE,
+    ) -> BOOL;
+    pub fn SetViewportOrgEx(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        lppt: *mut POINT,
+    ) -> BOOL;
+    pub fn SetWindowExtEx(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        lppt: LPSIZE,
+    ) -> BOOL;
+    pub fn SetWindowOrgEx(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        lppt: LPPOINT,
+    ) -> BOOL;
+    pub fn OffsetViewportOrgEx(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        lppt: LPPOINT,
+    ) -> BOOL;
+    pub fn OffsetWindowOrgEx(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        lppt: LPPOINT,
+    ) -> BOOL;
+    pub fn ScaleViewportExtEx(
+        hdc: HDC,xn: c_int,
+        dx: c_int,
+        yn: c_int,
+        yd: c_int,
+        lpsz: LPSIZE,
+    ) -> BOOL;
+    pub fn ScaleWindowExtEx(
+        hdc: HDC,
+        xn: c_int,
+        xd: c_int,
+        yn: c_int,
+        yd: c_int,
+        lpsz: LPSIZE,
+    ) -> BOOL;
+    pub fn SetBitmapDimensionEx(
+        hbm: HBITMAP,
+        w: c_int,
+        h: c_int,
+        lpsz: LPSIZE,
+    ) -> BOOL;
+    pub fn SetBrushOrgEx(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        lppt: LPPOINT,
+    ) -> BOOL;
+    pub fn GetTextFaceA(
+        hdc: HDC,
+        c: c_int,
+        lpName: LPSTR,
+    ) -> c_int;
+    pub fn GetTextFaceW(
+        hdc: HDC,
+        c: c_int,
+        lpName: LPWSTR,
+    ) -> c_int;
+}
+STRUCT!{struct KERNINGPAIR {
+    wFirst: WORD,
+    wSecond: WORD,
+    iKernAmount: c_int,
+}}
+pub type LPKERNINGPAIR = *mut KERNINGPAIR;
+extern "system" {
+    pub fn GetKerningPairsA(
+        hdc: HDC,
+        nPairs: DWORD,
+        lpKernPair: LPKERNINGPAIR,
+    ) -> DWORD;
+    pub fn GetKerningPairsW(
+        hdc: HDC,
+        nPairs: DWORD,
+        lpKernPair: LPKERNINGPAIR,
+    ) -> DWORD;
+    pub fn GetDCOrgEx(
+        hdc: HDC,
+        lppt: LPPOINT,
+    ) -> BOOL;
+    pub fn FixBrushOrgEx(
+        hdc: HDC,
+        x: c_int,
+        y: c_int,
+        ptl: LPPOINT,
+    ) -> BOOL;
+    pub fn UnrealizeObject(
+        h: HGDIOBJ,
+    ) -> BOOL;
+    pub fn GdiFlush() -> BOOL;
+    pub fn GdiSetBatchLimit(
+        dw: DWORD,
+    ) -> DWORD;
+    pub fn GdiGetBatchLimit() -> DWORD;
+}
+pub const ICM_OFF: c_int = 1;
+pub const ICM_ON: c_int = 2;
+pub const ICM_QUERY: c_int = 3;
+pub const ICM_DONE_OUTSIDEDC: c_int = 4;
 FN!{stdcall ICMENUMPROCA(
     LPSTR,
     LPARAM,
@@ -2739,17 +4462,1011 @@ FN!{stdcall ICMENUMPROCW(
     LPWSTR,
     LPARAM,
 ) -> c_int}
-FN!{stdcall MFENUMPROC(
-    hdc: HDC,
-    lpht: *mut HANDLETABLE,
-    lpMR: *mut METARECORD,
-    nObj: c_int,
-    param: LPARAM,
-) -> c_int}
-pub const GRADIENT_FILL_RECT_H: ULONG = 0x00000000;
-pub const GRADIENT_FILL_RECT_V: ULONG = 0x00000001;
-pub const GRADIENT_FILL_TRIANGLE: ULONG = 0x00000002;
-pub const GRADIENT_FILL_OP_FLAG: ULONG = 0x000000ff;
+extern "system" {
+    pub fn SetICMMode(
+        hdc: HDC,
+        mode: c_int,
+    ) -> c_int;
+    pub fn CheckColorsInGamut(
+        hDC: HDC,
+        lpRGBTriples: LPVOID,
+        lpBuffer: LPVOID,
+        nCount: UINT,
+    ) -> BOOL;
+    pub fn GetColorSpace(
+        hdc: HDC,
+    ) -> HCOLORSPACE;
+    pub fn GetLogColorSpaceA(
+        hColorSpace: HCOLORSPACE,
+        lpBuffer: LPLOGCOLORSPACEA,
+        nSize: DWORD,
+    ) -> BOOL;
+    pub fn GetLogColorSpaceW(
+        hColorSpace: HCOLORSPACE,
+        lpBuffer: LPLOGCOLORSPACEW,
+        nSize: DWORD,
+    ) -> BOOL;
+    pub fn CreateColorSpaceA(
+        lpLogColorSpace: LPLOGCOLORSPACEA,
+    ) -> HCOLORSPACE;
+    pub fn CreateColorSpaceW(
+        lpLogColorSpace: LPLOGCOLORSPACEW,
+    ) -> HCOLORSPACE;
+    pub fn SetColorSpace(
+        hdc: HDC,
+        hcs: HCOLORSPACE,
+    ) -> HCOLORSPACE;
+    pub fn DeleteColorSpace(
+        hcs: HCOLORSPACE,
+    ) -> BOOL;
+    pub fn GetICMProfileA(
+        hdc: HDC,
+        pBufSize: LPDWORD,
+        pszFilename: LPSTR,
+    ) -> BOOL;
+    pub fn GetICMProfileW(
+        hdc: HDC,
+        pBufSize: LPDWORD,
+        pszFilename: LPWSTR,
+    ) -> BOOL;
+    pub fn SetICMProfileA(
+        hdc: HDC,
+        lpFileName: LPSTR,
+    ) -> BOOL;
+    pub fn SetICMProfileW(
+        hdc: HDC,
+        lpFileName: LPWSTR,
+    ) -> BOOL;
+    pub fn GetDeviceGammaRamp(
+        hdc: HDC,
+        lpRamp: LPVOID,
+    ) -> BOOL;
+    pub fn SetDeviceGammaRamp(
+        hdc: HDC,
+        lpRamp: LPVOID,
+    ) -> BOOL;
+    pub fn ColorMatchToTarget(
+        hDC: HDC,
+        hdcTarget: HDC,
+        uiAction: UINT,
+    ) -> BOOL;
+    pub fn EnumICMProfilesA(
+        hdc: HDC,
+        iproc: ICMENUMPROCA,
+        param: LPARAM,
+    ) -> c_int;
+    pub fn EnumICMProfilesW(
+        hdc: HDC,
+        iproc: ICMENUMPROCW,
+        param: LPARAM,
+    ) -> c_int;
+    pub fn UpdateICMRegKeyA(
+        reserved: DWORD,
+        lpszCMID: LPSTR,
+        lpszFileName: LPSTR,
+        command: UINT,
+    ) -> BOOL;
+    pub fn UpdateICMRegKeyW(
+        reserved: DWORD,
+        lpszCMID: LPWSTR,
+        lpszFileName: LPWSTR,
+        command: UINT,
+    ) -> BOOL;
+    pub fn ColorCorrectPalette(
+        hDC: HDC,
+        hPalette: HPALETTE,
+        dwFirstEntry: DWORD,
+        dwNumOfEntries: DWORD,
+    ) -> BOOL;
+}
+pub const ENHMETA_SIGNATURE: DWORD = 0x464D4520;
+pub const ENHMETA_STOCK_OBJECT: DWORD = 0x80000000;
+pub const EMR_HEADER: DWORD = 1;
+pub const EMR_POLYBEZIER: DWORD = 2;
+pub const EMR_POLYGON: DWORD = 3;
+pub const EMR_POLYLINE: DWORD = 4;
+pub const EMR_POLYBEZIERTO: DWORD = 5;
+pub const EMR_POLYLINETO: DWORD = 6;
+pub const EMR_POLYPOLYLINE: DWORD = 7;
+pub const EMR_POLYPOLYGON: DWORD = 8;
+pub const EMR_SETWINDOWEXTEX: DWORD = 9;
+pub const EMR_SETWINDOWORGEX: DWORD = 10;
+pub const EMR_SETVIEWPORTEXTEX: DWORD = 11;
+pub const EMR_SETVIEWPORTORGEX: DWORD = 12;
+pub const EMR_SETBRUSHORGEX: DWORD = 13;
+pub const EMR_EOF: DWORD = 14;
+pub const EMR_SETPIXELV: DWORD = 15;
+pub const EMR_SETMAPPERFLAGS: DWORD = 16;
+pub const EMR_SETMAPMODE: DWORD = 17;
+pub const EMR_SETBKMODE: DWORD = 18;
+pub const EMR_SETPOLYFILLMODE: DWORD = 19;
+pub const EMR_SETROP2: DWORD = 20;
+pub const EMR_SETSTRETCHBLTMODE: DWORD = 21;
+pub const EMR_SETTEXTALIGN: DWORD = 22;
+pub const EMR_SETCOLORADJUSTMENT: DWORD = 23;
+pub const EMR_SETTEXTCOLOR: DWORD = 24;
+pub const EMR_SETBKCOLOR: DWORD = 25;
+pub const EMR_OFFSETCLIPRGN: DWORD = 26;
+pub const EMR_MOVETOEX: DWORD = 27;
+pub const EMR_SETMETARGN: DWORD = 28;
+pub const EMR_EXCLUDECLIPRECT: DWORD = 29;
+pub const EMR_INTERSECTCLIPRECT: DWORD = 30;
+pub const EMR_SCALEVIEWPORTEXTEX: DWORD = 31;
+pub const EMR_SCALEWINDOWEXTEX: DWORD = 32;
+pub const EMR_SAVEDC: DWORD = 33;
+pub const EMR_RESTOREDC: DWORD = 34;
+pub const EMR_SETWORLDTRANSFORM: DWORD = 35;
+pub const EMR_MODIFYWORLDTRANSFORM: DWORD = 36;
+pub const EMR_SELECTOBJECT: DWORD = 37;
+pub const EMR_CREATEPEN: DWORD = 38;
+pub const EMR_CREATEBRUSHINDIRECT: DWORD = 39;
+pub const EMR_DELETEOBJECT: DWORD = 40;
+pub const EMR_ANGLEARC: DWORD = 41;
+pub const EMR_ELLIPSE: DWORD = 42;
+pub const EMR_RECTANGLE: DWORD = 43;
+pub const EMR_ROUNDRECT: DWORD = 44;
+pub const EMR_ARC: DWORD = 45;
+pub const EMR_CHORD: DWORD = 46;
+pub const EMR_PIE: DWORD = 47;
+pub const EMR_SELECTPALETTE: DWORD = 48;
+pub const EMR_CREATEPALETTE: DWORD = 49;
+pub const EMR_SETPALETTEENTRIES: DWORD = 50;
+pub const EMR_RESIZEPALETTE: DWORD = 51;
+pub const EMR_REALIZEPALETTE: DWORD = 52;
+pub const EMR_EXTFLOODFILL: DWORD = 53;
+pub const EMR_LINETO: DWORD = 54;
+pub const EMR_ARCTO: DWORD = 55;
+pub const EMR_POLYDRAW: DWORD = 56;
+pub const EMR_SETARCDIRECTION: DWORD = 57;
+pub const EMR_SETMITERLIMIT: DWORD = 58;
+pub const EMR_BEGINPATH: DWORD = 59;
+pub const EMR_ENDPATH: DWORD = 60;
+pub const EMR_CLOSEFIGURE: DWORD = 61;
+pub const EMR_FILLPATH: DWORD = 62;
+pub const EMR_STROKEANDFILLPATH: DWORD = 63;
+pub const EMR_STROKEPATH: DWORD = 64;
+pub const EMR_FLATTENPATH: DWORD = 65;
+pub const EMR_WIDENPATH: DWORD = 66;
+pub const EMR_SELECTCLIPPATH: DWORD = 67;
+pub const EMR_ABORTPATH: DWORD = 68;
+pub const EMR_GDICOMMENT: DWORD = 70;
+pub const EMR_FILLRGN: DWORD = 71;
+pub const EMR_FRAMERGN: DWORD = 72;
+pub const EMR_INVERTRGN: DWORD = 73;
+pub const EMR_PAINTRGN: DWORD = 74;
+pub const EMR_EXTSELECTCLIPRGN: DWORD = 75;
+pub const EMR_BITBLT: DWORD = 76;
+pub const EMR_STRETCHBLT: DWORD = 77;
+pub const EMR_MASKBLT: DWORD = 78;
+pub const EMR_PLGBLT: DWORD = 79;
+pub const EMR_SETDIBITSTODEVICE: DWORD = 80;
+pub const EMR_STRETCHDIBITS: DWORD = 81;
+pub const EMR_EXTCREATEFONTINDIRECTW: DWORD = 82;
+pub const EMR_EXTTEXTOUTA: DWORD = 83;
+pub const EMR_EXTTEXTOUTW: DWORD = 84;
+pub const EMR_POLYBEZIER16: DWORD = 85;
+pub const EMR_POLYGON16: DWORD = 86;
+pub const EMR_POLYLINE16: DWORD = 87;
+pub const EMR_POLYBEZIERTO16: DWORD = 88;
+pub const EMR_POLYLINETO16: DWORD = 89;
+pub const EMR_POLYPOLYLINE16: DWORD = 90;
+pub const EMR_POLYPOLYGON16: DWORD = 91;
+pub const EMR_POLYDRAW16: DWORD = 92;
+pub const EMR_CREATEMONOBRUSH: DWORD = 93;
+pub const EMR_CREATEDIBPATTERNBRUSHPT: DWORD = 94;
+pub const EMR_EXTCREATEPEN: DWORD = 95;
+pub const EMR_POLYTEXTOUTA: DWORD = 96;
+pub const EMR_POLYTEXTOUTW: DWORD = 97;
+pub const EMR_SETICMMODE: DWORD = 98;
+pub const EMR_CREATECOLORSPACE: DWORD = 99;
+pub const EMR_SETCOLORSPACE: DWORD = 100;
+pub const EMR_DELETECOLORSPACE: DWORD = 101;
+pub const EMR_GLSRECORD: DWORD = 102;
+pub const EMR_GLSBOUNDEDRECORD: DWORD = 103;
+pub const EMR_PIXELFORMAT: DWORD = 104;
+pub const EMR_RESERVED_105: DWORD = 105;
+pub const EMR_RESERVED_106: DWORD = 106;
+pub const EMR_RESERVED_107: DWORD = 107;
+pub const EMR_RESERVED_108: DWORD = 108;
+pub const EMR_RESERVED_109: DWORD = 109;
+pub const EMR_RESERVED_110: DWORD = 110;
+pub const EMR_COLORCORRECTPALETTE: DWORD = 111;
+pub const EMR_SETICMPROFILEA: DWORD = 112;
+pub const EMR_SETICMPROFILEW: DWORD = 113;
+pub const EMR_ALPHABLEND: DWORD = 114;
+pub const EMR_SETLAYOUT: DWORD = 115;
+pub const EMR_TRANSPARENTBLT: DWORD = 116;
+pub const EMR_RESERVED_117: DWORD = 117;
+pub const EMR_GRADIENTFILL: DWORD = 118;
+pub const EMR_RESERVED_119: DWORD = 119;
+pub const EMR_RESERVED_120: DWORD = 120;
+pub const EMR_COLORMATCHTOTARGETW: DWORD = 121;
+pub const EMR_CREATECOLORSPACEW: DWORD = 122;
+pub const EMR_MIN: DWORD = 1;
+pub const EMR_MAX: DWORD = 122;
+STRUCT!{struct EMR {
+    iType: DWORD,
+    nSize: DWORD,
+}}
+pub type PEMR = *mut EMR;
+STRUCT!{struct EMRTEXT {
+    ptlReference: POINTL,
+    nChars: DWORD,
+    offString: DWORD,
+    fOptions: DWORD,
+    rcl: RECTL,
+    offDx: DWORD,
+}}
+pub type PEMRTEXT = *mut EMRTEXT;
+STRUCT!{struct EMRABORTPATH {
+    emr: EMR,
+}}
+pub type PEMRABORTPATH = *mut EMRABORTPATH;
+pub type EMRBEGINPATH = EMRABORTPATH;
+pub type PEMRBEGINPATH = *mut EMRABORTPATH;
+pub type EMRENDPATH = EMRABORTPATH;
+pub type PEMRENDPATH = *mut EMRABORTPATH;
+pub type EMRCLOSEFIGURE = EMRABORTPATH;
+pub type PEMRCLOSEFIGURE = *mut EMRABORTPATH;
+pub type EMRFLATTENPATH = EMRABORTPATH;
+pub type PEMRFLATTENPATH = *mut EMRABORTPATH;
+pub type EMRWIDENPATH = EMRABORTPATH;
+pub type PEMRWIDENPATH = *mut EMRABORTPATH;
+pub type EMRSETMETARGN = EMRABORTPATH;
+pub type PEMRSETMETARGN = *mut EMRABORTPATH;
+pub type EMRSAVEDC = EMRABORTPATH;
+pub type PEMRSAVEDC = *mut EMRABORTPATH;
+pub type EMRREALIZEPALETTE = EMRABORTPATH;
+pub type PEMRREALIZEPALETTE = *mut EMRABORTPATH;
+STRUCT!{struct EMRSELECTCLIPPATH {
+    emr: EMR,
+    iMode: DWORD,
+}}
+pub type PEMRSELECTCLIPPATH = *mut EMRSELECTCLIPPATH;
+pub type EMRSETBKMODE = EMRSELECTCLIPPATH;
+pub type PEMRSETBKMODE = *mut EMRSELECTCLIPPATH;
+pub type EMRSETMAPMODE = EMRSELECTCLIPPATH;
+pub type PEMRSETMAPMODE = *mut EMRSELECTCLIPPATH;
+pub type EMRSETLAYOUT = EMRSELECTCLIPPATH;
+pub type PEMRSETLAYOUT = *mut EMRSELECTCLIPPATH;
+pub type EMRSETPOLYFILLMODE = EMRSELECTCLIPPATH;
+pub type PEMRSETPOLYFILLMODE = *mut EMRSELECTCLIPPATH;
+pub type EMRSETROP2 = EMRSELECTCLIPPATH;
+pub type PEMRSETROP2 = *mut EMRSELECTCLIPPATH;
+pub type EMRSETSTRETCHBLTMODE = EMRSELECTCLIPPATH;
+pub type PEMRSETSTRETCHBLTMODE = *mut EMRSELECTCLIPPATH;
+pub type EMRSETICMMODE = EMRSELECTCLIPPATH;
+pub type PEMRSETICMMODE = *mut EMRSELECTCLIPPATH;
+pub type EMRSETTEXTALIGN = EMRSELECTCLIPPATH;
+pub type PEMRSETTEXTALIGN = *mut EMRSELECTCLIPPATH;
+STRUCT!{struct EMRSETMITERLIMIT {
+    emr: EMR,
+    eMiterLimit: FLOAT,
+}}
+pub type PEMRSETMITERLIMIT = *mut EMRSETMITERLIMIT;
+STRUCT!{struct EMRRESTOREDC {
+    emr: EMR,
+    iRelative: LONG,
+}}
+pub type PEMRRESTOREDC = *mut EMRRESTOREDC;
+STRUCT!{struct EMRSETARCDIRECTION {
+    emr: EMR,
+    iArcDirection: DWORD,
+}}
+pub type PEMRSETARCDIRECTION = *mut EMRSETARCDIRECTION;
+STRUCT!{struct EMRSETMAPPERFLAGS {
+    emr: EMR,
+    dwFlags: DWORD,
+}}
+pub type PEMRSETMAPPERFLAGS = *mut EMRSETMAPPERFLAGS;
+STRUCT!{struct EMRSETBKCOLOR {
+    emr: EMR,
+    crColor: COLORREF,
+}}
+pub type PEMRSETBKCOLOR = *mut EMRSETBKCOLOR;
+pub type EMRSETTEXTCOLOR = EMRSETBKCOLOR;
+pub type PEMRSETTEXTCOLOR = *mut EMRSETBKCOLOR;
+STRUCT!{struct EMRSELECTOBJECT {
+    emr: EMR,
+    ihObject: DWORD,
+}}
+pub type PEMRSELECTOBJECT = *mut EMRSELECTOBJECT;
+pub type EMRDELETEOBJECT = EMRSELECTOBJECT;
+pub type PEMRDELETEOBJECT = *mut EMRSELECTOBJECT;
+STRUCT!{struct EMRSELECTPALETTE {
+    emr: EMR,
+    ihPal: DWORD,
+}}
+pub type PEMRSELECTPALETTE = *mut EMRSELECTPALETTE;
+STRUCT!{struct EMRRESIZEPALETTE {
+    emr: EMR,
+    ihPal: DWORD,
+    cEntries: DWORD,
+}}
+pub type PEMRRESIZEPALETTE = *mut EMRRESIZEPALETTE;
+STRUCT!{struct EMRSETPALETTEENTRIES {
+    emr: EMR,
+    ihPal: DWORD,
+    iStart: DWORD,
+    cEntries: DWORD,
+    aPalEntries: [PALETTEENTRY; 1],
+}}
+pub type PEMRSETPALETTEENTRIES = *mut EMRSETPALETTEENTRIES;
+STRUCT!{struct EMRSETCOLORADJUSTMENT {
+    emr: EMR,
+    ColorAdjustment: COLORADJUSTMENT,
+}}
+pub type PEMRSETCOLORADJUSTMENT = *mut EMRSETCOLORADJUSTMENT;
+STRUCT!{struct EMRGDICOMMENT {
+    emr: EMR,
+    cbData: DWORD,
+    Data: [BYTE; 1],
+}}
+pub type PEMRGDICOMMENT = *mut EMRGDICOMMENT;
+STRUCT!{struct EMREOF {
+    emr: EMR,
+    nPalEntries: DWORD,
+    offPalEntries: DWORD,
+    nSizeLast: DWORD,
+}}
+pub type PEMREOF = *mut EMREOF;
+STRUCT!{struct EMRLINETO {
+    emr: EMR,
+    ptl: POINTL,
+}}
+pub type PEMRLINETO = *mut EMRLINETO;
+pub type EMRMOVETOEX = EMRLINETO;
+pub type PEMRMOVETOEX = *mut EMRLINETO;
+STRUCT!{struct EMROFFSETCLIPRGN {
+    emr: EMR,
+    ptlOffset: POINTL,
+}}
+pub type PEMROFFSETCLIPRGN = *mut EMROFFSETCLIPRGN;
+STRUCT!{struct EMRFILLPATH {
+    emr: EMR,
+    rclBounds: RECTL,
+}}
+pub type PEMRFILLPATH = *mut EMRFILLPATH;
+pub type EMRSTROKEANDFILLPATH = EMRFILLPATH;
+pub type PEMRSTROKEANDFILLPATH = *mut EMRFILLPATH;
+pub type EMRSTROKEPATH = EMRFILLPATH;
+pub type PEMRSTROKEPATH = *mut EMRFILLPATH;
+STRUCT!{struct EMREXCLUDECLIPRECT {
+    emr: EMR,
+    rclClip: RECTL,
+}}
+pub type PEMREXCLUDECLIPRECT = *mut EMREXCLUDECLIPRECT;
+pub type EMRINTERSECTCLIPRECT = EMREXCLUDECLIPRECT;
+pub type PEMRINTERSECTCLIPRECT = *mut EMREXCLUDECLIPRECT;
+STRUCT!{struct EMRSETVIEWPORTORGEX {
+    emr: EMR,
+    ptlOrigin: POINTL,
+}}
+pub type PEMRSETVIEWPORTORGEX = *mut EMRSETVIEWPORTORGEX;
+pub type EMRSETWINDOWORGEX = EMRSETVIEWPORTORGEX;
+pub type PEMRSETWINDOWORGEX = *mut EMRSETVIEWPORTORGEX;
+pub type EMRSETBRUSHORGEX = EMRSETVIEWPORTORGEX;
+pub type PEMRSETBRUSHORGEX = *mut EMRSETVIEWPORTORGEX;
+STRUCT!{struct EMRSETVIEWPORTEXTEX {
+    emr: EMR,
+    szlExtent: SIZEL,
+}}
+pub type PEMRSETVIEWPORTEXTEX = *mut EMRSETVIEWPORTEXTEX;
+pub type EMRSETWINDOWEXTEX = EMRSETVIEWPORTEXTEX;
+pub type PEMRSETWINDOWEXTEX = *mut EMRSETVIEWPORTEXTEX;
+STRUCT!{struct EMRSCALEVIEWPORTEXTEX {
+    emr: EMR,
+    xNum: LONG,
+    xDenom: LONG,
+    yNum: LONG,
+    yDenom: LONG,
+}}
+pub type PEMRSCALEVIEWPORTEXTEX = *mut EMRSCALEVIEWPORTEXTEX;
+pub type EMRSCALEWINDOWEXTEX = EMRSCALEVIEWPORTEXTEX;
+pub type PEMRSCALEWINDOWEXTEX = *mut EMRSCALEVIEWPORTEXTEX;
+STRUCT!{struct EMRSETWORLDTRANSFORM {
+    emr: EMR,
+    xform: XFORM,
+}}
+pub type PEMRSETWORLDTRANSFORM = *mut EMRSETWORLDTRANSFORM;
+STRUCT!{struct EMRMODIFYWORLDTRANSFORM {
+    emr: EMR,
+    xform: XFORM,
+    iMode: DWORD,
+}}
+pub type PEMRMODIFYWORLDTRANSFORM = *mut EMRMODIFYWORLDTRANSFORM;
+STRUCT!{struct EMRSETPIXELV {
+    emr: EMR,
+    ptlPixel: POINTL,
+    crColor: COLORREF,
+}}
+pub type PEMRSETPIXELV = *mut EMRSETPIXELV;
+STRUCT!{struct EMREXTFLOODFILL {
+    emr: EMR,
+    ptlStart: POINTL,
+    crColor: COLORREF,
+    iMode: DWORD,
+}}
+pub type PEMREXTFLOODFILL = *mut EMREXTFLOODFILL;
+STRUCT!{struct EMRELLIPSE {
+    emr: EMR,
+    rclBox: RECTL,
+}}
+pub type PEMRELLIPSE = *mut EMRELLIPSE;
+pub type EMRRECTANGLE = EMRELLIPSE;
+pub type PEMRRECTANGLE = *mut EMRELLIPSE;
+STRUCT!{struct EMRROUNDRECT {
+    emr: EMR,
+    rclBox: RECTL,
+    szlCorner: SIZEL,
+}}
+pub type PEMRROUNDRECT = *mut EMRROUNDRECT;
+STRUCT!{struct EMRARC {
+    emr: EMR,
+    rclBox: RECTL,
+    ptlStart: POINTL,
+    ptlEnd: POINTL,
+}}
+pub type PEMRARC = *mut EMRARC;
+pub type EMRARCTO = EMRARC;
+pub type PEMRARCTO = *mut EMRARC;
+pub type EMRCHORD = EMRARC;
+pub type PEMRCHORD = *mut EMRARC;
+pub type EMRPIE = EMRARC;
+pub type PEMRPIE = *mut EMRARC;
+STRUCT!{struct EMRANGLEARC {
+    emr: EMR,
+    ptlCenter: POINTL,
+    nRadius: DWORD,
+    eStartAngle: FLOAT,
+    eSweepAngle: FLOAT,
+}}
+pub type PEMRANGLEARC = *mut EMRANGLEARC;
+STRUCT!{struct EMRPOLYLINE {
+    emr: EMR,
+    rclBounds: RECTL,
+    cptl: DWORD,
+    aptl: [POINTL; 1],
+}}
+pub type PEMRPOLYLINE = *mut EMRPOLYLINE;
+pub type EMRPOLYBEZIER = EMRPOLYLINE;
+pub type PEMRPOLYBEZIER = *mut EMRPOLYLINE;
+pub type EMRPOLYGON = EMRPOLYLINE;
+pub type PEMRPOLYGON = *mut EMRPOLYLINE;
+pub type EMRPOLYBEZIERTO = EMRPOLYLINE;
+pub type PEMRPOLYBEZIERTO = *mut EMRPOLYLINE;
+pub type EMRPOLYLINETO = EMRPOLYLINE;
+pub type PEMRPOLYLINETO = *mut EMRPOLYLINE;
+STRUCT!{struct EMRPOLYLINE16 {
+    emr: EMR,
+    rclBounds: RECTL,
+    cpts: DWORD,
+    apts: [POINTL; 1],
+}}
+pub type PEMRPOLYLINE16 = *mut EMRPOLYLINE16;
+pub type EMRPOLYBEZIER16 = EMRPOLYLINE16;
+pub type PEMRPOLYBEZIER16 = *mut EMRPOLYLINE16;
+pub type EMRPOLYGON16 = EMRPOLYLINE16;
+pub type PEMRPOLYGON16 = *mut EMRPOLYLINE16;
+pub type EMRPOLYBEZIERTO16 = EMRPOLYLINE16;
+pub type PEMRPOLYBEZIERTO16 = *mut EMRPOLYLINE16;
+pub type EMRPOLYLINETO16 = EMRPOLYLINE16;
+pub type PEMRPOLYLINETO16 = *mut EMRPOLYLINE16;
+STRUCT!{struct EMRPOLYDRAW {
+    emr: EMR,
+    rclBounds: RECTL,
+    cptl: DWORD,
+    aptl: [POINTL; 1],
+    abTypes: [BYTE; 1],
+}}
+pub type PEMRPOLYDRAW = *mut EMRPOLYDRAW;
+STRUCT!{struct EMRPOLYDRAW16 {
+    emr: EMR,
+    rclBounds: RECTL,
+    cpts: DWORD,
+    apts: [POINTL; 1],
+    abTypes: [BYTE; 1],
+}}
+pub type PEMRPOLYDRAW16 = *mut EMRPOLYDRAW16;
+STRUCT!{struct EMRPOLYPOLYLINE {
+    emr: EMR,
+    rclBounds: RECTL,
+    nPolys: DWORD,
+    cptl: DWORD,
+    aPolyCounts: [DWORD; 1],
+    aptl: [POINTL; 1],
+}}
+pub type PEMRPOLYPOLYLINE = *mut EMRPOLYPOLYLINE;
+pub type EMRPOLYPOLYGON = EMRPOLYPOLYLINE;
+pub type PEMRPOLYPOLYGON = *mut EMRPOLYPOLYLINE;
+STRUCT!{struct EMRPOLYPOLYLINE16 {
+    emr: EMR,
+    rclBounds: RECTL,
+    nPolys: DWORD,
+    cpts: DWORD,
+    aPolyCounts: [DWORD; 1],
+    apts: [POINTL; 1],
+}}
+pub type PEMRPOLYPOLYLINE16 = *mut EMRPOLYPOLYLINE16;
+pub type EMRPOLYPOLYGON16 = EMRPOLYPOLYLINE16;
+pub type PEMRPOLYPOLYGON16 = *mut EMRPOLYPOLYLINE16;
+STRUCT!{struct EMRINVERTRGN {
+    emr: EMR,
+    rclBounds: RECTL,
+    cbRgnData: DWORD,
+    RgnData: [BYTE; 1],
+}}
+pub type PEMRINVERTRGN = *mut EMRINVERTRGN;
+pub type EMRPAINTRGN = EMRINVERTRGN;
+pub type PEMRPAINTRGN = *mut EMRINVERTRGN;
+STRUCT!{struct EMRFILLRGN {
+    emr: EMR,
+    rclBounds: RECTL,
+    cbRgnData: DWORD,
+    ihBrush: DWORD,
+    RgnData: [BYTE; 1],
+}}
+pub type PEMRFILLRGN = *mut EMRFILLRGN;
+STRUCT!{struct EMRFRAMERGN {
+    emr: EMR,
+    rclBounds: RECTL,
+    cbRgnData: DWORD,
+    ihBrush: DWORD,
+    szlStroke: SIZEL,
+    RgnData: [BYTE; 1],
+}}
+pub type PEMRFRAMERGN = *mut EMRFRAMERGN;
+STRUCT!{struct EMREXTSELECTCLIPRGN {
+    emr: EMR,
+    cbRgnData: DWORD,
+    iMode: DWORD,
+    RgnData: [BYTE; 1],
+}}
+pub type PEMREXTSELECTCLIPRGN = *mut EMREXTSELECTCLIPRGN;
+STRUCT!{struct EMREXTTEXTOUTA {
+    emr: EMR,
+    rclBounds: RECTL,
+    iGraphicsMode: DWORD,
+    exScale: FLOAT,
+    eyScale: FLOAT,
+    emrtext: EMRTEXT,
+}}
+pub type PEMREXTTEXTOUTA = *mut EMREXTTEXTOUTA;
+pub type EMREXTTEXTOUTW = EMREXTTEXTOUTA;
+pub type PEMREXTTEXTOUTW = *mut EMREXTTEXTOUTA;
+STRUCT!{struct EMRPOLYTEXTOUTA {
+    emr: EMR,
+    rclBounds: RECTL,
+    iGraphicsMode: DWORD,
+    exScale: FLOAT,
+    eyScale: FLOAT,
+    cStrings: LONG,
+    aemrtext: [EMRTEXT; 1],
+}}
+pub type PEMRPOLYTEXTOUTA = *mut EMRPOLYTEXTOUTA;
+pub type EMRPOLYTEXTOUTW = EMRPOLYTEXTOUTA;
+pub type PEMRPOLYTEXTOUTW = *mut EMRPOLYTEXTOUTA;
+STRUCT!{struct EMRBITBLT {
+    emr: EMR,
+    rclBounds: RECTL,
+    xDest: LONG,
+    yDest: LONG,
+    cxDest: LONG,
+    cyDest: LONG,
+    dwRop: DWORD,
+    xSrc: LONG,
+    ySrc: LONG,
+    xformSrc: XFORM,
+    crBkColorSrc: COLORREF,
+    iUsageSrc: DWORD,
+    offBmiSrc: DWORD,
+    cbBmiSrc: DWORD,
+    offBitsSrc: DWORD,
+    cbBitsSrc: DWORD,
+}}
+pub type PEMRBITBLT = *mut EMRBITBLT;
+STRUCT!{struct EMRSTRETCHBLT {
+    emr: EMR,
+    rclBounds: RECTL,
+    xDest: LONG,
+    yDest: LONG,
+    cxDest: LONG,
+    cyDest: LONG,
+    dwRop: DWORD,
+    xSrc: LONG,
+    ySrc: LONG,
+    xformSrc: XFORM,
+    crBkColorSrc: COLORREF,
+    iUsageSrc: DWORD,
+    offBmiSrc: DWORD,
+    cbBmiSrc: DWORD,
+    offBitsSrc: DWORD,
+    cbBitsSrc: DWORD,
+    cxSrc: LONG,
+    cySrc: LONG,
+}}
+pub type PEMRSTRETCHBLT = *mut EMRSTRETCHBLT;
+STRUCT!{struct EMRMASKBLT {
+    emr: EMR,
+    rclBounds: RECTL,
+    xDest: LONG,
+    yDest: LONG,
+    cxDest: LONG,
+    cyDest: LONG,
+    dwRop: DWORD,
+    xSrc: LONG,
+    ySrc: LONG,
+    xformSrc: XFORM,
+    crBkColorSrc: COLORREF,
+    iUsageSrc: DWORD,
+    offBmiSrc: DWORD,
+    cbBmiSrc: DWORD,
+    offBitsSrc: DWORD,
+    cbBitsSrc: DWORD,
+    xMask: LONG,
+    yMask: LONG,
+    iUsageMask: DWORD,
+    offBmiMask: DWORD,
+    cbBmiMask: DWORD,
+    offBitsMask: DWORD,
+    cbBitsMask: DWORD,
+}}
+pub type PEMRMASKBLT = *mut EMRMASKBLT;
+STRUCT!{struct EMRPLGBLT {
+    emr: EMR,
+    rclBounds: RECTL,
+    aptlDest: [POINTL; 3],
+    xSrc: LONG,
+    ySrc: LONG,
+    cxSrc: LONG,
+    cySrc: LONG,
+    xformSrc: XFORM,
+    crBkColorSrc: COLORREF,
+    iUsageSrc: DWORD,
+    offBmiSrc: DWORD,
+    cbBmiSrc: DWORD,
+    offBitsSrc: DWORD,
+    cbBitsSrc: DWORD,
+    xMask: LONG,
+    yMask: LONG,
+    iUsageMask: DWORD,
+    offBmiMask: DWORD,
+    cbBmiMask: DWORD,
+    offBitsMask: DWORD,
+    cbBitsMask: DWORD,
+}}
+pub type PEMRPLGBLT = *mut EMRPLGBLT;
+STRUCT!{struct EMRSETDIBITSTODEVICE {
+    emr: EMR,
+    rclBounds: RECTL,
+    xDest: LONG,
+    yDest: LONG,
+    xSrc: LONG,
+    ySrc: LONG,
+    cxSrc: LONG,
+    cySrc: LONG,
+    offBmiSrc: DWORD,
+    cbBmiSrc: DWORD,
+    offBitsSrc: DWORD,
+    cbBitsSrc: DWORD,
+    iUsageSrc: DWORD,
+    iStartScan: DWORD,
+    cScans: DWORD,
+}}
+pub type PEMRSETDIBITSTODEVICE = *mut EMRSETDIBITSTODEVICE;
+STRUCT!{struct EMRSTRETCHDIBITS {
+    emr: EMR,
+    rclBounds: RECTL,
+    xDest: LONG,
+    yDest: LONG,
+    xSrc: LONG,
+    ySrc: LONG,
+    cxSrc: LONG,
+    cySrc: LONG,
+    offBmiSrc: DWORD,
+    cbBmiSrc: DWORD,
+    offBitsSrc: DWORD,
+    cbBitsSrc: DWORD,
+    iUsageSrc: DWORD,
+    dwRop: DWORD,
+    cxDest: LONG,
+    cyDest: LONG,
+}}
+pub type PEMRSTRETCHDIBITS = *mut EMRSTRETCHDIBITS;
+STRUCT!{struct EMREXTCREATEFONTINDIRECTW {
+    emr: EMR,
+    ihFont: DWORD,
+    elfw: EXTLOGFONTW,
+}}
+pub type PEMREXTCREATEFONTINDIRECTW = *mut EMREXTCREATEFONTINDIRECTW;
+STRUCT!{struct EMRCREATEPALETTE {
+    emr: EMR,
+    ihPal: DWORD,
+    lgpl: LOGPALETTE,
+}}
+pub type PEMRCREATEPALETTE = *mut EMRCREATEPALETTE;
+STRUCT!{struct EMRCREATEPEN {
+    emr: EMR,
+    ihPen: DWORD,
+    lopn: LOGPEN,
+}}
+pub type PEMRCREATEPEN = *mut EMRCREATEPEN;
+STRUCT!{struct EMREXTCREATEPEN {
+    emr: EMR,
+    ihPen: DWORD,
+    offBmi: DWORD,
+    cbBmi: DWORD,
+    offBits: DWORD,
+    cbBits: DWORD,
+    elp: EXTLOGPEN32,
+}}
+pub type PEMREXTCREATEPEN = *mut EMREXTCREATEPEN;
+STRUCT!{struct EMRCREATEBRUSHINDIRECT {
+    emr: EMR,
+    ihBrush: DWORD,
+    lb: LOGBRUSH32,
+}}
+pub type PEMRCREATEBRUSHINDIRECT = *mut EMRCREATEBRUSHINDIRECT;
+STRUCT!{struct EMRCREATEMONOBRUSH {
+    emr: EMR,
+    ihBrush: DWORD,
+    iUsage: DWORD,
+    offBmi: DWORD,
+    cbBmi: DWORD,
+    offBits: DWORD,
+    cbBits: DWORD,
+}}
+pub type PEMRCREATEMONOBRUSH = *mut EMRCREATEMONOBRUSH;
+STRUCT!{struct EMRCREATEDIBPATTERNBRUSHPT {
+    emr: EMR,
+    ihBrush: DWORD,
+    iUsage: DWORD,
+    offBmi: DWORD,
+    cbBmi: DWORD,
+    offBits: DWORD,
+    cbBits: DWORD,
+}}
+pub type PEMRCREATEDIBPATTERNBRUSHPT = *mut EMRCREATEDIBPATTERNBRUSHPT;
+STRUCT!{struct EMRFORMAT {
+    dSignature: DWORD,
+    nVersion: DWORD,
+    cbData: DWORD,
+    offData: DWORD,
+}}
+pub type PEMRFORMAT = *mut EMRFORMAT;
+STRUCT!{struct EMRGLSRECORD {
+    emr: EMR,
+    cbData: DWORD,
+    Data: [BYTE; 1],
+}}
+pub type PEMRGLSRECORD = *mut EMRGLSRECORD;
+STRUCT!{struct EMRGLSBOUNDEDRECORD {
+    emr: EMR,
+    rclBounds: RECTL,
+    cbData: DWORD,
+    Data: [BYTE; 1],
+}}
+pub type PEMRGLSBOUNDEDRECORD = *mut EMRGLSBOUNDEDRECORD;
+STRUCT!{struct EMRPIXELFORMAT {
+    emr: EMR,
+    pfd: PIXELFORMATDESCRIPTOR,
+}}
+pub type PEMRPIXELFORMAT = *mut EMRPIXELFORMAT;
+STRUCT!{struct EMRCREATECOLORSPACE {
+    emr: EMR,
+    ihCS: DWORD,
+    lcs: LOGCOLORSPACEA,
+}}
+pub type PEMRCREATECOLORSPACE = *mut EMRCREATECOLORSPACE;
+STRUCT!{struct EMRSETCOLORSPACE {
+    emr: EMR,
+    ihCS: DWORD,
+}}
+pub type PEMRSETCOLORSPACE = *mut EMRSETCOLORSPACE;
+pub type EMRSELECTCOLORSPACE = EMRSETCOLORSPACE;
+pub type PEMRSELECTCOLORSPACE = *mut EMRSETCOLORSPACE;
+pub type EMRDELETECOLORSPACE = EMRSETCOLORSPACE;
+pub type PEMRDELETECOLORSPACE = *mut EMRSETCOLORSPACE;
+STRUCT!{struct EMREXTESCAPE {
+    emr: EMR,
+    iEscape: INT,
+    cbEscData: INT,
+    EscData: [BYTE; 1],
+}}
+pub type PEMREXTESCAPE = *mut EMREXTESCAPE;
+pub type EMRDRAWESCAPE = EMREXTESCAPE;
+pub type PEMRDRAWESCAPE = *mut EMREXTESCAPE;
+STRUCT!{struct EMRNAMEDESCAPE {
+    emr: EMR,
+    iEscape: INT,
+    cbDriver: INT,
+    cbEscData: INT,
+    EscData: [BYTE; 1],
+}}
+pub type PEMRNAMEDESCAPE = *mut EMRNAMEDESCAPE;
+pub const SETICMPROFILE_EMBEDED: DWORD = 0x00000001;
+STRUCT!{struct EMRSETICMPROFILE {
+    emr: EMR,
+    dwFlags: DWORD,
+    cbName: DWORD,
+    cbData: DWORD,
+    Data: [BYTE; 1],
+}}
+pub type PEMRSETICMPROFILE = *mut EMRSETICMPROFILE;
+pub type EMRSETICMPROFILEA = EMRSETICMPROFILE;
+pub type PEMRSETICMPROFILEA = *mut EMRSETICMPROFILE;
+pub type EMRSETICMPROFILEW = EMRSETICMPROFILE;
+pub type PEMRSETICMPROFILEW = *mut EMRSETICMPROFILE;
+pub const CREATECOLORSPACE_EMBEDED: DWORD = 0x00000001;
+STRUCT!{struct EMRCREATECOLORSPACEW {
+    emr: EMR,
+    ihCS: DWORD,
+    lcs: LOGCOLORSPACEW,
+    dwFlags: DWORD,
+    cbData: DWORD,
+    Data: [BYTE; 1],
+}}
+pub type PEMRCREATECOLORSPACEW = *mut EMRCREATECOLORSPACEW;
+pub const COLORMATCHTOTARGET_EMBEDED: DWORD = 0x00000001;
+STRUCT!{struct EMRCOLORMATCHTOTARGET {
+    emr: EMR,
+    dwAction: DWORD,
+    dwFlags: DWORD,
+    cbName: DWORD,
+    cbData: DWORD,
+    Data: [BYTE; 1],
+}}
+pub type PEMRCOLORMATCHTOTARGET = *mut EMRCOLORMATCHTOTARGET;
+STRUCT!{struct EMRCOLORCORRECTPALETTE {
+    emr: EMR,
+    ihPalette: DWORD,
+    nFirstEntry: DWORD,
+    nPalEntries: DWORD,
+    nReserved: DWORD,
+}}
+pub type PEMRCOLORCORRECTPALETTE = *mut EMRCOLORCORRECTPALETTE;
+STRUCT!{struct EMRALPHABLEND {
+    emr: EMR,
+    rclBounds: RECTL,
+    xDest: LONG,
+    yDest: LONG,
+    cxDest: LONG,
+    cyDest: LONG,
+    dwRop: DWORD,
+    xSrc: LONG,
+    ySrc: LONG,
+    xformSrc: XFORM,
+    crBkColorSrc: COLORREF,
+    iUsageSrc: DWORD,
+    offBmiSrc: DWORD,
+    cbBmiSrc: DWORD,
+    offBitsSrc: DWORD,
+    cbBitsSrc: DWORD,
+    cxSrc: LONG,
+    cySrc: LONG,
+}}
+pub type PEMRALPHABLEND = *mut EMRALPHABLEND;
+STRUCT!{struct EMRGRADIENTFILL {
+    emr: EMR,
+    rclBounds: RECTL,
+    nVer: DWORD,
+    nTri: DWORD,
+    ulMode: ULONG,
+    Ver: [TRIVERTEX; 1],
+}}
+pub type PEMRGRADIENTFILL = *mut EMRGRADIENTFILL;
+STRUCT!{struct EMRTRANSPARENTBLT {
+    emr: EMR,
+    rclBounds: RECTL,
+    xDest: LONG,
+    yDest: LONG,
+    cxDest: LONG,
+    cyDest: LONG,
+    dwRop: DWORD,
+    xSrc: LONG,
+    ySrc: LONG,
+    xformSrc: XFORM,
+    crBkColorSrc: COLORREF,
+    iUsageSrc: DWORD,
+    offBmiSrc: DWORD,
+    cbBmiSrc: DWORD,
+    offBitsSrc: DWORD,
+    cbBitsSrc: DWORD,
+    cxSrc: LONG,
+    cySrc: LONG,
+}}
+pub type PEMRTRANSPARENTBLT = *mut EMRTRANSPARENTBLT;
+pub const GDICOMMENT_IDENTIFIER: DWORD = 0x43494447;
+pub const GDICOMMENT_WINDOWS_METAFILE: DWORD = 0x80000001;
+pub const GDICOMMENT_BEGINGROUP: DWORD = 0x00000002;
+pub const GDICOMMENT_ENDGROUP: DWORD = 0x00000003;
+pub const GDICOMMENT_MULTIFORMATS: DWORD = 0x40000004;
+pub const EPS_SIGNATURE: DWORD = 0x46535045;
+pub const GDICOMMENT_UNICODE_STRING: DWORD = 0x00000040;
+pub const GDICOMMENT_UNICODE_END: DWORD = 0x00000080;
+extern "system" {
+    pub fn wglCopyContext(
+        hglrcSrc: HGLRC,
+        hglrcDst: HGLRC,
+        mask: UINT,
+    ) -> BOOL;
+    pub fn wglCreateContext(
+        hdc: HDC,
+    ) -> HGLRC;
+    pub fn wglCreateLayerContext(
+        hdc: HDC,
+        iLayerPlane: c_int,
+    ) -> HGLRC;
+    pub fn wglDeleteContext(
+        hglrc: HGLRC,
+    ) -> BOOL;
+    pub fn wglGetCurrentContext() -> HGLRC;
+    pub fn wglGetCurrentDC() -> HDC;
+    pub fn wglGetProcAddress(
+        lpszProc: LPCSTR,
+    ) -> PROC;
+    pub fn wglMakeCurrent(
+        hdc: HDC,
+        hglrc: HGLRC,
+    ) -> BOOL;
+    pub fn wglShareLists(
+        hglrc1: HGLRC,
+        hglrc2: HGLRC,
+    ) -> BOOL;
+    pub fn wglUseFontBitmapsA(
+        hdc: HDC,
+        first: DWORD,
+        count: DWORD,
+        listBase: DWORD,
+    ) -> BOOL;
+    pub fn wglUseFontBitmapsW(
+        hdc: HDC,
+        first: DWORD,
+        count: DWORD,
+        listBase: DWORD,
+    ) -> BOOL;
+    pub fn SwapBuffers(
+        hdc: HDC,
+    ) -> BOOL;
+}
+STRUCT!{struct POINTFLOAT {
+    x: FLOAT,
+    y: FLOAT,
+}}
+pub type PPOINTFLOAT = *mut POINTFLOAT;
+STRUCT!{struct GLYPHMETRICSFLOAT {
+    gmfBlackBoxX: FLOAT,
+    gmfBlackBoxY: FLOAT,
+    gmfptGlyphOrigin: POINTFLOAT,
+    gmfCellIncX: FLOAT,
+    gmfCellIncY: FLOAT,
+}}
+pub type PGLYPHMETRICSFLOAT = *mut GLYPHMETRICSFLOAT;
+pub type LPGLYPHMETRICSFLOAT = *mut GLYPHMETRICSFLOAT;
+pub const WGL_FONT_LINES: DWORD = 0;
+pub const WGL_FONT_POLYGONS: DWORD = 1;
+extern "system" {
+    pub fn wglUseFontOutlinesA(
+        hdc: HDC,
+        first: DWORD,
+        count: DWORD,
+        listBase: DWORD,
+        deviation: FLOAT,
+        extrusion: FLOAT,
+        format: c_int,
+        lpgmf: LPGLYPHMETRICSFLOAT,
+    ) -> BOOL;
+    pub fn wglUseFontOutlinesW(
+        hdc: HDC,
+        first: DWORD,
+        count: DWORD,
+        listBase: DWORD,
+        deviation: FLOAT,
+        extrusion: FLOAT,
+        format: c_int,
+        lpgmf: LPGLYPHMETRICSFLOAT,
+    ) -> BOOL;
+}
 STRUCT!{struct LAYERPLANEDESCRIPTOR {
     nSize: WORD,
     nVersion: WORD,
@@ -2778,30 +5495,91 @@ STRUCT!{struct LAYERPLANEDESCRIPTOR {
 }}
 pub type PLAYERPLANEDESCRIPTOR = *mut LAYERPLANEDESCRIPTOR;
 pub type LPLAYERPLANEDESCRIPTOR = *mut LAYERPLANEDESCRIPTOR;
-STRUCT!{struct KERNINGPAIR {
-    wFirst: WORD,
-    wSecond: WORD,
-    iKernAmount: c_int,
-}}
-pub type LPKERNINGPAIR = *mut KERNINGPAIR;
-STRUCT!{struct POINTFLOAT {
-    x: FLOAT,
-    y: FLOAT,
-}}
-pub type PPOINTFLOAT = *mut POINTFLOAT;
-STRUCT!{struct GLYPHMETRICSFLOAT {
-    gmfBlackBoxX: FLOAT,
-    gmfBlackBoxY: FLOAT,
-    gmfptGlyphOrigin: POINTFLOAT,
-    gmfCellIncX: FLOAT,
-    gmfCellIncY: FLOAT,
-}}
-pub type PGLYPHMETRICSFLOAT = *mut GLYPHMETRICSFLOAT;
-pub type LPGLYPHMETRICSFLOAT = *mut GLYPHMETRICSFLOAT;
-FN!{stdcall ENHMFENUMPROC(
+pub const LPD_DOUBLEBUFFER: DWORD = 0x00000001;
+pub const LPD_STEREO: DWORD = 0x00000002;
+pub const LPD_SUPPORT_GDI: DWORD = 0x00000010;
+pub const LPD_SUPPORT_OPENGL: DWORD = 0x00000020;
+pub const LPD_SHARE_DEPTH: DWORD = 0x00000040;
+pub const LPD_SHARE_STENCIL: DWORD = 0x00000080;
+pub const LPD_SHARE_ACCUM: DWORD = 0x00000100;
+pub const LPD_SWAP_EXCHANGE: DWORD = 0x00000200;
+pub const LPD_SWAP_COPY: DWORD = 0x00000400;
+pub const LPD_TRANSPARENT: DWORD = 0x00001000;
+pub const LPD_TYPE_RGBA: BYTE = 0;
+pub const LPD_TYPE_COLORINDEX: BYTE = 1;
+pub const WGL_SWAP_MAIN_PLANE: UINT = 0x00000001;
+pub const WGL_SWAP_OVERLAY1: UINT = 0x00000002;
+pub const WGL_SWAP_OVERLAY2: UINT = 0x00000004;
+pub const WGL_SWAP_OVERLAY3: UINT = 0x00000008;
+pub const WGL_SWAP_OVERLAY4: UINT = 0x00000010;
+pub const WGL_SWAP_OVERLAY5: UINT = 0x00000020;
+pub const WGL_SWAP_OVERLAY6: UINT = 0x00000040;
+pub const WGL_SWAP_OVERLAY7: UINT = 0x00000080;
+pub const WGL_SWAP_OVERLAY8: UINT = 0x00000100;
+pub const WGL_SWAP_OVERLAY9: UINT = 0x00000200;
+pub const WGL_SWAP_OVERLAY10: UINT = 0x00000400;
+pub const WGL_SWAP_OVERLAY11: UINT = 0x00000800;
+pub const WGL_SWAP_OVERLAY12: UINT = 0x00001000;
+pub const WGL_SWAP_OVERLAY13: UINT = 0x00002000;
+pub const WGL_SWAP_OVERLAY14: UINT = 0x00004000;
+pub const WGL_SWAP_OVERLAY15: UINT = 0x00008000;
+pub const WGL_SWAP_UNDERLAY1: UINT = 0x00010000;
+pub const WGL_SWAP_UNDERLAY2: UINT = 0x00020000;
+pub const WGL_SWAP_UNDERLAY3: UINT = 0x00040000;
+pub const WGL_SWAP_UNDERLAY4: UINT = 0x00080000;
+pub const WGL_SWAP_UNDERLAY5: UINT = 0x00100000;
+pub const WGL_SWAP_UNDERLAY6: UINT = 0x00200000;
+pub const WGL_SWAP_UNDERLAY7: UINT = 0x00400000;
+pub const WGL_SWAP_UNDERLAY8: UINT = 0x00800000;
+pub const WGL_SWAP_UNDERLAY9: UINT = 0x01000000;
+pub const WGL_SWAP_UNDERLAY10: UINT = 0x02000000;
+pub const WGL_SWAP_UNDERLAY11: UINT = 0x04000000;
+pub const WGL_SWAP_UNDERLAY12: UINT = 0x08000000;
+pub const WGL_SWAP_UNDERLAY13: UINT = 0x10000000;
+pub const WGL_SWAP_UNDERLAY14: UINT = 0x20000000;
+pub const WGL_SWAP_UNDERLAY15: UINT = 0x40000000;
+extern "system" {
+    pub fn wglDescribeLayerPlane(
+        hdc: HDC,
+        iPixelFormat: c_int,
+        iLayerPlane: c_int,
+        nBytes: UINT,
+        plpd: LPLAYERPLANEDESCRIPTOR,
+    ) -> BOOL;
+    pub fn wglSetLayerPaletteEntries(
+        hdc: HDC,
+        iLayerPlane: c_int,
+        iStart: c_int,
+        cEntries: c_int,
+        pcr: *const COLORREF,
+    ) -> c_int;
+    pub fn wglGetLayerPaletteEntries(
+        hdc: HDC,
+        iLayerPlane: c_int,
+        iStart: c_int,
+        cEntries: c_int,
+        pcr: *const COLORREF,
+    ) -> c_int;
+    pub fn wglRealizeLayerPalette(
+        hdc: HDC,
+        iLayerPlane: c_int,
+        bRealize: BOOL,
+    ) -> BOOL;
+    pub fn wglSwapLayerBuffers(
+        hdc: HDC,
+        fuPlanes: UINT,
+    ) -> BOOL;
+}
+STRUCT!{struct WGLSWAP {
     hdc: HDC,
-    lpht: HANDLETABLE,
-    lpmr: *const ENHMETARECORD,
-    nHandles: c_int,
-    data: LPARAM,
-) -> c_int}
+    uiFlags: UINT,
+}}
+pub type PWGLSWAP = *mut WGLSWAP;
+pub type LPWGLSWAP = *mut WGLSWAP;
+pub const WGL_SWAPMULTIPLE_MAX: usize = 16;
+extern "system" {
+    pub fn wglSwapMultipleBuffers(
+        n: UINT,
+        ps: *const WGLSWAP,
+    ) -> DWORD;
+}

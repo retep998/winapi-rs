@@ -1,0 +1,16 @@
+LIBRARY api-ms-win-downlevel-advapi32-l2-1-0.dll
+EXPORTS
+CloseServiceHandle
+ConvertSidToStringSidW
+ConvertStringSecurityDescriptorToSecurityDescriptorW
+ConvertStringSidToSidW
+CredDeleteW
+CredEnumerateW
+CredFree
+CredReadDomainCredentialsW
+CredReadW
+CredWriteDomainCredentialsW
+CredWriteW
+OpenSCManagerW
+OpenServiceW
+QueryServiceConfigW

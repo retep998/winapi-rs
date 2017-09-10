@@ -1,0 +1,6 @@
+LIBRARY api-ms-win-core-libraryloader-l1-2-2.dll
+EXPORTS
+EnumResourceNamesW
+FindResourceW
+LoadLibraryA
+LoadLibraryW

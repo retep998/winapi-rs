@@ -1,0 +1,5 @@
+LIBRARY OPMXbox.dll
+EXPORTS
+OPMXboxEnableHDCP
+OPMXboxGetHDCPStatus
+OPMXboxGetHDCPStatusAndType

@@ -5,10 +5,10 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! 32-Bit Common Dialog APIs
-use ctypes::c_void;
+use ctypes::{c_short, c_void};
 use shared::basetsd::UINT_PTR;
 use shared::minwindef::{
-    DWORD, HGLOBAL, HINSTANCE, INT, LPARAM, LPVOID, LRESULT, UINT, WORD, WPARAM,
+    BOOL, DWORD, HGLOBAL, HINSTANCE, INT, LPARAM, LPVOID, LRESULT, UINT, WORD, WPARAM,
 };
 use shared::windef::{COLORREF, HDC, HWND, POINT, RECT};
 use um::prsht::HPROPSHEETPAGE;
@@ -120,6 +120,30 @@ STRUCT!{struct OPENFILENAMEW {
     FlagsEx: DWORD,
 }}
 pub type LPOPENFILENAMEW = *mut OPENFILENAMEW;
+extern "system" {
+    pub fn GetOpenFileNameA(
+        lpofn: LPOPENFILENAMEA,
+    ) -> BOOL;
+    pub fn GetOpenFileNameW(
+        lpofn: LPOPENFILENAMEW,
+    ) -> BOOL;
+    pub fn GetSaveFileNameA(
+        lpofn: LPOPENFILENAMEA,
+    ) -> BOOL;
+    pub fn GetSaveFileNameW(
+        lpofn: LPOPENFILENAMEW,
+    ) -> BOOL;
+    pub fn GetFileTitleA(
+        lpszFile: LPCSTR,
+        Buf: LPSTR,
+        cchSize: WORD,
+    ) -> c_short;
+    pub fn GetFileTitleW(
+        lpszFile: LPCWSTR,
+        Buf: LPWSTR,
+        cchSize: WORD,
+    ) -> c_short;
+}
 pub const OFN_READONLY: DWORD = 0x00000001;
 pub const OFN_OVERWRITEPROMPT: DWORD = 0x00000002;
 pub const OFN_HIDEREADONLY: DWORD = 0x00000004;
@@ -182,8 +206,8 @@ STRUCT!{struct OFNOTIFYEXW {
     pidl: LPVOID,
 }}
 pub type LPOFNOTIFYEXW = *mut OFNOTIFYEXW;
-pub const CDN_FIRST: UINT = -601i32 as UINT;
-pub const CDN_LAST: UINT = -699i32 as UINT;
+pub const CDN_FIRST: UINT = -601i32 as u32;
+pub const CDN_LAST: UINT = -699i32 as u32;
 pub const CDN_INITDONE: UINT = CDN_FIRST - 0x0000;
 pub const CDN_SELCHANGE: UINT = CDN_FIRST - 0x0001;
 pub const CDN_FOLDERCHANGE: UINT = CDN_FIRST - 0x0002;
@@ -225,6 +249,14 @@ STRUCT!{struct CHOOSECOLORW {
     lpTemplateName: LPCWSTR,
 }}
 pub type LPCHOOSECOLORW = *mut CHOOSECOLORW;
+extern "system" {
+    pub fn ChooseColorA(
+        lpcc: LPCHOOSECOLORA,
+    ) -> BOOL;
+    pub fn ChooseColorW(
+        lpcc: LPCHOOSECOLORW,
+    ) -> BOOL;
+}
 pub const CC_RGBINIT: DWORD = 0x00000001;
 pub const CC_FULLOPEN: DWORD = 0x00000002;
 pub const CC_PREVENTFULLOPEN: DWORD = 0x00000004;
@@ -289,6 +321,20 @@ pub const FR_RAW: DWORD = 0x00020000;
 pub const FR_MATCHDIAC: DWORD = 0x20000000;
 pub const FR_MATCHKASHIDA: DWORD = 0x40000000;
 pub const FR_MATCHALEFHAMZA: DWORD = 0x80000000;
+extern "system" {
+    pub fn FindTextA(
+        lpfr: LPFINDREPLACEA,
+    ) -> HWND;
+    pub fn FindTextW(
+        lpfr: LPFINDREPLACEW,
+    ) -> HWND;
+    pub fn ReplaceTextA(
+        lpfr: LPFINDREPLACEA,
+    ) -> HWND;
+    pub fn ReplaceTextW(
+        lpfr: LPFINDREPLACEW,
+    ) -> HWND;
+}
 FN!{stdcall LPCFHOOKPROC(
     HWND,
     UINT,
@@ -333,6 +379,14 @@ STRUCT!{struct CHOOSEFONTW {
     nSizeMax: INT,
 }}
 pub type LPCHOOSEFONTW = *mut CHOOSEFONTW;
+extern "system" {
+    pub fn ChooseFontA(
+        lpcf: LPCHOOSEFONTA,
+    ) -> BOOL;
+    pub fn ChooseFontW(
+        lpcf: LPCHOOSEFONTW,
+    ) -> BOOL;
+}
 pub const CF_SCREENFONTS: DWORD = 0x00000001;
 pub const CF_PRINTERFONTS: DWORD = 0x00000002;
 pub const CF_BOTH: DWORD = CF_SCREENFONTS | CF_PRINTERFONTS;
@@ -375,7 +429,7 @@ pub const SYMBOL_FONTTYPE: DWORD = 0x80000;
 pub const WM_CHOOSEFONT_GETLOGFONT: UINT = WM_USER + 1;
 pub const WM_CHOOSEFONT_SETLOGFONT: UINT = WM_USER + 101;
 pub const WM_CHOOSEFONT_SETFLAGS: UINT = WM_USER + 102;
-pub const CD_LBSELNOITEMS: WORD = -1i16 as WORD;
+pub const CD_LBSELNOITEMS: WORD = -1i16 as u16;
 pub const CD_LBSELCHANGE: WORD = 0;
 pub const CD_LBSELSUB: WORD = 1;
 pub const CD_LBSELADD: WORD = 2;
@@ -435,6 +489,14 @@ STRUCT!{struct PRINTDLGW {
     hSetupTemplate: HGLOBAL,
 }}
 pub type LPPRINTDLGW = *mut PRINTDLGW;
+extern "system" {
+    pub fn PrintDlgA(
+        pPD: LPPRINTDLGA,
+    ) -> BOOL;
+    pub fn PrintDlgW(
+        pPD: LPPRINTDLGW,
+    ) -> BOOL;
+}
 RIDL!(#[uuid(0x5852a2c3, 0x6530, 0x11d1, 0xb6, 0xa3, 0x0, 0x0, 0xf8, 0x75, 0x7b, 0xf9)]
 interface IPrintDialogCallback(IPrintDialogCallbackVtbl): IUnknown(IUnknownVtbl) {
     fn InitDone() -> HRESULT,
@@ -518,6 +580,14 @@ STRUCT!{struct PRINTDLGEXW {
     dwResultAction: DWORD,
 }}
 pub type LPPRINTDLGEXW = *mut PRINTDLGEXW;
+extern "system" {
+    pub fn PrintDlgExA(
+        pPD: LPPRINTDLGEXA,
+    ) -> HRESULT;
+    pub fn PrintDlgExW(
+        pPD: LPPRINTDLGEXW,
+    ) -> HRESULT;
+}
 pub const PD_ALLPAGES: DWORD = 0x00000000;
 pub const PD_SELECTION: DWORD = 0x00000001;
 pub const PD_PAGENUMS: DWORD = 0x00000002;
@@ -560,6 +630,9 @@ STRUCT!{struct DEVNAMES {
 pub type LPDEVNAMES = *mut DEVNAMES;
 pub type PCDEVNAMES = *const DEVNAMES;
 pub const DN_DEFAULTPRN: WORD = 0x0001;
+extern "system" {
+    pub fn CommDlgExtendedError() -> DWORD;
+}
 pub const WM_PSD_PAGESETUPDLG: UINT = WM_USER;
 pub const WM_PSD_FULLPAGERECT: UINT = WM_USER + 1;
 pub const WM_PSD_MINMARGINRECT: UINT = WM_USER + 2;
@@ -613,6 +686,14 @@ STRUCT!{struct PAGESETUPDLGW {
     hPageSetupTemplate: HGLOBAL,
 }}
 pub type LPPAGESETUPDLGW = *mut PAGESETUPDLGW;
+extern "system" {
+    pub fn PageSetupDlgA(
+        lppsd: LPPAGESETUPDLGA,
+    ) -> BOOL;
+    pub fn PageSetupDlgW(
+        lppsd: LPPAGESETUPDLGW,
+    ) -> BOOL;
+}
 pub const PSD_DEFAULTMINMARGINS: DWORD = 0x00000000;
 pub const PSD_INWININIINTLMEASURE: DWORD = 0x00000000;
 pub const PSD_MINMARGINS: DWORD = 0x00000001;

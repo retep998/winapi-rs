@@ -1,0 +1,5 @@
+LIBRARY MDMLocalManagement.DLL
+EXPORTS
+ApplyLocalManagementSyncML@8
+RegisterDeviceWithLocalManagement@4
+UnregisterDeviceWithLocalManagement@0

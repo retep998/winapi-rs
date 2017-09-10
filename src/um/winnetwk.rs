@@ -5,9 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Standard WINNET Header File for WIN32
-
 use shared::basetsd::ULONG_PTR;
-use shared::minwindef::{DWORD, WORD};
+use shared::minwindef::{BOOL, DWORD, LPDWORD, LPHANDLE, LPVOID, WORD};
 use shared::windef::HWND;
 use shared::winerror::{
     ERROR_ACCESS_DENIED, ERROR_ALREADY_ASSIGNED, ERROR_ALREADY_INITIALIZED, ERROR_BAD_DEVICE,
@@ -22,8 +21,7 @@ use shared::winerror::{
     ERROR_NO_MORE_ITEMS, ERROR_NO_NETWORK, ERROR_NO_NET_OR_BAD_PATH, ERROR_OPEN_FILES, ERROR_RETRY,
     ERROR_UNEXP_NET_ERR, NO_ERROR
 };
-use um::winnt::{LPSTR, LPWSTR};
-
+use um::winnt::{HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR};
 pub const RESOURCE_CONNECTED: DWORD = 0x00000001;
 pub const RESOURCE_GLOBALNET: DWORD = 0x00000002;
 pub const RESOURCE_REMEMBERED: DWORD = 0x00000003;
@@ -92,6 +90,90 @@ pub const CONNECT_RESERVED: DWORD = 0xFF000000;
 pub const CONNECT_COMMANDLINE: DWORD = 0x00000800;
 pub const CONNECT_CMD_SAVECRED: DWORD = 0x00001000;
 pub const CONNECT_CRED_RESET: DWORD = 0x00002000;
+extern "system" {
+    pub fn WNetAddConnection2A(
+        lpNetResource: LPNETRESOURCEA,
+        lpPassword: LPCSTR,
+        lpUsername: LPCSTR,
+        dwFlags: DWORD,
+    ) -> DWORD;
+    pub fn WNetAddConnection2W(
+        lpNetResource: LPNETRESOURCEW,
+        lpPassword: LPCWSTR,
+        lpUsername: LPCWSTR,
+        dwFlags: DWORD,
+    ) -> DWORD;
+    pub fn WNetAddConnection3A(
+        hwndOwner: HWND,
+        lpNetResource: LPNETRESOURCEA,
+        lpPassword: LPCSTR,
+        lpUsername: LPCSTR,
+        dwFlags: DWORD,
+    ) -> DWORD;
+    pub fn WNetAddConnection3W(
+        hwndOwner: HWND,
+        lpNetResource: LPNETRESOURCEW,
+        lpPassword: LPCWSTR,
+        lpUsername: LPCWSTR,
+        dwFlags: DWORD,
+    ) -> DWORD;
+    pub fn WNetCancelConnectionA(
+        lpName: LPCSTR,
+        fForce: BOOL,
+    ) -> DWORD;
+    pub fn WNetCancelConnectionW(
+        lpName: LPCWSTR,
+        fForce: BOOL,
+    ) -> DWORD;
+    pub fn WNetCancelConnection2A(
+        lpName: LPCSTR,
+        dwFlags: DWORD,
+        fForce: BOOL,
+    ) -> DWORD;
+    pub fn WNetCancelConnection2W(
+        lpName: LPCWSTR,
+        dwFlags: DWORD,
+        fForce: BOOL,
+    ) -> DWORD;
+    pub fn WNetGetConnectionA(
+        lpLocalName: LPCSTR,
+        lpRemoteName: LPSTR,
+        lpnLength: LPDWORD,
+    ) -> DWORD;
+    pub fn WNetGetConnectionW(
+        lpLocalName: LPCWSTR,
+        lpRemoteName: LPWSTR,
+        lpnLength: LPDWORD,
+    ) -> DWORD;
+    pub fn WNetUseConnectionA(
+        hwndOwner: HWND,
+        lpNetResource: LPNETRESOURCEA,
+        lpPassword: LPCSTR,
+        lpUserId: LPCSTR,
+        dwFlags: DWORD,
+        lpAccessName: LPSTR,
+        lpBufferSize: LPDWORD,
+        lpResult: LPDWORD,
+    ) -> DWORD;
+    pub fn WNetUseConnectionW(
+        hwndOwner: HWND,
+        lpNetResource: LPNETRESOURCEW,
+        lpPassword: LPCWSTR,
+        lpUserId: LPCWSTR,
+        dwFlags: DWORD,
+        lpAccessName: LPWSTR,
+        lpBufferSize: LPDWORD,
+        lpResult: LPDWORD,
+    ) -> DWORD;
+    pub fn WNetConnectionDialog(
+        hwnd: HWND,
+        dwType: DWORD,
+    ) -> DWORD;
+    pub fn WNetDisconnectDialog(
+        hwnd: HWND,
+        dwType: DWORD,
+    ) -> DWORD;
+}
 STRUCT!{struct CONNECTDLGSTRUCTA {
     cbStructure: DWORD,
     hwndOwner: HWND,
@@ -114,6 +196,14 @@ pub const CONNDLG_USE_MRU: DWORD = 0x00000004;
 pub const CONNDLG_HIDE_BOX: DWORD = 0x00000008;
 pub const CONNDLG_PERSIST: DWORD = 0x00000010;
 pub const CONNDLG_NOT_PERSIST: DWORD = 0x00000020;
+extern "system" {
+    pub fn WNetConnectionDialog1A(
+        lpConnDlgStruct: LPCONNECTDLGSTRUCTA,
+    ) -> DWORD;
+    pub fn WNetConnectionDialog1W(
+        lpConnDlgStruct: LPCONNECTDLGSTRUCTW,
+    ) -> DWORD;
+}
 STRUCT!{struct DISCDLGSTRUCTA {
     cbStructure: DWORD,
     hwndOwner: HWND,
@@ -132,6 +222,65 @@ STRUCT!{struct DISCDLGSTRUCTW {
 pub type LPDISCDLGSTRUCTW = *mut DISCDLGSTRUCTW;
 pub const DISC_UPDATE_PROFILE: DWORD = 0x00000001;
 pub const DISC_NO_FORCE: DWORD = 0x00000040;
+extern "system" {
+    pub fn WNetDisconnectDialog1A(
+        lpConnDlgStruct: LPDISCDLGSTRUCTA,
+    ) -> DWORD;
+    pub fn WNetDisconnectDialog1W(
+        lpConnDlgStruct: LPDISCDLGSTRUCTW,
+    ) -> DWORD;
+    pub fn WNetOpenEnumA(
+        dwScope: DWORD,
+        dwType: DWORD,
+        dwUsage: DWORD,
+        lpNetResource: LPNETRESOURCEA,
+        lphEnum: LPHANDLE,
+    ) -> DWORD;
+    pub fn WNetOpenEnumW(
+        dwScope: DWORD,
+        dwType: DWORD,
+        dwUsage: DWORD,
+        lpNetResource: LPNETRESOURCEW,
+        lphEnum: LPHANDLE,
+    ) -> DWORD;
+    pub fn WNetEnumResourceA(
+        hEnum: HANDLE,
+        lpcCount: LPDWORD,
+        lpBuffer: LPVOID,
+        lpBufferSize: LPDWORD,
+    ) -> DWORD;
+    pub fn WNetEnumResourceW(
+        hEnum: HANDLE,
+        lpcCount: LPDWORD,
+        lpBuffer: LPVOID,
+        lpBufferSize: LPDWORD,
+    ) -> DWORD;
+    pub fn WNetCloseEnum(
+        hEnum: HANDLE,
+    ) -> DWORD;
+    pub fn WNetGetResourceParentA(
+        lpNetResource: LPNETRESOURCEA,
+        lpBuffer: LPVOID,
+        lpcbBuffer: LPDWORD,
+    ) -> DWORD;
+    pub fn WNetGetResourceParentW(
+        lpNetResource: LPNETRESOURCEW,
+        lpBuffer: LPVOID,
+        lpcbBuffer: LPDWORD,
+    ) -> DWORD;
+    pub fn WNetGetResourceInformationA(
+        lpNetResource: LPNETRESOURCEA,
+        lpBuffer: LPVOID,
+        lpcbBuffer: LPDWORD,
+        lplpSystem: *mut LPSTR,
+    ) -> DWORD;
+    pub fn WNetGetResourceInformationW(
+        lpNetResource: LPNETRESOURCEW,
+        lpBuffer: LPVOID,
+        lpcbBuffer: LPDWORD,
+        lplpSystem: *mut LPWSTR,
+    ) -> DWORD;
+}
 pub const UNIVERSAL_NAME_INFO_LEVEL: DWORD = 0x00000001;
 pub const REMOTE_NAME_INFO_LEVEL: DWORD = 0x00000002;
 STRUCT!{struct UNIVERSAL_NAME_INFOA {
@@ -154,10 +303,46 @@ STRUCT!{struct REMOTE_NAME_INFOW {
     lpRemainingPath: LPWSTR,
 }}
 pub type LPREMOTE_NAME_INFOW = *mut REMOTE_NAME_INFOW;
+extern "system" {
+    pub fn WNetGetUniversalNameA(
+        lpLocalPath: LPCSTR,
+        dwInfoLevel: DWORD,
+        lpBuffer: LPVOID,
+        lpBufferSize: LPDWORD,
+    ) -> DWORD;
+    pub fn WNetGetUniversalNameW(
+        lpLocalPath: LPCWSTR,
+        dwInfoLevel: DWORD,
+        lpBuffer: LPVOID,
+        lpBufferSize: LPDWORD,
+    ) -> DWORD;
+    pub fn WNetGetUserA(
+        lpName: LPCSTR,
+        lpUserName: LPSTR,
+        lpnLength: LPDWORD,
+    ) -> DWORD;
+    pub fn WNetGetUserW(
+        lpName: LPCWSTR,
+        lpUserName: LPWSTR,
+        lpnLength: LPDWORD,
+    ) -> DWORD;
+}
 pub const WNFMT_MULTILINE: DWORD = 0x01;
 pub const WNFMT_ABBREVIATED: DWORD = 0x02;
 pub const WNFMT_INENUM: DWORD = 0x10;
 pub const WNFMT_CONNECTION: DWORD = 0x20;
+extern "system" {
+    pub fn WNetGetProviderNameA(
+        dwNetType: DWORD,
+        lpProviderName: LPSTR,
+        lpBufferSize: LPDWORD,
+    ) -> DWORD;
+    pub fn WNetGetProviderNameW(
+        dwNetType: DWORD,
+        lpProviderName: LPWSTR,
+        lpBufferSize: LPDWORD,
+    ) -> DWORD;
+}
 STRUCT!{struct NETINFOSTRUCT {
     cbStructure: DWORD,
     dwProviderVersion: DWORD,
@@ -172,6 +357,30 @@ pub type LPNETINFOSTRUCT = *mut NETINFOSTRUCT;
 pub const NETINFO_DLL16: DWORD = 0x00000001;
 pub const NETINFO_DISKRED: DWORD = 0x00000004;
 pub const NETINFO_PRINTERRED: DWORD = 0x00000008;
+extern "system" {
+    pub fn WNetGetNetworkInformationA(
+        lpProvider: LPCSTR,
+        lpNetInfoStruct: LPNETINFOSTRUCT,
+    ) -> DWORD;
+    pub fn WNetGetNetworkInformationW(
+        lpProvider: LPCWSTR,
+        lpNetInfoStruct: LPNETINFOSTRUCT,
+    ) -> DWORD;
+    pub fn WNetGetLastErrorA(
+        lpError: LPDWORD,
+        lpErrorBuf: LPSTR,
+        nErrorBufSize: DWORD,
+        lpNameBuf: LPSTR,
+        nNameBufSize: DWORD,
+    ) -> DWORD;
+    pub fn WNetGetLastErrorW(
+        lpError: LPDWORD,
+        lpErrorBuf: LPWSTR,
+        nErrorBufSize: DWORD,
+        lpNameBuf: LPWSTR,
+        nNameBufSize: DWORD,
+    ) -> DWORD;
+}
 pub const WN_SUCCESS: DWORD = NO_ERROR;
 pub const WN_NO_ERROR: DWORD = NO_ERROR;
 pub const WN_NOT_SUPPORTED: DWORD = ERROR_NOT_SUPPORTED;
@@ -226,3 +435,13 @@ pub const WNCON_FORNETCARD: DWORD = 0x00000001;
 pub const WNCON_NOTROUTED: DWORD = 0x00000002;
 pub const WNCON_SLOWLINK: DWORD = 0x00000004;
 pub const WNCON_DYNAMIC: DWORD = 0x00000008;
+extern "system" {
+    pub fn MultinetGetConnectionPerformanceA(
+        lpNetResource: LPNETRESOURCEA,
+        lpNetConnectInfoStruct: LPNETCONNECTINFOSTRUCT,
+    ) -> DWORD;
+    pub fn MultinetGetConnectionPerformanceW(
+        lpNetResource: LPNETRESOURCEW,
+        lpNetConnectInfoStruct: LPNETCONNECTINFOSTRUCT,
+    ) -> DWORD;
+}

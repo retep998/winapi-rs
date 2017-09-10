@@ -8,5 +8,6 @@
 #[cfg(feature = "hstring")] pub mod hstring;
 #[cfg(feature = "inspectable")] pub mod inspectable;
 #[cfg(feature = "roapi")] pub mod roapi;
+#[cfg(feature = "robuffer")] pub mod robuffer;
 #[cfg(feature = "roerrorapi")] pub mod roerrorapi;
 #[cfg(feature = "winstring")] pub mod winstring;

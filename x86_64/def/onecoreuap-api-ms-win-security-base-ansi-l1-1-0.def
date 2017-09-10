@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-security-base-ansi-l1-1-0.dll
+EXPORTS
+GetFileSecurityA
+SetFileSecurityA

@@ -1,0 +1,6 @@
+LIBRARY api-ms-win-core-processenvironment-l1-2-0.dll
+EXPORTS
+GetCommandLineA
+GetCommandLineW
+GetCurrentDirectoryW
+SetCurrentDirectoryW

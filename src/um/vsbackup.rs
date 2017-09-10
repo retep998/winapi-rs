@@ -5,8 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Declaration of backup interfaces.
-
 use ctypes::c_void;
+use shared::guiddef::IID;
 use shared::minwindef::{BOOL, BYTE, DWORD, UINT};
 use shared::wtypes::BSTR;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
@@ -20,7 +20,6 @@ use um::vswriter::{
     VSS_WRITERRESTORE_ENUM
 };
 use um::winnt::{HRESULT, LONG, LPCWSTR};
-
 DEFINE_GUID!(IID_IVssExamineWriterMetadata,
     0x902fcf7f, 0xb7fd, 0x42f8, 0x81, 0xf1, 0xb2, 0xe4, 0x00, 0xb1, 0xe5, 0xbd);
 DEFINE_GUID!(IID_IVssExamineWriterMetadataEx,
@@ -506,3 +505,35 @@ interface IVssBackupComponentsEx4(IVssBackupComponentsEx4Vtbl):
 }
 );
 pub const VSS_SW_BOOTABLE_STATE: DWORD = 1;
+extern "system" {
+    #[link_name="CreateVssBackupComponentsInternal"]
+    pub fn CreateVssBackupComponents(
+        ppBackup: *mut *mut IVssBackupComponents,
+    ) -> HRESULT;
+    #[link_name="CreateVssExamineWriterMetadataInternal"]
+    pub fn CreateVssExamineWriterMetadata(
+        bstrXML: BSTR,
+        ppMetadata: *mut *mut IVssExamineWriterMetadata,
+    ) -> HRESULT;
+    #[link_name="IsVolumeSnapshottedInternal"]
+    pub fn IsVolumeSnapshotted(
+        pwszVolumeName: VSS_PWSZ,
+        pbSnapshotsPresent: *mut BOOL,
+        plSnapshotCapability: *mut LONG,
+    ) -> HRESULT;
+    #[link_name="VssFreeSnapshotPropertiesInternal"]
+    pub fn VssFreeSnapshotProperties(
+        pProp: *mut VSS_SNAPSHOT_PROP,
+    );
+    #[link_name="GetProviderMgmtInterfaceInternal"]
+    pub fn GetProviderMgmtInterface(
+        ProviderId: VSS_ID,
+        InterfaceId: IID,
+        ppItf: *mut *mut IUnknown,
+    ) -> HRESULT;
+    #[link_name="ShouldBlockRevertInternal"]
+    pub fn ShouldBlockRevert(
+        wszVolumeName: LPCWSTR,
+        pbBlock: *mut bool,
+    ) -> HRESULT;
+}

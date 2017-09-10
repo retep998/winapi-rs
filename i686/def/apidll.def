@@ -1,0 +1,3 @@
+LIBRARY APIDLL.dll
+EXPORTS
+_penter

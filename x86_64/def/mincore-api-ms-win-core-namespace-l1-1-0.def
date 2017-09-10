@@ -1,0 +1,8 @@
+LIBRARY api-ms-win-core-namespace-l1-1-0.dll
+EXPORTS
+AddSIDToBoundaryDescriptor
+ClosePrivateNamespace
+CreateBoundaryDescriptorW
+CreatePrivateNamespaceW
+DeleteBoundaryDescriptor
+OpenPrivateNamespaceW

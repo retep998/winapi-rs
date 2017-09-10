@@ -4,7 +4,10 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use um::sqltypes::*;
+use um::sqltypes::{
+    SQLHANDLE, SQLHDBC, SQLHENV, SQLHSTMT, SQLINTEGER, SQLLEN, SQLPOINTER, SQLRETURN, SQLSMALLINT,
+    SQLUSMALLINT,
+};
 pub const SQL_NULL_DATA: SQLLEN = -1;
 pub const SQL_DATA_AT_EXEC: SQLLEN = -2;
 pub const SQL_SUCCESS: SQLRETURN = 0;
@@ -55,3 +58,52 @@ pub const SQL_DROP: SQLUSMALLINT = 1;
 pub const SQL_UNBIND: SQLUSMALLINT = 2;
 pub const SQL_RESET_PARAMS: SQLUSMALLINT = 3;
 pub const SQL_NULL_HANDLE: SQLHANDLE = 0 as SQLHANDLE;
+extern "system" {
+    pub fn SQLAllocHandle(
+        handleType: SQLSMALLINT,
+        inputHandle: SQLHANDLE,
+        outputHandle: *mut SQLHANDLE,
+    ) -> SQLRETURN;
+    pub fn SQLDisconnect(
+        connectionHandle: SQLHDBC,
+    ) -> SQLRETURN;
+    pub fn SQLFetch(
+        statementHandle: SQLHSTMT,
+    ) -> SQLRETURN;
+    pub fn SQLFreeHandle(
+        handleType: SQLSMALLINT,
+        handle: SQLHANDLE,
+    ) -> SQLRETURN;
+    pub fn SQLFreeStmt(
+        statementHandle: SQLHSTMT,
+        option: SQLUSMALLINT,
+    ) -> SQLRETURN;
+    pub fn SQLGetData(
+        statementHandle: SQLHSTMT,
+        columnNumber: SQLUSMALLINT,
+        targetType: SQLSMALLINT,
+        targetValue: SQLPOINTER,
+        bufferLength: SQLLEN,
+        strLen_or_IndPtr: *mut SQLLEN,
+    ) -> SQLRETURN;
+    pub fn SQLNumResultCols(
+        statementHandle: SQLHSTMT,
+        columnCount: *mut SQLSMALLINT,
+    ) -> SQLRETURN;
+    pub fn SQLRowCount(
+        statementHandle: SQLHSTMT,
+        rowCount: *mut SQLLEN,
+    ) -> SQLRETURN;
+    pub fn SQLSetConnectAttr(
+        connectionHandle: SQLHDBC,
+        attribute: SQLINTEGER,
+        value: SQLPOINTER,
+        stringLength: SQLINTEGER,
+    ) -> SQLRETURN;
+    pub fn SQLSetEnvAttr(
+        environmentHandle: SQLHENV,
+        attribute: SQLINTEGER,
+        value: SQLPOINTER,
+        stringLength: SQLINTEGER,
+    ) -> SQLRETURN;
+}

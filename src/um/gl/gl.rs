@@ -41,3 +41,13 @@ pub const GL_ALWAYS: GLenum = 0x0207;
 // TODO: we're missing about 1500 lines of defines and methods
 // until that time, you can use the excellent GL crate
 // https://github.com/brendanzab/gl-rs
+extern "system" {
+    pub fn glAccum(
+        op: GLenum,
+        value: GLfloat,
+    );
+    pub fn glAlphaFunc(
+        func: GLenum,
+        reference: GLclampf,
+    );
+}

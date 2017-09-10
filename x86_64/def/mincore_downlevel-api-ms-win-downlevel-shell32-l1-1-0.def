@@ -1,0 +1,5 @@
+LIBRARY api-ms-win-downlevel-shell32-l1-1-0.dll
+EXPORTS
+CommandLineToArgvW
+GetCurrentProcessExplicitAppUserModelID
+SetCurrentProcessExplicitAppUserModelID
