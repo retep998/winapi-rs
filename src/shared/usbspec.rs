@@ -19,20 +19,15 @@ ENUM!{enum USB_DEVICE_TYPE {
     Usb11Device = 0,
     Usb20Device,
 }}
-STRUCT!{#[repr(packed)] struct BM_REQUEST_TYPE_BM {
-    BitField: UCHAR,
+STRUCT!{#[repr(packed)] struct BM_REQUEST_TYPE {
+    B: UCHAR,
 }}
-BITFIELD!{BM_REQUEST_TYPE_BM BitField: UCHAR [
+BITFIELD!{BM_REQUEST_TYPE B: UCHAR [
     Recipient set_Recipient[0..2],
     Reserved set_Reserved[2..5],
     Type set_Type[5..7],
     Dir set_Dir[7..8],
 ]}
-UNION2!{#[repr(packed)] union BM_REQUEST_TYPE {
-    [u8; 1],
-    BM BM_mut: BM_REQUEST_TYPE_BM,
-    B B_mut: UCHAR,
-}}
 pub type PBM_REQUEST_TYPE = *mut BM_REQUEST_TYPE;
 STRUCT!{#[repr(packed)] struct USB_DEFAULT_PIPE_SETUP_PACKET_wValue_s {
     LowByte: UCHAR,
@@ -127,10 +122,10 @@ pub const USB_GETSTATUS_REMOTE_WAKEUP_ENABLED: UCHAR = 0x02;
 pub const USB_GETSTATUS_U1_ENABLE: UCHAR = 0x04;
 pub const USB_GETSTATUS_U2_ENABLE: UCHAR = 0x08;
 pub const USB_GETSTATUS_LTM_ENABLE: UCHAR = 0x10;
-STRUCT!{#[repr(packed)] struct USB_DEVICE_STATUS_s {
-    BitField: USHORT,
+STRUCT!{#[repr(packed)] struct USB_DEVICE_STATUS {
+    AsUshort16: USHORT,
 }}
-BITFIELD!{USB_DEVICE_STATUS_s BitField: USHORT [
+BITFIELD!{USB_DEVICE_STATUS AsUshort16: USHORT [
     SelfPowered set_SelfPowered[0..1],
     RemoteWakeup set_RemoteWakeup[1..2],
     U1Enable set_U1Enable[2..3],
@@ -138,11 +133,6 @@ BITFIELD!{USB_DEVICE_STATUS_s BitField: USHORT [
     LtmEnable set_LtmEnable[4..5],
     Reserved set_Reserved[5..16],
 ]}
-UNION2!{#[repr(packed)] union USB_DEVICE_STATUS {
-    [u16; 1],
-    AsUshort16 AsUshort16_mut: USHORT,
-    s s_mut: USB_DEVICE_STATUS_s,
-}}
 pub type PUSB_DEVICE_STATUS = *mut USB_DEVICE_STATUS;
 STRUCT!{#[repr(packed)] struct USB_INTERFACE_STATUS_s {
     BitField: USHORT,
@@ -248,10 +238,10 @@ pub const USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB: UCHAR = 0x0A;
 pub const USB_DEVICE_CAPABILITY_PRECISION_TIME_MEASUREMENT: UCHAR = 0x0B;
 pub const USB_DEVICE_CAPABILITY_BILLBOARD: UCHAR = 0x0D;
 pub const USB_DEVICE_CAPABILITY_CONFIGURATION_SUMMARY: UCHAR = 0x10;
-STRUCT!{struct USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_s {
-    BitField: ULONG,
+STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes {
+    AsUlong: ULONG,
 }}
-BITFIELD!{USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_s BitField: ULONG [
+BITFIELD!{USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes AsUlong: ULONG [
     Reserved set_Reserved[0..1],
     LPMCapable set_LPMCapable[1..2],
     BESLAndAlternateHIRDSupported set_BESLAndAlternateHIRDSupported[2..3],
@@ -262,11 +252,6 @@ BITFIELD!{USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_s BitFie
     DeepBESL set_DeepBESL[12..16],
     Reserved2 set_Reserved2[16..32],
 ]}
-UNION2!{#[repr(packed)] union USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes {
-    [u32; 1],
-    AsUlong AsUlong_mut: ULONG,
-    s s_mut: USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_s,
-}}
 STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
