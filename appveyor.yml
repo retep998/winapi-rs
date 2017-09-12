@@ -16,4 +16,4 @@ build_script:
   - cargo build
   - cargo build --features everything
 test_script:
-  - cargo test --features everything --verbose
+  - cargo test --features everything

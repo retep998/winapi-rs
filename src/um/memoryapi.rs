@@ -10,10 +10,10 @@ use shared::basetsd::{PSIZE_T, PULONG_PTR, SIZE_T, ULONG64, ULONG_PTR};
 use shared::minwindef::{
     BOOL, DWORD, LPCVOID, LPDWORD, LPVOID, PBOOL, PDWORD, PULONG, UINT, ULONG,
 };
-use um::minwinbase::{LPSECURITY_ATTRIBUTES, NUMA_NO_PREFERRED_NODE, PSECURITY_ATTRIBUTES};
+use um::minwinbase::{LPSECURITY_ATTRIBUTES, PSECURITY_ATTRIBUTES};
 use um::winnt::{
     HANDLE, LPCWSTR, PCWSTR, PMEMORY_BASIC_INFORMATION, PVOID, SECTION_ALL_ACCESS,
-    SECTION_MAP_EXECUTE_EXPLICIT, SECTION_MAP_READ, SECTION_MAP_WRITE, VOID,
+    SECTION_MAP_EXECUTE_EXPLICIT, SECTION_MAP_READ, SECTION_MAP_WRITE,
 };
 pub const FILE_MAP_WRITE: DWORD = SECTION_MAP_WRITE;
 pub const FILE_MAP_READ: DWORD = SECTION_MAP_READ;
@@ -342,7 +342,8 @@ BITFIELD!{WIN32_MEMORY_REGION_INFORMATION_u_s Bitfield: ULONG [
     DirectMapped set_DirectMapped[5..6],
     Reserved set_Reserved[6..32],
 ]}
-extern "system" {
+// TODO: Need to resolve issue #323 first.
+/*extern "system" {
     pub fn QueryVirtualMemoryInformation(
         Process: HANDLE,
         VirtualAddress: *const VOID,
@@ -380,7 +381,7 @@ pub unsafe fn MapViewOfFile2(
         AllocationType,
         PageProtection,
         NUMA_NO_PREFERRED_NODE)
-}
+}*/
 extern "system" {
     pub fn UnmapViewOfFile2(
         ProcessHandle: HANDLE,
