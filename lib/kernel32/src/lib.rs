@@ -144,9 +144,6 @@ extern "system" {
     ) -> BOOL;
     pub fn DisassociateCurrentThreadFromCallback(pci: PTP_CALLBACK_INSTANCE);
     pub fn DisconnectNamedPipe(hNamedPipe: HANDLE) -> BOOL;
-    pub fn DnsHostnameToComputerNameExW(
-        Hostname: LPCWSTR, ComputerName: LPWSTR, nSize: LPDWORD,
-    ) -> BOOL;
     // pub fn DosPathToSessionPathW();
     pub fn EncodePointer(Ptr: PVOID) -> PVOID;
     pub fn EncodeSystemPointer(Ptr: PVOID) -> PVOID;
@@ -192,9 +189,6 @@ extern "system" {
     ) -> BOOL;
     pub fn EnumSystemCodePagesA(lpCodePageEnumProc: CODEPAGE_ENUMPROCA, dwFlags: DWORD) -> BOOL;
     pub fn EnumSystemCodePagesW(lpCodePageEnumProc: CODEPAGE_ENUMPROCW, dwFlags: DWORD) -> BOOL;
-    pub fn EnumSystemFirmwareTables(
-        FirmwareTableProviderSignature: DWORD, pFirmwareTableEnumBuffer: PVOID, BufferSize: DWORD,
-    ) -> UINT;
     pub fn EnumSystemGeoID(
         GeoClass: GEOCLASS, ParentGeoId: GEOID, lpGeoEnumProc: GEO_ENUMPROC,
     ) -> BOOL;
@@ -284,12 +278,6 @@ extern "system" {
     ) -> c_int;
     pub fn GetCommandLineA() -> LPSTR;
     pub fn GetCommandLineW() -> LPWSTR;
-    pub fn GetComputerNameExA(
-        NameType: COMPUTER_NAME_FORMAT, lpBuffer: LPSTR, nSize: LPDWORD,
-    ) -> BOOL;
-    pub fn GetComputerNameExW(
-        NameType: COMPUTER_NAME_FORMAT, lpBuffer: LPWSTR, nSize: LPDWORD,
-    ) -> BOOL;
     pub fn GetCurrencyFormatA(
         Locale: LCID, dwFlags: DWORD, lpValue: LPCSTR, lpFormat: *const CURRENCYFMTA,
         lpCurrencyStr: LPSTR, cchCurrency: c_int,
@@ -354,7 +342,6 @@ extern "system" {
         Location: GEOID, GeoType: GEOTYPE, lpGeoData: LPWSTR, cchData: c_int, LangId: LANGID,
     ) -> c_int;
     pub fn GetLargePageMinimum() -> SIZE_T;
-    pub fn GetLocalTime(lpSystemTime: LPSYSTEMTIME);
     pub fn GetLocaleInfoA(
         Locale: LCID, LCType: LCTYPE, lpLCData: LPSTR, cchData: c_int,
     ) -> c_int;
@@ -364,14 +351,6 @@ extern "system" {
     pub fn GetLocaleInfoW(
         Locale: LCID, LCType: LCTYPE, lpLCData: LPWSTR, cchData: c_int,
     ) -> c_int;
-    pub fn GetLogicalProcessorInformation(
-        Buffer: PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, ReturnedLength: PDWORD,
-    ) -> BOOL;
-    pub fn GetLogicalProcessorInformationEx(
-        RelationshipType: LOGICAL_PROCESSOR_RELATIONSHIP,
-        Buffer: PSYSTEM_LOGICAL_PROCESSOR_INFORMATION,
-        ReturnedLength: PDWORD,
-    ) -> BOOL;
     pub fn GetMemoryErrorHandlingCapabilities(Capabilities: PULONG) -> BOOL;
     pub fn GetNLSVersion(
         Function: NLS_FUNCTION, Locale: LCID, lpVersionInformation: LPNLSVERSIONINFO,
@@ -392,7 +371,6 @@ extern "system" {
         hNamedPipe: HANDLE, lpFlags: LPDWORD, lpOutBufferSize: LPDWORD, lpInBufferSize: LPDWORD,
         lpMaxInstances: LPDWORD,
     ) -> BOOL;
-    pub fn GetNativeSystemInfo(lpSystemInfo: LPSYSTEM_INFO);
     pub fn GetNumaAvailableMemoryNodeEx(Node: USHORT, AvailableBytes: PULONGLONG) -> BOOL;
     pub fn GetNumaHighestNodeNumber(HighestNodeNumber: PULONG) -> BOOL;
     pub fn GetNumaProximityNodeEx(ProximityId: ULONG, NodeNumber: PUSHORT) -> BOOL;
@@ -424,7 +402,7 @@ extern "system" {
     // pub fn GetPackagePath();
     // pub fn GetPackagePathByFullName();
     // pub fn GetPackagesByPackageFamily();
-    pub fn GetPhysicallyInstalledSystemMemory(TotalMemoryInKilobytes: PULONGLONG) -> BOOL;
+
     pub fn GetProcessGroupAffinity(
         hProcess: HANDLE, GroupCount: PUSHORT, GroupArray: PUSHORT,
     ) -> BOOL;
@@ -438,13 +416,8 @@ extern "system" {
         hProcess: HANDLE, lpMinimumWorkingSetSize: PSIZE_T, lpMaximumWorkingSetSize: PSIZE_T,
         Flags: PDWORD,
     ) -> BOOL;
-    pub fn GetProcessorSystemCycleTime(
-        Group: USHORT, Buffer: PSYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION, ReturnedLength: PDWORD,
-    ) -> BOOL;
-    pub fn GetProductInfo(
-        dwOSMajorVersion: DWORD, dwOSMinorVersion: DWORD, dwSpMajorVersion: DWORD,
-        dwSpMinorVersion: DWORD, pdwReturnedProductType: PDWORD,
-    ) -> BOOL;
+
+
     pub fn GetQueuedCompletionStatus(
         CompletionPort: HANDLE, lpNumberOfBytesTransferred: LPDWORD, lpCompletionKey: PULONG_PTR,
         lpOverlapped: *mut LPOVERLAPPED, dwMilliseconds: DWORD,
@@ -476,28 +449,21 @@ extern "system" {
     pub fn GetSystemDefaultLangID() -> LANGID;
     pub fn GetSystemDefaultLocaleName(lpLocaleName: LPWSTR, cchLocaleName: c_int) -> c_int;
     pub fn GetSystemDefaultUILanguage() -> LANGID;
-    pub fn GetSystemDirectoryA(lpBuffer: LPSTR, uSize: UINT) -> UINT;
-    pub fn GetSystemDirectoryW(lpBuffer: LPWSTR, uSize: UINT) -> UINT;
+
     pub fn GetSystemFileCacheSize(
         lpMinimumFileCacheSize: PSIZE_T, lpMaximumFileCacheSize: PSIZE_T, lpFlags: PDWORD,
     ) -> BOOL;
-    pub fn GetSystemFirmwareTable(
-        FirmwareTableProviderSignature: DWORD, FirmwareTableID: DWORD, pFirmwareTableBuffer: PVOID,
-        BufferSize: DWORD,
-    ) -> UINT;
-    pub fn GetSystemInfo(lpSystemInfo: LPSYSTEM_INFO);
+
+
     pub fn GetSystemPreferredUILanguages(
         dwFlags: DWORD, pulNumLanguages: PULONG, pwszLanguagesBuffer: PZZWSTR,
         pcchLanguagesBuffer: PULONG,
     ) -> BOOL;
-    pub fn GetSystemTime(lpSystemTime: LPSYSTEMTIME);
-    pub fn GetSystemTimeAdjustment(
-        lpTimeAdjustment: PDWORD, lpTimeIncrement: PDWORD, lpTimeAdjustmentDisabled: PBOOL,
-    ) -> BOOL;
-    pub fn GetSystemTimeAsFileTime(lpSystemTimeAsFileTime: LPFILETIME);
-    pub fn GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime: LPFILETIME);
-    pub fn GetSystemWindowsDirectoryA(lpBuffer: LPSTR, uSize: UINT) -> UINT;
-    pub fn GetSystemWindowsDirectoryW(lpBuffer: LPWSTR, uSize: UINT) -> UINT;
+
+
+
+
+
     pub fn GetSystemWow64DirectoryA(lpBuffer: LPSTR, uSize: UINT) -> UINT;
     pub fn GetSystemWow64DirectoryW(lpBuffer: LPWSTR, uSize: UINT) -> UINT;
     pub fn GetThreadGroupAffinity(hThread: HANDLE, GroupAffinity: PGROUP_AFFINITY) -> BOOL;
@@ -510,8 +476,8 @@ extern "system" {
         hThread: HANDLE, dwSelector: DWORD, lpSelectorEntry: LPLDT_ENTRY,
     ) -> BOOL;
     pub fn GetThreadUILanguage() -> LANGID;
-    pub fn GetTickCount() -> DWORD;
-    pub fn GetTickCount64() -> ULONGLONG;
+
+
     pub fn GetTimeFormatA(
         Locale: LCID, dwFlags: DWORD, lpTime: *const SYSTEMTIME, lpFormat: LPCSTR,
         lpTimeStr: LPSTR, cchTime: c_int,
@@ -541,20 +507,18 @@ extern "system" {
         dwFlags: DWORD, pulNumLanguages: PULONG, pwszLanguagesBuffer: PZZWSTR,
         pcchLanguagesBuffer: PULONG,
     ) -> BOOL;
-    pub fn GetVersion() -> DWORD;
-    pub fn GetVersionExA(lpVersionInformation: LPOSVERSIONINFOA) -> BOOL;
-    pub fn GetVersionExW(lpVersionInformation: LPOSVERSIONINFOW) -> BOOL;
+
+
     pub fn GetVolumePathNamesForVolumeNameW(
         lpszVolumeName: LPCWSTR, lpszVolumePathNames: LPWCH, cchBufferLength: DWORD,
         lpcchReturnLength: PDWORD,
     ) -> BOOL;
-    pub fn GetWindowsDirectoryA(lpBuffer: LPSTR, uSize: UINT) -> UINT;
-    pub fn GetWindowsDirectoryW(lpBuffer: LPWSTR, uSize: UINT) -> UINT;
+
     pub fn GetWriteWatch(
         dwFlags: DWORD, lpBaseAddress: PVOID, dwRegionSize: SIZE_T, lpAddresses: *mut PVOID,
         lpdwCount: *mut ULONG_PTR, lpdwGranularity: LPDWORD,
     ) -> UINT;
-    pub fn GlobalMemoryStatusEx(lpBuffer: LPMEMORYSTATUSEX) -> BOOL;
+
     pub fn Heap32First(lphe: LPHEAPENTRY32, th32ProcessID: DWORD, th32HeapID: ULONG_PTR) -> BOOL;
     pub fn Heap32ListFirst(hSnapshot: HANDLE, lphl: LPHEAPLIST32) -> BOOL;
     pub fn Heap32ListNext(hSnapshot: HANDLE, lphl: LPHEAPLIST32) -> BOOL;
@@ -580,7 +544,7 @@ extern "system" {
     pub fn HeapValidate(hHeap: HANDLE, dwFlags: DWORD, lpMem: LPCVOID) -> BOOL;
     pub fn HeapWalk(hHeap: HANDLE, lpEntry: LPPROCESS_HEAP_ENTRY) -> BOOL;
     pub fn InitializeSListHead(ListHead: PSLIST_HEADER);
-    pub fn InstallELAMCertificateInfo(ELAMFile: HANDLE) -> BOOL;
+
     #[cfg(target_arch = "x86")]
     pub fn InterlockedCompareExchange64(
         Destination: *mut LONG64, ExChange: LONG64, Comperand: LONG64,
@@ -898,13 +862,6 @@ extern "system" {
     pub fn SetCalendarInfoW(
         Locale: LCID, Calendar: CALID, CalType: CALTYPE, lpCalData: LPCWSTR,
     ) -> BOOL;
-    pub fn SetComputerNameA(lpComputerName: LPCSTR) -> BOOL;
-    pub fn SetComputerNameEx2W(
-        NameType: COMPUTER_NAME_FORMAT, Flags: DWORD, lpBuffer: LPCWSTR,
-    ) -> BOOL;
-    pub fn SetComputerNameExA(NameType: COMPUTER_NAME_FORMAT, lpBuffer: LPCSTR) -> BOOL;
-    pub fn SetComputerNameExW(NameType: COMPUTER_NAME_FORMAT, lpBuffer: LPCWSTR) -> BOOL;
-    pub fn SetComputerNameW(lpComputerName: LPCWSTR) -> BOOL;
     // pub fn SetConsoleCursor();
     pub fn SetCurrentDirectoryA(lpPathName: LPCSTR) -> BOOL;
     pub fn SetCurrentDirectoryW(lpPathName: LPCWSTR) -> BOOL;
@@ -921,7 +878,6 @@ extern "system" {
     ) -> BOOL;
     // pub fn SetLocalPrimaryComputerNameA();
     // pub fn SetLocalPrimaryComputerNameW();
-    pub fn SetLocalTime(lpSystemTime: *const SYSTEMTIME) -> BOOL;
     pub fn SetLocaleInfoA(Locale: LCID, LCType: LCTYPE, lpLCData: LPCSTR) -> BOOL;
     pub fn SetLocaleInfoW(Locale: LCID, LCType: LCTYPE, lpLCData: LPCWSTR) -> BOOL;
     pub fn SetNamedPipeAttribute(
@@ -944,8 +900,6 @@ extern "system" {
     pub fn SetSystemFileCacheSize(
         MinimumFileCacheSize: SIZE_T, MaximumFileCacheSize: SIZE_T, Flags: DWORD,
     ) -> BOOL;
-    pub fn SetSystemTime(lpSystemTime: *const SYSTEMTIME) -> BOOL;
-    pub fn SetSystemTimeAdjustment(dwTimeAdjustment: DWORD, bTimeAdjustmentDisabled: BOOL) -> BOOL;
     pub fn SetThreadGroupAffinity(
         hThread: HANDLE, GroupAffinity: *const GROUP_AFFINITY,
         PreviousGroupAffinity: PGROUP_AFFINITY,
@@ -1010,9 +964,6 @@ extern "system" {
     // pub fn UnregisterWaitUntilOOBECompleted();
     pub fn VerLanguageNameA(wLang: DWORD, szLang: LPSTR, cchLang: DWORD) -> DWORD;
     pub fn VerLanguageNameW(wLang: DWORD, szLang: LPWSTR, cchLang: DWORD) -> DWORD;
-    pub fn VerSetConditionMask(
-        ConditionMask: ULONGLONG, TypeMask: DWORD, Condition: BYTE,
-    ) -> ULONGLONG;
     pub fn VerifyScripts(
         dwFlags: DWORD, lpLocaleScripts: LPCWSTR, cchLocaleScripts: c_int, lpTestScripts: LPCWSTR,
         cchTestScripts: c_int,
