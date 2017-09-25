@@ -3090,10 +3090,10 @@ UNION2!{union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_u2 {
 }}
 UNION2!{union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_u3 {
     [u32; 1],
-    RateControlToleranceInterval RateControlToleranceInterval_mut
-        : JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL,
-    CpuRateControlToleranceInterval CpuRateControlToleranceInterval_mut
-        : JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL,
+    RateControlToleranceInterval RateControlToleranceInterval_mut:
+        JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL,
+    CpuRateControlToleranceInterval CpuRateControlToleranceInterval_mut:
+        JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL,
 }}
 STRUCT!{struct JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2 {
     IoReadBytesLimit: DWORD64,
@@ -3502,7 +3502,7 @@ STRUCT!{struct GROUP_RELATIONSHIP {
 }}
 pub type PGROUP_RELATIONSHIP = *mut GROUP_RELATIONSHIP;
 UNION2!{union SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_u {
-    [u8; 68] [u8; 72],
+    [u32; 17] [u64; 9],
     Processor Processor_mut: PROCESSOR_RELATIONSHIP,
     NumaNode NumaNode_mut: NUMA_NODE_RELATIONSHIP,
     Cache Cache_mut: CACHE_RELATIONSHIP,
