@@ -17,6 +17,7 @@
 #[cfg(feature = "devguid")] pub mod devguid;
 #[cfg(feature = "devpkey")] pub mod devpkey;
 #[cfg(feature = "devpropdef")] pub mod devpropdef;
+#[cfg(feature = "dinputd")] pub mod dinputd;
 #[cfg(feature = "dxgi")] pub mod dxgi;
 #[cfg(feature = "dxgi1_2")] pub mod dxgi1_2;
 #[cfg(feature = "dxgi1_3")] pub mod dxgi1_3;
