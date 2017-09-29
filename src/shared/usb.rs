@@ -508,14 +508,14 @@ UNION2!{union URB_u {
     UrbControlDescriptorRequest UrbControlDescriptorRequest_mut: URB_CONTROL_DESCRIPTOR_REQUEST,
     UrbControlGetStatusRequest UrbControlGetStatusRequest_mut: URB_CONTROL_GET_STATUS_REQUEST,
     UrbControlFeatureRequest UrbControlFeatureRequest_mut: URB_CONTROL_FEATURE_REQUEST,
-    UrbControlVendorClassRequest UrbControlVendorClassRequest_mut
-        : URB_CONTROL_VENDOR_OR_CLASS_REQUEST,
-    UrbControlGetInterfaceRequest UrbControlGetInterfaceRequest_mut
-        : URB_CONTROL_GET_INTERFACE_REQUEST,
-    UrbControlGetConfigurationRequest UrbControlGetConfigurationRequest_mut
-        : URB_CONTROL_GET_CONFIGURATION_REQUEST,
-    UrbOSFeatureDescriptorRequest UrbOSFeatureDescriptorRequest_mut
-        : URB_OS_FEATURE_DESCRIPTOR_REQUEST,
+    UrbControlVendorClassRequest UrbControlVendorClassRequest_mut:
+        URB_CONTROL_VENDOR_OR_CLASS_REQUEST,
+    UrbControlGetInterfaceRequest UrbControlGetInterfaceRequest_mut:
+        URB_CONTROL_GET_INTERFACE_REQUEST,
+    UrbControlGetConfigurationRequest UrbControlGetConfigurationRequest_mut:
+        URB_CONTROL_GET_CONFIGURATION_REQUEST,
+    UrbOSFeatureDescriptorRequest UrbOSFeatureDescriptorRequest_mut:
+        URB_OS_FEATURE_DESCRIPTOR_REQUEST,
     UrbOpenStaticStreams UrbOpenStaticStreams_mut: URB_OPEN_STATIC_STREAMS,
 }}
 STRUCT!{struct URB {
