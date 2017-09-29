@@ -7,9 +7,7 @@ use winapi::*;
 extern "system" {
     // pub fn AddLocalAlternateComputerNameA();
     // pub fn AddLocalAlternateComputerNameW();
-    pub fn AddSIDToBoundaryDescriptor(BoundaryDescriptor: *mut HANDLE, RequiredSid: PSID) -> BOOL;
     // pub fn AppXGetOSMaxVersionTested();
-    pub fn AssignProcessToJobObject(hJob: HANDLE, hProcess: HANDLE) -> BOOL;
     // pub fn BaseSetLastNTError();
     pub fn Beep(dwFreq: DWORD, dwDuration: DWORD) -> BOOL;
     pub fn CallNamedPipeW(
@@ -32,7 +30,6 @@ extern "system" {
     // pub fn CheckElevationEnabled();
     pub fn CheckRemoteDebuggerPresent(hProcess: HANDLE, pbDebuggerPresent: PBOOL) -> BOOL;
     // pub fn ClosePackageInfo();
-    pub fn ClosePrivateNamespace(Handle: HANDLE, Flags: ULONG) -> BOOLEAN;
     // pub fn CloseState();
     pub fn CloseThreadpool(ptpp: PTP_POOL);
     pub fn CloseThreadpoolCleanupGroup(ptpcg: PTP_CLEANUP_GROUP);
@@ -65,12 +62,10 @@ extern "system" {
     ) -> BOOL;
     pub fn ConvertDefaultLocale(Locale: LCID) -> LCID;
     pub fn ConvertFiberToThread() -> BOOL;
-    pub fn CreateBoundaryDescriptorW(Name: LPCWSTR, Flags: ULONG) -> HANDLE;
     pub fn CreateIoCompletionPort(
         FileHandle: HANDLE, ExistingCompletionPort: HANDLE, CompletionKey: ULONG_PTR,
         NumberOfConcurrentThreads: DWORD,
     ) -> HANDLE;
-    pub fn CreateJobObjectW(lpJobAttributes: LPSECURITY_ATTRIBUTES, lpName: LPCWSTR) -> HANDLE;
     pub fn CreateNamedPipeW(
         lpName: LPCWSTR, dwOpenMode: DWORD, dwPipeMode: DWORD, nMaxInstances: DWORD,
         nOutBufferSize: DWORD, nInBufferSize: DWORD, nDefaultTimeOut: DWORD,
@@ -80,10 +75,6 @@ extern "system" {
         hReadPipe: PHANDLE, hWritePipe: PHANDLE, lpPipeAttributes: LPSECURITY_ATTRIBUTES,
         nSize: DWORD,
     ) -> BOOL;
-    pub fn CreatePrivateNamespaceW(
-        lpPrivateNamespaceAttributes: LPSECURITY_ATTRIBUTES, lpBoundaryDescriptor: LPVOID,
-        lpAliasPrefix: LPCWSTR,
-    ) -> HANDLE;
     pub fn CreateThreadpool(reserved: PVOID) -> PTP_POOL;
     pub fn CreateThreadpoolCleanupGroup() -> PTP_CLEANUP_GROUP;
     pub fn CreateThreadpoolIo(
@@ -111,7 +102,6 @@ extern "system" {
     pub fn DecodePointer(Ptr: PVOID) -> PVOID;
     pub fn DecodeSystemPointer(Ptr: PVOID) -> PVOID;
     pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
-    pub fn DeleteBoundaryDescriptor(BoundaryDescriptor: HANDLE);
     pub fn DeleteTimerQueueEx(TimerQueue: HANDLE, CompletionEvent: HANDLE) -> BOOL;
     pub fn DeleteTimerQueueTimer(
         TimerQueue: HANDLE, Timer: HANDLE, CompletionEvent: HANDLE,
@@ -688,9 +678,7 @@ extern "system" {
         dwReserved: DWORD, pdwStatusRtrn: PDWORD,
     ) -> BOOL;
     // pub fn OOBEComplete();
-    pub fn OpenJobObjectW(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR) -> HANDLE;
     // pub fn OpenPackageInfoByFullName();
-    pub fn OpenPrivateNamespaceW(lpBoundaryDescriptor: LPVOID, lpAliasPrefix: LPCWSTR) -> HANDLE;
     // pub fn OpenState();
     // pub fn OpenStateExplicit();
     pub fn OutputDebugStringA(lpOutputString: LPCSTR);
@@ -719,11 +707,6 @@ extern "system" {
     ) -> BOOL;
     pub fn QueryIdleProcessorCycleTimeEx(
         Group: USHORT, BufferLength: PULONG, ProcessorIdleCycleTime: PULONG64,
-    ) -> BOOL;
-    pub fn QueryInformationJobObject(
-        hJob: HANDLE, JobObjectInformationClass: JOBOBJECTINFOCLASS,
-        lpJobObjectInformation: LPVOID, cbJobObjectInformationLength: DWORD,
-        lpReturnLength: LPDWORD,
     ) -> BOOL;
     pub fn QueryPerformanceCounter(lpPerformanceCount: *mut LARGE_INTEGER) -> BOOL;
     pub fn QueryPerformanceFrequency(lpFrequency: *mut LARGE_INTEGER) -> BOOL;
@@ -851,10 +834,6 @@ extern "system" {
     pub fn SetEnvironmentVariableA(lpName: LPCSTR, lpValue: LPCSTR) -> BOOL;
     pub fn SetEnvironmentVariableW(lpName: LPCWSTR, lpValue: LPCWSTR) -> BOOL;
     pub fn SetEventWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, evt: HANDLE);
-    pub fn SetInformationJobObject(
-        hJob: HANDLE, JobObjectInformationClass: JOBOBJECTINFOCLASS,
-        lpJobObjectInformation: LPVOID, cbJobObjectInformationLength: DWORD,
-    ) -> BOOL;
     // pub fn SetLocalPrimaryComputerNameA();
     // pub fn SetLocalPrimaryComputerNameW();
     pub fn SetLocalTime(lpSystemTime: *const SYSTEMTIME) -> BOOL;
@@ -912,7 +891,6 @@ extern "system" {
         lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
         lpUniversalTime: *const SYSTEMTIME, lpLocalTime: LPSYSTEMTIME,
     ) -> BOOL;
-    pub fn TerminateJobObject(hJob: HANDLE, uExitCode: UINT) -> BOOL;
     pub fn Thread32First(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
     pub fn Thread32Next(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
     pub fn Toolhelp32ReadProcessMemory(th32ProcessID: DWORD, lpBaseAddress: LPCVOID,
