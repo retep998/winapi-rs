@@ -61,6 +61,7 @@ pub mod gl;
 #[cfg(feature = "ddraw")] pub mod ddraw;
 #[cfg(feature = "ddrawi")] pub mod ddrawi;
 #[cfg(feature = "ddrawint")] pub mod ddrawint;
+#[cfg(feature = "debugapi")] pub mod debugapi;
 #[cfg(feature = "dinput")] pub mod dinput;
 #[cfg(feature = "dmksctl")] pub mod dmksctl;
 #[cfg(feature = "dmusicc")] pub mod dmusicc;

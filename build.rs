@@ -124,6 +124,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("ddraw", &[], &[]),
     ("ddrawi", &[], &[]),
     ("ddrawint", &[], &[]),
+    ("debugapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("dinput", &[], &[]),
     ("dmksctl", &[], &[]),
     ("dmusicc", &[], &[]),

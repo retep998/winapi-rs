@@ -13,7 +13,6 @@ extern "system" {
     pub fn ChangeTimerQueueTimer(
         TimerQueue: HANDLE, Timer: HANDLE, DueTime: ULONG, Period: ULONG,
     ) -> BOOL;
-    pub fn CheckRemoteDebuggerPresent(hProcess: HANDLE, pbDebuggerPresent: PBOOL) -> BOOL;
     pub fn CloseThreadpool(ptpp: PTP_POOL);
     pub fn CloseThreadpoolCleanupGroup(ptpcg: PTP_CLEANUP_GROUP);
     pub fn CloseThreadpoolCleanupGroupMembers(
@@ -30,9 +29,7 @@ extern "system" {
         Locale: LCID, dwCmpFlags: DWORD, lpString1: PCNZWCH, cchCount1: c_int, lpString2: PCNZWCH,
         cchCount2: c_int,
     ) -> c_int;
-    pub fn ContinueDebugEvent(
-        dwProcessId: DWORD, dwThreadId: DWORD, dwContinueStatus: DWORD,
-    ) -> BOOL;
+    pub fn ConvertDefaultLocale(Locale: LCID) -> LCID;
     pub fn ConvertFiberToThread() -> BOOL;
     pub fn CreateThreadpool(reserved: PVOID) -> PTP_POOL;
     pub fn CreateThreadpoolCleanupGroup() -> PTP_CLEANUP_GROUP;
@@ -54,9 +51,6 @@ extern "system" {
         DueTime: DWORD, Period: DWORD, Flags: ULONG,
     ) -> BOOL;
     pub fn CreateToolhelp32Snapshot(dwFlags: DWORD, th32ProcessID: DWORD) -> HANDLE;
-    pub fn DebugActiveProcess(dwProcessId: DWORD) -> BOOL;
-    pub fn DebugActiveProcessStop(dwProcessId: DWORD) -> BOOL;
-    pub fn DebugBreak();
     pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
     pub fn DeleteTimerQueueEx(TimerQueue: HANDLE, CompletionEvent: HANDLE) -> BOOL;
     pub fn DeleteTimerQueueTimer(
@@ -207,7 +201,13 @@ extern "system" {
     pub fn InterlockedPushListSListEx(
         ListHead: PSLIST_HEADER, List: PSLIST_ENTRY, ListEnd: PSLIST_ENTRY, Count: ULONG,
     ) -> PSLIST_ENTRY;
-    pub fn IsDebuggerPresent() -> BOOL;
+    pub fn IsDBCSLeadByte(TestChar: BYTE) -> BOOL;
+    pub fn IsDBCSLeadByteEx(CodePage: UINT, TestChar: BYTE) -> BOOL;
+    pub fn IsNLSDefinedString(
+        Function: NLS_FUNCTION, dwFlags: DWORD, lpVersionInformation: LPNLSVERSIONINFO,
+        lpString: LPCWSTR, cchStr: INT,
+    ) -> BOOL;
+    pub fn IsNormalizedString(NormForm: NORM_FORM, lpString: LPCWSTR, cwLength: c_int) -> BOOL;
     pub fn IsProcessInJob(ProcessHandle: HANDLE, JobHandle: HANDLE, Result: PBOOL) -> BOOL;
     pub fn IsThreadAFiber() -> BOOL;
     pub fn IsWow64Process(hProcess: HANDLE, Wow64Process: PBOOL) -> BOOL;
@@ -301,8 +301,6 @@ extern "system" {
         dwFlags: DWORD, pcwstrNewLanguage: PCWSTR, pcwstrPreviousLanguage: PCWSTR,
         dwReserved: DWORD, pdwStatusRtrn: PDWORD,
     ) -> BOOL;
-    pub fn OutputDebugStringA(lpOutputString: LPCSTR);
-    pub fn OutputDebugStringW(lpOutputString: LPCWSTR);
     pub fn Process32First(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
     pub fn Process32FirstW(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32W) -> BOOL;
     pub fn Process32Next(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
@@ -426,7 +424,10 @@ extern "system" {
     pub fn UnregisterWaitEx(WaitHandle: HANDLE, CompletionEvent: HANDLE) -> BOOL;
     pub fn VerLanguageNameA(wLang: DWORD, szLang: LPSTR, cchLang: DWORD) -> DWORD;
     pub fn VerLanguageNameW(wLang: DWORD, szLang: LPWSTR, cchLang: DWORD) -> DWORD;
-    pub fn WaitForDebugEvent(lpDebugEvent: LPDEBUG_EVENT, dwMilliseconds: DWORD) -> BOOL;
+    pub fn VerifyScripts(
+        dwFlags: DWORD, lpLocaleScripts: LPCWSTR, cchLocaleScripts: c_int, lpTestScripts: LPCWSTR,
+        cchTestScripts: c_int,
+    ) -> BOOL;
     pub fn WaitForMultipleObjectsEx(
         nCount: DWORD, lpHandles: *const HANDLE, bWaitAll: BOOL, dwMilliseconds: DWORD,
         bAlertable: BOOL,
