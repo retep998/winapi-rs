@@ -9,7 +9,6 @@ extern "system" {
     // pub fn AddLocalAlternateComputerNameW();
     // pub fn AppXGetOSMaxVersionTested();
     // pub fn BaseSetLastNTError();
-    pub fn Beep(dwFreq: DWORD, dwDuration: DWORD) -> BOOL;
     pub fn CallNamedPipeW(
         lpNamedPipeName: LPCWSTR, lpInBuffer: LPVOID, nInBufferSize: DWORD, lpOutBuffer: LPVOID,
         nOutBufferSize: DWORD, lpBytesRead: LPDWORD, nTimeOut: DWORD,
@@ -60,8 +59,6 @@ extern "system" {
     pub fn DebugActiveProcess(dwProcessId: DWORD) -> BOOL;
     pub fn DebugActiveProcessStop(dwProcessId: DWORD) -> BOOL;
     pub fn DebugBreak();
-    pub fn DecodePointer(Ptr: PVOID) -> PVOID;
-    pub fn DecodeSystemPointer(Ptr: PVOID) -> PVOID;
     pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
     pub fn DeleteTimerQueueEx(TimerQueue: HANDLE, CompletionEvent: HANDLE) -> BOOL;
     pub fn DeleteTimerQueueTimer(
@@ -74,8 +71,6 @@ extern "system" {
     ) -> BOOL;
     pub fn DisconnectNamedPipe(hNamedPipe: HANDLE) -> BOOL;
     // pub fn DosPathToSessionPathW();
-    pub fn EncodePointer(Ptr: PVOID) -> PVOID;
-    pub fn EncodeSystemPointer(Ptr: PVOID) -> PVOID;
     // pub fn EnumerateLocalComputerNamesA();
     // pub fn EnumerateLocalComputerNamesW();
     pub fn ExpandEnvironmentStringsA(lpSrc: LPCSTR, lpDst: LPSTR, nSize: DWORD) -> DWORD;
