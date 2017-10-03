@@ -9,7 +9,7 @@ use ctypes::c_int;
 use shared::basetsd::LONG_PTR;
 use shared::guiddef::GUID;
 use shared::minwindef::{
-    BOOL, BYTE, DWORD, INT, LPARAM, LPDWORD, LPINT, LPWORD, LPVOID, MAX_PATH, PULONG, PDWORD,
+    BOOL, BYTE, DWORD, INT, LPARAM, LPDWORD, LPINT, LPVOID, LPWORD, MAX_PATH, PDWORD, PULONG,
     UINT,
 };
 use um::minwinbase::SYSTEMTIME;
