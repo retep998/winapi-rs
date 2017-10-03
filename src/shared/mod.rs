@@ -34,6 +34,7 @@ pub mod guiddef;
 #[cfg(feature = "inaddr")] pub mod inaddr;
 #[cfg(feature = "intsafe")] pub mod intsafe;
 #[cfg(feature = "ksmedia")] pub mod ksmedia;
+#[cfg(feature = "ktmtypes")] pub mod ktmtypes;
 #[cfg(feature = "lmcons")] pub mod lmcons;
 #[cfg(feature = "minwindef")] pub mod minwindef;
 #[cfg(feature = "mmreg")] pub mod mmreg;
