@@ -262,11 +262,11 @@ macro_rules! UNION {
     );
 }
 macro_rules! UNION2 {
-    (union $name:ident {
+    ($(#[$attrs:meta])* union $name:ident {
         [$stype:ty; $ssize:expr],
         $($variant:ident $variant_mut:ident: $ftype:ty,)+
     }) => (
-        #[repr(C)]
+        #[repr(C)] $(#[$attrs])*
         pub struct $name([$stype; $ssize]);
         impl Copy for $name {}
         impl Clone for $name {
@@ -284,13 +284,13 @@ macro_rules! UNION2 {
             }
         )+}
     );
-    (union $name:ident {
+    ($(#[$attrs:meta])* union $name:ident {
         [$stype32:ty; $ssize32:expr] [$stype64:ty; $ssize64:expr],
         $($variant:ident $variant_mut:ident: $ftype:ty,)+
     }) => (
-        #[repr(C)] #[cfg(target_arch = "x86")]
+        #[repr(C)] $(#[$attrs])* #[cfg(target_arch = "x86")]
         pub struct $name([$stype32; $ssize32]);
-        #[repr(C)] #[cfg(target_arch = "x86_64")]
+        #[repr(C)] $(#[$attrs])* #[cfg(target_arch = "x86_64")]
         pub struct $name([$stype64; $ssize64]);
         impl Copy for $name {}
         impl Clone for $name {

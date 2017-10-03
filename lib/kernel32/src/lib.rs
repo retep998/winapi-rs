@@ -7,12 +7,6 @@ use winapi::*;
 extern "system" {
     // pub fn AddLocalAlternateComputerNameA();
     // pub fn AddLocalAlternateComputerNameW();
-    pub fn AllocateUserPhysicalPages(
-        hProcess: HANDLE, NumberOfPages: PULONG_PTR, PageArray: PULONG_PTR,
-    ) -> BOOL;
-    pub fn AllocateUserPhysicalPagesNuma(
-        hProcess: HANDLE, NumberOfPages: PULONG_PTR, PageArray: PULONG_PTR, nndPreferred: DWORD,
-    ) -> BOOL;
     // pub fn AppXGetOSMaxVersionTested();
     // pub fn BaseSetLastNTError();
     pub fn Beep(dwFreq: DWORD, dwDuration: DWORD) -> BOOL;
@@ -68,24 +62,9 @@ extern "system" {
     ) -> BOOL;
     pub fn ConvertDefaultLocale(Locale: LCID) -> LCID;
     pub fn ConvertFiberToThread() -> BOOL;
-    pub fn CreateFileMappingFromApp(
-        hFile: HANDLE, SecurityAttributes: PSECURITY_ATTRIBUTES, PageProtection: ULONG,
-        MaximumSize: ULONG64, Name: PCWSTR,
-    ) -> HANDLE;
-    pub fn CreateFileMappingNumaW(
-        hFile: HANDLE, lpFileMappingAttributes: LPSECURITY_ATTRIBUTES, flProtect: DWORD,
-        dwMaximumSizeHigh: DWORD, dwMaximumSizeLow: DWORD, lpName: LPCWSTR, nndPreferred: DWORD,
-    ) -> HANDLE;
-    pub fn CreateFileMappingW(
-        hFile: HANDLE, lpAttributes: LPSECURITY_ATTRIBUTES, flProtect: DWORD,
-        dwMaximumSizeHigh: DWORD, dwMaximumSizeLow: DWORD, lpName: LPCWSTR,
-    ) -> HANDLE;
     pub fn CreateIoCompletionPort(
         FileHandle: HANDLE, ExistingCompletionPort: HANDLE, CompletionKey: ULONG_PTR,
         NumberOfConcurrentThreads: DWORD,
-    ) -> HANDLE;
-    pub fn CreateMemoryResourceNotification(
-        NotificationType: MEMORY_RESOURCE_NOTIFICATION_TYPE,
     ) -> HANDLE;
     pub fn CreateNamedPipeW(
         lpName: LPCWSTR, dwOpenMode: DWORD, dwPipeMode: DWORD, nMaxInstances: DWORD,
@@ -231,7 +210,6 @@ extern "system" {
     pub fn FlsFree(dwFlsIndex: DWORD) -> BOOL;
     pub fn FlsGetValue(dwFlsIndex: DWORD) -> PVOID;
     pub fn FlsSetValue(dwFlsIndex: DWORD, lpFlsData: PVOID) -> BOOL;
-    pub fn FlushViewOfFile(lpBaseAddress: LPCVOID, dwNumberOfBytesToFlush: SIZE_T) -> BOOL;
     pub fn FoldStringA(
         dwMapFlags: DWORD, lpSrcStr: LPCSTR, cchSrc: c_int, lpDestStr: LPSTR, cchDest: c_int,
     ) -> c_int;
@@ -242,9 +220,6 @@ extern "system" {
     pub fn FreeEnvironmentStringsA(penv: LPCH) -> BOOL;
     pub fn FreeEnvironmentStringsW(penv: LPWCH) -> BOOL;
     pub fn FreeLibraryWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, module: HMODULE);
-    pub fn FreeUserPhysicalPages(
-        hProcess: HANDLE, NumberOfPages: PULONG_PTR, PageArray: PULONG_PTR,
-    ) -> BOOL;
     pub fn GetACP() -> UINT;
     pub fn GetAppContainerNamedObjectPath(
         Token: HANDLE, AppContainerSid: PSID, ObjectPathLength: ULONG, ObjectPath: LPWSTR,
@@ -332,6 +307,7 @@ extern "system" {
         Location: GEOID, GeoType: GEOTYPE, lpGeoData: LPWSTR, cchData: c_int, LangId: LANGID,
     ) -> c_int;
     pub fn GetLargePageMinimum() -> SIZE_T;
+    pub fn GetLocalTime(lpSystemTime: LPSYSTEMTIME);
     pub fn GetLocaleInfoA(
         Locale: LCID, LCType: LCTYPE, lpLCData: LPSTR, cchData: c_int,
     ) -> c_int;
@@ -342,6 +318,14 @@ extern "system" {
         Locale: LCID, LCType: LCTYPE, lpLCData: LPWSTR, cchData: c_int,
     ) -> c_int;
     pub fn GetMemoryErrorHandlingCapabilities(Capabilities: PULONG) -> BOOL;
+    pub fn GetLogicalProcessorInformation(
+        Buffer: PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, ReturnedLength: PDWORD,
+    ) -> BOOL;
+    pub fn GetLogicalProcessorInformationEx(
+        RelationshipType: LOGICAL_PROCESSOR_RELATIONSHIP,
+        Buffer: PSYSTEM_LOGICAL_PROCESSOR_INFORMATION,
+        ReturnedLength: PDWORD,
+    ) -> BOOL;
     pub fn GetNLSVersion(
         Function: NLS_FUNCTION, Locale: LCID, lpVersionInformation: LPNLSVERSIONINFO,
     ) -> BOOL;
@@ -406,8 +390,13 @@ extern "system" {
         hProcess: HANDLE, lpMinimumWorkingSetSize: PSIZE_T, lpMaximumWorkingSetSize: PSIZE_T,
         Flags: PDWORD,
     ) -> BOOL;
-
-
+    pub fn GetProcessorSystemCycleTime(
+        Group: USHORT, Buffer: PSYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION, ReturnedLength: PDWORD,
+    ) -> BOOL;
+    pub fn GetProductInfo(
+        dwOSMajorVersion: DWORD, dwOSMinorVersion: DWORD, dwSpMajorVersion: DWORD,
+        dwSpMinorVersion: DWORD, pdwReturnedProductType: PDWORD,
+    ) -> BOOL;
     pub fn GetQueuedCompletionStatus(
         CompletionPort: HANDLE, lpNumberOfBytesTransferred: LPDWORD, lpCompletionKey: PULONG_PTR,
         lpOverlapped: *mut LPOVERLAPPED, dwMilliseconds: DWORD,
@@ -439,12 +428,16 @@ extern "system" {
     pub fn GetSystemDefaultLangID() -> LANGID;
     pub fn GetSystemDefaultLocaleName(lpLocaleName: LPWSTR, cchLocaleName: c_int) -> c_int;
     pub fn GetSystemDefaultUILanguage() -> LANGID;
-
     pub fn GetSystemFileCacheSize(
         lpMinimumFileCacheSize: PSIZE_T, lpMaximumFileCacheSize: PSIZE_T, lpFlags: PDWORD,
     ) -> BOOL;
-
-
+    pub fn GetSystemDirectoryA(lpBuffer: LPSTR, uSize: UINT) -> UINT;
+    pub fn GetSystemDirectoryW(lpBuffer: LPWSTR, uSize: UINT) -> UINT;
+    pub fn GetSystemFirmwareTable(
+        FirmwareTableProviderSignature: DWORD, FirmwareTableID: DWORD, pFirmwareTableBuffer: PVOID,
+        BufferSize: DWORD,
+    ) -> UINT;
+    pub fn GetSystemInfo(lpSystemInfo: LPSYSTEM_INFO);
     pub fn GetSystemPreferredUILanguages(
         dwFlags: DWORD, pulNumLanguages: PULONG, pwszLanguagesBuffer: PZZWSTR,
         pcchLanguagesBuffer: PULONG,
@@ -656,21 +649,6 @@ extern "system" {
     // pub fn LoadStringBaseW();
     pub fn LocalFlags(hMem: HLOCAL) -> UINT;
     pub fn LocaleNameToLCID(lpName: LPCWSTR, dwFlags: DWORD) -> LCID;
-    pub fn MapUserPhysicalPages(
-        VirtualAddress: PVOID, NumberOfPages: ULONG_PTR, PageArray: PULONG_PTR,
-    ) -> BOOL;
-    pub fn MapViewOfFile(
-        hFileMappingObject: HANDLE, dwDesiredAccess: DWORD, dwFileOffsetHigh: DWORD,
-        dwFileOffsetLow: DWORD, dwNumberOfBytesToMap: SIZE_T,
-    ) -> LPVOID;
-    pub fn MapViewOfFileEx(
-        hFileMappingObject: HANDLE, dwDesiredAccess: DWORD, dwFileOffsetHigh: DWORD,
-        dwFileOffsetLow: DWORD, dwNumberOfBytesToMap: SIZE_T, lpBaseAddress: LPVOID,
-    ) -> LPVOID;
-    pub fn MapViewOfFileFromApp(
-        hFileMappingObject: HANDLE, DesiredAccess: ULONG, FileOffset: ULONG64,
-        NumberOfBytesToMap: SIZE_T,
-    ) -> PVOID;
     pub fn Module32First(hSnapshot: HANDLE, lpme: LPMODULEENTRY32) -> BOOL;
     pub fn Module32FirstW(hSnapshot: HANDLE, lpme: LPMODULEENTRY32W) -> BOOL;
     pub fn Module32Next(hSnapshot: HANDLE, lpme: LPMODULEENTRY32) -> BOOL;
@@ -691,9 +669,6 @@ extern "system" {
         dwReserved: DWORD, pdwStatusRtrn: PDWORD,
     ) -> BOOL;
     // pub fn OOBEComplete();
-    pub fn OpenFileMappingW(
-        dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR,
-    ) -> HANDLE;
     // pub fn OpenPackageInfoByFullName();
     // pub fn OpenState();
     // pub fn OpenStateExplicit();
@@ -713,10 +688,6 @@ extern "system" {
         CompletionPort: HANDLE, dwNumberOfBytesTransferred: DWORD, dwCompletionKey: ULONG_PTR,
         lpOverlapped: LPOVERLAPPED,
     ) -> BOOL;
-    pub fn PrefetchVirtualMemory(
-        hProcess: HANDLE, NumberOfEntries: ULONG_PTR, VirtualAddresses: PWIN32_MEMORY_RANGE_ENTRY,
-        Flags: ULONG,
-    ) -> BOOL;
     pub fn Process32First(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
     pub fn Process32FirstW(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32W) -> BOOL;
     pub fn Process32Next(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
@@ -727,9 +698,6 @@ extern "system" {
     ) -> BOOL;
     pub fn QueryIdleProcessorCycleTimeEx(
         Group: USHORT, BufferLength: PULONG, ProcessorIdleCycleTime: PULONG64,
-    ) -> BOOL;
-    pub fn QueryMemoryResourceNotification(
-        ResourceNotificationHandle: HANDLE, ResourceState: PBOOL,
     ) -> BOOL;
     pub fn QueryPerformanceCounter(lpPerformanceCount: *mut LARGE_INTEGER) -> BOOL;
     pub fn QueryPerformanceFrequency(lpFrequency: *mut LARGE_INTEGER) -> BOOL;
@@ -742,12 +710,7 @@ extern "system" {
     pub fn QueueUserWorkItem(
         Function: LPTHREAD_START_ROUTINE, Context: PVOID, Flags: ULONG,
     ) -> BOOL;
-    pub fn ReadProcessMemory(
-        hProcess: HANDLE, lpBaseAddress: LPCVOID, lpBuffer: LPVOID, nSize: SIZE_T,
-        lpNumberOfBytesRead: *mut SIZE_T,
-    ) -> BOOL;
     pub fn RegisterApplicationRestart(pwzCommandline: PCWSTR, dwFlags: DWORD) -> HRESULT;
-    pub fn RegisterBadMemoryNotification(Callback: PBAD_MEMORY_CALLBACK_ROUTINE) -> PVOID;
     // pub fn RegisterWaitForInputIdle();
     pub fn RegisterWaitForSingleObjectEx(
         hObject: HANDLE, Callback: WAITORTIMERCALLBACK, Context: PVOID, dwMilliseconds: ULONG,
@@ -770,54 +733,33 @@ extern "system" {
     pub fn RtlAddFunctionTable(
         FunctionTable: PRUNTIME_FUNCTION, EntryCount: DWORD, BaseAddress: DWORD,
     ) -> BOOLEAN;
-    #[cfg(target_arch = "x86_64")]
-    pub fn RtlAddFunctionTable(
-        FunctionTable: PRUNTIME_FUNCTION, EntryCount: DWORD, BaseAddress: DWORD64,
-    ) -> BOOLEAN;
-    pub fn RtlCaptureContext(ContextRecord: PCONTEXT);
-    pub fn RtlCaptureStackBackTrace(
-        FramesToSkip: DWORD, FramesToCapture: DWORD, BackTrace: *mut PVOID, BackTraceHash: PDWORD,
-    ) -> WORD;
+
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn RtlCompareMemory(Source1: *const VOID, Source2: *const VOID, Length: SIZE_T) -> SIZE_T;
+
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
     pub fn RtlCopyMemory(Destination: PVOID, Source: *const VOID, Length: SIZE_T);
-    #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn RtlDeleteFunctionTable(FunctionTable: PRUNTIME_FUNCTION) -> BOOLEAN;
+
     // pub fn RtlFillMemory();
     #[cfg(target_arch = "arm")]
     pub fn RtlInstallFunctionTableCallback(
         TableIdentifier: DWORD, BaseAddress: DWORD, Length: DWORD,
         Callback: PGET_RUNTIME_FUNCTION_CALLBACK, Context: PVOID, OutOfProcessCallbackDll: PCWSTR,
     ) -> BOOLEAN;
-    #[cfg(target_arch = "x86_64")]
-    pub fn RtlInstallFunctionTableCallback(
-        TableIdentifier: DWORD64, BaseAddress: DWORD64, Length: DWORD,
-        Callback: PGET_RUNTIME_FUNCTION_CALLBACK, Context: PVOID, OutOfProcessCallbackDll: PCWSTR,
-    ) -> BOOLEAN;
+
     #[cfg(target_arch = "arm")]
     pub fn RtlLookupFunctionEntry(
         ControlPc: ULONG_PTR, ImageBase: PDWORD, HistoryTable: PUNWIND_HISTORY_TABLE,
     ) -> PRUNTIME_FUNCTION;
-    #[cfg(target_arch = "x86_64")]
-    pub fn RtlLookupFunctionEntry(
-        ControlPc: DWORD64, ImageBase: PDWORD64, HistoryTable: PUNWIND_HISTORY_TABLE,
-    ) -> PRUNTIME_FUNCTION;
+
     // pub fn RtlMoveMemory();
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn RtlPcToFileHeader(PcValue: PVOID, BaseOfImage: *mut PVOID) -> PVOID;
+
     // #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
     // pub fn RtlRaiseException();
+
+
     #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn RtlRestoreContext(ContextRecord: PCONTEXT, ExceptionRecord: *mut EXCEPTION_RECORD);
-    pub fn RtlUnwind(
-        TargetFrame: PVOID, TargetIp: PVOID, ExceptionRecord: PEXCEPTION_RECORD, ReturnValue: PVOID,
-    );
-    #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn RtlUnwindEx(
-        TargetFrame: PVOID, TargetIp: PVOID, ExceptionRecord: PEXCEPTION_RECORD, ReturnValue: PVOID,
-        ContextRecord: PCONTEXT, HistoryTable: PUNWIND_HISTORY_TABLE,
-    );
+
     #[cfg(target_arch = "arm")]
     pub fn RtlVirtualUnwind(
         HandlerType: DWORD, ImageBase: DWORD, ControlPc: DWORD, FunctionEntry: PRUNTIME_FUNCTION,
@@ -825,11 +767,7 @@ extern "system" {
         ContextPointers: PKNONVOLATILE_CONTEXT_POINTERS,
     ) -> PEXCEPTION_ROUTINE;
     #[cfg(target_arch = "x86_64")]
-    pub fn RtlVirtualUnwind(
-        HandlerType: DWORD, ImageBase: DWORD64, ControlPc: DWORD64,
-        FunctionEntry: PRUNTIME_FUNCTION, ContextRecord: PCONTEXT, HandlerData: *mut PVOID,
-        EstablisherFrame: PDWORD64, ContextPointers: PKNONVOLATILE_CONTEXT_POINTERS,
-    ) -> PEXCEPTION_ROUTINE;
+
     // pub fn RtlZeroMemory();
     pub fn SearchPathA(
         lpPath: LPCSTR, lpFileName: LPCSTR, lpExtension: LPCSTR, nBufferLength: DWORD,
@@ -870,15 +808,13 @@ extern "system" {
     pub fn SetProcessPreferredUILanguages(
         dwFlags: DWORD, pwszLanguagesBuffer: PCZZWSTR, pulNumLanguages: PULONG,
     ) -> BOOL;
-    pub fn SetProcessWorkingSetSizeEx(
-        hProcess: HANDLE, dwMinimumWorkingSetSize: SIZE_T, dwMaximumWorkingSetSize: SIZE_T,
-        Flags: DWORD,
-    ) -> BOOL;
     pub fn SetStdHandle(nStdHandle: DWORD, hHandle: HANDLE) -> BOOL;
     pub fn SetStdHandleEx(nStdHandle: DWORD, hHandle: HANDLE, phPrevValue: PHANDLE) -> BOOL;
     pub fn SetSystemFileCacheSize(
         MinimumFileCacheSize: SIZE_T, MaximumFileCacheSize: SIZE_T, Flags: DWORD,
     ) -> BOOL;
+    pub fn SetSystemTime(lpSystemTime: *const SYSTEMTIME) -> BOOL;
+    pub fn SetSystemTimeAdjustment(dwTimeAdjustment: DWORD, bTimeAdjustmentDisabled: BOOL) -> BOOL;
     pub fn SetThreadGroupAffinity(
         hThread: HANDLE, GroupAffinity: *const GROUP_AFFINITY,
         PreviousGroupAffinity: PGROUP_AFFINITY,
@@ -936,8 +872,6 @@ extern "system" {
         lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
         lpLocalTime: *const SYSTEMTIME, lpUniversalTime: LPSYSTEMTIME,
     ) -> BOOL;
-    pub fn UnmapViewOfFile(lpBaseAddress: LPCVOID) -> BOOL;
-    pub fn UnregisterBadMemoryNotification(RegistrationHandle: PVOID) -> BOOL;
     pub fn UnregisterWaitEx(WaitHandle: HANDLE, CompletionEvent: HANDLE) -> BOOL;
     // pub fn UnregisterWaitUntilOOBECompleted();
     pub fn VerLanguageNameA(wLang: DWORD, szLang: LPSTR, cchLang: DWORD) -> DWORD;
@@ -946,36 +880,6 @@ extern "system" {
         dwFlags: DWORD, lpLocaleScripts: LPCWSTR, cchLocaleScripts: c_int, lpTestScripts: LPCWSTR,
         cchTestScripts: c_int,
     ) -> BOOL;
-    pub fn VirtualAlloc(
-        lpAddress: LPVOID, dwSize: SIZE_T, flAllocationType: DWORD, flProtect: DWORD,
-    ) -> LPVOID;
-    pub fn VirtualAllocEx(
-        hProcess: HANDLE, lpAddress: LPVOID, dwSize: SIZE_T, flAllocationType: DWORD,
-        flProtect: DWORD,
-    ) -> LPVOID;
-    pub fn VirtualAllocExNuma(
-        hProcess: HANDLE, lpAddress: LPVOID, dwSize: SIZE_T, flAllocationType: DWORD,
-        flProtect: DWORD, nndPreferred: DWORD,
-    ) -> LPVOID;
-    pub fn VirtualFree(lpAddress: LPVOID, dwSize: SIZE_T, dwFreeType: DWORD) -> BOOL;
-    pub fn VirtualFreeEx(
-        hProcess: HANDLE, lpAddress: LPVOID, dwSize: SIZE_T, dwFreeType: DWORD,
-    ) -> BOOL;
-    pub fn VirtualLock(lpAddress: LPVOID, dwSize: SIZE_T) -> BOOL;
-    pub fn VirtualProtect(
-        lpAddress: LPVOID, dwSize: SIZE_T, flNewProtect: DWORD, lpflOldProtect: PDWORD,
-    ) -> BOOL;
-    pub fn VirtualProtectEx(
-        hProcess: HANDLE, lpAddress: LPVOID, dwSize: SIZE_T, flNewProtect: DWORD,
-        lpflOldProtect: PDWORD,
-    ) -> BOOL;
-    pub fn VirtualQuery(
-        lpAddress: LPCVOID, lpBuffer: PMEMORY_BASIC_INFORMATION, dwLength: SIZE_T,
-    ) -> SIZE_T;
-    pub fn VirtualQueryEx(
-        hProcess: HANDLE, lpAddress: LPCVOID, lpBuffer: PMEMORY_BASIC_INFORMATION, dwLength: SIZE_T,
-    ) -> SIZE_T;
-    pub fn VirtualUnlock(lpAddress: LPVOID, dwSize: SIZE_T) -> BOOL;
     pub fn WaitForDebugEvent(lpDebugEvent: LPDEBUG_EVENT, dwMilliseconds: DWORD) -> BOOL;
     pub fn WaitForMultipleObjectsEx(
         nCount: DWORD, lpHandles: *const HANDLE, bWaitAll: BOOL, dwMilliseconds: DWORD,
@@ -993,10 +897,6 @@ extern "system" {
     ) -> c_int;
     pub fn Wow64DisableWow64FsRedirection(OldValue: *mut PVOID) -> BOOL;
     pub fn Wow64RevertWow64FsRedirection(OlValue: PVOID) -> BOOL;
-    pub fn WriteProcessMemory(
-        hProcess: HANDLE, lpBaseAddress: LPVOID, lpBuffer: LPCVOID, nSize: SIZE_T,
-        lpNumberOfBytesWritten: *mut SIZE_T,
-    ) -> BOOL;
     pub fn lstrcat(lpString1: LPSTR, lpString2: LPCSTR) -> LPSTR;
     pub fn lstrcmp(lpString1: LPCSTR, lpString2: LPCSTR) -> c_int;
     pub fn lstrcmpi(lpString1: LPCSTR, lpString2: LPCSTR) -> c_int;
