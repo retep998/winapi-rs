@@ -147,9 +147,25 @@ pub const MAXLONGLONG: LONGLONG = 0x7fffffffffffffff;
 pub type PLONGLONG = *mut LONGLONG;
 pub type PULONGLONG = *mut ULONGLONG;
 pub type USN = LONGLONG;
-pub type LARGE_INTEGER = LONGLONG;
+STRUCT!{struct LARGE_INTEGER_u {
+    LowPart: DWORD,
+    HighPart: LONG,
+}}
+UNION2!{union LARGE_INTEGER {
+    [u64; 1],
+    QuadPart QuadPart_mut: LONGLONG,
+    u u_mut: LARGE_INTEGER_u,
+}}
 pub type PLARGE_INTEGER = *mut LARGE_INTEGER;
-pub type ULARGE_INTEGER = ULONGLONG;
+STRUCT!{struct ULARGE_INTEGER_u {
+    LowPart: DWORD,
+    HighPart: LONG,
+}}
+UNION2!{union ULARGE_INTEGER {
+    [u64; 1],
+    QuadPart QuadPart_mut: ULONGLONG,
+    u u_mut: ULARGE_INTEGER_u,
+}}
 pub type PULARGE_INTEGER = *mut ULARGE_INTEGER;
 pub type RTL_REFERENCE_COUNT = LONG_PTR;
 pub type PRTL_REFERENCE_COUNT = *mut LONG_PTR;
