@@ -198,6 +198,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("powerbase", &["minwindef", "winnt", "winuser"], &["powrprof"]),
     ("powersetting", &["guiddef", "minwindef", "winnt", "winuser"], &["powrprof"]),
     ("powrprof", &["guiddef", "minwindef", "winnt", "winreg"], &["powrprof"]),
+    ("processenv", &["minwindef", "winnt"], &["kernel32"]),
     ("processsnapshot", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("processthreadsapi", &["basetsd", "guiddef", "minwinbase", "minwindef", "winnt"], &["advapi32", "kernel32"]),
     ("propidl", &["minwindef", "wtypes"], &[]),

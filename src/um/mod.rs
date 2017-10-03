@@ -134,6 +134,7 @@ pub mod gl;
 #[cfg(feature = "powerbase")] pub mod powerbase;
 #[cfg(feature = "powersetting")] pub mod powersetting;
 #[cfg(feature = "powrprof")] pub mod powrprof;
+#[cfg(feature = "processenv")] pub mod processenv;
 #[cfg(feature = "processsnapshot")] pub mod processsnapshot;
 #[cfg(feature = "processthreadsapi")] pub mod processthreadsapi;
 #[cfg(feature = "propidl")] pub mod propidl;

@@ -56,8 +56,6 @@ extern "system" {
     pub fn DeleteTimerQueueTimer(
         TimerQueue: HANDLE, Timer: HANDLE, CompletionEvent: HANDLE,
     ) -> BOOL;
-    pub fn ExpandEnvironmentStringsA(lpSrc: LPCSTR, lpDst: LPSTR, nSize: DWORD) -> DWORD;
-    pub fn ExpandEnvironmentStringsW(lpSrc: LPCWSTR, lpDst: LPWSTR, nSize: DWORD) -> DWORD;
     pub fn FileTimeToSystemTime(
         lpFileTime: *const FILETIME, lpSystemTime: LPSYSTEMTIME,
     ) -> BOOL;
@@ -78,29 +76,11 @@ extern "system" {
     pub fn FoldStringW(
         dwMapFlags: DWORD, lpSrcStr: LPCWCH, cchSrc: c_int, lpDestStr: LPWSTR, cchDest: c_int,
     ) -> c_int;
-    pub fn FreeEnvironmentStringsA(penv: LPCH) -> BOOL;
-    pub fn FreeEnvironmentStringsW(penv: LPWCH) -> BOOL;
+    pub fn FreeLibraryWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, module: HMODULE);
     pub fn GetAppContainerNamedObjectPath(
         Token: HANDLE, AppContainerSid: PSID, ObjectPathLength: ULONG, ObjectPath: LPWSTR,
         ReturnLength: PULONG,
     ) -> BOOL;
-    pub fn GetCPInfo(CodePage: UINT, lpCPInfo: LPCPINFO) -> BOOL;
-    pub fn GetCPInfoExA(CodePage: UINT, dwFlags: DWORD, lpCPInfoEx: LPCPINFOEXA) -> BOOL;
-    pub fn GetCPInfoExW(CodePage: UINT, dwFlags: DWORD, lpCPInfoEx: LPCPINFOEXW) -> BOOL;
-    pub fn GetCalendarInfoA(
-        Locale: LCID, Calendar: CALID, CalType: CALTYPE, lpCalData: LPSTR, cchData: c_int,
-        lpValue: LPDWORD,
-    ) -> c_int;
-    pub fn GetCalendarInfoEx(
-        lpLocaleName: LPCWSTR, Calendar: CALID, lpReserved: LPCWSTR, CalType: CALTYPE,
-        lpCalData: LPWSTR, cchData: c_int, lpValue: LPDWORD,
-    ) -> c_int;
-    pub fn GetCalendarInfoW(
-        Locale: LCID, Calendar: CALID, CalType: CALTYPE, lpCalData: LPWSTR, cchData: c_int,
-        lpValue: LPDWORD,
-    ) -> c_int;
-    pub fn GetCommandLineA() -> LPSTR;
-    pub fn GetCommandLineW() -> LPWSTR;
     pub fn GetProcessGroupAffinity(
         hProcess: HANDLE, GroupCount: PUSHORT, GroupArray: PUSHORT,
     ) -> BOOL;
@@ -113,7 +93,6 @@ extern "system" {
         dwOSMajorVersion: DWORD, dwOSMinorVersion: DWORD, dwSpMajorVersion: DWORD,
         dwSpMinorVersion: DWORD, pdwReturnedProductType: PDWORD,
     ) -> BOOL;
-    pub fn GetStdHandle(nStdHandle: DWORD) -> HANDLE;
     pub fn GetStringTypeExW(
         Locale: LCID, dwInfoType: DWORD, lpSrcStr: LPCWCH, cchSrc: c_int, lpCharType: LPWORD,
     ) -> BOOL;
@@ -291,16 +270,6 @@ extern "system" {
         CodePage: UINT, dwFlags: DWORD, lpMultiByteStr: LPCSTR, cbMultiByte: c_int,
         lpWideCharStr: LPWSTR, cchWideChar: c_int,
     ) -> c_int;
-    pub fn NeedCurrentDirectoryForExePathA(ExeName: LPCSTR) -> BOOL;
-    pub fn NeedCurrentDirectoryForExePathW(ExeName: LPCWSTR) -> BOOL;
-    pub fn NormalizeString(
-        NormForm: NORM_FORM, lpSrcString: LPCWSTR, cwSrcLength: c_int, lpDstString: LPWSTR,
-        cwDstLength: c_int,
-    ) -> c_int;
-    pub fn NotifyUILanguageChange(
-        dwFlags: DWORD, pcwstrNewLanguage: PCWSTR, pcwstrPreviousLanguage: PCWSTR,
-        dwReserved: DWORD, pdwStatusRtrn: PDWORD,
-    ) -> BOOL;
     pub fn Process32First(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
     pub fn Process32FirstW(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32W) -> BOOL;
     pub fn Process32Next(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
@@ -359,35 +328,9 @@ extern "system" {
         ContextRecord: PCONTEXT, HandlerData: *mut PVOID, EstablisherFrame: PDWORD,
         ContextPointers: PKNONVOLATILE_CONTEXT_POINTERS,
     ) -> PEXCEPTION_ROUTINE;
-    #[cfg(target_arch = "x86_64")]
-
-    pub fn SearchPathA(
-        lpPath: LPCSTR, lpFileName: LPCSTR, lpExtension: LPCSTR, nBufferLength: DWORD,
-        lpBuffer: LPSTR, lpFilePart: *mut LPSTR,
-    ) -> DWORD;
-    pub fn SearchPathW(
-        lpPath: LPCWSTR, lpFileName: LPCWSTR, lpExtension: LPCWSTR, nBufferLength: DWORD,
-        lpBuffer: LPWSTR, lpFilePart: *mut LPWSTR,
-    ) -> DWORD;
-    pub fn SetCurrentDirectoryA(lpPathName: LPCSTR) -> BOOL;
-    pub fn SetCurrentDirectoryW(lpPathName: LPCWSTR) -> BOOL;
-    pub fn SetDynamicTimeZoneInformation(
-        lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
-    ) -> BOOL;
-    pub fn SetEnvironmentStringsW(NewEnvironment: LPWCH) -> BOOL;
-    pub fn SetEnvironmentVariableA(lpName: LPCSTR, lpValue: LPCSTR) -> BOOL;
-    pub fn SetEnvironmentVariableW(lpName: LPCWSTR, lpValue: LPCWSTR) -> BOOL;
     pub fn SetNamedPipeAttribute(
         Pipe: HANDLE, AttributeType: PIPE_ATTRIBUTE_TYPE, AttributeName: PSTR,
         AttributeValue: PVOID, AttributeValueLength: SIZE_T,
-    ) -> BOOL;
-    pub fn SetProcessPreferredUILanguages(
-        dwFlags: DWORD, pwszLanguagesBuffer: PCZZWSTR, pulNumLanguages: PULONG,
-    ) -> BOOL;
-    pub fn SetStdHandle(nStdHandle: DWORD, hHandle: HANDLE) -> BOOL;
-    pub fn SetStdHandleEx(nStdHandle: DWORD, hHandle: HANDLE, phPrevValue: PHANDLE) -> BOOL;
-    pub fn SetSystemFileCacheSize(
-        MinimumFileCacheSize: SIZE_T, MaximumFileCacheSize: SIZE_T, Flags: DWORD,
     ) -> BOOL;
     pub fn SetSystemTime(lpSystemTime: *const SYSTEMTIME) -> BOOL;
     pub fn SetSystemTimeAdjustment(dwTimeAdjustment: DWORD, bTimeAdjustmentDisabled: BOOL) -> BOOL;
