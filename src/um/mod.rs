@@ -190,6 +190,7 @@ pub mod gl;
 #[cfg(feature = "wincon")] pub mod wincon;
 #[cfg(feature = "wincred")] pub mod wincred;
 #[cfg(feature = "wincrypt")] pub mod wincrypt;
+#[cfg(feature = "windowsceip")] pub mod windowsceip;
 #[cfg(feature = "winevt")] pub mod winevt;
 #[cfg(feature = "wingdi")] pub mod wingdi;
 #[cfg(feature = "winhttp")] pub mod winhttp;
