@@ -171,7 +171,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("lmuse", &["lmcons", "minwindef", "winnt"], &["netapi32"]),
     ("lmwksta", &["lmcons", "minwindef", "winnt"], &["netapi32"]),
     ("lsalookup", &["guiddef", "minwindef", "winnt"], &[]),
-    ("memoryapi", &["basetsd", "minwindef", "winnt"], &[]),
+    ("memoryapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("minschannel", &["guiddef", "minwindef", "wincrypt", "winnt"], &[]),
     ("minwinbase", &["basetsd", "minwindef", "ntstatus", "winnt"], &[]),
     ("mmdeviceapi", &["guiddef", "minwindef", "propidl", "propsys", "unknwnbase", "winnt", "wtypes"], &[]),
