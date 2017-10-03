@@ -9,10 +9,7 @@ extern "system" {
     // pub fn AddLocalAlternateComputerNameW();
     // pub fn AppXGetOSMaxVersionTested();
     // pub fn BaseSetLastNTError();
-    pub fn CallNamedPipeW(
-        lpNamedPipeName: LPCWSTR, lpInBuffer: LPVOID, nInBufferSize: DWORD, lpOutBuffer: LPVOID,
-        nOutBufferSize: DWORD, lpBytesRead: LPDWORD, nTimeOut: DWORD,
-    ) -> BOOL;
+    pub fn CallbackMayRunLong(pci: PTP_CALLBACK_INSTANCE) -> BOOL;
     pub fn CalloutOnFiberStack(
         lpFiber: PVOID, lpStartAddress: PFIBER_CALLOUT_ROUTINE, lpParameter: PVOID,
     ) -> PVOID;
@@ -31,7 +28,10 @@ extern "system" {
     pub fn CompareStringOrdinal(
         lpString1: LPCWCH, cchCount1: c_int, lpString2: LPCWCH, cchCount2: c_int, bIgnoreCase: BOOL,
     ) -> c_int;
-    pub fn ConnectNamedPipe(hNamedPipe: HANDLE, lpOverlapped: LPOVERLAPPED) -> BOOL;
+    pub fn CompareStringW(
+        Locale: LCID, dwCmpFlags: DWORD, lpString1: PCNZWCH, cchCount1: c_int, lpString2: PCNZWCH,
+        cchCount2: c_int,
+    ) -> c_int;
     pub fn ContinueDebugEvent(
         dwProcessId: DWORD, dwThreadId: DWORD, dwContinueStatus: DWORD,
     ) -> BOOL;
@@ -40,15 +40,20 @@ extern "system" {
         FileHandle: HANDLE, ExistingCompletionPort: HANDLE, CompletionKey: ULONG_PTR,
         NumberOfConcurrentThreads: DWORD,
     ) -> HANDLE;
-    pub fn CreateNamedPipeW(
-        lpName: LPCWSTR, dwOpenMode: DWORD, dwPipeMode: DWORD, nMaxInstances: DWORD,
-        nOutBufferSize: DWORD, nInBufferSize: DWORD, nDefaultTimeOut: DWORD,
-        lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
-    ) -> HANDLE;
-    pub fn CreatePipe(
-        hReadPipe: PHANDLE, hWritePipe: PHANDLE, lpPipeAttributes: LPSECURITY_ATTRIBUTES,
-        nSize: DWORD,
-    ) -> BOOL;
+    pub fn CreateThreadpool(reserved: PVOID) -> PTP_POOL;
+    pub fn CreateThreadpoolCleanupGroup() -> PTP_CLEANUP_GROUP;
+    pub fn CreateThreadpoolIo(
+        fl: HANDLE, pfnio: PTP_WIN32_IO_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
+    ) -> PTP_IO;
+    pub fn CreateThreadpoolTimer(
+        pfnti: PTP_TIMER_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
+    ) -> PTP_TIMER;
+    pub fn CreateThreadpoolWait(
+        pfnwa: PTP_WAIT_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
+    ) -> PTP_WAIT;
+    pub fn CreateThreadpoolWork(
+        pfnwk: PTP_WORK_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
+    ) -> PTP_WORK;
     pub fn CreateTimerQueue() -> HANDLE;
     pub fn CreateTimerQueueTimer(
         phNewTimer: PHANDLE, TimerQueue: HANDLE, Callback: WAITORTIMERCALLBACK, Parameter: PVOID,
@@ -69,7 +74,6 @@ extern "system" {
         lpOutBuffer: LPVOID, nOutBufferSize: DWORD, lpBytesReturned: LPDWORD,
         lpOverlapped: LPOVERLAPPED,
     ) -> BOOL;
-    pub fn DisconnectNamedPipe(hNamedPipe: HANDLE) -> BOOL;
     // pub fn DosPathToSessionPathW();
     // pub fn EnumerateLocalComputerNamesA();
     // pub fn EnumerateLocalComputerNamesW();
@@ -135,18 +139,6 @@ extern "system" {
         ReturnedLength: PDWORD,
     ) -> BOOL;
     // pub fn GetNamedPipeAttribute();
-    pub fn GetNamedPipeClientComputerNameW(
-        Pipe: HANDLE, ClientComputerName: LPWSTR, ClientComputerNameLength: ULONG,
-    ) -> BOOL;
-    pub fn GetNamedPipeHandleStateW(
-        hNamedPipe: HANDLE, lpState: LPDWORD, lpCurInstances: LPDWORD,
-        lpMaxCollectionCount: LPDWORD, lpCollectDataTimeout: LPDWORD, lpUserName: LPWSTR,
-        nMaxUserNameSize: DWORD,
-    ) -> BOOL;
-    pub fn GetNamedPipeInfo(
-        hNamedPipe: HANDLE, lpFlags: LPDWORD, lpOutBufferSize: LPDWORD, lpInBufferSize: LPDWORD,
-        lpMaxInstances: LPDWORD,
-    ) -> BOOL;
     pub fn GetNumaAvailableMemoryNodeEx(Node: USHORT, AvailableBytes: PULONGLONG) -> BOOL;
     pub fn GetNumaHighestNodeNumber(HighestNodeNumber: PULONG) -> BOOL;
     pub fn GetNumaProximityNodeEx(ProximityId: ULONG, NodeNumber: PUSHORT) -> BOOL;
@@ -369,10 +361,6 @@ extern "system" {
     // pub fn PackageIdFromFullName();
     // pub fn PackageNameAndPublisherIdFromFamilyName();
     // pub fn ParseApplicationUserModelId();
-    pub fn PeekNamedPipe(
-        hNamedPipe: HANDLE, lpBuffer: LPVOID, nBufferSize: DWORD, lpBytesRead: LPDWORD,
-        lpTotalBytesAvail: LPDWORD, lpBytesLeftThisMessage: LPDWORD,
-    ) -> BOOL;
     pub fn PostQueuedCompletionStatus(
         CompletionPort: HANDLE, dwNumberOfBytesTransferred: DWORD, dwCompletionKey: ULONG_PTR,
         lpOverlapped: LPOVERLAPPED,
@@ -471,9 +459,8 @@ extern "system" {
         Pipe: HANDLE, AttributeType: PIPE_ATTRIBUTE_TYPE, AttributeName: PSTR,
         AttributeValue: PVOID, AttributeValueLength: SIZE_T,
     ) -> BOOL;
-    pub fn SetNamedPipeHandleState(
-        hNamedPipe: HANDLE, lpMode: LPDWORD, lpMaxCollectionCount: LPDWORD,
-        lpCollectDataTimeout: LPDWORD,
+    pub fn SetProcessPreferredUILanguages(
+        dwFlags: DWORD, pwszLanguagesBuffer: PCZZWSTR, pulNumLanguages: PULONG,
     ) -> BOOL;
     pub fn SetStdHandle(nStdHandle: DWORD, hHandle: HANDLE) -> BOOL;
     pub fn SetStdHandleEx(nStdHandle: DWORD, hHandle: HANDLE, phPrevValue: PHANDLE) -> BOOL;
@@ -501,9 +488,8 @@ extern "system" {
     pub fn Toolhelp32ReadProcessMemory(th32ProcessID: DWORD, lpBaseAddress: LPCVOID,
         lpBuffer: LPVOID, cbRead: SIZE_T, lpNumberOfBytesRead: *mut SIZE_T
     ) -> BOOL;
-    pub fn TransactNamedPipe(
-        hNamedPipe: HANDLE, lpInBuffer: LPVOID, nInBufferSize: DWORD, lpOutBuffer: LPVOID,
-        nOutBufferSize: DWORD, lpBytesRead: LPDWORD, lpOverlapped: LPOVERLAPPED,
+    pub fn TrySubmitThreadpoolCallback(
+        pfns: PTP_SIMPLE_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
     ) -> BOOL;
     pub fn TzSpecificLocalTimeToSystemTime(
         lpTimeZoneInformation: *const TIME_ZONE_INFORMATION, lpLocalTime: *const SYSTEMTIME,
@@ -522,7 +508,10 @@ extern "system" {
         nCount: DWORD, lpHandles: *const HANDLE, bWaitAll: BOOL, dwMilliseconds: DWORD,
         bAlertable: BOOL,
     ) -> DWORD;
-    pub fn WaitNamedPipeW(lpNamedPipeName: LPCWSTR, nTimeOut: DWORD) -> BOOL;
+    pub fn WaitForThreadpoolIoCallbacks(pio: PTP_IO, fCancelPendingCallbacks: BOOL);
+    pub fn WaitForThreadpoolTimerCallbacks(pti: PTP_TIMER, fCancelPendingCallbacks: BOOL);
+    pub fn WaitForThreadpoolWaitCallbacks(pwa: PTP_WAIT, fCancelPendingCallbacks: BOOL);
+    pub fn WaitForThreadpoolWorkCallbacks(pwk: PTP_WORK, fCancelPendingCallbacks: BOOL);
     // pub fn WerpInitiateRemoteRecovery();
     pub fn WideCharToMultiByte(
         CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWSTR, cchWideChar: c_int,
