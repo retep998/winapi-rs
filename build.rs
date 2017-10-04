@@ -55,6 +55,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("rpcdce", &["guiddef", "minwindef", "rpc"], &[]),
     ("rpcndr", &[], &[]),
     ("sspi", &["basetsd", "guiddef", "minwindef", "subauth", "wincred", "winnt"], &["credui", "secur32"]),
+    ("stralign", &["vcruntime", "winnt"], &["kernel32"]),
     ("usb", &["minwindef", "usbspec", "winnt"], &[]),
     ("usbiodef", &["guiddef", "minwindef", "winioctl", "winnt"], &[]),
     ("usbspec", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),

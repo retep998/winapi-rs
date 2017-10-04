@@ -343,20 +343,4 @@ extern "system" {
     pub fn lstrcpy(lpString1: LPSTR, lpString2: LPCSTR) -> LPSTR;
     pub fn lstrcpyn(lpString1: LPSTR, lpString2: LPCSTR, iMaxLength: c_int) -> LPSTR;
     pub fn lstrlen(lpString: LPCSTR) -> c_int;
-    #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn uaw_lstrcmpW(String1: PCUWSTR, String2: PCUWSTR) -> c_int;
-    #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn uaw_lstrcmpiW(String1: PCUWSTR, String2: PCUWSTR) -> c_int;
-    #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn uaw_lstrlenW(String: LPCUWSTR) -> c_int;
-    #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn uaw_wcschr(String: PCUWSTR, Character: WCHAR) -> PUWSTR;
-    #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn uaw_wcscpy(Destination: PUWSTR, Source: PCUWSTR) -> PUWSTR;
-    #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn uaw_wcsicmp(String1: PCUWSTR, String2: PCUWSTR) -> c_int;
-    #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn uaw_wcslen(String: PCUWSTR) -> size_t;
-    #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-    pub fn uaw_wcsrchr(String: PCUWSTR, Character: WCHAR) -> PUWSTR;
 }
