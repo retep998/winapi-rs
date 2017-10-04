@@ -107,11 +107,6 @@ extern "system" {
         lpszVolumeName: LPCWSTR, lpszVolumePathNames: LPWCH, cchBufferLength: DWORD,
         lpcchReturnLength: PDWORD,
     ) -> BOOL;
-
-    pub fn GetWriteWatch(
-        dwFlags: DWORD, lpBaseAddress: PVOID, dwRegionSize: SIZE_T, lpAddresses: *mut PVOID,
-        lpdwCount: *mut ULONG_PTR, lpdwGranularity: LPDWORD,
-    ) -> UINT;
     pub fn HeapAlloc(hHeap: HANDLE, dwFlags: DWORD, dwBytes: SIZE_T) -> LPVOID;
     pub fn HeapCompact(hHeap: HANDLE, dwFlags: DWORD) -> SIZE_T;
     pub fn HeapCreate(flOptions: DWORD, dwInitialSize: SIZE_T, dwMaximumSize: SIZE_T) -> HANDLE;
@@ -252,7 +247,6 @@ extern "system" {
     pub fn ReleaseSemaphoreWhenCallbackReturns(
         pci: PTP_CALLBACK_INSTANCE, sem: HANDLE, crel: DWORD,
     );
-    pub fn ResetWriteWatch(lpBaseAddress: LPVOID, dwRegionSize: SIZE_T) -> UINT;
     pub fn RtlCopyMemory(Destination: PVOID, Source: *const VOID, Length: SIZE_T);
     pub fn SetNamedPipeAttribute(
         Pipe: HANDLE, AttributeType: PIPE_ATTRIBUTE_TYPE, AttributeName: PSTR,
