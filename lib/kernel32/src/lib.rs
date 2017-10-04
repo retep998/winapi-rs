@@ -42,7 +42,6 @@ extern "system" {
         phNewTimer: PHANDLE, TimerQueue: HANDLE, Callback: WAITORTIMERCALLBACK, Parameter: PVOID,
         DueTime: DWORD, Period: DWORD, Flags: ULONG,
     ) -> BOOL;
-    pub fn CreateToolhelp32Snapshot(dwFlags: DWORD, th32ProcessID: DWORD) -> HANDLE;
     pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
     pub fn DeleteTimerQueueEx(TimerQueue: HANDLE, CompletionEvent: HANDLE) -> BOOL;
     pub fn DeleteTimerQueueTimer(
@@ -120,11 +119,6 @@ extern "system" {
         dwFlags: DWORD, lpBaseAddress: PVOID, dwRegionSize: SIZE_T, lpAddresses: *mut PVOID,
         lpdwCount: *mut ULONG_PTR, lpdwGranularity: LPDWORD,
     ) -> UINT;
-
-    pub fn Heap32First(lphe: LPHEAPENTRY32, th32ProcessID: DWORD, th32HeapID: ULONG_PTR) -> BOOL;
-    pub fn Heap32ListFirst(hSnapshot: HANDLE, lphl: LPHEAPLIST32) -> BOOL;
-    pub fn Heap32ListNext(hSnapshot: HANDLE, lphl: LPHEAPLIST32) -> BOOL;
-    pub fn Heap32Next(lphe: LPHEAPENTRY32) -> BOOL;
     pub fn HeapAlloc(hHeap: HANDLE, dwFlags: DWORD, dwBytes: SIZE_T) -> LPVOID;
     pub fn HeapCompact(hHeap: HANDLE, dwFlags: DWORD) -> SIZE_T;
     pub fn HeapCreate(flOptions: DWORD, dwInitialSize: SIZE_T, dwMaximumSize: SIZE_T) -> HANDLE;
@@ -241,14 +235,6 @@ extern "system" {
         pci: PTP_CALLBACK_INSTANCE, pcs: PCRITICAL_SECTION,
     );
     pub fn LocalFlags(hMem: HLOCAL) -> UINT;
-    pub fn Module32First(hSnapshot: HANDLE, lpme: LPMODULEENTRY32) -> BOOL;
-    pub fn Module32FirstW(hSnapshot: HANDLE, lpme: LPMODULEENTRY32W) -> BOOL;
-    pub fn Module32Next(hSnapshot: HANDLE, lpme: LPMODULEENTRY32) -> BOOL;
-    pub fn Module32NextW(hSnapshot: HANDLE, lpme: LPMODULEENTRY32W) -> BOOL;
-    pub fn Process32First(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
-    pub fn Process32FirstW(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32W) -> BOOL;
-    pub fn Process32Next(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
-    pub fn Process32NextW(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32W) -> BOOL;
     pub fn QueryDepthSList(ListHead: PSLIST_HEADER) -> USHORT;
     pub fn QueryIdleProcessorCycleTime(
         BufferLength: PULONG, ProcessorIdleCycleTime: PULONG64,
@@ -322,11 +308,6 @@ extern "system" {
     pub fn SystemTimeToTzSpecificLocalTimeEx(
         lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
         lpUniversalTime: *const SYSTEMTIME, lpLocalTime: LPSYSTEMTIME,
-    ) -> BOOL;
-    pub fn Thread32First(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
-    pub fn Thread32Next(hSnapshot: HANDLE, lpte: LPTHREADENTRY32) -> BOOL;
-    pub fn Toolhelp32ReadProcessMemory(th32ProcessID: DWORD, lpBaseAddress: LPCVOID,
-        lpBuffer: LPVOID, cbRead: SIZE_T, lpNumberOfBytesRead: *mut SIZE_T
     ) -> BOOL;
     pub fn TrySubmitThreadpoolCallback(
         pfns: PTP_SIMPLE_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,

@@ -239,7 +239,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("threadpoolapiset", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("timeapi", &["minwindef", "mmsystem"], &["winmm"]),
     ("timezoneapi", &["minwinbase", "minwindef", "winnt"], &[]),
-    ("tlhelp32", &["basetsd", "minwindef", "winnt"], &[]),
+    ("tlhelp32", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("unknwnbase", &["guiddef", "minwindef", "winnt"], &[]),
     ("urlhist", &["docobj", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
     ("urlmon", &["minwindef", "unknwnbase", "winnt"], &[]),
