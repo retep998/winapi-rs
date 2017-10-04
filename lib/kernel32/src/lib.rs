@@ -47,9 +47,6 @@ extern "system" {
     pub fn DeleteTimerQueueTimer(
         TimerQueue: HANDLE, Timer: HANDLE, CompletionEvent: HANDLE,
     ) -> BOOL;
-    pub fn FileTimeToSystemTime(
-        lpFileTime: *const FILETIME, lpSystemTime: LPSYSTEMTIME,
-    ) -> BOOL;
     pub fn FindClose(hFindFile: HANDLE) -> BOOL;
     pub fn FindNLSString(
         Locale: LCID, dwFindNLSStringFlags: DWORD, lpStringSource: LPCWSTR, cchSource: c_int,
@@ -106,10 +103,6 @@ extern "system" {
         Locale: LCID, dwFlags: DWORD, lpTime: *const SYSTEMTIME, lpFormat: LPCWSTR,
         lpTimeStr: LPWSTR, cchTime: c_int,
     ) -> c_int;
-    pub fn GetTimeZoneInformation(lpTimeZoneInformation: LPTIME_ZONE_INFORMATION) -> DWORD;
-    pub fn GetTimeZoneInformationForYear(
-        wYear: USHORT, pdtzi: PDYNAMIC_TIME_ZONE_INFORMATION, ptzi: LPTIME_ZONE_INFORMATION,
-    ) -> BOOL;
     pub fn GetVolumePathNamesForVolumeNameW(
         lpszVolumeName: LPCWSTR, lpszVolumePathNames: LPWCH, cchBufferLength: DWORD,
         lpcchReturnLength: PDWORD,
@@ -299,26 +292,25 @@ extern "system" {
         hThread: HANDLE, GroupAffinity: *const GROUP_AFFINITY,
         PreviousGroupAffinity: PGROUP_AFFINITY,
     ) -> BOOL;
-    pub fn SetTimeZoneInformation(lpTimeZoneInformation: *const TIME_ZONE_INFORMATION) -> BOOL;
-    pub fn SystemTimeToFileTime(lpSystemTime: *const SYSTEMTIME, lpFileTime: LPFILETIME) -> BOOL;
-    pub fn SystemTimeToTzSpecificLocalTime(
-        lpTimeZoneInformation: *const TIME_ZONE_INFORMATION, lpUniversalTime: *const SYSTEMTIME,
-        lpLocalTime: LPSYSTEMTIME,
+    pub fn SetThreadpoolStackInformation(
+        ptpp: PTP_POOL, ptpsi: PTP_POOL_STACK_INFORMATION,
     ) -> BOOL;
-    pub fn SystemTimeToTzSpecificLocalTimeEx(
-        lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
-        lpUniversalTime: *const SYSTEMTIME, lpLocalTime: LPSYSTEMTIME,
+    pub fn SetThreadpoolThreadMaximum(ptpp: PTP_POOL, cthrdMost: DWORD);
+    pub fn SetThreadpoolThreadMinimum(ptpp: PTP_POOL, cthrdMic: DWORD) -> BOOL;
+    pub fn SetThreadpoolTimer(
+        pti: PTP_TIMER, pftDueTime: PFILETIME, msPeriod: DWORD, msWindowLength: DWORD,
+    );
+    pub fn SetThreadpoolTimerEx(
+        pti: PTP_TIMER, pftDueTime: PFILETIME, msPeriod: DWORD, msWindowLength: DWORD,
     ) -> BOOL;
+    pub fn SetThreadpoolWait(pwa: PTP_WAIT, h: HANDLE, pftTimeout: PFILETIME);
+    pub fn SetThreadpoolWaitEx(
+        pwa: PTP_WAIT, h: HANDLE, pftTimeout: PFILETIME, Reserved: PVOID,
+    ) -> BOOL;
+    pub fn StartThreadpoolIo(pio: PTP_IO);
+    pub fn SubmitThreadpoolWork(pwk: PTP_WORK);
     pub fn TrySubmitThreadpoolCallback(
         pfns: PTP_SIMPLE_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
-    ) -> BOOL;
-    pub fn TzSpecificLocalTimeToSystemTime(
-        lpTimeZoneInformation: *const TIME_ZONE_INFORMATION, lpLocalTime: *const SYSTEMTIME,
-        lpUniversalTime: LPSYSTEMTIME,
-    ) -> BOOL;
-    pub fn TzSpecificLocalTimeToSystemTimeEx(
-        lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
-        lpLocalTime: *const SYSTEMTIME, lpUniversalTime: LPSYSTEMTIME,
     ) -> BOOL;
     pub fn UnregisterWaitEx(WaitHandle: HANDLE, CompletionEvent: HANDLE) -> BOOL;
     pub fn VerLanguageNameA(wLang: DWORD, szLang: LPSTR, cchLang: DWORD) -> DWORD;
