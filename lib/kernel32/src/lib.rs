@@ -22,14 +22,6 @@ extern "system" {
     pub fn CloseThreadpoolTimer(pti: PTP_TIMER);
     pub fn CloseThreadpoolWait(pwa: PTP_WAIT);
     pub fn CloseThreadpoolWork(pwk: PTP_WORK);
-    pub fn CompareStringOrdinal(
-        lpString1: LPCWCH, cchCount1: c_int, lpString2: LPCWCH, cchCount2: c_int, bIgnoreCase: BOOL,
-    ) -> c_int;
-    pub fn CompareStringW(
-        Locale: LCID, dwCmpFlags: DWORD, lpString1: PCNZWCH, cchCount1: c_int, lpString2: PCNZWCH,
-        cchCount2: c_int,
-    ) -> c_int;
-    pub fn ConvertDefaultLocale(Locale: LCID) -> LCID;
     pub fn ConvertFiberToThread() -> BOOL;
     pub fn CreateThreadpool(reserved: PVOID) -> PTP_POOL;
     pub fn CreateThreadpoolCleanupGroup() -> PTP_CLEANUP_GROUP;
@@ -73,9 +65,6 @@ extern "system" {
     pub fn FlsFree(dwFlsIndex: DWORD) -> BOOL;
     pub fn FlsGetValue(dwFlsIndex: DWORD) -> PVOID;
     pub fn FlsSetValue(dwFlsIndex: DWORD, lpFlsData: PVOID) -> BOOL;
-    pub fn FoldStringW(
-        dwMapFlags: DWORD, lpSrcStr: LPCWCH, cchSrc: c_int, lpDestStr: LPWSTR, cchDest: c_int,
-    ) -> c_int;
     pub fn FreeLibraryWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, module: HMODULE);
     pub fn GetAppContainerNamedObjectPath(
         Token: HANDLE, AppContainerSid: PSID, ObjectPathLength: ULONG, ObjectPath: LPWSTR,
@@ -93,16 +82,6 @@ extern "system" {
         dwOSMajorVersion: DWORD, dwOSMinorVersion: DWORD, dwSpMajorVersion: DWORD,
         dwSpMinorVersion: DWORD, pdwReturnedProductType: PDWORD,
     ) -> BOOL;
-    pub fn GetStringTypeExW(
-        Locale: LCID, dwInfoType: DWORD, lpSrcStr: LPCWCH, cchSrc: c_int, lpCharType: LPWORD,
-    ) -> BOOL;
-    pub fn GetStringTypeW(
-        dwInfoType: DWORD, lpSrcStr: LPCWCH, cchSrc: c_int, lpCharType: LPWORD,
-    ) -> BOOL;
-    pub fn GetSystemDefaultLCID() -> LCID;
-    pub fn GetSystemDefaultLangID() -> LANGID;
-    pub fn GetSystemDefaultLocaleName(lpLocaleName: LPWSTR, cchLocaleName: c_int) -> c_int;
-    pub fn GetSystemDefaultUILanguage() -> LANGID;
     pub fn GetSystemDirectoryA(lpBuffer: LPSTR, uSize: UINT) -> UINT;
     pub fn GetSystemDirectoryW(lpBuffer: LPWSTR, uSize: UINT) -> UINT;
     pub fn GetSystemFirmwareTable(
@@ -266,10 +245,6 @@ extern "system" {
     pub fn Module32FirstW(hSnapshot: HANDLE, lpme: LPMODULEENTRY32W) -> BOOL;
     pub fn Module32Next(hSnapshot: HANDLE, lpme: LPMODULEENTRY32) -> BOOL;
     pub fn Module32NextW(hSnapshot: HANDLE, lpme: LPMODULEENTRY32W) -> BOOL;
-    pub fn MultiByteToWideChar(
-        CodePage: UINT, dwFlags: DWORD, lpMultiByteStr: LPCSTR, cbMultiByte: c_int,
-        lpWideCharStr: LPWSTR, cchWideChar: c_int,
-    ) -> c_int;
     pub fn Process32First(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
     pub fn Process32FirstW(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32W) -> BOOL;
     pub fn Process32Next(hSnapshot: HANDLE, lppe: LPPROCESSENTRY32) -> BOOL;
@@ -379,10 +354,6 @@ extern "system" {
     pub fn WaitForThreadpoolTimerCallbacks(pti: PTP_TIMER, fCancelPendingCallbacks: BOOL);
     pub fn WaitForThreadpoolWaitCallbacks(pwa: PTP_WAIT, fCancelPendingCallbacks: BOOL);
     pub fn WaitForThreadpoolWorkCallbacks(pwk: PTP_WORK, fCancelPendingCallbacks: BOOL);
-    pub fn WideCharToMultiByte(
-        CodePage: UINT, dwFlags: DWORD, lpWideCharStr: LPCWSTR, cchWideChar: c_int,
-        lpMultiByteStr: LPSTR, cbMultiByte: c_int, lpDefaultChar: LPCSTR, lpUsedDefaultChar: LPBOOL,
-    ) -> c_int;
     pub fn Wow64DisableWow64FsRedirection(OldValue: *mut PVOID) -> BOOL;
     pub fn Wow64RevertWow64FsRedirection(OlValue: PVOID) -> BOOL;
     pub fn lstrcat(lpString1: LPSTR, lpString2: LPCSTR) -> LPSTR;

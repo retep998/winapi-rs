@@ -230,6 +230,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("sqlext", &["sql", "sqltypes"], &[]),
     ("sqltypes", &["basetsd", "guiddef", "windef"], &[]),
     ("sqlucode", &["sqltypes"], &["odbc32"]),
+    ("stringapiset", &["minwindef", "winnls", "winnt"], &["kernel32"]),
     ("strmif", &["winnt"], &[]),
     ("subauth", &["minwindef", "winnt"], &[]),
     ("synchapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32", "synchronization"]),
