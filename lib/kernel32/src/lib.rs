@@ -279,12 +279,6 @@ extern "system" {
         pfns: PTP_SIMPLE_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
     ) -> BOOL;
     pub fn UnregisterWaitEx(WaitHandle: HANDLE, CompletionEvent: HANDLE) -> BOOL;
-    pub fn VerLanguageNameA(wLang: DWORD, szLang: LPSTR, cchLang: DWORD) -> DWORD;
-    pub fn VerLanguageNameW(wLang: DWORD, szLang: LPWSTR, cchLang: DWORD) -> DWORD;
-    pub fn VerifyScripts(
-        dwFlags: DWORD, lpLocaleScripts: LPCWSTR, cchLocaleScripts: c_int, lpTestScripts: LPCWSTR,
-        cchTestScripts: c_int,
-    ) -> BOOL;
     pub fn WaitForMultipleObjectsEx(
         nCount: DWORD, lpHandles: *const HANDLE, bWaitAll: BOOL, dwMilliseconds: DWORD,
         bAlertable: BOOL,
