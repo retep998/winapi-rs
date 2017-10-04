@@ -253,35 +253,7 @@ extern "system" {
         pci: PTP_CALLBACK_INSTANCE, sem: HANDLE, crel: DWORD,
     );
     pub fn ResetWriteWatch(lpBaseAddress: LPVOID, dwRegionSize: SIZE_T) -> UINT;
-    pub fn ResolveLocaleName(
-        lpNameToResolve: LPCWSTR, lpLocaleName: LPWSTR, cchLocaleName: c_int,
-    ) -> c_int;
-    #[cfg(target_arch = "arm")]
-    pub fn RtlAddFunctionTable(
-        FunctionTable: PRUNTIME_FUNCTION, EntryCount: DWORD, BaseAddress: DWORD,
-    ) -> BOOLEAN;
     pub fn RtlCopyMemory(Destination: PVOID, Source: *const VOID, Length: SIZE_T);
-
-    #[cfg(target_arch = "arm")]
-    pub fn RtlInstallFunctionTableCallback(
-        TableIdentifier: DWORD, BaseAddress: DWORD, Length: DWORD,
-        Callback: PGET_RUNTIME_FUNCTION_CALLBACK, Context: PVOID, OutOfProcessCallbackDll: PCWSTR,
-    ) -> BOOLEAN;
-
-    #[cfg(target_arch = "arm")]
-    pub fn RtlLookupFunctionEntry(
-        ControlPc: ULONG_PTR, ImageBase: PDWORD, HistoryTable: PUNWIND_HISTORY_TABLE,
-    ) -> PRUNTIME_FUNCTION;
-
-
-    #[cfg(any(target_arch = "arm", target_arch = "x86_64"))]
-
-    #[cfg(target_arch = "arm")]
-    pub fn RtlVirtualUnwind(
-        HandlerType: DWORD, ImageBase: DWORD, ControlPc: DWORD, FunctionEntry: PRUNTIME_FUNCTION,
-        ContextRecord: PCONTEXT, HandlerData: *mut PVOID, EstablisherFrame: PDWORD,
-        ContextPointers: PKNONVOLATILE_CONTEXT_POINTERS,
-    ) -> PEXCEPTION_ROUTINE;
     pub fn SetNamedPipeAttribute(
         Pipe: HANDLE, AttributeType: PIPE_ATTRIBUTE_TYPE, AttributeName: PSTR,
         AttributeValue: PVOID, AttributeValueLength: SIZE_T,
