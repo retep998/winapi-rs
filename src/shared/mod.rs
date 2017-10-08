@@ -25,6 +25,9 @@
 #[cfg(feature = "dxgi1_5")] pub mod dxgi1_5;
 #[cfg(feature = "dxgiformat")] pub mod dxgiformat;
 #[cfg(feature = "dxgitype")] pub mod dxgitype;
+#[cfg(feature = "evntcons")] pub mod evntcons;
+#[cfg(feature = "evntprov")] pub mod evntprov;
+#[cfg(feature = "evntrace")] pub mod evntrace;
 pub mod guiddef;
 #[cfg(feature = "hidclass")] pub mod hidclass;
 #[cfg(feature = "hidpi")] pub mod hidpi;
@@ -55,6 +58,7 @@ pub mod guiddef;
 #[cfg(feature = "windowsx")] pub mod windowsx;
 #[cfg(feature = "winerror")] pub mod winerror;
 #[cfg(feature = "winusbio")] pub mod winusbio;
+#[cfg(feature = "wmistr")] pub mod wmistr;
 #[cfg(feature = "wnnc")] pub mod wnnc;
 #[cfg(feature = "ws2def")] pub mod ws2def;
 #[cfg(feature = "ws2ipdef")] pub mod ws2ipdef;
