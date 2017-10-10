@@ -87,6 +87,17 @@ pub type wireBSTR = *mut FLAGGED_WORD_BLOB;
 pub type BSTR = *mut OLECHAR;
 pub type LPBSTR = *mut BSTR;
 pub type VARIANT_BOOL = c_short;
+STRUCT!{struct BSTRBLOB {
+    cbSize: ULONG,
+    pData: *mut BYTE,
+}}
+pub const VARIANT_TRUE: VARIANT_BOOL = -1;
+pub const VARIANT_FALSE: VARIANT_BOOL = 0;
+STRUCT!{struct CLIPDATA {
+    cbSize: ULONG,
+    ulClipFmt: LONG,
+    pClipData: BYTE,
+}}
 UNION!{union __MIDL_IWinTypes_0001 {
     [usize; 1],
     dwValue dwValue_mut: DWORD,
