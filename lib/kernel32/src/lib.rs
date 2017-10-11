@@ -5,11 +5,6 @@
 extern crate winapi;
 use winapi::*;
 extern "system" {
-    pub fn CallbackMayRunLong(pci: PTP_CALLBACK_INSTANCE) -> BOOL;
-    pub fn CalloutOnFiberStack(
-        lpFiber: PVOID, lpStartAddress: PFIBER_CALLOUT_ROUTINE, lpParameter: PVOID,
-    ) -> PVOID;
-    pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
     #[cfg(target_arch = "x86")]
     pub fn InterlockedCompareExchange64(
         Destination: *mut LONG64, ExChange: LONG64, Comperand: LONG64,
@@ -82,19 +77,7 @@ extern "system" {
     pub fn K32InitializeProcessForWsWatch(hProcess: HANDLE) -> BOOL;
     pub fn K32QueryWorkingSet(hProcess: HANDLE, pv: PVOID, cb: DWORD) -> BOOL;
     pub fn K32QueryWorkingSetEx(hProcess: HANDLE, pv: PVOID, cb: DWORD) -> BOOL;
-    pub fn RegisterWaitForSingleObjectEx(
-        hObject: HANDLE, Callback: WAITORTIMERCALLBACK, Context: PVOID, dwMilliseconds: ULONG,
-        dwFlags: ULONG,
-    ) -> HANDLE;
-    pub fn ReleaseMutexWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, mutex: HANDLE);
-    pub fn ReleaseSemaphoreWhenCallbackReturns(
-        pci: PTP_CALLBACK_INSTANCE, sem: HANDLE, crel: DWORD,
-    );
     pub fn RtlCopyMemory(Destination: PVOID, Source: *const VOID, Length: SIZE_T);
-    pub fn SetNamedPipeAttribute(
-        Pipe: HANDLE, AttributeType: PIPE_ATTRIBUTE_TYPE, AttributeName: PSTR,
-        AttributeValue: PVOID, AttributeValueLength: SIZE_T,
-    ) -> BOOL;
     pub fn lstrcat(lpString1: LPSTR, lpString2: LPCSTR) -> LPSTR;
     pub fn lstrcmp(lpString1: LPCSTR, lpString2: LPCSTR) -> c_int;
     pub fn lstrcmpi(lpString1: LPCSTR, lpString2: LPCSTR) -> c_int;
