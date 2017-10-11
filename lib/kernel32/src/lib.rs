@@ -22,7 +22,6 @@ extern "system" {
     pub fn CloseThreadpoolTimer(pti: PTP_TIMER);
     pub fn CloseThreadpoolWait(pwa: PTP_WAIT);
     pub fn CloseThreadpoolWork(pwk: PTP_WORK);
-    pub fn ConvertFiberToThread() -> BOOL;
     pub fn CreateThreadpool(reserved: PVOID) -> PTP_POOL;
     pub fn CreateThreadpoolCleanupGroup() -> PTP_CLEANUP_GROUP;
     pub fn CreateThreadpoolIo(
@@ -216,7 +215,6 @@ extern "system" {
     pub fn LeaveCriticalSectionWhenCallbackReturns(
         pci: PTP_CALLBACK_INSTANCE, pcs: PCRITICAL_SECTION,
     );
-    pub fn LocalFlags(hMem: HLOCAL) -> UINT;
     pub fn QueryDepthSList(ListHead: PSLIST_HEADER) -> USHORT;
     pub fn QueryIdleProcessorCycleTime(
         BufferLength: PULONG, ProcessorIdleCycleTime: PULONG64,

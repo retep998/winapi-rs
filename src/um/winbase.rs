@@ -409,6 +409,9 @@ extern "system" {
     pub fn LocalSize(
         hMem: HLOCAL
     ) -> SIZE_T;
+    pub fn LocalFlags(
+        hMem: HLOCAL,
+    ) -> UINT;
     pub fn LocalFree(
         hMem: HLOCAL
     ) -> HLOCAL;
@@ -482,6 +485,7 @@ extern "system" {
     pub fn DeleteFiber(
         lpFiber: LPVOID
     );
+    pub fn ConvertFiberToThread() -> BOOL;
     pub fn CreateFiberEx(
         dwStackCommitSize: SIZE_T,
         dwStackReserveSize: SIZE_T,
