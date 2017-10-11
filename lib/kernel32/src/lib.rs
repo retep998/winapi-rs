@@ -10,21 +10,6 @@ extern "system" {
         lpFiber: PVOID, lpStartAddress: PFIBER_CALLOUT_ROUTINE, lpParameter: PVOID,
     ) -> PVOID;
     pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
-    pub fn FindClose(hFindFile: HANDLE) -> BOOL;
-    pub fn FindNLSString(
-        Locale: LCID, dwFindNLSStringFlags: DWORD, lpStringSource: LPCWSTR, cchSource: c_int,
-        lpStringValue: LPCWSTR, cchValue: c_int, pcchFound: LPINT,
-    ) -> c_int;
-    pub fn FindNLSStringEx(
-        lpLocaleName: LPCWSTR, dwFindNLSStringFlags: DWORD, lpStringSource: LPCWSTR,
-        cchSource: c_int, lpStringValue: LPCWSTR, cchValue: c_int, pcchFound: LPINT,
-        lpVersionInformation: LPNLSVERSIONINFO, lpReserved: LPVOID, sortHandle: LPARAM,
-    ) -> c_int;
-    pub fn FlsAlloc(lpCallback: PFLS_CALLBACK_FUNCTION) -> DWORD;
-    pub fn FlsFree(dwFlsIndex: DWORD) -> BOOL;
-    pub fn FlsGetValue(dwFlsIndex: DWORD) -> PVOID;
-    pub fn FlsSetValue(dwFlsIndex: DWORD, lpFlsData: PVOID) -> BOOL;
-    pub fn FreeLibraryWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, module: HMODULE);
     pub fn GetProcessGroupAffinity(
         hProcess: HANDLE, GroupCount: PUSHORT, GroupArray: PUSHORT,
     ) -> BOOL;
@@ -67,8 +52,6 @@ extern "system" {
         Destination: *mut LONG64, ExChange: LONG64, Comperand: LONG64,
     ) -> LONG64;
     pub fn IsProcessInJob(ProcessHandle: HANDLE, JobHandle: HANDLE, Result: PBOOL) -> BOOL;
-    pub fn IsThreadAFiber() -> BOOL;
-    pub fn IsThreadpoolTimerSet(pti: PTP_TIMER) -> BOOL;
     pub fn K32EmptyWorkingSet(hProcess: HANDLE) -> BOOL;
     pub fn K32EnumDeviceDrivers(lpImageBase: *mut LPVOID, cb: DWORD, lpcbNeeded: LPDWORD) -> BOOL;
     pub fn K32EnumPageFilesA(

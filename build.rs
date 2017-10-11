@@ -146,6 +146,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dxfile", &[], &[]),
     ("dxgidebug", &[], &[]),
     ("errhandlingapi", &["basetsd", "minwindef", "winnt"], &[]),
+    ("fibersapi", &["minwindef", "winnt"], &["kernel32"]),
     ("fileapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("gl-gl", &[], &["opengl32"]),
     ("handleapi", &["minwindef", "winnt"], &["kernel32"]),
