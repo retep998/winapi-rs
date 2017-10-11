@@ -74,10 +74,4 @@ extern "system" {
     pub fn K32QueryWorkingSet(hProcess: HANDLE, pv: PVOID, cb: DWORD) -> BOOL;
     pub fn K32QueryWorkingSetEx(hProcess: HANDLE, pv: PVOID, cb: DWORD) -> BOOL;
     pub fn RtlCopyMemory(Destination: PVOID, Source: *const VOID, Length: SIZE_T);
-    pub fn lstrcat(lpString1: LPSTR, lpString2: LPCSTR) -> LPSTR;
-    pub fn lstrcmp(lpString1: LPCSTR, lpString2: LPCSTR) -> c_int;
-    pub fn lstrcmpi(lpString1: LPCSTR, lpString2: LPCSTR) -> c_int;
-    pub fn lstrcpy(lpString1: LPSTR, lpString2: LPCSTR) -> LPSTR;
-    pub fn lstrcpyn(lpString1: LPSTR, lpString2: LPCSTR, iMaxLength: c_int) -> LPSTR;
-    pub fn lstrlen(lpString: LPCSTR) -> c_int;
 }
