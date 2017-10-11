@@ -120,27 +120,10 @@ extern "system" {
     pub fn HeapUnlock(hHeap: HANDLE) -> BOOL;
     pub fn HeapValidate(hHeap: HANDLE, dwFlags: DWORD, lpMem: LPCVOID) -> BOOL;
     pub fn HeapWalk(hHeap: HANDLE, lpEntry: LPPROCESS_HEAP_ENTRY) -> BOOL;
-    pub fn InitializeSListHead(ListHead: PSLIST_HEADER);
-
     #[cfg(target_arch = "x86")]
     pub fn InterlockedCompareExchange64(
         Destination: *mut LONG64, ExChange: LONG64, Comperand: LONG64,
     ) -> LONG64;
-    pub fn InterlockedFlushSList(ListHead: PSLIST_HEADER) -> PSLIST_ENTRY;
-    pub fn InterlockedPopEntrySList(ListHead: PSLIST_HEADER) -> PSLIST_ENTRY;
-    pub fn InterlockedPushEntrySList(
-        ListHead: PSLIST_HEADER, ListEntry: PSLIST_ENTRY,
-    ) -> PSLIST_ENTRY;
-    pub fn InterlockedPushListSListEx(
-        ListHead: PSLIST_HEADER, List: PSLIST_ENTRY, ListEnd: PSLIST_ENTRY, Count: ULONG,
-    ) -> PSLIST_ENTRY;
-    pub fn IsDBCSLeadByte(TestChar: BYTE) -> BOOL;
-    pub fn IsDBCSLeadByteEx(CodePage: UINT, TestChar: BYTE) -> BOOL;
-    pub fn IsNLSDefinedString(
-        Function: NLS_FUNCTION, dwFlags: DWORD, lpVersionInformation: LPNLSVERSIONINFO,
-        lpString: LPCWSTR, cchStr: INT,
-    ) -> BOOL;
-    pub fn IsNormalizedString(NormForm: NORM_FORM, lpString: LPCWSTR, cwLength: c_int) -> BOOL;
     pub fn IsProcessInJob(ProcessHandle: HANDLE, JobHandle: HANDLE, Result: PBOOL) -> BOOL;
     pub fn IsThreadAFiber() -> BOOL;
     pub fn IsThreadpoolTimerSet(pti: PTP_TIMER) -> BOOL;
@@ -215,7 +198,6 @@ extern "system" {
     pub fn LeaveCriticalSectionWhenCallbackReturns(
         pci: PTP_CALLBACK_INSTANCE, pcs: PCRITICAL_SECTION,
     );
-    pub fn QueryDepthSList(ListHead: PSLIST_HEADER) -> USHORT;
     pub fn QueryIdleProcessorCycleTime(
         BufferLength: PULONG, ProcessorIdleCycleTime: PULONG64,
     ) -> BOOL;

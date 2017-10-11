@@ -87,6 +87,7 @@ pub mod gl;
 #[cfg(feature = "heapapi")] pub mod heapapi;
 #[cfg(feature = "http")] pub mod http;
 #[cfg(feature = "imm")] pub mod imm;
+#[cfg(feature = "interlockedapi")] pub mod interlockedapi;
 #[cfg(feature = "ioapiset")] pub mod ioapiset;
 #[cfg(feature = "jobapi2")] pub mod jobapi2;
 #[cfg(feature = "ktmw32")] pub mod ktmw32;
