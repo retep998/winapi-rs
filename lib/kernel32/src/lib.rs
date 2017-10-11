@@ -12,24 +12,6 @@ extern "system" {
     pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
     pub fn GetNumaHighestNodeNumber(HighestNodeNumber: PULONG) -> BOOL;
     pub fn GetNumaProximityNodeEx(ProximityId: ULONG, NodeNumber: PUSHORT) -> BOOL;
-    pub fn GetProcessGroupAffinity(
-        hProcess: HANDLE, GroupCount: PUSHORT, GroupArray: PUSHORT,
-    ) -> BOOL;
-    pub fn GetProcessorSystemCycleTime(
-        Group: USHORT, Buffer: PSYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION, ReturnedLength: PDWORD,
-    ) -> BOOL;
-    pub fn GetProductInfo(
-        dwOSMajorVersion: DWORD, dwOSMinorVersion: DWORD, dwSpMajorVersion: DWORD,
-        dwSpMinorVersion: DWORD, pdwReturnedProductType: PDWORD,
-    ) -> BOOL;
-    pub fn GetSystemDirectoryA(lpBuffer: LPSTR, uSize: UINT) -> UINT;
-    pub fn GetSystemDirectoryW(lpBuffer: LPWSTR, uSize: UINT) -> UINT;
-    pub fn GetSystemFirmwareTable(
-        FirmwareTableProviderSignature: DWORD, FirmwareTableID: DWORD, pFirmwareTableBuffer: PVOID,
-        BufferSize: DWORD,
-    ) -> UINT;
-    pub fn GetSystemInfo(lpSystemInfo: LPSYSTEM_INFO);
-    pub fn GetThreadGroupAffinity(hThread: HANDLE, GroupAffinity: PGROUP_AFFINITY) -> BOOL;
     pub fn GetVolumePathNamesForVolumeNameW(
         lpszVolumeName: LPCWSTR, lpszVolumePathNames: LPWCH, cchBufferLength: DWORD,
         lpcchReturnLength: PDWORD,
@@ -122,12 +104,6 @@ extern "system" {
     pub fn SetNamedPipeAttribute(
         Pipe: HANDLE, AttributeType: PIPE_ATTRIBUTE_TYPE, AttributeName: PSTR,
         AttributeValue: PVOID, AttributeValueLength: SIZE_T,
-    ) -> BOOL;
-    pub fn SetSystemTime(lpSystemTime: *const SYSTEMTIME) -> BOOL;
-    pub fn SetSystemTimeAdjustment(dwTimeAdjustment: DWORD, bTimeAdjustmentDisabled: BOOL) -> BOOL;
-    pub fn SetThreadGroupAffinity(
-        hThread: HANDLE, GroupAffinity: *const GROUP_AFFINITY,
-        PreviousGroupAffinity: PGROUP_AFFINITY,
     ) -> BOOL;
     pub fn WaitForMultipleObjectsEx(
         nCount: DWORD, lpHandles: *const HANDLE, bWaitAll: BOOL, dwMilliseconds: DWORD,
