@@ -10,10 +10,6 @@ extern "system" {
         lpFiber: PVOID, lpStartAddress: PFIBER_CALLOUT_ROUTINE, lpParameter: PVOID,
     ) -> PVOID;
     pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
-    pub fn GetVolumePathNamesForVolumeNameW(
-        lpszVolumeName: LPCWSTR, lpszVolumePathNames: LPWCH, cchBufferLength: DWORD,
-        lpcchReturnLength: PDWORD,
-    ) -> BOOL;
     #[cfg(target_arch = "x86")]
     pub fn InterlockedCompareExchange64(
         Destination: *mut LONG64, ExChange: LONG64, Comperand: LONG64,
