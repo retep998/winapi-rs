@@ -89,7 +89,6 @@ extern "system" {
     pub fn K32InitializeProcessForWsWatch(hProcess: HANDLE) -> BOOL;
     pub fn K32QueryWorkingSet(hProcess: HANDLE, pv: PVOID, cb: DWORD) -> BOOL;
     pub fn K32QueryWorkingSetEx(hProcess: HANDLE, pv: PVOID, cb: DWORD) -> BOOL;
-    pub fn RegisterApplicationRestart(pwzCommandline: PCWSTR, dwFlags: DWORD) -> HRESULT;
     pub fn RegisterWaitForSingleObjectEx(
         hObject: HANDLE, Callback: WAITORTIMERCALLBACK, Context: PVOID, dwMilliseconds: ULONG,
         dwFlags: ULONG,

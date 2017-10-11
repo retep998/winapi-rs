@@ -2570,6 +2570,10 @@ extern "system" {
         dwFlags: DWORD,
     ) -> HRESULT;
     pub fn UnregisterApplicationRecoveryCallback() -> HRESULT;
+    pub fn RegisterApplicationRestart(
+        pwzCommandline: PCWSTR,
+        dwFlags: DWORD,
+    ) -> HRESULT;
     pub fn UnregisterApplicationRestart() -> HRESULT;
     pub fn GetApplicationRecoveryCallback(
         hProcess: HANDLE,
