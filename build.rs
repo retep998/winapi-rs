@@ -149,7 +149,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("fileapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("gl-gl", &[], &["opengl32"]),
     ("handleapi", &["minwindef", "winnt"], &["kernel32"]),
-    ("heapapi", &["basetsd", "minwindef"], &[]),
+    ("heapapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("http", &["guiddef", "minwinbase", "minwindef", "sspi", "winnt", "ws2def"], &["winhttp"]),
     ("imm", &[], &[]),
     ("interlockedapi", &["minwindef", "winnt"], &["kernel32"]),
