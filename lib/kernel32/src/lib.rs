@@ -102,14 +102,6 @@ extern "system" {
         Pipe: HANDLE, AttributeType: PIPE_ATTRIBUTE_TYPE, AttributeName: PSTR,
         AttributeValue: PVOID, AttributeValueLength: SIZE_T,
     ) -> BOOL;
-    pub fn WaitForMultipleObjectsEx(
-        nCount: DWORD, lpHandles: *const HANDLE, bWaitAll: BOOL, dwMilliseconds: DWORD,
-        bAlertable: BOOL,
-    ) -> DWORD;
-    pub fn WaitForThreadpoolIoCallbacks(pio: PTP_IO, fCancelPendingCallbacks: BOOL);
-    pub fn WaitForThreadpoolTimerCallbacks(pti: PTP_TIMER, fCancelPendingCallbacks: BOOL);
-    pub fn WaitForThreadpoolWaitCallbacks(pwa: PTP_WAIT, fCancelPendingCallbacks: BOOL);
-    pub fn WaitForThreadpoolWorkCallbacks(pwk: PTP_WORK, fCancelPendingCallbacks: BOOL);
     pub fn lstrcat(lpString1: LPSTR, lpString2: LPCSTR) -> LPSTR;
     pub fn lstrcmp(lpString1: LPCSTR, lpString2: LPCSTR) -> c_int;
     pub fn lstrcmpi(lpString1: LPCSTR, lpString2: LPCSTR) -> c_int;
