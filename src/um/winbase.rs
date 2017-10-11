@@ -2548,6 +2548,10 @@ extern "system" {
         Node: USHORT,
         ProcessorMask: PGROUP_AFFINITY
     ) -> BOOL;
+    pub fn GetNumaAvailableMemoryNodeEx(
+        Node: USHORT,
+        AvailableBytes: PULONGLONG,
+    ) -> BOOL;
     pub fn GetNumaProximityNode(
         ProximityId: ULONG,
         NodeNumber: PUCHAR

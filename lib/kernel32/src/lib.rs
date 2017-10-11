@@ -10,6 +10,8 @@ extern "system" {
         lpFiber: PVOID, lpStartAddress: PFIBER_CALLOUT_ROUTINE, lpParameter: PVOID,
     ) -> PVOID;
     pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
+    pub fn GetNumaHighestNodeNumber(HighestNodeNumber: PULONG) -> BOOL;
+    pub fn GetNumaProximityNodeEx(ProximityId: ULONG, NodeNumber: PUSHORT) -> BOOL;
     pub fn GetProcessGroupAffinity(
         hProcess: HANDLE, GroupCount: PUSHORT, GroupArray: PUSHORT,
     ) -> BOOL;
@@ -28,9 +30,6 @@ extern "system" {
     ) -> UINT;
     pub fn GetSystemInfo(lpSystemInfo: LPSYSTEM_INFO);
     pub fn GetThreadGroupAffinity(hThread: HANDLE, GroupAffinity: PGROUP_AFFINITY) -> BOOL;
-    pub fn GetThreadSelectorEntry(
-        hThread: HANDLE, dwSelector: DWORD, lpSelectorEntry: LPLDT_ENTRY,
-    ) -> BOOL;
     pub fn GetVolumePathNamesForVolumeNameW(
         lpszVolumeName: LPCWSTR, lpszVolumePathNames: LPWCH, cchBufferLength: DWORD,
         lpcchReturnLength: PDWORD,
