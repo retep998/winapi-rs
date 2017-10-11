@@ -62,10 +62,6 @@ extern "system" {
     pub fn FlsGetValue(dwFlsIndex: DWORD) -> PVOID;
     pub fn FlsSetValue(dwFlsIndex: DWORD, lpFlsData: PVOID) -> BOOL;
     pub fn FreeLibraryWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, module: HMODULE);
-    pub fn GetAppContainerNamedObjectPath(
-        Token: HANDLE, AppContainerSid: PSID, ObjectPathLength: ULONG, ObjectPath: LPWSTR,
-        ReturnLength: PULONG,
-    ) -> BOOL;
     pub fn GetProcessGroupAffinity(
         hProcess: HANDLE, GroupCount: PUSHORT, GroupArray: PUSHORT,
     ) -> BOOL;
