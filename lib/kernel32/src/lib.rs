@@ -81,8 +81,6 @@ extern "system" {
         BufferSize: DWORD,
     ) -> UINT;
     pub fn GetSystemInfo(lpSystemInfo: LPSYSTEM_INFO);
-    pub fn GetSystemWow64DirectoryA(lpBuffer: LPSTR, uSize: UINT) -> UINT;
-    pub fn GetSystemWow64DirectoryW(lpBuffer: LPWSTR, uSize: UINT) -> UINT;
     pub fn GetThreadGroupAffinity(hThread: HANDLE, GroupAffinity: PGROUP_AFFINITY) -> BOOL;
     pub fn GetThreadSelectorEntry(
         hThread: HANDLE, dwSelector: DWORD, lpSelectorEntry: LPLDT_ENTRY,
@@ -146,7 +144,7 @@ extern "system" {
     pub fn IsNormalizedString(NormForm: NORM_FORM, lpString: LPCWSTR, cwLength: c_int) -> BOOL;
     pub fn IsProcessInJob(ProcessHandle: HANDLE, JobHandle: HANDLE, Result: PBOOL) -> BOOL;
     pub fn IsThreadAFiber() -> BOOL;
-    pub fn IsWow64Process(hProcess: HANDLE, Wow64Process: PBOOL) -> BOOL;
+    pub fn IsThreadpoolTimerSet(pti: PTP_TIMER) -> BOOL;
     pub fn K32EmptyWorkingSet(hProcess: HANDLE) -> BOOL;
     pub fn K32EnumDeviceDrivers(lpImageBase: *mut LPVOID, cb: DWORD, lpcbNeeded: LPDWORD) -> BOOL;
     pub fn K32EnumPageFilesA(
@@ -283,8 +281,6 @@ extern "system" {
     pub fn WaitForThreadpoolTimerCallbacks(pti: PTP_TIMER, fCancelPendingCallbacks: BOOL);
     pub fn WaitForThreadpoolWaitCallbacks(pwa: PTP_WAIT, fCancelPendingCallbacks: BOOL);
     pub fn WaitForThreadpoolWorkCallbacks(pwk: PTP_WORK, fCancelPendingCallbacks: BOOL);
-    pub fn Wow64DisableWow64FsRedirection(OldValue: *mut PVOID) -> BOOL;
-    pub fn Wow64RevertWow64FsRedirection(OlValue: PVOID) -> BOOL;
     pub fn lstrcat(lpString1: LPSTR, lpString2: LPCSTR) -> LPSTR;
     pub fn lstrcmp(lpString1: LPCSTR, lpString2: LPCSTR) -> c_int;
     pub fn lstrcmpi(lpString1: LPCSTR, lpString2: LPCSTR) -> c_int;

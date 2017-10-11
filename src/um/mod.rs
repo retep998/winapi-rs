@@ -213,6 +213,7 @@ pub mod gl;
 #[cfg(feature = "winusb")] pub mod winusb;
 #[cfg(feature = "winuser")] pub mod winuser;
 #[cfg(feature = "winver")] pub mod winver;
+#[cfg(feature = "wow64apiset")] pub mod wow64apiset;
 #[cfg(feature = "ws2spi")] pub mod ws2spi;
 #[cfg(feature = "ws2tcpip")] pub mod ws2tcpip;
 #[cfg(feature = "xinput")] pub mod xinput;
