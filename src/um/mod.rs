@@ -52,6 +52,7 @@ pub mod gl;
 #[cfg(feature = "d3dx10core")] pub mod d3dx10core;
 #[cfg(feature = "d3dx10math")] pub mod d3dx10math;
 #[cfg(feature = "d3dx10mesh")] pub mod d3dx10mesh;
+#[cfg(feature = "datetimeapi")] pub mod datetimeapi;
 #[cfg(feature = "davclnt")] pub mod davclnt;
 #[cfg(feature = "dbghelp")] pub mod dbghelp;
 #[cfg(feature = "dcommon")] pub mod dcommon;

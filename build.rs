@@ -116,6 +116,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("d3dx10core", &[], &[]),
     ("d3dx10math", &[], &[]),
     ("d3dx10mesh", &[], &[]),
+    ("datetimeapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("davclnt", &["minwindef", "winnt"], &["netapi32"]),
     ("dbghelp", &["basetsd", "guiddef", "minwindef", "vcruntime", "winnt"], &[]),
     ("dcommon", &["dxgiformat"], &[]),

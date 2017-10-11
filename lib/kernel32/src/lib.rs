@@ -31,18 +31,6 @@ extern "system" {
     pub fn GetThreadSelectorEntry(
         hThread: HANDLE, dwSelector: DWORD, lpSelectorEntry: LPLDT_ENTRY,
     ) -> BOOL;
-    pub fn GetTimeFormatA(
-        Locale: LCID, dwFlags: DWORD, lpTime: *const SYSTEMTIME, lpFormat: LPCSTR,
-        lpTimeStr: LPSTR, cchTime: c_int,
-    ) -> c_int;
-    pub fn GetTimeFormatEx(
-        lpLocaleName: LPCWSTR, dwFlags: DWORD, lpTime: *const SYSTEMTIME, lpFormat: LPCWSTR,
-        lpTimeStr: LPWSTR, cchTime: c_int,
-    ) -> c_int;
-    pub fn GetTimeFormatW(
-        Locale: LCID, dwFlags: DWORD, lpTime: *const SYSTEMTIME, lpFormat: LPCWSTR,
-        lpTimeStr: LPWSTR, cchTime: c_int,
-    ) -> c_int;
     pub fn GetVolumePathNamesForVolumeNameW(
         lpszVolumeName: LPCWSTR, lpszVolumePathNames: LPWCH, cchBufferLength: DWORD,
         lpcchReturnLength: PDWORD,
