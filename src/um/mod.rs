@@ -179,6 +179,7 @@ pub mod gl;
 #[cfg(feature = "subauth")] pub mod subauth;
 #[cfg(feature = "synchapi")] pub mod synchapi;
 #[cfg(feature = "sysinfoapi")] pub mod sysinfoapi;
+#[cfg(feature = "systemtopologyapi")] pub mod systemtopologyapi;
 #[cfg(feature = "textstor")] pub mod textstor;
 #[cfg(feature = "threadpoolapiset")] pub mod threadpoolapiset;
 #[cfg(feature = "threadpoollegacyapiset")] pub mod threadpoollegacyapiset;

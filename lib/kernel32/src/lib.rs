@@ -10,8 +10,6 @@ extern "system" {
         lpFiber: PVOID, lpStartAddress: PFIBER_CALLOUT_ROUTINE, lpParameter: PVOID,
     ) -> PVOID;
     pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
-    pub fn GetNumaHighestNodeNumber(HighestNodeNumber: PULONG) -> BOOL;
-    pub fn GetNumaProximityNodeEx(ProximityId: ULONG, NodeNumber: PUSHORT) -> BOOL;
     pub fn GetVolumePathNamesForVolumeNameW(
         lpszVolumeName: LPCWSTR, lpszVolumePathNames: LPWCH, cchBufferLength: DWORD,
         lpcchReturnLength: PDWORD,

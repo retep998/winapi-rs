@@ -244,6 +244,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("subauth", &["minwindef", "winnt"], &[]),
     ("synchapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32", "synchronization"]),
     ("sysinfoapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
+    ("systemtopologyapi", &["minwindef", "winnt"], &["kernel32"]),
     ("textstor", &[], &[]),
     ("threadpoolapiset", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("threadpoollegacyapiset", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
