@@ -5,10 +5,6 @@
 extern crate winapi;
 use winapi::*;
 extern "system" {
-    #[cfg(target_arch = "x86")]
-    pub fn InterlockedCompareExchange64(
-        Destination: *mut LONG64, ExChange: LONG64, Comperand: LONG64,
-    ) -> LONG64;
     pub fn K32EmptyWorkingSet(hProcess: HANDLE) -> BOOL;
     pub fn K32EnumDeviceDrivers(lpImageBase: *mut LPVOID, cb: DWORD, lpcbNeeded: LPDWORD) -> BOOL;
     pub fn K32EnumPageFilesA(
