@@ -107,20 +107,8 @@ extern "system" {
     pub fn K32InitializeProcessForWsWatch(hProcess: HANDLE) -> BOOL;
     pub fn K32QueryWorkingSet(hProcess: HANDLE, pv: PVOID, cb: DWORD) -> BOOL;
     pub fn K32QueryWorkingSetEx(hProcess: HANDLE, pv: PVOID, cb: DWORD) -> BOOL;
-    pub fn LeaveCriticalSectionWhenCallbackReturns(
-        pci: PTP_CALLBACK_INSTANCE, pcs: PCRITICAL_SECTION,
-    );
-    pub fn QueryIdleProcessorCycleTime(
-        BufferLength: PULONG, ProcessorIdleCycleTime: PULONG64,
-    ) -> BOOL;
-    pub fn QueryIdleProcessorCycleTimeEx(
-        Group: USHORT, BufferLength: PULONG, ProcessorIdleCycleTime: PULONG64,
-    ) -> BOOL;
     pub fn QueryPerformanceCounter(lpPerformanceCount: *mut LARGE_INTEGER) -> BOOL;
     pub fn QueryPerformanceFrequency(lpFrequency: *mut LARGE_INTEGER) -> BOOL;
-    pub fn QueryProcessCycleTime(ProcessHandle: HANDLE, CycleTime: PULONG64) -> BOOL;
-    pub fn QueryThreadCycleTime(ThreadHandle: HANDLE, CycleTime: PULONG64) -> BOOL;
-    pub fn QueryUnbiasedInterruptTime(UnbiasedTime: PULONGLONG) -> BOOL;
     pub fn RegisterApplicationRestart(pwzCommandline: PCWSTR, dwFlags: DWORD) -> HRESULT;
     pub fn RegisterWaitForSingleObjectEx(
         hObject: HANDLE, Callback: WAITORTIMERCALLBACK, Context: PVOID, dwMilliseconds: ULONG,

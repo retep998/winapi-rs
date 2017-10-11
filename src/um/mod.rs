@@ -145,6 +145,7 @@ pub mod gl;
 #[cfg(feature = "propsys")] pub mod propsys;
 #[cfg(feature = "prsht")] pub mod prsht;
 #[cfg(feature = "psapi")] pub mod psapi;
+#[cfg(feature = "realtimeapiset")] pub mod realtimeapiset;
 #[cfg(feature = "reason")] pub mod reason;
 #[cfg(feature = "restrictederrorinfo")] pub mod restrictederrorinfo;
 #[cfg(feature = "rmxfguid")] pub mod rmxfguid;

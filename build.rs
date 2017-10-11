@@ -210,6 +210,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("propsys", &["minwindef", "propidl", "propkeydef", "unknwnbase", "winnt", "wtypes"], &[]),
     ("prsht", &["basetsd", "minwindef", "windef", "winnt", "winuser"], &["comctl32"]),
     ("psapi", &["basetsd", "minwindef", "winnt"], &["psapi"]),
+    ("realtimeapiset", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("reason", &["minwindef"], &[]),
     ("restrictederrorinfo", &["unknwnbase", "winnt", "wtypes"], &[]),
     ("rmxfguid", &[], &[]),
