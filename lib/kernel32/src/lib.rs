@@ -9,43 +9,7 @@ extern "system" {
     pub fn CalloutOnFiberStack(
         lpFiber: PVOID, lpStartAddress: PFIBER_CALLOUT_ROUTINE, lpParameter: PVOID,
     ) -> PVOID;
-    pub fn CancelThreadpoolIo(pio: PTP_IO);
-    pub fn ChangeTimerQueueTimer(
-        TimerQueue: HANDLE, Timer: HANDLE, DueTime: ULONG, Period: ULONG,
-    ) -> BOOL;
-    pub fn CloseThreadpool(ptpp: PTP_POOL);
-    pub fn CloseThreadpoolCleanupGroup(ptpcg: PTP_CLEANUP_GROUP);
-    pub fn CloseThreadpoolCleanupGroupMembers(
-        ptpcg: PTP_CLEANUP_GROUP, fCancelPendingCallbacks: BOOL, pvCleanupContext: PVOID,
-    );
-    pub fn CloseThreadpoolIo(pio: PTP_IO);
-    pub fn CloseThreadpoolTimer(pti: PTP_TIMER);
-    pub fn CloseThreadpoolWait(pwa: PTP_WAIT);
-    pub fn CloseThreadpoolWork(pwk: PTP_WORK);
-    pub fn CreateThreadpool(reserved: PVOID) -> PTP_POOL;
-    pub fn CreateThreadpoolCleanupGroup() -> PTP_CLEANUP_GROUP;
-    pub fn CreateThreadpoolIo(
-        fl: HANDLE, pfnio: PTP_WIN32_IO_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
-    ) -> PTP_IO;
-    pub fn CreateThreadpoolTimer(
-        pfnti: PTP_TIMER_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
-    ) -> PTP_TIMER;
-    pub fn CreateThreadpoolWait(
-        pfnwa: PTP_WAIT_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
-    ) -> PTP_WAIT;
-    pub fn CreateThreadpoolWork(
-        pfnwk: PTP_WORK_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
-    ) -> PTP_WORK;
-    pub fn CreateTimerQueue() -> HANDLE;
-    pub fn CreateTimerQueueTimer(
-        phNewTimer: PHANDLE, TimerQueue: HANDLE, Callback: WAITORTIMERCALLBACK, Parameter: PVOID,
-        DueTime: DWORD, Period: DWORD, Flags: ULONG,
-    ) -> BOOL;
     pub fn DelayLoadFailureHook(pszDllName: LPCSTR, pszProcName: LPCSTR) -> FARPROC;
-    pub fn DeleteTimerQueueEx(TimerQueue: HANDLE, CompletionEvent: HANDLE) -> BOOL;
-    pub fn DeleteTimerQueueTimer(
-        TimerQueue: HANDLE, Timer: HANDLE, CompletionEvent: HANDLE,
-    ) -> BOOL;
     pub fn FindClose(hFindFile: HANDLE) -> BOOL;
     pub fn FindNLSString(
         Locale: LCID, dwFindNLSStringFlags: DWORD, lpStringSource: LPCWSTR, cchSource: c_int,
@@ -187,9 +151,6 @@ extern "system" {
     pub fn QueryProcessCycleTime(ProcessHandle: HANDLE, CycleTime: PULONG64) -> BOOL;
     pub fn QueryThreadCycleTime(ThreadHandle: HANDLE, CycleTime: PULONG64) -> BOOL;
     pub fn QueryUnbiasedInterruptTime(UnbiasedTime: PULONGLONG) -> BOOL;
-    pub fn QueueUserWorkItem(
-        Function: LPTHREAD_START_ROUTINE, Context: PVOID, Flags: ULONG,
-    ) -> BOOL;
     pub fn RegisterApplicationRestart(pwzCommandline: PCWSTR, dwFlags: DWORD) -> HRESULT;
     pub fn RegisterWaitForSingleObjectEx(
         hObject: HANDLE, Callback: WAITORTIMERCALLBACK, Context: PVOID, dwMilliseconds: ULONG,
@@ -210,27 +171,6 @@ extern "system" {
         hThread: HANDLE, GroupAffinity: *const GROUP_AFFINITY,
         PreviousGroupAffinity: PGROUP_AFFINITY,
     ) -> BOOL;
-    pub fn SetThreadpoolStackInformation(
-        ptpp: PTP_POOL, ptpsi: PTP_POOL_STACK_INFORMATION,
-    ) -> BOOL;
-    pub fn SetThreadpoolThreadMaximum(ptpp: PTP_POOL, cthrdMost: DWORD);
-    pub fn SetThreadpoolThreadMinimum(ptpp: PTP_POOL, cthrdMic: DWORD) -> BOOL;
-    pub fn SetThreadpoolTimer(
-        pti: PTP_TIMER, pftDueTime: PFILETIME, msPeriod: DWORD, msWindowLength: DWORD,
-    );
-    pub fn SetThreadpoolTimerEx(
-        pti: PTP_TIMER, pftDueTime: PFILETIME, msPeriod: DWORD, msWindowLength: DWORD,
-    ) -> BOOL;
-    pub fn SetThreadpoolWait(pwa: PTP_WAIT, h: HANDLE, pftTimeout: PFILETIME);
-    pub fn SetThreadpoolWaitEx(
-        pwa: PTP_WAIT, h: HANDLE, pftTimeout: PFILETIME, Reserved: PVOID,
-    ) -> BOOL;
-    pub fn StartThreadpoolIo(pio: PTP_IO);
-    pub fn SubmitThreadpoolWork(pwk: PTP_WORK);
-    pub fn TrySubmitThreadpoolCallback(
-        pfns: PTP_SIMPLE_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
-    ) -> BOOL;
-    pub fn UnregisterWaitEx(WaitHandle: HANDLE, CompletionEvent: HANDLE) -> BOOL;
     pub fn WaitForMultipleObjectsEx(
         nCount: DWORD, lpHandles: *const HANDLE, bWaitAll: BOOL, dwMilliseconds: DWORD,
         bAlertable: BOOL,

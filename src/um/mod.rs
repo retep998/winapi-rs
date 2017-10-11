@@ -175,6 +175,7 @@ pub mod gl;
 #[cfg(feature = "sysinfoapi")] pub mod sysinfoapi;
 #[cfg(feature = "textstor")] pub mod textstor;
 #[cfg(feature = "threadpoolapiset")] pub mod threadpoolapiset;
+#[cfg(feature = "threadpoollegacyapiset")] pub mod threadpoollegacyapiset;
 #[cfg(feature = "timeapi")] pub mod timeapi;
 #[cfg(feature = "timezoneapi")] pub mod timezoneapi;
 #[cfg(feature = "tlhelp32")] pub mod tlhelp32;
