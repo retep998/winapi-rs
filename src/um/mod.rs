@@ -91,6 +91,7 @@ pub mod gl;
 #[cfg(feature = "imm")] pub mod imm;
 #[cfg(feature = "interlockedapi")] pub mod interlockedapi;
 #[cfg(feature = "ioapiset")] pub mod ioapiset;
+#[cfg(feature = "jobapi")] pub mod jobapi;
 #[cfg(feature = "jobapi2")] pub mod jobapi2;
 #[cfg(feature = "ktmw32")] pub mod ktmw32;
 #[cfg(feature = "libloaderapi")] pub mod libloaderapi;

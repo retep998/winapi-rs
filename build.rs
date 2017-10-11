@@ -156,6 +156,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("imm", &[], &[]),
     ("interlockedapi", &["minwindef", "winnt"], &["kernel32"]),
     ("ioapiset", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
+    ("jobapi", &["minwindef", "winnt"], &["kernel32"]),
     ("jobapi2", &["basetsd", "minwinbase", "minwindef", "ntdef", "winnt"], &["kernel32"]),
     ("ktmw32", &["guiddef", "minwinbase", "minwindef", "winnt"], &["ktmw32"]),
     ("libloaderapi", &["basetsd", "minwindef", "winnt"], &["kernel32", "user32"]),
