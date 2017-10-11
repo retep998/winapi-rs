@@ -141,6 +141,7 @@ pub mod gl;
 #[cfg(feature = "processsnapshot")] pub mod processsnapshot;
 #[cfg(feature = "processthreadsapi")] pub mod processthreadsapi;
 #[cfg(feature = "processtopologyapi")] pub mod processtopologyapi;
+#[cfg(feature = "profileapi")] pub mod profileapi;
 #[cfg(feature = "propidl")] pub mod propidl;
 #[cfg(feature = "propkeydef")] pub mod propkeydef;
 #[cfg(feature = "propsys")] pub mod propsys;
