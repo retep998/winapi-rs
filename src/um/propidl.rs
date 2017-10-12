@@ -9,8 +9,8 @@ use shared::minwindef::{
     BYTE, DWORD, FILETIME, FLOAT, HIBYTE, HIWORD, INT, LOBYTE, LOWORD, UINT, WORD
 };
 use shared::ntdef::{
-    BOOLEAN, CHAR, HRESULT, LARGE_INTEGER, LONG, LPSTR, LPWSTR, SHORT, UCHAR,
-    ULARGE_INTEGER, ULONG, USHORT
+    BOOLEAN, CHAR, HRESULT, LARGE_INTEGER, LONG, LPSTR, LPWSTR, PVOID, SHORT,
+    UCHAR, ULARGE_INTEGER, ULONG, USHORT
 };
 use shared::wtypes::{
     BSTR, BSTRBLOB, CLIPDATA, CY, DATE, DECIMAL, PROPID, VARIANT_BOOL, VARTYPE
@@ -273,19 +273,6 @@ interface IEnumSTATPROPSTG(IEnumSTATPROPSTGVtbl): IUnknown(IUnknownVtbl) {
         ppenum: *mut *mut IEnumSTATPROPSTG,
     ) -> HRESULT,
 });
-extern "system" {
-    pub fn IEnumSTATPROPSTG_RemoteNext_Proxy(
-        This: *mut IEnumSTATPROPSTG,
-        rgelt: *mut STATPROPSTG,
-        pceltFetched: *mut ULONG,
-    ) -> HRESULT;
-    // pub fn IEnumSTATPROPSTG_RemoteNext_Stub(
-    //     This: *mut IRpcStubBuffer,
-    //     _pRpcChannelBuffer: *mut IRpcChannelBuffer,
-    //     _pRpcMessage: PRPC_MESSAGE,
-    //     _pdwStubPhase: *mut DWORD,
-    // );
-}
 pub type LPENUMSTATPROPSETSTG = *mut IEnumSTATPROPSETSTG;
 RIDL!(#[uuid(0x0000013B, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IEnumSTATPROPSETSTG(IEnumSTATPROPSETSTGVtbl): IUnknown(IUnknownVtbl) {
@@ -302,19 +289,6 @@ interface IEnumSTATPROPSETSTG(IEnumSTATPROPSETSTGVtbl): IUnknown(IUnknownVtbl) {
         ppenum: *mut *mut IEnumSTATPROPSETSTG,
     ) -> HRESULT,
 });
-extern "system" {
-    pub fn IEnumSTATPROPSETSTG_RemoteNext_Proxy(
-        This: *mut IEnumSTATPROPSETSTG,
-        rgelt: *mut STATPROPSETSTG,
-        pceltFetched: *mut ULONG,
-    ) -> HRESULT;
-    // pub fn IEnumSTATPROPSETSTG_RemoteNext_Stub(
-    //     This: *mut IRpcStubBuffer,
-    //     _pRpcChannelBuffer: *mut IRpcChannelBuffer,
-    //     _pRpcMessage: PRPC_MESSAGE,
-    //     _pdwStubPhase: *mut DWORD,
-    // );
-}
 pub type LPPROPERTYSTORAGE = *mut IPropertyStorage;
 pub const PIDDI_THUMBNAIL: DWORD = 0x00000002;
 pub const PIDSI_TITLE: DWORD = 0x00000002;
@@ -393,6 +367,7 @@ STRUCT!{struct SERIALIZEDPROPERTYVALUE {
     dwType: DWORD,
     rgb: *mut BYTE,
 }}
+pub type PMemoryAllocator = PVOID;
 extern "system" {
     pub fn StgConvertVariantToProperty(
         pvar: *const PROPVARIANT,
@@ -403,53 +378,10 @@ extern "system" {
         fReserved: BOOLEAN,
         pcIndirect: *mut ULONG,
     ) -> *mut SERIALIZEDPROPERTYVALUE;
-    // pub fn StgConvertPropertyToVariant(
-    //     pprop: *const SERIALIZEDPROPERTYVALUE,
-    //     CodePage: USHORT,
-    //     pvar: *mut PROPVARIANT,
-    //     pma: *mut PMemoryAllocator
-    // ) -> BOOLEAN;
-    // unsigned long             __RPC_USER  BSTR_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
-    // unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
-    // unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
-    // void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
-
-    // unsigned long             __RPC_USER  LPSAFEARRAY_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
-    // unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
-    // unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
-    // void                      __RPC_USER  LPSAFEARRAY_UserFree(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
-
-    // unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
-    // unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
-    // unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
-    // void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
-
-    // unsigned long             __RPC_USER  LPSAFEARRAY_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
-    // unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
-    // unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
-    // void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
-    pub fn IEnumSTATPROPSTG_Next_Proxy(
-        This: *mut IEnumSTATPROPSTG,
-        celt: ULONG,
-        rgelt: STATPROPSTG,
-        pceltFetched: *mut ULONG,
-    ) -> HRESULT;
-    pub fn IEnumSTATPROPSTG_Next_Stub(
-        This: *mut IEnumSTATPROPSTG,
-        celt: ULONG,
-        rgelt: *mut STATPROPSTG,
-        pceltFetched: *mut ULONG,
-    ) -> HRESULT;
-    pub fn IEnumSTATPROPSETSTG_Next_Proxy(
-        This: *mut IEnumSTATPROPSETSTG,
-        celt: ULONG,
-        rgelt: STATPROPSETSTG,
-        pceltFetched: *mut ULONG,
-    ) -> HRESULT;
-    pub fn IEnumSTATPROPSETSTG_Next_Stub(
-        This: *mut IEnumSTATPROPSETSTG,
-        celt: ULONG,
-        rgelt: *mut STATPROPSETSTG,
-        pceltFetched: *mut ULONG,
-    ) -> HRESULT;
+    pub fn StgConvertPropertyToVariant(
+        pprop: *const SERIALIZEDPROPERTYVALUE,
+        CodePage: USHORT,
+        pvar: *mut PROPVARIANT,
+        pma: *mut PMemoryAllocator
+    ) -> BOOLEAN;
 }
