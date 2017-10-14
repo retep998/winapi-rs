@@ -89,6 +89,8 @@ wtypesbase = []
 #ucrt
 #um
 "gl-gl" = []
+accctrl = []
+aclapi = []
 audioclient = []
 audiosessiontypes = []
 avrt = []
