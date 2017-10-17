@@ -14,14 +14,12 @@ extern "system" {
         lpNamedPipeName: LPCWSTR, lpInBuffer: LPVOID, nInBufferSize: DWORD, lpOutBuffer: LPVOID,
         nOutBufferSize: DWORD, lpBytesRead: LPDWORD, nTimeOut: DWORD,
     ) -> BOOL;
-    pub fn CallbackMayRunLong(pci: PTP_CALLBACK_INSTANCE) -> BOOL;
     pub fn CalloutOnFiberStack(
         lpFiber: PVOID, lpStartAddress: PFIBER_CALLOUT_ROUTINE, lpParameter: PVOID,
     ) -> PVOID;
     pub fn CancelIo(hFile: HANDLE) -> BOOL;
     pub fn CancelIoEx(hFile: HANDLE, lpOverlapped: LPOVERLAPPED) -> BOOL;
     pub fn CancelSynchronousIo(hThread: HANDLE) -> BOOL;
-    pub fn CancelThreadpoolIo(pio: PTP_IO);
     pub fn CeipIsOptedIn() -> BOOL;
     pub fn ChangeTimerQueueTimer(
         TimerQueue: HANDLE, Timer: HANDLE, DueTime: ULONG, Period: ULONG,
@@ -31,15 +29,6 @@ extern "system" {
     pub fn CheckRemoteDebuggerPresent(hProcess: HANDLE, pbDebuggerPresent: PBOOL) -> BOOL;
     // pub fn ClosePackageInfo();
     // pub fn CloseState();
-    pub fn CloseThreadpool(ptpp: PTP_POOL);
-    pub fn CloseThreadpoolCleanupGroup(ptpcg: PTP_CLEANUP_GROUP);
-    pub fn CloseThreadpoolCleanupGroupMembers(
-        ptpcg: PTP_CLEANUP_GROUP, fCancelPendingCallbacks: BOOL, pvCleanupContext: PVOID,
-    );
-    pub fn CloseThreadpoolIo(pio: PTP_IO);
-    pub fn CloseThreadpoolTimer(pti: PTP_TIMER);
-    pub fn CloseThreadpoolWait(pwa: PTP_WAIT);
-    pub fn CloseThreadpoolWork(pwk: PTP_WORK);
     pub fn CompareStringOrdinal(
         lpString1: LPCWCH, cchCount1: c_int, lpString2: LPCWCH, cchCount2: c_int, bIgnoreCase: BOOL,
     ) -> c_int;
@@ -61,20 +50,6 @@ extern "system" {
         hReadPipe: PHANDLE, hWritePipe: PHANDLE, lpPipeAttributes: LPSECURITY_ATTRIBUTES,
         nSize: DWORD,
     ) -> BOOL;
-    pub fn CreateThreadpool(reserved: PVOID) -> PTP_POOL;
-    pub fn CreateThreadpoolCleanupGroup() -> PTP_CLEANUP_GROUP;
-    pub fn CreateThreadpoolIo(
-        fl: HANDLE, pfnio: PTP_WIN32_IO_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
-    ) -> PTP_IO;
-    pub fn CreateThreadpoolTimer(
-        pfnti: PTP_TIMER_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
-    ) -> PTP_TIMER;
-    pub fn CreateThreadpoolWait(
-        pfnwa: PTP_WAIT_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
-    ) -> PTP_WAIT;
-    pub fn CreateThreadpoolWork(
-        pfnwk: PTP_WORK_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
-    ) -> PTP_WORK;
     pub fn CreateTimerQueue() -> HANDLE;
     pub fn CreateTimerQueueTimer(
         phNewTimer: PHANDLE, TimerQueue: HANDLE, Callback: WAITORTIMERCALLBACK, Parameter: PVOID,
@@ -97,7 +72,6 @@ extern "system" {
         lpOutBuffer: LPVOID, nOutBufferSize: DWORD, lpBytesReturned: LPDWORD,
         lpOverlapped: LPOVERLAPPED,
     ) -> BOOL;
-    pub fn DisassociateCurrentThreadFromCallback(pci: PTP_CALLBACK_INSTANCE);
     pub fn DisconnectNamedPipe(hNamedPipe: HANDLE) -> BOOL;
     pub fn DnsHostnameToComputerNameExW(
         Hostname: LPCWSTR, ComputerName: LPWSTR, nSize: LPDWORD,
@@ -127,7 +101,6 @@ extern "system" {
     // pub fn FormatApplicationUserModelId();
     pub fn FreeEnvironmentStringsA(penv: LPCH) -> BOOL;
     pub fn FreeEnvironmentStringsW(penv: LPWCH) -> BOOL;
-    pub fn FreeLibraryWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, module: HMODULE);
     pub fn GetAppContainerNamedObjectPath(
         Token: HANDLE, AppContainerSid: PSID, ObjectPathLength: ULONG, ObjectPath: LPWSTR,
         ReturnLength: PULONG,
@@ -333,7 +306,6 @@ extern "system" {
     pub fn IsDebuggerPresent() -> BOOL;
     pub fn IsProcessInJob(ProcessHandle: HANDLE, JobHandle: HANDLE, Result: PBOOL) -> BOOL;
     pub fn IsThreadAFiber() -> BOOL;
-    pub fn IsThreadpoolTimerSet(pti: PTP_TIMER) -> BOOL;
     pub fn IsWow64Process(hProcess: HANDLE, Wow64Process: PBOOL) -> BOOL;
     pub fn K32EmptyWorkingSet(hProcess: HANDLE) -> BOOL;
     pub fn K32EnumDeviceDrivers(lpImageBase: *mut LPVOID, cb: DWORD, lpcbNeeded: LPDWORD) -> BOOL;
@@ -403,9 +375,6 @@ extern "system" {
     pub fn K32InitializeProcessForWsWatch(hProcess: HANDLE) -> BOOL;
     pub fn K32QueryWorkingSet(hProcess: HANDLE, pv: PVOID, cb: DWORD) -> BOOL;
     pub fn K32QueryWorkingSetEx(hProcess: HANDLE, pv: PVOID, cb: DWORD) -> BOOL;
-    pub fn LeaveCriticalSectionWhenCallbackReturns(
-        pci: PTP_CALLBACK_INSTANCE, pcs: PCRITICAL_SECTION,
-    );
     // pub fn LoadAppInitDlls();
     // pub fn LoadStringBaseExW();
     // pub fn LoadStringBaseW();
@@ -456,9 +425,6 @@ extern "system" {
     pub fn QueryPerformanceFrequency(lpFrequency: *mut LARGE_INTEGER) -> BOOL;
     pub fn QueryProcessCycleTime(ProcessHandle: HANDLE, CycleTime: PULONG64) -> BOOL;
     pub fn QueryThreadCycleTime(ThreadHandle: HANDLE, CycleTime: PULONG64) -> BOOL;
-    pub fn QueryThreadpoolStackInformation(
-        ptpp: PTP_POOL, ptpsi: PTP_POOL_STACK_INFORMATION,
-    ) -> BOOL;
     pub fn QueryUnbiasedInterruptTime(UnbiasedTime: PULONGLONG) -> BOOL;
     pub fn QueueUserWorkItem(
         Function: LPTHREAD_START_ROUTINE, Context: PVOID, Flags: ULONG,
@@ -470,10 +436,6 @@ extern "system" {
         dwFlags: ULONG,
     ) -> HANDLE;
     // pub fn RegisterWaitUntilOOBECompleted();
-    pub fn ReleaseMutexWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, mutex: HANDLE);
-    pub fn ReleaseSemaphoreWhenCallbackReturns(
-        pci: PTP_CALLBACK_INSTANCE, sem: HANDLE, crel: DWORD,
-    );
     // pub fn RemoveLocalAlternateComputerNameA();
     // pub fn RemoveLocalAlternateComputerNameW();
     pub fn ResetWriteWatch(lpBaseAddress: LPVOID, dwRegionSize: SIZE_T) -> UINT;
@@ -543,7 +505,6 @@ extern "system" {
     pub fn SetEnvironmentStringsW(NewEnvironment: LPWCH) -> BOOL;
     pub fn SetEnvironmentVariableA(lpName: LPCSTR, lpValue: LPCSTR) -> BOOL;
     pub fn SetEnvironmentVariableW(lpName: LPCWSTR, lpValue: LPCWSTR) -> BOOL;
-    pub fn SetEventWhenCallbackReturns(pci: PTP_CALLBACK_INSTANCE, evt: HANDLE);
     // pub fn SetLocalPrimaryComputerNameA();
     // pub fn SetLocalPrimaryComputerNameW();
     pub fn SetLocalTime(lpSystemTime: *const SYSTEMTIME) -> BOOL;
@@ -563,24 +524,7 @@ extern "system" {
         hThread: HANDLE, GroupAffinity: *const GROUP_AFFINITY,
         PreviousGroupAffinity: PGROUP_AFFINITY,
     ) -> BOOL;
-    pub fn SetThreadpoolStackInformation(
-        ptpp: PTP_POOL, ptpsi: PTP_POOL_STACK_INFORMATION,
-    ) -> BOOL;
-    pub fn SetThreadpoolThreadMaximum(ptpp: PTP_POOL, cthrdMost: DWORD);
-    pub fn SetThreadpoolThreadMinimum(ptpp: PTP_POOL, cthrdMic: DWORD) -> BOOL;
-    pub fn SetThreadpoolTimer(
-        pti: PTP_TIMER, pftDueTime: PFILETIME, msPeriod: DWORD, msWindowLength: DWORD,
-    );
-    pub fn SetThreadpoolTimerEx(
-        pti: PTP_TIMER, pftDueTime: PFILETIME, msPeriod: DWORD, msWindowLength: DWORD,
-    ) -> BOOL;
-    pub fn SetThreadpoolWait(pwa: PTP_WAIT, h: HANDLE, pftTimeout: PFILETIME);
-    pub fn SetThreadpoolWaitEx(
-        pwa: PTP_WAIT, h: HANDLE, pftTimeout: PFILETIME, Reserved: PVOID,
-    ) -> BOOL;
     pub fn SetTimeZoneInformation(lpTimeZoneInformation: *const TIME_ZONE_INFORMATION) -> BOOL;
-    pub fn StartThreadpoolIo(pio: PTP_IO);
-    pub fn SubmitThreadpoolWork(pwk: PTP_WORK);
     pub fn SystemTimeToFileTime(lpSystemTime: *const SYSTEMTIME, lpFileTime: LPFILETIME) -> BOOL;
     pub fn SystemTimeToTzSpecificLocalTime(
         lpTimeZoneInformation: *const TIME_ZONE_INFORMATION, lpUniversalTime: *const SYSTEMTIME,
@@ -599,9 +543,6 @@ extern "system" {
         hNamedPipe: HANDLE, lpInBuffer: LPVOID, nInBufferSize: DWORD, lpOutBuffer: LPVOID,
         nOutBufferSize: DWORD, lpBytesRead: LPDWORD, lpOverlapped: LPOVERLAPPED,
     ) -> BOOL;
-    pub fn TrySubmitThreadpoolCallback(
-        pfns: PTP_SIMPLE_CALLBACK, pv: PVOID, pcbe: PTP_CALLBACK_ENVIRON,
-    ) -> BOOL;
     pub fn TzSpecificLocalTimeToSystemTime(
         lpTimeZoneInformation: *const TIME_ZONE_INFORMATION, lpLocalTime: *const SYSTEMTIME,
         lpUniversalTime: LPSYSTEMTIME,
@@ -619,10 +560,6 @@ extern "system" {
         nCount: DWORD, lpHandles: *const HANDLE, bWaitAll: BOOL, dwMilliseconds: DWORD,
         bAlertable: BOOL,
     ) -> DWORD;
-    pub fn WaitForThreadpoolIoCallbacks(pio: PTP_IO, fCancelPendingCallbacks: BOOL);
-    pub fn WaitForThreadpoolTimerCallbacks(pti: PTP_TIMER, fCancelPendingCallbacks: BOOL);
-    pub fn WaitForThreadpoolWaitCallbacks(pwa: PTP_WAIT, fCancelPendingCallbacks: BOOL);
-    pub fn WaitForThreadpoolWorkCallbacks(pwk: PTP_WORK, fCancelPendingCallbacks: BOOL);
     pub fn WaitNamedPipeW(lpNamedPipeName: LPCWSTR, nTimeOut: DWORD) -> BOOL;
     // pub fn WerpInitiateRemoteRecovery();
     pub fn WideCharToMultiByte(
