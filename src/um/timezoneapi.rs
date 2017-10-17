@@ -5,11 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! ApiSet Contract for api-ms-win-core-timezone-l1
-
-use shared::minwindef::DWORD;
-use um::minwinbase::SYSTEMTIME;
+use shared::minwindef::{BOOL, DWORD, FILETIME, LPDWORD, LPFILETIME, USHORT};
+use um::minwinbase::{LPSYSTEMTIME, SYSTEMTIME};
 use um::winnt::{BOOLEAN, LONG, WCHAR};
-
 pub const TIME_ZONE_ID_INVALID: DWORD = 0xFFFFFFFF;
 STRUCT!{struct TIME_ZONE_INFORMATION {
     Bias: LONG,
@@ -34,3 +32,59 @@ STRUCT!{struct DYNAMIC_TIME_ZONE_INFORMATION {
     DynamicDaylightTimeDisabled: BOOLEAN,
 }}
 pub type PDYNAMIC_TIME_ZONE_INFORMATION = *mut DYNAMIC_TIME_ZONE_INFORMATION;
+extern "system" {
+    pub fn SystemTimeToTzSpecificLocalTime(
+        lpTimeZoneInformation: *const TIME_ZONE_INFORMATION,
+        lpUniversalTime: *const SYSTEMTIME,
+        lpLocalTime: LPSYSTEMTIME,
+    ) -> BOOL;
+    pub fn TzSpecificLocalTimeToSystemTime(
+        lpTimeZoneInformation: *const TIME_ZONE_INFORMATION,
+        lpLocalTime: *const SYSTEMTIME,
+        lpUniversalTime: LPSYSTEMTIME,
+    ) -> BOOL;
+    pub fn FileTimeToSystemTime(
+        lpFileTime: *const FILETIME,
+        lpSystemTime: LPSYSTEMTIME,
+    ) -> BOOL;
+    pub fn SystemTimeToFileTime(
+        lpSystemTime: *const SYSTEMTIME,
+        lpFileTime: LPFILETIME,
+    ) -> BOOL;
+    pub fn GetTimeZoneInformation(
+        lpTimeZoneInformation: LPTIME_ZONE_INFORMATION,
+    ) -> DWORD;
+    pub fn SetTimeZoneInformation(
+        lpTimeZoneInformation: *const TIME_ZONE_INFORMATION,
+    ) -> BOOL;
+    pub fn SetDynamicTimeZoneInformation(
+        lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
+    ) -> BOOL;
+    pub fn GetDynamicTimeZoneInformation(
+        pTimeZoneInformation: PDYNAMIC_TIME_ZONE_INFORMATION,
+    ) -> DWORD;
+    pub fn GetTimeZoneInformationForYear(
+        wYear: USHORT,
+        pdtzi: PDYNAMIC_TIME_ZONE_INFORMATION,
+        ptzi: LPTIME_ZONE_INFORMATION,
+    ) -> BOOL;
+    pub fn EnumDynamicTimeZoneInformation(
+        dwIndex: DWORD,
+        lpTimeZoneInformation: PDYNAMIC_TIME_ZONE_INFORMATION,
+    ) -> DWORD;
+    pub fn GetDynamicTimeZoneInformationEffectiveYears(
+        lpTimeZoneInformation: PDYNAMIC_TIME_ZONE_INFORMATION,
+        FirstYear: LPDWORD,
+        LastYear: LPDWORD,
+    ) -> DWORD;
+    pub fn SystemTimeToTzSpecificLocalTimeEx(
+        lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
+        lpUniversalTime: *const SYSTEMTIME,
+        lpLocalTime: LPSYSTEMTIME,
+    ) -> BOOL;
+    pub fn TzSpecificLocalTimeToSystemTimeEx(
+        lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
+        lpLocalTime: *const SYSTEMTIME,
+        lpUniversalTime: LPSYSTEMTIME,
+    ) -> BOOL;
+}
