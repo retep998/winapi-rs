@@ -227,7 +227,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("strmif", &["winnt"], &[]),
     ("subauth", &["minwindef", "winnt"], &[]),
     ("synchapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32", "synchronization"]),
-    ("sysinfoapi", &["basetsd", "minwindef", "winnt"], &[]),
+    ("sysinfoapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("textstor", &[], &[]),
     ("threadpoolapiset", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("timeapi", &["minwindef", "mmsystem"], &["winmm"]),
