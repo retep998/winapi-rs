@@ -2355,3 +2355,28 @@ DEFINE_GUID!{IID_ID3D12CommandQueue,
     0x0ec870a6, 0x5d7e, 0x4c22, 0x8c, 0xfc, 0x5b, 0xaa, 0xe0, 0x76, 0x16, 0xed}
 DEFINE_GUID!{IID_ID3D12Device,
     0x189819f1, 0x1db6, 0x4b57, 0xbe, 0x54, 0x18, 0x21, 0x33, 0x9b, 0x85, 0xf7}
+
+extern "system" {
+    pub fn D3D12CreateDevice(
+        pAdapter: *mut IUnknown,
+        MinimumFeatureLevel: D3D_FEATURE_LEVEL,
+        riid: REFGUID,
+        ppDevice: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn D3D12CreateRootSignatureDeserializer(
+        pSrcData: LPCVOID,
+        SrcDataSizeInBytes: SIZE_T,
+        pRootSignatureDeserializerInterface: REFGUID,
+        ppRootSignatureDeserializer: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn D3D12GetDebugInterface(
+        riid: REFGUID,
+        ppvDebug: *mut *mut c_void
+    ) -> HRESULT;
+    pub fn D3D12SerializeRootSignature(
+        pRootSignature: *const D3D12_ROOT_SIGNATURE_DESC,
+        Version: D3D_ROOT_SIGNATURE_VERSION,
+        ppBlob: *mut *mut ID3DBlob,
+        ppErrorBlob: *mut *mut ID3DBlob,
+    ) -> HRESULT;
+}
