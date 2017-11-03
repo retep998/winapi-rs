@@ -7,7 +7,7 @@
 //! Version management functions, types, and definitions
 use ctypes::c_void;
 use shared::minwindef::{BOOL, DWORD, LPCVOID, LPVOID, PUINT};
-use um::winnt::{LPCSTR, LPCWSTR};
+use um::winnt::{LPCSTR, LPCWSTR, LPSTR, LPWSTR};
 extern "system" {
     pub fn GetFileVersionInfoSizeA(
         lptstrFilename: LPCSTR,
@@ -41,4 +41,14 @@ extern "system" {
         lplpBuffer: &mut LPVOID,
         puLen: PUINT,
     ) -> BOOL;
+    pub fn VerLanguageNameA(
+        wLang: DWORD,
+        szLang: LPSTR,
+        cchLang: DWORD,
+    ) -> DWORD;
+    pub fn VerLanguageNameW(
+        wLang: DWORD,
+        szLang: LPWSTR,
+        cchLang: DWORD,
+    ) -> DWORD;
 }
