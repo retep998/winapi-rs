@@ -31,13 +31,12 @@ use um::winnt::{
     BOOLEAN, CHAR, DWORDLONG, EXECUTION_STATE, FILE_ID_128, HANDLE, HRESULT, INT, LANGID,
     LARGE_INTEGER, LATENCY_TIME, LONG, LPCCH, LPCH, LPCSTR, LPCWSTR, LPOSVERSIONINFOEXA,
     LPOSVERSIONINFOEXW, LPSTR, LPWSTR, MAXLONG, PBOOLEAN, PCONTEXT, PCWSTR, PFIRMWARE_TYPE,
-    PGROUP_AFFINITY, PHANDLE, PIO_COUNTERS, PJOB_SET_ARRAY, PLUID, POWER_REQUEST_TYPE,
-    PPERFORMANCE_DATA, PPROCESSOR_NUMBER, PRTL_UMS_SCHEDULER_ENTRY_POINT,
-    PSECURE_MEMORY_CACHE_CALLBACK, PSID, PSID_NAME_USE, PULONGLONG, PVOID, PWOW64_CONTEXT,
-    PWOW64_LDT_ENTRY, PWSTR, RTL_UMS_THREAD_INFO_CLASS, STATUS_ABANDONED_WAIT_0, STATUS_USER_APC,
-    STATUS_WAIT_0, THREAD_BASE_PRIORITY_IDLE, THREAD_BASE_PRIORITY_LOWRT,
-    THREAD_BASE_PRIORITY_MAX, THREAD_BASE_PRIORITY_MIN, ULARGE_INTEGER, VOID, WAITORTIMERCALLBACK,
-    WCHAR, WOW64_CONTEXT,
+    PHANDLE, PIO_COUNTERS, PJOB_SET_ARRAY, PLUID, POWER_REQUEST_TYPE, PPERFORMANCE_DATA,
+    PPROCESSOR_NUMBER, PRTL_UMS_SCHEDULER_ENTRY_POINT, PSECURE_MEMORY_CACHE_CALLBACK, PSID,
+    PSID_NAME_USE, PULONGLONG, PVOID, PWOW64_CONTEXT, PWOW64_LDT_ENTRY, PWSTR,
+    RTL_UMS_THREAD_INFO_CLASS, STATUS_ABANDONED_WAIT_0, STATUS_USER_APC, STATUS_WAIT_0,
+    THREAD_BASE_PRIORITY_IDLE, THREAD_BASE_PRIORITY_LOWRT, THREAD_BASE_PRIORITY_MAX,
+    THREAD_BASE_PRIORITY_MIN, ULARGE_INTEGER, VOID, WAITORTIMERCALLBACK, WCHAR, WOW64_CONTEXT,
 };
 use vc::vadefs::va_list;
 pub const FILE_BEGIN: DWORD = 0;
@@ -409,6 +408,9 @@ extern "system" {
     pub fn LocalSize(
         hMem: HLOCAL
     ) -> SIZE_T;
+    pub fn LocalFlags(
+        hMem: HLOCAL,
+    ) -> UINT;
     pub fn LocalFree(
         hMem: HLOCAL
     ) -> HLOCAL;
@@ -482,6 +484,7 @@ extern "system" {
     pub fn DeleteFiber(
         lpFiber: LPVOID
     );
+    pub fn ConvertFiberToThread() -> BOOL;
     pub fn CreateFiberEx(
         dwStackCommitSize: SIZE_T,
         dwStackReserveSize: SIZE_T,
@@ -2540,9 +2543,9 @@ extern "system" {
         Node: UCHAR,
         AvailableBytes: PULONGLONG
     ) -> BOOL;
-    pub fn GetNumaNodeProcessorMaskEx(
+    pub fn GetNumaAvailableMemoryNodeEx(
         Node: USHORT,
-        ProcessorMask: PGROUP_AFFINITY
+        AvailableBytes: PULONGLONG,
     ) -> BOOL;
     pub fn GetNumaProximityNode(
         ProximityId: ULONG,
@@ -2562,6 +2565,10 @@ extern "system" {
         dwFlags: DWORD,
     ) -> HRESULT;
     pub fn UnregisterApplicationRecoveryCallback() -> HRESULT;
+    pub fn RegisterApplicationRestart(
+        pwzCommandline: PCWSTR,
+        dwFlags: DWORD,
+    ) -> HRESULT;
     pub fn UnregisterApplicationRestart() -> HRESULT;
     pub fn GetApplicationRecoveryCallback(
         hProcess: HANDLE,
