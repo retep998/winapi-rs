@@ -5,10 +5,15 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! WFP Structures and Definitions
-use ctypes::c_int;
+use ctypes::{c_float, c_double};
+use shared::minwindef::ULONG;
+use um::winnt::{LPWSTR, PSID, PSID_AND_ATTRIBUTES};
+use shared::basetsd::{UINT8, UINT16, UINT32, INT8, INT16, INT32, PUINT8, PUINT64, PINT64};
+
+// TODO: pub?
+pub use shared::wtypes::*;
+
 pub use shared::ntdef::LUID;
-use shared::basetsd::{UINT8, UINT32, UINT8_PTR};
-use shared::wtypes::*;
 
 //use shared::minwindef::{PUCHAR, UCHAR, ULONG, USHORT};
 //use um::winnt::{BOOLEAN, HANDLE, LONG, LPCWSTR, LPWSTR, PVOID, PWSTR, ULONGLONG, VOID};
@@ -74,14 +79,14 @@ STRUCT!{struct FWP_BITMAP_ARRAY64 {
     bitmapArray64: [UINT8; 8],
 }}
 
-pub const FWP_BYTEMAP_ARRAY64_SIZE: c_int = 8;
-pub const FWP_BITMAP_ARRAY64_SIZE: c_int = 64;
+pub const FWP_BYTEMAP_ARRAY64_SIZE: usize = 8;
+pub const FWP_BITMAP_ARRAY64_SIZE: usize = 64;
 
 STRUCT!{struct FWP_BYTE_ARRAY6 {
     byteArray6: [UINT8; 6],
 }}
 
-pub const FWP_BYTE_ARRAY6_SIZE: c_int = 6;
+pub const FWP_BYTE_ARRAY6_SIZE: usize = 6;
 
 STRUCT!{struct FWP_BYTE_ARRAY16 {
     byteArray16: [UINT8; 16],
@@ -89,7 +94,41 @@ STRUCT!{struct FWP_BYTE_ARRAY16 {
 
 STRUCT!{struct FWP_BYTE_BLOB {
     size: UINT32,
-    data: UINT8_PTR,
+    data: PUINT8,
 }}
 
+STRUCT!{struct FWP_TOKEN_INFORMATION {
+    sidCount: ULONG,
+    sids: PSID_AND_ATTRIBUTES,
+    restrictedSidCount: ULONG,
+    restrictedSids: PSID_AND_ATTRIBUTES,
+}}
+
+UNION2!{union FWP_VALUE0_u {
+    [u32; 1] [u64; 1],
+    uint8 uint8_mut: UINT8,
+    uint16 uint16_mut: UINT16,
+    uint32 uint32_mut: UINT32,
+    uint64 uint64_mut: PUINT64,
+    int8 int8_mut: INT8,
+    int16 int16_mut: INT16,
+    int32 int32_mut: INT32,
+    int64 int64_mut: PINT64,
+    float32 float32_mut: c_float,
+    double64 double64_mut: *mut c_double,
+    byteArray16 byteArray16_mut: *mut FWP_BYTE_ARRAY16,
+    byteBlob byteBlob_mut: *mut FWP_BYTE_BLOB,
+    sid sid_mut: PSID,
+    sd sd_mut: *mut FWP_BYTE_BLOB,
+    tokenInformation tokenInformation_mut: *mut FWP_TOKEN_INFORMATION,
+    tokenAccessInformation tokenAccessInformation_mut: *mut FWP_BYTE_BLOB,
+    unicodeString unicodeString_mut: LPWSTR,
+    byteArray6 byteArray6_mut: *mut FWP_BYTE_ARRAY6,
+    bitmapArray64 bitmapArray64_mut: *mut FWP_BITMAP_ARRAY64,
+}}
+
+STRUCT!{struct FWP_VALUE0 {
+    type_: FWP_DATA_TYPE,
+	u: FWP_VALUE0_u,
+}}
 
