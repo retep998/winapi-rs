@@ -32,6 +32,8 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dxgi1_5", &["basetsd", "dxgi", "dxgi1_2", "dxgi1_3", "dxgi1_4", "dxgiformat", "minwindef", "unknwnbase", "winnt"], &[]),
     ("dxgiformat", &[], &[]),
     ("dxgitype", &["d3d9types", "dxgiformat", "minwindef"], &[]),
+	("fwptypes", &["wtypes", "ntdef"], &["fwpuclnt"]),
+	("lawl", &[], &[]),
     ("guiddef", &[], &[]),
     ("hidclass", &["guiddef", "minwindef", "winioctl", "winnt"], &[]),
     ("hidpi", &["hidusage", "minwindef", "ntdef", "ntstatus", "winnt"], &["hid"]),
