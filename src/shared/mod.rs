@@ -26,6 +26,7 @@
 #[cfg(feature = "dxgiformat")] pub mod dxgiformat;
 #[cfg(feature = "dxgitype")] pub mod dxgitype;
 #[cfg(feature = "fwptypes")] pub mod fwptypes;
+#[cfg(feature = "fwpmtypes")] pub mod fwpmtypes;
 pub mod guiddef;
 #[cfg(feature = "hidclass")] pub mod hidclass;
 #[cfg(feature = "hidpi")] pub mod hidpi;
@@ -34,6 +35,7 @@ pub mod guiddef;
 #[cfg(feature = "in6addr")] pub mod in6addr;
 #[cfg(feature = "inaddr")] pub mod inaddr;
 #[cfg(feature = "intsafe")] pub mod intsafe;
+#[cfg(feature = "ipsectypes")] pub mod ipsectypes;
 #[cfg(feature = "ksmedia")] pub mod ksmedia;
 #[cfg(feature = "ktmtypes")] pub mod ktmtypes;
 #[cfg(feature = "lmcons")] pub mod lmcons;
