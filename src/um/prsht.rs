@@ -41,12 +41,27 @@ pub const PSPCB_ADDREF: UINT = 0;
 pub const PSPCB_RELEASE: UINT = 1;
 pub const PSPCB_CREATE: UINT = 2;
 pub type PROPSHEETPAGE_RESOURCE = LPCDLGTEMPLATEA;
+UNION2!{union PROPSHEETPAGEA_V1_u1 {
+    [usize; 1],
+    pszTemplate pszTemplate_mut: LPCSTR,
+    pResource pResource_mut: PROPSHEETPAGE_RESOURCE,
+}}
+UNION2!{union PROPSHEETPAGEA_V1_u2 {
+    [usize; 1],
+    hIcon hIcon_mut: HICON,
+    pszIcon pszIcon_mut: LPCSTR,
+}}
+UNION2!{union PROPSHEETPAGEA_V4_u3 {
+    [usize; 1],
+    hbmHeader hbmHeader_mut: HBITMAP,
+    pszbmHeader pszbmHeader_mut: LPCSTR,
+}}
 STRUCT!{struct PROPSHEETPAGEA_V4 {
     dwSize: DWORD,
     dwFlags: DWORD,
     hInstance: HINSTANCE,
-    pszTemplate: LPCSTR,
-    hIcon: HICON,
+    u1: PROPSHEETPAGEA_V1_u1,
+    u2: PROPSHEETPAGEA_V1_u2,
     pszTitle: LPCSTR,
     pfnDlgProc: DLGPROC,
     lParam: LPARAM,
@@ -55,19 +70,31 @@ STRUCT!{struct PROPSHEETPAGEA_V4 {
     pszHeaderTitle: LPCSTR,
     pszHeaderSubTitle: LPCSTR,
     hActCtx: HANDLE,
-    hbmHeader: HBITMAP,
+    u3: PROPSHEETPAGEA_V4_u3,
 }}
-UNION!(PROPSHEETPAGEA_V4, pszTemplate, pResource, pResource_mut, PROPSHEETPAGE_RESOURCE);
-UNION!(PROPSHEETPAGEA_V4, hIcon, pszIcon, pszIcon_mut, LPCSTR);
-UNION!(PROPSHEETPAGEA_V4, hbmHeader, pszbmHeader, pszbmHeader_mut, LPCSTR);
 pub type LPPROPSHEETPAGEA_V4 = *mut PROPSHEETPAGEA_V4;
 pub type LPCPROPSHEETPAGEA_V4 = *const PROPSHEETPAGEA_V4;
+UNION2!{union PROPSHEETPAGEW_V1_u1 {
+    [usize; 1],
+    pszTemplate pszTemplate_mut: LPCWSTR,
+    pResource pResource_mut: PROPSHEETPAGE_RESOURCE,
+}}
+UNION2!{union PROPSHEETPAGEW_V1_u2 {
+    [usize; 1],
+    hIcon hIcon_mut: HICON,
+    pszIcon pszIcon_mut: LPCWSTR,
+}}
+UNION2!{union PROPSHEETPAGEW_V4_u3 {
+    [usize; 1],
+    hbmHeader hbmHeader_mut: HBITMAP,
+    pszbmHeader pszbmHeader_mut: LPCWSTR,
+}}
 STRUCT!{struct PROPSHEETPAGEW_V4 {
     dwSize: DWORD,
     dwFlags: DWORD,
     hInstance: HINSTANCE,
-    pszTemplate: LPCWSTR,
-    hIcon: HICON,
+    u1: PROPSHEETPAGEW_V1_u1,
+    u2: PROPSHEETPAGEW_V1_u2,
     pszTitle: LPCWSTR,
     pfnDlgProc: DLGPROC,
     lParam: LPARAM,
@@ -76,11 +103,8 @@ STRUCT!{struct PROPSHEETPAGEW_V4 {
     pszHeaderTitle: LPCWSTR,
     pszHeaderSubTitle: LPCWSTR,
     hActCtx: HANDLE,
-    hbmHeader: HBITMAP,
+    u3: PROPSHEETPAGEW_V4_u3,
 }}
-UNION!(PROPSHEETPAGEW_V4, pszTemplate, pResource, pResource_mut, PROPSHEETPAGE_RESOURCE);
-UNION!(PROPSHEETPAGEW_V4, hIcon, pszIcon, pszIcon_mut, LPCWSTR);
-UNION!(PROPSHEETPAGEW_V4, hbmHeader, pszbmHeader, pszbmHeader_mut, LPCWSTR);
 pub type LPPROPSHEETPAGEW_V4 = *mut PROPSHEETPAGEW_V4;
 pub type LPCPROPSHEETPAGEW_V4 = *const PROPSHEETPAGEW_V4;
 pub type PROPSHEETPAGEA_LATEST = PROPSHEETPAGEA_V4;
@@ -128,48 +152,88 @@ FN!{stdcall PFNPROPSHEETCALLBACK(
     UINT,
     LPARAM,
 ) -> c_int}
+UNION2!{union PROPSHEETHEADERA_V1_u1 {
+    [usize; 1],
+    hIcon hIcon_mut: HICON,
+    pszIcon pszIcon_mut: LPCSTR,
+}}
+UNION2!{union PROPSHEETHEADERA_V1_u2 {
+    [usize; 1],
+    nStartPage nStartPage_mut: UINT,
+    pStartPage pStartPage_mut: LPCSTR,
+}}
+UNION2!{union PROPSHEETHEADERA_V1_u3 {
+    [usize; 1],
+    ppsp ppsp_mut: LPCPROPSHEETPAGEA,
+    phpage phpage_mut: *mut HPROPSHEETPAGE,
+}}
+UNION2!{union PROPSHEETHEADERA_V2_u4 {
+    [usize; 1],
+    hbmWatermark hbmWatermark_mut: HBITMAP,
+    pszbmWatermark pszbmWatermark_mut: LPCSTR,
+}}
+UNION2!{union PROPSHEETHEADERA_V2_u5 {
+    [usize; 1],
+    hbmHeader hbmHeader_mut: HBITMAP,
+    pszbmHeader pszbmHeader_mut: LPCSTR,
+}}
 STRUCT!{struct PROPSHEETHEADERA_V2 {
     dwSize: DWORD,
     dwFlags: DWORD,
     hwndParent: HWND,
     hInstance: HINSTANCE,
-    hIcon: HICON,
+    u1: PROPSHEETHEADERA_V1_u1,
     pszCaption: LPCSTR,
     nPages: UINT,
-    pStartPage: LPCSTR,
-    ppsp: LPCPROPSHEETPAGEA,
+    u2: PROPSHEETHEADERA_V1_u2,
+    u3: PROPSHEETHEADERA_V1_u3,
     pfnCallback: PFNPROPSHEETCALLBACK,
-    hbmWatermark: HBITMAP,
+    u4: PROPSHEETHEADERA_V2_u4,
     hplWatermark: HPALETTE,
-    hbmHeader: HBITMAP,
+    u5: PROPSHEETHEADERA_V2_u5,
 }}
-UNION!(PROPSHEETHEADERA_V2, hIcon, pszIcon, pszIcon_mut, LPCSTR);
-UNION!(PROPSHEETHEADERA_V2, pStartPage, nStartPage, nStartPage_mut, UINT);
-UNION!(PROPSHEETHEADERA_V2, ppsp, phpage, phpage_mut, *mut HPROPSHEETPAGE);
-UNION!(PROPSHEETHEADERA_V2, hbmWatermark, pszbmWatermark, pszbmWatermark_mut, LPCSTR);
-UNION!(PROPSHEETHEADERA_V2, hbmHeader, pszbmHeader, pszbmHeader_mut, LPCSTR);
 pub type LPPROPSHEETHEADERA_V2 = *mut PROPSHEETHEADERA_V2;
 pub type LPCPROPSHEETHEADERA_V2 = *const PROPSHEETHEADERA_V2;
+UNION2!{union PROPSHEETHEADERW_V1_u1 {
+    [usize; 1],
+    hIcon hIcon_mut: HICON,
+    pszIcon pszIcon_mut: LPCWSTR,
+}}
+UNION2!{union PROPSHEETHEADERW_V1_u2 {
+    [usize; 1],
+    nStartPage nStartPage_mut: UINT,
+    pStartPage pStartPage_mut: LPCWSTR,
+}}
+UNION2!{union PROPSHEETHEADERW_V1_u3 {
+    [usize; 1],
+    ppsp ppsp_mut: LPCPROPSHEETPAGEW,
+    phpage phpage_mut: *mut HPROPSHEETPAGE,
+}}
+UNION2!{union PROPSHEETHEADERW_V2_u4 {
+    [usize; 1],
+    hbmWatermark hbmWatermark_mut: HBITMAP,
+    pszbmWatermark pszbmWatermark_mut: LPCWSTR,
+}}
+UNION2!{union PROPSHEETHEADERW_V2_u5 {
+    [usize; 1],
+    hbmHeader hbmHeader_mut: HBITMAP,
+    pszbmHeader pszbmHeader_mut: LPCWSTR,
+}}
 STRUCT!{struct PROPSHEETHEADERW_V2 {
     dwSize: DWORD,
     dwFlags: DWORD,
     hwndParent: HWND,
     hInstance: HINSTANCE,
-    hIcon: HICON,
+    u1: PROPSHEETHEADERW_V1_u1,
     pszCaption: LPCWSTR,
     nPages: UINT,
-    pStartPage: LPCWSTR,
-    ppsp: LPCPROPSHEETPAGEW,
+    u2: PROPSHEETHEADERW_V1_u2,
+    u3: PROPSHEETHEADERW_V1_u3,
     pfnCallback: PFNPROPSHEETCALLBACK,
-    hbmWatermark: HBITMAP,
+    u4: PROPSHEETHEADERW_V2_u4,
     hplWatermark: HPALETTE,
-    hbmHeader: HBITMAP,
+    u5: PROPSHEETHEADERW_V2_u5,
 }}
-UNION!(PROPSHEETHEADERW_V2, hIcon, pszIcon, pszIcon_mut, LPCWSTR);
-UNION!(PROPSHEETHEADERW_V2, pStartPage, nStartPage, nStartPage_mut, UINT);
-UNION!(PROPSHEETHEADERW_V2, ppsp, phpage, phpage_mut, *mut HPROPSHEETPAGE);
-UNION!(PROPSHEETHEADERW_V2, hbmWatermark, pszbmWatermark, pszbmWatermark_mut, LPCWSTR);
-UNION!(PROPSHEETHEADERW_V2, hbmHeader, pszbmHeader, pszbmHeader_mut, LPCWSTR);
 pub type LPPROPSHEETHEADERW_V2 = *mut PROPSHEETHEADERW_V2;
 pub type LPCPROPSHEETHEADERW_V2 = *const PROPSHEETHEADERW_V2;
 pub type PROPSHEETHEADERA = PROPSHEETHEADERA_V2;

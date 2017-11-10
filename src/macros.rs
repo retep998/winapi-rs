@@ -247,20 +247,6 @@ macro_rules! RIDL {
     );
     (@item $thing:item) => ($thing);
 }
-macro_rules! UNION {
-    ($base:ident, $field:ident, $variant:ident, $variant_mut:ident, $fieldtype:ty) => (
-        impl $base {
-            #[inline]
-            pub unsafe fn $variant(&self) -> &$fieldtype {
-                &*(&self.$field as *const _ as *const _)
-            }
-            #[inline]
-            pub unsafe fn $variant_mut(&mut self) -> &mut $fieldtype {
-                &mut *(&mut self.$field as *mut _ as *mut _)
-            }
-        }
-    );
-}
 macro_rules! UNION2 {
     ($(#[$attrs:meta])* union $name:ident {
         [$stype:ty; $ssize:expr],

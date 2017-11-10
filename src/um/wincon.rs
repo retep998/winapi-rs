@@ -24,15 +24,19 @@ STRUCT!{struct SMALL_RECT {
     Bottom: SHORT,
 }}
 pub type PSMALL_RECT = *mut SMALL_RECT;
+UNION2!{union KEY_EVENT_RECORD_uChar {
+    [u16; 1],
+    UnicodeChar UnicodeChar_mut: WCHAR,
+    AsciiChar AsciiChar_mut: CHAR,
+}}
 STRUCT!{struct KEY_EVENT_RECORD {
     bKeyDown: BOOL,
     wRepeatCount: WORD,
     wVirtualKeyCode: WORD,
     wVirtualScanCode: WORD,
-    UnicodeChar: WCHAR,
+    uChar: KEY_EVENT_RECORD_uChar,
     dwControlKeyState: DWORD,
 }}
-UNION!{KEY_EVENT_RECORD, UnicodeChar, AsciiChar, AsciiChar_mut, CHAR}
 pub type PKEY_EVENT_RECORD = *mut KEY_EVENT_RECORD;
 pub const RIGHT_ALT_PRESSED: DWORD = 0x0001;
 pub const LEFT_ALT_PRESSED: DWORD = 0x0002;
@@ -78,27 +82,33 @@ STRUCT!{struct FOCUS_EVENT_RECORD {
     bSetFocus: BOOL,
 }}
 pub type PFOCUS_EVENT_RECORD = *mut FOCUS_EVENT_RECORD;
+UNION2!{union INPUT_RECORD_Event {
+    [u32; 4],
+    KeyEvent KeyEvent_mut: KEY_EVENT_RECORD,
+    MouseEvent MouseEvent_mut: MOUSE_EVENT_RECORD,
+    WindowBufferSizeEvent WindowBufferSizeEvent_mut: WINDOW_BUFFER_SIZE_RECORD,
+    MenuEvent MenuEvent_mut: MENU_EVENT_RECORD,
+    FocusEvent FocusEvent_mut: FOCUS_EVENT_RECORD,
+}}
 STRUCT!{struct INPUT_RECORD {
     EventType: WORD,
-    Event: [u32; 4],
+    Event: INPUT_RECORD_Event,
 }}
-UNION!{INPUT_RECORD, Event, KeyEvent, KeyEvent_mut, KEY_EVENT_RECORD}
-UNION!{INPUT_RECORD, Event, MouseEvent, MouseEvent_mut, MOUSE_EVENT_RECORD}
-UNION!{INPUT_RECORD, Event, WindowBufferSizeEvent, WindowBufferSizeEvent_mut,
-    WINDOW_BUFFER_SIZE_RECORD}
-UNION!{INPUT_RECORD, Event, MenuEvent, MenuEvent_mut, MENU_EVENT_RECORD}
-UNION!{INPUT_RECORD, Event, FocusEvent, FocusEvent_mut, FOCUS_EVENT_RECORD}
 pub type PINPUT_RECORD = *mut INPUT_RECORD;
 pub const KEY_EVENT: WORD = 0x0001;
 pub const MOUSE_EVENT: WORD = 0x0002;
 pub const WINDOW_BUFFER_SIZE_EVENT: WORD = 0x0004;
 pub const MENU_EVENT: WORD = 0x0008;
 pub const FOCUS_EVENT: WORD = 0x0010;
+UNION2!{union CHAR_INFO_Char {
+    [u16; 1],
+    UnicodeChar UnicodeChar_mut: WCHAR,
+    AsciiChar AsciiChar_mut: CHAR,
+}}
 STRUCT!{struct CHAR_INFO {
-    UnicodeChar: WCHAR,
+    Char: CHAR_INFO_Char,
     Attributes: WORD,
 }}
-UNION!{CHAR_INFO, UnicodeChar, AsciiChar, AsciiChar_mut, CHAR}
 pub type PCHAR_INFO = *mut CHAR_INFO;
 pub const FOREGROUND_BLUE: WORD = 0x0001;
 pub const FOREGROUND_GREEN: WORD = 0x0002;

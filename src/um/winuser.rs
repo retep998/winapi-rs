@@ -3029,19 +3029,16 @@ pub type LPHARDWAREINPUT= *mut HARDWAREINPUT;
 pub const INPUT_MOUSE: DWORD = 0;
 pub const INPUT_KEYBOARD: DWORD = 1;
 pub const INPUT_HARDWARE: DWORD = 2;
-#[cfg(target_arch = "x86")]
+UNION2!{union INPUT_u {
+    [u32; 6] [u64; 4],
+    mi mi_mut: MOUSEINPUT,
+    ki ki_mut: KEYBDINPUT,
+    hi hi_mut: HARDWAREINPUT,
+}}
 STRUCT!{struct INPUT {
     type_: DWORD,
-    u: [u32; 6],
+    u: INPUT_u,
 }}
-#[cfg(target_arch = "x86_64")]
-STRUCT!{struct INPUT {
-    type_: DWORD,
-    u: [u64; 4],
-}}
-UNION!{INPUT, u, mi, mi_mut, MOUSEINPUT}
-UNION!{INPUT, u, ki, ki_mut, KEYBDINPUT}
-UNION!{INPUT, u, hi, hi_mut, HARDWAREINPUT}
 pub type PINPUT = *mut INPUT;
 pub type LPINPUT = *mut INPUT;
 extern "system" {
@@ -6570,13 +6567,16 @@ STRUCT!{struct RAWHID {
 }}
 pub type PRAWHID = *mut RAWHID;
 pub type LPRAWHID = *mut RAWHID;
+UNION2!{union RAWINPUT_data {
+    [u32; 6],
+    mouse mouse_mut: RAWMOUSE,
+    keyboard keyboard_mut: RAWKEYBOARD,
+    hid hid_mut: RAWHID,
+}}
 STRUCT!{struct RAWINPUT {
     header: RAWINPUTHEADER,
-    mouse: RAWMOUSE,
+    data: RAWINPUT_data,
 }}
-UNION!(RAWINPUT, mouse, mouse, mouse_mut, RAWMOUSE);
-UNION!(RAWINPUT, mouse, keyboard, keyboard_mut, RAWKEYBOARD);
-UNION!(RAWINPUT, mouse, hid, hid_mut, RAWHID);
 pub type PRAWINPUT = *mut RAWINPUT;
 pub type LPRAWINPUT = *mut RAWINPUT;
 pub const RID_INPUT: DWORD = 0x10000003;
@@ -6617,14 +6617,17 @@ STRUCT!{struct RID_DEVICE_INFO_HID {
     usUsage: USHORT,
 }}
 pub type PRID_DEVICE_INFO_HID = *mut RID_DEVICE_INFO_HID;
+UNION2!{union RID_DEVICE_INFO_u {
+    [u32; 6],
+    mouse mouse_mut: RID_DEVICE_INFO_MOUSE,
+    keyboard keyboard_mut: RID_DEVICE_INFO_KEYBOARD,
+    hid hid_mut: RID_DEVICE_INFO_HID,
+}}
 STRUCT!{struct RID_DEVICE_INFO {
     cbSize: DWORD,
     dwType: DWORD,
-    keyboard: RID_DEVICE_INFO_KEYBOARD,
+    u: RID_DEVICE_INFO_u,
 }}
-UNION!(RID_DEVICE_INFO, keyboard, mouse, mouse_mut, RID_DEVICE_INFO_MOUSE);
-UNION!(RID_DEVICE_INFO, keyboard, keyboard, keyboard_mut, RID_DEVICE_INFO_KEYBOARD);
-UNION!(RID_DEVICE_INFO, keyboard, hid, hid_mut, RID_DEVICE_INFO_HID);
 pub type PRID_DEVICE_INFO = *mut RID_DEVICE_INFO;
 pub type LPRID_DEVICE_INFO = *mut RID_DEVICE_INFO;
 extern "system" {

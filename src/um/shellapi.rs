@@ -452,6 +452,11 @@ extern "system" {
         ppv: *mut *mut c_void,
     ) -> HRESULT;
 }
+UNION2!{union NOTIFYICONDATAA_u {
+    [u32; 1],
+    uTimeout uTimeout_mut: UINT,
+    uVersion uVersion_mut: UINT,
+}}
 STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONDATAA {
     cbSize: DWORD,
     hWnd: HWND,
@@ -463,14 +468,18 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONDATAA {
     dwState: DWORD,
     dwStateMask: DWORD,
     szInfo: [CHAR; 256],
-    uTimeout: UINT,
+    u: NOTIFYICONDATAA_u,
     szInfoTitle: [CHAR; 64],
     dwInfoFlags: DWORD,
     guidItem: GUID,
     hBalloonIcon: HICON,
 }}
-UNION!{NOTIFYICONDATAA, uTimeout, uVersion, uVersion_mut, UINT}
 pub type PNOTIFYICONDATAA = *mut NOTIFYICONDATAA;
+UNION2!{union NOTIFYICONDATAW_u {
+    [u32; 1],
+    uTimeout uTimeout_mut: UINT,
+    uVersion uVersion_mut: UINT,
+}}
 STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONDATAW {
     cbSize: DWORD,
     hWnd: HWND,
@@ -482,13 +491,12 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONDATAW {
     dwState: DWORD,
     dwStateMask: DWORD,
     szInfo: [WCHAR; 256],
-    uTimeout: UINT,
+    u: NOTIFYICONDATAW_u,
     szInfoTitle: [WCHAR; 64],
     dwInfoFlags: DWORD,
     guidItem: GUID,
     hBalloonIcon: HICON,
 }}
-UNION!{NOTIFYICONDATAW, uTimeout, uVersion, uVersion_mut, UINT}
 pub type PNOTIFYICONDATAW = *mut NOTIFYICONDATAW;
 pub const NIN_SELECT: DWORD = WM_USER + 0;
 pub const NINF_KEY: DWORD = 0x1;

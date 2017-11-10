@@ -8,15 +8,19 @@
 use ctypes::c_char;
 use um::winnt::PVOID;
 DECLARE_HANDLE!(HSTRING, HSTRING__);
-#[cfg(target_arch = "x86_64")]
-STRUCT!{struct HSTRING_HEADER {
-    Reserved: [PVOID; 0], // For alignment
-    Reserved2: [c_char; 24],
-}}
 #[cfg(target_arch = "x86")]
-STRUCT!{struct HSTRING_HEADER {
-    Reserved: [PVOID; 0], // For alignment
-    Reserved2: [c_char; 20],
+UNION2!{union HSTRING_HEADER_Reserved {
+    [u32; 5],
+    Reserved1 Reserved1_mut: PVOID,
+    Reserved2 Reserved2_mut: [c_char; 20],
 }}
-UNION!(HSTRING_HEADER, Reserved2, Reserved1, Reserved1_mut, PVOID);
+#[cfg(target_arch = "x86_64")]
+UNION2!{union HSTRING_HEADER_Reserved {
+    [u64; 3],
+    Reserved1 Reserved1_mut: PVOID,
+    Reserved2 Reserved2_mut: [c_char; 24],
+}}
+STRUCT!{struct HSTRING_HEADER {
+    Reserved: HSTRING_HEADER_Reserved,
+}}
 DECLARE_HANDLE!(HSTRING_BUFFER, HSTRING_BUFFER__);

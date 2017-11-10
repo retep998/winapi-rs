@@ -261,12 +261,27 @@ STRUCT!{struct SPRULEENTRY {
     pvClientGrammarContext: *mut c_void,
 }}
 ENUM!{enum SPTRANSITIONTYPE {
-    SPTRANSEPSILON,
+    SPTRANSEPSILON = 0,
     SPTRANSWORD,
     SPTRANSRULE,
     SPTRANSTEXTBUF,
     SPTRANSWILDCARD,
     SPTRANSDICTATION,
+}}
+STRUCT!{struct SPTRANSITIONENTRY_u_s1 {
+    hRuleInitialState: SPSTATEHANDLE,
+    hRule: SPRULEHANDLE,
+    pvClientRuleContext: *mut c_void,
+}}
+STRUCT!{struct SPTRANSITIONENTRY_u_s2 {
+    hWord: SPWORDHANDLE,
+    pvClientWordContext: *mut c_void,
+}}
+UNION2!{union SPTRANSITIONENTRY_u {
+    [usize; 3],
+    s1 s1_mut: SPTRANSITIONENTRY_u_s1,
+    s2 s2_mut: SPTRANSITIONENTRY_u_s2,
+    pvGrammarCookie pvGrammarCookie_mut: *mut c_void,
 }}
 STRUCT!{struct SPTRANSITIONENTRY {
     ID: SPTRANSITIONID,
@@ -275,13 +290,8 @@ STRUCT!{struct SPTRANSITIONENTRY {
     RequiredConfidence: c_char,
     fHasProperty: DWORD,
     Weight: c_float,
-    hRuleInitialState: SPSTATEHANDLE,
-    hRule: SPRULEHANDLE,
-    pvClientRuleContext: *mut c_void,
+    u: SPTRANSITIONENTRY_u,
 }}
-UNION!{SPTRANSITIONENTRY, hRuleInitialState, hWord, hWord_mut, SPWORDHANDLE}
-UNION!{SPTRANSITIONENTRY, hRule, pvClientWordContext, pvClientWordContext_mut, *mut c_void}
-UNION!{SPTRANSITIONENTRY, hRuleInitialState, pvGrammarCookie, pvGrammarCookie_mut, *mut c_void}
 STRUCT!{struct SPTRANSITIONPROPERTY {
     pszName: LPCWSTR,
     ulId: ULONG,
