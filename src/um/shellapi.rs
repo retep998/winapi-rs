@@ -452,7 +452,7 @@ extern "system" {
         ppv: *mut *mut c_void,
     ) -> HRESULT;
 }
-UNION2!{union NOTIFYICONDATAA_u {
+UNION!{union NOTIFYICONDATAA_u {
     [u32; 1],
     uTimeout uTimeout_mut: UINT,
     uVersion uVersion_mut: UINT,
@@ -475,7 +475,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONDATAA {
     hBalloonIcon: HICON,
 }}
 pub type PNOTIFYICONDATAA = *mut NOTIFYICONDATAA;
-UNION2!{union NOTIFYICONDATAW_u {
+UNION!{union NOTIFYICONDATAW_u {
     [u32; 1],
     uTimeout uTimeout_mut: UINT,
     uVersion uVersion_mut: UINT,

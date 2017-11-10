@@ -249,7 +249,7 @@ STRUCT!{struct VSS_PROVIDER_PROP {
     m_ClassId: CLSID,
 }}
 pub type PVSS_PROVIDER_PROP = *mut VSS_PROVIDER_PROP;
-UNION2!{union VSS_OBJECT_UNION {
+UNION!{union VSS_OBJECT_UNION {
     [u64; 12] [u64; 16],
     Snap Snap_mut: VSS_SNAPSHOT_PROP,
     Prov Prov_mut: VSS_PROVIDER_PROP,

@@ -9,13 +9,13 @@ use ctypes::c_char;
 use um::winnt::PVOID;
 DECLARE_HANDLE!(HSTRING, HSTRING__);
 #[cfg(target_arch = "x86")]
-UNION2!{union HSTRING_HEADER_Reserved {
+UNION!{union HSTRING_HEADER_Reserved {
     [u32; 5],
     Reserved1 Reserved1_mut: PVOID,
     Reserved2 Reserved2_mut: [c_char; 20],
 }}
 #[cfg(target_arch = "x86_64")]
-UNION2!{union HSTRING_HEADER_Reserved {
+UNION!{union HSTRING_HEADER_Reserved {
     [u64; 3],
     Reserved1 Reserved1_mut: PVOID,
     Reserved2 Reserved2_mut: [c_char; 24],

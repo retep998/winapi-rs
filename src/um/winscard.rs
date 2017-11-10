@@ -540,7 +540,7 @@ STRUCT!{struct READER_SEL_REQUEST_SerialNumberParameter {
     cbSerialNumberLength: DWORD,
     dwDesiredCardModuleVersion: DWORD,
 }}
-UNION2!{union READER_SEL_REQUEST_u {
+UNION!{union READER_SEL_REQUEST_u {
     [u32; 6],
     ReaderAndContainerParameter ReaderAndContainerParameter_mut:
         READER_SEL_REQUEST_ReaderAndContainerParameter,

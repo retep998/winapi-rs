@@ -133,7 +133,7 @@ STRUCT!{struct SCARD_T0_COMMAND {
     bP3: BYTE,
 }}
 pub type LPSCARD_T0_COMMAND = *mut SCARD_T0_COMMAND;
-UNION2!{union SCARD_T0_REQUEST_u {
+UNION!{union SCARD_T0_REQUEST_u {
     [u8; 5],
     CmdBytes CmdBytes_mut: SCARD_T0_COMMAND,
     rgbHeader rgbHeader_mut: [BYTE; 5],

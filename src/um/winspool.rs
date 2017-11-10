@@ -1575,7 +1575,7 @@ STRUCT!{struct PRINTER_NOTIFY_INFO_DATA_NotifyData_Data {
     cbBuf: DWORD,
     pBuf: LPVOID,
 }}
-UNION2!{union PRINTER_NOTIFY_INFO_DATA_NotifyData {
+UNION!{union PRINTER_NOTIFY_INFO_DATA_NotifyData {
     [usize; 2],
     adwData adwData_mut: [DWORD; 2],
     Data Data_mut: PRINTER_NOTIFY_INFO_DATA_NotifyData_Data,
@@ -1602,7 +1602,7 @@ STRUCT!{struct BINARY_CONTAINER {
     pData: LPBYTE,
 }}
 pub type PBINARY_CONTAINER = *mut BINARY_CONTAINER;
-UNION2!{union BIDI_DATA_u {
+UNION!{union BIDI_DATA_u {
     [usize; 2],
     bData bData_mut: BOOL,
     iData iData_mut: LONG,
@@ -2334,7 +2334,7 @@ STRUCT!{struct PrintPropertyValue_value_propertyBlob {
     cbBuf: DWORD,
     pBuf: LPVOID,
 }}
-UNION2!{union PrintPropertyValue_value {
+UNION!{union PrintPropertyValue_value {
     [u64; 1] [u64; 2],
     propertyByte propertyByte_mut: BYTE,
     propertyString propertyString_mut: PWSTR,

@@ -771,7 +771,7 @@ STRUCT!{struct SPPHRASEPROPERTY_u_s {
     bReserved: byte,
     usArrayIndex: c_ushort,
 }}
-UNION2!{union SPPHRASEPROPERTY_u {
+UNION!{union SPPHRASEPROPERTY_u {
     [u32; 1],
     ulId ulId_mut: ULONG,
     s s_mut: SPPHRASEPROPERTY_u_s,

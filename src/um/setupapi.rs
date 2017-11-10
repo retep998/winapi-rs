@@ -45,7 +45,7 @@ STRUCT!{struct SP_INF_INFORMATION {
     VersionData: [BYTE; ANYSIZE_ARRAY],
 }}
 pub type PSP_INF_INFORMATION = *mut SP_INF_INFORMATION;
-UNION2!{union SP_ALTPLATFORM_INFO_V3_u {
+UNION!{union SP_ALTPLATFORM_INFO_V3_u {
     [u16; 1],
     Reserved Reserved_mut: WORD,
     Flags Flags_mut: WORD,
@@ -64,7 +64,7 @@ STRUCT!{struct SP_ALTPLATFORM_INFO_V3 {
     BuildNumber: DWORD,
 }}
 pub type PSP_ALTPLATFORM_INFO_V3 = *mut SP_ALTPLATFORM_INFO_V3;
-UNION2!{union SP_ALTPLATFORM_INFO_V2_u {
+UNION!{union SP_ALTPLATFORM_INFO_V2_u {
     [u16; 1],
     Reserved Reserved_mut: WORD,
     Flags Flags_mut: WORD,

@@ -3029,7 +3029,7 @@ pub type LPHARDWAREINPUT= *mut HARDWAREINPUT;
 pub const INPUT_MOUSE: DWORD = 0;
 pub const INPUT_KEYBOARD: DWORD = 1;
 pub const INPUT_HARDWARE: DWORD = 2;
-UNION2!{union INPUT_u {
+UNION!{union INPUT_u {
     [u32; 6] [u64; 4],
     mi mi_mut: MOUSEINPUT,
     ki ki_mut: KEYBDINPUT,
@@ -3242,7 +3242,7 @@ STRUCT!{struct USAGE_PROPERTIES {
     physicalMaximum: INT32,
 }}
 pub type PUSAGE_PROPERTIES = *mut USAGE_PROPERTIES;
-UNION2!{union POINTER_TYPE_INFO_u {
+UNION!{union POINTER_TYPE_INFO_u {
     [u64; 17] [u64; 18],
     touchInfo touchInfo_mut: POINTER_TOUCH_INFO,
     penInfo penInfo_mut: POINTER_PEN_INFO,
@@ -6567,7 +6567,7 @@ STRUCT!{struct RAWHID {
 }}
 pub type PRAWHID = *mut RAWHID;
 pub type LPRAWHID = *mut RAWHID;
-UNION2!{union RAWINPUT_data {
+UNION!{union RAWINPUT_data {
     [u32; 6],
     mouse mouse_mut: RAWMOUSE,
     keyboard keyboard_mut: RAWKEYBOARD,
@@ -6617,7 +6617,7 @@ STRUCT!{struct RID_DEVICE_INFO_HID {
     usUsage: USHORT,
 }}
 pub type PRID_DEVICE_INFO_HID = *mut RID_DEVICE_INFO_HID;
-UNION2!{union RID_DEVICE_INFO_u {
+UNION!{union RID_DEVICE_INFO_u {
     [u32; 6],
     mouse mouse_mut: RID_DEVICE_INFO_MOUSE,
     keyboard keyboard_mut: RID_DEVICE_INFO_KEYBOARD,

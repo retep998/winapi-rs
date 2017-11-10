@@ -24,7 +24,7 @@ STRUCT!{struct SMALL_RECT {
     Bottom: SHORT,
 }}
 pub type PSMALL_RECT = *mut SMALL_RECT;
-UNION2!{union KEY_EVENT_RECORD_uChar {
+UNION!{union KEY_EVENT_RECORD_uChar {
     [u16; 1],
     UnicodeChar UnicodeChar_mut: WCHAR,
     AsciiChar AsciiChar_mut: CHAR,
@@ -82,7 +82,7 @@ STRUCT!{struct FOCUS_EVENT_RECORD {
     bSetFocus: BOOL,
 }}
 pub type PFOCUS_EVENT_RECORD = *mut FOCUS_EVENT_RECORD;
-UNION2!{union INPUT_RECORD_Event {
+UNION!{union INPUT_RECORD_Event {
     [u32; 4],
     KeyEvent KeyEvent_mut: KEY_EVENT_RECORD,
     MouseEvent MouseEvent_mut: MOUSE_EVENT_RECORD,
@@ -100,7 +100,7 @@ pub const MOUSE_EVENT: WORD = 0x0002;
 pub const WINDOW_BUFFER_SIZE_EVENT: WORD = 0x0004;
 pub const MENU_EVENT: WORD = 0x0008;
 pub const FOCUS_EVENT: WORD = 0x0010;
-UNION2!{union CHAR_INFO_Char {
+UNION!{union CHAR_INFO_Char {
     [u16; 1],
     UnicodeChar UnicodeChar_mut: WCHAR,
     AsciiChar AsciiChar_mut: CHAR,

@@ -469,7 +469,7 @@ STRUCT!{struct LSA_FOREST_TRUST_BINARY_DATA {
     Buffer: PUCHAR,
 }}
 pub type PLSA_FOREST_TRUST_BINARY_DATA = *mut LSA_FOREST_TRUST_BINARY_DATA;
-UNION2!{union LSA_FOREST_TRUST_RECORD_ForestTrustData {
+UNION!{union LSA_FOREST_TRUST_RECORD_ForestTrustData {
     [usize; 5],
     TopLevelName TopLevelName_mut: LSA_UNICODE_STRING,
     DomainInfo DomainInfo_mut: LSA_FOREST_TRUST_DOMAIN_INFO,

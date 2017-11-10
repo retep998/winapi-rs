@@ -49,7 +49,7 @@ pub type PPDH_COUNTER_PATH_ELEMENTS_A = *mut PDH_COUNTER_PATH_ELEMENTS_A;
 pub type PPDH_COUNTER_PATH_ELEMENTS_W = *mut PDH_COUNTER_PATH_ELEMENTS_W;
 pub type PPDH_BROWSE_DLG_CONFIG_HA = *mut PDH_BROWSE_DLG_CONFIG_HA;
 pub type PPDH_BROWSE_DLG_CONFIG_HW = *mut PDH_BROWSE_DLG_CONFIG_HW;
-UNION2!{union PDH_FMT_COUNTERVALUE_u {
+UNION!{union PDH_FMT_COUNTERVALUE_u {
     [u64; 1],
     longValue longValue_mut: LONG,
     doubleValue doubleValue_mut: c_double,
@@ -178,7 +178,7 @@ STRUCT!{struct PDH_COUNTER_INFO_A_u_s {
     dwInstanceIndex: DWORD,
     szCounterName: LPSTR,
 }}
-UNION2!{union PDH_COUNTER_INFO_A_u {
+UNION!{union PDH_COUNTER_INFO_A_u {
     [u32; 7] [u64; 6],
     DataItemPath DataItemPath_mut: PDH_DATA_ITEM_PATH_ELEMENTS_A,
     CounterPath CounterPath_mut: PDH_COUNTER_PATH_ELEMENTS_A,
@@ -206,7 +206,7 @@ STRUCT!{struct PDH_COUNTER_INFO_W_u_s {
     dwInstanceIndex: DWORD,
     szCounterName: LPWSTR,
 }}
-UNION2!{union PDH_COUNTER_INFO_W_u {
+UNION!{union PDH_COUNTER_INFO_W_u {
     [u32; 7] [u64; 6],
     DataItemPath DataItemPath_mut: PDH_DATA_ITEM_PATH_ELEMENTS_W,
     CounterPath CounterPath_mut: PDH_COUNTER_PATH_ELEMENTS_W,

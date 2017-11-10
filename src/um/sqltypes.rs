@@ -118,7 +118,7 @@ STRUCT!{struct SQL_DAY_SECOND_STRUCT {
     second: SQLUINTEGER,
     fraction: SQLUINTEGER,
 }}
-UNION2!{union SQL_INTERVAL_STRUCT_intval {
+UNION!{union SQL_INTERVAL_STRUCT_intval {
     [u32; 5],
     year_month year_month_mut: SQL_YEAR_MONTH_STRUCT,
     day_second day_second_mut: SQL_DAY_SECOND_STRUCT,

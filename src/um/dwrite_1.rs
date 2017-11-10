@@ -456,7 +456,7 @@ STRUCT!{struct DWRITE_PANOSE_symbol {
     aspectRatio163: UINT8,
     aspectRatio211: UINT8,
 }}
-UNION2!{union DWRITE_PANOSE {
+UNION!{union DWRITE_PANOSE {
     [u8; 10],
     values values_mut: [UINT8; 10],
     familyKind familyKind_mut: UINT8,

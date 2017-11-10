@@ -1739,7 +1739,7 @@ STRUCT!{struct COPYFILE2_MESSAGE_Error {
     uliTotalFileSize: ULARGE_INTEGER,
     uliTotalBytesTransferred: ULARGE_INTEGER,
 }}
-UNION2!{union COPYFILE2_MESSAGE_Info {
+UNION!{union COPYFILE2_MESSAGE_Info {
     [u64; 8] [u64; 9],
     ChunkStarted ChunkStarted_mut: COPYFILE2_MESSAGE_ChunkStarted,
     ChunkFinished ChunkFinished_mut: COPYFILE2_MESSAGE_ChunkFinished,
@@ -2558,7 +2558,7 @@ ENUM!{enum FILE_ID_TYPE {
     ExtendedFileIdType,
     MaximumFileIdType,
 }}
-UNION2!{union FILE_ID_DESCRIPTOR_u {
+UNION!{union FILE_ID_DESCRIPTOR_u {
     [u64; 2],
     FileId FileId_mut: LARGE_INTEGER,
     ObjectId ObjectId_mut: GUID,

@@ -277,7 +277,7 @@ STRUCT!{struct SPTRANSITIONENTRY_u_s2 {
     hWord: SPWORDHANDLE,
     pvClientWordContext: *mut c_void,
 }}
-UNION2!{union SPTRANSITIONENTRY_u {
+UNION!{union SPTRANSITIONENTRY_u {
     [usize; 3],
     s1 s1_mut: SPTRANSITIONENTRY_u_s1,
     s2 s2_mut: SPTRANSITIONENTRY_u_s2,
