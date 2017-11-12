@@ -469,17 +469,12 @@ STRUCT!{struct LSA_FOREST_TRUST_BINARY_DATA {
     Buffer: PUCHAR,
 }}
 pub type PLSA_FOREST_TRUST_BINARY_DATA = *mut LSA_FOREST_TRUST_BINARY_DATA;
-STRUCT!{struct LSA_FOREST_TRUST_RECORD_ForestTrustData {
-    DomainInfo: LSA_FOREST_TRUST_DOMAIN_INFO,
+UNION!{union LSA_FOREST_TRUST_RECORD_ForestTrustData {
+    [usize; 5],
+    TopLevelName TopLevelName_mut: LSA_UNICODE_STRING,
+    DomainInfo DomainInfo_mut: LSA_FOREST_TRUST_DOMAIN_INFO,
+    Data Data_mut: LSA_FOREST_TRUST_BINARY_DATA,
 }}
-UNION!(
-    LSA_FOREST_TRUST_RECORD_ForestTrustData, DomainInfo, TopLevelName, TopLevelName_mut,
-    LSA_UNICODE_STRING
-);
-UNION!(
-    LSA_FOREST_TRUST_RECORD_ForestTrustData, DomainInfo, Data, Data_mut,
-    LSA_FOREST_TRUST_BINARY_DATA
-);
 STRUCT!{struct LSA_FOREST_TRUST_RECORD {
     Flags: ULONG,
     ForestTrustType: LSA_FOREST_TRUST_RECORD_TYPE,
@@ -882,9 +877,32 @@ STRUCT!{struct MSV1_0_SUBAUTH_RESPONSE {
     SubAuthReturnBuffer: PUCHAR,
 }}
 pub type PMSV1_0_SUBAUTH_RESPONSE = *mut MSV1_0_SUBAUTH_RESPONSE;
+pub use self::SystemFunction036 as RtlGenRandom;
+pub use self::SystemFunction040 as RtlEncryptMemory;
+pub use self::SystemFunction041 as RtlDecryptMemory;
+extern "system" {
+    pub fn SystemFunction036(
+        RandomBuffer: PVOID,
+        RandomBufferLength: ULONG,
+    ) -> BOOLEAN;
+}
 pub const RTL_ENCRYPT_MEMORY_SIZE: ULONG = 8;
 pub const RTL_ENCRYPT_OPTION_CROSS_PROCESS: ULONG = 0x01;
 pub const RTL_ENCRYPT_OPTION_SAME_LOGON: ULONG = 0x02;
+extern "system" {
+    pub fn SystemFunction040(
+        Memory: PVOID,
+        MemorySize: ULONG,
+        OptionFlags: ULONG,
+    ) -> NTSTATUS;
+    pub fn SystemFunction041(
+        Memory: PVOID,
+        MemorySize: ULONG,
+        OptionFlags: ULONG,
+    ) -> NTSTATUS;
+}
+pub const KERBEROS_VERSION: ULONG = 5;
+pub const KERBEROS_REVISION: ULONG = 6;
 pub const KERB_ETYPE_NULL: LONG = 0;
 pub const KERB_ETYPE_DES_CBC_CRC: LONG = 1;
 pub const KERB_ETYPE_DES_CBC_MD4: LONG = 2;

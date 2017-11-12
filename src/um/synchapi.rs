@@ -156,6 +156,13 @@ extern "system" {
         dwMilliseconds: DWORD,
         bAlertable: BOOL,
     ) -> DWORD;
+    pub fn WaitForMultipleObjectsEx(
+        nCount: DWORD,
+        lpHandles: *const HANDLE,
+        bWaitAll: BOOL,
+        dwMilliseconds: DWORD,
+        bAlertable: BOOL,
+    ) -> DWORD;
 }
 //pub const MUTEX_MODIFY_STATE: DWORD = MUTANT_QUERY_STATE;
 //pub const MUTEX_ALL_ACCESS: DWORD = MUTANT_ALL_ACCESS;

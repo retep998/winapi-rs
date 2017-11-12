@@ -312,7 +312,7 @@ BITFIELD!{SCOPE_ID_u_s bitfield: ULONG [
     Zone set_Zone[0..28],
     Level set_Level[28..32],
 ]}
-UNION2!{union SCOPE_ID_u {
+UNION!{union SCOPE_ID_u {
     [u32; 1],
     s s_mut: SCOPE_ID_u_s,
     Value Value_mut: ULONG,

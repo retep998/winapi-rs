@@ -13,12 +13,12 @@ STRUCT!{struct WNODE_HEADER_u1_s {
     Version: ULONG,
     Linkage: ULONG,
 }}
-UNION2!{union WNODE_HEADER_u1 {
+UNION!{union WNODE_HEADER_u1 {
     [u64; 1],
     HistoricalContext HistoricalContext_mut: ULONG64,
     s s_mut: WNODE_HEADER_u1_s,
 }}
-UNION2!{union WNODE_HEADER_u2 {
+UNION!{union WNODE_HEADER_u2 {
     [u32; 2] [u64; 1],
     CountLost CountLost_mut: ULONG,
     KernelHandle KernelHandle_mut: HANDLE,
@@ -62,7 +62,7 @@ STRUCT!{struct OFFSETINSTANCEDATAANDLENGTH {
     LengthInstanceData: ULONG,
 }}
 pub type POFFSETINSTANCEDATAANDLENGTH = *mut OFFSETINSTANCEDATAANDLENGTH;
-UNION2!{union WNODE_ALL_DATA_u {
+UNION!{union WNODE_ALL_DATA_u {
     [u32; 1],
     FixedInstanceSize FixedInstanceSize_mut: ULONG,
     OffsetInstanceDataAndLength OffsetInstanceDataAndLength_mut: OFFSETINSTANCEDATAANDLENGTH,
@@ -108,7 +108,7 @@ STRUCT!{struct WNODE_EVENT_ITEM {
     WnodeHeader: WNODE_HEADER,
 }}
 pub type PWNODE_EVENT_ITEM = *mut WNODE_EVENT_ITEM;
-UNION2!{union WNODE_EVENT_REFERENCE_u {
+UNION!{union WNODE_EVENT_REFERENCE_u {
     [u32; 1],
     TargetInstanceIndex TargetInstanceIndex_mut: ULONG,
     TargetInstanceName TargetInstanceName_mut: [WCHAR; 0],
@@ -125,7 +125,7 @@ STRUCT!{struct WNODE_TOO_SMALL {
     SizeNeeded: ULONG,
 }}
 pub type PWNODE_TOO_SMALL = *mut WNODE_TOO_SMALL;
-UNION2!{union WMIREGGUIDW_u {
+UNION!{union WMIREGGUIDW_u {
     [usize; 1],
     InstanceNameList InstanceNameList_mut: ULONG,
     BaseNameOffset BaseNameOffset_mut: ULONG,

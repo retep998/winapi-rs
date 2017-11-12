@@ -48,7 +48,7 @@ STRUCT!{struct EVENT_DATA_DESCRIPTOR_u_s {
     Reserved1: UCHAR,
     Reserved2: USHORT,
 }}
-UNION2!{union EVENT_DATA_DESCRIPTOR_u {
+UNION!{union EVENT_DATA_DESCRIPTOR_u {
     [u32; 1],
     Reserved Reserved_mut: ULONG,
     s s_mut: EVENT_DATA_DESCRIPTOR_u_s,

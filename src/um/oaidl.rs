@@ -67,7 +67,7 @@ ENUM!{enum SF_TYPE {
     SF_HAVEIID = VT_UNKNOWN | VT_RESERVED,
 }}
 #[cfg(target_arch = "x86")]
-UNION2!{union __MIDL_IOleAutomationTypes_0001 {
+UNION!{union __MIDL_IOleAutomationTypes_0001 {
     [u32; 6],
     BstrStr BstrStr_mut: SAFEARR_BSTR,
     UnknownStr UnknownStr_mut: SAFEARR_UNKNOWN,
@@ -81,7 +81,7 @@ UNION2!{union __MIDL_IOleAutomationTypes_0001 {
     HyperStr HyperStr_mut: HYPER_SIZEDARR,
 }}
 #[cfg(target_arch = "x86_64")]
-UNION2!{union __MIDL_IOleAutomationTypes_0001 {
+UNION!{union __MIDL_IOleAutomationTypes_0001 {
     [u64; 4],
     BstrStr BstrStr_mut: SAFEARR_BSTR,
     UnknownStr UnknownStr_mut: SAFEARR_UNKNOWN,
@@ -133,7 +133,7 @@ STRUCT!{struct __tagBRECORD {
     pvRecord: PVOID,
     pRecInfo: *mut IRecordInfo,
 }}
-UNION2!{union VARIANT_n3 {
+UNION!{union VARIANT_n3 {
     [u64; 1] [u64; 2],
     llVal llVal_mut: LONGLONG,
     lVal lVal_mut: LONG,
@@ -187,7 +187,7 @@ STRUCT!{struct __tagVARIANT {
     wReserved3: WORD,
     n3: VARIANT_n3,
 }}
-UNION2!{union VARIANT_n1 {
+UNION!{union VARIANT_n1 {
     [u64; 2] [u64; 3],
     n2 n2_mut: __tagVARIANT,
     decVal decVal_mut: DECIMAL,
@@ -205,7 +205,7 @@ STRUCT!{struct _wireBRECORD {
     pRecInfo: *mut IRecordInfo,
     pRecord: *mut byte,
 }}
-UNION2!{union _wireVARIANT_u {
+UNION!{union _wireVARIANT_u {
     [u64; 2],
     llVal llVal_mut: LONGLONG,
     lVal lVal_mut: LONG,
@@ -275,7 +275,7 @@ ENUM!{enum TYPEKIND {
     TKIND_UNION,
     TKIND_MAX,
 }}
-UNION2!{union TYPEDESC_u {
+UNION!{union TYPEDESC_u {
     [usize; 1],
     lptdesc lptdesc_mut: *mut TYPEDESC,
     lpadesc lpadesc_mut: *mut ARRAYDESC,
@@ -318,7 +318,7 @@ pub const IDLFLAG_FIN: DWORD = PARAMFLAG_FIN;
 pub const IDLFLAG_FOUT: DWORD = PARAMFLAG_FOUT;
 pub const IDLFLAG_FLCID: DWORD = PARAMFLAG_FLCID;
 pub const IDLFLAG_FRETVAL: DWORD = PARAMFLAG_FRETVAL;
-UNION2!{union ELEMDESC_u {
+UNION!{union ELEMDESC_u {
     [usize; 2],
     idldesc idldesc_mut: IDLDESC,
     paramdesc paramdesc_mut: PARAMDESC,
@@ -419,7 +419,7 @@ pub const IMPLTYPEFLAG_FDEFAULT: DWORD = 0x1;
 pub const IMPLTYPEFLAG_FSOURCE: DWORD = 0x2;
 pub const IMPLTYPEFLAG_FRESTRICTED: DWORD = 0x4;
 pub const IMPLTYPEFLAG_FDEFAULTVTABLE: DWORD = 0x8;
-UNION2!{union VARDESC_u {
+UNION!{union VARDESC_u {
     [usize; 1],
     oInst oInst_mut: ULONG,
     lpvarValue lpvarValue_mut: *mut VARIANT,

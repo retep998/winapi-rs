@@ -94,7 +94,7 @@ STRUCT!{struct EVENT_HEADER_u_s {
     KernelTime: ULONG,
     UserTime: ULONG,
 }}
-UNION2!{union EVENT_HEADER_u {
+UNION!{union EVENT_HEADER_u {
     [u64; 1],
     s s_mut: EVENT_HEADER_u_s,
     ProcessorTime ProcessorTime_mut: ULONG64,

@@ -151,7 +151,7 @@ STRUCT!{struct LARGE_INTEGER_u {
     LowPart: DWORD,
     HighPart: LONG,
 }}
-UNION2!{union LARGE_INTEGER {
+UNION!{union LARGE_INTEGER {
     [u64; 1],
     QuadPart QuadPart_mut: LONGLONG,
     u u_mut: LARGE_INTEGER_u,
@@ -161,7 +161,7 @@ STRUCT!{struct ULARGE_INTEGER_u {
     LowPart: DWORD,
     HighPart: LONG,
 }}
-UNION2!{union ULARGE_INTEGER {
+UNION!{union ULARGE_INTEGER {
     [u64; 1],
     QuadPart QuadPart_mut: ULONGLONG,
     u u_mut: ULARGE_INTEGER_u,
@@ -1039,7 +1039,7 @@ STRUCT!{struct CONTEXT_u_s {
     Xmm14: M128A,
     Xmm15: M128A,
 }}
-UNION2!{union CONTEXT_u {
+UNION!{union CONTEXT_u {
     [u64; 64],
     FltSave FltSave_mut: XMM_SAVE_AREA32,
     s s_mut: CONTEXT_u_s,
@@ -1170,7 +1170,7 @@ STRUCT!{struct KNONVOLATILE_CONTEXT_POINTERS_u1_s {
     Xmm14: PM128A,
     Xmm15: PM128A,
 }}
-UNION2!{union KNONVOLATILE_CONTEXT_POINTERS_u1 {
+UNION!{union KNONVOLATILE_CONTEXT_POINTERS_u1 {
     [u64; 16],
     FloatingContext FloatingContext_mut: [PM128A; 16],
     s s_mut: KNONVOLATILE_CONTEXT_POINTERS_u1_s,
@@ -1193,7 +1193,7 @@ STRUCT!{struct KNONVOLATILE_CONTEXT_POINTERS_u2_s {
     R14: PDWORD64,
     R15: PDWORD64,
 }}
-UNION2!{union KNONVOLATILE_CONTEXT_POINTERS_u2 {
+UNION!{union KNONVOLATILE_CONTEXT_POINTERS_u2 {
     [u64; 16],
     IntegerContext IntegerContext_mut: [PDWORD64; 16],
     s s_mut: KNONVOLATILE_CONTEXT_POINTERS_u2_s,
@@ -1288,7 +1288,7 @@ BITFIELD!{LDT_ENTRY_Bits Bitfield: DWORD [
     Granularity set_Granularity[23..24],
     BaseHi set_BaseHi[24..32],
 ]}
-UNION2!{union LDT_ENTRY_HighWord {
+UNION!{union LDT_ENTRY_HighWord {
     [u32; 1],
     Bytes Bytes_mut: LDT_ENTRY_Bytes,
     Bits Bits_mut: LDT_ENTRY_Bits,
@@ -1383,7 +1383,7 @@ BITFIELD!(WOW64_LDT_ENTRY_Bits BitFields: DWORD [
     Granularity set_Granularity[23..24],
     BaseHi set_BaseHi[24..32],
 ]);
-UNION2!{union WOW64_LDT_ENTRY_HighWord {
+UNION!{union WOW64_LDT_ENTRY_HighWord {
     [u32; 1],
     Bytes Bytes_mut: WOW64_LDT_ENTRY_Bytes,
     Bits Bits_mut: WOW64_LDT_ENTRY_Bits,
@@ -1508,7 +1508,7 @@ pub const SID_RECOMMENDED_SUB_AUTHORITIES: BYTE = 1;
 pub const SECURITY_MAX_SID_SIZE: usize = 12 - 4 + (SID_MAX_SUB_AUTHORITIES as usize * 4);
 pub const SECURITY_MAX_SID_STRING_CHARACTERS: BYTE = 2 + 4 + 15 + (11 * SID_MAX_SUB_AUTHORITIES)
     + 1;
-UNION2!{union SE_SID {
+UNION!{union SE_SID {
     [u32; 17],
     Sid Sid_mut: SID,
     Buffer Buffer_mut: [BYTE; SECURITY_MAX_SID_SIZE],
@@ -2399,12 +2399,12 @@ STRUCT!{struct TOKEN_USER {
     User: SID_AND_ATTRIBUTES,
 }}
 pub type PTOKEN_USER = *mut TOKEN_USER;
-UNION2!{union SE_TOKEN_USER_u1 {
+UNION!{union SE_TOKEN_USER_u1 {
     [usize; 2],
     TokenUser TokenUser_mut: TOKEN_USER,
     User User_mut: SID_AND_ATTRIBUTES,
 }}
-UNION2!{union SE_TOKEN_USER_u2 {
+UNION!{union SE_TOKEN_USER_u2 {
     [u32; 17],
     Sid Sid_mut: SID,
     Buffer Buffer_mut: [BYTE; SECURITY_MAX_SID_SIZE],
@@ -2583,7 +2583,7 @@ pub const CLAIM_SECURITY_ATTRIBUTE_VALID_FLAGS: DWORD = CLAIM_SECURITY_ATTRIBUTE
     | CLAIM_SECURITY_ATTRIBUTE_DISABLED_BY_DEFAULT | CLAIM_SECURITY_ATTRIBUTE_DISABLED
     | CLAIM_SECURITY_ATTRIBUTE_MANDATORY;
 pub const CLAIM_SECURITY_ATTRIBUTE_CUSTOM_FLAGS: DWORD = 0xFFFF0000;
-UNION2!{union CLAIM_SECURITY_ATTRIBUTE_V1_Values {
+UNION!{union CLAIM_SECURITY_ATTRIBUTE_V1_Values {
     [usize; 1],
     pInt64 pInt64_mut: PLONG64,
     pUint64 pUint64_mut: PDWORD64,
@@ -2600,7 +2600,7 @@ STRUCT!{struct CLAIM_SECURITY_ATTRIBUTE_V1 {
     Values: CLAIM_SECURITY_ATTRIBUTE_V1_Values,
 }}
 pub type PCLAIM_SECURITY_ATTRIBUTE_V1 = *mut CLAIM_SECURITY_ATTRIBUTE_V1;
-UNION2!{union CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values {
+UNION!{union CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values {
     [u32; 1],
     pInt64 pInt64_mut: [DWORD; ANYSIZE_ARRAY],
     pUint64 pUint64_mut: [DWORD; ANYSIZE_ARRAY],
@@ -2620,7 +2620,7 @@ pub type PCLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 = *mut CLAIM_SECURITY_ATTRIBUTE_R
 pub const CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1: WORD = 1;
 pub const CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION: WORD =
     CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1;
-UNION2!{union CLAIM_SECURITY_ATTRIBUTES_INFORMATION_Attribute {
+UNION!{union CLAIM_SECURITY_ATTRIBUTES_INFORMATION_Attribute {
     [usize; 1],
     pAttributeV1 pAttributeV1_mut: PCLAIM_SECURITY_ATTRIBUTE_V1,
 }}
@@ -2759,7 +2759,7 @@ STRUCT!{struct EXCEPTION_REGISTRATION_RECORD {
     Handler: PEXCEPTION_ROUTINE,
 }}
 pub type PEXCEPTION_REGISTRATION_RECORD = *mut EXCEPTION_REGISTRATION_RECORD;
-UNION2!{union NT_TIB_u {
+UNION!{union NT_TIB_u {
     [usize; 1],
     FiberData FiberData_mut: PVOID,
     Version Version_mut: DWORD,
@@ -2774,7 +2774,7 @@ STRUCT!{struct NT_TIB {
     _Self: *mut NT_TIB,
 }}
 pub type PNT_TIB = *mut NT_TIB;
-UNION2!{union NT_TIB32_u {
+UNION!{union NT_TIB32_u {
     [u32; 1],
     FiberData FiberData_mut: DWORD,
     Version Version_mut: DWORD,
@@ -2789,7 +2789,7 @@ STRUCT!{struct NT_TIB32 {
     Self_: DWORD,
 }}
 pub type PNT_TIB32 = *mut NT_TIB32;
-UNION2!{union NT_TIB64_u {
+UNION!{union NT_TIB64_u {
     [u64; 1],
     FiberData FiberData_mut: DWORD64,
     Version Version_mut: DWORD,
@@ -3094,17 +3094,17 @@ STRUCT!{struct JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION {
     LimitFlags: DWORD,
 }}
 pub type PJOBOBJECT_NOTIFICATION_LIMIT_INFORMATION = *mut JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION;
-UNION2!{union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_u1 {
+UNION!{union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_u1 {
     [u64; 1],
     JobHighMemoryLimit JobHighMemoryLimit_mut: DWORD64,
     JobMemoryLimit JobMemoryLimit_mut: DWORD64,
 }}
-UNION2!{union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_u2 {
+UNION!{union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_u2 {
     [u32; 1],
     RateControlTolerance RateControlTolerance_mut: JOBOBJECT_RATE_CONTROL_TOLERANCE,
     CpuRateControlTolerance CpuRateControlTolerance_mut: JOBOBJECT_RATE_CONTROL_TOLERANCE,
 }}
-UNION2!{union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_u3 {
+UNION!{union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_u3 {
     [u32; 1],
     RateControlToleranceInterval RateControlToleranceInterval_mut:
         JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL,
@@ -3140,17 +3140,17 @@ STRUCT!{struct JOBOBJECT_LIMIT_VIOLATION_INFORMATION {
     RateControlToleranceLimit: JOBOBJECT_RATE_CONTROL_TOLERANCE,
 }}
 pub type PJOBOBJECT_LIMIT_VIOLATION_INFORMATION = *mut JOBOBJECT_LIMIT_VIOLATION_INFORMATION;
-UNION2!{union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_u1 {
+UNION!{union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_u1 {
     [u64; 1],
     JobHighMemoryLimit JobHighMemoryLimit_mut: DWORD64,
     JobMemoryLimit JobMemoryLimit_mut: DWORD64,
 }}
-UNION2!{union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_u2 {
+UNION!{union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_u2 {
     [u32; 1],
     RateControlTolerance RateControlTolerance_mut: JOBOBJECT_RATE_CONTROL_TOLERANCE,
     CpuRateControlTolerance CpuRateControlTolerance_mut: JOBOBJECT_RATE_CONTROL_TOLERANCE,
 }}
-UNION2!{union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_u3 {
+UNION!{union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_u3 {
     [u32; 1],
     RateControlToleranceLimit RateControlToleranceLimit_mut: JOBOBJECT_RATE_CONTROL_TOLERANCE,
     CpuRateControlToleranceLimit CpuRateControlToleranceLimit_mut:
@@ -3179,7 +3179,7 @@ STRUCT!{struct JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_u_s {
     MinRate: WORD,
     MaxRate: WORD,
 }}
-UNION2!{union JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_u {
+UNION!{union JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_u {
     [u32; 1],
     CpuRate CpuRate_mut: DWORD,
     Weight Weight_mut: DWORD,
@@ -3466,7 +3466,7 @@ STRUCT!{struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_ProcessorCore {
 STRUCT!{struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_NumaNode {
     NodeNumber: DWORD,
 }}
-UNION2!{union SYSTEM_LOGICAL_PROCESSOR_INFORMATION_u {
+UNION!{union SYSTEM_LOGICAL_PROCESSOR_INFORMATION_u {
     [u64; 2],
     ProcessorCore ProcessorCore_mut: SYSTEM_LOGICAL_PROCESSOR_INFORMATION_ProcessorCore,
     NumaNode NumaNode_mut: SYSTEM_LOGICAL_PROCESSOR_INFORMATION_NumaNode,
@@ -3517,7 +3517,7 @@ STRUCT!{struct GROUP_RELATIONSHIP {
     GroupInfo: [PROCESSOR_GROUP_INFO; ANYSIZE_ARRAY],
 }}
 pub type PGROUP_RELATIONSHIP = *mut GROUP_RELATIONSHIP;
-UNION2!{union SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_u {
+UNION!{union SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_u {
     [u32; 17] [u64; 9],
     Processor Processor_mut: PROCESSOR_RELATIONSHIP,
     NumaNode NumaNode_mut: NUMA_NODE_RELATIONSHIP,
@@ -5139,7 +5139,7 @@ BITFIELD!(PROCESSOR_PERFSTATE_POLICY_u_Flags AsBYTE: BYTE [
     DecreasePolicy set_DecreasePolicy[3..5],
     Reserved set_Reserved[5..8],
 ]);
-UNION2!{union PROCESSOR_PERFSTATE_POLICY_u {
+UNION!{union PROCESSOR_PERFSTATE_POLICY_u {
     [u8; 1],
     Spare Spare_mut: BYTE,
     Flags Flags_mut: PROCESSOR_PERFSTATE_POLICY_u_Flags,
@@ -5617,7 +5617,7 @@ STRUCT!{struct ANON_OBJECT_HEADER_BIGOBJ {
     NumberOfSymbols: DWORD,
 }}
 pub const IMAGE_SIZEOF_SHORT_NAME: usize = 8;
-UNION2!{union IMAGE_SECTION_HEADER_Misc {
+UNION!{union IMAGE_SECTION_HEADER_Misc {
     [u32; 1],
     PhysicalAddress PhysicalAddress_mut: DWORD,
     VirtualSize VirtualSize_mut: DWORD,
@@ -5679,7 +5679,7 @@ STRUCT!{struct IMAGE_SYMBOL_N_Name {
     Short: DWORD,
     Long: DWORD,
 }}
-UNION2!{union IMAGE_SYMBOL_N {
+UNION!{union IMAGE_SYMBOL_N {
     [u32; 2],
     ShortName ShortName_mut: [BYTE; 8],
     Name Name_mut: IMAGE_SYMBOL_N_Name,
@@ -5699,7 +5699,7 @@ STRUCT!{struct IMAGE_SYMBOL_EX_N_Name {
     Short: DWORD,
     Long: DWORD,
 }}
-UNION2!{union IMAGE_SYMBOL_EX_N {
+UNION!{union IMAGE_SYMBOL_EX_N {
     [u32; 2],
     ShortName ShortName_mut: [BYTE; 8],
     Name Name_mut: IMAGE_SYMBOL_EX_N_Name,
@@ -5814,7 +5814,7 @@ STRUCT!{struct IMAGE_AUX_SYMBOL_Sym_Misc_LnSz {
     Linenumber: WORD,
     Size: WORD,
 }}
-UNION2!{union IMAGE_AUX_SYMBOL_Sym_Misc {
+UNION!{union IMAGE_AUX_SYMBOL_Sym_Misc {
     [u32; 1],
     LnSz LnSz_mut: IMAGE_AUX_SYMBOL_Sym_Misc_LnSz,
     TotalSize TotalSize_mut: DWORD,
@@ -5826,7 +5826,7 @@ STRUCT!{struct IMAGE_AUX_SYMBOL_Sym_FcnAry_Function {
 STRUCT!{struct IMAGE_AUX_SYMBOL_Sym_FcnAry_Array {
     Dimension: [WORD; 4],
 }}
-UNION2!{union IMAGE_AUX_SYMBOL_Sym_FcnAry {
+UNION!{union IMAGE_AUX_SYMBOL_Sym_FcnAry {
     [u32; 2],
     Function Function_mut: IMAGE_AUX_SYMBOL_Sym_FcnAry_Function,
     Array Array_mut: IMAGE_AUX_SYMBOL_Sym_FcnAry_Array,
@@ -5910,7 +5910,7 @@ pub const IMAGE_COMDAT_SELECT_NEWEST: BYTE = 7;
 pub const IMAGE_WEAK_EXTERN_SEARCH_NOLIBRARY: BYTE = 1;
 pub const IMAGE_WEAK_EXTERN_SEARCH_LIBRARY: BYTE = 2;
 pub const IMAGE_WEAK_EXTERN_SEARCH_ALIAS: BYTE = 3;
-UNION2!{union IMAGE_RELOCATION_u {
+UNION!{union IMAGE_RELOCATION_u {
     [u32; 1],
     VirtualAddress VirtualAddress_mut: DWORD,
     RelocCount RelocCount_mut: DWORD,
@@ -6154,7 +6154,7 @@ pub const IMAGE_REL_EBC_ADDR32NB: WORD = 0x0001;
 pub const IMAGE_REL_EBC_REL32: WORD = 0x0002;
 pub const IMAGE_REL_EBC_SECTION: WORD = 0x0003;
 pub const IMAGE_REL_EBC_SECREL: WORD = 0x0004;
-UNION2!{union IMAGE_LINENUMBER_Type {
+UNION!{union IMAGE_LINENUMBER_Type {
     [u32; 1],
     SymbolTableIndex SymbolTableIndex_mut: DWORD,
     VirtualAddress VirtualAddress_mut: DWORD,
@@ -6222,7 +6222,7 @@ STRUCT!{struct IMAGE_IMPORT_BY_NAME {
     Name: [CHAR; 1],
 }}
 pub type PIMAGE_IMPORT_BY_NAME = *mut IMAGE_IMPORT_BY_NAME;
-UNION2!{union IMAGE_THUNK_DATA64_u1 {
+UNION!{union IMAGE_THUNK_DATA64_u1 {
     [u64; 1],
     ForwarderString ForwarderString_mut: ULONGLONG,
     Function Function_mut: ULONGLONG,
@@ -6233,7 +6233,7 @@ STRUCT!{struct IMAGE_THUNK_DATA64 {
     u1: IMAGE_THUNK_DATA64_u1,
 }}
 pub type PIMAGE_THUNK_DATA64 = *mut IMAGE_THUNK_DATA64;
-UNION2!{union IMAGE_THUNK_DATA32_u1 {
+UNION!{union IMAGE_THUNK_DATA32_u1 {
     [u32; 1],
     ForwarderString ForwarderString_mut: DWORD,
     Function Function_mut: DWORD,
@@ -6327,7 +6327,7 @@ pub fn IMAGE_SNAP_BY_ORDINAL(Ordinal: DWORD) -> bool {
 pub type IMAGE_TLS_DIRECTORY = IMAGE_TLS_DIRECTORY32;
 pub type PIMAGE_TLS_DIRECTORY = PIMAGE_TLS_DIRECTORY32;
 }
-UNION2!{union IMAGE_IMPORT_DESCRIPTOR_u {
+UNION!{union IMAGE_IMPORT_DESCRIPTOR_u {
     [u32; 1],
     Characteristics Characteristics_mut: DWORD,
     OriginalFirstThunk OriginalFirstThunk_mut: DWORD,
@@ -6389,7 +6389,7 @@ BITFIELD!(IMAGE_RESOURCE_DIRECTORY_ENTRY_u_s BitFields: DWORD [
     NameOffset set_NameOffset[0..31],
     NameIsString set_NameIsString[31..32],
 ]);
-UNION2!{union IMAGE_RESOURCE_DIRECTORY_ENTRY_u {
+UNION!{union IMAGE_RESOURCE_DIRECTORY_ENTRY_u {
     [u32; 1],
     s s_mut: IMAGE_RESOURCE_DIRECTORY_ENTRY_u_s,
     Name Name_mut: DWORD,
@@ -6692,7 +6692,7 @@ STRUCT!{struct IMAGE_ALPHA_RUNTIME_FUNCTION_ENTRY {
     PrologEndAddress: DWORD,
 }}
 pub type PIMAGE_ALPHA_RUNTIME_FUNCTION_ENTRY = *mut IMAGE_ALPHA_RUNTIME_FUNCTION_ENTRY;
-UNION2!{union IMAGE_RUNTIME_FUNCTION_ENTRY_u {
+UNION!{union IMAGE_RUNTIME_FUNCTION_ENTRY_u {
     [u32; 1],
     UnwindInfoAddress UnwindInfoAddress_mut: DWORD,
     UnwindData UnwindData_mut: DWORD,
@@ -6780,7 +6780,7 @@ STRUCT!{struct IMAGE_FUNCTION_ENTRY {
     EndOfPrologue: DWORD,
 }}
 pub type PIMAGE_FUNCTION_ENTRY = *mut IMAGE_FUNCTION_ENTRY;
-UNION2!{union IMAGE_FUNCTION_ENTRY64_u {
+UNION!{union IMAGE_FUNCTION_ENTRY64_u {
     [u64; 1],
     EndOfPrologue EndOfPrologue_mut: ULONGLONG,
     UnwindInfoAddress UnwindInfoAddress_mut: ULONGLONG,
@@ -6840,7 +6840,7 @@ STRUCT!{struct IMAGE_ARCHITECTURE_ENTRY {
 }}
 pub type PIMAGE_ARCHITECTURE_ENTRY = *mut IMAGE_ARCHITECTURE_ENTRY;
 pub const IMPORT_OBJECT_HDR_SIG2: WORD = 0xffff;
-UNION2!{union IMPORT_OBJECT_HEADER_u {
+UNION!{union IMPORT_OBJECT_HEADER_u {
     [u16; 1],
     Ordinal Ordinal_mut: WORD,
     Hint Hint_mut: WORD,
@@ -6899,7 +6899,7 @@ ENUM!{enum ReplacesCorHdrNumericDefines {
     MAX_CLASS_NAME = 1024,
     MAX_PACKAGE_NAME = 1024,
 }}
-UNION2!{union IMAGE_COR20_HEADER_u {
+UNION!{union IMAGE_COR20_HEADER_u {
     [u32; 1],
     EntryPointToken EntryPointToken_mut: DWORD,
     EntryPointRVA EntryPointRVA_mut: DWORD,
@@ -7021,7 +7021,7 @@ STRUCT!{struct SLIST_ENTRY {
 pub type PSLIST_ENTRY = *mut SLIST_ENTRY;
 #[cfg(target_arch = "x86_64")]
 IFDEF!{
-UNION2!{union SLIST_HEADER_u {
+UNION!{union SLIST_HEADER_u {
     [u64; 1],
     Alignment Alignment_mut: ULONGLONG,
     Region Region_mut: ULONGLONG,
@@ -7191,6 +7191,27 @@ pub const COMPRESSION_FORMAT_XPRESS_HUFF: USHORT = 0x0004;
 pub const COMPRESSION_ENGINE_STANDARD: USHORT = 0x0000;
 pub const COMPRESSION_ENGINE_MAXIMUM: USHORT = 0x0100;
 pub const COMPRESSION_ENGINE_HIBER: USHORT = 0x0200;
+// RtlEqualMemory
+#[inline]
+pub unsafe fn RtlMoveMemory(Destination: *mut c_void, Source: *const c_void, Length: usize) {
+    use core::ptr::copy;
+    copy(Source as *const u8, Destination as *mut u8, Length);
+}
+#[inline]
+pub unsafe fn RtlCopyMemory(Destination: *mut c_void, Source: *const c_void, Length: usize) {
+    use core::ptr::copy_nonoverlapping;
+    copy_nonoverlapping(Source as *const u8, Destination as *mut u8, Length);
+}
+#[inline]
+pub unsafe fn RtlFillMemory(Destination: *mut c_void, Length: usize, Fill: u8) {
+    use core::ptr::write_bytes;
+    write_bytes(Destination as *mut u8, Fill, Length);
+}
+#[inline]
+pub unsafe fn RtlZeroMemory(Destination: *mut c_void, Length: usize) {
+    use core::ptr::write_bytes;
+    write_bytes(Destination as *mut u8, 0, Length);
+}
 pub const SEF_DACL_AUTO_INHERIT: ULONG = 0x01;
 pub const SEF_SACL_AUTO_INHERIT: ULONG = 0x02;
 pub const SEF_DEFAULT_DESCRIPTOR_FOR_OBJECT: ULONG = 0x04;
@@ -8291,7 +8312,7 @@ BITFIELD!(TP_CALLBACK_ENVIRON_V3_u_s BitFields: DWORD [
     Persistent set_Persistent[1..2],
     Private set_Private[2..32],
 ]);
-UNION2!{union TP_CALLBACK_ENVIRON_V3_u {
+UNION!{union TP_CALLBACK_ENVIRON_V3_u {
     [u32; 1],
     Flags Flags_mut: DWORD,
     s s_mut: TP_CALLBACK_ENVIRON_V3_u_s,

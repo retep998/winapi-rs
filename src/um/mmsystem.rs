@@ -24,7 +24,7 @@ STRUCT!{struct MMTIME_smpte {
 STRUCT!{struct MMTIME_midi {
     songptrpos: DWORD,
 }}
-UNION2!{union MMTIME_u {
+UNION!{union MMTIME_u {
     [u8; 8],
     ms ms_mut: DWORD,
     sample sample_mut: DWORD,

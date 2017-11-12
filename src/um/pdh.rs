@@ -5,11 +5,11 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Common Performance Data Helper definitions
+use ctypes::c_double;
 use shared::basetsd::DWORD_PTR;
 use shared::guiddef::GUID;
 use shared::minwindef::{BOOL, DWORD, FILETIME, LPDWORD, UCHAR};
 use shared::windef::HWND;
-use shared::wtypesbase::DOUBLE;
 use um::winnt::{BOOLEAN, HANDLE, LONG, LONGLONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR};
 pub const PDH_FMT_RAW: DWORD = 0x00000010;
 pub const PDH_FMT_ANSI: DWORD = 0x00000020;
@@ -49,9 +49,17 @@ pub type PPDH_COUNTER_PATH_ELEMENTS_A = *mut PDH_COUNTER_PATH_ELEMENTS_A;
 pub type PPDH_COUNTER_PATH_ELEMENTS_W = *mut PDH_COUNTER_PATH_ELEMENTS_W;
 pub type PPDH_BROWSE_DLG_CONFIG_HA = *mut PDH_BROWSE_DLG_CONFIG_HA;
 pub type PPDH_BROWSE_DLG_CONFIG_HW = *mut PDH_BROWSE_DLG_CONFIG_HW;
+UNION!{union PDH_FMT_COUNTERVALUE_u {
+    [u64; 1],
+    longValue longValue_mut: LONG,
+    doubleValue doubleValue_mut: c_double,
+    largeValue largeValue_mut: LONGLONG,
+    AnsiStringValue AnsiStringValue_mut: LPCSTR,
+    WideStringValue WideStringValue_mut: LPCWSTR,
+}}
 STRUCT!{struct PDH_FMT_COUNTERVALUE {
     CStatus: DWORD,
-    largeValue: LONGLONG,
+    u: PDH_FMT_COUNTERVALUE_u,
 }}
 STRUCT!{struct PDH_RAW_LOG_RECORD {
     dwStructureSize: DWORD,
@@ -134,7 +142,7 @@ BITFIELD!(PDH_BROWSE_DLG_CONFIG_W flags: DWORD [
     IncludeCostlyObjects set_IncludeCostlyObjects[8..9],
     ShowObjectBrowser set_ShowObjectBrowser[9..10],
 ]);
-STRUCT!{struct PDH_COUNTER_INFO_INNER_A {
+STRUCT!{struct PDH_COUNTER_PATH_ELEMENTS_A {
     szMachineName: LPSTR,
     szObjectName: LPSTR,
     szInstanceName: LPSTR,
@@ -142,7 +150,7 @@ STRUCT!{struct PDH_COUNTER_INFO_INNER_A {
     dwInstanceIndex: DWORD,
     szCounterName: LPSTR,
 }}
-STRUCT!{struct PDH_COUNTER_INFO_INNER_W {
+STRUCT!{struct PDH_COUNTER_PATH_ELEMENTS_W {
     szMachineName: LPWSTR,
     szObjectName: LPWSTR,
     szInstanceName: LPWSTR,
@@ -162,6 +170,20 @@ STRUCT!{struct PDH_DATA_ITEM_PATH_ELEMENTS_W {
     dwItemId: DWORD,
     szInstanceName: LPWSTR,
 }}
+STRUCT!{struct PDH_COUNTER_INFO_A_u_s {
+    szMachineName: LPSTR,
+    szObjectName: LPSTR,
+    szInstanceName: LPSTR,
+    szParentInstance: LPSTR,
+    dwInstanceIndex: DWORD,
+    szCounterName: LPSTR,
+}}
+UNION!{union PDH_COUNTER_INFO_A_u {
+    [u32; 7] [u64; 6],
+    DataItemPath DataItemPath_mut: PDH_DATA_ITEM_PATH_ELEMENTS_A,
+    CounterPath CounterPath_mut: PDH_COUNTER_PATH_ELEMENTS_A,
+    s s_mut: PDH_COUNTER_INFO_A_u_s,
+}}
 STRUCT!{struct PDH_COUNTER_INFO_A {
     dwLength: DWORD,
     dwType: DWORD,
@@ -172,13 +194,24 @@ STRUCT!{struct PDH_COUNTER_INFO_A {
     dwUserData: DWORD_PTR,
     dwQueryUserData: DWORD_PTR,
     szFullPath: LPSTR,
-    info_union: PDH_DATA_ITEM_PATH_ELEMENTS_A,
+    u: PDH_COUNTER_INFO_A_u,
     szExplainText: LPSTR,
     DataBuffer: [DWORD; 1],
 }}
-UNION!(PDH_COUNTER_INFO_A, info_union, DataItemPath, DataItemPath_mut, PDH_DATA_ITEM_PATH_ELEMENTS_A);
-UNION!(PDH_COUNTER_INFO_A, info_union, CounterPath, CounterPath_mut, PDH_COUNTER_PATH_ELEMENTS_A);
-UNION!(PDH_COUNTER_INFO_A, info_union, inner, inner_mut, PDH_COUNTER_INFO_INNER_A);
+STRUCT!{struct PDH_COUNTER_INFO_W_u_s {
+    szMachineName: LPWSTR,
+    szObjectName: LPWSTR,
+    szInstanceName: LPWSTR,
+    szParentInstance: LPWSTR,
+    dwInstanceIndex: DWORD,
+    szCounterName: LPWSTR,
+}}
+UNION!{union PDH_COUNTER_INFO_W_u {
+    [u32; 7] [u64; 6],
+    DataItemPath DataItemPath_mut: PDH_DATA_ITEM_PATH_ELEMENTS_W,
+    CounterPath CounterPath_mut: PDH_COUNTER_PATH_ELEMENTS_W,
+    s s_mut: PDH_COUNTER_INFO_W_u_s,
+}}
 STRUCT!{struct PDH_COUNTER_INFO_W {
     dwLength: DWORD,
     dwType: DWORD,
@@ -189,33 +222,9 @@ STRUCT!{struct PDH_COUNTER_INFO_W {
     dwUserData: DWORD_PTR,
     dwQueryUserData: DWORD_PTR,
     szFullPath: LPWSTR,
-    info_union: PDH_DATA_ITEM_PATH_ELEMENTS_W,
+    u: PDH_COUNTER_INFO_W_u,
     szExplainText: LPWSTR,
     DataBuffer: [DWORD; 1],
-}}
-UNION!(PDH_COUNTER_INFO_W, info_union, DataItemPath, DataItemPath_mut, PDH_DATA_ITEM_PATH_ELEMENTS_W);
-UNION!(PDH_COUNTER_INFO_W, info_union, CounterPath, CounterPath_mut, PDH_COUNTER_PATH_ELEMENTS_W);
-UNION!(PDH_COUNTER_INFO_W, info_union, inner, inner_mut, PDH_COUNTER_INFO_INNER_W);
-UNION!(PDH_FMT_COUNTERVALUE, largeValue, largeValue, largeValue_mut, LONGLONG);
-UNION!(PDH_FMT_COUNTERVALUE, largeValue, longValue, longValue_mut, LONG);
-UNION!(PDH_FMT_COUNTERVALUE, largeValue, doubleValue, doubleValue_mut, DOUBLE);
-UNION!(PDH_FMT_COUNTERVALUE, largeValue, AnsiStringValue, AnsiStringValue_mut, LPCSTR);
-UNION!(PDH_FMT_COUNTERVALUE, largeValue, WideStringValue, WideStringValue_mut, LPCWSTR);
-STRUCT!{struct PDH_COUNTER_PATH_ELEMENTS_A {
-    szMachineName: LPSTR,
-    szObjectName: LPSTR,
-    szInstanceName: LPSTR,
-    szParentInstance: LPSTR,
-    dwInstanceIndex: DWORD,
-    szCounterName: LPSTR,
-}}
-STRUCT!{struct PDH_COUNTER_PATH_ELEMENTS_W {
-    szMachineName: LPWSTR,
-    szObjectName: LPWSTR,
-    szInstanceName: LPWSTR,
-    szParentInstance: LPWSTR,
-    dwInstanceIndex: DWORD,
-    szCounterName: LPWSTR,
 }}
 STRUCT!{struct PDH_BROWSE_DLG_CONFIG_HA {
     flags: DWORD,

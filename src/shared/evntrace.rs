@@ -240,7 +240,7 @@ STRUCT!{struct EVENT_TRACE_HEADER_u1_s {
     HeaderType: UCHAR,
     MarkerFlags: UCHAR,
 }}
-UNION2!{union EVENT_TRACE_HEADER_u1 {
+UNION!{union EVENT_TRACE_HEADER_u1 {
     [u16; 1],
     FieldTypeFlags FieldTypeFlags_mut: USHORT,
     s s_mut: EVENT_TRACE_HEADER_u1_s,
@@ -250,12 +250,12 @@ STRUCT!{struct EVENT_TRACE_HEADER_u2_Class {
     Level: UCHAR,
     Version: USHORT,
 }}
-UNION2!{union EVENT_TRACE_HEADER_u2 {
+UNION!{union EVENT_TRACE_HEADER_u2 {
     [u32; 1],
     Version Version_mut: USHORT,
     Class Class_mut: EVENT_TRACE_HEADER_u2_Class,
 }}
-UNION2!{union EVENT_TRACE_HEADER_u3 {
+UNION!{union EVENT_TRACE_HEADER_u3 {
     [u64; 2],
     Guid Guid_mut: GUID,
     GuidPtr GuidPtr_mut: ULONGLONG,
@@ -268,7 +268,7 @@ STRUCT!{struct EVENT_TRACE_HEADER_u4_s2 {
     ClientContext: ULONG,
     Flags: ULONG,
 }}
-UNION2!{union EVENT_TRACE_HEADER_u4 {
+UNION!{union EVENT_TRACE_HEADER_u4 {
     [u64; 1],
     s1 s1_mut: EVENT_TRACE_HEADER_u4_s1,
     ProcessorTime ProcessorTime_mut: ULONG64,
@@ -289,7 +289,7 @@ STRUCT!{struct EVENT_INSTANCE_HEADER_u1_s {
     HeaderType: UCHAR,
     MarkerFlags: UCHAR,
 }}
-UNION2!{union EVENT_INSTANCE_HEADER_u1 {
+UNION!{union EVENT_INSTANCE_HEADER_u1 {
     [u16; 1],
     FieldTypeFlags FieldTypeFlags_mut: USHORT,
     s s_mut: EVENT_INSTANCE_HEADER_u1_s,
@@ -299,7 +299,7 @@ STRUCT!{struct EVENT_INSTANCE_HEADER_u2_Class {
     Level: UCHAR,
     Version: USHORT,
 }}
-UNION2!{union EVENT_INSTANCE_HEADER_u2 {
+UNION!{union EVENT_INSTANCE_HEADER_u2 {
     [u32; 1],
     Version Version_mut: USHORT,
     Class Class_mut: EVENT_INSTANCE_HEADER_u2_Class,
@@ -312,7 +312,7 @@ STRUCT!{struct EVENT_INSTANCE_HEADER_u3_s2 {
     EventId: ULONG,
     Flags: ULONG,
 }}
-UNION2!{union EVENT_INSTANCE_HEADER_u3 {
+UNION!{union EVENT_INSTANCE_HEADER_u3 {
     [u64; 1],
     s1 s1_mut: EVENT_INSTANCE_HEADER_u3_s1,
     ProcessorTime ProcessorTime_mut: ULONG64,
@@ -386,7 +386,7 @@ STRUCT!{struct TRACE_LOGFILE_HEADER_u1_VersionDetail {
     SubVersion: UCHAR,
     SubMinorVersion: UCHAR,
 }}
-UNION2!{union TRACE_LOGFILE_HEADER_u1 {
+UNION!{union TRACE_LOGFILE_HEADER_u1 {
     [u32; 1],
     Version Version_mut: ULONG,
     VersionDetail VersionDetail_mut: TRACE_LOGFILE_HEADER_u1_VersionDetail,
@@ -397,7 +397,7 @@ STRUCT!{struct TRACE_LOGFILE_HEADER_u2_s {
     EventsLost: ULONG,
     CpuSpeedInMHz: ULONG,
 }}
-UNION2!{union TRACE_LOGFILE_HEADER_u2 {
+UNION!{union TRACE_LOGFILE_HEADER_u2 {
     [u32; 4],
     LogInstanceGuid LogInstanceGuid_mut: GUID,
     s s_mut: TRACE_LOGFILE_HEADER_u2_s,
@@ -429,7 +429,7 @@ STRUCT!{struct TRACE_LOGFILE_HEADER32_u1_VersionDetail {
     SubVersion: UCHAR,
     SubMinorVersion: UCHAR,
 }}
-UNION2!{union TRACE_LOGFILE_HEADER32_u1 {
+UNION!{union TRACE_LOGFILE_HEADER32_u1 {
     [u32; 1],
     Version Version_mut: ULONG,
     VersionDetail VersionDetail_mut: TRACE_LOGFILE_HEADER32_u1_VersionDetail,
@@ -440,7 +440,7 @@ STRUCT!{struct TRACE_LOGFILE_HEADER32_u2_s {
     EventsLost: ULONG,
     CpuSpeedInMHz: ULONG,
 }}
-UNION2!{union TRACE_LOGFILE_HEADER32_u2 {
+UNION!{union TRACE_LOGFILE_HEADER32_u2 {
     [u32; 4],
     LogInstanceGuid LogInstanceGuid_mut: GUID,
     s s_mut: TRACE_LOGFILE_HEADER32_u2_s,
@@ -472,7 +472,7 @@ STRUCT!{struct TRACE_LOGFILE_HEADER64_u1_VersionDetail {
     SubVersion: UCHAR,
     SubMinorVersion: UCHAR,
 }}
-UNION2!{union TRACE_LOGFILE_HEADER64_u1 {
+UNION!{union TRACE_LOGFILE_HEADER64_u1 {
     [u32; 1],
     Version Version_mut: ULONG,
     VersionDetail VersionDetail_mut: TRACE_LOGFILE_HEADER64_u1_VersionDetail,
@@ -483,7 +483,7 @@ STRUCT!{struct TRACE_LOGFILE_HEADER64_u2_s {
     EventsLost: ULONG,
     CpuSpeedInMHz: ULONG,
 }}
-UNION2!{union TRACE_LOGFILE_HEADER64_u2 {
+UNION!{union TRACE_LOGFILE_HEADER64_u2 {
     [u32; 4],
     LogInstanceGuid LogInstanceGuid_mut: GUID,
     s s_mut: TRACE_LOGFILE_HEADER64_u2_s,
@@ -514,7 +514,7 @@ STRUCT!{struct EVENT_INSTANCE_INFO {
     InstanceId: ULONG,
 }}
 pub type PEVENT_INSTANCE_INFO = *mut EVENT_INSTANCE_INFO;
-UNION2!{union EVENT_TRACE_PROPERTIES_u {
+UNION!{union EVENT_TRACE_PROPERTIES_u {
     [u32; 1],
     AgeLimit AgeLimit_mut: LONG,
     FlushThreshold FlushThreshold_mut: LONG,
@@ -540,7 +540,7 @@ STRUCT!{struct EVENT_TRACE_PROPERTIES {
     LoggerNameOffset: ULONG,
 }}
 pub type PEVENT_TRACE_PROPERTIES = *mut EVENT_TRACE_PROPERTIES;
-UNION2!{union EVENT_TRACE_PROPERTIES_V2_u1 {
+UNION!{union EVENT_TRACE_PROPERTIES_V2_u1 {
     [u32; 1],
     AgeLimit AgeLimit_mut: LONG,
     FlushThreshold FlushThreshold_mut: LONG,
@@ -594,7 +594,7 @@ STRUCT!{struct ETW_BUFFER_CONTEXT_u_s {
     ProcessorNumber: UCHAR,
     Alignment: UCHAR,
 }}
-UNION2!{union ETW_BUFFER_CONTEXT_u {
+UNION!{union ETW_BUFFER_CONTEXT_u {
     [u16; 1],
     s s_mut: ETW_BUFFER_CONTEXT_u_s,
     ProcessorIndex ProcessorIndex_mut: USHORT,
@@ -638,7 +638,7 @@ STRUCT!{struct PROFILE_SOURCE_INFO {
     Description: [WCHAR; ANYSIZE_ARRAY],
 }}
 pub type PPROFILE_SOURCE_INFO = *mut PROFILE_SOURCE_INFO;
-UNION2!{union EVENT_TRACE_u {
+UNION!{union EVENT_TRACE_u {
     [u32; 1],
     ClientContext ClientContext_mut: ULONG,
     BufferContext BufferContext_mut: ETW_BUFFER_CONTEXT,
@@ -676,12 +676,12 @@ FN!{stdcall WMIDPREQUEST(
     BufferSize: *mut ULONG,
     Buffer: PVOID,
 ) -> ULONG}
-UNION2!{union EVENT_TRACE_LOGFILEW_u1 {
+UNION!{union EVENT_TRACE_LOGFILEW_u1 {
     [u32; 1],
     LogFileMode LogFileMode_mut: ULONG,
     ProcessTraceMode ProcessTraceMode_mut: ULONG,
 }}
-UNION2!{union EVENT_TRACE_LOGFILEW_u2 {
+UNION!{union EVENT_TRACE_LOGFILEW_u2 {
     [usize; 1],
     EventCallback EventCallback_mut: PEVENT_CALLBACK,
     EventRecordCallback EventRecordCallback_mut: PEVENT_RECORD_CALLBACK,
@@ -702,12 +702,12 @@ STRUCT!{struct EVENT_TRACE_LOGFILEW {
     IsKernelTrace: ULONG,
     Context: PVOID,
 }}
-UNION2!{union EVENT_TRACE_LOGFILEA_u1 {
+UNION!{union EVENT_TRACE_LOGFILEA_u1 {
     [u32; 1],
     LogFileMode LogFileMode_mut: ULONG,
     ProcessTraceMode ProcessTraceMode_mut: ULONG,
 }}
-UNION2!{union EVENT_TRACE_LOGFILEA_u2 {
+UNION!{union EVENT_TRACE_LOGFILEA_u2 {
     [usize; 1],
     EventCallback EventCallback_mut: PEVENT_CALLBACK,
     EventRecordCallback EventRecordCallback_mut: PEVENT_RECORD_CALLBACK,

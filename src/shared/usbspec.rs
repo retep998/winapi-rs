@@ -33,7 +33,7 @@ STRUCT!{#[repr(packed)] struct USB_DEFAULT_PIPE_SETUP_PACKET_wValue_s {
     LowByte: UCHAR,
     HiByte: UCHAR,
 }}
-UNION2!{#[repr(packed)] union USB_DEFAULT_PIPE_SETUP_PACKET_wValue {
+UNION!{#[repr(packed)] union USB_DEFAULT_PIPE_SETUP_PACKET_wValue {
     [u16; 1],
     s s_mut: USB_DEFAULT_PIPE_SETUP_PACKET_wValue_s,
     W W_mut: USHORT,
@@ -42,7 +42,7 @@ STRUCT!{#[repr(packed)] struct USB_DEFAULT_PIPE_SETUP_PACKET_wIndex_s {
     LowByte: UCHAR,
     HiByte: UCHAR,
 }}
-UNION2!{#[repr(packed)] union USB_DEFAULT_PIPE_SETUP_PACKET_wIndex {
+UNION!{#[repr(packed)] union USB_DEFAULT_PIPE_SETUP_PACKET_wIndex {
     [u16; 1],
     s s_mut: USB_DEFAULT_PIPE_SETUP_PACKET_wIndex_s,
     W W_mut: USHORT,
@@ -587,7 +587,7 @@ BITFIELD!{USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_Isochronous 
     Reserved2 set_Reserved2[2..7],
     SspCompanion set_SspCompanion[7..8],
 ]}
-UNION2!{#[repr(packed)] union USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes {
+UNION!{#[repr(packed)] union USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes {
     [u8; 1],
     AsUchar AsUchar_mut: UCHAR,
     Bulk Bulk_mut: USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_Bulk,
@@ -667,7 +667,7 @@ STRUCT!{#[repr(packed)] struct USB_HUB_STATUS_AND_CHANGE_s {
     HubStatus: USB_HUB_STATUS,
     HubChange: USB_HUB_CHANGE,
 }}
-UNION2!{#[repr(packed)] union USB_HUB_STATUS_AND_CHANGE {
+UNION!{#[repr(packed)] union USB_HUB_STATUS_AND_CHANGE {
     [u32; 1],
     AsUlong32 AsUlong32_mut: ULONG,
     s s_mut: USB_HUB_STATUS_AND_CHANGE_s,
@@ -754,14 +754,14 @@ BITFIELD!{USB_30_PORT_CHANGE AsUshort16: USHORT [
     Reserved3 set_Reserved3[8..16],
 ]}
 pub type PUSB_30_PORT_CHANGE = *mut USB_30_PORT_CHANGE;
-UNION2!{#[repr(packed)] union USB_PORT_STATUS {
+UNION!{#[repr(packed)] union USB_PORT_STATUS {
     [u16; 1],
     AsUshort16 AsUshort16_mut: USHORT,
     Usb20PortStatus Usb20PortStatus_mut: USB_20_PORT_STATUS,
     Usb30PortStatus Usb30PortStatus_mut: USB_30_PORT_STATUS,
 }}
 pub type PUSB_PORT_STATUS = *mut USB_PORT_STATUS;
-UNION2!{#[repr(packed)] union USB_PORT_CHANGE {
+UNION!{#[repr(packed)] union USB_PORT_CHANGE {
     [u16; 1],
     AsUshort16 AsUshort16_mut: USHORT,
     Usb20PortChange Usb20PortChange_mut: USB_20_PORT_CHANGE,
@@ -783,7 +783,7 @@ STRUCT!{#[repr(packed)] struct USB_PORT_STATUS_AND_CHANGE_s {
     PortStatus: USB_PORT_STATUS,
     PortChange: USB_PORT_CHANGE,
 }}
-UNION2!{#[repr(packed)] union USB_PORT_STATUS_AND_CHANGE {
+UNION!{#[repr(packed)] union USB_PORT_STATUS_AND_CHANGE {
     [u32; 1],
     AsUlong32 AsUlong32_mut: ULONG,
     s s_mut: USB_PORT_STATUS_AND_CHANGE_s,
@@ -793,7 +793,7 @@ STRUCT!{#[repr(packed)] struct USB_PORT_EXT_STATUS_AND_CHANGE_s {
     PortStatusChange: USB_PORT_STATUS_AND_CHANGE,
     PortExtStatus: USB_PORT_EXT_STATUS,
 }}
-UNION2!{#[repr(packed)] union USB_PORT_EXT_STATUS_AND_CHANGE {
+UNION!{#[repr(packed)] union USB_PORT_EXT_STATUS_AND_CHANGE {
     [u64; 1],
     AsUlong64 AsUlong64_mut: ULONG64,
     s s_mut: USB_PORT_EXT_STATUS_AND_CHANGE_s,
