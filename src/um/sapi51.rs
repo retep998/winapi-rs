@@ -5,12 +5,13 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! SAPI 5.1 definitions
-use ctypes::{c_char, c_float, c_long, c_short, c_void};
+use ctypes::{c_char, c_float, c_long, c_short, c_ushort, c_void};
 use shared::guiddef::{CLSID, GUID, IID, REFCLSID, REFGUID, REFIID};
 use shared::minwindef::{
     BOOL, BYTE, DWORD, FILETIME, HKEY, HMODULE, LPARAM, UINT, ULONG, USHORT, WORD, WPARAM
 };
 use shared::mmreg::WAVEFORMATEX;
+use shared::rpcndr::byte;
 use shared::windef::HWND;
 use shared::wtypes::{BSTR, VARIANT_BOOL};
 use shared::wtypesbase::{
@@ -765,11 +766,19 @@ ENUM!{enum SPPHRASEPROPERTYUNIONTYPE {
     SPPPUT_UNUSED = 0,
     SPPPUT_ARRAY_INDEX,
 }}
+STRUCT!{struct SPPHRASEPROPERTY_u_s {
+    bType: byte,
+    bReserved: byte,
+    usArrayIndex: c_ushort,
+}}
+UNION!{union SPPHRASEPROPERTY_u {
+    [u32; 1],
+    ulId ulId_mut: ULONG,
+    s s_mut: SPPHRASEPROPERTY_u_s,
+}}
 STRUCT!{struct SPPHRASEPROPERTY {
     pszName: LPCWSTR,
-    bType: BYTE,
-    bReserved: BYTE,
-    usArrayIndex: u16,
+    u: SPPHRASEPROPERTY_u_s,
     pszValue: LPCWSTR,
     vValue: VARIANT,
     ulFirstElement: ULONG,
@@ -779,7 +788,6 @@ STRUCT!{struct SPPHRASEPROPERTY {
     SREngineConfidence: c_float,
     Confidence: c_char,
 }}
-UNION!(SPPHRASEPROPERTY, bType, ulId, ulId_mut, ULONG);
 STRUCT!{struct SPPHRASEREPLACEMENT {
     bDisplayAttributes: BYTE,
     pszReplacementText: LPCWSTR,

@@ -37,7 +37,7 @@ STRUCT!{struct OVERLAPPED_u_s {
     Offset: DWORD,
     OffsetHigh: DWORD,
 }}
-UNION2!{union OVERLAPPED_u {
+UNION!{union OVERLAPPED_u {
     [u32; 2] [u64; 1],
     s s_mut: OVERLAPPED_u_s,
     Pointer Pointer_mut: PVOID,
@@ -163,7 +163,7 @@ STRUCT!{struct PROCESS_HEAP_ENTRY_Region {
     lpFirstBlock: LPVOID,
     lpLastBlock: LPVOID,
 }}
-UNION2!{union PROCESS_HEAP_ENTRY_u {
+UNION!{union PROCESS_HEAP_ENTRY_u {
     [u32; 4] [u64; 3],
     Block Block_mut: PROCESS_HEAP_ENTRY_Block,
     Region Region_mut: PROCESS_HEAP_ENTRY_Region,
@@ -190,7 +190,7 @@ STRUCT!{struct REASON_CONTEXT_Detailed {
     ReasonStringCount: ULONG,
     ReasonStrings: *mut LPWSTR,
 }}
-UNION2!{union REASON_CONTEXT_Reason {
+UNION!{union REASON_CONTEXT_Reason {
     [u32; 4] [u64; 3],
     Detailed Detailed_mut: REASON_CONTEXT_Detailed,
     SimpleReasonString SimpleReasonString_mut: LPWSTR,
@@ -270,7 +270,7 @@ STRUCT!{struct RIP_INFO {
     dwType: DWORD,
 }}
 pub type LPRIP_INFO = *mut RIP_INFO;
-UNION2!{union DEBUG_EVENT_u {
+UNION!{union DEBUG_EVENT_u {
     [u32; 21] [u64; 20],
     Exception Exception_mut: EXCEPTION_DEBUG_INFO,
     CreateThread CreateThread_mut: CREATE_THREAD_DEBUG_INFO,
@@ -331,3 +331,4 @@ pub const NONZEROLPTR: UINT = LMEM_FIXED;
 //LocalDiscard
 pub const LMEM_DISCARDED: UINT = 0x4000;
 pub const LMEM_LOCKCOUNT: UINT = 0x00FF;
+pub const NUMA_NO_PREFERRED_NODE: DWORD = -1i32 as DWORD;

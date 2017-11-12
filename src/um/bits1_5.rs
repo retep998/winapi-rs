@@ -27,7 +27,7 @@ STRUCT!{struct BG_BASIC_CREDENTIALS {
     UserName: LPWSTR,
     Password: LPWSTR,
 }}
-UNION2!{union BG_AUTH_CREDENTIALS_UNION {
+UNION!{union BG_AUTH_CREDENTIALS_UNION {
     [usize; 2],
     Basic Basic_mut: BG_BASIC_CREDENTIALS,
 }}

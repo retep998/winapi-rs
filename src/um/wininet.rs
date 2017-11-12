@@ -149,33 +149,27 @@ STRUCT!{struct INTERNET_PROXY_INFO {
     lpszProxyBypass: LPCWSTR,
 }}
 pub type LPINTERNET_PROXY_INFO = *mut INTERNET_PROXY_INFO;
-#[cfg(target_arch = "x86")]
+UNION!{union INTERNET_PER_CONN_OPTIONA_Value {
+    [u32; 2] [u64; 1],
+    dwValue dwValue_mut: DWORD,
+    pszValue pszValue_mut: LPSTR,
+    ftValue ftValue_mut: FILETIME,
+}}
 STRUCT!{struct INTERNET_PER_CONN_OPTIONA {
     dwOption: DWORD,
-    Value: [usize; 2],
+    Value: INTERNET_PER_CONN_OPTIONA_Value,
 }}
-#[cfg(target_arch = "x86_64")]
-STRUCT!{struct INTERNET_PER_CONN_OPTIONA {
-    dwOption: DWORD,
-    Value: [usize; 1],
-}}
-UNION!(INTERNET_PER_CONN_OPTIONA, Value, dwValue, dwValue_mut, DWORD);
-UNION!(INTERNET_PER_CONN_OPTIONA, Value, pszValue, pszValue_mut, LPSTR);
-UNION!(INTERNET_PER_CONN_OPTIONA, Value, ftValue, ftValue_mut, FILETIME);
 pub type LPINTERNET_PER_CONN_OPTIONA = *mut INTERNET_PER_CONN_OPTIONA;
-#[cfg(target_arch = "x86")]
+UNION!{union INTERNET_PER_CONN_OPTIONW_Value {
+    [u32; 2] [u64; 1],
+    dwValue dwValue_mut: DWORD,
+    pszValue pszValue_mut: LPWSTR,
+    ftValue ftValue_mut: FILETIME,
+}}
 STRUCT!{struct INTERNET_PER_CONN_OPTIONW {
     dwOption: DWORD,
-    Value: [usize; 2],
+    Value: INTERNET_PER_CONN_OPTIONW_Value,
 }}
-#[cfg(target_arch = "x86_64")]
-STRUCT!{struct INTERNET_PER_CONN_OPTIONW {
-    dwOption: DWORD,
-    Value: [usize; 1],
-}}
-UNION!(INTERNET_PER_CONN_OPTIONW, Value, dwValue, dwValue_mut, DWORD);
-UNION!(INTERNET_PER_CONN_OPTIONW, Value, pszValue, pszValue_mut, LPWSTR);
-UNION!(INTERNET_PER_CONN_OPTIONW, Value, ftValue, ftValue_mut, FILETIME);
 pub type LPINTERNET_PER_CONN_OPTIONW = *mut INTERNET_PER_CONN_OPTIONW;
 STRUCT!{struct INTERNET_PER_CONN_OPTION_LISTA {
     dwSize: DWORD,
@@ -727,43 +721,31 @@ STRUCT!{struct GOPHER_UNKNOWN_ATTRIBUTE_TYPE {
     Text: LPCWSTR,
 }}
 pub type LPGOPHER_UNKNOWN_ATTRIBUTE_TYPE = *mut GOPHER_UNKNOWN_ATTRIBUTE_TYPE;
-#[cfg(target_arch = "x86")]
+UNION!{union GOPHER_ATTRIBUTE_TYPE_AttributeType {
+    [u32; 6] [u64; 3],
+    Admin Admin_mut: GOPHER_ADMIN_ATTRIBUTE_TYPE,
+    ModDate ModDate_mut: GOPHER_MOD_DATE_ATTRIBUTE_TYPE,
+    Ttl Ttl_mut: GOPHER_TTL_ATTRIBUTE_TYPE,
+    Score Score_mut: GOPHER_SCORE_ATTRIBUTE_TYPE,
+    ScoreRange ScoreRange_mut: GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE,
+    Site Site_mut: GOPHER_SITE_ATTRIBUTE_TYPE,
+    Organization Organization_mut: GOPHER_ORGANIZATION_ATTRIBUTE_TYPE,
+    Location Location_mut: GOPHER_LOCATION_ATTRIBUTE_TYPE,
+    GeographicalLocation GeographicalLocation_mut: GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE,
+    TimeZone TimeZone_mut: GOPHER_TIMEZONE_ATTRIBUTE_TYPE,
+    Provider Provider_mut: GOPHER_PROVIDER_ATTRIBUTE_TYPE,
+    Version Version_mut: GOPHER_VERSION_ATTRIBUTE_TYPE,
+    Abstract Abstract_mut: GOPHER_ABSTRACT_ATTRIBUTE_TYPE,
+    View View_mut: GOPHER_VIEW_ATTRIBUTE_TYPE,
+    Veronica Veronica_mut: GOPHER_VERONICA_ATTRIBUTE_TYPE,
+    Ask Ask_mut: GOPHER_ASK_ATTRIBUTE_TYPE,
+    Unknown Unknown_mut: GOPHER_UNKNOWN_ATTRIBUTE_TYPE,
+}}
 STRUCT!{struct GOPHER_ATTRIBUTE_TYPE {
     CategoryId: DWORD,
     AttributeId: DWORD,
-    AttributeType: [u32; 6],
+    AttributeType: GOPHER_ATTRIBUTE_TYPE_AttributeType,
 }}
-#[cfg(target_arch = "x86_64")]
-STRUCT!{struct GOPHER_ATTRIBUTE_TYPE {
-    CategoryId: DWORD,
-    AttributeId: DWORD,
-    AttributeType: [u64; 3],
-}}
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, Admin, Admin_mut, GOPHER_ADMIN_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, ModDate, ModDate_mut, GOPHER_MOD_DATE_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, Ttl, Ttl_mut, GOPHER_TTL_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, Score, Score_mut, GOPHER_SCORE_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, ScoreRange, ScoreRange_mut,
-    GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, Site, Site_mut, GOPHER_SITE_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, Organization, Organization_mut,
-    GOPHER_ORGANIZATION_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, Location, Location_mut,
-    GOPHER_LOCATION_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, GeographicalLocation, GeographicalLocation_mut,
-    GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, TimeZone, TimeZone_mut,
-    GOPHER_TIMEZONE_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, Provider, Provider_mut,
-    GOPHER_PROVIDER_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, Version, Version_mut, GOPHER_VERSION_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, Abstract, Abstract_mut,
-    GOPHER_ABSTRACT_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, View, View_mut, GOPHER_VIEW_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, Veronica, Veronica_mut,
-    GOPHER_VERONICA_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, Ask, Ask_mut, GOPHER_ASK_ATTRIBUTE_TYPE);
-UNION!(GOPHER_ATTRIBUTE_TYPE, AttributeType, Unknown, Unknown_mut, GOPHER_UNKNOWN_ATTRIBUTE_TYPE);
 pub type LPGOPHER_ATTRIBUTE_TYPE = *mut GOPHER_ATTRIBUTE_TYPE;
 pub const MAX_GOPHER_CATEGORY_NAME: DWORD = 128;
 pub const MAX_GOPHER_ATTRIBUTE_NAME: DWORD = 128;
@@ -1121,6 +1103,11 @@ pub const URLHISTORY_CACHE_ENTRY: DWORD = 0x00200000;
 pub const URLCACHE_FIND_DEFAULT_FILTER: DWORD = NORMAL_CACHE_ENTRY | COOKIE_CACHE_ENTRY
     | URLHISTORY_CACHE_ENTRY | TRACK_OFFLINE_CACHE_ENTRY | TRACK_ONLINE_CACHE_ENTRY
     | STICKY_CACHE_ENTRY;
+UNION!{union INTERNET_CACHE_ENTRY_INFOA_u {
+    [u32; 1],
+    dwReserved dwReserved_mut: DWORD,
+    dwExemptDelta dwExemptDelta_mut: DWORD,
+}}
 STRUCT!{struct INTERNET_CACHE_ENTRY_INFOA {
     dwStructSize: DWORD,
     lpszSourceUrlName: LPSTR,
@@ -1137,11 +1124,14 @@ STRUCT!{struct INTERNET_CACHE_ENTRY_INFOA {
     lpHeaderInfo: LPSTR,
     dwHeaderInfoSize: DWORD,
     lpszFileExtension: LPSTR,
-    u: DWORD,
+    u: INTERNET_CACHE_ENTRY_INFOA_u,
 }}
-UNION!(INTERNET_CACHE_ENTRY_INFOA, u, dwReserved, dwReserved_mut, DWORD);
-UNION!(INTERNET_CACHE_ENTRY_INFOA, u, dwExemptDelta, dwExemptDelta_mut, DWORD);
 pub type LPINTERNET_CACHE_ENTRY_INFOA = *mut INTERNET_CACHE_ENTRY_INFOA;
+UNION!{union INTERNET_CACHE_ENTRY_INFOW_u {
+    [u32; 1],
+    dwReserved dwReserved_mut: DWORD,
+    dwExemptDelta dwExemptDelta_mut: DWORD,
+}}
 STRUCT!{struct INTERNET_CACHE_ENTRY_INFOW {
     dwStructSize: DWORD,
     lpszSourceUrlName: LPWSTR,
@@ -1158,10 +1148,8 @@ STRUCT!{struct INTERNET_CACHE_ENTRY_INFOW {
     lpHeaderInfo: LPWSTR,
     dwHeaderInfoSize: DWORD,
     lpszFileExtension: LPWSTR,
-    u: DWORD,
+    u: INTERNET_CACHE_ENTRY_INFOW_u,
 }}
-UNION!(INTERNET_CACHE_ENTRY_INFOW, u, dwReserved, dwReserved_mut, DWORD);
-UNION!(INTERNET_CACHE_ENTRY_INFOW, u, dwExemptDelta, dwExemptDelta_mut, DWORD);
 pub type LPINTERNET_CACHE_ENTRY_INFOW = *mut INTERNET_CACHE_ENTRY_INFOW;
 STRUCT!{struct INTERNET_CACHE_TIMESTAMPS {
     ftExpires: FILETIME,

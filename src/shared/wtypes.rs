@@ -87,7 +87,7 @@ pub type wireBSTR = *mut FLAGGED_WORD_BLOB;
 pub type BSTR = *mut OLECHAR;
 pub type LPBSTR = *mut BSTR;
 pub type VARIANT_BOOL = c_short;
-UNION2!{union __MIDL_IWinTypes_0001 {
+UNION!{union __MIDL_IWinTypes_0001 {
     [usize; 1],
     dwValue dwValue_mut: DWORD,
     pwszName pwszName_mut: *mut wchar_t,
