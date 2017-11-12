@@ -1119,13 +1119,13 @@ STRUCT!{#[repr(packed)] struct MIXERCONTROLA_Bounds_s2 {
     dwMinimum: DWORD,
     dwMaximum: DWORD,
 }}
-UNION2!{union MIXERCONTROLA_Bounds {
+UNION!{union MIXERCONTROLA_Bounds {
     [u8; 24],
     s1 s1_mut: MIXERCONTROLA_Bounds_s1,
     s2 s2_mut: MIXERCONTROLA_Bounds_s2,
     dwReserved dwReserved_mut: [DWORD; 6],
 }}
-UNION2!{union MIXERCONTROLA_Metrics {
+UNION!{union MIXERCONTROLA_Metrics {
     [u8; 24],
     cSteps cSteps_mut: DWORD,
     cbCustomData cbCustomData_mut: DWORD,
@@ -1152,13 +1152,13 @@ STRUCT!{#[repr(packed)] struct MIXERCONTROLW_Bounds_s2 {
     dwMinimum: DWORD,
     dwMaximum: DWORD,
 }}
-UNION2!{union MIXERCONTROLW_Bounds {
+UNION!{union MIXERCONTROLW_Bounds {
     [u8; 24],
     s1 s1_mut: MIXERCONTROLA_Bounds_s1,
     s2 s2_mut: MIXERCONTROLA_Bounds_s2,
     dwReserved dwReserved_mut: [DWORD; 6],
 }}
-UNION2!{union MIXERCONTROLW_Metrics {
+UNION!{union MIXERCONTROLW_Metrics {
     [u8; 24],
     cSteps cSteps_mut: DWORD,
     cbCustomData cbCustomData_mut: DWORD,
@@ -1252,7 +1252,7 @@ pub const MIXERCONTROL_CONTROLTYPE_MICROTIME: DWORD = MIXERCONTROL_CT_CLASS_TIME
     MIXERCONTROL_CT_SC_TIME_MICROSECS | MIXERCONTROL_CT_UNITS_UNSIGNED;
 pub const MIXERCONTROL_CONTROLTYPE_MILLITIME: DWORD = MIXERCONTROL_CT_CLASS_TIME |
     MIXERCONTROL_CT_SC_TIME_MILLISECS | MIXERCONTROL_CT_UNITS_UNSIGNED;
-UNION2!{union MIXERLINECONTROLSA_u {
+UNION!{union MIXERLINECONTROLSA_u {
     [u8; 4],
     dwControlID dwControlID_mut: DWORD,
     dwControlType dwControlType_mut: DWORD,
@@ -1267,7 +1267,7 @@ STRUCT!{#[repr(packed)] struct MIXERLINECONTROLSA {
 }}
 pub type PMIXERLINECONTROLSA = *mut MIXERLINECONTROLSA;
 pub type LPMIXERLINECONTROLSA = *mut MIXERLINECONTROLSA;
-UNION2!{union MIXERLINECONTROLSW_u {
+UNION!{union MIXERLINECONTROLSW_u {
     [u8; 4],
     dwControlID dwControlID_mut: DWORD,
     dwControlType dwControlType_mut: DWORD,
@@ -1298,7 +1298,7 @@ pub const MIXER_GETLINECONTROLSF_ALL: DWORD = 0x00000000;
 pub const MIXER_GETLINECONTROLSF_ONEBYID: DWORD = 0x00000001;
 pub const MIXER_GETLINECONTROLSF_ONEBYTYPE: DWORD = 0x00000002;
 pub const MIXER_GETLINECONTROLSF_QUERYMASK: DWORD = 0x0000000F;
-UNION2!{union MIXERCONTROLDETAILS_u {
+UNION!{union MIXERCONTROLDETAILS_u {
     [u8; 4] [u8; 8],
     hwndOwner hwndOwner_mut: HWND,
     cMultipleItems cMultipleItems_mut: DWORD,

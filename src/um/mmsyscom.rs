@@ -25,7 +25,7 @@ STRUCT!{#[repr(packed)] struct MMTIME_u_smpte {
 STRUCT!{#[repr(packed)] struct MMTIME_u_midi {
     songptrpos: DWORD,
 }}
-UNION2!{union MMTIME_u {
+UNION!{union MMTIME_u {
     [u8; 8],
     ms ms_mut: DWORD,
     sample sample_mut: DWORD,

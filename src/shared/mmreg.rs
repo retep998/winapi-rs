@@ -1910,7 +1910,7 @@ pub fn IS_VALID_WAVEFORMATEX_GUID(guid: &GUID) -> bool {
     (guid.Data4[3] == 0xaa) && (guid.Data4[4] == 0x00) && (guid.Data4[5] == 0x38) &&
     (guid.Data4[6] == 0x9b) && (guid.Data4[7] == 0x71)
 }
-UNION2!{union WAVEFORMATEXTENSIBLE_Samples {
+UNION!{union WAVEFORMATEXTENSIBLE_Samples {
     [u8; 2],
     wValidBitsPerSample wValidBitsPerSample_mut: WORD,
     wSamplesPerBlock wSamplesPerBlock_mut: WORD,

@@ -132,9 +132,6 @@ pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
 
 ## Unions
 
-* `UNION!` is being deprecated in favor of `UNION2!` in order to more closely align with the new
-  untagged union feature.
-
 ```C
 typedef union {
     USN_RECORD_COMMON_HEADER Header;
@@ -144,7 +141,7 @@ typedef union {
 } USN_RECORD_UNION, *PUSN_RECORD_UNION;
 ```
 ```Rust
-UNION2!{union USN_RECORD_UNION {
+UNION!{union USN_RECORD_UNION {
     [u64; 10],
     Header Header_mut: USN_RECORD_COMMON_HEADER,
     V2 V2_mut: USN_RECORD_V2,
@@ -154,7 +151,7 @@ UNION2!{union USN_RECORD_UNION {
 pub type PUSN_RECORD_UNION = *mut USN_RECORD_UNION;
 ```
 
-* The first parameter to `UNION2!` is the storage for that union. It must have both the correct
+* The first parameter to `UNION!` is the storage for that union. It must have both the correct
   size and alignment. You can use the following C++ code to print out the storage for any union
   type that can be named. You may need to use a combination of `#define NONAMELESSUNION` and
   `decltype` in order to name anonymous unions.
@@ -177,11 +174,11 @@ int main() {
 ```
 
 * Note that sometimes the storage of a union varies based on whether the target is 32bit or 64bit,
-  in which case `UNION2!` allows a second storage to be specified, the first for 32bit and the
+  in which case `UNION!` allows a second storage to be specified, the first for 32bit and the
   second for 64bit.
 
 ```Rust
-UNION2!{union D3D12_RESOURCE_BARRIER_u {
+UNION!{union D3D12_RESOURCE_BARRIER_u {
     [u32; 4] [u64; 3],
     Transition Transition_mut: D3D12_RESOURCE_TRANSITION_BARRIER,
     Aliasing Aliasing_mut: D3D12_RESOURCE_ALIASING_BARRIER,
