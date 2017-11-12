@@ -5,29 +5,32 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of wincodec.h
-use ctypes::c_double;
+use ctypes::{c_double, c_uchar, c_ulong};
 use shared::basetsd::{UINT32, ULONG_PTR};
 use shared::dxgiformat::DXGI_FORMAT;
 use shared::dxgitype::{
-    DXGI_JPEG_AC_HUFFMAN_TABLE, DXGI_JPEG_DC_HUFFMAN_TABLE,
-    DXGI_JPEG_QUANTIZATION_TABLE
+    DXGI_JPEG_AC_HUFFMAN_TABLE, DXGI_JPEG_DC_HUFFMAN_TABLE, DXGI_JPEG_QUANTIZATION_TABLE,
 };
 use shared::guiddef::{CLSID, GUID, REFCLSID, REFGUID};
+use shared::intsafe::INTSAFE_E_ARITHMETIC_OVERFLOW;
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, LPVOID, UINT, ULONG};
 use shared::ntdef::{LPCWSTR, LPWSTR, PCWSTR, WCHAR};
 use shared::windef::{HBITMAP, HICON, HPALETTE};
 use shared::winerror::{
     E_ABORT, E_ACCESSDENIED, E_FAIL, E_INVALIDARG, E_NOTIMPL, E_OUTOFMEMORY, HRESULT,
-    SEVERITY_ERROR
 };
+use shared::wtypes::BSTR;
 use um::d2d1::ID2D1Image;
 use um::d2d1_1::ID2D1Device;
 use um::dcommon::D2D1_PIXEL_FORMAT;
+use um::oaidl::LPSAFEARRAY;
 use um::objidlbase::{IEnumString, IEnumUnknown, IStream, IStreamVtbl};
 use um::ocidl::IPropertyBag2;
 use um::propidl::PROPVARIANT;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HANDLE, ULARGE_INTEGER};
+pub const WINCODEC_SDK_VERSION1: UINT = 0x0236;
+pub const WINCODEC_SDK_VERSION2: UINT = 0x0237;
 DEFINE_GUID!{CLSID_WICImagingFactory,
     0xcacaf262, 0x9370, 0x4615, 0xa1, 0x3b, 0x9f, 0x55, 0x39, 0xda, 0x4c, 0xa}
 DEFINE_GUID!{CLSID_WICImagingFactory1,
@@ -127,22 +130,21 @@ STRUCT!{struct WICRect {
 }}
 pub type WICInProcPointer = *mut BYTE;
 ENUM!{enum WICColorContextType {
-    WICColorContextUninitialized = 0x00000000,
-    WICColorContextProfile = 0x00000001,
-    WICColorContextExifColorSpace = 0x00000002,
+    WICColorContextUninitialized = 0,
+    WICColorContextProfile = 0x1,
+    WICColorContextExifColorSpace = 0x2,
 }}
-pub const CODEC_FORCE_DWORD: DWORD = 0x7FFFFFFF;
 pub const WIC_JPEG_MAX_COMPONENT_COUNT: UINT = 4;
 pub const WIC_JPEG_MAX_TABLE_INDEX: UINT = 3;
-pub const WIC_JPEG_SAMPLE_FACTORS_ONE: DWORD = 0x00000011;
-pub const WIC_JPEG_SAMPLE_FACTORS_THREE_420: DWORD = 0x00111122;
-pub const WIC_JPEG_SAMPLE_FACTORS_THREE_422: DWORD = 0x00111121;
-pub const WIC_JPEG_SAMPLE_FACTORS_THREE_440: DWORD = 0x00111112;
-pub const WIC_JPEG_SAMPLE_FACTORS_THREE_444: DWORD = 0x00111111;
-pub const WIC_JPEG_QUANTIZATION_BASELINE_ONE: DWORD = 0x00000000;
-pub const WIC_JPEG_QUANTIZATION_BASELINE_THREE: DWORD = 0x00010100;
-pub const WIC_JPEG_HUFFMAN_BASELINE_ONE: DWORD = 0x00000000;
-pub const WIC_JPEG_HUFFMAN_BASELINE_THREE: DWORD = 0x00111100;
+pub const WIC_JPEG_SAMPLE_FACTORS_ONE: DWORD = 0x11;
+pub const WIC_JPEG_SAMPLE_FACTORS_THREE_420: DWORD = 0x111122;
+pub const WIC_JPEG_SAMPLE_FACTORS_THREE_422: DWORD = 0x111121;
+pub const WIC_JPEG_SAMPLE_FACTORS_THREE_440: DWORD = 0x111112;
+pub const WIC_JPEG_SAMPLE_FACTORS_THREE_444: DWORD = 0x111111;
+pub const WIC_JPEG_QUANTIZATION_BASELINE_ONE: DWORD = 0;
+pub const WIC_JPEG_QUANTIZATION_BASELINE_THREE: DWORD = 0x10100;
+pub const WIC_JPEG_HUFFMAN_BASELINE_ONE: DWORD = 0;
+pub const WIC_JPEG_HUFFMAN_BASELINE_THREE: DWORD = 0x111100;
 pub type REFWICPixelFormatGUID = REFGUID;
 pub type WICPixelFormatGUID = GUID;
 DEFINE_GUID!{GUID_WICPixelFormatDontCare,
@@ -308,53 +310,53 @@ DEFINE_GUID!{GUID_WICPixelFormat128bpp7ChannelsAlpha,
 DEFINE_GUID!{GUID_WICPixelFormat144bpp8ChannelsAlpha,
     0x6fddc324, 0x4e03, 0x4bfe, 0xb1, 0x85, 0x3d, 0x77, 0x76, 0x8d, 0xc9, 0x39}
 DEFINE_GUID!{GUID_WICPixelFormat8bppY,
-    0x91B4DB54, 0x2DF9, 0x42F0, 0xB4, 0x49, 0x29, 0x09, 0xBB, 0x3D, 0xF8, 0x8E}
+    0x91b4db54, 0x2df9, 0x42f0, 0xb4, 0x49, 0x29, 0x09, 0xbb, 0x3d, 0xf8, 0x8e}
 DEFINE_GUID!{GUID_WICPixelFormat8bppCb,
-    0x1339F224, 0x6BFE, 0x4C3E, 0x93, 0x02, 0xE4, 0xF3, 0xA6, 0xD0, 0xCA, 0x2A}
+    0x1339f224, 0x6bfe, 0x4c3e, 0x93, 0x02, 0xe4, 0xf3, 0xa6, 0xd0, 0xca, 0x2a}
 DEFINE_GUID!{GUID_WICPixelFormat8bppCr,
-    0xB8145053, 0x2116, 0x49F0, 0x88, 0x35, 0xED, 0x84, 0x4B, 0x20, 0x5C, 0x51}
+    0xb8145053, 0x2116, 0x49f0, 0x88, 0x35, 0xed, 0x84, 0x4b, 0x20, 0x5c, 0x51}
 DEFINE_GUID!{GUID_WICPixelFormat16bppCbCr,
-    0xFF95BA6E, 0x11E0, 0x4263, 0xBB, 0x45, 0x01, 0x72, 0x1F, 0x34, 0x60, 0xA4}
+    0xff95ba6e, 0x11e0, 0x4263, 0xbb, 0x45, 0x01, 0x72, 0x1f, 0x34, 0x60, 0xa4}
 DEFINE_GUID!{GUID_WICPixelFormat16bppYQuantizedDctCoefficients,
-    0xA355F433, 0x48E8, 0x4A42, 0x84, 0xD8, 0xE2, 0xAA, 0x26, 0xCA, 0x80, 0xA4}
+    0xa355f433, 0x48e8, 0x4a42, 0x84, 0xd8, 0xe2, 0xaa, 0x26, 0xca, 0x80, 0xa4}
 DEFINE_GUID!{GUID_WICPixelFormat16bppCbQuantizedDctCoefficients,
-    0xD2C4FF61, 0x56A5, 0x49C2, 0x8B, 0x5C, 0x4C, 0x19, 0x25, 0x96, 0x48, 0x37}
+    0xd2c4ff61, 0x56a5, 0x49c2, 0x8b, 0x5c, 0x4c, 0x19, 0x25, 0x96, 0x48, 0x37}
 DEFINE_GUID!{GUID_WICPixelFormat16bppCrQuantizedDctCoefficients,
-    0x2FE354F0, 0x1680, 0x42D8, 0x92, 0x31, 0xE7, 0x3C, 0x05, 0x65, 0xBF, 0xC1}
+    0x2fe354f0, 0x1680, 0x42d8, 0x92, 0x31, 0xe7, 0x3c, 0x05, 0x65, 0xbf, 0xc1}
 ENUM!{enum WICBitmapCreateCacheOption {
-    WICBitmapNoCache = 0x00000000,
-    WICBitmapCacheOnDemand = 0x00000001,
-    WICBitmapCacheOnLoad = 0x00000002,
-    WICBITMAPCREATECACHEOPTION_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICBitmapNoCache = 0,
+    WICBitmapCacheOnDemand = 0x1,
+    WICBitmapCacheOnLoad = 0x2,
+    WICBITMAPCREATECACHEOPTION_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICDecodeOptions {
-    WICDecodeMetadataCacheOnDemand = 0x00000000,
-    WICDecodeMetadataCacheOnLoad = 0x00000001,
-    WICMETADATACACHEOPTION_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICDecodeMetadataCacheOnDemand = 0,
+    WICDecodeMetadataCacheOnLoad = 0x1,
+    WICMETADATACACHEOPTION_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICBitmapEncoderCacheOption {
-    WICBitmapEncoderCacheInMemory = 0x00000000,
-    WICBitmapEncoderCacheTempFile = 0x00000001,
-    WICBitmapEncoderNoCache = 0x00000002,
-    WICBITMAPENCODERCACHEOPTION_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICBitmapEncoderCacheInMemory = 0,
+    WICBitmapEncoderCacheTempFile = 0x1,
+    WICBitmapEncoderNoCache = 0x2,
+    WICBITMAPENCODERCACHEOPTION_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICComponentType {
-    WICDecoder = 0x00000001,
-    WICEncoder = 0x00000002,
-    WICPixelFormatConverter = 0x00000004,
-    WICMetadataReader = 0x00000008,
-    WICMetadataWriter = 0x00000010,
-    WICPixelFormat = 0x00000020,
-    WICAllComponents = 0x0000003F,
-    WICCOMPONENTTYPE_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICDecoder = 0x1,
+    WICEncoder = 0x2,
+    WICPixelFormatConverter = 0x4,
+    WICMetadataReader = 0x8,
+    WICMetadataWriter = 0x10,
+    WICPixelFormat = 0x20,
+    WICAllComponents = 0x3f,
+    WICCOMPONENTTYPE_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICComponentEnumerateOptions {
-    WICComponentEnumerateDefault = 0x00000000,
-    WICComponentEnumerateRefresh = 0x00000001,
+    WICComponentEnumerateDefault = 0,
+    WICComponentEnumerateRefresh = 0x1,
     WICComponentEnumerateDisabled = 0x80000000,
     WICComponentEnumerateUnsigned = 0x40000000,
     WICComponentEnumerateBuiltInOnly = 0x20000000,
-    WICCOMPONENTENUMERATEOPTIONS_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICCOMPONENTENUMERATEOPTIONS_FORCE_DWORD = 0x7fffffff,
 }}
 STRUCT!{struct WICBitmapPattern {
     Position: ULARGE_INTEGER,
@@ -364,246 +366,246 @@ STRUCT!{struct WICBitmapPattern {
     EndOfStream: BOOL,
 }}
 ENUM!{enum WICBitmapInterpolationMode {
-    WICBitmapInterpolationModeNearestNeighbor = 0x00000000,
-    WICBitmapInterpolationModeLinear = 0x00000001,
-    WICBitmapInterpolationModeCubic = 0x00000002,
-    WICBitmapInterpolationModeFant = 0x00000003,
-    WICBitmapInterpolationModeHighQualityCubic = 0x00000004,
-    WICBITMAPINTERPOLATIONMODE_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICBitmapInterpolationModeNearestNeighbor = 0,
+    WICBitmapInterpolationModeLinear = 0x1,
+    WICBitmapInterpolationModeCubic = 0x2,
+    WICBitmapInterpolationModeFant = 0x3,
+    WICBitmapInterpolationModeHighQualityCubic = 0x4,
+    WICBITMAPINTERPOLATIONMODE_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICBitmapPaletteType {
-    WICBitmapPaletteTypeCustom = 0x00000000,
-    WICBitmapPaletteTypeMedianCut = 0x00000001,
-    WICBitmapPaletteTypeFixedBW = 0x00000002,
-    WICBitmapPaletteTypeFixedHalftone8 = 0x00000003,
-    WICBitmapPaletteTypeFixedHalftone27 = 0x00000004,
-    WICBitmapPaletteTypeFixedHalftone64 = 0x00000005,
-    WICBitmapPaletteTypeFixedHalftone125 = 0x00000006,
-    WICBitmapPaletteTypeFixedHalftone216 = 0x00000007,
+    WICBitmapPaletteTypeCustom = 0,
+    WICBitmapPaletteTypeMedianCut = 0x1,
+    WICBitmapPaletteTypeFixedBW = 0x2,
+    WICBitmapPaletteTypeFixedHalftone8 = 0x3,
+    WICBitmapPaletteTypeFixedHalftone27 = 0x4,
+    WICBitmapPaletteTypeFixedHalftone64 = 0x5,
+    WICBitmapPaletteTypeFixedHalftone125 = 0x6,
+    WICBitmapPaletteTypeFixedHalftone216 = 0x7,
     WICBitmapPaletteTypeFixedWebPalette = WICBitmapPaletteTypeFixedHalftone216,
-    WICBitmapPaletteTypeFixedHalftone252 = 0x00000008,
-    WICBitmapPaletteTypeFixedHalftone256 = 0x00000009,
-    WICBitmapPaletteTypeFixedGray4 = 0x0000000A,
-    WICBitmapPaletteTypeFixedGray16 = 0x0000000B,
-    WICBitmapPaletteTypeFixedGray256 = 0x0000000C,
-    WICBITMAPPALETTETYPE_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICBitmapPaletteTypeFixedHalftone252 = 0x8,
+    WICBitmapPaletteTypeFixedHalftone256 = 0x9,
+    WICBitmapPaletteTypeFixedGray4 = 0xa,
+    WICBitmapPaletteTypeFixedGray16 = 0xb,
+    WICBitmapPaletteTypeFixedGray256 = 0xc,
+    WICBITMAPPALETTETYPE_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICBitmapDitherType {
-    WICBitmapDitherTypeNone = 0x00000000,
-    WICBitmapDitherTypeSolid = 0x00000000,
-    WICBitmapDitherTypeOrdered4x4 = 0x00000001,
-    WICBitmapDitherTypeOrdered8x8 = 0x00000002,
-    WICBitmapDitherTypeOrdered16x16 = 0x00000003,
-    WICBitmapDitherTypeSpiral4x4 = 0x00000004,
-    WICBitmapDitherTypeSpiral8x8 = 0x00000005,
-    WICBitmapDitherTypeDualSpiral4x4 = 0x00000006,
-    WICBitmapDitherTypeDualSpiral8x8 = 0x00000007,
-    WICBitmapDitherTypeErrorDiffusion = 0x00000008,
-    WICBITMAPDITHERTYPE_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICBitmapDitherTypeNone = 0,
+    WICBitmapDitherTypeSolid = 0,
+    WICBitmapDitherTypeOrdered4x4 = 0x1,
+    WICBitmapDitherTypeOrdered8x8 = 0x2,
+    WICBitmapDitherTypeOrdered16x16 = 0x3,
+    WICBitmapDitherTypeSpiral4x4 = 0x4,
+    WICBitmapDitherTypeSpiral8x8 = 0x5,
+    WICBitmapDitherTypeDualSpiral4x4 = 0x6,
+    WICBitmapDitherTypeDualSpiral8x8 = 0x7,
+    WICBitmapDitherTypeErrorDiffusion = 0x8,
+    WICBITMAPDITHERTYPE_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICBitmapAlphaChannelOption {
-    WICBitmapUseAlpha = 0x00000000,
-    WICBitmapUsePremultipliedAlpha = 0x00000001,
-    WICBitmapIgnoreAlpha = 0x00000002,
-    WICBITMAPALPHACHANNELOPTIONS_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICBitmapUseAlpha = 0,
+    WICBitmapUsePremultipliedAlpha = 0x1,
+    WICBitmapIgnoreAlpha = 0x2,
+    WICBITMAPALPHACHANNELOPTIONS_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICBitmapTransformOptions {
-    WICBitmapTransformRotate0 = 0x00000000,
-    WICBitmapTransformRotate90 = 0x00000001,
-    WICBitmapTransformRotate180 = 0x00000002,
-    WICBitmapTransformRotate270 = 0x00000003,
-    WICBitmapTransformFlipHorizontal = 0x00000008,
-    WICBitmapTransformFlipVertical = 0x00000010,
-    WICBITMAPTRANSFORMOPTIONS_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICBitmapTransformRotate0 = 0,
+    WICBitmapTransformRotate90 = 0x1,
+    WICBitmapTransformRotate180 = 0x2,
+    WICBitmapTransformRotate270 = 0x3,
+    WICBitmapTransformFlipHorizontal = 0x8,
+    WICBitmapTransformFlipVertical = 0x10,
+    WICBITMAPTRANSFORMOPTIONS_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICBitmapLockFlags {
-    WICBitmapLockRead = 0x00000001,
-    WICBitmapLockWrite = 0x00000002,
-    WICBITMAPLOCKFLAGS_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICBitmapLockRead = 0x1,
+    WICBitmapLockWrite = 0x2,
+    WICBITMAPLOCKFLAGS_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICBitmapDecoderCapabilities {
-    WICBitmapDecoderCapabilitySameEncoder = 0x00000001,
-    WICBitmapDecoderCapabilityCanDecodeAllImages = 0x00000002,
-    WICBitmapDecoderCapabilityCanDecodeSomeImages = 0x00000004,
-    WICBitmapDecoderCapabilityCanEnumerateMetadata = 0x00000008,
-    WICBitmapDecoderCapabilityCanDecodeThumbnail = 0x00000010,
-    WICBITMAPDECODERCAPABILITIES_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICBitmapDecoderCapabilitySameEncoder = 0x1,
+    WICBitmapDecoderCapabilityCanDecodeAllImages = 0x2,
+    WICBitmapDecoderCapabilityCanDecodeSomeImages = 0x4,
+    WICBitmapDecoderCapabilityCanEnumerateMetadata = 0x8,
+    WICBitmapDecoderCapabilityCanDecodeThumbnail = 0x10,
+    WICBITMAPDECODERCAPABILITIES_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICProgressOperation {
-    WICProgressOperationCopyPixels = 0x00000001,
-    WICProgressOperationWritePixels = 0x00000002,
-    WICProgressOperationAll = 0x0000FFFF,
-    WICPROGRESSOPERATION_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICProgressOperationCopyPixels = 0x1,
+    WICProgressOperationWritePixels = 0x2,
+    WICProgressOperationAll = 0xffff,
+    WICPROGRESSOPERATION_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICProgressNotification {
-    WICProgressNotificationBegin = 0x00010000,
-    WICProgressNotificationEnd = 0x00020000,
-    WICProgressNotificationFrequent = 0x00040000,
-    WICProgressNotificationAll = 0xFFFF0000,
-    WICPROGRESSNOTIFICATION_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICProgressNotificationBegin = 0x10000,
+    WICProgressNotificationEnd = 0x20000,
+    WICProgressNotificationFrequent = 0x40000,
+    WICProgressNotificationAll = 0xffff0000,
+    WICPROGRESSNOTIFICATION_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICComponentSigning {
-    WICComponentSigned = 0x00000001,
-    WICComponentUnsigned = 0x00000002,
-    WICComponentSafe = 0x00000004,
+    WICComponentSigned = 0x1,
+    WICComponentUnsigned = 0x2,
+    WICComponentSafe = 0x4,
     WICComponentDisabled = 0x80000000,
-    WICCOMPONENTSIGNING_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICCOMPONENTSIGNING_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICGifLogicalScreenDescriptorProperties {
-    WICGifLogicalScreenSignature = 0x00000001,
-    WICGifLogicalScreenDescriptorWidth = 0x00000002,
-    WICGifLogicalScreenDescriptorHeight = 0x00000003,
-    WICGifLogicalScreenDescriptorGlobalColorTableFlag = 0x00000004,
-    WICGifLogicalScreenDescriptorColorResolution = 0x00000005,
-    WICGifLogicalScreenDescriptorSortFlag = 0x00000006,
-    WICGifLogicalScreenDescriptorGlobalColorTableSize = 0x00000007,
-    WICGifLogicalScreenDescriptorBackgroundColorIndex = 0x00000008,
-    WICGifLogicalScreenDescriptorPixelAspectRatio = 0x00000009,
-    WICGifLogicalScreenDescriptorProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICGifLogicalScreenSignature = 0x1,
+    WICGifLogicalScreenDescriptorWidth = 0x2,
+    WICGifLogicalScreenDescriptorHeight = 0x3,
+    WICGifLogicalScreenDescriptorGlobalColorTableFlag = 0x4,
+    WICGifLogicalScreenDescriptorColorResolution = 0x5,
+    WICGifLogicalScreenDescriptorSortFlag = 0x6,
+    WICGifLogicalScreenDescriptorGlobalColorTableSize = 0x7,
+    WICGifLogicalScreenDescriptorBackgroundColorIndex = 0x8,
+    WICGifLogicalScreenDescriptorPixelAspectRatio = 0x9,
+    WICGifLogicalScreenDescriptorProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICGifImageDescriptorProperties {
-    WICGifImageDescriptorLeft = 0x00000001,
-    WICGifImageDescriptorTop = 0x00000002,
-    WICGifImageDescriptorWidth = 0x00000003,
-    WICGifImageDescriptorHeight = 0x00000004,
-    WICGifImageDescriptorLocalColorTableFlag = 0x00000005,
-    WICGifImageDescriptorInterlaceFlag = 0x00000006,
-    WICGifImageDescriptorSortFlag = 0x00000007,
-    WICGifImageDescriptorLocalColorTableSize = 0x00000008,
-    WICGifImageDescriptorProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICGifImageDescriptorLeft = 0x1,
+    WICGifImageDescriptorTop = 0x2,
+    WICGifImageDescriptorWidth = 0x3,
+    WICGifImageDescriptorHeight = 0x4,
+    WICGifImageDescriptorLocalColorTableFlag = 0x5,
+    WICGifImageDescriptorInterlaceFlag = 0x6,
+    WICGifImageDescriptorSortFlag = 0x7,
+    WICGifImageDescriptorLocalColorTableSize = 0x8,
+    WICGifImageDescriptorProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICGifGraphicControlExtensionProperties {
-    WICGifGraphicControlExtensionDisposal = 0x00000001,
-    WICGifGraphicControlExtensionUserInputFlag = 0x00000002,
-    WICGifGraphicControlExtensionTransparencyFlag = 0x00000003,
-    WICGifGraphicControlExtensionDelay = 0x00000004,
-    WICGifGraphicControlExtensionTransparentColorIndex = 0x00000005,
-    WICGifGraphicControlExtensionProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICGifGraphicControlExtensionDisposal = 0x1,
+    WICGifGraphicControlExtensionUserInputFlag = 0x2,
+    WICGifGraphicControlExtensionTransparencyFlag = 0x3,
+    WICGifGraphicControlExtensionDelay = 0x4,
+    WICGifGraphicControlExtensionTransparentColorIndex = 0x5,
+    WICGifGraphicControlExtensionProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICGifApplicationExtensionProperties {
-    WICGifApplicationExtensionApplication = 0x00000001,
-    WICGifApplicationExtensionData = 0x00000002,
-    WICGifApplicationExtensionProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICGifApplicationExtensionApplication = 0x1,
+    WICGifApplicationExtensionData = 0x2,
+    WICGifApplicationExtensionProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICGifCommentExtensionProperties {
-    WICGifCommentExtensionText = 0x00000001,
-    WICGifCommentExtensionProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICGifCommentExtensionText = 0x1,
+    WICGifCommentExtensionProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICJpegCommentProperties {
-    WICJpegCommentText = 0x00000001,
-    WICJpegCommentProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICJpegCommentText = 0x1,
+    WICJpegCommentProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICJpegLuminanceProperties {
-    WICJpegLuminanceTable = 0x00000001,
-    WICJpegLuminanceProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICJpegLuminanceTable = 0x1,
+    WICJpegLuminanceProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICJpegChrominanceProperties {
-    WICJpegChrominanceTable = 0x00000001,
-    WICJpegChrominanceProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICJpegChrominanceTable = 0x1,
+    WICJpegChrominanceProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WIC8BIMIptcProperties {
-    WIC8BIMIptcPString = 0x00000000,
-    WIC8BIMIptcEmbeddedIPTC = 0x00000001,
-    WIC8BIMIptcProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WIC8BIMIptcPString = 0,
+    WIC8BIMIptcEmbeddedIPTC = 0x1,
+    WIC8BIMIptcProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WIC8BIMResolutionInfoProperties {
-    WIC8BIMResolutionInfoPString = 0x00000001,
-    WIC8BIMResolutionInfoHResolution = 0x00000002,
-    WIC8BIMResolutionInfoHResolutionUnit = 0x00000003,
-    WIC8BIMResolutionInfoWidthUnit = 0x00000004,
-    WIC8BIMResolutionInfoVResolution = 0x00000005,
-    WIC8BIMResolutionInfoVResolutionUnit = 0x00000006,
-    WIC8BIMResolutionInfoHeightUnit = 0x00000007,
-    WIC8BIMResolutionInfoProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WIC8BIMResolutionInfoPString = 0x1,
+    WIC8BIMResolutionInfoHResolution = 0x2,
+    WIC8BIMResolutionInfoHResolutionUnit = 0x3,
+    WIC8BIMResolutionInfoWidthUnit = 0x4,
+    WIC8BIMResolutionInfoVResolution = 0x5,
+    WIC8BIMResolutionInfoVResolutionUnit = 0x6,
+    WIC8BIMResolutionInfoHeightUnit = 0x7,
+    WIC8BIMResolutionInfoProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WIC8BIMIptcDigestProperties {
-    WIC8BIMIptcDigestPString = 0x00000001,
-    WIC8BIMIptcDigestIptcDigest = 0x00000002,
-    WIC8BIMIptcDigestProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WIC8BIMIptcDigestPString = 0x1,
+    WIC8BIMIptcDigestIptcDigest = 0x2,
+    WIC8BIMIptcDigestProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICPngGamaProperties {
-    WICPngGamaGamma = 0x00000001,
-    WICPngGamaProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICPngGamaGamma = 0x1,
+    WICPngGamaProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICPngBkgdProperties {
-    WICPngBkgdBackgroundColor = 0x00000001,
-    WICPngBkgdProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICPngBkgdBackgroundColor = 0x1,
+    WICPngBkgdProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICPngItxtProperties {
-    WICPngItxtKeyword = 0x00000001,
-    WICPngItxtCompressionFlag = 0x00000002,
-    WICPngItxtLanguageTag = 0x00000003,
-    WICPngItxtTranslatedKeyword = 0x00000004,
-    WICPngItxtText = 0x00000005,
-    WICPngItxtProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICPngItxtKeyword = 0x1,
+    WICPngItxtCompressionFlag = 0x2,
+    WICPngItxtLanguageTag = 0x3,
+    WICPngItxtTranslatedKeyword = 0x4,
+    WICPngItxtText = 0x5,
+    WICPngItxtProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICPngChrmProperties {
-    WICPngChrmWhitePointX = 0x00000001,
-    WICPngChrmWhitePointY = 0x00000002,
-    WICPngChrmRedX = 0x00000003,
-    WICPngChrmRedY = 0x00000004,
-    WICPngChrmGreenX = 0x00000005,
-    WICPngChrmGreenY = 0x00000006,
-    WICPngChrmBlueX = 0x00000007,
-    WICPngChrmBlueY = 0x0000008,
-    WICPngChrmProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICPngChrmWhitePointX = 0x1,
+    WICPngChrmWhitePointY = 0x2,
+    WICPngChrmRedX = 0x3,
+    WICPngChrmRedY = 0x4,
+    WICPngChrmGreenX = 0x5,
+    WICPngChrmGreenY = 0x6,
+    WICPngChrmBlueX = 0x7,
+    WICPngChrmBlueY = 0x8,
+    WICPngChrmProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICPngHistProperties {
-    WICPngHistFrequencies = 0x00000001,
-    WICPngHistProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICPngHistFrequencies = 0x1,
+    WICPngHistProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICPngIccpProperties {
-    WICPngIccpProfileName = 0x00000001,
-    WICPngIccpProfileData = 0x00000002,
-    WICPngIccpProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICPngIccpProfileName = 0x1,
+    WICPngIccpProfileData = 0x2,
+    WICPngIccpProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICPngSrgbProperties {
-    WICPngSrgbRenderingIntent = 0x00000001,
-    WICPngSrgbProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICPngSrgbRenderingIntent = 0x1,
+    WICPngSrgbProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICPngTimeProperties {
-    WICPngTimeYear = 0x00000001,
-    WICPngTimeMonth = 0x00000002,
-    WICPngTimeDay = 0x00000003,
-    WICPngTimeHour = 0x00000004,
-    WICPngTimeMinute = 0x00000005,
-    WICPngTimeSecond = 0x00000006,
-    WICPngTimeProperties_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICPngTimeYear = 0x1,
+    WICPngTimeMonth = 0x2,
+    WICPngTimeDay = 0x3,
+    WICPngTimeHour = 0x4,
+    WICPngTimeMinute = 0x5,
+    WICPngTimeSecond = 0x6,
+    WICPngTimeProperties_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICSectionAccessLevel {
-    WICSectionAccessLevelRead = 0x00000001,
-    WICSectionAccessLevelReadWrite = 0x00000003,
-    WICSectionAccessLevel_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICSectionAccessLevelRead = 0x1,
+    WICSectionAccessLevelReadWrite = 0x3,
+    WICSectionAccessLevel_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICPixelFormatNumericRepresentation {
-    WICPixelFormatNumericRepresentationUnspecified = 0x00000000,
-    WICPixelFormatNumericRepresentationIndexed = 0x00000001,
-    WICPixelFormatNumericRepresentationUnsignedInteger = 0x00000002,
-    WICPixelFormatNumericRepresentationSignedInteger = 0x00000003,
-    WICPixelFormatNumericRepresentationFixed = 0x00000004,
-    WICPixelFormatNumericRepresentationFloat = 0x00000005,
-    WICPixelFormatNumericRepresentation_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICPixelFormatNumericRepresentationUnspecified = 0,
+    WICPixelFormatNumericRepresentationIndexed = 0x1,
+    WICPixelFormatNumericRepresentationUnsignedInteger = 0x2,
+    WICPixelFormatNumericRepresentationSignedInteger = 0x3,
+    WICPixelFormatNumericRepresentationFixed = 0x4,
+    WICPixelFormatNumericRepresentationFloat = 0x5,
+    WICPixelFormatNumericRepresentation_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICPlanarOptions {
-    WICPlanarOptionsDefault = 0x00000000,
-    WICPlanarOptionsPreserveSubsampling = 0x00000001,
-    WICPLANAROPTIONS_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICPlanarOptionsDefault = 0,
+    WICPlanarOptionsPreserveSubsampling = 0x1,
+    WICPLANAROPTIONS_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICJpegIndexingOptions {
-    WICJpegIndexingOptionsGenerateOnDemand = 0x00000000,
-    WICJpegIndexingOptionsGenerateOnLoad = 0x00000001,
-    WICJpegIndexingOptions_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICJpegIndexingOptionsGenerateOnDemand = 0,
+    WICJpegIndexingOptionsGenerateOnLoad = 0x1,
+    WICJpegIndexingOptions_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICJpegTransferMatrix {
-    WICJpegTransferMatrixIdentity = 0x00000000,
-    WICJpegTransferMatrixBT601 = 0x00000001,
-    WICJpegTransferMatrix_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICJpegTransferMatrixIdentity = 0,
+    WICJpegTransferMatrixBT601 = 0x1,
+    WICJpegTransferMatrix_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICJpegScanType {
-    WICJpegScanTypeInterleaved = 0x00000000,
-    WICJpegScanTypePlanarComponents = 0x00000001,
-    WICJpegScanTypeProgressive = 0x00000002,
-    WICJpegScanType_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICJpegScanTypeInterleaved = 0,
+    WICJpegScanTypePlanarComponents = 0x1,
+    WICJpegScanTypeProgressive = 0x2,
+    WICJpegScanType_FORCE_DWORD = 0x7fffffff,
 }}
 STRUCT!{struct WICImageParameters {
     PixelFormat: D2D1_PIXEL_FORMAT,
@@ -1479,15 +1481,13 @@ extern "system" {
 }
 pub const FACILITY_WINCODEC_ERR: HRESULT = 0x898;
 pub const WINCODEC_ERR_BASE: HRESULT = 0x2000;
-/// intsafe.h, 0x216 = 534 = ERROR_ARITHMETIC_OVERFLOW
-pub const INTSAFE_E_ARITHMETIC_OVERFLOW: HRESULT = 0x80070216;
 #[inline]
-pub fn MAKE_WINCODECHR(severity: HRESULT, code: HRESULT) -> HRESULT {
-    MAKE_HRESULT!(severity, FACILITY_WINCODEC_ERR, WINCODEC_ERR_BASE + code)
+pub fn MAKE_WINCODECHR(sev: HRESULT, code: HRESULT) -> HRESULT {
+    MAKE_HRESULT!(sev, FACILITY_WINCODEC_ERR, WINCODEC_ERR_BASE + code)
 }
 #[inline]
 pub fn MAKE_WINCODECHR_ERR(code: HRESULT) -> HRESULT {
-    MAKE_WINCODECHR(SEVERITY_ERROR, code)
+    MAKE_WINCODECHR(1, code)
 }
 pub const WINCODEC_ERR_GENERIC_ERROR: HRESULT = E_FAIL;
 pub const WINCODEC_ERR_INVALIDPARAMETER: HRESULT = E_INVALIDARG;
@@ -1497,60 +1497,60 @@ pub const WINCODEC_ERR_ABORTED: HRESULT = E_ABORT;
 pub const WINCODEC_ERR_ACCESSDENIED: HRESULT = E_ACCESSDENIED;
 pub const WINCODEC_ERR_VALUEOVERFLOW: HRESULT = INTSAFE_E_ARITHMETIC_OVERFLOW;
 ENUM!{enum WICTiffCompressionOption {
-    WICTiffCompressionDontCare = 0x00000000,
-    WICTiffCompressionNone = 0x00000001,
-    WICTiffCompressionCCITT3 = 0x00000002,
-    WICTiffCompressionCCITT4 = 0x00000003,
-    WICTiffCompressionLZW = 0x00000004,
-    WICTiffCompressionRLE = 0x00000005,
-    WICTiffCompressionZIP = 0x00000006,
-    WICTiffCompressionLZWHDifferencing = 0x00000007,
-    WICTIFFCOMPRESSIONOPTION_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICTiffCompressionDontCare = 0,
+    WICTiffCompressionNone = 0x1,
+    WICTiffCompressionCCITT3 = 0x2,
+    WICTiffCompressionCCITT4 = 0x3,
+    WICTiffCompressionLZW = 0x4,
+    WICTiffCompressionRLE = 0x5,
+    WICTiffCompressionZIP = 0x6,
+    WICTiffCompressionLZWHDifferencing = 0x7,
+    WICTIFFCOMPRESSIONOPTION_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICJpegYCrCbSubsamplingOption {
-    WICJpegYCrCbSubsamplingDefault = 0x00000000,
-    WICJpegYCrCbSubsampling420 = 0x00000001,
-    WICJpegYCrCbSubsampling422 = 0x00000002,
-    WICJpegYCrCbSubsampling444 = 0x00000003,
-    WICJpegYCrCbSubsampling440 = 0x00000004,
-    WICJPEGYCRCBSUBSAMPLING_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICJpegYCrCbSubsamplingDefault = 0,
+    WICJpegYCrCbSubsampling420 = 0x1,
+    WICJpegYCrCbSubsampling422 = 0x2,
+    WICJpegYCrCbSubsampling444 = 0x3,
+    WICJpegYCrCbSubsampling440 = 0x4,
+    WICJPEGYCRCBSUBSAMPLING_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICPngFilterOption {
-    WICPngFilterUnspecified = 0x00000000,
-    WICPngFilterNone = 0x00000001,
-    WICPngFilterSub = 0x00000002,
-    WICPngFilterUp = 0x00000003,
-    WICPngFilterAverage = 0x00000004,
-    WICPngFilterPaeth = 0x00000005,
-    WICPngFilterAdaptive = 0x00000006,
-    WICPNGFILTEROPTION_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICPngFilterUnspecified = 0,
+    WICPngFilterNone = 0x1,
+    WICPngFilterSub = 0x2,
+    WICPngFilterUp = 0x3,
+    WICPngFilterAverage = 0x4,
+    WICPngFilterPaeth = 0x5,
+    WICPngFilterAdaptive = 0x6,
+    WICPNGFILTEROPTION_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICNamedWhitePoint {
-    WICWhitePointDefault = 0x00000001,
-    WICWhitePointDaylight = 0x00000002,
-    WICWhitePointCloudy = 0x00000004,
-    WICWhitePointShade = 0x00000008,
-    WICWhitePointTungsten = 0x00000010,
-    WICWhitePointFluorescent = 0x00000020,
-    WICWhitePointFlash = 0x00000040,
-    WICWhitePointUnderwater = 0x00000080,
-    WICWhitePointCustom = 0x00000100,
-    WICWhitePointAutoWhiteBalance = 0x00000200,
+    WICWhitePointDefault = 0x1,
+    WICWhitePointDaylight = 0x2,
+    WICWhitePointCloudy = 0x4,
+    WICWhitePointShade = 0x8,
+    WICWhitePointTungsten = 0x10,
+    WICWhitePointFluorescent = 0x20,
+    WICWhitePointFlash = 0x40,
+    WICWhitePointUnderwater = 0x80,
+    WICWhitePointCustom = 0x100,
+    WICWhitePointAutoWhiteBalance = 0x200,
     WICWhitePointAsShot = WICWhitePointDefault,
-    WICNAMEDWHITEPOINT_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICNAMEDWHITEPOINT_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICRawCapabilities {
-    WICRawCapabilityNotSupported = 0x00000000,
-    WICRawCapabilityGetSupported = 0x00000001,
-    WICRawCapabilityFullySupported = 0x00000002,
-    WICRAWCAPABILITIES_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICRawCapabilityNotSupported = 0,
+    WICRawCapabilityGetSupported = 0x1,
+    WICRawCapabilityFullySupported = 0x2,
+    WICRAWCAPABILITIES_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICRawRotationCapabilities {
-    WICRawRotationCapabilityNotSupported = 0x00000000,
-    WICRawRotationCapabilityGetSupported = 0x00000001,
-    WICRawRotationCapabilityNinetyDegreesSupported = 0x00000002,
-    WICRawRotationCapabilityFullySupported = 0x00000003,
-    WICRAWROTATIONCAPABILITIES_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICRawRotationCapabilityNotSupported = 0,
+    WICRawRotationCapabilityGetSupported = 0x1,
+    WICRawRotationCapabilityNinetyDegreesSupported = 0x2,
+    WICRawRotationCapabilityFullySupported = 0x3,
+    WICRAWROTATIONCAPABILITIES_FORCE_DWORD = 0x7fffffff,
 }}
 STRUCT!{struct WICRawCapabilitiesInfo {
     cbSize: UINT,
@@ -1573,16 +1573,16 @@ STRUCT!{struct WICRawCapabilitiesInfo {
     RenderModeSupport: WICRawCapabilities,
 }}
 ENUM!{enum WICRawParameterSet {
-    WICAsShotParameterSet = 0x00000001,
-    WICUserAdjustedParameterSet = 0x00000002,
-    WICAutoAdjustedParameterSet = 0x00000003,
-    WICRAWPARAMETERSET_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICAsShotParameterSet = 0x1,
+    WICUserAdjustedParameterSet = 0x2,
+    WICAutoAdjustedParameterSet = 0x3,
+    WICRAWPARAMETERSET_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICRawRenderMode {
-    WICRawRenderModeDraft = 0x00000001,
-    WICRawRenderModeNormal = 0x00000002,
-    WICRawRenderModeBestQuality = 0x00000003,
-    WICRAWRENDERMODE_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICRawRenderModeDraft = 0x1,
+    WICRawRenderModeNormal = 0x2,
+    WICRawRenderModeBestQuality = 0x3,
+    WICRAWRENDERMODE_FORCE_DWORD = 0x7fffffff,
 }}
 STRUCT!{struct WICRawToneCurvePoint {
     Input: c_double,
@@ -1590,7 +1590,7 @@ STRUCT!{struct WICRawToneCurvePoint {
 }}
 STRUCT!{struct WICRawToneCurve {
     cPoints: UINT,
-    aPoints: [WICRawToneCurvePoint; 0],
+    aPoints: [WICRawToneCurvePoint; 1],
 }}
 pub const WICRawChangeNotification_ExposureCompensation: UINT = 0x00000001;
 pub const WICRawChangeNotification_NamedWhitePoint: UINT = 0x00000002;
@@ -1722,19 +1722,19 @@ interface IWICDevelopRaw(IWICDevelopRawVtbl): IWICBitmapFrameDecode(IWICBitmapFr
     ) -> HRESULT,
 });
 ENUM!{enum WICDdsDimension {
-    WICDdsTexture1D = 0x00000000,
-    WICDdsTexture2D = 0x00000001,
-    WICDdsTexture3D = 0x00000002,
-    WICDdsTextureCube = 0x00000003,
-    WICDDSTEXTURE_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICDdsTexture1D = 0,
+    WICDdsTexture2D = 0x1,
+    WICDdsTexture3D = 0x2,
+    WICDdsTextureCube = 0x3,
+    WICDDSTEXTURE_FORCE_DWORD = 0x7fffffff,
 }}
 ENUM!{enum WICDdsAlphaMode {
-    WICDdsAlphaModeUnknown = 0x00000000,
-    WICDdsAlphaModeStraight = 0x00000001,
-    WICDdsAlphaModePremultiplied = 0x00000002,
-    WICDdsAlphaModeOpaque = 0x00000003,
-    WICDdsAlphaModeCustom = 0x00000004,
-    WICDDSALPHAMODE_FORCE_DWORD = CODEC_FORCE_DWORD,
+    WICDdsAlphaModeUnknown = 0,
+    WICDdsAlphaModeStraight = 0x1,
+    WICDdsAlphaModePremultiplied = 0x2,
+    WICDdsAlphaModeOpaque = 0x3,
+    WICDdsAlphaModeCustom = 0x4,
+    WICDDSALPHAMODE_FORCE_DWORD = 0x7fffffff,
 }}
 STRUCT!{struct WICDdsParameters {
     Width: UINT,
@@ -1863,3 +1863,100 @@ interface IWICJpegFrameEncode(IWICJpegFrameEncodeVtbl): IUnknown(IUnknownVtbl) {
         pbScanData: *const BYTE,
     ) -> HRESULT,
 });
+extern "system" {
+    pub fn BSTR_UserSize(
+        pFlags: *mut c_ulong,
+        Offset: c_ulong,
+        pBstr: *mut BSTR,
+    ) -> c_ulong;
+    pub fn BSTR_UserMarshal(
+        pFlags: *mut c_ulong,
+        pBuffer: *mut c_uchar,
+        pBstr: *mut BSTR,
+    ) -> *mut c_uchar;
+    pub fn BSTR_UserUnmarshal(
+        pFlags: *mut c_ulong,
+        pBuffer: *mut c_uchar,
+        pBstr: *mut BSTR,
+    ) -> *mut c_uchar;
+    pub fn BSTR_UserFree(
+        pFlags: *mut c_ulong,
+        pBstr: *mut BSTR,
+    );
+    pub fn HBITMAP_UserSize(
+        pFlags: *mut c_ulong,
+        Offset: c_ulong,
+        phBmp: *mut HBITMAP,
+    ) -> c_ulong;
+    pub fn HBITMAP_UserMarshal(
+        pFlags: *mut c_ulong,
+        pBuffer: *mut c_uchar,
+        pBstr: *mut HBITMAP,
+    ) -> *mut c_uchar;
+    pub fn HBITMAP_UserUnmarshal(
+        pFlags: *mut c_ulong,
+        pBuffer: *mut c_uchar,
+        pBstr: *mut HBITMAP,
+    ) -> *mut c_uchar;
+    pub fn HBITMAP_UserFree(
+        pFlags: *mut c_ulong,
+        pBstr: *mut HBITMAP,
+    );
+    pub fn HICON_UserSize(
+        pFlags: *mut c_ulong,
+        Offset: c_ulong,
+        phBmp: *mut HICON,
+    ) -> c_ulong;
+    pub fn HICON_UserMarshal(
+        pFlags: *mut c_ulong,
+        pBuffer: *mut c_uchar,
+        pBstr: *mut HICON,
+    ) -> *mut c_uchar;
+    pub fn HICON_UserUnmarshal(
+        pFlags: *mut c_ulong,
+        pBuffer: *mut c_uchar,
+        pBstr: *mut HICON,
+    ) -> *mut c_uchar;
+    pub fn HICON_UserFree(
+        pFlags: *mut c_ulong,
+        pBstr: *mut HICON,
+    );
+    pub fn HPALETTE_UserSize(
+        pFlags: *mut c_ulong,
+        Offset: c_ulong,
+        phBmp: *mut HPALETTE,
+    ) -> c_ulong;
+    pub fn HPALETTE_UserMarshal(
+        pFlags: *mut c_ulong,
+        pBuffer: *mut c_uchar,
+        pBstr: *mut HPALETTE,
+    ) -> *mut c_uchar;
+    pub fn HPALETTE_UserUnmarshal(
+        pFlags: *mut c_ulong,
+        pBuffer: *mut c_uchar,
+        pBstr: *mut HPALETTE,
+    ) -> *mut c_uchar;
+    pub fn HPALETTE_UserFree(
+        pFlags: *mut c_ulong,
+        pBstr: *mut HPALETTE,
+    );
+    pub fn LPSAFEARRAY_UserSize(
+        pFlags: *mut c_ulong,
+        Offset: c_ulong,
+        phBmp: *mut LPSAFEARRAY,
+    ) -> c_ulong;
+    pub fn LPSAFEARRAY_UserMarshal(
+        pFlags: *mut c_ulong,
+        pBuffer: *mut c_uchar,
+        pBstr: *mut LPSAFEARRAY,
+    ) -> *mut c_uchar;
+    pub fn LPSAFEARRAY_UserUnmarshal(
+        pFlags: *mut c_ulong,
+        pBuffer: *mut c_uchar,
+        pBstr: *mut LPSAFEARRAY,
+    ) -> *mut c_uchar;
+    pub fn LPSAFEARRAY_UserFree(
+        pFlags: *mut c_ulong,
+        pBstr: *mut LPSAFEARRAY,
+    );
+}

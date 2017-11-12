@@ -6,8 +6,8 @@
 // except according to those terms.
 use ctypes::c_void;
 use shared::basetsd::{INT8, LONG_PTR, SIZE_T, UINT16, UINT64, UINT8};
+use shared::dxgicommon::DXGI_SAMPLE_DESC;
 use shared::dxgiformat::DXGI_FORMAT;
-use shared::dxgitype::DXGI_SAMPLE_DESC;
 use shared::guiddef::{IID, REFGUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, LPCVOID, UINT};
 use shared::windef::RECT;

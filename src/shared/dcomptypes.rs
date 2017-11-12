@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of dcomptypes.h
-use shared::dxgitype::DXGI_RATIONAL;
+use shared::dxgicommon::DXGI_RATIONAL;
 use shared::minwindef::DWORD;
 use um::winnt::LARGE_INTEGER;
 ENUM!{enum DCOMPOSITION_BITMAP_INTERPOLATION_MODE {

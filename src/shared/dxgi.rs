@@ -7,16 +7,29 @@
 //! Mappings for the contents of dxgi.h
 use ctypes::c_void;
 use shared::basetsd::{SIZE_T, UINT64};
+use shared::dxgicommon::DXGI_SAMPLE_DESC;
 use shared::dxgiformat::DXGI_FORMAT;
 use shared::dxgitype::{
     DXGI_GAMMA_CONTROL, DXGI_GAMMA_CONTROL_CAPABILITIES, DXGI_MODE_DESC, DXGI_MODE_ROTATION,
-    DXGI_SAMPLE_DESC, DXGI_USAGE,
 };
 use shared::guiddef::{REFGUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, HMODULE, UINT};
 use shared::windef::{HDC, HMONITOR, HWND, RECT};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HANDLE, HRESULT, INT, LARGE_INTEGER, LUID, WCHAR};
+pub const DXGI_CPU_ACCESS_NONE: UINT = 0;
+pub const DXGI_CPU_ACCESS_DYNAMIC: UINT = 1;
+pub const DXGI_CPU_ACCESS_READ_WRITE: UINT = 2;
+pub const DXGI_CPU_ACCESS_SCRATCH: UINT = 3;
+pub const DXGI_CPU_ACCESS_FIELD: UINT = 15;
+pub const DXGI_USAGE_SHADER_INPUT: UINT = 0x00000010;
+pub const DXGI_USAGE_RENDER_TARGET_OUTPUT: UINT = 0x00000020;
+pub const DXGI_USAGE_BACK_BUFFER: UINT = 0x00000040;
+pub const DXGI_USAGE_SHARED: UINT = 0x00000080;
+pub const DXGI_USAGE_READ_ONLY: UINT = 0x00000100;
+pub const DXGI_USAGE_DISCARD_ON_PRESENT: UINT = 0x00000200;
+pub const DXGI_USAGE_UNORDERED_ACCESS: UINT = 0x00000400;
+pub type DXGI_USAGE = UINT;
 STRUCT!{struct DXGI_FRAME_STATISTICS {
     PresentCount: UINT,
     PresentRefreshCount: UINT,
@@ -82,6 +95,9 @@ ENUM!{enum DXGI_SWAP_CHAIN_FLAG {
     DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER = 128,
     DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO = 256,
     DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO = 512,
+    DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED = 1024,
+    DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING = 2048,
+    DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS = 4096,
 }}
 STRUCT!{struct DXGI_SWAP_CHAIN_DESC {
     BufferDesc: DXGI_MODE_DESC,
@@ -231,6 +247,7 @@ pub const DXGI_PRESENT_STEREO_PREFER_RIGHT: DWORD = 0x00000010;
 pub const DXGI_PRESENT_STEREO_TEMPORARY_MONO: DWORD = 0x00000020;
 pub const DXGI_PRESENT_RESTRICT_TO_OUTPUT: DWORD = 0x00000040;
 pub const DXGI_PRESENT_USE_DURATION: DWORD = 0x00000100;
+pub const DXGI_PRESENT_ALLOW_TEARING: DWORD = 0x00000200;
 RIDL!(#[uuid(0x310d36a0, 0xd2e7, 0x4c0a, 0xaa, 0x04, 0x6a, 0x9d, 0x23, 0xb8, 0x88, 0x6a)]
 interface IDXGISwapChain(IDXGISwapChainVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl) {
     fn Present(
@@ -273,6 +290,10 @@ interface IDXGISwapChain(IDXGISwapChainVtbl): IDXGIDeviceSubObject(IDXGIDeviceSu
         pLastPresentCount: *mut UINT,
     ) -> HRESULT,
 });
+pub const DXGI_MWA_NO_WINDOW_CHANGES: UINT = 1 << 0;
+pub const DXGI_MWA_NO_ALT_ENTER: UINT = 1 << 1;
+pub const DXGI_MWA_NO_PRINT_SCREEN: UINT = 1 << 2;
+pub const DXGI_MWA_VALID: UINT = 0x7;
 RIDL!(#[uuid(0x7b7166ec, 0x21c7, 0x44ae, 0xb2, 0x1a, 0xc9, 0xae, 0x32, 0x1a, 0xe3, 0x69)]
 interface IDXGIFactory(IDXGIFactoryVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn EnumAdapters(
@@ -331,9 +352,10 @@ interface IDXGIDevice(IDXGIDeviceVtbl): IDXGIObject(IDXGIObjectVtbl) {
     ) -> HRESULT,
 });
 ENUM!{enum DXGI_ADAPTER_FLAG {
-    DXGI_ADAPTER_FLAG_NONE,
-    DXGI_ADAPTER_FLAG_REMOTE,
-    DXGI_ADAPTER_FLAG_SOFTWARE,
+    DXGI_ADAPTER_FLAG_NONE = 0,
+    DXGI_ADAPTER_FLAG_REMOTE = 1,
+    DXGI_ADAPTER_FLAG_SOFTWARE = 2,
+    DXGI_ADAPTER_FLAG_FORCE_DWORD = 0xffffffff,
 }}
 STRUCT!{struct DXGI_ADAPTER_DESC1 {
     Description: [WCHAR; 128],
