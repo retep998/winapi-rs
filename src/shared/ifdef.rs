@@ -72,7 +72,7 @@ BITFIELD!(NET_LUID_LH_Info BitFields: ULONG64 [
     NetLuidIndex set_NetLuidIndex[24..48],
     IfType set_IfType[48..64],
 ]);
-UNION2!{union NET_LUID_LH {
+UNION!{union NET_LUID_LH {
     [u64; 1],
     Value Value_mut: ULONG64,
     Info Info_mut: NET_LUID_LH_Info,

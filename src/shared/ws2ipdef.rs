@@ -20,7 +20,7 @@ STRUCT!{struct sockaddr_in6_old {
     sin6_flowinfo: ULONG,
     sin6_addr: IN6_ADDR,
 }}
-UNION2!{union sockaddr_gen {
+UNION!{union sockaddr_gen {
     [u32; 6],
     Address Address_mut: SOCKADDR,
     AddressIn AddressIn_mut: SOCKADDR_IN,
@@ -90,7 +90,7 @@ pub const IP_MTU_DISCOVER: c_int = 71;
 pub const IP_RECVTOS: c_int = 40;
 pub const IP_RECVTTL: c_int = 21;
 pub const IP_UNSPECIFIED_TYPE_OF_SERVICE: c_int = -1;
-UNION2!{union SOCKADDR_IN6_LH_u {
+UNION!{union SOCKADDR_IN6_LH_u {
     [u32; 1],
     sin6_scope_id sin6_scope_id_mut: ULONG,
     sin6_scope_struct sin6_scope_struct_mut: SCOPE_ID,

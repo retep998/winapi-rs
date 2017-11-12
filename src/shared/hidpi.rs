@@ -42,7 +42,7 @@ STRUCT!{struct HIDP_CAPS_NotRange {
     DataIndex: USHORT,
     Reserved4: USHORT,
 }}
-UNION2!{union HIDP_CAPS_u {
+UNION!{union HIDP_CAPS_u {
     [u16; 8],
     Range Range_mut: HIDP_CAPS_Range,
     NotRange NotRange_mut: HIDP_CAPS_NotRange,
@@ -126,7 +126,7 @@ STRUCT!{struct HIDP_CAPS {
     NumberFeatureDataIndices: USHORT,
 }}
 pub type PHIDP_CAPS = *mut HIDP_CAPS;
-UNION2!{union HIDP_DATA_u {
+UNION!{union HIDP_DATA_u {
     [u32; 1],
     RawValue RawValue_mut: ULONG,
     On On_mut: BOOLEAN,

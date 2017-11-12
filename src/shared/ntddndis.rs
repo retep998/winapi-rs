@@ -1064,7 +1064,7 @@ STRUCT!{struct NDIS_802_11_AUTHENTICATION_EVENT {
     Request: [NDIS_802_11_AUTHENTICATION_REQUEST; 1],
 }}
 pub type PNDIS_802_11_AUTHENTICATION_EVENT = *mut NDIS_802_11_AUTHENTICATION_EVENT;
-UNION2!{union NDIS_802_11_TEST_u {
+UNION!{union NDIS_802_11_TEST_u {
     [u32; 5],
     AuthenticationEvent AuthenticationEvent_mut: NDIS_802_11_AUTHENTICATION_EVENT,
     RssiTrigger RssiTrigger_mut: NDIS_802_11_RSSI,
@@ -1720,7 +1720,7 @@ STRUCT!{struct NDIS_LINK_SPEED {
 pub type PNDIS_LINK_SPEED = *mut NDIS_LINK_SPEED;
 pub type NDIS_STATUS = c_int;
 pub type PNDIS_STATUS = *mut c_int;
-UNION2!{union NDIS_GUID_u {
+UNION!{union NDIS_GUID_u {
     [u32; 1],
     Oid Oid_mut: NDIS_OID,
     Status Status_mut: NDIS_STATUS,
@@ -1899,7 +1899,7 @@ pub const NDIS_OFFLOAD_PARAMETERS_SKIP_REGISTRY_UPDATE: ULONG = 0x00000001;
 STRUCT!{struct _VXLAN_PARAMETERS {
     VxlanUDPPortNumber: USHORT,
 }}
-UNION2!{union _ENCAPSULATION_PROTOCOL_PARAMETERS {
+UNION!{union _ENCAPSULATION_PROTOCOL_PARAMETERS {
     [u32; 1],
     VxlanParameters VxlanParameters_mut: _VXLAN_PARAMETERS,
     Value Value_mut: ULONG,
@@ -2128,7 +2128,7 @@ STRUCT!{struct _VXLAN_INFO {
 BITFIELD!(_VXLAN_INFO BitFields: USHORT [
     VxlanUDPPortNumberConfigurable set_VxlanUDPPortNumberConfigurable[0..1],
 ]);
-UNION2!{union _ENCAPSULATION_PROTOCOL_INFO {
+UNION!{union _ENCAPSULATION_PROTOCOL_INFO {
     [u32; 1],
     VxlanInfo VxlanInfo_mut: _VXLAN_INFO,
     Value Value_mut: ULONG,
@@ -2574,7 +2574,7 @@ STRUCT!{struct _WOL_BITMAP_PATTERN {
     PatternOffset: ULONG,
     PatternSize: ULONG,
 }}
-UNION2!{union _WOL_PATTERN {
+UNION!{union _WOL_PATTERN {
     [u32; 10],
     IPv4TcpSynParameters IPv4TcpSynParameters_mut: _IPV4_TCP_SYN_WOL_PACKET_PARAMETERS,
     IPv6TcpSynParameters IPv6TcpSynParameters_mut: _IPV6_TCP_SYN_WOL_PACKET_PARAMETERS,
@@ -2615,7 +2615,7 @@ STRUCT!{struct _DOT11_RSN_REKEY_PARAMETERS {
     KEK: [UCHAR; DOT11_RSN_KEK_LENGTH],
     KeyReplayCounter: ULONGLONG,
 }}
-UNION2!{union _PROTOCOL_OFFLOAD_PARAMETERS {
+UNION!{union _PROTOCOL_OFFLOAD_PARAMETERS {
     [u64; 10],
     IPv4ARPParameters IPv4ARPParameters_mut: _IPV4_ARP_PARAMETERS,
     IPv6NSParameters IPv6NSParameters_mut: _IPV6_NS_PARAMETERS,
@@ -2907,7 +2907,7 @@ pub type PNDIS_RECEIVE_FILTER_TEST = *mut NDIS_RECEIVE_FILTER_TEST;
 pub const NDIS_RECEIVE_FILTER_FIELD_MAC_HEADER_VLAN_UNTAGGED_OR_ZERO: ULONG = 0x00000001;
 pub const NDIS_RECEIVE_FILTER_FIELD_PARAMETERS_REVISION_1: UCHAR = 1;
 pub const NDIS_RECEIVE_FILTER_FIELD_PARAMETERS_REVISION_2: UCHAR = 2;
-UNION2!{union _HEADER_FIELD {
+UNION!{union _HEADER_FIELD {
     [u32; 1],
     MacHeaderField MacHeaderField_mut: NDIS_MAC_HEADER_FIELD,
     ArpHeaderField ArpHeaderField_mut: NDIS_ARP_HEADER_FIELD,
@@ -2915,7 +2915,7 @@ UNION2!{union _HEADER_FIELD {
     IPv6HeaderField IPv6HeaderField_mut: NDIS_IPV6_HEADER_FIELD,
     UdpHeaderField UdpHeaderField_mut: NDIS_UDP_HEADER_FIELD,
 }}
-UNION2!{union _FIELD_VALUE {
+UNION!{union _FIELD_VALUE {
     [u64; 2],
     FieldByteValue FieldByteValue_mut: UCHAR,
     FieldShortValue FieldShortValue_mut: USHORT,
@@ -2923,7 +2923,7 @@ UNION2!{union _FIELD_VALUE {
     FieldLong64Value FieldLong64Value_mut: ULONG64,
     FieldByteArrayValue FieldByteArrayValue_mut: [UCHAR; 16],
 }}
-UNION2!{union _RESULT_VALUE {
+UNION!{union _RESULT_VALUE {
     [u64; 2],
     ResultByteValue ResultByteValue_mut: UCHAR,
     ResultShortValue ResultShortValue_mut: USHORT,
@@ -3974,7 +3974,7 @@ STRUCT!{struct NDIS_SWITCH_PORT_PROPERTY_VLAN_u_VlanProperties {
     PruneVlanIdArray: [UINT64; 64],
     TrunkVlanIdArray: [UINT64; 64],
 }}
-UNION2!{union NDIS_SWITCH_PORT_PROPERTY_VLAN_u_PvlanProperties_u {
+UNION!{union NDIS_SWITCH_PORT_PROPERTY_VLAN_u_PvlanProperties_u {
     [u64; 64],
     SecondaryVlanId SecondaryVlanId_mut: UINT16,
     SecondaryVlanIdArray SecondaryVlanIdArray_mut: [UINT64; 64],
@@ -3984,7 +3984,7 @@ STRUCT!{struct NDIS_SWITCH_PORT_PROPERTY_VLAN_u_PvlanProperties {
     PrimaryVlanId: UINT16,
     u: NDIS_SWITCH_PORT_PROPERTY_VLAN_u_PvlanProperties_u,
 }}
-UNION2!{union NDIS_SWITCH_PORT_PROPERTY_VLAN_u {
+UNION!{union NDIS_SWITCH_PORT_PROPERTY_VLAN_u {
     [u64; 129],
     VlanProperties VlanProperties_mut: NDIS_SWITCH_PORT_PROPERTY_VLAN_u_VlanProperties,
     PvlanProperties PvlanProperties_mut: NDIS_SWITCH_PORT_PROPERTY_VLAN_u_PvlanProperties,
@@ -4487,7 +4487,7 @@ STRUCT!{struct NDIS_GFP_HEADER_GROUP_EXACT_MATCH_IPAddress_IPv6Address {
     SourceIPAddress: IN6_ADDR,
     DestinationIPAddress: IN6_ADDR,
 }}
-UNION2!{union NDIS_GFP_HEADER_GROUP_EXACT_MATCH_IPAddress {
+UNION!{union NDIS_GFP_HEADER_GROUP_EXACT_MATCH_IPAddress {
     [u32; 8],
     IPv4Address IPv4Address_mut: NDIS_GFP_HEADER_GROUP_EXACT_MATCH_IPAddress_IPv4Address,
     IPv6Address IPv6Address_mut: NDIS_GFP_HEADER_GROUP_EXACT_MATCH_IPAddress_IPv6Address,
@@ -4509,7 +4509,7 @@ STRUCT!{struct NDIS_GFP_HEADER_GROUP_EXACT_MATCH_TransportOrEncapsulation_Encaps
     TenantId: ULONG,
     GreProtocol: USHORT,
 }}
-UNION2!{union NDIS_GFP_HEADER_GROUP_EXACT_MATCH_TransportOrEncapsulation {
+UNION!{union NDIS_GFP_HEADER_GROUP_EXACT_MATCH_TransportOrEncapsulation {
     [u32; 2],
     Udp Udp_mut: NDIS_GFP_HEADER_GROUP_EXACT_MATCH_TransportOrEncapsulation_Udp,
     Tcp Tcp_mut: NDIS_GFP_HEADER_GROUP_EXACT_MATCH_TransportOrEncapsulation_Tcp,
@@ -4566,7 +4566,7 @@ STRUCT!{struct NDIS_GFP_WILDCARD_MATCH_PROFILE {
     HeaderGroupWildcardMatchProfileArrayElementSize: ULONG,
 }}
 pub type PNDIS_GFP_WILDCARD_MATCH_PROFILE = *mut NDIS_GFP_WILDCARD_MATCH_PROFILE;
-UNION2!{union NDIS_GFP_IPV4_ADDRESS_WILDCARD_MATCH_MatchValue {
+UNION!{union NDIS_GFP_IPV4_ADDRESS_WILDCARD_MATCH_MatchValue {
     [u32; 1],
     PrefixLength PrefixLength_mut: ULONG,
     RangeSize RangeSize_mut: ULONG,
@@ -4583,7 +4583,7 @@ STRUCT!{struct NDIS_GFP_IPV4_SRC_AND_DEST_ADDRESS_WILDCARD_MATCH {
 }}
 pub type PNDIS_GFP_IPV4_SRC_AND_DEST_ADDRESS_WILDCARD_MATCH =
     *mut NDIS_GFP_IPV4_SRC_AND_DEST_ADDRESS_WILDCARD_MATCH;
-UNION2!{union NDIS_GFP_IPV6_ADDRESS_WILDCARD_MATCH_MatchValue {
+UNION!{union NDIS_GFP_IPV6_ADDRESS_WILDCARD_MATCH_MatchValue {
     [u32; 1],
     PrefixLength PrefixLength_mut: ULONG,
     RangeSize RangeSize_mut: ULONG,
@@ -4600,7 +4600,7 @@ STRUCT!{struct NDIS_GFP_IPV6_SRC_AND_DEST_ADDRESS_WILDCARD_MATCH {
 }}
 pub type PNDIS_GFP_IPV6_SRC_AND_DEST_ADDRESS_WILDCARD_MATCH =
     *mut NDIS_GFP_IPV6_SRC_AND_DEST_ADDRESS_WILDCARD_MATCH;
-UNION2!{union NDIS_GFP_IP_SRC_AND_DEST_ADDRESS_WILDCARD_MATCH {
+UNION!{union NDIS_GFP_IP_SRC_AND_DEST_ADDRESS_WILDCARD_MATCH {
     [u32; 12],
     IPv4SrcAndDestAddress IPv4SrcAndDestAddress_mut:
         NDIS_GFP_IPV4_SRC_AND_DEST_ADDRESS_WILDCARD_MATCH,
@@ -4637,7 +4637,7 @@ STRUCT!{struct NDIS_GFP_HEADER_GROUP_WILDCARD_MATCH_TransportOrEncapsulation_Enc
     TenantId: ULONG,
     GreProtocol: USHORT,
 }}
-UNION2!{union NDIS_GFP_HEADER_GROUP_WILDCARD_MATCH_TransportOrEncapsulation {
+UNION!{union NDIS_GFP_HEADER_GROUP_WILDCARD_MATCH_TransportOrEncapsulation {
     [u32; 5],
     UdpHeader UdpHeader_mut:
         NDIS_GFP_HEADER_GROUP_WILDCARD_MATCH_TransportOrEncapsulation_UdpHeader,
@@ -4780,7 +4780,7 @@ STRUCT!{struct NDIS_GFT_PACKET_AND_BYTE_COUNTER_VALUE {
 pub type PNDIS_GFT_PACKET_AND_BYTE_COUNTER_VALUE = *mut NDIS_GFT_PACKET_AND_BYTE_COUNTER_VALUE;
 pub const NDIS_GFT_COUNTER_PARAMETERS_CLIENT_SPECIFIED_ADDRESS: ULONG = 0x00000001;
 pub const NDIS_GFT_COUNTER_PARAMETERS_REVISION_1: UCHAR = 1;
-UNION2!{union NDIS_GFT_COUNTER_PARAMETERS_CounterValuesBufferStart {
+UNION!{union NDIS_GFT_COUNTER_PARAMETERS_CounterValuesBufferStart {
     [usize; 1],
     PacketCounters PacketCounters_mut: PNDIS_GFT_PACKET_COUNTER_VALUE,
     ByteCounters ByteCounters_mut: PNDIS_GFT_BYTE_COUNTER_VALUE,
@@ -4831,7 +4831,7 @@ STRUCT!{struct NDIS_GFT_COUNTER_INFO_ARRAY {
     CounterInfoArrayElementSize: ULONG,
 }}
 pub type PNDIS_GFT_COUNTER_INFO_ARRAY = *mut NDIS_GFT_COUNTER_INFO_ARRAY;
-UNION2!{union NDIS_GFT_COUNTER_VALUE_CounterValue {
+UNION!{union NDIS_GFT_COUNTER_VALUE_CounterValue {
     [u64; 3],
     Packets Packets_mut: NDIS_GFT_PACKET_COUNTER_VALUE,
     Bytes Bytes_mut: NDIS_GFT_BYTE_COUNTER_VALUE,
@@ -4854,7 +4854,7 @@ ENUM!{enum NDIS_GFT_COUNTER_VALUE_QUERY_METHOD {
 }}
 pub type PNDIS_GFT_COUNTER_VALUE_QUERY_METHOD = *mut NDIS_GFT_COUNTER_VALUE_QUERY_METHOD;
 pub const NDIS_GFT_COUNTER_VALUE_ARRAY_REVISION_1: UCHAR = 1;
-UNION2!{union NDIS_GFT_COUNTER_VALUE_ARRAY_StartId {
+UNION!{union NDIS_GFT_COUNTER_VALUE_ARRAY_StartId {
     [usize; 1],
     FlowEntryId FlowEntryId_mut: NDIS_GFT_FLOW_ENTRY_ID,
     CounterId CounterId_mut: NDIS_GFT_COUNTER_ID,
@@ -4913,7 +4913,7 @@ pub type PNDIS_GFT_CUSTOM_ACTION_TYPE = *mut ULONG;
 pub const NDIS_GFT_UNDEFINED_CUSTOM_ACTION: NDIS_GFT_CUSTOM_ACTION_TYPE = 0;
 pub const NDIS_GFT_RESERVED_CUSTOM_ACTIONS: NDIS_GFT_CUSTOM_ACTION_TYPE = 256;
 pub const NDIS_GFT_CUSTOM_ACTION_PROFILE_REVISION_1: UCHAR = 1;
-UNION2!{union NDIS_GFT_CUSTOM_ACTION_PROFILE_u {
+UNION!{union NDIS_GFT_CUSTOM_ACTION_PROFILE_u {
     [usize; 1],
     Alignment Alignment_mut: ULONG_PTR,
     ActionProfileData ActionProfileData_mut: [UCHAR; 1],
@@ -4959,7 +4959,7 @@ STRUCT!{struct NDIS_GFT_HEADER_GROUP_TRANSPOSITION_IPAddress_IPv6Address {
     SourceIPAddress: IN6_ADDR,
     DestinationIPAddress: IN6_ADDR,
 }}
-UNION2!{union NDIS_GFT_HEADER_GROUP_TRANSPOSITION_IPAddress {
+UNION!{union NDIS_GFT_HEADER_GROUP_TRANSPOSITION_IPAddress {
     [u32; 8],
     IPv4Address IPv4Address_mut: NDIS_GFT_HEADER_GROUP_TRANSPOSITION_IPAddress_IPv4Address,
     IPv6Address IPv6Address_mut: NDIS_GFT_HEADER_GROUP_TRANSPOSITION_IPAddress_IPv6Address,
@@ -4977,7 +4977,7 @@ STRUCT!{struct NDIS_GFT_HEADER_GROUP_TRANSPOSITION_TransportOrEncapsulation_Enca
     GreProtocol: USHORT,
     Entropy: USHORT,
 }}
-UNION2!{union NDIS_GFT_HEADER_GROUP_TRANSPOSITION_TransportOrEncapsulation {
+UNION!{union NDIS_GFT_HEADER_GROUP_TRANSPOSITION_TransportOrEncapsulation {
     [u32; 2],
     Udp Udp_mut: NDIS_GFT_HEADER_GROUP_TRANSPOSITION_TransportOrEncapsulation_Udp,
     Tcp Tcp_mut: NDIS_GFT_HEADER_GROUP_TRANSPOSITION_TransportOrEncapsulation_Tcp,
@@ -5015,7 +5015,7 @@ ENUM!{enum NDIS_GFT_FLOW_ENTRY_STATE {
 pub type PNDIS_GFT_FLOW_ENTRY_STATE = *mut NDIS_GFT_FLOW_ENTRY_STATE;
 pub const NDIS_GFT_CUSTOM_ACTION_LAST_ACTION: ULONG = 0x00000001;
 pub const NDIS_GFT_CUSTOM_ACTION_REVISION_1: UCHAR = 1;
-UNION2!{union NDIS_GFT_CUSTOM_ACTION_u {
+UNION!{union NDIS_GFT_CUSTOM_ACTION_u {
     [u64; 1],
     Alignment Alignment_mut: ULONG_PTR,
     ActionData ActionData_mut: [UCHAR; 1],
@@ -5049,7 +5049,7 @@ pub const NDIS_GFT_EMFE_COUNTER_ALLOCATE: ULONG = 0x00000001;
 pub const NDIS_GFT_EMFE_COUNTER_MEMORY_MAPPED: ULONG = 0x00000002;
 pub const NDIS_GFT_EMFE_COUNTER_CLIENT_SPECIFIED_ADDRESS: ULONG = 0x00000004;
 pub const NDIS_GFT_EXACT_MATCH_FLOW_ENTRY_REVISION_1: UCHAR = 1;
-UNION2!{union NDIS_GFT_EXACT_MATCH_FLOW_ENTRY_CounterValueBuffer {
+UNION!{union NDIS_GFT_EXACT_MATCH_FLOW_ENTRY_CounterValueBuffer {
     [u64; 1],
     PacketCounterAddress PacketCounterAddress_mut: PNDIS_GFT_PACKET_COUNTER_VALUE,
     ByteCounterAddress ByteCounterAddress_mut: PNDIS_GFT_BYTE_COUNTER_VALUE,
@@ -5105,7 +5105,7 @@ pub const NDIS_GFT_WCFE_COUNTER_ALLOCATE: ULONG = 0x00000001;
 pub const NDIS_GFT_WCFE_COUNTER_MEMORY_MAPPED: ULONG = 0x00000002;
 pub const NDIS_GFT_WCFE_COUNTER_CLIENT_SPECIFIED_ADDRESS: ULONG = 0x00000004;
 pub const NDIS_GFT_WILDCARD_MATCH_FLOW_ENTRY_REVISION_1: UCHAR = 1;
-UNION2!{union NDIS_GFT_WILDCARD_MATCH_FLOW_ENTRY_CounterValueBuffer {
+UNION!{union NDIS_GFT_WILDCARD_MATCH_FLOW_ENTRY_CounterValueBuffer {
     [u64; 1],
     PacketCounterAddress PacketCounterAddress_mut: PNDIS_GFT_PACKET_COUNTER_VALUE,
     ByteCounterAddress ByteCounterAddress_mut: PNDIS_GFT_BYTE_COUNTER_VALUE,
@@ -5233,7 +5233,7 @@ STRUCT!{struct NDIS_GFT_FLOW_ENTRY_ID_ARRAY_IdArray_FlowEntryIdAndCounterArray {
     ProviderFlowEntryIdAndCounterArrayNumElements: ULONG,
     ProviderFlowEntryIdAndCounterArrayElementSize: ULONG,
 }}
-UNION2!{union NDIS_GFT_FLOW_ENTRY_ID_ARRAY_IdArray {
+UNION!{union NDIS_GFT_FLOW_ENTRY_ID_ARRAY_IdArray {
     [u32; 3],
     FlowEntryIdArray FlowEntryIdArray_mut: NDIS_GFT_FLOW_ENTRY_ID_ARRAY_IdArray_FlowEntryIdArray,
     FlowEntryIdAndCounterArray FlowEntryIdAndCounterArray_mut:

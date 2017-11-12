@@ -376,7 +376,7 @@ pub const MS_GENRE_DESCRIPTOR_INDEX: USHORT = 0x0001;
 pub const MS_POWER_DESCRIPTOR_INDEX: USHORT = 0x0002;
 pub const MS_OS_STRING_SIGNATURE: &'static str = "MSFT100";
 pub const MS_OS_FLAGS_CONTAINERID: UCHAR = 0x02;
-UNION2!{union OS_STRING_u {
+UNION!{union OS_STRING_u {
     [u8; 1],
     bPad bPad_mut: UCHAR,
     bFlags bFlags_mut: UCHAR,
@@ -491,7 +491,7 @@ STRUCT!{struct URB_OPEN_STATIC_STREAMS {
     StreamInfoSize: USHORT,
     Streams: PUSBD_STREAM_INFORMATION,
 }}
-UNION2!{union URB_u {
+UNION!{union URB_u {
     [u32; 24] [u64; 19],
     UrbHeader UrbHeader_mut: URB_HEADER,
     UrbSelectInterface UrbSelectInterface_mut: URB_SELECT_INTERFACE,

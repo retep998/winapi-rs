@@ -88,7 +88,7 @@ STRUCT!{struct IP_PATTERN_S_un_S_un_icmp {
     s_code: UCHAR,
     filler: USHORT,
 }}
-UNION2!{union IP_PATTERN_S_un {
+UNION!{union IP_PATTERN_S_un {
     [u32; 1],
     S_un_ports S_un_ports_mut: IP_PATTERN_S_un_S_un_ports,
     S_un_icmp S_un_icmp_mut: IP_PATTERN_S_un_S_un_icmp,
