@@ -19,7 +19,7 @@ STRUCT!{struct SYSTEM_INFO_u_s {
     wProcessorArchitecture: WORD,
     wReserved: WORD,
 }}
-UNION2!{union SYSTEM_INFO_u {
+UNION!{union SYSTEM_INFO_u {
     [u32; 1],
     dwOemId dwOemId_mut: DWORD,
     s s_mut: SYSTEM_INFO_u_s,

@@ -16,7 +16,7 @@ STRUCT!{struct in_addr_S_un_w {
     s_w1: USHORT,
     s_w2: USHORT,
 }}
-UNION2!{union in_addr_S_un {
+UNION!{union in_addr_S_un {
     [u32; 1],
     S_un_b S_un_b_mut: in_addr_S_un_b,
     S_un_w S_un_w_mut: in_addr_S_un_w,

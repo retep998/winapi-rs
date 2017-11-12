@@ -2883,7 +2883,7 @@ pub type LPTV_INSERTSTRUCTA = LPTVINSERTSTRUCTA;
 pub type LPTV_INSERTSTRUCTW = LPTVINSERTSTRUCTW;
 pub type TV_INSERTSTRUCTA = TVINSERTSTRUCTA;
 pub type TV_INSERTSTRUCTW = TVINSERTSTRUCTW;
-UNION2!{union TVINSERTSTRUCTA_u {
+UNION!{union TVINSERTSTRUCTA_u {
     [u32; 15] [u64; 10],
     itemex itemex_mut: TVITEMEXA,
     item item_mut: TV_ITEMA,
@@ -2894,7 +2894,7 @@ STRUCT!{struct TVINSERTSTRUCTA {
     u: TVINSERTSTRUCTA_u,
 }}
 pub type LPTVINSERTSTRUCTA = *mut TVINSERTSTRUCTA;
-UNION2!{union TVINSERTSTRUCTW_u {
+UNION!{union TVINSERTSTRUCTW_u {
     [u32; 15] [u64; 10],
     itemex itemex_mut: TVITEMEXW,
     item item_mut: TV_ITEMW,
@@ -3932,12 +3932,12 @@ ENUM!{enum TASKDIALOG_COMMON_BUTTON_FLAGS {
     TDCBF_RETRY_BUTTON = 0x0010,
     TDCBF_CLOSE_BUTTON = 0x0020,
 }}
-UNION2!{union TASKDIALOGCONFIG_u1 {
+UNION!{union TASKDIALOGCONFIG_u1 {
     [u8; 8],
     hMainIcon hMainIcon_mut: HICON,
     pszMainIcon pszMainIcon_mut: PCWSTR,
 }}
-UNION2!{union TASKDIALOGCONFIG_u2 {
+UNION!{union TASKDIALOGCONFIG_u2 {
     [u8; 8],
     hFooterIcon hFooterIcon_mut: HICON,
     pszFooterIcon pszFooterIcon_mut: PCWSTR,

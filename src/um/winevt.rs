@@ -42,7 +42,7 @@ ENUM!{enum EVT_VARIANT_TYPE {
 }}
 pub const EVT_VARIANT_TYPE_MASK: DWORD = 0x7f;
 pub const EVT_VARIANT_TYPE_ARRAY: DWORD = 128;
-UNION2!{union EVT_VARIANT_u {
+UNION!{union EVT_VARIANT_u {
     [u64; 1],
     BooleanVal BooleanVal_mut: BOOL,
     SByteVal SByteVal_mut: INT8,

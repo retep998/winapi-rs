@@ -332,7 +332,7 @@ STRUCT!{struct DXVA2_Fixed32_s {
     Fraction: USHORT,
     Value: SHORT,
 }}
-UNION2!{union DXVA2_Fixed32 {
+UNION!{union DXVA2_Fixed32 {
     [u32; 1],
     s s_mut: DXVA2_Fixed32_s,
     ll s_ll: LONG,

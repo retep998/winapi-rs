@@ -196,7 +196,7 @@ pub const MAXLONGLONG: LONGLONG = 0x7fffffffffffffff;
 pub type PLONGLONG = *mut LONGLONG;
 pub type PULONGLONG = *mut ULONGLONG;
 pub type USN = LONGLONG;
-UNION2!{union LARGE_INTEGER {
+UNION!{union LARGE_INTEGER {
     [i64; 1],
     s s_mut: LARGE_INTEGER_s,
     QuadPart QuadPart_mut: LONGLONG,
@@ -206,7 +206,7 @@ STRUCT!{struct LARGE_INTEGER_s {
     HighPart: LONG,
 }}
 pub type PLARGE_INTEGER = *mut LARGE_INTEGER;
-UNION2!{union ULARGE_INTEGER {
+UNION!{union ULARGE_INTEGER {
     [u64; 1],
     s s_mut: ULARGE_INTEGER_s,
     QuadPart QuadPart_mut: ULONGLONG,
@@ -290,7 +290,7 @@ STRUCT!{struct RTL_BALANCED_NODE {
     u: RTL_BALANCED_NODE_u,
     ParentValue: ULONG_PTR,
 }}
-UNION2!{union RTL_BALANCED_NODE_u {
+UNION!{union RTL_BALANCED_NODE_u {
     [usize; 2],
     Children Children_mut: [*mut RTL_BALANCED_NODE; 2],
     s s_mut: RTL_BALANCED_NODE_s,

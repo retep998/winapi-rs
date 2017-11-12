@@ -133,13 +133,17 @@ STRUCT!{struct SCARD_T0_COMMAND {
     bP3: BYTE,
 }}
 pub type LPSCARD_T0_COMMAND = *mut SCARD_T0_COMMAND;
+UNION!{union SCARD_T0_REQUEST_u {
+    [u8; 5],
+    CmdBytes CmdBytes_mut: SCARD_T0_COMMAND,
+    rgbHeader rgbHeader_mut: [BYTE; 5],
+}}
 STRUCT!{struct SCARD_T0_REQUEST {
     ioRequest: SCARD_IO_REQUEST,
     bSw1: BYTE,
     bSw2: BYTE,
-    CmdBytes: SCARD_T0_COMMAND,
+    u: SCARD_T0_REQUEST_u,
 }}
-UNION!(SCARD_T0_REQUEST, CmdBytes, rgbHeader, rgbHeader_mut, [BYTE; 5]);
 pub type PSCARD_T0_REQUEST = *mut SCARD_T0_REQUEST;
 pub type LPSCARD_T0_REQUEST = *mut SCARD_T0_REQUEST;
 STRUCT!{struct SCARD_T1_REQUEST {
