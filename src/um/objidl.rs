@@ -615,7 +615,7 @@ STRUCT!{struct RemSTGMEDIUM {
     cbData: ULONG,
     data: [byte; 1],
 }}
-UNION2!{union uSTGMEDIUM_u {
+UNION!{union uSTGMEDIUM_u {
     [usize; 1],
     hBitmap hBitmap_mut: HBITMAP,
     hMetaFilePict hMetaFilePict_mut: HMETAFILEPICT,
@@ -630,7 +630,7 @@ STRUCT!{struct uSTGMEDIUM {
     u: uSTGMEDIUM_u,
     pUnkForRelease: *mut IUnknown,
 }}
-UNION2!{union GDI_OBJECT_u {
+UNION!{union GDI_OBJECT_u {
     [usize; 1],
     hBitmap hBitmap_mut: wireHBITMAP,
     hPalette hPalette_mut: wireHPALETTE,
@@ -640,7 +640,7 @@ STRUCT!{struct GDI_OBJECT {
     ObjectType: DWORD,
     u: GDI_OBJECT_u,
 }}
-UNION2!{union userSTGMEDIUM_u {
+UNION!{union userSTGMEDIUM_u {
     [usize; 1],
     hMetaFilePict hMetaFilePict_mut: wireHMETAFILEPICT,
     hHEnhMetaFile hHEnhMetaFile_mut: wireHENHMETAFILE,

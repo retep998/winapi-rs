@@ -648,7 +648,7 @@ STRUCT!{struct CM_NOTIFY_FILTER_DeviceHandle {
 STRUCT!{struct CM_NOTIFY_FILTER_DeviceInstance {
     InstanceId: [WCHAR; MAX_DEVICE_ID_LEN],
 }}
-UNION2!{union CM_NOTIFY_FILTER_u {
+UNION!{union CM_NOTIFY_FILTER_u {
     [u32; 100] [u64; 50],
     DeviceInterface DeviceInterface_mut: CM_NOTIFY_FILTER_DeviceInterface,
     DeviceHandle DeviceHandle_mut: CM_NOTIFY_FILTER_DeviceHandle,
@@ -689,7 +689,7 @@ STRUCT!{struct CM_NOTIFY_EVENT_DATA_DeviceHandle {
 STRUCT!{struct CM_NOTIFY_EVENT_DATA_DeviceInstance {
     InstanceId: [WCHAR; ANYSIZE_ARRAY],
 }}
-UNION2!{union CM_NOTIFY_EVENT_DATA_u {
+UNION!{union CM_NOTIFY_EVENT_DATA_u {
     [u32; 7],
     DeviceInterface DeviceInterface_mut: CM_NOTIFY_EVENT_DATA_DeviceInterface,
     DeviceHandle DeviceHandle_mut: CM_NOTIFY_EVENT_DATA_DeviceHandle,

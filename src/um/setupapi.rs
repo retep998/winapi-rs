@@ -45,32 +45,40 @@ STRUCT!{struct SP_INF_INFORMATION {
     VersionData: [BYTE; ANYSIZE_ARRAY],
 }}
 pub type PSP_INF_INFORMATION = *mut SP_INF_INFORMATION;
+UNION!{union SP_ALTPLATFORM_INFO_V3_u {
+    [u16; 1],
+    Reserved Reserved_mut: WORD,
+    Flags Flags_mut: WORD,
+}}
 STRUCT!{struct SP_ALTPLATFORM_INFO_V3 {
     cbSize: DWORD,
     Platform: DWORD,
     MajorVersion: DWORD,
     MinorVersion: DWORD,
     ProcessorArchitecture: WORD,
-    Reserved: WORD,
+    u: SP_ALTPLATFORM_INFO_V3_u,
     FirstValidatedMajorVersion: DWORD,
     FirstValidatedMinorVersion: DWORD,
     ProductType: BYTE,
     SuiteMask: WORD,
     BuildNumber: DWORD,
 }}
-UNION!(SP_ALTPLATFORM_INFO_V3, Reserved, Flags, Flags_mut, WORD);
 pub type PSP_ALTPLATFORM_INFO_V3 = *mut SP_ALTPLATFORM_INFO_V3;
+UNION!{union SP_ALTPLATFORM_INFO_V2_u {
+    [u16; 1],
+    Reserved Reserved_mut: WORD,
+    Flags Flags_mut: WORD,
+}}
 STRUCT!{struct SP_ALTPLATFORM_INFO_V2 {
     cbSize: DWORD,
     Platform: DWORD,
     MajorVersion: DWORD,
     MinorVersion: DWORD,
     ProcessorArchitecture: WORD,
-    Reserved: WORD,
+    u: SP_ALTPLATFORM_INFO_V2_u,
     FirstValidatedMajorVersion: DWORD,
     FirstValidatedMinorVersion: DWORD,
 }}
-UNION!(SP_ALTPLATFORM_INFO_V2, Reserved, Flags, Flags_mut, WORD);
 pub type PSP_ALTPLATFORM_INFO_V2 = *mut SP_ALTPLATFORM_INFO_V2;
 STRUCT!{struct SP_ALTPLATFORM_INFO_V1 {
     cbSize: DWORD,

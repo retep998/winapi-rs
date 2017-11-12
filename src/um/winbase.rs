@@ -519,19 +519,12 @@ STRUCT!{struct UMS_SCHEDULER_STARTUP_INFO {
 pub type PUMS_SCHEDULER_STARTUP_INFO = *mut UMS_SCHEDULER_STARTUP_INFO;
 STRUCT!{struct UMS_SYSTEM_THREAD_INFORMATION {
     UmsVersion: ULONG,
-    BitFields: ULONG,
+    ThreadUmsFlags: ULONG,
 }}
-BITFIELD!(UMS_SYSTEM_THREAD_INFORMATION BitFields: ULONG [
+BITFIELD!{UMS_SYSTEM_THREAD_INFORMATION ThreadUmsFlags: ULONG [
     IsUmsSchedulerThread set_IsUmsSchedulerThread[0..1],
     IsUmsWorkerThread set_IsUmsWorkerThread[1..2],
-]);
-UNION!(
-    UMS_SYSTEM_THREAD_INFORMATION,
-    BitFields,
-    ThreadUmsFlags,
-    ThreadUmsFlags_mut,
-    ULONG
-);
+]}
 pub type PUMS_SYSTEM_THREAD_INFORMATION = *mut UMS_SYSTEM_THREAD_INFORMATION;
 extern "system" {
     #[cfg(target_arch = "x86_64")]
@@ -1746,60 +1739,20 @@ STRUCT!{struct COPYFILE2_MESSAGE_Error {
     uliTotalFileSize: ULARGE_INTEGER,
     uliTotalBytesTransferred: ULARGE_INTEGER,
 }}
-#[cfg(target_arch = "x86")]
+UNION!{union COPYFILE2_MESSAGE_Info {
+    [u64; 8] [u64; 9],
+    ChunkStarted ChunkStarted_mut: COPYFILE2_MESSAGE_ChunkStarted,
+    ChunkFinished ChunkFinished_mut: COPYFILE2_MESSAGE_ChunkFinished,
+    StreamStarted StreamStarted_mut: COPYFILE2_MESSAGE_StreamStarted,
+    StreamFinished StreamFinished_mut: COPYFILE2_MESSAGE_StreamFinished,
+    PollContinue PollContinue_mut: COPYFILE2_MESSAGE_PollContinue,
+    Error Error_mut: COPYFILE2_MESSAGE_Error,
+}}
 STRUCT!{struct COPYFILE2_MESSAGE {
     Type: COPYFILE2_MESSAGE_TYPE,
     dwPadding: DWORD,
-    Info: [u64; 8],
+    Info: COPYFILE2_MESSAGE_Info,
 }}
-#[cfg(target_arch = "x86_64")]
-STRUCT!{struct COPYFILE2_MESSAGE {
-    Type: COPYFILE2_MESSAGE_TYPE,
-    dwPadding: DWORD,
-    Info: [u64; 9],
-}}
-UNION!{
-    COPYFILE2_MESSAGE,
-    Info,
-    ChunkStarted,
-    ChunkStarted_mut,
-    COPYFILE2_MESSAGE_ChunkStarted
-}
-UNION!{
-    COPYFILE2_MESSAGE,
-    Info,
-    ChunkFinished,
-    ChunkFinished_mut,
-    COPYFILE2_MESSAGE_ChunkFinished
-}
-UNION!{
-    COPYFILE2_MESSAGE,
-    Info,
-    StreamStarted,
-    StreamStarted_mut,
-    COPYFILE2_MESSAGE_StreamStarted
-}
-UNION!{
-    COPYFILE2_MESSAGE,
-    Info,
-    StreamFinished,
-    StreamFinished_mut,
-    COPYFILE2_MESSAGE_StreamFinished
-}
-UNION!{
-    COPYFILE2_MESSAGE,
-    Info,
-    PollContinue,
-    PollContinue_mut,
-    COPYFILE2_MESSAGE_PollContinue
-}
-UNION!{
-    COPYFILE2_MESSAGE,
-    Info,
-    Error,
-    Error_mut,
-    COPYFILE2_MESSAGE_Error
-}
 FN!{stdcall PCOPYFILE2_PROGRESS_ROUTINE(
     pMessage: *const COPYFILE2_MESSAGE,
     pvCallbackContext: PVOID,
@@ -2605,25 +2558,17 @@ ENUM!{enum FILE_ID_TYPE {
     ExtendedFileIdType,
     MaximumFileIdType,
 }}
+UNION!{union FILE_ID_DESCRIPTOR_u {
+    [u64; 2],
+    FileId FileId_mut: LARGE_INTEGER,
+    ObjectId ObjectId_mut: GUID,
+    ExtendedFileId ExtendedFileId_mut: FILE_ID_128,
+}}
 STRUCT!{struct FILE_ID_DESCRIPTOR {
     dwSize: DWORD,
     Type: FILE_ID_TYPE,
-    ObjectId: GUID,
+    u: FILE_ID_DESCRIPTOR_u,
 }}
-UNION!(
-    FILE_ID_DESCRIPTOR,
-    ObjectId,
-    FileId,
-    FileId_mut,
-    LARGE_INTEGER
-);
-UNION!(
-    FILE_ID_DESCRIPTOR,
-    ObjectId,
-    ExtendedFileId,
-    ExtendedFileId_mut,
-    FILE_ID_128
-);
 pub type LPFILE_ID_DESCRIPTOR = *mut FILE_ID_DESCRIPTOR;
 extern "system" {
     pub fn OpenFileById(

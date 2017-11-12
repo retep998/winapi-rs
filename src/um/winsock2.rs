@@ -533,7 +533,7 @@ STRUCT!{struct WSACOMPLETION_Port {
     hPort: HANDLE,
     Key: ULONG_PTR,
 }}
-UNION2!{union WSACOMPLETION_Parameter {
+UNION!{union WSACOMPLETION_Parameter {
     [usize; 3],
     WindowMessage WindowMessage_mut: WSACOMPLETION_WindowMessage,
     Event Event_mut: WSACOMPLETION_Event,

@@ -32,7 +32,7 @@ pub const MSSIP_ADDINFO_FLAT: DWORD = 1;
 pub const MSSIP_ADDINFO_CATMEMBER: DWORD = 2;
 pub const MSSIP_ADDINFO_BLOB: DWORD = 3;
 pub const MSSIP_ADDINFO_NONMSSIP: DWORD = 500;
-UNION2!{union SIP_SUBJECTINFO_u {
+UNION!{union SIP_SUBJECTINFO_u {
     [usize; 1],
     psFlat psFlat_mut: *mut MS_ADDINFO_FLAT,
     psCatMember psCatMember_mut: *mut MS_ADDINFO_CATALOGMEMBER,
@@ -85,7 +85,7 @@ STRUCT!{struct SIP_CAP_SET_V2 {
     dwReserved: DWORD,
 }}
 pub type PSIP_CAP_SET_V2 = *mut SIP_CAP_SET_V2;
-UNION2!{union SIP_CAP_SET_V3_u {
+UNION!{union SIP_CAP_SET_V3_u {
     [u32; 1],
     dwFlags dwFlags_mut: DWORD,
     dwReserved dwReserved_mut: DWORD,

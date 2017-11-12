@@ -74,7 +74,7 @@ pub type LANGID = USHORT;
 pub const WDT_INPROC_CALL: DWORD = 0x48746457;
 pub const WDT_REMOTE_CALL: DWORD = 0x52746457;
 pub const WDT_INPROC64_CALL: DWORD = 0x50746457;
-UNION2!{union __MIDL_IWinTypes_0001 {
+UNION!{union __MIDL_IWinTypes_0001 {
     [usize; 1],
     dwValue dwValue_mut: DWORD,
     pwszName pwszName_mut: *mut wchar_t,
@@ -85,7 +85,7 @@ STRUCT!{struct userCLIPFORMAT {
 }}
 pub type wireCLIPFORMAT = *mut userCLIPFORMAT;
 pub type CLIPFORMAT = WORD;
-UNION2!{union __MIDL_IWinTypes_0002 {
+UNION!{union __MIDL_IWinTypes_0002 {
     [usize; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut DWORD_BLOB,
@@ -94,7 +94,7 @@ STRUCT!{struct GDI_NONREMOTE {
     fContext: LONG,
     u: __MIDL_IWinTypes_0002,
 }}
-UNION2!{union __MIDL_IWinTypes_0003 {
+UNION!{union __MIDL_IWinTypes_0003 {
     [u64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut FLAGGED_BYTE_BLOB,
@@ -105,7 +105,7 @@ STRUCT!{struct userHGLOBAL {
     u: __MIDL_IWinTypes_0003,
 }}
 pub type wireHGLOBAL = *mut userHGLOBAL;
-UNION2!{union __MIDL_IWinTypes_0004 {
+UNION!{union __MIDL_IWinTypes_0004 {
     [u64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut BYTE_BLOB,
@@ -121,7 +121,7 @@ STRUCT!{struct remoteMETAFILEPICT {
     yExt: LONG,
     hMF: *mut userHMETAFILE,
 }}
-UNION2!{union __MIDL_IWinTypes_0005 {
+UNION!{union __MIDL_IWinTypes_0005 {
     [u64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut remoteMETAFILEPICT,
@@ -131,7 +131,7 @@ STRUCT!{struct userHMETAFILEPICT {
     fContext: LONG,
     u: __MIDL_IWinTypes_0005,
 }}
-UNION2!{union __MIDL_IWinTypes_0006 {
+UNION!{union __MIDL_IWinTypes_0006 {
     [u64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut BYTE_BLOB,
@@ -151,7 +151,7 @@ STRUCT!{struct userBITMAP {
     cbData: ULONG,
     pBuffer: [byte; 1],
 }}
-UNION2!{union __MIDL_IWinTypes_0007 {
+UNION!{union __MIDL_IWinTypes_0007 {
     [u64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut userBITMAP,
@@ -161,7 +161,7 @@ STRUCT!{struct userHBITMAP {
     fContext: LONG,
     u: __MIDL_IWinTypes_0007,
 }}
-UNION2!{union __MIDL_IWinTypes_0008 {
+UNION!{union __MIDL_IWinTypes_0008 {
     [u64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut LOGPALETTE,
@@ -171,7 +171,7 @@ STRUCT!{struct userHPALETTE {
     fContext: LONG,
     u: __MIDL_IWinTypes_0008,
 }}
-UNION2!{union __MIDL_IWinTypes_0009 {
+UNION!{union __MIDL_IWinTypes_0009 {
     [u32; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: LONG,
@@ -206,7 +206,7 @@ STRUCT!{struct DECIMAL_u_s {
     scale: BYTE,
     sign: BYTE,
 }}
-UNION2!{union DECIMAL_u {
+UNION!{union DECIMAL_u {
     [u16; 1],
     s s_mut: DECIMAL_u_s,
     signscale signscale_mut: USHORT,
@@ -215,7 +215,7 @@ STRUCT!{struct DECIMAL_u2_s {
     Lo32: ULONG,
     Mid32: ULONG,
 }}
-UNION2!{union DECIMAL_u2 {
+UNION!{union DECIMAL_u2 {
     [u64; 1],
     s s_mut: DECIMAL_u2_s,
     Lo64 Lo64_mut: ULONGLONG,
@@ -346,7 +346,7 @@ STRUCT!{struct __MIDL___MIDL_itf_wtypes_0000_0001_0005_ByObjectId {
     ObjectId: GUID,
     PolicyId: GUID,
 }}
-UNION2!{union __MIDL___MIDL_itf_wtypes_0000_0001_0005 {
+UNION!{union __MIDL___MIDL_itf_wtypes_0000_0001_0005 {
     [u32; 8] [u64; 4],
     clsid clsid_mut: CLSID,
     pFileExt pFileExt_mut: LPOLESTR,
