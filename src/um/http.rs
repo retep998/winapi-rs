@@ -494,7 +494,7 @@ STRUCT!{struct HTTP_DATA_CHUNK_FromFragmentCacheEx {
     ByteRange: HTTP_BYTE_RANGE,
     pFragmentName: PCWSTR,
 }}
-UNION2!{union HTTP_DATA_CHUNK_u {
+UNION!{union HTTP_DATA_CHUNK_u {
     [u64; 3],
     FromMemory FromMemory_mut: HTTP_DATA_CHUNK_FromMemory,
     FromFileHandle FromFileHandle_mut: HTTP_DATA_CHUNK_FromFileHandle,

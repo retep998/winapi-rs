@@ -118,25 +118,16 @@ STRUCT!{struct SQL_DAY_SECOND_STRUCT {
     second: SQLUINTEGER,
     fraction: SQLUINTEGER,
 }}
+UNION!{union SQL_INTERVAL_STRUCT_intval {
+    [u32; 5],
+    year_month year_month_mut: SQL_YEAR_MONTH_STRUCT,
+    day_second day_second_mut: SQL_DAY_SECOND_STRUCT,
+}}
 STRUCT!{struct SQL_INTERVAL_STRUCT {
     interval_type: SQLINTERVAL,
     interval_sign: SQLSMALLINT,
-    intval: [u32; 5],
+    intval: SQL_INTERVAL_STRUCT_intval,
 }}
-UNION!{
-    SQL_INTERVAL_STRUCT,
-    intval,
-    year_month,
-    year_month_mut,
-    SQL_YEAR_MONTH_STRUCT
-}
-UNION!{
-    SQL_INTERVAL_STRUCT,
-    intval,
-    day_second,
-    day_second_mut,
-    SQL_DAY_SECOND_STRUCT
-}
 pub type ODBCINT64 = __int64;
 pub type SQLBIGINT = ODBCINT64;
 pub type SQLUBIGINT = __uint64;

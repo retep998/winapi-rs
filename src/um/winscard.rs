@@ -540,16 +540,18 @@ STRUCT!{struct READER_SEL_REQUEST_SerialNumberParameter {
     cbSerialNumberLength: DWORD,
     dwDesiredCardModuleVersion: DWORD,
 }}
+UNION!{union READER_SEL_REQUEST_u {
+    [u32; 6],
+    ReaderAndContainerParameter ReaderAndContainerParameter_mut:
+        READER_SEL_REQUEST_ReaderAndContainerParameter,
+    SerialNumberParameter SerialNumberParameter_mut: READER_SEL_REQUEST_SerialNumberParameter,
+}}
 STRUCT!{struct READER_SEL_REQUEST {
     dwShareMode: DWORD,
     dwPreferredProtocols: DWORD,
     MatchType: READER_SEL_REQUEST_MATCH_TYPE,
-    ReaderAndContainerParameter: READER_SEL_REQUEST_ReaderAndContainerParameter,
+    u: READER_SEL_REQUEST_u,
 }}
-UNION!(
-    READER_SEL_REQUEST, ReaderAndContainerParameter, SerialNumberParameter,
-    SerialNumberParameter_mut, READER_SEL_REQUEST_SerialNumberParameter
-);
 pub type PREADER_SEL_REQUEST = *mut READER_SEL_REQUEST;
 STRUCT!{struct READER_SEL_RESPONSE {
     cbReaderNameOffset: DWORD,

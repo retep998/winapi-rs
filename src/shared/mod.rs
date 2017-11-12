@@ -48,6 +48,7 @@ pub mod guiddef;
 #[cfg(feature = "rpcdce")] pub mod rpcdce;
 #[cfg(feature = "rpcndr")] pub mod rpcndr;
 #[cfg(feature = "sspi")] pub mod sspi;
+#[cfg(feature = "stralign")] pub mod stralign;
 #[cfg(feature = "usb")] pub mod usb;
 #[cfg(feature = "usbiodef")] pub mod usbiodef;
 #[cfg(feature = "usbspec")] pub mod usbspec;

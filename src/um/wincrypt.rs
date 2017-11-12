@@ -1870,7 +1870,7 @@ STRUCT!{struct CERT_OTHER_NAME {
     Value: CRYPT_OBJID_BLOB,
 }}
 pub type PCERT_OTHER_NAME = *mut CERT_OTHER_NAME;
-UNION2!{union CERT_ALT_NAME_ENTRY_u {
+UNION!{union CERT_ALT_NAME_ENTRY_u {
     [usize; 2],
     pOtherName pOtherName_mut: PCERT_OTHER_NAME,
     pwszRfc822Name pwszRfc822Name_mut: LPWSTR,
@@ -2034,7 +2034,7 @@ pub const CRL_REASON_CERTIFICATE_HOLD: DWORD = 6;
 pub const CRL_REASON_REMOVE_FROM_CRL: DWORD = 8;
 pub const CRL_REASON_PRIVILEGE_WITHDRAWN: DWORD = 9;
 pub const CRL_REASON_AA_COMPROMISE: DWORD = 10;
-UNION2!{union CRL_DIST_POINT_NAME_u {
+UNION!{union CRL_DIST_POINT_NAME_u {
     [usize; 2],
     FullName FullName_mut: CERT_ALT_NAME_INFO,
 }}
@@ -2296,7 +2296,7 @@ STRUCT!{struct CMC_TAGGED_CERT_REQUEST {
     SignedCertRequest: CRYPT_DER_BLOB,
 }}
 pub type PCMC_TAGGED_CERT_REQUEST = *mut CMC_TAGGED_CERT_REQUEST;
-UNION2!{union CMC_TAGGED_REQUEST_u {
+UNION!{union CMC_TAGGED_REQUEST_u {
     [usize; 1],
     pTaggedCertRequest pTaggedCertRequest_mut: PCMC_TAGGED_CERT_REQUEST,
 }}
@@ -2341,7 +2341,7 @@ STRUCT!{struct CMC_PEND_INFO {
     PendTime: FILETIME,
 }}
 pub type PCMC_PEND_INFO = *mut CMC_PEND_INFO;
-UNION2!{union CMC_STATUS_INFO_u {
+UNION!{union CMC_STATUS_INFO_u {
     [usize; 1],
     dwFailInfo dwFailInfo_mut: DWORD,
     pPendInfo pPendInfo_mut: PCMC_PEND_INFO,
@@ -2416,7 +2416,7 @@ STRUCT!{struct CERT_LOGOTYPE_REFERENCE {
     rgHashedUrl: PCERT_HASHED_URL,
 }}
 pub type PCERT_LOGOTYPE_REFERENCE = *mut CERT_LOGOTYPE_REFERENCE;
-UNION2!{union CERT_LOGOTYPE_IMAGE_INFO_u {
+UNION!{union CERT_LOGOTYPE_IMAGE_INFO_u {
     [u32; 1],
     dwNumBits dwNumBits_mut: DWORD,
     dwTableSize dwTableSize_mut: DWORD,
@@ -2461,7 +2461,7 @@ STRUCT!{struct CERT_LOGOTYPE_DATA {
     rgLogotypeAudio: PCERT_LOGOTYPE_AUDIO,
 }}
 pub type PCERT_LOGOTYPE_DATA = *mut CERT_LOGOTYPE_DATA;
-UNION2!{union CERT_LOGOTYPE_INFO_u {
+UNION!{union CERT_LOGOTYPE_INFO_u {
     [usize; 1],
     pLogotypeDirectInfo pLogotypeDirectInfo_mut: PCERT_LOGOTYPE_DATA,
     pLogotypeIndirectInfo pLogotypeIndirectInfo__mut: PCERT_LOGOTYPE_REFERENCE,
@@ -2489,7 +2489,7 @@ STRUCT!{struct CERT_LOGOTYPE_EXT_INFO {
     rgOtherLogo: PCERT_OTHER_LOGOTYPE_INFO,
 }}
 pub type PCERT_LOGOTYPE_EXT_INFO = *mut CERT_LOGOTYPE_EXT_INFO;
-UNION2!{union CERT_BIOMETRIC_DATA_u {
+UNION!{union CERT_BIOMETRIC_DATA_u {
     [usize; 1],
     dwPredefined dwPredefined_mut: DWORD,
     pszObjId pszObjId_mut: LPSTR,
@@ -2567,7 +2567,7 @@ STRUCT!{struct OCSP_BASIC_REVOKED_INFO {
     dwCrlReasonCode: DWORD,
 }}
 pub type POCSP_BASIC_REVOKED_INFO = *mut OCSP_BASIC_REVOKED_INFO;
-UNION2!{union OCSP_BASIC_RESPONSE_ENTRY_u {
+UNION!{union OCSP_BASIC_RESPONSE_ENTRY_u {
     [usize; 1],
     pRevokedInfo pRevokedInfo_mut: POCSP_BASIC_REVOKED_INFO,
 }}
@@ -2584,7 +2584,7 @@ pub type POCSP_BASIC_RESPONSE_ENTRY = *mut OCSP_BASIC_RESPONSE_ENTRY;
 pub const OCSP_BASIC_GOOD_CERT_STATUS: DWORD = 0;
 pub const OCSP_BASIC_REVOKED_CERT_STATUS: DWORD = 1;
 pub const OCSP_BASIC_UNKNOWN_CERT_STATUS: DWORD = 2;
-UNION2!{union OCSP_BASIC_RESPONSE_INFO_u {
+UNION!{union OCSP_BASIC_RESPONSE_INFO_u {
     [usize; 2],
     ByNameResponderId ByNameResponderId_mut: CERT_NAME_BLOB,
     ByKeyResponderId ByKeyResponderId_mut: CRYPT_HASH_BLOB,
@@ -2763,7 +2763,7 @@ pub const CRYPT_OID_INFO_OAEP_PARAMETERS_ALGORITHM: &'static str = "CryptOIDInfo
 pub const CRYPT_OID_INFO_ECC_WRAP_PARAMETERS_ALGORITHM: &'static str
     = "CryptOIDInfoECCWrapParameters";
 pub const CRYPT_OID_INFO_NO_PARAMETERS_ALGORITHM: &'static str = "CryptOIDInfoNoParameters";
-UNION2!{union CRYPT_OID_INFO_u {
+UNION!{union CRYPT_OID_INFO_u {
     [u32; 1],
     dwValue dwValue_mut: DWORD,
     Algid Algid_mut: ALG_ID,
@@ -2854,7 +2854,7 @@ STRUCT!{struct CERT_STRONG_SIGN_SERIALIZED_INFO {
 }}
 pub type PCERT_STRONG_SIGN_SERIALIZED_INFO = *mut CERT_STRONG_SIGN_SERIALIZED_INFO;
 pub const CERT_STRONG_SIGN_ECDSA_ALGORITHM: &'static str = "ECDSA";
-UNION2!{union CERT_STRONG_SIGN_PARA_u {
+UNION!{union CERT_STRONG_SIGN_PARA_u {
     [usize; 1],
     pvInfo pvInfo_mut: *mut c_void,
     pSerializedInfo pSerializedInfo_mut: PCERT_STRONG_SIGN_SERIALIZED_INFO,
@@ -2904,7 +2904,7 @@ STRUCT!{struct CERT_ISSUER_SERIAL_NUMBER {
     SerialNumber: CRYPT_INTEGER_BLOB,
 }}
 pub type PCERT_ISSUER_SERIAL_NUMBER = *mut CERT_ISSUER_SERIAL_NUMBER;
-UNION2!{union CERT_ID_u {
+UNION!{union CERT_ID_u {
     [usize; 4],
     IssuerSerialNumber IssuerSerialNumber_mut: CERT_ISSUER_SERIAL_NUMBER,
     KeyId KeyId_mut: CRYPT_HASH_BLOB,
@@ -2918,7 +2918,7 @@ pub type PCERT_ID = *mut CERT_ID;
 pub const CERT_ID_ISSUER_SERIAL_NUMBER: DWORD = 1;
 pub const CERT_ID_KEY_IDENTIFIER: DWORD = 2;
 pub const CERT_ID_SHA1_HASH: DWORD = 3;
-UNION2!{union CMSG_SIGNER_ENCODE_INFO_u {
+UNION!{union CMSG_SIGNER_ENCODE_INFO_u {
     [usize; 1],
     hCryptProv hCryptProv_mut: HCRYPTPROV,
     hNCryptKey hNCryptKey_mut: NCRYPT_KEY_HANDLE,
@@ -2988,7 +2988,7 @@ STRUCT!{struct CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO {
     pOtherAttr: PCRYPT_ATTRIBUTE_TYPE_VALUE,
 }}
 pub type PCMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO = *mut CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO;
-UNION2!{union CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_u {
+UNION!{union CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_u {
     [usize; 1],
     pEphemeralAlgorithm pEphemeralAlgorithm_mut: PCRYPT_ALGORITHM_IDENTIFIER,
     pSenderId pSenderId_mut: PCERT_ID,
@@ -3010,7 +3010,7 @@ STRUCT!{struct CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO {
 pub type PCMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO = *mut CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO;
 pub const CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE: DWORD = 1;
 pub const CMSG_KEY_AGREE_STATIC_KEY_CHOICE: DWORD = 2;
-UNION2!{union CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_u {
+UNION!{union CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_u {
     [usize; 1],
     hKeyEncryptionKey hKeyEncryptionKey_mut: HCRYPTKEY,
     pvKeyEncryptionKey pvKeyEncryptionKey_mut: *mut c_void,
@@ -3028,7 +3028,7 @@ STRUCT!{struct CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO {
 }}
 pub type PCMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO = *mut CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO;
 pub const CMSG_MAIL_LIST_HANDLE_KEY_CHOICE: DWORD = 1;
-UNION2!{union CMSG_RECIPIENT_ENCODE_INFO_u {
+UNION!{union CMSG_RECIPIENT_ENCODE_INFO_u {
     [usize; 1],
     pKeyTrans pKeyTrans_mut: PCMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO,
     pKeyAgree pKeyAgree_mut: PCMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO,
@@ -3232,7 +3232,7 @@ STRUCT!{struct CMSG_RECIPIENT_ENCRYPTED_KEY_INFO {
     pOtherAttr: PCRYPT_ATTRIBUTE_TYPE_VALUE,
 }}
 pub type PCMSG_RECIPIENT_ENCRYPTED_KEY_INFO = *mut CMSG_RECIPIENT_ENCRYPTED_KEY_INFO;
-UNION2!{union CMSG_KEY_AGREE_RECIPIENT_INFO_u {
+UNION!{union CMSG_KEY_AGREE_RECIPIENT_INFO_u {
     [usize; 6],
     OriginatorCertId OriginatorCertId_mut: CERT_ID,
     OriginatorPublicKeyInfo OriginatorPublicKeyInfo_mut: CERT_PUBLIC_KEY_INFO,
@@ -3258,7 +3258,7 @@ STRUCT!{struct CMSG_MAIL_LIST_RECIPIENT_INFO {
     pOtherAttr: PCRYPT_ATTRIBUTE_TYPE_VALUE,
 }}
 pub type PCMSG_MAIL_LIST_RECIPIENT_INFO = *mut CMSG_MAIL_LIST_RECIPIENT_INFO;
-UNION2!{union CMSG_CMS_RECIPIENT_INFO_u {
+UNION!{union CMSG_CMS_RECIPIENT_INFO_u {
     [usize; 1],
     pKeyTrans pKeyTrans_mut: PCMSG_KEY_TRANS_RECIPIENT_INFO,
     pKeyAgree pKeyAgree_mut: PCMSG_KEY_AGREE_RECIPIENT_INFO,
@@ -3316,7 +3316,7 @@ pub const CMSG_VERIFY_SIGNER_PUBKEY: DWORD = 1;
 pub const CMSG_VERIFY_SIGNER_CERT: DWORD = 2;
 pub const CMSG_VERIFY_SIGNER_CHAIN: DWORD = 3;
 pub const CMSG_VERIFY_SIGNER_NULL: DWORD = 4;
-UNION2!{union CMSG_CTRL_DECRYPT_PARA_u {
+UNION!{union CMSG_CTRL_DECRYPT_PARA_u {
     [usize; 1],
     hCryptProv hCryptProv_mut: HCRYPTPROV,
     hNCryptKey hNCryptKey_mut: NCRYPT_KEY_HANDLE,
@@ -3328,7 +3328,7 @@ STRUCT!{struct CMSG_CTRL_DECRYPT_PARA {
     dwRecipientIndex: DWORD,
 }}
 pub type PCMSG_CTRL_DECRYPT_PARA = *mut CMSG_CTRL_DECRYPT_PARA;
-UNION2!{union CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_u {
+UNION!{union CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_u {
     [usize; 1],
     hCryptProv hCryptProv_mut: HCRYPTPROV,
     hNCryptKey hNCryptKey_mut: NCRYPT_KEY_HANDLE,
@@ -3341,7 +3341,7 @@ STRUCT!{struct CMSG_CTRL_KEY_TRANS_DECRYPT_PARA {
     dwRecipientIndex: DWORD,
 }}
 pub type PCMSG_CTRL_KEY_TRANS_DECRYPT_PARA = *mut CMSG_CTRL_KEY_TRANS_DECRYPT_PARA;
-UNION2!{union CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_u {
+UNION!{union CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_u {
     [usize; 1],
     hCryptProv hCryptProv_mut: HCRYPTPROV,
     hNCryptKey hNCryptKey_mut: NCRYPT_KEY_HANDLE,
@@ -3356,7 +3356,7 @@ STRUCT!{struct CMSG_CTRL_KEY_AGREE_DECRYPT_PARA {
     OriginatorPublicKey: CRYPT_BIT_BLOB,
 }}
 pub type PCMSG_CTRL_KEY_AGREE_DECRYPT_PARA = *mut CMSG_CTRL_KEY_AGREE_DECRYPT_PARA;
-UNION2!{union CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_u {
+UNION!{union CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_u {
     [usize; 1],
     hKeyEncryptionKey hKeyEncryptionKey_mut: HCRYPTKEY,
     pvKeyEncryptionKey pvKeyEncryptionKey_mut: *mut c_void,
@@ -3459,7 +3459,7 @@ FN!{stdcall PFN_CMSG_IMPORT_ENCRYPT_KEY(
     phEncryptKey: *mut HCRYPTKEY,
 ) -> BOOL}
 pub const CMSG_DEFAULT_INSTALLABLE_FUNC_OID: LPCSTR = 1 as LPCSTR;
-UNION2!{union CMSG_CONTENT_ENCRYPT_INFO_u {
+UNION!{union CMSG_CONTENT_ENCRYPT_INFO_u {
     [usize; 1],
     hContentEncryptKey hContentEncryptKey_mut: HCRYPTKEY,
     hCNGContentEncryptKey hCNGContentEncryptKey_mut: BCRYPT_KEY_HANDLE,
@@ -3521,7 +3521,7 @@ STRUCT!{struct CMSG_KEY_AGREE_KEY_ENCRYPT_INFO {
     EncryptedKey: CRYPT_DATA_BLOB,
 }}
 pub type PCMSG_KEY_AGREE_KEY_ENCRYPT_INFO = *mut CMSG_KEY_AGREE_KEY_ENCRYPT_INFO;
-UNION2!{union CMSG_KEY_AGREE_ENCRYPT_INFO_u {
+UNION!{union CMSG_KEY_AGREE_ENCRYPT_INFO_u {
     [usize; 6],
     OriginatorCertId OriginatorCertId_mut: CERT_ID,
     OriginatorPublicKeyInfo OriginatorPublicKeyInfo_mut: CERT_PUBLIC_KEY_INFO,
@@ -3831,7 +3831,7 @@ pub type PCRYPT_KEY_PROV_INFO = *mut CRYPT_KEY_PROV_INFO;
 pub const CERT_SET_KEY_PROV_HANDLE_PROP_ID: DWORD = 0x00000001;
 pub const CERT_SET_KEY_CONTEXT_PROP_ID: DWORD = 0x00000001;
 pub const CERT_NCRYPT_KEY_SPEC: DWORD = 0xFFFFFFFF;
-UNION2!{union CERT_KEY_CONTEXT_u {
+UNION!{union CERT_KEY_CONTEXT_u {
     [usize; 1],
     hCryptProv hCryptProv_mut: HCRYPTPROV,
     hNCryptKey hNCryptKey_mut: NCRYPT_KEY_HANDLE,
@@ -3915,12 +3915,12 @@ pub const CERT_STORE_CREATE_NEW_FLAG: DWORD = 0x00002000;
 pub const CERT_STORE_MAXIMUM_ALLOWED_FLAG: DWORD = 0x00001000;
 pub const CERT_SYSTEM_STORE_MASK: DWORD = 0xFFFF0000;
 pub const CERT_SYSTEM_STORE_RELOCATE_FLAG: DWORD = 0x80000000;
-UNION2!{union CERT_SYSTEM_STORE_RELOCATE_PARA_u1 {
+UNION!{union CERT_SYSTEM_STORE_RELOCATE_PARA_u1 {
     [usize; 1],
     hKeyBase hKeyBase_mut: HKEY,
     pvBase pvBase_mut: *mut c_void,
 }}
-UNION2!{union CERT_SYSTEM_STORE_RELOCATE_PARA_u2 {
+UNION!{union CERT_SYSTEM_STORE_RELOCATE_PARA_u2 {
     [usize; 1],
     pvSystemStore pvSystemStore__mut: *mut c_void,
     pszSystemStore pszSystemStore_mut: LPCSTR,
@@ -5623,7 +5623,7 @@ STRUCT!{struct CRYPT_HASH_MESSAGE_PARA {
     pvHashAuxInfo: *mut c_void,
 }}
 pub type PCRYPT_HASH_MESSAGE_PARA = *mut CRYPT_HASH_MESSAGE_PARA;
-UNION2!{union CRYPT_KEY_SIGN_MESSAGE_PARA_u {
+UNION!{union CRYPT_KEY_SIGN_MESSAGE_PARA_u {
     [usize; 1],
     hCryptProv hCryptProv_mut: HCRYPTPROV,
     hNCryptKey hNCryptKey_mut: NCRYPT_KEY_HANDLE,
@@ -6850,7 +6850,7 @@ STRUCT!{struct AUTHENTICODE_TS_EXTRA_CERT_CHAIN_POLICY_PARA {
 }}
 pub type PAUTHENTICODE_TS_EXTRA_CERT_CHAIN_POLICY_PARA
     = *mut AUTHENTICODE_TS_EXTRA_CERT_CHAIN_POLICY_PARA;
-UNION2!{union HTTPSPolicyCallbackData_u {
+UNION!{union HTTPSPolicyCallbackData_u {
     [u32; 1],
     cbStruct cbStruct_mut: DWORD,
     cbSize cbSize_mut: DWORD,

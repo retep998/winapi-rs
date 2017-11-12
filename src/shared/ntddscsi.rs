@@ -462,7 +462,7 @@ STRUCT!{struct NV_SEP_CACHE_PARAMETER {
     ParameterReserve1: [UCHAR; 3],
 }}
 pub type PNV_SEP_CACHE_PARAMETER = *mut NV_SEP_CACHE_PARAMETER;
-UNION2!{union NV_SEP_CACHE_PARAMETER_Flags {
+UNION!{union NV_SEP_CACHE_PARAMETER_Flags {
     [u8; 1],
     CacheFlags CacheFlags_mut: NV_SEP_CACHE_PARAMETER_Flags_CacheFlags,
     CacheFlagsSet CacheFlagsSet_mut: UCHAR,
@@ -661,7 +661,7 @@ STRUCT!{struct STORAGE_FIRMWARE_SLOT_INFO {
     Revision: STORAGE_FIRMWARE_SLOT_INFO_Revision,
 }}
 pub type PSTORAGE_FIRMWARE_SLOT_INFO = *mut STORAGE_FIRMWARE_SLOT_INFO;
-UNION2!{union STORAGE_FIRMWARE_SLOT_INFO_Revision {
+UNION!{union STORAGE_FIRMWARE_SLOT_INFO_Revision {
     [u64; 1],
     Info Info_mut: [UCHAR; 8],
     AsUlonglong AsUlonglong_mut: ULONGLONG,

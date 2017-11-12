@@ -1473,12 +1473,12 @@ STRUCT!{struct DEVMODE_u1_s2 {
     dmDisplayOrientation: DWORD,
     dmDisplayFixedOutput: DWORD,
 }}
-UNION2!{union DEVMODE_u1 {
+UNION!{union DEVMODE_u1 {
     [u32; 4],
     s1 s1_mut: DEVMODE_u1_s1,
     s2 s2_mut: DEVMODE_u1_s2,
 }}
-UNION2!{union DEVMODE_u2 {
+UNION!{union DEVMODE_u2 {
     [u32; 1],
     dmDisplayFlags dmDisplayFlags_mut: DWORD,
     dmNup dmNup_mut: DWORD,
@@ -1849,7 +1849,7 @@ BITFIELD!{DISPLAYCONFIG_VIDEO_SIGNAL_INFO_AdditionalSignalInfo bitfield: UINT32 
     videoStandard set_videoStandard[0..16],
     vSyncFreqDivider set_vSyncFreqDivider[16..22],
 ]}
-UNION2!{union DISPLAYCONFIG_VIDEO_SIGNAL_INFO_u {
+UNION!{union DISPLAYCONFIG_VIDEO_SIGNAL_INFO_u {
     [u32; 1],
     AdditionalSignalInfo AdditionalSignalInfo_mut:
         DISPLAYCONFIG_VIDEO_SIGNAL_INFO_AdditionalSignalInfo,
@@ -1903,7 +1903,7 @@ STRUCT!{struct DISPLAYCONFIG_SOURCE_MODE {
 STRUCT!{struct DISPLAYCONFIG_TARGET_MODE {
     targetVideoSignalInfo: DISPLAYCONFIG_VIDEO_SIGNAL_INFO,
 }}
-UNION2!{union DISPLAYCONFIG_MODE_INFO_u {
+UNION!{union DISPLAYCONFIG_MODE_INFO_u {
     [u64; 6],
     targetMode targetMode_mut: DISPLAYCONFIG_TARGET_MODE,
     sourceMode sourceMode_mut: DISPLAYCONFIG_SOURCE_MODE,
