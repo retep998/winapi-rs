@@ -40,6 +40,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("hidpi", &["hidusage", "minwindef", "ntdef", "ntstatus", "winnt"], &["hid"]),
     ("hidsdi", &["guiddef", "hidpi", "minwindef", "winnt"], &["hid"]),
     ("hidusage", &["minwindef"], &[]),
+    ("iketypes", &[], &[]),
     ("in6addr", &["minwindef"], &[]),
     ("inaddr", &["minwindef"], &[]),
     ("intsafe", &[], &[]),
