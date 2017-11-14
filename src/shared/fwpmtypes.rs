@@ -122,6 +122,11 @@ ENUM!{enum FWPM_PROVIDER_CONTEXT_TYPE {
     FWPM_PROVIDER_CONTEXT_TYPE_MAX = FWPM_IPSEC_IKEV2_QM_TRANSPORT_CONTEXT + 1,
 }}
 
+// TODO: Remove
+STRUCT!{struct FWPM_FILTER0 {
+    moo: UINT64,
+}}
+
 // UNION2!{union FWPM_PROVIDER_CONTEXT0_u {
     // [u32; 1] [u64; 1],
     // keyingPolicy keyingPolicy_mut: *mut IPSEC_KEYING_POLICY0,

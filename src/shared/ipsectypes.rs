@@ -7,6 +7,7 @@
 use ctypes::wchar_t;
 use shared::basetsd::{UINT8, UINT16, UINT32, UINT64};
 use shared::fwptypes::{FWP_BYTE_ARRAY16, FWP_BYTE_BLOB, FWP_CONDITION_VALUE0, FWP_DIRECTION, FWPM_DISPLAY_DATA0, FWP_IP_VERSION, FWP_V6_ADDR_AND_MASK, IPSEC_VIRTUAL_IF_TUNNEL_INFO0};
+use shared::fwpmtypes::FWPM_FILTER0;
 use shared::guiddef::GUID;
 use shared::minwindef::UINT;
 

@@ -1,6 +1,18 @@
-
-
-
+// Copyright © 2016-2017 winapi-rs developers
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
+//! WFP Structures and Definitions
+use ctypes::wchar_t;
+use shared::basetsd::{UINT8, UINT32, UINT64};
+use shared::fwptypes::{FWP_BYTE_ARRAY16, FWP_BYTE_BLOB, FWP_CONDITION_VALUE0, FWP_IP_VERSION};
+use shared::guiddef::GUID;
+use shared::ipsectypes::IPSEC_V4_UDP_ENCAPSULATION0;
+use shared::minwindef::{BYTE, UINT, ULONG};
+use shared::winerror::{ERROR_IPSEC_IKE_NEG_STATUS_BEGIN, ERROR_IPSEC_IKE_NEG_STATUS_END};
+use um::winnt::{LPSTR, LPWSTR};
 
 ENUM!{enum IKEEXT_KEY_MODULE_TYPE {
     IKEEXT_KEY_MODULE_IKE = 0,
@@ -102,7 +114,7 @@ UNION2!{union IKEEXT_CERTIFICATE_AUTHENTICATION0_u2 {
 STRUCT!{struct IKEEXT_CERTIFICATE_AUTHENTICATION0 {
     inboundConfigType: IKEEXT_CERT_CONFIG_TYPE,
     u1: IKEEXT_CERTIFICATE_AUTHENTICATION0_u1,
-    outboundConfigType: IKEEXT_CERT_CONFIG_TYPE;
+    outboundConfigType: IKEEXT_CERT_CONFIG_TYPE,
     u2: IKEEXT_CERTIFICATE_AUTHENTICATION0_u2,    
     flags: UINT32,
 }}
@@ -295,6 +307,7 @@ STRUCT!{struct IKEEXT_AUTHENTICATION_METHOD1 {
 }}
 
 UNION2!{union IKEEXT_AUTHENTICATION_METHOD2_u {
+    [u32; 9] [u64; 9],
     presharedKeyAuthentication presharedKeyAuthentication_mut: IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
     certificateAuthentication certificateAuthentication_mut: IKEEXT_CERTIFICATE_AUTHENTICATION2,
     kerberosAuthentication kerberosAuthentication_mut: IKEEXT_KERBEROS_AUTHENTICATION1,
@@ -372,7 +385,7 @@ STRUCT!{struct IKEEXT_POLICY0 {
     authenticationMethods: *mut IKEEXT_AUTHENTICATION_METHOD0,
     initiatorImpersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE,
     numIkeProposals: UINT32,
-    ikeProposals: *mut IKEEXT_PROPOSAL0;
+    ikeProposals: *mut IKEEXT_PROPOSAL0,
     flags: UINT32,
     maxDynamicFilters: UINT32,
 }}
@@ -527,7 +540,7 @@ UNION2!{union IKEEXT_TRAFFIC0_u1 {
     localV6Address localV6Address_mut: [UINT8; 16],
 }}
 
-UNION2!{union IKEEXT_TRAFFIC0_u1 {
+UNION2!{union IKEEXT_TRAFFIC0_u2 {
     [u32; 4],
     remoteV4Address remoteV4Address_mut: UINT32,
     remoteV6Address remoteV6Address_mut: [UINT8; 16],
@@ -559,12 +572,162 @@ STRUCT!{struct IKEEXT_NAME_CREDENTIAL0 {
     principalName: *mut wchar_t,
 }}
 
+UNION2!{union IKEEXT_CREDENTIAL0_u {
+    [u32; 1] [u64; 1],
+    presharedKey presharedKey_mut: *mut IKEEXT_PRESHARED_KEY_AUTHENTICATION0,
+    certificate certificate_mut: *mut IKEEXT_CERTIFICATE_CREDENTIAL0,
+    name name_mut: *mut IKEEXT_NAME_CREDENTIAL0,
+}}
 
+STRUCT!{struct IKEEXT_CREDENTIAL0 {
+    authenticationMethodType: IKEEXT_AUTHENTICATION_METHOD_TYPE,
+    impersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE,
+    u: IKEEXT_CREDENTIAL0_u,
+}}
 
+STRUCT!{struct IKEEXT_CREDENTIAL_PAIR0 {
+    localCredentials: IKEEXT_CREDENTIAL0,
+    peerCredentials: IKEEXT_CREDENTIAL0,
+}}
 
+STRUCT!{struct IKEEXT_CREDENTIALS0 {
+    numCredentials: UINT32,
+    credentials: *mut IKEEXT_CREDENTIAL_PAIR0,
+}}
 
+STRUCT!{struct IKEEXT_SA_DETAILS0 {
+    saId: UINT64,
+    keyModuleType: IKEEXT_KEY_MODULE_TYPE,
+    ipVersion: FWP_IP_VERSION,
+	// Single field anonymous union
+    v4UdpEncapsulation: *mut IPSEC_V4_UDP_ENCAPSULATION0,
+    ikeTraffic: IKEEXT_TRAFFIC0,
+    ikeProposal: IKEEXT_PROPOSAL0,
+    cookiePair: IKEEXT_COOKIE_PAIR0,
+    ikeCredentials: IKEEXT_CREDENTIALS0,
+    ikePolicyKey: GUID,
+    virtualIfTunnelId: UINT64,
+}}
 
+STRUCT!{struct IKEEXT_CERTIFICATE_CREDENTIAL1 {
+    subjectName: FWP_BYTE_BLOB,
+    certHash: FWP_BYTE_BLOB,
+    flags: UINT32,
+    certificate: FWP_BYTE_BLOB,
+}}
 
+UNION2!{union IKEEXT_CREDENTIAL1_u {
+    [u32; 1] [u64; 1],
+    presharedKey presharedKey_mut: *mut IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
+    certificate certificate_mut: *mut IKEEXT_CERTIFICATE_CREDENTIAL1,
+    name name_mut: *mut IKEEXT_NAME_CREDENTIAL0,
+}}
 
+STRUCT!{struct IKEEXT_CREDENTIAL1 {
+    authenticationMethodType: IKEEXT_AUTHENTICATION_METHOD_TYPE,
+    impersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE,
+    u: IKEEXT_CREDENTIAL1_u,
+}}
 
+STRUCT!{struct IKEEXT_CREDENTIAL_PAIR1 {
+    localCredentials: IKEEXT_CREDENTIAL1,
+    peerCredentials: IKEEXT_CREDENTIAL1,
+}}
 
+STRUCT!{struct IKEEXT_CREDENTIALS1 {
+    numCredentials: UINT32,
+    credentials: *mut IKEEXT_CREDENTIAL_PAIR1,
+}}
+
+STRUCT!{struct IKEEXT_SA_DETAILS1 {
+    saId: UINT64,
+    keyModuleType: IKEEXT_KEY_MODULE_TYPE,
+    ipVersion: FWP_IP_VERSION,
+    // Single field anonymous union
+    v4UdpEncapsulation: *mut IPSEC_V4_UDP_ENCAPSULATION0,
+    ikeTraffic: IKEEXT_TRAFFIC0,
+    ikeProposal: IKEEXT_PROPOSAL0,
+    cookiePair: IKEEXT_COOKIE_PAIR0,
+    ikeCredentials: IKEEXT_CREDENTIALS1,
+    ikePolicyKey: GUID,
+    virtualIfTunnelId: UINT64,
+    correlationKey: FWP_BYTE_BLOB,
+}}
+
+UNION2!{union IKEEXT_CREDENTIAL2_u {
+    [u32; 1] [u64; 1],
+    presharedKey presharedKey_mut: *mut IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
+    certificate certificate_mut: *mut IKEEXT_CERTIFICATE_CREDENTIAL1,
+    name name_mut: *mut IKEEXT_NAME_CREDENTIAL0,
+}}
+
+STRUCT!{struct IKEEXT_CREDENTIAL2 {
+    authenticationMethodType: IKEEXT_AUTHENTICATION_METHOD_TYPE,
+    impersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE,
+	u: IKEEXT_CREDENTIAL2_u,
+}}
+
+STRUCT!{struct IKEEXT_CREDENTIAL_PAIR2 {
+    localCredentials: IKEEXT_CREDENTIAL2,
+    peerCredentials: IKEEXT_CREDENTIAL2,
+}}
+
+STRUCT!{struct IKEEXT_CREDENTIALS2 {
+    numCredentials: UINT32,
+    credentials: *mut IKEEXT_CREDENTIAL_PAIR2,
+}}
+
+STRUCT!{struct IKEEXT_SA_DETAILS2 {
+    saId: UINT64,
+    keyModuleType: IKEEXT_KEY_MODULE_TYPE,
+    ipVersion: FWP_IP_VERSION,
+    // Single field anonymous union
+    v4UdpEncapsulation: *mut IPSEC_V4_UDP_ENCAPSULATION0,
+    ikeTraffic: IKEEXT_TRAFFIC0,
+    ikeProposal: IKEEXT_PROPOSAL0,
+    cookiePair: IKEEXT_COOKIE_PAIR0,
+    ikeCredentials: IKEEXT_CREDENTIALS2,
+    ikePolicyKey: GUID,
+    virtualIfTunnelId: UINT64,
+    correlationKey: FWP_BYTE_BLOB,
+}}
+
+STRUCT!{struct IKEEXT_SA_ENUM_TEMPLATE0 {
+    localSubNet: FWP_CONDITION_VALUE0,
+    remoteSubNet:FWP_CONDITION_VALUE0,
+    localMainModeCertHash: FWP_BYTE_BLOB,
+}}
+
+ENUM!{enum IKEEXT_MM_SA_STATE {
+    IKEEXT_MM_SA_STATE_NONE = 0,
+    IKEEXT_MM_SA_STATE_SA_SENT = IKEEXT_MM_SA_STATE_NONE + 1,
+    IKEEXT_MM_SA_STATE_SSPI_SENT = IKEEXT_MM_SA_STATE_SA_SENT + 1,
+    IKEEXT_MM_SA_STATE_FINAL = IKEEXT_MM_SA_STATE_SSPI_SENT + 1,
+    IKEEXT_MM_SA_STATE_FINAL_SENT = IKEEXT_MM_SA_STATE_FINAL + 1,
+    IKEEXT_MM_SA_STATE_COMPLETE = IKEEXT_MM_SA_STATE_FINAL_SENT + 1,
+    IKEEXT_MM_SA_STATE_MAX = IKEEXT_MM_SA_STATE_COMPLETE + 1,
+}}
+
+ENUM!{enum IKEEXT_QM_SA_STATE {
+    IKEEXT_QM_SA_STATE_NONE = 0,
+    IKEEXT_QM_SA_STATE_INITIAL = IKEEXT_QM_SA_STATE_NONE + 1,
+    IKEEXT_QM_SA_STATE_FINAL = IKEEXT_QM_SA_STATE_INITIAL + 1,
+    IKEEXT_QM_SA_STATE_COMPLETE = IKEEXT_QM_SA_STATE_FINAL + 1,
+    IKEEXT_QM_SA_STATE_MAX = IKEEXT_QM_SA_STATE_COMPLETE + 1,
+}}
+
+ENUM!{enum IKEEXT_EM_SA_STATE {
+    IKEEXT_EM_SA_STATE_NONE = 0,
+    IKEEXT_EM_SA_STATE_SENT_ATTS = IKEEXT_EM_SA_STATE_NONE + 1,
+    IKEEXT_EM_SA_STATE_SSPI_SENT = IKEEXT_EM_SA_STATE_SENT_ATTS + 1,
+    IKEEXT_EM_SA_STATE_AUTH_COMPLETE = IKEEXT_EM_SA_STATE_SSPI_SENT + 1,
+    IKEEXT_EM_SA_STATE_FINAL = IKEEXT_EM_SA_STATE_AUTH_COMPLETE + 1,
+    IKEEXT_EM_SA_STATE_COMPLETE = IKEEXT_EM_SA_STATE_FINAL + 1,
+    IKEEXT_EM_SA_STATE_MAX = IKEEXT_EM_SA_STATE_COMPLETE + 1,
+}}
+
+ENUM!{enum IKEEXT_SA_ROLE {
+    IKEEXT_SA_ROLE_INITIATOR = 0,
+    IKEEXT_SA_ROLE_RESPONDER = IKEEXT_SA_ROLE_INITIATOR + 1,
+    IKEEXT_SA_ROLE_MAX = IKEEXT_SA_ROLE_RESPONDER + 1,
+}}
