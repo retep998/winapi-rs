@@ -4,7 +4,7 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-//! WFP Structures and Definitions
+//! IKE Structures and Definitions
 use ctypes::wchar_t;
 use shared::basetsd::{UINT8, UINT32, UINT64};
 use shared::fwptypes::{FWP_BYTE_ARRAY16, FWP_BYTE_BLOB, FWP_CONDITION_VALUE0, FWP_IP_VERSION};
