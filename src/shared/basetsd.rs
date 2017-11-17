@@ -69,3 +69,4 @@ pub type DWORD64 = __uint64;
 pub type PDWORD64 = *mut __uint64;
 pub type KAFFINITY = ULONG_PTR;
 pub type PKAFFINITY = *mut KAFFINITY;
+pub const MAXUINT64: UINT64 = !0u64;
