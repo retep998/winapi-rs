@@ -96,7 +96,8 @@ UNION2!{union IKEEXT_CERTIFICATE_AUTHENTICATION0_u1 {
     [u32; 2] [u64; 2],
     s s_mut: IKEEXT_CERTIFICATE_AUTHENTICATION0_u1_s,
     inboundEnterpriseStoreConfig inboundEnterpriseStoreConfig_mut: *mut IKEEXT_CERT_ROOT_CONFIG0,
-    inboundTrustedRootStoreConfig inboundTrustedRootStoreConfig_mut: *mut IKEEXT_CERT_ROOT_CONFIG0,
+    inboundTrustedRootStoreConfig inboundTrustedRootStoreConfig_mut:
+        *mut IKEEXT_CERT_ROOT_CONFIG0,
 }}
 
 STRUCT!{struct IKEEXT_CERTIFICATE_AUTHENTICATION0_u2_s {
@@ -107,8 +108,10 @@ STRUCT!{struct IKEEXT_CERTIFICATE_AUTHENTICATION0_u2_s {
 UNION2!{union IKEEXT_CERTIFICATE_AUTHENTICATION0_u2 {
     [u32; 2] [u64; 2],
     s s_mut: IKEEXT_CERTIFICATE_AUTHENTICATION0_u2_s,
-    outboundEnterpriseStoreConfig outboundEnterpriseStoreConfig_mut: *mut IKEEXT_CERT_ROOT_CONFIG0,
-    outboundTrustedRootStoreConfig outboundTrustedRootStoreConfig_mut: *mut IKEEXT_CERT_ROOT_CONFIG0,
+    outboundEnterpriseStoreConfig outboundEnterpriseStoreConfig_mut:
+        *mut IKEEXT_CERT_ROOT_CONFIG0,
+    outboundTrustedRootStoreConfig outboundTrustedRootStoreConfig_mut:
+        *mut IKEEXT_CERT_ROOT_CONFIG0,
 }}
 
 STRUCT!{struct IKEEXT_CERTIFICATE_AUTHENTICATION0 {
@@ -128,7 +131,8 @@ UNION2!{union IKEEXT_CERTIFICATE_AUTHENTICATION1_u1 {
     [u32; 2] [u64; 2],
 	s s_mut: IKEEXT_CERTIFICATE_AUTHENTICATION1_u1_s,
     inboundEnterpriseStoreConfig inboundEnterpriseStoreConfig_mut: *mut IKEEXT_CERT_ROOT_CONFIG0,
-    inboundTrustedRootStoreConfig inboundTrustedRootStoreConfig_mut: *mut IKEEXT_CERT_ROOT_CONFIG0,
+    inboundTrustedRootStoreConfig inboundTrustedRootStoreConfig_mut:
+        *mut IKEEXT_CERT_ROOT_CONFIG0,
 }}
 
 STRUCT!{struct IKEEXT_CERTIFICATE_AUTHENTICATION1_u2_s {
@@ -139,8 +143,10 @@ STRUCT!{struct IKEEXT_CERTIFICATE_AUTHENTICATION1_u2_s {
 UNION2!{union IKEEXT_CERTIFICATE_AUTHENTICATION1_u2 {
     [u32; 2] [u64; 2],
 	s s_mut: IKEEXT_CERTIFICATE_AUTHENTICATION1_u2_s,
-    outboundEnterpriseStoreConfig outboundEnterpriseStoreConfig_mut: *mut IKEEXT_CERT_ROOT_CONFIG0,
-    outboundTrustedRootStoreConfig outboundTrustedRootStoreConfig_mut: *mut IKEEXT_CERT_ROOT_CONFIG0,
+    outboundEnterpriseStoreConfig outboundEnterpriseStoreConfig_mut:
+        *mut IKEEXT_CERT_ROOT_CONFIG0,
+    outboundTrustedRootStoreConfig outboundTrustedRootStoreConfig_mut:
+        *mut IKEEXT_CERT_ROOT_CONFIG0,
 }}
 
 STRUCT!{struct IKEEXT_CERTIFICATE_AUTHENTICATION1 {
@@ -277,7 +283,8 @@ STRUCT!{struct IKEEXT_EAP_AUTHENTICATION0 {
 
 UNION2!{union IKEEXT_AUTHENTICATION_METHOD0_u {
     [u32; 8] [u64; 7],
-    presharedKeyAuthentication presharedKeyAuthentication_mut: IKEEXT_PRESHARED_KEY_AUTHENTICATION0,
+    presharedKeyAuthentication presharedKeyAuthentication_mut:
+        IKEEXT_PRESHARED_KEY_AUTHENTICATION0,
     certificateAuthentication certificateAuthentication_mut: IKEEXT_CERTIFICATE_AUTHENTICATION0,
     kerberosAuthentication kerberosAuthentication_mut: IKEEXT_KERBEROS_AUTHENTICATION0,
     ntlmV2Authentication ntlmV2Authentication_mut: IKEEXT_NTLM_V2_AUTHENTICATION0,
@@ -292,7 +299,8 @@ STRUCT!{struct IKEEXT_AUTHENTICATION_METHOD0 {
 
 UNION2!{union IKEEXT_AUTHENTICATION_METHOD1_u {
     [u32; 9] [u64; 9],
-    presharedKeyAuthentication presharedKeyAuthentication_mut: IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
+    presharedKeyAuthentication presharedKeyAuthentication_mut:
+        IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
     certificateAuthentication certificateAuthentication_mut: IKEEXT_CERTIFICATE_AUTHENTICATION1,
     kerberosAuthentication kerberosAuthentication_mut: IKEEXT_KERBEROS_AUTHENTICATION0,
     ntlmV2Authentication ntlmV2Authentication_mut: IKEEXT_NTLM_V2_AUTHENTICATION0,
@@ -308,7 +316,8 @@ STRUCT!{struct IKEEXT_AUTHENTICATION_METHOD1 {
 
 UNION2!{union IKEEXT_AUTHENTICATION_METHOD2_u {
     [u32; 9] [u64; 9],
-    presharedKeyAuthentication presharedKeyAuthentication_mut: IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
+    presharedKeyAuthentication presharedKeyAuthentication_mut:
+        IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
     certificateAuthentication certificateAuthentication_mut: IKEEXT_CERTIFICATE_AUTHENTICATION2,
     kerberosAuthentication kerberosAuthentication_mut: IKEEXT_KERBEROS_AUTHENTICATION1,
     reservedAuthentication reservedAuthentication_mut: IKEEXT_RESERVED_AUTHENTICATION0,
@@ -432,7 +441,8 @@ STRUCT!{struct IKEEXT_EM_POLICY2 {
     initiatorImpersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE,
 }}
 
-pub const IKEEXT_ERROR_CODE_COUNT: UINT = ERROR_IPSEC_IKE_NEG_STATUS_END - ERROR_IPSEC_IKE_NEG_STATUS_BEGIN;
+pub const IKEEXT_ERROR_CODE_COUNT: UINT = ERROR_IPSEC_IKE_NEG_STATUS_END
+    - ERROR_IPSEC_IKE_NEG_STATUS_BEGIN;
 
 STRUCT!{struct IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS0 {
     currentActiveMainModes: UINT32,

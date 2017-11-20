@@ -4,9 +4,13 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
+//! IPSEC Structures and Definitions
 use ctypes::wchar_t;
 use shared::basetsd::{UINT8, UINT16, UINT32, UINT64};
-use shared::fwptypes::{FWP_BYTE_ARRAY16, FWP_BYTE_BLOB, FWP_CONDITION_VALUE0, FWP_DIRECTION, FWPM_DISPLAY_DATA0, FWP_IP_VERSION, FWP_V6_ADDR_AND_MASK, IPSEC_VIRTUAL_IF_TUNNEL_INFO0};
+use shared::fwptypes::{
+    FWP_BYTE_ARRAY16, FWP_BYTE_BLOB, FWP_CONDITION_VALUE0, FWP_DIRECTION, FWPM_DISPLAY_DATA0,
+    FWP_IP_VERSION, FWP_V6_ADDR_AND_MASK, IPSEC_VIRTUAL_IF_TUNNEL_INFO0
+};
 use shared::fwpmtypes::FWPM_FILTER0;
 use shared::guiddef::GUID;
 use shared::minwindef::UINT;
@@ -99,7 +103,8 @@ UNION2!{union IPSEC_SA_TRANSFORM0_u {
     ahTransform ahTransform_mut: *mut IPSEC_AUTH_TRANSFORM0,
     espAuthTransform espAuthTransform_mut: *mut IPSEC_AUTH_TRANSFORM0,
     espCipherTransform espCipherTransform_mut: *mut IPSEC_CIPHER_TRANSFORM0,
-    espAuthAndCipherTransform espAuthAndCipherTransform_mut: *mut IPSEC_AUTH_AND_CIPHER_TRANSFORM0,
+    espAuthAndCipherTransform espAuthAndCipherTransform_mut:
+        *mut IPSEC_AUTH_AND_CIPHER_TRANSFORM0,
     espAuthFwTransform espAuthFwTransform_mut: *mut IPSEC_AUTH_TRANSFORM0,
 }}
 
@@ -453,7 +458,8 @@ UNION2!{union IPSEC_SA0_u {
     ahInformation ahInformation_mut: *mut IPSEC_SA_AUTH_INFORMATION0,
     espAuthInformation espAuthInformation_mut: *mut IPSEC_SA_AUTH_INFORMATION0,
     espCipherInformation espCipherInformation_mut: *mut IPSEC_SA_CIPHER_INFORMATION0,
-    espAuthAndCipherInformation espAuthAndCipherInformation_mut: *mut IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0,
+    espAuthAndCipherInformation espAuthAndCipherInformation_mut:
+        *mut IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0,
     espAuthFwInformation espAuthFwInformation_mut: *mut IPSEC_SA_AUTH_INFORMATION0,
 }}
 
