@@ -138,7 +138,7 @@ ENUM!{enum FWPM_PROVIDER_CONTEXT_TYPE {
     FWPM_PROVIDER_CONTEXT_TYPE_MAX = FWPM_IPSEC_IKEV2_QM_TRANSPORT_CONTEXT + 1,
 }}
 
-UNION2!{union FWPM_PROVIDER_CONTEXT0_u {
+UNION!{union FWPM_PROVIDER_CONTEXT0_u {
     [u32; 1] [u64; 1],
     keyingPolicy keyingPolicy_mut: *mut IPSEC_KEYING_POLICY0,
     ikeQmTransportPolicy ikeQmTransportPolicy_mut: *mut IPSEC_TRANSPORT_POLICY0,
@@ -162,7 +162,7 @@ STRUCT!{struct FWPM_PROVIDER_CONTEXT0 {
     providerContextId: UINT64,
 }}
 
-UNION2!{union FWPM_PROVIDER_CONTEXT1_u {
+UNION!{union FWPM_PROVIDER_CONTEXT1_u {
     [u32; 1] [u64; 1],
     keyingPolicy keyingPolicy_mut: *mut IPSEC_KEYING_POLICY0,
     ikeQmTransportPolicy ikeQmTransportPolicy_mut: *mut IPSEC_TRANSPORT_POLICY1,
@@ -189,7 +189,7 @@ STRUCT!{struct FWPM_PROVIDER_CONTEXT1 {
     providerContextId: UINT64,
 }}
 
-UNION2!{union FWPM_PROVIDER_CONTEXT2_u {
+UNION!{union FWPM_PROVIDER_CONTEXT2_u {
     [u32; 1] [u64; 1],
     keyingPolicy keyingPolicy_mut: *mut IPSEC_KEYING_POLICY1,
     ikeQmTransportPolicy ikeQmTransportPolicy_mut: *mut IPSEC_TRANSPORT_POLICY2,
@@ -216,7 +216,7 @@ STRUCT!{struct FWPM_PROVIDER_CONTEXT2 {
     providerContextId: UINT64,
 }}
 
-UNION2!{union FWPM_PROVIDER_CONTEXT3_u {
+UNION!{union FWPM_PROVIDER_CONTEXT3_u {
     [u32; 1] [u64; 1],
     keyingPolicy keyingPolicy_mut: *mut IPSEC_KEYING_POLICY1,
     ikeQmTransportPolicy ikeQmTransportPolicy_mut: *mut IPSEC_TRANSPORT_POLICY2,
@@ -350,7 +350,7 @@ STRUCT!{struct FWPM_CALLOUT_SUBSCRIPTION0 {
     sessionKey: GUID,
 }}
 
-UNION2!{union FWPM_ACTION0_u {
+UNION!{union FWPM_ACTION0_u {
     [u32; 4],
     filterType filterType_mut: GUID,
     calloutKey calloutKey_mut: GUID,
@@ -382,7 +382,7 @@ pub const FWPM_FILTER_FLAG_GAMEOS_ONLY: UINT = 0x00000200;
 pub const FWPM_FILTER_FLAG_SILENT_MODE: UINT = 0x00000400;
 pub const FWPM_FILTER_FLAG_IPSEC_NO_ACQUIRE_INITIATE: UINT = 0x00000800;
 
-UNION2!{union FWPM_FILTER0_u {
+UNION!{union FWPM_FILTER0_u {
     [u64; 2],
     rawContext rawContext_mut: UINT64,
     providerContextKey providerContextKey_mut: GUID,
@@ -497,13 +497,13 @@ pub const FWPM_NET_EVENT_FLAG_ENTERPRISE_ID_SET: UINT = 0x00000800;
 pub const FWPM_NET_EVENT_FLAG_POLICY_FLAGS_SET: UINT = 0x00001000;
 pub const FWPM_NET_EVENT_FLAG_EFFECTIVE_NAME_SET: UINT = 0x00002000;
 
-UNION2!{union FWPM_NET_EVENT_HEADER0_u1 {
+UNION!{union FWPM_NET_EVENT_HEADER0_u1 {
     [u32; 4],
     localAddrV4 localAddrV4_mut: UINT32,
     localAddrV6 localAddrV6_mut: FWP_BYTE_ARRAY16,
 }}
 
-UNION2!{union FWPM_NET_EVENT_HEADER0_u2 {
+UNION!{union FWPM_NET_EVENT_HEADER0_u2 {
     [u32; 4],
     remoteAddrV4 remoteAddrV4_mut: UINT32,
     remoteAddrV6 remoteAddrV6_mut: FWP_BYTE_ARRAY16,
@@ -523,13 +523,13 @@ STRUCT!{struct FWPM_NET_EVENT_HEADER0 {
     userId: *mut SID,
 }}
 
-UNION2!{union FWPM_NET_EVENT_HEADER1_u1 {
+UNION!{union FWPM_NET_EVENT_HEADER1_u1 {
     [u32; 4],
     localAddrV4 localAddrV4_mut: UINT32,
     localAddrV6 localAddrV6_mut: FWP_BYTE_ARRAY16,
 }}
 
-UNION2!{union FWPM_NET_EVENT_HEADER1_u2 {
+UNION!{union FWPM_NET_EVENT_HEADER1_u2 {
     [u32; 4],
     remoteAddrV4 remoteAddrV4_mut: UINT32,
     remoteAddrV6 remoteAddrV6_mut: FWP_BYTE_ARRAY16,
@@ -567,13 +567,13 @@ STRUCT!{struct FWPM_NET_EVENT_HEADER1 {
     s: FWPM_NET_EVENT_HEADER1_s,
 }}
 
-UNION2!{union FWPM_NET_EVENT_HEADER2_u1 {
+UNION!{union FWPM_NET_EVENT_HEADER2_u1 {
     [u32; 4],
     localAddrV4 localAddrV4_mut: UINT32,
     localAddrV6 localAddrV6_mut: FWP_BYTE_ARRAY16,
 }}
 
-UNION2!{union FWPM_NET_EVENT_HEADER2_u2 {
+UNION!{union FWPM_NET_EVENT_HEADER2_u2 {
     [u32; 4],
     remoteAddrV4 remoteAddrV4_mut: UINT32,
     remoteAddrV6 remoteAddrV6_mut: FWP_BYTE_ARRAY16,
@@ -595,13 +595,13 @@ STRUCT!{struct FWPM_NET_EVENT_HEADER2 {
     packageSid: *mut SID,
 }}
 
-UNION2!{union FWPM_NET_EVENT_HEADER3_u1 {
+UNION!{union FWPM_NET_EVENT_HEADER3_u1 {
     [u32; 4],
     localAddrV4 localAddrV4_mut: UINT32,
     localAddrV6 localAddrV6_mut: FWP_BYTE_ARRAY16,
 }}
 
-UNION2!{union FWPM_NET_EVENT_HEADER3_u2 {
+UNION!{union FWPM_NET_EVENT_HEADER3_u2 {
     [u32; 4],
     remoteAddrV4 remoteAddrV4_mut: UINT32,
     remoteAddrV6 remoteAddrV6_mut: FWP_BYTE_ARRAY16,
@@ -792,13 +792,13 @@ STRUCT!{struct FWPM_NET_EVENT_IPSEC_KERNEL_DROP0 {
     layerId: UINT16,
 }}
 
-UNION2!{union FWPM_NET_EVENT_IPSEC_DOSP_DROP0_u1 {
+UNION!{union FWPM_NET_EVENT_IPSEC_DOSP_DROP0_u1 {
     [u32; 4],
     publicHostV4Addr publicHostV4Addr_mut: UINT32,
     publicHostV6Addr publicHostV6Addr_mut: [UINT8; 16],
 }}
 
-UNION2!{union FWPM_NET_EVENT_IPSEC_DOSP_DROP0_u2 {
+UNION!{union FWPM_NET_EVENT_IPSEC_DOSP_DROP0_u2 {
     [u32; 4],
     internalHostV4Addr internalHostV4Addr_mut: UINT32,
     internalHostV6Addr internalHostV6Addr_mut: [UINT8; 16],
@@ -832,7 +832,7 @@ STRUCT!{struct FWPM_NET_EVENT_CAPABILITY_ALLOW0 {
     isLoopback: BOOL,
 }}
 
-UNION2!{union FWPM_NET_EVENT0_u {
+UNION!{union FWPM_NET_EVENT0_u {
     [u32; 1] [u64; 1],
     ikeMmFailure ikeMmFailure_mut: *mut FWPM_NET_EVENT_IKEEXT_MM_FAILURE0,
     ikeQmFailure ikeQmFailure_mut: *mut FWPM_NET_EVENT_IKEEXT_QM_FAILURE0,
@@ -848,7 +848,7 @@ STRUCT!{struct FWPM_NET_EVENT0 {
 	u: FWPM_NET_EVENT0_u,
 }}
 
-UNION2!{union FWPM_NET_EVENT1_u {
+UNION!{union FWPM_NET_EVENT1_u {
     [u32; 1] [u64; 1],
     ikeMmFailure ikeMmFailure_mut: *mut FWPM_NET_EVENT_IKEEXT_MM_FAILURE1,
     ikeQmFailure ikeQmFailure_mut: *mut FWPM_NET_EVENT_IKEEXT_QM_FAILURE0,
@@ -864,7 +864,7 @@ STRUCT!{struct FWPM_NET_EVENT1 {
     u: FWPM_NET_EVENT1_u,
 }}
 
-UNION2!{union FWPM_NET_EVENT2_u {
+UNION!{union FWPM_NET_EVENT2_u {
     [u32; 1] [u64; 1],
     ikeMmFailure ikeMmFailure_mut: *mut FWPM_NET_EVENT_IKEEXT_MM_FAILURE1,
     ikeQmFailure ikeQmFailure_mut: *mut FWPM_NET_EVENT_IKEEXT_QM_FAILURE0,
@@ -884,7 +884,7 @@ STRUCT!{struct FWPM_NET_EVENT2 {
     u: FWPM_NET_EVENT2_u,
 }}
 
-UNION2!{union FWPM_NET_EVENT3_u {
+UNION!{union FWPM_NET_EVENT3_u {
     [u32; 1] [u64; 1],
     ikeMmFailure ikeMmFailure_mut: *mut FWPM_NET_EVENT_IKEEXT_MM_FAILURE1,
     ikeQmFailure ikeQmFailure_mut: *mut FWPM_NET_EVENT_IKEEXT_QM_FAILURE0,
@@ -936,13 +936,13 @@ STRUCT!{struct FWPM_SYSTEM_PORTS0 {
     types: *mut FWPM_SYSTEM_PORTS_BY_TYPE0,
 }}
 
-UNION2!{union FWPM_CONNECTION0_u1 {
+UNION!{union FWPM_CONNECTION0_u1 {
     [u32; 4],
     localV4Address localV4Address_mut: UINT32,
     localV6Address localV6Address_mut: [UINT8; 16],
 }}
 
-UNION2!{union FWPM_CONNECTION0_u2 {
+UNION!{union FWPM_CONNECTION0_u2 {
     [u32; 4],
     remoteV4Address remoteV4Address_mut: UINT32,
     remoteV6Address remoteV6Address_mut: [UINT8; 16],
@@ -1006,7 +1006,7 @@ STRUCT!{struct FWPM_VSWITCH_EVENT0_u_reorderInfo {
     vSwitchFilterExtensions: *mut LPWSTR,
 }}
 
-UNION2!{union FWPM_VSWITCH_EVENT0_u {
+UNION!{union FWPM_VSWITCH_EVENT0_u {
     [u32; 3] [u64; 2],
     positionInfo positionInfo_mut: FWPM_VSWITCH_EVENT0_u_positionInfo,
     reorderInfo reorderInfo_mut: FWPM_VSWITCH_EVENT0_u_reorderInfo,

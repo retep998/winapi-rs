@@ -92,7 +92,7 @@ STRUCT!{struct IKEEXT_CERTIFICATE_AUTHENTICATION0_u1_s {
     inboundRootArray: *mut IKEEXT_CERT_ROOT_CONFIG0,
 }}
 
-UNION2!{union IKEEXT_CERTIFICATE_AUTHENTICATION0_u1 {
+UNION!{union IKEEXT_CERTIFICATE_AUTHENTICATION0_u1 {
     [u32; 2] [u64; 2],
     s s_mut: IKEEXT_CERTIFICATE_AUTHENTICATION0_u1_s,
     inboundEnterpriseStoreConfig inboundEnterpriseStoreConfig_mut: *mut IKEEXT_CERT_ROOT_CONFIG0,
@@ -105,7 +105,7 @@ STRUCT!{struct IKEEXT_CERTIFICATE_AUTHENTICATION0_u2_s {
     outboundRootArray: *mut IKEEXT_CERT_ROOT_CONFIG0,
 }}
 
-UNION2!{union IKEEXT_CERTIFICATE_AUTHENTICATION0_u2 {
+UNION!{union IKEEXT_CERTIFICATE_AUTHENTICATION0_u2 {
     [u32; 2] [u64; 2],
     s s_mut: IKEEXT_CERTIFICATE_AUTHENTICATION0_u2_s,
     outboundEnterpriseStoreConfig outboundEnterpriseStoreConfig_mut:
@@ -127,7 +127,7 @@ STRUCT!{struct IKEEXT_CERTIFICATE_AUTHENTICATION1_u1_s {
     inboundRootArray: *mut IKEEXT_CERT_ROOT_CONFIG0,
 }}
 
-UNION2!{union IKEEXT_CERTIFICATE_AUTHENTICATION1_u1 {
+UNION!{union IKEEXT_CERTIFICATE_AUTHENTICATION1_u1 {
     [u32; 2] [u64; 2],
 	s s_mut: IKEEXT_CERTIFICATE_AUTHENTICATION1_u1_s,
     inboundEnterpriseStoreConfig inboundEnterpriseStoreConfig_mut: *mut IKEEXT_CERT_ROOT_CONFIG0,
@@ -140,7 +140,7 @@ STRUCT!{struct IKEEXT_CERTIFICATE_AUTHENTICATION1_u2_s {
     outboundRootArray: *mut IKEEXT_CERT_ROOT_CONFIG0,
 }}
 
-UNION2!{union IKEEXT_CERTIFICATE_AUTHENTICATION1_u2 {
+UNION!{union IKEEXT_CERTIFICATE_AUTHENTICATION1_u2 {
     [u32; 2] [u64; 2],
 	s s_mut: IKEEXT_CERTIFICATE_AUTHENTICATION1_u2_s,
     outboundEnterpriseStoreConfig outboundEnterpriseStoreConfig_mut:
@@ -202,7 +202,7 @@ STRUCT!{struct IKEEXT_CERTIFICATE_AUTHENTICATION2_u1_s3 {
     inboundTrustedRootStoreCriteria: *mut IKEEXT_CERTIFICATE_CRITERIA0,
 }}
 
-UNION2!{union IKEEXT_CERTIFICATE_AUTHENTICATION2_u1 {
+UNION!{union IKEEXT_CERTIFICATE_AUTHENTICATION2_u1 {
     [u32; 2] [u64; 2],
     s1 s1_mut: IKEEXT_CERTIFICATE_AUTHENTICATION2_u1_s1,
     s2 s2_mut: IKEEXT_CERTIFICATE_AUTHENTICATION2_u1_s2,
@@ -224,7 +224,7 @@ STRUCT!{struct IKEEXT_CERTIFICATE_AUTHENTICATION2_u2_s3 {
     outboundTrustedRootStoreCriteria: *mut IKEEXT_CERTIFICATE_CRITERIA0,
 }}
 
-UNION2!{union IKEEXT_CERTIFICATE_AUTHENTICATION2_u2 {
+UNION!{union IKEEXT_CERTIFICATE_AUTHENTICATION2_u2 {
     [u32; 2] [u64; 2],
     s1 s1_mut: IKEEXT_CERTIFICATE_AUTHENTICATION2_u2_s1,
     s2 s2_mut: IKEEXT_CERTIFICATE_AUTHENTICATION2_u2_s2,
@@ -281,7 +281,7 @@ STRUCT!{struct IKEEXT_EAP_AUTHENTICATION0 {
     flags: UINT32,
 }}
 
-UNION2!{union IKEEXT_AUTHENTICATION_METHOD0_u {
+UNION!{union IKEEXT_AUTHENTICATION_METHOD0_u {
     [u32; 8] [u64; 7],
     presharedKeyAuthentication presharedKeyAuthentication_mut:
         IKEEXT_PRESHARED_KEY_AUTHENTICATION0,
@@ -297,7 +297,7 @@ STRUCT!{struct IKEEXT_AUTHENTICATION_METHOD0 {
 	u: IKEEXT_AUTHENTICATION_METHOD0_u,
 }}
 
-UNION2!{union IKEEXT_AUTHENTICATION_METHOD1_u {
+UNION!{union IKEEXT_AUTHENTICATION_METHOD1_u {
     [u32; 9] [u64; 9],
     presharedKeyAuthentication presharedKeyAuthentication_mut:
         IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
@@ -314,7 +314,7 @@ STRUCT!{struct IKEEXT_AUTHENTICATION_METHOD1 {
     u: IKEEXT_AUTHENTICATION_METHOD1_u,
 }}
 
-UNION2!{union IKEEXT_AUTHENTICATION_METHOD2_u {
+UNION!{union IKEEXT_AUTHENTICATION_METHOD2_u {
     [u32; 9] [u64; 9],
     presharedKeyAuthentication presharedKeyAuthentication_mut:
         IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
@@ -544,13 +544,13 @@ STRUCT!{struct IKEEXT_STATISTICS1 {
 }}
 
 
-UNION2!{union IKEEXT_TRAFFIC0_u1 {
+UNION!{union IKEEXT_TRAFFIC0_u1 {
     [u32; 4],
     localV4Address localV4Address_mut: UINT32,
     localV6Address localV6Address_mut: [UINT8; 16],
 }}
 
-UNION2!{union IKEEXT_TRAFFIC0_u2 {
+UNION!{union IKEEXT_TRAFFIC0_u2 {
     [u32; 4],
     remoteV4Address remoteV4Address_mut: UINT32,
     remoteV6Address remoteV6Address_mut: [UINT8; 16],
@@ -582,7 +582,7 @@ STRUCT!{struct IKEEXT_NAME_CREDENTIAL0 {
     principalName: *mut wchar_t,
 }}
 
-UNION2!{union IKEEXT_CREDENTIAL0_u {
+UNION!{union IKEEXT_CREDENTIAL0_u {
     [u32; 1] [u64; 1],
     presharedKey presharedKey_mut: *mut IKEEXT_PRESHARED_KEY_AUTHENTICATION0,
     certificate certificate_mut: *mut IKEEXT_CERTIFICATE_CREDENTIAL0,
@@ -626,7 +626,7 @@ STRUCT!{struct IKEEXT_CERTIFICATE_CREDENTIAL1 {
     certificate: FWP_BYTE_BLOB,
 }}
 
-UNION2!{union IKEEXT_CREDENTIAL1_u {
+UNION!{union IKEEXT_CREDENTIAL1_u {
     [u32; 1] [u64; 1],
     presharedKey presharedKey_mut: *mut IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
     certificate certificate_mut: *mut IKEEXT_CERTIFICATE_CREDENTIAL1,
@@ -664,7 +664,7 @@ STRUCT!{struct IKEEXT_SA_DETAILS1 {
     correlationKey: FWP_BYTE_BLOB,
 }}
 
-UNION2!{union IKEEXT_CREDENTIAL2_u {
+UNION!{union IKEEXT_CREDENTIAL2_u {
     [u32; 1] [u64; 1],
     presharedKey presharedKey_mut: *mut IKEEXT_PRESHARED_KEY_AUTHENTICATION1,
     certificate certificate_mut: *mut IKEEXT_CERTIFICATE_CREDENTIAL1,

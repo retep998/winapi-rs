@@ -98,7 +98,7 @@ STRUCT!{struct IPSEC_AUTH_AND_CIPHER_TRANSFORM0 {
     cipherTransform: IPSEC_CIPHER_TRANSFORM0,
 }}
 
-UNION2!{union IPSEC_SA_TRANSFORM0_u {
+UNION!{union IPSEC_SA_TRANSFORM0_u {
 	[u32; 1] [u64; 1],
     ahTransform ahTransform_mut: *mut IPSEC_AUTH_TRANSFORM0,
     espAuthTransform espAuthTransform_mut: *mut IPSEC_AUTH_TRANSFORM0,
@@ -138,13 +138,13 @@ STRUCT!{struct IPSEC_SA_IDLE_TIMEOUT0 {
     idleTimeoutSecondsFailOver: UINT32,
 }}
 
-UNION2!{union IPSEC_TRAFFIC_SELECTOR0_u1 {
+UNION!{union IPSEC_TRAFFIC_SELECTOR0_u1 {
 	[u32; 4],
     startV4Address startV4Address_mut: UINT32,
     startV6Address startV6Address_mut: [UINT8; 16],
 }}
 
-UNION2!{union IPSEC_TRAFFIC_SELECTOR0_u2 {
+UNION!{union IPSEC_TRAFFIC_SELECTOR0_u2 {
 	[u32; 4],
     endV4Address endV4Address_mut: UINT32,
     endV6Address endV6Address_mut: [UINT8; 16],
@@ -226,13 +226,13 @@ STRUCT!{struct IPSEC_TRANSPORT_POLICY2 {
     emPolicy: *mut IKEEXT_EM_POLICY2,
 }}
 
-UNION2!{union IPSEC_TUNNEL_ENDPOINTS0_u1 {
+UNION!{union IPSEC_TUNNEL_ENDPOINTS0_u1 {
 	[u32; 4],
     localV4Address localV4Address_mut: UINT32,
     localV6Address localV6Address_mut: [UINT8; 16],
 }}
 
-UNION2!{union IPSEC_TUNNEL_ENDPOINTS0_u2 {
+UNION!{union IPSEC_TUNNEL_ENDPOINTS0_u2 {
 	[u32; 4],
     remoteV4Address remoteV4Address_mut: UINT32,
     remoteV6Address remoteV6Address_mut: [UINT8; 16],
@@ -245,7 +245,7 @@ STRUCT!{struct IPSEC_TUNNEL_ENDPOINTS0 {
     u2: IPSEC_TUNNEL_ENDPOINTS0_u2,
 }}
 
-UNION2!{union IPSEC_TUNNEL_ENDPOINT0_u {
+UNION!{union IPSEC_TUNNEL_ENDPOINT0_u {
 	[u32; 4],
     v4Address v4Address_mut: UINT32,
     v6Address v6Address_mut: [UINT8; 16],
@@ -256,13 +256,13 @@ STRUCT!{struct IPSEC_TUNNEL_ENDPOINT0 {
     u: IPSEC_TUNNEL_ENDPOINT0_u,
 }}
 
-UNION2!{union IPSEC_TUNNEL_ENDPOINTS2_u1 {
+UNION!{union IPSEC_TUNNEL_ENDPOINTS2_u1 {
 	[u32; 4],
     localV4Address localV4Address_mut: UINT32,
     localV6Address localV6Address_mut: [UINT8; 16],
 }}
 
-UNION2!{union IPSEC_TUNNEL_ENDPOINTS2_u2 {
+UNION!{union IPSEC_TUNNEL_ENDPOINTS2_u2 {
 	[u32; 4],
     remoteV4Address remoteV4Address_mut: UINT32,
     remoteV6Address remoteV6Address_mut: [UINT8; 16],
@@ -278,13 +278,13 @@ STRUCT!{struct IPSEC_TUNNEL_ENDPOINTS2 {
     remoteAddresses: *mut IPSEC_TUNNEL_ENDPOINT0,
 }}
 
-UNION2!{union IPSEC_TUNNEL_ENDPOINTS1_u1 {
+UNION!{union IPSEC_TUNNEL_ENDPOINTS1_u1 {
 	[u32; 4],
     localV4Address localV4Address_mut: UINT32,
     localV6Address localV6Address_mut: [UINT8; 16],
 }}
 
-UNION2!{union IPSEC_TUNNEL_ENDPOINTS1_u2 {
+UNION!{union IPSEC_TUNNEL_ENDPOINTS1_u2 {
 	[u32; 4],
     remoteV4Address remoteV4Address_mut: UINT32,
     remoteV6Address remoteV6Address_mut: [UINT8; 16],
@@ -453,7 +453,7 @@ STRUCT!{struct IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0 {
     saAuthInformation: IPSEC_SA_AUTH_INFORMATION0,
 }}
 
-UNION2!{union IPSEC_SA0_u {
+UNION!{union IPSEC_SA0_u {
     [u32; 1] [u64; 1],
     ahInformation ahInformation_mut: *mut IPSEC_SA_AUTH_INFORMATION0,
     espAuthInformation espAuthInformation_mut: *mut IPSEC_SA_AUTH_INFORMATION0,
@@ -577,19 +577,19 @@ ENUM!{enum IPSEC_TRAFFIC_TYPE {
     IPSEC_TRAFFIC_TYPE_MAX = IPSEC_TRAFFIC_TYPE_TUNNEL + 1,
 }}
 
-UNION2!{union IPSEC_TRAFFIC0_u1 {
+UNION!{union IPSEC_TRAFFIC0_u1 {
 	[u32; 4],
     localV4Address localV4Address_mut: UINT32,
     localV6Address localV6Address_mut: [UINT8; 16],
 }}
 
-UNION2!{union IPSEC_TRAFFIC0_u2 {
+UNION!{union IPSEC_TRAFFIC0_u2 {
 	[u32; 4],
     remoteV4Address remoteV4Address_mut: UINT32,
     remoteV6Address remoteV6Address_mut: [UINT8; 16],
 }}
 
-UNION2!{union IPSEC_TRAFFIC0_u3 {
+UNION!{union IPSEC_TRAFFIC0_u3 {
 	[u64; 1],
     ipsecFilterId ipsecFilterId_mut: UINT64,
     tunnelPolicyId tunnelPolicyId_mut: UINT64,
@@ -604,19 +604,19 @@ STRUCT!{struct IPSEC_TRAFFIC0 {
     remotePort: UINT16,
 }}
 
-UNION2!{union IPSEC_TRAFFIC1_u1 {
+UNION!{union IPSEC_TRAFFIC1_u1 {
 	[u32; 4],
     localV4Address localV4Address_mut: UINT32,
     localV6Address localV6Address_mut: [UINT8; 16],
 }}
 
-UNION2!{union IPSEC_TRAFFIC1_u2 {
+UNION!{union IPSEC_TRAFFIC1_u2 {
 	[u32; 4],
     remoteV4Address remoteV4Address_mut: UINT32,
     remoteV6Address remoteV6Address_mut: [UINT8; 16],
 }}
 
-UNION2!{union IPSEC_TRAFFIC1_u3 {
+UNION!{union IPSEC_TRAFFIC1_u3 {
 	[u64; 1],
     ipsecFilterId ipsecFilterId_mut: UINT64,
     tunnelPolicyId tunnelPolicyId_mut: UINT64,

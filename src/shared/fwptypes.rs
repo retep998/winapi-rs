@@ -96,7 +96,7 @@ STRUCT!{struct FWP_TOKEN_INFORMATION {
     restrictedSids: PSID_AND_ATTRIBUTES,
 }}
 
-UNION2!{union FWP_VALUE0_u {
+UNION!{union FWP_VALUE0_u {
     [u32; 1] [u64; 1],
     uint8 uint8_mut: UINT8,
     uint16 uint16_mut: UINT16,
@@ -160,7 +160,7 @@ STRUCT!{struct FWP_RANGE0 {
 
 pub const FWP_ACTRL_MATCH_FILTER: DWORD = 0x00000001;
 
-UNION2!{union FWP_CONDITION_VALUE0_u {
+UNION!{union FWP_CONDITION_VALUE0_u {
     [u32; 1] [u64; 1],
     uint8 uint8_mut: UINT8,
     uint16 uint16_mut: UINT16,
