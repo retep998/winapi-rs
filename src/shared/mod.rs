@@ -25,8 +25,8 @@
 #[cfg(feature = "dxgi1_5")] pub mod dxgi1_5;
 #[cfg(feature = "dxgiformat")] pub mod dxgiformat;
 #[cfg(feature = "dxgitype")] pub mod dxgitype;
-#[cfg(feature = "fwptypes")] pub mod fwptypes;
 #[cfg(feature = "fwpmtypes")] pub mod fwpmtypes;
+#[cfg(feature = "fwptypes")] pub mod fwptypes;
 pub mod guiddef;
 #[cfg(feature = "hidclass")] pub mod hidclass;
 #[cfg(feature = "hidpi")] pub mod hidpi;
