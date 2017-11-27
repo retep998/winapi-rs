@@ -13,6 +13,7 @@ use shared::fwptypes::{
 };
 use shared::fwpmtypes::FWPM_FILTER0;
 use shared::guiddef::GUID;
+use shared::iketypes::{IKEEXT_EM_POLICY0, IKEEXT_EM_POLICY1, IKEEXT_EM_POLICY2};
 use shared::minwindef::UINT;
 
 STRUCT!{struct IPSEC_SA_LIFETIME0 {
@@ -184,11 +185,6 @@ pub const IPSEC_POLICY_FLAG_KEY_MANAGER_ALLOW_NOTIFY_KEY: UINT = 0x00004000;
 pub const IPSEC_POLICY_FLAG_RESERVED1: UINT = 0x00008000;
 pub const IPSEC_POLICY_FLAG_SITE_TO_SITE_TUNNEL: UINT = 0x00010000;
 
-//TODO: remove this placeholder
-STRUCT!{struct IKEEXT_EM_POLICY0 {
-    lol: UINT,
-}}
-
 STRUCT!{struct IPSEC_TRANSPORT_POLICY0 {
     numIpsecProposals: UINT32,
     ipsecProposals: *mut IPSEC_PROPOSAL0,
@@ -198,11 +194,6 @@ STRUCT!{struct IPSEC_TRANSPORT_POLICY0 {
     emPolicy: *mut IKEEXT_EM_POLICY0,
 }}
 
-//TODO: remove
-STRUCT!{struct IKEEXT_EM_POLICY1 {
-    lol: UINT,
-}}
-
 STRUCT!{struct IPSEC_TRANSPORT_POLICY1 {
     numIpsecProposals: UINT32,
     ipsecProposals: *mut IPSEC_PROPOSAL0,
@@ -210,11 +201,6 @@ STRUCT!{struct IPSEC_TRANSPORT_POLICY1 {
     ndAllowClearTimeoutSeconds: UINT32,
     saIdleTimeout: IPSEC_SA_IDLE_TIMEOUT0,
     emPolicy: *mut IKEEXT_EM_POLICY1,
-}}
-
-//TODO: remove
-STRUCT!{struct IKEEXT_EM_POLICY2 {
-    lol: UINT,
 }}
 
 STRUCT!{struct IPSEC_TRANSPORT_POLICY2 {
