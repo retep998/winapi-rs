@@ -939,7 +939,7 @@ extern "system" {
         sacl: *const ACL,
     ) -> DWORD;
 }
-	
+
 FN!{stdcall FWPM_PROVIDER_CHANGE_CALLBACK0(
     *mut c_void,
     *const FWPM_PROVIDER_CHANGE0,
@@ -1115,7 +1115,7 @@ extern "system" {
         sacl: *const ACL,
     ) -> DWORD;
 }
-						   
+
 FN!{stdcall FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0(
     *mut c_void,
     *const FWPM_PROVIDER_CONTEXT_CHANGE0,

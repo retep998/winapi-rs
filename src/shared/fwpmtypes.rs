@@ -158,7 +158,7 @@ STRUCT!{struct FWPM_PROVIDER_CONTEXT0 {
     providerKey: *mut GUID,
     providerData: FWP_BYTE_BLOB,
     type_: FWPM_PROVIDER_CONTEXT_TYPE,
-	u: FWPM_PROVIDER_CONTEXT0_u,
+    u: FWPM_PROVIDER_CONTEXT0_u,
     providerContextId: UINT64,
 }}
 
@@ -212,7 +212,7 @@ STRUCT!{struct FWPM_PROVIDER_CONTEXT2 {
     providerKey: *mut GUID,
     providerData: FWP_BYTE_BLOB,
     type_: FWPM_PROVIDER_CONTEXT_TYPE,
-	u: FWPM_PROVIDER_CONTEXT2_u,
+    u: FWPM_PROVIDER_CONTEXT2_u,
     providerContextId: UINT64,
 }}
 
@@ -240,7 +240,7 @@ STRUCT!{struct FWPM_PROVIDER_CONTEXT3 {
     providerKey: *mut GUID,
     providerData: FWP_BYTE_BLOB,
     type_: FWPM_PROVIDER_CONTEXT_TYPE,
-	u: FWPM_PROVIDER_CONTEXT3_u,
+    u: FWPM_PROVIDER_CONTEXT3_u,
     providerContextId: UINT64,
 }}
 
@@ -402,7 +402,7 @@ STRUCT!{struct FWPM_FILTER0 {
     filterCondition: *mut FWPM_FILTER_CONDITION0,
     action: FWPM_ACTION0,
     u: FWPM_FILTER0_u,
-	reserved: *mut GUID,
+    reserved: *mut GUID,
     filterId: UINT64,
     effectiveWeight: FWP_VALUE0,
 }}
@@ -806,8 +806,8 @@ UNION!{union FWPM_NET_EVENT_IPSEC_DOSP_DROP0_u2 {
 
 STRUCT!{struct FWPM_NET_EVENT_IPSEC_DOSP_DROP0 {
     ipVersion: FWP_IP_VERSION,
-	u1: FWPM_NET_EVENT_IPSEC_DOSP_DROP0_u1,
-	u2: FWPM_NET_EVENT_IPSEC_DOSP_DROP0_u2,
+    u1: FWPM_NET_EVENT_IPSEC_DOSP_DROP0_u1,
+    u2: FWPM_NET_EVENT_IPSEC_DOSP_DROP0_u2,
     failureStatus: INT32,
     direction: FWP_DIRECTION,
 }}
@@ -845,7 +845,7 @@ UNION!{union FWPM_NET_EVENT0_u {
 STRUCT!{struct FWPM_NET_EVENT0 {
     header: FWPM_NET_EVENT_HEADER0,
     type_: FWPM_NET_EVENT_TYPE,
-	u: FWPM_NET_EVENT0_u,
+    u: FWPM_NET_EVENT0_u,
 }}
 
 UNION!{union FWPM_NET_EVENT1_u {
@@ -901,7 +901,7 @@ UNION!{union FWPM_NET_EVENT3_u {
 STRUCT!{struct FWPM_NET_EVENT3 {
     header: FWPM_NET_EVENT_HEADER3,
     type_: FWPM_NET_EVENT_TYPE,
-	u: FWPM_NET_EVENT3_u,
+    u: FWPM_NET_EVENT3_u,
 }}
 
 STRUCT!{struct FWPM_NET_EVENT_ENUM_TEMPLATE0 {
@@ -1011,7 +1011,7 @@ UNION!{union FWPM_VSWITCH_EVENT0_u {
     positionInfo positionInfo_mut: FWPM_VSWITCH_EVENT0_u_positionInfo,
     reorderInfo reorderInfo_mut: FWPM_VSWITCH_EVENT0_u_reorderInfo,
 }}
-	
+
 STRUCT!{struct FWPM_VSWITCH_EVENT0 {
     eventType: FWPM_VSWITCH_EVENT_TYPE,
     vSwitchId: *mut wchar_t,

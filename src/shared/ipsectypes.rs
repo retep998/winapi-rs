@@ -99,7 +99,7 @@ STRUCT!{struct IPSEC_AUTH_AND_CIPHER_TRANSFORM0 {
 }}
 
 UNION!{union IPSEC_SA_TRANSFORM0_u {
-	[u32; 1] [u64; 1],
+    [u32; 1] [u64; 1],
     ahTransform ahTransform_mut: *mut IPSEC_AUTH_TRANSFORM0,
     espAuthTransform espAuthTransform_mut: *mut IPSEC_AUTH_TRANSFORM0,
     espCipherTransform espCipherTransform_mut: *mut IPSEC_CIPHER_TRANSFORM0,
@@ -110,7 +110,7 @@ UNION!{union IPSEC_SA_TRANSFORM0_u {
 
 STRUCT!{struct IPSEC_SA_TRANSFORM0 {
     ipsecTransformType: IPSEC_TRANSFORM_TYPE,
-	u: IPSEC_SA_TRANSFORM0_u,
+    u: IPSEC_SA_TRANSFORM0_u,
 }}
 
 ENUM!{enum IPSEC_PFS_GROUP {
@@ -139,13 +139,13 @@ STRUCT!{struct IPSEC_SA_IDLE_TIMEOUT0 {
 }}
 
 UNION!{union IPSEC_TRAFFIC_SELECTOR0_u1 {
-	[u32; 4],
+    [u32; 4],
     startV4Address startV4Address_mut: UINT32,
     startV6Address startV6Address_mut: [UINT8; 16],
 }}
 
 UNION!{union IPSEC_TRAFFIC_SELECTOR0_u2 {
-	[u32; 4],
+    [u32; 4],
     endV4Address endV4Address_mut: UINT32,
     endV6Address endV6Address_mut: [UINT8; 16],
 }}
@@ -216,7 +216,7 @@ STRUCT!{struct IPSEC_TRANSPORT_POLICY1 {
 STRUCT!{struct IKEEXT_EM_POLICY2 {
     lol: UINT,
 }}
-	
+
 STRUCT!{struct IPSEC_TRANSPORT_POLICY2 {
     numIpsecProposals: UINT32,
     ipsecProposals: *mut IPSEC_PROPOSAL0,
@@ -227,13 +227,13 @@ STRUCT!{struct IPSEC_TRANSPORT_POLICY2 {
 }}
 
 UNION!{union IPSEC_TUNNEL_ENDPOINTS0_u1 {
-	[u32; 4],
+    [u32; 4],
     localV4Address localV4Address_mut: UINT32,
     localV6Address localV6Address_mut: [UINT8; 16],
 }}
 
 UNION!{union IPSEC_TUNNEL_ENDPOINTS0_u2 {
-	[u32; 4],
+    [u32; 4],
     remoteV4Address remoteV4Address_mut: UINT32,
     remoteV6Address remoteV6Address_mut: [UINT8; 16],
 }}
@@ -246,7 +246,7 @@ STRUCT!{struct IPSEC_TUNNEL_ENDPOINTS0 {
 }}
 
 UNION!{union IPSEC_TUNNEL_ENDPOINT0_u {
-	[u32; 4],
+    [u32; 4],
     v4Address v4Address_mut: UINT32,
     v6Address v6Address_mut: [UINT8; 16],
 }}
@@ -257,21 +257,21 @@ STRUCT!{struct IPSEC_TUNNEL_ENDPOINT0 {
 }}
 
 UNION!{union IPSEC_TUNNEL_ENDPOINTS2_u1 {
-	[u32; 4],
+    [u32; 4],
     localV4Address localV4Address_mut: UINT32,
     localV6Address localV6Address_mut: [UINT8; 16],
 }}
 
 UNION!{union IPSEC_TUNNEL_ENDPOINTS2_u2 {
-	[u32; 4],
+    [u32; 4],
     remoteV4Address remoteV4Address_mut: UINT32,
     remoteV6Address remoteV6Address_mut: [UINT8; 16],
 }}
 
 STRUCT!{struct IPSEC_TUNNEL_ENDPOINTS2 {
     ipVersion: FWP_IP_VERSION,
-	u1: IPSEC_TUNNEL_ENDPOINTS2_u1,
-	u2: IPSEC_TUNNEL_ENDPOINTS2_u2,
+    u1: IPSEC_TUNNEL_ENDPOINTS2_u1,
+    u2: IPSEC_TUNNEL_ENDPOINTS2_u2,
     localIfLuid: UINT64,
     remoteFqdn: *mut wchar_t,
     numAddresses: UINT32,
@@ -279,13 +279,13 @@ STRUCT!{struct IPSEC_TUNNEL_ENDPOINTS2 {
 }}
 
 UNION!{union IPSEC_TUNNEL_ENDPOINTS1_u1 {
-	[u32; 4],
+    [u32; 4],
     localV4Address localV4Address_mut: UINT32,
     localV6Address localV6Address_mut: [UINT8; 16],
 }}
 
 UNION!{union IPSEC_TUNNEL_ENDPOINTS1_u2 {
-	[u32; 4],
+    [u32; 4],
     remoteV4Address remoteV4Address_mut: UINT32,
     remoteV6Address remoteV6Address_mut: [UINT8; 16],
 }}
@@ -466,7 +466,7 @@ UNION!{union IPSEC_SA0_u {
 STRUCT!{struct IPSEC_SA0 {
     spi: IPSEC_SA_SPI,
     saTransformType: IPSEC_TRANSFORM_TYPE,
-	u: IPSEC_SA0_u,
+    u: IPSEC_SA0_u,
 }}
 
 STRUCT!{struct IPSEC_KEYMODULE_STATE0 {
@@ -545,7 +545,7 @@ STRUCT!{struct IPSEC_SA_BUNDLE0 {
     saList: *mut IPSEC_SA0,
     keyModuleState: *mut IPSEC_KEYMODULE_STATE0,
     ipVersion: FWP_IP_VERSION,
-	// Single field anonymous union
+    // Single field anonymous union
     peerV4PrivateAddress: UINT32,
     mmSaId: UINT64,
     pfsGroup: IPSEC_PFS_GROUP,
@@ -563,7 +563,7 @@ STRUCT!{struct IPSEC_SA_BUNDLE1 {
     saList: *mut IPSEC_SA0,
     keyModuleState: *mut IPSEC_KEYMODULE_STATE0,
     ipVersion: FWP_IP_VERSION,
-	// Single field anonymous union
+    // Single field anonymous union
     peerV4PrivateAddress: UINT32,
     mmSaId: UINT64,
     pfsGroup: IPSEC_PFS_GROUP,
@@ -578,55 +578,55 @@ ENUM!{enum IPSEC_TRAFFIC_TYPE {
 }}
 
 UNION!{union IPSEC_TRAFFIC0_u1 {
-	[u32; 4],
+    [u32; 4],
     localV4Address localV4Address_mut: UINT32,
     localV6Address localV6Address_mut: [UINT8; 16],
 }}
 
 UNION!{union IPSEC_TRAFFIC0_u2 {
-	[u32; 4],
+    [u32; 4],
     remoteV4Address remoteV4Address_mut: UINT32,
     remoteV6Address remoteV6Address_mut: [UINT8; 16],
 }}
 
 UNION!{union IPSEC_TRAFFIC0_u3 {
-	[u64; 1],
+    [u64; 1],
     ipsecFilterId ipsecFilterId_mut: UINT64,
     tunnelPolicyId tunnelPolicyId_mut: UINT64,
 }}
 
 STRUCT!{struct IPSEC_TRAFFIC0 {
     ipVersion: FWP_IP_VERSION,
-	u1: IPSEC_TRAFFIC0_u1,
-	u2: IPSEC_TRAFFIC0_u2,
+    u1: IPSEC_TRAFFIC0_u1,
+    u2: IPSEC_TRAFFIC0_u2,
     trafficType: IPSEC_TRAFFIC_TYPE,
-	u3: IPSEC_TRAFFIC0_u3,
+    u3: IPSEC_TRAFFIC0_u3,
     remotePort: UINT16,
 }}
 
 UNION!{union IPSEC_TRAFFIC1_u1 {
-	[u32; 4],
+    [u32; 4],
     localV4Address localV4Address_mut: UINT32,
     localV6Address localV6Address_mut: [UINT8; 16],
 }}
 
 UNION!{union IPSEC_TRAFFIC1_u2 {
-	[u32; 4],
+    [u32; 4],
     remoteV4Address remoteV4Address_mut: UINT32,
     remoteV6Address remoteV6Address_mut: [UINT8; 16],
 }}
 
 UNION!{union IPSEC_TRAFFIC1_u3 {
-	[u64; 1],
+    [u64; 1],
     ipsecFilterId ipsecFilterId_mut: UINT64,
     tunnelPolicyId tunnelPolicyId_mut: UINT64,
 }}
 
 STRUCT!{struct IPSEC_TRAFFIC1 {
     ipVersion: FWP_IP_VERSION,
-	u1: IPSEC_TRAFFIC1_u1,
-	u2: IPSEC_TRAFFIC1_u2,
-	u3: IPSEC_TRAFFIC1_u3,
+    u1: IPSEC_TRAFFIC1_u1,
+    u2: IPSEC_TRAFFIC1_u2,
+    u3: IPSEC_TRAFFIC1_u3,
     remotePort: UINT16,
     localPort: UINT16,
     ipProtocol: UINT8,
@@ -642,7 +642,7 @@ STRUCT!{struct IPSEC_V4_UDP_ENCAPSULATION0 {
 STRUCT!{struct IPSEC_GETSPI0 {
     inboundIpsecTraffic: IPSEC_TRAFFIC0,
     ipVersion: FWP_IP_VERSION,
-	// Single field anonymous union
+    // Single field anonymous union
     inboundUdpEncapsulation: *mut IPSEC_V4_UDP_ENCAPSULATION0,
     rngCryptoModuleID: *mut IPSEC_CRYPTO_MODULE_ID,
 }}
@@ -650,7 +650,7 @@ STRUCT!{struct IPSEC_GETSPI0 {
 STRUCT!{struct IPSEC_GETSPI1 {
     inboundIpsecTraffic: IPSEC_TRAFFIC1,
     ipVersion: FWP_IP_VERSION,
-	// Single field anonymous union
+    // Single field anonymous union
     inboundUdpEncapsulation: *mut IPSEC_V4_UDP_ENCAPSULATION0,
     rngCryptoModuleID: *mut IPSEC_CRYPTO_MODULE_ID,
 }}
@@ -660,7 +660,7 @@ STRUCT!{struct IPSEC_SA_DETAILS0 {
     saDirection: FWP_DIRECTION,
     traffic: IPSEC_TRAFFIC0,
     saBundle: IPSEC_SA_BUNDLE0,
-	// Single field anonymous union
+    // Single field anonymous union
     udpEncapsulation: *mut IPSEC_V4_UDP_ENCAPSULATION0,
     transportFilter: *mut FWPM_FILTER0,
 }}
@@ -670,7 +670,7 @@ STRUCT!{struct IPSEC_SA_DETAILS1 {
     saDirection: FWP_DIRECTION,
     traffic: IPSEC_TRAFFIC1,
     saBundle: IPSEC_SA_BUNDLE1,
-	// Single field anonymous union
+    // Single field anonymous union
     udpEncapsulation: *mut IPSEC_V4_UDP_ENCAPSULATION0,
     transportFilter: *mut FWPM_FILTER0,
     virtualIfTunnelInfo: IPSEC_VIRTUAL_IF_TUNNEL_INFO0,
