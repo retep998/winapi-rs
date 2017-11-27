@@ -6,7 +6,7 @@
 // except according to those terms.
 //! IKE Structures and Definitions
 use ctypes::wchar_t;
-use shared::basetsd::{UINT8, UINT32, UINT64};
+use shared::basetsd::{UINT32, UINT64, UINT8};
 use shared::fwptypes::{FWP_BYTE_ARRAY16, FWP_BYTE_BLOB, FWP_CONDITION_VALUE0, FWP_IP_VERSION};
 use shared::guiddef::GUID;
 use shared::ipsectypes::IPSEC_V4_UDP_ENCAPSULATION0;

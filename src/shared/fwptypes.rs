@@ -6,7 +6,7 @@
 // except according to those terms.
 //! WFP Structures and Definitions
 use ctypes::{c_double, c_float, wchar_t};
-use shared::basetsd::{UINT8, UINT16, UINT32, UINT64, INT8, INT16, INT32, INT64};
+use shared::basetsd::{INT16, INT32, INT64, INT8, UINT16, UINT32, UINT64, UINT8};
 use shared::minwindef::{DWORD, ULONG};
 use um::winnt::{LPWSTR, PSID_AND_ATTRIBUTES, SID};
 
