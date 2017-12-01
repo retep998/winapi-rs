@@ -102,7 +102,7 @@ interface IDWriteFactory3(IDWriteFactory3Vtbl): IDWriteFactory2(IDWriteFactory2V
         fontSimulations: DWRITE_FONT_SIMULATIONS,
         fontFaceReference: *mut *mut IDWriteFontFaceReference,
     ) -> HRESULT,
-    fn CreateFontFaceReference(
+    fn CreateFontFaceReference_1(
         filePath: *const WCHAR,
         lastWriteTime: *const FILETIME,
         faceIndex: UINT32,
@@ -154,7 +154,7 @@ interface IDWriteFontSet(IDWriteFontSetVtbl): IUnknown(IUnknownVtbl) {
         preferredLocaleNames: *const WCHAR,
         values: *mut *mut IDWriteStringList,
     ) -> HRESULT,
-    fn GetPropertyValues(
+    fn GetPropertyValues_1(
         listIndex: UINT32,
         propertyId: DWRITE_FONT_PROPERTY_ID,
         exists: *mut BOOL,
@@ -171,7 +171,7 @@ interface IDWriteFontSet(IDWriteFontSetVtbl): IUnknown(IUnknownVtbl) {
         fontStyle: DWRITE_FONT_STYLE,
         filteredSet: *mut *mut IDWriteFontSet,
     ) -> HRESULT,
-    fn GetMatchingFonts(
+    fn GetMatchingFonts_1(
         properties: *const DWRITE_FONT_PROPERTY,
         propertyCount: UINT32,
         filteredSet: *mut *mut IDWriteFontSet,
@@ -184,7 +184,7 @@ interface IDWriteFontSetBuilder(IDWriteFontSetBuilderVtbl): IUnknown(IUnknownVtb
         properties: *const DWRITE_FONT_PROPERTY,
         propertyCount: UINT32,
     ) -> HRESULT,
-    fn AddFontFaceReference(
+    fn AddFontFaceReference_1(
         fontFaceReference: *mut IDWriteFontFaceReference,
     ) -> HRESULT,
     fn AddFontSet(
@@ -405,7 +405,7 @@ interface IDWriteGdiInterop1(IDWriteGdiInterop1Vtbl):
         fontFace: *mut IDWriteFontFace,
         fontSignature: *mut FONTSIGNATURE,
     ) -> HRESULT,
-    fn GetFontSignature(
+    fn GetFontSignature_2(
         font: *mut IDWriteFont,
         fontSignature: *mut FONTSIGNATURE,
     ) -> HRESULT,

@@ -165,19 +165,19 @@ interface IDCompositionVisual(IDCompositionVisualVtbl): IUnknown(IUnknownVtbl) {
     fn SetOffsetX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetOffsetX(
+    fn SetOffsetX_1(
         offsetX: c_float,
     ) -> HRESULT,
     fn SetOffsetY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetOffsetY(
+    fn SetOffsetY_1(
         offsetY: c_float,
     ) -> HRESULT,
     fn SetTransform_2(
         transform: *const IDCompositionTransform,
     ) -> HRESULT,
-    fn SetTransform(
+    fn SetTransform_1(
         matrix: *const D2D_MATRIX_3X2_F,
     ) -> HRESULT,
     fn SetTransformParent(
@@ -195,7 +195,7 @@ interface IDCompositionVisual(IDCompositionVisualVtbl): IUnknown(IUnknownVtbl) {
     fn SetClip_2(
         clip: *const IDCompositionClip,
     ) -> HRESULT,
-    fn SetClip(
+    fn SetClip_1(
         rect: *const D2D_RECT_F,
     ) -> HRESULT,
     fn SetContent(
@@ -232,13 +232,13 @@ interface IDCompositionTranslateTransform(IDCompositionTranslateTransformVtbl):
     fn SetOffsetX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetOffsetX(
+    fn SetOffsetX_1(
         offsetX: c_float,
     ) -> HRESULT,
     fn SetOffsetY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetOffsetY(
+    fn SetOffsetY_1(
         offsetY: c_float,
     ) -> HRESULT,
 });
@@ -248,25 +248,25 @@ interface IDCompositionScaleTransform(IDCompositionScaleTransformVtbl):
     fn SetScaleX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetScaleX(
+    fn SetScaleX_1(
         scaleX: c_float,
     ) -> HRESULT,
     fn SetScaleY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetScaleY(
+    fn SetScaleY_1(
         scaleY: c_float,
     ) -> HRESULT,
     fn SetCenterX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCenterX(
+    fn SetCenterX_1(
         centerX: c_float,
     ) -> HRESULT,
     fn SetCenterY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCenterY(
+    fn SetCenterY_1(
         centerY: c_float,
     ) -> HRESULT,
 });
@@ -276,19 +276,19 @@ interface IDCompositionRotateTransform(IDCompositionRotateTransformVtbl):
     fn SetAngle_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetAngle(
+    fn SetAngle_1(
         angle: c_float,
     ) -> HRESULT,
     fn SetCenterX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCenterX(
+    fn SetCenterX_1(
         centerX: c_float,
     ) -> HRESULT,
     fn SetCenterY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCenterY(
+    fn SetCenterY_1(
         centerY: c_float,
     ) -> HRESULT,
 });
@@ -298,25 +298,25 @@ interface IDCompositionSkewTransform(IDCompositionSkewTransformVtbl):
     fn SetAngleX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetAngleX(
+    fn SetAngleX_1(
         angleX: c_float,
     ) -> HRESULT,
     fn SetAngleY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetAngleY(
+    fn SetAngleY_1(
         angleY: c_float,
     ) -> HRESULT,
     fn SetCenterX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCenterX(
+    fn SetCenterX_1(
         centerX: c_float,
     ) -> HRESULT,
     fn SetCenterY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCenterY(
+    fn SetCenterY_1(
         centerY: c_float,
     ) -> HRESULT,
 });
@@ -331,7 +331,7 @@ interface IDCompositionMatrixTransform(IDCompositionMatrixTransformVtbl):
         column: c_int,
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetMatrixElement(
+    fn SetMatrixElement_1(
         row: c_int,
         column: c_int,
         value: c_float,
@@ -343,7 +343,7 @@ interface IDCompositionEffectGroup(IDCompositionEffectGroupVtbl):
     fn SetOpacity_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetOpacity(
+    fn SetOpacity_1(
         opacity: c_float,
     ) -> HRESULT,
     fn SetTransform3D(
@@ -356,19 +356,19 @@ interface IDCompositionTranslateTransform3D(IDCompositionTranslateTransform3DVtb
     fn SetOffsetX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetOffsetX(
+    fn SetOffsetX_1(
         offsetX: c_float,
     ) -> HRESULT,
     fn SetOffsetY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetOffsetY(
+    fn SetOffsetY_1(
         offsetY: c_float,
     ) -> HRESULT,
     fn SetOffsetZ_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetOffsetZ(
+    fn SetOffsetZ_1(
         offsetZ: c_float,
     ) -> HRESULT,
 });
@@ -378,37 +378,37 @@ interface IDCompositionScaleTransform3D(IDCompositionScaleTransform3DVtbl):
     fn SetScaleX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetScaleX(
+    fn SetScaleX_1(
         scaleX: c_float,
     ) -> HRESULT,
     fn SetScaleY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetScaleY(
+    fn SetScaleY_1(
         scaleY: c_float,
     ) -> HRESULT,
     fn SetScaleZ_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetScaleZ(
+    fn SetScaleZ_1(
         scaleZ: c_float,
     ) -> HRESULT,
     fn SetCenterX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCenterX(
+    fn SetCenterX_1(
         centerX: c_float,
     ) -> HRESULT,
     fn SetCenterY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCenterY(
+    fn SetCenterY_1(
         centerY: c_float,
     ) -> HRESULT,
     fn SetCenterZ_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCenterZ(
+    fn SetCenterZ_1(
         centerZ: c_float,
     ) -> HRESULT,
 });
@@ -418,43 +418,43 @@ interface IDCompositionRotateTransform3D(IDCompositionRotateTransform3DVtbl):
     fn SetAngle_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetAngle(
+    fn SetAngle_1(
         angle: c_float,
     ) -> HRESULT,
     fn SetAxisX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetAxisX(
+    fn SetAxisX_1(
         axisX: c_float,
     ) -> HRESULT,
     fn SetAxisY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetAxisY(
+    fn SetAxisY_1(
         axisY: c_float,
     ) -> HRESULT,
     fn SetAxisZ_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetAxisZ(
+    fn SetAxisZ_1(
         axisZ: c_float,
     ) -> HRESULT,
     fn SetCenterX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCenterX(
+    fn SetCenterX_1(
         centerX: c_float,
     ) -> HRESULT,
     fn SetCenterY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCenterY(
+    fn SetCenterY_1(
         centerY: c_float,
     ) -> HRESULT,
     fn SetCenterZ_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCenterZ(
+    fn SetCenterZ_1(
         centerZ: c_float,
     ) -> HRESULT,
 });
@@ -469,7 +469,7 @@ interface IDCompositionMatrixTransform3D(IDCompositionMatrixTransform3DVtbl):
         column: c_int,
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetMatrixElement(
+    fn SetMatrixElement_1(
         row: c_int,
         column: c_int,
         value: c_float,
@@ -484,73 +484,73 @@ interface IDCompositionRectangleClip(IDCompositionRectangleClipVtbl):
     fn SetLeft_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetLeft(
+    fn SetLeft_1(
         left: c_float,
     ) -> HRESULT,
     fn SetTop_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetTop(
+    fn SetTop_1(
         top: c_float,
     ) -> HRESULT,
     fn SetRight_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetRight(
+    fn SetRight_1(
         right: c_float,
     ) -> HRESULT,
     fn SetBottom_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetBottom(
+    fn SetBottom_1(
         bottom: c_float,
     ) -> HRESULT,
     fn SetTopLeftRadiusX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetTopLeftRadiusX(
+    fn SetTopLeftRadiusX_1(
         radius: c_float,
     ) -> HRESULT,
     fn SetTopLeftRadiusY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetTopLeftRadiusY(
+    fn SetTopLeftRadiusY_1(
         radius: c_float,
     ) -> HRESULT,
     fn SetTopRightRadiusX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetTopRightRadiusX(
+    fn SetTopRightRadiusX_1(
         radius: c_float,
     ) -> HRESULT,
     fn SetTopRightRadiusY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetTopRightRadiusY(
+    fn SetTopRightRadiusY_1(
         radius: c_float,
     ) -> HRESULT,
     fn SetBottomLeftRadiusX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetBottomLeftRadiusX(
+    fn SetBottomLeftRadiusX_1(
         radius: c_float,
     ) -> HRESULT,
     fn SetBottomLeftRadiusY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetBottomLeftRadiusY(
+    fn SetBottomLeftRadiusY_1(
         radius: c_float,
     ) -> HRESULT,
     fn SetBottomRightRadiusX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetBottomRightRadiusX(
+    fn SetBottomRightRadiusX_1(
         radius: c_float,
     ) -> HRESULT,
     fn SetBottomRightRadiusY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetBottomRightRadiusY(
+    fn SetBottomRightRadiusY_1(
         radius: c_float,
     ) -> HRESULT,
 });
@@ -727,19 +727,19 @@ interface IDCompositionVisual3(IDCompositionVisual3Vtbl):
     fn SetOffsetZ_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetOffsetZ(
+    fn SetOffsetZ_1(
         offsetZ: c_float,
     ) -> HRESULT,
     fn SetOpacity_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetOpacity(
+    fn SetOpacity_1(
         opacity: c_float,
     ) -> HRESULT,
     fn SetTransform_2(
         transform: *const IDCompositionTransform3D,
     ) -> HRESULT,
-    fn SetTransform(
+    fn SetTransform_1(
         matrix: *const D2D_MATRIX_4X4_F,
     ) -> HRESULT,
     fn SetVisible(
@@ -804,7 +804,7 @@ interface IDCompositionGaussianBlurEffect(IDCompositionGaussianBlurEffectVtbl):
     fn SetStandardDeviation_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetStandardDeviation(
+    fn SetStandardDeviation_1(
         amount: c_float,
     ) -> HRESULT,
     fn SetBorderMode(
@@ -823,25 +823,25 @@ interface IDCompositionBrightnessEffect(IDCompositionBrightnessEffectVtbl):
     fn SetWhitePointX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetWhitePointX(
+    fn SetWhitePointX_1(
         whitePointX: c_float,
     ) -> HRESULT,
     fn SetWhitePointY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetWhitePointY(
+    fn SetWhitePointY_1(
         whitePointY: c_float,
     ) -> HRESULT,
     fn SetBlackPointX_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetBlackPointX(
+    fn SetBlackPointX_1(
         blackPointX: c_float,
     ) -> HRESULT,
     fn SetBlackPointY_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetBlackPointY(
+    fn SetBlackPointY_1(
         blackPointY: c_float,
     ) -> HRESULT,
 });
@@ -856,7 +856,7 @@ interface IDCompositionColorMatrixEffect(IDCompositionColorMatrixEffectVtbl):
         column: c_int,
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetMatrixElement(
+    fn SetMatrixElement_1(
         row: c_int,
         column: c_int,
         value: c_float,
@@ -874,7 +874,7 @@ interface IDCompositionShadowEffect(IDCompositionShadowEffectVtbl):
     fn SetStandardDeviation_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetStandardDeviation(
+    fn SetStandardDeviation_1(
         amount: c_float,
     ) -> HRESULT,
     fn SetColor(
@@ -883,25 +883,25 @@ interface IDCompositionShadowEffect(IDCompositionShadowEffectVtbl):
     fn SetRed_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetRed(
+    fn SetRed_1(
         amount: c_float,
     ) -> HRESULT,
     fn SetGreen_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetGreen(
+    fn SetGreen_1(
         amount: c_float,
     ) -> HRESULT,
     fn SetBlue_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetBlue(
+    fn SetBlue_1(
         amount: c_float,
     ) -> HRESULT,
     fn SetAlpha_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetAlpha(
+    fn SetAlpha_1(
         amount: c_float,
     ) -> HRESULT,
 });
@@ -912,7 +912,7 @@ interface IDCompositionHueRotationEffect(IDCompositionHueRotationEffectVtbl):
     fn SetAngle_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetAngle(
+    fn SetAngle_1(
         amountDegrees: c_float,
     ) -> HRESULT,
 });
@@ -923,7 +923,7 @@ interface IDCompositionSaturationEffect(IDCompositionSaturationEffectVtbl):
     fn SetSaturation_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetSaturation(
+    fn SetSaturation_1(
         ratio: c_float,
     ) -> HRESULT,
 });
@@ -958,13 +958,13 @@ interface IDCompositionLinearTransferEffect(IDCompositionLinearTransferEffectVtb
     fn SetRedYIntercept_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetRedYIntercept(
+    fn SetRedYIntercept_1(
         redYIntercept: c_float,
     ) -> HRESULT,
     fn SetRedSlope_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetRedSlope(
+    fn SetRedSlope_1(
         redSlope: c_float,
     ) -> HRESULT,
     fn SetRedDisable(
@@ -973,13 +973,13 @@ interface IDCompositionLinearTransferEffect(IDCompositionLinearTransferEffectVtb
     fn SetGreenYIntercept_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetGreenYIntercept(
+    fn SetGreenYIntercept_1(
         greenYIntercept: c_float,
     ) -> HRESULT,
     fn SetGreenSlope_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetGreenSlope(
+    fn SetGreenSlope_1(
         greenSlope: c_float,
     ) -> HRESULT,
     fn SetGreenDisable(
@@ -988,13 +988,13 @@ interface IDCompositionLinearTransferEffect(IDCompositionLinearTransferEffectVtb
     fn SetBlueYIntercept_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetBlueYIntercept(
+    fn SetBlueYIntercept_1(
         blueYIntercept: c_float,
     ) -> HRESULT,
     fn SetBlueSlope_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetBlueSlope(
+    fn SetBlueSlope_1(
         blueSlope: c_float,
     ) -> HRESULT,
     fn SetBlueDisable(
@@ -1003,13 +1003,13 @@ interface IDCompositionLinearTransferEffect(IDCompositionLinearTransferEffectVtb
     fn SetAlphaYIntercept_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetAlphaYIntercept(
+    fn SetAlphaYIntercept_1(
         alphaYIntercept: c_float,
     ) -> HRESULT,
     fn SetAlphaSlope_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetAlphaSlope(
+    fn SetAlphaSlope_1(
         alphaSlope: c_float,
     ) -> HRESULT,
     fn SetAlphaDisable(
@@ -1057,7 +1057,7 @@ interface IDCompositionTableTransferEffect(IDCompositionTableTransferEffectVtbl)
         index: UINT,
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetRedTableValue(
+    fn SetRedTableValue_1(
         index: UINT,
         value: c_float,
     ) -> HRESULT,
@@ -1065,7 +1065,7 @@ interface IDCompositionTableTransferEffect(IDCompositionTableTransferEffectVtbl)
         index: UINT,
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetGreenTableValue(
+    fn SetGreenTableValue_1(
         index: UINT,
         value: c_float,
     ) -> HRESULT,
@@ -1073,7 +1073,7 @@ interface IDCompositionTableTransferEffect(IDCompositionTableTransferEffectVtbl)
         index: UINT,
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetBlueTableValue(
+    fn SetBlueTableValue_1(
         index: UINT,
         value: c_float,
     ) -> HRESULT,
@@ -1081,7 +1081,7 @@ interface IDCompositionTableTransferEffect(IDCompositionTableTransferEffectVtbl)
         index: UINT,
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetAlphaTableValue(
+    fn SetAlphaTableValue_1(
         index: UINT,
         value: c_float,
     ) -> HRESULT,
@@ -1112,25 +1112,25 @@ interface IDCompositionArithmeticCompositeEffect(IDCompositionArithmeticComposit
     fn SetCoefficient1_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCoefficient1(
+    fn SetCoefficient1_1(
         Coeffcient1: c_float,
     ) -> HRESULT,
     fn SetCoefficient2_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCoefficient2(
+    fn SetCoefficient2_1(
         Coefficient2: c_float,
     ) -> HRESULT,
     fn SetCoefficient3_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCoefficient3(
+    fn SetCoefficient3_1(
         Coefficient3: c_float,
     ) -> HRESULT,
     fn SetCoefficient4_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetCoefficient4(
+    fn SetCoefficient4_1(
         Coefficient4: c_float,
     ) -> HRESULT,
 });
@@ -1151,7 +1151,7 @@ interface IDCompositionAffineTransform2DEffect(IDCompositionAffineTransform2DEff
         column: c_int,
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetTransformMatrixElement(
+    fn SetTransformMatrixElement_1(
         row: c_int,
         column: c_int,
         value: c_float,
@@ -1159,7 +1159,7 @@ interface IDCompositionAffineTransform2DEffect(IDCompositionAffineTransform2DEff
     fn SetSharpness_2(
         animation: *const IDCompositionAnimation,
     ) -> HRESULT,
-    fn SetSharpness(
+    fn SetSharpness_1(
         sharpness: c_float,
     ) -> HRESULT,
 });

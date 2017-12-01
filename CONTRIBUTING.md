@@ -266,5 +266,6 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
     * If the duplicated thing is a struct or COM interface or union, then choose one header to be
       the canonical source of truth for that definition and publicly re-export the thing from the
       other header.
-* Sometimes a COM interface will have two methods with identical names. If the two methods are both
-  named `Foo`, then name them `Foo1` and `Foo2`.
+* Sometimes a COM interface will have two methods with identical names (an overloaded method). If
+  the two methods are both named `Foo`, then name them `Foo_1` and `Foo_2`. In addition,
+  overloaded methods must appear in *reverse* order to comply with the COM binary interface.
