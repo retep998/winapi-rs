@@ -268,4 +268,5 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
       other header.
 * Sometimes a COM interface will have two methods with identical names (an overloaded method). If
   the two methods are both named `Foo`, then name them `Foo_1` and `Foo_2`. In addition,
-  overloaded methods must appear in *reverse* order to comply with the COM binary interface.
+  overloaded methods must appear in *reverse* order to comply with the COM binary interface. See
+  #523 for more details.

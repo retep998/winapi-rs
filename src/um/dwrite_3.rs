@@ -405,7 +405,7 @@ interface IDWriteGdiInterop1(IDWriteGdiInterop1Vtbl):
         fontFace: *mut IDWriteFontFace,
         fontSignature: *mut FONTSIGNATURE,
     ) -> HRESULT,
-    fn GetFontSignature_2(
+    fn GetFontSignature_1(
         font: *mut IDWriteFont,
         fontSignature: *mut FONTSIGNATURE,
     ) -> HRESULT,
