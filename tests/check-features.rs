@@ -66,7 +66,7 @@ fn check_features_in_cargo_file(errors: &mut u32) {
         if line.is_empty() {
             break
         }
-        let feature_name = line.split(" ").next().unwrap();
+        let feature_name = line.split(" ").next().unwrap().replace("\"", "");
         if features.is_empty() {
             features.push(Vec::new());
         }
