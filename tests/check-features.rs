@@ -5,9 +5,35 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::fs::{File, read_dir};
+use std::fs::{read_dir, File};
 use std::io::{self, Read, Write};
 use std::path::Path;
+
+fn get_between_quotes(s: &str) -> &str {
+    s.split('"').skip(1).next().unwrap_or("")
+}
+
+fn get_libs() -> Vec<String> {
+    let content = read_file("build.rs");
+    let mut inside = false;
+    let mut files_deps = Vec::new();
+    for line in content.lines() {
+        let line = line.trim_left();
+        if !inside && line.starts_with("const DATA: ") {
+            inside = true;
+        } else if inside == true {
+            let line = line.trim_left();
+            if line.starts_with("//") {
+                continue
+            } else if !line.starts_with("(\"") {
+                break
+            }
+            let parts: Vec<&str> = line.split("&[").collect();
+            files_deps.push(get_between_quotes(parts[0]).to_owned());
+        }
+    }
+    files_deps
+}
 
 fn read_file<P: AsRef<Path>>(p: P) -> String {
     let mut f = File::open(p).expect("read_file::open failed");
@@ -19,7 +45,7 @@ fn read_file<P: AsRef<Path>>(p: P) -> String {
 fn check_feature_sorting<P: AsRef<Path>>(
     p: P,
     errors: &mut u32
-) {
+) -> Vec<String> {
     let r_p = p.as_ref();
     let s_path = r_p.to_str().unwrap();
     let file_content = read_file(r_p);
@@ -43,9 +69,10 @@ fn check_feature_sorting<P: AsRef<Path>>(
             }
         }
     }
+    features.into_iter().map(|e| e.1).collect()
 }
 
-fn check_features_in_cargo_file(errors: &mut u32) {
+fn check_features_in_cargo_file(errors: &mut u32) -> Vec<String> {
     let file_content = read_file("Cargo.toml");
     let mut features: Vec<Vec<(usize, String, String)>> = Vec::new();
     let mut inside = false;
@@ -87,6 +114,42 @@ fn check_features_in_cargo_file(errors: &mut u32) {
             }
         }
     }
+    features.into_iter().flat_map(|e| e.into_iter().map(|el| el.1)).collect()
+}
+
+fn check_missing_features_in_cargo_file(build_features: &[String],
+                                        cargo_features: &[String],
+                                        errors: &mut u32) {
+    const FEATURES_TO_IGNORE: &'static [&'static str] = &["std", "everything"];
+    let mut it1 = 0;
+    let mut it2 = 0;
+
+    while it1 < build_features.len() && it2 < cargo_features.len() {
+        if build_features[it1] == cargo_features[it2] {
+            it1 += 1;
+            it2 += 1;
+            continue
+        } else if FEATURES_TO_IGNORE.iter().any(|e| *e == &cargo_features[it2]) {
+            it2 += 1;
+            continue
+        } else if build_features[it1] < cargo_features[it2] {
+            writeln!(&mut io::stderr(),
+                     "Missing feature \"{}\" in `Cargo.toml`",
+                     build_features[it1]).unwrap();
+            *errors += 1;
+            while it1 < build_features.len() && build_features[it1] < cargo_features[it2] {
+                it1 += 1;
+            }
+        } else {
+            writeln!(&mut io::stderr(),
+                     "Extra feature in `Cargo.toml`: \"{}\"",
+                     cargo_features[it2]).unwrap();
+            *errors += 1;
+            while it2 < cargo_features.len() && build_features[it1] > cargo_features[it2] {
+                it2 += 1;
+            }
+        }
+    }
 }
 
 fn read_dirs<P: AsRef<Path>>(
@@ -108,6 +171,14 @@ fn read_dirs<P: AsRef<Path>>(
 fn check_imports_sorting() {
     let mut errors = 0;
     read_dirs("src", &mut errors);
-    check_features_in_cargo_file(&mut errors);
+    let mut cargo_features = check_features_in_cargo_file(&mut errors);
+    if errors == 0 {
+        // No need to check for missing features in here since we have sorting issues. Outcome would
+        // be chaotic.
+        cargo_features.sort();
+        let mut build_features: Vec<String> = get_libs();
+        build_features.sort();
+        check_missing_features_in_cargo_file(&build_features, &cargo_features, &mut errors);
+    }
     assert!(errors == 0, "Not sorted feature(s) found");
 }
