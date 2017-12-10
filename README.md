@@ -17,7 +17,7 @@ This branch is for winapi 0.3 which is a work in progress rewrite and as such is
 Cargo.toml:
 ```toml
 [target.'cfg(windows)'.dependencies]
-winapi = "0.3"
+winapi = { version = "0.3", features = ["winuser"] }
 ```
 main.rs:
 ```Rust
