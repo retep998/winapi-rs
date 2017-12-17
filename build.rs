@@ -158,6 +158,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("ioapiset", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("jobapi", &["minwindef", "winnt"], &["kernel32"]),
     ("jobapi2", &["basetsd", "minwinbase", "minwindef", "ntdef", "winnt"], &["kernel32"]),
+    ("knownfolders", &[], &[]),
     ("ktmw32", &["guiddef", "minwinbase", "minwindef", "winnt"], &["ktmw32"]),
     ("libloaderapi", &["basetsd", "minwindef", "winnt"], &["kernel32", "user32"]),
     ("lmaccess", &["basetsd", "lmcons", "minwindef", "winnt"], &["netapi32"]),
