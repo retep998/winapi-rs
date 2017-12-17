@@ -5,9 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use ctypes::c_uint;
-pub type LPUINT = *mut c_uint;
-use shared::minwindef::{DWORD, BOOL, UINT};
+use shared::minwindef::{BOOL, DWORD, UINT};
 use shared::windef::{HWND, POINT, RECT};
+pub type LPUINT = *mut c_uint;
 STRUCT!{struct COMPOSITIONFORM {
     dwStyle: DWORD,
     ptCurrentPos: POINT,
