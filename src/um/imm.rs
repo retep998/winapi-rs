@@ -16,11 +16,11 @@ STRUCT!{struct COMPOSITIONFORM {
 DECLARE_HANDLE!(HIMC, HIMC__);
 pub type LPCOMPOSITIONFORM = *mut COMPOSITIONFORM;
 extern "system"  {
-	pub fn ImmGetContext(hwnd: HWND) -> HIMC;
-	pub fn ImmGetOpenStatus(himc: HIMC) -> BOOL;
-	pub fn ImmSetOpenStatus(himc: HIMC, fopen: BOOL) -> BOOL;
-	pub fn ImmSetCompositionWindow(himc: HIMC, lpCompForm: LPCOMPOSITIONFORM) -> BOOL;
-	pub fn ImmReleaseContext(hwnd: HWND, himc: HIMC) -> BOOL;
+    pub fn ImmGetContext(hwnd: HWND) -> HIMC;
+    pub fn ImmGetOpenStatus(himc: HIMC) -> BOOL;
+    pub fn ImmSetOpenStatus(himc: HIMC, fopen: BOOL) -> BOOL;
+    pub fn ImmSetCompositionWindow(himc: HIMC, lpCompForm: LPCOMPOSITIONFORM) -> BOOL;
+    pub fn ImmReleaseContext(hwnd: HWND, himc: HIMC) -> BOOL;
 }
 pub const CFS_DEFAULT: UINT = 0x0000;
 pub const CFS_RECT: UINT = 0x0001;
