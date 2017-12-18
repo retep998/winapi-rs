@@ -17,8 +17,8 @@ features = ["everything"]
 default-target = "x86_64-pc-windows-msvc"
 
 [badges]
-travis-ci = { repository = "retep998/winapi-rs", branch = "0.3.2" }
-appveyor = { repository = "retep998/winapi-rs", branch = "0.3.2", service = "github" }
+travis-ci = { repository = "retep998/winapi-rs", tag = "0.3.2" }
+appveyor = { repository = "retep998/winapi-rs", tag = "0.3.2", service = "github" }
 
 [target.i686-pc-windows-gnu.dependencies]
 winapi-i686-pc-windows-gnu = { version = "0.3", path = "i686" }
