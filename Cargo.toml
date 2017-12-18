@@ -1,6 +1,6 @@
 [package]
 name = "winapi"
-version = "0.3.0-alpha.0"
+version = "0.3.0"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 license = "MIT/Apache-2.0"
 description = "Raw FFI bindings for all of Windows API."
@@ -17,8 +17,8 @@ features = ["everything"]
 default-target = "x86_64-pc-windows-msvc"
 
 [badges]
-travis-ci = { repository = "retep998/winapi-rs", branch = "master" }
-appveyor = { repository = "retep998/winapi-rs", branch = "master", service = "github" }
+travis-ci = { repository = "retep998/winapi-rs", branch = "0.3.0" }
+appveyor = { repository = "retep998/winapi-rs", branch = "0.3.0", service = "github" }
 
 [target.i686-pc-windows-gnu.dependencies]
 winapi-i686-pc-windows-gnu = { version = "0.3", path = "i686" }
