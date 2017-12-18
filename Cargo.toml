@@ -1,10 +1,10 @@
 [package]
 name = "winapi"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 license = "MIT/Apache-2.0"
 description = "Raw FFI bindings for all of Windows API."
-documentation = "https://retep998.github.io/doc/winapi/"
+documentation = "https://docs.rs/winapi/0.3.1/winapi/"
 repository = "https://github.com/retep998/winapi-rs"
 readme = "README.md"
 keywords = ["windows", "ffi", "win32", "com", "directx"]
