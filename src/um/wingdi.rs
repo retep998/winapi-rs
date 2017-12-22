@@ -596,7 +596,7 @@ STRUCT!{#[debug] struct BITMAPCOREINFO {
 }}
 pub type LPBITMAPCOREINFO = *mut BITMAPCOREINFO;
 pub type PBITMAPCOREINFO = *mut BITMAPCOREINFO;
-STRUCT!{#[debug] struct BITMAPFILEHEADER {
+STRUCT!{ #debug] #[repr(packed)] struct BITMAPFILEHEADER {
     bfType: WORD,
     bfSize: DWORD,
     bfReserved1: WORD,
