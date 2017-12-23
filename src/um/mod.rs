@@ -94,6 +94,7 @@ pub mod gl;
 #[cfg(feature = "jobapi")] pub mod jobapi;
 #[cfg(feature = "jobapi2")] pub mod jobapi2;
 #[cfg(feature = "joystickapi")] pub mod joystickapi;
+#[cfg(feature = "knownfolders")] pub mod knownfolders;
 #[cfg(feature = "ktmw32")] pub mod ktmw32;
 #[cfg(feature = "libloaderapi")] pub mod libloaderapi;
 #[cfg(feature = "lmaccess")] pub mod lmaccess;
