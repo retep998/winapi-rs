@@ -197,6 +197,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("ntsecapi", &["basetsd", "guiddef", "lsalookup", "minwindef", "ntdef", "sspi", "subauth", "winnt"], &["advapi32"]),
     ("oaidl", &["basetsd", "guiddef", "minwindef", "objidlbase", "rpcndr", "unknwnbase", "winnt", "wtypes", "wtypesbase"], &[]),
     ("objbase", &["combaseapi", "minwindef", "winnt"], &["ole32"]),
+    ("objectarray", &["guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("objidl", &["basetsd", "guiddef", "minwindef", "objidlbase", "rpcndr", "unknwnbase", "windef", "winnt", "wtypes", "wtypesbase"], &[]),
     ("objidlbase", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
     ("ocidl", &["basetsd", "guiddef", "minwindef", "oaidl", "objidl", "objidlbase", "oleidl", "servprov", "unknwnbase", "urlmon", "windef", "wingdi", "winnt", "winuser", "wtypes", "wtypesbase"], &[]),

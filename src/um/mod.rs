@@ -131,6 +131,7 @@ pub mod gl;
 #[cfg(feature = "ntsecapi")] pub mod ntsecapi;
 #[cfg(feature = "oaidl")] pub mod oaidl;
 #[cfg(feature = "objbase")] pub mod objbase;
+#[cfg(feature = "objectarray")] pub mod objectarray;
 #[cfg(feature = "objidl")] pub mod objidl;
 #[cfg(feature = "objidlbase")] pub mod objidlbase;
 #[cfg(feature = "ocidl")] pub mod ocidl;
