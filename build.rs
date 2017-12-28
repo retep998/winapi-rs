@@ -258,7 +258,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("tlhelp32", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("unknwnbase", &["guiddef", "minwindef", "winnt"], &[]),
     ("urlhist", &["docobj", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
-    ("urlmon", &["minwindef", "unknwnbase", "winnt"], &[]),
+    ("urlmon", &["basetsd", "guiddef", "minwinbase", "minwindef", "msxml", "objidl", "objidlbase", "servprov", "unknwnbase", "windef", "winnt", "wtypes", "wtypesbase"], &["urlmon"]),
     ("userenv", &["minwindef", "winnt"], &["userenv"]),
     ("usp10", &["minwindef", "ntdef", "windef", "winerror", "wingdi", "winnt"], &["usp10"]),
     ("utilapiset", &["minwindef", "ntdef"], &["kernel32"]),
