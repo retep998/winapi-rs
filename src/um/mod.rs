@@ -136,6 +136,7 @@ pub mod gl;
 #[cfg(feature = "objidlbase")] pub mod objidlbase;
 #[cfg(feature = "objsafe")] pub mod objsafe;
 #[cfg(feature = "ocidl")] pub mod ocidl;
+#[cfg(feature = "ocmm")] pub mod ocmm;
 #[cfg(feature = "oleauto")] pub mod oleauto;
 #[cfg(feature = "olectl")] pub mod olectl;
 #[cfg(feature = "oleidl")] pub mod oleidl;
