@@ -134,6 +134,7 @@ pub mod gl;
 #[cfg(feature = "ocidl")] pub mod ocidl;
 #[cfg(feature = "oleauto")] pub mod oleauto;
 #[cfg(feature = "olectl")] pub mod olectl;
+#[cfg(feature = "oleidl")] pub mod oleidl;
 #[cfg(feature = "pdh")] pub mod pdh;
 #[cfg(feature = "playsoundapi")] pub mod playsoundapi;
 #[cfg(feature = "powerbase")] pub mod powerbase;
