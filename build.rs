@@ -200,6 +200,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("objectarray", &["guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("objidl", &["basetsd", "guiddef", "minwindef", "objidlbase", "rpcndr", "unknwnbase", "windef", "winnt", "wtypes", "wtypesbase"], &[]),
     ("objidlbase", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
+    ("objsafe", &["guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("ocidl", &["basetsd", "guiddef", "minwindef", "oaidl", "objidl", "objidlbase", "oleidl", "servprov", "unknwnbase", "urlmon", "windef", "wingdi", "winnt", "winuser", "wtypes", "wtypesbase"], &[]),
     ("oleauto", &["basetsd", "minwinbase", "minwindef", "oaidl", "winnt", "wtypes", "wtypesbase"], &["oleaut32"]),
     ("olectl", &["winerror", "winnt"], &[]),
