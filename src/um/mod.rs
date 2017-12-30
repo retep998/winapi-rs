@@ -186,6 +186,7 @@ pub mod gl;
 #[cfg(feature = "sspi")] pub mod sspi;
 #[cfg(feature = "stringapiset")] pub mod stringapiset;
 #[cfg(feature = "strmif")] pub mod strmif;
+#[cfg(feature = "structuredquerycondition")] pub mod structuredquerycondition;
 #[cfg(feature = "subauth")] pub mod subauth;
 #[cfg(feature = "synchapi")] pub mod synchapi;
 #[cfg(feature = "sysinfoapi")] pub mod sysinfoapi;
