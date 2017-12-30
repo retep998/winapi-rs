@@ -242,7 +242,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("shlobj", &["guiddef", "minwinbase", "minwindef", "shtypes", "windef", "winnt"], &["shell32"]),
     ("shobjidl", &["guiddef", "minwindef", "objidl", "propkeydef", "propsys", "shobjidl_core", "shtypes", "unknwnbase", "windef", "winnt"], &[]),
     ("shobjidl_core", &["guiddef", "minwindef", "objidl", "unknwnbase", "windef", "winnt"], &[]),
-    ("shtypes", &["guiddef", "minwindef", "winnt"], &[]),
+    ("shtypes", &["guiddef", "minwindef", "winnt", "wtypes", "wtypesbase"], &[]),
     ("spapidef", &["minwindef", "winnt"], &[]),
     ("sporder", &["guiddef", "minwindef"], &["sporder"]),
     ("sql", &["sqltypes"], &["odbc32"]),
