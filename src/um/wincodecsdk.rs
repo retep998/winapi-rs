@@ -12,7 +12,7 @@ use um::oaidl::LPSAFEARRAY;
 use um::objidl::{IPersistStream, IPersistStreamVtbl};
 use um::objidlbase::{IEnumUnknown, IStream};
 use um::ocidl::{IPropertyBag2, PROPBAG2};
-use um::propidl::PROPVARIANT;
+use um::propidlbase::PROPVARIANT;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::wincodec::{
     IWICComponentInfo, IWICComponentInfoVtbl, IWICEnumMetadataItem, IWICImagingFactory,

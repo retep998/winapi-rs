@@ -152,6 +152,7 @@ pub mod gl;
 #[cfg(feature = "processtopologyapi")] pub mod processtopologyapi;
 #[cfg(feature = "profileapi")] pub mod profileapi;
 #[cfg(feature = "propidl")] pub mod propidl;
+#[cfg(feature = "propidlbase")] pub mod propidlbase;
 #[cfg(feature = "propkeydef")] pub mod propkeydef;
 #[cfg(feature = "propsys")] pub mod propsys;
 #[cfg(feature = "prsht")] pub mod prsht;
