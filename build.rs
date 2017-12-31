@@ -237,6 +237,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("securitybaseapi", &["minwindef", "winnt"], &["advapi32", "kernel32"]),
     ("servprov", &["guiddef", "unknwnbase", "winnt"], &[]),
     ("setupapi", &["basetsd", "commctrl", "devpropdef", "guiddef", "minwindef", "prsht", "spapidef", "windef", "winnt", "winreg"], &["setupapi"]),
+    ("shdispid", &["oaidl"], &[]),
     ("shellapi", &["basetsd", "guiddef", "minwinbase", "minwindef", "processthreadsapi", "windef", "winnt", "winuser"], &["shell32", "shlwapi"]),
     ("shellscalingapi", &["minwindef", "windef", "winnt"], &["shcore"]),
     ("shlguid", &["minwindef"], &[]),

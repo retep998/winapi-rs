@@ -171,6 +171,7 @@ pub mod gl;
 #[cfg(feature = "securitybaseapi")] pub mod securitybaseapi;
 #[cfg(feature = "servprov")] pub mod servprov;
 #[cfg(feature = "setupapi")] pub mod setupapi;
+#[cfg(feature = "shdispid")] pub mod shdispid;
 #[cfg(feature = "shellapi")] pub mod shellapi;
 #[cfg(feature = "shellscalingapi")] pub mod shellscalingapi;
 #[cfg(feature = "shlguid")] pub mod shlguid;
