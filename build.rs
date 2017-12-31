@@ -244,7 +244,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("shldisp", &["minwindef", "oaidl", "objidl", "objidlbase", "unknwnbase", "windef", "winnt", "wtypes"], &[]),
     ("shlguid", &["minwindef"], &[]),
     ("shlobj", &["guiddef", "minwinbase", "minwindef", "shtypes", "windef", "winnt"], &["shell32"]),
-    ("shobjidl", &["guiddef", "minwindef", "objidl", "propkeydef", "propsys", "shobjidl_core", "shtypes", "unknwnbase", "windef", "winnt"], &[]),
+    ("shobjidl", &["combaseapi", "commctrl", "guiddef", "minwinbase", "minwindef", "msxml", "oaidl", "objidl", "objidlbase", "propsys", "prsht", "shobjidl_core", "shtypes", "unknwnbase", "windef", "winerror", "wingdi", "winnt", "wtypes"], &["shell32"]),
     ("shobjidl_core", &["basetsd", "cguid", "combaseapi", "comcat", "commctrl", "guiddef", "minwinbase", "minwindef", "oaidl", "objectarray", "objidl", "objidlbase", "oleidl", "propidl", "propkeydef", "propsys", "prsht", "servprov", "shellapi", "shlobj", "shtypes", "structuredquerycondition", "unknwnbase", "winbase", "windef", "winerror", "wingdi", "winnt", "winuser", "wtypes", "wtypesbase"], &["shell32"]),
     ("shtypes", &["guiddef", "minwindef", "winnt", "wtypes", "wtypesbase"], &[]),
     ("spapidef", &["minwindef", "winnt"], &[]),
