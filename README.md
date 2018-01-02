@@ -18,7 +18,15 @@ Use `std::mem::zeroed()` to create an instance of the union, and then assign the
 
 ### Why am I getting errors about unresolved imports?
 
-Each module is gated on a feature flag, so you must enable the appropriate feature to gain access to those items. For example if you want to use something from `winapi::um::winuser` you must enable the `winuser` feature.
+Each module is gated on a feature flag, so you must enable the appropriate feature to gain access to those items. For example, if you want to use something from `winapi::um::winuser` you must enable the `winuser` feature.
+
+### How do I know which module an item is defined in?
+
+You can use the search functionality in the [documentation](https://docs.rs/winapi/*/x86_64-pc-windows-msvc/winapi/) to find where items are defined.
+
+### Why is there no documentation on how to use anything?
+
+This crate is nothing more than raw bindings to Windows API. If you wish to know how to use the various functionality in Windows API, you can look up the various items on MSDN which is full of detailed documentation.
 
 ## Example ##
 
