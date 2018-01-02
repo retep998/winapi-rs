@@ -10,6 +10,16 @@ If this crate is missing something you need, feel free to create an issue, open 
 
 This crate depends on Rust 1.6 or newer on Windows. On other platforms this crate is a no-op and should compile with Rust 1.2 or newer.
 
+## Frequently asked questions ##
+
+### How do I create an instance of a union?
+
+Use `std::mem::zeroed()` to create an instance of the union, and then assign the value you want using one of the variant methods.
+
+### Why am I getting errors about unresolved imports?
+
+Each module is gated on a feature flag, so you must enable the appropriate feature to gain access to those items. For example if you want to use something from `winapi::um::winuser` you must enable the `winuser` feature.
+
 ## Example ##
 
 Cargo.toml:
