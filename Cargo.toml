@@ -26,6 +26,7 @@ winapi-i686-pc-windows-gnu = { version = "0.3", path = "i686" }
 winapi-x86_64-pc-windows-gnu = { version = "0.3", path = "x86_64" }
 
 [features]
+debug = []
 everything = []
 std = []
 #km

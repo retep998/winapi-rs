@@ -340,6 +340,9 @@ macro_rules! ENUM {
 }
 #[macro_export]
 macro_rules! STRUCT {
+    (#[debug] $($rest:tt)*) => (
+        STRUCT!{#[cfg_attr(feature = "debug", derive(Debug))] $($rest)*}
+    );
     ($(#[$attrs:meta])* struct $name:ident {
         $($field:ident: $ftype:ty,)+
     }) => (
