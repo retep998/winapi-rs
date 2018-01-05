@@ -401,7 +401,7 @@ STRUCT!{struct BITMAP {
 pub type PBITMAP = *mut BITMAP;
 pub type NPBITMAP = *mut BITMAP;
 pub type LPBITMAP = *mut BITMAP;
-STRUCT!{struct RGBTRIPLE {
+STRUCT!{#[debug] struct RGBTRIPLE {
     rgbtBlue: BYTE,
     rgbtGreen: BYTE,
     rgbtRed: BYTE,
@@ -409,7 +409,7 @@ STRUCT!{struct RGBTRIPLE {
 pub type PRGBTRIPLE = *mut RGBTRIPLE;
 pub type NPRGBTRIPLE = *mut RGBTRIPLE;
 pub type LPRGBTRIPLE = *mut RGBTRIPLE;
-STRUCT!{struct RGBQUAD {
+STRUCT!{#[debug] struct RGBQUAD {
     rgbBlue: BYTE,
     rgbGreen: BYTE,
     rgbRed: BYTE,
@@ -474,7 +474,7 @@ STRUCT!{#[debug] struct CIEXYZTRIPLE {
     ciexyzBlue: CIEXYZ,
 }}
 pub type LPCIEXYZTRIPLE = *mut CIEXYZTRIPLE;
-STRUCT!{#[debug] struct LOGCOLORSPACEA {
+STRUCT!{struct LOGCOLORSPACEA {
     lcsSignature: DWORD,
     lcsVersion: DWORD,
     lcsSize: DWORD,
@@ -487,7 +487,7 @@ STRUCT!{#[debug] struct LOGCOLORSPACEA {
     lcsFilename: [CHAR; MAX_PATH],
 }}
 pub type LPLOGCOLORSPACEA = *mut LOGCOLORSPACEA;
-STRUCT!{#[debug] struct LOGCOLORSPACEW {
+STRUCT!{struct LOGCOLORSPACEW {
     lcsSignature: DWORD,
     lcsVersion: DWORD,
     lcsSize: DWORD,
