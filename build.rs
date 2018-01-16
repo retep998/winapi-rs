@@ -1,4 +1,4 @@
-// Copyright © 2016-2017 winapi-rs developers
+// Copyright © 2016-2018 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -370,9 +370,27 @@ impl Graph {
         }).flat_map(|(_, header)| {
             header.libraries.iter()
         }).collect::<HashSet<_>>();
+        let prefix = library_prefix();
+        let kind = library_kind();
         for lib in libs {
-            println!("cargo:rustc-link-lib=dylib={}", lib);
+            println!("cargo:rustc-link-lib={}={}{}", kind, prefix, lib);
         }
+    }
+}
+fn library_prefix() -> &'static str {
+    if var("TARGET").map(|target|
+        target == "i686-pc-windows-gnu" || target == "x86_64-pc-windows-gnu"
+    ).unwrap_or(false) && var("WINAPI_NO_BUNDLED_LIBRARIES").is_err() {
+        "winapi_"
+    } else {
+        ""
+    }
+}
+fn library_kind() -> &'static str {
+    if var("WINAPI_STATIC_NOBUNDLE").is_ok() {
+        "static-nobundle"
+    } else {
+        "dylib"
     }
 }
 fn try_everything() {
@@ -384,6 +402,8 @@ fn try_everything() {
     graph.emit_libraries();
 }
 fn main() {
+    println!("cargo:rerun-if-env-changed=WINAPI_NO_BUNDLED_LIBRARIES");
+    println!("cargo:rerun-if-env-changed=WINAPI_STATIC_NOBUNDLE");
     let target = var("TARGET").unwrap();
     let target: Vec<_> = target.split('-').collect();
     if target.get(2) == Some(&"windows") {
