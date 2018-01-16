@@ -1,6 +1,3 @@
 LIBRARY api-ms-win-core-namedpipe-ansi-l1-1-1.dll
 EXPORTS
 CallNamedPipeA
-GetNamedPipeClientComputerNameA
-GetNamedPipeHandleStateA
-WaitNamedPipeA

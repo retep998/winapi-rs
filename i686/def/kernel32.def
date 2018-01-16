@@ -250,6 +250,7 @@ EnumSystemCodePagesA@8
 EnumSystemCodePagesW@8
 EnumSystemFirmwareTables@12
 EnumSystemGeoID@12
+EnumSystemGeoNames@12
 EnumSystemLanguageGroupsA@12
 EnumSystemLanguageGroupsW@12
 EnumSystemLocalesA@8
@@ -480,6 +481,7 @@ GetFullPathNameTransactedA@20
 GetFullPathNameTransactedW@20
 GetFullPathNameW@16
 GetGeoInfoA@20
+GetGeoInfoEx@16
 GetGeoInfoW@20
 GetHandleInformation@8
 GetLargePageMinimum@0
@@ -656,6 +658,7 @@ GetTimeFormatW@24
 GetTimeZoneInformation@4
 GetTimeZoneInformationForYear@12
 GetUILanguageInfo@20
+GetUserDefaultGeoName@8
 GetUserDefaultLCID@0
 GetUserDefaultLangID@0
 GetUserDefaultLocaleName@8
@@ -772,7 +775,9 @@ IsValidLanguageGroup@8
 IsValidLocale@8
 IsValidLocaleName@4
 IsValidNLSVersion@12
+IsWow64GuestMachineSupported@8
 IsWow64Process@8
+IsWow64Process2@12
 K32EmptyWorkingSet@4
 K32EnumDeviceDrivers@12
 K32EnumPageFilesA@8
@@ -953,6 +958,7 @@ ReadConsoleOutputCharacterA@20
 ReadConsoleOutputCharacterW@20
 ReadConsoleOutputW@20
 ReadConsoleW@20
+ReadDirectoryChangesExW@36
 ReadDirectoryChangesW@32
 ReadFile@20
 ReadFileEx@20
@@ -1138,6 +1144,7 @@ SetTimeZoneInformation@4
 SetTimerQueueTimer@24
 SetUnhandledExceptionFilter@4
 SetUserGeoID@4
+SetUserGeoName@4
 SetVolumeLabelA@8
 SetVolumeLabelW@8
 SetVolumeMountPointA@8
@@ -1227,6 +1234,7 @@ WakeAllConditionVariable@4
 WakeConditionVariable@4
 WerGetFlags@8
 WerRegisterAdditionalProcess@8
+WerRegisterAppLocalDump@4
 WerRegisterCustomMetadata@8
 WerRegisterExcludedMemoryBlock@8
 WerRegisterFile@12
@@ -1234,6 +1242,7 @@ WerRegisterMemoryBlock@8
 WerRegisterRuntimeExceptionModule@8
 WerSetFlags@4
 WerUnregisterAdditionalProcess@4
+WerUnregisterAppLocalDump@0
 WerUnregisterCustomMetadata@4
 WerUnregisterExcludedMemoryBlock@4
 WerUnregisterFile@4

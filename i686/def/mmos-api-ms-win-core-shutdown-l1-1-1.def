@@ -1,5 +1,0 @@
-LIBRARY api-ms-win-core-shutdown-l1-1-1.dll
-EXPORTS
-AbortSystemShutdownW@4
-InitiateShutdownW@20
-InitiateSystemShutdownExW@24

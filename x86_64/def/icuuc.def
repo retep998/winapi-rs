@@ -221,6 +221,7 @@ ubrk_current
 ubrk_first
 ubrk_following
 ubrk_getAvailable
+ubrk_getBinaryRules
 ubrk_getLocaleByType
 ubrk_getRuleStatus
 ubrk_getRuleStatusVec
@@ -228,6 +229,7 @@ ubrk_isBoundary
 ubrk_last
 ubrk_next
 ubrk_open
+ubrk_openBinaryRules
 ubrk_openRules
 ubrk_preceding
 ubrk_previous
@@ -240,7 +242,6 @@ ucache_compareKeys
 ucache_deleteKey
 ucache_hashKeys
 ucase_fold
-ucase_getSingleton
 ucase_getType
 ucase_getTypeOrIgnorable
 ucase_isCaseSensitive
@@ -310,6 +311,8 @@ ucnv_getSubstChars
 ucnv_getToUCallBack
 ucnv_getType
 ucnv_getUnicodeSet
+ucnv_io_countKnownConverters
+ucnv_io_getConverterName
 ucnv_io_stripASCIIForCompare
 ucnv_io_stripEBCDICForCompare
 ucnv_isAmbiguous
@@ -483,6 +486,7 @@ ulist_getListFromEnum
 ulist_getListSize
 ulist_getNext
 ulist_next_keyword_value
+ulist_removeString
 ulist_resetList
 ulist_reset_keyword_values_iterator
 ulistfmt_close
@@ -637,6 +641,7 @@ uprv_timezone
 uprv_toupper
 uprv_trunc
 uprv_tzname
+uprv_tzname_clear_cache
 uprv_tzset
 uprv_uint16Comparator
 uprv_uint32Comparator
@@ -654,8 +659,7 @@ ures_close
 ures_countArrayItems
 ures_findResource
 ures_findSubResource
-ures_getAllArrayItemsWithFallback
-ures_getAllTableItemsWithFallback
+ures_getAllItemsWithFallback
 ures_getBinary
 ures_getByIndex
 ures_getByKey

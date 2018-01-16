@@ -6,7 +6,10 @@ AddClusterGroupToGroupSetDependency@8
 AddClusterNode@16
 AddClusterResourceDependency@8
 AddClusterResourceNode@8
+AddClusterStorageNode@24
+AddCrossClusterGroupSetDependency@12
 AddResourceToClusterSharedVolumes@4
+AddResourceToClusterSharedVolumesEx@8
 BackupClusterDatabase@8
 CanResourceBeDependent@8
 CancelClusterGroupOperation@8
@@ -47,6 +50,7 @@ ClusterGetEnumCount@4
 ClusterGetEnumCountEx@4
 ClusterGetFaultDomainObject@16
 ClusterGetFaultDomainObjects@20
+ClusterGetFaultDomainState@16
 ClusterGetFaultDomainXML@12
 ClusterGetPlacementScore@24
 ClusterGroupCloseEnum@4
@@ -85,6 +89,7 @@ ClusterNodeGetEnumCount@4
 ClusterNodeGetEnumCountEx@4
 ClusterNodeOpenEnum@8
 ClusterNodeOpenEnumEx@12
+ClusterNodeReplacement@12
 ClusterOpenEnum@8
 ClusterOpenEnumEx@12
 ClusterRegBatchAddCommand@24
@@ -168,6 +173,10 @@ DeleteClusterResource@4
 DeleteClusterResourceType@8
 DestroyCluster@16
 DestroyClusterGroup@4
+DetermineCNOResTypeFromCluster@8
+DetermineCNOResTypeFromNodelist@12
+DetermineClusterCloudTypeFromCluster@8
+DetermineClusterCloudTypeFromNodelist@12
 EvictClusterNode@4
 EvictClusterNodeEx@12
 FailClusterResource@4
@@ -231,6 +240,7 @@ OpenClusterNetInterfaceEx@16
 OpenClusterNetwork@8
 OpenClusterNetworkEx@16
 OpenClusterNode@8
+OpenClusterNodeById@8
 OpenClusterNodeEx@16
 OpenClusterResource@8
 OpenClusterResourceEx@16
@@ -242,8 +252,11 @@ RegisterClusterResourceTypeNotifyV2@24
 RemoveClusterGroupDependency@8
 RemoveClusterGroupSetDependency@8
 RemoveClusterGroupToGroupSetDependency@8
+RemoveClusterNameAccount@8
 RemoveClusterResourceDependency@8
 RemoveClusterResourceNode@8
+RemoveClusterStorageNode@16
+RemoveCrossClusterGroupSetDependency@12
 RemoveResourceFromClusterSharedVolumes@4
 RestartClusterResource@8
 RestoreClusterDatabase@12

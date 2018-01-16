@@ -1,0 +1,24 @@
+LIBRARY SspiCli.dll
+EXPORTS
+AcceptSecurityContext@36
+AcquireCredentialsHandleW@36
+ApplyControlToken@8
+CompleteAuthToken@8
+DecryptMessage@16
+DeleteSecurityContext@4
+EncryptMessage@16
+EnumerateSecurityPackagesW@8
+FreeContextBuffer@4
+FreeCredentialsHandle@4
+InitializeSecurityContextW@48
+LsaConnectUntrusted@4
+LsaDeregisterLogonProcess@4
+LsaFreeReturnBuffer@4
+LsaGetLogonSessionData@8
+LsaLogonUser@56
+LsaLookupAuthenticationPackage@12
+QueryContextAttributesW@12
+QuerySecurityContextToken@8
+SetContextAttributesW@16
+SspiEncodeStringsAsAuthIdentity@16
+SspiFreeAuthIdentity@4

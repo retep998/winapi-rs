@@ -35,6 +35,7 @@ WSACleanup @116
 WSAGetLastError @111
 WSASetLastError @112
 WSAStartup @115
+FreeAddrInfoEx
 FreeAddrInfoExW
 FreeAddrInfoW
 GetAddrInfoExCancel
