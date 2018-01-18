@@ -1,6 +1,6 @@
 [package]
 name = "winapi"
-version = "0.3.3"
+version = "0.3.4"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 license = "MIT/Apache-2.0"
 description = "Raw FFI bindings for all of Windows API."
@@ -21,9 +21,9 @@ travis-ci = { repository = "retep998/winapi-rs", branch = "0.3" }
 appveyor = { repository = "retep998/winapi-rs", branch = "0.3", service = "github" }
 
 [target.i686-pc-windows-gnu.dependencies]
-winapi-i686-pc-windows-gnu = { version = "0.3", path = "i686" }
+winapi-i686-pc-windows-gnu = { version = "0.4", path = "i686" }
 [target.x86_64-pc-windows-gnu.dependencies]
-winapi-x86_64-pc-windows-gnu = { version = "0.3", path = "x86_64" }
+winapi-x86_64-pc-windows-gnu = { version = "0.4", path = "x86_64" }
 
 [features]
 debug = []
