@@ -891,7 +891,7 @@ extern "system" {
         lpString1: LPWSTR,
         lpString2: LPCWSTR,
         iMaxLength: c_int
-    ) -> LPSTR;
+    ) -> LPWSTR;
     pub fn lstrcpyA(
         lpString1: LPSTR,
         lpString2: LPCSTR
@@ -899,7 +899,7 @@ extern "system" {
     pub fn lstrcpyW(
         lpString1: LPWSTR,
         lpString2: LPCWSTR
-    ) -> LPSTR;
+    ) -> LPWSTR;
     pub fn lstrcatA(
         lpString1: LPSTR,
         lpString2: LPCSTR
@@ -907,7 +907,7 @@ extern "system" {
     pub fn lstrcatW(
         lpString1: LPWSTR,
         lpString2: LPCWSTR
-    ) -> LPSTR;
+    ) -> LPWSTR;
     pub fn lstrlenA(
         lpString: LPCSTR
     ) -> c_int;
