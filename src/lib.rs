@@ -6,6 +6,7 @@
 // except according to those terms.
 #![cfg(windows)]
 #![deny(unused, unused_qualifications)]
+#![warn(unused_attributes)]
 #![allow(bad_style, overflowing_literals, unused_macros)]
 #![recursion_limit = "128"]
 #![no_std]
