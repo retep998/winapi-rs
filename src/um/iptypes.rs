@@ -10,6 +10,21 @@
 // #include <ifdef.h>
 // #include <nldef.h>
 
+use ctypes::*;
+use shared::minwindef::*;
+use shared::basetsd::*;
+use shared::inaddr::*;
+use shared::in6addr::*;
+use shared::ntdef::*;
+use shared::ws2def::*;
+use shared::guiddef::GUID;
+use um::minwinbase::{
+    OVERLAPPED, LPOVERLAPPED, 
+};
+use shared::ifdef::*;
+use shared::nldef::*;
+
+
 pub const MAX_ADAPTER_DESCRIPTION_LENGTH: usize = 128;
 pub const MAX_ADAPTER_NAME_LENGTH: usize        = 256;
 pub const MAX_ADAPTER_ADDRESS_LENGTH: usize     = 8;
@@ -19,7 +34,6 @@ pub const MAX_DOMAIN_NAME_LEN: usize            = 128;
 pub const MAX_SCOPE_ID_LEN: usize               = 256;
 pub const MAX_DHCPV6_DUID_LENGTH: usize         = 130;
 pub const MAX_DNS_SUFFIX_STRING_LENGTH: usize   = 256;
-
 pub const BROADCAST_NODETYPE: usize    = 1;
 pub const PEER_TO_PEER_NODETYPE: usize = 2;
 pub const MIXED_NODETYPE: usize        = 4;
@@ -65,20 +79,22 @@ pub type PIP_ADAPTER_INFO = *mut IP_ADAPTER_INFO;
 
 #[cfg(feature = "winsock2")]
 mod winsocks2 {
+    use supper::*;
+
     pub type IP_PREFIX_ORIGIN = NL_PREFIX_ORIGIN;
     pub type IP_SUFFIX_ORIGIN = NL_SUFFIX_ORIGIN;
     pub type IP_DAD_STATE = NL_DAD_STATE;
 
-    STRUCT!{struct IP_ADAPTER_UNICAST_ADDRESS_LH_UNAME_STRUCT {
+    STRUCT!{struct IP_ADAPTER_UNICAST_ADDRESS_LH_u_s {
         Length: ULONG,
         Flags: DWORD,
     }}
-    UNION!{union IP_ADAPTER_UNICAST_ADDRESS_LH_UNAME_UNION {
+    UNION!{union IP_ADAPTER_UNICAST_ADDRESS_LH_u {
         Alignment: ULONGLONG,
-        LengthAndFlags: IP_ADAPTER_UNICAST_ADDRESS_LH_UNAME_STRUCT,
+        s: IP_ADAPTER_UNICAST_ADDRESS_LH_u_s,
     }}
     STRUCT!{struct IP_ADAPTER_UNICAST_ADDRESS_LH {
-        uname_field: IP_ADAPTER_UNICAST_ADDRESS_LH_UNAME_UNION,
+        u: IP_ADAPTER_UNICAST_ADDRESS_LH_u,
         Next: *mut IP_ADAPTER_UNICAST_ADDRESS_LH,
         Address: SOCKET_ADDRESS,
         PrefixOrigin: IP_PREFIX_ORIGIN,
@@ -91,8 +107,16 @@ mod winsocks2 {
     }}
     pub type PIP_ADAPTER_UNICAST_ADDRESS_LH = *mut IP_ADAPTER_UNICAST_ADDRESS_LH;
 
+    STRUCT!{struct IP_ADAPTER_UNICAST_ADDRESS_XP_u_s {
+        Length: ULONG,
+        Flags: DWORD,
+    }}
+    UNION!{union IP_ADAPTER_UNICAST_ADDRESS_XP_u {
+        Alignment: ULONGLONG,
+        s: IP_ADAPTER_UNICAST_ADDRESS_XP_u_s,
+    }}
     STRUCT!{struct IP_ADAPTER_UNICAST_ADDRESS_XP {
-        uname_field: IP_ADAPTER_UNICAST_ADDRESS_LH_UNAME_UNION,
+        u: IP_ADAPTER_UNICAST_ADDRESS_XP_u,
         Next: *mut IP_ADAPTER_UNICAST_ADDRESS_XP,
         Address: SOCKET_ADDRESS,
         PrefixOrigin: IP_PREFIX_ORIGIN,
@@ -111,8 +135,16 @@ mod winsocks2 {
     pub const IP_ADAPTER_ADDRESS_DNS_ELIGIBLE: usize = 0x01;
     pub const IP_ADAPTER_ADDRESS_TRANSIENT: usize 0x02;
 
+    STRUCT!{struct IP_ADAPTER_ANYCAST_ADDRESS_XP_u_s {
+        Length: ULONG,
+        Flags: DWORD,
+    }}
+    UNION!{union IP_ADAPTER_ANYCAST_ADDRESS_XP_u {
+        Alignment: ULONGLONG,
+        s: IP_ADAPTER_ANYCAST_ADDRESS_XP_u_s,
+    }}
     STRUCT!{struct IP_ADAPTER_ANYCAST_ADDRESS_XP {
-        uname_field: IP_ADAPTER_UNICAST_ADDRESS_LH_UNAME_UNION,
+        u: IP_ADAPTER_ANYCAST_ADDRESS_XP_u,
         Next: *mut IP_ADAPTER_ANYCAST_ADDRESS_XP,
         Address: SOCKET_ADDRESS,
     }}
@@ -121,8 +153,16 @@ mod winsocks2 {
     pub type IP_ADAPTER_ANYCAST_ADDRESS = IP_ADAPTER_ANYCAST_ADDRESS_XP;
     pub type PIP_ADAPTER_ANYCAST_ADDRESS = *mut IP_ADAPTER_ANYCAST_ADDRESS;
 
+    STRUCT!{struct IP_ADAPTER_MULTICAST_ADDRESS_XP_u_s {
+        Length: ULONG,
+        Flags: DWORD,
+    }}
+    UNION!{union IP_ADAPTER_MULTICAST_ADDRESS_XP_u {
+        Alignment: ULONGLONG,
+        s: IP_ADAPTER_MULTICAST_ADDRESS_XP_u_s,
+    }}
     STRUCT!{struct IP_ADAPTER_MULTICAST_ADDRESS_XP {
-        uname_field: IP_ADAPTER_UNICAST_ADDRESS_LH_UNAME_UNION,
+        u: IP_ADAPTER_MULTICAST_ADDRESS_XP_u,
         Next: *mut IP_ADAPTER_MULTICAST_ADDRESS_XP,
         Address: SOCKET_ADDRESS,
     }}
@@ -131,8 +171,16 @@ mod winsocks2 {
     pub type IP_ADAPTER_MULTICAST_ADDRESS = IP_ADAPTER_MULTICAST_ADDRESS_XP;
     pub type PIP_ADAPTER_MULTICAST_ADDRESS = *mut IP_ADAPTER_MULTICAST_ADDRESS_XP;
 
+    STRUCT!{struct IP_ADAPTER_DNS_SERVER_ADDRESS_XP_u_s {
+        Length: ULONG,
+        Reserved: DWORD,
+    }}
+    UNION!{union IP_ADAPTER_DNS_SERVER_ADDRESS_XP_u {
+        Alignment: ULONGLONG,
+        s: IP_ADAPTER_DNS_SERVER_ADDRESS_XP_u_s,
+    }}
     STRUCT!{struct IP_ADAPTER_DNS_SERVER_ADDRESS_XP {
-        uname_field: IP_ADAPTER_UNICAST_ADDRESS_LH_UNAME_UNION,
+        u: IP_ADAPTER_DNS_SERVER_ADDRESS_XP_u,
         Next: *mut IP_ADAPTER_DNS_SERVER_ADDRESS_XP,
         Address: SOCKET_ADDRESS,
     }}
@@ -141,8 +189,16 @@ mod winsocks2 {
     pub type IP_ADAPTER_DNS_SERVER_ADDRESS = IP_ADAPTER_DNS_SERVER_ADDRESS_XP;
     pub type PIP_ADAPTER_DNS_SERVER_ADDRESS = *mut IP_ADAPTER_DNS_SERVER_ADDRESS_XP;
 
+    STRUCT!{struct IP_ADAPTER_WINS_SERVER_ADDRESS_LH_u_s {
+        Length: ULONG,
+        Reserved: DWORD,
+    }}
+    UNION!{union IP_ADAPTER_WINS_SERVER_ADDRESS_LH_u {
+        Alignment: ULONGLONG,
+        s: IP_ADAPTER_WINS_SERVER_ADDRESS_LH_u_s,
+    }}
     STRUCT!{struct IP_ADAPTER_WINS_SERVER_ADDRESS_LH {
-        uname_field: IP_ADAPTER_UNICAST_ADDRESS_LH_UNAME_UNION,
+        u: IP_ADAPTER_WINS_SERVER_ADDRESS_LH_u,
         Next: *mut IP_ADAPTER_WINS_SERVER_ADDRESS_LH,
         Address: SOCKET_ADDRESS,
     }}
@@ -151,8 +207,16 @@ mod winsocks2 {
     pub type IP_ADAPTER_WINS_SERVER_ADDRESS = IP_ADAPTER_WINS_SERVER_ADDRESS_LH;
     pub type PIP_ADAPTER_WINS_SERVER_ADDRESS = *mut IP_ADAPTER_WINS_SERVER_ADDRESS_LH;
 
+    STRUCT!{struct IP_ADAPTER_GATEWAY_ADDRESS_LH_u_s {
+        Length: ULONG,
+        Reserved: DWORD,
+    }}
+    UNION!{union IP_ADAPTER_GATEWAY_ADDRESS_LH_u {
+        Alignment: ULONGLONG,
+        s: IP_ADAPTER_GATEWAY_ADDRESS_LH_u_s,
+    }}
     STRUCT!{struct IP_ADAPTER_GATEWAY_ADDRESS_LH {
-        uname_field: IP_ADAPTER_UNICAST_ADDRESS_LH_UNAME_UNION,
+        u: IP_ADAPTER_GATEWAY_ADDRESS_LH_u,
         Next: *mut IP_ADAPTER_GATEWAY_ADDRESS_LH,
         Address: SOCKET_ADDRESS,
     }}
@@ -161,8 +225,16 @@ mod winsocks2 {
     pub type IP_ADAPTER_GATEWAY_ADDRESS = IP_ADAPTER_GATEWAY_ADDRESS_LH;
     pub type PIP_ADAPTER_GATEWAY_ADDRESS = *mut IP_ADAPTER_GATEWAY_ADDRESS_LH;
 
+    STRUCT!{struct IP_ADAPTER_PREFIX_XP_u_s {
+        Length: ULONG,
+        Flags: DWORD,
+    }}
+    UNION!{union IP_ADAPTER_PREFIX_XP_u {
+        Alignment: ULONGLONG,
+        s: IP_ADAPTER_PREFIX_XP_u_s,
+    }}
     STRUCT!{struct IP_ADAPTER_PREFIX_XP {
-        uname_field: IP_ADAPTER_UNICAST_ADDRESS_LH_UNAME_UNION,
+        u: IP_ADAPTER_PREFIX_XP_u,
         Next: *mut IP_ADAPTER_PREFIX_XP,
         Address: SOCKET_ADDRESS,
         PrefixLength: ULONG,
@@ -189,16 +261,20 @@ mod winsocks2 {
     pub const IP_ADAPTER_IPV6_ENABLED: DWORD = 0x00000100;
     pub const IP_ADAPTER_IPV6_MANAGE_ADDRESS_CONFIG: DWORD = 0x00000200;
 
-    STRUCT!{struct IP_ADAPTER_ADDRESSES_LH_UNAME_STRUCT {
+
+    STRUCT!{struct IP_ADAPTER_ADDRESSES_LH_u1_s {
         Length: ULONG,
         IfIndex: IF_INDEX,
     }}
-    UNION!{union IP_ADAPTER_ADDRESSES_LH_UNAME_UNION {
+    UNION!{union IP_ADAPTER_ADDRESSES_LH_u1 {
         Alignment: ULONGLONG,
-        LengthAndIfIndex: IP_ADAPTER_ADDRESSES_LH_UNAME_STRUCT,
+        s: IP_ADAPTER_ADDRESSES_LH_u1_s,
     }}
-
-    BITFIELD!{IP_ADAPTER_ADDRESSES_LH_UNAME_STRUCT_2 Bitfield: ULONG [
+    UNION!{union IP_ADAPTER_ADDRESSES_LH_u2 {
+        Flags: ULONG,
+        s: ULONG,
+    }}
+    BITFIELD!(IP_ADAPTER_ADDRESSES_LH_u2 s: ULONG [
         DdnsEnabled set_DdnsEnabled[0..1],
         RegisterAdapterSuffix set_RegisterAdapterSuffix[1..2],
         Dhcpv4Enabled set_Dhcpv4Enabled[2..3],
@@ -209,14 +285,9 @@ mod winsocks2 {
         Ipv4Enabled set_Ipv4Enabled[7..8],
         Ipv6Enabled set_Ipv6Enabled[8..9],
         Ipv6ManagedAddressConfigurationSupported set_Ipv6ManagedAddressConfigurationSupported[9..10],
-    ]}
-    UNION!{union IP_ADAPTER_ADDRESSES_LH_UNAME_UNION_2 {
-        Flags: ULONG,
-        UnameField: IP_ADAPTER_ADDRESSES_LH_UNAME_STRUCT_2,
-    }}
-
+    ])
     STRUCT!{struct IP_ADAPTER_ADDRESSES_LH {
-        uname_field: IP_ADAPTER_ADDRESSES_LH_UNAME_UNION,
+        u1: IP_ADAPTER_ADDRESSES_LH_u1,
         Next: *mut IP_ADAPTER_ADDRESSES_LH,
         AdapterName: PCHAR,
         FirstUnicastAddress: PIP_ADAPTER_UNICAST_ADDRESS_LH,
@@ -228,7 +299,7 @@ mod winsocks2 {
         FriendlyName: PWCHAR,
         PhysicalAddress: [BYTE; MAX_ADAPTER_ADDRESS_LENGTH],
         PhysicalAddressLength: ULONG,
-        uname_field2: IP_ADAPTER_ADDRESSES_LH_UNAME_UNION_2,
+        u2: IP_ADAPTER_ADDRESSES_LH_u2,
         Mtu: ULONG,
         IfType: IFTYPE,
         OperStatus: IF_OPER_STATUS,
@@ -255,17 +326,16 @@ mod winsocks2 {
     }}
     pub type PIP_ADAPTER_ADDRESSES_LH = *mut IP_ADAPTER_ADDRESSES_LH;
 
-
-    STRUCT!{struct IP_ADAPTER_ADDRESSES_XP_STRUCT {
+    STRUCT!{struct IP_ADAPTER_ADDRESSES_XP_u_s {
         Length: ULONG,
         IfIndex: DWORD,
     }}
-    UNION!{union IP_ADAPTER_ADDRESSES_XP_UNION {
+    UNION!{union IP_ADAPTER_ADDRESSES_XP_u {
         Alignment: ULONGLONG,
-        LengthAndIfIndex: IP_ADAPTER_ADDRESSES_XP_STRUCT,
+        s: IP_ADAPTER_ADDRESSES_XP_u_s,
     }}
     STRUCT!{struct IP_ADAPTER_ADDRESSES_XP {
-        uname_field: IP_ADAPTER_ADDRESSES_XP_UNION,
+        u: IP_ADAPTER_ADDRESSES_XP_u,
         Next: *mut IP_ADAPTER_ADDRESSES_XP,
         AdapterName: PCHAR,
         FirstUnicastAddress: PIP_ADAPTER_UNICAST_ADDRESS_XP,
