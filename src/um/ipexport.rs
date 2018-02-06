@@ -9,6 +9,19 @@
 // #include <in6addr.h>
 // #include <inaddr.h>
 
+use ctypes::*;
+use shared::minwindef::*;
+use shared::basetsd::*;
+use shared::inaddr::*;
+use shared::in6addr::*;
+use shared::ntdef::*;
+use shared::ws2def::*;
+use shared::guiddef::GUID;
+use um::minwinbase::{
+    OVERLAPPED, LPOVERLAPPED, 
+};
+
+
 pub const MAX_ADAPTER_NAME: usize = 128;
 pub const MAX_OPT_SIZE: usize = 40;
 
