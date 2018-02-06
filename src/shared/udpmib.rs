@@ -7,6 +7,16 @@
 
 // #include <winapifamily.h>
 
+use ctypes::*;
+use shared::minwindef::*;
+use shared::basetsd::*;
+use shared::ntdef::*;
+use shared::ws2def::*;
+use shared::guiddef::GUID;
+use um::minwinbase::{
+    OVERLAPPED, LPOVERLAPPED, 
+};
+
 pub const ANY_SIZE: usize = 1;
 pub const TCPIP_OWNING_MODULE_SIZE: usize = 16;
 
@@ -36,21 +46,19 @@ STRUCT!{struct MIB_UDPTABLE_OWNER_PID {
 pub type PMIB_UDPTABLE_OWNER_PID = *mut MIB_UDPTABLE_OWNER_PID;
 
 
-BITFIELD!(MIB_UDPROW_OWNER_MODULE_UNAME_FIELD_2 Bitfield: c_int [
-    SpecificPortBind set_SpecificPortBind[0..1],
-])
-
-UNION!{union MIB_UDPROW_OWNER_MODULE_UNAME_FIELD_1 {
-    SpecificPortBind: MIB_UDPROW_OWNER_MODULE_UNAME_FIELD_2,
+UNION!{union MIB_UDPROW_OWNER_MODULE_u {
+    s: c_int,
     dwFlags: c_int,
 }}
-
+BITFIELD!(MIB_UDPROW_OWNER_MODULE_u s: c_int [
+    SpecificPortBind set_SpecificPortBind[0..1],
+])
 STRUCT!{struct MIB_UDPROW_OWNER_MODULE {
     dwLocalAddr: DWORD,
     dwLocalPort: DWORD,
     dwOwningPid: DWORD,
     liCreateTimestamp: LARGE_INTEGER,
-    uname_field: MIB_UDPROW_OWNER_MODULE_UNAME_FIELD_1,
+    u: MIB_UDPROW_OWNER_MODULE_u,
     OwningModuleInfo: [ULONGULONG; TCPIP_OWNING_MODULE_SIZE],
 }}
 pub type PMIB_UDPROW_OWNER_MODULE = *mut MIB_UDPROW_OWNER_MODULE;
@@ -89,13 +97,20 @@ STRUCT!{struct MIB_UDP6TABLE_OWNER_PID {
 }}
 pub type PMIB_UDP6TABLE_OWNER_PID = *mut MIB_UDP6TABLE_OWNER_PID;
 
+UNION!{union MIB_UDP6ROW_OWNER_MODULE_u {
+    s: c_int,
+    dwFlags: c_int,
+}}
+BITFIELD!(MIB_UDP6ROW_OWNER_MODULE_u s: c_int [
+    SpecificPortBind set_SpecificPortBind[0..1],
+])
 STRUCT!{struct MIB_UDP6ROW_OWNER_MODULE {
     ucLocalAddr: [UCHAR; 16],
     dwLocalScopeId: DWORD,
     dwLocalPort: DWORD,
     dwOwningPid: DWORD,
     liCreateTimestamp: LARGE_INTEGER,
-    uname_field: MIB_UDPROW_OWNER_MODULE_UNAME_FIELD_1,
+    u: MIB_UDP6ROW_OWNER_MODULE_u,
     OwningModuleInfo: [ULONGLONG; TCPIP_OWNING_MODULE_SIZE],
 }}
 pub type PMIB_UDP6ROW_OWNER_MODULE = *mut MIB_UDP6ROW_OWNER_MODULE;

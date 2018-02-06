@@ -7,6 +7,16 @@
 
 // #include <winapifamily.h>
 
+use ctypes::*;
+use shared::minwindef::*;
+use shared::basetsd::*;
+use shared::ntdef::*;
+use shared::ws2def::*;
+use shared::guiddef::GUID;
+use um::minwinbase::{
+    OVERLAPPED, LPOVERLAPPED, 
+};
+
 pub const ANY_SIZE: usize = 1;
 pub const TCPIP_OWNING_MODULE_SIZE: usize = 16;
 

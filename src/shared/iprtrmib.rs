@@ -12,6 +12,21 @@
 // #include <ipmib.h>
 // #include <tcpmib.h>
 // #include <udpmib.h>
+use ctypes::*;
+use shared::minwindef::*;
+use shared::basetsd::*;
+use shared::ntdef::*;
+use shared::ws2def::*;
+use shared::guiddef::GUID;
+use um::minwinbase::{
+    OVERLAPPED, LPOVERLAPPED, 
+};
+
+use shared::mprapidef::*;
+use shared::ipifcons::*;
+use shared::ipmib::*;
+use shared::tcpmib::*;
+use shared::udpmib::*;
 
 pub const ANY_SIZE: usize = 1;
 pub const MAX_SCOPE_NAME_LEN: usize = 255;

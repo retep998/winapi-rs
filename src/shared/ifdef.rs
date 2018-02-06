@@ -7,6 +7,17 @@
 
 // #include <winapifamily.h>
 // #include <ipifcons.h>
+use ctypes::*;
+use shared::minwindef::*;
+use shared::basetsd::*;
+use shared::ntdef::*;
+use shared::ws2def::*;
+use shared::guiddef::GUID;
+use um::minwinbase::{
+    OVERLAPPED, LPOVERLAPPED, 
+};
+use shared::ipifcons::*;
+
 
 pub type NET_IF_COMPARTMENT_ID = UINT32;
 pub type PNET_IF_COMPARTMENT_ID = *mut NET_IF_COMPARTMENT_ID;
@@ -64,17 +75,15 @@ STRUCT!{struct NET_IF_ALIAS_LH {
 }}
 pub type PNET_IF_ALIAS_LH = *mut NET_IF_ALIAS_LH;
 
-BITFIELD!(NET_LUID_LH_Info Bitfield: ULONG64 [
+UNION!{union NET_LUID_LH {
+    Value: ULONG64,
+    Info: ULONG64,
+}}
+BITFIELD!(NET_LUID_LH Info: ULONG64 [
     Reserved set_Reserved[0..24],
     NetLuidIndex set_NetLuidIndex[24..48],
     IfType set_IfType[48..64],
 ])
-pub type PNET_LUID_LH_Info = *mut NET_LUID_LH_Info;
-
-UNION!{union NET_LUID_LH {
-    Value: ULONG64,
-    Info: NET_LUID_LH_Info
-}}
 pub type PNET_LUID_LH = *mut NET_LUID_LH;
 
 pub type NET_IF_RCV_ADDRESS = NET_IF_RCV_ADDRESS_LH;
@@ -233,4 +242,3 @@ STRUCT!{struct NDIS_INTERFACE_INFORMATION {
     SupportedStatistics: ULONG,
 }}
 pub type PNDIS_INTERFACE_INFORMATION = *mut NDIS_INTERFACE_INFORMATION;
-

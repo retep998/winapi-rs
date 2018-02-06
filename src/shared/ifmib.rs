@@ -8,6 +8,18 @@
 // #include <winapifamily.h>
 // #include <ifdef.h>
 
+use ctypes::*;
+use shared::minwindef::*;
+use shared::basetsd::*;
+use shared::ntdef::*;
+use shared::ws2def::*;
+use shared::guiddef::GUID;
+use um::minwinbase::{
+    OVERLAPPED, LPOVERLAPPED, 
+};
+use shared::ifdef::*;
+use shared::ipifcons::*;
+
 pub const ANY_SIZE: usize = 1;
 pub const MAXLEN_PHYSADDR: usize = 8;
 pub const MAXLEN_IFDESCR: usize = 256;

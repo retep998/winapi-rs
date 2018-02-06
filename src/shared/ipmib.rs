@@ -8,9 +8,19 @@
 // #include <winapifamily.h>
 // #include <ifmib.h>
 // #include <nldef.h>
-
-use shared::ifmib::{ANY_SIZE, MAXLEN_PHYSADDR};
-
+use ctypes::*;
+use shared::minwindef::*;
+use shared::basetsd::*;
+use shared::ntdef::*;
+use shared::ws2def::*;
+use shared::guiddef::GUID;
+use um::minwinbase::{
+    OVERLAPPED, LPOVERLAPPED, 
+};
+use shared::ifmib::*;
+use shared::ifdef::*;
+use shared::ipifcons::*;
+use shared::nldef::*;
 
 STRUCT!{struct MIB_IPADDRROW_XP {
     dwAddr: DWORD,
