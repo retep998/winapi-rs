@@ -54,6 +54,10 @@ pub mod ctypes {
     pub type __int64 = i64;
     pub type __uint64 = u64;
     pub type wchar_t = u16;
+    #[cfg(all(target_arch = "x86", target_env = "gnu"))]
+    pub type time_t = i32;
+    #[cfg(not(all(target_arch = "x86", target_env = "gnu")))]
+    pub type time_t = i64;
 }
 pub trait Interface {
     fn uuidof() -> shared::guiddef::GUID;
