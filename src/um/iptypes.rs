@@ -39,6 +39,10 @@ pub const PEER_TO_PEER_NODETYPE: usize = 2;
 pub const MIXED_NODETYPE: usize        = 4;
 pub const HYBRID_NODETYPE: usize       = 8;
 
+
+type __time64_t = __int64;
+type time_t = __time64_t;
+
 STRUCT!{struct IP_ADDRESS_STRING {
     String: [char; 4*4],
 }}
