@@ -10,28 +10,27 @@ use std::fs::read_dir;
 use std::io::{self, Write};
 use std::path::Path;
 
-mod utils;
+use utils::read_file;
 
 fn check_if_files_in_mod(
     files: &[String],
     mod_file: &Path,
     errors: &mut u32,
 ) {
-    let content = utils::read_file(mod_file);
+    let content = read_file(mod_file);
     let mut imports = HashMap::new();
-    content.split('\n')
-           .filter_map(|s| {
-               let x: Vec<&str> = s.split("mod ").collect();
-               if x.len() < 2 {
-                   None
-               } else {
-                   // We assume that only one mod import is present on a line.
-                   x[1].split(';').next()
-               }
-           })
-           .for_each(|x| {
-               imports.insert(x.to_owned(), false);
-           });
+    for x in content.split('\n')
+                    .filter_map(|s| {
+                        let x: Vec<&str> = s.split("mod ").collect();
+                        if x.len() < 2 {
+                            None
+                        } else {
+                            // We assume that only one mod import is present on a line.
+                            x[1].split(';').next()
+                        }
+                    }) {
+        imports.insert(x.to_owned(), false);
+    }
     for file in files {
         if let Some(import) = imports.get_mut(file) {
             *import = true;

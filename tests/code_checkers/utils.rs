@@ -15,3 +15,7 @@ pub fn read_file<P: AsRef<Path>>(p: P) -> String {
     f.read_to_string(&mut content).expect("read_file::read_to_end failed");
     content
 }
+
+pub fn get_between_quotes(s: &str) -> &str {
+    s.split('"').skip(1).next().unwrap_or("")
+}

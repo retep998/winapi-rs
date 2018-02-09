@@ -9,14 +9,10 @@ use std::fs::read_dir;
 use std::io::{self, Write};
 use std::path::Path;
 
-mod utils;
-
-fn get_between_quotes(s: &str) -> &str {
-    s.split('"').skip(1).next().unwrap_or("")
-}
+use utils::{get_between_quotes, read_file};
 
 fn get_libs() -> Vec<String> {
-    let content = utils::read_file("build.rs");
+    let content = read_file("build.rs");
     let mut inside = false;
     let mut files_deps = Vec::new();
     for line in content.lines() {
@@ -43,7 +39,7 @@ fn check_feature_sorting<P: AsRef<Path>>(
 ) -> Vec<String> {
     let r_p = p.as_ref();
     let s_path = r_p.to_str().unwrap();
-    let file_content = utils::read_file(r_p);
+    let file_content = read_file(r_p);
     let mut features: Vec<(usize, String, String)> = Vec::new();
     for (pos, line) in file_content.lines().enumerate() {
         if !line.starts_with("#[cfg(feature") {
@@ -68,7 +64,7 @@ fn check_feature_sorting<P: AsRef<Path>>(
 }
 
 fn check_features_in_cargo_file(errors: &mut u32) -> Vec<String> {
-    let file_content = utils::read_file("Cargo.toml");
+    let file_content = read_file("Cargo.toml");
     let mut features: Vec<Vec<(usize, String, String)>> = Vec::new();
     let mut inside = false;
     for (pos, line) in file_content.lines().enumerate() {
