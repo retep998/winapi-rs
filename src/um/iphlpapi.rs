@@ -31,22 +31,32 @@ ENUM!{enum NET_ADDRESS_FORMAT {
     NET_ADDRESS_IPV4,
     NET_ADDRESS_IPV6,
 }}
+
 // #if defined (_WS2DEF_) && defined (_WS2IPDEF_) && defined(_WINDNS_INCLUDED_)
-// STRUCT!{struct NET_NAMED_ADDRESS {
-//     Address: [WCHAR; DNS_MAX_NAME_BUFFER_LENGTH],
-//     Port: [WCHAR; 6],
-// }}
-// UNION!{union NET_ADDRESS {
-//     NamedAddress: NET_NAMED_ADDRESS,
-//     Ipv4Address: SOCKADDR_IN,
-//     Ipv6Address: SOCKADDR_IN6,
-//     IpAddress: SOCKADDR,
-// }}
-// STRUCT!{struct NET_ADDRESS_INFO {
-//     Format: NET_ADDRESS_FORMAT,
-//     Address: NET_ADDRESS,
-// }}
-// pub type PNET_ADDRESS_INFO = *mut NET_ADDRESS_INFO;
+#[cfg(all(feature = "ws2def", feature = "ws2ipdef"))]
+mod ws2def_and_ws2ipdef {
+    use super::*;
+
+    STRUCT!{struct NET_NAMED_ADDRESS {
+        Address: [WCHAR; DNS_MAX_NAME_BUFFER_LENGTH],
+        Port: [WCHAR; 6],
+    }}
+    UNION!{union NET_ADDRESS {
+        NamedAddress: NET_NAMED_ADDRESS,
+        Ipv4Address: SOCKADDR_IN,
+        Ipv6Address: SOCKADDR_IN6,
+        IpAddress: SOCKADDR,
+    }}
+    STRUCT!{struct NET_ADDRESS_INFO {
+        Format: NET_ADDRESS_FORMAT,
+        Address: NET_ADDRESS,
+    }}
+    pub type PNET_ADDRESS_INFO = *mut NET_ADDRESS_INFO;
+}
+#[cfg(all(feature = "ws2def", feature = "ws2ipdef"))]
+pub use ws2def_and_ws2ipdef::*;
+
+
 extern "system" {
     pub fn GetNumberOfInterfaces(
         pdwNumIf: PDWORD
@@ -370,11 +380,12 @@ extern "system" {
         Token: PULONG64,
     ) -> ULONG;
     // #if defined (_WS2DEF_) && defined (_WS2IPDEF_) && defined(_WINDNS_INCLUDED_)
-    // pub fn ParseNetworkString(
-    //     NetworkString: *const *mut WCHAR,
-    //     Types: DWORD,
-    //     AddressInfo: PNET_ADDRESS_INFO,
-    //     PortNumber: *mut USHORT,
-    //     PrefixLength: *mut BYTE,
-    // ) -> DWORD;
+    #[cfg(all(feature = "ws2def", feature = "ws2ipdef"))]
+    pub fn ParseNetworkString(
+        NetworkString: *const *mut WCHAR,
+        Types: DWORD,
+        AddressInfo: PNET_ADDRESS_INFO,
+        PortNumber: *mut USHORT,
+        PrefixLength: *mut BYTE,
+    ) -> DWORD;
 }
