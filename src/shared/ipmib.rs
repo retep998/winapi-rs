@@ -22,6 +22,8 @@ use shared::ifdef::*;
 use shared::ipifcons::*;
 use shared::nldef::*;
 
+const ANY_SIZE: usize = 1;
+
 STRUCT!{struct MIB_IPADDRROW_XP {
     dwAddr: DWORD,
     dwIndex: IF_INDEX,

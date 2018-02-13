@@ -21,20 +21,16 @@ use shared::guiddef::GUID;
 use um::minwinbase::{
     OVERLAPPED, LPOVERLAPPED, 
 };
-
 use shared::iprtrmib::*;
 use shared::ipexport::*;
 use shared::iptypes::*;
 use shared::tcpestats::*;
-
-
 ENUM!{enum NET_ADDRESS_FORMAT {
     NET_ADDRESS_FORMAT_UNSPECIFIED = 0,
     NET_ADDRESS_DNS_NAME,
     NET_ADDRESS_IPV4,
     NET_ADDRESS_IPV6,
 }}
-
 // #if defined (_WS2DEF_) && defined (_WS2IPDEF_) && defined(_WINDNS_INCLUDED_)
 // STRUCT!{struct NET_NAMED_ADDRESS {
 //     Address: [WCHAR; DNS_MAX_NAME_BUFFER_LENGTH],
@@ -51,7 +47,6 @@ ENUM!{enum NET_ADDRESS_FORMAT {
 //     Address: NET_ADDRESS,
 // }}
 // pub type PNET_ADDRESS_INFO = *mut NET_ADDRESS_INFO;
-
 extern "system" {
     pub fn GetNumberOfInterfaces(
         pdwNumIf: PDWORD

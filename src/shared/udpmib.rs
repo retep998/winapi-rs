@@ -17,8 +17,10 @@ use um::minwinbase::{
     OVERLAPPED, LPOVERLAPPED, 
 };
 
-pub const ANY_SIZE: usize = 1;
 pub const TCPIP_OWNING_MODULE_SIZE: usize = 16;
+
+const ANY_SIZE: usize = 1;
+
 
 STRUCT!{struct MIB_UDPROW {
     dwLocalAddr: DWORD,

@@ -17,8 +17,9 @@ use um::minwinbase::{
     OVERLAPPED, LPOVERLAPPED, 
 };
 
-pub const ANY_SIZE: usize = 1;
 pub const TCPIP_OWNING_MODULE_SIZE: usize = 16;
+
+const ANY_SIZE: usize = 1;
 
 ENUM!{enum MIB_TCP_STATE {
     MIB_TCP_STATE_CLOSED     =  1,

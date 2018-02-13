@@ -20,10 +20,11 @@ use um::minwinbase::{
 use shared::ifdef::*;
 use shared::ipifcons::*;
 
-pub const ANY_SIZE: usize = 1;
 pub const MAXLEN_PHYSADDR: usize = 8;
 pub const MAXLEN_IFDESCR: usize = 256;
 pub const MAX_INTERFACE_NAME_LEN: usize = 256;
+
+const ANY_SIZE: usize = 1;
 
 STRUCT!{struct MIB_IFROW {
     wszName: [WCHAR; MAX_INTERFACE_NAME_LEN],

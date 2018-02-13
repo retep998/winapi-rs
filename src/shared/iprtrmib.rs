@@ -28,9 +28,10 @@ use shared::ipmib::*;
 use shared::tcpmib::*;
 use shared::udpmib::*;
 
-pub const ANY_SIZE: usize = 1;
 pub const MAX_SCOPE_NAME_LEN: usize = 255;
 pub const MAX_MIB_OFFSET: usize = 8;
+
+const ANY_SIZE: usize = 1;
 
 STRUCT!{struct MIB_OPAQUE_QUERY {
     dwVarId: DWORD,
