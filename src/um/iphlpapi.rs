@@ -89,7 +89,15 @@ extern "system" {
         SizePointer: PULONG,
         Order: BOOL,
     ) -> ULONG;
-    // pub fn GetExtendedTcpTable() -> DWORD;
+    // https://msdn.microsoft.com/en-us/library/windows/desktop/aa365928(v=vs.85).aspx
+    pub fn GetExtendedTcpTable(
+        pTcpTable: PVOID,
+        pdwSize: PDWORD,
+        bOrder: BOOL,
+        ulAf: ULONG,
+        TableClass: TCP_TABLE_CLASS,
+        Reserved: ULONG,
+    ) -> DWORD;
     pub fn GetOwnerModuleFromTcpEntry(
         pTcpEntry: PMIB_TCPROW_OWNER_MODULE,
         Class: TCPIP_OWNER_MODULE_INFO_CLASS,
