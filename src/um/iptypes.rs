@@ -308,7 +308,7 @@ mod winsocks2 {
         IfType: IFTYPE,
         OperStatus: IF_OPER_STATUS,
         Ipv6IfIndex: IF_INDEX,
-        ZoneIndices: [ULONG; 16];
+        ZoneIndices: [ULONG; 16],
         FirstPrefix: PIP_ADAPTER_PREFIX_XP,
         TransmitLinkSpeed: ULONG64,
         ReceiveLinkSpeed: ULONG64,
