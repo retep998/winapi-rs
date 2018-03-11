@@ -278,7 +278,7 @@ mod winsocks2 {
         Flags: ULONG,
         s: ULONG,
     }}
-    BITFIELD!(IP_ADAPTER_ADDRESSES_LH_u2 s: ULONG [
+    BITFIELD!{IP_ADAPTER_ADDRESSES_LH_u2 s: ULONG [
         DdnsEnabled set_DdnsEnabled[0..1],
         RegisterAdapterSuffix set_RegisterAdapterSuffix[1..2],
         Dhcpv4Enabled set_Dhcpv4Enabled[2..3],
@@ -289,7 +289,7 @@ mod winsocks2 {
         Ipv4Enabled set_Ipv4Enabled[7..8],
         Ipv6Enabled set_Ipv6Enabled[8..9],
         Ipv6ManagedAddressConfigurationSupported set_Ipv6ManagedAddressConfigurationSupported[9..10],
-    ])
+    ]}
     STRUCT!{struct IP_ADAPTER_ADDRESSES_LH {
         u1: IP_ADAPTER_ADDRESSES_LH_u1,
         Next: *mut IP_ADAPTER_ADDRESSES_LH,

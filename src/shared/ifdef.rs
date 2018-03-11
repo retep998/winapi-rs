@@ -79,11 +79,11 @@ UNION!{union NET_LUID_LH {
     Value: ULONG64,
     Info: ULONG64,
 }}
-BITFIELD!(NET_LUID_LH Info: ULONG64 [
+BITFIELD!{NET_LUID_LH Info: ULONG64 [
     Reserved set_Reserved[0..24],
     NetLuidIndex set_NetLuidIndex[24..48],
     IfType set_IfType[48..64],
-])
+]}
 pub type PNET_LUID_LH = *mut NET_LUID_LH;
 
 pub type NET_IF_RCV_ADDRESS = NET_IF_RCV_ADDRESS_LH;

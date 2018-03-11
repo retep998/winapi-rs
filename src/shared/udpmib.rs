@@ -52,9 +52,9 @@ UNION!{union MIB_UDPROW_OWNER_MODULE_u {
     s: c_int,
     dwFlags: c_int,
 }}
-BITFIELD!(MIB_UDPROW_OWNER_MODULE_u s: c_int [
+BITFIELD!{MIB_UDPROW_OWNER_MODULE_u s: c_int [
     SpecificPortBind set_SpecificPortBind[0..1],
-])
+]}
 STRUCT!{struct MIB_UDPROW_OWNER_MODULE {
     dwLocalAddr: DWORD,
     dwLocalPort: DWORD,
@@ -103,9 +103,9 @@ UNION!{union MIB_UDP6ROW_OWNER_MODULE_u {
     s: c_int,
     dwFlags: c_int,
 }}
-BITFIELD!(MIB_UDP6ROW_OWNER_MODULE_u s: c_int [
+BITFIELD!{MIB_UDP6ROW_OWNER_MODULE_u s: c_int [
     SpecificPortBind set_SpecificPortBind[0..1],
-])
+]}
 STRUCT!{struct MIB_UDP6ROW_OWNER_MODULE {
     ucLocalAddr: [UCHAR; 16],
     dwLocalScopeId: DWORD,
