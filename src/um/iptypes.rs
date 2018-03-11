@@ -137,7 +137,7 @@ mod winsocks2 {
     pub type PIP_ADAPTER_UNICAST_ADDRESS = *mut IP_ADAPTER_UNICAST_ADDRESS;
 
     pub const IP_ADAPTER_ADDRESS_DNS_ELIGIBLE: usize = 0x01;
-    pub const IP_ADAPTER_ADDRESS_TRANSIENT: usize 0x02;
+    pub const IP_ADAPTER_ADDRESS_TRANSIENT: usize = 0x02;
 
     STRUCT!{struct IP_ADAPTER_ANYCAST_ADDRESS_XP_u_s {
         Length: ULONG,
