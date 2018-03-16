@@ -40,7 +40,10 @@ extern "system" {
     // pub fn DwmEnableMMCSS();
     // pub fn DwmExtendFrameIntoClientArea();
     // pub fn DwmGetColorizationColor();
-    // pub fn DwmGetCompositionTimingInfo();
+    pub fn DwmGetCompositionTimingInfo(
+        hWnd: HWND,
+        pTimingInfo: *mut DWM_TIMING_INFO,
+    ) -> HRESULT;
     pub fn DwmGetWindowAttribute(
         hWnd: HWND,
         dwAttribute: DWORD,
@@ -61,7 +64,7 @@ extern "system" {
     // pub fn DwmInvalidateIconicBitmaps();
     // pub fn DwmAttachMilContent();
     // pub fn DwmDetachMilContent();
-    // pub fn DwmFlush();
+    pub fn DwmFlush();
     // pub fn DwmGetGraphicsStreamTransformHint();
     // pub fn DwmGetGraphicsStreamClient();
     // pub fn DwmGetTransportAttributes();
