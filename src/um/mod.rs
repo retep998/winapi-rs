@@ -22,6 +22,7 @@ pub mod gl;
 #[cfg(feature = "d2d1")] pub mod d2d1;
 #[cfg(feature = "d2d1_1")] pub mod d2d1_1;
 #[cfg(feature = "d2d1_2")] pub mod d2d1_2;
+#[cfg(feature = "d2d1_3")] pub mod d2d1_3;
 #[cfg(feature = "d2d1effectauthor")] pub mod d2d1effectauthor;
 #[cfg(feature = "d2d1effects")] pub mod d2d1effects;
 #[cfg(feature = "d2d1effects_1")] pub mod d2d1effects_1;
