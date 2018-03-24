@@ -5,15 +5,20 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 // TODO:It is a minimal implementation.
+use ctypes::c_void;
 use shared::basetsd::UINT32;
 use shared::dxgiformat::DXGI_FORMAT;
-use shared::guiddef::{GUID, REFGUID};
+use shared::guiddef::{GUID, REFCLSID, REFGUID};
 use shared::minwindef::{BOOL, BYTE, FLOAT};
 use shared::ntdef::{HRESULT, PCSTR, PCWSTR};
 use um::d2d1::D2D1_EXTEND_MODE;
-use um::d2d1_1::{D2D1_BUFFER_PRECISION, ID2D1Bitmap1};
+use um::d2d1_1::{
+    D2D1_BUFFER_PRECISION, D2D1_COLOR_SPACE, ID2D1Bitmap1, ID2D1ColorContext, ID2D1Effect,
+};
 use um::d2dbasetypes::{D2D_POINT_2L, D2D_POINT_2U, D2D_RECT_L};
+use um::d3dcommon::D3D_FEATURE_LEVEL;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
+use um::wincodec::IWICColorContext;
 FN!{stdcall PD2D1_PROPERTY_SET_FUNCTION(
     effect: *const IUnknown,
     data: *const BYTE,
@@ -318,8 +323,8 @@ interface ID2D1ConcreteTransform(ID2D1ConcreteTransformVtbl): ID2D1TransformNode
 }}
 RIDL!{#[uuid(0x63ac0b32, 0xba44, 0x450f, 0x88, 0x06, 0x7f, 0x4c, 0xa1, 0xff, 0x2f, 0x1b)]
 interface ID2D1BlendTransform(ID2D1BlendTransformVtbl): ID2D1ConcreteTransform(ID2D1ConcreteTransformVtbl) {
-    fn SetDescription(description: *const D2D1_BLEND_DESCRIPTION) -> (),
-    fn GetDescription(description: *mut D2D1_BLEND_DESCRIPTION) -> (),
+    fn SetDescription(description: *const D2D1_BLEND_DESCRIPTION,) -> (),
+    fn GetDescription(description: *mut D2D1_BLEND_DESCRIPTION,) -> (),
 }}
 RIDL!{#[uuid(0x4998735c, 0x3a19, 0x473c, 0x97, 0x81, 0x65, 0x68, 0x47, 0xe3, 0xa3, 0x47)]
 interface ID2D1BorderTransform(ID2D1BorderTransformVtbl): ID2D1ConcreteTransform(ID2D1ConcreteTransformVtbl) {
@@ -336,7 +341,7 @@ interface ID2D1OffsetTransform(ID2D1OffsetTransformVtbl): ID2D1TransformNode(ID2
 RIDL!{#[uuid(0x90f732e2, 0x5092, 0x4606, 0xa8, 0x19, 0x86, 0x51, 0x97, 0x0b, 0xac, 0xcd)]
 interface ID2D1BoundsAdjustmentTransform(ID2D1BoundsAdjustmentTransformVtbl):
     ID2D1TransformNode(ID2D1TransformNodeVtbl) {
-    fn SetOutputBounds(outputBounds: *const D2D_RECT_L) -> (),
+    fn SetOutputBounds(outputBounds: *const D2D_RECT_L,) -> (),
     fn GetOutputBounds(outputBounds: *mut D2D_RECT_L,) -> (),
 }}
 RIDL!{#[uuid(0xa248fd3f, 0x3e6c, 0x4e63, 0x9f, 0x03, 0x7f, 0x68, 0xec, 0xc9, 0x1d, 0xb9)]
@@ -350,5 +355,91 @@ interface ID2D1EffectImpl(ID2D1EffectImplVtbl): IUnknown(IUnknownVtbl) {
 }}
 RIDL!{#[uuid(0x3d9f916b, 0x27dc, 0x4ad7, 0xb4, 0xf1, 0x64, 0x94, 0x53, 0x40, 0xf5, 0x63)]
 interface ID2D1EffectContext(ID2D1EffectContextVtbl): IUnknown(IUnknownVtbl) {
-    // TODO
+    fn GetDpi(dpiX: *mut FLOAT, dpiY: *mut FLOAT,) -> (),
+    fn CreateEffect(effectId: REFCLSID, effect: *mut *mut ID2D1Effect,) -> HRESULT,
+    fn GetMaximumSupportedFeatureLevel(
+        featureLevels: *const D3D_FEATURE_LEVEL,
+        featureLevelsCount: UINT32,
+        maximumSupportedFeatureLevel: *mut D3D_FEATURE_LEVEL,
+    ) -> HRESULT,
+    fn CreateTransformNodeFromEffect(
+        effect: *mut ID2D1Effect,
+        transformNode: *mut *mut ID2D1TransformNode,
+    ) -> HRESULT,
+    fn CreateBlendTransform(
+        numInputs: UINT32,
+        blendDescription: D2D1_BLEND_DESCRIPTION,
+        transform: *mut *mut ID2D1BlendTransform,
+    ) -> HRESULT,
+    fn CreateBorderTransform(
+        extendModeX: D2D1_EXTEND_MODE,
+        extendModeY: D2D1_EXTEND_MODE,
+        transform: *mut *mut ID2D1BorderTransform,
+    ) -> HRESULT,
+    fn CreateOffsetTransform(
+        offset: D2D_POINT_2L,
+        transform: *mut *mut ID2D1OffsetTransform,
+    ) -> HRESULT,
+    fn CreateBoundsAdjustmentTransform(
+        outputRectangle: *mut D2D_RECT_L,
+        transform: ID2D1BoundsAdjustmentTransform,
+    ) -> HRESULT,
+    fn LoadPixelShader(
+        shaderId: REFGUID,
+        shaderBuffer: *const BYTE,
+        shaderBufferCount: UINT32,
+    ) -> HRESULT,
+    fn LoadVertexShader(
+        resourceId: REFGUID,
+        shaderBuffer: *const BYTE,
+        shaderBufferCount: UINT32,
+    ) -> HRESULT,
+    fn LoadComputeShader(
+        resourceId: REFGUID,
+        shaderBuffer: *const BYTE,
+        shaderBufferCount: UINT32,
+    ) -> HRESULT,
+    fn IsShaderLoaded(shaderId: REFGUID,) -> BOOL,
+    fn CreateResourceTexture(
+        resourceId: *const GUID,
+        resourceTextureProperties: *const D2D1_RESOURCE_TEXTURE_PROPERTIES,
+        data: *const BYTE,
+        strides: *const UINT32,
+        dataSize: UINT32,
+        resourceTexture: *mut *mut ID2D1ResourceTexture,
+    ) -> HRESULT,
+    fn FindResourceTexture(
+        resourceId: *const GUID,
+        resourceTexture: *mut *mut ID2D1ResourceTexture,
+    ) -> HRESULT,
+    fn CreateVertexBuffer(
+        vertexBufferProperties: *const D2D1_VERTEX_BUFFER_PROPERTIES,
+        resourceId: *const GUID,
+        customVertexBufferProperties: *const D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES,
+        buffer: *mut *mut ID2D1VertexBuffer,
+    ) -> HRESULT,
+    fn FindVertexBuffer(
+        resourceId: *const GUID,
+        buffer: *mut *mut ID2D1VertexBuffer,
+    ) -> HRESULT,
+    fn CreateColorContext(
+        space: D2D1_COLOR_SPACE,
+        profile: *const BYTE,
+        profileSize: UINT32,
+        colorContext: *mut *mut ID2D1ColorContext,
+    ) -> HRESULT,
+    fn CreateColorContextFromFilename(
+        filename: PCWSTR,
+        colorContext: *mut *mut ID2D1ColorContext,
+    ) -> HRESULT,
+    fn CreateColorContextFromWicColorContext(
+        wicColorContext: *mut IWICColorContext,
+        colorContext: *mut *mut ID2D1ColorContext,
+    ) -> HRESULT,
+    fn CheckFeatureSupport(
+        feature: D2D1_FEATURE,
+        featureSupportData: *mut c_void,
+        featureSupportDataSize: UINT32,
+    ) -> HRESULT,
+    fn IsBufferPrecisionSupported(bufferPrecision: D2D1_BUFFER_PRECISION,) -> BOOL,
 }}
