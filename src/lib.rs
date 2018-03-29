@@ -8,7 +8,7 @@
 #![deny(unused, unused_qualifications)]
 #![warn(unused_attributes)]
 #![allow(bad_style, overflowing_literals, unused_macros)]
-#![recursion_limit = "128"]
+#![recursion_limit = "2563"]
 #![no_std]
 
 #[cfg(feature = "std")]
