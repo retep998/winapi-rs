@@ -4,8 +4,4 @@ CheckRemoteDebuggerPresent@8
 ContinueDebugEvent@12
 DebugActiveProcess@4
 DebugActiveProcessStop@4
-DebugBreak@0
-IsDebuggerPresent@0
-OutputDebugStringA@4
-OutputDebugStringW@4
 WaitForDebugEvent@8

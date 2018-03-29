@@ -1,0 +1,4 @@
+LIBRARY ext-ms-win-shell32-shellfolders-l1-1-1.dll
+EXPORTS
+PathMakeUniqueName@20
+SHFlushSFCache@0

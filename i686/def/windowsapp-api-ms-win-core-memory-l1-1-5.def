@@ -1,6 +1,0 @@
-LIBRARY api-ms-win-core-memory-l1-1-5.dll
-EXPORTS
-OpenFileMappingFromApp@12
-SetProcessValidCallTargets@20
-VirtualAllocFromApp@16
-VirtualProtectFromApp@16

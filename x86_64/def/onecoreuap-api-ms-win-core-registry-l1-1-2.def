@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-core-registry-l1-1-2.dll
+EXPORTS
+RegQueryMultipleValuesA
+RegQueryMultipleValuesW

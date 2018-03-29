@@ -20,6 +20,7 @@ HttpFlushResponseCache@16
 HttpGetCounters@24
 HttpInitialize@12
 HttpPrepareUrl@16
+HttpQueryRequestProperty@40
 HttpQueryRequestQueueProperty@28
 HttpQueryServerSessionProperty@24
 HttpQueryServiceConfiguration@32

@@ -1,0 +1,6 @@
+LIBRARY api-ms-win-mm-playsound-l1-1-0.dll
+EXPORTS
+PlaySoundA
+PlaySoundW
+sndPlaySoundA
+sndPlaySoundW

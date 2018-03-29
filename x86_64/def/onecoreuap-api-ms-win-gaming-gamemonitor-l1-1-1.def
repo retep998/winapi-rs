@@ -1,0 +1,3 @@
+LIBRARY api-ms-win-gaming-gamemonitor-l1-1-1.dll
+EXPORTS
+GetGameMonitoringPermissionState

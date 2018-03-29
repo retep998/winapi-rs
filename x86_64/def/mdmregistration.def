@@ -2,9 +2,11 @@ LIBRARY MDMRegistration.DLL
 EXPORTS
 DiscoverManagementService
 DiscoverManagementServiceEx
+GetDeviceRegistrationInfo
 GetManagementAppHyperlink
 IsDeviceRegisteredWithManagement
 IsManagementRegistrationAllowed
 RegisterDeviceWithManagement
+RegisterDeviceWithManagementUsingAADCredentials
 SetManagedExternally
 UnregisterDeviceWithManagement

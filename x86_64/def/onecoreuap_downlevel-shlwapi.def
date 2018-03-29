@@ -7,10 +7,12 @@ IsInternetESCEnabled @553
 IsOS @437
 IStream_Copy @568
 IStream_Read @184
+IStream_ReadPidl @512
 IStream_ReadStr @596
 IStream_Reset @213
 IStream_Size @214
 IStream_Write @212
+IStream_WritePidl @513
 IStream_WriteStr @597
 IUnknown_AtomicRelease @169
 IUnknown_GetSite @256
@@ -28,13 +30,16 @@ SHCreateMemStream @12
 SHCreateThread @16
 SHCreateThreadWithHandle @615
 SHFillRectClr @197
+SHFormatDateTimeW @354
 SHGetPerScreenResName @533
-SHGlobalCounterIncrement @633
+SHGetViewStatePropertyBag @515
 SHIsChildOrSelf @204
 SHLoadIndirectString @487
 SHQueueUserWorkItem @260
 SHRegGetIntW @280
+SHSendMessageBroadcastW @433
 SHStringFromGUIDW @24
+SHStripMneumonicW @225
 SHUnicodeToAnsi @217
 SHUnicodeToUnicode @346
 StrCmpCA @155
@@ -46,15 +51,44 @@ StrCmpNCW @152
 StrCmpNICA @153
 StrCmpNICW @154
 UrlFixupW @462
+AssocCopyVerbs
 AssocCreate
 AssocGetPerceivedType
 AssocIsDangerous
+AssocMakeApplicationByKeyW
+AssocMakeProgid
 AssocQueryStringA
+AssocQueryStringByKeyW
 AssocQueryStringW
+CalculateAspectRatio
+CharUpperNoDBCSW
+ColorHLSToRGB
+ColorRGBToHLS
+DoesStringRoundTripW
+DupWideToAnsi
+FDSA_DeleteItem
+FDSA_Initialize
+FDSA_InsertItem
+FixSlashesAndColonW
 GetMenuPosFromID
 HashData
+IShellFolder_GetDisplayNameOf
+IShellFolder_ParseDisplayName
+IUnknown_CPContainerInvokeIndirect
+IUnknown_EnableModeless
 IUnknown_Exec
+IUnknown_HasFocusIO
+IUnknown_OnFocusChangeIS
+IUnknown_QueryServiceExec
+IUnknown_QueryServiceForWebBrowserApp
+IUnknown_QueryServicePropertyBag
+IUnknown_SetOwner
+IUnknown_TranslateAcceleratorIO
+IUnknown_UIActivateIO
+IntlStrEqWorkerW
 IsCharSpaceA
+MayExecForward
+MayQSForward
 PathAddBackslashA
 PathAddBackslashW
 PathAddExtensionA
@@ -70,10 +104,14 @@ PathCombineW
 PathCommonPrefixA
 PathCommonPrefixW
 PathCompactPathExW
+PathCompactPathW
 PathCreateFromUrlA
 PathCreateFromUrlAlloc
 PathCreateFromUrlW
 PathFileExistsA
+PathFileExistsAndAttributesA
+PathFileExistsDefExtAndAttributesW
+PathFileExistsDefExtW
 PathFileExistsW
 PathFindExtensionA
 PathFindExtensionW
@@ -81,6 +119,9 @@ PathFindFileNameA
 PathFindFileNameW
 PathFindNextComponentA
 PathFindNextComponentW
+PathFindOnPathExW
+PathFindOnPathW
+PathFindSuffixArrayW
 PathGetArgsA
 PathGetArgsW
 PathGetCharTypeA
@@ -113,6 +154,8 @@ PathIsUNCServerW
 PathIsUNCW
 PathIsURLA
 PathIsURLW
+PathMakePrettyW
+PathMakeSystemFolderW
 PathMatchSpecA
 PathMatchSpecExA
 PathMatchSpecExW
@@ -136,6 +179,7 @@ PathRenameExtensionA
 PathRenameExtensionW
 PathSearchAndQualifyA
 PathSearchAndQualifyW
+PathSetDlgItemPathW
 PathSkipRootA
 PathSkipRootW
 PathStripPathA
@@ -143,12 +187,19 @@ PathStripPathW
 PathStripToRootA
 PathStripToRootW
 PathUnExpandEnvStringsA
+PathUnExpandEnvStringsForUserW
 PathUnExpandEnvStringsW
 PathUndecorateW
 PathUnquoteSpacesA
 PathUnquoteSpacesW
+QuerySourceCreateFromKey
+SHAddDataBlock
+SHClearViewStatePropertyBag
 SHCopyKeyA
 SHCopyKeyW
+SHCreatePropertyBagOnProfileSection
+SHCreatePropertyBagOnRegKey
+SHCreatePropertyStoreOnXML
 SHCreateShellPalette
 SHCreateStreamOnFileA
 SHCreateStreamOnFileEx
@@ -165,12 +216,31 @@ SHEnumKeyExA
 SHEnumKeyExW
 SHEnumValueA
 SHEnumValueW
+SHExpandEnvironmentStringsAlloc
+SHExpandEnvironmentStringsForUserW
+SHFindDataBlock
+SHForwardContextMenuMsg
+SHFreeDataBlockList
+SHGetCurColorRes
+SHGetFileDescriptionW
+SHGetIniStringW
 SHGetInverseCMAP
+SHGetMenuFromID
+SHGetRestriction
 SHGetShellKeyEx
 SHGetThreadRef
 SHGetValueA
 SHGetValueW
+SHInvokeCommand
+SHInvokeCommandOnContextMenu
+SHInvokeCommandOnContextMenuEx
+SHInvokeCommandWithFlagsAndSite
+SHInvokeDefaultCommand
+SHIsExpandableFolder
 SHLoadFromPropertyBag
+SHLoadMenuPopup
+SHMenuIndexFromID
+SHMessageBoxCheckExW
 SHOpenRegStream2A
 SHOpenRegStream2W
 SHOpenRegStreamA
@@ -180,6 +250,7 @@ SHQueryInfoKeyA
 SHQueryInfoKeyW
 SHQueryValueExA
 SHQueryValueExW
+SHReadDataBlockList
 SHRegCloseUSKey
 SHRegCreateUSKeyA
 SHRegCreateUSKeyW
@@ -212,14 +283,28 @@ SHRegSetUSValueA
 SHRegSetUSValueW
 SHRegWriteUSValueA
 SHRegWriteUSValueW
+SHRegisterClassW
 SHReleaseThreadRef
+SHRemoveDataBlock
+SHRemoveDefaultDialogFont
+SHRestrictionLookup
+SHSetDefaultDialogFont
+SHSetIniStringW
 SHSetThreadRef
 SHSetValueA
 SHSetValueW
+SHSetWindowBits
+SHSimulateDrop
+SHSkipJunction
 SHStrDupA
 SHStrDupW
 SHUnicodeToAnsiCP
+SHWeakQueryInterface
 SHWeakReleaseInterface
+SHWriteDataBlockList
+SKAllocValueW
+SKGetValueW
+SKSetValueW
 ShellMessageBoxA
 ShellMessageBoxW
 StrCSpnA
@@ -245,6 +330,9 @@ StrCmpW
 StrCpyNW
 StrDupA
 StrDupW
+StrFormatByteSizeEx
+StrFormatByteSizeW
+StrFromTimeIntervalW
 StrIsIntlEqualA
 StrIsIntlEqualW
 StrPBrkA
@@ -299,3 +387,4 @@ UrlIsOpaqueW
 UrlIsW
 UrlUnescapeA
 UrlUnescapeW
+ZoneCheckUrlExW

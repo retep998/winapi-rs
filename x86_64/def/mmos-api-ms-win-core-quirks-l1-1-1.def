@@ -1,4 +1,0 @@
-LIBRARY api-ms-win-core-quirks-l1-1-1.dll
-EXPORTS
-QuirkIsEnabledForPackage3
-QuirkIsEnabledForPackage4

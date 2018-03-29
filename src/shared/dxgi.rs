@@ -146,6 +146,9 @@ interface IDXGIKeyedMutex(IDXGIKeyedMutexVtbl): IDXGIDeviceSubObject(IDXGIDevice
         Key: UINT64,
     ) -> HRESULT,
 });
+pub const DXGI_MAP_READ: UINT = 1;
+pub const DXGI_MAP_WRITE: UINT = 2;
+pub const DXGI_MAP_DISCARD: UINT = 4;
 RIDL!(#[uuid(0xcafcb56c, 0x6ac3, 0x4889, 0xbf, 0x47, 0x9e, 0x23, 0xbb, 0xd2, 0x60, 0xec)]
 interface IDXGISurface(IDXGISurfaceVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl) {
     fn GetDesc(

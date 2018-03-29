@@ -141,6 +141,8 @@ EnumDisplayMonitors@16
 EnumDisplaySettingsA@12
 EnumDisplaySettingsExW@16
 EnumDisplaySettingsW@12
+EnumPropsExW@12
+EnumPropsW@8
 EnumThreadWindows@12
 EnumWindowStationsA@8
 EnumWindows@8
@@ -419,6 +421,7 @@ PackDDElParam@12
 PackTouchHitTestingProximityEvaluation@8
 PeekMessageA@20
 PeekMessageW@20
+PhysicalToLogicalPoint@8
 PhysicalToLogicalPointForPerMonitorDPI@8
 PostMessageA@16
 PostMessageW@16
@@ -432,6 +435,7 @@ QueryDisplayConfig@24
 RIMAddInputObserver@32
 RIMAreSiblingDevices@12
 RIMDeviceIoControl@36
+RIMEnableMonitorMappingForDevice@12
 RIMFreeInputBuffer@8
 RIMGetDevicePreparsedData@16
 RIMGetDevicePreparsedDataLockfree@12
@@ -448,6 +452,7 @@ RIMRemoveInputObserver@4
 RIMSetTestModeStatus@4
 RIMUnregisterForInput@4
 RIMUpdateInputObserverRegistration@16
+RealChildWindowFromPoint@12
 RealGetWindowClassA@12
 RealGetWindowClassW@12
 RedrawWindow@16
@@ -523,12 +528,14 @@ SetMenuDefaultItem@12
 SetMenuInfo@8
 SetMenuItemBitmaps@20
 SetMenuItemInfoW@16
+SetMessageExtraInfo@4
 SetMessageQueue@4
 SetParent@8
 SetPhysicalCursorPos@8
 SetProcessDPIAware@0
 SetProcessDefaultLayout@4
 SetProcessDpiAwarenessInternal@4
+SetProcessRestrictionExemption@4
 SetProcessWindowStation@4
 SetPropA@12
 SetPropW@12

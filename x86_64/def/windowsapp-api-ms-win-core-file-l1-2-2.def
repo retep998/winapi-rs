@@ -1,0 +1,5 @@
+LIBRARY api-ms-win-core-file-l1-2-2.dll
+EXPORTS
+GetTempFileNameA
+GetTempPathA
+GetVolumeInformationA

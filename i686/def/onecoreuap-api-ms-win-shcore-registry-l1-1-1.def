@@ -1,0 +1,3 @@
+LIBRARY api-ms-win-shcore-registry-l1-1-1.dll
+EXPORTS
+SHRegGetValueFromHKCUHKLM@24
