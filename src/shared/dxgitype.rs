@@ -7,10 +7,20 @@
 //! Mappings for the contents of dxgitype.h
 use ctypes::c_float;
 use shared::d3d9types::D3DCOLORVALUE;
-use shared::dxgicommon::DXGI_RATIONAL;
 use shared::dxgiformat::DXGI_FORMAT;
 use shared::minwindef::{BOOL, BYTE, DWORD, UINT, WORD};
 use um::winnt::HRESULT;
+pub use shared::dxgi::{
+    DXGI_USAGE,
+    DXGI_USAGE_SHADER_INPUT,
+    DXGI_USAGE_RENDER_TARGET_OUTPUT,
+    DXGI_USAGE_BACK_BUFFER,
+    DXGI_USAGE_SHARED,
+    DXGI_USAGE_READ_ONLY,
+    DXGI_USAGE_DISCARD_ON_PRESENT,
+    DXGI_USAGE_UNORDERED_ACCESS,
+};
+pub use shared::dxgicommon::*;
 pub const _FACDXGI: DWORD = 0x87a;
 #[inline]
 pub fn MAKE_DXGI_HRESULT(code: WORD) -> HRESULT {
