@@ -1,0 +1,18 @@
+LIBRARY api-ms-win-core-memory-l1-1-0.dll
+EXPORTS
+CreateFileMappingW
+FlushViewOfFile
+MapViewOfFile
+MapViewOfFileEx
+OpenFileMappingW
+ReadProcessMemory
+UnmapViewOfFile
+VirtualAlloc
+VirtualAllocEx
+VirtualFree
+VirtualFreeEx
+VirtualProtect
+VirtualProtectEx
+VirtualQuery
+VirtualQueryEx
+WriteProcessMemory

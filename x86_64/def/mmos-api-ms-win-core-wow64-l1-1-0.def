@@ -1,5 +1,0 @@
-LIBRARY api-ms-win-core-wow64-l1-1-0.dll
-EXPORTS
-IsWow64Process
-Wow64DisableWow64FsRedirection
-Wow64RevertWow64FsRedirection

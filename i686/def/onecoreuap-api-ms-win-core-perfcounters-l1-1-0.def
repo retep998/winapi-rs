@@ -1,22 +1,5 @@
 LIBRARY api-ms-win-core-perfcounters-l1-1-0.dll
 EXPORTS
-PcwAddQueryItem@36
-PcwClearCounterSetSecurity@4
-PcwCollectData@16
-PcwCompleteNotification@20
-PcwCreateNotifier@8
-PcwCreateQuery@8
-PcwDisconnectCounterSet@8
-PcwEnumerateInstances@24
-PcwIsNotifierAlive@12
-PcwQueryCounterSetSecurity@20
-PcwReadNotificationData@16
-PcwRegisterCounterSet@12
-PcwRemoveQueryItem@8
-PcwSendNotification@32
-PcwSendStatelessNotification@32
-PcwSetCounterSetSecurity@12
-PcwSetQueryItemUserData@12
 PerfCreateInstance@16
 PerfDecrementULongCounterValue@16
 PerfDecrementULongLongCounterValue@20
@@ -31,11 +14,3 @@ PerfSetULongLongCounterValue@20
 PerfStartProvider@12
 PerfStartProviderEx@12
 PerfStopProvider@4
-StmAlignSize@4
-StmAllocateFlat@8
-StmCoalesceChunks@12
-StmDeinitialize@4
-StmInitialize@20
-StmReduceSize@8
-StmReserve@12
-StmWrite@12

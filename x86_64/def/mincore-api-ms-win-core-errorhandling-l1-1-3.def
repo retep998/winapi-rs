@@ -3,6 +3,5 @@ EXPORTS
 FatalAppExitA
 FatalAppExitW
 GetThreadErrorMode
-RaiseFailFastException
 SetThreadErrorMode
 TerminateProcessOnMemoryExhaustion

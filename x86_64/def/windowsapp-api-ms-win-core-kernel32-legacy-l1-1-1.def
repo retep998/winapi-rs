@@ -1,4 +1,0 @@
-LIBRARY api-ms-win-core-kernel32-legacy-l1-1-1.dll
-EXPORTS
-GetSystemPowerStatus
-MoveFileExA

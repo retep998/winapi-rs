@@ -1,0 +1,8 @@
+LIBRARY api-ms-win-core-file-l2-1-0.dll
+EXPORTS
+CopyFile2@12
+CopyFileExW@24
+GetFileInformationByHandleEx@16
+MoveFileExW@12
+ReadDirectoryChangesW@32
+ReplaceFileW@24

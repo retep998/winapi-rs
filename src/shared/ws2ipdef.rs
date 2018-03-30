@@ -9,7 +9,8 @@
 use ctypes::c_int;
 use shared::in6addr::IN6_ADDR;
 use shared::inaddr::IN_ADDR;
-use shared::minwindef::ULONG;
+use shared::minwindef::{ULONG, USHORT};
+use shared::ws2def::{ADDRESS_FAMILY, SCOPE_ID};
 
 pub const IP_OPTIONS: c_int = 1;
 pub const IP_HDRINCL: c_int = 2;
@@ -63,3 +64,16 @@ STRUCT!{struct IPV6_MREQ {
     ipv6mr_interface: ULONG,
 }}
 pub type PIPV6_MREQ = *mut IPV6_MREQ;
+UNION!{union SOCKADDR_IN6_LH_u {
+    [u32; 1],
+    sin6_scope_id sin6_scope_id_mut: ULONG,
+    sin6_scope_struct sin6_scope_struct_mut: SCOPE_ID,
+}}
+STRUCT!{struct SOCKADDR_IN6_LH {
+  sin6_family: ADDRESS_FAMILY,
+  sin6_port: USHORT,
+  sin6_flowinfo: ULONG,
+  sin6_addr: IN6_ADDR,
+  u: SOCKADDR_IN6_LH_u,
+}}
+pub type PSOCKADDR_IN6_LH = *mut SOCKADDR_IN6_LH;

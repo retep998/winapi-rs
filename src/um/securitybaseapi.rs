@@ -6,10 +6,11 @@
 // except according to those terms.
 //! FFI bindings to psapi.
 
-use shared::minwindef::{BOOL, DWORD, PBOOL, PDWORD, PUCHAR, PULONG, ULONG}
+use shared::minwindef::{BOOL, DWORD, PBOOL, PDWORD, PUCHAR, PULONG, ULONG};
 use um::winnt::{
-    HANDLE, PACL, PCLAIM_SECURITY_ATTRIBUTES_INFORMATION, PHANDLE, PSID, PTOKEN_PRIVILEGES,
-}
+    HANDLE, PACL, PCLAIM_SECURITY_ATTRIBUTES_INFORMATION, PHANDLE, PLUID, PSID, PTOKEN_PRIVILEGES,
+    PVOID,
+};
 
 extern "system" {
     // pub fn AccessCheck();

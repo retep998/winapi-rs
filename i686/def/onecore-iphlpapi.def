@@ -126,12 +126,14 @@ GetTcp6Table@12
 GetTcp6Table2@12
 GetTcpStatistics@4
 GetTcpStatisticsEx@8
+GetTcpStatisticsEx2@8
 GetTcpTable@12
 GetTcpTable2@12
 GetTeredoPort@4
 GetUdp6Table@12
 GetUdpStatistics@4
 GetUdpStatisticsEx@8
+GetUdpStatisticsEx2@8
 GetUdpTable@12
 GetUniDirectionalAdapterInfo@8
 GetUnicastIpAddressEntry@4

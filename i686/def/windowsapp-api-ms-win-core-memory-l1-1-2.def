@@ -1,14 +1,5 @@
 LIBRARY api-ms-win-core-memory-l1-1-2.dll
 EXPORTS
-CreateFileMappingFromApp@24
 DiscardVirtualMemory@8
-FlushViewOfFile@8
-GetWriteWatch@24
-MapViewOfFileFromApp@20
 OfferVirtualMemory@12
 ReclaimVirtualMemory@8
-ResetWriteWatch@8
-UnmapViewOfFile@4
-UnmapViewOfFileEx@8
-VirtualFree@12
-VirtualQuery@12

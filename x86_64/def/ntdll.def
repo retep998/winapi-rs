@@ -47,6 +47,7 @@ DbgUiSetThreadDebugObject
 DbgUiStopDebugging
 DbgUiWaitStateChange
 DbgUserBreakPoint
+EtwCheckCoverage
 EtwCreateTraceInstanceId
 EtwDeliverDataBlock
 EtwEnumerateProcessRegGuids
@@ -91,6 +92,9 @@ LdrAddDllDirectory
 LdrAddLoadAsDataTable
 LdrAddRefDll
 LdrAppxHandleIntegrityFailure
+LdrCallEnclave
+LdrCreateEnclave
+LdrDeleteEnclave
 LdrDisableThreadCalloutsForDll
 LdrEnumResources
 LdrEnumerateLoadedModules
@@ -113,9 +117,11 @@ LdrGetProcedureAddress
 LdrGetProcedureAddressEx
 LdrGetProcedureAddressForCaller
 LdrInitShimEngineDynamic
+LdrInitializeEnclave
 LdrLoadAlternateResourceModule
 LdrLoadAlternateResourceModuleEx
 LdrLoadDll
+LdrLoadEnclaveModule
 LdrLockLoaderLock
 LdrOpenImageFileOptionsKey
 LdrProcessInitializationComplete
@@ -202,6 +208,7 @@ NtApphelpCacheControl
 NtAreMappedFilesTheSame
 NtAssignProcessToJobObject
 NtAssociateWaitCompletionPacket
+NtCallEnclave
 NtCallbackReturn
 NtCancelIoFile
 NtCancelIoFileEx
@@ -358,6 +365,7 @@ NtMapViewOfSection
 NtModifyBootEntry
 NtModifyDriverEntry
 NtNotifyChangeDirectoryFile
+NtNotifyChangeDirectoryFileEx
 NtNotifyChangeKey
 NtNotifyChangeMultipleKeys
 NtNotifyChangeSession
@@ -413,6 +421,7 @@ NtQueryDebugFilterState
 NtQueryDefaultLocale
 NtQueryDefaultUILanguage
 NtQueryDirectoryFile
+NtQueryDirectoryFileEx
 NtQueryDirectoryObject
 NtQueryDriverEntryOrder
 NtQueryEaFile
@@ -572,6 +581,7 @@ NtSubscribeWnfStateChange
 NtSuspendProcess
 NtSuspendThread
 NtSystemDebugControl
+NtTerminateEnclave
 NtTerminateJobObject
 NtTerminateProcess
 NtTerminateThread
@@ -688,6 +698,7 @@ RtlAvlRemoveNode
 RtlCancelTimer
 RtlCanonicalizeDomainName
 RtlCapabilityCheck
+RtlCapabilityCheckForSingleSessionSku
 RtlCaptureContext
 RtlCaptureStackBackTrace
 RtlCharToInteger
@@ -696,6 +707,7 @@ RtlCheckForOrphanedCriticalSections
 RtlCheckPortableOperatingSystem
 RtlCheckRegistryKey
 RtlCheckSandboxedToken
+RtlCheckSystemBootStatusIntegrity
 RtlCheckTokenCapability
 RtlCheckTokenMembership
 RtlCheckTokenMembershipEx
@@ -834,6 +846,8 @@ RtlDllShutdownInProgress
 RtlDnsHostNameToComputerName
 RtlDoesFileExists_U
 RtlDosApplyFileIsolationRedirection_Ustr
+RtlDosLongPathNameToNtPathName_U_WithStatus
+RtlDosLongPathNameToRelativeNtPathName_U_WithStatus
 RtlDosPathNameToNtPathName_U
 RtlDosPathNameToNtPathName_U_WithStatus
 RtlDosPathNameToRelativeNtPathName_U
@@ -882,6 +896,7 @@ RtlExitUserThread
 RtlExpandEnvironmentStrings
 RtlExpandEnvironmentStrings_U
 RtlExpandHashTable
+RtlExtendCorrelationVector
 RtlExtendMemoryBlockLookaside
 RtlExtendMemoryZone
 RtlExtractBitMap
@@ -985,6 +1000,8 @@ RtlGetSecurityDescriptorRMControl
 RtlGetSessionProperties
 RtlGetSetBootStatusData
 RtlGetSuiteMask
+RtlGetSystemBootStatus
+RtlGetSystemBootStatusEx
 RtlGetSystemPreferredUILanguages
 RtlGetSystemTimePrecise
 RtlGetThreadErrorMode
@@ -1014,6 +1031,7 @@ RtlImageRvaToSection
 RtlImageRvaToVa
 RtlImpersonateSelf
 RtlImpersonateSelfEx
+RtlIncrementCorrelationVector
 RtlInitAnsiString
 RtlInitAnsiStringEx
 RtlInitCodePageTable
@@ -1027,7 +1045,9 @@ RtlInitUnicodeStringEx
 RtlInitWeakEnumerationHashTable
 RtlInitializeAtomPackage
 RtlInitializeBitMap
+RtlInitializeBitMapEx
 RtlInitializeConditionVariable
+RtlInitializeCorrelationVector
 RtlInitializeCriticalSection
 RtlInitializeCriticalSectionAndSpinCount
 RtlInitializeCriticalSectionEx
@@ -1077,8 +1097,11 @@ RtlIpv6StringToAddressExW
 RtlIpv6StringToAddressW
 RtlIsActivationContextActive
 RtlIsCapabilitySid
+RtlIsCloudFilesPlaceholder
 RtlIsCriticalSectionLocked
 RtlIsCriticalSectionLockedByThread
+RtlIsCurrentProcess
+RtlIsCurrentThread
 RtlIsDosDeviceName_U
 RtlIsElevatedRid
 RtlIsGenericTableEmpty
@@ -1091,9 +1114,11 @@ RtlIsNonEmptyDirectoryReparsePointAllowed
 RtlIsNormalizedString
 RtlIsPackageSid
 RtlIsParentOfChildAppContainer
-RtlIsPlaceholderFileHandle
-RtlIsPlaceholderFileInfo
+RtlIsPartialPlaceholder
+RtlIsPartialPlaceholderFileHandle
+RtlIsPartialPlaceholderFileInfo
 RtlIsProcessorFeaturePresent
+RtlIsStateSeparationEnabled
 RtlIsTextUnicode
 RtlIsThreadWithinLoaderCallout
 RtlIsUntrustedObject
@@ -1179,6 +1204,7 @@ RtlQueryElevationFlags
 RtlQueryEnvironmentVariable
 RtlQueryEnvironmentVariable_U
 RtlQueryHeapInformation
+RtlQueryImageMitigationPolicy
 RtlQueryInformationAcl
 RtlQueryInformationActivationContext
 RtlQueryInformationActiveActivationContext
@@ -1194,6 +1220,7 @@ RtlQueryProtectedPolicy
 RtlQueryRegistryValues
 RtlQueryRegistryValuesEx
 RtlQuerySecurityObject
+RtlQueryThreadPlaceholderCompatibilityMode
 RtlQueryThreadProfiling
 RtlQueryTimeZoneInformation
 RtlQueryUmsThreadInformation
@@ -1242,6 +1269,7 @@ RtlResetRtlTranslations
 RtlRestoreBootStatusDefaults
 RtlRestoreContext
 RtlRestoreLastWin32Error
+RtlRestoreSystemBootStatusDefaults
 RtlRunDecodeUnicodeString
 RtlRunEncodeUnicodeString
 RtlRunOnceBeginInitialize
@@ -1269,6 +1297,7 @@ RtlSetEnvironmentVariable
 RtlSetExtendedFeaturesMask
 RtlSetGroupSecurityDescriptor
 RtlSetHeapInformation
+RtlSetImageMitigationPolicy
 RtlSetInformationAcl
 RtlSetIoCompletionCallback
 RtlSetLastWin32Error
@@ -1278,13 +1307,17 @@ RtlSetPortableOperatingSystem
 RtlSetProcessDebugInformation
 RtlSetProcessIsCritical
 RtlSetProtectedPolicy
+RtlSetProxiedProcessId
 RtlSetSaclSecurityDescriptor
 RtlSetSearchPathMode
 RtlSetSecurityDescriptorRMControl
 RtlSetSecurityObject
 RtlSetSecurityObjectEx
+RtlSetSystemBootStatus
+RtlSetSystemBootStatusEx
 RtlSetThreadErrorMode
 RtlSetThreadIsCritical
+RtlSetThreadPlaceholderCompatibilityMode
 RtlSetThreadPoolStartFunc
 RtlSetThreadPreferredUILanguages
 RtlSetThreadSubProcessTag
@@ -1318,6 +1351,7 @@ RtlSwitchedVVI
 RtlSystemTimeToLocalTime
 RtlTestAndPublishWnfStateData
 RtlTestBit
+RtlTestBitEx
 RtlTestProtectedAccess
 RtlTimeFieldsToTime
 RtlTimeToElapsedTimeFields
@@ -1381,6 +1415,7 @@ RtlValidProcessProtection
 RtlValidRelativeSecurityDescriptor
 RtlValidSecurityDescriptor
 RtlValidSid
+RtlValidateCorrelationVector
 RtlValidateHeap
 RtlValidateProcessHeaps
 RtlValidateUnicodeString
@@ -1406,14 +1441,18 @@ RtlWow64EnableFsRedirectionEx
 RtlWow64GetCpuAreaInfo
 RtlWow64GetCurrentCpuArea
 RtlWow64GetCurrentMachine
+RtlWow64GetEquivalentMachineCHPE
 RtlWow64GetProcessMachines
+RtlWow64GetSharedInfoProcess
 RtlWow64GetThreadContext
 RtlWow64GetThreadSelectorEntry
 RtlWow64IsWowGuestMachineSupported
 RtlWow64LogMessageInEventLogger
+RtlWow64PopAllCrossProcessWork
+RtlWow64PopCrossProcessWork
+RtlWow64PushCrossProcessWork
 RtlWow64SetThreadContext
 RtlWow64SuspendThread
-RtlWow64SuspendThreadEx
 RtlWriteNonVolatileMemory
 RtlWriteRegistryValue
 RtlZeroMemory
@@ -1597,6 +1636,7 @@ ZwApphelpCacheControl
 ZwAreMappedFilesTheSame
 ZwAssignProcessToJobObject
 ZwAssociateWaitCompletionPacket
+ZwCallEnclave
 ZwCallbackReturn
 ZwCancelIoFile
 ZwCancelIoFileEx
@@ -1752,6 +1792,7 @@ ZwMapViewOfSection
 ZwModifyBootEntry
 ZwModifyDriverEntry
 ZwNotifyChangeDirectoryFile
+ZwNotifyChangeDirectoryFileEx
 ZwNotifyChangeKey
 ZwNotifyChangeMultipleKeys
 ZwNotifyChangeSession
@@ -1807,6 +1848,7 @@ ZwQueryDebugFilterState
 ZwQueryDefaultLocale
 ZwQueryDefaultUILanguage
 ZwQueryDirectoryFile
+ZwQueryDirectoryFileEx
 ZwQueryDirectoryObject
 ZwQueryDriverEntryOrder
 ZwQueryEaFile
@@ -1966,6 +2008,7 @@ ZwSubscribeWnfStateChange
 ZwSuspendProcess
 ZwSuspendThread
 ZwSystemDebugControl
+ZwTerminateEnclave
 ZwTerminateJobObject
 ZwTerminateProcess
 ZwTerminateThread

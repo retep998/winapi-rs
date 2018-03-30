@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-core-sysinfo-l1-2-0.dll
+EXPORTS
+GetNativeSystemInfo
+GetSystemTimePreciseAsFileTime
