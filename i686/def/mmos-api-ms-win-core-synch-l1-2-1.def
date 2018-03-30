@@ -1,5 +1,0 @@
-LIBRARY api-ms-win-core-synch-l1-2-1.dll
-EXPORTS
-CreateSemaphoreW@16
-CreateWaitableTimerW@12
-WaitForMultipleObjects@16

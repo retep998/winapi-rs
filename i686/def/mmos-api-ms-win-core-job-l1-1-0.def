@@ -1,3 +1,0 @@
-LIBRARY api-ms-win-core-job-l1-1-0.dll
-EXPORTS
-IsProcessInJob@12

@@ -1,0 +1,10 @@
+LIBRARY api-ms-win-core-memory-l1-1-1.dll
+EXPORTS
+CreateFileMappingFromApp
+GetLargePageMinimum
+GetProcessWorkingSetSizeEx
+GetWriteWatch
+MapViewOfFileFromApp
+ResetWriteWatch
+SetProcessWorkingSetSizeEx
+UnmapViewOfFileEx

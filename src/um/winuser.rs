@@ -4984,40 +4984,6 @@ extern "system" {
         nIndex: c_int,
         dwNewLong: LONG_PTR,
     ) -> LONG_PTR;
-    pub fn GetDesktopWindow() -> HWND;
-    pub fn GetParent(
-        hWnd: HWND,
-    ) -> HWND;
-    pub fn SetParent(
-        hWndChild: HWND,
-        hWndNewParent: HWND,
-    ) -> HWND;
-    pub fn EnumChildWindows(
-        hwndParent: HWND,
-        lpEnumFunc: WNDENUMPROC,
-        lpParam: LPARAM,
-    ) -> BOOL;
-    pub fn FindWindowA(
-        lpClassName: LPCSTR,
-        lpWindowName: LPCSTR,
-    ) -> HWND;
-    pub fn FindWindowW(
-        lpClassName: LPCWSTR,
-        lpWindowName: LPCWSTR,
-    ) -> HWND;
-    pub fn FindWindowExA(
-        hWndParent: HWND,
-        hWndChildAfter: HWND,
-        lpszClass: LPCSTR,
-        lpszWindow: LPCSTR,
-    ) -> HWND;
-    pub fn FindWindowExW(
-        hWndParent: HWND,
-        hWndChildAfter: HWND,
-        lpszClass: LPCWSTR,
-        lpszWindow: LPCWSTR,
-    ) -> HWND;
-    pub fn GetShellWindow() -> HWND;
 }
 #[cfg(target_arch = "x86")]
 pub use self::GetWindowLongA as GetWindowLongPtrA;
@@ -5086,6 +5052,196 @@ pub use self::GetClassLongW as GetClassLongPtrW;
 pub use self::SetClassLongA as SetClassLongPtrA;
 #[cfg(target_arch = "x86")]
 pub use self::SetClassLongW as SetClassLongPtrW;
+extern "system" {
+    pub fn GetProcessDefaultLayout(
+        pdwDefaultLayout: *mut DWORD,
+    ) -> BOOL;
+    pub fn SetProcessDefaultLayout(
+        dwDefaultLayout: DWORD,
+    ) -> BOOL;
+    pub fn GetDesktopWindow() -> HWND;
+    pub fn GetParent(
+        hWnd: HWND,
+    ) -> HWND;
+    pub fn SetParent(
+        hWndChild: HWND,
+        hWndNewParent: HWND,
+    ) -> HWND;
+    pub fn EnumChildWindows(
+        hWndParent: HWND,
+        lpEnumFunc: WNDENUMPROC,
+        lParam: LPARAM,
+    ) -> BOOL;
+    pub fn FindWindowA(
+        lpClassName: LPCSTR,
+        lpWindowName: LPCSTR,
+    ) -> HWND;
+    pub fn FindWindowW(
+        lpClassName: LPCWSTR,
+        lpWindowName: LPCWSTR,
+    ) -> HWND;
+    pub fn FindWindowExA(
+        hWndParent: HWND,
+        hWndChildAfter: HWND,
+        lpszClass: LPCSTR,
+        lpszWindow: LPCSTR,
+    ) -> HWND;
+    pub fn FindWindowExW(
+        hWndParent: HWND,
+        hWndChildAfter: HWND,
+        lpszClass: LPCWSTR,
+        lpszWindow: LPCWSTR,
+    ) -> HWND;
+    pub fn GetShellWindow() -> HWND;
+    pub fn RegisterShellHookWindow(
+        hwnd: HWND,
+    ) -> BOOL;
+    pub fn DeregisterShellHookWindow(
+        hwnd: HWND,
+    ) -> BOOL;
+    pub fn EnumWindows(
+        lpEnumFunc: WNDENUMPROC,
+        lParam: LPARAM,
+    ) -> BOOL;
+    pub fn EnumThreadWindows(
+        dwThreadId: DWORD,
+        lpfn: WNDENUMPROC,
+        lParam: LPARAM,
+    ) -> BOOL;
+}
+// EnumTaskWindows
+extern "system" {
+    pub fn GetClassNameA(
+        hWnd: HWND,
+        lpClassName: LPCSTR,
+        nMaxCount: c_int,
+    ) -> c_int;
+    pub fn GetClassNameW(
+        hWnd: HWND,
+        lpClassName: LPCWSTR,
+        nMaxCount: c_int,
+    ) -> c_int;
+    pub fn GetTopWindow(
+        hWnd: HWND,
+    ) -> HWND;
+}
+// GetNextWindow
+// GetSysModalWindow
+// SetSysModalWindow
+extern "system" {
+    pub fn GetWindowThreadProcessId(
+        hWnd: HWND,
+        lpdwProcessId: LPDWORD,
+    ) -> DWORD;
+    pub fn IsGUIThread(
+        bConvert: BOOL,
+    ) -> BOOL;
+    pub fn GetLastActivePopup(
+        hWnd: HWND,
+    ) -> HWND;
+}
+pub const GW_HWNDFIRST: UINT = 0;
+pub const GW_HWNDLAST: UINT = 1;
+pub const GW_HWNDNEXT: UINT = 2;
+pub const GW_HWNDPREV: UINT = 3;
+pub const GW_OWNER: UINT = 4;
+pub const GW_CHILD: UINT = 5;
+pub const GW_ENABLEDPOPUP: UINT = 6;
+pub const GW_MAX: UINT = 6;
+extern "system" {
+    pub fn GetWindow(
+        hWnd: HWND,
+        uCmd: UINT,
+    ) -> HWND;
+    pub fn SetWindowsHookA(
+        nFilterType: c_int,
+        pfnFilterProc: HOOKPROC,
+    ) -> HHOOK;
+    pub fn SetWindowsHookW(
+        nFilterType: c_int,
+        pfnFilterProc: HOOKPROC,
+    ) -> HHOOK;
+    pub fn UnhookWindowsHook(
+        nFilterType: c_int,
+        pfnFilterProc: HOOKPROC,
+    ) -> BOOL;
+    pub fn SetWindowsHookExA(
+        idHook: c_int,
+        lpfn: HOOKPROC,
+        hmod: HINSTANCE,
+        dwThreadId: DWORD,
+    ) -> HHOOK;
+    pub fn SetWindowsHookExW(
+        idHook: c_int,
+        lpfn: HOOKPROC,
+        hmod: HINSTANCE,
+        dwThreadId: DWORD,
+    ) -> HHOOK;
+    pub fn UnhookWindowsHookEx(
+        hhk: HHOOK,
+    ) -> BOOL;
+    pub fn CallNextHookEx(
+        hhk: HHOOK,
+        nCode: c_int,
+        wParam: WPARAM,
+        lParam: LPARAM,
+    ) -> LRESULT;
+}
+// DefHookProc
+pub const MF_INSERT: UINT = 0x00000000;
+pub const MF_CHANGE: UINT = 0x00000080;
+pub const MF_APPEND: UINT = 0x00000100;
+pub const MF_DELETE: UINT = 0x00000200;
+pub const MF_REMOVE: UINT = 0x00001000;
+pub const MF_BYCOMMAND: UINT = 0x00000000;
+pub const MF_BYPOSITION: UINT = 0x00000400;
+pub const MF_SEPARATOR: UINT = 0x00000800;
+pub const MF_ENABLED: UINT = 0x00000000;
+pub const MF_GRAYED: UINT = 0x00000001;
+pub const MF_DISABLED: UINT = 0x00000002;
+pub const MF_UNCHECKED: UINT = 0x00000000;
+pub const MF_CHECKED: UINT = 0x00000008;
+pub const MF_USECHECKBITMAPS: UINT = 0x00000200;
+pub const MF_STRING: UINT = 0x00000000;
+pub const MF_BITMAP: UINT = 0x00000004;
+pub const MF_OWNERDRAW: UINT = 0x00000100;
+pub const MF_POPUP: UINT = 0x00000010;
+pub const MF_MENUBARBREAK: UINT = 0x00000020;
+pub const MF_MENUBREAK: UINT = 0x00000040;
+pub const MF_UNHILITE: UINT = 0x00000000;
+pub const MF_HILITE: UINT = 0x00000080;
+pub const MF_DEFAULT: UINT = 0x00001000;
+pub const MF_SYSMENU: UINT = 0x00002000;
+pub const MF_HELP: UINT = 0x00004000;
+pub const MF_RIGHTJUSTIFY: UINT = 0x00004000;
+pub const MF_MOUSESELECT: UINT = 0x00008000;
+pub const MF_END: UINT = 0x00000080;
+pub const MFT_STRING: UINT = MF_STRING;
+pub const MFT_BITMAP: UINT = MF_BITMAP;
+pub const MFT_MENUBARBREAK: UINT = MF_MENUBARBREAK;
+pub const MFT_MENUBREAK: UINT = MF_MENUBREAK;
+pub const MFT_OWNERDRAW: UINT = MF_OWNERDRAW;
+pub const MFT_RADIOCHECK: UINT = 0x00000200;
+pub const MFT_SEPARATOR: UINT = MF_SEPARATOR;
+pub const MFT_RIGHTORDER: UINT = 0x00002000;
+pub const MFT_RIGHTJUSTIFY: UINT = MF_RIGHTJUSTIFY;
+pub const MFS_GRAYED: UINT = 0x00000003;
+pub const MFS_DISABLED: UINT = MFS_GRAYED;
+pub const MFS_CHECKED: UINT = MF_CHECKED;
+pub const MFS_HILITE: UINT = MF_HILITE;
+pub const MFS_ENABLED: UINT = MF_ENABLED;
+pub const MFS_UNCHECKED: UINT = MF_UNCHECKED;
+pub const MFS_UNHILITE: UINT = MF_UNHILITE;
+pub const MFS_DEFAULT: UINT = MF_DEFAULT;
+extern "system" {
+    pub fn CheckMenuRadioItem(
+        hMenu: HMENU,
+        first: UINT,
+        last: UINT,
+        check: UINT,
+        flags: UINT,
+    ) -> BOOL;
+}
 /*********
 * CUTOFF *
 *********/
@@ -5684,129 +5840,6 @@ extern "system" {
         cKids: UINT,
         lpKids: *const HWND,
     ) -> WORD;
-    pub fn DeregisterShellHookWindow(
-        hwnd: HWND,
-    ) -> BOOL;
-    pub fn EnumWindows(
-        lpEnumFunc: WNDENUMPROC,
-        lParam: LPARAM,
-    ) -> BOOL;
-    pub fn EnumThreadWindows(
-        dwThreadId: DWORD,
-        lpfn: WNDENUMPROC,
-        lParam: LPARAM,
-    ) -> BOOL;
-    pub fn GetClassNameA(
-        hWnd: HWND,
-        lpClassName: LPCSTR,
-        nMaxCount: c_int,
-    ) -> c_int;
-    pub fn GetClassNameW(
-        hWnd: HWND,
-        lpClassName: LPCWSTR,
-        nMaxCount: c_int,
-    ) -> c_int;
-    pub fn GetTopWindow(
-        hWnd: HWND,
-    ) -> HWND;
-    pub fn GetWindowThreadProcessId(
-        hWnd: HWND,
-        lpdwProcessId: LPDWORD,
-    ) -> DWORD;
-    pub fn IsGUIThread(
-        bConvert: BOOL,
-    ) -> BOOL;
-    pub fn GetLastActivePopup(
-        hWnd: HWND,
-    ) -> HWND;
-}
-pub const GW_HWNDFIRST: UINT = 0;
-pub const GW_HWNDLAST: UINT = 1;
-pub const GW_HWNDNEXT: UINT = 2;
-pub const GW_HWNDPREV: UINT = 3;
-pub const GW_OWNER: UINT = 4;
-pub const GW_CHILD: UINT = 5;
-pub const GW_ENABLEDPOPUP: UINT = 6;
-pub const GW_MAX: UINT = 6;
-extern "system" {
-    pub fn GetWindow(
-        hWnd: HWND,
-        uCmd: UINT,
-    ) -> HWND;
-    pub fn SetWindowsHookExA(
-        idHook: c_int,
-        lpfn: HOOKPROC,
-        hmod: HINSTANCE,
-        dwThreadId: DWORD,
-    ) -> HHOOK;
-    pub fn SetWindowsHookExW(
-        idHook: c_int,
-        lpfn: HOOKPROC,
-        hmod: HINSTANCE,
-        dwThreadId: DWORD,
-    ) -> HHOOK;
-    pub fn UnhookWindowsHookEx(
-        hhk: HHOOK,
-    ) -> BOOL;
-    pub fn CallNextHookEx(
-        hhk: HHOOK,
-        nCode: c_int,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> LRESULT;
-}
-pub const MF_INSERT: UINT = 0x00000000;
-pub const MF_CHANGE: UINT = 0x00000080;
-pub const MF_APPEND: UINT = 0x00000100;
-pub const MF_DELETE: UINT = 0x00000200;
-pub const MF_REMOVE: UINT = 0x00001000;
-pub const MF_BYCOMMAND: UINT = 0x00000000;
-pub const MF_BYPOSITION: UINT = 0x00000400;
-pub const MF_SEPARATOR: UINT = 0x00000800;
-pub const MF_ENABLED: UINT = 0x00000000;
-pub const MF_GRAYED: UINT = 0x00000001;
-pub const MF_DISABLED: UINT = 0x00000002;
-pub const MF_UNCHECKED: UINT = 0x00000000;
-pub const MF_CHECKED: UINT = 0x00000008;
-pub const MF_STRING: UINT = 0x00000000;
-pub const MF_BITMAP: UINT = 0x00000004;
-pub const MF_OWNERDRAW: UINT = 0x00000100;
-pub const MF_POPUP: UINT = 0x00000010;
-pub const MF_MENUBARBREAK: UINT = 0x00000020;
-pub const MF_MENUBREAK: UINT = 0x00000040;
-pub const MF_UNHILITE: UINT = 0x00000000;
-pub const MF_HILITE: UINT = 0x00000080;
-pub const MF_DEFAULT: UINT = 0x00001000;
-pub const MF_SYSMENU: UINT = 0x00002000;
-pub const MF_HELP: UINT = 0x00004000;
-pub const MF_RIGHTJUSTIFY: UINT = 0x00004000;
-pub const MF_MOUSESELECT: UINT = 0x00008000;
-pub const MF_END: UINT = 0x00000080;
-pub const MFT_STRING: UINT = MF_STRING;
-pub const MFT_BITMAP: UINT = MF_BITMAP;
-pub const MFT_MENUBARBREAK: UINT = MF_MENUBARBREAK;
-pub const MFT_MENUBREAK: UINT = MF_MENUBREAK;
-pub const MFT_OWNERDRAW: UINT = MF_OWNERDRAW;
-pub const MFT_RADIOCHECK: UINT = 0x00000200;
-pub const MFT_SEPARATOR: UINT = MF_SEPARATOR;
-pub const MFT_RIGHTORDER: UINT = 0x00002000;
-pub const MFT_RIGHTJUSTIFY: UINT = MF_RIGHTJUSTIFY;
-pub const MFS_GRAYED: UINT = 0x00000003;
-pub const MFS_DISABLED: UINT = MFS_GRAYED;
-pub const MFS_CHECKED: UINT = MF_CHECKED;
-pub const MFS_HILITE: UINT = MF_HILITE;
-pub const MFS_ENABLED: UINT = MF_ENABLED;
-pub const MFS_UNCHECKED: UINT = MF_UNCHECKED;
-pub const MFS_UNHILITE: UINT = MF_UNHILITE;
-pub const MFS_DEFAULT: UINT = MF_DEFAULT;
-extern "system" {
-    pub fn CheckMenuRadioItem(
-        hMenu: HMENU,
-        first: UINT,
-        last: UINT,
-        check: UINT,
-        flags: UINT,
-    ) -> BOOL;
 }
 FN!{stdcall MSGBOXCALLBACK(
     LPHELPINFO,

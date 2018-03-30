@@ -2,5 +2,6 @@ LIBRARY api-ms-win-eventing-controller-l1-1-0.dll
 EXPORTS
 ControlTraceW
 EnableTraceEx2
+EnumerateTraceGuidsEx
 StartTraceW
 StopTraceW

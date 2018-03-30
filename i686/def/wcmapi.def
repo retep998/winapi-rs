@@ -1,9 +1,12 @@
 LIBRARY wcmapi.dll
 EXPORTS
+WcmAddRoutePolicy@16
 WcmBeginIgnoreProfileList@12
 WcmCancelOnDemandRequest@4
+WcmCheckCapabilityStatus@0
 WcmCloseHandle@8
 WcmCloseOnDemandRequestHandle@4
+WcmDeprovisionCapability@8
 WcmEndIgnoreProfileList@4
 WcmEnterConnectedStandby@0
 WcmEnterNetQuiet@0
@@ -11,10 +14,11 @@ WcmEnumInterfaces@12
 WcmExitConnectedStandby@0
 WcmExitNetQuiet@0
 WcmFreeMemory@4
+WcmGetInterfaceContextTable@20
 WcmGetInterfaceToken@12
 WcmGetProfileList@8
 WcmGetProfileListByPurpose@8
-WcmGetProfileListForInterfaceGuid@8
+WcmGetRoutingHint@8
 WcmOpenHandle@16
 WcmOpenOnDemandRequestHandle@24
 WcmOpenOnDemandRequestHandleByWwanProfileName@12
@@ -22,6 +26,8 @@ WcmOrderConnection@12
 WcmQueryOnDemandRequestStateInfo@8
 WcmQueryParameter@28
 WcmQueryProperty@24
+WcmRemoveMatchingRoutePolicy@8
+WcmRemoveRoutePolicy@4
 WcmResetIgnoreProfileList@8
 WcmSetOperatorConnectionCost@12
 WcmSetOperatorCycleData@12
@@ -30,3 +36,4 @@ WcmSetParameter@28
 WcmSetProfileList@16
 WcmSetProperty@24
 WcmStartOnDemandRequest@4
+WcmUpdateCapabilityAccess@12

@@ -1,4 +1,0 @@
-LIBRARY api-ms-win-core-profile-l1-1-0.dll
-EXPORTS
-QueryPerformanceCounter
-QueryPerformanceFrequency

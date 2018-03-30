@@ -1,0 +1,23 @@
+LIBRARY api-ms-win-core-processenvironment-l1-1-0.dll
+EXPORTS
+ExpandEnvironmentStringsA
+ExpandEnvironmentStringsW
+FreeEnvironmentStringsA
+FreeEnvironmentStringsW
+GetCommandLineA
+GetCommandLineW
+GetCurrentDirectoryA
+GetCurrentDirectoryW
+GetEnvironmentStrings
+GetEnvironmentStringsW
+GetEnvironmentVariableA
+GetEnvironmentVariableW
+GetStdHandle
+SearchPathW
+SetCurrentDirectoryA
+SetCurrentDirectoryW
+SetEnvironmentStringsW
+SetEnvironmentVariableA
+SetEnvironmentVariableW
+SetStdHandle
+SetStdHandleEx

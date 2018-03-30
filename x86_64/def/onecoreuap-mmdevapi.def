@@ -12,6 +12,7 @@ GetNeverSetAsDefaultProperty @16
 GetSessionIdFromEndpointId @9
 InitializeDeviceAPI @3
 mmdDevFindMmDevProperty @19
+mmdDevGetEndpointFormFactorFromMMDeviceId @30
 mmdDevGetInstanceIdFromInterfaceId @26
 mmdDevGetInstanceIdFromMMDeviceId @29
 mmdDevGetInterfaceClassGuid @24

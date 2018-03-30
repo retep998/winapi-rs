@@ -17,6 +17,14 @@ AddVectoredExceptionHandler
 AllocConsole
 AllocateUserPhysicalPages
 AllocateUserPhysicalPagesNuma
+AppPolicyGetClrCompat
+AppPolicyGetCreateFileAccess
+AppPolicyGetLifecycleManagement
+AppPolicyGetMediaFoundationCodecLoading
+AppPolicyGetProcessTerminationMethod
+AppPolicyGetShowDeveloperDiagnostic
+AppPolicyGetThreadInitializationType
+AppPolicyGetWindowingModel
 AreFileApisANSI
 AssignProcessToJobObject
 AttachConsole
@@ -27,6 +35,7 @@ Beep
 BeginUpdateResourceA
 BeginUpdateResourceW
 BindIoCompletionCallback
+BuildCommDCBW
 CallNamedPipeA
 CallNamedPipeW
 CallbackMayRunLong
@@ -308,6 +317,7 @@ GetApplicationRecoveryCallbackWorker
 GetApplicationRestartSettings
 GetApplicationRestartSettingsWorker
 GetApplicationUserModelId
+GetApplicationUserModelIdFromToken
 GetAtomNameA
 GetAtomNameW
 GetBinaryTypeA
@@ -353,7 +363,9 @@ GetCurrentDirectoryA
 GetCurrentDirectoryW
 GetCurrentPackageFamilyName
 GetCurrentPackageFullName
+GetCurrentPackageId
 GetCurrentPackageInfo
+GetCurrentPackagePath
 GetCurrentProcess
 GetCurrentProcessId
 GetCurrentProcessorNumber
@@ -425,6 +437,7 @@ GetLongPathNameA
 GetLongPathNameTransactedW
 GetLongPathNameW
 GetMailslotInfo
+GetMaximumProcessorCount
 GetMaximumProcessorGroupCount
 GetMemoryErrorHandlingCapabilities
 GetModuleFileNameA
@@ -458,10 +471,13 @@ GetOverlappedResult
 GetOverlappedResultEx
 GetPackageApplicationIds
 GetPackageFamilyName
+GetPackageFamilyNameFromToken
 GetPackageFullName
+GetPackageFullNameFromToken
 GetPackageId
 GetPackageInfo
 GetPackagePath
+GetPackagePathByFullName
 GetPackagesByPackageFamily
 GetPhysicallyInstalledSystemMemory
 GetPriorityClass
@@ -504,6 +520,8 @@ GetQueuedCompletionStatus
 GetQueuedCompletionStatusEx
 GetShortPathNameA
 GetShortPathNameW
+GetStagedPackageOrigin
+GetStagedPackagePathByFullName
 GetStartupInfoA
 GetStartupInfoW
 GetStdHandle
@@ -765,6 +783,7 @@ OpenJobObjectW
 OpenMutexA
 OpenMutexW
 OpenPackageInfoByFullName
+OpenPackageInfoByFullNameForUser
 OpenPrivateNamespaceA
 OpenPrivateNamespaceW
 OpenProcess
@@ -777,6 +796,8 @@ OpenWaitableTimerW
 OutputDebugStringA
 OutputDebugStringW
 PackageFamilyNameFromFullName
+PackageFamilyNameFromId
+PackageFullNameFromId
 PackageIdFromFullName
 PackageNameAndPublisherIdFromFamilyName
 ParseApplicationUserModelId
@@ -1060,6 +1081,11 @@ UpdateResourceW
 VerLanguageNameA
 VerLanguageNameW
 VerSetConditionMask
+VerifyApplicationUserModelId
+VerifyPackageFamilyName
+VerifyPackageFullName
+VerifyPackageId
+VerifyPackageRelativeApplicationId
 VerifyScripts
 VerifyVersionInfoA
 VerifyVersionInfoW

@@ -3,6 +3,5 @@ EXPORTS
 FatalAppExitA@8
 FatalAppExitW@8
 GetThreadErrorMode@0
-RaiseFailFastException@12
 SetThreadErrorMode@8
 TerminateProcessOnMemoryExhaustion@4
