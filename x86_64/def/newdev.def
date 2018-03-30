@@ -1,5 +1,6 @@
 LIBRARY newdev.dll
 EXPORTS
+CheckDriverSoftwareDependenciesSatisfied
 DeviceInternetSettingUiW
 DiInstallDevice
 DiInstallDriverA

@@ -1,0 +1,17 @@
+LIBRARY api-ms-win-core-heap-l1-1-0.dll
+EXPORTS
+GetProcessHeap
+GetProcessHeaps
+HeapAlloc
+HeapCompact
+HeapCreate
+HeapDestroy
+HeapFree
+HeapLock
+HeapQueryInformation
+HeapReAlloc
+HeapSetInformation
+HeapSize
+HeapUnlock
+HeapValidate
+HeapWalk

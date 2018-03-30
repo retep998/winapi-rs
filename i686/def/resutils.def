@@ -30,8 +30,12 @@ InitializeClusterHealthFaultArray@4
 OpenClusterCryptProvider@16
 ResUtilAddUnknownProperties@24
 ResUtilCreateDirectoryTree@4
+ResUtilDupGroup@8
 ResUtilDupParameterBlock@12
+ResUtilDupResource@8
 ResUtilDupString@4
+ResUtilEnumGroups@16
+ResUtilEnumGroupsEx@20
 ResUtilEnumPrivateProperties@20
 ResUtilEnumProperties@20
 ResUtilEnumResources@16
@@ -53,9 +57,12 @@ ResUtilFreeParameterBlock@12
 ResUtilGetAllProperties@24
 ResUtilGetBinaryProperty@28
 ResUtilGetBinaryValue@16
+ResUtilGetClusterGroupType@8
+ResUtilGetClusterId@8
 ResUtilGetClusterRoleState@8
 ResUtilGetCoreClusterResources@16
 ResUtilGetCoreClusterResourcesEx@16
+ResUtilGetCoreGroup@4
 ResUtilGetDwordProperty@28
 ResUtilGetDwordValue@16
 ResUtilGetEnvironmentWithNetName@4
@@ -82,12 +89,15 @@ ResUtilGetResourceNameDependency@8
 ResUtilGetResourceNameDependencyEx@12
 ResUtilGetSzProperty@20
 ResUtilGetSzValue@8
+ResUtilGroupsEqual@12
 ResUtilIsPathValid@4
 ResUtilIsResourceClassEqual@8
 ResUtilLeftPaxosIsLessThanRight@8
+ResUtilNodeEnum@12
 ResUtilPaxosComparer@8
 ResUtilPropertyListFromParameterBlock@24
 ResUtilRemoveResourceServiceEnvironment@12
+ResUtilResourceDepEnum@16
 ResUtilResourceTypesEqual@8
 ResUtilResourcesEqual@8
 ResUtilSetBinaryValue@24
@@ -114,3 +124,4 @@ ResUtilVerifyPrivatePropertyList@8
 ResUtilVerifyPropertyTable@24
 ResUtilVerifyResourceService@4
 ResUtilVerifyService@4
+ResUtilsDeleteKeyTree@12

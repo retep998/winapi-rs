@@ -24,6 +24,7 @@ EdpQueryRevokedPolicyOwnerIds
 EdpRmsClearKeys
 EdpSetCredServiceInfo
 EdpUnprotectFile
+EdpWriteLogSiteLearningEvents
 EfsClientCloseFileRaw
 EfsClientCopyFileRaw
 EfsClientDecryptFile
@@ -43,3 +44,4 @@ EfsUtilGetCurrentKey
 FeClientInitialize
 GetLockSessionUnwrappedKey
 GetLockSessionWrappedKey
+OefsCheckSupport

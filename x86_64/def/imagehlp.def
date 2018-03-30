@@ -75,6 +75,7 @@ SymFromName
 SymFunctionTableAccess
 SymFunctionTableAccess64
 SymFunctionTableAccess64AccessRoutines
+SymGetExtendedOption
 SymGetLineFromAddr
 SymGetLineFromAddr64
 SymGetLineFromInlineContext
@@ -125,6 +126,7 @@ SymRegisterCallback64
 SymRegisterFunctionEntryCallback
 SymRegisterFunctionEntryCallback64
 SymSetContext
+SymSetExtendedOption
 SymSetOptions
 SymSetScopeFromAddr
 SymSetScopeFromIndex

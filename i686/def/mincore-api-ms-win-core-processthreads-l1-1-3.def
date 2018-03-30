@@ -7,10 +7,8 @@ GetProcessShutdownParameters@8
 GetSystemCpuSetInformation@20
 GetThreadDescription@8
 GetThreadSelectedCpuSets@16
-QueryProtectedPolicy@8
 SetProcessDefaultCpuSets@12
 SetProcessInformation@16
-SetProtectedPolicy@12
 SetThreadDescription@8
 SetThreadIdealProcessor@8
 SetThreadSelectedCpuSets@12

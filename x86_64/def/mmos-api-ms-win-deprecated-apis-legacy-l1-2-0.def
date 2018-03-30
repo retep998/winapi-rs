@@ -1,4 +1,0 @@
-LIBRARY api-ms-win-deprecated-apis-legacy-l1-2-0.dll
-EXPORTS
-FindResourceExA
-GetStringTypeExA

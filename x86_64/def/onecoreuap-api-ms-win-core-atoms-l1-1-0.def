@@ -1,0 +1,19 @@
+LIBRARY api-ms-win-core-atoms-l1-1-0.dll
+EXPORTS
+AddAtomA
+AddAtomW
+DeleteAtom
+FindAtomA
+FindAtomW
+GetAtomNameA
+GetAtomNameW
+GlobalAddAtomA
+GlobalAddAtomExA
+GlobalAddAtomExW
+GlobalAddAtomW
+GlobalDeleteAtom
+GlobalFindAtomA
+GlobalFindAtomW
+GlobalGetAtomNameA
+GlobalGetAtomNameW
+InitAtomTable

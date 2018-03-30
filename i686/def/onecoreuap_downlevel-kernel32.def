@@ -17,6 +17,14 @@ AddVectoredExceptionHandler@8
 AllocConsole@0
 AllocateUserPhysicalPages@12
 AllocateUserPhysicalPagesNuma@16
+AppPolicyGetClrCompat@8
+AppPolicyGetCreateFileAccess@8
+AppPolicyGetLifecycleManagement@8
+AppPolicyGetMediaFoundationCodecLoading@8
+AppPolicyGetProcessTerminationMethod@8
+AppPolicyGetShowDeveloperDiagnostic@8
+AppPolicyGetThreadInitializationType@8
+AppPolicyGetWindowingModel@8
 AreFileApisANSI@0
 AssignProcessToJobObject@8
 AttachConsole@4
@@ -27,6 +35,7 @@ Beep@8
 BeginUpdateResourceA@8
 BeginUpdateResourceW@8
 BindIoCompletionCallback@12
+BuildCommDCBW@8
 CallNamedPipeA@28
 CallNamedPipeW@28
 CallbackMayRunLong@4
@@ -308,6 +317,7 @@ GetApplicationRecoveryCallbackWorker@20
 GetApplicationRestartSettings@16
 GetApplicationRestartSettingsWorker@16
 GetApplicationUserModelId@12
+GetApplicationUserModelIdFromToken@12
 GetAtomNameA@12
 GetAtomNameW@12
 GetBinaryTypeA@8
@@ -353,7 +363,9 @@ GetCurrentDirectoryA@8
 GetCurrentDirectoryW@8
 GetCurrentPackageFamilyName@8
 GetCurrentPackageFullName@8
+GetCurrentPackageId@8
 GetCurrentPackageInfo@16
+GetCurrentPackagePath@8
 GetCurrentProcess@0
 GetCurrentProcessId@0
 GetCurrentProcessorNumber@0
@@ -425,6 +437,7 @@ GetLongPathNameA@12
 GetLongPathNameTransactedW@16
 GetLongPathNameW@12
 GetMailslotInfo@20
+GetMaximumProcessorCount@4
 GetMaximumProcessorGroupCount@0
 GetMemoryErrorHandlingCapabilities@4
 GetModuleFileNameA@12
@@ -458,10 +471,13 @@ GetOverlappedResult@16
 GetOverlappedResultEx@20
 GetPackageApplicationIds@16
 GetPackageFamilyName@12
+GetPackageFamilyNameFromToken@12
 GetPackageFullName@12
+GetPackageFullNameFromToken@12
 GetPackageId@12
 GetPackageInfo@20
 GetPackagePath@16
+GetPackagePathByFullName@12
 GetPackagesByPackageFamily@20
 GetPhysicallyInstalledSystemMemory@4
 GetPriorityClass@4
@@ -504,6 +520,8 @@ GetQueuedCompletionStatus@20
 GetQueuedCompletionStatusEx@24
 GetShortPathNameA@12
 GetShortPathNameW@12
+GetStagedPackageOrigin@8
+GetStagedPackagePathByFullName@12
 GetStartupInfoA@4
 GetStartupInfoW@4
 GetStdHandle@4
@@ -771,6 +789,7 @@ OpenJobObjectW@12
 OpenMutexA@12
 OpenMutexW@12
 OpenPackageInfoByFullName@12
+OpenPackageInfoByFullNameForUser@16
 OpenPrivateNamespaceA@8
 OpenPrivateNamespaceW@8
 OpenProcess@12
@@ -783,6 +802,8 @@ OpenWaitableTimerW@12
 OutputDebugStringA@4
 OutputDebugStringW@4
 PackageFamilyNameFromFullName@12
+PackageFamilyNameFromId@12
+PackageFullNameFromId@12
 PackageIdFromFullName@16
 PackageNameAndPublisherIdFromFamilyName@20
 ParseApplicationUserModelId@20
@@ -1057,6 +1078,11 @@ UpdateResourceW@24
 VerLanguageNameA@12
 VerLanguageNameW@12
 VerSetConditionMask@16
+VerifyApplicationUserModelId@4
+VerifyPackageFamilyName@4
+VerifyPackageFullName@4
+VerifyPackageId@4
+VerifyPackageRelativeApplicationId@4
 VerifyScripts@20
 VerifyVersionInfoA@16
 VerifyVersionInfoW@16
