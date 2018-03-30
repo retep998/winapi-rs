@@ -1,0 +1,3 @@
+LIBRARY api-ms-win-gaming-deviceinformation-l1-1-0.dll
+EXPORTS
+GetGamingDeviceModelInformation@4

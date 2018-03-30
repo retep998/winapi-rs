@@ -101,6 +101,7 @@ SymFromTokenW@20
 SymFunctionTableAccess@8
 SymFunctionTableAccess64@12
 SymFunctionTableAccess64AccessRoutines@20
+SymGetExtendedOption@4
 SymGetFileLineOffsets64@20
 SymGetHomeDirectory@12
 SymGetHomeDirectoryW@12
@@ -180,6 +181,7 @@ SymRegisterFunctionEntryCallback64@16
 SymSearch@44
 SymSearchW@44
 SymSetContext@12
+SymSetExtendedOption@8
 SymSetHomeDirectory@8
 SymSetHomeDirectoryW@8
 SymSetOptions@4

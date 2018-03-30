@@ -18,6 +18,7 @@ MMDeviceGetPolicyConfig@4 @14
 RegisterForMediaCallback@8 @10
 UnregisterMediaCallback@4 @11
 mmdDevFindMmDevProperty@12 @19
+mmdDevGetEndpointFormFactorFromMMDeviceId@8 @30
 mmdDevGetInstanceIdFromInterfaceId@8 @26
 mmdDevGetInstanceIdFromMMDeviceId@8 @29
 mmdDevGetInterfaceClassGuid@8 @24

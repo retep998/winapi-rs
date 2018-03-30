@@ -1,0 +1,6 @@
+LIBRARY api-ms-win-core-fibers-l1-1-0.dll
+EXPORTS
+FlsAlloc
+FlsFree
+FlsGetValue
+FlsSetValue

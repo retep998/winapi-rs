@@ -1,3 +1,5 @@
 LIBRARY deviceaccess.dll
 EXPORTS
 CreateDeviceAccessInstance
+ProcessTrackerInsertOrWait
+ProcessTrackerRemove

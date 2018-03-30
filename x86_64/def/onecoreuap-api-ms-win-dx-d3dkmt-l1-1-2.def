@@ -1,0 +1,23 @@
+LIBRARY api-ms-win-dx-d3dkmt-l1-1-2.dll
+EXPORTS
+D3DKMTAbandonSwapChain
+D3DKMTAcquireSwapChain
+D3DKMTCheckMultiPlaneOverlaySupport3
+D3DKMTCreateHwContext
+D3DKMTCreateHwQueue
+D3DKMTCreateSwapChain
+D3DKMTDestroyHwContext
+D3DKMTDestroyHwQueue
+D3DKMTEnumAdapters2
+D3DKMTGetSetSwapChainMetadata
+D3DKMTOpenSwapChain
+D3DKMTPresentMultiPlaneOverlay3
+D3DKMTQueryFSEBlock
+D3DKMTQueryProcessOfferInfo
+D3DKMTReleaseSwapChain
+D3DKMTSetDodIndirectSwapchain
+D3DKMTSetFSEBlock
+D3DKMTSubmitCommandToHwQueue
+D3DKMTSubmitSignalSyncObjectsToHwQueue
+D3DKMTSubmitWaitForSyncObjectsToHwQueue
+D3DKMTTrimProcessCommitment

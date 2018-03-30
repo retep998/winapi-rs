@@ -1,5 +1,6 @@
 LIBRARY NEWDEV.dll
 EXPORTS
+CheckDriverSoftwareDependenciesSatisfied@24
 DiInstallDevice@24
 DiInstallDriverW@16
 DiUninstallDevice@20

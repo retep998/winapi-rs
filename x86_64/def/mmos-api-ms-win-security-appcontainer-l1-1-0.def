@@ -1,3 +1,0 @@
-LIBRARY api-ms-win-security-appcontainer-l1-1-0.dll
-EXPORTS
-GetAppContainerNamedObjectPath

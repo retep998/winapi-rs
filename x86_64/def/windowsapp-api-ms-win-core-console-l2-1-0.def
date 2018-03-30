@@ -1,0 +1,19 @@
+LIBRARY api-ms-win-core-console-l2-1-0.dll
+EXPORTS
+FillConsoleOutputAttribute
+FillConsoleOutputCharacterW
+GetConsoleCursorInfo
+GetConsoleScreenBufferInfo
+GetConsoleTitleW
+GetLargestConsoleWindowSize
+PeekConsoleInputW
+ReadConsoleOutputW
+SetConsoleCP
+SetConsoleCursorInfo
+SetConsoleCursorPosition
+SetConsoleOutputCP
+SetConsoleScreenBufferSize
+SetConsoleTextAttribute
+SetConsoleTitleW
+SetConsoleWindowInfo
+WriteConsoleOutputW

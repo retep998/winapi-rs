@@ -10,7 +10,7 @@ use shared::devpropdef::DEVPROPKEY;
 use shared::guiddef::GUID;
 use shared::minwindef::{BYTE, DWORD, WORD};
 use um::winnt::{
-    ANYSIZE_ARRAY, BOOLEAN, FILE_READ_DATA, FILE_WRITE_DATA, HANDLE, LARGE_INTEGER, WCHAR
+    ANYSIZE_ARRAY, BOOLEAN, FILE_READ_DATA, FILE_WRITE_DATA, HANDLE, LARGE_INTEGER, WCHAR,
 };
 DEFINE_GUID!{GUID_DEVINTERFACE_DISK,
     0x53f56307, 0xb6bf, 0x11d0, 0x94, 0xf2, 0x00, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b}
@@ -371,6 +371,59 @@ ENUM!{enum MEDIA_TYPE {
     F3_32M_512,
 }}
 pub type PMEDIA_TYPE = *mut MEDIA_TYPE;
+ENUM!{enum STORAGE_PROPERTY_ID {
+    StorageDeviceProperty = 0,
+    StorageAdapterProperty,
+    StorageDeviceIdProperty,
+    StorageDeviceUniqueIdProperty,
+    StorageDeviceWriteCacheProperty,
+    StorageMiniportProperty,
+    StorageAccessAlignmentProperty,
+    StorageDeviceSeekPenaltyProperty,
+    StorageDeviceTrimProperty,
+    StorageDeviceWriteAggregationProperty,
+    StorageDeviceDeviceTelemetryProperty,
+    StorageDeviceLBProvisioningProperty,
+    StorageDevicePowerProperty,
+    StorageDeviceCopyOffloadProperty,
+    StorageDeviceResiliencyProperty,
+    StorageDeviceMediumProductType,
+    StorageAdapterCryptoProperty,
+    StorageDeviceIoCapabilityProperty = 48,
+    StorageAdapterProtocolSpecificProperty,
+    StorageDeviceProtocolSpecificProperty,
+    StorageAdapterTemperatureProperty,
+    StorageDeviceTemperatureProperty,
+    StorageAdapterPhysicalTopologyProperty,
+    StorageDevicePhysicalTopologyProperty,
+    StorageDeviceAttributesProperty,
+    StorageDeviceManagementStatus,
+    StorageAdapterSerialNumberProperty,
+    StorageDeviceLocationProperty,
+    StorageDeviceNumaProperty,
+    StorageDeviceZonedDeviceProperty,
+    StorageDeviceUnsafeShutdownCount,
+}}
+pub type PSTORAGE_PROPERTY_ID = *mut STORAGE_PROPERTY_ID;
+ENUM!{enum STORAGE_QUERY_TYPE {
+    PropertyStandardQuery = 0,
+    PropertyExistsQuery,
+    PropertyMaskQuery,
+    PropertyQueryMaxDefined,
+}}
+pub type PSTORAGE_QUERY_TYPE = *mut STORAGE_QUERY_TYPE;
+STRUCT!{struct STORAGE_PROPERTY_QUERY {
+    PropertyId: STORAGE_PROPERTY_ID,
+    QueryType: STORAGE_QUERY_TYPE,
+    AdditionalParameters: [BYTE; 1],
+}}
+pub type PSTORAGE_PROPERTY_QUERY = *mut STORAGE_PROPERTY_QUERY;
+STRUCT!{struct DEVICE_TRIM_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    TrimEnabled: BOOLEAN,
+}}
+pub type PDEVICE_TRIM_DESCRIPTOR = *mut DEVICE_TRIM_DESCRIPTOR;
 //2953
 STRUCT!{struct DISK_GEOMETRY {
     Cylinders: LARGE_INTEGER,
