@@ -1,5 +1,9 @@
 LIBRARY MF.dll
 EXPORTS
+MFCreateASFContentInfo
+MFCreateASFIndexer
+MFCreateASFIndexerByteStream
+MFCreateASFSplitter
 MFCreateAggregateSource
 MFCreateAudioRendererActivate
 MFCreatePMPMediaSession

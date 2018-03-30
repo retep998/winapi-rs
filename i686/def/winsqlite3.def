@@ -168,6 +168,7 @@ sqlite3_rtree_geometry_callback@16
 sqlite3_rtree_query_callback@20
 sqlite3_set_authorizer@12
 sqlite3_set_auxdata@16
+sqlite3_set_last_insert_rowid@12
 sqlite3_shutdown@0
 sqlite3_sleep@4
 sqlite3_snprintf

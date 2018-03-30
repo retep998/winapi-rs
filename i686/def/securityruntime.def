@@ -1,6 +1,0 @@
-LIBRARY SecurityRuntime.dll
-EXPORTS
-FreeTransientObjectSecurityDescriptor@4
-GetChamberFolderPath@20
-GetChamberRegistryLocation@12
-QueryTransientObjectSecurityDescriptor@12

@@ -256,6 +256,7 @@ EnumSystemCodePagesA
 EnumSystemCodePagesW
 EnumSystemFirmwareTables
 EnumSystemGeoID
+EnumSystemGeoNames
 EnumSystemLanguageGroupsA
 EnumSystemLanguageGroupsW
 EnumSystemLocalesA
@@ -488,6 +489,7 @@ GetFullPathNameTransactedA
 GetFullPathNameTransactedW
 GetFullPathNameW
 GetGeoInfoA
+GetGeoInfoEx
 GetGeoInfoW
 GetHandleInformation
 GetLargePageMinimum
@@ -667,6 +669,7 @@ GetTimeZoneInformationForYear
 GetUILanguageInfo
 GetUmsCompletionListEvent
 GetUmsSystemThreadInformation
+GetUserDefaultGeoName
 GetUserDefaultLCID
 GetUserDefaultLangID
 GetUserDefaultLocaleName
@@ -777,7 +780,9 @@ IsValidLanguageGroup
 IsValidLocale
 IsValidLocaleName
 IsValidNLSVersion
+IsWow64GuestMachineSupported
 IsWow64Process
+IsWow64Process2
 K32EmptyWorkingSet
 K32EnumDeviceDrivers
 K32EnumPageFilesA
@@ -959,6 +964,7 @@ ReadConsoleOutputCharacterA
 ReadConsoleOutputCharacterW
 ReadConsoleOutputW
 ReadConsoleW
+ReadDirectoryChangesExW
 ReadDirectoryChangesW
 ReadFile
 ReadFileEx
@@ -1155,6 +1161,7 @@ SetTimerQueueTimer
 SetUmsThreadInformation
 SetUnhandledExceptionFilter
 SetUserGeoID
+SetUserGeoName
 SetVolumeLabelA
 SetVolumeLabelW
 SetVolumeMountPointA
@@ -1245,6 +1252,7 @@ WakeAllConditionVariable
 WakeConditionVariable
 WerGetFlags
 WerRegisterAdditionalProcess
+WerRegisterAppLocalDump
 WerRegisterCustomMetadata
 WerRegisterExcludedMemoryBlock
 WerRegisterFile
@@ -1252,6 +1260,7 @@ WerRegisterMemoryBlock
 WerRegisterRuntimeExceptionModule
 WerSetFlags
 WerUnregisterAdditionalProcess
+WerUnregisterAppLocalDump
 WerUnregisterCustomMetadata
 WerUnregisterExcludedMemoryBlock
 WerUnregisterFile

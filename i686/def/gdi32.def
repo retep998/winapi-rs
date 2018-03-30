@@ -74,6 +74,7 @@ D3DKMTAbandonSwapChain@4
 D3DKMTAcquireKeyedMutex@4
 D3DKMTAcquireKeyedMutex2@4
 D3DKMTAcquireSwapChain@4
+D3DKMTAddSurfaceToSwapChain@4
 D3DKMTAdjustFullscreenGamma@4
 D3DKMTCacheHybridQueryValue@4
 D3DKMTChangeVideoMemoryReservation@4
@@ -89,6 +90,7 @@ D3DKMTCloseAdapter@4
 D3DKMTConfigureSharedResource@4
 D3DKMTCreateAllocation@4
 D3DKMTCreateAllocation2@4
+D3DKMTCreateBundleObject@4
 D3DKMTCreateContext@4
 D3DKMTCreateContextVirtual@4
 D3DKMTCreateDCFromMemory@4
@@ -100,9 +102,11 @@ D3DKMTCreateKeyedMutex2@4
 D3DKMTCreateOutputDupl@4
 D3DKMTCreateOverlay@4
 D3DKMTCreatePagingQueue@4
+D3DKMTCreateProtectedSession@4
 D3DKMTCreateSwapChain@4
 D3DKMTCreateSynchronizationObject@4
 D3DKMTCreateSynchronizationObject2@4
+D3DKMTDDisplayEnum@4
 D3DKMTDestroyAllocation@4
 D3DKMTDestroyAllocation2@4
 D3DKMTDestroyContext@4
@@ -114,11 +118,16 @@ D3DKMTDestroyKeyedMutex@4
 D3DKMTDestroyOutputDupl@4
 D3DKMTDestroyOverlay@4
 D3DKMTDestroyPagingQueue@4
+D3DKMTDestroyProtectedSession@4
 D3DKMTDestroySynchronizationObject@4
+D3DKMTDispMgrCreate@4
+D3DKMTDispMgrSourceOperation@4
+D3DKMTDispMgrTargetOperation@4
 D3DKMTEnumAdapters@4
 D3DKMTEnumAdapters2@4
 D3DKMTEscape@4
 D3DKMTEvict@4
+D3DKMTExtractBundleObject@4
 D3DKMTFlipOverlay@4
 D3DKMTFlushHeapTransitions@4
 D3DKMTFreeGpuVirtualAddress@4
@@ -136,6 +145,7 @@ D3DKMTGetOverlayState@4
 D3DKMTGetPostCompositionCaps@4
 D3DKMTGetPresentHistory@4
 D3DKMTGetPresentQueueEvent@8
+D3DKMTGetProcessDeviceLostSupport@4
 D3DKMTGetProcessSchedulingPriorityBand@4
 D3DKMTGetProcessSchedulingPriorityClass@8
 D3DKMTGetResourcePresentPrivateDriverData@4
@@ -166,6 +176,7 @@ D3DKMTOpenAdapterFromLuid@4
 D3DKMTOpenKeyedMutex@4
 D3DKMTOpenKeyedMutex2@4
 D3DKMTOpenNtHandleFromName@4
+D3DKMTOpenProtectedSessionFromNtHandle@4
 D3DKMTOpenResource@4
 D3DKMTOpenResource2@4
 D3DKMTOpenResourceFromNtHandle@4
@@ -185,11 +196,14 @@ D3DKMTPresent@4
 D3DKMTPresentMultiPlaneOverlay@4
 D3DKMTPresentMultiPlaneOverlay2@4
 D3DKMTPresentMultiPlaneOverlay3@4
+D3DKMTPresentRedirected@4
 D3DKMTQueryAdapterInfo@4
 D3DKMTQueryAllocationResidency@4
 D3DKMTQueryClockCalibration@4
 D3DKMTQueryFSEBlock@4
 D3DKMTQueryProcessOfferInfo@4
+D3DKMTQueryProtectedSessionInfoFromNtHandle@4
+D3DKMTQueryProtectedSessionStatus@4
 D3DKMTQueryRemoteVidPnSourceFromGdiDisplayName@4
 D3DKMTQueryResourceInfo@4
 D3DKMTQueryResourceInfoFromNtHandle@4
@@ -203,11 +217,13 @@ D3DKMTReleaseKeyedMutex@4
 D3DKMTReleaseKeyedMutex2@4
 D3DKMTReleaseProcessVidPnSourceOwners@4
 D3DKMTReleaseSwapChain@4
+D3DKMTRemoveSurfaceFromSwapChain@4
 D3DKMTRender@4
 D3DKMTReserveGpuVirtualAddress@4
 D3DKMTSetAllocationPriority@4
 D3DKMTSetContextInProcessSchedulingPriority@4
 D3DKMTSetContextSchedulingPriority@4
+D3DKMTSetDeviceLostSupport@4
 D3DKMTSetDisplayMode@4
 D3DKMTSetDisplayPrivateDriverFormat@4
 D3DKMTSetDodIndirectSwapchain@4
@@ -215,6 +231,7 @@ D3DKMTSetFSEBlock@4
 D3DKMTSetGammaRamp@4
 D3DKMTSetHwProtectionTeardownRecovery@4
 D3DKMTSetMemoryBudgetTarget@4
+D3DKMTSetMonitorColorSpaceTransform@4
 D3DKMTSetProcessSchedulingPriorityBand@4
 D3DKMTSetProcessSchedulingPriorityClass@8
 D3DKMTSetQueuedLimit@4
@@ -224,6 +241,7 @@ D3DKMTSetSyncRefreshCountWaitTarget@4
 D3DKMTSetVidPnSourceHwProtection@4
 D3DKMTSetVidPnSourceOwner@4
 D3DKMTSetVidPnSourceOwner1@4
+D3DKMTSetVidPnSourceOwner2@4
 D3DKMTSetYieldPercentage@4
 D3DKMTShareObjects@20
 D3DKMTSharedPrimaryLockNotification@4
@@ -238,6 +256,7 @@ D3DKMTSubmitCommandToHwQueue@4
 D3DKMTSubmitSignalSyncObjectsToHwQueue@4
 D3DKMTSubmitWaitForSyncObjectsToHwQueue@4
 D3DKMTTrimProcessCommitment@4
+D3DKMTUnOrderedPresentSwapChain@4
 D3DKMTUnlock@4
 D3DKMTUnlock2@4
 D3DKMTUnpinDirectFlipResources@4

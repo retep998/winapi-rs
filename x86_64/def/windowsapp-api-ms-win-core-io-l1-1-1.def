@@ -1,10 +1,4 @@
 LIBRARY api-ms-win-core-io-l1-1-1.dll
 EXPORTS
 CancelIo
-CancelIoEx
-CreateIoCompletionPort
-GetOverlappedResult
 GetOverlappedResultEx
-GetQueuedCompletionStatus
-GetQueuedCompletionStatusEx
-PostQueuedCompletionStatus

@@ -1,5 +1,4 @@
 LIBRARY api-ms-win-core-delayload-l1-1-1.dll
 EXPORTS
-DelayLoadFailureHook
 ResolveDelayLoadedAPI
 ResolveDelayLoadsFromDll

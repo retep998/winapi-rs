@@ -1,0 +1,6 @@
+LIBRARY api-ms-win-core-memory-l1-1-0.dll
+EXPORTS
+FlushViewOfFile
+UnmapViewOfFile
+VirtualFree
+VirtualQuery

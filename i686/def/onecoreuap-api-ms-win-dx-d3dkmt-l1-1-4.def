@@ -1,0 +1,22 @@
+LIBRARY api-ms-win-dx-d3dkmt-l1-1-4.dll
+EXPORTS
+DrvQueryMonitorUniqueness@0 @1016
+D3DKMTAddSurfaceToSwapChain@4
+D3DKMTCreateBundleObject@4
+D3DKMTCreateProtectedSession@4
+D3DKMTDDisplayEnum@4
+D3DKMTDestroyProtectedSession@4
+D3DKMTDispMgrCreate@4
+D3DKMTDispMgrSourceOperation@4
+D3DKMTDispMgrTargetOperation@4
+D3DKMTExtractBundleObject@4
+D3DKMTGetProcessDeviceLostSupport@4
+D3DKMTOpenProtectedSessionFromNtHandle@4
+D3DKMTPresentRedirected@4
+D3DKMTQueryProtectedSessionInfoFromNtHandle@4
+D3DKMTQueryProtectedSessionStatus@4
+D3DKMTRemoveSurfaceFromSwapChain@4
+D3DKMTSetDeviceLostSupport@4
+D3DKMTSetMonitorColorSpaceTransform@4
+D3DKMTSetVidPnSourceOwner2@4
+D3DKMTUnOrderedPresentSwapChain@4

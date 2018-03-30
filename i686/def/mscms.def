@@ -18,12 +18,12 @@ ColorCplGetDefaultRenderingIntentScope@4
 ColorCplGetProfileProperties@8
 ColorCplHasSystemWideAssociationListChanged@12
 ColorCplInitialize@0
-ColorCplLoadAssociationList@16
+ColorCplLoadAssociationList@20
 ColorCplMergeAssociationLists@8
 ColorCplOverwritePerUserAssociationList@8
 ColorCplReleaseProfileProperties@4
 ColorCplResetSystemWideAssociationListChangedWarning@8
-ColorCplSaveAssociationList@16
+ColorCplSaveAssociationList@20
 ColorCplSetUsePerUserProfiles@12
 ColorCplUninitialize@0
 ConvertColorNameToIndex@16
@@ -69,7 +69,8 @@ InternalGetPS2ColorSpaceArray@24
 InternalGetPS2PreviewCRD@24
 InternalRefreshCalibration@8
 InternalSetDeviceConfig@24
-InternalWcsAssociateColorProfileWithDevice@16
+InternalWcsAssociateColorProfileWithDevice@20
+InternalWcsDisassociateColorProfileWithDevice@16
 IsColorProfileTagPresent@12
 IsColorProfileValid@8
 OpenColorProfileA@16

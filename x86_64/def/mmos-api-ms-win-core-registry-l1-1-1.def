@@ -1,6 +1,0 @@
-LIBRARY api-ms-win-core-registry-l1-1-1.dll
-EXPORTS
-RegDeleteKeyValueA
-RegDeleteKeyValueW
-RegSetKeyValueA
-RegSetKeyValueW

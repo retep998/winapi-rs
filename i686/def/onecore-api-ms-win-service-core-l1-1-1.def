@@ -3,6 +3,3 @@ EXPORTS
 EnumDependentServicesW@24
 EnumServicesStatusExW@40
 QueryServiceDynamicInformation@12
-RegisterServiceCtrlHandlerExW@12
-SetServiceStatus@8
-StartServiceCtrlDispatcherW@4
