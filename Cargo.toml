@@ -91,6 +91,8 @@ wtypes = []
 wtypesbase = []
 #ucrt
 #um
+accctrl = []
+aclapi = []
 audioclient = []
 audiosessiontypes = []
 avrt = []
