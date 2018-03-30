@@ -1,0 +1,24 @@
+LIBRARY api-ms-win-shell-namespace-l1-1-0.dll
+EXPORTS
+ILAppendID
+ILClone
+ILCloneFirst
+ILCombine
+ILFindChild
+ILFindLastID
+ILFree
+ILGetNext
+ILGetSize
+ILIsEqual
+ILIsParent
+ILRemoveLastID
+SHBindToFolderIDListParent
+SHBindToFolderIDListParentEx
+SHBindToObject
+SHBindToParent
+SHCreateItemFromIDList
+SHCreateItemFromParsingName
+SHCreateItemWithParent
+SHGetIDListFromObject
+SHGetNameFromIDList
+SHParseDisplayName

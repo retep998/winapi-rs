@@ -1,9 +1,4 @@
 LIBRARY api-ms-win-core-memory-l1-1-5.dll
 EXPORTS
 MapViewOfFileNuma2@36
-OpenFileMappingFromApp@12
-QueryVirtualMemoryInformation@24
-SetProcessValidCallTargets@20
 UnmapViewOfFile2@12
-VirtualAllocFromApp@16
-VirtualProtectFromApp@16

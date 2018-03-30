@@ -1,0 +1,5 @@
+LIBRARY api-ms-win-core-processtopology-l1-1-0.dll
+EXPORTS
+GetProcessGroupAffinity@12
+GetThreadGroupAffinity@8
+SetThreadGroupAffinity@12

@@ -27,6 +27,7 @@ WerStoreUploadReport
 WerpAddFile
 WerpAddFileBuffer
 WerpAddFileCallback
+WerpAddTerminationReason
 WerpAuxmdDumpProcessImages
 WerpAuxmdDumpRegisteredBlocks
 WerpAuxmdFree
@@ -42,8 +43,8 @@ WerpGetReportConsent
 WerpGetStoreLocation
 WerpIsDisabled
 WerpLaunchResponse
-WerpOpenUserQueue
 WerpSetAuxiliaryArchivePath
 WerpSetCallBack
 WerpSetDefaultUserConsent
 WerpSetIntegratorReportId
+WerpSetReportOption

@@ -1,9 +1,9 @@
 LIBRARY api-ms-win-appmodel-runtime-l1-1-1.dll
 EXPORTS
 FormatApplicationUserModelId
-PackageFamilyNameFromFullName
-PackageFamilyNameFromId
-PackageFullNameFromId
-PackageIdFromFullName
-PackageNameAndPublisherIdFromFamilyName
 ParseApplicationUserModelId
+VerifyApplicationUserModelId
+VerifyPackageFamilyName
+VerifyPackageFullName
+VerifyPackageId
+VerifyPackageRelativeApplicationId

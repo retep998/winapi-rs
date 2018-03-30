@@ -1,7 +1,3 @@
 LIBRARY api-ms-win-core-winrt-string-l1-1-1.dll
 EXPORTS
-HSTRING_UserFree64
-HSTRING_UserMarshal64
-HSTRING_UserSize64
-HSTRING_UserUnmarshal64
 WindowsInspectString2

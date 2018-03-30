@@ -2,9 +2,11 @@ LIBRARY api-ms-win-core-windowserrorreporting-l1-1-0.dll
 EXPORTS
 GetApplicationRecoveryCallback
 GetApplicationRestartSettings
+WerGetFlags
 WerRegisterFile
 WerRegisterMemoryBlock
 WerRegisterRuntimeExceptionModule
+WerSetFlags
 WerUnregisterFile
 WerUnregisterMemoryBlock
 WerUnregisterRuntimeExceptionModule

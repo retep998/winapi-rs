@@ -1,0 +1,3 @@
+LIBRARY api-ms-win-eventing-consumer-l1-1-1.dll
+EXPORTS
+QueryTraceProcessingHandle

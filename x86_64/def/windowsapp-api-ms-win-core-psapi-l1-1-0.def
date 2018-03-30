@@ -1,5 +1,6 @@
 LIBRARY api-ms-win-core-psapi-l1-1-0.dll
 EXPORTS
+K32EnumProcesses
 K32GetModuleBaseNameW
 K32GetModuleFileNameExW
 K32GetModuleInformation

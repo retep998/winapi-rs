@@ -36,3 +36,4 @@ wscSetDefaultProduct@8
 wscUnRegisterChangeNotification@4
 wscUnregisterSecurityProduct@4
 wscUpdateProductStatus@12
+wscUpdateProductSubStatus@8

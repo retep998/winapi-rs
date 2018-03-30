@@ -21,6 +21,7 @@ DwEnumEntryDetailsEx@20
 DwRasUninitialize@0
 GetAutoTriggerProfileInfo@24
 IsActiveAutoTriggerConnection@16
+IsActiveAutoTriggerConnectionEx@20
 RasAutoDialSharedConnection@0
 RasAutodialAddressToNetwork@12
 RasAutodialEntryToNetwork@12
@@ -97,6 +98,7 @@ RasHangUpW@4
 RasInvokeEapUI@16
 RasIsPublicPhonebook@4
 RasIsSharedConnection@8
+RasNQMStateEnteredNotification@0
 RasQueryRedialOnLinkFailure@12
 RasQuerySharedAutoDial@4
 RasQuerySharedConnection@4
@@ -104,6 +106,7 @@ RasRegisterEntryChangeNotification@24
 RasRenameEntryA@12
 RasRenameEntryW@12
 RasSetAutoTriggerProfile@24
+RasSetAutoTriggerProfileEx@28
 RasSetAutodialAddressA@20
 RasSetAutodialAddressW@20
 RasSetAutodialEnableA@8

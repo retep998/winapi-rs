@@ -1,7 +1,3 @@
 LIBRARY api-ms-win-core-fibers-l1-1-1.dll
 EXPORTS
-FlsAlloc@4
-FlsFree@4
-FlsGetValue@4
-FlsSetValue@8
 IsThreadAFiber@0

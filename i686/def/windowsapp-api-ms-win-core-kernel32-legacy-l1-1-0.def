@@ -1,0 +1,10 @@
+LIBRARY api-ms-win-core-kernel32-legacy-l1-1-0.dll
+EXPORTS
+CopyFileA@12
+CreateNamedPipeA@32
+GetComputerNameA@8
+GetComputerNameW@8
+GetSystemPowerStatus@4
+MoveFileExA@12
+SetFileCompletionNotificationModes@8
+SetVolumeLabelW@8

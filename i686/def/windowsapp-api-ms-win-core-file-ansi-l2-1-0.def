@@ -1,3 +1,4 @@
 LIBRARY api-ms-win-core-file-ansi-l2-1-0.dll
 EXPORTS
+CopyFileExA@24
 ReplaceFileA@24

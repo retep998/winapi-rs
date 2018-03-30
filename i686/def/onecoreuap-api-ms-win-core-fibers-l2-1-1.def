@@ -1,9 +1,4 @@
 LIBRARY api-ms-win-core-fibers-l2-1-1.dll
 EXPORTS
-ConvertFiberToThread@0
-ConvertThreadToFiber@4
 ConvertThreadToFiberEx@8
-CreateFiber@12
 CreateFiberEx@20
-DeleteFiber@4
-SwitchToFiber@4
