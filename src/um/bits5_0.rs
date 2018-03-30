@@ -70,9 +70,9 @@ UNION!{union BITS_FILE_PROPERTY_VALUE {
     [usize; 1],
     String String_mut: LPWSTR,
 }}
-RIDL!(#[uuid(0xe847030c, 0xbbba, 0x4657, 0xaf, 0x6d, 0x48, 0x4a, 0xa4, 0x2b, 0xf1, 0xfe)]
-interface IBackgroundCopyJob5(IBackgroundCopyJob5Vtbl)
-    : IBackgroundCopyJob4(IBackgroundCopyJob4Vtbl) {
+RIDL!{#[uuid(0xe847030c, 0xbbba, 0x4657, 0xaf, 0x6d, 0x48, 0x4a, 0xa4, 0x2b, 0xf1, 0xfe)]
+interface IBackgroundCopyJob5(IBackgroundCopyJob5Vtbl):
+    IBackgroundCopyJob4(IBackgroundCopyJob4Vtbl) {
     fn SetProperty(
         PropertyId: BITS_JOB_PROPERTY_ID,
         PropertyValue: BITS_JOB_PROPERTY_VALUE,
@@ -81,10 +81,10 @@ interface IBackgroundCopyJob5(IBackgroundCopyJob5Vtbl)
         PropertyId: BITS_JOB_PROPERTY_ID,
         PropertyValue: *mut BITS_JOB_PROPERTY_VALUE,
     ) -> HRESULT,
-});
-RIDL!(#[uuid(0x85c1657f, 0xdafc, 0x40e8, 0x88, 0x34, 0xdf, 0x18, 0xea, 0x25, 0x71, 0x7e)]
-interface IBackgroundCopyFile5(IBackgroundCopyFile5Vtbl)
-    : IBackgroundCopyFile4(IBackgroundCopyFile4Vtbl) {
+}}
+RIDL!{#[uuid(0x85c1657f, 0xdafc, 0x40e8, 0x88, 0x34, 0xdf, 0x18, 0xea, 0x25, 0x71, 0x7e)]
+interface IBackgroundCopyFile5(IBackgroundCopyFile5Vtbl):
+    IBackgroundCopyFile4(IBackgroundCopyFile4Vtbl) {
     fn SetProperty(
         PropertyId: BITS_JOB_PROPERTY_ID,
         PropertyValue: BITS_JOB_PROPERTY_VALUE,
@@ -93,4 +93,4 @@ interface IBackgroundCopyFile5(IBackgroundCopyFile5Vtbl)
         PropertyId: BITS_JOB_PROPERTY_ID,
         PropertyValue: *mut BITS_JOB_PROPERTY_VALUE,
     ) -> HRESULT,
-});
+}}

@@ -15,7 +15,7 @@ STRUCT!{struct BG_FILE_PROGRESS {
     BytesTransferred: UINT64,
     Completed: BOOL,
 }}
-RIDL!(#[uuid(0x01b7bd23, 0xfb88, 0x4a77, 0x84, 0x90, 0x58, 0x91, 0xd3, 0xe4, 0x65, 0x3a)]
+RIDL!{#[uuid(0x01b7bd23, 0xfb88, 0x4a77, 0x84, 0x90, 0x58, 0x91, 0xd3, 0xe4, 0x65, 0x3a)]
 interface IBackgroundCopyFile(IBackgroundCopyFileVtbl): IUnknown(IUnknownVtbl) {
     fn GetRemoteName(
         pVal: *mut LPWSTR,
@@ -26,8 +26,8 @@ interface IBackgroundCopyFile(IBackgroundCopyFileVtbl): IUnknown(IUnknownVtbl) {
     fn GetProgress(
         pVal: *mut BG_FILE_PROGRESS,
     ) -> HRESULT,
-});
-RIDL!(#[uuid(0xca51e165, 0xc365, 0x424c, 0x8d, 0x41, 0x24, 0xaa, 0xa4, 0xff, 0x3c, 0x40)]
+}}
+RIDL!{#[uuid(0xca51e165, 0xc365, 0x424c, 0x8d, 0x41, 0x24, 0xaa, 0xa4, 0xff, 0x3c, 0x40)]
 interface IEnumBackgroundCopyFiles(IEnumBackgroundCopyFilesVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
@@ -44,7 +44,7 @@ interface IEnumBackgroundCopyFiles(IEnumBackgroundCopyFilesVtbl): IUnknown(IUnkn
     fn GetCount(
         puCount: *mut ULONG,
     ) -> HRESULT,
-});
+}}
 ENUM!{enum BG_ERROR_CONTEXT {
     BG_ERROR_CONTEXT_NONE = 0,
     BG_ERROR_CONTEXT_UNKNOWN = 1,
@@ -55,7 +55,7 @@ ENUM!{enum BG_ERROR_CONTEXT {
     BG_ERROR_CONTEXT_GENERAL_TRANSPORT = 6,
     BG_ERROR_CONTEXT_REMOTE_APPLICATION = 7,
 }}
-RIDL!(#[uuid(0x19c613a0, 0xfcb8, 0x4f28, 0x81, 0xae, 0x89, 0x7c, 0x3d, 0x07, 0x8f, 0x81)]
+RIDL!{#[uuid(0x19c613a0, 0xfcb8, 0x4f28, 0x81, 0xae, 0x89, 0x7c, 0x3d, 0x07, 0x8f, 0x81)]
 interface IBackgroundCopyError(IBackgroundCopyErrorVtbl): IUnknown(IUnknownVtbl) {
     fn GetError(
         pContext: *mut BG_ERROR_CONTEXT,
@@ -75,7 +75,7 @@ interface IBackgroundCopyError(IBackgroundCopyErrorVtbl): IUnknown(IUnknownVtbl)
     fn GetProtocol(
         pProtocol: *mut LPWSTR,
     ) -> HRESULT,
-});
+}}
 STRUCT!{struct BG_FILE_INFO {
     RemoteName: LPWSTR,
     LocalName: LPWSTR,
@@ -119,7 +119,7 @@ ENUM!{enum BG_JOB_PROXY_USAGE {
     BG_JOB_PROXY_USAGE_OVERRIDE = BG_JOB_PROXY_USAGE_NO_PROXY + 1,
     BG_JOB_PROXY_USAGE_AUTODETECT = BG_JOB_PROXY_USAGE_OVERRIDE + 1,
 }}
-RIDL!(#[uuid(0x37668d37, 0x507e, 0x4160, 0x93, 0x16, 0x26, 0x30, 0x6d, 0x15, 0x0b, 0x12)]
+RIDL!{#[uuid(0x37668d37, 0x507e, 0x4160, 0x93, 0x16, 0x26, 0x30, 0x6d, 0x15, 0x0b, 0x12)]
 interface IBackgroundCopyJob(IBackgroundCopyJobVtbl): IUnknown(IUnknownVtbl) {
     fn AddFileSet(
         cFileCount: ULONG,
@@ -213,8 +213,8 @@ interface IBackgroundCopyJob(IBackgroundCopyJobVtbl): IUnknown(IUnknownVtbl) {
         pProxyBypassListpProxyList: *mut LPWSTR,
     ) -> HRESULT,
     fn TakeOwnership() -> HRESULT,
-});
-RIDL!(#[uuid(0x1af4f612, 0x3b71, 0x466f, 0x8f, 0x58, 0x7b, 0x6f, 0x73, 0xac, 0x57, 0xad)]
+}}
+RIDL!{#[uuid(0x1af4f612, 0x3b71, 0x466f, 0x8f, 0x58, 0x7b, 0x6f, 0x73, 0xac, 0x57, 0xad)]
 interface IEnumBackgroundCopyJobs(IEnumBackgroundCopyJobsVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
@@ -231,14 +231,14 @@ interface IEnumBackgroundCopyJobs(IEnumBackgroundCopyJobsVtbl): IUnknown(IUnknow
     fn GetCount(
         puCount: *mut ULONG,
     ) -> HRESULT,
-});
+}}
 pub const BG_NOTIFY_JOB_TRANSFERRED: DWORD = 0x0001;
 pub const BG_NOTIFY_JOB_ERROR: DWORD = 0x0002;
 pub const BG_NOTIFY_DISABLE: DWORD = 0x0004;
 pub const BG_NOTIFY_JOB_MODIFICATION: DWORD = 0x0008;
 pub const BG_NOTIFY_FILE_TRANSFERRED: DWORD = 0x0010;
 pub const BG_NOTIFY_FILE_RANGES_TRANSFERRED: DWORD = 0x0020;
-RIDL!(#[uuid(0x97ea99c7, 0x0186, 0x4ad4, 0x8d, 0xf9, 0xc5, 0xb4, 0xe0, 0xed, 0x6b, 0x22)]
+RIDL!{#[uuid(0x97ea99c7, 0x0186, 0x4ad4, 0x8d, 0xf9, 0xc5, 0xb4, 0xe0, 0xed, 0x6b, 0x22)]
 interface IBackgroundCopyCallback(IBackgroundCopyCallbackVtbl): IUnknown(IUnknownVtbl) {
     fn JobTransferred(
         pJob: *mut IBackgroundCopyJob,
@@ -251,8 +251,8 @@ interface IBackgroundCopyCallback(IBackgroundCopyCallbackVtbl): IUnknown(IUnknow
         pJob: *mut IBackgroundCopyJob,
         dwReserved: DWORD,
     ) -> HRESULT,
-});
-RIDL!(#[uuid(0xca29d251, 0xb4bb, 0x4679, 0xa3, 0xd9, 0xae, 0x80, 0x06, 0x11, 0x9d, 0x54)]
+}}
+RIDL!{#[uuid(0xca29d251, 0xb4bb, 0x4679, 0xa3, 0xd9, 0xae, 0x80, 0x06, 0x11, 0x9d, 0x54)]
 interface AsyncIBackgroundCopyCallback(AsyncIBackgroundCopyCallbackVtbl): IUnknown(IUnknownVtbl) {
     fn Begin_JobTransferred(
         pJob: *mut IBackgroundCopyJob,
@@ -268,9 +268,9 @@ interface AsyncIBackgroundCopyCallback(AsyncIBackgroundCopyCallbackVtbl): IUnkno
         dwReserved: DWORD,
     ) -> HRESULT,
     fn Finish_JobModification() -> HRESULT,
-});
+}}
 pub const BG_JOB_ENUM_ALL_USERS: DWORD = 0x0001;
-RIDL!(#[uuid(0x5ce34c0d, 0x0dc9, 0x4c1f, 0x89, 0x7c, 0xda, 0xa1, 0xb7, 0x8c, 0xee, 0x7c)]
+RIDL!{#[uuid(0x5ce34c0d, 0x0dc9, 0x4c1f, 0x89, 0x7c, 0xda, 0xa1, 0xb7, 0x8c, 0xee, 0x7c)]
 interface IBackgroundCopyManager(IBackgroundCopyManagerVtbl): IUnknown(IUnknownVtbl) {
     fn CreateJob(
         DisplayName: LPCWSTR,
@@ -291,4 +291,4 @@ interface IBackgroundCopyManager(IBackgroundCopyManagerVtbl): IUnknown(IUnknownV
         LanguageId: DWORD,
         pErrorDescription: *mut LPWSTR,
     ) -> HRESULT,
-});
+}}

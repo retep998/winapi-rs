@@ -20,9 +20,9 @@ ENUM!{enum BG_CERT_STORE_LOCATION {
     BG_CERT_STORE_LOCATION_LOCAL_MACHINE_ENTERPRISE
         = BG_CERT_STORE_LOCATION_LOCAL_MACHINE_GROUP_POLICY + 1,
 }}
-RIDL!(#[uuid(0x83e81b93, 0x0873, 0x474d, 0x8a, 0x8c, 0xf2, 0x01, 0x8b, 0x1a, 0x93, 0x9c)]
-interface IBackgroundCopyJobHttpOptions(IBackgroundCopyJobHttpOptionsVtbl)
-    : IUnknown(IUnknownVtbl) {
+RIDL!{#[uuid(0x83e81b93, 0x0873, 0x474d, 0x8a, 0x8c, 0xf2, 0x01, 0x8b, 0x1a, 0x93, 0x9c)]
+interface IBackgroundCopyJobHttpOptions(IBackgroundCopyJobHttpOptionsVtbl):
+    IUnknown(IUnknownVtbl) {
     fn SetClientCertificateByID(
         StoreLocation: BG_CERT_STORE_LOCATION,
         StoreName: LPCWSTR,
@@ -52,7 +52,7 @@ interface IBackgroundCopyJobHttpOptions(IBackgroundCopyJobHttpOptionsVtbl)
     fn GetSecurityFlags(
         pFlags: *mut ULONG,
     ) -> HRESULT,
-});
+}}
 pub const BG_SSL_ENABLE_CRL_CHECK: ULONG = 0x0001;
 pub const BG_SSL_IGNORE_CERT_CN_INVALID: ULONG = 0x0002;
 pub const BG_SSL_IGNORE_CERT_DATE_INVALID: ULONG = 0x0004;

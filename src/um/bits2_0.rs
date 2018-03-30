@@ -19,8 +19,9 @@ pub const BG_COPY_FILE_GROUP: DWORD = 2;
 pub const BG_COPY_FILE_DACL: DWORD = 4;
 pub const BG_COPY_FILE_SACL: DWORD = 8;
 pub const BG_COPY_FILE_ALL: DWORD = 15;
-RIDL!(#[uuid(0x443c8934, 0x90ff, 0x48ed, 0xbc, 0xde, 0x26, 0xf5, 0xc7, 0x45, 0x00, 0x42)]
-interface IBackgroundCopyJob3(IBackgroundCopyJob3Vtbl): IBackgroundCopyJob2(IBackgroundCopyJob2Vtbl) {
+RIDL!{#[uuid(0x443c8934, 0x90ff, 0x48ed, 0xbc, 0xde, 0x26, 0xf5, 0xc7, 0x45, 0x00, 0x42)]
+interface IBackgroundCopyJob3(IBackgroundCopyJob3Vtbl):
+    IBackgroundCopyJob2(IBackgroundCopyJob2Vtbl) {
     fn ReplaceRemotePrefix(
         OldPrefix: LPCWSTR,
         NewPrefix: LPCWSTR,
@@ -37,8 +38,8 @@ interface IBackgroundCopyJob3(IBackgroundCopyJob3Vtbl): IBackgroundCopyJob2(IBac
     fn GetFileACLFlags(
         Flags: *mut DWORD,
     ) -> HRESULT,
-});
-RIDL!(#[uuid(0x83e81b93, 0x0873, 0x474d, 0x8a, 0x8c, 0xf2, 0x01, 0x8b, 0x1a, 0x93, 0x9c)]
+}}
+RIDL!{#[uuid(0x83e81b93, 0x0873, 0x474d, 0x8a, 0x8c, 0xf2, 0x01, 0x8b, 0x1a, 0x93, 0x9c)]
 interface IBackgroundCopyFile2(IBackgroundCopyFile2Vtbl):
     IBackgroundCopyFile(IBackgroundCopyFileVtbl) {
     fn GetFileRanges(
@@ -48,4 +49,4 @@ interface IBackgroundCopyFile2(IBackgroundCopyFile2Vtbl):
     fn SetRemoteName(
         Val: LPCWSTR,
     ) -> HRESULT,
-});
+}}

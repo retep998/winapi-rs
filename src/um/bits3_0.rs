@@ -16,7 +16,7 @@ use um::bits2_0::{
 };
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR};
-RIDL!(#[uuid(0x659cdeaf, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
+RIDL!{#[uuid(0x659cdeaf, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
 interface IBitsPeerCacheRecord(IBitsPeerCacheRecordVtbl): IUnknown(IUnknownVtbl) {
     fn GetId(
         pVal: *mut GUID,
@@ -38,8 +38,8 @@ interface IBitsPeerCacheRecord(IBitsPeerCacheRecordVtbl): IUnknown(IUnknownVtbl)
         pRangeCount: *mut DWORD,
         ppRanges: *mut *mut BG_FILE_RANGE,
     ) -> HRESULT,
-});
-RIDL!(#[uuid(0x659cdea4, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
+}}
+RIDL!{#[uuid(0x659cdea4, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
 interface IEnumBitsPeerCacheRecords(IEnumBitsPeerCacheRecordsVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
@@ -56,8 +56,8 @@ interface IEnumBitsPeerCacheRecords(IEnumBitsPeerCacheRecordsVtbl): IUnknown(IUn
     fn GetCount(
         puCount: *mut ULONG,
     ) -> HRESULT,
-});
-RIDL!(#[uuid(0x659cdea2, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
+}}
+RIDL!{#[uuid(0x659cdea2, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
 interface IBitsPeer(IBitsPeerVtbl): IUnknown(IUnknownVtbl) {
     fn GetPeerName(
         pName: *mut LPWSTR,
@@ -68,8 +68,8 @@ interface IBitsPeer(IBitsPeerVtbl): IUnknown(IUnknownVtbl) {
     fn IsAvailable(
         pOnline: *mut BOOL,
     ) -> HRESULT,
-});
-RIDL!(#[uuid(0x659cdea5, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
+}}
+RIDL!{#[uuid(0x659cdea5, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
 interface IEnumBitsPeers(IEnumBitsPeersVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
@@ -86,11 +86,11 @@ interface IEnumBitsPeers(IEnumBitsPeersVtbl): IUnknown(IUnknownVtbl) {
     fn GetCount(
         puCount: *mut ULONG,
     ) -> HRESULT,
-});
+}}
 pub const BG_ENABLE_PEERCACHING_CLIENT: DWORD = 0x0001;
 pub const BG_ENABLE_PEERCACHING_SERVER: DWORD = 0x0002;
 pub const BG_DISABLE_BRANCH_CACHE: DWORD = 0x0004;
-RIDL!(#[uuid(0x659cdead, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
+RIDL!{#[uuid(0x659cdead, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
 interface IBitsPeerCacheAdministration(IBitsPeerCacheAdministrationVtbl): IUnknown(IUnknownVtbl) {
     fn GetMaximumCacheSize(
         pBytes: *mut DWORD,
@@ -128,13 +128,13 @@ interface IBitsPeerCacheAdministration(IBitsPeerCacheAdministrationVtbl): IUnkno
     ) -> HRESULT,
     fn ClearPeers() -> HRESULT,
     fn DiscoverPeers() -> HRESULT,
-});
+}}
 pub const BG_JOB_ENABLE_PEERCACHING_CLIENT: DWORD = 0x0001;
 pub const BG_JOB_ENABLE_PEERCACHING_SERVER: DWORD = 0x0002;
 pub const BG_JOB_DISABLE_BRANCH_CACHE: DWORD = 0x0004;
-RIDL!(#[uuid(0x659cdeae, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
-interface IBackgroundCopyJob4(IBackgroundCopyJob4Vtbl)
-    : IBackgroundCopyJob3(IBackgroundCopyJob3Vtbl) {
+RIDL!{#[uuid(0x659cdeae, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
+interface IBackgroundCopyJob4(IBackgroundCopyJob4Vtbl):
+    IBackgroundCopyJob3(IBackgroundCopyJob3Vtbl) {
     fn SetPeerCachingFlags(
         Flags: DWORD,
     ) -> HRESULT,
@@ -153,10 +153,10 @@ interface IBackgroundCopyJob4(IBackgroundCopyJob4Vtbl)
     fn GetMaximumDownloadTime(
         pTimeout: *mut ULONG,
     ) -> HRESULT,
-});
-RIDL!(#[uuid(0x659cdeaa, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
-interface IBackgroundCopyFile3(IBackgroundCopyFile3Vtbl)
-    : IBackgroundCopyFile2(IBackgroundCopyFile2Vtbl) {
+}}
+RIDL!{#[uuid(0x659cdeaa, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
+interface IBackgroundCopyFile3(IBackgroundCopyFile3Vtbl):
+    IBackgroundCopyFile2(IBackgroundCopyFile2Vtbl) {
     fn GetTemporaryName(
         pFilename: *mut LPWSTR,
     ) -> HRESULT,
@@ -169,12 +169,12 @@ interface IBackgroundCopyFile3(IBackgroundCopyFile3Vtbl)
     fn IsDownloadedFromPeer(
         pVal: *mut BOOL,
     ) -> HRESULT,
-});
-RIDL!(#[uuid(0x659cdeac, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
-interface IBackgroundCopyCallback2(IBackgroundCopyCallback2Vtbl)
-    : IBackgroundCopyCallback(IBackgroundCopyCallbackVtbl) {
+}}
+RIDL!{#[uuid(0x659cdeac, 0x489e, 0x11d9, 0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51)]
+interface IBackgroundCopyCallback2(IBackgroundCopyCallback2Vtbl):
+    IBackgroundCopyCallback(IBackgroundCopyCallbackVtbl) {
     fn FileTransferred(
         pJob: *mut IBackgroundCopyJob,
         pFile: *mut IBackgroundCopyFile,
     ) -> HRESULT,
-});
+}}

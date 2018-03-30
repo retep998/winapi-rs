@@ -37,8 +37,9 @@ STRUCT!{struct BG_AUTH_CREDENTIALS {
     Credentials: BG_AUTH_CREDENTIALS_UNION,
 }}
 pub type PBG_AUTH_CREDENTIALS = *mut BG_AUTH_CREDENTIALS;
-RIDL!(#[uuid(0x54b50739, 0x686f, 0x45eb, 0x9d, 0xff, 0xd6, 0xa9, 0xa0, 0xfa, 0xa9, 0xaf)]
-interface IBackgroundCopyJob2(IBackgroundCopyJob2Vtbl): IBackgroundCopyJob(IBackgroundCopyJobVtbl) {
+RIDL!{#[uuid(0x54b50739, 0x686f, 0x45eb, 0x9d, 0xff, 0xd6, 0xa9, 0xa0, 0xfa, 0xa9, 0xaf)]
+interface IBackgroundCopyJob2(IBackgroundCopyJob2Vtbl):
+    IBackgroundCopyJob(IBackgroundCopyJobVtbl) {
     fn SetNotifyCmdLine(
         Program: LPCWSTR,
         Parameters: LPCWSTR,
@@ -67,4 +68,4 @@ interface IBackgroundCopyJob2(IBackgroundCopyJob2Vtbl): IBackgroundCopyJob(IBack
         Target: BG_AUTH_TARGET,
         Scheme: BG_AUTH_SCHEME,
     ) -> HRESULT,
-});
+}}
