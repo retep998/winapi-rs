@@ -29,28 +29,34 @@ STRUCT!{struct VERSIONEDSTREAM {
     pStream: *mut IStream,
 }}
 pub type LPVERSIONEDSTREAM = *mut VERSIONEDSTREAM;
-DEFINE_CA!(CAC, CHAR);
-DEFINE_CA!(CAUB, UCHAR);
-DEFINE_CA!(CAI, SHORT);
-DEFINE_CA!(CAUI, USHORT);
-DEFINE_CA!(CAL, LONG);
-DEFINE_CA!(CAUL, ULONG);
-DEFINE_CA!(CAFLT, FLOAT);
-DEFINE_CA!(CADBL, DOUBLE);
-DEFINE_CA!(CACY, CY);
-DEFINE_CA!(CADATE, DATE);
-DEFINE_CA!(CABSTR, BSTR);
-DEFINE_CA!(CABSTRBLOB, BSTRBLOB);
-DEFINE_CA!(CABOOL, VARIANT_BOOL);
-DEFINE_CA!(CASCODE, SCODE);
-DEFINE_CA!(CAPROPVARIANT, PROPVARIANT);
-DEFINE_CA!(CAH, LARGE_INTEGER);
-DEFINE_CA!(CAUH, ULARGE_INTEGER);
-DEFINE_CA!(CALPSTR, LPSTR);
-DEFINE_CA!(CALPWSTR, LPWSTR);
-DEFINE_CA!(CAFILETIME, FILETIME);
-DEFINE_CA!(CACLIPDATA, CLIPDATA);
-DEFINE_CA!(CACLSID, CLSID);
+macro_rules! TYPEDEF_CA {
+    ($name:ident, $t:ty) => { STRUCT!{struct $name {
+        cElems: $crate::shared::ntdef::ULONG,
+        pElems: *mut $t,
+    }}}
+}
+TYPEDEF_CA!(CAC, CHAR);
+TYPEDEF_CA!(CAUB, UCHAR);
+TYPEDEF_CA!(CAI, SHORT);
+TYPEDEF_CA!(CAUI, USHORT);
+TYPEDEF_CA!(CAL, LONG);
+TYPEDEF_CA!(CAUL, ULONG);
+TYPEDEF_CA!(CAFLT, FLOAT);
+TYPEDEF_CA!(CADBL, DOUBLE);
+TYPEDEF_CA!(CACY, CY);
+TYPEDEF_CA!(CADATE, DATE);
+TYPEDEF_CA!(CABSTR, BSTR);
+TYPEDEF_CA!(CABSTRBLOB, BSTRBLOB);
+TYPEDEF_CA!(CABOOL, VARIANT_BOOL);
+TYPEDEF_CA!(CASCODE, SCODE);
+TYPEDEF_CA!(CAPROPVARIANT, PROPVARIANT);
+TYPEDEF_CA!(CAH, LARGE_INTEGER);
+TYPEDEF_CA!(CAUH, ULARGE_INTEGER);
+TYPEDEF_CA!(CALPSTR, LPSTR);
+TYPEDEF_CA!(CALPWSTR, LPWSTR);
+TYPEDEF_CA!(CAFILETIME, FILETIME);
+TYPEDEF_CA!(CACLIPDATA, CLIPDATA);
+TYPEDEF_CA!(CACLSID, CLSID);
 UNION!{union PROPVARIANT_data {
     [u64; 1] [u64; 2],
     cVal cVal_mut: CHAR,
@@ -186,7 +192,7 @@ STRUCT!{struct STATPROPSETSTG {
     atime: FILETIME,
     dwOSVersion: DWORD,
 }}
-RIDL!(#[uuid(0x00000138, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x00000138, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IPropertyStorage(IPropertyStorageVtbl): IUnknown(IUnknownVtbl) {
     fn ReadMultiple(
         cpspec: ULONG,
@@ -234,9 +240,9 @@ interface IPropertyStorage(IPropertyStorageVtbl): IUnknown(IUnknownVtbl) {
     fn Stat(
         pstatpsstg: *mut STATPROPSETSTG,
     ) -> HRESULT,
-});
+}}
 pub type LPPROPERTYSETSTORAGE = *mut IPropertySetStorage;
-RIDL!(#[uuid(0x0000013A, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x0000013A, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IPropertySetStorage(IPropertySetStorageVtbl): IUnknown(IUnknownVtbl) {
     fn Create(
         rfmtid: REFFMTID,
@@ -256,9 +262,9 @@ interface IPropertySetStorage(IPropertySetStorageVtbl): IUnknown(IUnknownVtbl) {
     fn Enum(
         ppenum: *mut *mut IEnumSTATPROPSTG,
     ) -> HRESULT,
-});
+}}
 pub type LPENUMSTATPROPSTG = *mut IEnumSTATPROPSTG;
-RIDL!(#[uuid(0x00000139, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x00000139, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IEnumSTATPROPSTG(IEnumSTATPROPSTGVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
@@ -272,9 +278,9 @@ interface IEnumSTATPROPSTG(IEnumSTATPROPSTGVtbl): IUnknown(IUnknownVtbl) {
     fn Clone(
         ppenum: *mut *mut IEnumSTATPROPSTG,
     ) -> HRESULT,
-});
+}}
 pub type LPENUMSTATPROPSETSTG = *mut IEnumSTATPROPSETSTG;
-RIDL!(#[uuid(0x0000013B, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x0000013B, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IEnumSTATPROPSETSTG(IEnumSTATPROPSETSTGVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
@@ -288,7 +294,7 @@ interface IEnumSTATPROPSETSTG(IEnumSTATPROPSETSTGVtbl): IUnknown(IUnknownVtbl) {
     fn Clone(
         ppenum: *mut *mut IEnumSTATPROPSETSTG,
     ) -> HRESULT,
-});
+}}
 pub type LPPROPERTYSTORAGE = *mut IPropertyStorage;
 pub const PIDDI_THUMBNAIL: DWORD = 0x00000002;
 pub const PIDSI_TITLE: DWORD = 0x00000002;

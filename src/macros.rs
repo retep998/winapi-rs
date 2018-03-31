@@ -389,9 +389,3 @@ macro_rules! FN {
         pub type $func = Option<unsafe extern "C" fn($($p: $t,)*) -> $ret>;
     );
 }
-macro_rules! DEFINE_CA {
-    ($name:ident, $t:ty) => { STRUCT!{struct $name {
-        cElems: $crate::shared::ntdef::ULONG,
-        pElems: *mut $t,
-    }}}
-}
