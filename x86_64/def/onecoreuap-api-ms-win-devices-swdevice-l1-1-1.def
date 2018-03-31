@@ -1,11 +1,4 @@
 LIBRARY api-ms-win-devices-swdevice-l1-1-1.dll
 EXPORTS
-SwDeviceClose
-SwDeviceCreate
 SwDeviceGetLifetime
-SwDeviceInterfacePropertySet
-SwDeviceInterfaceRegister
-SwDeviceInterfaceSetState
-SwDevicePropertySet
 SwDeviceSetLifetime
-SwMemFree

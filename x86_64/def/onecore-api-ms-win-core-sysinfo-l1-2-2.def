@@ -1,0 +1,3 @@
+LIBRARY api-ms-win-core-sysinfo-l1-2-2.dll
+EXPORTS
+GetProcessorSystemCycleTime

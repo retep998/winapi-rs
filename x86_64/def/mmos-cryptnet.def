@@ -1,7 +1,0 @@
-LIBRARY CRYPTNET.dll
-EXPORTS
-CryptGetObjectUrl
-CryptInstallCancelRetrieval
-CryptRetrieveObjectByUrlA
-CryptRetrieveObjectByUrlW
-CryptUninstallCancelRetrieval

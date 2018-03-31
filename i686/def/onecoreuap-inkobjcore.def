@@ -1,6 +1,7 @@
 LIBRARY inkobjcore.dll
 EXPORTS
 AddStroke@20
+AddStrokeWithId@24
 AddWordsToWordList@8
 AdviseInkChange@8
 CreateContext@8
@@ -21,9 +22,11 @@ IsStringSupported@12
 LoadCachedAttributes@20
 MakeWordList@12
 Process@8
+SetConstraint@12
 SetEnabledUnicodeRanges@12
 SetFactoid@12
 SetFlags@8
 SetGuide@12
+SetStrokeGroupId@12
 SetTextContext@20
 SetWordList@8

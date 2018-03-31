@@ -1,0 +1,9 @@
+LIBRARY api-ms-win-core-io-l1-1-0.dll
+EXPORTS
+CancelIoEx
+CreateIoCompletionPort
+DeviceIoControl
+GetOverlappedResult
+GetQueuedCompletionStatus
+GetQueuedCompletionStatusEx
+PostQueuedCompletionStatus
