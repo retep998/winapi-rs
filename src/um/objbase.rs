@@ -16,7 +16,7 @@ use um::objidl::{
     BIND_OPTS, IBindCtx, IFillLockBytes, IInitializeSpy, ILockBytes, IStorage, LPBC,
     LPDATAADVISEHOLDER, LPMALLOCSPY, LPMESSAGEFILTER, LPMONIKER, LPRUNNINGOBJECTTABLE,
 };
-use um::objidlbase::{COSERVERINFO, IChannelHook, MULTI_QI};
+use um::objidlbase::{COSERVERINFO, IChannelHook, IMalloc, MULTI_QI};
 use um::unknwnbase::{IUnknown, LPUNKNOWN};
 use um::urlmon::IBindStatusCallback;
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR, PSECURITY_DESCRIPTOR, ULARGE_INTEGER};
@@ -42,6 +42,10 @@ extern "system" {
         pMallocSpy: LPMALLOCSPY,
     ) -> HRESULT;
     pub fn CoRevokeMallocSpy() -> HRESULT;
+    pub fn CoCreateStandardMalloc(
+        memctx: DWORD,
+        ppMalloc: *mut *mut IMalloc,
+    ) -> HRESULT;
     pub fn CoRegisterInitializeSpy(
         pSpy: *mut IInitializeSpy,
         puliCookie: *mut ULARGE_INTEGER,

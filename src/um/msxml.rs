@@ -688,8 +688,8 @@ interface IXMLDocument(IXMLDocumentVtbl): IDispatch(IDispatchVtbl) {
         p: *mut BSTR,
     ) -> HRESULT,
     fn createElement(
+        vType: VARIANT,
         var1: VARIANT,
-        var2: VARIANT,
         ppElem: *mut *mut IXMLElement,
     ) -> HRESULT,
 });
@@ -735,8 +735,8 @@ interface IXMLDocument2(IXMLDocument2Vtbl): IDispatch(IDispatchVtbl) {
         p: *mut BSTR,
     ) -> HRESULT,
     fn createElement(
+        vType: VARIANT,
         var1: VARIANT,
-        var2: VARIANT,
         ppElem: *mut *mut IXMLElement,
     ) -> HRESULT,
     fn get_async(

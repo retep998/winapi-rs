@@ -196,10 +196,14 @@ pub type wireHMETAFILE = *mut userHMETAFILE;
 pub type wireHMETAFILEPICT = *mut userHMETAFILEPICT;
 pub type HMETAFILEPICT = *mut c_void;
 pub type DATE = c_double;
-STRUCT!{struct CY {
+STRUCT!{struct CY_s {
     Lo: ULONG,
     Hi: LONG,
-    int64: LONGLONG,
+}}
+UNION!{union CY {
+    [u64; 1],
+    s s_mut: CY_s,
+    int64 int64_mut: LONGLONG,
 }}
 pub type LPCY = *mut CY;
 STRUCT!{struct DECIMAL_u_s {
