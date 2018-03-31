@@ -1,0 +1,6 @@
+LIBRARY api-ms-win-core-debug-l1-1-0.dll
+EXPORTS
+DebugBreak@0
+IsDebuggerPresent@0
+OutputDebugStringA@4
+OutputDebugStringW@4

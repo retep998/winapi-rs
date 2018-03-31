@@ -1,4 +1,0 @@
-LIBRARY api-ms-win-core-file-l2-1-2.dll
-EXPORTS
-CopyFileW@12
-CreateHardLinkA@12

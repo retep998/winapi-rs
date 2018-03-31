@@ -9,6 +9,7 @@ WinUsb_GetAdjustedFrameNumber@12
 WinUsb_GetAssociatedInterface@12
 WinUsb_GetCurrentAlternateSetting@8
 WinUsb_GetCurrentFrameNumber@12
+WinUsb_GetCurrentFrameNumberAndQpc@8
 WinUsb_GetDescriptor@28
 WinUsb_GetOverlappedResult@16
 WinUsb_GetPipePolicy@20
@@ -30,6 +31,8 @@ WinUsb_SetCurrentAlternateSetting@8
 WinUsb_SetCurrentAlternateSettingAsync@12
 WinUsb_SetPipePolicy@20
 WinUsb_SetPowerPolicy@16
+WinUsb_StartTrackingForTimeSync@8
+WinUsb_StopTrackingForTimeSync@8
 WinUsb_UnregisterIsochBuffer@4
 WinUsb_WriteIsochPipe@20
 WinUsb_WriteIsochPipeAsap@20

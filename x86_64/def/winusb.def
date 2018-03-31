@@ -9,6 +9,7 @@ WinUsb_GetAdjustedFrameNumber
 WinUsb_GetAssociatedInterface
 WinUsb_GetCurrentAlternateSetting
 WinUsb_GetCurrentFrameNumber
+WinUsb_GetCurrentFrameNumberAndQpc
 WinUsb_GetDescriptor
 WinUsb_GetOverlappedResult
 WinUsb_GetPipePolicy
@@ -30,6 +31,8 @@ WinUsb_SetCurrentAlternateSetting
 WinUsb_SetCurrentAlternateSettingAsync
 WinUsb_SetPipePolicy
 WinUsb_SetPowerPolicy
+WinUsb_StartTrackingForTimeSync
+WinUsb_StopTrackingForTimeSync
 WinUsb_UnregisterIsochBuffer
 WinUsb_WriteIsochPipe
 WinUsb_WriteIsochPipeAsap

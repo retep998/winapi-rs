@@ -32,6 +32,7 @@ SetWindowSubclass@16 @410
 CreatePropertySheetPageA@4
 CreatePropertySheetPageW@4
 CreateToolbarEx@52
+DPA_Merge@24
 DSA_Clone@4
 DSA_GetSize@4
 DSA_Sort@12

@@ -2,10 +2,7 @@ LIBRARY api-ms-win-shcore-scaling-l1-1-1.dll
 EXPORTS
 GetDpiForMonitor
 GetProcessDpiAwareness
-GetScaleFactorForDevice
 GetScaleFactorForMonitor
 RegisterScaleChangeEvent
-RegisterScaleChangeNotifications
-RevokeScaleChangeNotifications
 SetProcessDpiAwareness
 UnregisterScaleChangeEvent

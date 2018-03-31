@@ -1,0 +1,5 @@
+LIBRARY MFSENSORGROUP.dll
+EXPORTS
+MFCreateSensorActivityMonitor
+MFCreateSensorGroup
+MFCreateSensorStream

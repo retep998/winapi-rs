@@ -1,0 +1,3 @@
+LIBRARY api-ms-win-mm-misc-l1-1-1.dll
+EXPORTS
+sndOpenSound@16

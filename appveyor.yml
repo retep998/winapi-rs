@@ -14,6 +14,6 @@ install:
   - cargo -vV
 build_script:
   - cargo build
-  - cargo build --features everything
+  - cargo build --features "everything debug"
 test_script:
-  - cargo test --features everything
+  - cargo test --features "everything debug"

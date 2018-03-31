@@ -1,0 +1,10 @@
+LIBRARY api-ms-win-core-console-l1-1-0.dll
+EXPORTS
+GetConsoleCP
+GetConsoleMode
+GetConsoleOutputCP
+ReadConsoleInputW
+ReadConsoleW
+SetConsoleCtrlHandler
+SetConsoleMode
+WriteConsoleW

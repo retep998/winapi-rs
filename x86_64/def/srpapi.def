@@ -5,6 +5,7 @@ AppIDDecodeAttributeString
 AppIDEncodeAttributeString
 AppIDFreeAttributeString
 SrpCloseThreadNetworkContext
+SrpCloseTrackInstall
 SrpCreateThreadNetworkContext
 SrpDisablePermissiveModeFileEncryption
 SrpDoesPolicyAllowAppExecution
@@ -17,5 +18,6 @@ SrpInheritEnterpriseContext
 SrpInheritOriginClaim
 SrpIsAllowed
 SrpIsTokenService
+SrpOpenTrackInstall
 SrpRestoreEnterpriseContext
 SrpSetTokenEnterpriseId
