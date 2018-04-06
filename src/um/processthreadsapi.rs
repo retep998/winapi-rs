@@ -199,17 +199,37 @@ extern "system" {
     pub fn GetStartupInfoW(
         lpStartupInfo: LPSTARTUPINFOW,
     );
-    // pub fn CreateProcessAsUserW();
+    pub fn CreateProcessAsUserW(
+        hToken: HANDLE,
+        lpApplicationName: LPCWSTR,
+        lpCommandLine: LPWSTR,
+        lpProcessAttributes: LPSECURITY_ATTRIBUTES,
+        lpThreadAttributes: LPSECURITY_ATTRIBUTES,
+        bInheritHandles: BOOL,
+        dwCreationFlags: DWORD,
+        lpEnvironment: LPVOID,
+        lpCurrentDirectory: LPCWSTR,
+        lpStartupInfo: LPSTARTUPINFOW,
+        lpProcessInformation: LPPROCESS_INFORMATION,
+    ) -> BOOL;
     // pub fn GetCurrentProcessToken();
     // pub fn GetCurrentThreadToken();
     // pub fn GetCurrentThreadEffectiveToken();
-    // pub fn SetThreadToken();
+    pub fn SetThreadToken(
+        Thread: PHANDLE,
+        Token: HANDLE,
+    ) -> BOOL;
     pub fn OpenProcessToken(
         ProcessHandle: HANDLE,
         DesiredAccess: DWORD,
         TokenHandle: PHANDLE,
     ) -> BOOL;
-    // pub fn OpenThreadToken();
+    pub fn OpenThreadToken(
+        ThreadHandle: HANDLE,
+        DesiredAccess: DWORD,
+        OpenAsSelf: BOOL,
+        TokenHandle: PHANDLE,
+    ) -> BOOL;
     pub fn SetPriorityClass(
         hProcess: HANDLE,
         dwPriorityClass: DWORD,
