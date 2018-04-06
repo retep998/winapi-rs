@@ -151,6 +151,7 @@ pub mod gl;
 #[cfg(feature = "psapi")] pub mod psapi;
 #[cfg(feature = "realtimeapiset")] pub mod realtimeapiset;
 #[cfg(feature = "reason")] pub mod reason;
+#[cfg(feature = "restartmanager")] pub mod restartmanager;
 #[cfg(feature = "restrictederrorinfo")] pub mod restrictederrorinfo;
 #[cfg(feature = "rmxfguid")] pub mod rmxfguid;
 #[cfg(feature = "sapi")] pub mod sapi;
