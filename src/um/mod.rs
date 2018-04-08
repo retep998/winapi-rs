@@ -88,6 +88,7 @@ pub mod gl;
 #[cfg(feature = "gdiplusenums")] pub mod gdiplusenums;
 #[cfg(feature = "gdiplusinit")] pub mod gdiplusinit;
 #[cfg(feature = "gdiplusmem")] pub mod gdiplusmem;
+#[cfg(feature = "gdipluspixelformats")] pub mod gdipluspixelformats;
 #[cfg(feature = "gdiplustypes")] pub mod gdiplustypes;
 #[cfg(feature = "handleapi")] pub mod handleapi;
 #[cfg(feature = "heapapi")] pub mod heapapi;

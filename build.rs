@@ -153,6 +153,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("gdiplusenums", &["minwindef", "wingdi"], &[]),
     ("gdiplusinit", &["basetsd", "gdiplustypes", "minwindef", "winnt"], &["gdiplus"]),
     ("gdiplusmem", &[], &["gdiplus"]),
+    ("gdipluspixelformats", &["minwindef", "winnt"], &[]),
     ("gdiplustypes", &["gdiplusenums", "minwindef", "winnt"], &[]),
     ("gl-gl", &[], &["opengl32"]),
     ("handleapi", &["minwindef", "winnt"], &["kernel32"]),
