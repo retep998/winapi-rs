@@ -17,6 +17,9 @@ use um::shtypes::COMDLG_FILTERSPEC;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR, WCHAR};
 
+DEFINE_GUID!{CLSID_TaskbarList,
+    0x56fdf344, 0xfd6d, 0x11d0, 0x95, 0x8a, 0x00, 0x60, 0x97, 0xc9, 0xa0, 0x90}
+
 pub type IFileOperationProgressSink = IUnknown; // TODO
 ENUM!{enum SIATTRIBFLAGS {
     SIATTRIBFLAGS_AND = 0x1,
@@ -381,4 +384,32 @@ interface IFileDialog2(IFileDialog2Vtbl): IFileDialog(IFileDialogVtbl) {
     fn SetNavigationRoot(
         psi: IShellItem,
     ) -> HRESULT,
+});
+
+RIDL!(
+#[uuid(0x56fdf342, 0xfd6d, 0x11d0, 0x95, 0x8a, 0x00, 0x60, 0x97, 0xc9, 0xa0, 0x90)]
+interface ITaskbarList(ITaskbarListVtbl): IUnknown(IUnknownVtbl) {
+    fn HrInit() -> HRESULT,
+    fn AddTab(
+        hwnd: HWND,
+    ) -> HRESULT,
+    fn DeleteTab(
+        hwnd: HWND,
+    ) -> HRESULT,
+    fn ActivateTab(
+        hwnd: HWND,
+    ) -> HRESULT,
+    fn SetActiveAlt(
+        hwnd: HWND,
+    ) -> HRESULT,
+});
+
+
+RIDL!(
+#[uuid(0x602d4995, 0xb13a, 0x429b, 0xa6, 0x6e, 0x19, 0x35, 0xe4, 0x4f, 0x43, 0x17)]
+interface ITaskbarList2(ITaskbarList2Vtbl): ITaskbarList(ITaskbarListVtbl) {
+    fn MarkFullscreenWindow(
+        hwnd: HWND,
+        fFullscreen: BOOL,
+    ) -> HRESULT,    
 });
