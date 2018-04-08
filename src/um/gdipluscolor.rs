@@ -20,6 +20,7 @@ ENUM!{enum ColorChannelFlags {
     ColorChannelFlagsLast,
 }}
 #[repr(C)]
+#[derive(Clone, Copy)]
 pub struct Color {
     Argb: ARGB,
 }
@@ -226,5 +227,10 @@ impl Color {
           ((g as ARGB) << Self::GreenShift) |
           ((r as ARGB) << Self::RedShift) |
           ((a as ARGB) << Self::AlphaShift)
+    }
+}
+impl Default for Color {
+    fn default() -> Self {
+        Color::new()
     }
 }
