@@ -88,6 +88,7 @@ pub mod gl;
 #[cfg(feature = "gdipluscolor")] pub mod gdipluscolor;
 #[cfg(feature = "gdipluscolormatrix")] pub mod gdipluscolormatrix;
 #[cfg(feature = "gdiplusenums")] pub mod gdiplusenums;
+#[cfg(feature = "gdiplusgpstubs")] pub mod gdiplusgpstubs;
 #[cfg(feature = "gdiplusinit")] pub mod gdiplusinit;
 #[cfg(feature = "gdiplusmem")] pub mod gdiplusmem;
 #[cfg(feature = "gdiplusmetaheader")] pub mod gdiplusmetaheader;
