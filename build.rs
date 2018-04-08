@@ -150,6 +150,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("errhandlingapi", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("fibersapi", &["minwindef", "winnt"], &["kernel32"]),
     ("fileapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
+    ("gdipluscolor", &["gdipluspixelformats", "minwindef", "windef", "wingdi"], &[]),
     ("gdiplusenums", &["minwindef", "wingdi"], &[]),
     ("gdiplusinit", &["basetsd", "gdiplustypes", "minwindef", "winnt"], &["gdiplus"]),
     ("gdiplusmem", &[], &["gdiplus"]),
