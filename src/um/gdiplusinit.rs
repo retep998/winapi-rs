@@ -23,46 +23,46 @@ STRUCT!{struct GdiplusStartupInput {
     SuppressExternalCodecs: BOOL,
 }}
 impl GdiplusStartupInput {
-  pub fn new(
-    debugEventCallback: DebugEventProc,
-    suppressBackgroundThread: BOOL,
-    suppressExternalCodecs: BOOL,
-  ) -> Self {
-    GdiplusStartupInput {
-      GdiplusVersion: 1,
-      DebugEventCallback: debugEventCallback,
-      SuppressBackgroundThread: suppressBackgroundThread,
-      SuppressExternalCodecs: suppressExternalCodecs,
+    pub fn new(
+        debugEventCallback: DebugEventProc,
+        suppressBackgroundThread: BOOL,
+        suppressExternalCodecs: BOOL,
+    ) -> Self {
+        GdiplusStartupInput {
+            GdiplusVersion: 1,
+            DebugEventCallback: debugEventCallback,
+            SuppressBackgroundThread: suppressBackgroundThread,
+            SuppressExternalCodecs: suppressExternalCodecs,
+        }
     }
-  }
 }
 STRUCT!{struct GdiplusStartupInputEx {
     parent: GdiplusStartupInput,
     StartupParameters: INT,
 }}
 impl GdiplusStartupInputEx {
-  pub fn new(
-    startupParameters: INT,
-    debugEventCallback: DebugEventProc,
-    suppressBackgroundThread: BOOL,
-    suppressExternalCodecs: BOOL,
-  ) -> Self {
-    GdiplusStartupInputEx {
-      parent: GdiplusStartupInput {
-        GdiplusVersion: 2,
-        DebugEventCallback: debugEventCallback,
-        SuppressBackgroundThread: suppressBackgroundThread,
-        SuppressExternalCodecs: suppressExternalCodecs,
-      },
-      StartupParameters: startupParameters,
+    pub fn new(
+        startupParameters: INT,
+        debugEventCallback: DebugEventProc,
+        suppressBackgroundThread: BOOL,
+        suppressExternalCodecs: BOOL,
+    ) -> Self {
+        GdiplusStartupInputEx {
+            parent: GdiplusStartupInput {
+                GdiplusVersion: 2,
+                DebugEventCallback: debugEventCallback,
+                SuppressBackgroundThread: suppressBackgroundThread,
+                SuppressExternalCodecs: suppressExternalCodecs,
+            },
+            StartupParameters: startupParameters,
+        }
     }
-  }
 }
 impl ops::Deref for GdiplusStartupInputEx {
-  type Target = GdiplusStartupInput;
-  fn deref(&self) -> &Self::Target {
-    &self.parent
-  }
+    type Target = GdiplusStartupInput;
+    fn deref(&self) -> &Self::Target {
+       &self.parent
+    }
 }
 ENUM!{enum GdiplusStartupParams {
     GdiplusStartupDefault = 0,
@@ -71,16 +71,16 @@ ENUM!{enum GdiplusStartupParams {
     GdiplusStartupTransparencyMask = 0xFF000000,
 }}
 STRUCT!{struct GdiplusStartupOutput {
-  NotificationHook: NotificationHookProc,
-  NotificationUnhook: NotificationUnhookProc,
+    NotificationHook: NotificationHookProc,
+    NotificationUnhook: NotificationUnhookProc,
 }}
 extern "system" {
-  pub fn GdiplusStartup(
-      token: *mut ULONG_PTR,
-      input: *const GdiplusStartupInput,
-      output: *mut GdiplusStartupOutput,
-  ) -> Status;
-  pub fn GdiplusShutdown(
-      token: ULONG_PTR,
-  );
+    pub fn GdiplusStartup(
+        token: *mut ULONG_PTR,
+        input: *const GdiplusStartupInput,
+        output: *mut GdiplusStartupOutput,
+    ) -> Status;
+    pub fn GdiplusShutdown(
+        token: ULONG_PTR,
+    );
 }
