@@ -32,8 +32,8 @@ use um::winnt::{
     LARGE_INTEGER, LATENCY_TIME, LONG, LPCCH, LPCH, LPCSTR, LPCWSTR, LPOSVERSIONINFOEXA,
     LPOSVERSIONINFOEXW, LPSTR, LPWSTR, MAXLONG, PBOOLEAN, PCONTEXT, PCWSTR, PFIRMWARE_TYPE,
     PHANDLE, PIO_COUNTERS, PJOB_SET_ARRAY, PLUID, POWER_REQUEST_TYPE, PPERFORMANCE_DATA,
-    PPROCESSOR_NUMBER, PRTL_UMS_SCHEDULER_ENTRY_POINT, PSECURE_MEMORY_CACHE_CALLBACK, PSID,
-    PSID_NAME_USE, PULONGLONG, PVOID, PWOW64_CONTEXT, PWOW64_LDT_ENTRY, PWSTR,
+    PPROCESSOR_NUMBER, PQUOTA_LIMITS, PRTL_UMS_SCHEDULER_ENTRY_POINT, PSECURE_MEMORY_CACHE_CALLBACK,
+    PSID, PSID_NAME_USE, PULONGLONG, PVOID, PWOW64_CONTEXT, PWOW64_LDT_ENTRY, PWSTR,
     RTL_UMS_THREAD_INFO_CLASS, STATUS_ABANDONED_WAIT_0, STATUS_USER_APC, STATUS_WAIT_0,
     THREAD_BASE_PRIORITY_IDLE, THREAD_BASE_PRIORITY_LOWRT, THREAD_BASE_PRIORITY_MAX,
     THREAD_BASE_PRIORITY_MIN, ULARGE_INTEGER, VOID, WAITORTIMERCALLBACK, WCHAR, WOW64_CONTEXT,
@@ -2155,10 +2155,46 @@ extern "system" {
         lpBuffer: LPWSTR,
         pcbBuffer: LPDWORD
     ) -> BOOL;
-    // pub fn LogonUserA();
-    // pub fn LogonUserW();
-    // pub fn LogonUserExA();
-    // pub fn LogonUserExW();
+    pub fn LogonUserA(
+        lpUsername: LPSTR,
+        lpDomain: LPSTR,
+        lpPassword: LPSTR,
+        dwLogonType: DWORD,
+        dwLogonProvider: DWORD,
+        phToken: PHANDLE
+    ) -> BOOL;
+    pub fn LogonUserW(
+        lpUsername: LPWSTR,
+        lpDomain: LPWSTR,
+        lpPassword: LPWSTR,
+        dwLogonType: DWORD,
+        dwLogonProvider: DWORD,
+        phToken: PHANDLE
+    ) -> BOOL;
+    pub fn LogonUserExA(
+        lpUsername: LPSTR,
+        lpDomain: LPSTR,
+        lpPassword: LPSTR,
+        dwLogonType: DWORD,
+        dwLogonProvider: DWORD,
+        phToken: PHANDLE,
+        ppLogonSid: PSID,
+        ppProfileBuffer: PVOID,
+        pdwProfileLength: LPDWORD,
+        pQuotaLimits: PQUOTA_LIMITS,
+    ) -> BOOL;
+    pub fn LogonUserExW(
+        lpUsername: LPWSTR,
+        lpDomain: LPWSTR,
+        lpPassword: LPWSTR,
+        dwLogonType: DWORD,
+        dwLogonProvider: DWORD,
+        phToken: PHANDLE,
+        ppLogonSid: PSID,
+        ppProfileBuffer: PVOID,
+        pdwProfileLength: LPDWORD,
+        pQuotaLimits: PQUOTA_LIMITS,
+    ) -> BOOL;
     // pub fn CreateProcessWithLogonW();
     // pub fn CreateProcessWithTokenW();
     // pub fn IsTokenUntrusted();
