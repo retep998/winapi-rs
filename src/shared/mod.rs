@@ -52,6 +52,7 @@ pub mod guiddef;
 #[cfg(feature = "sddl")] pub mod sddl;
 #[cfg(feature = "sspi")] pub mod sspi;
 #[cfg(feature = "stralign")] pub mod stralign;
+#[cfg(feature = "transportsettingcommon")] pub mod transportsettingcommon;
 #[cfg(feature = "tvout")] pub mod tvout;
 #[cfg(feature = "usb")] pub mod usb;
 #[cfg(feature = "usbiodef")] pub mod usbiodef;
