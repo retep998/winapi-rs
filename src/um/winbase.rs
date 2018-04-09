@@ -2156,42 +2156,42 @@ extern "system" {
         pcbBuffer: LPDWORD
     ) -> BOOL;
     pub fn LogonUserA(
-        lpUsername: LPSTR,
-        lpDomain: LPSTR,
-        lpPassword: LPSTR,
+        lpUsername: LPCSTR,
+        lpDomain: LPCSTR,
+        lpPassword: LPCSTR,
         dwLogonType: DWORD,
         dwLogonProvider: DWORD,
         phToken: PHANDLE
     ) -> BOOL;
     pub fn LogonUserW(
-        lpUsername: LPWSTR,
-        lpDomain: LPWSTR,
-        lpPassword: LPWSTR,
+        lpUsername: LPCWSTR,
+        lpDomain: LPCWSTR,
+        lpPassword: LPCWSTR,
         dwLogonType: DWORD,
         dwLogonProvider: DWORD,
         phToken: PHANDLE
     ) -> BOOL;
     pub fn LogonUserExA(
-        lpUsername: LPSTR,
-        lpDomain: LPSTR,
-        lpPassword: LPSTR,
+        lpUsername: LPCSTR,
+        lpDomain: LPCSTR,
+        lpPassword: LPCSTR,
         dwLogonType: DWORD,
         dwLogonProvider: DWORD,
         phToken: PHANDLE,
-        ppLogonSid: PSID,
-        ppProfileBuffer: PVOID,
+        ppLogonSid: *mut PSID,
+        ppProfileBuffer: *mut PVOID,
         pdwProfileLength: LPDWORD,
         pQuotaLimits: PQUOTA_LIMITS,
     ) -> BOOL;
     pub fn LogonUserExW(
-        lpUsername: LPWSTR,
-        lpDomain: LPWSTR,
-        lpPassword: LPWSTR,
+        lpUsername: LPCWSTR,
+        lpDomain: LPCWSTR,
+        lpPassword: LPCWSTR,
         dwLogonType: DWORD,
         dwLogonProvider: DWORD,
         phToken: PHANDLE,
-        ppLogonSid: PSID,
-        ppProfileBuffer: PVOID,
+        ppLogonSid: *mut PSID,
+        ppProfileBuffer: *mut PVOID,
         pdwProfileLength: LPDWORD,
         pQuotaLimits: PQUOTA_LIMITS,
     ) -> BOOL;
@@ -2255,6 +2255,20 @@ extern "system" {
         IntegrityLabel: PSID,
     ) -> BOOL;
 }
+pub const LOGON32_LOGON_INTERACTIVE: DWORD = 2;
+pub const LOGON32_LOGON_NETWORK: DWORD = 3;
+pub const LOGON32_LOGON_BATCH: DWORD = 4;
+pub const LOGON32_LOGON_SERVICE: DWORD = 5;
+pub const LOGON32_LOGON_UNLOCK: DWORD = 7;
+pub const LOGON32_LOGON_NETWORK_CLEARTEXT: DWORD = 8;
+pub const LOGON32_LOGON_NEW_CREDENTIALS: DWORD = 9;
+
+pub const LOGON32_PROVIDER_DEFAULT: DWORD = 0;
+pub const LOGON32_PROVIDER_WINNT35: DWORD = 1;
+pub const LOGON32_PROVIDER_WINNT40: DWORD = 2;
+pub const LOGON32_PROVIDER_WINNT50: DWORD = 3;
+pub const LOGON32_PROVIDER_VIRTUAL: DWORD = 4;
+
 pub const HW_PROFILE_GUIDLEN: usize = 39;
 // MAX_PROFILE_LEN
 pub const DOCKINFO_UNDOCKED: DWORD = 0x1;
