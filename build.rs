@@ -268,7 +268,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("unknwnbase", &["guiddef", "minwindef", "winnt"], &[]),
     ("urlhist", &["docobj", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
     ("urlmon", &["minwindef", "unknwnbase", "winnt"], &[]),
-    ("userenv", &["minwindef", "winnt"], &["userenv"]),
+    ("userenv", &["minwindef", "winnt", "winreg"], &["userenv"]),
     ("usp10", &["minwindef", "ntdef", "windef", "winerror", "wingdi", "winnt"], &["usp10"]),
     ("utilapiset", &["minwindef", "ntdef"], &["kernel32"]),
     ("vsbackup", &["guiddef", "minwindef", "unknwnbase", "vss", "vswriter", "winnt", "wtypes"], &["vssapi"]),
