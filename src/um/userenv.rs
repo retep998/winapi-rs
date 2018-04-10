@@ -7,7 +7,7 @@
 //! Definitions for the user environment API
 use shared::minwindef::{BOOL, DWORD, LPDWORD, LPVOID, PHKEY};
 use um::winnt::{
-    HANDLE, HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PCWSTR, PWSTR, PSID, PSID_AND_ATTRIBUTES
+    HANDLE, HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PCWSTR, PSID, PSID_AND_ATTRIBUTES, PWSTR
 };
 use um::winreg::REGSAM;
 extern "system" {
