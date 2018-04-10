@@ -7,12 +7,14 @@
 
 use ctypes::{c_int, c_void};
 use shared::guiddef::{REFGUID, REFIID};
-use shared::minwindef::ULONG;
-use shared::windef::HWND;
+use shared::minwindef::{ULONG,BOOL};
+use shared::windef::{HWND};
 use um::objidl::IBindCtx;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPWSTR};
 
+DEFINE_GUID!{CLSID_TaskbarList,
+0x56fdf344, 0xfd6d, 0x11d0, 0x95, 0x8a, 0x00, 0x60, 0x97, 0xc9, 0xa0, 0x90}
 //4498
 pub type SFGAOF = ULONG;
 //9466
@@ -71,3 +73,29 @@ interface IModalWindow(IModalWindowVtbl): IUnknown(IUnknownVtbl) {
 //22307
 //27457
 pub type IShellItemFilter = IUnknown; // TODO
+
+RIDL!{
+#[uuid(0x56fdf342, 0xfd6d, 0x11d0, 0x95, 0x8a, 0x00, 0x60, 0x97, 0xc9, 0xa0, 0x90)]
+interface ITaskbarList(ITaskbarListVtbl): IUnknown(IUnknownVtbl) {
+    fn HrInit() -> HRESULT,
+    fn AddTab(
+        hwnd: HWND,
+    ) -> HRESULT,
+    fn DeleteTab(
+        hwnd: HWND,
+    ) -> HRESULT,
+    fn ActivateTab(
+        hwnd: HWND,
+    ) -> HRESULT,
+    fn SetActiveAlt(
+        hwnd: HWND,
+    ) -> HRESULT,
+}}
+RIDL!{
+#[uuid(0x602d4995, 0xb13a, 0x429b, 0xa6, 0x6e, 0x19, 0x35, 0xe4, 0x4f, 0x43, 0x17)]
+interface ITaskbarList2(ITaskbarList2Vtbl): ITaskbarList(ITaskbarListVtbl) {
+    fn MarkFullscreenWindow(
+        hwnd: HWND,
+        fFullscreen: BOOL,
+    ) -> HRESULT,    
+}}
