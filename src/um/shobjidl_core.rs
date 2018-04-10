@@ -7,7 +7,7 @@
 
 use ctypes::{c_int, c_void};
 use shared::guiddef::{REFGUID, REFIID};
-use shared::minwindef::{ULONG,BOOL};
+use shared::minwindef::{BOOL, ULONG};
 use shared::windef::{HWND};
 use um::objidl::IBindCtx;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};

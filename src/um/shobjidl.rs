@@ -11,7 +11,7 @@ use shared::minwindef::{BOOL, DWORD, UINT};
 use shared::windef::HWND;
 use um::objidl::IBindCtx;
 use um::propkeydef::REFPROPERTYKEY;
-use um::propsys::{IPropertyDescriptionList, IPropertyStore, GETPROPERTYSTOREFLAGS};
+use um::propsys::{GETPROPERTYSTOREFLAGS, IPropertyDescriptionList, IPropertyStore};
 use um::shobjidl_core::{IModalWindow, IModalWindowVtbl, IShellItem, IShellItemFilter, SFGAOF};
 use um::shtypes::COMDLG_FILTERSPEC;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
