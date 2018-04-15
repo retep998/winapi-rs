@@ -19,21 +19,11 @@ pub const _FACDD: HRESULT = 0x876;
 pub fn MAKE_DDHRESULT(code: HRESULT) -> HRESULT {
     MAKE_HRESULT(1, _FACDD, code)
 }
-macro_rules! MAKE_DDHRESULT {
-    ($code:expr) => {
-        1i32 << 31 | 0x876i32 << 16 | $code
-    };
-}
-macro_rules! MAKE_FOURCC {
-    ($ch0:expr, $ch1:expr, $ch2:expr, $ch3:expr) => {
-        ($ch0 as u32) | (($ch1 as u32) << 8) | (($ch2 as u32) << 16) | (($ch3 as u32) << 24)
-    };
-}
-pub const FOURCC_DXT1: DWORD = MAKE_FOURCC!(b'D', b'X', b'T', b'1');
-pub const FOURCC_DXT2: DWORD = MAKE_FOURCC!(b'D', b'X', b'T', b'2');
-pub const FOURCC_DXT3: DWORD = MAKE_FOURCC!(b'D', b'X', b'T', b'3');
-pub const FOURCC_DXT4: DWORD = MAKE_FOURCC!(b'D', b'X', b'T', b'4');
-pub const FOURCC_DXT5: DWORD = MAKE_FOURCC!(b'D', b'X', b'T', b'5');
+pub const FOURCC_DXT1: DWORD = MAKEFOURCC!(b'D', b'X', b'T', b'1');
+pub const FOURCC_DXT2: DWORD = MAKEFOURCC!(b'D', b'X', b'T', b'2');
+pub const FOURCC_DXT3: DWORD = MAKEFOURCC!(b'D', b'X', b'T', b'3');
+pub const FOURCC_DXT4: DWORD = MAKEFOURCC!(b'D', b'X', b'T', b'4');
+pub const FOURCC_DXT5: DWORD = MAKEFOURCC!(b'D', b'X', b'T', b'5');
 DEFINE_GUID!{CLSID_DirectDraw,
     0xd7b70ee0, 0x4340, 0x11cf, 0xb0, 0x63, 0x00, 0x20, 0xaf, 0xc2, 0xcd, 0x35}
 DEFINE_GUID!{CLSID_DirectDraw7,
