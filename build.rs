@@ -124,7 +124,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dcomp", &["d2d1", "d2d1_1", "d2d1effects", "d2dbasetypes", "d3d9types", "d3dcommon", "dcompanimation", "dcomptypes", "dxgi", "dxgi1_2", "dxgiformat", "guiddef", "minwinbase", "minwindef", "ntdef", "unknwnbase", "windef"], &["dcomp"]),
     ("dcompanimation", &["ntdef", "unknwnbase"], &[]),
     ("dde", &["basetsd", "minwindef"], &["user32"]),
-    ("ddraw", &[], &[]),
+    ("ddraw", &["guiddef", "minwindef", "unknwnbase", "windef", "winerror", "wingdi", "winnt"], &["ddraw"]),
     ("ddrawi", &[], &[]),
     ("ddrawint", &[], &[]),
     ("debugapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
