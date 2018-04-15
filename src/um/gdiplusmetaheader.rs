@@ -4,7 +4,7 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::basetsd::INT16;
+use shared::basetsd::{INT16, UINT32};
 use shared::minwindef::{DWORD, INT, UINT, WORD};
 use shared::windef::{RECTL, SIZEL};
 use um::gdiplusenums::{
@@ -37,14 +37,14 @@ STRUCT!{struct PWMFRect16 {
     Bottom: INT16,
 }}
 // #[align(2)]
-// STRUCT!{struct WmfPlaceableFileHeader {
-//     Key: UINT32,
-//     Hmf: INT16,
-//     BoundingBox: PWMFRect16,
-//     Inch: INT16,
-//     Reserved: UINT32,
-//     Checksum: INT16,
-// }}
+STRUCT!{struct WmfPlaceableFileHeader {
+    Key: UINT32,
+    Hmf: INT16,
+    BoundingBox: PWMFRect16,
+    Inch: INT16,
+    Reserved: UINT32,
+    Checksum: INT16,
+}}
 pub const GDIP_EMFPLUSFLAGS_DISPLAY: DWORD = 0x00000001;
 UNION!{union MetafileHeader_u {
     [u32; 22],
