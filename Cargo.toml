@@ -328,6 +328,7 @@ winver = []
 wow64apiset = []
 ws2spi = []
 ws2tcpip = []
+xaudio2 = []
 xinput = []
 #vc
 excpt = []
