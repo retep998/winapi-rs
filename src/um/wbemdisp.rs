@@ -431,7 +431,7 @@ interface ISWbemLocator(ISWbemLocatorVtbl): IDispatch(IDispatchVtbl) {
         objWbemSecurity: *mut *mut ISWbemSecurity,
     ) -> HRESULT,
 }}
-pub const	WBEMS_DISPID_DERIVATION: DISPID =	23;
+pub const WBEMS_DISPID_DERIVATION: DISPID = 23;
 // EXTERN_C const IID IID_ISWbemObject;
 DEFINE_GUID!{IID_ISWbemObject,
     0x76a6415a, 0xcb41, 0x11d1, 0x8b, 0x02, 0x00, 0x60, 0x08, 0x06, 0xd9, 0xb6}
