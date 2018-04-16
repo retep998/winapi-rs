@@ -307,8 +307,8 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("wow64apiset", &["minwindef", "winnt"], &["kernel32"]),
     ("ws2spi", &["basetsd", "guiddef", "minwindef", "vcruntime", "windef", "winnt", "winsock2", "ws2def", "wtypesbase"], &["ws2_32"]),
     ("ws2tcpip", &["guiddef", "minwinbase", "minwindef", "mstcpip", "vcruntime", "winerror", "winnt", "winsock2", "ws2def", "wtypesbase"], &["fwpuclnt", "ws2_32"]),
-    ("xaudio2", &["audiosessiontypes", "basetsd", "minwindef", "mmreg", "unknwnbase", "winerror", "winnt"], &["xaudio2_8"]),
-    ("xaudio2fx", &["basetsd", "minwindef", "unknwnbase", "winerror"], &["xaudio2_8"]),
+    ("xaudio2", &["audiosessiontypes", "basetsd", "minwindef", "mmreg", "unknwnbase", "winerror", "winnt"], &["xaudio2"]),
+    ("xaudio2fx", &["basetsd", "minwindef", "unknwnbase", "winerror"], &["xaudio2"]),
     ("xinput", &["guiddef", "minwindef", "winnt"], &["xinput"]),
     // vc
     ("excpt", &[], &[]),

@@ -37,8 +37,7 @@ STRUCT!{struct XAUDIO2FX_REVERB_PARAMETERS {
     ReflectionsDelay: UINT32,
     ReverbDelay: BYTE,
     RearDelay: BYTE,
-    // XAudio 2.9
-    // SideDelay: BYTE,
+    SideDelay: BYTE,
     PositionLeft: BYTE,
     PositionRight: BYTE,
     PositionMatrixLeft: BYTE,
@@ -141,19 +140,14 @@ STRUCT!{struct XAUDIO2FX_REVERB_I3DL2_PARAMETERS {
 pub fn ReverbConvertI3DL2ToNative (
     pI3DL2: &XAUDIO2FX_REVERB_I3DL2_PARAMETERS,
     pNative: &mut XAUDIO2FX_REVERB_PARAMETERS,
-    // XAudio 2.9
-    // sevenDotOneReverb: bool,
+    sevenDotOneReverb: bool,
 ) {
-    // XAudio 2.9
-    // if sevenDotOneReverb {
-    //     pNative.RearDelay = XAUDIO2FX_REVERB_DEFAULT_7POINT1_REAR_DELAY;
-    // } else {
-    //     pNative.RearDelay = XAUDIO2FX_REVERB_DEFAULT_REAR_DELAY;
-    // }
-    // pNative.SideDelay = XAUDIO2FX_REVERB_DEFAULT_7POINT1_SIDE_DELAY;
-    // XAudio 2.8
-    pNative.RearDelay = XAUDIO2FX_REVERB_DEFAULT_REAR_DELAY;
-    // All Version
+    if sevenDotOneReverb {
+        pNative.RearDelay = XAUDIO2FX_REVERB_DEFAULT_7POINT1_REAR_DELAY;
+    } else {
+        pNative.RearDelay = XAUDIO2FX_REVERB_DEFAULT_REAR_DELAY;
+    }
+    pNative.SideDelay = XAUDIO2FX_REVERB_DEFAULT_7POINT1_SIDE_DELAY;
     pNative.PositionLeft = XAUDIO2FX_REVERB_DEFAULT_POSITION;
     pNative.PositionRight = XAUDIO2FX_REVERB_DEFAULT_POSITION;
     pNative.PositionMatrixLeft = XAUDIO2FX_REVERB_DEFAULT_POSITION_MATRIX;

@@ -4,7 +4,6 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use _core::f32;
 use ctypes::{c_float, c_void};
 use shared::basetsd::{INT32, UINT32, UINT64};
 use shared::minwindef::{BOOL, BYTE, DWORD};
@@ -183,7 +182,7 @@ pub const XAUDIO2_LOG_TIMING: u32 = 0x0040;
 pub const XAUDIO2_LOG_LOCKS: u32 = 0x0080;
 pub const XAUDIO2_LOG_MEMORY: u32 = 0x0100;
 pub const XAUDIO2_LOG_STREAMING: u32 = 0x1000;
-RIDL!{#[uuid(0x60d8dac8, 0x5aa1, 0x4e8e, 0xb5, 0x97, 0x2f, 0x5e, 0x28, 0x83, 0xd4, 0x84)]
+RIDL!{#[uuid(0x2b02e3cf, 0x2e0b, 0x4ec3, 0xbe, 0x45, 0x1b, 0x2a, 0x3f, 0xe7, 0x21, 0x0d)]
 interface IXAudio2(IXAudio2Vtbl): IUnknown(IUnknownVtbl) {
     fn RegisterForCallbacks(
         pCallback: *mut IXAudio2EngineCallback,
@@ -411,6 +410,7 @@ pub fn XAudio2FrequencyRatioToSemitones(FrequencyRatio: f32) -> f32 {
 #[inline]
 #[cfg(feature = "std")]
 pub fn XAudio2CutoffFrequencyToRadians(CutoffFrequency: f32, SampleRate: u32) -> f32 {
+    use _core::f32;
     if ((CutoffFrequency * 6.0f32) as u32) >= SampleRate {
         XAUDIO2_MAX_FILTER_FREQUENCY
     } else {
@@ -420,6 +420,7 @@ pub fn XAudio2CutoffFrequencyToRadians(CutoffFrequency: f32, SampleRate: u32) ->
 #[inline]
 #[cfg(feature = "std")]
 pub fn XAudio2RadiansToCutoffFrequency(Radians: f32, SampleRate: f32) -> f32 {
+    use _core::f32;
     SampleRate * (Radians / 2.0f32).asin() / f32::consts::PI
 }
 #[inline]
