@@ -275,6 +275,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("vss", &["guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("vsserror", &["winnt"], &[]),
     ("vswriter", &["minwindef", "unknwnbase", "vss", "winnt", "wtypes"], &[]),
+    ("wbemcli", &["minwindef", "oaidl", "rpcndr", "unknwnbase", "winerror", "winnt", "wtypes"], &[]),
     ("wct", &["basetsd", "guiddef", "minwindef", "winnt"], &["advapi32"]),
     ("werapi", &["minwindef", "winnt"], &["kernel32"]),
     ("winbase", &["basetsd", "cfgmgr32", "fileapi", "guiddef", "libloaderapi", "minwinbase", "minwindef", "processthreadsapi", "vadefs", "windef", "winnt"], &["kernel32"]),
