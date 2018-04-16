@@ -207,6 +207,7 @@ pub mod gl;
 #[cfg(feature = "vsserror")] pub mod vsserror;
 #[cfg(feature = "vswriter")] pub mod vswriter;
 #[cfg(feature = "wbemcli")] pub mod wbemcli;
+#[cfg(feature = "wbemdisp")] pub mod wbemdisp;
 #[cfg(feature = "wbemprov")] pub mod wbemprov;
 #[cfg(feature = "wct")] pub mod wct;
 #[cfg(feature = "werapi")] pub mod werapi;
