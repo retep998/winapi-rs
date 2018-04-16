@@ -238,4 +238,5 @@ pub mod gl;
 #[cfg(feature = "ws2spi")] pub mod ws2spi;
 #[cfg(feature = "ws2tcpip")] pub mod ws2tcpip;
 #[cfg(feature = "xaudio2")] pub mod xaudio2;
+#[cfg(feature = "xaudio2fx")] pub mod xaudio2fx;
 #[cfg(feature = "xinput")] pub mod xinput;

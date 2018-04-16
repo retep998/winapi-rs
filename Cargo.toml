@@ -329,6 +329,7 @@ wow64apiset = []
 ws2spi = []
 ws2tcpip = []
 xaudio2 = []
+xaudio2fx = []
 xinput = []
 #vc
 excpt = []
