@@ -13,9 +13,16 @@ ENUM!{enum DebugEventLevel {
     DebugEventLevelFatal,
     DebugEventLevelWarning,
 }}
-pub type DebugEventProc = extern "system" fn(DebugEventLevel, *mut CHAR);
-pub type NotificationHookProc = extern "system" fn(*mut ULONG_PTR) -> Status;
-pub type NotificationUnhookProc = extern "system" fn(ULONG_PTR);
+FN!{stdcall DebugEventProc(
+    level: DebugEventLevel,
+    message: *mut CHAR,
+) -> ()}
+FN!{stdcall NotificationHookProc(
+    token: *mut ULONG_PTR,
+) -> Status}
+FN!{stdcall NotificationUnhookProc(
+    token: ULONG_PTR,
+) -> ()}
 STRUCT!{struct GdiplusStartupInput {
     GdiplusVersion: UINT32,
     DebugEventCallback: DebugEventProc,

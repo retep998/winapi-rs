@@ -15,16 +15,18 @@ fn min(x: f32, y: f32) -> f32 {
 fn max(x: f32, y: f32) -> f32 {
     if x < y { y } else { x }
 }
-pub type ImageAbort = extern "system" fn(*mut VOID) -> BOOL;
+FN!{stdcall ImageAbort(
+    *mut VOID,
+) -> BOOL}
 pub type DrawImageAbort = ImageAbort;
 pub type GetThumbnailImageAbort = ImageAbort;
-pub type EnumerateMetafileProc = extern "system" fn(
+FN!{stdcall EnumerateMetafileProc(
     EmfPlusRecordType,
     UINT,
     UINT,
     *const BYTE,
     *mut VOID,
-) -> BOOL;
+) -> BOOL}
 // struct __declspec(novtable) GdiplusAbort
 // {
 //     virtual HRESULT __stdcall Abort(void) = 0;

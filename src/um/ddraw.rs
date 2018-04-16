@@ -73,8 +73,18 @@ pub type LPDIRECTDRAWGAMMACONTROL = *mut IDirectDrawGammaControl;
 pub type LPDDSURFACEDESC = *mut DDSURFACEDESC;
 pub type LPDDSURFACEDESC2 = *mut DDSURFACEDESC2;
 pub type LPDDCOLORCONTROL = *mut DDCOLORCONTROL;
-pub type LPDDENUMCALLBACKA = extern "system" fn(*mut GUID, LPSTR, LPSTR, LPVOID) -> BOOL;
-pub type LPDDENUMCALLBACKW = extern "system" fn(*mut GUID, LPWSTR, LPWSTR, LPVOID) -> BOOL;
+FN!{stdcall LPDDENUMCALLBACKA(
+    *mut GUID,
+    LPSTR,
+    LPSTR,
+    LPVOID,
+) -> BOOL}
+FN!{stdcall LPDDENUMCALLBACKW(
+    *mut GUID,
+    LPWSTR,
+    LPWSTR,
+    LPVOID,
+) -> BOOL}
 extern "system" {
     pub fn DirectDrawEnumerateW(
         lpCallback: LPDDENUMCALLBACKW,
@@ -85,8 +95,20 @@ extern "system" {
         lpContext: LPVOID,
     ) -> HRESULT;
 }
-pub type LPDDENUMCALLBACKEXA = extern "system" fn(*mut GUID, LPSTR, LPSTR, LPVOID, HMONITOR) -> bool;
-pub type LPDDENUMCALLBACKEXW = extern "system" fn(*mut GUID, LPWSTR, LPWSTR, LPVOID, HMONITOR) -> bool;
+FN!{stdcall LPDDENUMCALLBACKEXA(
+    *mut GUID,
+    LPSTR,
+    LPSTR,
+    LPVOID,
+    HMONITOR,
+) -> bool}
+FN!{stdcall LPDDENUMCALLBACKEXW(
+    *mut GUID,
+    LPWSTR,
+    LPWSTR,
+    LPVOID,
+    HMONITOR,
+) -> bool}
 extern "system" {
     pub fn DirectDrawEnumerateExW(
         lpCallback: LPDDENUMCALLBACKEXW,
@@ -99,8 +121,16 @@ extern "system" {
         dwFlags: DWORD,
     ) -> HRESULT;
 }
-pub type LPDIRECTDRAWENUMERATEEXA = extern "system" fn(LPDDENUMCALLBACKEXA, LPVOID, DWORD) -> HRESULT;
-pub type LPDIRECTDRAWENUMERATEEXW = extern "system" fn(LPDDENUMCALLBACKEXW, LPVOID, DWORD) -> HRESULT;
+FN!{stdcall LPDIRECTDRAWENUMERATEEXA(
+    lpCallback: LPDDENUMCALLBACKEXA,
+    plContext: LPVOID,
+    dwFlags: DWORD,
+) -> HRESULT}
+FN!{stdcall LPDIRECTDRAWENUMERATEEXW(
+    lpCallback: LPDDENUMCALLBACKEXW,
+    plContext: LPVOID,
+    dwFlags: DWORD,
+) -> HRESULT}
 extern "system" {
     pub fn DirectDrawCreate(
         lpGUID: *mut GUID,
@@ -127,11 +157,29 @@ pub const REGSTR_KEY_DDHW_DRIVERNAME: &'static str = "DriverName";
 pub const REGSTR_PATH_DDHW: &'static str = "Hardware\\DirectDrawDrivers";
 pub const DDCREATE_HARDWAREONLY: DWORD = 0x00000001;
 pub const DDCREATE_EMULATIONONLY: DWORD = 0x00000002;
-pub type LPDDENUMMODESCALLBACK = extern "system" fn(LPDDSURFACEDESC, LPVOID) -> HRESULT;
-pub type LPDDENUMMODESCALLBACK2 = extern "system" fn(LPDDSURFACEDESC2, LPVOID) -> HRESULT;
-pub type LPDDENUMSURFACESCALLBACK = extern "system" fn(LPDIRECTDRAWSURFACE, LPDDSURFACEDESC, LPVOID) -> HRESULT;
-pub type LPDDENUMSURFACESCALLBACK2 = extern "system" fn(LPDIRECTDRAWSURFACE4, LPDDSURFACEDESC2, LPVOID) -> HRESULT;
-pub type LPDDENUMSURFACESCALLBACK7 = extern "system" fn(LPDIRECTDRAWSURFACE7, LPDDSURFACEDESC2, LPVOID) -> HRESULT;
+FN!{stdcall LPDDENUMMODESCALLBACK(
+    LPDDSURFACEDESC,
+    LPVOID,
+) -> HRESULT}
+FN!{stdcall LPDDENUMMODESCALLBACK2(
+    LPDDSURFACEDESC2,
+    LPVOID,
+) -> HRESULT}
+FN!{stdcall LPDDENUMSURFACESCALLBACK(
+    LPDIRECTDRAWSURFACE,
+    LPDDSURFACEDESC,
+    LPVOID,
+) -> HRESULT}
+FN!{stdcall LPDDENUMSURFACESCALLBACK2(
+    LPDIRECTDRAWSURFACE4,
+    LPDDSURFACEDESC2,
+    LPVOID,
+) -> HRESULT}
+FN!{stdcall LPDDENUMSURFACESCALLBACK7(
+    LPDIRECTDRAWSURFACE7,
+    LPDDSURFACEDESC2,
+    LPVOID,
+) -> HRESULT}
 STRUCT!{struct DDARGB {
     blue: BYTE,
     green: BYTE,
@@ -643,8 +691,15 @@ pub fn GET_WHQL_MONTH(dwWHQLLevel: u32) -> u32 {
 pub fn GET_WHQL_DAY(dwWHQLLevel: u32) -> u32 {
     dwWHQLLevel & 0xff
 }
-pub type LPCLIPPERCALLBACK = extern "system" fn(LPDIRECTDRAWCLIPPER, HWND, DWORD, LPVOID) -> DWORD;
-pub type LPSURFACESTREAMINGCALLBACK = extern "system" fn(DWORD) -> DWORD;
+FN!{stdcall LPCLIPPERCALLBACK(
+    lpDDClipper: LPDIRECTDRAWCLIPPER,
+    hWnd: HWND,
+    code: DWORD,
+    lpContext: LPVOID,
+) -> DWORD}
+FN!{stdcall LPSURFACESTREAMINGCALLBACK(
+    DWORD,
+) -> DWORD}
 RIDL!{#[uuid(0x6c14db80, 0xa733, 0x11ce, 0xa5, 0x21, 0x00, 0x20, 0xaf, 0x0b, 0xe5, 0x60)]
 interface IDirectDraw(IDirectDrawVtbl): IUnknown(IUnknownVtbl) {
     fn Compact() -> HRESULT,
