@@ -568,7 +568,9 @@ interface IViewObject(IViewObjectVtbl): IUnknown(IUnknownVtbl) {
         hdcDraw: HDC,
         lprcBounds: LPCRECTL,
         lprcWBounds: LPCRECTL,
-        pfnContinue: fn(ULONG_PTR) -> BOOL,
+        pfnContinue: Option<extern "system" fn(
+            dwContinue: ULONG_PTR,
+        ) -> BOOL>,
         dwContinue: ULONG_PTR,
     ) -> HRESULT,
     fn GetColorSet(
