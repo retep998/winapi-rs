@@ -79,7 +79,7 @@ impl SizeF {
 impl ops::Add for SizeF {
     type Output = Self;
     fn add(self, rhs: Self) -> Self::Output {
-        Self {
+        SizeF {
             Width: self.Width + rhs.Width,
             Height: self.Height + rhs.Height,
         }
@@ -106,7 +106,7 @@ impl<'a> ops::Add<SizeF> for &'a SizeF {
 impl ops::Sub for SizeF {
     type Output = Self;
     fn sub(self, rhs: Self) -> Self::Output {
-        Self {
+        SizeF {
             Width: self.Width - rhs.Width,
             Height: self.Height - rhs.Height,
         }
@@ -151,7 +151,7 @@ impl Size {
 impl ops::Add for Size {
     type Output = Self;
     fn add(self, rhs: Self) -> Self::Output {
-        Self {
+        Size {
             Width: self.Width + rhs.Width,
             Height: self.Height + rhs.Height,
         }
@@ -178,7 +178,7 @@ impl<'a> ops::Add<Size> for &'a Size {
 impl ops::Sub for Size {
     type Output = Self;
     fn sub(self, rhs: Self) -> Self::Output {
-        Self {
+        Size {
             Width: self.Width - rhs.Width,
             Height: self.Height - rhs.Height,
         }
@@ -220,7 +220,7 @@ impl PointF {
 impl ops::Add for PointF {
     type Output = Self;
     fn add(self, rhs: Self) -> Self::Output {
-        Self {
+        PointF {
             X: self.X + rhs.X,
             Y: self.Y + rhs.Y,
         }
@@ -247,7 +247,7 @@ impl<'a> ops::Add<PointF> for &'a PointF {
 impl ops::Sub for PointF {
     type Output = Self;
     fn sub(self, rhs: Self) -> Self::Output {
-        Self {
+        PointF {
             X: self.X - rhs.X,
             Y: self.Y - rhs.Y,
         }
@@ -289,7 +289,7 @@ impl Point {
 impl ops::Add for Point {
     type Output = Self;
     fn add(self, rhs: Self) -> Self::Output {
-        Self {
+        Point {
             X: self.X + rhs.X,
             Y: self.Y + rhs.Y,
         }
@@ -316,7 +316,7 @@ impl<'a> ops::Add<Point> for &'a Point {
 impl ops::Sub for Point {
     type Output = Self;
     fn sub(self, rhs: Self) -> Self::Output {
-        Self {
+        Point {
             X: self.X - rhs.X,
             Y: self.Y - rhs.Y,
         }

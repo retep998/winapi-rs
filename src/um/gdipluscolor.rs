@@ -26,16 +26,16 @@ pub struct Color {
 }
 impl Color {
     pub fn new() -> Self {
-        Self { Argb: Black }
+        Color { Argb: Black }
     }
     pub fn from_rgb_parts(r: BYTE, g: BYTE, b: BYTE) -> Self {
-        Self { Argb: Self::MakeARGB(255, r, g, b) }
+        Color { Argb: Self::MakeARGB(255, r, g, b) }
     }
     pub fn from_argb_parts(a: BYTE, r: BYTE, g: BYTE, b: BYTE) -> Self {
-        Self { Argb: Self::MakeARGB(a, r, g, b) }
+        Color { Argb: Self::MakeARGB(a, r, g, b) }
     }
     pub fn from_argb(argb: ARGB) -> Self {
-        Self { Argb: argb }
+        Color { Argb: argb }
     }
     pub fn GetAlpha(&self) -> BYTE {
         (self.Argb >> AlphaShift) as BYTE
