@@ -84,7 +84,9 @@ STRUCT!{struct RM_FILTER_INFO {
     u: RM_FILTER_INFO_u,
 }}
 pub type PRM_FILTER_INFO = *mut RM_FILTER_INFO;
-pub type RM_WRITE_STATUS_CALLBACK = extern "C" fn(u32);
+FN!{cdecl RM_WRITE_STATUS_CALLBACK(
+    nPercentComplete: u32,
+) -> ()}
 extern "system" {
     pub fn RmStartSession(
         pSessionHandle: *mut DWORD,
