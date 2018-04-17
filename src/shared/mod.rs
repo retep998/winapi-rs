@@ -7,6 +7,9 @@
 //! Headers shared between user mode and kernel mode
 #[cfg(feature = "basetsd")] pub mod basetsd;
 #[cfg(feature = "bcrypt")] pub mod bcrypt;
+#[cfg(feature = "bthdef")] pub mod bthdef;
+#[cfg(feature = "bthioctl")] pub mod bthioctl;
+#[cfg(feature = "bthsdpdef")] pub mod bthsdpdef;
 #[cfg(feature = "bugcodes")] pub mod bugcodes;
 #[cfg(feature = "cderr")] pub mod cderr;
 #[cfg(feature = "cfg")] pub mod cfg;

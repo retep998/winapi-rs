@@ -45,6 +45,12 @@ macro_rules! DEFINE_GUID {
         };
     }
 }
+macro_rules! DEFINE_BLUETOOTH_UUID128 {
+    ($name:ident, $shortId:expr) => {
+        DEFINE_GUID!{$name,
+            $shortId as u32, 0x0000, 0x1000, 0x80, 0x00, 0x00, 0x80, 0x5F, 0x9B, 0x34, 0xFB}
+    }
+}
 #[macro_export]
 macro_rules! DEFINE_PROPERTYKEY {
     (
@@ -86,6 +92,16 @@ macro_rules! CTL_CODE {
     ($DeviceType:expr, $Function:expr, $Method:expr, $Access:expr) => {
         ($DeviceType << 16) | ($Access << 14) | ($Function << 2) | $Method
     }
+}
+macro_rules! BTH_CTL {
+    ($id:expr) => {
+        CTL_CODE!(FILE_DEVICE_BLUETOOTH, $id, METHOD_BUFFERED, FILE_ANY_ACCESS)
+    };
+}
+macro_rules! BTH_KERNEL_CTL {
+    ($id:expr) => {
+        CTL_CODE!(FILE_DEVICE_BLUETOOTH, $id, METHOD_NEITHER, FILE_ANY_ACCESS)
+    };
 }
 macro_rules! HID_CTL_CODE {
     ($id:expr) => {
