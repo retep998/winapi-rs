@@ -14,6 +14,9 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     // shared
     ("basetsd", &[], &[]),
     ("bcrypt", &["minwindef", "winnt"], &["bcrypt"]),
+    ("bthdef", &["bthsdpdef", "guiddef", "minwindef", "ntdef"], &[]),
+    ("bthioctl", &["bthdef", "bthsdpdef", "minwindef", "ntdef", "winioctl"], &[]),
+    ("bthsdpdef", &["guiddef", "minwindef", "ntdef"], &[]),
     ("bugcodes", &["ntdef"], &[]),
     ("cderr", &["minwindef"], &[]),
     ("cfg", &["minwindef"], &[]),
