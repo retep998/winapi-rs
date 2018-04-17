@@ -260,7 +260,7 @@ STRUCT!{struct DDOSCAPS {
     dwCaps: DWORD,
 }}
 pub type LPDDOSCAPS = *mut DDOSCAPS;
-UNION!{union DDSCAPSEX_u {
+UNION!{union DDSCAPSEX_u1 {
     [u32; 1],
     dwCaps4 dwCaps4_mut: DWORD,
     dwVolumeDepth dwVolumeDepth_mut: DWORD,
@@ -268,10 +268,10 @@ UNION!{union DDSCAPSEX_u {
 STRUCT!{struct DDSCAPSEX {
     dwCaps2: DWORD,
     dwCaps3: DWORD,
-    u: DDSCAPSEX_u,
+    u1: DDSCAPSEX_u1,
 }}
 pub type LPDDSCAPSEX = *mut DDSCAPSEX;
-UNION!{union DDSCAPS2_u {
+UNION!{union DDSCAPS2_u1 {
     [u32; 1],
     dwCaps4 dwCaps4_mut: DWORD,
     dwVolumeDepth dwVolumeDepth_mut: DWORD,
@@ -280,7 +280,7 @@ STRUCT!{struct DDSCAPS2 {
     dwCaps: DWORD,
     dwCaps2: DWORD,
     dwCaps3: DWORD,
-    u: DDSCAPS2_u,
+    u1: DDSCAPS2_u1,
 }}
 pub type LPDDSCAPS2 = *mut DDSCAPS2;
 pub const DD_ROP_SPACE: usize = 256 / 32;
@@ -1892,23 +1892,23 @@ UNION!{union DDSURFACEDESC2_u1 {
     lPitch lPitch_mut: LONG,
     dwLinearSize dwLinearSize_mut: DWORD,
 }}
-UNION!{union DDSURFACEDESC2_u2 {
+UNION!{union DDSURFACEDESC2_u5 {
     [u32; 1],
     dwBackBufferCount dwBackBufferCount_mut: DWORD,
     dwDepth dwDepth_mut: DWORD,
 }}
-UNION!{union DDSURFACEDESC2_u3 {
+UNION!{union DDSURFACEDESC2_u2 {
     [u32; 1],
     dwMipMapCount dwMipMapCount_mut: DWORD,
     dwRefreshRate dwRefreshRate_mut: DWORD,
     dwSrcVBHandle dwSrcVBHandle_mut: DWORD,
 }}
-UNION!{union DDSURFACEDESC2_u4 {
+UNION!{union DDSURFACEDESC2_u3 {
     [u32; 2],
     ddckCKDestOverlay ddckCKDestOverlay_mut: DDCOLORKEY,
     dwEmptyFaceColor dwEmptyFaceColor_mut: DWORD,
 }}
-UNION!{union DDSURFACEDESC2_u5 {
+UNION!{union DDSURFACEDESC2_u4 {
     [u32; 8],
     ddpfPixelFormat ddpfPixelFormat_mut: DDPIXELFORMAT,
     dwFVF dwFVF_mut: DWORD,
@@ -1919,16 +1919,16 @@ STRUCT!{struct DDSURFACEDESC2 {
     dwHeight: DWORD,
     dwWidth: DWORD,
     u1: DDSURFACEDESC2_u1,
+    u5: DDSURFACEDESC2_u5,
     u2: DDSURFACEDESC2_u2,
-    u3: DDSURFACEDESC2_u3,
     dwAlphaBitDepth: DWORD,
     dwReserved: DWORD,
     lpSurface: LPVOID,
-    u4: DDSURFACEDESC2_u4,
+    u3: DDSURFACEDESC2_u3,
     ddckCKDestBlt: DDCOLORKEY,
     ddckCKSrcOverlay: DDCOLORKEY,
     ddckCKSrcBlt: DDCOLORKEY,
-    u5: DDSURFACEDESC2_u5,
+    u4: DDSURFACEDESC2_u4,
     ddsCaps: DDSCAPS2,
     dwTextureStage: DWORD,
 }}
