@@ -13,6 +13,7 @@ pub mod gl;
 #[cfg(feature = "audiosessiontypes")] pub mod audiosessiontypes;
 #[cfg(feature = "avrt")] pub mod avrt;
 #[cfg(feature = "bluetoothapis")] pub mod bluetoothapis;
+#[cfg(feature = "bthledef")] pub mod bthledef;
 #[cfg(feature = "cfgmgr32")] pub mod cfgmgr32;
 #[cfg(feature = "cguid")] pub mod cguid;
 #[cfg(feature = "combaseapi")] pub mod combaseapi;
