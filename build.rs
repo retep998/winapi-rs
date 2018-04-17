@@ -104,6 +104,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("bitscfg", &["guiddef", "oaidl", "unknwnbase", "winnt", "wtypes"], &["oleaut32"]),
     ("bitsmsg", &["minwindef"], &[]),
     ("bluetoothapis", &["bthdef", "bthsdpdef", "guiddef", "minwinbase", "minwindef", "windef", "winnt"], &["bthprops"]),
+    ("bluetoothleapis", &["bthledef", "minwindef", "winerror", "winnt"], &["bluetoothapis"]),
     ("bthledef", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
     ("cfgmgr32", &["basetsd", "cfg", "devpropdef", "guiddef", "minwindef", "winnt", "winreg"], &["cfgmgr32"]),
     ("cguid", &[], &[]),
