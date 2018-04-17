@@ -22,6 +22,7 @@ pub mod gl;
 #[cfg(feature = "bitscfg")] pub mod bitscfg;
 #[cfg(feature = "bitsmsg")] pub mod bitsmsg;
 #[cfg(feature = "bluetoothapis")] pub mod bluetoothapis;
+#[cfg(feature = "bthledef")] pub mod bthledef;
 #[cfg(feature = "cfgmgr32")] pub mod cfgmgr32;
 #[cfg(feature = "cguid")] pub mod cguid;
 #[cfg(feature = "combaseapi")] pub mod combaseapi;
