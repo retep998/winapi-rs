@@ -86,6 +86,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("audiosessiontypes", &["minwindef"], &[]),
     ("avrt", &["guiddef", "minwindef", "winnt"], &["avrt"]),
     ("bluetoothapis", &["bthdef", "bthsdpdef", "guiddef", "minwinbase", "minwindef", "windef", "winnt"], &["bthprops"]),
+    ("bluetoothleapis", &["bthledef", "minwindef", "winerror", "winnt"], &["bluetoothapis"]),
     ("bthledef", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
     ("cfgmgr32", &["basetsd", "cfg", "guiddef", "minwindef", "winnt", "winreg"], &["setupapi"]),
     ("cguid", &[], &[]),
