@@ -2687,7 +2687,7 @@ STRUCT!{struct NMLVDISPINFOW {
 pub type LPNMLVDISPINFOW = *mut NMLVDISPINFOW;
 pub const LVN_KEYDOWN: UINT = LVN_FIRST - 55;
 pub type LV_KEYDOWN = NMLVKEYDOWN;
-STRUCT!{struct NMLVKEYDOWN {
+STRUCT!{#[repr(packed)] struct NMLVKEYDOWN {
     hdr: NMHDR,
     wVKey: WORD,
     flags: UINT,
@@ -3107,7 +3107,7 @@ pub const TVN_ITEMCHANGEDA: UINT = TVN_FIRST - 18;
 pub const TVN_ITEMCHANGEDW: UINT = TVN_FIRST - 19;
 pub const TVN_ASYNCDRAW: UINT = TVN_FIRST - 20;
 pub type TV_KEYDOWN = NMTVKEYDOWN;
-STRUCT!{struct NMTVKEYDOWN {
+STRUCT!{#[repr(packed)] struct NMTVKEYDOWN {
     hdr: NMHDR,
     wVKey: WORD,
     flags: UINT,
@@ -3386,7 +3386,7 @@ pub const TCM_SETUNICODEFORMAT: UINT = CCM_SETUNICODEFORMAT;
 pub const TCM_GETUNICODEFORMAT: UINT = CCM_GETUNICODEFORMAT;
 pub const TCN_KEYDOWN: UINT = TCN_FIRST - 0;
 pub type TC_KEYDOWN = NMTCKEYDOWN;
-STRUCT!{struct NMTCKEYDOWN {
+STRUCT!{#[repr(packed)] struct NMTCKEYDOWN {
     hdr: NMHDR,
     wVKey: WORD,
     flags: UINT,
@@ -3734,9 +3734,9 @@ pub const PGF_SCROLLRIGHT: c_int = 8;
 pub const PGK_SHIFT: BOOL = 1;
 pub const PGK_CONTROL: BOOL = 2;
 pub const PGK_MENU: BOOL = 4;
-STRUCT!{struct NMPGSCROLL {
+STRUCT!{#[repr(packed)] struct NMPGSCROLL {
     hdr: NMHDR,
-    fwKeys: BOOL,
+    fwKeys: WORD,
     rcParent: RECT,
     iDir: c_int,
     iXpos: c_int,
@@ -3906,7 +3906,7 @@ ENUM!{enum TASKDIALOG_NOTIFICATIONS {
     TDN_HELP = 9,
     TDN_EXPANDO_BUTTON_CLICKED = 10,
 }}
-STRUCT!{struct TASKDIALOG_BUTTON {
+STRUCT!{#[repr(packed)] struct TASKDIALOG_BUTTON {
     nButtonID: c_int,
     pszButtonText: PCWSTR,
 }}
@@ -3932,17 +3932,17 @@ ENUM!{enum TASKDIALOG_COMMON_BUTTON_FLAGS {
     TDCBF_RETRY_BUTTON = 0x0010,
     TDCBF_CLOSE_BUTTON = 0x0020,
 }}
-UNION!{union TASKDIALOGCONFIG_u1 {
-    [u8; 8],
+UNION!{#[repr(packed)] union TASKDIALOGCONFIG_u1 {
+    [usize; 1],
     hMainIcon hMainIcon_mut: HICON,
     pszMainIcon pszMainIcon_mut: PCWSTR,
 }}
-UNION!{union TASKDIALOGCONFIG_u2 {
-    [u8; 8],
+UNION!{#[repr(packed)] union TASKDIALOGCONFIG_u2 {
+    [usize; 1],
     hFooterIcon hFooterIcon_mut: HICON,
     pszFooterIcon pszFooterIcon_mut: PCWSTR,
 }}
-STRUCT!{struct TASKDIALOGCONFIG {
+STRUCT!{#[repr(packed)] struct TASKDIALOGCONFIG {
     cbSize: UINT,
     hwndParent: HWND,
     hInstance: HINSTANCE,

@@ -8,7 +8,7 @@
 use shared::minwindef::{BOOL, DWORD, HRGN, LPCVOID, LPVOID};
 use shared::windef::HWND;
 use um::winnt::HRESULT;
-STRUCT!{struct DWM_BLURBEHIND {
+STRUCT!{#[repr(packed)] struct DWM_BLURBEHIND {
     dwFlags: DWORD,
     fEnable: BOOL,
     hRgnBlur: HRGN,

@@ -5581,6 +5581,8 @@ STRUCT!{struct CRYPT_SIGN_MESSAGE_PARA {
     rgUnauthAttr: PCRYPT_ATTRIBUTE,
     dwFlags: DWORD,
     dwInnerContentType: DWORD,
+    HashEncryptionAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    pvHashEncryptionAuxInfo: *mut c_void,
 }}
 pub type PCRYPT_SIGN_MESSAGE_PARA = *mut CRYPT_SIGN_MESSAGE_PARA;
 pub const CRYPT_MESSAGE_BARE_CONTENT_OUT_FLAG: DWORD = 0x00000001;

@@ -811,6 +811,10 @@ STRUCT!{struct NTFS_EXTENDED_VOLUME_DATA {
     BytesPerPhysicalSector: DWORD,
     LfsMajorVersion: WORD,
     LfsMinorVersion: WORD,
+    MaxDeviceTrimExtentCount: DWORD,
+    MaxDeviceTrimByteCount: DWORD,
+    MaxVolumeTrimExtentCount: DWORD,
+    MaxVolumeTrimByteCount: DWORD,
 }}
 pub type PNTFS_EXTENDED_VOLUME_DATA = *mut NTFS_EXTENDED_VOLUME_DATA;
 STRUCT!{struct REFS_VOLUME_DATA_BUFFER {
