@@ -85,6 +85,7 @@ pub mod gl;
 #[cfg(feature = "dxdiag")] pub mod dxdiag;
 #[cfg(feature = "dxfile")] pub mod dxfile;
 #[cfg(feature = "dxgidebug")] pub mod dxgidebug;
+#[cfg(feature = "endpointvolume")] pub mod endpointvolume;
 #[cfg(feature = "errhandlingapi")] pub mod errhandlingapi;
 #[cfg(feature = "evntcons")] pub mod evntcons;
 #[cfg(feature = "fibersapi")] pub mod fibersapi;
