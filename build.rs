@@ -155,6 +155,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dxdiag", &[], &[]),
     ("dxfile", &[], &[]),
     ("dxgidebug", &[], &[]),
+    ("endpointvolume", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("errhandlingapi", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("evntcons", &["basetsd", "evntprov", "evntrace", "guiddef", "minwindef", "winnt"], &["advapi32"]),
     ("fibersapi", &["minwindef", "winnt"], &["kernel32"]),
