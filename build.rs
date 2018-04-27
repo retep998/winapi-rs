@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use std::cell::Cell;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::env::var;
 // (header name, &[header dependencies], &[library dependencies])
 const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static str])] = &[
@@ -381,11 +381,13 @@ impl Graph {
         }
     }
     fn emit_libraries(&self) {
-        let libs = self.0.iter().filter(|&(_, header)| {
+        let mut libs = self.0.iter().filter(|&(_, header)| {
             header.included.get()
         }).flat_map(|(_, header)| {
             header.libraries.iter()
-        }).collect::<HashSet<_>>();
+        }).collect::<Vec<_>>();
+        libs.sort();
+        libs.dedup();
         let prefix = library_prefix();
         let kind = library_kind();
         for lib in libs {
