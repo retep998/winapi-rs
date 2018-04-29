@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use std::cell::Cell;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::env::var;
 // (header name, &[header dependencies], &[library dependencies])
 const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static str])] = &[
@@ -85,6 +85,16 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("audioclient", &["audiosessiontypes", "basetsd", "guiddef", "minwindef", "mmreg", "strmif", "unknwnbase", "winerror", "winnt", "wtypesbase"], &[]),
     ("audiosessiontypes", &["minwindef"], &[]),
     ("avrt", &["guiddef", "minwindef", "winnt"], &["avrt"]),
+    ("bits", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
+    ("bits10_1", &["basetsd", "bits", "bits2_0", "bits3_0", "bits5_0", "minwindef", "winnt"], &[]),
+    ("bits1_5", &["basetsd", "bits", "rpcndr", "winnt"], &[]),
+    ("bits2_0", &["basetsd", "bits", "bits1_5", "minwindef", "winnt"], &[]),
+    ("bits2_5", &["minwindef", "rpcndr", "unknwnbase", "winnt"], &[]),
+    ("bits3_0", &["basetsd", "bits", "bits2_0", "guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
+    ("bits4_0", &["basetsd", "bits3_0", "minwindef", "unknwnbase", "winnt"], &[]),
+    ("bits5_0", &["basetsd", "bits1_5", "bits3_0", "bits4_0", "guiddef", "minwindef", "winnt"], &[]),
+    ("bitscfg", &["guiddef", "oaidl", "unknwnbase", "winnt", "wtypes"], &["oleaut32"]),
+    ("bitsmsg", &["minwindef"], &[]),
     ("bluetoothapis", &["bthdef", "bthsdpdef", "guiddef", "minwinbase", "minwindef", "windef", "winnt"], &["bthprops"]),
     ("bluetoothleapis", &["bthledef", "minwindef", "winerror", "winnt"], &["bluetoothapis"]),
     ("bthledef", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
@@ -153,7 +163,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dsound", &["guiddef", "minwindef", "mmsystem", "unknwnbase", "windef", "winerror", "winnt"], &["dsound"]),
     ("dsrole", &["guiddef", "minwindef", "winnt"], &["netapi32"]),
     ("dvp", &[], &[]),
-    ("dwmapi", &["minwindef", "windef", "winnt"], &["dwmapi"]),
+    ("dwmapi", &["basetsd", "minwindef", "windef", "winnt"], &["dwmapi"]),
     ("dwrite", &["basetsd", "d2d1", "dcommon", "guiddef", "minwindef", "unknwnbase", "windef", "winerror", "wingdi", "winnt"], &["dwrite"]),
     ("dwrite_1", &["basetsd", "dcommon", "dwrite", "minwindef", "winnt"], &[]),
     ("dwrite_2", &["basetsd", "d3d9types", "dcommon", "dwrite", "dwrite_1", "minwindef", "unknwnbase", "winnt"], &[]),
@@ -169,7 +179,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("handleapi", &["minwindef", "winnt"], &["kernel32"]),
     ("heapapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("http", &["guiddef", "minwinbase", "minwindef", "sspi", "winnt", "ws2def"], &["winhttp"]),
-    ("imm", &[], &[]),
+    ("imm", &["minwindef", "windef"], &["imm32"]),
     ("interlockedapi", &["minwindef", "winnt"], &["kernel32"]),
     ("ioapiset", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("jobapi", &["minwindef", "winnt"], &["kernel32"]),
@@ -235,6 +245,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("psapi", &["basetsd", "minwindef", "winnt"], &["kernel32", "psapi"]),
     ("realtimeapiset", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("reason", &["minwindef"], &[]),
+    ("restartmanager", &["minwindef", "winnt"], &["rstrtmgr"]),
     ("restrictederrorinfo", &["unknwnbase", "winnt", "wtypes"], &[]),
     ("rmxfguid", &[], &[]),
     ("sapi", &["guiddef", "minwindef", "sapi53", "unknwnbase", "winnt"], &[]),
@@ -274,7 +285,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("unknwnbase", &["guiddef", "minwindef", "winnt"], &[]),
     ("urlhist", &["docobj", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
     ("urlmon", &["minwindef", "unknwnbase", "winnt"], &[]),
-    ("userenv", &["minwindef", "winnt"], &["userenv"]),
+    ("userenv", &["minwindef", "winnt", "winreg"], &["userenv"]),
     ("usp10", &["minwindef", "ntdef", "windef", "winerror", "wingdi", "winnt"], &["usp10"]),
     ("utilapiset", &["minwindef", "ntdef"], &["kernel32"]),
     ("vsbackup", &["guiddef", "minwindef", "unknwnbase", "vss", "vswriter", "winnt", "wtypes"], &["vssapi"]),
@@ -296,7 +307,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("winhttp", &["basetsd", "minwinbase", "minwindef", "winnt"], &["winhttp"]),
     ("wininet", &["basetsd", "minwinbase", "minwindef", "ntdef", "windef", "winineti", "winnt"], &["wininet"]),
     ("winineti", &["minwindef"], &[]),
-    ("winioctl", &["devpropdef", "minwindef", "winnt"], &[]),
+    ("winioctl", &["basetsd", "devpropdef", "guiddef", "minwindef", "winnt"], &[]),
     ("winnetwk", &["basetsd", "minwindef", "windef", "winerror", "winnt"], &["mpr"]),
     ("winnls", &["basetsd", "guiddef", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("winnt", &["basetsd", "excpt", "guiddef", "ktmtypes", "minwindef", "vcruntime"], &["kernel32"]),
@@ -387,11 +398,13 @@ impl Graph {
         }
     }
     fn emit_libraries(&self) {
-        let libs = self.0.iter().filter(|&(_, header)| {
+        let mut libs = self.0.iter().filter(|&(_, header)| {
             header.included.get()
         }).flat_map(|(_, header)| {
             header.libraries.iter()
-        }).collect::<HashSet<_>>();
+        }).collect::<Vec<_>>();
+        libs.sort();
+        libs.dedup();
         let prefix = library_prefix();
         let kind = library_kind();
         for lib in libs {
@@ -424,6 +437,7 @@ fn try_everything() {
     graph.emit_libraries();
 }
 fn main() {
+    println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-env-changed=WINAPI_NO_BUNDLED_LIBRARIES");
     println!("cargo:rerun-if-env-changed=WINAPI_STATIC_NOBUNDLE");
     let target = var("TARGET").unwrap();

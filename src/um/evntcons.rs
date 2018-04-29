@@ -153,6 +153,7 @@ ENUM!{enum ETW_PROVIDER_TRAIT_TYPE {
     EtwProviderTraitDecodeGuid = 2,
     EtwProviderTraitTypeMax,
 }}
+#[inline]
 unsafe fn strnlen(s: PCSTR, max_len: isize) -> isize {
     let mut len = 0;
     while *s.offset(len) != 0 && len < max_len {
@@ -161,6 +162,7 @@ unsafe fn strnlen(s: PCSTR, max_len: isize) -> isize {
     len
 }
 // Taken from Rust 1.17.0 sources
+#[inline]
 unsafe fn read_unaligned<T>(src: *const T) -> T {
     use core::{mem, ptr};
 
@@ -170,6 +172,7 @@ unsafe fn read_unaligned<T>(src: *const T) -> T {
                              mem::size_of::<T>());
     tmp
 }
+#[inline]
 pub unsafe fn EtwGetTraitFromProviderTraits(
    ProviderTraits: PVOID, TraitType: UCHAR, Trait: *mut PVOID, Size: PUSHORT,
 ) {
