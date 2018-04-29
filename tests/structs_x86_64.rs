@@ -1480,6 +1480,44 @@ fn um_appmgmt() {
     assert_eq!(size_of::<APPCATEGORYINFOLIST>(), 16);
     assert_eq!(align_of::<APPCATEGORYINFOLIST>(), 8);
 }
+#[cfg(feature = "bits")] #[test]
+fn um_bits() {
+    use winapi::um::bits::*;
+    assert_eq!(size_of::<BG_FILE_PROGRESS>(), 24);
+    assert_eq!(align_of::<BG_FILE_PROGRESS>(), 8);
+    assert_eq!(size_of::<BG_FILE_INFO>(), 16);
+    assert_eq!(align_of::<BG_FILE_INFO>(), 8);
+    assert_eq!(size_of::<BG_JOB_PROGRESS>(), 24);
+    assert_eq!(align_of::<BG_JOB_PROGRESS>(), 8);
+    assert_eq!(size_of::<BG_JOB_TIMES>(), 24);
+    assert_eq!(align_of::<BG_JOB_TIMES>(), 4);
+}
+#[cfg(feature = "bits1_5")] #[test]
+fn um_bits1_5() {
+    use winapi::um::bits1_5::*;
+    assert_eq!(size_of::<BG_JOB_REPLY_PROGRESS>(), 16);
+    assert_eq!(align_of::<BG_JOB_REPLY_PROGRESS>(), 8);
+    assert_eq!(size_of::<BG_BASIC_CREDENTIALS>(), 16);
+    assert_eq!(align_of::<BG_BASIC_CREDENTIALS>(), 8);
+    assert_eq!(size_of::<BG_AUTH_CREDENTIALS_UNION>(), 16);
+    assert_eq!(align_of::<BG_AUTH_CREDENTIALS_UNION>(), 8);
+    assert_eq!(size_of::<BG_AUTH_CREDENTIALS>(), 24);
+    assert_eq!(align_of::<BG_AUTH_CREDENTIALS>(), 8);
+}
+#[cfg(feature = "bits2_0")] #[test]
+fn um_bits2_0() {
+    use winapi::um::bits2_0::*;
+    assert_eq!(size_of::<BG_FILE_RANGE>(), 16);
+    assert_eq!(align_of::<BG_FILE_RANGE>(), 8);
+}
+#[cfg(feature = "bits5_0")] #[test]
+fn um_bits5_0() {
+    use winapi::um::bits5_0::*;
+    assert_eq!(size_of::<BITS_JOB_PROPERTY_VALUE>(), 16);
+    assert_eq!(align_of::<BITS_JOB_PROPERTY_VALUE>(), 8);
+    assert_eq!(size_of::<BITS_FILE_PROPERTY_VALUE>(), 8);
+    assert_eq!(align_of::<BITS_FILE_PROPERTY_VALUE>(), 8);
+}
 #[cfg(feature = "cfgmgr32")] #[test]
 fn um_cfgmgr32() {
     use winapi::um::cfgmgr32::*;
@@ -2817,6 +2855,10 @@ fn um_dwmapi() {
     use winapi::um::dwmapi::*;
     assert_eq!(size_of::<DWM_BLURBEHIND>(), 20);
     assert_eq!(align_of::<DWM_BLURBEHIND>(), 1);
+    assert_eq!(size_of::<UNSIGNED_RATIO>(), 8);
+    assert_eq!(align_of::<UNSIGNED_RATIO>(), 1);
+    assert_eq!(size_of::<DWM_TIMING_INFO>(), 292);
+    assert_eq!(align_of::<DWM_TIMING_INFO>(), 1);
 }
 #[cfg(feature = "dwrite")] #[test]
 fn um_dwrite() {
@@ -3131,6 +3173,12 @@ fn um_jobapi2() {
     use winapi::um::jobapi2::*;
     assert_eq!(size_of::<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>(), 40);
     assert_eq!(align_of::<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>(), 8);
+}
+#[cfg(feature = "imm")] #[test]
+fn um_imm() {
+    use winapi::um::imm::*;
+    assert_eq!(size_of::<COMPOSITIONFORM>(), 28);
+    assert_eq!(align_of::<COMPOSITIONFORM>(), 4);
 }
 #[cfg(feature = "lmaccess")] #[test]
 fn um_lmaccess() {
@@ -4712,6 +4760,16 @@ fn um_psapi() {
     assert_eq!(align_of::<PSAPI_WS_WATCH_INFORMATION>(), 8);
     assert_eq!(size_of::<PSAPI_WS_WATCH_INFORMATION_EX>(), 32);
     assert_eq!(align_of::<PSAPI_WS_WATCH_INFORMATION_EX>(), 8);
+}
+#[cfg(feature = "restartmanager")] #[test]
+fn um_restartmanager() {
+    use winapi::um::restartmanager::*;
+    assert_eq!(size_of::<RM_UNIQUE_PROCESS>(), 12);
+    assert_eq!(align_of::<RM_UNIQUE_PROCESS>(), 4);
+    assert_eq!(size_of::<RM_PROCESS_INFO>(), 668);
+    assert_eq!(align_of::<RM_PROCESS_INFO>(), 4);
+    assert_eq!(size_of::<RM_FILTER_INFO>(), 32);
+    assert_eq!(align_of::<RM_FILTER_INFO>(), 8);
 }
 #[cfg(feature = "sapi")] #[test]
 fn um_sapi() {
@@ -6573,6 +6631,48 @@ fn um_winioctl() {
     assert_eq!(align_of::<DEVICE_TRIM_DESCRIPTOR>(), 4);
     assert_eq!(size_of::<DISK_GEOMETRY>(), 24);
     assert_eq!(align_of::<DISK_GEOMETRY>(), 8);
+    assert_eq!(size_of::<PARTITION_INFORMATION>(), 32);
+    assert_eq!(align_of::<PARTITION_INFORMATION>(), 8);
+    assert_eq!(size_of::<SET_PARTITION_INFORMATION>(), 1);
+    assert_eq!(align_of::<SET_PARTITION_INFORMATION>(), 1);
+    assert_eq!(size_of::<DRIVE_LAYOUT_INFORMATION>(), 40);
+    assert_eq!(align_of::<DRIVE_LAYOUT_INFORMATION>(), 8);
+    assert_eq!(size_of::<VERIFY_INFORMATION>(), 16);
+    assert_eq!(align_of::<VERIFY_INFORMATION>(), 8);
+    assert_eq!(size_of::<REASSIGN_BLOCKS>(), 8);
+    assert_eq!(align_of::<REASSIGN_BLOCKS>(), 4);
+    assert_eq!(size_of::<REASSIGN_BLOCKS_EX>(), 12);
+    assert_eq!(align_of::<REASSIGN_BLOCKS_EX>(), 1);
+    assert_eq!(size_of::<PARTITION_INFORMATION_GPT>(), 112);
+    assert_eq!(align_of::<PARTITION_INFORMATION_GPT>(), 8);
+    assert_eq!(size_of::<PARTITION_INFORMATION_MBR>(), 24);
+    assert_eq!(align_of::<PARTITION_INFORMATION_MBR>(), 4);
+    assert_eq!(size_of::<SET_PARTITION_INFORMATION_EX_u>(), 112);
+    assert_eq!(align_of::<SET_PARTITION_INFORMATION_EX_u>(), 8);
+    assert_eq!(size_of::<SET_PARTITION_INFORMATION_EX>(), 120);
+    assert_eq!(align_of::<SET_PARTITION_INFORMATION_EX>(), 8);
+    assert_eq!(size_of::<CREATE_DISK_GPT>(), 20);
+    assert_eq!(align_of::<CREATE_DISK_GPT>(), 4);
+    assert_eq!(size_of::<CREATE_DISK_MBR>(), 4);
+    assert_eq!(align_of::<CREATE_DISK_MBR>(), 4);
+    assert_eq!(size_of::<CREATE_DISK_u>(), 20);
+    assert_eq!(align_of::<CREATE_DISK_u>(), 4);
+    assert_eq!(size_of::<CREATE_DISK>(), 24);
+    assert_eq!(align_of::<CREATE_DISK>(), 4);
+    assert_eq!(size_of::<GET_LENGTH_INFORMATION>(), 8);
+    assert_eq!(align_of::<GET_LENGTH_INFORMATION>(), 8);
+    assert_eq!(size_of::<PARTITION_INFORMATION_EX_u >(), 112);
+    assert_eq!(align_of::<PARTITION_INFORMATION_EX_u >(), 8);
+    assert_eq!(size_of::<PARTITION_INFORMATION_EX>(), 144);
+    assert_eq!(align_of::<PARTITION_INFORMATION_EX>(), 8);
+    assert_eq!(size_of::<DRIVE_LAYOUT_INFORMATION_GPT>(), 40);
+    assert_eq!(align_of::<DRIVE_LAYOUT_INFORMATION_GPT>(), 8);
+    assert_eq!(size_of::<DRIVE_LAYOUT_INFORMATION_MBR>(), 8);
+    assert_eq!(align_of::<DRIVE_LAYOUT_INFORMATION_MBR>(), 4);
+    assert_eq!(size_of::<DRIVE_LAYOUT_INFORMATION_EX_u>(), 40);
+    assert_eq!(align_of::<DRIVE_LAYOUT_INFORMATION_EX_u>(), 8);
+    assert_eq!(size_of::<DRIVE_LAYOUT_INFORMATION_EX>(), 192);
+    assert_eq!(align_of::<DRIVE_LAYOUT_INFORMATION_EX>(), 8);
     assert_eq!(size_of::<PATHNAME_BUFFER>(), 8);
     assert_eq!(align_of::<PATHNAME_BUFFER>(), 4);
     assert_eq!(size_of::<FSCTL_QUERY_FAT_BPB_BUFFER>(), 36);
@@ -6706,6 +6806,9 @@ fn um_winnt() {
     // align = 16
     // assert_eq!(size_of::<CONTEXT_u>(), 512);
     // assert_eq!(align_of::<CONTEXT_u>(), 16);
+    // align = 16
+    // assert_eq!(size_of::<CONTEXT>(), 1232);
+    // assert_eq!(align_of::<CONTEXT>(), 16);
     assert_eq!(size_of::<UNWIND_HISTORY_TABLE_ENTRY>(), 16);
     assert_eq!(align_of::<UNWIND_HISTORY_TABLE_ENTRY>(), 8);
     assert_eq!(size_of::<UNWIND_HISTORY_TABLE>(), 216);
@@ -6722,9 +6825,6 @@ fn um_winnt() {
     assert_eq!(align_of::<KNONVOLATILE_CONTEXT_POINTERS_u2>(), 8);
     assert_eq!(size_of::<KNONVOLATILE_CONTEXT_POINTERS>(), 256);
     assert_eq!(align_of::<KNONVOLATILE_CONTEXT_POINTERS>(), 8);
-    // align = 16
-    // assert_eq!(size_of::<CONTEXT>(), 1232);
-    // assert_eq!(align_of::<CONTEXT>(), 16);
     assert_eq!(size_of::<LDT_ENTRY_Bytes>(), 4);
     assert_eq!(align_of::<LDT_ENTRY_Bytes>(), 1);
     assert_eq!(size_of::<LDT_ENTRY_Bits>(), 4);
@@ -7424,11 +7524,11 @@ fn um_winnt() {
     // assert_eq!(size_of::<SLIST_ENTRY>(), 16);
     // assert_eq!(align_of::<SLIST_ENTRY>(), 16);
     // align = 16
-    // assert_eq!(size_of::<SLIST_HEADER_HeaderX64>(), 16);
-    // assert_eq!(align_of::<SLIST_HEADER_HeaderX64>(), 8);
-    // align = 16
     // assert_eq!(size_of::<SLIST_HEADER_s>(), 16);
     // assert_eq!(align_of::<SLIST_HEADER_s>(), 8);
+    // align = 16
+    // assert_eq!(size_of::<SLIST_HEADER_HeaderX64>(), 16);
+    // assert_eq!(align_of::<SLIST_HEADER_HeaderX64>(), 8);
     // align = 16
     // assert_eq!(size_of::<SLIST_HEADER>(), 16);
     // assert_eq!(align_of::<SLIST_HEADER>(), 16);

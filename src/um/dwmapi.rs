@@ -17,11 +17,11 @@ STRUCT!{#[repr(packed)] struct DWM_BLURBEHIND {
     hRgnBlur: HRGN,
     fTransitionOnMaximized: BOOL,
 }}
-STRUCT!{struct UNSIGNED_RATIO {
+STRUCT!{#[repr(packed)] struct UNSIGNED_RATIO {
     uiNumerator: UINT32,
     uiDenominator: UINT32,
 }}
-STRUCT!{struct DWM_TIMING_INFO {
+STRUCT!{#[repr(packed)] struct DWM_TIMING_INFO {
     cbSize: UINT32,
     rateRefresh: UNSIGNED_RATIO,
     qpcRefreshPeriod: QPC_TIME,

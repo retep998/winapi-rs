@@ -451,7 +451,7 @@ pub type PSET_PARTITION_INFORMATION = *mut SET_PARTITION_INFORMATION;
 STRUCT!{struct DRIVE_LAYOUT_INFORMATION {
     PartitionCount: DWORD,
     Signature: DWORD,
-    PartitionEntry: [PARTITION_INFORMATION; 0],
+    PartitionEntry: [PARTITION_INFORMATION; 1],
 }}
 pub type PDRIVE_LAYOUT_INFORMATION = *mut DRIVE_LAYOUT_INFORMATION;
 STRUCT!{struct VERIFY_INFORMATION {
@@ -462,13 +462,13 @@ pub type PVERIFY_INFORMATION = *mut VERIFY_INFORMATION;
 STRUCT!{struct REASSIGN_BLOCKS {
     Reserved: WORD,
     Count: WORD,
-    BlockNumber: [DWORD; 0],
+    BlockNumber: [DWORD; 1],
 }}
 pub type PREASSIGN_BLOCKS = *mut REASSIGN_BLOCKS;
-STRUCT!{struct REASSIGN_BLOCKS_EX {
+STRUCT!{#[repr(packed)] struct REASSIGN_BLOCKS_EX {
     Reserved: WORD,
     Count: WORD,
-    BlockNumber: [LARGE_INTEGER; 0],
+    BlockNumber: [LARGE_INTEGER; 1],
 }}
 pub type PREASSIGN_BLOCKS_EX = *mut REASSIGN_BLOCKS_EX;
 ENUM!{enum PARTITION_STYLE {
@@ -555,7 +555,7 @@ STRUCT!{struct DRIVE_LAYOUT_INFORMATION_EX {
     PartitionStyle: DWORD,
     PartitionCount: DWORD,
     u: DRIVE_LAYOUT_INFORMATION_EX_u,
-    PartitionEntry: [PARTITION_INFORMATION_EX; 0],
+    PartitionEntry: [PARTITION_INFORMATION_EX; 1],
 }}
 pub type PDRIVE_LAYOUT_INFORMATION_EX = *mut DRIVE_LAYOUT_INFORMATION_EX;
 UNION! {union DRIVE_LAYOUT_INFORMATION_EX_u {
