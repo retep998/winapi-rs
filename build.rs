@@ -239,6 +239,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("psapi", &["basetsd", "minwindef", "winnt"], &["kernel32", "psapi"]),
     ("realtimeapiset", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("reason", &["minwindef"], &[]),
+    ("restartmanager", &["minwindef", "winnt"], &["rstrtmgr"]),
     ("restrictederrorinfo", &["unknwnbase", "winnt", "wtypes"], &[]),
     ("rmxfguid", &[], &[]),
     ("sapi", &["guiddef", "minwindef", "sapi53", "unknwnbase", "winnt"], &[]),
