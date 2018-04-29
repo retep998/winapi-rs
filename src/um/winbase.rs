@@ -1960,20 +1960,48 @@ extern "system" {
     // pub fn BackupEventLogA();
     // pub fn BackupEventLogW();
     // pub fn CloseEventLog();
-    // pub fn DeregisterEventSource();
+    pub fn DeregisterEventSource(
+        hEventLog: HANDLE,
+    ) -> BOOL;
     // pub fn NotifyChangeEventLog();
     // pub fn GetNumberOfEventLogRecords();
     // pub fn GetOldestEventLogRecord();
     // pub fn OpenEventLogA();
     // pub fn OpenEventLogW();
-    // pub fn RegisterEventSourceA();
-    // pub fn RegisterEventSourceW();
+    pub fn RegisterEventSourceA(
+        lpUNCServerName: LPCSTR,
+        lpSourceName: LPCSTR,
+    ) -> HANDLE;
+    pub fn RegisterEventSourceW(
+        lpUNCServerName: LPCWSTR,
+        lpSourceName: LPCWSTR,
+    ) -> HANDLE;
     // pub fn OpenBackupEventLogA();
     // pub fn OpenBackupEventLogW();
     // pub fn ReadEventLogA();
     // pub fn ReadEventLogW();
-    // pub fn ReportEventA();
-    // pub fn ReportEventW();
+    pub fn ReportEventA(
+        hEventLog: HANDLE,
+        wType: WORD,
+        wCategory: WORD,
+        dwEventID: DWORD,
+        lpUserSid: PSID,
+        wNumStrings: WORD,
+        dwDataSize: DWORD,
+        lpStrings: *mut LPCSTR,
+        lpRawData: LPVOID,
+    ) -> BOOL;
+    pub fn ReportEventW(
+        hEventLog: HANDLE,
+        wType: WORD,
+        wCategory: WORD,
+        dwEventID: DWORD,
+        lpUserSid: PSID,
+        wNumStrings: WORD,
+        dwDataSize: DWORD,
+        lpStrings: *mut LPCWSTR,
+        lpRawData: LPVOID,
+    ) -> BOOL;
     // pub fn GetEventLogInformation();
     // pub fn OperationStart();
     // pub fn OperationEnd();
@@ -2043,6 +2071,7 @@ extern "system" {
         Sid: PSID,
         cbSid: LPDWORD,
         ReferencedDomainName: LPCSTR,
+        cchReferencedDomainName: LPDWORD,
         peUse: PSID_NAME_USE,
     ) -> BOOL;
     pub fn LookupAccountNameW(
@@ -2051,6 +2080,7 @@ extern "system" {
         Sid: PSID,
         cbSid: LPDWORD,
         ReferencedDomainName: LPCWSTR,
+        cchReferencedDomainName: LPDWORD,
         peUse: PSID_NAME_USE,
     ) -> BOOL;
     // pub fn LookupAccountNameLocalA();

@@ -5,14 +5,63 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Procedure declarations, constant definitions, and macros for the NLS component.
-use shared::minwindef::{BOOL, DWORD, HRGN, LPCVOID, LPVOID};
+use shared::basetsd::UINT32;
+use shared::minwindef::{BOOL, DWORD, HRGN, LPCVOID, LPVOID, UINT};
 use shared::windef::HWND;
-use um::winnt::HRESULT;
+use um::winnt::{HRESULT, ULONGLONG};
+pub type DWM_FRAME_COUNT = ULONGLONG;
+pub type QPC_TIME = ULONGLONG;
 STRUCT!{#[repr(packed)] struct DWM_BLURBEHIND {
     dwFlags: DWORD,
     fEnable: BOOL,
     hRgnBlur: HRGN,
     fTransitionOnMaximized: BOOL,
+}}
+STRUCT!{struct UNSIGNED_RATIO {
+    uiNumerator: UINT32,
+    uiDenominator: UINT32,
+}}
+STRUCT!{struct DWM_TIMING_INFO {
+    cbSize: UINT32,
+    rateRefresh: UNSIGNED_RATIO,
+    qpcRefreshPeriod: QPC_TIME,
+    rateCompose: UNSIGNED_RATIO,
+    qpcVBlank: QPC_TIME,
+    cRefresh: DWM_FRAME_COUNT,
+    cDXRefresh: UINT,
+    qpcCompose: QPC_TIME,
+    cFrame: DWM_FRAME_COUNT,
+    cDXPresent: UINT,
+    cRefreshFrame: DWM_FRAME_COUNT,
+    cFrameSubmitted: DWM_FRAME_COUNT,
+    cDXPresentSubmitted: UINT,
+    cFrameConfirmed: DWM_FRAME_COUNT,
+    cDXPresentConfirmed: UINT,
+    cRefreshConfirmed: DWM_FRAME_COUNT,
+    cDXRefreshConfirmed: UINT,
+    cFramesLate: DWM_FRAME_COUNT,
+    cFramesOutstanding: UINT,
+    cFrameDisplayed: DWM_FRAME_COUNT,
+    qpcFrameDisplayed: QPC_TIME,
+    cRefreshFrameDisplayed: DWM_FRAME_COUNT,
+    cFrameComplete: DWM_FRAME_COUNT,
+    qpcFrameComplete: QPC_TIME,
+    cFramePending: DWM_FRAME_COUNT,
+    qpcFramePending: QPC_TIME,
+    cFramesDisplayed: DWM_FRAME_COUNT,
+    cFramesComplete: DWM_FRAME_COUNT,
+    cFramesPending: DWM_FRAME_COUNT,
+    cFramesAvailable: DWM_FRAME_COUNT,
+    cFramesDropped: DWM_FRAME_COUNT,
+    cFramesMissed: DWM_FRAME_COUNT,
+    cRefreshNextDisplayed: DWM_FRAME_COUNT,
+    cRefreshNextPresented: DWM_FRAME_COUNT,
+    cRefreshesDisplayed: DWM_FRAME_COUNT,
+    cRefreshesPresented: DWM_FRAME_COUNT,
+    cRefreshStarted: DWM_FRAME_COUNT,
+    cPixelsReceived: ULONGLONG,
+    cPixelsDrawn: ULONGLONG,
+    cBuffersEmpty: DWM_FRAME_COUNT,
 }}
 pub const DWMWA_NCRENDERING_ENABLED: DWORD = 1;
 pub const DWMWA_NCRENDERING_POLICY: DWORD = 2;
@@ -40,7 +89,10 @@ extern "system" {
     // pub fn DwmEnableMMCSS();
     // pub fn DwmExtendFrameIntoClientArea();
     // pub fn DwmGetColorizationColor();
-    // pub fn DwmGetCompositionTimingInfo();
+    pub fn DwmGetCompositionTimingInfo(
+        hWnd: HWND,
+        pTimingInfo: *mut DWM_TIMING_INFO,
+    ) -> HRESULT;
     pub fn DwmGetWindowAttribute(
         hWnd: HWND,
         dwAttribute: DWORD,
@@ -66,7 +118,7 @@ extern "system" {
     // pub fn DwmInvalidateIconicBitmaps();
     // pub fn DwmAttachMilContent();
     // pub fn DwmDetachMilContent();
-    // pub fn DwmFlush();
+    pub fn DwmFlush();
     // pub fn DwmGetGraphicsStreamTransformHint();
     // pub fn DwmGetGraphicsStreamClient();
     // pub fn DwmGetTransportAttributes();
