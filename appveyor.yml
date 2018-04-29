@@ -14,6 +14,9 @@ install:
   - cargo -vV
 build_script:
   - cargo build
-  - cargo build --features "everything debug"
+  - cargo build --features "everything debug impl-default"
 test_script:
-  - cargo test --features "everything debug"
+  - cargo test --features "everything debug impl-default"
+notifications:
+  - provider: Webhook
+    url: https://webhooks.gitter.im/e/d3d6703d143c888f0a8a

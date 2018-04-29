@@ -18,6 +18,8 @@
 * Avoid line breaks when possible, but if you cannot make it fit, add line breaks as late as
   possible.
 * When breaking on binary operators, put the operator at the beginning of the new line.
+** This does not apply to the `:` used for inheritance in COM interfaces, which should remain at
+   the end of the previous line.
 * Do not use aligned indentation. Indentation should always be block indentation.
 * Always use spaces for indentation.
 * Blank lines are evil.
@@ -228,6 +230,7 @@ BITFIELD!{USB_HUB_STATUS AsUshort16: USHORT [
 
 * The uuid should always be lowercase hex.
 * If the COM interface does not have a uuid then use a uuid of all zeroes.
+* Uuid numbers should be padded with zeros when needed.
 
 ```Rust
 RIDL!{#[uuid(0x6d4865fe, 0x0ab8, 0x4d91, 0x8f, 0x62, 0x5d, 0xd6, 0xbe, 0x34, 0xa3, 0xe0)]
@@ -255,8 +258,6 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
 * All definitions go into the source file that directly maps to the header the definition is from.
     * Stuff in `src/winrt` is special and has its own namespaced organization.
 * Definitions are defined in the same order as they are in the original header.
-* The `lib` folder is legacy from 0.2 and will eventually disappear once all definitions have been
-  moved to their correct locations.
 
 ## Dealing with duplicates
 

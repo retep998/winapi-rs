@@ -6,7 +6,7 @@
 // except according to those terms.
 //! Procedure declarations, constant definitions, and macros for the NLS component.
 use shared::basetsd::UINT32;
-use shared::minwindef::{BOOL, DWORD, HRGN, LPVOID, UINT};
+use shared::minwindef::{BOOL, DWORD, HRGN, LPCVOID, LPVOID, UINT};
 use shared::windef::HWND;
 use um::winnt::{HRESULT, ULONGLONG};
 pub type DWM_FRAME_COUNT = ULONGLONG;
@@ -105,7 +105,12 @@ extern "system" {
     // pub fn DwmRegisterThumbnail();
     // pub fn DwmSetDxFrameDuration();
     // pub fn DwmSetPresentParameters();
-    // pub fn DwmSetWindowAttribute();
+    pub fn DwmSetWindowAttribute(
+        hWnd: HWND,
+        dwAttribute: DWORD,
+        pvAttribute: LPCVOID,
+        cbAttribute: DWORD,
+    ) -> HRESULT;
     // pub fn DwmUnregisterThumbnail();
     // pub fn DwmUpdateThumbnailProperties();
     // pub fn DwmSetIconicThumbnail();

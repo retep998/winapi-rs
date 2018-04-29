@@ -82,6 +82,8 @@ ENUM!{enum DXGI_SWAP_CHAIN_FLAG {
     DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER = 128,
     DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO = 256,
     DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO = 512,
+    DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED = 1024,
+    DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING = 2048,
 }}
 STRUCT!{struct DXGI_SWAP_CHAIN_DESC {
     BufferDesc: DXGI_MODE_DESC,
@@ -146,6 +148,9 @@ interface IDXGIKeyedMutex(IDXGIKeyedMutexVtbl): IDXGIDeviceSubObject(IDXGIDevice
         Key: UINT64,
     ) -> HRESULT,
 });
+pub const DXGI_MAP_READ: UINT = 1;
+pub const DXGI_MAP_WRITE: UINT = 2;
+pub const DXGI_MAP_DISCARD: UINT = 4;
 RIDL!(#[uuid(0xcafcb56c, 0x6ac3, 0x4889, 0xbf, 0x47, 0x9e, 0x23, 0xbb, 0xd2, 0x60, 0xec)]
 interface IDXGISurface(IDXGISurfaceVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl) {
     fn GetDesc(
@@ -231,6 +236,8 @@ pub const DXGI_PRESENT_STEREO_PREFER_RIGHT: DWORD = 0x00000010;
 pub const DXGI_PRESENT_STEREO_TEMPORARY_MONO: DWORD = 0x00000020;
 pub const DXGI_PRESENT_RESTRICT_TO_OUTPUT: DWORD = 0x00000040;
 pub const DXGI_PRESENT_USE_DURATION: DWORD = 0x00000100;
+pub const DXGI_ENUM_MODES_INTERLACED: UINT = 1;
+pub const DXGI_ENUM_MODES_SCALING: UINT = 2;
 RIDL!(#[uuid(0x310d36a0, 0xd2e7, 0x4c0a, 0xaa, 0x04, 0x6a, 0x9d, 0x23, 0xb8, 0x88, 0x6a)]
 interface IDXGISwapChain(IDXGISwapChainVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl) {
     fn Present(

@@ -119,7 +119,7 @@ extern "system" {
     ) -> HICON;
     pub fn ExtractIconW(
         hInst: HINSTANCE,
-        pszExeFileName: LPCSTR,
+        pszExeFileName: LPCWSTR,
         nIconIndex: UINT,
     ) -> HICON;
 }
