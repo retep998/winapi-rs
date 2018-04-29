@@ -52,8 +52,8 @@ STRUCT!{struct RM_UNIQUE_PROCESS {
 pub type PRM_UNIQUE_PROCESS = *mut RM_UNIQUE_PROCESS;
 STRUCT!{struct RM_PROCESS_INFO {
     Process: RM_UNIQUE_PROCESS,
-    strAppName: [WCHAR; CCH_RM_MAX_APP_NAME+1],
-    strServiceShortName: [WCHAR; CCH_RM_MAX_SVC_NAME+1],
+    strAppName: [WCHAR; CCH_RM_MAX_APP_NAME + 1],
+    strServiceShortName: [WCHAR; CCH_RM_MAX_SVC_NAME + 1],
     ApplicationType: RM_APP_TYPE,
     AppStatus: ULONG,
     TSSessionId: DWORD,
