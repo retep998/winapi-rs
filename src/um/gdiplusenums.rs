@@ -602,7 +602,7 @@ ENUM!{enum EmfPlusRecordType {
     EmfPlusRecordTypeSetTSGraphics,
     EmfPlusRecordTypeSetTSClip,
     EmfPlusRecordTotal,
-    EmfPlusRecordTypeMax = EmfPlusRecordTotal-1,
+    EmfPlusRecordTypeMax = EmfPlusRecordTotal - 1,
     EmfPlusRecordTypeMin = EmfPlusRecordTypeHeader,
 }}
 ENUM!{enum StringFormatFlags {
