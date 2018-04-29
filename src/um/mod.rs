@@ -95,6 +95,7 @@ pub mod gl;
 #[cfg(feature = "errhandlingapi")] pub mod errhandlingapi;
 #[cfg(feature = "fibersapi")] pub mod fibersapi;
 #[cfg(feature = "fileapi")] pub mod fileapi;
+#[cfg(feature = "fwpmu")] pub mod fwpmu;
 #[cfg(feature = "handleapi")] pub mod handleapi;
 #[cfg(feature = "heapapi")] pub mod heapapi;
 #[cfg(feature = "http")] pub mod http;
