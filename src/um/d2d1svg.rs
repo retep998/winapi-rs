@@ -145,23 +145,39 @@ DEFINE_GUID!{IID_ID2D1SvgDocument,
     0x86b88e4d, 0xafa4, 0x4d7b, 0x88, 0xe4, 0x68, 0xa5, 0x1c, 0x4a, 0x0a, 0xec}
 RIDL!{#[uuid(0xc9cdb0dd, 0xf8c9, 0x4e70, 0xb7, 0xc2, 0x30, 0x1c, 0x80, 0x29, 0x2c, 0x5e)]
 interface ID2D1SvgAttribute(ID2D1SvgAttributeVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
-    fn GetElement(element: *mut *mut ID2D1SvgElement,) -> (),
-    fn Clone(attribute: *mut *mut ID2D1SvgAttribute,) -> HRESULT,
+    fn GetElement(
+        element: *mut *mut ID2D1SvgElement,
+    ) -> (),
+    fn Clone(
+        attribute: *mut *mut ID2D1SvgAttribute,
+    ) -> HRESULT,
 }}
 RIDL!{#[uuid(0xd59bab0a, 0x68a2, 0x455b, 0xa5, 0xdc, 0x9e, 0xb2, 0x85, 0x4e, 0x24, 0x90)]
 interface ID2D1SvgPaint(ID2D1SvgPaintVtbl): ID2D1SvgAttribute(ID2D1SvgAttributeVtbl) {
-    fn SetPaintType(paintType: D2D1_SVG_PAINT_TYPE,) -> HRESULT,
+    fn SetPaintType(paintType: D2D1_SVG_PAINT_TYPE,
+    ) -> HRESULT,
     fn GetPaintType() -> D2D1_SVG_PAINT_TYPE,
-    fn SetColor(color: D2D1_COLOR_F,) -> HRESULT,
-    fn GetColor(color: *mut D2D1_COLOR_F,) -> (),
-    fn SetId(id: PCWSTR,) -> HRESULT,
-    fn GetId(id: PWSTR, idCount: UINT32,) -> HRESULT,
+    fn SetColor(
+        color: D2D1_COLOR_F,
+    ) -> HRESULT,
+    fn GetColor(
+        color: *mut D2D1_COLOR_F,
+    ) -> (),
+    fn SetId(
+        id: PCWSTR,
+    ) -> HRESULT,
+    fn GetId(
+        id: PWSTR,
+        idCount: UINT32,
+    ) -> HRESULT,
     fn GetIdLength() -> UINT32,
 }}
 RIDL!{#[uuid(0xf1c0ca52, 0x92a3, 0x4f00, 0xb4, 0xce, 0xf3, 0x56, 0x91, 0xef, 0xd9, 0xd9)]
 interface ID2D1SvgStrokeDashArray(ID2D1SvgStrokeDashArrayVtbl):
     ID2D1SvgAttribute(ID2D1SvgAttributeVtbl) {
-    fn RemoveDashesAtEnd(dashesCount: UINT32,) -> HRESULT,
+    fn RemoveDashesAtEnd(
+        dashesCount: UINT32,
+    ) -> HRESULT,
     fn UpdateDashes_1(
         dashes: *const D2D1_SVG_LENGTH,
         dashesCount: UINT32,
@@ -187,7 +203,9 @@ interface ID2D1SvgStrokeDashArray(ID2D1SvgStrokeDashArrayVtbl):
 RIDL!{#[uuid(0x9dbe4c0d, 0x3572, 0x4dd9, 0x98, 0x25, 0x55, 0x30, 0x81, 0x3b, 0xb7, 0x12)]
 interface ID2D1SvgPointCollection(ID2D1SvgPointCollectionVtbl):
     ID2D1SvgAttribute(ID2D1SvgAttributeVtbl) {
-    fn RemovePointsAtEnd(pointsCount: UINT32,) -> HRESULT,
+    fn RemovePointsAtEnd(
+        pointsCount: UINT32,
+    ) -> HRESULT,
     fn UpdatePoints(
         points: *const D2D1_POINT_2F,
         pointsCount: UINT32,
@@ -202,7 +220,9 @@ interface ID2D1SvgPointCollection(ID2D1SvgPointCollectionVtbl):
 }}
 RIDL!{#[uuid(0xc095e4f4, 0xbb98, 0x43d6, 0x97, 0x45, 0x4d, 0x1b, 0x84, 0xec, 0x98, 0x88)]
 interface ID2D1SvgPathData(ID2D1SvgPathDataVtbl): ID2D1SvgAttribute(ID2D1SvgAttributeVtbl) {
-    fn RemoveSegmentDataAtEnd(dataCount: UINT32,) -> HRESULT,
+    fn RemoveSegmentDataAtEnd(
+        dataCount: UINT32,
+    ) -> HRESULT,
     fn UpdateSegmentData(
         data: *const FLOAT,
         dataCount: UINT32,
@@ -214,7 +234,9 @@ interface ID2D1SvgPathData(ID2D1SvgPathDataVtbl): ID2D1SvgAttribute(ID2D1SvgAttr
         startIndex: UINT32,
     ) -> HRESULT,
     fn GetSegmentDataCount() -> UINT32,
-    fn RemoveCommandsAtEnd(commandsCount: UINT32,) -> HRESULT,
+    fn RemoveCommandsAtEnd(
+        commandsCount: UINT32,
+    ) -> HRESULT,
     fn UpdateCommands(
         commands: *const D2D1_SVG_PATH_COMMAND,
         commandsCount: UINT32,
@@ -233,14 +255,25 @@ interface ID2D1SvgPathData(ID2D1SvgPathDataVtbl): ID2D1SvgAttribute(ID2D1SvgAttr
 }}
 RIDL!{#[uuid(0xac7b67a6, 0x183e, 0x49c1, 0xa8, 0x23, 0x0e, 0xbe, 0x40, 0xb0, 0xdb, 0x29)]
 interface ID2D1SvgElement(ID2D1SvgElementVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
-    fn GetDocument(document: *mut *mut ID2D1SvgDocument,) -> (),
-    fn GetTagName(name: PWSTR, nameCount: UINT32,) -> HRESULT,
+    fn GetDocument(
+        document: *mut *mut ID2D1SvgDocument,
+    ) -> (),
+    fn GetTagName(
+        name: PWSTR,
+        nameCount: UINT32,
+    ) -> HRESULT,
     fn GetTagNameLength() -> UINT32,
     fn IsTextContent() -> BOOL,
-    fn GetParent(parent: *mut *mut ID2D1SvgElement,) -> (),
+    fn GetParent(
+        parent: *mut *mut ID2D1SvgElement,
+    ) -> (),
     fn HasChildren() -> BOOL,
-    fn GetFirstChild(child: *mut *mut ID2D1SvgElement,) -> (),
-    fn GetLastChild(child: *mut *mut ID2D1SvgElement,) -> (),
+    fn GetFirstChild(
+        child: *mut *mut ID2D1SvgElement,
+    ) -> (),
+    fn GetLastChild(
+        child: *mut *mut ID2D1SvgElement,
+    ) -> (),
     fn GetPreviousChild(
         referenceChild: *mut ID2D1SvgElement,
         previousChild: *mut *mut ID2D1SvgElement,
@@ -253,13 +286,19 @@ interface ID2D1SvgElement(ID2D1SvgElementVtbl): ID2D1Resource(ID2D1ResourceVtbl)
         newChild: *mut ID2D1SvgElement,
         referenceChild: *mut ID2D1SvgElement,
     ) -> HRESULT,
-    fn AppendChild(newChild: *mut ID2D1SvgElement,) -> HRESULT,
+    fn AppendChild(
+        newChild: *mut ID2D1SvgElement,
+    ) -> HRESULT,
     fn ReplaceChild(
         newChild: *mut ID2D1SvgElement,
         oldChild: *mut ID2D1SvgElement,
     ) -> HRESULT,
-    fn RemoveChild(oldChild: *mut ID2D1SvgElement,) -> HRESULT,
-    fn IsAttributeSpecified(name: PCWSTR, inherited: *mut BOOL,) -> BOOL,
+    fn RemoveChild(
+        oldChild: *mut ID2D1SvgElement,
+    ) -> HRESULT,
+    fn IsAttributeSpecified(
+        name: PCWSTR, inherited: *mut BOOL,
+    ) -> BOOL,
     fn GetSpecifiedAttributeCount() -> UINT32,
     fn GetSpecifiedAttributeName(
         index: UINT32,
@@ -272,20 +311,31 @@ interface ID2D1SvgElement(ID2D1SvgElementVtbl): ID2D1Resource(ID2D1ResourceVtbl)
         nameLength: *mut UINT32,
         inherited: *mut BOOL,
     ) -> HRESULT,
-    fn RemoveAttribute(name: PCWSTR,) -> HRESULT,
-    fn SetTextValue(name: *const WCHAR, nameCount: UINT32,) -> HRESULT,
-    fn GetTextValue(name: PWSTR, nameCount: UINT32,) -> HRESULT,
+    fn RemoveAttribute(
+        name: PCWSTR,
+    ) -> HRESULT,
+    fn SetTextValue(
+        name: *const WCHAR,
+        nameCount: UINT32,
+    ) -> HRESULT,
+    fn GetTextValue(
+        name: PWSTR,
+        nameCount: UINT32,
+    ) -> HRESULT,
     fn GetTextValueLength() -> UINT32,
-    fn SetAttributeValue_1(name: PCWSTR, value: *mut ID2D1SvgAttribute,) -> HRESULT,
+    fn SetAttributeValue_1(
+        name: PCWSTR,
+        value: *mut ID2D1SvgAttribute,
+    ) -> HRESULT,
     fn SetAttributeValue_2(
         name: PCWSTR,
-        _type: D2D1_SVG_ATTRIBUTE_POD_TYPE,
+        type_: D2D1_SVG_ATTRIBUTE_POD_TYPE,
         value: *const c_void,
         valueSizeInBytes: UINT32,
     ) -> HRESULT,
     fn SetAttributeValue_3(
         name: PCWSTR,
-        _type: D2D1_SVG_ATTRIBUTE_STRING_TYPE,
+        type_: D2D1_SVG_ATTRIBUTE_STRING_TYPE,
         value: PCWSTR,
     ) -> HRESULT,
     fn GetAttributeValue_1(
@@ -295,31 +345,46 @@ interface ID2D1SvgElement(ID2D1SvgElementVtbl): ID2D1Resource(ID2D1ResourceVtbl)
     ) -> HRESULT,
     fn GetAttributeValue_2(
         name: PCWSTR,
-        _type: D2D1_SVG_ATTRIBUTE_POD_TYPE,
+        type_: D2D1_SVG_ATTRIBUTE_POD_TYPE,
         value: *mut c_void,
         valueSizeInBytes: UINT32,
     ) -> HRESULT,
     fn GetAttributeValue_3(
         name: PCWSTR,
-        _type: D2D1_SVG_ATTRIBUTE_STRING_TYPE,
+        type_: D2D1_SVG_ATTRIBUTE_STRING_TYPE,
         value: PWSTR,
         valueCount: UINT32,
     ) -> HRESULT,
     fn GetAttributeValueLength(
         name: PCWSTR,
-        _type: D2D1_SVG_ATTRIBUTE_STRING_TYPE,
+        type_: D2D1_SVG_ATTRIBUTE_STRING_TYPE,
         valueLength: *mut UINT32,
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x86b88e4d, 0xafa4, 0x4d7b, 0x88, 0xe4, 0x68, 0xa5, 0x1c, 0x4a, 0x0a, 0xec)]
 interface ID2D1SvgDocument(ID2D1SvgDocumentVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
-    fn SetViewportSize(viewportSize: D2D1_SIZE_F,) -> HRESULT,
+    fn SetViewportSize(
+        viewportSize: D2D1_SIZE_F,
+    ) -> HRESULT,
     fn GetViewportSize() -> D2D1_SIZE_F,
-    fn SetRoot(root: *mut ID2D1SvgElement,) -> HRESULT,
-    fn GetRoot(root: *mut *mut ID2D1SvgElement,) -> (),
-    fn FindElementById(id: PCWSTR, svgElement: *mut *mut ID2D1SvgElement,) -> HRESULT,
-    fn Serialize(outputXmlStream: *mut IStream, subtree: *mut ID2D1SvgElement,) -> HRESULT,
-    fn Deserialize(inputXmlStream: *mut IStream, subtree: *mut *mut ID2D1SvgElement,) -> HRESULT,
+    fn SetRoot(
+        root: *mut ID2D1SvgElement,
+    ) -> HRESULT,
+    fn GetRoot(
+        root: *mut *mut ID2D1SvgElement,
+    ) -> (),
+    fn FindElementById(
+        id: PCWSTR,
+        svgElement: *mut *mut ID2D1SvgElement,
+    ) -> HRESULT,
+    fn Serialize(
+        outputXmlStream: *mut IStream,
+        subtree: *mut ID2D1SvgElement,
+    ) -> HRESULT,
+    fn Deserialize(
+        inputXmlStream: *mut IStream,
+        subtree: *mut *mut ID2D1SvgElement,
+    ) -> HRESULT,
     fn CreatePaint(
         paintType: D2D1_SVG_PAINT_TYPE,
         color: *const D2D1_COLOR_F,

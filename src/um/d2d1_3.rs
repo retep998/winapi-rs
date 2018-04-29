@@ -201,26 +201,38 @@ DEFINE_GUID!{IID_ID2D1Factory7,
     0xbdc2bdd3, 0xb96c, 0x4de6, 0xbd, 0xf7, 0x99, 0xd4, 0x74, 0x54, 0x54, 0xde}
 RIDL!{#[uuid(0xbae8b344, 0x23fc, 0x4071, 0x8c, 0xb5, 0xd0, 0x5d, 0x6f, 0x07, 0x38, 0x48)]
 interface ID2D1InkStyle(ID2D1InkStyleVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
-    fn SetNibTransform(transform: *const D2D1_MATRIX_3X2_F,) -> (),
-    fn GetNibTransform(transform: *mut D2D1_MATRIX_3X2_F,) -> (),
-    fn SetNibShape(nibShape: D2D1_INK_NIB_SHAPE,) -> (),
+    fn SetNibTransform(
+        transform: *const D2D1_MATRIX_3X2_F,
+    ) -> (),
+    fn GetNibTransform(
+        transform: *mut D2D1_MATRIX_3X2_F,
+    ) -> (),
+    fn SetNibShape(
+        nibShape: D2D1_INK_NIB_SHAPE,
+    ) -> (),
     fn GetNibShape() -> D2D1_INK_NIB_SHAPE,
 }}
 RIDL!{#[uuid(0xb499923b, 0x7029, 0x478f, 0xa8, 0xb3, 0x43, 0x2c, 0x7c, 0x5f, 0x53, 0x12)]
 interface ID2D1Ink(ID2D1InkVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
-    fn SetStartPoint(startPoint: *const D2D1_INK_POINT,) -> (),
+    fn SetStartPoint(
+        startPoint: *const D2D1_INK_POINT,
+    ) -> (),
     fn GetStartPoint() -> D2D1_INK_POINT,
     fn AddSegments(
         segments: *const D2D1_INK_BEZIER_SEGMENT,
         segmentsCount: UINT32,
     ) -> HRESULT,
-    fn RemoveSegmentsAtEnd(segmentsCount: UINT32,) -> HRESULT,
+    fn RemoveSegmentsAtEnd(
+        segmentsCount: UINT32,
+    ) -> HRESULT,
     fn SetSegments(
         startSegment: UINT32,
         segments: *const D2D1_INK_BEZIER_SEGMENT,
         segmentsCount: UINT32,
     ) -> HRESULT,
-    fn SetSegmentAtEnd(segment: *const D2D1_INK_BEZIER_SEGMENT,) -> HRESULT,
+    fn SetSegmentAtEnd(
+        segment: *const D2D1_INK_BEZIER_SEGMENT,
+    ) -> HRESULT,
     fn GetSegmentCount() -> UINT32,
     fn GetSegments(
         startSegment: UINT32,
@@ -251,20 +263,32 @@ interface ID2D1GradientMesh(ID2D1GradientMeshVtbl): ID2D1Resource(ID2D1ResourceV
 RIDL!{#[uuid(0xc9b664e5, 0x74a1, 0x4378, 0x9a, 0xc2, 0xee, 0xfc, 0x37, 0xa3, 0xf4, 0xd8)]
 interface ID2D1ImageSource(ID2D1ImageSourceVtbl): ID2D1Image(ID2D1ImageVtbl) {
     fn OfferResources() -> HRESULT,
-    fn TryReclaimResources(resourcesDiscarded: *mut BOOL,) -> HRESULT,
+    fn TryReclaimResources(
+        resourcesDiscarded: *mut BOOL,
+    ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x77395441, 0x1c8f, 0x4555, 0x86, 0x83, 0xf5, 0x0d, 0xab, 0x0f, 0xe7, 0x92)]
 interface ID2D1ImageSourceFromWic(ID2D1ImageSourceFromWicVtbl):
     ID2D1ImageSource(ID2D1ImageSourceVtbl) {
-    fn EnsureCached(rectangleToFill: *const D2D1_RECT_U,) -> HRESULT,
-    fn TrimCache(rectangleToPreserve: *const D2D1_RECT_U,) -> HRESULT,
-    fn GetSource(wicBitmapSource: *mut *mut IWICBitmapSource,) -> (),
+    fn EnsureCached(
+        rectangleToFill: *const D2D1_RECT_U,
+    ) -> HRESULT,
+    fn TrimCache(
+        rectangleToPreserve: *const D2D1_RECT_U,
+    ) -> HRESULT,
+    fn GetSource(
+        wicBitmapSource: *mut *mut IWICBitmapSource,
+    ) -> (),
 }}
 RIDL!{#[uuid(0x7f1f79e5, 0x2796, 0x416c, 0x8f, 0x55, 0x70, 0x0f, 0x91, 0x14, 0x45, 0xe5)]
 interface ID2D1TransformedImageSource(ID2D1TransformedImageSourceVtbl):
     ID2D1Image(ID2D1ImageVtbl) {
-    fn GetSource(imageSource: *mut *mut ID2D1ImageSource,) -> (),
-    fn GetProperties(properties: *mut D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES,) -> (),
+    fn GetSource(
+        imageSource: *mut *mut ID2D1ImageSource,
+    ) -> (),
+    fn GetProperties(
+        properties: *mut D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES,
+    ) -> (),
 }}
 RIDL!{#[uuid(0x53dd9855, 0xa3b0, 0x4d5b, 0x82, 0xe1, 0x26, 0xe2, 0x5c, 0x5e, 0x57, 0x97)]
 interface ID2D1LookupTable3D(ID2D1LookupTable3DVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
@@ -272,7 +296,10 @@ interface ID2D1LookupTable3D(ID2D1LookupTable3DVtbl): ID2D1Resource(ID2D1Resourc
 RIDL!{#[uuid(0x394ea6a3, 0x0c34, 0x4321, 0x95, 0x0b, 0x6c, 0xa2, 0x0f, 0x0b, 0xe6, 0xc7)]
 interface ID2D1DeviceContext2(ID2D1DeviceContext2Vtbl):
     ID2D1DeviceContext1(ID2D1DeviceContext1Vtbl) {
-    fn CreateInk(startPoint: *const D2D1_INK_POINT, ink: *mut *mut ID2D1Ink,) -> HRESULT,
+    fn CreateInk(
+        startPoint: *const D2D1_INK_POINT,
+        ink: *mut *mut ID2D1Ink,
+    ) -> HRESULT,
     fn CreateInkStyle(
         inkStyleProperties: *const D2D1_INK_STYLE_PROPERTIES,
         inkStyle: *mut *mut ID2D1InkStyle,
@@ -312,7 +339,9 @@ interface ID2D1DeviceContext2(ID2D1DeviceContext2Vtbl):
         brush: *mut ID2D1Brush,
         inkStyle: *mut ID2D1InkStyle,
     ) -> (),
-    fn DrawGradientMesh(gradientMesh: *mut ID2D1GradientMesh,) -> (),
+    fn DrawGradientMesh(
+        gradientMesh: *mut ID2D1GradientMesh,
+    ) -> (),
     fn DrawGdiMetafile(
         gdiMetafile: *mut ID2D1GdiMetafile,
         destinationRectangle: *const D2D1_RECT_F,
@@ -330,8 +359,12 @@ interface ID2D1Device2(ID2D1Device2Vtbl): ID2D1Device1(ID2D1Device1Vtbl) {
         options: D2D1_DEVICE_CONTEXT_OPTIONS,
         deviceContext2: *mut *mut ID2D1DeviceContext2,
     ) -> HRESULT,
-    fn FlushDeviceContexts(bitmap: *mut ID2D1Bitmap,) -> (),
-    fn GetDxgiDevice(dxgiDevice: *mut *mut IDXGIDevice,) -> HRESULT,
+    fn FlushDeviceContexts(
+        bitmap: *mut ID2D1Bitmap,
+    ) -> (),
+    fn GetDxgiDevice(
+        dxgiDevice: *mut *mut IDXGIDevice,
+    ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x0869759f, 0x4f00, 0x413f, 0xb0, 0x3e, 0x2b, 0xda, 0x45, 0x40, 0x4d, 0x0f)]
 interface ID2D1Factory3(ID2D1Factory3Vtbl): ID2D1Factory2(ID2D1Factory2Vtbl) {
@@ -347,7 +380,9 @@ interface ID2D1CommandSink2(ID2D1CommandSink2Vtbl): ID2D1CommandSink1(ID2D1Comma
         brush: *mut ID2D1Brush,
         inkStyle: *mut ID2D1InkStyle,
     ) -> (),
-    fn DrawGradientMesh(gradientMesh: *mut ID2D1GradientMesh,) -> (),
+    fn DrawGradientMesh(
+        gradientMesh: *mut ID2D1GradientMesh,
+    ) -> (),
     fn DrawGdiMetafile(
         gdiMetafile: *mut ID2D1GdiMetafile,
         destinationRectangle: *const D2D1_RECT_F,
@@ -356,8 +391,13 @@ interface ID2D1CommandSink2(ID2D1CommandSink2Vtbl): ID2D1CommandSink1(ID2D1Comma
 }}
 RIDL!{#[uuid(0x2e69f9e8, 0xdd3f, 0x4bf9, 0x95, 0xba, 0xc0, 0x4f, 0x49, 0xd7, 0x88, 0xdf)]
 interface ID2D1GdiMetafile1(ID2D1GdiMetafile1Vtbl): ID2D1GdiMetafile(ID2D1GdiMetafileVtbl) {
-    fn GetDpi(dpiX: *mut FLOAT, dpiY: *mut FLOAT,) -> HRESULT,
-    fn GetSourceBounds(bounds: *mut D2D1_RECT_F,) -> HRESULT,
+    fn GetDpi(
+        dpiX: *mut FLOAT,
+        dpiY: *mut FLOAT,
+    ) -> HRESULT,
+    fn GetSourceBounds(
+        bounds: *mut D2D1_RECT_F,
+    ) -> HRESULT,
 }}
 RIDL!{#[uuid(0xfd0ecb6b, 0x91e6, 0x411e, 0x86, 0x55, 0x39, 0x5e, 0x76, 0x0f, 0x91, 0xb4)]
 interface ID2D1GdiMetafileSink1(ID2D1GdiMetafileSink1Vtbl):
@@ -408,7 +448,9 @@ interface ID2D1SpriteBatch(ID2D1SpriteBatchVtbl): ID2D1Resource(ID2D1ResourceVtb
 RIDL!{#[uuid(0x235a7496, 0x8351, 0x414c, 0xbc, 0xd4, 0x66, 0x72, 0xab, 0x2d, 0x8e, 0x00)]
 interface ID2D1DeviceContext3(ID2D1DeviceContext3Vtbl):
     ID2D1DeviceContext2(ID2D1DeviceContext2Vtbl) {
-    fn CreateSpriteBatch(spriteBatch: *mut *mut ID2D1SpriteBatch,) -> HRESULT,
+    fn CreateSpriteBatch(
+        spriteBatch: *mut *mut ID2D1SpriteBatch,
+    ) -> HRESULT,
     fn DrawSpriteBatch(
         spriteBatch: *mut ID2D1SpriteBatch,
         startIndex: UINT32,
@@ -445,8 +487,12 @@ interface ID2D1CommandSink3(ID2D1CommandSink3Vtbl): ID2D1CommandSink2(ID2D1Comma
 }}
 RIDL!{#[uuid(0xaf671749, 0xd241, 0x4db8, 0x8e, 0x41, 0xdc, 0xc2, 0xe5, 0xc1, 0xa4, 0x38)]
 interface ID2D1SvgGlyphStyle(ID2D1SvgGlyphStyleVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
-    fn SetFill(brush: *mut ID2D1Brush,) -> HRESULT,
-    fn GetFill(brush: *mut *mut ID2D1Brush,) -> (),
+    fn SetFill(
+        brush: *mut ID2D1Brush,
+    ) -> HRESULT,
+    fn GetFill(
+        brush: *mut *mut ID2D1Brush,
+    ) -> (),
     fn SetStroke(
         brush: *mut ID2D1Brush,
         strokeWidth: FLOAT,
@@ -466,7 +512,9 @@ interface ID2D1SvgGlyphStyle(ID2D1SvgGlyphStyleVtbl): ID2D1Resource(ID2D1Resourc
 RIDL!{#[uuid(0x8c427831, 0x3d90, 0x4476, 0xb6, 0x47, 0xc4, 0xfa, 0xe3, 0x49, 0xe4, 0xdb)]
 interface ID2D1DeviceContext4(ID2D1DeviceContext4Vtbl):
     ID2D1DeviceContext3(ID2D1DeviceContext3Vtbl) {
-    fn CreateSvgGlyphStyle(svgGlyphStyle: *mut *mut ID2D1SvgGlyphStyle,) -> HRESULT,
+    fn CreateSvgGlyphStyle(
+        svgGlyphStyle: *mut *mut ID2D1SvgGlyphStyle,
+    ) -> HRESULT,
     fn DrawText(
         string: *const WCHAR,
         stringLength: UINT32,
@@ -535,7 +583,9 @@ interface ID2D1Device4(ID2D1Device4Vtbl): ID2D1Device3(ID2D1Device3Vtbl) {
         options: D2D1_DEVICE_CONTEXT_OPTIONS,
         deviceContext4: *mut *mut ID2D1DeviceContext4,
     ) -> HRESULT,
-    fn SetMaximumColorGlyphCacheMemory(maximumInBytes: UINT64,) -> (),
+    fn SetMaximumColorGlyphCacheMemory(
+        maximumInBytes: UINT64,
+    ) -> (),
     fn GetMaximumColorGlyphCacheMemory() -> UINT64,
 }}
 RIDL!{#[uuid(0xc4349994, 0x838e, 0x4b0f, 0x8c, 0xab, 0x44, 0x99, 0x7d, 0x9e, 0xea, 0xcc)]
@@ -547,13 +597,17 @@ interface ID2D1Factory5(ID2D1Factory5Vtbl): ID2D1Factory4(ID2D1Factory4Vtbl) {
 }}
 RIDL!{#[uuid(0xc78a6519, 0x40d6, 0x4218, 0xb2, 0xde, 0xbe, 0xee, 0xb7, 0x44, 0xbb, 0x3e)]
 interface ID2D1CommandSink4(ID2D1CommandSink4Vtbl): ID2D1CommandSink3(ID2D1CommandSink3Vtbl) {
-    fn SetPrimitiveBlend2(primitiveBlend: D2D1_PRIMITIVE_BLEND,) -> HRESULT,
+    fn SetPrimitiveBlend2(
+        primitiveBlend: D2D1_PRIMITIVE_BLEND,
+    ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x1ab42875, 0xc57f, 0x4be9, 0xbd, 0x85, 0x9c, 0xd7, 0x8d, 0x6f, 0x55, 0xee)]
 interface ID2D1ColorContext1(ID2D1ColorContext1Vtbl): ID2D1ColorContext(ID2D1ColorContextVtbl) {
     fn GetColorContextType() -> D2D1_COLOR_CONTEXT_TYPE,
     fn GetDXGIColorSpace() -> DXGI_COLOR_SPACE_TYPE,
-    fn GetSimpleColorProfile(simpleProfile: *mut D2D1_SIMPLE_COLOR_PROFILE,) -> HRESULT,
+    fn GetSimpleColorProfile(
+        simpleProfile: *mut D2D1_SIMPLE_COLOR_PROFILE,
+    ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x7836d248, 0x68cc, 0x4df6, 0xb9, 0xe8, 0xde, 0x99, 0x1b, 0xf6, 0x2e, 0xb7)]
 interface ID2D1DeviceContext5(ID2D1DeviceContext5Vtbl): ID2D1DeviceContext4(ID2D1DeviceContext4Vtbl) {
@@ -562,7 +616,9 @@ interface ID2D1DeviceContext5(ID2D1DeviceContext5Vtbl): ID2D1DeviceContext4(ID2D
         viewportSize: D2D1_SIZE_F,
         svgDocument: *mut *mut ID2D1SvgDocument,
     ) -> HRESULT,
-    fn DrawSvgDocument(svgDocument: *mut ID2D1SvgDocument,) -> (),
+    fn DrawSvgDocument(
+        svgDocument: *mut ID2D1SvgDocument,
+    ) -> (),
     fn CreateColorContextFromDxgiColorSpace(
         colorSpace: DXGI_COLOR_SPACE_TYPE,
         colorContext: *mut *mut ID2D1ColorContext1,
