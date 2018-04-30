@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Procedure declarations, constant definitions, and macros for the NLS component.
-use shared::minwindef::{BOOL, DWORD, HRGN, LPVOID};
+use shared::minwindef::{BOOL, DWORD, HRGN, LPCVOID, LPVOID};
 use shared::windef::HWND;
 use um::winnt::HRESULT;
 STRUCT!{struct DWM_BLURBEHIND {
@@ -53,7 +53,12 @@ extern "system" {
     // pub fn DwmRegisterThumbnail();
     // pub fn DwmSetDxFrameDuration();
     // pub fn DwmSetPresentParameters();
-    // pub fn DwmSetWindowAttribute();
+    pub fn DwmSetWindowAttribute(
+        hWnd: HWND,
+        dwAttribute: DWORD,
+        pvAttribute: LPCVOID,
+        cbAttribute: DWORD,
+    ) -> HRESULT;
     // pub fn DwmUnregisterThumbnail();
     // pub fn DwmUpdateThumbnailProperties();
     // pub fn DwmSetIconicThumbnail();

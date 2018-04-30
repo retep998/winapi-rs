@@ -2043,6 +2043,7 @@ extern "system" {
         Sid: PSID,
         cbSid: LPDWORD,
         ReferencedDomainName: LPCSTR,
+        cchReferencedDomainName: LPDWORD,
         peUse: PSID_NAME_USE,
     ) -> BOOL;
     pub fn LookupAccountNameW(
@@ -2051,6 +2052,7 @@ extern "system" {
         Sid: PSID,
         cbSid: LPDWORD,
         ReferencedDomainName: LPCWSTR,
+        cchReferencedDomainName: LPDWORD,
         peUse: PSID_NAME_USE,
     ) -> BOOL;
     // pub fn LookupAccountNameLocalA();
