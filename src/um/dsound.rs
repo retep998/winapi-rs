@@ -9,7 +9,7 @@ use shared::guiddef::{GUID, LPCGUID, LPGUID};
 use shared::minwindef::{DWORD, LPDWORD, LPLONG, LPVOID};
 use shared::windef::HWND;
 use shared::winerror::{E_FAIL, S_OK};
-use um::mmsystem::{LPCWAVEFORMATEX, LPWAVEFORMATEX};
+use um::mmeapi::{LPCWAVEFORMATEX, LPWAVEFORMATEX};
 use um::unknwnbase::{IUnknown, IUnknownVtbl, LPUNKNOWN};
 use um::winnt::{HRESULT, LONG};
 DEFINE_GUID!{CLSID_DirectSound,

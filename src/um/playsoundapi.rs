@@ -33,6 +33,20 @@ pub const SND_APPLICATION: DWORD = 0x0080;
 pub const SND_SENTRY: DWORD = 0x00080000;
 pub const SND_RING: DWORD = 0x00100000;
 pub const SND_SYSTEM: DWORD = 0x00200000;
+pub const SND_ALIAS_START: DWORD = 0;
+macro_rules! sndAlias {
+    ($ch0:expr, $ch1:expr) => {
+        SND_ALIAS_START + ($ch0 as DWORD) | (($ch1 as DWORD) << 8)
+    }
+}
+pub const SND_ALIAS_SYSTEMASTERISK: DWORD = sndAlias!('S', '*');
+pub const SND_ALIAS_SYSTEMQUESTION: DWORD = sndAlias!('S', '?');
+pub const SND_ALIAS_SYSTEMHAND: DWORD = sndAlias!('S', 'H');
+pub const SND_ALIAS_SYSTEMEXIT: DWORD = sndAlias!('S', 'E');
+pub const SND_ALIAS_SYSTEMSTART: DWORD = sndAlias!('S', 'S');
+pub const SND_ALIAS_SYSTEMWELCOME: DWORD = sndAlias!('S', 'W');
+pub const SND_ALIAS_SYSTEMEXCLAMATION: DWORD = sndAlias!('S', '!');
+pub const SND_ALIAS_SYSTEMDEFAULT: DWORD = sndAlias!('S', 'D');
 extern "system" {
     pub fn PlaySoundA(
         pszSound: LPCSTR,

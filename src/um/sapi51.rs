@@ -10,13 +10,13 @@ use shared::guiddef::{CLSID, GUID, IID, REFCLSID, REFGUID, REFIID};
 use shared::minwindef::{
     BOOL, BYTE, DWORD, FILETIME, HKEY, HMODULE, LPARAM, UINT, ULONG, USHORT, WORD, WPARAM
 };
-use shared::mmreg::WAVEFORMATEX;
 use shared::rpcndr::byte;
 use shared::windef::HWND;
 use shared::wtypes::{BSTR, VARIANT_BOOL};
 use shared::wtypesbase::{
     CLSCTX_INPROC_HANDLER, CLSCTX_INPROC_SERVER, CLSCTX_LOCAL_SERVER, CLSCTX_REMOTE_SERVER
 };
+use um::mmeapi::WAVEFORMATEX;
 use um::oaidl::{DISPID_NEWENUM, DISPID_VALUE, IDispatch, IDispatchVtbl, VARIANT};
 use um::objidlbase::{IStream, IStreamVtbl, STREAM_SEEK_CUR, STREAM_SEEK_END, STREAM_SEEK_SET};
 use um::servprov::{IServiceProvider, IServiceProviderVtbl};
