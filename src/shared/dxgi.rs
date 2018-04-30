@@ -200,6 +200,8 @@ interface IDXGIAdapter(IDXGIAdapterVtbl): IDXGIObject(IDXGIObjectVtbl) {
         pUMDVersion: *mut LARGE_INTEGER,
     ) -> HRESULT,
 }}
+pub const DXGI_ENUM_MODES_INTERLACED: UINT = 1;
+pub const DXGI_ENUM_MODES_SCALING: UINT = 2;
 RIDL!{#[uuid(0xae02eedb, 0xc735, 0x4690, 0x8d, 0x52, 0x5a, 0x8d, 0xc2, 0x02, 0x13, 0xaa)]
 interface IDXGIOutput(IDXGIOutputVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn GetDesc(
