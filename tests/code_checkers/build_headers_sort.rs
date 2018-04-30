@@ -5,20 +5,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::fs::File;
-use std::io::{self, Read, Write};
-use std::path::Path;
-
-fn get_between_quotes(s: &str) -> &str {
-    s.split('"').skip(1).next().unwrap_or("")
-}
-
-fn read_file<P: AsRef<Path>>(p: P) -> String {
-    let mut f = File::open(p).expect("read_file::open failed");
-    let mut content = String::new();
-    f.read_to_string(&mut content).expect("read_file::read_to_end failed");
-    content
-}
+use std::io::{self, Write};
+use utils::{get_between_quotes, read_file};
 
 fn get_headers(entries: &str) -> Vec<String> {
     entries.split(',')
