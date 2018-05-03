@@ -5,10 +5,10 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
-use ctypes::c_float;
+use ctypes::{c_float};
 use shared::basetsd::{UINT32, UINT64};
 use shared::guiddef::{LPCGUID, REFIID};
-use shared::minwindef::{BYTE, DWORD, LPVOID};
+use shared::minwindef::{BOOL, BYTE, DWORD, LPVOID};
 use shared::mmreg::WAVEFORMATEX;
 use shared::winerror::{FACILITY_AUDCLNT, SEVERITY_ERROR, SEVERITY_SUCCESS};
 use shared::wtypesbase::SCODE;
@@ -67,6 +67,8 @@ DEFINE_GUID!{IID_IAudioClock,
     0xcd63314f, 0x3fba, 0x4a1b, 0x81, 0x2c, 0xef, 0x96, 0x35, 0x87, 0x28, 0xe7}
 DEFINE_GUID!{IID_IAudioStreamVolume,
     0x93014887, 0x242d, 0x4068, 0x8a, 0x15, 0xcf, 0x5e, 0x93, 0xb9, 0x0f, 0xe3}
+DEFINE_GUID!{IID_ISimpleAudioVolume,
+    0x87ce5498, 0x68d6, 0x44e5, 0x92, 0x15, 0x6d, 0xa4, 0x7e, 0xf8, 0x83, 0xd8}
 RIDL!{#[uuid(0x1cb9ad4c, 0xdbfa, 0x4c32, 0xb1, 0x78, 0xc2, 0xf5, 0x68, 0xa7, 0x03, 0xb2)]
 interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
     fn Initialize(
@@ -169,5 +171,22 @@ interface IAudioStreamVolume(IAudioStreamVolumeVtbl): IUnknown(IUnknownVtbl) {
     fn GetAllVolumes(
         dwCount: UINT32,
         pfVolumes: *mut c_float,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x87ce5498, 0x68d6, 0x44e5, 0x92, 0x15, 0x6d, 0xa4, 0x7e, 0xf8, 0x83, 0xd8)]
+interface ISimpleAudioVolume(ISimpleAudioVolumeVtbl): IUnknown(IUnknownVtbl) {
+    fn GetMasterVolume(
+        pfLevel: *mut c_float,
+    ) -> HRESULT,
+    fn GetMute(
+        pbMute: *mut BOOL,
+    ) -> HRESULT,
+    fn SetMasterVolume(
+        fLevel: c_float,
+        EventContext: LPCGUID,
+    ) -> HRESULT,
+    fn SetMute(
+        bMute: BOOL,
+        EventContext: LPCGUID,
     ) -> HRESULT,
 }}
