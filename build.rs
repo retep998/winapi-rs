@@ -145,7 +145,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dwrite_3", &["basetsd", "dcommon", "dwrite", "dwrite_1", "dwrite_2", "minwindef", "unknwnbase", "wingdi", "winnt"], &[]),
     ("dxdiag", &[], &[]),
     ("dxfile", &[], &[]),
-    ("dxgidebug", &[], &[]),
+    ("dxgidebug", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt"], &["dxgi"]),
     ("errhandlingapi", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("fibersapi", &["minwindef", "winnt"], &["kernel32"]),
     ("fileapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
