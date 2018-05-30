@@ -1742,6 +1742,7 @@ interface ID3D11DeviceContext(ID3D11DeviceContextVtbl): ID3D11DeviceChild(ID3D11
         StartSlot: UINT,
         NumUAVs: UINT,
         ppUnorderedAccessViews: *const *mut ID3D11UnorderedAccessView,
+        pUAVInitialCounts: *const UINT,
     ) -> (),
     fn CSSetShader(
         pComputeShader: *mut ID3D11ComputeShader,

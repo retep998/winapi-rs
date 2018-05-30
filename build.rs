@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use std::cell::Cell;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::env::var;
 // (header name, &[header dependencies], &[library dependencies])
 const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static str])] = &[
@@ -30,8 +30,11 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dxgi1_3", &["dxgi", "dxgi1_2", "dxgiformat", "guiddef", "minwindef", "unknwnbase", "windef", "winnt"], &["dxgi"]),
     ("dxgi1_4", &["basetsd", "dxgi1_2", "dxgi1_3", "dxgiformat", "dxgitype", "guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("dxgi1_5", &["basetsd", "dxgi", "dxgi1_2", "dxgi1_3", "dxgi1_4", "dxgiformat", "minwindef", "unknwnbase", "winnt"], &[]),
+    ("dxgi1_6", &["basetsd", "dxgi1_2", "dxgi1_4", "dxgi1_5", "dxgitype", "minwindef", "windef", "winnt"], &[]),
     ("dxgiformat", &[], &[]),
     ("dxgitype", &["d3d9types", "dxgiformat", "minwindef"], &[]),
+    ("evntprov", &["basetsd", "guiddef", "minwindef", "winnt"], &["advapi32"]),
+    ("evntrace", &["basetsd", "evntcons", "evntprov", "guiddef", "handleapi", "minwindef", "timezoneapi", "vadefs", "winnt", "wmistr"], &["advapi32"]),
     ("guiddef", &[], &[]),
     ("hidclass", &["guiddef", "minwindef", "winioctl", "winnt"], &[]),
     ("hidpi", &["hidusage", "minwindef", "ntdef", "ntstatus", "winnt"], &["hid"]),
@@ -54,8 +57,11 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("rpc", &[], &[]),
     ("rpcdce", &["guiddef", "minwindef", "rpc"], &[]),
     ("rpcndr", &[], &[]),
+    ("sddl", &["basetsd", "minwindef", "winnt"], &["advapi32"]),
     ("sspi", &["basetsd", "guiddef", "minwindef", "subauth", "wincred", "winnt"], &["credui", "secur32"]),
     ("stralign", &["vcruntime", "winnt"], &["kernel32"]),
+    ("transportsettingcommon", &["guiddef"], &[]),
+    ("tvout", &["guiddef", "minwindef"], &[]),
     ("usb", &["minwindef", "usbspec", "winnt"], &[]),
     ("usbiodef", &["guiddef", "minwindef", "winioctl", "winnt"], &[]),
     ("usbspec", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
@@ -63,6 +69,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("windowsx", &["minwindef"], &[]),
     ("winerror", &["minwindef"], &[]),
     ("winusbio", &["minwindef", "usb"], &[]),
+    ("wmistr", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
     ("wnnc", &["minwindef"], &[]),
     ("ws2def", &["basetsd", "guiddef", "inaddr", "minwindef", "vcruntime", "winnt"], &[]),
     ("ws2ipdef", &["in6addr", "inaddr", "minwindef", "ws2def"], &[]),
@@ -70,9 +77,22 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("wtypesbase", &["minwindef", "rpcndr", "winnt"], &[]),
     // ucrt
     // um
+    ("accctrl", &["guiddef", "minwindef", "winbase", "winnt"], &[]),
+    ("aclapi", &["accctrl", "guiddef", "minwindef", "winnt"], &["advapi32"]),
+    ("appmgmt", &["guiddef", "minwindef", "winnt"], &["advapi32"]),
     ("audioclient", &["audiosessiontypes", "basetsd", "guiddef", "minwindef", "mmreg", "strmif", "unknwnbase", "winerror", "winnt", "wtypesbase"], &[]),
     ("audiosessiontypes", &["minwindef"], &[]),
     ("avrt", &["guiddef", "minwindef", "winnt"], &["avrt"]),
+    ("bits", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
+    ("bits10_1", &["basetsd", "bits", "bits2_0", "bits3_0", "bits5_0", "minwindef", "winnt"], &[]),
+    ("bits1_5", &["basetsd", "bits", "rpcndr", "winnt"], &[]),
+    ("bits2_0", &["basetsd", "bits", "bits1_5", "minwindef", "winnt"], &[]),
+    ("bits2_5", &["minwindef", "rpcndr", "unknwnbase", "winnt"], &[]),
+    ("bits3_0", &["basetsd", "bits", "bits2_0", "guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
+    ("bits4_0", &["basetsd", "bits3_0", "minwindef", "unknwnbase", "winnt"], &[]),
+    ("bits5_0", &["basetsd", "bits1_5", "bits3_0", "bits4_0", "guiddef", "minwindef", "winnt"], &[]),
+    ("bitscfg", &["guiddef", "oaidl", "unknwnbase", "winnt", "wtypes"], &["oleaut32"]),
+    ("bitsmsg", &["minwindef"], &[]),
     ("cfgmgr32", &["basetsd", "cfg", "guiddef", "minwindef", "winnt", "winreg"], &["setupapi"]),
     ("cguid", &[], &[]),
     ("combaseapi", &["basetsd", "guiddef", "minwindef", "objidl", "objidlbase", "propidl", "rpcdce", "unknwnbase", "winnt", "wtypesbase"], &["ole32"]),
@@ -87,7 +107,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("d2d1_1", &["basetsd", "d2d1", "d2d1effectauthor", "d2dbasetypes", "dcommon", "documenttarget", "dwrite", "dxgi", "dxgiformat", "guiddef", "minwindef", "objidlbase", "unknwnbase", "wincodec", "winnt"], &["d2d1"]),
     ("d2d1_2", &["d2d1", "d2d1_1", "dxgi", "minwindef", "winnt"], &["d2d1"]),
     ("d2d1_3", &["basetsd", "d2d1", "d2d1_1", "d2d1_2", "d2d1effects", "d2d1svg", "dcommon", "dwrite", "dxgi", "dxgitype", "minwindef", "ntdef", "objidlbase", "wincodec", "winerror"], &["d2d1"]),
-    ("d2d1effectauthor", &["basetsd", "minwindef", "ntdef", "unknwnbase"], &[]),
+    ("d2d1effectauthor", &["basetsd", "d2d1", "d2d1_1", "d2dbasetypes", "d3dcommon", "dxgiformat", "guiddef", "minwindef", "ntdef", "unknwnbase", "wincodec"], &[]),
     ("d2d1effects", &[], &[]),
     ("d2d1effects_1", &[], &[]),
     ("d2d1effects_2", &[], &[]),
@@ -107,7 +127,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("d3d11_3", &[], &[]),
     ("d3d11_4", &[], &[]),
     ("d3d11on12", &["d3d11", "d3d12", "d3dcommon", "guiddef", "minwindef", "unknwnbase", "winnt"], &["d3d11"]),
-    ("d3d11sdklayers", &[], &[]),
+    ("d3d11sdklayers", &["basetsd", "d3d11", "dxgi", "minwindef", "unknwnbase", "winnt"], &[]),
     ("d3d11shader", &["basetsd", "d3dcommon", "minwindef", "unknwnbase", "winnt"], &[]),
     ("d3d12", &["basetsd", "d3dcommon", "dxgiformat", "dxgitype", "guiddef", "minwinbase", "minwindef", "unknwnbase", "windef", "winnt"], &["d3d12"]),
     ("d3d12sdklayers", &["basetsd", "d3d12", "minwindef", "unknwnbase", "winnt"], &[]),
@@ -140,22 +160,23 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dsound", &["guiddef", "minwindef", "mmsystem", "unknwnbase", "windef", "winerror", "winnt"], &["dsound"]),
     ("dsrole", &["guiddef", "minwindef", "winnt"], &["netapi32"]),
     ("dvp", &[], &[]),
-    ("dwmapi", &["minwindef", "windef", "winnt"], &["dwmapi"]),
+    ("dwmapi", &["basetsd", "minwindef", "windef", "winnt"], &["dwmapi"]),
     ("dwrite", &["basetsd", "d2d1", "dcommon", "guiddef", "minwindef", "unknwnbase", "windef", "winerror", "wingdi", "winnt"], &["dwrite"]),
     ("dwrite_1", &["basetsd", "dcommon", "dwrite", "minwindef", "winnt"], &[]),
     ("dwrite_2", &["basetsd", "d3d9types", "dcommon", "dwrite", "dwrite_1", "minwindef", "unknwnbase", "winnt"], &[]),
     ("dwrite_3", &["basetsd", "dcommon", "dwrite", "dwrite_1", "dwrite_2", "minwindef", "unknwnbase", "wingdi", "winnt"], &[]),
     ("dxdiag", &[], &[]),
     ("dxfile", &[], &[]),
-    ("dxgidebug", &[], &[]),
+    ("dxgidebug", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt"], &["dxgi"]),
     ("errhandlingapi", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
+    ("evntcons", &["basetsd", "evntprov", "evntrace", "guiddef", "minwindef", "winnt"], &["advapi32"]),
     ("fibersapi", &["minwindef", "winnt"], &["kernel32"]),
     ("fileapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("gl-gl", &[], &["opengl32"]),
     ("handleapi", &["minwindef", "winnt"], &["kernel32"]),
     ("heapapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("http", &["guiddef", "minwinbase", "minwindef", "sspi", "winnt", "ws2def"], &["winhttp"]),
-    ("imm", &[], &[]),
+    ("imm", &["minwindef", "windef"], &["imm32"]),
     ("interlockedapi", &["minwindef", "winnt"], &["kernel32"]),
     ("ioapiset", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("jobapi", &["minwindef", "winnt"], &["kernel32"]),
@@ -179,7 +200,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("lmsvc", &["lmcons", "minwindef", "winnt"], &["netapi32"]),
     ("lmuse", &["lmcons", "minwindef", "winnt"], &["netapi32"]),
     ("lmwksta", &["lmcons", "minwindef", "winnt"], &["netapi32"]),
-    ("lsalookup", &["guiddef", "minwindef", "winnt"], &[]),
+    ("lsalookup", &["guiddef", "minwindef", "ntdef", "winnt"], &["advapi32"]),
     ("memoryapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("minschannel", &["guiddef", "minwindef", "wincrypt", "winnt"], &[]),
     ("minwinbase", &["basetsd", "minwindef", "ntstatus", "winnt"], &[]),
@@ -188,11 +209,13 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("mmsystem", &["basetsd", "minwindef", "mmreg", "winnt"], &[]),
     ("msaatext", &[], &[]),
     ("mscat", &["guiddef", "minwindef", "mssip", "wincrypt", "winnt"], &[]),
+    ("mschapp", &["basetsd", "minwindef", "winnt"], &["advapi32"]),
     ("mssip", &["guiddef", "minwindef", "mscat", "wincrypt", "winnt"], &["crypt32"]),
-    ("namedpipeapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
+    ("namedpipeapi", &["minwinbase", "minwindef", "winnt"], &["advapi32", "kernel32"]),
     ("namespaceapi", &["minwinbase", "minwindef", "ntdef", "winnt"], &["kernel32"]),
     ("nb30", &["minwindef", "winnt"], &["netapi32"]),
     ("ncrypt", &["basetsd", "sspi"], &["ncrypt"]),
+    ("ntlsa", &["basetsd", "guiddef", "lsalookup", "minwindef", "ntdef", "ntsecapi", "subauth", "winnt"], &["advapi32"]),
     ("ntsecapi", &["basetsd", "guiddef", "lsalookup", "minwindef", "ntdef", "sspi", "subauth", "winnt"], &["advapi32"]),
     ("oaidl", &["basetsd", "guiddef", "minwindef", "rpcndr", "unknwnbase", "winnt", "wtypes", "wtypesbase"], &[]),
     ("objbase", &["combaseapi", "minwindef", "winnt"], &["ole32"]),
@@ -202,6 +225,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("oleauto", &["basetsd", "minwinbase", "minwindef", "oaidl", "winnt", "wtypes", "wtypesbase"], &["oleaut32"]),
     ("olectl", &["winerror", "winnt"], &[]),
     ("pdh", &["basetsd", "guiddef", "minwindef", "windef", "winnt"], &["pdh"]),
+    ("perflib", &["basetsd", "guiddef", "minwinbase", "minwindef", "winnt"], &["advapi32"]),
     ("playsoundapi", &["minwindef", "winnt"], &["winmm"]),
     ("powerbase", &["minwindef", "winnt", "winuser"], &["powrprof"]),
     ("powersetting", &["guiddef", "minwindef", "winnt", "winuser"], &["powrprof"]),
@@ -218,6 +242,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("psapi", &["basetsd", "minwindef", "winnt"], &["kernel32", "psapi"]),
     ("realtimeapiset", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("reason", &["minwindef"], &[]),
+    ("restartmanager", &["minwindef", "winnt"], &["rstrtmgr"]),
     ("restrictederrorinfo", &["unknwnbase", "winnt", "wtypes"], &[]),
     ("rmxfguid", &[], &[]),
     ("sapi", &["guiddef", "minwindef", "sapi53", "unknwnbase", "winnt"], &[]),
@@ -227,7 +252,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("sapiddk51", &["guiddef", "minwindef", "mmreg", "oaidl", "objidlbase", "sapi", "unknwnbase", "windef", "winnt"], &[]),
     ("schannel", &["guiddef", "minwindef", "wincrypt", "windef", "winnt"], &[]),
     ("securityappcontainer", &["minwindef", "winnt"], &["kernel32"]),
-    ("securitybaseapi", &["minwindef", "winnt"], &["advapi32", "kernel32"]),
+    ("securitybaseapi", &["guiddef", "minwinbase", "minwindef", "winnt"], &["advapi32", "kernel32"]),
     ("servprov", &["guiddef", "unknwnbase", "winnt"], &[]),
     ("setupapi", &["basetsd", "commctrl", "devpropdef", "guiddef", "minwindef", "prsht", "spapidef", "windef", "winnt", "winreg"], &["setupapi"]),
     ("shellapi", &["basetsd", "guiddef", "minwinbase", "minwindef", "processthreadsapi", "windef", "winnt", "winuser"], &["shell32", "shlwapi"]),
@@ -252,18 +277,19 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("threadpoolapiset", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("threadpoollegacyapiset", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("timeapi", &["minwindef", "mmsystem"], &["winmm"]),
-    ("timezoneapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
+    ("timezoneapi", &["minwinbase", "minwindef", "winnt"], &["advapi32", "kernel32"]),
     ("tlhelp32", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("unknwnbase", &["guiddef", "minwindef", "winnt"], &[]),
     ("urlhist", &["docobj", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
     ("urlmon", &["minwindef", "unknwnbase", "winnt"], &[]),
-    ("userenv", &["minwindef", "winnt"], &["userenv"]),
+    ("userenv", &["minwindef", "winnt", "winreg"], &["userenv"]),
     ("usp10", &["minwindef", "ntdef", "windef", "winerror", "wingdi", "winnt"], &["usp10"]),
     ("utilapiset", &["minwindef", "ntdef"], &["kernel32"]),
     ("vsbackup", &["guiddef", "minwindef", "unknwnbase", "vss", "vswriter", "winnt", "wtypes"], &["vssapi"]),
     ("vss", &["guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("vsserror", &["winnt"], &[]),
     ("vswriter", &["minwindef", "unknwnbase", "vss", "winnt", "wtypes"], &[]),
+    ("wct", &["basetsd", "guiddef", "minwindef", "winnt"], &["advapi32"]),
     ("werapi", &["minwindef", "winnt"], &["kernel32"]),
     ("winbase", &["basetsd", "cfgmgr32", "fileapi", "guiddef", "libloaderapi", "minwinbase", "minwindef", "processthreadsapi", "vadefs", "windef", "winnt"], &["kernel32"]),
     ("wincodec", &["basetsd", "d2d1", "d2d1_1", "dcommon", "dxgiformat", "dxgitype", "guiddef", "minwindef", "ntdef", "objidlbase", "ocidl", "propidl", "unknwnbase", "windef", "winerror", "winnt"], &["windowscodecs"]),
@@ -272,16 +298,18 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("wincred", &["minwindef", "sspi", "windef", "winnt"], &["advapi32", "credui"]),
     ("wincrypt", &["basetsd", "bcrypt", "guiddef", "minwinbase", "minwindef", "ncrypt", "vcruntime", "winnt"], &["advapi32", "crypt32", "cryptnet"]),
     ("windowsceip", &["minwindef"], &["kernel32"]),
+    ("winefs", &["basetsd", "minwinbase", "minwindef", "wincrypt", "winnt"], &["advapi32"]),
     ("winevt", &["basetsd", "guiddef", "minwinbase", "minwindef", "vcruntime", "winnt"], &["wevtapi"]),
     ("wingdi", &["basetsd", "minwindef", "windef", "winnt"], &["gdi32", "msimg32", "opengl32", "winspool"]),
     ("winhttp", &["basetsd", "minwinbase", "minwindef", "winnt"], &["winhttp"]),
     ("wininet", &["basetsd", "minwinbase", "minwindef", "ntdef", "windef", "winineti", "winnt"], &["wininet"]),
     ("winineti", &["minwindef"], &[]),
-    ("winioctl", &["devpropdef", "minwindef", "winnt"], &[]),
+    ("winioctl", &["basetsd", "devpropdef", "guiddef", "minwindef", "winnt"], &[]),
     ("winnetwk", &["basetsd", "minwindef", "windef", "winerror", "winnt"], &["mpr"]),
     ("winnls", &["basetsd", "guiddef", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("winnt", &["basetsd", "excpt", "guiddef", "ktmtypes", "minwindef", "vcruntime"], &["kernel32"]),
     ("winreg", &["basetsd", "minwinbase", "minwindef", "winnt"], &["advapi32"]),
+    ("winsafer", &["basetsd", "guiddef", "minwindef", "wincrypt", "windef", "winnt"], &["advapi32"]),
     ("winscard", &["basetsd", "guiddef", "minwindef", "rpcdce", "windef", "winnt", "winsmcrd"], &["winscard"]),
     ("winsmcrd", &["minwindef", "winioctl"], &[]),
     ("winsock2", &["basetsd", "guiddef", "inaddr", "minwinbase", "minwindef", "qos", "winbase", "windef", "winerror", "winnt", "ws2def", "wtypesbase"], &["ws2_32"]),
@@ -367,11 +395,13 @@ impl Graph {
         }
     }
     fn emit_libraries(&self) {
-        let libs = self.0.iter().filter(|&(_, header)| {
+        let mut libs = self.0.iter().filter(|&(_, header)| {
             header.included.get()
         }).flat_map(|(_, header)| {
             header.libraries.iter()
-        }).collect::<HashSet<_>>();
+        }).collect::<Vec<_>>();
+        libs.sort();
+        libs.dedup();
         let prefix = library_prefix();
         let kind = library_kind();
         for lib in libs {
@@ -404,6 +434,7 @@ fn try_everything() {
     graph.emit_libraries();
 }
 fn main() {
+    println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-env-changed=WINAPI_NO_BUNDLED_LIBRARIES");
     println!("cargo:rerun-if-env-changed=WINAPI_STATIC_NOBUNDLE");
     let target = var("TARGET").unwrap();

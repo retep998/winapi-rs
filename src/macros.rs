@@ -259,6 +259,11 @@ macro_rules! UNION {
             #[inline]
             fn clone(&self) -> $name { *self }
         }
+        #[cfg(feature = "impl-default")]
+        impl Default for $name {
+            #[inline]
+            fn default() -> $name { unsafe { $crate::_core::mem::zeroed() } }
+        }
         impl $name {$(
             #[inline]
             pub unsafe fn $variant(&self) -> &$ftype {
@@ -282,6 +287,11 @@ macro_rules! UNION {
         impl Clone for $name {
             #[inline]
             fn clone(&self) -> $name { *self }
+        }
+        #[cfg(feature = "impl-default")]
+        impl Default for $name {
+            #[inline]
+            fn default() -> $name { unsafe { $crate::_core::mem::zeroed() } }
         }
         impl $name {$(
             #[inline]
@@ -354,6 +364,11 @@ macro_rules! STRUCT {
         impl Clone for $name {
             #[inline]
             fn clone(&self) -> $name { *self }
+        }
+        #[cfg(feature = "impl-default")]
+        impl Default for $name {
+            #[inline]
+            fn default() -> $name { unsafe { $crate::_core::mem::zeroed() } }
         }
     );
 }
