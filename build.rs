@@ -105,7 +105,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("d2d1", &["basetsd", "d2dbasetypes", "d3dcommon", "dcommon", "dwrite", "dxgi", "guiddef", "minwindef", "unknwnbase", "wincodec", "windef", "winnt"], &["d2d1"]),
     ("d2d1_1", &["basetsd", "d2d1", "d2d1effectauthor", "d2dbasetypes", "dcommon", "documenttarget", "dwrite", "dxgi", "dxgiformat", "guiddef", "minwindef", "objidlbase", "unknwnbase", "wincodec", "winnt"], &["d2d1"]),
     ("d2d1_2", &["d2d1", "d2d1_1", "dxgi", "minwindef", "winnt"], &["d2d1"]),
-    ("d2d1effectauthor", &["basetsd", "minwindef", "ntdef", "unknwnbase"], &[]),
+    ("d2d1effectauthor", &["basetsd", "d2d1", "d2d1_1", "d2dbasetypes", "d3dcommon", "dxgiformat", "guiddef", "minwindef", "ntdef", "unknwnbase", "wincodec"], &[]),
     ("d2d1effects", &[], &[]),
     ("d2d1effects_1", &[], &[]),
     ("d2d1effects_2", &[], &[]),
