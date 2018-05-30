@@ -154,7 +154,8 @@ interface ID2D1SvgAttribute(ID2D1SvgAttributeVtbl): ID2D1Resource(ID2D1ResourceV
 }}
 RIDL!{#[uuid(0xd59bab0a, 0x68a2, 0x455b, 0xa5, 0xdc, 0x9e, 0xb2, 0x85, 0x4e, 0x24, 0x90)]
 interface ID2D1SvgPaint(ID2D1SvgPaintVtbl): ID2D1SvgAttribute(ID2D1SvgAttributeVtbl) {
-    fn SetPaintType(paintType: D2D1_SVG_PAINT_TYPE,
+    fn SetPaintType(
+        paintType: D2D1_SVG_PAINT_TYPE,
     ) -> HRESULT,
     fn GetPaintType() -> D2D1_SVG_PAINT_TYPE,
     fn SetColor(
