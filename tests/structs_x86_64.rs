@@ -329,6 +329,14 @@ fn shared_dxgi1_5() {
     assert_eq!(size_of::<DXGI_HDR_METADATA_HDR10>(), 28);
     assert_eq!(align_of::<DXGI_HDR_METADATA_HDR10>(), 4);
 }
+#[cfg(feature = "dxgi1_6")] #[test]
+fn shared_dxgi1_6() {
+    use winapi::shared::dxgi1_6::*;
+    assert_eq!(size_of::<DXGI_ADAPTER_DESC3>(), 320);
+    assert_eq!(align_of::<DXGI_ADAPTER_DESC3>(), 8);
+    assert_eq!(size_of::<DXGI_OUTPUT_DESC1>(), 152);
+    assert_eq!(align_of::<DXGI_OUTPUT_DESC1>(), 8);
+}
 #[cfg(feature = "dxgitype")] #[test]
 fn shared_dxgitype() {
     use winapi::shared::dxgitype::*;
@@ -2061,6 +2069,34 @@ fn um_d2d1effectauthor() {
     use winapi::um::d2d1effectauthor::*;
     assert_eq!(size_of::<D2D1_PROPERTY_BINDING>(), 24);
     assert_eq!(align_of::<D2D1_PROPERTY_BINDING>(), 8);
+    assert_eq!(size_of::<D2D1_RESOURCE_TEXTURE_PROPERTIES>(), 32);
+    assert_eq!(align_of::<D2D1_RESOURCE_TEXTURE_PROPERTIES>(), 8);
+    assert_eq!(size_of::<D2D1_INPUT_ELEMENT_DESC>(), 24);
+    assert_eq!(align_of::<D2D1_INPUT_ELEMENT_DESC>(), 8);
+    assert_eq!(size_of::<D2D1_VERTEX_BUFFER_PROPERTIES>(), 24);
+    assert_eq!(align_of::<D2D1_VERTEX_BUFFER_PROPERTIES>(), 8);
+    assert_eq!(size_of::<D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES>(), 32);
+    assert_eq!(align_of::<D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES>(), 8);
+    assert_eq!(size_of::<D2D1_VERTEX_RANGE>(), 8);
+    assert_eq!(align_of::<D2D1_VERTEX_RANGE>(), 4);
+    assert_eq!(size_of::<D2D1_BLEND_DESCRIPTION>(), 40);
+    assert_eq!(align_of::<D2D1_BLEND_DESCRIPTION>(), 4);
+    assert_eq!(size_of::<D2D1_INPUT_DESCRIPTION>(), 8);
+    assert_eq!(align_of::<D2D1_INPUT_DESCRIPTION>(), 4);
+    assert_eq!(size_of::<D2D1_FEATURE_DATA_DOUBLES>(), 4);
+    assert_eq!(align_of::<D2D1_FEATURE_DATA_DOUBLES>(), 4);
+    assert_eq!(size_of::<D2D1_FEATURE_DATA_D3D10_X_HARDWARE_OPTIONS>(), 4);
+    assert_eq!(align_of::<D2D1_FEATURE_DATA_D3D10_X_HARDWARE_OPTIONS>(), 4);
+}
+#[cfg(feature = "d2d1svg")] #[test]
+fn um_d2d1svg() {
+    use winapi::um::d2d1svg::*;
+    assert_eq!(size_of::<D2D1_SVG_LENGTH>(), 8);
+    assert_eq!(align_of::<D2D1_SVG_LENGTH>(), 4);
+    assert_eq!(size_of::<D2D1_SVG_PRESERVE_ASPECT_RATIO>(), 12);
+    assert_eq!(align_of::<D2D1_SVG_PRESERVE_ASPECT_RATIO>(), 4);
+    assert_eq!(size_of::<D2D1_SVG_VIEWBOX>(), 16);
+    assert_eq!(align_of::<D2D1_SVG_VIEWBOX>(), 4);
 }
 #[cfg(feature = "d2d1_1")] #[test]
 fn um_d2d1_1() {
@@ -2090,35 +2126,21 @@ fn um_d2d1_1() {
     assert_eq!(size_of::<D2D1_CREATION_PROPERTIES>(), 12);
     assert_eq!(align_of::<D2D1_CREATION_PROPERTIES>(), 4);
 }
-#[cfg(feature = "d2dbasetypes")] #[test]
-fn um_d2dbasetypes() {
-    use winapi::um::d2dbasetypes::*;
-    assert_eq!(size_of::<D2D_POINT_2U>(), 8);
-    assert_eq!(align_of::<D2D_POINT_2U>(), 4);
-    assert_eq!(size_of::<D2D_POINT_2F>(), 8);
-    assert_eq!(align_of::<D2D_POINT_2F>(), 4);
-    assert_eq!(size_of::<D2D_VECTOR_2F>(), 8);
-    assert_eq!(align_of::<D2D_VECTOR_2F>(), 4);
-    assert_eq!(size_of::<D2D_VECTOR_3F>(), 12);
-    assert_eq!(align_of::<D2D_VECTOR_3F>(), 4);
-    assert_eq!(size_of::<D2D_VECTOR_4F>(), 16);
-    assert_eq!(align_of::<D2D_VECTOR_4F>(), 4);
-    assert_eq!(size_of::<D2D_RECT_F>(), 16);
-    assert_eq!(align_of::<D2D_RECT_F>(), 4);
-    assert_eq!(size_of::<D2D_RECT_U>(), 16);
-    assert_eq!(align_of::<D2D_RECT_U>(), 4);
-    assert_eq!(size_of::<D2D_SIZE_F>(), 8);
-    assert_eq!(align_of::<D2D_SIZE_F>(), 4);
-    assert_eq!(size_of::<D2D_SIZE_U>(), 8);
-    assert_eq!(align_of::<D2D_SIZE_U>(), 4);
-    assert_eq!(size_of::<D2D_MATRIX_3X2_F>(), 24);
-    assert_eq!(align_of::<D2D_MATRIX_3X2_F>(), 4);
-    assert_eq!(size_of::<D2D_MATRIX_4X3_F>(), 48);
-    assert_eq!(align_of::<D2D_MATRIX_4X3_F>(), 4);
-    assert_eq!(size_of::<D2D_MATRIX_4X4_F>(), 64);
-    assert_eq!(align_of::<D2D_MATRIX_4X4_F>(), 4);
-    assert_eq!(size_of::<D2D_MATRIX_5X4_F>(), 80);
-    assert_eq!(align_of::<D2D_MATRIX_5X4_F>(), 4);
+#[cfg(feature = "d2d1_3")] #[test]
+fn um_d2d1_3() {
+    use winapi::um::d2d1_3::*;
+    assert_eq!(size_of::<D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES>(), 20);
+    assert_eq!(align_of::<D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES>(), 4);
+    assert_eq!(size_of::<D2D1_INK_POINT>(), 12);
+    assert_eq!(align_of::<D2D1_INK_POINT>(), 4);
+    assert_eq!(size_of::<D2D1_INK_BEZIER_SEGMENT>(), 36);
+    assert_eq!(align_of::<D2D1_INK_BEZIER_SEGMENT>(), 4);
+    assert_eq!(size_of::<D2D1_INK_STYLE_PROPERTIES>(), 28);
+    assert_eq!(align_of::<D2D1_INK_STYLE_PROPERTIES>(), 4);
+    assert_eq!(size_of::<D2D1_GRADIENT_MESH_PATCH>(), 208);
+    assert_eq!(align_of::<D2D1_GRADIENT_MESH_PATCH>(), 4);
+    assert_eq!(size_of::<D2D1_SIMPLE_COLOR_PROFILE>(), 36);
+    assert_eq!(align_of::<D2D1_SIMPLE_COLOR_PROFILE>(), 4);
 }
 #[cfg(feature = "d3d10shader")] #[test]
 fn um_d3d10shader() {
@@ -2756,6 +2778,38 @@ fn um_davclnt() {
     assert_eq!(size_of::<DAV_CALLBACK_CRED>(), 56);
     assert_eq!(align_of::<DAV_CALLBACK_CRED>(), 8);
 }
+#[cfg(feature = "dcommon")] #[test]
+fn um_dcommon() {
+    use winapi::um::dcommon::*;
+    assert_eq!(size_of::<D2D1_PIXEL_FORMAT>(), 8);
+    assert_eq!(align_of::<D2D1_PIXEL_FORMAT>(), 4);
+    assert_eq!(size_of::<D2D_POINT_2U>(), 8);
+    assert_eq!(align_of::<D2D_POINT_2U>(), 4);
+    assert_eq!(size_of::<D2D_POINT_2F>(), 8);
+    assert_eq!(align_of::<D2D_POINT_2F>(), 4);
+    assert_eq!(size_of::<D2D_VECTOR_2F>(), 8);
+    assert_eq!(align_of::<D2D_VECTOR_2F>(), 4);
+    assert_eq!(size_of::<D2D_VECTOR_3F>(), 12);
+    assert_eq!(align_of::<D2D_VECTOR_3F>(), 4);
+    assert_eq!(size_of::<D2D_VECTOR_4F>(), 16);
+    assert_eq!(align_of::<D2D_VECTOR_4F>(), 4);
+    assert_eq!(size_of::<D2D_RECT_F>(), 16);
+    assert_eq!(align_of::<D2D_RECT_F>(), 4);
+    assert_eq!(size_of::<D2D_RECT_U>(), 16);
+    assert_eq!(align_of::<D2D_RECT_U>(), 4);
+    assert_eq!(size_of::<D2D_SIZE_F>(), 8);
+    assert_eq!(align_of::<D2D_SIZE_F>(), 4);
+    assert_eq!(size_of::<D2D_SIZE_U>(), 8);
+    assert_eq!(align_of::<D2D_SIZE_U>(), 4);
+    assert_eq!(size_of::<D2D_MATRIX_3X2_F>(), 24);
+    assert_eq!(align_of::<D2D_MATRIX_3X2_F>(), 4);
+    assert_eq!(size_of::<D2D_MATRIX_4X3_F>(), 48);
+    assert_eq!(align_of::<D2D_MATRIX_4X3_F>(), 4);
+    assert_eq!(size_of::<D2D_MATRIX_4X4_F>(), 64);
+    assert_eq!(align_of::<D2D_MATRIX_4X4_F>(), 4);
+    assert_eq!(size_of::<D2D_MATRIX_5X4_F>(), 80);
+    assert_eq!(align_of::<D2D_MATRIX_5X4_F>(), 4);
+}
 #[cfg(feature = "dbghelp")] #[test]
 fn um_dbghelp() {
     use winapi::um::dbghelp::*;
@@ -2791,12 +2845,6 @@ fn um_dbghelp() {
     assert_eq!(align_of::<IMAGEHLP_SYMBOL64>(), 8);
     assert_eq!(size_of::<IMAGEHLP_LINEW64>(), 40);
     assert_eq!(align_of::<IMAGEHLP_LINEW64>(), 8);
-}
-#[cfg(feature = "dcommon")] #[test]
-fn um_dcommon() {
-    use winapi::um::dcommon::*;
-    assert_eq!(size_of::<D2D1_PIXEL_FORMAT>(), 8);
-    assert_eq!(align_of::<D2D1_PIXEL_FORMAT>(), 4);
 }
 #[cfg(feature = "docobj")] #[test]
 fn um_docobj() {
@@ -2955,6 +3003,16 @@ fn um_dwrite_3() {
     assert_eq!(align_of::<DWRITE_LINE_METRICS1>(), 4);
     assert_eq!(size_of::<DWRITE_LINE_SPACING>(), 20);
     assert_eq!(align_of::<DWRITE_LINE_SPACING>(), 4);
+}
+#[cfg(feature = "dxgidebug")] #[test]
+fn um_dxgidebug() {
+    use winapi::um::dxgidebug::*;
+    assert_eq!(size_of::<DXGI_INFO_QUEUE_MESSAGE>(), 48);
+    assert_eq!(align_of::<DXGI_INFO_QUEUE_MESSAGE>(), 8);
+    assert_eq!(size_of::<DXGI_INFO_QUEUE_FILTER_DESC>(), 48);
+    assert_eq!(align_of::<DXGI_INFO_QUEUE_FILTER_DESC>(), 8);
+    assert_eq!(size_of::<DXGI_INFO_QUEUE_FILTER>(), 96);
+    assert_eq!(align_of::<DXGI_INFO_QUEUE_FILTER>(), 8);
 }
 #[cfg(feature = "evntcons")] #[test]
 fn um_evntcons() {
