@@ -108,7 +108,7 @@ STRUCT!{struct WNODE_EVENT_ITEM {
 }}
 pub type PWNODE_EVENT_ITEM = *mut WNODE_EVENT_ITEM;
 UNION!{union WNODE_EVENT_REFERENCE_u {
-    [u8; 4],
+    [u32; 1],
     TargetInstanceIndex TargetInstanceIndex_mut: ULONG,
     TargetInstanceName TargetInstanceName_mut: [WCHAR; ANYSIZE_ARRAY],
 }}

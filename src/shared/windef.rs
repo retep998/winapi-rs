@@ -31,7 +31,7 @@ pub type HCURSOR = HICON;
 pub type COLORREF = DWORD;
 pub type LPCOLORREF = *mut DWORD;
 pub const HFILE_ERROR: HFILE = -1;
-STRUCT!{struct RECT {
+STRUCT!{#[debug] struct RECT {
     left: LONG,
     top: LONG,
     right: LONG,
@@ -41,7 +41,7 @@ pub type PRECT = *mut RECT;
 pub type NPRECT = *mut RECT;
 pub type LPRECT = *mut RECT;
 pub type LPCRECT = *const RECT;
-STRUCT!{struct RECTL {
+STRUCT!{#[debug] struct RECTL {
     left: LONG,
     top: LONG,
     right: LONG,

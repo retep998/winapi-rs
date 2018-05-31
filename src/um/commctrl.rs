@@ -2068,7 +2068,7 @@ pub const LPSTR_TEXTCALLBACKW: LPWSTR = -1isize as LPWSTR;
 pub const LPSTR_TEXTCALLBACKA: LPSTR = -1isize as LPSTR;
 pub const I_IMAGECALLBACK: c_int = -1;
 pub const I_IMAGENONE: c_int = -2;
-pub const I_COLUMNSCALLBACK: UINT = -1i32 as UINT;
+pub const I_COLUMNSCALLBACK: UINT = -1i32 as u32;
 pub const LVM_GETITEMA: UINT = LVM_FIRST + 5;
 pub const LVM_GETITEMW: UINT = LVM_FIRST + 75;
 pub const LVM_SETITEMA: UINT = LVM_FIRST + 6;
@@ -3678,7 +3678,7 @@ STRUCT!{struct NMIPADDRESS {
 pub type LPNMIPADDRESS = *mut NMIPADDRESS;
 #[inline]
 pub fn MAKEIPRANGE(low: BYTE, high: BYTE) -> LPARAM {
-    (high << 8 + low) as LPARAM
+    (((high as WORD) << 8) + low as WORD) as LPARAM
 }
 #[inline]
 pub fn MAKEIPADDRESS(b1: DWORD, b2: DWORD, b3: DWORD, b4: DWORD) -> LPARAM {
@@ -3933,12 +3933,12 @@ ENUM!{enum TASKDIALOG_COMMON_BUTTON_FLAGS {
     TDCBF_CLOSE_BUTTON = 0x0020,
 }}
 UNION!{union TASKDIALOGCONFIG_u1 {
-    [u8; 8],
+    [usize; 1],
     hMainIcon hMainIcon_mut: HICON,
     pszMainIcon pszMainIcon_mut: PCWSTR,
 }}
 UNION!{union TASKDIALOGCONFIG_u2 {
-    [u8; 8],
+    [usize; 1],
     hFooterIcon hFooterIcon_mut: HICON,
     pszFooterIcon pszFooterIcon_mut: PCWSTR,
 }}

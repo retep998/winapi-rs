@@ -25,7 +25,7 @@ STRUCT!{struct MMTIME_midi {
     songptrpos: DWORD,
 }}
 UNION!{union MMTIME_u {
-    [u8; 8],
+    [u32; 2],
     ms ms_mut: DWORD,
     sample sample_mut: DWORD,
     cb cb_mut: DWORD,
