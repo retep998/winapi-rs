@@ -4039,7 +4039,7 @@ pub fn GDI__DIBSIZE(bi: &BITMAPINFOHEADER) -> DWORD {
 #[inline]
 pub fn GDI_DIBSIZE(bi: &BITMAPINFOHEADER) -> DWORD {
     if bi.biHeight < 0 {
-        GDI__DIBSIZE(bi) * -1i32 as DWORD
+        GDI__DIBSIZE(bi) * -1i32 as u32
     } else {
         GDI__DIBSIZE(bi)
     }
@@ -4082,7 +4082,7 @@ pub const ILLUMINANT_TUNGSTEN: WORD = ILLUMINANT_A;
 pub const ILLUMINANT_DAYLIGHT: WORD = ILLUMINANT_C;
 pub const ILLUMINANT_FLUORESCENT: WORD = ILLUMINANT_F2;
 pub const ILLUMINANT_NTSC: WORD = ILLUMINANT_C;
-pub const RGB_GAMMA_MIN: WORD = 02500;
+pub const RGB_GAMMA_MIN: WORD = 0o2500; // FIXME It is octal in the headers but are the headers actually right?
 pub const RGB_GAMMA_MAX: WORD = 65000;
 pub const REFERENCE_WHITE_MIN: WORD = 6000;
 pub const REFERENCE_WHITE_MAX: WORD = 10000;
