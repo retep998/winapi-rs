@@ -9,7 +9,7 @@ use shared::basetsd::UINT64;
 use shared::d3d9::{IDirect3DDevice9, IDirect3DSurface9};
 use shared::d3d9types::{D3DFORMAT, D3DPOOL};
 use shared::guiddef::{GUID, REFGUID, REFIID};
-use shared::minwindef::{BOOL, DWORD, HIWORD, LOWORD, UCHAR, UINT, USHORT};
+use shared::minwindef::{BOOL, DWORD, FLOAT, HIWORD, LOWORD, UCHAR, UINT, USHORT};
 use shared::windef::{RECT, SIZE};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HANDLE, HRESULT, LONG, LONGLONG, PVOID, SHORT};
@@ -674,35 +674,34 @@ extern "system" {
 }
 #[inline]
 pub fn DXVA2FloatToFixed(_float_: c_float) -> DXVA2_Fixed32 {
-    let mut _fixed_ = DXVA2_Fixed32([0]);
     unsafe {
+        let mut _fixed_: DXVA2_Fixed32 = ::core::mem::uninitialized();
         _fixed_.s_mut().Fraction = LOWORD((_float_ * 0x10000 as c_float) as DWORD);
         _fixed_.s_mut().Value = HIWORD((_float_ * 0x10000 as c_float) as DWORD) as SHORT;
+        _fixed_
     }
-    _fixed_
 }
 #[inline]
 pub fn DXVA2FixedToFloat(_fixed_: DXVA2_Fixed32) -> c_float {
     unsafe {
-        let ret = (_fixed_.s().Value as USHORT + _fixed_.s().Fraction / 0x10000) as c_float;
-        ret
+        _fixed_.s().Value as FLOAT + _fixed_.s().Fraction as FLOAT / 0x10000 as FLOAT
     }
 }
 #[inline]
 pub fn DXVA2_Fixed32TransparentAlpha() -> DXVA2_Fixed32 {
-    let mut ret = DXVA2_Fixed32([0]);
     unsafe {
-        ret.s_mut().Fraction = 0;
-        ret.s_mut().Value = 0;
+        let mut _fixed_: DXVA2_Fixed32 = ::core::mem::uninitialized();
+        _fixed_.s_mut().Fraction = 0;
+        _fixed_.s_mut().Value = 0;
+        _fixed_
     }
-    ret
 }
 #[inline]
 pub fn DXVA2_Fixed32OpaqueAlpha() -> DXVA2_Fixed32 {
-    let mut ret = DXVA2_Fixed32([0]);
     unsafe {
-        ret.s_mut().Fraction = 0;
-        ret.s_mut().Value = 1;
+        let mut _fixed_: DXVA2_Fixed32 = ::core::mem::uninitialized();
+        _fixed_.s_mut().Fraction = 0;
+        _fixed_.s_mut().Value = 1;
+        _fixed_
     }
-    ret
 }
