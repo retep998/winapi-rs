@@ -10,7 +10,7 @@ use shared::windef::HMONITOR;
 use um::winnt::{HANDLE, HRESULT, WCHAR};
 pub type _BOOL = BOOL;
 pub const PHYSICAL_MONITOR_DESCRIPTION_SIZE: usize = 128;
-STRUCT!{struct PHYSICAL_MONITOR {
+STRUCT!{#[repr(packed)] struct PHYSICAL_MONITOR {
     hPhysicalMonitor: HANDLE,
     szPhysicalMonitorDescription: [WCHAR; PHYSICAL_MONITOR_DESCRIPTION_SIZE],
 }}

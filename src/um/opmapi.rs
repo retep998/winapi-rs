@@ -189,16 +189,16 @@ ENUM!{enum OPM_IMAGE_ASPECT_RATIO_EN300294 {
     OPM_ASPECT_RATIO_EN300294_FULL_FORMAT_16_BY_9_ANAMORPHIC = 7,
     OPM_ASPECT_RATIO_FORCE_ULONG = 0x7fffffff,
 }}
-STRUCT!{struct OPM_RANDOM_NUMBER {
+STRUCT!{#[repr(packed)] struct OPM_RANDOM_NUMBER {
     abRandomNumber: [BYTE; 16],
 }}
-STRUCT!{struct OPM_OMAC {
+STRUCT!{#[repr(packed)] struct OPM_OMAC {
     abOMAC: [BYTE; 16],
 }}
-STRUCT!{struct OPM_ENCRYPTED_INITIALIZATION_PARAMETERS {
+STRUCT!{#[repr(packed)] struct OPM_ENCRYPTED_INITIALIZATION_PARAMETERS {
     abEncryptedInitializationParameters: [BYTE; 256],
 }}
-STRUCT!{struct OPM_GET_INFO_PARAMETERS {
+STRUCT!{#[repr(packed)] struct OPM_GET_INFO_PARAMETERS {
     omac: OPM_OMAC,
     rnRandomNumber: OPM_RANDOM_NUMBER,
     guidInformation: GUID,
@@ -206,17 +206,17 @@ STRUCT!{struct OPM_GET_INFO_PARAMETERS {
     cbParametersSize: ULONG,
     abParameters: [BYTE; 4056],
 }}
-STRUCT!{struct OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS {
+STRUCT!{#[repr(packed)] struct OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     guidInformation: GUID,
     ulSequenceNumber: ULONG,
     cbParametersSize: ULONG,
     abParameters: [BYTE; 4056],
 }}
-STRUCT!{struct OPM_HDCP_KEY_SELECTION_VECTOR {
+STRUCT!{#[repr(packed)] struct OPM_HDCP_KEY_SELECTION_VECTOR {
     abKeySelectionVector: [BYTE; 5],
 }}
-STRUCT!{struct OPM_CONNECTED_HDCP_DEVICE_INFORMATION {
+STRUCT!{#[repr(packed)] struct OPM_CONNECTED_HDCP_DEVICE_INFORMATION {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     ulStatusFlags: ULONG,
     ulHDCPFlags: ULONG,
@@ -225,19 +225,19 @@ STRUCT!{struct OPM_CONNECTED_HDCP_DEVICE_INFORMATION {
     Reserved2: [BYTE; 16],
     Reserved3: [BYTE; 16],
 }}
-STRUCT!{struct OPM_REQUESTED_INFORMATION {
+STRUCT!{#[repr(packed)] struct OPM_REQUESTED_INFORMATION {
     omac: OPM_OMAC,
     cbRequestedInformationSize: ULONG,
     abRequestedInformation: [BYTE; 4076],
 }}
-STRUCT!{struct OPM_STANDARD_INFORMATION {
+STRUCT!{#[repr(packed)] struct OPM_STANDARD_INFORMATION {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     ulStatusFlags: ULONG,
     ulInformation: ULONG,
     ulReserved: ULONG,
     ulReserved2: ULONG,
 }}
-STRUCT!{struct OPM_ACTUAL_OUTPUT_FORMAT {
+STRUCT!{#[repr(packed)] struct OPM_ACTUAL_OUTPUT_FORMAT {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     ulStatusFlags: ULONG,
     ulDisplayWidth: ULONG,
@@ -247,7 +247,7 @@ STRUCT!{struct OPM_ACTUAL_OUTPUT_FORMAT {
     ulFrequencyNumerator: ULONG,
     ulFrequencyDenominator: ULONG,
 }}
-STRUCT!{struct OPM_ACP_AND_CGMSA_SIGNALING {
+STRUCT!{#[repr(packed)] struct OPM_ACP_AND_CGMSA_SIGNALING {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     ulStatusFlags: ULONG,
     ulAvailableTVProtectionStandards: ULONG,
@@ -262,25 +262,25 @@ STRUCT!{struct OPM_ACP_AND_CGMSA_SIGNALING {
     ulReserved2: [ULONG; 4],
     ulReserved3: [ULONG; 4],
 }}
-STRUCT!{struct OPM_OUTPUT_ID_DATA {
+STRUCT!{#[repr(packed)] struct OPM_OUTPUT_ID_DATA {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     ulStatusFlags: ULONG,
     OutputId: UINT64,
 }}
-STRUCT!{struct OPM_CONFIGURE_PARAMETERS {
+STRUCT!{#[repr(packed)] struct OPM_CONFIGURE_PARAMETERS {
     omac: OPM_OMAC,
     guidSetting: GUID,
     ulSequenceNumber: ULONG,
     cbParametersSize: ULONG,
     abParameters: [BYTE; 4056],
 }}
-STRUCT!{struct OPM_SET_PROTECTION_LEVEL_PARAMETERS {
+STRUCT!{#[repr(packed)] struct OPM_SET_PROTECTION_LEVEL_PARAMETERS {
     ulProtectionType: ULONG,
     ulProtectionLevel: ULONG,
     Reserved: ULONG,
     Reserved2: ULONG,
 }}
-STRUCT!{struct OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS {
+STRUCT!{#[repr(packed)] struct OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS {
     ulNewTVProtectionStandard: ULONG,
     ulAspectRatioChangeMask1: ULONG,
     ulAspectRatioData1: ULONG,
@@ -292,14 +292,14 @@ STRUCT!{struct OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS {
     ulReserved2: [ULONG; 4],
     ulReserved3: ULONG,
 }}
-STRUCT!{struct OPM_SET_HDCP_SRM_PARAMETERS {
+STRUCT!{#[repr(packed)] struct OPM_SET_HDCP_SRM_PARAMETERS {
     ulSRMVersion: ULONG,
 }}
-STRUCT!{struct OPM_GET_CODEC_INFO_PARAMETERS {
+STRUCT!{#[repr(packed)] struct OPM_GET_CODEC_INFO_PARAMETERS {
     cbVerifier: DWORD,
     Verifier: [BYTE; 4052],
 }}
-STRUCT!{struct OPM_GET_CODEC_INFO_INFORMATION {
+STRUCT!{#[repr(packed)] struct OPM_GET_CODEC_INFO_INFORMATION {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     Merit: DWORD,
 }}

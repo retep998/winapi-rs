@@ -2999,6 +2999,120 @@ fn um_dxgidebug() {
     assert_eq!(size_of::<DXGI_INFO_QUEUE_FILTER>(), 48);
     assert_eq!(align_of::<DXGI_INFO_QUEUE_FILTER>(), 4);
 }
+#[cfg(feature = "dxva2api")] #[test]
+fn um_dxva2api() {
+    use winapi::um::dxva2api::*;
+    assert_eq!(size_of::<DXVA2_ExtendedFormat>(), 4);
+    assert_eq!(align_of::<DXVA2_ExtendedFormat>(), 4);
+    assert_eq!(size_of::<DXVA2_Frequency>(), 8);
+    assert_eq!(align_of::<DXVA2_Frequency>(), 4);
+    assert_eq!(size_of::<DXVA2_VideoDesc>(), 40);
+    assert_eq!(align_of::<DXVA2_VideoDesc>(), 4);
+    assert_eq!(size_of::<DXVA2_VideoProcessorCaps>(), 40);
+    assert_eq!(align_of::<DXVA2_VideoProcessorCaps>(), 4);
+    assert_eq!(size_of::<DXVA2_Fixed32>(), 4);
+    assert_eq!(align_of::<DXVA2_Fixed32>(), 4);
+    assert_eq!(size_of::<DXVA2_AYUVSample8>(), 4);
+    assert_eq!(align_of::<DXVA2_AYUVSample8>(), 1);
+    assert_eq!(size_of::<DXVA2_AYUVSample16>(), 8);
+    assert_eq!(align_of::<DXVA2_AYUVSample16>(), 2);
+    assert_eq!(size_of::<DXVA2_VideoSample>(), 128);
+    assert_eq!(align_of::<DXVA2_VideoSample>(), 8);
+    assert_eq!(size_of::<DXVA2_ValueRange>(), 16);
+    assert_eq!(align_of::<DXVA2_ValueRange>(), 4);
+    assert_eq!(size_of::<DXVA2_ProcAmpValues>(), 16);
+    assert_eq!(align_of::<DXVA2_ProcAmpValues>(), 4);
+    assert_eq!(size_of::<DXVA2_FilterValues>(), 12);
+    assert_eq!(align_of::<DXVA2_FilterValues>(), 4);
+    assert_eq!(size_of::<DXVA2_VideoProcessBltParams>(), 120);
+    assert_eq!(align_of::<DXVA2_VideoProcessBltParams>(), 8);
+    assert_eq!(size_of::<DXVA2_ConfigPictureDecode>(), 100);
+    assert_eq!(align_of::<DXVA2_ConfigPictureDecode>(), 4);
+    assert_eq!(size_of::<DXVA2_DecodeBufferDesc>(), 44);
+    assert_eq!(align_of::<DXVA2_DecodeBufferDesc>(), 4);
+    assert_eq!(size_of::<DXVA2_AES_CTR_IV>(), 16);
+    assert_eq!(align_of::<DXVA2_AES_CTR_IV>(), 8);
+    assert_eq!(size_of::<DXVA2_DecodeExtensionData>(), 20);
+    assert_eq!(align_of::<DXVA2_DecodeExtensionData>(), 4);
+    assert_eq!(size_of::<DXVA2_DecodeExecuteParams>(), 12);
+    assert_eq!(align_of::<DXVA2_DecodeExecuteParams>(), 4);
+}
+#[cfg(feature = "dxvahd")] #[test]
+fn um_dxvahd() {
+    use winapi::um::dxvahd::*;
+    assert_eq!(size_of::<DXVAHD_RATIONAL>(), 8);
+    assert_eq!(align_of::<DXVAHD_RATIONAL>(), 4);
+    assert_eq!(size_of::<DXVAHD_COLOR_RGBA>(), 16);
+    assert_eq!(align_of::<DXVAHD_COLOR_RGBA>(), 4);
+    assert_eq!(size_of::<DXVAHD_COLOR_YCbCrA>(), 16);
+    assert_eq!(align_of::<DXVAHD_COLOR_YCbCrA>(), 4);
+    assert_eq!(size_of::<DXVAHD_COLOR>(), 16);
+    assert_eq!(align_of::<DXVAHD_COLOR>(), 4);
+    assert_eq!(size_of::<DXVAHD_CONTENT_DESC>(), 36);
+    assert_eq!(align_of::<DXVAHD_CONTENT_DESC>(), 4);
+    assert_eq!(size_of::<DXVAHD_VPDEVCAPS>(), 44);
+    assert_eq!(align_of::<DXVAHD_VPDEVCAPS>(), 4);
+    assert_eq!(size_of::<DXVAHD_VPCAPS>(), 36);
+    assert_eq!(align_of::<DXVAHD_VPCAPS>(), 4);
+    assert_eq!(size_of::<DXVAHD_CUSTOM_RATE_DATA>(), 20);
+    assert_eq!(align_of::<DXVAHD_CUSTOM_RATE_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_FILTER_RANGE_DATA>(), 16);
+    assert_eq!(align_of::<DXVAHD_FILTER_RANGE_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_BLT_STATE_TARGET_RECT_DATA>(), 20);
+    assert_eq!(align_of::<DXVAHD_BLT_STATE_TARGET_RECT_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_BLT_STATE_BACKGROUND_COLOR_DATA>(), 20);
+    assert_eq!(align_of::<DXVAHD_BLT_STATE_BACKGROUND_COLOR_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA>(), 4);
+    assert_eq!(align_of::<DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_BLT_STATE_ALPHA_FILL_DATA>(), 8);
+    assert_eq!(align_of::<DXVAHD_BLT_STATE_ALPHA_FILL_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_BLT_STATE_CONSTRICTION_DATA>(), 12);
+    assert_eq!(align_of::<DXVAHD_BLT_STATE_CONSTRICTION_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_BLT_STATE_PRIVATE_DATA>(), 24);
+    assert_eq!(align_of::<DXVAHD_BLT_STATE_PRIVATE_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_STATE_D3DFORMAT_DATA>(), 4);
+    assert_eq!(align_of::<DXVAHD_STREAM_STATE_D3DFORMAT_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_STATE_FRAME_FORMAT_DATA>(), 4);
+    assert_eq!(align_of::<DXVAHD_STREAM_STATE_FRAME_FORMAT_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA>(), 4);
+    assert_eq!(align_of::<DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_STATE_OUTPUT_RATE_DATA>(), 16);
+    assert_eq!(align_of::<DXVAHD_STREAM_STATE_OUTPUT_RATE_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_STATE_SOURCE_RECT_DATA>(), 20);
+    assert_eq!(align_of::<DXVAHD_STREAM_STATE_SOURCE_RECT_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_STATE_DESTINATION_RECT_DATA>(), 20);
+    assert_eq!(align_of::<DXVAHD_STREAM_STATE_DESTINATION_RECT_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_STATE_ALPHA_DATA>(), 8);
+    assert_eq!(align_of::<DXVAHD_STREAM_STATE_ALPHA_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_STATE_PALETTE_DATA>(), 8);
+    assert_eq!(align_of::<DXVAHD_STREAM_STATE_PALETTE_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_STATE_LUMA_KEY_DATA>(), 12);
+    assert_eq!(align_of::<DXVAHD_STREAM_STATE_LUMA_KEY_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_STATE_ASPECT_RATIO_DATA>(), 20);
+    assert_eq!(align_of::<DXVAHD_STREAM_STATE_ASPECT_RATIO_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_STATE_FILTER_DATA>(), 8);
+    assert_eq!(align_of::<DXVAHD_STREAM_STATE_FILTER_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_STATE_PRIVATE_DATA>(), 24);
+    assert_eq!(align_of::<DXVAHD_STREAM_STATE_PRIVATE_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_DATA>(), 32);
+    assert_eq!(align_of::<DXVAHD_STREAM_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHD_STREAM_STATE_PRIVATE_IVTC_DATA>(), 16);
+    assert_eq!(align_of::<DXVAHD_STREAM_STATE_PRIVATE_IVTC_DATA>(), 4);
+    assert_eq!(size_of::<DXVAHDSW_CALLBACKS>(), 64);
+    assert_eq!(align_of::<DXVAHDSW_CALLBACKS>(), 4);
+    assert_eq!(size_of::<DXVAHDETW_CREATEVIDEOPROCESSOR>(), 32);
+    assert_eq!(align_of::<DXVAHDETW_CREATEVIDEOPROCESSOR>(), 8);
+    assert_eq!(size_of::<DXVAHDETW_VIDEOPROCESSBLTSTATE>(), 24);
+    assert_eq!(align_of::<DXVAHDETW_VIDEOPROCESSBLTSTATE>(), 8);
+    assert_eq!(size_of::<DXVAHDETW_VIDEOPROCESSSTREAMSTATE>(), 24);
+    assert_eq!(align_of::<DXVAHDETW_VIDEOPROCESSSTREAMSTATE>(), 8);
+    assert_eq!(size_of::<DXVAHDETW_VIDEOPROCESSBLTHD>(), 56);
+    assert_eq!(align_of::<DXVAHDETW_VIDEOPROCESSBLTHD>(), 8);
+    assert_eq!(size_of::<DXVAHDETW_VIDEOPROCESSBLTHD_STREAM>(), 80);
+    assert_eq!(align_of::<DXVAHDETW_VIDEOPROCESSBLTHD_STREAM>(), 8);
+    assert_eq!(size_of::<DXVAHDETW_DESTROYVIDEOPROCESSOR>(), 8);
+    assert_eq!(align_of::<DXVAHDETW_DESTROYVIDEOPROCESSOR>(), 8);
+}
 #[cfg(feature = "evntcons")] #[test]
 fn um_evntcons() {
     use winapi::um::evntcons::*;
@@ -3909,6 +4023,12 @@ fn um_lmwksta() {
     assert_eq!(size_of::<WKSTA_TRANSPORT_INFO_0>(), 20);
     assert_eq!(align_of::<WKSTA_TRANSPORT_INFO_0>(), 4);
 }
+#[cfg(feature = "lowlevelmonitorconfigurationapi")] #[test]
+fn um_lowlevelmonitorconfigurationapi() {
+    use winapi::um::lowlevelmonitorconfigurationapi::*;
+    assert_eq!(size_of::<MC_TIMING_REPORT>(), 9);
+    assert_eq!(align_of::<MC_TIMING_REPORT>(), 1);
+}
 #[cfg(feature = "lsalookup")] #[test]
 fn um_lsalookup() {
     use winapi::um::lsalookup::*;
@@ -4603,6 +4723,46 @@ fn um_ocidl() {
     assert_eq!(size_of::<PROPBAG2>(), 32);
     assert_eq!(align_of::<PROPBAG2>(), 4);
 }
+#[cfg(feature = "opmapi")] #[test]
+fn um_opmapi() {
+    use winapi::um::opmapi::*;
+    assert_eq!(size_of::<OPM_RANDOM_NUMBER>(), 16);
+    assert_eq!(align_of::<OPM_RANDOM_NUMBER>(), 1);
+    assert_eq!(size_of::<OPM_OMAC>(), 16);
+    assert_eq!(align_of::<OPM_OMAC>(), 1);
+    assert_eq!(size_of::<OPM_ENCRYPTED_INITIALIZATION_PARAMETERS>(), 256);
+    assert_eq!(align_of::<OPM_ENCRYPTED_INITIALIZATION_PARAMETERS>(), 1);
+    assert_eq!(size_of::<OPM_GET_INFO_PARAMETERS>(), 4112);
+    assert_eq!(align_of::<OPM_GET_INFO_PARAMETERS>(), 1);
+    assert_eq!(size_of::<OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS>(), 4096);
+    assert_eq!(align_of::<OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS>(), 1);
+    assert_eq!(size_of::<OPM_HDCP_KEY_SELECTION_VECTOR>(), 5);
+    assert_eq!(align_of::<OPM_HDCP_KEY_SELECTION_VECTOR>(), 1);
+    assert_eq!(size_of::<OPM_CONNECTED_HDCP_DEVICE_INFORMATION>(), 72);
+    assert_eq!(align_of::<OPM_CONNECTED_HDCP_DEVICE_INFORMATION>(), 1);
+    assert_eq!(size_of::<OPM_REQUESTED_INFORMATION>(), 4096);
+    assert_eq!(align_of::<OPM_REQUESTED_INFORMATION>(), 1);
+    assert_eq!(size_of::<OPM_STANDARD_INFORMATION>(), 32);
+    assert_eq!(align_of::<OPM_STANDARD_INFORMATION>(), 1);
+    assert_eq!(size_of::<OPM_ACTUAL_OUTPUT_FORMAT>(), 44);
+    assert_eq!(align_of::<OPM_ACTUAL_OUTPUT_FORMAT>(), 1);
+    assert_eq!(size_of::<OPM_ACP_AND_CGMSA_SIGNALING>(), 88);
+    assert_eq!(align_of::<OPM_ACP_AND_CGMSA_SIGNALING>(), 1);
+    assert_eq!(size_of::<OPM_OUTPUT_ID_DATA>(), 28);
+    assert_eq!(align_of::<OPM_OUTPUT_ID_DATA>(), 1);
+    assert_eq!(size_of::<OPM_CONFIGURE_PARAMETERS>(), 4096);
+    assert_eq!(align_of::<OPM_CONFIGURE_PARAMETERS>(), 1);
+    assert_eq!(size_of::<OPM_SET_PROTECTION_LEVEL_PARAMETERS>(), 16);
+    assert_eq!(align_of::<OPM_SET_PROTECTION_LEVEL_PARAMETERS>(), 1);
+    assert_eq!(size_of::<OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS>(), 64);
+    assert_eq!(align_of::<OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS>(), 1);
+    assert_eq!(size_of::<OPM_SET_HDCP_SRM_PARAMETERS>(), 4);
+    assert_eq!(align_of::<OPM_SET_HDCP_SRM_PARAMETERS>(), 1);
+    assert_eq!(size_of::<OPM_GET_CODEC_INFO_PARAMETERS>(), 4056);
+    assert_eq!(align_of::<OPM_GET_CODEC_INFO_PARAMETERS>(), 1);
+    assert_eq!(size_of::<OPM_GET_CODEC_INFO_INFORMATION>(), 20);
+    assert_eq!(align_of::<OPM_GET_CODEC_INFO_INFORMATION>(), 1);
+}
 #[cfg(feature = "pdh")] #[test]
 fn um_pdh() {
     use winapi::um::pdh::*;
@@ -4676,6 +4836,12 @@ fn um_perflib() {
     assert_eq!(align_of::<PERF_MULTI_COUNTERS>(), 4);
     assert_eq!(size_of::<PERF_COUNTER_DATA>(), 8);
     assert_eq!(align_of::<PERF_COUNTER_DATA>(), 4);
+}
+#[cfg(feature = "physicalmonitorenumerationapi")] #[test]
+fn um_physicalmonitorenumerationapi() {
+    use winapi::um::physicalmonitorenumerationapi::*;
+    assert_eq!(size_of::<PHYSICAL_MONITOR>(), 260);
+    assert_eq!(align_of::<PHYSICAL_MONITOR>(), 1);
 }
 #[cfg(feature = "powrprof")] #[test]
 fn um_powrprof() {
