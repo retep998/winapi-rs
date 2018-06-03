@@ -93,5 +93,5 @@ interface ITaskbarList2(ITaskbarList2Vtbl): ITaskbarList(ITaskbarListVtbl) {
     fn MarkFullscreenWindow(
         hwnd: HWND,
         fFullscreen: BOOL,
-    ) -> HRESULT,    
+    ) -> HRESULT,
 }}

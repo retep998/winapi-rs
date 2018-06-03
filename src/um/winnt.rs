@@ -1137,6 +1137,7 @@ STRUCT!{struct DISPATCHER_CONTEXT {
     ImageBase: DWORD64,
     FunctionEntry: PRUNTIME_FUNCTION,
     EstablisherFrame: DWORD64,
+    TargetIp: DWORD64,
     ContextRecord: PCONTEXT,
     LanguageHandler: PEXCEPTION_ROUTINE,
     HandlerData: PVOID,
@@ -1167,6 +1168,7 @@ STRUCT!{struct KNONVOLATILE_CONTEXT_POINTERS_u1_s {
     Xmm10: PM128A,
     Xmm11: PM128A,
     Xmm12: PM128A,
+    Xmm13: PM128A,
     Xmm14: PM128A,
     Xmm15: PM128A,
 }}
@@ -1267,6 +1269,7 @@ STRUCT!{struct CONTEXT {
     ExtendedRegisters: [BYTE; MAXIMUM_SUPPORTED_EXTENSION],
 }}
 pub type PCONTEXT = *mut CONTEXT;
+} // IFDEF(x86)
 STRUCT!{struct LDT_ENTRY_Bytes {
     BaseMid: BYTE,
     Flags1: BYTE,
@@ -1299,7 +1302,6 @@ STRUCT!{struct LDT_ENTRY {
     HighWord: LDT_ENTRY_HighWord,
 }}
 pub type PLDT_ENTRY = *mut LDT_ENTRY;
-} // IFDEF(x86)
 pub const WOW64_CONTEXT_i386: DWORD = 0x00010000;
 pub const WOW64_CONTEXT_i486: DWORD = 0x00010000;
 pub const WOW64_CONTEXT_CONTROL: DWORD = WOW64_CONTEXT_i386 | 0x00000001;
@@ -1338,8 +1340,6 @@ STRUCT!{struct WOW64_CONTEXT {
     Dr1: DWORD,
     Dr2: DWORD,
     Dr3: DWORD,
-    Dr4: DWORD,
-    Dr5: DWORD,
     Dr6: DWORD,
     Dr7: DWORD,
     FloatSave: WOW64_FLOATING_SAVE_AREA,
@@ -2159,10 +2159,10 @@ STRUCT!{struct SECURITY_DESCRIPTOR {
     Revision: BYTE,
     Sbz1: BYTE,
     Control: SECURITY_DESCRIPTOR_CONTROL,
-    Owner: DWORD,
-    Group: DWORD,
-    Sacl: DWORD,
-    Dacl: DWORD,
+    Owner: PSID,
+    Group: PSID,
+    Sacl: PACL,
+    Dacl: PACL,
 }}
 pub type PISECURITY_DESCRIPTOR = *mut SECURITY_DESCRIPTOR;
 STRUCT!{struct SECURITY_OBJECT_AI_PARAMS {
@@ -2849,9 +2849,8 @@ pub const QUOTA_LIMITS_HARDWS_MAX_DISABLE: DWORD = 0x00000008;
 pub const QUOTA_LIMITS_USE_DEFAULT_LIMITS: DWORD = 0x00000010;
 STRUCT!{struct RATE_QUOTA_LIMIT {
     RateData: DWORD,
-    BitFields: DWORD,
 }}
-BITFIELD!(RATE_QUOTA_LIMIT BitFields: DWORD [
+BITFIELD!(RATE_QUOTA_LIMIT RateData: DWORD [
     RatePercent set_RatePercent[0..7],
     Reserved0 set_Reserved0[7..32],
 ]);
@@ -3904,9 +3903,10 @@ STRUCT!{struct FILE_NOTIFY_INFORMATION {
     FileNameLength: DWORD,
     FileName: [WCHAR; 1],
 }}
-STRUCT!{struct FILE_SEGMENT_ELEMENT {
-    Buffer: PVOID64,
-    Alignment: ULONGLONG,
+UNION!{union FILE_SEGMENT_ELEMENT {
+    [u64; 1],
+    Buffer Buffer_mut: PVOID64,
+    Alignment Alignment_mut: ULONGLONG,
 }}
 pub type PFILE_SEGMENT_ELEMENT = *mut FILE_SEGMENT_ELEMENT;
 pub const FLUSH_FLAGS_FILE_DATA_ONLY: ULONG = 0x00000001;
@@ -6433,17 +6433,17 @@ STRUCT!{struct IMAGE_DYNAMIC_RELOCATION_TABLE {
     Size: DWORD,
 }}
 pub type PIMAGE_DYNAMIC_RELOCATION_TABLE = *mut IMAGE_DYNAMIC_RELOCATION_TABLE;
-STRUCT!{struct IMAGE_DYNAMIC_RELOCATION32 {
+STRUCT!{#[repr(packed)] struct IMAGE_DYNAMIC_RELOCATION32 {
     Symbol: DWORD,
     BaseRelocSize: DWORD,
 }}
 pub type PIMAGE_DYNAMIC_RELOCATION32 = *mut IMAGE_DYNAMIC_RELOCATION32;
-STRUCT!{struct IMAGE_DYNAMIC_RELOCATION64 {
+STRUCT!{#[repr(packed)] struct IMAGE_DYNAMIC_RELOCATION64 {
     Symbol: ULONGLONG,
     BaseRelocSize: DWORD,
 }}
 pub type PIMAGE_DYNAMIC_RELOCATION64 = *mut IMAGE_DYNAMIC_RELOCATION64;
-STRUCT!{struct IMAGE_DYNAMIC_RELOCATION32_V2 {
+STRUCT!{#[repr(packed)] struct IMAGE_DYNAMIC_RELOCATION32_V2 {
     HeaderSize: DWORD,
     FixupInfoSize: DWORD,
     Symbol: DWORD,
@@ -6451,7 +6451,7 @@ STRUCT!{struct IMAGE_DYNAMIC_RELOCATION32_V2 {
     Flags: DWORD,
 }}
 pub type PIMAGE_DYNAMIC_RELOCATION32_V2 = *mut IMAGE_DYNAMIC_RELOCATION32_V2;
-STRUCT!{struct IMAGE_DYNAMIC_RELOCATION64_V2 {
+STRUCT!{#[repr(packed)] struct IMAGE_DYNAMIC_RELOCATION64_V2 {
     HeaderSize: DWORD,
     FixupInfoSize: DWORD,
     Symbol: ULONGLONG,
@@ -6475,11 +6475,11 @@ pub type PIMAGE_DYNAMIC_RELOCATION_V2 = PIMAGE_DYNAMIC_RELOCATION32_V2;
 }
 pub const IMAGE_DYNAMIC_RELOCATION_GUARD_RF_PROLOGUE: DWORD = 0x00000001;
 pub const IMAGE_DYNAMIC_RELOCATION_GUARD_RF_EPILOGUE: DWORD = 0x00000002;
-STRUCT!{struct IMAGE_PROLOGUE_DYNAMIC_RELOCATION_HEADER {
+STRUCT!{#[repr(packed)] struct IMAGE_PROLOGUE_DYNAMIC_RELOCATION_HEADER {
     PrologueByteCount: BYTE,
 }}
 pub type PIMAGE_PROLOGUE_DYNAMIC_RELOCATION_HEADER = *mut IMAGE_PROLOGUE_DYNAMIC_RELOCATION_HEADER;
-STRUCT!{struct IMAGE_EPILOGUE_DYNAMIC_RELOCATION_HEADER {
+STRUCT!{#[repr(packed)] struct IMAGE_EPILOGUE_DYNAMIC_RELOCATION_HEADER {
     EpilogueCount: DWORD,
     EpilogueByteCount: BYTE,
     BranchDescriptorElementSize: BYTE,
@@ -6526,6 +6526,8 @@ STRUCT!{struct IMAGE_LOAD_CONFIG_DIRECTORY32 {
     Reserved2: WORD,
     GuardRFVerifyStackPointerFunctionPointer: DWORD,
     HotPatchTableOffset: DWORD,
+    Reserved3: DWORD,
+    EnclaveConfigurationPointer: DWORD,
 }}
 pub type PIMAGE_LOAD_CONFIG_DIRECTORY32 = *mut IMAGE_LOAD_CONFIG_DIRECTORY32;
 STRUCT!{struct IMAGE_LOAD_CONFIG_DIRECTORY64 {
@@ -6568,6 +6570,8 @@ STRUCT!{struct IMAGE_LOAD_CONFIG_DIRECTORY64 {
     Reserved2: WORD,
     GuardRFVerifyStackPointerFunctionPointer: ULONGLONG,
     HotPatchTableOffset: DWORD,
+    Reserved3: DWORD,
+    EnclaveConfigurationPointer: ULONGLONG,
 }}
 pub type PIMAGE_LOAD_CONFIG_DIRECTORY64 = *mut IMAGE_LOAD_CONFIG_DIRECTORY64;
 #[cfg(target_arch = "x86_64")]
@@ -6586,6 +6590,7 @@ STRUCT!{struct IMAGE_HOT_PATCH_INFO {
     SequenceNumber: DWORD,
     BaseImageList: DWORD,
     BaseImageCount: DWORD,
+    BufferOffset: DWORD,
 }}
 pub type PIMAGE_HOT_PATCH_INFO = *mut IMAGE_HOT_PATCH_INFO;
 STRUCT!{struct IMAGE_HOT_PATCH_BASE {
@@ -6596,6 +6601,7 @@ STRUCT!{struct IMAGE_HOT_PATCH_BASE {
     CodeIntegrityInfo: DWORD,
     CodeIntegritySize: DWORD,
     PatchTable: DWORD,
+    BufferOffset: DWORD,
 }}
 pub type PIMAGE_HOT_PATCH_BASE = *mut IMAGE_HOT_PATCH_BASE;
 STRUCT!{struct IMAGE_HOT_PATCH_HASHES {
@@ -7021,10 +7027,9 @@ STRUCT!{struct SLIST_ENTRY {
 pub type PSLIST_ENTRY = *mut SLIST_ENTRY;
 #[cfg(target_arch = "x86_64")]
 IFDEF!{
-UNION!{union SLIST_HEADER_u {
-    [u64; 1],
-    Alignment Alignment_mut: ULONGLONG,
-    Region Region_mut: ULONGLONG,
+STRUCT!{struct SLIST_HEADER_s {
+    Alignment: ULONGLONG,
+    Region: ULONGLONG,
 }}
 STRUCT!{struct SLIST_HEADER_HeaderX64 {
     BitFields1: ULONGLONG,
@@ -7038,9 +7043,10 @@ BITFIELD!(SLIST_HEADER_HeaderX64 BitFields2: ULONGLONG [
     Reserved set_Reserved[0..4],
     NextEntry set_NextEntry[4..64],
 ]);
-STRUCT!{struct SLIST_HEADER {
-    u: SLIST_HEADER_u,
-    HeaderX64: SLIST_HEADER_HeaderX64,
+UNION!{union SLIST_HEADER {
+    [u64; 2],
+    s s_mut: SLIST_HEADER_s,
+    HeaderX64 HeaderX64_mut: SLIST_HEADER_HeaderX64,
 }}
 pub type PSLIST_HEADER = *mut SLIST_HEADER;
 }
@@ -7051,9 +7057,10 @@ STRUCT!{struct SLIST_HEADER_s {
     Depth: WORD,
     Reserved: WORD,
 }}
-STRUCT!{struct SLIST_HEADER {
-    Alignment: ULONGLONG,
-    s: SLIST_HEADER_s,
+UNION!{union SLIST_HEADER {
+    [u64; 1],
+    Alignment Alignment_mut: ULONGLONG,
+    s s_mut: SLIST_HEADER_s,
 }}
 pub type PSLIST_HEADER = *mut SLIST_HEADER;
 }
@@ -7388,6 +7395,8 @@ extern "system" {
         Flags: DWORD,
     ) -> OS_DEPLOYEMENT_STATE_VALUES;
 }
+#[cfg(target_arch = "x86_64")]
+IFDEF!{
 STRUCT!{struct NV_MEMORY_RANGE {
     BaseAddress: *mut VOID,
     Length: SIZE_T,
@@ -7395,6 +7404,7 @@ STRUCT!{struct NV_MEMORY_RANGE {
 pub type PNV_MEMORY_RANGE = *mut NV_MEMORY_RANGE;
 pub const FLUSH_NV_MEMORY_IN_FLAG_NO_DRAIN: ULONG = 0x00000001;
 pub const FLUSH_NV_MEMORY_DEFAULT_TOKEN: ULONG_PTR = -1isize as usize;
+}
 STRUCT!{struct RTL_CRITICAL_SECTION_DEBUG {
     Type: WORD,
     CreatorBackTraceIndex: WORD,

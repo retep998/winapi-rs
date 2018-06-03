@@ -7,7 +7,7 @@
 use shared::minwindef::{BYTE, DWORD, LPDWORD};
 use um::physicalmonitorenumerationapi::_BOOL;
 use um::winnt::{HANDLE, LPSTR};
-STRUCT!{struct MC_TIMING_REPORT {
+STRUCT!{#[repr(packed)] struct MC_TIMING_REPORT {
     dwHorizontalFrequencyInHZ: DWORD,
     dwVerticalFrequencyInHZ: DWORD,
     bTimingStatusByte: BYTE,

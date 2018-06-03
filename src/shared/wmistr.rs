@@ -7,7 +7,7 @@
 use shared::basetsd::{ULONG64, ULONG_PTR};
 use shared::guiddef::GUID;
 use shared::minwindef::{UCHAR, ULONG};
-use um::winnt::{ANYSIZE_ARRAY, HANDLE, LARGE_INTEGER, STANDARD_RIGHTS_READ, SYNCHRONIZE, WCHAR};
+use um::winnt::{HANDLE, LARGE_INTEGER, STANDARD_RIGHTS_READ, SYNCHRONIZE, WCHAR};
 STRUCT!{struct WNODE_HEADER_u1_s {
     Version: ULONG,
     Linkage: ULONG,
@@ -65,11 +65,12 @@ UNION!{union WNODE_ALL_DATA_u {
     [u32; 2],
     FixedInstanceSize FixedInstanceSize_mut: ULONG,
     OffsetInstanceDataAndLength OffsetInstanceDataAndLength_mut:
-        [OFFSETINSTANCEDATAANDLENGTH; ANYSIZE_ARRAY],
+        [OFFSETINSTANCEDATAANDLENGTH; 0],
 }}
 STRUCT!{struct WNODE_ALL_DATA {
     WnodeHeader: WNODE_HEADER,
     DataBlockOffset: ULONG,
+    InstanceCount: ULONG,
     OffsetInstanceNameOffsets: ULONG,
     u: WNODE_ALL_DATA_u,
 }}
@@ -80,7 +81,7 @@ STRUCT!{struct WNODE_SINGLE_INSTANCE {
     InstanceIndex: ULONG,
     DataBlockOffset: ULONG,
     SizeDataBlock: ULONG,
-    VariableData: [UCHAR; ANYSIZE_ARRAY],
+    VariableData: [UCHAR; 0],
 }}
 pub type PWNODE_SINGLE_INSTANCE = *mut WNODE_SINGLE_INSTANCE;
 STRUCT!{struct WNODE_SINGLE_ITEM {
@@ -90,7 +91,7 @@ STRUCT!{struct WNODE_SINGLE_ITEM {
     ItemId: ULONG,
     DataBlockOffset: ULONG,
     SizeDataItem: ULONG,
-    VariableData: [UCHAR; ANYSIZE_ARRAY],
+    VariableData: [UCHAR; 0],
 }}
 pub type PWNODE_SINGLE_ITEM = *mut WNODE_SINGLE_ITEM;
 STRUCT!{struct WNODE_METHOD_ITEM {
@@ -100,7 +101,7 @@ STRUCT!{struct WNODE_METHOD_ITEM {
     MethodId: ULONG,
     DataBlockOffset: ULONG,
     SizeDataBlock: ULONG,
-    VariableData: [UCHAR; ANYSIZE_ARRAY],
+    VariableData: [UCHAR; 0],
 }}
 pub type PWNODE_METHOD_ITEM = *mut WNODE_METHOD_ITEM;
 STRUCT!{struct WNODE_EVENT_ITEM {
@@ -110,7 +111,7 @@ pub type PWNODE_EVENT_ITEM = *mut WNODE_EVENT_ITEM;
 UNION!{union WNODE_EVENT_REFERENCE_u {
     [u32; 1],
     TargetInstanceIndex TargetInstanceIndex_mut: ULONG,
-    TargetInstanceName TargetInstanceName_mut: [WCHAR; ANYSIZE_ARRAY],
+    TargetInstanceName TargetInstanceName_mut: [WCHAR; 0],
 }}
 STRUCT!{struct WNODE_EVENT_REFERENCE {
     WnodeHeader: WNODE_HEADER,
@@ -125,7 +126,7 @@ STRUCT!{struct WNODE_TOO_SMALL {
 }}
 pub type PWNODE_TOO_SMALL = *mut WNODE_TOO_SMALL;
 UNION!{union WMIREGGUIDW_u {
-    [u32; 1] [u64; 1],
+    [usize; 1],
     InstanceNameList InstanceNameList_mut: ULONG,
     BaseNameOffset BaseNameOffset_mut: ULONG,
     Pdo Pdo_mut: ULONG_PTR,
@@ -154,7 +155,7 @@ STRUCT!{struct WMIREGINFOW {
     RegistryPath: ULONG,
     MofResourceName: ULONG,
     GuidGount: ULONG,
-    WmiRegGuid: [WMIREGGUIDW; ANYSIZE_ARRAY],
+    WmiRegGuid: [WMIREGGUIDW; 0],
 }}
 pub type PWMIREGINFOW = *mut WMIREGINFOW;
 ENUM!{enum WMIDPREQUESTCODE {
@@ -163,7 +164,7 @@ ENUM!{enum WMIDPREQUESTCODE {
     WMI_SET_SINGLE_INSTANCE = 2,
     WMI_SET_SINGLE_ITEM = 3,
     WMI_ENABLE_EVENTS = 4,
-    WMI_DISABLE_EVENTS  = 5,
+    WMI_DISABLE_EVENTS = 5,
     WMI_ENABLE_COLLECTION = 6,
     WMI_DISABLE_COLLECTION = 7,
     WMI_REGINFO = 8,
