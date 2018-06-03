@@ -15,7 +15,7 @@ STRUCT!{struct AUDIO_VOLUME_NOTIFICATION_DATA {
     bMuted: BOOL,
     fMasterVolume: c_float,
     nChannels: UINT,
-    afChannelVolumes: [c_float; 0],
+    afChannelVolumes: [c_float; 1],
 }}
 pub type PAUDIO_VOLUME_NOTIFICATION_DATA = *mut AUDIO_VOLUME_NOTIFICATION_DATA;
 pub const ENDPOINT_HARDWARE_SUPPORT_VOLUME: DWORD = 0x00000001;

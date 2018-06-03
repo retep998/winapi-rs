@@ -3128,6 +3128,12 @@ fn um_dxvahd() {
     assert_eq!(size_of::<DXVAHDETW_DESTROYVIDEOPROCESSOR>(), 8);
     assert_eq!(align_of::<DXVAHDETW_DESTROYVIDEOPROCESSOR>(), 8);
 }
+#[cfg(feature = "endpointvolume")] #[test]
+fn um_endpointvolume() {
+    use winapi::um::endpointvolume::*;
+    assert_eq!(size_of::<AUDIO_VOLUME_NOTIFICATION_DATA>(), 32);
+    assert_eq!(align_of::<AUDIO_VOLUME_NOTIFICATION_DATA>(), 4);
+}
 #[cfg(feature = "evntcons")] #[test]
 fn um_evntcons() {
     use winapi::um::evntcons::*;
@@ -4908,7 +4914,6 @@ fn um_processthreadsapi() {
 }
 #[cfg(feature = "propidl")] #[test]
 fn um_propidl() {
-    use winapi::um::propidl::*;
     // FIXME
     // assert_eq!(size_of::<PROPVARIANT>(), 24);
     // assert_eq!(align_of::<PROPVARIANT>(), 8);
