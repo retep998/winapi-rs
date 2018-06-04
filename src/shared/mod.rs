@@ -23,6 +23,7 @@
 #[cfg(feature = "dxgi1_3")] pub mod dxgi1_3;
 #[cfg(feature = "dxgi1_4")] pub mod dxgi1_4;
 #[cfg(feature = "dxgi1_5")] pub mod dxgi1_5;
+#[cfg(feature = "dxgi1_6")] pub mod dxgi1_6;
 #[cfg(feature = "dxgiformat")] pub mod dxgiformat;
 #[cfg(feature = "dxgitype")] pub mod dxgitype;
 #[cfg(feature = "evntprov")] pub mod evntprov;

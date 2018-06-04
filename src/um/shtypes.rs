@@ -10,13 +10,13 @@ use shared::guiddef::GUID;
 use shared::minwindef::{BYTE, USHORT};
 use um::winnt::LPCWSTR;
 
-STRUCT!{struct SHITEMID {
+STRUCT!{#[repr(packed)] struct SHITEMID {
     cb: USHORT,
-    abID: [BYTE; 0],
+    abID: [BYTE; 1],
 }}
 pub type LPSHITEMID = *mut SHITEMID;
 pub type LPCSHITEMID = *const SHITEMID;
-STRUCT!{struct ITEMIDLIST {
+STRUCT!{#[repr(packed)] struct ITEMIDLIST {
     mkid: SHITEMID,
 }}
 pub type ITEMIDLIST_RELATIVE = ITEMIDLIST;
