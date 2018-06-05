@@ -5,13 +5,11 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::fs::{read_dir, File};
-use std::io::{self, Read, Write};
+use std::fs::read_dir;
+use std::io::{self, Write};
 use std::path::Path;
 
-fn get_between_quotes(s: &str) -> &str {
-    s.split('"').skip(1).next().unwrap_or("")
-}
+use utils::{get_between_quotes, read_file};
 
 fn get_libs() -> Vec<String> {
     let content = read_file("build.rs");
@@ -33,13 +31,6 @@ fn get_libs() -> Vec<String> {
         }
     }
     files_deps
-}
-
-fn read_file<P: AsRef<Path>>(p: P) -> String {
-    let mut f = File::open(p).expect("read_file::open failed");
-    let mut content = String::new();
-    f.read_to_string(&mut content).expect("read_file::read_to_end failed");
-    content
 }
 
 fn check_feature_sorting<P: AsRef<Path>>(

@@ -8,7 +8,7 @@
 
 use shared::basetsd::{ULONG64, ULONG_PTR};
 use shared::guiddef::GUID;
-use shared::minwindef::{PUCHAR, UCHAR, ULONG, USHORT};
+use shared::minwindef::{PUCHAR, PULONG, UCHAR, ULONG, USHORT};
 use shared::ntdef::NTSTATUS;
 use shared::sspi::SecHandle;
 use um::lsalookup::{
@@ -16,9 +16,10 @@ use um::lsalookup::{
 };
 use um::subauth::{PUNICODE_STRING, STRING, UNICODE_STRING};
 use um::winnt::{
-    ACCESS_MASK, ANYSIZE_ARRAY, BOOLEAN, LARGE_INTEGER, LONG, LUID, PSECURITY_DESCRIPTOR, PSID,
-    PVOID, PWSTR, QUOTA_LIMITS, SHORT, SID_NAME_USE, STANDARD_RIGHTS_EXECUTE, STANDARD_RIGHTS_READ,
-    STANDARD_RIGHTS_REQUIRED, STANDARD_RIGHTS_WRITE, ULONGLONG
+    ACCESS_MASK, ANYSIZE_ARRAY, BOOLEAN, HANDLE, LARGE_INTEGER, LONG, LUID, PACL, PCSTR, PCWSTR,
+    PSECURITY_DESCRIPTOR, PSID, PSTR, PVOID, PWSTR, QUOTA_LIMITS, SECURITY_INFORMATION, SHORT, SID,
+    SID_NAME_USE, STANDARD_RIGHTS_EXECUTE, STANDARD_RIGHTS_READ, STANDARD_RIGHTS_REQUIRED,
+    STANDARD_RIGHTS_WRITE, ULONGLONG
 };
 
 DEFINE_GUID!(Audit_System_SecurityStateChange,
@@ -104,7 +105,7 @@ DEFINE_GUID!(Audit_AccountManagement_SecurityGroup,
 DEFINE_GUID!(Audit_AccountManagement_DistributionGroup,
     0x0cce9238, 0x69ae, 0x11d9, 0xbe, 0xd3, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30);
 DEFINE_GUID!(Audit_AccountManagement_ApplicationGroup,
-    0x0cce9239, 0x69ae, 0x11d9,  0xbe, 0xd3, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30);
+    0x0cce9239, 0x69ae, 0x11d9, 0xbe, 0xd3, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30);
 DEFINE_GUID!(Audit_AccountManagement_Others,
     0x0cce923a, 0x69ae, 0x11d9, 0xbe, 0xd3, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30);
 DEFINE_GUID!(Audit_DSAccess_DSAccess,
@@ -128,7 +129,7 @@ DEFINE_GUID!(Audit_Logon_NPS,
 DEFINE_GUID!(Audit_ObjectAccess_DetailedFileShare,
     0x0cce9244, 0x69ae, 0x11d9, 0xbe, 0xd3, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30);
 DEFINE_GUID!(Audit_ObjectAccess_RemovableStorage,
-    0x0cce9245, 0x69ae, 0x11d9,  0xbe, 0xd3, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30);
+    0x0cce9245, 0x69ae, 0x11d9, 0xbe, 0xd3, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30);
 DEFINE_GUID!(Audit_ObjectAccess_CbacStaging,
     0x0cce9246, 0x69ae, 0x11d9, 0xbe, 0xd3, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30);
 DEFINE_GUID!(Audit_Logon_Claims,
@@ -1604,27 +1605,99 @@ pub const AUDIT_GENERIC_WRITE: ULONG = STANDARD_RIGHTS_WRITE | AUDIT_SET_USER_PO
     | AUDIT_SET_MISC_POLICY | AUDIT_SET_SYSTEM_POLICY;
 pub const AUDIT_GENERIC_EXECUTE: ULONG = STANDARD_RIGHTS_EXECUTE;
 extern "system" {
-    // pub fn AuditSetSystemPolicy();
-    // pub fn AuditSetPerUserPolicy();
-    // pub fn AuditQuerySystemPolicy();
-    // pub fn AuditQueryPerUserPolicy();
-    // pub fn AuditEnumeratePerUserPolicy();
-    // pub fn AuditComputeEffectivePolicyBySid();
-    // pub fn AuditComputeEffectivePolicyByToken();
-    // pub fn AuditEnumerateCategories();
-    // pub fn AuditEnumerateSubCategories();
-    // pub fn AuditLookupCategoryNameW();
-    // pub fn AuditLookupCategoryNameA();
-    // pub fn AuditLookupSubCategoryNameW();
-    // pub fn AuditLookupSubCategoryNameA();
-    // pub fn AuditLookupCategoryIdFromCategoryGuid();
-    // pub fn AuditLookupCategoryGuidFromCategoryId();
-    // pub fn AuditSetSecurity();
-    // pub fn AuditQuerySecurity();
-    // pub fn AuditSetGlobalSaclW();
-    // pub fn AuditSetGlobalSaclA();
-    // pub fn AuditQueryGlobalSaclW();
-    // pub fn AuditQueryGlobalSaclA();
+    pub fn AuditSetSystemPolicy(
+        pAuditPolicy: PCAUDIT_POLICY_INFORMATION,
+        PolicyCount: ULONG,
+    ) -> BOOLEAN;
+    pub fn AuditSetPerUserPolicy(
+        pSid: *const SID,
+        pAuditPolicy: PCAUDIT_POLICY_INFORMATION,
+        PolicyCount: ULONG,
+    ) -> BOOLEAN;
+    pub fn AuditQuerySystemPolicy(
+        pSubCategoryGuids: *const GUID,
+        PolicyCount: ULONG,
+        ppAuditPolicy: *mut PAUDIT_POLICY_INFORMATION,
+    ) -> BOOLEAN;
+    pub fn AuditQueryPerUserPolicy(
+        pSid: *const SID,
+        pSubCategoryGuids: *const GUID,
+        PolicyCount: ULONG,
+        ppAuditPolicy: *mut PAUDIT_POLICY_INFORMATION,
+    ) -> BOOLEAN;
+    pub fn AuditEnumeratePerUserPolicy(
+        ppAuditSidArray: *mut PPOLICY_AUDIT_SID_ARRAY
+    ) -> BOOLEAN;
+    pub fn AuditComputeEffectivePolicyBySid(
+        pSid: *const SID,
+        pSubCategoryGuids: *const GUID,
+        dwPolicyCount: ULONG,
+        ppAuditPolicy: *mut PAUDIT_POLICY_INFORMATION,
+    ) -> BOOLEAN;
+    pub fn AuditComputeEffectivePolicyByToken(
+        hTokenHandle: HANDLE,
+        pSubCategoryGuids: *const GUID,
+        dwPolicyCount: ULONG,
+        ppAuditPolicy: *mut PAUDIT_POLICY_INFORMATION,
+    ) -> BOOLEAN;
+    pub fn AuditEnumerateCategories(
+        ppAuditCategoriesArray: *mut *mut GUID,
+        pdwCountReturned: PULONG,
+    ) -> BOOLEAN;
+    pub fn AuditEnumerateSubCategories(
+        pAuditCategoryGuid: *const GUID,
+        bRetrieveAllSubCategories: BOOLEAN,
+        ppAuditSubCategoriesArray: *mut *mut GUID,
+        pdwCountReturned: PULONG,
+    ) -> BOOLEAN;
+    pub fn AuditLookupCategoryNameW(
+        pAuditCategoryGuid: *const GUID,
+        ppszCategoryName: *mut PWSTR,
+    ) -> BOOLEAN;
+    pub fn AuditLookupCategoryNameA(
+        pAuditCategoryGuid: *const GUID,
+        ppszCategoryName: *mut PSTR,
+    ) -> BOOLEAN;
+    pub fn AuditLookupSubCategoryNameW(
+        pAuditSubCategoryGuid: *const GUID,
+        ppszSubCategoryName: *mut PWSTR,
+    ) -> BOOLEAN;
+    pub fn AuditLookupSubCategoryNameA(
+        pAuditSubCategoryGuid: *const GUID,
+        ppszSubCategoryName: *mut PSTR,
+    ) -> BOOLEAN;
+    pub fn AuditLookupCategoryIdFromCategoryGuid(
+        pAuditCategoryGuid: *const GUID,
+        pAuditCategoryId: PPOLICY_AUDIT_EVENT_TYPE,
+    ) -> BOOLEAN;
+    pub fn AuditLookupCategoryGuidFromCategoryId(
+        AuditCategoryId: POLICY_AUDIT_EVENT_TYPE,
+        pAuditCategoryGuid: *mut GUID,
+    ) -> BOOLEAN;
+    pub fn AuditSetSecurity(
+        SecurityInformation: SECURITY_INFORMATION,
+        pSecurityDescriptor: PSECURITY_DESCRIPTOR,
+    ) -> BOOLEAN;
+    pub fn AuditQuerySecurity(
+        SecurityInformation: SECURITY_INFORMATION,
+        ppSecurityDescriptor: *mut PSECURITY_DESCRIPTOR,
+    ) -> BOOLEAN;
+    pub fn AuditSetGlobalSaclW(
+        ObjectTypeName: PCWSTR,
+        Acl: PACL,
+    ) -> BOOLEAN;
+    pub fn AuditSetGlobalSaclA(
+        ObjectTypeName: PCSTR,
+        Acl: PACL,
+    ) -> BOOLEAN;
+    pub fn AuditQueryGlobalSaclW(
+        ObjectTypeName: PCWSTR,
+        Acl: *mut PACL,
+    ) -> BOOLEAN;
+    pub fn AuditQueryGlobalSaclA(
+        ObjectTypeName: PCSTR,
+        Acl: *mut PACL
+    ) -> BOOLEAN;
     pub fn AuditFree(
         Buffer: PVOID,
     );

@@ -13,7 +13,8 @@ use shared::minwindef::{PUCHAR, ULONG, USHORT};
 use um::subauth::PUNICODE_STRING;
 use um::wincred::{PCREDUI_INFOA, PCREDUI_INFOW};
 use um::winnt::{
-    BOOLEAN, CHAR, HANDLE, LARGE_INTEGER, LONG, LPSTR, LPWSTR, LUID, PCSTR, PCWSTR, PVOID, WCHAR
+    ANYSIZE_ARRAY, BOOLEAN, CHAR, HANDLE, LARGE_INTEGER, LONG, LPSTR, LPWSTR, LUID, PCSTR, PCWSTR,
+    PVOID, WCHAR
 };
 
 pub type SEC_WCHAR = WCHAR;
@@ -153,7 +154,7 @@ STRUCT!{struct SEC_APPLICATION_PROTOCOL_LIST {
 pub type PSEC_APPLICATION_PROTOCOL_LIST = *mut SEC_APPLICATION_PROTOCOL_LIST;
 STRUCT!{struct SEC_APPLICATION_PROTOCOLS {
     ProtocolListsSize: c_ulong,
-    ProtocolLists: [SEC_APPLICATION_PROTOCOL_LIST; 0],
+    ProtocolLists: [SEC_APPLICATION_PROTOCOL_LIST; ANYSIZE_ARRAY],
 }}
 pub type PSEC_APPLICATION_PROTOCOLS = *mut SEC_APPLICATION_PROTOCOLS;
 pub const SECURITY_NATIVE_DREP: c_ulong = 0x00000010;
@@ -505,13 +506,13 @@ pub const SECPKG_NEGOTIATION_IN_PROGRESS: c_ulong = 2;
 pub const SECPKG_NEGOTIATION_DIRECT: c_ulong = 3;
 pub const SECPKG_NEGOTIATION_TRY_MULTICRED: c_ulong = 4;
 STRUCT!{struct SecPkgContext_NativeNamesW {
-    sClientName: SEC_WCHAR,
-    sServerName: SEC_WCHAR,
+    sClientName: *mut SEC_WCHAR,
+    sServerName: *mut SEC_WCHAR,
 }}
 pub type PSecPkgContext_NativeNamesW = *mut SecPkgContext_NativeNamesW;
 STRUCT!{struct SecPkgContext_NativeNamesA {
-    sClientName: SEC_CHAR,
-    sServerName: SEC_CHAR,
+    sClientName: *mut SEC_CHAR,
+    sServerName: *mut SEC_CHAR,
 }}
 pub type PSecPkgContext_NativeNamesA = *mut SecPkgContext_NativeNamesA;
 STRUCT!{struct SecPkgContext_CredentialNameW {

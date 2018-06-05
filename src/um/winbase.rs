@@ -32,8 +32,8 @@ use um::winnt::{
     LARGE_INTEGER, LATENCY_TIME, LONG, LPCCH, LPCH, LPCSTR, LPCWSTR, LPOSVERSIONINFOEXA,
     LPOSVERSIONINFOEXW, LPSTR, LPWSTR, MAXLONG, PBOOLEAN, PCONTEXT, PCWSTR, PFIRMWARE_TYPE,
     PHANDLE, PIO_COUNTERS, PJOB_SET_ARRAY, PLUID, POWER_REQUEST_TYPE, PPERFORMANCE_DATA,
-    PPROCESSOR_NUMBER, PRTL_UMS_SCHEDULER_ENTRY_POINT, PSECURE_MEMORY_CACHE_CALLBACK, PSID,
-    PSID_NAME_USE, PULONGLONG, PVOID, PWOW64_CONTEXT, PWOW64_LDT_ENTRY, PWSTR,
+    PPROCESSOR_NUMBER, PQUOTA_LIMITS, PRTL_UMS_SCHEDULER_ENTRY_POINT, PSECURE_MEMORY_CACHE_CALLBACK,
+    PSID, PSID_NAME_USE, PULONGLONG, PVOID, PWOW64_CONTEXT, PWOW64_LDT_ENTRY, PWSTR,
     RTL_UMS_THREAD_INFO_CLASS, STATUS_ABANDONED_WAIT_0, STATUS_USER_APC, STATUS_WAIT_0,
     THREAD_BASE_PRIORITY_IDLE, THREAD_BASE_PRIORITY_LOWRT, THREAD_BASE_PRIORITY_MAX,
     THREAD_BASE_PRIORITY_MIN, ULARGE_INTEGER, VOID, WAITORTIMERCALLBACK, WCHAR, WOW64_CONTEXT,
@@ -1960,20 +1960,48 @@ extern "system" {
     // pub fn BackupEventLogA();
     // pub fn BackupEventLogW();
     // pub fn CloseEventLog();
-    // pub fn DeregisterEventSource();
+    pub fn DeregisterEventSource(
+        hEventLog: HANDLE,
+    ) -> BOOL;
     // pub fn NotifyChangeEventLog();
     // pub fn GetNumberOfEventLogRecords();
     // pub fn GetOldestEventLogRecord();
     // pub fn OpenEventLogA();
     // pub fn OpenEventLogW();
-    // pub fn RegisterEventSourceA();
-    // pub fn RegisterEventSourceW();
+    pub fn RegisterEventSourceA(
+        lpUNCServerName: LPCSTR,
+        lpSourceName: LPCSTR,
+    ) -> HANDLE;
+    pub fn RegisterEventSourceW(
+        lpUNCServerName: LPCWSTR,
+        lpSourceName: LPCWSTR,
+    ) -> HANDLE;
     // pub fn OpenBackupEventLogA();
     // pub fn OpenBackupEventLogW();
     // pub fn ReadEventLogA();
     // pub fn ReadEventLogW();
-    // pub fn ReportEventA();
-    // pub fn ReportEventW();
+    pub fn ReportEventA(
+        hEventLog: HANDLE,
+        wType: WORD,
+        wCategory: WORD,
+        dwEventID: DWORD,
+        lpUserSid: PSID,
+        wNumStrings: WORD,
+        dwDataSize: DWORD,
+        lpStrings: *mut LPCSTR,
+        lpRawData: LPVOID,
+    ) -> BOOL;
+    pub fn ReportEventW(
+        hEventLog: HANDLE,
+        wType: WORD,
+        wCategory: WORD,
+        dwEventID: DWORD,
+        lpUserSid: PSID,
+        wNumStrings: WORD,
+        dwDataSize: DWORD,
+        lpStrings: *mut LPCWSTR,
+        lpRawData: LPVOID,
+    ) -> BOOL;
     // pub fn GetEventLogInformation();
     // pub fn OperationStart();
     // pub fn OperationEnd();
@@ -2043,6 +2071,7 @@ extern "system" {
         Sid: PSID,
         cbSid: LPDWORD,
         ReferencedDomainName: LPCSTR,
+        cchReferencedDomainName: LPDWORD,
         peUse: PSID_NAME_USE,
     ) -> BOOL;
     pub fn LookupAccountNameW(
@@ -2051,6 +2080,7 @@ extern "system" {
         Sid: PSID,
         cbSid: LPDWORD,
         ReferencedDomainName: LPCWSTR,
+        cchReferencedDomainName: LPDWORD,
         peUse: PSID_NAME_USE,
     ) -> BOOL;
     // pub fn LookupAccountNameLocalA();
@@ -2155,10 +2185,60 @@ extern "system" {
         lpBuffer: LPWSTR,
         pcbBuffer: LPDWORD
     ) -> BOOL;
-    // pub fn LogonUserA();
-    // pub fn LogonUserW();
-    // pub fn LogonUserExA();
-    // pub fn LogonUserExW();
+}
+pub const LOGON32_LOGON_INTERACTIVE: DWORD = 2;
+pub const LOGON32_LOGON_NETWORK: DWORD = 3;
+pub const LOGON32_LOGON_BATCH: DWORD = 4;
+pub const LOGON32_LOGON_SERVICE: DWORD = 5;
+pub const LOGON32_LOGON_UNLOCK: DWORD = 7;
+pub const LOGON32_LOGON_NETWORK_CLEARTEXT: DWORD = 8;
+pub const LOGON32_LOGON_NEW_CREDENTIALS: DWORD = 9;
+pub const LOGON32_PROVIDER_DEFAULT: DWORD = 0;
+pub const LOGON32_PROVIDER_WINNT35: DWORD = 1;
+pub const LOGON32_PROVIDER_WINNT40: DWORD = 2;
+pub const LOGON32_PROVIDER_WINNT50: DWORD = 3;
+pub const LOGON32_PROVIDER_VIRTUAL: DWORD = 4;
+extern "system" {
+    pub fn LogonUserA(
+        lpUsername: LPCSTR,
+        lpDomain: LPCSTR,
+        lpPassword: LPCSTR,
+        dwLogonType: DWORD,
+        dwLogonProvider: DWORD,
+        phToken: PHANDLE
+    ) -> BOOL;
+    pub fn LogonUserW(
+        lpUsername: LPCWSTR,
+        lpDomain: LPCWSTR,
+        lpPassword: LPCWSTR,
+        dwLogonType: DWORD,
+        dwLogonProvider: DWORD,
+        phToken: PHANDLE
+    ) -> BOOL;
+    pub fn LogonUserExA(
+        lpUsername: LPCSTR,
+        lpDomain: LPCSTR,
+        lpPassword: LPCSTR,
+        dwLogonType: DWORD,
+        dwLogonProvider: DWORD,
+        phToken: PHANDLE,
+        ppLogonSid: *mut PSID,
+        ppProfileBuffer: *mut PVOID,
+        pdwProfileLength: LPDWORD,
+        pQuotaLimits: PQUOTA_LIMITS,
+    ) -> BOOL;
+    pub fn LogonUserExW(
+        lpUsername: LPCWSTR,
+        lpDomain: LPCWSTR,
+        lpPassword: LPCWSTR,
+        dwLogonType: DWORD,
+        dwLogonProvider: DWORD,
+        phToken: PHANDLE,
+        ppLogonSid: *mut PSID,
+        ppProfileBuffer: *mut PVOID,
+        pdwProfileLength: LPDWORD,
+        pQuotaLimits: PQUOTA_LIMITS,
+    ) -> BOOL;
     // pub fn CreateProcessWithLogonW();
     // pub fn CreateProcessWithTokenW();
     // pub fn IsTokenUntrusted();
