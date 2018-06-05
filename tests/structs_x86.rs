@@ -85,6 +85,66 @@ fn shared_bcrypt() {
     assert_eq!(size_of::<CRYPT_PROVIDER_REFS>(), 8);
     assert_eq!(align_of::<CRYPT_PROVIDER_REFS>(), 4);
 }
+#[cfg(feature = "bthdef")] #[test]
+fn shared_bthdef() {
+    use winapi::shared::bthdef::*;
+    assert_eq!(size_of::<BTH_DEVICE_INFO>(), 272);
+    assert_eq!(align_of::<BTH_DEVICE_INFO>(), 8);
+    assert_eq!(size_of::<BTH_RADIO_IN_RANGE>(), 280);
+    assert_eq!(align_of::<BTH_RADIO_IN_RANGE>(), 8);
+    assert_eq!(size_of::<BTH_L2CAP_EVENT_INFO>(), 16);
+    assert_eq!(align_of::<BTH_L2CAP_EVENT_INFO>(), 8);
+    assert_eq!(size_of::<BTH_HCI_EVENT_INFO>(), 16);
+    assert_eq!(align_of::<BTH_HCI_EVENT_INFO>(), 8);
+}
+#[cfg(feature = "bthioctl")] #[test]
+fn shared_bthioctl() {
+    use winapi::shared::bthioctl::*;
+    assert_eq!(size_of::<BTH_DEVICE_INFO_LIST>(), 276);
+    assert_eq!(align_of::<BTH_DEVICE_INFO_LIST>(), 1);
+    assert_eq!(size_of::<BTH_RADIO_INFO>(), 13);
+    assert_eq!(align_of::<BTH_RADIO_INFO>(), 1);
+    assert_eq!(size_of::<BTH_LOCAL_RADIO_INFO>(), 292);
+    assert_eq!(align_of::<BTH_LOCAL_RADIO_INFO>(), 1);
+    assert_eq!(size_of::<BTH_SDP_CONNECT>(), 21);
+    assert_eq!(align_of::<BTH_SDP_CONNECT>(), 1);
+    assert_eq!(size_of::<BTH_SDP_DISCONNECT>(), 8);
+    assert_eq!(align_of::<BTH_SDP_DISCONNECT>(), 1);
+    assert_eq!(size_of::<BTH_SDP_RECORD>(), 17);
+    assert_eq!(align_of::<BTH_SDP_RECORD>(), 1);
+    assert_eq!(size_of::<BTH_SDP_SERVICE_SEARCH_REQUEST>(), 248);
+    assert_eq!(align_of::<BTH_SDP_SERVICE_SEARCH_REQUEST>(), 1);
+    assert_eq!(size_of::<BTH_SDP_ATTRIBUTE_SEARCH_REQUEST>(), 20);
+    assert_eq!(align_of::<BTH_SDP_ATTRIBUTE_SEARCH_REQUEST>(), 1);
+    assert_eq!(size_of::<BTH_SDP_SERVICE_ATTRIBUTE_SEARCH_REQUEST>(), 256);
+    assert_eq!(align_of::<BTH_SDP_SERVICE_ATTRIBUTE_SEARCH_REQUEST>(), 1);
+    assert_eq!(size_of::<BTH_SDP_STREAM_RESPONSE>(), 9);
+    assert_eq!(align_of::<BTH_SDP_STREAM_RESPONSE>(), 1);
+    assert_eq!(size_of::<BTH_COMMAND_HEADER>(), 3);
+    assert_eq!(align_of::<BTH_COMMAND_HEADER>(), 1);
+    assert_eq!(size_of::<BTH_VENDOR_SPECIFIC_COMMAND>(), 10);
+    assert_eq!(align_of::<BTH_VENDOR_SPECIFIC_COMMAND>(), 1);
+    assert_eq!(size_of::<BTH_VENDOR_PATTERN>(), 3);
+    assert_eq!(align_of::<BTH_VENDOR_PATTERN>(), 1);
+    assert_eq!(size_of::<BTH_VENDOR_EVENT_INFO>(), 13);
+    assert_eq!(align_of::<BTH_VENDOR_EVENT_INFO>(), 1);
+    assert_eq!(size_of::<BTH_HOST_FEATURE_MASK>(), 24);
+    assert_eq!(align_of::<BTH_HOST_FEATURE_MASK>(), 1);
+}
+#[cfg(feature = "bthsdpdef")] #[test]
+fn shared_bthsdpdef() {
+    use winapi::shared::bthsdpdef::*;
+    assert_eq!(size_of::<SDP_LARGE_INTEGER_16>(), 16);
+    assert_eq!(align_of::<SDP_LARGE_INTEGER_16>(), 8);
+    assert_eq!(size_of::<SDP_ULARGE_INTEGER_16>(), 16);
+    assert_eq!(align_of::<SDP_ULARGE_INTEGER_16>(), 8);
+    assert_eq!(size_of::<SdpAttributeRange>(), 4);
+    assert_eq!(align_of::<SdpAttributeRange>(), 2);
+    assert_eq!(size_of::<SdpQueryUuidUnion>(), 16);
+    assert_eq!(align_of::<SdpQueryUuidUnion>(), 4);
+    assert_eq!(size_of::<SdpQueryUuid>(), 20);
+    assert_eq!(align_of::<SdpQueryUuid>(), 4);
+}
 #[cfg(feature = "d3d9caps")] #[test]
 fn shared_d3d9caps() {
     use winapi::shared::d3d9caps::*;
@@ -1580,6 +1640,78 @@ fn um_bits5_0() {
     assert_eq!(align_of::<BITS_JOB_PROPERTY_VALUE>(), 8);
     assert_eq!(size_of::<BITS_FILE_PROPERTY_VALUE>(), 4);
     assert_eq!(align_of::<BITS_FILE_PROPERTY_VALUE>(), 4);
+}
+#[cfg(feature = "bluetoothapis")] #[test]
+fn um_bluetoothapis() {
+    use winapi::um::bluetoothapis::*;
+    assert_eq!(size_of::<BLUETOOTH_LOCAL_SERVICE_INFO>(), 1040);
+    assert_eq!(align_of::<BLUETOOTH_LOCAL_SERVICE_INFO>(), 8);
+    assert_eq!(size_of::<BLUETOOTH_FIND_RADIO_PARAMS>(), 4);
+    assert_eq!(align_of::<BLUETOOTH_FIND_RADIO_PARAMS>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_RADIO_INFO>(), 520);
+    assert_eq!(align_of::<BLUETOOTH_RADIO_INFO>(), 8);
+    assert_eq!(size_of::<BLUETOOTH_DEVICE_INFO>(), 560);
+    assert_eq!(align_of::<BLUETOOTH_DEVICE_INFO>(), 8);
+    assert_eq!(size_of::<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS>(), 576);
+    assert_eq!(align_of::<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS>(), 8);
+    assert_eq!(size_of::<BLUETOOTH_DEVICE_SEARCH_PARAMS>(), 32);
+    assert_eq!(align_of::<BLUETOOTH_DEVICE_SEARCH_PARAMS>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_COD_PAIRS>(), 8);
+    assert_eq!(align_of::<BLUETOOTH_COD_PAIRS>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_SELECT_DEVICE_PARAMS>(), 60);
+    assert_eq!(align_of::<BLUETOOTH_SELECT_DEVICE_PARAMS>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_PIN_INFO>(), 17);
+    assert_eq!(align_of::<BLUETOOTH_PIN_INFO>(), 1);
+    assert_eq!(size_of::<BLUETOOTH_OOB_DATA_INFO>(), 32);
+    assert_eq!(align_of::<BLUETOOTH_OOB_DATA_INFO>(), 1);
+    assert_eq!(size_of::<BLUETOOTH_NUMERIC_COMPARISON_INFO>(), 4);
+    assert_eq!(align_of::<BLUETOOTH_NUMERIC_COMPARISON_INFO>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_PASSKEY_INFO>(), 4);
+    assert_eq!(align_of::<BLUETOOTH_PASSKEY_INFO>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_AUTHENTICATE_RESPONSE>(), 48);
+    assert_eq!(align_of::<BLUETOOTH_AUTHENTICATE_RESPONSE>(), 8);
+    assert_eq!(size_of::<SDP_ELEMENT_DATA_data_string>(), 8);
+    assert_eq!(align_of::<SDP_ELEMENT_DATA_data_string>(), 4);
+    assert_eq!(size_of::<SDP_ELEMENT_DATA_data_url>(), 8);
+    assert_eq!(align_of::<SDP_ELEMENT_DATA_data_url>(), 4);
+    assert_eq!(size_of::<SDP_ELEMENT_DATA_data_sequence>(), 8);
+    assert_eq!(align_of::<SDP_ELEMENT_DATA_data_sequence>(), 4);
+    assert_eq!(size_of::<SDP_ELEMENT_DATA_data_alternative>(), 8);
+    assert_eq!(align_of::<SDP_ELEMENT_DATA_data_alternative>(), 4);
+    assert_eq!(size_of::<SDP_ELEMENT_DATA_data>(), 16);
+    assert_eq!(align_of::<SDP_ELEMENT_DATA_data>(), 8);
+    assert_eq!(size_of::<SDP_ELEMENT_DATA>(), 24);
+    assert_eq!(align_of::<SDP_ELEMENT_DATA>(), 8);
+    assert_eq!(size_of::<SDP_STRING_TYPE_DATA>(), 6);
+    assert_eq!(align_of::<SDP_STRING_TYPE_DATA>(), 2);
+}
+#[cfg(feature = "bthledef")] #[test]
+fn um_bthledef() {
+    use winapi::um::bthledef::*;
+    assert_eq!(size_of::<BTH_LE_UUID>(), 20);
+    assert_eq!(align_of::<BTH_LE_UUID>(), 4);
+    assert_eq!(size_of::<BTH_LE_GATT_SERVICE>(), 24);
+    assert_eq!(align_of::<BTH_LE_GATT_SERVICE>(), 4);
+    assert_eq!(size_of::<BTH_LE_GATT_CHARACTERISTIC>(), 36);
+    assert_eq!(align_of::<BTH_LE_GATT_CHARACTERISTIC>(), 4);
+    assert_eq!(size_of::<BTH_LE_GATT_CHARACTERISTIC_VALUE>(), 8);
+    assert_eq!(align_of::<BTH_LE_GATT_CHARACTERISTIC_VALUE>(), 4);
+    assert_eq!(size_of::<BTH_LE_GATT_DESCRIPTOR>(), 32);
+    assert_eq!(align_of::<BTH_LE_GATT_DESCRIPTOR>(), 4);
+    assert_eq!(size_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicExtendedProperties>(), 2);
+    assert_eq!(align_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicExtendedProperties>(), 1);
+    assert_eq!(size_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_ClientCharacteristicConfiguration>(), 2);
+    assert_eq!(align_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_ClientCharacteristicConfiguration>(), 1);
+    assert_eq!(size_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_ServerCharacteristicConfiguration>(), 1);
+    assert_eq!(align_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_ServerCharacteristicConfiguration>(), 1);
+    assert_eq!(size_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicFormat>(), 48);
+    assert_eq!(align_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicFormat>(), 4);
+    assert_eq!(size_of::<BTH_LE_GATT_DESCRIPTOR_VALUE>(), 80);
+    assert_eq!(align_of::<BTH_LE_GATT_DESCRIPTOR_VALUE>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION>(), 40);
+    assert_eq!(align_of::<BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_GATT_VALUE_CHANGED_EVENT>(), 12);
+    assert_eq!(align_of::<BLUETOOTH_GATT_VALUE_CHANGED_EVENT>(), 4);
 }
 #[cfg(feature = "cfgmgr32")] #[test]
 fn um_cfgmgr32() {
