@@ -11,17 +11,17 @@ use shared::windef::HWND;
 use um::winnt::{HRESULT, ULONGLONG};
 pub type DWM_FRAME_COUNT = ULONGLONG;
 pub type QPC_TIME = ULONGLONG;
-STRUCT!{struct DWM_BLURBEHIND {
+STRUCT!{#[repr(packed)] struct DWM_BLURBEHIND {
     dwFlags: DWORD,
     fEnable: BOOL,
     hRgnBlur: HRGN,
     fTransitionOnMaximized: BOOL,
 }}
-STRUCT!{struct UNSIGNED_RATIO {
+STRUCT!{#[repr(packed)] struct UNSIGNED_RATIO {
     uiNumerator: UINT32,
     uiDenominator: UINT32,
 }}
-STRUCT!{struct DWM_TIMING_INFO {
+STRUCT!{#[repr(packed)] struct DWM_TIMING_INFO {
     cbSize: UINT32,
     rateRefresh: UNSIGNED_RATIO,
     qpcRefreshPeriod: QPC_TIME,

@@ -6596,7 +6596,7 @@ pub const RI_KEY_TERMSRV_SHADOW: DWORD = 0x10;
 STRUCT!{struct RAWHID {
     dwSizeHid: DWORD,
     dwCount: DWORD,
-    bRawData: [BYTE; 0],
+    bRawData: [BYTE; 1],
 }}
 pub type PRAWHID = *mut RAWHID;
 pub type LPRAWHID = *mut RAWHID;

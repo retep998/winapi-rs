@@ -15,7 +15,7 @@ STRUCT!{struct COMPOSITIONFORM {
 }}
 DECLARE_HANDLE!(HIMC, HIMC__);
 pub type LPCOMPOSITIONFORM = *mut COMPOSITIONFORM;
-extern "system"  {
+extern "system" {
     pub fn ImmGetContext(
         hwnd: HWND,
     ) -> HIMC;
@@ -23,11 +23,11 @@ extern "system"  {
         himc: HIMC,
     ) -> BOOL;
     pub fn ImmSetOpenStatus(
-        himc: HIMC, 
+        himc: HIMC,
         fopen: BOOL,
     ) -> BOOL;
     pub fn ImmSetCompositionWindow(
-        himc: HIMC, 
+        himc: HIMC,
         lpCompForm: LPCOMPOSITIONFORM,
     ) -> BOOL;
     pub fn ImmReleaseContext(
