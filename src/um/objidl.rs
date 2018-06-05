@@ -436,7 +436,7 @@ pub type LPSTORAGE = *mut IStorage;
 STRUCT!{struct RemSNB {
     ulCntStr: ULONG,
     ulCntChar: ULONG,
-    rgString: [OLECHAR; 0],
+    rgString: [OLECHAR; 1],
 }}
 pub type wireSNB = *mut RemSNB;
 pub type SNB = *mut LPOLESTR;
@@ -667,7 +667,7 @@ STRUCT!{struct DVTARGETDEVICE {
     tdDeviceNameOffset: WORD,
     tdPortNameOffset: WORD,
     tdExtDevmodeOffset: WORD,
-    tdData: [BYTE; 0],
+    tdData: [BYTE; 1],
 }}
 pub type LPCLIPFORMAT = *mut CLIPFORMAT;
 STRUCT!{struct FORMATETC {
@@ -775,7 +775,7 @@ STRUCT!{struct RemSTGMEDIUM {
     pData: ULONG,
     pUnkForRelease: ULONG,
     cbData: ULONG,
-    data: [byte; 0],
+    data: [byte; 1],
 }}
 UNION!{union uSTGMEDIUM_u {
     [u32; 1] [u64; 1],
@@ -815,7 +815,7 @@ STRUCT!{struct GDI_OBJECT {
     ObjectType: DWORD,
     u: GDI_OBJECT_u,
 }}
-UNION!{union userSTGMEDIUM_u {
+UNION!{union userSTGMEDIUM_u_u {
     [usize; 1],
     hMetaFilePict hMetaFilePict_mut: wireHMETAFILEPICT,
     hHEnhMetaFile hHEnhMetaFile_mut: wireHENHMETAFILE,
@@ -825,8 +825,11 @@ UNION!{union userSTGMEDIUM_u {
     pstm pstm_mut: *mut BYTE_BLOB,
     pstg pstg_mut: *mut BYTE_BLOB,
 }}
-STRUCT!{struct userSTGMEDIUM {
+STRUCT!{struct userSTGMEDIUM_u {
     tymed: DWORD,
+    u: userSTGMEDIUM_u_u,
+}}
+STRUCT!{struct userSTGMEDIUM {
     u: userSTGMEDIUM_u,
     pUnkForRelease: *mut IUnknown,
 }}

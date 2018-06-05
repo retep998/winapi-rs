@@ -47,7 +47,7 @@ ENUM!{enum STRRET_TYPE {
     STRRET_CSTR = 0x2,
 }}
 UNION!{union STRRET_u {
-    [u8; 260],
+    [u32; 65] [u64; 33],
     pOleStr pOleStr_mut: LPWSTR,
     uOffset uOffset_mut: UINT,
     cStr cStr_mut: [c_char; 260],
