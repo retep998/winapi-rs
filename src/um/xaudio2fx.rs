@@ -25,14 +25,14 @@ pub unsafe fn XAudio2CreateVolumeMeter(ppApo: *mut *mut IUnknown, _flags: UINT32
 pub unsafe fn XAudio2CreateReverb(ppApo: *mut *mut IUnknown, _flags: UINT32) -> HRESULT {
     CreateAudioReverb(ppApo)
 }
-STRUCT!{struct XAUDIO2FX_VOLUMEMETER_LEVELS {
+STRUCT!{#[repr(packed)] struct XAUDIO2FX_VOLUMEMETER_LEVELS {
     pPeakLevels: *mut c_float,
     pRMSLevels: *mut c_float,
     ChannelCount: UINT32,
 }}
 pub const XAUDIO2FX_REVERB_MIN_FRAMERATE: u32 = 20000;
 pub const XAUDIO2FX_REVERB_MAX_FRAMERATE: u32 = 48000;
-STRUCT!{struct XAUDIO2FX_REVERB_PARAMETERS {
+STRUCT!{#[repr(packed)] struct XAUDIO2FX_REVERB_PARAMETERS {
     WetDryMix: c_float,
     ReflectionsDelay: UINT32,
     ReverbDelay: BYTE,
@@ -120,7 +120,7 @@ pub const XAUDIO2FX_REVERB_DEFAULT_DECAY_TIME: f32 = 1.0f32;
 pub const XAUDIO2FX_REVERB_DEFAULT_DENSITY: f32 = 100.0f32;
 pub const XAUDIO2FX_REVERB_DEFAULT_ROOM_SIZE: f32 = 100.0f32;
 pub const XAUDIO2FX_REVERB_DEFAULT_DISABLE_LATE_FIELD: BOOL = FALSE;
-STRUCT!{struct XAUDIO2FX_REVERB_I3DL2_PARAMETERS {
+STRUCT!{#[repr(packed)] struct XAUDIO2FX_REVERB_I3DL2_PARAMETERS {
     WetDryMix: c_float,
     Room: INT32,
     RoomHF: INT32,

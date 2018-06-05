@@ -8490,6 +8490,42 @@ fn um_ws2spi() {
     assert_eq!(size_of::<NSPV2_ROUTINE>(), 72);
     assert_eq!(align_of::<NSPV2_ROUTINE>(), 8);
 }
+#[cfg(feature = "xaudio2")] #[test]
+fn um_xaudio2() {
+    use winapi::um::xaudio2::*;
+    assert_eq!(size_of::<XAUDIO2_VOICE_DETAILS>(), 16);
+    assert_eq!(align_of::<XAUDIO2_VOICE_DETAILS>(), 1);
+    assert_eq!(size_of::<XAUDIO2_SEND_DESCRIPTOR>(), 12);
+    assert_eq!(align_of::<XAUDIO2_SEND_DESCRIPTOR>(), 1);
+    assert_eq!(size_of::<XAUDIO2_VOICE_SENDS>(), 12);
+    assert_eq!(align_of::<XAUDIO2_VOICE_SENDS>(), 1);
+    assert_eq!(size_of::<XAUDIO2_EFFECT_DESCRIPTOR>(), 16);
+    assert_eq!(align_of::<XAUDIO2_EFFECT_DESCRIPTOR>(), 1);
+    assert_eq!(size_of::<XAUDIO2_EFFECT_CHAIN>(), 12);
+    assert_eq!(align_of::<XAUDIO2_EFFECT_CHAIN>(), 1);
+    assert_eq!(size_of::<XAUDIO2_FILTER_PARAMETERS>(), 12);
+    assert_eq!(align_of::<XAUDIO2_FILTER_PARAMETERS>(), 1);
+    assert_eq!(size_of::<XAUDIO2_BUFFER>(), 44);
+    assert_eq!(align_of::<XAUDIO2_BUFFER>(), 1);
+    assert_eq!(size_of::<XAUDIO2_BUFFER_WMA>(), 12);
+    assert_eq!(align_of::<XAUDIO2_BUFFER_WMA>(), 1);
+    assert_eq!(size_of::<XAUDIO2_VOICE_STATE>(), 20);
+    assert_eq!(align_of::<XAUDIO2_VOICE_STATE>(), 1);
+    assert_eq!(size_of::<XAUDIO2_PERFORMANCE_DATA>(), 64);
+    assert_eq!(align_of::<XAUDIO2_PERFORMANCE_DATA>(), 1);
+    assert_eq!(size_of::<XAUDIO2_DEBUG_CONFIGURATION>(), 24);
+    assert_eq!(align_of::<XAUDIO2_DEBUG_CONFIGURATION>(), 1);
+}
+#[cfg(feature = "xaudio2fx")] #[test]
+fn um_xaudio2fx() {
+    use winapi::um::xaudio2fx::*;
+    assert_eq!(size_of::<XAUDIO2FX_VOLUMEMETER_LEVELS>(), 20);
+    assert_eq!(align_of::<XAUDIO2FX_VOLUMEMETER_LEVELS>(), 1);
+    assert_eq!(size_of::<XAUDIO2FX_REVERB_PARAMETERS>(), 57);
+    assert_eq!(align_of::<XAUDIO2FX_REVERB_PARAMETERS>(), 1);
+    assert_eq!(size_of::<XAUDIO2FX_REVERB_I3DL2_PARAMETERS>(), 52);
+    assert_eq!(align_of::<XAUDIO2FX_REVERB_I3DL2_PARAMETERS>(), 1);
+}
 #[cfg(feature = "xinput")] #[test]
 fn um_xinput() {
     use winapi::um::xinput::*;
