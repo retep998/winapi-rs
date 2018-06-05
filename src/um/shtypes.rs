@@ -11,13 +11,13 @@ use shared::minwindef::{BYTE, DWORD, UINT, USHORT};
 use shared::wtypes::PROPERTYKEY;
 use shared::wtypesbase::BYTE_BLOB;
 use um::winnt::{LPCWSTR, LPWSTR};
-STRUCT!{struct SHITEMID {
+STRUCT!{#[repr(packed)] struct SHITEMID {
     cb: USHORT,
-    abID: [BYTE; 0],
+    abID: [BYTE; 1],
 }}
 pub type LPSHITEMID = *mut SHITEMID;
 pub type LPCSHITEMID = *const SHITEMID;
-STRUCT!{struct ITEMIDLIST {
+STRUCT!{#[repr(packed)] struct ITEMIDLIST {
     mkid: SHITEMID,
 }}
 pub type ITEMIDLIST_RELATIVE = ITEMIDLIST;

@@ -18,7 +18,7 @@ STRUCT!{struct OLECMDTEXT {
     cmdtextf: DWORD,
     cwActual: ULONG,
     cwBuf: ULONG,
-    rgwz: [wchar_t; 0],
+    rgwz: [wchar_t; 1],
 }}
 RIDL!{#[uuid(0xb722bccb, 0x4e68, 0x101b, 0xa2, 0xbc, 0x00, 0xaa, 0x00, 0x40, 0x47, 0x70)]
 interface IOleCommandTarget(IOleCommandTargetVtbl): IUnknown(IUnknownVtbl) {

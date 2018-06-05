@@ -1590,7 +1590,7 @@ STRUCT!{struct WICRawToneCurvePoint {
 }}
 STRUCT!{struct WICRawToneCurve {
     cPoints: UINT,
-    aPoints: [WICRawToneCurvePoint; 0],
+    aPoints: [WICRawToneCurvePoint; 1],
 }}
 pub const WICRawChangeNotification_ExposureCompensation: UINT = 0x00000001;
 pub const WICRawChangeNotification_NamedWhitePoint: UINT = 0x00000002;
