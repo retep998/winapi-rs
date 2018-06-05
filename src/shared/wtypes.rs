@@ -17,30 +17,30 @@ use shared::wtypesbase::{
 STRUCT!{struct RemHGLOBAL {
     fNullHGlobal: LONG,
     cbData: ULONG,
-    data: [byte; 0],
+    data: [byte; 1],
 }}
 STRUCT!{struct RemHMETAFILEPICT {
     mm: LONG,
     xExt: LONG,
     yExt: LONG,
     cbData: ULONG,
-    data: [byte; 0],
+    data: [byte; 1],
 }}
 STRUCT!{struct RemHENHMETAFILE {
     cbData: ULONG,
-    data: [byte; 0],
+    data: [byte; 1],
 }}
 STRUCT!{struct RemHBITMAP {
     cbData: ULONG,
-    data: [byte; 0],
+    data: [byte; 1],
 }}
 STRUCT!{struct RemHPALETTE {
     cbData: ULONG,
-    data: [byte; 0],
+    data: [byte; 1],
 }}
 STRUCT!{struct RemHBRUSH {
     cbData: ULONG,
-    data: [byte; 0],
+    data: [byte; 1],
 }}
 pub const ROTFLAGS_REGISTRATIONKEEPSALIVE: DWORD = 0x1;
 pub const ROTFLAGS_ALLOWANYCLIENT: DWORD = 0x2;
@@ -147,7 +147,7 @@ STRUCT!{struct userBITMAP {
     bmPlanes: WORD,
     bmBitsPixel: WORD,
     cbSize: ULONG,
-    pBuffer: [byte; 0],
+    pBuffer: [byte; 1],
 }}
 UNION!{union userHBITMAP_u {
     [u64; 1],
