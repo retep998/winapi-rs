@@ -5509,6 +5509,12 @@ fn um_vss() {
     assert_eq!(size_of::<VSS_OBJECT_PROP>(), 136);
     assert_eq!(align_of::<VSS_OBJECT_PROP>(), 8);
 }
+#[cfg(feature = "wbemcli")] #[test]
+fn um_wbemcli() {
+    use winapi::um::wbemcli::*;
+    assert_eq!(size_of::<WBEM_COMPILE_STATUS_INFO>(), 24);
+    assert_eq!(align_of::<WBEM_COMPILE_STATUS_INFO>(), 4);
+}
 #[cfg(feature = "wct")] #[test]
 fn um_wct() {
     use winapi::um::wct::*;
