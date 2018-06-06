@@ -1065,3 +1065,4 @@ BITFIELD!(SYM_DUMP_PARAM BitFields: ULONG[
    fConstant set_fConstant[4..5],
    Reserved set_Reserved[5..32],
 ]);
+
