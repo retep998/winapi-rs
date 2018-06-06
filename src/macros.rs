@@ -414,13 +414,13 @@ macro_rules! FN {
     (cdecl $func:ident($($t:ty,)*) -> $ret:ty) => (
         pub type $func = Option<unsafe extern "C" fn($($t,)*) -> $ret>;
     );
-    (cdecl $func:ident($($t:ty,)* ...) -> $ret:ty) => (
+    (cdecl_variadic $func:ident($($t:ty,)*) -> $ret:ty) => (
         pub type $func = Option<unsafe extern "C" fn($($t,)* ...) -> $ret>;
     );
     (cdecl $func:ident($($p:ident: $t:ty,)*) -> $ret:ty) => (
         pub type $func = Option<unsafe extern "C" fn($($p: $t,)*) -> $ret>;
     );
-    (cdecl $func:ident($($p:ident: $t:ty,)* ...) -> $ret:ty) => (
+    (cdecl_variadic $func:ident($($p:ident: $t:ty,)*) -> $ret:ty) => (
         pub type $func = Option<unsafe extern "C" fn($($p: $t,)* ...) -> $ret>;
     );
 }
