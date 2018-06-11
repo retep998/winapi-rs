@@ -221,6 +221,7 @@ pub mod gl;
 #[cfg(feature = "userenv")] pub mod userenv;
 #[cfg(feature = "usp10")] pub mod usp10;
 #[cfg(feature = "utilapiset")] pub mod utilapiset;
+#[cfg(feature = "uxtheme")] pub mod uxtheme;
 #[cfg(feature = "vsbackup")] pub mod vsbackup;
 #[cfg(feature = "vss")] pub mod vss;
 #[cfg(feature = "vsserror")] pub mod vsserror;
