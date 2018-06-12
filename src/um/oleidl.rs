@@ -5,7 +5,11 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 // TODO:It is a minimal implementation.
-use shared::windef::{POINTL};
+use shared::minwindref::DWORD;
+use shared::ntdef::HRESULT;
+use shared::windef::POINTL;
+use um::objidl::IDataObject;
+use um::unknwnbase::{IUnknown, IUnknownVtbl};
 pub const MK_ALT: DWORD = 20;
 pub const DROPEFFECT_NONE: DWORD = 0;
 pub const DROPEFFECT_COPY: DWORD = 1;

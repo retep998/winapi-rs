@@ -238,7 +238,7 @@ ENUM!{enum DATADIR {
 }}
 RIDL!(
 #[uuid(0x0000010e, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
-interface iDataObject(IDataObjectVtbl): IUnknown(IUnknownVtble) {
+interface IDataObject(IDataObjectVtbl): IUnknown(IUnknownVtble) {
     fn GetData(
         pformatetcIn: *const FORMATETC,
         pmedium: *mut STGMEDIUM,
