@@ -157,6 +157,7 @@ pub mod gl;
 #[cfg(feature = "ocidl")] pub mod ocidl;
 #[cfg(feature = "oleauto")] pub mod oleauto;
 #[cfg(feature = "olectl")] pub mod olectl;
+#[cfg(feature = "oleidl")] pub mod oleidl;
 #[cfg(feature = "opmapi")] pub mod opmapi;
 #[cfg(feature = "pdh")] pub mod pdh;
 #[cfg(feature = "perflib")] pub mod perflib;
