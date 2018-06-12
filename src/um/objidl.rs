@@ -434,6 +434,7 @@ ENUM!{enum DATADIR {
     DATADIR_GET = 1,
     DATADIR_SET = 2,
 }}
+pub type LPDATAOBJECT = *mut IDataObject;
 RIDL!(
 #[uuid(0x0000010e, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IDataObject(IDataObjectVtbl): IUnknown(IUnknownVtbl) {
