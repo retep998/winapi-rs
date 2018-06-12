@@ -7,10 +7,13 @@
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
 use ctypes::c_void;
 use shared::basetsd::UINT64;
-use shared::guiddef::{CLSID, REFIID};
-use shared::minwindef::{BOOL, DWORD, FILETIME, ULONG};
+use shared::guiddef::{CLSID, IID, REFCLSID, REFIID};
+use shared::minwindef::{BOOL, BYTE, DWORD, FILETIME, HGLOBAL, ULONG, WORD};
+use shared::ntdef::LONG;
+use shared::windef::{HBITMAP, HENHMETAFILE};
+use shared::wtypes::{CLIPFORMAT, HMETAFILEPICT};
 use shared::wtypesbase::{LPOLESTR, OLECHAR};
-use um::objidlbase::{IEnumString, IStream};
+use um::objidlbase::{IEnumString, IStream, STATSTG};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, ULARGE_INTEGER};
 //8402
@@ -232,13 +235,208 @@ STRUCT!{struct SOLE_AUTHENTICATION_SERVICE {
     pPrincipalName: *mut OLECHAR,
     hr: HRESULT,
 }}
+RIDL!{#[uuid(0x0000000d, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IEnumSTATSTG(IEnumSTATSTGVtbl): IUnknown(IUnknownVtbl) {
+    fn Next(
+        celt: ULONG,
+        rgelt: *mut STATSTG,
+        pceltFetched: *mut ULONG,
+    ) -> HRESULT,
+    fn Skip(
+        celt: ULONG,
+    ) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(
+        ppenum: *mut *mut IEnumSTATSTG,
+    ) -> HRESULT,
+}}
+pub type SNB = *const *const OLECHAR;
+RIDL!{#[uuid(0x0000000b, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IStorage(IStorageVtbl): IUnknown(IUnknownVtbl) {
+    fn CreateStream(
+        pwcsName: *const OLECHAR,
+        grfMode: DWORD,
+        reserved1: DWORD,
+        reserved2: DWORD,
+        ppstm: *mut *mut IStream,
+    ) -> HRESULT,
+    fn OpenStream(
+        pwcsName: *const OLECHAR,
+        reserved1: *const c_void,
+        grfMode: DWORD,
+        reserved2: DWORD,
+        ppstm: *mut *mut IStream,
+    ) -> HRESULT,
+    fn CreateStorage(
+        pwcsName: *const OLECHAR,
+        grfMode: DWORD,
+        reserved1: DWORD,
+        reserved2: DWORD,
+        ppstg: *mut *mut IStorage,
+    ) -> HRESULT,
+    fn OpenStorage(
+        pwcsName: *const OLECHAR,
+        pstgPriority: IStorage,
+        grfMode: DWORD,
+        snbExclude: SNB,
+        reserved: DWORD,
+        ppstg: *mut *mut IStorage,
+    ) -> HRESULT,
+    fn CopyTo(
+        ciidExclude: DWORD,
+        rgiidExclude: *const IID,
+        snbExclude: SNB,
+        pstgDest: *const IStorage,
+    ) -> HRESULT,
+    fn MoveElementTo(
+        pwcsName: *const OLECHAR,
+        pstgDest: *const IStorage,
+        pwcsNewName: *const OLECHAR,
+        grfFlags: DWORD,
+    ) -> HRESULT,
+    fn Commit(
+        grfCommitFlags: DWORD,
+    ) -> HRESULT,
+    fn Revert() -> HRESULT,
+    fn EnumElements(
+        reserved1: DWORD,
+        reserved2: *const c_void,
+        reserved3: DWORD,
+        ppenum: *mut *mut IEnumSTATSTG,
+    ) -> HRESULT,
+    fn DestroyElement(
+        pwcsName: *const OLECHAR,
+    ) -> HRESULT,
+    fn RenameElement(
+        pwcsOldName: *const OLECHAR,
+        pwcsNewName: *const OLECHAR,
+    ) -> HRESULT,
+    fn SetElementTimes(
+        pwcsName: *const OLECHAR,
+        pctime: *const FILETIME,
+        patime: *const FILETIME,
+        pmtime: *const FILETIME,
+    ) -> HRESULT,
+    fn SetClass(
+        clsid: REFCLSID,
+    ) -> HRESULT,
+    fn SetStateBits(
+        grfStateBits: DWORD,
+        grfMask: DWORD,
+    ) -> HRESULT,
+    fn Stat(
+        pstatstg: *mut STATSTG,
+        grfStatFlag: DWORD,
+    ) -> HRESULT,
+}}
+STRUCT!{struct DVTARGETDEVICE {
+    tdSize: DWORD,
+    tdDriverNameOffset: WORD,
+    tdDeviceNameOffset: WORD,
+    tdPortNameOffset: WORD,
+    tdExtDevmodeOFfset: WORD,
+    tdData: [BYTE; 1],
+}}
+STRUCT!{struct FORMATETC {
+    cfFormat: CLIPFORMAT,
+    ptd: *const DVTARGETDEVICE,
+    dwAspect: DWORD,
+    lindex: LONG,
+    tymed: DWORD,
+}}
+RIDL!{#[uuid(0x00000103, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IEnumFORMATETC(IEnumFORMATETCVtbl): IUnknown(IUnknownVtbl) {
+    fn Next(
+        celt: ULONG,
+        rgelt: *mut FORMATETC,
+        pceltFetched: *mut ULONG,
+    ) -> HRESULT,
+    fn Skip(
+        celt: ULONG,
+    ) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(
+        ppenum: *mut *mut IEnumFORMATETC,
+    ) -> HRESULT,
+}}
+ENUM!{enum ADVF {
+    ADVF_NODATA = 1,
+    ADVF_PRIMEFIRST = 2,
+    ADVF_ONLYONCE = 4,
+    ADVF_DATAONSTOP = 64,
+    ADVFCACHE_NOHANDLER = 8,
+    ADVFCACHE_FORCEBUILTIN = 16,
+    ADVFCACHE_ONSAVE = 32,
+}}
+STRUCT!{struct STATDATA {
+    formatetc: FORMATETC,
+    advf: DWORD,
+    pAdvSInk: *mut IAdviseSink,
+    dwConnection: DWORD,
+}}
+RIDL!{#[uuid(0x00000105, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IEnumSTATDATA(IEnumSTATDATAVtbl): IUnknown(IUnknownVtbl) {
+    fn Next(
+        celt: ULONG,
+        rgelt: *mut STATDATA,
+        pceltFetched: *mut ULONG,
+    ) -> HRESULT,
+    fn Skip(
+        celt: ULONG,
+    ) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(
+        ppenum: *mut *mut IEnumSTATDATA,
+    ) -> HRESULT,
+}}
+ENUM!{enum TYMED {
+    TYMED_HGLOBAL = 1,
+    TYMED_FILE = 2,
+    TYMED_ISTREAM = 4,
+    TYMED_ISTORAGE = 8,
+    TYMED_GDI = 16,
+    TYMED_MFPICT = 32,
+    TYMED_ENHMF = 64,
+    TYMED_NULL = 0,
+}}
+UNION!{union STGMEDIUM_u {
+    [u64; 7], //TODO: I guessed to move on
+    hBitmap hBitmap_mut: HBITMAP,
+    hMetaFilePict hMetaFilePict_mut: HMETAFILEPICT,
+    hEnhMetaFile hEnhMetaFile_mut: HENHMETAFILE,
+    hGlobal hGlobal_mut: HGLOBAL,
+    lpszFileName lpszFileName_mut: LPOLESTR,
+    pstm pstm_mut: *mut IStream,
+    pstg pstg_mut: *mut IStorage,
+}}
+STRUCT!{struct STGMEDIUM {
+    tymed: DWORD,
+    u: *mut STGMEDIUM_u,
+    pUnkForRelease: *mut IUnknown,
+}}
+RIDL!{#[uuid(0x0000010f, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IAdviseSink(IAdviseSinkVtbl): IUnknown(IUnknownVtbl) {
+    fn OnDataChange(
+        pformatetc: *mut FORMATETC,
+        pStgmed: *mut STGMEDIUM,
+    ) -> c_void,
+    fn OnViewChange(
+        dwAspect: DWORD,
+        lindex: LONG,
+    ) -> c_void,
+    fn OnRename(
+        pmk: *mut IMoniker,
+    ) -> c_void,
+    fn OnSave() -> c_void,
+    fn OnClose() -> c_void,
+}}
 ENUM!{enum DATADIR {
     DATADIR_GET = 1,
     DATADIR_SET = 2,
 }}
 RIDL!(
 #[uuid(0x0000010e, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
-interface IDataObject(IDataObjectVtbl): IUnknown(IUnknownVtble) {
+interface IDataObject(IDataObjectVtbl): IUnknown(IUnknownVtbl) {
     fn GetData(
         pformatetcIn: *const FORMATETC,
         pmedium: *mut STGMEDIUM,
@@ -257,7 +455,7 @@ interface IDataObject(IDataObjectVtbl): IUnknown(IUnknownVtble) {
     fn SetData(
         pformatetc: *const FORMATETC,
         pformatetcOut: *const FORMATETC,
-        fRelease: BOOL
+        fRelease: BOOL,
     ) -> HRESULT,
     fn EnumFormatEtc(
         dwDirection: DWORD,
@@ -274,7 +472,7 @@ interface IDataObject(IDataObjectVtbl): IUnknown(IUnknownVtble) {
     ) -> HRESULT,
     fn EnumDAdvise(
         ppenumAdvise: *const *const IEnumSTATDATA,
-    ),
+    ) -> HRESULT,
 }
 );
 RIDL!(

@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 // TODO:It is a minimal implementation.
-use shared::minwindref::DWORD;
+use shared::minwindef::DWORD;
 use shared::ntdef::HRESULT;
 use shared::windef::POINTL;
 use um::objidl::IDataObject;
@@ -28,19 +28,19 @@ interface IDropTarget(IDropTargetVtbl): IUnknown(IUnknownVtbl) {
         pDataObj: *const IDataObject,
         grfKeyState: DWORD,
         pt: *const POINTL,
-        pdwEffect: *mut DWORD
+        pdwEffect: *mut DWORD,
     ) -> HRESULT,
     fn DragOver(
         grfKeyState: DWORD,
         pt: *const POINTL,
-        pdwEffect: *mut DWORD
+        pdwEffect: *mut DWORD,
     ) -> HRESULT,
     fn DragLeave() -> HRESULT,
     fn Drop(
         pDataObj: *const IDataObject,
         grfKeyState: DWORD,
-        pt: *cosnt POINTL,
-        pdwEffect: *mut DWORD
+        pt: *const POINTL,
+        pdwEffect: *mut DWORD,
     ) -> HRESULT,
 }
 );
