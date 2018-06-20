@@ -11,9 +11,9 @@ use shared::dxgi1_2::{
     DXGI_COMPUTE_PREEMPTION_GRANULARITY, DXGI_GRAPHICS_PREEMPTION_GRANULARITY,
 };
 use shared::dxgi1_4::{IDXGIAdapter3, IDXGIAdapter3Vtbl};
-use shared::dxgi1_5::{IDXGIOutput5, IDXGIOutput5Vtbl, IDXGIFactory5, IDXGIFactory5Vtbl};
+use shared::dxgi1_5::{IDXGIFactory5, IDXGIFactory5Vtbl, IDXGIOutput5, IDXGIOutput5Vtbl};
 use shared::dxgitype::{DXGI_COLOR_SPACE_TYPE, DXGI_MODE_ROTATION};
-use shared::guiddef::{REFIID};
+use shared::guiddef::REFIID;
 use shared::minwindef::{BOOL, FLOAT, UINT};
 use shared::windef::{HMONITOR, RECT};
 use um::winnt::{HRESULT, LUID, WCHAR};
