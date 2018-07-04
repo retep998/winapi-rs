@@ -292,7 +292,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("userenv", &["minwindef", "winnt", "winreg"], &["userenv"]),
     ("usp10", &["minwindef", "ntdef", "windef", "winerror", "wingdi", "winnt"], &["usp10"]),
     ("utilapiset", &["minwindef", "ntdef"], &["kernel32"]),
-    ("uxtheme", &["minwindef", "windef", "winnt"], &["uxtheme"]),
+    ("uxtheme", &["commctrl", "minwindef", "windef", "wingdi", "winnt"], &["uxtheme"]),
     ("vsbackup", &["guiddef", "minwindef", "unknwnbase", "vss", "vswriter", "winnt", "wtypes"], &["vssapi"]),
     ("vss", &["guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("vsserror", &["winnt"], &[]),
