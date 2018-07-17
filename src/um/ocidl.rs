@@ -12,6 +12,13 @@ use shared::wtypes::{CLIPFORMAT, VARTYPE};
 use shared::wtypesbase::{LPCOLESTR, LPOLESTR};
 use um::oaidl::{IErrorLog, VARIANT};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
+ENUM!{enum READYSTATE {
+    READYSTATE_UNINITIALIZED = 0,
+    READYSTATE_LOADING = 1,
+    READYSTATE_LOADED = 2,
+    READYSTATE_INTERACTIVE = 3,
+    READYSTATE_COMPLETE = 4,
+}}
 ENUM!{enum PROPBAG2_TYPE {
     PROPBAG2_TYPE_UNDEFINED = 0,
     PROPBAG2_TYPE_DATA = 1,
