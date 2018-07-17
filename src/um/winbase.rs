@@ -321,7 +321,10 @@ pub const CLRDTR: DWORD = 6;
 pub const RESETDEV: DWORD = 7;
 pub const SETBREAK: DWORD = 8;
 pub const CLRBREAK: DWORD = 9;
-// PURGE_*
+pub const PURGE_TXABORT: DWORD = 0x0001;
+pub const PURGE_RXABORT: DWORD = 0x0002;
+pub const PURGE_TXCLEAR: DWORD = 0x0004;
+pub const PURGE_RXCLEAR: DWORD = 0x0008;
 pub const MS_CTS_ON: DWORD = 0x0010;
 pub const MS_DSR_ON: DWORD = 0x0020;
 pub const MS_RING_ON: DWORD = 0x0040;
