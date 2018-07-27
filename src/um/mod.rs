@@ -102,6 +102,7 @@ pub mod gl;
 #[cfg(feature = "endpointvolume")] pub mod endpointvolume;
 #[cfg(feature = "errhandlingapi")] pub mod errhandlingapi;
 #[cfg(feature = "evntcons")] pub mod evntcons;
+#[cfg(feature = "exdisp")] pub mod exdisp;
 #[cfg(feature = "fibersapi")] pub mod fibersapi;
 #[cfg(feature = "fileapi")] pub mod fileapi;
 #[cfg(feature = "handleapi")] pub mod handleapi;

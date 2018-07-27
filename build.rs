@@ -173,6 +173,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("endpointvolume", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("errhandlingapi", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("evntcons", &["basetsd", "evntprov", "evntrace", "guiddef", "minwindef", "winnt"], &["advapi32"]),
+    ("exdisp", &["basetsd", "docobj", "oaidl", "ocidl", "winnt", "wtypes"], &[]),
     ("fibersapi", &["minwindef", "winnt"], &["kernel32"]),
     ("fileapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("gl-gl", &[], &["opengl32"]),
