@@ -7240,6 +7240,12 @@ fn um_winnt() {
     assert_eq!(align_of::<PROCESS_MITIGATION_FONT_DISABLE_POLICY>(), 4);
     assert_eq!(size_of::<PROCESS_MITIGATION_IMAGE_LOAD_POLICY>(), 4);
     assert_eq!(align_of::<PROCESS_MITIGATION_IMAGE_LOAD_POLICY>(), 4);
+    assert_eq!(size_of::<PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY>(), 4);
+    assert_eq!(align_of::<PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY>(), 4);
+    assert_eq!(size_of::<PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY>(), 4);
+    assert_eq!(align_of::<PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY>(), 4);
+    assert_eq!(size_of::<PROCESS_MITIGATION_CHILD_PROCESS_POLICY>(), 4);
+    assert_eq!(align_of::<PROCESS_MITIGATION_CHILD_PROCESS_POLICY>(), 4);
     assert_eq!(size_of::<JOBOBJECT_BASIC_ACCOUNTING_INFORMATION>(), 48);
     assert_eq!(align_of::<JOBOBJECT_BASIC_ACCOUNTING_INFORMATION>(), 8);
     assert_eq!(size_of::<JOBOBJECT_BASIC_LIMIT_INFORMATION>(), 48);
