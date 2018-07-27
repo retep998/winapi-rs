@@ -4,10 +4,7 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use um::objidlbase::IMarshal;
-use um::winnt::HRESULT;
-extern "system" {
-    pub fn RoGetBufferMarshaler(
-        bufferMarshaler: *mut *mut IMarshal
-    ) -> HRESULT;
-}
+pub use um::winnt::LONG;
+pub const DISPID_XMLDSO: LONG = 0x00010000;
+pub const DISPID_XMLDSO_DOCUMENT: LONG = DISPID_XMLDSO + 1;
+pub const DISPID_XMLDSO_JAVADSOCOMPATIBLE: LONG = DISPID_XMLDSO_DOCUMENT + 1;

@@ -25,7 +25,7 @@ use um::d2d1_1::ID2D1Device;
 use um::dcommon::D2D1_PIXEL_FORMAT;
 use um::objidlbase::{IEnumString, IEnumUnknown, IStream, IStreamVtbl};
 use um::ocidl::IPropertyBag2;
-use um::propidl::PROPVARIANT;
+use um::propidlbase::PROPVARIANT;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HANDLE, ULARGE_INTEGER};
 DEFINE_GUID!{CLSID_WICImagingFactory,
