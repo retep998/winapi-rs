@@ -40,6 +40,42 @@ STRUCT!{struct D3DVIEWPORT9 {
     MinZ: c_float,
     MaxZ: c_float,
 }}
+
+#[inline]
+pub fn D3DCOLOR_ARGB(a: DWORD, r: DWORD, g: DWORD, b: DWORD) -> D3DCOLOR {
+    (((a & 0xff) << 24) | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff)) as D3DCOLOR
+}
+
+#[inline]
+pub fn D3DCOLOR_RGBA(r: DWORD, g: DWORD, b: DWORD, a: DWORD) -> D3DCOLOR {
+    D3DCOLOR_ARGB(a, r, g, b)
+}
+
+#[inline]
+pub fn D3DCOLOR_XRGB(r: DWORD, g: DWORD, b: DWORD) -> D3DCOLOR {
+    D3DCOLOR_ARGB(0xff, r, g, b)
+}
+
+#[inline]
+pub fn D3DCOLOR_XYUV(y: DWORD, u: DWORD, v: DWORD) -> D3DCOLOR {
+    D3DCOLOR_ARGB(0xff, y, u, v)
+}
+
+#[inline]
+pub fn D3DCOLOR_AYUV(a: DWORD, y: DWORD, u: DWORD, v: DWORD) -> D3DCOLOR {
+    D3DCOLOR_ARGB(a, y, u, v)
+}
+
+#[inline]
+pub fn D3DCOLOR_COLORVALUE(r: f32, g: f32, b: f32, a: f32) -> D3DCOLOR {
+    D3DCOLOR_ARGB(
+        (r * 255f32) as DWORD,
+        (g * 255f32) as DWORD,
+        (b * 255f32) as DWORD,
+        (a * 255f32) as DWORD,
+    )
+}
+
 pub const D3DMAXUSERCLIPPLANES: DWORD = 32;
 pub const D3DCLIPPLANE0: DWORD = 1 << 0;
 pub const D3DCLIPPLANE1: DWORD = 1 << 1;
