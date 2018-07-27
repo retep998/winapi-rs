@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of wstypes.h
-use ctypes::{c_double, c_short, c_ushort, wchar_t};
+use ctypes::{c_double, c_short, c_ushort, c_void, wchar_t};
 use shared::guiddef::{GUID};
 use shared::minwindef::{BYTE, DWORD, ULONG, USHORT, WORD};
 use shared::ntdef::{LONG, LONGLONG, ULONGLONG};
@@ -69,6 +69,7 @@ STRUCT!{struct PROPERTYKEY {
     fmtid: GUID,
     pid: DWORD,
 }}
+pub type HMETAFILEPICT = *mut c_void;
 pub type DATE = c_double;
 STRUCT!{struct CY {
     int64: LONGLONG,
