@@ -13,6 +13,7 @@ use um::winnt::{
 };
 pub const WTS_CURRENT_SERVER: HANDLE = 0isize as HANDLE;
 pub const WTS_CURRENT_SERVER_HANDLE: HANDLE = 0isize as HANDLE;
+// #define WTS_CURRENT_SERVER_NAME (NULL)
 pub const WTS_CURRENT_SESSION: DWORD = -1i32 as DWORD;
 pub const WTS_ANY_SESSION: DWORD = -2i32 as DWORD;
 const USERNAME_LENGTH: usize = 20;
@@ -24,7 +25,7 @@ pub const WTS_WSD_REBOOT: DWORD = 0x00000004;
 pub const WTS_WSD_POWEROFF: DWORD = 0x00000008;
 pub const WTS_WSD_FASTREBOOT: DWORD = 0x00000010;
 const WINSTATIONNAME_LENGTH: usize = 32;
-const DOMAIN_LENGTH: usize = 32;
+const DOMAIN_LENGTH: usize = 17;
 const WTS_DRIVE_LENGTH: usize = 3;
 const WTS_LISTENER_NAME_LENGTH: usize = 32;
 const WTS_COMMENT_LENGTH: usize = 60;
@@ -360,7 +361,6 @@ STRUCT!{struct WTS_VALIDATION_INFORMATIONA {
     HardwareIDLength: DWORD,
 }}
 pub type PWTS_VALIDATION_INFORMATIONA = *mut WTS_VALIDATION_INFORMATIONA;
-
 STRUCT!{struct WTS_VALIDATION_INFORMATIONW {
     ProductInfo: PRODUCT_INFOW,
     License: [BYTE; VALIDATIONINFORMATION_LICENSE_LENGTH],
@@ -441,10 +441,10 @@ STRUCT!{struct WTSUSERCONFIGW {
     ShadowingSettings: DWORD,
     TerminalServerRemoteHomeDir: DWORD,
     InitialProgram: [WCHAR; MAX_PATH + 1],
-    WorkDirectory: [CHAR; MAX_PATH + 1],
-    TerminalServerProfilePath: [CHAR; MAX_PATH + 1],
-    TerminalServerHomeDir: [CHAR; MAX_PATH + 1],
-    TerminalServerHomeDirDrive: [CHAR; WTS_DRIVE_LENGTH + 1],
+    WorkDirectory: [WCHAR; MAX_PATH + 1],
+    TerminalServerProfilePath: [WCHAR; MAX_PATH + 1],
+    TerminalServerHomeDir: [WCHAR; MAX_PATH + 1],
+    TerminalServerHomeDirDrive: [WCHAR; WTS_DRIVE_LENGTH + 1],
 }}
 pub type PWTSUSERCONFIGW = *mut WTSUSERCONFIGW;
 pub const WTS_EVENT_NONE: DWORD = 0x00000000;
@@ -472,7 +472,9 @@ STRUCT!{struct WTS_SESSION_ADDRESS {
 }}
 pub type PWTS_SESSION_ADDRESS = *mut WTS_SESSION_ADDRESS;
 extern "system" {
-    pub fn WTSStopRemoteControlSession(LogonId: ULONG) -> BOOL;
+    pub fn WTSStopRemoteControlSession(
+        LogonId: ULONG
+    ) -> BOOL;
     pub fn WTSStartRemoteControlSessionW(
         pTargetServerName: LPWSTR,
         TargetLogonId: ULONG,
@@ -511,11 +513,21 @@ extern "system" {
         ppServerInfo: *mut PWTS_SERVER_INFOA,
         pCount: *mut DWORD,
     ) -> BOOL;
-    pub fn WTSOpenServerW(pServerName: LPWSTR) -> HANDLE;
-    pub fn WTSOpenServerA(pServerName: LPSTR) -> HANDLE;
-    pub fn WTSOpenServerExW(pServerName: LPWSTR) -> HANDLE;
-    pub fn WTSOpenServerExA(pServerName: LPSTR) -> HANDLE;
-    pub fn WTSCloseServer(hServer: HANDLE);
+    pub fn WTSOpenServerW(
+        pServerName: LPWSTR
+    ) -> HANDLE;
+    pub fn WTSOpenServerA(
+        pServerName: LPSTR
+    ) -> HANDLE;
+    pub fn WTSOpenServerExW(
+        pServerName: LPWSTR
+    ) -> HANDLE;
+    pub fn WTSOpenServerExA(
+        pServerName: LPSTR
+    ) -> HANDLE;
+    pub fn WTSCloseServer(
+        hServer: HANDLE
+    );
     pub fn WTSEnumerateSessionsW(
         hServer: HANDLE,
         Reserved: DWORD,
@@ -670,7 +682,9 @@ extern "system" {
         pVirtualName: LPSTR,
         flags: DWORD,
     ) -> HANDLE;
-    pub fn WTSVirtualChannelClose(hChannelHandle: HANDLE) -> BOOL;
+    pub fn WTSVirtualChannelClose(
+        hChannelHandle: HANDLE
+    ) -> BOOL;
     pub fn WTSVirtualChannelRead(
         hChannelHandle: HANDLE,
         TimeOut: ULONG,
@@ -684,27 +698,41 @@ extern "system" {
         Length: ULONG,
         pBytesWritten: PULONG,
     ) -> BOOL;
-    pub fn WTSVirtualChannelPurgeInput(hChannelHandle: HANDLE) -> BOOL;
-    pub fn WTSVirtualChannelPurgeOutput(hChannelHandle: HANDLE) -> BOOL;
+    pub fn WTSVirtualChannelPurgeInput(
+        hChannelHandle: HANDLE
+    ) -> BOOL;
+    pub fn WTSVirtualChannelPurgeOutput(
+        hChannelHandle: HANDLE
+    ) -> BOOL;
     pub fn WTSVirtualChannelQuery(
         hChannelHandle: HANDLE,
         virtualClass: WTS_VIRTUAL_CLASS,
         ppBuffer: *mut PVOID,
         pBytesReturned: *mut DWORD,
     ) -> BOOL;
-    pub fn WTSFreeMemory(pMemory: PVOID);
+    pub fn WTSFreeMemory(
+        pMemory: PVOID
+    );
 }
 pub const NOTIFY_FOR_ALL_SESSIONS: DWORD = 1;
 pub const NOTIFY_FOR_THIS_SESSION: DWORD = 0;
 extern "system" {
-    pub fn WTSRegisterSessionNotification(hWnd: HWND, dwFlags: DWORD) -> BOOL;
-    pub fn WTSUnRegisterSessionNotification(hWnd: HWND) -> BOOL;
+    pub fn WTSRegisterSessionNotification(
+        hWnd: HWND,
+        dwFlags: DWORD
+    ) -> BOOL;
+    pub fn WTSUnRegisterSessionNotification(
+        hWnd: HWND
+    ) -> BOOL;
     pub fn WTSRegisterSessionNotificationEx(
         hServer: HANDLE,
         hWnd: HWND,
         dwFlags: DWORD,
     ) -> BOOL;
-    pub fn WTSUnRegisterSessionNotificationEx(hServer: HANDLE, hWnd: HWND) -> BOOL;
+    pub fn WTSUnRegisterSessionNotificationEx(
+        hServer: HANDLE,
+        hWnd: HWND
+    ) -> BOOL;
 }
 pub const WTS_PROCESS_INFO_LEVEL_0: DWORD = 0;
 pub const WTS_PROCESS_INFO_LEVEL_1: DWORD = 1;
@@ -924,7 +952,13 @@ extern "system" {
         nLength: DWORD,
         lpnLengthNeeded: LPDWORD,
     ) -> BOOL;
-    pub fn WTSEnableChildSessions(bEnable: BOOL) -> BOOL;
-    pub fn WTSIsChildSessionsEnabled(pbEnabled: PBOOL) -> BOOL;
-    pub fn WTSGetChildSessionId(pSessionId: PULONG) -> BOOL;
+    pub fn WTSEnableChildSessions(
+        bEnable: BOOL
+    ) -> BOOL;
+    pub fn WTSIsChildSessionsEnabled(
+        pbEnabled: PBOOL
+    ) -> BOOL;
+    pub fn WTSGetChildSessionId(
+        pSessionId: PULONG
+    ) -> BOOL;
 }
