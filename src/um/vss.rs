@@ -5,12 +5,10 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! VSS header file
-
 use shared::guiddef::{CLSID, GUID};
 use shared::minwindef::{DWORD, INT, ULONG};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LONG, LONGLONG, WCHAR};
-
 ENUM!{enum VSS_OBJECT_TYPE {
     VSS_OBJECT_UNKNOWN = 0,
     VSS_OBJECT_NONE = 1,

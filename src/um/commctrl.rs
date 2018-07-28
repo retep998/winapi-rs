@@ -50,13 +50,11 @@ pub const ICC_PAGESCROLLER_CLASS: DWORD = 0x1000;
 pub const ICC_NATIVEFNTCTL_CLASS: DWORD = 0x2000;
 pub const ICC_STANDARD_CLASSES: DWORD = 0x4000;
 pub const ICC_LINK_CLASS: DWORD = 0x8000;
-
 extern "system" {
     pub fn InitCommonControlsEx(
         lpInitCtrls: *const INITCOMMONCONTROLSEX,
     ) -> BOOL;
 }
-
 pub const ODT_HEADER: UINT = 100;
 pub const ODT_TAB: UINT = 101;
 pub const ODT_LISTVIEW: UINT = 102;
@@ -293,7 +291,6 @@ pub const ILC_MIRROR: UINT = 0x00002000;
 pub const ILC_PERITEMMIRROR: UINT = 0x00008000;
 pub const ILC_ORIGINALSIZE: UINT = 0x00010000;
 pub const ILC_HIGHQUALITYSCALE: UINT = 0x00020000;
-
 extern "system" {
     pub fn ImageList_Create(
         cx: c_int,
@@ -366,7 +363,6 @@ pub const ILS_SATURATE: DWORD = 0x00000004;
 pub const ILS_ALPHA: DWORD = 0x00000008;
 pub const ILGT_NORMAL: DWORD = 0x00000000;
 pub const ILGT_ASYNC : DWORD = 0x00000001;
-
 extern "system" {
     pub fn ImageList_Draw(
         himl: HIMAGELIST,
@@ -378,7 +374,6 @@ extern "system" {
     ) -> BOOL;
 }
 pub const HBITMAP_CALLBACK: HBITMAP = -1isize as HBITMAP;
-
 extern "system" {
     pub fn ImageList_Replace(
         himl: HIMAGELIST,
@@ -436,7 +431,6 @@ extern "system" {
 }
 pub const ILCF_MOVE: UINT = 0x00000000;
 pub const ILCF_SWAP: UINT = 0x00000001;
-
 extern "system" {
     pub fn ImageList_Copy(
         himlDst: HIMAGELIST,

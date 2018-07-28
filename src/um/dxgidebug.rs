@@ -10,7 +10,6 @@ use shared::guiddef::{GUID, REFIID};
 use shared::minwindef::{BOOL, DWORD, UINT};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
-
 pub const DXGI_DEBUG_BINARY_VERSION: DWORD = 1;
 ENUM!{enum DXGI_DEBUG_RLO_FLAGS {
     DXGI_DEBUG_RLO_SUMMARY = 0x1,

@@ -165,7 +165,6 @@ unsafe fn strnlen(s: PCSTR, max_len: isize) -> isize {
 #[inline]
 unsafe fn read_unaligned<T>(src: *const T) -> T {
     use core::{mem, ptr};
-
     let mut tmp: T = mem::uninitialized();
     ptr::copy_nonoverlapping(src as *const u8,
                              &mut tmp as *mut T as *mut u8,
@@ -186,23 +185,19 @@ pub unsafe fn EtwGetTraitFromProviderTraits(
     if ByteCount < 3 {
         return; 
     }
-
     Ptr = Ptr.offset(2);
     Ptr = Ptr.offset(strnlen(Ptr as PCSTR, (ByteCount - 3) as isize));
     Ptr = Ptr.offset(1);
-
     while Ptr < PtrEnd {
         let TraitByteCount = read_unaligned(Ptr as *const USHORT);
         if TraitByteCount < 3 {
             return;
         }
-
         if *Ptr.offset(2) == TraitType && Ptr.offset(TraitByteCount as isize) <= PtrEnd {
             *Trait = Ptr.offset(3) as PVOID;
             *Size = TraitByteCount - 3;
             return;
         }
-
         Ptr = Ptr.offset(TraitByteCount as isize);
     }
 }

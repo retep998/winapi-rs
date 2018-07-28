@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 //! ApiSet Contract for api-ms-win-core-processthreads-l1
-
 use ctypes::{c_int, c_void};
 use shared::basetsd::{DWORD_PTR, PSIZE_T, PULONG_PTR, SIZE_T, ULONG_PTR};
 use shared::guiddef::LPCGUID;
@@ -17,7 +16,6 @@ use um::winnt::{
     CONTEXT, HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PAPCFUNC, PHANDLE, PPROCESSOR_NUMBER,
     PROCESS_MITIGATION_POLICY, PVOID
 };
-
 STRUCT!{struct PROCESS_INFORMATION {
     hProcess: HANDLE,
     hThread: HANDLE,

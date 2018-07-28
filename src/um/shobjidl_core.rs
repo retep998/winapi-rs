@@ -4,7 +4,6 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
 use ctypes::{c_int, c_void};
 use shared::guiddef::{REFGUID, REFIID};
 use shared::minwindef::{BOOL, ULONG};
@@ -12,7 +11,6 @@ use shared::windef::{HWND};
 use um::objidl::IBindCtx;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPWSTR};
-
 DEFINE_GUID!{CLSID_TaskbarList,
     0x56fdf344, 0xfd6d, 0x11d0, 0x95, 0x8a, 0x00, 0x60, 0x97, 0xc9, 0xa0, 0x90}
 //4498
@@ -71,7 +69,6 @@ interface IModalWindow(IModalWindowVtbl): IUnknown(IUnknownVtbl) {
 //22307
 //27457
 pub type IShellItemFilter = IUnknown; // TODO
-
 RIDL!{#[uuid(0x56fdf342, 0xfd6d, 0x11d0, 0x95, 0x8a, 0x00, 0x60, 0x97, 0xc9, 0xa0, 0x90)]
 interface ITaskbarList(ITaskbarListVtbl): IUnknown(IUnknownVtbl) {
     fn HrInit() -> HRESULT,

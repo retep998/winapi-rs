@@ -5,13 +5,11 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Declaration of Writer
-
 use shared::minwindef::{BOOL, BYTE, DWORD, FILETIME, UINT};
 use shared::wtypes::BSTR;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::vss::{VSS_ID, VSS_ROLLFORWARD_TYPE};
 use um::winnt::{HRESULT, LPCWSTR, VOID};
-
 ENUM!{enum VSS_USAGE_TYPE {
     VSS_UT_UNDEFINED = 0,
     VSS_UT_BOOTABLESYSTEMSTATE = 1,

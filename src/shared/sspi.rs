@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Security Support Provider Interface Prototypes and structure definitions
-
 use ctypes::{c_char, c_int, c_uchar, c_ulong, c_ushort, c_void};
 use shared::basetsd::{ULONG_PTR};
 use shared::guiddef::GUID;
@@ -16,7 +15,6 @@ use um::winnt::{
     ANYSIZE_ARRAY, BOOLEAN, CHAR, HANDLE, LARGE_INTEGER, LONG, LPSTR, LPWSTR, LUID, PCSTR, PCWSTR,
     PVOID, WCHAR
 };
-
 pub type SEC_WCHAR = WCHAR;
 pub type SEC_CHAR = CHAR;
 pub type SECURITY_STATUS = LONG;

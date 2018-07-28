@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! FFI bindings to psapi.
-
 use shared::guiddef::GUID;
 use shared::minwindef::{
     BOOL, BYTE, DWORD, LPBOOL, LPDWORD, LPVOID, PBOOL, PDWORD, PUCHAR, PULONG, UCHAR, ULONG
@@ -20,7 +19,6 @@ use um::winnt::{
     SECURITY_IMPERSONATION_LEVEL, SECURITY_INFORMATION, TOKEN_INFORMATION_CLASS, TOKEN_TYPE,
     WELL_KNOWN_SID_TYPE
 };
-
 extern "system" {
     pub fn AccessCheck(
         pSecurityDescriptor: PSECURITY_DESCRIPTOR,

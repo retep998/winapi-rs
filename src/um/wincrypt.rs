@@ -6819,7 +6819,6 @@ extern "system" {
 }
 pub const CRYPT_OID_VERIFY_CERTIFICATE_CHAIN_POLICY_FUNC: &'static str
     = "CertDllVerifyCertificateChainPolicy";
-
 pub const CERT_CHAIN_POLICY_BASE: LPCSTR = 1 as LPCSTR;
 pub const CERT_CHAIN_POLICY_AUTHENTICODE: LPCSTR = 2 as LPCSTR;
 pub const CERT_CHAIN_POLICY_AUTHENTICODE_TS: LPCSTR = 3 as LPCSTR;

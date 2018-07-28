@@ -5,11 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
-
 use shared::guiddef::GUID;
 use shared::minwindef::{BYTE, USHORT};
 use um::winnt::LPCWSTR;
-
 STRUCT!{#[repr(packed)] struct SHITEMID {
     cb: USHORT,
     abID: [BYTE; 1],

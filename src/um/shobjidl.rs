@@ -4,7 +4,6 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
 use ctypes::c_void;
 use shared::guiddef::{REFGUID, REFIID};
 use shared::minwindef::{BOOL, DWORD, UINT};
@@ -16,7 +15,6 @@ use um::shobjidl_core::{IModalWindow, IModalWindowVtbl, IShellItem, IShellItemFi
 use um::shtypes::COMDLG_FILTERSPEC;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR, WCHAR};
-
 pub type IFileOperationProgressSink = IUnknown; // TODO
 ENUM!{enum SIATTRIBFLAGS {
     SIATTRIBFLAGS_AND = 0x1,

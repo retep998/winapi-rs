@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Header file for the Service Control Manager
-
 use shared::minwindef::{BOOL, DWORD, LPBYTE, LPDWORD, LPVOID};
 use um::winnt::{
     HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PSECURITY_DESCRIPTOR, PVOID,

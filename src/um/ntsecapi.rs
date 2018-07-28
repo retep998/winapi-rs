@@ -5,7 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! This module defines the Local Security Authority APIs.
-
 use shared::basetsd::{ULONG64, ULONG_PTR};
 use shared::guiddef::GUID;
 use shared::minwindef::{PUCHAR, PULONG, UCHAR, ULONG, USHORT};
@@ -21,7 +20,6 @@ use um::winnt::{
     SID_NAME_USE, STANDARD_RIGHTS_EXECUTE, STANDARD_RIGHTS_READ, STANDARD_RIGHTS_REQUIRED,
     STANDARD_RIGHTS_WRITE, ULONGLONG
 };
-
 DEFINE_GUID!(Audit_System_SecurityStateChange,
     0x0cce9210, 0x69ae, 0x11d9, 0xbe, 0xd3, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30);
 DEFINE_GUID!(Audit_System_SecuritySubsystemExtension,
