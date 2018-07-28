@@ -26,18 +26,18 @@ pub const EVENT_HEADER_EXT_TYPE_PROCESS_START_KEY: USHORT = 0x000D;
 pub const EVENT_HEADER_EXT_TYPE_CONTROL_GUID: USHORT = 0x000E;
 pub const EVENT_HEADER_EXT_TYPE_MAX: USHORT = 0x000F;
 STRUCT!{struct EVENT_HEADER_EXTENDED_DATA_ITEM_s {
-   bitfield: USHORT,
+    bitfield: USHORT,
 }}
 BITFIELD!{EVENT_HEADER_EXTENDED_DATA_ITEM_s bitfield: USHORT [
     Linkage set_Linkage[0..1],
     Reserved2 set_Reserved2[1..16],
 ]}
 STRUCT!{struct EVENT_HEADER_EXTENDED_DATA_ITEM {
-   Reserved1: USHORT,
-   ExtType: USHORT,
-   s: EVENT_HEADER_EXTENDED_DATA_ITEM_s,
-   DataSize: USHORT,
-   DataPtr: ULONGLONG,
+    Reserved1: USHORT,
+    ExtType: USHORT,
+    s: EVENT_HEADER_EXTENDED_DATA_ITEM_s,
+    DataSize: USHORT,
+    DataPtr: ULONGLONG,
 }}
 pub type PEVENT_HEADER_EXTENDED_DATA_ITEM = *mut EVENT_HEADER_EXTENDED_DATA_ITEM;
 STRUCT!{struct EVENT_EXTENDED_ITEM_INSTANCE {
@@ -166,24 +166,26 @@ unsafe fn strnlen(s: PCSTR, max_len: isize) -> isize {
 unsafe fn read_unaligned<T>(src: *const T) -> T {
     use core::{mem, ptr};
     let mut tmp: T = mem::uninitialized();
-    ptr::copy_nonoverlapping(src as *const u8,
-                             &mut tmp as *mut T as *mut u8,
-                             mem::size_of::<T>());
+    ptr::copy_nonoverlapping(
+        src as *const u8,
+        &mut tmp as *mut T as *mut u8,
+        mem::size_of::<T>(),
+    );
     tmp
 }
 #[inline]
 pub unsafe fn EtwGetTraitFromProviderTraits(
-   ProviderTraits: PVOID, TraitType: UCHAR, Trait: *mut PVOID, Size: PUSHORT,
+    ProviderTraits: PVOID, TraitType: UCHAR, Trait: *mut PVOID, Size: PUSHORT,
 ) {
     use core::ptr::null_mut;
-    
+
     let ByteCount = read_unaligned(ProviderTraits as *mut USHORT) as isize;
     let mut Ptr = ProviderTraits as PUCHAR;
     let PtrEnd = Ptr.offset(ByteCount);
     *Trait = null_mut();
     *Size = 0;
     if ByteCount < 3 {
-        return; 
+        return;
     }
     Ptr = Ptr.offset(2);
     Ptr = Ptr.offset(strnlen(Ptr as PCSTR, (ByteCount - 3) as isize));

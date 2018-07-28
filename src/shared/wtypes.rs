@@ -6,7 +6,7 @@
 // except according to those terms.
 //! Mappings for the contents of wstypes.h
 use ctypes::{c_double, c_short, c_ushort, c_void, wchar_t};
-use shared::guiddef::{GUID};
+use shared::guiddef::GUID;
 use shared::minwindef::{BYTE, DWORD, ULONG, USHORT, WORD};
 use shared::ntdef::{LONG, LONGLONG, ULONGLONG};
 use shared::wtypesbase::{FLAGGED_WORD_BLOB, OLECHAR};

@@ -2955,7 +2955,7 @@ extern "system" {
         lpBuffer: PFLOAT,
     ) -> BOOL;
     pub fn GetCharABCWidthsA(
-         hdc: HDC,
+        hdc: HDC,
         wFirst: UINT,
         wLast: UINT,
         lpABC: LPABC,

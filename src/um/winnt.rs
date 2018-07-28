@@ -11,7 +11,7 @@ use shared::basetsd::{
     DWORD64, KAFFINITY, LONG64, LONG_PTR, PDWORD64, PLONG64, SIZE_T, ULONG64, ULONG_PTR,
 };
 use shared::guiddef::{CLSID, GUID};
-use shared::ktmtypes::{UOW};
+use shared::ktmtypes::UOW;
 use shared::minwindef::{BYTE, DWORD, FALSE, PDWORD, TRUE, ULONG, USHORT, WORD};
 use vc::excpt::EXCEPTION_DISPOSITION;
 use vc::vcruntime::size_t;
@@ -4452,7 +4452,7 @@ pub const POWER_DISCONNECTED_STANDBY_MODE_AGGRESSIVE: DWORD = 1;
 DEFINE_GUID!{GUID_ACDC_POWER_SOURCE,
     0x5d3e9a59, 0xe9d5, 0x4b00, 0xa6, 0xbd, 0xff, 0x34, 0xff, 0x51, 0x65, 0x48}
 DEFINE_GUID!{GUID_LIDSWITCH_STATE_CHANGE,
-     0xba3e0f4d, 0xb817, 0x4094, 0xa2, 0xd1, 0xd5, 0x63, 0x79, 0xe6, 0xa0, 0xf3}
+    0xba3e0f4d, 0xb817, 0x4094, 0xa2, 0xd1, 0xd5, 0x63, 0x79, 0xe6, 0xa0, 0xf3}
 DEFINE_GUID!{GUID_BATTERY_PERCENTAGE_REMAINING,
     0xa7ad8041, 0xb45a, 0x4cae, 0x87, 0xa3, 0xee, 0xcb, 0xb4, 0x68, 0xa9, 0xe1}
 DEFINE_GUID!{GUID_BATTERY_COUNT,

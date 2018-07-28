@@ -981,11 +981,11 @@ extern "C" {
         ...
     ) -> ULONG;
     pub fn TraceMessageVa(
-       SessionHandle: TRACEHANDLE,
-       MessageFlags: ULONG,
-       MessageGuid: LPGUID,
-       MessageNumber: USHORT,
-       MessageArgList: va_list,
+        SessionHandle: TRACEHANDLE,
+        MessageFlags: ULONG,
+        MessageGuid: LPGUID,
+        MessageNumber: USHORT,
+        MessageArgList: va_list,
     );
 }
 pub const INVALID_PROCESSTRACE_HANDLE: TRACEHANDLE = INVALID_HANDLE_VALUE as TRACEHANDLE;

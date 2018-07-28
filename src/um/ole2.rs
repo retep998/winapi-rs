@@ -6,7 +6,7 @@
 // except according to those terms.
 use shared::windef::HWND;
 use um::oleidl::LPDROPTARGET;
-use um::winnt::{HRESULT};
+use um::winnt::HRESULT;
 extern "system" {
     pub fn RegisterDragDrop(
         hwnd: HWND,

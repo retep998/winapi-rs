@@ -7,7 +7,7 @@
 use ctypes::{c_float, c_int, c_long, c_void};
 use shared::basetsd::{SIZE_T, UINT64, UINT8};
 use shared::dxgi::{DXGI_SWAP_CHAIN_DESC, IDXGIAdapter, IDXGISwapChain};
-use shared::dxgiformat::{DXGI_FORMAT};
+use shared::dxgiformat::DXGI_FORMAT;
 use shared::dxgitype::{DXGI_RATIONAL, DXGI_SAMPLE_DESC};
 use shared::guiddef::{GUID, REFGUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, HMODULE, INT, UINT, USHORT};

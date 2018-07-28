@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! LSA Policy Lookup API
-use shared::guiddef::{GUID};
+use shared::guiddef::GUID;
 use shared::minwindef::{ULONG, USHORT};
 use shared::ntdef::NTSTATUS;
 use um::winnt::{ACCESS_MASK, HANDLE, LONG, PCHAR, PSID, PVOID, PWSTR, SID_NAME_USE};

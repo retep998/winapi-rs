@@ -6,7 +6,7 @@
 // except according to those terms.
 //! Security Support Provider Interface Prototypes and structure definitions
 use ctypes::{c_char, c_int, c_uchar, c_ulong, c_ushort, c_void};
-use shared::basetsd::{ULONG_PTR};
+use shared::basetsd::ULONG_PTR;
 use shared::guiddef::GUID;
 use shared::minwindef::{PUCHAR, ULONG, USHORT};
 use um::subauth::PUNICODE_STRING;

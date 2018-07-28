@@ -5,9 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of dcommon.h
-use shared::basetsd::{UINT32};
+use shared::basetsd::UINT32;
 use shared::dxgiformat::DXGI_FORMAT;
-use shared::minwindef::{FLOAT};
+use shared::minwindef::FLOAT;
 use shared::windef::{POINT, RECT};
 ENUM!{enum DWRITE_MEASURING_MODE {
     DWRITE_MEASURING_MODE_NATURAL = 0,
