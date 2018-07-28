@@ -2846,6 +2846,22 @@ fn um_dbghelp() {
     assert_eq!(size_of::<IMAGEHLP_LINEW64>(), 40);
     assert_eq!(align_of::<IMAGEHLP_LINEW64>(), 8);
 }
+#[cfg(feature = "devicetopology")] #[test]
+fn um_devicetopology() {
+    use winapi::um::devicetopology::*;
+    assert_eq!(size_of::<KSDATAFORMAT>(), 64);
+    assert_eq!(align_of::<KSDATAFORMAT>(), 4);
+    assert_eq!(size_of::<KSIDENTIFIER_s>(), 24);
+    assert_eq!(align_of::<KSIDENTIFIER_s>(), 4);
+    assert_eq!(size_of::<KSIDENTIFIER>(), 24);
+    assert_eq!(align_of::<KSIDENTIFIER>(), 8);
+    assert_eq!(size_of::<LUID>(), 8);
+    assert_eq!(align_of::<LUID>(), 4);
+    assert_eq!(size_of::<KSJACK_SINK_INFORMATION>(), 96);
+    assert_eq!(align_of::<KSJACK_SINK_INFORMATION>(), 4);
+    assert_eq!(size_of::<KSJACK_DESCRIPTION2>(), 8);
+    assert_eq!(align_of::<KSJACK_DESCRIPTION2>(), 4);
+}
 #[cfg(feature = "docobj")] #[test]
 fn um_docobj() {
     use winapi::um::docobj::*;
