@@ -367,7 +367,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("ws2bth", &["bthdef", "bthsdpdef", "guiddef", "minwindef", "winnt", "ws2def"], &[]),
     ("ws2spi", &["basetsd", "guiddef", "minwindef", "vcruntime", "windef", "winnt", "winsock2", "ws2def", "wtypesbase"], &["ws2_32"]),
     ("ws2tcpip", &["guiddef", "minwinbase", "minwindef", "mstcpip", "vcruntime", "winerror", "winnt", "winsock2", "ws2def", "wtypesbase"], &["fwpuclnt", "ws2_32"]),
-    ("wtsapi32", &["minwindef", "ntdef"], &["wtsapi32"]),
+    ("wtsapi32", &["minwindef", "windef", "winnt"], &["wtsapi32"]),
     ("xinput", &["guiddef", "minwindef", "winnt"], &["xinput"]),
     // vc
     ("excpt", &[], &[]),
