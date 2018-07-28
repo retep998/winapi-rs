@@ -3048,7 +3048,7 @@ extern "system" {
         cbSize: c_int,
     ) -> UINT;
 }
-DECLARE_HANDLE!(HTOUCHINPUT, HTOUCHINPUT__);
+DECLARE_HANDLE!{HTOUCHINPUT, HTOUCHINPUT__}
 STRUCT!{struct TOUCHINPUT {
     x: LONG,
     y: LONG,
@@ -6649,7 +6649,7 @@ extern "system" {
         bGrant: BOOL,
     ) -> BOOL;
 }
-DECLARE_HANDLE!(HRAWINPUT, HRAWINPUT__);
+DECLARE_HANDLE!{HRAWINPUT, HRAWINPUT__}
 #[inline]
 pub fn GET_RAWINPUT_CODE_WPARAM(wParam: WPARAM) -> WPARAM { wParam & 0xff }
 pub const RIM_INPUT: WPARAM = 0;

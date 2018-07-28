@@ -472,7 +472,7 @@ extern "system" {
         Port: PUSHORT,
     ) -> LONG;
 }
-DECLARE_HANDLE!(DL_EUI48, _DL_EUI48);
+DECLARE_HANDLE!{DL_EUI48, _DL_EUI48}
 pub type PDL_EUI48 = *mut DL_EUI48;
 extern "system" {
     pub fn RtlEthernetAddressToStringA(

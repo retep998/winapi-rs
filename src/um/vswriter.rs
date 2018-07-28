@@ -76,8 +76,7 @@ ENUM!{enum VSS_COMPONENT_FLAGS {
     VSS_CF_APP_ROLLBACK_RECOVERY = 0x00000002,
     VSS_CF_NOT_SYSTEM_STATE = 0x00000004,
 }}
-RIDL!(
-#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
+RIDL!{#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
 interface IVssWMFiledesc(IVssWMFiledescVtbl): IUnknown(IUnknownVtbl) {
     fn GetPath(
         pbstrPath: *mut BSTR,
@@ -94,10 +93,8 @@ interface IVssWMFiledesc(IVssWMFiledescVtbl): IUnknown(IUnknownVtbl) {
     fn GetBackupTypeMask(
         pdwTypeMask: *mut DWORD,
     ) -> HRESULT,
-}
-);
-RIDL!(
-#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
+}}
+RIDL!{#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
 interface IVssWMDependency(IVssWMDependencyVtbl): IUnknown(IUnknownVtbl) {
     fn GetWriterId(
         pWriterId: *mut VSS_ID,
@@ -108,10 +105,8 @@ interface IVssWMDependency(IVssWMDependencyVtbl): IUnknown(IUnknownVtbl) {
     fn GetComponentName(
         pbstrComponentName: *mut BSTR,
     ) -> HRESULT,
-}
-);
-RIDL!(
-#[uuid(0xd2c72c96, 0xc121, 0x4518, 0xb6, 0x27, 0xe5, 0xa9, 0x3d, 0x01, 0x0e, 0xad)]
+}}
+RIDL!{#[uuid(0xd2c72c96, 0xc121, 0x4518, 0xb6, 0x27, 0xe5, 0xa9, 0x3d, 0x01, 0x0e, 0xad)]
 interface IVssComponent(IVssComponentVtbl): IUnknown(IUnknownVtbl) {
     fn GetLogicalPath(
         pbstrPath: *mut BSTR,
@@ -261,10 +256,8 @@ interface IVssComponent(IVssComponentVtbl): IUnknown(IUnknownVtbl) {
         pbstrLsnString: *mut BSTR,
         pftLastModifyTime: *mut FILETIME,
     ) -> HRESULT,
-}
-);
-RIDL!(
-#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
+}}
+RIDL!{#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
 interface IVssWriterComponents(IVssWriterComponentsVtbl) {
     fn GetComponentCount(
         pcComponents: *mut UINT,
@@ -277,10 +270,8 @@ interface IVssWriterComponents(IVssWriterComponentsVtbl) {
         iComponent: UINT,
         ppComponent: *mut *mut IVssComponent,
     ) -> HRESULT,
-}
-);
-RIDL!(
-#[uuid(0x156c8b5e, 0xf131, 0x4bd7, 0x9c, 0x97, 0xd1, 0x92, 0x3b, 0xe7, 0xe1, 0xfa)]
+}}
+RIDL!{#[uuid(0x156c8b5e, 0xf131, 0x4bd7, 0x9c, 0x97, 0xd1, 0x92, 0x3b, 0xe7, 0xe1, 0xfa)]
 interface IVssComponentEx(IVssComponentExVtbl): IVssComponent(IVssComponentVtbl) {
     fn SetPrepareForBackupFailureMsg(
         wszFailureMsg: LPCWSTR,
@@ -304,10 +295,8 @@ interface IVssComponentEx(IVssComponentExVtbl): IVssComponent(IVssComponentVtbl)
     fn GetRestoreName(
         pbstrName: *mut BSTR,
     ) -> HRESULT,
-}
-);
-RIDL!(
-#[uuid(0x3b5be0f2, 0x07a9, 0x4e4b, 0xbd, 0xd3, 0xcf, 0xdc, 0x8e, 0x2c, 0x0d, 0x2d)]
+}}
+RIDL!{#[uuid(0x3b5be0f2, 0x07a9, 0x4e4b, 0xbd, 0xd3, 0xcf, 0xdc, 0x8e, 0x2c, 0x0d, 0x2d)]
 interface IVssComponentEx2(IVssComponentEx2Vtbl): IVssComponentEx(IVssComponentExVtbl) {
     fn SetFailure(
         hr: HRESULT,
@@ -321,10 +310,8 @@ interface IVssComponentEx2(IVssComponentEx2Vtbl): IVssComponentEx(IVssComponentE
         pbstrApplicationMessage: *mut BSTR,
         pdwReserved: *mut DWORD,
     ) -> HRESULT,
-}
-);
-RIDL!(
-#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
+}}
+RIDL!{#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
 interface IVssCreateWriterMetadata(IVssCreateWriterMetadataVtbl) {
     fn AddIncludeFiles(
         wszPath: LPCWSTR,
@@ -401,8 +388,7 @@ interface IVssCreateWriterMetadata(IVssCreateWriterMetadataVtbl) {
     fn SaveAsXML(
         pbstrXML: *mut BSTR,
     ) -> HRESULT,
-}
-);
+}}
 //IVssCreateWriterMetadataEx
 //IVssWriterImpl
 //IVssCreateExpressWriterMetadata

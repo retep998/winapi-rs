@@ -13,7 +13,7 @@ STRUCT!{struct COMPOSITIONFORM {
     ptCurrentPos: POINT,
     rcArea: RECT,
 }}
-DECLARE_HANDLE!(HIMC, HIMC__);
+DECLARE_HANDLE!{HIMC, HIMC__}
 pub type LPCOMPOSITIONFORM = *mut COMPOSITIONFORM;
 extern "system" {
     pub fn ImmGetContext(

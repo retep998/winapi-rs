@@ -686,7 +686,7 @@ interface ITypeLib(ITypeLibVtbl): IUnknown(IUnknownVtbl) {
         pTLibAttr: *const TLIBATTR,
     ) -> HRESULT,
 }}
-RIDL!(#[uuid(0x00020401, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x00020401, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeAttr(
         ppTypeAttr: *mut *mut TYPEATTR,
@@ -775,13 +775,12 @@ interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn ReleaseVarDesc(
         pVarDesc: *mut VARDESC,
     ) -> (),
-}
-);
-RIDL!(#[uuid(0x3127ca40, 0x446e, 0x11ce, 0x81, 0x35, 0x00, 0xaa, 0x00, 0x4b, 0xb8, 0x51)]
+}}
+RIDL!{#[uuid(0x3127ca40, 0x446e, 0x11ce, 0x81, 0x35, 0x00, 0xaa, 0x00, 0x4b, 0xb8, 0x51)]
 interface IErrorLog(IErrorLogVtbl): IUnknown(IUnknownVtbl) {
     fn AddError(
         pszPropName: LPCOLESTR,
         pExcepInfo: *const EXCEPINFO,
     ) -> HRESULT,
-});
+}}
 pub type LPERRORLOG = *mut IErrorLog;

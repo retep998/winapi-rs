@@ -32,7 +32,7 @@ pub const GLOBAL_LOGGER_NAME: &'static str = "GlobalLogger";
 pub const EVENT_LOGGER_NAME: &'static str = "EventLog";
 pub const DIAG_LOGGER_NAME: &'static str = "DiagLog";
 pub const MAX_MOF_FIELDS: SIZE_T = 16;
-DECLARE_HANDLE!(TRACEHANDLE, __TRACEHANDLE);
+DECLARE_HANDLE!{TRACEHANDLE, __TRACEHANDLE}
 pub type PTRACEHANDLE = *mut TRACEHANDLE;
 pub const EVENT_TRACE_TYPE_INFO: DWORD = 0x00;
 pub const EVENT_TRACE_TYPE_START: DWORD = 0x01;

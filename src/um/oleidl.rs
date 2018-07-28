@@ -21,8 +21,7 @@ pub const DD_DEFSCROLLINTERVAL: DWORD = 50;
 pub const DD_DEFDRAGDELAY: DWORD = 200;
 pub const DD_DEFDRAGMINDIST: DWORD = 2;
 pub type LPDROPTARGET = *mut IDropTarget;
-RIDL!(
-#[uuid(0x00000122, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x00000122, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IDropTarget(IDropTargetVtbl): IUnknown(IUnknownVtbl) {
     fn DragEnter(
         pDataObj: *const IDataObject,
@@ -42,5 +41,4 @@ interface IDropTarget(IDropTargetVtbl): IUnknown(IUnknownVtbl) {
         pt: *const POINTL,
         pdwEffect: *mut DWORD,
     ) -> HRESULT,
-}
-);
+}}

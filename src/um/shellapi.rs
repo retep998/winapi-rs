@@ -19,7 +19,7 @@ use um::winnt::{
     PZZSTR, PZZWSTR, ULARGE_INTEGER, WCHAR,
 };
 use um::winuser::WM_USER;
-DECLARE_HANDLE!(HDROP, HDROP__);
+DECLARE_HANDLE!{HDROP, HDROP__}
 extern "system" {
     pub fn DragQueryFileA(
         hDrop: HDROP,

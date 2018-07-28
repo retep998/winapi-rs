@@ -34,7 +34,7 @@ ENUM!{enum SICHINTF {
     SICHINT_CANONICAL = 0x10000000,
     SICHINT_TEST_FILESYSPATH_IF_NOT_EQUAL = 0x20000000,
 }}
-RIDL!(#[uuid(0x43826d1e, 0xe718, 0x42ee, 0xbc, 0x55, 0xa1, 0xe2, 0x61, 0xc3, 0x7b, 0xfe)]
+RIDL!{#[uuid(0x43826d1e, 0xe718, 0x42ee, 0xbc, 0x55, 0xa1, 0xe2, 0x61, 0xc3, 0x7b, 0xfe)]
 interface IShellItem(IShellItemVtbl): IUnknown(IUnknownVtbl) {
     fn BindToHandler(
         pbc: *mut IBindCtx,
@@ -58,14 +58,14 @@ interface IShellItem(IShellItemVtbl): IUnknown(IUnknownVtbl) {
         hint: SICHINTF,
         piOrder: *mut c_int,
     ) -> HRESULT,
-});
+}}
 //20869
-RIDL!(#[uuid(0xb4db1657, 0x70d7, 0x485e, 0x8e, 0x3e, 0x6f, 0xcb, 0x5a, 0x5c, 0x18, 0x02)]
+RIDL!{#[uuid(0xb4db1657, 0x70d7, 0x485e, 0x8e, 0x3e, 0x6f, 0xcb, 0x5a, 0x5c, 0x18, 0x02)]
 interface IModalWindow(IModalWindowVtbl): IUnknown(IUnknownVtbl) {
     fn Show(
         hwndOwner: HWND,
     ) -> HRESULT,
-});
+}}
 //22307
 //27457
 pub type IShellItemFilter = IUnknown; // TODO

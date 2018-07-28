@@ -139,7 +139,7 @@ STRUCT!{struct COMSTAT {
     cbInQue: DWORD,
     cbOutQue: DWORD,
 }}
-BITFIELD!(COMSTAT BitFields: DWORD [
+BITFIELD!{COMSTAT BitFields: DWORD [
     fCtsHold set_fCtsHold[0..1],
     fDsrHold set_fDsrHold[1..2],
     fRlsdHold set_fRlsdHold[2..3],
@@ -148,7 +148,7 @@ BITFIELD!(COMSTAT BitFields: DWORD [
     fEof set_fEof[5..6],
     fTxim set_fTxim[6..7],
     fReserved set_fReserved[7..32],
-]);
+]}
 pub type LPCOMSTAT = *mut COMSTAT;
 pub const DTR_CONTROL_DISABLE: DWORD = 0x00;
 pub const DTR_CONTROL_ENABLE: DWORD = 0x01;
@@ -174,7 +174,7 @@ STRUCT!{struct DCB {
     EvtChar: c_char,
     wReserved1: WORD,
 }}
-BITFIELD!(DCB BitFields: DWORD [
+BITFIELD!{DCB BitFields: DWORD [
     fBinary set_fBinary[0..1],
     fParity set_fParity[1..2],
     fOutxCtsFlow set_fOutxCtsFlow[2..3],
@@ -189,7 +189,7 @@ BITFIELD!(DCB BitFields: DWORD [
     fRtsControl set_fRtsControl[12..14],
     fAbortOnError set_fAbortOnError[14..15],
     fDummy2 set_fDummy2[15..32],
-]);
+]}
 pub type LPDCB = *mut DCB;
 STRUCT!{struct COMMTIMEOUTS {
     ReadIntervalTimeout: DWORD,

@@ -25,8 +25,7 @@ STRUCT!{struct BIND_OPTS {
 }}
 pub type LPBIND_OPTS = *mut BIND_OPTS;
 //8479
-RIDL!(
-#[uuid(0x0000000e, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x0000000e, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IBindCtx(IBindCtxVtbl): IUnknown(IUnknownVtbl) {
     fn RegisterObjectBound(
         punk: *mut IUnknown,
@@ -58,11 +57,9 @@ interface IBindCtx(IBindCtxVtbl): IUnknown(IUnknownVtbl) {
     fn RevokeObjectParam(
         pszKey: LPOLESTR,
     ) -> HRESULT,
-}
-);
+}}
 //8681
-RIDL!(
-#[uuid(0x00000102, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x00000102, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IEnumMoniker(IEnumMonikerVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
@@ -76,11 +73,9 @@ interface IEnumMoniker(IEnumMonikerVtbl): IUnknown(IUnknownVtbl) {
     fn Clone(
         ppenum: *mut *mut IEnumMoniker,
     ) -> HRESULT,
-}
-);
+}}
 //8958
-RIDL!(
-#[uuid(0x00000010, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x00000010, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IRunningObjectTable(IRunningObjectTableVtbl): IUnknown(IUnknownVtbl) {
     fn Register(
         grfFlags: DWORD,
@@ -109,20 +104,16 @@ interface IRunningObjectTable(IRunningObjectTableVtbl): IUnknown(IUnknownVtbl) {
     fn EnumRunning(
         ppenumMoniker: *mut *mut IEnumMoniker,
     ) -> HRESULT,
-}
-);
+}}
 //9125
-RIDL!(
-#[uuid(0x0000010c, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x0000010c, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IPersist(IPersistVtbl): IUnknown(IUnknownVtbl) {
     fn GetClassID(
         pClassID: *mut CLSID,
     ) -> HRESULT,
-}
-);
+}}
 //9207
-RIDL!(
-#[uuid(0x00000109, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x00000109, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IPersistStream(IPersistStreamVtbl): IPersist(IPersistVtbl) {
     fn IsDirty() -> HRESULT,
     fn Load(
@@ -135,11 +126,9 @@ interface IPersistStream(IPersistStreamVtbl): IPersist(IPersistVtbl) {
     fn GetSizeMax(
         pcbSize: *mut ULARGE_INTEGER,
     ) -> HRESULT,
-}
-);
+}}
 //9350
-RIDL!(
-#[uuid(0x0000000f, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x0000000f, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IMoniker(IMonikerVtbl): IPersistStream(IPersistStreamVtbl) {
     fn BindToObject(
         pbc: *mut IBindCtx,
@@ -210,8 +199,7 @@ interface IMoniker(IMonikerVtbl): IPersistStream(IPersistStreamVtbl) {
     fn IsSystemMoniker(
         pdwMksys: *mut DWORD,
     ) -> HRESULT,
-}
-);
+}}
 ENUM!{enum EOLE_AUTHENTICATION_CAPABILITIES {
     EOAC_NONE = 0,
     EOAC_MUTUAL_AUTH = 0x1,
@@ -435,8 +423,7 @@ ENUM!{enum DATADIR {
     DATADIR_SET = 2,
 }}
 pub type LPDATAOBJECT = *mut IDataObject;
-RIDL!(
-#[uuid(0x0000010e, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x0000010e, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IDataObject(IDataObjectVtbl): IUnknown(IUnknownVtbl) {
     fn GetData(
         pformatetcIn: *const FORMATETC,
@@ -474,18 +461,14 @@ interface IDataObject(IDataObjectVtbl): IUnknown(IUnknownVtbl) {
     fn EnumDAdvise(
         ppenumAdvise: *const *const IEnumSTATDATA,
     ) -> HRESULT,
-}
-);
-RIDL!(
-#[uuid(0xa2f05a09, 0x27a2, 0x42b5, 0xbc, 0x0e, 0xac, 0x16, 0x3e, 0xf4, 0x9d, 0x9b)]
+}}
+RIDL!{#[uuid(0xa2f05a09, 0x27a2, 0x42b5, 0xbc, 0x0e, 0xac, 0x16, 0x3e, 0xf4, 0x9d, 0x9b)]
 interface IApartmentShutdown(IApartmentShutdownVtbl): IUnknown(IUnknownVtbl) {
     fn OnUninitialize(
         ui64ApartmentIdentifier: UINT64,
     ) -> (),
-}
-);
-RIDL!(
-#[uuid(0x00000003, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+}}
+RIDL!{#[uuid(0x00000003, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IMarshal(IMarshalVtbl): IUnknown(IUnknownVtbl) {
     fn GetUnmarshalClass(
         riid: REFIID,
@@ -522,5 +505,4 @@ interface IMarshal(IMarshalVtbl): IUnknown(IUnknownVtbl) {
     fn DisconnectObject(
         dwReserved: DWORD,
     ) -> HRESULT,
-}
-);
+}}
