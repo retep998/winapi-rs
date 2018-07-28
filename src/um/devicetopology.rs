@@ -190,8 +190,7 @@ interface IPerChannelDbLevel(IPerChannelDbLevelVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x7fb7b48f, 0x531d, 0x44a2, 0xbc, 0xb3, 0x5a, 0xd5, 0xa1, 0x34, 0xb3, 0xdc)]
-interface IAudioVolumeLevel(IAudioVolumeLevelVtbl): IPerChannelDbLevel(IPerChannelDbLevelVtbl) {}
-}
+interface IAudioVolumeLevel(IAudioVolumeLevelVtbl): IPerChannelDbLevel(IPerChannelDbLevelVtbl) {}}
 RIDL!{#[uuid(0xbb11c46f, 0xec28, 0x493c, 0xb8, 0x8a, 0x5d, 0xb8, 0x80, 0x62, 0xce, 0x98)]
 interface IAudioChannelConfig(IAudioChannelConfigVtbl): IUnknown(IUnknownVtbl) {
     fn SetChannelConfig(
@@ -243,14 +242,11 @@ interface IAudioMute(IAudioMuteVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0xa2b1a1d9, 0x4db3, 0x425d, 0xa2, 0xb2, 0xbd, 0x33, 0x5c, 0xb3, 0xe2, 0xe5)]
-interface IAudioBass(IAudioBassVtbl): IPerChannelDbLevel(IPerChannelDbLevelVtbl) {}
-}
+interface IAudioBass(IAudioBassVtbl): IPerChannelDbLevel(IPerChannelDbLevelVtbl) {}}
 RIDL!{#[uuid(0x5e54b6d7, 0xb44b, 0x40d9, 0x9a, 0x9e, 0xe6, 0x91, 0xd9, 0xce, 0x6e, 0xdf)]
-interface IAudioMidrange(IAudioMidrangeVtbl): IPerChannelDbLevel(IPerChannelDbLevelVtbl) {}
-}
+interface IAudioMidrange(IAudioMidrangeVtbl): IPerChannelDbLevel(IPerChannelDbLevelVtbl) {}}
 RIDL!{#[uuid(0x0a717812, 0x694e, 0x4907, 0xb7, 0x4b, 0xba, 0xfa, 0x5c, 0xfd, 0xca, 0x7b)]
-interface IAudioTreble(IAudioTrebleVtbl): IPerChannelDbLevel(IPerChannelDbLevelVtbl) {}
-}
+interface IAudioTreble(IAudioTrebleVtbl): IPerChannelDbLevel(IPerChannelDbLevelVtbl) {}}
 RIDL!{#[uuid(0x85401fd4, 0x6de4, 0x4b9d, 0x98, 0x69, 0x2d, 0x67, 0x53, 0xa8, 0x2f, 0x3c)]
 interface IAudioAutoGainControl(IAudioAutoGainControlVtbl): IUnknown(IUnknownVtbl) {
     fn GetEnabled(
@@ -416,8 +412,7 @@ interface IConnector(IConnectorVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x82149a85, 0xdba6, 0x4487, 0x86, 0xbb, 0xea, 0x8f, 0x7f, 0xef, 0xcc, 0x71)]
-interface ISubunit(ISubunitVtbl): IUnknown(IUnknownVtbl) {}
-}
+interface ISubunit(ISubunitVtbl): IUnknown(IUnknownVtbl) {}}
 RIDL!{#[uuid(0x45d37c3f, 0x5140, 0x444a, 0xae, 0x24, 0x40, 0x07, 0x89, 0xf3, 0xcb, 0xf3)]
 interface IControlInterface(IControlInterfaceVtbl): IUnknown(IUnknownVtbl) {
     fn GetName(
