@@ -5,9 +5,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use shared::windef::HWND;
+use shared::minwindef::LPVOID;
 use um::oleidl::LPDROPTARGET;
 use um::winnt::HRESULT;
-use shared::minwindef::LPVOID;
 extern "system" {
     pub fn OleInitialize(
         pvReserved: LPVOID
