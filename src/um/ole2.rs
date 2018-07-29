@@ -7,7 +7,11 @@
 use shared::windef::HWND;
 use um::oleidl::LPDROPTARGET;
 use um::winnt::HRESULT;
+use shared::minwindef::LPVOID;
 extern "system" {
+    pub fn OleInitialize(
+        pvReserved: LPVOID
+    ) -> HRESULT;
     pub fn RegisterDragDrop(
         hwnd: HWND,
         pDropTarget: LPDROPTARGET,
