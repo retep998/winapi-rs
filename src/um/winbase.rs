@@ -1123,61 +1123,61 @@ pub enum PROC_THREAD_ATTRIBUTE_NUM {
 }
 macro_rules! ProcThreadAttributeValue {
     ($Number:path, $Thread:ident, $Input:ident, $Additive:ident) => {
-        (($Number as DWORD) & PROC_THREAD_ATTRIBUTE_NUMBER) |
-            (($Thread & 1) as DWORD * PROC_THREAD_ATTRIBUTE_THREAD) |
-            (($Input & 1) as DWORD * PROC_THREAD_ATTRIBUTE_INPUT) |
-            (($Additive & 1) as DWORD * PROC_THREAD_ATTRIBUTE_ADDITIVE)
+        ((($Number as DWORD) & PROC_THREAD_ATTRIBUTE_NUMBER) |
+            ((($Thread & 1) as DWORD) * PROC_THREAD_ATTRIBUTE_THREAD) |
+            ((($Input & 1) as DWORD) * PROC_THREAD_ATTRIBUTE_INPUT) |
+            ((($Additive & 1) as DWORD) * PROC_THREAD_ATTRIBUTE_ADDITIVE)) as DWORD_PTR
     }
 }
-pub const PROC_THREAD_ATTRIBUTE_PARENT_PROCESS: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_PARENT_PROCESS: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributeParentProcess,
     FALSE,
     TRUE,
     FALSE
 );
-pub const PROC_THREAD_ATTRIBUTE_HANDLE_LIST: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_HANDLE_LIST: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributeHandleList,
     FALSE,
     TRUE,
     FALSE
 );
-pub const PROC_THREAD_ATTRIBUTE_GROUP_AFFINITY: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_GROUP_AFFINITY: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributeGroupAffinity,
     TRUE,
     TRUE,
     FALSE
 );
-pub const PROC_THREAD_ATTRIBUTE_PREFERRED_NODE: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_PREFERRED_NODE: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributePreferredNode,
     FALSE,
     TRUE,
     FALSE
 );
-pub const PROC_THREAD_ATTRIBUTE_IDEAL_PROCESSOR: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_IDEAL_PROCESSOR: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributeIdealProcessor,
     TRUE,
     TRUE,
     FALSE
 );
-pub const PROC_THREAD_ATTRIBUTE_UMS_THREAD: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_UMS_THREAD: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributeUmsThread,
     TRUE,
     TRUE,
     FALSE
 );
-pub const PROC_THREAD_ATTRIBUTE_MITIGATION_POLICY: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_MITIGATION_POLICY: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributeMitigationPolicy,
     FALSE,
     TRUE,
     FALSE
 );
-pub const PROC_THREAD_ATTRIBUTE_SECURITY_CAPABILITIES: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_SECURITY_CAPABILITIES: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributeSecurityCapabilities,
     FALSE,
     TRUE,
     FALSE
 );
-pub const PROC_THREAD_ATTRIBUTE_PROTECTION_LEVEL: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_PROTECTION_LEVEL: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributeProtectionLevel,
     FALSE,
     TRUE,
@@ -1271,7 +1271,7 @@ pub const PROCESS_CREATION_MITIGATION_POLICY2_MODULE_TAMPERING_PROTECTION_DEFER:
 pub const PROCESS_CREATION_MITIGATION_POLICY2_MODULE_TAMPERING_PROTECTION_ALWAYS_ON: DWORD64 = (0x00000001 << 12);
 pub const PROCESS_CREATION_MITIGATION_POLICY2_MODULE_TAMPERING_PROTECTION_ALWAYS_OFF: DWORD64 = (0x00000002 << 12);
 pub const PROCESS_CREATION_MITIGATION_POLICY2_MODULE_TAMPERING_PROTECTION_NOINHERIT: DWORD64 = (0x00000003 << 12);
-pub const PROC_THREAD_ATTRIBUTE_JOB_LIST: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_JOB_LIST: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributeJobList,
     FALSE,
     TRUE,
@@ -1280,20 +1280,20 @@ pub const PROC_THREAD_ATTRIBUTE_JOB_LIST: DWORD = ProcThreadAttributeValue!(
 pub const PROCESS_CREATION_CHILD_PROCESS_RESTRICTED: DWORD = (0x01);
 pub const PROCESS_CREATION_CHILD_PROCESS_OVERRIDE: DWORD = 0x02;
 pub const PROCESS_CREATION_CHILD_PROCESS_RESTRICTED_UNLESS_SECURE: DWORD = 0x04;
-pub const PROC_THREAD_ATTRIBUTE_CHILD_PROCESS_POLICY: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_CHILD_PROCESS_POLICY: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributeChildProcessPolicy,
     FALSE,
     TRUE,
     FALSE
 );
 pub const PROCESS_CREATION_ALL_APPLICATION_PACKAGES_OPT_OUT: DWORD = 0x01;
-pub const PROC_THREAD_ATTRIBUTE_ALL_APPLICATION_PACKAGES_POLICY: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_ALL_APPLICATION_PACKAGES_POLICY: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributeAllApplicationPackagesPolicy,
     FALSE,
     TRUE,
     FALSE
 );
-pub const PROC_THREAD_ATTRIBUTE_WIN32K_FILTER: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_WIN32K_FILTER: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributeWin32kFilter,
     FALSE,
     TRUE,
@@ -1302,7 +1302,7 @@ pub const PROC_THREAD_ATTRIBUTE_WIN32K_FILTER: DWORD = ProcThreadAttributeValue!
 pub const PROCESS_CREATION_DESKTOP_APP_BREAKAWAY_ENABLE_PROCESS_TREE: DWORD = 0x01;
 pub const PROCESS_CREATION_DESKTOP_APP_BREAKAWAY_DISABLE_PROCESS_TREE: DWORD = 0x02;
 pub const PROCESS_CREATION_DESKTOP_APP_BREAKAWAY_OVERRIDE: DWORD = 0x04;
-pub const PROC_THREAD_ATTRIBUTE_DESKTOP_APP_POLICY: DWORD = ProcThreadAttributeValue!(
+pub const PROC_THREAD_ATTRIBUTE_DESKTOP_APP_POLICY: DWORD_PTR = ProcThreadAttributeValue!(
     PROC_THREAD_ATTRIBUTE_NUM::ProcThreadAttributeDesktopAppPolicy,
     FALSE,
     TRUE,
