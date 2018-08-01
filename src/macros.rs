@@ -388,3 +388,9 @@ macro_rules! FN {
         pub type $func = Option<unsafe extern "C" fn($($p: $t,)*) -> $ret>;
     );
 }
+#[macro_export]
+macro_rules! FIELD_OFFSET {
+    ($type:ident, $field:ident) => {
+        unsafe { &(*$crate::_core::ptr::null::<$type>()).$field as *const _ as usize }
+    };
+}
