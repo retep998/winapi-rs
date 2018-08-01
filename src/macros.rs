@@ -390,7 +390,7 @@ macro_rules! FN {
 }
 #[macro_export]
 macro_rules! FIELD_OFFSET {
-    ($type:ident, $field:ident) => {
-        unsafe { &(*$crate::_core::ptr::null::<$type>()).$field as *const _ as usize }
+    ($_type:ident, $field:ident) => {
+        unsafe { &(*$crate::_core::ptr::null::<$_type>()).$field as *const _ as usize }
     };
 }
