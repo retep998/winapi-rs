@@ -420,7 +420,7 @@ STRUCT!{struct URB_CONTROL_TRANSFER {
     hca: URB_HCD_AREA,
     SetupPacket: [UCHAR; 8],
 }}
-#[cfg(target_arch = "x86_64")]
+#[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
 STRUCT!{struct URB_CONTROL_TRANSFER_EX {
     Hdr: URB_HEADER,
     PipeHandle: USBD_PIPE_HANDLE,

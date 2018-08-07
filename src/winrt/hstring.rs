@@ -14,7 +14,7 @@ UNION!{union HSTRING_HEADER_Reserved {
     Reserved1 Reserved1_mut: PVOID,
     Reserved2 Reserved2_mut: [c_char; 20],
 }}
-#[cfg(target_arch = "x86_64")]
+#[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
 UNION!{union HSTRING_HEADER_Reserved {
     [u64; 3],
     Reserved1 Reserved1_mut: PVOID,
