@@ -214,7 +214,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("lowlevelmonitorconfigurationapi", &["minwindef", "physicalmonitorenumerationapi", "winnt"], &["dxva2"]),
     ("lsalookup", &["guiddef", "minwindef", "ntdef", "winnt"], &["advapi32"]),
     ("memoryapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
-    ("mfapi", &["basetsd", "mfobjects", "minwindef", "winnt"], &["mfplat"]),
+    ("mfapi", &["basetsd", "d3d9types", "mfobjects", "minwindef", "winnt"], &["mfplat"]),
     ("mfidl", &["basetsd", "guiddef", "mfobjects", "minwindef", "propidl", "unknwnbase", "winnt"], &["mf"]),
     ("mfobjects", &["basetsd", "guiddef", "minwindef", "propidl", "unknwnbase", "winnt", "wtypes"], &[]),
     ("mfreadwrite", &["guiddef", "mfidl", "mfobjects", "minwindef", "ntdef", "propidl", "unknwnbase"], &["mfreadwrite"]),
