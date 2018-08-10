@@ -626,7 +626,69 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
 // IEnumVARIANT
 // IEnumVARIANT_RemoteNext_Proxy
 // IEnumVARIANT_RemoteNext_Stub
-pub enum IRecordInfo {} // FIXME
+RIDL!{#[uuid(0x0000002F, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl){
+    fn RecordInit(
+        pvNew: PVOID, 
+    ) -> HRESULT,
+    fn RecordClear(
+        pvExisting: PVOID,
+    ) -> HRESULT,
+    fn RecordCopy(
+        pvExisting: PVOID, 
+        pvNew: PVOID,
+    ) -> HRESULT,
+    fn GetGuid(
+        pguid: *mut GUID, 
+    ) -> HRESULT, 
+    fn GetName(
+        pbstrName: *mut BSTR,
+    ) -> HRESULT,
+    fn GetSize(
+        pcbSize: *mut ULONG,
+    ) -> HRESULT,
+    fn GetTypeInfo(
+        ppTypeInfo: *mut *mut ITypeInfo,
+    ) -> HRESULT,
+    fn GetField(
+        pvData: PVOID, 
+        szFieldName: LPCOLESTR, 
+        pvarField: LPVARIANT,
+    ) -> HRESULT,
+    fn GetFieldNoCopy(
+        pvData: PVOID, 
+        szFieldName: LPCOLESTR, 
+        pvarField: LPVARIANT, 
+        ppvDataCArray: *mut PVOID, 
+    ) -> HRESULT,
+    fn PutField(
+        wFlags: ULONG, 
+        pvData: PVOID, 
+        szFieldName: LPCOLESTR, 
+        pvarField: LPVARIANT,
+    ) -> HRESULT,
+    fn PutFieldNoCopy(
+        wFlags: ULONG, 
+        pvData: PVOID, 
+        szFieldName: LPCOLESTR, 
+        pvarField: LPVARIANT,
+    ) -> HRESULT,
+    fn GetFieldNames(
+        pcNames: *mut ULONG,
+        rgBstrNames: *mut BSTR,
+    ) -> HRESULT,
+    fn IsMatchingType(
+        pRecordInfo: *mut IRecordInfo, 
+    ) -> HRESULT,
+    fn RecordCreate() -> PVOID,
+    fn RecordCreateCopy(
+        pvSource: PVOID, 
+        ppvDest: *mut PVOID,
+    ) -> HRESULT, 
+    fn RecordDestroy(
+        pvRecord: PVOID,
+    ) -> HRESULT,
+}}
 pub enum ITypeComp {} // FIXME
 ENUM!{enum SYSKIND {
     SYS_WIN16 = 0,
