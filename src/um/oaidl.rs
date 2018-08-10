@@ -653,25 +653,25 @@ interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl){
     fn GetField(
         pvData: PVOID, 
         szFieldName: LPCOLESTR, 
-        pvarField: LPVARIANT,
+        pvarField: *mut VARIANT,
     ) -> HRESULT,
     fn GetFieldNoCopy(
         pvData: PVOID, 
         szFieldName: LPCOLESTR, 
-        pvarField: LPVARIANT, 
+        pvarField: *mut VARIANT, 
         ppvDataCArray: *mut PVOID, 
     ) -> HRESULT,
     fn PutField(
         wFlags: ULONG, 
         pvData: PVOID, 
         szFieldName: LPCOLESTR, 
-        pvarField: LPVARIANT,
+        pvarField: *mut VARIANT,
     ) -> HRESULT,
     fn PutFieldNoCopy(
         wFlags: ULONG, 
         pvData: PVOID, 
         szFieldName: LPCOLESTR, 
-        pvarField: LPVARIANT,
+        pvarField: *mut VARIANT,
     ) -> HRESULT,
     fn GetFieldNames(
         pcNames: *mut ULONG,
@@ -679,7 +679,7 @@ interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl){
     ) -> HRESULT,
     fn IsMatchingType(
         pRecordInfo: *mut IRecordInfo, 
-    ) -> HRESULT,
+    ) -> BOOL,
     fn RecordCreate() -> PVOID,
     fn RecordCreateCopy(
         pvSource: PVOID, 
