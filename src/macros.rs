@@ -253,7 +253,7 @@ macro_rules! UNION {
         $($variant:ident $variant_mut:ident: $ftype:ty,)+
     }) => (
         #[repr(C)] $(#[$attrs])*
-        pub struct $name([$stype; $ssize]);
+        pub struct $name(pub [$stype; $ssize]);
         impl Copy for $name {}
         impl Clone for $name {
             #[inline]
@@ -280,9 +280,9 @@ macro_rules! UNION {
         $($variant:ident $variant_mut:ident: $ftype:ty,)+
     }) => (
         #[repr(C)] $(#[$attrs])* #[cfg(target_arch = "x86")]
-        pub struct $name([$stype32; $ssize32]);
+        pub struct $name(pub [$stype32; $ssize32]);
         #[repr(C)] $(#[$attrs])* #[cfg(target_arch = "x86_64")]
-        pub struct $name([$stype64; $ssize64]);
+        pub struct $name(pub [$stype64; $ssize64]);
         impl Copy for $name {}
         impl Clone for $name {
             #[inline]
