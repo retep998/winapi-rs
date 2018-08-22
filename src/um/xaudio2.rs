@@ -230,7 +230,7 @@ interface IXAudio2(IXAudio2Vtbl): IUnknown(IUnknownVtbl) {
         pReserved: *mut c_void,
     ) -> (),
 }}
-RIDL!{
+RIDL!{#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
 interface IXAudio2Voice(IXAudio2VoiceVtbl) {
     fn GetVoiceDetails(
         pVoiceDetails: *mut XAUDIO2_VOICE_DETAILS,
@@ -311,7 +311,7 @@ interface IXAudio2Voice(IXAudio2VoiceVtbl) {
     ) -> (),
     fn DestroyVoice() -> (),
 }}
-RIDL!{
+RIDL!{#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
 interface IXAudio2SourceVoice(IXAudio2SourceVoiceVtbl): IXAudio2Voice(IXAudio2VoiceVtbl) {
     fn Start(
         Flags: UINT32,
@@ -345,16 +345,16 @@ interface IXAudio2SourceVoice(IXAudio2SourceVoiceVtbl): IXAudio2Voice(IXAudio2Vo
         NewSourceSampleRate: UINT32,
     ) -> HRESULT,
 }}
-RIDL!{
+RIDL!{#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
 interface IXAudio2SubmixVoice(IXAudio2SubmixVoiceVtbl): IXAudio2Voice(IXAudio2VoiceVtbl) {
 }}
-RIDL!{
+RIDL!{#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
 interface IXAudio2MasteringVoice(IXAudio2MasteringVoiceVtbl): IXAudio2Voice(IXAudio2VoiceVtbl) {
     fn GetChannelMask(
         pChannelmask: *mut DWORD,
     ) -> HRESULT,
 }}
-RIDL!{
+RIDL!{#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
 interface IXAudio2EngineCallback(IXAudio2EngineCallbackVtbl) {
     fn OnProcessingPassStart() -> (),
     fn OnProcessingPassEnd() -> (),
@@ -362,7 +362,7 @@ interface IXAudio2EngineCallback(IXAudio2EngineCallbackVtbl) {
         Error: HRESULT,
     ) -> (),
 }}
-RIDL!{
+RIDL!{#[uuid(0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)]
 interface IXAudio2VoiceCallback(IXAudio2VoiceCallbackVtbl) {
     fn OnVoiceProcessingPassStart(
         BytesRequired: UINT32,

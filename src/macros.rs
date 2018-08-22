@@ -129,7 +129,8 @@ macro_rules! MAKEINTRESOURCE {
 }
 #[macro_export]
 macro_rules! RIDL {
-    (interface $interface:ident ($vtbl:ident) {$(
+    (#[uuid($($uuid:expr),+)]
+    interface $interface:ident ($vtbl:ident) {$(
         $(#[$($attrs:tt)*])* fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
     )+}) => (
         RIDL!{@vtbl $interface $vtbl () $(
@@ -142,8 +143,10 @@ macro_rules! RIDL {
         impl $interface {
             $(RIDL!{@method $(#[$($attrs)*])* fn $method($($p: $t,)*) -> $rtr})+
         }
+        RIDL!{@uuid $interface $($uuid),+}
     );
-    (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {
+    (#[uuid($($uuid:expr),+)]
+    interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {
     }) => (
         RIDL!{@vtbl $interface $vtbl (pub parent: $pvtbl,)}
         #[repr(C)]
@@ -151,8 +154,10 @@ macro_rules! RIDL {
             pub lpVtbl: *const $vtbl,
         }
         RIDL!{@deref $interface $pinterface}
+        RIDL!{@uuid $interface $($uuid),+}
     );
-    (interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
+    (#[uuid($($uuid:expr),+)]
+    interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
         $(#[$($attrs:tt)*])* fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
     )+}) => (
         RIDL!{@vtbl $interface $vtbl (pub parent: $pvtbl,) $(
@@ -166,29 +171,6 @@ macro_rules! RIDL {
             $(RIDL!{@method $(#[$($attrs)*])* fn $method($($p: $t,)*) -> $rtr})+
         }
         RIDL!{@deref $interface $pinterface}
-    );
-    (#[uuid($($uuid:expr),+)]
-    interface $interface:ident ($vtbl:ident) {$(
-        $(#[$($attrs:tt)*])* fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
-    )+}) => (
-        RIDL!{interface $interface ($vtbl) {$(
-           $(#[$($attrs)*])* fn $method($($p: $t,)*) -> $rtr,
-        )+}}
-        RIDL!{@uuid $interface $($uuid),+}
-    );
-    (#[uuid($($uuid:expr),+)]
-    interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {
-    }) => (
-        RIDL!{interface $interface($vtbl): $pinterface($pvtbl) {}}
-        RIDL!{@uuid $interface $($uuid),+}
-    );
-    (#[uuid($($uuid:expr),+)]
-    interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
-        $(#[$($attrs:tt)*])* fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
-    )+}) => (
-        RIDL!{interface $interface ($vtbl): $pinterface($pvtbl) {$(
-           $(#[$($attrs)*])* fn $method($($p: $t,)*) -> $rtr,
-        )+}}
         RIDL!{@uuid $interface $($uuid),+}
     );
     (@deref $interface:ident $pinterface:ident) => (
