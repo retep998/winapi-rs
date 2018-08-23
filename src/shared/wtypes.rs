@@ -12,35 +12,36 @@ use shared::rpcndr::byte;
 use shared::wtypesbase::{
     BYTE_BLOB, DWORD_BLOB, FLAGGED_BYTE_BLOB, FLAGGED_WORD_BLOB, LPOLESTR, OLECHAR
 };
+use um::wingdi::LOGPALETTE;
 // extern RPC_IF_HANDLE __MIDL_itf_wtypes_0000_0000_v0_0_c_ifspec;
 // extern RPC_IF_HANDLE __MIDL_itf_wtypes_0000_0000_v0_0_s_ifspec;
 STRUCT!{struct RemHGLOBAL {
     fNullHGlobal: LONG,
     cbData: ULONG,
-    data: [byte; 1],
+    data: [byte; 0],
 }}
 STRUCT!{struct RemHMETAFILEPICT {
     mm: LONG,
     xExt: LONG,
     yExt: LONG,
     cbData: ULONG,
-    data: [byte; 1],
+    data: [byte; 0],
 }}
 STRUCT!{struct RemHENHMETAFILE {
     cbData: ULONG,
-    data: [byte; 1],
+    data: [byte; 0],
 }}
 STRUCT!{struct RemHBITMAP {
     cbData: ULONG,
-    data: [byte; 1],
+    data: [byte; 0],
 }}
 STRUCT!{struct RemHPALETTE {
     cbData: ULONG,
-    data: [byte; 1],
+    data: [byte; 0],
 }}
 STRUCT!{struct RemHBRUSH {
     cbData: ULONG,
-    data: [byte; 1],
+    data: [byte; 0],
 }}
 pub const ROTFLAGS_REGISTRATIONKEEPSALIVE: DWORD = 0x1;
 pub const ROTFLAGS_ALLOWANYCLIENT: DWORD = 0x2;
@@ -93,7 +94,7 @@ STRUCT!{struct GDI_NONREMOTE {
     u: GDI_NONREMOTE_u,
 }}
 UNION!{union userHGLOBAL_u {
-    [u64; 1],
+    [__int64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut FLAGGED_BYTE_BLOB,
     hInproc64 hInproc64_mut: __int64,
@@ -104,7 +105,7 @@ STRUCT!{struct userHGLOBAL {
 }}
 pub type wireHGLOBAL = *mut userHGLOBAL;
 UNION!{union userHMETAFILE_u {
-    [u64; 1],
+    [__int64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut BYTE_BLOB,
     hInproc64 hInproc64_mut: __int64,
@@ -120,7 +121,7 @@ STRUCT!{struct remoteMETAFILEPICT {
     hMF: *mut userHMETAFILE,
 }}
 UNION!{union userHMETAFILEPICT_u {
-    [u64; 1],
+    [__int64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut remoteMETAFILEPICT,
     hInproc64 hInproc64_mut: __int64,
@@ -130,7 +131,7 @@ STRUCT!{struct userHMETAFILEPICT {
     u: userHMETAFILEPICT_u,
 }}
 UNION!{union userHENHMETAFILE_u {
-    [u64; 1],
+    [__int64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut BYTE_BLOB,
     hInproc64 hInproc64_mut: __int64,
@@ -147,10 +148,10 @@ STRUCT!{struct userBITMAP {
     bmPlanes: WORD,
     bmBitsPixel: WORD,
     cbSize: ULONG,
-    pBuffer: [byte; 1],
+    pBuffer: [byte; 0],
 }}
 UNION!{union userHBITMAP_u {
-    [u64; 1],
+    [__int64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut userBITMAP,
     hInproc64 hInproc64_mut: __int64,
@@ -160,10 +161,9 @@ STRUCT!{struct userHBITMAP {
     u: userHBITMAP_u,
 }}
 UNION!{union userHPALETTE_u {
-    [u64; 1],
+    [__int64; 1],
     hInproc hInproc_mut: LONG,
-    // LOGPALETTE from wingdi.h
-    hRemote hRemote_mut: *mut c_void,
+    hRemote hRemote_mut: *mut LOGPALETTE,
     hInproc64 hInproc64_mut: __int64,
 }}
 STRUCT!{struct userHPALETTE {
@@ -171,7 +171,7 @@ STRUCT!{struct userHPALETTE {
     u: userHPALETTE_u,
 }}
 UNION!{union RemotableHandle_u {
-    [usize; 1],
+    [LONG; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut DWORD_BLOB,
 }}
@@ -297,7 +297,6 @@ STRUCT!{struct PROPERTYKEY {
     fmtid: GUID,
     pid: DWORD,
 }}
-pub type HMETAFILEPICT = *mut c_void;
 STRUCT!{struct CSPLATFORM {
     dwPlatformId: DWORD,
     dwVersionHi: DWORD,
