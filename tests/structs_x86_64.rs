@@ -5369,6 +5369,12 @@ fn um_shtypes() {
     assert_eq!(align_of::<SHITEMID>(), 1);
     assert_eq!(size_of::<ITEMIDLIST>(), 3);
     assert_eq!(align_of::<ITEMIDLIST>(), 1);
+    assert_eq!(size_of::<STRRET_u>(), 264);
+    assert_eq!(align_of::<STRRET_u>(), 8);
+    assert_eq!(size_of::<STRRET>(), 272);
+    assert_eq!(align_of::<STRRET>(), 8);
+    assert_eq!(size_of::<SHELLDETAILS>(), 280);
+    assert_eq!(align_of::<SHELLDETAILS>(), 1);
     assert_eq!(size_of::<COMDLG_FILTERSPEC>(), 16);
     assert_eq!(align_of::<COMDLG_FILTERSPEC>(), 8);
 }
