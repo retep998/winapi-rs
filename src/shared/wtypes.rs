@@ -18,30 +18,30 @@ use um::wingdi::LOGPALETTE;
 STRUCT!{struct RemHGLOBAL {
     fNullHGlobal: LONG,
     cbData: ULONG,
-    data: [byte; 0],
+    data: [byte; 1],
 }}
 STRUCT!{struct RemHMETAFILEPICT {
     mm: LONG,
     xExt: LONG,
     yExt: LONG,
     cbData: ULONG,
-    data: [byte; 0],
+    data: [byte; 1],
 }}
 STRUCT!{struct RemHENHMETAFILE {
     cbData: ULONG,
-    data: [byte; 0],
+    data: [byte; 1],
 }}
 STRUCT!{struct RemHBITMAP {
     cbData: ULONG,
-    data: [byte; 0],
+    data: [byte; 1],
 }}
 STRUCT!{struct RemHPALETTE {
     cbData: ULONG,
-    data: [byte; 0],
+    data: [byte; 1],
 }}
 STRUCT!{struct RemHBRUSH {
     cbData: ULONG,
-    data: [byte; 0],
+    data: [byte; 1],
 }}
 pub const ROTFLAGS_REGISTRATIONKEEPSALIVE: DWORD = 0x1;
 pub const ROTFLAGS_ALLOWANYCLIENT: DWORD = 0x2;
@@ -94,7 +94,7 @@ STRUCT!{struct GDI_NONREMOTE {
     u: GDI_NONREMOTE_u,
 }}
 UNION!{union userHGLOBAL_u {
-    [__int64; 1],
+    [u64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut FLAGGED_BYTE_BLOB,
     hInproc64 hInproc64_mut: __int64,
@@ -105,7 +105,7 @@ STRUCT!{struct userHGLOBAL {
 }}
 pub type wireHGLOBAL = *mut userHGLOBAL;
 UNION!{union userHMETAFILE_u {
-    [__int64; 1],
+    [u64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut BYTE_BLOB,
     hInproc64 hInproc64_mut: __int64,
@@ -121,7 +121,7 @@ STRUCT!{struct remoteMETAFILEPICT {
     hMF: *mut userHMETAFILE,
 }}
 UNION!{union userHMETAFILEPICT_u {
-    [__int64; 1],
+    [u64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut remoteMETAFILEPICT,
     hInproc64 hInproc64_mut: __int64,
@@ -131,7 +131,7 @@ STRUCT!{struct userHMETAFILEPICT {
     u: userHMETAFILEPICT_u,
 }}
 UNION!{union userHENHMETAFILE_u {
-    [__int64; 1],
+    [u64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut BYTE_BLOB,
     hInproc64 hInproc64_mut: __int64,
@@ -148,10 +148,10 @@ STRUCT!{struct userBITMAP {
     bmPlanes: WORD,
     bmBitsPixel: WORD,
     cbSize: ULONG,
-    pBuffer: [byte; 0],
+    pBuffer: [byte; 1],
 }}
 UNION!{union userHBITMAP_u {
-    [__int64; 1],
+    [u64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut userBITMAP,
     hInproc64 hInproc64_mut: __int64,
@@ -161,7 +161,7 @@ STRUCT!{struct userHBITMAP {
     u: userHBITMAP_u,
 }}
 UNION!{union userHPALETTE_u {
-    [__int64; 1],
+    [u64; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut LOGPALETTE,
     hInproc64 hInproc64_mut: __int64,
@@ -171,7 +171,7 @@ STRUCT!{struct userHPALETTE {
     u: userHPALETTE_u,
 }}
 UNION!{union RemotableHandle_u {
-    [LONG; 1],
+    [usize; 1],
     hInproc hInproc_mut: LONG,
     hRemote hRemote_mut: *mut DWORD_BLOB,
 }}
