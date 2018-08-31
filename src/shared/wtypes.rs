@@ -171,9 +171,9 @@ STRUCT!{struct userHPALETTE {
     u: userHPALETTE_u,
 }}
 UNION!{union RemotableHandle_u {
-    [usize; 1],
+    [u32; 1],
     hInproc hInproc_mut: LONG,
-    hRemote hRemote_mut: *mut DWORD_BLOB,
+    hRemote hRemote_mut: LONG,
 }}
 STRUCT!{struct RemotableHandle {
     fContext: LONG,
