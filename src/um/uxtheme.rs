@@ -572,7 +572,7 @@ pub unsafe fn SetWindowThemeNonClientAttributes(
     dwMask: DWORD,
     dwAttributes: DWORD,
 ) -> HRESULT {
-    use _core::mem::{size_of, uninitialized};
+    use core::mem::{size_of, uninitialized};
     let mut wta: WTA_OPTIONS = uninitialized();
     wta.dwFlags = dwAttributes;
     wta.dwMask = dwMask;
