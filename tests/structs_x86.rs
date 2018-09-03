@@ -2831,6 +2831,40 @@ fn um_dbghelp() {
     assert_eq!(size_of::<IMAGEHLP_LINEW64>(), 24);
     assert_eq!(align_of::<IMAGEHLP_LINEW64>(), 8);
 }
+#[cfg(feature = "dbt")] #[test]
+fn um_dbt() {
+    use winapi::um::dbt::*;
+    assert_eq!(size_of::<DEV_BROADCAST_HDR>(), 12);
+    assert_eq!(align_of::<DEV_BROADCAST_HDR>(), 4);
+    assert_eq!(size_of::<VolLockBroadcast>(), 20);
+    assert_eq!(align_of::<VolLockBroadcast>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_HEADER>(), 12);
+    assert_eq!(align_of::<DEV_BROADCAST_HEADER>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_OEM>(), 20);
+    assert_eq!(align_of::<DEV_BROADCAST_OEM>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_DEVNODE>(), 16);
+    assert_eq!(align_of::<DEV_BROADCAST_DEVNODE>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_VOLUME>(), 20);
+    assert_eq!(align_of::<DEV_BROADCAST_VOLUME>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_PORT_A>(), 16);
+    assert_eq!(align_of::<DEV_BROADCAST_PORT_A>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_PORT_W>(), 16);
+    assert_eq!(align_of::<DEV_BROADCAST_PORT_W>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_NET>(), 20);
+    assert_eq!(align_of::<DEV_BROADCAST_NET>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_DEVICEINTERFACE_A>(), 32);
+    assert_eq!(align_of::<DEV_BROADCAST_DEVICEINTERFACE_A>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_DEVICEINTERFACE_W>(), 32);
+    assert_eq!(align_of::<DEV_BROADCAST_DEVICEINTERFACE_W>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_HANDLE>(), 44);
+    assert_eq!(align_of::<DEV_BROADCAST_HANDLE>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_HANDLE32>(), 44);
+    assert_eq!(align_of::<DEV_BROADCAST_HANDLE32>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_HANDLE64>(), 56);
+    assert_eq!(align_of::<DEV_BROADCAST_HANDLE64>(), 8);
+    assert_eq!(size_of::<DEV_BROADCAST_USERDEFINED>(), 16);
+    assert_eq!(align_of::<DEV_BROADCAST_USERDEFINED>(), 4);
+}
 #[cfg(feature = "devicetopology")] #[test]
 fn um_devicetopology() {
     use winapi::um::devicetopology::*;
