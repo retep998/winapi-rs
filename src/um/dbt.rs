@@ -111,14 +111,14 @@ STRUCT!{struct DEV_BROADCAST_VOLUME {
 pub type PDEV_BROADCAST_VOLUME = *mut DEV_BROADCAST_VOLUME;
 pub const DBTF_MEDIA: WORD = 0x0001;
 pub const DBTF_NET: WORD = 0x0002;
-STRUCT!{#[repr(packed)] struct DEV_BROADCAST_PORT_A {
+STRUCT!{struct DEV_BROADCAST_PORT_A {
     dbcp_size: DWORD,
     dbcp_devicetype: DWORD,
     dbcp_reserved: DWORD,
     dbcp_name: [c_char; 1],
 }}
 pub type PDEV_BROADCAST_PORT_A = *mut DEV_BROADCAST_PORT_A;
-STRUCT!{#[repr(packed)] struct DEV_BROADCAST_PORT_W {
+STRUCT!{struct DEV_BROADCAST_PORT_W {
     dbcp_size: DWORD,
     dbcp_devicetype: DWORD,
     dbcp_reserved: DWORD,
@@ -133,7 +133,7 @@ STRUCT!{struct DEV_BROADCAST_NET {
     dbcn_flags: DWORD,
 }}
 pub type PDEV_BROADCAST_NET = *mut DEV_BROADCAST_NET;
-STRUCT!{#[repr(packed)] struct DEV_BROADCAST_DEVICEINTERFACE_A {
+STRUCT!{struct DEV_BROADCAST_DEVICEINTERFACE_A {
     dbcc_size: DWORD,
     dbcc_devicetype: DWORD,
     dbcc_reserved: DWORD,
@@ -141,7 +141,7 @@ STRUCT!{#[repr(packed)] struct DEV_BROADCAST_DEVICEINTERFACE_A {
     dbcc_name: [c_char; 1], 
 }}
 pub type PDEV_BROADCAST_DEVICEINTERFACE_A = *mut DEV_BROADCAST_DEVICEINTERFACE_A;
-STRUCT!{#[repr(packed)] struct DEV_BROADCAST_DEVICEINTERFACE_W {
+STRUCT!{struct DEV_BROADCAST_DEVICEINTERFACE_W {
     dbcc_size: DWORD,
     dbcc_devicetype: DWORD,
     dbcc_reserved: DWORD,
@@ -149,7 +149,7 @@ STRUCT!{#[repr(packed)] struct DEV_BROADCAST_DEVICEINTERFACE_W {
     dbcc_name: [wchar_t; 1],
 }}
 pub type PDEV_BROADCAST_DEVICEINTERFACE_W = *mut DEV_BROADCAST_DEVICEINTERFACE_W;
-STRUCT!{#[repr(packed)] struct DEV_BROADCAST_HANDLE {
+STRUCT!{struct DEV_BROADCAST_HANDLE {
     dbch_size: DWORD,
     dbch_devicetype: DWORD,
     dbch_reserved: DWORD,
@@ -187,7 +187,7 @@ pub const DBTF_XPORT: DWORD = 0x00000002;
 pub const DBTF_SLOWNET: DWORD = 0x00000004;
 pub const DBT_VPOWERDAPI: WPARAM = 0x8100;
 pub const DBT_USERDEFINED: WPARAM = 0xFFFF;
-STRUCT!{#[repr(packed)] struct DEV_BROADCAST_USERDEFINED {
+STRUCT!{struct DEV_BROADCAST_USERDEFINED {
     dbud_dbh: DEV_BROADCAST_HDR,
     dbud_szName: [c_char; 1],
 }}
