@@ -2853,8 +2853,8 @@ fn um_dbt() {
     assert_eq!(align_of::<DEV_BROADCAST_HDR>(), 4);
     assert_eq!(size_of::<VolLockBroadcast>(), 20);
     assert_eq!(align_of::<VolLockBroadcast>(), 4);
-    assert_eq!(size_of::<DEV_BROADCAST_HEADER>(), 12);
-    assert_eq!(align_of::<DEV_BROADCAST_HEADER>(), 4);
+    assert_eq!(size_of::<_DEV_BROADCAST_HEADER>(), 12);
+    assert_eq!(align_of::<_DEV_BROADCAST_HEADER>(), 4);
     assert_eq!(size_of::<DEV_BROADCAST_OEM>(), 20);
     assert_eq!(align_of::<DEV_BROADCAST_OEM>(), 4);
     assert_eq!(size_of::<DEV_BROADCAST_DEVNODE>(), 16);
@@ -2877,8 +2877,8 @@ fn um_dbt() {
     assert_eq!(align_of::<DEV_BROADCAST_HANDLE32>(), 4);
     assert_eq!(size_of::<DEV_BROADCAST_HANDLE64>(), 56);
     assert_eq!(align_of::<DEV_BROADCAST_HANDLE64>(), 8);
-    assert_eq!(size_of::<DEV_BROADCAST_USERDEFINED>(), 16);
-    assert_eq!(align_of::<DEV_BROADCAST_USERDEFINED>(), 4);
+    assert_eq!(size_of::<_DEV_BROADCAST_USERDEFINED>(), 16);
+    assert_eq!(align_of::<_DEV_BROADCAST_USERDEFINED>(), 4);
 }
 #[cfg(feature = "devicetopology")] #[test]
 fn um_devicetopology() {
