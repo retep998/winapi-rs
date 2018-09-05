@@ -12,7 +12,7 @@ pub const MAX_LANA: usize = 254;
 FN!{stdcall PFPOST(
     *mut NCB,
 ) -> ()}
-#[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
+#[cfg(target_pointer_width = "64")]
 STRUCT!{struct NCB {
     ncb_command: UCHAR,
     ncb_retcode: UCHAR,
