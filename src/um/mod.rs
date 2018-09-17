@@ -231,6 +231,7 @@ pub mod gl;
 #[cfg(feature = "vswriter")] pub mod vswriter;
 #[cfg(feature = "wct")] pub mod wct;
 #[cfg(feature = "werapi")] pub mod werapi;
+#[cfg(feature = "wia")] pub mod wia;
 #[cfg(feature = "winbase")] pub mod winbase;
 #[cfg(feature = "wincodec")] pub mod wincodec;
 #[cfg(feature = "wincodecsdk")] pub mod wincodecsdk;
