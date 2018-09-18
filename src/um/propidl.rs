@@ -6,8 +6,8 @@
 // except according to those terms.
 use shared::guiddef::{CLSID, FMTID};
 use shared::minwindef::{DWORD, FILETIME, PULONG, WORD};
-use shared::wtypesbase::{LPOLESTR, ULONG};
 use shared::wtypes::{PROPID, VARTYPE};
+use shared::wtypesbase::{LPOLESTR, ULONG};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::HRESULT;
 UNION!{union PROPSPEC_u {
