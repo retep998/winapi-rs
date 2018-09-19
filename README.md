@@ -1,4 +1,13 @@
-# winapi-rs [![Build status](https://ci.appveyor.com/api/projects/status/i47oonf5e7qm5utq/branch/master?svg=true)](https://ci.appveyor.com/project/retep998/winapi-rs/branch/master) [![Build Status](https://travis-ci.org/retep998/winapi-rs.svg?branch=master)](https://travis-ci.org/retep998/winapi-rs) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/retep998/winapi-rs) [![Crates.io](https://img.shields.io/crates/v/winapi.svg)](https://crates.io/crates/winapi) ![Lines of Code](https://tokei.rs/b1/github/retep998/winapi-rs) ![100% unsafe](https://img.shields.io/badge/unsafe-100%25-blue.svg) #
+# winapi-rs 
+[![Build status](https://ci.appveyor.com/api/projects/status/i47oonf5e7qm5utq/branch/master?svg=true)](https://ci.appveyor.com/project/retep998/winapi-rs/branch/master) 
+[![Build Status](https://travis-ci.org/retep998/winapi-rs.svg?branch=master)](https://travis-ci.org/retep998/winapi-rs) 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/retep998/winapi-rs) 
+[![Crates.io](https://img.shields.io/crates/v/winapi.svg)](https://crates.io/crates/winapi) 
+![Lines of Code](https://tokei.rs/b1/github/retep998/winapi-rs) 
+![100% unsafe](https://img.shields.io/badge/unsafe-100%25-blue.svg) 
+[![Open issues](https://img.shields.io/github/issues-raw/retep998/winapi-rs.svg)](https://github.com/retep998/winapi-rs/issues)
+[![License](https://img.shields.io/crates/l/winapi.svg)](https://github.com/retep998/winapi-rs)
+
 
 [Documentation](https://docs.rs/winapi/*/x86_64-pc-windows-msvc/winapi/)
 
