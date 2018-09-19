@@ -2919,10 +2919,14 @@ fn um_dwmapi() {
     use winapi::um::dwmapi::*;
     assert_eq!(size_of::<DWM_BLURBEHIND>(), 20);
     assert_eq!(align_of::<DWM_BLURBEHIND>(), 1);
+    assert_eq!(size_of::<DWM_THUMBNAIL_PROPERTIES>(), 45);
+    assert_eq!(align_of::<DWM_THUMBNAIL_PROPERTIES>(), 1);
     assert_eq!(size_of::<UNSIGNED_RATIO>(), 8);
     assert_eq!(align_of::<UNSIGNED_RATIO>(), 1);
     assert_eq!(size_of::<DWM_TIMING_INFO>(), 292);
     assert_eq!(align_of::<DWM_TIMING_INFO>(), 1);
+    assert_eq!(size_of::<DWM_PRESENT_PARAMETERS>(), 40);
+    assert_eq!(align_of::<DWM_PRESENT_PARAMETERS>(), 1);
 }
 #[cfg(feature = "dwrite")] #[test]
 fn um_dwrite() {
@@ -5506,6 +5510,36 @@ fn um_usp10() {
     assert_eq!(align_of::<SCRIPT_CHARPROP>(), 2);
     assert_eq!(size_of::<SCRIPT_GLYPHPROP>(), 4);
     assert_eq!(align_of::<SCRIPT_GLYPHPROP>(), 2);
+}
+#[cfg(feature = "uxtheme")] #[test]
+fn um_uxtheme() {
+    use winapi::um::uxtheme::*;
+    assert_eq!(size_of::<TA_TRANSFORM>(), 20);
+    assert_eq!(align_of::<TA_TRANSFORM>(), 4);
+    assert_eq!(size_of::<TA_TRANSFORM_2D>(), 44);
+    assert_eq!(align_of::<TA_TRANSFORM_2D>(), 4);
+    assert_eq!(size_of::<TA_TRANSFORM_OPACITY>(), 28);
+    assert_eq!(align_of::<TA_TRANSFORM_OPACITY>(), 4);
+    assert_eq!(size_of::<TA_TRANSFORM_CLIP>(), 52);
+    assert_eq!(align_of::<TA_TRANSFORM_CLIP>(), 4);
+    assert_eq!(size_of::<TA_TIMINGFUNCTION>(), 4);
+    assert_eq!(align_of::<TA_TIMINGFUNCTION>(), 4);
+    assert_eq!(size_of::<TA_CUBIC_BEZIER>(), 20);
+    assert_eq!(align_of::<TA_CUBIC_BEZIER>(), 4);
+    assert_eq!(size_of::<DTBGOPTS>(), 24);
+    assert_eq!(align_of::<DTBGOPTS>(), 4);
+    assert_eq!(size_of::<MARGINS>(), 16);
+    assert_eq!(align_of::<MARGINS>(), 4);
+    assert_eq!(size_of::<INTLIST>(), 1612);
+    assert_eq!(align_of::<INTLIST>(), 4);
+    assert_eq!(size_of::<WTA_OPTIONS>(), 8);
+    assert_eq!(align_of::<WTA_OPTIONS>(), 4);
+    assert_eq!(size_of::<DTTOPTS>(), 72);
+    assert_eq!(align_of::<DTTOPTS>(), 8);
+    assert_eq!(size_of::<BP_ANIMATIONPARAMS>(), 16);
+    assert_eq!(align_of::<BP_ANIMATIONPARAMS>(), 4);
+    assert_eq!(size_of::<BP_PAINTPARAMS>(), 24);
+    assert_eq!(align_of::<BP_PAINTPARAMS>(), 8);
 }
 #[cfg(feature = "vsbackup")] #[test]
 fn um_vsbackup() {
