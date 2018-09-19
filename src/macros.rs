@@ -129,6 +129,22 @@ macro_rules! MAKEINTRESOURCE {
 }
 #[macro_export]
 macro_rules! RIDL {
+    (#[uuid($l:expr, $w1:expr, $w2:expr,
+        $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr, $b6:expr, $b7:expr, $b8:expr)]
+    class $class:ident;) => (
+        pub enum $class {}
+        impl $crate::Class for $class {
+            #[inline]
+            fn uuidof() -> $crate::shared::guiddef::GUID {
+                $crate::shared::guiddef::GUID {
+                    Data1: $l,
+                    Data2: $w1,
+                    Data3: $w2,
+                    Data4: [$b1, $b2, $b3, $b4, $b5, $b6, $b7, $b8],
+                }
+            }
+        }
+    );
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) {$(
         $(#[$($attrs:tt)*])* fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
