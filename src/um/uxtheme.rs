@@ -572,8 +572,8 @@ pub unsafe fn SetWindowThemeNonClientAttributes(
     dwMask: DWORD,
     dwAttributes: DWORD,
 ) -> HRESULT {
-    use core::mem::{size_of, uninitialized};
-    let mut wta: WTA_OPTIONS = uninitialized();
+    use core::mem::{size_of, zeroed};
+    let mut wta: WTA_OPTIONS = zeroed();
     wta.dwFlags = dwAttributes;
     wta.dwMask = dwMask;
     SetWindowThemeAttribute(
@@ -705,8 +705,12 @@ extern "system" {
         hBufferedPaint: HPAINTBUFFER,
         prc: *mut RECT,
     ) -> HRESULT;
-    pub fn GetBufferedPaintTargetDC(hBufferedPaint: HPAINTBUFFER) -> HDC;
-    pub fn GetBufferedPaintDC(hBufferedPaint: HPAINTBUFFER) -> HDC;
+    pub fn GetBufferedPaintTargetDC(
+        hBufferedPaint: HPAINTBUFFER,
+    ) -> HDC;
+    pub fn GetBufferedPaintDC(
+        hBufferedPaint: HPAINTBUFFER,
+    ) -> HDC;
     pub fn GetBufferedPaintBits(
         hBufferedPaint: HPAINTBUFFER,
         ppbBuffer: *mut *mut RGBQUAD,
@@ -721,7 +725,9 @@ extern "system" {
         prc: *const RECT,
         alpha: BYTE,
     ) -> HRESULT;
-    pub fn BufferedPaintStopAllAnimations(hwnd: HWND) -> HRESULT;
+    pub fn BufferedPaintStopAllAnimations(
+        hwnd: HWND,
+    ) -> HRESULT;
 }
 pub type HANIMATIONBUFFER = HANDLE;
 extern "system" {
