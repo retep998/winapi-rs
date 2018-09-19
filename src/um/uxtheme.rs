@@ -15,7 +15,9 @@ pub type HTHEME = HANDLE;
 //pub const MAX_THEMECOLOR: u32 = 64;
 //pub const MAX_THEMESIZE: u32 = 64;
 extern "system" {
-    pub fn BeginPanningFeedback(hwnd: HWND) -> BOOL;
+    pub fn BeginPanningFeedback(
+        hwnd: HWND,
+    ) -> BOOL;
     pub fn UpdatePanningFeedback(
         hwnd: HWND,
         lTotalOverpanOffsetX: LONG,
@@ -156,7 +158,9 @@ extern "system" {
         pszClassList: LPCWSTR,
         dwFlags: DWORD,
     ) -> HTHEME;
-    pub fn CloseThemeData(hTheme: HTHEME) -> HRESULT;
+    pub fn CloseThemeData(
+        hTheme: HTHEME,
+    ) -> HRESULT;
     pub fn DrawThemeBackground(
         hTheme: HTHEME,
         hdc: HDC,
@@ -478,7 +482,9 @@ extern "system" {
     ) -> HRESULT;
     pub fn IsThemeActive() -> BOOL;
     pub fn IsAppThemed() -> BOOL;
-    pub fn GetWindowTheme(hwnd: HWND) -> HTHEME;
+    pub fn GetWindowTheme(
+        hwnd: HWND,
+    ) -> HTHEME;
 }
 pub const ETDT_DISABLE: DWORD = 0x00000001;
 pub const ETDT_ENABLE: DWORD = 0x00000002;
@@ -493,7 +499,9 @@ extern "system" {
         hwnd: HWND,
         dwFlags: DWORD,
     ) -> HRESULT;
-    pub fn IsThemeDialogTextureEnabled(hwnd: HWND) -> BOOL;
+    pub fn IsThemeDialogTextureEnabled(
+        hwnd: HWND,
+    ) -> BOOL;
 }
 pub const STAP_ALLOW_NONCLIENT: DWORD = 1 << 0;
 pub const STAP_ALLOW_CONTROLS: DWORD = 1 << 1;
@@ -502,7 +510,9 @@ pub const STAP_VALIDBITS: DWORD = STAP_ALLOW_NONCLIENT | STAP_ALLOW_CONTROLS
     | STAP_ALLOW_WEBCONTENT;
 extern "system" {
     pub fn GetThemeAppProperties() -> DWORD;
-    pub fn SetThemeAppProperties(dwFlags: DWORD);
+    pub fn SetThemeAppProperties(
+        dwFlags: DWORD,
+    );
     pub fn GetCurrentThemeName(
         pszThemeFileName: LPWSTR,
         cchMaxNameChars: c_int,
@@ -528,7 +538,9 @@ extern "system" {
         hdc: HDC,
         prc: *const RECT,
     ) -> HRESULT;
-    pub fn EnableTheming(fEnable: BOOL) -> HRESULT;
+    pub fn EnableTheming(
+        fEnable: BOOL,
+    ) -> HRESULT;
 }
 pub const GBF_DIRECT: ULONG = 0x00000001;
 pub const GBF_COPY: ULONG = 0x00000002;

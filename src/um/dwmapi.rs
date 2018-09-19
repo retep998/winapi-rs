@@ -143,7 +143,7 @@ FN!{stdcall DwmDefWindowProc(
         wParam: WPARAM,
         lParam: LPARAM,
         plResult: *mut LRESULT,
-    ) -> BOOL}
+) -> BOOL}
 extern "system" {
     pub fn DwmEnableBlurBehindWindow(
         hWnd: HWND,
@@ -153,8 +153,12 @@ extern "system" {
 pub const DWM_EC_DISABLECOMPOSITION: UINT = 0;
 pub const DWM_EC_ENABLECOMPOSITION: UINT = 1;
 extern "system" {
-    pub fn DwmEnableComposition(uCompositionAction: UINT) -> HRESULT;
-    pub fn DwmEnableMMCSS(fEnableMMCSS: BOOL) -> HRESULT;
+    pub fn DwmEnableComposition(
+        uCompositionAction: UINT,
+    ) -> HRESULT;
+    pub fn DwmEnableMMCSS(
+        fEnableMMCSS: BOOL,
+    ) -> HRESULT;
     pub fn DwmExtendFrameIntoClientArea(
         hWnd: HWND,
         pMarInset: *const MARGINS,
@@ -173,7 +177,9 @@ extern "system" {
         pvAttribute: LPVOID,
         cbAttribute: DWORD,
     ) -> HRESULT;
-    pub fn DwmIsCompositionEnabled(pfEnabled: *mut BOOL) -> HRESULT;
+    pub fn DwmIsCompositionEnabled(
+        pfEnabled: *mut BOOL,
+    ) -> HRESULT;
     pub fn DwmModifyPreviousDxFrameDuration(
         hwnd: HWND,
         cRefreshes: INT,
@@ -202,7 +208,9 @@ extern "system" {
         pvAttribute: LPCVOID,
         cbAttribute: DWORD,
     ) -> HRESULT;
-    pub fn DwmUnregisterThumbnail(hThumbnailId: HTHUMBNAIL) -> HRESULT;
+    pub fn DwmUnregisterThumbnail(
+        hThumbnailId: HTHUMBNAIL,
+    ) -> HRESULT;
     pub fn DwmUpdateThumbnailProperties(
         hThumbnailId: HTHUMBNAIL,
         ptnProperties: *const DWM_THUMBNAIL_PROPERTIES,
@@ -221,7 +229,9 @@ extern "system" {
         pptClient: *mut POINT,
         dwSITFlags: DWORD,
     ) -> HRESULT;
-    pub fn DwmInvalidateIconicBitmaps(hwnd: HWND) -> HRESULT;
+    pub fn DwmInvalidateIconicBitmaps(
+        hwnd: HWND,
+    ) -> HRESULT;
     // pub fn DwmAttachMilContent(hwnd: HWND) -> HRESULT;
     // pub fn DwmDetachMilContent(hwnd: HWND) -> HRESULT;
     pub fn DwmFlush() -> HRESULT;
