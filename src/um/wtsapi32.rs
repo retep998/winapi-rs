@@ -10,8 +10,8 @@ use um::winnt::{
     CHAR, HANDLE, LARGE_INTEGER, LONG, LPSTR, LPWSTR, PCHAR, PSECURITY_DESCRIPTOR, PSID, PSTR,
     PVOID, PWSTR, SECURITY_INFORMATION, STANDARD_RIGHTS_REQUIRED, WCHAR
 };
-pub const WTS_CURRENT_SERVER: HANDLE = 0isize as HANDLE;
-pub const WTS_CURRENT_SERVER_HANDLE: HANDLE = 0isize as HANDLE;
+pub const WTS_CURRENT_SERVER: HANDLE = 0 as HANDLE;
+pub const WTS_CURRENT_SERVER_HANDLE: HANDLE = 0 as HANDLE;
 // #define WTS_CURRENT_SERVER_NAME (NULL)
 pub const WTS_CURRENT_SESSION: DWORD = -1i32 as DWORD;
 pub const WTS_ANY_SESSION: DWORD = -2i32 as DWORD;
@@ -338,14 +338,12 @@ STRUCT!{struct WTSCLIENTA {
 pub type PWTSCLIENTA = *mut WTSCLIENTA;
 const PRODUCTINFO_COMPANYNAME_LENGTH: usize = 256;
 const PRODUCTINFO_PRODUCTID_LENGTH: usize = 4;
-STRUCT!{struct WTS_PRODUCT_INFOA
-{
+STRUCT!{struct WTS_PRODUCT_INFOA {
     CompanyName: [CHAR; PRODUCTINFO_COMPANYNAME_LENGTH],
     ProductID: [CHAR; PRODUCTINFO_PRODUCTID_LENGTH],
 }}
 pub type PRODUCT_INFOA = WTS_PRODUCT_INFOA;
-STRUCT!{struct WTS_PRODUCT_INFOW
-{
+STRUCT!{struct WTS_PRODUCT_INFOW {
     CompanyName: [WCHAR; PRODUCTINFO_COMPANYNAME_LENGTH],
     ProductID: [WCHAR; PRODUCTINFO_PRODUCTID_LENGTH],
 }}
@@ -533,14 +531,14 @@ extern "system" {
         Version: DWORD,
         ppSessionInfo: *mut PWTS_SESSION_INFOW,
         pCount: *mut DWORD
-        ) -> BOOL;
+    ) -> BOOL;
     pub fn WTSEnumerateSessionsA(
         hServer: HANDLE,
         Reserved: DWORD,
         Version: DWORD,
         ppSessionInfo: *mut PWTS_SESSION_INFOA,
         pCount: *mut DWORD
-        ) -> BOOL;
+    ) -> BOOL;
     pub fn WTSEnumerateSessionsExW(
         hServer: HANDLE,
         pLevel: *mut DWORD,
