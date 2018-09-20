@@ -143,6 +143,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("datetimeapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("davclnt", &["minwindef", "winnt"], &["netapi32"]),
     ("dbghelp", &["basetsd", "guiddef", "minwindef", "vcruntime", "winnt"], &["dbghelp"]),
+    ("dbt", &["basetsd", "guiddef", "minwindef", "winnt", "winuser"], &[]),
     ("dcommon", &["basetsd", "dxgiformat", "minwindef", "windef"], &[]),
     ("dcomp", &["d2d1", "d2d1_1", "d2d1effects", "d2dbasetypes", "d3d9types", "d3dcommon", "dcompanimation", "dcomptypes", "dxgi", "dxgi1_2", "dxgiformat", "guiddef", "minwinbase", "minwindef", "ntdef", "unknwnbase", "windef"], &["dcomp"]),
     ("dcompanimation", &["ntdef", "unknwnbase"], &[]),

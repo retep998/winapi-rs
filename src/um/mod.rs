@@ -71,6 +71,7 @@ pub mod gl;
 #[cfg(feature = "datetimeapi")] pub mod datetimeapi;
 #[cfg(feature = "davclnt")] pub mod davclnt;
 #[cfg(feature = "dbghelp")] pub mod dbghelp;
+#[cfg(feature = "dbt")] pub mod dbt;
 #[cfg(feature = "dcommon")] pub mod dcommon;
 #[cfg(feature = "dcomp")] pub mod dcomp;
 #[cfg(feature = "dcompanimation")] pub mod dcompanimation;
