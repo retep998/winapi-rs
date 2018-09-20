@@ -22,8 +22,6 @@ use um::winnt::{HANDLE, HRESULT, LONG, LPCSTR, LPCWSTR};
 pub const DIRECTSOUND_VERSION: DWORD = 0x0900;
 pub type D3DVALUE = c_float;
 pub type LPD3DVALUE = *mut D3DVALUE;
-pub type D3DCOLOR = DWORD;
-pub type LPD3DCOLOR = *mut D3DCOLOR;
 pub const _FACDS: HRESULT = 0x878;
 DEFINE_GUID!{CLSID_DirectSound,
     0x47d4d946, 0x62e8, 0x11cf, 0x93, 0xbc, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00}
