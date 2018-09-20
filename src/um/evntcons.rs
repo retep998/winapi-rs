@@ -9,7 +9,9 @@ use shared::evntprov::EVENT_DESCRIPTOR;
 use shared::evntrace::ETW_BUFFER_CONTEXT;
 use shared::guiddef::{GUID, LPGUID};
 use shared::minwindef::{PUCHAR, PULONG, PUSHORT, UCHAR, ULONG, USHORT};
-use um::winnt::{ANYSIZE_ARRAY, BOOLEAN, LARGE_INTEGER, PCSTR, PSECURITY_DESCRIPTOR, PSID, PVOID, ULONGLONG};
+use um::winnt::{
+    ANYSIZE_ARRAY, BOOLEAN, LARGE_INTEGER, PCSTR, PSECURITY_DESCRIPTOR, PSID, PVOID, ULONGLONG,
+};
 pub const EVENT_HEADER_EXT_TYPE_RELATED_ACTIVITYID: USHORT = 0x0001;
 pub const EVENT_HEADER_EXT_TYPE_SID: USHORT = 0x0002;
 pub const EVENT_HEADER_EXT_TYPE_TS_ID: USHORT = 0x0003;
@@ -178,7 +180,6 @@ pub unsafe fn EtwGetTraitFromProviderTraits(
     ProviderTraits: PVOID, TraitType: UCHAR, Trait: *mut PVOID, Size: PUSHORT,
 ) {
     use core::ptr::null_mut;
-
     let ByteCount = read_unaligned(ProviderTraits as *mut USHORT) as isize;
     let mut Ptr = ProviderTraits as PUCHAR;
     let PtrEnd = Ptr.offset(ByteCount);
