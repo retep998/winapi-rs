@@ -37,6 +37,14 @@ You can use the search functionality in the [documentation](https://docs.rs/wina
 
 This crate is nothing more than raw bindings to Windows API. If you wish to know how to use the various functionality in Windows API, you can look up the various items on [MSDN](https://msdn.microsoft.com/en-us/library/windows/desktop/aa906039) which is full of detailed documentation.
 
+### Can I use this library in `no_std` projects?
+
+Yes, absolutely! By default the `std` feature of `winapi` is disabled, allowing you to write Windows applications using nothing but `core` and `winapi`.
+
+### Why is `winapi`'s `HANDLE` incompatible with `std`'s `HANDLE`?
+
+Because `winapi` does not depend on `std` by default, it has to define `c_void` itself instead of using `std::os::raw::c_void`. However, if you enable the `std` feature of `winapi` then it will re-export `c_void` from `std` and cause `winapi`'s `HANDLE` to be the same type as `std`'s `HANDLE`.
+
 ## Example ##
 
 Cargo.toml:
