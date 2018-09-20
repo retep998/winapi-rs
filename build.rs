@@ -43,6 +43,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("in6addr", &["minwindef"], &[]),
     ("inaddr", &["minwindef"], &[]),
     ("intsafe", &[], &[]),
+    ("ks", &[], &[]),
     ("ksmedia", &[], &[]),
     ("ktmtypes", &["guiddef", "minwindef", "winnt"], &[]),
     ("lmcons", &["minwindef", "winnt"], &[]),
