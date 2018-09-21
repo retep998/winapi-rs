@@ -65,7 +65,7 @@ ENUM!{enum __MIDL___MIDL_itf_mfreadwrite_0000_0001_0002 {
     MF_SOURCE_READER_CURRENT_TYPE_INDEX = 0xffffffff,
 }}
 RIDL!(#[uuid(0x70ae66f2, 0xc809, 0x4e4f, 0x89, 0x15, 0xbd, 0xcb, 0x40, 0x6b, 0x79, 0x93)]
-interface IMFSourceReader(IMFSourceReaderVtbl) : IUnknown(IUnknownVtbl) {
+interface IMFSourceReader(IMFSourceReaderVtbl): IUnknown(IUnknownVtbl) {
     fn GetStreamSelection( 
         dwStreamIndex: DWORD,
         pfSelected: *mut BOOL,
@@ -116,7 +116,7 @@ interface IMFSourceReader(IMFSourceReaderVtbl) : IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 });
 RIDL!(#[uuid(0xdeec8d99, 0xfa1d, 0x4d82, 0x84, 0xc2, 0x2c, 0x89, 0x69, 0x94, 0x48, 0x67)]
-interface IMFSourceReaderCallback(IMFSourceReaderCallbackVtbl) : IUnknown(IUnknownVtbl) {
+interface IMFSourceReaderCallback(IMFSourceReaderCallbackVtbl): IUnknown(IUnknownVtbl) {
     fn OnReadSample( 
         hrStatus: HRESULT,
         dwStreamIndex: DWORD,
