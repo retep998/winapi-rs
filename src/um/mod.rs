@@ -139,6 +139,7 @@ pub mod gl;
 #[cfg(feature = "mscat")] pub mod mscat;
 #[cfg(feature = "mschapp")] pub mod mschapp;
 #[cfg(feature = "mssip")] pub mod mssip;
+#[cfg(feature = "msxml")] pub mod msxml;
 #[cfg(feature = "namedpipeapi")] pub mod namedpipeapi;
 #[cfg(feature = "namespaceapi")] pub mod namespaceapi;
 #[cfg(feature = "nb30")] pub mod nb30;
