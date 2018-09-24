@@ -80,3 +80,6 @@ fn main() {
     print_message("Hello, world!").unwrap();
 }
 ```
+
+## Financial Support
+Do you use `winapi` in your projects? If so, you may be interested in financially supporting me on [Patreon](https://www.patreon.com/retep998). Companies in particular are especially encouraged to donate (I'm looking at you [Microsoft](https://github.com/Azure/iotedge/tree/master/edgelet)).
