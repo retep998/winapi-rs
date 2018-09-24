@@ -1,4 +1,4 @@
-// Copyright © 2015-2017 winapi-rs developers
+// Copyright © 2015-2018 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -403,4 +403,12 @@ macro_rules! FN {
     (cdecl $func:ident($($p:ident: $t:ty,)*) -> $ret:ty) => (
         pub type $func = Option<unsafe extern "C" fn($($p: $t,)*) -> $ret>;
     );
+}
+#[macro_export]
+macro_rules! FIELD_OFFSET {
+    ($_type:ident, $field:ident$(.$cfields:ident)*) => {
+        unsafe {
+            &(*$crate::_core::ptr::null::<$_type>()).$field$(.$cfields)* as *const _ as usize
+        }
+    };
 }
