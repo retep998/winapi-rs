@@ -5,6 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! DSound procedure declarations, constant definitions and macros
+use core::{f32};
 use ctypes::{c_float};
 use shared::basetsd::{DWORD_PTR};
 use shared::d3d9types::{D3DVECTOR};
@@ -1237,8 +1238,8 @@ pub const DS3DMODE_HEADRELATIVE: DWORD = 0x00000001;
 pub const DS3DMODE_DISABLE: DWORD = 0x00000002;
 pub const DS3D_IMMEDIATE: DWORD = 0x00000000;
 pub const DS3D_DEFERRED: DWORD = 0x00000001;
-pub const DS3D_MINDISTANCEFACTOR: D3DVALUE = -3.40282347e+38;
-pub const DS3D_MAXDISTANCEFACTOR: D3DVALUE = 3.40282347e+38;
+pub const DS3D_MINDISTANCEFACTOR: D3DVALUE = f32::MIN;
+pub const DS3D_MAXDISTANCEFACTOR: D3DVALUE = f32::MAX;
 pub const DS3D_DEFAULTDISTANCEFACTOR: D3DVALUE = 1.0;
 pub const DS3D_MINROLLOFFFACTOR: D3DVALUE = 0.0;
 pub const DS3D_MAXROLLOFFFACTOR: D3DVALUE = 10.0;
