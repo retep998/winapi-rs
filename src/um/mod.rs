@@ -264,4 +264,5 @@ pub mod gl;
 #[cfg(feature = "wow64apiset")] pub mod wow64apiset;
 #[cfg(feature = "ws2spi")] pub mod ws2spi;
 #[cfg(feature = "ws2tcpip")] pub mod ws2tcpip;
+#[cfg(feature = "wtsapi32")] pub mod wtsapi32;
 #[cfg(feature = "xinput")] pub mod xinput;
