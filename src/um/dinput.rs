@@ -12,9 +12,9 @@ use shared::minwindef::{
 use shared::ntdef::{CHAR, HANDLE, HRESULT, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, WCHAR};
 use shared::windef::{HWND, POINT, RECT};
 use shared::winerror::{
-    CLASS_E_NOAGGREGATION, ERROR_ALREADY_INITIALIZED, ERROR_BAD_DRIVER_LEVEL, ERROR_BUSY, 
-    ERROR_FILE_NOT_FOUND, ERROR_INVALID_ACCESS, ERROR_NOT_READY, ERROR_OLD_WIN_VERSION, 
-    ERROR_READ_FAULT, ERROR_RMODE_APP, E_ACCESSDENIED, E_FAIL, E_INVALIDARG, E_NOINTERFACE, 
+    CLASS_E_NOAGGREGATION, ERROR_ALREADY_INITIALIZED, ERROR_BAD_DRIVER_LEVEL, ERROR_BUSY,
+    ERROR_FILE_NOT_FOUND, ERROR_INVALID_ACCESS, ERROR_NOT_READY, ERROR_OLD_WIN_VERSION,
+    ERROR_READ_FAULT, ERROR_RMODE_APP, E_ACCESSDENIED, E_FAIL, E_INVALIDARG, E_NOINTERFACE,
     E_NOTIMPL, E_OUTOFMEMORY, FACILITY_WIN32, REGDB_E_CLASSNOTREG, SEVERITY_ERROR, S_FALSE, S_OK
 };
 use um::mmsystem::{MMRESULT};
@@ -181,11 +181,11 @@ STRUCT!{struct DICUSTOMFORCE {
 pub type LPDICUSTOMFORCE = *mut DICUSTOMFORCE;
 pub type LPCDICUSTOMFORCE = *const DICUSTOMFORCE;
 STRUCT!{struct DIENVELOPE {
-    dwSize: DWORD, 
+    dwSize: DWORD,
     dwAttackLevel: DWORD,
-    dwAttackTime: DWORD, 
+    dwAttackTime: DWORD,
     dwFadeLevel: DWORD,
-    dwFadeTime: DWORD, 
+    dwFadeTime: DWORD,
 }}
 pub type LPDIENVELOPE = *mut DIENVELOPE;
 pub type LPCDIENVELOPE = *const DIENVELOPE;
@@ -1103,7 +1103,7 @@ FN!{stdcall LPDIENUMCREATEDEFFECTOBJECTSCALLBACK(
     pvRef: LPVOID,
 ) -> BOOL}
 RIDL!{#[uuid(0x5944e683, 0xc92e, 0x11cf, 0xbf, 0xc7, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00)]
-interface IDirectInputDevice2W(IDirectInputDevice2WVtbl): 
+interface IDirectInputDevice2W(IDirectInputDevice2WVtbl):
     IDirectInputDeviceW(IDirectInputDeviceWVtbl) {
     fn CreateEffect(
         rguid: REFGUID,
@@ -1144,7 +1144,7 @@ interface IDirectInputDevice2W(IDirectInputDevice2WVtbl):
 }}
 pub type LPDIRECTINPUTDEVICE2W = *mut IDirectInputDevice2W;
 RIDL!{#[uuid(0x5944e682, 0xc92e, 0x11cf, 0xbf, 0xc7, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00)]
-interface IDirectInputDevice2A(IDirectInputDevice2AVtbl): 
+interface IDirectInputDevice2A(IDirectInputDevice2AVtbl):
     IDirectInputDeviceA(IDirectInputDeviceAVtbl) {
     fn CreateEffect(
         rguid: REFGUID,
@@ -1188,7 +1188,7 @@ pub const DIFEF_DEFAULT: DWORD = 0x00000000;
 pub const DIFEF_INCLUDENONSTANDARD: DWORD = 0x00000001;
 pub const DIFEF_MODIFYIFNEEDED: DWORD = 0x00000010;
 RIDL!{#[uuid(0x57d7c6bd, 0x2356, 0x11d3, 0x8e, 0x9d, 0x00, 0xc0, 0x4f, 0x68, 0x44, 0xae)]
-interface IDirectInputDevice7W(IDirectInputDevice7WVtbl): 
+interface IDirectInputDevice7W(IDirectInputDevice7WVtbl):
     IDirectInputDevice2W(IDirectInputDevice2WVtbl) {
     fn EnumEffectsInFile(
         lpszFileName: LPCWSTR,
@@ -1205,7 +1205,7 @@ interface IDirectInputDevice7W(IDirectInputDevice7WVtbl):
 }}
 pub type LPDIRECTINPUTDEVICE7W = *mut IDirectInputDevice7W;
 RIDL!{#[uuid(0x57d7c6bc, 0x2356, 0x11d3, 0x8e, 0x9d, 0x00, 0xc0, 0x4f, 0x68, 0x44, 0xae)]
-interface IDirectInputDevice7A(IDirectInputDevice7AVtbl): 
+interface IDirectInputDevice7A(IDirectInputDevice7AVtbl):
     IDirectInputDevice2A(IDirectInputDevice2AVtbl) {
     fn EnumEffectsInFile(
         lpszFileName: LPCSTR,
@@ -2005,29 +2005,29 @@ pub const DI_SETTINGSNOTSAVED: HRESULT = 0x0000000B;
 pub const DI_TRUNCATEDANDRESTARTED: HRESULT = 0x0000000C;
 pub const DI_WRITEPROTECT: HRESULT = 0x00000013;
 pub const DIERR_OLDDIRECTINPUTVERSION: HRESULT = MAKE_HRESULT!(
-    SEVERITY_ERROR, 
-    FACILITY_WIN32, 
+    SEVERITY_ERROR,
+    FACILITY_WIN32,
     ERROR_OLD_WIN_VERSION as HRESULT
 );
 pub const DIERR_BETADIRECTINPUTVERSION: HRESULT = MAKE_HRESULT!(
-    SEVERITY_ERROR, 
-    FACILITY_WIN32, 
+    SEVERITY_ERROR,
+    FACILITY_WIN32,
     ERROR_RMODE_APP as HRESULT
 );
 pub const DIERR_BADDRIVERVER: HRESULT = MAKE_HRESULT!(
-    SEVERITY_ERROR, 
-    FACILITY_WIN32, 
+    SEVERITY_ERROR,
+    FACILITY_WIN32,
     ERROR_BAD_DRIVER_LEVEL as HRESULT
 );
 pub const DIERR_DEVICENOTREG: HRESULT = REGDB_E_CLASSNOTREG;
 pub const DIERR_NOTFOUND: HRESULT = MAKE_HRESULT!(
-    SEVERITY_ERROR, 
-    FACILITY_WIN32, 
+    SEVERITY_ERROR,
+    FACILITY_WIN32,
     ERROR_FILE_NOT_FOUND as HRESULT
 );
 pub const DIERR_OBJECTNOTFOUND: HRESULT = MAKE_HRESULT!(
-    SEVERITY_ERROR, 
-    FACILITY_WIN32, 
+    SEVERITY_ERROR,
+    FACILITY_WIN32,
     ERROR_FILE_NOT_FOUND as HRESULT
 );
 pub const DIERR_INVALIDPARAM: HRESULT = E_INVALIDARG;
