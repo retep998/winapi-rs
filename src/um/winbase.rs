@@ -646,6 +646,10 @@ extern "system" {
     pub fn RestoreLastError(
         dwErrCode: DWORD
     );
+}
+pub const FILE_SKIP_COMPLETION_PORT_ON_SUCCESS: UCHAR = 0x1;
+pub const FILE_SKIP_SET_EVENT_ON_HANDLE: UCHAR = 0x2;
+extern "system" {
     pub fn SetFileCompletionNotificationModes(
         FileHandle: HANDLE,
         Flags: UCHAR
