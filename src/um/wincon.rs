@@ -538,3 +538,4 @@ extern "system" {
         ExeNameBufferLength: DWORD,
     ) -> DWORD;
 }
+pub type HPCON = *mut c_void;
