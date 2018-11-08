@@ -223,7 +223,24 @@ STRUCT!{struct COMMCONFIG {
     wcProviderData: [WCHAR; 1],
 }}
 pub type LPCOMMCONFIG = *mut COMMCONFIG;
-// GMEM_*
+pub const GMEM_FIXED: UINT = 0x0000;
+pub const GMEM_MOVEABLE: UINT = 0x0002;
+pub const GMEM_NOCOMPACT: UINT = 0x0010;
+pub const GMEM_NODISCARD: UINT = 0x0020;
+pub const GMEM_ZEROINIT: UINT = 0x0040;
+pub const GMEM_MODIFY: UINT = 0x0080;
+pub const GMEM_DISCARDABLE: UINT = 0x0100;
+pub const GMEM_NOT_BANKED: UINT = 0x1000;
+pub const GMEM_SHARE: UINT = 0x2000;
+pub const GMEM_DDESHARE: UINT = 0x2000;
+pub const GMEM_NOTIFY: UINT = 0x4000;
+pub const GMEM_LOWER: UINT = GMEM_NOT_BANKED;
+pub const GMEM_VALID_FLAGS: UINT = 0x7F72;
+pub const GMEM_INVALID_HANDLE: UINT = 0x8000;
+pub const GHND: UINT = GMEM_MOVEABLE | GMEM_ZEROINIT;
+pub const GPTR: UINT = GMEM_FIXED | GMEM_ZEROINIT;
+pub const GMEM_DISCARDED: UINT = 0x4000;
+pub const GMEM_LOCKCOUNT: UINT = 0x00FF;
 STRUCT!{struct MEMORYSTATUS {
     dwLength: DWORD,
     dwMemoryLoad: DWORD,
