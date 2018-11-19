@@ -700,9 +700,9 @@ ENUM!{enum DESCKIND {
 }}
 UNION!{union BINDPTR {
     [usize; 1],
-    Lpfuncdesc Lpfuncdesc_mut: LPFUNCDESC, 
-    Lpvardesc Lpvardesc_mut: LPVARDESC, 
-    Lptcomp Lptcomp_mut: LPTYPECOMP,
+    lpfuncdesc lpfuncdesc_mut: *mut FUNCDESC, 
+    lpvardesc lpvardesc_mut: *mut VARDESC, 
+    lptcomp lptcomp_mut: *mut ITypeComp,
 }}
 pub type LPBINDPTR = *mut BINDPTR;
 RIDL!{#[uuid(0x00020403, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
