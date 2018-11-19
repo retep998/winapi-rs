@@ -699,7 +699,7 @@ ENUM!{enum DESCKIND {
     DESCKIND_MAX = DESCKIND_IMPLICITAPPOBJ + 1,
 }}
 UNION!{union BINDPTR {
-    [u32; 1] [u64; 1],
+    [usize; 1],
     Lpfuncdesc Lpfuncdesc_mut: LPFUNCDESC, 
     Lpvardesc Lpvardesc_mut: LPVARDESC, 
     Lptcomp Lptcomp_mut: LPTYPECOMP,
