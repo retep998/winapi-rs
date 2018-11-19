@@ -4746,6 +4746,14 @@ fn um_oaidl() {
     assert_eq!(align_of::<CUSTDATA>(), 4);
     assert_eq!(size_of::<TLIBATTR>(), 32);
     assert_eq!(align_of::<TLIBATTR>(), 4);
+    assert_eq!(size_of::<IRecordInfo>(), 4);
+    assert_eq!(align_of::<IRecordInfo>(), 4);
+    assert_eq!(size_of::<DESCKIND>(), 4);
+    assert_eq!(align_of::<DESCKIND>(), 4);
+    assert_eq!(size_of::<BINDPTR>(), 4);
+    assert_eq!(align_of::<BINDPTR>(), 4);
+    assert_eq!(size_of::<ITypeComp>(), 4);
+    assert_eq!(align_of::<ITypeComp>(), 4);
 }
 #[cfg(feature = "objidl")] #[test]
 fn um_objidl() {
