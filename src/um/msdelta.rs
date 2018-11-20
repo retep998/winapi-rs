@@ -11,7 +11,7 @@ use shared::minwindef::{BOOL, DWORD, FILETIME, LPCVOID, LPVOID, UCHAR};
 use um::wincrypt::ALG_ID;
 use um::winnt::{LPCSTR, LPCWSTR};
 UNION!{union DELTA_INPUT_U {
-    [u64; 1],
+    [u32; 1],
     lpcStart lpcStart_mut: LPCVOID,
     lpStart lpStart_mut: LPVOID,
 }}
