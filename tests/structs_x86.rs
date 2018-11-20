@@ -4746,6 +4746,8 @@ fn um_oaidl() {
     assert_eq!(align_of::<CUSTDATA>(), 4);
     assert_eq!(size_of::<TLIBATTR>(), 32);
     assert_eq!(align_of::<TLIBATTR>(), 4);
+    assert_eq!(size_of::<BINDPTR>(), 4);
+    assert_eq!(align_of::<BINDPTR>(), 4);
 }
 #[cfg(feature = "objidl")] #[test]
 fn um_objidl() {

@@ -689,7 +689,39 @@ interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl){
         pvRecord: PVOID,
     ) -> HRESULT,
 }}
-pub enum ITypeComp {} // FIXME
+pub type LPTYPECOMP = *mut ITypeComp;
+ENUM!{enum DESCKIND {
+    DESCKIND_NONE = 0, 
+    DESCKIND_FUNCDESC = DESCKIND_NONE + 1, 
+    DESCKIND_VARDESC = DESCKIND_FUNCDESC + 1, 
+    DESCKIND_TYPECOMP = DESCKIND_VARDESC + 1, 
+    DESCKIND_IMPLICITAPPOBJ = DESCKIND_TYPECOMP + 1, 
+    DESCKIND_MAX = DESCKIND_IMPLICITAPPOBJ + 1,
+}}
+UNION!{union BINDPTR {
+    [usize; 1],
+    lpfuncdesc lpfuncdesc_mut: *mut FUNCDESC, 
+    lpvardesc lpvardesc_mut: *mut VARDESC, 
+    lptcomp lptcomp_mut: *mut ITypeComp,
+}}
+pub type LPBINDPTR = *mut BINDPTR;
+RIDL!{#[uuid(0x00020403, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface ITypeComp(ITypeCompVtbl): IUnknown(IUnknownVtbl) {
+    fn Bind(
+        szName: LPOLESTR, 
+        lHashVal: ULONG, 
+        wFlags: WORD, 
+        ppTInfo: *mut *mut ITypeInfo, 
+        pDescKind: *mut DESCKIND, 
+        pBindPtr: *mut BINDPTR, 
+    ) -> HRESULT, 
+    fn BindType(
+        szName: LPOLESTR, 
+        lHashVal: ULONG, 
+        ppTInfo: *mut *mut ITypeInfo, 
+        ppTComp: *mut *mut ITypeComp,
+    ) -> HRESULT,
+}}
 ENUM!{enum SYSKIND {
     SYS_WIN16 = 0,
     SYS_WIN32,
