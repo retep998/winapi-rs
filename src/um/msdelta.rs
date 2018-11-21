@@ -11,14 +11,14 @@ use shared::minwindef::{BOOL, DWORD, FILETIME, LPCVOID, LPVOID, UCHAR};
 use um::wincrypt::ALG_ID;
 use um::winnt::{LPCSTR, LPCWSTR};
 UNION!{union DELTA_INPUT_U {
-    [u32; 1],
+    [usize; 1],
     lpcStart lpcStart_mut: LPCVOID,
     lpStart lpStart_mut: LPVOID,
 }}
 STRUCT!{struct DELTA_INPUT {
+    u: DELTA_INPUT_U,
     uSize: SIZE_T,
     Editable: bool,
-    u: DELTA_INPUT_U,
 }}
 pub type LPDELTA_INPUT = *mut DELTA_INPUT;
 pub type LPCDELTA_INPUT = *const DELTA_INPUT;
