@@ -102,7 +102,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("commctrl", &["basetsd", "commoncontrols", "guiddef", "minwinbase", "minwindef", "vcruntime", "windef", "winnt", "winuser"], &["comctl32"]),
     ("commdlg", &["basetsd", "minwindef", "prsht", "unknwnbase", "windef", "wingdi", "winnt", "winuser"], &["comdlg32"]),
     ("commoncontrols", &["commctrl", "guiddef", "minwindef", "unknwnbase", "windef", "winnt"], &["comctl32"]),
-    ("consoleapi", &["minwindef", "wincon", "winnt"], &["kernel32"]),
+    ("consoleapi", &["minwindef", "wincon", "wincontypes", "winnt"], &["kernel32"]),
     ("corsym", &["basetsd", "objidlbase", "unknwnbase", "winnt"], &[]),
     ("d2d1", &["basetsd", "d2dbasetypes", "d3dcommon", "dcommon", "dwrite", "dxgi", "guiddef", "minwindef", "unknwnbase", "wincodec", "windef", "winnt"], &["d2d1"]),
     ("d2d1_1", &["basetsd", "d2d1", "d2d1effectauthor", "d2dbasetypes", "dcommon", "documenttarget", "dwrite", "dxgi", "dxgiformat", "guiddef", "minwindef", "objidlbase", "unknwnbase", "wincodec", "winnt"], &["d2d1"]),
