@@ -277,6 +277,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("shobjidl_core", &["guiddef", "minwindef", "objidl", "unknwnbase", "windef", "winnt"], &[]),
     ("shtypes", &["guiddef", "minwindef", "winnt"], &[]),
     ("spapidef", &["minwindef", "winnt"], &[]),
+    ("spellcheck", &["minwindef", "ntdef", "objidlbase", "unknwnbase", "winerror"], &[]),
     ("sporder", &["guiddef", "minwindef"], &["sporder"]),
     ("sql", &["sqltypes"], &["odbc32"]),
     ("sqlext", &["sql", "sqltypes"], &[]),
