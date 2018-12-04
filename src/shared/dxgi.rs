@@ -239,6 +239,10 @@ pub const DXGI_PRESENT_USE_DURATION: DWORD = 0x00000100;
 pub const DXGI_PRESENT_ALLOW_TEARING: DWORD = 0x00000200;
 pub const DXGI_ENUM_MODES_INTERLACED: UINT = 1;
 pub const DXGI_ENUM_MODES_SCALING: UINT = 2;
+pub const DXGI_MWA_NO_WINDOW_CHANGES: UINT = 1;
+pub const DXGI_MWA_NO_ALT_ENTER: UINT = 2;
+pub const DXGI_MWA_NO_PRINT_SCREEN: UINT = 4;
+pub const DXGI_MWA_VALID: UINT = 0x7;
 RIDL!{#[uuid(0x310d36a0, 0xd2e7, 0x4c0a, 0xaa, 0x04, 0x6a, 0x9d, 0x23, 0xb8, 0x88, 0x6a)]
 interface IDXGISwapChain(IDXGISwapChainVtbl): IDXGIDeviceSubObject(IDXGIDeviceSubObjectVtbl) {
     fn Present(
