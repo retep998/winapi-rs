@@ -27,13 +27,13 @@ ENUM!{enum MFMEDIASOURCE_CHARACTERISTICS {
 }}
 RIDL!{#[uuid(0x279a808d, 0xaec7, 0x40c8, 0x9c, 0x6b, 0xa6, 0xb4, 0x92, 0xc7, 0x8a, 0x66)]
 interface IMFMediaSource(IMFMediaSourceVtbl): IMFMediaEventGenerator(IMFMediaEventGeneratorVtbl) {
-    fn GetCharacteristics( 
+    fn GetCharacteristics(
         pdwCharacteristics: *mut DWORD,
     ) -> HRESULT,
-    fn CreatePresentationDescriptor( 
+    fn CreatePresentationDescriptor(
         ppPresentationDescriptor: *mut *mut IMFPresentationDescriptor,
     ) -> HRESULT,
-    fn Start( 
+    fn Start(
         pPresentationDescriptor: *mut IMFPresentationDescriptor,
         pguidTimeFormat: *const GUID,
         pvarStartPosition: *const PROPVARIANT,
@@ -62,21 +62,21 @@ pub type MFTIME = LONGLONG;
 RIDL!{#[uuid(0x03cb2711, 0x24d7, 0x4db6, 0xa1, 0x7f, 0xf3, 0xa7, 0xa4, 0x79, 0xa5, 0x36)]
 interface IMFPresentationDescriptor(IMFPresentationDescriptorVtbl):
     IMFAttributes(IMFAttributesVtbl) {
-    fn GetStreamDescriptorCount( 
+    fn GetStreamDescriptorCount(
         pdwDescriptorCount: *mut DWORD,
     ) -> HRESULT,
-    fn GetStreamDescriptorByIndex( 
+    fn GetStreamDescriptorByIndex(
         dwIndex: DWORD,
         pfSelected: *mut BOOL,
         ppDescriptor: *mut *mut IMFStreamDescriptor,
     ) -> HRESULT,
-    fn SelectStream( 
+    fn SelectStream(
         dwDescriptorIndex: DWORD,
     ) -> HRESULT,
-    fn DeselectStream( 
+    fn DeselectStream(
         dwDescriptorIndex: DWORD,
     ) -> HRESULT,
-    fn Clone( 
+    fn Clone(
         ppPresentationDescriptor: *mut *mut IMFPresentationDescriptor,
     ) -> HRESULT,
 }}
@@ -90,33 +90,33 @@ DEFINE_GUID!{MF_SD_MUTUALLY_EXCLUSIVE,
     0x023ef79c, 0x388d, 0x487f, 0xac, 0x17, 0x69, 0x6c, 0xd6, 0xe3, 0xc6, 0xf5}
 RIDL!{#[uuid(0x56c03d9c, 0x9dbb, 0x45f5, 0xab, 0x4b, 0xd8, 0x0f, 0x47, 0xc0, 0x59, 0x38)]
 interface IMFStreamDescriptor(IMFStreamDescriptorVtbl): IMFAttributes(IMFAttributesVtbl) {
-    fn GetStreamIdentifier( 
+    fn GetStreamIdentifier(
         pdwStreamIdentifier: *mut DWORD,
     ) -> HRESULT,
-    fn GetMediaTypeHandler( 
+    fn GetMediaTypeHandler(
         ppMediaTypeHandler: *mut *mut IMFMediaTypeHandler,
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0xe93dcf6c, 0x4b07, 0x4e1e, 0x81, 0x23, 0xaa, 0x16, 0xed, 0x6e, 0xad, 0xf5)]
 interface IMFMediaTypeHandler(IMFMediaTypeHandlerVtbl): IUnknown(IUnknownVtbl) {
-    fn IsMediaTypeSupported( 
+    fn IsMediaTypeSupported(
         pMediaType: *mut IMFMediaType,
         ppMediaType: *mut *mut IMFMediaType,
     ) -> HRESULT,
-    fn GetMediaTypeCount( 
+    fn GetMediaTypeCount(
         pdwTypeCount: *mut DWORD,
     ) -> HRESULT,
-    fn GetMediaTypeByIndex( 
+    fn GetMediaTypeByIndex(
         dwIndex: DWORD,
         ppType: *mut *mut IMFMediaType,
     ) -> HRESULT,
-    fn SetCurrentMediaType( 
+    fn SetCurrentMediaType(
         pMediaType: *mut IMFMediaType,
     ) -> HRESULT,
-    fn GetCurrentMediaType( 
+    fn GetCurrentMediaType(
         ppMediaType: *mut *mut IMFMediaType,
     ) -> HRESULT,
-    fn GetMajorType( 
+    fn GetMajorType(
         pguidMajorType: *mut GUID,
     ) -> HRESULT,
 }}
@@ -130,7 +130,7 @@ extern "system" {
         pAttributes: *mut IMFAttributes,
         ppSource: *mut *mut IMFMediaSource,
     ) -> HRESULT;
-    pub fn MFCreateDeviceSourceActivate( 
+    pub fn MFCreateDeviceSourceActivate(
         pAttributes: *mut IMFAttributes,
         ppActivate: *mut *mut IMFActivate,
     ) -> HRESULT;

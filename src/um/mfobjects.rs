@@ -247,7 +247,7 @@ ENUM!{enum MF2DBuffer_LockFlags {
     MF2DBuffer_LockFlags_Read = 0x1,
     MF2DBuffer_LockFlags_Write = 0x2,
     MF2DBuffer_LockFlags_ReadWrite = 0x3,
-    MF2DBuffer_LockFlags_ForceDWORD	= 0x7fffffff,
+    MF2DBuffer_LockFlags_ForceDWORD = 0x7fffffff,
 }}
 RIDL!(#[uuid(0x33ae5ea6, 0x4316, 0x436f, 0x8d, 0xdd, 0xd7, 0x3d, 0x22, 0xf8, 0x29, 0xec)]
 interface IMF2DBuffer2(IMF2DBuffer2Vtbl): IMF2DBuffer(IMF2DBufferVtbl) {

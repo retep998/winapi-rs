@@ -5,10 +5,11 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of mfapi.h
+use shared::basetsd::UINT32;
 use shared::d3d9types::{
     D3DFMT_A16B16G16R16F, D3DFMT_A2B10G10R10, D3DFMT_A8R8G8B8, D3DFMT_D16, D3DFMT_L16, D3DFMT_L8,
     D3DFMT_P8, D3DFMT_R5G6B5, D3DFMT_R8G8B8, D3DFMT_X1R5G5B5, D3DFMT_X8R8G8B8,
-}
+};
 use shared::minwindef::{DWORD, ULONG};
 use um::mfobjects::{IMFAttributes, IMFSample};
 use um::winnt::HRESULT;
