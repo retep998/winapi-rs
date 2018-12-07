@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of PortableDeviceTypes.h
-use shared::guiddef::{CLSID, GUID, REFGUID};
+use shared::guiddef::{CLSID, GUID, IID, REFGUID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, ULONG};
 use shared::wtypes::{PROPERTYKEY, VARTYPE};
 use um::propidl::PROPVARIANT;
@@ -233,10 +233,20 @@ interface IPortableDeviceValuesCollection(IPortableDeviceValuesCollectionVtbl):
     ) -> HRESULT,
 }}
 extern {
-// EXTERN_C const IID LIBID_PortableDeviceTypesLib;
+    pub static LIBID_PortableDeviceTypesLib: IID;
     pub static CLSID_WpdSerializer: CLSID;
     pub static CLSID_PortableDeviceValues: CLSID;
     pub static CLSID_PortableDeviceKeyCollection: CLSID;
     pub static CLSID_PortableDevicePropVariantCollection: CLSID;
     pub static CLSID_PortableDeviceValuesCollection: CLSID;
 }
+RIDL!{#[uuid(0x0b91a74b, 0xad7c, 0x4a9d, 0xb5, 0x63, 0x29, 0xee, 0xf9, 0x16, 0x71, 0x72)]
+class WpdSerializer;}
+RIDL!{#[uuid(0x0c15d503, 0xd017, 0x47ce, 0x90, 0x16, 0x7b, 0x3f, 0x97, 0x87, 0x21, 0xcc)]
+class PortableDeviceValues;}
+RIDL!{#[uuid(0xde2d022d, 0x2480, 0x43be, 0x97, 0xf0, 0xd1, 0xfa, 0x2c, 0xf9, 0x8f, 0x4f)]
+class PortableDeviceKeyCollection;}
+RIDL!{#[uuid(0x08a99e2f, 0x6d6d, 0x4b80, 0xaf, 0x5a, 0xba, 0xf2, 0xbc, 0xbe, 0x4c, 0xb9)]
+class PortableDevicePropVariantCollection;}
+RIDL!{#[uuid(0x3882134d, 0x14cf, 0x4220, 0x9c, 0xb4, 0x43, 0x5f, 0x86, 0xd8, 0x3f, 0x60)]
+class PortableDeviceValuesCollection;}
