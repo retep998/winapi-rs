@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of PortableDeviceApi.h
-use shared::guiddef::{CLSID, REFGUID};
+use shared::guiddef::REFGUID;
 use shared::minwindef::{BYTE, DWORD, ULONG};
 use um::objidlbase::IStream;
 use um::portabledevicetypes::{

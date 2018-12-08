@@ -5,7 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of PortableDeviceTypes.h
-use shared::guiddef::{CLSID, GUID, IID, REFGUID};
+use shared::guiddef::{GUID, REFGUID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, ULONG};
 use shared::wtypes::{PROPERTYKEY, VARTYPE};
 use um::propidl::PROPVARIANT;
