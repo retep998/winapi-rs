@@ -1,11 +1,7 @@
 use ctypes::{c_char, c_int};
 use shared::minwindef::{BOOL, DWORD, INT, LPDWORD, LPINT, LPVOID, ULONG};
-// Unsure how to include these macros from ws2def.rs
-macro_rules! _WSAIOR { ($x:expr, $y:expr) => { IOC_OUT | $x | $y } }
-macro_rules! _WSAIOW { ($x:expr, $y:expr) => { IOC_IN | $x | $y } }
-macro_rules! _WSAIORW { ($x:expr, $y:expr) => { IOC_INOUT | $x | $y } }
 use shared::mswsockdef::{PRIORESULT, PRIO_BUF, RIO_BUFFERID, RIO_CQ, RIO_RQ};
-use shared::ws2def::{IOC_IN, IOC_INOUT, IOC_OUT, IOC_VENDOR, IOC_WS2, LPWSAMSG, SOCKADDR};
+use shared::ws2def::{IOC_VENDOR, IOC_WS2, LPWSAMSG, SOCKADDR};
 use um::minwinbase::LPOVERLAPPED;
 use um::winnt::{CHAR, HANDLE, LARGE_INTEGER, PCHAR, PVOID, WCHAR};
 use um::winsock2::{

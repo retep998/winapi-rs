@@ -78,9 +78,6 @@ STRUCT!{struct ASSOCIATE_NAMERES_CONTEXT_INPUT {
     Handle: UINT64,
 }}
 pub type PASSOCIATE_NAMERES_CONTEXT_INPUT = *mut ASSOCIATE_NAMERES_CONTEXT_INPUT;
-macro_rules! _WSAIOR { ($x:expr, $y:expr) => { IOC_OUT | $x | $y } }
-macro_rules! _WSAIOW { ($x:expr, $y:expr) => { IOC_IN | $x | $y } }
-macro_rules! _WSAIORW { ($x:expr, $y:expr) => { IOC_INOUT | $x | $y } }
 pub const SIO_RCVALL: DWORD = _WSAIOW!(IOC_VENDOR,1);
 pub const SIO_RCVALL_MCAST: DWORD = _WSAIOW!(IOC_VENDOR,2);
 pub const SIO_RCVALL_IGMPMCAST: DWORD = _WSAIOW!(IOC_VENDOR,3);

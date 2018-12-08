@@ -1,7 +1,5 @@
 use shared::minwindef::{DWORD, ULONG};
-// Unsure how to include these macros from ws2def.rs
-macro_rules! _WSAIOW { ($x:expr, $y:expr) => { IOC_IN | $x | $y } }
-use shared::ws2def::{IOC_IN, IOC_VENDOR};
+use shared::ws2def::IOC_VENDOR;
 use um::winnt::{LONG, PVOID, ULONGLONG};
 pub const SIO_SET_COMPATIBILITY_MODE: DWORD = _WSAIOW!(IOC_VENDOR, 300);
 ENUM!{enum WSA_COMPATIBILITY_BEHAVIOR_ID {
