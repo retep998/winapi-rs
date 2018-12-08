@@ -5,6 +5,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of PortableDevice.h
+use shared::basetsd::ULONG_PTR;
 DEFINE_GUID!{GUID_DEVINTERFACE_WPD,
     0x6AC27878, 0xA6FA, 0x4155, 0xBA, 0x85, 0xF9, 0x8F, 0x49, 0x1D, 0x4F, 0x33}
 DEFINE_GUID!{GUID_DEVINTERFACE_WPD_PRIVATE,
@@ -12,8 +13,18 @@ DEFINE_GUID!{GUID_DEVINTERFACE_WPD_PRIVATE,
 DEFINE_GUID!{GUID_DEVINTERFACE_WPD_SERVICE,
     0x9EF44F80, 0x3D64, 0x4246, 0xA6, 0xAA, 0x20, 0x6F, 0x32, 0x8D, 0x1E, 0xDC}
 //51
-pub const WPD_DEVICE_OBJECT_ID: &[u16] =
-    &['D' as u16, 'E' as u16, 'V' as u16, 'I' as u16, 'C' as u16, 'E' as u16, '\0' as u16];
+pub const WPD_DEVICE_OBJECT_ID: &'static str = "DEVICE";
+pub const WMDRMDEVICEAPP_USE_WPD_DEVICE_PTR: ULONG_PTR = -1isize as ULONG_PTR;
+pub const PORTABLE_DEVICE_TYPE: &'static str = "PortableDeviceType";
+pub const PORTABLE_DEVICE_ICON: &'static str = "Icons";
+pub const PORTABLE_DEVICE_NAMESPACE_TIMEOUT: &'static str = "PortableDeviceNameSpaceTimeout";
+pub const PORTABLE_DEVICE_NAMESPACE_EXCLUDE_FROM_SHELL: &'static str
+    = "PortableDeviceNameSpaceExcludeFromShell";
+pub const PORTABLE_DEVICE_NAMESPACE_THUMBNAIL_CONTENT_TYPES: &'static str
+    = "PortableDeviceNameSpaceThumbnailContentTypes";
+pub const PORTABLE_DEVICE_IS_MASS_STORAGE: &'static str = "PortableDeviceIsMassStorage";
+pub const PORTABLE_DEVICE_DRM_SCHEME_WMDRM10_PD: &'static str = "WMDRM10-PD";
+pub const PORTABLE_DEVICE_DRM_SCHEME_PDDRM: &'static str = "PDDRM";
 //101
 ENUM!{enum WPD_DEVICE_TYPES {
     WPD_DEVICE_TYPE_GENERIC = 0,
