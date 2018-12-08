@@ -173,10 +173,7 @@ pub type RTL_REFERENCE_COUNT = LONG_PTR;
 pub type PRTL_REFERENCE_COUNT = *mut LONG_PTR;
 pub type RTL_REFERENCE_COUNT32 = LONG;
 pub type PRTL_REFERENCE_COUNT32 = *mut LONG;
-STRUCT!{struct LUID {
-    LowPart: DWORD,
-    HighPart: LONG,
-}}
+pub use shared::ntdef::LUID;
 pub type PLUID = *mut LUID;
 pub type DWORDLONG = ULONGLONG;
 pub type PDWORDLONG = *mut DWORDLONG;
