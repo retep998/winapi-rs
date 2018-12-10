@@ -40,21 +40,14 @@ pub const DELTA_FILE_TYPE_CLI4_ARM: DELTA_FILE_TYPE = 0x00000040;
 pub const DELTA_FILE_TYPE_CLI4_ARM64: DELTA_FILE_TYPE = 0x00000080;
 pub const DELTA_FILE_TYPE_SET_RAW_ONLY: DELTA_FILE_TYPE = DELTA_FILE_TYPE_RAW;
 pub const DELTA_FILE_TYPE_SET_EXECUTABLES_1: DELTA_FILE_TYPE = DELTA_FILE_TYPE_RAW
-                                                             | DELTA_FILE_TYPE_I386
-                                                             | DELTA_FILE_TYPE_IA64
-                                                             | DELTA_FILE_TYPE_AMD64;
+    | DELTA_FILE_TYPE_I386 | DELTA_FILE_TYPE_IA64 | DELTA_FILE_TYPE_AMD64;
 pub const DELTA_FILE_TYPE_SET_EXECUTABLES: DELTA_FILE_TYPE = DELTA_FILE_TYPE_SET_EXECUTABLES_1;
 pub const DELTA_FILE_TYPE_SET_EXECUTABLES_2: DELTA_FILE_TYPE = DELTA_FILE_TYPE_RAW
-                                                             | DELTA_FILE_TYPE_CLI4_I386
-                                                             | DELTA_FILE_TYPE_IA64
-                                                             | DELTA_FILE_TYPE_CLI4_AMD64
-                                                             | DELTA_FILE_TYPE_CLI4_ARM;
+    | DELTA_FILE_TYPE_CLI4_I386 | DELTA_FILE_TYPE_IA64 | DELTA_FILE_TYPE_CLI4_AMD64
+    | DELTA_FILE_TYPE_CLI4_ARM;
 pub const DELTA_FILE_TYPE_SET_EXECUTABLES_3: DELTA_FILE_TYPE = DELTA_FILE_TYPE_RAW
-                                                             | DELTA_FILE_TYPE_CLI4_I386
-                                                             | DELTA_FILE_TYPE_IA64
-                                                             | DELTA_FILE_TYPE_CLI4_AMD64
-                                                             | DELTA_FILE_TYPE_CLI4_ARM
-                                                             | DELTA_FILE_TYPE_CLI4_ARM64;
+    | DELTA_FILE_TYPE_CLI4_I386  | DELTA_FILE_TYPE_IA64 | DELTA_FILE_TYPE_CLI4_AMD64
+    | DELTA_FILE_TYPE_CLI4_ARM | DELTA_FILE_TYPE_CLI4_ARM64;
 pub const DELTA_FILE_TYPE_SET_EXECUTABLES_LATEST : DELTA_FILE_TYPE = DELTA_FILE_TYPE_SET_EXECUTABLES_3;
 pub type DELTA_FLAG_TYPE = __int64;
 pub const DELTA_FLAG_NONE: DELTA_FLAG_TYPE = 0x00000000;
@@ -85,78 +78,29 @@ pub const DELTA_FLAG_CLI4_DISASM: DELTA_FLAG_TYPE = 0x00400000;
 pub const DELTA_FLAG_ARM64_DISASM: DELTA_FLAG_TYPE = 0x00800000;
 pub const DELTA_FLAG_ARM64_PDATA: DELTA_FLAG_TYPE = 0x01000000;
 pub const DELTA_DEFAULT_FLAGS_RAW: DELTA_FLAG_TYPE = DELTA_FLAG_NONE;
-pub const DELTA_DEFAULT_FLAGS_I386: DELTA_FLAG_TYPE = DELTA_FLAG_MARK
-                                                    | DELTA_FLAG_IMPORTS
-                                                    | DELTA_FLAG_EXPORTS
-                                                    | DELTA_FLAG_RESOURCES
-                                                    | DELTA_FLAG_RELOCS
-                                                    | DELTA_FLAG_I386_SMASHLOCK
-                                                    | DELTA_FLAG_I386_JMPS
-                                                    | DELTA_FLAG_I386_CALLS
-                                                    | DELTA_FLAG_UNBIND
-                                                    | DELTA_FLAG_CLI_DISASM
-                                                    | DELTA_FLAG_CLI_METADATA;
-pub const DELTA_DEFAULT_FLAGS_IA64: DELTA_FLAG_TYPE = DELTA_FLAG_MARK
-                                                    | DELTA_FLAG_IMPORTS
-                                                    | DELTA_FLAG_EXPORTS
-                                                    | DELTA_FLAG_RESOURCES
-                                                    | DELTA_FLAG_RELOCS
-                                                    | DELTA_FLAG_IA64_DISASM
-                                                    | DELTA_FLAG_IA64_PDATA
-                                                    | DELTA_FLAG_UNBIND
-                                                    | DELTA_FLAG_CLI_DISASM
-                                                    | DELTA_FLAG_CLI_METADATA;
-pub const DELTA_DEFAULT_FLAGS_AMD64: DELTA_FLAG_TYPE = DELTA_FLAG_MARK
-                                                     | DELTA_FLAG_IMPORTS
-                                                     | DELTA_FLAG_EXPORTS
-                                                     | DELTA_FLAG_RESOURCES
-                                                     | DELTA_FLAG_RELOCS
-                                                     | DELTA_FLAG_AMD64_DISASM
-                                                     | DELTA_FLAG_AMD64_PDATA
-                                                     | DELTA_FLAG_UNBIND
-                                                     | DELTA_FLAG_CLI_DISASM
-                                                     | DELTA_FLAG_CLI_METADATA;
-pub const DELTA_CLI4_FLAGS_I386: DELTA_FLAG_TYPE = DELTA_FLAG_MARK
-                                                 | DELTA_FLAG_IMPORTS
-                                                 | DELTA_FLAG_EXPORTS
-                                                 | DELTA_FLAG_RESOURCES
-                                                 | DELTA_FLAG_RELOCS
-                                                 | DELTA_FLAG_I386_SMASHLOCK
-                                                 | DELTA_FLAG_I386_JMPS
-                                                 | DELTA_FLAG_I386_CALLS
-                                                 | DELTA_FLAG_UNBIND
-                                                 | DELTA_FLAG_CLI4_DISASM
-                                                 | DELTA_FLAG_CLI4_METADATA;
-pub const DELTA_CLI4_FLAGS_AMD64: DELTA_FLAG_TYPE = DELTA_FLAG_MARK
-                                                  | DELTA_FLAG_IMPORTS
-                                                  | DELTA_FLAG_EXPORTS
-                                                  | DELTA_FLAG_RESOURCES
-                                                  | DELTA_FLAG_RELOCS
-                                                  | DELTA_FLAG_AMD64_DISASM
-                                                  | DELTA_FLAG_AMD64_PDATA
-                                                  | DELTA_FLAG_UNBIND
-                                                  | DELTA_FLAG_CLI4_DISASM
-                                                  | DELTA_FLAG_CLI4_METADATA;
-pub const DELTA_CLI4_FLAGS_ARM: DELTA_FLAG_TYPE = DELTA_FLAG_MARK
-                                                | DELTA_FLAG_IMPORTS
-                                                | DELTA_FLAG_EXPORTS
-                                                | DELTA_FLAG_RESOURCES
-                                                | DELTA_FLAG_RELOCS
-                                                | DELTA_FLAG_ARM_DISASM
-                                                | DELTA_FLAG_ARM_PDATA
-                                                | DELTA_FLAG_UNBIND
-                                                | DELTA_FLAG_CLI4_DISASM
-                                                | DELTA_FLAG_CLI4_METADATA;
-pub const DELTA_CLI4_FLAGS_ARM64: DELTA_FLAG_TYPE = DELTA_FLAG_MARK
-                                                  | DELTA_FLAG_IMPORTS
-                                                  | DELTA_FLAG_EXPORTS
-                                                  | DELTA_FLAG_RESOURCES
-                                                  | DELTA_FLAG_RELOCS
-                                                  | DELTA_FLAG_ARM64_DISASM
-                                                  | DELTA_FLAG_ARM64_PDATA
-                                                  | DELTA_FLAG_UNBIND
-                                                  | DELTA_FLAG_CLI4_DISASM
-                                                  | DELTA_FLAG_CLI4_METADATA;
+pub const DELTA_DEFAULT_FLAGS_I386: DELTA_FLAG_TYPE = DELTA_FLAG_MARK | DELTA_FLAG_IMPORTS
+    | DELTA_FLAG_EXPORTS | DELTA_FLAG_RESOURCES | DELTA_FLAG_RELOCS | DELTA_FLAG_I386_SMASHLOCK
+    | DELTA_FLAG_I386_JMPS | DELTA_FLAG_I386_CALLS | DELTA_FLAG_UNBIND | DELTA_FLAG_CLI_DISASM
+    | DELTA_FLAG_CLI_METADATA;
+pub const DELTA_DEFAULT_FLAGS_IA64: DELTA_FLAG_TYPE = DELTA_FLAG_MARK | DELTA_FLAG_IMPORTS
+    | DELTA_FLAG_EXPORTS | DELTA_FLAG_RESOURCES | DELTA_FLAG_RELOCS | DELTA_FLAG_IA64_DISASM
+    | DELTA_FLAG_IA64_PDATA | DELTA_FLAG_UNBIND | DELTA_FLAG_CLI_DISASM | DELTA_FLAG_CLI_METADATA;
+pub const DELTA_DEFAULT_FLAGS_AMD64: DELTA_FLAG_TYPE = DELTA_FLAG_MARK | DELTA_FLAG_IMPORTS
+    | DELTA_FLAG_EXPORTS | DELTA_FLAG_RESOURCES | DELTA_FLAG_RELOCS | DELTA_FLAG_AMD64_DISASM
+    | DELTA_FLAG_AMD64_PDATA | DELTA_FLAG_UNBIND | DELTA_FLAG_CLI_DISASM | DELTA_FLAG_CLI_METADATA;
+pub const DELTA_CLI4_FLAGS_I386: DELTA_FLAG_TYPE = DELTA_FLAG_MARK | DELTA_FLAG_IMPORTS
+    | DELTA_FLAG_EXPORTS | DELTA_FLAG_RESOURCES | DELTA_FLAG_RELOCS | DELTA_FLAG_I386_SMASHLOCK
+    | DELTA_FLAG_I386_JMPS | DELTA_FLAG_I386_CALLS | DELTA_FLAG_UNBIND | DELTA_FLAG_CLI4_DISASM
+    | DELTA_FLAG_CLI4_METADATA;
+pub const DELTA_CLI4_FLAGS_AMD64: DELTA_FLAG_TYPE = DELTA_FLAG_MARK | DELTA_FLAG_IMPORTS
+    | DELTA_FLAG_EXPORTS | DELTA_FLAG_RESOURCES | DELTA_FLAG_RELOCS | DELTA_FLAG_AMD64_DISASM
+    | DELTA_FLAG_AMD64_PDATA | DELTA_FLAG_UNBIND | DELTA_FLAG_CLI4_DISASM | DELTA_FLAG_CLI4_METADATA;
+pub const DELTA_CLI4_FLAGS_ARM: DELTA_FLAG_TYPE = DELTA_FLAG_MARK | DELTA_FLAG_IMPORTS | DELTA_FLAG_EXPORTS
+    | DELTA_FLAG_RESOURCES | DELTA_FLAG_RELOCS | DELTA_FLAG_ARM_DISASM | DELTA_FLAG_ARM_PDATA
+    | DELTA_FLAG_UNBIND | DELTA_FLAG_CLI4_DISASM | DELTA_FLAG_CLI4_METADATA;
+pub const DELTA_CLI4_FLAGS_ARM64: DELTA_FLAG_TYPE = DELTA_FLAG_MARK | DELTA_FLAG_IMPORTS
+    | DELTA_FLAG_EXPORTS | DELTA_FLAG_RESOURCES | DELTA_FLAG_RELOCS | DELTA_FLAG_ARM64_DISASM
+    | DELTA_FLAG_ARM64_PDATA | DELTA_FLAG_UNBIND | DELTA_FLAG_CLI4_DISASM | DELTA_FLAG_CLI4_METADATA;
 pub const DELTA_MAX_HASH_SIZE: usize = 32;
 STRUCT!{struct DELTA_HASH {
     HashSize: DWORD,
