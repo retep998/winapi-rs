@@ -546,6 +546,12 @@ fn shared_hidsdi() {
     assert_eq!(size_of::<HIDD_ATTRIBUTES>(), 12);
     assert_eq!(align_of::<HIDD_ATTRIBUTES>(), 4);
 }
+#[cfg(feature = "ifdef")] #[test]
+fn shared_ifdef() {
+    use winapi::shared::ifdef::*;
+    assert_eq!(size_of::<NET_LUID_LH>(), 8);
+    assert_eq!(align_of::<NET_LUID_LH>(), 8);
+}
 #[cfg(feature = "in6addr")] #[test]
 fn shared_in6addr() {
     use winapi::shared::in6addr::*;
