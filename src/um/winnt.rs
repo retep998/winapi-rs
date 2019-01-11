@@ -111,7 +111,7 @@ STRUCT!{struct GROUP_AFFINITY {
     Reserved: [WORD; 3],
 }}
 pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 pub const MAXIMUM_PROC_PER_GROUP: BYTE = 32;
 #[cfg(target_arch = "x86_64")]
 pub const MAXIMUM_PROC_PER_GROUP: BYTE = 64;
@@ -914,7 +914,7 @@ STRUCT!{struct M128A { // FIXME align 16
     High: LONGLONG,
 }}
 pub type PM128A = *mut M128A;
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 STRUCT!{struct XSAVE_FORMAT { // FIXME align 16
     ControlWord: WORD,
     StatusWord: WORD,
@@ -964,7 +964,7 @@ STRUCT!{struct XSAVE_AREA { // FIXME align 16
     Header: XSAVE_AREA_HEADER,
 }}
 pub type PXSAVE_AREA = *mut XSAVE_AREA;
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 STRUCT!{struct XSTATE_CONTEXT {
     Mask: DWORD64,
     Length: DWORD,
@@ -1206,7 +1206,7 @@ STRUCT!{struct KNONVOLATILE_CONTEXT_POINTERS {
 }}
 pub type PKNONVOLATILE_CONTEXT_POINTERS = *mut KNONVOLATILE_CONTEXT_POINTERS;
 } // IFDEF(x86_64)
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 IFDEF!{
 pub const EXCEPTION_READ_FAULT: DWORD = 0;
 pub const EXCEPTION_WRITE_FAULT: DWORD = 1;
@@ -5534,7 +5534,7 @@ IFDEF!{
 pub type IMAGE_NT_HEADERS = IMAGE_NT_HEADERS64;
 pub type PIMAGE_NT_HEADERS = PIMAGE_NT_HEADERS64;
 }
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 IFDEF!{
 pub type IMAGE_NT_HEADERS = IMAGE_NT_HEADERS32;
 pub type PIMAGE_NT_HEADERS = PIMAGE_NT_HEADERS32;
@@ -7050,7 +7050,7 @@ UNION!{union SLIST_HEADER {
 }}
 pub type PSLIST_HEADER = *mut SLIST_HEADER;
 }
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 IFDEF!{
 STRUCT!{struct SLIST_HEADER_s {
     Next: SLIST_ENTRY,

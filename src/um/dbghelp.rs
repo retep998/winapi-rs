@@ -14,7 +14,7 @@ use um::winnt::{
     BOOLEAN, CHAR, HANDLE, LIST_ENTRY, PCSTR, PCWSTR, PIMAGE_NT_HEADERS, PIMAGE_SECTION_HEADER,
     PSTR, PVOID, PWSTR, WCHAR,
 };
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 use um::winnt::{
     PFPO_DATA, PIMAGE_COFF_SYMBOLS_HEADER, PIMAGE_DEBUG_DIRECTORY, PIMAGE_FUNCTION_ENTRY,
     PIMAGE_NT_HEADERS32,
@@ -39,7 +39,7 @@ STRUCT!{struct LOADED_IMAGE {
     Links: LIST_ENTRY,
     SizeOfImage: ULONG,
 }}
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 STRUCT!{struct LOADED_IMAGE {
     ModuleName: PSTR,
     hFile: HANDLE,
@@ -88,7 +88,7 @@ FN!{stdcall PFIND_EXE_FILE_CALLBACKW(
     FileName: PCWSTR,
     CallerData: PVOID,
 ) -> BOOL}
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 STRUCT!{struct IMAGE_DEBUG_INFORMATION {
     List: LIST_ENTRY,
     ReservedSize: DWORD,
@@ -122,7 +122,7 @@ STRUCT!{struct IMAGE_DEBUG_INFORMATION {
     ReservedOriginalFunctionTableBaseAddress: DWORD,
     Reserved: [DWORD; 2],
 }}
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 pub type PIMAGE_DEBUG_INFORMATION = *mut IMAGE_DEBUG_INFORMATION;
 FN!{stdcall PENUMDIRTREE_CALLBACK(
     FilePath: PCSTR,
@@ -190,13 +190,13 @@ pub type LPADDRESS64 = *mut ADDRESS64;
 pub type ADDRESS = ADDRESS64;
 #[cfg(target_arch = "x86_64")]
 pub type LPADDRESS = LPADDRESS64;
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 STRUCT!{struct ADDRESS {
     Offset: DWORD,
     Segment: WORD,
     Mode: ADDRESS_MODE,
 }}
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 pub type LPADDRESS = *mut ADDRESS;
 STRUCT!{struct KDHELP64 {
     Thread: DWORD64,
@@ -219,7 +219,7 @@ pub type PKDHELP64 = *mut KDHELP64;
 pub type KDHELP = KDHELP64;
 #[cfg(target_arch = "x86_64")]
 pub type PKDHELP = PKDHELP64;
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 STRUCT!{struct KDHELP {
     Thread: DWORD,
     ThCallbackStack: DWORD,
@@ -272,7 +272,7 @@ pub type LPSTACKFRAME_EX = *mut STACKFRAME_EX;
 pub type STACKFRAME = STACKFRAME64;
 #[cfg(target_arch = "x86_64")]
 pub type LPSTACKFRAME = LPSTACKFRAME64;
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 STRUCT!{struct STACKFRAME {
     AddrPC: ADDRESS,
     AddrReturn: ADDRESS,
@@ -286,7 +286,7 @@ STRUCT!{struct STACKFRAME {
     KdHelp: KDHELP,
     AddrBStore: ADDRESS,
 }}
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 pub type LPSTACKFRAME = *mut STACKFRAME;
 FN!{stdcall PREAD_PROCESS_MEMORY_ROUTINE64(
     hProcess: HANDLE,
@@ -318,7 +318,7 @@ pub type PFUNCTION_TABLE_ACCESS_ROUTINE = PFUNCTION_TABLE_ACCESS_ROUTINE64;
 pub type PGET_MODULE_BASE_ROUTINE = PGET_MODULE_BASE_ROUTINE64;
 #[cfg(target_arch = "x86_64")]
 pub type PTRANSLATE_ADDRESS_ROUTINE = PTRANSLATE_ADDRESS_ROUTINE64;
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 FN!{stdcall PREAD_PROCESS_MEMORY_ROUTINE(
     hProcess: HANDLE,
     qwBaseAddress: DWORD,
@@ -326,17 +326,17 @@ FN!{stdcall PREAD_PROCESS_MEMORY_ROUTINE(
     nSize: DWORD,
     lpNumberOfBytesRead: PDWORD,
 ) -> BOOL}
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 FN!{stdcall PFUNCTION_TABLE_ACCESS_ROUTINE(
     ahProcess: HANDLE,
     AddrBase: DWORD,
 ) -> PVOID}
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 FN!{stdcall PGET_MODULE_BASE_ROUTINE(
     hProcess: HANDLE,
     Address: DWORD,
 ) -> DWORD}
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 FN!{stdcall PTRANSLATE_ADDRESS_ROUTINE(
     hProcess: HANDLE,
     hThread: HANDLE,
