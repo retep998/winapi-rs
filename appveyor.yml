@@ -36,11 +36,14 @@ install:
 build_script:
   - cargo build --target=%target%
   - cargo build --release --target=%target%
-  - cargo build --target=%target% --features "everything debug impl-default"
+#  - cargo build --target=%target% --features "everything debug impl-default"
 
-test_script:
-  - cargo test --target=%target% --features "everything debug impl-default"
-  
+# test_script:
+#   - cargo test --target=%target% --features "everything debug impl-default"
+
+after_build:
+  - dir *.exe /s /b | find ^"temp^" /v /i | findstr /e .exe
+
 artifacts:
   - path: target\$(target)\release\**\*.exe
     name: winapi-rs-$(target)
