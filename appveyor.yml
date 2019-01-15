@@ -38,15 +38,11 @@ build_script:
   - cargo build --release --target=%target%
   - cargo build --target=%target% --features "everything debug impl-default"
 
-after_build:
-  - dir *.exe /s /b | find ^"temp^" /v /i | findstr /e .exe
-  - dir \*.exe /s /b | find ^"temp^" /v /i | findstr /e .exe
-
-# test_script:
-#   - cargo test --target=%target% --features "everything debug impl-default"
+test_script:
+  - cargo test --target=%target% --features "everything debug impl-default"
   
 artifacts:
-  - path: target\$(target)\release\*.exe
+  - path: target\$(target)\release\**\*.exe
     name: winapi-rs-$(target)
 
 notifications:
