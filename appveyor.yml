@@ -1,6 +1,5 @@
 environment:
   channel: nightly
-  host: x86_64-pc-windows-msvc
   matrix:
   - TARGET: x86_64-pc-windows-msvc
     image: Visual Studio 2017
