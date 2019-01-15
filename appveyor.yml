@@ -23,6 +23,11 @@ environment:
 matrix:
   allow_failures:
     - target: aarch64-pc-windows-msvc
+    
+cache:
+ - rustup
+ - rustc
+ - cargo
 
 install:
   - ps: if (ls -r . -fi "*.rs" | sls "`t") { throw "Found tab character" }
