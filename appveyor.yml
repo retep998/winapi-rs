@@ -1,34 +1,45 @@
 image: Visual Studio 2017
 
 environment:
-  channel: nightly
   matrix:
-  - TARGET: x86_64-pc-windows-msvc
-    HOST: x86_64-pc-windows-msvc
-  - TARGET: aarch64-pc-windows-msvc
-    HOST: x86_64-pc-windows-msvc
-  - TARGET: i686-pc-windows-msvc
-    HOST: i686-pc-windows-msvc
-  - TARGET: x86_64-pc-windows-gnu
-    HOST: x86_64-pc-windows-gnu
-  - TARGET: i686-pc-windows-gnu
-    HOST: i686-pc-windows-gnu
+  - target: x86_64-pc-windows-msvc
+    host: x86_64-pc-windows-msvc
+    channel: stable
+  - target: aarch64-pc-windows-msvc
+    host: x86_64-pc-windows-msvc
+    channel: nightly
+  - target: i686-pc-windows-msvc
+    host: i686-pc-windows-msvc
+    channel: stable
+  - target: x86_64-pc-windows-gnu
+    host: x86_64-pc-windows-gnu
+    channel: stable
+  - target: i686-pc-windows-gnu
+    host: i686-pc-windows-gnu
+    channel: stable
+  - target: x86_64-pc-windows-gnu
+    host: x86_64-pc-windows-gnu
+    channel: none
+    version: 1.6.0
+matrix:
+  allow_failures:
+    - target: aarch64-pc-windows-msvc
 
 install:
   - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
-  - rustup-init -yv --default-toolchain %channel% --default-host %HOST%
+  - rustup-init -yv --default-toolchain %channel% --default-host %host%
   - set PATH=%PATH%;%USERPROFILE%\.cargo\bin;%APPVEYOR_BUILD_FOLDER%
-  - ps: $Env:PKG_CONFIG_ALLOW_CROSS=1
+  - rustup install %version%
+  - rustup target add %target%
   - rustc -vV
   - cargo -vV
-  - rustup target add %TARGET%
 
 build_script:
-  - cargo build --target=%TARGET%
-  - cargo build --target=%TARGET% --features "everything debug impl-default"
+  - cargo build --target=%target%
+  - cargo build --target=%target% --features "everything debug impl-default"
 
 test_script:
-  - cargo test --target=%TARGET% --features "everything debug impl-default"
+  - cargo test --target=%target% --features "everything debug impl-default"
 
 notifications:
   - provider: Webhook
