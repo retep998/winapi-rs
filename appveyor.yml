@@ -4,14 +4,19 @@ environment:
   channel: nightly
   matrix:
   - TARGET: x86_64-pc-windows-msvc
+    HOST: x86_64-pc-windows-msvc
   - TARGET: aarch64-pc-windows-msvc
+    HOST: x86_64-pc-windows-msvc
   - TARGET: i686-pc-windows-msvc
+    HOST: i686-pc-windows-msvc
   - TARGET: x86_64-pc-windows-gnu
+    HOST: x86_64-pc-windows-gnu
   - TARGET: i686-pc-windows-gnu
+    HOST: i686-pc-windows-gnu
 
 install:
   - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
-  - rustup-init -yv --default-toolchain %channel% --default-host %TARGET%
+  - rustup-init -yv --default-toolchain %channel% --default-host %HOST%
   - set PATH=%PATH%;%USERPROFILE%\.cargo\bin;%APPVEYOR_BUILD_FOLDER%
   - ps: $Env:PKG_CONFIG_ALLOW_CROSS=1
   - rustc -vV
