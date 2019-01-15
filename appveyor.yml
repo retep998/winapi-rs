@@ -28,7 +28,7 @@ install:
   - ps: if (ls -r . -fi "*.rs" | sls "`t") { throw "Found tab character" }
   - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
   - rustup-init -yv --default-toolchain %channel% --default-host %host%
-  - set PATH=%PATH%;%USERPROFILE%\.cargo\bin;%APPVEYOR_BUILD_FOLDER%
+  - set PATH=%PATH%;%USERPROFILE%\.cargo\bin;
   - if NOT %host% == %target% rustup target add %target%
   - rustc -vV
   - cargo -vV
@@ -40,10 +40,6 @@ build_script:
 
 test_script:
   - cargo test --target=%target% --features "everything debug impl-default"
-  
-artifacts:
-  - path: target\$(target)\release\*.exe
-    name: winapi-rs-$(target)
 
 notifications:
   - provider: Webhook
