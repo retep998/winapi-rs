@@ -1,4 +1,6 @@
 environment:
+  channel: nightly
+  host: x86_64-pc-windows-msvc
   matrix:
   - TARGET: nightly-x86_64-pc-windows-msvc
   - TARGET: nightly-aarch64-pc-windows-msvc
