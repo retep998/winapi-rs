@@ -1,14 +1,18 @@
-image: Visual Studio 2017
-
 environment:
   channel: nightly
   host: x86_64-pc-windows-msvc
   matrix:
   - TARGET: x86_64-pc-windows-msvc
+    image: Visual Studio 2017
   - TARGET: aarch64-pc-windows-msvc
+    image: Visual Studio 2017
   - TARGET: i686-pc-windows-msvc
+    image: Visual Studio 2017
   - TARGET: x86_64-pc-windows-gnu
+    image: Ubuntu1804
   - TARGET: i686-pc-windows-gnu
+    image: Ubuntu1804
+
 install:
   - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
   - rustup-init -yv --default-toolchain %channel% --default-host %host%
