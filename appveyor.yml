@@ -1,30 +1,30 @@
+image: Visual Studio 2017
+
 environment:
   channel: nightly
   matrix:
   - TARGET: x86_64-pc-windows-msvc
-    image: Visual Studio 2017
   - TARGET: aarch64-pc-windows-msvc
-    image: Visual Studio 2017
   - TARGET: i686-pc-windows-msvc
-    image: Visual Studio 2017
   - TARGET: x86_64-pc-windows-gnu
-    image: Ubuntu1804
   - TARGET: i686-pc-windows-gnu
-    image: Ubuntu1804
 
 install:
   - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
-  - rustup-init -yv --default-toolchain %channel%
+  - rustup-init -yv --default-toolchain %channel% --default-host %TARGET%
   - set PATH=%PATH%;%USERPROFILE%\.cargo\bin;%APPVEYOR_BUILD_FOLDER%
   - ps: $Env:PKG_CONFIG_ALLOW_CROSS=1
   - rustc -vV
   - cargo -vV
   - rustup target add %TARGET%
+
 build_script:
   - cargo build --target=%TARGET%
   - cargo build --target=%TARGET% --features "everything debug impl-default"
+
 test_script:
   - cargo test --target=%TARGET% --features "everything debug impl-default"
+
 notifications:
   - provider: Webhook
     url: https://webhooks.gitter.im/e/d3d6703d143c888f0a8a
