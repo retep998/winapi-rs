@@ -4,19 +4,19 @@ environment:
   matrix:
   - target: x86_64-pc-windows-msvc
     host: x86_64-pc-windows-msvc
-    channel: stable
+    channel: nightly
   - target: aarch64-pc-windows-msvc
     host: x86_64-pc-windows-msvc
     channel: nightly
   - target: i686-pc-windows-msvc
     host: i686-pc-windows-msvc
-    channel: stable
+    channel: nightly
   - target: x86_64-pc-windows-gnu
     host: x86_64-pc-windows-gnu
-    channel: stable
+    channel: nightly
   - target: i686-pc-windows-gnu
     host: i686-pc-windows-gnu
-    channel: stable
+    channel: nightly
   - target: x86_64-pc-windows-gnu
     host: x86_64-pc-windows-gnu
     channel: 1.6.0
