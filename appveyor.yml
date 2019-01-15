@@ -15,7 +15,7 @@ environment:
 
 install:
   - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
-  - rustup-init -yv --default-toolchain %channel% --default-host %host%
+  - rustup-init -yv --default-toolchain %channel%
   - set PATH=%PATH%;%USERPROFILE%\.cargo\bin;%APPVEYOR_BUILD_FOLDER%
   - ps: $Env:PKG_CONFIG_ALLOW_CROSS=1
   - rustc -vV
