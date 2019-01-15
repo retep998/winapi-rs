@@ -1,6 +1,7 @@
 environment:
   matrix:
   - TARGET: nightly-x86_64-pc-windows-msvc
+  - TARGET: nightly-aarch64-pc-windows-msvc
   - TARGET: nightly-i686-pc-windows-msvc
   - TARGET: nightly-x86_64-pc-windows-gnu
   - TARGET: nightly-i686-pc-windows-gnu
