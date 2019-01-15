@@ -23,10 +23,6 @@ environment:
 matrix:
   allow_failures:
     - target: aarch64-pc-windows-msvc
-    
-cache:
- - C:\projects\winapi-rs
- - C:\Users\appveyor
 
 install:
   - ps: if (ls -r . -fi "*.rs" | sls "`t") { throw "Found tab character" }
