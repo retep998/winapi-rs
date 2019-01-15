@@ -25,9 +25,8 @@ matrix:
     - target: aarch64-pc-windows-msvc
     
 cache:
- - C:\Users\appveyor\.rustup
- - C:\Users\appveyor\.rustc
- - C:\Users\appveyor\.cargo
+ - C:\projects\winapi-rs
+ - C:\Users\appveyor
 
 install:
   - ps: if (ls -r . -fi "*.rs" | sls "`t") { throw "Found tab character" }
