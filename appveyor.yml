@@ -25,9 +25,9 @@ matrix:
     - target: aarch64-pc-windows-msvc
     
 cache:
- - rustup
- - rustc
- - cargo
+ - C:\Users\appveyor\.rustup
+ - C:\Users\appveyor\.rustc
+ - C:\Users\appveyor\.cargo
 
 install:
   - ps: if (ls -r . -fi "*.rs" | sls "`t") { throw "Found tab character" }
