@@ -427,6 +427,14 @@ impl Graph {
         }).collect::<Vec<_>>();
         libs.sort();
         libs.dedup();
+        // FIXME Temporary hacks until build script is redesigned.
+        libs.retain(|&&lib| match &*var("TARGET").unwrap() {
+            "aarch64-pc-windows-msvc" => {
+                if lib == "opengl32" { false }
+                else { true }
+            },
+            _ => true,
+        });
         let prefix = library_prefix();
         let kind = library_kind();
         for lib in libs {

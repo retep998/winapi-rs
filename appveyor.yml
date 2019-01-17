@@ -2,23 +2,16 @@ image: Visual Studio 2017
 
 environment:
   matrix:
-  - target: x86_64-pc-windows-msvc
-    host: x86_64-pc-windows-msvc
+  - host: x86_64-pc-windows-msvc
+    targets: aarch64-pc-windows-msvc
     channel: nightly
-  - target: aarch64-pc-windows-msvc
-    host: x86_64-pc-windows-msvc
+  - host: i686-pc-windows-msvc
     channel: nightly
-  - target: i686-pc-windows-msvc
-    host: i686-pc-windows-msvc
+  - host: x86_64-pc-windows-gnu
     channel: nightly
-  - target: x86_64-pc-windows-gnu
-    host: x86_64-pc-windows-gnu
+  - host: i686-pc-windows-gnu
     channel: nightly
-  - target: i686-pc-windows-gnu
-    host: i686-pc-windows-gnu
-    channel: nightly
-  - target: x86_64-pc-windows-gnu
-    host: x86_64-pc-windows-gnu
+  - host: x86_64-pc-windows-gnu
     channel: 1.6.0
 matrix:
   allow_failures:
@@ -27,19 +20,25 @@ matrix:
 install:
   - ps: if (ls -r . -fi "*.rs" | sls "`t") { throw "Found tab character" }
   - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
-  - rustup-init -yv --default-toolchain %channel% --default-host %host%
-  - set PATH=%PATH%;%USERPROFILE%\.cargo\bin;
-  - if NOT %host% == %target% rustup target add %target%
+  - rustup-init.exe -y --default-toolchain %channel% --default-host %host%
+  - ps: $env:CARGO_INCREMENTAL = 0
+  - ps: $env:PATH = "$env:PATH;${env:USERPROFILE}\.cargo\bin"
+  - ps: >
+      if ($env:targets) { $env:targets -split " " | %{
+        rustup target add $_ 2>&1|%{"$_"}
+      }}
   - rustc -vV
   - cargo -vV
 
 build_script:
-  - cargo build --target=%target%
-  - cargo build --release --target=%target%
-  - cargo build --target=%target% --features "everything debug impl-default"
-
-test_script:
-  - cargo test --target=%target% --features "everything debug impl-default"
+  - cargo build
+  - cargo build --features "everything impl-debug impl-default"
+  - cargo build --release --features "everything impl-debug impl-default"
+  - cargo test --features "everything impl-debug impl-default"
+  - ps: >
+      if ($env:targets) { $env:targets -split " " | %{
+        cargo test --target=$_ --features "everything impl-debug impl-default" --no-run 2>&1|%{"$_"}
+      }}
 
 notifications:
   - provider: Webhook
