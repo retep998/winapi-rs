@@ -8,8 +8,8 @@
 use shared::basetsd::{PSIZE_T, SIZE_T};
 use shared::minwindef::{BOOL, DWORD, LPCVOID, LPDWORD, LPVOID};
 use shared::ntdef::{HANDLE};
-use um::winnt::{LPCSTR, LPCWSTR};
 use um::minwinbase::LPENCLAVE_ROUTINE;
+use um::winnt::{LPCSTR, LPCWSTR};
 extern "system" {
     pub fn IsEnclaveTypeSupported(
         flEnclaveType: DWORD,
