@@ -30,7 +30,7 @@ fn check_lines() {
         err_list.is_empty(),
         "All files must have a maximum line length of {}, must not contain blank lines, \
         and must end with a trailing newline. The following inconsistencies were found:\n\n{}\
-        Note: if you can't make a line fit, add it to WHITE_LIST at {}:12",
+        Note: if you can't make a line fit, add it to WHITE_LIST at {}:14",
         MAX_LEN,
         err_list,
         file!(),
@@ -48,29 +48,28 @@ fn process_modules<P: AsRef<Path>>(dir: P, err_list: &mut String) {
 }
 fn check_module<P: AsRef<Path>>(path: P, err_list: &mut String) {
     let clean_path = &path.as_ref().to_str().expect("Path.to_str() failed")[ROOT.len() + 1..];
+    let file = read_file(&path);
+    let mut marked = false;
     let maybe_this = WHITE_LIST.into_iter()
                                .find(|&&(module, _)| module == clean_path)
                                .map(|&(_, allowed_lines)| allowed_lines);
-    if maybe_this.map(|skip_lines| skip_lines.is_empty()).unwrap_or(false) {
-        return
-    }
-    let file = read_file(&path);
-    let mut marked = false;
-    for (line, n) in file.lines().zip(1..) {
-        if line.matches('"').count() >= 2 // Allow long string constants
-            || maybe_this.map(|skip_lines| skip_lines.contains(&line)).unwrap_or(false) {
-            continue
-        }
-        let len = line.split_terminator("//")
-                      .next()
-                      .map(|actual| actual.trim_right().chars().count())
-                      .unwrap_or(0);
-        if line.is_empty() || len > MAX_LEN {
-            if !marked {
-                writeln!(err_list, "--> {}:", clean_path).unwrap();
-                marked = true;
+    if maybe_this.map(|skip_lines| !skip_lines.is_empty()).unwrap_or(true) {
+        for (line, n) in file.lines().zip(1..) {
+            if line.matches('"').count() >= 2 // Allow long string constants
+                || maybe_this.map(|skip_lines| skip_lines.contains(&line)).unwrap_or(false) {
+                continue
             }
-            writeln!(err_list, "Line {} ({} chars);", n, len).unwrap();
+            let len = line.split_terminator("//")
+                          .next()
+                          .map(|actual| actual.trim_right().chars().count())
+                          .unwrap_or(0);
+            if line.is_empty() || len > MAX_LEN {
+                if !marked {
+                    writeln!(err_list, "--> {}:", clean_path).unwrap();
+                    marked = true;
+                }
+                writeln!(err_list, "Line {} ({} chars);", n, len).unwrap();
+            }
         }
     }
     if !file.ends_with('\n') {
