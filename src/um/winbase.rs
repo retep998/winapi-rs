@@ -118,7 +118,7 @@ FN!{stdcall PFIBER_CALLOUT_ROUTINE(
 // FAIL_FAST_*
 #[cfg(target_arch = "x86")]
 pub type LPLDT_ENTRY = PLDT_ENTRY;
-#[cfg(target_arch = "x86_64")]
+#[cfg(not(target_arch = "x86"))]
 pub type LPLDT_ENTRY = LPVOID; // TODO - fix this for 32-bit
 //SP_SERIALCOMM
 //PST_*
@@ -225,7 +225,24 @@ STRUCT!{struct COMMCONFIG {
     wcProviderData: [WCHAR; 1],
 }}
 pub type LPCOMMCONFIG = *mut COMMCONFIG;
-// GMEM_*
+pub const GMEM_FIXED: UINT = 0x0000;
+pub const GMEM_MOVEABLE: UINT = 0x0002;
+pub const GMEM_NOCOMPACT: UINT = 0x0010;
+pub const GMEM_NODISCARD: UINT = 0x0020;
+pub const GMEM_ZEROINIT: UINT = 0x0040;
+pub const GMEM_MODIFY: UINT = 0x0080;
+pub const GMEM_DISCARDABLE: UINT = 0x0100;
+pub const GMEM_NOT_BANKED: UINT = 0x1000;
+pub const GMEM_SHARE: UINT = 0x2000;
+pub const GMEM_DDESHARE: UINT = 0x2000;
+pub const GMEM_NOTIFY: UINT = 0x4000;
+pub const GMEM_LOWER: UINT = GMEM_NOT_BANKED;
+pub const GMEM_VALID_FLAGS: UINT = 0x7F72;
+pub const GMEM_INVALID_HANDLE: UINT = 0x8000;
+pub const GHND: UINT = GMEM_MOVEABLE | GMEM_ZEROINIT;
+pub const GPTR: UINT = GMEM_FIXED | GMEM_ZEROINIT;
+pub const GMEM_DISCARDED: UINT = 0x4000;
+pub const GMEM_LOCKCOUNT: UINT = 0x00FF;
 STRUCT!{struct MEMORYSTATUS {
     dwLength: DWORD,
     dwMemoryLoad: DWORD,
@@ -545,40 +562,40 @@ BITFIELD!{UMS_SYSTEM_THREAD_INFORMATION ThreadUmsFlags: ULONG [
 ]}
 pub type PUMS_SYSTEM_THREAD_INFORMATION = *mut UMS_SYSTEM_THREAD_INFORMATION;
 extern "system" {
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn CreateUmsCompletionList(
         UmsCompletionList: *mut PUMS_COMPLETION_LIST
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn DequeueUmsCompletionListItems(
         UmsCompletionList: PUMS_COMPLETION_LIST,
         WaitTimeOut: DWORD,
         UmsThreadList: *mut PUMS_CONTEXT,
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetUmsCompletionListEvent(
         UmsCompletionList: PUMS_COMPLETION_LIST,
         UmsCompletionEvent: PHANDLE,
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn ExecuteUmsThread(
         UmsThread: PUMS_CONTEXT
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn UmsThreadYield(
         SchedulerParam: PVOID
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn DeleteUmsCompletionList(
         UmsCompletionList: PUMS_COMPLETION_LIST
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetCurrentUmsThread() -> PUMS_CONTEXT;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetNextUmsListItem(
         UmsContext: PUMS_CONTEXT
     ) -> PUMS_CONTEXT;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn QueryUmsThreadInformation(
         UmsThread: PUMS_CONTEXT,
         UmsThreadInfoClass: UMS_THREAD_INFO_CLASS,
@@ -586,26 +603,26 @@ extern "system" {
         UmsThreadInformationLength: ULONG,
         ReturnLength: PULONG,
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn SetUmsThreadInformation(
         UmsThread: PUMS_CONTEXT,
         UmsThreadInfoClass: UMS_THREAD_INFO_CLASS,
         UmsThreadInformation: PVOID,
         UmsThreadInformationLength: ULONG,
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn DeleteUmsThreadContext(
         UmsThread: PUMS_CONTEXT
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn CreateUmsThreadContext(
         lpUmsThread: *mut PUMS_CONTEXT
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn EnterUmsSchedulingMode(
         SchedulerStartupInfo: PUMS_SCHEDULER_STARTUP_INFO
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetUmsSystemThreadInformation(
         ThreadHandle: HANDLE,
         SystemThreadInfo: PUMS_SYSTEM_THREAD_INFORMATION,
@@ -648,6 +665,10 @@ extern "system" {
     pub fn RestoreLastError(
         dwErrCode: DWORD
     );
+}
+pub const FILE_SKIP_COMPLETION_PORT_ON_SUCCESS: UCHAR = 0x1;
+pub const FILE_SKIP_SET_EVENT_ON_HANDLE: UCHAR = 0x2;
+extern "system" {
     pub fn SetFileCompletionNotificationModes(
         FileHandle: HANDLE,
         Flags: UCHAR
@@ -1251,7 +1272,6 @@ extern "system" {
         hUpdate: HANDLE,
         fDiscard: BOOL
     ) -> BOOL;
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
     pub fn GlobalAddAtomA(
         lpString: LPCSTR
     ) -> ATOM;

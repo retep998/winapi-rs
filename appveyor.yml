@@ -1,22 +1,46 @@
+image: Visual Studio 2017
+
 environment:
   matrix:
-  - TARGET: nightly-x86_64-pc-windows-msvc
-  - TARGET: nightly-i686-pc-windows-msvc
-  - TARGET: nightly-x86_64-pc-windows-gnu
-  - TARGET: nightly-i686-pc-windows-gnu
-  - TARGET: 1.6.0-x86_64-pc-windows-gnu
+  - target: x86_64-pc-windows-msvc
+    host: x86_64-pc-windows-msvc
+    channel: nightly
+  - target: aarch64-pc-windows-msvc
+    host: x86_64-pc-windows-msvc
+    channel: nightly
+  - target: i686-pc-windows-msvc
+    host: i686-pc-windows-msvc
+    channel: nightly
+  - target: x86_64-pc-windows-gnu
+    host: x86_64-pc-windows-gnu
+    channel: nightly
+  - target: i686-pc-windows-gnu
+    host: i686-pc-windows-gnu
+    channel: nightly
+  - target: x86_64-pc-windows-gnu
+    host: x86_64-pc-windows-gnu
+    channel: 1.6.0
+matrix:
+  allow_failures:
+    - target: aarch64-pc-windows-msvc
+
 install:
   - ps: if (ls -r . -fi "*.rs" | sls "`t") { throw "Found tab character" }
-  - ps: Start-FileDownload "https://static.rust-lang.org/dist/rust-${env:TARGET}.exe" -FileName "rust-install.exe"
-  - ps: .\rust-install.exe /VERYSILENT /NORESTART /DIR="C:\rust" | Out-Null
-  - ps: $env:PATH="$env:PATH;C:\rust\bin"
+  - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
+  - rustup-init -yv --default-toolchain %channel% --default-host %host%
+  - set PATH=%PATH%;%USERPROFILE%\.cargo\bin;
+  - if NOT %host% == %target% rustup target add %target%
   - rustc -vV
   - cargo -vV
+
 build_script:
-  - cargo build
-  - cargo build --features "everything debug impl-default"
+  - cargo build --target=%target%
+  - cargo build --release --target=%target%
+  - cargo build --target=%target% --features "everything debug impl-default"
+
 test_script:
-  - cargo test --features "everything debug impl-default"
+  - cargo test --target=%target% --features "everything debug impl-default"
+
 notifications:
   - provider: Webhook
     url: https://webhooks.gitter.im/e/d3d6703d143c888f0a8a

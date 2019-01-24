@@ -1,4 +1,4 @@
-// Copyright © 2015-2017 winapi-rs developers
+// Copyright © 2015-2018 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -13,6 +13,10 @@ use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPWSTR};
 DEFINE_GUID!{CLSID_TaskbarList,
     0x56fdf344, 0xfd6d, 0x11d0, 0x95, 0x8a, 0x00, 0x60, 0x97, 0xc9, 0xa0, 0x90}
+DEFINE_GUID!{CLSID_FileOpenDialog,
+    0xdc1c5a9c, 0xe88a, 0x4dde, 0xa5, 0xa1, 0x60, 0xf8, 0x2a, 0x20, 0xae, 0xf7}
+DEFINE_GUID!{CLSID_FileSaveDialog,
+    0xc0b4e2f3, 0xba21, 0x4773, 0x8d, 0xba, 0x33, 0x5e, 0xc9, 0x46, 0xeb, 0x8b}
 //4498
 pub type SFGAOF = ULONG;
 //9466
@@ -92,3 +96,7 @@ interface ITaskbarList2(ITaskbarList2Vtbl): ITaskbarList(ITaskbarListVtbl) {
         fFullscreen: BOOL,
     ) -> HRESULT,
 }}
+RIDL!{#[uuid(0xdc1c5a9c, 0xe88a, 0x4dde, 0xa5, 0xa1, 0x60, 0xf8, 0x2a, 0x20, 0xae, 0xf7)]
+class FileOpenDialog;}
+RIDL!{#[uuid(0xc0b4e2f3, 0xba21, 0x4773, 0x8d, 0xba, 0x33, 0x5e, 0xc9, 0x46, 0xeb, 0x8b)]
+class FileSaveDialog;}

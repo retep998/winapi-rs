@@ -6,8 +6,9 @@
 // except according to those terms.
 //! ApiSet Contract for api-ms-win-core-console-l1
 use shared::minwindef::{BOOL, DWORD, LPDWORD, LPVOID, UINT};
-use um::wincon::{PCONSOLE_READCONSOLE_CONTROL, PHANDLER_ROUTINE, PINPUT_RECORD};
-use um::winnt::{HANDLE, VOID};
+use um::wincon::{PCONSOLE_READCONSOLE_CONTROL, PHANDLER_ROUTINE};
+use um::wincontypes::{COORD, HPCON, PINPUT_RECORD};
+use um::winnt::{HANDLE, HRESULT, VOID};
 extern "system" {
     pub fn AllocConsole() -> BOOL;
     pub fn GetConsoleCP() -> UINT;
@@ -74,4 +75,18 @@ extern "system" {
         lpNumberOfCharsWritten: LPDWORD,
         lpReserved: LPVOID,
     ) -> BOOL;
+    pub fn CreatePseudoConsole(
+        size: COORD,
+        hInput: HANDLE,
+        hOutput: HANDLE,
+        dwFlags: DWORD,
+        phPC: *mut HPCON
+    ) -> HRESULT;
+    pub fn ResizePseudoConsole(
+        hPC: HPCON,
+        size: COORD
+    ) -> HRESULT;
+    pub fn ClosePseudoConsole(
+        hPC: HPCON
+    );
 }
