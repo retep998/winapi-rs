@@ -33,7 +33,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dxgi1_6", &["basetsd", "dxgi1_2", "dxgi1_4", "dxgi1_5", "dxgitype", "guiddef", "minwindef", "windef", "winnt"], &[]),
     ("dxgiformat", &[], &[]),
     ("dxgitype", &["d3d9types", "dxgiformat", "minwindef"], &[]),
-    ("enclaveapi", &["basetsd", "minwinbase", "minwindef", "ntdef", "winnt"], &[]),
+    ("enclaveapi", &["basetsd", "minwinbase", "minwindef", "ntdef", "winnt"], &["kernel32"]),
     ("evntprov", &["basetsd", "guiddef", "minwindef", "winnt"], &["advapi32"]),
     ("evntrace", &["basetsd", "evntcons", "evntprov", "guiddef", "handleapi", "minwindef", "timezoneapi", "vadefs", "winnt", "wmistr"], &["advapi32"]),
     ("guiddef", &[], &[]),
