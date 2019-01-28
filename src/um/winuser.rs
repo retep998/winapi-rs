@@ -9,7 +9,6 @@ use ctypes::{c_int, c_long, c_short, c_uint};
 use shared::basetsd::{
     DWORD_PTR, INT32, INT_PTR, PDWORD_PTR, UINT16, UINT32, UINT64, UINT_PTR, ULONG_PTR,
 };
-#[cfg(target_pointer_width = "64")]
 use shared::basetsd::LONG_PTR;
 use shared::guiddef::{GUID, LPCGUID};
 use shared::minwindef::{
@@ -4986,13 +4985,21 @@ extern "system" {
     ) -> LONG_PTR;
 }
 #[cfg(target_arch = "x86")]
-pub use self::GetWindowLongA as GetWindowLongPtrA;
+pub unsafe fn GetWindowLongPtrA(hWnd: HWND, nIndex: c_int) -> LONG_PTR {
+    GetWindowLongA(hWnd, nIndex) as LONG_PTR
+}
 #[cfg(target_arch = "x86")]
-pub use self::GetWindowLongW as GetWindowLongPtrW;
+pub unsafe fn GetWindowLongPtrW(hWnd: HWND, nIndex: c_int) -> LONG_PTR {
+    GetWindowLongW(hWnd, nIndex) as LONG_PTR
+}
 #[cfg(target_arch = "x86")]
-pub use self::SetWindowLongA as SetWindowLongPtrA;
+pub unsafe fn SetWindowLongPtrA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> LONG_PTR {
+    SetWindowLongA(hWnd, nIndex, dwNewLong as LONG) as LONG_PTR
+}
 #[cfg(target_arch = "x86")]
-pub use self::SetWindowLongW as SetWindowLongPtrW;
+pub unsafe fn SetWindowLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> LONG_PTR {
+    SetWindowLongW(hWnd, nIndex, dwNewLong as LONG) as LONG_PTR
+}
 extern "system" {
     pub fn GetClassWord(
         hWnd: HWND,
@@ -5045,13 +5052,21 @@ extern "system" {
     ) -> ULONG_PTR;
 }
 #[cfg(target_arch = "x86")]
-pub use self::GetClassLongA as GetClassLongPtrA;
+pub unsafe fn GetClassLongPtrA(hWnd: HWND, nIndex: c_int) -> ULONG_PTR {
+    GetClassLongA(hWnd, nIndex) as ULONG_PTR
+}
 #[cfg(target_arch = "x86")]
-pub use self::GetClassLongW as GetClassLongPtrW;
+pub unsafe fn GetClassLongPtrW(hWnd: HWND, nIndex: c_int) -> ULONG_PTR {
+    GetClassLongW(hWnd, nIndex) as ULONG_PTR
+}
 #[cfg(target_arch = "x86")]
-pub use self::SetClassLongA as SetClassLongPtrA;
+pub unsafe fn SetClassLongPtrA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> ULONG_PTR {
+    SetClassLongA(hWnd, nIndex, dwNewLong as LONG) as ULONG_PTR
+}
 #[cfg(target_arch = "x86")]
-pub use self::SetClassLongW as SetClassLongPtrW;
+pub unsafe fn SetClassLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> ULONG_PTR {
+    SetClassLongW(hWnd, nIndex, dwNewLong as LONG) as ULONG_PTR
+}
 extern "system" {
     pub fn GetProcessDefaultLayout(
         pdwDefaultLayout: *mut DWORD,
