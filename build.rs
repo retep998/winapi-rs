@@ -197,7 +197,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("ioapiset", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("ipexport", &["basetsd", "in6addr", "ntdef"], &[]),
     ("iphlpapi", &["basetsd", "ifmib", "ipexport", "ipmib", "iprtrmib", "iptypes", "minwinbase", "minwindef", "ntdef", "tcpmib", "udpmib", "ws2def", "ws2ipdef"], &[]),
-    ("iptypes", &["basetsd", "guiddef", "ifdef", "ipifcons", "minwindef", "nldef", "ntdef", "ws2def"], &[]),
+    ("iptypes", &["basetsd", "guiddef", "ifdef", "ipifcons", "minwindef", "nldef", "ntdef", "ws2def"], &["iphlpapi"]),
     ("jobapi", &["minwindef", "winnt"], &["kernel32"]),
     ("jobapi2", &["basetsd", "minwinbase", "minwindef", "ntdef", "winnt"], &["kernel32"]),
     ("knownfolders", &[], &[]),
