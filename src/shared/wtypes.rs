@@ -95,6 +95,7 @@ pub type BSTR = *mut OLECHAR;
 pub type LPBSTR = *mut BSTR;
 pub type VARIANT_BOOL = c_short;
 pub const VARIANT_TRUE: VARIANT_BOOL = -1;
+pub const VARIANT_FALSE: VARIANT_BOOL = 0;
 UNION!{union __MIDL_IWinTypes_0001 {
     [usize; 1],
     dwValue dwValue_mut: DWORD,
