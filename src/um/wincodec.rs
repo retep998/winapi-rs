@@ -698,7 +698,7 @@ interface IWICBitmapSource(IWICBitmapSourceVtbl): IUnknown(IUnknownVtbl) {
         pDpiY: *mut c_double,
     ) -> HRESULT,
     fn CopyPalette(
-        pIPalette: *const IWICPalette,
+        pIPalette: *mut IWICPalette,
     ) -> HRESULT,
     fn CopyPixels(
         prc: *const WICRect,
