@@ -5408,6 +5408,12 @@ fn um_shellapi() {
     assert_eq!(size_of::<OPEN_PRINTER_PROPS_INFOW>(), 32);
     assert_eq!(align_of::<OPEN_PRINTER_PROPS_INFOW>(), 8);
 }
+#[cfg(feature = "shobjidl_core")] #[test]
+fn um_shobjidl_core() {
+    use winapi::um::shobjidl_core::*;
+    assert_eq!(size_of::<THUMBBUTTON>(), 552);
+    assert_eq!(align_of::<THUMBBUTTON>(), 8);
+}
 #[cfg(feature = "shtypes")] #[test]
 fn um_shtypes() {
     use winapi::um::shtypes::*;
