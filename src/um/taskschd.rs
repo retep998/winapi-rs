@@ -1,15 +1,16 @@
-// Copyright © 2018 winapi-rs developers
+// Copyright © 2019 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
+use ctypes::{c_long, c_short};
 use shared::minwindef::{DWORD, INT};
 use shared::wtypes::{BSTR, DATE, VARIANT_BOOL};
 use um::minwinbase::SYSTEMTIME;
 use um::oaidl::{IDispatch, IDispatchVtbl, SAFEARRAY, VARIANT};
 use um::unknwnbase::{IUnknown, IUnknownVtbl, LPUNKNOWN};
-use um::winnt::{HRESULT, LONG, SHORT};
+use um::winnt::{HRESULT, LONG};
 RIDL!{#[uuid(0x0f87369f, 0xa4e5, 0x4cfc, 0xbd, 0x3e, 0x73, 0xe6, 0x15, 0x45, 0x72, 0xdd)]
 class TaskScheduler;}
 RIDL!{#[uuid(0xf2a69db7, 0xda2c, 0x4352, 0x90, 0x66, 0x86, 0xfe, 0xe6, 0xda, 0xca, 0xc9)]
@@ -187,10 +188,8 @@ interface IRunningTask(IRunningTaskVtbl): IDispatch(IDispatchVtbl) {
     fn get_CurrentAction(
         pName: *mut BSTR,
     ) -> HRESULT,
-    fn Stop(
-    ) -> HRESULT,
-    fn Refresh(
-    ) -> HRESULT,
+    fn Stop() -> HRESULT,
+    fn Refresh() -> HRESULT,
     fn get_EnginePID(
         pPID: *mut DWORD,
     ) -> HRESULT,
@@ -208,6 +207,7 @@ interface IRunningTaskCollection(IRunningTaskCollectionVtbl): IDispatch(IDispatc
         ppEnum: *mut LPUNKNOWN,
     ) -> HRESULT,
 }}
+
 RIDL!{#[uuid(0xf5bc8fc5, 0x536d, 0x4f77, 0xb8, 0x52, 0xfb, 0xc1, 0x35, 0x6f, 0xde, 0xb6)]
 interface ITaskDefinition(ITaskDefinitionVtbl): IDispatch(IDispatchVtbl) {
     fn get_RegistrationInfo(
@@ -313,10 +313,10 @@ interface IRegistrationInfo(IRegistrationInfoVtbl): IDispatch(IDispatchVtbl) {
 RIDL!{#[uuid(0x85df5081, 0x1b24, 0x4f32, 0x87, 0x8a, 0xd9, 0xd1, 0x4d, 0xf4, 0xcb, 0x77)]
 interface ITriggerCollection(ITriggerCollectionVtbl): IDispatch(IDispatchVtbl) {
     fn get_Count(
-        pCount: *mut LONG,
+        pCount: *mut c_long,
     ) -> HRESULT,
     fn get_Item(
-        index: LONG,
+        index: c_long,
         ppTrigger: *mut *mut ITrigger,
     ) -> HRESULT,
     fn get__NewEnum(
@@ -329,8 +329,7 @@ interface ITriggerCollection(ITriggerCollectionVtbl): IDispatch(IDispatchVtbl) {
     fn Remove(
         index: VARIANT,
     ) -> HRESULT,
-    fn Clear(
-    ) -> HRESULT,
+    fn Clear() -> HRESULT,
 }}
 RIDL!{#[uuid(0x09941815, 0xea89, 0x4b5b, 0x89, 0xe0, 0x2a, 0x77, 0x38, 0x01, 0xfa, 0xc3)]
 interface ITrigger(ITriggerVtbl): IDispatch(IDispatchVtbl) {
@@ -386,6 +385,7 @@ ENUM!{enum TASK_TRIGGER_TYPE2 {
     TASK_TRIGGER_BOOT = 8,
     TASK_TRIGGER_LOGON = 9,
     TASK_TRIGGER_SESSION_STATE_CHANGE = 11,
+    TASK_TRIGGER_CUSTOM_TRIGGER_01 = 12,
 }}
 RIDL!{#[uuid(0x7fb9acf1, 0x26be, 0x400e, 0x85, 0xb5, 0x29, 0x4b, 0x9c, 0x75, 0xdf, 0xd6)]
 interface IRepetitionPattern(IRepetitionPatternVtbl): IDispatch(IDispatchVtbl) {
@@ -408,6 +408,7 @@ interface IRepetitionPattern(IRepetitionPatternVtbl): IDispatch(IDispatchVtbl) {
         pStop: VARIANT_BOOL,
     ) -> HRESULT,
 }}
+
 RIDL!{#[uuid(0x8fd4711d, 0x2d02, 0x4c8c, 0x87, 0xe3, 0xef, 0xf6, 0x99, 0xde, 0x12, 0x7e)]
 interface ITaskSettings(ITaskSettingsVtbl): IDispatch(IDispatchVtbl) {
     fn get_AllowDemandStart(
@@ -542,6 +543,9 @@ ENUM!{enum TASK_COMPATIBILITY {
     TASK_COMPATIBILITY_V1 = 1,
     TASK_COMPATIBILITY_V2 = 2,
     TASK_COMPATIBILITY_V2_1 = 3,
+    TASK_COMPATIBILITY_V2_2 = 4,
+    TASK_COMPATIBILITY_V2_3 = 5,
+    TASK_COMPATIBILITY_V2_4 = 6,
 }}
 RIDL!{#[uuid(0x84594461, 0x0053, 0x4342, 0xa8, 0xfd, 0x08, 0x8f, 0xab, 0xf1, 0x1f, 0x32)]
 interface IIdleSettings(IIdleSettingsVtbl): IDispatch(IDispatchVtbl) {
@@ -640,10 +644,10 @@ ENUM!{enum TASK_RUNLEVEL {
 RIDL!{#[uuid(0x02820e19, 0x7b98, 0x4ed2, 0xb2, 0xe8, 0xfd, 0xcc, 0xce, 0xff, 0x61, 0x9b)]
 interface IActionCollection(IActionCollectionVtbl): IDispatch(IDispatchVtbl) {
     fn get_Count(
-        pCount: *mut LONG,
+        pCount: *mut c_long,
     ) -> HRESULT,
     fn get_Item(
-        index: LONG,
+        index: c_long,
         ppAction: *mut *mut IAction,
     ) -> HRESULT,
     fn get__NewEnum(
@@ -662,8 +666,7 @@ interface IActionCollection(IActionCollectionVtbl): IDispatch(IDispatchVtbl) {
     fn Remove(
         index: VARIANT,
     ) -> HRESULT,
-    fn Clear(
-    ) -> HRESULT,
+    fn Clear() -> HRESULT,
     fn get_Context(
         pContext: *mut BSTR,
     ) -> HRESULT,
@@ -747,15 +750,13 @@ interface ITaskHandler(ITaskHandlerVtbl): IUnknown(IUnknownVtbl) {
     fn Stop(
         pRetCode: *mut HRESULT,
     ) -> HRESULT,
-    fn Pause(
-    ) -> HRESULT,
-    fn Resume(
-    ) -> HRESULT,
+    fn Pause() -> HRESULT,
+    fn Resume() -> HRESULT,
 }}
 RIDL!{#[uuid(0xeaec7a8f, 0x27a0, 0x4ddc, 0x86, 0x75, 0x14, 0x72, 0x6a, 0x01, 0xa3, 0x8a)]
 interface ITaskHandlerStatus(ITaskHandlerStatusVtbl): IUnknown(IUnknownVtbl) {
     fn UpdateStatus(
-        percentComplete: SHORT,
+        percentComplete: c_short,
         statusMessage: BSTR,
     ) -> HRESULT,
     fn TaskCompleted(
@@ -792,7 +793,7 @@ interface ITaskNamedValuePair(ITaskNamedValuePairVtbl): IDispatch(IDispatchVtbl)
 RIDL!{#[uuid(0xb4ef826b, 0x63c3, 0x46e4, 0xa5, 0x04, 0xef, 0x69, 0xe4, 0xf7, 0xea, 0x4d)]
 interface ITaskNamedValueCollection(ITaskNamedValueCollectionVtbl): IDispatch(IDispatchVtbl) {
     fn get_Count(
-        pCount: *mut LONG,
+        pCount: *mut c_long,
     ) -> HRESULT,
     fn get_Item(
         index: LONG,
@@ -809,8 +810,7 @@ interface ITaskNamedValueCollection(ITaskNamedValueCollectionVtbl): IDispatch(ID
     fn Remove(
         index: LONG,
     ) -> HRESULT,
-    fn Clear(
-    ) -> HRESULT,
+    fn Clear() -> HRESULT,
 }}
 RIDL!{#[uuid(0xd537d2b0, 0x9fb3, 0x4d34, 0x97, 0x39, 0x1f, 0xf5, 0xce, 0x7b, 0x1e, 0xf3)]
 interface IIdleTrigger(IIdleTriggerVtbl): ITrigger(ITriggerVtbl) {
@@ -892,10 +892,10 @@ interface ITimeTrigger(ITimeTriggerVtbl): ITrigger(ITriggerVtbl) {
 RIDL!{#[uuid(0x126c5cd8, 0xb288, 0x41d5, 0x8d, 0xbf, 0xe4, 0x91, 0x44, 0x6a, 0xdc, 0x5c)]
 interface IDailyTrigger(IDailyTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_DaysInterval(
-        pDays: *mut SHORT,
+        pDays: *mut c_short,
     ) -> HRESULT,
     fn put_DaysInterval(
-        pDays: SHORT,
+        pDays: c_short,
     ) -> HRESULT,
     fn get_RandomDelay(
         pRandomDelay: *mut BSTR,
@@ -907,16 +907,16 @@ interface IDailyTrigger(IDailyTriggerVtbl): ITrigger(ITriggerVtbl) {
 RIDL!{#[uuid(0x5038fc98, 0x82ff, 0x436d, 0x87, 0x28, 0xa5, 0x12, 0xa5, 0x7c, 0x9d, 0xc1)]
 interface IWeeklyTrigger(IWeeklyTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_DaysOfWeek(
-        pDays: *mut SHORT,
+        pDays: *mut c_short,
     ) -> HRESULT,
     fn put_DaysOfWeek(
-        pDays: SHORT,
+        pDays: c_short,
     ) -> HRESULT,
     fn get_WeeksInterval(
-        pWeeks: *mut SHORT,
+        pWeeks: *mut c_short,
     ) -> HRESULT,
     fn put_WeeksInterval(
-        pWeeks: SHORT,
+        pWeeks: c_short,
     ) -> HRESULT,
     fn get_RandomDelay(
         pRandomDelay: *mut BSTR,
@@ -928,16 +928,16 @@ interface IWeeklyTrigger(IWeeklyTriggerVtbl): ITrigger(ITriggerVtbl) {
 RIDL!{#[uuid(0x97c45ef1, 0x6b02, 0x4a1a, 0x9c, 0x0e, 0x1e, 0xbf, 0xba, 0x15, 0x00, 0xac)]
 interface IMonthlyTrigger(IMonthlyTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_DaysOfMonth(
-        pDays: *mut LONG,
+        pDays: *mut c_long,
     ) -> HRESULT,
     fn put_DaysOfMonth(
-        pDays: LONG,
+        pDays: c_long,
     ) -> HRESULT,
     fn get_MonthsOfYear(
-        pMonths: *mut SHORT,
+        pMonths: *mut c_short,
     ) -> HRESULT,
     fn put_MonthsOfYear(
-        pMonths: SHORT,
+        pMonths: c_short,
     ) -> HRESULT,
     fn get_RunOnLastDayOfMonth(
         pLastDay: *mut VARIANT_BOOL,
@@ -955,22 +955,22 @@ interface IMonthlyTrigger(IMonthlyTriggerVtbl): ITrigger(ITriggerVtbl) {
 RIDL!{#[uuid(0x77d025a3, 0x90fa, 0x43aa, 0xb5, 0x2e, 0xcd, 0xa5, 0x49, 0x9b, 0x94, 0x6a)]
 interface IMonthlyDOWTrigger(IMonthlyDOWTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_DaysOfWeek(
-        pDays: *mut SHORT,
+        pDays: *mut c_short,
     ) -> HRESULT,
     fn put_DaysOfWeek(
-        pDays: SHORT,
+        pDays: c_short,
     ) -> HRESULT,
     fn get_WeeksOfMonth(
-        pWeeks: *mut SHORT,
+        pWeeks: *mut c_short,
     ) -> HRESULT,
     fn put_WeeksOfMonth(
-        pWeeks: SHORT,
+        pWeeks: c_short,
     ) -> HRESULT,
     fn get_MonthsOfYear(
-        pMonths: *mut SHORT,
+        pMonths: *mut c_short,
     ) -> HRESULT,
     fn put_MonthsOfYear(
-        pMonths: SHORT,
+        pMonths: c_short,
     ) -> HRESULT,
     fn get_RunOnLastWeekOfMonth(
         pLastWeek: *mut VARIANT_BOOL,
@@ -1022,6 +1022,15 @@ interface IExecAction(IExecActionVtbl): IAction(IActionVtbl) {
     ) -> HRESULT,
     fn put_WorkingDirectory(
         pWorkingDirectory: BSTR,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0xf2a82542, 0xbda5, 0x4e6b, 0x91, 0x43, 0xe2, 0xbf, 0x4f, 0x89, 0x87, 0xb6)]
+interface IExecAction2(IExecAction2Vtbl): IExecAction(IExecActionVtbl) {
+    fn get_HideAppWindow(
+        pHideAppWindow: *mut VARIANT_BOOL,
+    ) -> HRESULT,
+    fn put_HideAppWindow(
+        pHideAppWindow: VARIANT_BOOL,
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x505e9e68, 0xaf89, 0x46b8, 0xa3, 0x0f, 0x56, 0x16, 0x2a, 0x83, 0xd5, 0x37)]
@@ -1117,6 +1126,30 @@ interface IEmailAction(IEmailActionVtbl): IAction(IActionVtbl) {
         pAttachements: SAFEARRAY,
     ) -> HRESULT,
 }}
+RIDL!{#[uuid(0x248919ae, 0xe345, 0x4a6d, 0x8a, 0xeb, 0xe0, 0xd3, 0x16, 0x5c, 0x90, 0x4e)]
+interface IPrincipal2(IPrincipal2Vtbl): IDispatch(IDispatchVtbl) {
+    fn get_ProcessTokenSidType(
+        pProcessTokenSidType: *mut TASK_PROCESSTOKENSID,
+    ) -> HRESULT,
+    fn put_ProcessTokenSidType(
+        pProcessTokenSidType: TASK_PROCESSTOKENSID,
+    ) -> HRESULT,
+    fn get_RequiredPrivilegeCount(
+        pCount: *mut c_long,
+    ) -> HRESULT,
+    fn get_RequiredPrivilege(
+        index: c_long,
+        pPrivilege: *mut BSTR,
+    ) -> HRESULT,
+    fn AddRequiredPrivilege(
+        privilege: BSTR,
+    ) -> HRESULT,
+}}
+ENUM!{enum TASK_PROCESSTOKENSID {
+    TASK_PROCESSTOKENSID_NONE = 0,
+    TASK_PROCESSTOKENSID_UNRESTRICTED = 1,
+    TASK_PROCESSTOKENSID_DEFAULT = 2,
+}}
 RIDL!{#[uuid(0x2c05c3f0, 0x6eed, 0x4c05, 0xa1, 0x5f, 0xed, 0x7d, 0x7a, 0x98, 0xa3, 0x69)]
 interface ITaskSettings2(ITaskSettings2Vtbl): IDispatch(IDispatchVtbl) {
     fn get_DisallowStartOnRemoteAppSession(
@@ -1132,6 +1165,57 @@ interface ITaskSettings2(ITaskSettings2Vtbl): IDispatch(IDispatchVtbl) {
         pUseUnifiedEngine: VARIANT_BOOL,
     ) -> HRESULT,
 }}
+RIDL!{#[uuid(0x0ad9d0d7, 0x0c7f, 0x4ebb, 0x9a, 0x5f, 0xd1, 0xc6, 0x48, 0xdc, 0xa5, 0x28)]
+interface ITaskSettings3(ITaskSettings3Vtbl): ITaskSettings(ITaskSettingsVtbl) {
+    fn get_DisallowStartOnRemoteAppSession(
+        pDisallowStart: *mut VARIANT_BOOL,
+    ) -> HRESULT,
+    fn put_DisallowStartOnRemoteAppSession(
+        pDisallowStart: VARIANT_BOOL,
+    ) -> HRESULT,
+    fn get_UseUnifiedSchedulingEngine(
+        pUseUnifiedEngine: *mut VARIANT_BOOL,
+    ) -> HRESULT,
+    fn put_UseUnifiedSchedulingEngine(
+        pUseUnifiedEngine: VARIANT_BOOL,
+    ) -> HRESULT,
+    fn get_MaintenanceSettings(
+        ppMaintenanceSettings: *mut *mut IMaintenanceSettings,
+    ) -> HRESULT,
+    fn put_MaintenanceSettings(
+        ppMaintenanceSettings: *const IMaintenanceSettings,
+    ) -> HRESULT,
+    fn CreateMaintenanceSettings(
+        ppMaintenanceSettings: *mut *mut IMaintenanceSettings,
+    ) -> HRESULT,
+    fn get_Volatile(
+        pVolatile: *mut VARIANT_BOOL,
+    ) -> HRESULT,
+    fn put_Volatile(
+        pVolatile: VARIANT_BOOL,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0xa6024fa8, 0x9652, 0x4adb, 0xa6, 0xbf, 0x5c, 0xfc, 0xd8, 0x77, 0xa7, 0xba)]
+interface IMaintenanceSettings(IMaintenanceSettingsVtbl): IDispatch(IDispatchVtbl) {
+    fn put_Period(
+        target: BSTR,
+    ) -> HRESULT,
+    fn get_Period(
+        target: *mut BSTR,
+    ) -> HRESULT,
+    fn put_Deadline(
+        target: BSTR,
+    ) -> HRESULT,
+    fn get_Deadline(
+        target: *mut BSTR,
+    ) -> HRESULT,
+    fn put_Exclusive(
+        target: VARIANT_BOOL,
+    ) -> HRESULT,
+    fn get_Exclusive(
+        target: *mut VARIANT_BOOL,
+    ) -> HRESULT,
+}}
 ENUM!{enum TASK_RUN_FLAGS {
     TASK_RUN_NO_FLAGS = 0,
     TASK_RUN_AS_SELF = 1,
@@ -1141,11 +1225,6 @@ ENUM!{enum TASK_RUN_FLAGS {
 }}
 ENUM!{enum TASK_ENUM_FLAGS {
     TASK_ENUM_HIDDEN = 1,
-}}
-ENUM!{enum TASK_PROCESSTOKENSID {
-    TASK_PROCESSTOKENSID_NONE = 0,
-    TASK_PROCESSTOKENSID_UNRESTRICTED = 1,
-    TASK_PROCESSTOKENSID_DEFAULT = 2,
 }}
 ENUM!{enum TASK_CREATION {
     TASK_VALIDATE_ONLY = 1,
