@@ -8,6 +8,7 @@
 mod build_headers_sort;
 mod check_all_files_imported;
 mod check_features;
+mod check_lines;
 mod headers;
 mod import_sorts;
 pub mod utils;

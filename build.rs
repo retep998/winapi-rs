@@ -70,7 +70,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("usbspec", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
     ("windef", &["minwindef", "winnt"], &[]),
     ("windowsx", &["minwindef"], &[]),
-    ("winerror", &["minwindef"], &[]),
+    ("winerror", &["minwindef", "wtypesbase"], &[]),
     ("winusbio", &["minwindef", "usb"], &[]),
     ("wmistr", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
     ("wnnc", &["minwindef"], &[]),
@@ -244,6 +244,9 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("perflib", &["basetsd", "guiddef", "minwinbase", "minwindef", "winnt"], &["advapi32"]),
     ("physicalmonitorenumerationapi", &["d3d9", "minwindef", "windef", "winnt"], &["dxva2"]),
     ("playsoundapi", &["minwindef", "winnt"], &["winmm"]),
+    ("portabledevice", &["basetsd"], &[]),
+    ("portabledeviceapi", &["guiddef", "minwindef", "objidlbase", "portabledevicetypes", "propkeydef", "unknwnbase", "winnt"], &[]),
+    ("portabledevicetypes", &["guiddef", "minwindef", "propidl", "propkeydef", "propsys", "unknwnbase", "winnt", "wtypes"], &[]),
     ("powerbase", &["minwindef", "winnt", "winuser"], &["powrprof"]),
     ("powersetting", &["guiddef", "minwindef", "winnt", "winuser"], &["powrprof"]),
     ("powrprof", &["guiddef", "minwindef", "winnt", "winreg"], &["powrprof"]),
@@ -276,7 +279,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("shellscalingapi", &["minwindef", "windef", "winnt"], &["shcore"]),
     ("shlobj", &["guiddef", "minwinbase", "minwindef", "shtypes", "windef", "winnt"], &["shell32"]),
     ("shobjidl", &["guiddef", "minwindef", "objidl", "propkeydef", "propsys", "shobjidl_core", "shtypes", "unknwnbase", "windef", "winnt"], &[]),
-    ("shobjidl_core", &["guiddef", "minwindef", "objidl", "unknwnbase", "windef", "winnt"], &[]),
+    ("shobjidl_core", &["commctrl", "guiddef", "minwindef", "objidl", "unknwnbase", "windef", "winnt"], &[]),
     ("shtypes", &["guiddef", "minwindef", "winnt"], &[]),
     ("spapidef", &["minwindef", "winnt"], &[]),
     ("spellcheck", &["minwindef", "ntdef", "objidlbase", "unknwnbase", "winerror"], &[]),
@@ -332,7 +335,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("winioctl", &["basetsd", "devpropdef", "guiddef", "minwindef", "winnt"], &[]),
     ("winnetwk", &["basetsd", "minwindef", "windef", "winerror", "winnt"], &["mpr"]),
     ("winnls", &["basetsd", "guiddef", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
-    ("winnt", &["basetsd", "excpt", "guiddef", "ktmtypes", "minwindef", "vcruntime"], &["kernel32"]),
+    ("winnt", &["basetsd", "excpt", "guiddef", "ktmtypes", "minwindef", "ntdef", "vcruntime"], &["kernel32"]),
     ("winreg", &["basetsd", "minwinbase", "minwindef", "winnt"], &["advapi32"]),
     ("winsafer", &["basetsd", "guiddef", "minwindef", "wincrypt", "windef", "winnt"], &["advapi32"]),
     ("winscard", &["basetsd", "guiddef", "minwindef", "rpcdce", "windef", "winnt", "winsmcrd"], &["winscard"]),
@@ -344,6 +347,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("winuser", &["basetsd", "guiddef", "limits", "minwinbase", "minwindef", "vadefs", "windef", "wingdi", "winnt"], &["user32"]),
     ("winver", &["minwindef", "winnt"], &["kernel32", "version"]),
     ("wow64apiset", &["minwindef", "winnt"], &["kernel32"]),
+    ("wpdmtpextensions", &[], &[]),
     ("ws2spi", &["basetsd", "guiddef", "minwindef", "vcruntime", "windef", "winnt", "winsock2", "ws2def", "wtypesbase"], &["ws2_32"]),
     ("ws2tcpip", &["guiddef", "minwinbase", "minwindef", "mstcpip", "vcruntime", "winerror", "winnt", "winsock2", "ws2def", "wtypesbase"], &["fwpuclnt", "ws2_32"]),
     ("xinput", &["guiddef", "minwindef", "winnt"], &["xinput"]),
@@ -427,6 +431,14 @@ impl Graph {
         }).collect::<Vec<_>>();
         libs.sort();
         libs.dedup();
+        // FIXME Temporary hacks until build script is redesigned.
+        libs.retain(|&&lib| match &*var("TARGET").unwrap() {
+            "aarch64-pc-windows-msvc" => {
+                if lib == "opengl32" { false }
+                else { true }
+            },
+            _ => true,
+        });
         let prefix = library_prefix();
         let kind = library_kind();
         for lib in libs {

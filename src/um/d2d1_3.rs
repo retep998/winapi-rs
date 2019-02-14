@@ -610,7 +610,8 @@ interface ID2D1ColorContext1(ID2D1ColorContext1Vtbl): ID2D1ColorContext(ID2D1Col
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x7836d248, 0x68cc, 0x4df6, 0xb9, 0xe8, 0xde, 0x99, 0x1b, 0xf6, 0x2e, 0xb7)]
-interface ID2D1DeviceContext5(ID2D1DeviceContext5Vtbl): ID2D1DeviceContext4(ID2D1DeviceContext4Vtbl) {
+interface ID2D1DeviceContext5(ID2D1DeviceContext5Vtbl):
+    ID2D1DeviceContext4(ID2D1DeviceContext4Vtbl) {
     fn CreateSvgDocument(
         inputXmlStream: *mut IStream,
         viewportSize: D2D1_SIZE_F,
@@ -653,7 +654,8 @@ interface ID2D1CommandSink5(ID2D1CommandSink5Vtbl): ID2D1CommandSink4(ID2D1Comma
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x985f7e37, 0x4ed0, 0x4a19, 0x98, 0xa3, 0x15, 0xb0, 0xed, 0xfd, 0xe3, 0x06)]
-interface ID2D1DeviceContext6(ID2D1DeviceContext6Vtbl): ID2D1DeviceContext5(ID2D1DeviceContext5Vtbl) {
+interface ID2D1DeviceContext6(ID2D1DeviceContext6Vtbl):
+    ID2D1DeviceContext5(ID2D1DeviceContext5Vtbl) {
     fn BlendImage(
         image: *mut ID2D1Image,
         blendMode: D2D1_BLEND_MODE,
