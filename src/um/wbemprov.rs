@@ -1,4 +1,4 @@
-// Copyright © 2018 winapi-rs developers
+// Copyright © 2018-2019 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -241,7 +241,8 @@ ENUM!{enum WBEM_PROVIDER_FLAGS {
 DEFINE_GUID!{IID_IWbemDecoupledBasicEventProvider,
     0x86336d20, 0xca11, 0x4786, 0x9e, 0xf1, 0xbc, 0x8a, 0x94, 0x6b, 0x42, 0xfc}
 RIDL!{#[uuid(0x86336d20, 0xca11, 0x4786, 0x9e, 0xf1, 0xbc, 0x8a, 0x94, 0x6b, 0x42, 0xfc)]
-interface IWbemDecoupledBasicEventProvider(IWbemDecoupledBasicEventProviderVtbl): IWbemDecoupledRegistrar(IWbemDecoupledRegistrarVtbl) {
+interface IWbemDecoupledBasicEventProvider(IWbemDecoupledBasicEventProviderVtbl):
+    IWbemDecoupledRegistrar(IWbemDecoupledRegistrarVtbl) {
     fn GetSink(
         a_Flags: c_long,
         a_Context: *mut IWbemContext,

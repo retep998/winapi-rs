@@ -1,4 +1,4 @@
-// Copyright © 2015-2017 winapi-rs developers
+// Copyright © 2015-2018 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -26,7 +26,9 @@ use um::minwinbase::{
     FILE_INFO_BY_HANDLE_CLASS, FINDEX_INFO_LEVELS, FINDEX_SEARCH_OPS, GET_FILEEX_INFO_LEVELS,
     LPOVERLAPPED, LPOVERLAPPED_COMPLETION_ROUTINE, LPSECURITY_ATTRIBUTES, PREASON_CONTEXT,
 };
-use um::processthreadsapi::{LPPROC_THREAD_ATTRIBUTE_LIST, LPSTARTUPINFOA, STARTUPINFOA, STARTUPINFOW};
+use um::processthreadsapi::{
+    LPPROC_THREAD_ATTRIBUTE_LIST, LPSTARTUPINFOA, STARTUPINFOA, STARTUPINFOW,
+};
 use um::winnt::{
     BOOLEAN, CHAR, DWORDLONG, EXECUTION_STATE, FILE_ID_128, HANDLE, HRESULT, INT, LANGID,
     LARGE_INTEGER, LATENCY_TIME, LONG, LPCCH, LPCH, LPCSTR, LPCWSTR, LPOSVERSIONINFOEXA,

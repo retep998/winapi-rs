@@ -1,4 +1,4 @@
-// Copyright © 2015-2017 winapi-rs developers
+// Copyright © 2015-2018 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -14,8 +14,8 @@ use shared::basetsd::LONG_PTR;
 use shared::guiddef::{GUID, LPCGUID};
 use shared::minwindef::{
     ATOM, BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HMODULE, HRGN, HWINSTA, INT, LOWORD, LPARAM,
-    LPBYTE, LPDWORD, LPINT, LPVOID, LPWORD, LRESULT, PBYTE, PUINT, PULONG, TRUE, UCHAR, UINT, ULONG,
-    USHORT, WORD, WPARAM,
+    LPBYTE, LPDWORD, LPINT, LPVOID, LPWORD, LRESULT, PBYTE, PUINT, PULONG, TRUE, UCHAR, UINT,
+    ULONG, USHORT, WORD, WPARAM,
 };
 use shared::windef::{
     COLORREF, HACCEL, HBITMAP, HBRUSH, HCURSOR, HDC, HDESK, HHOOK, HICON, HMENU, HMONITOR,

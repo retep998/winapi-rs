@@ -16,7 +16,7 @@ ENUM!{enum CORRECTIVE_ACTION {
     CORRECTIVE_ACTION_DELETE = 3,
 }}
 RIDL!{#[uuid(0xb7c82d61, 0xfbe8, 0x4b47, 0x9b, 0x27, 0x6c, 0x0d, 0x2e, 0x0d, 0xe0, 0xa3)]
-interface ISpellingError(ISpellingErrorVtbl) : IUnknown(IUnknownVtbl) {
+interface ISpellingError(ISpellingErrorVtbl): IUnknown(IUnknownVtbl) {
     fn get_StartIndex(
         value: *mut ULONG,
     ) -> HRESULT,
@@ -31,7 +31,7 @@ interface ISpellingError(ISpellingErrorVtbl) : IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x803e3bd4, 0x2828, 0x4410, 0x82, 0x90, 0x41, 0x8d, 0x1d, 0x73, 0xc7, 0x62)]
-interface IEnumSpellingError(IEnumSpellingErrorVtbl) : IUnknown(IUnknownVtbl) {
+interface IEnumSpellingError(IEnumSpellingErrorVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         value: *mut *mut ISpellingError,
     ) -> HRESULT,
@@ -52,13 +52,14 @@ interface IOptionDescription(IOptionDescriptionVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x0b83a5b0, 0x792f, 0x4eab, 0x97, 0x99, 0xac, 0xf5, 0x2c, 0x5e, 0xd0, 0x8a)]
-interface ISpellCheckerChangedEventHandler(ISpellCheckerChangedEventHandlerVtbl) : IUnknown(IUnknownVtbl) {
+interface ISpellCheckerChangedEventHandler(ISpellCheckerChangedEventHandlerVtbl):
+    IUnknown(IUnknownVtbl) {
     fn Invoke(
         sender: *const ISpellChecker,
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0xb6fd0b71, 0xe2bc, 0x4653, 0x8d, 0x05, 0xf1, 0x97, 0xe4, 0x12, 0x77, 0x0b)]
-interface ISpellChecker(ISpellCheckerVtbl) : IUnknown(IUnknownVtbl) {
+interface ISpellChecker(ISpellCheckerVtbl): IUnknown(IUnknownVtbl) {
     fn get_LanguageTag(
         value: *mut LPWSTR,
     ) -> HRESULT,
@@ -110,13 +111,13 @@ interface ISpellChecker(ISpellCheckerVtbl) : IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0xe7ed1c71, 0x87f7, 0x4378, 0xa8, 0x40, 0xc9, 0x20, 0x0d, 0xac, 0xee, 0x47)]
-interface ISpellChecker2(ISpellChecker2Vtbl) : ISpellChecker(ISpellCheckerVtbl) {
+interface ISpellChecker2(ISpellChecker2Vtbl): ISpellChecker(ISpellCheckerVtbl) {
     fn Remove(
         word: LPCWSTR,
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x8e018a9d, 0x2415, 0x4677, 0xbf, 0x08, 0x79, 0x4e, 0xa6, 0x1f, 0x94, 0xbb)]
-interface ISpellCheckerFactory(ISpellCheckerFactoryVtbl) : IUnknown(IUnknownVtbl) {
+interface ISpellCheckerFactory(ISpellCheckerFactoryVtbl): IUnknown(IUnknownVtbl) {
     fn SupportedLanguages(
        value: *mut *mut IEnumString,
     ) -> HRESULT,
@@ -130,7 +131,7 @@ interface ISpellCheckerFactory(ISpellCheckerFactoryVtbl) : IUnknown(IUnknownVtbl
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0xaa176b85, 0x0e12, 0x4844, 0x8e, 0x1a, 0xee, 0xf1, 0xda, 0x77, 0xf5, 0x86)]
-interface IUserDictionariesRegistrar(IUserDictionariesRegistrarVtbl) : IUnknown(IUnknownVtbl) {
+interface IUserDictionariesRegistrar(IUserDictionariesRegistrarVtbl): IUnknown(IUnknownVtbl) {
     fn RegisterUserDictionary(
         dictionaryPath: LPCWSTR,
         languageTag: LPCWSTR,

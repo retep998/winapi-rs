@@ -1,4 +1,4 @@
-// Copyright © 2018 winapi-rs developers
+// Copyright © 2018-2019 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -121,7 +121,8 @@ interface IWbemClientTransport(IWbemClientTransportVtbl): IUnknown(IUnknownVtbl)
 DEFINE_GUID!{IID_IWbemClientConnectionTransport,
     0xa889c72a, 0xfcc1, 0x4a9e, 0xaf, 0x61, 0xed, 0x07, 0x13, 0x33, 0xfb, 0x5b}
 RIDL!{#[uuid(0xa889c72a, 0xfcc1, 0x4a9e, 0xaf, 0x61, 0xed, 0x07, 0x13, 0x33, 0xfb, 0x5b)]
-interface IWbemClientConnectionTransport(IWbemClientConnectionTransportVtbl): IUnknown(IUnknownVtbl) {
+interface IWbemClientConnectionTransport(IWbemClientConnectionTransportVtbl):
+    IUnknown(IUnknownVtbl) {
     fn Open(
         strAddressType: BSTR,
         dwBinaryAddressLength: DWORD,
