@@ -70,7 +70,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("usbspec", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
     ("windef", &["minwindef", "winnt"], &[]),
     ("windowsx", &["minwindef"], &[]),
-    ("winerror", &["minwindef"], &[]),
+    ("winerror", &["minwindef", "wtypesbase"], &[]),
     ("winusbio", &["minwindef", "usb"], &[]),
     ("wmistr", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
     ("wnnc", &["minwindef"], &[]),
