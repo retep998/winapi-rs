@@ -56,6 +56,13 @@ pub mod ctypes {
     pub type __uint64 = u64;
     pub type wchar_t = u16;
 }
+// This trait should be implemented for all COM interfaces
 pub trait Interface {
+    // Returns the IID of the Interface
+    fn uuidof() -> shared::guiddef::GUID;
+}
+// This trait should be implemented for all COM classes
+pub trait Class {
+    // Returns the CLSID of the Class
     fn uuidof() -> shared::guiddef::GUID;
 }

@@ -1,4 +1,4 @@
-// Copyright © 2015-2017 winapi-rs developers
+// Copyright © 2015-2019 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -9,17 +9,18 @@ use ctypes::{c_int, c_long, c_short, c_uint};
 use shared::basetsd::{
     DWORD_PTR, INT32, INT_PTR, PDWORD_PTR, UINT16, UINT32, UINT64, UINT_PTR, ULONG_PTR,
 };
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 use shared::basetsd::LONG_PTR;
 use shared::guiddef::{GUID, LPCGUID};
 use shared::minwindef::{
     ATOM, BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HMODULE, HRGN, HWINSTA, INT, LOWORD, LPARAM,
-    LPBYTE, LPDWORD, LPINT, LPVOID, LPWORD, LRESULT, PBYTE, PUINT, PULONG, TRUE, UCHAR, UINT, ULONG,
-    USHORT, WORD, WPARAM,
+    LPBYTE, LPDWORD, LPINT, LPVOID, LPWORD, LRESULT, PBYTE, PUINT, PULONG, TRUE, UCHAR, UINT,
+    ULONG, USHORT, WORD, WPARAM,
 };
 use shared::windef::{
-    COLORREF, HACCEL, HBITMAP, HBRUSH, HCURSOR, HDC, HDESK, HHOOK, HICON, HMENU, HMONITOR,
-    HWINEVENTHOOK, HWND, LPCRECT, LPPOINT, LPRECT, POINT, RECT,
+    COLORREF, DPI_AWARENESS, DPI_AWARENESS_CONTEXT, DPI_HOSTING_BEHAVIOR, HACCEL, HBITMAP, HBRUSH,
+    HCURSOR, HDC, HDESK, HHOOK, HICON, HMENU, HMONITOR, HWINEVENTHOOK, HWND, LPCRECT, LPPOINT,
+    LPRECT, POINT, RECT,
 };
 use um::minwinbase::LPSECURITY_ATTRIBUTES;
 use um::wingdi::{
@@ -913,8 +914,7 @@ extern "system" {
     pub fn SetProcessWindowStation(
         hWinSta: HWINSTA,
     ) -> BOOL;
-    pub fn GetProcessWindowStation(
-    ) -> HWINSTA;
+    pub fn GetProcessWindowStation() -> HWINSTA;
     pub fn SetUserObjectSecurity(
         hObj: HANDLE,
         pSIRequested: PSECURITY_INFORMATION,
@@ -1383,6 +1383,9 @@ pub const WM_WTSSESSION_CHANGE: UINT = 0x02B1;
 pub const WM_TABLET_FIRST: UINT = 0x02c0;
 pub const WM_TABLET_LAST: UINT = 0x02df;
 pub const WM_DPICHANGED: UINT = 0x02E0;
+pub const WM_DPICHANGED_BEFOREPARENT: UINT = 0x02E2;
+pub const WM_DPICHANGED_AFTERPARENT: UINT = 0x02E3;
+pub const WM_GETDPISCALEDSIZE: UINT = 0x02E4;
 pub const WM_CUT: UINT = 0x0300;
 pub const WM_COPY: UINT = 0x0301;
 pub const WM_PASTE: UINT = 0x0302;
@@ -2699,6 +2702,37 @@ extern "system" {
         wParam: WPARAM,
         lParam: LPARAM,
     ) -> LRESULT;
+}
+ENUM!{enum DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
+    DCDC_DEFAULT = 0x0000,
+    DCDC_DISABLE_FONT_UPDATE = 0x0001,
+    DCDC_DISABLE_RELAYOUT = 0x0002,
+}}
+extern "system" {
+    pub fn SetDialogControlDpiChangeBehavior(
+        hwnd: HWND,
+        mask: DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS,
+        values: DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS,
+    ) -> BOOL;
+    pub fn GetDialogControlDpiChangeBehavior(
+        hwnd: HWND,
+    ) -> DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS;
+}
+ENUM!{enum DIALOG_DPI_CHANGE_BEHAVIORS {
+    DDC_DEFAULT = 0x0000,
+    DDC_DISABLE_ALL = 0x0001,
+    DDC_DISABLE_RESIZE = 0x0002,
+    DDC_DISABLE_CONTROL_RELAYOUT = 0x0004,
+}}
+extern "system" {
+    pub fn SetDialogDpiChangeBehavior(
+        hDlg: HWND,
+        mask: DIALOG_DPI_CHANGE_BEHAVIORS,
+        values: DIALOG_DPI_CHANGE_BEHAVIORS,
+    ) -> BOOL;
+    pub fn GetDialogDpiChangeBehavior(
+        hDlg: HWND,
+    ) -> DIALOG_DPI_CHANGE_BEHAVIORS;
     pub fn CallMsgFilterA(
         lpMsg: LPMSG,
         nCode: c_int,
@@ -4962,23 +4996,23 @@ extern "system" {
         nIndex: c_int,
         dwNewLong: LONG,
     ) -> LONG;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetWindowLongPtrA(
         hWnd: HWND,
         nIndex: c_int,
     ) -> LONG_PTR;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetWindowLongPtrW(
         hWnd: HWND,
         nIndex: c_int,
     ) -> LONG_PTR;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn SetWindowLongPtrA(
         hWnd: HWND,
         nIndex: c_int,
         dwNewLong: LONG_PTR,
     ) -> LONG_PTR;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn SetWindowLongPtrW(
         hWnd: HWND,
         nIndex: c_int,
@@ -5021,23 +5055,23 @@ extern "system" {
         nIndex: c_int,
         dwNewLong: LONG,
     ) -> DWORD;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetClassLongPtrA(
         hWnd: HWND,
         nIndex: c_int,
     ) -> ULONG_PTR;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetClassLongPtrW(
         hWnd: HWND,
         nIndex: c_int,
     ) -> ULONG_PTR;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn SetClassLongPtrA(
         hWnd: HWND,
         nIndex: c_int,
         dwNewLong: LONG_PTR,
     ) -> ULONG_PTR;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn SetClassLongPtrW(
         hWnd: HWND,
         nIndex: c_int,
@@ -5771,6 +5805,13 @@ extern "system" {
         uiParam: UINT,
         pvParam: PVOID,
         fWinIni: UINT,
+    ) -> BOOL;
+    pub fn SystemParametersInfoForDpi(
+        uiAction: UINT,
+        uiParam: UINT,
+        pvParam: PVOID,
+        fWinIni: UINT,
+        dpi: UINT,
     ) -> BOOL;
 }
 pub const ENUM_CURRENT_SETTINGS: DWORD = 0xFFFFFFFF;
@@ -6613,7 +6654,51 @@ extern "system" {
     pub fn BlockInput(
         fBlockIt: BOOL,
     ) -> BOOL;
+}
+pub const USER_DEFAULT_SCREEN_DPI: LONG = 96;
+extern "system" {
+    pub fn SetProcessDPIAware() -> BOOL;
     pub fn IsProcessDPIAware() -> BOOL;
+    pub fn SetThreadDpiAwarenessContext(
+        dpiContext: DPI_AWARENESS_CONTEXT,
+    ) -> DPI_AWARENESS_CONTEXT;
+    pub fn GetThreadDpiAwarenessContext() -> DPI_AWARENESS_CONTEXT;
+    pub fn GetWindowDpiAwarenessContext(
+        hwnd: HWND,
+    ) -> DPI_AWARENESS_CONTEXT;
+    pub fn GetAwarenessFromDpiAwarenessContext(
+        value: DPI_AWARENESS_CONTEXT,
+    ) -> DPI_AWARENESS;
+    pub fn GetDpiFromDpiAwarenessContext(
+        value: DPI_AWARENESS_CONTEXT,
+    ) -> UINT;
+    pub fn AreDpiAwarenessContextsEqual(
+        dpiContextA: DPI_AWARENESS_CONTEXT,
+        dpiContextB: DPI_AWARENESS_CONTEXT,
+    ) -> BOOL;
+    pub fn IsValidDpiAwarenessContext(
+        value: DPI_AWARENESS_CONTEXT,
+    ) -> BOOL;
+    pub fn GetDpiForWindow(
+        hwnd: HWND,
+    ) -> UINT;
+    pub fn GetDpiForSystem() -> UINT;
+    pub fn GetSystemDpiForProcess(
+        hProcess: HANDLE,
+    ) -> UINT;
+    pub fn EnableNonClientDpiScaling(
+        hwnd: HWND,
+    ) -> BOOL;
+    pub fn SetProcessDpiAwarenessContext(
+        value: DPI_AWARENESS_CONTEXT,
+    ) -> BOOL;
+    pub fn SetThreadDpiHostingBehavior(
+        value: DPI_HOSTING_BEHAVIOR,
+    ) -> DPI_HOSTING_BEHAVIOR;
+    pub fn GetThreadDpiHostingBehavior() -> DPI_HOSTING_BEHAVIOR;
+    pub fn GetWindowDpiHostingBehavior(
+        hwnd: HWND,
+    ) -> DPI_HOSTING_BEHAVIOR;
     pub fn GetWindowModuleFileNameA(
         hWnd: HWND,
         lpszFileName: LPCSTR,

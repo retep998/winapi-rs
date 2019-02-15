@@ -391,7 +391,7 @@ extern "system" {
         ThreadInformationClass: THREAD_INFORMATION_CLASS,
         ThreadInformation: LPVOID,
         ThreadInformationSize: DWORD,
-    );
+    ) -> BOOL;
     pub fn IsProcessCritical(
         hProcess: HANDLE,
         Critical: PBOOL,

@@ -19,10 +19,10 @@ use um::winnt::{
     PFPO_DATA, PIMAGE_COFF_SYMBOLS_HEADER, PIMAGE_DEBUG_DIRECTORY, PIMAGE_FUNCTION_ENTRY,
     PIMAGE_NT_HEADERS32,
 };
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 use um::winnt::PIMAGE_NT_HEADERS64;
 use vc::vcruntime::size_t;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 STRUCT!{struct LOADED_IMAGE {
     ModuleName: PSTR,
     hFile: HANDLE,
@@ -86,6 +86,11 @@ FN!{stdcall PFIND_EXE_FILE_CALLBACK(
 FN!{stdcall PFIND_EXE_FILE_CALLBACKW(
     FileHandle: HANDLE,
     FileName: PCWSTR,
+    CallerData: PVOID,
+) -> BOOL}
+FN!{stdcall PSYM_ENUMERATESYMBOLS_CALLBACKW(
+    pSymInfo: PSYMBOL_INFOW,
+    SymbolSize: ULONG,
     CallerData: PVOID,
 ) -> BOOL}
 #[cfg(target_arch = "x86")]
@@ -186,9 +191,9 @@ STRUCT!{struct ADDRESS64 {
     Mode: ADDRESS_MODE,
 }}
 pub type LPADDRESS64 = *mut ADDRESS64;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type ADDRESS = ADDRESS64;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type LPADDRESS = LPADDRESS64;
 #[cfg(target_arch = "x86")]
 STRUCT!{struct ADDRESS {
@@ -215,9 +220,9 @@ STRUCT!{struct KDHELP64 {
     Reserved1: [DWORD64; 4],
 }}
 pub type PKDHELP64 = *mut KDHELP64;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type KDHELP = KDHELP64;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type PKDHELP = PKDHELP64;
 #[cfg(target_arch = "x86")]
 STRUCT!{struct KDHELP {
@@ -268,9 +273,9 @@ STRUCT!{struct STACKFRAME_EX {
     InlineFrameContext: DWORD,
 }}
 pub type LPSTACKFRAME_EX = *mut STACKFRAME_EX;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type STACKFRAME = STACKFRAME64;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type LPSTACKFRAME = LPSTACKFRAME64;
 #[cfg(target_arch = "x86")]
 STRUCT!{struct STACKFRAME {
@@ -310,13 +315,13 @@ FN!{stdcall PTRANSLATE_ADDRESS_ROUTINE64(
 ) -> DWORD64}
 pub const SYM_STKWALK_DEFAULT: DWORD = 0x00000000;
 pub const SYM_STKWALK_FORCE_FRAMEPTR: DWORD = 0x00000001;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type PREAD_PROCESS_MEMORY_ROUTINE = PREAD_PROCESS_MEMORY_ROUTINE64;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type PFUNCTION_TABLE_ACCESS_ROUTINE = PFUNCTION_TABLE_ACCESS_ROUTINE64;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type PGET_MODULE_BASE_ROUTINE = PGET_MODULE_BASE_ROUTINE64;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type PTRANSLATE_ADDRESS_ROUTINE = PTRANSLATE_ADDRESS_ROUTINE64;
 #[cfg(target_arch = "x86")]
 FN!{stdcall PREAD_PROCESS_MEMORY_ROUTINE(
@@ -536,6 +541,13 @@ extern "system" {
     pub fn SymCleanup(
         hProcess: HANDLE
     ) -> BOOL;
+    pub fn SymEnumSymbolsW(
+        hProcess: HANDLE,
+        BaseOfDll: ULONG64,
+        Mask: PCWSTR,
+        EnumSymbolsCallback: PSYM_ENUMERATESYMBOLS_CALLBACKW,
+        CallerData: PVOID
+    ) -> BOOL;
     pub fn SymFindDebugInfoFile(
         hProcess: HANDLE,
         FileName: PCSTR,
@@ -594,6 +606,11 @@ extern "system" {
         Displacement: PDWORD64,
         Symbol: PSYMBOL_INFOW,
     ) -> BOOL;
+    pub fn SymFromNameW(
+        hProcess: HANDLE,
+        Name: PCWSTR,
+        Symbol: PSYMBOL_INFOW
+    ) -> BOOL;
     pub fn SymFunctionTableAccess64(
         hProcess: HANDLE,
         AddrBase: DWORD64,
@@ -618,6 +635,24 @@ extern "system" {
         hProcess: HANDLE,
         UserSearchPath: PCWSTR,
         fInvadeProcess: BOOL,
+    ) -> BOOL;
+    pub fn SymLoadModuleExW(
+        hProcess: HANDLE,
+        hFile: HANDLE,
+        ImageName: PCWSTR,
+        ModuleName: PCWSTR,
+        BaseOfDll: DWORD64,
+        SizeOfDll: DWORD,
+        Data: PMODLOAD_DATA,
+        Flags: DWORD
+    ) -> DWORD64;
+    pub fn SymUnloadModule(
+        hProcess: HANDLE,
+        BaseOfDll: DWORD
+    ) -> BOOL;
+    pub fn SymUnloadModule64(
+        hProcess: HANDLE,
+        BaseOfDll: DWORD64
     ) -> BOOL;
     #[cfg(any(target_arch = "x86", target_arch = "arm"))]
     pub fn MapDebugInformation(

@@ -1,4 +1,4 @@
-// Copyright © 2015-2017 winapi-rs developers
+// Copyright © 2015-2018 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -26,18 +26,24 @@ use um::minwinbase::{
     FILE_INFO_BY_HANDLE_CLASS, FINDEX_INFO_LEVELS, FINDEX_SEARCH_OPS, GET_FILEEX_INFO_LEVELS,
     LPOVERLAPPED, LPOVERLAPPED_COMPLETION_ROUTINE, LPSECURITY_ATTRIBUTES, PREASON_CONTEXT,
 };
-use um::processthreadsapi::{LPPROC_THREAD_ATTRIBUTE_LIST, LPSTARTUPINFOA, STARTUPINFOA, STARTUPINFOW};
+use um::processthreadsapi::{
+    LPPROC_THREAD_ATTRIBUTE_LIST, LPSTARTUPINFOA, STARTUPINFOA, STARTUPINFOW,
+};
 use um::winnt::{
     BOOLEAN, CHAR, DWORDLONG, EXECUTION_STATE, FILE_ID_128, HANDLE, HRESULT, INT, LANGID,
     LARGE_INTEGER, LATENCY_TIME, LONG, LPCCH, LPCH, LPCSTR, LPCWSTR, LPOSVERSIONINFOEXA,
     LPOSVERSIONINFOEXW, LPSTR, LPWSTR, MAXLONG, PBOOLEAN, PCONTEXT, PCWSTR, PFIRMWARE_TYPE,
     PHANDLE, PIO_COUNTERS, PJOB_SET_ARRAY, PLUID, POWER_REQUEST_TYPE, PPERFORMANCE_DATA,
-    PPROCESSOR_NUMBER, PQUOTA_LIMITS, PRTL_UMS_SCHEDULER_ENTRY_POINT, PSECURE_MEMORY_CACHE_CALLBACK,
-    PSID, PSID_NAME_USE, PULONGLONG, PVOID, PWOW64_CONTEXT, PWOW64_LDT_ENTRY, PWSTR,
-    RTL_UMS_THREAD_INFO_CLASS, STATUS_ABANDONED_WAIT_0, STATUS_USER_APC, STATUS_WAIT_0,
-    THREAD_BASE_PRIORITY_IDLE, THREAD_BASE_PRIORITY_LOWRT, THREAD_BASE_PRIORITY_MAX,
-    THREAD_BASE_PRIORITY_MIN, ULARGE_INTEGER, VOID, WAITORTIMERCALLBACK, WCHAR, WOW64_CONTEXT,
+    PPROCESSOR_NUMBER, PQUOTA_LIMITS, PRTL_UMS_SCHEDULER_ENTRY_POINT,
+    PSECURE_MEMORY_CACHE_CALLBACK, PSID, PSID_NAME_USE, PULONGLONG, PVOID, PWOW64_CONTEXT,
+    PWOW64_LDT_ENTRY, PWSTR, RTL_UMS_THREAD_INFO_CLASS, STATUS_ABANDONED_WAIT_0, STATUS_USER_APC,
+    STATUS_WAIT_0, SecurityAnonymous, SecurityDelegation, SecurityIdentification,
+    SecurityImpersonation, THREAD_BASE_PRIORITY_IDLE, THREAD_BASE_PRIORITY_LOWRT,
+    THREAD_BASE_PRIORITY_MAX, THREAD_BASE_PRIORITY_MIN, ULARGE_INTEGER, VOID, WAITORTIMERCALLBACK,
+    WCHAR, WOW64_CONTEXT,
 };
+#[cfg(target_arch = "x86")]
+use um::winnt::PLDT_ENTRY;
 use vc::vadefs::va_list;
 pub const FILE_BEGIN: DWORD = 0;
 pub const FILE_CURRENT: DWORD = 1;
@@ -75,6 +81,8 @@ pub const COPY_FILE_NO_BUFFERING: DWORD = 0x00001000;
 pub const COPY_FILE_REQUEST_SECURITY_PRIVILEGES: DWORD = 0x00002000;
 pub const COPY_FILE_RESUME_FROM_PAUSE: DWORD = 0x00004000;
 pub const COPY_FILE_NO_OFFLOAD: DWORD = 0x00040000;
+pub const COPY_FILE_IGNORE_EDP_BLOCK: DWORD = 0x00400000;
+pub const COPY_FILE_IGNORE_SOURCE_ENCRYPTION: DWORD = 0x00800000;
 pub const REPLACEFILE_WRITE_THROUGH: DWORD = 0x00000001;
 pub const REPLACEFILE_IGNORE_MERGE_ERRORS: DWORD = 0x00000002;
 pub const REPLACEFILE_IGNORE_ACL_ERRORS: DWORD = 0x00000004;
@@ -92,6 +100,10 @@ pub const PIPE_TYPE_MESSAGE: DWORD = 0x00000004;
 pub const PIPE_ACCEPT_REMOTE_CLIENTS: DWORD = 0x00000000;
 pub const PIPE_REJECT_REMOTE_CLIENTS: DWORD = 0x00000008;
 pub const PIPE_UNLIMITED_INSTANCES: DWORD = 255;
+pub const SECURITY_ANONYMOUS: DWORD = SecurityAnonymous << 16;
+pub const SECURITY_IDENTIFICATION: DWORD = SecurityIdentification << 16;
+pub const SECURITY_IMPERSONATION: DWORD = SecurityImpersonation << 16;
+pub const SECURITY_DELEGATION: DWORD = SecurityDelegation << 16;
 pub const SECURITY_CONTEXT_TRACKING: DWORD = 0x00040000;
 pub const SECURITY_EFFECTIVE_ONLY: DWORD = 0x00080000;
 pub const SECURITY_SQOS_PRESENT: DWORD = 0x00100000;
@@ -104,6 +116,9 @@ FN!{stdcall PFIBER_CALLOUT_ROUTINE(
     lpParameter: LPVOID,
 ) -> LPVOID}
 // FAIL_FAST_*
+#[cfg(target_arch = "x86")]
+pub type LPLDT_ENTRY = PLDT_ENTRY;
+#[cfg(not(target_arch = "x86"))]
 pub type LPLDT_ENTRY = LPVOID; // TODO - fix this for 32-bit
 //SP_SERIALCOMM
 //PST_*
@@ -210,7 +225,24 @@ STRUCT!{struct COMMCONFIG {
     wcProviderData: [WCHAR; 1],
 }}
 pub type LPCOMMCONFIG = *mut COMMCONFIG;
-// GMEM_*
+pub const GMEM_FIXED: UINT = 0x0000;
+pub const GMEM_MOVEABLE: UINT = 0x0002;
+pub const GMEM_NOCOMPACT: UINT = 0x0010;
+pub const GMEM_NODISCARD: UINT = 0x0020;
+pub const GMEM_ZEROINIT: UINT = 0x0040;
+pub const GMEM_MODIFY: UINT = 0x0080;
+pub const GMEM_DISCARDABLE: UINT = 0x0100;
+pub const GMEM_NOT_BANKED: UINT = 0x1000;
+pub const GMEM_SHARE: UINT = 0x2000;
+pub const GMEM_DDESHARE: UINT = 0x2000;
+pub const GMEM_NOTIFY: UINT = 0x4000;
+pub const GMEM_LOWER: UINT = GMEM_NOT_BANKED;
+pub const GMEM_VALID_FLAGS: UINT = 0x7F72;
+pub const GMEM_INVALID_HANDLE: UINT = 0x8000;
+pub const GHND: UINT = GMEM_MOVEABLE | GMEM_ZEROINIT;
+pub const GPTR: UINT = GMEM_FIXED | GMEM_ZEROINIT;
+pub const GMEM_DISCARDED: UINT = 0x4000;
+pub const GMEM_LOCKCOUNT: UINT = 0x00FF;
 STRUCT!{struct MEMORYSTATUS {
     dwLength: DWORD,
     dwMemoryLoad: DWORD,
@@ -281,9 +313,9 @@ pub const FILE_TYPE_DISK: DWORD = 0x0001;
 pub const FILE_TYPE_CHAR: DWORD = 0x0002;
 pub const FILE_TYPE_PIPE: DWORD = 0x0003;
 pub const FILE_TYPE_REMOTE: DWORD = 0x8000;
-pub const STD_INPUT_HANDLE: DWORD = 0xFFFFFFF6;
-pub const STD_OUTPUT_HANDLE: DWORD = 0xFFFFFFF5;
-pub const STD_ERROR_HANDLE: DWORD = 0xFFFFFFF4;
+pub const STD_INPUT_HANDLE: DWORD = -10i32 as u32;
+pub const STD_OUTPUT_HANDLE: DWORD = -11i32 as u32;
+pub const STD_ERROR_HANDLE: DWORD = -12i32 as u32;
 pub const NOPARITY: BYTE = 0;
 pub const ODDPARITY: BYTE = 1;
 pub const EVENPARITY: BYTE = 2;
@@ -530,40 +562,40 @@ BITFIELD!{UMS_SYSTEM_THREAD_INFORMATION ThreadUmsFlags: ULONG [
 ]}
 pub type PUMS_SYSTEM_THREAD_INFORMATION = *mut UMS_SYSTEM_THREAD_INFORMATION;
 extern "system" {
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn CreateUmsCompletionList(
         UmsCompletionList: *mut PUMS_COMPLETION_LIST
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn DequeueUmsCompletionListItems(
         UmsCompletionList: PUMS_COMPLETION_LIST,
         WaitTimeOut: DWORD,
         UmsThreadList: *mut PUMS_CONTEXT,
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetUmsCompletionListEvent(
         UmsCompletionList: PUMS_COMPLETION_LIST,
         UmsCompletionEvent: PHANDLE,
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn ExecuteUmsThread(
         UmsThread: PUMS_CONTEXT
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn UmsThreadYield(
         SchedulerParam: PVOID
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn DeleteUmsCompletionList(
         UmsCompletionList: PUMS_COMPLETION_LIST
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetCurrentUmsThread() -> PUMS_CONTEXT;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetNextUmsListItem(
         UmsContext: PUMS_CONTEXT
     ) -> PUMS_CONTEXT;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn QueryUmsThreadInformation(
         UmsThread: PUMS_CONTEXT,
         UmsThreadInfoClass: UMS_THREAD_INFO_CLASS,
@@ -571,26 +603,26 @@ extern "system" {
         UmsThreadInformationLength: ULONG,
         ReturnLength: PULONG,
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn SetUmsThreadInformation(
         UmsThread: PUMS_CONTEXT,
         UmsThreadInfoClass: UMS_THREAD_INFO_CLASS,
         UmsThreadInformation: PVOID,
         UmsThreadInformationLength: ULONG,
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn DeleteUmsThreadContext(
         UmsThread: PUMS_CONTEXT
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn CreateUmsThreadContext(
         lpUmsThread: *mut PUMS_CONTEXT
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn EnterUmsSchedulingMode(
         SchedulerStartupInfo: PUMS_SCHEDULER_STARTUP_INFO
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetUmsSystemThreadInformation(
         ThreadHandle: HANDLE,
         SystemThreadInfo: PUMS_SYSTEM_THREAD_INFORMATION,
@@ -633,6 +665,10 @@ extern "system" {
     pub fn RestoreLastError(
         dwErrCode: DWORD
     );
+}
+pub const FILE_SKIP_COMPLETION_PORT_ON_SUCCESS: UCHAR = 0x1;
+pub const FILE_SKIP_SET_EVENT_ON_HANDLE: UCHAR = 0x2;
+extern "system" {
     pub fn SetFileCompletionNotificationModes(
         FileHandle: HANDLE,
         Flags: UCHAR
@@ -1236,7 +1272,6 @@ extern "system" {
         hUpdate: HANDLE,
         fDiscard: BOOL
     ) -> BOOL;
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
     pub fn GlobalAddAtomA(
         lpString: LPCSTR
     ) -> ATOM;
@@ -2080,8 +2115,24 @@ extern "system" {
         lpsz: LPCWSTR,
         ucchMax: UINT_PTR
     ) -> BOOL;
-    // pub fn LookupAccountSidA();
-    // pub fn LookupAccountSidW();
+    pub fn LookupAccountSidA(
+        lpSystemName: LPCSTR,
+        Sid: PSID,
+        Name: LPSTR,
+        cchName: LPDWORD,
+        ReferencedDomainName: LPSTR,
+        cchReferencedDomainName: LPDWORD,
+        peUse: PSID_NAME_USE,
+    ) -> BOOL;
+    pub fn LookupAccountSidW(
+        lpSystemName: LPCWSTR,
+        Sid: PSID,
+        Name: LPWSTR,
+        cchName: LPDWORD,
+        ReferencedDomainName: LPWSTR,
+        cchReferencedDomainName: LPDWORD,
+        peUse: PSID_NAME_USE,
+    ) -> BOOL;
     pub fn LookupAccountNameA(
         lpSystemName: LPCSTR,
         lpAccountName: LPCSTR,

@@ -459,3 +459,5 @@ interface IDeviceTopology(IDeviceTopologyVtbl): IUnknown(IUnknownVtbl) {
         ppParts: *mut *mut IPartsList,
     ) -> HRESULT,
 }}
+RIDL!{#[uuid(0x1df639d0, 0x5ec1, 0x47aa, 0x93, 0x79, 0x82, 0x8d, 0xc1, 0xaa, 0x8c, 0x59)]
+class DeviceTopology;}

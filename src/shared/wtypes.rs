@@ -217,9 +217,9 @@ pub fn DECIMAL_SETZERO(dec: &mut DECIMAL) {
     dec.sign = 0;
 }
 pub type LPDECIMAL = *mut DECIMAL;
+pub type wireBSTR = *mut FLAGGED_WORD_BLOB;
 pub type BSTR = *mut OLECHAR;
 pub type LPBSTR = *mut BSTR;
-pub type wireBSTR = *mut FLAGGED_WORD_BLOB;
 pub type VARIANT_BOOL = c_short;
 STRUCT!{struct BSTRBLOB {
     cbSize: ULONG,

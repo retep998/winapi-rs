@@ -20,7 +20,7 @@ ENUM!{enum BG_CERT_STORE_LOCATION {
     BG_CERT_STORE_LOCATION_LOCAL_MACHINE_ENTERPRISE
         = BG_CERT_STORE_LOCATION_LOCAL_MACHINE_GROUP_POLICY + 1,
 }}
-RIDL!{#[uuid(0x83e81b93, 0x0873, 0x474d, 0x8a, 0x8c, 0xf2, 0x01, 0x8b, 0x1a, 0x93, 0x9c)]
+RIDL!{#[uuid(0xf1bd1079, 0x9f01, 0x4bdc, 0x80, 0x36, 0xf0, 0x9b, 0x70, 0x09, 0x50, 0x66)]
 interface IBackgroundCopyJobHttpOptions(IBackgroundCopyJobHttpOptionsVtbl):
     IUnknown(IUnknownVtbl) {
     fn SetClientCertificateByID(
