@@ -207,7 +207,6 @@ interface IRunningTaskCollection(IRunningTaskCollectionVtbl): IDispatch(IDispatc
         ppEnum: *mut LPUNKNOWN,
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0xf5bc8fc5, 0x536d, 0x4f77, 0xb8, 0x52, 0xfb, 0xc1, 0x35, 0x6f, 0xde, 0xb6)]
 interface ITaskDefinition(ITaskDefinitionVtbl): IDispatch(IDispatchVtbl) {
     fn get_RegistrationInfo(
@@ -408,7 +407,6 @@ interface IRepetitionPattern(IRepetitionPatternVtbl): IDispatch(IDispatchVtbl) {
         pStop: VARIANT_BOOL,
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0x8fd4711d, 0x2d02, 0x4c8c, 0x87, 0xe3, 0xef, 0xf6, 0x99, 0xde, 0x12, 0x7e)]
 interface ITaskSettings(ITaskSettingsVtbl): IDispatch(IDispatchVtbl) {
     fn get_AllowDemandStart(
