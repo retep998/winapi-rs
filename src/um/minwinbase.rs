@@ -214,6 +214,10 @@ FN!{stdcall PTHREAD_START_ROUTINE(
     lpThreadParameter: LPVOID,
 ) -> DWORD}
 pub type LPTHREAD_START_ROUTINE = PTHREAD_START_ROUTINE;
+FN!{stdcall PENCLAVE_ROUTINE(
+    lpThreadParameter: LPVOID,
+) -> DWORD}
+pub type LPENCLAVE_ROUTINE = PENCLAVE_ROUTINE;
 STRUCT!{struct EXCEPTION_DEBUG_INFO {
     ExceptionRecord: EXCEPTION_RECORD,
     dwFirstChance: DWORD,
