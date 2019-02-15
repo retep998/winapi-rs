@@ -914,8 +914,7 @@ extern "system" {
     pub fn SetProcessWindowStation(
         hWinSta: HWINSTA,
     ) -> BOOL;
-    pub fn GetProcessWindowStation(
-    ) -> HWINSTA;
+    pub fn GetProcessWindowStation() -> HWINSTA;
     pub fn SetUserObjectSecurity(
         hObj: HANDLE,
         pSIRequested: PSECURITY_INFORMATION,

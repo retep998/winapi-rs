@@ -291,8 +291,7 @@ interface ID2D1TransformedImageSource(ID2D1TransformedImageSourceVtbl):
     ) -> (),
 }}
 RIDL!{#[uuid(0x53dd9855, 0xa3b0, 0x4d5b, 0x82, 0xe1, 0x26, 0xe2, 0x5c, 0x5e, 0x57, 0x97)]
-interface ID2D1LookupTable3D(ID2D1LookupTable3DVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
-}}
+interface ID2D1LookupTable3D(ID2D1LookupTable3DVtbl): ID2D1Resource(ID2D1ResourceVtbl) {}}
 RIDL!{#[uuid(0x394ea6a3, 0x0c34, 0x4321, 0x95, 0x0b, 0x6c, 0xa2, 0x0f, 0x0b, 0xe6, 0xc7)]
 interface ID2D1DeviceContext2(ID2D1DeviceContext2Vtbl):
     ID2D1DeviceContext1(ID2D1DeviceContext1Vtbl) {

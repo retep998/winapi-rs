@@ -811,8 +811,7 @@ interface ITaskNamedValueCollection(ITaskNamedValueCollectionVtbl): IDispatch(ID
     fn Clear() -> HRESULT,
 }}
 RIDL!{#[uuid(0xd537d2b0, 0x9fb3, 0x4d34, 0x97, 0x39, 0x1f, 0xf5, 0xce, 0x7b, 0x1e, 0xf3)]
-interface IIdleTrigger(IIdleTriggerVtbl): ITrigger(ITriggerVtbl) {
-}}
+interface IIdleTrigger(IIdleTriggerVtbl): ITrigger(ITriggerVtbl) {}}
 RIDL!{#[uuid(0x72dade38, 0xfae4, 0x4b3e, 0xba, 0xf4, 0x5d, 0x00, 0x9a, 0xf0, 0x2b, 0x1c)]
 interface ILogonTrigger(ILogonTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_Delay(
