@@ -164,6 +164,11 @@ extern "system" {
         hWnd: HWND,
         hIMC: HIMC,
     ) -> HIMC;
+    pub fn ImmAssociateContextEx(
+        hWnd: HWND,
+        hIMC: HIMC,
+        dwFlags: DWORD,
+    ) -> BOOL;
     pub fn ImmGetCompositionStringA(
         hIMC: HIMC,
         dwIndex: DWORD,
