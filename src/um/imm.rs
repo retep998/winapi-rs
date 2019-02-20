@@ -14,6 +14,8 @@ use um::winuser::{
 };
 DECLARE_HANDLE!{HIMC, HIMC__}
 DECLARE_HANDLE!{HIMCC, HIMCC__}
+pub type LPHKL = *mut HKL;
+pub type LPUINT = *mut UINT;
 STRUCT!{struct COMPOSITIONFORM {
     dwStyle: DWORD,
     ptCurrentPos: POINT,
