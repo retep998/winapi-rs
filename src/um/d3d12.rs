@@ -2664,7 +2664,7 @@ FN!{stdcall PFN_D3D12_GET_DEBUG_INTERFACE(
 extern "system" {
     pub fn D3D12GetDebugInterface(
         riid: REFGUID,
-        ppvDebug: *mut *mut c_void
+        ppvDebug: *mut *mut c_void,
     ) -> HRESULT;
     pub fn D3D12EnableExperimentalFeatures(
         NumFeatures: UINT,

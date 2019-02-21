@@ -82,7 +82,7 @@ extern "system" {
     ) -> DWORD;
     pub fn PssFreeSnapshot(
         ProcessHandle: HANDLE,
-        SnapshotHandle: HPSS
+        SnapshotHandle: HPSS,
     ) -> DWORD;
     pub fn PssQuerySnapshot(
         SnapshotHandle: HPSS,
@@ -95,20 +95,20 @@ extern "system" {
         WalkMarkerHandle: *mut HPSSWALK,
     ) -> DWORD;
     pub fn PssWalkMarkerFree(
-        WalkMarkerHandle: HPSSWALK
+        WalkMarkerHandle: HPSSWALK,
     ) -> DWORD;
     pub fn PssWalkMarkerGetPosition(
         WalkMarkerHandle: HPSSWALK,
-        Position: *mut ULONG_PTR
+        Position: *mut ULONG_PTR,
     ) -> DWORD;
     // pub fn PssWalkMarkerRewind();
     // pub fn PssWalkMarkerSeek();
     pub fn PssWalkMarkerSeekToBeginning(
-        WalkMarkerHandle: HPSS
+        WalkMarkerHandle: HPSS,
     ) -> DWORD;
     pub fn PssWalkMarkerSetPosition(
         WalkMarkerHandle: HPSSWALK,
-        Position: ULONG_PTR
+        Position: ULONG_PTR,
     ) -> DWORD;
     // pub fn PssWalkMarkerTell();
     pub fn PssWalkSnapshot(

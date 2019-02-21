@@ -239,7 +239,7 @@ extern "system" {
         fResume: BOOL,
     ) -> BOOL;
     pub fn CancelWaitableTimer(
-        hTimer: HANDLE
+        hTimer: HANDLE,
     ) -> BOOL;
 }
 pub const CREATE_MUTEX_INITIAL_OWNER: DWORD = 0x00000001;

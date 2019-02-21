@@ -1123,7 +1123,7 @@ extern "system" {
         PropertyType: *mut DEVPROPTYPE,
         PropertyBuffer: PBYTE,
         PropertyBufferSize: PULONG,
-        ulFlags: ULONG
+        ulFlags: ULONG,
     ) -> CONFIGRET;
     pub fn CM_Get_DevNode_PropertyExW(
         dnDevInst: DEVINST,
@@ -1132,7 +1132,7 @@ extern "system" {
         PropertyBuffer: PBYTE,
         PropertyBufferSize: PULONG,
         ulFlags: ULONG,
-        hMachine: HMACHINE
+        hMachine: HMACHINE,
     ) -> CONFIGRET;
     pub fn CM_Get_DevNode_Registry_PropertyA(
         dnDevInst: DEVINST,
@@ -1375,7 +1375,7 @@ extern "system" {
         PropertyType: *mut DEVPROPTYPE,
         PropertyBuffer: PBYTE,
         PropertyBufferSize: PULONG,
-        ulFlags: ULONG
+        ulFlags: ULONG,
     ) -> CONFIGRET;
     pub fn CM_Get_Device_Interface_PropertyExW(
         pszDeviceInterface: LPCWSTR,
@@ -1384,7 +1384,7 @@ extern "system" {
         PropertyBuffer: PBYTE,
         PropertyBufferSize: PULONG,
         ulFlags: ULONG,
-        hMachine: HMACHINE
+        hMachine: HMACHINE,
     ) -> CONFIGRET;
     pub fn CM_Get_Log_Conf_Priority(
         lcLogConf: LOG_CONF,

@@ -80,13 +80,13 @@ extern "system" {
         hInput: HANDLE,
         hOutput: HANDLE,
         dwFlags: DWORD,
-        phPC: *mut HPCON
+        phPC: *mut HPCON,
     ) -> HRESULT;
     pub fn ResizePseudoConsole(
         hPC: HPCON,
-        size: COORD
+        size: COORD,
     ) -> HRESULT;
     pub fn ClosePseudoConsole(
-        hPC: HPCON
+        hPC: HPCON,
     );
 }

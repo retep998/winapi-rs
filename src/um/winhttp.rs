@@ -435,7 +435,7 @@ extern "system" {
     ) -> BOOL;
     pub fn WinHttpTimeToSystemTime(
         pwszTime: LPCWSTR,
-        pst: *mut SYSTEMTIME
+        pst: *mut SYSTEMTIME,
     ) -> BOOL;
     pub fn WinHttpCrackUrl(
         pwszUrl: LPCWSTR,

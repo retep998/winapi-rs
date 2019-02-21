@@ -4044,13 +4044,13 @@ extern "system" {
         hMenu: HMENU,
         uItem: UINT,
         fByPosition: BOOL,
-        lpmii: LPMENUITEMINFOA
+        lpmii: LPMENUITEMINFOA,
     ) -> BOOL;
     pub fn GetMenuItemInfoW(
         hMenu: HMENU,
         uItem: UINT,
         fByPosition: BOOL,
-        lpmii: LPMENUITEMINFOW
+        lpmii: LPMENUITEMINFOW,
     ) -> BOOL;
     pub fn SetMenuItemInfoA(
         hmenu: HMENU,

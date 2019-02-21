@@ -66,7 +66,7 @@ extern "system" {
         string: HSTRING,
         stringReplaced: HSTRING,
         stringReplaceWith: HSTRING,
-        newString: *mut HSTRING
+        newString: *mut HSTRING,
     ) -> HRESULT;
     pub fn WindowsTrimStringStart(
         string: HSTRING,

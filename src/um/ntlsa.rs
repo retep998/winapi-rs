@@ -1008,7 +1008,7 @@ extern "system" {
     pub fn LsaSetSecurityObject(
         ObjectHandle: LSA_HANDLE,
         SecurityInformation: SECURITY_INFORMATION,
-        SecurityDescriptor: PSECURITY_DESCRIPTOR
+        SecurityDescriptor: PSECURITY_DESCRIPTOR,
     ) -> NTSTATUS;
     pub fn LsaChangePassword(
         ServerName: PLSA_UNICODE_STRING,
@@ -1252,7 +1252,7 @@ extern "system" {
     ) -> NTSTATUS;
     pub fn LsaSetQuotasForAccount(
         AccountHandle: LSA_HANDLE,
-        QuotaLimits: PQUOTA_LIMITS
+        QuotaLimits: PQUOTA_LIMITS,
     ) -> NTSTATUS;
     pub fn LsaGetSystemAccessAccount(
         AccountHandle: LSA_HANDLE,
@@ -1294,7 +1294,7 @@ extern "system" {
         CurrentValue: *mut PLSA_UNICODE_STRING,
         CurrentValueSetTime: PLARGE_INTEGER,
         OldValue: *mut PLSA_UNICODE_STRING,
-        OldValueSetTime: PLARGE_INTEGER
+        OldValueSetTime: PLARGE_INTEGER,
     ) -> NTSTATUS;
     pub fn LsaLookupPrivilegeValue(
         PolicyHandle: LSA_HANDLE,

@@ -10,7 +10,7 @@ use um::oleidl::LPDROPTARGET;
 use um::winnt::HRESULT;
 extern "system" {
     pub fn OleInitialize(
-        pvReserved: LPVOID
+        pvReserved: LPVOID,
     ) -> HRESULT;
     pub fn RegisterDragDrop(
         hwnd: HWND,
