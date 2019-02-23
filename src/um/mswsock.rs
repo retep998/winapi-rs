@@ -1,3 +1,8 @@
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms.
 use ctypes::{c_char, c_int};
 use shared::minwindef::{BOOL, DWORD, INT, LPDWORD, LPINT, LPVOID, ULONG};
 use shared::mswsockdef::{PRIORESULT, PRIO_BUF, RIO_BUFFERID, RIO_CQ, RIO_RQ};
@@ -51,7 +56,7 @@ pub const TF_USE_DEFAULT_WORKER: DWORD = 0x00;
 pub const TF_USE_SYSTEM_THREAD: DWORD = 0x10;
 pub const TF_USE_KERNEL_APC: DWORD = 0x20;
 extern "system" {
-    pub fn TransmitFile (
+    pub fn TransmitFile(
         hSocket: SOCKET,
         hFile: HANDLE,
         nNumberOfBytesToWrite: DWORD,
@@ -60,7 +65,7 @@ extern "system" {
         lpTransmitBuffers: LPTRANSMIT_FILE_BUFFERS,
         dwReserved: DWORD,
     ) -> BOOL;
-    pub fn AcceptEx (
+    pub fn AcceptEx(
         sListenSocket: SOCKET,
         sAcceptSocket: SOCKET,
         lpOutputBuffer: PVOID,
@@ -70,7 +75,7 @@ extern "system" {
         lpdwBytesReceived: LPDWORD,
         lpOverlapped: LPOVERLAPPED,
     ) -> BOOL;
-    pub fn GetAcceptExSockaddrs (
+    pub fn GetAcceptExSockaddrs(
         lpOutputBuffer: PVOID,
         dwReceiveDataLength: DWORD,
         dwLocalAddressLength: DWORD,
