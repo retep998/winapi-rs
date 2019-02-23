@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -162,8 +161,7 @@ macro_rules! RIDL {
         RIDL!{@uuid $interface $($uuid),+}
     );
     (#[uuid($($uuid:expr),+)]
-    interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {
-    }) => (
+    interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {}) => (
         RIDL!{@vtbl $interface $vtbl (pub parent: $pvtbl,)}
         #[repr(C)]
         pub struct $interface {
@@ -297,7 +295,7 @@ macro_rules! UNION {
     }) => (
         #[repr(C)] $(#[$attrs])* #[cfg(target_arch = "x86")]
         pub struct $name([$stype32; $ssize32]);
-        #[repr(C)] $(#[$attrs])* #[cfg(target_arch = "x86_64")]
+        #[repr(C)] $(#[$attrs])* #[cfg(target_pointer_width = "64")]
         pub struct $name([$stype64; $ssize64]);
         impl Copy for $name {}
         impl Clone for $name {
@@ -367,7 +365,7 @@ macro_rules! ENUM {
 #[macro_export]
 macro_rules! STRUCT {
     (#[debug] $($rest:tt)*) => (
-        STRUCT!{#[cfg_attr(feature = "debug", derive(Debug))] $($rest)*}
+        STRUCT!{#[cfg_attr(feature = "impl-debug", derive(Debug))] $($rest)*}
     );
     ($(#[$attrs:meta])* struct $name:ident {
         $($field:ident: $ftype:ty,)+
