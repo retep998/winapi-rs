@@ -4,7 +4,10 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! longhorn display driver model kernel mode thunk interfaces
-use shared::d3dukmdt::{D3DDDI_ALLOCATIONLIST, D3DDDI_CREATECONTEXTFLAGS, D3DDDI_PATCHLOCATIONLIST, D3DGPU_VIRTUAL_ADDRESS, D3DKMT_HANDLE};
+use shared::d3dukmdt::{
+    D3DDDI_ALLOCATIONLIST, D3DDDI_CREATECONTEXTFLAGS, D3DDDI_PATCHLOCATIONLIST,
+    D3DGPU_VIRTUAL_ADDRESS, D3DKMT_HANDLE,
+};
 use shared::minwindef::UINT;
 use shared::ntdef::VOID;
 STRUCT!{struct D3DKMT_CREATEDEVICEFLAGS {
