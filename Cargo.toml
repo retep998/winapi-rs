@@ -32,6 +32,7 @@ impl-debug = []
 impl-default = []
 std = []
 #km
+d3dkmthk = []
 #mmos
 #shared
 basetsd = []
@@ -42,6 +43,7 @@ cfg = []
 d3d9 = []
 d3d9caps = []
 d3d9types = []
+d3dukmdt = []
 dcomptypes = []
 devguid = []
 devpkey = []
