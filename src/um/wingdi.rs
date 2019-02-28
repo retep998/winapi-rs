@@ -1,4 +1,3 @@
-// Copyright © 2016-2018 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -2787,44 +2786,44 @@ extern "system" {
         lpLogfont: LPLOGFONTA,
         lpProc: FONTENUMPROCA,
         lParam: LPARAM,
-        dwFlags: DWORD
+        dwFlags: DWORD,
     ) -> c_int;
     pub fn EnumFontFamiliesExW(
         hdc: HDC,
         lpLogfont: LPLOGFONTW,
         lpProc: FONTENUMPROCW,
         lParam: LPARAM,
-        dwFlags: DWORD
+        dwFlags: DWORD,
     ) -> c_int;
     pub fn EnumFontFamiliesA(
         hdc: HDC,
         lpLogfont: LPCSTR,
         lpProc: FONTENUMPROCA,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> c_int;
     pub fn EnumFontFamiliesW(
         hdc: HDC,
         lpLogfont: LPCWSTR,
         lpProc: FONTENUMPROCW,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> c_int;
     pub fn EnumFontsA(
         hdc: HDC,
         lpLogfont: LPCSTR,
         lpProc: FONTENUMPROCA,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> c_int;
     pub fn EnumFontsW(
         hdc: HDC,
         lpLogfont: LPCWSTR,
         lpProc: FONTENUMPROCW,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> c_int;
     pub fn EnumObjects(
         hdc: HDC,
         nType: c_int,
         lpFunc: GOBJENUMPROC,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> c_int;
     pub fn EqualRgn(
         hrgn1: HRGN,
@@ -2843,7 +2842,7 @@ extern "system" {
         cjInput: c_int,
         lpInData: LPCSTR,
         cjOutput: c_int,
-        lpOutData: LPSTR
+        lpOutData: LPSTR,
     ) -> c_int;
     pub fn ExcludeClipRect(
         hdc: HDC,
@@ -2971,13 +2970,13 @@ extern "system" {
         hdc: HDC,
         iFirst: UINT,
         iLast: UINT,
-        lpABC: LPABCFLOAT
+        lpABC: LPABCFLOAT,
     ) -> BOOL;
     pub fn GetCharABCWidthsFloatW(
         hdc: HDC,
         iFirst: UINT,
         iLast: UINT,
-        lpABC: LPABCFLOAT
+        lpABC: LPABCFLOAT,
     ) -> BOOL;
     pub fn GetClipBox(
         hdc: HDC,
@@ -3010,14 +3009,14 @@ extern "system" {
         cLines: UINT,
         lpvBits: LPVOID,
         lpbmi: LPBITMAPINFO,
-        usage: UINT
+        usage: UINT,
     ) -> c_int;
     pub fn GetFontData(
         hdc: HDC,
         dwTable: DWORD,
         dwOffset: DWORD,
         pvBuffer: PVOID,
-        cjBuffer: DWORD
+        cjBuffer: DWORD,
     ) -> DWORD;
     pub fn GetGlyphOutlineA(
         hdc: HDC,
@@ -3026,7 +3025,7 @@ extern "system" {
         lpgm: LPGLYPHMETRICS,
         cjBuffer: DWORD,
         pvBuffer: LPVOID,
-        lpmat2: *const MAT2
+        lpmat2: *const MAT2,
     ) -> DWORD;
     pub fn GetGlyphOutlineW(
         hdc: HDC,
@@ -3035,7 +3034,7 @@ extern "system" {
         lpgm: LPGLYPHMETRICS,
         cjBuffer: DWORD,
         pvBuffer: LPVOID,
-        lpmat2: *const MAT2
+        lpmat2: *const MAT2,
     ) -> DWORD;
     pub fn GetGraphicsMode(
         hdc: HDC,
@@ -3079,7 +3078,7 @@ extern "system" {
         hpal: HPALETTE,
         iStart: UINT,
         cEntries: UINT,
-        pPalEntries: LPPALETTEENTRY
+        pPalEntries: LPPALETTEENTRY,
     ) -> UINT;
     pub fn GetPixel(
         hdc: HDC,
@@ -3165,7 +3164,7 @@ extern "system" {
         nMaxExtent: c_int,
         lpnFit: LPINT,
         lpnDx: LPINT,
-        lpSize: LPSIZE
+        lpSize: LPSIZE,
     ) -> BOOL;
     pub fn GetTextExtentExPointW(
         hdc: HDC,
@@ -3174,7 +3173,7 @@ extern "system" {
         nMaxExtent: c_int,
         lpnFit: LPINT,
         lpnDx: LPINT,
-        lpSize: LPSIZE
+        lpSize: LPSIZE,
     ) -> BOOL;
     pub fn GetTextCharset(
         hdc: HDC,
@@ -3187,7 +3186,7 @@ extern "system" {
     pub fn TranslateCharsetInfo(
         lpSrc: *const DWORD,
         lpCs: LPCHARSETINFO,
-        dwFlags: DWORD
+        dwFlags: DWORD,
     ) -> BOOL;
     pub fn GetFontLanguageInfo(
         hdc: HDC,
@@ -3198,7 +3197,7 @@ extern "system" {
         nCount: c_int,
         nMexExtent: c_int,
         lpResults: LPGCP_RESULTSA,
-        dwFlags: DWORD
+        dwFlags: DWORD,
     ) -> DWORD;
     pub fn GetCharacterPlacementW(
         hdc: HDC,
@@ -3206,7 +3205,7 @@ extern "system" {
         nCount: c_int,
         nMexExtent: c_int,
         lpResults: LPGCP_RESULTSW,
-        dwFlags: DWORD
+        dwFlags: DWORD,
     ) -> DWORD;
 }
 STRUCT!{struct WCRANGE {

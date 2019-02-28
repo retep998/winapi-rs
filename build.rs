@@ -1,4 +1,3 @@
-// Copyright © 2016-2018 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -52,6 +51,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("minwindef", &["basetsd", "ntdef"], &[]),
     ("mmreg", &["guiddef", "minwindef"], &[]),
     ("mstcpip", &["basetsd", "guiddef", "in6addr", "inaddr", "minwindef", "winnt", "ws2def"], &["ntdll"]),
+    ("mswsockdef", &["minwindef", "winnt", "ws2def"], &[]),
     ("netioapi", &["basetsd", "guiddef", "ifdef", "minwindef", "ntdef"], &["iphlpapi"]),
     ("ntddscsi", &["basetsd", "minwindef", "ntdef", "winioctl", "winnt"], &[]),
     ("ntddser", &["devpropdef"], &[]),
@@ -97,7 +97,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("bits5_0", &["basetsd", "bits1_5", "bits3_0", "bits4_0", "guiddef", "minwindef", "winnt"], &[]),
     ("bitscfg", &["guiddef", "oaidl", "unknwnbase", "winnt", "wtypes"], &["oleaut32"]),
     ("bitsmsg", &["minwindef"], &[]),
-    ("cfgmgr32", &["basetsd", "cfg", "guiddef", "minwindef", "winnt", "winreg"], &["setupapi"]),
+    ("cfgmgr32", &["basetsd", "cfg", "devpropdef", "guiddef", "minwindef", "winnt", "winreg"], &["cfgmgr32"]),
     ("cguid", &[], &[]),
     ("combaseapi", &["basetsd", "guiddef", "minwindef", "objidlbase", "propidl", "rpcdce", "unknwnbase", "winnt", "wtypesbase"], &["ole32"]),
     ("coml2api", &["minwindef"], &[]),
@@ -225,6 +225,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("mscat", &["guiddef", "minwindef", "mssip", "wincrypt", "winnt"], &[]),
     ("mschapp", &["basetsd", "minwindef", "winnt"], &["advapi32"]),
     ("mssip", &["guiddef", "minwindef", "mscat", "wincrypt", "winnt"], &["crypt32"]),
+    ("mswsock", &["minwinbase", "minwindef", "mswsockdef", "winnt", "winsock2", "ws2def"], &["mswsock"]),
     ("namedpipeapi", &["minwinbase", "minwindef", "winnt"], &["advapi32", "kernel32"]),
     ("namespaceapi", &["minwinbase", "minwindef", "ntdef", "winnt"], &["kernel32"]),
     ("nb30", &["minwindef", "winnt"], &["netapi32"]),

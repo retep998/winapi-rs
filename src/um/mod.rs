@@ -1,4 +1,3 @@
-// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -150,6 +149,7 @@ pub mod gl;
 #[cfg(feature = "mscat")] pub mod mscat;
 #[cfg(feature = "mschapp")] pub mod mschapp;
 #[cfg(feature = "mssip")] pub mod mssip;
+#[cfg(feature = "mswsock")] pub mod mswsock;
 #[cfg(feature = "namedpipeapi")] pub mod namedpipeapi;
 #[cfg(feature = "namespaceapi")] pub mod namespaceapi;
 #[cfg(feature = "nb30")] pub mod nb30;
