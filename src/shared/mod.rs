@@ -43,6 +43,7 @@ pub mod guiddef;
 #[cfg(feature = "minwindef")] pub mod minwindef;
 #[cfg(feature = "mmreg")] pub mod mmreg;
 #[cfg(feature = "mstcpip")] pub mod mstcpip;
+#[cfg(feature = "mswsockdef")] pub mod mswsockdef;
 #[cfg(feature = "netioapi")] pub mod netioapi;
 #[cfg(feature = "ntddscsi")] pub mod ntddscsi;
 #[cfg(feature = "ntddser")] pub mod ntddser;

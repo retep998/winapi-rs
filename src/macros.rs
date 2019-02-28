@@ -402,3 +402,23 @@ macro_rules! FN {
         pub type $func = Option<unsafe extern "C" fn($($p: $t,)*) -> $ret>;
     );
 }
+macro_rules! _WSAIO {
+    ($x:expr, $y:expr) => {
+        $crate::shared::ws2def::IOC_VOID | $x | $y
+    }
+}
+macro_rules! _WSAIOR {
+    ($x:expr, $y:expr) => {
+        $crate::shared::ws2def::IOC_OUT | $x | $y
+    }
+}
+macro_rules! _WSAIOW {
+    ($x:expr, $y:expr) => {
+        $crate::shared::ws2def::IOC_IN | $x | $y
+    }
+}
+macro_rules! _WSAIORW {
+    ($x:expr, $y:expr) => {
+        $crate::shared::ws2def::IOC_INOUT | $x | $y
+    }
+}

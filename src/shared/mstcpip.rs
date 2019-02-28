@@ -11,7 +11,7 @@ use shared::in6addr::IN6_ADDR;
 use shared::inaddr::IN_ADDR;
 use shared::minwindef::{DWORD, PULONG, PUSHORT, UCHAR, ULONG, USHORT};
 use shared::ws2def::{
-    INADDR_ANY, INADDR_BROADCAST, INADDR_NONE, IOC_IN, IOC_INOUT, IOC_OUT, IOC_VENDOR, SOCKADDR_IN,
+    INADDR_ANY, INADDR_BROADCAST, INADDR_NONE, IOC_VENDOR, SOCKADDR_IN,
     SOCKADDR_STORAGE,
 };
 use um::winnt::{BOOLEAN, LONG, LPCWSTR, PCSTR, PCWSTR, PSTR, PWSTR};
@@ -77,9 +77,6 @@ STRUCT!{struct ASSOCIATE_NAMERES_CONTEXT_INPUT {
     Handle: UINT64,
 }}
 pub type PASSOCIATE_NAMERES_CONTEXT_INPUT = *mut ASSOCIATE_NAMERES_CONTEXT_INPUT;
-macro_rules! _WSAIOR { ($x:expr, $y:expr) => { IOC_OUT | $x | $y } }
-macro_rules! _WSAIOW { ($x:expr, $y:expr) => { IOC_IN | $x | $y } }
-macro_rules! _WSAIORW { ($x:expr, $y:expr) => { IOC_INOUT | $x | $y } }
 pub const SIO_RCVALL: DWORD = _WSAIOW!(IOC_VENDOR,1);
 pub const SIO_RCVALL_MCAST: DWORD = _WSAIOW!(IOC_VENDOR,2);
 pub const SIO_RCVALL_IGMPMCAST: DWORD = _WSAIOW!(IOC_VENDOR,3);
