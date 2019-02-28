@@ -6,7 +6,7 @@
 //! Longhorn Display Driver Model (LDDM) user/kernel mode shared data type definitions.
 use shared::basetsd::{UINT64, ULONG_PTR};
 use shared::guiddef::GUID;
-use shared::minwindef::{UINT, ULONG};
+use shared::minwindef::{BOOL, UINT, ULONG};
 use shared::ntdef::{HANDLE, LUID, ULONGLONG, VOID};
 pub const DXGKDDI_INTERFACE_VERSION_VISTA: ULONG = 0x1052;
 pub const DXGKDDI_INTERFACE_VERSION_VISTA_SP1: ULONG = 0x1053;
@@ -21,6 +21,7 @@ pub const DXGKDDI_INTERFACE_VERSION_WDDM2_2: ULONG = 0x700A;
 pub const DXGKDDI_INTERFACE_VERSION_WDDM2_3: ULONG = 0x8001;
 pub const DXGKDDI_INTERFACE_VERSION_WDDM2_4: ULONG = 0x9006;
 pub const DXGKDDI_INTERFACE_VERSION_WDDM2_5: ULONG = 0xA00B;
+#[inline]
 pub fn IS_OFFICIAL_DDI_INTERFACE_VERSION(version: ULONG) -> bool {
     (version == DXGKDDI_INTERFACE_VERSION_VISTA) ||
     (version == DXGKDDI_INTERFACE_VERSION_VISTA_SP1) ||
@@ -303,3 +304,113 @@ BITFIELD!{D3DDDI_CREATECONTEXTFLAGS Value: UINT [
     HwQueueSupported set_HwQueueSupported[4..5],
     Reserved set_Reserved[5..32],
 ]}
+//1188
+STRUCT!{struct D3DDDICB_SIGNALFLAGS {
+    Value: UINT,
+}}
+BITFIELD!{D3DDDICB_SIGNALFLAGS Value: UINT [
+    SignalAtSubmission set_SignalAtSubmission[0..1],
+    EnqueueCpuEvent set_EnqueueCpuEvent[1..2],
+    AllowFenceRewind set_AllowFenceRewind[2..3],
+    Reserved set_Reserved[3..31],
+    DXGK_SIGNAL_FLAG_INTERNAL0 set_DXGK_SIGNAL_FLAG_INTERNAL0[31..32],
+]}
+pub const D3DDDI_MAX_OBJECT_WAITED_ON: usize = 32;
+pub const D3DDDI_MAX_OBJECT_SIGNALED: usize = 32;
+ENUM!{enum D3DDDI_SYNCHRONIZATIONOBJECT_TYPE {
+    D3DDDI_SYNCHRONIZATION_MUTEX = 1,
+    D3DDDI_SEMAPHORE = 2,
+    D3DDDI_FENCE = 3,
+    D3DDDI_CPU_NOTIFICATION = 4,
+    D3DDDI_MONITORED_FENCE = 5,
+    D3DDDI_PERIODIC_MONITORED_FENCE = 6,
+    D3DDDI_SYNCHRONIZATION_TYPE_LIMIT,
+}}
+//1553
+STRUCT!{struct D3DDDI_SYNCHRONIZATIONOBJECTINFO_u_SynchronizationMutex {
+    InitialState: BOOL,
+}}
+STRUCT!{struct D3DDDI_SYNCHRONIZATIONOBJECTINFO_u_Semaphore {
+    MaxCount: UINT,
+    InitialCount: UINT,
+}}
+STRUCT!{struct D3DDDI_SYNCHRONIZATIONOBJECTINFO_u_Reserved {
+    Reserved: [UINT; 16],
+}}
+UNION!{union D3DDDI_SYNCHRONIZATIONOBJECTINFO_u {
+    [u32; 16],
+    SynchronizationMutex SynchronizationMutex_mut:
+        D3DDDI_SYNCHRONIZATIONOBJECTINFO_u_SynchronizationMutex,
+    Semaphore Semaphore_mut: D3DDDI_SYNCHRONIZATIONOBJECTINFO_u_Semaphore,
+    Reserved Reserved_mut: D3DDDI_SYNCHRONIZATIONOBJECTINFO_u_Reserved,
+}}
+STRUCT!{struct D3DDDI_SYNCHRONIZATIONOBJECTINFO {
+    Type: D3DDDI_SYNCHRONIZATIONOBJECT_TYPE,
+    u: D3DDDI_SYNCHRONIZATIONOBJECTINFO_u,
+}}
+STRUCT!{struct D3DDDI_SYNCHRONIZATIONOBJECT_FLAGS {
+    Value: UINT,
+}}
+BITFIELD!{D3DDDI_SYNCHRONIZATIONOBJECT_FLAGS Value: UINT [
+    Shared set_Shared[0..1],
+    NtSecuritySharing set_NtSecuritySharing[1..2],
+    CrossAdapter set_CrossAdapter[2..3],
+    TopOfPipeline set_TopOfPipeline[3..4],
+    NoSignal set_NoSignal[4..5],
+    NoWait set_NoWait[5..6],
+    NoSignalMaxValueOnTdr set_NoSignalMaxValueOnTdr[6..7],
+    NoGPUAccess set_NoGPUAccess[7..8],
+    Reserved set_Reserved[8..31],
+    D3DDDI_SYNCHRONIZATIONOBJECT_FLAGS_RESERVED0
+        set_D3DDDI_SYNCHRONIZATIONOBJECT_FLAGS_RESERVED0[31..32],
+]}
+STRUCT!{struct D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_SynchronizationMutex {
+    InitialState: BOOL,
+}}
+STRUCT!{struct D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_Semaphore {
+    MaxCount: UINT,
+    InitialCount: UINT,
+}}
+STRUCT!{struct D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_Fence {
+    FenceValue: UINT64,
+}}
+STRUCT!{struct D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_CPUNotification {
+    Event: HANDLE,
+}}
+STRUCT!{struct D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_MonitoredFence {
+    InitialFenceValue: UINT64,
+    FenceValueCPUVirtualAddress: *mut VOID,
+    FenceValueGPUVirtualAddress: D3DGPU_VIRTUAL_ADDRESS,
+    EngineAffinity: UINT,
+}}
+STRUCT!{struct D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_PeriodicMonitoredFence {
+    hAdapter: D3DKMT_HANDLE,
+    VidPnTargetId: D3DDDI_VIDEO_PRESENT_TARGET_ID,
+    Time: UINT64,
+    FenceValueCPUVirtualAddress: *mut VOID,
+    FenceValueGPUVirtualAddress: D3DGPU_VIRTUAL_ADDRESS,
+    EngineAffinity: UINT,
+}}
+STRUCT!{struct D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_Reserved {
+    Reserved: [UINT64; 8],
+}}
+UNION!{union D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u {
+    [u64; 8],
+    SynchronizationMutex SynchronizationMutex_mut:
+        D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_SynchronizationMutex,
+    Semaphore Semaphore_mut: D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_Semaphore,
+    Fence Fence_mut: D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_Fence,
+    CPUNotification CPUNotification_mut: D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_CPUNotification,
+    MonitoredFence MonitoredFence_mut: D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_MonitoredFence,
+    PeriodicMonitoredFence PeriodicMonitoredFence_mut:
+        D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_PeriodicMonitoredFence,
+    Reserved Reserved_mut: D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u_Reserved,
+}}
+STRUCT!{struct D3DDDI_SYNCHRONIZATIONOBJECTINFO2 {
+    Type: D3DDDI_SYNCHRONIZATIONOBJECT_TYPE,
+    Flags: D3DDDI_SYNCHRONIZATIONOBJECT_FLAGS,
+    u: D3DDDI_SYNCHRONIZATIONOBJECTINFO2_u,
+    SharedHandle: D3DKMT_HANDLE,
+}}
+//1778
+pub const D3DDDI_MAX_BROADCAST_CONTEXT: usize = 64;
