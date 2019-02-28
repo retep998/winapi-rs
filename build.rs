@@ -9,7 +9,7 @@ use std::env::var;
 // (header name, &[header dependencies], &[library dependencies])
 const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static str])] = &[
     // km
-    ("d3dkmthk", &["basetsd", "d3dukmdt", "minwindef", "ntdef"], &[]),
+    ("d3dkmthk", &["basetsd", "d3dukmdt", "minwindef", "ntdef", "windef"], &[]),
     // mmos
     // shared
     ("basetsd", &[], &[]),
