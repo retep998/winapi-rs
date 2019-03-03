@@ -4,7 +4,6 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
 // #include <winapifamily.h>
 // #include <ifmib.h>
 // #include <nldef.h>
@@ -13,9 +12,7 @@ use shared::ifmib::MAXLEN_PHYSADDR;
 use shared::minwindef::DWORD;
 use shared::nldef::NL_ROUTE_PROTOCOL;
 use shared::ntdef::{PVOID, UCHAR, ULONG, USHORT};
-
 const ANY_SIZE: usize = 1;
-
 STRUCT!{struct MIB_IPADDRROW_XP {
     dwAddr: DWORD,
     dwIndex: IF_INDEX,
@@ -26,7 +23,6 @@ STRUCT!{struct MIB_IPADDRROW_XP {
     wType: USHORT,
 }}
 pub type PMIB_IPADDRROW_XP = *mut MIB_IPADDRROW_XP;
-
 STRUCT!{struct MIB_IPADDRROW_W2K {
     dwAddr: DWORD,
     dwIndex: DWORD,
@@ -37,32 +33,26 @@ STRUCT!{struct MIB_IPADDRROW_W2K {
     unused2: USHORT,
 }}
 pub type PMIB_IPADDRROW_W2K = *mut MIB_IPADDRROW_W2K;
-
 // Windows XP
 // pub type MIB_IPADDRROW = MIB_IPADDRROW_XP;
 pub type MIB_IPADDRROW = MIB_IPADDRROW_W2K;
 pub type PMIB_IPADDRROW = *mut MIB_IPADDRROW;
-
 STRUCT!{struct MIB_IPADDRTABLE {
     dwNumEntries: DWORD,
     table: [MIB_IPADDRROW; ANY_SIZE],
 }}
 pub type PMIB_IPADDRTABLE = *mut MIB_IPADDRTABLE;
-
 STRUCT!{struct MIB_IPFORWARDNUMBER {
     dwValue: DWORD,
 }}
 pub type PMIB_IPFORWARDNUMBER = *mut MIB_IPFORWARDNUMBER;
-
 pub type MIB_IPFORWARD_PROTO = NL_ROUTE_PROTOCOL;
-
 ENUM!{enum MIB_IPFORWARD_TYPE {
     MIB_IPROUTE_TYPE_OTHER    = 1,
     MIB_IPROUTE_TYPE_INVALID  = 2,
     MIB_IPROUTE_TYPE_DIRECT   = 3,
     MIB_IPROUTE_TYPE_INDIRECT = 4,
 }}
-
 STRUCT!{struct MIB_IPFORWARDROW {
     dwForwardDest: DWORD,
     dwForwardMask: DWORD,
@@ -80,20 +70,17 @@ STRUCT!{struct MIB_IPFORWARDROW {
     dwForwardMetric5: DWORD,
 }}
 pub type PMIB_IPFORWARDROW = *mut MIB_IPFORWARDROW;
-
 STRUCT!{struct MIB_IPFORWARDTABLE {
     dwNumEntries: DWORD,
     table: [MIB_IPFORWARDROW; ANY_SIZE],
 }}
 pub type PMIB_IPFORWARDTABLE = *mut MIB_IPFORWARDTABLE;
-
 ENUM!{enum MIB_IPNET_TYPE {
     MIB_IPNET_TYPE_OTHER   = 1,
     MIB_IPNET_TYPE_INVALID = 2,
     MIB_IPNET_TYPE_DYNAMIC = 3,
     MIB_IPNET_TYPE_STATIC  = 4,
 }}
-
 STRUCT!{struct MIB_IPNETROW_LH {
     dwIndex: IF_INDEX,
     dwPhysAddrLen: DWORD,
@@ -102,7 +89,6 @@ STRUCT!{struct MIB_IPNETROW_LH {
     Type: MIB_IPNET_TYPE,
 }}
 pub type PMIB_IPNETROW_LH = *mut MIB_IPNETROW_LH;
-
 STRUCT!{struct MIB_IPNETROW_W2K {
     dwIndex: IF_INDEX,
     dwPhysAddrLen: DWORD,
@@ -111,24 +97,20 @@ STRUCT!{struct MIB_IPNETROW_W2K {
     dwType: DWORD,
 }}
 pub type PMIB_IPNETROW_W2K = *mut MIB_IPNETROW_W2K;
-
 // Windows XP
 // pub type MIB_IPNETROW = MIB_IPNETROW_LH;
 pub type MIB_IPNETROW = MIB_IPNETROW_W2K;
 pub type PMIB_IPNETROW = *mut MIB_IPNETROW;
-
 STRUCT!{struct MIB_IPNETTABLE {
     dwNumEntries: DWORD,
     table: [MIB_IPNETROW; ANY_SIZE],
 }}
 pub type PMIB_IPNETTABLE = *mut MIB_IPNETTABLE;
-
 ENUM!{enum MIB_IPSTATS_FORWARDING {
     MIB_IP_FORWARDING     = 1,
     MIB_IP_NOT_FORWARDING = 2,
 }}
 pub type PMIB_IPSTATS_FORWARDING = *mut MIB_IPSTATS_FORWARDING;
-
 STRUCT!{struct MIB_IPSTATS_LH {
     Forwarding: MIB_IPSTATS_FORWARDING,
     dwDefaultTTL: DWORD,
@@ -155,7 +137,6 @@ STRUCT!{struct MIB_IPSTATS_LH {
     dwNumRoutes: DWORD,
 }}
 pub type PMIB_IPSTATS_LH = *mut MIB_IPSTATS_LH;
-
 STRUCT!{struct MIB_IPSTATS_W2K {
     dwForwarding: DWORD,
     dwDefaultTTL: DWORD,
@@ -182,12 +163,10 @@ STRUCT!{struct MIB_IPSTATS_W2K {
     dwNumRoutes: DWORD,
 }}
 pub type PMIB_IPSTATS_W2K = *mut MIB_IPSTATS_W2K;
-
 // Windows XP
 // pub type MIB_IPSTATS = MIB_IPSTATS_LH;
 pub type MIB_IPSTATS = MIB_IPSTATS_W2K;
 pub type PMIB_IPSTATS = *mut MIB_IPSTATS;
-
 STRUCT!{struct MIBICMPSTATS {
     dwMsgs: DWORD,
     dwErrors: DWORD,
@@ -204,36 +183,29 @@ STRUCT!{struct MIBICMPSTATS {
     dwAddrMaskReps: DWORD,
 }}
 pub type PMIBICMPSTATS = *mut MIBICMPSTATS;
-
 STRUCT!{struct MIBICMPINFO {
     icmpInStats: MIBICMPSTATS,
     icmpOutStats: MIBICMPSTATS,
 }}
-
 STRUCT!{struct MIB_ICMP {
     stats: MIBICMPINFO,
 }}
 pub type PMIB_ICMP = *mut MIB_ICMP;
-
 STRUCT!{struct MIBICMPSTATS_EX_XPSP1 {
     dwMsgs: DWORD,
     dwErrors: DWORD,
     rgdwTypeCount: [DWORD; 256],
 }}
 pub type PMIBICMPSTATS_EX_XPSP1 = *mut MIBICMPSTATS_EX_XPSP1;
-
 pub type MIBICMPSTATS_EX = MIBICMPSTATS_EX_XPSP1;
 pub type PMIBICMPSTATS_EX = *mut MIBICMPSTATS_EX_XPSP1;
-
 STRUCT!{struct MIB_ICMP_EX_XPSP1 {
     icmpInStats: MIBICMPSTATS_EX,
     icmpOutStats: MIBICMPSTATS_EX,
 }}
 pub type PMIB_ICMP_EX_XPSP1 = *mut MIB_ICMP_EX_XPSP1;
-
 pub type MIB_ICMP_EX = MIB_ICMP_EX_XPSP1;
 pub type PMIB_ICMP_EX = *mut MIB_ICMP_EX_XPSP1;
-
 ENUM!{enum ICMP6_TYPE {
     ICMP6_DST_UNREACH          =   1,
     ICMP6_PACKET_TOO_BIG       =   2,
@@ -252,7 +224,6 @@ ENUM!{enum ICMP6_TYPE {
     ICMP6_V2_MEMBERSHIP_REPORT = 143,
 }}
 pub type PICMP6_TYPE = *mut ICMP6_TYPE;
-
 ENUM!{enum ICMP4_TYPE {
     ICMP4_ECHO_REPLY        =  0,
     ICMP4_DST_UNREACH       =  3,
@@ -269,7 +240,6 @@ ENUM!{enum ICMP4_TYPE {
     ICMP4_MASK_REPLY        = 18,
 }}
 pub type PICMP4_TYPE = *mut ICMP4_TYPE;
-
 STRUCT!{struct MIB_IPMCAST_OIF_XP {
     dwOutIfIndex: DWORD,
     dwNextHopAddr: DWORD,
@@ -277,7 +247,6 @@ STRUCT!{struct MIB_IPMCAST_OIF_XP {
     dwReserved1: DWORD,
 }}
 pub type PMIB_IPMCAST_OIF_XP = *mut MIB_IPMCAST_OIF_XP;
-
 STRUCT!{struct MIB_IPMCAST_OIF_W2K {
     dwOutIfIndex: DWORD,
     dwNextHopAddr: DWORD,
@@ -285,12 +254,10 @@ STRUCT!{struct MIB_IPMCAST_OIF_W2K {
     dwReserved: DWORD,
 }}
 pub type PMIB_IPMCAST_OIF_W2K = *mut MIB_IPMCAST_OIF_W2K;
-
 // Windows XP
 // pub type MIB_IPMCAST_OIF = MIB_IPMCAST_OIF_XP;
 pub type MIB_IPMCAST_OIF = MIB_IPMCAST_OIF_W2K;
 pub type PMIB_IPMCAST_OIF = *mut MIB_IPMCAST_OIF;
-
 STRUCT!{struct MIB_IPMCAST_MFE {
     dwGroup: DWORD,
     dwSource: DWORD,
@@ -310,13 +277,11 @@ STRUCT!{struct MIB_IPMCAST_MFE {
     rgmioOutInfo: [MIB_IPMCAST_OIF; ANY_SIZE],
 }}
 pub type PMIB_IPMCAST_MFE = *mut MIB_IPMCAST_MFE;
-
 STRUCT!{struct MIB_MFE_TABLE {
     dwNumEntries: DWORD,
     table: [MIB_IPMCAST_MFE; ANY_SIZE],
 }}
 pub type PMIB_MFE_TABLE = *mut MIB_MFE_TABLE;
-
 STRUCT!{struct MIB_IPMCAST_OIF_STATS_LH {
     dwOutIfIndex: DWORD,
     dwNextHopAddr: DWORD,
@@ -327,7 +292,6 @@ STRUCT!{struct MIB_IPMCAST_OIF_STATS_LH {
     ulOutDiscards: ULONG,
 }}
 pub type PMIB_IPMCAST_OIF_STATS_LH = *mut MIB_IPMCAST_OIF_STATS_LH;
-
 STRUCT!{struct MIB_IPMCAST_OIF_STATS_W2K {
     dwOutIfIndex: DWORD,
     dwNextHopAddr: DWORD,
@@ -338,12 +302,10 @@ STRUCT!{struct MIB_IPMCAST_OIF_STATS_W2K {
     ulOutDiscards: ULONG,
 }}
 pub type PMIB_IPMCAST_OIF_STATS_W2K = *mut MIB_IPMCAST_OIF_STATS_W2K;
-
 // Windows Vista
 // pub type MIB_IPMCAST_OIF_STATS = MIB_IPMCAST_OIF_STATS_LH;
 pub type MIB_IPMCAST_OIF_STATS = MIB_IPMCAST_OIF_STATS_W2K;
 pub type PMIB_IPMCAST_OIF_STATS = *mut MIB_IPMCAST_OIF_STATS;
-
 STRUCT!{struct MIB_IPMCAST_MFE_STATS {
     dwGroup: DWORD,
     dwSource: DWORD,
@@ -364,13 +326,11 @@ STRUCT!{struct MIB_IPMCAST_MFE_STATS {
     rgmiosOutStats: [MIB_IPMCAST_OIF_STATS; ANY_SIZE],
 }}
 pub type PMIB_IPMCAST_MFE_STATS = *mut MIB_IPMCAST_MFE_STATS;
-
 STRUCT!{struct MIB_MFE_STATS_TABLE {
     dwNumEntries: DWORD,
     table: [MIB_IPMCAST_MFE_STATS; ANY_SIZE],
 }}
 pub type PMIB_MFE_STATS_TABLE = *mut MIB_MFE_STATS_TABLE;
-
 STRUCT!{struct MIB_IPMCAST_MFE_STATS_EX_XP {
     dwGroup: DWORD,
     dwSource: DWORD,
@@ -396,24 +356,19 @@ STRUCT!{struct MIB_IPMCAST_MFE_STATS_EX_XP {
     rgmiosOutStats: [MIB_IPMCAST_OIF_STATS; ANY_SIZE],
 }}
 pub type PMIB_IPMCAST_MFE_STATS_EX_XP = *mut MIB_IPMCAST_MFE_STATS_EX_XP;
-
 pub type MIB_IPMCAST_MFE_STATS_EX = MIB_IPMCAST_MFE_STATS_EX_XP;
 pub type PMIB_IPMCAST_MFE_STATS_EX = *mut MIB_IPMCAST_MFE_STATS_EX;
-
 STRUCT!{struct MIB_MFE_STATS_TABLE_EX_XP {
     dwNumEntries: DWORD,
     table: [PMIB_IPMCAST_MFE_STATS_EX_XP; ANY_SIZE],
 }}
 pub type PMIB_MFE_STATS_TABLE_EX_XP = *mut MIB_MFE_STATS_TABLE_EX_XP;
-
 pub type MIB_MFE_STATS_TABLE_EX = MIB_MFE_STATS_TABLE_EX_XP;
 pub type PMIB_MFE_STATS_TABLE_EX = *mut MIB_MFE_STATS_TABLE_EX;
-
 STRUCT!{struct MIB_IPMCAST_GLOBAL {
     dwEnable: DWORD,
 }}
 pub type PMIB_IPMCAST_GLOBAL = *mut MIB_IPMCAST_GLOBAL;
-
 STRUCT!{struct MIB_IPMCAST_IF_ENTRY {
     dwIfIndex: DWORD,
     dwTtl: DWORD,
@@ -423,7 +378,6 @@ STRUCT!{struct MIB_IPMCAST_IF_ENTRY {
     ulOutMcastOctets: ULONG,
 }}
 pub type PMIB_IPMCAST_IF_ENTRY = *mut MIB_IPMCAST_IF_ENTRY;
-
 STRUCT!{struct MIB_IPMCAST_IF_TABLE {
     dwNumEntries: DWORD,
     table: [MIB_IPMCAST_IF_ENTRY; ANY_SIZE],

@@ -4,7 +4,6 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
 // #include <iprtrmib.h>
 // #include <ipexport.h>
 // #include <iptypes.h>
@@ -34,16 +33,13 @@ use um::ipexport::{
 };
 use um::iptypes::{PFIXED_INFO, PIP_ADAPTER_ADDRESSES, PIP_ADAPTER_INFO, PIP_PER_ADAPTER_INFO};
 use um::minwinbase::{LPOVERLAPPED,OVERLAPPED};
-
 ENUM!{enum NET_ADDRESS_FORMAT {
     NET_ADDRESS_FORMAT_UNSPECIFIED = 0,
     NET_ADDRESS_DNS_NAME,
     NET_ADDRESS_IPV4,
     NET_ADDRESS_IPV6,
 }}
-
 pub const DNS_MAX_NAME_BUFFER_LENGTH: usize = 256;
-
 STRUCT!{struct NET_NAMED_ADDRESS {
     Address: [WCHAR; DNS_MAX_NAME_BUFFER_LENGTH],
     Port: [WCHAR; 6],
@@ -60,7 +56,6 @@ STRUCT!{struct NET_ADDRESS_INFO {
     Address: NET_ADDRESS,
 }}
 pub type PNET_ADDRESS_INFO = *mut NET_ADDRESS_INFO;
-
 extern "system" {
     pub fn GetNumberOfInterfaces(
         pdwNumIf: PDWORD
