@@ -8,11 +8,11 @@ use shared::minwindef::{BOOL, DWORD, UINT};
 use shared::windef::HWND;
 use um::propsys::{IPropertyDescriptionList, IPropertyStore};
 use um::shobjidl_core::{IModalWindow, IModalWindowVtbl, IShellItem, IShellItemFilter};
-pub use um::shobjidl_core::{IShellItemArray, SIATTRIBFLAGS};
 use um::shtypes::COMDLG_FILTERSPEC;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR, WCHAR};
 pub type IFileOperationProgressSink = IUnknown; // TODO
+pub use um::shobjidl_core::{IShellItemArray, SIATTRIBFLAGS}; // FIXME: Remove these in the next major release
 ENUM!{enum FDE_OVERWRITE_RESPONSE {
     FDEOR_DEFAULT = 0,
     FDEOR_ACCEPT = 1,
