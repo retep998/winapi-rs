@@ -13,14 +13,14 @@ use um::propkeydef::REFPROPERTYKEY;
 use um::propsys::GETPROPERTYSTOREFLAGS;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR, ULONGLONG, WCHAR};
+DEFINE_GUID!{CLSID_DesktopWallpaper,
+    0xc2cf3110, 0x460e, 0x4fc1, 0xb9, 0xd0, 0x8a, 0x1c, 0x0c, 0x9c, 0xc4, 0xbd}
 DEFINE_GUID!{CLSID_TaskbarList,
     0x56fdf344, 0xfd6d, 0x11d0, 0x95, 0x8a, 0x00, 0x60, 0x97, 0xc9, 0xa0, 0x90}
 DEFINE_GUID!{CLSID_FileOpenDialog,
     0xdc1c5a9c, 0xe88a, 0x4dde, 0xa5, 0xa1, 0x60, 0xf8, 0x2a, 0x20, 0xae, 0xf7}
 DEFINE_GUID!{CLSID_FileSaveDialog,
     0xc0b4e2f3, 0xba21, 0x4773, 0x8d, 0xba, 0x33, 0x5e, 0xc9, 0x46, 0xeb, 0x8b}
-DEFINE_GUID!{CLSID_DesktopWallpaper,
-    0xc2cf3110, 0x460e, 0x4fc1, 0xb9, 0xd0, 0x8a, 0x1c, 0x0c, 0x9c, 0xc4, 0xbd}
 //4498
 ENUM!{enum SHCONTF {
     SHCONTF_CHECKING_FOR_CHILDREN = 0x10,
@@ -259,6 +259,13 @@ ENUM!{enum STPFLAG {
     STPF_USEAPPPEEKALWAYS = 0x4,
     STPF_USEAPPPEEKWHENACTIVE = 0x8,
 }}
+RIDL!{#[uuid(0xc43dc798, 0x95d1, 0x4bea, 0x90, 0x30, 0xbb, 0x99, 0xe2, 0x98, 0x3a, 0x1a)]
+interface ITaskbarList4(ITaskbarList4Vtbl): ITaskbarList3(ITaskbarList3Vtbl) {
+    fn SetTabProperties(
+        hwndTab: HWND,
+        stpFlags: STPFLAG,
+    ) -> HRESULT,
+}}
 ENUM!{enum DESKTOP_SLIDESHOW_OPTIONS {
     DSO_SHUFFLEIMAGES = 0x1,
 }}
@@ -335,13 +342,6 @@ interface IDesktopWallpaper(IDesktopWallpaperVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
     fn Enable(
         enable: BOOL,
-    ) -> HRESULT,
-}}
-RIDL!{#[uuid(0xc43dc798, 0x95d1, 0x4bea, 0x90, 0x30, 0xbb, 0x99, 0xe2, 0x98, 0x3a, 0x1a)]
-interface ITaskbarList4(ITaskbarList4Vtbl): ITaskbarList3(ITaskbarList3Vtbl) {
-    fn SetTabProperties(
-        hwndTab: HWND,
-        stpFlags: STPFLAG,
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0xc2cf3110, 0x460e, 0x4fc1, 0xb9, 0xd0, 0x8a, 0x1c, 0x0c, 0x9c, 0xc4, 0xbd)]
