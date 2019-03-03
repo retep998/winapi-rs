@@ -9,7 +9,8 @@ use shared::minwindef::{BOOL, DWORD, UINT, ULONG, WORD};
 use shared::windef::{COLORREF, HICON, HWND, RECT};
 use um::commctrl::HIMAGELIST;
 use um::objidl::IBindCtx;
-use um::shobjidl::IShellItemArray;
+use um::propkeydef::REFPROPERTYKEY;
+use um::propsys::GETPROPERTYSTOREFLAGS;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR, ULONGLONG, WCHAR};
 DEFINE_GUID!{CLSID_TaskbarList,
@@ -80,6 +81,48 @@ interface IShellItem(IShellItemVtbl): IUnknown(IUnknownVtbl) {
         hint: SICHINTF,
         piOrder: *mut c_int,
     ) -> HRESULT,
+}}
+ENUM!{enum SIATTRIBFLAGS {
+    SIATTRIBFLAGS_AND = 0x1,
+    SIATTRIBFLAGS_OR = 0x2,
+    SIATTRIBFLAGS_APPCOMPAT = 0x3,
+    SIATTRIBFLAGS_MASK = 0x3,
+    SIATTRIBFLAGS_ALLITEMS = 0x4000,
+}}
+RIDL!{#[uuid(0xb63ea76d, 0x1f85, 0x456f, 0xa1, 0x9c, 0x48, 0x15, 0x9e, 0xfa, 0x85, 0x8b)]
+interface IShellItemArray(IShellItemArrayVtbl): IUnknown(IUnknownVtbl) {
+    fn BindToHandler(
+        pbc: *mut IBindCtx,
+        bhid: REFGUID,
+        riid: REFIID,
+        ppvOut: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetPropertyStore(
+        flags: GETPROPERTYSTOREFLAGS,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetPropertyDescriptionList(
+        keyType: REFPROPERTYKEY,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetAttributes(
+        AttribFlags: SIATTRIBFLAGS,
+        sfgaoMask: SFGAOF,
+        psfgaoAttribs: *mut SFGAOF,
+    ) -> HRESULT,
+    fn GetCount(
+        pdwNumItems: *mut DWORD,
+    ) -> HRESULT,
+    fn GetItemAt(
+        dwIndex: DWORD,
+        ppsi: *mut *mut IShellItem,
+    ) -> HRESULT,
+    // TODO: Add IEnumShellItems
+    //fn EnumItems(
+    //    ppenumShellItems: *mut *mut IEnumShellItems,
+    //) -> HRESULT,
 }}
 //20869
 RIDL!{#[uuid(0xb4db1657, 0x70d7, 0x485e, 0x8e, 0x3e, 0x6f, 0xcb, 0x5a, 0x5c, 0x18, 0x02)]
