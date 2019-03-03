@@ -6,9 +6,10 @@
 use ctypes::{c_int, c_void};
 use shared::guiddef::{REFGUID, REFIID};
 use shared::minwindef::{BOOL, DWORD, UINT, ULONG, WORD};
-use shared::windef::{HICON, HWND, RECT};
+use shared::windef::{HICON, HWND, RECT, COLORREF};
 use um::commctrl::HIMAGELIST;
 use um::objidl::IBindCtx;
+use um::shobjidl::IShellItemArray;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR, ULONGLONG, WCHAR};
 DEFINE_GUID!{CLSID_TaskbarList,
@@ -212,6 +213,81 @@ ENUM!{enum STPFLAG {
     STPF_USEAPPTHUMBNAILWHENACTIVE = 0x2,
     STPF_USEAPPPEEKALWAYS = 0x4,
     STPF_USEAPPPEEKWHENACTIVE = 0x8,
+}}
+ENUM!{enum DESKTOP_SLIDESHOW_DIRECTION {
+    DSD_FORWARD = 0,
+    DSD_BACKWARD = 1,
+}}
+ENUM!{enum DESKTOP_WALLPAPER_POSITION {
+    DWPOS_CENTER = 0,
+    DWPOS_TILE = 1,
+    DWPOS_STRETCH = 2,
+    DWPOS_FIT = 3,
+    DWPOS_FILL = 4,
+    DWPOS_SPAN = 5,
+}}
+ENUM!{enum DESKTOP_SLIDESHOW_OPTIONS {
+    DSO_SHUFFLEIMAGES = 0x1,
+}}
+ENUM!{enum DESKTOP_SLIDESHOW_STATE {
+    DSS_ENABLED = 0x1,
+    DSS_SLIDESHOW = 0x2,
+    DSS_DISABLED_BY_REMOTE_SESSION = 0x4,
+}}
+RIDL!{#[uuid(0xb92b56a9, 0x8b55, 0x4e14, 0x9a, 0x89, 0x01, 0x99, 0xbb, 0xb6, 0xf9, 0x3b)]
+interface IDesktopWallpaper(IDesktopWallpaperVtbl): IUnknown(IUnknownVtbl) {
+    fn AdvanceSlideshow(
+        monitorID: LPCWSTR,
+        direction: DESKTOP_SLIDESHOW_DIRECTION,
+    ) -> HRESULT,
+    fn Enable(
+        enable: BOOL,
+    ) -> HRESULT,
+    fn GetBackgroundColor(
+        color: *mut COLORREF,
+    ) -> HRESULT,
+    fn GetMonitorDevicePathAt(
+        monitorIndex: UINT,
+        monitorID: *mut LPWSTR,
+    ) -> HRESULT,
+    fn GetMonitorDevicePathCount(
+        count: *mut UINT,
+    ) -> HRESULT,
+    fn GetMonitorRECT(
+        monitorID: LPCWSTR,
+        displayRect: *mut RECT,
+    ) -> HRESULT,
+    fn GetPosition(
+        position: *mut DESKTOP_WALLPAPER_POSITION,
+    ) -> HRESULT,
+    fn GetSlideshowOptions(
+        options: *mut DESKTOP_SLIDESHOW_OPTIONS,
+        slideshowTick: *mut UINT,
+    ) -> HRESULT,
+    fn GetStatus(
+        state: *mut DESKTOP_SLIDESHOW_STATE,
+    ) -> HRESULT,
+    fn GetWallpaper(
+        monitorID: LPCWSTR,
+        wallpaper: *mut LPWSTR,
+    ) -> HRESULT,
+    fn SetBackgroundColor(
+        color: COLORREF,
+    ) -> HRESULT,
+    fn SetPosition(
+        position: DESKTOP_WALLPAPER_POSITION,
+    ) -> HRESULT,
+    fn SetSlideshow(
+        items: *mut IShellItemArray,
+    ) -> HRESULT,
+    fn SetSlideshowOptions(
+        options: DESKTOP_SLIDESHOW_OPTIONS,
+        slideshowTick: UINT,
+    ) -> HRESULT,
+    fn SetWallpaper(
+        monitorID: LPCWSTR,
+        wallpaper: LPCWSTR,
+    ) -> HRESULT,
 }}
 RIDL!{#[uuid(0xc43dc798, 0x95d1, 0x4bea, 0x90, 0x30, 0xbb, 0x99, 0xe2, 0x98, 0x3a, 0x1a)]
 interface ITaskbarList4(ITaskbarList4Vtbl): ITaskbarList3(ITaskbarList3Vtbl) {
