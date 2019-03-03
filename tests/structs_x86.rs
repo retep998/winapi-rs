@@ -549,6 +549,12 @@ fn shared_hidsdi() {
     assert_eq!(size_of::<HIDD_ATTRIBUTES>(), 12);
     assert_eq!(align_of::<HIDD_ATTRIBUTES>(), 4);
 }
+#[cfg(feature = "ifdef")] #[test]
+fn shared_ifdef() {
+    use winapi::shared::ifdef::*;
+    assert_eq!(size_of::<NET_LUID_LH>(), 8);
+    assert_eq!(align_of::<NET_LUID_LH>(), 8);
+}
 #[cfg(feature = "in6addr")] #[test]
 fn shared_in6addr() {
     use winapi::shared::in6addr::*;
@@ -1358,14 +1364,80 @@ fn shared_ws2ipdef() {
 #[cfg(feature = "wtypes")] #[test]
 fn shared_wtypes() {
     use winapi::shared::wtypes::*;
-    assert_eq!(size_of::<PROPERTYKEY>(), 20);
-    assert_eq!(align_of::<PROPERTYKEY>(), 4);
+    assert_eq!(size_of::<RemHGLOBAL>(), 12);
+    assert_eq!(align_of::<RemHGLOBAL>(), 4);
+    assert_eq!(size_of::<RemHMETAFILEPICT>(), 20);
+    assert_eq!(align_of::<RemHMETAFILEPICT>(), 4);
+    assert_eq!(size_of::<RemHENHMETAFILE>(), 8);
+    assert_eq!(align_of::<RemHENHMETAFILE>(), 4);
+    assert_eq!(size_of::<RemHBITMAP>(), 8);
+    assert_eq!(align_of::<RemHBITMAP>(), 4);
+    assert_eq!(size_of::<RemHPALETTE>(), 8);
+    assert_eq!(align_of::<RemHPALETTE>(), 4);
+    assert_eq!(size_of::<RemHBRUSH>(), 8);
+    assert_eq!(align_of::<RemHBRUSH>(), 4);
+    assert_eq!(size_of::<userCLIPFORMAT_u>(), 4);
+    assert_eq!(align_of::<userCLIPFORMAT_u>(), 4);
+    assert_eq!(size_of::<userCLIPFORMAT>(), 8);
+    assert_eq!(align_of::<userCLIPFORMAT>(), 4);
+    assert_eq!(size_of::<GDI_NONREMOTE_u>(), 4);
+    assert_eq!(align_of::<GDI_NONREMOTE_u>(), 4);
+    assert_eq!(size_of::<GDI_NONREMOTE>(), 8);
+    assert_eq!(align_of::<GDI_NONREMOTE>(), 4);
+    assert_eq!(size_of::<userHGLOBAL_u>(), 8);
+    assert_eq!(align_of::<userHGLOBAL_u>(), 8);
+    assert_eq!(size_of::<userHGLOBAL>(), 16);
+    assert_eq!(align_of::<userHGLOBAL>(), 8);
+    assert_eq!(size_of::<userHMETAFILE_u>(), 8);
+    assert_eq!(align_of::<userHMETAFILE_u>(), 8);
+    assert_eq!(size_of::<userHMETAFILE>(), 16);
+    assert_eq!(align_of::<userHMETAFILE>(), 8);
+    assert_eq!(size_of::<remoteMETAFILEPICT>(), 16);
+    assert_eq!(align_of::<remoteMETAFILEPICT>(), 4);
+    assert_eq!(size_of::<userHMETAFILEPICT_u>(), 8);
+    assert_eq!(align_of::<userHMETAFILEPICT_u>(), 8);
+    assert_eq!(size_of::<userHMETAFILEPICT>(), 16);
+    assert_eq!(align_of::<userHMETAFILEPICT>(), 8);
+    assert_eq!(size_of::<userHENHMETAFILE_u>(), 8);
+    assert_eq!(align_of::<userHENHMETAFILE_u>(), 8);
+    assert_eq!(size_of::<userHENHMETAFILE>(), 16);
+    assert_eq!(align_of::<userHENHMETAFILE>(), 8);
+    assert_eq!(size_of::<userBITMAP>(), 28);
+    assert_eq!(align_of::<userBITMAP>(), 4);
+    assert_eq!(size_of::<userHBITMAP_u>(), 8);
+    assert_eq!(align_of::<userHBITMAP_u>(), 8);
+    assert_eq!(size_of::<userHBITMAP>(), 16);
+    assert_eq!(align_of::<userHBITMAP>(), 8);
+    assert_eq!(size_of::<userHPALETTE_u>(), 8);
+    assert_eq!(align_of::<userHPALETTE_u>(), 8);
+    assert_eq!(size_of::<userHPALETTE>(), 16);
+    assert_eq!(align_of::<userHPALETTE>(), 8);
+    assert_eq!(size_of::<RemotableHandle_u>(), 4);
+    assert_eq!(align_of::<RemotableHandle_u>(), 4);
+    assert_eq!(size_of::<RemotableHandle>(), 8);
+    assert_eq!(align_of::<RemotableHandle>(), 4);
     assert_eq!(size_of::<CY>(), 8);
     assert_eq!(align_of::<CY>(), 8);
     assert_eq!(size_of::<DECIMAL>(), 16);
     assert_eq!(align_of::<DECIMAL>(), 8);
-    assert_eq!(size_of::<userCLIPFORMAT>(), 8);
-    assert_eq!(align_of::<userCLIPFORMAT>(), 4);
+    assert_eq!(size_of::<BSTRBLOB>(), 8);
+    assert_eq!(align_of::<BSTRBLOB>(), 4);
+    assert_eq!(size_of::<CLIPDATA>(), 12);
+    assert_eq!(align_of::<CLIPDATA>(), 4);
+    assert_eq!(size_of::<PROPERTYKEY>(), 20);
+    assert_eq!(align_of::<PROPERTYKEY>(), 4);
+    assert_eq!(size_of::<CSPLATFORM>(), 16);
+    assert_eq!(align_of::<CSPLATFORM>(), 4);
+    assert_eq!(size_of::<QUERYCONTEXT>(), 32);
+    assert_eq!(align_of::<QUERYCONTEXT>(), 4);
+    assert_eq!(size_of::<uCLSSPEC_ByName>(), 20);
+    assert_eq!(align_of::<uCLSSPEC_ByName>(), 4);
+    assert_eq!(size_of::<uCLSSPEC_ByObjectId>(), 32);
+    assert_eq!(align_of::<uCLSSPEC_ByObjectId>(), 4);
+    assert_eq!(size_of::<uCLSSPEC_u>(), 32);
+    assert_eq!(align_of::<uCLSSPEC_u>(), 4);
+    assert_eq!(size_of::<uCLSSPEC>(), 36);
+    assert_eq!(align_of::<uCLSSPEC>(), 4);
 }
 #[cfg(feature = "wtypesbase")] #[test]
 fn shared_wtypesbase() {
@@ -2831,6 +2903,40 @@ fn um_dbghelp() {
     assert_eq!(size_of::<IMAGEHLP_LINEW64>(), 24);
     assert_eq!(align_of::<IMAGEHLP_LINEW64>(), 8);
 }
+#[cfg(feature = "dbt")] #[test]
+fn um_dbt() {
+    use winapi::um::dbt::*;
+    assert_eq!(size_of::<DEV_BROADCAST_HDR>(), 12);
+    assert_eq!(align_of::<DEV_BROADCAST_HDR>(), 4);
+    assert_eq!(size_of::<VolLockBroadcast>(), 20);
+    assert_eq!(align_of::<VolLockBroadcast>(), 4);
+    assert_eq!(size_of::<_DEV_BROADCAST_HEADER>(), 12);
+    assert_eq!(align_of::<_DEV_BROADCAST_HEADER>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_OEM>(), 20);
+    assert_eq!(align_of::<DEV_BROADCAST_OEM>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_DEVNODE>(), 16);
+    assert_eq!(align_of::<DEV_BROADCAST_DEVNODE>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_VOLUME>(), 20);
+    assert_eq!(align_of::<DEV_BROADCAST_VOLUME>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_PORT_A>(), 16);
+    assert_eq!(align_of::<DEV_BROADCAST_PORT_A>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_PORT_W>(), 16);
+    assert_eq!(align_of::<DEV_BROADCAST_PORT_W>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_NET>(), 20);
+    assert_eq!(align_of::<DEV_BROADCAST_NET>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_DEVICEINTERFACE_A>(), 32);
+    assert_eq!(align_of::<DEV_BROADCAST_DEVICEINTERFACE_A>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_DEVICEINTERFACE_W>(), 32);
+    assert_eq!(align_of::<DEV_BROADCAST_DEVICEINTERFACE_W>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_HANDLE>(), 44);
+    assert_eq!(align_of::<DEV_BROADCAST_HANDLE>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_HANDLE32>(), 44);
+    assert_eq!(align_of::<DEV_BROADCAST_HANDLE32>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_HANDLE64>(), 56);
+    assert_eq!(align_of::<DEV_BROADCAST_HANDLE64>(), 8);
+    assert_eq!(size_of::<_DEV_BROADCAST_USERDEFINED>(), 16);
+    assert_eq!(align_of::<_DEV_BROADCAST_USERDEFINED>(), 4);
+}
 #[cfg(feature = "devicetopology")] #[test]
 fn um_devicetopology() {
     use winapi::um::devicetopology::*;
@@ -2904,10 +3010,14 @@ fn um_dwmapi() {
     use winapi::um::dwmapi::*;
     assert_eq!(size_of::<DWM_BLURBEHIND>(), 16);
     assert_eq!(align_of::<DWM_BLURBEHIND>(), 1);
+    assert_eq!(size_of::<DWM_THUMBNAIL_PROPERTIES>(), 45);
+    assert_eq!(align_of::<DWM_THUMBNAIL_PROPERTIES>(), 1);
     assert_eq!(size_of::<UNSIGNED_RATIO>(), 8);
     assert_eq!(align_of::<UNSIGNED_RATIO>(), 1);
     assert_eq!(size_of::<DWM_TIMING_INFO>(), 292);
     assert_eq!(align_of::<DWM_TIMING_INFO>(), 1);
+    assert_eq!(size_of::<DWM_PRESENT_PARAMETERS>(), 40);
+    assert_eq!(align_of::<DWM_PRESENT_PARAMETERS>(), 1);
 }
 #[cfg(feature = "dwrite")] #[test]
 fn um_dwrite() {
@@ -4708,6 +4818,8 @@ fn um_oaidl() {
     assert_eq!(align_of::<CUSTDATA>(), 4);
     assert_eq!(size_of::<TLIBATTR>(), 32);
     assert_eq!(align_of::<TLIBATTR>(), 4);
+    assert_eq!(size_of::<BINDPTR>(), 4);
+    assert_eq!(align_of::<BINDPTR>(), 4);
 }
 #[cfg(feature = "objidl")] #[test]
 fn um_objidl() {
@@ -5337,6 +5449,12 @@ fn um_shellapi() {
     assert_eq!(size_of::<OPEN_PRINTER_PROPS_INFOW>(), 20);
     assert_eq!(align_of::<OPEN_PRINTER_PROPS_INFOW>(), 1);
 }
+#[cfg(feature = "shobjidl_core")] #[test]
+fn um_shobjidl_core() {
+    use winapi::um::shobjidl_core::*;
+    assert_eq!(size_of::<THUMBBUTTON>(), 540);
+    assert_eq!(align_of::<THUMBBUTTON>(), 4);
+}
 #[cfg(feature = "shtypes")] #[test]
 fn um_shtypes() {
     use winapi::um::shtypes::*;
@@ -5482,6 +5600,36 @@ fn um_usp10() {
     assert_eq!(size_of::<SCRIPT_GLYPHPROP>(), 4);
     assert_eq!(align_of::<SCRIPT_GLYPHPROP>(), 2);
 }
+#[cfg(feature = "uxtheme")] #[test]
+fn um_uxtheme() {
+    use winapi::um::uxtheme::*;
+    assert_eq!(size_of::<TA_TRANSFORM>(), 20);
+    assert_eq!(align_of::<TA_TRANSFORM>(), 4);
+    assert_eq!(size_of::<TA_TRANSFORM_2D>(), 44);
+    assert_eq!(align_of::<TA_TRANSFORM_2D>(), 4);
+    assert_eq!(size_of::<TA_TRANSFORM_OPACITY>(), 28);
+    assert_eq!(align_of::<TA_TRANSFORM_OPACITY>(), 4);
+    assert_eq!(size_of::<TA_TRANSFORM_CLIP>(), 52);
+    assert_eq!(align_of::<TA_TRANSFORM_CLIP>(), 4);
+    assert_eq!(size_of::<TA_TIMINGFUNCTION>(), 4);
+    assert_eq!(align_of::<TA_TIMINGFUNCTION>(), 4);
+    assert_eq!(size_of::<TA_CUBIC_BEZIER>(), 20);
+    assert_eq!(align_of::<TA_CUBIC_BEZIER>(), 4);
+    assert_eq!(size_of::<DTBGOPTS>(), 24);
+    assert_eq!(align_of::<DTBGOPTS>(), 4);
+    assert_eq!(size_of::<MARGINS>(), 16);
+    assert_eq!(align_of::<MARGINS>(), 4);
+    assert_eq!(size_of::<INTLIST>(), 1612);
+    assert_eq!(align_of::<INTLIST>(), 4);
+    assert_eq!(size_of::<WTA_OPTIONS>(), 8);
+    assert_eq!(align_of::<WTA_OPTIONS>(), 4);
+    assert_eq!(size_of::<DTTOPTS>(), 64);
+    assert_eq!(align_of::<DTTOPTS>(), 4);
+    assert_eq!(size_of::<BP_ANIMATIONPARAMS>(), 16);
+    assert_eq!(align_of::<BP_ANIMATIONPARAMS>(), 4);
+    assert_eq!(size_of::<BP_PAINTPARAMS>(), 16);
+    assert_eq!(align_of::<BP_PAINTPARAMS>(), 4);
+}
 #[cfg(feature = "vsbackup")] #[test]
 fn um_vsbackup() {
     use winapi::um::vsbackup::*;
@@ -5499,6 +5647,12 @@ fn um_vss() {
     assert_eq!(align_of::<VSS_OBJECT_UNION>(), 8);
     assert_eq!(size_of::<VSS_OBJECT_PROP>(), 104);
     assert_eq!(align_of::<VSS_OBJECT_PROP>(), 8);
+}
+#[cfg(feature = "wbemcli")] #[test]
+fn um_wbemcli() {
+    use winapi::um::wbemcli::*;
+    assert_eq!(size_of::<WBEM_COMPILE_STATUS_INFO>(), 24);
+    assert_eq!(align_of::<WBEM_COMPILE_STATUS_INFO>(), 4);
 }
 #[cfg(feature = "wct")] #[test]
 fn um_wct() {

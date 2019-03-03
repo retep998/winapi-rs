@@ -1,10 +1,10 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of dcommon.h
+use ctypes::c_void;
 use shared::basetsd::UINT32;
 use shared::dxgiformat::DXGI_FORMAT;
 use shared::minwindef::FLOAT;
@@ -24,6 +24,17 @@ ENUM!{enum DWRITE_GLYPH_IMAGE_FORMATS {
     DWRITE_GLYPH_IMAGE_FORMATS_JPEG = 0x00000020,
     DWRITE_GLYPH_IMAGE_FORMATS_TIFF = 0x00000040,
     DWRITE_GLYPH_IMAGE_FORMATS_PREMULTIPLIED_B8G8R8A8 = 0x00000080,
+}}
+STRUCT!{struct DWRITE_GLYPH_IMAGE_DATA {
+    imageData: *const c_void,
+    imageDataSize: UINT32,
+    uniqueDataId: UINT32,
+    pixelsPerEm: UINT32,
+    pixelSize: D2D1_SIZE_U,
+    horizontalLeftOrigin: D2D1_POINT_2L,
+    horizontalRightOrigin: D2D1_POINT_2L,
+    verticalTopOrigin: D2D1_POINT_2L,
+    verticalBottomOrigin: D2D1_POINT_2L,
 }}
 ENUM!{enum D2D1_ALPHA_MODE {
     D2D1_ALPHA_MODE_UNKNOWN = 0,
