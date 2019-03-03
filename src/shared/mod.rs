@@ -1,4 +1,3 @@
-// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -41,6 +40,7 @@ pub mod guiddef;
 #[cfg(feature = "ipifcons")] pub mod ipifcons;
 #[cfg(feature = "ipmib")] pub mod ipmib;
 #[cfg(feature = "iprtrmib")] pub mod iprtrmib;
+#[cfg(feature = "ks")] pub mod ks;
 #[cfg(feature = "ksmedia")] pub mod ksmedia;
 #[cfg(feature = "ktmtypes")] pub mod ktmtypes;
 #[cfg(feature = "lmcons")] pub mod lmcons;
@@ -48,6 +48,8 @@ pub mod guiddef;
 #[cfg(feature = "mmreg")] pub mod mmreg;
 #[cfg(feature = "mprapidef")] pub mod mprapidef;
 #[cfg(feature = "mstcpip")] pub mod mstcpip;
+#[cfg(feature = "mswsockdef")] pub mod mswsockdef;
+#[cfg(feature = "netioapi")] pub mod netioapi;
 #[cfg(feature = "nldef")] pub mod nldef;
 #[cfg(feature = "ntddscsi")] pub mod ntddscsi;
 #[cfg(feature = "ntddser")] pub mod ntddser;
