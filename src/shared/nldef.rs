@@ -40,7 +40,7 @@ ENUM!{enum NL_DAD_STATE {
     NldsDuplicate,
     NldsDeprecated,
     NldsPreferred,
-    IpDadStateInvalid    = 0,
+    IpDadStateInvalid = 0,
     IpDadStateTentative,
     IpDadStateDuplicate,
     IpDadStateDeprecated,
