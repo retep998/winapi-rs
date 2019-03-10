@@ -8593,6 +8593,7 @@ fn um_winuser() {
     assert_eq!(align_of::<CHANGEFILTERSTRUCT>(), 4);
     assert_eq!(size_of::<ANIMATIONINFO>(), 8);
     assert_eq!(align_of::<ANIMATIONINFO>(), 4);
+    assert_eq!(size_of::<WINDOWINFO>(), 60);
 }
 #[cfg(feature = "ws2spi")] #[test]
 fn um_ws2spi() {
