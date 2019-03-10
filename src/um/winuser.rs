@@ -7014,7 +7014,7 @@ STRUCT!{struct WINDOWINFO {
     cxWindowBorders: UINT,
     cyWindowBorders: UINT,
     atomWindowType: ATOM,
-    wCreatorVersion: WORD
+    wCreatorVersion: WORD,
 }}
 pub type PWINDOWINFO = *mut WINDOWINFO;
 pub type LPWINDOWINFO = *mut WINDOWINFO;
