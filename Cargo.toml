@@ -116,6 +116,7 @@ ws2ipdef = []
 wtypes = []
 wtypesbase = []
 #ucrt
+corecrt = []
 #um
 accctrl = []
 aclapi = []

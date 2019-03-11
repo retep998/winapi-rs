@@ -91,6 +91,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("wtypes", &["guiddef", "minwindef", "ntdef", "rpcndr", "wingdi", "wtypesbase"], &[]),
     ("wtypesbase", &["minwindef", "rpcndr", "winnt"], &[]),
     // ucrt
+    ("corecrt", &["ntdef"], &[]),
     // um
     ("accctrl", &["guiddef", "minwindef", "winbase", "winnt"], &[]),
     ("aclapi", &["accctrl", "guiddef", "minwindef", "winnt"], &["advapi32"]),
@@ -205,7 +206,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("ioapiset", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("ipexport", &["basetsd", "in6addr", "ntdef"], &[]),
     ("iphlpapi", &["basetsd", "ifmib", "ipexport", "ipmib", "iprtrmib", "iptypes", "minwinbase", "minwindef", "ntdef", "tcpmib", "udpmib", "ws2def", "ws2ipdef"], &["iphlpapi"]),
-    ("iptypes", &["basetsd", "guiddef", "ifdef", "ipifcons", "minwindef", "nldef", "ntdef", "ws2def"], &[]),
+    ("iptypes", &["basetsd", "corecrt", "guiddef", "ifdef", "ipifcons", "minwindef", "nldef", "ntdef", "ws2def"], &[]),
     ("jobapi", &["minwindef", "winnt"], &["kernel32"]),
     ("jobapi2", &["basetsd", "minwinbase", "minwindef", "ntdef", "winnt"], &["kernel32"]),
     ("knownfolders", &[], &[]),

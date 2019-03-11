@@ -4,7 +4,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 // #include <winapifamily.h>
-// #include <time.h>
 // #include <ifdef.h>
 // #include <nldef.h>
 use shared::basetsd::{UINT8, ULONG64};
@@ -18,6 +17,7 @@ use shared::minwindef::{BOOL, BYTE, DWORD, UCHAR, UINT};
 use shared::nldef::{NL_DAD_STATE, NL_PREFIX_ORIGIN, NL_SUFFIX_ORIGIN};
 use shared::ntdef::{CHAR, LONGLONG, PCHAR, PWCHAR, ULONG, ULONGLONG, WCHAR};
 use shared::ws2def::SOCKET_ADDRESS;
+use ucrt::corecrt; // Currently causes build failure
 pub const MAX_ADAPTER_DESCRIPTION_LENGTH: usize = 128;
 pub const MAX_ADAPTER_NAME_LENGTH: usize = 256;
 pub const MAX_ADAPTER_ADDRESS_LENGTH: usize = 8;
@@ -31,8 +31,8 @@ pub const BROADCAST_NODETYPE: usize = 1;
 pub const PEER_TO_PEER_NODETYPE: usize = 2;
 pub const MIXED_NODETYPE: usize = 4;
 pub const HYBRID_NODETYPE: usize = 8;
-pub type __time64_t = LONGLONG;
-pub type time_t = __time64_t;
+//pub type __time64_t = LONGLONG;
+//pub type time_t = __time64_t;
 STRUCT!{struct IP_ADDRESS_STRING {
     String: [CHAR; 4*4],
 }}
