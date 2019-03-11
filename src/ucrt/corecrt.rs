@@ -5,7 +5,7 @@
 // except according to those terms.
 // #include <time.h>
 // #include <vcruntime.h>
-use shared::ntdef::{CHAR, LONGLONG, PCHAR, PWCHAR, ULONG, ULONGLONG, WCHAR};
-pub type __time32_t = LONG;
-pub type __time64_t = LONGLONG;
+use ctypes::{__int64, c_long};
+pub type __time32_t = c_long;
+pub type __time64_t = __int64;
 pub type time_t = __time64_t;

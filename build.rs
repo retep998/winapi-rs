@@ -91,7 +91,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("wtypes", &["guiddef", "minwindef", "ntdef", "rpcndr", "wingdi", "wtypesbase"], &[]),
     ("wtypesbase", &["minwindef", "rpcndr", "winnt"], &[]),
     // ucrt
-    ("corecrt", &["ntdef"], &[]),
+    ("corecrt", &[], &[]),
     // um
     ("accctrl", &["guiddef", "minwindef", "winbase", "winnt"], &[]),
     ("aclapi", &["accctrl", "guiddef", "minwindef", "winnt"], &["advapi32"]),
