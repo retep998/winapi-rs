@@ -175,7 +175,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("evntcons", &["basetsd", "evntprov", "evntrace", "guiddef", "minwindef", "winnt"], &["advapi32"]),
     ("fibersapi", &["minwindef", "winnt"], &["kernel32"]),
     ("fileapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
-    //("gl-gl", &[], &["opengl32"]),
+    ("gl-gl", &[], &["opengl32"]),
     ("handleapi", &["minwindef", "winnt"], &["kernel32"]),
     ("heapapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("highlevelmonitorconfigurationapi", &["minwindef", "physicalmonitorenumerationapi", "winnt"], &["dxva2"]),
@@ -307,7 +307,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("windowsceip", &["minwindef"], &["kernel32"]),
     ("winefs", &["basetsd", "minwinbase", "minwindef", "wincrypt", "winnt"], &["advapi32"]),
     ("winevt", &["basetsd", "guiddef", "minwinbase", "minwindef", "vcruntime", "winnt"], &["wevtapi"]),
-    ("wingdi", &["basetsd", "minwindef", "windef", "winnt"], &["gdi32", "msimg32", /*"opengl32",*/ "winspool"]),
+    ("wingdi", &["basetsd", "minwindef", "windef", "winnt"], &["gdi32", "msimg32", "opengl32", "winspool"]),
     ("winhttp", &["basetsd", "minwinbase", "minwindef", "winnt"], &["winhttp"]),
     ("wininet", &["basetsd", "minwinbase", "minwindef", "ntdef", "windef", "winineti", "winnt"], &["wininet"]),
     ("winineti", &["minwindef"], &[]),
@@ -402,6 +402,10 @@ impl Graph {
         }
     }
     fn emit_libraries(&self) {
+        let target_supports_opengl32 = match var("TARGET").as_ref().map(String::as_str) {
+            Ok("thumbv7a-pc-windows-msvc") => false,
+            _ => true,
+        };
         let mut libs = self.0.iter().filter(|&(_, header)| {
             header.included.get()
         }).flat_map(|(_, header)| {
@@ -412,7 +416,9 @@ impl Graph {
         let prefix = library_prefix();
         let kind = library_kind();
         for lib in libs {
-            println!("cargo:rustc-link-lib={}={}{}", kind, prefix, lib);
+            if *lib != "opengl32" || target_supports_opengl32 {
+                println!("cargo:rustc-link-lib={}={}{}", kind, prefix, lib);
+            }
         }
     }
 }
