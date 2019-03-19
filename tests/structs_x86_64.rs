@@ -8780,6 +8780,34 @@ fn um_winuser() {
     assert_eq!(size_of::<ANIMATIONINFO>(), 8);
     assert_eq!(align_of::<ANIMATIONINFO>(), 4);
 }
+#[cfg(feature = "ws2bth")] #[test]
+fn um_ws2bth() {
+    use winapi::um::ws2bth::*;
+    assert_eq!(size_of::<SOCKADDR_BTH>(), 30);
+    assert_eq!(align_of::<SOCKADDR_BTH>(), 1);
+    assert_eq!(size_of::<BTH_SET_SERVICE>(), 45);
+    assert_eq!(align_of::<BTH_SET_SERVICE>(), 1);
+    assert_eq!(size_of::<BTH_QUERY_DEVICE>(), 5);
+    assert_eq!(align_of::<BTH_QUERY_DEVICE>(), 1);
+    assert_eq!(size_of::<BTH_QUERY_SERVICE>(), 256);
+    assert_eq!(align_of::<BTH_QUERY_SERVICE>(), 1);
+    assert_eq!(size_of::<RFCOMM_MSC_DATA>(), 2);
+    assert_eq!(align_of::<RFCOMM_MSC_DATA>(), 1);
+    assert_eq!(size_of::<RFCOMM_RLS_DATA>(), 1);
+    assert_eq!(align_of::<RFCOMM_RLS_DATA>(), 1);
+    assert_eq!(size_of::<RFCOMM_RPN_DATA>(), 7);
+    assert_eq!(align_of::<RFCOMM_RPN_DATA>(), 1);
+    assert_eq!(size_of::<RFCOMM_COMMAND>(), 11);
+    assert_eq!(align_of::<RFCOMM_COMMAND>(), 1);
+    assert_eq!(size_of::<BTH_PING_REQ>(), 53);
+    assert_eq!(align_of::<BTH_PING_REQ>(), 1);
+    assert_eq!(size_of::<BTH_PING_RSP>(), 45);
+    assert_eq!(align_of::<BTH_PING_RSP>(), 1);
+    assert_eq!(size_of::<BTH_INFO_REQ>(), 10);
+    assert_eq!(align_of::<BTH_INFO_REQ>(), 1);
+    assert_eq!(size_of::<BTH_INFO_RSP>(), 47);
+    assert_eq!(align_of::<BTH_INFO_RSP>(), 1);
+}
 #[cfg(feature = "ws2spi")] #[test]
 fn um_ws2spi() {
     use winapi::um::ws2spi::*;
