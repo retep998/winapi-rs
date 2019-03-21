@@ -21,7 +21,7 @@ ENUM!{enum DXGK_ENGINE_TYPE {
     DXGK_ENGINE_TYPE_CRYPTO,
     DXGK_ENGINE_TYPE_MAX,
 }}
-STRUCT!{struct DXGK_NODEMETADATA_FLAGS {
+STRUCT!{#[repr(packed)] struct DXGK_NODEMETADATA_FLAGS {
     Value: UINT32,
 }}
 BITFIELD!{DXGK_NODEMETADATA_FLAGS Value: UINT32 [
@@ -31,7 +31,7 @@ BITFIELD!{DXGK_NODEMETADATA_FLAGS Value: UINT32 [
     Reserved set_Reserved[3..16],
     MaxInFlightHwQueueBuffers set_MaxInFlightHwQueueBuffers[16..32],
 ]}
-STRUCT!{struct DXGK_NODEMETADATA {
+STRUCT!{#[repr(packed)] struct DXGK_NODEMETADATA {
     EngineType: DXGK_ENGINE_TYPE,
     FriendlyName: [WCHAR; DXGK_MAX_METADATA_NAME_LENGTH],
     Flags: DXGK_NODEMETADATA_FLAGS,
@@ -39,7 +39,7 @@ STRUCT!{struct DXGK_NODEMETADATA {
     IoMmuSupported: BOOLEAN,
 }}
 //2100
-STRUCT!{struct D3DKMT_NODEMETADATA {
+STRUCT!{#[repr(packed)] struct D3DKMT_NODEMETADATA {
     NodeOrdinalAndAdapterIndex: UINT,
     NodeData: DXGK_NODEMETADATA,
 }}
