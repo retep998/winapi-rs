@@ -142,6 +142,14 @@ pub const FILE_DEVICE_STORAGE_REPLICATION: DEVICE_TYPE = 0x00000055;
 pub const FILE_DEVICE_TRUST_ENV: DEVICE_TYPE = 0x00000056;
 pub const FILE_DEVICE_UCM: DEVICE_TYPE = 0x00000057;
 pub const FILE_DEVICE_UCMTCPCI: DEVICE_TYPE = 0x00000058;
+pub fn CTL_CODE(
+    DeviceType: DWORD,
+    Function: DWORD,
+    Method: DWORD,
+    Access: DWORD,
+) -> DWORD {
+    (DeviceType << 16) | (Access << 14) | (Function << 2) | Method
+}
 //288
 pub const METHOD_BUFFERED: DWORD = 0;
 pub const METHOD_IN_DIRECT: DWORD = 1;
