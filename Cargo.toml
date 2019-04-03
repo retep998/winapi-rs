@@ -1,6 +1,6 @@
 [package]
 name = "winapi"
-version = "0.3.6"
+version = "0.3.7"
 authors = ["Peter Atashian <retep998@gmail.com>"]
 license = "MIT/Apache-2.0"
 description = "Raw FFI bindings for all of Windows API."
@@ -13,7 +13,7 @@ include = ["/src/**/*", "/Cargo.toml", "/LICENSE-MIT", "/LICENSE-APACHE", "/buil
 build = "build.rs"
 
 [package.metadata.docs.rs]
-features = ["everything"]
+features = ["everything", "impl-debug", "impl-default"]
 default-target = "x86_64-pc-windows-msvc"
 
 [badges]
