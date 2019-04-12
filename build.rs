@@ -10,6 +10,10 @@ use std::env::var;
 const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static str])] = &[
     // km
     ("d3dkmthk", &["basetsd", "d3dukmdt", "minwindef", "ntdef", "windef"], &[]),
+    ("fwp", &["winnt","ws2def","minwindef","netioapi"], &[]),
+    ("ndis", &["wdm"], &[]),
+    ("wdm", &[], &[]),
+    ("fltkernel", &[], &[]),
     // mmos
     // shared
     ("basetsd", &[], &[]),
@@ -55,9 +59,10 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("mmreg", &["guiddef", "minwindef"], &[]),
     ("mstcpip", &["basetsd", "guiddef", "in6addr", "inaddr", "minwindef", "winnt", "ws2def"], &["ntdll"]),
     ("mswsockdef", &["minwindef", "winnt", "ws2def"], &[]),
-    ("netioapi", &["basetsd", "guiddef", "ifdef", "minwindef", "ntdef"], &["iphlpapi"]),
+    ("netioapi", &["basetsd", "guiddef", "ifdef", "minwindef", "ntdef", "ws2ipdef"], &["iphlpapi"]),
     ("ntddscsi", &["basetsd", "minwindef", "ntdef", "winioctl", "winnt"], &[]),
     ("ntddser", &["devpropdef"], &[]),
+    ("ntddstor", &["devpropdef"], &[]),
     ("ntdef", &["basetsd", "guiddef"], &[]),
     ("ntstatus", &["ntdef"], &[]),
     ("qos", &["minwindef"], &[]),

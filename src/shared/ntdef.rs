@@ -25,6 +25,7 @@ pub const SYSTEM_CACHE_ALIGNMENT_SIZE: usize = 64;
 #[cfg(not(any(target_arch = "x86_64", target_arch = "x86")))]
 pub const SYSTEM_CACHE_ALIGNMENT_SIZE: usize = 128;
 pub type PVOID = *mut c_void;
+pub type PCVOID = *const c_void;
 pub type PVOID64 = u64; // This is a 64-bit pointer, even when in 32-bit
 pub type VOID = c_void;
 pub type CHAR = c_char;
