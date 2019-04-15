@@ -7,8 +7,8 @@
 #[cfg(feature = "d3dkmthk")] pub mod d3dkmthk;
 
 //make relax and take slow
+#[cfg(feature = "km_util")]
 pub type MISS_TYPE_PTR = *const ::shared::ntdef::PVOID;
-
 
 #[cfg(feature = "fwp")]
 pub mod fwp;

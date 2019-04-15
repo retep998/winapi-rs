@@ -237,22 +237,19 @@ pub const IRP_MJ_OPERATION_END: u8 = 0x80;
 pub const FLT_REGISTRATION_VERSION_0203: USHORT = 0x0203;
 pub const FLT_REGISTRATION_VERSION: USHORT = FLT_REGISTRATION_VERSION_0203;
 
-#[repr(C)]
-#[derive(Default)]
-pub struct _FLT_VOLUME_PROPERTIES {
-    pub DeviceType: ULONG,
-    pub DeviceCharacteristics: ULONG,
-    pub DeviceObjectFlags: ULONG,
-    pub AlignmentRequirement: ULONG,
-    pub SectorSize: USHORT,
-    pub Flags: USHORT,
-    pub FileSystemDriverName: UNICODE_STRING,
-    pub FileSystemDeviceName: UNICODE_STRING,
-    pub RealDeviceName: UNICODE_STRING,
-}
+STRUCT!{ struct FLT_VOLUME_PROPERTIES {
+    DeviceType: ULONG,
+    DeviceCharacteristics: ULONG,
+    DeviceObjectFlags: ULONG,
+    AlignmentRequirement: ULONG,
+    SectorSize: USHORT,
+    Flags: USHORT,
+    FileSystemDriverName: UNICODE_STRING,
+    FileSystemDeviceName: UNICODE_STRING,
+    RealDeviceName: UNICODE_STRING,
+}}
 
-pub type FLT_VOLUME_PROPERTIES = _FLT_VOLUME_PROPERTIES;
-pub type PFLT_VOLUME_PROPERTIES = *mut _FLT_VOLUME_PROPERTIES;
+pub type PFLT_VOLUME_PROPERTIES = *mut FLT_VOLUME_PROPERTIES;
 
 #[repr(C)]
 pub struct _FLT_CALLBACK_DATA {

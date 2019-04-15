@@ -206,16 +206,14 @@ pub enum IO_COMPLETION_ROUTINE_RESULT {
     StopCompletion = 0xC0000016,
 }
 
-#[repr(C)]
-#[derive(Default)]
-pub struct DISPATCHER_HEADER {
-    pub Type: u8,
-    pub Absolute: u8,
-    pub Size: u8,
-    pub Inserted: u8,
-    pub SignalState: i32,
-    pub WaitListHead: LIST_ENTRY,
-}
+STRUCT!{ struct DISPATCHER_HEADER {
+    Type: u8,
+    Absolute: u8,
+    Size: u8,
+    Inserted: u8,
+    SignalState: i32,
+    WaitListHead: LIST_ENTRY,
+}}
 
 /// The `DEVICE_OBJECT` structure is used by the operating system to represent a device object.
 #[repr(C)]
@@ -715,12 +713,9 @@ ENUM! {
     }
 }
 
-/// Event object.
-#[repr(C)]
-#[derive(Default)]
-pub struct KEVENT {
+STRUCT!{ struct KEVENT {
     Header: DISPATCHER_HEADER,
-}
+}}
 
 use self::IO_PRIORITY::*;
 

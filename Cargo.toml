@@ -32,8 +32,10 @@ impl-debug = []
 impl-default = []
 std = []
 #km
+km_util=[]
 fwp=[]
 ndis=[]
+wdm=[]
 fltkernel=[]
 d3dkmthk = []
 #mmos
