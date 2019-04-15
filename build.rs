@@ -183,6 +183,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("dxvahd", &["d3d9", "d3d9types", "guiddef", "minwindef", "unknwnbase", "windef", "winnt"], &["dxva2"]),
     ("endpointvolume", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("errhandlingapi", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
+    ("esent", &[], &["esent"]),
     ("evntcons", &["basetsd", "evntprov", "evntrace", "guiddef", "minwindef", "winnt"], &["advapi32"]),
     ("exdisp", &["basetsd", "docobj", "oaidl", "ocidl", "winnt", "wtypes"], &[]),
     ("fibersapi", &["minwindef", "winnt"], &["kernel32"]),
