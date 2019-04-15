@@ -1,4 +1,3 @@
-// Copyright © 2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -45,7 +44,7 @@ extern "system" {
         factory: *mut *mut VOID,
     ) -> HRESULT;
 }
-DECLARE_HANDLE!(APARTMENT_SHUTDOWN_REGISTRATION_COOKIE, APARTMENT_SHUTDOWN_REGISTRATION_COOKIE__);
+DECLARE_HANDLE!{APARTMENT_SHUTDOWN_REGISTRATION_COOKIE, APARTMENT_SHUTDOWN_REGISTRATION_COOKIE__}
 extern "system" {
     pub fn RoRegisterForApartmentShutdown(
         callbackObject: *const IApartmentShutdown,

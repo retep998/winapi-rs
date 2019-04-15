@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -129,6 +128,22 @@ macro_rules! MAKEINTRESOURCE {
 }
 #[macro_export]
 macro_rules! RIDL {
+    (#[uuid($l:expr, $w1:expr, $w2:expr,
+        $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr, $b6:expr, $b7:expr, $b8:expr)]
+    class $class:ident;) => (
+        pub enum $class {}
+        impl $crate::Class for $class {
+            #[inline]
+            fn uuidof() -> $crate::shared::guiddef::GUID {
+                $crate::shared::guiddef::GUID {
+                    Data1: $l,
+                    Data2: $w1,
+                    Data3: $w2,
+                    Data4: [$b1, $b2, $b3, $b4, $b5, $b6, $b7, $b8],
+                }
+            }
+        }
+    );
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) {$(
         $(#[$($attrs:tt)*])* fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty,
@@ -146,8 +161,7 @@ macro_rules! RIDL {
         RIDL!{@uuid $interface $($uuid),+}
     );
     (#[uuid($($uuid:expr),+)]
-    interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {
-    }) => (
+    interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {}) => (
         RIDL!{@vtbl $interface $vtbl (pub parent: $pvtbl,)}
         #[repr(C)]
         pub struct $interface {
@@ -281,7 +295,7 @@ macro_rules! UNION {
     }) => (
         #[repr(C)] $(#[$attrs])* #[cfg(target_arch = "x86")]
         pub struct $name([$stype32; $ssize32]);
-        #[repr(C)] $(#[$attrs])* #[cfg(target_arch = "x86_64")]
+        #[repr(C)] $(#[$attrs])* #[cfg(target_pointer_width = "64")]
         pub struct $name([$stype64; $ssize64]);
         impl Copy for $name {}
         impl Clone for $name {
@@ -351,16 +365,15 @@ macro_rules! ENUM {
 #[macro_export]
 macro_rules! STRUCT {
     (#[debug] $($rest:tt)*) => (
-        STRUCT!{#[cfg_attr(feature = "debug", derive(Debug))] $($rest)*}
+        STRUCT!{#[cfg_attr(feature = "impl-debug", derive(Debug))] $($rest)*}
     );
     ($(#[$attrs:meta])* struct $name:ident {
         $($field:ident: $ftype:ty,)+
     }) => (
-        #[repr(C)] $(#[$attrs])*
+        #[repr(C)] #[derive(Copy)] $(#[$attrs])*
         pub struct $name {
             $(pub $field: $ftype,)+
         }
-        impl Copy for $name {}
         impl Clone for $name {
             #[inline]
             fn clone(&self) -> $name { *self }
@@ -388,4 +401,24 @@ macro_rules! FN {
     (cdecl $func:ident($($p:ident: $t:ty,)*) -> $ret:ty) => (
         pub type $func = Option<unsafe extern "C" fn($($p: $t,)*) -> $ret>;
     );
+}
+macro_rules! _WSAIO {
+    ($x:expr, $y:expr) => {
+        $crate::shared::ws2def::IOC_VOID | $x | $y
+    }
+}
+macro_rules! _WSAIOR {
+    ($x:expr, $y:expr) => {
+        $crate::shared::ws2def::IOC_OUT | $x | $y
+    }
+}
+macro_rules! _WSAIOW {
+    ($x:expr, $y:expr) => {
+        $crate::shared::ws2def::IOC_IN | $x | $y
+    }
+}
+macro_rules! _WSAIORW {
+    ($x:expr, $y:expr) => {
+        $crate::shared::ws2def::IOC_INOUT | $x | $y
+    }
 }

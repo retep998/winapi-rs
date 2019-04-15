@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -3290,8 +3289,8 @@ pub const CMSG_CTRL_DECRYPT: DWORD = 2;
 pub const CMSG_CTRL_VERIFY_HASH: DWORD = 5;
 pub const CMSG_CTRL_ADD_SIGNER: DWORD = 6;
 pub const CMSG_CTRL_DEL_SIGNER: DWORD = 7;
-pub const CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR: DWORD =  8;
-pub const CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR: DWORD =  9;
+pub const CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR: DWORD = 8;
+pub const CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR: DWORD = 9;
 pub const CMSG_CTRL_ADD_CERT: DWORD = 10;
 pub const CMSG_CTRL_DEL_CERT: DWORD = 11;
 pub const CMSG_CTRL_ADD_CRL: DWORD = 12;
@@ -4686,7 +4685,7 @@ STRUCT!{struct CTL_FIND_USAGE_PARA {
 }}
 pub type PCTL_FIND_USAGE_PARA = *mut CTL_FIND_USAGE_PARA;
 pub const CTL_FIND_NO_LIST_ID_CBDATA: DWORD = 0xFFFFFFFF;
-pub const CTL_FIND_NO_SIGNER_PTR: PCERT_INFO = -1i32 as PCERT_INFO;
+pub const CTL_FIND_NO_SIGNER_PTR: PCERT_INFO = -1isize as PCERT_INFO;
 pub const CTL_FIND_SAME_USAGE_FLAG: DWORD = 0x1;
 STRUCT!{struct CTL_FIND_SUBJECT_PARA {
     cbSize: DWORD,
@@ -5581,6 +5580,8 @@ STRUCT!{struct CRYPT_SIGN_MESSAGE_PARA {
     rgUnauthAttr: PCRYPT_ATTRIBUTE,
     dwFlags: DWORD,
     dwInnerContentType: DWORD,
+    HashEncryptionAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
+    pvHashEncryptionAuxInfo: *mut c_void,
 }}
 pub type PCRYPT_SIGN_MESSAGE_PARA = *mut CRYPT_SIGN_MESSAGE_PARA;
 pub const CRYPT_MESSAGE_BARE_CONTENT_OUT_FLAG: DWORD = 0x00000001;
@@ -6432,20 +6433,20 @@ pub const CRYPTNET_PRE_FETCH_AFTER_PUBLISH_PRE_FETCH_DIVISOR_DEFAULT: DWORD = 10
 pub const CRYPTNET_PRE_FETCH_BEFORE_NEXT_UPDATE_PRE_FETCH_DIVISOR_VALUE_NAME: &'static str
     = "CryptnetPreFetchBeforeNextUpdatePreFetchDivisor";
 pub const CRYPTNET_PRE_FETCH_BEFORE_NEXT_UPDATE_PRE_FETCH_DIVISOR_DEFAULT: DWORD = 20;
-pub const CRYPTNET_PRE_FETCH_MIN_BEFORE_NEXT_UPDATE_PRE_FETCH_PERIOD_SECONDS_VALUE_NAME: &'static str
-    = "CryptnetPreFetchMinBeforeNextUpdatePreFetchSeconds";
+pub const CRYPTNET_PRE_FETCH_MIN_BEFORE_NEXT_UPDATE_PRE_FETCH_PERIOD_SECONDS_VALUE_NAME:
+    &'static str = "CryptnetPreFetchMinBeforeNextUpdatePreFetchSeconds";
 pub const CRYPTNET_PRE_FETCH_MIN_BEFORE_NEXT_UPDATE_PRE_FETCH_PERIOD_SECONDS_DEFAULT: DWORD
     = 1 * 60 * 60;
-pub const CRYPTNET_PRE_FETCH_VALIDITY_PERIOD_AFTER_NEXT_UPDATE_PRE_FETCH_DIVISOR_VALUE_NAME: &'static str
-    = "CryptnetPreFetchValidityPeriodAfterNextUpdatePreFetchDivisor";
+pub const CRYPTNET_PRE_FETCH_VALIDITY_PERIOD_AFTER_NEXT_UPDATE_PRE_FETCH_DIVISOR_VALUE_NAME:
+    &'static str = "CryptnetPreFetchValidityPeriodAfterNextUpdatePreFetchDivisor";
 pub const CRYPTNET_PRE_FETCH_VALIDITY_PERIOD_AFTER_NEXT_UPDATE_PRE_FETCH_DIVISOR_DEFAULT: DWORD
     = 10;
-pub const CRYPTNET_PRE_FETCH_MAX_AFTER_NEXT_UPDATE_PRE_FETCH_PERIOD_SECONDS_VALUE_NAME: &'static str
-    = "CryptnetPreFetchMaxAfterNextUpdatePreFetchPeriodSeconds";
+pub const CRYPTNET_PRE_FETCH_MAX_AFTER_NEXT_UPDATE_PRE_FETCH_PERIOD_SECONDS_VALUE_NAME:
+    &'static str = "CryptnetPreFetchMaxAfterNextUpdatePreFetchPeriodSeconds";
 pub const CRYPTNET_PRE_FETCH_MAX_AFTER_NEXT_UPDATE_PRE_FETCH_PERIOD_SECONDS_DEFAULT: DWORD
     = 4 * 60 * 60;
-pub const CRYPTNET_PRE_FETCH_MIN_AFTER_NEXT_UPDATE_PRE_FETCH_PERIOD_SECONDS_VALUE_NAME: &'static str
-    = "CryptnetPreFetchMinAfterNextUpdatePreFetchPeriodSeconds";
+pub const CRYPTNET_PRE_FETCH_MIN_AFTER_NEXT_UPDATE_PRE_FETCH_PERIOD_SECONDS_VALUE_NAME:
+    &'static str = "CryptnetPreFetchMinAfterNextUpdatePreFetchPeriodSeconds";
 pub const CRYPTNET_PRE_FETCH_MIN_AFTER_NEXT_UPDATE_PRE_FETCH_PERIOD_SECONDS_DEFAULT: DWORD
     = 30 * 60;
 pub const CRYPTNET_PRE_FETCH_AFTER_CURRENT_TIME_PRE_FETCH_PERIOD_SECONDS_VALUE_NAME: &'static str
@@ -6817,7 +6818,6 @@ extern "system" {
 }
 pub const CRYPT_OID_VERIFY_CERTIFICATE_CHAIN_POLICY_FUNC: &'static str
     = "CertDllVerifyCertificateChainPolicy";
-
 pub const CERT_CHAIN_POLICY_BASE: LPCSTR = 1 as LPCSTR;
 pub const CERT_CHAIN_POLICY_AUTHENTICODE: LPCSTR = 2 as LPCSTR;
 pub const CERT_CHAIN_POLICY_AUTHENTICODE_TS: LPCSTR = 3 as LPCSTR;

@@ -1,4 +1,3 @@
-// Copyright © 2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -6,7 +5,7 @@
 // except according to those terms.
 use ctypes::c_char;
 use shared::basetsd::{SIZE_T, UINT64};
-use shared::dxgi::{IDXGISwapChain};
+use shared::dxgi::IDXGISwapChain;
 use shared::minwindef::{BOOL, UINT};
 use um::d3d11::ID3D11DeviceContext;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
@@ -28,33 +27,33 @@ RIDL!{#[uuid(0x79cf2233, 0x7536, 0x4948, 0x9d, 0x36, 0x1e, 0x46, 0x92, 0xdc, 0x5
 interface ID3D11Debug(ID3D11DebugVtbl): IUnknown(IUnknownVtbl) {
     fn SetFeatureMask(
         Mask: UINT,
-   ) -> HRESULT,
+    ) -> HRESULT,
     fn GetFeatureMask() -> UINT,
     fn SetPresentPerRenderOpDelay(
         Milliseconds: UINT,
-   ) -> HRESULT,
+    ) -> HRESULT,
     fn GetPresentPerRenderOpDelay() -> UINT,
     fn SetSwapChain(
         pSwapChain: *mut IDXGISwapChain,
-   ) -> HRESULT,
+    ) -> HRESULT,
     fn GetSwapChain(
         ppSwapChain: *mut *mut IDXGISwapChain,
-   ) -> HRESULT,
+    ) -> HRESULT,
     fn ValidateContext(
         pContext: *const ID3D11DeviceContext,
-   ) -> HRESULT,
+    ) -> HRESULT,
     fn ReportLiveDeviceObjects(
         Flags: D3D11_RLDO_FLAGS,
-   ) -> HRESULT,
+    ) -> HRESULT,
     fn ValidateContextForDispatch(
         pContext: *mut ID3D11DeviceContext,
-   ) -> HRESULT,
+    ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x1ef337e3, 0x58e7, 0x4f83, 0xa6, 0x92, 0xdb, 0x22, 0x1f, 0x5e, 0xd4, 0x7e)]
 interface ID3D11SwitchToRef(ID3D11SwitchToRefVtbl): IUnknown(IUnknownVtbl) {
     fn SetUseRef(
         UseRef: BOOL,
-   ) -> BOOL,
+    ) -> BOOL,
     fn GetUseRef() -> BOOL,
 }}
 ENUM!{enum D3D11_SHADER_TRACKING_RESOURCE_TYPE {
@@ -102,24 +101,24 @@ interface ID3D11TracingDevice(ID3D11TracingDeviceVtbl): IUnknown(IUnknownVtbl) {
     fn SetShaderTrackingOptionsByType(
         ResourceTypeFlags: UINT,
         Options: UINT,
-   ) -> HRESULT,
+    ) -> HRESULT,
     fn SetShaderTrackingOptions(
         pShader: *const IUnknown,
         Options: UINT,
-   ) -> HRESULT,
+    ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x193dacdf, 0x0db2, 0x4c05, 0xa5, 0x5c, 0xef, 0x06, 0xca, 0xc5, 0x6f, 0xd9)]
 interface ID3D11RefTrackingOptions(ID3D11RefTrackingOptionsVtbl): IUnknown(IUnknownVtbl) {
     fn SetTrackingOptions(
         Options: UINT,
-   ) -> HRESULT,
+    ) -> HRESULT,
 }}
 RIDL!{#[uuid(0x03916615, 0xc644, 0x418c, 0x9b, 0xf4, 0x75, 0xdb, 0x5b, 0xe6, 0x3c, 0xa0)]
 interface ID3D11RefDefaultTrackingOptions(ID3D11RefDefaultTrackingOptionsVtbl):
     IUnknown(IUnknownVtbl) {
-        fn SetTrackingOptions(
-            ResourceTypeFlags: UINT,
-            Options: UINT,
+    fn SetTrackingOptions(
+        ResourceTypeFlags: UINT,
+        Options: UINT,
     ) -> HRESULT,
 }}
 DEFINE_GUID!{DXGI_DEBUG_D3D11,

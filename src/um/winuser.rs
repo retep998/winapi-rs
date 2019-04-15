@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -9,17 +8,18 @@ use ctypes::{c_int, c_long, c_short, c_uint};
 use shared::basetsd::{
     DWORD_PTR, INT32, INT_PTR, PDWORD_PTR, UINT16, UINT32, UINT64, UINT_PTR, ULONG_PTR,
 };
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 use shared::basetsd::LONG_PTR;
 use shared::guiddef::{GUID, LPCGUID};
 use shared::minwindef::{
     ATOM, BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HMODULE, HRGN, HWINSTA, INT, LOWORD, LPARAM,
-    LPBYTE, LPDWORD, LPINT, LPVOID, LPWORD, LRESULT, PBYTE, PUINT, PULONG, TRUE, UCHAR, UINT, ULONG,
-    USHORT, WORD, WPARAM,
+    LPBYTE, LPDWORD, LPINT, LPVOID, LPWORD, LRESULT, PBYTE, PUINT, PULONG, TRUE, UCHAR, UINT,
+    ULONG, USHORT, WORD, WPARAM,
 };
 use shared::windef::{
-    COLORREF, HACCEL, HBITMAP, HBRUSH, HCURSOR, HDC, HDESK, HHOOK, HICON, HMENU, HMONITOR,
-    HWINEVENTHOOK, HWND, LPCRECT, LPPOINT, LPRECT, POINT, RECT,
+    COLORREF, DPI_AWARENESS, DPI_AWARENESS_CONTEXT, DPI_HOSTING_BEHAVIOR, HACCEL, HBITMAP, HBRUSH,
+    HCURSOR, HDC, HDESK, HHOOK, HICON, HMENU, HMONITOR, HWINEVENTHOOK, HWND, LPCRECT, LPPOINT,
+    LPRECT, POINT, RECT,
 };
 use um::minwinbase::LPSECURITY_ATTRIBUTES;
 use um::wingdi::{
@@ -913,8 +913,7 @@ extern "system" {
     pub fn SetProcessWindowStation(
         hWinSta: HWINSTA,
     ) -> BOOL;
-    pub fn GetProcessWindowStation(
-    ) -> HWINSTA;
+    pub fn GetProcessWindowStation() -> HWINSTA;
     pub fn SetUserObjectSecurity(
         hObj: HANDLE,
         pSIRequested: PSECURITY_INFORMATION,
@@ -1383,6 +1382,9 @@ pub const WM_WTSSESSION_CHANGE: UINT = 0x02B1;
 pub const WM_TABLET_FIRST: UINT = 0x02c0;
 pub const WM_TABLET_LAST: UINT = 0x02df;
 pub const WM_DPICHANGED: UINT = 0x02E0;
+pub const WM_DPICHANGED_BEFOREPARENT: UINT = 0x02E2;
+pub const WM_DPICHANGED_AFTERPARENT: UINT = 0x02E3;
+pub const WM_GETDPISCALEDSIZE: UINT = 0x02E4;
 pub const WM_CUT: UINT = 0x0300;
 pub const WM_COPY: UINT = 0x0301;
 pub const WM_PASTE: UINT = 0x0302;
@@ -2699,6 +2701,37 @@ extern "system" {
         wParam: WPARAM,
         lParam: LPARAM,
     ) -> LRESULT;
+}
+ENUM!{enum DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
+    DCDC_DEFAULT = 0x0000,
+    DCDC_DISABLE_FONT_UPDATE = 0x0001,
+    DCDC_DISABLE_RELAYOUT = 0x0002,
+}}
+extern "system" {
+    pub fn SetDialogControlDpiChangeBehavior(
+        hwnd: HWND,
+        mask: DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS,
+        values: DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS,
+    ) -> BOOL;
+    pub fn GetDialogControlDpiChangeBehavior(
+        hwnd: HWND,
+    ) -> DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS;
+}
+ENUM!{enum DIALOG_DPI_CHANGE_BEHAVIORS {
+    DDC_DEFAULT = 0x0000,
+    DDC_DISABLE_ALL = 0x0001,
+    DDC_DISABLE_RESIZE = 0x0002,
+    DDC_DISABLE_CONTROL_RELAYOUT = 0x0004,
+}}
+extern "system" {
+    pub fn SetDialogDpiChangeBehavior(
+        hDlg: HWND,
+        mask: DIALOG_DPI_CHANGE_BEHAVIORS,
+        values: DIALOG_DPI_CHANGE_BEHAVIORS,
+    ) -> BOOL;
+    pub fn GetDialogDpiChangeBehavior(
+        hDlg: HWND,
+    ) -> DIALOG_DPI_CHANGE_BEHAVIORS;
     pub fn CallMsgFilterA(
         lpMsg: LPMSG,
         nCode: c_int,
@@ -3048,7 +3081,7 @@ extern "system" {
         cbSize: c_int,
     ) -> UINT;
 }
-DECLARE_HANDLE!(HTOUCHINPUT, HTOUCHINPUT__);
+DECLARE_HANDLE!{HTOUCHINPUT, HTOUCHINPUT__}
 STRUCT!{struct TOUCHINPUT {
     x: LONG,
     y: LONG,
@@ -4010,13 +4043,13 @@ extern "system" {
         hMenu: HMENU,
         uItem: UINT,
         fByPosition: BOOL,
-        lpmii: LPMENUITEMINFOA
+        lpmii: LPMENUITEMINFOA,
     ) -> BOOL;
     pub fn GetMenuItemInfoW(
         hMenu: HMENU,
         uItem: UINT,
         fByPosition: BOOL,
-        lpmii: LPMENUITEMINFOW
+        lpmii: LPMENUITEMINFOW,
     ) -> BOOL;
     pub fn SetMenuItemInfoA(
         hmenu: HMENU,
@@ -4962,23 +4995,23 @@ extern "system" {
         nIndex: c_int,
         dwNewLong: LONG,
     ) -> LONG;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetWindowLongPtrA(
         hWnd: HWND,
         nIndex: c_int,
     ) -> LONG_PTR;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetWindowLongPtrW(
         hWnd: HWND,
         nIndex: c_int,
     ) -> LONG_PTR;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn SetWindowLongPtrA(
         hWnd: HWND,
         nIndex: c_int,
         dwNewLong: LONG_PTR,
     ) -> LONG_PTR;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn SetWindowLongPtrW(
         hWnd: HWND,
         nIndex: c_int,
@@ -5021,23 +5054,23 @@ extern "system" {
         nIndex: c_int,
         dwNewLong: LONG,
     ) -> DWORD;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetClassLongPtrA(
         hWnd: HWND,
         nIndex: c_int,
     ) -> ULONG_PTR;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn GetClassLongPtrW(
         hWnd: HWND,
         nIndex: c_int,
     ) -> ULONG_PTR;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn SetClassLongPtrA(
         hWnd: HWND,
         nIndex: c_int,
         dwNewLong: LONG_PTR,
     ) -> ULONG_PTR;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn SetClassLongPtrW(
         hWnd: HWND,
         nIndex: c_int,
@@ -5772,6 +5805,13 @@ extern "system" {
         pvParam: PVOID,
         fWinIni: UINT,
     ) -> BOOL;
+    pub fn SystemParametersInfoForDpi(
+        uiAction: UINT,
+        uiParam: UINT,
+        pvParam: PVOID,
+        fWinIni: UINT,
+        dpi: UINT,
+    ) -> BOOL;
 }
 pub const ENUM_CURRENT_SETTINGS: DWORD = 0xFFFFFFFF;
 pub const ENUM_REGISTRY_SETTINGS: DWORD = 0xFFFFFFFE;
@@ -6483,14 +6523,181 @@ extern "system" {
     pub fn IsWinEventHookInstalled(
         event: DWORD,
     ) -> BOOL;
+}
+pub const WINEVENT_OUTOFCONTEXT: UINT = 0x0000;
+pub const WINEVENT_SKIPOWNTHREAD: UINT = 0x0001;
+pub const WINEVENT_SKIPOWNPROCESS: UINT = 0x0002;
+pub const WINEVENT_INCONTEXT: UINT = 0x0004;
+extern "system" {
     pub fn UnhookWinEvent(
         hWinEventHook: HWINEVENTHOOK,
     ) -> BOOL;
+}
+pub const CHILDID_SELF: LONG = 0;
+pub const INDEXID_OBJECT: LONG = 0;
+pub const INDEXID_CONTAINER: LONG = 0;
+pub const OBJID_WINDOW: LONG = 0x0000;
+pub const OBJID_SYSMENU: LONG = 0xFFFFFFFF;
+pub const OBJID_TITLEBAR: LONG = 0xFFFFFFFE;
+pub const OBJID_MENU: LONG = 0xFFFFFFFD;
+pub const OBJID_CLIENT: LONG = 0xFFFFFFFC;
+pub const OBJID_VSCROLL: LONG = 0xFFFFFFFB;
+pub const OBJID_HSCROLL: LONG = 0xFFFFFFFA;
+pub const OBJID_SIZEGRIP: LONG = 0xFFFFFFF9;
+pub const OBJID_CARET: LONG = 0xFFFFFFF8;
+pub const OBJID_CURSOR: LONG = 0xFFFFFFF7;
+pub const OBJID_ALERT: LONG = 0xFFFFFFF6;
+pub const OBJID_SOUND: LONG = 0xFFFFFFF5;
+pub const OBJID_QUERYCLASSNAMEIDX: LONG = 0xFFFFFFF4;
+pub const OBJID_NATIVEOM: LONG = 0xFFFFFFF0;
+pub const EVENT_MIN: UINT = 0x0001;
+pub const EVENT_MAX: UINT = 0x7FFFFFFF;
+pub const EVENT_SYSTEM_SOUND: UINT = 0x0001;
+pub const EVENT_SYSTEM_ALERT: UINT = 0x0002;
+pub const EVENT_SYSTEM_FOREGROUND: UINT = 0x0003;
+pub const EVENT_SYSTEM_MENUSTART: UINT = 0x0004;
+pub const EVENT_SYSTEM_MENUEND: UINT = 0x0005;
+pub const EVENT_SYSTEM_MENUPOPUPSTART: UINT = 0x0006;
+pub const EVENT_SYSTEM_MENUPOPUPEND: UINT = 0x0007;
+pub const EVENT_SYSTEM_CAPTURESTART: UINT = 0x0008;
+pub const EVENT_SYSTEM_CAPTUREEND: UINT = 0x0009;
+pub const EVENT_SYSTEM_MOVESIZESTART: UINT = 0x000A;
+pub const EVENT_SYSTEM_MOVESIZEEND: UINT = 0x000B;
+pub const EVENT_SYSTEM_CONTEXTHELPSTART: UINT = 0x000C;
+pub const EVENT_SYSTEM_CONTEXTHELPEND: UINT = 0x000D;
+pub const EVENT_SYSTEM_DRAGDROPSTART: UINT = 0x000E;
+pub const EVENT_SYSTEM_DRAGDROPEND: UINT = 0x000F;
+pub const EVENT_SYSTEM_DIALOGSTART: UINT = 0x0010;
+pub const EVENT_SYSTEM_DIALOGEND: UINT = 0x0011;
+pub const EVENT_SYSTEM_SCROLLINGSTART: UINT = 0x0012;
+pub const EVENT_SYSTEM_SCROLLINGEND: UINT = 0x0013;
+pub const EVENT_SYSTEM_SWITCHSTART: UINT = 0x0014;
+pub const EVENT_SYSTEM_SWITCHEND: UINT = 0x0015;
+pub const EVENT_SYSTEM_MINIMIZESTART: UINT = 0x0016;
+pub const EVENT_SYSTEM_MINIMIZEEND: UINT = 0x0017;
+pub const EVENT_SYSTEM_DESKTOPSWITCH: UINT = 0x0020;
+pub const EVENT_SYSTEM_SWITCHER_APPGRABBED: UINT = 0x0024;
+pub const EVENT_SYSTEM_SWITCHER_APPOVERTARGET: UINT = 0x0025;
+pub const EVENT_SYSTEM_SWITCHER_APPDROPPED: UINT = 0x0026;
+pub const EVENT_SYSTEM_SWITCHER_CANCELLED: UINT = 0x0027;
+pub const EVENT_SYSTEM_IME_KEY_NOTIFICATION: UINT = 0x0029;
+pub const EVENT_SYSTEM_END: UINT = 0x00FF;
+pub const EVENT_OEM_DEFINED_START: UINT = 0x0101;
+pub const EVENT_OEM_DEFINED_END: UINT = 0x01FF;
+pub const EVENT_UIA_EVENTID_START: UINT = 0x4E00;
+pub const EVENT_UIA_EVENTID_END: UINT = 0x4EFF;
+pub const EVENT_UIA_PROPID_START: UINT = 0x7500;
+pub const EVENT_UIA_PROPID_END: UINT = 0x75FF;
+pub const EVENT_CONSOLE_CARET: UINT = 0x4001;
+pub const EVENT_CONSOLE_UPDATE_REGION: UINT = 0x4002;
+pub const EVENT_CONSOLE_UPDATE_SIMPLE: UINT = 0x4003;
+pub const EVENT_CONSOLE_UPDATE_SCROLL: UINT = 0x4004;
+pub const EVENT_CONSOLE_LAYOUT: UINT = 0x4005;
+pub const EVENT_CONSOLE_START_APPLICATION: UINT = 0x4006;
+pub const EVENT_CONSOLE_END_APPLICATION: UINT = 0x4007;
+#[cfg(target_arch = "x86_64")]
+pub const CONSOLE_APPLICATION_16BIT: LONG = 0x0000;
+#[cfg(target_arch = "x86")]
+pub const CONSOLE_APPLICATION_16BIT: LONG = 0x0001;
+pub const CONSOLE_CARET_SELECTION: LONG = 0x0001;
+pub const CONSOLE_CARET_VISIBLE: LONG = 0x0002;
+pub const EVENT_CONSOLE_END: UINT = 0x40FF;
+pub const EVENT_OBJECT_CREATE: UINT = 0x8000;
+pub const EVENT_OBJECT_DESTROY: UINT = 0x8001;
+pub const EVENT_OBJECT_SHOW: UINT = 0x8002;
+pub const EVENT_OBJECT_HIDE: UINT = 0x8003;
+pub const EVENT_OBJECT_REORDER: UINT = 0x8004;
+pub const EVENT_OBJECT_FOCUS: UINT = 0x8005;
+pub const EVENT_OBJECT_SELECTION: UINT = 0x8006;
+pub const EVENT_OBJECT_SELECTIONADD: UINT = 0x8007;
+pub const EVENT_OBJECT_SELECTIONREMOVE: UINT = 0x8008;
+pub const EVENT_OBJECT_SELECTIONWITHIN: UINT = 0x8009;
+pub const EVENT_OBJECT_STATECHANGE: UINT = 0x800A;
+pub const EVENT_OBJECT_LOCATIONCHANGE: UINT = 0x800B;
+pub const EVENT_OBJECT_NAMECHANGE: UINT = 0x800C;
+pub const EVENT_OBJECT_DESCRIPTIONCHANGE: UINT = 0x800D;
+pub const EVENT_OBJECT_VALUECHANGE: UINT = 0x800E;
+pub const EVENT_OBJECT_PARENTCHANGE: UINT = 0x800F;
+pub const EVENT_OBJECT_HELPCHANGE: UINT = 0x8010;
+pub const EVENT_OBJECT_DEFACTIONCHANGE: UINT = 0x8011;
+pub const EVENT_OBJECT_ACCELERATORCHANGE: UINT = 0x8012;
+pub const EVENT_OBJECT_INVOKED: UINT = 0x8013;
+pub const EVENT_OBJECT_TEXTSELECTIONCHANGED: UINT = 0x8014;
+pub const EVENT_OBJECT_CONTENTSCROLLED: UINT = 0x8015;
+pub const EVENT_SYSTEM_ARRANGMENTPREVIEW: UINT = 0x8016;
+pub const EVENT_OBJECT_CLOAKED: UINT = 0x8017;
+pub const EVENT_OBJECT_UNCLOAKED: UINT = 0x8018;
+pub const EVENT_OBJECT_LIVEREGIONCHANGED: UINT = 0x8019;
+pub const EVENT_OBJECT_HOSTEDOBJECTSINVALIDATED: UINT = 0x8020;
+pub const EVENT_OBJECT_DRAGSTART: UINT = 0x8021;
+pub const EVENT_OBJECT_DRAGCANCEL: UINT = 0x8022;
+pub const EVENT_OBJECT_DRAGCOMPLETE: UINT = 0x8023;
+pub const EVENT_OBJECT_DRAGENTER: UINT = 0x8024;
+pub const EVENT_OBJECT_DRAGLEAVE: UINT = 0x8025;
+pub const EVENT_OBJECT_DRAGDROPPED: UINT = 0x8026;
+pub const EVENT_OBJECT_IME_SHOW: UINT = 0x8027;
+pub const EVENT_OBJECT_IME_HIDE: UINT = 0x8028;
+pub const EVENT_OBJECT_IME_CHANGE: UINT = 0x8029;
+pub const EVENT_OBJECT_TEXTEDIT_CONVERSIONTARGETCHANGED: UINT = 0x8030;
+pub const EVENT_OBJECT_END: UINT = 0x80FF;
+pub const EVENT_AIA_START: UINT = 0xA000;
+pub const EVENT_AIA_END: UINT = 0xAFFF;
+pub const ALERT_SYSTEM_INFORMATIONAL: LONG = 1;
+pub const ALERT_SYSTEM_WARNING: LONG = 2;
+pub const ALERT_SYSTEM_ERROR: LONG = 3;
+pub const ALERT_SYSTEM_QUERY: LONG = 4;
+pub const ALERT_SYSTEM_CRITICAL: LONG = 5;
+pub const CALERT_SYSTEM: LONG = 6;
+extern "system" {
 //14098
     pub fn BlockInput(
         fBlockIt: BOOL,
     ) -> BOOL;
+}
+pub const USER_DEFAULT_SCREEN_DPI: LONG = 96;
+extern "system" {
+    pub fn SetProcessDPIAware() -> BOOL;
     pub fn IsProcessDPIAware() -> BOOL;
+    pub fn SetThreadDpiAwarenessContext(
+        dpiContext: DPI_AWARENESS_CONTEXT,
+    ) -> DPI_AWARENESS_CONTEXT;
+    pub fn GetThreadDpiAwarenessContext() -> DPI_AWARENESS_CONTEXT;
+    pub fn GetWindowDpiAwarenessContext(
+        hwnd: HWND,
+    ) -> DPI_AWARENESS_CONTEXT;
+    pub fn GetAwarenessFromDpiAwarenessContext(
+        value: DPI_AWARENESS_CONTEXT,
+    ) -> DPI_AWARENESS;
+    pub fn GetDpiFromDpiAwarenessContext(
+        value: DPI_AWARENESS_CONTEXT,
+    ) -> UINT;
+    pub fn AreDpiAwarenessContextsEqual(
+        dpiContextA: DPI_AWARENESS_CONTEXT,
+        dpiContextB: DPI_AWARENESS_CONTEXT,
+    ) -> BOOL;
+    pub fn IsValidDpiAwarenessContext(
+        value: DPI_AWARENESS_CONTEXT,
+    ) -> BOOL;
+    pub fn GetDpiForWindow(
+        hwnd: HWND,
+    ) -> UINT;
+    pub fn GetDpiForSystem() -> UINT;
+    pub fn GetSystemDpiForProcess(
+        hProcess: HANDLE,
+    ) -> UINT;
+    pub fn EnableNonClientDpiScaling(
+        hwnd: HWND,
+    ) -> BOOL;
+    pub fn SetProcessDpiAwarenessContext(
+        value: DPI_AWARENESS_CONTEXT,
+    ) -> BOOL;
+    pub fn SetThreadDpiHostingBehavior(
+        value: DPI_HOSTING_BEHAVIOR,
+    ) -> DPI_HOSTING_BEHAVIOR;
+    pub fn GetThreadDpiHostingBehavior() -> DPI_HOSTING_BEHAVIOR;
+    pub fn GetWindowDpiHostingBehavior(
+        hwnd: HWND,
+    ) -> DPI_HOSTING_BEHAVIOR;
     pub fn GetWindowModuleFileNameA(
         hWnd: HWND,
         lpszFileName: LPCSTR,
@@ -6526,7 +6733,7 @@ extern "system" {
         bGrant: BOOL,
     ) -> BOOL;
 }
-DECLARE_HANDLE!(HRAWINPUT, HRAWINPUT__);
+DECLARE_HANDLE!{HRAWINPUT, HRAWINPUT__}
 #[inline]
 pub fn GET_RAWINPUT_CODE_WPARAM(wParam: WPARAM) -> WPARAM { wParam & 0xff }
 pub const RIM_INPUT: WPARAM = 0;
@@ -6596,7 +6803,7 @@ pub const RI_KEY_TERMSRV_SHADOW: DWORD = 0x10;
 STRUCT!{struct RAWHID {
     dwSizeHid: DWORD,
     dwCount: DWORD,
-    bRawData: [BYTE; 0],
+    bRawData: [BYTE; 1],
 }}
 pub type PRAWHID = *mut RAWHID;
 pub type LPRAWHID = *mut RAWHID;
@@ -6780,5 +6987,20 @@ extern "system" {
     ) -> HICON;
     pub fn IsImmersiveProcess(
         hProcess: HANDLE,
+    ) -> BOOL;
+}
+pub const MAX_STR_BLOCKREASON: usize = 256;
+extern "system" {
+    pub fn ShutdownBlockReasonCreate(
+        hWnd: HWND,
+        pwszReason: LPCWSTR,
+    ) -> BOOL;
+    pub fn ShutdownBlockReasonQuery(
+        hWnd: HWND,
+        pwszBuff: LPWSTR,
+        pcchBuff: *mut DWORD,
+    ) -> BOOL;
+    pub fn ShutdownBlockReasonDestroy(
+        hWnd: HWND,
     ) -> BOOL;
 }

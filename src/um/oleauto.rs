@@ -1,4 +1,3 @@
-// Copyright © 2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -11,7 +10,7 @@ use shared::minwindef::{BYTE, DWORD, FLOAT, UINT, ULONG, USHORT, WORD};
 use shared::wtypes::{BSTR, DATE, DECIMAL, LPBSTR, LPDECIMAL, VARTYPE};
 use shared::wtypesbase::{DOUBLE, LPCOLESTR, LPOLESTR, OLECHAR};
 use um::minwinbase::LPSYSTEMTIME;
-use um::oaidl::{DISPID_UNKNOWN, ITypeLib, VARIANT, VARIANTARG};
+use um::oaidl::{DISPID_UNKNOWN, ITypeLib, SAFEARRAY, VARIANT, VARIANTARG};
 use um::winnt::{CHAR, HRESULT, INT, LCID, LONG, LPCSTR, SHORT};
 extern "system" {
     pub fn SysAllocString(
@@ -61,6 +60,31 @@ extern "system" {
         vtime: DOUBLE,
         lpSystemTime: LPSYSTEMTIME,
     ) -> INT;
+    pub fn SafeArrayAccessData(
+        psa: *mut SAFEARRAY,
+        ppvData: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SafeArrayUnaccessData(
+        psa: *mut SAFEARRAY,
+    ) -> HRESULT;
+    pub fn SafeArrayCreateVector(
+        vt: VARTYPE,
+        lLbound: LONG,
+        cElements: ULONG,
+    ) -> *mut SAFEARRAY;
+    pub fn SafeArrayGetLBound(
+        psa: *mut SAFEARRAY,
+        nDim: UINT,
+        plLbound: *mut LONG
+    ) -> HRESULT;
+    pub fn SafeArrayGetUBound(
+        psa: *mut SAFEARRAY,
+        nDim: UINT,
+        plUbound: *mut LONG
+    ) -> HRESULT;
+    pub fn SafeArrayDestroy(
+        psa: *mut SAFEARRAY
+    ) -> HRESULT;
     pub fn VariantInit(
         pvarg: *mut VARIANTARG,
     );

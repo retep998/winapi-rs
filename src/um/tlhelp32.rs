@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -26,7 +25,7 @@ pub const TH32CS_INHERIT: DWORD = 0x80000000;
 STRUCT!{struct HEAPLIST32 {
     dwSize: SIZE_T,
     th32ProcessID: DWORD,
-    th32HeapID:  ULONG_PTR,
+    th32HeapID: ULONG_PTR,
     dwFlags: DWORD,
 }}
 pub type PHEAPLIST32 = *mut HEAPLIST32;

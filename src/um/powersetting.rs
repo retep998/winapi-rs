@@ -1,4 +1,3 @@
-// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -6,7 +5,7 @@
 // except according to those terms.
 use shared::guiddef::{GUID, LPCGUID};
 use shared::minwindef::{DWORD, HKEY, LPBYTE, LPDWORD, PUCHAR, PULONG};
-use um::winnt::{HANDLE};
+use um::winnt::HANDLE;
 use um::winuser::{HPOWERNOTIFY, PHPOWERNOTIFY};
 extern "system" {
     pub fn PowerReadACValue(

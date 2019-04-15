@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -29,7 +28,7 @@ ENUM!{enum PSS_CAPTURE_FLAGS {
     PSS_CREATE_FORCE_BREAKAWAY = 0x10000000,
     PSS_CREATE_USE_VM_ALLOCATIONS = 0x20000000,
     PSS_CREATE_MEASURE_PERFORMANCE = 0x40000000,
-    PSS_CREATE_RELEASE_SECTION = -2147483648i32 as u32,
+    PSS_CREATE_RELEASE_SECTION = 0x80000000,
 }}
 ENUM!{enum PSS_QUERY_INFORMATION_CLASS {
     PSS_QUERY_PROCESS_INFORMATION = 0,
@@ -51,8 +50,8 @@ ENUM!{enum PSS_DUPLICATE_FLAGS {
     PSS_DUPLICATE_NONE = 0x00,
     PSS_DUPLICATE_CLOSE_SOURCE = 0x01,
 }}
-DECLARE_HANDLE!(HPSS, HPSS__);
-DECLARE_HANDLE!(HPSSWALK, HPSSWALK__);
+DECLARE_HANDLE!{HPSS, HPSS__}
+DECLARE_HANDLE!{HPSSWALK, HPSSWALK__}
 FN!{stdcall pAllocRoutine(
     Context: *mut c_void,
     Size: DWORD,
@@ -82,7 +81,7 @@ extern "system" {
     ) -> DWORD;
     pub fn PssFreeSnapshot(
         ProcessHandle: HANDLE,
-        SnapshotHandle: HPSS
+        SnapshotHandle: HPSS,
     ) -> DWORD;
     pub fn PssQuerySnapshot(
         SnapshotHandle: HPSS,
@@ -95,20 +94,20 @@ extern "system" {
         WalkMarkerHandle: *mut HPSSWALK,
     ) -> DWORD;
     pub fn PssWalkMarkerFree(
-        WalkMarkerHandle: HPSSWALK
+        WalkMarkerHandle: HPSSWALK,
     ) -> DWORD;
     pub fn PssWalkMarkerGetPosition(
         WalkMarkerHandle: HPSSWALK,
-        Position: *mut ULONG_PTR
+        Position: *mut ULONG_PTR,
     ) -> DWORD;
     // pub fn PssWalkMarkerRewind();
     // pub fn PssWalkMarkerSeek();
     pub fn PssWalkMarkerSeekToBeginning(
-        WalkMarkerHandle: HPSS
+        WalkMarkerHandle: HPSS,
     ) -> DWORD;
     pub fn PssWalkMarkerSetPosition(
         WalkMarkerHandle: HPSSWALK,
-        Position: ULONG_PTR
+        Position: ULONG_PTR,
     ) -> DWORD;
     // pub fn PssWalkMarkerTell();
     pub fn PssWalkSnapshot(

@@ -1,12 +1,14 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Definitions for the user environment API
-use shared::minwindef::{BOOL, DWORD, LPDWORD, LPVOID};
-use um::winnt::{HANDLE, HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR};
+use shared::minwindef::{BOOL, DWORD, LPDWORD, LPVOID, PHKEY};
+use um::winnt::{
+    HANDLE, HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PCWSTR, PSID, PSID_AND_ATTRIBUTES, PWSTR
+};
+use um::winreg::REGSAM;
 extern "system" {
     // pub fn LoadUserProfileA(
     //     hToken: HANDLE,
@@ -126,10 +128,32 @@ extern "system" {
     // pub fn RsopSetPolicySettingStatus();
     // pub fn RsopResetPolicySettingStatus();
     // pub fn GenerateGPNotification();
-    // pub fn CreateAppContainerProfile();
-    // pub fn DeleteAppContainerProfile();
-    // pub fn GetAppContainerRegistryLocation();
-    // pub fn GetAppContainerFolderPath();
-    // pub fn DeriveAppContainerSidFromAppContainerName();
-    // pub fn DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName();
+    pub fn CreateAppContainerProfile(
+        pszAppContainerName: PCWSTR,
+        pszDisplayName: PCWSTR,
+        pszDescription: PCWSTR,
+        pCapabilities: PSID_AND_ATTRIBUTES,
+        dwCapabilityCount: DWORD,
+        ppSidAppContainerSid: *mut PSID,
+    ) -> HRESULT;
+    pub fn DeleteAppContainerProfile(
+        pszAppContainerName: PCWSTR,
+    ) -> HRESULT;
+    pub fn GetAppContainerRegistryLocation(
+        desiredAccess: REGSAM,
+        phAppContainerKey: PHKEY,
+    ) -> HRESULT;
+    pub fn GetAppContainerFolderPath(
+        pszAppContainerSid: PCWSTR,
+        ppszPath: *mut PWSTR,
+    ) -> HRESULT;
+    pub fn DeriveAppContainerSidFromAppContainerName(
+        pszAppContainerName: PCWSTR,
+        ppsidAppContainerSid: *mut PSID,
+    ) -> HRESULT;
+    pub fn DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName(
+        psidAppContainerSid: PSID,
+        pszRestrictedAppContainerName: PCWSTR,
+        ppsidRestrictedAppContainerSid: *mut PSID,
+    ) -> HRESULT;
 }
