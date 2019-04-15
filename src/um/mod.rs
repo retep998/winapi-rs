@@ -109,6 +109,7 @@ pub mod gl;
 #[cfg(feature = "exdisp")] pub mod exdisp;
 #[cfg(feature = "fibersapi")] pub mod fibersapi;
 #[cfg(feature = "fileapi")] pub mod fileapi;
+#[cfg(feature = "functiondiscoverykeys_devpkey")] pub mod functiondiscoverykeys_devpkey;
 #[cfg(feature = "handleapi")] pub mod handleapi;
 #[cfg(feature = "heapapi")] pub mod heapapi;
 #[cfg(feature = "highlevelmonitorconfigurationapi")] pub mod highlevelmonitorconfigurationapi;

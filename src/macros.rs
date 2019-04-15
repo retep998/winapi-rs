@@ -51,8 +51,8 @@ macro_rules! DEFINE_PROPERTYKEY {
         $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr, $b6:expr, $b7:expr, $b8:expr,
         $pid:expr
     ) => {
-        pub const $name: $crate::shared::wtypes::PROPERTYKEY
-            = $crate::shared::wtypes::PROPERTYKEY {
+        pub const $name: PROPERTYKEY
+            = PROPERTYKEY {
             fmtid: $crate::shared::guiddef::GUID {
                 Data1: $l,
                 Data2: $w1,
