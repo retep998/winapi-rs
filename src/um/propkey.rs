@@ -1,20 +1,12 @@
-// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-
-// NOTE: The pointless imports are required to make the tests not complain
-//       about guiddef and wtypes not being used byt this module.
-
-#[allow(unused_imports)]
-use shared::guiddef::LPGUID;
 use shared::minwindef::DWORD;
 use shared::ntdef::{DOUBLE, LONG};
 #[allow(unused_imports)]
-use shared::wtypes::BSTR;
-
+use shared::wtypes::PROPERTYKEY;
 DEFINE_PROPERTYKEY!{PKEY_Audio_ChannelCount,
     0x64440490, 0x4C8B, 0x11D1, 0x8B, 0x70, 0x08, 0x00, 0x36, 0xB1, 0x1A, 0x03, 7}
 pub const AUDIO_CHANNELCOUNT_MONO: DWORD = 1;

@@ -261,7 +261,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("processtopologyapi", &["minwindef", "winnt"], &["kernel32"]),
     ("profileapi", &["minwindef", "winnt"], &["kernel32"]),
     ("propidl", &["guiddef", "minwindef", "ntdef", "oaidl", "objidlbase", "unknwnbase", "wtypes", "wtypesbase"], &["ole32"]),
-    ("propkey", &["guiddef", "minwindef", "ntdef", "wtypes"], &[]),
+    ("propkey", &["minwindef", "ntdef", "wtypes"], &[]),
     ("propkeydef", &["guiddef", "wtypes"], &[]),
     ("propsys", &["minwindef", "propidl", "propkeydef", "unknwnbase", "winnt", "wtypes"], &[]),
     ("prsht", &["basetsd", "minwindef", "windef", "winnt", "winuser"], &["comctl32"]),
