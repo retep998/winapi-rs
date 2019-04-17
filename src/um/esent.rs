@@ -5,9 +5,6 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Bindings to the Extensible Storage Engine.
-// Note that esent.h does a `#pragma pack(push, N)` at the top, where N is 4 on x86 and 8 on x64,
-// so every structure definition here needs to have a repr preamble on it to set the packing
-// correctly.
 use ctypes::{
     __int64, c_char, c_double, c_int, c_long, c_uchar, c_ulong, c_ushort, c_void, wchar_t,
 };
