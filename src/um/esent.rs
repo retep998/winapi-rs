@@ -55,10 +55,7 @@ FN!{stdcall JET_PFNSTATUS(
     snt: JET_SNT,
     pv:  *mut c_void,
 ) -> JET_ERR}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_COLUMNCREATE_W {
+STRUCT!{struct JET_COLUMNCREATE_W {
     cbStruct: c_ulong,
     szColumnName: *mut wchar_t,
     coltyp: JET_COLTYP,
@@ -70,10 +67,7 @@ struct JET_COLUMNCREATE_W {
     columnid: JET_COLUMNID,
     err: JET_ERR,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_COLUMNDEF {
+STRUCT!{struct JET_COLUMNDEF {
     cbStruct: c_ulong,
     columnid: JET_COLUMNID,
     coltyp: JET_COLTYP,
@@ -84,84 +78,54 @@ struct JET_COLUMNDEF {
     cbMax: c_ulong,
     grbit: JET_GRBIT,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_COMMIT_ID {
+STRUCT!{struct JET_COMMIT_ID {
     signLog: JET_SIGNATURE,
     reserved: c_int,
     commitId: __int64,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_CONDITIONALCOLUMN_W {
+STRUCT!{struct JET_CONDITIONALCOLUMN_W {
     cbStruct: c_ulong,
     szColumnName: *mut wchar_t,
     grbit: JET_GRBIT,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_ENUMCOLUMN_u_s1 {
+STRUCT!{struct JET_ENUMCOLUMN_u_s1 {
     cEnumColumnValue: c_ulong,
     rgEnumColumnValue: *mut JET_ENUMCOLUMNVALUE,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_ENUMCOLUMN_u_s2 {
+STRUCT!{struct JET_ENUMCOLUMN_u_s2 {
     cbData: c_ulong,
     pvData: *mut c_void,
 }}
-UNION!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-union JET_ENUMCOLUMN_u {
+UNION!{union JET_ENUMCOLUMN_u {
     [usize; 2],
     V1 V1_mut: JET_ENUMCOLUMN_u_s1,
     V2 V2_mut: JET_ENUMCOLUMN_u_s2,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_ENUMCOLUMN {
+STRUCT!{struct JET_ENUMCOLUMN {
     columnid: JET_COLUMNID,
     err: JET_ERR,
     u: JET_ENUMCOLUMN_u,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_ENUMCOLUMNID {
+STRUCT!{struct JET_ENUMCOLUMNID {
     columnid: JET_COLUMNID,
     ctagSequence: c_ulong,
     rgtagSequence: *const c_ulong,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_ENUMCOLUMNVALUE {
-    itagSequcne: c_ulong,
+STRUCT!{struct JET_ENUMCOLUMNVALUE {
+    itagSequence: c_ulong,
     err: JET_ERR,
     cbData: c_ulong,
     pvData: *mut c_void,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_ERRINFOBASIC_W{
+STRUCT!{struct JET_ERRINFOBASIC_W {
     cbStruct: c_ulong,
     errValue: JET_ERR,
     errcatMostSpecific: JET_ERRCAT,
-    rgCategoricalHeirarchy: [c_uchar; 8],
+    rgCategoricalHierarchy: [c_uchar; 8],
     lSourceLine: c_ulong,
     rgszSourceFile: [wchar_t; 64],
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_INDEX_COLUMN {
+STRUCT!{struct JET_INDEX_COLUMN {
     columnid: JET_COLUMNID,
     relop: JET_RELOP,
     pv: *mut c_void,
@@ -169,25 +133,16 @@ struct JET_INDEX_COLUMN {
     grbit: JET_GRBIT,
 }}
 #[cfg(target_pointer_width = "32")]
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_INDEXID {
+STRUCT!{struct JET_INDEXID {
     cbStruct: c_ulong,
     rgbIndexId: [c_char; 12], // sizeof(JET_API_PTR) + 2 * sizeof(unsigned long)
 }}
 #[cfg(target_pointer_width = "64")]
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_INDEXID {
+STRUCT!{struct JET_INDEXID {
     cbStruct: c_ulong,
     rgbIndexId: [c_char; 16], // sizeof(JET_API_PTR) + 2 * sizeof(unsigned long)
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_INDEXCREATE_W {
+STRUCT!{struct JET_INDEXCREATE_W {
     cbStruct: c_ulong,
     szIndexName: *mut wchar_t,
     szKey: *mut wchar_t,
@@ -201,26 +156,17 @@ struct JET_INDEXCREATE_W {
     err: JET_ERR,
     cbKeyMost: c_ulong,
 }}
-UNION!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-union JET_INDEXCREATE_W_u1 {
+UNION!{union JET_INDEXCREATE_W_u1 {
     [usize; 1],
     lcid lcid_mut: c_ulong,
     pidxunicode pidxunicode_mut: *mut JET_UNICODEINDEX,
 }}
-UNION!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-union JET_INDEXCREATE_W_u2 {
+UNION!{union JET_INDEXCREATE_W_u2 {
     [usize; 1],
     cbVarSegMac cbVarSegMac_mut: c_ulong,
     ptuplelimits ptuplelimits_mut: *mut JET_TUPLELIMITS,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_INDEXCREATE2_W{
+STRUCT!{struct JET_INDEXCREATE2_W {
     cbStruct: c_ulong,
     szIndexName: *mut wchar_t,
     szKey: *mut wchar_t,
@@ -235,26 +181,17 @@ struct JET_INDEXCREATE2_W{
     cbKeyMost: c_ulong,
     pSpacehints: *mut JET_SPACEHINTS,
 }}
-UNION!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-union JET_INDEXCREATE2_W_u1 {
+UNION!{union JET_INDEXCREATE2_W_u1 {
     [usize; 1],
     lcid lcid_mut: c_ulong,
     pidxunicode pidxunicode_mut: *mut JET_UNICODEINDEX,
 }}
-UNION!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-union JET_INDEXCREATE2_W_u2 {
+UNION!{union JET_INDEXCREATE2_W_u2 {
     [usize; 1],
     cbVarSegMac cbVarSegMac_mut: c_ulong,
     ptuplelimits ptuplelimits_mut: *mut JET_TUPLELIMITS,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_INDEXCREATE3_W{
+STRUCT!{struct JET_INDEXCREATE3_W {
     cbStruct: c_ulong,
     szIndexName: *mut wchar_t,
     szKey: *mut wchar_t,
@@ -269,26 +206,17 @@ struct JET_INDEXCREATE3_W{
     cbKeyMost: c_ulong,
     pSpacehints: *mut JET_SPACEHINTS,
 }}
-UNION!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-union JET_INDEXCREATE3_W_u {
+UNION!{union JET_INDEXCREATE3_W_u {
     [usize; 1],
     cbVarSegMac cbVarSegMac_mut: c_ulong,
     ptuplelimits ptuplelimits_mut: *mut JET_TUPLELIMITS,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_INDEXRANGE {
+STRUCT!{struct JET_INDEXRANGE {
     cbStruct: c_ulong,
     tableid: JET_TABLEID,
     grbit: JET_GRBIT,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_INSTANCE_INFO_W {
+STRUCT!{struct JET_INSTANCE_INFO_W {
     hInstanceId: JET_INSTANCE,
     szInstanceName: *const wchar_t,
     cDatabases: JET_API_PTR,
@@ -301,10 +229,7 @@ STRUCT!{#[repr(packed)] struct JET_LGPOS {
     isec: c_ushort,
     lGeneration: c_long,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_LOGINFO_W {
+STRUCT!{struct JET_LOGINFO_W {
     cbSize: c_ulong,
     ulGenLow: c_ulong,
     ulGenHigh: c_ulong,
@@ -329,10 +254,7 @@ BITFIELD!(JET_LOGTIME bFiller2: u8 [
     bMillisecondsHigh set_bMillisecondsHigh [1..4],
     fUnused set_fUnused [4..8],
 ]);
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_OPENTEMPORARYTABLE {
+STRUCT!{struct JET_OPENTEMPORARYTABLE {
     cbStruct: c_ulong,
     prgcolumndef: *const JET_COLUMNDEF,
     ccolumn: c_ulong,
@@ -343,10 +265,7 @@ struct JET_OPENTEMPORARYTABLE {
     cbVarSegMac: c_ulong,
     tableid: JET_TABLEID,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_OPENTEMPORARYTABLE2 {
+STRUCT!{struct JET_OPENTEMPORARYTABLE2 {
     cbStruct: c_ulong,
     prgcolumndef: *const JET_COLUMNDEF,
     ccolumn: c_ulong,
@@ -357,40 +276,29 @@ struct JET_OPENTEMPORARYTABLE2 {
     cbVarSegMac: c_ulong,
     tableid: JET_TABLEID,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_RECORDLIST {
+STRUCT!{struct JET_RECORDLIST {
     cbStruct: c_ulong,
     tableid: JET_TABLEID,
     cRecord: c_ulong,
     columnidBookmark: JET_COLUMNID,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_RECPOS {
+STRUCT!{struct JET_RECPOS {
     cbStruct: c_ulong,
     centriesLT: c_ulong,
     centriesInRange: c_ulong,
     centriesTotal: c_ulong,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_RECSIZE {
+STRUCT!{struct JET_RECSIZE {
     cbData: __int64,
     cbLongValueData: __int64,
     cbOverhead: __int64,
     cbLongValueOverhead: __int64,
     cNonTaggedColumns: __int64,
+    cTaggedColumns: __int64,
     cLongValues: __int64,
     cMultiValues: __int64,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_RECSIZE2 {
+STRUCT!{struct JET_RECSIZE2 {
     cbData: __int64,
     cbLongValueData: __int64,
     cbOverhead: __int64,
@@ -403,19 +311,13 @@ struct JET_RECSIZE2 {
     cbDataCompressed: __int64,
     cbLongValueDataCompressed: __int64,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_RETINFO {
+STRUCT!{struct JET_RETINFO {
     cbStruct: c_ulong,
     ibLongValue: c_ulong,
     itagSequence: c_ulong,
     columnidNextTagged: JET_COLUMNID,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_RETRIEVECOLUMN {
+STRUCT!{struct JET_RETRIEVECOLUMN {
     columnid: JET_COLUMNID,
     pvData: *mut c_void,
     cbData: c_ulong,
@@ -426,17 +328,11 @@ struct JET_RETRIEVECOLUMN {
     columnidNextTagged: JET_COLUMNID,
     err: JET_ERR,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_RSTMAP_W {
+STRUCT!{struct JET_RSTMAP_W {
     szDatabaseName: *mut wchar_t,
     szNewDatabaseName: *mut wchar_t,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_RSTINFO_W {
+STRUCT!{struct JET_RSTINFO_W {
     cbStruct: c_ulong,
     rgrstmap: *mut JET_RSTMAP_W,
     crstmap: c_long,
@@ -444,47 +340,32 @@ struct JET_RSTINFO_W {
     logtimeStop: JET_LOGTIME,
     pfnStatus: JET_PFNSTATUS,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_SETCOLUMN {
+STRUCT!{struct JET_SETCOLUMN {
     columnid: JET_COLUMNID,
-    pvdata: *mut c_void,
-    cbdata: c_ulong,
+    pvData: *mut c_void,
+    cbData: c_ulong,
     grbit: JET_GRBIT,
     ibLongValue: c_ulong,
     itagSequence: c_ulong,
     err: JET_ERR,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_SETINFO {
+STRUCT!{struct JET_SETINFO {
     cbStruct: c_ulong,
     ibLongValue: c_ulong,
     itagSequence: c_ulong,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_SETSYSPARAM_W {
+STRUCT!{struct JET_SETSYSPARAM_W {
     paramid: c_ulong,
     lParam: JET_API_PTR,
     sz: *const wchar_t,
     err: JET_ERR,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_SIGNATURE {
+STRUCT!{struct JET_SIGNATURE {
     ulRandom: c_ulong,
     logtimeCreate: JET_LOGTIME,
     szComputerName: [u8; JET_MAX_COMPUTERNAME_LENGTH + 1],
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_SPACEHINTS {
+STRUCT!{struct JET_SPACEHINTS {
     cbStruct: c_ulong,
     ulInitialDensity: c_ulong,
     cbInitial: c_ulong,
@@ -494,10 +375,7 @@ struct JET_SPACEHINTS {
     cbMinExtent: c_ulong,
     cbMaxExtent: c_ulong,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_TABLECREATE_W {
+STRUCT!{struct JET_TABLECREATE_W {
     cbStruct: c_ulong,
     szTableName: *mut wchar_t,
     szTemplateTableName: *mut wchar_t,
@@ -505,16 +383,13 @@ struct JET_TABLECREATE_W {
     ulDensity: c_ulong,
     rgcolumncreate: *const JET_COLUMNCREATE_W,
     cColumns: c_ulong,
-    rcindexcreate: *const JET_INDEXCREATE_W,
+    rgindexcreate: *const JET_INDEXCREATE_W,
     cIndexes: c_ulong,
     grbit: JET_GRBIT,
     tableid: JET_TABLEID,
     cCreated: c_ulong,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_TABLECREATE2_W {
+STRUCT!{struct JET_TABLECREATE2_W {
     cbStruct: c_ulong,
     szTableName: *mut wchar_t,
     szTemplateTableName: *mut wchar_t,
@@ -530,10 +405,7 @@ struct JET_TABLECREATE2_W {
     tableid: JET_TABLEID,
     cCreated: c_ulong,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_TABLECREATE3_W {
+STRUCT!{struct JET_TABLECREATE3_W {
     cbStruct: c_ulong,
     szTableName: *mut wchar_t,
     szTemplateTableName: *mut wchar_t,
@@ -543,31 +415,27 @@ struct JET_TABLECREATE3_W {
     cColumns: c_ulong,
     rgindexcreate: *mut JET_INDEXCREATE_W,
     cIndexes: c_ulong,
+    szCallback: *mut wchar_t,
+    cbtyp: JET_CBTYP,
     grbit: JET_GRBIT,
+    pSeqSpacehints: *mut JET_SPACEHINTS,
+    pLVSpacehints: *mut JET_SPACEHINTS,
+    cbSeparateLV: c_ulong,
     tableid: JET_TABLEID,
     cCreated: c_ulong,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_TUPLELIMITS {
+STRUCT!{struct JET_TUPLELIMITS {
     chLengthMin: c_ulong,
     chLengthMax: c_ulong,
     chToIndexMax: c_ulong,
     cchIncrement: c_ulong,
     ichStart: c_ulong,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_UNICODEINDEX {
+STRUCT!{struct JET_UNICODEINDEX {
     lcid: c_ulong,
     dwMapFlags: c_ulong,
 }}
-STRUCT!{
-    #[cfg_attr(target_pointer_width = "32", repr(C, packed(4)))]
-    #[cfg_attr(target_pointer_width = "64", repr(C, packed(8)))]
-struct JET_UNICODEINDEX2 {
+STRUCT!{struct JET_UNICODEINDEX2 {
     szLocaleName: *mut wchar_t,
     dwMapFlags: c_ulong,
 }}
