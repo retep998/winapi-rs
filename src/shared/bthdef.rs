@@ -583,8 +583,8 @@ pub const BTH_EIR_OOB_SP_HASH_ID: u8 = 0x0E;
 pub const BTH_EIR_OOB_SP_RANDOMIZER_ID: u8 = 0x0F;
 pub const BTH_EIR_MANUFACTURER_ID: u8 = 0xFF;
 pub const BTH_EIR_SIZE: usize = 240;
-// #define LAP_GIAC_INIT                   { 0x33, 0x8B, 0x9E }
-// #define LAP_LIAC_INIT                   { 0x00, 0x8B, 0x9E }
+// #define LAP_GIAC_INIT { 0x33, 0x8B, 0x9E }
+// #define LAP_LIAC_INIT { 0x00, 0x8B, 0x9E }
 pub const LAP_GIAC_VALUE: BTH_LAP = 0x009E8B33;
 pub const LAP_LIAC_VALUE: BTH_LAP = 0x009E8B00;
 pub const BTH_ADDR_IAC_FIRST: BTH_ADDR = 0x9E8B00;
@@ -734,20 +734,20 @@ STRUCT!{struct BTH_HCI_EVENT_INFO {
 }}
 pub type PBTH_HCI_EVENT_INFO = *mut BTH_HCI_EVENT_INFO;
 ENUM!{enum IO_CAPABILITY {
-    IoCaps_DisplayOnly     = 0x00,
-    IoCaps_DisplayYesNo    = 0x01,
-    IoCaps_KeyboardOnly    = 0x02,
+    IoCaps_DisplayOnly = 0x00,
+    IoCaps_DisplayYesNo = 0x01,
+    IoCaps_KeyboardOnly = 0x02,
     IoCaps_NoInputNoOutput = 0x03,
-    IoCaps_Undefined       = 0xff,
+    IoCaps_Undefined = 0xff,
 }}
 ENUM!{enum AUTHENTICATION_REQUIREMENTS {
-    MITMProtectionNotRequired               = 0x00,
-    MITMProtectionRequired                  = 0x01,
-    MITMProtectionNotRequiredBonding        = 0x02,
-    MITMProtectionRequiredBonding           = 0x03,
+    MITMProtectionNotRequired = 0x00,
+    MITMProtectionRequired = 0x01,
+    MITMProtectionNotRequiredBonding = 0x02,
+    MITMProtectionRequiredBonding = 0x03,
     MITMProtectionNotRequiredGeneralBonding = 0x04,
-    MITMProtectionRequiredGeneralBonding    = 0x05,
-    MITMProtectionNotDefined                = 0xff,
+    MITMProtectionRequiredGeneralBonding = 0x05,
+    MITMProtectionNotDefined = 0xff,
 }}
 #[inline]
 pub fn IsMITMProtectionRequired(requirements: AUTHENTICATION_REQUIREMENTS) -> bool {
@@ -876,11 +876,11 @@ pub const PSM_ATT: u16 = 0x001F;
 pub const PSM_3DSP: u16 = 0x0021;
 pub const PSM_LE_IPSP: u16 = 0x0023;
 pub const STR_ADDR_FMTA: &'static str = "(%02x:%02x:%02x:%02x:%02x:%02x)\0";
-// #define STR_ADDR_FMTW                   L"(%02x:%02x:%02x:%02x:%02x:%02x)"
+// #define STR_ADDR_FMTW L"(%02x:%02x:%02x:%02x:%02x:%02x)"
 pub const STR_ADDR_SHORT_FMTA: &'static str = "%04x%08x\0";
-// #define STR_ADDR_SHORT_FMTW             L"%04x%08x"
+// #define STR_ADDR_SHORT_FMTW L"%04x%08x"
 pub const STR_USBHCI_CLASS_HARDWAREIDA: &'static str = "USB\\Class_E0&SubClass_01&Prot_01\0";
-// #define STR_USBHCI_CLASS_HARDWAREIDW    L"USB\\Class_E0&SubClass_01&Prot_01"
+// #define STR_USBHCI_CLASS_HARDWAREIDW L"USB\\Class_E0&SubClass_01&Prot_01"
 #[inline]
 pub fn GET_BITS(field: u64, offset: u8, mask: u64) -> u64 {
     (field >> offset) & mask
