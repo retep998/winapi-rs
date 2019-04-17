@@ -4,7 +4,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use shared::bthdef::{
-    BTH_ADDR, MAX_L2CAP_INFO_DATA_LENGTH, MAX_L2CAP_PING_DATA_LENGTH, MAX_UUIDS_IN_QUERY
+    BTH_ADDR, MAX_L2CAP_INFO_DATA_LENGTH, MAX_L2CAP_PING_DATA_LENGTH, MAX_UUIDS_IN_QUERY,
 };
 use shared::bthsdpdef::{SdpAttributeRange, SdpQueryUuid};
 use shared::guiddef::GUID;
