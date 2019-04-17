@@ -3,7 +3,6 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use _core::u16;
 use shared::basetsd::ULONG64;
 use shared::guiddef::{GUID, IsEqualGUID};
 use shared::minwindef::{UCHAR, ULONG, USHORT};
