@@ -19,15 +19,15 @@ pub const AF_BTH: USHORT = 32;
 pub const PH_BTH: USHORT = AF_BTH;
 pub const NS_BTH: USHORT = 16;
 STRUCT!{#[repr(packed)] struct SOCKADDR_BTH {
-    addressFamily: USHORT,  // Always AF_BTH
-    btAddr: BTH_ADDR,       // Bluetooth device address
-    serviceClassId: GUID,   // [OPTIONAL] system will query SDP for port
-    port: ULONG,            // RFCOMM channel or L2CAP PSM
+    addressFamily: USHORT,
+    btAddr: BTH_ADDR,
+    serviceClassId: GUID,
+    port: ULONG,
 }}
 pub type PSOCKADDR_BTH = *mut SOCKADDR_BTH;
 DEFINE_GUID!{SVCID_BTH_PROVIDER,
     0x6aa63e0, 0x7d60, 0x41ff, 0xaf, 0xb2, 0x3e, 0xe6, 0xd2, 0xd9, 0x39, 0x2d}
-pub const BT_ADDR_STRING_SIZE: DWORD = 12; // max size from WSAAddressToString
+pub const BTH_ADDR_STRING_SIZE: DWORD = 12;
 pub const BTHPROTO_RFCOMM: USHORT = 0x0003;
 pub const BTHPROTO_L2CAP: USHORT = 0x0100;
 pub const SOL_RFCOMM: USHORT = BTHPROTO_RFCOMM;
@@ -38,9 +38,8 @@ pub const SO_BTH_ENCRYPT: ULONG = 0x00000002;
 pub const SO_BTH_MTU: ULONG = 0x80000007;
 pub const SO_BTH_MTU_MAX: ULONG = 0x80000008;
 pub const SO_BTH_MTU_MIN: ULONG = 0x8000000a;
-// 3-DH5 => payload of 1021 => L2cap payload of 1017 => RFComm payload of 1011
-pub const RFCOMM_MAX_MTU: ULONG = 0x000003F3;  // L2CAP MTU (1017) - RFCOMM header size (6)
-pub const RFCOMM_MIN_MTU: ULONG = 0x00000017;  // RFCOMM spec sec 5.3 table 5.1
+pub const RFCOMM_MAX_MTU: ULONG = 0x000003F3;
+pub const RFCOMM_MIN_MTU: ULONG = 0x00000017;
 pub const BTH_SDP_VERSION: ULONG = 1;
 STRUCT!{#[repr(packed)] struct BTH_SET_SERVICE {
     pSdpVersion: PULONG,
@@ -58,12 +57,12 @@ pub const SDP_SERVICE_SEARCH_REQUEST: ULONG = 1;
 pub const SDP_SERVICE_ATTRIBUTE_REQUEST: ULONG = 2;
 pub const SDP_SERVICE_SEARCH_ATTRIBUTE_REQUEST: ULONG = 3;
 STRUCT!{#[repr(packed)] struct BTH_QUERY_DEVICE {
-    LAP: ULONG,     // reserved: must be 0 (GIAC inquiry only)
-    length: UCHAR,  // requested length of inquiry (seconds)
+    LAP: ULONG,
+    length: UCHAR,
 }}
 pub type PBTH_QUERY_DEVICE = *mut BTH_QUERY_DEVICE;
 STRUCT!{#[repr(packed)] struct BTH_QUERY_SERVICE {
-    type_: ULONG,    // one of SDP_SERVICE_*
+    type_: ULONG,
     serviceHandle: ULONG,
     uuids: [SdpQueryUuid; MAX_UUIDS_IN_QUERY],
     numRange: ULONG,
@@ -91,13 +90,13 @@ STRUCT!{#[repr(packed)] struct RFCOMM_MSC_DATA {
 }}
 pub type PRFCOMM_MSC_DATA = *mut RFCOMM_MSC_DATA;
 pub const MSC_EA_BIT: UCHAR = BIT!(0);
-pub const MSC_FC_BIT: UCHAR = BIT!(1);               // Flow control, clear if we can receive
-pub const MSC_RTC_BIT: UCHAR = BIT!(2);              // Ready to communicate, set when ready
-pub const MSC_RTR_BIT: UCHAR = BIT!(3);              // Ready to receive, set when ready
-pub const MSC_RESERVED: UCHAR = (BIT!(4) | BIT!(5));    // Reserved by spec, must be 0
-pub const MSC_IC_BIT: UCHAR = BIT!(6);               // Incoming call
-pub const MSC_DV_BIT: UCHAR = BIT!(7);               // Data valid
-pub const MSC_BREAK_BIT: UCHAR = BIT!(1);            // Set if sending break
+pub const MSC_FC_BIT: UCHAR = BIT!(1);
+pub const MSC_RTC_BIT: UCHAR = BIT!(2);
+pub const MSC_RTR_BIT: UCHAR = BIT!(3);
+pub const MSC_RESERVED: UCHAR = (BIT!(4) | BIT!(5));
+pub const MSC_IC_BIT: UCHAR = BIT!(6);
+pub const MSC_DV_BIT: UCHAR = BIT!(7);
+pub const MSC_BREAK_BIT: UCHAR = BIT!(1);
 macro_rules! MSC_SET_BREAK_LENGTH {
     ($b: expr, $l: expr) => {
         ($b & 0x3) | (($l & 0xf) << 4)
