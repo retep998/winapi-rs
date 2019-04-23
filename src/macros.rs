@@ -262,6 +262,9 @@ macro_rules! RIDL {
     (@item $thing:item) => ($thing);
 }
 macro_rules! UNION {
+    (#[debug] $($rest:tt)*) => (
+        UNION!{#[cfg_attr(feature = "impl-debug", derive(Debug))] $($rest)*}
+    );
     ($(#[$attrs:meta])* union $name:ident {
         [$stype:ty; $ssize:expr],
         $($variant:ident $variant_mut:ident: $ftype:ty,)+
