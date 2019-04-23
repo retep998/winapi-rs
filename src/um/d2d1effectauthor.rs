@@ -103,7 +103,7 @@ STRUCT!{struct D2D1_RESOURCE_TEXTURE_PROPERTIES {
     filter: D2D1_FILTER,
     extendModes: *const D2D1_EXTEND_MODE,
 }}
-STRUCT!{struct D2D1_INPUT_ELEMENT_DESC {
+STRUCT!{#[debug] struct D2D1_INPUT_ELEMENT_DESC {
     semanticName: PCSTR,
     semanticIndex: UINT32,
     format: DXGI_FORMAT,

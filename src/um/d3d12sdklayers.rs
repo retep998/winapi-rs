@@ -1248,7 +1248,7 @@ STRUCT!{struct D3D12_MESSAGE {
     pDescription: *const c_char,
     DescriptionByteLength: SIZE_T,
 }}
-STRUCT!{struct D3D12_INFO_QUEUE_FILTER_DESC {
+STRUCT!{#[debug] struct D3D12_INFO_QUEUE_FILTER_DESC {
     NumCategories: UINT,
     pCategoryList: *mut D3D12_MESSAGE_CATEGORY,
     NumSeverities: UINT,

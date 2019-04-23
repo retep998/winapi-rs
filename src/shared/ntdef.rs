@@ -217,7 +217,7 @@ STRUCT!{struct ULARGE_INTEGER_s {
 pub type PULARGE_INTEGER = *mut ULARGE_INTEGER;
 pub type RTL_REFERENCE_COUNT = LONG_PTR;
 pub type PRTL_REFERENCE_COUNT = *mut RTL_REFERENCE_COUNT;
-STRUCT!{struct LUID {
+STRUCT!{#[debug] struct LUID {
     LowPart: ULONG,
     HighPart: LONG,
 }}
