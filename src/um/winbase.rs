@@ -41,7 +41,7 @@ use um::winnt::{
     THREAD_BASE_PRIORITY_MAX, THREAD_BASE_PRIORITY_MIN, ULARGE_INTEGER, VOID, WAITORTIMERCALLBACK,
     WCHAR, WOW64_CONTEXT,
 };
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 use um::winnt::PLDT_ENTRY;
 use vc::vadefs::va_list;
 pub const FILE_BEGIN: DWORD = 0;
@@ -115,9 +115,9 @@ FN!{stdcall PFIBER_CALLOUT_ROUTINE(
     lpParameter: LPVOID,
 ) -> LPVOID}
 // FAIL_FAST_*
-#[cfg(target_arch = "x86")]
+#[cfg(any(target_arch = "x86", target_arch = "arm"))]
 pub type LPLDT_ENTRY = PLDT_ENTRY;
-#[cfg(not(target_arch = "x86"))]
+#[cfg(not(any(target_arch = "x86", target_arch = "arm")))]
 pub type LPLDT_ENTRY = LPVOID; // TODO - fix this for 32-bit
 //SP_SERIALCOMM
 //PST_*
@@ -2784,13 +2784,13 @@ extern "system" {
         Context: PCONTEXT,
         FeatureMask: PDWORD64,
     ) -> BOOL;
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    #[cfg(any(target_arch = "x86", target_arch = "x86_64", target_arch = "arm"))]
     pub fn LocateXStateFeature(
         Context: PCONTEXT,
         FeatureId: DWORD,
         Length: PDWORD,
     ) -> PVOID;
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    #[cfg(any(target_arch = "x86", target_arch = "x86_64", target_arch = "arm"))]
     pub fn SetXStateFeaturesMask(
         Context: PCONTEXT,
         FeatureMask: DWORD64,
