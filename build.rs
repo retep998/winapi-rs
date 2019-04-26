@@ -450,7 +450,7 @@ impl Graph {
         let prefix = library_prefix();
         let kind = library_kind();
         for lib in libs {
-            if *lib != "opengl32" || target_supports_opengl32 {
+            if *lib != "opengl32" {
                 println!("cargo:rustc-link-lib={}={}{}", kind, prefix, lib);
             }
         }
