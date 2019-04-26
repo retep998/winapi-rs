@@ -432,10 +432,6 @@ impl Graph {
         }
     }
     fn emit_libraries(&self) {
-        let target_supports_opengl32 = match var("TARGET").as_ref().map(String::as_str) {
-            Ok("thumbv7a-pc-windows-msvc") => false,
-            _ => true,
-        };
         let mut libs = self.0.iter().filter(|&(_, header)| {
             header.included.get()
         }).flat_map(|(_, header)| {
