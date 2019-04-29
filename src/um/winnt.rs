@@ -17,7 +17,7 @@ use shared::minwindef::PBYTE;
 use vc::excpt::EXCEPTION_DISPOSITION;
 use vc::vcruntime::size_t;
 pub const ANYSIZE_ARRAY: usize = 1;
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 pub const MAX_NATURAL_ALIGNMENT: usize = 4;
 pub const MEMORY_ALLOCATION_ALIGNMENT: usize = 8;
@@ -112,7 +112,7 @@ STRUCT!{struct GROUP_AFFINITY {
     Reserved: [WORD; 3],
 }}
 pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 pub const MAXIMUM_PROC_PER_GROUP: BYTE = 32;
 #[cfg(target_pointer_width = "64")]
 pub const MAXIMUM_PROC_PER_GROUP: BYTE = 64;
@@ -912,7 +912,7 @@ STRUCT!{struct M128A { // FIXME align 16
     High: LONGLONG,
 }}
 pub type PM128A = *mut M128A;
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 STRUCT!{struct XSAVE_FORMAT { // FIXME align 16
     ControlWord: WORD,
     StatusWord: WORD,
@@ -950,7 +950,7 @@ STRUCT!{struct XSAVE_FORMAT { // FIXME align 16
     XmmRegisters: [M128A; 16],
     Reserved4: [BYTE; 96],
 }}
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 STRUCT!{struct XSTATE_CONTEXT {
     Mask: DWORD64,
     Length: DWORD,
@@ -968,7 +968,7 @@ STRUCT!{struct XSTATE_CONTEXT {
     Area: PXSAVE_AREA,
     Buffer: PVOID,
 }}
-#[cfg(any(target_arch = "x86", target_arch = "arm", target_arch = "x86_64"))]
+#[cfg(any(target_pointer_width = "32", target_pointer_width = "64"))]
 IFDEF!{
 pub type PXSAVE_FORMAT = *mut XSAVE_FORMAT;
 STRUCT!{struct XSAVE_AREA_HEADER { // FIXME align 8
@@ -1218,7 +1218,7 @@ STRUCT!{struct KNONVOLATILE_CONTEXT_POINTERS {
 }}
 pub type PKNONVOLATILE_CONTEXT_POINTERS = *mut KNONVOLATILE_CONTEXT_POINTERS;
 } // IFDEF(x86_64)
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 pub const EXCEPTION_READ_FAULT: DWORD = 0;
 pub const EXCEPTION_WRITE_FAULT: DWORD = 1;
@@ -2307,7 +2307,7 @@ pub const SECURITY_DESCRIPTOR_REVISION: DWORD = 1;
 pub const SECURITY_DESCRIPTOR_REVISION1: DWORD = 1;
 #[cfg(target_pointer_width = "64")]
 pub const SECURITY_DESCRIPTOR_MIN_LENGTH: usize = 40;
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 pub const SECURITY_DESCRIPTOR_MIN_LENGTH: usize = 20;
 pub type SECURITY_DESCRIPTOR_CONTROL = WORD;
 pub type PSECURITY_DESCRIPTOR_CONTROL = *mut WORD;
@@ -5728,7 +5728,7 @@ pub type IMAGE_OPTIONAL_HEADER = IMAGE_OPTIONAL_HEADER64;
 pub type PIMAGE_OPTIONAL_HEADER = PIMAGE_OPTIONAL_HEADER64;
 pub const IMAGE_NT_OPTIONAL_HDR_MAGIC: WORD = IMAGE_NT_OPTIONAL_HDR64_MAGIC;
 }
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 pub type IMAGE_OPTIONAL_HEADER = IMAGE_OPTIONAL_HEADER32;
 pub type PIMAGE_OPTIONAL_HEADER = PIMAGE_OPTIONAL_HEADER32;
@@ -5756,7 +5756,7 @@ IFDEF!{
 pub type IMAGE_NT_HEADERS = IMAGE_NT_HEADERS64;
 pub type PIMAGE_NT_HEADERS = PIMAGE_NT_HEADERS64;
 }
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 pub type IMAGE_NT_HEADERS = IMAGE_NT_HEADERS32;
 pub type PIMAGE_NT_HEADERS = PIMAGE_NT_HEADERS32;
@@ -6533,7 +6533,7 @@ pub fn IMAGE_SNAP_BY_ORDINAL(Ordinal: ULONGLONG) -> bool {
 pub type IMAGE_TLS_DIRECTORY = IMAGE_TLS_DIRECTORY64;
 pub type PIMAGE_TLS_DIRECTORY = PIMAGE_TLS_DIRECTORY64;
 }
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 pub const IMAGE_ORDINAL_FLAG: DWORD = IMAGE_ORDINAL_FLAG32;
 #[inline]
@@ -6688,7 +6688,7 @@ pub type PIMAGE_DYNAMIC_RELOCATION = PIMAGE_DYNAMIC_RELOCATION64;
 pub type IMAGE_DYNAMIC_RELOCATION_V2 = IMAGE_DYNAMIC_RELOCATION64_V2;
 pub type PIMAGE_DYNAMIC_RELOCATION_V2 = PIMAGE_DYNAMIC_RELOCATION64_V2;
 }
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 pub type IMAGE_DYNAMIC_RELOCATION = IMAGE_DYNAMIC_RELOCATION32;
 pub type PIMAGE_DYNAMIC_RELOCATION = PIMAGE_DYNAMIC_RELOCATION32;
@@ -6801,7 +6801,7 @@ IFDEF!{
 pub type IMAGE_LOAD_CONFIG_DIRECTORY = IMAGE_LOAD_CONFIG_DIRECTORY64;
 pub type PIMAGE_LOAD_CONFIG_DIRECTORY = PIMAGE_LOAD_CONFIG_DIRECTORY64;
 }
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 pub type IMAGE_LOAD_CONFIG_DIRECTORY = IMAGE_LOAD_CONFIG_DIRECTORY32;
 pub type PIMAGE_LOAD_CONFIG_DIRECTORY = PIMAGE_LOAD_CONFIG_DIRECTORY32;
@@ -7282,7 +7282,7 @@ UNION!{union SLIST_HEADER {
 }}
 pub type PSLIST_HEADER = *mut SLIST_HEADER;
 }
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 STRUCT!{struct SLIST_HEADER_s {
     Next: SLIST_ENTRY,

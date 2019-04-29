@@ -432,7 +432,7 @@ STRUCT!{struct URB_CONTROL_TRANSFER_EX {
     hca: URB_HCD_AREA,
     SetupPacket: [UCHAR; 8],
 }}
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 STRUCT!{struct URB_CONTROL_TRANSFER_EX {
     Hdr: URB_HEADER,
     PipeHandle: USBD_PIPE_HANDLE,

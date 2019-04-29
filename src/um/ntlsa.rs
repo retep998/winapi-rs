@@ -155,7 +155,7 @@ pub const SE_ADT_PARAMETERS_SEND_TO_LSA: ULONG = 0x00000002;
 pub const SE_ADT_PARAMETER_EXTENSIBLE_AUDIT: ULONG = 0x00000004;
 pub const SE_ADT_PARAMETER_GENERIC_AUDIT: ULONG = 0x00000008;
 pub const SE_ADT_PARAMETER_WRITE_SYNCHRONOUS: ULONG = 0x00000010;
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 #[inline]
 pub fn LSAP_SE_ADT_PARAMETER_ARRAY_TRUE_SIZE(
     AuditParameters: SE_ADT_PARAMETER_ARRAY,

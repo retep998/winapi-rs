@@ -770,7 +770,7 @@ STRUCT!{struct NMHDFILTERBTNCLICK {
 }}
 pub type LPNMHDFILTERBTNCLICK = *mut NMHDFILTERBTNCLICK;
 pub const TOOLBARCLASSNAME: &'static str = "ToolbarWindow32";
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 STRUCT!{struct TBBUTTON {
     iBitmap: c_int,
     idCommand: c_int,

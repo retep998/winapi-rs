@@ -65,7 +65,7 @@ ENUM!{enum SF_TYPE {
     SF_RECORD = VT_RECORD,
     SF_HAVEIID = VT_UNKNOWN | VT_RESERVED,
 }}
-#[cfg(any(target_arch = "x86", target_arch = "arm"))]
+#[cfg(target_pointer_width = "32")]
 UNION!{union __MIDL_IOleAutomationTypes_0001 {
     [u32; 6],
     BstrStr BstrStr_mut: SAFEARR_BSTR,

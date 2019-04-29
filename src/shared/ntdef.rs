@@ -20,9 +20,9 @@ IFDEF!{
 pub const MAX_NATURAL_ALIGNMENT: usize = 4;
 pub const MEMORY_ALLOCATION_ALIGNMENT: usize = 8;
 }
-#[cfg(any(target_arch = "x86_64", target_arch = "x86", target_arch = "arm"))]
+#[cfg(any(target_pointer_width = "32", target_pointer_width = "64"))]
 pub const SYSTEM_CACHE_ALIGNMENT_SIZE: usize = 64;
-#[cfg(not(any(target_arch = "x86_64", target_arch = "x86", target_arch = "arm")))]
+#[cfg(not(any(target_pointer_width = "32", target_pointer_width = "64")))]
 pub const SYSTEM_CACHE_ALIGNMENT_SIZE: usize = 128;
 pub type PVOID = *mut c_void;
 pub type PVOID64 = u64; // This is a 64-bit pointer, even when in 32-bit
