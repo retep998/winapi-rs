@@ -25,6 +25,9 @@ winapi-i686-pc-windows-gnu = { version = "0.3", path = "i686" }
 [target.x86_64-pc-windows-gnu.dependencies]
 winapi-x86_64-pc-windows-gnu = { version = "0.3", path = "x86_64" }
 
+[dev-dependencies]
+doc-comment = "0.3"
+
 [features]
 everything = []
 std = []

@@ -36,7 +36,7 @@ Cargo.toml:
 winapi = { version = "0.3", features = ["winuser"] }
 ```
 main.rs:
-```Rust
+```rust
 #[cfg(windows)] extern crate winapi;
 use std::io::Error;
 

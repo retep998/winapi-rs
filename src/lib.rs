@@ -13,6 +13,13 @@
 #[cfg(feature = "std")]
 extern crate std;
 
+#[cfg(test)]
+#[macro_use]
+extern crate doc_comment;
+
+#[cfg(test)]
+doctest!("../README.md");
+
 /// Hack for exported macros
 #[doc(hidden)]
 pub extern crate core as _core;
