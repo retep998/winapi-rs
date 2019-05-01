@@ -968,8 +968,6 @@ STRUCT!{struct XSTATE_CONTEXT {
     Area: PXSAVE_AREA,
     Buffer: PVOID,
 }}
-#[cfg(any(target_pointer_width = "32", target_pointer_width = "64"))]
-IFDEF!{
 pub type PXSAVE_FORMAT = *mut XSAVE_FORMAT;
 STRUCT!{struct XSAVE_AREA_HEADER { // FIXME align 8
     Mask: DWORD64,
@@ -983,7 +981,6 @@ STRUCT!{struct XSAVE_AREA { // FIXME align 16
 }}
 pub type PXSAVE_AREA = *mut XSAVE_AREA;
 pub type PXSTATE_CONTEXT = *mut XSTATE_CONTEXT;
-}
 STRUCT!{struct SCOPE_TABLE_AMD64 {
     Count: DWORD,
     ScopeRecord: [SCOPE_TABLE_AMD64_ScopeRecord; 1],
@@ -1218,7 +1215,7 @@ STRUCT!{struct KNONVOLATILE_CONTEXT_POINTERS {
 }}
 pub type PKNONVOLATILE_CONTEXT_POINTERS = *mut KNONVOLATILE_CONTEXT_POINTERS;
 } // IFDEF(x86_64)
-#[cfg(target_pointer_width = "32")]
+#[cfg(target_arch = "x86")]
 IFDEF!{
 pub const EXCEPTION_READ_FAULT: DWORD = 0;
 pub const EXCEPTION_WRITE_FAULT: DWORD = 1;

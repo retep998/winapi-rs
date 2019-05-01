@@ -115,9 +115,9 @@ FN!{stdcall PFIBER_CALLOUT_ROUTINE(
     lpParameter: LPVOID,
 ) -> LPVOID}
 // FAIL_FAST_*
-#[cfg(target_pointer_width = "32")]
+#[cfg(target_arch = "x86")]
 pub type LPLDT_ENTRY = PLDT_ENTRY;
-#[cfg(not(target_pointer_width = "32"))]
+#[cfg(not(target_arch = "x86"))]
 pub type LPLDT_ENTRY = LPVOID; // TODO - fix this for 32-bit
 //SP_SERIALCOMM
 //PST_*
@@ -2784,13 +2784,13 @@ extern "system" {
         Context: PCONTEXT,
         FeatureMask: PDWORD64,
     ) -> BOOL;
-    #[cfg(any(target_pointer_width = "32", target_pointer_width = "64"))]
+    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
     pub fn LocateXStateFeature(
         Context: PCONTEXT,
         FeatureId: DWORD,
         Length: PDWORD,
     ) -> PVOID;
-    #[cfg(any(target_pointer_width = "32", target_pointer_width = "64"))]
+    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
     pub fn SetXStateFeaturesMask(
         Context: PCONTEXT,
         FeatureMask: DWORD64,
