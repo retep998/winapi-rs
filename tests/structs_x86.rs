@@ -7079,6 +7079,8 @@ fn um_winioctl() {
     assert_eq!(align_of::<DISK_EXTENT>(), 8);
     assert_eq!(size_of::<VOLUME_DISK_EXTENTS>(), 32);
     assert_eq!(align_of::<VOLUME_DISK_EXTENTS>(), 8);
+    assert_eq!(size_of::<DISK_PERFORMANCE>(), 88);
+    assert_eq!(align_of::<DISK_PERFORMANCE>(), 8);
 }
 #[cfg(feature = "winnetwk")] #[test]
 fn um_winnetwk() {
