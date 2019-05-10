@@ -931,7 +931,7 @@ STRUCT!{struct XSAVE_FORMAT { // FIXME align 16
     XmmRegisters: [M128A; 8],
     Reserved4: [BYTE; 224],
 }}
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 STRUCT!{struct XSAVE_FORMAT { // FIXME align 16
     ControlWord: WORD,
     StatusWord: WORD,
@@ -960,7 +960,7 @@ STRUCT!{struct XSTATE_CONTEXT {
     Buffer: PVOID,
     Reserved3: DWORD,
 }}
-#[cfg(target_arch = "x86_64")]
+#[cfg(not(target_arch = "x86"))]
 STRUCT!{struct XSTATE_CONTEXT {
     Mask: DWORD64,
     Length: DWORD,
