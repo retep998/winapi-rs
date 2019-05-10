@@ -1481,14 +1481,15 @@ pub type PKNONVOLATILE_CONTEXT_POINTERS = *mut KNONVOLATILE_CONTEXT_POINTERS;
 } // IFDEF(aarch64)
 #[cfg(target_arch = "arm")]
 IFDEF!{
-pub const ARM_MAX_BREAKPOINTS: DWORD = 8;
-pub const ARM_MAX_WATCHPOINTS: DWORD = 1;
+pub const ARM_MAX_BREAKPOINTS: usize = 8;
+pub const ARM_MAX_WATCHPOINTS: usize = 1;
 STRUCT!{struct NEON128 {
     Low: ULONGLONG,
     High: LONGLONG,
 }}
 pub type PNEON128 = *mut NEON128;
 UNION!{union CONTEXT_u {
+    [u64; 32],
     Q: [NEON128; 16],
     D: [ULONGLONG; 32],
     S: [DWORD; 32],
