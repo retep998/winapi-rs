@@ -1479,6 +1479,50 @@ STRUCT!{struct KNONVOLATILE_CONTEXT_POINTERS {
 }}
 pub type PKNONVOLATILE_CONTEXT_POINTERS = *mut KNONVOLATILE_CONTEXT_POINTERS;
 } // IFDEF(aarch64)
+#[cfg(target_arch = "arm")]
+IFDEF!{
+STRUCT!{struct NEON128 {
+    Low: ULONGLONG,
+    High: LONGLONG
+}}
+pub type PNEON128 = *mut NEON128;
+UNION!{union CONTEXT_u {
+    Q: [NEON128; 16],
+    D: [ULONGLONG; 32],
+    S: [DWORD; 32]
+}}
+pub const ARM_MAX_BREAKPOINTS: DWORD = 8;
+pub const ARM_MAX_WATCHPOINTS: DWORD = 1;
+STRUCT!{struct CONTEXT {
+    ContextFlags: DWORD,
+    R0: DWORD,
+    R1: DWORD,
+    R2: DWORD,
+    R3: DWORD,
+    R4: DWORD,
+    R5: DWORD,
+    R6: DWORD,
+    R7: DWORD,
+    R8: DWORD,
+    R9: DWORD,
+    R10: DWORD,
+    R11: DWORD,
+    R12: DWORD,
+    Sp: DWORD,
+    Lr: DWORD,
+    Pc: DWORD,
+    Cpsr: DWORD,
+    Fpsrc: DWORD,
+    Padding: DWORD,
+    u: CONTEXT_u,
+    Bvr: [DWORD; ARM_MAX_BREAKPOINTS],
+    Bcr: [DWORD; ARM_MAX_BREAKPOINTS],
+    Wvr: [DWORD; ARM_MAX_WATCHPOINTS],
+    Wcr: [DWORD; ARM_MAX_WATCHPOINTS],
+    Padding2: [DWORD; 2]
+}}
+pub type PCONTEXT = *mut CONTEXT;
+} // IFDEF(arm)
 pub const WOW64_CONTEXT_i386: DWORD = 0x00010000;
 pub const WOW64_CONTEXT_i486: DWORD = 0x00010000;
 pub const WOW64_CONTEXT_CONTROL: DWORD = WOW64_CONTEXT_i386 | 0x00000001;
