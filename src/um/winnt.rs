@@ -950,7 +950,7 @@ STRUCT!{struct XSAVE_FORMAT { // FIXME align 16
     XmmRegisters: [M128A; 16],
     Reserved4: [BYTE; 96],
 }}
-#[cfg(target_pointer_width = "32")]
+#[cfg(target_arch = "x86")]
 STRUCT!{struct XSTATE_CONTEXT {
     Mask: DWORD64,
     Length: DWORD,

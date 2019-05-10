@@ -164,7 +164,7 @@ pub fn LSAP_SE_ADT_PARAMETER_ARRAY_TRUE_SIZE(
         - (20 // FIXME: sizeof::<SE_ADT_PARAMETER_ARRAY_ENTRY>()
         * (SE_MAX_AUDIT_PARAMETERS - AuditParameters.ParameterCount as SIZE_T))
 }
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 #[inline]
 pub fn LSAP_SE_ADT_PARAMETER_ARRAY_TRUE_SIZE(
     AuditParameters: SE_ADT_PARAMETER_ARRAY,

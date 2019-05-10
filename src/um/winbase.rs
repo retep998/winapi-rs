@@ -41,7 +41,7 @@ use um::winnt::{
     THREAD_BASE_PRIORITY_MAX, THREAD_BASE_PRIORITY_MIN, ULARGE_INTEGER, VOID, WAITORTIMERCALLBACK,
     WCHAR, WOW64_CONTEXT,
 };
-#[cfg(target_pointer_width = "32")]
+#[cfg(target_arch = "x86")]
 use um::winnt::PLDT_ENTRY;
 use vc::vadefs::va_list;
 pub const FILE_BEGIN: DWORD = 0;
