@@ -1490,9 +1490,9 @@ STRUCT!{struct NEON128 {
 pub type PNEON128 = *mut NEON128;
 UNION!{union CONTEXT_u {
     [u64; 32],
-    Q: [NEON128; 16],
-    D: [ULONGLONG; 32],
-    S: [DWORD; 32],
+    Q Q_mut: [NEON128; 16],
+    D D_mut: [ULONGLONG; 32],
+    S S_mut: [DWORD; 32],
 }}
 STRUCT!{struct CONTEXT {
     ContextFlags: DWORD,
