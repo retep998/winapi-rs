@@ -476,7 +476,7 @@ extern "system" {
         MachineType: DWORD,
         hProcess: HANDLE,
         hThread: HANDLE,
-        StackFrame: LPSTACKFRAME64,
+        StackFrame: LPSTACKFRAME_EX,
         ContextRecord: PVOID,
         ReadMemoryRoutine: PREAD_PROCESS_MEMORY_ROUTINE64,
         FunctionTableAccessRoutine: PFUNCTION_TABLE_ACCESS_ROUTINE64,
