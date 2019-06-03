@@ -5018,13 +5018,13 @@ extern "system" {
         dwNewLong: LONG_PTR,
     ) -> LONG_PTR;
 }
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub use self::GetWindowLongA as GetWindowLongPtrA;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub use self::GetWindowLongW as GetWindowLongPtrW;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub use self::SetWindowLongA as SetWindowLongPtrA;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub use self::SetWindowLongW as SetWindowLongPtrW;
 extern "system" {
     pub fn GetClassWord(
@@ -5077,13 +5077,13 @@ extern "system" {
         dwNewLong: LONG_PTR,
     ) -> ULONG_PTR;
 }
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub use self::GetClassLongA as GetClassLongPtrA;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub use self::GetClassLongW as GetClassLongPtrW;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub use self::SetClassLongA as SetClassLongPtrA;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub use self::SetClassLongW as SetClassLongPtrW;
 extern "system" {
     pub fn GetProcessDefaultLayout(
@@ -6595,9 +6595,9 @@ pub const EVENT_CONSOLE_UPDATE_SCROLL: UINT = 0x4004;
 pub const EVENT_CONSOLE_LAYOUT: UINT = 0x4005;
 pub const EVENT_CONSOLE_START_APPLICATION: UINT = 0x4006;
 pub const EVENT_CONSOLE_END_APPLICATION: UINT = 0x4007;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub const CONSOLE_APPLICATION_16BIT: LONG = 0x0000;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub const CONSOLE_APPLICATION_16BIT: LONG = 0x0001;
 pub const CONSOLE_CARET_SELECTION: LONG = 0x0001;
 pub const CONSOLE_CARET_VISIBLE: LONG = 0x0002;

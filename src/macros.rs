@@ -293,7 +293,7 @@ macro_rules! UNION {
         [$stype32:ty; $ssize32:expr] [$stype64:ty; $ssize64:expr],
         $($variant:ident $variant_mut:ident: $ftype:ty,)+
     }) => (
-        #[repr(C)] $(#[$attrs])* #[cfg(target_arch = "x86")]
+        #[repr(C)] $(#[$attrs])* #[cfg(target_pointer_width = "32")]
         pub struct $name([$stype32; $ssize32]);
         #[repr(C)] $(#[$attrs])* #[cfg(target_pointer_width = "64")]
         pub struct $name([$stype64; $ssize64]);
