@@ -7004,3 +7004,23 @@ extern "system" {
         hWnd: HWND,
     ) -> BOOL;
 }
+STRUCT!{struct WINDOWINFO {
+    cbSize: DWORD,
+    rcWindow: RECT,
+    rcClient: RECT,
+    dwStyle: DWORD,
+    deExStyle: DWORD,
+    dwWindowStatus: DWORD,
+    cxWindowBorders: UINT,
+    cyWindowBorders: UINT,
+    atomWindowType: ATOM,
+    wCreatorVersion: WORD,
+}}
+pub type PWINDOWINFO = *mut WINDOWINFO;
+pub type LPWINDOWINFO = *mut WINDOWINFO;
+extern "system" {
+    pub fn GetWindowInfo(
+        hwnd: HWND,
+        pwi: PWINDOWINFO
+    ) -> BOOL;
+}
