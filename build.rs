@@ -201,7 +201,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("http", &["guiddef", "minwinbase", "minwindef", "sspi", "winnt", "ws2def"], &["winhttp"]),
     ("imm", &["minwindef", "windef"], &["imm32"]),
     ("interlockedapi", &["minwindef", "winnt"], &["kernel32"]),
-    ("ioapiset", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
+    ("ioapiset", &["basedef", "basetsd", "minwinbase", "minwindef", "ntdef", "winnt"], &["kernel32"]),
     ("jobapi", &["minwindef", "winnt"], &["kernel32"]),
     ("jobapi2", &["basetsd", "minwinbase", "minwindef", "ntdef", "winnt"], &["kernel32"]),
     ("knownfolders", &[], &[]),

@@ -3,8 +3,10 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
+use km::basedef::{PIO_APC_ROUTINE, PIO_STATUS_BLOCK, PVOID};
 use shared::basetsd::{PULONG_PTR, ULONG_PTR};
 use shared::minwindef::{BOOL, DWORD, LPDWORD, LPVOID, PULONG, ULONG};
+use shared::ntdef::NTSTATUS;
 use um::minwinbase::{LPOVERLAPPED, LPOVERLAPPED_ENTRY};
 use um::winnt::HANDLE;
 extern "system" {
@@ -68,4 +70,18 @@ extern "system" {
     pub fn CancelSynchronousIo(
         hThread: HANDLE,
     ) -> BOOL;
+}
+extern "system" {
+    pub fn NtDeviceIoControlFile(
+        FileHandle: Handle,
+        Event: Handle,
+        ApcRoutine: PIO_APC_ROUTINE,
+        ApcContext: PVOID,
+        IoStatusBlock: ULONG,
+        IoControlCode: PVOID,
+        InputBuffer: PVOID,
+        InputBufferLength: ULONG,
+        OutputBuffer: PVOID,
+        OutputBufferLength: ULONG,
+    ) -> NTSTATUS;
 }
