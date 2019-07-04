@@ -195,7 +195,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("fileapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("functiondiscoverykeys_devpkey", &["wtypes"], &[]),
     ("gl-gl", &[], &["opengl32"]),
-    ("handleapi", &["minwindef", "winnt"], &["kernel32"]),
+    ("handleapi", &["minwindef", "winnt"], &["WindowsApp"]),
     ("heapapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("highlevelmonitorconfigurationapi", &["minwindef", "physicalmonitorenumerationapi", "winnt"], &["dxva2"]),
     ("http", &["guiddef", "minwinbase", "minwindef", "sspi", "winnt", "ws2def"], &["winhttp"]),
