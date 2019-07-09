@@ -294,6 +294,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("shobjidl", &["guiddef", "minwindef", "propsys", "shobjidl_core", "shtypes", "unknwnbase", "windef", "winnt"], &[]),
     ("shobjidl_core", &["commctrl", "guiddef", "minwindef", "objidl", "propkeydef", "propsys", "unknwnbase", "windef", "winnt"], &[]),
     ("shtypes", &["guiddef", "minwindef", "winnt"], &[]),
+    ("softpub", &[], &[]),
     ("spapidef", &["minwindef", "winnt"], &[]),
     ("spellcheck", &["minwindef", "ntdef", "objidlbase", "unknwnbase", "winerror"], &[]),
     ("sporder", &["guiddef", "minwindef"], &["sporder"]),
@@ -357,6 +358,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("winsock2", &["basetsd", "guiddef", "inaddr", "minwinbase", "minwindef", "qos", "winbase", "windef", "winerror", "winnt", "ws2def", "wtypesbase"], &["ws2_32"]),
     ("winspool", &["guiddef", "minwinbase", "minwindef", "vcruntime", "windef", "winerror", "wingdi", "winnt"], &["winspool"]),
     ("winsvc", &["minwindef", "winnt"], &["advapi32"]),
+    ("wintrust", &["guiddef", "minwindef", "ntdef", "wincrypt", "windef"], &["wintrust"]),
     ("winusb", &["minwinbase", "minwindef", "usb", "usbspec", "winnt", "winusbio"], &["winusb"]),
     ("winuser", &["basetsd", "guiddef", "limits", "minwinbase", "minwindef", "vadefs", "windef", "wingdi", "winnt"], &["user32"]),
     ("winver", &["minwindef", "winnt"], &["kernel32", "version"]),
@@ -365,6 +367,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("ws2bth", &["bthdef", "bthsdpdef", "guiddef", "minwindef", "winnt", "ws2def"], &[]),
     ("ws2spi", &["basetsd", "guiddef", "minwindef", "vcruntime", "windef", "winnt", "winsock2", "ws2def", "wtypesbase"], &["ws2_32"]),
     ("ws2tcpip", &["guiddef", "minwinbase", "minwindef", "mstcpip", "vcruntime", "winerror", "winnt", "winsock2", "ws2def", "wtypesbase"], &["fwpuclnt", "ws2_32"]),
+    ("wtsapi32", &["minwindef", "ntdef"], &["wtsapi32"]),
     ("xinput", &["guiddef", "minwindef", "winnt"], &["xinput"]),
     // vc
     ("excpt", &[], &[]),
