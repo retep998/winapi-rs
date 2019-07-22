@@ -2435,8 +2435,22 @@ interface ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl):
         ResolveMode: D3D12_RESOLVE_MODE,
     ) -> (),
 }}
-// TODO: Command lists 2 and 3
-RIDL!{#[uuid()]
+RIDL!{#[uuid(0x38C3E585, 0xFF17, 0x412C, 0x91, 0x50, 0x4F, 0xC6, 0xF9, 0xD7, 0x2A, 0x28)]
+interface D3D12GraphicsCommandList2(D3D12GraphicsCommandList2Vtbl):
+    D3D12GraphicsCommandList1(D3D12GraphicsCommandList1Vtbl) {}
+}
+RIDL!{#[uuid(0x6FDA83A7, 0xB84C, 0x4E38, 0x9A, 0xC8, 0xC7, 0xBD, 0x22, 0x01, 0x6B, 0x3D)]
+interface ID3D12GraphicsCommandList3(ID3D12GraphcisCommandList3Vtbl):
+    ID3D12GraphicsCommandList2(ID3D12GraphicsCommandList2Vtbl) {
+        fn SetProtectedResourceSession(
+            pProtectedResourceSession: *ID3D12ProtectedResourceSession,
+        ) -> (),
+}}
+RIDL!{#[uuid(0x6CD696F4, 0xF289, 0x40CC, 0x80, 0x91, 0x5A, 0x6C, 0x0A, 0x09, 0x9C, 0x3D)]
+interface ID3D12ProtectedResourceSession(ID3D12ProtectedResourceSessionVtbl):
+ID3D12ProtectedResourceSession(ID3D12ProtectedResourceSessionVtbl) {}
+}
+RIDL!{#[uuid(0x8754318e, 0xd3a9, 0x4541, 0x98, 0xcf, 0x64, 0x5b, 0x50, 0xdc, 0x48, 0x74)]
 interface ID3D12GraphicsCommandList4(ID3D12GraphcisCommandList4Vtbl):
     ID3D12GraphicsCommandList3(ID3D12GraphicsCommandList3Vtbl) {
         fn BeginRenderPass(
@@ -2467,16 +2481,16 @@ interface ID3D12GraphicsCommandList4(ID3D12GraphcisCommandList4Vtbl):
             Mode: D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE,
         ) -> (),
         fn SetPipelineState1(
-            pStateObjectL: *ID3D12StateObject,
+            pStateObject: *ID3D12StateObject,
         ) -> (),
         fn DispatchRays(
             pDesc: *const D3D12_DISPATCH_RAYS_DESC,
         ) -> ()
 }}
-RIDL!{#[uuid()]
+RIDL!{#[uuid(0xDBB84C27, 0x36CE, 0x4FC9, 0xB8, 0x01, 0xF0, 0x48, 0xC4, 0x6A, 0xC5, 0x70)]
 interface ID3D12MetaCommand(ID3D12MetaCommandVtlbl): ID3D12MetaCommand(ID3D12MetaCommandVtbl) {}
 }
-RIDL!{#[uuid()]
+RIDL!{#[uuid(0x47016943, 0xfca8, 0x4594, 0x93, 0xea, 0xaf, 0x25, 0x8b, 0x55, 0x34, 0x6d)]
 interface ID3D12StateObject(ID3D12StateObjectVtbl): ID3D12StateObject(ID3D12StateObjectVtable) {}
 }
 RIDL!{#[uuid(0x0ec870a6, 0x5d7e, 0x4c22, 0x8c, 0xfc, 0x5b, 0xaa, 0xe0, 0x76, 0x16, 0xed)]
