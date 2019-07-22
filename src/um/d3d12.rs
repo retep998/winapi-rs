@@ -1962,6 +1962,20 @@ ENUM!{enum D3D12_RENDER_PASS_FLAGS {
     D3D12_RENDER_PASS_FLAG_RESUMING_PASS	= 0x4
 }}
 // DXR
+STRUCT!{struct D3D12_GPU_VIRTUAL_ADDRESS_AND_STRIDE{
+    StartAddress: D3D12_GPU_VIRTUAL_ADDRESS,
+    StrideInBytes: UINT64,
+}}
+
+STRUCT!{struct D3D12_GPU_VIRTUAL_ADDRESS_RANGE{
+    StartAddress: D3D12_GPU_VIRTUAL_ADDRESS,
+    SizeInBytes: UINT64,
+}}
+STRUCT!{struct D3D12_GPU_VIRTUAL_ADDRESS_RANGE_AND_STRIDE{
+    StartAddress: D3D12_GPU_VIRTUAL_ADDRESS,
+    SizeInBytes: UINT64,
+    StrideInBytes: UINT64,
+}}
 ENUM!{enum D3D12_RAYTRACING_ACCELERATION_STRUCTURE_TYPE{
     D3D12_RAYTRACING_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL = 0,
     D3D12_RAYTRACING_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL = 0x1
@@ -2017,6 +2031,15 @@ STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC {
     Inputs: D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS,
     SourceAccelerationStructureData: D3D12_GPU_VIRTUAL_ADDRESS,
     ScratchAccelerationStructureData: D3D12_GPU_VIRTUAL_ADDRESS,
+}}
+STRUCT!{struct D3D12_DISPATCH_RAYS_DESC{
+    RayGenerationShaderRecord: D3D12_GPU_VIRTUAL_ADDRESS_RANGE,
+    MissShaderTable: D3D12_GPU_VIRTUAL_ADDRESS_RANGE_AND_STRIDE,
+    HitGroupTable: D3D12_GPU_VIRTUAL_ADDRESS_RANGE_AND_STRIDE,
+    CallableShaderTable: D3D12_GPU_VIRTUAL_ADDRESS_RANGE_AND_STRIDE,
+    Width: UINT,
+    Height: UINT,
+    Depth: UINT,
 }}
 // End ID3D12GraphicsCommandList4 structs, enums, and unions
 RIDL!{#[uuid(0xc4fec28f, 0x7966, 0x4e95, 0x9f, 0x94, 0xf4, 0x31, 0xcb, 0x56, 0xc3, 0xb8)]
@@ -2452,6 +2475,9 @@ interface ID3D12GraphicsCommandList4(ID3D12GraphcisCommandList4Vtbl):
 }}
 RIDL!{#[uuid()]
 interface ID3D12MetaCommand(ID3D12MetaCommandVtlbl): ID3D12MetaCommand(ID3D12MetaCommandVtbl) {}
+}
+RIDL!{#[uuid()]
+interface ID3D12StateObject(ID3D12StateObjectVtbl): ID3D12StateObject(ID3D12StateObjectVtable) {}
 }
 RIDL!{#[uuid(0x0ec870a6, 0x5d7e, 0x4c22, 0x8c, 0xfc, 0x5b, 0xaa, 0xe0, 0x76, 0x16, 0xed)]
 interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
