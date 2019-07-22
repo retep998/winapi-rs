@@ -1901,6 +1901,85 @@ STRUCT!{struct D3D12_COMMAND_SIGNATURE_DESC {
     pArgumentDescs: *const D3D12_INDIRECT_ARGUMENT_DESC,
     NodeMask: UINT,
 }}
+// Begin ID3D12GraphicsCommandList4 structs, enums, and unions
+STRUCT!{struct D3D12_RENDER_PASS_BEGINNING_ACCESS_CLEAR_PARAMETERS {
+    ClearValue: D3D12_CLEAR_VALUE,
+}}
+ENUM!{enum D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE {
+  D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_DISCARD = 0,
+  D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_PRESERVE = 1,
+  D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_CLEAR = 2,
+  D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_NO_ACCESS = 3,
+}}
+UNION!{union D3D12_RENDER_PASS_BEGINNING_ACCESS_u {
+    [u32; 5],
+    Clear Clear_mut: D3D12_RENDER_PASS_BEGINNING_ACCESS_CLEAR_PARAMETERS,
+}}
+STRUCT!{struct D3D12_RENDER_PASS_BEGINNING_ACCESS {
+    Type: D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE,
+    u: D3D12_RENDER_PASS_BEGINNING_ACCESS_u,
+}}
+ENUM!{enum D3D12_RENDER_PASS_ENDING_ACCESS_TYPE {
+    D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_DISCARD = 0,
+    D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_PRESERVE = 1,
+    D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_RESOLVE = 2,
+    D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_NO_ACCESS = 3,
+}}
+STRUCT!{struct D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS {
+  SrcSubresource: UINT,
+  DstSubresource: UINT,
+  DstX: UINT,
+  DstY: UINT,
+  SrcRect: D3D12_RECT,
+}}
+STRUCT!{struct D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS {
+  pSrcResource: *ID3D12Resource,
+  pDstResource: *ID3D12Resource,
+  SubresourceCount: UINT
+  pSubresourceParameters: *const D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS,
+  Format: DXGI_FORMAT,
+  ResolveMode: D3D12_RESOLVE_MODE,
+  PreserveResolveSource: BOOL,
+}}
+UNION!{union D3D12_RENDER_PASS_ENDING_ACCESS_u {
+    [u64; 6],
+    Resolve Resolve_mut D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS,
+}}
+STRUCT!{struct D3D12_RENDER_PASS_ENDING_ACCESS {
+  Type: D3D12_RENDER_PASS_ENDING_ACCESS_TYPE,
+  u: D3D12_RENDER_PASS_ENDING_ACCESS_u,
+}}
+STRUCT!{struct D3D12_RENDER_PASS_RENDER_TARGET_DESC {
+  cpuDescriptor: D3D12_CPU_DESCRIPTOR_HANDLE,
+  BeginningAccess: D3D12_RENDER_PASS_BEGINNING_ACCESS,
+  EndingAccess: D3D12_RENDER_PASS_ENDING_ACCESS,
+}}
+ENUM!{enum D3D12_RENDER_PASS_FLAGS {
+    D3D12_RENDER_PASS_FLAG_NONE	= 0,
+    D3D12_RENDER_PASS_FLAG_ALLOW_UAV_WRITES	= 0x1,
+    D3D12_RENDER_PASS_FLAG_SUSPENDING_PASS	= 0x2,
+    D3D12_RENDER_PASS_FLAG_RESUMING_PASS	= 0x4
+}}
+UNION!{union D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS_u {
+    [u64; 1],
+    InstanceDescs: D3D12_GPU_VIRTUAL_ADDRESS,
+    pGeometryDescs: *const D3D12_RAYTRACING_GEOMETRY_DESC,
+    ppGeometryDescs: *const D3D12_RAYTRACING_GEOMETRY_DESC *const;
+}}
+STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS {
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_TYPE Type,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAGS Flags,
+    UINT NumDescs,
+    D3D12_ELEMENTS_LAYOUT DescsLayout,
+    u: D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS_u,
+}}
+STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC {
+    DestAccelerationStructureData: D3D12_GPU_VIRTUAL_ADDRESS,
+    Inputs: D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS,
+    SourceAccelerationStructureData: D3D12_GPU_VIRTUAL_ADDRESS,
+    ScratchAccelerationStructureData: D3D12_GPU_VIRTUAL_ADDRESS,
+}}
+// End ID3D12GraphicsCommandList4 structs, enums, and unions
 RIDL!{#[uuid(0xc4fec28f, 0x7966, 0x4e95, 0x9f, 0x94, 0xf4, 0x31, 0xcb, 0x56, 0xc3, 0xb8)]
 interface ID3D12Object(ID3D12ObjectVtbl): IUnknown(IUnknownVtbl) {
     fn GetPrivateData(
@@ -2294,6 +2373,47 @@ interface ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl):
         ResolveMode: D3D12_RESOLVE_MODE,
     ) -> (),
 }}
+// TODO: Command lists 2 and 3
+RIDL!{#[uuid()]
+interface ID3D12GraphicsCommandList4(ID3D12GraphcisCommandList4Vtbl):
+    ID3D12GraphicsCommandList3(ID3D12GraphicsCommandList3Vtbl) {
+        fn BeginRenderPass(
+            NumRenderTargets: UINT,
+            pRenderTargets: *const D3D12_RENDER_PASS_RENDER_TARGET_DESC,
+            pDepthStencil: *const D3D12_RENDER_PASS_RENDER_TARGET_DESC,
+            Flags: D3D12_RENDER_PASS_FLAGS
+        ) -> (),
+        fn EndRenderPass() -> (),
+        fn InitializeMetaCommand(
+            pMetaCommand: *mut ID3D12MetaCommand,
+            pInitializationParametersData: *const void,
+            InitializationParametersDataSizeInBytes: SIZE_T,
+        ) -> (),
+        fn ExecuteMetaCommand(
+            pMetaCommand: *mut ID3D12MetaCommand,
+            pExecutionParametersData: *const void,
+            ExecutionParametersDataSizeInBytes: SIZE_T,
+        ) -> (),
+        fn BuildRaytracingAccelerationStructure(
+            pDesc: *const D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC,
+            NumPostbuildInfoDescs: UINT,
+            pPostbuildInfoDescs: *const ID3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC,
+        ) -> (),
+        fn EmitRaytracingAccelerationStructurePostbuildInfo(
+            DestAccelerationStructureData: D3D12_GPU_VIRTUAL_ADDRESS,
+            SourceAccelerationStructureData: D3D12_GPU_VIRTUAL_ADDRESS,
+            Mode: D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE,
+        ) -> (),
+        fn SetPipelineState1(
+            pStateObjectL: *ID3D12StateObject,
+        ) -> (),
+        fn DispatchRays(
+            pDesc: *const D3D12_DISPATCH_RAYS_DESC,
+        ) -> ()
+}}
+RIDL!{#[uuid()]
+interface ID3D12MetaCommand(ID3D12MetaCommandVtlbl): ID3D12MetaCommand(ID3D12MetaCommandVtbl) {}
+}
 RIDL!{#[uuid(0x0ec870a6, 0x5d7e, 0x4c22, 0x8c, 0xfc, 0x5b, 0xaa, 0xe0, 0x76, 0x16, 0xed)]
 interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
     fn UpdateTileMappings(
