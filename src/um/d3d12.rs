@@ -592,6 +592,8 @@ STRUCT!{struct D3D12_BOX {
     back: UINT,
 }}
 
+pub type D3D12_RECT = RECT;
+
 STRUCT!{struct D3D12_HEAP_PROPERTIES {
     Type: D3D12_HEAP_TYPE,
     CPUPageProperty: D3D12_CPU_PAGE_PROPERTY,
@@ -2165,6 +2167,68 @@ interface ID3D12VersionedRootSignatureDeserializer(ID3D12VersionedRootSignatureD
     fn GetUnconvertedRootSignatureDesc(
     ) -> *mut D3D12_VERSIONED_ROOT_SIGNATURE_DESC,
 }}
+
+FN!{stdcall PFN_D3D12_SERIALIZE_ROOT_SIGNATURE(
+    pRootSignature: *const D3D12_ROOT_SIGNATURE_DESC,
+    Version: D3D_ROOT_SIGNATURE_VERSION,
+    ppBlob: *mut *mut ID3DBlob,
+    ppErrorBlob: *mut *mut ID3DBlob,
+) -> HRESULT}
+
+extern "system" {
+    pub fn D3D12SerializeRootSignature(
+        pRootSignature: *const D3D12_ROOT_SIGNATURE_DESC,
+        Version: D3D_ROOT_SIGNATURE_VERSION,
+        ppBlob: *mut *mut ID3DBlob,
+        ppErrorBlob: *mut *mut ID3DBlob,
+    ) -> HRESULT;
+}
+
+FN!{stdcall PFN_D3D12_CREATE_ROOT_SIGNATURE_DESERIALIZER(
+    pSrcData: LPCVOID,
+    SrcDataSizeInBytes: SIZE_T,
+    pRootSignatureDeserializerInterface: REFIID,
+    ppRootSignatureDeserializer: *mut *mut c_void,
+) -> HRESULT}
+
+extern "system" {
+    pub fn D3D12CreateRootSignatureDeserializer(
+        pSrcData: LPCVOID,
+        SrcDataSizeInBytes: SIZE_T,
+        pRootSignatureDeserializerInterface: REFGUID,
+        ppRootSignatureDeserializer: *mut *mut c_void,
+    ) -> HRESULT;
+}
+
+FN!{stdcall PFN_D3D12_SERIALIZE_VERSIONED_ROOT_SIGNATURE(
+    pRootSignature: *const D3D12_VERSIONED_ROOT_SIGNATURE_DESC,
+    ppBlob: *mut *mut ID3DBlob,
+    ppErrorBlob: *mut *mut ID3DBlob,
+) -> HRESULT}
+
+extern "system" {
+    pub fn D3D12SerializeVersionedRootSignature(
+        pRootSignature: *const D3D12_VERSIONED_ROOT_SIGNATURE_DESC,
+        ppBlob: *mut *mut ID3DBlob,
+        ppErrorBlob: *mut *mut ID3DBlob,
+    ) -> HRESULT;
+}
+
+FN!{stdcall PFN_D3D12_CREATE_VERSIONED_ROOT_SIGNATURE_DESERIALIZER(
+    pSrcData: LPCVOID,
+    SrcDataSizeInBytes: SIZE_T,
+    pRootSignatureDeserializerInterface: REFIID,
+    ppRootSignatureDeserializer: *mut *mut c_void,
+) -> HRESULT}
+
+extern "system" {
+    pub fn D3D12CreateVersionedRootSignatureDeserializer(
+        pSrcData: LPCVOID,
+        SrcDataSizeInBytes: SIZE_T,
+        pRootSignatureDeserializerInterface: REFIID,
+        ppRootSignatureDeserializer: *mut *mut c_void,
+    ) -> HRESULT;
+}
 
 STRUCT!{struct D3D12_CPU_DESCRIPTOR_HANDLE {
     ptr: ULONG_PTR,
@@ -3841,3 +3905,37 @@ STRUCT!{struct D3D12_MEMCPY_DEST {
     RowPitch: ULONG_PTR,
     SlicePitch: ULONG_PTR,
 }}
+
+FN!{stdcall PFN_D3D12_CREATE_DEVICE(
+    *mut IUnknown,
+    D3D_FEATURE_LEVEL,
+    REFIID,
+    *mut *mut c_void,
+) -> HRESULT}
+
+extern "system" {
+    pub fn D3D12CreateDevice(
+        pAdapter: *mut IUnknown,
+        MinimumFeatureLevel: D3D_FEATURE_LEVEL,
+        riid: REFGUID,
+        ppDevice: *mut *mut c_void,
+    ) -> HRESULT;
+}
+
+FN!{stdcall PFN_D3D12_GET_DEBUG_INTERFACE(
+    REFIID,
+    *mut *mut c_void,
+) -> HRESULT}
+
+extern "system" {
+    pub fn D3D12GetDebugInterface(
+        riid: REFGUID,
+        ppvDebug: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn D3D12EnableExperimentalFeatures(
+        NumFeatures: UINT,
+        pIIDs: *const IID,
+        pConfigurationStructs: *mut c_void,
+        pConfigurationStructSizes: *mut UINT,
+    ) -> HRESULT;
+}
