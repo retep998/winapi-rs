@@ -3408,7 +3408,7 @@ STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS {
 }}
 
 UNION!{union __MIDL___MIDL_itf_d3d12_0001_0033_0002 {
-    u64,
+    [u64; 1],
     InstanceDescs InstanceDescs_mut: u64,
     pGeometryDescs pGeometryDescs_mut: *mut D3D12_RAYTRACING_GEOMETRY_DESC,
     ppGeometryDescs ppGeometryDescs_mut: *mut *mut D3D12_RAYTRACING_GEOMETRY_DESC,
