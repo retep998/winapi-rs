@@ -7,13 +7,13 @@ use ctypes::c_void;
 use shared::basetsd::{INT8, LONG_PTR, SIZE_T, UINT16, UINT64, UINT8};
 use shared::dxgiformat::DXGI_FORMAT;
 use shared::dxgitype::DXGI_SAMPLE_DESC;
-use shared::guiddef::{IID, REFGUID, REFIID};
+use shared::guiddef::{GUID, IID, REFGUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, LPCVOID, UINT};
 use shared::windef::RECT;
 use um::d3dcommon::{D3D_FEATURE_LEVEL, D3D_PRIMITIVE, D3D_PRIMITIVE_TOPOLOGY, ID3DBlob};
 use um::minwinbase::SECURITY_ATTRIBUTES;
-use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HANDLE, HRESULT, LPCSTR, LPCWSTR, LUID};
+use um::unknwnbase::{LPUNKNOWN, IUnknown, IUnknownVtbl};
+use um::winnt::{HANDLE, HRESULT, LPCSTR, LPSTR, LPCWSTR, LUID};
 
 pub const D3D12_16BIT_INDEX_STRIP_CUT_VALUE: UINT = 0xffff;
 pub const D3D12_32BIT_INDEX_STRIP_CUT_VALUE: UINT = 0xffffffff;
@@ -4157,8 +4157,6 @@ STRUCT!{struct D3D12_SUBRESOURCE_DATA {
     RowPitch: LONG_PTR,
     SlicePitch: LONG_PTR,
 }}
-
-pub type LONG_PTR = i64;
 
 STRUCT!{struct D3D12_MEMCPY_DEST {
     pData: *mut c_void,
