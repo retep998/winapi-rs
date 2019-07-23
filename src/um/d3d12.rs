@@ -1,3 +1,10 @@
+use um::unknwnbase::IUnknownVtbl;
+use shared::guiddef::GUID;
+use shared::minwindef::UINT;
+use _core::ffi::c_void;
+use um::unknwnbase::LPUNKNOWN;
+use um::winnt::{HRESULT, LPCWSTR};
+
 RIDL!{#[uuid(0xc4fec28f, 0x7966, 0x4e95, 0x9f, 0x94, 0xf4, 0x31, 0xcb, 0x56, 0xc3, 0xb8)]
 interface ID3D12Object(ID3D12ObjectVtbl): IUnknown(IUnknownVtbl) {
     fn GetPrivateData(
