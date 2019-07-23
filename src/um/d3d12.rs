@@ -1280,7 +1280,7 @@ STRUCT!{struct D3D12_CLEAR_VALUE {
     __MIDL____MIDL_itf_d3d12_0001_00000000: __MIDL___MIDL_itf_d3d12_0001_0000_0001,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0000_0001 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0000_0001 {
     [u32; 4],
     Color Color_mut: [f32; 4],
     DepthStencil DepthStencil_mut: D3D12_DEPTH_STENCIL_VALUE,
@@ -1391,7 +1391,7 @@ STRUCT!{struct D3D12_RESOURCE_BARRIER {
     __MIDL____MIDL_itf_d3d12_0001_00000001: __MIDL___MIDL_itf_d3d12_0001_0000_0002,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0000_0002 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0000_0002 {
     [u64; 3],
     Transition Transition_mut: D3D12_RESOURCE_TRANSITION_BARRIER,
     Aliasing Aliasing_mut: D3D12_RESOURCE_ALIASING_BARRIER,
@@ -1422,7 +1422,7 @@ STRUCT!{struct D3D12_TEXTURE_COPY_LOCATION {
     __MIDL____MIDL_itf_d3d12_0001_00000002: __MIDL___MIDL_itf_d3d12_0001_0000_0003,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0000_0003 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0000_0003 {
     [u64; 4],
     PlacedFootprint PlacedFootprint_mut: D3D12_PLACED_SUBRESOURCE_FOOTPRINT,
     SubresourceIndex SubresourceIndex_mut: UINT,
@@ -1562,7 +1562,7 @@ STRUCT!{struct D3D12_SHADER_RESOURCE_VIEW_DESC {
     __MIDL____MIDL_itf_d3d12_0001_00000003: __MIDL___MIDL_itf_d3d12_0001_0000_0004,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0000_0004 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0000_0004 {
     [u64; 3],
     Buffer Buffer_mut: D3D12_BUFFER_SRV,
     Texture1D Texture1D_mut: D3D12_TEX1D_SRV,
@@ -1711,7 +1711,7 @@ STRUCT!{struct D3D12_UNORDERED_ACCESS_VIEW_DESC {
     __MIDL____MIDL_itf_d3d12_0001_00000004: __MIDL___MIDL_itf_d3d12_0001_0000_0005,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0000_0005 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0000_0005 {
     [u64; 4],
     Buffer Buffer_mut: D3D12_BUFFER_UAV,
     Texture1D Texture1D_mut: D3D12_TEX1D_UAV,
@@ -1781,7 +1781,7 @@ STRUCT!{struct D3D12_RENDER_TARGET_VIEW_DESC {
     __MIDL____MIDL_itf_d3d12_0001_00000005: __MIDL___MIDL_itf_d3d12_0001_0000_0006,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0000_0006 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0000_0006 {
     [u64; 2],
     Buffer Buffer_mut: D3D12_BUFFER_RTV,
     Texture1D Texture1D_mut: D3D12_TEX1D_RTV,
@@ -1845,7 +1845,7 @@ STRUCT!{struct D3D12_DEPTH_STENCIL_VIEW_DESC {
     __MIDL____MIDL_itf_d3d12_0001_00000006: __MIDL___MIDL_itf_d3d12_0001_0000_0007,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0000_0007 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0000_0007 {
     [u32; 3],
     Texture1D Texture1D_mut: D3D12_TEX1D_DSV,
     Texture1DArray Texture1DArray_mut: D3D12_TEX1D_ARRAY_DSV,
@@ -1941,7 +1941,7 @@ STRUCT!{struct D3D12_ROOT_PARAMETER {
     ShaderVisibility: D3D12_SHADER_VISIBILITY,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0000_0008 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0000_0008 {
     [u64; 2],
     DescriptorTable DescriptorTable_mut: D3D12_ROOT_DESCRIPTOR_TABLE,
     Constants Constants_mut: D3D12_ROOT_CONSTANTS,
@@ -2032,7 +2032,7 @@ STRUCT!{struct D3D12_ROOT_PARAMETER1 {
     ShaderVisibility: D3D12_SHADER_VISIBILITY,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0000_0009 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0000_0009 {
     [u64; 2],
     DescriptorTable DescriptorTable_mut: D3D12_ROOT_DESCRIPTOR_TABLE1,
     Constants Constants_mut: D3D12_ROOT_CONSTANTS,
@@ -2052,7 +2052,7 @@ STRUCT!{struct D3D12_VERSIONED_ROOT_SIGNATURE_DESC {
     __MIDL____MIDL_itf_d3d12_0001_00000009: __MIDL___MIDL_itf_d3d12_0001_0000_0010,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0000_0010 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0000_0010 {
     [u64; 5],
     Desc_1_0 Desc_1_0_mut: D3D12_ROOT_SIGNATURE_DESC,
     Desc_1_1 Desc_1_1_mut: D3D12_ROOT_SIGNATURE_DESC1,
@@ -2196,7 +2196,7 @@ STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC {
     __MIDL____MIDL_itf_d3d12_0001_00020000: __MIDL___MIDL_itf_d3d12_0001_0002_0001,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0002_0001 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0002_0001 {
     [u32; 3],
     VertexBuffer VertexBuffer_mut: __MIDL___MIDL_itf_d3d12_0001_0002_0002,
     Constant Constant_mut: __MIDL___MIDL_itf_d3d12_0001_0002_0003,
@@ -3393,7 +3393,7 @@ STRUCT!{struct D3D12_RAYTRACING_GEOMETRY_DESC {
     __MIDL____MIDL_itf_d3d12_0001_00330000: __MIDL___MIDL_itf_d3d12_0001_0033_0001,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0033_0001 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0033_0001 {
     [u64; 6],
     Triangles Triangles_mut: D3D12_RAYTRACING_GEOMETRY_TRIANGLES_DESC,
     AABBs AABBs_mut: D3D12_RAYTRACING_GEOMETRY_AABBS_DESC,
@@ -3407,7 +3407,7 @@ STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS {
     __MIDL____MIDL_itf_d3d12_0001_00330001: __MIDL___MIDL_itf_d3d12_0001_0033_0002,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0033_0002 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0033_0002 {
     u64,
     InstanceDescs InstanceDescs_mut: u64,
     pGeometryDescs pGeometryDescs_mut: *mut D3D12_RAYTRACING_GEOMETRY_DESC,
@@ -3563,7 +3563,7 @@ STRUCT!{struct D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA {
     __MIDL____MIDL_itf_d3d12_0001_00340000: __MIDL___MIDL_itf_d3d12_0001_0034_0001,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0034_0001 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0034_0001 {
     [u64; 2],
     Dred_1_0 Dred_1_0_mut: D3D12_DEVICE_REMOVED_EXTENDED_DATA,
 }}
@@ -3607,7 +3607,7 @@ STRUCT!{struct D3D12_RENDER_PASS_BEGINNING_ACCESS {
     __MIDL____MIDL_itf_d3d12_0001_00370000: __MIDL___MIDL_itf_d3d12_0001_0037_0001,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0037_0001 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0037_0001 {
     [u32; 5],
     Clear Clear_mut: D3D12_RENDER_PASS_BEGINNING_ACCESS_CLEAR_PARAMETERS,
 }}
@@ -3642,7 +3642,7 @@ STRUCT!{struct D3D12_RENDER_PASS_ENDING_ACCESS {
     __MIDL____MIDL_itf_d3d12_0001_00370001: __MIDL___MIDL_itf_d3d12_0001_0037_0002,
 }}
 
-UNION2!{union __MIDL___MIDL_itf_d3d12_0001_0037_0002 {
+UNION!{union __MIDL___MIDL_itf_d3d12_0001_0037_0002 {
     [u64; 6],
     Resolve Resolve_mut: D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS,
 }}
