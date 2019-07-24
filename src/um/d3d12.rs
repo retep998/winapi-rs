@@ -415,17 +415,17 @@ pub type D3D12_GPU_VIRTUAL_ADDRESS = UINT64;
 RIDL!{#[uuid(0xc4fec28f, 0x7966, 0x4e95, 0x9f, 0x94, 0xf4, 0x31, 0xcb, 0x56, 0xc3, 0xb8)]
 interface ID3D12Object(ID3D12ObjectVtbl): IUnknown(IUnknownVtbl) {
     fn GetPrivateData(
-        guid: *mut GUID,
-        pDataSize: *mut UINT,
-        pData: *mut c_void,
+        guid: *const GUID,
+        pDataSize: *const UINT,
+        pData: *const c_void,
     ) -> HRESULT,
     fn SetPrivateData(
-        guid: *mut GUID,
+        guid: *const GUID,
         DataSize: UINT,
-        pData: *mut c_void,
+        pData: *const c_void,
     ) -> HRESULT,
     fn SetPrivateDataInterface(
-        guid: *mut GUID,
+        guid: *const GUID,
         pData: LPUNKNOWN,
     ) -> HRESULT,
     fn SetName(
@@ -437,7 +437,7 @@ RIDL!{#[uuid(0x905db94b, 0xa00c, 0x4140, 0x9d, 0xf5, 0x2b, 0x64, 0xca, 0x9e, 0xa
 interface ID3D12DeviceChild(ID3D12DeviceChildVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     fn GetDevice(
         riid: *const GUID,
-        ppvDevice: *mut *mut c_void,
+        ppvDevice: *const *const c_void,
     ) -> HRESULT,
 }}
 
@@ -448,55 +448,55 @@ interface ID3D12Pageable(ID3D12PageableVtbl): ID3D12DeviceChild(ID3D12DeviceChil
 RIDL!{#[uuid(0x0ec870a6, 0x5d7e, 0x4c22, 0x8c, 0xfc, 0x5b, 0xaa, 0xe0, 0x76, 0x16, 0xed)]
 interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
     fn UpdateTileMappings(
-        pResource: *mut ID3D12Resource,
+        pResource: *const ID3D12Resource,
         NumResourceRegions: UINT,
-        pResourceRegionStartCoordinates: *mut D3D12_TILED_RESOURCE_COORDINATE,
-        pResourceRegionSizes: *mut D3D12_TILE_REGION_SIZE,
-        pHeap: *mut ID3D12Heap,
+        pResourceRegionStartCoordinates: *const D3D12_TILED_RESOURCE_COORDINATE,
+        pResourceRegionSizes: *const D3D12_TILE_REGION_SIZE,
+        pHeap: *const ID3D12Heap,
         NumRanges: UINT,
-        pRangeFlags: *mut D3D12_TILE_RANGE_FLAGS,
-        pHeapRangeStartOffsets: *mut UINT,
-        pRangeTileCounts: *mut UINT,
+        pRangeFlags: *const D3D12_TILE_RANGE_FLAGS,
+        pHeapRangeStartOffsets: *const UINT,
+        pRangeTileCounts: *const UINT,
         Flags: D3D12_TILE_MAPPING_FLAGS,
     ) -> c_void,
     fn CopyTileMappings(
-        pDstResource: *mut ID3D12Resource,
-        pDstRegionStartCoordinate: *mut D3D12_TILED_RESOURCE_COORDINATE,
-        pSrcResource: *mut ID3D12Resource,
-        pSrcRegionStartCoordinate: *mut D3D12_TILED_RESOURCE_COORDINATE,
-        pRegionSize: *mut D3D12_TILE_REGION_SIZE,
+        pDstResource: *const ID3D12Resource,
+        pDstRegionStartCoordinate: *const D3D12_TILED_RESOURCE_COORDINATE,
+        pSrcResource: *const ID3D12Resource,
+        pSrcRegionStartCoordinate: *const D3D12_TILED_RESOURCE_COORDINATE,
+        pRegionSize: *const D3D12_TILE_REGION_SIZE,
         Flags: D3D12_TILE_MAPPING_FLAGS,
     ) -> c_void,
     fn ExecuteCommandLists(
         NumCommandLists: UINT,
-        ppCommandLists: *mut *mut ID3D12CommandList,
+        ppCommandLists: *const *const ID3D12CommandList,
     ) -> c_void,
     fn SetMarker(
         Metadata: UINT,
-        pData: *mut c_void,
+        pData: *const c_void,
         Size: UINT,
     ) -> c_void,
     fn BeginEvent(
         Metadata: UINT,
-        pData: *mut c_void,
+        pData: *const c_void,
         Size: UINT,
     ) -> c_void,
     fn EndEvent(
     ) -> c_void,
     fn Signal(
-        pFence: *mut ID3D12Fence,
+        pFence: *const ID3D12Fence,
         Value: u64,
     ) -> HRESULT,
     fn Wait(
-        pFence: *mut ID3D12Fence,
+        pFence: *const ID3D12Fence,
         Value: u64,
     ) -> HRESULT,
     fn GetTimestampFrequency(
-        pFrequency: *mut u64,
+        pFrequency: *const u64,
     ) -> HRESULT,
     fn GetClockCalibration(
-        pGpuTimestamp: *mut u64,
-        pCpuTimestamp: *mut u64,
+        pGpuTimestamp: *const u64,
+        pCpuTimestamp: *const u64,
     ) -> HRESULT,
     fn GetDesc(
     ) -> D3D12_COMMAND_QUEUE_DESC,
@@ -506,12 +506,12 @@ RIDL!{#[uuid(0x696442be, 0xa72e, 0x4059, 0xbc, 0x79, 0x5b, 0x5c, 0x98, 0x04, 0x0
 interface ID3D12Resource(ID3D12ResourceVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
     fn Map(
         Subresource: UINT,
-        pReadRange: *mut D3D12_RANGE,
-        ppData: *mut *mut c_void,
+        pReadRange: *const D3D12_RANGE,
+        ppData: *const *const c_void,
     ) -> HRESULT,
     fn Unmap(
         Subresource: UINT,
-        pWrittenRange: *mut D3D12_RANGE,
+        pWrittenRange: *const D3D12_RANGE,
     ) -> c_void,
     fn GetDesc(
     ) -> D3D12_RESOURCE_DESC,
@@ -519,21 +519,21 @@ interface ID3D12Resource(ID3D12ResourceVtbl): ID3D12Pageable(ID3D12PageableVtbl)
     ) -> u64,
     fn WriteToSubresource(
         DstSubresource: UINT,
-        pDstBox: *mut D3D12_BOX,
-        pSrcData: *mut c_void,
+        pDstBox: *const D3D12_BOX,
+        pSrcData: *const c_void,
         SrcRowPitch: UINT,
         SrcDepthPitch: UINT,
     ) -> HRESULT,
     fn ReadFromSubresource(
-        pDstData: *mut c_void,
+        pDstData: *const c_void,
         DstRowPitch: UINT,
         DstDepthPitch: UINT,
         SrcSubresource: UINT,
-        pSrcBox: *mut D3D12_BOX,
+        pSrcBox: *const D3D12_BOX,
     ) -> HRESULT,
     fn GetHeapProperties(
-        pHeapProperties: *mut D3D12_HEAP_PROPERTIES,
-        pHeapFlags: *mut D3D12_HEAP_FLAGS,
+        pHeapProperties: *const D3D12_HEAP_PROPERTIES,
+        pHeapFlags: *const D3D12_HEAP_FLAGS,
     ) -> HRESULT,
 }}
 
@@ -700,7 +700,7 @@ interface ID3D12Fence(ID3D12FenceVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
     ) -> u64,
     fn SetEventOnCompletion(
         Value: u64,
-        hEvent: *mut c_void,
+        hEvent: *const c_void,
     ) -> HRESULT,
     fn Signal(
         Value: u64,
@@ -939,20 +939,20 @@ interface ID3D12RootSignature(ID3D12RootSignatureVtbl): ID3D12DeviceChild(ID3D12
 }}
 
 STRUCT!{struct D3D12_SHADER_BYTECODE {
-    pShaderBytecode: *mut c_void,
+    pShaderBytecode: *const c_void,
     BytecodeLength: usize,
 }}
 
 STRUCT!{struct D3D12_STREAM_OUTPUT_DESC {
-    pSODeclaration: *mut D3D12_SO_DECLARATION_ENTRY,
+    pSODeclaration: *const D3D12_SO_DECLARATION_ENTRY,
     NumEntries: UINT,
-    pBufferStrides: *mut UINT,
+    pBufferStrides: *const UINT,
     NumStrides: UINT,
     RasterizedStream: UINT,
 }}
 
 STRUCT!{struct D3D12_INPUT_LAYOUT_DESC {
-    pInputElementDescs: *mut D3D12_INPUT_ELEMENT_DESC,
+    pInputElementDescs: *const D3D12_INPUT_ELEMENT_DESC,
     NumElements: UINT,
 }}
 
@@ -963,7 +963,7 @@ ENUM!{enum D3D12_INDEX_BUFFER_STRIP_CUT_VALUE {
 }}
 
 STRUCT!{struct D3D12_CACHED_PIPELINE_STATE {
-    pCachedBlob: *mut c_void,
+    pCachedBlob: *const c_void,
     CachedBlobSizeInBytes: usize,
 }}
 
@@ -973,7 +973,7 @@ ENUM!{enum D3D12_PIPELINE_STATE_FLAGS {
 }}
 
 STRUCT!{struct D3D12_GRAPHICS_PIPELINE_STATE_DESC {
-    pRootSignature: *mut ID3D12RootSignature,
+    pRootSignature: *const ID3D12RootSignature,
     VS: D3D12_SHADER_BYTECODE,
     PS: D3D12_SHADER_BYTECODE,
     DS: D3D12_SHADER_BYTECODE,
@@ -997,7 +997,7 @@ STRUCT!{struct D3D12_GRAPHICS_PIPELINE_STATE_DESC {
 }}
 
 STRUCT!{struct D3D12_COMPUTE_PIPELINE_STATE_DESC {
-    pRootSignature: *mut ID3D12RootSignature,
+    pRootSignature: *const ID3D12RootSignature,
     CS: D3D12_SHADER_BYTECODE,
     NodeMask: UINT,
     CachedPSO: D3D12_CACHED_PIPELINE_STATE,
@@ -1011,7 +1011,7 @@ STRUCT!{struct D3D12_RT_FORMAT_ARRAY {
 
 STRUCT!{struct D3D12_PIPELINE_STATE_STREAM_DESC {
     SizeInBytes: usize,
-    pPipelineStateSubobjectStream: *mut c_void,
+    pPipelineStateSubobjectStream: *const c_void,
 }}
 
 ENUM!{enum D3D12_PIPELINE_STATE_SUBOBJECT_TYPE {
@@ -1230,7 +1230,7 @@ STRUCT!{struct D3D12_FEATURE_DATA_ARCHITECTURE1 {
 
 STRUCT!{struct D3D12_FEATURE_DATA_FEATURE_LEVELS {
     NumFeatureLevels: UINT,
-    pFeatureLevelsRequested: *mut D3D_FEATURE_LEVEL,
+    pFeatureLevelsRequested: *const D3D_FEATURE_LEVEL,
     MaxSupportedFeatureLevel: D3D_FEATURE_LEVEL,
 }}
 
@@ -1458,19 +1458,19 @@ ENUM!{enum D3D12_RESOURCE_BARRIER_TYPE {
 }}
 
 STRUCT!{struct D3D12_RESOURCE_TRANSITION_BARRIER {
-    pResource: *mut ID3D12Resource,
+    pResource: *const ID3D12Resource,
     Subresource: UINT,
     StateBefore: D3D12_RESOURCE_STATES,
     StateAfter: D3D12_RESOURCE_STATES,
 }}
 
 STRUCT!{struct D3D12_RESOURCE_ALIASING_BARRIER {
-    pResourceBefore: *mut ID3D12Resource,
-    pResourceAfter: *mut ID3D12Resource,
+    pResourceBefore: *const ID3D12Resource,
+    pResourceAfter: *const ID3D12Resource,
 }}
 
 STRUCT!{struct D3D12_RESOURCE_UAV_BARRIER {
-    pResource: *mut ID3D12Resource,
+    pResource: *const ID3D12Resource,
 }}
 
 ENUM!{enum D3D12_RESOURCE_BARRIER_FLAGS {
@@ -1511,7 +1511,7 @@ ENUM!{enum D3D12_TEXTURE_COPY_TYPE {
 }}
 
 STRUCT!{struct D3D12_TEXTURE_COPY_LOCATION {
-    pResource: *mut ID3D12Resource,
+    pResource: *const ID3D12Resource,
     Type: D3D12_TEXTURE_COPY_TYPE,
     __MIDL____MIDL_itf_d3d12_0001_00000002: __MIDL___MIDL_itf_d3d12_0001_0000_0003,
 }}
@@ -1546,7 +1546,7 @@ ENUM!{enum D3D12_VIEW_INSTANCING_FLAGS {
 
 STRUCT!{struct D3D12_VIEW_INSTANCING_DESC {
     ViewInstanceCount: UINT,
-    pViewInstanceLocations: *mut D3D12_VIEW_INSTANCE_LOCATION,
+    pViewInstanceLocations: *const D3D12_VIEW_INSTANCE_LOCATION,
     Flags: D3D12_VIEW_INSTANCING_FLAGS,
 }}
 
@@ -1998,7 +1998,7 @@ STRUCT!{struct D3D12_DESCRIPTOR_RANGE {
 
 STRUCT!{struct D3D12_ROOT_DESCRIPTOR_TABLE {
     NumDescriptorRanges: UINT,
-    pDescriptorRanges: *mut D3D12_DESCRIPTOR_RANGE,
+    pDescriptorRanges: *const D3D12_DESCRIPTOR_RANGE,
 }}
 
 STRUCT!{struct D3D12_ROOT_CONSTANTS {
@@ -2078,9 +2078,9 @@ STRUCT!{struct D3D12_STATIC_SAMPLER_DESC {
 
 STRUCT!{struct D3D12_ROOT_SIGNATURE_DESC {
     NumParameters: UINT,
-    pParameters: *mut D3D12_ROOT_PARAMETER,
+    pParameters: *const D3D12_ROOT_PARAMETER,
     NumStaticSamplers: UINT,
-    pStaticSamplers: *mut D3D12_STATIC_SAMPLER_DESC,
+    pStaticSamplers: *const D3D12_STATIC_SAMPLER_DESC,
     Flags: D3D12_ROOT_SIGNATURE_FLAGS,
 }}
 
@@ -2104,7 +2104,7 @@ STRUCT!{struct D3D12_DESCRIPTOR_RANGE1 {
 
 STRUCT!{struct D3D12_ROOT_DESCRIPTOR_TABLE1 {
     NumDescriptorRanges: UINT,
-    pDescriptorRanges: *mut D3D12_DESCRIPTOR_RANGE1,
+    pDescriptorRanges: *const D3D12_DESCRIPTOR_RANGE1,
 }}
 
 ENUM!{enum D3D12_ROOT_DESCRIPTOR_FLAGS {
@@ -2135,9 +2135,9 @@ UNION!{union __MIDL___MIDL_itf_d3d12_0001_0000_0009 {
 
 STRUCT!{struct D3D12_ROOT_SIGNATURE_DESC1 {
     NumParameters: UINT,
-    pParameters: *mut D3D12_ROOT_PARAMETER1,
+    pParameters: *const D3D12_ROOT_PARAMETER1,
     NumStaticSamplers: UINT,
-    pStaticSamplers: *mut D3D12_STATIC_SAMPLER_DESC,
+    pStaticSamplers: *const D3D12_STATIC_SAMPLER_DESC,
     Flags: D3D12_ROOT_SIGNATURE_FLAGS,
 }}
 
@@ -2155,32 +2155,32 @@ UNION!{union __MIDL___MIDL_itf_d3d12_0001_0000_0010 {
 RIDL!{#[uuid(0x34ab647b, 0x3cc8, 0x46ac, 0x84, 0x1b, 0xc0, 0x96, 0x56, 0x45, 0xc0, 0x46)]
 interface ID3D12RootSignatureDeserializer(ID3D12RootSignatureDeserializerVtbl): IUnknown(IUnknownVtbl) {
     fn GetRootSignatureDesc(
-    ) -> *mut D3D12_ROOT_SIGNATURE_DESC,
+    ) -> *const D3D12_ROOT_SIGNATURE_DESC,
 }}
 
 RIDL!{#[uuid(0x7f91ce67, 0x090c, 0x4bb7, 0xb7, 0x8e, 0xed, 0x8f, 0xf2, 0xe3, 0x1d, 0xa0)]
 interface ID3D12VersionedRootSignatureDeserializer(ID3D12VersionedRootSignatureDeserializerVtbl): IUnknown(IUnknownVtbl) {
     fn GetRootSignatureDescAtVersion(
         convertToVersion: D3D_ROOT_SIGNATURE_VERSION,
-        ppDesc: *mut *mut D3D12_VERSIONED_ROOT_SIGNATURE_DESC,
+        ppDesc: *const *const D3D12_VERSIONED_ROOT_SIGNATURE_DESC,
     ) -> HRESULT,
     fn GetUnconvertedRootSignatureDesc(
-    ) -> *mut D3D12_VERSIONED_ROOT_SIGNATURE_DESC,
+    ) -> *const D3D12_VERSIONED_ROOT_SIGNATURE_DESC,
 }}
 
 FN!{stdcall PFN_D3D12_SERIALIZE_ROOT_SIGNATURE(
     pRootSignature: *const D3D12_ROOT_SIGNATURE_DESC,
     Version: D3D_ROOT_SIGNATURE_VERSION,
-    ppBlob: *mut *mut ID3DBlob,
-    ppErrorBlob: *mut *mut ID3DBlob,
+    ppBlob: *const *const ID3DBlob,
+    ppErrorBlob: *const *const ID3DBlob,
 ) -> HRESULT}
 
 extern "system" {
     pub fn D3D12SerializeRootSignature(
         pRootSignature: *const D3D12_ROOT_SIGNATURE_DESC,
         Version: D3D_ROOT_SIGNATURE_VERSION,
-        ppBlob: *mut *mut ID3DBlob,
-        ppErrorBlob: *mut *mut ID3DBlob,
+        ppBlob: *const *const ID3DBlob,
+        ppErrorBlob: *const *const ID3DBlob,
     ) -> HRESULT;
 }
 
@@ -2188,7 +2188,7 @@ FN!{stdcall PFN_D3D12_CREATE_ROOT_SIGNATURE_DESERIALIZER(
     pSrcData: LPCVOID,
     SrcDataSizeInBytes: SIZE_T,
     pRootSignatureDeserializerInterface: REFIID,
-    ppRootSignatureDeserializer: *mut *mut c_void,
+    ppRootSignatureDeserializer: *const *const c_void,
 ) -> HRESULT}
 
 extern "system" {
@@ -2196,21 +2196,21 @@ extern "system" {
         pSrcData: LPCVOID,
         SrcDataSizeInBytes: SIZE_T,
         pRootSignatureDeserializerInterface: REFGUID,
-        ppRootSignatureDeserializer: *mut *mut c_void,
+        ppRootSignatureDeserializer: *const *const c_void,
     ) -> HRESULT;
 }
 
 FN!{stdcall PFN_D3D12_SERIALIZE_VERSIONED_ROOT_SIGNATURE(
     pRootSignature: *const D3D12_VERSIONED_ROOT_SIGNATURE_DESC,
-    ppBlob: *mut *mut ID3DBlob,
-    ppErrorBlob: *mut *mut ID3DBlob,
+    ppBlob: *const *const ID3DBlob,
+    ppErrorBlob: *const *const ID3DBlob,
 ) -> HRESULT}
 
 extern "system" {
     pub fn D3D12SerializeVersionedRootSignature(
         pRootSignature: *const D3D12_VERSIONED_ROOT_SIGNATURE_DESC,
-        ppBlob: *mut *mut ID3DBlob,
-        ppErrorBlob: *mut *mut ID3DBlob,
+        ppBlob: *const *const ID3DBlob,
+        ppErrorBlob: *const *const ID3DBlob,
     ) -> HRESULT;
 }
 
@@ -2218,7 +2218,7 @@ FN!{stdcall PFN_D3D12_CREATE_VERSIONED_ROOT_SIGNATURE_DESERIALIZER(
     pSrcData: LPCVOID,
     SrcDataSizeInBytes: SIZE_T,
     pRootSignatureDeserializerInterface: REFIID,
-    ppRootSignatureDeserializer: *mut *mut c_void,
+    ppRootSignatureDeserializer: *const *const c_void,
 ) -> HRESULT}
 
 extern "system" {
@@ -2226,7 +2226,7 @@ extern "system" {
         pSrcData: LPCVOID,
         SrcDataSizeInBytes: SIZE_T,
         pRootSignatureDeserializerInterface: REFIID,
-        ppRootSignatureDeserializer: *mut *mut c_void,
+        ppRootSignatureDeserializer: *const *const c_void,
     ) -> HRESULT;
 }
 
@@ -2386,7 +2386,7 @@ STRUCT!{struct __MIDL___MIDL_itf_d3d12_0001_0002_0006 {
 STRUCT!{struct D3D12_COMMAND_SIGNATURE_DESC {
     ByteStride: UINT,
     NumArgumentDescs: UINT,
-    pArgumentDescs: *mut D3D12_INDIRECT_ARGUMENT_DESC,
+    pArgumentDescs: *const D3D12_INDIRECT_ARGUMENT_DESC,
     NodeMask: UINT,
 }}
 
@@ -2395,89 +2395,89 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     fn GetNodeCount(
     ) -> UINT,
     fn CreateCommandQueue(
-        pDesc: *mut D3D12_COMMAND_QUEUE_DESC,
+        pDesc: *const D3D12_COMMAND_QUEUE_DESC,
         riid: *const GUID,
-        ppCommandQueue: *mut *mut c_void,
+        ppCommandQueue: *const *const c_void,
     ) -> HRESULT,
     fn CreateCommandAllocator(
         Type: D3D12_COMMAND_LIST_TYPE,
         riid: *const GUID,
-        ppCommandAllocator: *mut *mut c_void,
+        ppCommandAllocator: *const *const c_void,
     ) -> HRESULT,
     fn CreateGraphicsPipelineState(
-        pDesc: *mut D3D12_GRAPHICS_PIPELINE_STATE_DESC,
+        pDesc: *const D3D12_GRAPHICS_PIPELINE_STATE_DESC,
         riid: *const GUID,
-        ppPipelineState: *mut *mut c_void,
+        ppPipelineState: *const *const c_void,
     ) -> HRESULT,
     fn CreateComputePipelineState(
-        pDesc: *mut D3D12_COMPUTE_PIPELINE_STATE_DESC,
+        pDesc: *const D3D12_COMPUTE_PIPELINE_STATE_DESC,
         riid: *const GUID,
-        ppPipelineState: *mut *mut c_void,
+        ppPipelineState: *const *const c_void,
     ) -> HRESULT,
     fn CreateCommandList(
         NodeMask: UINT,
         Type: D3D12_COMMAND_LIST_TYPE,
-        pCommandAllocator: *mut ID3D12CommandAllocator,
-        pInitialState: *mut ID3D12PipelineState,
+        pCommandAllocator: *const ID3D12CommandAllocator,
+        pInitialState: *const ID3D12PipelineState,
         riid: *const GUID,
-        ppCommandList: *mut *mut c_void,
+        ppCommandList: *const *const c_void,
     ) -> HRESULT,
     fn CheckFeatureSupport(
         Feature: D3D12_FEATURE,
-        pFeatureSupportData: *mut c_void,
+        pFeatureSupportData: *const c_void,
         FeatureSupportDataSize: UINT,
     ) -> HRESULT,
     fn CreateDescriptorHeap(
-        pDescriptorHeapDesc: *mut D3D12_DESCRIPTOR_HEAP_DESC,
+        pDescriptorHeapDesc: *const D3D12_DESCRIPTOR_HEAP_DESC,
         riid: *const GUID,
-        ppvHeap: *mut *mut c_void,
+        ppvHeap: *const *const c_void,
     ) -> HRESULT,
     fn GetDescriptorHandleIncrementSize(
         DescriptorHeapType: D3D12_DESCRIPTOR_HEAP_TYPE,
     ) -> UINT,
     fn CreateRootSignature(
         NodeMask: UINT,
-        pBlobWithRootSignature: *mut c_void,
+        pBlobWithRootSignature: *const c_void,
         blobLengthInBytes: usize,
         riid: *const GUID,
-        ppvRootSignature: *mut *mut c_void,
+        ppvRootSignature: *const *const c_void,
     ) -> HRESULT,
     fn CreateConstantBufferView(
-        pDesc: *mut D3D12_CONSTANT_BUFFER_VIEW_DESC,
+        pDesc: *const D3D12_CONSTANT_BUFFER_VIEW_DESC,
         DestDescriptor: D3D12_CPU_DESCRIPTOR_HANDLE,
     ) -> c_void,
     fn CreateShaderResourceView(
-        pResource: *mut ID3D12Resource,
-        pDesc: *mut D3D12_SHADER_RESOURCE_VIEW_DESC,
+        pResource: *const ID3D12Resource,
+        pDesc: *const D3D12_SHADER_RESOURCE_VIEW_DESC,
         DestDescriptor: D3D12_CPU_DESCRIPTOR_HANDLE,
     ) -> c_void,
     fn CreateUnorderedAccessView(
-        pResource: *mut ID3D12Resource,
-        pCounterResource: *mut ID3D12Resource,
-        pDesc: *mut D3D12_UNORDERED_ACCESS_VIEW_DESC,
+        pResource: *const ID3D12Resource,
+        pCounterResource: *const ID3D12Resource,
+        pDesc: *const D3D12_UNORDERED_ACCESS_VIEW_DESC,
         DestDescriptor: D3D12_CPU_DESCRIPTOR_HANDLE,
     ) -> c_void,
     fn CreateRenderTargetView(
-        pResource: *mut ID3D12Resource,
-        pDesc: *mut D3D12_RENDER_TARGET_VIEW_DESC,
+        pResource: *const ID3D12Resource,
+        pDesc: *const D3D12_RENDER_TARGET_VIEW_DESC,
         DestDescriptor: D3D12_CPU_DESCRIPTOR_HANDLE,
     ) -> c_void,
     fn CreateDepthStencilView(
-        pResource: *mut ID3D12Resource,
-        pDesc: *mut D3D12_DEPTH_STENCIL_VIEW_DESC,
+        pResource: *const ID3D12Resource,
+        pDesc: *const D3D12_DEPTH_STENCIL_VIEW_DESC,
         DestDescriptor: D3D12_CPU_DESCRIPTOR_HANDLE,
     ) -> c_void,
     fn CreateSampler(
-        pDesc: *mut D3D12_SAMPLER_DESC,
+        pDesc: *const D3D12_SAMPLER_DESC,
         DestDescriptor: D3D12_CPU_DESCRIPTOR_HANDLE,
     ) -> c_void,
     fn CopyDescriptors(
         NumDestDescriptorRanges: UINT,
-        pDestDescriptorRangeStarts: *mut D3D12_CPU_DESCRIPTOR_HANDLE,
-        pDestDescriptorRangeSizes: *mut UINT,
+        pDestDescriptorRangeStarts: *const D3D12_CPU_DESCRIPTOR_HANDLE,
+        pDestDescriptorRangeSizes: *const UINT,
         NumSrcDescriptorRanges: UINT,
-        pSrcDescriptorRangeStarts: *mut D3D12_CPU_DESCRIPTOR_HANDLE,
-        pSrcDescriptorRangeSizes: *mut UINT,
+        pSrcDescriptorRangeStarts: *const D3D12_CPU_DESCRIPTOR_HANDLE,
+        pSrcDescriptorRangeSizes: *const UINT,
         DescriptorHeapsType: D3D12_DESCRIPTOR_HEAP_TYPE,
     ) -> c_void,
     fn CopyDescriptorsSimple(
@@ -2489,107 +2489,107 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     fn GetResourceAllocationInfo(
         visibleMask: UINT,
         numResourceDescs: UINT,
-        pResourceDescs: *mut D3D12_RESOURCE_DESC,
+        pResourceDescs: *const D3D12_RESOURCE_DESC,
     ) -> D3D12_RESOURCE_ALLOCATION_INFO,
     fn GetCustomHeapProperties(
         NodeMask: UINT,
         heapType: D3D12_HEAP_TYPE,
     ) -> D3D12_HEAP_PROPERTIES,
     fn CreateCommittedResource(
-        pHeapProperties: *mut D3D12_HEAP_PROPERTIES,
+        pHeapProperties: *const D3D12_HEAP_PROPERTIES,
         HeapFlags: D3D12_HEAP_FLAGS,
-        pDesc: *mut D3D12_RESOURCE_DESC,
+        pDesc: *const D3D12_RESOURCE_DESC,
         InitialResourceState: D3D12_RESOURCE_STATES,
-        pOptimizedClearValue: *mut D3D12_CLEAR_VALUE,
+        pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
         riidResource: *const GUID,
-        ppvResource: *mut *mut c_void,
+        ppvResource: *const *const c_void,
     ) -> HRESULT,
     fn CreateHeap(
-        pDesc: *mut D3D12_HEAP_DESC,
+        pDesc: *const D3D12_HEAP_DESC,
         riid: *const GUID,
-        ppvHeap: *mut *mut c_void,
+        ppvHeap: *const *const c_void,
     ) -> HRESULT,
     fn CreatePlacedResource(
-        pHeap: *mut ID3D12Heap,
+        pHeap: *const ID3D12Heap,
         HeapOffset: u64,
-        pDesc: *mut D3D12_RESOURCE_DESC,
+        pDesc: *const D3D12_RESOURCE_DESC,
         InitialState: D3D12_RESOURCE_STATES,
-        pOptimizedClearValue: *mut D3D12_CLEAR_VALUE,
+        pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
         riid: *const GUID,
-        ppvResource: *mut *mut c_void,
+        ppvResource: *const *const c_void,
     ) -> HRESULT,
     fn CreateReservedResource(
-        pDesc: *mut D3D12_RESOURCE_DESC,
+        pDesc: *const D3D12_RESOURCE_DESC,
         InitialState: D3D12_RESOURCE_STATES,
-        pOptimizedClearValue: *mut D3D12_CLEAR_VALUE,
+        pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
         riid: *const GUID,
-        ppvResource: *mut *mut c_void,
+        ppvResource: *const *const c_void,
     ) -> HRESULT,
     fn CreateSharedHandle(
-        pObject: *mut ID3D12DeviceChild,
-        pAttributes: *mut _SECURITY_ATTRIBUTES,
+        pObject: *const ID3D12DeviceChild,
+        pAttributes: *const _SECURITY_ATTRIBUTES,
         Access: u32,
         Name: LPCWSTR,
-        pHandle: *mut *mut c_void,
+        pHandle: *const *const c_void,
     ) -> HRESULT,
     fn OpenSharedHandle(
-        NTHandle: *mut c_void,
+        NTHandle: *const c_void,
         riid: *const GUID,
-        ppvObj: *mut *mut c_void,
+        ppvObj: *const *const c_void,
     ) -> HRESULT,
     fn OpenSharedHandleByName(
         Name: LPCWSTR,
         Access: u32,
-        pNTHandle: *mut *mut c_void,
+        pNTHandle: *const *const c_void,
     ) -> HRESULT,
     fn MakeResident(
         NumObjects: UINT,
-        ppObjects: *mut *mut ID3D12Pageable,
+        ppObjects: *const *const ID3D12Pageable,
     ) -> HRESULT,
     fn Evict(
         NumObjects: UINT,
-        ppObjects: *mut *mut ID3D12Pageable,
+        ppObjects: *const *const ID3D12Pageable,
     ) -> HRESULT,
     fn CreateFence(
         InitialValue: u64,
         Flags: D3D12_FENCE_FLAGS,
         riid: *const GUID,
-        ppFence: *mut *mut c_void,
+        ppFence: *const *const c_void,
     ) -> HRESULT,
     fn GetDeviceRemovedReason(
     ) -> HRESULT,
     fn GetCopyableFootprints(
-        pResourceDesc: *mut D3D12_RESOURCE_DESC,
+        pResourceDesc: *const D3D12_RESOURCE_DESC,
         FirstSubresource: UINT,
         NumSubresources: UINT,
         BaseOffset: u64,
-        pLayouts: *mut D3D12_PLACED_SUBRESOURCE_FOOTPRINT,
-        pNumRows: *mut UINT,
-        pRowSizeInBytes: *mut u64,
-        pTotalBytes: *mut u64,
+        pLayouts: *const D3D12_PLACED_SUBRESOURCE_FOOTPRINT,
+        pNumRows: *const UINT,
+        pRowSizeInBytes: *const u64,
+        pTotalBytes: *const u64,
     ) -> c_void,
     fn CreateQueryHeap(
-        pDesc: *mut D3D12_QUERY_HEAP_DESC,
+        pDesc: *const D3D12_QUERY_HEAP_DESC,
         riid: *const GUID,
-        ppvHeap: *mut *mut c_void,
+        ppvHeap: *const *const c_void,
     ) -> HRESULT,
     fn SetStablePowerState(
         Enable: i32,
     ) -> HRESULT,
     fn CreateCommandSignature(
-        pDesc: *mut D3D12_COMMAND_SIGNATURE_DESC,
-        pRootSignature: *mut ID3D12RootSignature,
+        pDesc: *const D3D12_COMMAND_SIGNATURE_DESC,
+        pRootSignature: *const ID3D12RootSignature,
         riid: *const GUID,
-        ppvCommandSignature: *mut *mut c_void,
+        ppvCommandSignature: *const *const c_void,
     ) -> HRESULT,
     fn GetResourceTiling(
-        pTiledResource: *mut ID3D12Resource,
-        pNumTilesForEntireResource: *mut UINT,
-        pPackedMipDesc: *mut D3D12_PACKED_MIP_INFO,
-        pStandardTileShapeForNonPackedMips: *mut D3D12_TILE_SHAPE,
-        pNumSubresourceTilings: *mut UINT,
+        pTiledResource: *const ID3D12Resource,
+        pNumTilesForEntireResource: *const UINT,
+        pPackedMipDesc: *const D3D12_PACKED_MIP_INFO,
+        pStandardTileShapeForNonPackedMips: *const D3D12_TILE_SHAPE,
+        pNumSubresourceTilings: *const UINT,
         FirstSubresourceTilingToGet: UINT,
-        pSubresourceTilingsForNonPackedMips: *mut D3D12_SUBRESOURCE_TILING,
+        pSubresourceTilingsForNonPackedMips: *const D3D12_SUBRESOURCE_TILING,
     ) -> c_void,
     fn GetAdapterLuid(
     ) -> __LUID,
@@ -2604,21 +2604,21 @@ interface ID3D12CommandAllocator(ID3D12CommandAllocatorVtbl): ID3D12Pageable(ID3
 RIDL!{#[uuid(0x765a30f3, 0xf624, 0x4c6f, 0xa8, 0x28, 0xac, 0xe9, 0x48, 0x62, 0x24, 0x45)]
 interface ID3D12PipelineState(ID3D12PipelineStateVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
     fn GetCachedBlob(
-        ppBlob: *mut *mut ID3D10Blob,
+        ppBlob: *const *const ID3D10Blob,
     ) -> HRESULT,
 }}
 
 RIDL!{#[uuid(0x8ba5fb08, 0x5195, 0x40e2, 0xac, 0x58, 0x0d, 0x98, 0x9c, 0x3a, 0x01, 0x02)]
 interface ID3D10Blob(ID3D10BlobVtbl): IUnknown(IUnknownVtbl) {
     fn GetBufferPointer(
-    ) -> *mut c_void,
+    ) -> *const c_void,
     fn GetBufferSize(
     ) -> ULONG_PTR,
 }}
 
 STRUCT!{struct _SECURITY_ATTRIBUTES {
     nLength: u32,
-    lpSecurityDescriptor: *mut c_void,
+    lpSecurityDescriptor: *const c_void,
     bInheritHandle: i32,
 }}
 
@@ -2656,11 +2656,11 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
     fn Close(
     ) -> HRESULT,
     fn Reset(
-        pAllocator: *mut ID3D12CommandAllocator,
-        pInitialState: *mut ID3D12PipelineState,
+        pAllocator: *const ID3D12CommandAllocator,
+        pInitialState: *const ID3D12PipelineState,
     ) -> HRESULT,
     fn ClearState(
-        pPipelineState: *mut ID3D12PipelineState,
+        pPipelineState: *const ID3D12PipelineState,
     ) -> c_void,
     fn DrawInstanced(
         VertexCountPerInstance: UINT,
@@ -2681,36 +2681,36 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         ThreadGroupCountZ: UINT,
     ) -> c_void,
     fn CopyBufferRegion(
-        pDstBuffer: *mut ID3D12Resource,
+        pDstBuffer: *const ID3D12Resource,
         DstOffset: u64,
-        pSrcBuffer: *mut ID3D12Resource,
+        pSrcBuffer: *const ID3D12Resource,
         SrcOffset: u64,
         NumBytes: u64,
     ) -> c_void,
     fn CopyTextureRegion(
-        pDst: *mut D3D12_TEXTURE_COPY_LOCATION,
+        pDst: *const D3D12_TEXTURE_COPY_LOCATION,
         DstX: UINT,
         DstY: UINT,
         DstZ: UINT,
-        pSrc: *mut D3D12_TEXTURE_COPY_LOCATION,
-        pSrcBox: *mut D3D12_BOX,
+        pSrc: *const D3D12_TEXTURE_COPY_LOCATION,
+        pSrcBox: *const D3D12_BOX,
     ) -> c_void,
     fn CopyResource(
-        pDstResource: *mut ID3D12Resource,
-        pSrcResource: *mut ID3D12Resource,
+        pDstResource: *const ID3D12Resource,
+        pSrcResource: *const ID3D12Resource,
     ) -> c_void,
     fn CopyTiles(
-        pTiledResource: *mut ID3D12Resource,
-        pTileRegionStartCoordinate: *mut D3D12_TILED_RESOURCE_COORDINATE,
-        pTileRegionSize: *mut D3D12_TILE_REGION_SIZE,
-        pBuffer: *mut ID3D12Resource,
+        pTiledResource: *const ID3D12Resource,
+        pTileRegionStartCoordinate: *const D3D12_TILED_RESOURCE_COORDINATE,
+        pTileRegionSize: *const D3D12_TILE_REGION_SIZE,
+        pBuffer: *const ID3D12Resource,
         BufferStartOffsetInBytes: u64,
         Flags: D3D12_TILE_COPY_FLAGS,
     ) -> c_void,
     fn ResolveSubresource(
-        pDstResource: *mut ID3D12Resource,
+        pDstResource: *const ID3D12Resource,
         DstSubresource: UINT,
-        pSrcResource: *mut ID3D12Resource,
+        pSrcResource: *const ID3D12Resource,
         SrcSubresource: UINT,
         Format: DXGI_FORMAT,
     ) -> c_void,
@@ -2719,11 +2719,11 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
     ) -> c_void,
     fn RSSetViewports(
         NumViewports: UINT,
-        pViewports: *mut D3D12_VIEWPORT,
+        pViewports: *const D3D12_VIEWPORT,
     ) -> c_void,
     fn RSSetScissorRects(
         NumRects: UINT,
-        pRects: *mut tagRECT,
+        pRects: *const tagRECT,
     ) -> c_void,
     fn OMSetBlendFactor(
         BlendFactor: [f32; 4],
@@ -2732,24 +2732,24 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         StencilRef: UINT,
     ) -> c_void,
     fn SetPipelineState(
-        pPipelineState: *mut ID3D12PipelineState,
+        pPipelineState: *const ID3D12PipelineState,
     ) -> c_void,
     fn ResourceBarrier(
         NumBarriers: UINT,
-        pBarriers: *mut D3D12_RESOURCE_BARRIER,
+        pBarriers: *const D3D12_RESOURCE_BARRIER,
     ) -> c_void,
     fn ExecuteBundle(
-        pCommandList: *mut ID3D12GraphicsCommandList,
+        pCommandList: *const ID3D12GraphicsCommandList,
     ) -> c_void,
     fn SetDescriptorHeaps(
         NumDescriptorHeaps: UINT,
-        ppDescriptorHeaps: *mut *mut ID3D12DescriptorHeap,
+        ppDescriptorHeaps: *const *const ID3D12DescriptorHeap,
     ) -> c_void,
     fn SetComputeRootSignature(
-        pRootSignature: *mut ID3D12RootSignature,
+        pRootSignature: *const ID3D12RootSignature,
     ) -> c_void,
     fn SetGraphicsRootSignature(
-        pRootSignature: *mut ID3D12RootSignature,
+        pRootSignature: *const ID3D12RootSignature,
     ) -> c_void,
     fn SetComputeRootDescriptorTable(
         RootParameterIndex: UINT,
@@ -2772,13 +2772,13 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
     fn SetComputeRoot32BitConstants(
         RootParameterIndex: UINT,
         Num32BitValuesToSet: UINT,
-        pSrcData: *mut c_void,
+        pSrcData: *const c_void,
         DestOffsetIn32BitValues: UINT,
     ) -> c_void,
     fn SetGraphicsRoot32BitConstants(
         RootParameterIndex: UINT,
         Num32BitValuesToSet: UINT,
-        pSrcData: *mut c_void,
+        pSrcData: *const c_void,
         DestOffsetIn32BitValues: UINT,
     ) -> c_void,
     fn SetComputeRootConstantBufferView(
@@ -2806,23 +2806,23 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         BufferLocation: u64,
     ) -> c_void,
     fn IASetIndexBuffer(
-        pView: *mut D3D12_INDEX_BUFFER_VIEW,
+        pView: *const D3D12_INDEX_BUFFER_VIEW,
     ) -> c_void,
     fn IASetVertexBuffers(
         StartSlot: UINT,
         NumViews: UINT,
-        pViews: *mut D3D12_VERTEX_BUFFER_VIEW,
+        pViews: *const D3D12_VERTEX_BUFFER_VIEW,
     ) -> c_void,
     fn SOSetTargets(
         StartSlot: UINT,
         NumViews: UINT,
-        pViews: *mut D3D12_STREAM_OUTPUT_BUFFER_VIEW,
+        pViews: *const D3D12_STREAM_OUTPUT_BUFFER_VIEW,
     ) -> c_void,
     fn OMSetRenderTargets(
         NumRenderTargetDescriptors: UINT,
-        pRenderTargetDescriptors: *mut D3D12_CPU_DESCRIPTOR_HANDLE,
+        pRenderTargetDescriptors: *const D3D12_CPU_DESCRIPTOR_HANDLE,
         RTsSingleHandleToDescriptorRange: i32,
-        pDepthStencilDescriptor: *mut D3D12_CPU_DESCRIPTOR_HANDLE,
+        pDepthStencilDescriptor: *const D3D12_CPU_DESCRIPTOR_HANDLE,
     ) -> c_void,
     fn ClearDepthStencilView(
         DepthStencilView: D3D12_CPU_DESCRIPTOR_HANDLE,
@@ -2836,69 +2836,69 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         RenderTargetView: D3D12_CPU_DESCRIPTOR_HANDLE,
         ColorRGBA: [f32; 4],
         NumRects: UINT,
-        pRects: *mut tagRECT,
+        pRects: *const tagRECT,
     ) -> c_void,
     fn ClearUnorderedAccessViewUint(
         ViewGPUHandleInCurrentHeap: D3D12_GPU_DESCRIPTOR_HANDLE,
         ViewCPUHandle: D3D12_CPU_DESCRIPTOR_HANDLE,
-        pResource: *mut ID3D12Resource,
+        pResource: *const ID3D12Resource,
         Values: [UINT; 4],
         NumRects: UINT,
-        pRects: *mut tagRECT,
+        pRects: *const tagRECT,
     ) -> c_void,
     fn ClearUnorderedAccessViewFloat(
         ViewGPUHandleInCurrentHeap: D3D12_GPU_DESCRIPTOR_HANDLE,
         ViewCPUHandle: D3D12_CPU_DESCRIPTOR_HANDLE,
-        pResource: *mut ID3D12Resource,
+        pResource: *const ID3D12Resource,
         Values: [f32; 4],
         NumRects: UINT,
-        pRects: *mut tagRECT,
+        pRects: *const tagRECT,
     ) -> c_void,
     fn DiscardResource(
-        pResource: *mut ID3D12Resource,
-        pRegion: *D3D12_DISCARD_REGION,
+        pResource: *const ID3D12Resource,
+        pRegion: *const D3D12_DISCARD_REGION,
     ) -> c_void,
     fn BeginQuery(
-        pQueryHeap: *mut ID3D12QueryHeap,
+        pQueryHeap: *const ID3D12QueryHeap,
         Type: D3D12_QUERY_TYPE,
         Index: UINT,
     ) -> c_void,
     fn EndQuery(
-        pQueryHeap: *mut ID3D12QueryHeap,
+        pQueryHeap: *const ID3D12QueryHeap,
         Type: D3D12_QUERY_TYPE,
         Index: UINT,
     ) -> c_void,
     fn ResolveQueryData(
-        pQueryHeap: *mut ID3D12QueryHeap,
+        pQueryHeap: *const ID3D12QueryHeap,
         Type: D3D12_QUERY_TYPE,
         StartIndex: UINT,
         NumQueries: UINT,
-        pDestinationBuffer: *mut ID3D12Resource,
+        pDestinationBuffer: *const ID3D12Resource,
         AlignedDestinationBufferOffset: u64,
     ) -> c_void,
     fn SetPredication(
-        pBuffer: *mut ID3D12Resource,
+        pBuffer: *const ID3D12Resource,
         AlignedBufferOffset: u64,
         Operation: D3D12_PREDICATION_OP,
     ) -> c_void,
     fn SetMarker(
         Metadata: UINT,
-        pData: *mut c_void,
+        pData: *const c_void,
         Size: UINT,
     ) -> c_void,
     fn BeginEvent(
         Metadata: UINT,
-        pData: *mut c_void,
+        pData: *const c_void,
         Size: UINT,
     ) -> c_void,
     fn EndEvent(
     ) -> c_void,
     fn ExecuteIndirect(
-        pCommandSignature: *mut ID3D12CommandSignature,
+        pCommandSignature: *const ID3D12CommandSignature,
         MaxCommandCount: UINT,
-        pArgumentBuffer: *mut ID3D12Resource,
+        pArgumentBuffer: *const ID3D12Resource,
         ArgumentBufferOffset: u64,
-        pCountBuffer: *mut ID3D12Resource,
+        pCountBuffer: *const ID3D12Resource,
         CountBufferOffset: u64,
     ) -> c_void,
 }}
@@ -2906,22 +2906,22 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
 RIDL!{#[uuid(0x553103fb, 0x1fe7, 0x4557, 0xbb, 0x38, 0x94, 0x6d, 0x7d, 0x0e, 0x7c, 0xa7)]
 interface ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl): ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl) {
     fn AtomicCopyBufferUINT(
-        pDstBuffer: *mut ID3D12Resource,
+        pDstBuffer: *const ID3D12Resource,
         DstOffset: u64,
-        pSrcBuffer: *mut ID3D12Resource,
+        pSrcBuffer: *const ID3D12Resource,
         SrcOffset: u64,
         Dependencies: UINT,
-        ppDependentResources: *mut *mut ID3D12Resource,
-        pDependentSubresourceRanges: *mut D3D12_SUBRESOURCE_RANGE_UINT64,
+        ppDependentResources: *const *const ID3D12Resource,
+        pDependentSubresourceRanges: *const D3D12_SUBRESOURCE_RANGE_UINT64,
     ) -> c_void,
     fn AtomicCopyBufferUINT64(
-        pDstBuffer: *mut ID3D12Resource,
+        pDstBuffer: *const ID3D12Resource,
         DstOffset: u64,
-        pSrcBuffer: *mut ID3D12Resource,
+        pSrcBuffer: *const ID3D12Resource,
         SrcOffset: u64,
         Dependencies: UINT,
-        ppDependentResources: *mut *mut ID3D12Resource,
-        pDependentSubresourceRanges: *mut D3D12_SUBRESOURCE_RANGE_UINT64,
+        ppDependentResources: *const *const ID3D12Resource,
+        pDependentSubresourceRanges: *const D3D12_SUBRESOURCE_RANGE_UINT64,
     ) -> c_void,
     fn OMSetDepthBounds(
         Min: f32,
@@ -2930,16 +2930,16 @@ interface ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl): ID3D12Grap
     fn SetSamplePositions(
         NumSamplesPerPixel: UINT,
         NumPixels: UINT,
-        pSamplePositions: *mut D3D12_SAMPLE_POSITION,
+        pSamplePositions: *const D3D12_SAMPLE_POSITION,
     ) -> c_void,
     fn ResolveSubresourceRegion(
-        pDstResource: *mut ID3D12Resource,
+        pDstResource: *const ID3D12Resource,
         DstSubresource: UINT,
         DstX: UINT,
         DstY: UINT,
-        pSrcResource: *mut ID3D12Resource,
+        pSrcResource: *const ID3D12Resource,
         SrcSubresource: UINT,
-        pSrcRect: *mut tagRECT,
+        pSrcRect: *const tagRECT,
         Format: DXGI_FORMAT,
         ResolveMode: D3D12_RESOLVE_MODE,
     ) -> c_void,
@@ -2963,8 +2963,8 @@ RIDL!{#[uuid(0x38c3e585, 0xff17, 0x412c, 0x91, 0x50, 0x4f, 0xc6, 0xf9, 0xd7, 0x2
 interface ID3D12GraphicsCommandList2(ID3D12GraphicsCommandList2Vtbl): ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl) {
     fn WriteBufferImmediate(
         Count: UINT,
-        pParams: *mut D3D12_WRITEBUFFERIMMEDIATE_PARAMETER,
-        pModes: *mut D3D12_WRITEBUFFERIMMEDIATE_MODE,
+        pParams: *const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER,
+        pModes: *const D3D12_WRITEBUFFERIMMEDIATE_MODE,
     ) -> c_void,
 }}
 
@@ -2972,24 +2972,24 @@ RIDL!{#[uuid(0xc64226a8, 0x9201, 0x46af, 0xb4, 0xcc, 0x53, 0xfb, 0x9f, 0xf7, 0x4
 interface ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl): ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
     fn StorePipeline(
         pName: LPCWSTR,
-        pPipeline: *mut ID3D12PipelineState,
+        pPipeline: *const ID3D12PipelineState,
     ) -> HRESULT,
     fn LoadGraphicsPipeline(
         pName: LPCWSTR,
-        pDesc: *mut D3D12_GRAPHICS_PIPELINE_STATE_DESC,
+        pDesc: *const D3D12_GRAPHICS_PIPELINE_STATE_DESC,
         riid: *const GUID,
-        ppPipelineState: *mut *mut c_void,
+        ppPipelineState: *const *const c_void,
     ) -> HRESULT,
     fn LoadComputePipeline(
         pName: LPCWSTR,
-        pDesc: *mut D3D12_COMPUTE_PIPELINE_STATE_DESC,
+        pDesc: *const D3D12_COMPUTE_PIPELINE_STATE_DESC,
         riid: *const GUID,
-        ppPipelineState: *mut *mut c_void,
+        ppPipelineState: *const *const c_void,
     ) -> HRESULT,
     fn GetSerializedSize(
     ) -> usize,
     fn Serialize(
-        pData: *mut c_void,
+        pData: *const c_void,
         DataSizeInBytes: usize,
     ) -> HRESULT,
 }}
@@ -2998,9 +2998,9 @@ RIDL!{#[uuid(0x80eabf42, 0x2568, 0x4e5e, 0xbd, 0x82, 0xc3, 0x7f, 0x86, 0x96, 0x1
 interface ID3D12PipelineLibrary1(ID3D12PipelineLibrary1Vtbl): ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl) {
     fn LoadPipeline(
         pName: LPCWSTR,
-        pDesc: *mut D3D12_PIPELINE_STATE_STREAM_DESC,
+        pDesc: *const D3D12_PIPELINE_STATE_STREAM_DESC,
         riid: *const GUID,
-        ppPipelineState: *mut *mut c_void,
+        ppPipelineState: *const *const c_void,
     ) -> HRESULT,
 }}
 
@@ -3021,22 +3021,22 @@ ENUM!{enum D3D12_RESIDENCY_PRIORITY {
 RIDL!{#[uuid(0x77acce80, 0x638e, 0x4e65, 0x88, 0x95, 0xc1, 0xf2, 0x33, 0x86, 0x86, 0x3e)]
 interface ID3D12Device1(ID3D12Device1Vtbl): ID3D12Device(ID3D12DeviceVtbl) {
     fn CreatePipelineLibrary(
-        pLibraryBlob: *mut c_void,
+        pLibraryBlob: *const c_void,
         BlobLength: usize,
         riid: *const GUID,
-        ppPipelineLibrary: *mut *mut c_void,
+        ppPipelineLibrary: *const *const c_void,
     ) -> HRESULT,
     fn SetEventOnMultipleFenceCompletion(
-        ppFences: *mut *mut ID3D12Fence,
-        pFenceValues: *mut u64,
+        ppFences: *const *const ID3D12Fence,
+        pFenceValues: *const u64,
         NumFences: UINT,
         Flags: D3D12_MULTIPLE_FENCE_WAIT_FLAGS,
-        hEvent: *mut c_void,
+        hEvent: *const c_void,
     ) -> HRESULT,
     fn SetResidencyPriority(
         NumObjects: UINT,
-        ppObjects: *mut *mut ID3D12Pageable,
-        pPriorities: *mut D3D12_RESIDENCY_PRIORITY,
+        ppObjects: *const *const ID3D12Pageable,
+        pPriorities: *const D3D12_RESIDENCY_PRIORITY,
     ) -> HRESULT,
 }}
 
@@ -3045,7 +3045,7 @@ interface ID3D12Device2(ID3D12Device2Vtbl): ID3D12Device1(ID3D12Device1Vtbl) {
     fn CreatePipelineState(
         pDesc: *const D3D12_PIPELINE_STATE_STREAM_DESC,
         riid: *const GUID,
-        ppPipelineState: *mut *mut c_void,
+        ppPipelineState: *const *const c_void,
     ) -> HRESULT,
 }}
 
@@ -3057,20 +3057,20 @@ ENUM!{enum D3D12_RESIDENCY_FLAGS {
 RIDL!{#[uuid(0x81dadc15, 0x2bad, 0x4392, 0x93, 0xc5, 0x10, 0x13, 0x45, 0xc4, 0xaa, 0x98)]
 interface ID3D12Device3(ID3D12Device3Vtbl): ID3D12Device2(ID3D12Device2Vtbl) {
     fn OpenExistingHeapFromAddress(
-        pAddress: *mut c_void,
+        pAddress: *const c_void,
         riid: *const GUID,
-        ppvHeap: *mut *mut c_void,
+        ppvHeap: *const *const c_void,
     ) -> HRESULT,
     fn OpenExistingHeapFromFileMapping(
-        hFileMapping: *mut c_void,
+        hFileMapping: *const c_void,
         riid: *const GUID,
-        ppvHeap: *mut *mut c_void,
+        ppvHeap: *const *const c_void,
     ) -> HRESULT,
     fn EnqueueMakeResident(
         Flags: D3D12_RESIDENCY_FLAGS,
         NumObjects: UINT,
-        ppObjects: *mut *mut ID3D12Pageable,
-        pFenceToSignal: *mut ID3D12Fence,
+        ppObjects: *const *const ID3D12Pageable,
+        pFenceToSignal: *const ID3D12Fence,
         FenceValueToSignal: u64,
     ) -> HRESULT,
 }}
@@ -3096,7 +3096,7 @@ RIDL!{#[uuid(0xa1533d18, 0x0ac1, 0x4084, 0x85, 0xb9, 0x89, 0xa9, 0x61, 0x16, 0x8
 interface ID3D12ProtectedSession(ID3D12ProtectedSessionVtbl): ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
     fn GetStatusFence(
         riid: *const GUID,
-        ppFence: *mut *mut c_void,
+        ppFence: *const *const c_void,
     ) -> HRESULT,
     fn GetSessionStatus(
     ) -> D3D12_PROTECTED_SESSION_STATUS,
@@ -3134,42 +3134,42 @@ interface ID3D12Device4(ID3D12Device4Vtbl): ID3D12Device3(ID3D12Device3Vtbl) {
         Type: D3D12_COMMAND_LIST_TYPE,
         Flags: D3D12_COMMAND_LIST_FLAGS,
         riid: *const GUID,
-        ppCommandList: *mut *mut c_void,
+        ppCommandList: *const *const c_void,
     ) -> HRESULT,
     fn CreateProtectedResourceSession(
-        pDesc: *mut D3D12_PROTECTED_RESOURCE_SESSION_DESC,
-        riid: *mut GUID,
-        ppSession: *mut *mut c_void,
+        pDesc: *const D3D12_PROTECTED_RESOURCE_SESSION_DESC,
+        riid: *const GUID,
+        ppSession: *const *const c_void,
     ) -> HRESULT,
     fn CreateCommittedResource1(
-        pHeapProperties: *mut D3D12_HEAP_PROPERTIES,
+        pHeapProperties: *const D3D12_HEAP_PROPERTIES,
         HeapFlags: D3D12_HEAP_FLAGS,
-        pDesc: *mut D3D12_RESOURCE_DESC,
+        pDesc: *const D3D12_RESOURCE_DESC,
         InitialResourceState: D3D12_RESOURCE_STATES,
-        pOptimizedClearValue: *mut D3D12_CLEAR_VALUE,
-        pProtectedSession: *mut ID3D12ProtectedResourceSession,
+        pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
+        pProtectedSession: *const ID3D12ProtectedResourceSession,
         riidResource: *const GUID,
-        ppvResource: *mut *mut c_void,
+        ppvResource: *const *const c_void,
     ) -> HRESULT,
     fn CreateHeap1(
-        pDesc: *mut D3D12_HEAP_DESC,
-        pProtectedSession: *mut ID3D12ProtectedResourceSession,
+        pDesc: *const D3D12_HEAP_DESC,
+        pProtectedSession: *const ID3D12ProtectedResourceSession,
         riid: *const GUID,
-        ppvHeap: *mut *mut c_void,
+        ppvHeap: *const *const c_void,
     ) -> HRESULT,
     fn CreateReservedResource1(
-        pDesc: *mut D3D12_RESOURCE_DESC,
+        pDesc: *const D3D12_RESOURCE_DESC,
         InitialState: D3D12_RESOURCE_STATES,
-        pOptimizedClearValue: *mut D3D12_CLEAR_VALUE,
-        pProtectedSession: *mut ID3D12ProtectedResourceSession,
+        pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
+        pProtectedSession: *const ID3D12ProtectedResourceSession,
         riid: *const GUID,
-        ppvResource: *mut *mut c_void,
+        ppvResource: *const *const c_void,
     ) -> HRESULT,
     fn GetResourceAllocationInfo1(
         visibleMask: UINT,
         numResourceDescs: UINT,
-        pResourceDescs: *mut D3D12_RESOURCE_DESC,
-        pResourceAllocationInfo1: *mut D3D12_RESOURCE_ALLOCATION_INFO1,
+        pResourceDescs: *const D3D12_RESOURCE_DESC,
+        pResourceAllocationInfo1: *const D3D12_RESOURCE_ALLOCATION_INFO1,
     ) -> D3D12_RESOURCE_ALLOCATION_INFO,
 }}
 
@@ -3181,7 +3181,7 @@ ENUM!{enum D3D12_LIFETIME_STATE {
 RIDL!{#[uuid(0x3fd03d36, 0x4eb1, 0x424a, 0xa5, 0x82, 0x49, 0x4e, 0xcb, 0x8b, 0xa8, 0x13)]
 interface ID3D12LifetimeTracker(ID3D12LifetimeTrackerVtbl): ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
     fn DestroyOwnedObject(
-        pObject: *mut ID3D12DeviceChild,
+        pObject: *const ID3D12DeviceChild,
     ) -> HRESULT,
 }}
 
@@ -3197,14 +3197,14 @@ interface ID3D12SwapChainAssistant(ID3D12SwapChainAssistantVtbl): IUnknown(IUnkn
     fn GetLUID(
     ) -> __LUID,
     fn GetSwapChainObject(
-        riid: *mut GUID,
-        ppv: *mut *mut c_void,
+        riid: *const GUID,
+        ppv: *const *const c_void,
     ) -> HRESULT,
     fn GetCurrentResourceAndCommandQueue(
-        riidResource: *mut GUID,
-        ppvResource: *mut *mut c_void,
-        riidQueue: *mut GUID,
-        ppvQueue: *mut *mut c_void,
+        riidResource: *const GUID,
+        ppvResource: *const *const c_void,
+        riidQueue: *const GUID,
+        ppvQueue: *const *const c_void,
     ) -> HRESULT,
     fn InsertImplicitSync(
     ) -> HRESULT,
@@ -3273,7 +3273,7 @@ RIDL!{#[uuid(0xde5fa827, 0x9bf9, 0x4f26, 0x89, 0xff, 0xd7, 0xf5, 0x6f, 0xde, 0x3
 interface ID3D12StateObjectProperties(ID3D12StateObjectPropertiesVtbl): IUnknown(IUnknownVtbl) {
     fn GetShaderIdentifier(
         pExportName: LPCWSTR,
-    ) -> *mut c_void,
+    ) -> *const c_void,
     fn GetShaderStackSize(
         pExportName: LPCWSTR,
     ) -> u64,
@@ -3301,7 +3301,7 @@ ENUM!{enum D3D12_STATE_SUBOBJECT_TYPE {
 
 STRUCT!{struct D3D12_STATE_SUBOBJECT {
     Type: D3D12_STATE_SUBOBJECT_TYPE,
-    pDesc: *mut c_void,
+    pDesc: *const c_void,
 }}
 
 ENUM!{enum D3D12_STATE_OBJECT_FLAGS {
@@ -3315,11 +3315,11 @@ STRUCT!{struct D3D12_STATE_OBJECT_CONFIG {
 }}
 
 STRUCT!{struct D3D12_GLOBAL_ROOT_SIGNATURE {
-    pGlobalRootSignature: *mut ID3D12RootSignature,
+    pGlobalRootSignature: *const ID3D12RootSignature,
 }}
 
 STRUCT!{struct D3D12_LOCAL_ROOT_SIGNATURE {
-    pLocalRootSignature: *mut ID3D12RootSignature,
+    pLocalRootSignature: *const ID3D12RootSignature,
 }}
 
 STRUCT!{struct D3D12_NODE_MASK {
@@ -3339,25 +3339,25 @@ STRUCT!{struct D3D12_EXPORT_DESC {
 STRUCT!{struct D3D12_DXIL_LIBRARY_DESC {
     DXILLibrary: D3D12_SHADER_BYTECODE,
     NumExports: UINT,
-    pExports: *mut D3D12_EXPORT_DESC,
+    pExports: *const D3D12_EXPORT_DESC,
 }}
 
 STRUCT!{struct D3D12_EXISTING_COLLECTION_DESC {
-    pExistingCollection: *mut ID3D12StateObject,
+    pExistingCollection: *const ID3D12StateObject,
     NumExports: UINT,
-    pExports: *mut D3D12_EXPORT_DESC,
+    pExports: *const D3D12_EXPORT_DESC,
 }}
 
 STRUCT!{struct D3D12_SUBOBJECT_TO_EXPORTS_ASSOCIATION {
-    pSubobjectToAssociate: *mut D3D12_STATE_SUBOBJECT,
+    pSubobjectToAssociate: *const D3D12_STATE_SUBOBJECT,
     NumExports: UINT,
-    pExports: *mut LPCWSTR,
+    pExports: *const LPCWSTR,
 }}
 
 STRUCT!{struct D3D12_DXIL_SUBOBJECT_TO_EXPORTS_ASSOCIATION {
     SubobjectToAssociate: LPCWSTR,
     NumExports: UINT,
-    pExports: *mut LPCWSTR,
+    pExports: *const LPCWSTR,
 }}
 
 ENUM!{enum D3D12_HIT_GROUP_TYPE {
@@ -3390,7 +3390,7 @@ ENUM!{enum D3D12_STATE_OBJECT_TYPE {
 STRUCT!{struct D3D12_STATE_OBJECT_DESC {
     Type: D3D12_STATE_OBJECT_TYPE,
     NumSubobjects: UINT,
-    pSubobjects: *mut D3D12_STATE_SUBOBJECT,
+    pSubobjects: *const D3D12_STATE_SUBOBJECT,
 }}
 
 ENUM!{enum D3D12_RAYTRACING_GEOMETRY_FLAGS {
@@ -3566,8 +3566,8 @@ STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS {
 UNION!{union __MIDL___MIDL_itf_d3d12_0001_0033_0002 {
     [u64; 1],
     InstanceDescs InstanceDescs_mut: u64,
-    pGeometryDescs pGeometryDescs_mut: *mut D3D12_RAYTRACING_GEOMETRY_DESC,
-    ppGeometryDescs ppGeometryDescs_mut: *mut *mut D3D12_RAYTRACING_GEOMETRY_DESC,
+    pGeometryDescs pGeometryDescs_mut: *const D3D12_RAYTRACING_GEOMETRY_DESC,
+    ppGeometryDescs ppGeometryDescs_mut: *const *const D3D12_RAYTRACING_GEOMETRY_DESC,
 }}
 
 STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC {
@@ -3603,43 +3603,43 @@ ENUM!{enum D3D12_HIT_KIND {
 RIDL!{#[uuid(0x8b4f173b, 0x2fea, 0x4b80, 0x8f, 0x58, 0x43, 0x07, 0x19, 0x1a, 0xb9, 0x5d)]
 interface ID3D12Device5(ID3D12Device5Vtbl): ID3D12Device4(ID3D12Device4Vtbl) {
     fn CreateLifetimeTracker(
-        pOwner: *mut ID3D12LifetimeOwner,
+        pOwner: *const ID3D12LifetimeOwner,
         riid: *const GUID,
-        ppvTracker: *mut *mut c_void,
+        ppvTracker: *const *const c_void,
     ) -> HRESULT,
     fn RemoveDevice(
     ) -> c_void,
     fn EnumerateMetaCommands(
-        pNumMetaCommands: *mut UINT,
-        pDescs: *mut D3D12_META_COMMAND_DESC,
+        pNumMetaCommands: *const UINT,
+        pDescs: *const D3D12_META_COMMAND_DESC,
     ) -> HRESULT,
     fn EnumerateMetaCommandParameters(
-        CommandId: *mut GUID,
+        CommandId: *const GUID,
         Stage: D3D12_META_COMMAND_PARAMETER_STAGE,
-        pTotalStructureSizeInBytes: *mut UINT,
-        pParameterCount: *mut UINT,
-        pParameterDescs: *mut D3D12_META_COMMAND_PARAMETER_DESC,
+        pTotalStructureSizeInBytes: *const UINT,
+        pParameterCount: *const UINT,
+        pParameterDescs: *const D3D12_META_COMMAND_PARAMETER_DESC,
     ) -> HRESULT,
     fn CreateMetaCommand(
-        CommandId: *mut GUID,
+        CommandId: *const GUID,
         NodeMask: UINT,
-        pCreationParametersData: *mut c_void,
+        pCreationParametersData: *const c_void,
         CreationParametersDataSizeInBytes: usize,
         riid: *const GUID,
-        ppMetaCommand: *mut *mut c_void,
+        ppMetaCommand: *const *const c_void,
     ) -> HRESULT,
     fn CreateStateObject(
         pDesc: *const D3D12_STATE_OBJECT_DESC,
         riid: *const GUID,
-        ppStateObject: *mut *mut c_void,
+        ppStateObject: *const *const c_void,
     ) -> HRESULT,
     fn GetRaytracingAccelerationStructurePrebuildInfo(
-        pDesc: *mut D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS,
-        pInfo: *mut D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO,
+        pDesc: *const D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS,
+        pInfo: *const D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO,
     ) -> c_void,
     fn CheckDriverMatchingIdentifier(
         SerializedDataType: D3D12_SERIALIZED_DATA_TYPE,
-        pIdentifierToCheck: *mut D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER,
+        pIdentifierToCheck: *const D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER,
     ) -> D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS,
 }}
 
@@ -3687,16 +3687,16 @@ ENUM!{enum D3D12_AUTO_BREADCRUMB_OP {
 }}
 
 STRUCT!{struct D3D12_AUTO_BREADCRUMB_NODE {
-    pCommandListDebugNameA: *mut i8,
-    pCommandListDebugNameW: *mut u16,
-    pCommandQueueDebugNameA: *mut i8,
-    pCommandQueueDebugNameW: *mut u16,
-    pCommandList: *mut ID3D12GraphicsCommandList,
-    pCommandQueue: *mut ID3D12CommandQueue,
+    pCommandListDebugNameA: *const i8,
+    pCommandListDebugNameW: *const u16,
+    pCommandQueueDebugNameA: *const i8,
+    pCommandQueueDebugNameW: *const u16,
+    pCommandList: *const ID3D12GraphicsCommandList,
+    pCommandQueue: *const ID3D12CommandQueue,
     BreadcrumbCount: UINT,
-    pLastBreadcrumbValue: *mut UINT,
-    pCommandHistory: *mut D3D12_AUTO_BREADCRUMB_OP,
-    pNext: *mut D3D12_AUTO_BREADCRUMB_NODE,
+    pLastBreadcrumbValue: *const UINT,
+    pCommandHistory: *const D3D12_AUTO_BREADCRUMB_OP,
+    pNext: *const D3D12_AUTO_BREADCRUMB_NODE,
 }}
 
 ENUM!{enum D3D12_DRED_VERSION {
@@ -3711,7 +3711,7 @@ ENUM!{enum D3D12_DRED_FLAGS {
 
 STRUCT!{struct D3D12_DEVICE_REMOVED_EXTENDED_DATA {
     Flags: D3D12_DRED_FLAGS,
-    pHeadAutoBreadcrumbNode: *mut D3D12_AUTO_BREADCRUMB_NODE,
+    pHeadAutoBreadcrumbNode: *const D3D12_AUTO_BREADCRUMB_NODE,
 }}
 
 STRUCT!{struct D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA {
@@ -3728,7 +3728,7 @@ RIDL!{#[uuid(0x9d5e227a, 0x4430, 0x4161, 0x88, 0xb3, 0x3e, 0xca, 0x6b, 0xb1, 0x6
 interface ID3D12Resource1(ID3D12Resource1Vtbl): ID3D12Resource(ID3D12ResourceVtbl) {
     fn GetProtectedResourceSession(
         riid: *const GUID,
-        ppProtectedSession: *mut *mut c_void,
+        ppProtectedSession: *const *const c_void,
     ) -> HRESULT,
 }}
 
@@ -3736,14 +3736,14 @@ RIDL!{#[uuid(0x572f7389, 0x2168, 0x49e3, 0x96, 0x93, 0xd6, 0xdf, 0x58, 0x71, 0xb
 interface ID3D12Heap1(ID3D12Heap1Vtbl): ID3D12Heap(ID3D12HeapVtbl) {
     fn GetProtectedResourceSession(
         riid: *const GUID,
-        ppProtectedSession: *mut *mut c_void,
+        ppProtectedSession: *const *const c_void,
     ) -> HRESULT,
 }}
 
 RIDL!{#[uuid(0x6fda83a7, 0xb84c, 0x4e38, 0x9a, 0xc8, 0xc7, 0xbd, 0x22, 0x01, 0x6b, 0x3d)]
 interface ID3D12GraphicsCommandList3(ID3D12GraphicsCommandList3Vtbl): ID3D12GraphicsCommandList2(ID3D12GraphicsCommandList2Vtbl) {
     fn SetProtectedResourceSession(
-        pProtectedResourceSession: *mut ID3D12ProtectedResourceSession,
+        pProtectedResourceSession: *const ID3D12ProtectedResourceSession,
     ) -> c_void,
 }}
 
@@ -3784,10 +3784,10 @@ STRUCT!{struct D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS {
 }}
 
 STRUCT!{struct D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS {
-    pSrcResource: *mut ID3D12Resource,
-    pDstResource: *mut ID3D12Resource,
+    pSrcResource: *const ID3D12Resource,
+    pDstResource: *const ID3D12Resource,
     SubresourceCount: UINT,
-    pSubresourceParameters: *mut D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS,
+    pSubresourceParameters: *const D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS,
     Format: DXGI_FORMAT,
     ResolveMode: D3D12_RESOLVE_MODE,
     PreserveResolveSource: i32,
@@ -3846,31 +3846,31 @@ RIDL!{#[uuid(0x8754318e, 0xd3a9, 0x4541, 0x98, 0xcf, 0x64, 0x5b, 0x50, 0xdc, 0x4
 interface ID3D12GraphicsCommandList4(ID3D12GraphicsCommandList4Vtbl): ID3D12GraphicsCommandList3(ID3D12GraphicsCommandList3Vtbl) {
     fn BeginRenderPass(
         NumRenderTargets: UINT,
-        pRenderTargets: *mut D3D12_RENDER_PASS_RENDER_TARGET_DESC,
-        pDepthStencil: *mut D3D12_RENDER_PASS_DEPTH_STENCIL_DESC,
+        pRenderTargets: *const D3D12_RENDER_PASS_RENDER_TARGET_DESC,
+        pDepthStencil: *const D3D12_RENDER_PASS_DEPTH_STENCIL_DESC,
         Flags: D3D12_RENDER_PASS_FLAGS,
     ) -> c_void,
     fn EndRenderPass(
     ) -> c_void,
     fn InitializeMetaCommand(
-        pMetaCommand: *mut ID3D12MetaCommand,
-        pInitializationParametersData: *mut c_void,
+        pMetaCommand: *const ID3D12MetaCommand,
+        pInitializationParametersData: *const c_void,
         InitializationParametersDataSizeInBytes: usize,
     ) -> c_void,
     fn ExecuteMetaCommand(
-        pMetaCommand: *mut ID3D12MetaCommand,
-        pExecutionParametersData: *mut c_void,
+        pMetaCommand: *const ID3D12MetaCommand,
+        pExecutionParametersData: *const c_void,
         ExecutionParametersDataSizeInBytes: usize,
     ) -> c_void,
     fn BuildRaytracingAccelerationStructure(
-        pDesc: *mut D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC,
+        pDesc: *const D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC,
         NumPostbuildInfoDescs: UINT,
-        pPostbuildInfoDescs: *mut D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC,
+        pPostbuildInfoDescs: *const D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC,
     ) -> c_void,
     fn EmitRaytracingAccelerationStructurePostbuildInfo(
-        pDesc: *mut D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC,
+        pDesc: *const D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC,
         NumSourceAccelerationStructures: UINT,
-        pSourceAccelerationStructureData: *mut u64,
+        pSourceAccelerationStructureData: *const u64,
     ) -> c_void,
     fn CopyRaytracingAccelerationStructure(
         DestAccelerationStructureData: u64,
@@ -3878,10 +3878,10 @@ interface ID3D12GraphicsCommandList4(ID3D12GraphicsCommandList4Vtbl): ID3D12Grap
         Mode: D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE,
     ) -> c_void,
     fn SetPipelineState1(
-        pStateObject: *mut ID3D12StateObject,
+        pStateObject: *const ID3D12StateObject,
     ) -> c_void,
     fn DispatchRays(
-        pDesc: *mut D3D12_DISPATCH_RAYS_DESC,
+        pDesc: *const D3D12_DISPATCH_RAYS_DESC,
     ) -> c_void,
 }}
 
@@ -3895,47 +3895,47 @@ interface ID3D12Tools(ID3D12ToolsVtbl): IUnknown(IUnknownVtbl) {
 }}
 
 STRUCT!{struct D3D12_SUBRESOURCE_DATA {
-    pData: *mut c_void,
+    pData: *const c_void,
     RowPitch: LONG_PTR,
     SlicePitch: LONG_PTR,
 }}
 
 STRUCT!{struct D3D12_MEMCPY_DEST {
-    pData: *mut c_void,
+    pData: *const c_void,
     RowPitch: ULONG_PTR,
     SlicePitch: ULONG_PTR,
 }}
 
 FN!{stdcall PFN_D3D12_CREATE_DEVICE(
-    *mut IUnknown,
+    *const IUnknown,
     D3D_FEATURE_LEVEL,
     REFIID,
-    *mut *mut c_void,
+    *const *const c_void,
 ) -> HRESULT}
 
 extern "system" {
     pub fn D3D12CreateDevice(
-        pAdapter: *mut IUnknown,
+        pAdapter: *const IUnknown,
         MinimumFeatureLevel: D3D_FEATURE_LEVEL,
         riid: REFGUID,
-        ppDevice: *mut *mut c_void,
+        ppDevice: *const *const c_void,
     ) -> HRESULT;
 }
 
 FN!{stdcall PFN_D3D12_GET_DEBUG_INTERFACE(
     REFIID,
-    *mut *mut c_void,
+    *const *const c_void,
 ) -> HRESULT}
 
 extern "system" {
     pub fn D3D12GetDebugInterface(
         riid: REFGUID,
-        ppvDebug: *mut *mut c_void,
+        ppvDebug: *const *const c_void,
     ) -> HRESULT;
     pub fn D3D12EnableExperimentalFeatures(
         NumFeatures: UINT,
         pIIDs: *const IID,
-        pConfigurationStructs: *mut c_void,
-        pConfigurationStructSizes: *mut UINT,
+        pConfigurationStructs: *const c_void,
+        pConfigurationStructSizes: *const UINT,
     ) -> HRESULT;
 }
