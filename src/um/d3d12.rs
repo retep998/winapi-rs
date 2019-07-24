@@ -538,8 +538,8 @@ interface ID3D12Resource(ID3D12ResourceVtbl): ID3D12Pageable(ID3D12PageableVtbl)
 }}
 
 STRUCT!{struct D3D12_RANGE {
-    Begin: ULONG_PTR,
-    End: ULONG_PTR,
+    Begin: usize,
+    End: usize,
 }}
 
 pub type ULONG_PTR = u64;
@@ -940,7 +940,7 @@ interface ID3D12RootSignature(ID3D12RootSignatureVtbl): ID3D12DeviceChild(ID3D12
 
 STRUCT!{struct D3D12_SHADER_BYTECODE {
     pShaderBytecode: *mut c_void,
-    BytecodeLength: ULONG_PTR,
+    BytecodeLength: usize,
 }}
 
 STRUCT!{struct D3D12_STREAM_OUTPUT_DESC {
@@ -964,7 +964,7 @@ ENUM!{enum D3D12_INDEX_BUFFER_STRIP_CUT_VALUE {
 
 STRUCT!{struct D3D12_CACHED_PIPELINE_STATE {
     pCachedBlob: *mut c_void,
-    CachedBlobSizeInBytes: ULONG_PTR,
+    CachedBlobSizeInBytes: usize,
 }}
 
 ENUM!{enum D3D12_PIPELINE_STATE_FLAGS {
@@ -1010,7 +1010,7 @@ STRUCT!{struct D3D12_RT_FORMAT_ARRAY {
 }}
 
 STRUCT!{struct D3D12_PIPELINE_STATE_STREAM_DESC {
-    SizeInBytes: ULONG_PTR,
+    SizeInBytes: usize,
     pPipelineStateSubobjectStream: *mut c_void,
 }}
 
@@ -2438,7 +2438,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     fn CreateRootSignature(
         NodeMask: UINT,
         pBlobWithRootSignature: *mut c_void,
-        blobLengthInBytes: ULONG_PTR,
+        blobLengthInBytes: usize,
         riid: *const GUID,
         ppvRootSignature: *mut *mut c_void,
     ) -> HRESULT,
@@ -2987,10 +2987,10 @@ interface ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl): ID3D12DeviceChild(ID
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
     fn GetSerializedSize(
-    ) -> ULONG_PTR,
+    ) -> usize,
     fn Serialize(
         pData: *mut c_void,
-        DataSizeInBytes: ULONG_PTR,
+        DataSizeInBytes: usize,
     ) -> HRESULT,
 }}
 
@@ -3022,7 +3022,7 @@ RIDL!{#[uuid(0x77acce80, 0x638e, 0x4e65, 0x88, 0x95, 0xc1, 0xf2, 0x33, 0x86, 0x8
 interface ID3D12Device1(ID3D12Device1Vtbl): ID3D12Device(ID3D12DeviceVtbl) {
     fn CreatePipelineLibrary(
         pLibraryBlob: *mut c_void,
-        BlobLength: ULONG_PTR,
+        BlobLength: usize,
         riid: *const GUID,
         ppPipelineLibrary: *mut *mut c_void,
     ) -> HRESULT,
@@ -3624,7 +3624,7 @@ interface ID3D12Device5(ID3D12Device5Vtbl): ID3D12Device4(ID3D12Device4Vtbl) {
         CommandId: *mut GUID,
         NodeMask: UINT,
         pCreationParametersData: *mut c_void,
-        CreationParametersDataSizeInBytes: ULONG_PTR,
+        CreationParametersDataSizeInBytes: usize,
         riid: *const GUID,
         ppMetaCommand: *mut *mut c_void,
     ) -> HRESULT,
@@ -3855,12 +3855,12 @@ interface ID3D12GraphicsCommandList4(ID3D12GraphicsCommandList4Vtbl): ID3D12Grap
     fn InitializeMetaCommand(
         pMetaCommand: *mut ID3D12MetaCommand,
         pInitializationParametersData: *mut c_void,
-        InitializationParametersDataSizeInBytes: ULONG_PTR,
+        InitializationParametersDataSizeInBytes: usize,
     ) -> c_void,
     fn ExecuteMetaCommand(
         pMetaCommand: *mut ID3D12MetaCommand,
         pExecutionParametersData: *mut c_void,
-        ExecutionParametersDataSizeInBytes: ULONG_PTR,
+        ExecutionParametersDataSizeInBytes: usize,
     ) -> c_void,
     fn BuildRaytracingAccelerationStructure(
         pDesc: *mut D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC,
