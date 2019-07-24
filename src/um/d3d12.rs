@@ -2240,7 +2240,7 @@ STRUCT!{struct D3D12_GPU_DESCRIPTOR_HANDLE {
 
 STRUCT!{struct D3D12_DISCARD_REGION {
     NumRects: UINT,
-    pRects: *mut tagRECT,
+    pRects: *tagRECT,
     FirstSubresource: UINT,
     NumSubresources: UINT,
 }}
@@ -2830,7 +2830,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         Depth: f32,
         Stencil: u8,
         NumRects: UINT,
-        pRects: *mut tagRECT,
+        pRects: *tagRECT,
     ) -> c_void,
     fn ClearRenderTargetView(
         RenderTargetView: D3D12_CPU_DESCRIPTOR_HANDLE,
@@ -2856,7 +2856,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
     ) -> c_void,
     fn DiscardResource(
         pResource: *mut ID3D12Resource,
-        pRegion: *mut D3D12_DISCARD_REGION,
+        pRegion: *D3D12_DISCARD_REGION,
     ) -> c_void,
     fn BeginQuery(
         pQueryHeap: *mut ID3D12QueryHeap,
