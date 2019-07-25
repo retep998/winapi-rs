@@ -6,9 +6,6 @@
 use std::cell::Cell;
 use std::collections::HashMap;
 use std::env::var;
-use std::io::Write;
-
-extern crate winapi_tlb_bindgen;
 
 // (header name, &[header dependencies], &[library dependencies])
 const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static str])] = &[
@@ -490,17 +487,6 @@ fn try_everything() {
     graph.emit_libraries();
 }
 fn main() {
-    let mut d3d12_header = std::fs::File::create(r"src/um/d3d12.new.rs").expect("Could not make D3D12 header");
-
-    match winapi_tlb_bindgen::build(
-        std::path::Path::new(r"d3d12.Tlb"),
-        false,
-        &mut d3d12_header,
-    ) {
-        Ok(_) => println!("D3D12 header created!"),
-        Err(err) => write!(d3d12_header, "{}", err).unwrap()
-    }
-
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-env-changed=WINAPI_NO_BUNDLED_LIBRARIES");
     println!("cargo:rerun-if-env-changed=WINAPI_STATIC_NOBUNDLE");

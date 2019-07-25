@@ -25,9 +25,6 @@ winapi-i686-pc-windows-gnu = { version = "0.4", path = "i686" }
 [target.x86_64-pc-windows-gnu.dependencies]
 winapi-x86_64-pc-windows-gnu = { version = "0.4", path = "x86_64" }
 
-[build-dependencies]
-winapi-tlb-bindgen = { git = "https://github.com/Arnavion/winapi-tlb-bindgen" }
-
 [features]
 debug = ["impl-debug"]
 everything = []
