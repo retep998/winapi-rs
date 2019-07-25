@@ -458,7 +458,7 @@ interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12Pagea
         pHeapRangeStartOffsets: *const UINT,
         pRangeTileCounts: *const UINT,
         Flags: D3D12_TILE_MAPPING_FLAGS,
-    ) -> c_void,
+    ) -> (),
     fn CopyTileMappings(
         pDstResource: *mut ID3D12Resource,
         pDstRegionStartCoordinate: *const D3D12_TILED_RESOURCE_COORDINATE,
@@ -466,30 +466,30 @@ interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12Pagea
         pSrcRegionStartCoordinate: *const D3D12_TILED_RESOURCE_COORDINATE,
         pRegionSize: *const D3D12_TILE_REGION_SIZE,
         Flags: D3D12_TILE_MAPPING_FLAGS,
-    ) -> c_void,
+    ) -> (),
     fn ExecuteCommandLists(
         NumCommandLists: UINT,
         ppCommandLists: *const *mut ID3D12CommandList,
-    ) -> c_void,
+    ) -> (),
     fn SetMarker(
         Metadata: UINT,
         pData: *const c_void,
         Size: UINT,
-    ) -> c_void,
+    ) -> (),
     fn BeginEvent(
         Metadata: UINT,
         pData: *const c_void,
         Size: UINT,
-    ) -> c_void,
+    ) -> (),
     fn EndEvent(
-    ) -> c_void,
+    ) -> (),
     fn Signal(
         pFence: *mut ID3D12Fence,
-        Value: u64,
+        Value: UINT64,
     ) -> HRESULT,
     fn Wait(
         pFence: *mut ID3D12Fence,
-        Value: u64,
+        Value: UINT64,
     ) -> HRESULT,
     fn GetTimestampFrequency(
         pFrequency: *mut UINT64,
@@ -512,7 +512,7 @@ interface ID3D12Resource(ID3D12ResourceVtbl): ID3D12Pageable(ID3D12PageableVtbl)
     fn Unmap(
         Subresource: UINT,
         pWrittenRange: *const D3D12_RANGE,
-    ) -> c_void,
+    ) -> (),
     fn GetDesc(
     ) -> D3D12_RESOURCE_DESC,
     fn GetGPUVirtualAddress(
@@ -538,19 +538,19 @@ interface ID3D12Resource(ID3D12ResourceVtbl): ID3D12Pageable(ID3D12PageableVtbl)
 }}
 
 STRUCT!{struct D3D12_RANGE {
-    Begin: usize,
-    End: usize,
+    Begin: SIZE_T,
+    End: SIZE_T,
 }}
 
 pub type ULONG_PTR = u64;
 
 STRUCT!{struct D3D12_RESOURCE_DESC {
     Dimension: D3D12_RESOURCE_DIMENSION,
-    Alignment: u64,
-    Width: u64,
+    Alignment: UINT64,
+    Width: UINT64,
     Height: UINT,
-    DepthOrArraySize: u16,
-    MipLevels: u16,
+    DepthOrArraySize: UINT16,
+    MipLevels: UINT16,
     Format: DXGI_FORMAT,
     SampleDesc: DXGI_SAMPLE_DESC,
     Layout: D3D12_TEXTURE_LAYOUT,
@@ -592,7 +592,7 @@ STRUCT!{struct D3D12_BOX {
     back: UINT,
 }}
 
-pub type D3D12_RECT = RECT;
+pub type D3D12_RECT = D3D12_RECT;
 
 STRUCT!{struct D3D12_HEAP_PROPERTIES {
     Type: D3D12_HEAP_TYPE,
@@ -648,10 +648,10 @@ STRUCT!{struct D3D12_TILED_RESOURCE_COORDINATE {
 
 STRUCT!{struct D3D12_TILE_REGION_SIZE {
     NumTiles: UINT,
-    UseBox: i32,
+    UseBox: BOOL,
     Width: UINT,
-    Height: u16,
-    Depth: u16,
+    Height: UINT16,
+    Depth: UINT16,
 }}
 
 RIDL!{#[uuid(0x6b3b2502, 0x6e51, 0x45b3, 0x90, 0xee, 0x98, 0x84, 0x26, 0x5e, 0x8d, 0xf3)]
@@ -661,9 +661,9 @@ interface ID3D12Heap(ID3D12HeapVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
 }}
 
 STRUCT!{struct D3D12_HEAP_DESC {
-    SizeInBytes: u64,
+    SizeInBytes: UINT64,
     Properties: D3D12_HEAP_PROPERTIES,
-    Alignment: u64,
+    Alignment: UINT64,
     Flags: D3D12_HEAP_FLAGS,
 }}
 
@@ -699,11 +699,11 @@ interface ID3D12Fence(ID3D12FenceVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
     fn GetCompletedValue(
     ) -> u64,
     fn SetEventOnCompletion(
-        Value: u64,
+        Value: UINT64,
         hEvent: *const c_void,
     ) -> HRESULT,
     fn Signal(
-        Value: u64,
+        Value: UINT64,
     ) -> HRESULT,
 }}
 
@@ -763,18 +763,18 @@ STRUCT!{struct D3D12_SO_DECLARATION_ENTRY {
     Stream: UINT,
     SemanticName: LPSTR,
     SemanticIndex: UINT,
-    StartComponent: u8,
-    ComponentCount: u8,
-    OutputSlot: u8,
+    StartComponent: UINT8,
+    ComponentCount: UINT8,
+    OutputSlot: UINT8,
 }}
 
 STRUCT!{struct D3D12_VIEWPORT {
-    TopLeftX: f32,
-    TopLeftY: f32,
-    Width: f32,
-    Height: f32,
-    MinDepth: f32,
-    MaxDepth: f32,
+    TopLeftX: FLOAT,
+    TopLeftY: FLOAT,
+    Width: FLOAT,
+    Height: FLOAT,
+    MinDepth: FLOAT,
+    MaxDepth: FLOAT,
 }}
 
 ENUM!{enum D3D12_COMPARISON_FUNC {
@@ -812,26 +812,26 @@ STRUCT!{struct D3D12_DEPTH_STENCILOP_DESC {
 }}
 
 STRUCT!{struct D3D12_DEPTH_STENCIL_DESC {
-    DepthEnable: i32,
+    DepthEnable: BOOL,
     DepthWriteMask: D3D12_DEPTH_WRITE_MASK,
     DepthFunc: D3D12_COMPARISON_FUNC,
-    StencilEnable: i32,
-    StencilReadMask: u8,
-    StencilWriteMask: u8,
+    StencilEnable: BOOL,
+    StencilReadMask: UINT8,
+    StencilWriteMask: UINT8,
     FrontFace: D3D12_DEPTH_STENCILOP_DESC,
     BackFace: D3D12_DEPTH_STENCILOP_DESC,
 }}
 
 STRUCT!{struct D3D12_DEPTH_STENCIL_DESC1 {
-    DepthEnable: i32,
+    DepthEnable: BOOL,
     DepthWriteMask: D3D12_DEPTH_WRITE_MASK,
     DepthFunc: D3D12_COMPARISON_FUNC,
-    StencilEnable: i32,
-    StencilReadMask: u8,
-    StencilWriteMask: u8,
+    StencilEnable: BOOL,
+    StencilReadMask: UINT8,
+    StencilWriteMask: UINT8,
     FrontFace: D3D12_DEPTH_STENCILOP_DESC,
     BackFace: D3D12_DEPTH_STENCILOP_DESC,
-    DepthBoundsTestEnable: i32,
+    DepthBoundsTestEnable: BOOL,
 }}
 
 ENUM!{enum D3D12_BLEND {
@@ -890,8 +890,8 @@ ENUM!{enum D3D12_LOGIC_OP {
 }}
 
 STRUCT!{struct D3D12_RENDER_TARGET_BLEND_DESC {
-    BlendEnable: i32,
-    LogicOpEnable: i32,
+    BlendEnable: BOOL,
+    LogicOpEnable: BOOL,
     SrcBlend: D3D12_BLEND,
     DestBlend: D3D12_BLEND,
     BlendOp: D3D12_BLEND_OP,
@@ -899,12 +899,12 @@ STRUCT!{struct D3D12_RENDER_TARGET_BLEND_DESC {
     DestBlendAlpha: D3D12_BLEND,
     BlendOpAlpha: D3D12_BLEND_OP,
     LogicOp: D3D12_LOGIC_OP,
-    RenderTargetWriteMask: u8,
+    RenderTargetWriteMask: UINT8,
 }}
 
 STRUCT!{struct D3D12_BLEND_DESC {
-    AlphaToCoverageEnable: i32,
-    IndependentBlendEnable: i32,
+    AlphaToCoverageEnable: BOOL,
+    IndependentBlendEnable: BOOL,
     RenderTarget: [D3D12_RENDER_TARGET_BLEND_DESC; 8],
 }}
 
@@ -916,13 +916,13 @@ ENUM!{enum D3D12_CONSERVATIVE_RASTERIZATION_MODE {
 STRUCT!{struct D3D12_RASTERIZER_DESC {
     FillMode: D3D12_FILL_MODE,
     CullMode: D3D12_CULL_MODE,
-    FrontCounterClockwise: i32,
+    FrontCounterClockwise: BOOL,
     DepthBias: INT,
-    DepthBiasClamp: f32,
-    SlopeScaledDepthBias: f32,
-    DepthClipEnable: i32,
-    MultisampleEnable: i32,
-    AntialiasedLineEnable: i32,
+    DepthBiasClamp: FLOAT,
+    SlopeScaledDepthBias: FLOAT,
+    DepthClipEnable: BOOL,
+    MultisampleEnable: BOOL,
+    AntialiasedLineEnable: BOOL,
     ForcedSampleCount: UINT,
     ConservativeRaster: D3D12_CONSERVATIVE_RASTERIZATION_MODE,
 }}
@@ -933,7 +933,7 @@ interface ID3D12RootSignature(ID3D12RootSignatureVtbl): ID3D12DeviceChild(ID3D12
 
 STRUCT!{struct D3D12_SHADER_BYTECODE {
     pShaderBytecode: *const c_void,
-    BytecodeLength: usize,
+    BytecodeLength: SIZE_T,
 }}
 
 STRUCT!{struct D3D12_STREAM_OUTPUT_DESC {
@@ -957,7 +957,7 @@ ENUM!{enum D3D12_INDEX_BUFFER_STRIP_CUT_VALUE {
 
 STRUCT!{struct D3D12_CACHED_PIPELINE_STATE {
     pCachedBlob: *const c_void,
-    CachedBlobSizeInBytes: usize,
+    CachedBlobSizeInBytes: SIZE_T,
 }}
 
 ENUM!{enum D3D12_PIPELINE_STATE_FLAGS {
@@ -1003,7 +1003,7 @@ STRUCT!{struct D3D12_RT_FORMAT_ARRAY {
 }}
 
 STRUCT!{struct D3D12_PIPELINE_STATE_STREAM_DESC {
-    SizeInBytes: usize,
+    SizeInBytes: SIZE_T,
     pPipelineStateSubobjectStream: *mut c_void,
 }}
 
@@ -1165,34 +1165,34 @@ ENUM!{enum D3D12_VIEW_INSTANCING_TIER {
 }}
 
 STRUCT!{struct D3D12_FEATURE_DATA_D3D12_OPTIONS {
-    DoublePrecisionFloatShaderOps: i32,
-    OutputMergerLogicOp: i32,
+    DoublePrecisionFloatShaderOps: BOOL,
+    OutputMergerLogicOp: BOOL,
     MinPrecisionSupport: D3D12_SHADER_MIN_PRECISION_SUPPORT,
     TiledResourcesTier: D3D12_TILED_RESOURCES_TIER,
     ResourceBindingTier: D3D12_RESOURCE_BINDING_TIER,
-    PSSpecifiedStencilRefSupported: i32,
-    TypedUAVLoadAdditionalFormats: i32,
-    ROVsSupported: i32,
+    PSSpecifiedStencilRefSupported: BOOL,
+    TypedUAVLoadAdditionalFormats: BOOL,
+    ROVsSupported: BOOL,
     ConservativeRasterizationTier: D3D12_CONSERVATIVE_RASTERIZATION_TIER,
     MaxGPUVirtualAddressBitsPerResource: UINT,
-    StandardSwizzle64KBSupported: i32,
+    StandardSwizzle64KBSupported: BOOL,
     CrossNodeSharingTier: D3D12_CROSS_NODE_SHARING_TIER,
-    CrossAdapterRowMajorTextureSupported: i32,
-    VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: i32,
+    CrossAdapterRowMajorTextureSupported: BOOL,
+    VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: BOOL,
     ResourceHeapTier: D3D12_RESOURCE_HEAP_TIER,
 }}
 
 STRUCT!{struct D3D12_FEATURE_DATA_D3D12_OPTIONS1 {
-    WaveOps: i32,
+    WaveOps: BOOL,
     WaveLaneCountMin: UINT,
     WaveLaneCountMax: UINT,
     TotalLaneCount: UINT,
-    ExpandedComputeResourceStates: i32,
-    Int64ShaderOps: i32,
+    ExpandedComputeResourceStates: BOOL,
+    Int64ShaderOps: BOOL,
 }}
 
 STRUCT!{struct D3D12_FEATURE_DATA_D3D12_OPTIONS2 {
-    DepthBoundsTestSupported: i32,
+    DepthBoundsTestSupported: BOOL,
     ProgrammableSamplePositionsTier: D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER,
 }}
 
@@ -1208,17 +1208,17 @@ STRUCT!{struct D3D12_FEATURE_DATA_ROOT_SIGNATURE {
 
 STRUCT!{struct D3D12_FEATURE_DATA_ARCHITECTURE {
     NodeIndex: UINT,
-    TileBasedRenderer: i32,
-    UMA: i32,
-    CacheCoherentUMA: i32,
+    TileBasedRenderer: BOOL,
+    UMA: BOOL,
+    CacheCoherentUMA: BOOL,
 }}
 
 STRUCT!{struct D3D12_FEATURE_DATA_ARCHITECTURE1 {
     NodeIndex: UINT,
-    TileBasedRenderer: i32,
-    UMA: i32,
-    CacheCoherentUMA: i32,
-    IsolatedMMU: i32,
+    TileBasedRenderer: BOOL,
+    UMA: BOOL,
+    CacheCoherentUMA: BOOL,
+    IsolatedMMU: BOOL,
 }}
 
 STRUCT!{struct D3D12_FEATURE_DATA_FEATURE_LEVELS {
@@ -1255,7 +1255,7 @@ STRUCT!{struct D3D12_FEATURE_DATA_MULTISAMPLE_QUALITY_LEVELS {
 
 STRUCT!{struct D3D12_FEATURE_DATA_FORMAT_INFO {
     Format: DXGI_FORMAT,
-    PlaneCount: u8,
+    PlaneCount: UINT8,
 }}
 
 STRUCT!{struct D3D12_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT {
@@ -1278,7 +1278,7 @@ STRUCT!{struct D3D12_FEATURE_DATA_SHADER_CACHE {
 STRUCT!{struct D3D12_FEATURE_DATA_COMMAND_QUEUE_PRIORITY {
     CommandListType: D3D12_COMMAND_LIST_TYPE,
     Priority: UINT,
-    PriorityForTypeIsSupported: i32,
+    PriorityForTypeIsSupported: BOOL,
 }}
 
 ENUM!{enum D3D12_COMMAND_LIST_SUPPORT_FLAGS {
@@ -1292,15 +1292,15 @@ ENUM!{enum D3D12_COMMAND_LIST_SUPPORT_FLAGS {
 }}
 
 STRUCT!{struct D3D12_FEATURE_DATA_D3D12_OPTIONS3 {
-    CopyQueueTimestampQueriesSupported: i32,
-    CastingFullyTypedFormatSupported: i32,
+    CopyQueueTimestampQueriesSupported: BOOL,
+    CastingFullyTypedFormatSupported: BOOL,
     WriteBufferImmediateSupportFlags: D3D12_COMMAND_LIST_SUPPORT_FLAGS,
     ViewInstancingTier: D3D12_VIEW_INSTANCING_TIER,
-    BarycentricsSupported: i32,
+    BarycentricsSupported: BOOL,
 }}
 
 STRUCT!{struct D3D12_FEATURE_DATA_EXISTING_HEAPS {
-    Supported: i32,
+    Supported: BOOL,
 }}
 
 ENUM!{enum D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER {
@@ -1309,9 +1309,9 @@ ENUM!{enum D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER {
 }}
 
 STRUCT!{struct D3D12_FEATURE_DATA_D3D12_OPTIONS4 {
-    MSAA64KBAlignedTextureSupported: i32,
+    MSAA64KBAlignedTextureSupported: BOOL,
     SharedResourceCompatibilityTier: D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER,
-    Native16BitShaderOpsSupported: i32,
+    Native16BitShaderOpsSupported: BOOL,
 }}
 
 ENUM!{enum D3D12_HEAP_SERIALIZATION_TIER {
@@ -1326,7 +1326,7 @@ STRUCT!{struct D3D12_FEATURE_DATA_SERIALIZATION {
 
 STRUCT!{struct D3D12_FEATURE_DATA_CROSS_NODE {
     SharingTier: D3D12_CROSS_NODE_SHARING_TIER,
-    AtomicShaderInstructions: i32,
+    AtomicShaderInstructions: BOOL,
 }}
 
 ENUM!{enum D3D12_RENDER_PASS_TIER {
@@ -1341,25 +1341,25 @@ ENUM!{enum D3D12_RAYTRACING_TIER {
 }}
 
 STRUCT!{struct D3D12_FEATURE_DATA_D3D12_OPTIONS5 {
-    SRVOnlyTiledResourceTier3: i32,
+    SRVOnlyTiledResourceTier3: BOOL,
     RenderPassesTier: D3D12_RENDER_PASS_TIER,
     RaytracingTier: D3D12_RAYTRACING_TIER,
 }}
 
 STRUCT!{struct D3D12_RESOURCE_ALLOCATION_INFO {
-    SizeInBytes: u64,
-    Alignment: u64,
+    SizeInBytes: UINT64,
+    Alignment: UINT64,
 }}
 
 STRUCT!{struct D3D12_RESOURCE_ALLOCATION_INFO1 {
-    Offset: u64,
-    Alignment: u64,
-    SizeInBytes: u64,
+    Offset: UINT64,
+    Alignment: UINT64,
+    SizeInBytes: UINT64,
 }}
 
 STRUCT!{struct D3D12_DEPTH_STENCIL_VALUE {
-    Depth: f32,
-    Stencil: u8,
+    Depth: FLOAT,
+    Stencil: UINT8,
 }}
 
 STRUCT!{struct D3D12_CLEAR_VALUE {
@@ -1374,8 +1374,8 @@ UNION!{union D3D12_CLEAR_VALUE_u {
 }}
 
 STRUCT!{struct D3D12_RANGE_UINT64 {
-    Begin: u64,
-    End: u64,
+    Begin: UINT64,
+    End: UINT64,
 }}
 
 STRUCT!{struct D3D12_SUBRESOURCE_RANGE_UINT64 {
@@ -1384,15 +1384,15 @@ STRUCT!{struct D3D12_SUBRESOURCE_RANGE_UINT64 {
 }}
 
 STRUCT!{struct D3D12_SUBRESOURCE_INFO {
-    Offset: u64,
+    Offset: UINT64,
     RowPitch: UINT,
     DepthPitch: UINT,
 }}
 
 STRUCT!{struct D3D12_SUBRESOURCE_TILING {
     WidthInTiles: UINT,
-    HeightInTiles: u16,
-    DepthInTiles: u16,
+    HeightInTiles: UINT16,
+    DepthInTiles: UINT16,
     StartTileIndexInOverallResource: UINT,
 }}
 
@@ -1403,8 +1403,8 @@ STRUCT!{struct D3D12_TILE_SHAPE {
 }}
 
 STRUCT!{struct D3D12_PACKED_MIP_INFO {
-    NumStandardMips: u8,
-    NumPackedMips: u8,
+    NumStandardMips: UINT8,
+    NumPackedMips: UINT8,
     NumTilesForPackedMips: UINT,
     StartTileIndexInOverallResource: UINT,
 }}
@@ -1451,19 +1451,19 @@ ENUM!{enum D3D12_RESOURCE_BARRIER_TYPE {
 }}
 
 STRUCT!{struct D3D12_RESOURCE_TRANSITION_BARRIER {
-    pResource: *const ID3D12Resource,
+    pResource: *mut ID3D12Resource,
     Subresource: UINT,
     StateBefore: D3D12_RESOURCE_STATES,
     StateAfter: D3D12_RESOURCE_STATES,
 }}
 
 STRUCT!{struct D3D12_RESOURCE_ALIASING_BARRIER {
-    pResourceBefore: *const ID3D12Resource,
-    pResourceAfter: *const ID3D12Resource,
+    pResourceBefore: *mut ID3D12Resource,
+    pResourceAfter: *mut ID3D12Resource,
 }}
 
 STRUCT!{struct D3D12_RESOURCE_UAV_BARRIER {
-    pResource: *const ID3D12Resource,
+    pResource: *mut ID3D12Resource,
 }}
 
 ENUM!{enum D3D12_RESOURCE_BARRIER_FLAGS {
@@ -1494,7 +1494,7 @@ STRUCT!{struct D3D12_SUBRESOURCE_FOOTPRINT {
 }}
 
 STRUCT!{struct D3D12_PLACED_SUBRESOURCE_FOOTPRINT {
-    Offset: u64,
+    Offset: UINT64,
     Footprint: D3D12_SUBRESOURCE_FOOTPRINT,
 }}
 
@@ -1523,8 +1523,8 @@ ENUM!{enum D3D12_RESOLVE_MODE {
 }}
 
 STRUCT!{struct D3D12_SAMPLE_POSITION {
-    X: i8,
-    Y: i8,
+    X: INT8,
+    Y: INT8,
 }}
 
 STRUCT!{struct D3D12_VIEW_INSTANCE_LOCATION {
@@ -1563,7 +1563,7 @@ ENUM!{enum D3D12_BUFFER_SRV_FLAGS {
 }}
 
 STRUCT!{struct D3D12_BUFFER_SRV {
-    FirstElement: u64,
+    FirstElement: UINT64,
     NumElements: UINT,
     StructureByteStride: UINT,
     Flags: D3D12_BUFFER_SRV_FLAGS,
@@ -1572,7 +1572,7 @@ STRUCT!{struct D3D12_BUFFER_SRV {
 STRUCT!{struct D3D12_TEX1D_SRV {
     MostDetailedMip: UINT,
     MipLevels: UINT,
-    ResourceMinLODClamp: f32,
+    ResourceMinLODClamp: FLOAT,
 }}
 
 STRUCT!{struct D3D12_TEX1D_ARRAY_SRV {
@@ -1580,14 +1580,14 @@ STRUCT!{struct D3D12_TEX1D_ARRAY_SRV {
     MipLevels: UINT,
     FirstArraySlice: UINT,
     ArraySize: UINT,
-    ResourceMinLODClamp: f32,
+    ResourceMinLODClamp: FLOAT,
 }}
 
 STRUCT!{struct D3D12_TEX2D_SRV {
     MostDetailedMip: UINT,
     MipLevels: UINT,
     PlaneSlice: UINT,
-    ResourceMinLODClamp: f32,
+    ResourceMinLODClamp: FLOAT,
 }}
 
 STRUCT!{struct D3D12_TEX2D_ARRAY_SRV {
@@ -1596,19 +1596,19 @@ STRUCT!{struct D3D12_TEX2D_ARRAY_SRV {
     FirstArraySlice: UINT,
     ArraySize: UINT,
     PlaneSlice: UINT,
-    ResourceMinLODClamp: f32,
+    ResourceMinLODClamp: FLOAT,
 }}
 
 STRUCT!{struct D3D12_TEX3D_SRV {
     MostDetailedMip: UINT,
     MipLevels: UINT,
-    ResourceMinLODClamp: f32,
+    ResourceMinLODClamp: FLOAT,
 }}
 
 STRUCT!{struct D3D12_TEXCUBE_SRV {
     MostDetailedMip: UINT,
     MipLevels: UINT,
-    ResourceMinLODClamp: f32,
+    ResourceMinLODClamp: FLOAT,
 }}
 
 STRUCT!{struct D3D12_TEXCUBE_ARRAY_SRV {
@@ -1616,7 +1616,7 @@ STRUCT!{struct D3D12_TEXCUBE_ARRAY_SRV {
     MipLevels: UINT,
     First2DArrayFace: UINT,
     NumCubes: UINT,
-    ResourceMinLODClamp: f32,
+    ResourceMinLODClamp: FLOAT,
 }}
 
 STRUCT!{struct D3D12_TEX2DMS_SRV {
@@ -1629,7 +1629,7 @@ STRUCT!{struct D3D12_TEX2DMS_ARRAY_SRV {
 }}
 
 STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV {
-    Location: u64,
+    Location: UINT64,
 }}
 
 ENUM!{enum D3D12_SRV_DIMENSION {
@@ -1670,7 +1670,7 @@ UNION!{union D3D12_SHADER_RESOURCE_VIEW_DESC_u {
 }}
 
 STRUCT!{struct D3D12_CONSTANT_BUFFER_VIEW_DESC {
-    BufferLocation: u64,
+    BufferLocation: D3D12_GPU_VIRTUAL_ADDRESS,
     SizeInBytes: UINT,
 }}
 
@@ -1746,12 +1746,12 @@ STRUCT!{struct D3D12_SAMPLER_DESC {
     AddressU: D3D12_TEXTURE_ADDRESS_MODE,
     AddressV: D3D12_TEXTURE_ADDRESS_MODE,
     AddressW: D3D12_TEXTURE_ADDRESS_MODE,
-    MipLODBias: f32,
+    MipLODBias: FLOAT,
     MaxAnisotropy: UINT,
     ComparisonFunc: D3D12_COMPARISON_FUNC,
-    BorderColor: *const [FLOAT; 4],
-    MinLOD: f32,
-    MaxLOD: f32,
+    BorderColor: [FLOAT; 4],
+    MinLOD: FLOAT,
+    MaxLOD: FLOAT,
 }}
 
 ENUM!{enum D3D12_BUFFER_UAV_FLAGS {
@@ -1760,10 +1760,10 @@ ENUM!{enum D3D12_BUFFER_UAV_FLAGS {
 }}
 
 STRUCT!{struct D3D12_BUFFER_UAV {
-    FirstElement: u64,
+    FirstElement: UINT64,
     NumElements: UINT,
     StructureByteStride: UINT,
-    CounterOffsetInBytes: u64,
+    CounterOffsetInBytes: UINT64,
     Flags: D3D12_BUFFER_UAV_FLAGS,
 }}
 
@@ -1822,7 +1822,7 @@ UNION!{union D3D12_UNORDERED_ACCESS_VIEW_DESC_u {
 }}
 
 STRUCT!{struct D3D12_BUFFER_RTV {
-    FirstElement: u64,
+    FirstElement: UINT64,
     NumElements: UINT,
 }}
 
@@ -2071,12 +2071,12 @@ STRUCT!{struct D3D12_STATIC_SAMPLER_DESC {
     AddressU: D3D12_TEXTURE_ADDRESS_MODE,
     AddressV: D3D12_TEXTURE_ADDRESS_MODE,
     AddressW: D3D12_TEXTURE_ADDRESS_MODE,
-    MipLODBias: f32,
+    MipLODBias: FLOAT,
     MaxAnisotropy: UINT,
     ComparisonFunc: D3D12_COMPARISON_FUNC,
     BorderColor: D3D12_STATIC_BORDER_COLOR,
-    MinLOD: f32,
-    MaxLOD: f32,
+    MinLOD: FLOAT,
+    MaxLOD: FLOAT,
     ShaderRegister: UINT,
     RegisterSpace: UINT,
     ShaderVisibility: D3D12_SHADER_VISIBILITY,
@@ -2237,16 +2237,16 @@ extern "system" {
 }
 
 STRUCT!{struct D3D12_CPU_DESCRIPTOR_HANDLE {
-    ptr: ULONG_PTR,
+    ptr: SIZE_T,
 }}
 
 STRUCT!{struct D3D12_GPU_DESCRIPTOR_HANDLE {
-    ptr: u64,
+    ptr: UINT64,
 }}
 
 STRUCT!{struct D3D12_DISCARD_REGION {
     NumRects: UINT,
-    pRects: *const RECT,
+    pRects: *const D3D12_RECT,
     FirstSubresource: UINT,
     NumSubresources: UINT,
 }}
@@ -2284,28 +2284,28 @@ ENUM!{enum D3D12_PREDICATION_OP {
 }}
 
 STRUCT!{struct D3D12_QUERY_DATA_PIPELINE_STATISTICS {
-    IAVertices: u64,
-    IAPrimitives: u64,
-    VSInvocations: u64,
-    GSInvocations: u64,
-    GSPrimitives: u64,
-    CInvocations: u64,
-    CPrimitives: u64,
-    PSInvocations: u64,
-    HSInvocations: u64,
-    DSInvocations: u64,
-    CSInvocations: u64,
+    IAVertices: UINT64,
+    IAPrimitives: UINT64,
+    VSInvocations: UINT64,
+    GSInvocations: UINT64,
+    GSPrimitives: UINT64,
+    CInvocations: UINT64,
+    CPrimitives: UINT64,
+    PSInvocations: UINT64,
+    HSInvocations: UINT64,
+    DSInvocations: UINT64,
+    CSInvocations: UINT64,
 }}
 
 STRUCT!{struct D3D12_QUERY_DATA_SO_STATISTICS {
-    NumPrimitivesWritten: u64,
-    PrimitivesStorageNeeded: u64,
+    NumPrimitivesWritten: UINT64,
+    PrimitivesStorageNeeded: UINT64,
 }}
 
 STRUCT!{struct D3D12_STREAM_OUTPUT_BUFFER_VIEW {
-    BufferLocation: u64,
-    SizeInBytes: u64,
-    BufferFilledSizeLocation: u64,
+    BufferLocation: D3D12_GPU_VIRTUAL_ADDRESS,
+    SizeInBytes: UINT64,
+    BufferFilledSizeLocation: D3D12_GPU_VIRTUAL_ADDRESS,
 }}
 
 STRUCT!{struct D3D12_DRAW_ARGUMENTS {
@@ -2330,13 +2330,13 @@ STRUCT!{struct D3D12_DISPATCH_ARGUMENTS {
 }}
 
 STRUCT!{struct D3D12_VERTEX_BUFFER_VIEW {
-    BufferLocation: u64,
+    BufferLocation: D3D12_GPU_VIRTUAL_ADDRESS,
     SizeInBytes: UINT,
     StrideInBytes: UINT,
 }}
 
 STRUCT!{struct D3D12_INDEX_BUFFER_VIEW {
-    BufferLocation: u64,
+    BufferLocation: D3D12_GPU_VIRTUAL_ADDRESS,
     SizeInBytes: UINT,
     Format: DXGI_FORMAT,
 }}
@@ -2360,32 +2360,32 @@ STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC {
 
 UNION!{union D3D12_INDIRECT_ARGUMENT_DESC_u {
     [u32; 3],
-    VertexBuffer VertexBuffer_mut: __MIDL___MIDL_itf_d3d12_0001_0002_0002,
-    Constant Constant_mut: __MIDL___MIDL_itf_d3d12_0001_0002_0003,
-    ConstantBufferView ConstantBufferView_mut: __MIDL___MIDL_itf_d3d12_0001_0002_0004,
-    ShaderResourceView ShaderResourceView_mut: __MIDL___MIDL_itf_d3d12_0001_0002_0005,
-    UnorderedAccessView UnorderedAccessView_mut: __MIDL___MIDL_itf_d3d12_0001_0002_0006,
+    VertexBuffer VertexBuffer_mut: D3D12_INDIRECT_ARGUMENT_DESC_VertexBuffer,
+    Constant Constant_mut: D3D12_INDIRECT_ARGUMENT_DESC_Constant,
+    ConstantBufferView ConstantBufferView_mut: D3D12_INDIRECT_ARGUMENT_DESC_ConstantBufferView,
+    ShaderResourceView ShaderResourceView_mut: D3D12_INDIRECT_ARGUMENT_DESC_ShaderResourceView,
+    UnorderedAccessView UnorderedAccessView_mut: D3D12_INDIRECT_ARGUMENT_DESC_UnorderedAccessView,
 }}
 
-STRUCT!{struct __MIDL___MIDL_itf_d3d12_0001_0002_0002 {
+STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC_VertexBuffer {
     Slot: UINT,
 }}
 
-STRUCT!{struct __MIDL___MIDL_itf_d3d12_0001_0002_0003 {
+STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC_Constant {
     RootParameterIndex: UINT,
     DestOffsetIn32BitValues: UINT,
     Num32BitValuesToSet: UINT,
 }}
 
-STRUCT!{struct __MIDL___MIDL_itf_d3d12_0001_0002_0004 {
+STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC_ConstantBufferView {
     RootParameterIndex: UINT,
 }}
 
-STRUCT!{struct __MIDL___MIDL_itf_d3d12_0001_0002_0005 {
+STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC_ShaderResourceView {
     RootParameterIndex: UINT,
 }}
 
-STRUCT!{struct __MIDL___MIDL_itf_d3d12_0001_0002_0006 {
+STRUCT!{struct D3D12_INDIRECT_ARGUMENT_DESC_UnorderedAccessView {
     RootParameterIndex: UINT,
 }}
 
@@ -2444,39 +2444,39 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     fn CreateRootSignature(
         NodeMask: UINT,
         pBlobWithRootSignature: *const c_void,
-        blobLengthInBytes: usize,
+        blobLengthInBytes: SIZE_T,
         riid: REFIID,
         ppvRootSignature: *mut *mut c_void,
     ) -> HRESULT,
     fn CreateConstantBufferView(
         pDesc: *const D3D12_CONSTANT_BUFFER_VIEW_DESC,
         DestDescriptor: D3D12_CPU_DESCRIPTOR_HANDLE,
-    ) -> c_void,
+    ) -> (),
     fn CreateShaderResourceView(
         pResource: *mut ID3D12Resource,
         pDesc: *const D3D12_SHADER_RESOURCE_VIEW_DESC,
         DestDescriptor: D3D12_CPU_DESCRIPTOR_HANDLE,
-    ) -> c_void,
+    ) -> (),
     fn CreateUnorderedAccessView(
         pResource: *mut ID3D12Resource,
         pCounterResource: *mut ID3D12Resource,
         pDesc: *const D3D12_UNORDERED_ACCESS_VIEW_DESC,
         DestDescriptor: D3D12_CPU_DESCRIPTOR_HANDLE,
-    ) -> c_void,
+    ) -> (),
     fn CreateRenderTargetView(
         pResource: *mut ID3D12Resource,
         pDesc: *const D3D12_RENDER_TARGET_VIEW_DESC,
         DestDescriptor: D3D12_CPU_DESCRIPTOR_HANDLE,
-    ) -> c_void,
+    ) -> (),
     fn CreateDepthStencilView(
         pResource: *mut ID3D12Resource,
         pDesc: *const D3D12_DEPTH_STENCIL_VIEW_DESC,
         DestDescriptor: D3D12_CPU_DESCRIPTOR_HANDLE,
-    ) -> c_void,
+    ) -> (),
     fn CreateSampler(
         pDesc: *const D3D12_SAMPLER_DESC,
         DestDescriptor: D3D12_CPU_DESCRIPTOR_HANDLE,
-    ) -> c_void,
+    ) -> (),
     fn CopyDescriptors(
         NumDestDescriptorRanges: UINT,
         pDestDescriptorRangeStarts: *const D3D12_CPU_DESCRIPTOR_HANDLE,
@@ -2485,13 +2485,13 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         pSrcDescriptorRangeStarts: *const D3D12_CPU_DESCRIPTOR_HANDLE,
         pSrcDescriptorRangeSizes: *const UINT,
         DescriptorHeapsType: D3D12_DESCRIPTOR_HEAP_TYPE,
-    ) -> c_void,
+    ) -> (),
     fn CopyDescriptorsSimple(
         NumDescriptors: UINT,
         DestDescriptorRangeStart: D3D12_CPU_DESCRIPTOR_HANDLE,
         SrcDescriptorRangeStart: D3D12_CPU_DESCRIPTOR_HANDLE,
         DescriptorHeapsType: D3D12_DESCRIPTOR_HEAP_TYPE,
-    ) -> c_void,
+    ) -> (),
     fn GetResourceAllocationInfo(
         visibleMask: UINT,
         numResourceDescs: UINT,
@@ -2517,7 +2517,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     ) -> HRESULT,
     fn CreatePlacedResource(
         pHeap: *mut ID3D12Heap,
-        HeapOffset: u64,
+        HeapOffset: UINT64,
         pDesc: *const D3D12_RESOURCE_DESC,
         InitialState: D3D12_RESOURCE_STATES,
         pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
@@ -2534,7 +2534,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     fn CreateSharedHandle(
         pObject: *mut ID3D12DeviceChild,
         pAttributes: *const _SECURITY_ATTRIBUTES,
-        Access: u32,
+        Access: UINT,
         Name: LPCWSTR,
         pHandle: *mut HANDLE,
     ) -> HRESULT,
@@ -2545,7 +2545,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     ) -> HRESULT,
     fn OpenSharedHandleByName(
         Name: LPCWSTR,
-        Access: u32,
+        Access: UINT,
         pNTHandle: *mut HANDLE,
     ) -> HRESULT,
     fn MakeResident(
@@ -2557,7 +2557,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         ppObjects: *mut *mut ID3D12Pageable,
     ) -> HRESULT,
     fn CreateFence(
-        InitialValue: u64,
+        InitialValue: UINT64,
         Flags: D3D12_FENCE_FLAGS,
         riid: REFIID,
         ppFence: *mut *mut c_void,
@@ -2568,19 +2568,19 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         pResourceDesc: *const D3D12_RESOURCE_DESC,
         FirstSubresource: UINT,
         NumSubresources: UINT,
-        BaseOffset: u64,
+        BaseOffset: UINT64,
         pLayouts: *mut D3D12_PLACED_SUBRESOURCE_FOOTPRINT,
         pNumRows: *mut UINT,
         pRowSizeInBytes: *mut u64,
         pTotalBytes: *mut u64,
-    ) -> c_void,
+    ) -> (),
     fn CreateQueryHeap(
         pDesc: *const D3D12_QUERY_HEAP_DESC,
         riid: REFIID,
         ppvHeap: *mut *mut c_void,
     ) -> HRESULT,
     fn SetStablePowerState(
-        Enable: i32,
+        Enable: BOOL,
     ) -> HRESULT,
     fn CreateCommandSignature(
         pDesc: *const D3D12_COMMAND_SIGNATURE_DESC,
@@ -2596,7 +2596,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         pNumSubresourceTilings: *mut UINT,
         FirstSubresourceTilingToGet: UINT,
         pSubresourceTilingsForNonPackedMips: *mut D3D12_SUBRESOURCE_TILING,
-    ) -> c_void,
+    ) -> (),
     fn GetAdapterLuid(
     ) -> __LUID,
 }}
@@ -2610,27 +2610,8 @@ interface ID3D12CommandAllocator(ID3D12CommandAllocatorVtbl): ID3D12Pageable(ID3
 RIDL!{#[uuid(0x765a30f3, 0xf624, 0x4c6f, 0xa8, 0x28, 0xac, 0xe9, 0x48, 0x62, 0x24, 0x45)]
 interface ID3D12PipelineState(ID3D12PipelineStateVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
     fn GetCachedBlob(
-        ppBlob: *mut *mut ID3D10Blob,
+        ppBlob: *mut *mut ID3DBlob,
     ) -> HRESULT,
-}}
-
-RIDL!{#[uuid(0x8ba5fb08, 0x5195, 0x40e2, 0xac, 0x58, 0x0d, 0x98, 0x9c, 0x3a, 0x01, 0x02)]
-interface ID3D10Blob(ID3D10BlobVtbl): IUnknown(IUnknownVtbl) {
-    fn GetBufferPointer(
-    ) -> *const c_void,
-    fn GetBufferSize(
-    ) -> ULONG_PTR,
-}}
-
-STRUCT!{struct _SECURITY_ATTRIBUTES {
-    nLength: u32,
-    lpSecurityDescriptor: *const c_void,
-    bInheritHandle: i32,
-}}
-
-STRUCT!{struct __LUID {
-    LowPart: u32,
-    HighPart: i32,
 }}
 
 RIDL!{#[uuid(0x433685fe, 0xe22b, 0x4ca0, 0xa8, 0xdb, 0xb5, 0xb4, 0xf4, 0xdd, 0x0e, 0x4a)]
@@ -2667,32 +2648,32 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
     ) -> HRESULT,
     fn ClearState(
         pPipelineState: *mut ID3D12PipelineState,
-    ) -> c_void,
+    ) -> (),
     fn DrawInstanced(
         VertexCountPerInstance: UINT,
         InstanceCount: UINT,
         StartVertexLocation: UINT,
         StartInstanceLocation: UINT,
-    ) -> c_void,
+    ) -> (),
     fn DrawIndexedInstanced(
         IndexCountPerInstance: UINT,
         InstanceCount: UINT,
         StartIndexLocation: UINT,
         BaseVertexLocation: INT,
         StartInstanceLocation: UINT,
-    ) -> c_void,
+    ) -> (),
     fn Dispatch(
         ThreadGroupCountX: UINT,
         ThreadGroupCountY: UINT,
         ThreadGroupCountZ: UINT,
-    ) -> c_void,
+    ) -> (),
     fn CopyBufferRegion(
         pDstBuffer: *mut ID3D12Resource,
-        DstOffset: u64,
+        DstOffset: UINT64,
         pSrcBuffer: *mut ID3D12Resource,
-        SrcOffset: u64,
-        NumBytes: u64,
-    ) -> c_void,
+        SrcOffset: UINT64,
+        NumBytes: UINT64,
+    ) -> (),
     fn CopyTextureRegion(
         pDst: *const D3D12_TEXTURE_COPY_LOCATION,
         DstX: UINT,
@@ -2700,244 +2681,244 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         DstZ: UINT,
         pSrc: *const D3D12_TEXTURE_COPY_LOCATION,
         pSrcBox: *const D3D12_BOX,
-    ) -> c_void,
+    ) -> (),
     fn CopyResource(
         pDstResource: *mut ID3D12Resource,
         pSrcResource: *mut ID3D12Resource,
-    ) -> c_void,
+    ) -> (),
     fn CopyTiles(
         pTiledResource: *mut ID3D12Resource,
         pTileRegionStartCoordinate: *const D3D12_TILED_RESOURCE_COORDINATE,
         pTileRegionSize: *const D3D12_TILE_REGION_SIZE,
         pBuffer: *mut ID3D12Resource,
-        BufferStartOffsetInBytes: u64,
+        BufferStartOffsetInBytes: UINT64,
         Flags: D3D12_TILE_COPY_FLAGS,
-    ) -> c_void,
+    ) -> (),
     fn ResolveSubresource(
         pDstResource: *mut ID3D12Resource,
         DstSubresource: UINT,
         pSrcResource: *mut ID3D12Resource,
         SrcSubresource: UINT,
         Format: DXGI_FORMAT,
-    ) -> c_void,
+    ) -> (),
     fn IASetPrimitiveTopology(
-        PrimitiveTopology: D3D_PRIMITIVE_TOPOLOGY,
-    ) -> c_void,
+        PrimitiveTopology: D3D12_PRIMITIVE_TOPOLOGY,
+    ) -> (),
     fn RSSetViewports(
         NumViewports: UINT,
         pViewports: *const D3D12_VIEWPORT,
-    ) -> c_void,
+    ) -> (),
     fn RSSetScissorRects(
         NumRects: UINT,
-        pRects: *const RECT,
-    ) -> c_void,
+        pRects: *const D3D12_RECT,
+    ) -> (),
     fn OMSetBlendFactor(
         BlendFactor: *const [FLOAT; 4],
-    ) -> c_void,
+    ) -> (),
     fn OMSetStencilRef(
         StencilRef: UINT,
-    ) -> c_void,
+    ) -> (),
     fn SetPipelineState(
         pPipelineState: *mut ID3D12PipelineState,
-    ) -> c_void,
+    ) -> (),
     fn ResourceBarrier(
         NumBarriers: UINT,
         pBarriers: *const D3D12_RESOURCE_BARRIER,
-    ) -> c_void,
+    ) -> (),
     fn ExecuteBundle(
         pCommandList: *mut ID3D12GraphicsCommandList,
-    ) -> c_void,
+    ) -> (),
     fn SetDescriptorHeaps(
         NumDescriptorHeaps: UINT,
         ppDescriptorHeaps: *mut *mut ID3D12DescriptorHeap,
-    ) -> c_void,
+    ) -> (),
     fn SetComputeRootSignature(
         pRootSignature: *mut ID3D12RootSignature,
-    ) -> c_void,
+    ) -> (),
     fn SetGraphicsRootSignature(
         pRootSignature: *mut ID3D12RootSignature,
-    ) -> c_void,
+    ) -> (),
     fn SetComputeRootDescriptorTable(
         RootParameterIndex: UINT,
         BaseDescriptor: D3D12_GPU_DESCRIPTOR_HANDLE,
-    ) -> c_void,
+    ) -> (),
     fn SetGraphicsRootDescriptorTable(
         RootParameterIndex: UINT,
         BaseDescriptor: D3D12_GPU_DESCRIPTOR_HANDLE,
-    ) -> c_void,
+    ) -> (),
     fn SetComputeRoot32BitConstant(
         RootParameterIndex: UINT,
         SrcData: UINT,
         DestOffsetIn32BitValues: UINT,
-    ) -> c_void,
+    ) -> (),
     fn SetGraphicsRoot32BitConstant(
         RootParameterIndex: UINT,
         SrcData: UINT,
         DestOffsetIn32BitValues: UINT,
-    ) -> c_void,
+    ) -> (),
     fn SetComputeRoot32BitConstants(
         RootParameterIndex: UINT,
         Num32BitValuesToSet: UINT,
         pSrcData: *const c_void,
         DestOffsetIn32BitValues: UINT,
-    ) -> c_void,
+    ) -> (),
     fn SetGraphicsRoot32BitConstants(
         RootParameterIndex: UINT,
         Num32BitValuesToSet: UINT,
         pSrcData: *const c_void,
         DestOffsetIn32BitValues: UINT,
-    ) -> c_void,
+    ) -> (),
     fn SetComputeRootConstantBufferView(
         RootParameterIndex: UINT,
-        BufferLocation: u64,
-    ) -> c_void,
+        BufferLocation: D3D12_GPU_VIRTUAL_ADDRESS,
+    ) -> (),
     fn SetGraphicsRootConstantBufferView(
         RootParameterIndex: UINT,
-        BufferLocation: u64,
-    ) -> c_void,
+        BufferLocation: D3D12_GPU_VIRTUAL_ADDRESS,
+    ) -> (),
     fn SetComputeRootShaderResourceView(
         RootParameterIndex: UINT,
-        BufferLocation: u64,
-    ) -> c_void,
+        BufferLocation: D3D12_GPU_VIRTUAL_ADDRESS,
+    ) -> (),
     fn SetGraphicsRootShaderResourceView(
         RootParameterIndex: UINT,
-        BufferLocation: u64,
-    ) -> c_void,
+        BufferLocation: D3D12_GPU_VIRTUAL_ADDRESS,
+    ) -> (),
     fn SetComputeRootUnorderedAccessView(
         RootParameterIndex: UINT,
-        BufferLocation: u64,
-    ) -> c_void,
+        BufferLocation: D3D12_GPU_VIRTUAL_ADDRESS,
+    ) -> (),
     fn SetGraphicsRootUnorderedAccessView(
         RootParameterIndex: UINT,
-        BufferLocation: u64,
-    ) -> c_void,
+        BufferLocation: D3D12_GPU_VIRTUAL_ADDRESS,
+    ) -> (),
     fn IASetIndexBuffer(
         pView: *const D3D12_INDEX_BUFFER_VIEW,
-    ) -> c_void,
+    ) -> (),
     fn IASetVertexBuffers(
         StartSlot: UINT,
         NumViews: UINT,
         pViews: *const D3D12_VERTEX_BUFFER_VIEW,
-    ) -> c_void,
+    ) -> (),
     fn SOSetTargets(
         StartSlot: UINT,
         NumViews: UINT,
         pViews: *const D3D12_STREAM_OUTPUT_BUFFER_VIEW,
-    ) -> c_void,
+    ) -> (),
     fn OMSetRenderTargets(
         NumRenderTargetDescriptors: UINT,
         pRenderTargetDescriptors: *const D3D12_CPU_DESCRIPTOR_HANDLE,
-        RTsSingleHandleToDescriptorRange: i32,
+        RTsSingleHandleToDescriptorRange: BOOL,
         pDepthStencilDescriptor: *const D3D12_CPU_DESCRIPTOR_HANDLE,
-    ) -> c_void,
+    ) -> (),
     fn ClearDepthStencilView(
         DepthStencilView: D3D12_CPU_DESCRIPTOR_HANDLE,
         ClearFlags: D3D12_CLEAR_FLAGS,
-        Depth: f32,
-        Stencil: u8,
+        Depth: FLOAT,
+        Stencil: UINT8,
         NumRects: UINT,
-        pRects: *const RECT,
-    ) -> c_void,
+        pRects: *const D3D12_RECT,
+    ) -> (),
     fn ClearRenderTargetView(
         RenderTargetView: D3D12_CPU_DESCRIPTOR_HANDLE,
         ColorRGBA: *const [FLOAT; 4],
         NumRects: UINT,
-        pRects: *const RECT,
-    ) -> c_void,
+        pRects: *const D3D12_RECT,
+    ) -> (),
     fn ClearUnorderedAccessViewUint(
         ViewGPUHandleInCurrentHeap: D3D12_GPU_DESCRIPTOR_HANDLE,
         ViewCPUHandle: D3D12_CPU_DESCRIPTOR_HANDLE,
         pResource: *mut ID3D12Resource,
         Values: *const [UINT; 4],
         NumRects: UINT,
-        pRects: *const RECT,
-    ) -> c_void,
+        pRects: *const D3D12_RECT,
+    ) -> (),
     fn ClearUnorderedAccessViewFloat(
         ViewGPUHandleInCurrentHeap: D3D12_GPU_DESCRIPTOR_HANDLE,
         ViewCPUHandle: D3D12_CPU_DESCRIPTOR_HANDLE,
         pResource: *mut ID3D12Resource,
         Values: *const [FLOAT; 4],
         NumRects: UINT,
-        pRects: *const RECT,
-    ) -> c_void,
+        pRects: *const D3D12_RECT,
+    ) -> (),
     fn DiscardResource(
         pResource: *mut ID3D12Resource,
         pRegion: *const D3D12_DISCARD_REGION,
-    ) -> c_void,
+    ) -> (),
     fn BeginQuery(
         pQueryHeap: *mut ID3D12QueryHeap,
         Type: D3D12_QUERY_TYPE,
         Index: UINT,
-    ) -> c_void,
+    ) -> (),
     fn EndQuery(
         pQueryHeap: *mut ID3D12QueryHeap,
         Type: D3D12_QUERY_TYPE,
         Index: UINT,
-    ) -> c_void,
+    ) -> (),
     fn ResolveQueryData(
         pQueryHeap: *mut ID3D12QueryHeap,
         Type: D3D12_QUERY_TYPE,
         StartIndex: UINT,
         NumQueries: UINT,
         pDestinationBuffer: *mut ID3D12Resource,
-        AlignedDestinationBufferOffset: u64,
-    ) -> c_void,
+        AlignedDestinationBufferOffset: UINT64,
+    ) -> (),
     fn SetPredication(
         pBuffer: *mut ID3D12Resource,
-        AlignedBufferOffset: u64,
+        AlignedBufferOffset: UINT64,
         Operation: D3D12_PREDICATION_OP,
-    ) -> c_void,
+    ) -> (),
     fn SetMarker(
         Metadata: UINT,
         pData: *const c_void,
         Size: UINT,
-    ) -> c_void,
+    ) -> (),
     fn BeginEvent(
         Metadata: UINT,
         pData: *const c_void,
         Size: UINT,
-    ) -> c_void,
+    ) -> (),
     fn EndEvent(
-    ) -> c_void,
+    ) -> (),
     fn ExecuteIndirect(
         pCommandSignature: *mut ID3D12CommandSignature,
         MaxCommandCount: UINT,
         pArgumentBuffer: *mut ID3D12Resource,
-        ArgumentBufferOffset: u64,
+        ArgumentBufferOffset: UINT64,
         pCountBuffer: *mut ID3D12Resource,
-        CountBufferOffset: u64,
-    ) -> c_void,
+        CountBufferOffset: UINT64,
+    ) -> (),
 }}
 
 RIDL!{#[uuid(0x553103fb, 0x1fe7, 0x4557, 0xbb, 0x38, 0x94, 0x6d, 0x7d, 0x0e, 0x7c, 0xa7)]
 interface ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl): ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl) {
     fn AtomicCopyBufferUINT(
         pDstBuffer: *mut ID3D12Resource,
-        DstOffset: u64,
+        DstOffset: UINT64,
         pSrcBuffer: *mut ID3D12Resource,
-        SrcOffset: u64,
+        SrcOffset: UINT64,
         Dependencies: UINT,
         ppDependentResources: *const *mut ID3D12Resource,
         pDependentSubresourceRanges: *mut D3D12_SUBRESOURCE_RANGE_UINT64,
-    ) -> c_void,
+    ) -> (),
     fn AtomicCopyBufferUINT64(
         pDstBuffer: *mut ID3D12Resource,
-        DstOffset: u64,
+        DstOffset: UINT64,
         pSrcBuffer: *mut ID3D12Resource,
-        SrcOffset: u64,
+        SrcOffset: UINT64,
         Dependencies: UINT,
         ppDependentResources: *const *mut ID3D12Resource,
         pDependentSubresourceRanges: *mut D3D12_SUBRESOURCE_RANGE_UINT64,
-    ) -> c_void,
+    ) -> (),
     fn OMSetDepthBounds(
-        Min: f32,
-        Max: f32,
-    ) -> c_void,
+        Min: FLOAT,
+        Max: FLOAT,
+    ) -> (),
     fn SetSamplePositions(
         NumSamplesPerPixel: UINT,
         NumPixels: UINT,
         pSamplePositions: *mut D3D12_SAMPLE_POSITION,
-    ) -> c_void,
+    ) -> (),
     fn ResolveSubresourceRegion(
         pDstResource: *mut ID3D12Resource,
         DstSubresource: UINT,
@@ -2945,17 +2926,17 @@ interface ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl): ID3D12Grap
         DstY: UINT,
         pSrcResource: *mut ID3D12Resource,
         SrcSubresource: UINT,
-        pSrcRect: *mut RECT,
+        pSrcRect: *mut D3D12_RECT,
         Format: DXGI_FORMAT,
         ResolveMode: D3D12_RESOLVE_MODE,
-    ) -> c_void,
+    ) -> (),
     fn SetViewInstanceMask(
         Mask: UINT,
-    ) -> c_void,
+    ) -> (),
 }}
 
 STRUCT!{struct D3D12_WRITEBUFFERIMMEDIATE_PARAMETER {
-    Dest: u64,
+    Dest: UINT64,
     Value: UINT,
 }}
 
@@ -2971,7 +2952,7 @@ interface ID3D12GraphicsCommandList2(ID3D12GraphicsCommandList2Vtbl): ID3D12Grap
         Count: UINT,
         pParams: *const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER,
         pModes: *const D3D12_WRITEBUFFERIMMEDIATE_MODE,
-    ) -> c_void,
+    ) -> (),
 }}
 
 RIDL!{#[uuid(0xc64226a8, 0x9201, 0x46af, 0xb4, 0xcc, 0x53, 0xfb, 0x9f, 0xf7, 0x41, 0x4f)]
@@ -2993,10 +2974,10 @@ interface ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl): ID3D12DeviceChild(ID
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
     fn GetSerializedSize(
-    ) -> usize,
+    ) -> SIZE_T,
     fn Serialize(
         pData: *mut c_void,
-        DataSizeInBytes: usize,
+        DataSizeInBytes: SIZE_T,
     ) -> HRESULT,
 }}
 
@@ -3028,7 +3009,7 @@ RIDL!{#[uuid(0x77acce80, 0x638e, 0x4e65, 0x88, 0x95, 0xc1, 0xf2, 0x33, 0x86, 0x8
 interface ID3D12Device1(ID3D12Device1Vtbl): ID3D12Device(ID3D12DeviceVtbl) {
     fn CreatePipelineLibrary(
         pLibraryBlob: *const c_void,
-        BlobLength: usize,
+        BlobLength: SIZE_T,
         riid: REFIID,
         ppPipelineLibrary: *mut *mut c_void,
     ) -> HRESULT,
@@ -3037,7 +3018,7 @@ interface ID3D12Device1(ID3D12Device1Vtbl): ID3D12Device(ID3D12DeviceVtbl) {
         pFenceValues: *const u64,
         NumFences: UINT,
         Flags: D3D12_MULTIPLE_FENCE_WAIT_FLAGS,
-        hEvent: *const c_void,
+        hEvent: HANDLE,
     ) -> HRESULT,
     fn SetResidencyPriority(
         NumObjects: UINT,
@@ -3077,7 +3058,7 @@ interface ID3D12Device3(ID3D12Device3Vtbl): ID3D12Device2(ID3D12Device2Vtbl) {
         NumObjects: UINT,
         ppObjects: *const *const ID3D12Pageable,
         pFenceToSignal: *const ID3D12Fence,
-        FenceValueToSignal: u64,
+        FenceValueToSignal: UINT64,
     ) -> HRESULT,
 }}
 
@@ -3195,7 +3176,7 @@ RIDL!{#[uuid(0xe667af9f, 0xcd56, 0x4f46, 0x83, 0xce, 0x03, 0x2e, 0x59, 0x5d, 0x7
 interface ID3D12LifetimeOwner(ID3D12LifetimeOwnerVtbl): IUnknown(IUnknownVtbl) {
     fn LifetimeStateUpdated(
         NewState: D3D12_LIFETIME_STATE,
-    ) -> c_void,
+    ) -> (),
 }}
 
 RIDL!{#[uuid(0xf1df64b6, 0x57fd, 0x49cd, 0x88, 0x07, 0xc0, 0xeb, 0x88, 0xb4, 0x5c, 0x8f)]
@@ -3286,8 +3267,8 @@ interface ID3D12StateObjectProperties(ID3D12StateObjectPropertiesVtbl): IUnknown
     fn GetPipelineStackSize(
     ) -> u64,
     fn SetPipelineStackSize(
-        PipelineStackSizeInBytes: u64,
-    ) -> c_void,
+        PipelineStackSizeInBytes: UINT64,
+    ) -> (),
 }}
 
 ENUM!{enum D3D12_STATE_SUBOBJECT_TYPE {
@@ -3419,42 +3400,42 @@ ENUM!{enum D3D12_RAYTRACING_INSTANCE_FLAGS {
 }}
 
 STRUCT!{struct D3D12_GPU_VIRTUAL_ADDRESS_AND_STRIDE {
-    StartAddress: u64,
-    StrideInBytes: u64,
+    StartAddress: UINT64,
+    StrideInBytes: UINT64,
 }}
 
 STRUCT!{struct D3D12_GPU_VIRTUAL_ADDRESS_RANGE {
-    StartAddress: u64,
-    SizeInBytes: u64,
+    StartAddress: UINT64,
+    SizeInBytes: UINT64,
 }}
 
 STRUCT!{struct D3D12_GPU_VIRTUAL_ADDRESS_RANGE_AND_STRIDE {
-    StartAddress: u64,
-    SizeInBytes: u64,
-    StrideInBytes: u64,
+    StartAddress: UINT64,
+    SizeInBytes: UINT64,
+    StrideInBytes: UINT64,
 }}
 
 STRUCT!{struct D3D12_RAYTRACING_GEOMETRY_TRIANGLES_DESC {
-    Transform3x4: u64,
+    Transform3x4: UINT64,
     IndexFormat: DXGI_FORMAT,
     VertexFormat: DXGI_FORMAT,
     IndexCount: UINT,
     VertexCount: UINT,
-    IndexBuffer: u64,
+    IndexBuffer: UINT64,
     VertexBuffer: D3D12_GPU_VIRTUAL_ADDRESS_AND_STRIDE,
 }}
 
 STRUCT!{struct D3D12_RAYTRACING_AABB {
-    MinX: f32,
-    MinY: f32,
-    MinZ: f32,
-    MaxX: f32,
-    MaxY: f32,
-    MaxZ: f32,
+    MinX: FLOAT,
+    MinY: FLOAT,
+    MinZ: FLOAT,
+    MaxX: FLOAT,
+    MaxY: FLOAT,
+    MaxZ: FLOAT,
 }}
 
 STRUCT!{struct D3D12_RAYTRACING_GEOMETRY_AABBS_DESC {
-    AABBCount: u64,
+    AABBCount: UINT64,
     AABBs: D3D12_GPU_VIRTUAL_ADDRESS_AND_STRIDE,
 }}
 
@@ -3494,16 +3475,16 @@ ENUM!{enum D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_TYPE {
 }}
 
 STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC {
-    DestBuffer: u64,
+    DestBuffer: UINT64,
     InfoType: D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_TYPE,
 }}
 
 STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_COMPACTED_SIZE_DESC {
-    CompactedSizeInBytes: u64,
+    CompactedSizeInBytes: UINT64,
 }}
 
 STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_TOOLS_VISUALIZATION_DESC {
-    DecodedSizeInBytes: u64,
+    DecodedSizeInBytes: UINT64,
 }}
 
 STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_TOOLS_VISUALIZATION_HEADER {
@@ -3512,13 +3493,13 @@ STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_TOOLS_VISUALIZATION
 }}
 
 STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION_DESC {
-    SerializedSizeInBytes: u64,
-    NumBottomLevelAccelerationStructurePointers: u64,
+    SerializedSizeInBytes: UINT64,
+    NumBottomLevelAccelerationStructurePointers: UINT64,
 }}
 
 STRUCT!{struct D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER {
     DriverOpaqueGUID: GUID,
-    DriverOpaqueVersioningData: [u8; 16],
+    DriverOpaqueVersioningData: [UINT8; 16],
 }}
 
 ENUM!{enum D3D12_SERIALIZED_DATA_TYPE {
@@ -3535,18 +3516,18 @@ ENUM!{enum D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS {
 
 STRUCT!{struct D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER {
     DriverMatchingIdentifier: D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER,
-    SerializedSizeInBytesIncludingHeader: u64,
-    DeserializedSizeInBytes: u64,
-    NumBottomLevelAccelerationStructurePointersAfterHeader: u64,
+    SerializedSizeInBytesIncludingHeader: UINT64,
+    DeserializedSizeInBytes: UINT64,
+    NumBottomLevelAccelerationStructurePointersAfterHeader: UINT64,
 }}
 
 STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_CURRENT_SIZE_DESC {
-    CurrentSizeInBytes: u64,
+    CurrentSizeInBytes: UINT64,
 }}
 
 STRUCT!{struct D3D12_RAYTRACING_INSTANCE_DESC {
-    Transform: [[f32; 3]; 4],
-    AccelerationStructure: u64,
+    Transform: [[FLOAT; 3]; 4],
+    AccelerationStructure: UINT64,
 }}
 
 STRUCT!{struct D3D12_RAYTRACING_GEOMETRY_DESC {
@@ -3571,22 +3552,22 @@ STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS {
 
 UNION!{union __MIDL___MIDL_itf_d3d12_0001_0033_0002 {
     [u64; 1],
-    InstanceDescs InstanceDescs_mut: u64,
+    InstanceDescs InstanceDescs_mut: UINT64,
     pGeometryDescs pGeometryDescs_mut: *const D3D12_RAYTRACING_GEOMETRY_DESC,
     ppGeometryDescs ppGeometryDescs_mut: *const *const D3D12_RAYTRACING_GEOMETRY_DESC,
 }}
 
 STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC {
-    DestAccelerationStructureData: u64,
+    DestAccelerationStructureData: UINT64,
     Inputs: D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS,
-    SourceAccelerationStructureData: u64,
-    ScratchAccelerationStructureData: u64,
+    SourceAccelerationStructureData: UINT64,
+    ScratchAccelerationStructureData: UINT64,
 }}
 
 STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO {
-    ResultDataMaxSizeInBytes: u64,
-    ScratchDataSizeInBytes: u64,
-    UpdateScratchDataSizeInBytes: u64,
+    ResultDataMaxSizeInBytes: UINT64,
+    ScratchDataSizeInBytes: UINT64,
+    UpdateScratchDataSizeInBytes: UINT64,
 }}
 
 ENUM!{enum D3D12_RAY_FLAGS {
@@ -3614,7 +3595,7 @@ interface ID3D12Device5(ID3D12Device5Vtbl): ID3D12Device4(ID3D12Device4Vtbl) {
         ppvTracker: *const *const c_void,
     ) -> HRESULT,
     fn RemoveDevice(
-    ) -> c_void,
+    ) -> (),
     fn EnumerateMetaCommands(
         pNumMetaCommands: *const UINT,
         pDescs: *const D3D12_META_COMMAND_DESC,
@@ -3630,7 +3611,7 @@ interface ID3D12Device5(ID3D12Device5Vtbl): ID3D12Device4(ID3D12Device4Vtbl) {
         CommandId: REFIID,
         NodeMask: UINT,
         pCreationParametersData: *const c_void,
-        CreationParametersDataSizeInBytes: usize,
+        CreationParametersDataSizeInBytes: SIZE_T,
         riid: REFIID,
         ppMetaCommand: *const *const c_void,
     ) -> HRESULT,
@@ -3642,7 +3623,7 @@ interface ID3D12Device5(ID3D12Device5Vtbl): ID3D12Device4(ID3D12Device4Vtbl) {
     fn GetRaytracingAccelerationStructurePrebuildInfo(
         pDesc: *const D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS,
         pInfo: *const D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO,
-    ) -> c_void,
+    ) -> (),
     fn CheckDriverMatchingIdentifier(
         SerializedDataType: D3D12_SERIALIZED_DATA_TYPE,
         pIdentifierToCheck: *const D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER,
@@ -3693,10 +3674,10 @@ ENUM!{enum D3D12_AUTO_BREADCRUMB_OP {
 }}
 
 STRUCT!{struct D3D12_AUTO_BREADCRUMB_NODE {
-    pCommandListDebugNameA: *const i8,
-    pCommandListDebugNameW: *const u16,
-    pCommandQueueDebugNameA: *const i8,
-    pCommandQueueDebugNameW: *const u16,
+    pCommandListDebugNameA: *const INT8,
+    pCommandListDebugNameW: *const UINT16,
+    pCommandQueueDebugNameA: *const INT8,
+    pCommandQueueDebugNameW: *const UINT16,
     pCommandList: *const ID3D12GraphicsCommandList,
     pCommandQueue: *const ID3D12CommandQueue,
     BreadcrumbCount: UINT,
@@ -3750,7 +3731,7 @@ RIDL!{#[uuid(0x6fda83a7, 0xb84c, 0x4e38, 0x9a, 0xc8, 0xc7, 0xbd, 0x22, 0x01, 0x6
 interface ID3D12GraphicsCommandList3(ID3D12GraphicsCommandList3Vtbl): ID3D12GraphicsCommandList2(ID3D12GraphicsCommandList2Vtbl) {
     fn SetProtectedResourceSession(
         pProtectedResourceSession: *const ID3D12ProtectedResourceSession,
-    ) -> c_void,
+    ) -> (),
 }}
 
 ENUM!{enum D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE {
@@ -3786,7 +3767,7 @@ STRUCT!{struct D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS {
     DstSubresource: UINT,
     DstX: UINT,
     DstY: UINT,
-    SrcRect: RECT,
+    SrcRect: D3D12_RECT,
 }}
 
 STRUCT!{struct D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS {
@@ -3796,7 +3777,7 @@ STRUCT!{struct D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS {
     pSubresourceParameters: *const D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS,
     Format: DXGI_FORMAT,
     ResolveMode: D3D12_RESOLVE_MODE,
-    PreserveResolveSource: i32,
+    PreserveResolveSource: BOOL,
 }}
 
 STRUCT!{struct D3D12_RENDER_PASS_ENDING_ACCESS {
@@ -3855,49 +3836,49 @@ interface ID3D12GraphicsCommandList4(ID3D12GraphicsCommandList4Vtbl): ID3D12Grap
         pRenderTargets: *const D3D12_RENDER_PASS_RENDER_TARGET_DESC,
         pDepthStencil: *const D3D12_RENDER_PASS_DEPTH_STENCIL_DESC,
         Flags: D3D12_RENDER_PASS_FLAGS,
-    ) -> c_void,
+    ) -> (),
     fn EndRenderPass(
-    ) -> c_void,
+    ) -> (),
     fn InitializeMetaCommand(
         pMetaCommand: *const ID3D12MetaCommand,
         pInitializationParametersData: *const c_void,
-        InitializationParametersDataSizeInBytes: usize,
-    ) -> c_void,
+        InitializationParametersDataSizeInBytes: SIZE_T,
+    ) -> (),
     fn ExecuteMetaCommand(
         pMetaCommand: *const ID3D12MetaCommand,
         pExecutionParametersData: *const c_void,
-        ExecutionParametersDataSizeInBytes: usize,
-    ) -> c_void,
+        ExecutionParametersDataSizeInBytes: SIZE_T,
+    ) -> (),
     fn BuildRaytracingAccelerationStructure(
         pDesc: *const D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC,
         NumPostbuildInfoDescs: UINT,
         pPostbuildInfoDescs: *const D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC,
-    ) -> c_void,
+    ) -> (),
     fn EmitRaytracingAccelerationStructurePostbuildInfo(
         pDesc: *const D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC,
         NumSourceAccelerationStructures: UINT,
         pSourceAccelerationStructureData: *const u64,
-    ) -> c_void,
+    ) -> (),
     fn CopyRaytracingAccelerationStructure(
-        DestAccelerationStructureData: u64,
-        SourceAccelerationStructureData: u64,
+        DestAccelerationStructureData: UINT64,
+        SourceAccelerationStructureData: UINT64,
         Mode: D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE,
-    ) -> c_void,
+    ) -> (),
     fn SetPipelineState1(
         pStateObject: *const ID3D12StateObject,
-    ) -> c_void,
+    ) -> (),
     fn DispatchRays(
         pDesc: *const D3D12_DISPATCH_RAYS_DESC,
-    ) -> c_void,
+    ) -> (),
 }}
 
 RIDL!{#[uuid(0x7071e1f0, 0xe84b, 0x4b33, 0x97, 0x4f, 0x12, 0xfa, 0x49, 0xde, 0x65, 0xc5)]
 interface ID3D12Tools(ID3D12ToolsVtbl): IUnknown(IUnknownVtbl) {
     fn EnableShaderInstrumentation(
-        bEnable: i32,
-    ) -> c_void,
+        bEnable: BOOL,
+    ) -> (),
     fn ShaderInstrumentationEnabled(
-    ) -> i32,
+    ) -> BOOL,
 }}
 
 STRUCT!{struct D3D12_SUBRESOURCE_DATA {
@@ -3908,8 +3889,8 @@ STRUCT!{struct D3D12_SUBRESOURCE_DATA {
 
 STRUCT!{struct D3D12_MEMCPY_DEST {
     pData: *mut c_void,
-    RowPitch: ULONG_PTR,
-    SlicePitch: ULONG_PTR,
+    RowPitch: SIZE_T,
+    SlicePitch: SIZE_T,
 }}
 
 FN!{stdcall PFN_D3D12_CREATE_DEVICE(
@@ -3930,7 +3911,7 @@ extern "system" {
 
 FN!{stdcall PFN_D3D12_GET_DEBUG_INTERFACE(
     REFIID,
-    *const *const c_void,
+    *mut *mut c_void,
 ) -> HRESULT}
 
 extern "system" {
