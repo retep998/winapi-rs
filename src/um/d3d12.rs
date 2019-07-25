@@ -2240,7 +2240,7 @@ STRUCT!{struct D3D12_GPU_DESCRIPTOR_HANDLE {
 
 STRUCT!{struct D3D12_DISCARD_REGION {
     NumRects: UINT,
-    pRects: *tagRECT,
+    pRects: *const tagRECT,
     FirstSubresource: UINT,
     NumSubresources: UINT,
 }}
