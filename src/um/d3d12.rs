@@ -1369,7 +1369,7 @@ STRUCT!{struct D3D12_CLEAR_VALUE {
 
 UNION!{union __MIDL___MIDL_itf_d3d12_0001_0000_0001 {
     [u32; 4],
-    Color Color_mut: [f32; 4],
+    Color Color_mut: *const [FLOAT; 4],
     DepthStencil DepthStencil_mut: D3D12_DEPTH_STENCIL_VALUE,
 }}
 
@@ -1736,7 +1736,7 @@ STRUCT!{struct D3D12_SAMPLER_DESC {
     MipLODBias: f32,
     MaxAnisotropy: UINT,
     ComparisonFunc: D3D12_COMPARISON_FUNC,
-    BorderColor: [f32; 4],
+    BorderColor: *const [FLOAT; 4],
     MinLOD: f32,
     MaxLOD: f32,
 }}
@@ -2719,7 +2719,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         pRects: *const RECT,
     ) -> c_void,
     fn OMSetBlendFactor(
-        BlendFactor: [f32; 4],
+        BlendFactor: *const [FLOAT; 4],
     ) -> c_void,
     fn OMSetStencilRef(
         StencilRef: UINT,
@@ -2827,7 +2827,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
     ) -> c_void,
     fn ClearRenderTargetView(
         RenderTargetView: D3D12_CPU_DESCRIPTOR_HANDLE,
-        ColorRGBA: [f32; 4],
+        ColorRGBA: *const [FLOAT; 4],
         NumRects: UINT,
         pRects: *const RECT,
     ) -> c_void,
@@ -2835,7 +2835,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         ViewGPUHandleInCurrentHeap: D3D12_GPU_DESCRIPTOR_HANDLE,
         ViewCPUHandle: D3D12_CPU_DESCRIPTOR_HANDLE,
         pResource: *const ID3D12Resource,
-        Values: [UINT; 4],
+        Values: *const [UINT; 4],
         NumRects: UINT,
         pRects: *const RECT,
     ) -> c_void,
@@ -2843,7 +2843,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         ViewGPUHandleInCurrentHeap: D3D12_GPU_DESCRIPTOR_HANDLE,
         ViewCPUHandle: D3D12_CPU_DESCRIPTOR_HANDLE,
         pResource: *const ID3D12Resource,
-        Values: [f32; 4],
+        Values: *const [FLOAT; 4],
         NumRects: UINT,
         pRects: *const RECT,
     ) -> c_void,
