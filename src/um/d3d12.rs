@@ -777,13 +777,6 @@ STRUCT!{struct D3D12_VIEWPORT {
     MaxDepth: f32,
 }}
 
-STRUCT!{struct tagRECT {
-    left: i32,
-    top: i32,
-    right: i32,
-    bottom: i32,
-}}
-
 ENUM!{enum D3D12_COMPARISON_FUNC {
     D3D12_COMPARISON_FUNC_NEVER = 1,
     D3D12_COMPARISON_FUNC_LESS = 2,
@@ -2240,7 +2233,7 @@ STRUCT!{struct D3D12_GPU_DESCRIPTOR_HANDLE {
 
 STRUCT!{struct D3D12_DISCARD_REGION {
     NumRects: UINT,
-    pRects: *const tagRECT,
+    pRects: *const RECT,
     FirstSubresource: UINT,
     NumSubresources: UINT,
 }}
@@ -2723,7 +2716,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
     ) -> c_void,
     fn RSSetScissorRects(
         NumRects: UINT,
-        pRects: *const tagRECT,
+        pRects: *const RECT,
     ) -> c_void,
     fn OMSetBlendFactor(
         BlendFactor: [f32; 4],
@@ -2830,13 +2823,13 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         Depth: f32,
         Stencil: u8,
         NumRects: UINT,
-        pRects: *const tagRECT,
+        pRects: *const RECT,
     ) -> c_void,
     fn ClearRenderTargetView(
         RenderTargetView: D3D12_CPU_DESCRIPTOR_HANDLE,
         ColorRGBA: [f32; 4],
         NumRects: UINT,
-        pRects: *const tagRECT,
+        pRects: *const RECT,
     ) -> c_void,
     fn ClearUnorderedAccessViewUint(
         ViewGPUHandleInCurrentHeap: D3D12_GPU_DESCRIPTOR_HANDLE,
@@ -2844,7 +2837,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         pResource: *const ID3D12Resource,
         Values: [UINT; 4],
         NumRects: UINT,
-        pRects: *const tagRECT,
+        pRects: *const RECT,
     ) -> c_void,
     fn ClearUnorderedAccessViewFloat(
         ViewGPUHandleInCurrentHeap: D3D12_GPU_DESCRIPTOR_HANDLE,
@@ -2852,7 +2845,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         pResource: *const ID3D12Resource,
         Values: [f32; 4],
         NumRects: UINT,
-        pRects: *const tagRECT,
+        pRects: *const RECT,
     ) -> c_void,
     fn DiscardResource(
         pResource: *const ID3D12Resource,
@@ -2939,7 +2932,7 @@ interface ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl): ID3D12Grap
         DstY: UINT,
         pSrcResource: *const ID3D12Resource,
         SrcSubresource: UINT,
-        pSrcRect: *const tagRECT,
+        pSrcRect: *const RECT,
         Format: DXGI_FORMAT,
         ResolveMode: D3D12_RESOLVE_MODE,
     ) -> c_void,
@@ -3780,7 +3773,7 @@ STRUCT!{struct D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS {
     DstSubresource: UINT,
     DstX: UINT,
     DstY: UINT,
-    SrcRect: tagRECT,
+    SrcRect: RECT,
 }}
 
 STRUCT!{struct D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS {
