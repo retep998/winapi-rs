@@ -2830,7 +2830,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         Depth: f32,
         Stencil: u8,
         NumRects: UINT,
-        pRects: *tagRECT,
+        pRects: *const tagRECT,
     ) -> c_void,
     fn ClearRenderTargetView(
         RenderTargetView: D3D12_CPU_DESCRIPTOR_HANDLE,
