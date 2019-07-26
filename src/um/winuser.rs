@@ -6714,7 +6714,7 @@ pub const GA_ROOT: UINT = 2;
 pub const GA_ROOTOWNER: UINT = 3;
 extern "system" {
     pub fn GetAncestor(
-        hWnd: HWND,
+        hwnd: HWND,
         gaFlags: UINT,
     ) -> HWND;
     pub fn RealChildWindowFromPoint(
