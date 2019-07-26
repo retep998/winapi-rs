@@ -6708,6 +6708,11 @@ extern "system" {
         lpszFileName: LPWSTR,
         cchFileNameMax: UINT,
     ) -> UINT;
+}
+pub const GA_PARENT: UINT = 1;
+pub const GA_ROOT: UINT = 2;
+pub const GA_ROOTOWNER: UINT = 3;
+extern "system" {
     pub fn GetAncestor(
         hWnd: HWND,
         gaFlags: UINT,
