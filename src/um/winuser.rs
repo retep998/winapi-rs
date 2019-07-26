@@ -6709,6 +6709,26 @@ extern "system" {
         cchFileNameMax: UINT,
     ) -> UINT;
 }
+STRUCT!{struct WINDOWINFO {
+    cbSize: DWORD,
+    rcWindow: RECT,
+    rcClient: RECT,
+    dwStyle: DWORD,
+    deExStyle: DWORD,
+    dwWindowStatus: DWORD,
+    cxWindowBorders: UINT,
+    cyWindowBorders: UINT,
+    atomWindowType: ATOM,
+    wCreatorVersion: WORD,
+}}
+pub type PWINDOWINFO = *mut WINDOWINFO;
+pub type LPWINDOWINFO = *mut WINDOWINFO;
+extern "system" {
+    pub fn GetWindowInfo(
+        hwnd: HWND,
+        pwi: PWINDOWINFO
+    ) -> BOOL;
+}
 pub const GA_PARENT: UINT = 1;
 pub const GA_ROOT: UINT = 2;
 pub const GA_ROOTOWNER: UINT = 3;
@@ -7007,25 +7027,5 @@ extern "system" {
     ) -> BOOL;
     pub fn ShutdownBlockReasonDestroy(
         hWnd: HWND,
-    ) -> BOOL;
-}
-STRUCT!{struct WINDOWINFO {
-    cbSize: DWORD,
-    rcWindow: RECT,
-    rcClient: RECT,
-    dwStyle: DWORD,
-    deExStyle: DWORD,
-    dwWindowStatus: DWORD,
-    cxWindowBorders: UINT,
-    cyWindowBorders: UINT,
-    atomWindowType: ATOM,
-    wCreatorVersion: WORD,
-}}
-pub type PWINDOWINFO = *mut WINDOWINFO;
-pub type LPWINDOWINFO = *mut WINDOWINFO;
-extern "system" {
-    pub fn GetWindowInfo(
-        hwnd: HWND,
-        pwi: PWINDOWINFO
     ) -> BOOL;
 }
