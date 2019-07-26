@@ -7,7 +7,7 @@ use ctypes::c_void;
 use shared::basetsd::{INT8, LONG_PTR, SIZE_T, UINT16, UINT64, UINT8};
 use shared::dxgiformat::DXGI_FORMAT;
 use shared::dxgitype::DXGI_SAMPLE_DESC;
-use shared::guiddef::{IID, REFGUID, REFIID};
+use shared::guiddef::{GUID, IID, REFGUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, LPCVOID, UINT};
 use shared::windef::RECT;
 use um::d3dcommon::{D3D_FEATURE_LEVEL, D3D_PRIMITIVE, D3D_PRIMITIVE_TOPOLOGY, ID3DBlob};
@@ -1810,7 +1810,7 @@ STRUCT!{struct D3D12_DEPTH_STENCIL_VIEW_DESC {
 
 ENUM!{enum D3D12_CLEAR_FLAGS {
     D3D12_CLEAR_FLAG_DEPTH = 0x1,
-    D3D12_CLEAR_FLAG_STENCIL =0x 2,
+    D3D12_CLEAR_FLAG_STENCIL =0x2,
 }}
 
 ENUM!{enum D3D12_FENCE_FLAGS {
@@ -1907,7 +1907,7 @@ ENUM!{enum D3D12_ROOT_SIGNATURE_FLAGS {
     D3D12_ROOT_SIGNATURE_FLAG_DENY_VERTEX_SHADER_ROOT_ACCESS = 0x2,
     D3D12_ROOT_SIGNATURE_FLAG_DENY_HULL_SHADER_ROOT_ACCESS = 0x4,
     D3D12_ROOT_SIGNATURE_FLAG_DENY_DOMAIN_SHADER_ROOT_ACCESS = 0x8,
-    D3D12_ROOT_SIGNATURE_FLAG_DENY_GEOMETRY_SHADER_ROOT_ACCESS = 0x10
+    D3D12_ROOT_SIGNATURE_FLAG_DENY_GEOMETRY_SHADER_ROOT_ACCESS = 0x10,
     D3D12_ROOT_SIGNATURE_FLAG_DENY_PIXEL_SHADER_ROOT_ACCESS = 0x20,
     D3D12_ROOT_SIGNATURE_FLAG_ALLOW_STREAM_OUTPUT = 0x40,
     D3D12_ROOT_SIGNATURE_FLAG_LOCAL_ROOT_SIGNATURE = 0x80,
@@ -2884,7 +2884,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     ) -> HRESULT,
     fn CreateSharedHandle(
         pObject: *mut ID3D12DeviceChild,
-        pAttributes: *const _SECURITY_ATTRIBUTES,
+        pAttributes: *const SECURITY_ATTRIBUTES,
         Access: UINT,
         Name: LPCWSTR,
         pHandle: *mut HANDLE,
@@ -2948,8 +2948,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         FirstSubresourceTilingToGet: UINT,
         pSubresourceTilingsForNonPackedMips: *mut D3D12_SUBRESOURCE_TILING,
     ) -> (),
-    fn GetAdapterLuid(
-    ) -> __LUID,
+    #[fixme] fn GetAdapterLuid() -> LUID,
 }}
 
 RIDL!{#[uuid(0xc64226a8, 0x9201, 0x46af, 0xb4, 0xcc, 0x53, 0xfb, 0x9f, 0xf7, 0x41, 0x4f)]
@@ -3187,7 +3186,7 @@ interface ID3D12LifetimeOwner(ID3D12LifetimeOwnerVtbl): IUnknown(IUnknownVtbl) {
 RIDL!{#[uuid(0xf1df64b6, 0x57fd, 0x49cd, 0x88, 0x07, 0xc0, 0xeb, 0x88, 0xb4, 0x5c, 0x8f)]
 interface ID3D12SwapChainAssistant(ID3D12SwapChainAssistantVtbl): IUnknown(IUnknownVtbl) {
     fn GetLUID(
-    ) -> __LUID,
+    ) -> LUID,
     fn GetSwapChainObject(
         riid: REFIID,
         ppv: *const *const c_void,
