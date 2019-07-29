@@ -7,7 +7,7 @@ use ctypes::c_void;
 use shared::basetsd::{INT8, LONG_PTR, SIZE_T, UINT16, UINT64, UINT8};
 use shared::dxgiformat::DXGI_FORMAT;
 use shared::dxgitype::DXGI_SAMPLE_DESC;
-use shared::guiddef::{GUID, IID, REFGUID, REFGUID};
+use shared::guiddef::{GUID, IID, REFGUID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, LPCVOID, UINT};
 use shared::windef::RECT;
 use um::d3dcommon::{D3D_FEATURE_LEVEL, D3D_PRIMITIVE, D3D_PRIMITIVE_TOPOLOGY, ID3DBlob};
