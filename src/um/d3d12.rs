@@ -7,7 +7,7 @@ use ctypes::c_void;
 use shared::basetsd::{INT8, LONG_PTR, SIZE_T, UINT16, UINT64, UINT8};
 use shared::dxgiformat::DXGI_FORMAT;
 use shared::dxgitype::DXGI_SAMPLE_DESC;
-use shared::guiddef::{GUID, IID, REFGUID, REFIID};
+use shared::guiddef::{GUID, IID, REFGUID, REFGUID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, LPCVOID, UINT};
 use shared::windef::RECT;
 use um::d3dcommon::{D3D_FEATURE_LEVEL, D3D_PRIMITIVE, D3D_PRIMITIVE_TOPOLOGY, ID3DBlob};
@@ -2046,7 +2046,7 @@ extern "system" {
 FN!{stdcall PFN_D3D12_CREATE_ROOT_SIGNATURE_DESERIALIZER(
     pSrcData: LPCVOID,
     SrcDataSizeInBytes: SIZE_T,
-    pRootSignatureDeserializerInterface: REFIID,
+    pRootSignatureDeserializerInterface: REFGUID,
     ppRootSignatureDeserializer: *mut *mut c_void,
 ) -> HRESULT}
 
@@ -2076,7 +2076,7 @@ extern "system" {
 FN!{stdcall PFN_D3D12_CREATE_VERSIONED_ROOT_SIGNATURE_DESERIALIZER(
     pSrcData: LPCVOID,
     SrcDataSizeInBytes: SIZE_T,
-    pRootSignatureDeserializerInterface: REFIID,
+    pRootSignatureDeserializerInterface: REFGUID,
     ppRootSignatureDeserializer: *mut *mut c_void,
 ) -> HRESULT}
 
@@ -2084,7 +2084,7 @@ extern "system" {
     pub fn D3D12CreateVersionedRootSignatureDeserializer(
         pSrcData: LPCVOID,
         SrcDataSizeInBytes: SIZE_T,
-        pRootSignatureDeserializerInterface: REFIID,
+        pRootSignatureDeserializerInterface: REFGUID,
         ppRootSignatureDeserializer: *mut *mut c_void,
     ) -> HRESULT;
 }
@@ -2263,17 +2263,17 @@ ENUM!{enum D3D12_WRITEBUFFERIMMEDIATE_MODE {
 RIDL!{#[uuid(0xc4fec28f, 0x7966, 0x4e95, 0x9f, 0x94, 0xf4, 0x31, 0xcb, 0x56, 0xc3, 0xb8)]
 interface ID3D12Object(ID3D12ObjectVtbl): IUnknown(IUnknownVtbl) {
     fn GetPrivateData(
-        guid: REFIID,
+        guid: REFGUID,
         pDataSize: *mut UINT,
         pData: *mut c_void,
     ) -> HRESULT,
     fn SetPrivateData(
-        guid: REFIID,
+        guid: REFGUID,
         DataSize: UINT,
         pData: *const c_void,
     ) -> HRESULT,
     fn SetPrivateDataInterface(
-        guid: REFIID,
+        guid: REFGUID,
         pData: *const IUnknown,
     ) -> HRESULT,
     fn SetName(
@@ -2284,7 +2284,7 @@ interface ID3D12Object(ID3D12ObjectVtbl): IUnknown(IUnknownVtbl) {
 RIDL!{#[uuid(0x905db94b, 0xa00c, 0x4140, 0x9d, 0xf5, 0x2b, 0x64, 0xca, 0x9e, 0xa3, 0x57)]
 interface ID3D12DeviceChild(ID3D12DeviceChildVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     fn GetDevice(
-        riid: REFIID,
+        riid: REFGUID,
         ppvDevice: *mut *mut c_void,
     ) -> HRESULT,
 }}
@@ -2753,22 +2753,22 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     ) -> UINT,
     fn CreateCommandQueue(
         pDesc: *const D3D12_COMMAND_QUEUE_DESC,
-        riid: REFIID,
+        riid: REFGUID,
         ppCommandQueue: *mut *mut c_void,
     ) -> HRESULT,
     fn CreateCommandAllocator(
         Type: D3D12_COMMAND_LIST_TYPE,
-        riid: REFIID,
+        riid: REFGUID,
         ppCommandAllocator: *mut *mut c_void,
     ) -> HRESULT,
     fn CreateGraphicsPipelineState(
         pDesc: *const D3D12_GRAPHICS_PIPELINE_STATE_DESC,
-        riid: REFIID,
+        riid: REFGUID,
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
     fn CreateComputePipelineState(
         pDesc: *const D3D12_COMPUTE_PIPELINE_STATE_DESC,
-        riid: REFIID,
+        riid: REFGUID,
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
     fn CreateCommandList(
@@ -2776,7 +2776,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         Type: D3D12_COMMAND_LIST_TYPE,
         pCommandAllocator: *mut ID3D12CommandAllocator,
         pInitialState: *mut ID3D12PipelineState,
-        riid: REFIID,
+        riid: REFGUID,
         ppCommandList: *mut *mut c_void,
     ) -> HRESULT,
     fn CheckFeatureSupport(
@@ -2786,7 +2786,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     ) -> HRESULT,
     fn CreateDescriptorHeap(
         pDescriptorHeapDesc: *const D3D12_DESCRIPTOR_HEAP_DESC,
-        riid: REFIID,
+        riid: REFGUID,
         ppvHeap: *mut *mut c_void,
     ) -> HRESULT,
     fn GetDescriptorHandleIncrementSize(
@@ -2796,7 +2796,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         NodeMask: UINT,
         pBlobWithRootSignature: *const c_void,
         blobLengthInBytes: SIZE_T,
-        riid: REFIID,
+        riid: REFGUID,
         ppvRootSignature: *mut *mut c_void,
     ) -> HRESULT,
     fn CreateConstantBufferView(
@@ -2858,12 +2858,12 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         pDesc: *const D3D12_RESOURCE_DESC,
         InitialResourceState: D3D12_RESOURCE_STATES,
         pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
-        riidResource: REFIID,
+        riidResource: REFGUID,
         ppvResource: *mut *mut c_void,
     ) -> HRESULT,
     fn CreateHeap(
         pDesc: *const D3D12_HEAP_DESC,
-        riid: REFIID,
+        riid: REFGUID,
         ppvHeap: *mut *mut c_void,
     ) -> HRESULT,
     fn CreatePlacedResource(
@@ -2872,14 +2872,14 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         pDesc: *const D3D12_RESOURCE_DESC,
         InitialState: D3D12_RESOURCE_STATES,
         pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
-        riid: REFIID,
+        riid: REFGUID,
         ppvResource: *mut *mut c_void,
     ) -> HRESULT,
     fn CreateReservedResource(
         pDesc: *const D3D12_RESOURCE_DESC,
         InitialState: D3D12_RESOURCE_STATES,
         pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
-        riid: REFIID,
+        riid: REFGUID,
         ppvResource: *mut *mut c_void,
     ) -> HRESULT,
     fn CreateSharedHandle(
@@ -2891,7 +2891,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     ) -> HRESULT,
     fn OpenSharedHandle(
         NTHandle: HANDLE,
-        riid: REFIID,
+        riid: REFGUID,
         ppvObj: *mut *mut c_void,
     ) -> HRESULT,
     fn OpenSharedHandleByName(
@@ -2910,7 +2910,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     fn CreateFence(
         InitialValue: UINT64,
         Flags: D3D12_FENCE_FLAGS,
-        riid: REFIID,
+        riid: REFGUID,
         ppFence: *mut *mut c_void,
     ) -> HRESULT,
     fn GetDeviceRemovedReason(
@@ -2927,7 +2927,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     ) -> (),
     fn CreateQueryHeap(
         pDesc: *const D3D12_QUERY_HEAP_DESC,
-        riid: REFIID,
+        riid: REFGUID,
         ppvHeap: *mut *mut c_void,
     ) -> HRESULT,
     fn SetStablePowerState(
@@ -2936,7 +2936,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     fn CreateCommandSignature(
         pDesc: *const D3D12_COMMAND_SIGNATURE_DESC,
         pRootSignature: *mut ID3D12RootSignature,
-        riid: REFIID,
+        riid: REFGUID,
         ppvCommandSignature: *mut *mut c_void,
     ) -> HRESULT,
     fn GetResourceTiling(
@@ -2960,13 +2960,13 @@ interface ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl): ID3D12DeviceChild(ID
     fn LoadGraphicsPipeline(
         pName: LPCWSTR,
         pDesc: *const D3D12_GRAPHICS_PIPELINE_STATE_DESC,
-        riid: REFIID,
+        riid: REFGUID,
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
     fn LoadComputePipeline(
         pName: LPCWSTR,
         pDesc: *const D3D12_COMPUTE_PIPELINE_STATE_DESC,
-        riid: REFIID,
+        riid: REFGUID,
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
     fn GetSerializedSize(
@@ -2982,7 +2982,7 @@ interface ID3D12PipelineLibrary1(ID3D12PipelineLibrary1Vtbl): ID3D12PipelineLibr
     fn LoadPipeline(
         pName: LPCWSTR,
         pDesc: *const D3D12_PIPELINE_STATE_STREAM_DESC,
-        riid: REFIID,
+        riid: REFGUID,
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
 }}
@@ -3006,7 +3006,7 @@ interface ID3D12Device1(ID3D12Device1Vtbl): ID3D12Device(ID3D12DeviceVtbl) {
     fn CreatePipelineLibrary(
         pLibraryBlob: *const c_void,
         BlobLength: SIZE_T,
-        riid: REFIID,
+        riid: REFGUID,
         ppPipelineLibrary: *mut *mut c_void,
     ) -> HRESULT,
     fn SetEventOnMultipleFenceCompletion(
@@ -3027,7 +3027,7 @@ RIDL!{#[uuid(0x30baa41e, 0xb15b, 0x475c, 0xa0, 0xbb, 0x1a, 0xf5, 0xc5, 0xb6, 0x4
 interface ID3D12Device2(ID3D12Device2Vtbl): ID3D12Device1(ID3D12Device1Vtbl) {
     fn CreatePipelineState(
         pDesc: *const D3D12_PIPELINE_STATE_STREAM_DESC,
-        riid: REFIID,
+        riid: REFGUID,
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
 }}
@@ -3041,12 +3041,12 @@ RIDL!{#[uuid(0x81dadc15, 0x2bad, 0x4392, 0x93, 0xc5, 0x10, 0x13, 0x45, 0xc4, 0xa
 interface ID3D12Device3(ID3D12Device3Vtbl): ID3D12Device2(ID3D12Device2Vtbl) {
     fn OpenExistingHeapFromAddress(
         pAddress: *const c_void,
-        riid: REFIID,
+        riid: REFGUID,
         ppvHeap: *const *const c_void,
     ) -> HRESULT,
     fn OpenExistingHeapFromFileMapping(
         hFileMapping: *const c_void,
-        riid: REFIID,
+        riid: REFGUID,
         ppvHeap: *const *const c_void,
     ) -> HRESULT,
     fn EnqueueMakeResident(
@@ -3086,7 +3086,7 @@ ENUM!{enum D3D12_PROTECTED_SESSION_STATUS {
 RIDL!{#[uuid(0xa1533d18, 0x0ac1, 0x4084, 0x85, 0xb9, 0x89, 0xa9, 0x61, 0x16, 0x80, 0x6b)]
 interface ID3D12ProtectedSession(ID3D12ProtectedSessionVtbl): ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
     fn GetStatusFence(
-        riid: REFIID,
+        riid: REFGUID,
         ppFence: *const *const c_void,
     ) -> HRESULT,
     fn GetSessionStatus(
@@ -3124,12 +3124,12 @@ interface ID3D12Device4(ID3D12Device4Vtbl): ID3D12Device3(ID3D12Device3Vtbl) {
         NodeMask: UINT,
         Type: D3D12_COMMAND_LIST_TYPE,
         Flags: D3D12_COMMAND_LIST_FLAGS,
-        riid: REFIID,
+        riid: REFGUID,
         ppCommandList: *const *const c_void,
     ) -> HRESULT,
     fn CreateProtectedResourceSession(
         pDesc: *const D3D12_PROTECTED_RESOURCE_SESSION_DESC,
-        riid: REFIID,
+        riid: REFGUID,
         ppSession: *const *const c_void,
     ) -> HRESULT,
     fn CreateCommittedResource1(
@@ -3139,13 +3139,13 @@ interface ID3D12Device4(ID3D12Device4Vtbl): ID3D12Device3(ID3D12Device3Vtbl) {
         InitialResourceState: D3D12_RESOURCE_STATES,
         pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
         pProtectedSession: *const ID3D12ProtectedResourceSession,
-        riidResource: REFIID,
+        riidResource: REFGUID,
         ppvResource: *const *const c_void,
     ) -> HRESULT,
     fn CreateHeap1(
         pDesc: *const D3D12_HEAP_DESC,
         pProtectedSession: *const ID3D12ProtectedResourceSession,
-        riid: REFIID,
+        riid: REFGUID,
         ppvHeap: *const *const c_void,
     ) -> HRESULT,
     fn CreateReservedResource1(
@@ -3153,7 +3153,7 @@ interface ID3D12Device4(ID3D12Device4Vtbl): ID3D12Device3(ID3D12Device3Vtbl) {
         InitialState: D3D12_RESOURCE_STATES,
         pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
         pProtectedSession: *const ID3D12ProtectedResourceSession,
-        riid: REFIID,
+        riid: REFGUID,
         ppvResource: *const *const c_void,
     ) -> HRESULT,
     fn GetResourceAllocationInfo1(
@@ -3188,13 +3188,13 @@ interface ID3D12SwapChainAssistant(ID3D12SwapChainAssistantVtbl): IUnknown(IUnkn
     fn GetLUID(
     ) -> LUID,
     fn GetSwapChainObject(
-        riid: REFIID,
+        riid: REFGUID,
         ppv: *const *const c_void,
     ) -> HRESULT,
     fn GetCurrentResourceAndCommandQueue(
-        riidResource: REFIID,
+        riidResource: REFGUID,
         ppvResource: *const *const c_void,
-        riidQueue: REFIID,
+        riidQueue: REFGUID,
         ppvQueue: *const *const c_void,
     ) -> HRESULT,
     fn InsertImplicitSync(
@@ -3595,7 +3595,7 @@ RIDL!{#[uuid(0x8b4f173b, 0x2fea, 0x4b80, 0x8f, 0x58, 0x43, 0x07, 0x19, 0x1a, 0xb
 interface ID3D12Device5(ID3D12Device5Vtbl): ID3D12Device4(ID3D12Device4Vtbl) {
     fn CreateLifetimeTracker(
         pOwner: *const ID3D12LifetimeOwner,
-        riid: REFIID,
+        riid: REFGUID,
         ppvTracker: *const *const c_void,
     ) -> HRESULT,
     fn RemoveDevice(
@@ -3605,23 +3605,23 @@ interface ID3D12Device5(ID3D12Device5Vtbl): ID3D12Device4(ID3D12Device4Vtbl) {
         pDescs: *const D3D12_META_COMMAND_DESC,
     ) -> HRESULT,
     fn EnumerateMetaCommandParameters(
-        CommandId: REFIID,
+        CommandId: REFGUID,
         Stage: D3D12_META_COMMAND_PARAMETER_STAGE,
         pTotalStructureSizeInBytes: *const UINT,
         pParameterCount: *const UINT,
         pParameterDescs: *const D3D12_META_COMMAND_PARAMETER_DESC,
     ) -> HRESULT,
     fn CreateMetaCommand(
-        CommandId: REFIID,
+        CommandId: REFGUID,
         NodeMask: UINT,
         pCreationParametersData: *const c_void,
         CreationParametersDataSizeInBytes: SIZE_T,
-        riid: REFIID,
+        riid: REFGUID,
         ppMetaCommand: *const *const c_void,
     ) -> HRESULT,
     fn CreateStateObject(
         pDesc: *const D3D12_STATE_OBJECT_DESC,
-        riid: REFIID,
+        riid: REFGUID,
         ppStateObject: *const *const c_void,
     ) -> HRESULT,
     fn GetRaytracingAccelerationStructurePrebuildInfo(
@@ -3718,7 +3718,7 @@ UNION!{union D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA_u {
 RIDL!{#[uuid(0x9d5e227a, 0x4430, 0x4161, 0x88, 0xb3, 0x3e, 0xca, 0x6b, 0xb1, 0x6e, 0x19)]
 interface ID3D12Resource1(ID3D12Resource1Vtbl): ID3D12Resource(ID3D12ResourceVtbl) {
     fn GetProtectedResourceSession(
-        riid: REFIID,
+        riid: REFGUID,
         ppProtectedSession: *mut *mut c_void,
     ) -> HRESULT,
 }}
@@ -3732,7 +3732,7 @@ interface ID3D12Fence1(ID3D12Fence1Vtbl): ID3D12Fence(ID3D12FenceVtbl) {
 RIDL!{#[uuid(0x572f7389, 0x2168, 0x49e3, 0x96, 0x93, 0xd6, 0xdf, 0x58, 0x71, 0xbf, 0x6d)]
 interface ID3D12Heap1(ID3D12Heap1Vtbl): ID3D12Heap(ID3D12HeapVtbl) {
     fn GetProtectedResourceSession(
-        riid: REFIID,
+        riid: REFGUID,
         ppProtectedSession: *mut *mut c_void,
     ) -> HRESULT,
 }}
@@ -3906,7 +3906,7 @@ STRUCT!{struct D3D12_MEMCPY_DEST {
 FN!{stdcall PFN_D3D12_CREATE_DEVICE(
     *mut IUnknown,
     D3D_FEATURE_LEVEL,
-    REFIID,
+    REFGUID,
     *mut *mut c_void,
 ) -> HRESULT}
 
@@ -3920,7 +3920,7 @@ extern "system" {
 }
 
 FN!{stdcall PFN_D3D12_GET_DEBUG_INTERFACE(
-    REFIID,
+    REFGUID,
     *mut *mut c_void,
 ) -> HRESULT}
 
