@@ -877,3 +877,16 @@ interface IErrorLog(IErrorLogVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 pub type LPERRORLOG = *mut IErrorLog;
+RIDL!{#[uuid(0x55272a00, 0x42cb, 0x11ce, 0x81, 0x35, 0x00, 0xaa, 0x00, 0x4b, 0xb8, 0x51)]
+interface IPropertyBag(IPropertyBagVtbl): IUnknown(IUnknownVtbl) {
+    fn Read(
+        pszPropName: LPCOLESTR,
+        pVar: *mut VARIANT,
+        pErrorLog: *const IErrorLog,
+    ) -> HRESULT,
+    fn Write(
+        pszPropName: LPCOLESTR,
+        pVar: *mut VARIANT,
+    ) -> HRESULT,
+}}
+pub type LPPropertyBag = *mut IPropertyBag;
