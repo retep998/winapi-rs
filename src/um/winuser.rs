@@ -5713,7 +5713,6 @@ extern "system" {
         lpsi: *mut SCROLLINFO,
     ) -> BOOL;
 }
-pub const CCHILDREN_SCROLLBAR: usize = 5;
 pub const CDS_UPDATEREGISTRY: DWORD = 0x00000001;
 pub const CDS_TEST: DWORD = 0x00000002;
 pub const CDS_FULLSCREEN: DWORD = 0x00000004;
@@ -5893,17 +5892,6 @@ FN!{stdcall WINEVENTPROC(
     DWORD,
     DWORD,
 ) -> ()}
-STRUCT!{struct SCROLLBARINFO {
-    cbSize: DWORD,
-    rcScrollBar: RECT,
-    dxyLineButton: c_int,
-    xyThumbTop: c_int,
-    xyThumbBottom: c_int,
-    reserved: c_int,
-    rgstate: [DWORD; CCHILDREN_SCROLLBAR + 1],
-}}
-pub type PSCROLLBARINFO = *mut SCROLLBARINFO;
-pub type LPSCROLLBARINFO = *mut SCROLLBARINFO;
 STRUCT!{struct SIZE {
     cx: LONG,
     cy: LONG,
@@ -6441,7 +6429,6 @@ extern "system" {
 pub const MONITOR_DEFAULTTONULL: DWORD = 0x00000000;
 pub const MONITOR_DEFAULTTOPRIMARY: DWORD = 0x00000001;
 pub const MONITOR_DEFAULTTONEAREST: DWORD = 0x00000002;
-//12900
 extern "system" {
     pub fn MonitorFromPoint(
         pt: POINT,
@@ -6481,7 +6468,6 @@ STRUCT!{struct MONITORINFOEXW {
     szDevice: [WCHAR; CCHDEVICENAME],
 }}
 pub type LPMONITORINFOEXW = *mut MONITORINFOEXW;
-//12971
 extern "system" {
     pub fn GetMonitorInfoA(
         hMonitor: HMONITOR,
@@ -6648,8 +6634,33 @@ pub const ALERT_SYSTEM_ERROR: LONG = 3;
 pub const ALERT_SYSTEM_QUERY: LONG = 4;
 pub const ALERT_SYSTEM_CRITICAL: LONG = 5;
 pub const CALERT_SYSTEM: LONG = 6;
+STRUCT!{struct GUITHREADINFO {
+    cbSize: DWORD,
+    flags: DWORD,
+    hwndActive: HWND,
+    hwndFocus: HWND,
+    hwndCapture: HWND,
+    hwndMenuOwner: HWND,
+    hwndMoveSize: HWND,
+    hwndCaret: HWND,
+    rcCaret: RECT,
+}}
+pub type PGUITHREADINFO = *mut GUITHREADINFO;
+pub type LPGUITHREADINFO = *mut GUITHREADINFO;
+pub const GUI_CARETBLINKING: DWORD = 0x00000001;
+pub const GUI_INMOVESIZE: DWORD = 0x00000002;
+pub const GUI_INMENUMODE: DWORD = 0x00000004;
+pub const GUI_SYSTEMMENUMODE: DWORD = 0x00000008;
+pub const GUI_POPUPMENUMODE: DWORD = 0x00000010;
+#[cfg(target_arch = "x86_64")]
+pub const GUI_16BITTASK: DWORD = 0x00000000;
+#[cfg(target_arch = "x86")]
+pub const GUI_16BITTASK: DWORD = 0x00000020;
 extern "system" {
-//14098
+    pub fn GetGUIThreadInfo(
+        idThread: DWORD,
+        pgui: PGUITHREADINFO,
+    ) -> BOOL;
     pub fn BlockInput(
         fBlockIt: BOOL,
     ) -> BOOL;
@@ -6708,6 +6719,158 @@ extern "system" {
         lpszFileName: LPWSTR,
         cchFileNameMax: UINT,
     ) -> UINT;
+}
+pub const STATE_SYSTEM_UNAVAILABLE: DWORD = 0x00000001;
+pub const STATE_SYSTEM_SELECTED: DWORD = 0x00000002;
+pub const STATE_SYSTEM_FOCUSED: DWORD = 0x00000004;
+pub const STATE_SYSTEM_PRESSED: DWORD = 0x00000008;
+pub const STATE_SYSTEM_CHECKED: DWORD = 0x00000010;
+pub const STATE_SYSTEM_MIXED: DWORD = 0x00000020;
+pub const STATE_SYSTEM_INDETERMINATE: DWORD = STATE_SYSTEM_MIXED;
+pub const STATE_SYSTEM_READONLY: DWORD = 0x00000040;
+pub const STATE_SYSTEM_HOTTRACKED: DWORD = 0x00000080;
+pub const STATE_SYSTEM_DEFAULT: DWORD = 0x00000100;
+pub const STATE_SYSTEM_EXPANDED: DWORD = 0x00000200;
+pub const STATE_SYSTEM_COLLAPSED: DWORD = 0x00000400;
+pub const STATE_SYSTEM_BUSY: DWORD = 0x00000800;
+pub const STATE_SYSTEM_FLOATING: DWORD = 0x00001000;
+pub const STATE_SYSTEM_MARQUEED: DWORD = 0x00002000;
+pub const STATE_SYSTEM_ANIMATED: DWORD = 0x00004000;
+pub const STATE_SYSTEM_INVISIBLE: DWORD = 0x00008000;
+pub const STATE_SYSTEM_OFFSCREEN: DWORD = 0x00010000;
+pub const STATE_SYSTEM_SIZEABLE: DWORD = 0x00020000;
+pub const STATE_SYSTEM_MOVEABLE: DWORD = 0x00040000;
+pub const STATE_SYSTEM_SELFVOICING: DWORD = 0x00080000;
+pub const STATE_SYSTEM_FOCUSABLE: DWORD = 0x00100000;
+pub const STATE_SYSTEM_SELECTABLE: DWORD = 0x00200000;
+pub const STATE_SYSTEM_LINKED: DWORD = 0x00400000;
+pub const STATE_SYSTEM_TRAVERSED: DWORD = 0x00800000;
+pub const STATE_SYSTEM_MULTISELECTABLE: DWORD = 0x01000000;
+pub const STATE_SYSTEM_EXTSELECTABLE: DWORD = 0x02000000;
+pub const STATE_SYSTEM_ALERT_LOW: DWORD = 0x04000000;
+pub const STATE_SYSTEM_ALERT_MEDIUM: DWORD = 0x08000000;
+pub const STATE_SYSTEM_ALERT_HIGH: DWORD = 0x10000000;
+pub const STATE_SYSTEM_PROTECTED: DWORD = 0x20000000;
+pub const STATE_SYSTEM_VALID: DWORD = 0x3fffffff;
+pub const CCHILDREN_TITLEBAR: usize = 5;
+pub const CCHILDREN_SCROLLBAR: usize = 5;
+STRUCT!{struct CURSORINFO {
+    cbSize: DWORD,
+    flags: DWORD,
+    hCursor: HCURSOR,
+    ptScreenPos: POINT,
+}}
+pub type PCURSORINFO = *mut CURSORINFO;
+pub type LPCURSORINFO = *mut CURSORINFO;
+pub const CURSOR_SHOWING: DWORD = 0x00000001;
+pub const CURSOR_SUPPRESSED: DWORD = 0x00000002;
+extern "system" {
+    pub fn GetCursorInfo(
+        pci: PCURSORINFO,
+    ) -> BOOL;
+}
+STRUCT!{struct WINDOWINFO {
+    cbSize: DWORD,
+    rcWindow: RECT,
+    rcClient: RECT,
+    dwStyle: DWORD,
+    dwExStyle: DWORD,
+    dwWindowStatus: DWORD,
+    cxWindowBorders: UINT,
+    cyWindowBorders: UINT,
+    atomWindowType: ATOM,
+    wCreatorVersion: WORD,
+}}
+pub type PWINDOWINFO = *mut WINDOWINFO;
+pub type LPWINDOWINFO = *mut WINDOWINFO;
+pub const WS_ACTIVECAPTION: DWORD = 0x0001;
+extern "system" {
+    pub fn GetWindowInfo(
+        hwnd: HWND,
+        pwi: PWINDOWINFO,
+    ) -> BOOL;
+}
+STRUCT!{struct TITLEBARINFO {
+    cbSize: DWORD,
+    rcTitleBar: RECT,
+    rgstate: [DWORD; CCHILDREN_TITLEBAR + 1],
+}}
+pub type PTITLEBARINFO = *mut TITLEBARINFO;
+pub type LPTITLEBARINFO = *mut TITLEBARINFO;
+extern "system" {
+    pub fn GetTitleBarInfo(
+        hwnd: HWND,
+        pti: PTITLEBARINFO,
+    ) -> BOOL;
+}
+STRUCT!{struct TITLEBARINFOEX {
+    cbSize: DWORD,
+    rcTitleBar: RECT,
+    rgstate: [DWORD; CCHILDREN_TITLEBAR + 1],
+    rgrect: [RECT; CCHILDREN_TITLEBAR + 1],
+}}
+pub type PTITLEBARINFOEX = *mut TITLEBARINFOEX;
+pub type LPTITLEBARINFOEX = *mut TITLEBARINFOEX;
+STRUCT!{struct MENUBARINFO {
+    cbSize: DWORD,
+    rcBar: RECT,
+    hMenu: HMENU,
+    hwndMenu: HWND,
+    BitFields: BOOL,
+}}
+BITFIELD!{MENUBARINFO BitFields: BOOL [
+    fBarFocused set_fBarFocused[0..1],
+    fFocused set_fFocused[1..2],
+]}
+pub type PMENUBARINFO = *mut MENUBARINFO;
+pub type LPMENUBARINFO = *mut MENUBARINFO;
+extern "system" {
+    pub fn GetMenuBarInfo(
+        hwnd: HWND,
+        idObject: LONG,
+        idItem: LONG,
+        pmbi: PMENUBARINFO,
+    ) -> BOOL;
+}
+STRUCT!{struct SCROLLBARINFO {
+    cbSize: DWORD,
+    rcScrollBar: RECT,
+    dxyLineButton: c_int,
+    xyThumbTop: c_int,
+    xyThumbBottom: c_int,
+    reserved: c_int,
+    rgstate: [DWORD; CCHILDREN_SCROLLBAR + 1],
+}}
+pub type PSCROLLBARINFO = *mut SCROLLBARINFO;
+pub type LPSCROLLBARINFO = *mut SCROLLBARINFO;
+extern "system" {
+    pub fn GetScrollBarInfo(
+        hwnd: HWND,
+        idObject: LONG,
+        psbi: PSCROLLBARINFO,
+    ) -> BOOL;
+}
+STRUCT!{struct COMBOBOXINFO {
+    cbSize: DWORD,
+    rcItem: RECT,
+    rcButton: RECT,
+    stateButton: DWORD,
+    hwndCombo: HWND,
+    hwndItem: HWND,
+    hwndList: HWND,
+}}
+pub type PCOMBOBOXINFO = *mut COMBOBOXINFO;
+pub type LPCOMBOBOXINFO = *mut COMBOBOXINFO;
+extern "system" {
+    pub fn GetComboBoxInfo(
+        hwndCombo: HWND,
+        pcbi: PCOMBOBOXINFO,
+    ) -> BOOL;
+}
+pub const GA_PARENT: UINT = 1;
+pub const GA_ROOT: UINT = 2;
+pub const GA_ROOTOWNER: UINT = 3;
+extern "system" {
     pub fn GetAncestor(
         hWnd: HWND,
         gaFlags: UINT,
@@ -6726,6 +6889,38 @@ extern "system" {
         ptszClassName: LPWSTR,
         cchClassNameMax: UINT,
     ) -> UINT;
+}
+STRUCT!{struct ALTTABINFO {
+    cbSize: DWORD,
+    cItems: c_int,
+    cColumns: c_int,
+    cRows: c_int,
+    iColFocus: c_int,
+    iRowFocus: c_int,
+    cxItem: c_int,
+    cyItem: c_int,
+    ptStart: POINT,
+}}
+pub type PALTTABINFO = *mut ALTTABINFO;
+pub type LPALTTABINFO = *mut ALTTABINFO;
+extern "system" {
+    pub fn GetAltTabInfoA(
+        hwnd: HWND,
+        iItem: c_int,
+        pati: PALTTABINFO,
+        pszItemText: LPSTR,
+        cchItemText: UINT,
+    ) -> BOOL;
+    pub fn GetAltTabInfoW(
+        hwnd: HWND,
+        iItem: c_int,
+        pati: PALTTABINFO,
+        pszItemText: LPWSTR,
+        cchItemText: UINT,
+    ) -> BOOL;
+    pub fn GetListBoxInfo(
+        hwnd: HWND,
+    ) -> DWORD;
     pub fn LockWorkStation() -> BOOL;
     pub fn UserHandleGrantAccess(
         hUserHandle: HANDLE,
