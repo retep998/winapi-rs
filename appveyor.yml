@@ -25,7 +25,7 @@ install:
   - ps: $env:PATH = "$env:PATH;${env:USERPROFILE}\.cargo\bin"
   - ps: >
       if ($env:targets) { $env:targets -split " " | %{
-        rustup target add $_ 2>&1|%{"$_"}
+        cmd /c "rustup target add $_ 2>&1"
       }}
   - rustc -vV
   - cargo -vV
@@ -37,7 +37,7 @@ build_script:
   - cargo test --features "everything impl-debug impl-default"
   - ps: >
       if ($env:targets) { $env:targets -split " " | %{
-        cargo test --target=$_ --features "everything impl-debug impl-default" --no-run 2>&1|%{"$_"}
+        cmd /c "cargo test --target=$_ --features `"everything impl-debug impl-default`" --no-run 2>&1"
       }}
 
 notifications:
