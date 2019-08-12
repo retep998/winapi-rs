@@ -8681,8 +8681,6 @@ fn um_winuser() {
     assert_eq!(align_of::<MSGBOXPARAMSW>(), 4);
     assert_eq!(size_of::<SCROLLINFO>(), 28);
     assert_eq!(align_of::<SCROLLINFO>(), 4);
-    assert_eq!(size_of::<SIZE>(), 8);
-    assert_eq!(align_of::<SIZE>(), 4);
     assert_eq!(size_of::<ICONINFO>(), 20);
     assert_eq!(align_of::<ICONINFO>(), 4);
     assert_eq!(size_of::<NONCLIENTMETRICSA>(), 344);
