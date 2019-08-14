@@ -31,25 +31,25 @@ pub const MAX_SERVICE_NAME_LEN: usize = 256;
 pub const MAX_SUBTITLE_LEN: usize = 256;
 pub const SP_MAX_MACHINENAME_LENGTH: usize = MAX_PATH + 3;
 pub type HINF = PVOID;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct INFCONTEXT {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct INFCONTEXT {
     Inf: PVOID,
     CurrentInf: PVOID,
     Section: UINT,
     Line: UINT,
 }}
 pub type PINFCONTEXT = *mut INFCONTEXT;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_INF_INFORMATION {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_INF_INFORMATION {
     InfStyle: DWORD,
     InfCount: DWORD,
     VersionData: [BYTE; ANYSIZE_ARRAY],
 }}
 pub type PSP_INF_INFORMATION = *mut SP_INF_INFORMATION;
-UNION!{#[cfg_attr(target_arch = "x86", repr(packed))] union SP_ALTPLATFORM_INFO_V3_u {
+UNION! {#[cfg_attr(target_arch = "x86", repr(packed))] union SP_ALTPLATFORM_INFO_V3_u {
     [u16; 1],
     Reserved Reserved_mut: WORD,
     Flags Flags_mut: WORD,
 }}
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ALTPLATFORM_INFO_V3 {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ALTPLATFORM_INFO_V3 {
     cbSize: DWORD,
     Platform: DWORD,
     MajorVersion: DWORD,
@@ -63,12 +63,12 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ALTPLATFORM_INF
     BuildNumber: DWORD,
 }}
 pub type PSP_ALTPLATFORM_INFO_V3 = *mut SP_ALTPLATFORM_INFO_V3;
-UNION!{#[cfg_attr(target_arch = "x86", repr(packed))] union SP_ALTPLATFORM_INFO_V2_u {
+UNION! {#[cfg_attr(target_arch = "x86", repr(packed))] union SP_ALTPLATFORM_INFO_V2_u {
     [u16; 1],
     Reserved Reserved_mut: WORD,
     Flags Flags_mut: WORD,
 }}
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ALTPLATFORM_INFO_V2 {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ALTPLATFORM_INFO_V2 {
     cbSize: DWORD,
     Platform: DWORD,
     MajorVersion: DWORD,
@@ -79,7 +79,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ALTPLATFORM_INF
     FirstValidatedMinorVersion: DWORD,
 }}
 pub type PSP_ALTPLATFORM_INFO_V2 = *mut SP_ALTPLATFORM_INFO_V2;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ALTPLATFORM_INFO_V1 {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ALTPLATFORM_INFO_V1 {
     cbSize: DWORD,
     Platform: DWORD,
     MajorVersion: DWORD,
@@ -92,13 +92,13 @@ pub type SP_ALTPLATFORM_INFO = SP_ALTPLATFORM_INFO_V2;
 pub type PSP_ALTPLATFORM_INFO = PSP_ALTPLATFORM_INFO_V2;
 pub const SP_ALTPLATFORM_FLAGS_VERSION_RANGE: WORD = 0x0001;
 pub const SP_ALTPLATFORM_FLAGS_SUITE_MASK: WORD = 0x0002;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ORIGINAL_FILE_INFO_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ORIGINAL_FILE_INFO_A {
     cbSize: DWORD,
     OriginalInfName: [CHAR; MAX_PATH],
     OriginalCatalogName: [CHAR; MAX_PATH],
 }}
 pub type PSP_ORIGINAL_FILE_INFO_A = *mut SP_ORIGINAL_FILE_INFO_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ORIGINAL_FILE_INFO_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ORIGINAL_FILE_INFO_W {
     cbSize: DWORD,
     OriginalInfName: [WCHAR; MAX_PATH],
     OriginalCatalogName: [WCHAR; MAX_PATH],
@@ -148,13 +148,13 @@ pub const DIRID_PROGRAM_FILES_COMMONX86: DWORD = 16428;
 pub const DIRID_COMMON_TEMPLATES: DWORD = 16429;
 pub const DIRID_COMMON_DOCUMENTS: DWORD = 16430;
 pub const DIRID_USER: DWORD = 0x8000;
-FN!{stdcall PSP_FILE_CALLBACK_A(
+FN! {stdcall PSP_FILE_CALLBACK_A(
     Context: PVOID,
     Notification: UINT,
     Param1: UINT_PTR,
     Param2: UINT_PTR,
 ) -> UINT}
-FN!{stdcall PSP_FILE_CALLBACK_W(
+FN! {stdcall PSP_FILE_CALLBACK_W(
     Context: PVOID,
     Notification: UINT,
     Param1: UINT_PTR,
@@ -214,21 +214,21 @@ pub const COPYFLG_NOPRUNE: UINT = 0x00002000;
 pub const COPYFLG_IN_USE_TRY_RENAME: UINT = 0x00004000;
 pub const DELFLG_IN_USE: UINT = 0x00000001;
 pub const DELFLG_IN_USE1: UINT = 0x00010000;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct FILEPATHS_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct FILEPATHS_A {
     Target: PCSTR,
     Source: PCSTR,
     Win32Error: UINT,
     Flags: DWORD,
 }}
 pub type PFILEPATHS_A = *mut FILEPATHS_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct FILEPATHS_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct FILEPATHS_W {
     Target: PCWSTR,
     Source: PCWSTR,
     Win32Error: UINT,
     Flags: DWORD,
 }}
 pub type PFILEPATHS_W = *mut FILEPATHS_W;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct FILEPATHS_SIGNERINFO_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct FILEPATHS_SIGNERINFO_A {
     Target: PCSTR,
     Source: PCSTR,
     Win32Error: UINT,
@@ -238,7 +238,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct FILEPATHS_SIGNERIN
     CatalogFile: PCSTR,
 }}
 pub type PFILEPATHS_SIGNERINFO_A = *mut FILEPATHS_SIGNERINFO_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct FILEPATHS_SIGNERINFO_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct FILEPATHS_SIGNERINFO_W {
     Target: PCWSTR,
     Source: PCWSTR,
     Win32Error: UINT,
@@ -248,7 +248,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct FILEPATHS_SIGNERIN
     CatalogFile: PCWSTR,
 }}
 pub type PFILEPATHS_SIGNERINFO_W = *mut FILEPATHS_SIGNERINFO_W;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SOURCE_MEDIA_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SOURCE_MEDIA_A {
     Reserved: PCSTR,
     Tagfile: PCSTR,
     Description: PCSTR,
@@ -257,7 +257,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SOURCE_MEDIA_A {
     Flags: DWORD,
 }}
 pub type PSOURCE_MEDIA_A = *mut SOURCE_MEDIA_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SOURCE_MEDIA_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SOURCE_MEDIA_W {
     Reserved: PCWSTR,
     Tagfile: PCWSTR,
     Description: PCWSTR,
@@ -266,7 +266,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SOURCE_MEDIA_W {
     Flags: DWORD,
 }}
 pub type PSOURCE_MEDIA_W = *mut SOURCE_MEDIA_W;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct CABINET_INFO_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct CABINET_INFO_A {
     CabinetPath: PCSTR,
     CabinetFile: PCSTR,
     DiskName: PCSTR,
@@ -274,7 +274,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct CABINET_INFO_A {
     CabinetNumber: USHORT,
 }}
 pub type PCABINET_INFO_A = *mut CABINET_INFO_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct CABINET_INFO_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct CABINET_INFO_W {
     CabinetPath: PCWSTR,
     CabinetFile: PCWSTR,
     DiskName: PCWSTR,
@@ -282,7 +282,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct CABINET_INFO_W {
     CabinetNumber: USHORT,
 }}
 pub type PCABINET_INFO_W = *mut CABINET_INFO_W;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct FILE_IN_CABINET_INFO_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct FILE_IN_CABINET_INFO_A {
     NameInCabinet: PCSTR,
     FileSize: DWORD,
     Win32Error: DWORD,
@@ -292,7 +292,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct FILE_IN_CABINET_IN
     FullTargetName: [CHAR; MAX_PATH],
 }}
 pub type PFILE_IN_CABINET_INFO_A = *mut FILE_IN_CABINET_INFO_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct FILE_IN_CABINET_INFO_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct FILE_IN_CABINET_INFO_W {
     NameInCabinet: PCWSTR,
     FileSize: DWORD,
     Win32Error: DWORD,
@@ -302,14 +302,14 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct FILE_IN_CABINET_IN
     FullTargetName: [WCHAR; MAX_PATH],
 }}
 pub type PFILE_IN_CABINET_INFO_W = *mut FILE_IN_CABINET_INFO_W;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_REGISTER_CONTROL_STATUSA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_REGISTER_CONTROL_STATUSA {
     cbSize: DWORD,
     FileName: PCSTR,
     Win32Error: DWORD,
     FailureCode: DWORD,
 }}
 pub type PSP_REGISTER_CONTROL_STATUSA = *mut SP_REGISTER_CONTROL_STATUSA;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_REGISTER_CONTROL_STATUSW {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_REGISTER_CONTROL_STATUSW {
     cbSize: DWORD,
     FileName: PCWSTR,
     Win32Error: DWORD,
@@ -324,7 +324,7 @@ pub const SPREG_DLLINSTALL: DWORD = 0x00000004;
 pub const SPREG_TIMEOUT: DWORD = 0x00000005;
 pub const SPREG_UNKNOWN: DWORD = 0xFFFFFFFF;
 pub type HSPFILEQ = PVOID;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_FILE_COPY_PARAMS_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_FILE_COPY_PARAMS_A {
     cbSize: DWORD,
     QueueHandle: HSPFILEQ,
     SourceRootPath: PCSTR,
@@ -339,7 +339,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_FILE_COPY_PARAM
     SecurityDescriptor: PCSTR,
 }}
 pub type PSP_FILE_COPY_PARAMS_A = *mut SP_FILE_COPY_PARAMS_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_FILE_COPY_PARAMS_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_FILE_COPY_PARAMS_W {
     cbSize: DWORD,
     QueueHandle: HSPFILEQ,
     SourceRootPath: PCWSTR,
@@ -356,14 +356,14 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_FILE_COPY_PARAM
 pub type PSP_FILE_COPY_PARAMS_W = *mut SP_FILE_COPY_PARAMS_W;
 pub type HDSKSPC = PVOID;
 pub type HDEVINFO = PVOID;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVINFO_DATA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVINFO_DATA {
     cbSize: DWORD,
     ClassGuid: GUID,
     DevInst: DWORD,
     Reserved: ULONG_PTR,
 }}
 pub type PSP_DEVINFO_DATA = *mut SP_DEVINFO_DATA;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVICE_INTERFACE_DATA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVICE_INTERFACE_DATA {
     cbSize: DWORD,
     InterfaceClassGuid: GUID,
     Flags: DWORD,
@@ -378,24 +378,24 @@ pub type PSP_INTERFACE_DEVICE_DATA = PSP_DEVICE_INTERFACE_DATA;
 pub const SPID_ACTIVE: DWORD = SPINT_ACTIVE;
 pub const SPID_DEFAULT: DWORD = SPINT_DEFAULT;
 pub const SPID_REMOVED: DWORD = SPINT_REMOVED;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVICE_INTERFACE_DETAIL_DATA_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVICE_INTERFACE_DETAIL_DATA_A {
     cbSize: DWORD,
     DevicePath: [CHAR; ANYSIZE_ARRAY],
 }}
 pub type PSP_DEVICE_INTERFACE_DETAIL_DATA_A = *mut SP_DEVICE_INTERFACE_DETAIL_DATA_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVICE_INTERFACE_DETAIL_DATA_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVICE_INTERFACE_DETAIL_DATA_W {
     cbSize: DWORD,
     DevicePath: [WCHAR; ANYSIZE_ARRAY],
 }}
 pub type PSP_DEVICE_INTERFACE_DETAIL_DATA_W = *mut SP_DEVICE_INTERFACE_DETAIL_DATA_W;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVINFO_LIST_DETAIL_DATA_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVINFO_LIST_DETAIL_DATA_A {
     cbSize: DWORD,
     ClassGuid: GUID,
     RemoteMachineHandle: HANDLE,
     RemoteMachineName: [CHAR; SP_MAX_MACHINENAME_LENGTH],
 }}
 pub type PSP_DEVINFO_LIST_DETAIL_DATA_A = *mut SP_DEVINFO_LIST_DETAIL_DATA_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVINFO_LIST_DETAIL_DATA_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVINFO_LIST_DETAIL_DATA_W {
     cbSize: DWORD,
     ClassGuid: GUID,
     RemoteMachineHandle: HANDLE,
@@ -446,7 +446,7 @@ pub const DIF_FINISHINSTALL_ACTION: DI_FUNCTION = 0x0000002A;
 pub const DIF_RESERVED2: DI_FUNCTION = 0x00000030;
 pub const DIF_MOVEDEVICE: DI_FUNCTION = 0x0000000E;
 pub type DI_FUNCTION = UINT;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVINSTALL_PARAMS_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVINSTALL_PARAMS_A {
     cbSize: DWORD,
     Flags: DWORD,
     FlagsEx: DWORD,
@@ -459,7 +459,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVINSTALL_PARA
     DriverPath: [CHAR; MAX_PATH],
 }}
 pub type PSP_DEVINSTALL_PARAMS_A = *mut SP_DEVINSTALL_PARAMS_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVINSTALL_PARAMS_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DEVINSTALL_PARAMS_W {
     cbSize: DWORD,
     Flags: DWORD,
     FlagsEx: DWORD,
@@ -536,12 +536,12 @@ pub const DI_FLAGSEX_ALTPLATFORM_DRVSEARCH: DWORD = 0x10000000;
 pub const DI_FLAGSEX_RESTART_DEVICE_ONLY: DWORD = 0x20000000;
 pub const DI_FLAGSEX_RECURSIVESEARCH: DWORD = 0x40000000;
 pub const DI_FLAGSEX_SEARCH_PUBLISHED_INFS: DWORD = 0x80000000;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_CLASSINSTALL_HEADER {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_CLASSINSTALL_HEADER {
     cbSize: DWORD,
     InstallFunction: DI_FUNCTION,
 }}
 pub type PSP_CLASSINSTALL_HEADER = *mut SP_CLASSINSTALL_HEADER;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ENABLECLASS_PARAMS {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_ENABLECLASS_PARAMS {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     ClassGuid: GUID,
     EnableMessage: DWORD,
@@ -558,14 +558,14 @@ pub const DICS_STOP: DWORD = 0x00000005;
 pub const DICS_FLAG_GLOBAL: DWORD = 0x00000001;
 pub const DICS_FLAG_CONFIGSPECIFIC: DWORD = 0x00000002;
 pub const DICS_FLAG_CONFIGGENERAL: DWORD = 0x00000004;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_PROPCHANGE_PARAMS {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_PROPCHANGE_PARAMS {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     StateChange: DWORD,
     Scope: DWORD,
     HwProfile: DWORD,
 }}
 pub type PSP_PROPCHANGE_PARAMS = *mut SP_PROPCHANGE_PARAMS;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_REMOVEDEVICE_PARAMS {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_REMOVEDEVICE_PARAMS {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     Scope: DWORD,
     HwProfile: DWORD,
@@ -573,14 +573,14 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_REMOVEDEVICE_PA
 pub type PSP_REMOVEDEVICE_PARAMS = *mut SP_REMOVEDEVICE_PARAMS;
 pub const DI_REMOVEDEVICE_GLOBAL: DWORD = 0x00000001;
 pub const DI_REMOVEDEVICE_CONFIGSPECIFIC: DWORD = 0x00000002;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_UNREMOVEDEVICE_PARAMS {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_UNREMOVEDEVICE_PARAMS {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     Scope: DWORD,
     HwProfile: DWORD,
 }}
 pub type PSP_UNREMOVEDEVICE_PARAMS = *mut SP_UNREMOVEDEVICE_PARAMS;
 pub const DI_UNREMOVEDEVICE_CONFIGSPECIFIC: DWORD = 0x00000002;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_SELECTDEVICE_PARAMS_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_SELECTDEVICE_PARAMS_A {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     Title: [CHAR; MAX_TITLE_LEN],
     Instructions: [CHAR; MAX_INSTRUCTION_LEN],
@@ -589,7 +589,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_SELECTDEVICE_PA
     Reserved: [BYTE; 2],
 }}
 pub type PSP_SELECTDEVICE_PARAMS_A = *mut SP_SELECTDEVICE_PARAMS_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_SELECTDEVICE_PARAMS_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_SELECTDEVICE_PARAMS_W {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     Title: [WCHAR; MAX_TITLE_LEN],
     Instructions: [WCHAR; MAX_INSTRUCTION_LEN],
@@ -597,18 +597,18 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_SELECTDEVICE_PA
     SubTitle: [WCHAR; MAX_SUBTITLE_LEN],
 }}
 pub type PSP_SELECTDEVICE_PARAMS_W = *mut SP_SELECTDEVICE_PARAMS_W;
-FN!{stdcall PDETECT_PROGRESS_NOTIFY(
+FN! {stdcall PDETECT_PROGRESS_NOTIFY(
     ProgressNotifyParam: PVOID,
     DetectComplete: DWORD,
 ) -> BOOL}
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DETECTDEVICE_PARAMS {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DETECTDEVICE_PARAMS {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     DetectProgressNotify: PDETECT_PROGRESS_NOTIFY,
     ProgressNotifyParam: PVOID,
 }}
 pub type PSP_DETECTDEVICE_PARAMS = *mut SP_DETECTDEVICE_PARAMS;
 pub const MAX_INSTALLWIZARD_DYNAPAGES: usize = 20;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_INSTALLWIZARD_DATA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_INSTALLWIZARD_DATA {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     Flags: DWORD,
     DynamicPages: [HPROPSHEETPAGE; MAX_INSTALLWIZARD_DYNAPAGES],
@@ -652,7 +652,7 @@ pub const IDD_DYNAWIZ_SELECTCLASS_PAGE: c_int = 10012;
 pub const IDD_DYNAWIZ_INSTALLDETECTED_PREVPAGE: c_int = 10006;
 pub const IDD_DYNAWIZ_INSTALLDETECTED_NEXTPAGE: c_int = 10007;
 pub const IDD_DYNAWIZ_INSTALLDETECTED_NODEVS: c_int = 10008;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_NEWDEVICEWIZARD_DATA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_NEWDEVICEWIZARD_DATA {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     Flags: DWORD,
     DynamicPages: [HPROPSHEETPAGE; MAX_INSTALLWIZARD_DYNAPAGES],
@@ -662,29 +662,29 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_NEWDEVICEWIZARD
 pub type PSP_NEWDEVICEWIZARD_DATA = *mut SP_NEWDEVICEWIZARD_DATA;
 pub type SP_ADDPROPERTYPAGE_DATA = SP_NEWDEVICEWIZARD_DATA;
 pub type PSP_ADDPROPERTYPAGE_DATA = PSP_NEWDEVICEWIZARD_DATA;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_TROUBLESHOOTER_PARAMS_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_TROUBLESHOOTER_PARAMS_A {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     ChmFile: [CHAR; MAX_PATH],
     HtmlTroubleShooter: [CHAR; MAX_PATH],
 }}
 pub type PSP_TROUBLESHOOTER_PARAMS_A = *mut SP_TROUBLESHOOTER_PARAMS_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_TROUBLESHOOTER_PARAMS_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_TROUBLESHOOTER_PARAMS_W {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     ChmFile: [WCHAR; MAX_PATH],
     HtmlTroubleShooter: [WCHAR; MAX_PATH],
 }}
 pub type PSP_TROUBLESHOOTER_PARAMS_W = *mut SP_TROUBLESHOOTER_PARAMS_W;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_POWERMESSAGEWAKE_PARAMS_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_POWERMESSAGEWAKE_PARAMS_A {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     PowerMessageWake: [CHAR; LINE_LEN * 2],
 }}
 pub type PSP_POWERMESSAGEWAKE_PARAMS_A = *mut SP_POWERMESSAGEWAKE_PARAMS_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_POWERMESSAGEWAKE_PARAMS_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_POWERMESSAGEWAKE_PARAMS_W {
     ClassInstallHeader: SP_CLASSINSTALL_HEADER,
     PowerMessageWake: [WCHAR; LINE_LEN * 2],
 }}
 pub type PSP_POWERMESSAGEWAKE_PARAMS_W = *mut SP_POWERMESSAGEWAKE_PARAMS_W;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DATA_V2_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DATA_V2_A {
     cbSize: DWORD,
     DriverType: DWORD,
     Reserved: ULONG_PTR,
@@ -695,7 +695,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DATA_V2
     DriverVersion: DWORDLONG,
 }}
 pub type PSP_DRVINFO_DATA_V2_A = *mut SP_DRVINFO_DATA_V2_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DATA_V2_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DATA_V2_W {
     cbSize: DWORD,
     DriverType: DWORD,
     Reserved: ULONG_PTR,
@@ -706,7 +706,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DATA_V2
     DriverVersion: DWORDLONG,
 }}
 pub type PSP_DRVINFO_DATA_V2_W = *mut SP_DRVINFO_DATA_V2_W;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DATA_V1_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DATA_V1_A {
     cbSize: DWORD,
     DriverType: DWORD,
     Reserved: ULONG_PTR,
@@ -715,7 +715,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DATA_V1
     ProviderName: [CHAR; LINE_LEN],
 }}
 pub type PSP_DRVINFO_DATA_V1_A = *mut SP_DRVINFO_DATA_V1_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DATA_V1_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DATA_V1_W {
     cbSize: DWORD,
     DriverType: DWORD,
     Reserved: ULONG_PTR,
@@ -728,7 +728,7 @@ pub type SP_DRVINFO_DATA_A = SP_DRVINFO_DATA_V2_A;
 pub type PSP_DRVINFO_DATA_A = PSP_DRVINFO_DATA_V2_A;
 pub type SP_DRVINFO_DATA_W = SP_DRVINFO_DATA_V2_W;
 pub type PSP_DRVINFO_DATA_W = PSP_DRVINFO_DATA_V2_W;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DETAIL_DATA_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DETAIL_DATA_A {
     cbSize: DWORD,
     InfDate: FILETIME,
     CompatIDsOffset: DWORD,
@@ -740,7 +740,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DETAIL_
     HardwareID: [CHAR; ANYSIZE_ARRAY],
 }}
 pub type PSP_DRVINFO_DETAIL_DATA_A = *mut SP_DRVINFO_DETAIL_DATA_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DETAIL_DATA_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DETAIL_DATA_W {
     cbSize: DWORD,
     InfDate: FILETIME,
     CompatIDsOffset: DWORD,
@@ -752,7 +752,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINFO_DETAIL_
     HardwareID: [WCHAR; ANYSIZE_ARRAY],
 }}
 pub type PSP_DRVINFO_DETAIL_DATA_W = *mut SP_DRVINFO_DETAIL_DATA_W;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINSTALL_PARAMS {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_DRVINSTALL_PARAMS {
     cbSize: DWORD,
     Rank: DWORD,
     Flags: DWORD,
@@ -796,25 +796,25 @@ pub const DRIVER_HARDWAREID_RANK: DWORD = 0x00000FFF;
 pub const DRIVER_HARDWAREID_MASK: DWORD = 0x80000FFF;
 pub const DRIVER_UNTRUSTED_RANK: DWORD = 0x80000000;
 pub const DRIVER_W9X_SUSPECT_RANK: DWORD = 0xC0000000;
-FN!{stdcall PSP_DETSIG_CMPPROC(
+FN! {stdcall PSP_DETSIG_CMPPROC(
     DeviceInfoSet: HDEVINFO,
     NewDeviceData: PSP_DEVINFO_DATA,
     ExistingDeviceData: PSP_DEVINFO_DATA,
     CompareContext: PVOID,
 ) -> DWORD}
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct COINSTALLER_CONTEXT_DATA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct COINSTALLER_CONTEXT_DATA {
     PostProcessing: BOOL,
     InstallResult: DWORD,
     PrivateData: PVOID,
 }}
 pub type PCOINSTALLER_CONTEXT_DATA = *mut COINSTALLER_CONTEXT_DATA;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_CLASSIMAGELIST_DATA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_CLASSIMAGELIST_DATA {
     cbSize: DWORD,
     ImageList: HIMAGELIST,
     Reserved: ULONG_PTR,
 }}
 pub type PSP_CLASSIMAGELIST_DATA = *mut SP_CLASSIMAGELIST_DATA;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_PROPSHEETPAGE_REQUEST {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_PROPSHEETPAGE_REQUEST {
     cbSize: DWORD,
     PageRequested: DWORD,
     DeviceInfoSet: HDEVINFO,
@@ -824,27 +824,27 @@ pub type PSP_PROPSHEETPAGE_REQUEST = *mut SP_PROPSHEETPAGE_REQUEST;
 pub const SPPSR_SELECT_DEVICE_RESOURCES: DWORD = 1;
 pub const SPPSR_ENUM_BASIC_DEVICE_PROPERTIES: DWORD = 2;
 pub const SPPSR_ENUM_ADV_DEVICE_PROPERTIES: DWORD = 3;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_BACKUP_QUEUE_PARAMS_V2_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_BACKUP_QUEUE_PARAMS_V2_A {
     cbSize: DWORD,
     FullInfPath: [CHAR; MAX_PATH],
     FilenameOffset: INT,
     ReinstallInstance: [CHAR; MAX_PATH],
 }}
 pub type PSP_BACKUP_QUEUE_PARAMS_V2_A = *mut SP_BACKUP_QUEUE_PARAMS_V2_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_BACKUP_QUEUE_PARAMS_V2_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_BACKUP_QUEUE_PARAMS_V2_W {
     cbSize: DWORD,
     FullInfPath: [WCHAR; MAX_PATH],
     FilenameOffset: INT,
     ReinstallInstance: [WCHAR; MAX_PATH],
 }}
 pub type PSP_BACKUP_QUEUE_PARAMS_V2_W = *mut SP_BACKUP_QUEUE_PARAMS_V2_W;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_BACKUP_QUEUE_PARAMS_V1_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_BACKUP_QUEUE_PARAMS_V1_A {
     cbSize: DWORD,
     FullInfPath: [CHAR; MAX_PATH],
     FilenameOffset: INT,
 }}
 pub type PSP_BACKUP_QUEUE_PARAMS_V1_A = *mut SP_BACKUP_QUEUE_PARAMS_V1_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_BACKUP_QUEUE_PARAMS_V1_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_BACKUP_QUEUE_PARAMS_V1_W {
     cbSize: DWORD,
     FullInfPath: [WCHAR; MAX_PATH],
     FilenameOffset: INT,
@@ -867,21 +867,18 @@ pub const ERROR_CLASS_MISMATCH: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_
 pub const ERROR_DUPLICATE_FOUND: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x202;
 pub const ERROR_NO_DRIVER_SELECTED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x203;
 pub const ERROR_KEY_DOES_NOT_EXIST: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x204;
-pub const ERROR_INVALID_DEVINST_NAME: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x205;
+pub const ERROR_INVALID_DEVINST_NAME: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x205;
 pub const ERROR_INVALID_CLASS: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x206;
-pub const ERROR_DEVINST_ALREADY_EXISTS: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x207;
-pub const ERROR_DEVINFO_NOT_REGISTERED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x208;
-pub const ERROR_INVALID_REG_PROPERTY: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x209;
+pub const ERROR_DEVINST_ALREADY_EXISTS: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x207;
+pub const ERROR_DEVINFO_NOT_REGISTERED: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x208;
+pub const ERROR_INVALID_REG_PROPERTY: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x209;
 pub const ERROR_NO_INF: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x20A;
 pub const ERROR_NO_SUCH_DEVINST: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x20B;
-pub const ERROR_CANT_LOAD_CLASS_ICON: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x20C;
-pub const ERROR_INVALID_CLASS_INSTALLER: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x20D;
+pub const ERROR_CANT_LOAD_CLASS_ICON: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x20C;
+pub const ERROR_INVALID_CLASS_INSTALLER: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x20D;
 pub const ERROR_DI_DO_DEFAULT: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x20E;
 pub const ERROR_DI_NOFILECOPY: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x20F;
 pub const ERROR_INVALID_HWPROFILE: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x210;
@@ -889,107 +886,104 @@ pub const ERROR_NO_DEVICE_SELECTED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVER
 pub const ERROR_DEVINFO_LIST_LOCKED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x212;
 pub const ERROR_DEVINFO_DATA_LOCKED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x213;
 pub const ERROR_DI_BAD_PATH: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x214;
-pub const ERROR_NO_CLASSINSTALL_PARAMS: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x215;
+pub const ERROR_NO_CLASSINSTALL_PARAMS: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x215;
 pub const ERROR_FILEQUEUE_LOCKED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x216;
-pub const ERROR_BAD_SERVICE_INSTALLSECT: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x217;
-pub const ERROR_NO_CLASS_DRIVER_LIST: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x218;
-pub const ERROR_NO_ASSOCIATED_SERVICE: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x219;
-pub const ERROR_NO_DEFAULT_DEVICE_INTERFACE: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x21A;
-pub const ERROR_DEVICE_INTERFACE_ACTIVE: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x21B;
-pub const ERROR_DEVICE_INTERFACE_REMOVED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x21C;
-pub const ERROR_BAD_INTERFACE_INSTALLSECT: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x21D;
-pub const ERROR_NO_SUCH_INTERFACE_CLASS: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x21E;
-pub const ERROR_INVALID_REFERENCE_STRING: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x21F;
+pub const ERROR_BAD_SERVICE_INSTALLSECT: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x217;
+pub const ERROR_NO_CLASS_DRIVER_LIST: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x218;
+pub const ERROR_NO_ASSOCIATED_SERVICE: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x219;
+pub const ERROR_NO_DEFAULT_DEVICE_INTERFACE: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x21A;
+pub const ERROR_DEVICE_INTERFACE_ACTIVE: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x21B;
+pub const ERROR_DEVICE_INTERFACE_REMOVED: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x21C;
+pub const ERROR_BAD_INTERFACE_INSTALLSECT: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x21D;
+pub const ERROR_NO_SUCH_INTERFACE_CLASS: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x21E;
+pub const ERROR_INVALID_REFERENCE_STRING: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x21F;
 pub const ERROR_INVALID_MACHINENAME: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x220;
 pub const ERROR_REMOTE_COMM_FAILURE: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x221;
 pub const ERROR_MACHINE_UNAVAILABLE: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x222;
-pub const ERROR_NO_CONFIGMGR_SERVICES: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x223;
-pub const ERROR_INVALID_PROPPAGE_PROVIDER: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x224;
-pub const ERROR_NO_SUCH_DEVICE_INTERFACE: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x225;
-pub const ERROR_DI_POSTPROCESSING_REQUIRED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x226;
+pub const ERROR_NO_CONFIGMGR_SERVICES: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x223;
+pub const ERROR_INVALID_PROPPAGE_PROVIDER: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x224;
+pub const ERROR_NO_SUCH_DEVICE_INTERFACE: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x225;
+pub const ERROR_DI_POSTPROCESSING_REQUIRED: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x226;
 pub const ERROR_INVALID_COINSTALLER: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x227;
 pub const ERROR_NO_COMPAT_DRIVERS: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x228;
 pub const ERROR_NO_DEVICE_ICON: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x229;
-pub const ERROR_INVALID_INF_LOGCONFIG: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x22A;
+pub const ERROR_INVALID_INF_LOGCONFIG: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x22A;
 pub const ERROR_DI_DONT_INSTALL: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x22B;
-pub const ERROR_INVALID_FILTER_DRIVER: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x22C;
-pub const ERROR_NON_WINDOWS_NT_DRIVER: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x22D;
+pub const ERROR_INVALID_FILTER_DRIVER: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x22C;
+pub const ERROR_NON_WINDOWS_NT_DRIVER: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x22D;
 pub const ERROR_NON_WINDOWS_DRIVER: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x22E;
-pub const ERROR_NO_CATALOG_FOR_OEM_INF: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x22F;
-pub const ERROR_DEVINSTALL_QUEUE_NONNATIVE: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x230;
+pub const ERROR_NO_CATALOG_FOR_OEM_INF: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x22F;
+pub const ERROR_DEVINSTALL_QUEUE_NONNATIVE: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x230;
 pub const ERROR_NOT_DISABLEABLE: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x231;
 pub const ERROR_CANT_REMOVE_DEVINST: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x232;
 pub const ERROR_INVALID_TARGET: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x233;
 pub const ERROR_DRIVER_NONNATIVE: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x234;
 pub const ERROR_IN_WOW64: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x235;
-pub const ERROR_SET_SYSTEM_RESTORE_POINT: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x236;
+pub const ERROR_SET_SYSTEM_RESTORE_POINT: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x236;
 pub const ERROR_SCE_DISABLED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x238;
 pub const ERROR_UNKNOWN_EXCEPTION: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x239;
 pub const ERROR_PNP_REGISTRY_ERROR: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x23A;
-pub const ERROR_REMOTE_REQUEST_UNSUPPORTED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x23B;
-pub const ERROR_NOT_AN_INSTALLED_OEM_INF: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x23C;
-pub const ERROR_INF_IN_USE_BY_DEVICES: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x23D;
-pub const ERROR_DI_FUNCTION_OBSOLETE: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x23E;
-pub const ERROR_NO_AUTHENTICODE_CATALOG: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x23F;
-pub const ERROR_AUTHENTICODE_DISALLOWED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x240;
-pub const ERROR_AUTHENTICODE_TRUSTED_PUBLISHER: DWORD = APPLICATION_ERROR_MASK
-    | ERROR_SEVERITY_ERROR | 0x241;
-pub const ERROR_AUTHENTICODE_TRUST_NOT_ESTABLISHED: DWORD = APPLICATION_ERROR_MASK
-    | ERROR_SEVERITY_ERROR | 0x242;
-pub const ERROR_AUTHENTICODE_PUBLISHER_NOT_TRUSTED: DWORD = APPLICATION_ERROR_MASK
-    | ERROR_SEVERITY_ERROR | 0x243;
-pub const ERROR_SIGNATURE_OSATTRIBUTE_MISMATCH: DWORD = APPLICATION_ERROR_MASK
-    | ERROR_SEVERITY_ERROR | 0x244;
-pub const ERROR_ONLY_VALIDATE_VIA_AUTHENTICODE: DWORD = APPLICATION_ERROR_MASK
-    | ERROR_SEVERITY_ERROR | 0x245;
-pub const ERROR_DEVICE_INSTALLER_NOT_READY: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x246;
-pub const ERROR_DRIVER_STORE_ADD_FAILED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x247;
-pub const ERROR_DEVICE_INSTALL_BLOCKED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x248;
-pub const ERROR_DRIVER_INSTALL_BLOCKED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x249;
+pub const ERROR_REMOTE_REQUEST_UNSUPPORTED: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x23B;
+pub const ERROR_NOT_AN_INSTALLED_OEM_INF: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x23C;
+pub const ERROR_INF_IN_USE_BY_DEVICES: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x23D;
+pub const ERROR_DI_FUNCTION_OBSOLETE: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x23E;
+pub const ERROR_NO_AUTHENTICODE_CATALOG: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x23F;
+pub const ERROR_AUTHENTICODE_DISALLOWED: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x240;
+pub const ERROR_AUTHENTICODE_TRUSTED_PUBLISHER: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x241;
+pub const ERROR_AUTHENTICODE_TRUST_NOT_ESTABLISHED: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x242;
+pub const ERROR_AUTHENTICODE_PUBLISHER_NOT_TRUSTED: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x243;
+pub const ERROR_SIGNATURE_OSATTRIBUTE_MISMATCH: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x244;
+pub const ERROR_ONLY_VALIDATE_VIA_AUTHENTICODE: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x245;
+pub const ERROR_DEVICE_INSTALLER_NOT_READY: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x246;
+pub const ERROR_DRIVER_STORE_ADD_FAILED: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x247;
+pub const ERROR_DEVICE_INSTALL_BLOCKED: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x248;
+pub const ERROR_DRIVER_INSTALL_BLOCKED: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x249;
 pub const ERROR_WRONG_INF_TYPE: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x24A;
-pub const ERROR_FILE_HASH_NOT_IN_CATALOG: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x24B;
-pub const ERROR_DRIVER_STORE_DELETE_FAILED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x24C;
-pub const ERROR_UNRECOVERABLE_STACK_OVERFLOW: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x300;
+pub const ERROR_FILE_HASH_NOT_IN_CATALOG: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x24B;
+pub const ERROR_DRIVER_STORE_DELETE_FAILED: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x24C;
+pub const ERROR_UNRECOVERABLE_STACK_OVERFLOW: DWORD =
+    APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x300;
 pub const EXCEPTION_SPAPI_UNRECOVERABLE_STACK_OVERFLOW: DWORD = ERROR_UNRECOVERABLE_STACK_OVERFLOW;
 pub const ERROR_NO_DEFAULT_INTERFACE_DEVICE: DWORD = ERROR_NO_DEFAULT_DEVICE_INTERFACE;
 pub const ERROR_INTERFACE_DEVICE_ACTIVE: DWORD = ERROR_DEVICE_INTERFACE_ACTIVE;
 pub const ERROR_INTERFACE_DEVICE_REMOVED: DWORD = ERROR_DEVICE_INTERFACE_REMOVED;
 pub const ERROR_NO_SUCH_INTERFACE_DEVICE: DWORD = ERROR_NO_SUCH_DEVICE_INTERFACE;
-pub const ERROR_NOT_INSTALLED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR
-    | 0x1000;
+pub const ERROR_NOT_INSTALLED: DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x1000;
 extern "system" {
     pub fn SetupGetInfInformationA(
         InfSpec: LPCVOID,
@@ -1109,19 +1103,9 @@ extern "system" {
         ErrorLine: PUINT,
     ) -> HINF;
     pub fn SetupOpenMasterInf() -> HINF;
-    pub fn SetupOpenAppendInfFileW(
-        FileName: PCWSTR,
-        InfHandle: HINF,
-        ErrorLine: PUINT,
-    ) -> BOOL;
-    pub fn SetupOpenAppendInfFileA(
-        FileName: PCSTR,
-        InfHandle: HINF,
-        ErrorLine: PUINT,
-    ) -> BOOL;
-    pub fn SetupCloseInfFile(
-        InfHandle: HINF,
-    ) -> ();
+    pub fn SetupOpenAppendInfFileW(FileName: PCWSTR, InfHandle: HINF, ErrorLine: PUINT) -> BOOL;
+    pub fn SetupOpenAppendInfFileA(FileName: PCSTR, InfHandle: HINF, ErrorLine: PUINT) -> BOOL;
+    pub fn SetupCloseInfFile(InfHandle: HINF) -> ();
     pub fn SetupFindFirstLineA(
         InfHandle: HINF,
         Section: PCSTR,
@@ -1134,10 +1118,7 @@ extern "system" {
         Key: PCWSTR,
         Context: PINFCONTEXT,
     ) -> BOOL;
-    pub fn SetupFindNextLine(
-        ContextIn: PINFCONTEXT,
-        ContextOut: PINFCONTEXT,
-    ) -> BOOL;
+    pub fn SetupFindNextLine(ContextIn: PINFCONTEXT, ContextOut: PINFCONTEXT) -> BOOL;
     pub fn SetupFindNextMatchLineA(
         ContextIn: PINFCONTEXT,
         Key: PCSTR,
@@ -1160,14 +1141,8 @@ extern "system" {
         Index: DWORD,
         Context: PINFCONTEXT,
     ) -> BOOL;
-    pub fn SetupGetLineCountA(
-        InfHandle: HINF,
-        Section: PCSTR,
-    ) -> LONG;
-    pub fn SetupGetLineCountW(
-        InfHandle: HINF,
-        Section: PCWSTR,
-    ) -> LONG;
+    pub fn SetupGetLineCountA(InfHandle: HINF, Section: PCSTR) -> LONG;
+    pub fn SetupGetLineCountW(InfHandle: HINF, Section: PCWSTR) -> LONG;
     pub fn SetupGetLineTextA(
         Context: PINFCONTEXT,
         InfHandle: HINF,
@@ -1186,9 +1161,7 @@ extern "system" {
         ReturnBufferSize: DWORD,
         ReturnBufferSize: PDWORD,
     ) -> BOOL;
-    pub fn SetupGetFieldCount(
-        Context: PINFCONTEXT,
-    ) -> DWORD;
+    pub fn SetupGetFieldCount(Context: PINFCONTEXT) -> DWORD;
     pub fn SetupGetStringFieldA(
         Context: PINFCONTEXT,
         FieldIndex: DWORD,
@@ -1203,11 +1176,7 @@ extern "system" {
         ReturnBufferSize: DWORD,
         RequiredSize: PDWORD,
     ) -> BOOL;
-    pub fn SetupGetIntField(
-        Context: PINFCONTEXT,
-        FieldIndex: DWORD,
-        IntegerValue: PINT,
-    ) -> BOOL;
+    pub fn SetupGetIntField(Context: PINFCONTEXT, FieldIndex: DWORD, IntegerValue: PINT) -> BOOL;
     pub fn SetupGetMultiSzFieldA(
         Context: PINFCONTEXT,
         FieldIndex: DWORD,
@@ -1337,51 +1306,17 @@ pub const SRCLIST_SUBDIRS: DWORD = 0x00000100;
 pub const SRCLIST_APPEND: DWORD = 0x00000200;
 pub const SRCLIST_NOSTRIPPLATFORM: DWORD = 0x00000400;
 extern "system" {
-    pub fn SetupSetSourceListA(
-        Flags: DWORD,
-        SourceList: *mut PCSTR,
-        SourceCount: UINT,
-    ) -> BOOL;
-    pub fn SetupSetSourceListW(
-        Flags: DWORD,
-        SourceList: *mut PCWSTR,
-        SourceCount: UINT,
-    ) -> BOOL;
+    pub fn SetupSetSourceListA(Flags: DWORD, SourceList: *mut PCSTR, SourceCount: UINT) -> BOOL;
+    pub fn SetupSetSourceListW(Flags: DWORD, SourceList: *mut PCWSTR, SourceCount: UINT) -> BOOL;
     pub fn SetupCancelTemporarySourceList() -> BOOL;
-    pub fn SetupAddToSourceListA(
-        Flags: DWORD,
-        Source: PCSTR,
-    ) -> BOOL;
-    pub fn SetupAddToSourceListW(
-        Flags: DWORD,
-        Source: PCWSTR,
-    ) -> BOOL;
-    pub fn SetupRemoveFromSourceListA(
-        Flags: DWORD,
-        Source: PCSTR,
-    ) -> BOOL;
-    pub fn SetupRemoveFromSourceListW(
-        Flags: DWORD,
-        Source: PCWSTR,
-    ) -> BOOL;
-    pub fn SetupQuerySourceListA(
-        Flags: DWORD,
-        List: *mut *mut PCSTR,
-        Count: PUINT,
-    ) -> BOOL;
-    pub fn SetupQuerySourceListW(
-        Flags: DWORD,
-        List: *mut *mut PCWSTR,
-        Count: PUINT,
-    ) -> BOOL;
-    pub fn SetupFreeSourceListA(
-        List: *mut *mut PCSTR,
-        Count: UINT,
-    ) -> BOOL;
-    pub fn SetupFreeSourceListW(
-        List: *mut *mut PCWSTR,
-        Count: UINT,
-    ) -> BOOL;
+    pub fn SetupAddToSourceListA(Flags: DWORD, Source: PCSTR) -> BOOL;
+    pub fn SetupAddToSourceListW(Flags: DWORD, Source: PCWSTR) -> BOOL;
+    pub fn SetupRemoveFromSourceListA(Flags: DWORD, Source: PCSTR) -> BOOL;
+    pub fn SetupRemoveFromSourceListW(Flags: DWORD, Source: PCWSTR) -> BOOL;
+    pub fn SetupQuerySourceListA(Flags: DWORD, List: *mut *mut PCSTR, Count: PUINT) -> BOOL;
+    pub fn SetupQuerySourceListW(Flags: DWORD, List: *mut *mut PCWSTR, Count: PUINT) -> BOOL;
+    pub fn SetupFreeSourceListA(List: *mut *mut PCSTR, Count: UINT) -> BOOL;
+    pub fn SetupFreeSourceListW(List: *mut *mut PCWSTR, Count: UINT) -> BOOL;
     pub fn SetupPromptForDiskA(
         hwndParent: HWND,
         DialogTitle: PCSTR,
@@ -1496,16 +1431,8 @@ pub const DPROMPT_SKIPFILE: UINT = 2;
 pub const DPROMPT_BUFFERTOOSMALL: UINT = 3;
 pub const DPROMPT_OUTOFMEMORY: UINT = 4;
 extern "system" {
-    pub fn SetupSetDirectoryIdA(
-        InfHandle: HINF,
-        Id: DWORD,
-        Directory: PCSTR,
-    ) -> BOOL;
-    pub fn SetupSetDirectoryIdW(
-        InfHandle: HINF,
-        Id: DWORD,
-        Directory: PCWSTR,
-    ) -> BOOL;
+    pub fn SetupSetDirectoryIdA(InfHandle: HINF, Id: DWORD, Directory: PCSTR) -> BOOL;
+    pub fn SetupSetDirectoryIdW(InfHandle: HINF, Id: DWORD, Directory: PCWSTR) -> BOOL;
     pub fn SetupSetDirectoryIdExA(
         InfHandle: HINF,
         Id: DWORD,
@@ -1627,9 +1554,7 @@ pub const SP_BACKUP_SPECIAL: DWORD = 0x00000004;
 pub const SP_BACKUP_BOOTFILE: DWORD = 0x00000008;
 extern "system" {
     pub fn SetupOpenFileQueue() -> HSPFILEQ;
-    pub fn SetupCloseFileQueue(
-        QueueHandle: HSPFILEQ,
-    ) -> BOOL;
+    pub fn SetupCloseFileQueue(QueueHandle: HSPFILEQ) -> BOOL;
     pub fn SetupSetFileQueueAlternatePlatformA(
         QueueHandle: HSPFILEQ,
         AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
@@ -1640,12 +1565,8 @@ extern "system" {
         AlternatePlatformInfo: PSP_ALTPLATFORM_INFO,
         AlternateDefaultCatalogFile: PCWSTR,
     ) -> BOOL;
-    pub fn SetupSetPlatformPathOverrideA(
-        Override: PCSTR,
-    ) -> BOOL;
-    pub fn SetupSetPlatformPathOverrideW(
-        Override: PCWSTR,
-    ) -> BOOL;
+    pub fn SetupSetPlatformPathOverrideA(Override: PCSTR) -> BOOL;
+    pub fn SetupSetPlatformPathOverrideW(Override: PCWSTR) -> BOOL;
     pub fn SetupQueueCopyA(
         QueueHandle: HSPFILEQ,
         SourceRootPath: PCSTR,
@@ -1668,12 +1589,8 @@ extern "system" {
         TargetFilename: PCWSTR,
         CopyStyle: DWORD,
     ) -> BOOL;
-    pub fn SetupQueueCopyIndirectA(
-        CopyParams: PSP_FILE_COPY_PARAMS_A,
-    ) -> BOOL;
-    pub fn SetupQueueCopyIndirectW(
-        CopyParams: PSP_FILE_COPY_PARAMS_W,
-    ) -> BOOL;
+    pub fn SetupQueueCopyIndirectA(CopyParams: PSP_FILE_COPY_PARAMS_A) -> BOOL;
+    pub fn SetupQueueCopyIndirectW(CopyParams: PSP_FILE_COPY_PARAMS_W) -> BOOL;
     pub fn SetupQueueDefaultCopyA(
         QueueHandle: HSPFILEQ,
         InfHandle: HINF,
@@ -1706,16 +1623,8 @@ extern "system" {
         Section: PCWSTR,
         CopyStyle: DWORD,
     ) -> BOOL;
-    pub fn SetupQueueDeleteA(
-        QueueHandle: HSPFILEQ,
-        PathPart1: PCSTR,
-        PathPart2: PCSTR,
-    ) -> BOOL;
-    pub fn SetupQueueDeleteW(
-        QueueHandle: HSPFILEQ,
-        PathPart1: PCWSTR,
-        PathPart2: PCWSTR,
-    ) -> BOOL;
+    pub fn SetupQueueDeleteA(QueueHandle: HSPFILEQ, PathPart1: PCSTR, PathPart2: PCSTR) -> BOOL;
+    pub fn SetupQueueDeleteW(QueueHandle: HSPFILEQ, PathPart1: PCWSTR, PathPart2: PCWSTR) -> BOOL;
     pub fn SetupQueueDeleteSectionA(
         QueueHandle: HSPFILEQ,
         InfHandle: HINF,
@@ -1801,15 +1710,8 @@ extern "system" {
         SubQueueFileOp: UINT,
         NumOperations: PUINT,
     ) -> BOOL;
-    pub fn SetupGetFileQueueFlags(
-        FileQueue: HSPFILEQ,
-        Flags: PDWORD,
-    ) -> BOOL;
-    pub fn SetupSetFileQueueFlags(
-        FileQueue: HSPFILEQ,
-        FlagMask: DWORD,
-        Flags: DWORD,
-    ) -> BOOL;
+    pub fn SetupGetFileQueueFlags(FileQueue: HSPFILEQ, Flags: PDWORD) -> BOOL;
+    pub fn SetupSetFileQueueFlags(FileQueue: HSPFILEQ, FlagMask: DWORD, Flags: DWORD) -> BOOL;
 }
 pub const SPQ_FLAG_BACKUP_AWARE: DWORD = 0x00000001;
 pub const SPQ_FLAG_ABORT_IF_UNSIGNED: DWORD = 0x00000002;
@@ -1845,31 +1747,15 @@ extern "system" {
 pub const SUOI_FORCEDELETE: DWORD = 0x00000001;
 pub const SUOI_INTERNAL1: DWORD = 0x00000002;
 extern "system" {
-    pub fn SetupUninstallOEMInfA(
-        InfFileName: PCSTR,
-        Flags: DWORD,
-        Reserved: PVOID,
-    ) -> BOOL;
-    pub fn SetupUninstallOEMInfW(
-        InfFileName: PCWSTR,
-        Flags: DWORD,
-        Reserved: PVOID,
-    ) -> BOOL;
+    pub fn SetupUninstallOEMInfA(InfFileName: PCSTR, Flags: DWORD, Reserved: PVOID) -> BOOL;
+    pub fn SetupUninstallOEMInfW(InfFileName: PCWSTR, Flags: DWORD, Reserved: PVOID) -> BOOL;
     pub fn SetupUninstallNewlyCopiedInfs(
         FileQueue: HSPFILEQ,
         Flags: DWORD,
         Reserved: PVOID,
     ) -> BOOL;
-    pub fn SetupCreateDiskSpaceListA(
-        Reserved1: PVOID,
-        Reserved2: DWORD,
-        Flags: UINT,
-    ) -> HDSKSPC;
-    pub fn SetupCreateDiskSpaceListW(
-        Reserved1: PVOID,
-        Reserved2: DWORD,
-        Flags: UINT,
-    ) -> HDSKSPC;
+    pub fn SetupCreateDiskSpaceListA(Reserved1: PVOID, Reserved2: DWORD, Flags: UINT) -> HDSKSPC;
+    pub fn SetupCreateDiskSpaceListW(Reserved1: PVOID, Reserved2: DWORD, Flags: UINT) -> HDSKSPC;
 }
 pub const SPDSL_IGNORE_DISK: UINT = 0x00000001;
 pub const SPDSL_DISALLOW_NEGATIVE_ADJUST: UINT = 0x00000002;
@@ -1886,9 +1772,7 @@ extern "system" {
         Reserved2: DWORD,
         Flags: UINT,
     ) -> HDSKSPC;
-    pub fn SetupDestroyDiskSpaceList(
-        DiskSpace: HDSKSPC,
-    ) -> BOOL;
+    pub fn SetupDestroyDiskSpaceList(DiskSpace: HDSKSPC) -> BOOL;
     pub fn SetupQueryDrivesInDiskSpaceListA(
         DiskSpace: HDSKSPC,
         ReturnBuffer: PSTR,
@@ -2039,19 +1923,13 @@ extern "system" {
         MsgHandler: PSP_FILE_CALLBACK_W,
         Context: PVOID,
     ) -> BOOL;
-    pub fn SetupPromptReboot(
-        FileQueue: HSPFILEQ,
-        Owner: HWND,
-        ScanOnly: BOOL,
-    ) -> INT;
+    pub fn SetupPromptReboot(FileQueue: HSPFILEQ, Owner: HWND, ScanOnly: BOOL) -> INT;
 }
 pub const SPFILEQ_FILE_IN_USE: INT = 0x00000001;
 pub const SPFILEQ_REBOOT_RECOMMENDED: INT = 0x00000002;
 pub const SPFILEQ_REBOOT_IN_PROGRESS: INT = 0x00000004;
 extern "system" {
-    pub fn SetupInitDefaultQueueCallback(
-        OwnerWindow: HWND,
-    ) -> PVOID;
+    pub fn SetupInitDefaultQueueCallback(OwnerWindow: HWND) -> PVOID;
     pub fn SetupInitDefaultQueueCallbackEx(
         OwnerWindow: HWND,
         AlternateProgressWindow: HWND,
@@ -2059,9 +1937,7 @@ extern "system" {
         Reserved1: DWORD,
         Reserved2: PVOID,
     ) -> PVOID;
-    pub fn SetupTermDefaultQueueCallback(
-        Context: PVOID,
-    ) -> ();
+    pub fn SetupTermDefaultQueueCallback(Context: PVOID) -> ();
     pub fn SetupDefaultQueueCallbackA(
         Context: PVOID,
         Notification: UINT,
@@ -2104,8 +1980,8 @@ pub const FLG_DELREG_64BITKEY: DWORD = FLG_ADDREG_64BITKEY;
 pub const FLG_DELREG_KEYONLY_COMMON: DWORD = FLG_ADDREG_KEYONLY_COMMON;
 pub const FLG_DELREG_32BITKEY: DWORD = FLG_ADDREG_32BITKEY;
 pub const FLG_DELREG_OPERATION_MASK: DWORD = 0x000000FE;
-pub const FLG_DELREG_MULTI_SZ_DELSTRING: DWORD = FLG_DELREG_TYPE_MULTI_SZ | FLG_ADDREG_DELREG_BIT
-    | 0x00000002;
+pub const FLG_DELREG_MULTI_SZ_DELSTRING: DWORD =
+    FLG_DELREG_TYPE_MULTI_SZ | FLG_ADDREG_DELREG_BIT | 0x00000002;
 pub const FLG_BITREG_CLEARBITS: DWORD = 0x00000000;
 pub const FLG_BITREG_SETBITS: DWORD = 0x00000001;
 pub const FLG_BITREG_64BITKEY: DWORD = 0x00001000;
@@ -2244,22 +2120,14 @@ extern "system" {
 }
 pub type HSPFILELOG = PVOID;
 extern "system" {
-    pub fn SetupInitializeFileLogA(
-        LogFileName: PCSTR,
-        Flags: DWORD,
-    ) -> HSPFILELOG;
-    pub fn SetupInitializeFileLogW(
-        LogFileName: PCWSTR,
-        Flags: DWORD,
-    ) -> HSPFILELOG;
+    pub fn SetupInitializeFileLogA(LogFileName: PCSTR, Flags: DWORD) -> HSPFILELOG;
+    pub fn SetupInitializeFileLogW(LogFileName: PCWSTR, Flags: DWORD) -> HSPFILELOG;
 }
 pub const SPFILELOG_SYSTEMLOG: DWORD = 0x00000001;
 pub const SPFILELOG_FORCENEW: DWORD = 0x00000002;
 pub const SPFILELOG_QUERYONLY: DWORD = 0x00000004;
 extern "system" {
-    pub fn SetupTerminateFileLog(
-        FileLogHandle: HSPFILELOG,
-    ) -> BOOL;
+    pub fn SetupTerminateFileLog(FileLogHandle: HSPFILELOG) -> BOOL;
     pub fn SetupLogFileA(
         FileLogHandle: HSPFILELOG,
         LogSectionName: PCSTR,
@@ -2296,7 +2164,7 @@ extern "system" {
         TargetFilename: PCWSTR,
     ) -> BOOL;
 }
-ENUM!{enum SetupFileLogInfo {
+ENUM! {enum SetupFileLogInfo {
     SetupFileLogSourceFilename,
     SetupFileLogChecksum,
     SetupFileLogDiskTagfile,
@@ -2331,22 +2199,12 @@ pub const LogSevError: LogSeverity = 0x00000002;
 pub const LogSevFatalError: LogSeverity = 0x00000003;
 pub const LogSevMaximum: LogSeverity = 0x00000004;
 extern "system" {
-    pub fn SetupOpenLog(
-        Erase: BOOL,
-    ) -> BOOL;
-    pub fn SetupLogErrorA(
-        MessageString: LPCSTR,
-        Severity: LogSeverity,
-    ) -> BOOL;
-    pub fn SetupLogErrorW(
-        MessageString: LPCWSTR,
-        Severity: LogSeverity,
-    ) -> BOOL;
+    pub fn SetupOpenLog(Erase: BOOL) -> BOOL;
+    pub fn SetupLogErrorA(MessageString: LPCSTR, Severity: LogSeverity) -> BOOL;
+    pub fn SetupLogErrorW(MessageString: LPCWSTR, Severity: LogSeverity) -> BOOL;
     pub fn SetupCloseLog() -> ();
     pub fn SetupGetThreadLogToken() -> SP_LOG_TOKEN;
-    pub fn SetupSetThreadLogToken(
-        LogToken: SP_LOG_TOKEN,
-    ) -> ();
+    pub fn SetupSetThreadLogToken(LogToken: SP_LOG_TOKEN) -> ();
 }
 //pub fn SetupWriteTextLog() -> ();
 //pub fn SetupWriteTextLogError() -> ();
@@ -2375,14 +2233,9 @@ extern "system" {
         BackupPath: PCWSTR,
         RestoreFlags: DWORD,
     ) -> BOOL;
-    pub fn SetupSetNonInteractiveMode(
-        NonInteractiveFlag: BOOL,
-    ) -> BOOL;
+    pub fn SetupSetNonInteractiveMode(NonInteractiveFlag: BOOL) -> BOOL;
     pub fn SetupGetNonInteractiveMode() -> BOOL;
-    pub fn SetupDiCreateDeviceInfoList(
-        ClassGuid: *const GUID,
-        hwndParent: HWND,
-    ) -> HDEVINFO;
+    pub fn SetupDiCreateDeviceInfoList(ClassGuid: *const GUID, hwndParent: HWND) -> HDEVINFO;
     pub fn SetupDiCreateDeviceInfoListExA(
         ClassGuid: *const GUID,
         hwndParent: HWND,
@@ -2395,10 +2248,7 @@ extern "system" {
         MachineName: PCWSTR,
         Reserved: PVOID,
     ) -> HDEVINFO;
-    pub fn SetupDiGetDeviceInfoListClass(
-        DeviceInfoSet: HDEVINFO,
-        ClassGuid: LPGUID,
-    ) -> BOOL;
+    pub fn SetupDiGetDeviceInfoListClass(DeviceInfoSet: HDEVINFO, ClassGuid: LPGUID) -> BOOL;
     pub fn SetupDiGetDeviceInfoListDetailA(
         DeviceInfoSet: HDEVINFO,
         DeviceInfoSetDetailData: PSP_DEVINFO_LIST_DETAIL_DATA_A,
@@ -2470,9 +2320,7 @@ extern "system" {
         MemberIndex: DWORD,
         DeviceInfoData: PSP_DEVINFO_DATA,
     ) -> BOOL;
-    pub fn SetupDiDestroyDeviceInfoList(
-        DeviceInfoSet: HDEVINFO,
-    ) -> BOOL;
+    pub fn SetupDiDestroyDeviceInfoList(DeviceInfoSet: HDEVINFO) -> BOOL;
     pub fn SetupDiEnumDeviceInterfaces(
         DeviceInfoSet: HDEVINFO,
         DeviceInfoData: PSP_DEVINFO_DATA,
@@ -2572,9 +2420,7 @@ extern "system" {
         DeviceInfoData: PSP_DEVINFO_DATA,
         DriverType: DWORD,
     ) -> BOOL;
-    pub fn SetupDiCancelDriverInfoSearch(
-        DeviceInfoSet: HDEVINFO,
-    ) -> BOOL;
+    pub fn SetupDiCancelDriverInfoSearch(DeviceInfoSet: HDEVINFO) -> BOOL;
     pub fn SetupDiEnumDriverInfoA(
         DeviceInfoSet: HDEVINFO,
         DeviceInfoData: PSP_DEVINFO_DATA,
@@ -2740,18 +2586,12 @@ extern "system" {
         DeviceInfoSet: HDEVINFO,
         DeviceInfoData: PSP_DEVINFO_DATA,
     ) -> BOOL;
-    pub fn SetupDiSelectDevice(
-        DeviceInfoSet: HDEVINFO,
-        DeviceInfoData: PSP_DEVINFO_DATA,
-    ) -> BOOL;
+    pub fn SetupDiSelectDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA) -> BOOL;
     pub fn SetupDiSelectBestCompatDrv(
         DeviceInfoSet: HDEVINFO,
         DeviceInfoData: PSP_DEVINFO_DATA,
     ) -> BOOL;
-    pub fn SetupDiInstallDevice(
-        DeviceInfoSet: HDEVINFO,
-        DeviceInfoData: PSP_DEVINFO_DATA,
-    ) -> BOOL;
+    pub fn SetupDiInstallDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA) -> BOOL;
     pub fn SetupDiInstallDriverFiles(
         DeviceInfoSet: HDEVINFO,
         DeviceInfoData: PSP_DEVINFO_DATA,
@@ -2760,22 +2600,12 @@ extern "system" {
         DeviceInfoSet: HDEVINFO,
         DeviceInfoData: PSP_DEVINFO_DATA,
     ) -> BOOL;
-    pub fn SetupDiRemoveDevice(
-        DeviceInfoSet: HDEVINFO,
-        DeviceInfoData: PSP_DEVINFO_DATA,
-    ) -> BOOL;
-    pub fn SetupDiUnremoveDevice(
-        DeviceInfoSet: HDEVINFO,
-        DeviceInfoData: PSP_DEVINFO_DATA,
-    ) -> BOOL;
-    pub fn SetupDiRestartDevices(
-        DeviceInfoSet: HDEVINFO,
-        DeviceInfoData: PSP_DEVINFO_DATA,
-    ) -> BOOL;
-    pub fn SetupDiChangeState(
-        DeviceInfoSet: HDEVINFO,
-        DeviceInfoData: PSP_DEVINFO_DATA,
-    ) -> BOOL;
+    pub fn SetupDiRemoveDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA) -> BOOL;
+    pub fn SetupDiUnremoveDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA)
+        -> BOOL;
+    pub fn SetupDiRestartDevices(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA)
+        -> BOOL;
+    pub fn SetupDiChangeState(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA) -> BOOL;
     pub fn SetupDiInstallClassA(
         hwndParent: HWND,
         InfFileName: PCSTR,
@@ -2806,10 +2636,7 @@ extern "system" {
         Reserved1: PVOID,
         Reserved2: PVOID,
     ) -> BOOL;
-    pub fn SetupDiOpenClassRegKey(
-        ClassGuid: *const GUID,
-        samDesired: REGSAM,
-    ) -> HKEY;
+    pub fn SetupDiOpenClassRegKey(ClassGuid: *const GUID, samDesired: REGSAM) -> HKEY;
 }
 pub const DIOCR_INSTALLER: DWORD = 0x00000001;
 pub const DIOCR_INTERFACE: DWORD = 0x00000002;
@@ -3231,19 +3058,9 @@ pub const DMI_MASK: DWORD = 0x00000001;
 pub const DMI_BKCOLOR: DWORD = 0x00000002;
 pub const DMI_USERECT: DWORD = 0x00000004;
 extern "system" {
-    pub fn SetupDiDrawMiniIcon(
-        hdc: HDC,
-        rc: RECT,
-        MiniIconIndex: INT,
-        Flags: DWORD,
-    ) -> INT;
-    pub fn SetupDiGetClassBitmapIndex(
-        ClassGuid: *const GUID,
-        MiniIconIndex: PINT,
-    ) -> BOOL;
-    pub fn SetupDiGetClassImageList(
-        ClassImageListData: PSP_CLASSIMAGELIST_DATA,
-    ) -> BOOL;
+    pub fn SetupDiDrawMiniIcon(hdc: HDC, rc: RECT, MiniIconIndex: INT, Flags: DWORD) -> INT;
+    pub fn SetupDiGetClassBitmapIndex(ClassGuid: *const GUID, MiniIconIndex: PINT) -> BOOL;
+    pub fn SetupDiGetClassImageList(ClassImageListData: PSP_CLASSIMAGELIST_DATA) -> BOOL;
     pub fn SetupDiGetClassImageListExA(
         ClassImageListData: PSP_CLASSIMAGELIST_DATA,
         MachineName: PCSTR,
@@ -3259,9 +3076,7 @@ extern "system" {
         ClassGuid: *const GUID,
         ImageIndex: PINT,
     ) -> BOOL;
-    pub fn SetupDiDestroyClassImageList(
-        ClassImageListData: PSP_CLASSIMAGELIST_DATA,
-    ) -> BOOL;
+    pub fn SetupDiDestroyClassImageList(ClassImageListData: PSP_CLASSIMAGELIST_DATA) -> BOOL;
 }
 pub const DIGCDP_FLAG_BASIC: DWORD = 0x00000001;
 pub const DIGCDP_FLAG_ADVANCED: DWORD = 0x00000002;
@@ -3297,10 +3112,7 @@ pub const IDI_PROBLEM_OVL: c_int = 500;
 pub const IDI_DISABLED_OVL: c_int = 501;
 pub const IDI_FORCED_OVL: c_int = 502;
 extern "system" {
-    pub fn SetupDiAskForOEMDisk(
-        DeviceInfoSet: HDEVINFO,
-        DeviceInfoData: PSP_DEVINFO_DATA,
-    ) -> BOOL;
+    pub fn SetupDiAskForOEMDisk(DeviceInfoSet: HDEVINFO, DeviceInfoData: PSP_DEVINFO_DATA) -> BOOL;
     pub fn SetupDiSelectOEMDrv(
         hwndParent: HWND,
         DeviceInfoSet: HDEVINFO,
@@ -3476,21 +3288,21 @@ extern "system" {
         SizeNeeded: *mut UINT,
     ) -> BOOL;
 }
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_INF_SIGNER_INFO_V1_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_INF_SIGNER_INFO_V1_A {
     cbSize: DWORD,
     CatalogFile: [CHAR; MAX_PATH],
     DigitalSigner: [CHAR; MAX_PATH],
     DigitalSignerVersion: [CHAR; MAX_PATH],
 }}
 pub type PSP_INF_SIGNER_INFO_V1_A = *mut SP_INF_SIGNER_INFO_V1_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_INF_SIGNER_INFO_V1_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_INF_SIGNER_INFO_V1_W {
     cbSize: DWORD,
     CatalogFile: [WCHAR; MAX_PATH],
     DigitalSigner: [WCHAR; MAX_PATH],
     DigitalSignerVersion: [WCHAR; MAX_PATH],
 }}
 pub type PSP_INF_SIGNER_INFO_V1_W = *mut SP_INF_SIGNER_INFO_V1_W;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_INF_SIGNER_INFO_V2_A {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_INF_SIGNER_INFO_V2_A {
     cbSize: DWORD,
     CatalogFile: [CHAR; MAX_PATH],
     DigitalSigner: [CHAR; MAX_PATH],
@@ -3498,7 +3310,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_INF_SIGNER_INFO
     SignerScore: DWORD,
 }}
 pub type PSP_INF_SIGNER_INFO_V2_A = *mut SP_INF_SIGNER_INFO_V2_A;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_INF_SIGNER_INFO_V2_W {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SP_INF_SIGNER_INFO_V2_W {
     cbSize: DWORD,
     CatalogFile: [WCHAR; MAX_PATH],
     DigitalSigner: [WCHAR; MAX_PATH],

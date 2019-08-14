@@ -12,11 +12,10 @@ pub const JOB_EXEC_ERROR: UCHAR = 0x02;
 pub const JOB_RUNS_TODAY: UCHAR = 0x04;
 pub const JOB_ADD_CURRENT_DATE: UCHAR = 0x08;
 pub const JOB_NONINTERACTIVE: UCHAR = 0x10;
-pub const JOB_INPUT_FLAGS: UCHAR = JOB_RUN_PERIODICALLY | JOB_ADD_CURRENT_DATE
-    | JOB_NONINTERACTIVE;
-pub const JOB_OUTPUT_FLAGS: UCHAR = JOB_RUN_PERIODICALLY | JOB_EXEC_ERROR | JOB_RUNS_TODAY
-    | JOB_NONINTERACTIVE;
-STRUCT!{struct AT_INFO {
+pub const JOB_INPUT_FLAGS: UCHAR = JOB_RUN_PERIODICALLY | JOB_ADD_CURRENT_DATE | JOB_NONINTERACTIVE;
+pub const JOB_OUTPUT_FLAGS: UCHAR =
+    JOB_RUN_PERIODICALLY | JOB_EXEC_ERROR | JOB_RUNS_TODAY | JOB_NONINTERACTIVE;
+STRUCT! {struct AT_INFO {
     JobTime: DWORD_PTR,
     DaysOfMonth: DWORD,
     DaysOfWeek: UCHAR,
@@ -25,7 +24,7 @@ STRUCT!{struct AT_INFO {
 }}
 pub type PAT_INFO = *mut AT_INFO;
 pub type LPAT_INFO = *mut AT_INFO;
-STRUCT!{struct AT_ENUM {
+STRUCT! {struct AT_ENUM {
     JobId: DWORD,
     JobTime: DWORD_PTR,
     DaysOfMonth: DWORD,
@@ -36,11 +35,8 @@ STRUCT!{struct AT_ENUM {
 pub type PAT_ENUM = *mut AT_ENUM;
 pub type LPAT_ENUM = *mut AT_ENUM;
 extern "system" {
-    pub fn NetScheduleJobAdd(
-        Servername: LPCWSTR,
-        Buffer: LPBYTE,
-        JobId: LPDWORD,
-    ) -> NET_API_STATUS;
+    pub fn NetScheduleJobAdd(Servername: LPCWSTR, Buffer: LPBYTE, JobId: LPDWORD)
+        -> NET_API_STATUS;
     pub fn NetScheduleJobDel(
         Servername: LPCWSTR,
         MinJobId: DWORD,

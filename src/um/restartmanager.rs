@@ -12,7 +12,7 @@ pub const CCH_RM_MAX_APP_NAME: usize = 255;
 pub const CCH_RM_MAX_SVC_NAME: usize = 63;
 pub const RM_INVALID_TS_SESSION: DWORD = -1i32 as u32;
 pub const RM_INVALID_PROCESS: DWORD = -1i32 as u32;
-ENUM!{enum RM_APP_TYPE {
+ENUM! {enum RM_APP_TYPE {
     RmUnknownApp = 0,
     RmMainWindow = 1,
     RmOtherWindow = 2,
@@ -21,11 +21,11 @@ ENUM!{enum RM_APP_TYPE {
     RmConsole = 5,
     RmCritical = 1000,
 }}
-ENUM!{enum RM_SHUTDOWN_TYPE {
+ENUM! {enum RM_SHUTDOWN_TYPE {
     RmForceShutdown = 0x1,
     RmShutdownOnlyRegistered = 0x10,
 }}
-ENUM!{enum RM_APP_STATUS {
+ENUM! {enum RM_APP_STATUS {
     RmStatusUnknown = 0x0,
     RmStatusRunning = 0x1,
     RmStatusStopped = 0x2,
@@ -36,7 +36,7 @@ ENUM!{enum RM_APP_STATUS {
     RmStatusShutdownMasked = 0x40,
     RmStatusRestartMasked = 0x80,
 }}
-ENUM!{enum RM_REBOOT_REASON {
+ENUM! {enum RM_REBOOT_REASON {
     RmRebootReasonNone = 0x0,
     RmRebootReasonPermissionDenied = 0x1,
     RmRebootReasonSessionMismatch = 0x2,
@@ -44,12 +44,12 @@ ENUM!{enum RM_REBOOT_REASON {
     RmRebootReasonCriticalService = 0x8,
     RmRebootReasonDetectedSelf = 0x10,
 }}
-STRUCT!{struct RM_UNIQUE_PROCESS {
+STRUCT! {struct RM_UNIQUE_PROCESS {
     dwProcessId: DWORD,
     ProcessStartTime: FILETIME,
 }}
 pub type PRM_UNIQUE_PROCESS = *mut RM_UNIQUE_PROCESS;
-STRUCT!{struct RM_PROCESS_INFO {
+STRUCT! {struct RM_PROCESS_INFO {
     Process: RM_UNIQUE_PROCESS,
     strAppName: [WCHAR; CCH_RM_MAX_APP_NAME + 1],
     strServiceShortName: [WCHAR; CCH_RM_MAX_SVC_NAME + 1],
@@ -59,31 +59,31 @@ STRUCT!{struct RM_PROCESS_INFO {
     bRestartable: BOOL,
 }}
 pub type PRM_PROCESS_INFO = *mut RM_PROCESS_INFO;
-ENUM!{enum RM_FILTER_TRIGGER {
+ENUM! {enum RM_FILTER_TRIGGER {
     RmFilterTriggerInvalid = 0,
     RmFilterTriggerFile,
     RmFilterTriggerProcess,
     RmFilterTriggerService,
 }}
-ENUM!{enum RM_FILTER_ACTION {
+ENUM! {enum RM_FILTER_ACTION {
     RmInvalidFilterAction = 0,
     RmNoRestart = 1,
     RmNoShutdown = 2,
 }}
-UNION!{union RM_FILTER_INFO_u {
+UNION! {union RM_FILTER_INFO_u {
     [u32; 3] [u64; 2],
     strFilename strFilename_mut: LPWSTR,
     Process Process_mut: RM_UNIQUE_PROCESS,
     strServiceShortName strServiceShortName_mut: LPWSTR,
 }}
-STRUCT!{struct RM_FILTER_INFO {
+STRUCT! {struct RM_FILTER_INFO {
     FilterAction: RM_FILTER_ACTION,
     FilterTrigger: RM_FILTER_TRIGGER,
     cbNextOffset: DWORD,
     u: RM_FILTER_INFO_u,
 }}
 pub type PRM_FILTER_INFO = *mut RM_FILTER_INFO;
-FN!{cdecl RM_WRITE_STATUS_CALLBACK(
+FN! {cdecl RM_WRITE_STATUS_CALLBACK(
     nPercentComplete: u32,
 ) -> ()}
 extern "system" {
@@ -92,13 +92,8 @@ extern "system" {
         dwSessionFlags: DWORD,
         strSessionKey: *mut WCHAR,
     ) -> DWORD;
-    pub fn RmJoinSession(
-        pSessionHandle: *mut DWORD,
-        strSessionKey: *const WCHAR,
-    ) -> DWORD;
-    pub fn RmEndSession(
-        dwSessionHandle: DWORD,
-    ) -> DWORD;
+    pub fn RmJoinSession(pSessionHandle: *mut DWORD, strSessionKey: *const WCHAR) -> DWORD;
+    pub fn RmEndSession(dwSessionHandle: DWORD) -> DWORD;
     pub fn RmRegisterResources(
         dwSessionHandle: DWORD,
         nFiles: UINT,
@@ -125,9 +120,7 @@ extern "system" {
         dwRestartFlags: DWORD,
         fnStatus: RM_WRITE_STATUS_CALLBACK,
     ) -> DWORD;
-    pub fn RmCancelCurrentTask(
-        dwSessionHandle: DWORD,
-    ) -> DWORD;
+    pub fn RmCancelCurrentTask(dwSessionHandle: DWORD) -> DWORD;
     pub fn RmAddFilter(
         dwSessionHandle: DWORD,
         strModuleName: LPCWSTR,

@@ -4,11 +4,11 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use shared::minwindef::DWORD;
-ENUM!{enum AUDCLNT_SHAREMODE {
+ENUM! {enum AUDCLNT_SHAREMODE {
     AUDCLNT_SHAREMODE_SHARED,
     AUDCLNT_SHAREMODE_EXCLUSIVE,
 }}
-ENUM!{enum AUDIO_STREAM_CATEGORY {
+ENUM! {enum AUDIO_STREAM_CATEGORY {
     AudioCategory_Other = 0,
     AudioCategory_ForegroundOnlyMedia = 1,
     AudioCategory_BackgroundCapableMedia = 2,
@@ -30,7 +30,7 @@ pub const AUDCLNT_STREAMFLAGS_RATEADJUST: DWORD = 0x00100000;
 pub const AUDCLNT_SESSIONFLAGS_EXPIREWHENUNOWNED: DWORD = 0x10000000;
 pub const AUDCLNT_SESSIONFLAGS_DISPLAY_HIDE: DWORD = 0x20000000;
 pub const AUDCLNT_SESSIONFLAGS_DISPLAY_HIDEWHENEXPIRED: DWORD = 0x40000000;
-ENUM!{enum AudioSessionState {
+ENUM! {enum AudioSessionState {
     AudioSessionStateInactive = 0,
     AudioSessionStateActive = 1,
     AudioSessionStateExpired = 2,

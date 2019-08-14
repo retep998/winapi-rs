@@ -11,7 +11,7 @@ use um::winnt::{HANDLE, LONG, LPSTR, LPWSTR, PVOID, SID};
 pub unsafe fn AccFree(p: PVOID) -> PVOID {
     LocalFree(p)
 }
-ENUM!{enum SE_OBJECT_TYPE {
+ENUM! {enum SE_OBJECT_TYPE {
     SE_UNKNOWN_OBJECT_TYPE = 0,
     SE_FILE_OBJECT,
     SE_SERVICE,
@@ -27,7 +27,7 @@ ENUM!{enum SE_OBJECT_TYPE {
     SE_REGISTRY_WOW64_32KEY,
     SE_REGISTRY_WOW64_64KEY,
 }}
-ENUM!{enum TRUSTEE_TYPE {
+ENUM! {enum TRUSTEE_TYPE {
     TRUSTEE_IS_UNKNOWN,
     TRUSTEE_IS_USER,
     TRUSTEE_IS_GROUP,
@@ -38,25 +38,25 @@ ENUM!{enum TRUSTEE_TYPE {
     TRUSTEE_IS_INVALID,
     TRUSTEE_IS_COMPUTER,
 }}
-ENUM!{enum TRUSTEE_FORM {
+ENUM! {enum TRUSTEE_FORM {
     TRUSTEE_IS_SID,
     TRUSTEE_IS_NAME,
     TRUSTEE_BAD_FORM,
     TRUSTEE_IS_OBJECTS_AND_SID,
     TRUSTEE_IS_OBJECTS_AND_NAME,
 }}
-ENUM!{enum MULTIPLE_TRUSTEE_OPERATION {
+ENUM! {enum MULTIPLE_TRUSTEE_OPERATION {
     NO_MULTIPLE_TRUSTEE,
     TRUSTEE_IS_IMPERSONATE,
 }}
-STRUCT!{struct OBJECTS_AND_SID {
+STRUCT! {struct OBJECTS_AND_SID {
     ObjectsPresent: DWORD,
     ObjectTypeGuid: GUID,
     InheritedObjectTypeGuid: GUID,
     pSid: *mut SID,
 }}
 pub type POBJECTS_AND_SID = *mut OBJECTS_AND_SID;
-STRUCT!{struct OBJECTS_AND_NAME_A {
+STRUCT! {struct OBJECTS_AND_NAME_A {
     ObjectsPresent: DWORD,
     ObjectType: SE_OBJECT_TYPE,
     ObjectTypeName: LPSTR,
@@ -64,7 +64,7 @@ STRUCT!{struct OBJECTS_AND_NAME_A {
     ptstrName: LPSTR,
 }}
 pub type POBJECTS_AND_NAME_A = *mut OBJECTS_AND_NAME_A;
-STRUCT!{struct OBJECTS_AND_NAME_W {
+STRUCT! {struct OBJECTS_AND_NAME_W {
     ObjectsPresent: DWORD,
     ObjectType: SE_OBJECT_TYPE,
     ObjectTypeName: LPWSTR,
@@ -72,7 +72,7 @@ STRUCT!{struct OBJECTS_AND_NAME_W {
     ptstrName: LPWSTR,
 }}
 pub type POBJECTS_AND_NAME_W = *mut OBJECTS_AND_NAME_W;
-STRUCT!{struct TRUSTEE_A {
+STRUCT! {struct TRUSTEE_A {
     pMultipleTrustee: *mut TRUSTEE_A,
     MultipleTrusteeOperation: MULTIPLE_TRUSTEE_OPERATION,
     TrusteeForm: TRUSTEE_FORM,
@@ -82,7 +82,7 @@ STRUCT!{struct TRUSTEE_A {
 pub type PTRUSTEE_A = *mut TRUSTEE_A;
 pub type TRUSTEEA = TRUSTEE_A;
 pub type PTRUSTEEA = PTRUSTEE_A;
-STRUCT!{struct TRUSTEE_W {
+STRUCT! {struct TRUSTEE_W {
     pMultipleTrustee: *mut TRUSTEE_W,
     MultipleTrusteeOperation: MULTIPLE_TRUSTEE_OPERATION,
     TrusteeForm: TRUSTEE_FORM,
@@ -92,7 +92,7 @@ STRUCT!{struct TRUSTEE_W {
 pub type PTRUSTEE_W = *mut TRUSTEE_W;
 pub type TRUSTEEW = TRUSTEE_W;
 pub type PTRUSTEEW = PTRUSTEE_W;
-ENUM!{enum ACCESS_MODE {
+ENUM! {enum ACCESS_MODE {
     NOT_USED_ACCESS = 0,
     GRANT_ACCESS,
     SET_ACCESS,
@@ -110,7 +110,7 @@ pub const INHERIT_ONLY: DWORD = 0x8;
 pub const INHERITED_ACCESS_ENTRY: DWORD = 0x10;
 pub const INHERITED_PARENT: DWORD = 0x10000000;
 pub const INHERITED_GRANDPARENT: DWORD = 0x20000000;
-STRUCT!{struct EXPLICIT_ACCESS_A {
+STRUCT! {struct EXPLICIT_ACCESS_A {
     grfAccessPermissions: DWORD,
     grfAccessMode: ACCESS_MODE,
     grfInheritance: DWORD,
@@ -119,7 +119,7 @@ STRUCT!{struct EXPLICIT_ACCESS_A {
 pub type PEXPLICIT_ACCESS_A = *mut EXPLICIT_ACCESS_A;
 pub type EXPLICIT_ACCESSA = EXPLICIT_ACCESS_A;
 pub type PEXPLICIT_ACCESSA = PEXPLICIT_ACCESS_A;
-STRUCT!{struct EXPLICIT_ACCESS_W {
+STRUCT! {struct EXPLICIT_ACCESS_W {
     grfAccessPermissions: DWORD,
     grfAccessMode: ACCESS_MODE,
     grfInheritance: DWORD,
@@ -133,7 +133,7 @@ pub type ACCESS_RIGHTS = ULONG;
 pub type PACCESS_RIGHTS = *mut ACCESS_RIGHTS;
 pub type INHERIT_FLAGS = ULONG;
 pub type PINHERIT_FLAGS = *mut INHERIT_FLAGS;
-STRUCT!{struct ACTRL_ACCESS_ENTRYA {
+STRUCT! {struct ACTRL_ACCESS_ENTRYA {
     Trustee: TRUSTEE_A,
     fAccessFlags: ULONG,
     Access: ACCESS_RIGHTS,
@@ -142,7 +142,7 @@ STRUCT!{struct ACTRL_ACCESS_ENTRYA {
     lpInheritProperty: LPSTR,
 }}
 pub type PACTRL_ACCESS_ENTRYA = *mut ACTRL_ACCESS_ENTRYA;
-STRUCT!{struct ACTRL_ACCESS_ENTRYW {
+STRUCT! {struct ACTRL_ACCESS_ENTRYW {
     Trustee: TRUSTEE_W,
     fAccessFlags: ULONG,
     Access: ACCESS_RIGHTS,
@@ -151,36 +151,36 @@ STRUCT!{struct ACTRL_ACCESS_ENTRYW {
     lpInheritProperty: LPWSTR,
 }}
 pub type PACTRL_ACCESS_ENTRYW = *mut ACTRL_ACCESS_ENTRYW;
-STRUCT!{struct ACTRL_ACCESS_ENTRY_LISTA {
+STRUCT! {struct ACTRL_ACCESS_ENTRY_LISTA {
     cEntries: ULONG,
     pAccessList: *mut ACTRL_ACCESS_ENTRYA,
 }}
 pub type PACTRL_ACCESS_ENTRY_LISTA = *mut ACTRL_ACCESS_ENTRY_LISTA;
-STRUCT!{struct ACTRL_ACCESS_ENTRY_LISTW {
+STRUCT! {struct ACTRL_ACCESS_ENTRY_LISTW {
     cEntries: ULONG,
     pAccessList: *mut ACTRL_ACCESS_ENTRYW,
 }}
 pub type PACTRL_ACCESS_ENTRY_LISTW = *mut ACTRL_ACCESS_ENTRY_LISTW;
-STRUCT!{struct ACTRL_PROPERTY_ENTRYA {
+STRUCT! {struct ACTRL_PROPERTY_ENTRYA {
     lpProperty: LPSTR,
     pAccessEntryList: PACTRL_ACCESS_ENTRY_LISTA,
     fListFlags: ULONG,
 }}
 pub type PACTRL_PROPERTY_ENTRYA = *mut ACTRL_PROPERTY_ENTRYA;
-STRUCT!{struct ACTRL_PROPERTY_ENTRYW {
+STRUCT! {struct ACTRL_PROPERTY_ENTRYW {
     lpProperty: LPWSTR,
     pAccessEntryList: PACTRL_ACCESS_ENTRY_LISTW,
     fListFlags: ULONG,
 }}
 pub type PACTRL_PROPERTY_ENTRYW = *mut ACTRL_PROPERTY_ENTRYW;
-STRUCT!{struct ACTRL_ACCESSA {
+STRUCT! {struct ACTRL_ACCESSA {
     cEntries: ULONG,
     pPropertyAccessList: PACTRL_PROPERTY_ENTRYA,
 }}
 pub type PACTRL_ACCESSA = *mut ACTRL_ACCESSA;
 pub type ACTRL_AUDITA = ACTRL_ACCESSA;
 pub type PACTRL_AUDITA = *mut ACTRL_AUDITA;
-STRUCT!{struct ACTRL_ACCESSW {
+STRUCT! {struct ACTRL_ACCESSW {
     cEntries: ULONG,
     pPropertyAccessList: PACTRL_PROPERTY_ENTRYW,
 }}
@@ -193,14 +193,14 @@ pub const TRUSTEE_ACCESS_WRITE: ULONG = 0x00000004;
 pub const TRUSTEE_ACCESS_EXPLICIT: ULONG = 0x00000001;
 pub const TRUSTEE_ACCESS_READ_WRITE: ULONG = TRUSTEE_ACCESS_READ | TRUSTEE_ACCESS_WRITE;
 pub const TRUSTEE_ACCESS_ALL: ULONG = 0xFFFFFFFF;
-STRUCT!{struct TRUSTEE_ACCESSA {
+STRUCT! {struct TRUSTEE_ACCESSA {
     lpProperty: LPSTR,
     Access: ACCESS_RIGHTS,
     fAccessFlags: ULONG,
     fReturnedAccess: ULONG,
 }}
 pub type PTRUSTEE_ACCESSA = *mut TRUSTEE_ACCESSA;
-STRUCT!{struct TRUSTEE_ACCESSW {
+STRUCT! {struct TRUSTEE_ACCESSW {
     lpProperty: LPWSTR,
     Access: ACCESS_RIGHTS,
     fAccessFlags: ULONG,
@@ -310,33 +310,33 @@ pub const ACTRL_WIN_READ_ATTRIBS: ULONG = ACTRL_PERM_6;
 pub const ACTRL_WIN_WRITE_ATTRIBS: ULONG = ACTRL_PERM_7;
 pub const ACTRL_WIN_SCREEN: ULONG = ACTRL_PERM_8;
 pub const ACTRL_WIN_EXIT: ULONG = ACTRL_PERM_9;
-UNION!{union ACTRL_OVERLAPPED_u {
+UNION! {union ACTRL_OVERLAPPED_u {
     [u32; 1] [u64; 1],
     Provider Provider_mut: PVOID,
     Reserved1 Reserved1_mut: ULONG,
 }}
-STRUCT!{struct ACTRL_OVERLAPPED {
+STRUCT! {struct ACTRL_OVERLAPPED {
     u: ACTRL_OVERLAPPED_u,
     Reserved2: ULONG,
     hEvent: HANDLE,
 }}
 pub type PACTRL_OVERLAPPED = *mut ACTRL_OVERLAPPED;
-STRUCT!{struct ACTRL_ACCESS_INFOA {
+STRUCT! {struct ACTRL_ACCESS_INFOA {
     fAccessPermission: ULONG,
     lpAccessPermissionName: LPSTR,
 }}
 pub type PACTRL_ACCESS_INFOA = *mut ACTRL_ACCESS_INFOA;
-STRUCT!{struct ACTRL_ACCESS_INFOW {
+STRUCT! {struct ACTRL_ACCESS_INFOW {
     fAccessPermission: ULONG,
     lpAccessPermissionName: LPWSTR,
 }}
 pub type PACTRL_ACCESS_INFOW = *mut ACTRL_ACCESS_INFOW;
-STRUCT!{struct ACTRL_CONTROL_INFOA {
+STRUCT! {struct ACTRL_CONTROL_INFOA {
     lpControlId: LPSTR,
     lpControlName: LPSTR,
 }}
 pub type PACTRL_CONTROL_INFOA = *mut ACTRL_CONTROL_INFOA;
-STRUCT!{struct ACTRL_CONTROL_INFOW {
+STRUCT! {struct ACTRL_CONTROL_INFOW {
     lpControlId: LPWSTR,
     lpControlName: LPWSTR,
 }}
@@ -346,7 +346,7 @@ pub const ACTRL_ACCESS_SUPPORTS_OBJECT_ENTRIES: DWORD = 0x00000001;
 pub const TREE_SEC_INFO_SET: DWORD = 0x00000001;
 pub const TREE_SEC_INFO_RESET: DWORD = 0x00000002;
 pub const TREE_SEC_INFO_RESET_KEEP_EXPLICIT: DWORD = 0x00000003;
-ENUM!{enum PROG_INVOKE_SETTING {
+ENUM! {enum PROG_INVOKE_SETTING {
     ProgressInvokeNever = 1,
     ProgressInvokeEveryObject,
     ProgressInvokeOnError,
@@ -355,16 +355,16 @@ ENUM!{enum PROG_INVOKE_SETTING {
     ProgressInvokePrePostError,
 }}
 pub type PPROG_INVOKE_SETTING = *mut PROG_INVOKE_SETTING;
-STRUCT!{struct FN_OBJECT_MGR_FUNCTS {
+STRUCT! {struct FN_OBJECT_MGR_FUNCTS {
     Placeholder: ULONG,
 }}
 pub type PFN_OBJECT_MGR_FUNCTS = *mut FN_OBJECT_MGR_FUNCTS;
-STRUCT!{struct INHERITED_FROMA {
+STRUCT! {struct INHERITED_FROMA {
     GenerationGap: LONG,
     AncestorName: LPSTR,
 }}
 pub type PINHERITED_FROMA = *mut INHERITED_FROMA;
-STRUCT!{struct INHERITED_FROMW {
+STRUCT! {struct INHERITED_FROMW {
     GenerationGap: LONG,
     AncestorName: LPWSTR,
 }}

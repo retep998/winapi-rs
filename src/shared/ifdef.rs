@@ -5,10 +5,10 @@
 // except according to those terms.
 use shared::basetsd::{UINT16, ULONG64};
 use shared::minwindef::ULONG;
-STRUCT!{struct NET_LUID_LH {
+STRUCT! {struct NET_LUID_LH {
     Value: ULONG64,
 }}
-BITFIELD!{NET_LUID_LH Value: ULONG64 [
+BITFIELD! {NET_LUID_LH Value: ULONG64 [
     Reserved set_Reserved[0..24],
     NetLuidIndex set_NetLuidIndex[24..48],
     IfType set_IfType[48..64],

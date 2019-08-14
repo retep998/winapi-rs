@@ -8,7 +8,7 @@ use shared::minwindef::{BOOL, DWORD, LPDWORD, LPVOID, UINT, ULONG};
 use shared::ntdef::{HANDLE, LPCWSTR, PCWSTR, VOID};
 use um::minwinbase::LPSECURITY_ATTRIBUTES;
 use um::winnt::JOBOBJECTINFOCLASS;
-STRUCT!{struct JOBOBJECT_IO_RATE_CONTROL_INFORMATION {
+STRUCT! {struct JOBOBJECT_IO_RATE_CONTROL_INFORMATION {
     MaxIops: LONG64,
     MaxBandwidth: LONG64,
     ReservationIops: LONG64,
@@ -17,26 +17,11 @@ STRUCT!{struct JOBOBJECT_IO_RATE_CONTROL_INFORMATION {
     ControlFlags: ULONG,
 }}
 extern "system" {
-    pub fn CreateJobObjectW(
-        lpJobAttributes: LPSECURITY_ATTRIBUTES,
-        lpName: LPCWSTR,
-    ) -> HANDLE;
-    pub fn FreeMemoryJobObject(
-        Buffer: *mut VOID,
-    ) -> ();
-    pub fn OpenJobObjectW(
-        dwDesiredAccess: DWORD,
-        bInheritHandle: BOOL,
-        lpName: LPCWSTR,
-    ) -> HANDLE;
-    pub fn AssignProcessToJobObject(
-        hJob: HANDLE,
-        hProcess: HANDLE,
-    ) -> BOOL;
-    pub fn TerminateJobObject(
-        hJob: HANDLE,
-        uExitCode: UINT,
-    ) -> BOOL;
+    pub fn CreateJobObjectW(lpJobAttributes: LPSECURITY_ATTRIBUTES, lpName: LPCWSTR) -> HANDLE;
+    pub fn FreeMemoryJobObject(Buffer: *mut VOID) -> ();
+    pub fn OpenJobObjectW(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR) -> HANDLE;
+    pub fn AssignProcessToJobObject(hJob: HANDLE, hProcess: HANDLE) -> BOOL;
+    pub fn TerminateJobObject(hJob: HANDLE, uExitCode: UINT) -> BOOL;
     pub fn SetInformationJobObject(
         hJob: HANDLE,
         JobObjectInformationClass: JOBOBJECTINFOCLASS,

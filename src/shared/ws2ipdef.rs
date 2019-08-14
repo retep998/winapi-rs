@@ -31,12 +31,12 @@ pub const IP_UNBLOCK_SOURCE: c_int = 18;
 pub const IP_PKTINFO: c_int = 19;
 pub const IP_RECEIVE_BROADCAST: c_int = 22;
 pub const IP_RECVDSTADDR: c_int = 25;
-UNION!{union SOCKADDR_IN6_LH_u {
+UNION! {union SOCKADDR_IN6_LH_u {
     [u32; 1],
     sin6_scope_id sin6_scope_id_mut: ULONG,
     sin6_scope_struct sin6_scope_struct_mut: SCOPE_ID,
 }}
-STRUCT!{struct SOCKADDR_IN6_LH {
+STRUCT! {struct SOCKADDR_IN6_LH {
     sin6_family: ADDRESS_FAMILY,
     sin6_port: USHORT,
     sin6_flowinfo: ULONG,
@@ -44,7 +44,7 @@ STRUCT!{struct SOCKADDR_IN6_LH {
     u: SOCKADDR_IN6_LH_u,
 }}
 pub type PSOCKADDR_IN6_LH = *mut SOCKADDR_IN6_LH;
-STRUCT!{struct IP_MREQ {
+STRUCT! {struct IP_MREQ {
     imr_multiaddr: IN_ADDR,
     imr_interface: IN_ADDR,
 }}
@@ -75,17 +75,17 @@ pub const IPV6_RTHDR: c_int = 32;
 pub const IPV6_RECVRTHDR: c_int = 38;
 pub const IPV6_TCLASS: c_int = 39;
 pub const IPV6_RECVTCLASS: c_int = 40;
-STRUCT!{struct IPV6_MREQ {
+STRUCT! {struct IPV6_MREQ {
     ipv6mr_multiaddr: IN6_ADDR,
     ipv6mr_interface: ULONG,
 }}
 pub type PIPV6_MREQ = *mut IPV6_MREQ;
-STRUCT!{struct IN_PKTINFO {
+STRUCT! {struct IN_PKTINFO {
     ipi_addr: IN_ADDR,
     ipi_ifindex: ULONG,
 }}
 pub type PIN_PKTINFO = *mut IN_PKTINFO;
-STRUCT!{struct IN6_PKTINFO {
+STRUCT! {struct IN6_PKTINFO {
     ipi6_addr: IN6_ADDR,
     ipi6_ifindex: ULONG,
 }}

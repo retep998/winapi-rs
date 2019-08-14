@@ -26,19 +26,19 @@ pub const IOCTL_BTH_SDP_SUBMIT_RECORD: DWORD = BTH_CTL!(BTH_IOCTL_BASE + 0x85);
 pub const IOCTL_BTH_SDP_REMOVE_RECORD: DWORD = BTH_CTL!(BTH_IOCTL_BASE + 0x86);
 pub const IOCTL_BTH_SDP_SUBMIT_RECORD_WITH_INFO: DWORD = BTH_CTL!(BTH_IOCTL_BASE + 0x87);
 pub const IOCTL_BTH_GET_HOST_SUPPORTED_FEATURES: DWORD = BTH_CTL!(BTH_IOCTL_BASE + 0x88);
-STRUCT!{#[repr(packed)] struct BTH_DEVICE_INFO_LIST {
+STRUCT! {#[repr(packed)] struct BTH_DEVICE_INFO_LIST {
     numOfDevices: ULONG,
     deviceList: [BTH_DEVICE_INFO; 1],
 }}
 pub type PBTH_DEVICE_INFO_LIST = *mut BTH_DEVICE_INFO_LIST;
-STRUCT!{#[repr(packed)] struct BTH_RADIO_INFO {
+STRUCT! {#[repr(packed)] struct BTH_RADIO_INFO {
     lmpSupportedFeatures: ULONGLONG,
     mfg: USHORT,
     lmpSubversion: USHORT,
     lmpVersion: UCHAR,
 }}
 pub type PBTH_RADIO_INFO = *mut BTH_RADIO_INFO;
-STRUCT!{#[repr(packed)] struct BTH_LOCAL_RADIO_INFO {
+STRUCT! {#[repr(packed)] struct BTH_LOCAL_RADIO_INFO {
     localInfo: BTH_DEVICE_INFO,
     flags: ULONG,
     hciRevision: USHORT,
@@ -69,18 +69,18 @@ pub type PHANDLE_SDP = *mut ULONGLONG;
 pub type HANDLE_SDP_TYPE = HANDLE_SDP;
 pub const HANDLE_SDP_NULL: HANDLE_SDP = 0x0;
 pub const HANDLE_SDP_LOCAL: HANDLE_SDP = -2i64 as u64;
-STRUCT!{#[repr(packed)] struct BTH_SDP_CONNECT {
+STRUCT! {#[repr(packed)] struct BTH_SDP_CONNECT {
     bthAddress: BTH_ADDR,
     fSdpConnect: ULONG,
     hConnection: HANDLE_SDP_TYPE,
     requestTimeout: UCHAR,
 }}
 pub type PBTH_SDP_CONNECT = *mut BTH_SDP_CONNECT;
-STRUCT!{#[repr(packed)] struct BTH_SDP_DISCONNECT {
+STRUCT! {#[repr(packed)] struct BTH_SDP_DISCONNECT {
     hConnection: HANDLE_SDP_TYPE,
 }}
 pub type PBTH_SDP_DISCONNECT = *mut BTH_SDP_DISCONNECT;
-STRUCT!{#[repr(packed)] struct BTH_SDP_RECORD {
+STRUCT! {#[repr(packed)] struct BTH_SDP_RECORD {
     fSecurity: ULONG,
     fOptions: ULONG,
     fCodService: ULONG,
@@ -88,37 +88,37 @@ STRUCT!{#[repr(packed)] struct BTH_SDP_RECORD {
     record: [UCHAR; 1],
 }}
 pub type PBTH_SDP_RECORD = *mut BTH_SDP_RECORD;
-STRUCT!{#[repr(packed)] struct BTH_SDP_SERVICE_SEARCH_REQUEST {
+STRUCT! {#[repr(packed)] struct BTH_SDP_SERVICE_SEARCH_REQUEST {
     hConnection: HANDLE_SDP_TYPE,
     uuids: [SdpQueryUuid; MAX_UUIDS_IN_QUERY],
 }}
 pub type PBTH_SDP_SERVICE_SEARCH_REQUEST = *mut BTH_SDP_SERVICE_SEARCH_REQUEST;
-STRUCT!{#[repr(packed)] struct BTH_SDP_ATTRIBUTE_SEARCH_REQUEST {
+STRUCT! {#[repr(packed)] struct BTH_SDP_ATTRIBUTE_SEARCH_REQUEST {
     hConnection: HANDLE_SDP_TYPE,
     searchFlags: ULONG,
     recordHandle: ULONG,
     range: [SdpAttributeRange; 1],
 }}
 pub type PBTH_SDP_ATTRIBUTE_SEARCH_REQUEST = *mut BTH_SDP_ATTRIBUTE_SEARCH_REQUEST;
-STRUCT!{#[repr(packed)] struct BTH_SDP_SERVICE_ATTRIBUTE_SEARCH_REQUEST {
+STRUCT! {#[repr(packed)] struct BTH_SDP_SERVICE_ATTRIBUTE_SEARCH_REQUEST {
     hConnection: HANDLE_SDP_TYPE,
     searchFlags: ULONG,
     uuids: [SdpQueryUuid; MAX_UUIDS_IN_QUERY],
     range: [SdpAttributeRange; 1],
 }}
 pub type PBTH_SDP_SERVICE_ATTRIBUTE_SEARCH_REQUEST = *mut BTH_SDP_SERVICE_ATTRIBUTE_SEARCH_REQUEST;
-STRUCT!{#[repr(packed)] struct BTH_SDP_STREAM_RESPONSE {
+STRUCT! {#[repr(packed)] struct BTH_SDP_STREAM_RESPONSE {
     requiredSize: ULONG,
     responseSize: ULONG,
     response: [UCHAR; 1],
 }}
 pub type PBTH_SDP_STREAM_RESPONSE = *mut BTH_SDP_STREAM_RESPONSE;
-STRUCT!{#[repr(packed)] struct BTH_COMMAND_HEADER {
+STRUCT! {#[repr(packed)] struct BTH_COMMAND_HEADER {
     OpCode: USHORT,
     TotalParameterLength: UCHAR,
 }}
 pub type PBTH_COMMAND_HEADER = *mut BTH_COMMAND_HEADER;
-STRUCT!{#[repr(packed)] struct BTH_VENDOR_SPECIFIC_COMMAND {
+STRUCT! {#[repr(packed)] struct BTH_VENDOR_SPECIFIC_COMMAND {
     ManufacturerId: ULONG,
     LmpVersion: UCHAR,
     MatchAnySinglePattern: BOOLEAN,
@@ -126,13 +126,13 @@ STRUCT!{#[repr(packed)] struct BTH_VENDOR_SPECIFIC_COMMAND {
     Data: [UCHAR; 1],
 }}
 pub type PBTH_VENDOR_SPECIFIC_COMMAND = *mut BTH_VENDOR_SPECIFIC_COMMAND;
-STRUCT!{#[repr(packed)] struct BTH_VENDOR_PATTERN {
+STRUCT! {#[repr(packed)] struct BTH_VENDOR_PATTERN {
     Offset: UCHAR,
     Size: UCHAR,
     Pattern: [UCHAR; 1],
 }}
 pub type PBTH_VENDOR_PATTERN = *mut BTH_VENDOR_PATTERN;
-STRUCT!{#[repr(packed)] struct BTH_VENDOR_EVENT_INFO {
+STRUCT! {#[repr(packed)] struct BTH_VENDOR_EVENT_INFO {
     BthAddress: BTH_ADDR,
     EventSize: ULONG,
     EventInfo: [UCHAR; 1],
@@ -143,7 +143,7 @@ pub const BTH_HOST_FEATURE_STREAMING_MODE: ULONGLONG = 0x0000000000000002;
 pub const BTH_HOST_FEATURE_LOW_ENERGY: ULONGLONG = 0x0000000000000004;
 pub const BTH_HOST_FEATURE_SCO_HCI: ULONGLONG = 0x0000000000000008;
 pub const BTH_HOST_FEATURE_SCO_HCIBYPASS: ULONGLONG = 0x0000000000000010;
-STRUCT!{#[repr(packed)] struct BTH_HOST_FEATURE_MASK {
+STRUCT! {#[repr(packed)] struct BTH_HOST_FEATURE_MASK {
     Mask: ULONGLONG,
     Reserved1: ULONGLONG,
     Reserved2: ULONGLONG,

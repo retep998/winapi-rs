@@ -8,7 +8,7 @@ use shared::lmcons::NET_API_STATUS;
 use shared::minwindef::{BYTE, DWORD, PBYTE, PDWORD, ULONG};
 use um::wincrypt::PCCERT_CONTEXT;
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR, PVOID};
-ENUM!{enum NETSETUP_NAME_TYPE {
+ENUM! {enum NETSETUP_NAME_TYPE {
     NetSetupUnknown = 0,
     NetSetupMachine,
     NetSetupWorkgroup,
@@ -17,19 +17,19 @@ ENUM!{enum NETSETUP_NAME_TYPE {
     NetSetupDnsMachine,
 }}
 pub type PNETSETUP_NAME_TYPE = *mut NETSETUP_NAME_TYPE;
-ENUM!{enum DSREG_JOIN_TYPE {
+ENUM! {enum DSREG_JOIN_TYPE {
     DSREG_UNKNOWN_JOIN = 0,
     DSREG_DEVICE_JOIN = 1,
     DSREG_WORKPLACE_JOIN = 2,
 }}
 pub type PDSREG_JOIN_TYPE = *mut DSREG_JOIN_TYPE;
-STRUCT!{struct DSREG_USER_INFO {
+STRUCT! {struct DSREG_USER_INFO {
     pszUserEmail: LPWSTR,
     pszUserKeyId: LPWSTR,
     pszUserKeyName: LPWSTR,
 }}
 pub type PDSREG_USER_INFO = *mut DSREG_USER_INFO;
-STRUCT!{struct DSREG_JOIN_INFO {
+STRUCT! {struct DSREG_JOIN_INFO {
     joinType: DSREG_JOIN_TYPE,
     pJoinCertificate: PCCERT_CONTEXT,
     pszDeviceId: LPWSTR,
@@ -65,10 +65,12 @@ pub const NETSETUP_FORCE_SPN_SET: DWORD = 0x00010000;
 pub const NETSETUP_NO_ACCT_REUSE: DWORD = 0x00020000;
 pub const NETSETUP_ALT_SAMACCOUNTNAME: DWORD = 0x00020000;
 pub const NETSETUP_IGNORE_UNSUPPORTED_FLAGS: DWORD = 0x10000000;
-pub const NETSETUP_VALID_UNJOIN_FLAGS: DWORD = NETSETUP_ACCT_DELETE
-    | NETSETUP_IGNORE_UNSUPPORTED_FLAGS | NETSETUP_JOIN_DC_ACCOUNT;
+pub const NETSETUP_VALID_UNJOIN_FLAGS: DWORD =
+    NETSETUP_ACCT_DELETE | NETSETUP_IGNORE_UNSUPPORTED_FLAGS | NETSETUP_JOIN_DC_ACCOUNT;
 pub const NETSETUP_PROCESS_OFFLINE_FLAGS: DWORD = NETSETUP_JOIN_DOMAIN
-    | NETSETUP_DOMAIN_JOIN_IF_JOINED | NETSETUP_JOIN_WITH_NEW_NAME | NETSETUP_DONT_CONTROL_SERVICES
+    | NETSETUP_DOMAIN_JOIN_IF_JOINED
+    | NETSETUP_JOIN_WITH_NEW_NAME
+    | NETSETUP_DONT_CONTROL_SERVICES
     | NETSETUP_MACHINE_PWD_PASSED;
 extern "system" {
     pub fn NetJoinDomain(
@@ -132,7 +134,7 @@ extern "system" {
         Reserved: ULONG,
     ) -> NET_API_STATUS;
 }
-ENUM!{enum NET_COMPUTER_NAME_TYPE {
+ENUM! {enum NET_COMPUTER_NAME_TYPE {
     NetPrimaryComputerName,
     NetAlternateComputerNames,
     NetAllComputerNames,
@@ -176,7 +178,7 @@ extern "system" {
 }
 pub const NETSETUP_PROVISIONING_PARAMS_WIN8_VERSION: DWORD = 0x00000001;
 pub const NETSETUP_PROVISIONING_PARAMS_CURRENT_VERSION: DWORD = 0x00000002;
-STRUCT!{struct NETSETUP_PROVISIONING_PARAMS {
+STRUCT! {struct NETSETUP_PROVISIONING_PARAMS {
     dwVersion: DWORD,
     lpDomain: LPCWSTR,
     lpHostName: LPCWSTR,
@@ -212,11 +214,9 @@ extern "system" {
         pcszTenantId: LPCWSTR,
         ppJoinInfo: *mut PDSREG_JOIN_INFO,
     ) -> HRESULT;
-    pub fn NetFreeAadJoinInformation(
-        pJoinInfo: PDSREG_JOIN_INFO,
-    );
+    pub fn NetFreeAadJoinInformation(pJoinInfo: PDSREG_JOIN_INFO);
 }
-ENUM!{enum NETSETUP_JOIN_STATUS {
+ENUM! {enum NETSETUP_JOIN_STATUS {
     NetSetupUnknownStatus = 0,
     NetSetupUnjoined,
     NetSetupWorkgroupName,

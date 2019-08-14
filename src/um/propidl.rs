@@ -5,15 +5,13 @@
 // except according to those terms.
 use shared::guiddef::{CLSID, FMTID, GUID, REFCLSID, REFFMTID};
 use shared::minwindef::{
-    BYTE, DWORD, FILETIME, FLOAT, HIBYTE, HIWORD, INT, LOBYTE, LOWORD, UINT, WORD
+    BYTE, DWORD, FILETIME, FLOAT, HIBYTE, HIWORD, INT, LOBYTE, LOWORD, UINT, WORD,
 };
 use shared::ntdef::{
-    BOOLEAN, CHAR, HRESULT, LARGE_INTEGER, LONG, LPSTR, LPWSTR, PVOID, SHORT,
-    UCHAR, ULARGE_INTEGER, ULONG, USHORT
+    BOOLEAN, CHAR, HRESULT, LARGE_INTEGER, LONG, LPSTR, LPWSTR, PVOID, SHORT, UCHAR,
+    ULARGE_INTEGER, ULONG, USHORT,
 };
-use shared::wtypes::{
-    BSTR, BSTRBLOB, CLIPDATA, CY, DATE, DECIMAL, PROPID, VARIANT_BOOL, VARTYPE
-};
+use shared::wtypes::{BSTR, BSTRBLOB, CLIPDATA, CY, DATE, DECIMAL, PROPID, VARIANT_BOOL, VARTYPE};
 use shared::wtypesbase::{BLOB, DOUBLE, LPOLESTR, SCODE};
 use um::oaidl::{IDispatch, LPSAFEARRAY};
 use um::objidlbase::IStream;
@@ -23,16 +21,18 @@ pub const PROPSETFLAG_NONSIMPLE: DWORD = 1;
 pub const PROPSETFLAG_ANSI: DWORD = 2;
 pub const PROPSETFLAG_UNBUFFERED: DWORD = 4;
 pub const PROPSET_BEHAVIOR_CASE_SENSITIVE: DWORD = 1;
-STRUCT!{struct VERSIONEDSTREAM {
+STRUCT! {struct VERSIONEDSTREAM {
     guidVersion: GUID,
     pStream: *mut IStream,
 }}
 pub type LPVERSIONEDSTREAM = *mut VERSIONEDSTREAM;
 macro_rules! TYPEDEF_CA {
-    ($type_:ty, $name:ident) => { STRUCT!{struct $name {
-        cElems: $crate::shared::ntdef::ULONG,
-        pElems: *mut $type_,
-    }}}
+    ($type_:ty, $name:ident) => {
+        STRUCT! {struct $name {
+            cElems: $crate::shared::ntdef::ULONG,
+            pElems: *mut $type_,
+        }}
+    };
 }
 TYPEDEF_CA!(CHAR, CAC);
 TYPEDEF_CA!(UCHAR, CAUB);
@@ -56,7 +56,7 @@ TYPEDEF_CA!(LPWSTR, CALPWSTR);
 TYPEDEF_CA!(FILETIME, CAFILETIME);
 TYPEDEF_CA!(CLIPDATA, CACLIPDATA);
 TYPEDEF_CA!(CLSID, CACLSID);
-UNION!{union PROPVARIANT_data {
+UNION! {union PROPVARIANT_data {
     [u64; 1] [u64; 2],
     cVal cVal_mut: CHAR,
     bVal bVal_mut: UCHAR,
@@ -132,7 +132,7 @@ UNION!{union PROPVARIANT_data {
 }}
 // This is actually defined as a union between this struct
 // and DECIMAL. I don't this we need to do that.
-STRUCT!{struct PROPVARIANT {
+STRUCT! {struct PROPVARIANT {
     vt: VARTYPE,
     wReserved1: WORD,
     wReserved2: WORD,
@@ -155,16 +155,16 @@ pub const PID_MAX_READONLY: DWORD = 0xbfffffff;
 pub const PRSPEC_INVALID: ULONG = 0xffffffff;
 pub const PRSPEC_LPWSTR: ULONG = 0;
 pub const PRSPEC_PROPID: ULONG = 1;
-UNION!{union PROPSPEC_u {
+UNION! {union PROPSPEC_u {
     [u32; 1] [u64; 1],
     propid propid_mut: PROPID,
     lpwstr lpwstr_mut: LPOLESTR,
 }}
-STRUCT!{struct PROPSPEC {
+STRUCT! {struct PROPSPEC {
     ulKind: ULONG,
     u: PROPSPEC_u,
 }}
-STRUCT!{struct STATPROPSTG {
+STRUCT! {struct STATPROPSTG {
     lpwstrName: LPOLESTR,
     propid: PROPID,
     vt: VARTYPE,
@@ -182,7 +182,7 @@ pub fn PROPSETHDR_OSVER_MINOR(dwOSVer: DWORD) -> BYTE {
     HIBYTE(LOWORD(dwOSVer))
 }
 pub const PROPSETHDR_OSVERSION_UNKNOWN: DWORD = 0xFFFFFFFF;
-STRUCT!{struct STATPROPSETSTG {
+STRUCT! {struct STATPROPSETSTG {
     fmtid: FMTID,
     clsid: CLSID,
     grfFlags: DWORD,
@@ -191,7 +191,7 @@ STRUCT!{struct STATPROPSETSTG {
     atime: FILETIME,
     dwOSVersion: DWORD,
 }}
-RIDL!{#[uuid(0x00000138, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL! {#[uuid(0x00000138, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IPropertyStorage(IPropertyStorageVtbl): IUnknown(IUnknownVtbl) {
     fn ReadMultiple(
         cpspec: ULONG,
@@ -241,7 +241,7 @@ interface IPropertyStorage(IPropertyStorageVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 pub type LPPROPERTYSETSTORAGE = *mut IPropertySetStorage;
-RIDL!{#[uuid(0x0000013A, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL! {#[uuid(0x0000013A, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IPropertySetStorage(IPropertySetStorageVtbl): IUnknown(IUnknownVtbl) {
     fn Create(
         rfmtid: REFFMTID,
@@ -263,7 +263,7 @@ interface IPropertySetStorage(IPropertySetStorageVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 pub type LPENUMSTATPROPSTG = *mut IEnumSTATPROPSTG;
-RIDL!{#[uuid(0x00000139, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL! {#[uuid(0x00000139, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IEnumSTATPROPSTG(IEnumSTATPROPSTGVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
@@ -279,7 +279,7 @@ interface IEnumSTATPROPSTG(IEnumSTATPROPSTGVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 pub type LPENUMSTATPROPSETSTG = *mut IEnumSTATPROPSETSTG;
-RIDL!{#[uuid(0x0000013B, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL! {#[uuid(0x0000013B, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IEnumSTATPROPSETSTG(IEnumSTATPROPSETSTGVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
@@ -339,7 +339,7 @@ pub const PIDMSI_OWNER: DWORD = 0x00000008;
 pub const PIDMSI_RATING: DWORD = 0x00000009;
 pub const PIDMSI_PRODUCTION: DWORD = 0x0000000A;
 pub const PIDMSI_COPYRIGHT: DWORD = 0x0000000B;
-ENUM!{enum PIDMSI_STATUS_VALUE {
+ENUM! {enum PIDMSI_STATUS_VALUE {
     PIDMSI_STATUS_NORMAL = 0,
     PIDMSI_STATUS_NEW,
     PIDMSI_STATUS_PRELIM,
@@ -352,23 +352,15 @@ ENUM!{enum PIDMSI_STATUS_VALUE {
     PIDMSI_STATUS_OTHER = 0x7fff,
 }}
 extern "system" {
-    pub fn PropVariantCopy(
-        pvarDest: *mut PROPVARIANT,
-        pvarSrc: *const PROPVARIANT,
-    ) -> HRESULT;
-    pub fn PropVariantClear(
-        pvar: *mut PROPVARIANT,
-    ) -> HRESULT;
-    pub fn FreePropVariantArray(
-        cVariants: ULONG,
-        rgvars: *mut PROPVARIANT,
-    ) -> HRESULT;
+    pub fn PropVariantCopy(pvarDest: *mut PROPVARIANT, pvarSrc: *const PROPVARIANT) -> HRESULT;
+    pub fn PropVariantClear(pvar: *mut PROPVARIANT) -> HRESULT;
+    pub fn FreePropVariantArray(cVariants: ULONG, rgvars: *mut PROPVARIANT) -> HRESULT;
 }
 // #[inline]
 // pub fn PropVariantInit(pvar: *mut PROPVARIANT) {
 //     memset(pvar, 0, sizeof(PROPVARIANT))
 // }
-STRUCT!{struct SERIALIZEDPROPERTYVALUE {
+STRUCT! {struct SERIALIZEDPROPERTYVALUE {
     dwType: DWORD,
     rgb: *mut BYTE,
 }}
@@ -387,6 +379,6 @@ extern "system" {
         pprop: *const SERIALIZEDPROPERTYVALUE,
         CodePage: USHORT,
         pvar: *mut PROPVARIANT,
-        pma: *mut PMemoryAllocator
+        pma: *mut PMemoryAllocator,
     ) -> BOOLEAN;
 }

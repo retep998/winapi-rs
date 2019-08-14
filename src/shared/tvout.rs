@@ -5,7 +5,7 @@
 // except according to those terms.
 use shared::guiddef::GUID;
 use shared::minwindef::{UCHAR, ULONG};
-STRUCT!{struct VIDEOPARAMETERS {
+STRUCT! {struct VIDEOPARAMETERS {
     Guid: GUID,
     dwOffset: ULONG,
     dwCommand: ULONG,

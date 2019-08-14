@@ -7,11 +7,7 @@ use shared::lmcons::{LMSTR, NET_API_STATUS};
 use shared::minwindef::{BOOL, DWORD, LPBYTE, LPDWORD};
 use um::winnt::LPCWSTR;
 extern "system" {
-    pub fn NetWkstaGetInfo(
-        servername: LMSTR,
-        level: DWORD,
-        bufptr: *mut LPBYTE,
-    ) -> NET_API_STATUS;
+    pub fn NetWkstaGetInfo(servername: LMSTR, level: DWORD, bufptr: *mut LPBYTE) -> NET_API_STATUS;
     pub fn NetWkstaSetInfo(
         servername: LMSTR,
         level: DWORD,
@@ -59,7 +55,7 @@ extern "system" {
         resumehandle: LPDWORD,
     ) -> NET_API_STATUS;
 }
-STRUCT!{struct WKSTA_INFO_100 {
+STRUCT! {struct WKSTA_INFO_100 {
     wki100_platform_id: DWORD,
     wki100_computername: LMSTR,
     wki100_langroup: LMSTR,
@@ -68,7 +64,7 @@ STRUCT!{struct WKSTA_INFO_100 {
 }}
 pub type PWKSTA_INFO_100 = *mut WKSTA_INFO_100;
 pub type LPWKSTA_INFO_100 = *mut WKSTA_INFO_100;
-STRUCT!{struct WKSTA_INFO_101 {
+STRUCT! {struct WKSTA_INFO_101 {
     wki101_platform_id: DWORD,
     wki101_computername: LMSTR,
     wki101_langroup: LMSTR,
@@ -78,7 +74,7 @@ STRUCT!{struct WKSTA_INFO_101 {
 }}
 pub type PWKSTA_INFO_101 = *mut WKSTA_INFO_101;
 pub type LPWKSTA_INFO_101 = *mut WKSTA_INFO_101;
-STRUCT!{struct WKSTA_INFO_102 {
+STRUCT! {struct WKSTA_INFO_102 {
     wki102_platform_id: DWORD,
     wki102_computername: LMSTR,
     wki102_langroup: LMSTR,
@@ -89,7 +85,7 @@ STRUCT!{struct WKSTA_INFO_102 {
 }}
 pub type PWKSTA_INFO_102 = *mut WKSTA_INFO_102;
 pub type LPWKSTA_INFO_102 = *mut WKSTA_INFO_102;
-STRUCT!{struct WKSTA_INFO_302 {
+STRUCT! {struct WKSTA_INFO_302 {
     wki302_char_wait: DWORD,
     wki302_collection_time: DWORD,
     wki302_maximum_collection_count: DWORD,
@@ -113,7 +109,7 @@ STRUCT!{struct WKSTA_INFO_302 {
 }}
 pub type PWKSTA_INFO_302 = *mut WKSTA_INFO_302;
 pub type LPWKSTA_INFO_302 = *mut WKSTA_INFO_302;
-STRUCT!{struct WKSTA_INFO_402 {
+STRUCT! {struct WKSTA_INFO_402 {
     wki402_char_wait: DWORD,
     wki402_collection_time: DWORD,
     wki402_maximum_collection_count: DWORD,
@@ -138,7 +134,7 @@ STRUCT!{struct WKSTA_INFO_402 {
 }}
 pub type PWKSTA_INFO_402 = *mut WKSTA_INFO_402;
 pub type LPWKSTA_INFO_402 = *mut WKSTA_INFO_402;
-STRUCT!{struct WKSTA_INFO_502 {
+STRUCT! {struct WKSTA_INFO_502 {
     wki502_char_wait: DWORD,
     wki502_collection_time: DWORD,
     wki502_maximum_collection_count: DWORD,
@@ -177,172 +173,172 @@ STRUCT!{struct WKSTA_INFO_502 {
 }}
 pub type PWKSTA_INFO_502 = *mut WKSTA_INFO_502;
 pub type LPWKSTA_INFO_502 = *mut WKSTA_INFO_502;
-STRUCT!{struct WKSTA_INFO_1010 {
+STRUCT! {struct WKSTA_INFO_1010 {
     wki1010_char_wait: DWORD,
 }}
 pub type PWKSTA_INFO_1010 = *mut WKSTA_INFO_1010;
 pub type LPWKSTA_INFO_1010 = *mut WKSTA_INFO_1010;
-STRUCT!{struct WKSTA_INFO_1011 {
+STRUCT! {struct WKSTA_INFO_1011 {
     wki1011_collection_time: DWORD,
 }}
 pub type PWKSTA_INFO_1011 = *mut WKSTA_INFO_1011;
 pub type LPWKSTA_INFO_1011 = *mut WKSTA_INFO_1011;
-STRUCT!{struct WKSTA_INFO_1012 {
+STRUCT! {struct WKSTA_INFO_1012 {
     wki1012_maximum_collection_count: DWORD,
 }}
 pub type PWKSTA_INFO_1012 = *mut WKSTA_INFO_1012;
 pub type LPWKSTA_INFO_1012 = *mut WKSTA_INFO_1012;
-STRUCT!{struct WKSTA_INFO_1027 {
+STRUCT! {struct WKSTA_INFO_1027 {
     wki1027_errlog_sz: DWORD,
 }}
 pub type PWKSTA_INFO_1027 = *mut WKSTA_INFO_1027;
 pub type LPWKSTA_INFO_1027 = *mut WKSTA_INFO_1027;
-STRUCT!{struct WKSTA_INFO_1028 {
+STRUCT! {struct WKSTA_INFO_1028 {
     wki1028_print_buf_time: DWORD,
 }}
 pub type PWKSTA_INFO_1028 = *mut WKSTA_INFO_1028;
 pub type LPWKSTA_INFO_1028 = *mut WKSTA_INFO_1028;
-STRUCT!{struct WKSTA_INFO_1032 {
+STRUCT! {struct WKSTA_INFO_1032 {
     wki1032_wrk_heuristics: DWORD,
 }}
 pub type PWKSTA_INFO_1032 = *mut WKSTA_INFO_1032;
 pub type LPWKSTA_INFO_1032 = *mut WKSTA_INFO_1032;
-STRUCT!{struct WKSTA_INFO_1013 {
+STRUCT! {struct WKSTA_INFO_1013 {
     wki1013_keep_conn: DWORD,
 }}
 pub type PWKSTA_INFO_1013 = *mut WKSTA_INFO_1013;
 pub type LPWKSTA_INFO_1013 = *mut WKSTA_INFO_1013;
-STRUCT!{struct WKSTA_INFO_1018 {
+STRUCT! {struct WKSTA_INFO_1018 {
     wki1018_sess_timeout: DWORD,
 }}
 pub type PWKSTA_INFO_1018 = *mut WKSTA_INFO_1018;
 pub type LPWKSTA_INFO_1018 = *mut WKSTA_INFO_1018;
-STRUCT!{struct WKSTA_INFO_1023 {
+STRUCT! {struct WKSTA_INFO_1023 {
     wki1023_siz_char_buf: DWORD,
 }}
 pub type PWKSTA_INFO_1023 = *mut WKSTA_INFO_1023;
 pub type LPWKSTA_INFO_1023 = *mut WKSTA_INFO_1023;
-STRUCT!{struct WKSTA_INFO_1033 {
+STRUCT! {struct WKSTA_INFO_1033 {
     wki1033_max_threads: DWORD,
 }}
 pub type PWKSTA_INFO_1033 = *mut WKSTA_INFO_1033;
 pub type LPWKSTA_INFO_1033 = *mut WKSTA_INFO_1033;
-STRUCT!{struct WKSTA_INFO_1041 {
+STRUCT! {struct WKSTA_INFO_1041 {
     wki1041_lock_quota: DWORD,
 }}
 pub type PWKSTA_INFO_1041 = *mut WKSTA_INFO_1041;
 pub type LPWKSTA_INFO_1041 = *mut WKSTA_INFO_1041;
-STRUCT!{struct WKSTA_INFO_1042 {
+STRUCT! {struct WKSTA_INFO_1042 {
     wki1042_lock_increment: DWORD,
 }}
 pub type PWKSTA_INFO_1042 = *mut WKSTA_INFO_1042;
 pub type LPWKSTA_INFO_1042 = *mut WKSTA_INFO_1042;
-STRUCT!{struct WKSTA_INFO_1043 {
+STRUCT! {struct WKSTA_INFO_1043 {
     wki1043_lock_maximum: DWORD,
 }}
 pub type PWKSTA_INFO_1043 = *mut WKSTA_INFO_1043;
 pub type LPWKSTA_INFO_1043 = *mut WKSTA_INFO_1043;
-STRUCT!{struct WKSTA_INFO_1044 {
+STRUCT! {struct WKSTA_INFO_1044 {
     wki1044_pipe_increment: DWORD,
 }}
 pub type PWKSTA_INFO_1044 = *mut WKSTA_INFO_1044;
 pub type LPWKSTA_INFO_1044 = *mut WKSTA_INFO_1044;
-STRUCT!{struct WKSTA_INFO_1045 {
+STRUCT! {struct WKSTA_INFO_1045 {
     wki1045_pipe_maximum: DWORD,
 }}
 pub type PWKSTA_INFO_1045 = *mut WKSTA_INFO_1045;
 pub type LPWKSTA_INFO_1045 = *mut WKSTA_INFO_1045;
-STRUCT!{struct WKSTA_INFO_1046 {
+STRUCT! {struct WKSTA_INFO_1046 {
     wki1046_dormant_file_limit: DWORD,
 }}
 pub type PWKSTA_INFO_1046 = *mut WKSTA_INFO_1046;
 pub type LPWKSTA_INFO_1046 = *mut WKSTA_INFO_1046;
-STRUCT!{struct WKSTA_INFO_1047 {
+STRUCT! {struct WKSTA_INFO_1047 {
     wki1047_cache_file_timeout: DWORD,
 }}
 pub type PWKSTA_INFO_1047 = *mut WKSTA_INFO_1047;
 pub type LPWKSTA_INFO_1047 = *mut WKSTA_INFO_1047;
-STRUCT!{struct WKSTA_INFO_1048 {
+STRUCT! {struct WKSTA_INFO_1048 {
     wki1048_use_opportunistic_locking: BOOL,
 }}
 pub type PWKSTA_INFO_1048 = *mut WKSTA_INFO_1048;
 pub type LPWKSTA_INFO_1048 = *mut WKSTA_INFO_1048;
-STRUCT!{struct WKSTA_INFO_1049 {
+STRUCT! {struct WKSTA_INFO_1049 {
     wki1049_use_unlock_behind: BOOL,
 }}
 pub type PWKSTA_INFO_1049 = *mut WKSTA_INFO_1049;
 pub type LPWKSTA_INFO_1049 = *mut WKSTA_INFO_1049;
-STRUCT!{struct WKSTA_INFO_1050 {
+STRUCT! {struct WKSTA_INFO_1050 {
     wki1050_use_close_behind: BOOL,
 }}
 pub type PWKSTA_INFO_1050 = *mut WKSTA_INFO_1050;
 pub type LPWKSTA_INFO_1050 = *mut WKSTA_INFO_1050;
-STRUCT!{struct WKSTA_INFO_1051 {
+STRUCT! {struct WKSTA_INFO_1051 {
     wki1051_buf_named_pipes: BOOL,
 }}
 pub type PWKSTA_INFO_1051 = *mut WKSTA_INFO_1051;
 pub type LPWKSTA_INFO_1051 = *mut WKSTA_INFO_1051;
-STRUCT!{struct WKSTA_INFO_1052 {
+STRUCT! {struct WKSTA_INFO_1052 {
     wki1052_use_lock_read_unlock: BOOL,
 }}
 pub type PWKSTA_INFO_1052 = *mut WKSTA_INFO_1052;
 pub type LPWKSTA_INFO_1052 = *mut WKSTA_INFO_1052;
-STRUCT!{struct WKSTA_INFO_1053 {
+STRUCT! {struct WKSTA_INFO_1053 {
     wki1053_utilize_nt_caching: BOOL,
 }}
 pub type PWKSTA_INFO_1053 = *mut WKSTA_INFO_1053;
 pub type LPWKSTA_INFO_1053 = *mut WKSTA_INFO_1053;
-STRUCT!{struct WKSTA_INFO_1054 {
+STRUCT! {struct WKSTA_INFO_1054 {
     wki1054_use_raw_read: BOOL,
 }}
 pub type PWKSTA_INFO_1054 = *mut WKSTA_INFO_1054;
 pub type LPWKSTA_INFO_1054 = *mut WKSTA_INFO_1054;
-STRUCT!{struct WKSTA_INFO_1055 {
+STRUCT! {struct WKSTA_INFO_1055 {
     wki1055_use_raw_write: BOOL,
 }}
 pub type PWKSTA_INFO_1055 = *mut WKSTA_INFO_1055;
 pub type LPWKSTA_INFO_1055 = *mut WKSTA_INFO_1055;
-STRUCT!{struct WKSTA_INFO_1056 {
+STRUCT! {struct WKSTA_INFO_1056 {
     wki1056_use_write_raw_data: BOOL,
 }}
 pub type PWKSTA_INFO_1056 = *mut WKSTA_INFO_1056;
 pub type LPWKSTA_INFO_1056 = *mut WKSTA_INFO_1056;
-STRUCT!{struct WKSTA_INFO_1057 {
+STRUCT! {struct WKSTA_INFO_1057 {
     wki1057_use_encryption: BOOL,
 }}
 pub type PWKSTA_INFO_1057 = *mut WKSTA_INFO_1057;
 pub type LPWKSTA_INFO_1057 = *mut WKSTA_INFO_1057;
-STRUCT!{struct WKSTA_INFO_1058 {
+STRUCT! {struct WKSTA_INFO_1058 {
     wki1058_buf_files_deny_write: BOOL,
 }}
 pub type PWKSTA_INFO_1058 = *mut WKSTA_INFO_1058;
 pub type LPWKSTA_INFO_1058 = *mut WKSTA_INFO_1058;
-STRUCT!{struct WKSTA_INFO_1059 {
+STRUCT! {struct WKSTA_INFO_1059 {
     wki1059_buf_read_only_files: BOOL,
 }}
 pub type PWKSTA_INFO_1059 = *mut WKSTA_INFO_1059;
 pub type LPWKSTA_INFO_1059 = *mut WKSTA_INFO_1059;
-STRUCT!{struct WKSTA_INFO_1060 {
+STRUCT! {struct WKSTA_INFO_1060 {
     wki1060_force_core_create_mode: BOOL,
 }}
 pub type PWKSTA_INFO_1060 = *mut WKSTA_INFO_1060;
 pub type LPWKSTA_INFO_1060 = *mut WKSTA_INFO_1060;
-STRUCT!{struct WKSTA_INFO_1061 {
+STRUCT! {struct WKSTA_INFO_1061 {
     wki1061_use_512_byte_max_transfer: BOOL,
 }}
 pub type PWKSTA_INFO_1061 = *mut WKSTA_INFO_1061;
 pub type LPWKSTA_INFO_1061 = *mut WKSTA_INFO_1061;
-STRUCT!{struct WKSTA_INFO_1062 {
+STRUCT! {struct WKSTA_INFO_1062 {
     wki1062_read_ahead_throughput: DWORD,
 }}
 pub type PWKSTA_INFO_1062 = *mut WKSTA_INFO_1062;
 pub type LPWKSTA_INFO_1062 = *mut WKSTA_INFO_1062;
-STRUCT!{struct WKSTA_USER_INFO_0 {
+STRUCT! {struct WKSTA_USER_INFO_0 {
     wkui0_username: LMSTR,
 }}
 pub type PWKSTA_USER_INFO_0 = *mut WKSTA_USER_INFO_0;
 pub type LPWKSTA_USER_INFO_0 = *mut WKSTA_USER_INFO_0;
-STRUCT!{struct WKSTA_USER_INFO_1 {
+STRUCT! {struct WKSTA_USER_INFO_1 {
     wkui1_username: LMSTR,
     wkui1_logon_domain: LMSTR,
     wkui1_oth_domains: LMSTR,
@@ -350,12 +346,12 @@ STRUCT!{struct WKSTA_USER_INFO_1 {
 }}
 pub type PWKSTA_USER_INFO_1 = *mut WKSTA_USER_INFO_1;
 pub type LPWKSTA_USER_INFO_1 = *mut WKSTA_USER_INFO_1;
-STRUCT!{struct WKSTA_USER_INFO_1101 {
+STRUCT! {struct WKSTA_USER_INFO_1101 {
     wkui1101_oth_domains: LMSTR,
 }}
 pub type PWKSTA_USER_INFO_1101 = *mut WKSTA_USER_INFO_1101;
 pub type LPWKSTA_USER_INFO_1101 = *mut WKSTA_USER_INFO_1101;
-STRUCT!{struct WKSTA_TRANSPORT_INFO_0 {
+STRUCT! {struct WKSTA_TRANSPORT_INFO_0 {
     wkti0_quality_of_service: DWORD,
     wkti0_number_of_vcs: DWORD,
     wkti0_transport_name: LMSTR,

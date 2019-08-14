@@ -6,17 +6,17 @@
 //! Type definitions for the basic types.
 use ctypes::{
     __int64, __uint64, c_char, c_double, c_int, c_long, c_schar, c_short, c_uchar, c_ulong,
-    c_ushort, c_void, wchar_t
+    c_ushort, c_void, wchar_t,
 };
 use shared::basetsd::{KAFFINITY, LONG_PTR, ULONG64, ULONG_PTR};
 use shared::guiddef::GUID;
 #[cfg(target_arch = "x86_64")]
-IFDEF!{
+IFDEF! {
 pub const MAX_NATURAL_ALIGNMENT: usize = 8;
 pub const MEMORY_ALLOCATION_ALIGNMENT: usize = 16;
 }
 #[cfg(not(target_arch = "x86_64"))]
-IFDEF!{
+IFDEF! {
 pub const MAX_NATURAL_ALIGNMENT: usize = 4;
 pub const MEMORY_ALLOCATION_ALIGNMENT: usize = 8;
 }
@@ -95,7 +95,7 @@ pub type PNZCH = *mut CHAR;
 pub type PCNZCH = *const CHAR;
 // Skipping TCHAR things
 pub type DOUBLE = c_double;
-STRUCT!{struct QUAD {
+STRUCT! {struct QUAD {
     UseThisFieldToCopy: __int64,
 }}
 pub type PSHORT = *mut SHORT;
@@ -117,13 +117,13 @@ pub type SCHAR = c_schar;
 pub type PSCHAR = *mut SCHAR;
 pub type PCSCHAR = *const SCHAR;
 pub const ALL_PROCESSOR_GROUPS: USHORT = 0xffff;
-STRUCT!{struct PROCESSOR_NUMBER {
+STRUCT! {struct PROCESSOR_NUMBER {
     Group: USHORT,
     Number: UCHAR,
     Reserved: UCHAR,
 }}
 pub type PPROCESSOR_NUMBER = *mut PROCESSOR_NUMBER;
-STRUCT!{struct GROUP_AFFINITY {
+STRUCT! {struct GROUP_AFFINITY {
     Mask: KAFFINITY,
     Group: USHORT,
     Reserved: [USHORT; 3],
@@ -150,7 +150,7 @@ pub type PCLONG = *mut CLONG;
 pub type LCID = ULONG;
 pub type PLCID = PULONG;
 pub type LANGID = USHORT;
-ENUM!{enum COMPARTMENT_ID {
+ENUM! {enum COMPARTMENT_ID {
     UNSPECIFIED_COMPARTMENT_ID = 0,
     DEFAULT_COMPARTMENT_ID,
 }}
@@ -184,7 +184,7 @@ pub const ERROR_SEVERITY_ERROR: ULONG = 0xC0000000;
 pub type SECURITY_STATUS = c_long;
 pub type TIME = LARGE_INTEGER;
 pub type PTIME = *mut TIME;
-STRUCT!{struct FLOAT128 {
+STRUCT! {struct FLOAT128 {
     LowPart: __int64,
     HighPart: __int64,
 }}
@@ -195,29 +195,29 @@ pub const MAXLONGLONG: LONGLONG = 0x7fffffffffffffff;
 pub type PLONGLONG = *mut LONGLONG;
 pub type PULONGLONG = *mut ULONGLONG;
 pub type USN = LONGLONG;
-UNION!{union LARGE_INTEGER {
+UNION! {union LARGE_INTEGER {
     [i64; 1],
     s s_mut: LARGE_INTEGER_s,
     QuadPart QuadPart_mut: LONGLONG,
 }}
-STRUCT!{struct LARGE_INTEGER_s {
+STRUCT! {struct LARGE_INTEGER_s {
     LowPart: ULONG,
     HighPart: LONG,
 }}
 pub type PLARGE_INTEGER = *mut LARGE_INTEGER;
-UNION!{union ULARGE_INTEGER {
+UNION! {union ULARGE_INTEGER {
     [u64; 1],
     s s_mut: ULARGE_INTEGER_s,
     QuadPart QuadPart_mut: ULONGLONG,
 }}
-STRUCT!{struct ULARGE_INTEGER_s {
+STRUCT! {struct ULARGE_INTEGER_s {
     LowPart: ULONG,
     HighPart: ULONG,
 }}
 pub type PULARGE_INTEGER = *mut ULARGE_INTEGER;
 pub type RTL_REFERENCE_COUNT = LONG_PTR;
 pub type PRTL_REFERENCE_COUNT = *mut RTL_REFERENCE_COUNT;
-STRUCT!{struct LUID {
+STRUCT! {struct LUID {
     LowPart: ULONG,
     HighPart: LONG,
 }}
@@ -226,15 +226,15 @@ pub type DWORDLONG = ULONGLONG;
 pub type PDWORDLONG = *mut DWORDLONG;
 pub type PHYSICAL_ADDRESS = LARGE_INTEGER;
 pub type PPHYSICAL_ADDRESS = *mut PHYSICAL_ADDRESS;
-ENUM!{enum EVENT_TYPE {
+ENUM! {enum EVENT_TYPE {
     NotificationEvent,
     SynchronizationEvent,
 }}
-ENUM!{enum TIMER_TYPE {
+ENUM! {enum TIMER_TYPE {
     NotificationTimer,
     SynchronizationTimer,
 }}
-ENUM!{enum WAIT_TYPE {
+ENUM! {enum WAIT_TYPE {
     WaitAll,
     WaitAny,
     WaitNotification,
@@ -243,7 +243,7 @@ ENUM!{enum WAIT_TYPE {
 pub type PSZ = *mut CHAR;
 pub type PCSZ = *const c_char;
 pub type RTL_STRING_LENGTH_TYPE = USHORT;
-STRUCT!{struct STRING {
+STRUCT! {struct STRING {
     Length: USHORT,
     MaximumLength: USHORT,
     Buffer: PCHAR,
@@ -254,7 +254,7 @@ pub type PANSI_STRING = PSTRING;
 pub type OEM_STRING = STRING;
 pub type POEM_STRING = PSTRING;
 pub type PCOEM_STRING = *const STRING;
-STRUCT!{struct CSTRING {
+STRUCT! {struct CSTRING {
     Length: USHORT,
     MaximumLength: USHORT,
     Buffer: *const c_char,
@@ -263,7 +263,7 @@ pub type PCSTRING = *mut CSTRING;
 pub const ANSI_NULL: CHAR = 0;
 pub type CANSI_STRING = STRING;
 pub type PCANSI_STRING = PSTRING;
-STRUCT!{struct UNICODE_STRING {
+STRUCT! {struct UNICODE_STRING {
     Length: USHORT,
     MaximumLength: USHORT,
     Buffer: PWCH,
@@ -275,48 +275,46 @@ pub const UNICODE_STRING_MAX_BYTES: USHORT = 65534;
 pub const UNICODE_STRING_MAX_CHARS: usize = 32767;
 pub type BOOLEAN = UCHAR;
 pub type PBOOLEAN = *mut BOOLEAN;
-STRUCT!{struct LIST_ENTRY {
+STRUCT! {struct LIST_ENTRY {
     Flink: *mut LIST_ENTRY,
     Blink: *mut LIST_ENTRY,
 }}
 pub type PLIST_ENTRY = *mut LIST_ENTRY;
 pub type PRLIST_ENTRY = *mut LIST_ENTRY; // Restricted pointer
-STRUCT!{struct SINGLE_LIST_ENTRY {
+STRUCT! {struct SINGLE_LIST_ENTRY {
     Next: *mut SINGLE_LIST_ENTRY,
 }}
 pub type PSINGLE_LIST_ENTRY = *mut SINGLE_LIST_ENTRY;
-STRUCT!{struct RTL_BALANCED_NODE {
+STRUCT! {struct RTL_BALANCED_NODE {
     u: RTL_BALANCED_NODE_u,
     ParentValue: ULONG_PTR,
 }}
-UNION!{union RTL_BALANCED_NODE_u {
+UNION! {union RTL_BALANCED_NODE_u {
     [usize; 2],
     Children Children_mut: [*mut RTL_BALANCED_NODE; 2],
     s s_mut: RTL_BALANCED_NODE_s,
 }}
-STRUCT!{struct RTL_BALANCED_NODE_s {
+STRUCT! {struct RTL_BALANCED_NODE_s {
     Left: *mut RTL_BALANCED_NODE,
     Right: *mut RTL_BALANCED_NODE,
 }}
 pub const RTL_BALANCED_NODE_RESERVED_PARENT_MASK: ULONG_PTR = 3;
 pub type PRTL_BALANCED_NODE = *mut RTL_BALANCED_NODE;
 #[inline]
-pub unsafe fn RTL_BALANCED_NODE_GET_PARENT_POINTER(
-    Node: PRTL_BALANCED_NODE,
-) -> PRTL_BALANCED_NODE {
+pub unsafe fn RTL_BALANCED_NODE_GET_PARENT_POINTER(Node: PRTL_BALANCED_NODE) -> PRTL_BALANCED_NODE {
     ((*Node).ParentValue & !RTL_BALANCED_NODE_RESERVED_PARENT_MASK) as *mut RTL_BALANCED_NODE
 }
-STRUCT!{struct LIST_ENTRY32 {
+STRUCT! {struct LIST_ENTRY32 {
     Flink: ULONG,
     Blink: ULONG,
 }}
 pub type PLIST_ENTRY32 = *mut LIST_ENTRY32;
-STRUCT!{struct LIST_ENTRY64 {
+STRUCT! {struct LIST_ENTRY64 {
     Flink: ULONGLONG,
     Blink: ULONGLONG,
 }}
 pub type PLIST_ENTRY64 = *mut LIST_ENTRY64;
-STRUCT!{struct SINGLE_LIST_ENTRY32 {
+STRUCT! {struct SINGLE_LIST_ENTRY32 {
     Next: ULONG,
 }}
 pub type PSINGLE_LIST_ENTRY32 = *mut SINGLE_LIST_ENTRY32;
@@ -330,12 +328,12 @@ pub unsafe fn ListEntry64To32(l64: PLIST_ENTRY64, l32: PLIST_ENTRY32) {
     (*l32).Flink = (*l64).Flink as ULONG;
     (*l32).Blink = (*l64).Blink as ULONG;
 }
-STRUCT!{struct WNF_STATE_NAME {
+STRUCT! {struct WNF_STATE_NAME {
     Data: [ULONG; 2],
 }}
 pub type PWNF_STATE_NAME = *mut WNF_STATE_NAME;
 pub type PCWNF_STATE_NAME = *const WNF_STATE_NAME;
-STRUCT!{struct STRING32 {
+STRUCT! {struct STRING32 {
     Length: USHORT,
     MaximumLength: USHORT,
     Buffer: ULONG,
@@ -345,7 +343,7 @@ pub type UNICODE_STRING32 = STRING32;
 pub type PUNICODE_STRING32 = *mut UNICODE_STRING32;
 pub type ANSI_STRING32 = STRING32;
 pub type PANSI_STRING32 = *mut ANSI_STRING32;
-STRUCT!{struct STRING64 {
+STRUCT! {struct STRING64 {
     Length: USHORT,
     MaximumLength: USHORT,
     Buffer: ULONGLONG,
@@ -366,7 +364,7 @@ pub const OBJ_FORCE_ACCESS_CHECK: ULONG = 0x00000400;
 pub const OBJ_IGNORE_IMPERSONATED_DEVICEMAP: ULONG = 0x00000800;
 pub const OBJ_DONT_REPARSE: ULONG = 0x00001000;
 pub const OBJ_VALID_ATTRIBUTES: ULONG = 0x00001FF2;
-STRUCT!{struct OBJECT_ATTRIBUTES64 {
+STRUCT! {struct OBJECT_ATTRIBUTES64 {
     Length: ULONG,
     RootDirectory: ULONG64,
     ObjectName: ULONG64,
@@ -376,7 +374,7 @@ STRUCT!{struct OBJECT_ATTRIBUTES64 {
 }}
 pub type POBJECT_ATTRIBUTES64 = *mut OBJECT_ATTRIBUTES64;
 pub type PCOBJECT_ATTRIBUTES64 = *const OBJECT_ATTRIBUTES64;
-STRUCT!{struct OBJECT_ATTRIBUTES32 {
+STRUCT! {struct OBJECT_ATTRIBUTES32 {
     Length: ULONG,
     RootDirectory: ULONG,
     ObjectName: ULONG,
@@ -386,7 +384,7 @@ STRUCT!{struct OBJECT_ATTRIBUTES32 {
 }}
 pub type POBJECT_ATTRIBUTES32 = *mut OBJECT_ATTRIBUTES32;
 pub type PCOBJECT_ATTRIBUTES32 = *const OBJECT_ATTRIBUTES32;
-STRUCT!{struct OBJECT_ATTRIBUTES {
+STRUCT! {struct OBJECT_ATTRIBUTES {
     Length: ULONG,
     RootDirectory: HANDLE,
     ObjectName: PUNICODE_STRING,
@@ -416,7 +414,7 @@ pub const FALSE: BOOLEAN = 0;
 pub const TRUE: BOOLEAN = 1;
 pub const NULL: PVOID = 0 as PVOID;
 pub const NULL64: PVOID64 = 0;
-STRUCT!{struct OBJECTID {
+STRUCT! {struct OBJECTID {
     Lineage: GUID,
     Uniquifier: ULONG,
 }}
@@ -432,13 +430,13 @@ pub const MAXULONG: ULONG = 0xffffffff;
 // PEXCEPTION_ROUTINE: Can't define here, because it needs EXCEPTION_RECORD and CONTEXT.
 pub type KIRQL = UCHAR;
 pub type PKIRQL = *mut KIRQL;
-ENUM!{enum NT_PRODUCT_TYPE {
+ENUM! {enum NT_PRODUCT_TYPE {
     NtProductWinNt = 1,
     NtProductLanManNt,
     NtProductServer,
 }}
 pub type PNT_PRODUCT_TYPE = *mut NT_PRODUCT_TYPE;
-ENUM!{enum SUITE_TYPE {
+ENUM! {enum SUITE_TYPE {
     SmallBusiness,
     Enterprise,
     BackOffice,
@@ -1023,19 +1021,25 @@ pub const SORT_GEORGIAN_MODERN: USHORT = 0x1;
 macro_rules! MAKELANGID {
     ($p:expr, $s:expr) => {
         (($s as USHORT) << 10) | ($p as USHORT)
-    }
+    };
 }
 #[inline]
-pub fn MAKELANGID(p: USHORT, s: USHORT) -> LANGID { (s << 10) | p }
+pub fn MAKELANGID(p: USHORT, s: USHORT) -> LANGID {
+    (s << 10) | p
+}
 #[inline]
-pub fn PRIMARYLANGID(lgid: LANGID) -> USHORT { lgid & 0x3ff }
+pub fn PRIMARYLANGID(lgid: LANGID) -> USHORT {
+    lgid & 0x3ff
+}
 #[inline]
-pub fn SUBLANGID(lgid: LANGID) -> USHORT { lgid >> 10 }
+pub fn SUBLANGID(lgid: LANGID) -> USHORT {
+    lgid >> 10
+}
 pub const NLS_VALID_LOCALE_MASK: ULONG = 0x000fffff;
 macro_rules! MAKELCID {
     ($lgid:expr, $srtid:expr) => {
         (($srtid as ULONG) << 16) | ($lgid as ULONG)
-    }
+    };
 }
 #[inline]
 pub fn MAKELCID(lgid: LANGID, srtid: USHORT) -> LCID {
@@ -1046,26 +1050,38 @@ pub fn MAKESORTLCID(lgid: LANGID, srtid: USHORT, ver: USHORT) -> LCID {
     MAKELCID(lgid, srtid) | ((ver as ULONG) << 20)
 }
 #[inline]
-pub fn LANGIDFROMLCID(lcid: LCID) -> LANGID { lcid as LANGID }
+pub fn LANGIDFROMLCID(lcid: LCID) -> LANGID {
+    lcid as LANGID
+}
 #[inline]
-pub fn SORTIDFROMLCID(lcid: LCID) -> USHORT { ((lcid >> 16) & 0xf) as USHORT }
+pub fn SORTIDFROMLCID(lcid: LCID) -> USHORT {
+    ((lcid >> 16) & 0xf) as USHORT
+}
 #[inline]
-pub fn SORTVERSIONFROMLCID(lcid: LCID) -> USHORT { ((lcid >> 16) & 0xf) as USHORT }
+pub fn SORTVERSIONFROMLCID(lcid: LCID) -> USHORT {
+    ((lcid >> 16) & 0xf) as USHORT
+}
 pub const LOCALE_NAME_MAX_LENGTH: usize = 85;
 pub const LANG_SYSTEM_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_SYS_DEFAULT);
 pub const LANG_USER_DEFAULT: LANGID = MAKELANGID!(LANG_NEUTRAL, SUBLANG_DEFAULT);
 pub const LOCALE_SYSTEM_DEFAULT: LCID = MAKELCID!(LANG_SYSTEM_DEFAULT, SORT_DEFAULT);
 pub const LOCALE_USER_DEFAULT: LCID = MAKELCID!(LANG_USER_DEFAULT, SORT_DEFAULT);
-pub const LOCALE_CUSTOM_DEFAULT: LCID
-    = MAKELCID!(MAKELANGID!(LANG_NEUTRAL, SUBLANG_CUSTOM_DEFAULT), SORT_DEFAULT);
-pub const LOCALE_CUSTOM_UNSPECIFIED: LCID
-    = MAKELCID!(MAKELANGID!(LANG_NEUTRAL, SUBLANG_CUSTOM_UNSPECIFIED), SORT_DEFAULT);
-pub const LOCALE_CUSTOM_UI_DEFAULT: LCID
-    = MAKELCID!(MAKELANGID!(LANG_NEUTRAL, SUBLANG_UI_CUSTOM_DEFAULT), SORT_DEFAULT);
-pub const LOCALE_NEUTRAL: LCID
-    = MAKELCID!(MAKELANGID!(LANG_NEUTRAL, SUBLANG_NEUTRAL), SORT_DEFAULT);
-pub const LOCALE_INVARIANT: LCID
-    = MAKELCID!(MAKELANGID!(LANG_INVARIANT, SUBLANG_NEUTRAL), SORT_DEFAULT);
+pub const LOCALE_CUSTOM_DEFAULT: LCID = MAKELCID!(
+    MAKELANGID!(LANG_NEUTRAL, SUBLANG_CUSTOM_DEFAULT),
+    SORT_DEFAULT
+);
+pub const LOCALE_CUSTOM_UNSPECIFIED: LCID = MAKELCID!(
+    MAKELANGID!(LANG_NEUTRAL, SUBLANG_CUSTOM_UNSPECIFIED),
+    SORT_DEFAULT
+);
+pub const LOCALE_CUSTOM_UI_DEFAULT: LCID = MAKELCID!(
+    MAKELANGID!(LANG_NEUTRAL, SUBLANG_UI_CUSTOM_DEFAULT),
+    SORT_DEFAULT
+);
+pub const LOCALE_NEUTRAL: LCID =
+    MAKELCID!(MAKELANGID!(LANG_NEUTRAL, SUBLANG_NEUTRAL), SORT_DEFAULT);
+pub const LOCALE_INVARIANT: LCID =
+    MAKELCID!(MAKELANGID!(LANG_INVARIANT, SUBLANG_NEUTRAL), SORT_DEFAULT);
 pub const LOCALE_TRANSIENT_KEYBOARD1: LCID = 0x2000;
 pub const LOCALE_TRANSIENT_KEYBOARD2: LCID = 0x2400;
 pub const LOCALE_TRANSIENT_KEYBOARD3: LCID = 0x2800;

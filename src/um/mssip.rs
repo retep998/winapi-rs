@@ -24,20 +24,20 @@ pub const SPC_DIGEST_GENERATE_FLAG: DWORD = 0x200;
 pub const SPC_DIGEST_SIGN_FLAG: DWORD = 0x400;
 pub const SPC_RELAXED_PE_MARKER_CHECK: DWORD = 0x800;
 pub const SPC_MARKER_CHECK_SKIP_SIP_INDIRECT_DATA_FLAG: DWORD = 0x00000001;
-pub const SPC_MARKER_CHECK_CURRENTLY_SUPPORTED_FLAGS: DWORD
-    = SPC_MARKER_CHECK_SKIP_SIP_INDIRECT_DATA_FLAG;
+pub const SPC_MARKER_CHECK_CURRENTLY_SUPPORTED_FLAGS: DWORD =
+    SPC_MARKER_CHECK_SKIP_SIP_INDIRECT_DATA_FLAG;
 pub const MSSIP_ADDINFO_NONE: DWORD = 0;
 pub const MSSIP_ADDINFO_FLAT: DWORD = 1;
 pub const MSSIP_ADDINFO_CATMEMBER: DWORD = 2;
 pub const MSSIP_ADDINFO_BLOB: DWORD = 3;
 pub const MSSIP_ADDINFO_NONMSSIP: DWORD = 500;
-UNION!{union SIP_SUBJECTINFO_u {
+UNION! {union SIP_SUBJECTINFO_u {
     [usize; 1],
     psFlat psFlat_mut: *mut MS_ADDINFO_FLAT,
     psCatMember psCatMember_mut: *mut MS_ADDINFO_CATALOGMEMBER,
     psBlob psBlob_mut: *mut MS_ADDINFO_BLOB,
 }}
-STRUCT!{struct SIP_SUBJECTINFO {
+STRUCT! {struct SIP_SUBJECTINFO {
     cbSize: DWORD,
     pgSubjectType: *mut GUID,
     hFile: HANDLE,
@@ -58,18 +58,18 @@ STRUCT!{struct SIP_SUBJECTINFO {
     pClientData: LPVOID,
 }}
 pub type LPSIP_SUBJECTINFO = *mut SIP_SUBJECTINFO;
-STRUCT!{struct MS_ADDINFO_FLAT {
+STRUCT! {struct MS_ADDINFO_FLAT {
     cbStruct: DWORD,
     pIndirectData: *mut SIP_INDIRECT_DATA,
 }}
 pub type PMS_ADDINFO_FLAT = *mut MS_ADDINFO_FLAT;
-STRUCT!{struct MS_ADDINFO_CATALOGMEMBER {
+STRUCT! {struct MS_ADDINFO_CATALOGMEMBER {
     cbStruct: DWORD,
     pStore: *mut CRYPTCATSTORE,
     pMember: *mut CRYPTCATMEMBER,
 }}
 pub type PMS_ADDINFO_CATALOGMEMBER = *mut MS_ADDINFO_CATALOGMEMBER;
-STRUCT!{struct MS_ADDINFO_BLOB {
+STRUCT! {struct MS_ADDINFO_BLOB {
     cbStruct: DWORD,
     cbMemObject: DWORD,
     pbMemObject: *mut BYTE,
@@ -77,19 +77,19 @@ STRUCT!{struct MS_ADDINFO_BLOB {
     pbMemSignedMsg: *mut BYTE,
 }}
 pub type PMS_ADDINFO_BLOB = *mut MS_ADDINFO_BLOB;
-STRUCT!{struct SIP_CAP_SET_V2 {
+STRUCT! {struct SIP_CAP_SET_V2 {
     cbSize: DWORD,
     dwVersion: DWORD,
     isMultiSign: BOOL,
     dwReserved: DWORD,
 }}
 pub type PSIP_CAP_SET_V2 = *mut SIP_CAP_SET_V2;
-UNION!{union SIP_CAP_SET_V3_u {
+UNION! {union SIP_CAP_SET_V3_u {
     [u32; 1],
     dwFlags dwFlags_mut: DWORD,
     dwReserved dwReserved_mut: DWORD,
 }}
-STRUCT!{struct SIP_CAP_SET_V3 {
+STRUCT! {struct SIP_CAP_SET_V3 {
     cbSize: DWORD,
     dwVersion: DWORD,
     isMultiSign: BOOL,
@@ -102,7 +102,7 @@ pub const SIP_CAP_SET_VERSION_2: DWORD = 2;
 pub const SIP_CAP_SET_VERSION_3: DWORD = 3;
 pub const SIP_CAP_SET_CUR_VER: DWORD = 3;
 pub const SIP_CAP_FLAG_SEALING: DWORD = 0x00000001;
-STRUCT!{struct SIP_INDIRECT_DATA {
+STRUCT! {struct SIP_INDIRECT_DATA {
     Data: CRYPT_ATTRIBUTE_TYPE_VALUE,
     DigestAlgorithm: CRYPT_ALGORITHM_IDENTIFIER,
     Digest: CRYPT_HASH_BLOB,
@@ -117,7 +117,7 @@ extern "system" {
         pbSignedDataMsg: *mut BYTE,
     ) -> BOOL;
 }
-FN!{stdcall pCryptSIPGetSignedDataMsg(
+FN! {stdcall pCryptSIPGetSignedDataMsg(
     pSubjectInfo: *mut SIP_SUBJECTINFO,
     pdwEncodingType: *mut DWORD,
     dwIndex: DWORD,
@@ -133,7 +133,7 @@ extern "system" {
         pbSignedDataMsg: *mut BYTE,
     ) -> BOOL;
 }
-FN!{stdcall pCryptSIPPutSignedDataMsg(
+FN! {stdcall pCryptSIPPutSignedDataMsg(
     pSubjectInfo: *mut SIP_SUBJECTINFO,
     dwEncodingType: DWORD,
     pdwIndex: *mut DWORD,
@@ -147,7 +147,7 @@ extern "system" {
         pIndirectData: *mut SIP_INDIRECT_DATA,
     ) -> BOOL;
 }
-FN!{stdcall pCryptSIPCreateIndirectData(
+FN! {stdcall pCryptSIPCreateIndirectData(
     pSubjectInfo: *mut SIP_SUBJECTINFO,
     pcbIndirectData: *mut DWORD,
     pIndirectData: *mut SIP_INDIRECT_DATA,
@@ -158,21 +158,18 @@ extern "system" {
         pIndirectData: *mut SIP_INDIRECT_DATA,
     ) -> BOOL;
 }
-FN!{stdcall pCryptSIPVerifyIndirectData(
+FN! {stdcall pCryptSIPVerifyIndirectData(
     pSubjectInfo: *mut SIP_SUBJECTINFO,
     pIndirectData: *mut SIP_INDIRECT_DATA,
 ) -> BOOL}
 extern "system" {
-    pub fn CryptSIPRemoveSignedDataMsg(
-        pSubjectInfo: *mut SIP_SUBJECTINFO,
-        dwIndex: DWORD,
-    ) -> BOOL;
+    pub fn CryptSIPRemoveSignedDataMsg(pSubjectInfo: *mut SIP_SUBJECTINFO, dwIndex: DWORD) -> BOOL;
 }
-FN!{stdcall pCryptSIPRemoveSignedDataMsg(
+FN! {stdcall pCryptSIPRemoveSignedDataMsg(
     pSubjectInfo: *mut SIP_SUBJECTINFO,
     dwIndex: DWORD,
 ) -> BOOL}
-STRUCT!{struct SIP_DISPATCH_INFO {
+STRUCT! {struct SIP_DISPATCH_INFO {
     cbSize: DWORD,
     hSIP: HANDLE,
     pfGet: pCryptSIPGetSignedDataMsg,
@@ -182,15 +179,15 @@ STRUCT!{struct SIP_DISPATCH_INFO {
     pfRemove: pCryptSIPRemoveSignedDataMsg,
 }}
 pub type LPSIP_DISPATCH_INFO = *mut SIP_DISPATCH_INFO;
-FN!{stdcall pfnIsFileSupported(
+FN! {stdcall pfnIsFileSupported(
     hFile: HANDLE,
     pgSubject: *mut GUID,
 ) -> BOOL}
-FN!{stdcall pfnIsFileSupportedName(
+FN! {stdcall pfnIsFileSupportedName(
     pwszFileName: *mut WCHAR,
     pgSubject: *mut GUID,
 ) -> BOOL}
-STRUCT!{struct SIP_ADD_NEWPROVIDER {
+STRUCT! {struct SIP_ADD_NEWPROVIDER {
     cbStruct: DWORD,
     pgSubject: *mut GUID,
     pwszDLLFileName: *mut WCHAR,
@@ -222,18 +219,11 @@ extern "system" {
         hFileIn: HANDLE,
         pgSubject: *mut GUID,
     ) -> BOOL;
-    pub fn CryptSIPAddProvider(
-        psNewProv: *mut SIP_ADD_NEWPROVIDER,
-    ) -> BOOL;
-    pub fn CryptSIPRemoveProvider(
-        pgProv: *mut GUID,
-    ) -> BOOL;
-    pub fn CryptSIPGetCaps(
-        pSubjInfo: *mut SIP_SUBJECTINFO,
-        pCaps: *mut SIP_CAP_SET,
-    ) -> BOOL;
+    pub fn CryptSIPAddProvider(psNewProv: *mut SIP_ADD_NEWPROVIDER) -> BOOL;
+    pub fn CryptSIPRemoveProvider(pgProv: *mut GUID) -> BOOL;
+    pub fn CryptSIPGetCaps(pSubjInfo: *mut SIP_SUBJECTINFO, pCaps: *mut SIP_CAP_SET) -> BOOL;
 }
-FN!{stdcall pCryptSIPGetCaps(
+FN! {stdcall pCryptSIPGetCaps(
     pSubjInfo: *mut SIP_SUBJECTINFO,
     pCaps: *mut SIP_CAP_SET,
 ) -> BOOL}
@@ -246,7 +236,7 @@ extern "system" {
         pcbDigest: *mut DWORD,
     ) -> BOOL;
 }
-FN!{stdcall pCryptSIPGetSealedDigest(
+FN! {stdcall pCryptSIPGetSealedDigest(
     pSubjectInfo: *mut SIP_SUBJECTINFO,
     pSig: *const BYTE,
     dwSig: DWORD,

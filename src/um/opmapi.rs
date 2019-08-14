@@ -12,41 +12,41 @@ use shared::windef::HMONITOR;
 use um::dxva2api::DXVA2_SampleFormat;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LUID};
-DEFINE_GUID!{OPM_GET_CURRENT_HDCP_SRM_VERSION,
-    0x99c5ceff, 0x5f1d, 0x4879, 0x81, 0xc1, 0xc5, 0x24, 0x43, 0xc9, 0x48, 0x2b}
-DEFINE_GUID!{OPM_GET_CONNECTED_HDCP_DEVICE_INFORMATION,
-    0x0db59d74, 0xa992, 0x492e, 0xa0, 0xbd, 0xc2, 0x3f, 0xda, 0x56, 0x4e, 0x00}
-DEFINE_GUID!{OPM_GET_ACP_AND_CGMSA_SIGNALING,
-    0x6629a591, 0x3b79, 0x4cf3, 0x92, 0x4a, 0x11, 0xe8, 0xe7, 0x81, 0x16, 0x71}
-DEFINE_GUID!{OPM_GET_CONNECTOR_TYPE,
-    0x81d0bfd5, 0x6afe, 0x48c2, 0x99, 0xc0, 0x95, 0xa0, 0x8f, 0x97, 0xc5, 0xda}
-DEFINE_GUID!{OPM_GET_SUPPORTED_PROTECTION_TYPES,
-    0x38f2a801, 0x9a6c, 0x48bb, 0x91, 0x07, 0xb6, 0x69, 0x6e, 0x6f, 0x17, 0x97}
-DEFINE_GUID!{OPM_GET_VIRTUAL_PROTECTION_LEVEL,
-    0xb2075857, 0x3eda, 0x4d5d, 0x88, 0xdb, 0x74, 0x8f, 0x8c, 0x1a, 0x05, 0x49}
-DEFINE_GUID!{OPM_GET_ACTUAL_PROTECTION_LEVEL,
-    0x1957210a, 0x7766, 0x452a, 0xb9, 0x9a, 0xd2, 0x7a, 0xed, 0x54, 0xf0, 0x3a}
-DEFINE_GUID!{OPM_GET_ACTUAL_OUTPUT_FORMAT,
-    0xd7bf1ba3, 0xad13, 0x4f8e, 0xaf, 0x98, 0x0d, 0xcb, 0x3c, 0xa2, 0x04, 0xcc}
-DEFINE_GUID!{OPM_GET_ADAPTER_BUS_TYPE,
-    0xc6f4d673, 0x6174, 0x4184, 0x8e, 0x35, 0xf6, 0xdb, 0x52, 0x0, 0xbc, 0xba}
-DEFINE_GUID!{OPM_GET_OUTPUT_ID,
-    0x72cb6df3, 0x244f, 0x40ce, 0xb0, 0x9e, 0x20, 0x50, 0x6a, 0xf6, 0x30, 0x2f}
-DEFINE_GUID!{OPM_GET_DVI_CHARACTERISTICS,
-    0xa470b3bb, 0x5dd7, 0x4172, 0x83, 0x9c, 0x3d, 0x37, 0x76, 0xe0, 0xeb, 0xf5}
-DEFINE_GUID!{OPM_GET_CODEC_INFO,
-    0x4f374491, 0x8f5f, 0x4445, 0x9d, 0xba, 0x95, 0x58, 0x8f, 0x6b, 0x58, 0xb4}
-DEFINE_GUID!{OPM_GET_OUTPUT_HARDWARE_PROTECTION_SUPPORT,
-    0x3b129589, 0x2af8, 0x4ef0, 0x96, 0xa2, 0x70, 0x4a, 0x84, 0x5a, 0x21, 0x8e}
-DEFINE_GUID!{OPM_SET_PROTECTION_LEVEL,
-    0x9bb9327c, 0x4eb5, 0x4727, 0x9f, 0x00, 0xb4, 0x2b, 0x09, 0x19, 0xc0, 0xda}
-DEFINE_GUID!{OPM_SET_ACP_AND_CGMSA_SIGNALING,
-    0x09a631a5, 0xd684, 0x4c60, 0x8e, 0x4d, 0xd3, 0xbb, 0x0f, 0x0b, 0xe3, 0xee}
-DEFINE_GUID!{OPM_SET_HDCP_SRM,
-    0x8b5ef5d1, 0xc30d, 0x44ff, 0x84, 0xa5, 0xea, 0x71, 0xdc, 0xe7, 0x8f, 0x13}
-DEFINE_GUID!{OPM_SET_PROTECTION_LEVEL_ACCORDING_TO_CSS_DVD,
-    0x39ce333e, 0x4cc0, 0x44ae, 0xbf, 0xcc, 0xda, 0x50, 0xb5, 0xf8, 0x2e, 0x72}
-ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0001 {
+DEFINE_GUID! {OPM_GET_CURRENT_HDCP_SRM_VERSION,
+0x99c5ceff, 0x5f1d, 0x4879, 0x81, 0xc1, 0xc5, 0x24, 0x43, 0xc9, 0x48, 0x2b}
+DEFINE_GUID! {OPM_GET_CONNECTED_HDCP_DEVICE_INFORMATION,
+0x0db59d74, 0xa992, 0x492e, 0xa0, 0xbd, 0xc2, 0x3f, 0xda, 0x56, 0x4e, 0x00}
+DEFINE_GUID! {OPM_GET_ACP_AND_CGMSA_SIGNALING,
+0x6629a591, 0x3b79, 0x4cf3, 0x92, 0x4a, 0x11, 0xe8, 0xe7, 0x81, 0x16, 0x71}
+DEFINE_GUID! {OPM_GET_CONNECTOR_TYPE,
+0x81d0bfd5, 0x6afe, 0x48c2, 0x99, 0xc0, 0x95, 0xa0, 0x8f, 0x97, 0xc5, 0xda}
+DEFINE_GUID! {OPM_GET_SUPPORTED_PROTECTION_TYPES,
+0x38f2a801, 0x9a6c, 0x48bb, 0x91, 0x07, 0xb6, 0x69, 0x6e, 0x6f, 0x17, 0x97}
+DEFINE_GUID! {OPM_GET_VIRTUAL_PROTECTION_LEVEL,
+0xb2075857, 0x3eda, 0x4d5d, 0x88, 0xdb, 0x74, 0x8f, 0x8c, 0x1a, 0x05, 0x49}
+DEFINE_GUID! {OPM_GET_ACTUAL_PROTECTION_LEVEL,
+0x1957210a, 0x7766, 0x452a, 0xb9, 0x9a, 0xd2, 0x7a, 0xed, 0x54, 0xf0, 0x3a}
+DEFINE_GUID! {OPM_GET_ACTUAL_OUTPUT_FORMAT,
+0xd7bf1ba3, 0xad13, 0x4f8e, 0xaf, 0x98, 0x0d, 0xcb, 0x3c, 0xa2, 0x04, 0xcc}
+DEFINE_GUID! {OPM_GET_ADAPTER_BUS_TYPE,
+0xc6f4d673, 0x6174, 0x4184, 0x8e, 0x35, 0xf6, 0xdb, 0x52, 0x0, 0xbc, 0xba}
+DEFINE_GUID! {OPM_GET_OUTPUT_ID,
+0x72cb6df3, 0x244f, 0x40ce, 0xb0, 0x9e, 0x20, 0x50, 0x6a, 0xf6, 0x30, 0x2f}
+DEFINE_GUID! {OPM_GET_DVI_CHARACTERISTICS,
+0xa470b3bb, 0x5dd7, 0x4172, 0x83, 0x9c, 0x3d, 0x37, 0x76, 0xe0, 0xeb, 0xf5}
+DEFINE_GUID! {OPM_GET_CODEC_INFO,
+0x4f374491, 0x8f5f, 0x4445, 0x9d, 0xba, 0x95, 0x58, 0x8f, 0x6b, 0x58, 0xb4}
+DEFINE_GUID! {OPM_GET_OUTPUT_HARDWARE_PROTECTION_SUPPORT,
+0x3b129589, 0x2af8, 0x4ef0, 0x96, 0xa2, 0x70, 0x4a, 0x84, 0x5a, 0x21, 0x8e}
+DEFINE_GUID! {OPM_SET_PROTECTION_LEVEL,
+0x9bb9327c, 0x4eb5, 0x4727, 0x9f, 0x00, 0xb4, 0x2b, 0x09, 0x19, 0xc0, 0xda}
+DEFINE_GUID! {OPM_SET_ACP_AND_CGMSA_SIGNALING,
+0x09a631a5, 0xd684, 0x4c60, 0x8e, 0x4d, 0xd3, 0xbb, 0x0f, 0x0b, 0xe3, 0xee}
+DEFINE_GUID! {OPM_SET_HDCP_SRM,
+0x8b5ef5d1, 0xc30d, 0x44ff, 0x84, 0xa5, 0xea, 0x71, 0xdc, 0xe7, 0x8f, 0x13}
+DEFINE_GUID! {OPM_SET_PROTECTION_LEVEL_ACCORDING_TO_CSS_DVD,
+0x39ce333e, 0x4cc0, 0x44ae, 0xbf, 0xcc, 0xda, 0x50, 0xb5, 0xf8, 0x2e, 0x72}
+ENUM! {enum __MIDL___MIDL_itf_opmapi_0000_0000_0001 {
     OPM_OMAC_SIZE = 16,
     OPM_128_BIT_RANDOM_NUMBER_SIZE = 16,
     OPM_ENCRYPTED_INITIALIZATION_PARAMETERS_SIZE = 256,
@@ -58,23 +58,23 @@ ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0001 {
     OPM_BUS_TYPE_MASK = 0xffff,
     OPM_BUS_IMPLEMENTATION_MODIFIER_MASK = 0x7fff,
 }}
-ENUM!{enum OPM_VIDEO_OUTPUT_SEMANTICS {
+ENUM! {enum OPM_VIDEO_OUTPUT_SEMANTICS {
     OPM_VOS_COPP_SEMANTICS = 0,
     OPM_VOS_OPM_SEMANTICS = 1,
     OPM_VOS_OPM_INDIRECT_DISPLAY = 2,
 }}
-ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0002 {
+ENUM! {enum __MIDL___MIDL_itf_opmapi_0000_0000_0002 {
     OPM_HDCP_FLAG_NONE = 0,
     OPM_HDCP_FLAG_REPEATER = 0x1,
 }}
-ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0003 {
+ENUM! {enum __MIDL___MIDL_itf_opmapi_0000_0000_0003 {
     OPM_STATUS_NORMAL = 0,
     OPM_STATUS_LINK_LOST = 0x1,
     OPM_STATUS_RENEGOTIATION_REQUIRED = 0x2,
     OPM_STATUS_TAMPERING_DETECTED = 0x4,
     OPM_STATUS_REVOKED_HDCP_DEVICE_ATTACHED = 0x8,
 }}
-ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0004 {
+ENUM! {enum __MIDL___MIDL_itf_opmapi_0000_0000_0004 {
     OPM_CONNECTOR_TYPE_OTHER = -1i32 as u32,
     OPM_CONNECTOR_TYPE_VGA = 0,
     OPM_CONNECTOR_TYPE_SVIDEO = 1,
@@ -95,15 +95,15 @@ ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0004 {
     OPM_CONNECTOR_TYPE_TRANSPORT_AGNOSTIC_DIGITAL_MODE_B = 17,
     OPM_COPP_COMPATIBLE_CONNECTOR_TYPE_INTERNAL = 0x80000000,
 }}
-ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0005 {
+ENUM! {enum __MIDL___MIDL_itf_opmapi_0000_0000_0005 {
     OPM_DVI_CHARACTERISTIC_1_0 = 1,
     OPM_DVI_CHARACTERISTIC_1_1_OR_ABOVE = 2,
 }}
-ENUM!{enum OPM_OUTPUT_HARDWARE_PROTECTION {
+ENUM! {enum OPM_OUTPUT_HARDWARE_PROTECTION {
     OPM_OUTPUT_HARDWARE_PROTECTION_NOT_SUPPORTED = 0,
     OPM_OUTPUT_HARDWARE_PROTECTION_SUPPORTED = 0x1,
 }}
-ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0006 {
+ENUM! {enum __MIDL___MIDL_itf_opmapi_0000_0000_0006 {
     OPM_BUS_TYPE_OTHER = 0,
     OPM_BUS_TYPE_PCI = 0x1,
     OPM_BUS_TYPE_PCIX = 0x2,
@@ -117,23 +117,23 @@ ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0006 {
     OPM_BUS_IMPLEMENTATION_MODIFIER_NON_STANDARD = 0x80000000,
     OPM_COPP_COMPATIBLE_BUS_TYPE_INTEGRATED = 0x80000000,
 }}
-ENUM!{enum OPM_DPCP_PROTECTION_LEVEL {
+ENUM! {enum OPM_DPCP_PROTECTION_LEVEL {
     OPM_DPCP_OFF = 0,
     OPM_DPCP_ON = 1,
     OPM_DPCP_FORCE_ULONG = 0x7fffffff,
 }}
-ENUM!{enum OPM_HDCP_PROTECTION_LEVEL {
+ENUM! {enum OPM_HDCP_PROTECTION_LEVEL {
     OPM_HDCP_OFF = 0,
     OPM_HDCP_ON = 1,
     OPM_HDCP_FORCE_ULONG = 0x7fffffff,
 }}
-ENUM!{enum OPM_TYPE_ENFORCEMENT_HDCP_PROTECTION_LEVEL {
+ENUM! {enum OPM_TYPE_ENFORCEMENT_HDCP_PROTECTION_LEVEL {
     OPM_TYPE_ENFORCEMENT_HDCP_OFF = OPM_HDCP_OFF,
     OPM_TYPE_ENFORCEMENT_HDCP_ON_WITH_NO_TYPE_RESTRICTION = OPM_HDCP_ON,
     OPM_TYPE_ENFORCEMENT_HDCP_ON_WITH_TYPE1_RESTRICTION = OPM_HDCP_ON + 1,
     OPM_TYPE_ENFORCEMENT_HDCP_FORCE_ULONG = 0x7fffffff,
 }}
-ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0007 {
+ENUM! {enum __MIDL___MIDL_itf_opmapi_0000_0000_0007 {
     OPM_CGMSA_OFF = 0,
     OPM_CGMSA_COPY_FREELY = 0x1,
     OPM_CGMSA_COPY_NO_MORE = 0x2,
@@ -141,14 +141,14 @@ ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0007 {
     OPM_CGMSA_COPY_NEVER = 0x4,
     OPM_CGMSA_REDISTRIBUTION_CONTROL_REQUIRED = 0x8,
 }}
-ENUM!{enum OPM_ACP_PROTECTION_LEVEL {
+ENUM! {enum OPM_ACP_PROTECTION_LEVEL {
     OPM_ACP_OFF = 0,
     OPM_ACP_LEVEL_ONE = 1,
     OPM_ACP_LEVEL_TWO = 2,
     OPM_ACP_LEVEL_THREE = 3,
     OPM_ACP_FORCE_ULONG = 0x7fffffff,
 }}
-ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0008 {
+ENUM! {enum __MIDL___MIDL_itf_opmapi_0000_0000_0008 {
     OPM_PROTECTION_TYPE_OTHER = 0x80000000,
     OPM_PROTECTION_TYPE_NONE = 0,
     OPM_PROTECTION_TYPE_COPP_COMPATIBLE_HDCP = 0x1,
@@ -158,7 +158,7 @@ ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0008 {
     OPM_PROTECTION_TYPE_DPCP = 0x10,
     OPM_PROTECTION_TYPE_TYPE_ENFORCEMENT_HDCP = 0x20,
 }}
-ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0009 {
+ENUM! {enum __MIDL___MIDL_itf_opmapi_0000_0000_0009 {
     OPM_PROTECTION_STANDARD_OTHER = 0x80000000,
     OPM_PROTECTION_STANDARD_NONE = 0,
     OPM_PROTECTION_STANDARD_IEC61880_525I = 0x1,
@@ -177,7 +177,7 @@ ENUM!{enum __MIDL___MIDL_itf_opmapi_0000_0000_0009 {
     OPM_PROTECTION_STANDARD_ARIBTRB15_750P = 0x2000,
     OPM_PROTECTION_STANDARD_ARIBTRB15_1125I = 0x4000,
 }}
-ENUM!{enum OPM_IMAGE_ASPECT_RATIO_EN300294 {
+ENUM! {enum OPM_IMAGE_ASPECT_RATIO_EN300294 {
     OPM_ASPECT_RATIO_EN300294_FULL_FORMAT_4_BY_3 = 0,
     OPM_ASPECT_RATIO_EN300294_BOX_14_BY_9_CENTER = 1,
     OPM_ASPECT_RATIO_EN300294_BOX_14_BY_9_TOP = 2,
@@ -188,16 +188,16 @@ ENUM!{enum OPM_IMAGE_ASPECT_RATIO_EN300294 {
     OPM_ASPECT_RATIO_EN300294_FULL_FORMAT_16_BY_9_ANAMORPHIC = 7,
     OPM_ASPECT_RATIO_FORCE_ULONG = 0x7fffffff,
 }}
-STRUCT!{#[repr(packed)] struct OPM_RANDOM_NUMBER {
+STRUCT! {#[repr(packed)] struct OPM_RANDOM_NUMBER {
     abRandomNumber: [BYTE; 16],
 }}
-STRUCT!{#[repr(packed)] struct OPM_OMAC {
+STRUCT! {#[repr(packed)] struct OPM_OMAC {
     abOMAC: [BYTE; 16],
 }}
-STRUCT!{#[repr(packed)] struct OPM_ENCRYPTED_INITIALIZATION_PARAMETERS {
+STRUCT! {#[repr(packed)] struct OPM_ENCRYPTED_INITIALIZATION_PARAMETERS {
     abEncryptedInitializationParameters: [BYTE; 256],
 }}
-STRUCT!{#[repr(packed)] struct OPM_GET_INFO_PARAMETERS {
+STRUCT! {#[repr(packed)] struct OPM_GET_INFO_PARAMETERS {
     omac: OPM_OMAC,
     rnRandomNumber: OPM_RANDOM_NUMBER,
     guidInformation: GUID,
@@ -205,17 +205,17 @@ STRUCT!{#[repr(packed)] struct OPM_GET_INFO_PARAMETERS {
     cbParametersSize: ULONG,
     abParameters: [BYTE; 4056],
 }}
-STRUCT!{#[repr(packed)] struct OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS {
+STRUCT! {#[repr(packed)] struct OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     guidInformation: GUID,
     ulSequenceNumber: ULONG,
     cbParametersSize: ULONG,
     abParameters: [BYTE; 4056],
 }}
-STRUCT!{#[repr(packed)] struct OPM_HDCP_KEY_SELECTION_VECTOR {
+STRUCT! {#[repr(packed)] struct OPM_HDCP_KEY_SELECTION_VECTOR {
     abKeySelectionVector: [BYTE; 5],
 }}
-STRUCT!{#[repr(packed)] struct OPM_CONNECTED_HDCP_DEVICE_INFORMATION {
+STRUCT! {#[repr(packed)] struct OPM_CONNECTED_HDCP_DEVICE_INFORMATION {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     ulStatusFlags: ULONG,
     ulHDCPFlags: ULONG,
@@ -224,19 +224,19 @@ STRUCT!{#[repr(packed)] struct OPM_CONNECTED_HDCP_DEVICE_INFORMATION {
     Reserved2: [BYTE; 16],
     Reserved3: [BYTE; 16],
 }}
-STRUCT!{#[repr(packed)] struct OPM_REQUESTED_INFORMATION {
+STRUCT! {#[repr(packed)] struct OPM_REQUESTED_INFORMATION {
     omac: OPM_OMAC,
     cbRequestedInformationSize: ULONG,
     abRequestedInformation: [BYTE; 4076],
 }}
-STRUCT!{#[repr(packed)] struct OPM_STANDARD_INFORMATION {
+STRUCT! {#[repr(packed)] struct OPM_STANDARD_INFORMATION {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     ulStatusFlags: ULONG,
     ulInformation: ULONG,
     ulReserved: ULONG,
     ulReserved2: ULONG,
 }}
-STRUCT!{#[repr(packed)] struct OPM_ACTUAL_OUTPUT_FORMAT {
+STRUCT! {#[repr(packed)] struct OPM_ACTUAL_OUTPUT_FORMAT {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     ulStatusFlags: ULONG,
     ulDisplayWidth: ULONG,
@@ -246,7 +246,7 @@ STRUCT!{#[repr(packed)] struct OPM_ACTUAL_OUTPUT_FORMAT {
     ulFrequencyNumerator: ULONG,
     ulFrequencyDenominator: ULONG,
 }}
-STRUCT!{#[repr(packed)] struct OPM_ACP_AND_CGMSA_SIGNALING {
+STRUCT! {#[repr(packed)] struct OPM_ACP_AND_CGMSA_SIGNALING {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     ulStatusFlags: ULONG,
     ulAvailableTVProtectionStandards: ULONG,
@@ -261,25 +261,25 @@ STRUCT!{#[repr(packed)] struct OPM_ACP_AND_CGMSA_SIGNALING {
     ulReserved2: [ULONG; 4],
     ulReserved3: [ULONG; 4],
 }}
-STRUCT!{#[repr(packed)] struct OPM_OUTPUT_ID_DATA {
+STRUCT! {#[repr(packed)] struct OPM_OUTPUT_ID_DATA {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     ulStatusFlags: ULONG,
     OutputId: UINT64,
 }}
-STRUCT!{#[repr(packed)] struct OPM_CONFIGURE_PARAMETERS {
+STRUCT! {#[repr(packed)] struct OPM_CONFIGURE_PARAMETERS {
     omac: OPM_OMAC,
     guidSetting: GUID,
     ulSequenceNumber: ULONG,
     cbParametersSize: ULONG,
     abParameters: [BYTE; 4056],
 }}
-STRUCT!{#[repr(packed)] struct OPM_SET_PROTECTION_LEVEL_PARAMETERS {
+STRUCT! {#[repr(packed)] struct OPM_SET_PROTECTION_LEVEL_PARAMETERS {
     ulProtectionType: ULONG,
     ulProtectionLevel: ULONG,
     Reserved: ULONG,
     Reserved2: ULONG,
 }}
-STRUCT!{#[repr(packed)] struct OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS {
+STRUCT! {#[repr(packed)] struct OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS {
     ulNewTVProtectionStandard: ULONG,
     ulAspectRatioChangeMask1: ULONG,
     ulAspectRatioData1: ULONG,
@@ -291,20 +291,20 @@ STRUCT!{#[repr(packed)] struct OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS {
     ulReserved2: [ULONG; 4],
     ulReserved3: ULONG,
 }}
-STRUCT!{#[repr(packed)] struct OPM_SET_HDCP_SRM_PARAMETERS {
+STRUCT! {#[repr(packed)] struct OPM_SET_HDCP_SRM_PARAMETERS {
     ulSRMVersion: ULONG,
 }}
-STRUCT!{#[repr(packed)] struct OPM_GET_CODEC_INFO_PARAMETERS {
+STRUCT! {#[repr(packed)] struct OPM_GET_CODEC_INFO_PARAMETERS {
     cbVerifier: DWORD,
     Verifier: [BYTE; 4052],
 }}
-STRUCT!{#[repr(packed)] struct OPM_GET_CODEC_INFO_INFORMATION {
+STRUCT! {#[repr(packed)] struct OPM_GET_CODEC_INFO_INFORMATION {
     rnRandomNumber: OPM_RANDOM_NUMBER,
     Merit: DWORD,
 }}
-DEFINE_GUID!{IID_IOPMVideoOutput,
-    0x0a15159d, 0x41c7, 0x4456, 0x93, 0xe1, 0x28, 0x4c, 0xd6, 0x1d, 0x4e, 0x8d}
-RIDL!{#[uuid(0x0a15159d, 0x41c7, 0x4456, 0x93, 0xe1, 0x28, 0x4c, 0xd6, 0x1d, 0x4e, 0x8d)]
+DEFINE_GUID! {IID_IOPMVideoOutput,
+0x0a15159d, 0x41c7, 0x4456, 0x93, 0xe1, 0x28, 0x4c, 0xd6, 0x1d, 0x4e, 0x8d}
+RIDL! {#[uuid(0x0a15159d, 0x41c7, 0x4456, 0x93, 0xe1, 0x28, 0x4c, 0xd6, 0x1d, 0x4e, 0x8d)]
 interface IOPMVideoOutput(IOPMVideoOutputVtbl): IUnknown(IUnknownVtbl) {
     fn StartInitialization(
         prnRandomNumber: *mut OPM_RANDOM_NUMBER,

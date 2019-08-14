@@ -10,10 +10,7 @@ use um::winnt::{CHAR, LONG, LPCWSTR, LPSTR};
 pub type DESC_CHAR = CHAR;
 pub type LPDESC = LPSTR;
 extern "system" {
-    pub fn NetRemoteTOD(
-        UncServerName: LPCWSTR,
-        BufferPtr: *mut LPBYTE,
-    ) -> NET_API_STATUS;
+    pub fn NetRemoteTOD(UncServerName: LPCWSTR, BufferPtr: *mut LPBYTE) -> NET_API_STATUS;
     pub fn NetRemoteComputerSupports(
         UncServerName: LPCWSTR,
         OptionsWanted: DWORD,
@@ -34,7 +31,7 @@ extern "C" {
         Flags: DWORD,
     ) -> NET_API_STATUS;
 }
-STRUCT!{struct TIME_OF_DAY_INFO {
+STRUCT! {struct TIME_OF_DAY_INFO {
     tod_elapsedt: DWORD,
     tod_msecs: DWORD,
     tod_hours: DWORD,

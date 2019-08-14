@@ -7,14 +7,8 @@
 use shared::minwindef::{BOOL, DWORD, HMODULE, UINT};
 use um::winnt::{LPCSTR, LPCWSTR};
 extern "system" {
-    pub fn sndPlaySoundA(
-        pszSound: LPCSTR,
-        fuSound: UINT,
-    ) -> BOOL;
-    pub fn sndPlaySoundW(
-        pszSound: LPCWSTR,
-        fuSound: UINT,
-    ) -> BOOL;
+    pub fn sndPlaySoundA(pszSound: LPCSTR, fuSound: UINT) -> BOOL;
+    pub fn sndPlaySoundW(pszSound: LPCWSTR, fuSound: UINT) -> BOOL;
 }
 pub const SND_SYNC: DWORD = 0x0000;
 pub const SND_ASYNC: DWORD = 0x0001;
@@ -33,14 +27,6 @@ pub const SND_SENTRY: DWORD = 0x00080000;
 pub const SND_RING: DWORD = 0x00100000;
 pub const SND_SYSTEM: DWORD = 0x00200000;
 extern "system" {
-    pub fn PlaySoundA(
-        pszSound: LPCSTR,
-        hmod: HMODULE,
-        fdwSound: DWORD,
-    ) -> BOOL;
-    pub fn PlaySoundW(
-        pszSound: LPCWSTR,
-        hmod: HMODULE,
-        fdwSound: DWORD,
-    ) -> BOOL;
+    pub fn PlaySoundA(pszSound: LPCSTR, hmod: HMODULE, fdwSound: DWORD) -> BOOL;
+    pub fn PlaySoundW(pszSound: LPCWSTR, hmod: HMODULE, fdwSound: DWORD) -> BOOL;
 }

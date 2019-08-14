@@ -18,31 +18,13 @@ use um::winnt::{
     PZZSTR, PZZWSTR, ULARGE_INTEGER, WCHAR,
 };
 use um::winuser::WM_USER;
-DECLARE_HANDLE!{HDROP, HDROP__}
+DECLARE_HANDLE! {HDROP, HDROP__}
 extern "system" {
-    pub fn DragQueryFileA(
-        hDrop: HDROP,
-        iFile: UINT,
-        lpszFile: LPSTR,
-        cch: UINT,
-    ) -> UINT;
-    pub fn DragQueryFileW(
-        hDrop: HDROP,
-        iFile: UINT,
-        lpszFile: LPWSTR,
-        cch: UINT,
-    ) -> UINT;
-    pub fn DragQueryPoint(
-        hDrop: HDROP,
-        lppt: *mut POINT,
-    ) -> BOOL;
-    pub fn DragFinish(
-        hDrop: HDROP,
-    );
-    pub fn DragAcceptFiles(
-        hWnd: HWND,
-        fAccept: BOOL,
-    );
+    pub fn DragQueryFileA(hDrop: HDROP, iFile: UINT, lpszFile: LPSTR, cch: UINT) -> UINT;
+    pub fn DragQueryFileW(hDrop: HDROP, iFile: UINT, lpszFile: LPWSTR, cch: UINT) -> UINT;
+    pub fn DragQueryPoint(hDrop: HDROP, lppt: *mut POINT) -> BOOL;
+    pub fn DragFinish(hDrop: HDROP);
+    pub fn DragAcceptFiles(hWnd: HWND, fAccept: BOOL);
     pub fn ShellExecuteA(
         hwnd: HWND,
         lpOperation: LPCSTR,
@@ -59,41 +41,14 @@ extern "system" {
         lpDirectory: LPCWSTR,
         nShowCmd: c_int,
     ) -> HINSTANCE;
-    pub fn FindExecutableA(
-        lpFile: LPCSTR,
-        lpDirectory: LPCSTR,
-        lpResult: LPSTR,
-    ) -> HINSTANCE;
-    pub fn FindExecutableW(
-        lpFile: LPCWSTR,
-        lpDirectory: LPCWSTR,
-        lpResult: LPWSTR,
-    ) -> HINSTANCE;
-    pub fn CommandLineToArgvW(
-        lpCmdLine: LPCWSTR,
-        pNumArgs: *mut c_int,
-    ) -> *mut LPWSTR;
-    pub fn ShellAboutA(
-        hWnd: HWND,
-        szApp: LPCSTR,
-        szOtherStuff: LPCSTR,
-        hIcon: HICON,
-    ) -> INT;
-    pub fn ShellAboutW(
-        hWnd: HWND,
-        szApp: LPCWSTR,
-        szOtherStuff: LPCWSTR,
-        hIcon: HICON,
-    ) -> INT;
-    pub fn DuplicateIcon(
-        hInst: HINSTANCE,
-        hIcon: HICON,
-    ) -> HICON;
-    pub fn ExtractAssociatedIconA(
-        hInst: HINSTANCE,
-        pszIconPath: LPSTR,
-        piIcon: *mut WORD,
-    ) -> HICON;
+    pub fn FindExecutableA(lpFile: LPCSTR, lpDirectory: LPCSTR, lpResult: LPSTR) -> HINSTANCE;
+    pub fn FindExecutableW(lpFile: LPCWSTR, lpDirectory: LPCWSTR, lpResult: LPWSTR) -> HINSTANCE;
+    pub fn CommandLineToArgvW(lpCmdLine: LPCWSTR, pNumArgs: *mut c_int) -> *mut LPWSTR;
+    pub fn ShellAboutA(hWnd: HWND, szApp: LPCSTR, szOtherStuff: LPCSTR, hIcon: HICON) -> INT;
+    pub fn ShellAboutW(hWnd: HWND, szApp: LPCWSTR, szOtherStuff: LPCWSTR, hIcon: HICON) -> INT;
+    pub fn DuplicateIcon(hInst: HINSTANCE, hIcon: HICON) -> HICON;
+    pub fn ExtractAssociatedIconA(hInst: HINSTANCE, pszIconPath: LPSTR, piIcon: *mut WORD)
+        -> HICON;
     pub fn ExtractAssociatedIconW(
         hInst: HINSTANCE,
         pszIconPath: LPWSTR,
@@ -111,18 +66,10 @@ extern "system" {
         piIconIndex: *mut WORD,
         piIconId: *mut WORD,
     ) -> HICON;
-    pub fn ExtractIconA(
-        hInst: HINSTANCE,
-        pszExeFileName: LPCSTR,
-        nIconIndex: UINT,
-    ) -> HICON;
-    pub fn ExtractIconW(
-        hInst: HINSTANCE,
-        pszExeFileName: LPCWSTR,
-        nIconIndex: UINT,
-    ) -> HICON;
+    pub fn ExtractIconA(hInst: HINSTANCE, pszExeFileName: LPCSTR, nIconIndex: UINT) -> HICON;
+    pub fn ExtractIconW(hInst: HINSTANCE, pszExeFileName: LPCWSTR, nIconIndex: UINT) -> HICON;
 }
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct DRAGINFOA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct DRAGINFOA {
     uSize: UINT,
     pt: POINT,
     fNC: BOOL,
@@ -130,7 +77,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct DRAGINFOA {
     grfKeyState: DWORD,
 }}
 pub type LPDRAGINFOA = *mut DRAGINFOA;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct DRAGINFOW {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct DRAGINFOW {
     uSize: UINT,
     pt: POINT,
     fNC: BOOL,
@@ -161,7 +108,7 @@ pub const ABE_LEFT: UINT = 0;
 pub const ABE_TOP: UINT = 1;
 pub const ABE_RIGHT: UINT = 2;
 pub const ABE_BOTTOM: UINT = 3;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct APPBARDATA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct APPBARDATA {
     cbSize: DWORD,
     hWnd: HWND,
     uCallbackMessage: UINT,
@@ -171,18 +118,9 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct APPBARDATA {
 }}
 pub type PAPPBARDATA = *mut APPBARDATA;
 extern "system" {
-    pub fn SHAppBarMessage(
-        dwMessage: DWORD,
-        pData: PAPPBARDATA,
-    ) -> UINT_PTR;
-    pub fn DoEnvironmentSubstA(
-        pszSrc: LPSTR,
-        cchSrc: UINT,
-    ) -> DWORD;
-    pub fn DoEnvironmentSubstW(
-        pszSrc: LPWSTR,
-        cchSrc: UINT,
-    ) -> DWORD;
+    pub fn SHAppBarMessage(dwMessage: DWORD, pData: PAPPBARDATA) -> UINT_PTR;
+    pub fn DoEnvironmentSubstA(pszSrc: LPSTR, cchSrc: UINT) -> DWORD;
+    pub fn DoEnvironmentSubstW(pszSrc: LPWSTR, cchSrc: UINT) -> DWORD;
     pub fn ExtractIconExA(
         lpszFile: LPCSTR,
         nIconIndex: c_int,
@@ -225,7 +163,7 @@ pub const PO_RENAME: WORD = 0x0014;
 pub const PO_PORTCHANGE: WORD = 0x0020;
 pub const PO_REN_PORT: WORD = 0x0034;
 pub type PRINTEROP_FLAGS = WORD;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEOPSTRUCTA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEOPSTRUCTA {
     hwnd: HWND,
     wFunc: UINT,
     pFrom: PCZZSTR,
@@ -236,7 +174,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEOPSTRUCTA {
     lpszProgressTitle: PCSTR,
 }}
 pub type LPSHFILEOPSTRUCTA = *mut SHFILEOPSTRUCTA;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEOPSTRUCTW {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEOPSTRUCTW {
     hwnd: HWND,
     wFunc: UINT,
     pFrom: PCZZWSTR,
@@ -248,24 +186,18 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEOPSTRUCTW {
 }}
 pub type LPSHFILEOPSTRUCTW = *mut SHFILEOPSTRUCTW;
 extern "system" {
-    pub fn SHFileOperationA(
-        lpFileOp: LPSHFILEOPSTRUCTA,
-    ) -> c_int;
-    pub fn SHFileOperationW(
-        lpFileOp: LPSHFILEOPSTRUCTW,
-    ) -> c_int;
-    pub fn SHFreeNameMappings(
-        hNameMappings: HANDLE,
-    );
+    pub fn SHFileOperationA(lpFileOp: LPSHFILEOPSTRUCTA) -> c_int;
+    pub fn SHFileOperationW(lpFileOp: LPSHFILEOPSTRUCTW) -> c_int;
+    pub fn SHFreeNameMappings(hNameMappings: HANDLE);
 }
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHNAMEMAPPINGA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SHNAMEMAPPINGA {
     pszOldPath: LPSTR,
     pszNewPath: LPSTR,
     cchOldPath: c_int,
     cchNewPath: c_int,
 }}
 pub type LPSHNAMEMAPPINGA = *mut SHNAMEMAPPINGA;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHNAMEMAPPINGW {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SHNAMEMAPPINGW {
     pszOldPath: LPWSTR,
     pszNewPath: LPWSTR,
     cchOldPath: c_int,
@@ -305,7 +237,7 @@ pub const SEE_MASK_NOQUERYCLASSSTORE: DWORD = 0x01000000;
 pub const SEE_MASK_WAITFORINPUTIDLE: DWORD = 0x02000000;
 pub const SEE_MASK_FLAG_LOG_USAGE: DWORD = 0x04000000;
 pub const SEE_MASK_FLAG_HINST_IS_SITE: DWORD = 0x08000000;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHELLEXECUTEINFOA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SHELLEXECUTEINFOA {
     cbSize: DWORD,
     fMask: ULONG,
     hwnd: HWND,
@@ -323,7 +255,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHELLEXECUTEINFOA 
     hProcess: HANDLE,
 }}
 pub type LPSHELLEXECUTEINFOA = *mut SHELLEXECUTEINFOA;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHELLEXECUTEINFOW {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SHELLEXECUTEINFOW {
     cbSize: DWORD,
     fMask: ULONG,
     hwnd: HWND,
@@ -342,14 +274,10 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHELLEXECUTEINFOW 
 }}
 pub type LPSHELLEXECUTEINFOW = *mut SHELLEXECUTEINFOW;
 extern "system" {
-    pub fn ShellExecuteExA(
-        pExecInfo: *mut SHELLEXECUTEINFOA,
-    ) -> BOOL;
-    pub fn ShellExecuteExW(
-        pExecInfo: *mut SHELLEXECUTEINFOW,
-    ) -> BOOL;
+    pub fn ShellExecuteExA(pExecInfo: *mut SHELLEXECUTEINFOA) -> BOOL;
+    pub fn ShellExecuteExW(pExecInfo: *mut SHELLEXECUTEINFOW) -> BOOL;
 }
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHCREATEPROCESSINFOW {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SHCREATEPROCESSINFOW {
     cbSize: DWORD,
     fMask: ULONG,
     hwnd: HWND,
@@ -366,9 +294,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHCREATEPROCESSINF
 }}
 pub type PSHCREATEPROCESSINFOW = *mut SHCREATEPROCESSINFOW;
 extern "system" {
-    pub fn SHCreateProcessAsUserW(
-        pscpi: PSHCREATEPROCESSINFOW,
-    ) -> BOOL;
+    pub fn SHCreateProcessAsUserW(pscpi: PSHCREATEPROCESSINFOW) -> BOOL;
     pub fn SHEvaluateSystemCommandTemplate(
         pszCmdTemplate: PCWSTR,
         ppszApplication: *mut PWSTR,
@@ -376,7 +302,7 @@ extern "system" {
         ppszParameters: *mut PWSTR,
     ) -> HRESULT;
 }
-ENUM!{enum ASSOCCLASS {
+ENUM! {enum ASSOCCLASS {
     ASSOCCLASS_SHELL_KEY = 0,
     ASSOCCLASS_PROGID_KEY,
     ASSOCCLASS_PROGID_STR,
@@ -390,7 +316,7 @@ ENUM!{enum ASSOCCLASS {
     ASSOCCLASS_FIXED_PROGID_STR,
     ASSOCCLASS_PROTOCOL_STR,
 }}
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct ASSOCIATIONELEMENT {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct ASSOCIATIONELEMENT {
     ac: ASSOCCLASS,
     hkClass: HKEY,
     pszClass: PCWSTR,
@@ -403,7 +329,7 @@ extern "system" {
         ppv: *mut *mut c_void,
     ) -> HRESULT;
 }
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHQUERYRBINFO {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SHQUERYRBINFO {
     cbSize: DWORD,
     i64Size: __int64,
     i64NumItems: __int64,
@@ -413,26 +339,12 @@ pub const SHERB_NOCONFIRMATION: DWORD = 0x00000001;
 pub const SHERB_NOPROGRESSUI: DWORD = 0x00000002;
 pub const SHERB_NOSOUND: DWORD = 0x00000004;
 extern "system" {
-    pub fn SHQueryRecycleBinA(
-        pszRootPath: LPCSTR,
-        pSHQueryRBInfo: LPSHQUERYRBINFO,
-    ) -> HRESULT;
-    pub fn SHQueryRecycleBinW(
-        pszRootPath: LPCWSTR,
-        pSHQueryRBInfo: LPSHQUERYRBINFO,
-    ) -> HRESULT;
-    pub fn SHEmptyRecycleBinA(
-        hwnd: HWND,
-        pszRootPath: LPCSTR,
-        dwFlags: DWORD,
-    ) -> HRESULT;
-    pub fn SHEmptyRecycleBinW(
-        hwnd: HWND,
-        pszRootPath: LPCWSTR,
-        dwFlags: DWORD,
-    ) -> HRESULT;
+    pub fn SHQueryRecycleBinA(pszRootPath: LPCSTR, pSHQueryRBInfo: LPSHQUERYRBINFO) -> HRESULT;
+    pub fn SHQueryRecycleBinW(pszRootPath: LPCWSTR, pSHQueryRBInfo: LPSHQUERYRBINFO) -> HRESULT;
+    pub fn SHEmptyRecycleBinA(hwnd: HWND, pszRootPath: LPCSTR, dwFlags: DWORD) -> HRESULT;
+    pub fn SHEmptyRecycleBinW(hwnd: HWND, pszRootPath: LPCWSTR, dwFlags: DWORD) -> HRESULT;
 }
-ENUM!{enum QUERY_USER_NOTIFICATION_STATE {
+ENUM! {enum QUERY_USER_NOTIFICATION_STATE {
     QUNS_NOT_PRESENT = 1,
     QUNS_BUSY = 2,
     QUNS_RUNNING_D3D_FULL_SCREEN = 3,
@@ -442,21 +354,15 @@ ENUM!{enum QUERY_USER_NOTIFICATION_STATE {
     QUNS_APP = 7,
 }}
 extern "system" {
-    pub fn SHQueryUserNotificationState(
-        pquns: *mut QUERY_USER_NOTIFICATION_STATE,
-    ) -> HRESULT;
-    pub fn SHGetPropertyStoreForWindow(
-        hwnd: HWND,
-        riid: REFIID,
-        ppv: *mut *mut c_void,
-    ) -> HRESULT;
+    pub fn SHQueryUserNotificationState(pquns: *mut QUERY_USER_NOTIFICATION_STATE) -> HRESULT;
+    pub fn SHGetPropertyStoreForWindow(hwnd: HWND, riid: REFIID, ppv: *mut *mut c_void) -> HRESULT;
 }
-UNION!{#[cfg_attr(target_arch = "x86", repr(packed))] union NOTIFYICONDATAA_u {
+UNION! {#[cfg_attr(target_arch = "x86", repr(packed))] union NOTIFYICONDATAA_u {
     [u32; 1],
     uTimeout uTimeout_mut: UINT,
     uVersion uVersion_mut: UINT,
 }}
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONDATAA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONDATAA {
     cbSize: DWORD,
     hWnd: HWND,
     uID: UINT,
@@ -474,12 +380,12 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONDATAA {
     hBalloonIcon: HICON,
 }}
 pub type PNOTIFYICONDATAA = *mut NOTIFYICONDATAA;
-UNION!{#[cfg_attr(target_arch = "x86", repr(packed))] union NOTIFYICONDATAW_u {
+UNION! {#[cfg_attr(target_arch = "x86", repr(packed))] union NOTIFYICONDATAW_u {
     [u32; 1],
     uTimeout uTimeout_mut: UINT,
     uVersion uVersion_mut: UINT,
 }}
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONDATAW {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONDATAW {
     cbSize: DWORD,
     hWnd: HWND,
     uID: UINT,
@@ -532,7 +438,7 @@ pub const NIIF_ICON_MASK: DWORD = 0x0000000F;
 pub const NIIF_NOSOUND: DWORD = 0x00000010;
 pub const NIIF_LARGE_ICON: DWORD = 0x00000020;
 pub const NIIF_RESPECT_QUIET_TIME: DWORD = 0x00000080;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONIDENTIFIER {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONIDENTIFIER {
     cbSize: DWORD,
     hWnd: HWND,
     uID: UINT,
@@ -540,27 +446,21 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct NOTIFYICONIDENTIFI
 }}
 pub type PNOTIFYICONIDENTIFIER = *mut NOTIFYICONIDENTIFIER;
 extern "system" {
-    pub fn Shell_NotifyIconA(
-        dwMessage: DWORD,
-        lpData: PNOTIFYICONDATAA,
-    ) -> BOOL;
-    pub fn Shell_NotifyIconW(
-        dwMessage: DWORD,
-        lpData: PNOTIFYICONDATAW,
-    ) -> BOOL;
+    pub fn Shell_NotifyIconA(dwMessage: DWORD, lpData: PNOTIFYICONDATAA) -> BOOL;
+    pub fn Shell_NotifyIconW(dwMessage: DWORD, lpData: PNOTIFYICONDATAW) -> BOOL;
     pub fn Shell_NotifyIconGetRect(
         identifier: *const NOTIFYICONIDENTIFIER,
         iconLocation: *mut RECT,
     ) -> HRESULT;
 }
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEINFOA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEINFOA {
     hIcon: HICON,
     iIcon: c_int,
     dwAttributes: DWORD,
     szDisplayName: [CHAR; MAX_PATH],
     szTypeName: [CHAR; 80],
 }}
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEINFOW {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SHFILEINFOW {
     hIcon: HICON,
     iIcon: c_int,
     dwAttributes: DWORD,
@@ -601,7 +501,7 @@ extern "system" {
         uFlags: UINT,
     ) -> DWORD_PTR;
 }
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct SHSTOCKICONINFO {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct SHSTOCKICONINFO {
     cbSize: DWORD,
     hIcon: HICON,
     iSysImageIndex: c_int,
@@ -616,7 +516,7 @@ pub const SHGSI_SELECTED: DWORD = SHGFI_SELECTED;
 pub const SHGSI_LARGEICON: DWORD = SHGFI_LARGEICON;
 pub const SHGSI_SMALLICON: DWORD = SHGFI_SMALLICON;
 pub const SHGSI_SHELLICONSIZE: DWORD = SHGFI_SHELLICONSIZE;
-ENUM!{enum SHSTOCKICONID {
+ENUM! {enum SHSTOCKICONID {
     SIID_DOCNOASSOC = 0,
     SIID_DOCASSOC = 1,
     SIID_APPLICATION = 2,
@@ -776,7 +676,7 @@ extern "system" {
         fModal: BOOL,
     ) -> BOOL;
 }
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct OPEN_PRINTER_PROPS_INFOA {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct OPEN_PRINTER_PROPS_INFOA {
     dwSize: DWORD,
     pszSheetName: LPSTR,
     uSheetIndex: UINT,
@@ -784,7 +684,7 @@ STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct OPEN_PRINTER_PROPS
     bModal: BOOL,
 }}
 pub type POPEN_PRINTER_PROPS_INFOA = *mut OPEN_PRINTER_PROPS_INFOA;
-STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct OPEN_PRINTER_PROPS_INFOW {
+STRUCT! {#[cfg_attr(target_arch = "x86", repr(packed))] struct OPEN_PRINTER_PROPS_INFOW {
     dwSize: DWORD,
     pszSheetName: LPWSTR,
     uSheetIndex: UINT,
@@ -795,23 +695,14 @@ pub type POPEN_PRINTER_PROPS_INFOW = *mut OPEN_PRINTER_PROPS_INFOW;
 pub const PRINT_PROP_FORCE_NAME: DWORD = 0x01;
 extern "system" {
     pub fn SHLoadNonloadedIconOverlayIdentifiers() -> HRESULT;
-    pub fn SHIsFileAvailableOffline(
-        pwszPath: PCWSTR,
-        pdwStatus: *mut DWORD,
-    ) -> HRESULT;
+    pub fn SHIsFileAvailableOffline(pwszPath: PCWSTR, pdwStatus: *mut DWORD) -> HRESULT;
 }
 pub const OFFLINE_STATUS_LOCAL: DWORD = 0x0001;
 pub const OFFLINE_STATUS_REMOTE: DWORD = 0x0002;
 pub const OFFLINE_STATUS_INCOMPLETE: DWORD = 0x0004;
 extern "system" {
-    pub fn SHSetLocalizedName(
-        pszPath: PCWSTR,
-        pszResModule: PCWSTR,
-        idsRes: c_int,
-    ) -> HRESULT;
-    pub fn SHRemoveLocalizedName(
-        pszPath: PCWSTR,
-    ) -> HRESULT;
+    pub fn SHSetLocalizedName(pszPath: PCWSTR, pszResModule: PCWSTR, idsRes: c_int) -> HRESULT;
+    pub fn SHRemoveLocalizedName(pszPath: PCWSTR) -> HRESULT;
     pub fn SHGetLocalizedName(
         pszPath: PCWSTR,
         pszResModule: PWSTR,
@@ -838,12 +729,8 @@ extern "C" {
     ) -> c_int;
 }
 extern "system" {
-    pub fn IsLFNDriveA(
-        pszPath: LPCSTR,
-    ) -> BOOL;
-    pub fn IsLFNDriveW(
-        pszPath: LPCWSTR,
-    ) -> BOOL;
+    pub fn IsLFNDriveA(pszPath: LPCSTR) -> BOOL;
+    pub fn IsLFNDriveW(pszPath: LPCWSTR) -> BOOL;
     pub fn SHEnumerateUnreadMailAccountsA(
         hKeyUser: HKEY,
         dwIndex: DWORD,
@@ -882,15 +769,8 @@ extern "system" {
         dwCount: DWORD,
         pszShellExecuteCommand: LPCWSTR,
     ) -> HRESULT;
-    pub fn SHTestTokenMembership(
-        hToken: HANDLE,
-        ulRID: ULONG,
-    ) -> BOOL;
-    pub fn SHGetImageList(
-        iImageList: c_int,
-        riid: REFIID,
-        ppvObj: *mut *mut c_void,
-    ) -> HRESULT;
+    pub fn SHTestTokenMembership(hToken: HANDLE, ulRID: ULONG) -> BOOL;
+    pub fn SHGetImageList(iImageList: c_int, riid: REFIID, ppvObj: *mut *mut c_void) -> HRESULT;
 }
 pub const SHIL_LARGE: DWORD = 0;
 pub const SHIL_SMALL: DWORD = 1;
@@ -898,10 +778,10 @@ pub const SHIL_EXTRALARGE: DWORD = 2;
 pub const SHIL_SYSSMALL: DWORD = 3;
 pub const SHIL_JUMBO: DWORD = 4;
 pub const SHIL_LAST: DWORD = SHIL_JUMBO;
-FN!{stdcall PFNCANSHAREFOLDERW(
+FN! {stdcall PFNCANSHAREFOLDERW(
     pszPath: PCWSTR,
 ) -> HRESULT}
-FN!{stdcall PFNSHOWSHAREFOLDERUIW(
+FN! {stdcall PFNSHOWSHAREFOLDERUIW(
     hwndParent: HWND,
     pszPath: PCWSTR,
 ) -> HRESULT}
@@ -916,8 +796,5 @@ extern "system" {
 // }}
 // pub type PNC_ADDRESS = *mut NC_ADDRESS;
 extern "system" {
-    pub fn SHGetDriveMedia(
-        pszDrive: PCWSTR,
-        pdwMediaContent: *mut DWORD,
-    ) -> HRESULT;
+    pub fn SHGetDriveMedia(pszDrive: PCWSTR, pdwMediaContent: *mut DWORD) -> HRESULT;
 }

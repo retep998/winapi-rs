@@ -6,15 +6,7 @@
 use shared::minwindef::{BOOL, PULONG, PUSHORT, ULONG, USHORT};
 use um::winnt::PGROUP_AFFINITY;
 extern "system" {
-    pub fn GetNumaHighestNodeNumber(
-        HighestNodeNumber: PULONG,
-    ) -> BOOL;
-    pub fn GetNumaNodeProcessorMaskEx(
-        Node: USHORT,
-        ProcessorMask: PGROUP_AFFINITY,
-    ) -> BOOL;
-    pub fn GetNumaProximityNodeEx(
-        ProximityId: ULONG,
-        NodeNumber: PUSHORT,
-    ) -> BOOL;
+    pub fn GetNumaHighestNodeNumber(HighestNodeNumber: PULONG) -> BOOL;
+    pub fn GetNumaNodeProcessorMaskEx(Node: USHORT, ProcessorMask: PGROUP_AFFINITY) -> BOOL;
+    pub fn GetNumaProximityNodeEx(ProximityId: ULONG, NodeNumber: PUSHORT) -> BOOL;
 }

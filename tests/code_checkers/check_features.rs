@@ -21,9 +21,9 @@ fn get_libs() -> Vec<String> {
         } else if inside == true {
             let line = line.trim_left();
             if line.starts_with("//") {
-                continue
+                continue;
             } else if !line.starts_with("(\"") {
-                break
+                break;
             }
             let parts: Vec<&str> = line.split("&[").collect();
             files_deps.push(get_between_quotes(parts[0]).to_owned());
@@ -32,17 +32,14 @@ fn get_libs() -> Vec<String> {
     files_deps
 }
 
-fn check_feature_sorting<P: AsRef<Path>>(
-    p: P,
-    errors: &mut u32
-) -> Vec<String> {
+fn check_feature_sorting<P: AsRef<Path>>(p: P, errors: &mut u32) -> Vec<String> {
     let r_p = p.as_ref();
     let s_path = r_p.to_str().unwrap();
     let file_content = read_file(r_p);
     let mut features: Vec<(usize, String, String)> = Vec::new();
     for (pos, line) in file_content.lines().enumerate() {
         if !line.starts_with("#[cfg(feature") {
-            continue
+            continue;
         }
         let feature_name = line.split(" ").last().unwrap().replace(";", "");
         features.push((pos + 1, feature_name.to_owned(), line.to_owned()));
@@ -50,11 +47,15 @@ fn check_feature_sorting<P: AsRef<Path>>(
     if features.len() > 1 {
         for pos in 0..features.len() - 1 {
             if features[pos].1 > features[pos + 1].1 {
-                writeln!(&mut io::stderr(), "[{}:{}] \"{}\" should be after \"{}\"",
-                         s_path,
-                         features[pos].0,
-                         features[pos].2,
-                         features[pos + 1].2).unwrap();
+                writeln!(
+                    &mut io::stderr(),
+                    "[{}:{}] \"{}\" should be after \"{}\"",
+                    s_path,
+                    features[pos].0,
+                    features[pos].2,
+                    features[pos + 1].2
+                )
+                .unwrap();
                 *errors += 1;
             }
         }
@@ -70,18 +71,18 @@ fn check_features_in_cargo_file(errors: &mut u32) -> Vec<String> {
         let line = line.trim();
         if line.starts_with("[features]") {
             inside = true;
-            continue
+            continue;
         }
         if !inside {
-            continue
+            continue;
         } else if line.starts_with("#") {
             if !features.is_empty() && !features.last().unwrap().is_empty() {
                 features.push(Vec::new());
             }
-            continue
+            continue;
         }
         if line.is_empty() {
-            break
+            break;
         }
         let feature_name = line.split(" ").next().unwrap().replace("\"", "");
         if features.is_empty() {
@@ -94,25 +95,33 @@ fn check_features_in_cargo_file(errors: &mut u32) -> Vec<String> {
         for pos in 0..features.len() - 1 {
             for sub_pos in 0..features[pos].len() - 1 {
                 if features[pos][sub_pos].1 > features[pos][sub_pos + 1].1 {
-                    writeln!(&mut io::stderr(), "[{}:{}] \"{}\" should be after \"{}\"",
-                             "Cargo.toml",
-                             features[pos][sub_pos].0,
-                             features[pos][sub_pos].2,
-                             features[pos][sub_pos + 1].2).unwrap();
+                    writeln!(
+                        &mut io::stderr(),
+                        "[{}:{}] \"{}\" should be after \"{}\"",
+                        "Cargo.toml",
+                        features[pos][sub_pos].0,
+                        features[pos][sub_pos].2,
+                        features[pos][sub_pos + 1].2
+                    )
+                    .unwrap();
                     *errors += 1;
                 }
             }
         }
     }
-    features.into_iter().flat_map(|e| e.into_iter().map(|el| el.1)).collect()
+    features
+        .into_iter()
+        .flat_map(|e| e.into_iter().map(|el| el.1))
+        .collect()
 }
 
-fn check_missing_features_in_cargo_file(build_features: &[String],
-                                        cargo_features: &[String],
-                                        errors: &mut u32) {
-    const FEATURES_TO_IGNORE: &'static [&'static str] = &[
-        "debug", "everything", "impl-debug", "impl-default", "std",
-    ];
+fn check_missing_features_in_cargo_file(
+    build_features: &[String],
+    cargo_features: &[String],
+    errors: &mut u32,
+) {
+    const FEATURES_TO_IGNORE: &'static [&'static str] =
+        &["debug", "everything", "impl-debug", "impl-default", "std"];
     let mut it1 = 0;
     let mut it2 = 0;
 
@@ -120,22 +129,31 @@ fn check_missing_features_in_cargo_file(build_features: &[String],
         if build_features[it1] == cargo_features[it2] {
             it1 += 1;
             it2 += 1;
-            continue
-        } else if FEATURES_TO_IGNORE.iter().any(|e| *e == &cargo_features[it2]) {
+            continue;
+        } else if FEATURES_TO_IGNORE
+            .iter()
+            .any(|e| *e == &cargo_features[it2])
+        {
             it2 += 1;
-            continue
+            continue;
         } else if build_features[it1] < cargo_features[it2] {
-            writeln!(&mut io::stderr(),
-                     "Missing feature \"{}\" in `Cargo.toml`",
-                     build_features[it1]).unwrap();
+            writeln!(
+                &mut io::stderr(),
+                "Missing feature \"{}\" in `Cargo.toml`",
+                build_features[it1]
+            )
+            .unwrap();
             *errors += 1;
             while it1 < build_features.len() && build_features[it1] < cargo_features[it2] {
                 it1 += 1;
             }
         } else {
-            writeln!(&mut io::stderr(),
-                     "Extra feature in `Cargo.toml`: \"{}\"",
-                     cargo_features[it2]).unwrap();
+            writeln!(
+                &mut io::stderr(),
+                "Extra feature in `Cargo.toml`: \"{}\"",
+                cargo_features[it2]
+            )
+            .unwrap();
             *errors += 1;
             while it2 < cargo_features.len() && build_features[it1] > cargo_features[it2] {
                 it2 += 1;
@@ -144,10 +162,7 @@ fn check_missing_features_in_cargo_file(build_features: &[String],
     }
 }
 
-fn read_dirs<P: AsRef<Path>>(
-    dir: P,
-    errors: &mut u32
-) {
+fn read_dirs<P: AsRef<Path>>(dir: P, errors: &mut u32) {
     for entry in read_dir(dir).expect("read_dir failed") {
         let entry = entry.expect("entry failed");
         let path = entry.path();

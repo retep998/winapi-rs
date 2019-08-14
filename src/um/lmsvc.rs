@@ -8,12 +8,12 @@ use ctypes::c_long;
 use shared::lmcons::NET_API_STATUS;
 use shared::minwindef::{DWORD, LPBYTE, LPDWORD};
 use um::winnt::{LPCWSTR, LPWSTR};
-STRUCT!{struct SERVICE_INFO_0 {
+STRUCT! {struct SERVICE_INFO_0 {
     svci0_name: LPWSTR,
 }}
 pub type PSERVICE_INFO_0 = *mut SERVICE_INFO_0;
 pub type LPSERVICE_INFO_0 = *mut SERVICE_INFO_0;
-STRUCT!{struct SERVICE_INFO_1 {
+STRUCT! {struct SERVICE_INFO_1 {
     svci1_name: LPWSTR,
     svci1_status: DWORD,
     svci1_code: DWORD,
@@ -21,7 +21,7 @@ STRUCT!{struct SERVICE_INFO_1 {
 }}
 pub type PSERVICE_INFO_1 = *mut SERVICE_INFO_1;
 pub type LPSERVICE_INFO_1 = *mut SERVICE_INFO_1;
-STRUCT!{struct SERVICE_INFO_2 {
+STRUCT! {struct SERVICE_INFO_2 {
     svci2_name: LPWSTR,
     svci2_status: DWORD,
     svci2_code: DWORD,
@@ -170,11 +170,13 @@ pub fn SERVICE_UIC_CODE(cc: DWORD, mm: DWORD) -> c_long {
 }
 #[inline]
 pub fn SERVICE_NT_CCP_CODE(tt: DWORD, nn: DWORD) -> c_long {
-    (SERVICE_CCP_QUERY_HINT | nn | ((tt & LOWER_HINT_MASK) << SERVICE_IP_WAITTIME_SHIFT)
-    | ((tt & UPPER_HINT_MASK) << SERVICE_NTIP_WAITTIME_SHIFT)) as c_long
+    (SERVICE_CCP_QUERY_HINT
+        | nn
+        | ((tt & LOWER_HINT_MASK) << SERVICE_IP_WAITTIME_SHIFT)
+        | ((tt & UPPER_HINT_MASK) << SERVICE_NTIP_WAITTIME_SHIFT)) as c_long
 }
 #[inline]
 pub fn SERVICE_NT_WAIT_GET(code: DWORD) -> DWORD {
     ((code & UPPER_GET_HINT_MASK) >> SERVICE_NTIP_WAITTIME_SHIFT)
-    | ((code & LOWER_GET_HINT_MASK) >> SERVICE_IP_WAITTIME_SHIFT)
+        | ((code & LOWER_GET_HINT_MASK) >> SERVICE_IP_WAITTIME_SHIFT)
 }

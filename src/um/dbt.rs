@@ -40,13 +40,13 @@ pub const DBT_VOLLOCKLOCKFAILED: WPARAM = 0x8043;
 pub const DBT_VOLLOCKQUERYUNLOCK: WPARAM = 0x8044;
 pub const DBT_VOLLOCKLOCKRELEASED: WPARAM = 0x8045;
 pub const DBT_VOLLOCKUNLOCKFAILED: WPARAM = 0x8046;
-STRUCT!{struct DEV_BROADCAST_HDR {
+STRUCT! {struct DEV_BROADCAST_HDR {
     dbch_size: DWORD,
     dbch_devicetype: DWORD,
     dbch_reserved: DWORD,
 }}
 pub type PDEV_BROADCAST_HDR = *mut DEV_BROADCAST_HDR;
-STRUCT!{struct VolLockBroadcast {
+STRUCT! {struct VolLockBroadcast {
     vlb_dbh: DEV_BROADCAST_HDR,
     vlb_owner: DWORD,
     vlb_perms: BYTE,
@@ -80,12 +80,12 @@ pub const DBT_DEVTYP_PORT: DWORD = 0x00000003;
 pub const DBT_DEVTYP_NET: DWORD = 0x00000004;
 pub const DBT_DEVTYP_DEVICEINTERFACE: DWORD = 0x00000005;
 pub const DBT_DEVTYP_HANDLE: DWORD = 0x00000006;
-STRUCT!{struct _DEV_BROADCAST_HEADER {
+STRUCT! {struct _DEV_BROADCAST_HEADER {
     dbcd_size: DWORD,
     dbcd_devicetype: DWORD,
     dbcd_reserved: DWORD,
 }}
-STRUCT!{struct DEV_BROADCAST_OEM {
+STRUCT! {struct DEV_BROADCAST_OEM {
     dbco_size: DWORD,
     dbco_devicetype: DWORD,
     dbco_reserved: DWORD,
@@ -93,14 +93,14 @@ STRUCT!{struct DEV_BROADCAST_OEM {
     dbco_suppfunc: DWORD,
 }}
 pub type PDEV_BROADCAST_OEM = *mut DEV_BROADCAST_OEM;
-STRUCT!{struct DEV_BROADCAST_DEVNODE {
+STRUCT! {struct DEV_BROADCAST_DEVNODE {
     dbcd_size: DWORD,
     dbcd_devicetype: DWORD,
     dbcd_reserved: DWORD,
     dbcd_devnode: DWORD,
 }}
 pub type PDEV_BROADCAST_DEVNODE = *mut DEV_BROADCAST_DEVNODE;
-STRUCT!{struct DEV_BROADCAST_VOLUME {
+STRUCT! {struct DEV_BROADCAST_VOLUME {
     dbcv_size: DWORD,
     dbcv_devicetype: DWORD,
     dbcv_reserved: DWORD,
@@ -110,21 +110,21 @@ STRUCT!{struct DEV_BROADCAST_VOLUME {
 pub type PDEV_BROADCAST_VOLUME = *mut DEV_BROADCAST_VOLUME;
 pub const DBTF_MEDIA: WORD = 0x0001;
 pub const DBTF_NET: WORD = 0x0002;
-STRUCT!{struct DEV_BROADCAST_PORT_A {
+STRUCT! {struct DEV_BROADCAST_PORT_A {
     dbcp_size: DWORD,
     dbcp_devicetype: DWORD,
     dbcp_reserved: DWORD,
     dbcp_name: [c_char; 1],
 }}
 pub type PDEV_BROADCAST_PORT_A = *mut DEV_BROADCAST_PORT_A;
-STRUCT!{struct DEV_BROADCAST_PORT_W {
+STRUCT! {struct DEV_BROADCAST_PORT_W {
     dbcp_size: DWORD,
     dbcp_devicetype: DWORD,
     dbcp_reserved: DWORD,
     dbcp_name: [wchar_t; 1],
 }}
 pub type PDEV_BROADCAST_PORT_W = *mut DEV_BROADCAST_PORT_W;
-STRUCT!{struct DEV_BROADCAST_NET {
+STRUCT! {struct DEV_BROADCAST_NET {
     dbcn_size: DWORD,
     dbcn_devicetype: DWORD,
     dbcn_reserved: DWORD,
@@ -132,7 +132,7 @@ STRUCT!{struct DEV_BROADCAST_NET {
     dbcn_flags: DWORD,
 }}
 pub type PDEV_BROADCAST_NET = *mut DEV_BROADCAST_NET;
-STRUCT!{struct DEV_BROADCAST_DEVICEINTERFACE_A {
+STRUCT! {struct DEV_BROADCAST_DEVICEINTERFACE_A {
     dbcc_size: DWORD,
     dbcc_devicetype: DWORD,
     dbcc_reserved: DWORD,
@@ -140,7 +140,7 @@ STRUCT!{struct DEV_BROADCAST_DEVICEINTERFACE_A {
     dbcc_name: [c_char; 1],
 }}
 pub type PDEV_BROADCAST_DEVICEINTERFACE_A = *mut DEV_BROADCAST_DEVICEINTERFACE_A;
-STRUCT!{struct DEV_BROADCAST_DEVICEINTERFACE_W {
+STRUCT! {struct DEV_BROADCAST_DEVICEINTERFACE_W {
     dbcc_size: DWORD,
     dbcc_devicetype: DWORD,
     dbcc_reserved: DWORD,
@@ -148,7 +148,7 @@ STRUCT!{struct DEV_BROADCAST_DEVICEINTERFACE_W {
     dbcc_name: [wchar_t; 1],
 }}
 pub type PDEV_BROADCAST_DEVICEINTERFACE_W = *mut DEV_BROADCAST_DEVICEINTERFACE_W;
-STRUCT!{struct DEV_BROADCAST_HANDLE {
+STRUCT! {struct DEV_BROADCAST_HANDLE {
     dbch_size: DWORD,
     dbch_devicetype: DWORD,
     dbch_reserved: DWORD,
@@ -159,7 +159,7 @@ STRUCT!{struct DEV_BROADCAST_HANDLE {
     dbch_data: [BYTE; 1],
 }}
 pub type PDEV_BROADCAST_HANDLE = *mut DEV_BROADCAST_HANDLE;
-STRUCT!{struct DEV_BROADCAST_HANDLE32 {
+STRUCT! {struct DEV_BROADCAST_HANDLE32 {
     dbch_size: DWORD,
     dbch_devicetype: DWORD,
     dbch_reserved: DWORD,
@@ -170,7 +170,7 @@ STRUCT!{struct DEV_BROADCAST_HANDLE32 {
     dbch_data: [BYTE; 1],
 }}
 pub type PDEV_BROADCAST_HANDLE32 = *mut DEV_BROADCAST_HANDLE32;
-STRUCT!{struct DEV_BROADCAST_HANDLE64 {
+STRUCT! {struct DEV_BROADCAST_HANDLE64 {
     dbch_size: DWORD,
     dbch_devicetype: DWORD,
     dbch_reserved: DWORD,
@@ -186,7 +186,7 @@ pub const DBTF_XPORT: DWORD = 0x00000002;
 pub const DBTF_SLOWNET: DWORD = 0x00000004;
 pub const DBT_VPOWERDAPI: WPARAM = 0x8100;
 pub const DBT_USERDEFINED: WPARAM = 0xFFFF;
-STRUCT!{struct _DEV_BROADCAST_USERDEFINED {
+STRUCT! {struct _DEV_BROADCAST_USERDEFINED {
     dbud_dbh: DEV_BROADCAST_HDR,
     dbud_szName: [c_char; 1],
 }}

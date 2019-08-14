@@ -8,7 +8,7 @@ use shared::minwindef::{BOOL, DWORD, FILETIME, LPDWORD, LPFILETIME, USHORT};
 use um::minwinbase::{LPSYSTEMTIME, SYSTEMTIME};
 use um::winnt::{BOOLEAN, LONG, WCHAR};
 pub const TIME_ZONE_ID_INVALID: DWORD = 0xFFFFFFFF;
-STRUCT!{struct TIME_ZONE_INFORMATION {
+STRUCT! {struct TIME_ZONE_INFORMATION {
     Bias: LONG,
     StandardName: [WCHAR; 32],
     StandardDate: SYSTEMTIME,
@@ -19,7 +19,7 @@ STRUCT!{struct TIME_ZONE_INFORMATION {
 }}
 pub type PTIME_ZONE_INFORMATION = *mut TIME_ZONE_INFORMATION;
 pub type LPTIME_ZONE_INFORMATION = *mut TIME_ZONE_INFORMATION;
-STRUCT!{struct DYNAMIC_TIME_ZONE_INFORMATION {
+STRUCT! {struct DYNAMIC_TIME_ZONE_INFORMATION {
     Bias: LONG,
     StandardName: [WCHAR; 32],
     StandardDate: SYSTEMTIME,
@@ -42,20 +42,10 @@ extern "system" {
         lpLocalTime: *const SYSTEMTIME,
         lpUniversalTime: LPSYSTEMTIME,
     ) -> BOOL;
-    pub fn FileTimeToSystemTime(
-        lpFileTime: *const FILETIME,
-        lpSystemTime: LPSYSTEMTIME,
-    ) -> BOOL;
-    pub fn SystemTimeToFileTime(
-        lpSystemTime: *const SYSTEMTIME,
-        lpFileTime: LPFILETIME,
-    ) -> BOOL;
-    pub fn GetTimeZoneInformation(
-        lpTimeZoneInformation: LPTIME_ZONE_INFORMATION,
-    ) -> DWORD;
-    pub fn SetTimeZoneInformation(
-        lpTimeZoneInformation: *const TIME_ZONE_INFORMATION,
-    ) -> BOOL;
+    pub fn FileTimeToSystemTime(lpFileTime: *const FILETIME, lpSystemTime: LPSYSTEMTIME) -> BOOL;
+    pub fn SystemTimeToFileTime(lpSystemTime: *const SYSTEMTIME, lpFileTime: LPFILETIME) -> BOOL;
+    pub fn GetTimeZoneInformation(lpTimeZoneInformation: LPTIME_ZONE_INFORMATION) -> DWORD;
+    pub fn SetTimeZoneInformation(lpTimeZoneInformation: *const TIME_ZONE_INFORMATION) -> BOOL;
     pub fn SetDynamicTimeZoneInformation(
         lpTimeZoneInformation: *const DYNAMIC_TIME_ZONE_INFORMATION,
     ) -> BOOL;

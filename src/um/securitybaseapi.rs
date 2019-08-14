@@ -6,7 +6,7 @@
 //! FFI bindings to psapi.
 use shared::guiddef::GUID;
 use shared::minwindef::{
-    BOOL, BYTE, DWORD, LPBOOL, LPDWORD, LPVOID, PBOOL, PDWORD, PUCHAR, PULONG, UCHAR, ULONG
+    BOOL, BYTE, DWORD, LPBOOL, LPDWORD, LPVOID, PBOOL, PDWORD, PUCHAR, PULONG, UCHAR, ULONG,
 };
 use um::minwinbase::LPSECURITY_ATTRIBUTES;
 use um::winnt::{
@@ -16,7 +16,7 @@ use um::winnt::{
     PSECURITY_DESCRIPTOR_CONTROL, PSID, PSID_AND_ATTRIBUTES, PSID_IDENTIFIER_AUTHORITY,
     PTOKEN_GROUPS, PTOKEN_PRIVILEGES, PVOID, SECURITY_DESCRIPTOR_CONTROL,
     SECURITY_IMPERSONATION_LEVEL, SECURITY_INFORMATION, TOKEN_INFORMATION_CLASS, TOKEN_TYPE,
-    WELL_KNOWN_SID_TYPE
+    WELL_KNOWN_SID_TYPE,
 };
 extern "system" {
     pub fn AccessCheck(
@@ -67,7 +67,7 @@ extern "system" {
         PrivilegeSetLength: LPDWORD,
         GrantedAccessList: LPDWORD,
         AccessStatusList: LPDWORD,
-        ) -> BOOL;
+    ) -> BOOL;
     pub fn AccessCheckByTypeAndAuditAlarmW(
         SubsystemName: LPCWSTR,
         HandleId: LPVOID,
@@ -254,22 +254,10 @@ extern "system" {
         dwSubAuthority7: DWORD,
         pSid: *mut PSID,
     ) -> BOOL;
-    pub fn AllocateLocallyUniqueId(
-        Luid: PLUID,
-    ) -> BOOL;
-    pub fn AreAllAccessesGranted(
-        GrantedAccess: DWORD,
-        DesiredAccess: DWORD,
-    ) -> BOOL;
-    pub fn AreAnyAccessesGranted(
-        GrantedAccess: DWORD,
-        DesiredAccess: DWORD,
-    ) -> BOOL;
-    pub fn CheckTokenMembership(
-        TokenHandle: HANDLE,
-        SidToCheck: PSID,
-        IsMember: PBOOL,
-    ) -> BOOL;
+    pub fn AllocateLocallyUniqueId(Luid: PLUID) -> BOOL;
+    pub fn AreAllAccessesGranted(GrantedAccess: DWORD, DesiredAccess: DWORD) -> BOOL;
+    pub fn AreAnyAccessesGranted(GrantedAccess: DWORD, DesiredAccess: DWORD) -> BOOL;
+    pub fn CheckTokenMembership(TokenHandle: HANDLE, SidToCheck: PSID, IsMember: PBOOL) -> BOOL;
     pub fn CheckTokenCapability(
         TokenHandle: HANDLE,
         CapabilitySidToCheck: PSID,
@@ -295,11 +283,7 @@ extern "system" {
         IsDirectoryObject: BOOLEAN,
         GenericMapping: PGENERIC_MAPPING,
     ) -> BOOL;
-    pub fn CopySid(
-        nDestinationSidLength: DWORD,
-        pDestinationSid: PSID,
-        pSourceSid: PSID,
-    ) -> BOOL;
+    pub fn CopySid(nDestinationSidLength: DWORD, pDestinationSid: PSID, pSourceSid: PSID) -> BOOL;
     pub fn CreatePrivateObjectSecurity(
         ParentDescriptor: PSECURITY_DESCRIPTOR,
         CreatorDescriptor: PSECURITY_DESCRIPTOR,
@@ -346,18 +330,9 @@ extern "system" {
         pSid: PSID,
         cbSid: *mut DWORD,
     ) -> BOOL;
-    pub fn EqualDomainSid(
-        pSid1: PSID,
-        pSid2: PSID,
-        pfEqual: *mut BOOL,
-    ) -> BOOL;
-    pub fn DeleteAce(
-        pAcl: PACL,
-        dwAceIndex: DWORD,
-    ) -> BOOL;
-    pub fn DestroyPrivateObjectSecurity(
-        ObjectDescriptor: *mut PSECURITY_DESCRIPTOR,
-    ) -> BOOL;
+    pub fn EqualDomainSid(pSid1: PSID, pSid2: PSID, pfEqual: *mut BOOL) -> BOOL;
+    pub fn DeleteAce(pAcl: PACL, dwAceIndex: DWORD) -> BOOL;
+    pub fn DestroyPrivateObjectSecurity(ObjectDescriptor: *mut PSECURITY_DESCRIPTOR) -> BOOL;
     pub fn DuplicateToken(
         ExistingTokenHandle: HANDLE,
         ImpersonationLevel: SECURITY_IMPERSONATION_LEVEL,
@@ -371,26 +346,11 @@ extern "system" {
         TokenType: TOKEN_TYPE,
         phNewToken: PHANDLE,
     ) -> BOOL;
-    pub fn EqualPrefixSid(
-        pSid1: PSID,
-        pSid2: PSID,
-    ) -> BOOL;
-    pub fn EqualSid(
-        pSid1: PSID,
-        pSid2: PSID,
-    ) -> BOOL;
-    pub fn FindFirstFreeAce(
-        pAcl: PACL,
-        pAce: *mut LPVOID,
-    ) -> BOOL;
-    pub fn FreeSid(
-        pSid: PSID,
-    ) -> PVOID;
-    pub fn GetAce(
-        pAcl: PACL,
-        dwAceIndex: DWORD,
-        pAce: *mut LPVOID,
-    ) -> BOOL;
+    pub fn EqualPrefixSid(pSid1: PSID, pSid2: PSID) -> BOOL;
+    pub fn EqualSid(pSid1: PSID, pSid2: PSID) -> BOOL;
+    pub fn FindFirstFreeAce(pAcl: PACL, pAce: *mut LPVOID) -> BOOL;
+    pub fn FreeSid(pSid: PSID) -> PVOID;
+    pub fn GetAce(pAcl: PACL, dwAceIndex: DWORD, pAce: *mut LPVOID) -> BOOL;
     pub fn GetAclInformation(
         pAcl: PACL,
         pAclInformtion: LPVOID,
@@ -411,9 +371,7 @@ extern "system" {
         nLength: DWORD,
         lpnLengthNeeded: LPDWORD,
     ) -> BOOL;
-    pub fn GetLengthSid(
-        pSid: PSID,
-    ) -> DWORD;
+    pub fn GetLengthSid(pSid: PSID) -> DWORD;
     pub fn GetPrivateObjectSecurity(
         ObjectDescriptor: PSECURITY_DESCRIPTOR,
         SecurityInformation: SECURITY_INFORMATION,
@@ -437,9 +395,7 @@ extern "system" {
         pGroup: *mut PSID,
         lpbGroupDefaulted: LPBOOL,
     ) -> BOOL;
-    pub fn GetSecurityDescriptorLength(
-        pSecurityDescriptor: PSECURITY_DESCRIPTOR,
-    ) -> DWORD;
+    pub fn GetSecurityDescriptorLength(pSecurityDescriptor: PSECURITY_DESCRIPTOR) -> DWORD;
     pub fn GetSecurityDescriptorOwner(
         pSecurityDescriptor: PSECURITY_DESCRIPTOR,
         pOwner: *mut PSID,
@@ -455,19 +411,10 @@ extern "system" {
         pSacl: *mut PACL,
         lpbSaclDefaulted: LPBOOL,
     ) -> BOOL;
-    pub fn GetSidIdentifierAuthority(
-        pSid: PSID,
-    ) -> PSID_IDENTIFIER_AUTHORITY;
-    pub fn GetSidLengthRequired(
-        nSubAuthorityCount: UCHAR,
-    ) -> DWORD;
-    pub fn GetSidSubAuthority(
-        pSid: PSID,
-        nSubAuthority: DWORD,
-    ) -> PDWORD;
-    pub fn GetSidSubAuthorityCount(
-        pSid: PSID,
-    ) -> PUCHAR;
+    pub fn GetSidIdentifierAuthority(pSid: PSID) -> PSID_IDENTIFIER_AUTHORITY;
+    pub fn GetSidLengthRequired(nSubAuthorityCount: UCHAR) -> DWORD;
+    pub fn GetSidSubAuthority(pSid: PSID, nSubAuthority: DWORD) -> PDWORD;
+    pub fn GetSidSubAuthorityCount(pSid: PSID) -> PUCHAR;
     pub fn GetTokenInformation(
         TokenHandle: HANDLE,
         TokenInformationClass: TOKEN_INFORMATION_CLASS,
@@ -480,20 +427,10 @@ extern "system" {
         pDomainSid: PSID,
         cbDomainSid: *mut DWORD,
     ) -> BOOL;
-    pub fn ImpersonateAnonymousToken(
-        ThreadHandle: HANDLE,
-    ) -> BOOL;
-    pub fn ImpersonateLoggedOnUser(
-        hToken: HANDLE,
-    ) -> BOOL;
-    pub fn ImpersonateSelf(
-        ImpersonationLevel: SECURITY_IMPERSONATION_LEVEL,
-    ) -> BOOL;
-    pub fn InitializeAcl(
-        pAcl: PACL,
-        nAclLength: DWORD,
-        dwAclRevision: DWORD,
-    ) -> BOOL;
+    pub fn ImpersonateAnonymousToken(ThreadHandle: HANDLE) -> BOOL;
+    pub fn ImpersonateLoggedOnUser(hToken: HANDLE) -> BOOL;
+    pub fn ImpersonateSelf(ImpersonationLevel: SECURITY_IMPERSONATION_LEVEL) -> BOOL;
+    pub fn InitializeAcl(pAcl: PACL, nAclLength: DWORD, dwAclRevision: DWORD) -> BOOL;
     pub fn InitializeSecurityDescriptor(
         pSecurityDescriptor: PSECURITY_DESCRIPTOR,
         dwRevision: DWORD,
@@ -503,22 +440,11 @@ extern "system" {
         pIdentifierAuthority: PSID_IDENTIFIER_AUTHORITY,
         nSubAuthorityCount: BYTE,
     ) -> BOOL;
-    pub fn IsTokenRestricted(
-        TokenHandle: HANDLE,
-    ) -> BOOL;
-    pub fn IsValidAcl(
-        pAcl: PACL,
-    ) -> BOOL;
-    pub fn IsValidSecurityDescriptor(
-        pSecurityDescriptor: PSECURITY_DESCRIPTOR,
-    ) -> BOOL;
-    pub fn IsValidSid(
-        pSid: PSID,
-    ) -> BOOL;
-    pub fn IsWellKnownSid(
-        pSid: PSID,
-        WellKnownSidType: WELL_KNOWN_SID_TYPE,
-    ) -> BOOL;
+    pub fn IsTokenRestricted(TokenHandle: HANDLE) -> BOOL;
+    pub fn IsValidAcl(pAcl: PACL) -> BOOL;
+    pub fn IsValidSecurityDescriptor(pSecurityDescriptor: PSECURITY_DESCRIPTOR) -> BOOL;
+    pub fn IsValidSid(pSid: PSID) -> BOOL;
+    pub fn IsWellKnownSid(pSid: PSID, WellKnownSidType: WELL_KNOWN_SID_TYPE) -> BOOL;
     pub fn MakeAbsoluteSD(
         pSelfRelativeSD: PSECURITY_DESCRIPTOR,
         pAbsoluteSD: PSECURITY_DESCRIPTOR,
@@ -537,10 +463,7 @@ extern "system" {
         pSelfRelativeSD: PSECURITY_DESCRIPTOR,
         lpdwBufferLength: LPDWORD,
     ) -> BOOL;
-    pub fn MapGenericMask(
-        AccessMask: PDWORD,
-        GenericMapping: PGENERIC_MAPPING,
-    );
+    pub fn MapGenericMask(AccessMask: PDWORD, GenericMapping: PGENERIC_MAPPING);
     pub fn ObjectCloseAuditAlarmW(
         SubsystemName: LPCWSTR,
         HandleId: LPVOID,
@@ -621,10 +544,7 @@ extern "system" {
         GenericMapping: PGENERIC_MAPPING,
         Token: HANDLE,
     ) -> BOOL;
-    pub fn SetSecurityAccessMask(
-        SecurityInformation: SECURITY_INFORMATION,
-        DesiredAccess: LPDWORD,
-    );
+    pub fn SetSecurityAccessMask(SecurityInformation: SECURITY_INFORMATION, DesiredAccess: LPDWORD);
     pub fn SetSecurityDescriptorControl(
         pSecurityDescriptor: PSECURITY_DESCRIPTOR,
         ControlBitsOfInterest: SECURITY_DESCRIPTOR_CONTROL,
@@ -676,10 +596,7 @@ extern "system" {
         ThumbprintSize: PULONG,
         ThumbprintAlgorithm: PULONG,
     ) -> BOOL;
-    pub fn CveEventWrite(
-        CveId: PCWSTR,
-        AdditionalDetails: PCWSTR,
-    ) -> LONG;
+    pub fn CveEventWrite(CveId: PCWSTR, AdditionalDetails: PCWSTR) -> LONG;
     pub fn DeriveCapabilitySidsFromName(
         CapName: LPCWSTR,
         CapabilityGroupSids: *mut *mut PSID,

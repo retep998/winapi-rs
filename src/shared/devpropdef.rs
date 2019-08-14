@@ -4,7 +4,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Defines property types and keys for the Plug and Play Device Property API
-use shared::guiddef::{GUID, IsEqualGUID};
+use shared::guiddef::{IsEqualGUID, GUID};
 use shared::minwindef::ULONG;
 use um::winnt::{CHAR, PCWSTR, PVOID};
 pub type DEVPROPTYPE = ULONG;
@@ -51,7 +51,7 @@ pub type DEVPROPGUID = GUID;
 pub type PDEVPROPGUID = *mut GUID;
 pub type DEVPROPID = ULONG;
 pub type PDEVPROPID = *mut ULONG;
-STRUCT!{struct DEVPROPKEY {
+STRUCT! {struct DEVPROPKEY {
     fmtid: DEVPROPGUID,
     pid: DEVPROPID,
 }}
@@ -60,12 +60,12 @@ pub type PDEVPROPKEY = *mut DEVPROPKEY;
 pub fn IsEqualDevPropKey(a: &DEVPROPKEY, b: &DEVPROPKEY) -> bool {
     (a.pid == b.pid) && IsEqualGUID(&a.fmtid, &b.fmtid)
 }
-ENUM!{enum DEVPROPSTORE {
+ENUM! {enum DEVPROPSTORE {
     DEVPROP_STORE_SYSTEM,
     DEVPROP_STORE_USER,
 }}
 pub type PDEVPROPSTORE = *mut DEVPROPSTORE;
-STRUCT!{struct DEVPROPCOMPKEY {
+STRUCT! {struct DEVPROPCOMPKEY {
     Key: DEVPROPKEY,
     Store: DEVPROPSTORE,
     LocaleName: PCWSTR,
@@ -73,7 +73,7 @@ STRUCT!{struct DEVPROPCOMPKEY {
 pub type PDEVPROPCOMPKEY = *mut DEVPROPCOMPKEY;
 // IsEqualLocaleName
 // IsEqualDevPropCompKey
-STRUCT!{struct DEVPROPERTY {
+STRUCT! {struct DEVPROPERTY {
     CompKey: DEVPROPCOMPKEY,
     Type: DEVPROPTYPE,
     BufferSize: ULONG,

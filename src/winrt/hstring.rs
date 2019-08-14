@@ -6,20 +6,20 @@
 //! This interface definition contains typedefs for Windows Runtime data types.
 use ctypes::c_char;
 use um::winnt::PVOID;
-DECLARE_HANDLE!{HSTRING, HSTRING__}
+DECLARE_HANDLE! {HSTRING, HSTRING__}
 #[cfg(target_pointer_width = "32")]
-UNION!{union HSTRING_HEADER_Reserved {
+UNION! {union HSTRING_HEADER_Reserved {
     [u32; 5],
     Reserved1 Reserved1_mut: PVOID,
     Reserved2 Reserved2_mut: [c_char; 20],
 }}
 #[cfg(target_pointer_width = "64")]
-UNION!{union HSTRING_HEADER_Reserved {
+UNION! {union HSTRING_HEADER_Reserved {
     [u64; 3],
     Reserved1 Reserved1_mut: PVOID,
     Reserved2 Reserved2_mut: [c_char; 24],
 }}
-STRUCT!{struct HSTRING_HEADER {
+STRUCT! {struct HSTRING_HEADER {
     Reserved: HSTRING_HEADER_Reserved,
 }}
-DECLARE_HANDLE!{HSTRING_BUFFER, HSTRING_BUFFER__}
+DECLARE_HANDLE! {HSTRING_BUFFER, HSTRING_BUFFER__}

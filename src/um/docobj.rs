@@ -9,7 +9,7 @@ use shared::minwindef::{DWORD, ULONG};
 use um::oaidl::VARIANT;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::HRESULT;
-ENUM!{enum OLECMDF {
+ENUM! {enum OLECMDF {
     OLECMDF_SUPPORTED = 0x1,
     OLECMDF_ENABLED = 0x2,
     OLECMDF_LATCHED = 0x4,
@@ -17,23 +17,23 @@ ENUM!{enum OLECMDF {
     OLECMDF_INVISIBLE = 0x10,
     OLECMDF_DEFHIDEONCTXTMENU = 0x20,
 }}
-STRUCT!{struct OLECMD {
+STRUCT! {struct OLECMD {
     cmdID: ULONG,
     cmdf: DWORD,
 }}
-STRUCT!{struct OLECMDTEXT {
+STRUCT! {struct OLECMDTEXT {
     cmdtextf: DWORD,
     cwActual: ULONG,
     cwBuf: ULONG,
     rgwz: [wchar_t; 1],
 }}
-ENUM!{enum OLECMDEXECOPT {
+ENUM! {enum OLECMDEXECOPT {
     OLECMDEXECOPT_DODEFAULT = 0,
     OLECMDEXECOPT_PROMPTUSER = 1,
     OLECMDEXECOPT_DONTPROMPTUSER = 2,
     OLECMDEXECOPT_SHOWHELP = 3,
 }}
-ENUM!{enum OLECMDID {
+ENUM! {enum OLECMDID {
     OLECMDID_OPEN = 1,
     OLECMDID_NEW = 2,
     OLECMDID_SAVE = 3,
@@ -118,7 +118,7 @@ ENUM!{enum OLECMDID {
     OLECMDID_SHOWMESSAGE_BLOCKABLE = 84,
     OLECMDID_SHOWTASKDLG_BLOCKABLE = 85,
 }}
-RIDL!{#[uuid(0xb722bccb, 0x4e68, 0x101b, 0xa2, 0xbc, 0x00, 0xaa, 0x00, 0x40, 0x47, 0x70)]
+RIDL! {#[uuid(0xb722bccb, 0x4e68, 0x101b, 0xa2, 0xbc, 0x00, 0xaa, 0x00, 0x40, 0x47, 0x70)]
 interface IOleCommandTarget(IOleCommandTargetVtbl): IUnknown(IUnknownVtbl) {
     fn QueryStatus(
         pguidCmdGroup: *const GUID,

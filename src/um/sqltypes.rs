@@ -69,19 +69,19 @@ pub type HDBC = *mut c_void;
 pub type HSTMT = *mut c_void;
 pub type RETCODE = c_short;
 pub type SQLHWND = HWND;
-STRUCT!{struct DATE_STRUCT {
+STRUCT! {struct DATE_STRUCT {
     year: SQLSMALLINT,
     month: SQLUSMALLINT,
     day: SQLUSMALLINT,
 }}
 pub type SQL_DATE_STRUCT = DATE_STRUCT;
-STRUCT!{struct TIME_STRUCT {
+STRUCT! {struct TIME_STRUCT {
     hour: SQLUSMALLINT,
     minute: SQLUSMALLINT,
     second: SQLUSMALLINT,
 }}
 pub type SQL_TIME_STRUCT = TIME_STRUCT;
-STRUCT!{struct TIMESTAMP_STRUCT {
+STRUCT! {struct TIMESTAMP_STRUCT {
     year: SQLSMALLINT,
     month: SQLUSMALLINT,
     day: SQLUSMALLINT,
@@ -91,7 +91,7 @@ STRUCT!{struct TIMESTAMP_STRUCT {
     fraction: SQLUINTEGER,
 }}
 pub type SQL_TIMESTAMP_STRUCT = TIMESTAMP_STRUCT;
-ENUM!{enum SQLINTERVAL {
+ENUM! {enum SQLINTERVAL {
     SQL_IS_YEAR = 1,
     SQL_IS_MONTH = 2,
     SQL_IS_DAY = 3,
@@ -106,23 +106,23 @@ ENUM!{enum SQLINTERVAL {
     SQL_IS_HOUR_TO_SECOND = 12,
     SQL_IS_MINUTE_TO_SECOND = 13,
 }}
-STRUCT!{struct SQL_YEAR_MONTH_STRUCT {
+STRUCT! {struct SQL_YEAR_MONTH_STRUCT {
     year: SQLUINTEGER,
     month: SQLUINTEGER,
 }}
-STRUCT!{struct SQL_DAY_SECOND_STRUCT {
+STRUCT! {struct SQL_DAY_SECOND_STRUCT {
     day: SQLUINTEGER,
     hour: SQLUINTEGER,
     minute: SQLUINTEGER,
     second: SQLUINTEGER,
     fraction: SQLUINTEGER,
 }}
-UNION!{union SQL_INTERVAL_STRUCT_intval {
+UNION! {union SQL_INTERVAL_STRUCT_intval {
     [u32; 5],
     year_month year_month_mut: SQL_YEAR_MONTH_STRUCT,
     day_second day_second_mut: SQL_DAY_SECOND_STRUCT,
 }}
-STRUCT!{struct SQL_INTERVAL_STRUCT {
+STRUCT! {struct SQL_INTERVAL_STRUCT {
     interval_type: SQLINTERVAL,
     interval_sign: SQLSMALLINT,
     intval: SQL_INTERVAL_STRUCT_intval,
@@ -131,7 +131,7 @@ pub type ODBCINT64 = __int64;
 pub type SQLBIGINT = ODBCINT64;
 pub type SQLUBIGINT = __uint64;
 pub const SQL_MAX_NUMERIC_LEN: usize = 16;
-STRUCT!{struct SQL_NUMERIC_STRUCT {
+STRUCT! {struct SQL_NUMERIC_STRUCT {
     precision: SQLCHAR,
     scale: SQLSCHAR,
     sign: SQLCHAR,

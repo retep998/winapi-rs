@@ -8,45 +8,45 @@ use shared::basetsd::ULONG64;
 use shared::guiddef::GUID;
 use shared::minwindef::{UCHAR, ULONG, USHORT};
 use um::winnt::WCHAR;
-ENUM!{enum USB_DEVICE_SPEED {
+ENUM! {enum USB_DEVICE_SPEED {
     UsbLowSpeed = 0,
     UsbFullSpeed,
     UsbHighSpeed,
     UsbSuperSpeed,
 }}
-ENUM!{enum USB_DEVICE_TYPE {
+ENUM! {enum USB_DEVICE_TYPE {
     Usb11Device = 0,
     Usb20Device,
 }}
-STRUCT!{#[repr(packed)] struct BM_REQUEST_TYPE {
+STRUCT! {#[repr(packed)] struct BM_REQUEST_TYPE {
     B: UCHAR,
 }}
-BITFIELD!{BM_REQUEST_TYPE B: UCHAR [
+BITFIELD! {BM_REQUEST_TYPE B: UCHAR [
     Recipient set_Recipient[0..2],
     Reserved set_Reserved[2..5],
     Type set_Type[5..7],
     Dir set_Dir[7..8],
 ]}
 pub type PBM_REQUEST_TYPE = *mut BM_REQUEST_TYPE;
-STRUCT!{#[repr(packed)] struct USB_DEFAULT_PIPE_SETUP_PACKET_wValue_s {
+STRUCT! {#[repr(packed)] struct USB_DEFAULT_PIPE_SETUP_PACKET_wValue_s {
     LowByte: UCHAR,
     HiByte: UCHAR,
 }}
-UNION!{#[repr(packed)] union USB_DEFAULT_PIPE_SETUP_PACKET_wValue {
+UNION! {#[repr(packed)] union USB_DEFAULT_PIPE_SETUP_PACKET_wValue {
     [u16; 1],
     s s_mut: USB_DEFAULT_PIPE_SETUP_PACKET_wValue_s,
     W W_mut: USHORT,
 }}
-STRUCT!{#[repr(packed)] struct USB_DEFAULT_PIPE_SETUP_PACKET_wIndex_s {
+STRUCT! {#[repr(packed)] struct USB_DEFAULT_PIPE_SETUP_PACKET_wIndex_s {
     LowByte: UCHAR,
     HiByte: UCHAR,
 }}
-UNION!{#[repr(packed)] union USB_DEFAULT_PIPE_SETUP_PACKET_wIndex {
+UNION! {#[repr(packed)] union USB_DEFAULT_PIPE_SETUP_PACKET_wIndex {
     [u16; 1],
     s s_mut: USB_DEFAULT_PIPE_SETUP_PACKET_wIndex_s,
     W W_mut: USHORT,
 }}
-STRUCT!{#[repr(packed)] struct USB_DEFAULT_PIPE_SETUP_PACKET {
+STRUCT! {#[repr(packed)] struct USB_DEFAULT_PIPE_SETUP_PACKET {
     bmRequestType: BM_REQUEST_TYPE,
     bRequest: UCHAR,
     wValue: USB_DEFAULT_PIPE_SETUP_PACKET_wValue,
@@ -121,10 +121,10 @@ pub const USB_GETSTATUS_REMOTE_WAKEUP_ENABLED: UCHAR = 0x02;
 pub const USB_GETSTATUS_U1_ENABLE: UCHAR = 0x04;
 pub const USB_GETSTATUS_U2_ENABLE: UCHAR = 0x08;
 pub const USB_GETSTATUS_LTM_ENABLE: UCHAR = 0x10;
-STRUCT!{#[repr(packed)] struct USB_DEVICE_STATUS {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_STATUS {
     AsUshort16: USHORT,
 }}
-BITFIELD!{USB_DEVICE_STATUS AsUshort16: USHORT [
+BITFIELD! {USB_DEVICE_STATUS AsUshort16: USHORT [
     SelfPowered set_SelfPowered[0..1],
     RemoteWakeup set_RemoteWakeup[1..2],
     U1Enable set_U1Enable[2..3],
@@ -133,29 +133,29 @@ BITFIELD!{USB_DEVICE_STATUS AsUshort16: USHORT [
     Reserved set_Reserved[5..16],
 ]}
 pub type PUSB_DEVICE_STATUS = *mut USB_DEVICE_STATUS;
-STRUCT!{#[repr(packed)] struct USB_INTERFACE_STATUS {
+STRUCT! {#[repr(packed)] struct USB_INTERFACE_STATUS {
     AsUshort16: USHORT,
 }}
-BITFIELD!{USB_INTERFACE_STATUS AsUshort16: USHORT [
+BITFIELD! {USB_INTERFACE_STATUS AsUshort16: USHORT [
     RemoteWakeupCapable set_RemoteWakeupCapable[0..1],
     RemoteWakeupEnabled set_RemoteWakeupEnabled[1..2],
     Reserved set_Reserved[2..16],
 ]}
 pub type PUSB_INTERFACE_STATUS = *mut USB_INTERFACE_STATUS;
-STRUCT!{#[repr(packed)] struct USB_ENDPOINT_STATUS {
+STRUCT! {#[repr(packed)] struct USB_ENDPOINT_STATUS {
     AsUshort16: USHORT,
 }}
-BITFIELD!{USB_ENDPOINT_STATUS AsUshort16: USHORT [
+BITFIELD! {USB_ENDPOINT_STATUS AsUshort16: USHORT [
     Halt set_Halt[0..1],
     Reserved set_Reserved[1..16],
 ]}
 pub type PUSB_ENDPOINT_STATUS = *mut USB_ENDPOINT_STATUS;
-STRUCT!{#[repr(packed)] struct USB_COMMON_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_COMMON_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
 }}
 pub type PUSB_COMMON_DESCRIPTOR = *mut USB_COMMON_DESCRIPTOR;
-STRUCT!{#[repr(packed)] struct USB_DEVICE_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bcdUSB: USHORT,
@@ -195,7 +195,7 @@ pub const USB_DEVICE_CLASS_WIRELESS_CONTROLLER: UCHAR = 0xE0;
 pub const USB_DEVICE_CLASS_MISCELLANEOUS: UCHAR = 0xEF;
 pub const USB_DEVICE_CLASS_APPLICATION_SPECIFIC: UCHAR = 0xFE;
 pub const USB_DEVICE_CLASS_VENDOR_SPECIFIC: UCHAR = 0xFF;
-STRUCT!{#[repr(packed)] struct USB_DEVICE_QUALIFIER_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_QUALIFIER_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bcdUSB: USHORT,
@@ -207,7 +207,7 @@ STRUCT!{#[repr(packed)] struct USB_DEVICE_QUALIFIER_DESCRIPTOR {
     bReserved: UCHAR,
 }}
 pub type PUSB_DEVICE_QUALIFIER_DESCRIPTOR = *mut USB_DEVICE_QUALIFIER_DESCRIPTOR;
-STRUCT!{#[repr(packed)] struct USB_BOS_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_BOS_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     wTotalLength: USHORT,
@@ -227,10 +227,10 @@ pub const USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB: UCHAR = 0x0A;
 pub const USB_DEVICE_CAPABILITY_PRECISION_TIME_MEASUREMENT: UCHAR = 0x0B;
 pub const USB_DEVICE_CAPABILITY_BILLBOARD: UCHAR = 0x0D;
 pub const USB_DEVICE_CAPABILITY_CONFIGURATION_SUMMARY: UCHAR = 0x10;
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes {
     AsUlong: ULONG,
 }}
-BITFIELD!{USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes AsUlong: ULONG [
+BITFIELD! {USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes AsUlong: ULONG [
     Reserved set_Reserved[0..1],
     LPMCapable set_LPMCapable[1..2],
     BESLAndAlternateHIRDSupported set_BESLAndAlternateHIRDSupported[2..3],
@@ -241,19 +241,19 @@ BITFIELD!{USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes AsUlong:
     DeepBESL set_DeepBESL[12..16],
     Reserved2 set_Reserved2[16..32],
 ]}
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bDevCapabilityType: UCHAR,
     bmAttributes: USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes,
 }}
-pub type PUSB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR
-    = *mut USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR;
+pub type PUSB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR =
+    *mut USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR;
 pub const USB_DEVICE_CAPABILITY_USB20_EXTENSION_BMATTRIBUTES_RESERVED_MASK: ULONG = 0xFFFF00E1;
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR_bmAttributes {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR_bmAttributes {
     AsUlong: ULONG,
 }}
-BITFIELD!{USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR_bmAttributes AsUlong: ULONG [
+BITFIELD! {USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR_bmAttributes AsUlong: ULONG [
     Reserved set_Reserved[0..1],
     BatteryCharging set_BatteryCharging[1..2],
     USBPowerDelivery set_USBPowerDelivery[2..3],
@@ -269,7 +269,7 @@ BITFIELD!{USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR_bmAttributes AsUlong: 
     UsesVbus set_UsesVbus[14..15],
     Reserved3 set_Reserved3[15..32],
 ]}
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bDevCapabilityType: UCHAR,
@@ -281,18 +281,18 @@ STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR {
     bcdPDVersion: USHORT,
     bcdUSBTypeCVersion: USHORT,
 }}
-pub type PUSB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR
-    = *mut USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR;
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR_bmCapabilities {
+pub type PUSB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR =
+    *mut USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR;
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR_bmCapabilities {
     AsUshort: USHORT,
 }}
-BITFIELD!{USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR_bmCapabilities AsUshort: USHORT [
+BITFIELD! {USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR_bmCapabilities AsUshort: USHORT [
     BatteryCharging set_BatteryCharging[0..1],
     USBPowerDelivery set_USBPowerDelivery[1..2],
     USBTypeCCurrent set_USBTypeCCurrent[2..3],
     Reserved set_Reserved[3..16],
 ]}
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bDevCapabilityType: UCHAR,
@@ -305,9 +305,9 @@ STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR
     dwMaxPeakPower: ULONG,
     dwMaxPeakPowerTime: ULONG,
 }}
-pub type PUSB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR
-    = *mut USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR;
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR {
+pub type PUSB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR =
+    *mut USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR;
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bDevCapabilityType: UCHAR,
@@ -317,8 +317,8 @@ STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR {
     bU1DevExitLat: UCHAR,
     wU2DevExitLat: USHORT,
 }}
-pub type PUSB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR
-    = *mut USB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR;
+pub type PUSB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR =
+    *mut USB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR;
 pub const USB_DEVICE_CAPABILITY_SUPERSPEED_BMATTRIBUTES_RESERVED_MASK: UCHAR = 0xFD;
 pub const USB_DEVICE_CAPABILITY_SUPERSPEED_BMATTRIBUTES_LTM_CAPABLE: UCHAR = 0x02;
 pub const USB_DEVICE_CAPABILITY_SUPERSPEED_SPEEDS_SUPPORTED_RESERVED_MASK: USHORT = 0xFFF0;
@@ -340,10 +340,10 @@ pub const USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_DIR_RX: ULONG = 0;
 pub const USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_DIR_TX: ULONG = 1;
 pub const USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_PROTOCOL_SS: ULONG = 0;
 pub const USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_PROTOCOL_SSP: ULONG = 1;
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED {
     AsUlong32: ULONG,
 }}
-BITFIELD!{USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED AsUlong32: ULONG [
+BITFIELD! {USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED AsUlong32: ULONG [
     SublinkSpeedAttrID set_SublinkSpeedAttrID[0..4],
     LaneSpeedExponent set_LaneSpeedExponent[4..6],
     SublinkTypeMode set_SublinkTypeMode[6..7],
@@ -352,26 +352,26 @@ BITFIELD!{USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED AsUlong32: ULONG [
     LinkProtocol set_LinkProtocol[14..16],
     LaneSpeedMantissa set_LaneSpeedMantissa[16..32],
 ]}
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_bmAttributes {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_bmAttributes {
     AsUlong32: ULONG,
 }}
-BITFIELD!{USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_bmAttributes AsUlong32: ULONG [
+BITFIELD! {USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_bmAttributes AsUlong32: ULONG [
     SublinkSpeedAttrCount set_SublinkSpeedAttrCount[0..5],
     SublinkSpeedIDCount set_SublinkSpeedIDCount[5..9],
     Reserved set_Reserved[9..32],
 ]}
-STRUCT!{#[repr(packed)]
+STRUCT! {#[repr(packed)]
     struct USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_wFunctionalitySupport {
     AsUshort: USHORT,
 }}
-BITFIELD!{
+BITFIELD! {
     USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_wFunctionalitySupport AsUshort: USHORT [
     SublinkSpeedAttrID set_SublinkSpeedAttrID[0..4],
     Reserved set_Reserved[4..8],
     MinRxLaneCount set_MinRxLaneCount[8..12],
     MinTxLaneCount set_MinTxLaneCount[12..16],
 ]}
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bDevCapabilityType: UCHAR,
@@ -382,23 +382,23 @@ STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPT
     wReserved: USHORT,
     bmSublinkSpeedAttr: [USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED; 1],
 }}
-pub type PUSB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR
-    = *mut USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR;
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_CONTAINER_ID_DESCRIPTOR {
+pub type PUSB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR =
+    *mut USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR;
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_CONTAINER_ID_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bDevCapabilityType: UCHAR,
     bReserved: UCHAR,
     ContainerID: [UCHAR; 16],
 }}
-pub type PUSB_DEVICE_CAPABILITY_CONTAINER_ID_DESCRIPTOR
-    = *mut USB_DEVICE_CAPABILITY_CONTAINER_ID_DESCRIPTOR;
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_CONFIGURATION_SUMMARY_DESCRIPTOR_Function {
+pub type PUSB_DEVICE_CAPABILITY_CONTAINER_ID_DESCRIPTOR =
+    *mut USB_DEVICE_CAPABILITY_CONTAINER_ID_DESCRIPTOR;
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_CONFIGURATION_SUMMARY_DESCRIPTOR_Function {
     bClass: UCHAR,
     bSubClass: UCHAR,
     bProtocol: UCHAR,
 }}
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_CONFIGURATION_SUMMARY_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_CONFIGURATION_SUMMARY_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bDevCapabilityType: UCHAR,
@@ -408,9 +408,9 @@ STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_CONFIGURATION_SUMMARY_DESCR
     bNumFunctions: UCHAR,
     Function: [USB_DEVICE_CAPABILITY_CONFIGURATION_SUMMARY_DESCRIPTOR_Function; 1],
 }}
-pub type PUSB_DEVICE_CAPABILITY_CONFIGURATION_SUMMARY_DESCRIPTOR
-    = *mut USB_DEVICE_CAPABILITY_CONFIGURATION_SUMMARY_DESCRIPTOR;
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR {
+pub type PUSB_DEVICE_CAPABILITY_CONFIGURATION_SUMMARY_DESCRIPTOR =
+    *mut USB_DEVICE_CAPABILITY_CONFIGURATION_SUMMARY_DESCRIPTOR;
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bDevCapabilityType: UCHAR,
@@ -418,22 +418,22 @@ STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR {
     PlatformCapabilityUuid: GUID,
     CapabililityData: [UCHAR; 1],
 }}
-pub type PUSB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR
-    = *mut USB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR;
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_VconnPower {
+pub type PUSB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR =
+    *mut USB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR;
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_VconnPower {
     AsUshort: USHORT,
 }}
-BITFIELD!{USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_VconnPower AsUshort: USHORT [
+BITFIELD! {USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_VconnPower AsUshort: USHORT [
     VConnPowerNeededForFullFunctionality set_VConnPowerNeededForFullFunctionality[0..3],
     Reserved set_Reserved[3..15],
     NoVconnPowerRequired set_NoVconnPowerRequired[15..16],
 ]}
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_AlternateMode {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_AlternateMode {
     wSVID: USHORT,
     bAlternateMode: UCHAR,
     iAlternateModeSetting: UCHAR,
 }}
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bDevCapabilityType: UCHAR,
@@ -445,17 +445,17 @@ STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR {
     bReserved: ULONG,
     AlternateMode: [USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_AlternateMode; 1],
 }}
-pub type PUSB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR
-    = *mut USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR;
-DEFINE_GUID!{GUID_USB_MSOS20_PLATFORM_CAPABILITY_ID,
-    0xd8dd60df, 0x4589, 0x4cc7, 0x9c, 0xd2, 0x65, 0x9d, 0x9e, 0x64, 0x8a, 0x9f}
-STRUCT!{#[repr(packed)] struct USB_DEVICE_CAPABILITY_DESCRIPTOR {
+pub type PUSB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR =
+    *mut USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR;
+DEFINE_GUID! {GUID_USB_MSOS20_PLATFORM_CAPABILITY_ID,
+0xd8dd60df, 0x4589, 0x4cc7, 0x9c, 0xd2, 0x65, 0x9d, 0x9e, 0x64, 0x8a, 0x9f}
+STRUCT! {#[repr(packed)] struct USB_DEVICE_CAPABILITY_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bDevCapabilityType: UCHAR,
 }}
 pub type PUSB_DEVICE_CAPABILITY_DESCRIPTOR = *mut USB_DEVICE_CAPABILITY_DESCRIPTOR;
-STRUCT!{#[repr(packed)] struct USB_CONFIGURATION_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_CONFIGURATION_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     wTotalLength: USHORT,
@@ -471,7 +471,7 @@ pub const USB_CONFIG_BUS_POWERED: UCHAR = 0x80;
 pub const USB_CONFIG_SELF_POWERED: UCHAR = 0x40;
 pub const USB_CONFIG_REMOTE_WAKEUP: UCHAR = 0x20;
 pub const USB_CONFIG_RESERVED: UCHAR = 0x1F;
-STRUCT!{#[repr(packed)] struct USB_INTERFACE_ASSOCIATION_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_INTERFACE_ASSOCIATION_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bFirstInterface: UCHAR,
@@ -482,7 +482,7 @@ STRUCT!{#[repr(packed)] struct USB_INTERFACE_ASSOCIATION_DESCRIPTOR {
     iFunction: UCHAR,
 }}
 pub type PUSB_INTERFACE_ASSOCIATION_DESCRIPTOR = *mut USB_INTERFACE_ASSOCIATION_DESCRIPTOR;
-STRUCT!{#[repr(packed)] struct USB_INTERFACE_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_INTERFACE_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bInterfaceNumber: UCHAR,
@@ -494,7 +494,7 @@ STRUCT!{#[repr(packed)] struct USB_INTERFACE_DESCRIPTOR {
     iInterface: UCHAR,
 }}
 pub type PUSB_INTERFACE_DESCRIPTOR = *mut USB_INTERFACE_DESCRIPTOR;
-STRUCT!{#[repr(packed)] struct USB_ENDPOINT_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_ENDPOINT_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bEndpointAddress: UCHAR,
@@ -550,10 +550,10 @@ pub const USB_ENDPOINT_TYPE_ISOCHRONOUS_USAGE_RESERVED: UCHAR = 0x30;
 pub fn USB_ENDPOINT_TYPE_ISOCHRONOUS_USAGE(bmAttr: UCHAR) -> UCHAR {
     bmAttr & USB_ENDPOINT_TYPE_ISOCHRONOUS_USAGE_MASK
 }
-STRUCT!{#[repr(packed)] struct USB_HIGH_SPEED_MAXPACKET {
+STRUCT! {#[repr(packed)] struct USB_HIGH_SPEED_MAXPACKET {
     us: USHORT,
 }}
-BITFIELD!{USB_HIGH_SPEED_MAXPACKET us: USHORT [
+BITFIELD! {USB_HIGH_SPEED_MAXPACKET us: USHORT [
     MaxPacket set_MaxPacket[0..11],
     HSmux set_HSmux[11..13],
     Reserved set_Reserved[13..16],
@@ -563,57 +563,57 @@ pub const USB_ENDPOINT_SUPERSPEED_BULK_MAX_PACKET_SIZE: USHORT = 1024;
 pub const USB_ENDPOINT_SUPERSPEED_CONTROL_MAX_PACKET_SIZE: USHORT = 512;
 pub const USB_ENDPOINT_SUPERSPEED_ISO_MAX_PACKET_SIZE: USHORT = 1024;
 pub const USB_ENDPOINT_SUPERSPEED_INTERRUPT_MAX_PACKET_SIZE: USHORT = 1024;
-STRUCT!{#[repr(packed)] struct USB_STRING_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_STRING_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bString: [WCHAR; 1],
 }}
 pub type PUSB_STRING_DESCRIPTOR = *mut USB_STRING_DESCRIPTOR;
 pub const MAXIMUM_USB_STRING_LENGTH: UCHAR = 255;
-STRUCT!{#[repr(packed)] struct USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_Bulk {
+STRUCT! {#[repr(packed)] struct USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_Bulk {
     BitField: UCHAR,
 }}
-BITFIELD!{USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_Bulk BitField: UCHAR [
+BITFIELD! {USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_Bulk BitField: UCHAR [
     MaxStreams set_MaxStreams[0..5],
     Reserved1 set_Reserved1[5..8],
 ]}
-STRUCT!{#[repr(packed)]
+STRUCT! {#[repr(packed)]
     struct USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_Isochronous {
     BitField: UCHAR,
 }}
-BITFIELD!{USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_Isochronous BitField: UCHAR [
+BITFIELD! {USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_Isochronous BitField: UCHAR [
     Mult set_Mult[0..2],
     Reserved2 set_Reserved2[2..7],
     SspCompanion set_SspCompanion[7..8],
 ]}
-UNION!{#[repr(packed)] union USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes {
+UNION! {#[repr(packed)] union USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes {
     [u8; 1],
     AsUchar AsUchar_mut: UCHAR,
     Bulk Bulk_mut: USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_Bulk,
     Isochronous Isochronous_mut:
         USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_Isochronous,
 }}
-STRUCT!{#[repr(packed)] struct USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bMaxBurst: UCHAR,
     bmAttributes: USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes,
     wBytesPerInterval: USHORT,
 }}
-pub type PUSB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR
-    = *mut USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR;
+pub type PUSB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR =
+    *mut USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR;
 pub const USB_SUPERSPEED_ISOCHRONOUS_MAX_MULTIPLIER: UCHAR = 2;
-STRUCT!{#[repr(packed)] struct USB_SUPERSPEEDPLUS_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_SUPERSPEEDPLUS_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     wReserved: USHORT,
     dwBytesPerInterval: ULONG,
 }}
-pub type PUSB_SUPERSPEEDPLUS_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR
-    = *mut USB_SUPERSPEEDPLUS_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR;
+pub type PUSB_SUPERSPEEDPLUS_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR =
+    *mut USB_SUPERSPEEDPLUS_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR;
 pub const USB_SUPERSPEEDPLUS_ISOCHRONOUS_MIN_BYTESPERINTERVAL: ULONG = 0xC001;
 pub const USB_SUPERSPEEDPLUS_ISOCHRONOUS_MAX_BYTESPERINTERVAL: ULONG = 0xFFFFFF;
-STRUCT!{#[repr(packed)] struct USB_HUB_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_HUB_DESCRIPTOR {
     bDescriptorLength: UCHAR,
     bDescriptorType: UCHAR,
     bNumberOfPorts: UCHAR,
@@ -624,7 +624,7 @@ STRUCT!{#[repr(packed)] struct USB_HUB_DESCRIPTOR {
 }}
 pub type PUSB_HUB_DESCRIPTOR = *mut USB_HUB_DESCRIPTOR;
 pub const USB_20_HUB_DESCRIPTOR_TYPE: UCHAR = 0x29;
-STRUCT!{#[repr(packed)] struct USB_30_HUB_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_30_HUB_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bNumberOfPorts: UCHAR,
@@ -644,38 +644,38 @@ pub const USB_REQUEST_GET_TT_STATE: UCHAR = 0x0A;
 pub const USB_REQUEST_STOP_TT: UCHAR = 0x0B;
 pub const USB_REQUEST_SET_HUB_DEPTH: UCHAR = 0x0C;
 pub const USB_REQUEST_GET_PORT_ERR_COUNT: UCHAR = 0x0D;
-STRUCT!{#[repr(packed)] struct USB_HUB_STATUS {
+STRUCT! {#[repr(packed)] struct USB_HUB_STATUS {
     AsUshort16: USHORT,
 }}
-BITFIELD!{USB_HUB_STATUS AsUshort16: USHORT [
+BITFIELD! {USB_HUB_STATUS AsUshort16: USHORT [
     LocalPowerLost set_LocalPowerLost[0..1],
     OverCurrent set_OverCurrent[1..2],
     Reserved set_Reserved[2..16],
 ]}
 pub type PUSB_HUB_STATUS = *mut USB_HUB_STATUS;
-STRUCT!{#[repr(packed)] struct USB_HUB_CHANGE {
+STRUCT! {#[repr(packed)] struct USB_HUB_CHANGE {
     AsUshort16: USHORT,
 }}
-BITFIELD!{USB_HUB_CHANGE AsUshort16: USHORT [
+BITFIELD! {USB_HUB_CHANGE AsUshort16: USHORT [
     LocalPowerChange set_LocalPowerChange[0..1],
     OverCurrentChange set_OverCurrentChange[1..2],
     Reserved set_Reserved[2..16],
 ]}
 pub type PUSB_HUB_CHANGE = *mut USB_HUB_CHANGE;
-STRUCT!{#[repr(packed)] struct USB_HUB_STATUS_AND_CHANGE_s {
+STRUCT! {#[repr(packed)] struct USB_HUB_STATUS_AND_CHANGE_s {
     HubStatus: USB_HUB_STATUS,
     HubChange: USB_HUB_CHANGE,
 }}
-UNION!{#[repr(packed)] union USB_HUB_STATUS_AND_CHANGE {
+UNION! {#[repr(packed)] union USB_HUB_STATUS_AND_CHANGE {
     [u32; 1],
     AsUlong32 AsUlong32_mut: ULONG,
     s s_mut: USB_HUB_STATUS_AND_CHANGE_s,
 }}
 pub type PUSB_HUB_STATUS_AND_CHANGE = *mut USB_HUB_STATUS_AND_CHANGE;
-STRUCT!{#[repr(packed)] struct USB_20_PORT_STATUS {
+STRUCT! {#[repr(packed)] struct USB_20_PORT_STATUS {
     AsUshort16: USHORT,
 }}
-BITFIELD!{USB_20_PORT_STATUS AsUshort16: USHORT [
+BITFIELD! {USB_20_PORT_STATUS AsUshort16: USHORT [
     CurrentConnectStatus set_CurrentConnectStatus[0..1],
     PortEnabledDisabled set_PortEnabledDisabled[1..2],
     Suspend set_Suspend[2..3],
@@ -699,10 +699,10 @@ pub const USB_PORT_STATUS_RESET: USHORT = 0x0010;
 pub const USB_PORT_STATUS_POWER: USHORT = 0x0100;
 pub const USB_PORT_STATUS_LOW_SPEED: USHORT = 0x0200;
 pub const USB_PORT_STATUS_HIGH_SPEED: USHORT = 0x0400;
-STRUCT!{#[repr(packed)] struct USB_20_PORT_CHANGE {
+STRUCT! {#[repr(packed)] struct USB_20_PORT_CHANGE {
     AsUshort16: USHORT,
 }}
-BITFIELD!{USB_20_PORT_CHANGE AsUshort16: USHORT [
+BITFIELD! {USB_20_PORT_CHANGE AsUshort16: USHORT [
     ConnectStatusChange set_ConnectStatusChange[0..1],
     PortEnableDisableChange set_PortEnableDisableChange[1..2],
     SuspendChange set_SuspendChange[2..3],
@@ -711,10 +711,10 @@ BITFIELD!{USB_20_PORT_CHANGE AsUshort16: USHORT [
     Reserved2 set_Reserved2[5..16],
 ]}
 pub type PUSB_20_PORT_CHANGE = *mut USB_20_PORT_CHANGE;
-STRUCT!{#[repr(packed)] struct USB_30_PORT_STATUS {
+STRUCT! {#[repr(packed)] struct USB_30_PORT_STATUS {
     AsUshort16: USHORT,
 }}
-BITFIELD!{USB_30_PORT_STATUS AsUshort16: USHORT [
+BITFIELD! {USB_30_PORT_STATUS AsUshort16: USHORT [
     CurrentConnectStatus set_CurrentConnectStatus[0..1],
     PortEnabledDisabled set_PortEnabledDisabled[1..2],
     Reserved0 set_Reserved0[2..3],
@@ -739,10 +739,10 @@ pub const PORT_LINK_STATE_HOT_RESET: USHORT = 9;
 pub const PORT_LINK_STATE_COMPLIANCE_MODE: USHORT = 10;
 pub const PORT_LINK_STATE_LOOPBACK: USHORT = 11;
 pub const PORT_LINK_STATE_TEST_MODE: USHORT = 11;
-STRUCT!{#[repr(packed)] struct USB_30_PORT_CHANGE {
+STRUCT! {#[repr(packed)] struct USB_30_PORT_CHANGE {
     AsUshort16: USHORT,
 }}
-BITFIELD!{USB_30_PORT_CHANGE AsUshort16: USHORT [
+BITFIELD! {USB_30_PORT_CHANGE AsUshort16: USHORT [
     ConnectStatusChange set_ConnectStatusChange[0..1],
     Reserved2 set_Reserved2[1..3],
     OverCurrentIndicatorChange set_OverCurrentIndicatorChange[3..4],
@@ -753,24 +753,24 @@ BITFIELD!{USB_30_PORT_CHANGE AsUshort16: USHORT [
     Reserved3 set_Reserved3[8..16],
 ]}
 pub type PUSB_30_PORT_CHANGE = *mut USB_30_PORT_CHANGE;
-UNION!{#[repr(packed)] union USB_PORT_STATUS {
+UNION! {#[repr(packed)] union USB_PORT_STATUS {
     [u16; 1],
     AsUshort16 AsUshort16_mut: USHORT,
     Usb20PortStatus Usb20PortStatus_mut: USB_20_PORT_STATUS,
     Usb30PortStatus Usb30PortStatus_mut: USB_30_PORT_STATUS,
 }}
 pub type PUSB_PORT_STATUS = *mut USB_PORT_STATUS;
-UNION!{#[repr(packed)] union USB_PORT_CHANGE {
+UNION! {#[repr(packed)] union USB_PORT_CHANGE {
     [u16; 1],
     AsUshort16 AsUshort16_mut: USHORT,
     Usb20PortChange Usb20PortChange_mut: USB_20_PORT_CHANGE,
     Usb30PortChange Usb30PortChange_mut: USB_30_PORT_CHANGE,
 }}
 pub type PUSB_PORT_CHANGE = *mut USB_PORT_CHANGE;
-STRUCT!{#[repr(packed)] struct USB_PORT_EXT_STATUS {
+STRUCT! {#[repr(packed)] struct USB_PORT_EXT_STATUS {
     AsUlong32: ULONG,
 }}
-BITFIELD!{USB_PORT_EXT_STATUS AsUlong32: ULONG [
+BITFIELD! {USB_PORT_EXT_STATUS AsUlong32: ULONG [
     RxSublinkSpeedID set_RxSublinkSpeedID[0..4],
     TxSublinkSpeedID set_TxSublinkSpeedID[4..8],
     RxLaneCount set_RxLaneCount[8..12],
@@ -778,40 +778,40 @@ BITFIELD!{USB_PORT_EXT_STATUS AsUlong32: ULONG [
     Reserved set_Reserved[16..32],
 ]}
 pub type PUSB_PORT_EXT_STATUS = *mut USB_PORT_EXT_STATUS;
-STRUCT!{#[repr(packed)] struct USB_PORT_STATUS_AND_CHANGE_s {
+STRUCT! {#[repr(packed)] struct USB_PORT_STATUS_AND_CHANGE_s {
     PortStatus: USB_PORT_STATUS,
     PortChange: USB_PORT_CHANGE,
 }}
-UNION!{#[repr(packed)] union USB_PORT_STATUS_AND_CHANGE {
+UNION! {#[repr(packed)] union USB_PORT_STATUS_AND_CHANGE {
     [u32; 1],
     AsUlong32 AsUlong32_mut: ULONG,
     s s_mut: USB_PORT_STATUS_AND_CHANGE_s,
 }}
 pub type PUSB_PORT_STATUS_AND_CHANGE = *mut USB_PORT_STATUS_AND_CHANGE;
-STRUCT!{#[repr(packed)] struct USB_PORT_EXT_STATUS_AND_CHANGE_s {
+STRUCT! {#[repr(packed)] struct USB_PORT_EXT_STATUS_AND_CHANGE_s {
     PortStatusChange: USB_PORT_STATUS_AND_CHANGE,
     PortExtStatus: USB_PORT_EXT_STATUS,
 }}
-UNION!{#[repr(packed)] union USB_PORT_EXT_STATUS_AND_CHANGE {
+UNION! {#[repr(packed)] union USB_PORT_EXT_STATUS_AND_CHANGE {
     [u64; 1],
     AsUlong64 AsUlong64_mut: ULONG64,
     s s_mut: USB_PORT_EXT_STATUS_AND_CHANGE_s,
 }}
 pub type PUSB_PORT_EXT_STATUS_AND_CHANGE = *mut USB_PORT_EXT_STATUS_AND_CHANGE;
-STRUCT!{#[repr(packed)] struct USB_HUB_30_PORT_REMOTE_WAKE_MASK {
+STRUCT! {#[repr(packed)] struct USB_HUB_30_PORT_REMOTE_WAKE_MASK {
     AsUchar8: UCHAR,
 }}
-BITFIELD!{USB_HUB_30_PORT_REMOTE_WAKE_MASK AsUchar8: UCHAR [
+BITFIELD! {USB_HUB_30_PORT_REMOTE_WAKE_MASK AsUchar8: UCHAR [
     ConnectRemoteWakeEnable set_ConnectRemoteWakeEnable[0..1],
     DisconnectRemoteWakeEnable set_DisconnectRemoteWakeEnable[1..2],
     OverCurrentRemoteWakeEnable set_OverCurrentRemoteWakeEnable[2..3],
     Reserved0 set_Reserved0[3..8],
 ]}
 pub type PUSB_HUB_30_PORT_REMOTE_WAKE_MASK = *mut USB_HUB_30_PORT_REMOTE_WAKE_MASK;
-STRUCT!{#[repr(packed)] struct USB_FUNCTION_SUSPEND_OPTIONS {
+STRUCT! {#[repr(packed)] struct USB_FUNCTION_SUSPEND_OPTIONS {
     AsUchar: UCHAR,
 }}
-BITFIELD!{USB_FUNCTION_SUSPEND_OPTIONS AsUchar: UCHAR [
+BITFIELD! {USB_FUNCTION_SUSPEND_OPTIONS AsUchar: UCHAR [
     PowerState set_PowerState[0..1],
     RemoteWakeEnabled set_RemoteWakeEnabled[1..2],
     Reserved0 set_Reserved0[2..8],
@@ -827,7 +827,7 @@ pub const USB_SUPPORT_D2_COMMAND: UCHAR = 0x04;
 pub const USB_SUPPORT_D3_COMMAND: UCHAR = 0x08;
 pub const USB_SUPPORT_D1_WAKEUP: UCHAR = 0x10;
 pub const USB_SUPPORT_D2_WAKEUP: UCHAR = 0x20;
-STRUCT!{#[repr(packed)] struct USB_CONFIGURATION_POWER_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_CONFIGURATION_POWER_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     SelfPowerConsumedD0: [UCHAR; 3],
@@ -843,7 +843,7 @@ STRUCT!{#[repr(packed)] struct USB_CONFIGURATION_POWER_DESCRIPTOR {
     TransitionTimeFromD3: USHORT,
 }}
 pub type PUSB_CONFIGURATION_POWER_DESCRIPTOR = *mut USB_CONFIGURATION_POWER_DESCRIPTOR;
-STRUCT!{#[repr(packed)] struct USB_INTERFACE_POWER_DESCRIPTOR {
+STRUCT! {#[repr(packed)] struct USB_INTERFACE_POWER_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bmCapabilitiesFlags: UCHAR,

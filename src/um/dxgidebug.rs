@@ -10,22 +10,22 @@ use shared::minwindef::{BOOL, DWORD, UINT};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
 pub const DXGI_DEBUG_BINARY_VERSION: DWORD = 1;
-ENUM!{enum DXGI_DEBUG_RLO_FLAGS {
+ENUM! {enum DXGI_DEBUG_RLO_FLAGS {
     DXGI_DEBUG_RLO_SUMMARY = 0x1,
     DXGI_DEBUG_RLO_DETAIL = 0x2,
     DXGI_DEBUG_RLO_IGNORE_INTERNAL = 0x4,
     DXGI_DEBUG_RLO_ALL = 0x7,
 }}
 pub type DXGI_DEBUG_ID = GUID;
-DEFINE_GUID!{DXGI_DEBUG_ALL,
-    0xe48ae283, 0xda80, 0x490b, 0x87, 0xe6, 0x43, 0xe9, 0xa9, 0xcf, 0xda, 0x08}
-DEFINE_GUID!{DXGI_DEBUG_DX,
-    0x35cdd7fc, 0x13b2, 0x421d, 0xa5, 0xd7, 0x7e, 0x44, 0x51, 0x28, 0x7d, 0x64}
-DEFINE_GUID!{DXGI_DEBUG_DXGI,
-    0x25cddaa4, 0xb1c6, 0x47e1, 0xac, 0x3e, 0x98, 0x87, 0x5b, 0x5a, 0x2e, 0x2a}
-DEFINE_GUID!{DXGI_DEBUG_APP,
-    0x06cd6e01, 0x4219, 0x4ebd, 0x87, 0x09, 0x27, 0xed, 0x23, 0x36, 0x0c, 0x62}
-ENUM!{enum DXGI_INFO_QUEUE_MESSAGE_CATEGORY {
+DEFINE_GUID! {DXGI_DEBUG_ALL,
+0xe48ae283, 0xda80, 0x490b, 0x87, 0xe6, 0x43, 0xe9, 0xa9, 0xcf, 0xda, 0x08}
+DEFINE_GUID! {DXGI_DEBUG_DX,
+0x35cdd7fc, 0x13b2, 0x421d, 0xa5, 0xd7, 0x7e, 0x44, 0x51, 0x28, 0x7d, 0x64}
+DEFINE_GUID! {DXGI_DEBUG_DXGI,
+0x25cddaa4, 0xb1c6, 0x47e1, 0xac, 0x3e, 0x98, 0x87, 0x5b, 0x5a, 0x2e, 0x2a}
+DEFINE_GUID! {DXGI_DEBUG_APP,
+0x06cd6e01, 0x4219, 0x4ebd, 0x87, 0x09, 0x27, 0xed, 0x23, 0x36, 0x0c, 0x62}
+ENUM! {enum DXGI_INFO_QUEUE_MESSAGE_CATEGORY {
     DXGI_INFO_QUEUE_MESSAGE_CATEGORY_UNKNOWN = 0,
     DXGI_INFO_QUEUE_MESSAGE_CATEGORY_MISCELLANEOUS = 1,
     DXGI_INFO_QUEUE_MESSAGE_CATEGORY_INITIALIZATION = 2,
@@ -38,7 +38,7 @@ ENUM!{enum DXGI_INFO_QUEUE_MESSAGE_CATEGORY {
     DXGI_INFO_QUEUE_MESSAGE_CATEGORY_EXECUTION = 9,
     DXGI_INFO_QUEUE_MESSAGE_CATEGORY_SHADER = 10,
 }}
-ENUM!{enum DXGI_INFO_QUEUE_MESSAGE_SEVERITY {
+ENUM! {enum DXGI_INFO_QUEUE_MESSAGE_SEVERITY {
     DXGI_INFO_QUEUE_MESSAGE_SEVERITY_CORRUPTION = 0,
     DXGI_INFO_QUEUE_MESSAGE_SEVERITY_ERROR = 1,
     DXGI_INFO_QUEUE_MESSAGE_SEVERITY_WARNING = 2,
@@ -46,7 +46,7 @@ ENUM!{enum DXGI_INFO_QUEUE_MESSAGE_SEVERITY {
     DXGI_INFO_QUEUE_MESSAGE_SEVERITY_MESSAGE = 4,
 }}
 pub type DXGI_INFO_QUEUE_MESSAGE_ID = c_int;
-STRUCT!{struct DXGI_INFO_QUEUE_MESSAGE {
+STRUCT! {struct DXGI_INFO_QUEUE_MESSAGE {
     Producer: DXGI_DEBUG_ID,
     Category: DXGI_INFO_QUEUE_MESSAGE_CATEGORY,
     Severity: DXGI_INFO_QUEUE_MESSAGE_SEVERITY,
@@ -54,7 +54,7 @@ STRUCT!{struct DXGI_INFO_QUEUE_MESSAGE {
     pDescription: *const c_char,
     DescriptionByteLength: SIZE_T,
 }}
-STRUCT!{struct DXGI_INFO_QUEUE_FILTER_DESC {
+STRUCT! {struct DXGI_INFO_QUEUE_FILTER_DESC {
     NumCategories: UINT,
     pCategoryList: *mut DXGI_INFO_QUEUE_MESSAGE_CATEGORY,
     NumSeverities: UINT,
@@ -62,18 +62,15 @@ STRUCT!{struct DXGI_INFO_QUEUE_FILTER_DESC {
     NumIDs: UINT,
     pIDList: *mut DXGI_INFO_QUEUE_MESSAGE_ID,
 }}
-STRUCT!{struct DXGI_INFO_QUEUE_FILTER {
+STRUCT! {struct DXGI_INFO_QUEUE_FILTER {
     AllowList: DXGI_INFO_QUEUE_FILTER_DESC,
     DenyList: DXGI_INFO_QUEUE_FILTER_DESC,
 }}
 pub const DXGI_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT: DWORD = 1024;
 extern "system" {
-    pub fn DXGIGetDebugInterface(
-        riid: REFIID,
-        ppDebug: *mut *mut c_void,
-    ) -> HRESULT;
+    pub fn DXGIGetDebugInterface(riid: REFIID, ppDebug: *mut *mut c_void) -> HRESULT;
 }
-RIDL!{#[uuid(0xd67441c7, 0x672a, 0x476f, 0x9e, 0x82, 0xcd, 0x55, 0xb4, 0x49, 0x49, 0xce)]
+RIDL! {#[uuid(0xd67441c7, 0x672a, 0x476f, 0x9e, 0x82, 0xcd, 0x55, 0xb4, 0x49, 0x49, 0xce)]
 interface IDXGIInfoQueue(IDXGIInfoQueueVtbl): IUnknown(IUnknownVtbl) {
     fn SetMessageCountLimit(
         Producer: DXGI_DEBUG_ID,
@@ -214,22 +211,22 @@ interface IDXGIInfoQueue(IDXGIInfoQueueVtbl): IUnknown(IUnknownVtbl) {
         Producer: DXGI_DEBUG_ID,
     ) -> BOOL,
 }}
-RIDL!{#[uuid(0x119e7452, 0xde9e, 0x40fe, 0x88, 0x06, 0x88, 0xf9, 0x0c, 0x12, 0xb4, 0x41)]
+RIDL! {#[uuid(0x119e7452, 0xde9e, 0x40fe, 0x88, 0x06, 0x88, 0xf9, 0x0c, 0x12, 0xb4, 0x41)]
 interface IDXGIDebug(IDXGIDebugVtbl): IUnknown(IUnknownVtbl) {
     fn ReportLiveObjects(
         apiid: GUID,
         flags: DXGI_DEBUG_RLO_FLAGS,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x119e7452, 0xde9e, 0x40fe, 0x88, 0x06, 0x88, 0xf9, 0x0c, 0x12, 0xb4, 0x41)]
+RIDL! {#[uuid(0x119e7452, 0xde9e, 0x40fe, 0x88, 0x06, 0x88, 0xf9, 0x0c, 0x12, 0xb4, 0x41)]
 interface IDXGIDebug1(IDXGIDebug1Vtbl): IDXGIDebug(IDXGIDebugVtbl) {
     fn EnableLeakTrackingForThread() -> (),
     fn DisableLeakTrackingForThread() -> (),
     fn IsLeakTrackingEnabledForThread() -> BOOL,
 }}
-DEFINE_GUID!{IID_IDXGIInfoQueue,
-    0xd67441c7, 0x672a, 0x476f, 0x9e, 0x82, 0xcd, 0x55, 0xb4, 0x49, 0x49, 0xce}
-DEFINE_GUID!{IID_IDXGIDebug,
-    0x119e7452, 0xde9e, 0x40fe, 0x88, 0x06, 0x88, 0xf9, 0x0c, 0x12, 0xb4, 0x41}
-DEFINE_GUID!{IID_IDXGIDebug1,
-    0xc5a05f0c, 0x16f2, 0x4adf, 0x9f, 0x4d, 0xa8, 0xc4, 0xd5, 0x8a, 0xc5, 0x50}
+DEFINE_GUID! {IID_IDXGIInfoQueue,
+0xd67441c7, 0x672a, 0x476f, 0x9e, 0x82, 0xcd, 0x55, 0xb4, 0x49, 0x49, 0xce}
+DEFINE_GUID! {IID_IDXGIDebug,
+0x119e7452, 0xde9e, 0x40fe, 0x88, 0x06, 0x88, 0xf9, 0x0c, 0x12, 0xb4, 0x41}
+DEFINE_GUID! {IID_IDXGIDebug1,
+0xc5a05f0c, 0x16f2, 0x4adf, 0x9f, 0x4d, 0xa8, 0xc4, 0xd5, 0x8a, 0xc5, 0x50}

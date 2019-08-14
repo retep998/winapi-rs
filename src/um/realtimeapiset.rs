@@ -7,14 +7,8 @@ use shared::basetsd::PULONG64;
 use shared::minwindef::{BOOL, PULONG, USHORT};
 use um::winnt::{HANDLE, PULONGLONG};
 extern "system" {
-    pub fn QueryThreadCycleTime(
-        ThreadHandle: HANDLE,
-        CycleTime: PULONG64,
-    ) -> BOOL;
-    pub fn QueryProcessCycleTime(
-        ProcessHandle: HANDLE,
-        CycleTime: PULONG64,
-    ) -> BOOL;
+    pub fn QueryThreadCycleTime(ThreadHandle: HANDLE, CycleTime: PULONG64) -> BOOL;
+    pub fn QueryProcessCycleTime(ProcessHandle: HANDLE, CycleTime: PULONG64) -> BOOL;
     pub fn QueryIdleProcessorCycleTime(
         BufferLength: PULONG,
         ProcessorIdleCycleTime: PULONG64,
@@ -24,7 +18,5 @@ extern "system" {
         BufferLength: PULONG,
         ProcessorIdleCycleTime: PULONG64,
     ) -> BOOL;
-    pub fn QueryUnbiasedInterruptTime(
-        UnbiasedTime: PULONGLONG,
-    ) -> BOOL;
+    pub fn QueryUnbiasedInterruptTime(UnbiasedTime: PULONGLONG) -> BOOL;
 }

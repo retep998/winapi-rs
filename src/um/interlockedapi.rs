@@ -6,12 +6,8 @@
 use shared::minwindef::{ULONG, USHORT};
 use um::winnt::{PSLIST_ENTRY, PSLIST_HEADER};
 extern "system" {
-    pub fn InitializeSListHead(
-        ListHead: PSLIST_HEADER,
-    );
-    pub fn InterlockedPopEntrySList(
-        ListHead: PSLIST_HEADER,
-    ) -> PSLIST_ENTRY;
+    pub fn InitializeSListHead(ListHead: PSLIST_HEADER);
+    pub fn InterlockedPopEntrySList(ListHead: PSLIST_HEADER) -> PSLIST_ENTRY;
     pub fn InterlockedPushEntrySList(
         ListHead: PSLIST_HEADER,
         ListEntry: PSLIST_ENTRY,
@@ -22,10 +18,6 @@ extern "system" {
         ListEnd: PSLIST_ENTRY,
         Count: ULONG,
     ) -> PSLIST_ENTRY;
-    pub fn InterlockedFlushSList(
-        ListHead: PSLIST_HEADER,
-    ) -> PSLIST_ENTRY;
-    pub fn QueryDepthSList(
-        ListHead: PSLIST_HEADER,
-    ) -> USHORT;
+    pub fn InterlockedFlushSList(ListHead: PSLIST_HEADER) -> PSLIST_ENTRY;
+    pub fn QueryDepthSList(ListHead: PSLIST_HEADER) -> USHORT;
 }

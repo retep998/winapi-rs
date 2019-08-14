@@ -4,20 +4,20 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use shared::basetsd::{SIZE_T, ULONG_PTR};
-use shared::bcrypt::{BCRYPT_NO_KEY_VALIDATION, BCryptBufferDesc};
+use shared::bcrypt::{BCryptBufferDesc, BCRYPT_NO_KEY_VALIDATION};
 use shared::minwindef::{DWORD, LPVOID, PBYTE};
 use um::winnt::{LONG, LPCWSTR, VOID};
 pub type SECURITY_STATUS = LONG;
 pub type HCRYPTPROV = ULONG_PTR;
 pub type HCRYPTKEY = ULONG_PTR;
 pub type HCRYPTHASH = ULONG_PTR;
-FN!{stdcall PFN_NCRYPT_ALLOC(
+FN! {stdcall PFN_NCRYPT_ALLOC(
     cbSize: SIZE_T,
 ) -> LPVOID}
-FN!{stdcall PFN_NCRYPT_FREE(
+FN! {stdcall PFN_NCRYPT_FREE(
     pv: LPVOID,
 ) -> VOID}
-STRUCT!{struct NCRYPT_ALLOC_PARA {
+STRUCT! {struct NCRYPT_ALLOC_PARA {
     cbSize: DWORD,
     pfnAlloc: PFN_NCRYPT_ALLOC,
     pfnFree: PFN_NCRYPT_FREE,
@@ -82,7 +82,5 @@ extern "system" {
         cbData: DWORD,
         dwFlags: DWORD,
     ) -> SECURITY_STATUS;
-    pub fn NCryptFreeObject(
-        hObject: NCRYPT_HANDLE,
-    ) -> SECURITY_STATUS;
+    pub fn NCryptFreeObject(hObject: NCRYPT_HANDLE) -> SECURITY_STATUS;
 }

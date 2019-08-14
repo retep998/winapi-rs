@@ -4,7 +4,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use shared::guiddef::GUID;
-STRUCT!{struct TRANSPORT_SETTING_ID {
+STRUCT! {struct TRANSPORT_SETTING_ID {
     Guid: GUID,
 }}
 pub type PTRANSPORT_SETTING_ID = *mut TRANSPORT_SETTING_ID;

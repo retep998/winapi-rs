@@ -14,7 +14,7 @@ pub type WINUSB_INTERFACE_HANDLE = PVOID;
 pub type PWINUSB_INTERFACE_HANDLE = *mut PVOID;
 pub type WINUSB_ISOCH_BUFFER_HANDLE = PVOID;
 pub type PWINUSB_ISOCH_BUFFER_HANDLE = *mut PVOID;
-STRUCT!{#[repr(packed)] struct WINUSB_SETUP_PACKET {
+STRUCT! {#[repr(packed)] struct WINUSB_SETUP_PACKET {
     RequestType: UCHAR,
     Request: UCHAR,
     Value: USHORT,
@@ -27,9 +27,7 @@ extern "system" {
         DeviceHandle: HANDLE,
         InterfaceHandle: PWINUSB_INTERFACE_HANDLE,
     ) -> BOOL;
-    pub fn WinUsb_Free(
-        InterfaceHandle: WINUSB_INTERFACE_HANDLE,
-    ) -> BOOL;
+    pub fn WinUsb_Free(InterfaceHandle: WINUSB_INTERFACE_HANDLE) -> BOOL;
     pub fn WinUsb_GetAssociatedInterface(
         InterfaceHandle: WINUSB_INTERFACE_HANDLE,
         AssociatedInterfaceIndex: UCHAR,
@@ -113,18 +111,9 @@ extern "system" {
         LengthTransferred: PULONG,
         Overlapped: LPOVERLAPPED,
     ) -> BOOL;
-    pub fn WinUsb_ResetPipe(
-        InterfaceHandle: WINUSB_INTERFACE_HANDLE,
-        PipeID: UCHAR,
-    ) -> BOOL;
-    pub fn WinUsb_AbortPipe(
-        InterfaceHandle: WINUSB_INTERFACE_HANDLE,
-        PipeID: UCHAR,
-    ) -> BOOL;
-    pub fn WinUsb_FlushPipe(
-        InterfaceHandle: WINUSB_INTERFACE_HANDLE,
-        PipeID: UCHAR,
-    ) -> BOOL;
+    pub fn WinUsb_ResetPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UCHAR) -> BOOL;
+    pub fn WinUsb_AbortPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UCHAR) -> BOOL;
+    pub fn WinUsb_FlushPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UCHAR) -> BOOL;
     pub fn WinUsb_SetPowerPolicy(
         InterfaceHandle: WINUSB_INTERFACE_HANDLE,
         PolicyType: ULONG,
@@ -174,9 +163,7 @@ extern "system" {
         BufferLength: ULONG,
         IsochBufferHandle: PWINUSB_ISOCH_BUFFER_HANDLE,
     ) -> BOOL;
-    pub fn WinUsb_UnregisterIsochBuffer(
-        IsochBufferHandle: WINUSB_ISOCH_BUFFER_HANDLE,
-    ) -> BOOL;
+    pub fn WinUsb_UnregisterIsochBuffer(IsochBufferHandle: WINUSB_ISOCH_BUFFER_HANDLE) -> BOOL;
     pub fn WinUsb_WriteIsochPipe(
         BufferHandle: WINUSB_ISOCH_BUFFER_HANDLE,
         Offset: ULONG,
@@ -210,7 +197,7 @@ extern "system" {
         Overlapped: LPOVERLAPPED,
     ) -> BOOL;
 }
-STRUCT!{struct USB_INTERFACE_DESCRIPTOR {
+STRUCT! {struct USB_INTERFACE_DESCRIPTOR {
     bLength: UCHAR,
     bDescriptorType: UCHAR,
     bInterfaceNumber: UCHAR,

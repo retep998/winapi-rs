@@ -8,28 +8,28 @@ use shared::guiddef::GUID;
 use shared::minwindef::{DWORD, WORD};
 use shared::winerror::HRESULT;
 use shared::wtypes::{BSTR, VARIANT_BOOL, VARTYPE};
-use um::oaidl::{DISPID, DISPID_UNKNOWN, DISPPARAMS, EXCEPINFO, IDispatch, IDispatchVtbl, VARIANT};
+use um::oaidl::{IDispatch, IDispatchVtbl, DISPID, DISPID_UNKNOWN, DISPPARAMS, EXCEPINFO, VARIANT};
 use um::servprov::IServiceProvider;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::LCID;
-DEFINE_GUID!{IID_IDispatchEx,
-    0xa6ef9860, 0xc720, 0x11d0, 0x93, 0x37, 0x0, 0xa0, 0xc9, 0xd, 0xca, 0xa9}
-DEFINE_GUID!{IID_IDispError,
-    0xa6ef9861, 0xc720, 0x11d0, 0x93, 0x37, 0x0, 0xa0, 0xc9, 0xd, 0xca, 0xa9}
-DEFINE_GUID!{IID_IVariantChangeType,
-    0xa6ef9862, 0xc720, 0x11d0, 0x93, 0x37, 0x0, 0xa0, 0xc9, 0xd, 0xca, 0xa9}
-DEFINE_GUID!{SID_VariantConversion,
-    0x1f101481, 0xbccd, 0x11d0, 0x93, 0x36, 0x0, 0xa0, 0xc9, 0xd, 0xca, 0xa9}
-DEFINE_GUID!{SID_GetCaller,
-    0x4717cc40, 0xbcb9, 0x11d0, 0x93, 0x36, 0x0, 0xa0, 0xc9, 0xd, 0xca, 0xa9}
-DEFINE_GUID!{SID_ProvideRuntimeContext,
-    0x74a5040c, 0xdd0c, 0x48f0, 0xac, 0x85, 0x19, 0x4c, 0x32, 0x59, 0x18, 0xa}
-DEFINE_GUID!{IID_IProvideRuntimeContext,
-    0x10e2414a, 0xec59, 0x49d2, 0xbc, 0x51, 0x5a, 0xdd, 0x2c, 0x36, 0xfe, 0xbc}
-DEFINE_GUID!{IID_IObjectIdentity,
-    0xca04b7e6, 0xd21, 0x11d1, 0x8c, 0xc5, 0x0, 0xc0, 0x4f, 0xc2, 0xb0, 0x85}
-DEFINE_GUID!{IID_ICanHandleException,
-    0xc5598e60, 0xb307, 0x11d1, 0xb2, 0x7d, 0x0, 0x60, 0x08, 0xc3, 0xfb, 0xfb}
+DEFINE_GUID! {IID_IDispatchEx,
+0xa6ef9860, 0xc720, 0x11d0, 0x93, 0x37, 0x0, 0xa0, 0xc9, 0xd, 0xca, 0xa9}
+DEFINE_GUID! {IID_IDispError,
+0xa6ef9861, 0xc720, 0x11d0, 0x93, 0x37, 0x0, 0xa0, 0xc9, 0xd, 0xca, 0xa9}
+DEFINE_GUID! {IID_IVariantChangeType,
+0xa6ef9862, 0xc720, 0x11d0, 0x93, 0x37, 0x0, 0xa0, 0xc9, 0xd, 0xca, 0xa9}
+DEFINE_GUID! {SID_VariantConversion,
+0x1f101481, 0xbccd, 0x11d0, 0x93, 0x36, 0x0, 0xa0, 0xc9, 0xd, 0xca, 0xa9}
+DEFINE_GUID! {SID_GetCaller,
+0x4717cc40, 0xbcb9, 0x11d0, 0x93, 0x36, 0x0, 0xa0, 0xc9, 0xd, 0xca, 0xa9}
+DEFINE_GUID! {SID_ProvideRuntimeContext,
+0x74a5040c, 0xdd0c, 0x48f0, 0xac, 0x85, 0x19, 0x4c, 0x32, 0x59, 0x18, 0xa}
+DEFINE_GUID! {IID_IProvideRuntimeContext,
+0x10e2414a, 0xec59, 0x49d2, 0xbc, 0x51, 0x5a, 0xdd, 0x2c, 0x36, 0xfe, 0xbc}
+DEFINE_GUID! {IID_IObjectIdentity,
+0xca04b7e6, 0xd21, 0x11d1, 0x8c, 0xc5, 0x0, 0xc0, 0x4f, 0xc2, 0xb0, 0x85}
+DEFINE_GUID! {IID_ICanHandleException,
+0xc5598e60, 0xb307, 0x11d1, 0xb2, 0x7d, 0x0, 0x60, 0x08, 0xc3, 0xfb, 0xfb}
 // pub const SID_GetScriptSite = IID_IActiveScriptSite;
 pub const fdexNameCaseSensitive: DWORD = 0x00000001;
 pub const fdexNameEnsure: DWORD = 0x00000002;
@@ -51,10 +51,18 @@ pub const fdexPropCanConstruct: DWORD = 0x00000400;
 pub const fdexPropCannotConstruct: DWORD = 0x00000800;
 pub const fdexPropCanSourceEvents: DWORD = 0x00001000;
 pub const fdexPropCannotSourceEvents: DWORD = 0x00002000;
-pub const grfdexPropCanAll: DWORD = fdexPropCanGet | fdexPropCanPut | fdexPropCanPutRef
-    | fdexPropCanCall | fdexPropCanConstruct | fdexPropCanSourceEvents;
-pub const grfdexPropCannotAll: DWORD = fdexPropCannotGet | fdexPropCannotPut | fdexPropCannotPutRef
-    | fdexPropCannotCall | fdexPropCannotConstruct | fdexPropCannotSourceEvents;
+pub const grfdexPropCanAll: DWORD = fdexPropCanGet
+    | fdexPropCanPut
+    | fdexPropCanPutRef
+    | fdexPropCanCall
+    | fdexPropCanConstruct
+    | fdexPropCanSourceEvents;
+pub const grfdexPropCannotAll: DWORD = fdexPropCannotGet
+    | fdexPropCannotPut
+    | fdexPropCannotPutRef
+    | fdexPropCannotCall
+    | fdexPropCannotConstruct
+    | fdexPropCannotSourceEvents;
 pub const grfdexPropExtraAll: DWORD = fdexPropNoSideEffects | fdexPropDynamicType;
 pub const grfdexPropAll: DWORD = grfdexPropCanAll | grfdexPropCannotAll | grfdexPropExtraAll;
 pub const fdexEnumDefault: DWORD = 0x00000001;
@@ -65,7 +73,7 @@ pub const DISPID_STARTENUM: DISPID = DISPID_UNKNOWN;
 // extern RPC_IF_HANDLE __MIDL_itf_dispex_0000_0000_v0_0_c_ifspec;
 // extern RPC_IF_HANDLE __MIDL_itf_dispex_0000_0000_v0_0_s_ifspec;
 // EXTERN_C const IID IID_IDispatchEx;
-RIDL!{#[uuid(0xa6ef9860, 0xc720, 0x11d0, 0x93, 0x37, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9)]
+RIDL! {#[uuid(0xa6ef9860, 0xc720, 0x11d0, 0x93, 0x37, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9)]
 interface IDispatchEx(IDispatchExVtbl): IDispatch(IDispatchVtbl) {
     fn GetDispID(
         bstrName: BSTR,
@@ -124,7 +132,7 @@ interface IDispatchEx(IDispatchExVtbl): IDispatch(IDispatchVtbl) {
 //     PRPC_MESSAGE _pRpcMessage,
 //     DWORD *_pdwStubPhase);
 // EXTERN_C const IID IID_IDispError;
-RIDL!{#[uuid(0xa6ef9861, 0xc720, 0x11d0, 0x93, 0x37, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9)]
+RIDL! {#[uuid(0xa6ef9861, 0xc720, 0x11d0, 0x93, 0x37, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9)]
 interface IDispError(IDispErrorVtbl): IUnknown(IUnknownVtbl) {
     fn QueryErrorInfo(
         guidErrorType: GUID,
@@ -148,7 +156,7 @@ interface IDispError(IDispErrorVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IVariantChangeType;
-RIDL!{#[uuid(0xa6ef9862, 0xc720, 0x11d0, 0x93, 0x37, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9)]
+RIDL! {#[uuid(0xa6ef9862, 0xc720, 0x11d0, 0x93, 0x37, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9)]
 interface IVariantChangeType(IVariantChangeTypeVtbl): IUnknown(IUnknownVtbl) {
     fn ChangeType(
         pvarDst: *mut VARIANT,
@@ -158,14 +166,14 @@ interface IVariantChangeType(IVariantChangeTypeVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IObjectIdentity;
-RIDL!{#[uuid(0xca04b7e6, 0x0d21, 0x11d1, 0x8c, 0xc5, 0x00, 0xc0, 0x4f, 0xc2, 0xb0, 0x85)]
+RIDL! {#[uuid(0xca04b7e6, 0x0d21, 0x11d1, 0x8c, 0xc5, 0x00, 0xc0, 0x4f, 0xc2, 0xb0, 0x85)]
 interface IObjectIdentity(IObjectIdentityVtbl): IUnknown(IUnknownVtbl) {
     fn IsEqualObject(
         punk: *mut IUnknown,
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_ICanHandleException;
-RIDL!{#[uuid(0xc5598e60, 0xb307, 0x11d1, 0xb2, 0x7d, 0x00, 0x60, 0x08, 0xc3, 0xfb, 0xfb)]
+RIDL! {#[uuid(0xc5598e60, 0xb307, 0x11d1, 0xb2, 0x7d, 0x00, 0x60, 0x08, 0xc3, 0xfb, 0xfb)]
 interface ICanHandleException(ICanHandleExceptionVtbl): IUnknown(IUnknownVtbl) {
     fn CanHandleException(
         pExcepInfo: *mut EXCEPINFO,
@@ -173,7 +181,7 @@ interface ICanHandleException(ICanHandleExceptionVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IProvideRuntimeContext;
-RIDL!{#[uuid(0x10e2414a, 0xec59, 0x49d2, 0xbc, 0x51, 0x5a, 0xdd, 0x2c, 0x36, 0xfe, 0xbc)]
+RIDL! {#[uuid(0x10e2414a, 0xec59, 0x49d2, 0xbc, 0x51, 0x5a, 0xdd, 0x2c, 0x36, 0xfe, 0xbc)]
 interface IProvideRuntimeContext(IProvideRuntimeContextVtbl): IUnknown(IUnknownVtbl) {
     fn GetCurrentSourceContext(
         pdwContext: *mut DWORD_PTR,

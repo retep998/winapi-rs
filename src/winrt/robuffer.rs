@@ -6,7 +6,5 @@
 use um::objidl::IMarshal;
 use um::winnt::HRESULT;
 extern "system" {
-    pub fn RoGetBufferMarshaler(
-        bufferMarshaler: *mut *mut IMarshal,
-    ) -> HRESULT;
+    pub fn RoGetBufferMarshaler(bufferMarshaler: *mut *mut IMarshal) -> HRESULT;
 }

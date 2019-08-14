@@ -6,15 +6,6 @@
 use shared::basetsd::{PUINT_PTR, UINT_PTR};
 use shared::minwindef::{BOOL, LPARAM, UINT};
 extern "system" {
-    pub fn PackDDElParam(
-        msg: UINT,
-        uiLo: UINT_PTR,
-        uiHi: UINT_PTR,
-    ) -> LPARAM;
-    pub fn UnpackDDElParam(
-        msg: UINT,
-        lParam: LPARAM,
-        puiLo: PUINT_PTR,
-        puiHi: PUINT_PTR,
-    ) -> BOOL;
+    pub fn PackDDElParam(msg: UINT, uiLo: UINT_PTR, uiHi: UINT_PTR) -> LPARAM;
+    pub fn UnpackDDElParam(msg: UINT, lParam: LPARAM, puiLo: PUINT_PTR, puiHi: PUINT_PTR) -> BOOL;
 }

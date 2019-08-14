@@ -6,10 +6,10 @@
 use shared::minwindef::{BYTE, LPVOID, UINT};
 use um::d3d10::{D3D10_PRIMITIVE_TOPOLOGY, D3D10_SRV_DIMENSION};
 use um::d3dcommon::{
-    D3D_CBUFFER_TYPE, D3D_INCLUDE_TYPE, D3D_NAME, D3D_REGISTER_COMPONENT_TYPE,
+    ID3DInclude, D3D_CBUFFER_TYPE, D3D_INCLUDE_TYPE, D3D_NAME, D3D_REGISTER_COMPONENT_TYPE,
     D3D_RESOURCE_RETURN_TYPE, D3D_SHADER_CBUFFER_FLAGS, D3D_SHADER_INPUT_FLAGS,
     D3D_SHADER_INPUT_TYPE, D3D_SHADER_MACRO, D3D_SHADER_VARIABLE_CLASS, D3D_SHADER_VARIABLE_FLAGS,
-    D3D_SHADER_VARIABLE_TYPE, ID3DInclude,
+    D3D_SHADER_VARIABLE_TYPE,
 };
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
@@ -61,7 +61,7 @@ pub type D3D10_INCLUDE_TYPE = D3D_INCLUDE_TYPE;
 pub type ID3D10Include = ID3DInclude;
 pub type LPD3D10INCLUDE = *mut ID3DInclude;
 // const IID_ID3D10Include: IID = IID_ID3DInclude;
-STRUCT!{struct D3D10_SHADER_DESC {
+STRUCT! {struct D3D10_SHADER_DESC {
     Version: UINT,
     Creator: LPCSTR,
     Flags: UINT,
@@ -91,21 +91,21 @@ STRUCT!{struct D3D10_SHADER_DESC {
     GSOutputTopology: D3D10_PRIMITIVE_TOPOLOGY,
     GSMaxOutputVertexCount: UINT,
 }}
-STRUCT!{struct D3D10_SHADER_BUFFER_DESC {
+STRUCT! {struct D3D10_SHADER_BUFFER_DESC {
     Name: LPCSTR,
     Type: D3D10_CBUFFER_TYPE,
     Variables: UINT,
     Size: UINT,
     uFlags: UINT,
 }}
-STRUCT!{struct D3D10_SHADER_VARIABLE_DESC {
+STRUCT! {struct D3D10_SHADER_VARIABLE_DESC {
     Name: LPCSTR,
     StartOffset: UINT,
     Size: UINT,
     uFlags: UINT,
     DefaultValue: LPVOID,
 }}
-STRUCT!{struct D3D10_SHADER_TYPE_DESC {
+STRUCT! {struct D3D10_SHADER_TYPE_DESC {
     Class: D3D10_SHADER_VARIABLE_CLASS,
     Type: D3D10_SHADER_VARIABLE_TYPE,
     Rows: UINT,
@@ -114,7 +114,7 @@ STRUCT!{struct D3D10_SHADER_TYPE_DESC {
     Members: UINT,
     Offset: UINT,
 }}
-STRUCT!{struct D3D10_SHADER_INPUT_BIND_DESC {
+STRUCT! {struct D3D10_SHADER_INPUT_BIND_DESC {
     Name: LPCSTR,
     Type: D3D10_SHADER_INPUT_TYPE,
     BindPoint: UINT,
@@ -124,7 +124,7 @@ STRUCT!{struct D3D10_SHADER_INPUT_BIND_DESC {
     Dimension: D3D10_SRV_DIMENSION,
     NumSamples: UINT,
 }}
-STRUCT!{struct D3D10_SIGNATURE_PARAMETER_DESC {
+STRUCT! {struct D3D10_SIGNATURE_PARAMETER_DESC {
     SemanticName: LPCSTR,
     SemanticIndex: UINT,
     Register: UINT,
@@ -134,9 +134,9 @@ STRUCT!{struct D3D10_SIGNATURE_PARAMETER_DESC {
     ReadWriteMask: BYTE,
 }}
 pub type LPD3D10SHADERREFLECTIONTYPE = *mut ID3D10ShaderReflectionType;
-DEFINE_GUID!{IID_ID3D10ShaderReflectionType,
-    0xc530ad7d, 0x9b16, 0x4395, 0xa9, 0x79, 0xba, 0x2e, 0xcf, 0xf8, 0x3a, 0xdd}
-RIDL!{#[uuid(0xc530ad7d, 0x9b16, 0x4395, 0xa9, 0x79, 0xba, 0x2e, 0xcf, 0xf8, 0x3a, 0xdd)]
+DEFINE_GUID! {IID_ID3D10ShaderReflectionType,
+0xc530ad7d, 0x9b16, 0x4395, 0xa9, 0x79, 0xba, 0x2e, 0xcf, 0xf8, 0x3a, 0xdd}
+RIDL! {#[uuid(0xc530ad7d, 0x9b16, 0x4395, 0xa9, 0x79, 0xba, 0x2e, 0xcf, 0xf8, 0x3a, 0xdd)]
 interface ID3D10ShaderReflectionType(ID3D10ShaderReflectionTypeVtbl) {
     fn GetDesc(
         pDesc: *mut D3D10_SHADER_TYPE_DESC,
@@ -152,9 +152,9 @@ interface ID3D10ShaderReflectionType(ID3D10ShaderReflectionTypeVtbl) {
     ) -> LPCSTR,
 }}
 pub type LPD3D10SHADERREFLECTIONVARIABLE = *mut ID3D10ShaderReflectionVariable;
-DEFINE_GUID!{IID_ID3D10ShaderReflectionVariable,
-    0x1bf63c95, 0x2650, 0x405d, 0x99, 0xc1, 0x36, 0x36, 0xbd, 0x1d, 0xa0, 0xa1}
-RIDL!{#[uuid(0x1bf63c95, 0x2650, 0x405d, 0x99, 0xc1, 0x36, 0x36, 0xbd, 0x1d, 0xa0, 0xa1)]
+DEFINE_GUID! {IID_ID3D10ShaderReflectionVariable,
+0x1bf63c95, 0x2650, 0x405d, 0x99, 0xc1, 0x36, 0x36, 0xbd, 0x1d, 0xa0, 0xa1}
+RIDL! {#[uuid(0x1bf63c95, 0x2650, 0x405d, 0x99, 0xc1, 0x36, 0x36, 0xbd, 0x1d, 0xa0, 0xa1)]
 interface ID3D10ShaderReflectionVariable(ID3D10ShaderReflectionVariableVtbl) {
     fn GetDesc(
         pDesc: *mut D3D10_SHADER_VARIABLE_DESC,
@@ -162,9 +162,9 @@ interface ID3D10ShaderReflectionVariable(ID3D10ShaderReflectionVariableVtbl) {
     fn GetType() -> *mut ID3D10ShaderReflectionType,
 }}
 pub type LPD3D10SHADERREFLECTIONCONSTANTBUFFER = *mut ID3D10ShaderReflectionConstantBuffer;
-DEFINE_GUID!{IID_ID3D10ShaderReflectionConstantBuffer,
-    0x66c66a94, 0xdddd, 0x4b62, 0xa6, 0x6a, 0xf0, 0xda, 0x33, 0xc2, 0xb4, 0xd0}
-RIDL!{#[uuid(0x66c66a94, 0xdddd, 0x4b62, 0xa6, 0x6a, 0xf0, 0xda, 0x33, 0xc2, 0xb4, 0xd0)]
+DEFINE_GUID! {IID_ID3D10ShaderReflectionConstantBuffer,
+0x66c66a94, 0xdddd, 0x4b62, 0xa6, 0x6a, 0xf0, 0xda, 0x33, 0xc2, 0xb4, 0xd0}
+RIDL! {#[uuid(0x66c66a94, 0xdddd, 0x4b62, 0xa6, 0x6a, 0xf0, 0xda, 0x33, 0xc2, 0xb4, 0xd0)]
 interface ID3D10ShaderReflectionConstantBuffer(ID3D10ShaderReflectionConstantBufferVtbl) {
     fn GetDesc(
         pDesc: *mut D3D10_SHADER_BUFFER_DESC,
@@ -177,9 +177,9 @@ interface ID3D10ShaderReflectionConstantBuffer(ID3D10ShaderReflectionConstantBuf
     ) -> *mut ID3D10ShaderReflectionVariable,
 }}
 pub type LPD3D10SHADERREFLECTION = *mut ID3D10ShaderReflection;
-DEFINE_GUID!{IID_ID3D10ShaderReflection,
-    0xd40e20b6, 0xf8f7, 0x42ad, 0xab, 0x20, 0x4b, 0xaf, 0x8f, 0x15, 0xdf, 0xaa}
-RIDL!{#[uuid(0xd40e20b6, 0xf8f7, 0x42ad, 0xab, 0x20, 0x4b, 0xaf, 0x8f, 0x15, 0xdf, 0xaa)]
+DEFINE_GUID! {IID_ID3D10ShaderReflection,
+0xd40e20b6, 0xf8f7, 0x42ad, 0xab, 0x20, 0x4b, 0xaf, 0x8f, 0x15, 0xdf, 0xaa}
+RIDL! {#[uuid(0xd40e20b6, 0xf8f7, 0x42ad, 0xab, 0x20, 0x4b, 0xaf, 0x8f, 0x15, 0xdf, 0xaa)]
 interface ID3D10ShaderReflection(ID3D10ShaderReflectionVtbl): IUnknown(IUnknownVtbl) {
     fn GetDesc(
         pDesc: *mut D3D10_SHADER_DESC,

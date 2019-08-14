@@ -9,50 +9,49 @@ use shared::guiddef::{GUID, IID, REFGUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, UINT, ULONG, USHORT, WORD};
 use shared::rpcndr::byte;
 use shared::wtypes::{
-    BSTR, CY, DATE, DECIMAL, VARIANT_BOOL, VARTYPE, VT_BSTR, VT_DISPATCH, VT_ERROR,
+    wireBSTR, BSTR, CY, DATE, DECIMAL, VARIANT_BOOL, VARTYPE, VT_BSTR, VT_DISPATCH, VT_ERROR,
     VT_I1, VT_I2, VT_I4, VT_I8, VT_RECORD, VT_RESERVED, VT_UNKNOWN, VT_VARIANT,
-    wireBSTR
 };
 use shared::wtypesbase::{
     BYTE_SIZEDARR, DOUBLE, DWORD_SIZEDARR, HYPER_SIZEDARR, LPCOLESTR, LPOLESTR, SCODE,
-    WORD_SIZEDARR
+    WORD_SIZEDARR,
 };
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{CHAR, HRESULT, LCID, LONG, LONGLONG, PVOID, SHORT, ULONGLONG};
 pub type CURRENCY = CY;
-STRUCT!{struct SAFEARRAYBOUND {
+STRUCT! {struct SAFEARRAYBOUND {
     cElements: ULONG,
     lLbound: LONG,
 }}
 pub type LPSAFEARRAYBOUND = *mut SAFEARRAYBOUND;
 pub type wireBRECORD = *mut _wireBRECORD;
 pub type wireVARIANT = *mut _wireVARIANT;
-STRUCT!{struct SAFEARR_BSTR {
+STRUCT! {struct SAFEARR_BSTR {
     Size: ULONG,
     aBstr: *mut wireBSTR,
 }}
-STRUCT!{struct SAFEARR_UNKNOWN {
+STRUCT! {struct SAFEARR_UNKNOWN {
     Size: ULONG,
     apUnknown: *mut *mut IUnknown,
 }}
-STRUCT!{struct SAFEARR_DISPATCH {
+STRUCT! {struct SAFEARR_DISPATCH {
     Size: ULONG,
     apDispatch: *mut *mut IDispatch,
 }}
-STRUCT!{struct SAFEARR_VARIANT {
+STRUCT! {struct SAFEARR_VARIANT {
     Size: ULONG,
     aVariant: *mut wireVARIANT,
 }}
-STRUCT!{struct SAFEARR_BRECORD {
+STRUCT! {struct SAFEARR_BRECORD {
     Size: ULONG,
     aRecord: *mut wireBRECORD,
 }}
-STRUCT!{struct SAFEARR_HAVEIID {
+STRUCT! {struct SAFEARR_HAVEIID {
     Size: ULONG,
     apUnknown: *mut *mut IUnknown,
     iid: IID,
 }}
-ENUM!{enum SF_TYPE {
+ENUM! {enum SF_TYPE {
     SF_ERROR = VT_ERROR,
     SF_I1 = VT_I1,
     SF_I2 = VT_I2,
@@ -66,7 +65,7 @@ ENUM!{enum SF_TYPE {
     SF_HAVEIID = VT_UNKNOWN | VT_RESERVED,
 }}
 #[cfg(target_pointer_width = "32")]
-UNION!{union __MIDL_IOleAutomationTypes_0001 {
+UNION! {union __MIDL_IOleAutomationTypes_0001 {
     [u32; 6],
     BstrStr BstrStr_mut: SAFEARR_BSTR,
     UnknownStr UnknownStr_mut: SAFEARR_UNKNOWN,
@@ -80,7 +79,7 @@ UNION!{union __MIDL_IOleAutomationTypes_0001 {
     HyperStr HyperStr_mut: HYPER_SIZEDARR,
 }}
 #[cfg(target_pointer_width = "64")]
-UNION!{union __MIDL_IOleAutomationTypes_0001 {
+UNION! {union __MIDL_IOleAutomationTypes_0001 {
     [u64; 4],
     BstrStr BstrStr_mut: SAFEARR_BSTR,
     UnknownStr UnknownStr_mut: SAFEARR_UNKNOWN,
@@ -93,11 +92,11 @@ UNION!{union __MIDL_IOleAutomationTypes_0001 {
     LongStr LongStr_mut: DWORD_SIZEDARR,
     HyperStr HyperStr_mut: HYPER_SIZEDARR,
 }}
-STRUCT!{struct SAFEARRAYUNION {
+STRUCT! {struct SAFEARRAYUNION {
     sfType: ULONG,
     u: __MIDL_IOleAutomationTypes_0001,
 }}
-STRUCT!{struct _wireSAFEARRAY {
+STRUCT! {struct _wireSAFEARRAY {
     cDims: USHORT,
     fFeatures: USHORT,
     cbElements: ULONG,
@@ -107,7 +106,7 @@ STRUCT!{struct _wireSAFEARRAY {
 }}
 pub type wireSAFEARRAY = *mut _wireSAFEARRAY;
 pub type wirePSAFEARRAY = *mut wireSAFEARRAY;
-STRUCT!{struct SAFEARRAY {
+STRUCT! {struct SAFEARRAY {
     cDims: USHORT,
     fFeatures: USHORT,
     cbElements: ULONG,
@@ -128,11 +127,11 @@ pub const FADF_UNKNOWN: DWORD = 0x200;
 pub const FADF_DISPATCH: DWORD = 0x400;
 pub const FADF_VARIANT: DWORD = 0x800;
 pub const FADF_RESERVED: DWORD = 0xf008;
-STRUCT!{struct __tagBRECORD {
+STRUCT! {struct __tagBRECORD {
     pvRecord: PVOID,
     pRecInfo: *mut IRecordInfo,
 }}
-UNION!{union VARIANT_n3 {
+UNION! {union VARIANT_n3 {
     [u64; 1] [u64; 2],
     llVal llVal_mut: LONGLONG,
     lVal lVal_mut: LONG,
@@ -179,32 +178,32 @@ UNION!{union VARIANT_n3 {
     puintVal puintVal_mut: *mut UINT,
     n4 n4_mut: __tagBRECORD,
 }}
-STRUCT!{struct __tagVARIANT {
+STRUCT! {struct __tagVARIANT {
     vt: VARTYPE,
     wReserved1: WORD,
     wReserved2: WORD,
     wReserved3: WORD,
     n3: VARIANT_n3,
 }}
-UNION!{union VARIANT_n1 {
+UNION! {union VARIANT_n1 {
     [u64; 2] [u64; 3],
     n2 n2_mut: __tagVARIANT,
     decVal decVal_mut: DECIMAL,
 }}
-STRUCT!{struct VARIANT {
+STRUCT! {struct VARIANT {
     n1: VARIANT_n1,
 }}
 pub type LPVARIANT = *mut VARIANT;
 pub type VARIANTARG = VARIANT;
 pub type LPVARIANTARG = *mut VARIANT;
 pub type REFVARIANT = *const VARIANT;
-STRUCT!{struct _wireBRECORD {
+STRUCT! {struct _wireBRECORD {
     fFlags: ULONG,
     clSize: ULONG,
     pRecInfo: *mut IRecordInfo,
     pRecord: *mut byte,
 }}
-UNION!{union _wireVARIANT_u {
+UNION! {union _wireVARIANT_u {
     [u64; 2],
     llVal llVal_mut: LONGLONG,
     lVal lVal_mut: LONG,
@@ -251,7 +250,7 @@ UNION!{union _wireVARIANT_u {
     pintVal pintVal_mut: *mut INT,
     puintVal puintVal_mut: *mut UINT,
 }}
-STRUCT!{struct _wireVARIANT {
+STRUCT! {struct _wireVARIANT {
     clSize: DWORD,
     rpcReserved: DWORD,
     vt: USHORT,
@@ -263,7 +262,7 @@ STRUCT!{struct _wireVARIANT {
 pub type DISPID = LONG;
 pub type MEMBERID = DISPID;
 pub type HREFTYPE = DWORD;
-ENUM!{enum TYPEKIND {
+ENUM! {enum TYPEKIND {
     TKIND_ENUM = 0,
     TKIND_RECORD,
     TKIND_MODULE,
@@ -274,27 +273,27 @@ ENUM!{enum TYPEKIND {
     TKIND_UNION,
     TKIND_MAX,
 }}
-UNION!{union TYPEDESC_u {
+UNION! {union TYPEDESC_u {
     [usize; 1],
     lptdesc lptdesc_mut: *mut TYPEDESC,
     lpadesc lpadesc_mut: *mut ARRAYDESC,
     hreftype hreftype_mut: HREFTYPE,
 }}
-STRUCT!{struct TYPEDESC {
+STRUCT! {struct TYPEDESC {
     u: TYPEDESC_u,
     vt: VARTYPE,
 }}
-STRUCT!{struct ARRAYDESC {
+STRUCT! {struct ARRAYDESC {
     tdescElem: TYPEDESC,
     cDims: USHORT,
     rgbounds: [SAFEARRAYBOUND; 1],
 }}
-STRUCT!{struct PARAMDESCEX {
+STRUCT! {struct PARAMDESCEX {
     cBytes: ULONG,
     varDefaultValue: VARIANTARG,
 }}
 pub type LPPARAMDESCEX = *mut PARAMDESCEX;
-STRUCT!{struct PARAMDESC {
+STRUCT! {struct PARAMDESC {
     pparamdescex: LPPARAMDESCEX,
     wParamFlags: USHORT,
 }}
@@ -307,7 +306,7 @@ pub const PARAMFLAG_FRETVAL: DWORD = 0x8;
 pub const PARAMFLAG_FOPT: DWORD = 0x10;
 pub const PARAMFLAG_FHASDEFAULT: DWORD = 0x20;
 pub const PARAMFLAG_FHASCUSTDATA: DWORD = 0x40;
-STRUCT!{struct IDLDESC {
+STRUCT! {struct IDLDESC {
     dwReserved: ULONG_PTR,
     wIDLFlags: USHORT,
 }}
@@ -317,17 +316,17 @@ pub const IDLFLAG_FIN: DWORD = PARAMFLAG_FIN;
 pub const IDLFLAG_FOUT: DWORD = PARAMFLAG_FOUT;
 pub const IDLFLAG_FLCID: DWORD = PARAMFLAG_FLCID;
 pub const IDLFLAG_FRETVAL: DWORD = PARAMFLAG_FRETVAL;
-UNION!{union ELEMDESC_u {
+UNION! {union ELEMDESC_u {
     [usize; 2],
     idldesc idldesc_mut: IDLDESC,
     paramdesc paramdesc_mut: PARAMDESC,
 }}
-STRUCT!{struct ELEMDESC {
+STRUCT! {struct ELEMDESC {
     tdesc: TYPEDESC,
     u: ELEMDESC_u,
 }}
 pub type LPELEMDESC = *mut ELEMDESC;
-STRUCT!{struct TYPEATTR {
+STRUCT! {struct TYPEATTR {
     guid: GUID,
     lcid: LCID,
     dwReserved: DWORD,
@@ -348,13 +347,13 @@ STRUCT!{struct TYPEATTR {
     idldescType: IDLDESC,
 }}
 pub type LPTYPEATTR = *mut TYPEATTR;
-STRUCT!{struct DISPPARAMS {
+STRUCT! {struct DISPPARAMS {
     rgvarg: *mut VARIANTARG,
     rgdispidNamedArgs: *mut DISPID,
     cArgs: UINT,
     cNamedArgs: UINT,
 }}
-STRUCT!{struct EXCEPINFO {
+STRUCT! {struct EXCEPINFO {
     wCode: WORD,
     wReserved: WORD,
     bstrSource: BSTR,
@@ -367,7 +366,7 @@ STRUCT!{struct EXCEPINFO {
     ) -> HRESULT>,
     scode: SCODE,
 }}
-ENUM!{enum CALLCONV {
+ENUM! {enum CALLCONV {
     CC_FASTCALL = 0,
     CC_CDECL = 1,
     CC_MSCPASCAL,
@@ -380,20 +379,20 @@ ENUM!{enum CALLCONV {
     CC_MPWPASCAL,
     CC_MAX,
 }}
-ENUM!{enum FUNCKIND {
+ENUM! {enum FUNCKIND {
     FUNC_VIRTUAL = 0,
     FUNC_PUREVIRTUAL,
     FUNC_NONVIRTUAL,
     FUNC_STATIC,
     FUNC_DISPATCH,
 }}
-ENUM!{enum INVOKEKIND {
+ENUM! {enum INVOKEKIND {
     INVOKE_FUNC = 1,
     INVOKE_PROPERTYGET = 2,
     INVOKE_PROPERTYPUT = 4,
     INVOKE_PROPERTYPUTREF = 8,
 }}
-STRUCT!{struct FUNCDESC {
+STRUCT! {struct FUNCDESC {
     memid: MEMBERID,
     lprgscode: *mut SCODE,
     lprgelemdescParam: *mut ELEMDESC,
@@ -408,7 +407,7 @@ STRUCT!{struct FUNCDESC {
     wFuncFlags: WORD,
 }}
 pub type LPFUNCDESC = *mut FUNCDESC;
-ENUM!{enum VARKIND {
+ENUM! {enum VARKIND {
     VAR_PERINSTANCE = 0,
     VAR_STATIC,
     VAR_CONST,
@@ -418,12 +417,12 @@ pub const IMPLTYPEFLAG_FDEFAULT: DWORD = 0x1;
 pub const IMPLTYPEFLAG_FSOURCE: DWORD = 0x2;
 pub const IMPLTYPEFLAG_FRESTRICTED: DWORD = 0x4;
 pub const IMPLTYPEFLAG_FDEFAULTVTABLE: DWORD = 0x8;
-UNION!{union VARDESC_u {
+UNION! {union VARDESC_u {
     [usize; 1],
     oInst oInst_mut: ULONG,
     lpvarValue lpvarValue_mut: *mut VARIANT,
 }}
-STRUCT!{struct VARDESC {
+STRUCT! {struct VARDESC {
     memid: MEMBERID,
     lpstrSchema: LPOLESTR,
     u: VARDESC_u,
@@ -432,7 +431,7 @@ STRUCT!{struct VARDESC {
     varkind: VARKIND,
 }}
 pub type LPVARDESC = *mut VARDESC;
-ENUM!{enum TYPEFLAGS {
+ENUM! {enum TYPEFLAGS {
     TYPEFLAG_FAPPOBJECT = 0x1,
     TYPEFLAG_FCANCREATE = 0x2,
     TYPEFLAG_FLICENSED = 0x4,
@@ -449,7 +448,7 @@ ENUM!{enum TYPEFLAGS {
     TYPEFLAG_FREVERSEBIND = 0x2000,
     TYPEFLAG_FPROXY = 0x4000,
 }}
-ENUM!{enum FUNCFLAGS {
+ENUM! {enum FUNCFLAGS {
     FUNCFLAG_FRESTRICTED = 0x1,
     FUNCFLAG_FSOURCE = 0x2,
     FUNCFLAG_FBINDABLE = 0x4,
@@ -464,7 +463,7 @@ ENUM!{enum FUNCFLAGS {
     FUNCFLAG_FREPLACEABLE = 0x800,
     FUNCFLAG_FIMMEDIATEBIND = 0x1000,
 }}
-ENUM!{enum VARFLAGS {
+ENUM! {enum VARFLAGS {
     VARFLAG_FREADONLY = 0x1,
     VARFLAG_FSOURCE = 0x2,
     VARFLAG_FBINDABLE = 0x4,
@@ -479,23 +478,23 @@ ENUM!{enum VARFLAGS {
     VARFLAG_FREPLACEABLE = 0x800,
     VARFLAG_FIMMEDIATEBIND = 0x1000,
 }}
-STRUCT!{struct CLEANLOCALSTORAGE {
+STRUCT! {struct CLEANLOCALSTORAGE {
     pInterface: *mut IUnknown,
     pStorage: PVOID,
     flags: DWORD,
 }}
-STRUCT!{struct CUSTDATAITEM {
+STRUCT! {struct CUSTDATAITEM {
     guid: GUID,
     varValue: VARIANTARG,
 }}
 pub type LPCUSTDATAITEM = *mut CUSTDATAITEM;
-STRUCT!{struct CUSTDATA {
+STRUCT! {struct CUSTDATA {
     cCustData: DWORD,
     prgCustData: LPCUSTDATAITEM,
 }}
 pub type LPCUSTDATA = *mut CUSTDATA;
 pub type LPCREATETYPEINFO = *mut ICreateTypeInfo;
-RIDL!{#[uuid(0x00020405, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL! {#[uuid(0x00020405, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ICreateTypeInfo(ICreateTypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn SetGuid(
         guid: REFGUID,
@@ -591,7 +590,7 @@ pub const DISPID_EVALUATE: INT = -5;
 pub const DISPID_CONSTRUCTOR: INT = -6;
 pub const DISPID_DESTRUCTOR: INT = -7;
 pub const DISPID_COLLECT: INT = -8;
-RIDL!{#[uuid(0x00020400, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL! {#[uuid(0x00020400, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeInfoCount(
         pctinfo: *mut UINT,
@@ -625,7 +624,7 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
 // IEnumVARIANT
 // IEnumVARIANT_RemoteNext_Proxy
 // IEnumVARIANT_RemoteNext_Stub
-RIDL!{#[uuid(0x0000002F, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL! {#[uuid(0x0000002F, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl) {
     fn RecordInit(
         pvNew: PVOID,
@@ -689,7 +688,7 @@ interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 pub type LPTYPECOMP = *mut ITypeComp;
-ENUM!{enum DESCKIND {
+ENUM! {enum DESCKIND {
     DESCKIND_NONE = 0,
     DESCKIND_FUNCDESC = DESCKIND_NONE + 1,
     DESCKIND_VARDESC = DESCKIND_FUNCDESC + 1,
@@ -697,14 +696,14 @@ ENUM!{enum DESCKIND {
     DESCKIND_IMPLICITAPPOBJ = DESCKIND_TYPECOMP + 1,
     DESCKIND_MAX = DESCKIND_IMPLICITAPPOBJ + 1,
 }}
-UNION!{union BINDPTR {
+UNION! {union BINDPTR {
     [usize; 1],
     lpfuncdesc lpfuncdesc_mut: *mut FUNCDESC,
     lpvardesc lpvardesc_mut: *mut VARDESC,
     lptcomp lptcomp_mut: *mut ITypeComp,
 }}
 pub type LPBINDPTR = *mut BINDPTR;
-RIDL!{#[uuid(0x00020403, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL! {#[uuid(0x00020403, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ITypeComp(ITypeCompVtbl): IUnknown(IUnknownVtbl) {
     fn Bind(
         szName: LPOLESTR,
@@ -721,13 +720,13 @@ interface ITypeComp(ITypeCompVtbl): IUnknown(IUnknownVtbl) {
         ppTComp: *mut *mut ITypeComp,
     ) -> HRESULT,
 }}
-ENUM!{enum SYSKIND {
+ENUM! {enum SYSKIND {
     SYS_WIN16 = 0,
     SYS_WIN32,
     SYS_MAC,
     SYS_WIN64,
 }}
-STRUCT!{struct TLIBATTR {
+STRUCT! {struct TLIBATTR {
     guid: GUID,
     lcid: LCID,
     syskind: SYSKIND,
@@ -735,7 +734,7 @@ STRUCT!{struct TLIBATTR {
     wMinorVerNum: WORD,
     wLibFlags: WORD,
 }}
-RIDL!{#[uuid(0x00020402, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL! {#[uuid(0x00020402, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ITypeLib(ITypeLibVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeInfoCount() -> UINT,
     fn GetTypeInfo(
@@ -779,7 +778,7 @@ interface ITypeLib(ITypeLibVtbl): IUnknown(IUnknownVtbl) {
         pTLibAttr: *const TLIBATTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x00020401, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL! {#[uuid(0x00020401, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeAttr(
         ppTypeAttr: *mut *mut TYPEATTR,
@@ -869,7 +868,7 @@ interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
         pVarDesc: *mut VARDESC,
     ) -> (),
 }}
-RIDL!{#[uuid(0x3127ca40, 0x446e, 0x11ce, 0x81, 0x35, 0x00, 0xaa, 0x00, 0x4b, 0xb8, 0x51)]
+RIDL! {#[uuid(0x3127ca40, 0x446e, 0x11ce, 0x81, 0x35, 0x00, 0xaa, 0x00, 0x4b, 0xb8, 0x51)]
 interface IErrorLog(IErrorLogVtbl): IUnknown(IUnknownVtbl) {
     fn AddError(
         pszPropName: LPCOLESTR,

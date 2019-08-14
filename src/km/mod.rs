@@ -4,4 +4,5 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Headers for kernel mode
-#[cfg(feature = "d3dkmthk")] pub mod d3dkmthk;
+#[cfg(feature = "d3dkmthk")]
+pub mod d3dkmthk;

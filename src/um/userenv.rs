@@ -6,7 +6,7 @@
 //! Definitions for the user environment API
 use shared::minwindef::{BOOL, DWORD, LPDWORD, LPVOID, PHKEY};
 use um::winnt::{
-    HANDLE, HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PCWSTR, PSID, PSID_AND_ATTRIBUTES, PWSTR
+    HANDLE, HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PCWSTR, PSID, PSID_AND_ATTRIBUTES, PWSTR,
 };
 use um::winreg::REGSAM;
 extern "system" {
@@ -18,21 +18,10 @@ extern "system" {
     //     hToken: HANDLE,
     //     lpProfileInfo: LPPROFILEINFOW,
     // ) -> BOOL;
-    pub fn UnloadUserProfile(
-        hToken: HANDLE,
-        hProfile: HANDLE,
-    ) -> BOOL;
-    pub fn GetProfilesDirectoryA(
-        lpProfileDir: LPSTR,
-        lpcchSize: LPDWORD,
-    ) -> BOOL;
-    pub fn GetProfilesDirectoryW(
-        lpProfileDir: LPWSTR,
-        lpcchSize: LPDWORD,
-    ) -> BOOL;
-    pub fn GetProfileType(
-        dwFlags: *mut DWORD,
-    ) -> BOOL;
+    pub fn UnloadUserProfile(hToken: HANDLE, hProfile: HANDLE) -> BOOL;
+    pub fn GetProfilesDirectoryA(lpProfileDir: LPSTR, lpcchSize: LPDWORD) -> BOOL;
+    pub fn GetProfilesDirectoryW(lpProfileDir: LPWSTR, lpcchSize: LPDWORD) -> BOOL;
+    pub fn GetProfileType(dwFlags: *mut DWORD) -> BOOL;
     pub fn DeleteProfileA(
         lpSidString: LPCSTR,
         lpProfilePath: LPCSTR,
@@ -49,22 +38,10 @@ extern "system" {
         pszProfilePath: LPWSTR,
         cchProfilePath: DWORD,
     ) -> HRESULT;
-    pub fn GetDefaultUserProfileDirectoryA(
-        lpProfileDir: LPSTR,
-        lpcchSize: LPDWORD,
-    ) -> BOOL;
-    pub fn GetDefaultUserProfileDirectoryW(
-        lpProfileDir: LPWSTR,
-        lpcchSize: LPDWORD,
-    ) -> BOOL;
-    pub fn GetAllUsersProfileDirectoryA(
-        lpProfileDir: LPSTR,
-        lpcchSize: LPDWORD,
-    ) -> BOOL;
-    pub fn GetAllUsersProfileDirectoryW(
-        lpProfileDir: LPWSTR,
-        lpcchSize: LPDWORD,
-    ) -> BOOL;
+    pub fn GetDefaultUserProfileDirectoryA(lpProfileDir: LPSTR, lpcchSize: LPDWORD) -> BOOL;
+    pub fn GetDefaultUserProfileDirectoryW(lpProfileDir: LPWSTR, lpcchSize: LPDWORD) -> BOOL;
+    pub fn GetAllUsersProfileDirectoryA(lpProfileDir: LPSTR, lpcchSize: LPDWORD) -> BOOL;
+    pub fn GetAllUsersProfileDirectoryW(lpProfileDir: LPWSTR, lpcchSize: LPDWORD) -> BOOL;
     pub fn GetUserProfileDirectoryA(
         hToken: HANDLE,
         lpProfileDir: LPSTR,
@@ -80,9 +57,7 @@ extern "system" {
         hToken: HANDLE,
         bInherit: BOOL,
     ) -> BOOL;
-    pub fn DestroyEnvironmentBlock(
-        lpEnvironment: LPVOID,
-    ) -> BOOL;
+    pub fn DestroyEnvironmentBlock(lpEnvironment: LPVOID) -> BOOL;
     pub fn ExpandEnvironmentStringsForUserA(
         hToken: HANDLE,
         lpSrc: LPCSTR,
@@ -95,26 +70,12 @@ extern "system" {
         lpDest: LPWSTR,
         dwSize: DWORD,
     ) -> BOOL;
-    pub fn RefreshPolicy(
-        bMachine: BOOL,
-    ) -> BOOL;
-    pub fn RefreshPolicyEx(
-        bMachine: BOOL,
-        dwOptions: DWORD,
-    ) -> BOOL;
-    pub fn EnterCriticalPolicySection(
-        bMachine: BOOL,
-    ) -> HANDLE;
-    pub fn LeaveCriticalPolicySection(
-        hSection: HANDLE,
-    ) -> BOOL;
-    pub fn RegisterGPNotification(
-        hEvent: HANDLE,
-        bMachine: BOOL,
-    ) -> BOOL;
-    pub fn UnregisterGPNotification(
-        hEvent: HANDLE,
-    ) -> BOOL;
+    pub fn RefreshPolicy(bMachine: BOOL) -> BOOL;
+    pub fn RefreshPolicyEx(bMachine: BOOL, dwOptions: DWORD) -> BOOL;
+    pub fn EnterCriticalPolicySection(bMachine: BOOL) -> HANDLE;
+    pub fn LeaveCriticalPolicySection(hSection: HANDLE) -> BOOL;
+    pub fn RegisterGPNotification(hEvent: HANDLE, bMachine: BOOL) -> BOOL;
+    pub fn UnregisterGPNotification(hEvent: HANDLE) -> BOOL;
     // pub fn GetGPOListA();
     // pub fn GetGPOListW();
     // pub fn FreeGPOListA();
@@ -136,17 +97,12 @@ extern "system" {
         dwCapabilityCount: DWORD,
         ppSidAppContainerSid: *mut PSID,
     ) -> HRESULT;
-    pub fn DeleteAppContainerProfile(
-        pszAppContainerName: PCWSTR,
-    ) -> HRESULT;
+    pub fn DeleteAppContainerProfile(pszAppContainerName: PCWSTR) -> HRESULT;
     pub fn GetAppContainerRegistryLocation(
         desiredAccess: REGSAM,
         phAppContainerKey: PHKEY,
     ) -> HRESULT;
-    pub fn GetAppContainerFolderPath(
-        pszAppContainerSid: PCWSTR,
-        ppszPath: *mut PWSTR,
-    ) -> HRESULT;
+    pub fn GetAppContainerFolderPath(pszAppContainerSid: PCWSTR, ppszPath: *mut PWSTR) -> HRESULT;
     pub fn DeriveAppContainerSidFromAppContainerName(
         pszAppContainerName: PCWSTR,
         ppsidAppContainerSid: *mut PSID,

@@ -11,7 +11,7 @@ use um::winnt::{LPSTR, WCHAR};
 //109 (Win 7 SDK)
 pub type MMVERSION = UINT;
 pub type MMRESULT = UINT;
-STRUCT!{#[repr(packed)] struct MMTIME_smpte {
+STRUCT! {#[repr(packed)] struct MMTIME_smpte {
     hour: BYTE,
     min: BYTE,
     sec: BYTE,
@@ -20,10 +20,10 @@ STRUCT!{#[repr(packed)] struct MMTIME_smpte {
     dummy: BYTE,
     pad: [BYTE; 2],
 }}
-STRUCT!{#[repr(packed)] struct MMTIME_midi {
+STRUCT! {#[repr(packed)] struct MMTIME_midi {
     songptrpos: DWORD,
 }}
-UNION!{#[repr(packed)] union MMTIME_u {
+UNION! {#[repr(packed)] union MMTIME_u {
     [u32; 2],
     ms ms_mut: DWORD,
     sample sample_mut: DWORD,
@@ -32,7 +32,7 @@ UNION!{#[repr(packed)] union MMTIME_u {
     smpte smpte_mut: MMTIME_smpte,
     midi midi_mut: MMTIME_midi,
 }}
-STRUCT!{#[repr(packed)] struct MMTIME {
+STRUCT! {#[repr(packed)] struct MMTIME {
     wType: UINT,
     u: MMTIME_u,
 }}
@@ -121,8 +121,8 @@ pub const WAVERR_STILLPLAYING: MMRESULT = WAVERR_BASE + 1;
 pub const WAVERR_UNPREPARED: MMRESULT = WAVERR_BASE + 2;
 pub const WAVERR_SYNC: MMRESULT = WAVERR_BASE + 3;
 pub const WAVERR_LASTERROR: MMRESULT = WAVERR_BASE + 3;
-DECLARE_HANDLE!{HWAVEIN, HWAVEIN__}
-DECLARE_HANDLE!{HWAVEOUT, HWAVEOUT__}
+DECLARE_HANDLE! {HWAVEIN, HWAVEIN__}
+DECLARE_HANDLE! {HWAVEOUT, HWAVEOUT__}
 pub type LPHWAVEIN = *mut HWAVEIN;
 pub type LPHWAVEOUT = *mut HWAVEOUT;
 pub const WOM_OPEN: UINT = MM_WOM_OPEN;
@@ -138,7 +138,7 @@ pub const WAVE_MAPPED: DWORD = 0x0004;
 pub const WAVE_FORMAT_DIRECT: DWORD = 0x0008;
 pub const WAVE_FORMAT_DIRECT_QUERY: DWORD = WAVE_FORMAT_QUERY | WAVE_FORMAT_DIRECT;
 pub const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE: DWORD = 0x0010;
-STRUCT!{#[repr(packed)] struct WAVEHDR {
+STRUCT! {#[repr(packed)] struct WAVEHDR {
     lpData: LPSTR,
     dwBufferLength: DWORD,
     dwBytesRecorded: DWORD,
@@ -151,7 +151,7 @@ STRUCT!{#[repr(packed)] struct WAVEHDR {
 pub type PWAVEHDR = *mut WAVEHDR;
 pub type NPWAVEHDR = *mut WAVEHDR;
 pub type LPWAVEHDR = *mut WAVEHDR;
-STRUCT!{#[repr(packed)] struct WAVEOUTCAPSW {
+STRUCT! {#[repr(packed)] struct WAVEOUTCAPSW {
     wMid: WORD,
     wPid: WORD,
     vDriverVersion: MMVERSION,
@@ -164,7 +164,7 @@ STRUCT!{#[repr(packed)] struct WAVEOUTCAPSW {
 pub type PWAVEOUTCAPSW = *mut WAVEOUTCAPSW;
 pub type NPWAVEOUTCAPSW = *mut WAVEOUTCAPSW;
 pub type LPWAVEOUTCAPSW = *mut WAVEOUTCAPSW;
-STRUCT!{#[repr(packed)] struct WAVEINCAPSW {
+STRUCT! {#[repr(packed)] struct WAVEINCAPSW {
     wMid: WORD,
     wPid: WORD,
     vDriverVersion: MMVERSION,
@@ -211,14 +211,14 @@ pub const TIMERR_NOERROR: MMRESULT = 0;
 pub const TIMERR_NOCANDO: MMRESULT = TIMERR_BASE + 1;
 pub const TIMERR_STRUCT: MMRESULT = TIMERR_BASE + 33;
 //2198 (Win 7 SDK)
-STRUCT!{#[repr(packed)] struct TIMECAPS {
+STRUCT! {#[repr(packed)] struct TIMECAPS {
     wPeriodMin: UINT,
     wPeriodMax: UINT,
 }}
 pub type PTIMECAPS = *mut TIMECAPS;
 pub type NPTIMECAPS = *mut TIMECAPS;
 pub type LPTIMECAPS = *mut TIMECAPS;
-STRUCT!{#[repr(packed)] struct MIDIHDR {
+STRUCT! {#[repr(packed)] struct MIDIHDR {
     lpData: LPSTR,
     dwBufferLength: DWORD,
     dwBytesRecorded: DWORD,
@@ -232,7 +232,7 @@ STRUCT!{#[repr(packed)] struct MIDIHDR {
 pub type PMIDIHDR = *mut MIDIHDR;
 pub type NPMIDIHDR = *mut MIDIHDR;
 pub type LPMIDIHDR = *mut MIDIHDR;
-STRUCT!{#[repr(packed)] struct MIDIINCAPSW {
+STRUCT! {#[repr(packed)] struct MIDIINCAPSW {
     wMid: WORD,
     wPid: WORD,
     vDriverVersion: MMVERSION,
@@ -242,7 +242,7 @@ STRUCT!{#[repr(packed)] struct MIDIINCAPSW {
 pub type PMIDIINCAPSW = *mut MIDIINCAPSW;
 pub type NPMIDIINCAPSW = *mut MIDIINCAPSW;
 pub type LPMIDIINCAPSW = *mut MIDIINCAPSW;
-STRUCT!{#[repr(packed)] struct MIDIOUTCAPSW {
+STRUCT! {#[repr(packed)] struct MIDIOUTCAPSW {
     wMid: WORD,
     wPid: WORD,
     vDriverVersion: MMVERSION,
@@ -256,11 +256,11 @@ STRUCT!{#[repr(packed)] struct MIDIOUTCAPSW {
 pub type PMIDIOUTCAPSW = *mut MIDIOUTCAPSW;
 pub type NPMIDIOUTCAPSW = *mut MIDIOUTCAPSW;
 pub type LPMIDIOUTCAPSW = *mut MIDIOUTCAPSW;
-DECLARE_HANDLE!{HMIDIIN, HMIDIIN__}
-DECLARE_HANDLE!{HMIDIOUT, HMIDIOUT__}
+DECLARE_HANDLE! {HMIDIIN, HMIDIIN__}
+DECLARE_HANDLE! {HMIDIOUT, HMIDIOUT__}
 pub type LPHMIDIIN = *mut HMIDIIN;
 pub type LPHMIDIOUT = *mut HMIDIOUT;
-DECLARE_HANDLE!{HMIDISTRM, HMIDISTRM__}
-DECLARE_HANDLE!{HMIDI, HMIDI__}
+DECLARE_HANDLE! {HMIDISTRM, HMIDISTRM__}
+DECLARE_HANDLE! {HMIDI, HMIDI__}
 pub type LPHMIDISTRM = *mut HMIDISTRM;
 pub type LPHMIDI = *mut HMIDI;

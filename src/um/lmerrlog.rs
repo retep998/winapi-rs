@@ -5,7 +5,7 @@
 // except according to those terms.
 use shared::minwindef::{DWORD, LPBYTE};
 use um::winnt::LPWSTR;
-STRUCT!{struct ERROR_LOG {
+STRUCT! {struct ERROR_LOG {
     el_len: DWORD,
     el_reserved: DWORD,
     el_time: DWORD,
@@ -18,7 +18,7 @@ STRUCT!{struct ERROR_LOG {
 }}
 pub type PERROR_LOG = *mut ERROR_LOG;
 pub type LPERROR_LOG = *mut ERROR_LOG;
-STRUCT!{struct HLOG {
+STRUCT! {struct HLOG {
     time: DWORD,
     last_flags: DWORD,
     offset: DWORD,

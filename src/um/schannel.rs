@@ -15,13 +15,13 @@ pub const SSL3SP_NAME: &'static str = "Microsoft SSL 3.0";
 pub const TLS1SP_NAME: &'static str = "Microsoft TLS 1.0";
 pub const PCT1SP_NAME: &'static str = "Microsoft PCT 1.0";
 pub const SCHANNEL_NAME: &'static str = "Schannel";
-ENUM!{enum eTlsSignatureAlgorithm {
+ENUM! {enum eTlsSignatureAlgorithm {
     TlsSignatureAlgorithm_Anonymous = 0,
     TlsSignatureAlgorithm_Rsa = 1,
     TlsSignatureAlgorithm_Dsa = 2,
     TlsSignatureAlgorithm_Ecdsa = 3,
 }}
-ENUM!{enum eTlsHashAlgorithm {
+ENUM! {enum eTlsHashAlgorithm {
     TlsHashAlgorithm_None = 0,
     TlsHashAlgorithm_Md5 = 1,
     TlsHashAlgorithm_Sha1 = 2,
@@ -31,7 +31,7 @@ ENUM!{enum eTlsHashAlgorithm {
     TlsHashAlgorithm_Sha512 = 6,
 }}
 pub const UNISP_RPC_ID: DWORD = 14;
-STRUCT!{struct SecPkgContext_RemoteCredentialInfo {
+STRUCT! {struct SecPkgContext_RemoteCredentialInfo {
     cbCertificateChain: DWORD,
     pbCertificateChain: PBYTE,
     cCertificates: DWORD,
@@ -44,7 +44,7 @@ pub type PSecPkgContext_RemoteCredenitalInfo = *mut SecPkgContext_RemoteCredenti
 pub const RCRED_STATUS_NOCRED: DWORD = 0x00000000;
 pub const RCRED_CRED_EXISTS: DWORD = 0x00000001;
 pub const RCRED_STATUS_UNKNOWN_ISSUER: DWORD = 0x00000002;
-STRUCT!{struct SecPkgContext_LocalCredentialInfo {
+STRUCT! {struct SecPkgContext_LocalCredentialInfo {
     cbCertificateChain: DWORD,
     pbCertificateChain: PBYTE,
     cCertificates: DWORD,
@@ -57,17 +57,17 @@ pub type PSecPkgContext_LocalCredenitalInfo = *mut SecPkgContext_LocalCredential
 pub const LCRED_STATUS_NOCRED: DWORD = 0x00000000;
 pub const LCRED_CRED_EXISTS: DWORD = 0x00000001;
 pub const LCRED_STATUS_UNKNOWN_ISSUER: DWORD = 0x00000002;
-STRUCT!{struct SecPkgContext_ClientCertPolicyResult {
+STRUCT! {struct SecPkgContext_ClientCertPolicyResult {
     dwPolicyResult: HRESULT,
     guidPolicyId: GUID,
 }}
 pub type PSecPkgContext_ClientCertPolicyResult = *mut SecPkgContext_ClientCertPolicyResult;
-STRUCT!{struct SecPkgContext_IssuerListInfoEx {
+STRUCT! {struct SecPkgContext_IssuerListInfoEx {
     aIssuers: PCERT_NAME_BLOB,
     cIssuers: DWORD,
 }}
 pub type PSecPkgContext_IssuerListInfoEx = *mut SecPkgContext_IssuerListInfoEx;
-STRUCT!{struct SecPkgContext_ConnectionInfo {
+STRUCT! {struct SecPkgContext_ConnectionInfo {
     dwProtocol: DWORD,
     aiCipher: ALG_ID,
     dwCipherStrength: DWORD,
@@ -79,7 +79,7 @@ STRUCT!{struct SecPkgContext_ConnectionInfo {
 pub type PSecPkgContext_ConnectionInfo = *mut SecPkgContext_ConnectionInfo;
 pub const SZ_ALG_MAX_SIZE: usize = 64;
 pub const SECPKGCONTEXT_CIPHERINFO_V1: DWORD = 1;
-STRUCT!{struct SecPkgContext_CipherInfo {
+STRUCT! {struct SecPkgContext_CipherInfo {
     dwVersion: DWORD,
     dwProtocol: DWORD,
     dwCipherSuite: DWORD,
@@ -97,47 +97,47 @@ STRUCT!{struct SecPkgContext_CipherInfo {
     dwKeyType: DWORD,
 }}
 pub type PSecPkgContext_CipherInfo = *mut SecPkgContext_CipherInfo;
-STRUCT!{struct SecPkgContext_EapKeyBlock {
+STRUCT! {struct SecPkgContext_EapKeyBlock {
     rgbKeys: [BYTE; 128],
     rgbIVs: [BYTE; 64],
 }}
 pub type PSecPkgContext_EapKeyBlock = *mut SecPkgContext_EapKeyBlock;
-STRUCT!{struct SecPkgContext_MappedCredAttr {
+STRUCT! {struct SecPkgContext_MappedCredAttr {
     dwAttribute: DWORD,
     pvBuffer: PVOID,
 }}
 pub type PSecPkgContext_MappedCredAttr = *mut SecPkgContext_MappedCredAttr;
 pub const SSL_SESSION_RECONNECT: DWORD = 1;
-STRUCT!{struct SecPkgContext_SessionInfo {
+STRUCT! {struct SecPkgContext_SessionInfo {
     dwFlags: DWORD,
     cbSessionId: DWORD,
     rgbSessionId: [BYTE; 32],
 }}
 pub type PSecPkgContext_SessionInfo = *mut SecPkgContext_SessionInfo;
-STRUCT!{struct SecPkgContext_SessionAppData {
+STRUCT! {struct SecPkgContext_SessionAppData {
     dwFlags: DWORD,
     cbAppData: DWORD,
     pbAppData: PBYTE,
 }}
 pub type PSecPkgContext_SessionAppData = *mut SecPkgContext_SessionAppData;
-STRUCT!{struct SecPkgContext_EapPrfInfo {
+STRUCT! {struct SecPkgContext_EapPrfInfo {
     dwVersion: DWORD,
     cbPrfData: DWORD,
     pbPrfData: PBYTE,
 }}
 pub type PSecPkgContext_EapPrfInfo = *mut SecPkgContext_EapPrfInfo;
-STRUCT!{struct SecPkgContext_SupportedSignatures {
+STRUCT! {struct SecPkgContext_SupportedSignatures {
     cSignatureAndHashAlgorithms: WORD,
     pSignatureAndHashAlgorithms: *mut WORD,
 }}
 pub type PSecPkgContext_SupportedSignatures = *mut SecPkgContext_SupportedSignatures;
-STRUCT!{struct SecPkgContext_Certificates {
+STRUCT! {struct SecPkgContext_Certificates {
     cCertificates: DWORD,
     cbCertificateChain: DWORD,
     pbCertificateChain: PBYTE,
 }}
 pub type PSecPkgContext_Certificates = *mut SecPkgContext_Certificates;
-STRUCT!{struct SecPkgContext_CertInfo {
+STRUCT! {struct SecPkgContext_CertInfo {
     dwVersion: DWORD,
     cbSubjectName: DWORD,
     pwszSubjectName: LPWSTR,
@@ -147,11 +147,11 @@ STRUCT!{struct SecPkgContext_CertInfo {
 }}
 pub type PSecPkgContext_CertInfo = *mut SecPkgContext_CertInfo;
 pub const KERN_CONTEXT_CERT_INFO_V1: DWORD = 0x00000000;
-STRUCT!{struct SecPkgContext_UiInfo {
+STRUCT! {struct SecPkgContext_UiInfo {
     hParentWindow: HWND,
 }}
 pub type PSecPkgContext_UiInfo = *mut SecPkgContext_UiInfo;
-STRUCT!{struct SecPkgContext_EarlyStart {
+STRUCT! {struct SecPkgContext_EarlyStart {
     dwEarlyStartFlags: DWORD,
 }}
 pub type PSecPkgContext_EarlyStart = *mut SecPkgContext_EarlyStart;
@@ -167,7 +167,7 @@ pub const SCH_CRED_X509_CERTCHAIN: DWORD = 0x00000001;
 pub const SCH_CRED_X509_CAPI: DWORD = 0x00000002;
 pub const SCH_CRED_CERT_CONTEXT: DWORD = 0x00000003;
 pub enum _HMAPPER {}
-STRUCT!{struct SCHANNEL_CRED {
+STRUCT! {struct SCHANNEL_CRED {
     dwVersion: DWORD,
     cCreds: DWORD,
     paCred: *mut PCCERT_CONTEXT,
@@ -190,14 +190,14 @@ pub const SCH_CRED_FORMAT_CERT_HASH_STORE: DWORD = 0x00000002;
 pub const SCH_CRED_MAX_STORE_NAME_SIZE: usize = 128;
 pub const SCH_CRED_MAX_SUPPORTED_ALGS: DWORD = 256;
 pub const SCH_CRED_MAX_SUPPORTED_CERTS: DWORD = 100;
-STRUCT!{struct SCHANNEL_CERT_HASH {
+STRUCT! {struct SCHANNEL_CERT_HASH {
     dwLength: DWORD,
     dwFlags: DWORD,
     hProv: HCRYPTPROV,
     ShaHash: [BYTE; 20],
 }}
 pub type PSCHANNEL_CERT_HASH = *mut SCHANNEL_CERT_HASH;
-STRUCT!{struct SCHANNEL_CERT_HASH_STORE {
+STRUCT! {struct SCHANNEL_CERT_HASH_STORE {
     dwLength: DWORD,
     dwFlags: DWORD,
     hProv: HCRYPTPROV,
@@ -232,7 +232,7 @@ pub const SCHANNEL_RENEGOTIATE: DWORD = 0;
 pub const SCHANNEL_SHUTDOWN: DWORD = 1;
 pub const SCHANNEL_ALERT: DWORD = 2;
 pub const SCHANNEL_SESSION: DWORD = 3;
-STRUCT!{struct SCHANNEL_ALERT_TOKEN {
+STRUCT! {struct SCHANNEL_ALERT_TOKEN {
     dwTokenType: DWORD,
     dwAlertType: DWORD,
     dwAlertNumber: DWORD,
@@ -266,11 +266,11 @@ pub const TLS1_ALERT_UNSUPPORTED_EXT: DWORD = 110;
 pub const TLS1_ALERT_NO_APP_PROTOCOL: DWORD = 120;
 pub const SSL_SESSION_ENABLE_RECONNECTS: DWORD = 1;
 pub const SSL_SESSION_DISABLE_RECONNECTS: DWORD = 2;
-STRUCT!{struct SCHANNEL_SESSION_TOKEN {
+STRUCT! {struct SCHANNEL_SESSION_TOKEN {
     dwTokenType: DWORD,
     dwFlags: DWORD,
 }}
-STRUCT!{struct SCHANNEL_CLIENT_SIGNATURE {
+STRUCT! {struct SCHANNEL_CLIENT_SIGNATURE {
     cbLength: DWORD,
     aiHash: ALG_ID,
     cbHash: DWORD,
@@ -298,10 +298,16 @@ pub const SP_PROT_UNI_CLIENT: DWORD = 0x80000000;
 pub const SP_PROT_UNI: DWORD = SP_PROT_UNI_SERVER | SP_PROT_UNI_CLIENT;
 pub const SP_PROT_ALL: DWORD = 0xffffffff;
 pub const SP_PROT_NONE: DWORD = 0;
-pub const SP_PROT_CLIENTS: DWORD = SP_PROT_PCT1_CLIENT | SP_PROT_SSL2_CLIENT
-    | SP_PROT_SSL3_CLIENT | SP_PROT_UNI_CLIENT | SP_PROT_TLS1_CLIENT;
-pub const SP_PROT_SERVERS: DWORD = SP_PROT_PCT1_SERVER | SP_PROT_SSL2_SERVER
-    | SP_PROT_SSL3_SERVER | SP_PROT_UNI_SERVER | SP_PROT_TLS1_SERVER;
+pub const SP_PROT_CLIENTS: DWORD = SP_PROT_PCT1_CLIENT
+    | SP_PROT_SSL2_CLIENT
+    | SP_PROT_SSL3_CLIENT
+    | SP_PROT_UNI_CLIENT
+    | SP_PROT_TLS1_CLIENT;
+pub const SP_PROT_SERVERS: DWORD = SP_PROT_PCT1_SERVER
+    | SP_PROT_SSL2_SERVER
+    | SP_PROT_SSL3_SERVER
+    | SP_PROT_UNI_SERVER
+    | SP_PROT_TLS1_SERVER;
 pub const SP_PROT_TLS1_0_SERVER: DWORD = SP_PROT_TLS1_SERVER;
 pub const SP_PROT_TLS1_0_CLIENT: DWORD = SP_PROT_TLS1_CLIENT;
 pub const SP_PROT_TLS1_0: DWORD = SP_PROT_TLS1_0_SERVER | SP_PROT_TLS1_0_CLIENT;
@@ -323,17 +329,17 @@ pub const SP_PROT_DTLS1_X: DWORD = SP_PROT_DTLS1_X_SERVER | SP_PROT_DTLS1_X_CLIE
 pub const SP_PROT_TLS1_1PLUS_SERVER: DWORD = SP_PROT_TLS1_1_SERVER | SP_PROT_TLS1_2_SERVER;
 pub const SP_PROT_TLS1_1PLUS_CLIENT: DWORD = SP_PROT_TLS1_1_CLIENT | SP_PROT_TLS1_2_CLIENT;
 pub const SP_PROT_TLS1_1PLUS: DWORD = SP_PROT_TLS1_1PLUS_SERVER | SP_PROT_TLS1_1PLUS_CLIENT;
-pub const SP_PROT_TLS1_X_SERVER: DWORD = SP_PROT_TLS1_0_SERVER | SP_PROT_TLS1_1_SERVER
-    | SP_PROT_TLS1_2_SERVER;
-pub const SP_PROT_TLS1_X_CLIENT: DWORD = SP_PROT_TLS1_0_CLIENT | SP_PROT_TLS1_1_CLIENT
-    | SP_PROT_TLS1_2_CLIENT;
+pub const SP_PROT_TLS1_X_SERVER: DWORD =
+    SP_PROT_TLS1_0_SERVER | SP_PROT_TLS1_1_SERVER | SP_PROT_TLS1_2_SERVER;
+pub const SP_PROT_TLS1_X_CLIENT: DWORD =
+    SP_PROT_TLS1_0_CLIENT | SP_PROT_TLS1_1_CLIENT | SP_PROT_TLS1_2_CLIENT;
 pub const SP_PROT_TLS1_X: DWORD = SP_PROT_TLS1_X_SERVER | SP_PROT_TLS1_X_CLIENT;
 pub const SP_PROT_SSL3TLS1_X_CLIENTS: DWORD = SP_PROT_TLS1_X_CLIENT | SP_PROT_SSL3_CLIENT;
 pub const SP_PROT_SSL3TLS1_X_SERVERS: DWORD = SP_PROT_TLS1_X_SERVER | SP_PROT_SSL3_SERVER;
 pub const SP_PROT_SSL3TLS1_X: DWORD = SP_PROT_SSL3 | SP_PROT_TLS1_X;
-pub const SP_PROT_X_CLIENTS: DWORD = SP_PROT_CLIENTS | SP_PROT_TLS1_X_CLIENT
-    | SP_PROT_DTLS1_X_CLIENT;
-pub const SP_PROT_X_SERVERS: DWORD = SP_PROT_SERVERS | SP_PROT_TLS1_X_SERVER
-    | SP_PROT_DTLS1_X_SERVER;
+pub const SP_PROT_X_CLIENTS: DWORD =
+    SP_PROT_CLIENTS | SP_PROT_TLS1_X_CLIENT | SP_PROT_DTLS1_X_CLIENT;
+pub const SP_PROT_X_SERVERS: DWORD =
+    SP_PROT_SERVERS | SP_PROT_TLS1_X_SERVER | SP_PROT_DTLS1_X_SERVER;
 pub const SSL_CRACK_CERTIFICATE_NAME: &'static str = "SslCrackCertificate";
 pub const SSL_FREE_CERTIFICATE_NAME: &'static str = "SslFreeCertificate";

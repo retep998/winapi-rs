@@ -8,71 +8,24 @@ use um::winnt::{HANDLE, LPCH, LPCSTR, LPCWSTR, LPSTR, LPWCH, LPWSTR, PHANDLE};
 extern "system" {
     pub fn GetEnvironmentStrings() -> LPCH;
     pub fn GetEnvironmentStringsW() -> LPWCH;
-    pub fn SetEnvironmentStringsW(
-        NewEnvironment: LPWCH,
-    ) -> BOOL;
-    pub fn FreeEnvironmentStringsA(
-        penv: LPCH,
-    ) -> BOOL;
-    pub fn FreeEnvironmentStringsW(
-        penv: LPWCH,
-    ) -> BOOL;
-    pub fn GetStdHandle(
-        nStdHandle: DWORD,
-    ) -> HANDLE;
-    pub fn SetStdHandle(
-        nStdHandle: DWORD,
-        hHandle: HANDLE,
-    ) -> BOOL;
-    pub fn SetStdHandleEx(
-        nStdHandle: DWORD,
-        hHandle: HANDLE,
-        phPrevValue: PHANDLE,
-    ) -> BOOL;
+    pub fn SetEnvironmentStringsW(NewEnvironment: LPWCH) -> BOOL;
+    pub fn FreeEnvironmentStringsA(penv: LPCH) -> BOOL;
+    pub fn FreeEnvironmentStringsW(penv: LPWCH) -> BOOL;
+    pub fn GetStdHandle(nStdHandle: DWORD) -> HANDLE;
+    pub fn SetStdHandle(nStdHandle: DWORD, hHandle: HANDLE) -> BOOL;
+    pub fn SetStdHandleEx(nStdHandle: DWORD, hHandle: HANDLE, phPrevValue: PHANDLE) -> BOOL;
     pub fn GetCommandLineA() -> LPSTR;
     pub fn GetCommandLineW() -> LPWSTR;
-    pub fn GetEnvironmentVariableA(
-        lpName: LPCSTR,
-        lpBuffer: LPSTR,
-        nSize: DWORD,
-    ) -> DWORD;
-    pub fn GetEnvironmentVariableW(
-        lpName: LPCWSTR,
-        lpBuffer: LPWSTR,
-        nSize: DWORD,
-    ) -> DWORD;
-    pub fn SetEnvironmentVariableA(
-        lpName: LPCSTR,
-        lpValue: LPCSTR,
-    ) -> BOOL;
-    pub fn SetEnvironmentVariableW(
-        lpName: LPCWSTR,
-        lpValue: LPCWSTR,
-    ) -> BOOL;
-    pub fn ExpandEnvironmentStringsA(
-        lpSrc: LPCSTR,
-        lpDst: LPSTR,
-        nSize: DWORD,
-    ) -> DWORD;
-    pub fn ExpandEnvironmentStringsW(
-        lpSrc: LPCWSTR,
-        lpDst: LPWSTR,
-        nSize: DWORD,
-    ) -> DWORD;
-    pub fn SetCurrentDirectoryA(
-        lpPathName: LPCSTR,
-    ) -> BOOL;
-    pub fn SetCurrentDirectoryW(
-        lpPathName: LPCWSTR,
-    ) -> BOOL;
-    pub fn GetCurrentDirectoryA(
-        nBufferLength: DWORD,
-        lpBuffer: LPSTR,
-    ) -> DWORD;
-    pub fn GetCurrentDirectoryW(
-        nBufferLength: DWORD,
-        lpBuffer: LPWSTR,
-    ) -> DWORD;
+    pub fn GetEnvironmentVariableA(lpName: LPCSTR, lpBuffer: LPSTR, nSize: DWORD) -> DWORD;
+    pub fn GetEnvironmentVariableW(lpName: LPCWSTR, lpBuffer: LPWSTR, nSize: DWORD) -> DWORD;
+    pub fn SetEnvironmentVariableA(lpName: LPCSTR, lpValue: LPCSTR) -> BOOL;
+    pub fn SetEnvironmentVariableW(lpName: LPCWSTR, lpValue: LPCWSTR) -> BOOL;
+    pub fn ExpandEnvironmentStringsA(lpSrc: LPCSTR, lpDst: LPSTR, nSize: DWORD) -> DWORD;
+    pub fn ExpandEnvironmentStringsW(lpSrc: LPCWSTR, lpDst: LPWSTR, nSize: DWORD) -> DWORD;
+    pub fn SetCurrentDirectoryA(lpPathName: LPCSTR) -> BOOL;
+    pub fn SetCurrentDirectoryW(lpPathName: LPCWSTR) -> BOOL;
+    pub fn GetCurrentDirectoryA(nBufferLength: DWORD, lpBuffer: LPSTR) -> DWORD;
+    pub fn GetCurrentDirectoryW(nBufferLength: DWORD, lpBuffer: LPWSTR) -> DWORD;
     pub fn SearchPathW(
         lpPath: LPCWSTR,
         lpFileName: LPCWSTR,
@@ -89,10 +42,6 @@ extern "system" {
         lpBuffer: LPSTR,
         lpFilePart: *mut LPSTR,
     ) -> DWORD;
-    pub fn NeedCurrentDirectoryForExePathA(
-        ExeName: LPCSTR,
-    ) -> BOOL;
-    pub fn NeedCurrentDirectoryForExePathW(
-        ExeName: LPCWSTR,
-    ) -> BOOL;
+    pub fn NeedCurrentDirectoryForExePathA(ExeName: LPCSTR) -> BOOL;
+    pub fn NeedCurrentDirectoryForExePathW(ExeName: LPCWSTR) -> BOOL;
 }

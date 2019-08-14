@@ -38,28 +38,28 @@ pub const KDF_ITERATION_COUNT: ULONG = 0x10;
 pub const KDF_GENERIC_PARAMETER: ULONG = 0x11;
 pub const KDF_KEYBITLENGTH: ULONG = 0x12;
 pub const KDF_USE_SECRET_AS_HMAC_KEY_FLAG: ULONG = 0x1;
-STRUCT!{struct BCRYPT_KEY_LENGTHS_STRUCT {
+STRUCT! {struct BCRYPT_KEY_LENGTHS_STRUCT {
     dwMinLength: ULONG,
     dwMaxLength: ULONG,
     dwIncrement: ULONG,
 }}
 pub type BCRYPT_AUTH_TAG_LENGTHS_STRUCT = BCRYPT_KEY_LENGTHS_STRUCT;
-STRUCT!{struct BCRYPT_OID {
+STRUCT! {struct BCRYPT_OID {
     cbOID: ULONG,
     pbOID: PUCHAR,
 }}
-STRUCT!{struct BCRYPT_OID_LIST {
+STRUCT! {struct BCRYPT_OID_LIST {
     dwOIDCount: ULONG,
     pOIDs: *mut BCRYPT_OID,
 }}
-STRUCT!{struct BCRYPT_PKCS1_PADDING_INFO {
+STRUCT! {struct BCRYPT_PKCS1_PADDING_INFO {
     pszAlgId: LPCWSTR,
 }}
-STRUCT!{struct BCRYPT_PSS_PADDING_INFO {
+STRUCT! {struct BCRYPT_PSS_PADDING_INFO {
     pszAlgId: LPCWSTR,
     cbSalt: ULONG,
 }}
-STRUCT!{struct BCRYPT_OAEP_PADDING_INFO {
+STRUCT! {struct BCRYPT_OAEP_PADDING_INFO {
     pszAlgId: LPCWSTR,
     pbLabel: PUCHAR,
     cbLabel: ULONG,
@@ -67,7 +67,7 @@ STRUCT!{struct BCRYPT_OAEP_PADDING_INFO {
 pub const BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO_VERSION: ULONG = 1;
 pub const BCRYPT_AUTH_MODE_CHAIN_CALLS_FLAG: ULONG = 0x00000001;
 pub const BCRYPT_AUTH_MODE_IN_PROGRESS_FLAG: ULONG = 0x00000002;
-STRUCT!{struct BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO {
+STRUCT! {struct BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO {
     cbSize: ULONG,
     dwInfoVersion: ULONG,
     pbNonce: PUCHAR,
@@ -126,13 +126,13 @@ pub const BCRYPT_PAD_OAEP: ULONG = 0x00000004;
 pub const BCRYPT_PAD_PSS: ULONG = 0x00000008;
 pub const BCRYPT_PAD_PKCS1_OPTIONAL_HASH_OID: ULONG = 0x00000010;
 pub const BCRYPTBUFFER_VERSION: ULONG = 0;
-STRUCT!{struct BCryptBuffer {
+STRUCT! {struct BCryptBuffer {
     cbBuffer: ULONG,
     BufferType: ULONG,
     pvBuffer: PVOID,
 }}
 pub type PBCryptBuffer = *mut BCryptBuffer;
-STRUCT!{struct BCryptBufferDesc {
+STRUCT! {struct BCryptBufferDesc {
     ulVersion: ULONG,
     cBuffers: ULONG,
     pBuffers: PBCryptBuffer,
@@ -145,7 +145,7 @@ pub type BCRYPT_HASH_HANDLE = PVOID;
 pub type BCRYPT_SECRET_HANDLE = PVOID;
 pub const BCRYPT_PUBLIC_KEY_BLOB: &'static str = "PUBLICBLOB";
 pub const BCRYPT_PRIVATE_KEY_BLOB: &'static str = "PRIVATEBLOB";
-STRUCT!{struct BCRYPT_KEY_BLOB {
+STRUCT! {struct BCRYPT_KEY_BLOB {
     Magic: ULONG,
 }}
 pub const BCRYPT_RSAPUBLIC_BLOB: &'static str = "RSAPUBLICBLOB";
@@ -154,7 +154,7 @@ pub const LEGACY_RSAPUBLIC_BLOB: &'static str = "CAPIPUBLICBLOB";
 pub const LEGACY_RSAPRIVATE_BLOB: &'static str = "CAPIPRIVATEBLOB";
 pub const BCRYPT_RSAPUBLIC_MAGIC: ULONG = 0x31415352;
 pub const BCRYPT_RSAPRIVATE_MAGIC: ULONG = 0x32415352;
-STRUCT!{struct BCRYPT_RSAKEY_BLOB {
+STRUCT! {struct BCRYPT_RSAKEY_BLOB {
     Magic: ULONG,
     BitLength: ULONG,
     cbPublicExp: ULONG,
@@ -187,26 +187,26 @@ pub const BCRYPT_ECDSA_PUBLIC_P521_MAGIC: ULONG = 0x35534345;
 pub const BCRYPT_ECDSA_PRIVATE_P521_MAGIC: ULONG = 0x36534345;
 pub const BCRYPT_ECDSA_PUBLIC_GENERIC_MAGIC: ULONG = 0x50444345;
 pub const BCRYPT_ECDSA_PRIVATE_GENERIC_MAGIC: ULONG = 0x56444345;
-STRUCT!{struct BCRYPT_ECCKEY_BLOB {
+STRUCT! {struct BCRYPT_ECCKEY_BLOB {
     dwMagic: ULONG,
     cbKey: ULONG,
 }}
 pub type PBCRYPT_ECCKEY_BLOB = *mut BCRYPT_ECCKEY_BLOB;
-STRUCT!{struct SSL_ECCKEY_BLOB {
+STRUCT! {struct SSL_ECCKEY_BLOB {
     dwCurveType: ULONG,
     cbKey: ULONG,
 }}
 pub type PSSL_ECCKEY_BLOB = *mut SSL_ECCKEY_BLOB;
 pub const BCRYPT_ECC_FULLKEY_BLOB_V1: ULONG = 0x1;
-ENUM!{enum ECC_CURVE_TYPE_ENUM {
+ENUM! {enum ECC_CURVE_TYPE_ENUM {
     BCRYPT_ECC_PRIME_SHORT_WEIERSTRASS_CURVE = 0x1,
     BCRYPT_ECC_PRIME_TWISTED_EDWARDS_CURVE = 0x2,
     BCRYPT_ECC_PRIME_MONTGOMERY_CURVE = 0x3,
 }}
-ENUM!{enum ECC_CURVE_ALG_ID_ENUM {
+ENUM! {enum ECC_CURVE_ALG_ID_ENUM {
     BCRYPT_NO_CURVE_GENERATION_ALG_ID = 0x0,
 }}
-STRUCT!{struct BCRYPT_ECCFULLKEY_BLOB {
+STRUCT! {struct BCRYPT_ECCFULLKEY_BLOB {
     dwMagic: ULONG,
     dwVersion: ULONG,
     dwCurveType: ECC_CURVE_TYPE_ENUM,
@@ -223,14 +223,14 @@ pub const LEGACY_DH_PUBLIC_BLOB: &'static str = "CAPIDHPUBLICBLOB";
 pub const LEGACY_DH_PRIVATE_BLOB: &'static str = "CAPIDHPRIVATEBLOB";
 pub const BCRYPT_DH_PUBLIC_MAGIC: ULONG = 0x42504844;
 pub const BCRYPT_DH_PRIVATE_MAGIC: ULONG = 0x56504844;
-STRUCT!{struct BCRYPT_DH_KEY_BLOB {
+STRUCT! {struct BCRYPT_DH_KEY_BLOB {
     dwMagic: ULONG,
     cbKey: ULONG,
 }}
 pub type PBCRYPT_DH_KEY_BLOB = *mut BCRYPT_DH_KEY_BLOB;
 pub const BCRYPT_DH_PARAMETERS: &'static str = "DHParameters";
 pub const BCRYPT_DH_PARAMETERS_MAGIC: ULONG = 0x4d504844;
-STRUCT!{struct BCRYPT_DH_PARAMETER_HEADER {
+STRUCT! {struct BCRYPT_DH_PARAMETER_HEADER {
     cbLength: ULONG,
     dwMagic: ULONG,
     cbKeyLength: ULONG,
@@ -245,7 +245,7 @@ pub const BCRYPT_DSA_PUBLIC_MAGIC: ULONG = 0x42505344;
 pub const BCRYPT_DSA_PRIVATE_MAGIC: ULONG = 0x56505344;
 pub const BCRYPT_DSA_PUBLIC_MAGIC_V2: ULONG = 0x32425044;
 pub const BCRYPT_DSA_PRIVATE_MAGIC_V2: ULONG = 0x32565044;
-STRUCT!{struct BCRYPT_DSA_KEY_BLOB {
+STRUCT! {struct BCRYPT_DSA_KEY_BLOB {
     dwMagic: ULONG,
     cbKey: ULONG,
     Count: [UCHAR; 4],
@@ -253,16 +253,16 @@ STRUCT!{struct BCRYPT_DSA_KEY_BLOB {
     q: [UCHAR; 20],
 }}
 pub type PBCRYPT_DSA_KEY_BLOB = *mut BCRYPT_DSA_KEY_BLOB;
-ENUM!{enum HASHALGORITHM_ENUM {
+ENUM! {enum HASHALGORITHM_ENUM {
     DSA_HASH_ALGORITHM_SHA1,
     DSA_HASH_ALGORITHM_SHA256,
     DSA_HASH_ALGORITHM_SHA512,
 }}
-ENUM!{enum DSAFIPSVERSION_ENUM {
+ENUM! {enum DSAFIPSVERSION_ENUM {
     DSA_FIPS186_2,
     DSA_FIPS186_3,
 }}
-STRUCT!{struct BCRYPT_DSA_KEY_BLOB_V2 {
+STRUCT! {struct BCRYPT_DSA_KEY_BLOB_V2 {
     dwMagic: ULONG,
     cbKey: ULONG,
     hashAlgorithm: HASHALGORITHM_ENUM,
@@ -272,7 +272,7 @@ STRUCT!{struct BCRYPT_DSA_KEY_BLOB_V2 {
     Count: [UCHAR; 4],
 }}
 pub type PBCRYPT_DSA_KEY_BLOB_V2 = *mut BCRYPT_DSA_KEY_BLOB_V2;
-STRUCT!{struct BCRYPT_KEY_DATA_BLOB_HEADER {
+STRUCT! {struct BCRYPT_KEY_DATA_BLOB_HEADER {
     dwMagic: ULONG,
     dwVersion: ULONG,
     cbKeyData: ULONG,
@@ -283,7 +283,7 @@ pub const BCRYPT_KEY_DATA_BLOB_VERSION1: ULONG = 0x1;
 pub const BCRYPT_DSA_PARAMETERS: &'static str = "DSAParameters";
 pub const BCRYPT_DSA_PARAMETERS_MAGIC: ULONG = 0x4d505344;
 pub const BCRYPT_DSA_PARAMETERS_MAGIC_V2: ULONG = 0x324d5044;
-STRUCT!{struct BCRYPT_DSA_PARAMETER_HEADER {
+STRUCT! {struct BCRYPT_DSA_PARAMETER_HEADER {
     cbLength: ULONG,
     dwMagic: ULONG,
     cbKeyLength: ULONG,
@@ -291,7 +291,7 @@ STRUCT!{struct BCRYPT_DSA_PARAMETER_HEADER {
     Seed: [UCHAR; 20],
     q: [UCHAR; 20],
 }}
-STRUCT!{struct BCRYPT_DSA_PARAMETER_HEADER_V2 {
+STRUCT! {struct BCRYPT_DSA_PARAMETER_HEADER_V2 {
     cbLength: ULONG,
     dwMagic: ULONG,
     cbKeyLength: ULONG,
@@ -305,7 +305,7 @@ pub const BCRYPT_ECC_PARAMETERS: &'static str = "ECCParameters";
 pub const BCRYPT_ECC_CURVE_NAME: &'static str = "ECCCurveName";
 pub const BCRYPT_ECC_CURVE_NAME_LIST: &'static str = "ECCCurveNameList";
 pub const BCRYPT_ECC_PARAMETERS_MAGIC: ULONG = 0x50434345;
-STRUCT!{struct BCRYPT_ECC_CURVE_NAMES {
+STRUCT! {struct BCRYPT_ECC_CURVE_NAMES {
     dwEccCurveNames: ULONG,
     pEccCurveNames: LPWSTR,
 }}
@@ -354,20 +354,20 @@ pub const BCRYPT_ECC_CURVE_X962P239V1: &'static str = "x962P239v1";
 pub const BCRYPT_ECC_CURVE_X962P239V2: &'static str = "x962P239v2";
 pub const BCRYPT_ECC_CURVE_X962P239V3: &'static str = "x962P239v3";
 pub const BCRYPT_ECC_CURVE_X962P256V1: &'static str = "x962P256v1";
-ENUM!{enum BCRYPT_HASH_OPERATION_TYPE {
+ENUM! {enum BCRYPT_HASH_OPERATION_TYPE {
     BCRYPT_HASH_OPERATION_HASH_DATA = 1,
     BCRYPT_HASH_OPERATION_FINISH_HASH = 2,
 }}
-STRUCT!{struct BCRYPT_MULTI_HASH_OPERATION {
+STRUCT! {struct BCRYPT_MULTI_HASH_OPERATION {
     iHash: ULONG,
     hashOperation: BCRYPT_HASH_OPERATION_TYPE,
     pbBuffer: PUCHAR,
     cbBuffer: ULONG,
 }}
-ENUM!{enum BCRYPT_MULTI_OPERATION_TYPE {
+ENUM! {enum BCRYPT_MULTI_OPERATION_TYPE {
     BCRYPT_OPERATION_TYPE_HASH = 1,
 }}
-STRUCT!{struct BCRYPT_MULTI_OBJECT_LENGTH_STRUCT {
+STRUCT! {struct BCRYPT_MULTI_OBJECT_LENGTH_STRUCT {
     cbPerObject: ULONG,
     cbPerElement: ULONG,
 }}
@@ -496,7 +496,7 @@ pub const BCRYPT_SECRET_AGREEMENT_OPERATION: ULONG = 0x00000008;
 pub const BCRYPT_SIGNATURE_OPERATION: ULONG = 0x00000010;
 pub const BCRYPT_RNG_OPERATION: ULONG = 0x00000020;
 pub const BCRYPT_KEY_DERIVATION_OPERATION: ULONG = 0x00000040;
-STRUCT!{struct BCRYPT_ALGORITHM_IDENTIFIER {
+STRUCT! {struct BCRYPT_ALGORITHM_IDENTIFIER {
     pszName: LPWSTR,
     dwClass: ULONG,
     dwFlags: ULONG,
@@ -509,7 +509,7 @@ extern "system" {
         dwFlags: ULONG,
     ) -> NTSTATUS;
 }
-STRUCT!{struct BCRYPT_PROVIDER_NAME {
+STRUCT! {struct BCRYPT_PROVIDER_NAME {
     pszProviderName: LPWSTR,
 }}
 extern "system" {
@@ -538,13 +538,8 @@ extern "system" {
         cbInput: ULONG,
         dwFlags: ULONG,
     ) -> NTSTATUS;
-    pub fn BCryptCloseAlgorithmProvider(
-        hAlgorithm: BCRYPT_ALG_HANDLE,
-        dwFlags: ULONG,
-    ) -> NTSTATUS;
-    pub fn BCryptFreeBuffer(
-        pvBuffer: PVOID,
-    );
+    pub fn BCryptCloseAlgorithmProvider(hAlgorithm: BCRYPT_ALG_HANDLE, dwFlags: ULONG) -> NTSTATUS;
+    pub fn BCryptFreeBuffer(pvBuffer: PVOID);
     pub fn BCryptGenerateSymmetricKey(
         hAlgorithm: BCRYPT_ALG_HANDLE,
         phKey: *mut BCRYPT_KEY_HANDLE,
@@ -623,16 +618,9 @@ extern "system" {
         cbKeyObject: ULONG,
         dwFlags: ULONG,
     ) -> NTSTATUS;
-    pub fn BCryptFinalizeKeyPair(
-        hKey: BCRYPT_KEY_HANDLE,
-        dwFlags: ULONG,
-    ) -> NTSTATUS;
-    pub fn BCryptDestroyKey(
-        hKey: BCRYPT_KEY_HANDLE,
-    ) -> NTSTATUS;
-    pub fn BCryptDestroySecret(
-        hSecret: BCRYPT_SECRET_HANDLE,
-    ) -> NTSTATUS;
+    pub fn BCryptFinalizeKeyPair(hKey: BCRYPT_KEY_HANDLE, dwFlags: ULONG) -> NTSTATUS;
+    pub fn BCryptDestroyKey(hKey: BCRYPT_KEY_HANDLE) -> NTSTATUS;
+    pub fn BCryptDestroySecret(hSecret: BCRYPT_SECRET_HANDLE) -> NTSTATUS;
     pub fn BCryptSignHash(
         hKey: BCRYPT_KEY_HANDLE,
         pPaddingInfo: *mut VOID,
@@ -720,9 +708,7 @@ extern "system" {
         cbHashObject: ULONG,
         dwFlags: ULONG,
     ) -> NTSTATUS;
-    pub fn BCryptDestroyHash(
-        hHash: BCRYPT_HASH_HANDLE,
-    ) -> NTSTATUS;
+    pub fn BCryptDestroyHash(hHash: BCRYPT_HASH_HANDLE) -> NTSTATUS;
     pub fn BCryptHash(
         hAlgorithm: BCRYPT_ALG_HANDLE,
         pbSecret: PUCHAR,
@@ -761,7 +747,7 @@ extern "system" {
         dwFlags: ULONG,
     ) -> NTSTATUS;
 }
-STRUCT!{struct BCRYPT_INTERFACE_VERSION {
+STRUCT! {struct BCRYPT_INTERFACE_VERSION {
     MajorVersion: USHORT,
     MinorVersion: USHORT,
 }}
@@ -804,68 +790,68 @@ pub const CRYPT_ALL_PROVIDERS: ULONG = 0x00000002;
 pub const CRYPT_PRIORITY_TOP: ULONG = 0x00000000;
 pub const CRYPT_PRIORITY_BOTTOM: ULONG = 0xFFFFFFFF;
 pub const CRYPT_DEFAULT_CONTEXT: &'static str = "Default";
-STRUCT!{struct CRYPT_INTERFACE_REG {
+STRUCT! {struct CRYPT_INTERFACE_REG {
     dwInterface: ULONG,
     dwFlags: ULONG,
     cFunctions: ULONG,
     rgpszFunctions: *mut PWSTR,
 }}
 pub type PCRYPT_INTERFACE_REG = *mut CRYPT_INTERFACE_REG;
-STRUCT!{struct CRYPT_IMAGE_REG {
+STRUCT! {struct CRYPT_IMAGE_REG {
     pszImage: PWSTR,
     cInterfaces: ULONG,
     rgpInterfaces: *mut PCRYPT_INTERFACE_REG,
 }}
 pub type PCRYPT_IMAGE_REG = *mut CRYPT_IMAGE_REG;
-STRUCT!{struct CRYPT_PROVIDER_REG {
+STRUCT! {struct CRYPT_PROVIDER_REG {
     cAliases: ULONG,
     rgpszAliases: *mut PWSTR,
     pUM: PCRYPT_IMAGE_REG,
     pKM: PCRYPT_IMAGE_REG,
 }}
 pub type PCRYPT_PROVIDER_REG = *mut CRYPT_PROVIDER_REG;
-STRUCT!{struct CRYPT_PROVIDERS {
+STRUCT! {struct CRYPT_PROVIDERS {
     cProviders: ULONG,
     rgpszProviders: *mut PWSTR,
 }}
 pub type PCRYPT_PROVIDERS = *mut CRYPT_PROVIDERS;
-STRUCT!{struct CRYPT_CONTEXT_CONFIG {
+STRUCT! {struct CRYPT_CONTEXT_CONFIG {
     dwFlags: ULONG,
     dwReserved: ULONG,
 }}
 pub type PCRYPT_CONTEXT_CONFIG = *mut CRYPT_CONTEXT_CONFIG;
-STRUCT!{struct CRYPT_CONTEXT_FUNCTION_CONFIG {
+STRUCT! {struct CRYPT_CONTEXT_FUNCTION_CONFIG {
     dwFlags: ULONG,
     dwReserved: ULONG,
 }}
 pub type PCRYPT_CONTEXT_FUNCTION_CONFIG = *mut CRYPT_CONTEXT_FUNCTION_CONFIG;
-STRUCT!{struct CRYPT_CONTEXTS {
+STRUCT! {struct CRYPT_CONTEXTS {
     cContexts: ULONG,
     rgpszContexts: *mut PWSTR,
 }}
 pub type PCRYPT_CONTEXTS = *mut CRYPT_CONTEXTS;
-STRUCT!{struct CRYPT_CONTEXT_FUNCTIONS {
+STRUCT! {struct CRYPT_CONTEXT_FUNCTIONS {
     cFunctions: ULONG,
     rgpszFunctions: *mut PWSTR,
 }}
 pub type PCRYPT_CONTEXT_FUNCTIONS = *mut CRYPT_CONTEXT_FUNCTIONS;
-STRUCT!{struct CRYPT_CONTEXT_FUNCTION_PROVIDERS {
+STRUCT! {struct CRYPT_CONTEXT_FUNCTION_PROVIDERS {
     cProviders: ULONG,
     rgpszProviders: *mut PWSTR,
 }}
 pub type PCRYPT_CONTEXT_FUNCTION_PROVIDERS = *mut CRYPT_CONTEXT_FUNCTION_PROVIDERS;
-STRUCT!{struct CRYPT_PROPERTY_REF {
+STRUCT! {struct CRYPT_PROPERTY_REF {
     pszProperty: PWSTR,
     cbValue: ULONG,
     pbValue: PUCHAR,
 }}
 pub type PCRYPT_PROPERTY_REF = *mut CRYPT_PROPERTY_REF;
-STRUCT!{struct CRYPT_IMAGE_REF {
+STRUCT! {struct CRYPT_IMAGE_REF {
     pszImage: PWSTR,
     dwFlags: ULONG,
 }}
 pub type PCRYPT_IMAGE_REF = *mut CRYPT_IMAGE_REF;
-STRUCT!{struct CRYPT_PROVIDER_REF {
+STRUCT! {struct CRYPT_PROVIDER_REF {
     dwInterface: ULONG,
     pszFunction: PWSTR,
     pszProvider: PWSTR,
@@ -875,7 +861,7 @@ STRUCT!{struct CRYPT_PROVIDER_REF {
     pKM: PCRYPT_IMAGE_REF,
 }}
 pub type PCRYPT_PROVIDER_REF = *mut CRYPT_PROVIDER_REF;
-STRUCT!{struct CRYPT_PROVIDER_REFS {
+STRUCT! {struct CRYPT_PROVIDER_REFS {
     cProviders: ULONG,
     rgpProviders: *mut PCRYPT_PROVIDER_REF,
 }}
@@ -897,10 +883,7 @@ extern "system" {
         pszContext: LPCWSTR,
         pConfig: PCRYPT_CONTEXT_CONFIG,
     ) -> NTSTATUS;
-    pub fn BCryptDeleteContext(
-        dwTable: ULONG,
-        pszContext: LPCWSTR,
-    ) -> NTSTATUS;
+    pub fn BCryptDeleteContext(dwTable: ULONG, pszContext: LPCWSTR) -> NTSTATUS;
     pub fn BCryptEnumContexts(
         dwTable: ULONG,
         pcbBuffer: *mut ULONG,
@@ -978,12 +961,8 @@ extern "system" {
         pcbValue: *mut ULONG,
         ppbValue: *mut PUCHAR,
     ) -> NTSTATUS;
-    pub fn BCryptRegisterConfigChangeNotify(
-        phEvent: *mut HANDLE,
-    ) -> NTSTATUS;
-    pub fn BCryptUnregisterConfigChangeNotify(
-        hEvent: HANDLE,
-    ) -> NTSTATUS;
+    pub fn BCryptRegisterConfigChangeNotify(phEvent: *mut HANDLE) -> NTSTATUS;
+    pub fn BCryptUnregisterConfigChangeNotify(hEvent: HANDLE) -> NTSTATUS;
     pub fn BCryptResolveProviders(
         pszContext: LPCWSTR,
         dwInterface: ULONG,
@@ -994,8 +973,6 @@ extern "system" {
         pcbBuffer: *mut ULONG,
         ppBuffer: *mut PCRYPT_PROVIDER_REFS,
     ) -> NTSTATUS;
-    pub fn BCryptGetFipsAlgorithmMode(
-        pfEnabled: *mut BOOLEAN,
-    ) -> NTSTATUS;
+    pub fn BCryptGetFipsAlgorithmMode(pfEnabled: *mut BOOLEAN) -> NTSTATUS;
     pub fn CngGetFipsAlgorithmMode() -> BOOLEAN;
 }

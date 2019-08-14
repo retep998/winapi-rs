@@ -10,9 +10,10 @@ use std::path::Path;
 
 pub fn read_file<P: AsRef<Path>>(p: P) -> String {
     let mut f = File::open(p).expect("read_file::open failed");
-    let mut content = String::with_capacity(f.metadata().map(|m| m.len() as usize + 1)
-                                                        .unwrap_or(0));
-    f.read_to_string(&mut content).expect("read_file::read_to_end failed");
+    let mut content =
+        String::with_capacity(f.metadata().map(|m| m.len() as usize + 1).unwrap_or(0));
+    f.read_to_string(&mut content)
+        .expect("read_file::read_to_end failed");
     content
 }
 

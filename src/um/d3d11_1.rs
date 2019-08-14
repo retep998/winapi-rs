@@ -10,41 +10,41 @@ use shared::dxgitype::{DXGI_COLOR_SPACE_TYPE, DXGI_RATIONAL};
 use shared::guiddef::{GUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, UINT};
 use um::d3d11::{
-    D3D11_BLEND, D3D11_BLEND_OP, D3D11_BOX, D3D11_CULL_MODE, D3D11_FILL_MODE, D3D11_RECT,
-    D3D11_VIDEO_DECODER_BUFFER_TYPE, D3D11_VIDEO_DECODER_CONFIG, D3D11_VIDEO_DECODER_DESC,
     ID3D11BlendState, ID3D11BlendStateVtbl, ID3D11Buffer, ID3D11CryptoSession, ID3D11Device,
     ID3D11DeviceChild, ID3D11DeviceChildVtbl, ID3D11DeviceContext, ID3D11DeviceContextVtbl,
     ID3D11DeviceVtbl, ID3D11RasterizerState, ID3D11RasterizerStateVtbl, ID3D11Resource,
     ID3D11VideoContext, ID3D11VideoContextVtbl, ID3D11VideoDecoder, ID3D11VideoDevice,
     ID3D11VideoDeviceVtbl, ID3D11VideoProcessor, ID3D11VideoProcessorEnumerator,
-    ID3D11VideoProcessorEnumeratorVtbl, ID3D11View
+    ID3D11VideoProcessorEnumeratorVtbl, ID3D11View, D3D11_BLEND, D3D11_BLEND_OP, D3D11_BOX,
+    D3D11_CULL_MODE, D3D11_FILL_MODE, D3D11_RECT, D3D11_VIDEO_DECODER_BUFFER_TYPE,
+    D3D11_VIDEO_DECODER_CONFIG, D3D11_VIDEO_DECODER_DESC,
 };
 use um::d3dcommon::D3D_FEATURE_LEVEL;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HANDLE, HRESULT, LPCWSTR};
-DEFINE_GUID!{IID_ID3D11BlendState1,
-    0xcc86fabe, 0xda55, 0x401d, 0x85, 0xe7, 0xe3, 0xc9, 0xde, 0x28, 0x77, 0xe9}
-DEFINE_GUID!{IID_ID3D11RasterizerState1,
-    0x1217d7a6, 0x5039, 0x418c, 0xb0, 0x42, 0x9c, 0xbe, 0x25, 0x6a, 0xfd, 0x6e}
-DEFINE_GUID!{IID_ID3DDeviceContextState,
-    0x5c1e0d8a, 0x7c23, 0x48f9, 0x8c, 0x59, 0xa9, 0x29, 0x58, 0xce, 0xff, 0x11}
-DEFINE_GUID!{IID_ID3D11DeviceContext1,
-    0xbb2c6faa, 0xb5fb, 0x4082, 0x8e, 0x6b, 0x38, 0x8b, 0x8c, 0xfa, 0x90, 0xe1}
-DEFINE_GUID!{IID_ID3D11VideoContext1,
-    0xa7f026da, 0xa5f8, 0x4487, 0xa5, 0x64, 0x15, 0xe3, 0x43, 0x57, 0x65, 0x1e}
-DEFINE_GUID!{IID_ID3D11VideoDevice1,
-    0x29da1d51, 0x1321, 0x4454, 0x80, 0x4b, 0xf5, 0xfc, 0x9f, 0x86, 0x1f, 0x0f}
-DEFINE_GUID!{IID_ID3D11VideoProcessorEnumerator1,
-    0x465217f2, 0x5568, 0x43cf, 0xb5, 0xb9, 0xf6, 0x1d, 0x54, 0x53, 0x1c, 0xa1}
-DEFINE_GUID!{IID_ID3D11Device1,
-    0xa04bfb29, 0x08ef, 0x43d6, 0xa4, 0x9c, 0xa9, 0xbd, 0xbd, 0xcb, 0xe6, 0x86}
-DEFINE_GUID!{IID_ID3DUserDefinedAnnotation,
-    0xb2daad8b, 0x03d4, 0x4dbf, 0x95, 0xeb, 0x32, 0xab, 0x4b, 0x63, 0xd0, 0xab}
-ENUM!{enum D3D11_COPY_FLAGS {
+DEFINE_GUID! {IID_ID3D11BlendState1,
+0xcc86fabe, 0xda55, 0x401d, 0x85, 0xe7, 0xe3, 0xc9, 0xde, 0x28, 0x77, 0xe9}
+DEFINE_GUID! {IID_ID3D11RasterizerState1,
+0x1217d7a6, 0x5039, 0x418c, 0xb0, 0x42, 0x9c, 0xbe, 0x25, 0x6a, 0xfd, 0x6e}
+DEFINE_GUID! {IID_ID3DDeviceContextState,
+0x5c1e0d8a, 0x7c23, 0x48f9, 0x8c, 0x59, 0xa9, 0x29, 0x58, 0xce, 0xff, 0x11}
+DEFINE_GUID! {IID_ID3D11DeviceContext1,
+0xbb2c6faa, 0xb5fb, 0x4082, 0x8e, 0x6b, 0x38, 0x8b, 0x8c, 0xfa, 0x90, 0xe1}
+DEFINE_GUID! {IID_ID3D11VideoContext1,
+0xa7f026da, 0xa5f8, 0x4487, 0xa5, 0x64, 0x15, 0xe3, 0x43, 0x57, 0x65, 0x1e}
+DEFINE_GUID! {IID_ID3D11VideoDevice1,
+0x29da1d51, 0x1321, 0x4454, 0x80, 0x4b, 0xf5, 0xfc, 0x9f, 0x86, 0x1f, 0x0f}
+DEFINE_GUID! {IID_ID3D11VideoProcessorEnumerator1,
+0x465217f2, 0x5568, 0x43cf, 0xb5, 0xb9, 0xf6, 0x1d, 0x54, 0x53, 0x1c, 0xa1}
+DEFINE_GUID! {IID_ID3D11Device1,
+0xa04bfb29, 0x08ef, 0x43d6, 0xa4, 0x9c, 0xa9, 0xbd, 0xbd, 0xcb, 0xe6, 0x86}
+DEFINE_GUID! {IID_ID3DUserDefinedAnnotation,
+0xb2daad8b, 0x03d4, 0x4dbf, 0x95, 0xeb, 0x32, 0xab, 0x4b, 0x63, 0xd0, 0xab}
+ENUM! {enum D3D11_COPY_FLAGS {
     D3D11_COPY_NO_OVERWRITE = 0x00000001,
     D3D11_COPY_DISCARD = 0x00000002,
 }}
-ENUM!{enum D3D11_LOGIC_OP {
+ENUM! {enum D3D11_LOGIC_OP {
     D3D11_LOGIC_OP_CLEAR = 0,
     D3D11_LOGIC_OP_SET = 1,
     D3D11_LOGIC_OP_COPY = 2,
@@ -62,7 +62,7 @@ ENUM!{enum D3D11_LOGIC_OP {
     D3D11_LOGIC_OP_OR_REVERSE = 14,
     D3D11_LOGIC_OP_OR_INVERTED = 15,
 }}
-STRUCT!{struct D3D11_RENDER_TARGET_BLEND_DESC1 {
+STRUCT! {struct D3D11_RENDER_TARGET_BLEND_DESC1 {
     BlendEnable: BOOL,
     LogicOpEnable: BOOL,
     SrcBlend: D3D11_BLEND,
@@ -74,18 +74,18 @@ STRUCT!{struct D3D11_RENDER_TARGET_BLEND_DESC1 {
     LogicOp: D3D11_LOGIC_OP,
     RenderTargetWriteMask: UINT8,
 }}
-STRUCT!{struct D3D11_BLEND_DESC1 {
+STRUCT! {struct D3D11_BLEND_DESC1 {
     AlphaToCoverageEnable: BOOL,
     IndependentBlendEnable: BOOL,
     RenderTarget: [D3D11_RENDER_TARGET_BLEND_DESC1; 8],
 }}
-RIDL!{#[uuid(0xcc86fabe, 0xda55, 0x401d, 0x85, 0xe7, 0xe3, 0xc9, 0xde, 0x28, 0x77, 0xe9)]
+RIDL! {#[uuid(0xcc86fabe, 0xda55, 0x401d, 0x85, 0xe7, 0xe3, 0xc9, 0xde, 0x28, 0x77, 0xe9)]
 interface ID3D11BlendState1(ID3D11BlendState1Vtbl): ID3D11BlendState(ID3D11BlendStateVtbl) {
     fn GetDesc1(
         pDesc: *mut D3D11_BLEND_DESC1,
     ) -> (),
 }}
-STRUCT!{struct D3D11_RASTERIZER_DESC1 {
+STRUCT! {struct D3D11_RASTERIZER_DESC1 {
     FillMode: D3D11_FILL_MODE,
     CullMode: D3D11_CULL_MODE,
     FrontCounterClockwise: BOOL,
@@ -98,20 +98,20 @@ STRUCT!{struct D3D11_RASTERIZER_DESC1 {
     AntialiasedLineEnable: BOOL,
     ForcedSampleCount: UINT,
 }}
-RIDL!{#[uuid(0x1217d7a6, 0x5039, 0x418c, 0xb0, 0x42, 0x9c, 0xbe, 0x25, 0x6a, 0xfd, 0x6e)]
+RIDL! {#[uuid(0x1217d7a6, 0x5039, 0x418c, 0xb0, 0x42, 0x9c, 0xbe, 0x25, 0x6a, 0xfd, 0x6e)]
 interface ID3D11RasterizerState1(ID3D11RasterizerState1Vtbl):
     ID3D11RasterizerState(ID3D11RasterizerStateVtbl) {
     fn GetDesc1(
         pDesc: *mut D3D11_RASTERIZER_DESC1,
     ) -> (),
 }}
-ENUM!{enum D3D11_1_CREATE_DEVICE_CONTEXT_STATE_FLAG {
+ENUM! {enum D3D11_1_CREATE_DEVICE_CONTEXT_STATE_FLAG {
     D3D11_1_CREATE_DEVICE_CONTEXT_STATE_SINGLETHREADED = 0x1,
 }}
-RIDL!{#[uuid(0x5c1e0d8a, 0x7c23, 0x48f9, 0x8c, 0x59, 0xa9, 0x29, 0x58, 0xce, 0xff, 0x11)]
+RIDL! {#[uuid(0x5c1e0d8a, 0x7c23, 0x48f9, 0x8c, 0x59, 0xa9, 0x29, 0x58, 0xce, 0xff, 0x11)]
 interface ID3DDeviceContextState(ID3DDeviceContextStateVtbl):
     ID3D11DeviceChild(ID3D11DeviceChildVtbl) {}}
-RIDL!{#[uuid(0xbb2c6faa, 0xb5fb, 0x4082, 0x8e, 0x6b, 0x38, 0x8b, 0x8c, 0xfa, 0x90, 0xe1)]
+RIDL! {#[uuid(0xbb2c6faa, 0xb5fb, 0x4082, 0x8e, 0x6b, 0x38, 0x8b, 0x8c, 0xfa, 0x90, 0xe1)]
 interface ID3D11DeviceContext1(ID3D11DeviceContext1Vtbl):
     ID3D11DeviceContext(ID3D11DeviceContextVtbl) {
     fn CopySubresourceRegion1(
@@ -240,11 +240,11 @@ interface ID3D11DeviceContext1(ID3D11DeviceContext1Vtbl):
         NumRects: UINT,
     ) -> (),
 }}
-STRUCT!{struct D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK {
+STRUCT! {struct D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK {
     ClearSize: UINT,
     EncryptedSize: UINT,
 }}
-STRUCT!{struct D3D11_VIDEO_DECODER_BUFFER_DESC1 {
+STRUCT! {struct D3D11_VIDEO_DECODER_BUFFER_DESC1 {
     BufferType: D3D11_VIDEO_DECODER_BUFFER_TYPE,
     DataOffset: UINT,
     DataSize: UINT,
@@ -253,7 +253,7 @@ STRUCT!{struct D3D11_VIDEO_DECODER_BUFFER_DESC1 {
     pSubSampleMappingBlock: *mut D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK,
     SubSampleMappingCount: UINT,
 }}
-STRUCT!{struct D3D11_VIDEO_DECODER_BEGIN_FRAME_CRYPTO_SESSION {
+STRUCT! {struct D3D11_VIDEO_DECODER_BEGIN_FRAME_CRYPTO_SESSION {
     pCryptoSession: *mut ID3D11CryptoSession,
     BlobSize: UINT,
     pBlob: *mut c_void,
@@ -261,36 +261,36 @@ STRUCT!{struct D3D11_VIDEO_DECODER_BEGIN_FRAME_CRYPTO_SESSION {
     PrivateDataSize: UINT,
     pPrivateData: *mut c_void,
 }}
-ENUM!{enum D3D11_VIDEO_DECODER_CAPS {
+ENUM! {enum D3D11_VIDEO_DECODER_CAPS {
     D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE = 0x1,
     D3D11_VIDEO_DECODER_CAPS_NON_REAL_TIME = 0x02,
     D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE_DYNAMIC = 0x04,
     D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE_REQUIRED = 0x08,
     D3D11_VIDEO_DECODER_CAPS_UNSUPPORTED = 0x10,
 }}
-ENUM!{enum D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS {
+ENUM! {enum D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS {
     D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_MULTIPLANE_OVERLAY_ROTATION = 0x01,
     D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_MULTIPLANE_OVERLAY_RESIZE = 0x02,
     D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_MULTIPLANE_OVERLAY_COLOR_SPACE_CONVERSION = 0x04,
     D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_TRIPLE_BUFFER_OUTPUT = 0x08,
 }}
-STRUCT!{struct D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT {
+STRUCT! {struct D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT {
     Enable: BOOL,
     Width: UINT,
     Height: UINT,
     Format: DXGI_FORMAT,
 }}
-ENUM!{enum D3D11_CRYPTO_SESSION_STATUS {
+ENUM! {enum D3D11_CRYPTO_SESSION_STATUS {
     D3D11_CRYPTO_SESSION_STATUS_OK = 0,
     D3D11_CRYPTO_SESSION_STATUS_KEY_LOST = 1,
     D3D11_CRYPTO_SESSION_STATUS_KEY_AND_CONTENT_LOST = 2,
 }}
-STRUCT!{struct D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA {
+STRUCT! {struct D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA {
     PrivateDataSize: UINT,
     HWProtectionDataSize: UINT,
     pbInput: [BYTE; 4],
 }}
-STRUCT!{struct D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA {
+STRUCT! {struct D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA {
     PrivateDataSize: UINT,
     MaxHWProtectionDataSize: UINT,
     HWProtectionDataSize: UINT,
@@ -298,19 +298,19 @@ STRUCT!{struct D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA {
     ExecutionTime: UINT64,
     pbOutput: [BYTE; 4],
 }}
-STRUCT!{struct D3D11_KEY_EXCHANGE_HW_PROTECTION_DATA {
+STRUCT! {struct D3D11_KEY_EXCHANGE_HW_PROTECTION_DATA {
     HWProtectionFunctionID: UINT,
     pInputData: *mut D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA,
     pOutputData: *mut D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA,
     Status: HRESULT,
 }}
-STRUCT!{struct D3D11_VIDEO_SAMPLE_DESC {
+STRUCT! {struct D3D11_VIDEO_SAMPLE_DESC {
     Width: UINT,
     Height: UINT,
     Format: DXGI_FORMAT,
     ColorSpace: DXGI_COLOR_SPACE_TYPE,
 }}
-RIDL!{#[uuid(0xa7f026da, 0xa5f8, 0x4487, 0xa5, 0x64, 0x15, 0xe3, 0x43, 0x57, 0x65, 0x1e)]
+RIDL! {#[uuid(0xa7f026da, 0xa5f8, 0x4487, 0xa5, 0x64, 0x15, 0xe3, 0x43, 0x57, 0x65, 0x1e)]
 interface ID3D11VideoContext1(ID3D11VideoContext1Vtbl):
     ID3D11VideoContext(ID3D11VideoContextVtbl) {
     fn SubmitDecoderBuffers1(
@@ -388,7 +388,7 @@ interface ID3D11VideoContext1(ID3D11VideoContext1Vtbl):
         pBehaviorHints: *mut UINT,
     ) -> (),
 }}
-RIDL!{#[uuid(0x29da1d51, 0x1321, 0x4454, 0x80, 0x4b, 0xf5, 0xfc, 0x9f, 0x86, 0x1f, 0x0f)]
+RIDL! {#[uuid(0x29da1d51, 0x1321, 0x4454, 0x80, 0x4b, 0xf5, 0xfc, 0x9f, 0x86, 0x1f, 0x0f)]
 interface ID3D11VideoDevice1(ID3D11VideoDevice1Vtbl): ID3D11VideoDevice(ID3D11VideoDeviceVtbl) {
     fn GetCryptoSessionPrivateDataSize(
         pCryptoType: *const GUID,
@@ -422,7 +422,7 @@ interface ID3D11VideoDevice1(ID3D11VideoDevice1Vtbl): ID3D11VideoDevice(ID3D11Vi
         pRecommendedOutputDesc: *mut D3D11_VIDEO_SAMPLE_DESC,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x465217f2, 0x5568, 0x43cf, 0xb5, 0xb9, 0xf6, 0x1d, 0x54, 0x53, 0x1c, 0xa1)]
+RIDL! {#[uuid(0x465217f2, 0x5568, 0x43cf, 0xb5, 0xb9, 0xf6, 0x1d, 0x54, 0x53, 0x1c, 0xa1)]
 interface ID3D11VideoProcessorEnumerator1(ID3D11VideoProcessorEnumerator1Vtbl):
     ID3D11VideoProcessorEnumerator(ID3D11VideoProcessorEnumeratorVtbl) {
     fn CheckVideoProcessorFormatConversion(
@@ -433,7 +433,7 @@ interface ID3D11VideoProcessorEnumerator1(ID3D11VideoProcessorEnumerator1Vtbl):
         pSupported: *mut BOOL,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xa04bfb29, 0x08ef, 0x43d6, 0xa4, 0x9c, 0xa9, 0xbd, 0xbd, 0xcb, 0xe6, 0x86)]
+RIDL! {#[uuid(0xa04bfb29, 0x08ef, 0x43d6, 0xa4, 0x9c, 0xa9, 0xbd, 0xbd, 0xcb, 0xe6, 0x86)]
 interface ID3D11Device1(ID3D11Device1Vtbl): ID3D11Device(ID3D11DeviceVtbl) {
     fn GetImmediateContext1(
         ppImmediateContext: *mut *mut ID3D11DeviceContext1,
@@ -471,7 +471,7 @@ interface ID3D11Device1(ID3D11Device1Vtbl): ID3D11Device(ID3D11DeviceVtbl) {
         ppResource: *mut *mut c_void,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xb2daad8b, 0x03d4, 0x4dbf, 0x95, 0xeb, 0x32, 0xab, 0x4b, 0x63, 0xd0, 0xab)]
+RIDL! {#[uuid(0xb2daad8b, 0x03d4, 0x4dbf, 0x95, 0xeb, 0x32, 0xab, 0x4b, 0x63, 0xd0, 0xab)]
 interface ID3DUserDefinedAnnotation(ID3DUserDefinedAnnotationVtbl): IUnknown(IUnknownVtbl) {
     fn BeginEvent(
         Name: LPCWSTR,

@@ -15,7 +15,7 @@ use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HANDLE, HRESULT, LONG, LPCWSTR, LPWSTR, PVOID, ULONGLONG, WCHAR};
 pub const SPRECOEXTENSION: &'static str = "RecoExtension";
 pub const SPALTERNATESCLSID: &'static str = "AlternatesCLSID";
-RIDL!{#[uuid(0xf8e690f0, 0x39cb, 0x4843, 0xb8, 0xd7, 0xc8, 0x46, 0x96, 0xe1, 0x11, 0x9d)]
+RIDL! {#[uuid(0xf8e690f0, 0x39cb, 0x4843, 0xb8, 0xd7, 0xc8, 0x46, 0x96, 0xe1, 0x11, 0x9d)]
 interface ISpTokenUI(ISpTokenUIVtbl): IUnknown(IUnknownVtbl) {
     fn IsUISupported(
         pszTypeOfUI: LPCWSTR,
@@ -34,7 +34,7 @@ interface ISpTokenUI(ISpTokenUIVtbl): IUnknown(IUnknownVtbl) {
         punkObject: *mut IUnknown,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x06b64f9f, 0x7fda, 0x11d2, 0xb4, 0xf2, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96)]
+RIDL! {#[uuid(0x06b64f9f, 0x7fda, 0x11d2, 0xb4, 0xf2, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96)]
 interface ISpObjectTokenEnumBuilder(ISpObjectTokenEnumBuilderVtbl):
     IEnumSpObjectTokens(IEnumSpObjectTokensVtbl) {
     fn SetAttribs(
@@ -57,14 +57,14 @@ interface ISpObjectTokenEnumBuilder(ISpObjectTokenEnumBuilderVtbl):
         pszTokenIdToListFirst: LPCWSTR,
     ) -> HRESULT,
 }}
-DECLARE_HANDLE!{SPWORDHANDLE, SPWORDHANDLE__}
-DECLARE_HANDLE!{SPRULEHANDLE, SPRULEHANDLE__}
-DECLARE_HANDLE!{SPGRAMMARHANDLE, SPGRAMMARHANDLE__}
-DECLARE_HANDLE!{SPRECOCONTEXTHANDLE, SPRECOCONTEXTHANDLE__}
-DECLARE_HANDLE!{SPPHRASERULEHANDLE, SPPHRASERULEHANDLE__}
-DECLARE_HANDLE!{SPPHRASEPROPERTYHANDLE, SPPHRASEPROPERTYHANDLE__}
-DECLARE_HANDLE!{SPTRANSITIONID, SPTRANSITIONID__}
-RIDL!{#[uuid(0xf4711347, 0xe608, 0x11d2, 0xa0, 0x86, 0x00, 0xc0, 0x4f, 0x8e, 0xf9, 0xb5)]
+DECLARE_HANDLE! {SPWORDHANDLE, SPWORDHANDLE__}
+DECLARE_HANDLE! {SPRULEHANDLE, SPRULEHANDLE__}
+DECLARE_HANDLE! {SPGRAMMARHANDLE, SPGRAMMARHANDLE__}
+DECLARE_HANDLE! {SPRECOCONTEXTHANDLE, SPRECOCONTEXTHANDLE__}
+DECLARE_HANDLE! {SPPHRASERULEHANDLE, SPPHRASERULEHANDLE__}
+DECLARE_HANDLE! {SPPHRASEPROPERTYHANDLE, SPPHRASEPROPERTYHANDLE__}
+DECLARE_HANDLE! {SPTRANSITIONID, SPTRANSITIONID__}
+RIDL! {#[uuid(0xf4711347, 0xe608, 0x11d2, 0xa0, 0x86, 0x00, 0xc0, 0x4f, 0x8e, 0xf9, 0xb5)]
 interface ISpErrorLog(ISpErrorLogVtbl): IUnknown(IUnknownVtbl) {
     fn AddError(
         lLineNumber: c_long,
@@ -74,7 +74,7 @@ interface ISpErrorLog(ISpErrorLogVtbl): IUnknown(IUnknownVtbl) {
         dwHelpContext: DWORD,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xb1e29d58, 0xa675, 0x11d2, 0x83, 0x02, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0)]
+RIDL! {#[uuid(0xb1e29d58, 0xa675, 0x11d2, 0x83, 0x02, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0)]
 interface ISpGrammarCompiler(ISpGrammarCompilerVtbl): IUnknown(IUnknownVtbl) {
     fn CompileStream(
         pSource: *mut IStream,
@@ -85,7 +85,7 @@ interface ISpGrammarCompiler(ISpGrammarCompilerVtbl): IUnknown(IUnknownVtbl) {
         dwFlags: DWORD,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x3ddca27c, 0x665c, 0x4786, 0x9f, 0x97, 0x8c, 0x90, 0xc3, 0x48, 0x8b, 0x61)]
+RIDL! {#[uuid(0x3ddca27c, 0x665c, 0x4786, 0x9f, 0x97, 0x8c, 0x90, 0xc3, 0x48, 0x8b, 0x61)]
 interface ISpGramCompBackend(ISpGramCompBackendVtbl): ISpGrammarBuilder(ISpGrammarBuilderVtbl) {
     fn SetSaveObjects(
         pStream: *mut IStream,
@@ -95,7 +95,7 @@ interface ISpGramCompBackend(ISpGramCompBackendVtbl): ISpGrammarBuilder(ISpGramm
         pBinaryData: *const SPBINARYGRAMMAR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x12d7360f, 0xa1c9, 0x11d3, 0xbc, 0x90, 0x00, 0xc0, 0x4f, 0x72, 0xdf, 0x9f)]
+RIDL! {#[uuid(0x12d7360f, 0xa1c9, 0x11d3, 0xbc, 0x90, 0x00, 0xc0, 0x4f, 0x72, 0xdf, 0x9f)]
 interface ISpITNProcessor(ISpITNProcessorVtbl): IUnknown(IUnknownVtbl) {
     fn LoadITNGrammar(
         pszCLSID: LPWSTR,
@@ -104,7 +104,7 @@ interface ISpITNProcessor(ISpITNProcessorVtbl): IUnknown(IUnknownVtbl) {
         pPhrase: *mut ISpPhraseBuilder,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x88a3342a, 0x0bed, 0x4834, 0x92, 0x2b, 0x88, 0xd4, 0x31, 0x73, 0x16, 0x2f)]
+RIDL! {#[uuid(0x88a3342a, 0x0bed, 0x4834, 0x92, 0x2b, 0x88, 0xd4, 0x31, 0x73, 0x16, 0x2f)]
 interface ISpPhraseBuilder(ISpPhraseBuilderVtbl): ISpPhrase(ISpPhraseVtbl) {
     fn InitFromPhrase(
         pPhrase: *const SPPHRASE,
@@ -133,7 +133,7 @@ interface ISpPhraseBuilder(ISpPhraseBuilderVtbl): ISpPhrase(ISpPhraseVtbl) {
 }}
 pub type ISpTask = *mut c_void;
 pub type ISpThreadTask = *mut c_void;
-RIDL!{#[uuid(0xa6be4d73, 0x4403, 0x4358, 0xb2, 0x2d, 0x03, 0x46, 0xe2, 0x3b, 0x17, 0x64)]
+RIDL! {#[uuid(0xa6be4d73, 0x4403, 0x4358, 0xb2, 0x2d, 0x03, 0x46, 0xe2, 0x3b, 0x17, 0x64)]
 interface ISpThreadControl(ISpThreadControlVtbl): ISpNotifySink(ISpNotifySinkVtbl) {
     fn StartThread(
         dwFlags: DWORD,
@@ -152,13 +152,13 @@ interface ISpThreadControl(ISpThreadControlVtbl): ISpNotifySink(ISpNotifySinkVtb
     fn ThreadCompleteEvent() -> HANDLE,
     fn ExitThreadEvent() -> HANDLE,
 }}
-STRUCT!{struct SPTMTHREADINFO {
+STRUCT! {struct SPTMTHREADINFO {
     lPoolSize: c_long,
     lPriority: c_long,
     ulConcurrencyLimit: ULONG,
     ulMaxQuickAllocThreads: ULONG,
 }}
-RIDL!{#[uuid(0x2baeef81, 0x2ca3, 0x4331, 0x98, 0xf3, 0x26, 0xec, 0x5a, 0xbe, 0xfb, 0x03)]
+RIDL! {#[uuid(0x2baeef81, 0x2ca3, 0x4331, 0x98, 0xf3, 0x26, 0xec, 0x5a, 0xbe, 0xfb, 0x03)]
 interface ISpTaskManager(ISpTaskManagerVtbl): IUnknown(IUnknownVtbl) {
     fn SetThreadPoolInfo(
         pPoolInfo: *const SPTMTHREADINFO,
@@ -190,17 +190,17 @@ interface ISpTaskManager(ISpTaskManagerVtbl): IUnknown(IUnknownVtbl) {
         ulWaitPeriod: ULONG,
     ) -> HRESULT,
 }}
-ENUM!{enum SPVSKIPTYPE {
+ENUM! {enum SPVSKIPTYPE {
     SPVST_SENTENCE = 1 << 0,
 }}
-ENUM!{enum SPVESACTIONS {
+ENUM! {enum SPVESACTIONS {
     SPVES_CONTINUE = 0,
     SPVES_ABORT = 1 << 0,
     SPVES_SKIP = 1 << 1,
     SPVES_RATE = 1 << 2,
     SPVES_VOLUME = 1 << 3,
 }}
-RIDL!{#[uuid(0x9880499b, 0xcce9, 0x11d2, 0xb5, 0x03, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96)]
+RIDL! {#[uuid(0x9880499b, 0xcce9, 0x11d2, 0xb5, 0x03, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96)]
 interface ISpTTSEngineSite(ISpTTSEngineSiteVtbl): ISpEventSink(ISpEventSinkVtbl) {
     fn GetActions() -> DWORD,
     fn Write(
@@ -221,14 +221,14 @@ interface ISpTTSEngineSite(ISpTTSEngineSiteVtbl): ISpEventSink(ISpEventSinkVtbl)
         ulNumSkipped: c_long,
     ) -> HRESULT,
 }}
-STRUCT!{struct SPVTEXTFRAG {
+STRUCT! {struct SPVTEXTFRAG {
     pNext: *mut SPVTEXTFRAG,
     State: SPVSTATE,
     pTextStart: LPCWSTR,
     ulTextLen: ULONG,
     ulTextSrcOffset: ULONG,
 }}
-RIDL!{#[uuid(0xa74d7c8e, 0x4cc5, 0x4f2f, 0xa6, 0xeb, 0x80, 0x4d, 0xee, 0x18, 0x50, 0x0e)]
+RIDL! {#[uuid(0xa74d7c8e, 0x4cc5, 0x4f2f, 0xa6, 0xeb, 0x80, 0x4d, 0xee, 0x18, 0x50, 0x0e)]
 interface ISpTTSEngine(ISpTTSEngineVtbl): IUnknown(IUnknownVtbl) {
     fn Speak(
         dwSpeakFlags: DWORD,
@@ -244,7 +244,7 @@ interface ISpTTSEngine(ISpTTSEngineVtbl): IUnknown(IUnknownVtbl) {
         ppCoMemOutputWaveFormatEx: *mut WAVEFORMATEX,
     ) -> HRESULT,
 }}
-STRUCT!{struct SPWORDENTRY {
+STRUCT! {struct SPWORDENTRY {
     hWord: SPWORDHANDLE,
     LangID: WORD,
     pszDisplayText: *mut WCHAR,
@@ -252,14 +252,14 @@ STRUCT!{struct SPWORDENTRY {
     aPhoneId: *mut SPPHONEID,
     pvClientContext: *mut c_void,
 }}
-STRUCT!{struct SPRULEENTRY {
+STRUCT! {struct SPRULEENTRY {
     hRule: SPRULEHANDLE,
     hInitialState: SPSTATEHANDLE,
     Attributes: DWORD,
     pvClientRuleContext: *mut c_void,
     pvClientGrammarContext: *mut c_void,
 }}
-ENUM!{enum SPTRANSITIONTYPE {
+ENUM! {enum SPTRANSITIONTYPE {
     SPTRANSEPSILON = 0,
     SPTRANSWORD,
     SPTRANSRULE,
@@ -267,22 +267,22 @@ ENUM!{enum SPTRANSITIONTYPE {
     SPTRANSWILDCARD,
     SPTRANSDICTATION,
 }}
-STRUCT!{struct SPTRANSITIONENTRY_u_s1 {
+STRUCT! {struct SPTRANSITIONENTRY_u_s1 {
     hRuleInitialState: SPSTATEHANDLE,
     hRule: SPRULEHANDLE,
     pvClientRuleContext: *mut c_void,
 }}
-STRUCT!{struct SPTRANSITIONENTRY_u_s2 {
+STRUCT! {struct SPTRANSITIONENTRY_u_s2 {
     hWord: SPWORDHANDLE,
     pvClientWordContext: *mut c_void,
 }}
-UNION!{union SPTRANSITIONENTRY_u {
+UNION! {union SPTRANSITIONENTRY_u {
     [usize; 3],
     s1 s1_mut: SPTRANSITIONENTRY_u_s1,
     s2 s2_mut: SPTRANSITIONENTRY_u_s2,
     pvGrammarCookie pvGrammarCookie_mut: *mut c_void,
 }}
-STRUCT!{struct SPTRANSITIONENTRY {
+STRUCT! {struct SPTRANSITIONENTRY {
     ID: SPTRANSITIONID,
     hNextState: SPSTATEHANDLE,
     Type: BYTE,
@@ -291,13 +291,13 @@ STRUCT!{struct SPTRANSITIONENTRY {
     Weight: c_float,
     u: SPTRANSITIONENTRY_u,
 }}
-STRUCT!{struct SPTRANSITIONPROPERTY {
+STRUCT! {struct SPTRANSITIONPROPERTY {
     pszName: LPCWSTR,
     ulId: ULONG,
     pszValue: LPCWSTR,
     vValue: VARIANT,
 }}
-STRUCT!{struct SPSTATEINFO {
+STRUCT! {struct SPSTATEINFO {
     cAllocatedEntries: ULONG,
     pTransitions: *mut SPTRANSITIONENTRY,
     cEpsilons: ULONG,
@@ -305,11 +305,11 @@ STRUCT!{struct SPSTATEINFO {
     cWords: ULONG,
     cSpecialTransitions: ULONG,
 }}
-STRUCT!{struct SPPATHENTRY {
+STRUCT! {struct SPPATHENTRY {
     hTransition: SPTRANSITIONID,
     elem: SPPHRASEELEMENT,
 }}
-RIDL!{#[uuid(0x6a6ffad8, 0x78b6, 0x473d, 0xb8, 0x44, 0x98, 0x15, 0x2e, 0x4f, 0xb1, 0x6b)]
+RIDL! {#[uuid(0x6a6ffad8, 0x78b6, 0x473d, 0xb8, 0x44, 0x98, 0x15, 0x2e, 0x4f, 0xb1, 0x6b)]
 interface ISpCFGInterpreterSite(ISpCFGInterpreterSiteVtbl): IUnknown(IUnknownVtbl) {
     fn AddTextReplacement(
         pReplace: *mut SPPHRASEREPLACEMENT,
@@ -322,7 +322,7 @@ interface ISpCFGInterpreterSite(ISpCFGInterpreterSiteVtbl): IUnknown(IUnknownVtb
         ppCoMemResource: *mut LPWSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xf3d3f926, 0x11fc, 0x11d3, 0xbb, 0x97, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0)]
+RIDL! {#[uuid(0xf3d3f926, 0x11fc, 0x11d3, 0xbb, 0x97, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0)]
 interface ISpCFGInterpreter(ISpCFGInterpreterVtbl): IUnknown(IUnknownVtbl) {
     fn InitGrammar(
         pszGrammarName: LPCWSTR,
@@ -335,20 +335,20 @@ interface ISpCFGInterpreter(ISpCFGInterpreterVtbl): IUnknown(IUnknownVtbl) {
         pSite: *mut ISpCFGInterpreterSite,
     ) -> HRESULT,
 }}
-ENUM!{enum SPCFGNOTIFY {
+ENUM! {enum SPCFGNOTIFY {
     SPCFGN_ADD,
     SPCFGN_REMOVE,
     SPCFGN_INVALIDATE,
     SPCFGN_ACTIVATE,
     SPCFGN_DEACTIVATE,
 }}
-ENUM!{enum SPRESULTTYPE {
+ENUM! {enum SPRESULTTYPE {
     SPRT_CFG = 0,
     SPRT_SLM = 1,
     SPRT_PROPRIETARY = 2,
     SPRT_FALSE_RECOGNITION = 1 << 2,
 }}
-STRUCT!{struct SPPHRASEALT {
+STRUCT! {struct SPPHRASEALT {
     pPhrase: *mut ISpPhraseBuilder,
     ulStartElementInParent: ULONG,
     cElementsInParent: ULONG,
@@ -356,7 +356,7 @@ STRUCT!{struct SPPHRASEALT {
     pvAltExtra: *mut c_void,
     cbAltExtra: ULONG,
 }}
-STRUCT!{struct SPRECORESULTINFO {
+STRUCT! {struct SPRECORESULTINFO {
     cbSize: ULONG,
     eResultType: SPRESULTTYPE,
     fHypothesis: BOOL,
@@ -370,14 +370,14 @@ STRUCT!{struct SPRECORESULTINFO {
     aPhraseAlts: *mut SPPHRASEALT,
     ulNumAlts: ULONG,
 }}
-ENUM!{enum SPWORDINFOOPT {
+ENUM! {enum SPWORDINFOOPT {
     SPWIO_NONE = 0,
     SPWIO_WANT_TEXT = 1,
 }}
-ENUM!{enum SPRULEINFOOPT {
+ENUM! {enum SPRULEINFOOPT {
     SPRIO_NONE = 0,
 }}
-STRUCT!{struct SPPARSEINFO {
+STRUCT! {struct SPPARSEINFO {
     cbSize: ULONG,
     hRule: SPRULEHANDLE,
     ullAudioStreamPosition: ULONGLONG,
@@ -389,7 +389,7 @@ STRUCT!{struct SPPARSEINFO {
     pSREnginePrivateData: *const BYTE,
     fHypothesis: BOOL,
 }}
-RIDL!{#[uuid(0x3b414aec, 0x720c, 0x4883, 0xb9, 0xef, 0x17, 0x8c, 0xd3, 0x94, 0xfb, 0x3a)]
+RIDL! {#[uuid(0x3b414aec, 0x720c, 0x4883, 0xb9, 0xef, 0x17, 0x8c, 0xd3, 0x94, 0xfb, 0x3a)]
 interface ISpSREngineSite(ISpSREngineSiteVtbl): IUnknown(IUnknownVtbl) {
     fn Read(
         pv: *mut c_void,
@@ -461,12 +461,12 @@ interface ISpSREngineSite(ISpSREngineSiteVtbl): IUnknown(IUnknownVtbl) {
         ullCurrentRecoPos: ULONGLONG,
     ) -> HRESULT,
 }}
-ENUM!{enum SPPROPSRC {
+ENUM! {enum SPPROPSRC {
     SPPROPSRC_RECO_INST,
     SPPROPSRC_RECO_CTX,
     SPPROPSRC_RECO_GRAMMAR,
 }}
-RIDL!{#[uuid(0x2f472991, 0x854b, 0x4465, 0xb6, 0x13, 0xfb, 0xaf, 0xb3, 0xad, 0x8e, 0xd8)]
+RIDL! {#[uuid(0x2f472991, 0x854b, 0x4465, 0xb6, 0x13, 0xfb, 0xaf, 0xb3, 0xad, 0x8e, 0xd8)]
 interface ISpSREngine(ISpSREngineVtbl): IUnknown(IUnknownVtbl) {
     fn SetSite(
         pSite: *mut ISpSREngineSite,
@@ -614,7 +614,7 @@ interface ISpSREngine(ISpSREngineVtbl): IUnknown(IUnknownVtbl) {
         eContextState: SPCONTEXTSTATE,
     ) -> HRESULT,
 }}
-STRUCT!{struct SPPHRASEALTREQUEST {
+STRUCT! {struct SPPHRASEALTREQUEST {
     ulStartElement: ULONG,
     cElements: ULONG,
     ulRequestAltCount: ULONG,
@@ -623,7 +623,7 @@ STRUCT!{struct SPPHRASEALTREQUEST {
     pPhrase: *mut ISpPhrase,
     pRecoContext: *mut ISpRecoContext,
 }}
-RIDL!{#[uuid(0x8e7c791e, 0x4467, 0x11d3, 0x97, 0x23, 0x00, 0xc0, 0x4f, 0x72, 0xdb, 0x08)]
+RIDL! {#[uuid(0x8e7c791e, 0x4467, 0x11d3, 0x97, 0x23, 0x00, 0xc0, 0x4f, 0x72, 0xdb, 0x08)]
 interface _ISpPrivateEngineCall(_ISpPrivateEngineCallVtbl): IUnknown(IUnknownVtbl) {
     fn CallEngine(
         pCallFrame: *mut c_void,
@@ -636,13 +636,13 @@ interface _ISpPrivateEngineCall(_ISpPrivateEngineCallVtbl): IUnknown(IUnknownVtb
         pulOutFrameSize: *mut ULONG,
     ) -> HRESULT,
 }}
-extern {
+extern "C" {
     pub static LIBID_SpeechDDKLib: IID;
     pub static CLSID_SpDataKey: CLSID;
 }
-RIDL!{#[uuid(0xd9f6ee60, 0x58c9, 0x458b, 0x88, 0xe1, 0x2f, 0x90, 0x8f, 0xd7, 0xf8, 0x7c)]
+RIDL! {#[uuid(0xd9f6ee60, 0x58c9, 0x458b, 0x88, 0xe1, 0x2f, 0x90, 0x8f, 0xd7, 0xf8, 0x7c)]
 class SpDataKey;}
-extern {
+extern "C" {
     pub static CLSID_SpObjectTokenEnum: CLSID;
     pub static CLSID_SpPhraseBuilder: CLSID;
     pub static CLSID_SpITNProcessor: CLSID;

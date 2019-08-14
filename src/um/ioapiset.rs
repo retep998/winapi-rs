@@ -51,13 +51,8 @@ extern "system" {
         lpNumberOfBytesTransferred: LPDWORD,
         bWait: BOOL,
     ) -> BOOL;
-    pub fn CancelIoEx(
-        hFile: HANDLE,
-        lpOverlapped: LPOVERLAPPED,
-    ) -> BOOL;
-    pub fn CancelIo(
-        hFile: HANDLE,
-    ) -> BOOL;
+    pub fn CancelIoEx(hFile: HANDLE, lpOverlapped: LPOVERLAPPED) -> BOOL;
+    pub fn CancelIo(hFile: HANDLE) -> BOOL;
     pub fn GetOverlappedResultEx(
         hFile: HANDLE,
         lpOverlapped: LPOVERLAPPED,
@@ -65,7 +60,5 @@ extern "system" {
         dwMilliseconds: DWORD,
         bAlertable: BOOL,
     ) -> BOOL;
-    pub fn CancelSynchronousIo(
-        hThread: HANDLE,
-    ) -> BOOL;
+    pub fn CancelSynchronousIo(hThread: HANDLE) -> BOOL;
 }

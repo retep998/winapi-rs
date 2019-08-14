@@ -10,13 +10,13 @@ use um::minwinbase::SYSTEMTIME;
 use um::oaidl::{IDispatch, IDispatchVtbl, SAFEARRAY, VARIANT};
 use um::unknwnbase::{IUnknown, IUnknownVtbl, LPUNKNOWN};
 use um::winnt::{HRESULT, LONG};
-RIDL!{#[uuid(0x0f87369f, 0xa4e5, 0x4cfc, 0xbd, 0x3e, 0x73, 0xe6, 0x15, 0x45, 0x72, 0xdd)]
+RIDL! {#[uuid(0x0f87369f, 0xa4e5, 0x4cfc, 0xbd, 0x3e, 0x73, 0xe6, 0x15, 0x45, 0x72, 0xdd)]
 class TaskScheduler;}
-RIDL!{#[uuid(0xf2a69db7, 0xda2c, 0x4352, 0x90, 0x66, 0x86, 0xfe, 0xe6, 0xda, 0xca, 0xc9)]
+RIDL! {#[uuid(0xf2a69db7, 0xda2c, 0x4352, 0x90, 0x66, 0x86, 0xfe, 0xe6, 0xda, 0xca, 0xc9)]
 class TaskHandlerPS;}
-RIDL!{#[uuid(0x9f15266d, 0xd7ba, 0x48f0, 0x93, 0xc1, 0xe6, 0x89, 0x5f, 0x6f, 0xe5, 0xac)]
+RIDL! {#[uuid(0x9f15266d, 0xd7ba, 0x48f0, 0x93, 0xc1, 0xe6, 0x89, 0x5f, 0x6f, 0xe5, 0xac)]
 class TaskHandlerStatusPS;}
-RIDL!{#[uuid(0x79184a66, 0x8664, 0x423f, 0x97, 0xf1, 0x63, 0x73, 0x56, 0xa5, 0xd8, 0x12)]
+RIDL! {#[uuid(0x79184a66, 0x8664, 0x423f, 0x97, 0xf1, 0x63, 0x73, 0x56, 0xa5, 0xd8, 0x12)]
 interface ITaskFolderCollection(ITaskFolderCollectionVtbl): IDispatch(IDispatchVtbl) {
     fn get_Count(
         pCount: *mut LONG,
@@ -29,7 +29,7 @@ interface ITaskFolderCollection(ITaskFolderCollectionVtbl): IDispatch(IDispatchV
         ppEnum: *mut LPUNKNOWN,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x8cfac062, 0xa080, 0x4c15, 0x9a, 0x88, 0xaa, 0x7c, 0x2a, 0xf8, 0x0d, 0xfc)]
+RIDL! {#[uuid(0x8cfac062, 0xa080, 0x4c15, 0x9a, 0x88, 0xaa, 0x7c, 0x2a, 0xf8, 0x0d, 0xfc)]
 interface ITaskFolder(ITaskFolderVtbl): IDispatch(IDispatchVtbl) {
     fn get_Name(
         pName: *mut BSTR,
@@ -95,7 +95,7 @@ interface ITaskFolder(ITaskFolderVtbl): IDispatch(IDispatchVtbl) {
         flags: LONG,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x9c86f320, 0xdee3, 0x4dd1, 0xb9, 0x72, 0xa3, 0x03, 0xf2, 0x6b, 0x06, 0x1e)]
+RIDL! {#[uuid(0x9c86f320, 0xdee3, 0x4dd1, 0xb9, 0x72, 0xa3, 0x03, 0xf2, 0x6b, 0x06, 0x1e)]
 interface IRegisteredTask(IRegisteredTaskVtbl): IDispatch(IDispatchVtbl) {
     fn get_Name(
         pName: *mut BSTR,
@@ -163,14 +163,14 @@ interface IRegisteredTask(IRegisteredTaskVtbl): IDispatch(IDispatchVtbl) {
         pRunTimes: *mut *mut SYSTEMTIME,
     ) -> HRESULT,
 }}
-ENUM!{enum TASK_STATE {
+ENUM! {enum TASK_STATE {
     TASK_STATE_UNKNOWN = 0,
     TASK_STATE_DISABLED = 1,
     TASK_STATE_QUEUED = 2,
     TASK_STATE_READY = 3,
     TASK_STATE_RUNNING = 4,
 }}
-RIDL!{#[uuid(0x653758fb, 0x7b9a, 0x4f1e, 0xa4, 0x71, 0xbe, 0xeb, 0x8e, 0x9b, 0x83, 0x4e)]
+RIDL! {#[uuid(0x653758fb, 0x7b9a, 0x4f1e, 0xa4, 0x71, 0xbe, 0xeb, 0x8e, 0x9b, 0x83, 0x4e)]
 interface IRunningTask(IRunningTaskVtbl): IDispatch(IDispatchVtbl) {
     fn get_Name(
         pName: *mut BSTR,
@@ -193,7 +193,7 @@ interface IRunningTask(IRunningTaskVtbl): IDispatch(IDispatchVtbl) {
         pPID: *mut DWORD,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x6a67614b, 0x6828, 0x4fec, 0xaa, 0x54, 0x6d, 0x52, 0xe8, 0xf1, 0xf2, 0xdb)]
+RIDL! {#[uuid(0x6a67614b, 0x6828, 0x4fec, 0xaa, 0x54, 0x6d, 0x52, 0xe8, 0xf1, 0xf2, 0xdb)]
 interface IRunningTaskCollection(IRunningTaskCollectionVtbl): IDispatch(IDispatchVtbl) {
     fn get_Count(
         pCount: *mut LONG,
@@ -206,7 +206,7 @@ interface IRunningTaskCollection(IRunningTaskCollectionVtbl): IDispatch(IDispatc
         ppEnum: *mut LPUNKNOWN,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xf5bc8fc5, 0x536d, 0x4f77, 0xb8, 0x52, 0xfb, 0xc1, 0x35, 0x6f, 0xde, 0xb6)]
+RIDL! {#[uuid(0xf5bc8fc5, 0x536d, 0x4f77, 0xb8, 0x52, 0xfb, 0xc1, 0x35, 0x6f, 0xde, 0xb6)]
 interface ITaskDefinition(ITaskDefinitionVtbl): IDispatch(IDispatchVtbl) {
     fn get_RegistrationInfo(
         ppRegistrationInfo: *mut *mut IRegistrationInfo,
@@ -251,7 +251,7 @@ interface ITaskDefinition(ITaskDefinitionVtbl): IDispatch(IDispatchVtbl) {
         pXml: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x416d8b73, 0xcb41, 0x4ea1, 0x80, 0x5c, 0x9b, 0xe9, 0xa5, 0xac, 0x4a, 0x74)]
+RIDL! {#[uuid(0x416d8b73, 0xcb41, 0x4ea1, 0x80, 0x5c, 0x9b, 0xe9, 0xa5, 0xac, 0x4a, 0x74)]
 interface IRegistrationInfo(IRegistrationInfoVtbl): IDispatch(IDispatchVtbl) {
     fn get_Description(
         pDescription: *mut BSTR,
@@ -308,7 +308,7 @@ interface IRegistrationInfo(IRegistrationInfoVtbl): IDispatch(IDispatchVtbl) {
         pSource: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x85df5081, 0x1b24, 0x4f32, 0x87, 0x8a, 0xd9, 0xd1, 0x4d, 0xf4, 0xcb, 0x77)]
+RIDL! {#[uuid(0x85df5081, 0x1b24, 0x4f32, 0x87, 0x8a, 0xd9, 0xd1, 0x4d, 0xf4, 0xcb, 0x77)]
 interface ITriggerCollection(ITriggerCollectionVtbl): IDispatch(IDispatchVtbl) {
     fn get_Count(
         pCount: *mut c_long,
@@ -329,7 +329,7 @@ interface ITriggerCollection(ITriggerCollectionVtbl): IDispatch(IDispatchVtbl) {
     ) -> HRESULT,
     fn Clear() -> HRESULT,
 }}
-RIDL!{#[uuid(0x09941815, 0xea89, 0x4b5b, 0x89, 0xe0, 0x2a, 0x77, 0x38, 0x01, 0xfa, 0xc3)]
+RIDL! {#[uuid(0x09941815, 0xea89, 0x4b5b, 0x89, 0xe0, 0x2a, 0x77, 0x38, 0x01, 0xfa, 0xc3)]
 interface ITrigger(ITriggerVtbl): IDispatch(IDispatchVtbl) {
     fn get_Type(
         pType: *mut TASK_TRIGGER_TYPE2,
@@ -371,7 +371,7 @@ interface ITrigger(ITriggerVtbl): IDispatch(IDispatchVtbl) {
         pEnabled: VARIANT_BOOL,
     ) -> HRESULT,
 }}
-ENUM!{enum TASK_TRIGGER_TYPE2 {
+ENUM! {enum TASK_TRIGGER_TYPE2 {
     TASK_TRIGGER_EVENT = 0,
     TASK_TRIGGER_TIME = 1,
     TASK_TRIGGER_DAILY = 2,
@@ -385,7 +385,7 @@ ENUM!{enum TASK_TRIGGER_TYPE2 {
     TASK_TRIGGER_SESSION_STATE_CHANGE = 11,
     TASK_TRIGGER_CUSTOM_TRIGGER_01 = 12,
 }}
-RIDL!{#[uuid(0x7fb9acf1, 0x26be, 0x400e, 0x85, 0xb5, 0x29, 0x4b, 0x9c, 0x75, 0xdf, 0xd6)]
+RIDL! {#[uuid(0x7fb9acf1, 0x26be, 0x400e, 0x85, 0xb5, 0x29, 0x4b, 0x9c, 0x75, 0xdf, 0xd6)]
 interface IRepetitionPattern(IRepetitionPatternVtbl): IDispatch(IDispatchVtbl) {
     fn get_Interval(
         pInterval: *mut BSTR,
@@ -406,7 +406,7 @@ interface IRepetitionPattern(IRepetitionPatternVtbl): IDispatch(IDispatchVtbl) {
         pStop: VARIANT_BOOL,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x8fd4711d, 0x2d02, 0x4c8c, 0x87, 0xe3, 0xef, 0xf6, 0x99, 0xde, 0x12, 0x7e)]
+RIDL! {#[uuid(0x8fd4711d, 0x2d02, 0x4c8c, 0x87, 0xe3, 0xef, 0xf6, 0x99, 0xde, 0x12, 0x7e)]
 interface ITaskSettings(ITaskSettingsVtbl): IDispatch(IDispatchVtbl) {
     fn get_AllowDemandStart(
         pAllowDemandStart: *mut VARIANT_BOOL,
@@ -529,13 +529,13 @@ interface ITaskSettings(ITaskSettingsVtbl): IDispatch(IDispatchVtbl) {
         ppNetworkSettings: *const INetworkSettings,
     ) -> HRESULT,
 }}
-ENUM!{enum TASK_INSTANCES_POLICY {
+ENUM! {enum TASK_INSTANCES_POLICY {
     TASK_INSTANCES_PARALLEL = 0,
     TASK_INSTANCES_QUEUE = 1,
     TASK_INSTANCES_IGNORE_NEW = 2,
     TASK_INSTANCES_STOP_EXISTING = 3,
 }}
-ENUM!{enum TASK_COMPATIBILITY {
+ENUM! {enum TASK_COMPATIBILITY {
     TASK_COMPATIBILITY_AT = 0,
     TASK_COMPATIBILITY_V1 = 1,
     TASK_COMPATIBILITY_V2 = 2,
@@ -544,7 +544,7 @@ ENUM!{enum TASK_COMPATIBILITY {
     TASK_COMPATIBILITY_V2_3 = 5,
     TASK_COMPATIBILITY_V2_4 = 6,
 }}
-RIDL!{#[uuid(0x84594461, 0x0053, 0x4342, 0xa8, 0xfd, 0x08, 0x8f, 0xab, 0xf1, 0x1f, 0x32)]
+RIDL! {#[uuid(0x84594461, 0x0053, 0x4342, 0xa8, 0xfd, 0x08, 0x8f, 0xab, 0xf1, 0x1f, 0x32)]
 interface IIdleSettings(IIdleSettingsVtbl): IDispatch(IDispatchVtbl) {
     fn get_IdleDuration(
         pDelay: *mut BSTR,
@@ -571,7 +571,7 @@ interface IIdleSettings(IIdleSettingsVtbl): IDispatch(IDispatchVtbl) {
         pRestart: VARIANT_BOOL,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x9f7dea84, 0xc30b, 0x4245, 0x80, 0xb6, 0x00, 0xe9, 0xf6, 0x46, 0xf1, 0xb4)]
+RIDL! {#[uuid(0x9f7dea84, 0xc30b, 0x4245, 0x80, 0xb6, 0x00, 0xe9, 0xf6, 0x46, 0xf1, 0xb4)]
 interface INetworkSettings(INetworkSettingsVtbl): IDispatch(IDispatchVtbl) {
     fn get_Name(
         pName: *mut BSTR,
@@ -586,7 +586,7 @@ interface INetworkSettings(INetworkSettingsVtbl): IDispatch(IDispatchVtbl) {
         pId: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xd98d51e5, 0xc9b4, 0x496a, 0xa9, 0xc1, 0x18, 0x98, 0x02, 0x61, 0xcf, 0x0f)]
+RIDL! {#[uuid(0xd98d51e5, 0xc9b4, 0x496a, 0xa9, 0xc1, 0x18, 0x98, 0x02, 0x61, 0xcf, 0x0f)]
 interface IPrincipal(IPrincipalVtbl): IDispatch(IDispatchVtbl) {
     fn get_Id(
         pId: *mut BSTR,
@@ -625,7 +625,7 @@ interface IPrincipal(IPrincipalVtbl): IDispatch(IDispatchVtbl) {
         pRunLevel: TASK_RUNLEVEL,
     ) -> HRESULT,
 }}
-ENUM!{enum TASK_LOGON_TYPE {
+ENUM! {enum TASK_LOGON_TYPE {
     TASK_LOGON_NONE = 0,
     TASK_LOGON_PASSWORD = 1,
     TASK_LOGON_S4U = 2,
@@ -634,11 +634,11 @@ ENUM!{enum TASK_LOGON_TYPE {
     TASK_LOGON_SERVICE_ACCOUNT = 5,
     TASK_LOGON_INTERACTIVE_TOKEN_OR_PASSWORD = 6,
 }}
-ENUM!{enum TASK_RUNLEVEL {
+ENUM! {enum TASK_RUNLEVEL {
     TASK_RUNLEVEL_LUA = 0,
     TASK_RUNLEVEL_HIGHEST = 1,
 }}
-RIDL!{#[uuid(0x02820e19, 0x7b98, 0x4ed2, 0xb2, 0xe8, 0xfd, 0xcc, 0xce, 0xff, 0x61, 0x9b)]
+RIDL! {#[uuid(0x02820e19, 0x7b98, 0x4ed2, 0xb2, 0xe8, 0xfd, 0xcc, 0xce, 0xff, 0x61, 0x9b)]
 interface IActionCollection(IActionCollectionVtbl): IDispatch(IDispatchVtbl) {
     fn get_Count(
         pCount: *mut c_long,
@@ -671,7 +671,7 @@ interface IActionCollection(IActionCollectionVtbl): IDispatch(IDispatchVtbl) {
         pContext: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xbae54997, 0x48b1, 0x4cbe, 0x99, 0x65, 0xd6, 0xbe, 0x26, 0x3e, 0xbe, 0xa4)]
+RIDL! {#[uuid(0xbae54997, 0x48b1, 0x4cbe, 0x99, 0x65, 0xd6, 0xbe, 0x26, 0x3e, 0xbe, 0xa4)]
 interface IAction(IActionVtbl): IDispatch(IDispatchVtbl) {
     fn get_Id(
         pId: *mut BSTR,
@@ -683,13 +683,13 @@ interface IAction(IActionVtbl): IDispatch(IDispatchVtbl) {
         pType: *mut TASK_ACTION_TYPE,
     ) -> HRESULT,
 }}
-ENUM!{enum TASK_ACTION_TYPE {
+ENUM! {enum TASK_ACTION_TYPE {
     TASK_ACTION_EXEC = 0,
     TASK_ACTION_COM_HANDLER = 5,
     TASK_ACTION_SEND_EMAIL = 6,
     TASK_ACTION_SHOW_MESSAGE = 7,
 }}
-RIDL!{#[uuid(0x86627eb4, 0x42a7, 0x41e4, 0xa4, 0xd9, 0xac, 0x33, 0xa7, 0x2f, 0x2d, 0x52)]
+RIDL! {#[uuid(0x86627eb4, 0x42a7, 0x41e4, 0xa4, 0xd9, 0xac, 0x33, 0xa7, 0x2f, 0x2d, 0x52)]
 interface IRegisteredTaskCollection(IRegisteredTaskCollectionVtbl): IDispatch(IDispatchVtbl) {
     fn get_Count(
         pCount: *mut LONG,
@@ -702,7 +702,7 @@ interface IRegisteredTaskCollection(IRegisteredTaskCollectionVtbl): IDispatch(ID
         ppEnum: *mut LPUNKNOWN,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x2faba4c7, 0x4da9, 0x4013, 0x96, 0x97, 0x20, 0xcc, 0x3f, 0xd4, 0x0f, 0x85)]
+RIDL! {#[uuid(0x2faba4c7, 0x4da9, 0x4013, 0x96, 0x97, 0x20, 0xcc, 0x3f, 0xd4, 0x0f, 0x85)]
 interface ITaskService(ITaskServiceVtbl): IDispatch(IDispatchVtbl) {
     fn GetFolder(
         Path: BSTR,
@@ -738,7 +738,7 @@ interface ITaskService(ITaskServiceVtbl): IDispatch(IDispatchVtbl) {
         pVersion: *mut DWORD,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x839d7762, 0x5121, 0x4009, 0x92, 0x34, 0x4f, 0x0d, 0x19, 0x39, 0x4f, 0x04)]
+RIDL! {#[uuid(0x839d7762, 0x5121, 0x4009, 0x92, 0x34, 0x4f, 0x0d, 0x19, 0x39, 0x4f, 0x04)]
 interface ITaskHandler(ITaskHandlerVtbl): IUnknown(IUnknownVtbl) {
     fn Start(
         pHandlerServices: LPUNKNOWN,
@@ -750,7 +750,7 @@ interface ITaskHandler(ITaskHandlerVtbl): IUnknown(IUnknownVtbl) {
     fn Pause() -> HRESULT,
     fn Resume() -> HRESULT,
 }}
-RIDL!{#[uuid(0xeaec7a8f, 0x27a0, 0x4ddc, 0x86, 0x75, 0x14, 0x72, 0x6a, 0x01, 0xa3, 0x8a)]
+RIDL! {#[uuid(0xeaec7a8f, 0x27a0, 0x4ddc, 0x86, 0x75, 0x14, 0x72, 0x6a, 0x01, 0xa3, 0x8a)]
 interface ITaskHandlerStatus(ITaskHandlerStatusVtbl): IUnknown(IUnknownVtbl) {
     fn UpdateStatus(
         percentComplete: c_short,
@@ -760,7 +760,7 @@ interface ITaskHandlerStatus(ITaskHandlerStatusVtbl): IUnknown(IUnknownVtbl) {
         taskErrCode: HRESULT,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x3e4c9351, 0xd966, 0x4b8b, 0xbb, 0x87, 0xce, 0xba, 0x68, 0xbb, 0x01, 0x07)]
+RIDL! {#[uuid(0x3e4c9351, 0xd966, 0x4b8b, 0xbb, 0x87, 0xce, 0xba, 0x68, 0xbb, 0x01, 0x07)]
 interface ITaskVariables(ITaskVariablesVtbl): IUnknown(IUnknownVtbl) {
     fn GetInput(
         pInput: *mut BSTR,
@@ -772,7 +772,7 @@ interface ITaskVariables(ITaskVariablesVtbl): IUnknown(IUnknownVtbl) {
         pContext: *mut BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x39038068, 0x2b46, 0x4afd, 0x86, 0x62, 0x7b, 0xb6, 0xf8, 0x68, 0xd2, 0x21)]
+RIDL! {#[uuid(0x39038068, 0x2b46, 0x4afd, 0x86, 0x62, 0x7b, 0xb6, 0xf8, 0x68, 0xd2, 0x21)]
 interface ITaskNamedValuePair(ITaskNamedValuePairVtbl): IDispatch(IDispatchVtbl) {
     fn get_Name(
         pName: *mut BSTR,
@@ -787,7 +787,7 @@ interface ITaskNamedValuePair(ITaskNamedValuePairVtbl): IDispatch(IDispatchVtbl)
         pValue: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xb4ef826b, 0x63c3, 0x46e4, 0xa5, 0x04, 0xef, 0x69, 0xe4, 0xf7, 0xea, 0x4d)]
+RIDL! {#[uuid(0xb4ef826b, 0x63c3, 0x46e4, 0xa5, 0x04, 0xef, 0x69, 0xe4, 0xf7, 0xea, 0x4d)]
 interface ITaskNamedValueCollection(ITaskNamedValueCollectionVtbl): IDispatch(IDispatchVtbl) {
     fn get_Count(
         pCount: *mut c_long,
@@ -809,9 +809,9 @@ interface ITaskNamedValueCollection(ITaskNamedValueCollectionVtbl): IDispatch(ID
     ) -> HRESULT,
     fn Clear() -> HRESULT,
 }}
-RIDL!{#[uuid(0xd537d2b0, 0x9fb3, 0x4d34, 0x97, 0x39, 0x1f, 0xf5, 0xce, 0x7b, 0x1e, 0xf3)]
+RIDL! {#[uuid(0xd537d2b0, 0x9fb3, 0x4d34, 0x97, 0x39, 0x1f, 0xf5, 0xce, 0x7b, 0x1e, 0xf3)]
 interface IIdleTrigger(IIdleTriggerVtbl): ITrigger(ITriggerVtbl) {}}
-RIDL!{#[uuid(0x72dade38, 0xfae4, 0x4b3e, 0xba, 0xf4, 0x5d, 0x00, 0x9a, 0xf0, 0x2b, 0x1c)]
+RIDL! {#[uuid(0x72dade38, 0xfae4, 0x4b3e, 0xba, 0xf4, 0x5d, 0x00, 0x9a, 0xf0, 0x2b, 0x1c)]
 interface ILogonTrigger(ILogonTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_Delay(
         pDelay: *mut BSTR,
@@ -826,7 +826,7 @@ interface ILogonTrigger(ILogonTriggerVtbl): ITrigger(ITriggerVtbl) {
         pUser: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x754da71b, 0x4385, 0x4475, 0x9d, 0xd9, 0x59, 0x82, 0x94, 0xfa, 0x36, 0x41)]
+RIDL! {#[uuid(0x754da71b, 0x4385, 0x4475, 0x9d, 0xd9, 0x59, 0x82, 0x94, 0xfa, 0x36, 0x41)]
 interface ISessionStateChangeTrigger(ISessionStateChangeTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_Delay(
         pDelay: *mut BSTR,
@@ -847,7 +847,7 @@ interface ISessionStateChangeTrigger(ISessionStateChangeTriggerVtbl): ITrigger(I
         pType: TASK_SESSION_STATE_CHANGE_TYPE,
     ) -> HRESULT,
 }}
-ENUM!{enum TASK_SESSION_STATE_CHANGE_TYPE {
+ENUM! {enum TASK_SESSION_STATE_CHANGE_TYPE {
     TASK_CONSOLE_CONNECT = 1,
     TASK_CONSOLE_DISCONNECT = 2,
     TASK_REMOTE_CONNECT = 3,
@@ -855,7 +855,7 @@ ENUM!{enum TASK_SESSION_STATE_CHANGE_TYPE {
     TASK_SESSION_LOCK = 7,
     TASK_SESSION_UNLOCK = 8,
 }}
-RIDL!{#[uuid(0xd45b0167, 0x9653, 0x4eef, 0xb9, 0x4f, 0x07, 0x32, 0xca, 0x7a, 0xf2, 0x51)]
+RIDL! {#[uuid(0xd45b0167, 0x9653, 0x4eef, 0xb9, 0x4f, 0x07, 0x32, 0xca, 0x7a, 0xf2, 0x51)]
 interface IEventTrigger(IEventTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_Subscription(
         pQuery: *mut BSTR,
@@ -876,7 +876,7 @@ interface IEventTrigger(IEventTriggerVtbl): ITrigger(ITriggerVtbl) {
         ppNamedXPaths: *const ITaskNamedValueCollection,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xb45747e0, 0xeba7, 0x4276, 0x9f, 0x29, 0x85, 0xc5, 0xbb, 0x30, 0x00, 0x06)]
+RIDL! {#[uuid(0xb45747e0, 0xeba7, 0x4276, 0x9f, 0x29, 0x85, 0xc5, 0xbb, 0x30, 0x00, 0x06)]
 interface ITimeTrigger(ITimeTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_RandomDelay(
         pRandomDelay: *mut BSTR,
@@ -885,7 +885,7 @@ interface ITimeTrigger(ITimeTriggerVtbl): ITrigger(ITriggerVtbl) {
         pRandomDelay: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x126c5cd8, 0xb288, 0x41d5, 0x8d, 0xbf, 0xe4, 0x91, 0x44, 0x6a, 0xdc, 0x5c)]
+RIDL! {#[uuid(0x126c5cd8, 0xb288, 0x41d5, 0x8d, 0xbf, 0xe4, 0x91, 0x44, 0x6a, 0xdc, 0x5c)]
 interface IDailyTrigger(IDailyTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_DaysInterval(
         pDays: *mut c_short,
@@ -900,7 +900,7 @@ interface IDailyTrigger(IDailyTriggerVtbl): ITrigger(ITriggerVtbl) {
         pRandomDelay: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x5038fc98, 0x82ff, 0x436d, 0x87, 0x28, 0xa5, 0x12, 0xa5, 0x7c, 0x9d, 0xc1)]
+RIDL! {#[uuid(0x5038fc98, 0x82ff, 0x436d, 0x87, 0x28, 0xa5, 0x12, 0xa5, 0x7c, 0x9d, 0xc1)]
 interface IWeeklyTrigger(IWeeklyTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_DaysOfWeek(
         pDays: *mut c_short,
@@ -921,7 +921,7 @@ interface IWeeklyTrigger(IWeeklyTriggerVtbl): ITrigger(ITriggerVtbl) {
         pRandomDelay: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x97c45ef1, 0x6b02, 0x4a1a, 0x9c, 0x0e, 0x1e, 0xbf, 0xba, 0x15, 0x00, 0xac)]
+RIDL! {#[uuid(0x97c45ef1, 0x6b02, 0x4a1a, 0x9c, 0x0e, 0x1e, 0xbf, 0xba, 0x15, 0x00, 0xac)]
 interface IMonthlyTrigger(IMonthlyTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_DaysOfMonth(
         pDays: *mut c_long,
@@ -948,7 +948,7 @@ interface IMonthlyTrigger(IMonthlyTriggerVtbl): ITrigger(ITriggerVtbl) {
         pRandomDelay: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x77d025a3, 0x90fa, 0x43aa, 0xb5, 0x2e, 0xcd, 0xa5, 0x49, 0x9b, 0x94, 0x6a)]
+RIDL! {#[uuid(0x77d025a3, 0x90fa, 0x43aa, 0xb5, 0x2e, 0xcd, 0xa5, 0x49, 0x9b, 0x94, 0x6a)]
 interface IMonthlyDOWTrigger(IMonthlyDOWTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_DaysOfWeek(
         pDays: *mut c_short,
@@ -981,7 +981,7 @@ interface IMonthlyDOWTrigger(IMonthlyDOWTriggerVtbl): ITrigger(ITriggerVtbl) {
         pRandomDelay: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x2a9c35da, 0xd357, 0x41f4, 0xbb, 0xc1, 0x20, 0x7a, 0xc1, 0xb1, 0xf3, 0xcb)]
+RIDL! {#[uuid(0x2a9c35da, 0xd357, 0x41f4, 0xbb, 0xc1, 0x20, 0x7a, 0xc1, 0xb1, 0xf3, 0xcb)]
 interface IBootTrigger(IBootTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_Delay(
         pDelay: *mut BSTR,
@@ -990,7 +990,7 @@ interface IBootTrigger(IBootTriggerVtbl): ITrigger(ITriggerVtbl) {
         pDelay: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x4c8fec3a, 0xc218, 0x4e0c, 0xb2, 0x3d, 0x62, 0x90, 0x24, 0xdb, 0x91, 0xa2)]
+RIDL! {#[uuid(0x4c8fec3a, 0xc218, 0x4e0c, 0xb2, 0x3d, 0x62, 0x90, 0x24, 0xdb, 0x91, 0xa2)]
 interface IRegistrationTrigger(IRegistrationTriggerVtbl): ITrigger(ITriggerVtbl) {
     fn get_Delay(
         pDelay: *mut BSTR,
@@ -999,7 +999,7 @@ interface IRegistrationTrigger(IRegistrationTriggerVtbl): ITrigger(ITriggerVtbl)
         pDelay: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x4c3d624d, 0xfd6b, 0x49a3, 0xb9, 0xb7, 0x09, 0xcb, 0x3c, 0xd3, 0xf0, 0x47)]
+RIDL! {#[uuid(0x4c3d624d, 0xfd6b, 0x49a3, 0xb9, 0xb7, 0x09, 0xcb, 0x3c, 0xd3, 0xf0, 0x47)]
 interface IExecAction(IExecActionVtbl): IAction(IActionVtbl) {
     fn get_Path(
         pPath: *mut BSTR,
@@ -1020,7 +1020,7 @@ interface IExecAction(IExecActionVtbl): IAction(IActionVtbl) {
         pWorkingDirectory: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xf2a82542, 0xbda5, 0x4e6b, 0x91, 0x43, 0xe2, 0xbf, 0x4f, 0x89, 0x87, 0xb6)]
+RIDL! {#[uuid(0xf2a82542, 0xbda5, 0x4e6b, 0x91, 0x43, 0xe2, 0xbf, 0x4f, 0x89, 0x87, 0xb6)]
 interface IExecAction2(IExecAction2Vtbl): IExecAction(IExecActionVtbl) {
     fn get_HideAppWindow(
         pHideAppWindow: *mut VARIANT_BOOL,
@@ -1029,7 +1029,7 @@ interface IExecAction2(IExecAction2Vtbl): IExecAction(IExecActionVtbl) {
         pHideAppWindow: VARIANT_BOOL,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x505e9e68, 0xaf89, 0x46b8, 0xa3, 0x0f, 0x56, 0x16, 0x2a, 0x83, 0xd5, 0x37)]
+RIDL! {#[uuid(0x505e9e68, 0xaf89, 0x46b8, 0xa3, 0x0f, 0x56, 0x16, 0x2a, 0x83, 0xd5, 0x37)]
 interface IShowMessageAction(IShowMessageActionVtbl): IAction(IActionVtbl) {
     fn get_Title(
         pTitle: *mut BSTR,
@@ -1044,7 +1044,7 @@ interface IShowMessageAction(IShowMessageActionVtbl): IAction(IActionVtbl) {
         pMessageBody: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x6d2fd252, 0x75c5, 0x4f66, 0x90, 0xba, 0x2a, 0x7d, 0x8c, 0xc3, 0x03, 0x9f)]
+RIDL! {#[uuid(0x6d2fd252, 0x75c5, 0x4f66, 0x90, 0xba, 0x2a, 0x7d, 0x8c, 0xc3, 0x03, 0x9f)]
 interface IComHandlerAction(IComHandlerActionVtbl): IAction(IActionVtbl) {
     fn get_ClassId(
         pClsid: *mut BSTR,
@@ -1059,7 +1059,7 @@ interface IComHandlerAction(IComHandlerActionVtbl): IAction(IActionVtbl) {
         pData: BSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x10f62c64, 0x7e16, 0x4314, 0xa0, 0xc2, 0x0c, 0x36, 0x83, 0xf9, 0x9d, 0x40)]
+RIDL! {#[uuid(0x10f62c64, 0x7e16, 0x4314, 0xa0, 0xc2, 0x0c, 0x36, 0x83, 0xf9, 0x9d, 0x40)]
 interface IEmailAction(IEmailActionVtbl): IAction(IActionVtbl) {
     fn get_Server(
         pServer: *mut BSTR,
@@ -1122,7 +1122,7 @@ interface IEmailAction(IEmailActionVtbl): IAction(IActionVtbl) {
         pAttachements: SAFEARRAY,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x248919ae, 0xe345, 0x4a6d, 0x8a, 0xeb, 0xe0, 0xd3, 0x16, 0x5c, 0x90, 0x4e)]
+RIDL! {#[uuid(0x248919ae, 0xe345, 0x4a6d, 0x8a, 0xeb, 0xe0, 0xd3, 0x16, 0x5c, 0x90, 0x4e)]
 interface IPrincipal2(IPrincipal2Vtbl): IDispatch(IDispatchVtbl) {
     fn get_ProcessTokenSidType(
         pProcessTokenSidType: *mut TASK_PROCESSTOKENSID,
@@ -1141,12 +1141,12 @@ interface IPrincipal2(IPrincipal2Vtbl): IDispatch(IDispatchVtbl) {
         privilege: BSTR,
     ) -> HRESULT,
 }}
-ENUM!{enum TASK_PROCESSTOKENSID {
+ENUM! {enum TASK_PROCESSTOKENSID {
     TASK_PROCESSTOKENSID_NONE = 0,
     TASK_PROCESSTOKENSID_UNRESTRICTED = 1,
     TASK_PROCESSTOKENSID_DEFAULT = 2,
 }}
-RIDL!{#[uuid(0x2c05c3f0, 0x6eed, 0x4c05, 0xa1, 0x5f, 0xed, 0x7d, 0x7a, 0x98, 0xa3, 0x69)]
+RIDL! {#[uuid(0x2c05c3f0, 0x6eed, 0x4c05, 0xa1, 0x5f, 0xed, 0x7d, 0x7a, 0x98, 0xa3, 0x69)]
 interface ITaskSettings2(ITaskSettings2Vtbl): IDispatch(IDispatchVtbl) {
     fn get_DisallowStartOnRemoteAppSession(
         pDisallowStart: *mut VARIANT_BOOL,
@@ -1161,7 +1161,7 @@ interface ITaskSettings2(ITaskSettings2Vtbl): IDispatch(IDispatchVtbl) {
         pUseUnifiedEngine: VARIANT_BOOL,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x0ad9d0d7, 0x0c7f, 0x4ebb, 0x9a, 0x5f, 0xd1, 0xc6, 0x48, 0xdc, 0xa5, 0x28)]
+RIDL! {#[uuid(0x0ad9d0d7, 0x0c7f, 0x4ebb, 0x9a, 0x5f, 0xd1, 0xc6, 0x48, 0xdc, 0xa5, 0x28)]
 interface ITaskSettings3(ITaskSettings3Vtbl): ITaskSettings(ITaskSettingsVtbl) {
     fn get_DisallowStartOnRemoteAppSession(
         pDisallowStart: *mut VARIANT_BOOL,
@@ -1191,7 +1191,7 @@ interface ITaskSettings3(ITaskSettings3Vtbl): ITaskSettings(ITaskSettingsVtbl) {
         pVolatile: VARIANT_BOOL,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xa6024fa8, 0x9652, 0x4adb, 0xa6, 0xbf, 0x5c, 0xfc, 0xd8, 0x77, 0xa7, 0xba)]
+RIDL! {#[uuid(0xa6024fa8, 0x9652, 0x4adb, 0xa6, 0xbf, 0x5c, 0xfc, 0xd8, 0x77, 0xa7, 0xba)]
 interface IMaintenanceSettings(IMaintenanceSettingsVtbl): IDispatch(IDispatchVtbl) {
     fn put_Period(
         target: BSTR,
@@ -1212,17 +1212,17 @@ interface IMaintenanceSettings(IMaintenanceSettingsVtbl): IDispatch(IDispatchVtb
         target: *mut VARIANT_BOOL,
     ) -> HRESULT,
 }}
-ENUM!{enum TASK_RUN_FLAGS {
+ENUM! {enum TASK_RUN_FLAGS {
     TASK_RUN_NO_FLAGS = 0,
     TASK_RUN_AS_SELF = 1,
     TASK_RUN_IGNORE_CONSTRAINTS = 2,
     TASK_RUN_USE_SESSION_ID = 4,
     TASK_RUN_USER_SID = 8,
 }}
-ENUM!{enum TASK_ENUM_FLAGS {
+ENUM! {enum TASK_ENUM_FLAGS {
     TASK_ENUM_HIDDEN = 1,
 }}
-ENUM!{enum TASK_CREATION {
+ENUM! {enum TASK_CREATION {
     TASK_VALIDATE_ONLY = 1,
     TASK_CREATE = 2,
     TASK_UPDATE = 4,

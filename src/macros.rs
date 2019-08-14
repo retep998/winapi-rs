@@ -13,22 +13,22 @@ macro_rules! DECLARE_HANDLE {
 macro_rules! MAKE_HRESULT {
     ($sev:expr, $fac:expr, $code:expr) => {
         ($sev << 31) | ($fac << 16) | $code
-    }
+    };
 }
 macro_rules! MAKE_SCODE {
     ($sev:expr, $fac:expr, $code:expr) => {
         ($sev << 31) | ($fac << 16) | $code
-    }
+    };
 }
 macro_rules! HIDP_ERROR_CODES {
     ($sev:expr, $code:expr) => {
         ($sev << 28) | (FACILITY_HID_ERROR_CODE << 16) | $code
-    }
+    };
 }
 macro_rules! MAKEFOURCC {
     ($a:expr, $b:expr, $c:expr, $d:expr) => {
         ($a as u32) | (($b as u32) << 8) | (($c as u32) << 16) | (($d as u32) << 24)
-    }
+    };
 }
 #[macro_export]
 macro_rules! DEFINE_GUID {
@@ -42,13 +42,13 @@ macro_rules! DEFINE_GUID {
             Data3: $w2,
             Data4: [$b1, $b2, $b3, $b4, $b5, $b6, $b7, $b8],
         };
-    }
+    };
 }
 macro_rules! DEFINE_BLUETOOTH_UUID128 {
     ($name:ident, $shortId:expr) => {
-        DEFINE_GUID!{$name,
-            $shortId as u32, 0x0000, 0x1000, 0x80, 0x00, 0x00, 0x80, 0x5F, 0x9B, 0x34, 0xFB}
-    }
+        DEFINE_GUID! {$name,
+        $shortId as u32, 0x0000, 0x1000, 0x80, 0x00, 0x00, 0x80, 0x5F, 0x9B, 0x34, 0xFB}
+    };
 }
 #[macro_export]
 macro_rules! DEFINE_PROPERTYKEY {
@@ -57,8 +57,7 @@ macro_rules! DEFINE_PROPERTYKEY {
         $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr, $b6:expr, $b7:expr, $b8:expr,
         $pid:expr
     ) => {
-        pub const $name: PROPERTYKEY
-            = PROPERTYKEY {
+        pub const $name: PROPERTYKEY = PROPERTYKEY {
             fmtid: $crate::shared::guiddef::GUID {
                 Data1: $l,
                 Data2: $w1,
@@ -67,7 +66,7 @@ macro_rules! DEFINE_PROPERTYKEY {
             },
             pid: $pid,
         };
-    }
+    };
 }
 #[macro_export]
 macro_rules! DEFINE_DEVPROPKEY {
@@ -85,12 +84,12 @@ macro_rules! DEFINE_DEVPROPKEY {
             },
             pid: $pid,
         };
-    }
+    };
 }
 macro_rules! CTL_CODE {
     ($DeviceType:expr, $Function:expr, $Method:expr, $Access:expr) => {
         ($DeviceType << 16) | ($Access << 14) | ($Function << 2) | $Method
-    }
+    };
 }
 macro_rules! BTH_CTL {
     ($id:expr) => {
@@ -105,22 +104,27 @@ macro_rules! BTH_KERNEL_CTL {
 macro_rules! HID_CTL_CODE {
     ($id:expr) => {
         CTL_CODE!(FILE_DEVICE_KEYBOARD, $id, METHOD_NEITHER, FILE_ANY_ACCESS)
-    }
+    };
 }
 macro_rules! HID_BUFFER_CTL_CODE {
     ($id:expr) => {
         CTL_CODE!(FILE_DEVICE_KEYBOARD, $id, METHOD_BUFFERED, FILE_ANY_ACCESS)
-    }
+    };
 }
 macro_rules! HID_IN_CTL_CODE {
     ($id:expr) => {
         CTL_CODE!(FILE_DEVICE_KEYBOARD, $id, METHOD_IN_DIRECT, FILE_ANY_ACCESS)
-    }
+    };
 }
 macro_rules! HID_OUT_CTL_CODE {
     ($id:expr) => {
-        CTL_CODE!(FILE_DEVICE_KEYBOARD, $id, METHOD_OUT_DIRECT, FILE_ANY_ACCESS)
-    }
+        CTL_CODE!(
+            FILE_DEVICE_KEYBOARD,
+            $id,
+            METHOD_OUT_DIRECT,
+            FILE_ANY_ACCESS
+        )
+    };
 }
 macro_rules! AUDCLNT_ERR {
     ($n:expr) => {
@@ -135,12 +139,15 @@ macro_rules! AUDCLNT_SUCCESS {
 macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
     ($major:expr, $minor:expr) => {
         $crate::shared::bcrypt::BCRYPT_INTERFACE_VERSION {
-            MajorVersion: $major, MinorVersion: $minor,
+            MajorVersion: $major,
+            MinorVersion: $minor,
         }
-    }
+    };
 }
 macro_rules! MAKEINTRESOURCE {
-    ($i:expr) => { $i as u16 as usize as LPWSTR }
+    ($i:expr) => {
+        $i as u16 as usize as LPWSTR
+    };
 }
 #[macro_export]
 macro_rules! RIDL {
@@ -421,20 +428,20 @@ macro_rules! FN {
 macro_rules! _WSAIO {
     ($x:expr, $y:expr) => {
         $crate::shared::ws2def::IOC_VOID | $x | $y
-    }
+    };
 }
 macro_rules! _WSAIOR {
     ($x:expr, $y:expr) => {
         $crate::shared::ws2def::IOC_OUT | $x | $y
-    }
+    };
 }
 macro_rules! _WSAIOW {
     ($x:expr, $y:expr) => {
         $crate::shared::ws2def::IOC_IN | $x | $y
-    }
+    };
 }
 macro_rules! _WSAIORW {
     ($x:expr, $y:expr) => {
         $crate::shared::ws2def::IOC_INOUT | $x | $y
-    }
+    };
 }

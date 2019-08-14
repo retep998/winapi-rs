@@ -6,22 +6,9 @@
 use shared::minwindef::{BOOL, PBOOL, UINT};
 use um::winnt::{HANDLE, LPSTR, LPWSTR, PVOID};
 extern "system" {
-    pub fn Wow64DisableWow64FsRedirection(
-        OldValue: *mut PVOID,
-    ) -> BOOL;
-    pub fn Wow64RevertWow64FsRedirection(
-        OlValue: PVOID,
-    ) -> BOOL;
-    pub fn IsWow64Process(
-        hProcess: HANDLE,
-        Wow64Process: PBOOL,
-    ) -> BOOL;
-    pub fn GetSystemWow64DirectoryA(
-        lpBuffer: LPSTR,
-        uSize: UINT,
-    ) -> UINT;
-    pub fn GetSystemWow64DirectoryW(
-        lpBuffer: LPWSTR,
-        uSize: UINT,
-    ) -> UINT;
+    pub fn Wow64DisableWow64FsRedirection(OldValue: *mut PVOID) -> BOOL;
+    pub fn Wow64RevertWow64FsRedirection(OlValue: PVOID) -> BOOL;
+    pub fn IsWow64Process(hProcess: HANDLE, Wow64Process: PBOOL) -> BOOL;
+    pub fn GetSystemWow64DirectoryA(lpBuffer: LPSTR, uSize: UINT) -> UINT;
+    pub fn GetSystemWow64DirectoryW(lpBuffer: LPWSTR, uSize: UINT) -> UINT;
 }

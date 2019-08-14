@@ -10,44 +10,24 @@ use um::minwinbase::{
     LPCRITICAL_SECTION, LPSECURITY_ATTRIBUTES, PCRITICAL_SECTION, PREASON_CONTEXT,
 };
 use um::winnt::{
-    BOOLEAN, HANDLE, LARGE_INTEGER, LONG, LPCSTR, LPCWSTR, PRTL_BARRIER, PRTL_RUN_ONCE,
-    PVOID, RTL_BARRIER, RTL_CONDITION_VARIABLE, RTL_CONDITION_VARIABLE_INIT,
-    RTL_RUN_ONCE, RTL_SRWLOCK, RTL_SRWLOCK_INIT, VOID
+    BOOLEAN, HANDLE, LARGE_INTEGER, LONG, LPCSTR, LPCWSTR, PRTL_BARRIER, PRTL_RUN_ONCE, PVOID,
+    RTL_BARRIER, RTL_CONDITION_VARIABLE, RTL_CONDITION_VARIABLE_INIT, RTL_RUN_ONCE, RTL_SRWLOCK,
+    RTL_SRWLOCK_INIT, VOID,
 };
 pub const SRWLOCK_INIT: SRWLOCK = RTL_SRWLOCK_INIT;
 pub type SRWLOCK = RTL_SRWLOCK;
 pub type PSRWLOCK = *mut RTL_SRWLOCK;
 extern "system" {
-    pub fn InitializeSRWLock(
-        SRWLock: PSRWLOCK,
-    );
-    pub fn ReleaseSRWLockExclusive(
-        SRWLock: PSRWLOCK,
-    );
-    pub fn ReleaseSRWLockShared(
-        SRWLock: PSRWLOCK,
-    );
-    pub fn AcquireSRWLockExclusive(
-        SRWLock: PSRWLOCK,
-    );
-    pub fn AcquireSRWLockShared(
-        SRWLock: PSRWLOCK,
-    );
-    pub fn TryAcquireSRWLockExclusive(
-        SRWLock: PSRWLOCK,
-    ) -> BOOLEAN;
-    pub fn TryAcquireSRWLockShared(
-        SRWLock: PSRWLOCK,
-    ) -> BOOLEAN;
-    pub fn InitializeCriticalSection(
-        lpCriticalSection: LPCRITICAL_SECTION,
-    );
-    pub fn EnterCriticalSection(
-        lpCriticalSection: LPCRITICAL_SECTION,
-    );
-    pub fn LeaveCriticalSection(
-        lpCriticalSection: LPCRITICAL_SECTION,
-    );
+    pub fn InitializeSRWLock(SRWLock: PSRWLOCK);
+    pub fn ReleaseSRWLockExclusive(SRWLock: PSRWLOCK);
+    pub fn ReleaseSRWLockShared(SRWLock: PSRWLOCK);
+    pub fn AcquireSRWLockExclusive(SRWLock: PSRWLOCK);
+    pub fn AcquireSRWLockShared(SRWLock: PSRWLOCK);
+    pub fn TryAcquireSRWLockExclusive(SRWLock: PSRWLOCK) -> BOOLEAN;
+    pub fn TryAcquireSRWLockShared(SRWLock: PSRWLOCK) -> BOOLEAN;
+    pub fn InitializeCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
+    pub fn EnterCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
+    pub fn LeaveCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
     pub fn InitializeCriticalSectionAndSpinCount(
         lpCriticalSection: LPCRITICAL_SECTION,
         dwSpinCount: DWORD,
@@ -61,12 +41,8 @@ extern "system" {
         lpCriticalSection: LPCRITICAL_SECTION,
         dwSpinCount: DWORD,
     ) -> DWORD;
-    pub fn TryEnterCriticalSection(
-        lpCriticalSection: LPCRITICAL_SECTION,
-    ) -> BOOL;
-    pub fn DeleteCriticalSection(
-        lpCriticalSection: LPCRITICAL_SECTION,
-    );
+    pub fn TryEnterCriticalSection(lpCriticalSection: LPCRITICAL_SECTION) -> BOOL;
+    pub fn DeleteCriticalSection(lpCriticalSection: LPCRITICAL_SECTION);
 }
 pub type INIT_ONCE = RTL_RUN_ONCE;
 pub type PINIT_ONCE = PRTL_RUN_ONCE;
@@ -76,15 +52,13 @@ pub type LPINIT_ONCE = PRTL_RUN_ONCE;
 //pub const INIT_ONCE_ASYNC: ULONG = RTL_RUN_ONCE_ASYNC;
 //pub const INIT_ONCE_INIT_FAILED: ULONG = RTL_RUN_ONCE_INIT_FAILED;
 //pub const INIT_ONCE_CTX_RESERVED_BITS: usize = RTL_RUN_ONCE_CTX_RESERVED_BITS;
-FN!{stdcall PINIT_ONCE_FN(
+FN! {stdcall PINIT_ONCE_FN(
     InitOnce: PINIT_ONCE,
     Parameter: PVOID,
     Context: *mut PVOID,
 ) -> BOOL}
 extern "system" {
-    pub fn InitOnceInitialize(
-        InitOnce: PINIT_ONCE,
-    );
+    pub fn InitOnceInitialize(InitOnce: PINIT_ONCE);
     pub fn InitOnceExecuteOnce(
         InitOnce: PINIT_ONCE,
         InitFn: PINIT_ONCE_FN,
@@ -97,26 +71,16 @@ extern "system" {
         fPending: PBOOL,
         lpContext: *mut LPVOID,
     ) -> BOOL;
-    pub fn InitOnceComplete(
-        lpInitOnce: LPINIT_ONCE,
-        dwFlags: DWORD,
-        lpContext: LPVOID,
-    ) -> BOOL;
+    pub fn InitOnceComplete(lpInitOnce: LPINIT_ONCE, dwFlags: DWORD, lpContext: LPVOID) -> BOOL;
 }
 pub type CONDITION_VARIABLE = RTL_CONDITION_VARIABLE;
 pub type PCONDITION_VARIABLE = *mut CONDITION_VARIABLE;
 pub const CONDITION_VARIABLE_INIT: CONDITION_VARIABLE = RTL_CONDITION_VARIABLE_INIT;
 //pub const CONDITION_VARIABLE_LOCKMODE_SHARED: ULONG = RTL_CONDITION_VARIABLE_LOCKMODE_SHARED;
 extern "system" {
-    pub fn InitializeConditionVariable(
-        ConditionVariable: PCONDITION_VARIABLE,
-    );
-    pub fn WakeConditionVariable(
-        ConditionVariable: PCONDITION_VARIABLE,
-    );
-    pub fn WakeAllConditionVariable(
-        ConditionVariable: PCONDITION_VARIABLE,
-    );
+    pub fn InitializeConditionVariable(ConditionVariable: PCONDITION_VARIABLE);
+    pub fn WakeConditionVariable(ConditionVariable: PCONDITION_VARIABLE);
+    pub fn WakeAllConditionVariable(ConditionVariable: PCONDITION_VARIABLE);
     pub fn SleepConditionVariableCS(
         ConditionVariable: PCONDITION_VARIABLE,
         CriticalSection: PCRITICAL_SECTION,
@@ -128,33 +92,18 @@ extern "system" {
         dwMilliseconds: DWORD,
         Flags: ULONG,
     ) -> BOOL;
-    pub fn SetEvent(
-        hEvent: HANDLE,
-    ) -> BOOL;
-    pub fn ResetEvent(
-        hEvent: HANDLE,
-    ) -> BOOL;
+    pub fn SetEvent(hEvent: HANDLE) -> BOOL;
+    pub fn ResetEvent(hEvent: HANDLE) -> BOOL;
     pub fn ReleaseSemaphore(
         hSemaphore: HANDLE,
         lReleaseCount: LONG,
         lpPreviousCount: LPLONG,
     ) -> BOOL;
-    pub fn ReleaseMutex(
-        hMutex: HANDLE,
-    ) -> BOOL;
-    pub fn WaitForSingleObject(
-        hHandle: HANDLE,
-        dwMilliseconds: DWORD,
-    ) -> DWORD;
-    pub fn SleepEx(
-        dwMilliseconds: DWORD,
-        bAlertable: BOOL,
-    ) -> DWORD;
-    pub fn WaitForSingleObjectEx(
-        hHandle: HANDLE,
-        dwMilliseconds: DWORD,
-        bAlertable: BOOL,
-    ) -> DWORD;
+    pub fn ReleaseMutex(hMutex: HANDLE) -> BOOL;
+    pub fn WaitForSingleObject(hHandle: HANDLE, dwMilliseconds: DWORD) -> DWORD;
+    pub fn SleepEx(dwMilliseconds: DWORD, bAlertable: BOOL) -> DWORD;
+    pub fn WaitForSingleObjectEx(hHandle: HANDLE, dwMilliseconds: DWORD, bAlertable: BOOL)
+        -> DWORD;
     pub fn WaitForMultipleObjectsEx(
         nCount: DWORD,
         lpHandles: *const HANDLE,
@@ -176,11 +125,7 @@ extern "system" {
         bInitialOwner: BOOL,
         lpName: LPCWSTR,
     ) -> HANDLE;
-    pub fn OpenMutexW(
-        dwDesiredAccess: DWORD,
-        bInheritHandle: BOOL,
-        lpName: LPCWSTR,
-    ) -> HANDLE;
+    pub fn OpenMutexW(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR) -> HANDLE;
     pub fn CreateEventA(
         lpEventAttributes: LPSECURITY_ATTRIBUTES,
         bManualReset: BOOL,
@@ -193,23 +138,11 @@ extern "system" {
         bInitialState: BOOL,
         lpName: LPCWSTR,
     ) -> HANDLE;
-    pub fn OpenEventA(
-        dwDesiredAccess: DWORD,
-        bInheritHandle: BOOL,
-        lpName: LPCSTR,
-    ) -> HANDLE;
-    pub fn OpenEventW(
-        dwDesiredAccess: DWORD,
-        bInheritHandle: BOOL,
-        lpName: LPCWSTR,
-    ) -> HANDLE;
-    pub fn OpenSemaphoreW(
-        dwDesiredAccess: DWORD,
-        bInheritHandle: BOOL,
-        lpName: LPCWSTR,
-    ) -> HANDLE;
+    pub fn OpenEventA(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCSTR) -> HANDLE;
+    pub fn OpenEventW(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR) -> HANDLE;
+    pub fn OpenSemaphoreW(dwDesiredAccess: DWORD, bInheritHandle: BOOL, lpName: LPCWSTR) -> HANDLE;
 }
-FN!{stdcall PTIMERAPCROUTINE(
+FN! {stdcall PTIMERAPCROUTINE(
     lpArgToCompletionRoutine: LPVOID,
     dwTimerLowValue: DWORD,
     dwTimerHighValue: DWORD,
@@ -237,9 +170,7 @@ extern "system" {
         lpArgToCompletionRoutine: LPVOID,
         fResume: BOOL,
     ) -> BOOL;
-    pub fn CancelWaitableTimer(
-        hTimer: HANDLE,
-    ) -> BOOL;
+    pub fn CancelWaitableTimer(hTimer: HANDLE) -> BOOL;
 }
 pub const CREATE_MUTEX_INITIAL_OWNER: DWORD = 0x00000001;
 extern "system" {
@@ -305,24 +236,16 @@ extern "system" {
         lTotalThreads: LONG,
         lSpinCount: LONG,
     ) -> BOOL;
-    pub fn DeleteSynchronizationBarrier(
-        lpBarrier: LPSYNCHRONIZATION_BARRIER,
-    ) -> BOOL;
-    pub fn Sleep(
-        dwMilliseconds: DWORD,
-    );
+    pub fn DeleteSynchronizationBarrier(lpBarrier: LPSYNCHRONIZATION_BARRIER) -> BOOL;
+    pub fn Sleep(dwMilliseconds: DWORD);
     pub fn WaitOnAddress(
         Address: *mut VOID,
         CompareAddress: PVOID,
         AddressSize: SIZE_T,
         dwMilliseconds: DWORD,
     ) -> BOOL;
-    pub fn WakeByAddressSingle(
-        Address: PVOID,
-    );
-    pub fn WakeByAddressAll(
-        Address: PVOID,
-    );
+    pub fn WakeByAddressSingle(Address: PVOID);
+    pub fn WakeByAddressAll(Address: PVOID);
     pub fn SignalObjectAndWait(
         hObjectToSignal: HANDLE,
         hObjectToWaitOn: HANDLE,

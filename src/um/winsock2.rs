@@ -22,11 +22,11 @@ use shared::winerror::{
     ERROR_NOT_ENOUGH_MEMORY, ERROR_OPERATION_ABORTED, WAIT_TIMEOUT,
 };
 use shared::ws2def::{
-    AF_APPLETALK, AF_ATM, AF_BAN, AF_BTH, AF_CCITT, AF_CHAOS, AF_DATAKIT, AF_DECnet, AF_DLI,
-    AF_ECMA, AF_FIREFOX, AF_HYLINK, AF_IMPLINK, AF_INET, AF_INET6, AF_IPX, AF_ISO, AF_LAT,
-    AF_MAX, AF_NS, AF_OSI, AF_PUP, AF_SNA, AF_UNIX, AF_UNKNOWN1, AF_UNSPEC, AF_VOICEVIEW,
-    INADDR_ANY, LPCSADDR_INFO, LPSOCKADDR, LPWSABUF, LPWSAMSG, PSOCKET_ADDRESS_LIST, SOCKADDR,
-    SOCKADDR_IN, WSABUF,
+    AF_DECnet, AF_APPLETALK, AF_ATM, AF_BAN, AF_BTH, AF_CCITT, AF_CHAOS, AF_DATAKIT, AF_DLI,
+    AF_ECMA, AF_FIREFOX, AF_HYLINK, AF_IMPLINK, AF_INET, AF_INET6, AF_IPX, AF_ISO, AF_LAT, AF_MAX,
+    AF_NS, AF_OSI, AF_PUP, AF_SNA, AF_UNIX, AF_UNKNOWN1, AF_UNSPEC, AF_VOICEVIEW, INADDR_ANY,
+    LPCSADDR_INFO, LPSOCKADDR, LPWSABUF, LPWSAMSG, PSOCKET_ADDRESS_LIST, SOCKADDR, SOCKADDR_IN,
+    WSABUF,
 };
 use shared::wtypesbase::{BLOB, LPBLOB};
 use um::minwinbase::OVERLAPPED;
@@ -42,17 +42,14 @@ pub type u_long = c_ulong;
 pub type u_int64 = __uint64;
 pub type SOCKET = UINT_PTR;
 pub const FD_SETSIZE: usize = 64;
-STRUCT!{struct fd_set {
+STRUCT! {struct fd_set {
     fd_count: u_int,
     fd_array: [SOCKET; FD_SETSIZE],
 }}
 extern "system" {
-    pub fn __WSAFDIsSet(
-        fd: SOCKET,
-        _: *mut fd_set,
-    ) -> c_int;
+    pub fn __WSAFDIsSet(fd: SOCKET, _: *mut fd_set) -> c_int;
 }
-STRUCT!{struct timeval {
+STRUCT! {struct timeval {
     tv_sec: c_long,
     tv_usec: c_long,
 }}
@@ -69,34 +66,34 @@ pub const SIOCGHIWAT: c_long = IOC_OUT | ((4 & IOCPARM_MASK) << 16) | (0x73 << 8
 pub const SIOCSLOWAT: c_long = IOC_IN | ((4 & IOCPARM_MASK) << 16) | (0x73 << 8) | 2;
 pub const SIOCGLOWAT: c_long = IOC_OUT | ((4 & IOCPARM_MASK) << 16) | (0x73 << 8) | 3;
 pub const SIOCATMARK: c_long = IOC_OUT | ((4 & IOCPARM_MASK) << 16) | (0x73 << 8) | 7;
-STRUCT!{struct hostent {
+STRUCT! {struct hostent {
     h_name: *mut c_char,
     h_aliases: *mut *mut c_char,
     h_addrtype: c_short,
     h_length: c_short,
     h_addr_list: *mut *mut c_char,
 }}
-STRUCT!{struct netent {
+STRUCT! {struct netent {
     n_name: *mut c_char,
     n_aliases: *mut *mut c_char,
     n_addrtype: c_short,
     n_net: u_long,
 }}
 #[cfg(target_pointer_width = "32")]
-STRUCT!{struct servent {
+STRUCT! {struct servent {
     s_name: *mut c_char,
     s_aliases: *mut *mut c_char,
     s_port: c_short,
     s_proto: *mut c_char,
 }}
 #[cfg(target_pointer_width = "64")]
-STRUCT!{struct servent {
+STRUCT! {struct servent {
     s_name: *mut c_char,
     s_aliases: *mut *mut c_char,
     s_proto: *mut c_char,
     s_port: c_short,
 }}
-STRUCT!{struct protoent {
+STRUCT! {struct protoent {
     p_name: *mut c_char,
     p_aliases: *mut *mut c_char,
     p_proto: c_short,
@@ -133,7 +130,7 @@ pub const ADDR_ANY: ULONG = INADDR_ANY;
 pub const WSADESCRIPTION_LEN: usize = 256;
 pub const WSASYS_STATUS_LEN: usize = 128;
 #[cfg(target_pointer_width = "32")]
-STRUCT!{struct WSADATA {
+STRUCT! {struct WSADATA {
     wVersion: WORD,
     wHighVersion: WORD,
     szDescription: [c_char; WSADESCRIPTION_LEN + 1],
@@ -143,7 +140,7 @@ STRUCT!{struct WSADATA {
     lpVendorInfo: *mut c_char,
 }}
 #[cfg(target_pointer_width = "64")]
-STRUCT!{struct WSADATA {
+STRUCT! {struct WSADATA {
     wVersion: WORD,
     wHighVersion: WORD,
     iMaxSockets: c_ushort,
@@ -187,7 +184,7 @@ pub const SO_PROTOCOL_INFOA: c_int = 0x2004;
 pub const SO_PROTOCOL_INFOW: c_int = 0x2005;
 pub const PVD_CONFIG: c_int = 0x3001;
 pub const SO_CONDITIONAL_ACCEPT: c_int = 0x3002;
-STRUCT!{struct sockproto {
+STRUCT! {struct sockproto {
     sp_family: u_short,
     sp_protocol: u_short,
 }}
@@ -218,7 +215,7 @@ pub const PF_ATM: c_int = AF_ATM;
 pub const PF_INET6: c_int = AF_INET6;
 pub const PF_BTH: c_int = AF_BTH;
 pub const PF_MAX: c_int = AF_MAX;
-STRUCT!{struct linger {
+STRUCT! {struct linger {
     l_onoff: u_short,
     l_linger: u_short,
 }}
@@ -260,68 +257,68 @@ pub const FD_ADDRESS_LIST_CHANGE: c_long = 1 << FD_ADDRESS_LIST_CHANGE_BIT;
 pub const FD_MAX_EVENTS: usize = 10;
 pub const FD_ALL_EVENTS: c_long = (1 << FD_MAX_EVENTS) - 1;
 pub const WSABASEERR: c_int = 10000;
-pub const WSAEINTR: c_int = WSABASEERR+4;
-pub const WSAEBADF: c_int = WSABASEERR+9;
-pub const WSAEACCES: c_int = WSABASEERR+13;
-pub const WSAEFAULT: c_int = WSABASEERR+14;
-pub const WSAEINVAL: c_int = WSABASEERR+22;
-pub const WSAEMFILE: c_int = WSABASEERR+24;
-pub const WSAEWOULDBLOCK: c_int = WSABASEERR+35;
-pub const WSAEINPROGRESS: c_int = WSABASEERR+36;
-pub const WSAEALREADY: c_int = WSABASEERR+37;
-pub const WSAENOTSOCK: c_int = WSABASEERR+38;
-pub const WSAEDESTADDRREQ: c_int = WSABASEERR+39;
-pub const WSAEMSGSIZE: c_int = WSABASEERR+40;
-pub const WSAEPROTOTYPE: c_int = WSABASEERR+41;
-pub const WSAENOPROTOOPT: c_int = WSABASEERR+42;
-pub const WSAEPROTONOSUPPORT: c_int = WSABASEERR+43;
-pub const WSAESOCKTNOSUPPORT: c_int = WSABASEERR+44;
-pub const WSAEOPNOTSUPP: c_int = WSABASEERR+45;
-pub const WSAEPFNOSUPPORT: c_int = WSABASEERR+46;
-pub const WSAEAFNOSUPPORT: c_int = WSABASEERR+47;
-pub const WSAEADDRINUSE: c_int = WSABASEERR+48;
-pub const WSAEADDRNOTAVAIL: c_int = WSABASEERR+49;
-pub const WSAENETDOWN: c_int = WSABASEERR+50;
-pub const WSAENETUNREACH: c_int = WSABASEERR+51;
-pub const WSAENETRESET: c_int = WSABASEERR+52;
-pub const WSAECONNABORTED: c_int = WSABASEERR+53;
-pub const WSAECONNRESET: c_int = WSABASEERR+54;
-pub const WSAENOBUFS: c_int = WSABASEERR+55;
-pub const WSAEISCONN: c_int = WSABASEERR+56;
-pub const WSAENOTCONN: c_int = WSABASEERR+57;
-pub const WSAESHUTDOWN: c_int = WSABASEERR+58;
-pub const WSAETOOMANYREFS: c_int = WSABASEERR+59;
-pub const WSAETIMEDOUT: c_int = WSABASEERR+60;
-pub const WSAECONNREFUSED: c_int = WSABASEERR+61;
-pub const WSAELOOP: c_int = WSABASEERR+62;
-pub const WSAENAMETOOLONG: c_int = WSABASEERR+63;
-pub const WSAEHOSTDOWN: c_int = WSABASEERR+64;
-pub const WSAEHOSTUNREACH: c_int = WSABASEERR+65;
-pub const WSAENOTEMPTY: c_int = WSABASEERR+66;
-pub const WSAEPROCLIM: c_int = WSABASEERR+67;
-pub const WSAEUSERS: c_int = WSABASEERR+68;
-pub const WSAEDQUOT: c_int = WSABASEERR+69;
-pub const WSAESTALE: c_int = WSABASEERR+70;
-pub const WSAEREMOTE: c_int = WSABASEERR+71;
-pub const WSASYSNOTREADY: c_int = WSABASEERR+91;
-pub const WSAVERNOTSUPPORTED: c_int = WSABASEERR+92;
-pub const WSANOTINITIALISED: c_int = WSABASEERR+93;
-pub const WSAEDISCON: c_int = WSABASEERR+101;
-pub const WSAENOMORE: c_int = WSABASEERR+102;
-pub const WSAECANCELLED: c_int = WSABASEERR+103;
-pub const WSAEINVALIDPROCTABLE: c_int = WSABASEERR+104;
-pub const WSAEINVALIDPROVIDER: c_int = WSABASEERR+105;
-pub const WSAEPROVIDERFAILEDINIT: c_int = WSABASEERR+106;
-pub const WSASYSCALLFAILURE: c_int = WSABASEERR+107;
-pub const WSASERVICE_NOT_FOUND: c_int = WSABASEERR+108;
-pub const WSATYPE_NOT_FOUND: c_int = WSABASEERR+109;
-pub const WSA_E_NO_MORE: c_int = WSABASEERR+110;
-pub const WSA_E_CANCELLED: c_int = WSABASEERR+111;
-pub const WSAEREFUSED: c_int = WSABASEERR+112;
-pub const WSAHOST_NOT_FOUND: c_int = WSABASEERR+1001;
-pub const WSATRY_AGAIN: c_int = WSABASEERR+1002;
-pub const WSANO_RECOVERY: c_int = WSABASEERR+1003;
-pub const WSANO_DATA: c_int = WSABASEERR+1004;
+pub const WSAEINTR: c_int = WSABASEERR + 4;
+pub const WSAEBADF: c_int = WSABASEERR + 9;
+pub const WSAEACCES: c_int = WSABASEERR + 13;
+pub const WSAEFAULT: c_int = WSABASEERR + 14;
+pub const WSAEINVAL: c_int = WSABASEERR + 22;
+pub const WSAEMFILE: c_int = WSABASEERR + 24;
+pub const WSAEWOULDBLOCK: c_int = WSABASEERR + 35;
+pub const WSAEINPROGRESS: c_int = WSABASEERR + 36;
+pub const WSAEALREADY: c_int = WSABASEERR + 37;
+pub const WSAENOTSOCK: c_int = WSABASEERR + 38;
+pub const WSAEDESTADDRREQ: c_int = WSABASEERR + 39;
+pub const WSAEMSGSIZE: c_int = WSABASEERR + 40;
+pub const WSAEPROTOTYPE: c_int = WSABASEERR + 41;
+pub const WSAENOPROTOOPT: c_int = WSABASEERR + 42;
+pub const WSAEPROTONOSUPPORT: c_int = WSABASEERR + 43;
+pub const WSAESOCKTNOSUPPORT: c_int = WSABASEERR + 44;
+pub const WSAEOPNOTSUPP: c_int = WSABASEERR + 45;
+pub const WSAEPFNOSUPPORT: c_int = WSABASEERR + 46;
+pub const WSAEAFNOSUPPORT: c_int = WSABASEERR + 47;
+pub const WSAEADDRINUSE: c_int = WSABASEERR + 48;
+pub const WSAEADDRNOTAVAIL: c_int = WSABASEERR + 49;
+pub const WSAENETDOWN: c_int = WSABASEERR + 50;
+pub const WSAENETUNREACH: c_int = WSABASEERR + 51;
+pub const WSAENETRESET: c_int = WSABASEERR + 52;
+pub const WSAECONNABORTED: c_int = WSABASEERR + 53;
+pub const WSAECONNRESET: c_int = WSABASEERR + 54;
+pub const WSAENOBUFS: c_int = WSABASEERR + 55;
+pub const WSAEISCONN: c_int = WSABASEERR + 56;
+pub const WSAENOTCONN: c_int = WSABASEERR + 57;
+pub const WSAESHUTDOWN: c_int = WSABASEERR + 58;
+pub const WSAETOOMANYREFS: c_int = WSABASEERR + 59;
+pub const WSAETIMEDOUT: c_int = WSABASEERR + 60;
+pub const WSAECONNREFUSED: c_int = WSABASEERR + 61;
+pub const WSAELOOP: c_int = WSABASEERR + 62;
+pub const WSAENAMETOOLONG: c_int = WSABASEERR + 63;
+pub const WSAEHOSTDOWN: c_int = WSABASEERR + 64;
+pub const WSAEHOSTUNREACH: c_int = WSABASEERR + 65;
+pub const WSAENOTEMPTY: c_int = WSABASEERR + 66;
+pub const WSAEPROCLIM: c_int = WSABASEERR + 67;
+pub const WSAEUSERS: c_int = WSABASEERR + 68;
+pub const WSAEDQUOT: c_int = WSABASEERR + 69;
+pub const WSAESTALE: c_int = WSABASEERR + 70;
+pub const WSAEREMOTE: c_int = WSABASEERR + 71;
+pub const WSASYSNOTREADY: c_int = WSABASEERR + 91;
+pub const WSAVERNOTSUPPORTED: c_int = WSABASEERR + 92;
+pub const WSANOTINITIALISED: c_int = WSABASEERR + 93;
+pub const WSAEDISCON: c_int = WSABASEERR + 101;
+pub const WSAENOMORE: c_int = WSABASEERR + 102;
+pub const WSAECANCELLED: c_int = WSABASEERR + 103;
+pub const WSAEINVALIDPROCTABLE: c_int = WSABASEERR + 104;
+pub const WSAEINVALIDPROVIDER: c_int = WSABASEERR + 105;
+pub const WSAEPROVIDERFAILEDINIT: c_int = WSABASEERR + 106;
+pub const WSASYSCALLFAILURE: c_int = WSABASEERR + 107;
+pub const WSASERVICE_NOT_FOUND: c_int = WSABASEERR + 108;
+pub const WSATYPE_NOT_FOUND: c_int = WSABASEERR + 109;
+pub const WSA_E_NO_MORE: c_int = WSABASEERR + 110;
+pub const WSA_E_CANCELLED: c_int = WSABASEERR + 111;
+pub const WSAEREFUSED: c_int = WSABASEERR + 112;
+pub const WSAHOST_NOT_FOUND: c_int = WSABASEERR + 1001;
+pub const WSATRY_AGAIN: c_int = WSABASEERR + 1002;
+pub const WSANO_RECOVERY: c_int = WSABASEERR + 1003;
+pub const WSANO_DATA: c_int = WSABASEERR + 1004;
 pub const WSA_QOS_RECEIVERS: c_int = WSABASEERR + 1005;
 pub const WSA_QOS_SENDERS: c_int = WSABASEERR + 1006;
 pub const WSA_QOS_NO_SENDERS: c_int = WSABASEERR + 1007;
@@ -376,7 +373,7 @@ pub const WSA_WAIT_EVENT_0: DWORD = WAIT_OBJECT_0;
 pub const WSA_WAIT_IO_COMPLETION: DWORD = WAIT_IO_COMPLETION;
 pub const WSA_WAIT_TIMEOUT: DWORD = WAIT_TIMEOUT;
 pub const WSA_INFINITE: DWORD = INFINITE;
-STRUCT!{struct QOS {
+STRUCT! {struct QOS {
     SendingFlowspec: FLOWSPEC,
     FLOWSPEC: FLOWSPEC,
     ProviderSpecific: WSABUF,
@@ -391,7 +388,7 @@ pub const SD_BOTH: c_int = 0x02;
 pub type GROUP = c_uint;
 pub const SG_UNCONSTRAINED_GROUP: GROUP = 0x01;
 pub const SG_CONSTRAINED_GROUP: GROUP = 0x02;
-STRUCT!{struct WSANETWORKEVENTS {
+STRUCT! {struct WSANETWORKEVENTS {
     lNetworkEvents: c_long,
     iErrorCode: [c_int; FD_MAX_EVENTS],
 }}
@@ -399,13 +396,13 @@ pub type LPWSANETWORKEVENTS = *mut WSANETWORKEVENTS;
 pub const MAX_PROTOCOL_CHAIN: usize = 7;
 pub const BASE_PROTOCOL: c_int = 1;
 pub const LAYERED_PROTOCOL: c_int = 0;
-STRUCT!{struct WSAPROTOCOLCHAIN {
+STRUCT! {struct WSAPROTOCOLCHAIN {
     ChainLen: c_int,
     ChainEntries: [DWORD; MAX_PROTOCOL_CHAIN],
 }}
 pub type LPWSAPROTOCOLCHAIN = *mut WSAPROTOCOLCHAIN;
 pub const WSAPROTOCOL_LEN: usize = 255;
-STRUCT!{struct WSAPROTOCOL_INFOA {
+STRUCT! {struct WSAPROTOCOL_INFOA {
     dwServiceFlags1: DWORD,
     dwServiceFlags2: DWORD,
     dwServiceFlags3: DWORD,
@@ -428,7 +425,7 @@ STRUCT!{struct WSAPROTOCOL_INFOA {
     szProtocol: [CHAR; WSAPROTOCOL_LEN + 1],
 }}
 pub type LPWSAPROTOCOL_INFOA = *mut WSAPROTOCOL_INFOA;
-STRUCT!{struct WSAPROTOCOL_INFOW {
+STRUCT! {struct WSAPROTOCOL_INFOW {
     dwServiceFlags1: DWORD,
     dwServiceFlags2: DWORD,
     dwServiceFlags3: DWORD,
@@ -490,7 +487,7 @@ pub const WSA_FLAG_MULTIPOINT_D_LEAF: DWORD = 0x10;
 pub const WSA_FLAG_ACCESS_SYSTEM_SECURITY: DWORD = 0x40;
 pub const WSA_FLAG_NO_HANDLE_INHERIT: DWORD = 0x80;
 pub const WSA_FLAG_REGISTERED_IO: DWORD = 0x100;
-FN!{stdcall LPCONDITIONPROC(
+FN! {stdcall LPCONDITIONPROC(
     lpCallerId: LPWSABUF,
     lpCallerData: LPWSABUF,
     lpSQOS: LPQOS,
@@ -500,13 +497,13 @@ FN!{stdcall LPCONDITIONPROC(
     g: *mut GROUP,
     dwCallbackData: DWORD,
 ) -> c_int}
-FN!{stdcall LPWSAOVERLAPPED_COMPLETION_ROUTINE(
+FN! {stdcall LPWSAOVERLAPPED_COMPLETION_ROUTINE(
     dwError: DWORD,
     cbTransferred: DWORD,
     lpOverlapped: LPWSAOVERLAPPED,
     dwFlags: DWORD,
 ) -> ()}
-ENUM!{enum WSACOMPLETIONTYPE {
+ENUM! {enum WSACOMPLETIONTYPE {
     NSP_NOTIFY_IMMEDIATELY = 0,
     NSP_NOTIFY_HWND,
     NSP_NOTIFY_EVENT,
@@ -515,31 +512,31 @@ ENUM!{enum WSACOMPLETIONTYPE {
 }}
 pub type PWSACOMPLETIONTYPE = *mut WSACOMPLETIONTYPE;
 pub type LPWSACOMPLETIONTYPE = *mut WSACOMPLETIONTYPE;
-STRUCT!{struct WSACOMPLETION_WindowMessage {
+STRUCT! {struct WSACOMPLETION_WindowMessage {
     hWnd: HWND,
     uMsg: UINT,
     context: WPARAM,
 }}
-STRUCT!{struct WSACOMPLETION_Event {
+STRUCT! {struct WSACOMPLETION_Event {
     lpOverlapped: LPWSAOVERLAPPED,
 }}
-STRUCT!{struct WSACOMPLETION_Apc {
+STRUCT! {struct WSACOMPLETION_Apc {
     lpOverlapped: LPWSAOVERLAPPED,
     lpfnCompletionProc: LPWSAOVERLAPPED_COMPLETION_ROUTINE,
 }}
-STRUCT!{struct WSACOMPLETION_Port {
+STRUCT! {struct WSACOMPLETION_Port {
     lpOverlapped: LPWSAOVERLAPPED,
     hPort: HANDLE,
     Key: ULONG_PTR,
 }}
-UNION!{union WSACOMPLETION_Parameter {
+UNION! {union WSACOMPLETION_Parameter {
     [usize; 3],
     WindowMessage WindowMessage_mut: WSACOMPLETION_WindowMessage,
     Event Event_mut: WSACOMPLETION_Event,
     Apc Apc_mut: WSACOMPLETION_Apc,
     Port Port_mut: WSACOMPLETION_Port,
 }}
-STRUCT!{struct WSACOMPLETION {
+STRUCT! {struct WSACOMPLETION {
     Type: WSACOMPLETIONTYPE,
     Parameters: WSACOMPLETION_Parameter,
 }}
@@ -582,25 +579,25 @@ pub const SERVICE_TYPE_VALUE_SAPID: &'static str = "SapId";
 pub const SERVICE_TYPE_VALUE_TCPPORT: &'static str = "TcpPort";
 pub const SERVICE_TYPE_VALUE_UDPPORT: &'static str = "UdpPort";
 pub const SERVICE_TYPE_VALUE_OBJECTID: &'static str = "ObjectId";
-STRUCT!{struct AFPROTOCOLS {
+STRUCT! {struct AFPROTOCOLS {
     iAddressFamily: INT,
     iProtocol: INT,
 }}
 pub type PAFPROTOCOLS = *mut AFPROTOCOLS;
 pub type LPAFPROTOCOLS = *mut AFPROTOCOLS;
-ENUM!{enum WSAECOMPARATOR {
+ENUM! {enum WSAECOMPARATOR {
     COMP_EQUAL = 0,
     COMP_NOTLESS,
 }}
 pub type PWSAECOMPARATOR = *mut WSAECOMPARATOR;
 pub type LPWSAECOMPARATOR = *mut WSAECOMPARATOR;
-STRUCT!{struct WSAVERSION {
+STRUCT! {struct WSAVERSION {
     dwVersion: DWORD,
     ecHow: WSAECOMPARATOR,
 }}
 pub type PWSAVERSION = *mut WSAVERSION;
 pub type LPWSAVERSION = *mut WSAVERSION;
-STRUCT!{struct WSAQUERYSETA {
+STRUCT! {struct WSAQUERYSETA {
     dwSize: DWORD,
     lpszServiceInstanceName: LPSTR,
     lpServiceClassId: LPGUID,
@@ -619,7 +616,7 @@ STRUCT!{struct WSAQUERYSETA {
 }}
 pub type PWSAQUERYSETA = *mut WSAQUERYSETA;
 pub type LPWSAQUERYSETA = *mut WSAQUERYSETA;
-STRUCT!{struct WSAQUERYSETW {
+STRUCT! {struct WSAQUERYSETW {
     dwSize: DWORD,
     lpszServiceInstanceName: LPWSTR,
     lpServiceClassId: LPGUID,
@@ -638,7 +635,7 @@ STRUCT!{struct WSAQUERYSETW {
 }}
 pub type PWSAQUERYSETW = *mut WSAQUERYSETW;
 pub type LPWSAQUERYSETW = *mut WSAQUERYSETW;
-STRUCT!{struct WSAQUERYSET2A {
+STRUCT! {struct WSAQUERYSET2A {
     dwSize: DWORD,
     lpszServiceInstanceName: LPSTR,
     lpVersion: LPWSAVERSION,
@@ -656,7 +653,7 @@ STRUCT!{struct WSAQUERYSET2A {
 }}
 pub type PWSAQUERYSET2A = *mut WSAQUERYSET2A;
 pub type LPWSAQUERYSET2A = *mut WSAQUERYSET2A;
-STRUCT!{struct WSAQUERYSET2W {
+STRUCT! {struct WSAQUERYSET2W {
     dwSize: DWORD,
     lpszServiceInstanceName: LPWSTR,
     lpVersion: LPWSAVERSION,
@@ -704,14 +701,14 @@ pub const RESULT_IS_ALIAS: DWORD = 0x0001;
 pub const RESULT_IS_ADDED: DWORD = 0x0010;
 pub const RESULT_IS_CHANGED: DWORD = 0x0020;
 pub const RESULT_IS_DELETED: DWORD = 0x0040;
-ENUM!{enum WSAESETSERVICEOP {
+ENUM! {enum WSAESETSERVICEOP {
     RNRSERVICE_REGISTER = 0,
     RNRSERVICE_DEREGISTER,
     RNRSERVICE_DELETE,
 }}
 pub type PWSAESETSERVICEOP = *mut WSAESETSERVICEOP;
 pub type LPWSAESETSERVICEOP = *mut WSAESETSERVICEOP;
-STRUCT!{struct WSANSCLASSINFOA {
+STRUCT! {struct WSANSCLASSINFOA {
     lpszName: LPSTR,
     dwNameSpace: DWORD,
     dwValueType: DWORD,
@@ -720,7 +717,7 @@ STRUCT!{struct WSANSCLASSINFOA {
 }}
 pub type PWSANSCLASSINFOA = *mut WSANSCLASSINFOA;
 pub type LPWSANSCLASSINFOA = *mut WSANSCLASSINFOA;
-STRUCT!{struct WSANSCLASSINFOW {
+STRUCT! {struct WSANSCLASSINFOW {
     lpszName: LPWSTR,
     dwNameSpace: DWORD,
     dwValueType: DWORD,
@@ -729,7 +726,7 @@ STRUCT!{struct WSANSCLASSINFOW {
 }}
 pub type PWSANSCLASSINFOW = *mut WSANSCLASSINFOW;
 pub type LPWSANSCLASSINFOW = *mut WSANSCLASSINFOW;
-STRUCT!{struct WSASERVICECLASSINFOA {
+STRUCT! {struct WSASERVICECLASSINFOA {
     lpServiceClassId: LPGUID,
     lpszServiceClassName: LPSTR,
     dwCount: DWORD,
@@ -737,7 +734,7 @@ STRUCT!{struct WSASERVICECLASSINFOA {
 }}
 pub type PWSASERVICECLASSINFOA = *mut WSASERVICECLASSINFOA;
 pub type LPWSASERVICECLASSINFOA = *mut WSASERVICECLASSINFOA;
-STRUCT!{struct WSASERVICECLASSINFOW {
+STRUCT! {struct WSASERVICECLASSINFOW {
     lpServiceClassId: LPGUID,
     lpszServiceClassName: LPWSTR,
     dwCount: DWORD,
@@ -745,7 +742,7 @@ STRUCT!{struct WSASERVICECLASSINFOW {
 }}
 pub type PWSASERVICECLASSINFOW = *mut WSASERVICECLASSINFOW;
 pub type LPWSASERVICECLASSINFOW = *mut WSASERVICECLASSINFOW;
-STRUCT!{struct WSANAMESPACE_INFOA {
+STRUCT! {struct WSANAMESPACE_INFOA {
     NSProviderId: GUID,
     dwNameSpace: DWORD,
     fActive: BOOL,
@@ -754,7 +751,7 @@ STRUCT!{struct WSANAMESPACE_INFOA {
 }}
 pub type PWSANAMESPACE_INFOA = *mut WSANAMESPACE_INFOA;
 pub type LPWSANAMESPACE_INFOA = *mut WSANAMESPACE_INFOA;
-STRUCT!{struct WSANAMESPACE_INFOW {
+STRUCT! {struct WSANAMESPACE_INFOW {
     NSProviderId: GUID,
     dwNameSpace: DWORD,
     fActive: BOOL,
@@ -763,7 +760,7 @@ STRUCT!{struct WSANAMESPACE_INFOW {
 }}
 pub type PWSANAMESPACE_INFOW = *mut WSANAMESPACE_INFOW;
 pub type LPWSANAMESPACE_INFOW = *mut WSANAMESPACE_INFOW;
-STRUCT!{struct WSANAMESPACE_INFOEXA {
+STRUCT! {struct WSANAMESPACE_INFOEXA {
     NSProviderId: GUID,
     dwNameSpace: DWORD,
     fActive: BOOL,
@@ -773,7 +770,7 @@ STRUCT!{struct WSANAMESPACE_INFOEXA {
 }}
 pub type PWSANAMESPACE_INFOEXA = *mut WSANAMESPACE_INFOEXA;
 pub type LPWSANAMESPACE_INFOEXA = *mut WSANAMESPACE_INFOEXA;
-STRUCT!{struct WSANAMESPACE_INFOEXW {
+STRUCT! {struct WSANAMESPACE_INFOEXW {
     NSProviderId: GUID,
     dwNameSpace: DWORD,
     fActive: BOOL,
@@ -793,7 +790,7 @@ pub const POLLWRBAND: SHORT = 0x0020;
 pub const POLLERR: SHORT = 0x0001;
 pub const POLLHUP: SHORT = 0x0002;
 pub const POLLNVAL: SHORT = 0x0004;
-STRUCT!{struct WSAPOLLFD {
+STRUCT! {struct WSAPOLLFD {
     fd: SOCKET,
     events: SHORT,
     revents: SHORT,
@@ -801,38 +798,13 @@ STRUCT!{struct WSAPOLLFD {
 pub type PWSAPOLLFD = *mut WSAPOLLFD;
 pub type LPWSAPOLLFD = *mut WSAPOLLFD;
 extern "system" {
-    pub fn accept(
-        s: SOCKET,
-        addr: *mut SOCKADDR,
-        addrlen: *mut c_int,
-    ) -> SOCKET;
-    pub fn bind(s: SOCKET,
-        name: *const SOCKADDR,
-        namelen: c_int,
-    ) -> c_int;
-    pub fn closesocket(
-        s: SOCKET,
-    ) -> c_int;
-    pub fn connect(
-        s: SOCKET,
-        name: *const SOCKADDR,
-        namelen: c_int,
-    ) -> c_int;
-    pub fn ioctlsocket(
-        s: SOCKET,
-        cmd: c_long,
-        argp: *mut u_long,
-    ) -> c_int;
-    pub fn getpeername(
-        s: SOCKET,
-        name: *mut SOCKADDR,
-        namelen: *mut c_int,
-    ) -> c_int;
-    pub fn getsockname(
-        s: SOCKET,
-        name: *mut SOCKADDR,
-        namelen: *mut c_int,
-    ) -> c_int;
+    pub fn accept(s: SOCKET, addr: *mut SOCKADDR, addrlen: *mut c_int) -> SOCKET;
+    pub fn bind(s: SOCKET, name: *const SOCKADDR, namelen: c_int) -> c_int;
+    pub fn closesocket(s: SOCKET) -> c_int;
+    pub fn connect(s: SOCKET, name: *const SOCKADDR, namelen: c_int) -> c_int;
+    pub fn ioctlsocket(s: SOCKET, cmd: c_long, argp: *mut u_long) -> c_int;
+    pub fn getpeername(s: SOCKET, name: *mut SOCKADDR, namelen: *mut c_int) -> c_int;
+    pub fn getsockname(s: SOCKET, name: *mut SOCKADDR, namelen: *mut c_int) -> c_int;
     pub fn getsockopt(
         s: SOCKET,
         level: c_int,
@@ -840,30 +812,28 @@ extern "system" {
         optval: *mut c_char,
         optlen: *mut c_int,
     ) -> c_int;
-    pub fn htonl(
-        hostlong: u_long,
-    ) -> u_long;
-    pub fn htons(
-        hostshort: u_short,
-    ) -> u_short;
-    pub fn inet_addr(
-        cp: *const c_char,
-    ) -> c_ulong;
-    pub fn inet_ntoa(
-        _in: in_addr,
-    ) -> *mut c_char;
+    pub fn htonl(hostlong: u_long) -> u_long;
+    pub fn htons(hostshort: u_short) -> u_short;
+    pub fn inet_addr(cp: *const c_char) -> c_ulong;
+    pub fn inet_ntoa(_in: in_addr) -> *mut c_char;
 }
 #[inline]
 pub fn _WS2_32_WINSOCK_SWAP_LONG(l: __uint32) -> __uint32 {
-    ((l >> 24) & 0x000000FF) | ((l >> 8) & 0x0000FF00) | ((l << 8) & 0x00FF0000)
-    | ((l << 24) & 0xFF000000)
+    ((l >> 24) & 0x000000FF)
+        | ((l >> 8) & 0x0000FF00)
+        | ((l << 8) & 0x00FF0000)
+        | ((l << 24) & 0xFF000000)
 }
 #[inline]
 pub fn _WS2_32_WINSOCK_SWAP_LONGLONG(l: __uint64) -> __uint64 {
-    ((l >> 56) & 0x00000000000000FF) | ((l >> 40) & 0x000000000000FF00)
-    | ((l >> 24) & 0x0000000000FF0000) | ((l >> 8) & 0x00000000FF000000)
-    | ((l << 8) & 0x000000FF00000000) | ((l << 24) & 0x0000FF0000000000)
-    | ((l << 40) & 0x00FF000000000000) | ((l << 56) & 0xFF00000000000000)
+    ((l >> 56) & 0x00000000000000FF)
+        | ((l >> 40) & 0x000000000000FF00)
+        | ((l >> 24) & 0x0000000000FF0000)
+        | ((l >> 8) & 0x00000000FF000000)
+        | ((l << 8) & 0x000000FF00000000)
+        | ((l << 24) & 0x0000FF0000000000)
+        | ((l << 40) & 0x00FF000000000000)
+        | ((l << 56) & 0xFF00000000000000)
 }
 #[inline]
 pub fn htonll(Value: __uint64) -> __uint64 {
@@ -894,22 +864,10 @@ pub fn ntohd(Value: __uint64) -> c_double {
     unsafe { ::core::mem::transmute(Tempval) }
 }
 extern "system" {
-    pub fn listen(
-        s: SOCKET,
-        backlog: c_int,
-    ) -> c_int;
-    pub fn ntohl(
-        netlong: u_long,
-    ) -> u_long;
-    pub fn ntohs(
-        netshort: u_short,
-    ) -> u_short;
-    pub fn recv(
-        s: SOCKET,
-        buf: *mut c_char,
-        len: c_int,
-        flags: c_int,
-    ) -> c_int;
+    pub fn listen(s: SOCKET, backlog: c_int) -> c_int;
+    pub fn ntohl(netlong: u_long) -> u_long;
+    pub fn ntohs(netshort: u_short) -> u_short;
+    pub fn recv(s: SOCKET, buf: *mut c_char, len: c_int, flags: c_int) -> c_int;
     pub fn recvfrom(
         s: SOCKET,
         buf: *mut c_char,
@@ -925,12 +883,7 @@ extern "system" {
         exceptfds: *mut fd_set,
         timeout: *const timeval,
     ) -> c_int;
-    pub fn send(
-        s: SOCKET,
-        buf: *const c_char,
-        len: c_int,
-        flags: c_int,
-    ) -> c_int;
+    pub fn send(s: SOCKET, buf: *const c_char, len: c_int, flags: c_int) -> c_int;
     pub fn sendto(
         s: SOCKET,
         buf: *const c_char,
@@ -946,59 +899,23 @@ extern "system" {
         optval: *const c_char,
         optlen: c_int,
     ) -> c_int;
-    pub fn shutdown(
-        s: SOCKET,
-        how: c_int,
-    ) -> c_int;
-    pub fn socket(
-        af: c_int,
-        _type: c_int,
-        protocol: c_int,
-    ) -> SOCKET;
-    pub fn gethostbyaddr(
-        addr: *const c_char,
-        len: c_int,
-        _type: c_int,
-    ) -> *mut hostent;
-    pub fn gethostbyname(
-        name: *const c_char,
-    ) -> *mut hostent;
-    pub fn gethostname(
-        name: *mut c_char,
-        namelen: c_int,
-    ) -> c_int;
-    pub fn GetHostNameW(
-        name: PWSTR,
-        namelen: c_int,
-    ) -> c_int;
-    pub fn getservbyport(
-        port: c_int,
-        proto: *const c_char,
-    ) -> *mut servent;
-    pub fn getservbyname(
-        name: *const c_char,
-        proto: *const c_char,
-    ) -> *mut servent;
-    pub fn getprotobynumber(
-        number: c_int,
-    ) -> *mut protoent;
-    pub fn getprotobyname(
-        name: *const c_char,
-    ) -> *mut protoent;
-    pub fn WSAStartup(
-        wVersionRequested: WORD,
-        lpWSAData: LPWSADATA,
-    ) -> c_int;
+    pub fn shutdown(s: SOCKET, how: c_int) -> c_int;
+    pub fn socket(af: c_int, _type: c_int, protocol: c_int) -> SOCKET;
+    pub fn gethostbyaddr(addr: *const c_char, len: c_int, _type: c_int) -> *mut hostent;
+    pub fn gethostbyname(name: *const c_char) -> *mut hostent;
+    pub fn gethostname(name: *mut c_char, namelen: c_int) -> c_int;
+    pub fn GetHostNameW(name: PWSTR, namelen: c_int) -> c_int;
+    pub fn getservbyport(port: c_int, proto: *const c_char) -> *mut servent;
+    pub fn getservbyname(name: *const c_char, proto: *const c_char) -> *mut servent;
+    pub fn getprotobynumber(number: c_int) -> *mut protoent;
+    pub fn getprotobyname(name: *const c_char) -> *mut protoent;
+    pub fn WSAStartup(wVersionRequested: WORD, lpWSAData: LPWSADATA) -> c_int;
     pub fn WSACleanup() -> c_int;
-    pub fn WSASetLastError(
-        iError: c_int,
-    );
+    pub fn WSASetLastError(iError: c_int);
     pub fn WSAGetLastError() -> c_int;
     pub fn WSAIsBlocking() -> BOOL;
     pub fn WSAUnhookBlockingHook() -> c_int;
-    pub fn WSASetBlockingHook(
-        lpBlockFunc: FARPROC,
-    ) -> FARPROC;
+    pub fn WSASetBlockingHook(lpBlockFunc: FARPROC) -> FARPROC;
     pub fn WSACancelBlockingCall() -> c_int;
     pub fn WSAAsyncGetServByName(
         hWnd: HWND,
@@ -1046,15 +963,8 @@ extern "system" {
         buf: *mut c_char,
         buflen: c_int,
     ) -> HANDLE;
-    pub fn WSACancelAsyncRequest(
-        hAsyncTaskHandle: HANDLE,
-    ) -> c_int;
-    pub fn WSAAsyncSelect(
-        s: SOCKET,
-        hWnd: HWND,
-        wMsg: u_int,
-        lEvent: c_long,
-    ) -> c_int;
+    pub fn WSACancelAsyncRequest(hAsyncTaskHandle: HANDLE) -> c_int;
+    pub fn WSAAsyncSelect(s: SOCKET, hWnd: HWND, wMsg: u_int, lEvent: c_long) -> c_int;
     pub fn WSAAccept(
         s: SOCKET,
         addr: *mut SOCKADDR,
@@ -1062,9 +972,7 @@ extern "system" {
         lpfnCondition: LPCONDITIONPROC,
         dwCallbackData: DWORD_PTR,
     ) -> SOCKET;
-    pub fn WSACloseEvent(
-        hEvent: WSAEVENT,
-    ) -> BOOL;
+    pub fn WSACloseEvent(hEvent: WSAEVENT) -> BOOL;
     pub fn WSAConnect(
         s: SOCKET,
         name: *const SOCKADDR,
@@ -1132,11 +1040,7 @@ extern "system" {
         lpProtocolBuffer: LPWSAPROTOCOL_INFOW,
         lpdwBufferLength: LPDWORD,
     ) -> c_int;
-    pub fn WSAEventSelect(
-        s: SOCKET,
-        hEventObject: WSAEVENT,
-        lNetworkEvents: c_long,
-    ) -> c_int;
+    pub fn WSAEventSelect(s: SOCKET, hEventObject: WSAEVENT, lNetworkEvents: c_long) -> c_int;
     pub fn WSAGetOverlappedResult(
         s: SOCKET,
         lpOverlapped: LPWSAOVERLAPPED,
@@ -1144,20 +1048,9 @@ extern "system" {
         fWait: BOOL,
         lpdwFlags: LPDWORD,
     ) -> BOOL;
-    pub fn WSAGetQOSByName(
-        s: SOCKET,
-        lpQOSName: LPWSABUF,
-        lpQOS: LPQOS,
-    ) -> BOOL;
-    pub fn WSAHtonl(
-        s: SOCKET,
-        hostlong: u_long,
-        lpnetlong: *mut u_long,
-    ) -> c_int;
-    pub fn WSAHtons(s: SOCKET,
-        hostshort: u_short,
-        lpnetshort: *mut u_short,
-    ) -> c_int;
+    pub fn WSAGetQOSByName(s: SOCKET, lpQOSName: LPWSABUF, lpQOS: LPQOS) -> BOOL;
+    pub fn WSAHtonl(s: SOCKET, hostlong: u_long, lpnetlong: *mut u_long) -> c_int;
+    pub fn WSAHtons(s: SOCKET, hostshort: u_short, lpnetshort: *mut u_short) -> c_int;
     pub fn WSAIoctl(
         s: SOCKET,
         dwIoControlCode: DWORD,
@@ -1179,16 +1072,8 @@ extern "system" {
         lpGQOS: LPQOS,
         dwFlags: DWORD,
     ) -> SOCKET;
-    pub fn WSANtohl(
-        s: SOCKET,
-        netlong: u_long,
-        lphostlong: *mut c_long,
-    ) -> c_int;
-    pub fn WSANtohs(
-        s: SOCKET,
-        netshort: u_short,
-        lphostshort: *mut c_short,
-    ) -> c_int;
+    pub fn WSANtohl(s: SOCKET, netlong: u_long, lphostlong: *mut c_long) -> c_int;
+    pub fn WSANtohs(s: SOCKET, netshort: u_short, lphostshort: *mut c_short) -> c_int;
     pub fn WSARecv(
         s: SOCKET,
         lpBuffers: LPWSABUF,
@@ -1198,10 +1083,7 @@ extern "system" {
         lpOverlapped: LPWSAOVERLAPPED,
         lpCompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE,
     ) -> c_int;
-    pub fn WSARecvDisconnect(
-        s: SOCKET,
-        lpInboundDisconnectData: LPWSABUF,
-    ) -> c_int;
+    pub fn WSARecvDisconnect(s: SOCKET, lpInboundDisconnectData: LPWSABUF) -> c_int;
     pub fn WSARecvFrom(
         s: SOCKET,
         lpBuffers: LPWSABUF,
@@ -1213,9 +1095,7 @@ extern "system" {
         lpOverlapped: LPWSAOVERLAPPED,
         lpCompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE,
     ) -> c_int;
-    pub fn WSAResetEvent(
-        hEvent: WSAEVENT,
-    ) -> BOOL;
+    pub fn WSAResetEvent(hEvent: WSAEVENT) -> BOOL;
     pub fn WSASend(
         s: SOCKET,
         lpBuffers: LPWSABUF,
@@ -1233,10 +1113,7 @@ extern "system" {
         lpOverlapped: LPWSAOVERLAPPED,
         lpCompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE,
     ) -> c_int;
-    pub fn WSASendDisconnect(
-        s: SOCKET,
-        lpOutboundDisconnectData: LPWSABUF,
-    ) -> c_int;
+    pub fn WSASendDisconnect(s: SOCKET, lpOutboundDisconnectData: LPWSABUF) -> c_int;
     pub fn WSASendTo(
         s: SOCKET,
         lpBuffers: LPWSABUF,
@@ -1248,9 +1125,7 @@ extern "system" {
         lpOverlapped: LPWSAOVERLAPPED,
         lpCompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE,
     ) -> c_int;
-    pub fn WSASetEvent(
-        hEvent: WSAEVENT,
-    ) -> BOOL;
+    pub fn WSASetEvent(hEvent: WSAEVENT) -> BOOL;
     pub fn WSASocketA(
         af: c_int,
         _type: c_int,
@@ -1334,18 +1209,10 @@ extern "system" {
         lpcbBytesReturned: LPDWORD,
         lpCompletion: LPWSACOMPLETION,
     ) -> INT;
-    pub fn WSALookupServiceEnd(
-        hLookup: HANDLE,
-    ) -> INT;
-    pub fn WSAInstallServiceClassA(
-        lpServiceClassInfo: LPWSASERVICECLASSINFOA,
-    ) -> INT;
-    pub fn WSAInstallServiceClassW(
-        lpServiceClassInfo: LPWSASERVICECLASSINFOW,
-    ) -> INT;
-    pub fn WSARemoveServiceClass(
-        lpServiceClassId: LPGUID,
-    ) -> INT;
+    pub fn WSALookupServiceEnd(hLookup: HANDLE) -> INT;
+    pub fn WSAInstallServiceClassA(lpServiceClassInfo: LPWSASERVICECLASSINFOA) -> INT;
+    pub fn WSAInstallServiceClassW(lpServiceClassInfo: LPWSASERVICECLASSINFOW) -> INT;
+    pub fn WSARemoveServiceClass(lpServiceClassId: LPGUID) -> INT;
     pub fn WSAGetServiceClassInfoA(
         lpProviderId: LPGUID,
         lpServiceClassId: LPGUID,
@@ -1399,11 +1266,7 @@ extern "system" {
         lpOverlapped: LPWSAOVERLAPPED,
         lpCompletionRoutine: LPWSAOVERLAPPED_COMPLETION_ROUTINE,
     ) -> INT;
-    pub fn WSAPoll(
-        fdArray: LPWSAPOLLFD,
-        fds: ULONG,
-        timeout: INT,
-    ) -> c_int;
+    pub fn WSAPoll(fdArray: LPWSAPOLLFD, fds: ULONG, timeout: INT) -> c_int;
 }
 pub type LPSOCKADDR_IN = *mut SOCKADDR_IN;
 pub type LINGER = linger;

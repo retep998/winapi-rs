@@ -15,7 +15,7 @@ extern "system" {
         Buffer: *mut LPBYTE,
     ) -> NET_API_STATUS;
 }
-STRUCT!{struct STAT_WORKSTATION_0 {
+STRUCT! {struct STAT_WORKSTATION_0 {
     StatisticsStartTime: LARGE_INTEGER,
     BytesReceived: LARGE_INTEGER,
     SmbsReceived: LARGE_INTEGER,
@@ -59,7 +59,7 @@ STRUCT!{struct STAT_WORKSTATION_0 {
 }}
 pub type PSTAT_WORKSTATION_0 = *mut STAT_WORKSTATION_0;
 pub type LPSTAT_WORKSTATION_0 = *mut STAT_WORKSTATION_0;
-STRUCT!{struct STAT_SERVER_0 {
+STRUCT! {struct STAT_SERVER_0 {
     sts0_start: DWORD,
     sts0_fopens: DWORD,
     sts0_devopens: DWORD,

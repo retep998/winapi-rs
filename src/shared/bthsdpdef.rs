@@ -6,11 +6,11 @@
 use shared::guiddef::GUID;
 use shared::minwindef::{ULONG, USHORT};
 use shared::ntdef::{LONGLONG, ULONGLONG};
-STRUCT!{struct SDP_LARGE_INTEGER_16 {
+STRUCT! {struct SDP_LARGE_INTEGER_16 {
     LowPart: ULONGLONG,
     HighPart: LONGLONG,
 }}
-STRUCT!{struct SDP_ULARGE_INTEGER_16 {
+STRUCT! {struct SDP_ULARGE_INTEGER_16 {
     LowPart: ULONGLONG,
     HighPart: ULONGLONG,
 }}
@@ -18,13 +18,13 @@ pub type PSDP_ULARGE_INTEGER_16 = *mut SDP_ULARGE_INTEGER_16;
 pub type LPSDP_ULARGE_INTEGER_16 = *mut SDP_ULARGE_INTEGER_16;
 pub type PSDP_LARGE_INTEGER_16 = *mut SDP_LARGE_INTEGER_16;
 pub type LPSDP_LARGE_INTEGER_16 = *mut SDP_LARGE_INTEGER_16;
-ENUM!{enum NodeContainerType {
+ENUM! {enum NodeContainerType {
     NodeContainerTypeSequence,
     NodeContainerTypeAlternative,
 }}
 pub type SDP_ERROR = USHORT;
 pub type PSDP_ERROR = *mut USHORT;
-ENUM!{enum SDP_TYPE {
+ENUM! {enum SDP_TYPE {
     SDP_TYPE_NIL = 0x00,
     SDP_TYPE_UINT = 0x01,
     SDP_TYPE_INT = 0x02,
@@ -36,7 +36,7 @@ ENUM!{enum SDP_TYPE {
     SDP_TYPE_URL = 0x08,
     SDP_TYPE_CONTAINER = 0x20,
 }}
-ENUM!{enum SDP_SPECIFICTYPE {
+ENUM! {enum SDP_SPECIFICTYPE {
     SDP_ST_NONE = 0x0000,
     SDP_ST_UINT8 = 0x0010,
     SDP_ST_UINT16 = 0x0110,
@@ -52,17 +52,17 @@ ENUM!{enum SDP_SPECIFICTYPE {
     SDP_ST_UUID32 = 0x0220,
     SDP_ST_UUID128 = 0x0430,
 }}
-STRUCT!{struct SdpAttributeRange {
+STRUCT! {struct SdpAttributeRange {
     minAttribute: USHORT,
     maxAttribute: USHORT,
 }}
-UNION!{union SdpQueryUuidUnion {
+UNION! {union SdpQueryUuidUnion {
     [u32; 4],
     uuid128 uuid128_mut: GUID,
     uuid32 uuid32_mut: ULONG,
     uuid16 uuid16_mut: USHORT,
 }}
-STRUCT!{struct SdpQueryUuid {
+STRUCT! {struct SdpQueryUuid {
     u: SdpQueryUuidUnion,
     uuidType: USHORT,
 }}

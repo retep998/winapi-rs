@@ -8,11 +8,11 @@ use shared::minwindef::{DWORD, PUCHAR, UCHAR, ULONG, USHORT, WORD};
 use um::winnt::HANDLE;
 pub const NCBNAMSZ: usize = 16;
 pub const MAX_LANA: usize = 254;
-FN!{stdcall PFPOST(
+FN! {stdcall PFPOST(
     *mut NCB,
 ) -> ()}
 #[cfg(target_pointer_width = "64")]
-STRUCT!{struct NCB {
+STRUCT! {struct NCB {
     ncb_command: UCHAR,
     ncb_retcode: UCHAR,
     ncb_lsn: UCHAR,
@@ -30,7 +30,7 @@ STRUCT!{struct NCB {
     ncb_event: HANDLE,
 }}
 #[cfg(target_pointer_width = "32")]
-STRUCT!{struct NCB {
+STRUCT! {struct NCB {
     ncb_command: UCHAR,
     ncb_retcode: UCHAR,
     ncb_lsn: UCHAR,
@@ -48,7 +48,7 @@ STRUCT!{struct NCB {
     ncb_event: HANDLE,
 }}
 pub type PNCB = *mut NCB;
-STRUCT!{struct ADAPTER_STATUS {
+STRUCT! {struct ADAPTER_STATUS {
     adapter_address: [UCHAR; 6],
     rev_major: UCHAR,
     reserved0: UCHAR,
@@ -78,7 +78,7 @@ STRUCT!{struct ADAPTER_STATUS {
     name_count: WORD,
 }}
 pub type PADAPTER_STATUS = *mut ADAPTER_STATUS;
-STRUCT!{struct NAME_BUFFER {
+STRUCT! {struct NAME_BUFFER {
     name: [UCHAR; NCBNAMSZ],
     name_num: UCHAR,
     name_flags: UCHAR,
@@ -92,14 +92,14 @@ pub const REGISTERED: UCHAR = 0x04;
 pub const DEREGISTERED: UCHAR = 0x05;
 pub const DUPLICATE: UCHAR = 0x06;
 pub const DUPLICATE_DEREG: UCHAR = 0x07;
-STRUCT!{struct SESSION_HEADER {
+STRUCT! {struct SESSION_HEADER {
     sess_name: UCHAR,
     num_sess: UCHAR,
     rcv_dg_outstanding: UCHAR,
     rcv_any_outstanding: UCHAR,
 }}
 pub type PSESSION_HEADER = *mut SESSION_HEADER;
-STRUCT!{struct SESSION_BUFFER {
+STRUCT! {struct SESSION_BUFFER {
     lsn: UCHAR,
     state: UCHAR,
     local_name: [UCHAR; NCBNAMSZ],
@@ -114,18 +114,18 @@ pub const SESSION_ESTABLISHED: UCHAR = 0x03;
 pub const HANGUP_PENDING: UCHAR = 0x04;
 pub const HANGUP_COMPLETE: UCHAR = 0x05;
 pub const SESSION_ABORTED: UCHAR = 0x06;
-STRUCT!{struct LANA_ENUM {
+STRUCT! {struct LANA_ENUM {
     length: UCHAR,
     lana: [UCHAR; MAX_LANA + 1],
 }}
 pub type PLANA_ENUM = *mut LANA_ENUM;
-STRUCT!{struct FIND_NAME_HEADER {
+STRUCT! {struct FIND_NAME_HEADER {
     node_count: WORD,
     reserved: UCHAR,
     unique_group: UCHAR,
 }}
 pub type PFIND_NAME_HEADER = *mut FIND_NAME_HEADER;
-STRUCT!{struct FIND_NAME_BUFFER {
+STRUCT! {struct FIND_NAME_BUFFER {
     length: UCHAR,
     access_control: UCHAR,
     frame_control: UCHAR,
@@ -134,7 +134,7 @@ STRUCT!{struct FIND_NAME_BUFFER {
     routing_info: [UCHAR; 18],
 }}
 pub type PFIND_NAME_BUFFER = *mut FIND_NAME_BUFFER;
-STRUCT!{struct ACTION_HEADER {
+STRUCT! {struct ACTION_HEADER {
     transport_id: ULONG,
     action_code: USHORT,
     reserved: USHORT,
@@ -208,7 +208,5 @@ pub const NRC_OPENERR: UCHAR = 0x3f;
 pub const NRC_SYSTEM: UCHAR = 0x40;
 pub const NRC_PENDING: UCHAR = 0xff;
 extern "system" {
-    pub fn Netbios(
-        pncb: PNCB,
-    ) -> UCHAR;
+    pub fn Netbios(pncb: PNCB) -> UCHAR;
 }

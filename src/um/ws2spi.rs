@@ -15,33 +15,33 @@ use shared::ws2def::{LPSOCKADDR, LPWSABUF, SOCKADDR};
 use shared::wtypesbase::LPBLOB;
 use um::winnt::{HANDLE, LPCWSTR, LPWSTR, PVOID, WCHAR};
 use um::winsock2::{
-    GROUP, LPCONDITIONPROC, LPQOS, LPWSACOMPLETION, LPWSANETWORKEVENTS, LPWSAOVERLAPPED,
-    LPWSAOVERLAPPED_COMPLETION_ROUTINE, LPWSAPROTOCOL_INFOW, LPWSAQUERYSET2W, LPWSAQUERYSETW,
-    LPWSASERVICECLASSINFOW, SOCKET, WSAESETSERVICEOP, WSAEVENT, fd_set, timeval,
+    fd_set, timeval, GROUP, LPCONDITIONPROC, LPQOS, LPWSACOMPLETION, LPWSANETWORKEVENTS,
+    LPWSAOVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE, LPWSAPROTOCOL_INFOW, LPWSAQUERYSET2W,
+    LPWSAQUERYSETW, LPWSASERVICECLASSINFOW, SOCKET, WSAESETSERVICEOP, WSAEVENT,
 };
 #[cfg(target_pointer_width = "64")]
 use um::winsock2::{LPWSANAMESPACE_INFOEXW, LPWSANAMESPACE_INFOW};
 use vc::vcruntime::size_t;
 pub const WSPDESCRIPTION_LEN: usize = 255;
 pub const WSS_OPERATION_IN_PROGRESS: ULONG_PTR = 0x00000103;
-STRUCT!{struct WSPDATA {
+STRUCT! {struct WSPDATA {
     wVersion: WORD,
     wHighVersion: WORD,
     szDescription: [WCHAR; WSPDESCRIPTION_LEN + 1],
 }}
 pub type LPWSPDATA = *mut WSPDATA;
-STRUCT!{struct WSATHREADID {
+STRUCT! {struct WSATHREADID {
     ThreadHandle: HANDLE,
     Reserved: DWORD_PTR,
 }}
 pub type LPWSATHREADID = *mut WSATHREADID;
-FN!{stdcall LPBLOCKINGCALLBACK(
+FN! {stdcall LPBLOCKINGCALLBACK(
     dwContext: DWORD_PTR,
 ) -> BOOL}
-FN!{stdcall LPWSAUSERAPC(
+FN! {stdcall LPWSAUSERAPC(
     dwContext: DWORD_PTR,
 ) -> ()}
-FN!{stdcall LPWSPACCEPT(
+FN! {stdcall LPWSPACCEPT(
     s: SOCKET,
     addr: *mut SOCKADDR,
     addrlen: LPINT,
@@ -49,7 +49,7 @@ FN!{stdcall LPWSPACCEPT(
     dwCallbackData: DWORD_PTR,
     lpErrno: LPINT,
 ) -> SOCKET}
-FN!{stdcall LPWSPADDRESSTOSTRING(
+FN! {stdcall LPWSPADDRESSTOSTRING(
     lpsaAddress: LPSOCKADDR,
     dwAddressLength: DWORD,
     lpProtocolInfo: LPWSAPROTOCOL_INFOW,
@@ -57,30 +57,30 @@ FN!{stdcall LPWSPADDRESSTOSTRING(
     lpdwAddressStringLength: LPDWORD,
     lpErrno: LPINT,
 ) -> INT}
-FN!{stdcall LPWSPASYNCSELECT(
+FN! {stdcall LPWSPASYNCSELECT(
     s: SOCKET,
     hWnd: HWND,
     wMsg: c_uint,
     lEvent: c_long,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPBIND(
+FN! {stdcall LPWSPBIND(
     s: SOCKET,
     name: *mut SOCKADDR,
     namelen: c_int,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPCANCELBLOCKINGCALL(
+FN! {stdcall LPWSPCANCELBLOCKINGCALL(
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPCLEANUP(
+FN! {stdcall LPWSPCLEANUP(
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPCLOSESOCKET(
+FN! {stdcall LPWSPCLOSESOCKET(
     s: SOCKET,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPCONNECT(
+FN! {stdcall LPWSPCONNECT(
     s: SOCKET,
     name: *mut SOCKADDR,
     namelen: c_int,
@@ -90,25 +90,25 @@ FN!{stdcall LPWSPCONNECT(
     lpGQOS: LPQOS,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPDUPLICATESOCKET(
+FN! {stdcall LPWSPDUPLICATESOCKET(
     s: SOCKET,
     dwProcessId: DWORD,
     lpProtocolInfo: LPWSAPROTOCOL_INFOW,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPENUMNETWORKEVENTS(
+FN! {stdcall LPWSPENUMNETWORKEVENTS(
     s: SOCKET,
     hEventObject: WSAEVENT,
     lpNetworkEvents: LPWSANETWORKEVENTS,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPEVENTSELECT(
+FN! {stdcall LPWSPEVENTSELECT(
     s: SOCKET,
     hEventObject: WSAEVENT,
     lNetworkEvents: c_long,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPGETOVERLAPPEDRESULT(
+FN! {stdcall LPWSPGETOVERLAPPEDRESULT(
     s: SOCKET,
     lpOverlapped: LPWSAOVERLAPPED,
     lpcbTransfer: LPDWORD,
@@ -116,19 +116,19 @@ FN!{stdcall LPWSPGETOVERLAPPEDRESULT(
     lpdwFlags: LPDWORD,
     lpErrno: LPINT,
 ) -> BOOL}
-FN!{stdcall LPWSPGETPEERNAME(
+FN! {stdcall LPWSPGETPEERNAME(
     s: SOCKET,
     name: *mut SOCKADDR,
     namelen: LPINT,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPGETSOCKNAME(
+FN! {stdcall LPWSPGETSOCKNAME(
     s: SOCKET,
     name: *mut SOCKADDR,
     namelen: LPINT,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPGETSOCKOPT(
+FN! {stdcall LPWSPGETSOCKOPT(
     s: SOCKET,
     level: c_int,
     optname: c_int,
@@ -136,13 +136,13 @@ FN!{stdcall LPWSPGETSOCKOPT(
     optlen: LPINT,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPGETQOSBYNAME(
+FN! {stdcall LPWSPGETQOSBYNAME(
     s: SOCKET,
     lpQOSName: LPWSABUF,
     lpQOS: LPQOS,
     lpErrno: LPINT,
 ) -> BOOL}
-FN!{stdcall LPWSPIOCTL(
+FN! {stdcall LPWSPIOCTL(
     s: SOCKET,
     dwIoControlCode: DWORD,
     lpvInBuffer: LPVOID,
@@ -155,7 +155,7 @@ FN!{stdcall LPWSPIOCTL(
     lpThreadId: LPWSATHREADID,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPJOINLEAF(
+FN! {stdcall LPWSPJOINLEAF(
     s: SOCKET,
     name: *mut SOCKADDR,
     namelen: c_int,
@@ -166,12 +166,12 @@ FN!{stdcall LPWSPJOINLEAF(
     dwFlags: DWORD,
     lpErrno: LPINT,
 ) -> SOCKET}
-FN!{stdcall LPWSPLISTEN(
+FN! {stdcall LPWSPLISTEN(
     s: SOCKET,
     backlog: c_int,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPRECV(
+FN! {stdcall LPWSPRECV(
     s: SOCKET,
     lpBuffers: LPWSABUF,
     dwBufferCount: DWORD,
@@ -182,12 +182,12 @@ FN!{stdcall LPWSPRECV(
     lpThreadId: LPWSATHREADID,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPRECVDISCONNECT(
+FN! {stdcall LPWSPRECVDISCONNECT(
     s: SOCKET,
     lpInboundDisconnectData: LPWSABUF,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPRECVFROM(
+FN! {stdcall LPWSPRECVFROM(
     s: SOCKET,
     lpBuffers: LPWSABUF,
     dwBufferCount: DWORD,
@@ -200,7 +200,7 @@ FN!{stdcall LPWSPRECVFROM(
     lpThreadId: LPWSATHREADID,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPSELECT(
+FN! {stdcall LPWSPSELECT(
     nfds: c_int,
     readfds: *mut fd_set,
     writefds: *mut fd_set,
@@ -208,7 +208,7 @@ FN!{stdcall LPWSPSELECT(
     timeout: *const timeval,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPSEND(
+FN! {stdcall LPWSPSEND(
     s: SOCKET,
     lpBuffers: LPWSABUF,
     dwBufferCount: DWORD,
@@ -219,12 +219,12 @@ FN!{stdcall LPWSPSEND(
     lpThreadId: LPWSATHREADID,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPSENDDISCONNECT(
+FN! {stdcall LPWSPSENDDISCONNECT(
     s: SOCKET,
     lpOutboundDisconnectData: LPWSABUF,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPSENDTO(
+FN! {stdcall LPWSPSENDTO(
     s: SOCKET,
     lpBuffers: LPWSABUF,
     dwBufferCount: DWORD,
@@ -237,7 +237,7 @@ FN!{stdcall LPWSPSENDTO(
     lpThreadId: LPWSATHREADID,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPSETSOCKOPT(
+FN! {stdcall LPWSPSETSOCKOPT(
     s: SOCKET,
     level: c_int,
     optname: c_int,
@@ -245,12 +245,12 @@ FN!{stdcall LPWSPSETSOCKOPT(
     optlen: c_int,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPSHUTDOWN(
+FN! {stdcall LPWSPSHUTDOWN(
     s: SOCKET,
     how: c_int,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWSPSOCKET(
+FN! {stdcall LPWSPSOCKET(
     af: c_int,
     _type: c_int,
     protocol: c_int,
@@ -259,7 +259,7 @@ FN!{stdcall LPWSPSOCKET(
     dwFlags: DWORD,
     lpErrno: LPINT,
 ) -> SOCKET}
-FN!{stdcall LPWSPSTRINGTOADDRESS(
+FN! {stdcall LPWSPSTRINGTOADDRESS(
     AddressString: LPWSTR,
     AddressFamily: INT,
     lpProtocolInfo: LPWSAPROTOCOL_INFOW,
@@ -267,7 +267,7 @@ FN!{stdcall LPWSPSTRINGTOADDRESS(
     lpAddressLength: LPINT,
     lpErrno: LPINT,
 ) -> c_int}
-STRUCT!{struct WSPPROC_TABLE {
+STRUCT! {struct WSPPROC_TABLE {
     lpWSPAccept: LPWSPACCEPT,
     lpWSPAddressToString: LPWSPADDRESSTOSTRING,
     lpWSPAsyncSelect: LPWSPASYNCSELECT,
@@ -300,84 +300,84 @@ STRUCT!{struct WSPPROC_TABLE {
     lpWSPStringToAddress: LPWSPSTRINGTOADDRESS,
 }}
 pub type LPWSPPROC_TABLE = *mut WSPPROC_TABLE;
-FN!{stdcall LPWPUCLOSEEVENT(
+FN! {stdcall LPWPUCLOSEEVENT(
     hEvent: WSAEVENT,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWPUCLOSESOCKETHANDLE(
+FN! {stdcall LPWPUCLOSESOCKETHANDLE(
     s: SOCKET,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWPUCREATEEVENT(
+FN! {stdcall LPWPUCREATEEVENT(
     lpErrno: LPINT,
 ) -> WSAEVENT}
-FN!{stdcall LPWPUCREATESOCKETHANDLE(
+FN! {stdcall LPWPUCREATESOCKETHANDLE(
     dwCatalogEntryId: DWORD,
     dwContext: DWORD_PTR,
     lpErrno: LPINT,
 ) -> SOCKET}
-FN!{stdcall LPWPUFDISSET(
+FN! {stdcall LPWPUFDISSET(
     s: SOCKET,
     fdset: *mut fd_set,
 ) -> c_int}
-FN!{stdcall LPWPUGETPROVIDERPATH(
+FN! {stdcall LPWPUGETPROVIDERPATH(
     lpProviderId: LPGUID,
     lpszProviderDllPath: *mut WCHAR,
     lpProviderDllPathLen: LPINT,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWPUMODIFYIFSHANDLE(
+FN! {stdcall LPWPUMODIFYIFSHANDLE(
     dwCatalogEntryId: DWORD,
     ProposedHandle: SOCKET,
     lpErrno: LPINT,
 ) -> SOCKET}
-FN!{stdcall LPWPUPOSTMESSAGE(
+FN! {stdcall LPWPUPOSTMESSAGE(
     hWnd: HWND,
     Msg: UINT,
     wParam: WPARAM,
     lParam: LPARAM,
 ) -> BOOL}
-FN!{stdcall LPWPUQUERYBLOCKINGCALLBACK(
+FN! {stdcall LPWPUQUERYBLOCKINGCALLBACK(
     dwCatalogEntryId: DWORD,
     lplpfnCallback: *mut LPBLOCKINGCALLBACK,
     lpdwContext: PDWORD_PTR,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWPUQUERYSOCKETHANDLECONTEXT(
+FN! {stdcall LPWPUQUERYSOCKETHANDLECONTEXT(
     s: SOCKET,
     lpContext: PDWORD_PTR,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWPUQUEUEAPC(
+FN! {stdcall LPWPUQUEUEAPC(
     lpThreadId: LPWSATHREADID,
     lpfnUserApc: LPWSAUSERAPC,
     dwContext: DWORD_PTR,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWPURESETEVENT(
+FN! {stdcall LPWPURESETEVENT(
     hEvent: WSAEVENT,
     lpErrno: LPINT,
 ) -> BOOL}
-FN!{stdcall LPWPUSETEVENT(
+FN! {stdcall LPWPUSETEVENT(
     hEvent: WSAEVENT,
     lpErrno: LPINT,
 ) -> BOOL}
-FN!{stdcall LPWPUOPENCURRENTTHREAD(
+FN! {stdcall LPWPUOPENCURRENTTHREAD(
     lpThreadId: LPWSATHREADID,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWPUCLOSETHREAD(
+FN! {stdcall LPWPUCLOSETHREAD(
     lpThreadId: LPWSATHREADID,
     lpErrno: LPINT,
 ) -> c_int}
-FN!{stdcall LPWPUCOMPLETEOVERLAPPEDREQUEST(
+FN! {stdcall LPWPUCOMPLETEOVERLAPPEDREQUEST(
     s: SOCKET,
     lpOverlapped: LPWSAOVERLAPPED,
     dwError: DWORD,
     cbTransferred: DWORD,
     lpErrno: LPINT,
 ) -> c_int}
-STRUCT!{struct WSPUPCALLTABLE {
+STRUCT! {struct WSPUPCALLTABLE {
     lpWPUCloseEvent: LPWPUCLOSEEVENT,
     lpWPUCloseSocketHandle: LPWPUCLOSESOCKETHANDLE,
     lpWPUCreateEvent: LPWPUCREATEEVENT,
@@ -404,7 +404,7 @@ extern "system" {
         lpProcTable: LPWSPPROC_TABLE,
     ) -> c_int;
 }
-FN!{stdcall LPWSPSTARTUP(
+FN! {stdcall LPWSPSTARTUP(
     wVersionRequested: WORD,
     lpWSPData: LPWSPDATA,
     lpProtocolInfo: LPWSAPROTOCOL_INFOW,
@@ -419,7 +419,7 @@ extern "system" {
         lpErrno: LPINT,
     ) -> c_int;
 }
-FN!{stdcall LPWSCENUMPROTOCOLS(
+FN! {stdcall LPWSCENUMPROTOCOLS(
     lpiProtocols: LPINT,
     lpProtocolBuffer: LPWSAPROTOCOL_INFOW,
     lpdwBufferLength: LPDWORD,
@@ -433,21 +433,15 @@ extern "system" {
         lpdwBufferLength: LPDWORD,
         lpErrno: LPINT,
     ) -> c_int;
-    pub fn WSCDeinstallProvider(
-        lpProviderId: LPGUID,
-        lpErrno: LPINT,
-    ) -> c_int;
+    pub fn WSCDeinstallProvider(lpProviderId: LPGUID, lpErrno: LPINT) -> c_int;
 }
-FN!{stdcall LPWSCDEINSTALLPROVIDER(
+FN! {stdcall LPWSCDEINSTALLPROVIDER(
     lpProviderId: LPGUID,
     lpErrno: LPINT,
 ) -> c_int}
 extern "system" {
     #[cfg(target_pointer_width = "64")]
-    pub fn WSCDeinstallProvider32(
-        lpProviderId: LPGUID,
-        lpErrno: LPINT,
-    ) -> c_int;
+    pub fn WSCDeinstallProvider32(lpProviderId: LPGUID, lpErrno: LPINT) -> c_int;
     pub fn WSCInstallProvider(
         lpProviderId: LPGUID,
         lpszProviderDllPath: *const WCHAR,
@@ -456,7 +450,7 @@ extern "system" {
         lpErrno: LPINT,
     ) -> c_int;
 }
-FN!{stdcall LPWSCINSTALLPROVIDER(
+FN! {stdcall LPWSCINSTALLPROVIDER(
     lpProviderId: LPGUID,
     lpszProviderDllPath: *const WCHAR,
     lpProtocolInfoList: LPWSAPROTOCOL_INFOW,
@@ -479,7 +473,7 @@ extern "system" {
         lpErrno: LPINT,
     ) -> c_int;
 }
-FN!{stdcall LPWSCGETPROVIDERPATH(
+FN! {stdcall LPWSCGETPROVIDERPATH(
     lpProviderId: LPGUID,
     lpszProviderDllPath: *mut WCHAR,
     lpProviderDllPathLen: LPINT,
@@ -501,7 +495,7 @@ extern "system" {
         lpErrno: LPINT,
     ) -> c_int;
 }
-FN!{stdcall LPWSCUPDATEPROVIDER(
+FN! {stdcall LPWSCUPDATEPROVIDER(
     lpProviderId: LPGUID,
     lpszProviderDllPath: *const WCHAR,
     lpProtocolInfoList: LPWSAPROTOCOL_INFOW,
@@ -527,11 +521,11 @@ pub const LSP_INBOUND_MODIFY: DWORD = 0x00000010;
 pub const LSP_OUTBOUND_MODIFY: DWORD = 0x00000020;
 pub const LSP_CRYPTO_COMPRESS: DWORD = 0x00000040;
 pub const LSP_LOCAL_CACHE: DWORD = 0x00000080;
-ENUM!{enum WSC_PROVIDER_INFO_TYPE {
+ENUM! {enum WSC_PROVIDER_INFO_TYPE {
     ProviderInfoLspCategories,
     ProviderInfoAudit,
 }}
-STRUCT!{struct WSC_PROVIDER_AUDIT_INFO {
+STRUCT! {struct WSC_PROVIDER_AUDIT_INFO {
     RecordSize: DWORD,
     Reserved: PVOID,
 }}
@@ -587,26 +581,15 @@ extern "system" {
         pPermittedLspCategories: *mut DWORD,
         lpErrno: LPINT,
     ) -> c_int;
-    pub fn WPUCloseEvent(
-        hEvent: WSAEVENT,
-        lpErrno: LPINT,
-    ) -> BOOL;
-    pub fn WPUCloseSocketHandle(
-        s: SOCKET,
-        lpErrno: LPINT,
-    ) -> c_int;
-    pub fn WPUCreateEvent(
-        lpErrno: LPINT,
-    ) -> WSAEVENT;
+    pub fn WPUCloseEvent(hEvent: WSAEVENT, lpErrno: LPINT) -> BOOL;
+    pub fn WPUCloseSocketHandle(s: SOCKET, lpErrno: LPINT) -> c_int;
+    pub fn WPUCreateEvent(lpErrno: LPINT) -> WSAEVENT;
     pub fn WPUCreateSocketHandle(
         dwCatalogEntryId: DWORD,
         dwContext: DWORD_PTR,
         lpErrno: LPINT,
     ) -> SOCKET;
-    pub fn WPUFDIsSet(
-        s: SOCKET,
-        fdset: *mut fd_set,
-    ) -> c_int;
+    pub fn WPUFDIsSet(s: SOCKET, fdset: *mut fd_set) -> c_int;
     pub fn WPUGetProviderPath(
         lpProviderId: LPGUID,
         lpszProviderDllPath: *mut WCHAR,
@@ -618,37 +601,22 @@ extern "system" {
         ProposedHandle: SOCKET,
         lpErrno: LPINT,
     ) -> SOCKET;
-    pub fn WPUPostMessage(
-        hWnd: HWND,
-        Msg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> BOOL;
+    pub fn WPUPostMessage(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
     pub fn WPUQueryBlockingCallback(
         dwCatalogEntryId: DWORD,
         lplpfnCallback: *mut LPBLOCKINGCALLBACK,
         lpdwContext: PDWORD_PTR,
         lpErrno: LPINT,
     ) -> c_int;
-    pub fn WPUQuerySocketHandleContext(
-        s: SOCKET,
-        lpContext: PDWORD_PTR,
-        lpErrno: LPINT,
-    ) -> c_int;
+    pub fn WPUQuerySocketHandleContext(s: SOCKET, lpContext: PDWORD_PTR, lpErrno: LPINT) -> c_int;
     pub fn WPUQueueApc(
         lpThreadId: LPWSATHREADID,
         lpfnUserApc: LPWSAUSERAPC,
         dwContext: DWORD_PTR,
         lpErrno: LPINT,
     ) -> c_int;
-    pub fn WPUResetEvent(
-        hEvent: WSAEVENT,
-        lpErrno: LPINT,
-    ) -> BOOL;
-    pub fn WPUSetEvent(
-        hEvent: WSAEVENT,
-        lpErrno: LPINT,
-    ) -> BOOL;
+    pub fn WPUResetEvent(hEvent: WSAEVENT, lpErrno: LPINT) -> BOOL;
+    pub fn WPUSetEvent(hEvent: WSAEVENT, lpErrno: LPINT) -> BOOL;
     pub fn WPUCompleteOverlappedRequest(
         s: SOCKET,
         lpOverlapped: LPWSAOVERLAPPED,
@@ -656,14 +624,8 @@ extern "system" {
         cbTransferred: DWORD,
         lpErrno: LPINT,
     ) -> c_int;
-    pub fn WPUOpenCurrentThread(
-        lpThreadId: LPWSATHREADID,
-        lpErrno: LPINT,
-    ) -> c_int;
-    pub fn WPUCloseThread(
-        lpThreadId: LPWSATHREADID,
-        lpErrno: LPINT,
-    ) -> c_int;
+    pub fn WPUOpenCurrentThread(lpThreadId: LPWSATHREADID, lpErrno: LPINT) -> c_int;
+    pub fn WPUCloseThread(lpThreadId: LPWSATHREADID, lpErrno: LPINT) -> c_int;
     #[cfg(target_pointer_width = "64")]
     pub fn WSCEnumNameSpaceProviders32(
         lpdwBufferLength: LPDWORD,
@@ -682,7 +644,7 @@ extern "system" {
         lpProviderId: LPGUID,
     ) -> INT;
 }
-FN!{stdcall LPWSCINSTALLNAMESPACE(
+FN! {stdcall LPWSCINSTALLNAMESPACE(
     lpszIdentifier: LPWSTR,
     lpszPathName: LPWSTR,
     dwNameSpace: DWORD,
@@ -698,11 +660,9 @@ extern "system" {
         dwVersion: DWORD,
         lpProviderId: LPGUID,
     ) -> INT;
-    pub fn WSCUnInstallNameSpace(
-        lpProviderId: LPGUID,
-    ) -> INT;
+    pub fn WSCUnInstallNameSpace(lpProviderId: LPGUID) -> INT;
 }
-FN!{stdcall LPWSCUNINSTALLNAMESPACE(
+FN! {stdcall LPWSCUNINSTALLNAMESPACE(
     lpProviderId: LPGUID,
 ) -> INT}
 extern "system" {
@@ -724,24 +684,16 @@ extern "system" {
         lpProviderSpecific: LPBLOB,
     ) -> INT;
     #[cfg(target_pointer_width = "64")]
-    pub fn WSCUnInstallNameSpace32(
-        lpProviderId: LPGUID,
-    ) -> INT;
-    pub fn WSCEnableNSProvider(
-        lpProviderId: LPGUID,
-        fEnable: BOOL,
-    ) -> INT;
+    pub fn WSCUnInstallNameSpace32(lpProviderId: LPGUID) -> INT;
+    pub fn WSCEnableNSProvider(lpProviderId: LPGUID, fEnable: BOOL) -> INT;
 }
-FN!{stdcall LPWSCENABLENSPROVIDER(
+FN! {stdcall LPWSCENABLENSPROVIDER(
     lpProviderId: LPGUID,
     fEnable: BOOL,
 ) -> INT}
 extern "system" {
     #[cfg(target_pointer_width = "64")]
-    pub fn WSCEnableNSProvider32(
-        lpProviderId: LPGUID,
-        fEnable: BOOL,
-    ) -> INT;
+    pub fn WSCEnableNSProvider32(lpProviderId: LPGUID, fEnable: BOOL) -> INT;
     #[cfg(target_pointer_width = "64")]
     pub fn WSCInstallProviderAndChains64_32(
         lpProviderId: LPGUID,
@@ -766,23 +718,23 @@ extern "system" {
         lpErrno: LPINT,
     ) -> c_int;
 }
-FN!{stdcall LPNSPCLEANUP(
+FN! {stdcall LPNSPCLEANUP(
     lpProviderId: LPGUID,
 ) -> INT}
-FN!{stdcall LPNSPLOOKUPSERVICEBEGIN(
+FN! {stdcall LPNSPLOOKUPSERVICEBEGIN(
     lpProviderId: LPGUID,
     lpqsRestrictions: LPWSAQUERYSETW,
     lpServiceClassInfo: LPWSASERVICECLASSINFOW,
     dwControlFlags: DWORD,
     lphLookup: LPHANDLE,
 ) -> INT}
-FN!{stdcall LPNSPLOOKUPSERVICENEXT(
+FN! {stdcall LPNSPLOOKUPSERVICENEXT(
     hLookup: HANDLE,
     dwControlFlags: DWORD,
     lpdwBufferLength: LPDWORD,
     lpqsResults: LPWSAQUERYSETW,
 ) -> INT}
-FN!{stdcall LPNSPIOCTL(
+FN! {stdcall LPNSPIOCTL(
     hLookup: HANDLE,
     dwControlCode: DWORD,
     lpvInBuffer: LPVOID,
@@ -793,30 +745,30 @@ FN!{stdcall LPNSPIOCTL(
     lpCompletion: LPWSACOMPLETION,
     lpThreadId: LPWSATHREADID,
 ) -> INT}
-FN!{stdcall LPNSPLOOKUPSERVICEEND(
+FN! {stdcall LPNSPLOOKUPSERVICEEND(
     hLookup: HANDLE,
 ) -> INT}
-FN!{stdcall LPNSPSETSERVICE(
+FN! {stdcall LPNSPSETSERVICE(
     lpProviderId: LPGUID,
     lpServiceClassInfo: LPWSASERVICECLASSINFOW,
     lpqsRegInfo: LPWSAQUERYSETW,
     essOperation: WSAESETSERVICEOP,
     dwControlFlags: DWORD,
 ) -> INT}
-FN!{stdcall LPNSPINSTALLSERVICECLASS(
+FN! {stdcall LPNSPINSTALLSERVICECLASS(
     lpProviderId: LPGUID,
     lpServiceClassInfo: LPWSASERVICECLASSINFOW,
 ) -> INT}
-FN!{stdcall LPNSPREMOVESERVICECLASS(
+FN! {stdcall LPNSPREMOVESERVICECLASS(
     lpProviderId: LPGUID,
     lpServiceClassId: LPGUID,
 ) -> INT}
-FN!{stdcall LPNSPGETSERVICECLASSINFO(
+FN! {stdcall LPNSPGETSERVICECLASSINFO(
     lpProviderId: LPGUID,
     lpdwBufSize: LPDWORD,
     lpServiceClassInfo: LPWSASERVICECLASSINFOW,
 ) -> INT}
-STRUCT!{struct NSP_ROUTINE {
+STRUCT! {struct NSP_ROUTINE {
     cbSize: DWORD,
     dwMajorVersion: DWORD,
     dwMinorVersion: DWORD,
@@ -832,41 +784,38 @@ STRUCT!{struct NSP_ROUTINE {
 }}
 pub type LPNSP_ROUTINE = *mut NSP_ROUTINE;
 extern "system" {
-    pub fn NSPStartup(
-        lpProviderId: LPGUID,
-        lpnspRoutines: LPNSP_ROUTINE,
-    ) -> INT;
+    pub fn NSPStartup(lpProviderId: LPGUID, lpnspRoutines: LPNSP_ROUTINE) -> INT;
 }
-FN!{stdcall LPNSPSTARTUP(
+FN! {stdcall LPNSPSTARTUP(
     lpProviderId: LPGUID,
     lpnspRoutines: LPNSP_ROUTINE,
 ) -> INT}
-FN!{stdcall LPNSPV2STARTUP(
+FN! {stdcall LPNSPV2STARTUP(
     lpProviderId: LPGUID,
     ppvClientSessionArg: *mut LPVOID,
 ) -> INT}
-FN!{stdcall LPNSPV2CLEANUP(
+FN! {stdcall LPNSPV2CLEANUP(
     lpProviderId: LPGUID,
     pvClientSessionArg: LPVOID,
 ) -> INT}
-FN!{stdcall LPNSPV2LOOKUPSERVICEBEGIN(
+FN! {stdcall LPNSPV2LOOKUPSERVICEBEGIN(
     lpProviderId: LPGUID,
     lpqsRestrictions: LPWSAQUERYSET2W,
     dwControlFlags: DWORD,
     lpvClientSessionArg: LPVOID,
     lphLookup: LPHANDLE,
 ) -> INT}
-FN!{stdcall LPNSPV2LOOKUPSERVICENEXTEX(
+FN! {stdcall LPNSPV2LOOKUPSERVICENEXTEX(
     hAsyncCall: HANDLE,
     hLookup: HANDLE,
     dwControlFlags: DWORD,
     lpdwBufferLength: LPDWORD,
     lpqsResults: LPWSAQUERYSET2W,
 ) -> ()}
-FN!{stdcall LPNSPV2LOOKUPSERVICEEND(
+FN! {stdcall LPNSPV2LOOKUPSERVICEEND(
     hLookup: HANDLE,
 ) -> INT}
-FN!{stdcall LPNSPV2SETSERVICEEX(
+FN! {stdcall LPNSPV2SETSERVICEEX(
     hAsyncCall: HANDLE,
     lpProviderId: LPGUID,
     lpqsRegInfo: LPWSAQUERYSET2W,
@@ -874,11 +823,11 @@ FN!{stdcall LPNSPV2SETSERVICEEX(
     dwControlFlags: DWORD,
     lpvClientSessionArg: LPVOID,
 ) -> ()}
-FN!{stdcall LPNSPV2CLIENTSESSIONRUNDOWN(
+FN! {stdcall LPNSPV2CLIENTSESSIONRUNDOWN(
     lpProviderId: LPGUID,
     pvClientSessionArg: LPVOID,
 ) -> ()}
-STRUCT!{struct NSPV2_ROUTINE {
+STRUCT! {struct NSPV2_ROUTINE {
     cbSize: DWORD,
     dwMajorVersion: DWORD,
     dwMinorVersion: DWORD,
@@ -899,11 +848,6 @@ extern "system" {
         puuidProviderId: *const GUID,
         pNSPv2Routine: *const LPCNSPV2_ROUTINE,
     ) -> INT;
-    pub fn WSAUnadvertiseProvider(
-        puuidProviderId: *const GUID,
-    ) -> INT;
-    pub fn WSAProviderCompleteAsyncCall(
-        hAsyncCall: HANDLE,
-        iRetCode: INT,
-    ) -> INT;
+    pub fn WSAUnadvertiseProvider(puuidProviderId: *const GUID) -> INT;
+    pub fn WSAProviderCompleteAsyncCall(hAsyncCall: HANDLE, iRetCode: INT) -> INT;
 }

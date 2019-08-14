@@ -5,23 +5,23 @@
 // except according to those terms.
 //! IPv4 Internet address
 use shared::minwindef::{UCHAR, ULONG, USHORT};
-STRUCT!{struct in_addr_S_un_b {
+STRUCT! {struct in_addr_S_un_b {
     s_b1: UCHAR,
     s_b2: UCHAR,
     s_b3: UCHAR,
     s_b4: UCHAR,
 }}
-STRUCT!{struct in_addr_S_un_w {
+STRUCT! {struct in_addr_S_un_w {
     s_w1: USHORT,
     s_w2: USHORT,
 }}
-UNION!{union in_addr_S_un {
+UNION! {union in_addr_S_un {
     [u32; 1],
     S_un_b S_un_b_mut: in_addr_S_un_b,
     S_un_w S_un_w_mut: in_addr_S_un_w,
     S_addr S_addr_mut: ULONG,
 }}
-STRUCT!{struct in_addr {
+STRUCT! {struct in_addr {
     S_un: in_addr_S_un,
 }}
 pub type IN_ADDR = in_addr;

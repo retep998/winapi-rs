@@ -7,13 +7,13 @@ use shared::guiddef::LPGUID;
 use shared::hidpi::PHIDP_PREPARSED_DATA;
 use shared::minwindef::{PULONG, ULONG, USHORT};
 use um::winnt::{BOOLEAN, HANDLE, PVOID};
-STRUCT!{struct HIDD_CONFIGURATION {
+STRUCT! {struct HIDD_CONFIGURATION {
     cookie: PVOID,
     size: ULONG,
     RingBufferSize: ULONG,
 }}
 pub type PHIDD_CONFIGURATION = *mut HIDD_CONFIGURATION;
-STRUCT!{struct HIDD_ATTRIBUTES {
+STRUCT! {struct HIDD_ATTRIBUTES {
     Size: ULONG,
     VendorID: USHORT,
     ProductID: USHORT,
@@ -21,23 +21,14 @@ STRUCT!{struct HIDD_ATTRIBUTES {
 }}
 pub type PHIDD_ATTRIBUTES = *mut HIDD_ATTRIBUTES;
 extern "system" {
-    pub fn HidD_GetAttributes(
-        HidDeviceObject: HANDLE,
-        Attributes: PHIDD_ATTRIBUTES,
-    ) -> BOOLEAN;
-    pub fn HidD_GetHidGuid(
-        HidGuid: LPGUID,
-    );
+    pub fn HidD_GetAttributes(HidDeviceObject: HANDLE, Attributes: PHIDD_ATTRIBUTES) -> BOOLEAN;
+    pub fn HidD_GetHidGuid(HidGuid: LPGUID);
     pub fn HidD_GetPreparsedData(
         HidDeviceObject: HANDLE,
         PreparsedData: *mut PHIDP_PREPARSED_DATA,
     ) -> BOOLEAN;
-    pub fn HidD_FreePreparsedData(
-        PreparsedData: PHIDP_PREPARSED_DATA,
-    ) -> BOOLEAN;
-    pub fn HidD_FlushQueue(
-        HidDeviceObject: HANDLE,
-    ) -> BOOLEAN;
+    pub fn HidD_FreePreparsedData(PreparsedData: PHIDP_PREPARSED_DATA) -> BOOLEAN;
+    pub fn HidD_FlushQueue(HidDeviceObject: HANDLE) -> BOOLEAN;
     pub fn HidD_GetConfiguration(
         HidDeviceObject: HANDLE,
         Configuration: PHIDD_CONFIGURATION,
@@ -68,14 +59,8 @@ extern "system" {
         ReportBuffer: PVOID,
         ReportBufferLength: ULONG,
     ) -> BOOLEAN;
-    pub fn HidD_GetNumInputBuffers(
-        HidDeviceObject: HANDLE,
-        NumberBuffers: PULONG,
-    ) -> BOOLEAN;
-    pub fn HidD_SetNumInputBuffers(
-        HidDeviceObject: HANDLE,
-        NumberBuffers: ULONG,
-    ) -> BOOLEAN;
+    pub fn HidD_GetNumInputBuffers(HidDeviceObject: HANDLE, NumberBuffers: PULONG) -> BOOLEAN;
+    pub fn HidD_SetNumInputBuffers(HidDeviceObject: HANDLE, NumberBuffers: ULONG) -> BOOLEAN;
     pub fn HidD_GetPhysicalDescriptor(
         HidDeviceObject: HANDLE,
         Buffer: PVOID,

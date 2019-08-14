@@ -292,7 +292,7 @@ pub const SPEAKER_TOP_BACK_CENTER: DWORD = 0x10000;
 pub const SPEAKER_TOP_BACK_RIGHT: DWORD = 0x20000;
 pub const SPEAKER_RESERVED: DWORD = 0x7FFC0000;
 pub const SPEAKER_ALL: DWORD = 0x80000000;
-STRUCT!{#[repr(packed)] struct WAVEFORMATEX {
+STRUCT! {#[repr(packed)] struct WAVEFORMATEX {
     wFormatTag: WORD,
     nChannels: WORD,
     nSamplesPerSec: DWORD,
@@ -301,7 +301,7 @@ STRUCT!{#[repr(packed)] struct WAVEFORMATEX {
     wBitsPerSample: WORD,
     cbSize: WORD,
 }}
-STRUCT!{#[repr(packed)] struct WAVEFORMATEXTENSIBLE {
+STRUCT! {#[repr(packed)] struct WAVEFORMATEXTENSIBLE {
     Format: WAVEFORMATEX,
     Samples: WORD,
     dwChannelMask: DWORD,

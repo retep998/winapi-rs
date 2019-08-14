@@ -7,14 +7,7 @@ use shared::minwindef::{DWORD, UINT};
 use um::mmsystem::{LPTIMECAPS, MMRESULT};
 extern "system" {
     pub fn timeGetTime() -> DWORD;
-    pub fn timeGetDevCaps(
-        ptc: LPTIMECAPS,
-        cbtc: UINT,
-    ) -> MMRESULT;
-    pub fn timeBeginPeriod(
-        uPeriod: UINT,
-    ) -> MMRESULT;
-    pub fn timeEndPeriod(
-        uPeriod: UINT,
-    ) -> MMRESULT;
+    pub fn timeGetDevCaps(ptc: LPTIMECAPS, cbtc: UINT) -> MMRESULT;
+    pub fn timeBeginPeriod(uPeriod: UINT) -> MMRESULT;
+    pub fn timeEndPeriod(uPeriod: UINT) -> MMRESULT;
 }

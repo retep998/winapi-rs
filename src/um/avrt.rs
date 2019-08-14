@@ -7,7 +7,7 @@ use ctypes::c_longlong;
 use shared::guiddef::GUID;
 use shared::minwindef::{BOOL, LPDWORD, PULONG};
 use um::winnt::{HANDLE, LPCSTR, LPCWSTR, PHANDLE, PLARGE_INTEGER};
-ENUM!{enum AVRT_PRIORITY {
+ENUM! {enum AVRT_PRIORITY {
     AVRT_PRIORITY_VERYLOW = -2i32 as u32,
     AVRT_PRIORITY_LOW,
     AVRT_PRIORITY_NORMAL = 0,
@@ -16,14 +16,8 @@ ENUM!{enum AVRT_PRIORITY {
 }}
 pub const THREAD_ORDER_GROUP_INFINITE_TIMEOUT: c_longlong = -1;
 extern "system" {
-    pub fn AvSetMmThreadCharacteristicsA(
-        TaskName: LPCSTR,
-        TaskIndex: LPDWORD,
-    ) -> HANDLE;
-    pub fn AvSetMmThreadCharacteristicsW(
-        TaskName: LPCWSTR,
-        TaskIndex: LPDWORD,
-    ) -> HANDLE;
+    pub fn AvSetMmThreadCharacteristicsA(TaskName: LPCSTR, TaskIndex: LPDWORD) -> HANDLE;
+    pub fn AvSetMmThreadCharacteristicsW(TaskName: LPCWSTR, TaskIndex: LPDWORD) -> HANDLE;
     pub fn AvSetMmMaxThreadCharacteristicsA(
         FirstTask: LPCSTR,
         SecondTask: LPCSTR,
@@ -34,13 +28,8 @@ extern "system" {
         SecondTask: LPCWSTR,
         TaskIndex: LPDWORD,
     ) -> HANDLE;
-    pub fn AvRevertMmThreadCharacteristics(
-        avrt_handle: HANDLE,
-    ) -> BOOL;
-    pub fn AvSetMmThreadPriority(
-        AvrtHandle: HANDLE,
-        Priority: AVRT_PRIORITY,
-    ) -> BOOL;
+    pub fn AvRevertMmThreadCharacteristics(avrt_handle: HANDLE) -> BOOL;
+    pub fn AvSetMmThreadPriority(AvrtHandle: HANDLE, Priority: AVRT_PRIORITY) -> BOOL;
     pub fn AvRtCreateThreadOrderingGroup(
         Context: PHANDLE,
         Period: PLARGE_INTEGER,
@@ -53,7 +42,7 @@ extern "system" {
         ThreadOrderingGuid: *mut GUID,
         Timeout: PLARGE_INTEGER,
         TaskName: LPCSTR,
-    )-> BOOL;
+    ) -> BOOL;
     pub fn AvRtCreateThreadOrderingGroupExW(
         Context: PHANDLE,
         Period: PLARGE_INTEGER,
@@ -66,15 +55,9 @@ extern "system" {
         ThreadOrderingGuid: *mut GUID,
         Before: BOOL,
     ) -> BOOL;
-    pub fn AvRtWaitOnThreadOrderingGroup(
-        Context: HANDLE,
-    ) -> BOOL;
-    pub fn AvRtLeaveThreadOrderingGroup(
-        Context: HANDLE,
-    ) -> BOOL;
-    pub fn AvRtDeleteThreadOrderingGroup(
-        Context: HANDLE,
-    ) -> BOOL;
+    pub fn AvRtWaitOnThreadOrderingGroup(Context: HANDLE) -> BOOL;
+    pub fn AvRtLeaveThreadOrderingGroup(Context: HANDLE) -> BOOL;
+    pub fn AvRtDeleteThreadOrderingGroup(Context: HANDLE) -> BOOL;
     pub fn AvQuerySystemResponsiveness(
         AvrtHandle: HANDLE,
         SystemResponsivenessValue: PULONG,

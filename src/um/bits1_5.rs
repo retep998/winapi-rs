@@ -7,36 +7,36 @@ use shared::basetsd::UINT64;
 use shared::rpcndr::byte;
 use um::bits::{IBackgroundCopyJob, IBackgroundCopyJobVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR};
-STRUCT!{struct BG_JOB_REPLY_PROGRESS {
+STRUCT! {struct BG_JOB_REPLY_PROGRESS {
     BytesTotal: UINT64,
     BytesTransferred: UINT64,
 }}
-ENUM!{enum BG_AUTH_TARGET {
+ENUM! {enum BG_AUTH_TARGET {
     BG_AUTH_TARGET_SERVER = 1,
     BG_AUTH_TARGET_PROXY = BG_AUTH_TARGET_SERVER + 1,
 }}
-ENUM!{enum BG_AUTH_SCHEME {
+ENUM! {enum BG_AUTH_SCHEME {
     BG_AUTH_SCHEME_BASIC = 1,
     BG_AUTH_SCHEME_DIGEST = BG_AUTH_SCHEME_BASIC + 1,
     BG_AUTH_SCHEME_NTLM = BG_AUTH_SCHEME_DIGEST + 1,
     BG_AUTH_SCHEME_NEGOTIATE = BG_AUTH_SCHEME_NTLM + 1,
     BG_AUTH_SCHEME_PASSPORT = BG_AUTH_SCHEME_NEGOTIATE + 1,
 }}
-STRUCT!{struct BG_BASIC_CREDENTIALS {
+STRUCT! {struct BG_BASIC_CREDENTIALS {
     UserName: LPWSTR,
     Password: LPWSTR,
 }}
-UNION!{union BG_AUTH_CREDENTIALS_UNION {
+UNION! {union BG_AUTH_CREDENTIALS_UNION {
     [usize; 2],
     Basic Basic_mut: BG_BASIC_CREDENTIALS,
 }}
-STRUCT!{struct BG_AUTH_CREDENTIALS {
+STRUCT! {struct BG_AUTH_CREDENTIALS {
     Target: BG_AUTH_TARGET,
     Scheme: BG_AUTH_SCHEME,
     Credentials: BG_AUTH_CREDENTIALS_UNION,
 }}
 pub type PBG_AUTH_CREDENTIALS = *mut BG_AUTH_CREDENTIALS;
-RIDL!{#[uuid(0x54b50739, 0x686f, 0x45eb, 0x9d, 0xff, 0xd6, 0xa9, 0xa0, 0xfa, 0xa9, 0xaf)]
+RIDL! {#[uuid(0x54b50739, 0x686f, 0x45eb, 0x9d, 0xff, 0xd6, 0xa9, 0xa0, 0xfa, 0xa9, 0xaf)]
 interface IBackgroundCopyJob2(IBackgroundCopyJob2Vtbl):
     IBackgroundCopyJob(IBackgroundCopyJobVtbl) {
     fn SetNotifyCmdLine(

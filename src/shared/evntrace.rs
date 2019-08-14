@@ -13,25 +13,25 @@ use um::handleapi::INVALID_HANDLE_VALUE;
 use um::timezoneapi::TIME_ZONE_INFORMATION;
 use um::winnt::{
     ANYSIZE_ARRAY, BOOLEAN, HANDLE, LARGE_INTEGER, LONG, LONGLONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR,
-    PVOID, ULONGLONG, WCHAR
+    PVOID, ULONGLONG, WCHAR,
 };
 use vc::vadefs::va_list;
-DEFINE_GUID!{EventTraceGuid,
-    0x68fdd900, 0x4a3e, 0x11d1, 0x84, 0xf4, 0x00, 0x00, 0xf8, 0x04, 0x64, 0xe3}
-DEFINE_GUID!{SystemTraceControlGuid,
-    0x9e814aad, 0x3204, 0x11d2, 0x9a, 0x82, 0x00, 0x60, 0x08, 0xa8, 0x69, 0x39}
-DEFINE_GUID!{EventTraceConfigGuid,
-    0x01853a65, 0x418f, 0x4f36, 0xae, 0xfc, 0xdc, 0x0f, 0x1d, 0x2f, 0xd2, 0x35}
-DEFINE_GUID!{DefaultTraceSecurityGuid,
-    0x0811c1af, 0x7a07, 0x4a06, 0x82, 0xed, 0x86, 0x94, 0x55, 0xcd, 0xf7, 0x13}
-DEFINE_GUID!{PrivateLoggerNotificationGuid,
-    0x3595ab5c, 0x042a, 0x4c8e, 0xb9, 0x42, 0x2d, 0x05, 0x9b, 0xfe, 0xb1, 0xb1}
+DEFINE_GUID! {EventTraceGuid,
+0x68fdd900, 0x4a3e, 0x11d1, 0x84, 0xf4, 0x00, 0x00, 0xf8, 0x04, 0x64, 0xe3}
+DEFINE_GUID! {SystemTraceControlGuid,
+0x9e814aad, 0x3204, 0x11d2, 0x9a, 0x82, 0x00, 0x60, 0x08, 0xa8, 0x69, 0x39}
+DEFINE_GUID! {EventTraceConfigGuid,
+0x01853a65, 0x418f, 0x4f36, 0xae, 0xfc, 0xdc, 0x0f, 0x1d, 0x2f, 0xd2, 0x35}
+DEFINE_GUID! {DefaultTraceSecurityGuid,
+0x0811c1af, 0x7a07, 0x4a06, 0x82, 0xed, 0x86, 0x94, 0x55, 0xcd, 0xf7, 0x13}
+DEFINE_GUID! {PrivateLoggerNotificationGuid,
+0x3595ab5c, 0x042a, 0x4c8e, 0xb9, 0x42, 0x2d, 0x05, 0x9b, 0xfe, 0xb1, 0xb1}
 pub const KERNEL_LOGGER_NAME: &'static str = "NT Kernel Logger";
 pub const GLOBAL_LOGGER_NAME: &'static str = "GlobalLogger";
 pub const EVENT_LOGGER_NAME: &'static str = "EventLog";
 pub const DIAG_LOGGER_NAME: &'static str = "DiagLog";
 pub const MAX_MOF_FIELDS: SIZE_T = 16;
-DECLARE_HANDLE!{TRACEHANDLE, __TRACEHANDLE}
+DECLARE_HANDLE! {TRACEHANDLE, __TRACEHANDLE}
 pub type PTRACEHANDLE = *mut TRACEHANDLE;
 pub const EVENT_TRACE_TYPE_INFO: DWORD = 0x00;
 pub const EVENT_TRACE_TYPE_START: DWORD = 0x01;
@@ -228,50 +228,50 @@ pub const TRACE_HEADER_FLAG_TRACED_GUID: DWORD = 0x00020000;
 pub const TRACE_HEADER_FLAG_LOG_WNODE: DWORD = 0x00040000;
 pub const TRACE_HEADER_FLAG_USE_GUID_PTR: DWORD = 0x00080000;
 pub const TRACE_HEADER_FLAG_USE_MOF_PTR: DWORD = 0x00100000;
-ENUM!{enum ETW_COMPRESSION_RESUMPTION_MODE {
+ENUM! {enum ETW_COMPRESSION_RESUMPTION_MODE {
     EtwCompressionModeRestart = 0,
     EtwCompressionModeNoDisable = 1,
     EtwCompressionModeNoRestart = 2,
 }}
-STRUCT!{struct EVENT_TRACE_HEADER_u1_s {
+STRUCT! {struct EVENT_TRACE_HEADER_u1_s {
     HeaderType: UCHAR,
     MarkerFlags: UCHAR,
 }}
-UNION!{union EVENT_TRACE_HEADER_u1 {
+UNION! {union EVENT_TRACE_HEADER_u1 {
     [u16; 1],
     FieldTypeFlags FieldTypeFlags_mut: USHORT,
     s s_mut: EVENT_TRACE_HEADER_u1_s,
 }}
-STRUCT!{struct EVENT_TRACE_HEADER_u2_CLASS {
+STRUCT! {struct EVENT_TRACE_HEADER_u2_CLASS {
     Type: UCHAR,
     Level: UCHAR,
     Version: USHORT,
 }}
-UNION!{union EVENT_TRACE_HEADER_u2 {
+UNION! {union EVENT_TRACE_HEADER_u2 {
     [u32; 1],
     Version Version_mut: ULONG,
     Class Class_mut: EVENT_TRACE_HEADER_u2_CLASS,
 }}
-UNION!{union EVENT_TRACE_HEADER_u3 {
+UNION! {union EVENT_TRACE_HEADER_u3 {
     [u64; 2],
     Guid Guid_mut: GUID,
     GuidPtr GuidPtr_mut: ULONGLONG,
 }}
-STRUCT!{struct EVENT_TRACE_HEADER_u4_s1 {
+STRUCT! {struct EVENT_TRACE_HEADER_u4_s1 {
     ClientContext: ULONG,
     Flags: ULONG,
 }}
-STRUCT!{struct EVENT_TRACE_HEADER_u4_s2 {
+STRUCT! {struct EVENT_TRACE_HEADER_u4_s2 {
     KernelTime: ULONG,
     UserTime: ULONG,
 }}
-UNION!{union EVENT_TRACE_HEADER_u4 {
+UNION! {union EVENT_TRACE_HEADER_u4 {
     [u64; 1],
     s1 s1_mut: EVENT_TRACE_HEADER_u4_s1,
     s2 s2_mut: EVENT_TRACE_HEADER_u4_s2,
     ProcessorTime ProcessorTime_mut: ULONG64,
 }}
-STRUCT!{struct EVENT_TRACE_HEADER {
+STRUCT! {struct EVENT_TRACE_HEADER {
     Size: USHORT,
     u1: EVENT_TRACE_HEADER_u1,
     u2: EVENT_TRACE_HEADER_u2,
@@ -282,40 +282,40 @@ STRUCT!{struct EVENT_TRACE_HEADER {
     u4: EVENT_TRACE_HEADER_u4,
 }}
 pub type PEVENT_TRACE_HEADER = *mut EVENT_TRACE_HEADER;
-STRUCT!{struct EVENT_INSTANCE_HEADER_u1_s {
+STRUCT! {struct EVENT_INSTANCE_HEADER_u1_s {
     HeaderType: UCHAR,
     MarkerFlags: UCHAR,
 }}
-UNION!{union EVENT_INSTANCE_HEADER_u1 {
+UNION! {union EVENT_INSTANCE_HEADER_u1 {
     [u16; 1],
     FieldTypeFlags FieldTypeFlags_mut: USHORT,
     s s_mut: EVENT_INSTANCE_HEADER_u1_s,
 }}
-STRUCT!{struct EVENT_INSTANCE_HEADER_u2_CLASS {
+STRUCT! {struct EVENT_INSTANCE_HEADER_u2_CLASS {
     Type: UCHAR,
     Level: UCHAR,
     Version: USHORT,
 }}
-UNION!{union EVENT_INSTANCE_HEADER_u2 {
+UNION! {union EVENT_INSTANCE_HEADER_u2 {
     [u32; 1],
     Version Version_mut: ULONG,
     Class Class_mut: EVENT_INSTANCE_HEADER_u2_CLASS,
 }}
-STRUCT!{struct EVENT_INSTANCE_HEADER_u3_s1 {
+STRUCT! {struct EVENT_INSTANCE_HEADER_u3_s1 {
     KernelTime: ULONG,
     UserTime: ULONG,
 }}
-STRUCT!{struct EVENT_INSTANCE_HEADER_u3_s2 {
+STRUCT! {struct EVENT_INSTANCE_HEADER_u3_s2 {
     EventId: ULONG,
     Flags: ULONG,
 }}
-UNION!{union EVENT_INSTANCE_HEADER_u3 {
+UNION! {union EVENT_INSTANCE_HEADER_u3 {
     [u64; 1],
     s1 s1_mut: EVENT_INSTANCE_HEADER_u3_s1,
     ProcessorTime ProcessorTime_mut: ULONG64,
     s2 s2_mut: EVENT_INSTANCE_HEADER_u3_s2,
 }}
-STRUCT!{struct EVENT_INSTANCE_HEADER {
+STRUCT! {struct EVENT_INSTANCE_HEADER {
     Size: USHORT,
     u1: EVENT_INSTANCE_HEADER_u1,
     u2: EVENT_INSTANCE_HEADER_u2,
@@ -366,35 +366,35 @@ pub const ETW_WMITIME_TYPE_VALUE: ULONG = 118;
 pub const ETW_DATETIME_TYPE_VALUE: ULONG = 119;
 pub const ETW_REFRENCE_TYPE_VALUE: ULONG = 120;
 // TODO: DEFINE_TRACE_MOF_FIELD
-STRUCT!{struct MOF_FIELD {
+STRUCT! {struct MOF_FIELD {
     DataPtr: ULONG64,
     Length: ULONG,
     DataType: ULONG,
 }}
 pub type PMOF_FIELD = *mut MOF_FIELD;
-STRUCT!{struct TRACE_LOGFILE_HEADER_u1_VERSIONDETAIL {
+STRUCT! {struct TRACE_LOGFILE_HEADER_u1_VERSIONDETAIL {
     MajorVersion: UCHAR,
     MinorVersion: UCHAR,
     SubVersion: UCHAR,
     SubMinorVersion: UCHAR,
 }}
-UNION!{union TRACE_LOGFILE_HEADER_u1 {
+UNION! {union TRACE_LOGFILE_HEADER_u1 {
     [u32; 1],
     Version Version_mut: ULONG,
     VersionDetail VersionDetail_mut: TRACE_LOGFILE_HEADER_u1_VERSIONDETAIL,
 }}
-STRUCT!{struct TRACE_LOGFILE_HEADER_u2_s {
+STRUCT! {struct TRACE_LOGFILE_HEADER_u2_s {
     StartBuffers: ULONG,
     PointerSize: ULONG,
     EventsLost: ULONG,
     CpuSpeedInMHz: ULONG,
 }}
-UNION!{union TRACE_LOGFILE_HEADER_u2 {
+UNION! {union TRACE_LOGFILE_HEADER_u2 {
     [u32; 4],
     LogInstanceGuid LogInstanceGuid_mut: GUID,
     s s_mut: TRACE_LOGFILE_HEADER_u2_s,
 }}
-STRUCT!{struct TRACE_LOGFILE_HEADER {
+STRUCT! {struct TRACE_LOGFILE_HEADER {
     BufferSize: ULONG,
     u1: TRACE_LOGFILE_HEADER_u1,
     ProviderVersion: ULONG,
@@ -415,7 +415,7 @@ STRUCT!{struct TRACE_LOGFILE_HEADER {
     BuffersLost: ULONG,
 }}
 pub type PTRACE_LOGFILE_HEADER = *mut TRACE_LOGFILE_HEADER;
-STRUCT!{struct TRACE_LOGFILE_HEADER32 {
+STRUCT! {struct TRACE_LOGFILE_HEADER32 {
     BufferSize: ULONG,
     u1: TRACE_LOGFILE_HEADER_u1,
     ProviderVersion: ULONG,
@@ -436,7 +436,7 @@ STRUCT!{struct TRACE_LOGFILE_HEADER32 {
     BuffersLost: ULONG,
 }}
 pub type PTRACE_LOGFILE_HEADER32 = *mut TRACE_LOGFILE_HEADER32;
-STRUCT!{struct TRACE_LOGFILE_HEADER64 {
+STRUCT! {struct TRACE_LOGFILE_HEADER64 {
     BufferSize: ULONG,
     u1: TRACE_LOGFILE_HEADER_u1,
     ProviderVersion: ULONG,
@@ -457,17 +457,17 @@ STRUCT!{struct TRACE_LOGFILE_HEADER64 {
     BuffersLost: ULONG,
 }}
 pub type PTRACE_LOGFILE_HEADER64 = *mut TRACE_LOGFILE_HEADER64;
-STRUCT!{struct EVENT_INSTANCE_INFO {
+STRUCT! {struct EVENT_INSTANCE_INFO {
     RegHandle: HANDLE,
     InstanceId: ULONG,
 }}
 pub type PEVENT_INSTANCE_INFO = *mut EVENT_INSTANCE_INFO;
-UNION!{union EVENT_TRACE_PROPERTIES_u {
+UNION! {union EVENT_TRACE_PROPERTIES_u {
     [u32; 1],
     AgeLimit AgeLimit_mut: LONG,
     FlushThreshold FlushThreshold_mut: LONG,
 }}
-STRUCT!{struct EVENT_TRACE_PROPERTIES {
+STRUCT! {struct EVENT_TRACE_PROPERTIES {
     Wnode: WNODE_HEADER,
     BufferSize: ULONG,
     MinimumBuffers: ULONG,
@@ -488,34 +488,34 @@ STRUCT!{struct EVENT_TRACE_PROPERTIES {
     LoggerNameOffset: ULONG,
 }}
 pub type PEVENT_TRACE_PROPERTIES = *mut EVENT_TRACE_PROPERTIES;
-UNION!{union EVENT_TRACE_PROPERTIES_V2_u1 {
+UNION! {union EVENT_TRACE_PROPERTIES_V2_u1 {
     [u32; 1],
     AgeLimit AgeLimit_mut: LONG,
     FlushThreshold FlushThreshold_mut: LONG,
 }}
-STRUCT!{struct EVENT_TRACE_PROPERTIES_V2_u2_s {
+STRUCT! {struct EVENT_TRACE_PROPERTIES_V2_u2_s {
     bitfield: ULONG,
 }}
-BITFIELD!{EVENT_TRACE_PROPERTIES_V2_u2_s bitfield: ULONG [
+BITFIELD! {EVENT_TRACE_PROPERTIES_V2_u2_s bitfield: ULONG [
     VersionNumber set_VersionNumber[0..8],
 ]}
-UNION!{union EVENT_TRACE_PROPERTIES_V2_u2 {
+UNION! {union EVENT_TRACE_PROPERTIES_V2_u2 {
     [u32; 1],
     s s_mut: EVENT_TRACE_PROPERTIES_V2_u2_s,
     V2Control V2Control_mut: ULONG,
 }}
-STRUCT!{struct EVENT_TRACE_PROPERTIES_V2_u3_s {
+STRUCT! {struct EVENT_TRACE_PROPERTIES_V2_u3_s {
     bitfield: ULONG,
 }}
-BITFIELD!{EVENT_TRACE_PROPERTIES_V2_u3_s bitfield: ULONG [
+BITFIELD! {EVENT_TRACE_PROPERTIES_V2_u3_s bitfield: ULONG [
     Wow set_Wow[0..1],
 ]}
-UNION!{union EVENT_TRACE_PROPERTIES_V2_u3 {
+UNION! {union EVENT_TRACE_PROPERTIES_V2_u3 {
     [u64; 1],
     s s_mut: EVENT_TRACE_PROPERTIES_V2_u3_s,
     V2Options V2Options_mut: ULONG64,
 }}
-STRUCT!{struct EVENT_TRACE_PROPERTIES_V2 {
+STRUCT! {struct EVENT_TRACE_PROPERTIES_V2 {
     Wnode: WNODE_HEADER,
     BufferSize: ULONG,
     MinimumBuffers: ULONG,
@@ -540,12 +540,12 @@ STRUCT!{struct EVENT_TRACE_PROPERTIES_V2 {
     u3: EVENT_TRACE_PROPERTIES_V2_u3,
 }}
 pub type PEVENT_TRACE_PROPERTIES_V2 = *mut EVENT_TRACE_PROPERTIES_V2;
-STRUCT!{struct TRACE_GUID_REGISTRATION {
+STRUCT! {struct TRACE_GUID_REGISTRATION {
     Guid: LPCGUID,
     RegHandle: HANDLE,
 }}
 pub type PTRACE_GUID_REGISTRATION = *mut TRACE_GUID_REGISTRATION;
-STRUCT!{struct TRACE_GUID_PROPERTIES {
+STRUCT! {struct TRACE_GUID_PROPERTIES {
     Guid: GUID,
     GuidType: ULONG,
     LoggerId: ULONG,
@@ -554,23 +554,23 @@ STRUCT!{struct TRACE_GUID_PROPERTIES {
     IsEnable: BOOLEAN,
 }}
 pub type PTRACE_GUID_PROPERTIES = *mut TRACE_GUID_PROPERTIES;
-STRUCT!{struct ETW_BUFFER_CONTEXT_u_s {
+STRUCT! {struct ETW_BUFFER_CONTEXT_u_s {
     ProcessorNumber: UCHAR,
     Alignment: UCHAR,
 }}
-UNION!{union ETW_BUFFER_CONTEXT_u {
+UNION! {union ETW_BUFFER_CONTEXT_u {
     [u16; 1],
     s s_mut: ETW_BUFFER_CONTEXT_u_s,
     ProcessorIndex ProcessorIndex_mut: USHORT,
 }}
-STRUCT!{struct ETW_BUFFER_CONTEXT {
+STRUCT! {struct ETW_BUFFER_CONTEXT {
     u: ETW_BUFFER_CONTEXT_u,
     LoggerId: USHORT,
 }}
 pub type PETW_BUFFER_CONTEXT = *mut ETW_BUFFER_CONTEXT;
 pub const TRACE_PROVIDER_FLAG_LEGACY: ULONG = 0x00000001;
 pub const TRACE_PROVIDER_FLAG_PRE_ENABLE: ULONG = 0x00000002;
-STRUCT!{struct TRACE_ENABLE_INFO {
+STRUCT! {struct TRACE_ENABLE_INFO {
     IsEnabled: ULONG,
     Level: UCHAR,
     Reserved1: UCHAR,
@@ -581,19 +581,19 @@ STRUCT!{struct TRACE_ENABLE_INFO {
     MatchAllKeyword: ULONGLONG,
 }}
 pub type PTRACE_ENABLE_INFO = *mut TRACE_ENABLE_INFO;
-STRUCT!{struct TRACE_PROVIDER_INSTANCE_INFO {
+STRUCT! {struct TRACE_PROVIDER_INSTANCE_INFO {
     NameOffset: ULONG,
     EnableCount: ULONG,
     Pid: ULONG,
     Flags: ULONG,
 }}
 pub type PTRACE_PROVIDER_INSTANCE_INFO = *mut TRACE_PROVIDER_INSTANCE_INFO;
-STRUCT!{struct TRACE_GUID_INFO {
+STRUCT! {struct TRACE_GUID_INFO {
     InstanceCount: ULONG,
     Reserved: ULONG,
 }}
 pub type PTRACE_GUID_INFO = *mut TRACE_GUID_INFO;
-STRUCT!{struct PROFILE_SOURCE_INFO {
+STRUCT! {struct PROFILE_SOURCE_INFO {
     NextEntryOffset: ULONG,
     Source: ULONG,
     MinInterval: ULONG,
@@ -602,12 +602,12 @@ STRUCT!{struct PROFILE_SOURCE_INFO {
     Description: [WCHAR; ANYSIZE_ARRAY],
 }}
 pub type PPROFILE_SOURCE_INFO = *mut PROFILE_SOURCE_INFO;
-UNION!{union EVENT_TRACE_u {
+UNION! {union EVENT_TRACE_u {
     [u32; 1],
     ClientContext ClientContext_mut: ULONG,
     BufferContext BufferContext_mut: ETW_BUFFER_CONTEXT,
 }}
-STRUCT!{struct EVENT_TRACE {
+STRUCT! {struct EVENT_TRACE {
     Header: EVENT_TRACE_HEADER,
     InstanceId: ULONG,
     ParentInstanceId: ULONG,
@@ -620,35 +620,35 @@ pub type PEVENT_TRACE = *mut EVENT_TRACE;
 pub const EVENT_CONTROL_CODE_DISABLE_PROVIDER: ULONG = 0;
 pub const EVENT_CONTROL_CODE_ENABLE_PROVIDER: ULONG = 1;
 pub const EVENT_CONTROL_CODE_CAPTURE_STATE: ULONG = 2;
-FN!{stdcall PEVENT_TRACE_BUFFER_CALLBACKW(
+FN! {stdcall PEVENT_TRACE_BUFFER_CALLBACKW(
     PEVENT_TRACE_LOGFILEW,
 ) -> ULONG}
-FN!{stdcall PEVENT_TRACE_BUFFER_CALLBACKA(
+FN! {stdcall PEVENT_TRACE_BUFFER_CALLBACKA(
     PEVENT_TRACE_LOGFILEA,
 ) -> ULONG}
-FN!{stdcall PEVENT_CALLBACK(
+FN! {stdcall PEVENT_CALLBACK(
     pEvent: PEVENT_TRACE,
 ) -> ()}
-FN!{stdcall PEVENT_RECORD_CALLBACK(
+FN! {stdcall PEVENT_RECORD_CALLBACK(
     EventRecord: PEVENT_RECORD,
 ) -> ()}
-FN!{stdcall WMIDPREQUEST(
+FN! {stdcall WMIDPREQUEST(
     RequestCode: WMIDPREQUESTCODE,
     RequestContext: PVOID,
     BufferSize: *mut ULONG,
     Buffer: PVOID,
 ) -> ULONG}
-UNION!{union EVENT_TRACE_LOGFILE_u1 {
+UNION! {union EVENT_TRACE_LOGFILE_u1 {
     [u32; 1],
     LogFileMode LogFileMode_mut: ULONG,
     ProcessTraceMode ProcessTraceMode_mut: ULONG,
 }}
-UNION!{union EVENT_TRACE_LOGFILE_u2 {
+UNION! {union EVENT_TRACE_LOGFILE_u2 {
     [u32; 1] [u64; 1],
     EventCallback EventCallback_mut: PEVENT_CALLBACK,
     EventRecordCallback EventRecordCallback_mut: PEVENT_RECORD_CALLBACK,
 }}
-STRUCT!{struct EVENT_TRACE_LOGFILEW {
+STRUCT! {struct EVENT_TRACE_LOGFILEW {
     LogFileName: LPWSTR,
     LoggerName: LPWSTR,
     CurrentTime: LONGLONG,
@@ -665,7 +665,7 @@ STRUCT!{struct EVENT_TRACE_LOGFILEW {
     Context: PVOID,
 }}
 pub type PEVENT_TRACE_LOGFILEW = *mut EVENT_TRACE_LOGFILEW;
-STRUCT!{struct EVENT_TRACE_LOGFILEA {
+STRUCT! {struct EVENT_TRACE_LOGFILEA {
     LogFileName: LPSTR,
     LoggerName: LPSTR,
     CurrentTime: LONGLONG,
@@ -776,7 +776,7 @@ extern "system" {
 }
 pub const ENABLE_TRACE_PARAMETERS_VERSION: ULONG = 1;
 pub const ENABLE_TRACE_PARAMETERS_VERSION_2: ULONG = 2;
-STRUCT!{struct ENABLE_TRACE_PARAMETERS_V1 {
+STRUCT! {struct ENABLE_TRACE_PARAMETERS_V1 {
     Version: ULONG,
     EnableProperty: ULONG,
     ControlFlags: ULONG,
@@ -784,7 +784,7 @@ STRUCT!{struct ENABLE_TRACE_PARAMETERS_V1 {
     EnableFilterDesc: PEVENT_FILTER_DESCRIPTOR,
 }}
 pub type PENABLE_TRACE_PARAMETERS_V1 = *mut ENABLE_TRACE_PARAMETERS_V1;
-STRUCT!{struct ENABLE_TRACE_PARAMETERS {
+STRUCT! {struct ENABLE_TRACE_PARAMETERS {
     Version: ULONG,
     EnableProperty: ULONG,
     ControlFlags: ULONG,
@@ -805,7 +805,7 @@ extern "system" {
         EnableParameters: PENABLE_TRACE_PARAMETERS,
     ) -> ULONG;
 }
-ENUM!{enum TRACE_QUERY_INFO_CLASS {
+ENUM! {enum TRACE_QUERY_INFO_CLASS {
     TraceGuidQueryList,
     TraceGuidQueryInfo,
     TraceGuidQueryProcess,
@@ -839,23 +839,23 @@ extern "system" {
         ReturnLength: PULONG,
     ) -> ULONG;
 }
-STRUCT!{struct CLASSIC_EVENT_ID {
+STRUCT! {struct CLASSIC_EVENT_ID {
     EventGuid: GUID,
     Type: UCHAR,
     Reserved: [UCHAR; 7],
 }}
 pub type PCLASSIC_EVENT_ID = *mut CLASSIC_EVENT_ID;
-STRUCT!{struct TRACE_PROFILE_INTERVAL {
+STRUCT! {struct TRACE_PROFILE_INTERVAL {
     Source: ULONG,
     Interval: ULONG,
 }}
 pub type PTRACE_PROFILE_INTERVAL = *mut TRACE_PROFILE_INTERVAL;
-STRUCT!{struct TRACE_VERSION_INFO {
+STRUCT! {struct TRACE_VERSION_INFO {
     EtwTraceProcessingVersion: UINT,
     Reserved: UINT,
 }}
 pub type PTRACE_VERSION_INFO = *mut TRACE_VERSION_INFO;
-STRUCT!{struct TRACE_PERIODIC_CAPTURE_STATE_INFO {
+STRUCT! {struct TRACE_PERIODIC_CAPTURE_STATE_INFO {
     CaptureStateFrequencyInSeconds: ULONG,
     ProviderCount: USHORT,
     Reserved: USHORT,
@@ -875,14 +875,8 @@ extern "system" {
         InformationLength: ULONG,
         ReturnLength: PULONG,
     ) -> ULONG;
-    pub fn CreateTraceInstanceId(
-        RegHandle: HANDLE,
-        pInstInfo: PEVENT_INSTANCE_INFO,
-    ) -> ULONG;
-    pub fn TraceEvent(
-        SessionHandle: TRACEHANDLE,
-        EventTrace: PEVENT_TRACE_HEADER,
-    ) -> ULONG;
+    pub fn CreateTraceInstanceId(RegHandle: HANDLE, pInstInfo: PEVENT_INSTANCE_INFO) -> ULONG;
+    pub fn TraceEvent(SessionHandle: TRACEHANDLE, EventTrace: PEVENT_TRACE_HEADER) -> ULONG;
     pub fn TraceEventInstance(
         SessionHandle: TRACEHANDLE,
         EventTrace: PEVENT_TRACE_HEADER,
@@ -914,36 +908,24 @@ extern "system" {
         PropertyArrayCount: ULONG,
         GuidCount: PULONG,
     ) -> ULONG;
-    pub fn UnregisterTraceGuids(
-        RegistrationHandle: TRACEHANDLE,
-    ) -> ULONG;
-    pub fn GetTraceLoggerHandle(
-        Buffer: PVOID,
-    ) -> TRACEHANDLE;
-    pub fn GetTraceEnableLevel(
-        SessionHandle: TRACEHANDLE,
-    ) -> UCHAR;
-    pub fn GetTraceEnableFlags(
-        SessionHandle: TRACEHANDLE,
-    ) -> ULONG;
-    pub fn OpenTraceW(
-        Logfile: PEVENT_TRACE_LOGFILEW,
-    ) -> TRACEHANDLE;
+    pub fn UnregisterTraceGuids(RegistrationHandle: TRACEHANDLE) -> ULONG;
+    pub fn GetTraceLoggerHandle(Buffer: PVOID) -> TRACEHANDLE;
+    pub fn GetTraceEnableLevel(SessionHandle: TRACEHANDLE) -> UCHAR;
+    pub fn GetTraceEnableFlags(SessionHandle: TRACEHANDLE) -> ULONG;
+    pub fn OpenTraceW(Logfile: PEVENT_TRACE_LOGFILEW) -> TRACEHANDLE;
     pub fn ProcessTrace(
         HandleArray: PTRACEHANDLE,
         HandleCount: ULONG,
         StartTime: LPFILETIME,
         EndTime: LPFILETIME,
     ) -> ULONG;
-    pub fn CloseTrace(
-        TraceHandle: TRACEHANDLE,
-    ) -> ULONG;
+    pub fn CloseTrace(TraceHandle: TRACEHANDLE) -> ULONG;
 }
-ENUM!{enum ETW_PROCESS_HANDLE_INFO_TYPE {
+ENUM! {enum ETW_PROCESS_HANDLE_INFO_TYPE {
     EtwQueryPartitionInformation = 1,
     EtwQueryProcessHandleInfoMax,
 }}
-STRUCT!{struct ETW_TRACE_PARTITION_INFORMATION {
+STRUCT! {struct ETW_TRACE_PARTITION_INFORMATION {
     PartitionId: GUID,
     ParentId: GUID,
     Reserved: ULONG64,
@@ -960,16 +942,9 @@ extern "system" {
         OutBufferSize: ULONG,
         ReturnLength: PULONG,
     ) -> ULONG;
-    pub fn OpenTraceA(
-        Logfile: PEVENT_TRACE_LOGFILEA,
-    ) -> TRACEHANDLE;
-    pub fn SetTraceCallback(
-        pGuid: LPCGUID,
-        EventCallback: PEVENT_CALLBACK,
-    ) -> ULONG;
-    pub fn RemoveTraceCallback(
-        pGuid: LPCGUID,
-    ) -> ULONG;
+    pub fn OpenTraceA(Logfile: PEVENT_TRACE_LOGFILEA) -> TRACEHANDLE;
+    pub fn SetTraceCallback(pGuid: LPCGUID, EventCallback: PEVENT_CALLBACK) -> ULONG;
+    pub fn RemoveTraceCallback(pGuid: LPCGUID) -> ULONG;
 }
 extern "C" {
     pub fn TraceMessage(

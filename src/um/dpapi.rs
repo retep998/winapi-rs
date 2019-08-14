@@ -12,7 +12,7 @@ pub const szFORCE_KEY_PROTECTION: &'static str = "ForceKeyProtection";
 pub const dwFORCE_KEY_PROTECTION_DISABLED: DWORD = 0x0;
 pub const dwFORCE_KEY_PROTECTION_USER_SELECT: DWORD = 0x1;
 pub const dwFORCE_KEY_PROTECTION_HIGH: DWORD = 0x2;
-STRUCT!{struct CRYPTPROTECT_PROMPTSTRUCT {
+STRUCT! {struct CRYPTPROTECT_PROMPTSTRUCT {
     cbSize: DWORD,
     dwPromptFlags: DWORD,
     hwndApp: HWND,
@@ -87,14 +87,6 @@ pub const CRYPTPROTECTMEMORY_SAME_PROCESS: DWORD = 0x00;
 pub const CRYPTPROTECTMEMORY_CROSS_PROCESS: DWORD = 0x01;
 pub const CRYPTPROTECTMEMORY_SAME_LOGON: DWORD = 0x02;
 extern "system" {
-    pub fn CryptProtectMemory(
-        pDataIn: LPVOID,
-        cbDataIn: DWORD,
-        dwFlags: DWORD,
-    ) -> BOOL;
-    pub fn CryptUnprotectMemory(
-        pDataIn: LPVOID,
-        cbDataIn: DWORD,
-        dwFlags: DWORD,
-    ) -> BOOL;
+    pub fn CryptProtectMemory(pDataIn: LPVOID, cbDataIn: DWORD, dwFlags: DWORD) -> BOOL;
+    pub fn CryptUnprotectMemory(pDataIn: LPVOID, cbDataIn: DWORD, dwFlags: DWORD) -> BOOL;
 }

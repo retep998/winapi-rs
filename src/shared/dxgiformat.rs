@@ -4,7 +4,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Mappings for the contents of dxgiformat.h
-ENUM!{enum DXGI_FORMAT {
+ENUM! {enum DXGI_FORMAT {
     DXGI_FORMAT_UNKNOWN = 0,
     DXGI_FORMAT_R32G32B32A32_TYPELESS = 1,
     DXGI_FORMAT_R32G32B32A32_FLOAT = 2,

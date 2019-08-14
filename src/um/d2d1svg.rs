@@ -11,13 +11,13 @@ use shared::minwindef::{BOOL, FLOAT};
 use shared::ntdef::{PCWSTR, PWSTR, WCHAR};
 use shared::winerror::HRESULT;
 use um::d2d1::{
-    D2D1_CAP_STYLE_FLAT, D2D1_CAP_STYLE_ROUND, D2D1_CAP_STYLE_SQUARE, D2D1_COLOR_F, D2D1_FILL_MODE,
-    D2D1_LINE_JOIN_BEVEL, D2D1_LINE_JOIN_MITER_OR_BEVEL, D2D1_LINE_JOIN_ROUND, D2D1_POINT_2F,
-    D2D1_SIZE_F, ID2D1Resource, ID2D1ResourceVtbl
+    ID2D1Resource, ID2D1ResourceVtbl, D2D1_CAP_STYLE_FLAT, D2D1_CAP_STYLE_ROUND,
+    D2D1_CAP_STYLE_SQUARE, D2D1_COLOR_F, D2D1_FILL_MODE, D2D1_LINE_JOIN_BEVEL,
+    D2D1_LINE_JOIN_MITER_OR_BEVEL, D2D1_LINE_JOIN_ROUND, D2D1_POINT_2F, D2D1_SIZE_F,
 };
 use um::d2d1_1::ID2D1PathGeometry1;
 use um::objidlbase::IStream;
-ENUM!{enum D2D1_SVG_PAINT_TYPE {
+ENUM! {enum D2D1_SVG_PAINT_TYPE {
     D2D1_SVG_PAINT_TYPE_NONE = 0,
     D2D1_SVG_PAINT_TYPE_COLOR = 1,
     D2D1_SVG_PAINT_TYPE_CURRENT_COLOR = 2,
@@ -26,33 +26,33 @@ ENUM!{enum D2D1_SVG_PAINT_TYPE {
     D2D1_SVG_PAINT_TYPE_URI_COLOR = 5,
     D2D1_SVG_PAINT_TYPE_URI_CURRENT_COLOR = 6,
 }}
-ENUM!{enum D2D1_SVG_LENGTH_UNITS {
+ENUM! {enum D2D1_SVG_LENGTH_UNITS {
     D2D1_SVG_LENGTH_UNITS_NUMBER = 0,
     D2D1_SVG_LENGTH_UNITS_PERCENTAGE = 1,
 }}
-ENUM!{enum D2D1_SVG_DISPLAY {
+ENUM! {enum D2D1_SVG_DISPLAY {
     D2D1_SVG_DISPLAY_INLINE = 0,
     D2D1_SVG_DISPLAY_NONE = 1,
 }}
-ENUM!{enum D2D1_SVG_VISIBILITY {
+ENUM! {enum D2D1_SVG_VISIBILITY {
     D2D1_SVG_VISIBILITY_VISIBLE = 0,
     D2D1_SVG_VISIBILITY_HIDDEN = 1,
 }}
-ENUM!{enum D2D1_SVG_OVERFLOW {
+ENUM! {enum D2D1_SVG_OVERFLOW {
     D2D1_SVG_OVERFLOW_VISIBLE = 0,
     D2D1_SVG_OVERFLOW_HIDDEN = 1,
 }}
-ENUM!{enum D2D1_SVG_LINE_CAP {
+ENUM! {enum D2D1_SVG_LINE_CAP {
     D2D1_SVG_LINE_CAP_BUTT = D2D1_CAP_STYLE_FLAT,
     D2D1_SVG_LINE_CAP_SQUARE = D2D1_CAP_STYLE_SQUARE,
     D2D1_SVG_LINE_CAP_ROUND = D2D1_CAP_STYLE_ROUND,
 }}
-ENUM!{enum D2D1_SVG_LINE_JOIN {
+ENUM! {enum D2D1_SVG_LINE_JOIN {
     D2D1_SVG_LINE_JOIN_BEVEL = D2D1_LINE_JOIN_BEVEL,
     D2D1_SVG_LINE_JOIN_MITER = D2D1_LINE_JOIN_MITER_OR_BEVEL,
     D2D1_SVG_LINE_JOIN_ROUND = D2D1_LINE_JOIN_ROUND,
 }}
-ENUM!{enum D2D1_SVG_ASPECT_ALIGN {
+ENUM! {enum D2D1_SVG_ASPECT_ALIGN {
     D2D1_SVG_ASPECT_ALIGN_NONE = 0,
     D2D1_SVG_ASPECT_ALIGN_X_MIN_Y_MIN = 1,
     D2D1_SVG_ASPECT_ALIGN_X_MID_Y_MIN = 2,
@@ -64,11 +64,11 @@ ENUM!{enum D2D1_SVG_ASPECT_ALIGN {
     D2D1_SVG_ASPECT_ALIGN_X_MID_Y_MAX = 8,
     D2D1_SVG_ASPECT_ALIGN_X_MAX_Y_MAX = 9,
 }}
-ENUM!{enum D2D1_SVG_ASPECT_SCALING {
+ENUM! {enum D2D1_SVG_ASPECT_SCALING {
     D2D1_SVG_ASPECT_SCALING_MEET = 0,
     D2D1_SVG_ASPECT_SCALING_SLICE = 1,
 }}
-ENUM!{enum D2D1_SVG_PATH_COMMAND {
+ENUM! {enum D2D1_SVG_PATH_COMMAND {
     D2D1_SVG_PATH_COMMAND_CLOSE_PATH = 0,
     D2D1_SVG_PATH_COMMAND_MOVE_ABSOLUTE = 1,
     D2D1_SVG_PATH_COMMAND_MOVE_RELATIVE = 2,
@@ -89,15 +89,15 @@ ENUM!{enum D2D1_SVG_PATH_COMMAND {
     D2D1_SVG_PATH_COMMAND_QUADRADIC_SMOOTH_ABSOLUTE = 17,
     D2D1_SVG_PATH_COMMAND_QUADRADIC_SMOOTH_RELATIVE = 18,
 }}
-ENUM!{enum D2D1_SVG_UNIT_TYPE {
+ENUM! {enum D2D1_SVG_UNIT_TYPE {
     D2D1_SVG_UNIT_TYPE_USER_SPACE_ON_USE = 0,
     D2D1_SVG_UNIT_TYPE_OBJECT_BOUNDING_BOX = 1,
 }}
-ENUM!{enum D2D1_SVG_ATTRIBUTE_STRING_TYPE {
+ENUM! {enum D2D1_SVG_ATTRIBUTE_STRING_TYPE {
     D2D1_SVG_ATTRIBUTE_STRING_TYPE_SVG = 0,
     D2D1_SVG_ATTRIBUTE_STRING_TYPE_ID = 1,
 }}
-ENUM!{enum D2D1_SVG_ATTRIBUTE_POD_TYPE {
+ENUM! {enum D2D1_SVG_ATTRIBUTE_POD_TYPE {
     D2D1_SVG_ATTRIBUTE_POD_TYPE_FLOAT = 0,
     D2D1_SVG_ATTRIBUTE_POD_TYPE_COLOR = 1,
     D2D1_SVG_ATTRIBUTE_POD_TYPE_FILL_MODE = 2,
@@ -113,36 +113,36 @@ ENUM!{enum D2D1_SVG_ATTRIBUTE_POD_TYPE {
     D2D1_SVG_ATTRIBUTE_POD_TYPE_VIEWBOX = 12,
     D2D1_SVG_ATTRIBUTE_POD_TYPE_LENGTH = 13,
 }}
-STRUCT!{struct D2D1_SVG_LENGTH {
+STRUCT! {struct D2D1_SVG_LENGTH {
     value: FLOAT,
     units: D2D1_SVG_LENGTH_UNITS,
 }}
-STRUCT!{struct D2D1_SVG_PRESERVE_ASPECT_RATIO {
+STRUCT! {struct D2D1_SVG_PRESERVE_ASPECT_RATIO {
     defer: BOOL,
     align: D2D1_SVG_ASPECT_ALIGN,
     meetOrSlice: D2D1_SVG_ASPECT_SCALING,
 }}
-STRUCT!{struct D2D1_SVG_VIEWBOX {
+STRUCT! {struct D2D1_SVG_VIEWBOX {
     x: FLOAT,
     y: FLOAT,
     width: FLOAT,
     height: FLOAT,
 }}
-DEFINE_GUID!{IID_ID2D1SvgAttribute,
-    0xc9cdb0dd, 0xf8c9, 0x4e70, 0xb7, 0xc2, 0x30, 0x1c, 0x80, 0x29, 0x2c, 0x5e}
-DEFINE_GUID!{IID_ID2D1SvgPaint,
-    0xd59bab0a, 0x68a2, 0x455b, 0xa5, 0xdc, 0x9e, 0xb2, 0x85, 0x4e, 0x24, 0x90}
-DEFINE_GUID!{IID_ID2D1SvgStrokeDashArray,
-    0xf1c0ca52, 0x92a3, 0x4f00, 0xb4, 0xce, 0xf3, 0x56, 0x91, 0xef, 0xd9, 0xd9}
-DEFINE_GUID!{IID_ID2D1SvgPointCollection,
-    0x9dbe4c0d, 0x3572, 0x4dd9, 0x98, 0x25, 0x55, 0x30, 0x81, 0x3b, 0xb7, 0x12}
-DEFINE_GUID!{IID_ID2D1SvgPathData,
-    0xc095e4f4, 0xbb98, 0x43d6, 0x97, 0x45, 0x4d, 0x1b, 0x84, 0xec, 0x98, 0x88}
-DEFINE_GUID!{IID_ID2D1SvgElement,
-    0xac7b67a6, 0x183e, 0x49c1, 0xa8, 0x23, 0x0e, 0xbe, 0x40, 0xb0, 0xdb, 0x29}
-DEFINE_GUID!{IID_ID2D1SvgDocument,
-    0x86b88e4d, 0xafa4, 0x4d7b, 0x88, 0xe4, 0x68, 0xa5, 0x1c, 0x4a, 0x0a, 0xec}
-RIDL!{#[uuid(0xc9cdb0dd, 0xf8c9, 0x4e70, 0xb7, 0xc2, 0x30, 0x1c, 0x80, 0x29, 0x2c, 0x5e)]
+DEFINE_GUID! {IID_ID2D1SvgAttribute,
+0xc9cdb0dd, 0xf8c9, 0x4e70, 0xb7, 0xc2, 0x30, 0x1c, 0x80, 0x29, 0x2c, 0x5e}
+DEFINE_GUID! {IID_ID2D1SvgPaint,
+0xd59bab0a, 0x68a2, 0x455b, 0xa5, 0xdc, 0x9e, 0xb2, 0x85, 0x4e, 0x24, 0x90}
+DEFINE_GUID! {IID_ID2D1SvgStrokeDashArray,
+0xf1c0ca52, 0x92a3, 0x4f00, 0xb4, 0xce, 0xf3, 0x56, 0x91, 0xef, 0xd9, 0xd9}
+DEFINE_GUID! {IID_ID2D1SvgPointCollection,
+0x9dbe4c0d, 0x3572, 0x4dd9, 0x98, 0x25, 0x55, 0x30, 0x81, 0x3b, 0xb7, 0x12}
+DEFINE_GUID! {IID_ID2D1SvgPathData,
+0xc095e4f4, 0xbb98, 0x43d6, 0x97, 0x45, 0x4d, 0x1b, 0x84, 0xec, 0x98, 0x88}
+DEFINE_GUID! {IID_ID2D1SvgElement,
+0xac7b67a6, 0x183e, 0x49c1, 0xa8, 0x23, 0x0e, 0xbe, 0x40, 0xb0, 0xdb, 0x29}
+DEFINE_GUID! {IID_ID2D1SvgDocument,
+0x86b88e4d, 0xafa4, 0x4d7b, 0x88, 0xe4, 0x68, 0xa5, 0x1c, 0x4a, 0x0a, 0xec}
+RIDL! {#[uuid(0xc9cdb0dd, 0xf8c9, 0x4e70, 0xb7, 0xc2, 0x30, 0x1c, 0x80, 0x29, 0x2c, 0x5e)]
 interface ID2D1SvgAttribute(ID2D1SvgAttributeVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
     fn GetElement(
         element: *mut *mut ID2D1SvgElement,
@@ -151,7 +151,7 @@ interface ID2D1SvgAttribute(ID2D1SvgAttributeVtbl): ID2D1Resource(ID2D1ResourceV
         attribute: *mut *mut ID2D1SvgAttribute,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xd59bab0a, 0x68a2, 0x455b, 0xa5, 0xdc, 0x9e, 0xb2, 0x85, 0x4e, 0x24, 0x90)]
+RIDL! {#[uuid(0xd59bab0a, 0x68a2, 0x455b, 0xa5, 0xdc, 0x9e, 0xb2, 0x85, 0x4e, 0x24, 0x90)]
 interface ID2D1SvgPaint(ID2D1SvgPaintVtbl): ID2D1SvgAttribute(ID2D1SvgAttributeVtbl) {
     fn SetPaintType(
         paintType: D2D1_SVG_PAINT_TYPE,
@@ -172,7 +172,7 @@ interface ID2D1SvgPaint(ID2D1SvgPaintVtbl): ID2D1SvgAttribute(ID2D1SvgAttributeV
     ) -> HRESULT,
     fn GetIdLength() -> UINT32,
 }}
-RIDL!{#[uuid(0xf1c0ca52, 0x92a3, 0x4f00, 0xb4, 0xce, 0xf3, 0x56, 0x91, 0xef, 0xd9, 0xd9)]
+RIDL! {#[uuid(0xf1c0ca52, 0x92a3, 0x4f00, 0xb4, 0xce, 0xf3, 0x56, 0x91, 0xef, 0xd9, 0xd9)]
 interface ID2D1SvgStrokeDashArray(ID2D1SvgStrokeDashArrayVtbl):
     ID2D1SvgAttribute(ID2D1SvgAttributeVtbl) {
     fn RemoveDashesAtEnd(
@@ -200,7 +200,7 @@ interface ID2D1SvgStrokeDashArray(ID2D1SvgStrokeDashArrayVtbl):
     ) -> HRESULT,
     fn GetDashesCount() -> UINT32,
 }}
-RIDL!{#[uuid(0x9dbe4c0d, 0x3572, 0x4dd9, 0x98, 0x25, 0x55, 0x30, 0x81, 0x3b, 0xb7, 0x12)]
+RIDL! {#[uuid(0x9dbe4c0d, 0x3572, 0x4dd9, 0x98, 0x25, 0x55, 0x30, 0x81, 0x3b, 0xb7, 0x12)]
 interface ID2D1SvgPointCollection(ID2D1SvgPointCollectionVtbl):
     ID2D1SvgAttribute(ID2D1SvgAttributeVtbl) {
     fn RemovePointsAtEnd(
@@ -218,7 +218,7 @@ interface ID2D1SvgPointCollection(ID2D1SvgPointCollectionVtbl):
     ) -> HRESULT,
     fn GetPointsCount() -> UINT32,
 }}
-RIDL!{#[uuid(0xc095e4f4, 0xbb98, 0x43d6, 0x97, 0x45, 0x4d, 0x1b, 0x84, 0xec, 0x98, 0x88)]
+RIDL! {#[uuid(0xc095e4f4, 0xbb98, 0x43d6, 0x97, 0x45, 0x4d, 0x1b, 0x84, 0xec, 0x98, 0x88)]
 interface ID2D1SvgPathData(ID2D1SvgPathDataVtbl): ID2D1SvgAttribute(ID2D1SvgAttributeVtbl) {
     fn RemoveSegmentDataAtEnd(
         dataCount: UINT32,
@@ -253,7 +253,7 @@ interface ID2D1SvgPathData(ID2D1SvgPathDataVtbl): ID2D1SvgAttribute(ID2D1SvgAttr
         pathGeometry: *mut *mut ID2D1PathGeometry1,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xac7b67a6, 0x183e, 0x49c1, 0xa8, 0x23, 0x0e, 0xbe, 0x40, 0xb0, 0xdb, 0x29)]
+RIDL! {#[uuid(0xac7b67a6, 0x183e, 0x49c1, 0xa8, 0x23, 0x0e, 0xbe, 0x40, 0xb0, 0xdb, 0x29)]
 interface ID2D1SvgElement(ID2D1SvgElementVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
     fn GetDocument(
         document: *mut *mut ID2D1SvgDocument,
@@ -361,7 +361,7 @@ interface ID2D1SvgElement(ID2D1SvgElementVtbl): ID2D1Resource(ID2D1ResourceVtbl)
         valueLength: *mut UINT32,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x86b88e4d, 0xafa4, 0x4d7b, 0x88, 0xe4, 0x68, 0xa5, 0x1c, 0x4a, 0x0a, 0xec)]
+RIDL! {#[uuid(0x86b88e4d, 0xafa4, 0x4d7b, 0x88, 0xe4, 0x68, 0xa5, 0x1c, 0x4a, 0x0a, 0xec)]
 interface ID2D1SvgDocument(ID2D1SvgDocumentVtbl): ID2D1Resource(ID2D1ResourceVtbl) {
     fn SetViewportSize(
         viewportSize: D2D1_SIZE_F,

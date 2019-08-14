@@ -18,14 +18,20 @@ fn check_if_in_build<P: Debug>(
     path: &P,
     include: &str,
     entries: &[String],
-    errors: &mut u32
+    errors: &mut u32,
 ) -> bool {
     for entry in entries {
         if &include == &entry {
-            return true
+            return true;
         }
     }
-    writeln!(&mut io::stderr(), "{:?}: include not found: \"{}\"\n", path, include).unwrap();
+    writeln!(
+        &mut io::stderr(),
+        "{:?}: include not found: \"{}\"\n",
+        path,
+        include
+    )
+    .unwrap();
     *errors += 1;
     false
 }
@@ -39,17 +45,20 @@ fn check_file_deps<P: AsRef<Path>>(
     p: P,
     files_deps: &mut HashMap<String, Vec<String>>,
     errors: &mut u32,
-    level: u32
+    level: u32,
 ) {
     let r_p = p.as_ref();
     if should_be_ignored(&r_p) {
-        return
+        return;
     }
     let filename = if level < 2 {
         r_p.file_name().unwrap().to_str().unwrap().to_owned()
     } else {
-        let values: Vec<String> = r_p.iter().skip(1)
-            .map(|x| x.to_str().unwrap().to_owned()).collect();
+        let values: Vec<String> = r_p
+            .iter()
+            .skip(1)
+            .map(|x| x.to_str().unwrap().to_owned())
+            .collect();
         values[values.len() - 2..].join("-")
     };
     let mut found: Vec<String> = Vec::new();
@@ -58,11 +67,11 @@ fn check_file_deps<P: AsRef<Path>>(
             let file_content = read_file(r_p);
             for line in file_content.lines() {
                 if !line.starts_with("use ") && !line.starts_with("pub use ") {
-                    continue
+                    continue;
                 }
                 let include: Vec<&str> = line.split("::").skip(1).collect();
                 if include.len() < 2 || include[0].starts_with('{') {
-                    continue
+                    continue;
                 }
                 let include = if include.len() > 2 {
                     include[..include.len() - 1].join("-").to_owned()
@@ -70,7 +79,8 @@ fn check_file_deps<P: AsRef<Path>>(
                     include[0].to_owned()
                 };
                 if check_if_in_build(&r_p, &include, &entries, errors)
-                    && found.iter().find(|x| **x == include).is_none() {
+                    && found.iter().find(|x| **x == include).is_none()
+                {
                     found.push(include);
                 }
             }
@@ -81,14 +91,23 @@ fn check_file_deps<P: AsRef<Path>>(
                     }
                 }
                 if !entries.is_empty() {
-                    writeln!(&mut io::stderr(), "{}: include not used: {:?}", filename, entries)
-                        .expect("stderr::write failed");
+                    writeln!(
+                        &mut io::stderr(),
+                        "{}: include not used: {:?}",
+                        filename,
+                        entries
+                    )
+                    .expect("stderr::write failed");
                     *errors += 1;
                 }
             }
         } else if level > 0 && filename != "mod.rs" && !filename.ends_with("-mod.rs") {
-            writeln!(&mut io::stderr(), "\"{}\" not found in build.rs",
-                     p.as_ref().to_str().unwrap()).unwrap();
+            writeln!(
+                &mut io::stderr(),
+                "\"{}\" not found in build.rs",
+                p.as_ref().to_str().unwrap()
+            )
+            .unwrap();
             *errors += 1;
         }
     }
@@ -99,7 +118,7 @@ fn read_dirs<P: AsRef<Path>>(
     dir: P,
     files_deps: &mut HashMap<String, Vec<String>>,
     errors: &mut u32,
-    level: u32
+    level: u32,
 ) {
     for entry in read_dir(dir).expect("read_dir failed") {
         let entry = entry.expect("entry failed");
@@ -129,11 +148,14 @@ fn check_imports() {
                 break;
             }
             let parts: Vec<&str> = line.split("&[").collect();
-            files_deps.insert(format!("{}.rs", get_between_quotes(parts[0])),
-                              parts[1].split(',')
-                                      .map(|x| get_between_quotes(x).to_owned())
-                                      .filter(|x| !x.is_empty())
-                                      .collect());
+            files_deps.insert(
+                format!("{}.rs", get_between_quotes(parts[0])),
+                parts[1]
+                    .split(',')
+                    .map(|x| get_between_quotes(x).to_owned())
+                    .filter(|x| !x.is_empty())
+                    .collect(),
+            );
         }
     }
     let mut errors = 0;

@@ -5,7 +5,7 @@
 // except according to those terms.
 //! Authentication API Prototypes and Definitions
 use shared::minwindef::{
-    BOOL, DWORD, FILETIME, LPBYTE, LPCVOID, LPDWORD, LPVOID, PBOOL, PBYTE, UCHAR, ULONG
+    BOOL, DWORD, FILETIME, LPBYTE, LPCVOID, LPDWORD, LPVOID, PBOOL, PBYTE, UCHAR, ULONG,
 };
 use shared::windef::{HBITMAP, HWND};
 use um::sspi::PCtxtHandle;
@@ -21,14 +21,14 @@ pub const CRED_MAX_TARGETNAME_NAMESPACE_LENGTH: DWORD = 256;
 pub const CRED_MAX_TARGETNAME_ATTRIBUTE_LENGTH: DWORD = 256;
 pub const CRED_MAX_VALUE_SIZE: DWORD = 256;
 pub const CRED_MAX_ATTRIBUTES: DWORD = 64;
-STRUCT!{struct CREDENTIAL_ATTRIBUTEA {
+STRUCT! {struct CREDENTIAL_ATTRIBUTEA {
     Keyword: LPSTR,
     Flags: DWORD,
     ValueSize: DWORD,
     Value: LPBYTE,
 }}
 pub type PCREDENTIAL_ATTRIBUTEA = *mut CREDENTIAL_ATTRIBUTEA;
-STRUCT!{struct CREDENTIAL_ATTRIBUTEW {
+STRUCT! {struct CREDENTIAL_ATTRIBUTEW {
     Keyword: LPWSTR,
     Flags: DWORD,
     ValueSize: DWORD,
@@ -57,7 +57,7 @@ pub const CRED_PERSIST_NONE: DWORD = 0;
 pub const CRED_PERSIST_SESSION: DWORD = 1;
 pub const CRED_PERSIST_LOCAL_MACHINE: DWORD = 2;
 pub const CRED_PERSIST_ENTERPRISE: DWORD = 3;
-STRUCT!{struct CREDENTIALA {
+STRUCT! {struct CREDENTIALA {
     Flags: DWORD,
     Type: DWORD,
     TargetName: LPSTR,
@@ -72,7 +72,7 @@ STRUCT!{struct CREDENTIALA {
     UserName: LPSTR,
 }}
 pub type PCREDENTIALA = *mut CREDENTIALA;
-STRUCT!{struct CREDENTIALW {
+STRUCT! {struct CREDENTIALW {
     Flags: DWORD,
     Type: DWORD,
     TargetName: LPWSTR,
@@ -94,7 +94,7 @@ pub const CRED_TI_USERNAME_TARGET: ULONG = 0x0008;
 pub const CRED_TI_CREATE_EXPLICIT_CRED: ULONG = 0x0010;
 pub const CRED_TI_WORKGROUP_MEMBER: ULONG = 0x0020;
 pub const CRED_TI_VALID_FLAGS: ULONG = 0xF07F;
-STRUCT!{struct CREDENTIAL_TARGET_INFORMATIONA {
+STRUCT! {struct CREDENTIAL_TARGET_INFORMATIONA {
     TargetName: LPSTR,
     NetbiosServerName: LPSTR,
     DnsServerName: LPSTR,
@@ -107,7 +107,7 @@ STRUCT!{struct CREDENTIAL_TARGET_INFORMATIONA {
     CredTypes: LPDWORD,
 }}
 pub type PCREDENTIAL_TARGET_INFORMATIONA = *mut CREDENTIAL_TARGET_INFORMATIONA;
-STRUCT!{struct CREDENTIAL_TARGET_INFORMATIONW {
+STRUCT! {struct CREDENTIAL_TARGET_INFORMATIONW {
     TargetName: LPWSTR,
     NetbiosServerName: LPWSTR,
     DnsServerName: LPWSTR,
@@ -121,28 +121,28 @@ STRUCT!{struct CREDENTIAL_TARGET_INFORMATIONW {
 }}
 pub type PCREDENTIAL_TARGET_INFORMATIONW = *mut CREDENTIAL_TARGET_INFORMATIONW;
 pub const CERT_HASH_LENGTH: usize = 20;
-STRUCT!{struct CERT_CREDENTIAL_INFO {
+STRUCT! {struct CERT_CREDENTIAL_INFO {
     cbSize: ULONG,
     rgbHashOfCert: [UCHAR; CERT_HASH_LENGTH],
 }}
 pub type PCERT_CREDENTIAL_INFO = *mut CERT_CREDENTIAL_INFO;
-STRUCT!{struct USERNAME_TARGET_CREDENTIAL_INFO {
+STRUCT! {struct USERNAME_TARGET_CREDENTIAL_INFO {
     UserName: LPWSTR,
 }}
 pub type PUSERNAME_TARGET_CREDENTIAL_INFO = *mut USERNAME_TARGET_CREDENTIAL_INFO;
-STRUCT!{struct BINARY_BLOB_CREDENTIAL_INFO {
+STRUCT! {struct BINARY_BLOB_CREDENTIAL_INFO {
     cbBlob: ULONG,
     pbBlob: LPBYTE,
 }}
 pub type PBINARY_BLOB_CREDENTIAL_INFO = *mut BINARY_BLOB_CREDENTIAL_INFO;
-ENUM!{enum CRED_MARSHAL_TYPE {
+ENUM! {enum CRED_MARSHAL_TYPE {
     CertCredential = 1,
     UsernameTargetCredential,
     BinaryBlobCredential,
     UsernameForPackedCredentials,
 }}
 pub type PCRED_MARSHAL_TYPE = *mut CRED_MARSHAL_TYPE;
-ENUM!{enum CRED_PROTECTION_TYPE {
+ENUM! {enum CRED_PROTECTION_TYPE {
     CredUnprotected,
     CredUserProtection,
     CredTrustedProtection,
@@ -152,7 +152,7 @@ pub const CRED_PACK_PROTECTED_CREDENTIALS: DWORD = 0x1;
 pub const CRED_PACK_WOW_BUFFER: DWORD = 0x2;
 pub const CRED_PACK_GENERIC_CREDENTIALS: DWORD = 0x4;
 pub const CRED_PACK_ID_PROVIDER_CREDENTIALS: DWORD = 0x8;
-STRUCT!{struct CREDUI_INFOA {
+STRUCT! {struct CREDUI_INFOA {
     cbSize: DWORD,
     hwndParent: HWND,
     pszMessageText: PCSTR,
@@ -160,7 +160,7 @@ STRUCT!{struct CREDUI_INFOA {
     hbmBanner: HBITMAP,
 }}
 pub type PCREDUI_INFOA = *mut CREDUI_INFOA;
-STRUCT!{struct CREDUI_INFOW {
+STRUCT! {struct CREDUI_INFOW {
     cbSize: DWORD,
     hwndParent: HWND,
     pszMessageText: PCWSTR,
@@ -192,13 +192,21 @@ pub const CREDUI_FLAGS_GENERIC_CREDENTIALS: DWORD = 0x40000;
 pub const CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS: DWORD = 0x80000;
 pub const CREDUI_FLAGS_KEEP_USERNAME: DWORD = 0x100000;
 pub const CREDUI_FLAGS_PROMPT_VALID: DWORD = CREDUI_FLAGS_INCORRECT_PASSWORD
-    | CREDUI_FLAGS_DO_NOT_PERSIST | CREDUI_FLAGS_REQUEST_ADMINISTRATOR
-    | CREDUI_FLAGS_EXCLUDE_CERTIFICATES | CREDUI_FLAGS_REQUIRE_CERTIFICATE
-    | CREDUI_FLAGS_SHOW_SAVE_CHECK_BOX | CREDUI_FLAGS_ALWAYS_SHOW_UI
-    | CREDUI_FLAGS_REQUIRE_SMARTCARD | CREDUI_FLAGS_PASSWORD_ONLY_OK
-    | CREDUI_FLAGS_VALIDATE_USERNAME | CREDUI_FLAGS_COMPLETE_USERNAME | CREDUI_FLAGS_PERSIST
-    | CREDUI_FLAGS_SERVER_CREDENTIAL | CREDUI_FLAGS_EXPECT_CONFIRMATION
-    | CREDUI_FLAGS_GENERIC_CREDENTIALS | CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS
+    | CREDUI_FLAGS_DO_NOT_PERSIST
+    | CREDUI_FLAGS_REQUEST_ADMINISTRATOR
+    | CREDUI_FLAGS_EXCLUDE_CERTIFICATES
+    | CREDUI_FLAGS_REQUIRE_CERTIFICATE
+    | CREDUI_FLAGS_SHOW_SAVE_CHECK_BOX
+    | CREDUI_FLAGS_ALWAYS_SHOW_UI
+    | CREDUI_FLAGS_REQUIRE_SMARTCARD
+    | CREDUI_FLAGS_PASSWORD_ONLY_OK
+    | CREDUI_FLAGS_VALIDATE_USERNAME
+    | CREDUI_FLAGS_COMPLETE_USERNAME
+    | CREDUI_FLAGS_PERSIST
+    | CREDUI_FLAGS_SERVER_CREDENTIAL
+    | CREDUI_FLAGS_EXPECT_CONFIRMATION
+    | CREDUI_FLAGS_GENERIC_CREDENTIALS
+    | CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS
     | CREDUI_FLAGS_KEEP_USERNAME;
 pub const CREDUIWIN_GENERIC: DWORD = 0x00000001;
 pub const CREDUIWIN_CHECKBOX: DWORD = 0x00000002;
@@ -209,20 +217,19 @@ pub const CREDUIWIN_ENUMERATE_CURRENT_USER: DWORD = 0x00000200;
 pub const CREDUIWIN_SECURE_PROMPT: DWORD = 0x00001000;
 pub const CREDUIWIN_PREPROMPTING: DWORD = 0x00002000;
 pub const CREDUIWIN_PACK_32_WOW: DWORD = 0x10000000;
-pub const CREDUIWIN_VALID_FLAGS: DWORD = CREDUIWIN_GENERIC | CREDUIWIN_CHECKBOX
-    | CREDUIWIN_AUTHPACKAGE_ONLY | CREDUIWIN_IN_CRED_ONLY | CREDUIWIN_ENUMERATE_ADMINS
-    | CREDUIWIN_ENUMERATE_CURRENT_USER | CREDUIWIN_SECURE_PROMPT | CREDUIWIN_PREPROMPTING
+pub const CREDUIWIN_VALID_FLAGS: DWORD = CREDUIWIN_GENERIC
+    | CREDUIWIN_CHECKBOX
+    | CREDUIWIN_AUTHPACKAGE_ONLY
+    | CREDUIWIN_IN_CRED_ONLY
+    | CREDUIWIN_ENUMERATE_ADMINS
+    | CREDUIWIN_ENUMERATE_CURRENT_USER
+    | CREDUIWIN_SECURE_PROMPT
+    | CREDUIWIN_PREPROMPTING
     | CREDUIWIN_PACK_32_WOW;
 pub const CRED_PRESERVE_CREDENTIAL_BLOB: DWORD = 0x1;
 extern "system" {
-    pub fn CredWriteW(
-        Credential: PCREDENTIALW,
-        Flags: DWORD,
-    ) -> BOOL;
-    pub fn CredWriteA(
-        Credential: PCREDENTIALA,
-        Flags: DWORD,
-    ) -> BOOL;
+    pub fn CredWriteW(Credential: PCREDENTIALW, Flags: DWORD) -> BOOL;
+    pub fn CredWriteA(Credential: PCREDENTIALA, Flags: DWORD) -> BOOL;
     pub fn CredReadW(
         TargetName: LPCWSTR,
         Type: DWORD,
@@ -275,16 +282,8 @@ extern "system" {
         Count: *mut DWORD,
         Credential: *mut *mut PCREDENTIALA,
     ) -> BOOL;
-    pub fn CredDeleteW(
-        TargetName: LPCWSTR,
-        Type: DWORD,
-        Flags: DWORD,
-    ) -> BOOL;
-    pub fn CredDeleteA(
-        TargetName: LPCSTR,
-        Type: DWORD,
-        Flags: DWORD,
-    ) -> BOOL;
+    pub fn CredDeleteW(TargetName: LPCWSTR, Type: DWORD, Flags: DWORD) -> BOOL;
+    pub fn CredDeleteA(TargetName: LPCSTR, Type: DWORD, Flags: DWORD) -> BOOL;
     pub fn CredRenameW(
         OldTargetName: LPCWSTR,
         NewTargetName: LPCWSTR,
@@ -330,12 +329,8 @@ extern "system" {
         CredType: PCRED_MARSHAL_TYPE,
         Credential: *mut PVOID,
     ) -> BOOL;
-    pub fn CredIsMarshaledCredentialW(
-        MarshaledCredential: LPCWSTR,
-    ) -> BOOL;
-    pub fn CredIsMarshaledCredentialA(
-        MarshaledCredential: LPCSTR,
-    ) -> BOOL;
+    pub fn CredIsMarshaledCredentialW(MarshaledCredential: LPCWSTR) -> BOOL;
+    pub fn CredIsMarshaledCredentialA(MarshaledCredential: LPCSTR) -> BOOL;
     pub fn CredUnPackAuthenticationBufferW(
         dwFlags: DWORD,
         pAuthBuffer: PVOID,
@@ -422,13 +417,8 @@ extern "system" {
         Flags: DWORD,
         Credential: *mut PCREDENTIALA,
     ) -> BOOL;
-    pub fn CredGetSessionTypes(
-        MaximumPersistCount: DWORD,
-        MaximumPersist: LPDWORD,
-    ) -> BOOL;
-    pub fn CredFree(
-        Buffer: PVOID,
-    );
+    pub fn CredGetSessionTypes(MaximumPersistCount: DWORD, MaximumPersist: LPDWORD) -> BOOL;
+    pub fn CredFree(Buffer: PVOID);
     pub fn CredUIPromptForCredentialsW(
         pUiInfo: PCREDUI_INFOW,
         pszTargetName: PCWSTR,
@@ -511,22 +501,13 @@ extern "system" {
         pfSave: PBOOL,
         dwFlags: DWORD,
     ) -> DWORD;
-    pub fn CredUIConfirmCredentialsW(
-        pszTargetName: PCWSTR,
-        bConfirm: BOOL,
-    ) -> DWORD;
-    pub fn CredUIConfirmCredentialsA(
-        pszTargetName: PCSTR,
-        bConfirm: BOOL,
-    ) -> DWORD;
+    pub fn CredUIConfirmCredentialsW(pszTargetName: PCWSTR, bConfirm: BOOL) -> DWORD;
+    pub fn CredUIConfirmCredentialsA(pszTargetName: PCSTR, bConfirm: BOOL) -> DWORD;
     pub fn CredUIStoreSSOCredW(
         pszRealm: PCWSTR,
         pszUsername: PCWSTR,
         pszPassword: PCWSTR,
         bPersist: BOOL,
     ) -> DWORD;
-    pub fn CredUIReadSSOCredW(
-        pszRealm: PCWSTR,
-        ppszUsername: *mut PWSTR,
-    ) -> DWORD;
+    pub fn CredUIReadSSOCredW(pszRealm: PCWSTR, ppszUsername: *mut PWSTR) -> DWORD;
 }

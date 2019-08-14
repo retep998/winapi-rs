@@ -9,7 +9,7 @@ use shared::minwindef::DWORD;
 use um::mssip::SIP_INDIRECT_DATA;
 use um::wincrypt::{CRYPT_ATTR_BLOB, HCRYPTMSG, HCRYPTPROV};
 use um::winnt::{HANDLE, LPWSTR};
-STRUCT!{struct CRYPTCATSTORE {
+STRUCT! {struct CRYPTCATSTORE {
     cbStruct: DWORD,
     dwPublicVersion: DWORD,
     pwszP7File: LPWSTR,
@@ -21,7 +21,7 @@ STRUCT!{struct CRYPTCATSTORE {
     hCryptMsg: HCRYPTMSG,
     hSorted: HANDLE,
 }}
-STRUCT!{struct CRYPTCATMEMBER {
+STRUCT! {struct CRYPTCATMEMBER {
     cbStruct: DWORD,
     pwszReferenceTag: LPWSTR,
     pwszFileName: LPWSTR,

@@ -11,10 +11,7 @@ extern "system" {
         GroupCount: PUSHORT,
         GroupArray: PUSHORT,
     ) -> BOOL;
-    pub fn GetThreadGroupAffinity(
-        hThread: HANDLE,
-        GroupAffinity: PGROUP_AFFINITY,
-    ) -> BOOL;
+    pub fn GetThreadGroupAffinity(hThread: HANDLE, GroupAffinity: PGROUP_AFFINITY) -> BOOL;
     pub fn SetThreadGroupAffinity(
         hThread: HANDLE,
         GroupAffinity: *const GROUP_AFFINITY,

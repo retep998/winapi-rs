@@ -6,20 +6,9 @@
 use shared::minwindef::{BOOL, DWORD};
 use shared::ntdef::PVOID;
 extern "system" {
-    pub fn EncodePointer(
-        Ptr: PVOID,
-    ) -> PVOID;
-    pub fn DecodePointer(
-        Ptr: PVOID,
-    ) -> PVOID;
-    pub fn EncodeSystemPointer(
-        Ptr: PVOID,
-    ) -> PVOID;
-    pub fn DecodeSystemPointer(
-        Ptr: PVOID,
-    ) -> PVOID;
-    pub fn Beep(
-        dwFreq: DWORD,
-        dwDuration: DWORD,
-    ) -> BOOL;
+    pub fn EncodePointer(Ptr: PVOID) -> PVOID;
+    pub fn DecodePointer(Ptr: PVOID) -> PVOID;
+    pub fn EncodeSystemPointer(Ptr: PVOID) -> PVOID;
+    pub fn DecodeSystemPointer(Ptr: PVOID) -> PVOID;
+    pub fn Beep(dwFreq: DWORD, dwDuration: DWORD) -> BOOL;
 }

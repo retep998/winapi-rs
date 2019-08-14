@@ -40,21 +40,13 @@ extern "system" {
         PowerSettingGuid: *const GUID,
         DcValueIndex: DWORD,
     ) -> DWORD;
-    pub fn PowerGetActiveScheme(
-        UserRootPowerKey: HKEY,
-        ActivePolicyGuid: *mut *mut GUID,
-    ) -> DWORD;
-    pub fn PowerSetActiveScheme(
-        UserRootPowerKey: HKEY,
-        SchemeGuid: *const GUID,
-    ) -> DWORD;
+    pub fn PowerGetActiveScheme(UserRootPowerKey: HKEY, ActivePolicyGuid: *mut *mut GUID) -> DWORD;
+    pub fn PowerSetActiveScheme(UserRootPowerKey: HKEY, SchemeGuid: *const GUID) -> DWORD;
     pub fn PowerSettingRegisterNotification(
         SettingGuid: LPCGUID,
         Flags: DWORD,
         Recipient: HANDLE,
         RegistrationHandle: PHPOWERNOTIFY,
     ) -> DWORD;
-    pub fn PowerSettingUnregisterNotification(
-        RegistrationHandle: HPOWERNOTIFY,
-    ) -> DWORD;
+    pub fn PowerSettingUnregisterNotification(RegistrationHandle: HPOWERNOTIFY) -> DWORD;
 }

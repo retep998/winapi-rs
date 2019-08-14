@@ -41,14 +41,14 @@ pub type PPDH_FMT_COUNTERVALUE_ITEM_W = *mut PDH_FMT_COUNTERVALUE_ITEM_W;
 pub type PPDH_DATA_ITEM_PATH_ELEMENTS_A = *mut PDH_DATA_ITEM_PATH_ELEMENTS_A;
 pub type PPDH_DATA_ITEM_PATH_ELEMENTS_W = *mut PDH_DATA_ITEM_PATH_ELEMENTS_W;
 pub type PPDH_FMT_COUNTERVALUE = *mut PDH_FMT_COUNTERVALUE;
-FN!{stdcall CounterPathCallBack(
+FN! {stdcall CounterPathCallBack(
     DWORD_PTR,
 ) -> PDH_STATUS}
 pub type PPDH_COUNTER_PATH_ELEMENTS_A = *mut PDH_COUNTER_PATH_ELEMENTS_A;
 pub type PPDH_COUNTER_PATH_ELEMENTS_W = *mut PDH_COUNTER_PATH_ELEMENTS_W;
 pub type PPDH_BROWSE_DLG_CONFIG_HA = *mut PDH_BROWSE_DLG_CONFIG_HA;
 pub type PPDH_BROWSE_DLG_CONFIG_HW = *mut PDH_BROWSE_DLG_CONFIG_HW;
-UNION!{union PDH_FMT_COUNTERVALUE_u {
+UNION! {union PDH_FMT_COUNTERVALUE_u {
     [u64; 1],
     longValue longValue_mut: LONG,
     doubleValue doubleValue_mut: c_double,
@@ -56,44 +56,44 @@ UNION!{union PDH_FMT_COUNTERVALUE_u {
     AnsiStringValue AnsiStringValue_mut: LPCSTR,
     WideStringValue WideStringValue_mut: LPCWSTR,
 }}
-STRUCT!{struct PDH_FMT_COUNTERVALUE {
+STRUCT! {struct PDH_FMT_COUNTERVALUE {
     CStatus: DWORD,
     u: PDH_FMT_COUNTERVALUE_u,
 }}
-STRUCT!{struct PDH_RAW_LOG_RECORD {
+STRUCT! {struct PDH_RAW_LOG_RECORD {
     dwStructureSize: DWORD,
     dwRecordType: DWORD,
     dwItems: DWORD,
     RawBytes: UCHAR,
 }}
-STRUCT!{struct PDH_TIME_INFO {
+STRUCT! {struct PDH_TIME_INFO {
     StartTime: LONGLONG,
     EndTime: LONGLONG,
     SampleCount: DWORD,
 }}
-STRUCT!{struct PDH_RAW_COUNTER {
+STRUCT! {struct PDH_RAW_COUNTER {
     CStatus: DWORD,
     TimeStamp: FILETIME,
     FirstValue: LONGLONG,
     SecondValue: LONGLONG,
     MultiCount: DWORD,
 }}
-STRUCT!{struct PDH_STATISTICS {
+STRUCT! {struct PDH_STATISTICS {
     dwFormat: DWORD,
     count: DWORD,
     min: PDH_FMT_COUNTERVALUE,
     max: PDH_FMT_COUNTERVALUE,
     mean: PDH_FMT_COUNTERVALUE,
 }}
-STRUCT!{struct PDH_FMT_COUNTERVALUE_ITEM_A {
+STRUCT! {struct PDH_FMT_COUNTERVALUE_ITEM_A {
     szName: LPSTR,
     FmtValue: PDH_FMT_COUNTERVALUE,
 }}
-STRUCT!{struct PDH_FMT_COUNTERVALUE_ITEM_W {
+STRUCT! {struct PDH_FMT_COUNTERVALUE_ITEM_W {
     szName: LPWSTR,
     FmtValue: PDH_FMT_COUNTERVALUE,
 }}
-STRUCT!{struct PDH_BROWSE_DLG_CONFIG_A {
+STRUCT! {struct PDH_BROWSE_DLG_CONFIG_A {
     flags: DWORD,
     hWndOwner: HWND,
     szDataSource: LPSTR,
@@ -105,7 +105,7 @@ STRUCT!{struct PDH_BROWSE_DLG_CONFIG_A {
     dwDefaultDetailLevel: DWORD,
     szDialogBoxCaption: LPSTR,
 }}
-BITFIELD!{PDH_BROWSE_DLG_CONFIG_A flags: DWORD [
+BITFIELD! {PDH_BROWSE_DLG_CONFIG_A flags: DWORD [
     IncludeInstanceIndex set_IncludeInstanceIndex[0..1],
     SingleCounterPerAdd set_SingleCounterPerAdd[1..2],
     SingleCounterPerDialog set_SingleCounterPerDialog[2..3],
@@ -117,7 +117,7 @@ BITFIELD!{PDH_BROWSE_DLG_CONFIG_A flags: DWORD [
     IncludeCostlyObjects set_IncludeCostlyObjects[8..9],
     ShowObjectBrowser set_ShowObjectBrowser[9..10],
 ]}
-STRUCT!{struct PDH_BROWSE_DLG_CONFIG_W {
+STRUCT! {struct PDH_BROWSE_DLG_CONFIG_W {
     flags: DWORD,
     hWndOwner: HWND,
     szDataSource: LPWSTR,
@@ -129,7 +129,7 @@ STRUCT!{struct PDH_BROWSE_DLG_CONFIG_W {
     dwDefaultDetailLevel: DWORD,
     szDialogBoxCaption: LPWSTR,
 }}
-BITFIELD!{PDH_BROWSE_DLG_CONFIG_W flags: DWORD [
+BITFIELD! {PDH_BROWSE_DLG_CONFIG_W flags: DWORD [
     IncludeInstanceIndex set_IncludeInstanceIndex[0..1],
     SingleCounterPerAdd set_SingleCounterPerAdd[1..2],
     SingleCounterPerDialog set_SingleCounterPerDialog[2..3],
@@ -141,7 +141,7 @@ BITFIELD!{PDH_BROWSE_DLG_CONFIG_W flags: DWORD [
     IncludeCostlyObjects set_IncludeCostlyObjects[8..9],
     ShowObjectBrowser set_ShowObjectBrowser[9..10],
 ]}
-STRUCT!{struct PDH_COUNTER_PATH_ELEMENTS_A {
+STRUCT! {struct PDH_COUNTER_PATH_ELEMENTS_A {
     szMachineName: LPSTR,
     szObjectName: LPSTR,
     szInstanceName: LPSTR,
@@ -149,7 +149,7 @@ STRUCT!{struct PDH_COUNTER_PATH_ELEMENTS_A {
     dwInstanceIndex: DWORD,
     szCounterName: LPSTR,
 }}
-STRUCT!{struct PDH_COUNTER_PATH_ELEMENTS_W {
+STRUCT! {struct PDH_COUNTER_PATH_ELEMENTS_W {
     szMachineName: LPWSTR,
     szObjectName: LPWSTR,
     szInstanceName: LPWSTR,
@@ -157,19 +157,19 @@ STRUCT!{struct PDH_COUNTER_PATH_ELEMENTS_W {
     dwInstanceIndex: DWORD,
     szCounterName: LPWSTR,
 }}
-STRUCT!{struct PDH_DATA_ITEM_PATH_ELEMENTS_A {
+STRUCT! {struct PDH_DATA_ITEM_PATH_ELEMENTS_A {
     szMachineName: LPSTR,
     ObjectGUID: GUID,
     dwItemId: DWORD,
     szInstanceName: LPSTR,
 }}
-STRUCT!{struct PDH_DATA_ITEM_PATH_ELEMENTS_W {
+STRUCT! {struct PDH_DATA_ITEM_PATH_ELEMENTS_W {
     szMachineName: LPWSTR,
     ObjectGUID: GUID,
     dwItemId: DWORD,
     szInstanceName: LPWSTR,
 }}
-STRUCT!{struct PDH_COUNTER_INFO_A_u_s {
+STRUCT! {struct PDH_COUNTER_INFO_A_u_s {
     szMachineName: LPSTR,
     szObjectName: LPSTR,
     szInstanceName: LPSTR,
@@ -177,13 +177,13 @@ STRUCT!{struct PDH_COUNTER_INFO_A_u_s {
     dwInstanceIndex: DWORD,
     szCounterName: LPSTR,
 }}
-UNION!{union PDH_COUNTER_INFO_A_u {
+UNION! {union PDH_COUNTER_INFO_A_u {
     [u32; 7] [u64; 6],
     DataItemPath DataItemPath_mut: PDH_DATA_ITEM_PATH_ELEMENTS_A,
     CounterPath CounterPath_mut: PDH_COUNTER_PATH_ELEMENTS_A,
     s s_mut: PDH_COUNTER_INFO_A_u_s,
 }}
-STRUCT!{struct PDH_COUNTER_INFO_A {
+STRUCT! {struct PDH_COUNTER_INFO_A {
     dwLength: DWORD,
     dwType: DWORD,
     CVersion: DWORD,
@@ -197,7 +197,7 @@ STRUCT!{struct PDH_COUNTER_INFO_A {
     szExplainText: LPSTR,
     DataBuffer: [DWORD; 1],
 }}
-STRUCT!{struct PDH_COUNTER_INFO_W_u_s {
+STRUCT! {struct PDH_COUNTER_INFO_W_u_s {
     szMachineName: LPWSTR,
     szObjectName: LPWSTR,
     szInstanceName: LPWSTR,
@@ -205,13 +205,13 @@ STRUCT!{struct PDH_COUNTER_INFO_W_u_s {
     dwInstanceIndex: DWORD,
     szCounterName: LPWSTR,
 }}
-UNION!{union PDH_COUNTER_INFO_W_u {
+UNION! {union PDH_COUNTER_INFO_W_u {
     [u32; 7] [u64; 6],
     DataItemPath DataItemPath_mut: PDH_DATA_ITEM_PATH_ELEMENTS_W,
     CounterPath CounterPath_mut: PDH_COUNTER_PATH_ELEMENTS_W,
     s s_mut: PDH_COUNTER_INFO_W_u_s,
 }}
-STRUCT!{struct PDH_COUNTER_INFO_W {
+STRUCT! {struct PDH_COUNTER_INFO_W {
     dwLength: DWORD,
     dwType: DWORD,
     CVersion: DWORD,
@@ -225,7 +225,7 @@ STRUCT!{struct PDH_COUNTER_INFO_W {
     szExplainText: LPWSTR,
     DataBuffer: [DWORD; 1],
 }}
-STRUCT!{struct PDH_BROWSE_DLG_CONFIG_HA {
+STRUCT! {struct PDH_BROWSE_DLG_CONFIG_HA {
     flags: DWORD,
     hWndOwner: HWND,
     hDataSource: PDH_HLOG,
@@ -237,7 +237,7 @@ STRUCT!{struct PDH_BROWSE_DLG_CONFIG_HA {
     dwDefaultDetailLevel: DWORD,
     szDialogBoxCaption: LPSTR,
 }}
-BITFIELD!{PDH_BROWSE_DLG_CONFIG_HA flags: DWORD [
+BITFIELD! {PDH_BROWSE_DLG_CONFIG_HA flags: DWORD [
     IncludeInstanceIndex set_IncludeInstanceIndex[0..1],
     SingleCounterPerAdd set_SingleCounterPerAdd[1..2],
     SingleCounterPerDialog set_SingleCounterPerDialog[2..3],
@@ -249,7 +249,7 @@ BITFIELD!{PDH_BROWSE_DLG_CONFIG_HA flags: DWORD [
     IncludeCostlyObjects set_IncludeCostlyObjects[8..9],
     ShowObjectBrowser set_ShowObjectBrowser[9..10],
 ]}
-STRUCT!{struct PDH_BROWSE_DLG_CONFIG_HW {
+STRUCT! {struct PDH_BROWSE_DLG_CONFIG_HW {
     flags: DWORD,
     hWndOwner: HWND,
     hDataSource: PDH_HLOG,
@@ -261,7 +261,7 @@ STRUCT!{struct PDH_BROWSE_DLG_CONFIG_HW {
     dwDefaultDetailLevel: DWORD,
     szDialogBoxCaption: LPWSTR,
 }}
-BITFIELD!{PDH_BROWSE_DLG_CONFIG_HW flags: DWORD [
+BITFIELD! {PDH_BROWSE_DLG_CONFIG_HW flags: DWORD [
     IncludeInstanceIndex set_IncludeInstanceIndex[0..1],
     SingleCounterPerAdd set_SingleCounterPerAdd[1..2],
     SingleCounterPerDialog set_SingleCounterPerDialog[2..3],
@@ -274,9 +274,7 @@ BITFIELD!{PDH_BROWSE_DLG_CONFIG_HW flags: DWORD [
     ShowObjectBrowser set_ShowObjectBrowser[9..10],
 ]}
 extern "system" {
-    pub fn PdhGetDllVersion(
-        lpdwVersion: LPDWORD,
-    ) -> PDH_STATUS;
+    pub fn PdhGetDllVersion(lpdwVersion: LPDWORD) -> PDH_STATUS;
     pub fn PdhOpenQueryW(
         szDataSource: LPCWSTR,
         dwUserData: DWORD_PTR,
@@ -315,23 +313,11 @@ extern "system" {
         hQuery: PDH_HQUERY,
         pllTimeStamp: *mut LONGLONG,
     ) -> PDH_STATUS;
-    pub fn PdhValidatePathExW(
-        hDataSource: PDH_HLOG,
-        szFullPathBuffer: LPCWSTR,
-    ) -> PDH_STATUS;
-    pub fn PdhValidatePathExA(
-        hDataSource: PDH_HLOG,
-        szFullPathBuffer: LPCSTR,
-    ) -> PDH_STATUS;
-    pub fn PdhRemoveCounter(
-        hCounter: PDH_HCOUNTER,
-    ) -> PDH_STATUS;
-    pub fn PdhCollectQueryData(
-        hQuery: PDH_HQUERY,
-    ) -> PDH_STATUS;
-    pub fn PdhCloseQuery(
-        hQuery: PDH_HQUERY,
-    ) -> PDH_STATUS;
+    pub fn PdhValidatePathExW(hDataSource: PDH_HLOG, szFullPathBuffer: LPCWSTR) -> PDH_STATUS;
+    pub fn PdhValidatePathExA(hDataSource: PDH_HLOG, szFullPathBuffer: LPCSTR) -> PDH_STATUS;
+    pub fn PdhRemoveCounter(hCounter: PDH_HCOUNTER) -> PDH_STATUS;
+    pub fn PdhCollectQueryData(hQuery: PDH_HQUERY) -> PDH_STATUS;
+    pub fn PdhCloseQuery(hQuery: PDH_HQUERY) -> PDH_STATUS;
     pub fn PdhGetFormattedCounterValue(
         hCounter: PDH_HCOUNTER,
         dwFormat: DWORD,
@@ -398,16 +384,9 @@ extern "system" {
         pdwBufferSize: LPDWORD,
         lpBuffer: PPDH_COUNTER_INFO_A,
     ) -> PDH_STATUS;
-    pub fn PdhSetCounterScaleFactor(
-        hCounter: PDH_HCOUNTER,
-        lFactor: LONG,
-    ) -> PDH_STATUS;
-    pub fn PdhConnectMachineW(
-        szMachineName: LPCWSTR,
-    ) -> PDH_STATUS;
-    pub fn PdhConnectMachineA(
-        szMachineName: LPCSTR,
-    ) -> PDH_STATUS;
+    pub fn PdhSetCounterScaleFactor(hCounter: PDH_HCOUNTER, lFactor: LONG) -> PDH_STATUS;
+    pub fn PdhConnectMachineW(szMachineName: LPCWSTR) -> PDH_STATUS;
+    pub fn PdhConnectMachineA(szMachineName: LPCSTR) -> PDH_STATUS;
     pub fn PdhEnumMachinesW(
         szDataSource: LPCWSTR,
         mszMachineNameList: LPWSTR,
@@ -496,12 +475,8 @@ extern "system" {
         pcchParentNameLength: LPDWORD,
         lpIndex: LPDWORD,
     ) -> PDH_STATUS;
-    pub fn PdhValidatePathW(
-        szFullCounterPath: LPCWSTR,
-    ) -> PDH_STATUS;
-    pub fn PdhValidatePathA(
-        szFullCounterPath: LPCSTR,
-    ) -> PDH_STATUS;
+    pub fn PdhValidatePathW(szFullCounterPath: LPCWSTR) -> PDH_STATUS;
+    pub fn PdhValidatePathA(szFullCounterPath: LPCSTR) -> PDH_STATUS;
     pub fn PdhGetDefaultPerfObjectW(
         szDataSource: LPCWSTR,
         szMachineName: LPCWSTR,
@@ -528,12 +503,8 @@ extern "system" {
         szDefaultCounterName: LPSTR,
         pcchBufferSize: LPDWORD,
     ) -> PDH_STATUS;
-    pub fn PdhBrowseCountersW(
-        pBrowseDlgData: PPDH_BROWSE_DLG_CONFIG_W,
-    ) -> PDH_STATUS;
-    pub fn PdhBrowseCountersA(
-        pBrowseDlgData: PPDH_BROWSE_DLG_CONFIG_A,
-    ) -> PDH_STATUS;
+    pub fn PdhBrowseCountersW(pBrowseDlgData: PPDH_BROWSE_DLG_CONFIG_W) -> PDH_STATUS;
+    pub fn PdhBrowseCountersA(pBrowseDlgData: PPDH_BROWSE_DLG_CONFIG_A) -> PDH_STATUS;
     pub fn PdhExpandCounterPathW(
         szWildCardPath: LPCWSTR,
         mszExpandedPathList: LPWSTR,
@@ -598,25 +569,11 @@ extern "system" {
         szUserCaption: LPCSTR,
         phLog: *mut PDH_HLOG,
     ) -> PDH_STATUS;
-    pub fn PdhUpdateLogW(
-        hLog: PDH_HLOG,
-        szUserString: LPCWSTR,
-    ) -> PDH_STATUS;
-    pub fn PdhUpdateLogA(
-        hLog: PDH_HLOG,
-        szUserString: LPCSTR,
-    ) -> PDH_STATUS;
-    pub fn PdhUpdateLogFileCatalog(
-        hLog: PDH_HLOG,
-    ) -> PDH_STATUS;
-    pub fn PdhGetLogFileSize(
-        hLog: PDH_HLOG,
-        llSize: *mut LONGLONG,
-    ) -> PDH_STATUS;
-    pub fn PdhCloseLog(
-        hLog: PDH_HLOG,
-        dwFlags: DWORD,
-    ) -> PDH_STATUS;
+    pub fn PdhUpdateLogW(hLog: PDH_HLOG, szUserString: LPCWSTR) -> PDH_STATUS;
+    pub fn PdhUpdateLogA(hLog: PDH_HLOG, szUserString: LPCSTR) -> PDH_STATUS;
+    pub fn PdhUpdateLogFileCatalog(hLog: PDH_HLOG) -> PDH_STATUS;
+    pub fn PdhGetLogFileSize(hLog: PDH_HLOG, llSize: *mut LONGLONG) -> PDH_STATUS;
+    pub fn PdhCloseLog(hLog: PDH_HLOG, dwFlags: DWORD) -> PDH_STATUS;
     pub fn PdhSelectDataSourceW(
         hWndOwner: HWND,
         dwFlags: DWORD,
@@ -629,13 +586,8 @@ extern "system" {
         szDataSource: LPSTR,
         pcchBufferLength: LPDWORD,
     ) -> PDH_STATUS;
-    pub fn PdhIsRealTimeQuery(
-        hQuery: PDH_HQUERY,
-    ) -> PDH_STATUS;
-    pub fn PdhSetQueryTimeRange(
-        hQuery: PDH_HQUERY,
-        pInfo: PPDH_TIME_INFO,
-    ) -> PDH_STATUS;
+    pub fn PdhIsRealTimeQuery(hQuery: PDH_HQUERY) -> PDH_STATUS;
+    pub fn PdhSetQueryTimeRange(hQuery: PDH_HQUERY, pInfo: PPDH_TIME_INFO) -> PDH_STATUS;
     pub fn PdhGetDataSourceTimeRangeW(
         szDataSource: LPCWSTR,
         pdwNumEntries: LPDWORD,
@@ -661,19 +613,14 @@ extern "system" {
         rawValue2: PPDH_RAW_COUNTER,
         fmtValue: PPDH_FMT_COUNTERVALUE,
     ) -> PDH_STATUS;
-    pub fn PdhGetCounterTimeBase(
-        hCounter: PDH_HCOUNTER,
-        pTimeBase: *mut LONGLONG,
-    ) -> PDH_STATUS;
+    pub fn PdhGetCounterTimeBase(hCounter: PDH_HCOUNTER, pTimeBase: *mut LONGLONG) -> PDH_STATUS;
     pub fn PdhReadRawLogRecord(
         hLog: PDH_HLOG,
         ftRecord: FILETIME,
         pRawLogRecord: PPDH_RAW_LOG_RECORD,
         pdwBufferLength: LPDWORD,
     ) -> PDH_STATUS;
-    pub fn PdhSetDefaultRealTimeDataSource(
-        dwDataSourceId: DWORD,
-    ) -> PDH_STATUS;
+    pub fn PdhSetDefaultRealTimeDataSource(dwDataSourceId: DWORD) -> PDH_STATUS;
     pub fn PdhBindInputDataSourceW(
         phDataSource: *mut PDH_HLOG,
         szLogFileNameList: LPCWSTR,
@@ -781,12 +728,8 @@ extern "system" {
         szDefaultCounterName: LPSTR,
         pcchBufferSize: LPDWORD,
     ) -> PDH_STATUS;
-    pub fn PdhBrowseCountersHW(
-        pBrowseDlgData: PPDH_BROWSE_DLG_CONFIG_HW,
-    ) -> PDH_STATUS;
-    pub fn PdhBrowseCountersHA(
-        pBrowseDlgData: PPDH_BROWSE_DLG_CONFIG_HA,
-    ) -> PDH_STATUS;
+    pub fn PdhBrowseCountersHW(pBrowseDlgData: PPDH_BROWSE_DLG_CONFIG_HW) -> PDH_STATUS;
+    pub fn PdhBrowseCountersHA(pBrowseDlgData: PPDH_BROWSE_DLG_CONFIG_HA) -> PDH_STATUS;
     pub fn PdhEnumLogSetNamesW(
         szDataSource: LPCWSTR,
         mszLogSetNameList: LPWSTR,

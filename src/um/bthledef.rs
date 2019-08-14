@@ -4,15 +4,15 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use shared::basetsd::ULONG64;
-use shared::guiddef::{GUID, IsEqualGUID};
+use shared::guiddef::{IsEqualGUID, GUID};
 use shared::minwindef::{UCHAR, ULONG, USHORT};
 use um::winnt::{BOOLEAN, HANDLE, PVOID};
-DEFINE_GUID!{GUID_BLUETOOTHLE_DEVICE_INTERFACE,
-    0x781aee18, 0x7733, 0x4ce4, 0xad, 0xd0, 0x91, 0xf4, 0x1c, 0x67, 0xb5, 0x92}
-DEFINE_GUID!{GUID_BLUETOOTH_GATT_SERVICE_DEVICE_INTERFACE,
-    0x6e3bb679, 0x4372, 0x40c8, 0x9e, 0xaa, 0x45, 0x09, 0xdf, 0x26, 0x0c, 0xd8}
-DEFINE_GUID!{BTH_LE_ATT_BLUETOOTH_BASE_GUID,
-    0x00000000, 0x0000, 0x1000, 0x80, 0x00, 0x00, 0x80, 0x5F, 0x9B, 0x34, 0xFB}
+DEFINE_GUID! {GUID_BLUETOOTHLE_DEVICE_INTERFACE,
+0x781aee18, 0x7733, 0x4ce4, 0xad, 0xd0, 0x91, 0xf4, 0x1c, 0x67, 0xb5, 0x92}
+DEFINE_GUID! {GUID_BLUETOOTH_GATT_SERVICE_DEVICE_INTERFACE,
+0x6e3bb679, 0x4372, 0x40c8, 0x9e, 0xaa, 0x45, 0x09, 0xdf, 0x26, 0x0c, 0xd8}
+DEFINE_GUID! {BTH_LE_ATT_BLUETOOTH_BASE_GUID,
+0x00000000, 0x0000, 0x1000, 0x80, 0x00, 0x00, 0x80, 0x5F, 0x9B, 0x34, 0xFB}
 pub const BTH_LE_SERVICE_GAP: USHORT = 0x1800;
 pub const BTH_LE_SERVICE_GATT: USHORT = 0x1801;
 pub const BTH_LE_GATT_ATTRIBUTE_TYPE_PRIMARY_SERVICE: USHORT = 0x2800;
@@ -29,8 +29,7 @@ pub const BTH_LE_GATT_CHARACTERISTIC_TYPE_DEVICE_NAME: USHORT = 0x2A00;
 pub const BTH_LE_GATT_CHARACTERISTIC_TYPE_APPEARANCE: USHORT = 0x2A01;
 pub const BTH_LE_GATT_CHARACTERISTIC_TYPE_PERIPHERAL_PRIVACY_FLAG: USHORT = 0x2A02;
 pub const BTH_LE_GATT_CHARACTERISTIC_TYPE_RECONNECTION_ADDRESS: USHORT = 0x2A03;
-pub const BTH_LE_GATT_CHARACTERISTIC_TYPE_PERIPHERAL_PREFERED_CONNECTION_PARAMETER: USHORT
-    = 0x2A04;
+pub const BTH_LE_GATT_CHARACTERISTIC_TYPE_PERIPHERAL_PREFERED_CONNECTION_PARAMETER: USHORT = 0x2A04;
 pub const BTH_LE_GATT_CHARACTERISTIC_TYPE_SERVICE_CHANGED: USHORT = 0x2A05;
 pub const BTH_LE_GAP_APPEARANCE_CATEGORY_OFFSET: u8 = 0x6;
 pub const BTH_LE_GAP_APPEARANCE_CATEGORY_MASK: USHORT = 0x3ff;
@@ -40,8 +39,7 @@ pub fn BTH_LE_GAP_APPEARANCE_GET_CATEGORY(a: USHORT) -> USHORT {
 }
 #[inline]
 pub fn BTH_LE_GAP_APPEARANCE_SET_CATEGORY(a: &mut USHORT, c: USHORT) {
-    *a = (*a & !BTH_LE_GAP_APPEARANCE_CATEGORY_MASK)
-        | (c << BTH_LE_GAP_APPEARANCE_CATEGORY_OFFSET);
+    *a = (*a & !BTH_LE_GAP_APPEARANCE_CATEGORY_MASK) | (c << BTH_LE_GAP_APPEARANCE_CATEGORY_OFFSET);
 }
 pub const BTH_LE_GAP_APPEARANCE_SUB_CATEGORY_MASK: USHORT = 0x3f;
 #[inline]
@@ -98,14 +96,14 @@ pub const BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_POWER_SENSOR: UCHAR = 0x04;
 pub const BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_SPEED_AND_CADENCE_SENSOR: UCHAR = 0x05;
 pub const BTH_LE_GAP_APPEARANCE_PULSE_OXIMETER_SUBCATEGORY_FINGERTIP: UCHAR = 0x01;
 pub const BTH_LE_GAP_APPEARANCE_PULSE_OXIMETER_SUBCATEGORY_WRIST_WORN: UCHAR = 0x02;
-pub const BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_DISPLAY_DEVICE: UCHAR
-    = 0x01;
+pub const BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_DISPLAY_DEVICE: UCHAR =
+    0x01;
 pub const
     BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_NAVIGATION_DISPLAY_DEVICE:
         UCHAR = 0x02;
 pub const BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_POD: UCHAR = 0x03;
-pub const BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_NAVIGATION_POD: UCHAR
-    = 0x04;
+pub const BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_NAVIGATION_POD: UCHAR =
+    0x04;
 pub const BTH_LE_GATT_DEFAULT_MAX_INCLUDED_SERVICES_DEPTH: USHORT = 3;
 pub const BTH_LE_ATT_TRANSACTION_TIMEOUT: USHORT = 30;
 pub const BTH_LE_ATT_MAX_VALUE_SIZE: USHORT = 512;
@@ -141,31 +139,34 @@ pub const BLUETOOTH_GATT_FLAG_SIGNED_WRITE: ULONG = 0x00000010;
 pub const BLUETOOTH_GATT_FLAG_WRITE_WITHOUT_RESPONSE: ULONG = 0x00000020;
 pub const BLUETOOTH_GATT_FLAG_RETURN_ALL: ULONG = 0x00000040;
 pub const BLUETOOTH_GATT_FLAG_VALID_MASK: ULONG = BLUETOOTH_GATT_FLAG_NONE
-    | BLUETOOTH_GATT_FLAG_CONNECTION_ENCRYPTED | BLUETOOTH_GATT_FLAG_CONNECTION_AUTHENTICATED
-    | BLUETOOTH_GATT_FLAG_FORCE_READ_FROM_DEVICE | BLUETOOTH_GATT_FLAG_FORCE_READ_FROM_CACHE
-    | BLUETOOTH_GATT_FLAG_SIGNED_WRITE | BLUETOOTH_GATT_FLAG_WRITE_WITHOUT_RESPONSE
+    | BLUETOOTH_GATT_FLAG_CONNECTION_ENCRYPTED
+    | BLUETOOTH_GATT_FLAG_CONNECTION_AUTHENTICATED
+    | BLUETOOTH_GATT_FLAG_FORCE_READ_FROM_DEVICE
+    | BLUETOOTH_GATT_FLAG_FORCE_READ_FROM_CACHE
+    | BLUETOOTH_GATT_FLAG_SIGNED_WRITE
+    | BLUETOOTH_GATT_FLAG_WRITE_WITHOUT_RESPONSE
     | BLUETOOTH_GATT_FLAG_RETURN_ALL;
 #[inline]
 pub fn IS_BLUETOOTH_GATT_FLAG_VALID(f: ULONG) -> bool {
     (f & !BLUETOOTH_GATT_FLAG_VALID_MASK) == 0
 }
 pub type BLUETOOTH_GATT_EVENT_HANDLE = HANDLE;
-UNION!{union BTH_LE_UUID_value {
+UNION! {union BTH_LE_UUID_value {
     [u32; 4],
     ShortUuid ShortUuid_mut: USHORT,
     LongUuid LongUuid_mut: GUID,
 }}
-STRUCT!{struct BTH_LE_UUID {
+STRUCT! {struct BTH_LE_UUID {
     IsShortUuid: BOOLEAN,
     Value: BTH_LE_UUID_value,
 }}
 pub type PBTH_LE_UUID = *mut BTH_LE_UUID;
-STRUCT!{struct BTH_LE_GATT_SERVICE {
+STRUCT! {struct BTH_LE_GATT_SERVICE {
     ServiceUuid: BTH_LE_UUID,
     AttributeHandle: USHORT,
 }}
 pub type PBTH_LE_GATT_SERVICE = *mut BTH_LE_GATT_SERVICE;
-ENUM!{enum BTH_LE_GATT_DESCRIPTOR_TYPE {
+ENUM! {enum BTH_LE_GATT_DESCRIPTOR_TYPE {
     CharacteristicExtendedProperties,
     CharacteristicUserDescription,
     ClientCharacteristicConfiguration,
@@ -175,7 +176,7 @@ ENUM!{enum BTH_LE_GATT_DESCRIPTOR_TYPE {
     CustomDescriptor,
 }}
 pub type PBTH_LE_GATT_DESCRIPTOR_TYPE = *mut BTH_LE_GATT_DESCRIPTOR_TYPE;
-STRUCT!{struct BTH_LE_GATT_CHARACTERISTIC {
+STRUCT! {struct BTH_LE_GATT_CHARACTERISTIC {
     ServiceHandle: USHORT,
     CharacteristicUuid: BTH_LE_UUID,
     AttributeHandle: USHORT,
@@ -190,12 +191,12 @@ STRUCT!{struct BTH_LE_GATT_CHARACTERISTIC {
     HasExtendedProperties: BOOLEAN,
 }}
 pub type PBTH_LE_GATT_CHARACTERISTIC = *mut BTH_LE_GATT_CHARACTERISTIC;
-STRUCT!{struct BTH_LE_GATT_CHARACTERISTIC_VALUE {
+STRUCT! {struct BTH_LE_GATT_CHARACTERISTIC_VALUE {
     DataSize: ULONG,
     Data: [UCHAR; 1],
 }}
 pub type PBTH_LE_GATT_CHARACTERISTIC_VALUE = *mut BTH_LE_GATT_CHARACTERISTIC_VALUE;
-STRUCT!{struct BTH_LE_GATT_DESCRIPTOR {
+STRUCT! {struct BTH_LE_GATT_DESCRIPTOR {
     ServiceHandle: USHORT,
     CharacteristicHandle: USHORT,
     DescriptorType: BTH_LE_GATT_DESCRIPTOR_TYPE,
@@ -203,25 +204,25 @@ STRUCT!{struct BTH_LE_GATT_DESCRIPTOR {
     AttributeHandle: USHORT,
 }}
 pub type PBTH_LE_GATT_DESCRIPTOR = *mut BTH_LE_GATT_DESCRIPTOR;
-STRUCT!{struct BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicExtendedProperties {
+STRUCT! {struct BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicExtendedProperties {
     IsReliableWriteEnabled: BOOLEAN,
     IsAuxiliariesWritable: BOOLEAN,
 }}
-STRUCT!{struct BTH_LE_GATT_DESCRIPTOR_VALUE_u_ClientCharacteristicConfiguration {
+STRUCT! {struct BTH_LE_GATT_DESCRIPTOR_VALUE_u_ClientCharacteristicConfiguration {
     IsSubscribeToNotification: BOOLEAN,
     IsSubscribeToIndication: BOOLEAN,
 }}
-STRUCT!{struct BTH_LE_GATT_DESCRIPTOR_VALUE_u_ServerCharacteristicConfiguration {
+STRUCT! {struct BTH_LE_GATT_DESCRIPTOR_VALUE_u_ServerCharacteristicConfiguration {
     IsBroadcast: BOOLEAN,
 }}
-STRUCT!{struct BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicFormat {
+STRUCT! {struct BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicFormat {
     Format: UCHAR,
     Exponent: UCHAR,
     Unit: BTH_LE_UUID,
     NameSpace: UCHAR,
     Description: BTH_LE_UUID,
 }}
-UNION!{union BTH_LE_GATT_DESCRIPTOR_VALUE_u {
+UNION! {union BTH_LE_GATT_DESCRIPTOR_VALUE_u {
     [u32; 12],
     CharacteristicExtendedProperties CharacteristicExtendedProperties_mut:
         BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicExtendedProperties,
@@ -232,7 +233,7 @@ UNION!{union BTH_LE_GATT_DESCRIPTOR_VALUE_u {
     CharacteristicFormat CharacteristicFormat_mut:
         BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicFormat,
 }}
-STRUCT!{struct BTH_LE_GATT_DESCRIPTOR_VALUE {
+STRUCT! {struct BTH_LE_GATT_DESCRIPTOR_VALUE {
     DescriptorType: BTH_LE_GATT_DESCRIPTOR_TYPE,
     DescriptorUuid: BTH_LE_UUID,
     u: BTH_LE_GATT_DESCRIPTOR_VALUE_u,
@@ -240,21 +241,21 @@ STRUCT!{struct BTH_LE_GATT_DESCRIPTOR_VALUE {
     Data: [UCHAR; 1],
 }}
 pub type PBTH_LE_GATT_DESCRIPTOR_VALUE = *mut BTH_LE_GATT_DESCRIPTOR_VALUE;
-ENUM!{enum BTH_LE_GATT_EVENT_TYPE {
+ENUM! {enum BTH_LE_GATT_EVENT_TYPE {
     CharacteristicValueChangedEvent,
 }}
-FN!{stdcall PFNBLUETOOTH_GATT_EVENT_CALLBACK(
+FN! {stdcall PFNBLUETOOTH_GATT_EVENT_CALLBACK(
     EventType: BTH_LE_GATT_EVENT_TYPE,
     EventOutParameter: PVOID,
     Context: PVOID,
 ) -> ()}
-STRUCT!{struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION {
+STRUCT! {struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION {
     NumCharacteristics: USHORT,
     Characteristics: [BTH_LE_GATT_CHARACTERISTIC; 1],
 }}
-pub type PBLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION
-    = *mut BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION;
-STRUCT!{struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT {
+pub type PBLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION =
+    *mut BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION;
+STRUCT! {struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT {
     ChangedAttributeHandle: USHORT,
     CharacteristicValueDataSize: usize,
     CharacteristicValue: PBTH_LE_GATT_CHARACTERISTIC_VALUE,
@@ -269,12 +270,18 @@ pub fn IsBthLEUuidMatch(uuid1: &BTH_LE_UUID, uuid2: &BTH_LE_UUID) -> bool {
             && uuid.Data3 == BTH_LE_ATT_BLUETOOTH_BASE_GUID.Data3
             && uuid.Data4 == BTH_LE_ATT_BLUETOOTH_BASE_GUID.Data4
     }
-    unsafe { match (uuid1.IsShortUuid != 0, uuid2.IsShortUuid != 0) {
-        (true, true) => uuid1.Value.ShortUuid() == uuid2.Value.ShortUuid(),
-        (false, false) => IsEqualGUID(uuid1.Value.LongUuid(), uuid2.Value.LongUuid()),
-        (true, false) => is_bluetooth_le_uuid(uuid2.Value.LongUuid())
-            && ((*uuid1.Value.ShortUuid()) as u32) == uuid2.Value.LongUuid().Data1,
-        (false, true) => is_bluetooth_le_uuid(uuid1.Value.LongUuid())
-            && ((*uuid2.Value.ShortUuid()) as u32) == uuid1.Value.LongUuid().Data1,
-    }}
+    unsafe {
+        match (uuid1.IsShortUuid != 0, uuid2.IsShortUuid != 0) {
+            (true, true) => uuid1.Value.ShortUuid() == uuid2.Value.ShortUuid(),
+            (false, false) => IsEqualGUID(uuid1.Value.LongUuid(), uuid2.Value.LongUuid()),
+            (true, false) => {
+                is_bluetooth_le_uuid(uuid2.Value.LongUuid())
+                    && ((*uuid1.Value.ShortUuid()) as u32) == uuid2.Value.LongUuid().Data1
+            }
+            (false, true) => {
+                is_bluetooth_le_uuid(uuid1.Value.LongUuid())
+                    && ((*uuid2.Value.ShortUuid()) as u32) == uuid1.Value.LongUuid().Data1
+            }
+        }
+    }
 }

@@ -9,11 +9,11 @@ use shared::minwindef::{BOOL, FLOAT, UINT};
 use um::d3d12::ID3D12Resource;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
-RIDL!{#[uuid(0x344488b7, 0x6846, 0x474b, 0xb9, 0x89, 0xf0, 0x27, 0x44, 0x82, 0x45, 0xe0)]
+RIDL! {#[uuid(0x344488b7, 0x6846, 0x474b, 0xb9, 0x89, 0xf0, 0x27, 0x44, 0x82, 0x45, 0xe0)]
 interface ID3D12Debug(ID3D12DebugVtbl): IUnknown(IUnknownVtbl) {
     fn EnableDebugLayer() -> (),
 }}
-RIDL!{#[uuid(0xaffaa4ca, 0x63fe, 0x4d8e, 0xb8, 0xad, 0x15, 0x90, 0x00, 0xaf, 0x43, 0x04)]
+RIDL! {#[uuid(0xaffaa4ca, 0x63fe, 0x4d8e, 0xb8, 0xad, 0x15, 0x90, 0x00, 0xaf, 0x43, 0x04)]
 interface ID3D12Debug1(ID3D12Debug1Vtbl): IUnknown(IUnknownVtbl) {
     fn EnableDebugLayer() -> (),
     fn SetEnableGPUBasedValidation(
@@ -23,42 +23,42 @@ interface ID3D12Debug1(ID3D12Debug1Vtbl): IUnknown(IUnknownVtbl) {
         Enable: BOOL,
     ) -> (),
 }}
-ENUM!{enum D3D12_GPU_BASED_VALIDATION_FLAGS {
+ENUM! {enum D3D12_GPU_BASED_VALIDATION_FLAGS {
     D3D12_GPU_BASED_VALIDATION_FLAGS_NONE = 0,
     D3D12_GPU_BASED_VALIDATION_FLAGS_DISABLE_STATE_TRACKING = 0x01,
 }}
-RIDL!{#[uuid(0x93a665c4, 0xa3b2, 0x4e5d, 0xb6, 0x92, 0xa2, 0x6a, 0xe1, 0x4e, 0x33, 0x74)]
+RIDL! {#[uuid(0x93a665c4, 0xa3b2, 0x4e5d, 0xb6, 0x92, 0xa2, 0x6a, 0xe1, 0x4e, 0x33, 0x74)]
 interface ID3D12Debug2(ID3D12Debug2Vtbl): IUnknown(IUnknownVtbl) {
     fn SetGPUBasedValidationFlags(
         Flags: D3D12_GPU_BASED_VALIDATION_FLAGS,
     ) -> (),
 }}
-ENUM!{enum D3D12_RLDO_FLAGS {
+ENUM! {enum D3D12_RLDO_FLAGS {
     D3D12_RLDO_NONE = 0,
     D3D12_RLDO_SUMMARY = 0x1,
     D3D12_RLDO_DETAIL = 0x2,
     D3D12_RLDO_IGNORE_INTERNAL = 0x4,
 }}
-ENUM!{enum D3D12_DEBUG_DEVICE_PARAMETER_TYPE {
+ENUM! {enum D3D12_DEBUG_DEVICE_PARAMETER_TYPE {
     D3D12_DEBUG_DEVICE_PARAMETER_FEATURE_FLAGS = 0,
     D3D12_DEBUG_DEVICE_PARAMETER_GPU_BASED_VALIDATION_SETTINGS = 1,
     D3D12_DEBUG_DEVICE_PARAMETER_GPU_SLOWDOWN_PERFORMANCE_FACTOR = 2,
 }}
-ENUM!{enum D3D12_DEBUG_FEATURE {
+ENUM! {enum D3D12_DEBUG_FEATURE {
     D3D12_DEBUG_FEATURE_NONE = 0,
     D3D12_DEBUG_FEATURE_TREAT_BUNDLE_AS_DRAW = 0x1,
     D3D12_DEBUG_FEATURE_TREAT_BUNDLE_AS_DISPATCH = 0x2,
     D3D12_DEBUG_FEATURE_DISABLE_VIRTUALIZED_BUNDLES_VALIDATION = 0x04,
     D3D12_DEBUG_FEATURE_VALID_MASK = 0x7,
 }}
-ENUM!{enum D3D12_GPU_BASED_VALIDATION_SHADER_PATCH_MODE {
+ENUM! {enum D3D12_GPU_BASED_VALIDATION_SHADER_PATCH_MODE {
     D3D12_GPU_BASED_VALIDATION_SHADER_PATCH_MODE_NONE = 0,
     D3D12_GPU_BASED_VALIDATION_SHADER_PATCH_MODE_STATE_TRACKING_ONLY = 1,
     D3D12_GPU_BASED_VALIDATION_SHADER_PATCH_MODE_UNGUARDED_VALIDATION = 2,
     D3D12_GPU_BASED_VALIDATION_SHADER_PATCH_MODE_GUARDED_VALIDATION = 3,
     NUM_D3D12_GPU_BASED_VALIDATION_SHADER_PATCH_MODES = 4,
 }}
-ENUM!{enum D3D12_GPU_BASED_VALIDATION_PIPELINE_STATE_CREATE_FLAGS {
+ENUM! {enum D3D12_GPU_BASED_VALIDATION_PIPELINE_STATE_CREATE_FLAGS {
     D3D12_GPU_BASED_VALIDATION_PIPELINE_STATE_CREATE_FLAG_NONE = 0,
     D3D12_GPU_BASED_VALIDATION_PIPELINE_STATE_CREATE_FLAG_FRONT_LOAD_CREATE_TRACKING_ONLY_SHADERS
         = 0x01,
@@ -66,15 +66,15 @@ ENUM!{enum D3D12_GPU_BASED_VALIDATION_PIPELINE_STATE_CREATE_FLAGS {
     D3D12_GPU_BASED_VALIDATION_PIPELINE_STATE_CREATE_FLAG_FRONT_LOAD_CREATE_GUARDED_VALIDATION_SHADERS = 0x04,
     D3D12_GPU_BASED_VALIDATION_PIPELINE_STATE_CREATE_FLAGS_VALID_MASK = 0x07,
 }}
-STRUCT!{struct D3D12_DEBUG_DEVICE_GPU_BASED_VALIDATION_SETTINGS {
+STRUCT! {struct D3D12_DEBUG_DEVICE_GPU_BASED_VALIDATION_SETTINGS {
     MaxMessagesPerCommandList: UINT,
     DefaultShaderPatchMode: D3D12_GPU_BASED_VALIDATION_SHADER_PATCH_MODE,
     PipelineStateCreateFlags: D3D12_GPU_BASED_VALIDATION_PIPELINE_STATE_CREATE_FLAGS,
 }}
-STRUCT!{struct D3D12_DEBUG_DEVICE_GPU_SLOWDOWN_PERFORMANCE_FACTOR {
+STRUCT! {struct D3D12_DEBUG_DEVICE_GPU_SLOWDOWN_PERFORMANCE_FACTOR {
     SlowdownFactor: FLOAT,
 }}
-RIDL!{#[uuid(0x3febd6dd, 0x4973, 0x4787, 0x81, 0x94, 0xe4, 0x5f, 0x9e, 0x28, 0x92, 0x3e)]
+RIDL! {#[uuid(0x3febd6dd, 0x4973, 0x4787, 0x81, 0x94, 0xe4, 0x5f, 0x9e, 0x28, 0x92, 0x3e)]
 interface ID3D12DebugDevice1(ID3D12DebugDevice1Vtbl): IUnknown(IUnknownVtbl) {
     fn SetDebugParameter(
         Type: D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE,
@@ -90,7 +90,7 @@ interface ID3D12DebugDevice1(ID3D12DebugDevice1Vtbl): IUnknown(IUnknownVtbl) {
         Flags: D3D12_RLDO_FLAGS,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x3febd6dd, 0x4973, 0x4787, 0x81, 0x94, 0xe4, 0x5f, 0x9e, 0x28, 0x92, 0x3e)]
+RIDL! {#[uuid(0x3febd6dd, 0x4973, 0x4787, 0x81, 0x94, 0xe4, 0x5f, 0x9e, 0x28, 0x92, 0x3e)]
 interface ID3D12DebugDevice(ID3D12DebugDeviceVtbl): IUnknown(IUnknownVtbl) {
     fn SetFeatureMask(
         Mask: D3D12_DEBUG_FEATURE,
@@ -100,9 +100,9 @@ interface ID3D12DebugDevice(ID3D12DebugDeviceVtbl): IUnknown(IUnknownVtbl) {
         Flags: D3D12_RLDO_FLAGS,
     ) -> HRESULT,
 }}
-DEFINE_GUID!{DXGI_DEBUG_D3D12,
-    0xcf59a98c, 0xa950, 0x4326, 0x91, 0xef, 0x9b, 0xba, 0xa1, 0x7b, 0xfd, 0x95}
-RIDL!{#[uuid(0x09e0bf36, 0x54ac, 0x484f, 0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3a)]
+DEFINE_GUID! {DXGI_DEBUG_D3D12,
+0xcf59a98c, 0xa950, 0x4326, 0x91, 0xef, 0x9b, 0xba, 0xa1, 0x7b, 0xfd, 0x95}
+RIDL! {#[uuid(0x09e0bf36, 0x54ac, 0x484f, 0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3a)]
 interface ID3D12DebugCommandQueue(ID3D12DebugCommandQueueVtbl): IUnknown(IUnknownVtbl) {
     fn AssertResourceState(
         pResource: *mut ID3D12Resource,
@@ -110,13 +110,13 @@ interface ID3D12DebugCommandQueue(ID3D12DebugCommandQueueVtbl): IUnknown(IUnknow
         State: UINT,
     ) -> BOOL,
 }}
-ENUM!{enum D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE {
+ENUM! {enum D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE {
     D3D12_DEBUG_COMMAND_LIST_PARAMETER_GPU_BASED_VALIDATION_SETTINGS = 0,
 }}
-STRUCT!{struct D3D12_DEBUG_COMMAND_LIST_GPU_BASED_VALIDATION_SETTINGS {
+STRUCT! {struct D3D12_DEBUG_COMMAND_LIST_GPU_BASED_VALIDATION_SETTINGS {
     ShaderPatchMode: D3D12_GPU_BASED_VALIDATION_SHADER_PATCH_MODE,
 }}
-RIDL!{#[uuid(0x102ca951, 0x311b, 0x4b01, 0xb1, 0x1f, 0xec, 0xb8, 0x3e, 0x06, 0x1b, 0x37)]
+RIDL! {#[uuid(0x102ca951, 0x311b, 0x4b01, 0xb1, 0x1f, 0xec, 0xb8, 0x3e, 0x06, 0x1b, 0x37)]
 interface ID3D12DebugCommandList1(ID3D12DebugCommandList1Vtbl): IUnknown(IUnknownVtbl) {
     fn AssertResourceState(
         pResource: *mut ID3D12Resource,
@@ -134,7 +134,7 @@ interface ID3D12DebugCommandList1(ID3D12DebugCommandList1Vtbl): IUnknown(IUnknow
         DataSize: UINT,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x09e0bf36, 0x54ac, 0x484f, 0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3f)]
+RIDL! {#[uuid(0x09e0bf36, 0x54ac, 0x484f, 0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3f)]
 interface ID3D12DebugCommandList(ID3D12DebugCommandListVtbl): IUnknown(IUnknownVtbl) {
     fn AssertResourceState(
         pResource: *mut ID3D12Resource,
@@ -146,7 +146,7 @@ interface ID3D12DebugCommandList(ID3D12DebugCommandListVtbl): IUnknown(IUnknownV
     ) -> HRESULT,
     fn GetFeatureMask() -> D3D12_DEBUG_FEATURE,
 }}
-ENUM!{enum D3D12_MESSAGE_CATEGORY {
+ENUM! {enum D3D12_MESSAGE_CATEGORY {
     D3D12_MESSAGE_CATEGORY_APPLICATION_DEFINED = 0,
     D3D12_MESSAGE_CATEGORY_MISCELLANEOUS = 1,
     D3D12_MESSAGE_CATEGORY_INITIALIZATION = 2,
@@ -159,14 +159,14 @@ ENUM!{enum D3D12_MESSAGE_CATEGORY {
     D3D12_MESSAGE_CATEGORY_EXECUTION = 9,
     D3D12_MESSAGE_CATEGORY_SHADER = 10,
 }}
-ENUM!{enum D3D12_MESSAGE_SEVERITY {
+ENUM! {enum D3D12_MESSAGE_SEVERITY {
     D3D12_MESSAGE_SEVERITY_CORRUPTION = 0,
     D3D12_MESSAGE_SEVERITY_ERROR = 1,
     D3D12_MESSAGE_SEVERITY_WARNING = 2,
     D3D12_MESSAGE_SEVERITY_INFO = 3,
     D3D12_MESSAGE_SEVERITY_MESSAGE = 4,
 }}
-ENUM!{enum D3D12_MESSAGE_ID {
+ENUM! {enum D3D12_MESSAGE_ID {
     D3D12_MESSAGE_ID_UNKNOWN = 0,
     D3D12_MESSAGE_ID_STRING_FROM_APPLICATION = 1,
     D3D12_MESSAGE_ID_CORRUPTED_THIS = 2,
@@ -1241,14 +1241,14 @@ ENUM!{enum D3D12_MESSAGE_ID {
     D3D12_MESSAGE_ID_COPY_INVALIDLAYOUT = 1067,
     D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1068,
 }}
-STRUCT!{struct D3D12_MESSAGE {
+STRUCT! {struct D3D12_MESSAGE {
     Category: D3D12_MESSAGE_CATEGORY,
     Severity: D3D12_MESSAGE_SEVERITY,
     ID: D3D12_MESSAGE_ID,
     pDescription: *const c_char,
     DescriptionByteLength: SIZE_T,
 }}
-STRUCT!{struct D3D12_INFO_QUEUE_FILTER_DESC {
+STRUCT! {struct D3D12_INFO_QUEUE_FILTER_DESC {
     NumCategories: UINT,
     pCategoryList: *mut D3D12_MESSAGE_CATEGORY,
     NumSeverities: UINT,
@@ -1256,12 +1256,12 @@ STRUCT!{struct D3D12_INFO_QUEUE_FILTER_DESC {
     NumIDs: UINT,
     pIDList: *mut D3D12_MESSAGE_ID,
 }}
-STRUCT!{struct D3D12_INFO_QUEUE_FILTER {
+STRUCT! {struct D3D12_INFO_QUEUE_FILTER {
     AllowList: D3D12_INFO_QUEUE_FILTER_DESC,
     DenyList: D3D12_INFO_QUEUE_FILTER_DESC,
 }}
 pub const D3D12_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT: UINT = 1024;
-RIDL!{#[uuid(0x0742a90b, 0xc387, 0x483f, 0xb9, 0x46, 0x30, 0xa7, 0xe4, 0xe6, 0x14, 0x58)]
+RIDL! {#[uuid(0x0742a90b, 0xc387, 0x483f, 0xb9, 0x46, 0x30, 0xa7, 0xe4, 0xe6, 0x14, 0x58)]
 interface ID3D12InfoQueue(ID3D12InfoQueueVtbl): IUnknown(IUnknownVtbl) {
     fn SetMessageCountLimit(
         MessageCountLimit: UINT64,
@@ -1344,21 +1344,21 @@ interface ID3D12InfoQueue(ID3D12InfoQueueVtbl): IUnknown(IUnknownVtbl) {
     ) -> (),
     fn GetMuteDebugOutput() -> BOOL,
 }}
-DEFINE_GUID!{IID_ID3D12Debug,
-    0x344488b7, 0x6846, 0x474b, 0xb9, 0x89, 0xf0, 0x27, 0x44, 0x82, 0x45, 0xe0}
-DEFINE_GUID!{IID_ID3D12Debug1,
-    0xaffaa4ca, 0x63fe, 0x4d8e, 0xb8, 0xad, 0x15, 0x90, 0x00, 0xaf, 0x43, 0x04}
-DEFINE_GUID!{IID_ID3D12Debug2,
-    0x93a665c4, 0xa3b2, 0x4e5d, 0xb6, 0x92, 0xa2, 0x6a, 0xe1, 0x4e, 0x33, 0x74}
-DEFINE_GUID!{IID_ID3D12DebugDevice1,
-    0xa9b71770, 0xd099, 0x4a65, 0xa6, 0x98, 0x3d, 0xee, 0x10, 0x02, 0x0f, 0x88}
-DEFINE_GUID!{IID_ID3D12DebugDevice,
-    0x3febd6dd, 0x4973, 0x4787, 0x81, 0x94, 0xe4, 0x5f, 0x9e, 0x28, 0x92, 0x3e}
-DEFINE_GUID!{IID_ID3D12DebugCommandQueue,
-    0x09e0bf36, 0x54ac, 0x484f, 0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3a}
-DEFINE_GUID!{IID_ID3D12DebugCommandList1,
-    0x102ca951, 0x311b, 0x4b01, 0xb1, 0x1f, 0xec, 0xb8, 0x3e, 0x06, 0x1b, 0x37}
-DEFINE_GUID!{IID_ID3D12DebugCommandList,
-    0x09e0bf36, 0x54ac, 0x484f, 0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3f}
-DEFINE_GUID!{IID_ID3D12InfoQueue,
-    0x0742a90b, 0xc387, 0x483f, 0xb9, 0x46, 0x30, 0xa7, 0xe4, 0xe6, 0x14, 0x58}
+DEFINE_GUID! {IID_ID3D12Debug,
+0x344488b7, 0x6846, 0x474b, 0xb9, 0x89, 0xf0, 0x27, 0x44, 0x82, 0x45, 0xe0}
+DEFINE_GUID! {IID_ID3D12Debug1,
+0xaffaa4ca, 0x63fe, 0x4d8e, 0xb8, 0xad, 0x15, 0x90, 0x00, 0xaf, 0x43, 0x04}
+DEFINE_GUID! {IID_ID3D12Debug2,
+0x93a665c4, 0xa3b2, 0x4e5d, 0xb6, 0x92, 0xa2, 0x6a, 0xe1, 0x4e, 0x33, 0x74}
+DEFINE_GUID! {IID_ID3D12DebugDevice1,
+0xa9b71770, 0xd099, 0x4a65, 0xa6, 0x98, 0x3d, 0xee, 0x10, 0x02, 0x0f, 0x88}
+DEFINE_GUID! {IID_ID3D12DebugDevice,
+0x3febd6dd, 0x4973, 0x4787, 0x81, 0x94, 0xe4, 0x5f, 0x9e, 0x28, 0x92, 0x3e}
+DEFINE_GUID! {IID_ID3D12DebugCommandQueue,
+0x09e0bf36, 0x54ac, 0x484f, 0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3a}
+DEFINE_GUID! {IID_ID3D12DebugCommandList1,
+0x102ca951, 0x311b, 0x4b01, 0xb1, 0x1f, 0xec, 0xb8, 0x3e, 0x06, 0x1b, 0x37}
+DEFINE_GUID! {IID_ID3D12DebugCommandList,
+0x09e0bf36, 0x54ac, 0x484f, 0x88, 0x47, 0x4b, 0xae, 0xea, 0xb6, 0x05, 0x3f}
+DEFINE_GUID! {IID_ID3D12InfoQueue,
+0x0742a90b, 0xc387, 0x483f, 0xb9, 0x46, 0x30, 0xa7, 0xe4, 0xe6, 0x14, 0x58}

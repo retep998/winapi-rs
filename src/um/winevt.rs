@@ -13,7 +13,7 @@ use um::winnt::{HANDLE, LCID, LONGLONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PSID, PV
 use vc::vcruntime::size_t;
 pub type EVT_HANDLE = HANDLE;
 pub type PEVT_HANDLE = *mut HANDLE;
-ENUM!{enum EVT_VARIANT_TYPE {
+ENUM! {enum EVT_VARIANT_TYPE {
     EvtVarTypeNull = 0,
     EvtVarTypeString = 1,
     EvtVarTypeAnsiString = 2,
@@ -41,7 +41,7 @@ ENUM!{enum EVT_VARIANT_TYPE {
 }}
 pub const EVT_VARIANT_TYPE_MASK: DWORD = 0x7f;
 pub const EVT_VARIANT_TYPE_ARRAY: DWORD = 128;
-UNION!{union EVT_VARIANT_u {
+UNION! {union EVT_VARIANT_u {
     [u64; 1],
     BooleanVal BooleanVal_mut: BOOL,
     SByteVal SByteVal_mut: INT8,
@@ -84,22 +84,22 @@ UNION!{union EVT_VARIANT_u {
     XmlVal XmlVal_mut: LPCWSTR,
     XmlValArr XmlValArr_mut: *mut LPCWSTR,
 }}
-STRUCT!{struct EVT_VARIANT {
+STRUCT! {struct EVT_VARIANT {
     u: EVT_VARIANT_u,
     Count: DWORD,
     Type: DWORD,
 }}
 pub type PEVT_VARIANT = *mut EVT_VARIANT;
-ENUM!{enum EVT_LOGIN_CLASS {
+ENUM! {enum EVT_LOGIN_CLASS {
     EvtRpcLogin = 1,
 }}
-ENUM!{enum EVT_RPC_LOGIN_FLAGS {
+ENUM! {enum EVT_RPC_LOGIN_FLAGS {
     EvtRpcLoginAuthDefault = 0,
     EvtRpcLoginAuthNegotiate,
     EvtRpcLoginAuthKerberos,
     EvtRpcLoginAuthNTLM,
 }}
-STRUCT!{struct EVT_RPC_LOGIN {
+STRUCT! {struct EVT_RPC_LOGIN {
     Server: LPWSTR,
     User: LPWSTR,
     Domain: LPWSTR,
@@ -113,26 +113,18 @@ extern "system" {
         Timeout: DWORD,
         Flags: DWORD,
     ) -> EVT_HANDLE;
-    pub fn EvtClose(
-        Object: EVT_HANDLE,
-    ) -> BOOL;
-    pub fn EvtCancel(
-        Object: EVT_HANDLE,
-    ) -> BOOL;
-    pub fn EvtGetExtendedStatus(
-        BufferSize: DWORD,
-        Buffer: LPWSTR,
-        BufferUsed: PDWORD,
-    ) -> DWORD;
+    pub fn EvtClose(Object: EVT_HANDLE) -> BOOL;
+    pub fn EvtCancel(Object: EVT_HANDLE) -> BOOL;
+    pub fn EvtGetExtendedStatus(BufferSize: DWORD, Buffer: LPWSTR, BufferUsed: PDWORD) -> DWORD;
 }
-ENUM!{enum EVT_QUERY_FLAGS {
+ENUM! {enum EVT_QUERY_FLAGS {
     EvtQueryChannelPath = 0x1,
     EvtQueryFilePath = 0x2,
     EvtQueryForwardDirection = 0x100,
     EvtQueryReverseDirection = 0x200,
     EvtQueryTolerateQueryErrors = 0x1000,
 }}
-ENUM!{enum EVT_SEEK_FLAGS {
+ENUM! {enum EVT_SEEK_FLAGS {
     EvtSeekRelativeToFirst = 1,
     EvtSeekRelativeToLast = 2,
     EvtSeekRelativeToCurrent = 3,
@@ -141,12 +133,8 @@ ENUM!{enum EVT_SEEK_FLAGS {
     EvtSeekStrict = 0x10000,
 }}
 extern "system" {
-    pub fn EvtQuery(
-        Session: EVT_HANDLE,
-        Path: LPCWSTR,
-        Query: LPCWSTR,
-        Flags: DWORD,
-    ) -> EVT_HANDLE;
+    pub fn EvtQuery(Session: EVT_HANDLE, Path: LPCWSTR, Query: LPCWSTR, Flags: DWORD)
+        -> EVT_HANDLE;
     pub fn EvtNext(
         ResultSet: EVT_HANDLE,
         EventsSize: DWORD,
@@ -163,7 +151,7 @@ extern "system" {
         Flags: DWORD,
     ) -> BOOL;
 }
-ENUM!{enum EVT_SUBSCRIBE_FLAGS {
+ENUM! {enum EVT_SUBSCRIBE_FLAGS {
     EvtSubscribeToFutureEvents = 1,
     EvtSubscribeStartAtOldestRecord = 2,
     EvtSubscribeStartAfterBookmark = 3,
@@ -171,11 +159,11 @@ ENUM!{enum EVT_SUBSCRIBE_FLAGS {
     EvtSubscribeTolerateQueryErrors = 0x1000,
     EvtSubscribeStrict = 0x10000,
 }}
-ENUM!{enum EVT_SUBSCRIBE_NOTIFY_ACTION {
+ENUM! {enum EVT_SUBSCRIBE_NOTIFY_ACTION {
     EvtSubscribeActionError = 0,
     EvtSubscribeActionDeliver,
 }}
-FN!{stdcall EVT_SUBSCRIBE_CALLBACK(
+FN! {stdcall EVT_SUBSCRIBE_CALLBACK(
     Action: EVT_SUBSCRIBE_NOTIFY_ACTION,
     UserContext: PVOID,
     Event: EVT_HANDLE,
@@ -192,7 +180,7 @@ extern "system" {
         Flags: DWORD,
     ) -> EVT_HANDLE;
 }
-ENUM!{enum EVT_SYSTEM_PROPERTY_ID {
+ENUM! {enum EVT_SYSTEM_PROPERTY_ID {
     EvtSystemProviderName = 0,
     EvtSystemProviderGuid,
     EvtSystemEventID,
@@ -213,12 +201,12 @@ ENUM!{enum EVT_SYSTEM_PROPERTY_ID {
     EvtSystemVersion,
     EvtSystemPropertyIdEND,
 }}
-ENUM!{enum EVT_RENDER_CONTEXT_FLAGS {
+ENUM! {enum EVT_RENDER_CONTEXT_FLAGS {
     EvtRenderContextValues = 0,
     EvtRenderContextSystem,
     EvtRenderContextUser,
 }}
-ENUM!{enum EVT_RENDER_FLAGS {
+ENUM! {enum EVT_RENDER_FLAGS {
     EvtRenderEventValues = 0,
     EvtRenderEventXml,
     EvtRenderBookmark,
@@ -239,7 +227,7 @@ extern "system" {
         PropertyCount: PDWORD,
     ) -> BOOL;
 }
-ENUM!{enum EVT_FORMAT_MESSAGE_FLAGS {
+ENUM! {enum EVT_FORMAT_MESSAGE_FLAGS {
     EvtFormatMessageEvent = 1,
     EvtFormatMessageLevel,
     EvtFormatMessageTask,
@@ -263,11 +251,11 @@ extern "system" {
         BufferUsed: PDWORD,
     ) -> BOOL;
 }
-ENUM!{enum EVT_OPEN_LOG_FLAGS {
+ENUM! {enum EVT_OPEN_LOG_FLAGS {
     EvtOpenChannelPath = 0x1,
     EvtOpenFilePath = 0x2,
 }}
-ENUM!{enum EVT_LOG_PROPERTY_ID {
+ENUM! {enum EVT_LOG_PROPERTY_ID {
     EvtLogCreationTime = 0,
     EvtLogLastAccessTime,
     EvtLogLastWriteTime,
@@ -278,11 +266,7 @@ ENUM!{enum EVT_LOG_PROPERTY_ID {
     EvtLogFull,
 }}
 extern "system" {
-    pub fn EvtOpenLog(
-        Session: EVT_HANDLE,
-        Path: LPCWSTR,
-        Flags: DWORD,
-    ) -> EVT_HANDLE;
+    pub fn EvtOpenLog(Session: EVT_HANDLE, Path: LPCWSTR, Flags: DWORD) -> EVT_HANDLE;
     pub fn EvtGetLogInfo(
         Log: EVT_HANDLE,
         PropertyId: EVT_LOG_PROPERTY_ID,
@@ -297,7 +281,7 @@ extern "system" {
         Flags: DWORD,
     ) -> BOOL;
 }
-ENUM!{enum EVT_EXPORTLOG_FLAGS {
+ENUM! {enum EVT_EXPORTLOG_FLAGS {
     EvtExportLogChannelPath = 0x1,
     EvtExportLogFilePath = 0x2,
     EvtExportLogTolerateQueryErrors = 0x1000,
@@ -318,7 +302,7 @@ extern "system" {
         Flags: DWORD,
     ) -> BOOL;
 }
-ENUM!{enum EVT_CHANNEL_CONFIG_PROPERTY_ID {
+ENUM! {enum EVT_CHANNEL_CONFIG_PROPERTY_ID {
     EvtChannelConfigEnabled = 0,
     EvtChannelConfigIsolation,
     EvtChannelConfigType,
@@ -342,30 +326,27 @@ ENUM!{enum EVT_CHANNEL_CONFIG_PROPERTY_ID {
     EvtChannelPublishingConfigFileMax,
     EvtChannelConfigPropertyIdEND,
 }}
-ENUM!{enum EVT_CHANNEL_TYPE {
+ENUM! {enum EVT_CHANNEL_TYPE {
     EvtChannelTypeAdmin = 0,
     EvtChannelTypeOperational,
     EvtChannelTypeAnalytic,
     EvtChannelTypeDebug,
 }}
-ENUM!{enum EVT_CHANNEL_ISOLATION_TYPE {
+ENUM! {enum EVT_CHANNEL_ISOLATION_TYPE {
     EvtChannelIsolationTypeApplication = 0,
     EvtChannelIsolationTypeSystem,
     EvtChannelIsolationTypeCustom,
 }}
-ENUM!{enum EVT_CHANNEL_CLOCK_TYPE {
+ENUM! {enum EVT_CHANNEL_CLOCK_TYPE {
     EvtChannelClockTypeSystemTime = 0,
     EvtChannelClockTypeQPC,
 }}
-ENUM!{enum EVT_CHANNEL_SID_TYPE {
+ENUM! {enum EVT_CHANNEL_SID_TYPE {
     EvtChannelSidTypeNone = 0,
     EvtChannelSidTypePublishing,
 }}
 extern "system" {
-    pub fn EvtOpenChannelEnum(
-        Session: EVT_HANDLE,
-        Flags: DWORD,
-    ) -> EVT_HANDLE;
+    pub fn EvtOpenChannelEnum(Session: EVT_HANDLE, Flags: DWORD) -> EVT_HANDLE;
     pub fn EvtNextChannelPath(
         ChannelEnum: EVT_HANDLE,
         ChannelPathBufferSize: DWORD,
@@ -377,10 +358,7 @@ extern "system" {
         ChannelPath: LPCWSTR,
         Flags: DWORD,
     ) -> EVT_HANDLE;
-    pub fn EvtSaveChannelConfig(
-        ChannelConfig: EVT_HANDLE,
-        Flags: DWORD,
-    ) -> BOOL;
+    pub fn EvtSaveChannelConfig(ChannelConfig: EVT_HANDLE, Flags: DWORD) -> BOOL;
     pub fn EvtSetChannelConfigProperty(
         ChannelConfig: EVT_HANDLE,
         PropertyId: EVT_CHANNEL_CONFIG_PROPERTY_ID,
@@ -396,10 +374,10 @@ extern "system" {
         PropertyValueBufferUsed: PDWORD,
     ) -> BOOL;
 }
-ENUM!{enum EVT_CHANNEL_REFERENCE_FLAGS {
+ENUM! {enum EVT_CHANNEL_REFERENCE_FLAGS {
     EvtChannelReferenceImported = 0x1,
 }}
-ENUM!{enum EVT_PUBLISHER_METADATA_PROPERTY_ID {
+ENUM! {enum EVT_PUBLISHER_METADATA_PROPERTY_ID {
     EvtPublisherMetadataPublisherGuid = 0,
     EvtPublisherMetadataResourceFilePath,
     EvtPublisherMetadataParameterFilePath,
@@ -432,10 +410,7 @@ ENUM!{enum EVT_PUBLISHER_METADATA_PROPERTY_ID {
     EvtPublisherMetadataPropertyIdEND,
 }}
 extern "system" {
-    pub fn EvtOpenPublisherEnum(
-        Session: EVT_HANDLE,
-        Flags: DWORD,
-    ) -> EVT_HANDLE;
+    pub fn EvtOpenPublisherEnum(Session: EVT_HANDLE, Flags: DWORD) -> EVT_HANDLE;
     pub fn EvtNextPublisherId(
         PublisherEnum: EVT_HANDLE,
         PublisherIdBufferSize: DWORD,
@@ -458,7 +433,7 @@ extern "system" {
         PublisherMetadataPropertyBufferUsed: PDWORD,
     ) -> BOOL;
 }
-ENUM!{enum EVT_EVENT_METADATA_PROPERTY_ID {
+ENUM! {enum EVT_EVENT_METADATA_PROPERTY_ID {
     EventMetadataEventID,
     EventMetadataEventVersion,
     EventMetadataEventChannel,
@@ -471,14 +446,8 @@ ENUM!{enum EVT_EVENT_METADATA_PROPERTY_ID {
     EvtEventMetadataPropertyIdEND,
 }}
 extern "system" {
-    pub fn EvtOpenEventMetadataEnum(
-        PublisherMetadata: EVT_HANDLE,
-        Flags: DWORD,
-    ) -> EVT_HANDLE;
-    pub fn EvtNextEventMetadata(
-        EventMetadataEnum: EVT_HANDLE,
-        Flags: DWORD,
-    ) -> EVT_HANDLE;
+    pub fn EvtOpenEventMetadataEnum(PublisherMetadata: EVT_HANDLE, Flags: DWORD) -> EVT_HANDLE;
+    pub fn EvtNextEventMetadata(EventMetadataEnum: EVT_HANDLE, Flags: DWORD) -> EVT_HANDLE;
     pub fn EvtGetEventMetadataProperty(
         EventMetadata: EVT_HANDLE,
         PropertyId: EVT_EVENT_METADATA_PROPERTY_ID,
@@ -504,12 +473,12 @@ extern "system" {
         PropertyValueBufferUsed: PDWORD,
     ) -> BOOL;
 }
-ENUM!{enum EVT_QUERY_PROPERTY_ID {
+ENUM! {enum EVT_QUERY_PROPERTY_ID {
     EvtQueryNames,
     EvtQueryStatuses,
     EvtQueryPropertyIdEND,
 }}
-ENUM!{enum EVT_EVENT_PROPERTY_ID {
+ENUM! {enum EVT_EVENT_PROPERTY_ID {
     EvtEventQueryIDs = 0,
     EvtEventPath,
     EvtEventPropertyIdEND,
@@ -522,13 +491,8 @@ extern "system" {
         PropertyValueBuffer: PEVT_VARIANT,
         PropertyValueBufferUsed: PDWORD,
     ) -> BOOL;
-    pub fn EvtCreateBookmark(
-        BookmarkXml: LPCWSTR,
-    ) -> EVT_HANDLE;
-    pub fn EvtUpdateBookmark(
-        Bookmark: EVT_HANDLE,
-        Event: EVT_HANDLE,
-    ) -> BOOL;
+    pub fn EvtCreateBookmark(BookmarkXml: LPCWSTR) -> EVT_HANDLE;
+    pub fn EvtUpdateBookmark(Bookmark: EVT_HANDLE, Event: EVT_HANDLE) -> BOOL;
     pub fn EvtGetEventInfo(
         Event: EVT_HANDLE,
         PropertyId: EVT_EVENT_PROPERTY_ID,

@@ -6,13 +6,13 @@
 use shared::minwindef::{BYTE, DWORD, LPDWORD};
 use um::physicalmonitorenumerationapi::_BOOL;
 use um::winnt::{HANDLE, LPSTR};
-STRUCT!{#[repr(packed)] struct MC_TIMING_REPORT {
+STRUCT! {#[repr(packed)] struct MC_TIMING_REPORT {
     dwHorizontalFrequencyInHZ: DWORD,
     dwVerticalFrequencyInHZ: DWORD,
     bTimingStatusByte: BYTE,
 }}
 pub type LPMC_TIMING_REPORT = *mut MC_TIMING_REPORT;
-ENUM!{enum MC_VCP_CODE_TYPE {
+ENUM! {enum MC_VCP_CODE_TYPE {
     MC_MOMENTARY,
     MC_SET_PARAMETER,
 }}
@@ -25,14 +25,8 @@ extern "system" {
         pdwCurrentValue: LPDWORD,
         pdwMaximumValue: LPDWORD,
     ) -> _BOOL;
-    pub fn SetVCPFeature(
-        hMonitor: HANDLE,
-        bVCPCode: BYTE,
-        dwNewValue: DWORD,
-    ) -> _BOOL;
-    pub fn SaveCurrentSettings(
-        hMonitor: HANDLE,
-    ) -> _BOOL;
+    pub fn SetVCPFeature(hMonitor: HANDLE, bVCPCode: BYTE, dwNewValue: DWORD) -> _BOOL;
+    pub fn SaveCurrentSettings(hMonitor: HANDLE) -> _BOOL;
     pub fn GetCapabilitiesStringLength(
         hMonitor: HANDLE,
         pdwCapabilitiesStringLengthInCharacters: LPDWORD,
@@ -42,8 +36,5 @@ extern "system" {
         pszASCIICapabilitiesString: LPSTR,
         dwCapabilitiesStringLengthInCharacters: DWORD,
     ) -> _BOOL;
-    pub fn GetTimingReport(
-        hMonitor: HANDLE,
-        pmtrMonitorTimingReport: LPMC_TIMING_REPORT,
-    ) -> _BOOL;
+    pub fn GetTimingReport(hMonitor: HANDLE, pmtrMonitorTimingReport: LPMC_TIMING_REPORT) -> _BOOL;
 }

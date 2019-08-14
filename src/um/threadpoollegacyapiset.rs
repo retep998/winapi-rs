@@ -12,10 +12,7 @@ extern "system" {
         Context: PVOID,
         Flags: ULONG,
     ) -> BOOL;
-    pub fn UnregisterWaitEx(
-        WaitHandle: HANDLE,
-        CompletionEvent: HANDLE,
-    ) -> BOOL;
+    pub fn UnregisterWaitEx(WaitHandle: HANDLE, CompletionEvent: HANDLE) -> BOOL;
     pub fn CreateTimerQueue() -> HANDLE;
     pub fn CreateTimerQueueTimer(
         phNewTimer: PHANDLE,
@@ -37,8 +34,5 @@ extern "system" {
         Timer: HANDLE,
         CompletionEvent: HANDLE,
     ) -> BOOL;
-    pub fn DeleteTimerQueueEx(
-        TimerQueue: HANDLE,
-        CompletionEvent: HANDLE,
-    ) -> BOOL;
+    pub fn DeleteTimerQueueEx(TimerQueue: HANDLE, CompletionEvent: HANDLE) -> BOOL;
 }

@@ -18,18 +18,12 @@ extern "system" {
         OutputBuffer: PVOID,
         OutputBufferLength: ULONG,
     ) -> NTSTATUS;
-    pub fn GetPwrCapabilities(
-        lpspc: PSYSTEM_POWER_CAPABILITIES,
-    ) -> BOOLEAN;
-    pub fn PowerDeterminePlatformRoleEx(
-        Version: ULONG,
-    ) -> POWER_PLATFORM_ROLE;
+    pub fn GetPwrCapabilities(lpspc: PSYSTEM_POWER_CAPABILITIES) -> BOOLEAN;
+    pub fn PowerDeterminePlatformRoleEx(Version: ULONG) -> POWER_PLATFORM_ROLE;
     pub fn PowerRegisterSuspendResumeNotification(
         Flags: DWORD,
         Recipient: HANDLE,
         RegistrationHandle: PHPOWERNOTIFY,
     ) -> DWORD;
-    pub fn PowerUnregisterSuspendResumeNotification(
-        RegistrationHandle: HPOWERNOTIFY,
-    ) -> DWORD;
+    pub fn PowerUnregisterSuspendResumeNotification(RegistrationHandle: HPOWERNOTIFY) -> DWORD;
 }

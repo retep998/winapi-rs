@@ -26,14 +26,14 @@ pub const EVENT_HEADER_EXT_TYPE_PROV_TRAITS: USHORT = 0x000C;
 pub const EVENT_HEADER_EXT_TYPE_PROCESS_START_KEY: USHORT = 0x000D;
 pub const EVENT_HEADER_EXT_TYPE_CONTROL_GUID: USHORT = 0x000E;
 pub const EVENT_HEADER_EXT_TYPE_MAX: USHORT = 0x000F;
-STRUCT!{struct EVENT_HEADER_EXTENDED_DATA_ITEM_s {
+STRUCT! {struct EVENT_HEADER_EXTENDED_DATA_ITEM_s {
     bitfield: USHORT,
 }}
-BITFIELD!{EVENT_HEADER_EXTENDED_DATA_ITEM_s bitfield: USHORT [
+BITFIELD! {EVENT_HEADER_EXTENDED_DATA_ITEM_s bitfield: USHORT [
     Linkage set_Linkage[0..1],
     Reserved2 set_Reserved2[1..16],
 ]}
-STRUCT!{struct EVENT_HEADER_EXTENDED_DATA_ITEM {
+STRUCT! {struct EVENT_HEADER_EXTENDED_DATA_ITEM {
     Reserved1: USHORT,
     ExtType: USHORT,
     s: EVENT_HEADER_EXTENDED_DATA_ITEM_s,
@@ -41,43 +41,43 @@ STRUCT!{struct EVENT_HEADER_EXTENDED_DATA_ITEM {
     DataPtr: ULONGLONG,
 }}
 pub type PEVENT_HEADER_EXTENDED_DATA_ITEM = *mut EVENT_HEADER_EXTENDED_DATA_ITEM;
-STRUCT!{struct EVENT_EXTENDED_ITEM_INSTANCE {
+STRUCT! {struct EVENT_EXTENDED_ITEM_INSTANCE {
     InstanceId: ULONG,
     ParentInstanceId: ULONG,
     ParentGuid: GUID,
 }}
 pub type PEVENT_EXTENDED_ITEM_INSTANCE = *mut EVENT_EXTENDED_ITEM_INSTANCE;
-STRUCT!{struct EVENT_EXTENDED_ITEM_RELATED_ACTIVITYID {
+STRUCT! {struct EVENT_EXTENDED_ITEM_RELATED_ACTIVITYID {
     RelatedActivityId: GUID,
 }}
 pub type PEVENT_EXTENDED_ITEM_RELATED_ACTIVITYID = *mut EVENT_EXTENDED_ITEM_RELATED_ACTIVITYID;
-STRUCT!{struct EVENT_EXTENDED_ITEM_TS_ID {
+STRUCT! {struct EVENT_EXTENDED_ITEM_TS_ID {
     SessionId: ULONG,
 }}
 pub type PEVENT_EXTENDED_ITEM_TS_ID = *mut EVENT_EXTENDED_ITEM_TS_ID;
-STRUCT!{struct EVENT_EXTENDED_ITEM_STACK_TRACE32 {
+STRUCT! {struct EVENT_EXTENDED_ITEM_STACK_TRACE32 {
     MatchId: ULONG64,
     Address: [ULONG; ANYSIZE_ARRAY],
 }}
 pub type PEVENT_EXTENDED_ITEM_STACK_TRACE32 = *mut EVENT_EXTENDED_ITEM_STACK_TRACE32;
-STRUCT!{struct EVENT_EXTENDED_ITEM_STACK_TRACE64 {
+STRUCT! {struct EVENT_EXTENDED_ITEM_STACK_TRACE64 {
     MatchId: ULONG64,
     Address: [ULONG64; ANYSIZE_ARRAY],
 }}
 pub type PEVENT_EXTENDED_ITEM_STACK_TRACE64 = *mut EVENT_EXTENDED_ITEM_STACK_TRACE64;
-STRUCT!{struct EVENT_EXTENDED_ITEM_PEBS_INDEX {
+STRUCT! {struct EVENT_EXTENDED_ITEM_PEBS_INDEX {
     PebsIndex: ULONG64,
 }}
 pub type PEVENT_EXTENDED_ITEM_PEBS_INDEX = *mut EVENT_EXTENDED_ITEM_PEBS_INDEX;
-STRUCT!{struct EVENT_EXTENDED_ITEM_PMC_COUNTERS {
+STRUCT! {struct EVENT_EXTENDED_ITEM_PMC_COUNTERS {
     Counter: [ULONG64; ANYSIZE_ARRAY],
 }}
 pub type PEVENT_EXTENDED_ITEM_PMC_COUNTERS = *mut EVENT_EXTENDED_ITEM_PMC_COUNTERS;
-STRUCT!{struct EVENT_EXTENDED_ITEM_PROCESS_START_KEY {
+STRUCT! {struct EVENT_EXTENDED_ITEM_PROCESS_START_KEY {
     ProcessStartKey: ULONG64,
 }}
 pub type PEVENT_EXTENDED_ITEM_PROCESS_START_KEY = *mut EVENT_EXTENDED_ITEM_PROCESS_START_KEY;
-STRUCT!{struct EVENT_EXTENDED_ITEM_EVENT_KEY {
+STRUCT! {struct EVENT_EXTENDED_ITEM_EVENT_KEY {
     Key: ULONG64,
 }}
 pub type PEVENT_EXTENDED_ITEM_EVENT_KEY = *mut EVENT_EXTENDED_ITEM_EVENT_KEY;
@@ -94,16 +94,16 @@ pub const EVENT_HEADER_FLAG_32_BIT_HEADER: USHORT = 0x0020;
 pub const EVENT_HEADER_FLAG_64_BIT_HEADER: USHORT = 0x0040;
 pub const EVENT_HEADER_FLAG_CLASSIC_HEADER: USHORT = 0x0100;
 pub const EVENT_HEADER_FLAG_PROCESSOR_INDEX: USHORT = 0x0200;
-STRUCT!{struct EVENT_HEADER_u_s {
+STRUCT! {struct EVENT_HEADER_u_s {
     KernelTime: ULONG,
     UserTime: ULONG,
 }}
-UNION!{union EVENT_HEADER_u {
+UNION! {union EVENT_HEADER_u {
     [u64; 1],
     s s_mut: EVENT_HEADER_u_s,
     ProcessorTime ProcessorTime_mut: ULONG64,
 }}
-STRUCT!{struct EVENT_HEADER {
+STRUCT! {struct EVENT_HEADER {
     Size: USHORT,
     HeaderType: USHORT,
     Flags: USHORT,
@@ -117,7 +117,7 @@ STRUCT!{struct EVENT_HEADER {
     ActivityId: GUID,
 }}
 pub type PEVENT_HEADER = *mut EVENT_HEADER;
-STRUCT!{struct EVENT_RECORD {
+STRUCT! {struct EVENT_RECORD {
     EventHeader: EVENT_HEADER,
     BufferContext: ETW_BUFFER_CONTEXT,
     ExtendedDataCount: USHORT,
@@ -149,7 +149,7 @@ pub unsafe fn GetEventProcessorIndex(EventRecord: PCEVENT_RECORD) -> ULONG {
         (*EventRecord).BufferContext.u.s().ProcessorNumber as ULONG
     }
 }
-ENUM!{enum ETW_PROVIDER_TRAIT_TYPE {
+ENUM! {enum ETW_PROVIDER_TRAIT_TYPE {
     EtwProviderTraitTypeGroup = 1,
     EtwProviderTraitDecodeGuid = 2,
     EtwProviderTraitTypeMax,
@@ -176,7 +176,10 @@ unsafe fn read_unaligned<T>(src: *const T) -> T {
 }
 #[inline]
 pub unsafe fn EtwGetTraitFromProviderTraits(
-    ProviderTraits: PVOID, TraitType: UCHAR, Trait: *mut PVOID, Size: PUSHORT,
+    ProviderTraits: PVOID,
+    TraitType: UCHAR,
+    Trait: *mut PVOID,
+    Size: PUSHORT,
 ) {
     use core::ptr::null_mut;
     let ByteCount = read_unaligned(ProviderTraits as *mut USHORT) as isize;
@@ -203,7 +206,7 @@ pub unsafe fn EtwGetTraitFromProviderTraits(
         Ptr = Ptr.offset(TraitByteCount as isize);
     }
 }
-ENUM!{enum EVENTSECURITYOPERATION {
+ENUM! {enum EVENTSECURITYOPERATION {
     EventSecuritySetDACL,
     EventSecuritySetSACL,
     EventSecurityAddDACL,
@@ -223,7 +226,5 @@ extern "system" {
         Buffer: PSECURITY_DESCRIPTOR,
         BufferSize: PULONG,
     ) -> ULONG;
-    pub fn EventAccessRemove(
-        Guid: LPGUID,
-    ) -> ULONG;
+    pub fn EventAccessRemove(Guid: LPGUID) -> ULONG;
 }

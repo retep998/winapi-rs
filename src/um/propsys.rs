@@ -10,7 +10,7 @@ use um::propkeydef::REFPROPERTYKEY;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::HRESULT;
 pub type IPropertyDescriptionList = IUnknown; // TODO
-RIDL!{#[uuid(0x886d8eeb, 0x8cf2, 0x4446, 0x8d, 0x02, 0xcd, 0xba, 0x1d, 0xbd, 0xcf, 0x99)]
+RIDL! {#[uuid(0x886d8eeb, 0x8cf2, 0x4446, 0x8d, 0x02, 0xcd, 0xba, 0x1d, 0xbd, 0xcf, 0x99)]
 interface IPropertyStore(IPropertyStoreVtbl): IUnknown(IUnknownVtbl) {
     fn GetCount(
         cProps: *mut DWORD,
@@ -29,7 +29,7 @@ interface IPropertyStore(IPropertyStoreVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
     fn Commit() -> HRESULT,
 }}
-ENUM!{enum GETPROPERTYSTOREFLAGS {
+ENUM! {enum GETPROPERTYSTOREFLAGS {
     GPS_DEFAULT = 0,
     GPS_HANDLERPROPERTIESONLY = 0x1,
     GPS_READWRITE = 0x2,

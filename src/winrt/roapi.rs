@@ -10,20 +10,18 @@ use um::winnt::{HRESULT, VOID};
 use winrt::activation::IActivationFactory;
 use winrt::hstring::HSTRING;
 use winrt::inspectable::IInspectable;
-ENUM!{enum RO_INIT_TYPE {
+ENUM! {enum RO_INIT_TYPE {
     RO_INIT_SINGLETHREADED = 0,
     RO_INIT_MULTITHREADED = 1,
 }}
 pub enum RO_REGISTRATION_COOKIE__ {}
 pub type RO_REGISTRATION_COOKIE = *mut RO_REGISTRATION_COOKIE__;
-FN!{stdcall PFNGETACTIVATIONFACTORY(
+FN! {stdcall PFNGETACTIVATIONFACTORY(
     HSTRING,
     *mut *mut IActivationFactory,
 ) -> HRESULT}
 extern "system" {
-    pub fn RoInitialize(
-        initType: RO_INIT_TYPE,
-    ) -> HRESULT;
+    pub fn RoInitialize(initType: RO_INIT_TYPE) -> HRESULT;
     pub fn RoUninitialize();
     pub fn RoActivateInstance(
         activatableClassId: HSTRING,
@@ -35,16 +33,14 @@ extern "system" {
         count: UINT32,
         cookie: *mut RO_REGISTRATION_COOKIE,
     ) -> HRESULT;
-    pub fn RoRevokeActivationFactories(
-        cookie: RO_REGISTRATION_COOKIE,
-    );
+    pub fn RoRevokeActivationFactories(cookie: RO_REGISTRATION_COOKIE);
     pub fn RoGetActivationFactory(
         activatableClassId: HSTRING,
         iid: REFIID,
         factory: *mut *mut VOID,
     ) -> HRESULT;
 }
-DECLARE_HANDLE!{APARTMENT_SHUTDOWN_REGISTRATION_COOKIE, APARTMENT_SHUTDOWN_REGISTRATION_COOKIE__}
+DECLARE_HANDLE! {APARTMENT_SHUTDOWN_REGISTRATION_COOKIE, APARTMENT_SHUTDOWN_REGISTRATION_COOKIE__}
 extern "system" {
     pub fn RoRegisterForApartmentShutdown(
         callbackObject: *const IApartmentShutdown,
@@ -54,7 +50,5 @@ extern "system" {
     pub fn RoUnregisterForApartmentShutdown(
         regCookie: APARTMENT_SHUTDOWN_REGISTRATION_COOKIE,
     ) -> HRESULT;
-    pub fn RoGetApartmentIdentifier(
-        apartmentIdentifier: *mut UINT64,
-    ) -> HRESULT;
+    pub fn RoGetApartmentIdentifier(apartmentIdentifier: *mut UINT64) -> HRESULT;
 }

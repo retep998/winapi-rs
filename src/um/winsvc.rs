@@ -6,8 +6,8 @@
 //! Header file for the Service Control Manager
 use shared::minwindef::{BOOL, DWORD, LPBYTE, LPDWORD, LPVOID};
 use um::winnt::{
-    HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PSECURITY_DESCRIPTOR, PVOID,
-    SECURITY_INFORMATION, STANDARD_RIGHTS_REQUIRED
+    HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PSECURITY_DESCRIPTOR, PVOID, SECURITY_INFORMATION,
+    STANDARD_RIGHTS_REQUIRED,
 };
 pub const SERVICE_NO_CHANGE: DWORD = 0xffffffff;
 pub const SERVICE_ACTIVE: DWORD = 0x00000001;
@@ -55,9 +55,13 @@ pub const SC_MANAGER_ENUMERATE_SERVICE: DWORD = 0x0004;
 pub const SC_MANAGER_LOCK: DWORD = 0x0008;
 pub const SC_MANAGER_QUERY_LOCK_STATUS: DWORD = 0x0010;
 pub const SC_MANAGER_MODIFY_BOOT_CONFIG: DWORD = 0x0020;
-pub const SC_MANAGER_ALL_ACCESS: DWORD = STANDARD_RIGHTS_REQUIRED | SC_MANAGER_CONNECT
-    | SC_MANAGER_CREATE_SERVICE | SC_MANAGER_ENUMERATE_SERVICE | SC_MANAGER_LOCK
-    | SC_MANAGER_QUERY_LOCK_STATUS | SC_MANAGER_MODIFY_BOOT_CONFIG;
+pub const SC_MANAGER_ALL_ACCESS: DWORD = STANDARD_RIGHTS_REQUIRED
+    | SC_MANAGER_CONNECT
+    | SC_MANAGER_CREATE_SERVICE
+    | SC_MANAGER_ENUMERATE_SERVICE
+    | SC_MANAGER_LOCK
+    | SC_MANAGER_QUERY_LOCK_STATUS
+    | SC_MANAGER_MODIFY_BOOT_CONFIG;
 pub const SERVICE_QUERY_CONFIG: DWORD = 0x0001;
 pub const SERVICE_CHANGE_CONFIG: DWORD = 0x0002;
 pub const SERVICE_QUERY_STATUS: DWORD = 0x0004;
@@ -67,9 +71,16 @@ pub const SERVICE_STOP: DWORD = 0x0020;
 pub const SERVICE_PAUSE_CONTINUE: DWORD = 0x0040;
 pub const SERVICE_INTERROGATE: DWORD = 0x0080;
 pub const SERVICE_USER_DEFINED_CONTROL: DWORD = 0x0100;
-pub const SERVICE_ALL_ACCESS: DWORD = STANDARD_RIGHTS_REQUIRED | SERVICE_QUERY_CONFIG
-    | SERVICE_CHANGE_CONFIG | SERVICE_QUERY_STATUS | SERVICE_ENUMERATE_DEPENDENTS | SERVICE_START
-    | SERVICE_STOP | SERVICE_PAUSE_CONTINUE | SERVICE_INTERROGATE | SERVICE_USER_DEFINED_CONTROL;
+pub const SERVICE_ALL_ACCESS: DWORD = STANDARD_RIGHTS_REQUIRED
+    | SERVICE_QUERY_CONFIG
+    | SERVICE_CHANGE_CONFIG
+    | SERVICE_QUERY_STATUS
+    | SERVICE_ENUMERATE_DEPENDENTS
+    | SERVICE_START
+    | SERVICE_STOP
+    | SERVICE_PAUSE_CONTINUE
+    | SERVICE_INTERROGATE
+    | SERVICE_USER_DEFINED_CONTROL;
 pub const SERVICE_RUNS_IN_SYSTEM_PROCESS: DWORD = 0x00000001;
 pub const SERVICE_CONFIG_DESCRIPTION: DWORD = 1;
 pub const SERVICE_CONFIG_FAILURE_ACTIONS: DWORD = 2;
@@ -163,38 +174,38 @@ pub const SERVICE_LAUNCH_PROTECTED_NONE: DWORD = 0;
 pub const SERVICE_LAUNCH_PROTECTED_WINDOWS: DWORD = 1;
 pub const SERVICE_LAUNCH_PROTECTED_WINDOWS_LIGHT: DWORD = 2;
 pub const SERVICE_LAUNCH_PROTECTED_ANTIMALWARE_LIGHT: DWORD = 3;
-DEFINE_GUID!{NETWORK_MANAGER_FIRST_IP_ADDRESS_ARRIVAL_GUID,
-    0x4f27f2de, 0x14e2, 0x430b, 0xa5, 0x49, 0x7c, 0xd4, 0x8c, 0xbc, 0x82, 0x45}
-DEFINE_GUID!{NETWORK_MANAGER_LAST_IP_ADDRESS_REMOVAL_GUID,
-    0xcc4ba62a, 0x162e, 0x4648, 0x84, 0x7a, 0xb6, 0xbd, 0xf9, 0x93, 0xe3, 0x35}
-DEFINE_GUID!{DOMAIN_JOIN_GUID,
-    0x1ce20aba, 0x9851, 0x4421, 0x94, 0x30, 0x1d, 0xde, 0xb7, 0x66, 0xe8, 0x09}
-DEFINE_GUID!{DOMAIN_LEAVE_GUID,
-    0xddaf516e, 0x58c2, 0x4866, 0x95, 0x74, 0xc3, 0xb6, 0x15, 0xd4, 0x2e, 0xa1}
-DEFINE_GUID!{FIREWALL_PORT_OPEN_GUID,
-    0xb7569e07, 0x8421, 0x4ee0, 0xad, 0x10, 0x86, 0x91, 0x5a, 0xfd, 0xad, 0x09}
-DEFINE_GUID!{FIREWALL_PORT_CLOSE_GUID,
-    0xa144ed38, 0x8e12, 0x4de4, 0x9d, 0x96, 0xe6, 0x47, 0x40, 0xb1, 0xa5, 0x24}
-DEFINE_GUID!{MACHINE_POLICY_PRESENT_GUID,
-    0x659fcae6, 0x5bdb, 0x4da9, 0xb1, 0xff, 0xca, 0x2a, 0x17, 0x8d, 0x46, 0xe0}
-DEFINE_GUID!{USER_POLICY_PRESENT_GUID,
-    0x54fb46c8, 0xf089, 0x464c, 0xb1, 0xfd, 0x59, 0xd1, 0xb6, 0x2c, 0x3b, 0x50}
-DEFINE_GUID!{RPC_INTERFACE_EVENT_GUID,
-    0xbc90d167, 0x9470, 0x4139, 0xa9, 0xba, 0xbe, 0x0b, 0xbb, 0xf5, 0xb7, 0x4d}
-DEFINE_GUID!{NAMED_PIPE_EVENT_GUID,
-    0x1f81d131, 0x3fac, 0x4537, 0x9e, 0x0c, 0x7e, 0x7b, 0x0c, 0x2f, 0x4b, 0x55}
-DEFINE_GUID!{CUSTOM_SYSTEM_STATE_CHANGE_EVENT_GUID,
-    0x2d7a2816, 0x0c5e, 0x45fc, 0x9c, 0xe7, 0x57, 0x0e, 0x5e, 0xcd, 0xe9, 0xc9}
-DECLARE_HANDLE!{SC_HANDLE, SC_HANDLE__}
+DEFINE_GUID! {NETWORK_MANAGER_FIRST_IP_ADDRESS_ARRIVAL_GUID,
+0x4f27f2de, 0x14e2, 0x430b, 0xa5, 0x49, 0x7c, 0xd4, 0x8c, 0xbc, 0x82, 0x45}
+DEFINE_GUID! {NETWORK_MANAGER_LAST_IP_ADDRESS_REMOVAL_GUID,
+0xcc4ba62a, 0x162e, 0x4648, 0x84, 0x7a, 0xb6, 0xbd, 0xf9, 0x93, 0xe3, 0x35}
+DEFINE_GUID! {DOMAIN_JOIN_GUID,
+0x1ce20aba, 0x9851, 0x4421, 0x94, 0x30, 0x1d, 0xde, 0xb7, 0x66, 0xe8, 0x09}
+DEFINE_GUID! {DOMAIN_LEAVE_GUID,
+0xddaf516e, 0x58c2, 0x4866, 0x95, 0x74, 0xc3, 0xb6, 0x15, 0xd4, 0x2e, 0xa1}
+DEFINE_GUID! {FIREWALL_PORT_OPEN_GUID,
+0xb7569e07, 0x8421, 0x4ee0, 0xad, 0x10, 0x86, 0x91, 0x5a, 0xfd, 0xad, 0x09}
+DEFINE_GUID! {FIREWALL_PORT_CLOSE_GUID,
+0xa144ed38, 0x8e12, 0x4de4, 0x9d, 0x96, 0xe6, 0x47, 0x40, 0xb1, 0xa5, 0x24}
+DEFINE_GUID! {MACHINE_POLICY_PRESENT_GUID,
+0x659fcae6, 0x5bdb, 0x4da9, 0xb1, 0xff, 0xca, 0x2a, 0x17, 0x8d, 0x46, 0xe0}
+DEFINE_GUID! {USER_POLICY_PRESENT_GUID,
+0x54fb46c8, 0xf089, 0x464c, 0xb1, 0xfd, 0x59, 0xd1, 0xb6, 0x2c, 0x3b, 0x50}
+DEFINE_GUID! {RPC_INTERFACE_EVENT_GUID,
+0xbc90d167, 0x9470, 0x4139, 0xa9, 0xba, 0xbe, 0x0b, 0xbb, 0xf5, 0xb7, 0x4d}
+DEFINE_GUID! {NAMED_PIPE_EVENT_GUID,
+0x1f81d131, 0x3fac, 0x4537, 0x9e, 0x0c, 0x7e, 0x7b, 0x0c, 0x2f, 0x4b, 0x55}
+DEFINE_GUID! {CUSTOM_SYSTEM_STATE_CHANGE_EVENT_GUID,
+0x2d7a2816, 0x0c5e, 0x45fc, 0x9c, 0xe7, 0x57, 0x0e, 0x5e, 0xcd, 0xe9, 0xc9}
+DECLARE_HANDLE! {SC_HANDLE, SC_HANDLE__}
 pub type LPSC_HANDLE = *mut SC_HANDLE;
-DECLARE_HANDLE!{SERVICE_STATUS_HANDLE, SERVICE_STATUS_HANDLE__}
-ENUM!{enum SC_STATUS_TYPE {
+DECLARE_HANDLE! {SERVICE_STATUS_HANDLE, SERVICE_STATUS_HANDLE__}
+ENUM! {enum SC_STATUS_TYPE {
     SC_STATUS_PROCESS_INFO = 0,
 }}
-ENUM!{enum SC_ENUM_TYPE {
+ENUM! {enum SC_ENUM_TYPE {
     SC_ENUM_PROCESS_INFO = 0,
 }}
-STRUCT!{struct SERVICE_STATUS {
+STRUCT! {struct SERVICE_STATUS {
     dwServiceType: DWORD,
     dwCurrentState: DWORD,
     dwControlsAccepted: DWORD,
@@ -204,7 +215,7 @@ STRUCT!{struct SERVICE_STATUS {
     dwWaitHint: DWORD,
 }}
 pub type LPSERVICE_STATUS = *mut SERVICE_STATUS;
-STRUCT!{struct SERVICE_STATUS_PROCESS {
+STRUCT! {struct SERVICE_STATUS_PROCESS {
     dwServiceType: DWORD,
     dwCurrentState: DWORD,
     dwControlsAccepted: DWORD,
@@ -216,44 +227,44 @@ STRUCT!{struct SERVICE_STATUS_PROCESS {
     dwServiceFlags: DWORD,
 }}
 pub type LPSERVICE_STATUS_PROCESS = *mut SERVICE_STATUS_PROCESS;
-STRUCT!{struct ENUM_SERVICE_STATUSA {
+STRUCT! {struct ENUM_SERVICE_STATUSA {
     lpServiceName: LPSTR,
     lpDisplayName: LPSTR,
     ServiceStatus: SERVICE_STATUS,
 }}
 pub type LPENUM_SERVICE_STATUSA = *mut ENUM_SERVICE_STATUSA;
-STRUCT!{struct ENUM_SERVICE_STATUSW {
+STRUCT! {struct ENUM_SERVICE_STATUSW {
     lpServiceName: LPWSTR,
     lpDisplayName: LPWSTR,
     ServiceStatus: SERVICE_STATUS,
 }}
 pub type LPENUM_SERVICE_STATUSW = *mut ENUM_SERVICE_STATUSW;
-STRUCT!{struct ENUM_SERVICE_STATUS_PROCESSA {
+STRUCT! {struct ENUM_SERVICE_STATUS_PROCESSA {
     lpServiceName: LPSTR,
     lpDisplayName: LPSTR,
     ServiceStatusProcess: SERVICE_STATUS_PROCESS,
 }}
 pub type LPENUM_SERVICE_STATUS_PROCESSA = *mut ENUM_SERVICE_STATUS_PROCESSA;
-STRUCT!{struct ENUM_SERVICE_STATUS_PROCESSW {
+STRUCT! {struct ENUM_SERVICE_STATUS_PROCESSW {
     lpServiceName: LPWSTR,
     lpDisplayName: LPWSTR,
     ServiceStatusProcess: SERVICE_STATUS_PROCESS,
 }}
 pub type LPENUM_SERVICE_STATUS_PROCESSW = *mut ENUM_SERVICE_STATUS_PROCESSW;
 pub type SC_LOCK = LPVOID;
-STRUCT!{struct QUERY_SERVICE_LOCK_STATUSA {
+STRUCT! {struct QUERY_SERVICE_LOCK_STATUSA {
     fIsLocked: DWORD,
     lpLockOwner: LPSTR,
     dwLockDuration: DWORD,
 }}
 pub type LPQUERY_SERVICE_LOCK_STATUSA = *mut QUERY_SERVICE_LOCK_STATUSA;
-STRUCT!{struct QUERY_SERVICE_LOCK_STATUSW {
+STRUCT! {struct QUERY_SERVICE_LOCK_STATUSW {
     fIsLocked: DWORD,
     lpLockOwner: LPWSTR,
     dwLockDuration: DWORD,
 }}
 pub type LPQUERY_SERVICE_LOCK_STATUSW = *mut QUERY_SERVICE_LOCK_STATUSW;
-STRUCT!{struct QUERY_SERVICE_CONFIGA {
+STRUCT! {struct QUERY_SERVICE_CONFIGA {
     dwServiceType: DWORD,
     dwStartType: DWORD,
     dwErrorControl: DWORD,
@@ -265,7 +276,7 @@ STRUCT!{struct QUERY_SERVICE_CONFIGA {
     lpDisplayName: LPSTR,
 }}
 pub type LPQUERY_SERVICE_CONFIGA = *mut QUERY_SERVICE_CONFIGA;
-STRUCT!{struct QUERY_SERVICE_CONFIGW {
+STRUCT! {struct QUERY_SERVICE_CONFIGW {
     dwServiceType: DWORD,
     dwStartType: DWORD,
     dwErrorControl: DWORD,
@@ -277,37 +288,37 @@ STRUCT!{struct QUERY_SERVICE_CONFIGW {
     lpDisplayName: LPWSTR,
 }}
 pub type LPQUERY_SERVICE_CONFIGW = *mut QUERY_SERVICE_CONFIGW;
-FN!{stdcall LPSERVICE_MAIN_FUNCTIONW(
+FN! {stdcall LPSERVICE_MAIN_FUNCTIONW(
     dwNumServicesArgs: DWORD,
     lpServiceArgVectors: *mut LPWSTR,
 ) -> ()}
-FN!{stdcall LPSERVICE_MAIN_FUNCTIONA(
+FN! {stdcall LPSERVICE_MAIN_FUNCTIONA(
     dwNumServicesArgs: DWORD,
     lpServiceArgVectors: *mut LPSTR,
 ) -> ()}
-STRUCT!{struct SERVICE_TABLE_ENTRYA {
+STRUCT! {struct SERVICE_TABLE_ENTRYA {
     lpServiceName: LPCSTR,
     lpServiceProc: LPSERVICE_MAIN_FUNCTIONA,
 }}
 pub type LPSERVICE_TABLE_ENTRYA = *mut SERVICE_TABLE_ENTRYA;
-STRUCT!{struct SERVICE_TABLE_ENTRYW {
+STRUCT! {struct SERVICE_TABLE_ENTRYW {
     lpServiceName: LPCWSTR,
     lpServiceProc: LPSERVICE_MAIN_FUNCTIONW,
 }}
 pub type LPSERVICE_TABLE_ENTRYW = *mut SERVICE_TABLE_ENTRYW;
-FN!{stdcall LPHANDLER_FUNCTION(
+FN! {stdcall LPHANDLER_FUNCTION(
     dwControl: DWORD,
 ) -> ()}
-FN!{stdcall LPHANDLER_FUNCTION_EX(
+FN! {stdcall LPHANDLER_FUNCTION_EX(
     dwControl: DWORD,
     dwEventType: DWORD,
     lpEventData: LPVOID,
     lpContext: LPVOID,
 ) -> DWORD}
-FN!{stdcall PFN_SC_NOTIFY_CALLBACK(
+FN! {stdcall PFN_SC_NOTIFY_CALLBACK(
     pParameter: PVOID,
 ) -> ()}
-STRUCT!{struct SERVICE_NOTIFY_1 {
+STRUCT! {struct SERVICE_NOTIFY_1 {
     dwVersion: DWORD,
     pfnNotifyCallback: PFN_SC_NOTIFY_CALLBACK,
     pContext: PVOID,
@@ -315,7 +326,7 @@ STRUCT!{struct SERVICE_NOTIFY_1 {
     ServiceStatus: SERVICE_STATUS_PROCESS,
 }}
 pub type PSERVICE_NOTIFY_1 = *mut SERVICE_NOTIFY_1;
-STRUCT!{struct SERVICE_NOTIFY_2A {
+STRUCT! {struct SERVICE_NOTIFY_2A {
     dwVersion: DWORD,
     pfnNotifyCallback: PFN_SC_NOTIFY_CALLBACK,
     pContext: PVOID,
@@ -325,7 +336,7 @@ STRUCT!{struct SERVICE_NOTIFY_2A {
     pszServiceNames: LPSTR,
 }}
 pub type PSERVICE_NOTIFY_2A = *mut SERVICE_NOTIFY_2A;
-STRUCT!{struct SERVICE_NOTIFY_2W {
+STRUCT! {struct SERVICE_NOTIFY_2W {
     dwVersion: DWORD,
     pfnNotifyCallback: PFN_SC_NOTIFY_CALLBACK,
     pContext: PVOID,
@@ -366,19 +377,9 @@ extern "system" {
         lpPassword: LPCWSTR,
         lpDisplayName: LPCWSTR,
     ) -> BOOL;
-    pub fn ChangeServiceConfig2A(
-        hService: SC_HANDLE,
-        dwInfoLevel: DWORD,
-        lpInfo: LPVOID,
-    ) -> BOOL;
-    pub fn ChangeServiceConfig2W(
-        hService: SC_HANDLE,
-        dwInfoLevel: DWORD,
-        lpInfo: LPVOID,
-    ) -> BOOL;
-    pub fn CloseServiceHandle(
-        hSCObject: SC_HANDLE,
-    ) -> BOOL;
+    pub fn ChangeServiceConfig2A(hService: SC_HANDLE, dwInfoLevel: DWORD, lpInfo: LPVOID) -> BOOL;
+    pub fn ChangeServiceConfig2W(hService: SC_HANDLE, dwInfoLevel: DWORD, lpInfo: LPVOID) -> BOOL;
+    pub fn CloseServiceHandle(hSCObject: SC_HANDLE) -> BOOL;
     pub fn ControlService(
         hService: SC_HANDLE,
         dwControl: DWORD,
@@ -414,9 +415,7 @@ extern "system" {
         lpServiceStartName: LPCWSTR,
         lpPassword: LPCWSTR,
     ) -> SC_HANDLE;
-    pub fn DeleteService(
-        hService: SC_HANDLE,
-    ) -> BOOL;
+    pub fn DeleteService(hService: SC_HANDLE) -> BOOL;
     pub fn EnumDependentServicesA(
         hService: SC_HANDLE,
         dwServiceState: DWORD,
@@ -501,12 +500,8 @@ extern "system" {
         lpDisplayName: LPWSTR,
         lpcchBuffer: LPDWORD,
     ) -> BOOL;
-    pub fn LockServiceDatabase(
-        hSCManager: SC_HANDLE,
-    ) -> SC_LOCK;
-    pub fn NotifyBootConfigStatus(
-        BootAcceptable: BOOL,
-    ) -> BOOL;
+    pub fn LockServiceDatabase(hSCManager: SC_HANDLE) -> SC_LOCK;
+    pub fn NotifyBootConfigStatus(BootAcceptable: BOOL) -> BOOL;
     pub fn OpenSCManagerA(
         lpMachineName: LPCSTR,
         lpDatabaseName: LPCSTR,
@@ -572,10 +567,7 @@ extern "system" {
         cbBufSize: DWORD,
         pcbBytesNeeded: LPDWORD,
     ) -> BOOL;
-    pub fn QueryServiceStatus(
-        hService: SC_HANDLE,
-        lpServiceStatus: LPSERVICE_STATUS,
-    ) -> BOOL;
+    pub fn QueryServiceStatus(hService: SC_HANDLE, lpServiceStatus: LPSERVICE_STATUS) -> BOOL;
     pub fn QueryServiceStatusEx(
         hService: SC_HANDLE,
         InfoLevel: SC_STATUS_TYPE,
@@ -610,12 +602,8 @@ extern "system" {
         hServiceStatus: SERVICE_STATUS_HANDLE,
         lpServiceStatus: LPSERVICE_STATUS,
     ) -> BOOL;
-    pub fn StartServiceCtrlDispatcherA(
-        lpServiceStartTable: *const SERVICE_TABLE_ENTRYA,
-    ) -> BOOL;
-    pub fn StartServiceCtrlDispatcherW(
-        lpServiceStartTable: *const SERVICE_TABLE_ENTRYW,
-    ) -> BOOL;
+    pub fn StartServiceCtrlDispatcherA(lpServiceStartTable: *const SERVICE_TABLE_ENTRYA) -> BOOL;
+    pub fn StartServiceCtrlDispatcherW(lpServiceStartTable: *const SERVICE_TABLE_ENTRYW) -> BOOL;
     pub fn StartServiceA(
         hService: SC_HANDLE,
         dwNumServiceArgs: DWORD,
@@ -626,9 +614,7 @@ extern "system" {
         dwNumServiceArgs: DWORD,
         lpServiceArgVectors: *mut LPCWSTR,
     ) -> BOOL;
-    pub fn UnlockServiceDatabase(
-        ScLock: SC_LOCK,
-    ) -> BOOL;
+    pub fn UnlockServiceDatabase(ScLock: SC_LOCK) -> BOOL;
     pub fn NotifyServiceStatusChangeA(
         hService: SC_HANDLE,
         dwNotifyMask: DWORD,
@@ -656,7 +642,7 @@ extern "system" {
         dwInfoLevel: DWORD,
         ppDynamicInfo: *mut PVOID,
     ) -> BOOL;
-    pub fn WaitServiceState (
+    pub fn WaitServiceState(
         hService: SC_HANDLE,
         dwNotify: DWORD,
         dwTimeout: DWORD,

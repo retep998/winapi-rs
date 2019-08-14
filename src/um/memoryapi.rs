@@ -35,11 +35,7 @@ extern "system" {
         flNewProtect: DWORD,
         lpflOldProtect: PDWORD,
     ) -> BOOL;
-    pub fn VirtualFree(
-        lpAddress: LPVOID,
-        dwSize: SIZE_T,
-        dwFreeType: DWORD,
-    ) -> BOOL;
+    pub fn VirtualFree(lpAddress: LPVOID, dwSize: SIZE_T, dwFreeType: DWORD) -> BOOL;
     pub fn VirtualQuery(
         lpAddress: LPCVOID,
         lpBuffer: PMEMORY_BASIC_INFORMATION,
@@ -113,13 +109,8 @@ extern "system" {
         dwNumberOfBytesToMap: SIZE_T,
         lpBaseAddress: LPVOID,
     ) -> LPVOID;
-    pub fn FlushViewOfFile(
-        lpBaseAddress: LPCVOID,
-        dwNumberOfBytesToFlush: SIZE_T,
-    ) -> BOOL;
-    pub fn UnmapViewOfFile(
-        lpBaseAddress: LPCVOID,
-    ) -> BOOL;
+    pub fn FlushViewOfFile(lpBaseAddress: LPCVOID, dwNumberOfBytesToFlush: SIZE_T) -> BOOL;
+    pub fn UnmapViewOfFile(lpBaseAddress: LPCVOID) -> BOOL;
     pub fn GetLargePageMinimum() -> SIZE_T;
     pub fn GetProcessWorkingSetSizeEx(
         hProcess: HANDLE,
@@ -133,14 +124,8 @@ extern "system" {
         dwMaximumWorkingSetSize: SIZE_T,
         Flags: DWORD,
     ) -> BOOL;
-    pub fn VirtualLock(
-        lpAddress: LPVOID,
-        dwSize: SIZE_T,
-    ) -> BOOL;
-    pub fn VirtualUnlock(
-        lpAddress: LPVOID,
-        dwSize: SIZE_T,
-    ) -> BOOL;
+    pub fn VirtualLock(lpAddress: LPVOID, dwSize: SIZE_T) -> BOOL;
+    pub fn VirtualUnlock(lpAddress: LPVOID, dwSize: SIZE_T) -> BOOL;
     pub fn GetWriteWatch(
         dwFlags: DWORD,
         lpBaseAddress: PVOID,
@@ -149,12 +134,9 @@ extern "system" {
         lpdwCount: *mut ULONG_PTR,
         lpdwGranularity: LPDWORD,
     ) -> UINT;
-    pub fn ResetWriteWatch(
-        lpBaseAddress: LPVOID,
-        dwRegionSize: SIZE_T,
-    ) -> UINT;
+    pub fn ResetWriteWatch(lpBaseAddress: LPVOID, dwRegionSize: SIZE_T) -> UINT;
 }
-ENUM!{enum MEMORY_RESOURCE_NOTIFICATION_TYPE {
+ENUM! {enum MEMORY_RESOURCE_NOTIFICATION_TYPE {
     LowMemoryResourceNotification,
     HighMemoryResourceNotification,
 }}
@@ -192,7 +174,7 @@ extern "system" {
         nndPreferred: DWORD,
     ) -> HANDLE;
 }
-STRUCT!{struct WIN32_MEMORY_RANGE_ENTRY {
+STRUCT! {struct WIN32_MEMORY_RANGE_ENTRY {
     VirtualAddress: PVOID,
     NumberOfBytes: SIZE_T,
 }}
@@ -217,10 +199,7 @@ extern "system" {
         FileOffset: ULONG64,
         NumberOfBytesToMap: SIZE_T,
     ) -> PVOID;
-    pub fn UnmapViewOfFileEx(
-        BaseAddress: PVOID,
-        UnmapFlags: ULONG,
-    ) -> BOOL;
+    pub fn UnmapViewOfFileEx(BaseAddress: PVOID, UnmapFlags: ULONG) -> BOOL;
     pub fn AllocateUserPhysicalPages(
         hProcess: HANDLE,
         NumberOfPages: PULONG_PTR,
@@ -253,20 +232,14 @@ extern "system" {
 }
 pub const MEHC_PATROL_SCRUBBER_PRESENT: ULONG = 0x1;
 extern "system" {
-    pub fn GetMemoryErrorHandlingCapabilities(
-        Capabilities: PULONG,
-    ) -> BOOL;
+    pub fn GetMemoryErrorHandlingCapabilities(Capabilities: PULONG) -> BOOL;
 }
-FN!{stdcall PBAD_MEMORY_CALLBACK_ROUTINE() -> ()}
+FN! {stdcall PBAD_MEMORY_CALLBACK_ROUTINE() -> ()}
 extern "system" {
-    pub fn RegisterBadMemoryNotification(
-        Callback: PBAD_MEMORY_CALLBACK_ROUTINE,
-    ) -> PVOID;
-    pub fn UnregisterBadMemoryNotification(
-        RegistrationHandle: PVOID,
-    ) -> BOOL;
+    pub fn RegisterBadMemoryNotification(Callback: PBAD_MEMORY_CALLBACK_ROUTINE) -> PVOID;
+    pub fn UnregisterBadMemoryNotification(RegistrationHandle: PVOID) -> BOOL;
 }
-ENUM!{enum OFFER_PRIORITY {
+ENUM! {enum OFFER_PRIORITY {
     VmOfferPriorityVeryLow = 1,
     VmOfferPriorityLow,
     VmOfferPriorityBelowNormal,
@@ -278,16 +251,10 @@ extern "system" {
         Size: SIZE_T,
         Priority: OFFER_PRIORITY,
     ) -> DWORD;
-    pub fn ReclaimVirtualMemory(
-        VirtualAddress: *const c_void,
-        Size: SIZE_T,
-    ) -> DWORD;
-    pub fn DiscardVirtualMemory(
-        VirtualAddress: PVOID,
-        Size: SIZE_T,
-    ) -> DWORD;
-// TODO: Needs winnt::PCFG_CALL_TARGET_INFO.
-/*  pub fn SetProcessValidCallTargets(
+    pub fn ReclaimVirtualMemory(VirtualAddress: *const c_void, Size: SIZE_T) -> DWORD;
+    pub fn DiscardVirtualMemory(VirtualAddress: PVOID, Size: SIZE_T) -> DWORD;
+    // TODO: Needs winnt::PCFG_CALL_TARGET_INFO.
+    /*  pub fn SetProcessValidCallTargets(
         hProcess: HANDLE,
         VirtualAddress: PVOID,
         RegionSize: SIZE_T,
@@ -314,25 +281,25 @@ extern "system" {
 }
 // TODO: Under WINAPI_PARTITION_APP, define CreateFileMappingW, MapViewOfFile, VirtualAlloc,
 // VirtualProtect, and OpenFileMappingW as wrappers around the *FromApp functions.
-ENUM!{enum WIN32_MEMORY_INFORMATION_CLASS {
+ENUM! {enum WIN32_MEMORY_INFORMATION_CLASS {
     MemoryRegionInfo,
 }}
-STRUCT!{struct WIN32_MEMORY_REGION_INFORMATION {
+STRUCT! {struct WIN32_MEMORY_REGION_INFORMATION {
     AllocationBase: PVOID,
     AllocationProtect: ULONG,
     u: WIN32_MEMORY_REGION_INFORMATION_u,
     RegionSize: SIZE_T,
     CommitSize: SIZE_T,
 }}
-UNION!{union WIN32_MEMORY_REGION_INFORMATION_u {
+UNION! {union WIN32_MEMORY_REGION_INFORMATION_u {
     [u32; 1],
     Flags Flags_mut: ULONG,
     s s_mut: WIN32_MEMORY_REGION_INFORMATION_u_s,
 }}
-STRUCT!{struct WIN32_MEMORY_REGION_INFORMATION_u_s {
+STRUCT! {struct WIN32_MEMORY_REGION_INFORMATION_u_s {
     Bitfield: ULONG,
 }}
-BITFIELD!{WIN32_MEMORY_REGION_INFORMATION_u_s Bitfield: ULONG [
+BITFIELD! {WIN32_MEMORY_REGION_INFORMATION_u_s Bitfield: ULONG [
     Private set_Private[0..1],
     MappedDataFile set_MappedDataFile[1..2],
     MappedImage set_MappedImage[2..3],
@@ -382,9 +349,5 @@ pub unsafe fn MapViewOfFile2(
         NUMA_NO_PREFERRED_NODE)
 }*/
 extern "system" {
-    pub fn UnmapViewOfFile2(
-        ProcessHandle: HANDLE,
-        BaseAddress: PVOID,
-        UnmapFlags: ULONG,
-    ) -> BOOL;
+    pub fn UnmapViewOfFile2(ProcessHandle: HANDLE, BaseAddress: PVOID, UnmapFlags: ULONG) -> BOOL;
 }

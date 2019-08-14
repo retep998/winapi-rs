@@ -8,10 +8,7 @@ use shared::lmcons::NET_API_STATUS;
 use shared::minwindef::{DWORD, LPBYTE, LPDWORD};
 use um::winnt::{LPCWSTR, LPWSTR};
 extern "system" {
-    pub fn NetMessageNameAdd(
-        servername: LPCWSTR,
-        msgname: LPCWSTR,
-    ) -> NET_API_STATUS;
+    pub fn NetMessageNameAdd(servername: LPCWSTR, msgname: LPCWSTR) -> NET_API_STATUS;
     pub fn NetMessageNameEnum(
         servername: LPCWSTR,
         level: DWORD,
@@ -27,10 +24,7 @@ extern "system" {
         level: DWORD,
         bufptr: *mut LPBYTE,
     ) -> NET_API_STATUS;
-    pub fn NetMessageNameDel(
-        servername: LPCWSTR,
-        msgname: LPCWSTR,
-    ) -> NET_API_STATUS;
+    pub fn NetMessageNameDel(servername: LPCWSTR, msgname: LPCWSTR) -> NET_API_STATUS;
     pub fn NetMessageBufferSend(
         servername: LPCWSTR,
         msgname: LPCWSTR,
@@ -39,12 +33,12 @@ extern "system" {
         buflen: DWORD,
     ) -> NET_API_STATUS;
 }
-STRUCT!{struct MSG_INFO_0 {
+STRUCT! {struct MSG_INFO_0 {
     msgi0_name: LPWSTR,
 }}
 pub type PMSG_INFO_0 = *mut MSG_INFO_0;
 pub type LPMSG_INFO_0 = *mut MSG_INFO_0;
-STRUCT!{struct MSG_INFO_1 {
+STRUCT! {struct MSG_INFO_1 {
     msgi1_name: LPWSTR,
     msgi1_forward_flag: DWORD,
     msgi1_forward: LPWSTR,

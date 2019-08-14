@@ -12,12 +12,12 @@ use um::winnt::{HANDLE, LPCSTR, LPCWSTR};
 use um::winuser::{DLGPROC, LPCDLGTEMPLATEA, NMHDR, WM_USER};
 pub enum PSP {}
 pub type HPROPSHEETPAGE = *mut PSP;
-FN!{stdcall LPFNPSPCALLBACKA(
+FN! {stdcall LPFNPSPCALLBACKA(
     hwnd: HWND,
     uMsg: UINT,
     ppsp: *mut PROPSHEETPAGEA,
 ) -> UINT}
-FN!{stdcall LPFNPSPCALLBACKW(
+FN! {stdcall LPFNPSPCALLBACKW(
     hwnd: HWND,
     uMsg: UINT,
     ppsp: *mut PROPSHEETPAGEW,
@@ -40,22 +40,22 @@ pub const PSPCB_ADDREF: UINT = 0;
 pub const PSPCB_RELEASE: UINT = 1;
 pub const PSPCB_CREATE: UINT = 2;
 pub type PROPSHEETPAGE_RESOURCE = LPCDLGTEMPLATEA;
-UNION!{union PROPSHEETPAGEA_V1_u1 {
+UNION! {union PROPSHEETPAGEA_V1_u1 {
     [usize; 1],
     pszTemplate pszTemplate_mut: LPCSTR,
     pResource pResource_mut: PROPSHEETPAGE_RESOURCE,
 }}
-UNION!{union PROPSHEETPAGEA_V1_u2 {
+UNION! {union PROPSHEETPAGEA_V1_u2 {
     [usize; 1],
     hIcon hIcon_mut: HICON,
     pszIcon pszIcon_mut: LPCSTR,
 }}
-UNION!{union PROPSHEETPAGEA_V4_u3 {
+UNION! {union PROPSHEETPAGEA_V4_u3 {
     [usize; 1],
     hbmHeader hbmHeader_mut: HBITMAP,
     pszbmHeader pszbmHeader_mut: LPCSTR,
 }}
-STRUCT!{struct PROPSHEETPAGEA_V4 {
+STRUCT! {struct PROPSHEETPAGEA_V4 {
     dwSize: DWORD,
     dwFlags: DWORD,
     hInstance: HINSTANCE,
@@ -73,22 +73,22 @@ STRUCT!{struct PROPSHEETPAGEA_V4 {
 }}
 pub type LPPROPSHEETPAGEA_V4 = *mut PROPSHEETPAGEA_V4;
 pub type LPCPROPSHEETPAGEA_V4 = *const PROPSHEETPAGEA_V4;
-UNION!{union PROPSHEETPAGEW_V1_u1 {
+UNION! {union PROPSHEETPAGEW_V1_u1 {
     [usize; 1],
     pszTemplate pszTemplate_mut: LPCWSTR,
     pResource pResource_mut: PROPSHEETPAGE_RESOURCE,
 }}
-UNION!{union PROPSHEETPAGEW_V1_u2 {
+UNION! {union PROPSHEETPAGEW_V1_u2 {
     [usize; 1],
     hIcon hIcon_mut: HICON,
     pszIcon pszIcon_mut: LPCWSTR,
 }}
-UNION!{union PROPSHEETPAGEW_V4_u3 {
+UNION! {union PROPSHEETPAGEW_V4_u3 {
     [usize; 1],
     hbmHeader hbmHeader_mut: HBITMAP,
     pszbmHeader pszbmHeader_mut: LPCWSTR,
 }}
-STRUCT!{struct PROPSHEETPAGEW_V4 {
+STRUCT! {struct PROPSHEETPAGEW_V4 {
     dwSize: DWORD,
     dwFlags: DWORD,
     hInstance: HINSTANCE,
@@ -146,37 +146,37 @@ pub const PSH_AEROWIZARD: DWORD = 0x00004000;
 pub const PSH_RESIZABLE: DWORD = 0x04000000;
 pub const PSH_HEADERBITMAP: DWORD = 0x08000000;
 pub const PSH_NOMARGIN: DWORD = 0x10000000;
-FN!{stdcall PFNPROPSHEETCALLBACK(
+FN! {stdcall PFNPROPSHEETCALLBACK(
     HWND,
     UINT,
     LPARAM,
 ) -> c_int}
-UNION!{union PROPSHEETHEADERA_V1_u1 {
+UNION! {union PROPSHEETHEADERA_V1_u1 {
     [usize; 1],
     hIcon hIcon_mut: HICON,
     pszIcon pszIcon_mut: LPCSTR,
 }}
-UNION!{union PROPSHEETHEADERA_V1_u2 {
+UNION! {union PROPSHEETHEADERA_V1_u2 {
     [usize; 1],
     nStartPage nStartPage_mut: UINT,
     pStartPage pStartPage_mut: LPCSTR,
 }}
-UNION!{union PROPSHEETHEADERA_V1_u3 {
+UNION! {union PROPSHEETHEADERA_V1_u3 {
     [usize; 1],
     ppsp ppsp_mut: LPCPROPSHEETPAGEA,
     phpage phpage_mut: *mut HPROPSHEETPAGE,
 }}
-UNION!{union PROPSHEETHEADERA_V2_u4 {
+UNION! {union PROPSHEETHEADERA_V2_u4 {
     [usize; 1],
     hbmWatermark hbmWatermark_mut: HBITMAP,
     pszbmWatermark pszbmWatermark_mut: LPCSTR,
 }}
-UNION!{union PROPSHEETHEADERA_V2_u5 {
+UNION! {union PROPSHEETHEADERA_V2_u5 {
     [usize; 1],
     hbmHeader hbmHeader_mut: HBITMAP,
     pszbmHeader pszbmHeader_mut: LPCSTR,
 }}
-STRUCT!{struct PROPSHEETHEADERA_V2 {
+STRUCT! {struct PROPSHEETHEADERA_V2 {
     dwSize: DWORD,
     dwFlags: DWORD,
     hwndParent: HWND,
@@ -193,32 +193,32 @@ STRUCT!{struct PROPSHEETHEADERA_V2 {
 }}
 pub type LPPROPSHEETHEADERA_V2 = *mut PROPSHEETHEADERA_V2;
 pub type LPCPROPSHEETHEADERA_V2 = *const PROPSHEETHEADERA_V2;
-UNION!{union PROPSHEETHEADERW_V1_u1 {
+UNION! {union PROPSHEETHEADERW_V1_u1 {
     [usize; 1],
     hIcon hIcon_mut: HICON,
     pszIcon pszIcon_mut: LPCWSTR,
 }}
-UNION!{union PROPSHEETHEADERW_V1_u2 {
+UNION! {union PROPSHEETHEADERW_V1_u2 {
     [usize; 1],
     nStartPage nStartPage_mut: UINT,
     pStartPage pStartPage_mut: LPCWSTR,
 }}
-UNION!{union PROPSHEETHEADERW_V1_u3 {
+UNION! {union PROPSHEETHEADERW_V1_u3 {
     [usize; 1],
     ppsp ppsp_mut: LPCPROPSHEETPAGEW,
     phpage phpage_mut: *mut HPROPSHEETPAGE,
 }}
-UNION!{union PROPSHEETHEADERW_V2_u4 {
+UNION! {union PROPSHEETHEADERW_V2_u4 {
     [usize; 1],
     hbmWatermark hbmWatermark_mut: HBITMAP,
     pszbmWatermark pszbmWatermark_mut: LPCWSTR,
 }}
-UNION!{union PROPSHEETHEADERW_V2_u5 {
+UNION! {union PROPSHEETHEADERW_V2_u5 {
     [usize; 1],
     hbmHeader hbmHeader_mut: HBITMAP,
     pszbmHeader pszbmHeader_mut: LPCWSTR,
 }}
-STRUCT!{struct PROPSHEETHEADERW_V2 {
+STRUCT! {struct PROPSHEETHEADERW_V2 {
     dwSize: DWORD,
     dwFlags: DWORD,
     hwndParent: HWND,
@@ -245,32 +245,24 @@ pub const PSCB_INITIALIZED: UINT = 1;
 pub const PSCB_PRECREATE: UINT = 2;
 pub const PSCB_BUTTONPRESSED: UINT = 3;
 extern "system" {
-    pub fn CreatePropertySheetPageA(
-        constPropSheetPagePointer: LPCPROPSHEETPAGEA,
-    ) -> HPROPSHEETPAGE;
-    pub fn CreatePropertySheetPageW(
-        constPropSheetPagePointer: LPCPROPSHEETPAGEW,
-    ) -> HPROPSHEETPAGE;
-    pub fn DestroyPropertySheetPage(
-        hPSPage: HPROPSHEETPAGE,
-    ) -> BOOL;
-    pub fn PropertySheetA(
-        lppsph: LPCPROPSHEETHEADERA,
-    ) -> INT_PTR;
-    pub fn PropertySheetW(
-        lppsph: LPCPROPSHEETHEADERW,
-    ) -> INT_PTR;
+    pub fn CreatePropertySheetPageA(constPropSheetPagePointer: LPCPROPSHEETPAGEA)
+        -> HPROPSHEETPAGE;
+    pub fn CreatePropertySheetPageW(constPropSheetPagePointer: LPCPROPSHEETPAGEW)
+        -> HPROPSHEETPAGE;
+    pub fn DestroyPropertySheetPage(hPSPage: HPROPSHEETPAGE) -> BOOL;
+    pub fn PropertySheetA(lppsph: LPCPROPSHEETHEADERA) -> INT_PTR;
+    pub fn PropertySheetW(lppsph: LPCPROPSHEETHEADERW) -> INT_PTR;
 }
-FN!{stdcall LPFNADDPROPSHEETPAGE(
+FN! {stdcall LPFNADDPROPSHEETPAGE(
     HPROPSHEETPAGE,
     LPARAM,
 ) -> BOOL}
-FN!{stdcall LPFNADDPROPSHEETPAGES(
+FN! {stdcall LPFNADDPROPSHEETPAGES(
     LPVOID,
     LPFNADDPROPSHEETPAGE,
     LPARAM,
 ) -> BOOL}
-STRUCT!{struct PSHNOTIFY {
+STRUCT! {struct PSHNOTIFY {
     hdr: NMHDR,
     lParam: LPARAM,
 }}

@@ -11,7 +11,7 @@ use shared::minwindef::{
 use um::minwinbase::{
     FILE_INFO_BY_HANDLE_CLASS, FINDEX_INFO_LEVELS, FINDEX_SEARCH_OPS, GET_FILEEX_INFO_LEVELS,
     LPOVERLAPPED, LPOVERLAPPED_COMPLETION_ROUTINE, LPSECURITY_ATTRIBUTES, LPWIN32_FIND_DATAA,
-    LPWIN32_FIND_DATAW
+    LPWIN32_FIND_DATAW,
 };
 use um::winnt::{
     BOOLEAN, CCHAR, FILE_ID_128, FILE_SEGMENT_ELEMENT, HANDLE, LARGE_INTEGER, LONG, LONGLONG,
@@ -26,7 +26,7 @@ pub const TRUNCATE_EXISTING: DWORD = 5;
 pub const INVALID_FILE_SIZE: DWORD = 0xFFFFFFFF;
 pub const INVALID_SET_FILE_POINTER: DWORD = 0xFFFFFFFF;
 pub const INVALID_FILE_ATTRIBUTES: DWORD = 0xFFFFFFFF;
-STRUCT!{struct WIN32_FILE_ATTRIBUTE_DATA {
+STRUCT! {struct WIN32_FILE_ATTRIBUTE_DATA {
     dwFileAttributes: DWORD,
     ftCreationTime: FILETIME,
     ftLastAccessTime: FILETIME,
@@ -35,7 +35,7 @@ STRUCT!{struct WIN32_FILE_ATTRIBUTE_DATA {
     nFileSizeLow: DWORD,
 }}
 pub type LPWIN32_FILE_ATTRIBUTE_DATA = *mut WIN32_FILE_ATTRIBUTE_DATA;
-STRUCT!{struct BY_HANDLE_FILE_INFORMATION {
+STRUCT! {struct BY_HANDLE_FILE_INFORMATION {
     dwFileAttributes: DWORD,
     ftCreationTime: FILETIME,
     ftLastAccessTime: FILETIME,
@@ -49,7 +49,7 @@ STRUCT!{struct BY_HANDLE_FILE_INFORMATION {
 }}
 pub type PBY_HANDLE_FILE_INFORMATION = *mut BY_HANDLE_FILE_INFORMATION;
 pub type LPBY_HANDLE_FILE_INFORMATION = *mut BY_HANDLE_FILE_INFORMATION;
-STRUCT!{struct CREATEFILE2_EXTENDED_PARAMETERS {
+STRUCT! {struct CREATEFILE2_EXTENDED_PARAMETERS {
     dwSize: DWORD,
     dwFileAttributes: DWORD,
     dwFileFlags: DWORD,
@@ -59,53 +59,53 @@ STRUCT!{struct CREATEFILE2_EXTENDED_PARAMETERS {
 }}
 pub type PCREATEFILE2_EXTENDED_PARAMETERS = *mut CREATEFILE2_EXTENDED_PARAMETERS;
 pub type LPCREATEFILE2_EXTENDED_PARAMETERS = *mut CREATEFILE2_EXTENDED_PARAMETERS;
-ENUM!{enum PRIORITY_HINT {
+ENUM! {enum PRIORITY_HINT {
     IoPriorityHintVeryLow = 0,
     IoPriorityHintLow = 1,
     IoPriorityHintNormal = 2,
     MaximumIoPriorityHintType = 3,
 }}
-STRUCT!{struct FILE_BASIC_INFO {
+STRUCT! {struct FILE_BASIC_INFO {
     CreationTime: LARGE_INTEGER,
     LastAccessTime: LARGE_INTEGER,
     LastWriteTime: LARGE_INTEGER,
     ChangeTime: LARGE_INTEGER,
     FileAttributes: DWORD,
 }}
-STRUCT!{struct FILE_STANDARD_INFO {
+STRUCT! {struct FILE_STANDARD_INFO {
     AllocationSize: LARGE_INTEGER,
     EndOfFile: LARGE_INTEGER,
     NumberOfLinks: DWORD,
     DeletePending: BOOLEAN,
     Directory: BOOLEAN,
 }}
-STRUCT!{struct FILE_NAME_INFO {
+STRUCT! {struct FILE_NAME_INFO {
     FileNameLength: DWORD,
     FileName: [WCHAR; 1],
 }}
-STRUCT!{struct FILE_RENAME_INFO {
+STRUCT! {struct FILE_RENAME_INFO {
     ReplaceIfExists: BOOL,
     RootDirectory: HANDLE,
     FileNameLength: DWORD,
     FileName: [WCHAR; 1],
 }}
-STRUCT!{struct FILE_DISPOSITION_INFO {
+STRUCT! {struct FILE_DISPOSITION_INFO {
     DeleteFile: BOOLEAN,
 }}
-STRUCT!{struct FILE_ALLOCATION_INFO {
+STRUCT! {struct FILE_ALLOCATION_INFO {
     AllocationSize: LARGE_INTEGER,
 }}
-STRUCT!{struct FILE_END_OF_FILE_INFO {
+STRUCT! {struct FILE_END_OF_FILE_INFO {
     EndOfFile: LARGE_INTEGER,
 }}
-STRUCT!{struct FILE_STREAM_INFO {
+STRUCT! {struct FILE_STREAM_INFO {
     NextEntryOffset: DWORD,
     StreamNameLength: DWORD,
     StreamSize: LARGE_INTEGER,
     StreamAllocationSize: LARGE_INTEGER,
     StreamName: [WCHAR; 1],
 }}
-STRUCT!{struct FILE_COMPRESSION_INFO {
+STRUCT! {struct FILE_COMPRESSION_INFO {
     CompressedFileSize: LARGE_INTEGER,
     CompressionFormat: WORD,
     CompressionUnitShift: UCHAR,
@@ -113,11 +113,11 @@ STRUCT!{struct FILE_COMPRESSION_INFO {
     ClusterShift: UCHAR,
     Reserved: [UCHAR; 3],
 }}
-STRUCT!{struct FILE_ATTRIBUTE_TAG_INFO {
+STRUCT! {struct FILE_ATTRIBUTE_TAG_INFO {
     NextEntryOffset: DWORD,
     ReparseTag: DWORD,
 }}
-STRUCT!{struct FILE_ID_BOTH_DIR_INFO {
+STRUCT! {struct FILE_ID_BOTH_DIR_INFO {
     NextEntryOffset: DWORD,
     FileIndex: DWORD,
     CreationTime: LARGE_INTEGER,
@@ -134,10 +134,10 @@ STRUCT!{struct FILE_ID_BOTH_DIR_INFO {
     FileId: LARGE_INTEGER,
     FileName: [WCHAR; 1],
 }}
-STRUCT!{struct FILE_IO_PRIORITY_HINT_INFO {
+STRUCT! {struct FILE_IO_PRIORITY_HINT_INFO {
     PriorityHint: PRIORITY_HINT,
 }}
-STRUCT!{struct FILE_FULL_DIR_INFO {
+STRUCT! {struct FILE_FULL_DIR_INFO {
     NextEntryOffset: ULONG,
     FileIndex: ULONG,
     CreationTime: LARGE_INTEGER,
@@ -151,7 +151,7 @@ STRUCT!{struct FILE_FULL_DIR_INFO {
     EaSize: ULONG,
     FileName: [WCHAR; 1],
 }}
-STRUCT!{struct FILE_STORAGE_INFO {
+STRUCT! {struct FILE_STORAGE_INFO {
     LogicalBytesPerSector: ULONG,
     PhysicalBytesPerSectorForAtomicity: ULONG,
     PhysicalBytesPerSectorForPerformance: ULONG,
@@ -160,18 +160,15 @@ STRUCT!{struct FILE_STORAGE_INFO {
     ByteOffsetForSectorAlignment: ULONG,
     ByteOffsetForPartitionAlignment: ULONG,
 }}
-STRUCT!{struct FILE_ALIGNMENT_INFO {
+STRUCT! {struct FILE_ALIGNMENT_INFO {
     AlignmentRequirement: ULONG,
 }}
-STRUCT!{struct FILE_ID_INFO {
+STRUCT! {struct FILE_ID_INFO {
     VolumeSerialNumber: ULONGLONG,
     FileId: FILE_ID_128,
 }}
 extern "system" {
-    pub fn CompareFileTime(
-        lpFileTime1: *const FILETIME,
-        lpFileTime2: *const FILETIME,
-    ) -> LONG;
+    pub fn CompareFileTime(lpFileTime1: *const FILETIME, lpFileTime2: *const FILETIME) -> LONG;
     pub fn CreateDirectoryA(
         lpPathName: LPCSTR,
         lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
@@ -198,30 +195,16 @@ extern "system" {
         dwFlagsAndAttributes: DWORD,
         hTemplateFile: HANDLE,
     ) -> HANDLE;
-    pub fn DefineDosDeviceW(
-        dwFlags: DWORD,
-        lpDeviceName: LPCWSTR,
-        lpTargetPath: LPCWSTR,
-    ) -> BOOL;
-    pub fn DeleteFileA(
-        lpFileName: LPCSTR,
-    ) -> BOOL;
-    pub fn DeleteFileW(
-        lpFileName: LPCWSTR,
-    ) -> BOOL;
-    pub fn DeleteVolumeMountPointW(
-        lpszVolumeMountPoint: LPCWSTR,
-    ) -> BOOL;
+    pub fn DefineDosDeviceW(dwFlags: DWORD, lpDeviceName: LPCWSTR, lpTargetPath: LPCWSTR) -> BOOL;
+    pub fn DeleteFileA(lpFileName: LPCSTR) -> BOOL;
+    pub fn DeleteFileW(lpFileName: LPCWSTR) -> BOOL;
+    pub fn DeleteVolumeMountPointW(lpszVolumeMountPoint: LPCWSTR) -> BOOL;
     pub fn FileTimeToLocalFileTime(
         lpFileTime: *const FILETIME,
         lpLocalFileTime: LPFILETIME,
     ) -> BOOL;
-    pub fn FindClose(
-        hFindFile: HANDLE,
-    ) -> BOOL;
-    pub fn FindCloseChangeNotification(
-        hChangeHandle: HANDLE,
-    ) -> BOOL;
+    pub fn FindClose(hFindFile: HANDLE) -> BOOL;
+    pub fn FindCloseChangeNotification(hChangeHandle: HANDLE) -> BOOL;
     pub fn FindFirstChangeNotificationA(
         lpPathName: LPCSTR,
         bWatchSubtree: BOOL,
@@ -232,14 +215,8 @@ extern "system" {
         bWatchSubtree: BOOL,
         dwNotifyFilter: DWORD,
     ) -> HANDLE;
-    pub fn FindFirstFileA(
-        lpFileName: LPCSTR,
-        lpFindFileData: LPWIN32_FIND_DATAA,
-    ) -> HANDLE;
-    pub fn FindFirstFileW(
-        lpFileName: LPCWSTR,
-        lpFindFileData: LPWIN32_FIND_DATAW,
-    ) -> HANDLE;
+    pub fn FindFirstFileA(lpFileName: LPCSTR, lpFindFileData: LPWIN32_FIND_DATAA) -> HANDLE;
+    pub fn FindFirstFileW(lpFileName: LPCWSTR, lpFindFileData: LPWIN32_FIND_DATAW) -> HANDLE;
     pub fn FindFirstFileExA(
         lpFileName: LPCSTR,
         fInfoLevelId: FINDEX_INFO_LEVELS,
@@ -256,32 +233,17 @@ extern "system" {
         lpSearchFilter: LPVOID,
         dwAdditionalFlags: DWORD,
     ) -> HANDLE;
-    pub fn FindFirstVolumeW(
-        lpszVolumeName: LPWSTR,
-        cchBufferLength: DWORD,
-    ) -> HANDLE;
-    pub fn FindNextChangeNotification(
-        hChangeHandle: HANDLE,
-    ) -> BOOL;
-    pub fn FindNextFileA(
-        hFindFile: HANDLE,
-        lpFindFileData: LPWIN32_FIND_DATAA,
-    ) -> BOOL;
-    pub fn FindNextFileW(
-        hFindFile: HANDLE,
-        lpFindFileData: LPWIN32_FIND_DATAW,
-    ) -> BOOL;
+    pub fn FindFirstVolumeW(lpszVolumeName: LPWSTR, cchBufferLength: DWORD) -> HANDLE;
+    pub fn FindNextChangeNotification(hChangeHandle: HANDLE) -> BOOL;
+    pub fn FindNextFileA(hFindFile: HANDLE, lpFindFileData: LPWIN32_FIND_DATAA) -> BOOL;
+    pub fn FindNextFileW(hFindFile: HANDLE, lpFindFileData: LPWIN32_FIND_DATAW) -> BOOL;
     pub fn FindNextVolumeW(
         hFindVolume: HANDLE,
         lpszVolumeName: LPWSTR,
         cchBufferLength: DWORD,
     ) -> BOOL;
-    pub fn FindVolumeClose(
-        hFindVolume: HANDLE,
-    ) -> BOOL;
-    pub fn FlushFileBuffers(
-        hFile: HANDLE,
-    ) -> BOOL;
+    pub fn FindVolumeClose(hFindVolume: HANDLE) -> BOOL;
+    pub fn FlushFileBuffers(hFile: HANDLE) -> BOOL;
     pub fn GetDiskFreeSpaceA(
         lpRootPathName: LPCSTR,
         lpSectorsPerCluster: LPDWORD,
@@ -308,18 +270,10 @@ extern "system" {
         lpTotalNumberOfBytes: PULARGE_INTEGER,
         lpTotalNumberOfFreeBytes: PULARGE_INTEGER,
     ) -> BOOL;
-    pub fn GetDriveTypeA(
-        lpRootPathName: LPCSTR,
-    ) -> UINT;
-    pub fn GetDriveTypeW(
-        lpRootPathName: LPCWSTR,
-    ) -> UINT;
-    pub fn GetFileAttributesA(
-        lpFileName: LPCSTR,
-    ) -> DWORD;
-    pub fn GetFileAttributesW(
-        lpFileName: LPCWSTR,
-    ) -> DWORD;
+    pub fn GetDriveTypeA(lpRootPathName: LPCSTR) -> UINT;
+    pub fn GetDriveTypeW(lpRootPathName: LPCWSTR) -> UINT;
+    pub fn GetFileAttributesA(lpFileName: LPCSTR) -> DWORD;
+    pub fn GetFileAttributesW(lpFileName: LPCWSTR) -> DWORD;
     pub fn GetFileAttributesExA(
         lpFileName: LPCSTR,
         fInfoLevelId: GET_FILEEX_INFO_LEVELS,
@@ -334,17 +288,9 @@ extern "system" {
         hFile: HANDLE,
         lpFileInformation: LPBY_HANDLE_FILE_INFORMATION,
     ) -> BOOL;
-    pub fn GetFileSize(
-        hFile: HANDLE,
-        lpFileSizeHigh: LPDWORD,
-    ) -> DWORD;
-    pub fn GetFileSizeEx(
-        hFile: HANDLE,
-        lpFileSize: PLARGE_INTEGER,
-    ) -> BOOL;
-    pub fn GetFileType(
-        hFile: HANDLE,
-    ) -> DWORD;
+    pub fn GetFileSize(hFile: HANDLE, lpFileSizeHigh: LPDWORD) -> DWORD;
+    pub fn GetFileSizeEx(hFile: HANDLE, lpFileSize: PLARGE_INTEGER) -> BOOL;
+    pub fn GetFileType(hFile: HANDLE) -> DWORD;
     pub fn GetFinalPathNameByHandleA(
         hFile: HANDLE,
         lpszFilePath: LPSTR,
@@ -376,15 +322,8 @@ extern "system" {
         lpFilePart: *mut LPSTR,
     ) -> DWORD;
     pub fn GetLogicalDrives() -> DWORD;
-    pub fn GetLogicalDriveStringsW(
-        nBufferLength: DWORD,
-        lpBuffer: LPWSTR,
-    ) -> DWORD;
-    pub fn GetLongPathNameA(
-        lpszShortPath: LPCSTR,
-        lpszLongPath: LPSTR,
-        cchBuffer: DWORD,
-    ) -> DWORD;
+    pub fn GetLogicalDriveStringsW(nBufferLength: DWORD, lpBuffer: LPWSTR) -> DWORD;
+    pub fn GetLongPathNameA(lpszShortPath: LPCSTR, lpszLongPath: LPSTR, cchBuffer: DWORD) -> DWORD;
     pub fn GetLongPathNameW(
         lpszShortPath: LPCWSTR,
         lpszLongPath: LPWSTR,
@@ -445,11 +384,7 @@ extern "system" {
         nNumberOfBytesToLockHigh: DWORD,
         lpOverlapped: LPOVERLAPPED,
     ) -> BOOL;
-    pub fn QueryDosDeviceW(
-        lpDeviceName: LPCWSTR,
-        lpTargetPath: LPWSTR,
-        ucchMax: DWORD,
-    ) -> DWORD;
+    pub fn QueryDosDeviceW(lpDeviceName: LPCWSTR, lpTargetPath: LPWSTR, ucchMax: DWORD) -> DWORD;
     pub fn ReadFile(
         hFile: HANDLE,
         lpBuffer: LPVOID,
@@ -471,23 +406,11 @@ extern "system" {
         lpReserved: LPDWORD,
         lpOverlapped: LPOVERLAPPED,
     ) -> BOOL;
-    pub fn RemoveDirectoryA(
-        lpPathName: LPCSTR,
-    ) -> BOOL;
-    pub fn RemoveDirectoryW(
-        lpPathName: LPCWSTR,
-    ) -> BOOL;
-    pub fn SetEndOfFile(
-        hFile: HANDLE,
-    ) -> BOOL;
-    pub fn SetFileAttributesA(
-        lpFileName: LPCSTR,
-        dwFileAttributes: DWORD,
-    ) -> BOOL;
-    pub fn SetFileAttributesW(
-        lpFileName: LPCWSTR,
-        dwFileAttributes: DWORD,
-    ) -> BOOL;
+    pub fn RemoveDirectoryA(lpPathName: LPCSTR) -> BOOL;
+    pub fn RemoveDirectoryW(lpPathName: LPCWSTR) -> BOOL;
+    pub fn SetEndOfFile(hFile: HANDLE) -> BOOL;
+    pub fn SetFileAttributesA(lpFileName: LPCSTR, dwFileAttributes: DWORD) -> BOOL;
+    pub fn SetFileAttributesW(lpFileName: LPCWSTR, dwFileAttributes: DWORD) -> BOOL;
     pub fn SetFileInformationByHandle(
         hFile: HANDLE,
         FileInformationClass: FILE_INFO_BY_HANDLE_CLASS,
@@ -512,10 +435,7 @@ extern "system" {
         lpLastAccessTime: *const FILETIME,
         lpLastWriteTime: *const FILETIME,
     ) -> BOOL;
-    pub fn SetFileValidData(
-        hFile: HANDLE,
-        ValidDataLength: LONGLONG,
-    ) -> BOOL;
+    pub fn SetFileValidData(hFile: HANDLE, ValidDataLength: LONGLONG) -> BOOL;
     pub fn UnlockFile(
         hFile: HANDLE,
         dwFileOffsetLow: DWORD,
@@ -551,10 +471,7 @@ extern "system" {
         lpReserved: LPDWORD,
         lpOverlapped: LPOVERLAPPED,
     ) -> BOOL;
-    pub fn GetTempPathW(
-        nBufferLength: DWORD,
-        lpBuffer: LPWSTR,
-    ) -> DWORD;
+    pub fn GetTempPathW(nBufferLength: DWORD, lpBuffer: LPWSTR) -> DWORD;
     pub fn GetVolumeNameForVolumeMountPointW(
         lpszVolumeMountPoint: LPCWSTR,
         lpszVolumeName: LPWSTR,
@@ -578,16 +495,10 @@ extern "system" {
         OverlappedRangeStart: PUCHAR,
         Length: ULONG,
     ) -> BOOL;
-    pub fn GetCompressedFileSizeA(
-        lpFileName: LPCSTR,
-        lpFileSizeHigh: LPDWORD,
-    ) -> DWORD;
-    pub fn GetCompressedFileSizeW(
-        lpFileName: LPCWSTR,
-        lpFileSizeHigh: LPDWORD,
-    ) -> DWORD;
+    pub fn GetCompressedFileSizeA(lpFileName: LPCSTR, lpFileSizeHigh: LPDWORD) -> DWORD;
+    pub fn GetCompressedFileSizeW(lpFileName: LPCWSTR, lpFileSizeHigh: LPDWORD) -> DWORD;
 }
-ENUM!{enum STREAM_INFO_LEVELS {
+ENUM! {enum STREAM_INFO_LEVELS {
     FindStreamInfoStandard,
     FindStreamInfoMaxInfoLevel,
 }}
@@ -598,26 +509,16 @@ extern "system" {
         lpFindStreamData: LPVOID,
         dwFlags: DWORD,
     ) -> HANDLE;
-    pub fn FindNextStreamW(
-        hFindStream: HANDLE,
-        lpFindStreamData: LPVOID,
-    ) -> BOOL;
+    pub fn FindNextStreamW(hFindStream: HANDLE, lpFindStreamData: LPVOID) -> BOOL;
     pub fn AreFileApisANSI() -> BOOL;
-    pub fn GetTempPathA(
-        nBufferLength: DWORD,
-        lpBuffer: LPSTR,
-    ) -> DWORD;
+    pub fn GetTempPathA(nBufferLength: DWORD, lpBuffer: LPSTR) -> DWORD;
     pub fn FindFirstFileNameW(
         lpFileName: LPCWSTR,
         dwFlags: DWORD,
         StringLength: LPDWORD,
         LinkName: PWSTR,
     ) -> HANDLE;
-    pub fn FindNextFileNameW(
-        hFindStream: HANDLE,
-        StringLength: LPDWORD,
-        LinkName: PWSTR,
-    ) -> BOOL;
+    pub fn FindNextFileNameW(hFindStream: HANDLE, StringLength: LPDWORD, LinkName: PWSTR) -> BOOL;
     pub fn GetVolumeInformationA(
         lpRootPathName: LPCSTR,
         lpVolumeNameBuffer: LPSTR,

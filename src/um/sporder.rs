@@ -8,34 +8,22 @@ use ctypes::c_int;
 use shared::guiddef::LPGUID;
 use shared::minwindef::{DWORD, LPDWORD};
 extern "system" {
-    pub fn WSCWriteProviderOrder(
-        lpwdCatalogEntryId: LPDWORD,
-        dwNumberOfEntries: DWORD,
-    ) -> c_int;
+    pub fn WSCWriteProviderOrder(lpwdCatalogEntryId: LPDWORD, dwNumberOfEntries: DWORD) -> c_int;
 }
-FN!{stdcall LPWSCWRITEPROVIDERORDER(
+FN! {stdcall LPWSCWRITEPROVIDERORDER(
     lpwdCatalogEntryId: LPDWORD,
     dwNumberOfEntries: DWORD,
 ) -> c_int}
 #[cfg(target_pointer_width = "64")]
 extern "system" {
-    pub fn WSCWriteProviderOrder32(
-        lpwdCatalogEntryId: LPDWORD,
-        dwNumberOfEntries: DWORD,
-    ) -> c_int;
-    pub fn WSCWriteNameSpaceOrder(
-        lpProviderId: LPGUID,
-        dwNumberOfEntries: DWORD,
-    ) -> c_int;
+    pub fn WSCWriteProviderOrder32(lpwdCatalogEntryId: LPDWORD, dwNumberOfEntries: DWORD) -> c_int;
+    pub fn WSCWriteNameSpaceOrder(lpProviderId: LPGUID, dwNumberOfEntries: DWORD) -> c_int;
 }
-FN!{stdcall LPWSCWRITENAMESPACEORDER(
+FN! {stdcall LPWSCWRITENAMESPACEORDER(
     lpProviderId: LPGUID,
     dwNumberOfEntries: DWORD,
 ) -> c_int}
 #[cfg(target_pointer_width = "64")]
 extern "system" {
-    pub fn WSCWriteNameSpaceOrder32(
-        lpProviderId: LPGUID,
-        dwNumberOfEntries: DWORD,
-    ) -> c_int;
+    pub fn WSCWriteNameSpaceOrder32(lpProviderId: LPGUID, dwNumberOfEntries: DWORD) -> c_int;
 }

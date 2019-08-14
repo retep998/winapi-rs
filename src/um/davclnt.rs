@@ -7,20 +7,20 @@
 use shared::minwindef::{BOOL, DWORD, LPDWORD, PBYTE, PULONG, ULONG};
 use um::winnt::{HANDLE, LPCWSTR, LPWSTR, PVOID, PWSTR};
 pub type OPAQUE_HANDLE = DWORD;
-STRUCT!{struct DAV_CALLBACK_AUTH_BLOB {
+STRUCT! {struct DAV_CALLBACK_AUTH_BLOB {
     pBuffer: PVOID,
     ulSize: ULONG,
     ulType: ULONG,
 }}
 pub type PDAV_CALLBACK_AUTH_BLOB = *mut DAV_CALLBACK_AUTH_BLOB;
-STRUCT!{struct DAV_CALLBACK_AUTH_UNP {
+STRUCT! {struct DAV_CALLBACK_AUTH_UNP {
     pszUserName: LPWSTR,
     ulUserNameLength: ULONG,
     pszPassword: LPWSTR,
     ulPasswordLength: ULONG,
 }}
 pub type PDAV_CALLBACK_AUTH_UNP = *mut DAV_CALLBACK_AUTH_UNP;
-STRUCT!{struct DAV_CALLBACK_CRED {
+STRUCT! {struct DAV_CALLBACK_CRED {
     AuthBlob: DAV_CALLBACK_AUTH_BLOB,
     UNPBlob: DAV_CALLBACK_AUTH_UNP,
     bAuthBlobValid: BOOL,
@@ -34,15 +34,15 @@ pub const DAV_AUTHN_SCHEME_DIGEST: DWORD = 0x00000008;
 pub const DAV_AUTHN_SCHEME_NEGOTIATE: DWORD = 0x00000010;
 pub const DAV_AUTHN_SCHEME_CERT: DWORD = 0x00010000;
 pub const DAV_AUTHN_SCHEME_FBA: DWORD = 0x00100000;
-ENUM!{enum AUTHNEXTSTEP {
+ENUM! {enum AUTHNEXTSTEP {
     DefaultBehavior,
     RetryRequest,
     CancelRequest,
 }}
-FN!{stdcall PFNDAVAUTHCALLBACK_FREECRED(
+FN! {stdcall PFNDAVAUTHCALLBACK_FREECRED(
     pbuffer: PVOID,
 ) -> DWORD}
-FN!{stdcall PFNDAVAUTHCALLBACK(
+FN! {stdcall PFNDAVAUTHCALLBACK(
     lpwzServerName: LPWSTR,
     lpwzRemoteName: LPWSTR,
     dwAuthScheme: DWORD,
@@ -60,19 +60,9 @@ extern "system" {
         ClientCert: PBYTE,
         CertSize: DWORD,
     ) -> DWORD;
-    pub fn DavDeleteConnection(
-        ConnectionHandle: HANDLE,
-    ) -> DWORD;
-    pub fn DavGetUNCFromHTTPPath(
-        HttpPath: LPCWSTR,
-        UncPath: LPWSTR,
-        lpSize: LPDWORD,
-    ) -> DWORD;
-    pub fn DavGetHTTPFromUNCPath(
-        UncPath: LPCWSTR,
-        HttpPath: LPWSTR,
-        lpSize: LPDWORD,
-    ) -> DWORD;
+    pub fn DavDeleteConnection(ConnectionHandle: HANDLE) -> DWORD;
+    pub fn DavGetUNCFromHTTPPath(HttpPath: LPCWSTR, UncPath: LPWSTR, lpSize: LPDWORD) -> DWORD;
+    pub fn DavGetHTTPFromUNCPath(UncPath: LPCWSTR, HttpPath: LPWSTR, lpSize: LPDWORD) -> DWORD;
     pub fn DavGetTheLockOwnerOfTheFile(
         FileName: LPCWSTR,
         LockOwnerName: PWSTR,
@@ -84,21 +74,9 @@ extern "system" {
         ExtErrorString: LPWSTR,
         cChSize: *mut DWORD,
     ) -> DWORD;
-    pub fn DavFlushFile(
-        hFile: HANDLE,
-    ) -> DWORD;
-    pub fn DavInvalidateCache(
-        URLName: LPWSTR,
-    ) -> DWORD;
-    pub fn DavCancelConnectionsToServer(
-        URLName: LPWSTR,
-        fForce: BOOL,
-    ) -> DWORD;
-    pub fn DavRegisterAuthCallback(
-        CallBack: PFNDAVAUTHCALLBACK,
-        Version: ULONG,
-    ) -> OPAQUE_HANDLE;
-    pub fn DavUnregisterAuthCallback(
-        hCallback: OPAQUE_HANDLE,
-    );
+    pub fn DavFlushFile(hFile: HANDLE) -> DWORD;
+    pub fn DavInvalidateCache(URLName: LPWSTR) -> DWORD;
+    pub fn DavCancelConnectionsToServer(URLName: LPWSTR, fForce: BOOL) -> DWORD;
+    pub fn DavRegisterAuthCallback(CallBack: PFNDAVAUTHCALLBACK, Version: ULONG) -> OPAQUE_HANDLE;
+    pub fn DavUnregisterAuthCallback(hCallback: OPAQUE_HANDLE);
 }

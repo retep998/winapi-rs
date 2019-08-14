@@ -7,7 +7,7 @@ use shared::minwindef::ULONG;
 use shared::rpcndr::byte;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR};
-ENUM!{enum BG_CERT_STORE_LOCATION {
+ENUM! {enum BG_CERT_STORE_LOCATION {
     BG_CERT_STORE_LOCATION_CURRENT_USER = 0,
     BG_CERT_STORE_LOCATION_LOCAL_MACHINE = BG_CERT_STORE_LOCATION_CURRENT_USER + 1,
     BG_CERT_STORE_LOCATION_CURRENT_SERVICE = BG_CERT_STORE_LOCATION_LOCAL_MACHINE + 1,
@@ -19,7 +19,7 @@ ENUM!{enum BG_CERT_STORE_LOCATION {
     BG_CERT_STORE_LOCATION_LOCAL_MACHINE_ENTERPRISE
         = BG_CERT_STORE_LOCATION_LOCAL_MACHINE_GROUP_POLICY + 1,
 }}
-RIDL!{#[uuid(0xf1bd1079, 0x9f01, 0x4bdc, 0x80, 0x36, 0xf0, 0x9b, 0x70, 0x09, 0x50, 0x66)]
+RIDL! {#[uuid(0xf1bd1079, 0x9f01, 0x4bdc, 0x80, 0x36, 0xf0, 0x9b, 0x70, 0x09, 0x50, 0x66)]
 interface IBackgroundCopyJobHttpOptions(IBackgroundCopyJobHttpOptionsVtbl):
     IUnknown(IUnknownVtbl) {
     fn SetClientCertificateByID(

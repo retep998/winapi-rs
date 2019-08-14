@@ -9,33 +9,16 @@ use um::winnt::{HANDLE, LPCSTR, LPCWSTR};
 extern "system" {
     pub fn IsDebuggerPresent() -> BOOL;
     pub fn DebugBreak();
-    pub fn OutputDebugStringA(
-        lpOutputString: LPCSTR,
-    );
-    pub fn OutputDebugStringW(
-        lpOutputString: LPCWSTR,
-    );
+    pub fn OutputDebugStringA(lpOutputString: LPCSTR);
+    pub fn OutputDebugStringW(lpOutputString: LPCWSTR);
     pub fn ContinueDebugEvent(
         dwProcessId: DWORD,
         dwThreadId: DWORD,
         dwContinueStatus: DWORD,
     ) -> BOOL;
-    pub fn WaitForDebugEvent(
-        lpDebugEvent: LPDEBUG_EVENT,
-        dwMilliseconds: DWORD,
-    ) -> BOOL;
-    pub fn DebugActiveProcess(
-        dwProcessId: DWORD,
-    ) -> BOOL;
-    pub fn DebugActiveProcessStop(
-        dwProcessId: DWORD,
-    ) -> BOOL;
-    pub fn CheckRemoteDebuggerPresent(
-        hProcess: HANDLE,
-        pbDebuggerPresent: PBOOL,
-    ) -> BOOL;
-    pub fn WaitForDebugEventEx(
-        lpDebugEvent: LPDEBUG_EVENT,
-        dwMilliseconds: DWORD,
-    ) -> BOOL;
+    pub fn WaitForDebugEvent(lpDebugEvent: LPDEBUG_EVENT, dwMilliseconds: DWORD) -> BOOL;
+    pub fn DebugActiveProcess(dwProcessId: DWORD) -> BOOL;
+    pub fn DebugActiveProcessStop(dwProcessId: DWORD) -> BOOL;
+    pub fn CheckRemoteDebuggerPresent(hProcess: HANDLE, pbDebuggerPresent: PBOOL) -> BOOL;
+    pub fn WaitForDebugEventEx(lpDebugEvent: LPDEBUG_EVENT, dwMilliseconds: DWORD) -> BOOL;
 }

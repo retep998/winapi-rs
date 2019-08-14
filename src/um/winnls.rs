@@ -8,8 +8,7 @@ use ctypes::c_int;
 use shared::basetsd::LONG_PTR;
 use shared::guiddef::GUID;
 use shared::minwindef::{
-    BOOL, BYTE, DWORD, INT, LPARAM, LPDWORD, LPINT, LPVOID, LPWORD, MAX_PATH, PDWORD, PULONG,
-    UINT,
+    BOOL, BYTE, DWORD, INT, LPARAM, LPDWORD, LPINT, LPVOID, LPWORD, MAX_PATH, PDWORD, PULONG, UINT,
 };
 use um::minwinbase::SYSTEMTIME;
 use um::winnt::{
@@ -39,13 +38,13 @@ pub type LGRPID = DWORD;
 pub type LCTYPE = DWORD;
 pub type CALTYPE = DWORD;
 pub type CALID = DWORD;
-STRUCT!{struct CPINFO {
+STRUCT! {struct CPINFO {
     MaxCharSize: UINT,
     DefaultChar: [BYTE; MAX_DEFAULTCHAR],
     LeadByte: [BYTE; MAX_LEADBYTES],
 }}
 pub type LPCPINFO = *mut CPINFO;
-STRUCT!{struct CPINFOEXA {
+STRUCT! {struct CPINFOEXA {
     MaxCharSize: UINT,
     DefaultChar: [BYTE; MAX_DEFAULTCHAR],
     LeadByte: [BYTE; MAX_LEADBYTES],
@@ -54,7 +53,7 @@ STRUCT!{struct CPINFOEXA {
     CodePageName: [CHAR; MAX_PATH],
 }}
 pub type LPCPINFOEXA = *mut CPINFOEXA;
-STRUCT!{struct CPINFOEXW {
+STRUCT! {struct CPINFOEXW {
     MaxCharSize: UINT,
     DefaultChar: [BYTE; MAX_DEFAULTCHAR],
     LeadByte: [BYTE; MAX_LEADBYTES],
@@ -63,7 +62,7 @@ STRUCT!{struct CPINFOEXW {
     CodePageName: [WCHAR; MAX_PATH],
 }}
 pub type LPCPINFOEXW = *mut CPINFOEXW;
-STRUCT!{struct NUMBERFMTA {
+STRUCT! {struct NUMBERFMTA {
     NumDigits: UINT,
     LeadingZero: UINT,
     Grouping: UINT,
@@ -72,7 +71,7 @@ STRUCT!{struct NUMBERFMTA {
     NegativeOrder: UINT,
 }}
 pub type LPNUMBERFMTA = *mut NUMBERFMTA;
-STRUCT!{struct NUMBERFMTW {
+STRUCT! {struct NUMBERFMTW {
     NumDigits: UINT,
     LeadingZero: UINT,
     Grouping: UINT,
@@ -81,7 +80,7 @@ STRUCT!{struct NUMBERFMTW {
     NegativeOrder: UINT,
 }}
 pub type LPNUMBERFMTW = *mut NUMBERFMTW;
-STRUCT!{struct CURRENCYFMTA {
+STRUCT! {struct CURRENCYFMTA {
     NumDigits: UINT,
     LeadingZero: UINT,
     Grouping: UINT,
@@ -92,7 +91,7 @@ STRUCT!{struct CURRENCYFMTA {
     lpCurrencySymbol: LPSTR,
 }}
 pub type LPCURRENCYFMTA = *mut CURRENCYFMTA;
-STRUCT!{struct CURRENCYFMTW {
+STRUCT! {struct CURRENCYFMTW {
     NumDigits: UINT,
     LeadingZero: UINT,
     Grouping: UINT,
@@ -104,7 +103,7 @@ STRUCT!{struct CURRENCYFMTW {
 }}
 pub type LPCURRENCYFMTW = *mut CURRENCYFMTW;
 pub type NLS_FUNCTION = DWORD;
-STRUCT!{struct NLSVERSIONINFO {
+STRUCT! {struct NLSVERSIONINFO {
     dwNLSVersionInfoSize: DWORD,
     dwNLSVersion: DWORD,
     dwDefinedVersion: DWORD,
@@ -112,7 +111,7 @@ STRUCT!{struct NLSVERSIONINFO {
     guidCustomVersion: GUID,
 }}
 pub type LPNLSVERSIONINFO = *mut NLSVERSIONINFO;
-STRUCT!{struct NLSVERSIONINFOEX {
+STRUCT! {struct NLSVERSIONINFOEX {
     dwNLSVersionInfoSize: DWORD,
     dwNLSVersion: DWORD,
     dwDefinedVersion: DWORD,
@@ -123,97 +122,97 @@ pub type LPNLSVERSIONINFOEX = *mut NLSVERSIONINFOEX;
 pub type GEOID = LONG;
 pub type GEOTYPE = DWORD;
 pub type GEOCLASS = DWORD;
-ENUM!{enum NORM_FORM {
+ENUM! {enum NORM_FORM {
     NormalizationOther = 0,
     NormalizationC = 0x1,
     NormalizationD = 0x2,
     NormalizationKC = 0x5,
     NormalizationKD = 0x6,
 }}
-FN!{stdcall LANGUAGEGROUP_ENUMPROCA(
+FN! {stdcall LANGUAGEGROUP_ENUMPROCA(
     LGRPID,
     LPSTR,
     LPSTR,
     DWORD,
     LONG_PTR,
 ) -> BOOL}
-FN!{stdcall LANGGROUPLOCALE_ENUMPROCA(
+FN! {stdcall LANGGROUPLOCALE_ENUMPROCA(
     LGRPID,
     LCID,
     LPSTR,
     LONG_PTR,
 ) -> BOOL}
-FN!{stdcall UILANGUAGE_ENUMPROCA(
+FN! {stdcall UILANGUAGE_ENUMPROCA(
     LPSTR,
     LONG_PTR,
 ) -> BOOL}
-FN!{stdcall CODEPAGE_ENUMPROCA(
+FN! {stdcall CODEPAGE_ENUMPROCA(
     LPSTR,
 ) -> BOOL}
-FN!{stdcall DATEFMT_ENUMPROCA(
+FN! {stdcall DATEFMT_ENUMPROCA(
     LPSTR,
 ) -> BOOL}
-FN!{stdcall DATEFMT_ENUMPROCEXA(
-    LPSTR,
-    CALID,
-) -> BOOL}
-FN!{stdcall TIMEFMT_ENUMPROCA(
-    LPSTR,
-) -> BOOL}
-FN!{stdcall CALINFO_ENUMPROCA(
-    LPSTR,
-) -> BOOL}
-FN!{stdcall CALINFO_ENUMPROCEXA(
+FN! {stdcall DATEFMT_ENUMPROCEXA(
     LPSTR,
     CALID,
 ) -> BOOL}
-FN!{stdcall LOCALE_ENUMPROCA(
+FN! {stdcall TIMEFMT_ENUMPROCA(
     LPSTR,
 ) -> BOOL}
-FN!{stdcall LOCALE_ENUMPROCW(
+FN! {stdcall CALINFO_ENUMPROCA(
+    LPSTR,
+) -> BOOL}
+FN! {stdcall CALINFO_ENUMPROCEXA(
+    LPSTR,
+    CALID,
+) -> BOOL}
+FN! {stdcall LOCALE_ENUMPROCA(
+    LPSTR,
+) -> BOOL}
+FN! {stdcall LOCALE_ENUMPROCW(
     LPWSTR,
 ) -> BOOL}
-FN!{stdcall LANGUAGEGROUP_ENUMPROCW(
+FN! {stdcall LANGUAGEGROUP_ENUMPROCW(
     LGRPID,
     LPWSTR,
     LPWSTR,
     DWORD,
     LONG_PTR,
 ) -> BOOL}
-FN!{stdcall LANGGROUPLOCALE_ENUMPROCW(
+FN! {stdcall LANGGROUPLOCALE_ENUMPROCW(
     LGRPID,
     LCID,
     LPWSTR,
     LONG_PTR,
 ) -> BOOL}
-FN!{stdcall UILANGUAGE_ENUMPROCW(
+FN! {stdcall UILANGUAGE_ENUMPROCW(
     LPWSTR,
     LONG_PTR,
 ) -> BOOL}
-FN!{stdcall CODEPAGE_ENUMPROCW(
+FN! {stdcall CODEPAGE_ENUMPROCW(
     LPWSTR,
 ) -> BOOL}
-FN!{stdcall DATEFMT_ENUMPROCW(
+FN! {stdcall DATEFMT_ENUMPROCW(
     LPWSTR,
 ) -> BOOL}
-FN!{stdcall DATEFMT_ENUMPROCEXW(
-    LPWSTR,
-    CALID,
-) -> BOOL}
-FN!{stdcall TIMEFMT_ENUMPROCW(
-    LPWSTR,
-) -> BOOL}
-FN!{stdcall CALINFO_ENUMPROCW(
-    LPWSTR,
-) -> BOOL}
-FN!{stdcall CALINFO_ENUMPROCEXW(
+FN! {stdcall DATEFMT_ENUMPROCEXW(
     LPWSTR,
     CALID,
 ) -> BOOL}
-FN!{stdcall GEO_ENUMPROC(
+FN! {stdcall TIMEFMT_ENUMPROCW(
+    LPWSTR,
+) -> BOOL}
+FN! {stdcall CALINFO_ENUMPROCW(
+    LPWSTR,
+) -> BOOL}
+FN! {stdcall CALINFO_ENUMPROCEXW(
+    LPWSTR,
+    CALID,
+) -> BOOL}
+FN! {stdcall GEO_ENUMPROC(
     GEOID,
 ) -> BOOL}
-STRUCT!{struct FILEMUIINFO {
+STRUCT! {struct FILEMUIINFO {
     dwSize: DWORD,
     dwVersion: DWORD,
     dwFileType: DWORD,
@@ -229,22 +228,22 @@ STRUCT!{struct FILEMUIINFO {
     abBuffer: [BYTE; 8],
 }}
 pub type PFILEMUIINFO = *mut FILEMUIINFO;
-FN!{stdcall CALINFO_ENUMPROCEXEX(
+FN! {stdcall CALINFO_ENUMPROCEXEX(
     LPWSTR,
     CALID,
     LPWSTR,
     LPARAM,
 ) -> BOOL}
-FN!{stdcall DATEFMT_ENUMPROCEXEX(
+FN! {stdcall DATEFMT_ENUMPROCEXEX(
     LPWSTR,
     CALID,
     LPARAM,
 ) -> BOOL}
-FN!{stdcall TIMEFMT_ENUMPROCEX(
+FN! {stdcall TIMEFMT_ENUMPROCEX(
     LPWSTR,
     LPARAM,
 ) -> BOOL}
-FN!{stdcall LOCALE_ENUMPROCEX(
+FN! {stdcall LOCALE_ENUMPROCEX(
     LPWSTR,
     DWORD,
     LPARAM,
@@ -348,14 +347,8 @@ extern "system" {
         dwFlags: DWORD,
         lParam: LONG_PTR,
     ) -> BOOL;
-    pub fn EnumSystemCodePagesA(
-        lpCodePageEnumProc: CODEPAGE_ENUMPROCA,
-        dwFlags: DWORD,
-    ) -> BOOL;
-    pub fn EnumSystemCodePagesW(
-        lpCodePageEnumProc: CODEPAGE_ENUMPROCW,
-        dwFlags: DWORD,
-    ) -> BOOL;
+    pub fn EnumSystemCodePagesA(lpCodePageEnumProc: CODEPAGE_ENUMPROCA, dwFlags: DWORD) -> BOOL;
+    pub fn EnumSystemCodePagesW(lpCodePageEnumProc: CODEPAGE_ENUMPROCW, dwFlags: DWORD) -> BOOL;
     pub fn EnumSystemGeoID(
         GeoClass: GEOCLASS,
         ParentGeoId: GEOID,
@@ -371,20 +364,14 @@ extern "system" {
         dwFlags: DWORD,
         lParam: LONG_PTR,
     ) -> BOOL;
-    pub fn EnumSystemLocalesA(
-        lpLocaleEnumProc: LOCALE_ENUMPROCA,
-        dwFlags: DWORD,
-    ) -> BOOL;
+    pub fn EnumSystemLocalesA(lpLocaleEnumProc: LOCALE_ENUMPROCA, dwFlags: DWORD) -> BOOL;
     pub fn EnumSystemLocalesEx(
         lpLocaleEnumProcEx: LOCALE_ENUMPROCEX,
         dwFlags: DWORD,
         lParam: LPARAM,
         lpReserved: LPVOID,
     ) -> BOOL;
-    pub fn EnumSystemLocalesW(
-        lpLocaleEnumProc: LOCALE_ENUMPROCW,
-        dwFlags: DWORD,
-    ) -> BOOL;
+    pub fn EnumSystemLocalesW(lpLocaleEnumProc: LOCALE_ENUMPROCW, dwFlags: DWORD) -> BOOL;
     pub fn EnumTimeFormatsA(
         lpTimeFmtEnumProc: TIMEFMT_ENUMPROCA,
         Locale: LCID,
@@ -440,20 +427,9 @@ extern "system" {
         cchDest: c_int,
     ) -> c_int;
     pub fn GetACP() -> UINT;
-    pub fn GetCPInfo(
-        CodePage: UINT,
-        lpCPInfo: LPCPINFO,
-    ) -> BOOL;
-    pub fn GetCPInfoExA(
-        CodePage: UINT,
-        dwFlags: DWORD,
-        lpCPInfoEx: LPCPINFOEXA,
-    ) -> BOOL;
-    pub fn GetCPInfoExW(
-        CodePage: UINT,
-        dwFlags: DWORD,
-        lpCPInfoEx: LPCPINFOEXW,
-    ) -> BOOL;
+    pub fn GetCPInfo(CodePage: UINT, lpCPInfo: LPCPINFO) -> BOOL;
+    pub fn GetCPInfoExA(CodePage: UINT, dwFlags: DWORD, lpCPInfoEx: LPCPINFOEXA) -> BOOL;
+    pub fn GetCPInfoExW(CodePage: UINT, dwFlags: DWORD, lpCPInfoEx: LPCPINFOEXW) -> BOOL;
     pub fn GetCalendarInfoA(
         Locale: LCID,
         Calendar: CALID,
@@ -550,24 +526,14 @@ extern "system" {
         cchData: c_int,
         LangId: LANGID,
     ) -> c_int;
-    pub fn GetLocaleInfoA(
-        Locale: LCID,
-        LCType: LCTYPE,
-        lpLCData: LPSTR,
-        cchData: c_int,
-    ) -> c_int;
+    pub fn GetLocaleInfoA(Locale: LCID, LCType: LCTYPE, lpLCData: LPSTR, cchData: c_int) -> c_int;
     pub fn GetLocaleInfoEx(
         lpLocaleName: LPCWSTR,
         LCType: LCTYPE,
         lpLCData: LPWSTR,
         cchData: c_int,
     ) -> c_int;
-    pub fn GetLocaleInfoW(
-        Locale: LCID,
-        LCType: LCTYPE,
-        lpLCData: LPWSTR,
-        cchData: c_int,
-    ) -> c_int;
+    pub fn GetLocaleInfoW(Locale: LCID, LCType: LCTYPE, lpLCData: LPWSTR, cchData: c_int) -> c_int;
     pub fn GetNLSVersion(
         Function: NLS_FUNCTION,
         Locale: LCID,
@@ -638,10 +604,7 @@ extern "system" {
     ) -> BOOL;
     pub fn GetSystemDefaultLCID() -> LCID;
     pub fn GetSystemDefaultLangID() -> LANGID;
-    pub fn GetSystemDefaultLocaleName(
-        lpLocaleName: LPWSTR,
-        cchLocaleName: c_int,
-    ) -> c_int;
+    pub fn GetSystemDefaultLocaleName(lpLocaleName: LPWSTR, cchLocaleName: c_int) -> c_int;
     pub fn GetSystemDefaultUILanguage() -> LANGID;
     pub fn GetSystemPreferredUILanguages(
         dwFlags: DWORD,
@@ -666,10 +629,7 @@ extern "system" {
     ) -> BOOL;
     pub fn GetUserDefaultLCID() -> LCID;
     pub fn GetUserDefaultLangID() -> LANGID;
-    pub fn GetUserDefaultLocaleName(
-        lpLocaleName: LPWSTR,
-        cchLocaleName: c_int,
-    ) -> c_int;
+    pub fn GetUserDefaultLocaleName(lpLocaleName: LPWSTR, cchLocaleName: c_int) -> c_int;
     pub fn GetUserDefaultUILanguage() -> LANGID;
     pub fn GetUserGeoID(GeoClass: GEOCLASS) -> GEOID;
     pub fn GetUserPreferredUILanguages(
@@ -678,13 +638,8 @@ extern "system" {
         pwszLanguagesBuffer: PZZWSTR,
         pcchLanguagesBuffer: PULONG,
     ) -> BOOL;
-    pub fn IsDBCSLeadByte(
-        TestChar: BYTE,
-    ) -> BOOL;
-    pub fn IsDBCSLeadByteEx(
-        CodePage: UINT,
-        TestChar: BYTE,
-    ) -> BOOL;
+    pub fn IsDBCSLeadByte(TestChar: BYTE) -> BOOL;
+    pub fn IsDBCSLeadByteEx(CodePage: UINT, TestChar: BYTE) -> BOOL;
     pub fn IsNLSDefinedString(
         Function: NLS_FUNCTION,
         dwFlags: DWORD,
@@ -692,36 +647,17 @@ extern "system" {
         lpString: LPCWSTR,
         cchStr: INT,
     ) -> BOOL;
-    pub fn IsNormalizedString(
-        NormForm: NORM_FORM,
-        lpString: LPCWSTR,
-        cwLength: c_int,
-    ) -> BOOL;
-    pub fn IsValidCodePage(
-        CodePage: UINT,
-    ) -> BOOL;
-    pub fn IsValidLanguageGroup(
-        LanguageGroup: LGRPID,
-        dwFlags: DWORD,
-    ) -> BOOL;
-    pub fn IsValidLocale(
-        Locale: LCID,
-        dwFlags: DWORD,
-    ) -> BOOL;
-    pub fn IsValidLocaleName(
-        lpLocaleName: LPCWSTR,
-    ) -> BOOL;
+    pub fn IsNormalizedString(NormForm: NORM_FORM, lpString: LPCWSTR, cwLength: c_int) -> BOOL;
+    pub fn IsValidCodePage(CodePage: UINT) -> BOOL;
+    pub fn IsValidLanguageGroup(LanguageGroup: LGRPID, dwFlags: DWORD) -> BOOL;
+    pub fn IsValidLocale(Locale: LCID, dwFlags: DWORD) -> BOOL;
+    pub fn IsValidLocaleName(lpLocaleName: LPCWSTR) -> BOOL;
     pub fn IsValidNLSVersion(
         function: NLS_FUNCTION,
         lpLocaleName: LPCWSTR,
         lpVersionInformation: LPNLSVERSIONINFOEX,
     ) -> BOOL;
-    pub fn LCIDToLocaleName(
-        Locale: LCID,
-        lpName: LPWSTR,
-        cchName: c_int,
-        dwFlags: DWORD,
-    ) -> c_int;
+    pub fn LCIDToLocaleName(Locale: LCID, lpName: LPWSTR, cchName: c_int, dwFlags: DWORD) -> c_int;
     pub fn LCMapStringA(
         Locale: LCID,
         dwMapFlags: DWORD,
@@ -749,10 +685,7 @@ extern "system" {
         lpDestStr: LPWSTR,
         cchDest: c_int,
     ) -> c_int;
-    pub fn LocaleNameToLCID(
-        lpName: LPCWSTR,
-        dwFlags: DWORD,
-    ) -> LCID;
+    pub fn LocaleNameToLCID(lpName: LPCWSTR, dwFlags: DWORD) -> LCID;
     pub fn NormalizeString(
         NormForm: NORM_FORM,
         lpSrcString: LPCWSTR,
@@ -784,16 +717,8 @@ extern "system" {
         CalType: CALTYPE,
         lpCalData: LPCWSTR,
     ) -> BOOL;
-    pub fn SetLocaleInfoA(
-        Locale: LCID,
-        LCType: LCTYPE,
-        lpLCData: LPCSTR,
-    ) -> BOOL;
-    pub fn SetLocaleInfoW(
-        Locale: LCID,
-        LCType: LCTYPE,
-        lpLCData: LPCWSTR,
-    ) -> BOOL;
+    pub fn SetLocaleInfoA(Locale: LCID, LCType: LCTYPE, lpLCData: LPCSTR) -> BOOL;
+    pub fn SetLocaleInfoW(Locale: LCID, LCType: LCTYPE, lpLCData: LPCWSTR) -> BOOL;
     pub fn SetProcessPreferredUILanguages(
         dwFlags: DWORD,
         pwszLanguagesBuffer: PCZZWSTR,

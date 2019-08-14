@@ -23,7 +23,7 @@ use shared::wtypesbase::LPBLOB;
 use um::minwinbase::LPOVERLAPPED;
 use um::winnt::{PCHAR, PCSTR, PCWSTR, PSTR, PVOID, PWCHAR, PWSTR, VOID};
 use um::winsock2::{
-    LPWSAOVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE, SOCKET, WSA_NOT_ENOUGH_MEMORY, timeval,
+    timeval, LPWSAOVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE, SOCKET, WSA_NOT_ENOUGH_MEMORY,
 };
 use vc::vcruntime::size_t;
 pub const UDP_NOCHECKSUM: c_int = 1;
@@ -55,19 +55,19 @@ extern "system" {
         ppResult: *mut PADDRINFOW,
     ) -> INT;
 }
-FN!{stdcall LPFN_GETADDRINFO(
+FN! {stdcall LPFN_GETADDRINFO(
     pNodeName: PCSTR,
     pServiceName: PCSTR,
     pHints: *const ADDRINFOA,
     ppResult: *mut PADDRINFOA,
 ) -> INT}
-FN!{stdcall LPFN_GETADDRINFOW(
+FN! {stdcall LPFN_GETADDRINFOW(
     pNodeName: PCWSTR,
     pServiceName: PCWSTR,
     pHints: *const ADDRINFOW,
     ppResult: *mut PADDRINFOW,
 ) -> INT}
-FN!{stdcall LPLOOKUPSERVICE_COMPLETION_ROUTINE(
+FN! {stdcall LPLOOKUPSERVICE_COMPLETION_ROUTINE(
     dwError: DWORD,
     dwBytes: DWORD,
     lpOverlapped: LPWSAOVERLAPPED,
@@ -97,14 +97,10 @@ extern "system" {
         lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE,
         lpNameHandle: LPHANDLE,
     ) -> INT;
-    pub fn GetAddrInfoExCancel(
-        lpHandle: LPHANDLE,
-    ) -> INT;
-    pub fn GetAddrInfoExOverlappedResult(
-        lpOverlapped: LPOVERLAPPED,
-    ) -> INT;
+    pub fn GetAddrInfoExCancel(lpHandle: LPHANDLE) -> INT;
+    pub fn GetAddrInfoExOverlappedResult(lpOverlapped: LPOVERLAPPED) -> INT;
 }
-FN!{stdcall LPFN_GETADDRINFOEXA(
+FN! {stdcall LPFN_GETADDRINFOEXA(
     pName: PCSTR,
     pServiceName: PCSTR,
     dwNameSpace: DWORD,
@@ -116,7 +112,7 @@ FN!{stdcall LPFN_GETADDRINFOEXA(
     lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE,
     lpNameHandle: LPHANDLE,
 ) -> INT}
-FN!{stdcall LPFN_GETADDRINFOEXW(
+FN! {stdcall LPFN_GETADDRINFOEXW(
     pName: PCWSTR,
     pServiceName: PCWSTR,
     dwNameSpace: DWORD,
@@ -128,10 +124,10 @@ FN!{stdcall LPFN_GETADDRINFOEXW(
     lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE,
     lpNameHandle: LPHANDLE,
 ) -> INT}
-FN!{stdcall LPFN_GETADDRINFOEXCANCEL(
+FN! {stdcall LPFN_GETADDRINFOEXCANCEL(
     lpHandle: LPHANDLE,
 ) -> INT}
-FN!{stdcall LPFN_GETADDRINFOEXOVERLAPPEDRESULT(
+FN! {stdcall LPFN_GETADDRINFOEXOVERLAPPEDRESULT(
     lpOverlapped: LPOVERLAPPED,
 ) -> INT}
 extern "system" {
@@ -164,7 +160,7 @@ extern "system" {
         lpNameHandle: LPHANDLE,
     ) -> INT;
 }
-FN!{stdcall LPFN_SETADDRINFOEXA(
+FN! {stdcall LPFN_SETADDRINFOEXA(
     pName: PCSTR,
     pServiceName: PCSTR,
     pAddresses: *mut SOCKET_ADDRESS,
@@ -178,7 +174,7 @@ FN!{stdcall LPFN_SETADDRINFOEXA(
     lpCompletionRoutine: LPLOOKUPSERVICE_COMPLETION_ROUTINE,
     lpNameHandle: LPHANDLE,
 ) -> INT}
-FN!{stdcall LPFN_SETADDRINFOEXW(
+FN! {stdcall LPFN_SETADDRINFOEXW(
     pName: PCWSTR,
     pServiceName: PCWSTR,
     pAddresses: *mut SOCKET_ADDRESS,
@@ -193,31 +189,23 @@ FN!{stdcall LPFN_SETADDRINFOEXW(
     lpNameHandle: LPHANDLE,
 ) -> INT}
 extern "system" {
-    pub fn freeaddrinfo(
-        pAddrInfo: PADDRINFOA,
-    );
-    pub fn FreeAddrInfoW(
-        pAddrInfo: PADDRINFOW,
-    );
+    pub fn freeaddrinfo(pAddrInfo: PADDRINFOA);
+    pub fn FreeAddrInfoW(pAddrInfo: PADDRINFOW);
 }
-FN!{stdcall LPFN_FREEADDRINFO(
+FN! {stdcall LPFN_FREEADDRINFO(
     pAddrInfo: PADDRINFOA,
 ) -> ()}
-FN!{stdcall LPFN_FREEADDRINFOW(
+FN! {stdcall LPFN_FREEADDRINFOW(
     pAddrInfo: PADDRINFOW,
 ) -> ()}
 extern "system" {
-    pub fn FreeAddrInfoEx(
-        pAddrInfoEx: PADDRINFOEXA,
-    );
-    pub fn FreeAddrInfoExW(
-        pAddrInfoEx: PADDRINFOEXW,
-    );
+    pub fn FreeAddrInfoEx(pAddrInfoEx: PADDRINFOEXA);
+    pub fn FreeAddrInfoExW(pAddrInfoEx: PADDRINFOEXW);
 }
-FN!{stdcall LPFN_FREEADDRINFOEXA(
+FN! {stdcall LPFN_FREEADDRINFOEXA(
     pAddrInfoEx: PADDRINFOEXA,
 ) -> ()}
-FN!{stdcall LPFN_FREEADDRINFOEXW(
+FN! {stdcall LPFN_FREEADDRINFOEXW(
     pAddrInfoEx: PADDRINFOEXW,
 ) -> ()}
 pub type socklen_t = c_int;
@@ -241,7 +229,7 @@ extern "system" {
         Flags: INT,
     ) -> INT;
 }
-FN!{stdcall LPFN_GETNAMEINFO(
+FN! {stdcall LPFN_GETNAMEINFO(
     pSockaddr: *const SOCKADDR,
     SockaddrLength: socklen_t,
     pNodeBuffer: PCHAR,
@@ -250,7 +238,7 @@ FN!{stdcall LPFN_GETNAMEINFO(
     ServiceBufferSize: DWORD,
     Flags: INT,
 ) -> c_int}
-FN!{stdcall LPFN_GETNAMEINFOW(
+FN! {stdcall LPFN_GETNAMEINFOW(
     pSockaddr: *const SOCKADDR,
     SockaddrLength: socklen_t,
     pNodeBuffer: PWCHAR,
@@ -260,16 +248,8 @@ FN!{stdcall LPFN_GETNAMEINFOW(
     Flags: INT,
 ) -> INT}
 extern "system" {
-    pub fn inet_pton(
-        Family: INT,
-        pszAddrString: PCSTR,
-        pAddrBuf: PVOID,
-    ) -> INT;
-    pub fn InetPtonW(
-        Family: INT,
-        pszAddrString: PCWSTR,
-        pAddrBuf: PVOID,
-    ) -> INT;
+    pub fn inet_pton(Family: INT, pszAddrString: PCSTR, pAddrBuf: PVOID) -> INT;
+    pub fn InetPtonW(Family: INT, pszAddrString: PCWSTR, pAddrBuf: PVOID) -> INT;
     pub fn inet_ntop(
         Family: INT,
         pAddr: *const VOID,
@@ -283,23 +263,23 @@ extern "system" {
         StringBufSize: size_t,
     ) -> PCWSTR;
 }
-FN!{stdcall LPFN_INET_PTONA(
+FN! {stdcall LPFN_INET_PTONA(
     Family: INT,
     pszAddrString: PCSTR,
     pAddrBuf: PVOID,
 ) -> INT}
-FN!{stdcall LPFN_INET_PTONW(
+FN! {stdcall LPFN_INET_PTONW(
     Family: INT,
     pszAddrString: PCWSTR,
     pAddrBuf: PVOID,
 ) -> INT}
-FN!{stdcall LPFN_INET_NTOPA(
+FN! {stdcall LPFN_INET_NTOPA(
     Family: INT,
     pAddr: *const VOID,
     pStringBuf: PSTR,
     StringBufSize: size_t,
 ) -> PCSTR}
-FN!{stdcall LPFN_INET_NTOPW(
+FN! {stdcall LPFN_INET_NTOPW(
     Family: INT,
     pAddr: *const VOID,
     pStringBuf: PWSTR,

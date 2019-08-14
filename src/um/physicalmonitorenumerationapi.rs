@@ -9,7 +9,7 @@ use shared::windef::HMONITOR;
 use um::winnt::{HANDLE, HRESULT, WCHAR};
 pub type _BOOL = BOOL;
 pub const PHYSICAL_MONITOR_DESCRIPTION_SIZE: usize = 128;
-STRUCT!{#[repr(packed)] struct PHYSICAL_MONITOR {
+STRUCT! {#[repr(packed)] struct PHYSICAL_MONITOR {
     hPhysicalMonitor: HANDLE,
     szPhysicalMonitorDescription: [WCHAR; PHYSICAL_MONITOR_DESCRIPTION_SIZE],
 }}
@@ -33,9 +33,7 @@ extern "system" {
         dwPhysicalMonitorArraySize: DWORD,
         pPhysicalMonitorArray: LPPHYSICAL_MONITOR,
     ) -> HRESULT;
-    pub fn DestroyPhysicalMonitor(
-        hMonitor: HANDLE,
-    ) -> _BOOL;
+    pub fn DestroyPhysicalMonitor(hMonitor: HANDLE) -> _BOOL;
     pub fn DestroyPhysicalMonitors(
         dwPhysicalMonitorArraySize: DWORD,
         pPhysicalMonitorArray: LPPHYSICAL_MONITOR,

@@ -7,13 +7,13 @@ use shared::minwindef::{DWORD, ULONG};
 use shared::ws2def::IOC_VENDOR;
 use um::winnt::{LONG, PVOID, ULONGLONG};
 pub const SIO_SET_COMPATIBILITY_MODE: DWORD = _WSAIOW!(IOC_VENDOR, 300);
-ENUM!{enum WSA_COMPATIBILITY_BEHAVIOR_ID {
+ENUM! {enum WSA_COMPATIBILITY_BEHAVIOR_ID {
     WsaBehaviorAll = 0,
     WsaBehaviorReceiveBuffering,
     WsaBehaviorAutoTuning,
 }}
 pub type PWSA_COMPATIBILITY_BEHAVIOR_ID = *mut WSA_COMPATIBILITY_BEHAVIOR_ID;
-STRUCT!{struct WSA_COMPATIBILITY_MODE {
+STRUCT! {struct WSA_COMPATIBILITY_MODE {
     BehaviorId: WSA_COMPATIBILITY_BEHAVIOR_ID,
     TargetOsVersion: ULONG,
 }}
@@ -24,14 +24,14 @@ pub type RIO_CQ = PVOID;
 pub type PRIO_CQ = *mut PVOID;
 pub type RIO_RQ = PVOID;
 pub type PRIO_RQ = *mut PVOID;
-STRUCT!{struct RIORESULT {
+STRUCT! {struct RIORESULT {
     Status: LONG,
     BytesTransferred: ULONG,
     SocketContext: ULONGLONG,
     RequestContext: ULONGLONG,
 }}
 pub type PRIORESULT = *mut RIORESULT;
-STRUCT!{struct RIO_BUF {
+STRUCT! {struct RIO_BUF {
     BufferId: RIO_BUFFERID,
     Offset: ULONG,
     Length: ULONG,

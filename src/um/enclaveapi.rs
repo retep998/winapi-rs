@@ -5,13 +5,11 @@
 // except according to those terms.
 use shared::basetsd::{PSIZE_T, SIZE_T};
 use shared::minwindef::{BOOL, DWORD, LPCVOID, LPDWORD, LPVOID};
-use shared::ntdef::{HANDLE};
+use shared::ntdef::HANDLE;
 use um::minwinbase::LPENCLAVE_ROUTINE;
 use um::winnt::{LPCSTR, LPCWSTR};
 extern "system" {
-    pub fn IsEnclaveTypeSupported(
-        flEnclaveType: DWORD,
-    ) -> BOOL;
+    pub fn IsEnclaveTypeSupported(flEnclaveType: DWORD) -> BOOL;
     pub fn CreateEnclave(
         hProcess: HANDLE,
         lpAddress: LPVOID,
@@ -40,25 +38,14 @@ extern "system" {
         dwInfoLength: DWORD,
         lpEnclaveError: LPDWORD,
     ) -> BOOL;
-    pub fn LoadEnclaveImageA(
-        lpEnclaveAddress: LPVOID,
-        lpImageName: LPCSTR,
-    ) -> BOOL;
-    pub fn LoadEnclaveImageW(
-        lpEnclaveAddress: LPVOID,
-        lpImageName: LPCWSTR,
-    ) -> BOOL;
+    pub fn LoadEnclaveImageA(lpEnclaveAddress: LPVOID, lpImageName: LPCSTR) -> BOOL;
+    pub fn LoadEnclaveImageW(lpEnclaveAddress: LPVOID, lpImageName: LPCWSTR) -> BOOL;
     pub fn CallEnclave(
         lpRoutine: LPENCLAVE_ROUTINE,
         lpParameter: LPVOID,
         fWaitForThread: BOOL,
         lpReturnValue: *mut LPVOID,
     ) -> BOOL;
-    pub fn TerminateEnclave(
-        lpAddress: LPVOID,
-        fWait: BOOL,
-    ) -> BOOL;
-    pub fn DeleteEnclave(
-        lpAddress: LPVOID,
-    ) -> BOOL;
+    pub fn TerminateEnclave(lpAddress: LPVOID, fWait: BOOL) -> BOOL;
+    pub fn DeleteEnclave(lpAddress: LPVOID) -> BOOL;
 }

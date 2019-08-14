@@ -82,7 +82,7 @@ pub const VK_PAD_RTHUMB_DOWNLEFT: WORD = 0x5837;
 pub const XINPUT_KEYSTROKE_KEYDOWN: WORD = 0x0001;
 pub const XINPUT_KEYSTROKE_KEYUP: WORD = 0x0002;
 pub const XINPUT_KEYSTROKE_REPEAT: WORD = 0x0004;
-STRUCT!{struct XINPUT_GAMEPAD {
+STRUCT! {struct XINPUT_GAMEPAD {
     wButtons: WORD,
     bLeftTrigger: BYTE,
     bRightTrigger: BYTE,
@@ -92,17 +92,17 @@ STRUCT!{struct XINPUT_GAMEPAD {
     sThumbRY: SHORT,
 }}
 pub type PXINPUT_GAMEPAD = *mut XINPUT_GAMEPAD;
-STRUCT!{struct XINPUT_STATE {
+STRUCT! {struct XINPUT_STATE {
     dwPacketNumber: DWORD,
     Gamepad: XINPUT_GAMEPAD,
 }}
 pub type PXINPUT_STATE = *mut XINPUT_STATE;
-STRUCT!{struct XINPUT_VIBRATION {
+STRUCT! {struct XINPUT_VIBRATION {
     wLeftMotorSpeed: WORD,
     wRightMotorSpeed: WORD,
 }}
 pub type PXINPUT_VIBRATION = *mut XINPUT_VIBRATION;
-STRUCT!{struct XINPUT_CAPABILITIES {
+STRUCT! {struct XINPUT_CAPABILITIES {
     Type: BYTE,
     SubType: BYTE,
     Flags: WORD,
@@ -110,12 +110,12 @@ STRUCT!{struct XINPUT_CAPABILITIES {
     Vibration: XINPUT_VIBRATION,
 }}
 pub type PXINPUT_CAPABILITIES = *mut XINPUT_CAPABILITIES;
-STRUCT!{struct XINPUT_BATTERY_INFORMATION {
+STRUCT! {struct XINPUT_BATTERY_INFORMATION {
     BatteryType: BYTE,
     BatteryLevel: BYTE,
 }}
 pub type PXINPUT_BATTERY_INFORMATION = *mut XINPUT_BATTERY_INFORMATION;
-STRUCT!{struct XINPUT_KEYSTROKE {
+STRUCT! {struct XINPUT_KEYSTROKE {
     VirtualKey: WORD,
     Unicode: WCHAR,
     Flags: WORD,
@@ -124,22 +124,14 @@ STRUCT!{struct XINPUT_KEYSTROKE {
 }}
 pub type PXINPUT_KEYSTROKE = *mut XINPUT_KEYSTROKE;
 extern "system" {
-    pub fn XInputGetState(
-        dwUserIndex: DWORD,
-        pState: *mut XINPUT_STATE,
-    ) -> DWORD;
-    pub fn XInputSetState(
-        dwUserIndex: DWORD,
-        pVibration: *mut XINPUT_VIBRATION,
-    ) -> DWORD;
+    pub fn XInputGetState(dwUserIndex: DWORD, pState: *mut XINPUT_STATE) -> DWORD;
+    pub fn XInputSetState(dwUserIndex: DWORD, pVibration: *mut XINPUT_VIBRATION) -> DWORD;
     pub fn XInputGetCapabilities(
         dwUserIndex: DWORD,
         dwFlags: DWORD,
         pCapabilities: *mut XINPUT_CAPABILITIES,
     ) -> DWORD;
-    pub fn XInputEnable(
-        enable: BOOL,
-    );
+    pub fn XInputEnable(enable: BOOL);
     pub fn XInputGetAudioDeviceIds(
         dwUserIndex: DWORD,
         pRenderDeviceId: LPWSTR,

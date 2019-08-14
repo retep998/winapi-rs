@@ -12,12 +12,12 @@ use um::subauth::PUNICODE_STRING;
 use um::wincred::{PCREDUI_INFOA, PCREDUI_INFOW};
 use um::winnt::{
     ANYSIZE_ARRAY, BOOLEAN, CHAR, HANDLE, LARGE_INTEGER, LONG, LPSTR, LPWSTR, LUID, PCSTR, PCWSTR,
-    PVOID, WCHAR
+    PVOID, WCHAR,
 };
 pub type SEC_WCHAR = WCHAR;
 pub type SEC_CHAR = CHAR;
 pub type SECURITY_STATUS = LONG;
-STRUCT!{struct SecHandle {
+STRUCT! {struct SecHandle {
     dwLower: ULONG_PTR,
     dwUpper: ULONG_PTR,
 }}
@@ -31,13 +31,13 @@ pub type SECURITY_INTEGER = LARGE_INTEGER;
 pub type PSECURITY_INTEGER = *mut LARGE_INTEGER;
 pub type TimeStamp = SECURITY_INTEGER;
 pub type PTimeStamp = *mut SECURITY_INTEGER;
-STRUCT!{struct SECURITY_STRING {
+STRUCT! {struct SECURITY_STRING {
     Length: c_ushort,
     MaximumLength: c_ushort,
     Buffer: *mut c_ushort,
 }}
 pub type PSECURITY_STRING = *mut SECURITY_STRING;
-STRUCT!{struct SecPkgInfoW {
+STRUCT! {struct SecPkgInfoW {
     fCapabilities: c_ulong,
     wVersion: c_ushort,
     wRPCID: c_ushort,
@@ -46,7 +46,7 @@ STRUCT!{struct SecPkgInfoW {
     Comment: *mut SEC_WCHAR,
 }}
 pub type PSecPkgInfoW = *mut SecPkgInfoW;
-STRUCT!{struct SecPkgInfoA {
+STRUCT! {struct SecPkgInfoA {
     fCapabilities: c_ulong,
     wVersion: c_ushort,
     wRPCID: c_ushort,
@@ -83,13 +83,13 @@ pub const SECPKG_ID_NONE: c_ulong = 0xFFFF;
 pub const SECPKG_CALLFLAGS_APPCONTAINER: c_ulong = 0x00000001;
 pub const SECPKG_CALLFLAGS_APPCONTAINER_AUTHCAPABLE: c_ulong = 0x00000002;
 pub const SECPKG_CALLFLAGS_FORCE_SUPPLIED: c_ulong = 0x00000004;
-STRUCT!{struct SecBuffer {
+STRUCT! {struct SecBuffer {
     cbBuffer: c_ulong,
     BufferType: c_ulong,
     pvBuffer: *mut c_void,
 }}
 pub type PSecBuffer = *mut SecBuffer;
-STRUCT!{struct SecBufferDesc {
+STRUCT! {struct SecBufferDesc {
     ulVersion: c_ulong,
     cBuffers: c_ulong,
     pBuffers: PSecBuffer,
@@ -119,14 +119,14 @@ pub const SECBUFFER_ATTRMASK: c_ulong = 0xF0000000;
 pub const SECBUFFER_READONLY: c_ulong = 0x80000000;
 pub const SECBUFFER_READONLY_WITH_CHECKSUM: c_ulong = 0x10000000;
 pub const SECBUFFER_RESERVED: c_ulong = 0x60000000;
-STRUCT!{struct SEC_NEGOTIATION_INFO {
+STRUCT! {struct SEC_NEGOTIATION_INFO {
     Size: c_ulong,
     NameLength: c_ulong,
     Name: *mut SEC_WCHAR,
     Reserved: *mut c_void,
 }}
 pub type PSEC_NEGOTIATION_INFO = *mut SEC_NEGOTIATION_INFO;
-STRUCT!{struct SEC_CHANNEL_BINDINGS {
+STRUCT! {struct SEC_CHANNEL_BINDINGS {
     dwInitiatorAddrType: c_ulong,
     cbInitiatorLength: c_ulong,
     dwInitiatorOffset: c_ulong,
@@ -137,19 +137,19 @@ STRUCT!{struct SEC_CHANNEL_BINDINGS {
     dwApplicationDataOffset: c_ulong,
 }}
 pub type PSEC_CHANNEL_BINDINGS = *mut SEC_CHANNEL_BINDINGS;
-ENUM!{enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT {
+ENUM! {enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT {
     SecApplicationProtocolNegotiationExt_None,
     SecApplicationProtocolNegotiationExt_NPN,
     SecApplicationProtocolNegotiationExt_ALPN,
 }}
 pub type PSEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT = *mut SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT;
-STRUCT!{struct SEC_APPLICATION_PROTOCOL_LIST {
+STRUCT! {struct SEC_APPLICATION_PROTOCOL_LIST {
     ProtoNegoExt: SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT,
     ProtocolListSize: c_ushort,
     ProtocolList: [c_uchar; 0],
 }}
 pub type PSEC_APPLICATION_PROTOCOL_LIST = *mut SEC_APPLICATION_PROTOCOL_LIST;
-STRUCT!{struct SEC_APPLICATION_PROTOCOLS {
+STRUCT! {struct SEC_APPLICATION_PROTOCOLS {
     ProtocolListsSize: c_ulong,
     ProtocolLists: [SEC_APPLICATION_PROTOCOL_LIST; ANYSIZE_ARRAY],
 }}
@@ -270,21 +270,21 @@ pub const SECPKG_CRED_ATTR_NAMES: c_ulong = 1;
 pub const SECPKG_CRED_ATTR_SSI_PROVIDER: c_ulong = 2;
 pub const SECPKG_CRED_ATTR_KDC_PROXY_SETTINGS: c_ulong = 3;
 pub const SECPKG_CRED_ATTR_CERT: c_ulong = 4;
-STRUCT!{struct SecPkgCredentials_NamesW {
+STRUCT! {struct SecPkgCredentials_NamesW {
     sUserName: *mut SEC_WCHAR,
 }}
 pub type PSecPkgCredentials_NamesW = *mut SecPkgCredentials_NamesW;
-STRUCT!{struct SecPkgCredentials_NamesA {
+STRUCT! {struct SecPkgCredentials_NamesA {
     sUserName: *mut SEC_CHAR,
 }}
 pub type PSecPkgCredentials_NamesA = *mut SecPkgCredentials_NamesA;
-STRUCT!{struct SecPkgCredentials_SSIProviderW {
+STRUCT! {struct SecPkgCredentials_SSIProviderW {
     sProviderName: *mut SEC_WCHAR,
     ProviderInfoLength: c_ulong,
     ProviderInfo: *mut c_char,
 }}
 pub type PSecPkgCredentials_SSIProviderW = *mut SecPkgCredentials_SSIProviderW;
-STRUCT!{struct SecPkgCredentials_SSIProviderA {
+STRUCT! {struct SecPkgCredentials_SSIProviderA {
     sProviderName: *mut SEC_CHAR,
     ProviderInfoLength: c_ulong,
     ProviderInfo: *mut c_char,
@@ -292,7 +292,7 @@ STRUCT!{struct SecPkgCredentials_SSIProviderA {
 pub type PSecPkgCredentials_SSIProviderA = *mut SecPkgCredentials_SSIProviderA;
 pub const KDC_PROXY_SETTINGS_V1: ULONG = 1;
 pub const KDC_PROXY_SETTINGS_FLAGS_FORCEPROXY: ULONG = 0x1;
-STRUCT!{struct SecPkgCredentials_KdcProxySettingsW {
+STRUCT! {struct SecPkgCredentials_KdcProxySettingsW {
     Version: ULONG,
     Flags: ULONG,
     ProxyServerOffset: USHORT,
@@ -301,7 +301,7 @@ STRUCT!{struct SecPkgCredentials_KdcProxySettingsW {
     ClientTlsCredLength: USHORT,
 }}
 pub type PSecPkgCredentials_KdcProxySettingsW = *mut SecPkgCredentials_KdcProxySettingsW;
-STRUCT!{struct SecPkgCredentials_Cert {
+STRUCT! {struct SecPkgCredentials_Cert {
     EncodedCertSize: c_ulong,
     EncodedCert: *mut c_uchar,
 }}
@@ -341,13 +341,13 @@ pub const SECPKG_ATTR_DTLS_MTU: c_ulong = 34;
 pub const SECPKG_ATTR_DATAGRAM_SIZES: c_ulong = SECPKG_ATTR_STREAM_SIZES;
 pub const SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES: c_ulong = 128;
 pub const SECPKG_ATTR_APPLICATION_PROTOCOL: c_ulong = 35;
-STRUCT!{struct SecPkgContext_SubjectAttributes {
+STRUCT! {struct SecPkgContext_SubjectAttributes {
     AttributeInfo: *mut c_void,
 }}
 pub type PSecPkgContext_SubjectAttributes = *mut SecPkgContext_SubjectAttributes;
 pub const SECPKG_ATTR_NEGO_INFO_FLAG_NO_KERBEROS: c_ulong = 0x1;
 pub const SECPKG_ATTR_NEGO_INFO_FLAG_NO_NTLM: c_ulong = 0x2;
-ENUM!{enum SECPKG_CRED_CLASS {
+ENUM! {enum SECPKG_CRED_CLASS {
     SecPkgCredClass_None = 0,
     SecPkgCredClass_Ephemeral = 10,
     SecPkgCredClass_PersistedGeneric = 20,
@@ -355,27 +355,27 @@ ENUM!{enum SECPKG_CRED_CLASS {
     SecPkgCredClass_Explicit = 40,
 }}
 pub type PSECPKG_CRED_CLASS = *mut SECPKG_CRED_CLASS;
-STRUCT!{struct SecPkgContext_CredInfo {
+STRUCT! {struct SecPkgContext_CredInfo {
     CredClass: SECPKG_CRED_CLASS,
     IsPromptingNeeded: c_ulong,
 }}
 pub type PSecPkgContext_CredInfo = *mut SecPkgContext_CredInfo;
-STRUCT!{struct SecPkgContext_NegoPackageInfo {
+STRUCT! {struct SecPkgContext_NegoPackageInfo {
     PackageMask: c_ulong,
 }}
 pub type PSecPkgContext_NegoPackageInfo = *mut SecPkgContext_NegoPackageInfo;
-STRUCT!{struct SecPkgContext_NegoStatus {
+STRUCT! {struct SecPkgContext_NegoStatus {
     LastStatus: c_ulong,
 }}
 pub type PSecPkgContext_NegoStatus = *mut SecPkgContext_NegoStatus;
-STRUCT!{struct SecPkgContext_Sizes {
+STRUCT! {struct SecPkgContext_Sizes {
     cbMaxToken: c_ulong,
     cbMaxSignature: c_ulong,
     cbBlockSize: c_ulong,
     cbSecurityTrailer: c_ulong,
 }}
 pub type PSecPkgContext_Sizes = *mut SecPkgContext_Sizes;
-STRUCT!{struct SecPkgContext_StreamSizes {
+STRUCT! {struct SecPkgContext_StreamSizes {
     cbHeader: c_ulong,
     cbTrailer: c_ulong,
     cbMaximumMessage: c_ulong,
@@ -385,35 +385,35 @@ STRUCT!{struct SecPkgContext_StreamSizes {
 pub type PSecPkgContext_StreamSizes = *mut SecPkgContext_StreamSizes;
 pub type SecPkgContext_DatagramSizes = SecPkgContext_StreamSizes;
 pub type PSecPkgContext_DatagramSizes = PSecPkgContext_StreamSizes;
-STRUCT!{struct SecPkgContext_NamesW {
+STRUCT! {struct SecPkgContext_NamesW {
     sUserName: *mut SEC_WCHAR,
 }}
 pub type PSecPkgContext_NamesW = *mut SecPkgContext_NamesW;
-ENUM!{enum SECPKG_ATTR_LCT_STATUS {
+ENUM! {enum SECPKG_ATTR_LCT_STATUS {
     SecPkgAttrLastClientTokenYes,
     SecPkgAttrLastClientTokenNo,
     SecPkgAttrLastClientTokenMaybe,
 }}
 pub type PSECPKG_ATTR_LCT_STATUS = *mut SECPKG_ATTR_LCT_STATUS;
-STRUCT!{struct SecPkgContext_LastClientTokenStatus {
+STRUCT! {struct SecPkgContext_LastClientTokenStatus {
     LastClientTokenStatus: SECPKG_ATTR_LCT_STATUS,
 }}
 pub type PSecPkgContext_LastClientTokenStatus = *mut SecPkgContext_LastClientTokenStatus;
-STRUCT!{struct SecPkgContext_NamesA {
+STRUCT! {struct SecPkgContext_NamesA {
     sUserName: *mut SEC_CHAR,
 }}
 pub type PSecPkgContext_NamesA = *mut SecPkgContext_NamesA;
-STRUCT!{struct SecPkgContext_Lifespan {
+STRUCT! {struct SecPkgContext_Lifespan {
     tsStart: TimeStamp,
     tsExpiry: TimeStamp,
 }}
 pub type PSecPkgContext_Lifespan = *mut SecPkgContext_Lifespan;
-STRUCT!{struct SecPkgContext_DceInfo {
+STRUCT! {struct SecPkgContext_DceInfo {
     AuthzSvc: c_ulong,
     pPac: *mut c_void,
 }}
 pub type PSecPkgContext_DceInfo = *mut SecPkgContext_DceInfo;
-STRUCT!{struct SecPkgContext_KeyInfoA {
+STRUCT! {struct SecPkgContext_KeyInfoA {
     sSignatureAlgorithmName: *mut SEC_CHAR,
     sEncryptAlgorithmName: *mut SEC_CHAR,
     KeySize: c_ulong,
@@ -421,7 +421,7 @@ STRUCT!{struct SecPkgContext_KeyInfoA {
     EncryptAlgorithm: c_ulong,
 }}
 pub type PSecPkgContext_KeyInfoA = *mut SecPkgContext_KeyInfoA;
-STRUCT!{struct SecPkgContext_KeyInfoW {
+STRUCT! {struct SecPkgContext_KeyInfoW {
     sSignatureAlgorithmName: *mut SEC_WCHAR,
     sEncryptAlgorithmName: *mut SEC_WCHAR,
     KeySize: c_ulong,
@@ -429,40 +429,40 @@ STRUCT!{struct SecPkgContext_KeyInfoW {
     EncryptAlgorithm: c_ulong,
 }}
 pub type PSecPkgContext_KeyInfoW = *mut SecPkgContext_KeyInfoW;
-STRUCT!{struct SecPkgContext_AuthorityA {
+STRUCT! {struct SecPkgContext_AuthorityA {
     sAuthorityName: *mut SEC_CHAR,
 }}
 pub type PSecPkgContext_AuthorityA = *mut SecPkgContext_AuthorityA;
-STRUCT!{struct SecPkgContext_AuthorityW {
+STRUCT! {struct SecPkgContext_AuthorityW {
     sAuthorityName: *mut SEC_WCHAR,
 }}
 pub type PSecPkgContext_AuthorityW = *mut SecPkgContext_AuthorityW;
-STRUCT!{struct SecPkgContext_ProtoInfoA {
+STRUCT! {struct SecPkgContext_ProtoInfoA {
     sProtocolName: *mut SEC_CHAR,
     majorVersion: c_ulong,
     minorVersion: c_ulong,
 }}
 pub type PSecPkgContext_ProtoInfoA = *mut SecPkgContext_ProtoInfoA;
-STRUCT!{struct SecPkgContext_ProtoInfoW {
+STRUCT! {struct SecPkgContext_ProtoInfoW {
     sProtocolName: *mut SEC_WCHAR,
     majorVersion: c_ulong,
     minorVersion: c_ulong,
 }}
 pub type PSecPkgContext_ProtoInfoW = *mut SecPkgContext_ProtoInfoW;
-STRUCT!{struct SecPkgContext_PasswordExpiry {
+STRUCT! {struct SecPkgContext_PasswordExpiry {
     tsPasswordExpires: TimeStamp,
 }}
 pub type PSecPkgContext_PasswordExpiry = *mut SecPkgContext_PasswordExpiry;
-STRUCT!{struct SecPkgContext_LogoffTime {
+STRUCT! {struct SecPkgContext_LogoffTime {
     tsLogoffTime: TimeStamp,
 }}
 pub type PSecPkgContext_LogoffTime = *mut SecPkgContext_LogoffTime;
-STRUCT!{struct SecPkgContext_SessionKey {
+STRUCT! {struct SecPkgContext_SessionKey {
     SessionKeyLength: c_ulong,
     SessionKey: *mut c_uchar,
 }}
 pub type PSecPkgContext_SessionKey = *mut SecPkgContext_SessionKey;
-STRUCT!{struct SecPkgContext_NegoKeys {
+STRUCT! {struct SecPkgContext_NegoKeys {
     KeyType: c_ulong,
     KeyLength: c_ushort,
     KeyValue: *mut c_uchar,
@@ -471,28 +471,28 @@ STRUCT!{struct SecPkgContext_NegoKeys {
     VerifyKeyValue: *mut c_uchar,
 }}
 pub type PSecPkgContext_NegoKeys = *mut SecPkgContext_NegoKeys;
-STRUCT!{struct SecPkgContext_PackageInfoW {
+STRUCT! {struct SecPkgContext_PackageInfoW {
     PackageInfo: PSecPkgInfoW,
 }}
 pub type PSecPkgContext_PackageInfoW = *mut SecPkgContext_PackageInfoW;
-STRUCT!{struct SecPkgContext_PackageInfoA {
+STRUCT! {struct SecPkgContext_PackageInfoA {
     PackageInfo: PSecPkgInfoA,
 }}
 pub type PSecPkgContext_PackageInfoA = *mut SecPkgContext_PackageInfoA;
-STRUCT!{struct SecPkgContext_UserFlags {
+STRUCT! {struct SecPkgContext_UserFlags {
     UserFlags: c_ulong,
 }}
 pub type PSecPkgContext_UserFlags = *mut SecPkgContext_UserFlags;
-STRUCT!{struct SecPkgContext_Flags {
+STRUCT! {struct SecPkgContext_Flags {
     Flags: c_ulong,
 }}
 pub type PSecPkgContext_Flags = *mut SecPkgContext_Flags;
-STRUCT!{struct SecPkgContext_NegotiationInfoA {
+STRUCT! {struct SecPkgContext_NegotiationInfoA {
     PackageInfo: PSecPkgInfoA,
     NegotiationState: c_ulong,
 }}
 pub type PSecPkgContext_NegotiationInfoA = *mut SecPkgContext_NegotiationInfoA;
-STRUCT!{struct SecPkgContext_NegotiationInfoW {
+STRUCT! {struct SecPkgContext_NegotiationInfoW {
     PackageInfo: PSecPkgInfoW,
     NegotiationState: c_ulong,
 }}
@@ -502,55 +502,55 @@ pub const SECPKG_NEGOTIATION_OPTIMISTIC: c_ulong = 1;
 pub const SECPKG_NEGOTIATION_IN_PROGRESS: c_ulong = 2;
 pub const SECPKG_NEGOTIATION_DIRECT: c_ulong = 3;
 pub const SECPKG_NEGOTIATION_TRY_MULTICRED: c_ulong = 4;
-STRUCT!{struct SecPkgContext_NativeNamesW {
+STRUCT! {struct SecPkgContext_NativeNamesW {
     sClientName: *mut SEC_WCHAR,
     sServerName: *mut SEC_WCHAR,
 }}
 pub type PSecPkgContext_NativeNamesW = *mut SecPkgContext_NativeNamesW;
-STRUCT!{struct SecPkgContext_NativeNamesA {
+STRUCT! {struct SecPkgContext_NativeNamesA {
     sClientName: *mut SEC_CHAR,
     sServerName: *mut SEC_CHAR,
 }}
 pub type PSecPkgContext_NativeNamesA = *mut SecPkgContext_NativeNamesA;
-STRUCT!{struct SecPkgContext_CredentialNameW {
+STRUCT! {struct SecPkgContext_CredentialNameW {
     CredentialType: c_ulong,
     sCredentialName: *mut SEC_WCHAR,
 }}
 pub type PSecPkgContext_CredentialNameW = *mut SecPkgContext_CredentialNameW;
-STRUCT!{struct SecPkgContext_CredentialNameA {
+STRUCT! {struct SecPkgContext_CredentialNameA {
     CredentialType: c_ulong,
     sCredentialName: *mut SEC_CHAR,
 }}
 pub type PSecPkgContext_CredentialNameA = *mut SecPkgContext_CredentialNameA;
-STRUCT!{struct SecPkgContext_AccessToken {
+STRUCT! {struct SecPkgContext_AccessToken {
     AccessToken: *mut c_void,
 }}
 pub type PSecPkgContext_AccessToken = *mut SecPkgContext_AccessToken;
-STRUCT!{struct SecPkgContext_TargetInformation {
+STRUCT! {struct SecPkgContext_TargetInformation {
     MarshalledTargetInfoLength: c_ulong,
     MarshalledTargetInfo: *mut c_uchar,
 }}
 pub type PSecPkgContext_TargetInformation = *mut SecPkgContext_TargetInformation;
-STRUCT!{struct SecPkgContext_AuthzID {
+STRUCT! {struct SecPkgContext_AuthzID {
     AuthzIDLength: c_ulong,
     AuthzID: *mut c_char,
 }}
 pub type PSecPkgContext_AuthzID = *mut SecPkgContext_AuthzID;
-STRUCT!{struct SecPkgContext_Target {
+STRUCT! {struct SecPkgContext_Target {
     TargetLength: c_ulong,
     Target: *mut c_char,
 }}
 pub type PSecPkgContext_Target = *mut SecPkgContext_Target;
-STRUCT!{struct SecPkgContext_ClientSpecifiedTarget {
+STRUCT! {struct SecPkgContext_ClientSpecifiedTarget {
     sTargetName: *mut SEC_WCHAR,
 }}
 pub type PSecPkgContext_ClientSpecifiedTarget = *mut SecPkgContext_ClientSpecifiedTarget;
-STRUCT!{struct SecPkgContext_Bindings {
+STRUCT! {struct SecPkgContext_Bindings {
     BindingsLength: c_ulong,
     Bindings: *mut SEC_CHANNEL_BINDINGS,
 }}
 pub type PSecPkgContext_Bindings = *mut SecPkgContext_Bindings;
-ENUM!{enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS {
+ENUM! {enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS {
     SecApplicationProtocolNegotiationStatus_None,
     SecApplicationProtocolNegotiationStatus_Success,
     SecApplicationProtocolNegotiationStatus_SelectedClientOnly,
@@ -558,14 +558,14 @@ ENUM!{enum SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS {
 pub type PSEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS =
     *mut SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS;
 pub const MAX_PROTOCOL_ID_SIZE: usize = 0xff;
-STRUCT!{struct SecPkgContext_ApplicationProtocol {
+STRUCT! {struct SecPkgContext_ApplicationProtocol {
     ProtoNegoStatus: SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS,
     ProtoNegoExt: SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT,
     ProtocolIdSize: c_uchar,
     ProtocolId: [c_uchar; MAX_PROTOCOL_ID_SIZE],
 }}
 pub type PSecPkgContext_ApplicationProtocol = *mut SecPkgContext_ApplicationProtocol;
-FN!{stdcall SEC_GET_KEY_FN(
+FN! {stdcall SEC_GET_KEY_FN(
     Arg: *mut c_void,
     Principal: *mut c_void,
     KeyVer: c_ulong,
@@ -588,7 +588,7 @@ extern "system" {
         ptsExpiry: PTimeStamp,
     ) -> SECURITY_STATUS;
 }
-FN!{stdcall ACQUIRE_CREDENTIALS_HANDLE_FN_W(
+FN! {stdcall ACQUIRE_CREDENTIALS_HANDLE_FN_W(
     *mut SEC_WCHAR,
     *mut SEC_WCHAR,
     c_ulong,
@@ -612,7 +612,7 @@ extern "system" {
         ptsExpiry: PTimeStamp,
     ) -> SECURITY_STATUS;
 }
-FN!{stdcall ACQUIRE_CREDENTIALS_HANDLE_FN_A(
+FN! {stdcall ACQUIRE_CREDENTIALS_HANDLE_FN_A(
     *mut SEC_CHAR,
     *mut SEC_CHAR,
     c_ulong,
@@ -624,11 +624,9 @@ FN!{stdcall ACQUIRE_CREDENTIALS_HANDLE_FN_A(
     PTimeStamp,
 ) -> SECURITY_STATUS}
 extern "system" {
-    pub fn FreeCredentialsHandle(
-        phCredential: PCredHandle,
-    ) -> SECURITY_STATUS;
+    pub fn FreeCredentialsHandle(phCredential: PCredHandle) -> SECURITY_STATUS;
 }
-FN!{stdcall FREE_CREDENTIALS_HANDLE_FN(
+FN! {stdcall FREE_CREDENTIALS_HANDLE_FN(
     PCredHandle,
 ) -> SECURITY_STATUS}
 extern "system" {
@@ -643,7 +641,7 @@ extern "system" {
         ptsExpiry: PTimeStamp,
     ) -> SECURITY_STATUS;
 }
-FN!{stdcall ADD_CREDENTIALS_FN_W(
+FN! {stdcall ADD_CREDENTIALS_FN_W(
     PCredHandle,
     *mut SEC_WCHAR,
     *mut SEC_WCHAR,
@@ -665,7 +663,7 @@ extern "system" {
         ptsExpiry: PTimeStamp,
     ) -> SECURITY_STATUS;
 }
-FN!{stdcall ADD_CREDENTIALS_FN_A(
+FN! {stdcall ADD_CREDENTIALS_FN_A(
     PCredHandle,
     *mut SEC_CHAR,
     *mut SEC_CHAR,
@@ -700,7 +698,7 @@ extern "system" {
         pOutput: PSecBufferDesc,
     ) -> SECURITY_STATUS;
 }
-FN!{stdcall CHANGE_PASSWORD_FN_W(
+FN! {stdcall CHANGE_PASSWORD_FN_W(
     *mut SEC_WCHAR,
     *mut SEC_WCHAR,
     *mut SEC_WCHAR,
@@ -722,7 +720,7 @@ extern "system" {
         pOutput: PSecBufferDesc,
     ) -> SECURITY_STATUS;
 }
-FN!{stdcall CHANGE_PASSWORD_FN_A(
+FN! {stdcall CHANGE_PASSWORD_FN_A(
     *mut SEC_CHAR,
     *mut SEC_CHAR,
     *mut SEC_CHAR,
@@ -775,27 +773,15 @@ extern "system" {
         pfContextAttr: *mut c_ulong,
         ptsExpiry: PTimeStamp,
     ) -> SECURITY_STATUS;
-    pub fn CompleteAuthToken(
-        phContext: PCtxtHandle,
-        pToken: PSecBufferDesc,
-    ) -> SECURITY_STATUS;
-    pub fn ImpersonateSecurityContext(
-        phContext: PCtxtHandle,
-    ) -> SECURITY_STATUS;
-    pub fn RevertSecurityContext(
-        phContext: PCtxtHandle,
-    ) -> SECURITY_STATUS;
+    pub fn CompleteAuthToken(phContext: PCtxtHandle, pToken: PSecBufferDesc) -> SECURITY_STATUS;
+    pub fn ImpersonateSecurityContext(phContext: PCtxtHandle) -> SECURITY_STATUS;
+    pub fn RevertSecurityContext(phContext: PCtxtHandle) -> SECURITY_STATUS;
     pub fn QuerySecurityContextToken(
         phContext: PCtxtHandle,
         Token: *mut *mut c_void,
     ) -> SECURITY_STATUS;
-    pub fn DeleteSecurityContext(
-        phContext: PCtxtHandle,
-    ) -> SECURITY_STATUS;
-    pub fn ApplyControlToken(
-        phContext: PCtxtHandle,
-        pInput: PSecBufferDesc,
-    ) -> SECURITY_STATUS;
+    pub fn DeleteSecurityContext(phContext: PCtxtHandle) -> SECURITY_STATUS;
+    pub fn ApplyControlToken(phContext: PCtxtHandle, pInput: PSecBufferDesc) -> SECURITY_STATUS;
     pub fn QueryContextAttributesW(
         phContext: PCtxtHandle,
         ulAttribute: c_ulong,
@@ -844,9 +830,7 @@ extern "system" {
         pBuffer: *mut c_void,
         cbBuffer: c_ulong,
     ) -> SECURITY_STATUS;
-    pub fn FreeContextBuffer(
-        pvContextBuffer: PVOID,
-    ) -> SECURITY_STATUS;
+    pub fn FreeContextBuffer(pvContextBuffer: PVOID) -> SECURITY_STATUS;
     pub fn MakeSignature(
         phContext: PCtxtHandle,
         fQOP: c_ulong,
@@ -888,7 +872,7 @@ extern "system" {
         ppPackageInfo: *mut PSecPkgInfoA,
     ) -> SECURITY_STATUS;
 }
-ENUM!{enum SecDelegationType {
+ENUM! {enum SecDelegationType {
     SecFull,
     SecService,
     SecTree,
@@ -961,45 +945,45 @@ extern "system" {
         dwFlags: c_ulong,
     ) -> c_ulong;
 }
-STRUCT!{struct SEC_WINNT_AUTH_BYTE_VECTOR {
+STRUCT! {struct SEC_WINNT_AUTH_BYTE_VECTOR {
     ByteArrayOffset: c_ulong,
     ByteArrayLength: c_ushort,
 }}
 pub type PSEC_WINNT_AUTH_BYTE_VECTOR = *mut SEC_WINNT_AUTH_BYTE_VECTOR;
-STRUCT!{struct SEC_WINNT_AUTH_DATA {
+STRUCT! {struct SEC_WINNT_AUTH_DATA {
     CredType: GUID,
     CredData: SEC_WINNT_AUTH_BYTE_VECTOR,
 }}
 pub type PSEC_WINNT_AUTH_DATA = *mut SEC_WINNT_AUTH_DATA;
-STRUCT!{struct SEC_WINNT_AUTH_PACKED_CREDENTIALS {
+STRUCT! {struct SEC_WINNT_AUTH_PACKED_CREDENTIALS {
     cbHeaderLength: c_ushort,
     cbStructureLength: c_ushort,
     AuthData: SEC_WINNT_AUTH_DATA,
 }}
 pub type PSEC_WINNT_AUTH_PACKED_CREDENTIALS = *mut SEC_WINNT_AUTH_PACKED_CREDENTIALS;
-DEFINE_GUID!{SEC_WINNT_AUTH_DATA_TYPE_PASSWORD,
-    0x28bfc32f, 0x10f6, 0x4738, 0x98, 0xd1, 0x1a, 0xc0, 0x61, 0xdf, 0x71, 0x6a}
-DEFINE_GUID!{SEC_WINNT_AUTH_DATA_TYPE_CERT,
-    0x235f69ad, 0x73fb, 0x4dbc, 0x82, 0x3, 0x6, 0x29, 0xe7, 0x39, 0x33, 0x9b}
-STRUCT!{struct SEC_WINNT_AUTH_DATA_PASSWORD {
+DEFINE_GUID! {SEC_WINNT_AUTH_DATA_TYPE_PASSWORD,
+0x28bfc32f, 0x10f6, 0x4738, 0x98, 0xd1, 0x1a, 0xc0, 0x61, 0xdf, 0x71, 0x6a}
+DEFINE_GUID! {SEC_WINNT_AUTH_DATA_TYPE_CERT,
+0x235f69ad, 0x73fb, 0x4dbc, 0x82, 0x3, 0x6, 0x29, 0xe7, 0x39, 0x33, 0x9b}
+STRUCT! {struct SEC_WINNT_AUTH_DATA_PASSWORD {
     UnicodePassword: SEC_WINNT_AUTH_BYTE_VECTOR,
 }}
 pub type PSEC_WINNT_AUTH_DATA_PASSWORD = *mut SEC_WINNT_AUTH_DATA_PASSWORD;
-DEFINE_GUID!{SEC_WINNT_AUTH_DATA_TYPE_CSP_DATA,
-    0x68fd9879, 0x79c, 0x4dfe, 0x82, 0x81, 0x57, 0x8a, 0xad, 0xc1, 0xc1, 0x0}
+DEFINE_GUID! {SEC_WINNT_AUTH_DATA_TYPE_CSP_DATA,
+0x68fd9879, 0x79c, 0x4dfe, 0x82, 0x81, 0x57, 0x8a, 0xad, 0xc1, 0xc1, 0x0}
 // GUID SEC_WINNT_AUTH_DATA_TYPE_SMARTCARD_CONTEXTS
-STRUCT!{struct SEC_WINNT_AUTH_CERTIFICATE_DATA {
+STRUCT! {struct SEC_WINNT_AUTH_CERTIFICATE_DATA {
     cbHeaderLength: c_ushort,
     cbStructureLength: c_ushort,
     Certificate: SEC_WINNT_AUTH_BYTE_VECTOR,
 }}
 pub type PSEC_WINNT_AUTH_CERTIFICATE_DATA = *mut SEC_WINNT_AUTH_CERTIFICATE_DATA;
-STRUCT!{struct SEC_WINNT_CREDUI_CONTEXT_VECTOR {
+STRUCT! {struct SEC_WINNT_CREDUI_CONTEXT_VECTOR {
     CredUIContextArrayOffset: ULONG,
     CredUIContextCount: USHORT,
 }}
 pub type PSEC_WINNT_CREDUI_CONTEXT_VECTOR = *mut SEC_WINNT_CREDUI_CONTEXT_VECTOR;
-STRUCT!{struct SEC_WINNT_AUTH_SHORT_VECTOR {
+STRUCT! {struct SEC_WINNT_AUTH_SHORT_VECTOR {
     ShortArrayOffset: ULONG,
     ShortArrayCount: USHORT,
 }}
@@ -1019,7 +1003,7 @@ extern "system" {
         FlatCredUIContext: PUCHAR,
     ) -> SECURITY_STATUS;
 }
-STRUCT!{struct CREDUIWIN_MARSHALED_CONTEXT {
+STRUCT! {struct CREDUIWIN_MARSHALED_CONTEXT {
     StructureType: GUID,
     cbHeaderLength: USHORT,
     LogonId: LUID,
@@ -1028,7 +1012,7 @@ STRUCT!{struct CREDUIWIN_MARSHALED_CONTEXT {
     MarshaledDataLength: USHORT,
 }}
 pub type PCREDUIWIN_MARSHALED_CONTEXT = *mut CREDUIWIN_MARSHALED_CONTEXT;
-STRUCT!{struct SEC_WINNT_CREDUI_CONTEXT {
+STRUCT! {struct SEC_WINNT_CREDUI_CONTEXT {
     cbHeaderLength: USHORT,
     CredUIContextHandle: HANDLE,
     UIInfo: PCREDUI_INFOW,
@@ -1062,13 +1046,11 @@ extern "system" {
     // pub fn SspiCompareAuthIdentities();
     // pub fn SspiMarshalAuthIdentity();
     // pub fn SspiUnmarshalAuthIdentity();
-    pub fn SspiIsPromptingNeeded(
-        ErrorOrNtStatus: c_ulong,
-    ) -> BOOLEAN;
-    // pub fn SspiGetTargetHostName();
-    // pub fn SspiExcludePackage();
-    // pub fn AddSecurityPackageA();
-    // pub fn AddSecurityPackageW();
-    // pub fn DeleteSecurityPackageA();
-    // pub fn DeleteSecurityPackageW();
+    pub fn SspiIsPromptingNeeded(ErrorOrNtStatus: c_ulong) -> BOOLEAN;
+// pub fn SspiGetTargetHostName();
+// pub fn SspiExcludePackage();
+// pub fn AddSecurityPackageA();
+// pub fn AddSecurityPackageW();
+// pub fn DeleteSecurityPackageA();
+// pub fn DeleteSecurityPackageW();
 }

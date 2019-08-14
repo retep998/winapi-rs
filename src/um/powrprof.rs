@@ -14,14 +14,14 @@ use um::winnt::{
     SYSTEM_POWER_STATE,
 };
 use um::winreg::REGSAM;
-STRUCT!{struct GLOBAL_MACHINE_POWER_POLICY {
+STRUCT! {struct GLOBAL_MACHINE_POWER_POLICY {
     Revision: ULONG,
     LidOpenWakeAc: SYSTEM_POWER_STATE,
     LidOpenWakeDc: SYSTEM_POWER_STATE,
     BroadcastCapacityResolution: ULONG,
 }}
 pub type PGLOBAL_MACHINE_POWER_POLICY = *mut GLOBAL_MACHINE_POWER_POLICY;
-STRUCT!{struct GLOBAL_USER_POWER_POLICY {
+STRUCT! {struct GLOBAL_USER_POWER_POLICY {
     Revision: ULONG,
     PowerButtonAc: POWER_ACTION_POLICY,
     PowerButtonDc: POWER_ACTION_POLICY,
@@ -33,12 +33,12 @@ STRUCT!{struct GLOBAL_USER_POWER_POLICY {
     GlobalFlags: ULONG,
 }}
 pub type PGLOBAL_USER_POWER_POLICY = *mut GLOBAL_USER_POWER_POLICY;
-STRUCT!{struct GLOBAL_POWER_POLICY {
+STRUCT! {struct GLOBAL_POWER_POLICY {
     user: GLOBAL_USER_POWER_POLICY,
     mach: GLOBAL_MACHINE_POWER_POLICY,
 }}
 pub type PGLOBAL_POWER_POLICY = *mut GLOBAL_POWER_POLICY;
-STRUCT!{struct MACHINE_POWER_POLICY {
+STRUCT! {struct MACHINE_POWER_POLICY {
     Revision: ULONG,
     MinSleepAc: SYSTEM_POWER_STATE,
     MinSleepDc: SYSTEM_POWER_STATE,
@@ -55,13 +55,13 @@ STRUCT!{struct MACHINE_POWER_POLICY {
     OverThrottledDc: POWER_ACTION_POLICY,
 }}
 pub type PMACHINE_POWER_POLICY = *mut MACHINE_POWER_POLICY;
-STRUCT!{struct MACHINE_PROCESSOR_POWER_POLICY {
+STRUCT! {struct MACHINE_PROCESSOR_POWER_POLICY {
     Revision: ULONG,
     ProcessorPolicyAc: PROCESSOR_POWER_POLICY,
     ProcessorPolicyDc: PROCESSOR_POWER_POLICY,
 }}
 pub type PMACHINE_PROCESSOR_POWER_POLICY = *mut MACHINE_PROCESSOR_POWER_POLICY;
-STRUCT!{struct USER_POWER_POLICY {
+STRUCT! {struct USER_POWER_POLICY {
     Revision: ULONG,
     IdleAc: POWER_ACTION_POLICY,
     IdleDc: POWER_ACTION_POLICY,
@@ -86,7 +86,7 @@ STRUCT!{struct USER_POWER_POLICY {
     ForcedThrottleDc: UCHAR,
 }}
 pub type PUSER_POWER_POLICY = *mut USER_POWER_POLICY;
-STRUCT!{struct POWER_POLICY {
+STRUCT! {struct POWER_POLICY {
     user: USER_POWER_POLICY,
     mach: MACHINE_POWER_POLICY,
 }}
@@ -99,7 +99,7 @@ pub const EnableVideoDimDisplay: ULONG = 0x10;
 pub const POWER_ATTRIBUTE_HIDE: ULONG = 0x00000001;
 pub const POWER_ATTRIBUTE_SHOW_AOAC: ULONG = 0x00000002;
 pub const NEWSCHEME: UINT = -1i32 as u32;
-FN!{stdcall PWRSCHEMESENUMPROC_V1(
+FN! {stdcall PWRSCHEMESENUMPROC_V1(
     Index: UINT,
     NameSize: DWORD,
     Name: LPWSTR,
@@ -108,7 +108,7 @@ FN!{stdcall PWRSCHEMESENUMPROC_V1(
     Policy: PPOWER_POLICY,
     Context: LPARAM,
 ) -> BOOLEAN}
-FN!{stdcall PWRSCHEMESENUMPROC_V2(
+FN! {stdcall PWRSCHEMESENUMPROC_V2(
     Index: UINT,
     NameSize: DWORD,
     Name: LPWSTR,
@@ -119,36 +119,19 @@ FN!{stdcall PWRSCHEMESENUMPROC_V2(
 ) -> BOOLEAN}
 pub type PWRSCHEMESENUMPROC = *mut PWRSCHEMESENUMPROC_V2;
 extern "system" {
-    pub fn GetPwrDiskSpindownRange(
-        puiMax: PUINT,
-        puiMin: PUINT,
-    ) -> BOOLEAN;
-    pub fn EnumPwrSchemes(
-        lpfn: PWRSCHEMESENUMPROC,
-        lParam: LPARAM,
-    ) -> BOOLEAN;
-    pub fn ReadGlobalPwrPolicy(
-        pGlobalPowerPolicy: PGLOBAL_POWER_POLICY,
-    ) -> BOOLEAN;
-    pub fn ReadPwrScheme(
-        uiID: UINT,
-        pPowerPolicy: PPOWER_POLICY,
-    ) -> BOOLEAN;
+    pub fn GetPwrDiskSpindownRange(puiMax: PUINT, puiMin: PUINT) -> BOOLEAN;
+    pub fn EnumPwrSchemes(lpfn: PWRSCHEMESENUMPROC, lParam: LPARAM) -> BOOLEAN;
+    pub fn ReadGlobalPwrPolicy(pGlobalPowerPolicy: PGLOBAL_POWER_POLICY) -> BOOLEAN;
+    pub fn ReadPwrScheme(uiID: UINT, pPowerPolicy: PPOWER_POLICY) -> BOOLEAN;
     pub fn WritePwrScheme(
         puiID: PUINT,
         lpszSchemeName: LPCWSTR,
         lpszDescription: LPCWSTR,
         lpScheme: PPOWER_POLICY,
     ) -> BOOLEAN;
-    pub fn WriteGlobalPwrPolicy(
-        pGlobalPowerPolicy: PGLOBAL_POWER_POLICY,
-    ) -> BOOLEAN;
-    pub fn DeletePwrScheme(
-        uiID: UINT,
-    ) -> BOOLEAN;
-    pub fn GetActivePwrScheme(
-        puiID: PUINT,
-    ) -> BOOLEAN;
+    pub fn WriteGlobalPwrPolicy(pGlobalPowerPolicy: PGLOBAL_POWER_POLICY) -> BOOLEAN;
+    pub fn DeletePwrScheme(uiID: UINT) -> BOOLEAN;
+    pub fn GetActivePwrScheme(puiID: PUINT) -> BOOLEAN;
     pub fn SetActivePwrScheme(
         uiID: UINT,
         pGlobalPowerPolicy: PGLOBAL_POWER_POLICY,
@@ -157,9 +140,7 @@ extern "system" {
     pub fn IsPwrSuspendAllowed() -> BOOLEAN;
     pub fn IsPwrHibernateAllowed() -> BOOLEAN;
     pub fn IsPwrShutdownAllowed() -> BOOLEAN;
-    pub fn IsAdminOverrideActive(
-        papp: PADMINISTRATOR_POWER_POLICY,
-    ) -> BOOLEAN;
+    pub fn IsAdminOverrideActive(papp: PADMINISTRATOR_POWER_POLICY) -> BOOLEAN;
     pub fn SetSuspendState(
         bHibernate: BOOLEAN,
         bForce: BOOLEAN,
@@ -183,7 +164,7 @@ extern "system" {
         pPowerPolicy: PPOWER_POLICY,
     ) -> BOOLEAN;
 }
-ENUM!{enum POWER_DATA_ACCESSOR {
+ENUM! {enum POWER_DATA_ACCESSOR {
     ACCESS_AC_POWER_SETTING_INDEX = 0,
     ACCESS_DC_POWER_SETTING_INDEX,
     ACCESS_FRIENDLY_NAME,
@@ -215,22 +196,20 @@ ENUM!{enum POWER_DATA_ACCESSOR {
 }}
 pub type PPOWER_DATA_ACCESSOR = *mut POWER_DATA_ACCESSOR;
 pub const DEVICE_NOTIFY_CALLBACK: ULONG = 2;
-FN!{stdcall DEVICE_NOTIFY_CALLBACK_ROUTINE(
+FN! {stdcall DEVICE_NOTIFY_CALLBACK_ROUTINE(
     Context: PVOID,
     Type: ULONG,
     Setting: PVOID,
 ) -> ULONG}
 pub type PDEVICE_NOTIFY_CALLBACK_ROUTINE = *mut DEVICE_NOTIFY_CALLBACK_ROUTINE;
-STRUCT!{struct DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS {
+STRUCT! {struct DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS {
     Callback: PDEVICE_NOTIFY_CALLBACK_ROUTINE,
     Context: PVOID,
 }}
 pub type PDEVICE_NOTIFY_SUBSCRIBE_PARAMETERS = *mut DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS;
 extern "system" {
-    pub fn PowerIsSettingRangeDefined(
-        SubKeyGuid: *const GUID,
-        SettingGuid: *const GUID,
-    ) -> BOOLEAN;
+    pub fn PowerIsSettingRangeDefined(SubKeyGuid: *const GUID, SettingGuid: *const GUID)
+        -> BOOLEAN;
     pub fn PowerSettingAccessCheckEx(
         AccessFlags: POWER_DATA_ACCESSOR,
         PowerGuid: *const GUID,
@@ -449,10 +428,7 @@ extern "system" {
         ImportFileNamePath: LPCWSTR,
         DestinationSchemeGuid: *mut *mut GUID,
     ) -> DWORD;
-    pub fn PowerDeleteScheme(
-        RootPowerKey: HKEY,
-        SchemeGuid: *mut GUID,
-    ) -> DWORD;
+    pub fn PowerDeleteScheme(RootPowerKey: HKEY, SchemeGuid: *mut GUID) -> DWORD;
     pub fn PowerRemovePowerSetting(
         PowerSettingSubKeyGuid: *const GUID,
         PowerSettingGuid: *const GUID,
@@ -487,12 +463,8 @@ extern "system" {
         Access: REGSAM,
         OpenExisting: BOOL,
     ) -> DWORD;
-    pub fn PowerCanRestoreIndividualDefaultPowerScheme(
-        SchemeGuid: *const GUID,
-    ) -> DWORD;
-    pub fn PowerRestoreIndividualDefaultPowerScheme(
-        SchemeGuid: *const GUID,
-    ) -> DWORD;
+    pub fn PowerCanRestoreIndividualDefaultPowerScheme(SchemeGuid: *const GUID) -> DWORD;
+    pub fn PowerRestoreIndividualDefaultPowerScheme(SchemeGuid: *const GUID) -> DWORD;
     pub fn PowerRestoreDefaultPowerSchemes() -> DWORD;
     pub fn PowerReplaceDefaultPowerSchemes() -> DWORD;
     pub fn PowerDeterminePlatformRole() -> POWER_PLATFORM_ROLE;
@@ -529,12 +501,10 @@ extern "system" {
         SetFlags: ULONG,
         SetData: PVOID,
     ) -> DWORD;
-    pub fn DevicePowerOpen(
-        DebugMask: ULONG,
-    ) -> BOOLEAN;
+    pub fn DevicePowerOpen(DebugMask: ULONG) -> BOOLEAN;
     pub fn DevicePowerClose() -> BOOLEAN;
 }
-STRUCT!{struct THERMAL_EVENT {
+STRUCT! {struct THERMAL_EVENT {
     Version: ULONG,
     Size: ULONG,
     Type: ULONG,
@@ -544,7 +514,5 @@ STRUCT!{struct THERMAL_EVENT {
 }}
 pub type PTHERMAL_EVENT = *mut THERMAL_EVENT;
 extern "system" {
-    pub fn PowerReportThermalEvent(
-        Event: PTHERMAL_EVENT,
-    ) -> DWORD;
+    pub fn PowerReportThermalEvent(Event: PTHERMAL_EVENT) -> DWORD;
 }

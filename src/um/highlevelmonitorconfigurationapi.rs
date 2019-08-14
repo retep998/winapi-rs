@@ -28,7 +28,7 @@ pub const MC_SUPPORTED_COLOR_TEMPERATURE_8200K: DWORD = 0x00000010;
 pub const MC_SUPPORTED_COLOR_TEMPERATURE_9300K: DWORD = 0x00000020;
 pub const MC_SUPPORTED_COLOR_TEMPERATURE_10000K: DWORD = 0x00000040;
 pub const MC_SUPPORTED_COLOR_TEMPERATURE_11500K: DWORD = 0x00000080;
-ENUM!{enum MC_DISPLAY_TECHNOLOGY_TYPE {
+ENUM! {enum MC_DISPLAY_TECHNOLOGY_TYPE {
     MC_SHADOW_MASK_CATHODE_RAY_TUBE,
     MC_APERTURE_GRILL_CATHODE_RAY_TUBE,
     MC_THIN_FILM_TRANSISTOR,
@@ -40,25 +40,25 @@ ENUM!{enum MC_DISPLAY_TECHNOLOGY_TYPE {
     MC_FIELD_EMISSION_DEVICE,
 }}
 pub type LPMC_DISPLAY_TECHNOLOGY_TYPE = *mut MC_DISPLAY_TECHNOLOGY_TYPE;
-ENUM!{enum MC_DRIVE_TYPE {
+ENUM! {enum MC_DRIVE_TYPE {
     MC_RED_DRIVE,
     MC_GREEN_DRIVE,
     MC_BLUE_DRIVE,
 }}
-ENUM!{enum MC_GAIN_TYPE {
+ENUM! {enum MC_GAIN_TYPE {
     MC_RED_GAIN,
     MC_GREEN_GAIN,
     MC_BLUE_GAIN,
 }}
-ENUM!{enum MC_POSITION_TYPE {
+ENUM! {enum MC_POSITION_TYPE {
     MC_HORIZONTAL_POSITION,
     MC_VERTICAL_POSITION,
 }}
-ENUM!{enum MC_SIZE_TYPE {
+ENUM! {enum MC_SIZE_TYPE {
     MC_WIDTH,
     MC_HEIGHT,
 }}
-ENUM!{enum MC_COLOR_TEMPERATURE {
+ENUM! {enum MC_COLOR_TEMPERATURE {
     MC_COLOR_TEMPERATURE_UNKNOWN,
     MC_COLOR_TEMPERATURE_4000K,
     MC_COLOR_TEMPERATURE_5000K,
@@ -76,9 +76,7 @@ extern "system" {
         pdwMonitorCapabilities: LPDWORD,
         pdwSupportedColorTemperature: LPDWORD,
     ) -> _BOOL;
-    pub fn SaveCurrentMonitorSettings(
-        hMonitor: HANDLE,
-    ) -> _BOOL;
+    pub fn SaveCurrentMonitorSettings(hMonitor: HANDLE) -> _BOOL;
     pub fn GetMonitorTechnologyType(
         hMonitor: HANDLE,
         pdtyDisplayTechnologyType: LPMC_DISPLAY_TECHNOLOGY_TYPE,
@@ -113,14 +111,8 @@ extern "system" {
         pdwCurrentGain: LPDWORD,
         pdwMaximumGain: LPDWORD,
     ) -> _BOOL;
-    pub fn SetMonitorBrightness(
-        hMonitor: HANDLE,
-        dwNewBrightness: DWORD,
-    ) -> _BOOL;
-    pub fn SetMonitorContrast(
-        hMonitor: HANDLE,
-        dwNewContrast: DWORD,
-    ) -> _BOOL;
+    pub fn SetMonitorBrightness(hMonitor: HANDLE, dwNewBrightness: DWORD) -> _BOOL;
+    pub fn SetMonitorContrast(hMonitor: HANDLE, dwNewContrast: DWORD) -> _BOOL;
     pub fn SetMonitorColorTemperature(
         hMonitor: HANDLE,
         ctCurrentColorTemperature: MC_COLOR_TEMPERATURE,
@@ -135,9 +127,7 @@ extern "system" {
         gtGainType: MC_GAIN_TYPE,
         dwNewGain: DWORD,
     ) -> _BOOL;
-    pub fn DegaussMonitor(
-        hMonitor: HANDLE,
-    ) -> _BOOL;
+    pub fn DegaussMonitor(hMonitor: HANDLE) -> _BOOL;
     pub fn GetMonitorDisplayAreaSize(
         hMonitor: HANDLE,
         stSizeType: MC_SIZE_TYPE,
@@ -162,10 +152,6 @@ extern "system" {
         ptPositionType: MC_POSITION_TYPE,
         dwNewPosition: DWORD,
     ) -> _BOOL;
-    pub fn RestoreMonitorFactoryColorDefaults(
-        hMonitor: HANDLE,
-    ) -> _BOOL;
-    pub fn RestoreMonitorFactoryDefaults(
-        hMonitor: HANDLE,
-    ) -> _BOOL;
+    pub fn RestoreMonitorFactoryColorDefaults(hMonitor: HANDLE) -> _BOOL;
+    pub fn RestoreMonitorFactoryDefaults(hMonitor: HANDLE) -> _BOOL;
 }

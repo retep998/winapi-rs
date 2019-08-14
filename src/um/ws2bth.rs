@@ -18,15 +18,15 @@ pub const BT_PORT_DYN_FIRST: ULONG = 0x1001;
 pub const AF_BTH: USHORT = 32;
 pub const PH_BTH: USHORT = AF_BTH;
 pub const NS_BTH: USHORT = 16;
-STRUCT!{#[repr(packed)] struct SOCKADDR_BTH {
+STRUCT! {#[repr(packed)] struct SOCKADDR_BTH {
     addressFamily: USHORT,
     btAddr: BTH_ADDR,
     serviceClassId: GUID,
     port: ULONG,
 }}
 pub type PSOCKADDR_BTH = *mut SOCKADDR_BTH;
-DEFINE_GUID!{SVCID_BTH_PROVIDER,
-    0x6aa63e0, 0x7d60, 0x41ff, 0xaf, 0xb2, 0x3e, 0xe6, 0xd2, 0xd9, 0x39, 0x2d}
+DEFINE_GUID! {SVCID_BTH_PROVIDER,
+0x6aa63e0, 0x7d60, 0x41ff, 0xaf, 0xb2, 0x3e, 0xe6, 0xd2, 0xd9, 0x39, 0x2d}
 pub const BTH_ADDR_STRING_SIZE: DWORD = 12;
 pub const BTHPROTO_RFCOMM: USHORT = 0x0003;
 pub const BTHPROTO_L2CAP: USHORT = 0x0100;
@@ -41,7 +41,7 @@ pub const SO_BTH_MTU_MIN: ULONG = 0x8000000a;
 pub const RFCOMM_MAX_MTU: ULONG = 0x000003F3;
 pub const RFCOMM_MIN_MTU: ULONG = 0x00000017;
 pub const BTH_SDP_VERSION: ULONG = 1;
-STRUCT!{#[repr(packed)] struct BTH_SET_SERVICE {
+STRUCT! {#[repr(packed)] struct BTH_SET_SERVICE {
     pSdpVersion: PULONG,
     pRecordHandle: HANDLE,
     fCodService: ULONG,
@@ -56,12 +56,12 @@ pub const SDP_DEFAULT_INQUIRY_MAX_RESPONSES: UCHAR = 255;
 pub const SDP_SERVICE_SEARCH_REQUEST: ULONG = 1;
 pub const SDP_SERVICE_ATTRIBUTE_REQUEST: ULONG = 2;
 pub const SDP_SERVICE_SEARCH_ATTRIBUTE_REQUEST: ULONG = 3;
-STRUCT!{#[repr(packed)] struct BTH_QUERY_DEVICE {
+STRUCT! {#[repr(packed)] struct BTH_QUERY_DEVICE {
     LAP: ULONG,
     length: UCHAR,
 }}
 pub type PBTH_QUERY_DEVICE = *mut BTH_QUERY_DEVICE;
-STRUCT!{#[repr(packed)] struct BTH_QUERY_SERVICE {
+STRUCT! {#[repr(packed)] struct BTH_QUERY_SERVICE {
     type_: ULONG,
     serviceHandle: ULONG,
     uuids: [SdpQueryUuid; MAX_UUIDS_IN_QUERY],
@@ -84,7 +84,7 @@ macro_rules! BIT {
         1 << $b
     };
 }
-STRUCT!{#[repr(packed)] struct RFCOMM_MSC_DATA {
+STRUCT! {#[repr(packed)] struct RFCOMM_MSC_DATA {
     Signals: UCHAR,
     Break: UCHAR,
 }}
@@ -102,7 +102,7 @@ macro_rules! MSC_SET_BREAK_LENGTH {
         ($b & 0x3) | (($l & 0xf) << 4)
     };
 }
-STRUCT!{#[repr(packed)] struct RFCOMM_RLS_DATA {
+STRUCT! {#[repr(packed)] struct RFCOMM_RLS_DATA {
     LineStatus: UCHAR,
 }}
 pub type PRFCOMM_RLS_DATA = *mut RFCOMM_RLS_DATA;
@@ -110,7 +110,7 @@ pub const RLS_ERROR: UCHAR = 0x01;
 pub const RLS_OVERRUN: UCHAR = 0x02;
 pub const RLS_PARITY: UCHAR = 0x04;
 pub const RLS_FRAMING: UCHAR = 0x08;
-STRUCT!{#[repr(packed)] struct RFCOMM_RPN_DATA {
+STRUCT! {#[repr(packed)] struct RFCOMM_RPN_DATA {
     Baud: UCHAR,
     Data: UCHAR,
     FlowControl: UCHAR,
@@ -165,39 +165,39 @@ pub const RFCOMM_CMD_RLS: UCHAR = 2;
 pub const RFCOMM_CMD_RPN: UCHAR = 3;
 pub const RFCOMM_CMD_RPN_REQUEST: UCHAR = 4;
 pub const RFCOMM_CMD_RPN_RESPONSE: UCHAR = 5;
-UNION!{#[repr(packed)] union RFCOMM_COMMAND_Data {
+UNION! {#[repr(packed)] union RFCOMM_COMMAND_Data {
     [u8; 7],
     MSC MSC_mut: RFCOMM_MSC_DATA,
     RLS RLS_mut: RFCOMM_RLS_DATA,
     RPN RPN_mut: RFCOMM_RPN_DATA,
 }}
-STRUCT!{#[repr(packed)] struct RFCOMM_COMMAND {
+STRUCT! {#[repr(packed)] struct RFCOMM_COMMAND {
     CmdType: ULONG,
     Data: RFCOMM_COMMAND_Data,
 }}
 pub type PRFCOMM_COMMAND = *mut RFCOMM_COMMAND;
-STRUCT!{#[repr(packed)] struct BTH_PING_REQ {
+STRUCT! {#[repr(packed)] struct BTH_PING_REQ {
     btAddr: BTH_ADDR,
     dataLen: UCHAR,
     data: [UCHAR; MAX_L2CAP_PING_DATA_LENGTH],
 }}
 pub type PBTH_PING_REQ = *mut BTH_PING_REQ;
-STRUCT!{#[repr(packed)] struct BTH_PING_RSP {
+STRUCT! {#[repr(packed)] struct BTH_PING_RSP {
     dataLen: UCHAR,
     data: [UCHAR; MAX_L2CAP_PING_DATA_LENGTH],
 }}
 pub type PBTH_PING_RSP = *mut BTH_PING_RSP;
-STRUCT!{#[repr(packed)] struct BTH_INFO_REQ {
+STRUCT! {#[repr(packed)] struct BTH_INFO_REQ {
     btAddr: BTH_ADDR,
     infoType: USHORT,
 }}
 pub type PBTH_INFO_REQ = *mut BTH_INFO_REQ;
-UNION!{#[repr(packed)] union BTH_INFO_RSP_u {
+UNION! {#[repr(packed)] union BTH_INFO_RSP_u {
     [u8; MAX_L2CAP_INFO_DATA_LENGTH],
     connectionlessMTU connectionlessMTU_mut: USHORT,
     data data_mut: [UCHAR; MAX_L2CAP_INFO_DATA_LENGTH],
 }}
-STRUCT!{#[repr(packed)] struct BTH_INFO_RSP {
+STRUCT! {#[repr(packed)] struct BTH_INFO_RSP {
     result: USHORT,
     dataLen: UCHAR,
     u: BTH_INFO_RSP_u,

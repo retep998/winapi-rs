@@ -22,7 +22,7 @@ pub const ILIF_ALPHA: DWORD = 0x00000001;
 pub const ILIF_LOWQUALITY: DWORD = 0x00000001;
 pub const ILDRF_IMAGELOWQUALITY: LRESULT = 0x00000001;
 pub const ILDRF_OVERLAYLOWQUALITY: LRESULT = 0x00000010;
-RIDL!{#[uuid(0x46eb5926, 0x582e, 0x4017, 0x9f, 0xdf, 0xe8, 0x99, 0x8d, 0xaa, 0x09, 0x50)]
+RIDL! {#[uuid(0x46eb5926, 0x582e, 0x4017, 0x9f, 0xdf, 0xe8, 0x99, 0x8d, 0xaa, 0x09, 0x50)]
 interface IImageList(IImageListVtbl): IUnknown(IUnknownVtbl) {
     fn Add(
         hbmImage: HBITMAP,
@@ -163,13 +163,13 @@ pub const ILDI_PURGE: DWORD = 0x00000001;
 pub const ILDI_STANDBY: DWORD = 0x00000002;
 pub const ILDI_RESETACCESS: DWORD = 0x00000004;
 pub const ILDI_QUERYACCESS: DWORD = 0x00000008;
-STRUCT!{struct IMAGELISTSTATS {
+STRUCT! {struct IMAGELISTSTATS {
     cbSize: DWORD,
     cAlloc: c_int,
     cUsed: c_int,
     cStandby: c_int,
 }}
-RIDL!{#[uuid(0x192b9d83, 0x58fc, 0x457b, 0x90, 0xa0, 0x2b, 0x82, 0xa8, 0xb5, 0xda, 0xe1)]
+RIDL! {#[uuid(0x192b9d83, 0x58fc, 0x457b, 0x90, 0xa0, 0x2b, 0x82, 0xa8, 0xb5, 0xda, 0xe1)]
 interface IImageList2(IImageList2Vtbl): IImageList(IImageListVtbl) {
     fn Resize(
         cxNewIconSize: c_int,

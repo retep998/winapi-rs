@@ -16,7 +16,7 @@ use um::winnt::{
 pub const HTTP_INITIALIZE_SERVER: ULONG = 0x00000001;
 pub const HTTP_INITIALIZE_CONFIG: ULONG = 0x00000002;
 pub const HTTP_DEMAND_CBT: ULONG = 0x00000004;
-ENUM!{enum HTTP_SERVER_PROPERTY {
+ENUM! {enum HTTP_SERVER_PROPERTY {
     HttpServerAuthenticationProperty,
     HttpServerLoggingProperty,
     HttpServerQosProperty,
@@ -31,51 +31,51 @@ ENUM!{enum HTTP_SERVER_PROPERTY {
     HttpServerProtectionLevelProperty,
 }}
 pub type PHTTP_SERVER_PROPERTY = *mut HTTP_SERVER_PROPERTY;
-STRUCT!{struct HTTP_PROPERTY_FLAGS {
+STRUCT! {struct HTTP_PROPERTY_FLAGS {
     BitFields: ULONG,
 }}
-BITFIELD!{HTTP_PROPERTY_FLAGS BitFields: ULONG [
+BITFIELD! {HTTP_PROPERTY_FLAGS BitFields: ULONG [
     Present set_Present[0..1],
 ]}
 pub type PHTTP_PROPERTY_FLAGS = *mut HTTP_PROPERTY_FLAGS;
-ENUM!{enum HTTP_ENABLED_STATE {
+ENUM! {enum HTTP_ENABLED_STATE {
     HttpEnabledStateActive,
     HttpEnabledStateInactive,
 }}
 pub type PHTTP_ENABLED_STATE = *mut HTTP_ENABLED_STATE;
-STRUCT!{struct HTTP_STATE_INFO {
+STRUCT! {struct HTTP_STATE_INFO {
     Flags: HTTP_PROPERTY_FLAGS,
     State: HTTP_ENABLED_STATE,
 }}
 pub type PHTTP_STATE_INFO = *mut HTTP_STATE_INFO;
-ENUM!{enum HTTP_503_RESPONSE_VERBOSITY {
+ENUM! {enum HTTP_503_RESPONSE_VERBOSITY {
     Http503ResponseVerbosityBasic,
     Http503ResponseVerbosityLimited,
     Http503ResponseVerbosityFull,
 }}
 pub type PHTTP_503_RESPONSE_VERBOSITY = *mut HTTP_503_RESPONSE_VERBOSITY;
-ENUM!{enum HTTP_QOS_SETTING_TYPE {
+ENUM! {enum HTTP_QOS_SETTING_TYPE {
     HttpQosSettingTypeBandwidth,
     HttpQosSettingTypeConnectionLimit,
     HttpQosSettingTypeFlowRate,
 }}
 pub type PHTTP_QOS_SETTING_TYPE = *mut HTTP_QOS_SETTING_TYPE;
-STRUCT!{struct HTTP_QOS_SETTING_INFO {
+STRUCT! {struct HTTP_QOS_SETTING_INFO {
     QosType: HTTP_QOS_SETTING_TYPE,
     QosSetting: PVOID,
 }}
 pub type PHTTP_QOS_SETTING_INFO = *mut HTTP_QOS_SETTING_INFO;
-STRUCT!{struct HTTP_CONNECTION_LIMIT_INFO {
+STRUCT! {struct HTTP_CONNECTION_LIMIT_INFO {
     Flags: HTTP_PROPERTY_FLAGS,
     MaxConnections: ULONG,
 }}
 pub type PHTTP_CONNECTION_LIMIT_INFO = *mut HTTP_CONNECTION_LIMIT_INFO;
-STRUCT!{struct HTTP_BANDWIDTH_LIMIT_INFO {
+STRUCT! {struct HTTP_BANDWIDTH_LIMIT_INFO {
     Flags: HTTP_PROPERTY_FLAGS,
     MaxBandwidth: ULONG,
 }}
 pub type PHTTP_BANDWIDTH_LIMIT_INFO = *mut HTTP_BANDWIDTH_LIMIT_INFO;
-STRUCT!{struct HTTP_FLOWRATE_INFO {
+STRUCT! {struct HTTP_FLOWRATE_INFO {
     Flags: HTTP_PROPERTY_FLAGS,
     MaxBandwidth: ULONG,
     MaxPeakBandwidth: ULONG,
@@ -84,19 +84,19 @@ STRUCT!{struct HTTP_FLOWRATE_INFO {
 pub type PHTTP_FLOWRATE_INFO = *mut HTTP_FLOWRATE_INFO;
 pub const HTTP_MIN_ALLOWED_BANDWIDTH_THROTTLING_RATE: ULONG = 1024;
 pub const HTTP_LIMIT_INFINITE: ULONG = !0;
-ENUM!{enum HTTP_SERVICE_CONFIG_TIMEOUT_KEY {
+ENUM! {enum HTTP_SERVICE_CONFIG_TIMEOUT_KEY {
     IdleConnectionTimeout = 0,
     HeaderWaitTimeout,
 }}
 pub type PHTTP_SERVICE_CONFIG_TIMEOUT_KEY = *mut HTTP_SERVICE_CONFIG_TIMEOUT_KEY;
 pub type HTTP_SERVICE_CONFIG_TIMEOUT_PARAM = USHORT;
 pub type PHTTP_SERVICE_CONFIG_TIMEOUT_PARAM = *mut USHORT;
-STRUCT!{struct HTTP_SERVICE_CONFIG_TIMEOUT_SET {
+STRUCT! {struct HTTP_SERVICE_CONFIG_TIMEOUT_SET {
     KeyDesc: HTTP_SERVICE_CONFIG_TIMEOUT_KEY,
     ParamDesc: HTTP_SERVICE_CONFIG_TIMEOUT_PARAM,
 }}
 pub type PHTTP_SERVICE_CONFIG_TIMEOUT_SET = *mut HTTP_SERVICE_CONFIG_TIMEOUT_SET;
-STRUCT!{struct HTTP_TIMEOUT_LIMIT_INFO {
+STRUCT! {struct HTTP_TIMEOUT_LIMIT_INFO {
     Flags: HTTP_PROPERTY_FLAGS,
     EntityBody: USHORT,
     DrainEntityBody: USHORT,
@@ -106,19 +106,19 @@ STRUCT!{struct HTTP_TIMEOUT_LIMIT_INFO {
     MinSendRate: ULONG,
 }}
 pub type PHTTP_TIMEOUT_LIMIT_INFO = *mut HTTP_TIMEOUT_LIMIT_INFO;
-STRUCT!{struct HTTP_LISTEN_ENDPOINT_INFO {
+STRUCT! {struct HTTP_LISTEN_ENDPOINT_INFO {
     Flags: HTTP_PROPERTY_FLAGS,
     EnableSharing: BOOLEAN,
 }}
 pub type PHTTP_LISTEN_ENDPOINT_INFO = *mut HTTP_LISTEN_ENDPOINT_INFO;
-STRUCT!{struct HTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS {
+STRUCT! {struct HTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS {
     DomainNameLength: USHORT,
     DomainName: PWSTR,
     RealmLength: USHORT,
     Realm: PWSTR,
 }}
 pub type PHTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS = *mut HTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS;
-STRUCT!{struct HTTP_SERVER_AUTHENTICATION_BASIC_PARAMS {
+STRUCT! {struct HTTP_SERVER_AUTHENTICATION_BASIC_PARAMS {
     RealmLength: USHORT,
     Realm: PWSTR,
 }}
@@ -128,11 +128,14 @@ pub const HTTP_AUTH_ENABLE_DIGEST: ULONG = 0x00000002;
 pub const HTTP_AUTH_ENABLE_NTLM: ULONG = 0x00000004;
 pub const HTTP_AUTH_ENABLE_NEGOTIATE: ULONG = 0x00000008;
 pub const HTTP_AUTH_ENABLE_KERBEROS: ULONG = 0x00000010;
-pub const HTTP_AUTH_ENABLE_ALL: ULONG = HTTP_AUTH_ENABLE_BASIC | HTTP_AUTH_ENABLE_DIGEST |
-    HTTP_AUTH_ENABLE_NTLM | HTTP_AUTH_ENABLE_NEGOTIATE | HTTP_AUTH_ENABLE_KERBEROS;
+pub const HTTP_AUTH_ENABLE_ALL: ULONG = HTTP_AUTH_ENABLE_BASIC
+    | HTTP_AUTH_ENABLE_DIGEST
+    | HTTP_AUTH_ENABLE_NTLM
+    | HTTP_AUTH_ENABLE_NEGOTIATE
+    | HTTP_AUTH_ENABLE_KERBEROS;
 pub const HTTP_AUTH_EX_FLAG_ENABLE_KERBEROS_CREDENTIAL_CACHING: UCHAR = 0x01;
 pub const HTTP_AUTH_EX_FLAG_CAPTURE_CREDENTIAL: UCHAR = 0x02;
-STRUCT!{struct HTTP_SERVER_AUTHENTICATION_INFO {
+STRUCT! {struct HTTP_SERVER_AUTHENTICATION_INFO {
     Flags: HTTP_PROPERTY_FLAGS,
     AuthSchemes: ULONG,
     ReceiveMutualAuth: BOOLEAN,
@@ -143,28 +146,28 @@ STRUCT!{struct HTTP_SERVER_AUTHENTICATION_INFO {
     BasicParams: HTTP_SERVER_AUTHENTICATION_BASIC_PARAMS,
 }}
 pub type PHTTP_SERVER_AUTHENTICATION_INFO = *mut HTTP_SERVER_AUTHENTICATION_INFO;
-ENUM!{enum HTTP_SERVICE_BINDING_TYPE {
+ENUM! {enum HTTP_SERVICE_BINDING_TYPE {
     HttpServiceBindingTypeNone = 0,
     HttpServiceBindingTypeW,
     HttpServiceBindingTypeA,
 }}
-STRUCT!{struct HTTP_SERVICE_BINDING_BASE {
+STRUCT! {struct HTTP_SERVICE_BINDING_BASE {
     Type: HTTP_SERVICE_BINDING_TYPE,
 }}
 pub type PHTTP_SERVICE_BINDING_BASE = *mut HTTP_SERVICE_BINDING_BASE;
-STRUCT!{struct HTTP_SERVICE_BINDING_A {
+STRUCT! {struct HTTP_SERVICE_BINDING_A {
     Base: HTTP_SERVICE_BINDING_BASE,
     Buffer: PCHAR,
     BufferSize: ULONG,
 }}
 pub type PHTTP_SERVICE_BINDING_A = *mut HTTP_SERVICE_BINDING_A;
-STRUCT!{struct HTTP_SERVICE_BINDING_W {
+STRUCT! {struct HTTP_SERVICE_BINDING_W {
     Base: HTTP_SERVICE_BINDING_BASE,
     Buffer: PWCHAR,
     BufferSize: ULONG,
 }}
 pub type PHTTP_SERVICE_BINDING_W = *mut HTTP_SERVICE_BINDING_W;
-ENUM!{enum HTTP_AUTHENTICATION_HARDENING_LEVELS {
+ENUM! {enum HTTP_AUTHENTICATION_HARDENING_LEVELS {
     HttpAuthenticationHardeningLegacy = 0,
     HttpAuthenticationHardeningMedium,
     HttpAuthenticationHardeningStrict,
@@ -175,14 +178,14 @@ pub const HTTP_CHANNEL_BIND_NO_SERVICE_NAME_CHECK: ULONG = 0x2;
 pub const HTTP_CHANNEL_BIND_DOTLESS_SERVICE: ULONG = 0x4;
 pub const HTTP_CHANNEL_BIND_SECURE_CHANNEL_TOKEN: ULONG = 0x8;
 pub const HTTP_CHANNEL_BIND_CLIENT_SERVICE: ULONG = 0x10;
-STRUCT!{struct HTTP_CHANNEL_BIND_INFO {
+STRUCT! {struct HTTP_CHANNEL_BIND_INFO {
     Hardening: HTTP_AUTHENTICATION_HARDENING_LEVELS,
     Flags: ULONG,
     ServiceNames: *mut PHTTP_SERVICE_BINDING_BASE,
     NumberOfServiceNames: ULONG,
 }}
 pub type PHTTP_CHANNEL_BIND_INFO = *mut HTTP_CHANNEL_BIND_INFO;
-STRUCT!{struct HTTP_REQUEST_CHANNEL_BIND_STATUS {
+STRUCT! {struct HTTP_REQUEST_CHANNEL_BIND_STATUS {
     ServiceName: PHTTP_SERVICE_BINDING_BASE,
     ChannelToken: PUCHAR,
     ChannelTokenSize: ULONG,
@@ -216,13 +219,13 @@ pub const HTTP_LOG_FIELD_URI: ULONG = 0x00800000;
 pub const HTTP_LOG_FIELD_SITE_ID: ULONG = 0x01000000;
 pub const HTTP_LOG_FIELD_REASON: ULONG = 0x02000000;
 pub const HTTP_LOG_FIELD_QUEUE_NAME: ULONG = 0x04000000;
-ENUM!{enum HTTP_LOGGING_TYPE {
+ENUM! {enum HTTP_LOGGING_TYPE {
     HttpLoggingTypeW3C,
     HttpLoggingTypeIIS,
     HttpLoggingTypeNCSA,
     HttpLoggingTypeRaw,
 }}
-ENUM!{enum HTTP_LOGGING_ROLLOVER_TYPE {
+ENUM! {enum HTTP_LOGGING_ROLLOVER_TYPE {
     HttpLoggingRolloverSize,
     HttpLoggingRolloverDaily,
     HttpLoggingRolloverWeekly,
@@ -234,7 +237,7 @@ pub const HTTP_LOGGING_FLAG_LOCAL_TIME_ROLLOVER: ULONG = 0x00000001;
 pub const HTTP_LOGGING_FLAG_USE_UTF8_CONVERSION: ULONG = 0x00000002;
 pub const HTTP_LOGGING_FLAG_LOG_ERRORS_ONLY: ULONG = 0x00000004;
 pub const HTTP_LOGGING_FLAG_LOG_SUCCESS_ONLY: ULONG = 0x00000008;
-STRUCT!{struct HTTP_LOGGING_INFO {
+STRUCT! {struct HTTP_LOGGING_INFO {
     Flags: HTTP_PROPERTY_FLAGS,
     LoggingFlags: ULONG,
     SoftwareName: PCWSTR,
@@ -251,18 +254,18 @@ STRUCT!{struct HTTP_LOGGING_INFO {
     pSecurityDescriptor: PSECURITY_DESCRIPTOR,
 }}
 pub type PHTTP_LOGGING_INFO = *mut HTTP_LOGGING_INFO;
-STRUCT!{struct HTTP_BINDING_INFO {
+STRUCT! {struct HTTP_BINDING_INFO {
     Flags: HTTP_PROPERTY_FLAGS,
     RequestQueueHandle: HANDLE,
 }}
 pub type PHTTP_BINDING_INFO = *mut HTTP_BINDING_INFO;
-ENUM!{enum HTTP_PROTECTION_LEVEL_TYPE {
+ENUM! {enum HTTP_PROTECTION_LEVEL_TYPE {
     HttpProtectionLevelUnrestricted,
     HttpProtectionLevelEdgeRestricted,
     HttpProtectionLevelRestricted,
 }}
 pub type PHTTP_PROTECTION_LEVEL_TYPE = *mut HTTP_PROTECTION_LEVEL_TYPE;
-STRUCT!{struct HTTP_PROTECTION_LEVEL_INFO {
+STRUCT! {struct HTTP_PROTECTION_LEVEL_INFO {
     Flags: HTTP_PROPERTY_FLAGS,
     Level: HTTP_PROTECTION_LEVEL_TYPE,
 }}
@@ -292,20 +295,32 @@ pub type PHTTP_URL_GROUP_ID = *mut HTTP_OPAQUE_ID;
 pub type HTTP_SERVER_SESSION_ID = HTTP_OPAQUE_ID;
 pub type PHTTP_SERVER_SESSION_ID = *mut HTTP_OPAQUE_ID;
 pub const HTTP_BYTE_RANGE_TO_EOF: ULONGLONG = !0;
-STRUCT!{struct HTTP_BYTE_RANGE {
+STRUCT! {struct HTTP_BYTE_RANGE {
     StartingOffset: ULARGE_INTEGER,
     Length: ULARGE_INTEGER,
 }}
 pub type PHTTP_BYTE_RANGE = *mut HTTP_BYTE_RANGE;
-STRUCT!{struct HTTP_VERSION {
+STRUCT! {struct HTTP_VERSION {
     MajorVersion: USHORT,
     MinorVersion: USHORT,
 }}
 pub type PHTTP_VERSION = *mut HTTP_VERSION;
-pub const HTTP_VERSION_UNKNOWN: HTTP_VERSION = HTTP_VERSION { MajorVersion: 0, MinorVersion: 0 };
-pub const HTTP_VERSION_0_9: HTTP_VERSION = HTTP_VERSION { MajorVersion: 0, MinorVersion: 9 };
-pub const HTTP_VERSION_1_0: HTTP_VERSION = HTTP_VERSION { MajorVersion: 1, MinorVersion: 0 };
-pub const HTTP_VERSION_1_1: HTTP_VERSION = HTTP_VERSION { MajorVersion: 1, MinorVersion: 1 };
+pub const HTTP_VERSION_UNKNOWN: HTTP_VERSION = HTTP_VERSION {
+    MajorVersion: 0,
+    MinorVersion: 0,
+};
+pub const HTTP_VERSION_0_9: HTTP_VERSION = HTTP_VERSION {
+    MajorVersion: 0,
+    MinorVersion: 9,
+};
+pub const HTTP_VERSION_1_0: HTTP_VERSION = HTTP_VERSION {
+    MajorVersion: 1,
+    MinorVersion: 0,
+};
+pub const HTTP_VERSION_1_1: HTTP_VERSION = HTTP_VERSION {
+    MajorVersion: 1,
+    MinorVersion: 1,
+};
 #[inline]
 pub fn HTTP_SET_VERSION(mut version: HTTP_VERSION, major: USHORT, minor: USHORT) {
     version.MajorVersion = major;
@@ -335,7 +350,7 @@ pub fn HTTP_GREATER_EQUAL_VERSION(version: HTTP_VERSION, major: USHORT, minor: U
 pub fn HTTP_LESS_EQUAL_VERSION(version: HTTP_VERSION, major: USHORT, minor: USHORT) -> bool {
     !HTTP_GREATER_VERSION(version, major, minor)
 }
-ENUM!{enum HTTP_VERB {
+ENUM! {enum HTTP_VERB {
     HttpVerbUnparsed,
     HttpVerbUnknown,
     HttpVerbInvalid,
@@ -359,7 +374,7 @@ ENUM!{enum HTTP_VERB {
     HttpVerbMaximum,
 }}
 pub type PHTTP_VERB = *mut HTTP_VERB;
-ENUM!{enum HTTP_HEADER_ID {
+ENUM! {enum HTTP_HEADER_ID {
     HttpHeaderCacheControl = 0,
     HttpHeaderConnection = 1,
     HttpHeaderDate = 2,
@@ -416,27 +431,27 @@ ENUM!{enum HTTP_HEADER_ID {
     HttpHeaderMaximum = 41,
 }}
 pub type PHTTP_HEADER_ID = *mut HTTP_HEADER_ID;
-STRUCT!{struct HTTP_KNOWN_HEADER {
+STRUCT! {struct HTTP_KNOWN_HEADER {
     RawValueLength: USHORT,
     pRawValue: PCSTR,
 }}
 pub type PHTTP_KNOWN_HEADER = *mut HTTP_KNOWN_HEADER;
-STRUCT!{struct HTTP_UNKNOWN_HEADER {
+STRUCT! {struct HTTP_UNKNOWN_HEADER {
     NameLength: USHORT,
     RawValueLength: USHORT,
     pName: PCSTR,
     pRawValue: PCSTR,
 }}
 pub type PHTTP_UNKNOWN_HEADER = *mut HTTP_UNKNOWN_HEADER;
-ENUM!{enum HTTP_LOG_DATA_TYPE {
+ENUM! {enum HTTP_LOG_DATA_TYPE {
     HttpLogDataTypeFields = 0,
 }}
 pub type PHTTP_LOG_DATA_TYPE = *mut HTTP_LOG_DATA_TYPE;
-STRUCT!{struct HTTP_LOG_DATA {
+STRUCT! {struct HTTP_LOG_DATA {
     Type: HTTP_LOG_DATA_TYPE,
 }}
 pub type PHTTP_LOG_DATA = *mut HTTP_LOG_DATA;
-STRUCT!{struct HTTP_LOG_FIELDS_DATA {
+STRUCT! {struct HTTP_LOG_FIELDS_DATA {
     Base: HTTP_LOG_DATA,
     UserNameLength: USHORT,
     UriStemLength: USHORT,
@@ -469,7 +484,7 @@ STRUCT!{struct HTTP_LOG_FIELDS_DATA {
     SubStatus: USHORT,
 }}
 pub type PHTTP_LOG_FIELDS_DATA = *mut HTTP_LOG_FIELDS_DATA;
-ENUM!{enum HTTP_DATA_CHUNK_TYPE {
+ENUM! {enum HTTP_DATA_CHUNK_TYPE {
     HttpDataChunkFromMemory,
     HttpDataChunkFromFileHandle,
     HttpDataChunkFromFragmentCache,
@@ -477,35 +492,35 @@ ENUM!{enum HTTP_DATA_CHUNK_TYPE {
     HttpDataChunkMaximum,
 }}
 pub type PHTTP_DATA_CHUNK_TYPE = *mut HTTP_DATA_CHUNK_TYPE;
-STRUCT!{struct HTTP_DATA_CHUNK_FromMemory {
+STRUCT! {struct HTTP_DATA_CHUNK_FromMemory {
     pBuffer: PVOID,
     BufferLength: ULONG,
 }}
-STRUCT!{struct HTTP_DATA_CHUNK_FromFileHandle {
+STRUCT! {struct HTTP_DATA_CHUNK_FromFileHandle {
     ByteRange: HTTP_BYTE_RANGE,
     FileHandle: HANDLE,
 }}
-STRUCT!{struct HTTP_DATA_CHUNK_FromFragmentCache {
+STRUCT! {struct HTTP_DATA_CHUNK_FromFragmentCache {
     FragmentNameLength: USHORT,
     pFragmentName: PCWSTR,
 }}
-STRUCT!{struct HTTP_DATA_CHUNK_FromFragmentCacheEx {
+STRUCT! {struct HTTP_DATA_CHUNK_FromFragmentCacheEx {
     ByteRange: HTTP_BYTE_RANGE,
     pFragmentName: PCWSTR,
 }}
-UNION!{union HTTP_DATA_CHUNK_u {
+UNION! {union HTTP_DATA_CHUNK_u {
     [u64; 3],
     FromMemory FromMemory_mut: HTTP_DATA_CHUNK_FromMemory,
     FromFileHandle FromFileHandle_mut: HTTP_DATA_CHUNK_FromFileHandle,
     FromFragmentCache FromFragmentCache_mut: HTTP_DATA_CHUNK_FromFragmentCache,
     FromFragmentCacheEx FromFragmentCacheEx_mut: HTTP_DATA_CHUNK_FromFragmentCacheEx,
 }}
-STRUCT!{struct HTTP_DATA_CHUNK {
+STRUCT! {struct HTTP_DATA_CHUNK {
     DataChunkType: HTTP_DATA_CHUNK_TYPE,
     u: HTTP_DATA_CHUNK_u,
 }}
 pub type PHTTP_DATA_CHUNK = *mut HTTP_DATA_CHUNK;
-STRUCT!{struct HTTP_REQUEST_HEADERS {
+STRUCT! {struct HTTP_REQUEST_HEADERS {
     UnknownHeaderCount: USHORT,
     pUnknownHeaders: PHTTP_UNKNOWN_HEADER,
     TrailerCount: USHORT,
@@ -513,7 +528,7 @@ STRUCT!{struct HTTP_REQUEST_HEADERS {
     KnownHeaders: [HTTP_KNOWN_HEADER; 41], // FIXME HttpHeaderRequestMaximum
 }}
 pub type PHTTP_REQUEST_HEADERS = *mut HTTP_REQUEST_HEADERS;
-STRUCT!{struct HTTP_RESPONSE_HEADERS {
+STRUCT! {struct HTTP_RESPONSE_HEADERS {
     UnknownHeaderCount: USHORT,
     pUnknownHeaders: PHTTP_UNKNOWN_HEADER,
     TrailerCount: USHORT,
@@ -521,12 +536,12 @@ STRUCT!{struct HTTP_RESPONSE_HEADERS {
     KnownHeaders: [HTTP_KNOWN_HEADER; 30], // FIXME HttpHeaderResponseMaximum
 }}
 pub type PHTTP_RESPONSE_HEADERS = *mut HTTP_RESPONSE_HEADERS;
-STRUCT!{struct HTTP_TRANSPORT_ADDRESS {
+STRUCT! {struct HTTP_TRANSPORT_ADDRESS {
     pRemoteAddress: PSOCKADDR,
     pLocalAddress: PSOCKADDR,
 }}
 pub type PHTTP_TRANSPORT_ADDRESS = *mut HTTP_TRANSPORT_ADDRESS;
-STRUCT!{struct HTTP_COOKED_URL {
+STRUCT! {struct HTTP_COOKED_URL {
     FullUrlLength: USHORT,
     HostLength: USHORT,
     AbsPathLength: USHORT,
@@ -539,13 +554,13 @@ STRUCT!{struct HTTP_COOKED_URL {
 pub type PHTTP_COOKED_URL = *mut HTTP_COOKED_URL;
 pub type HTTP_URL_CONTEXT = ULONGLONG;
 pub const HTTP_URL_FLAG_REMOVE_ALL: ULONG = 0x00000001;
-ENUM!{enum HTTP_AUTH_STATUS {
+ENUM! {enum HTTP_AUTH_STATUS {
     HttpAuthStatusSuccess,
     HttpAuthStatusNotAuthenticated,
     HttpAuthStatusFailure,
 }}
 pub type PHTTP_AUTH_STATUS = *mut HTTP_AUTH_STATUS;
-ENUM!{enum HTTP_REQUEST_AUTH_TYPE {
+ENUM! {enum HTTP_REQUEST_AUTH_TYPE {
     HttpRequestAuthTypeNone = 0,
     HttpRequestAuthTypeBasic,
     HttpRequestAuthTypeDigest,
@@ -554,7 +569,7 @@ ENUM!{enum HTTP_REQUEST_AUTH_TYPE {
     HttpRequestAuthTypeKerberos,
 }}
 pub type PHTTP_REQUEST_AUTH_TYPE = *mut HTTP_REQUEST_AUTH_TYPE;
-STRUCT!{struct HTTP_SSL_CLIENT_CERT_INFO {
+STRUCT! {struct HTTP_SSL_CLIENT_CERT_INFO {
     CertFlags: ULONG,
     CertEncodedSize: ULONG,
     pCertEncoded: PUCHAR,
@@ -563,7 +578,7 @@ STRUCT!{struct HTTP_SSL_CLIENT_CERT_INFO {
 }}
 pub type PHTTP_SSL_CLIENT_CERT_INFO = *mut HTTP_SSL_CLIENT_CERT_INFO;
 pub const HTTP_RECEIVE_SECURE_CHANNEL_TOKEN: ULONG = 0x1;
-STRUCT!{struct HTTP_SSL_INFO {
+STRUCT! {struct HTTP_SSL_INFO {
     ServerCertKeySize: USHORT,
     ConnectionKeySize: USHORT,
     ServerCertIssuerSize: ULONG,
@@ -574,18 +589,18 @@ STRUCT!{struct HTTP_SSL_INFO {
     SslClientCertNegotiated: ULONG,
 }}
 pub type PHTTP_SSL_INFO = *mut HTTP_SSL_INFO;
-ENUM!{enum HTTP_REQUEST_INFO_TYPE {
+ENUM! {enum HTTP_REQUEST_INFO_TYPE {
     HttpRequestInfoTypeAuth,
     HttpRequestInfoTypeChannelBind,
 }}
-STRUCT!{struct HTTP_REQUEST_INFO {
+STRUCT! {struct HTTP_REQUEST_INFO {
     InfoType: HTTP_REQUEST_INFO_TYPE,
     InfoLength: ULONG,
     pInfo: PVOID,
 }}
 pub type PHTTP_REQUEST_INFO = *mut HTTP_REQUEST_INFO;
 pub const HTTP_REQUEST_AUTH_FLAG_TOKEN_FOR_CACHED_CRED: ULONG = 0x00000001;
-STRUCT!{struct HTTP_REQUEST_AUTH_INFO {
+STRUCT! {struct HTTP_REQUEST_AUTH_INFO {
     AuthStatus: HTTP_AUTH_STATUS,
     SecStatus: SECURITY_STATUS,
     Flags: ULONG,
@@ -601,7 +616,7 @@ STRUCT!{struct HTTP_REQUEST_AUTH_INFO {
     pPackageName: PWSTR,
 }}
 pub type PHTTP_REQUEST_AUTH_INFO = *mut HTTP_REQUEST_AUTH_INFO;
-STRUCT!{struct HTTP_REQUEST_V1 {
+STRUCT! {struct HTTP_REQUEST_V1 {
     Flags: ULONG,
     ConnectionId: HTTP_CONNECTION_ID,
     RequestId: HTTP_REQUEST_ID,
@@ -622,7 +637,7 @@ STRUCT!{struct HTTP_REQUEST_V1 {
     pSslInfo: PHTTP_SSL_INFO,
 }}
 pub type PHTTP_REQUEST_V1 = *mut HTTP_REQUEST_V1;
-STRUCT!{struct HTTP_REQUEST_V2 {
+STRUCT! {struct HTTP_REQUEST_V2 {
     Base: HTTP_REQUEST_V1,
     RequestInfoCount: USHORT,
     pRequestInfo: PHTTP_REQUEST_INFO,
@@ -632,7 +647,7 @@ pub type HTTP_REQUEST = HTTP_REQUEST_V2;
 pub type PHTTP_REQUEST = *mut HTTP_REQUEST;
 pub const HTTP_REQUEST_FLAG_MORE_ENTITY_BODY_EXISTS: ULONG = 0x00000001;
 pub const HTTP_REQUEST_FLAG_IP_ROUTED: ULONG = 0x00000002;
-STRUCT!{struct HTTP_RESPONSE_V1 {
+STRUCT! {struct HTTP_RESPONSE_V1 {
     Flags: ULONG,
     Version: HTTP_VERSION,
     StatusCode: USHORT,
@@ -644,28 +659,28 @@ STRUCT!{struct HTTP_RESPONSE_V1 {
 }}
 pub type PHTTP_RESPONSE_V1 = *mut HTTP_RESPONSE_V1;
 pub const HTTP_RESPONSE_FLAG_MULTIPLE_ENCODINGS_AVAILABLE: ULONG = 0x00000001;
-ENUM!{enum HTTP_RESPONSE_INFO_TYPE {
+ENUM! {enum HTTP_RESPONSE_INFO_TYPE {
     HttpResponseInfoTypeMultipleKnownHeaders,
     HttpResponseInfoTypeAuthenticationProperty,
     HttpResponseInfoTypeQoSProperty,
     HttpResponseInfoTypeChannelBind,
 }}
 pub type PHTTP_RESPONSE_INFO_TYPE = *mut HTTP_RESPONSE_INFO_TYPE;
-STRUCT!{struct HTTP_RESPONSE_INFO {
+STRUCT! {struct HTTP_RESPONSE_INFO {
     Type: HTTP_RESPONSE_INFO_TYPE,
     Length: ULONG,
     pInfo: PVOID,
 }}
 pub type PHTTP_RESPONSE_INFO = *mut HTTP_RESPONSE_INFO;
 pub const HTTP_RESPONSE_INFO_FLAGS_PRESERVE_ORDER: ULONG = 0x00000001;
-STRUCT!{struct HTTP_MULTIPLE_KNOWN_HEADERS {
+STRUCT! {struct HTTP_MULTIPLE_KNOWN_HEADERS {
     HeaderId: HTTP_HEADER_ID,
     Flags: ULONG,
     KnownHeaderCount: USHORT,
     KnownHeaders: PHTTP_KNOWN_HEADER,
 }}
 pub type PHTTP_MULTIPLE_KNOWN_HEADERS = *mut HTTP_MULTIPLE_KNOWN_HEADERS;
-STRUCT!{struct HTTP_RESPONSE_V2 {
+STRUCT! {struct HTTP_RESPONSE_V2 {
     Base: HTTP_RESPONSE_V1,
     ResponseInfoCount: USHORT,
     pResponseInfo: PHTTP_RESPONSE_INFO,
@@ -673,7 +688,7 @@ STRUCT!{struct HTTP_RESPONSE_V2 {
 pub type PHTTP_RESPONSE_V2 = *mut HTTP_RESPONSE_V2;
 pub type HTTP_RESPONSE = HTTP_RESPONSE_V2;
 pub type PHTTP_RESPONSE = *mut HTTP_RESPONSE;
-STRUCT!{struct HTTPAPI_VERSION {
+STRUCT! {struct HTTPAPI_VERSION {
     HttpApiMajorVersion: USHORT,
     HttpApiMinorVersion: USHORT,
 }}
@@ -692,13 +707,13 @@ pub fn HTTPAPI_EQUAL_VERSION(version: HTTPAPI_VERSION, major: USHORT, minor: USH
 }
 #[inline]
 pub fn HTTPAPI_GREATER_VERSION(version: HTTPAPI_VERSION, major: USHORT, minor: USHORT) -> bool {
-    version.HttpApiMajorVersion > major ||
-    (version.HttpApiMajorVersion == major && version.HttpApiMinorVersion > minor)
+    version.HttpApiMajorVersion > major
+        || (version.HttpApiMajorVersion == major && version.HttpApiMinorVersion > minor)
 }
 #[inline]
 pub fn HTTPAPI_LESS_VERSION(version: HTTPAPI_VERSION, major: USHORT, minor: USHORT) -> bool {
-    version.HttpApiMajorVersion < major ||
-    (version.HttpApiMajorVersion == major && version.HttpApiMinorVersion < minor)
+    version.HttpApiMajorVersion < major
+        || (version.HttpApiMajorVersion == major && version.HttpApiMinorVersion < minor)
 }
 #[inline]
 pub fn HTTPAPI_VERSION_GREATER_OR_EQUAL(
@@ -708,19 +723,19 @@ pub fn HTTPAPI_VERSION_GREATER_OR_EQUAL(
 ) -> bool {
     !HTTPAPI_LESS_VERSION(version, major, minor)
 }
-ENUM!{enum HTTP_CACHE_POLICY_TYPE {
+ENUM! {enum HTTP_CACHE_POLICY_TYPE {
     HttpCachePolicyNocache,
     HttpCachePolicyUserInvalidates,
     HttpCachePolicyTimeToLive,
     HttpCachePolicyMaximum,
 }}
 pub type PHTTP_CACHE_POLICY_TYPE = *mut HTTP_CACHE_POLICY_TYPE;
-STRUCT!{struct HTTP_CACHE_POLICY {
+STRUCT! {struct HTTP_CACHE_POLICY {
     Policy: HTTP_CACHE_POLICY_TYPE,
     SecondsToLive: ULONG,
 }}
 pub type PHTTP_CACHE_POLICY = *mut HTTP_CACHE_POLICY;
-ENUM!{enum HTTP_SERVICE_CONFIG_ID {
+ENUM! {enum HTTP_SERVICE_CONFIG_ID {
     HttpServiceConfigIPListenList,
     HttpServiceConfigSSLCertInfo,
     HttpServiceConfigUrlAclInfo,
@@ -731,26 +746,26 @@ ENUM!{enum HTTP_SERVICE_CONFIG_ID {
     HttpServiceConfigMax,
 }}
 pub type PHTTP_SERVICE_CONFIG_ID = *mut HTTP_SERVICE_CONFIG_ID;
-ENUM!{enum HTTP_SERVICE_CONFIG_QUERY_TYPE {
+ENUM! {enum HTTP_SERVICE_CONFIG_QUERY_TYPE {
     HttpServiceConfigQueryExact,
     HttpServiceConfigQueryNext,
     HttpServiceConfigQueryMax,
 }}
 pub type PHTTP_SERVICE_CONFIG_QUERY_TYPE = *mut HTTP_SERVICE_CONFIG_QUERY_TYPE;
-STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_KEY {
+STRUCT! {struct HTTP_SERVICE_CONFIG_SSL_KEY {
     pIpPort: PSOCKADDR,
 }}
 pub type PHTTP_SERVICE_CONFIG_SSL_KEY = *mut HTTP_SERVICE_CONFIG_SSL_KEY;
-STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_SNI_KEY {
+STRUCT! {struct HTTP_SERVICE_CONFIG_SSL_SNI_KEY {
     IpPort: SOCKADDR_STORAGE,
     Host: PWSTR,
 }}
 pub type PHTTP_SERVICE_CONFIG_SSL_SNI_KEY = *mut HTTP_SERVICE_CONFIG_SSL_SNI_KEY;
-STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_CCS_KEY {
+STRUCT! {struct HTTP_SERVICE_CONFIG_SSL_CCS_KEY {
     LocalAddress: SOCKADDR_STORAGE,
 }}
 pub type PHTTP_SERVICE_CONFIG_SSL_CCS_KEY = *mut HTTP_SERVICE_CONFIG_SSL_CCS_KEY;
-STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_PARAM {
+STRUCT! {struct HTTP_SERVICE_CONFIG_SSL_PARAM {
     SslHashLength: ULONG,
     pSslHash: PVOID,
     AppId: GUID,
@@ -766,94 +781,84 @@ pub type PHTTP_SERVICE_CONFIG_SSL_PARAM = *mut HTTP_SERVICE_CONFIG_SSL_PARAM;
 pub const HTTP_SERVICE_CONFIG_SSL_FLAG_USE_DS_MAPPER: DWORD = 0x00000001;
 pub const HTTP_SERVICE_CONFIG_SSL_FLAG_NEGOTIATE_CLIENT_CERT: DWORD = 0x00000002;
 pub const HTTP_SERVICE_CONFIG_SSL_FLAG_NO_RAW_FILTER: DWORD = 0x00000004;
-STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_SET {
+STRUCT! {struct HTTP_SERVICE_CONFIG_SSL_SET {
     KeyDesc: HTTP_SERVICE_CONFIG_SSL_KEY,
     ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM,
 }}
 pub type PHTTP_SERVICE_CONFIG_SSL_SET = *mut HTTP_SERVICE_CONFIG_SSL_SET;
-STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_SNI_SET {
+STRUCT! {struct HTTP_SERVICE_CONFIG_SSL_SNI_SET {
     KeyDesc: HTTP_SERVICE_CONFIG_SSL_SNI_KEY,
     ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM,
 }}
 pub type PHTTP_SERVICE_CONFIG_SSL_SNI_SET = *mut HTTP_SERVICE_CONFIG_SSL_SNI_SET;
-STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_CCS_SET {
+STRUCT! {struct HTTP_SERVICE_CONFIG_SSL_CCS_SET {
     KeyDesc: HTTP_SERVICE_CONFIG_SSL_CCS_KEY,
     ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM,
 }}
 pub type PHTTP_SERVICE_CONFIG_SSL_CCS_SET = *mut HTTP_SERVICE_CONFIG_SSL_CCS_SET;
-STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_QUERY {
+STRUCT! {struct HTTP_SERVICE_CONFIG_SSL_QUERY {
     QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE,
     KeyDesc: HTTP_SERVICE_CONFIG_SSL_KEY,
     dwToken: DWORD,
 }}
 pub type PHTTP_SERVICE_CONFIG_SSL_QUERY = *mut HTTP_SERVICE_CONFIG_SSL_QUERY;
-STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_SNI_QUERY {
+STRUCT! {struct HTTP_SERVICE_CONFIG_SSL_SNI_QUERY {
     QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE,
     KeyDesc: HTTP_SERVICE_CONFIG_SSL_SNI_KEY,
     dwToken: DWORD,
 }}
 pub type PHTTP_SERVICE_CONFIG_SSL_SNI_QUERY = *mut HTTP_SERVICE_CONFIG_SSL_SNI_QUERY;
-STRUCT!{struct HTTP_SERVICE_CONFIG_SSL_CCS_QUERY {
+STRUCT! {struct HTTP_SERVICE_CONFIG_SSL_CCS_QUERY {
     QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE,
     KeyDesc: HTTP_SERVICE_CONFIG_SSL_CCS_KEY,
     dwToken: DWORD,
 }}
 pub type PHTTP_SERVICE_CONFIG_SSL_CCS_QUERY = *mut HTTP_SERVICE_CONFIG_SSL_CCS_QUERY;
-STRUCT!{struct HTTP_SERVICE_CONFIG_IP_LISTEN_PARAM {
+STRUCT! {struct HTTP_SERVICE_CONFIG_IP_LISTEN_PARAM {
     AddrLength: USHORT,
     pAddress: PSOCKADDR,
 }}
 pub type PHTTP_SERVICE_CONFIG_IP_LISTEN_PARAM = *mut HTTP_SERVICE_CONFIG_IP_LISTEN_PARAM;
-STRUCT!{struct HTTP_SERVICE_CONFIG_IP_LISTEN_QUERY {
+STRUCT! {struct HTTP_SERVICE_CONFIG_IP_LISTEN_QUERY {
     AddrCount: ULONG,
     AddrList: [SOCKADDR_STORAGE; ANYSIZE_ARRAY],
 }}
 pub type PHTTP_SERVICE_CONFIG_IP_LISTEN_QUERY = *mut HTTP_SERVICE_CONFIG_IP_LISTEN_QUERY;
-STRUCT!{struct HTTP_SERVICE_CONFIG_URLACL_KEY {
+STRUCT! {struct HTTP_SERVICE_CONFIG_URLACL_KEY {
     pUrlPrefix: PWSTR,
 }}
 pub type PHTTP_SERVICE_CONFIG_URLACL_KEY = *mut HTTP_SERVICE_CONFIG_URLACL_KEY;
-STRUCT!{struct HTTP_SERVICE_CONFIG_URLACL_PARAM {
+STRUCT! {struct HTTP_SERVICE_CONFIG_URLACL_PARAM {
     pStringSecurityDescriptor: PWSTR,
 }}
 pub type PHTTP_SERVICE_CONFIG_URLACL_PARAM = *mut HTTP_SERVICE_CONFIG_URLACL_PARAM;
-STRUCT!{struct HTTP_SERVICE_CONFIG_URLACL_SET {
+STRUCT! {struct HTTP_SERVICE_CONFIG_URLACL_SET {
     KeyDesc: HTTP_SERVICE_CONFIG_URLACL_KEY,
     ParamDesc: HTTP_SERVICE_CONFIG_URLACL_PARAM,
 }}
 pub type PHTTP_SERVICE_CONFIG_URLACL_SET = *mut HTTP_SERVICE_CONFIG_URLACL_SET;
-STRUCT!{struct HTTP_SERVICE_CONFIG_URLACL_QUERY {
+STRUCT! {struct HTTP_SERVICE_CONFIG_URLACL_QUERY {
     QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE,
     KeyDesc: HTTP_SERVICE_CONFIG_URLACL_KEY,
     dwToken: DWORD,
 }}
 pub type PHTTP_SERVICE_CONFIG_URLACL_QUERY = *mut HTTP_SERVICE_CONFIG_URLACL_QUERY;
-ENUM!{enum HTTP_SERVICE_CONFIG_CACHE_KEY {
+ENUM! {enum HTTP_SERVICE_CONFIG_CACHE_KEY {
     MaxCacheResponseSize = 0,
     CacheRangeChunkSize,
 }}
 pub type PHTTP_SERVICE_CONFIG_CACHE_KEY = *mut HTTP_SERVICE_CONFIG_CACHE_KEY;
 pub type HTTP_SERVICE_CONFIG_CACHE_PARAM = ULONG;
 pub type PHTTP_SERVICE_CONFIG_CACHE_PARAM = *mut ULONG;
-STRUCT!{struct HTTP_SERVICE_CONFIG_CACHE_SET {
+STRUCT! {struct HTTP_SERVICE_CONFIG_CACHE_SET {
     KeyDesc: HTTP_SERVICE_CONFIG_CACHE_KEY,
     ParamDesc: HTTP_SERVICE_CONFIG_CACHE_PARAM,
 }}
 pub type PHTTP_SERVICE_CONFIG_CACHE_SET = *mut HTTP_SERVICE_CONFIG_CACHE_SET;
 extern "system" {
-    pub fn HttpInitialize(
-        Version: HTTPAPI_VERSION,
-        Flags: ULONG,
-        pReserved: PVOID,
-    ) -> ULONG;
-    pub fn HttpTerminate(
-        Flags: ULONG,
-        pReserved: PVOID,
-    ) -> ULONG;
-    pub fn HttpCreateHttpHandle(
-        pReqQueueHandle: HANDLE,
-        Reserved: ULONG,
-    ) -> ULONG;
+    pub fn HttpInitialize(Version: HTTPAPI_VERSION, Flags: ULONG, pReserved: PVOID) -> ULONG;
+    pub fn HttpTerminate(Flags: ULONG, pReserved: PVOID) -> ULONG;
+    pub fn HttpCreateHttpHandle(pReqQueueHandle: HANDLE, Reserved: ULONG) -> ULONG;
     pub fn HttpCreateRequestQueue(
         Version: HTTPAPI_VERSION,
         pName: PCWSTR,
@@ -861,9 +866,7 @@ extern "system" {
         Flags: ULONG,
         pReqQueueHandle: PHANDLE,
     ) -> ULONG;
-    pub fn HttpCloseRequestQueue(
-        ReqQueueHandle: HANDLE,
-    ) -> ULONG;
+    pub fn HttpCloseRequestQueue(ReqQueueHandle: HANDLE) -> ULONG;
     pub fn HttpSetRequestQueueProperty(
         Handle: HANDLE,
         Property: HTTP_SERVER_PROPERTY,
@@ -881,9 +884,7 @@ extern "system" {
         pReturnLength: PULONG,
         pReserved: PVOID,
     ) -> ULONG;
-    pub fn HttpShutdownRequestQueue(
-        ReqQueueHandle: HANDLE,
-    ) -> ULONG;
+    pub fn HttpShutdownRequestQueue(ReqQueueHandle: HANDLE) -> ULONG;
     pub fn HttpReceiveClientCertificate(
         ReqQueueHandle: HANDLE,
         ConnectionId: HTTP_CONNECTION_ID,
@@ -898,9 +899,7 @@ extern "system" {
         pServerSessionId: PHTTP_SERVER_SESSION_ID,
         Reserved: ULONG,
     ) -> ULONG;
-    pub fn HttpCloseServerSession(
-        ServerSessionId: HTTP_SERVER_SESSION_ID,
-    ) -> ULONG;
+    pub fn HttpCloseServerSession(ServerSessionId: HTTP_SERVER_SESSION_ID) -> ULONG;
     pub fn HttpQueryServerSessionProperty(
         ServerSessionId: HTTP_SERVER_SESSION_ID,
         Property: HTTP_SERVER_PROPERTY,
@@ -919,18 +918,13 @@ extern "system" {
         pFullyQualifiedUrl: PCWSTR,
         pReserved: PVOID,
     ) -> ULONG;
-    pub fn HttpRemoveUrl(
-        ReqQueueHandle: HANDLE,
-        pFullyQualifiedUrl: PCWSTR,
-    ) -> ULONG;
+    pub fn HttpRemoveUrl(ReqQueueHandle: HANDLE, pFullyQualifiedUrl: PCWSTR) -> ULONG;
     pub fn HttpCreateUrlGroup(
         ServerSessionId: HTTP_SERVER_SESSION_ID,
         pUrlGroupId: PHTTP_URL_GROUP_ID,
         Reserved: ULONG,
     ) -> ULONG;
-    pub fn HttpCloseUrlGroup(
-        UrlGroupId: HTTP_URL_GROUP_ID,
-    ) -> ULONG;
+    pub fn HttpCloseUrlGroup(UrlGroupId: HTTP_URL_GROUP_ID) -> ULONG;
     pub fn HttpAddUrlToUrlGroup(
         UrlGroupId: HTTP_URL_GROUP_ID,
         pFullyQualifiedUrl: PCWSTR,
@@ -1019,10 +1013,7 @@ extern "system" {
         RequestId: HTTP_REQUEST_ID,
         pOverlapped: LPOVERLAPPED,
     ) -> ULONG;
-    pub fn HttpWaitForDemandStart(
-        ReqQueueHandle: HANDLE,
-        pOverlapped: LPOVERLAPPED,
-    ) -> ULONG;
+    pub fn HttpWaitForDemandStart(ReqQueueHandle: HANDLE, pOverlapped: LPOVERLAPPED) -> ULONG;
     pub fn HttpFlushResponseCache(
         ReqQueueHandle: HANDLE,
         pUrlPrefix: PCWSTR,

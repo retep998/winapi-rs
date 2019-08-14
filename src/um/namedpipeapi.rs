@@ -13,13 +13,8 @@ extern "system" {
         lpPipeAttributes: LPSECURITY_ATTRIBUTES,
         nSize: DWORD,
     ) -> BOOL;
-    pub fn ConnectNamedPipe(
-        hNamedPipe: HANDLE,
-        lpOverlapped: LPOVERLAPPED,
-    ) -> BOOL;
-    pub fn DisconnectNamedPipe(
-        hNamedPipe: HANDLE,
-    ) -> BOOL;
+    pub fn ConnectNamedPipe(hNamedPipe: HANDLE, lpOverlapped: LPOVERLAPPED) -> BOOL;
+    pub fn DisconnectNamedPipe(hNamedPipe: HANDLE) -> BOOL;
     pub fn SetNamedPipeHandleState(
         hNamedPipe: HANDLE,
         lpMode: LPDWORD,
@@ -53,18 +48,13 @@ extern "system" {
         nDefaultTimeOut: DWORD,
         lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
     ) -> HANDLE;
-    pub fn WaitNamedPipeW(
-        lpNamedPipeName: LPCWSTR,
-        nTimeOut: DWORD,
-    ) -> BOOL;
+    pub fn WaitNamedPipeW(lpNamedPipeName: LPCWSTR, nTimeOut: DWORD) -> BOOL;
     pub fn GetNamedPipeClientComputerNameW(
         Pipe: HANDLE,
         ClientComputerName: LPWSTR,
         ClientComputerNameLength: ULONG,
     ) -> BOOL;
-    pub fn ImpersonateNamedPipeClient(
-        hNamedPipe: HANDLE,
-    ) -> BOOL;
+    pub fn ImpersonateNamedPipeClient(hNamedPipe: HANDLE) -> BOOL;
     pub fn GetNamedPipeInfo(
         hNamedPipe: HANDLE,
         lpFlags: LPDWORD,

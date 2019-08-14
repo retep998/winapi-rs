@@ -9,7 +9,7 @@ use shared::minwindef::{BOOL, BYTE, DWORD, FILETIME, LPBYTE, LPDWORD, LPVOID, PD
 use shared::windef::HWND;
 use um::wincrypt::ALG_ID;
 use um::winnt::{BOOLEAN, HANDLE, LARGE_INTEGER, LPCWSTR, PHANDLE, PVOID, PWCHAR, WCHAR};
-DECLARE_HANDLE!{SAFER_LEVEL_HANDLE, __SAFER_LEVEL_HANDLE}
+DECLARE_HANDLE! {SAFER_LEVEL_HANDLE, __SAFER_LEVEL_HANDLE}
 pub const SAFER_SCOPEID_MACHINE: DWORD = 1;
 pub const SAFER_SCOPEID_USER: DWORD = 2;
 pub const SAFER_LEVELID_DISALLOWED: DWORD = 0x00000;
@@ -32,7 +32,7 @@ pub const SAFER_CRITERIA_AUTHENTICODE: DWORD = 0x00008;
 pub const SAFER_CRITERIA_URLZONE: DWORD = 0x00010;
 pub const SAFER_CRITERIA_APPX_PACKAGE: DWORD = 0x00020;
 pub const SAFER_CRITERIA_IMAGEPATH_NT: DWORD = 0x01000;
-STRUCT!{struct SAFER_CODE_PROPERTIES_V1 {
+STRUCT! {struct SAFER_CODE_PROPERTIES_V1 {
     cbSize: DWORD,
     dwCheckFlags: DWORD,
     ImagePath: LPCWSTR,
@@ -47,7 +47,7 @@ STRUCT!{struct SAFER_CODE_PROPERTIES_V1 {
     dwWVTUIChoice: DWORD,
 }}
 pub type PSAFER_CODE_PROPERTIES_V1 = *mut SAFER_CODE_PROPERTIES_V1;
-STRUCT!{struct SAFER_CODE_PROPERTIES_V2 {
+STRUCT! {struct SAFER_CODE_PROPERTIES_V2 {
     cbSize: DWORD,
     dwCheckFlags: DWORD,
     ImagePath: LPCWSTR,
@@ -81,7 +81,7 @@ pub const SAFER_POLICY_UIFLAGS_MASK: DWORD = 0x000000FF;
 pub const SAFER_POLICY_UIFLAGS_INFORMATION_PROMPT: DWORD = 0x00000001;
 pub const SAFER_POLICY_UIFLAGS_OPTION_PROMPT: DWORD = 0x00000002;
 pub const SAFER_POLICY_UIFLAGS_HIDDEN: DWORD = 0x00000004;
-ENUM!{enum SAFER_POLICY_INFO_CLASS {
+ENUM! {enum SAFER_POLICY_INFO_CLASS {
     SaferPolicyLevelList = 1,
     SaferPolicyEnableTransparentEnforcement,
     SaferPolicyDefaultLevel,
@@ -90,7 +90,7 @@ ENUM!{enum SAFER_POLICY_INFO_CLASS {
     SaferPolicyDefaultLevelFlags,
     SaferPolicyAuthenticodeEnabled,
 }}
-ENUM!{enum SAFER_OBJECT_INFO_CLASS {
+ENUM! {enum SAFER_OBJECT_INFO_CLASS {
     SaferObjectLevelId = 1,
     SaferObjectScopeId,
     SaferObjectFriendlyName,
@@ -108,28 +108,28 @@ ENUM!{enum SAFER_OBJECT_INFO_CLASS {
     SaferObjectSingleIdentification,
     SaferObjectExtendedError,
 }}
-ENUM!{enum SAFER_IDENTIFICATION_TYPES {
+ENUM! {enum SAFER_IDENTIFICATION_TYPES {
     SaferIdentityDefault,
     SaferIdentityTypeImageName = 1,
     SaferIdentityTypeImageHash,
     SaferIdentityTypeUrlZone,
     SaferIdentityTypeCertificate,
 }}
-STRUCT!{struct SAFER_IDENTIFICATION_HEADER {
+STRUCT! {struct SAFER_IDENTIFICATION_HEADER {
     dwIdentificationType: SAFER_IDENTIFICATION_TYPES,
     cbStructSize: DWORD,
     IdentificationGuid: GUID,
     lastModified: FILETIME,
 }}
 pub type PSAFER_IDENTIFICATION_HEADER = *mut SAFER_IDENTIFICATION_HEADER;
-STRUCT!{struct SAFER_PATHNAME_IDENTIFICATION {
+STRUCT! {struct SAFER_PATHNAME_IDENTIFICATION {
     header: SAFER_IDENTIFICATION_HEADER,
     Description: [WCHAR; SAFER_MAX_DESCRIPTION_SIZE],
     ImageName: PWCHAR,
     dwSaferFlags: DWORD,
 }}
 pub type PSAFER_PATHNAME_IDENTIFICATION = *mut SAFER_PATHNAME_IDENTIFICATION;
-STRUCT!{struct SAFER_HASH_IDENTIFICATION {
+STRUCT! {struct SAFER_HASH_IDENTIFICATION {
     header: SAFER_IDENTIFICATION_HEADER,
     Description: [WCHAR; SAFER_MAX_DESCRIPTION_SIZE],
     FriendlyName: [WCHAR; SAFER_MAX_DESCRIPTION_SIZE],
@@ -140,14 +140,14 @@ STRUCT!{struct SAFER_HASH_IDENTIFICATION {
     dwSaferFlags: DWORD,
 }}
 pub type PSAFER_HASH_IDENTIFICATION = *mut SAFER_HASH_IDENTIFICATION;
-STRUCT!{struct SAFER_HASH_IDENTIFICATION2 {
+STRUCT! {struct SAFER_HASH_IDENTIFICATION2 {
     hashIdentification: SAFER_HASH_IDENTIFICATION,
     HashSize: DWORD,
     ImageHash: [BYTE; SAFER_MAX_HASH_SIZE],
     HashAlgorithm: ALG_ID,
 }}
 pub type PSAFER_HASH_IDENTIFICATION2 = *mut SAFER_HASH_IDENTIFICATION2;
-STRUCT!{struct SAFER_URLZONE_IDENTIFICATION {
+STRUCT! {struct SAFER_URLZONE_IDENTIFICATION {
     header: SAFER_IDENTIFICATION_HEADER,
     UrlZoneId: DWORD,
     dwSaferFlags: DWORD,
@@ -176,9 +176,7 @@ extern "system" {
         pLevelHandle: *mut SAFER_LEVEL_HANDLE,
         lpReserved: LPVOID,
     ) -> BOOL;
-    pub fn SaferCloseLevel(
-        hLevelHandle: SAFER_LEVEL_HANDLE,
-    ) -> BOOL;
+    pub fn SaferCloseLevel(hLevelHandle: SAFER_LEVEL_HANDLE) -> BOOL;
     pub fn SaferIdentifyLevel(
         dwNumProperties: DWORD,
         pCodeProperties: PSAFER_CODE_PROPERTIES,
@@ -210,10 +208,7 @@ extern "system" {
         szTargetPath: LPCWSTR,
         lpReserved: LPVOID,
     ) -> BOOL;
-    pub fn SaferiIsExecutableFileType(
-        szFullPath: LPCWSTR,
-        bFromShellExecute: BOOLEAN,
-    ) -> BOOL;
+    pub fn SaferiIsExecutableFileType(szFullPath: LPCWSTR, bFromShellExecute: BOOLEAN) -> BOOL;
 }
 pub const SRP_POLICY_EXE: &'static str = "EXE";
 pub const SRP_POLICY_DLL: &'static str = "DLL";

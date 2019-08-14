@@ -6,7 +6,7 @@
 //! QoS definitions for NDIS components.
 use shared::minwindef::ULONG;
 pub type SERVICETYPE = ULONG;
-STRUCT!{struct FLOWSPEC {
+STRUCT! {struct FLOWSPEC {
     TokenRate: ULONG,
     TokenBucketSize: ULONG,
     PeakBandwidth: ULONG,

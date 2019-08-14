@@ -87,25 +87,25 @@ pub const SO_REUSE_UNICASTPORT: c_int = 0x3007;
 pub const SO_REUSE_MULTICASTPORT: c_int = 0x3008;
 pub const WSK_SO_BASE: c_int = 0x4000;
 pub const TCP_NODELAY: c_int = 0x0001;
-STRUCT!{struct SOCKADDR {
+STRUCT! {struct SOCKADDR {
     sa_family: ADDRESS_FAMILY,
     sa_data: [CHAR; 14],
 }}
 pub type PSOCKADDR = *mut SOCKADDR;
 pub type LPSOCKADDR = *mut SOCKADDR;
-STRUCT!{struct SOCKET_ADDRESS {
+STRUCT! {struct SOCKET_ADDRESS {
     lpSockaddr: LPSOCKADDR,
     iSockaddrLength: INT,
 }}
 pub type PSOCKET_ADDRESS = *mut SOCKET_ADDRESS;
 pub type LPSOCKET_ADDRESS = *mut SOCKET_ADDRESS;
-STRUCT!{struct SOCKET_ADDRESS_LIST {
+STRUCT! {struct SOCKET_ADDRESS_LIST {
     iAddressCount: INT,
     Address: [SOCKET_ADDRESS; 1],
 }}
 pub type PSOCKET_ADDRESS_LIST = *mut SOCKET_ADDRESS_LIST;
 pub type LPSOCKET_ADDRESS_LIST = *mut SOCKET_ADDRESS_LIST;
-STRUCT!{struct CSADDR_INFO {
+STRUCT! {struct CSADDR_INFO {
     LocalAddr: SOCKET_ADDRESS,
     RemoteAddr: SOCKET_ADDRESS,
     iSocketType: INT,
@@ -113,7 +113,7 @@ STRUCT!{struct CSADDR_INFO {
 }}
 pub type PCSADDR_INFO = *mut CSADDR_INFO;
 pub type LPCSADDR_INFO = *mut CSADDR_INFO;
-STRUCT!{struct SOCKADDR_STORAGE_LH {
+STRUCT! {struct SOCKADDR_STORAGE_LH {
     ss_family: ADDRESS_FAMILY,
     __ss_pad1: [CHAR; 6],
     __ss_align: __int64,
@@ -121,7 +121,7 @@ STRUCT!{struct SOCKADDR_STORAGE_LH {
 }}
 pub type PSOCKADDR_STORAGE_LH = *mut SOCKADDR_STORAGE_LH;
 pub type LPSOCKADDR_STORAGE_LH = *mut SOCKADDR_STORAGE_LH;
-STRUCT!{struct SOCKADDR_STORAGE_XP {
+STRUCT! {struct SOCKADDR_STORAGE_XP {
     ss_family: c_short,
     __ss_pad1: [CHAR; 6],
     __ss_align: __int64,
@@ -132,7 +132,7 @@ pub type LPSOCKADDR_STORAGE_XP = *mut SOCKADDR_STORAGE_XP;
 pub type SOCKADDR_STORAGE = SOCKADDR_STORAGE_LH;
 pub type PSOCKADDR_STORAGE = *mut SOCKADDR_STORAGE;
 pub type LPSOCKADDR_STORAGE = *mut SOCKADDR_STORAGE;
-STRUCT!{struct SOCKET_PROCESSOR_AFFINITY {
+STRUCT! {struct SOCKET_PROCESSOR_AFFINITY {
     Processor: PROCESSOR_NUMBER,
     NumaNodeId: USHORT,
     Reserved: USHORT,
@@ -167,7 +167,7 @@ pub const SIO_RESERVED_1: DWORD = _WSAIOW!(IOC_WS2, 26);
 pub const SIO_RESERVED_2: DWORD = _WSAIOW!(IOC_WS2, 33);
 pub const SIO_GET_MULTIPLE_EXTENSION_FUNCTION_POINTER: DWORD = _WSAIORW!(IOC_WS2, 36);
 pub const IPPROTO_IP: c_int = 0;
-ENUM!{enum IPPROTO {
+ENUM! {enum IPPROTO {
     IPPROTO_HOPOPTS = 0, // IPv6 Hop-by-Hop options
     IPPROTO_ICMP = 1,
     IPPROTO_IGMP = 2,
@@ -290,7 +290,7 @@ pub const INADDR_ANY: ULONG = 0x00000000;
 pub const INADDR_LOOPBACK: ULONG = 0x7f000001;
 pub const INADDR_BROADCAST: ULONG = 0xffffffff;
 pub const INADDR_NONE: ULONG = 0xffffffff;
-ENUM!{enum SCOPE_LEVEL {
+ENUM! {enum SCOPE_LEVEL {
     ScopeLevelInterface = 1,
     ScopeLevelLink = 2,
     ScopeLevelSubnet = 3,
@@ -300,30 +300,30 @@ ENUM!{enum SCOPE_LEVEL {
     ScopeLevelGlobal = 14,
     ScopeLevelCount = 16,
 }}
-STRUCT!{struct SCOPE_ID_u_s {
+STRUCT! {struct SCOPE_ID_u_s {
     bitfield: ULONG,
 }}
-BITFIELD!{SCOPE_ID_u_s bitfield: ULONG [
+BITFIELD! {SCOPE_ID_u_s bitfield: ULONG [
     Zone set_Zone[0..28],
     Level set_Level[28..32],
 ]}
-UNION!{union SCOPE_ID_u {
+UNION! {union SCOPE_ID_u {
     [u32; 1],
     s s_mut: SCOPE_ID_u_s,
     Value Value_mut: ULONG,
 }}
-STRUCT!{struct SCOPE_ID {
+STRUCT! {struct SCOPE_ID {
     u: SCOPE_ID_u,
 }}
 pub type PSCOPE_ID = *mut SCOPE_ID;
-STRUCT!{struct SOCKADDR_IN {
+STRUCT! {struct SOCKADDR_IN {
     sin_family: ADDRESS_FAMILY,
     sin_port: USHORT,
     sin_addr: IN_ADDR,
     sin_zero: [CHAR; 8],
 }}
 pub type PSOCKADDR_IN = *mut SOCKADDR_IN;
-STRUCT!{struct SOCKADDR_DL {
+STRUCT! {struct SOCKADDR_DL {
     sdl_family: ADDRESS_FAMILY,
     sdl_data: [UCHAR; 8],
     sdl_zero: [UCHAR; 4],
@@ -334,12 +334,12 @@ pub const IOC_VOID: DWORD = 0x20000000;
 pub const IOC_OUT: DWORD = 0x40000000;
 pub const IOC_IN: DWORD = 0x80000000;
 pub const IOC_INOUT: DWORD = IOC_IN | IOC_OUT;
-STRUCT!{struct WSABUF {
+STRUCT! {struct WSABUF {
     len: ULONG,
     buf: *mut CHAR,
 }}
 pub type LPWSABUF = *mut WSABUF;
-STRUCT!{struct WSAMSG {
+STRUCT! {struct WSAMSG {
     name: LPSOCKADDR,
     namelen: INT,
     lpBuffers: LPWSABUF,
@@ -349,7 +349,7 @@ STRUCT!{struct WSAMSG {
 }}
 pub type PWSAMSG = *mut WSAMSG;
 pub type LPWSAMSG = *mut WSAMSG;
-STRUCT!{struct WSACMSGHDR {
+STRUCT! {struct WSACMSGHDR {
     cmsg_len: SIZE_T,
     cmsg_level: INT,
     cmsg_type: INT,
@@ -378,7 +378,7 @@ pub const AI_FILESERVER: c_int = 0x00040000;
 pub const AI_DISABLE_IDN_ENCODING: c_int = 0x00080000;
 pub const AI_EXTENDED: c_int = 0x80000000;
 pub const AI_RESOLUTION_HANDLE: c_int = 0x40000000;
-STRUCT!{struct ADDRINFOA {
+STRUCT! {struct ADDRINFOA {
     ai_flags: c_int,
     ai_family: c_int,
     ai_socktype: c_int,
@@ -389,7 +389,7 @@ STRUCT!{struct ADDRINFOA {
     ai_next: *mut ADDRINFOA,
 }}
 pub type PADDRINFOA = *mut ADDRINFOA;
-STRUCT!{struct ADDRINFOW {
+STRUCT! {struct ADDRINFOW {
     ai_flags: c_int,
     ai_family: c_int,
     ai_socktype: c_int,
@@ -400,7 +400,7 @@ STRUCT!{struct ADDRINFOW {
     ai_next: *mut ADDRINFOW,
 }}
 pub type PADDRINFOW = *mut ADDRINFOW;
-STRUCT!{struct ADDRINFOEXA {
+STRUCT! {struct ADDRINFOEXA {
     ai_flags: c_int,
     ai_family: c_int,
     ai_socktype: c_int,
@@ -415,7 +415,7 @@ STRUCT!{struct ADDRINFOEXA {
 }}
 pub type PADDRINFOEXA = *mut ADDRINFOEXA;
 pub type LPADDRINFOEXA = *mut ADDRINFOEXA;
-STRUCT!{struct ADDRINFOEXW {
+STRUCT! {struct ADDRINFOEXW {
     ai_flags: c_int,
     ai_family: c_int,
     ai_socktype: c_int,
@@ -433,7 +433,7 @@ pub type LPADDRINFOEXW = *mut ADDRINFOEXW;
 pub const ADDRINFOEX_VERSION_2: c_int = 2;
 pub const ADDRINFOEX_VERSION_3: c_int = 3;
 pub const ADDRINFOEX_VERSION_4: c_int = 4;
-STRUCT!{struct ADDRINFOEX2A {
+STRUCT! {struct ADDRINFOEX2A {
     ai_flags: c_int,
     ai_family: c_int,
     ai_socktype: c_int,
@@ -450,7 +450,7 @@ STRUCT!{struct ADDRINFOEX2A {
 }}
 pub type PADDRINFOEX2A = *mut ADDRINFOEX2A;
 pub type LPADDRINFOEX2A = *mut ADDRINFOEX2A;
-STRUCT!{struct ADDRINFOEX2W {
+STRUCT! {struct ADDRINFOEX2W {
     ai_flags: c_int,
     ai_family: c_int,
     ai_socktype: c_int,
@@ -467,7 +467,7 @@ STRUCT!{struct ADDRINFOEX2W {
 }}
 pub type PADDRINFOEX2W = *mut ADDRINFOEX2W;
 pub type LPADDRINFOEX2W = *mut ADDRINFOEX2W;
-STRUCT!{struct ADDRINFOEX3A {
+STRUCT! {struct ADDRINFOEX3A {
     ai_flags: c_int,
     ai_family: c_int,
     ai_socktype: c_int,
@@ -485,7 +485,7 @@ STRUCT!{struct ADDRINFOEX3A {
 }}
 pub type PADDRINFOEX3A = *mut ADDRINFOEX3A;
 pub type LPADDRINFOEX3A = *mut ADDRINFOEX3A;
-STRUCT!{struct ADDRINFOEX3W {
+STRUCT! {struct ADDRINFOEX3W {
     ai_flags: c_int,
     ai_family: c_int,
     ai_socktype: c_int,
@@ -503,7 +503,7 @@ STRUCT!{struct ADDRINFOEX3W {
 }}
 pub type PADDRINFOEX3W = *mut ADDRINFOEX3W;
 pub type LPADDRINFOEX3W = *mut ADDRINFOEX3W;
-STRUCT!{struct ADDRINFOEX4 {
+STRUCT! {struct ADDRINFOEX4 {
     ai_flags: c_int,
     ai_family: c_int,
     ai_socktype: c_int,

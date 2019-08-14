@@ -10,18 +10,18 @@ use shared::ntstatus::FACILITY_HID_ERROR_CODE;
 use um::winnt::{BOOLEAN, LONG, PCHAR, PLONG, PVOID};
 pub const HIDP_LINK_COLLECTION_ROOT: USHORT = -1i16 as u16;
 pub const HIDP_LINK_COLLECTION_UNSPECIFIED: USHORT = 0;
-ENUM!{enum HIDP_REPORT_TYPE {
+ENUM! {enum HIDP_REPORT_TYPE {
     HidP_Input,
     HidP_Output,
     HidP_Feature,
 }}
-STRUCT!{struct USAGE_AND_PAGE {
+STRUCT! {struct USAGE_AND_PAGE {
     Usage: USAGE,
     UsagePage: USAGE,
 }}
 pub type PUSAGE_AND_PAGE = *mut USAGE_AND_PAGE;
 // HidP_IsSameUsageAndPage
-STRUCT!{struct HIDP_CAPS_Range {
+STRUCT! {struct HIDP_CAPS_Range {
     UsageMin: USAGE,
     UsageMax: USAGE,
     StringMin: USHORT,
@@ -31,7 +31,7 @@ STRUCT!{struct HIDP_CAPS_Range {
     DataIndexMin: USHORT,
     DataIndexMax: USHORT,
 }}
-STRUCT!{struct HIDP_CAPS_NotRange {
+STRUCT! {struct HIDP_CAPS_NotRange {
     Usage: USAGE,
     Reserved1: USAGE,
     StringIndex: USHORT,
@@ -41,12 +41,12 @@ STRUCT!{struct HIDP_CAPS_NotRange {
     DataIndex: USHORT,
     Reserved4: USHORT,
 }}
-UNION!{union HIDP_CAPS_u {
+UNION! {union HIDP_CAPS_u {
     [u16; 8],
     Range Range_mut: HIDP_CAPS_Range,
     NotRange NotRange_mut: HIDP_CAPS_NotRange,
 }}
-STRUCT!{struct HIDP_BUTTON_CAPS {
+STRUCT! {struct HIDP_BUTTON_CAPS {
     UsagePage: USAGE,
     ReportID: UCHAR,
     IsAlias: BOOLEAN,
@@ -62,7 +62,7 @@ STRUCT!{struct HIDP_BUTTON_CAPS {
     u: HIDP_CAPS_u,
 }}
 pub type PHIDP_BUTTON_CAPS = *mut HIDP_BUTTON_CAPS;
-STRUCT!{struct HIDP_VALUE_CAPS {
+STRUCT! {struct HIDP_VALUE_CAPS {
     UsagePage: USAGE,
     ReportID: UCHAR,
     IsAlias: BOOLEAN,
@@ -88,7 +88,7 @@ STRUCT!{struct HIDP_VALUE_CAPS {
     u: HIDP_CAPS_u,
 }}
 pub type PHIDP_VALUE_CAPS = *mut HIDP_VALUE_CAPS;
-STRUCT!{struct HIDP_LINK_COLLECTION_NODE {
+STRUCT! {struct HIDP_LINK_COLLECTION_NODE {
     LinkUsage: USAGE,
     LinkUsagePage: USAGE,
     Parent: USHORT,
@@ -98,7 +98,7 @@ STRUCT!{struct HIDP_LINK_COLLECTION_NODE {
     bit_fields: ULONG,
     UserContext: PVOID,
 }}
-BITFIELD!{HIDP_LINK_COLLECTION_NODE bit_fields: ULONG [
+BITFIELD! {HIDP_LINK_COLLECTION_NODE bit_fields: ULONG [
     CollectionType set_CollectionType[0..8],
     IsAlias set_IsAlias[8..9],
 ]}
@@ -106,7 +106,7 @@ pub type PHIDP_LINK_COLLECTION_NODE = *mut HIDP_LINK_COLLECTION_NODE;
 pub type PHIDP_REPORT_DESCRIPTOR = PUCHAR;
 pub enum HIDP_PREPARSED_DATA {}
 pub type PHIDP_PREPARSED_DATA = *mut HIDP_PREPARSED_DATA;
-STRUCT!{struct HIDP_CAPS {
+STRUCT! {struct HIDP_CAPS {
     Usage: USAGE,
     UsagePage: USAGE,
     InputReportByteLength: USHORT,
@@ -125,24 +125,24 @@ STRUCT!{struct HIDP_CAPS {
     NumberFeatureDataIndices: USHORT,
 }}
 pub type PHIDP_CAPS = *mut HIDP_CAPS;
-UNION!{union HIDP_DATA_u {
+UNION! {union HIDP_DATA_u {
     [u32; 1],
     RawValue RawValue_mut: ULONG,
     On On_mut: BOOLEAN,
 }}
-STRUCT!{struct HIDP_DATA {
+STRUCT! {struct HIDP_DATA {
     DataIndex: USHORT,
     Reserved: USHORT,
     u: HIDP_DATA_u,
 }}
 pub type PHIDP_DATA = *mut HIDP_DATA;
-STRUCT!{struct HIDP_UNKNOWN_TOKEN {
+STRUCT! {struct HIDP_UNKNOWN_TOKEN {
     Token: UCHAR,
     Reserved: [UCHAR; 3],
     BitField: ULONG,
 }}
 pub type PHIDP_UNKNOWN_TOKEN = *mut HIDP_UNKNOWN_TOKEN;
-STRUCT!{struct HIDP_EXTENDED_ATTRIBUTES {
+STRUCT! {struct HIDP_EXTENDED_ATTRIBUTES {
     NumGlobalUnknowns: UCHAR,
     Reserved: [UCHAR; 3],
     GlobalUnknowns: PHIDP_UNKNOWN_TOKEN,
@@ -150,10 +150,7 @@ STRUCT!{struct HIDP_EXTENDED_ATTRIBUTES {
 }}
 pub type PHIDP_EXTENDED_ATTRIBUTES = *mut HIDP_EXTENDED_ATTRIBUTES;
 extern "system" {
-    pub fn HidP_GetCaps(
-        PreparsedData: PHIDP_PREPARSED_DATA,
-        Capabilities: PHIDP_CAPS,
-    ) -> NTSTATUS;
+    pub fn HidP_GetCaps(PreparsedData: PHIDP_PREPARSED_DATA, Capabilities: PHIDP_CAPS) -> NTSTATUS;
     pub fn HidP_GetLinkCollectionNodes(
         LinkCollectionNodes: PHIDP_LINK_COLLECTION_NODE,
         LinkCollectionNodesLength: PULONG,
@@ -345,14 +342,14 @@ extern "system" {
         InsertCodesContext: PVOID,
     ) -> NTSTATUS;
 }
-ENUM!{enum HIDP_KEYBOARD_DIRECTION {
+ENUM! {enum HIDP_KEYBOARD_DIRECTION {
     HidP_Keyboard_Break,
     HidP_Keyboard_Make,
 }}
-STRUCT!{struct HIDP_KEYBOARD_MODIFIER_STATE {
+STRUCT! {struct HIDP_KEYBOARD_MODIFIER_STATE {
     ul: ULONG,
 }}
-BITFIELD!{HIDP_KEYBOARD_MODIFIER_STATE ul: ULONG [
+BITFIELD! {HIDP_KEYBOARD_MODIFIER_STATE ul: ULONG [
     LeftControl set_LeftControl[0..1],
     LeftShift set_LeftShift[1..2],
     LeftAlt set_LeftAlt[2..3],
@@ -366,7 +363,7 @@ BITFIELD!{HIDP_KEYBOARD_MODIFIER_STATE ul: ULONG [
     NumLock set_NumLock[10..11],
 ]}
 pub type PHIDP_KEYBOARD_MODIFIER_STATE = *mut HIDP_KEYBOARD_MODIFIER_STATE;
-FN!{stdcall PHIDP_INSERT_SCANCODES(
+FN! {stdcall PHIDP_INSERT_SCANCODES(
     Context: PVOID,
     NewScanCodes: PCHAR,
     Length: ULONG,

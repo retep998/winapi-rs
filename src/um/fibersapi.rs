@@ -6,18 +6,9 @@
 use shared::minwindef::{BOOL, DWORD};
 use um::winnt::{PFLS_CALLBACK_FUNCTION, PVOID};
 extern "system" {
-    pub fn FlsAlloc(
-        lpCallback: PFLS_CALLBACK_FUNCTION,
-    ) -> DWORD;
-    pub fn FlsGetValue(
-        dwFlsIndex: DWORD,
-    ) -> PVOID;
-    pub fn FlsSetValue(
-        dwFlsIndex: DWORD,
-        lpFlsData: PVOID,
-    ) -> BOOL;
-    pub fn FlsFree(
-        dwFlsIndex: DWORD,
-    ) -> BOOL;
+    pub fn FlsAlloc(lpCallback: PFLS_CALLBACK_FUNCTION) -> DWORD;
+    pub fn FlsGetValue(dwFlsIndex: DWORD) -> PVOID;
+    pub fn FlsSetValue(dwFlsIndex: DWORD, lpFlsData: PVOID) -> BOOL;
+    pub fn FlsFree(dwFlsIndex: DWORD) -> BOOL;
     pub fn IsThreadAFiber() -> BOOL;
 }

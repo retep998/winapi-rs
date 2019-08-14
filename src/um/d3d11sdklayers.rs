@@ -18,12 +18,12 @@ pub const D3D11_DEBUG_FEATURE_ALWAYS_DISCARD_OFFERED_RESOURCE: UINT = 0x8;
 pub const D3D11_DEBUG_FEATURE_NEVER_DISCARD_OFFERED_RESOURCE: UINT = 0x10;
 pub const D3D11_DEBUG_FEATURE_AVOID_BEHAVIOR_CHANGING_DEBUG_AIDS: UINT = 0x40;
 pub const D3D11_DEBUG_FEATURE_DISABLE_TILED_RESOURCE_MAPPING_TRACKING_AND_VALIDATION: UINT = 0x80;
-ENUM!{enum D3D11_RLDO_FLAGS {
+ENUM! {enum D3D11_RLDO_FLAGS {
     D3D11_RLDO_SUMMARY = 0x1,
     D3D11_RLDO_DETAIL = 0x2,
     D3D11_RLDO_IGNORE_INTERNAL = 0x4,
 }}
-RIDL!{#[uuid(0x79cf2233, 0x7536, 0x4948, 0x9d, 0x36, 0x1e, 0x46, 0x92, 0xdc, 0x57, 0x60)]
+RIDL! {#[uuid(0x79cf2233, 0x7536, 0x4948, 0x9d, 0x36, 0x1e, 0x46, 0x92, 0xdc, 0x57, 0x60)]
 interface ID3D11Debug(ID3D11DebugVtbl): IUnknown(IUnknownVtbl) {
     fn SetFeatureMask(
         Mask: UINT,
@@ -49,14 +49,14 @@ interface ID3D11Debug(ID3D11DebugVtbl): IUnknown(IUnknownVtbl) {
         pContext: *mut ID3D11DeviceContext,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x1ef337e3, 0x58e7, 0x4f83, 0xa6, 0x92, 0xdb, 0x22, 0x1f, 0x5e, 0xd4, 0x7e)]
+RIDL! {#[uuid(0x1ef337e3, 0x58e7, 0x4f83, 0xa6, 0x92, 0xdb, 0x22, 0x1f, 0x5e, 0xd4, 0x7e)]
 interface ID3D11SwitchToRef(ID3D11SwitchToRefVtbl): IUnknown(IUnknownVtbl) {
     fn SetUseRef(
         UseRef: BOOL,
     ) -> BOOL,
     fn GetUseRef() -> BOOL,
 }}
-ENUM!{enum D3D11_SHADER_TRACKING_RESOURCE_TYPE {
+ENUM! {enum D3D11_SHADER_TRACKING_RESOURCE_TYPE {
     D3D11_SHADER_TRACKING_RESOURCE_TYPE_NONE = 0,
     D3D11_SHADER_TRACKING_RESOURCE_TYPE_UAV_DEVICEMEMORY = 1,
     D3D11_SHADER_TRACKING_RESOURCE_TYPE_NON_UAV_DEVICEMEMORY = 2,
@@ -66,7 +66,7 @@ ENUM!{enum D3D11_SHADER_TRACKING_RESOURCE_TYPE {
     D3D11_SHADER_TRACKING_RESOURCE_TYPE_GROUPSHARED_NON_UAV = 6,
     D3D11_SHADER_TRACKING_RESOURCE_TYPE_ALL = 7,
 }}
-ENUM!{enum D3D11_SHADER_TRACKING_OPTION {
+ENUM! {enum D3D11_SHADER_TRACKING_OPTION {
     D3D11_SHADER_TRACKING_OPTION_IGNORE = 0,
     D3D11_SHADER_TRACKING_OPTION_TRACK_UNINITIALIZED = 0x1,
     D3D11_SHADER_TRACKING_OPTION_TRACK_RAW = 0x2,
@@ -96,7 +96,7 @@ ENUM!{enum D3D11_SHADER_TRACKING_OPTION {
         = D3D11_SHADER_TRACKING_OPTION_ALL_HAZARDS_ALLOWING_SAME
         | D3D11_SHADER_TRACKING_OPTION_TRACK_UNINITIALIZED,
 }}
-RIDL!{#[uuid(0x1911c771, 0x1587, 0x413e, 0xa7, 0xe0, 0xfb, 0x26, 0xc3, 0xde, 0x02, 0x68)]
+RIDL! {#[uuid(0x1911c771, 0x1587, 0x413e, 0xa7, 0xe0, 0xfb, 0x26, 0xc3, 0xde, 0x02, 0x68)]
 interface ID3D11TracingDevice(ID3D11TracingDeviceVtbl): IUnknown(IUnknownVtbl) {
     fn SetShaderTrackingOptionsByType(
         ResourceTypeFlags: UINT,
@@ -107,13 +107,13 @@ interface ID3D11TracingDevice(ID3D11TracingDeviceVtbl): IUnknown(IUnknownVtbl) {
         Options: UINT,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x193dacdf, 0x0db2, 0x4c05, 0xa5, 0x5c, 0xef, 0x06, 0xca, 0xc5, 0x6f, 0xd9)]
+RIDL! {#[uuid(0x193dacdf, 0x0db2, 0x4c05, 0xa5, 0x5c, 0xef, 0x06, 0xca, 0xc5, 0x6f, 0xd9)]
 interface ID3D11RefTrackingOptions(ID3D11RefTrackingOptionsVtbl): IUnknown(IUnknownVtbl) {
     fn SetTrackingOptions(
         Options: UINT,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x03916615, 0xc644, 0x418c, 0x9b, 0xf4, 0x75, 0xdb, 0x5b, 0xe6, 0x3c, 0xa0)]
+RIDL! {#[uuid(0x03916615, 0xc644, 0x418c, 0x9b, 0xf4, 0x75, 0xdb, 0x5b, 0xe6, 0x3c, 0xa0)]
 interface ID3D11RefDefaultTrackingOptions(ID3D11RefDefaultTrackingOptionsVtbl):
     IUnknown(IUnknownVtbl) {
     fn SetTrackingOptions(
@@ -121,8 +121,8 @@ interface ID3D11RefDefaultTrackingOptions(ID3D11RefDefaultTrackingOptionsVtbl):
         Options: UINT,
     ) -> HRESULT,
 }}
-DEFINE_GUID!{DXGI_DEBUG_D3D11,
-    0x4b99317b, 0xac39, 0x4aa6, 0xbb, 0x0b, 0xba, 0xa0, 0x47, 0x84, 0x79, 0x8f}
+DEFINE_GUID! {DXGI_DEBUG_D3D11,
+0x4b99317b, 0xac39, 0x4aa6, 0xbb, 0x0b, 0xba, 0xa0, 0x47, 0x84, 0x79, 0x8f}
 pub const D3D11_REGKEY_PATH: &'static str = "Software\\Microsoft\\Direct3D";
 pub const D3D11_MUTE_DEBUG_OUTPUT: &'static str = "MuteDebugOutput";
 pub const D3D11_ENABLE_BREAK_ON_MESSAGE: &'static str = "EnableBreakOnMessage";
@@ -140,7 +140,7 @@ pub const D3D11_APPSIZE_STRING: &'static str = "Size";
 pub const D3D11_APPNAME_STRING: &'static str = "Name";
 pub const D3D11_FORCE_DEBUGGABLE: &'static str = "ForceDebuggable";
 pub const D3D11_FORCE_SHADER_SKIP_OPTIMIZATION: &'static str = "ForceShaderSkipOptimization";
-ENUM!{enum D3D11_MESSAGE_CATEGORY {
+ENUM! {enum D3D11_MESSAGE_CATEGORY {
     D3D11_MESSAGE_CATEGORY_APPLICATION_DEFINED = 0,
     D3D11_MESSAGE_CATEGORY_MISCELLANEOUS = D3D11_MESSAGE_CATEGORY_APPLICATION_DEFINED + 1,
     D3D11_MESSAGE_CATEGORY_INITIALIZATION = D3D11_MESSAGE_CATEGORY_MISCELLANEOUS + 1,
@@ -153,14 +153,14 @@ ENUM!{enum D3D11_MESSAGE_CATEGORY {
     D3D11_MESSAGE_CATEGORY_EXECUTION = D3D11_MESSAGE_CATEGORY_RESOURCE_MANIPULATION + 1,
     D3D11_MESSAGE_CATEGORY_SHADER = D3D11_MESSAGE_CATEGORY_EXECUTION + 1,
 }}
-ENUM!{enum D3D11_MESSAGE_SEVERITY {
+ENUM! {enum D3D11_MESSAGE_SEVERITY {
     D3D11_MESSAGE_SEVERITY_CORRUPTION = 0,
     D3D11_MESSAGE_SEVERITY_ERROR = D3D11_MESSAGE_SEVERITY_CORRUPTION + 1,
     D3D11_MESSAGE_SEVERITY_WARNING = D3D11_MESSAGE_SEVERITY_ERROR + 1,
     D3D11_MESSAGE_SEVERITY_INFO = D3D11_MESSAGE_SEVERITY_WARNING + 1,
     D3D11_MESSAGE_SEVERITY_MESSAGE = D3D11_MESSAGE_SEVERITY_INFO + 1,
 }}
-ENUM!{enum D3D11_MESSAGE_ID {
+ENUM! {enum D3D11_MESSAGE_ID {
     D3D11_MESSAGE_ID_UNKNOWN = 0,
     D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_HAZARD = D3D11_MESSAGE_ID_UNKNOWN + 1,
     D3D11_MESSAGE_ID_DEVICE_IASETINDEXBUFFER_HAZARD
@@ -2562,14 +2562,14 @@ ENUM!{enum D3D11_MESSAGE_ID {
     D3D11_MESSAGE_ID_DESTROY_FENCE = D3D11_MESSAGE_ID_LIVE_FENCE + 1,
     D3D11_MESSAGE_ID_D3D11_3_MESSAGES_END = D3D11_MESSAGE_ID_DESTROY_FENCE + 1,
 }}
-STRUCT!{struct D3D11_MESSAGE {
+STRUCT! {struct D3D11_MESSAGE {
     Category: D3D11_MESSAGE_CATEGORY,
     Severity: D3D11_MESSAGE_SEVERITY,
     ID: D3D11_MESSAGE_ID,
     pDescription: *const c_char,
     DescriptionByteLength: SIZE_T,
 }}
-STRUCT!{struct D3D11_INFO_QUEUE_FILTER_DESC {
+STRUCT! {struct D3D11_INFO_QUEUE_FILTER_DESC {
     NumCategories: UINT,
     pCategoryList: *const D3D11_MESSAGE_CATEGORY,
     NumSeverities: UINT,
@@ -2577,12 +2577,12 @@ STRUCT!{struct D3D11_INFO_QUEUE_FILTER_DESC {
     NumIDs: UINT,
     pIDList: *const D3D11_MESSAGE_ID,
 }}
-STRUCT!{struct D3D11_INFO_QUEUE_FILTER {
+STRUCT! {struct D3D11_INFO_QUEUE_FILTER {
     AllowList: D3D11_INFO_QUEUE_FILTER_DESC,
     DenyList: D3D11_INFO_QUEUE_FILTER_DESC,
 }}
 pub const D3D11_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT: UINT64 = 1024;
-RIDL!{#[uuid(0x6543dbb6, 0x1b48, 0x42f5, 0xab, 0x82, 0xe9, 0x7e, 0xc7, 0x43, 0x26, 0xf6)]
+RIDL! {#[uuid(0x6543dbb6, 0x1b48, 0x42f5, 0xab, 0x82, 0xe9, 0x7e, 0xc7, 0x43, 0x26, 0xf6)]
 interface ID3D11InfoQueue(ID3D11InfoQueueVtbl): IUnknown(IUnknownVtbl) {
     fn SetMessageCountLimit(
         MessageCountLimit: UINT64,
@@ -2665,15 +2665,15 @@ interface ID3D11InfoQueue(ID3D11InfoQueueVtbl): IUnknown(IUnknownVtbl) {
     ) -> (),
     fn GetMuteDebugOutput() -> BOOL,
 }}
-DEFINE_GUID!{IID_ID3D11Debug,
-    0x79cf2233, 0x7536, 0x4948, 0x9d, 0x36, 0x1e, 0x46, 0x92, 0xdc, 0x57, 0x60}
-DEFINE_GUID!{IID_ID3D11SwitchToRef,
-    0x1ef337e3, 0x58e7, 0x4f83, 0xa6, 0x92, 0xdb, 0x22, 0x1f, 0x5e, 0xd4, 0x7e}
-DEFINE_GUID!{IID_ID3D11TracingDevice,
-    0x1911c771, 0x1587, 0x413e, 0xa7, 0xe0, 0xfb, 0x26, 0xc3, 0xde, 0x02, 0x68}
-DEFINE_GUID!{IID_ID3D11RefTrackingOptions,
-    0x193dacdf, 0x0db2, 0x4c05, 0xa5, 0x5c, 0xef, 0x06, 0xca, 0xc5, 0x6f, 0xd9}
-DEFINE_GUID!{IID_ID3D11RefDefaultTrackingOptions,
-    0x03916615, 0xc644, 0x418c, 0x9b, 0xf4, 0x75, 0xdb, 0x5b, 0xe6, 0x3c, 0xa0}
-DEFINE_GUID!{IID_ID3D11InfoQueue,
-    0x6543dbb6, 0x1b48, 0x42f5, 0xab, 0x82, 0xe9, 0x7e, 0xc7, 0x43, 0x26, 0xf6}
+DEFINE_GUID! {IID_ID3D11Debug,
+0x79cf2233, 0x7536, 0x4948, 0x9d, 0x36, 0x1e, 0x46, 0x92, 0xdc, 0x57, 0x60}
+DEFINE_GUID! {IID_ID3D11SwitchToRef,
+0x1ef337e3, 0x58e7, 0x4f83, 0xa6, 0x92, 0xdb, 0x22, 0x1f, 0x5e, 0xd4, 0x7e}
+DEFINE_GUID! {IID_ID3D11TracingDevice,
+0x1911c771, 0x1587, 0x413e, 0xa7, 0xe0, 0xfb, 0x26, 0xc3, 0xde, 0x02, 0x68}
+DEFINE_GUID! {IID_ID3D11RefTrackingOptions,
+0x193dacdf, 0x0db2, 0x4c05, 0xa5, 0x5c, 0xef, 0x06, 0xca, 0xc5, 0x6f, 0xd9}
+DEFINE_GUID! {IID_ID3D11RefDefaultTrackingOptions,
+0x03916615, 0xc644, 0x418c, 0x9b, 0xf4, 0x75, 0xdb, 0x5b, 0xe6, 0x3c, 0xa0}
+DEFINE_GUID! {IID_ID3D11InfoQueue,
+0x6543dbb6, 0x1b48, 0x42f5, 0xab, 0x82, 0xe9, 0x7e, 0xc7, 0x43, 0x26, 0xf6}

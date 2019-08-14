@@ -12,7 +12,7 @@ use um::d3d12::D3D12_RESOURCE_STATES;
 use um::d3dcommon::D3D_FEATURE_LEVEL;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::HRESULT;
-FN!{stdcall PFN_D3D11ON12_CREATE_DEVICE(
+FN! {stdcall PFN_D3D11ON12_CREATE_DEVICE(
     *mut IUnknown,
     UINT,
     *const D3D_FEATURE_LEVEL,
@@ -38,13 +38,13 @@ extern "system" {
         pChosenFeatureLevel: *mut D3D_FEATURE_LEVEL,
     ) -> HRESULT;
 }
-STRUCT!{struct D3D11_RESOURCE_FLAGS {
+STRUCT! {struct D3D11_RESOURCE_FLAGS {
     BindFlags: UINT,
     MiscFlags: UINT,
     CPUAccessFlags: UINT,
     StructureByteStride: UINT,
 }}
-RIDL!{#[uuid(0x85611e73, 0x70a9, 0x490e, 0x96, 0x14, 0xa9, 0xe3, 0x02, 0x77, 0x79, 0x04)]
+RIDL! {#[uuid(0x85611e73, 0x70a9, 0x490e, 0x96, 0x14, 0xa9, 0xe3, 0x02, 0x77, 0x79, 0x04)]
 interface ID3D11On12Device(ID3D11On12DeviceVtbl): IUnknown(IUnknownVtbl) {
     fn CreateWrappedResource(
         pResource12: *mut IUnknown,
@@ -63,5 +63,5 @@ interface ID3D11On12Device(ID3D11On12DeviceVtbl): IUnknown(IUnknownVtbl) {
         NumResources: UINT,
     ) -> (),
 }}
-DEFINE_GUID!{IID_ID3D11On12Device,
-    0x85611e73, 0x70a9, 0x490e, 0x96, 0x14, 0xa9, 0xe3, 0x02, 0x77, 0x79, 0x04}
+DEFINE_GUID! {IID_ID3D11On12Device,
+0x85611e73, 0x70a9, 0x490e, 0x96, 0x14, 0xa9, 0xe3, 0x02, 0x77, 0x79, 0x04}

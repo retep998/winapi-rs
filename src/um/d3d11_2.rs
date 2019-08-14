@@ -12,57 +12,57 @@ use um::d3d11_1::{
     ID3D11Device1, ID3D11Device1Vtbl, ID3D11DeviceContext1, ID3D11DeviceContext1Vtbl,
 };
 use um::winnt::{HRESULT, LPCWSTR};
-DEFINE_GUID!{IID_ID3D11DeviceContext2,
-    0x420d5b32, 0xb90c, 0x4da4, 0xbe, 0xf0, 0x35, 0x9f, 0x6a, 0x24, 0xa8, 0x3a}
-DEFINE_GUID!{IID_ID3D11Device2,
-    0x9d06dffa, 0xd1e5, 0x4d07, 0x83, 0xa8, 0x1b, 0xb1, 0x23, 0xf2, 0xf8, 0x41}
-STRUCT!{struct D3D11_TILED_RESOURCE_COORDINATE {
+DEFINE_GUID! {IID_ID3D11DeviceContext2,
+0x420d5b32, 0xb90c, 0x4da4, 0xbe, 0xf0, 0x35, 0x9f, 0x6a, 0x24, 0xa8, 0x3a}
+DEFINE_GUID! {IID_ID3D11Device2,
+0x9d06dffa, 0xd1e5, 0x4d07, 0x83, 0xa8, 0x1b, 0xb1, 0x23, 0xf2, 0xf8, 0x41}
+STRUCT! {struct D3D11_TILED_RESOURCE_COORDINATE {
     X: UINT,
     Y: UINT,
     Z: UINT,
     Subresource: UINT,
 }}
-STRUCT!{struct D3D11_TILE_REGION_SIZE {
+STRUCT! {struct D3D11_TILE_REGION_SIZE {
     NumTiles: UINT,
     bUseBox: BOOL,
     Width: UINT,
     Height: UINT16,
     Depth: UINT16,
 }}
-ENUM!{enum D3D11_TILE_MAPPING_FLAG {
+ENUM! {enum D3D11_TILE_MAPPING_FLAG {
     D3D11_TILE_MAPPING_NO_OVERWRITE = 0x00000001,
 }}
-ENUM!{enum D3D11_TILE_RANGE_FLAG {
+ENUM! {enum D3D11_TILE_RANGE_FLAG {
     D3D11_TILE_RANGE_NULL = 0x00000001,
     D3D11_TILE_RANGE_SKIP = 0x00000002,
     D3D11_TILE_RANGE_REUSE_SINGLE_TILE = 0x00000004,
 }}
-STRUCT!{struct D3D11_SUBRESOURCE_TILING {
+STRUCT! {struct D3D11_SUBRESOURCE_TILING {
     WidthInTiles: UINT,
     HeightInTiles: UINT16,
     DepthInTiles: UINT16,
     StartTileIndexInOverallResource: UINT,
 }}
-STRUCT!{struct D3D11_TILE_SHAPE {
+STRUCT! {struct D3D11_TILE_SHAPE {
     WidthInTexels: UINT,
     HeightInTexels: UINT,
     DepthInTexels: UINT,
 }}
-STRUCT!{struct D3D11_PACKED_MIP_DESC {
+STRUCT! {struct D3D11_PACKED_MIP_DESC {
     NumStandardMips: UINT8,
     NumPackedMips: UINT8,
     NumTilesForPackedMips: UINT,
     StartTileIndexInOverallResource: UINT,
 }}
-ENUM!{enum D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_FLAG {
+ENUM! {enum D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_FLAG {
     D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_TILED_RESOURCE = 0x00000001,
 }}
-ENUM!{enum D3D11_TILE_COPY_FLAG {
+ENUM! {enum D3D11_TILE_COPY_FLAG {
     D3D11_TILE_COPY_NO_OVERWRITE = 0x00000001,
     D3D11_TILE_COPY_LINEAR_BUFFER_TO_SWIZZLED_TILED_RESOURCE = 0x00000002,
     D3D11_TILE_COPY_SWIZZLED_TILED_RESOURCE_TO_LINEAR_BUFFER = 0x00000004,
 }}
-RIDL!{#[uuid(0x420d5b32, 0xb90c, 0x4da4, 0xbe, 0xf0, 0x35, 0x9f, 0x6a, 0x24, 0xa8, 0x3a)]
+RIDL! {#[uuid(0x420d5b32, 0xb90c, 0x4da4, 0xbe, 0xf0, 0x35, 0x9f, 0x6a, 0x24, 0xa8, 0x3a)]
 interface ID3D11DeviceContext2(ID3D11DeviceContext2Vtbl):
     ID3D11DeviceContext1(ID3D11DeviceContext1Vtbl) {
     fn UpdateTileMappings(
@@ -119,7 +119,7 @@ interface ID3D11DeviceContext2(ID3D11DeviceContext2Vtbl):
     ) -> (),
     fn EndEvent() -> (),
 }}
-RIDL!{#[uuid(0x9d06dffa, 0xd1e5, 0x4d07, 0x83, 0xa8, 0x1b, 0xb1, 0x23, 0xf2, 0xf8, 0x41)]
+RIDL! {#[uuid(0x9d06dffa, 0xd1e5, 0x4d07, 0x83, 0xa8, 0x1b, 0xb1, 0x23, 0xf2, 0xf8, 0x41)]
 interface ID3D11Device2(ID3D11Device2Vtbl): ID3D11Device1(ID3D11Device1Vtbl) {
     fn GetImmediateContext2(
         ppImmediateContext: *mut *mut ID3D11DeviceContext2,

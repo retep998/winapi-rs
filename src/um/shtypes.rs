@@ -7,13 +7,13 @@
 use shared::guiddef::GUID;
 use shared::minwindef::{BYTE, USHORT};
 use um::winnt::LPCWSTR;
-STRUCT!{#[repr(packed)] struct SHITEMID {
+STRUCT! {#[repr(packed)] struct SHITEMID {
     cb: USHORT,
     abID: [BYTE; 1],
 }}
 pub type LPSHITEMID = *mut SHITEMID;
 pub type LPCSHITEMID = *const SHITEMID;
-STRUCT!{#[repr(packed)] struct ITEMIDLIST {
+STRUCT! {#[repr(packed)] struct ITEMIDLIST {
     mkid: SHITEMID,
 }}
 pub type ITEMIDLIST_RELATIVE = ITEMIDLIST;
@@ -36,7 +36,7 @@ pub type PCUITEMID_CHILD_ARRAY = *const PCUITEMID_CHILD;
 pub type PCUIDLIST_RELATIVE_ARRAY = *const PCUIDLIST_RELATIVE;
 pub type PCIDLIST_ABSOLUTE_ARRAY = *const PCIDLIST_ABSOLUTE;
 pub type PCUIDLIST_ABSOLUTE_ARRAY = *const PCUIDLIST_ABSOLUTE;
-STRUCT!{struct COMDLG_FILTERSPEC {
+STRUCT! {struct COMDLG_FILTERSPEC {
     pszName: LPCWSTR,
     pszSpec: LPCWSTR,
 }}

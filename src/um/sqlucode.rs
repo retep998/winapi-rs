@@ -6,7 +6,7 @@
 //! This module defines the ODBC Core unicode functions
 use um::sqltypes::{
     SQLCHAR, SQLHANDLE, SQLHDBC, SQLHSTMT, SQLHWND, SQLINTEGER, SQLRETURN, SQLSMALLINT, SQLULEN,
-    SQLUSMALLINT, SQLWCHAR
+    SQLUSMALLINT, SQLWCHAR,
 };
 pub const SQL_WCHAR: SQLSMALLINT = -8;
 pub const SQL_WVARCHAR: SQLSMALLINT = -9;

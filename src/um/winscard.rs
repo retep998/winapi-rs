@@ -31,12 +31,8 @@ extern "system" {
         pvReserved2: LPCVOID,
         phContext: LPSCARDCONTEXT,
     ) -> LONG;
-    pub fn SCardReleaseContext(
-        hContext: SCARDCONTEXT,
-    ) -> LONG;
-    pub fn SCardIsValidContext(
-        hContext: SCARDCONTEXT,
-    ) -> LONG;
+    pub fn SCardReleaseContext(hContext: SCARDCONTEXT) -> LONG;
+    pub fn SCardIsValidContext(hContext: SCARDCONTEXT) -> LONG;
 }
 pub const SCARD_PROVIDER_PRIMARY: DWORD = 1;
 pub const SCARD_PROVIDER_CSP: DWORD = 2;
@@ -116,22 +112,10 @@ extern "system" {
         szProvider: *mut WCHAR,
         pcchProvider: LPDWORD,
     ) -> LONG;
-    pub fn SCardIntroduceReaderGroupA(
-        hContext: SCARDCONTEXT,
-        szGroupName: LPCSTR,
-    ) -> LONG;
-    pub fn SCardIntroduceReaderGroupW(
-        hContext: SCARDCONTEXT,
-        szGroupName: LPCWSTR,
-    ) -> LONG;
-    pub fn SCardForgetReaderGroupA(
-        hContext: SCARDCONTEXT,
-        szGroupName: LPCSTR,
-    ) -> LONG;
-    pub fn SCardForgetReaderGroupW(
-        hContext: SCARDCONTEXT,
-        szGroupName: LPCWSTR,
-    ) -> LONG;
+    pub fn SCardIntroduceReaderGroupA(hContext: SCARDCONTEXT, szGroupName: LPCSTR) -> LONG;
+    pub fn SCardIntroduceReaderGroupW(hContext: SCARDCONTEXT, szGroupName: LPCWSTR) -> LONG;
+    pub fn SCardForgetReaderGroupA(hContext: SCARDCONTEXT, szGroupName: LPCSTR) -> LONG;
+    pub fn SCardForgetReaderGroupW(hContext: SCARDCONTEXT, szGroupName: LPCWSTR) -> LONG;
     pub fn SCardIntroduceReaderA(
         hContext: SCARDCONTEXT,
         szReaderName: LPCSTR,
@@ -142,14 +126,8 @@ extern "system" {
         szReaderName: LPCWSTR,
         szDeviceName: LPCWSTR,
     ) -> LONG;
-    pub fn SCardForgetReaderA(
-        hContext: SCARDCONTEXT,
-        szReaderName: LPCSTR,
-    ) -> LONG;
-    pub fn SCardForgetReaderW(
-        hContext: SCARDCONTEXT,
-        szReaderName: LPCWSTR,
-    ) -> LONG;
+    pub fn SCardForgetReaderA(hContext: SCARDCONTEXT, szReaderName: LPCSTR) -> LONG;
+    pub fn SCardForgetReaderW(hContext: SCARDCONTEXT, szReaderName: LPCWSTR) -> LONG;
     pub fn SCardAddReaderToGroupA(
         hContext: SCARDCONTEXT,
         szReaderName: LPCSTR,
@@ -202,22 +180,13 @@ extern "system" {
         dwProviderId: DWORD,
         szProvider: LPCWSTR,
     ) -> LONG;
-    pub fn SCardForgetCardTypeA(
-        hContext: SCARDCONTEXT,
-        szCardName: LPCSTR,
-    ) -> LONG;
-    pub fn SCardForgetCardTypeW(
-        hContext: SCARDCONTEXT,
-        szCardName: LPCWSTR,
-    ) -> LONG;
-    pub fn SCardFreeMemory(
-        hContext: SCARDCONTEXT,
-        pvMem: LPCVOID,
-    ) -> LONG;
+    pub fn SCardForgetCardTypeA(hContext: SCARDCONTEXT, szCardName: LPCSTR) -> LONG;
+    pub fn SCardForgetCardTypeW(hContext: SCARDCONTEXT, szCardName: LPCWSTR) -> LONG;
+    pub fn SCardFreeMemory(hContext: SCARDCONTEXT, pvMem: LPCVOID) -> LONG;
     pub fn SCardAccessStartedEvent() -> HANDLE;
     pub fn SCardReleaseStartedEvent();
 }
-STRUCT!{struct SCARD_READERSTATEA {
+STRUCT! {struct SCARD_READERSTATEA {
     szReader: LPCSTR,
     pvUserData: LPVOID,
     dwCurrentState: DWORD,
@@ -227,7 +196,7 @@ STRUCT!{struct SCARD_READERSTATEA {
 }}
 pub type PSCARD_READERSTATEA = *mut SCARD_READERSTATEA;
 pub type LPSCARD_READERSTATEA = *mut SCARD_READERSTATEA;
-STRUCT!{struct SCARD_READERSTATEW {
+STRUCT! {struct SCARD_READERSTATEW {
     szReader: LPCWSTR,
     pvUserData: LPVOID,
     dwCurrentState: DWORD,
@@ -269,7 +238,7 @@ extern "system" {
         cReaders: DWORD,
     ) -> LONG;
 }
-STRUCT!{struct SCARD_ATRMASK {
+STRUCT! {struct SCARD_ATRMASK {
     cbAtr: DWORD,
     rgbAtr: [BYTE; 36],
     rgbMask: [BYTE; 36],
@@ -303,9 +272,7 @@ extern "system" {
         rgReaderStates: LPSCARD_READERSTATEW,
         cReaders: DWORD,
     ) -> LONG;
-    pub fn SCardCancel(
-        hContext: SCARDCONTEXT,
-    ) -> LONG;
+    pub fn SCardCancel(hContext: SCARDCONTEXT) -> LONG;
 }
 pub const SCARD_SHARE_EXCLUSIVE: DWORD = 1;
 pub const SCARD_SHARE_SHARED: DWORD = 2;
@@ -338,17 +305,9 @@ extern "system" {
         dwInitialization: DWORD,
         pdwActiveProtocol: LPDWORD,
     ) -> LONG;
-    pub fn SCardDisconnect(
-        hCard: SCARDHANDLE,
-        dwDisposition: DWORD,
-    ) -> LONG;
-    pub fn SCardBeginTransaction(
-        hCard: SCARDHANDLE,
-    ) -> LONG;
-    pub fn SCardEndTransaction(
-        hCard: SCARDHANDLE,
-        dwDisposition: DWORD,
-    ) -> LONG;
+    pub fn SCardDisconnect(hCard: SCARDHANDLE, dwDisposition: DWORD) -> LONG;
+    pub fn SCardBeginTransaction(hCard: SCARDHANDLE) -> LONG;
+    pub fn SCardEndTransaction(hCard: SCARDHANDLE, dwDisposition: DWORD) -> LONG;
     pub fn SCardState(
         hCard: SCARDHANDLE,
         pdwState: LPDWORD,
@@ -383,10 +342,7 @@ extern "system" {
         pbRecvBuffer: LPBYTE,
         pcbRecvLength: LPDWORD,
     ) -> LONG;
-    pub fn SCardGetTransmitCount(
-        hCard: SCARDHANDLE,
-        pcTransmitCount: LPDWORD,
-    ) -> LONG;
+    pub fn SCardGetTransmitCount(hCard: SCARDHANDLE, pcTransmitCount: LPDWORD) -> LONG;
     pub fn SCardControl(
         hCard: SCARDHANDLE,
         dwControlCode: DWORD,
@@ -414,29 +370,29 @@ pub const SC_DLG_NO_UI: DWORD = 0x02;
 pub const SC_DLG_FORCE_UI: DWORD = 0x04;
 pub const SCERR_NOCARDNAME: DWORD = 0x4000;
 pub const SCERR_NOGUIDS: DWORD = 0x8000;
-FN!{stdcall LPOCNCONNPROCA(
+FN! {stdcall LPOCNCONNPROCA(
     SCARDCONTEXT,
     LPSTR,
     LPSTR,
     PVOID,
 ) -> SCARDHANDLE}
-FN!{stdcall LPOCNCONNPROCW(
+FN! {stdcall LPOCNCONNPROCW(
     SCARDCONTEXT,
     LPWSTR,
     LPWSTR,
     PVOID,
 ) -> SCARDHANDLE}
-FN!{stdcall LPOCNCHKPROC(
+FN! {stdcall LPOCNCHKPROC(
     SCARDCONTEXT,
     SCARDHANDLE,
     PVOID,
 ) -> BOOL}
-FN!{stdcall LPOCNDSCPROC(
+FN! {stdcall LPOCNDSCPROC(
     SCARDCONTEXT,
     SCARDHANDLE,
     PVOID,
 ) -> ()}
-STRUCT!{struct OPENCARD_SEARCH_CRITERIAA {
+STRUCT! {struct OPENCARD_SEARCH_CRITERIAA {
     dwStructSize: DWORD,
     lpstrGroupNames: LPSTR,
     nMaxGroupNames: DWORD,
@@ -453,7 +409,7 @@ STRUCT!{struct OPENCARD_SEARCH_CRITERIAA {
 }}
 pub type POPENCARD_SEARCH_CRITERIAA = *mut OPENCARD_SEARCH_CRITERIAA;
 pub type LPOPENCARD_SEARCH_CRITERIAA = *mut OPENCARD_SEARCH_CRITERIAA;
-STRUCT!{struct OPENCARD_SEARCH_CRITERIAW {
+STRUCT! {struct OPENCARD_SEARCH_CRITERIAW {
     dwStructSize: DWORD,
     lpstrGroupNames: LPWSTR,
     nMaxGroupNames: DWORD,
@@ -470,7 +426,7 @@ STRUCT!{struct OPENCARD_SEARCH_CRITERIAW {
 }}
 pub type POPENCARD_SEARCH_CRITERIAW = *mut OPENCARD_SEARCH_CRITERIAW;
 pub type LPOPENCARD_SEARCH_CRITERIAW = *mut OPENCARD_SEARCH_CRITERIAW;
-STRUCT!{struct OPENCARDNAME_EXA {
+STRUCT! {struct OPENCARDNAME_EXA {
     dwStructSize: DWORD,
     hSCardContext: SCARDCONTEXT,
     hwndOwner: HWND,
@@ -492,7 +448,7 @@ STRUCT!{struct OPENCARDNAME_EXA {
 }}
 pub type POPENCARDNAME_EXA = *mut OPENCARDNAME_EXA;
 pub type LPOPENCARDNAME_EXA = *mut OPENCARDNAME_EXA;
-STRUCT!{struct OPENCARDNAME_EXW {
+STRUCT! {struct OPENCARDNAME_EXW {
     dwStructSize: DWORD,
     hSCardContext: SCARDCONTEXT,
     hwndOwner: HWND,
@@ -521,12 +477,12 @@ pub type POPENCARDNAMEW_EX = POPENCARDNAME_EXW;
 pub type LPOPENCARDNAMEA_EX = LPOPENCARDNAME_EXA;
 pub type LPOPENCARDNAMEW_EX = LPOPENCARDNAME_EXW;
 pub const SCARD_READER_SEL_AUTH_PACKAGE: DWORD = -629i32 as u32;
-ENUM!{enum READER_SEL_REQUEST_MATCH_TYPE {
+ENUM! {enum READER_SEL_REQUEST_MATCH_TYPE {
     RSR_MATCH_TYPE_READER_AND_CONTAINER = 1,
     RSR_MATCH_TYPE_SERIAL_NUMBER,
     RSR_MATCH_TYPE_ALL_CARDS,
 }}
-STRUCT!{struct READER_SEL_REQUEST_ReaderAndContainerParameter {
+STRUCT! {struct READER_SEL_REQUEST_ReaderAndContainerParameter {
     cbReaderNameOffset: DWORD,
     cchReaderNameLength: DWORD,
     cbContainerNameOffset: DWORD,
@@ -534,32 +490,32 @@ STRUCT!{struct READER_SEL_REQUEST_ReaderAndContainerParameter {
     dwDesiredCardModuleVersion: DWORD,
     dwCspFlags: DWORD,
 }}
-STRUCT!{struct READER_SEL_REQUEST_SerialNumberParameter {
+STRUCT! {struct READER_SEL_REQUEST_SerialNumberParameter {
     cbSerialNumberOffset: DWORD,
     cbSerialNumberLength: DWORD,
     dwDesiredCardModuleVersion: DWORD,
 }}
-UNION!{union READER_SEL_REQUEST_u {
+UNION! {union READER_SEL_REQUEST_u {
     [u32; 6],
     ReaderAndContainerParameter ReaderAndContainerParameter_mut:
         READER_SEL_REQUEST_ReaderAndContainerParameter,
     SerialNumberParameter SerialNumberParameter_mut: READER_SEL_REQUEST_SerialNumberParameter,
 }}
-STRUCT!{struct READER_SEL_REQUEST {
+STRUCT! {struct READER_SEL_REQUEST {
     dwShareMode: DWORD,
     dwPreferredProtocols: DWORD,
     MatchType: READER_SEL_REQUEST_MATCH_TYPE,
     u: READER_SEL_REQUEST_u,
 }}
 pub type PREADER_SEL_REQUEST = *mut READER_SEL_REQUEST;
-STRUCT!{struct READER_SEL_RESPONSE {
+STRUCT! {struct READER_SEL_RESPONSE {
     cbReaderNameOffset: DWORD,
     cchReaderNameLength: DWORD,
     cbCardNameOffset: DWORD,
     cchCardNameLength: DWORD,
 }}
 pub type PREADER_SEL_RESPONSE = *mut READER_SEL_RESPONSE;
-STRUCT!{struct OPENCARDNAMEA {
+STRUCT! {struct OPENCARDNAMEA {
     dwStructSize: DWORD,
     hwndOwner: HWND,
     hSCardContext: SCARDCONTEXT,
@@ -586,7 +542,7 @@ STRUCT!{struct OPENCARDNAMEA {
 }}
 pub type POPENCARDNAMEA = *mut OPENCARDNAMEA;
 pub type LPOPENCARDNAMEA = *mut OPENCARDNAMEA;
-STRUCT!{struct OPENCARDNAMEW {
+STRUCT! {struct OPENCARDNAMEW {
     dwStructSize: DWORD,
     hwndOwner: HWND,
     hSCardContext: SCARDCONTEXT,
@@ -702,8 +658,5 @@ extern "system" {
 pub const SCARD_AUDIT_CHV_FAILURE: DWORD = 0x0;
 pub const SCARD_AUDIT_CHV_SUCCESS: DWORD = 0x1;
 extern "system" {
-    pub fn SCardAudit(
-        hContext: SCARDCONTEXT,
-        dwEvent: DWORD,
-    ) -> LONG;
+    pub fn SCardAudit(hContext: SCARDCONTEXT, dwEvent: DWORD) -> LONG;
 }

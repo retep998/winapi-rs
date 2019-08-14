@@ -16,18 +16,18 @@ pub type handle_t = RPC_BINDING_HANDLE;
 pub type rpc_binding_handle_t = RPC_BINDING_HANDLE;
 pub type UUID = GUID;
 pub type uuid_t = UUID;
-STRUCT!{struct RPC_BINDING_VECTOR {
+STRUCT! {struct RPC_BINDING_VECTOR {
     Count: c_ulong,
     BindingH: [RPC_BINDING_HANDLE; 1],
 }}
 pub type rpc_binding_vector_t = RPC_BINDING_VECTOR;
-STRUCT!{struct UUID_VECTOR {
+STRUCT! {struct UUID_VECTOR {
     Count: c_ulong,
     Uuid: [*mut UUID; 1],
 }}
 pub type uuid_vector_t = UUID_VECTOR;
 pub type RPC_IF_HANDLE = *mut c_void;
-STRUCT!{struct RPC_IF_ID {
+STRUCT! {struct RPC_IF_ID {
     Uuid: UUID,
     VersMajor: c_ushort,
     VersMinor: c_ushort,
@@ -74,34 +74,34 @@ pub const RPC_C_MQ_JOURNAL_NONE: DWORD = 0;
 pub const RPC_C_MQ_JOURNAL_DEADLETTER: DWORD = 1;
 pub const RPC_C_MQ_JOURNAL_ALWAYS: DWORD = 2;
 pub const RPC_C_FULL_CERT_CHAIN: DWORD = 0x0001;
-STRUCT!{struct RPC_PROTSEQ_VECTORA {
+STRUCT! {struct RPC_PROTSEQ_VECTORA {
     Count: c_uint,
     Protseq: [*mut c_uchar; 1],
 }}
-STRUCT!{struct RPC_PROTSEQ_VECTORW {
+STRUCT! {struct RPC_PROTSEQ_VECTORW {
     Count: c_uint,
     Protseq: [*mut c_ushort; 1],
 }}
-STRUCT!{struct RPC_POLICY {
+STRUCT! {struct RPC_POLICY {
     Length: c_uint,
     EndpointFlags: c_ulong,
     NICFlags: c_ulong,
 }}
 pub type PRPC_POLICY = *mut RPC_POLICY;
-FN!{stdcall RPC_OBJECT_INQ_FN(
+FN! {stdcall RPC_OBJECT_INQ_FN(
     ObjectUuid: *mut UUID,
     TypeUuid: *mut UUID,
     Status: *mut RPC_STATUS,
 ) -> ()}
-FN!{stdcall RPC_IF_CALLBACK_FN(
+FN! {stdcall RPC_IF_CALLBACK_FN(
     InterfaceUuid: RPC_IF_HANDLE,
     Context: *mut c_void,
 ) -> RPC_STATUS}
-FN!{stdcall RPC_SECURITY_CALLBACK_FN(
+FN! {stdcall RPC_SECURITY_CALLBACK_FN(
     Context: *mut c_void,
 ) -> ()}
 pub type RPC_MGR_EPV = c_void;
-STRUCT!{struct RPC_STATS_VECTOR {
+STRUCT! {struct RPC_STATS_VECTOR {
     Count: c_uint,
     Stats: [c_ulong; 1],
 }}
@@ -109,7 +109,7 @@ pub const RPC_C_STATS_CALLS_IN: c_ulong = 0;
 pub const RPC_C_STATS_CALLS_OUT: c_ulong = 1;
 pub const RPC_C_STATS_PKTS_IN: c_ulong = 2;
 pub const RPC_C_STATS_PKTS_OUT: c_ulong = 3;
-STRUCT!{struct RPC_IF_ID_VECTOR {
+STRUCT! {struct RPC_IF_ID_VECTOR {
     Count: c_ulong,
     IfId: [*mut RPC_IF_ID; 1],
 }}
@@ -165,14 +165,14 @@ pub const RPC_C_AUTHN_DEFAULT: DWORD = 0xFFFFFFFF;
 pub const RPC_C_NO_CREDENTIALS: DWORD = 0xFFFFFFFF;
 pub const RPC_C_SECURITY_QOS_VERSION: DWORD = 1;
 pub const RPC_C_SECURITY_QOS_VERSION_1: DWORD = 1;
-STRUCT!{struct RPC_SECURITY_QOS {
+STRUCT! {struct RPC_SECURITY_QOS {
     Version: c_ulong,
     Capabilities: c_ulong,
     IdentityTracking: c_ulong,
     ImpersonationType: c_ulong,
 }}
 pub type PRPC_SECURITY_QOS = *mut RPC_SECURITY_QOS;
-STRUCT!{struct SEC_WINNT_AUTH_IDENTITY_W {
+STRUCT! {struct SEC_WINNT_AUTH_IDENTITY_W {
     User: *mut c_ushort,
     UserLength: c_ulong,
     Domain: *mut c_ushort,
@@ -182,7 +182,7 @@ STRUCT!{struct SEC_WINNT_AUTH_IDENTITY_W {
     Flags: c_ulong,
 }}
 pub type PSEC_WINNT_AUTH_IDENTITY_W = *mut SEC_WINNT_AUTH_IDENTITY_W;
-STRUCT!{struct SEC_WINNT_AUTH_IDENTITY_A {
+STRUCT! {struct SEC_WINNT_AUTH_IDENTITY_A {
     User: *mut c_uchar,
     UserLength: c_ulong,
     Domain: *mut c_uchar,
@@ -205,7 +205,7 @@ pub const RPC_C_HTTP_FLAG_USE_SSL: c_ulong = 1;
 pub const RPC_C_HTTP_FLAG_USE_FIRST_AUTH_SCHEME: c_ulong = 2;
 pub const RPC_C_HTTP_FLAG_IGNORE_CERT_CN_INVALID: c_ulong = 8;
 pub const RPC_C_HTTP_FLAG_ENABLE_CERT_REVOCATION_CHECK: c_ulong = 16;
-STRUCT!{struct RPC_HTTP_TRANSPORT_CREDENTIALS_W {
+STRUCT! {struct RPC_HTTP_TRANSPORT_CREDENTIALS_W {
     TransportCredentials: *mut SEC_WINNT_AUTH_IDENTITY_W,
     Flags: c_ulong,
     AuthenticationTarget: c_ulong,
@@ -214,7 +214,7 @@ STRUCT!{struct RPC_HTTP_TRANSPORT_CREDENTIALS_W {
     ServerCertificateSubject: *mut c_ushort,
 }}
 pub type PRPC_HTTP_TRANSPORT_CREDENTIALS_W = *mut RPC_HTTP_TRANSPORT_CREDENTIALS_W;
-STRUCT!{struct RPC_HTTP_TRANSPORT_CREDENTIALS_A {
+STRUCT! {struct RPC_HTTP_TRANSPORT_CREDENTIALS_A {
     TransportCredentials: *mut SEC_WINNT_AUTH_IDENTITY_A,
     Flags: c_ulong,
     AuthenticationTarget: c_ulong,
@@ -223,7 +223,7 @@ STRUCT!{struct RPC_HTTP_TRANSPORT_CREDENTIALS_A {
     ServerCertificateSubject: *mut c_uchar,
 }}
 pub type PRPC_HTTP_TRANSPORT_CREDENTIALS_A = *mut RPC_HTTP_TRANSPORT_CREDENTIALS_A;
-STRUCT!{struct RPC_HTTP_TRANSPORT_CREDENTIALS_V2_W {
+STRUCT! {struct RPC_HTTP_TRANSPORT_CREDENTIALS_V2_W {
     TransportCredentials: *mut SEC_WINNT_AUTH_IDENTITY_W,
     Flags: c_ulong,
     AuthenticationTarget: c_ulong,
@@ -235,7 +235,7 @@ STRUCT!{struct RPC_HTTP_TRANSPORT_CREDENTIALS_V2_W {
     ProxyAuthnSchemes: *mut c_ulong,
 }}
 pub type PRPC_HTTP_TRANSPORT_CREDENTIALS_V2_W = *mut RPC_HTTP_TRANSPORT_CREDENTIALS_V2_W;
-STRUCT!{struct RPC_HTTP_TRANSPORT_CREDENTIALS_V2_A {
+STRUCT! {struct RPC_HTTP_TRANSPORT_CREDENTIALS_V2_A {
     TransportCredentials: *mut SEC_WINNT_AUTH_IDENTITY_A,
     Flags: c_ulong,
     AuthenticationTarget: c_ulong,
@@ -247,7 +247,7 @@ STRUCT!{struct RPC_HTTP_TRANSPORT_CREDENTIALS_V2_A {
     ProxyAuthnSchemes: *mut c_ulong,
 }}
 pub type PRPC_HTTP_TRANSPORT_CREDENTIALS_V2_A = *mut RPC_HTTP_TRANSPORT_CREDENTIALS_V2_A;
-STRUCT!{struct RPC_HTTP_TRANSPORT_CREDENTIALS_V3_W {
+STRUCT! {struct RPC_HTTP_TRANSPORT_CREDENTIALS_V3_W {
     TransportCredentials: RPC_AUTH_IDENTITY_HANDLE,
     Flags: c_ulong,
     AuthenticationTarget: c_ulong,
@@ -259,7 +259,7 @@ STRUCT!{struct RPC_HTTP_TRANSPORT_CREDENTIALS_V3_W {
     ProxyAuthnSchemes: *mut c_ulong,
 }}
 pub type PRPC_HTTP_TRANSPORT_CREDENTIALS_V3_W = *mut RPC_HTTP_TRANSPORT_CREDENTIALS_V3_W;
-STRUCT!{struct RPC_HTTP_TRANSPORT_CREDENTIALS_V3_A {
+STRUCT! {struct RPC_HTTP_TRANSPORT_CREDENTIALS_V3_A {
     TransportCredentials: RPC_AUTH_IDENTITY_HANDLE,
     Flags: c_ulong,
     AuthenticationTarget: c_ulong,
@@ -271,10 +271,10 @@ STRUCT!{struct RPC_HTTP_TRANSPORT_CREDENTIALS_V3_A {
     ProxyAuthnSchemes: *mut c_ulong,
 }}
 pub type PRPC_HTTP_TRANSPORT_CREDENTIALS_V3_A = *mut RPC_HTTP_TRANSPORT_CREDENTIALS_V3_A;
-STRUCT!{struct RPC_SECURITY_QOS_V2_W_union {
+STRUCT! {struct RPC_SECURITY_QOS_V2_W_union {
     HttpCredentials: *mut RPC_HTTP_TRANSPORT_CREDENTIALS_W,
 }}
-STRUCT!{struct RPC_SECURITY_QOS_V2_W {
+STRUCT! {struct RPC_SECURITY_QOS_V2_W {
     Version: c_ulong,
     Capabilities: c_ulong,
     IdentityTracking: c_ulong,
@@ -283,10 +283,10 @@ STRUCT!{struct RPC_SECURITY_QOS_V2_W {
     u: RPC_SECURITY_QOS_V2_W_union,
 }}
 pub type PRPC_SECURITY_QOS_V2_W = *mut RPC_SECURITY_QOS_V2_W;
-STRUCT!{struct RPC_SECURITY_QOS_V2_A_union {
+STRUCT! {struct RPC_SECURITY_QOS_V2_A_union {
     HttpCredentials: *mut RPC_HTTP_TRANSPORT_CREDENTIALS_A,
 }}
-STRUCT!{struct RPC_SECURITY_QOS_V2_A {
+STRUCT! {struct RPC_SECURITY_QOS_V2_A {
     Version: c_ulong,
     Capabilities: c_ulong,
     IdentityTracking: c_ulong,
@@ -295,10 +295,10 @@ STRUCT!{struct RPC_SECURITY_QOS_V2_A {
     u: RPC_SECURITY_QOS_V2_A_union,
 }}
 pub type PRPC_SECURITY_QOS_V2_A = *mut RPC_SECURITY_QOS_V2_A;
-STRUCT!{struct RPC_SECURITY_QOS_V3_W_union {
+STRUCT! {struct RPC_SECURITY_QOS_V3_W_union {
     HttpCredentials: *mut RPC_HTTP_TRANSPORT_CREDENTIALS_W,
 }}
-STRUCT!{struct RPC_SECURITY_QOS_V3_W {
+STRUCT! {struct RPC_SECURITY_QOS_V3_W {
     Version: c_ulong,
     Capabilities: c_ulong,
     IdentityTracking: c_ulong,
@@ -308,10 +308,10 @@ STRUCT!{struct RPC_SECURITY_QOS_V3_W {
     Sid: *mut c_void,
 }}
 pub type PRPC_SECURITY_QOS_V3_W = *mut RPC_SECURITY_QOS_V3_W;
-STRUCT!{struct RPC_SECURITY_QOS_V3_A_union {
+STRUCT! {struct RPC_SECURITY_QOS_V3_A_union {
     HttpCredentials: *mut RPC_HTTP_TRANSPORT_CREDENTIALS_A,
 }}
-STRUCT!{struct RPC_SECURITY_QOS_V3_A {
+STRUCT! {struct RPC_SECURITY_QOS_V3_A {
     Version: c_ulong,
     Capabilities: c_ulong,
     IdentityTracking: c_ulong,
@@ -321,10 +321,10 @@ STRUCT!{struct RPC_SECURITY_QOS_V3_A {
     Sid: *mut c_void,
 }}
 pub type PRPC_SECURITY_QOS_V3_A = *mut RPC_SECURITY_QOS_V3_A;
-STRUCT!{struct RPC_SECURITY_QOS_V4_W_union {
+STRUCT! {struct RPC_SECURITY_QOS_V4_W_union {
     HttpCredentials: *mut RPC_HTTP_TRANSPORT_CREDENTIALS_W,
 }}
-STRUCT!{struct RPC_SECURITY_QOS_V4_W {
+STRUCT! {struct RPC_SECURITY_QOS_V4_W {
     Version: c_ulong,
     Capabilities: c_ulong,
     IdentityTracking: c_ulong,
@@ -335,10 +335,10 @@ STRUCT!{struct RPC_SECURITY_QOS_V4_W {
     EffectiveOnly: c_uint,
 }}
 pub type PRPC_SECURITY_QOS_V4_W = *mut RPC_SECURITY_QOS_V4_W;
-STRUCT!{struct RPC_SECURITY_QOS_V4_A_union {
+STRUCT! {struct RPC_SECURITY_QOS_V4_A_union {
     HttpCredentials: *mut RPC_HTTP_TRANSPORT_CREDENTIALS_A,
 }}
-STRUCT!{struct RPC_SECURITY_QOS_V4_A {
+STRUCT! {struct RPC_SECURITY_QOS_V4_A {
     Version: c_ulong,
     Capabilities: c_ulong,
     IdentityTracking: c_ulong,
@@ -349,10 +349,10 @@ STRUCT!{struct RPC_SECURITY_QOS_V4_A {
     EffectiveOnly: c_uint,
 }}
 pub type PRPC_SECURITY_QOS_V4_A = *mut RPC_SECURITY_QOS_V4_A;
-STRUCT!{struct RPC_SECURITY_QOS_V5_W_union {
+STRUCT! {struct RPC_SECURITY_QOS_V5_W_union {
     HttpCredentials: *mut RPC_HTTP_TRANSPORT_CREDENTIALS_W,
 }}
-STRUCT!{struct RPC_SECURITY_QOS_V5_W {
+STRUCT! {struct RPC_SECURITY_QOS_V5_W {
     Version: c_ulong,
     Capabilities: c_ulong,
     IdentityTracking: c_ulong,
@@ -364,10 +364,10 @@ STRUCT!{struct RPC_SECURITY_QOS_V5_W {
     ServerSecurityDescriptor: *mut c_void,
 }}
 pub type PRPC_SECURITY_QOS_V5_W = *mut RPC_SECURITY_QOS_V5_W;
-STRUCT!{struct RPC_SECURITY_QOS_V5_A_union {
+STRUCT! {struct RPC_SECURITY_QOS_V5_A_union {
     HttpCredentials: *mut RPC_HTTP_TRANSPORT_CREDENTIALS_A,
 }}
-STRUCT!{struct RPC_SECURITY_QOS_V5_A {
+STRUCT! {struct RPC_SECURITY_QOS_V5_A {
     Version: c_ulong,
     Capabilities: c_ulong,
     IdentityTracking: c_ulong,
@@ -387,10 +387,10 @@ pub const RPC_BHT_OBJECT_UUID_VALID: c_ulong = 0x1;
 pub const RPC_BHO_NONCAUSAL: c_ulong = 0x1;
 pub const RPC_BHO_DONTLINGER: c_ulong = 0x2;
 pub const RPC_BHO_EXCLUSIVE_AND_GUARANTEED: c_ulong = 0x4;
-STRUCT!{struct RPC_BINDING_HANDLE_TEMPLATE_V1_W_union {
+STRUCT! {struct RPC_BINDING_HANDLE_TEMPLATE_V1_W_union {
     Reserved: *mut c_ushort,
 }}
-STRUCT!{struct RPC_BINDING_HANDLE_TEMPLATE_V1_W {
+STRUCT! {struct RPC_BINDING_HANDLE_TEMPLATE_V1_W {
     Version: c_ulong,
     Flags: c_ulong,
     ProtocolSequence: c_ulong,
@@ -400,10 +400,10 @@ STRUCT!{struct RPC_BINDING_HANDLE_TEMPLATE_V1_W {
     ObjectUuid: UUID,
 }}
 pub type PRPC_BINDING_HANDLE_TEMPLATE_V1_W = *mut RPC_BINDING_HANDLE_TEMPLATE_V1_W;
-STRUCT!{struct RPC_BINDING_HANDLE_TEMPLATE_V1_A_union {
+STRUCT! {struct RPC_BINDING_HANDLE_TEMPLATE_V1_A_union {
     Reserved: *mut c_uchar,
 }}
-STRUCT!{struct RPC_BINDING_HANDLE_TEMPLATE_V1_A {
+STRUCT! {struct RPC_BINDING_HANDLE_TEMPLATE_V1_A {
     Version: c_ulong,
     Flags: c_ulong,
     ProtocolSequence: c_ulong,
@@ -413,7 +413,7 @@ STRUCT!{struct RPC_BINDING_HANDLE_TEMPLATE_V1_A {
     ObjectUuid: UUID,
 }}
 pub type PRPC_BINDING_HANDLE_TEMPLATE_V1_A = *mut RPC_BINDING_HANDLE_TEMPLATE_V1_A;
-STRUCT!{struct RPC_BINDING_HANDLE_SECURITY_V1_W {
+STRUCT! {struct RPC_BINDING_HANDLE_SECURITY_V1_W {
     Version: c_ulong,
     ServerPrincName: *mut c_ushort,
     AuthnLevel: c_ulong,
@@ -422,7 +422,7 @@ STRUCT!{struct RPC_BINDING_HANDLE_SECURITY_V1_W {
     SecurityQos: *mut RPC_SECURITY_QOS,
 }}
 pub type PRPC_BINDING_HANDLE_SECURITY_V1_W = *mut RPC_BINDING_HANDLE_SECURITY_V1_W;
-STRUCT!{struct RPC_BINDING_HANDLE_SECURITY_V1_A {
+STRUCT! {struct RPC_BINDING_HANDLE_SECURITY_V1_A {
     Version: c_ulong,
     ServerPrincName: *mut c_uchar,
     AuthnLevel: c_ulong,
@@ -431,21 +431,21 @@ STRUCT!{struct RPC_BINDING_HANDLE_SECURITY_V1_A {
     SecurityQos: *mut RPC_SECURITY_QOS,
 }}
 pub type PRPC_BINDING_HANDLE_SECURITY_V1_A = *mut RPC_BINDING_HANDLE_SECURITY_V1_A;
-STRUCT!{struct RPC_BINDING_HANDLE_OPTIONS_V1 {
+STRUCT! {struct RPC_BINDING_HANDLE_OPTIONS_V1 {
     Version: c_ulong,
     Flags: c_ulong,
     ComTimeout: c_ulong,
     CallTimeout: c_ulong,
 }}
 pub type PRPC_BINDING_HANDLE_OPTIONS_V1 = *mut RPC_BINDING_HANDLE_OPTIONS_V1;
-ENUM!{enum RPC_HTTP_REDIRECTOR_STAGE {
+ENUM! {enum RPC_HTTP_REDIRECTOR_STAGE {
     RPCHTTP_RS_REDIRECT = 1,
     RPCHTTP_RS_ACCESS_1,
     RPCHTTP_RS_SESSION,
     RPCHTTP_RS_ACCESS_2,
     RPCHTTP_RS_INTERFACE,
 }}
-FN!{stdcall RPC_NEW_HTTP_PROXY_CHANNEL(
+FN! {stdcall RPC_NEW_HTTP_PROXY_CHANNEL(
     RedirectorStage: RPC_HTTP_REDIRECTOR_STAGE,
     ServerName: RPC_WSTR,
     ServerPort: RPC_WSTR,
@@ -459,21 +459,21 @@ FN!{stdcall RPC_NEW_HTTP_PROXY_CHANNEL(
     NewServerName: *mut RPC_WSTR,
     NewServerPort: *mut RPC_WSTR,
 ) -> RPC_STATUS}
-FN!{stdcall RPC_HTTP_PROXY_FREE_STRING(
+FN! {stdcall RPC_HTTP_PROXY_FREE_STRING(
     String: RPC_WSTR,
 ) -> ()}
 pub const RPC_C_AUTHZ_NONE: DWORD = 0;
 pub const RPC_C_AUTHZ_NAME: DWORD = 1;
 pub const RPC_C_AUTHZ_DCE: DWORD = 2;
 pub const RPC_C_AUTHZ_DEFAULT: DWORD = 0xffffffff;
-FN!{stdcall RPC_AUTH_KEY_RETRIEVAL_FN(
+FN! {stdcall RPC_AUTH_KEY_RETRIEVAL_FN(
     Arg: *mut c_void,
     ServerPrincName: RPC_WSTR,
     KeyVer: c_ulong,
     Key: *mut *mut c_void,
     Status: *mut RPC_STATUS,
 ) -> ()}
-STRUCT!{struct RPC_CLIENT_INFORMATION1 {
+STRUCT! {struct RPC_CLIENT_INFORMATION1 {
     UserName: *mut c_uchar,
     ComputerName: *mut c_uchar,
     Privilege: c_ushort,
@@ -490,7 +490,7 @@ pub const RPC_C_VERS_COMPATIBLE: c_ulong = 2;
 pub const RPC_C_VERS_EXACT: c_ulong = 3;
 pub const RPC_C_VERS_MAJOR_ONLY: c_ulong = 4;
 pub const RPC_C_VERS_UPTO: c_ulong = 5;
-FN!{stdcall RPC_MGMT_AUTHORIZATION_FN(
+FN! {stdcall RPC_MGMT_AUTHORIZATION_FN(
     ClientBinding: RPC_BINDING_HANDLE,
     RequestedMgmtOperation: c_ulong,
     Status: *mut RPC_STATUS,
@@ -512,7 +512,7 @@ pub const RPC_IF_ASYNC_CALLBACK: c_uint = 0x0100;
 pub const RPC_FW_IF_FLAG_DCOM: c_uint = 0x0001;
 pub type RPC_INTERFACE_GROUP = *mut c_void;
 pub type PRPC_INTERFACE_GROUP = *mut *mut c_void;
-STRUCT!{struct RPC_ENDPOINT_TEMPLATEW {
+STRUCT! {struct RPC_ENDPOINT_TEMPLATEW {
     Version: c_ulong,
     ProtSeq: RPC_WSTR,
     Endpoint: RPC_WSTR,
@@ -520,7 +520,7 @@ STRUCT!{struct RPC_ENDPOINT_TEMPLATEW {
     Backlog: c_ulong,
 }}
 pub type PRPC_ENDPOINT_TEMPLATEW = *mut RPC_ENDPOINT_TEMPLATEW;
-STRUCT!{struct RPC_ENDPOINT_TEMPLATEA {
+STRUCT! {struct RPC_ENDPOINT_TEMPLATEA {
     Version: c_ulong,
     ProtSeq: RPC_CSTR,
     Endpoint: RPC_CSTR,
@@ -528,7 +528,7 @@ STRUCT!{struct RPC_ENDPOINT_TEMPLATEA {
     Backlog: c_ulong,
 }}
 pub type PRPC_ENDPOINT_TEMPLATEA = *mut RPC_ENDPOINT_TEMPLATEA;
-STRUCT!{struct RPC_INTERFACE_TEMPLATEA {
+STRUCT! {struct RPC_INTERFACE_TEMPLATEA {
     Version: c_ulong,
     IfSpec: RPC_IF_HANDLE,
     MgrTypeUuid: *mut UUID,
@@ -542,7 +542,7 @@ STRUCT!{struct RPC_INTERFACE_TEMPLATEA {
     SecurityDescriptor: *mut c_void,
 }}
 pub type PRPC_INTERFACE_TEMPLATEA = *mut RPC_INTERFACE_TEMPLATEA;
-STRUCT!{struct RPC_INTERFACE_TEMPLATEW {
+STRUCT! {struct RPC_INTERFACE_TEMPLATEW {
     Version: c_ulong,
     IfSpec: RPC_IF_HANDLE,
     MgrTypeUuid: *mut UUID,
@@ -556,7 +556,7 @@ STRUCT!{struct RPC_INTERFACE_TEMPLATEW {
     SecurityDescriptor: *mut c_void,
 }}
 pub type PRPC_INTERFACE_TEMPLATEW = *mut RPC_INTERFACE_TEMPLATEW;
-FN!{stdcall RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN(
+FN! {stdcall RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN(
     IfGroup: RPC_INTERFACE_GROUP,
     IdleCallbackContext: *mut c_void,
     IsGroupIdle: c_ulong,

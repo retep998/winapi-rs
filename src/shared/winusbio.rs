@@ -19,16 +19,16 @@ pub const DEVICE_SPEED: ULONG = 0x01;
 pub const LowSpeed: ULONG = 0x01;
 pub const FullSpeed: ULONG = 0x02;
 pub const HighSpeed: ULONG = 0x03;
-DEFINE_GUID!{WinUSB_TestGuid,
-    0xda812bff, 0x12c3, 0x46a2, 0x8e, 0x2b, 0xdb, 0xd3, 0xb7, 0x83, 0x4c, 0x43}
-STRUCT!{struct WINUSB_PIPE_INFORMATION {
+DEFINE_GUID! {WinUSB_TestGuid,
+0xda812bff, 0x12c3, 0x46a2, 0x8e, 0x2b, 0xdb, 0xd3, 0xb7, 0x83, 0x4c, 0x43}
+STRUCT! {struct WINUSB_PIPE_INFORMATION {
     PipeType: USBD_PIPE_TYPE,
     PipeId: UCHAR,
     MaximumPacketSize: USHORT,
     Interval: UCHAR,
 }}
 pub type PWINUSB_PIPE_INFORMATION = *mut WINUSB_PIPE_INFORMATION;
-STRUCT!{struct WINUSB_PIPE_INFORMATION_EX {
+STRUCT! {struct WINUSB_PIPE_INFORMATION_EX {
     PipeType: USBD_PIPE_TYPE,
     PipeId: UCHAR,
     MaximumPacketSize: USHORT,

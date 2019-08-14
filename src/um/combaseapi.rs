@@ -15,20 +15,18 @@ use shared::wtypesbase::{
 };
 use um::objidl::SOLE_AUTHENTICATION_SERVICE;
 use um::objidlbase::{
-    APTTYPE, APTTYPEQUALIFIER, COSERVERINFO, IActivationFilter, IAgileReference, LPMALLOC,
+    IActivationFilter, IAgileReference, APTTYPE, APTTYPEQUALIFIER, COSERVERINFO, LPMALLOC,
     LPMARSHAL, LPSTREAM, LPSURROGATE, MULTI_QI,
 };
 use um::propidl::PROPVARIANT;
 use um::unknwnbase::{IUnknown, LPUNKNOWN};
-use um::winnt::{HANDLE, HRESULT, LARGE_INTEGER, LONG, PSECURITY_DESCRIPTOR, PVOID, ULARGE_INTEGER};
+use um::winnt::{
+    HANDLE, HRESULT, LARGE_INTEGER, LONG, PSECURITY_DESCRIPTOR, PVOID, ULARGE_INTEGER,
+};
 #[inline]
 pub fn LISet32(li: &mut LARGE_INTEGER, v: DWORD) {
     unsafe {
-        li.u_mut().HighPart = if (v as LONG) < 0 {
-            -1
-        } else {
-            0
-        };
+        li.u_mut().HighPart = if (v as LONG) < 0 { -1 } else { 0 };
         li.u_mut().LowPart = v;
     }
 }
@@ -40,11 +38,10 @@ pub fn ULISet32(li: &mut ULARGE_INTEGER, v: DWORD) {
     }
 }
 pub const CLSCTX_INPROC: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER;
-pub const CLSCTX_ALL: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER | CLSCTX_LOCAL_SERVER
-    | CLSCTX_REMOTE_SERVER;
-pub const CLSCTX_SERVER: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER
-    | CLSCTX_REMOTE_SERVER;
-ENUM!{enum REGCLS {
+pub const CLSCTX_ALL: CLSCTX =
+    CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER | CLSCTX_LOCAL_SERVER | CLSCTX_REMOTE_SERVER;
+pub const CLSCTX_SERVER: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER | CLSCTX_REMOTE_SERVER;
+ENUM! {enum REGCLS {
     REGCLS_SINGLEUSE = 0,
     REGCLS_MULTIPLEUSE = 1,
     REGCLS_MULTI_SEPARATE = 2,
@@ -52,49 +49,30 @@ ENUM!{enum REGCLS {
     REGCLS_SURROGATE = 8,
     REGCLS_AGILE = 0x10,
 }}
-ENUM!{enum COINITBASE {
+ENUM! {enum COINITBASE {
     COINITBASE_MULTITHREADED = 0x0,
 }}
 extern "system" {
-    pub fn CoGetMalloc(
-        dwMemContext: DWORD,
-        ppMalloc: *mut LPMALLOC,
-    ) -> HRESULT;
+    pub fn CoGetMalloc(dwMemContext: DWORD, ppMalloc: *mut LPMALLOC) -> HRESULT;
     pub fn CreateStreamOnHGlobal(
         hGlobal: HGLOBAL,
         fDeleteOnRelease: BOOL,
         ppstm: *mut LPSTREAM,
     ) -> HRESULT;
-    pub fn GetHGlobalFromStream(
-        pstm: LPSTREAM,
-        phglobal: *mut HGLOBAL,
-    ) -> HRESULT;
+    pub fn GetHGlobalFromStream(pstm: LPSTREAM, phglobal: *mut HGLOBAL) -> HRESULT;
     pub fn CoUninitialize() -> ();
     pub fn CoGetCurrentProcess() -> DWORD;
-    pub fn CoInitializeEx(
-        pvReserved: LPVOID,
-        dwCoInit: DWORD,
-    ) -> HRESULT;
-    pub fn CoGetCallerTID(
-        lpdwTID: LPDWORD,
-    ) -> HRESULT;
-    pub fn CoGetCurrentLogicalThreadId(
-        pguid: *mut GUID,
-    ) -> HRESULT;
-    pub fn CoGetContextToken(
-        pToken: *mut ULONG_PTR,
-    ) -> HRESULT;
-    pub fn CoGetDefaultContext(
-        aptType: APTTYPE,
-        riid: REFIID,
-        ppv: *mut *mut c_void,
-    ) -> HRESULT;
+    pub fn CoInitializeEx(pvReserved: LPVOID, dwCoInit: DWORD) -> HRESULT;
+    pub fn CoGetCallerTID(lpdwTID: LPDWORD) -> HRESULT;
+    pub fn CoGetCurrentLogicalThreadId(pguid: *mut GUID) -> HRESULT;
+    pub fn CoGetContextToken(pToken: *mut ULONG_PTR) -> HRESULT;
+    pub fn CoGetDefaultContext(aptType: APTTYPE, riid: REFIID, ppv: *mut *mut c_void) -> HRESULT;
     pub fn CoGetApartmentType(
         pAptType: *mut APTTYPE,
         pAptQualifier: *mut APTTYPEQUALIFIER,
     ) -> HRESULT;
 }
-STRUCT!{struct ServerInformation {
+STRUCT! {struct ServerInformation {
     dwServerPid: DWORD,
     dwServerTid: DWORD,
     ui64ServerAddress: UINT64,
@@ -107,21 +85,12 @@ extern "system" {
         pServerInformation: PServerInformation,
     ) -> HRESULT;
 }
-DECLARE_HANDLE!{CO_MTA_USAGE_COOKIE, CO_MTA_USAGE_COOKIE__}
+DECLARE_HANDLE! {CO_MTA_USAGE_COOKIE, CO_MTA_USAGE_COOKIE__}
 extern "system" {
-    pub fn CoIncrementMTAUsage(
-        pCookie: *mut CO_MTA_USAGE_COOKIE,
-    ) -> HRESULT;
-    pub fn CoDecrementMTAUsage(
-        Cookie: CO_MTA_USAGE_COOKIE,
-    ) -> HRESULT;
-    pub fn CoAllowUnmarshalerCLSID(
-        clsid: REFCLSID,
-    ) -> HRESULT;
-    pub fn CoGetObjectContext(
-        riid: REFIID,
-        ppv: *mut LPVOID,
-    ) -> HRESULT;
+    pub fn CoIncrementMTAUsage(pCookie: *mut CO_MTA_USAGE_COOKIE) -> HRESULT;
+    pub fn CoDecrementMTAUsage(Cookie: CO_MTA_USAGE_COOKIE) -> HRESULT;
+    pub fn CoAllowUnmarshalerCLSID(clsid: REFCLSID) -> HRESULT;
+    pub fn CoGetObjectContext(riid: REFIID, ppv: *mut LPVOID) -> HRESULT;
     pub fn CoGetClassObject(
         rclsid: REFCLSID,
         dwClsContext: DWORD,
@@ -136,24 +105,14 @@ extern "system" {
         flags: DWORD,
         lpdwRegister: LPDWORD,
     ) -> HRESULT;
-    pub fn CoRevokeClassObject(
-        dwRegister: DWORD,
-    ) -> HRESULT;
+    pub fn CoRevokeClassObject(dwRegister: DWORD) -> HRESULT;
     pub fn CoResumeClassObjects() -> HRESULT;
     pub fn CoSuspendClassObjects() -> HRESULT;
     pub fn CoAddRefServerProcess() -> ULONG;
     pub fn CoReleaseServerProcess() -> ULONG;
-    pub fn CoGetPSClsid(
-        riid: REFIID,
-        pClsid: *mut CLSID,
-    ) -> HRESULT;
-    pub fn CoRegisterPSClsid(
-        riid: REFIID,
-        rclsid: REFCLSID,
-    ) -> HRESULT;
-    pub fn CoRegisterSurrogate(
-        pSurrogate: LPSURROGATE,
-    ) -> HRESULT;
+    pub fn CoGetPSClsid(riid: REFIID, pClsid: *mut CLSID) -> HRESULT;
+    pub fn CoRegisterPSClsid(riid: REFIID, rclsid: REFCLSID) -> HRESULT;
+    pub fn CoRegisterSurrogate(pSurrogate: LPSURROGATE) -> HRESULT;
     pub fn CoGetMarshalSizeMax(
         pulSize: *mut ULONG,
         riid: REFIID,
@@ -170,31 +129,13 @@ extern "system" {
         pvDestContext: LPVOID,
         mshlflags: DWORD,
     ) -> HRESULT;
-    pub fn CoUnmarshalInterface(
-        pStm: LPSTREAM,
-        riid: REFIID,
-        ppv: *mut LPVOID,
-    ) -> HRESULT;
-    pub fn CoMarshalHresult(
-        pstm: LPSTREAM,
-        hresult: HRESULT,
-    ) -> HRESULT;
-    pub fn CoUnmarshalHresult(
-        pstm: LPSTREAM,
-        phresult: *mut HRESULT,
-    ) -> HRESULT;
-    pub fn CoReleaseMarshalData(
-        pstm: LPSTREAM,
-    ) -> HRESULT;
-    pub fn CoDisconnectObject(
-        pUnk: LPUNKNOWN,
-        dwReserved: DWORD,
-    ) -> HRESULT;
-    pub fn CoLockObjectExternal(
-        pUnk: LPUNKNOWN,
-        fLock: BOOL,
-        fLastUnlockReleases: BOOL,
-    ) -> HRESULT;
+    pub fn CoUnmarshalInterface(pStm: LPSTREAM, riid: REFIID, ppv: *mut LPVOID) -> HRESULT;
+    pub fn CoMarshalHresult(pstm: LPSTREAM, hresult: HRESULT) -> HRESULT;
+    pub fn CoUnmarshalHresult(pstm: LPSTREAM, phresult: *mut HRESULT) -> HRESULT;
+    pub fn CoReleaseMarshalData(pstm: LPSTREAM) -> HRESULT;
+    pub fn CoDisconnectObject(pUnk: LPUNKNOWN, dwReserved: DWORD) -> HRESULT;
+    pub fn CoLockObjectExternal(pUnk: LPUNKNOWN, fLock: BOOL, fLastUnlockReleases: BOOL)
+        -> HRESULT;
     pub fn CoGetStandardMarshal(
         riid: REFIID,
         pUnk: LPUNKNOWN,
@@ -209,36 +150,26 @@ extern "system" {
         ppUnkInner: *mut LPUNKNOWN,
     ) -> HRESULT;
 }
-ENUM!{enum STDMSHLFLAGS {
+ENUM! {enum STDMSHLFLAGS {
     SMEXF_SERVER = 0x01,
     SMEXF_HANDLER = 0x02,
 }}
 extern "system" {
-    pub fn CoIsHandlerConnected(
-        pUnk: LPUNKNOWN,
-    ) -> BOOL;
+    pub fn CoIsHandlerConnected(pUnk: LPUNKNOWN) -> BOOL;
     pub fn CoMarshalInterThreadInterfaceInStream(
         riid: REFIID,
         pUnk: LPUNKNOWN,
         ppStm: *mut LPSTREAM,
     ) -> HRESULT;
-    pub fn CoGetInterfaceAndReleaseStream(
-        pStm: LPSTREAM,
-        iid: REFIID,
-        ppv: *mut LPVOID,
-    ) -> HRESULT;
+    pub fn CoGetInterfaceAndReleaseStream(pStm: LPSTREAM, iid: REFIID, ppv: *mut LPVOID)
+        -> HRESULT;
     pub fn CoCreateFreeThreadedMarshaler(
         punkOuter: LPUNKNOWN,
         ppunkMarshal: *mut LPUNKNOWN,
     ) -> HRESULT;
     pub fn CoFreeUnusedLibraries();
-    pub fn CoFreeUnusedLibrariesEx(
-        dwUnloadDelay: DWORD,
-        dwReserved: DWORD,
-    );
-    pub fn CoDisconnectContext(
-        dwTimeout: DWORD,
-    )-> HRESULT;
+    pub fn CoFreeUnusedLibrariesEx(dwUnloadDelay: DWORD, dwReserved: DWORD);
+    pub fn CoDisconnectContext(dwTimeout: DWORD) -> HRESULT;
     pub fn CoInitializeSecurity(
         pSecDesc: PSECURITY_DESCRIPTOR,
         cAuthSvc: LONG,
@@ -250,10 +181,7 @@ extern "system" {
         dwCapabilities: DWORD,
         pReserved3: *mut c_void,
     ) -> HRESULT;
-    pub fn CoGetCallContext(
-        riid: REFIID,
-        ppInterface: *mut *mut c_void,
-    ) -> HRESULT;
+    pub fn CoGetCallContext(riid: REFIID, ppInterface: *mut *mut c_void) -> HRESULT;
     pub fn CoQueryProxyBlanket(
         pProxy: *mut IUnknown,
         pwAuthnSvc: *mut DWORD,
@@ -274,10 +202,7 @@ extern "system" {
         pAuthInfo: RPC_AUTH_IDENTITY_HANDLE,
         dwCapabilities: DWORD,
     ) -> HRESULT;
-    pub fn CoCopyProxy(
-        pProxy: *mut IUnknown,
-        ppCopy: *mut *mut IUnknown,
-    ) -> HRESULT;
+    pub fn CoCopyProxy(pProxy: *mut IUnknown, ppCopy: *mut *mut IUnknown) -> HRESULT;
     pub fn CoQueryClientBlanket(
         pAuthnSvc: *mut DWORD,
         pAuthzSvc: *mut DWORD,
@@ -319,9 +244,7 @@ extern "system" {
         dwCount: DWORD,
         pResults: *mut MULTI_QI,
     ) -> HRESULT;
-    pub fn CoRegisterActivationFilter(
-        pActivationFilter: *mut IActivationFilter,
-    ) -> HRESULT;
+    pub fn CoRegisterActivationFilter(pActivationFilter: *mut IActivationFilter) -> HRESULT;
     pub fn CoCreateInstanceFromApp(
         Clsid: REFCLSID,
         punkOuter: *mut IUnknown,
@@ -330,68 +253,23 @@ extern "system" {
         dwCount: DWORD,
         pResults: *mut MULTI_QI,
     ) -> HRESULT;
-    pub fn CoGetCancelObject(
-        dwThreadId: DWORD,
-        iid: REFIID,
-        ppUnk: *mut *mut c_void,
-    ) -> HRESULT;
-    pub fn CoSetCancelObject(
-        pUnk: *mut *mut IUnknown,
-    ) -> HRESULT;
-    pub fn CoCancelCall(
-        dwThreadId: DWORD,
-        ulTimeout: ULONG,
-    ) -> HRESULT;
+    pub fn CoGetCancelObject(dwThreadId: DWORD, iid: REFIID, ppUnk: *mut *mut c_void) -> HRESULT;
+    pub fn CoSetCancelObject(pUnk: *mut *mut IUnknown) -> HRESULT;
+    pub fn CoCancelCall(dwThreadId: DWORD, ulTimeout: ULONG) -> HRESULT;
     pub fn CoTestCancel() -> HRESULT;
-    pub fn CoEnableCallCancellation(
-        pReserved: LPVOID,
-    ) -> HRESULT;
-    pub fn CoDisableCallCancellation(
-        pReserved: LPVOID,
-    ) -> HRESULT;
-    pub fn StringFromCLSID(
-        rclsid: REFCLSID,
-        lplpsz: *mut LPOLESTR,
-    ) -> HRESULT;
-    pub fn CLSIDFromString(
-        lpsz: LPCOLESTR,
-        pclsid: LPCLSID,
-    ) -> HRESULT;
-    pub fn StringFromIID(
-        rclsid: REFIID,
-        lplpsz: *mut LPOLESTR,
-    ) -> HRESULT;
-    pub fn IIDFromString(
-        lpsz: LPCOLESTR,
-        lpiid: LPIID,
-    ) -> HRESULT;
-    pub fn ProgIDFromCLSID(
-        clsid: REFCLSID,
-        lplpszProgID: *mut LPOLESTR,
-    ) -> HRESULT;
-    pub fn CLSIDFromProgID(
-        lpszProgID: LPCOLESTR,
-        lpclsid: LPCLSID,
-    ) -> HRESULT;
-    pub fn StringFromGUID2(
-        rguid: REFGUID,
-        lpsz: LPOLESTR,
-        cchMax: c_int,
-    ) -> c_int;
-    pub fn CoCreateGuid(
-        pguid: *mut GUID,
-    ) -> HRESULT;
-    pub fn PropVariantCopy(
-        pvarDest: *mut PROPVARIANT,
-        pvarSrc: *const PROPVARIANT,
-    ) -> HRESULT;
-    pub fn PropVariantClear(
-        pvar: *mut PROPVARIANT,
-    ) -> HRESULT;
-    pub fn FreePropVariantArray(
-        cVariants: ULONG,
-        rgvars: *mut PROPVARIANT,
-    ) -> HRESULT;
+    pub fn CoEnableCallCancellation(pReserved: LPVOID) -> HRESULT;
+    pub fn CoDisableCallCancellation(pReserved: LPVOID) -> HRESULT;
+    pub fn StringFromCLSID(rclsid: REFCLSID, lplpsz: *mut LPOLESTR) -> HRESULT;
+    pub fn CLSIDFromString(lpsz: LPCOLESTR, pclsid: LPCLSID) -> HRESULT;
+    pub fn StringFromIID(rclsid: REFIID, lplpsz: *mut LPOLESTR) -> HRESULT;
+    pub fn IIDFromString(lpsz: LPCOLESTR, lpiid: LPIID) -> HRESULT;
+    pub fn ProgIDFromCLSID(clsid: REFCLSID, lplpszProgID: *mut LPOLESTR) -> HRESULT;
+    pub fn CLSIDFromProgID(lpszProgID: LPCOLESTR, lpclsid: LPCLSID) -> HRESULT;
+    pub fn StringFromGUID2(rguid: REFGUID, lpsz: LPOLESTR, cchMax: c_int) -> c_int;
+    pub fn CoCreateGuid(pguid: *mut GUID) -> HRESULT;
+    pub fn PropVariantCopy(pvarDest: *mut PROPVARIANT, pvarSrc: *const PROPVARIANT) -> HRESULT;
+    pub fn PropVariantClear(pvar: *mut PROPVARIANT) -> HRESULT;
+    pub fn FreePropVariantArray(cVariants: ULONG, rgvars: *mut PROPVARIANT) -> HRESULT;
     pub fn CoWaitForMultipleHandles(
         dwFlags: DWORD,
         dwTimeout: DWORD,
@@ -400,7 +278,7 @@ extern "system" {
         lpdwindex: LPDWORD,
     ) -> HRESULT;
 }
-ENUM!{enum COWAIT_FLAGS {
+ENUM! {enum COWAIT_FLAGS {
     COWAIT_DEFAULT = 0,
     COWAIT_WAITALL = 1,
     COWAIT_ALERTABLE = 2,
@@ -408,7 +286,7 @@ ENUM!{enum COWAIT_FLAGS {
     COWAIT_DISPATCH_CALLS = 8,
     COWAIT_DISPATCH_WINDOW_MESSAGES = 0x10,
 }}
-ENUM!{enum CWMO_FLAGS {
+ENUM! {enum CWMO_FLAGS {
     CWMO_DEFAULT = 0,
     CWMO_DISPATCH_CALLS = 1,
     CWMO_DISPATCH_WINDOW_MESSAGES = 2,
@@ -424,15 +302,10 @@ extern "system" {
 }
 pub const CWMO_MAX_HANDLES: ULONG = 56;
 extern "system" {
-    pub fn CoGetTreatAsClass(
-        clsidOld: REFCLSID,
-        pClsidNew: LPCLSID,
-    ) -> HRESULT;
-    pub fn CoInvalidateRemoteMachineBindings(
-        pszMachineName: LPOLESTR,
-    ) -> HRESULT;
+    pub fn CoGetTreatAsClass(clsidOld: REFCLSID, pClsidNew: LPCLSID) -> HRESULT;
+    pub fn CoInvalidateRemoteMachineBindings(pszMachineName: LPOLESTR) -> HRESULT;
 }
-ENUM!{enum AgileReferenceOptions {
+ENUM! {enum AgileReferenceOptions {
     AGILEREFERENCE_DEFAULT = 0,
     AGILEREFERENCE_DELAYEDMARSHAL = 1,
 }}
@@ -444,34 +317,18 @@ extern "system" {
         ppAgileReference: *mut *mut IAgileReference,
     ) -> HRESULT;
 }
-FN!{stdcall LPFNGETCLASSOBJECT(
+FN! {stdcall LPFNGETCLASSOBJECT(
     REFCLSID,
     REFIID,
     *mut LPVOID,
 ) -> HRESULT}
-FN!{stdcall LPFNCANUNLOADNOW() -> HRESULT}
+FN! {stdcall LPFNCANUNLOADNOW() -> HRESULT}
 extern "system" {
-    pub fn DllGetClassObject(
-        rclsid: REFCLSID,
-        riid: REFIID,
-        ppv: *mut LPVOID,
-    ) -> HRESULT;
+    pub fn DllGetClassObject(rclsid: REFCLSID, riid: REFIID, ppv: *mut LPVOID) -> HRESULT;
     pub fn DllCanUnloadNow() -> HRESULT;
-    pub fn CoTaskMemAlloc(
-        cb: SIZE_T,
-    ) -> LPVOID;
-    pub fn CoTaskMemRealloc(
-        pv: LPVOID,
-        cb: SIZE_T,
-    ) -> LPVOID;
-    pub fn CoTaskMemFree(
-        pv: LPVOID,
-    );
-    pub fn CoFileTimeNow(
-        lpFileTime: *mut FILETIME,
-    ) -> HRESULT;
-    pub fn CLSIDFromProgIDEx(
-        lpszProgID: LPCOLESTR,
-        lpclsid: LPCLSID,
-    ) -> HRESULT;
+    pub fn CoTaskMemAlloc(cb: SIZE_T) -> LPVOID;
+    pub fn CoTaskMemRealloc(pv: LPVOID, cb: SIZE_T) -> LPVOID;
+    pub fn CoTaskMemFree(pv: LPVOID);
+    pub fn CoFileTimeNow(lpFileTime: *mut FILETIME) -> HRESULT;
+    pub fn CLSIDFromProgIDEx(lpszProgID: LPCOLESTR, lpclsid: LPCLSID) -> HRESULT;
 }

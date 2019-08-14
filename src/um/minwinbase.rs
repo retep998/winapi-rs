@@ -5,7 +5,9 @@
 // except according to those terms
 //! This module defines the 32-Bit Windows Base APIs
 use shared::basetsd::ULONG_PTR;
-use shared::minwindef::{BOOL, BYTE, DWORD, FILETIME, HMODULE, LPVOID, MAX_PATH, UINT, ULONG, WORD};
+use shared::minwindef::{
+    BOOL, BYTE, DWORD, FILETIME, HMODULE, LPVOID, MAX_PATH, UINT, ULONG, WORD,
+};
 use shared::ntstatus::{
     STATUS_ACCESS_VIOLATION, STATUS_ARRAY_BOUNDS_EXCEEDED, STATUS_BREAKPOINT,
     STATUS_CONTROL_C_EXIT, STATUS_DATATYPE_MISALIGNMENT, STATUS_FLOAT_DENORMAL_OPERAND,
@@ -25,37 +27,37 @@ use um::winnt::{
 //CopyMemory
 //FillMemory
 //ZeroMemory
-STRUCT!{struct SECURITY_ATTRIBUTES {
+STRUCT! {struct SECURITY_ATTRIBUTES {
     nLength: DWORD,
     lpSecurityDescriptor: LPVOID,
     bInheritHandle: BOOL,
 }}
 pub type PSECURITY_ATTRIBUTES = *mut SECURITY_ATTRIBUTES;
 pub type LPSECURITY_ATTRIBUTES = *mut SECURITY_ATTRIBUTES;
-STRUCT!{struct OVERLAPPED_u_s {
+STRUCT! {struct OVERLAPPED_u_s {
     Offset: DWORD,
     OffsetHigh: DWORD,
 }}
-UNION!{union OVERLAPPED_u {
+UNION! {union OVERLAPPED_u {
     [u32; 2] [u64; 1],
     s s_mut: OVERLAPPED_u_s,
     Pointer Pointer_mut: PVOID,
 }}
-STRUCT!{struct OVERLAPPED {
+STRUCT! {struct OVERLAPPED {
     Internal: ULONG_PTR,
     InternalHigh: ULONG_PTR,
     u: OVERLAPPED_u,
     hEvent: HANDLE,
 }}
 pub type LPOVERLAPPED = *mut OVERLAPPED;
-STRUCT!{struct OVERLAPPED_ENTRY {
+STRUCT! {struct OVERLAPPED_ENTRY {
     lpCompletionKey: ULONG_PTR,
     lpOverlapped: LPOVERLAPPED,
     Internal: ULONG_PTR,
     dwNumberOfBytesTransferred: DWORD,
 }}
 pub type LPOVERLAPPED_ENTRY = *mut OVERLAPPED_ENTRY;
-STRUCT!{struct SYSTEMTIME {
+STRUCT! {struct SYSTEMTIME {
     wYear: WORD,
     wMonth: WORD,
     wDayOfWeek: WORD,
@@ -67,7 +69,7 @@ STRUCT!{struct SYSTEMTIME {
 }}
 pub type PSYSTEMTIME = *mut SYSTEMTIME;
 pub type LPSYSTEMTIME = *mut SYSTEMTIME;
-STRUCT!{struct WIN32_FIND_DATAA {
+STRUCT! {struct WIN32_FIND_DATAA {
     dwFileAttributes: DWORD,
     ftCreationTime: FILETIME,
     ftLastAccessTime: FILETIME,
@@ -81,7 +83,7 @@ STRUCT!{struct WIN32_FIND_DATAA {
 }}
 pub type PWIN32_FIND_DATAA = *mut WIN32_FIND_DATAA;
 pub type LPWIN32_FIND_DATAA = *mut WIN32_FIND_DATAA;
-STRUCT!{struct WIN32_FIND_DATAW {
+STRUCT! {struct WIN32_FIND_DATAW {
     dwFileAttributes: DWORD,
     ftCreationTime: FILETIME,
     ftLastAccessTime: FILETIME,
@@ -95,24 +97,24 @@ STRUCT!{struct WIN32_FIND_DATAW {
 }}
 pub type PWIN32_FIND_DATAW = *mut WIN32_FIND_DATAW;
 pub type LPWIN32_FIND_DATAW = *mut WIN32_FIND_DATAW;
-ENUM!{enum FINDEX_INFO_LEVELS {
+ENUM! {enum FINDEX_INFO_LEVELS {
     FindExInfoStandard,
     FindExInfoBasic,
     FindExInfoMaxInfoLevel,
 }}
 pub const FIND_FIRST_EX_CASE_SENSITIVE: DWORD = 0x00000001;
 pub const FIND_FIRST_EX_LARGE_FETCH: DWORD = 0x00000002;
-ENUM!{enum FINDEX_SEARCH_OPS {
+ENUM! {enum FINDEX_SEARCH_OPS {
     FindExSearchNameMatch,
     FindExSearchLimitToDirectories,
     FindExSearchLimitToDevices,
     FindExSearchMaxSearchOp,
 }}
-ENUM!{enum GET_FILEEX_INFO_LEVELS {
+ENUM! {enum GET_FILEEX_INFO_LEVELS {
     GetFileExInfoStandard,
     GetFileExMaxInfoLevel,
 }}
-ENUM!{enum FILE_INFO_BY_HANDLE_CLASS {
+ENUM! {enum FILE_INFO_BY_HANDLE_CLASS {
     FileBasicInfo,
     FileStandardInfo,
     FileNameInfo,
@@ -145,29 +147,29 @@ pub type LPCRITICAL_SECTION = PRTL_CRITICAL_SECTION;
 pub type CRITICAL_SECTION_DEBUG = RTL_CRITICAL_SECTION_DEBUG;
 pub type PCRITICAL_SECTION_DEBUG = PRTL_CRITICAL_SECTION_DEBUG;
 pub type LPCRITICAL_SECTION_DEBUG = PRTL_CRITICAL_SECTION_DEBUG;
-FN!{stdcall LPOVERLAPPED_COMPLETION_ROUTINE(
+FN! {stdcall LPOVERLAPPED_COMPLETION_ROUTINE(
     dwErrorCode: DWORD,
     dwNumberOfBytesTransfered: DWORD,
     lpOverlapped: LPOVERLAPPED,
 ) -> ()}
 pub const LOCKFILE_FAIL_IMMEDIATELY: DWORD = 0x00000001;
 pub const LOCKFILE_EXCLUSIVE_LOCK: DWORD = 0x00000002;
-STRUCT!{struct PROCESS_HEAP_ENTRY_Block {
+STRUCT! {struct PROCESS_HEAP_ENTRY_Block {
     hMem: HANDLE,
     dwReserved: [DWORD; 3],
 }}
-STRUCT!{struct PROCESS_HEAP_ENTRY_Region {
+STRUCT! {struct PROCESS_HEAP_ENTRY_Region {
     dwCommittedSize: DWORD,
     dwUnCommittedSize: DWORD,
     lpFirstBlock: LPVOID,
     lpLastBlock: LPVOID,
 }}
-UNION!{union PROCESS_HEAP_ENTRY_u {
+UNION! {union PROCESS_HEAP_ENTRY_u {
     [u32; 4] [u64; 3],
     Block Block_mut: PROCESS_HEAP_ENTRY_Block,
     Region Region_mut: PROCESS_HEAP_ENTRY_Region,
 }}
-STRUCT!{struct PROCESS_HEAP_ENTRY {
+STRUCT! {struct PROCESS_HEAP_ENTRY {
     lpData: PVOID,
     cbData: DWORD,
     cbOverhead: BYTE,
@@ -183,18 +185,18 @@ pub const PROCESS_HEAP_ENTRY_BUSY: WORD = 0x0004;
 pub const PROCESS_HEAP_SEG_ALLOC: WORD = 0x0008;
 pub const PROCESS_HEAP_ENTRY_MOVEABLE: WORD = 0x0010;
 pub const PROCESS_HEAP_ENTRY_DDESHARE: WORD = 0x0020;
-STRUCT!{struct REASON_CONTEXT_Detailed {
+STRUCT! {struct REASON_CONTEXT_Detailed {
     LocalizedReasonModule: HMODULE,
     LocalizedReasonId: ULONG,
     ReasonStringCount: ULONG,
     ReasonStrings: *mut LPWSTR,
 }}
-UNION!{union REASON_CONTEXT_Reason {
+UNION! {union REASON_CONTEXT_Reason {
     [u32; 4] [u64; 3],
     Detailed Detailed_mut: REASON_CONTEXT_Detailed,
     SimpleReasonString SimpleReasonString_mut: LPWSTR,
 }}
-STRUCT!{struct REASON_CONTEXT {
+STRUCT! {struct REASON_CONTEXT {
     Version: ULONG,
     Flags: DWORD,
     Reason: REASON_CONTEXT_Reason,
@@ -209,26 +211,26 @@ pub const LOAD_DLL_DEBUG_EVENT: DWORD = 6;
 pub const UNLOAD_DLL_DEBUG_EVENT: DWORD = 7;
 pub const OUTPUT_DEBUG_STRING_EVENT: DWORD = 8;
 pub const RIP_EVENT: DWORD = 9;
-FN!{stdcall PTHREAD_START_ROUTINE(
+FN! {stdcall PTHREAD_START_ROUTINE(
     lpThreadParameter: LPVOID,
 ) -> DWORD}
 pub type LPTHREAD_START_ROUTINE = PTHREAD_START_ROUTINE;
-FN!{stdcall PENCLAVE_ROUTINE(
+FN! {stdcall PENCLAVE_ROUTINE(
     lpThreadParameter: LPVOID,
 ) -> DWORD}
 pub type LPENCLAVE_ROUTINE = PENCLAVE_ROUTINE;
-STRUCT!{struct EXCEPTION_DEBUG_INFO {
+STRUCT! {struct EXCEPTION_DEBUG_INFO {
     ExceptionRecord: EXCEPTION_RECORD,
     dwFirstChance: DWORD,
 }}
 pub type LPEXCEPTION_DEBUG_INFO = *mut EXCEPTION_DEBUG_INFO;
-STRUCT!{struct CREATE_THREAD_DEBUG_INFO {
+STRUCT! {struct CREATE_THREAD_DEBUG_INFO {
     hThread: HANDLE,
     lpThreadLocalBase: LPVOID,
     lpStartAddress: LPTHREAD_START_ROUTINE,
 }}
 pub type LPCREATE_THREAD_DEBUG_INFO = *mut CREATE_THREAD_DEBUG_INFO;
-STRUCT!{struct CREATE_PROCESS_DEBUG_INFO {
+STRUCT! {struct CREATE_PROCESS_DEBUG_INFO {
     hFile: HANDLE,
     hProcess: HANDLE,
     hThread: HANDLE,
@@ -241,15 +243,15 @@ STRUCT!{struct CREATE_PROCESS_DEBUG_INFO {
     fUnicode: WORD,
 }}
 pub type LPCREATE_PROCESS_DEBUG_INFO = *mut CREATE_PROCESS_DEBUG_INFO;
-STRUCT!{struct EXIT_THREAD_DEBUG_INFO {
+STRUCT! {struct EXIT_THREAD_DEBUG_INFO {
     dwExitCode: DWORD,
 }}
 pub type LPEXIT_THREAD_DEBUG_INFO = *mut EXIT_THREAD_DEBUG_INFO;
-STRUCT!{struct EXIT_PROCESS_DEBUG_INFO {
+STRUCT! {struct EXIT_PROCESS_DEBUG_INFO {
     dwExitCode: DWORD,
 }}
 pub type LPEXIT_PROCESS_DEBUG_INFO = *mut EXIT_PROCESS_DEBUG_INFO;
-STRUCT!{struct LOAD_DLL_DEBUG_INFO {
+STRUCT! {struct LOAD_DLL_DEBUG_INFO {
     hFile: HANDLE,
     lpBaseOfDll: LPVOID,
     dwDebugInfoFileOffset: DWORD,
@@ -258,22 +260,22 @@ STRUCT!{struct LOAD_DLL_DEBUG_INFO {
     fUnicode: WORD,
 }}
 pub type LPLOAD_DLL_DEBUG_INFO = *mut LOAD_DLL_DEBUG_INFO;
-STRUCT!{struct UNLOAD_DLL_DEBUG_INFO {
+STRUCT! {struct UNLOAD_DLL_DEBUG_INFO {
     lpBaseOfDll: LPVOID,
 }}
 pub type LPUNLOAD_DLL_DEBUG_INFO = *mut UNLOAD_DLL_DEBUG_INFO;
-STRUCT!{struct OUTPUT_DEBUG_STRING_INFO {
+STRUCT! {struct OUTPUT_DEBUG_STRING_INFO {
     lpDebugStringData: LPSTR,
     fUnicode: WORD,
     nDebugStringLength: WORD,
 }}
 pub type LPOUTPUT_DEBUG_STRING_INFO = *mut OUTPUT_DEBUG_STRING_INFO;
-STRUCT!{struct RIP_INFO {
+STRUCT! {struct RIP_INFO {
     dwError: DWORD,
     dwType: DWORD,
 }}
 pub type LPRIP_INFO = *mut RIP_INFO;
-UNION!{union DEBUG_EVENT_u {
+UNION! {union DEBUG_EVENT_u {
     [u32; 21] [u64; 20],
     Exception Exception_mut: EXCEPTION_DEBUG_INFO,
     CreateThread CreateThread_mut: CREATE_THREAD_DEBUG_INFO,
@@ -285,7 +287,7 @@ UNION!{union DEBUG_EVENT_u {
     DebugString DebugString_mut: OUTPUT_DEBUG_STRING_INFO,
     RipInfo RipInfo_mut: RIP_INFO,
 }}
-STRUCT!{struct DEBUG_EVENT {
+STRUCT! {struct DEBUG_EVENT {
     dwDebugEventCode: DWORD,
     dwProcessId: DWORD,
     dwThreadId: DWORD,

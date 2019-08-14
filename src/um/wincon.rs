@@ -16,23 +16,17 @@ use um::winnt::{CHAR, HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, WCHAR};
 // than winapi's usual alphabetical ordering, with some newlines and indentation to match their
 // grouping in the file.
 pub use um::wincontypes::{
-    COORD, PCOORD,
-    SMALL_RECT, PSMALL_RECT,
-    KEY_EVENT_RECORD_uChar, KEY_EVENT_RECORD, PKEY_EVENT_RECORD,
-    RIGHT_ALT_PRESSED, LEFT_ALT_PRESSED, RIGHT_CTRL_PRESSED, LEFT_CTRL_PRESSED, SHIFT_PRESSED,
-        NUMLOCK_ON, SCROLLLOCK_ON, CAPSLOCK_ON, ENHANCED_KEY, NLS_DBCSCHAR, NLS_ALPHANUMERIC,
-        NLS_KATAKANA, NLS_HIRAGANA, NLS_ROMAN, NLS_IME_CONVERSION, NLS_IME_DISABLE,
-    MOUSE_EVENT_RECORD, PMOUSE_EVENT_RECORD,
-    FROM_LEFT_1ST_BUTTON_PRESSED, RIGHTMOST_BUTTON_PRESSED, FROM_LEFT_2ND_BUTTON_PRESSED,
-        FROM_LEFT_3RD_BUTTON_PRESSED, FROM_LEFT_4TH_BUTTON_PRESSED, MOUSE_MOVED, DOUBLE_CLICK,
-        MOUSE_WHEELED, MOUSE_HWHEELED,
-    WINDOW_BUFFER_SIZE_RECORD, PWINDOW_BUFFER_SIZE_RECORD,
-    MENU_EVENT_RECORD, PMENU_EVENT_RECORD,
-    FOCUS_EVENT_RECORD, PFOCUS_EVENT_RECORD,
-    INPUT_RECORD_Event, INPUT_RECORD, PINPUT_RECORD,
-    KEY_EVENT, MOUSE_EVENT, WINDOW_BUFFER_SIZE_EVENT, MENU_EVENT, FOCUS_EVENT,
-    CHAR_INFO_Char, CHAR_INFO, PCHAR_INFO,
-    CONSOLE_FONT_INFO, PCONSOLE_FONT_INFO
+    CHAR_INFO_Char, INPUT_RECORD_Event, KEY_EVENT_RECORD_uChar, CAPSLOCK_ON, CHAR_INFO,
+    CONSOLE_FONT_INFO, COORD, DOUBLE_CLICK, ENHANCED_KEY, FOCUS_EVENT, FOCUS_EVENT_RECORD,
+    FROM_LEFT_1ST_BUTTON_PRESSED, FROM_LEFT_2ND_BUTTON_PRESSED, FROM_LEFT_3RD_BUTTON_PRESSED,
+    FROM_LEFT_4TH_BUTTON_PRESSED, INPUT_RECORD, KEY_EVENT, KEY_EVENT_RECORD, LEFT_ALT_PRESSED,
+    LEFT_CTRL_PRESSED, MENU_EVENT, MENU_EVENT_RECORD, MOUSE_EVENT, MOUSE_EVENT_RECORD,
+    MOUSE_HWHEELED, MOUSE_MOVED, MOUSE_WHEELED, NLS_ALPHANUMERIC, NLS_DBCSCHAR, NLS_HIRAGANA,
+    NLS_IME_CONVERSION, NLS_IME_DISABLE, NLS_KATAKANA, NLS_ROMAN, NUMLOCK_ON, PCHAR_INFO,
+    PCONSOLE_FONT_INFO, PCOORD, PFOCUS_EVENT_RECORD, PINPUT_RECORD, PKEY_EVENT_RECORD,
+    PMENU_EVENT_RECORD, PMOUSE_EVENT_RECORD, PSMALL_RECT, PWINDOW_BUFFER_SIZE_RECORD,
+    RIGHTMOST_BUTTON_PRESSED, RIGHT_ALT_PRESSED, RIGHT_CTRL_PRESSED, SCROLLLOCK_ON, SHIFT_PRESSED,
+    SMALL_RECT, WINDOW_BUFFER_SIZE_EVENT, WINDOW_BUFFER_SIZE_RECORD,
 };
 pub const FOREGROUND_BLUE: WORD = 0x0001;
 pub const FOREGROUND_GREEN: WORD = 0x0002;
@@ -50,7 +44,7 @@ pub const COMMON_LVB_GRID_RVERTICAL: WORD = 0x1000;
 pub const COMMON_LVB_REVERSE_VIDEO: WORD = 0x4000;
 pub const COMMON_LVB_UNDERSCORE: WORD = 0x8000;
 pub const COMMON_LVB_SBCSDBCS: WORD = 0x0300;
-STRUCT!{struct CONSOLE_SCREEN_BUFFER_INFO {
+STRUCT! {struct CONSOLE_SCREEN_BUFFER_INFO {
     dwSize: COORD,
     dwCursorPosition: COORD,
     wAttributes: WORD,
@@ -58,7 +52,7 @@ STRUCT!{struct CONSOLE_SCREEN_BUFFER_INFO {
     dwMaximumWindowSize: COORD,
 }}
 pub type PCONSOLE_SCREEN_BUFFER_INFO = *mut CONSOLE_SCREEN_BUFFER_INFO;
-STRUCT!{struct CONSOLE_SCREEN_BUFFER_INFOEX {
+STRUCT! {struct CONSOLE_SCREEN_BUFFER_INFOEX {
     cbSize: ULONG,
     dwSize: COORD,
     dwCursorPosition: COORD,
@@ -70,12 +64,12 @@ STRUCT!{struct CONSOLE_SCREEN_BUFFER_INFOEX {
     ColorTable: [COLORREF; 16],
 }}
 pub type PCONSOLE_SCREEN_BUFFER_INFOEX = *mut CONSOLE_SCREEN_BUFFER_INFOEX;
-STRUCT!{struct CONSOLE_CURSOR_INFO {
+STRUCT! {struct CONSOLE_CURSOR_INFO {
     dwSize: DWORD,
     bVisible: BOOL,
 }}
 pub type PCONSOLE_CURSOR_INFO = *mut CONSOLE_CURSOR_INFO;
-STRUCT!{struct CONSOLE_FONT_INFOEX {
+STRUCT! {struct CONSOLE_FONT_INFOEX {
     cbSize: ULONG,
     nFont: DWORD,
     dwFontSize: COORD,
@@ -85,14 +79,14 @@ STRUCT!{struct CONSOLE_FONT_INFOEX {
 }}
 pub type PCONSOLE_FONT_INFOEX = *mut CONSOLE_FONT_INFOEX;
 pub const HISTORY_NO_DUP_FLAG: DWORD = 0x1;
-STRUCT!{struct CONSOLE_HISTORY_INFO {
+STRUCT! {struct CONSOLE_HISTORY_INFO {
     cbSize: UINT,
     HistoryBufferSize: UINT,
     NumberOfHistoryBuffers: UINT,
     dwFlags: DWORD,
 }}
 pub type PCONSOLE_HISTORY_INFO = *mut CONSOLE_HISTORY_INFO;
-STRUCT!{struct CONSOLE_SELECTION_INFO {
+STRUCT! {struct CONSOLE_SELECTION_INFO {
     dwFlags: DWORD,
     dwSelectionAnchor: COORD,
     srSelection: SMALL_RECT,
@@ -103,7 +97,7 @@ pub const CONSOLE_SELECTION_IN_PROGRESS: DWORD = 0x0001;
 pub const CONSOLE_SELECTION_NOT_EMPTY: DWORD = 0x0002;
 pub const CONSOLE_MOUSE_SELECTION: DWORD = 0x0004;
 pub const CONSOLE_MOUSE_DOWN: DWORD = 0x0008;
-FN!{stdcall PHANDLER_ROUTINE(
+FN! {stdcall PHANDLER_ROUTINE(
     CtrlType: DWORD,
 ) -> BOOL}
 pub const CTRL_C_EVENT: DWORD = 0;
@@ -252,9 +246,7 @@ extern "system" {
         hConsoleOutput: HANDLE,
         lpConsoleScreenBufferInfoEx: PCONSOLE_SCREEN_BUFFER_INFOEX,
     ) -> BOOL;
-    pub fn GetLargestConsoleWindowSize(
-        hConsoleOutput: HANDLE,
-    ) -> COORD;
+    pub fn GetLargestConsoleWindowSize(hConsoleOutput: HANDLE) -> COORD;
     pub fn GetConsoleCursorInfo(
         hConsoleOutput: HANDLE,
         lpConsoleCursorInfo: PCONSOLE_CURSOR_INFO,
@@ -274,36 +266,15 @@ extern "system" {
         bMaximumWindow: BOOL,
         lpConsoleCurrentFontEx: PCONSOLE_FONT_INFOEX,
     ) -> BOOL;
-    pub fn GetConsoleHistoryInfo(
-        lpConsoleHistoryInfo: PCONSOLE_HISTORY_INFO,
-    ) -> BOOL;
-    pub fn SetConsoleHistoryInfo(
-        lpConsoleHistoryInfo: PCONSOLE_HISTORY_INFO,
-    ) -> BOOL;
-    pub fn GetConsoleFontSize(
-        hConsoleOutput: HANDLE,
-        nFont: DWORD,
-    ) -> COORD;
-    pub fn GetConsoleSelectionInfo(
-        lpConsoleSelectionInfo: PCONSOLE_SELECTION_INFO,
-    ) -> BOOL;
-    pub fn GetNumberOfConsoleMouseButtons(
-        lpNumberOfMouseButtons: LPDWORD,
-    ) -> BOOL;
-    pub fn SetConsoleActiveScreenBuffer(
-        hConsoleOutput: HANDLE,
-    ) -> BOOL;
-    pub fn FlushConsoleInputBuffer(
-        hConsoleInput: HANDLE,
-    ) -> BOOL;
-    pub fn SetConsoleScreenBufferSize(
-        hConsoleOutput: HANDLE,
-        dwSize: COORD,
-    ) -> BOOL;
-    pub fn SetConsoleCursorPosition(
-        hConsoleOutput: HANDLE,
-        dwCursorPosition: COORD,
-    ) -> BOOL;
+    pub fn GetConsoleHistoryInfo(lpConsoleHistoryInfo: PCONSOLE_HISTORY_INFO) -> BOOL;
+    pub fn SetConsoleHistoryInfo(lpConsoleHistoryInfo: PCONSOLE_HISTORY_INFO) -> BOOL;
+    pub fn GetConsoleFontSize(hConsoleOutput: HANDLE, nFont: DWORD) -> COORD;
+    pub fn GetConsoleSelectionInfo(lpConsoleSelectionInfo: PCONSOLE_SELECTION_INFO) -> BOOL;
+    pub fn GetNumberOfConsoleMouseButtons(lpNumberOfMouseButtons: LPDWORD) -> BOOL;
+    pub fn SetConsoleActiveScreenBuffer(hConsoleOutput: HANDLE) -> BOOL;
+    pub fn FlushConsoleInputBuffer(hConsoleInput: HANDLE) -> BOOL;
+    pub fn SetConsoleScreenBufferSize(hConsoleOutput: HANDLE, dwSize: COORD) -> BOOL;
+    pub fn SetConsoleCursorPosition(hConsoleOutput: HANDLE, dwCursorPosition: COORD) -> BOOL;
     pub fn SetConsoleCursorInfo(
         hConsoleOutput: HANDLE,
         lpConsoleCursorInfo: *const CONSOLE_CURSOR_INFO,
@@ -327,45 +298,21 @@ extern "system" {
         bAbsolute: BOOL,
         lpConsoleWindow: *const SMALL_RECT,
     ) -> BOOL;
-    pub fn SetConsoleTextAttribute(
-        hConsoleOutput: HANDLE,
-        wAttributes: WORD,
-    ) -> BOOL;
-    pub fn GenerateConsoleCtrlEvent(
-        dwCtrlEvent: DWORD,
-        dwProcessGroupId: DWORD,
-    ) -> BOOL;
+    pub fn SetConsoleTextAttribute(hConsoleOutput: HANDLE, wAttributes: WORD) -> BOOL;
+    pub fn GenerateConsoleCtrlEvent(dwCtrlEvent: DWORD, dwProcessGroupId: DWORD) -> BOOL;
     pub fn FreeConsole() -> BOOL;
-    pub fn AttachConsole(
-        dwProcessId: DWORD,
-    ) -> BOOL;
+    pub fn AttachConsole(dwProcessId: DWORD) -> BOOL;
 }
 pub const ATTACH_PARENT_PROCESS: DWORD = 0xFFFFFFFF;
 extern "system" {
-    pub fn GetConsoleTitleA(
-        lpConsoleTitle: LPSTR,
-        nSize: DWORD,
-    ) -> DWORD;
-    pub fn GetConsoleTitleW(
-        lpConsoleTitle: LPWSTR,
-        nSize: DWORD,
-    ) -> DWORD;
-    pub fn GetConsoleOriginalTitleA(
-        lpConsoleTitle: LPSTR,
-        nSize: DWORD,
-    ) -> DWORD;
-    pub fn GetConsoleOriginalTitleW(
-        lpConsoleTitle: LPWSTR,
-        nSize: DWORD,
-    ) -> DWORD;
-    pub fn SetConsoleTitleA(
-        lpConsoleTitle: LPCSTR,
-    ) -> BOOL;
-    pub fn SetConsoleTitleW(
-        lpConsoleTitle: LPCWSTR,
-    ) -> BOOL;
+    pub fn GetConsoleTitleA(lpConsoleTitle: LPSTR, nSize: DWORD) -> DWORD;
+    pub fn GetConsoleTitleW(lpConsoleTitle: LPWSTR, nSize: DWORD) -> DWORD;
+    pub fn GetConsoleOriginalTitleA(lpConsoleTitle: LPSTR, nSize: DWORD) -> DWORD;
+    pub fn GetConsoleOriginalTitleW(lpConsoleTitle: LPWSTR, nSize: DWORD) -> DWORD;
+    pub fn SetConsoleTitleA(lpConsoleTitle: LPCSTR) -> BOOL;
+    pub fn SetConsoleTitleW(lpConsoleTitle: LPCWSTR) -> BOOL;
 }
-STRUCT!{struct CONSOLE_READCONSOLE_CONTROL {
+STRUCT! {struct CONSOLE_READCONSOLE_CONTROL {
     nLength: ULONG,
     nInitialChars: ULONG,
     dwCtrlWakeupMask: ULONG,
@@ -381,19 +328,13 @@ extern "system" {
         dwFlags: DWORD,
         lpScreenBufferData: LPVOID,
     ) -> HANDLE;
-    pub fn SetConsoleCP(
-        wCodePageID: UINT,
-    ) -> BOOL;
-    pub fn SetConsoleOutputCP(
-        wCodePageID: UINT,
-    ) -> BOOL;
+    pub fn SetConsoleCP(wCodePageID: UINT) -> BOOL;
+    pub fn SetConsoleOutputCP(wCodePageID: UINT) -> BOOL;
 }
 pub const CONSOLE_FULLSCREEN: DWORD = 1;
 pub const CONSOLE_FULLSCREEN_HARDWARE: DWORD = 2;
 extern "system" {
-    pub fn GetConsoleDisplayMode(
-        lpModeFlags: LPDWORD,
-    ) -> BOOL;
+    pub fn GetConsoleDisplayMode(lpModeFlags: LPDWORD) -> BOOL;
 }
 pub const CONSOLE_FULLSCREEN_MODE: DWORD = 1;
 pub const CONSOLE_WINDOWED_MODE: DWORD = 2;
@@ -404,20 +345,9 @@ extern "system" {
         lpNewScreenBufferDimensions: PCOORD,
     ) -> BOOL;
     pub fn GetConsoleWindow() -> HWND;
-    pub fn GetConsoleProcessList(
-        lpdwProcessList: LPDWORD,
-        dwProcessCount: DWORD,
-    ) -> DWORD;
-    pub fn AddConsoleAliasA(
-        Source: LPSTR,
-        Target: LPSTR,
-        ExeName: LPSTR,
-    ) -> BOOL;
-    pub fn AddConsoleAliasW(
-        Source: LPWSTR,
-        Target: LPWSTR,
-        ExeName: LPWSTR,
-    ) -> BOOL;
+    pub fn GetConsoleProcessList(lpdwProcessList: LPDWORD, dwProcessCount: DWORD) -> DWORD;
+    pub fn AddConsoleAliasA(Source: LPSTR, Target: LPSTR, ExeName: LPSTR) -> BOOL;
+    pub fn AddConsoleAliasW(Source: LPWSTR, Target: LPWSTR, ExeName: LPWSTR) -> BOOL;
     pub fn GetConsoleAliasA(
         Source: LPSTR,
         TargetBuffer: LPSTR,
@@ -430,12 +360,8 @@ extern "system" {
         TargetBufferLength: DWORD,
         ExeName: LPWSTR,
     ) -> DWORD;
-    pub fn GetConsoleAliasesLengthA(
-        ExeName: LPSTR,
-    ) -> DWORD;
-    pub fn GetConsoleAliasesLengthW(
-        ExeName: LPWSTR,
-    ) -> DWORD;
+    pub fn GetConsoleAliasesLengthA(ExeName: LPSTR) -> DWORD;
+    pub fn GetConsoleAliasesLengthW(ExeName: LPWSTR) -> DWORD;
     pub fn GetConsoleAliasExesLengthA() -> DWORD;
     pub fn GetConsoleAliasExesLengthW() -> DWORD;
     pub fn GetConsoleAliasesA(
@@ -448,12 +374,6 @@ extern "system" {
         AliasBufferLength: DWORD,
         ExeName: LPWSTR,
     ) -> DWORD;
-    pub fn GetConsoleAliasExesA(
-        ExeNameBuffer: LPSTR,
-        ExeNameBufferLength: DWORD,
-    ) -> DWORD;
-    pub fn GetConsoleAliasExesW(
-        ExeNameBuffer: LPWSTR,
-        ExeNameBufferLength: DWORD,
-    ) -> DWORD;
+    pub fn GetConsoleAliasExesA(ExeNameBuffer: LPSTR, ExeNameBufferLength: DWORD) -> DWORD;
+    pub fn GetConsoleAliasExesW(ExeNameBuffer: LPWSTR, ExeNameBufferLength: DWORD) -> DWORD;
 }

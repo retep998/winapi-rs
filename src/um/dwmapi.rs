@@ -6,7 +6,7 @@
 //! Procedure declarations, constant definitions, and macros for the NLS component.
 use shared::basetsd::UINT32;
 use shared::minwindef::{
-    BOOL, BYTE, DWORD, HRGN, INT, LPARAM, LPCVOID, LPVOID, LRESULT, UINT, WPARAM
+    BOOL, BYTE, DWORD, HRGN, INT, LPARAM, LPCVOID, LPVOID, LRESULT, UINT, WPARAM,
 };
 use shared::windef::{HBITMAP, HWND, POINT, PSIZE, RECT};
 use um::uxtheme::MARGINS;
@@ -14,13 +14,13 @@ use um::winnt::{HANDLE, HRESULT, ULONGLONG};
 pub const DWM_BB_ENABLE: DWORD = 0x00000001;
 pub const DWM_BB_BLURREGION: DWORD = 0x00000002;
 pub const DWM_BB_TRANSITIONONMAXIMIZED: DWORD = 0x00000004;
-STRUCT!{#[repr(packed)] struct DWM_BLURBEHIND {
+STRUCT! {#[repr(packed)] struct DWM_BLURBEHIND {
     dwFlags: DWORD,
     fEnable: BOOL,
     hRgnBlur: HRGN,
     fTransitionOnMaximized: BOOL,
 }}
-ENUM!{enum DWMWINDOWATTRIBUTE {
+ENUM! {enum DWMWINDOWATTRIBUTE {
     DWMWA_NCRENDERING_ENABLED = 1,
     DWMWA_NCRENDERING_POLICY = 2,
     DWMWA_TRANSITIONS_FORCEDISABLED = 3,
@@ -38,13 +38,13 @@ ENUM!{enum DWMWINDOWATTRIBUTE {
     DWMWA_FREEZE_REPRESENTATION = 15,
     DWMWA_LAST = 16,
 }}
-ENUM!{enum DWMNCRENDERINGPOLICY {
+ENUM! {enum DWMNCRENDERINGPOLICY {
     DWMNCRP_USEWINDOWSTYLE = 0,
     DWMNCRP_DISABLED = 1,
     DWMNCRP_ENABLED = 2,
     DWMNCRP_LAST = 3,
 }}
-ENUM!{enum DWMFLIP3DWINDOWPOLICY {
+ENUM! {enum DWMFLIP3DWINDOWPOLICY {
     DWMFLIP3D_DEFAULT = 0,
     DWMFLIP3D_EXCLUDEBELOW = 1,
     DWMFLIP3D_EXCLUDEABOVE = 2,
@@ -60,7 +60,7 @@ pub const DWM_TNP_RECTSOURCE: DWORD = 0x00000002;
 pub const DWM_TNP_OPACITY: DWORD = 0x00000004;
 pub const DWM_TNP_VISIBLE: DWORD = 0x00000008;
 pub const DWM_TNP_SOURCECLIENTAREAONLY: DWORD = 0x00000010;
-STRUCT!{#[repr(packed)] struct DWM_THUMBNAIL_PROPERTIES {
+STRUCT! {#[repr(packed)] struct DWM_THUMBNAIL_PROPERTIES {
     dwFlags: DWORD,
     rcDestination: RECT,
     rcSource: RECT,
@@ -71,11 +71,11 @@ STRUCT!{#[repr(packed)] struct DWM_THUMBNAIL_PROPERTIES {
 pub type PDWM_THUMBNAIL_PROPERTIES = *mut DWM_THUMBNAIL_PROPERTIES;
 pub type DWM_FRAME_COUNT = ULONGLONG;
 pub type QPC_TIME = ULONGLONG;
-STRUCT!{#[repr(packed)] struct UNSIGNED_RATIO {
+STRUCT! {#[repr(packed)] struct UNSIGNED_RATIO {
     uiNumerator: UINT32,
     uiDenominator: UINT32,
 }}
-STRUCT!{#[repr(packed)] struct DWM_TIMING_INFO {
+STRUCT! {#[repr(packed)] struct DWM_TIMING_INFO {
     cbSize: UINT32,
     rateRefresh: UNSIGNED_RATIO,
     qpcRefreshPeriod: QPC_TIME,
@@ -117,7 +117,7 @@ STRUCT!{#[repr(packed)] struct DWM_TIMING_INFO {
     cPixelsDrawn: ULONGLONG,
     cBuffersEmpty: DWM_FRAME_COUNT,
 }}
-ENUM!{enum DWM_SOURCE_FRAME_SAMPLING {
+ENUM! {enum DWM_SOURCE_FRAME_SAMPLING {
     DWM_SOURCE_FRAME_SAMPLING_POINT = 0,
     DWM_SOURCE_FRAME_SAMPLING_COVERAGE = 1,
     DWM_SOURCE_FRAME_SAMPLING_LAST = 2,
@@ -125,7 +125,7 @@ ENUM!{enum DWM_SOURCE_FRAME_SAMPLING {
 // pub const c_DwmMaxQueuedBuffers: UINT = 8;
 // pub const c_DwmMaxMonitors: UINT = 16;
 // pub const c_DwmMaxAdapters: UINT = 16;
-STRUCT!{#[repr(packed)] struct DWM_PRESENT_PARAMETERS {
+STRUCT! {#[repr(packed)] struct DWM_PRESENT_PARAMETERS {
     cbSize: UINT32,
     fQueue: BOOL,
     cRefreshStart: DWM_FRAME_COUNT,
@@ -144,59 +144,38 @@ extern "system" {
         lParam: LPARAM,
         plResult: *mut LRESULT,
     ) -> BOOL;
-    pub fn DwmEnableBlurBehindWindow(
-        hWnd: HWND,
-        pBlurBehind: *const DWM_BLURBEHIND,
-    ) -> HRESULT;
+    pub fn DwmEnableBlurBehindWindow(hWnd: HWND, pBlurBehind: *const DWM_BLURBEHIND) -> HRESULT;
 }
 pub const DWM_EC_DISABLECOMPOSITION: UINT = 0;
 pub const DWM_EC_ENABLECOMPOSITION: UINT = 1;
 extern "system" {
-    pub fn DwmEnableComposition(
-        uCompositionAction: UINT,
-    ) -> HRESULT;
-    pub fn DwmEnableMMCSS(
-        fEnableMMCSS: BOOL,
-    ) -> HRESULT;
-    pub fn DwmExtendFrameIntoClientArea(
-        hWnd: HWND,
-        pMarInset: *const MARGINS,
-    ) -> HRESULT;
+    pub fn DwmEnableComposition(uCompositionAction: UINT) -> HRESULT;
+    pub fn DwmEnableMMCSS(fEnableMMCSS: BOOL) -> HRESULT;
+    pub fn DwmExtendFrameIntoClientArea(hWnd: HWND, pMarInset: *const MARGINS) -> HRESULT;
     pub fn DwmGetColorizationColor(
         pcrColorization: *mut DWORD,
         pfOpaqueBlend: *mut BOOL,
     ) -> HRESULT;
-    pub fn DwmGetCompositionTimingInfo(
-        hWnd: HWND,
-        pTimingInfo: *mut DWM_TIMING_INFO,
-    ) -> HRESULT;
+    pub fn DwmGetCompositionTimingInfo(hWnd: HWND, pTimingInfo: *mut DWM_TIMING_INFO) -> HRESULT;
     pub fn DwmGetWindowAttribute(
         hWnd: HWND,
         dwAttribute: DWORD,
         pvAttribute: LPVOID,
         cbAttribute: DWORD,
     ) -> HRESULT;
-    pub fn DwmIsCompositionEnabled(
-        pfEnabled: *mut BOOL,
-    ) -> HRESULT;
+    pub fn DwmIsCompositionEnabled(pfEnabled: *mut BOOL) -> HRESULT;
     pub fn DwmModifyPreviousDxFrameDuration(
         hwnd: HWND,
         cRefreshes: INT,
         fRelative: BOOL,
     ) -> HRESULT;
-    pub fn DwmQueryThumbnailSourceSize(
-        hThumbnail: HTHUMBNAIL,
-        pSize: PSIZE,
-    ) -> HRESULT;
+    pub fn DwmQueryThumbnailSourceSize(hThumbnail: HTHUMBNAIL, pSize: PSIZE) -> HRESULT;
     pub fn DwmRegisterThumbnail(
         hwndDestination: HWND,
         hwndSource: HWND,
         phThumbnailId: PHTHUMBNAIL,
     ) -> HRESULT;
-    pub fn DwmSetDxFrameDuration(
-        hwnd: HWND,
-        cRefreshes: INT,
-    ) -> HRESULT;
+    pub fn DwmSetDxFrameDuration(hwnd: HWND, cRefreshes: INT) -> HRESULT;
     pub fn DwmSetPresentParameters(
         hwnd: HWND,
         pPresentParams: *mut DWM_PRESENT_PARAMETERS,
@@ -207,9 +186,7 @@ extern "system" {
         pvAttribute: LPCVOID,
         cbAttribute: DWORD,
     ) -> HRESULT;
-    pub fn DwmUnregisterThumbnail(
-        hThumbnailId: HTHUMBNAIL,
-    ) -> HRESULT;
+    pub fn DwmUnregisterThumbnail(hThumbnailId: HTHUMBNAIL) -> HRESULT;
     pub fn DwmUpdateThumbnailProperties(
         hThumbnailId: HTHUMBNAIL,
         ptnProperties: *const DWM_THUMBNAIL_PROPERTIES,
@@ -217,20 +194,14 @@ extern "system" {
 }
 pub const DWM_SIT_DISPLAYFRAME: DWORD = 0x00000001;
 extern "system" {
-    pub fn DwmSetIconicThumbnail(
-        hwnd: HWND,
-        hbmp: HBITMAP,
-        dwSITFlags: DWORD,
-    ) -> HRESULT;
+    pub fn DwmSetIconicThumbnail(hwnd: HWND, hbmp: HBITMAP, dwSITFlags: DWORD) -> HRESULT;
     pub fn DwmSetIconicLivePreviewBitmap(
         hwnd: HWND,
         hbmp: HBITMAP,
         pptClient: *mut POINT,
         dwSITFlags: DWORD,
     ) -> HRESULT;
-    pub fn DwmInvalidateIconicBitmaps(
-        hwnd: HWND,
-    ) -> HRESULT;
+    pub fn DwmInvalidateIconicBitmaps(hwnd: HWND) -> HRESULT;
     // pub fn DwmAttachMilContent(hwnd: HWND) -> HRESULT;
     // pub fn DwmDetachMilContent(hwnd: HWND) -> HRESULT;
     pub fn DwmFlush() -> HRESULT;
@@ -242,7 +213,7 @@ extern "system" {
         pDwGeneration: *mut DWORD,
     ) -> HRESULT;
 }
-ENUM!{enum DWMTRANSITION_OWNEDWINDOW_TARGET {
+ENUM! {enum DWMTRANSITION_OWNEDWINDOW_TARGET {
     DWMTRANSITION_OWNEDWINDOW_NULL = -1i32 as u32,
     DWMTRANSITION_OWNEDWINDOW_REPOSITION = 0,
 }}
@@ -252,7 +223,7 @@ extern "system" {
         target: DWMTRANSITION_OWNEDWINDOW_TARGET,
     ) -> HRESULT;
 }
-ENUM!{enum GESTURE_TYPE {
+ENUM! {enum GESTURE_TYPE {
     GT_PEN_TAP = 0,
     GT_PEN_DOUBLETAP = 1,
     GT_PEN_RIGHTTAP = 2,
@@ -272,13 +243,9 @@ extern "system" {
         pdwPointerID: *const DWORD,
         pPoints: *const POINT,
     ) -> HRESULT;
-    pub fn DwmTetherContact(
-        dwPointerID: DWORD,
-        fEnable: BOOL,
-        ptTether: POINT,
-    ) -> HRESULT;
+    pub fn DwmTetherContact(dwPointerID: DWORD, fEnable: BOOL, ptTether: POINT) -> HRESULT;
 }
-ENUM!{enum DWM_SHOWCONTACT {
+ENUM! {enum DWM_SHOWCONTACT {
     DWMSC_DOWN = 0x00000001,
     DWMSC_UP = 0x00000002,
     DWMSC_DRAG = 0x00000004,
@@ -288,8 +255,5 @@ ENUM!{enum DWM_SHOWCONTACT {
     DWMSC_ALL = 0xFFFFFFFF,
 }}
 extern "system" {
-    pub fn DwmShowContact(
-        dwPointerID: DWORD,
-        eShowContact: DWM_SHOWCONTACT,
-    ) -> HRESULT;
+    pub fn DwmShowContact(dwPointerID: DWORD, eShowContact: DWM_SHOWCONTACT) -> HRESULT;
 }

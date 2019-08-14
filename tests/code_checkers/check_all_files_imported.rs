@@ -11,33 +11,31 @@ use std::path::Path;
 
 use utils::read_file;
 
-fn check_if_files_in_mod(
-    files: &[String],
-    mod_file: &Path,
-    errors: &mut u32,
-) {
+fn check_if_files_in_mod(files: &[String], mod_file: &Path, errors: &mut u32) {
     let content = read_file(mod_file);
     let mut imports = HashMap::new();
-    for x in content.split('\n')
-                    .filter_map(|s| {
-                        let x: Vec<&str> = s.split("mod ").collect();
-                        if x.len() < 2 {
-                            None
-                        } else {
-                            // We assume that only one mod import is present on a line.
-                            x[1].split(';').next()
-                        }
-                    }) {
+    for x in content.split('\n').filter_map(|s| {
+        let x: Vec<&str> = s.split("mod ").collect();
+        if x.len() < 2 {
+            None
+        } else {
+            // We assume that only one mod import is present on a line.
+            x[1].split(';').next()
+        }
+    }) {
         imports.insert(x.to_owned(), false);
     }
     for file in files {
         if let Some(import) = imports.get_mut(file) {
             *import = true;
         } else {
-            writeln!(&mut io::stderr(),
-                     "\"{}\" isn't imported in \"{}\"",
-                     file,
-                     mod_file.display()).unwrap();
+            writeln!(
+                &mut io::stderr(),
+                "\"{}\" isn't imported in \"{}\"",
+                file,
+                mod_file.display()
+            )
+            .unwrap();
             *errors += 1;
         }
     }
@@ -45,19 +43,19 @@ fn check_if_files_in_mod(
     // Just because we want to have checks without compilation!
     for (import, found) in &imports {
         if *found == false {
-            writeln!(&mut io::stderr(),
-                     "module \"{}\" is imported in \"{}\" but doesn't exist",
-                     import,
-                     mod_file.display()).unwrap();
+            writeln!(
+                &mut io::stderr(),
+                "module \"{}\" is imported in \"{}\" but doesn't exist",
+                import,
+                mod_file.display()
+            )
+            .unwrap();
             *errors += 1;
         }
     }
 }
 
-fn read_dirs<P: AsRef<Path>>(
-    dir: P,
-    errors: &mut u32,
-) {
+fn read_dirs<P: AsRef<Path>>(dir: P, errors: &mut u32) {
     let mut files = Vec::new();
     let mut mod_file = None;
 

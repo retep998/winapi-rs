@@ -14,11 +14,7 @@ extern "system" {
         buf: LPBYTE,
         parm_err: LPDWORD,
     ) -> NET_API_STATUS;
-    pub fn NetUseDel(
-        UncServerName: LMSTR,
-        UseName: LMSTR,
-        ForceCond: DWORD,
-    ) -> NET_API_STATUS;
+    pub fn NetUseDel(UncServerName: LMSTR, UseName: LMSTR, ForceCond: DWORD) -> NET_API_STATUS;
     pub fn NetUseEnum(
         UncServerName: LMSTR,
         Level: DWORD,
@@ -35,13 +31,13 @@ extern "system" {
         bufptr: *mut LPBYTE,
     ) -> NET_API_STATUS;
 }
-STRUCT!{struct USE_INFO_0 {
+STRUCT! {struct USE_INFO_0 {
     ui0_local: LMSTR,
     ui0_remote: LMSTR,
 }}
 pub type PUSE_INFO_0 = *mut USE_INFO_0;
 pub type LPUSE_INFO_0 = *mut USE_INFO_0;
-STRUCT!{struct USE_INFO_1 {
+STRUCT! {struct USE_INFO_1 {
     ui1_local: LMSTR,
     ui1_remote: LMSTR,
     ui1_password: LMSTR,
@@ -52,7 +48,7 @@ STRUCT!{struct USE_INFO_1 {
 }}
 pub type PUSE_INFO_1 = *mut USE_INFO_1;
 pub type LPUSE_INFO_1 = *mut USE_INFO_1;
-STRUCT!{struct USE_INFO_2 {
+STRUCT! {struct USE_INFO_2 {
     ui2_local: LMSTR,
     ui2_remote: LMSTR,
     ui2_password: LMSTR,
@@ -65,12 +61,12 @@ STRUCT!{struct USE_INFO_2 {
 }}
 pub type PUSE_INFO_2 = *mut USE_INFO_2;
 pub type LPUSE_INFO_2 = *mut USE_INFO_2;
-STRUCT!{struct USE_INFO_3 {
+STRUCT! {struct USE_INFO_3 {
     ui3_ui2: USE_INFO_2,
     ui3_flags: ULONG,
 }}
 pub type PUSE_INFO_3 = *mut USE_INFO_3;
-STRUCT!{struct USE_INFO_4 {
+STRUCT! {struct USE_INFO_4 {
     ui4_ui3: USE_INFO_3,
     ui4_auth_identity_length: DWORD,
     ui4_auth_identity: PBYTE,

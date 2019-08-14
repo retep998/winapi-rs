@@ -41,12 +41,6 @@ pub const GL_ALWAYS: GLenum = 0x0207;
 // until that time, you can use the excellent GL crate
 // https://github.com/brendanzab/gl-rs
 extern "system" {
-    pub fn glAccum(
-        op: GLenum,
-        value: GLfloat,
-    );
-    pub fn glAlphaFunc(
-        func: GLenum,
-        reference: GLclampf,
-    );
+    pub fn glAccum(op: GLenum, value: GLfloat);
+    pub fn glAlphaFunc(func: GLenum, reference: GLclampf);
 }

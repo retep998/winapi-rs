@@ -6,10 +6,6 @@
 use shared::minwindef::BOOL;
 use um::winnt::LARGE_INTEGER;
 extern "system" {
-    pub fn QueryPerformanceCounter(
-        lpPerformanceCount: *mut LARGE_INTEGER,
-    ) -> BOOL;
-    pub fn QueryPerformanceFrequency(
-        lpFrequency: *mut LARGE_INTEGER,
-    ) -> BOOL;
+    pub fn QueryPerformanceCounter(lpPerformanceCount: *mut LARGE_INTEGER) -> BOOL;
+    pub fn QueryPerformanceFrequency(lpFrequency: *mut LARGE_INTEGER) -> BOOL;
 }

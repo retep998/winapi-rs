@@ -47,40 +47,24 @@ extern "system" {
         buf: LPBYTE,
         parm_err: LPDWORD,
     ) -> NET_API_STATUS;
-    pub fn NetShareDel(
-        servername: LMSTR,
-        netname: LMSTR,
-        reserved: DWORD,
-    ) -> NET_API_STATUS;
-    pub fn NetShareDelSticky(
-        servername: LMSTR,
-        netname: LMSTR,
-        reserved: DWORD,
-    ) -> NET_API_STATUS;
-    pub fn NetShareCheck(
-        servername: LMSTR,
-        device: LMSTR,
-        _type: LPDWORD,
-    ) -> NET_API_STATUS;
-    pub fn NetShareDelEx(
-        servername: LMSTR,
-        level: DWORD,
-        buf: LPBYTE,
-    ) -> NET_API_STATUS;
+    pub fn NetShareDel(servername: LMSTR, netname: LMSTR, reserved: DWORD) -> NET_API_STATUS;
+    pub fn NetShareDelSticky(servername: LMSTR, netname: LMSTR, reserved: DWORD) -> NET_API_STATUS;
+    pub fn NetShareCheck(servername: LMSTR, device: LMSTR, _type: LPDWORD) -> NET_API_STATUS;
+    pub fn NetShareDelEx(servername: LMSTR, level: DWORD, buf: LPBYTE) -> NET_API_STATUS;
 }
-STRUCT!{struct SHARE_INFO_0 {
+STRUCT! {struct SHARE_INFO_0 {
     shi0_netname: LMSTR,
 }}
 pub type PSHARE_INFO_0 = *mut SHARE_INFO_0;
 pub type LPSHARE_INFO_0 = *mut SHARE_INFO_0;
-STRUCT!{struct SHARE_INFO_1 {
+STRUCT! {struct SHARE_INFO_1 {
     shi1_netname: LMSTR,
     shi1_type: DWORD,
     shi1_remark: LMSTR,
 }}
 pub type PSHARE_INFO_1 = *mut SHARE_INFO_1;
 pub type LPSHARE_INFO_1 = *mut SHARE_INFO_1;
-STRUCT!{struct SHARE_INFO_2 {
+STRUCT! {struct SHARE_INFO_2 {
     shi2_netname: LMSTR,
     shi2_type: DWORD,
     shi2_remark: LMSTR,
@@ -92,7 +76,7 @@ STRUCT!{struct SHARE_INFO_2 {
 }}
 pub type PSHARE_INFO_2 = *mut SHARE_INFO_2;
 pub type LPSHARE_INFO_2 = *mut SHARE_INFO_2;
-STRUCT!{struct SHARE_INFO_501 {
+STRUCT! {struct SHARE_INFO_501 {
     shi501_netname: LMSTR,
     shi501_type: DWORD,
     shi501_remark: LMSTR,
@@ -100,7 +84,7 @@ STRUCT!{struct SHARE_INFO_501 {
 }}
 pub type PSHARE_INFO_501 = *mut SHARE_INFO_501;
 pub type LPSHARE_INFO_501 = *mut SHARE_INFO_501;
-STRUCT!{struct SHARE_INFO_502 {
+STRUCT! {struct SHARE_INFO_502 {
     shi502_netname: LMSTR,
     shi502_type: DWORD,
     shi502_remark: LMSTR,
@@ -114,7 +98,7 @@ STRUCT!{struct SHARE_INFO_502 {
 }}
 pub type PSHARE_INFO_502 = *mut SHARE_INFO_502;
 pub type LPSHARE_INFO_502 = *mut SHARE_INFO_502;
-STRUCT!{struct SHARE_INFO_503 {
+STRUCT! {struct SHARE_INFO_503 {
     shi503_netname: LMSTR,
     shi503_type: DWORD,
     shi503_remark: LMSTR,
@@ -129,43 +113,35 @@ STRUCT!{struct SHARE_INFO_503 {
 }}
 pub type PSHARE_INFO_503 = *mut SHARE_INFO_503;
 pub type LPSHARE_INFO_503 = *mut SHARE_INFO_503;
-STRUCT!{struct SHARE_INFO_1004 {
+STRUCT! {struct SHARE_INFO_1004 {
     shi1004_remark: LMSTR,
 }}
 pub type PSHARE_INFO_1004 = *mut SHARE_INFO_1004;
 pub type LPSHARE_INFO_1004 = *mut SHARE_INFO_1004;
-STRUCT!{struct SHARE_INFO_1005 {
+STRUCT! {struct SHARE_INFO_1005 {
     shi1005_flags: DWORD,
 }}
 pub type PSHARE_INFO_1005 = *mut SHARE_INFO_1005;
 pub type LPSHARE_INFO_1005 = *mut SHARE_INFO_1005;
-STRUCT!{struct SHARE_INFO_1006 {
+STRUCT! {struct SHARE_INFO_1006 {
     shi1006_max_uses: DWORD,
 }}
 pub type PSHARE_INFO_1006 = *mut SHARE_INFO_1006;
 pub type LPSHARE_INFO_1006 = *mut SHARE_INFO_1006;
-STRUCT!{struct SHARE_INFO_1501 {
+STRUCT! {struct SHARE_INFO_1501 {
     shi1501_reserved: DWORD,
     shi1501_security_descriptor: PSECURITY_DESCRIPTOR,
 }}
 pub type PSHARE_INFO_1501 = *mut SHARE_INFO_1501;
 pub type LPSHARE_INFO_1501 = *mut SHARE_INFO_1501;
-STRUCT!{struct SHARE_INFO_1503 {
+STRUCT! {struct SHARE_INFO_1503 {
     shi1503_sharefilter: GUID,
 }}
 pub type PSHARE_INFO_1503 = *mut SHARE_INFO_1503;
 pub type LPSHARE_INFO_1503 = *mut SHARE_INFO_1503;
 extern "system" {
-    pub fn NetServerAliasAdd(
-        servername: LMSTR,
-        level: DWORD,
-        buf: LPBYTE,
-    ) -> NET_API_STATUS;
-    pub fn NetServerAliasDel(
-        servername: LMSTR,
-        level: DWORD,
-        buf: LPBYTE,
-    ) -> NET_API_STATUS;
+    pub fn NetServerAliasAdd(servername: LMSTR, level: DWORD, buf: LPBYTE) -> NET_API_STATUS;
+    pub fn NetServerAliasDel(servername: LMSTR, level: DWORD, buf: LPBYTE) -> NET_API_STATUS;
     pub fn NetServerAliasEnum(
         servername: LMSTR,
         level: DWORD,
@@ -176,7 +152,7 @@ extern "system" {
         resumehandle: LPDWORD,
     ) -> NET_API_STATUS;
 }
-STRUCT!{struct SERVER_ALIAS_INFO_0 {
+STRUCT! {struct SERVER_ALIAS_INFO_0 {
     srvai0_alias: LMSTR,
     srvai0_target: LMSTR,
     srvai0_default: BOOLEAN,
@@ -229,10 +205,15 @@ pub const SHI1005_FLAGS_ENABLE_HASH: DWORD = 0x02000;
 pub const SHI1005_FLAGS_ENABLE_CA: DWORD = 0x04000;
 pub const SHI1005_FLAGS_ENCRYPT_DATA: DWORD = 0x08000;
 pub const SHI1005_FLAGS_RESERVED: DWORD = 0x10000;
-pub const SHI1005_VALID_FLAGS_SET: DWORD = CSC_MASK | SHI1005_FLAGS_RESTRICT_EXCLUSIVE_OPENS
-    | SHI1005_FLAGS_FORCE_SHARED_DELETE | SHI1005_FLAGS_ALLOW_NAMESPACE_CACHING
-    | SHI1005_FLAGS_ACCESS_BASED_DIRECTORY_ENUM | SHI1005_FLAGS_FORCE_LEVELII_OPLOCK
-    | SHI1005_FLAGS_ENABLE_HASH | SHI1005_FLAGS_ENABLE_CA | SHI1005_FLAGS_ENCRYPT_DATA
+pub const SHI1005_VALID_FLAGS_SET: DWORD = CSC_MASK
+    | SHI1005_FLAGS_RESTRICT_EXCLUSIVE_OPENS
+    | SHI1005_FLAGS_FORCE_SHARED_DELETE
+    | SHI1005_FLAGS_ALLOW_NAMESPACE_CACHING
+    | SHI1005_FLAGS_ACCESS_BASED_DIRECTORY_ENUM
+    | SHI1005_FLAGS_FORCE_LEVELII_OPLOCK
+    | SHI1005_FLAGS_ENABLE_HASH
+    | SHI1005_FLAGS_ENABLE_CA
+    | SHI1005_FLAGS_ENCRYPT_DATA
     | SHI1005_FLAGS_RESERVED;
 extern "system" {
     pub fn NetSessionEnum(
@@ -259,12 +240,12 @@ extern "system" {
         bufptr: *mut LPBYTE,
     ) -> NET_API_STATUS;
 }
-STRUCT!{struct SESSION_INFO_0 {
+STRUCT! {struct SESSION_INFO_0 {
     sesi0_cname: LMSTR,
 }}
 pub type PSESSION_INFO_0 = *mut SESSION_INFO_0;
 pub type LPSESSION_INFO_0 = *mut SESSION_INFO_0;
-STRUCT!{struct SESSION_INFO_1 {
+STRUCT! {struct SESSION_INFO_1 {
     sesi1_cname: LMSTR,
     sesi1_username: LMSTR,
     sesi1_num_opens: DWORD,
@@ -274,7 +255,7 @@ STRUCT!{struct SESSION_INFO_1 {
 }}
 pub type PSESSION_INFO_1 = *mut SESSION_INFO_1;
 pub type LPSESSION_INFO_1 = *mut SESSION_INFO_1;
-STRUCT!{struct SESSION_INFO_2 {
+STRUCT! {struct SESSION_INFO_2 {
     sesi2_cname: LMSTR,
     sesi2_username: LMSTR,
     sesi2_num_opens: DWORD,
@@ -285,7 +266,7 @@ STRUCT!{struct SESSION_INFO_2 {
 }}
 pub type PSESSION_INFO_2 = *mut SESSION_INFO_2;
 pub type LPSESSION_INFO_2 = *mut SESSION_INFO_2;
-STRUCT!{struct SESSION_INFO_10 {
+STRUCT! {struct SESSION_INFO_10 {
     sesi10_cname: LMSTR,
     sesi10_username: LMSTR,
     sesi10_time: DWORD,
@@ -293,7 +274,7 @@ STRUCT!{struct SESSION_INFO_10 {
 }}
 pub type PSESSION_INFO_10 = *mut SESSION_INFO_10;
 pub type LPSESSION_INFO_10 = *mut SESSION_INFO_10;
-STRUCT!{struct SESSION_INFO_502 {
+STRUCT! {struct SESSION_INFO_502 {
     sesi502_cname: LMSTR,
     sesi502_username: LMSTR,
     sesi502_num_opens: DWORD,
@@ -321,12 +302,12 @@ extern "system" {
         resume_handle: LPDWORD,
     ) -> NET_API_STATUS;
 }
-STRUCT!{struct CONNECTION_INFO_0 {
+STRUCT! {struct CONNECTION_INFO_0 {
     coni0_id: DWORD,
 }}
 pub type PCONNECTION_INFO_0 = *mut CONNECTION_INFO_0;
 pub type LPCONNECTION_INFO_0 = *mut CONNECTION_INFO_0;
-STRUCT!{struct CONNECTION_INFO_1 {
+STRUCT! {struct CONNECTION_INFO_1 {
     coni1_id: DWORD,
     coni1_type: DWORD,
     coni1_num_opens: DWORD,
@@ -338,10 +319,7 @@ STRUCT!{struct CONNECTION_INFO_1 {
 pub type PCONNECTION_INFO_1 = *mut CONNECTION_INFO_1;
 pub type LPCONNECTION_INFO_1 = *mut CONNECTION_INFO_1;
 extern "system" {
-    pub fn NetFileClose(
-        servername: LMSTR,
-        fileid: DWORD,
-    ) -> NET_API_STATUS;
+    pub fn NetFileClose(servername: LMSTR, fileid: DWORD) -> NET_API_STATUS;
     pub fn NetFileEnum(
         servername: LMSTR,
         basepath: LMSTR,
@@ -360,12 +338,12 @@ extern "system" {
         bufptr: *mut LPBYTE,
     ) -> NET_API_STATUS;
 }
-STRUCT!{struct FILE_INFO_2 {
+STRUCT! {struct FILE_INFO_2 {
     fi2_id: DWORD,
 }}
 pub type PFILE_INFO_2 = *mut FILE_INFO_2;
 pub type LPFILE_INFO_2 = *mut FILE_INFO_2;
-STRUCT!{struct FILE_INFO_3 {
+STRUCT! {struct FILE_INFO_3 {
     fi3_id: DWORD,
     fi3_permissions: DWORD,
     fi3_num_locks: DWORD,

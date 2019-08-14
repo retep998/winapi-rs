@@ -19,27 +19,12 @@ extern "system" {
         hstringHeader: *mut HSTRING_HEADER,
         string: *mut HSTRING,
     ) -> HRESULT;
-    pub fn WindowsDeleteString(
-        string: HSTRING,
-    ) -> HRESULT;
-    pub fn WindowsDuplicateString(
-        string: HSTRING,
-        newString: *mut HSTRING,
-    ) -> HRESULT;
-    pub fn WindowsGetStringLen(
-        string: HSTRING,
-    ) -> UINT32;
-    pub fn WindowsGetStringRawBuffer(
-        string: HSTRING,
-        length: *mut UINT32,
-    ) -> PCWSTR;
-    pub fn WindowsIsStringEmpty(
-        string: HSTRING,
-    ) -> BOOL;
-    pub fn WindowsStringHasEmbeddedNull(
-        string: HSTRING,
-        hasEmbedNull: *mut BOOL,
-    ) -> HRESULT;
+    pub fn WindowsDeleteString(string: HSTRING) -> HRESULT;
+    pub fn WindowsDuplicateString(string: HSTRING, newString: *mut HSTRING) -> HRESULT;
+    pub fn WindowsGetStringLen(string: HSTRING) -> UINT32;
+    pub fn WindowsGetStringRawBuffer(string: HSTRING, length: *mut UINT32) -> PCWSTR;
+    pub fn WindowsIsStringEmpty(string: HSTRING) -> BOOL;
+    pub fn WindowsStringHasEmbeddedNull(string: HSTRING, hasEmbedNull: *mut BOOL) -> HRESULT;
     pub fn WindowsCompareStringOrdinal(
         string1: HSTRING,
         string2: HSTRING,
@@ -86,11 +71,9 @@ extern "system" {
         bufferHandle: HSTRING_BUFFER,
         string: *mut HSTRING,
     ) -> HRESULT;
-    pub fn WindowsDeleteStringBuffer(
-        bufferHandle: HSTRING_BUFFER,
-    ) -> HRESULT;
+    pub fn WindowsDeleteStringBuffer(bufferHandle: HSTRING_BUFFER) -> HRESULT;
 }
-FN!{stdcall PINSPECT_HSTRING_CALLBACK(
+FN! {stdcall PINSPECT_HSTRING_CALLBACK(
     *const VOID,
     UINT_PTR,
     UINT32,
@@ -120,10 +103,7 @@ extern "system" {
         pBuffer: *const UCHAR,
         ppidl: *mut HSTRING,
     ) -> *mut UCHAR;
-    pub fn HSTRING_UserFree(
-        pFlags: *const ULONG,
-        ppidl: *const HSTRING,
-    );
+    pub fn HSTRING_UserFree(pFlags: *const ULONG, ppidl: *const HSTRING);
     #[cfg(target_arch = "x86_64")]
     pub fn HSTRING_UserSize64(
         pFlags: *const ULONG,
@@ -143,8 +123,5 @@ extern "system" {
         ppidl: *mut HSTRING,
     ) -> *mut UCHAR;
     #[cfg(target_arch = "x86_64")]
-    pub fn HSTRING_UserFree64(
-        pFlags: *const ULONG,
-        ppidl: *const HSTRING,
-    );
+    pub fn HSTRING_UserFree64(pFlags: *const ULONG, ppidl: *const HSTRING);
 }

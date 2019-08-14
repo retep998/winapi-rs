@@ -43,23 +43,23 @@ pub const EVENT_WRITE_FLAG_NO_FAULTING: ULONG = 0x00000001;
 pub const EVENT_WRITE_FLAG_INPRIVATE: ULONG = 0x00000002;
 pub type REGHANDLE = ULONGLONG;
 pub type PREGHANDLE = *mut REGHANDLE;
-STRUCT!{struct EVENT_DATA_DESCRIPTOR_u_s {
+STRUCT! {struct EVENT_DATA_DESCRIPTOR_u_s {
     Type: UCHAR,
     Reserved1: UCHAR,
     Reserved2: USHORT,
 }}
-UNION!{union EVENT_DATA_DESCRIPTOR_u {
+UNION! {union EVENT_DATA_DESCRIPTOR_u {
     [u32; 1],
     Reserved Reserved_mut: ULONG,
     s s_mut: EVENT_DATA_DESCRIPTOR_u_s,
 }}
-STRUCT!{struct EVENT_DATA_DESCRIPTOR {
+STRUCT! {struct EVENT_DATA_DESCRIPTOR {
     Ptr: ULONGLONG,
     Size: ULONG,
     u: EVENT_DATA_DESCRIPTOR_u,
 }}
 pub type PEVENT_DATA_DESCRIPTOR = *mut EVENT_DATA_DESCRIPTOR;
-STRUCT!{struct EVENT_DESCRIPTOR {
+STRUCT! {struct EVENT_DESCRIPTOR {
     Id: USHORT,
     Version: UCHAR,
     Channel: UCHAR,
@@ -70,13 +70,13 @@ STRUCT!{struct EVENT_DESCRIPTOR {
 }}
 pub type PEVENT_DESCRIPTOR = *mut EVENT_DESCRIPTOR;
 pub type PCEVENT_DESCRIPTOR = *const EVENT_DESCRIPTOR;
-STRUCT!{struct EVENT_FILTER_DESCRIPTOR {
+STRUCT! {struct EVENT_FILTER_DESCRIPTOR {
     Ptr: ULONGLONG,
     Size: ULONG,
     Type: ULONG,
 }}
 pub type PEVENT_FILTER_DESCRIPTOR = *mut EVENT_FILTER_DESCRIPTOR;
-STRUCT!{struct EVENT_FILTER_HEADER {
+STRUCT! {struct EVENT_FILTER_HEADER {
     Id: USHORT,
     Version: UCHAR,
     Reserved: [UCHAR; 5],
@@ -85,14 +85,14 @@ STRUCT!{struct EVENT_FILTER_HEADER {
     NextOffset: ULONG,
 }}
 pub type PEVENT_FILTER_HEADER = *mut EVENT_FILTER_HEADER;
-STRUCT!{struct EVENT_FILTER_EVENT_ID {
+STRUCT! {struct EVENT_FILTER_EVENT_ID {
     FilterIn: BOOLEAN,
     Reserved: UCHAR,
     Count: USHORT,
     Events: [USHORT; ANYSIZE_ARRAY],
 }}
 pub type PEVENT_FILTER_EVENT_ID = *mut EVENT_FILTER_EVENT_ID;
-STRUCT!{struct EVENT_FILTER_EVENT_NAME {
+STRUCT! {struct EVENT_FILTER_EVENT_NAME {
     MatchAnyKeyword: ULONGLONG,
     MatchAllKeyword: ULONGLONG,
     Level: UCHAR,
@@ -101,20 +101,20 @@ STRUCT!{struct EVENT_FILTER_EVENT_NAME {
     Names: [UCHAR; ANYSIZE_ARRAY],
 }}
 pub type PEVENT_FILTER_EVENT_NAME = *mut EVENT_FILTER_EVENT_NAME;
-STRUCT!{struct EVENT_FILTER_LEVEL_KW {
+STRUCT! {struct EVENT_FILTER_LEVEL_KW {
     MatchAnyKeyword: ULONGLONG,
     MatchAllKeyword: ULONGLONG,
     Level: UCHAR,
     FilterIn: BOOLEAN,
 }}
-ENUM!{enum EVENT_INFO_CLASS {
+ENUM! {enum EVENT_INFO_CLASS {
     EventProviderBinaryTrackInfo,
     EventProviderSetReserved1,
     EventProviderSetTraits,
     EventProviderUseDescriptorType,
     MaxEventInfo,
 }}
-FN!{stdcall PENABLECALLBACK(
+FN! {stdcall PENABLECALLBACK(
     SourceId: LPCGUID,
     IsEnabled: ULONG,
     Level: UCHAR,
@@ -130,24 +130,15 @@ extern "system" {
         CallbackContext: PVOID,
         RegHandle: PREGHANDLE,
     ) -> ULONG;
-    pub fn EventUnregister(
-        RegHandle: REGHANDLE,
-    ) -> ULONG;
+    pub fn EventUnregister(RegHandle: REGHANDLE) -> ULONG;
     pub fn EventSetInformation(
         RegHandle: REGHANDLE,
         InformationClass: EVENT_INFO_CLASS,
         EventInformation: PVOID,
         InformationLength: ULONG,
     ) -> ULONG;
-    pub fn EventEnabled(
-        RegHandle: REGHANDLE,
-        EventDescriptor: PCEVENT_DESCRIPTOR,
-    ) -> BOOLEAN;
-    pub fn EventProviderEnabled(
-        RegHandle: REGHANDLE,
-        Level: UCHAR,
-        Keyword: ULONGLONG,
-    ) -> BOOLEAN;
+    pub fn EventEnabled(RegHandle: REGHANDLE, EventDescriptor: PCEVENT_DESCRIPTOR) -> BOOLEAN;
+    pub fn EventProviderEnabled(RegHandle: REGHANDLE, Level: UCHAR, Keyword: ULONGLONG) -> BOOLEAN;
     pub fn EventWrite(
         RegHandle: REGHANDLE,
         EventDescriptor: PCEVENT_DESCRIPTOR,
@@ -178,10 +169,7 @@ extern "system" {
         Keyword: ULONGLONG,
         EventString: PCWSTR,
     ) -> ULONG;
-    pub fn EventActivityIdControl(
-        ControlCode: ULONG,
-        ActivityId: LPGUID,
-    ) -> ULONG;
+    pub fn EventActivityIdControl(ControlCode: ULONG, ActivityId: LPGUID) -> ULONG;
 }
 #[inline]
 pub unsafe fn EventDataDescCreate(

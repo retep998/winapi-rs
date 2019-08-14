@@ -7,7 +7,7 @@
 use shared::minwindef::DWORD;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR};
-RIDL!{#[uuid(0x79eac9ee, 0xbaf9, 0x11ce, 0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b)]
+RIDL! {#[uuid(0x79eac9ee, 0xbaf9, 0x11ce, 0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b)]
 interface IInternetSecurityManager(IInternetSecurityManagerVtbl): IUnknown(IUnknownVtbl) {
     fn SetSecuritySite() -> HRESULT,
     fn GetSecuritySite() -> HRESULT,

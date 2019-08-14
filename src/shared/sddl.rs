@@ -172,22 +172,10 @@ pub const SDDL_ACE_COND_RESOURCE_ATTRIBUTE_PREFIX: &'static str = "@RESOURCE.";
 pub const SDDL_ACE_COND_DEVICE_ATTRIBUTE_PREFIX: &'static str = "@DEVICE.";
 pub const SDDL_ACE_COND_TOKEN_ATTRIBUTE_PREFIX: &'static str = "@TOKEN.";
 extern "system" {
-    pub fn ConvertSidToStringSidA(
-        Sid: PSID,
-        StringSid: *mut LPSTR,
-    ) -> BOOL;
-    pub fn ConvertSidToStringSidW(
-        Sid: PSID,
-        StringSid: *mut LPWSTR,
-    ) -> BOOL;
-    pub fn ConvertStringSidToSidA(
-        StringSid: LPCSTR,
-        Sid: *mut PSID,
-    ) -> BOOL;
-    pub fn ConvertStringSidToSidW(
-        StringSid: LPCWSTR,
-        Sid: *mut PSID,
-    ) -> BOOL;
+    pub fn ConvertSidToStringSidA(Sid: PSID, StringSid: *mut LPSTR) -> BOOL;
+    pub fn ConvertSidToStringSidW(Sid: PSID, StringSid: *mut LPWSTR) -> BOOL;
+    pub fn ConvertStringSidToSidA(StringSid: LPCSTR, Sid: *mut PSID) -> BOOL;
+    pub fn ConvertStringSidToSidW(StringSid: LPCWSTR, Sid: *mut PSID) -> BOOL;
     pub fn ConvertStringSecurityDescriptorToSecurityDescriptorA(
         StringSecurityDescriptor: LPCSTR,
         StringSDRevision: DWORD,

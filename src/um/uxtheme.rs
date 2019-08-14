@@ -14,21 +14,16 @@ pub type HTHEME = HANDLE;
 //pub const MAX_THEMECOLOR: u32 = 64;
 //pub const MAX_THEMESIZE: u32 = 64;
 extern "system" {
-    pub fn BeginPanningFeedback(
-        hwnd: HWND,
-    ) -> BOOL;
+    pub fn BeginPanningFeedback(hwnd: HWND) -> BOOL;
     pub fn UpdatePanningFeedback(
         hwnd: HWND,
         lTotalOverpanOffsetX: LONG,
         lTotalOverpanOffsetY: LONG,
         fInInertia: BOOL,
     ) -> BOOL;
-    pub fn EndPanningFeedback(
-        hwnd: HWND,
-        fAnimateBack: BOOL,
-    ) -> BOOL;
+    pub fn EndPanningFeedback(hwnd: HWND, fAnimateBack: BOOL) -> BOOL;
 }
-ENUM!{enum TA_PROPERTY {
+ENUM! {enum TA_PROPERTY {
     TAP_FLAGS = 0,
     TAP_TRANSFORMCOUNT = 1,
     TAP_STAGGERDELAY = 2,
@@ -36,7 +31,7 @@ ENUM!{enum TA_PROPERTY {
     TAP_STAGGERDELAYFACTOR = 4,
     TAP_ZORDER = 5,
 }}
-ENUM!{enum TA_PROPERTY_FLAG {
+ENUM! {enum TA_PROPERTY_FLAG {
     TAPF_NONE = 0x0,
     TAPF_HASSTAGGER = 0x1,
     TAPF_ISRTLAWARE = 0x2,
@@ -55,19 +50,19 @@ extern "system" {
         pcbSizeOut: *mut DWORD,
     ) -> HRESULT;
 }
-ENUM!{enum TA_TRANSFORM_TYPE {
+ENUM! {enum TA_TRANSFORM_TYPE {
     TATT_TRANSLATE_2D = 0,
     TATT_SCALE_2D = 1,
     TATT_OPACITY = 2,
     TATT_CLIP = 3,
 }}
-ENUM!{enum TA_TRANSFORM_FLAG {
+ENUM! {enum TA_TRANSFORM_FLAG {
     TATF_NONE = 0x0,
     TATF_TARGETVALUES_USER = 0x1,
     TATF_HASINITIALVALUES = 0x2,
     TATF_HASORIGINVALUES = 0x4,
 }}
-STRUCT!{struct TA_TRANSFORM {
+STRUCT! {struct TA_TRANSFORM {
     eTransformType: TA_TRANSFORM_TYPE,
     dwTimingFunctionId: DWORD,
     dwStartTime: DWORD,
@@ -75,7 +70,7 @@ STRUCT!{struct TA_TRANSFORM {
     eFlags: TA_TRANSFORM_FLAG,
 }}
 pub type PTA_TRANSFORM = *mut TA_TRANSFORM;
-STRUCT!{struct TA_TRANSFORM_2D {
+STRUCT! {struct TA_TRANSFORM_2D {
     header: TA_TRANSFORM,
     rX: c_float,
     rY: c_float,
@@ -85,13 +80,13 @@ STRUCT!{struct TA_TRANSFORM_2D {
     rOriginY: c_float,
 }}
 pub type PTA_TRANSFORM_2D = *mut TA_TRANSFORM_2D;
-STRUCT!{struct TA_TRANSFORM_OPACITY {
+STRUCT! {struct TA_TRANSFORM_OPACITY {
     header: TA_TRANSFORM,
     rOpacity: c_float,
     rInitialOpacity: c_float,
 }}
 pub type PTA_TRANSFORM_OPACITY = *mut TA_TRANSFORM_OPACITY;
-STRUCT!{struct TA_TRANSFORM_CLIP {
+STRUCT! {struct TA_TRANSFORM_CLIP {
     header: TA_TRANSFORM,
     rLeft: c_float,
     rTop: c_float,
@@ -114,15 +109,15 @@ extern "system" {
         pcbSizeOut: *mut DWORD,
     ) -> HRESULT;
 }
-ENUM!{enum TA_TIMINGFUNCTION_TYPE {
+ENUM! {enum TA_TIMINGFUNCTION_TYPE {
     TTFT_UNDEFINED = 0,
     TTFT_CUBIC_BEZIER = 1,
 }}
-STRUCT!{struct TA_TIMINGFUNCTION {
+STRUCT! {struct TA_TIMINGFUNCTION {
     eTimingFunctionType: TA_TIMINGFUNCTION_TYPE,
 }}
 pub type PTA_TIMINGFUNCTION = *mut TA_TIMINGFUNCTION;
-STRUCT!{struct TA_CUBIC_BEZIER {
+STRUCT! {struct TA_CUBIC_BEZIER {
     header: TA_TIMINGFUNCTION,
     rX0: c_float,
     rY0: c_float,
@@ -138,28 +133,15 @@ extern "system" {
         cbSize: DWORD,
         pcbSizeOut: *mut DWORD,
     ) -> HRESULT;
-    pub fn OpenThemeData(
-        hwnd: HWND,
-        pszClassList: LPCWSTR,
-    ) -> HTHEME;
+    pub fn OpenThemeData(hwnd: HWND, pszClassList: LPCWSTR) -> HTHEME;
 }
 pub const OTD_FORCE_RECT_SIZING: DWORD = 0x00000001;
 pub const OTD_NONCLIENT: DWORD = 0x00000002;
 pub const OTD_VALIDBITS: DWORD = OTD_FORCE_RECT_SIZING | OTD_NONCLIENT;
 extern "system" {
-    pub fn OpenThemeDataForDpi(
-        hwnd: HWND,
-        pszClassList: LPCWSTR,
-        dpi: UINT,
-    ) -> HTHEME;
-    pub fn OpenThemeDataEx(
-        hwnd: HWND,
-        pszClassList: LPCWSTR,
-        dwFlags: DWORD,
-    ) -> HTHEME;
-    pub fn CloseThemeData(
-        hTheme: HTHEME,
-    ) -> HRESULT;
+    pub fn OpenThemeDataForDpi(hwnd: HWND, pszClassList: LPCWSTR, dpi: UINT) -> HTHEME;
+    pub fn OpenThemeDataEx(hwnd: HWND, pszClassList: LPCWSTR, dwFlags: DWORD) -> HTHEME;
+    pub fn CloseThemeData(hTheme: HTHEME) -> HRESULT;
     pub fn DrawThemeBackground(
         hTheme: HTHEME,
         hdc: HDC,
@@ -176,9 +158,14 @@ pub const DTBG_OMITCONTENT: DWORD = 0x00000008;
 pub const DTBG_COMPUTINGREGION: DWORD = 0x00000010;
 pub const DTBG_MIRRORDC: DWORD = 0x00000020;
 pub const DTBG_NOMIRROR: DWORD = 0x00000040;
-pub const DTBG_VALIDBITS: DWORD = DTBG_CLIPRECT | DTBG_DRAWSOLID | DTBG_OMITBORDER
-    | DTBG_OMITCONTENT | DTBG_COMPUTINGREGION | DTBG_MIRRORDC | DTBG_NOMIRROR;
-STRUCT!{struct DTBGOPTS {
+pub const DTBG_VALIDBITS: DWORD = DTBG_CLIPRECT
+    | DTBG_DRAWSOLID
+    | DTBG_OMITBORDER
+    | DTBG_OMITCONTENT
+    | DTBG_COMPUTINGREGION
+    | DTBG_MIRRORDC
+    | DTBG_NOMIRROR;
+STRUCT! {struct DTBGOPTS {
     dwSize: DWORD,
     dwFlags: DWORD,
     rcClip: RECT,
@@ -233,7 +220,7 @@ extern "system" {
         pRegion: *mut HRGN,
     ) -> HRESULT;
 }
-ENUM!{enum THEMESIZE {
+ENUM! {enum THEMESIZE {
     TS_MIN = 0,
     TS_TRUE = 1,
     TS_DRAW = 2,
@@ -274,8 +261,10 @@ pub const HTTB_RESIZINGBORDER_LEFT: DWORD = 0x00000010;
 pub const HTTB_RESIZINGBORDER_TOP: DWORD = 0x00000020;
 pub const HTTB_RESIZINGBORDER_RIGHT: DWORD = 0x00000040;
 pub const HTTB_RESIZINGBORDER_BOTTOM: DWORD = 0x00000080;
-pub const HTTB_RESIZINGBORDER: DWORD = HTTB_RESIZINGBORDER_LEFT | HTTB_RESIZINGBORDER_TOP
-    | HTTB_RESIZINGBORDER_RIGHT | HTTB_RESIZINGBORDER_BOTTOM;
+pub const HTTB_RESIZINGBORDER: DWORD = HTTB_RESIZINGBORDER_LEFT
+    | HTTB_RESIZINGBORDER_TOP
+    | HTTB_RESIZINGBORDER_RIGHT
+    | HTTB_RESIZINGBORDER_BOTTOM;
 pub const HTTB_SIZINGTEMPLATE: DWORD = 0x00000100;
 pub const HTTB_SYSTEMSIZINGMARGINS: DWORD = 0x00000200;
 extern "system" {
@@ -309,11 +298,7 @@ extern "system" {
         himl: HIMAGELIST,
         iImageIndex: c_int,
     ) -> HRESULT;
-    pub fn IsThemePartDefined(
-        hTheme: HTHEME,
-        iPartId: c_int,
-        iStateId: c_int,
-    ) -> BOOL;
+    pub fn IsThemePartDefined(hTheme: HTHEME, iPartId: c_int, iStateId: c_int) -> BOOL;
     pub fn IsThemeBackgroundPartiallyTransparent(
         hTheme: HTHEME,
         iPartId: c_int,
@@ -386,7 +371,7 @@ extern "system" {
         pRect: LPRECT,
     ) -> HRESULT;
 }
-STRUCT!{struct MARGINS {
+STRUCT! {struct MARGINS {
     cxLeftWidth: c_int,
     cxRightWidth: c_int,
     cyTopHeight: c_int,
@@ -405,7 +390,7 @@ extern "system" {
     ) -> HRESULT;
 }
 pub const MAX_INTLIST_COUNT: usize = 402;
-STRUCT!{struct INTLIST {
+STRUCT! {struct INTLIST {
     iValueCount: c_int,
     iValues: [c_int; MAX_INTLIST_COUNT],
 }}
@@ -419,7 +404,7 @@ extern "system" {
         pIntList: *mut INTLIST,
     ) -> HRESULT;
 }
-ENUM!{enum PROPERTYORIGIN {
+ENUM! {enum PROPERTYORIGIN {
     PO_STATE = 0,
     PO_PART = 1,
     PO_CLASS = 2,
@@ -434,11 +419,7 @@ extern "system" {
         iPropId: c_int,
         pOrigin: *mut PROPERTYORIGIN,
     ) -> HRESULT;
-    pub fn SetWindowTheme(
-        hwnd: HWND,
-        pszSubAppName: LPCWSTR,
-        pszSubIdList: LPCWSTR,
-    ) -> HRESULT;
+    pub fn SetWindowTheme(hwnd: HWND, pszSubAppName: LPCWSTR, pszSubIdList: LPCWSTR) -> HRESULT;
     pub fn GetThemeFilename(
         hTheme: HTHEME,
         iPartId: c_int,
@@ -447,43 +428,21 @@ extern "system" {
         pszThemeFileName: LPWSTR,
         cchMaxBuffChars: c_int,
     ) -> HRESULT;
-    pub fn GetThemeSysColor(
-        hTheme: HTHEME,
-        iColorId: c_int,
-    ) -> COLORREF;
-    pub fn GetThemeSysColorBrush(
-        hTheme: HTHEME,
-        iColorId: c_int,
-    ) -> HBRUSH;
-    pub fn GetThemeSysBool(
-        hTheme: HTHEME,
-        iBoolId: c_int,
-    ) -> BOOL;
-    pub fn GetThemeSysSize(
-        hTheme: HTHEME,
-        iSizeId: c_int,
-    ) -> c_int;
-    pub fn GetThemeSysFont(
-        hTheme: HTHEME,
-        iFontId: c_int,
-        plf: *mut LOGFONTW,
-    ) -> HRESULT;
+    pub fn GetThemeSysColor(hTheme: HTHEME, iColorId: c_int) -> COLORREF;
+    pub fn GetThemeSysColorBrush(hTheme: HTHEME, iColorId: c_int) -> HBRUSH;
+    pub fn GetThemeSysBool(hTheme: HTHEME, iBoolId: c_int) -> BOOL;
+    pub fn GetThemeSysSize(hTheme: HTHEME, iSizeId: c_int) -> c_int;
+    pub fn GetThemeSysFont(hTheme: HTHEME, iFontId: c_int, plf: *mut LOGFONTW) -> HRESULT;
     pub fn GetThemeSysString(
         hTheme: HTHEME,
         iStringId: c_int,
         pszStringBuff: LPWSTR,
         cchMaxStringChars: c_int,
     ) -> HRESULT;
-    pub fn GetThemeSysInt(
-        hTheme: HTHEME,
-        iIntId: c_int,
-        piValue: *mut c_int,
-    ) -> HRESULT;
+    pub fn GetThemeSysInt(hTheme: HTHEME, iIntId: c_int, piValue: *mut c_int) -> HRESULT;
     pub fn IsThemeActive() -> BOOL;
     pub fn IsAppThemed() -> BOOL;
-    pub fn GetWindowTheme(
-        hwnd: HWND,
-    ) -> HTHEME;
+    pub fn GetWindowTheme(hwnd: HWND) -> HTHEME;
 }
 pub const ETDT_DISABLE: DWORD = 0x00000001;
 pub const ETDT_ENABLE: DWORD = 0x00000002;
@@ -491,27 +450,20 @@ pub const ETDT_USETABTEXTURE: DWORD = 0x00000004;
 pub const ETDT_ENABLETAB: DWORD = ETDT_ENABLE | ETDT_USETABTEXTURE;
 pub const ETDT_USEAEROWIZARDTABTEXTURE: DWORD = 0x00000008;
 pub const ETDT_ENABLEAEROWIZARDTAB: DWORD = ETDT_ENABLE | ETDT_USEAEROWIZARDTABTEXTURE;
-pub const ETDT_VALIDBITS: DWORD = ETDT_DISABLE | ETDT_ENABLE | ETDT_USETABTEXTURE
-    | ETDT_USEAEROWIZARDTABTEXTURE;
+pub const ETDT_VALIDBITS: DWORD =
+    ETDT_DISABLE | ETDT_ENABLE | ETDT_USETABTEXTURE | ETDT_USEAEROWIZARDTABTEXTURE;
 extern "system" {
-    pub fn EnableThemeDialogTexture(
-        hwnd: HWND,
-        dwFlags: DWORD,
-    ) -> HRESULT;
-    pub fn IsThemeDialogTextureEnabled(
-        hwnd: HWND,
-    ) -> BOOL;
+    pub fn EnableThemeDialogTexture(hwnd: HWND, dwFlags: DWORD) -> HRESULT;
+    pub fn IsThemeDialogTextureEnabled(hwnd: HWND) -> BOOL;
 }
 pub const STAP_ALLOW_NONCLIENT: DWORD = 1 << 0;
 pub const STAP_ALLOW_CONTROLS: DWORD = 1 << 1;
 pub const STAP_ALLOW_WEBCONTENT: DWORD = 1 << 2;
-pub const STAP_VALIDBITS: DWORD = STAP_ALLOW_NONCLIENT | STAP_ALLOW_CONTROLS
-    | STAP_ALLOW_WEBCONTENT;
+pub const STAP_VALIDBITS: DWORD =
+    STAP_ALLOW_NONCLIENT | STAP_ALLOW_CONTROLS | STAP_ALLOW_WEBCONTENT;
 extern "system" {
     pub fn GetThemeAppProperties() -> DWORD;
-    pub fn SetThemeAppProperties(
-        dwFlags: DWORD,
-    );
+    pub fn SetThemeAppProperties(dwFlags: DWORD);
     pub fn GetCurrentThemeName(
         pszThemeFileName: LPWSTR,
         cchMaxNameChars: c_int,
@@ -532,14 +484,8 @@ extern "system" {
         pszValueBuff: LPWSTR,
         cchMaxValChars: c_int,
     ) -> HRESULT;
-    pub fn DrawThemeParentBackground(
-        hwnd: HWND,
-        hdc: HDC,
-        prc: *const RECT,
-    ) -> HRESULT;
-    pub fn EnableTheming(
-        fEnable: BOOL,
-    ) -> HRESULT;
+    pub fn DrawThemeParentBackground(hwnd: HWND, hdc: HDC, prc: *const RECT) -> HRESULT;
+    pub fn EnableTheming(fEnable: BOOL) -> HRESULT;
 }
 pub const GBF_DIRECT: ULONG = 0x00000001;
 pub const GBF_COPY: ULONG = 0x00000002;
@@ -555,10 +501,10 @@ extern "system" {
         prc: *const RECT,
     ) -> HRESULT;
 }
-ENUM!{enum WINDOWTHEMEATTRIBUTETYPE {
+ENUM! {enum WINDOWTHEMEATTRIBUTETYPE {
     WTA_NONCLIENT = 1,
 }}
-STRUCT!{struct WTA_OPTIONS {
+STRUCT! {struct WTA_OPTIONS {
     dwFlags: DWORD,
     dwMask: DWORD,
 }}
@@ -567,8 +513,8 @@ pub const WTNCA_NODRAWCAPTION: DWORD = 0x00000001;
 pub const WTNCA_NODRAWICON: DWORD = 0x00000002;
 pub const WTNCA_NOSYSMENU: DWORD = 0x00000004;
 pub const WTNCA_NOMIRRORHELP: DWORD = 0x00000008;
-pub const WTNCA_VALIDBITS: DWORD = WTNCA_NODRAWCAPTION | WTNCA_NODRAWICON | WTNCA_NOSYSMENU
-    | WTNCA_NOMIRRORHELP;
+pub const WTNCA_VALIDBITS: DWORD =
+    WTNCA_NODRAWCAPTION | WTNCA_NODRAWICON | WTNCA_NOSYSMENU | WTNCA_NOMIRRORHELP;
 extern "system" {
     pub fn SetWindowThemeAttribute(
         hwnd: HWND,
@@ -594,7 +540,7 @@ pub unsafe fn SetWindowThemeNonClientAttributes(
         size_of::<WTA_OPTIONS>() as u32,
     )
 }
-FN!{stdcall DTT_CALLBACK_PROC(
+FN! {stdcall DTT_CALLBACK_PROC(
     hdc: HDC,
     pszText: LPWSTR,
     cchText: c_int,
@@ -616,10 +562,20 @@ pub const DTT_APPLYOVERLAY: DWORD = 1 << 10;
 pub const DTT_GLOWSIZE: DWORD = 1 << 11;
 pub const DTT_CALLBACK: DWORD = 1 << 12;
 pub const DTT_COMPOSITED: DWORD = 1 << 13;
-pub const DTT_VALIDBITS: DWORD = DTT_TEXTCOLOR | DTT_BORDERCOLOR | DTT_SHADOWCOLOR
-    | DTT_SHADOWTYPE | DTT_SHADOWOFFSET | DTT_BORDERSIZE | DTT_FONTPROP | DTT_COLORPROP
-    | DTT_STATEID | DTT_CALCRECT | DTT_APPLYOVERLAY | DTT_GLOWSIZE | DTT_COMPOSITED;
-STRUCT!{struct DTTOPTS {
+pub const DTT_VALIDBITS: DWORD = DTT_TEXTCOLOR
+    | DTT_BORDERCOLOR
+    | DTT_SHADOWCOLOR
+    | DTT_SHADOWTYPE
+    | DTT_SHADOWOFFSET
+    | DTT_BORDERSIZE
+    | DTT_FONTPROP
+    | DTT_COLORPROP
+    | DTT_STATEID
+    | DTT_CALCRECT
+    | DTT_APPLYOVERLAY
+    | DTT_GLOWSIZE
+    | DTT_COMPOSITED;
+STRUCT! {struct DTTOPTS {
     dwSize: DWORD,
     dwFlags: DWORD,
     crText: COLORREF,
@@ -670,20 +626,20 @@ extern "system" {
     pub fn BufferedPaintUnInit() -> HRESULT;
 }
 pub type HPAINTBUFFER = HANDLE;
-ENUM!{enum BP_BUFFERFORMAT {
+ENUM! {enum BP_BUFFERFORMAT {
     BPBF_COMPATIBLEBITMAP = 0,
     BPBF_DIB = 1,
     BPBF_TOPDOWNDIB = 2,
     BPBF_TOPDOWNMONODIB = 3,
 }}
 pub const BPBF_COMPOSITED: BP_BUFFERFORMAT = BPBF_TOPDOWNDIB;
-ENUM!{enum BP_ANIMATIONSTYLE {
+ENUM! {enum BP_ANIMATIONSTYLE {
     BPAS_NONE = 0,
     BPAS_LINEAR = 1,
     BPAS_CUBIC = 2,
     BPAS_SINE = 3,
 }}
-STRUCT!{struct BP_ANIMATIONPARAMS {
+STRUCT! {struct BP_ANIMATIONPARAMS {
     cbSize: DWORD,
     dwFlags: DWORD,
     style: BP_ANIMATIONSTYLE,
@@ -693,7 +649,7 @@ pub type PBP_ANIMATIONPARAMS = *mut BP_ANIMATIONPARAMS;
 pub const BPPF_ERASE: DWORD = 0x0001;
 pub const BPPF_NOCLIP: DWORD = 0x0002;
 pub const BPPF_NONCLIENT: DWORD = 0x0004;
-STRUCT!{struct BP_PAINTPARAMS {
+STRUCT! {struct BP_PAINTPARAMS {
     cbSize: DWORD,
     dwFlags: DWORD,
     prcExclude: *const RECT,
@@ -708,37 +664,22 @@ extern "system" {
         pPaintParams: *mut BP_PAINTPARAMS,
         phdc: *mut HDC,
     ) -> HPAINTBUFFER;
-    pub fn EndBufferedPaint(
-        hBufferedPaint: HPAINTBUFFER,
-        fUpdateTarget: BOOL,
-    ) -> HRESULT;
-    pub fn GetBufferedPaintTargetRect(
-        hBufferedPaint: HPAINTBUFFER,
-        prc: *mut RECT,
-    ) -> HRESULT;
-    pub fn GetBufferedPaintTargetDC(
-        hBufferedPaint: HPAINTBUFFER,
-    ) -> HDC;
-    pub fn GetBufferedPaintDC(
-        hBufferedPaint: HPAINTBUFFER,
-    ) -> HDC;
+    pub fn EndBufferedPaint(hBufferedPaint: HPAINTBUFFER, fUpdateTarget: BOOL) -> HRESULT;
+    pub fn GetBufferedPaintTargetRect(hBufferedPaint: HPAINTBUFFER, prc: *mut RECT) -> HRESULT;
+    pub fn GetBufferedPaintTargetDC(hBufferedPaint: HPAINTBUFFER) -> HDC;
+    pub fn GetBufferedPaintDC(hBufferedPaint: HPAINTBUFFER) -> HDC;
     pub fn GetBufferedPaintBits(
         hBufferedPaint: HPAINTBUFFER,
         ppbBuffer: *mut *mut RGBQUAD,
         pcxRow: *mut c_int,
     ) -> HRESULT;
-    pub fn BufferedPaintClear(
-        hBufferedPaint: HPAINTBUFFER,
-        prc: *const RECT,
-    ) -> HRESULT;
+    pub fn BufferedPaintClear(hBufferedPaint: HPAINTBUFFER, prc: *const RECT) -> HRESULT;
     pub fn BufferedPaintSetAlpha(
         hBufferedPaint: HPAINTBUFFER,
         prc: *const RECT,
         alpha: BYTE,
     ) -> HRESULT;
-    pub fn BufferedPaintStopAllAnimations(
-        hwnd: HWND,
-    ) -> HRESULT;
+    pub fn BufferedPaintStopAllAnimations(hwnd: HWND) -> HRESULT;
 }
 pub type HANIMATIONBUFFER = HANDLE;
 extern "system" {
@@ -752,14 +693,8 @@ extern "system" {
         phdcFrom: *mut HDC,
         phdcTo: *mut HDC,
     ) -> HANIMATIONBUFFER;
-    pub fn EndBufferedAnimation(
-        hbpAnimation: HANIMATIONBUFFER,
-        fUpdateTarget: BOOL,
-    ) -> HRESULT;
-    pub fn BufferedPaintRenderAnimation(
-        hwnd: HWND,
-        hdcTarget: HDC,
-    ) -> BOOL;
+    pub fn EndBufferedAnimation(hbpAnimation: HANIMATIONBUFFER, fUpdateTarget: BOOL) -> HRESULT;
+    pub fn BufferedPaintRenderAnimation(hwnd: HWND, hdcTarget: HDC) -> BOOL;
     pub fn IsCompositionActive() -> BOOL;
     pub fn GetThemeTransitionDuration(
         hTheme: HTHEME,

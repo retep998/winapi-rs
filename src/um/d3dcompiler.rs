@@ -8,15 +8,12 @@ use shared::basetsd::SIZE_T;
 use shared::guiddef::REFIID;
 use shared::minwindef::{BOOL, DWORD, LPCVOID, LPVOID, UINT};
 use um::d3d11shader::{ID3D11FunctionLinkingGraph, ID3D11Linker, ID3D11Module};
-use um::d3dcommon::{D3D_SHADER_MACRO, ID3DBlob, ID3DInclude};
+use um::d3dcommon::{ID3DBlob, ID3DInclude, D3D_SHADER_MACRO};
 use um::winnt::{HRESULT, LPCSTR, LPCWSTR};
 pub const D3DCOMPILER_DLL: &'static str = "d3dcompiler_47.dll";
 pub const D3D_COMPILER_VERSION: DWORD = 47;
 extern "system" {
-    pub fn D3DReadFileToBlob(
-        pFileName: LPCWSTR,
-        ppContents: *mut *mut ID3DBlob,
-    ) -> HRESULT;
+    pub fn D3DReadFileToBlob(pFileName: LPCWSTR, ppContents: *mut *mut ID3DBlob) -> HRESULT;
     pub fn D3DWriteBlobToFile(
         pBlob: *mut ID3DBlob,
         pFileName: LPCWSTR,
@@ -149,9 +146,7 @@ extern "system" {
         pFinishByteOffset: *mut SIZE_T,
         ppDisassembly: *mut *mut ID3DBlob,
     ) -> HRESULT;
-    pub fn D3DCreateLinker(
-        ppLinker: *mut *mut ID3D11Linker,
-    ) -> HRESULT;
+    pub fn D3DCreateLinker(ppLinker: *mut *mut ID3D11Linker) -> HRESULT;
     pub fn D3DLoadModule(
         pSrcData: LPCVOID,
         cbSrcDataSize: SIZE_T,
@@ -189,7 +184,7 @@ extern "system" {
         ppSignatureBlob: *mut *mut ID3DBlob,
     ) -> HRESULT;
 }
-ENUM!{enum D3DCOMPILER_STRIP_FLAGS {
+ENUM! {enum D3DCOMPILER_STRIP_FLAGS {
     D3DCOMPILER_STRIP_REFLECTION_DATA = 0x00000001,
     D3DCOMPILER_STRIP_DEBUG_INFO = 0x00000002,
     D3DCOMPILER_STRIP_TEST_BLOBS = 0x00000004,
@@ -205,7 +200,7 @@ extern "system" {
         ppStrippedBlob: *mut *mut ID3DBlob,
     ) -> HRESULT;
 }
-ENUM!{enum D3D_BLOB_PART {
+ENUM! {enum D3D_BLOB_PART {
     D3D_BLOB_INPUT_SIGNATURE_BLOB,
     D3D_BLOB_OUTPUT_SIGNATURE_BLOB,
     D3D_BLOB_INPUT_AND_OUTPUT_SIGNATURE_BLOB,
@@ -240,12 +235,9 @@ extern "system" {
         PartSize: SIZE_T,
         ppNewShader: *mut *mut ID3DBlob,
     ) -> HRESULT;
-    pub fn D3DCreateBlob(
-        Size: SIZE_T,
-        ppBlob: *mut *mut ID3DBlob,
-    ) -> HRESULT;
+    pub fn D3DCreateBlob(Size: SIZE_T, ppBlob: *mut *mut ID3DBlob) -> HRESULT;
 }
-STRUCT!{struct D3D_SHADER_DATA {
+STRUCT! {struct D3D_SHADER_DATA {
     pBytecode: LPCVOID,
     BytecodeLength: SIZE_T,
 }}
@@ -266,9 +258,9 @@ extern "system" {
         ppShaders: *mut *mut ID3DBlob,
         pTotalShaders: *mut UINT,
     ) -> HRESULT;
-    // pub fn D3DDisassemble10Effect(
-    //     pEffect: *mut ID3D10Effect,
-    //     Flags: UINT,
-    //     ppDisassembly: *mut *mut ID3DBlob,
-    // ) -> HRESULT;
+// pub fn D3DDisassemble10Effect(
+//     pEffect: *mut ID3D10Effect,
+//     Flags: UINT,
+//     ppDisassembly: *mut *mut ID3DBlob,
+// ) -> HRESULT;
 }

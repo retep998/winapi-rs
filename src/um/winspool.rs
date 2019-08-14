@@ -19,7 +19,7 @@ use um::winnt::{
     STANDARD_RIGHTS_READ, STANDARD_RIGHTS_REQUIRED, STANDARD_RIGHTS_WRITE, WCHAR,
 };
 use vc::vcruntime::size_t;
-STRUCT!{struct PRINTER_INFO_1A {
+STRUCT! {struct PRINTER_INFO_1A {
     Flags: DWORD,
     pDescription: LPSTR,
     pName: LPSTR,
@@ -27,7 +27,7 @@ STRUCT!{struct PRINTER_INFO_1A {
 }}
 pub type PPRINTER_INFO_1A = *mut PRINTER_INFO_1A;
 pub type LPPRINTER_INFO_1A = *mut PRINTER_INFO_1A;
-STRUCT!{struct PRINTER_INFO_1W {
+STRUCT! {struct PRINTER_INFO_1W {
     Flags: DWORD,
     pDescription: LPWSTR,
     pName: LPWSTR,
@@ -35,7 +35,7 @@ STRUCT!{struct PRINTER_INFO_1W {
 }}
 pub type PPRINTER_INFO_1W = *mut PRINTER_INFO_1W;
 pub type LPPRINTER_INFO_1W = *mut PRINTER_INFO_1W;
-STRUCT!{struct PRINTER_INFO_2A {
+STRUCT! {struct PRINTER_INFO_2A {
     pServerName: LPSTR,
     pPrinterName: LPSTR,
     pShareName: LPSTR,
@@ -60,7 +60,7 @@ STRUCT!{struct PRINTER_INFO_2A {
 }}
 pub type PPRINTER_INFO_2A = *mut PRINTER_INFO_2A;
 pub type LPPRINTER_INFO_2A = *mut PRINTER_INFO_2A;
-STRUCT!{struct PRINTER_INFO_2W {
+STRUCT! {struct PRINTER_INFO_2W {
     pServerName: LPWSTR,
     pPrinterName: LPWSTR,
     pShareName: LPWSTR,
@@ -85,26 +85,26 @@ STRUCT!{struct PRINTER_INFO_2W {
 }}
 pub type PPRINTER_INFO_2W = *mut PRINTER_INFO_2W;
 pub type LPPRINTER_INFO_2W = *mut PRINTER_INFO_2W;
-STRUCT!{struct PRINTER_INFO_3 {
+STRUCT! {struct PRINTER_INFO_3 {
     pSecurityDescriptor: PSECURITY_DESCRIPTOR,
 }}
 pub type PPRINTER_INFO_3 = *mut PRINTER_INFO_3;
 pub type LPPRINTER_INFO_3 = *mut PRINTER_INFO_3;
-STRUCT!{struct PRINTER_INFO_4A {
+STRUCT! {struct PRINTER_INFO_4A {
     pPrinterName: LPSTR,
     pServerName: LPSTR,
     Attributes: DWORD,
 }}
 pub type PPRINTER_INFO_4A = *mut PRINTER_INFO_4A;
 pub type LPPRINTER_INFO_4A = *mut PRINTER_INFO_4A;
-STRUCT!{struct PRINTER_INFO_4W {
+STRUCT! {struct PRINTER_INFO_4W {
     pPrinterName: LPWSTR,
     pServerName: LPWSTR,
     Attributes: DWORD,
 }}
 pub type PPRINTER_INFO_4W = *mut PRINTER_INFO_4W;
 pub type LPPRINTER_INFO_4W = *mut PRINTER_INFO_4W;
-STRUCT!{struct PRINTER_INFO_5A {
+STRUCT! {struct PRINTER_INFO_5A {
     pPrinterName: LPSTR,
     pPortName: LPSTR,
     Attributes: DWORD,
@@ -113,7 +113,7 @@ STRUCT!{struct PRINTER_INFO_5A {
 }}
 pub type PPRINTER_INFO_5A = *mut PRINTER_INFO_5A;
 pub type LPPRINTER_INFO_5A = *mut PRINTER_INFO_5A;
-STRUCT!{struct PRINTER_INFO_5W {
+STRUCT! {struct PRINTER_INFO_5W {
     pPrinterName: LPWSTR,
     pPortName: LPWSTR,
     Attributes: DWORD,
@@ -122,18 +122,18 @@ STRUCT!{struct PRINTER_INFO_5W {
 }}
 pub type PPRINTER_INFO_5W = *mut PRINTER_INFO_5W;
 pub type LPPRINTER_INFO_5W = *mut PRINTER_INFO_5W;
-STRUCT!{struct PRINTER_INFO_6 {
+STRUCT! {struct PRINTER_INFO_6 {
     dwStatus: DWORD,
 }}
 pub type PPRINTER_INFO_6 = *mut PRINTER_INFO_6;
 pub type LPPRINTER_INFO_6 = *mut PRINTER_INFO_6;
-STRUCT!{struct PRINTER_INFO_7A {
+STRUCT! {struct PRINTER_INFO_7A {
     pszObjectGUID: LPSTR,
     dwAction: DWORD,
 }}
 pub type PPRINTER_INFO_7A = *mut PRINTER_INFO_7A;
 pub type LPPRINTER_INFO_7A = *mut PRINTER_INFO_7A;
-STRUCT!{struct PRINTER_INFO_7W {
+STRUCT! {struct PRINTER_INFO_7W {
     pszObjectGUID: LPWSTR,
     dwAction: DWORD,
 }}
@@ -144,22 +144,22 @@ pub const DSPRINT_UPDATE: DWORD = 0x00000002;
 pub const DSPRINT_UNPUBLISH: DWORD = 0x00000004;
 pub const DSPRINT_REPUBLISH: DWORD = 0x00000008;
 pub const DSPRINT_PENDING: DWORD = 0x80000000;
-STRUCT!{struct PRINTER_INFO_8A {
+STRUCT! {struct PRINTER_INFO_8A {
     pDevMode: LPDEVMODEA,
 }}
 pub type PPRINTER_INFO_8A = *mut PRINTER_INFO_8A;
 pub type LPPRINTER_INFO_8A = *mut PRINTER_INFO_8A;
-STRUCT!{struct PRINTER_INFO_8W {
+STRUCT! {struct PRINTER_INFO_8W {
     pDevMode: LPDEVMODEW,
 }}
 pub type PPRINTER_INFO_8W = *mut PRINTER_INFO_8W;
 pub type LPPRINTER_INFO_8W = *mut PRINTER_INFO_8W;
-STRUCT!{struct PRINTER_INFO_9A {
+STRUCT! {struct PRINTER_INFO_9A {
     pDevMode: LPDEVMODEA,
 }}
 pub type PPRINTER_INFO_9A = *mut PRINTER_INFO_9A;
 pub type LPPRINTER_INFO_9A = *mut PRINTER_INFO_9A;
-STRUCT!{struct PRINTER_INFO_9W {
+STRUCT! {struct PRINTER_INFO_9W {
     pDevMode: LPDEVMODEA,
 }}
 pub type PPRINTER_INFO_9W = *mut PRINTER_INFO_9W;
@@ -222,7 +222,7 @@ pub const NO_PRIORITY: DWORD = 0;
 pub const MAX_PRIORITY: DWORD = 99;
 pub const MIN_PRIORITY: DWORD = 1;
 pub const DEF_PRIORITY: DWORD = 1;
-STRUCT!{struct JOB_INFO_1A {
+STRUCT! {struct JOB_INFO_1A {
     JobId: DWORD,
     pPrinterName: LPSTR,
     pMachineName: LPSTR,
@@ -239,7 +239,7 @@ STRUCT!{struct JOB_INFO_1A {
 }}
 pub type PJOB_INFO_1A = *mut JOB_INFO_1A;
 pub type LPJOB_INFO_1A = *mut JOB_INFO_1A;
-STRUCT!{struct JOB_INFO_1W {
+STRUCT! {struct JOB_INFO_1W {
     JobId: DWORD,
     pPrinterName: LPWSTR,
     pMachineName: LPWSTR,
@@ -256,7 +256,7 @@ STRUCT!{struct JOB_INFO_1W {
 }}
 pub type PJOB_INFO_1W = *mut JOB_INFO_1W;
 pub type LPJOB_INFO_1W = *mut JOB_INFO_1W;
-STRUCT!{struct JOB_INFO_2A {
+STRUCT! {struct JOB_INFO_2A {
     JobId: DWORD,
     pPrinterName: LPSTR,
     pMachineName: LPSTR,
@@ -283,7 +283,7 @@ STRUCT!{struct JOB_INFO_2A {
 }}
 pub type PJOB_INFO_2A = *mut JOB_INFO_2A;
 pub type LPJOB_INFO_2A = *mut JOB_INFO_2A;
-STRUCT!{struct JOB_INFO_2W {
+STRUCT! {struct JOB_INFO_2W {
     JobId: DWORD,
     pPrinterName: LPWSTR,
     pMachineName: LPWSTR,
@@ -310,14 +310,14 @@ STRUCT!{struct JOB_INFO_2W {
 }}
 pub type PJOB_INFO_2W = *mut JOB_INFO_2W;
 pub type LPJOB_INFO_2W = *mut JOB_INFO_2W;
-STRUCT!{struct JOB_INFO_3 {
+STRUCT! {struct JOB_INFO_3 {
     JobId: DWORD,
     NextJobId: DWORD,
     Reserved: DWORD,
 }}
 pub type PJOB_INFO_3 = *mut JOB_INFO_3;
 pub type LPJOB_INFO_3 = *mut JOB_INFO_3;
-STRUCT!{struct JOB_INFO_4A {
+STRUCT! {struct JOB_INFO_4A {
     JobId: DWORD,
     pPrinterName: LPSTR,
     pMachineName: LPSTR,
@@ -345,7 +345,7 @@ STRUCT!{struct JOB_INFO_4A {
 }}
 pub type PJOB_INFO_4A = *mut JOB_INFO_4A;
 pub type LPJOB_INFO_4A = *mut JOB_INFO_4A;
-STRUCT!{struct JOB_INFO_4W {
+STRUCT! {struct JOB_INFO_4W {
     JobId: DWORD,
     pPrinterName: LPWSTR,
     pMachineName: LPWSTR,
@@ -393,29 +393,29 @@ pub const JOB_STATUS_BLOCKED_DEVQ: DWORD = 0x00000200;
 pub const JOB_STATUS_USER_INTERVENTION: DWORD = 0x00000400;
 pub const JOB_STATUS_RESTART: DWORD = 0x00000800;
 pub const JOB_POSITION_UNSPECIFIED: DWORD = 0;
-STRUCT!{struct ADDJOB_INFO_1A {
+STRUCT! {struct ADDJOB_INFO_1A {
     Path: LPSTR,
     JobId: DWORD,
 }}
 pub type PADDJOB_INFO_1A = *mut ADDJOB_INFO_1A;
 pub type LPADDJOB_INFO_1A = *mut ADDJOB_INFO_1A;
-STRUCT!{struct ADDJOB_INFO_1W {
+STRUCT! {struct ADDJOB_INFO_1W {
     Path: LPWSTR,
     JobId: DWORD,
 }}
 pub type PADDJOB_INFO_1W = *mut ADDJOB_INFO_1W;
 pub type LPADDJOB_INFO_1W = *mut ADDJOB_INFO_1W;
-STRUCT!{struct DRIVER_INFO_1A {
+STRUCT! {struct DRIVER_INFO_1A {
     pName: LPSTR,
 }}
 pub type PDRIVER_INFO_1A = *mut DRIVER_INFO_1A;
 pub type LPDRIVER_INFO_1A = *mut DRIVER_INFO_1A;
-STRUCT!{struct DRIVER_INFO_1W {
+STRUCT! {struct DRIVER_INFO_1W {
     pName: LPWSTR,
 }}
 pub type PDRIVER_INFO_1W = *mut DRIVER_INFO_1W;
 pub type LPDRIVER_INFO_1W = *mut DRIVER_INFO_1W;
-STRUCT!{struct DRIVER_INFO_2A {
+STRUCT! {struct DRIVER_INFO_2A {
     cVersion: DWORD,
     pName: LPSTR,
     pEnvironment: LPSTR,
@@ -425,7 +425,7 @@ STRUCT!{struct DRIVER_INFO_2A {
 }}
 pub type PDRIVER_INFO_2A = *mut DRIVER_INFO_2A;
 pub type LPDRIVER_INFO_2A = *mut DRIVER_INFO_2A;
-STRUCT!{struct DRIVER_INFO_2W {
+STRUCT! {struct DRIVER_INFO_2W {
     cVersion: DWORD,
     pName: LPWSTR,
     pEnvironment: LPWSTR,
@@ -435,7 +435,7 @@ STRUCT!{struct DRIVER_INFO_2W {
 }}
 pub type PDRIVER_INFO_2W = *mut DRIVER_INFO_2W;
 pub type LPDRIVER_INFO_2W = *mut DRIVER_INFO_2W;
-STRUCT!{struct DRIVER_INFO_3A {
+STRUCT! {struct DRIVER_INFO_3A {
     cVersion: DWORD,
     pName: LPSTR,
     pEnvironment: LPSTR,
@@ -449,7 +449,7 @@ STRUCT!{struct DRIVER_INFO_3A {
 }}
 pub type PDRIVER_INFO_3A = *mut DRIVER_INFO_3A;
 pub type LPDRIVER_INFO_3A = *mut DRIVER_INFO_3A;
-STRUCT!{struct DRIVER_INFO_3W {
+STRUCT! {struct DRIVER_INFO_3W {
     cVersion: DWORD,
     pName: LPWSTR,
     pEnvironment: LPWSTR,
@@ -463,7 +463,7 @@ STRUCT!{struct DRIVER_INFO_3W {
 }}
 pub type PDRIVER_INFO_3W = *mut DRIVER_INFO_3W;
 pub type LPDRIVER_INFO_3W = *mut DRIVER_INFO_3W;
-STRUCT!{struct DRIVER_INFO_4A {
+STRUCT! {struct DRIVER_INFO_4A {
     cVersion: DWORD,
     pName: LPSTR,
     pEnvironment: LPSTR,
@@ -478,7 +478,7 @@ STRUCT!{struct DRIVER_INFO_4A {
 }}
 pub type PDRIVER_INFO_4A = *mut DRIVER_INFO_4A;
 pub type LPDRIVER_INFO_4A = *mut DRIVER_INFO_4A;
-STRUCT!{struct DRIVER_INFO_4W {
+STRUCT! {struct DRIVER_INFO_4W {
     cVersion: DWORD,
     pName: LPWSTR,
     pEnvironment: LPWSTR,
@@ -493,7 +493,7 @@ STRUCT!{struct DRIVER_INFO_4W {
 }}
 pub type PDRIVER_INFO_4W = *mut DRIVER_INFO_4W;
 pub type LPDRIVER_INFO_4W = *mut DRIVER_INFO_4W;
-STRUCT!{struct DRIVER_INFO_5A {
+STRUCT! {struct DRIVER_INFO_5A {
     cVersion: DWORD,
     pName: LPSTR,
     pEnvironment: LPSTR,
@@ -506,7 +506,7 @@ STRUCT!{struct DRIVER_INFO_5A {
 }}
 pub type PDRIVER_INFO_5A = *mut DRIVER_INFO_5A;
 pub type LPDRIVER_INFO_5A = *mut DRIVER_INFO_5A;
-STRUCT!{struct DRIVER_INFO_5W {
+STRUCT! {struct DRIVER_INFO_5W {
     cVersion: DWORD,
     pName: LPWSTR,
     pEnvironment: LPWSTR,
@@ -519,7 +519,7 @@ STRUCT!{struct DRIVER_INFO_5W {
 }}
 pub type PDRIVER_INFO_5W = *mut DRIVER_INFO_5W;
 pub type LPDRIVER_INFO_5W = *mut DRIVER_INFO_5W;
-STRUCT!{struct DRIVER_INFO_6A {
+STRUCT! {struct DRIVER_INFO_6A {
     cVersion: DWORD,
     pName: LPSTR,
     pEnvironment: LPSTR,
@@ -540,7 +540,7 @@ STRUCT!{struct DRIVER_INFO_6A {
 }}
 pub type PDRIVER_INFO_6A = *mut DRIVER_INFO_6A;
 pub type LPDRIVER_INFO_6A = *mut DRIVER_INFO_6A;
-STRUCT!{struct DRIVER_INFO_6W {
+STRUCT! {struct DRIVER_INFO_6W {
     cVersion: DWORD,
     pName: LPWSTR,
     pEnvironment: LPWSTR,
@@ -575,7 +575,7 @@ pub const PRINTER_DRIVER_SOFT_RESET_REQUIRED: DWORD = 0x00000400;
 pub const PRINTER_DRIVER_SANDBOX_DISABLED: DWORD = 0x00000800;
 pub const PRINTER_DRIVER_CATEGORY_3D: DWORD = 0x00001000;
 pub const PRINTER_DRIVER_CATEGORY_CLOUD: DWORD = 0x00002000;
-STRUCT!{struct DRIVER_INFO_8A {
+STRUCT! {struct DRIVER_INFO_8A {
     cVersion: DWORD,
     pName: LPSTR,
     pEnvironment: LPSTR,
@@ -604,7 +604,7 @@ STRUCT!{struct DRIVER_INFO_8A {
 }}
 pub type PDRIVER_INFO_8A = *mut DRIVER_INFO_8A;
 pub type LPDRIVER_INFO_8A = *mut DRIVER_INFO_8A;
-STRUCT!{struct DRIVER_INFO_8W {
+STRUCT! {struct DRIVER_INFO_8W {
     cVersion: DWORD,
     pName: LPWSTR,
     pEnvironment: LPWSTR,
@@ -643,21 +643,21 @@ pub const APD_STRICT_DOWNGRADE: DWORD = 0x00000002;
 pub const APD_COPY_ALL_FILES: DWORD = 0x00000004;
 pub const APD_COPY_NEW_FILES: DWORD = 0x00000008;
 pub const APD_COPY_FROM_DIRECTORY: DWORD = 0x00000010;
-STRUCT!{struct DOC_INFO_1A {
+STRUCT! {struct DOC_INFO_1A {
     pDocName: LPSTR,
     pOutputFile: LPSTR,
     pDatatype: LPSTR,
 }}
 pub type PDOC_INFO_1A = *mut DOC_INFO_1A;
 pub type LPDOC_INFO_1A = *mut DOC_INFO_1A;
-STRUCT!{struct DOC_INFO_1W {
+STRUCT! {struct DOC_INFO_1W {
     pDocName: LPWSTR,
     pOutputFile: LPWSTR,
     pDatatype: LPWSTR,
 }}
 pub type PDOC_INFO_1W = *mut DOC_INFO_1W;
 pub type LPDOC_INFO_1W = *mut DOC_INFO_1W;
-STRUCT!{struct FORM_INFO_1A {
+STRUCT! {struct FORM_INFO_1A {
     Flags: DWORD,
     pName: LPSTR,
     Size: SIZEL,
@@ -665,7 +665,7 @@ STRUCT!{struct FORM_INFO_1A {
 }}
 pub type PFORM_INFO_1A = *mut FORM_INFO_1A;
 pub type LPFORM_INFO_1A = *mut FORM_INFO_1A;
-STRUCT!{struct FORM_INFO_1W {
+STRUCT! {struct FORM_INFO_1W {
     Flags: DWORD,
     pName: LPWSTR,
     Size: SIZEL,
@@ -677,7 +677,7 @@ pub const STRING_NONE: DWORD = 0x00000001;
 pub const STRING_MUIDLL: DWORD = 0x00000002;
 pub const STRING_LANGPAIR: DWORD = 0x00000004;
 pub const MAX_FORM_KEYWORD_LENGTH: usize = 63 + 1;
-STRUCT!{struct FORM_INFO_2A {
+STRUCT! {struct FORM_INFO_2A {
     Flags: DWORD,
     pName: LPCSTR,
     Size: SIZEL,
@@ -691,7 +691,7 @@ STRUCT!{struct FORM_INFO_2A {
 }}
 pub type PFORM_INFO_2A = *mut FORM_INFO_2A;
 pub type LPFORM_INFO_2A = *mut FORM_INFO_2A;
-STRUCT!{struct FORM_INFO_2W {
+STRUCT! {struct FORM_INFO_2W {
     Flags: DWORD,
     pName: LPCWSTR,
     Size: SIZEL,
@@ -705,7 +705,7 @@ STRUCT!{struct FORM_INFO_2W {
 }}
 pub type PFORM_INFO_2W = *mut FORM_INFO_2W;
 pub type LPFORM_INFO_2W = *mut FORM_INFO_2W;
-STRUCT!{struct DOC_INFO_2A {
+STRUCT! {struct DOC_INFO_2A {
     pDocName: LPSTR,
     pOutputFile: LPSTR,
     pDatatype: LPSTR,
@@ -714,7 +714,7 @@ STRUCT!{struct DOC_INFO_2A {
 }}
 pub type PDOC_INFO_2A = *mut DOC_INFO_2A;
 pub type LPDOC_INFO_2A = *mut DOC_INFO_2A;
-STRUCT!{struct DOC_INFO_2W {
+STRUCT! {struct DOC_INFO_2W {
     pDocName: LPWSTR,
     pOutputFile: LPWSTR,
     pDatatype: LPWSTR,
@@ -725,7 +725,7 @@ pub type PDOC_INFO_2W = *mut DOC_INFO_2W;
 pub type LPDOC_INFO_2W = *mut DOC_INFO_2W;
 pub const DI_CHANNEL: DWORD = 1;
 pub const DI_READ_SPOOL_JOB: DWORD = 3;
-STRUCT!{struct DOC_INFO_3A {
+STRUCT! {struct DOC_INFO_3A {
     pDocName: LPSTR,
     pOutputFile: LPSTR,
     pDatatype: LPSTR,
@@ -733,7 +733,7 @@ STRUCT!{struct DOC_INFO_3A {
 }}
 pub type PDOC_INFO_3A = *mut DOC_INFO_3A;
 pub type LPDOC_INFO_3A = *mut DOC_INFO_3A;
-STRUCT!{struct DOC_INFO_3W {
+STRUCT! {struct DOC_INFO_3W {
     pDocName: LPWSTR,
     pOutputFile: LPWSTR,
     pDatatype: LPWSTR,
@@ -745,24 +745,24 @@ pub const DI_MEMORYMAP_WRITE: DWORD = 0x00000001;
 pub const FORM_USER: DWORD = 0x00000000;
 pub const FORM_BUILTIN: DWORD = 0x00000001;
 pub const FORM_PRINTER: DWORD = 0x00000002;
-STRUCT!{struct PRINTPROCESSOR_INFO_1A {
+STRUCT! {struct PRINTPROCESSOR_INFO_1A {
     pName: LPSTR,
 }}
 pub type PPRINTPROCESSOR_INFO_1A = *mut PRINTPROCESSOR_INFO_1A;
 pub type LPPRINTPROCESSOR_INFO_1A = *mut PRINTPROCESSOR_INFO_1A;
-STRUCT!{struct PRINTPROCESSOR_INFO_1W {
+STRUCT! {struct PRINTPROCESSOR_INFO_1W {
     pName: LPWSTR,
 }}
 pub type PPRINTPROCESSOR_INFO_1W = *mut PRINTPROCESSOR_INFO_1W;
 pub type LPPRINTPROCESSOR_INFO_1W = *mut PRINTPROCESSOR_INFO_1W;
-STRUCT!{struct PRINTPROCESSOR_CAPS_1 {
+STRUCT! {struct PRINTPROCESSOR_CAPS_1 {
     dwLevel: DWORD,
     dwNupOptions: DWORD,
     dwPageOrderFlags: DWORD,
     dwNumberOfCopies: DWORD,
 }}
 pub type PPRINTPROCESSOR_CAPS_1 = *mut PRINTPROCESSOR_CAPS_1;
-STRUCT!{struct PRINTPROCESSOR_CAPS_2 {
+STRUCT! {struct PRINTPROCESSOR_CAPS_2 {
     dwLevel: DWORD,
     dwNupOptions: DWORD,
     dwPageOrderFlags: DWORD,
@@ -783,17 +783,17 @@ pub const PPCAPS_BOOKLET_EDGE: DWORD = 0x00000001;
 pub const PPCAPS_REVERSE_PAGES_FOR_REVERSE_DUPLEX: DWORD = 0x00000001;
 pub const PPCAPS_DONT_SEND_EXTRA_PAGES_FOR_DUPLEX: DWORD = 0x00000001 << 1;
 pub const PPCAPS_SQUARE_SCALING: DWORD = 0x00000001;
-STRUCT!{struct PORT_INFO_1A {
+STRUCT! {struct PORT_INFO_1A {
     pName: LPSTR,
 }}
 pub type PPORT_INFO_1A = *mut PORT_INFO_1A;
 pub type LPPORT_INFO_1A = *mut PORT_INFO_1A;
-STRUCT!{struct PORT_INFO_1W {
+STRUCT! {struct PORT_INFO_1W {
     pName: LPWSTR,
 }}
 pub type PPORT_INFO_1W = *mut PORT_INFO_1W;
 pub type LPPORT_INFO_1W = *mut PORT_INFO_1W;
-STRUCT!{struct PORT_INFO_2A {
+STRUCT! {struct PORT_INFO_2A {
     pPortName: LPSTR,
     pMonitorName: LPSTR,
     pDescription: LPSTR,
@@ -802,7 +802,7 @@ STRUCT!{struct PORT_INFO_2A {
 }}
 pub type PPORT_INFO_2A = *mut PORT_INFO_2A;
 pub type LPPORT_INFO_2A = *mut PORT_INFO_2A;
-STRUCT!{struct PORT_INFO_2W {
+STRUCT! {struct PORT_INFO_2W {
     pPortName: LPWSTR,
     pMonitorName: LPWSTR,
     pDescription: LPWSTR,
@@ -815,14 +815,14 @@ pub const PORT_TYPE_WRITE: DWORD = 0x0001;
 pub const PORT_TYPE_READ: DWORD = 0x0002;
 pub const PORT_TYPE_REDIRECTED: DWORD = 0x0004;
 pub const PORT_TYPE_NET_ATTACHED: DWORD = 0x0008;
-STRUCT!{struct PORT_INFO_3A {
+STRUCT! {struct PORT_INFO_3A {
     dwStatus: DWORD,
     pszStatus: LPSTR,
     dwSeverity: DWORD,
 }}
 pub type PPORT_INFO_3A = *mut PORT_INFO_3A;
 pub type LPPORT_INFO_3A = *mut PORT_INFO_3A;
-STRUCT!{struct PORT_INFO_3W {
+STRUCT! {struct PORT_INFO_3W {
     dwStatus: DWORD,
     pszStatus: LPWSTR,
     dwSeverity: DWORD,
@@ -844,55 +844,55 @@ pub const PORT_STATUS_OUT_OF_MEMORY: DWORD = 9;
 pub const PORT_STATUS_TONER_LOW: DWORD = 10;
 pub const PORT_STATUS_WARMING_UP: DWORD = 11;
 pub const PORT_STATUS_POWER_SAVE: DWORD = 12;
-STRUCT!{struct MONITOR_INFO_1A {
+STRUCT! {struct MONITOR_INFO_1A {
     pName: LPSTR,
 }}
 pub type PMONITOR_INFO_1A = *mut MONITOR_INFO_1A;
 pub type LPMONITOR_INFO_1A = *mut MONITOR_INFO_1A;
-STRUCT!{struct MONITOR_INFO_1W {
+STRUCT! {struct MONITOR_INFO_1W {
     pName: LPWSTR,
 }}
 pub type PMONITOR_INFO_1W = *mut MONITOR_INFO_1W;
 pub type LPMONITOR_INFO_1W = *mut MONITOR_INFO_1W;
-STRUCT!{struct MONITOR_INFO_2A {
+STRUCT! {struct MONITOR_INFO_2A {
     pName: LPSTR,
     pEnvironment: LPSTR,
     pDLLName: LPSTR,
 }}
 pub type PMONITOR_INFO_2A = *mut MONITOR_INFO_2A;
 pub type LPMONITOR_INFO_2A = *mut MONITOR_INFO_2A;
-STRUCT!{struct MONITOR_INFO_2W {
+STRUCT! {struct MONITOR_INFO_2W {
     pName: LPWSTR,
     pEnvironment: LPWSTR,
     pDLLName: LPWSTR,
 }}
 pub type PMONITOR_INFO_2W = *mut MONITOR_INFO_2W;
 pub type LPMONITOR_INFO_2W = *mut MONITOR_INFO_2W;
-STRUCT!{struct DATATYPES_INFO_1A {
+STRUCT! {struct DATATYPES_INFO_1A {
     pName: LPSTR,
 }}
 pub type PDATATYPES_INFO_1A = *mut DATATYPES_INFO_1A;
 pub type LPDATATYPES_INFO_1A = *mut DATATYPES_INFO_1A;
-STRUCT!{struct DATATYPES_INFO_1W {
+STRUCT! {struct DATATYPES_INFO_1W {
     pName: LPWSTR,
 }}
 pub type PDATATYPES_INFO_1W = *mut DATATYPES_INFO_1W;
 pub type LPDATATYPES_INFO_1W = *mut DATATYPES_INFO_1W;
-STRUCT!{struct PRINTER_DEFAULTSA {
+STRUCT! {struct PRINTER_DEFAULTSA {
     pDataType: LPSTR,
     pDevMode: LPDEVMODEA,
     DesiredAccess: ACCESS_MASK,
 }}
 pub type PPRINTER_DEFAULTSA = *mut PRINTER_DEFAULTSA;
 pub type LPPRINTER_DEFAULTSA = *mut PRINTER_DEFAULTSA;
-STRUCT!{struct PRINTER_DEFAULTSW {
+STRUCT! {struct PRINTER_DEFAULTSW {
     pDataType: LPWSTR,
     pDevMode: LPDEVMODEW,
     DesiredAccess: ACCESS_MASK,
 }}
 pub type PPRINTER_DEFAULTSW = *mut PRINTER_DEFAULTSW;
 pub type LPPRINTER_DEFAULTSW = *mut PRINTER_DEFAULTSW;
-STRUCT!{struct PRINTER_ENUM_VALUESA {
+STRUCT! {struct PRINTER_ENUM_VALUESA {
     pValueName: LPSTR,
     cbValueName: DWORD,
     dwType: DWORD,
@@ -901,7 +901,7 @@ STRUCT!{struct PRINTER_ENUM_VALUESA {
 }}
 pub type PPRINTER_ENUM_VALUESA = *mut PRINTER_ENUM_VALUESA;
 pub type LPPRINTER_ENUM_VALUESA = *mut PRINTER_ENUM_VALUESA;
-STRUCT!{struct PRINTER_ENUM_VALUESW {
+STRUCT! {struct PRINTER_ENUM_VALUESW {
     pValueName: LPWSTR,
     cbValueName: DWORD,
     dwType: DWORD,
@@ -955,18 +955,9 @@ pub const PRINTER_ENUM_CATEGORY_3D: DWORD = 0x04000000;
 pub const SPOOL_FILE_PERSISTENT: DWORD = 0x00000001;
 pub const SPOOL_FILE_TEMPORARY: DWORD = 0x00000002;
 extern "system" {
-    pub fn GetSpoolFileHandle(
-        hPrinter: HANDLE,
-    ) -> HANDLE;
-    pub fn CommitSpoolData(
-        hPrinter: HANDLE,
-        hSpoolFile: HANDLE,
-        cbCommit: DWORD,
-    ) -> HANDLE;
-    pub fn CloseSpoolFileHandle(
-        hPrinter: HANDLE,
-        hSpoolFile: HANDLE,
-    ) -> BOOL;
+    pub fn GetSpoolFileHandle(hPrinter: HANDLE) -> HANDLE;
+    pub fn CommitSpoolData(hPrinter: HANDLE, hSpoolFile: HANDLE, cbCommit: DWORD) -> HANDLE;
+    pub fn CloseSpoolFileHandle(hPrinter: HANDLE, hSpoolFile: HANDLE) -> BOOL;
     pub fn OpenPrinterA(
         pPrinterName: LPSTR,
         phPrinter: LPHANDLE,
@@ -977,14 +968,8 @@ extern "system" {
         phPrinter: LPHANDLE,
         pDefault: LPPRINTER_DEFAULTSW,
     ) -> BOOL;
-    pub fn ResetPrinterA(
-        hPrinter: HANDLE,
-        pDefault: LPPRINTER_DEFAULTSA,
-    ) -> BOOL;
-    pub fn ResetPrinterW(
-        hPrinter: HANDLE,
-        pDefault: LPPRINTER_DEFAULTSW,
-    ) -> BOOL;
+    pub fn ResetPrinterA(hPrinter: HANDLE, pDefault: LPPRINTER_DEFAULTSA) -> BOOL;
+    pub fn ResetPrinterW(hPrinter: HANDLE, pDefault: LPPRINTER_DEFAULTSW) -> BOOL;
     pub fn SetJobA(
         hPrinter: HANDLE,
         JobId: DWORD,
@@ -1035,31 +1020,11 @@ extern "system" {
         pcbNeeded: LPDWORD,
         pcReturned: LPDWORD,
     ) -> BOOL;
-    pub fn AddPrinterA(
-        pName: LPSTR,
-        Level: DWORD,
-        pPrinter: LPBYTE,
-    ) -> HANDLE;
-    pub fn AddPrinterW(
-        pName: LPWSTR,
-        Level: DWORD,
-        pPrinter: LPBYTE,
-    ) -> HANDLE;
-    pub fn DeletePrinter(
-        hPrinter: HANDLE,
-    ) -> BOOL;
-    pub fn SetPrinterA(
-        hPrinter: HANDLE,
-        Level: DWORD,
-        pPrinter: LPBYTE,
-        Command: DWORD,
-    ) -> BOOL;
-    pub fn SetPrinterW(
-        hPrinter: HANDLE,
-        Level: DWORD,
-        pPrinter: LPBYTE,
-        Command: DWORD,
-    ) -> BOOL;
+    pub fn AddPrinterA(pName: LPSTR, Level: DWORD, pPrinter: LPBYTE) -> HANDLE;
+    pub fn AddPrinterW(pName: LPWSTR, Level: DWORD, pPrinter: LPBYTE) -> HANDLE;
+    pub fn DeletePrinter(hPrinter: HANDLE) -> BOOL;
+    pub fn SetPrinterA(hPrinter: HANDLE, Level: DWORD, pPrinter: LPBYTE, Command: DWORD) -> BOOL;
+    pub fn SetPrinterW(hPrinter: HANDLE, Level: DWORD, pPrinter: LPBYTE, Command: DWORD) -> BOOL;
     pub fn GetPrinterA(
         hPrinter: HANDLE,
         Level: DWORD,
@@ -1074,16 +1039,8 @@ extern "system" {
         cbBuf: DWORD,
         pcbNeeded: LPDWORD,
     ) -> BOOL;
-    pub fn AddPrinterDriverA(
-        pName: LPSTR,
-        Level: DWORD,
-        pDriverInfo: LPBYTE,
-    ) -> BOOL;
-    pub fn AddPrinterDriverW(
-        pName: LPWSTR,
-        Level: DWORD,
-        pDriverInfo: LPBYTE,
-    ) -> BOOL;
+    pub fn AddPrinterDriverA(pName: LPSTR, Level: DWORD, pDriverInfo: LPBYTE) -> BOOL;
+    pub fn AddPrinterDriverW(pName: LPWSTR, Level: DWORD, pDriverInfo: LPBYTE) -> BOOL;
     pub fn AddPrinterDriverExA(
         pName: LPSTR,
         Level: DWORD,
@@ -1146,16 +1103,8 @@ extern "system" {
         cbBuf: DWORD,
         pcbNeeded: LPDWORD,
     ) -> BOOL;
-    pub fn DeletePrinterDriverA(
-        pName: LPSTR,
-        pEnvironment: LPSTR,
-        pDriverName: LPSTR,
-    ) -> BOOL;
-    pub fn DeletePrinterDriverW(
-        pName: LPWSTR,
-        pEnvironment: LPWSTR,
-        pDriverName: LPWSTR,
-    ) -> BOOL;
+    pub fn DeletePrinterDriverA(pName: LPSTR, pEnvironment: LPSTR, pDriverName: LPSTR) -> BOOL;
+    pub fn DeletePrinterDriverW(pName: LPWSTR, pEnvironment: LPWSTR, pDriverName: LPWSTR) -> BOOL;
     pub fn DeletePrinterDriverExA(
         pName: LPSTR,
         pEnvironment: LPSTR,
@@ -1244,25 +1193,10 @@ extern "system" {
         pEnvironment: LPWSTR,
         pPrintProcessorName: LPWSTR,
     ) -> BOOL;
-    pub fn StartDocPrinterA(
-        hPrinter: HANDLE,
-        Level: DWORD,
-        pDocInfo: LPBYTE,
-    ) -> DWORD;
-    pub fn StartDocPrinterW(
-        hPrinter: HANDLE,
-        Level: DWORD,
-        pDocInfo: LPBYTE,
-    ) -> DWORD;
-    pub fn StartPagePrinter(
-        hPrinter: HANDLE,
-    ) -> BOOL;
-    pub fn WritePrinter(
-        hPrinter: HANDLE,
-        pBuf: LPVOID,
-        cbBuf: DWORD,
-        pcWritten: LPDWORD,
-    ) -> BOOL;
+    pub fn StartDocPrinterA(hPrinter: HANDLE, Level: DWORD, pDocInfo: LPBYTE) -> DWORD;
+    pub fn StartDocPrinterW(hPrinter: HANDLE, Level: DWORD, pDocInfo: LPBYTE) -> DWORD;
+    pub fn StartPagePrinter(hPrinter: HANDLE) -> BOOL;
+    pub fn WritePrinter(hPrinter: HANDLE, pBuf: LPVOID, cbBuf: DWORD, pcWritten: LPDWORD) -> BOOL;
     pub fn FlushPrinter(
         hPrinter: HANDLE,
         pBuf: LPVOID,
@@ -1270,21 +1204,11 @@ extern "system" {
         pcWritten: LPDWORD,
         cSleep: DWORD,
     ) -> BOOL;
-    pub fn EndPagePrinter(
-        hPrinter: HANDLE,
-    ) -> BOOL;
-    pub fn AbortPrinter(
-        hPrinter: HANDLE,
-    ) -> BOOL;
-    pub fn ReadPrinter(
-        hPrinter: HANDLE,
-        pBuf: LPVOID,
-        cbBuf: DWORD,
-        pNoBytesRead: LPDWORD,
-    ) -> BOOL;
-    pub fn EndDocPrinter(
-        hPrinter: HANDLE,
-    ) -> BOOL;
+    pub fn EndPagePrinter(hPrinter: HANDLE) -> BOOL;
+    pub fn AbortPrinter(hPrinter: HANDLE) -> BOOL;
+    pub fn ReadPrinter(hPrinter: HANDLE, pBuf: LPVOID, cbBuf: DWORD, pNoBytesRead: LPDWORD)
+        -> BOOL;
+    pub fn EndDocPrinter(hPrinter: HANDLE) -> BOOL;
     pub fn AddJobA(
         hPrinter: HANDLE,
         Level: DWORD,
@@ -1299,14 +1223,8 @@ extern "system" {
         cbBuf: DWORD,
         pcbNeeded: LPDWORD,
     ) -> BOOL;
-    pub fn ScheduleJob(
-        hPrinter: HANDLE,
-        JobId: DWORD,
-    ) -> BOOL;
-    pub fn PrinterProperties(
-        hWnd: HWND,
-        hPrinter: HANDLE,
-    ) -> BOOL;
+    pub fn ScheduleJob(hPrinter: HANDLE, JobId: DWORD) -> BOOL;
+    pub fn PrinterProperties(hWnd: HWND, hPrinter: HANDLE) -> BOOL;
     pub fn DocumentPropertiesA(
         hWnd: HWND,
         hPrinter: HANDLE,
@@ -1463,32 +1381,12 @@ extern "system" {
         pData: LPBYTE,
         cbData: DWORD,
     ) -> DWORD;
-    pub fn DeletePrinterDataA(
-        hPrinter: HANDLE,
-        pValueName: LPSTR,
-    ) -> DWORD;
-    pub fn DeletePrinterDataW(
-        hPrinter: HANDLE,
-        pValueName: LPWSTR,
-    ) -> DWORD;
-    pub fn DeletePrinterDataExA(
-        hPrinter: HANDLE,
-        pKeyName: LPCSTR,
-        pValueName: LPCSTR,
-    ) -> DWORD;
-    pub fn DeletePrinterDataExW(
-        hPrinter: HANDLE,
-        pKeyName: LPCWSTR,
-        pValueName: LPCWSTR,
-    ) -> DWORD;
-    pub fn DeletePrinterKeyA(
-        hPrinter: HANDLE,
-        pKeyName: LPCSTR,
-    ) -> DWORD;
-    pub fn DeletePrinterKeyW(
-        hPrinter: HANDLE,
-        pKeyName: LPCWSTR,
-    ) -> DWORD;
+    pub fn DeletePrinterDataA(hPrinter: HANDLE, pValueName: LPSTR) -> DWORD;
+    pub fn DeletePrinterDataW(hPrinter: HANDLE, pValueName: LPWSTR) -> DWORD;
+    pub fn DeletePrinterDataExA(hPrinter: HANDLE, pKeyName: LPCSTR, pValueName: LPCSTR) -> DWORD;
+    pub fn DeletePrinterDataExW(hPrinter: HANDLE, pKeyName: LPCWSTR, pValueName: LPCWSTR) -> DWORD;
+    pub fn DeletePrinterKeyA(hPrinter: HANDLE, pKeyName: LPCSTR) -> DWORD;
+    pub fn DeletePrinterKeyW(hPrinter: HANDLE, pKeyName: LPCWSTR) -> DWORD;
 }
 pub const PRINTER_NOTIFY_TYPE: DWORD = 0x00;
 pub const JOB_NOTIFY_TYPE: DWORD = 0x01;
@@ -1550,7 +1448,7 @@ pub const JOB_NOTIFY_FIELD_REMOTE_JOB_ID: DWORD = 0x18;
 pub const SERVER_NOTIFY_FIELD_PRINT_DRIVER_ISOLATION_GROUP: DWORD = 0x00;
 pub const PRINTER_NOTIFY_CATEGORY_ALL: DWORD = 0x001000;
 pub const PRINTER_NOTIFY_CATEGORY_3D: DWORD = 0x002000;
-STRUCT!{struct PRINTER_NOTIFY_OPTIONS_TYPE {
+STRUCT! {struct PRINTER_NOTIFY_OPTIONS_TYPE {
     Type: WORD,
     Reserved0: WORD,
     Reserved1: DWORD,
@@ -1561,7 +1459,7 @@ STRUCT!{struct PRINTER_NOTIFY_OPTIONS_TYPE {
 pub type PPRINTER_NOTIFY_OPTIONS_TYPE = *mut PRINTER_NOTIFY_OPTIONS_TYPE;
 pub type LPPRINTER_NOTIFY_OPTIONS_TYPE = *mut PRINTER_NOTIFY_OPTIONS_TYPE;
 pub const PRINTER_NOTIFY_OPTIONS_REFRESH: DWORD = 0x01;
-STRUCT!{struct PRINTER_NOTIFY_OPTIONS {
+STRUCT! {struct PRINTER_NOTIFY_OPTIONS {
     Version: DWORD,
     Flags: DWORD,
     Count: DWORD,
@@ -1570,16 +1468,16 @@ STRUCT!{struct PRINTER_NOTIFY_OPTIONS {
 pub type PPRINTER_NOTIFY_OPTIONS = *mut PRINTER_NOTIFY_OPTIONS;
 pub type LPPRINTER_NOTIFY_OPTIONS = *mut PRINTER_NOTIFY_OPTIONS;
 pub const PRINTER_NOTIFY_INFO_DISCARDED: DWORD = 0x01;
-STRUCT!{struct PRINTER_NOTIFY_INFO_DATA_NotifyData_Data {
+STRUCT! {struct PRINTER_NOTIFY_INFO_DATA_NotifyData_Data {
     cbBuf: DWORD,
     pBuf: LPVOID,
 }}
-UNION!{union PRINTER_NOTIFY_INFO_DATA_NotifyData {
+UNION! {union PRINTER_NOTIFY_INFO_DATA_NotifyData {
     [usize; 2],
     adwData adwData_mut: [DWORD; 2],
     Data Data_mut: PRINTER_NOTIFY_INFO_DATA_NotifyData_Data,
 }}
-STRUCT!{struct PRINTER_NOTIFY_INFO_DATA {
+STRUCT! {struct PRINTER_NOTIFY_INFO_DATA {
     Type: WORD,
     Field: WORD,
     Reserved: DWORD,
@@ -1588,7 +1486,7 @@ STRUCT!{struct PRINTER_NOTIFY_INFO_DATA {
 }}
 pub type PPRINTER_NOTIFY_INFO_DATA = *mut PRINTER_NOTIFY_INFO_DATA;
 pub type LPPRINTER_NOTIFY_INFO_DATA = *mut PRINTER_NOTIFY_INFO_DATA;
-STRUCT!{struct PRINTER_NOTIFY_INFO {
+STRUCT! {struct PRINTER_NOTIFY_INFO {
     Version: DWORD,
     Flags: DWORD,
     Count: DWORD,
@@ -1596,12 +1494,12 @@ STRUCT!{struct PRINTER_NOTIFY_INFO {
 }}
 pub type PPRINTER_NOTIFY_INFO = *mut PRINTER_NOTIFY_INFO;
 pub type LPPRINTER_NOTIFY_INFO = *mut PRINTER_NOTIFY_INFO;
-STRUCT!{struct BINARY_CONTAINER {
+STRUCT! {struct BINARY_CONTAINER {
     cbBuf: DWORD,
     pData: LPBYTE,
 }}
 pub type PBINARY_CONTAINER = *mut BINARY_CONTAINER;
-UNION!{union BIDI_DATA_u {
+UNION! {union BIDI_DATA_u {
     [usize; 2],
     bData bData_mut: BOOL,
     iData iData_mut: LONG,
@@ -1609,20 +1507,20 @@ UNION!{union BIDI_DATA_u {
     fData fData_mut: FLOAT,
     biData biData_mut: BINARY_CONTAINER,
 }}
-STRUCT!{struct BIDI_DATA {
+STRUCT! {struct BIDI_DATA {
     dwBidiType: DWORD,
     u: BIDI_DATA_u,
 }}
 pub type PBIDI_DATA = *mut BIDI_DATA;
 pub type LPBIDI_DATA = *mut BIDI_DATA;
-STRUCT!{struct BIDI_REQUEST_DATA {
+STRUCT! {struct BIDI_REQUEST_DATA {
     dwReqNumber: DWORD,
     pSchema: LPWSTR,
     data: BIDI_DATA,
 }}
 pub type PBIDI_REQUEST_DATA = *mut BIDI_REQUEST_DATA;
 pub type LPBIDI_REQUEST_DATA = *mut BIDI_REQUEST_DATA;
-STRUCT!{struct BIDI_REQUEST_CONTAINER {
+STRUCT! {struct BIDI_REQUEST_CONTAINER {
     Version: DWORD,
     Flags: DWORD,
     Count: DWORD,
@@ -1630,7 +1528,7 @@ STRUCT!{struct BIDI_REQUEST_CONTAINER {
 }}
 pub type PBIDI_REQUEST_CONTAINER = *mut BIDI_REQUEST_CONTAINER;
 pub type LPBIDI_REQUEST_CONTAINER = *mut BIDI_REQUEST_CONTAINER;
-STRUCT!{struct BIDI_RESPONSE_DATA {
+STRUCT! {struct BIDI_RESPONSE_DATA {
     dwResult: DWORD,
     dwReqNumber: DWORD,
     pSchema: LPWSTR,
@@ -1638,7 +1536,7 @@ STRUCT!{struct BIDI_RESPONSE_DATA {
 }}
 pub type PBIDI_RESPONSE_DATA = *mut BIDI_RESPONSE_DATA;
 pub type LPBIDI_RESPONSE_DATA = *mut BIDI_RESPONSE_DATA;
-STRUCT!{struct BIDI_RESPONSE_CONTAINER {
+STRUCT! {struct BIDI_RESPONSE_CONTAINER {
     Version: DWORD,
     Flags: DWORD,
     Count: DWORD,
@@ -1651,7 +1549,7 @@ pub const BIDI_ACTION_GET: &'static str = "Get";
 pub const BIDI_ACTION_SET: &'static str = "Set";
 pub const BIDI_ACTION_GET_ALL: &'static str = "GetAll";
 pub const BIDI_ACTION_GET_WITH_ARGUMENT: &'static str = "GetWithArgument";
-ENUM!{enum BIDI_TYPE {
+ENUM! {enum BIDI_TYPE {
     BIDI_NULL = 0,
     BIDI_INT = 1,
     BIDI_FLOAT = 2,
@@ -1685,10 +1583,7 @@ pub const ERROR_BIDI_NO_BIDI_SCHEMA_EXTENSIONS: DWORD = ERROR_BIDI_ERROR_BASE + 
 pub const ERROR_BIDI_UNSUPPORTED_CLIENT_LANGUAGE: DWORD = ERROR_BIDI_ERROR_BASE + 17;
 pub const ERROR_BIDI_UNSUPPORTED_RESOURCE_FORMAT: DWORD = ERROR_BIDI_ERROR_BASE + 18;
 extern "system" {
-    pub fn WaitForPrinterChange(
-        hPrinter: HANDLE,
-        Flags: DWORD,
-    ) -> DWORD;
+    pub fn WaitForPrinterChange(hPrinter: HANDLE, Flags: DWORD) -> DWORD;
     pub fn FindFirstPrinterChangeNotification(
         hPrinter: HANDLE,
         fdwFilter: DWORD,
@@ -1701,12 +1596,8 @@ extern "system" {
         pPrinterNotifyOptions: LPVOID,
         ppPrinterNotifyInfo: *mut LPVOID,
     ) -> BOOL;
-    pub fn FreePrinterNotifyInfo(
-        pPrinterNotifyInfo: PPRINTER_NOTIFY_INFO,
-    ) -> BOOL;
-    pub fn FindClosePrinterChangeNotification(
-        hChange: HANDLE,
-    ) -> BOOL;
+    pub fn FreePrinterNotifyInfo(pPrinterNotifyInfo: PPRINTER_NOTIFY_INFO) -> BOOL;
+    pub fn FindClosePrinterChangeNotification(hChange: HANDLE) -> BOOL;
 }
 pub const PRINTER_CHANGE_ADD_PRINTER: DWORD = 0x00000001;
 pub const PRINTER_CHANGE_SET_PRINTER: DWORD = 0x00000002;
@@ -1761,27 +1652,11 @@ pub const PRINTER_ERROR_OUTOFPAPER: DWORD = 0x00000001;
 pub const PRINTER_ERROR_JAM: DWORD = 0x00000002;
 pub const PRINTER_ERROR_OUTOFTONER: DWORD = 0x00000004;
 extern "system" {
-    pub fn ClosePrinter(
-        hPrinter: HANDLE,
-    ) -> BOOL;
-    pub fn AddFormA(
-        hPrinter: HANDLE,
-        Level: DWORD,
-        pForm: LPBYTE,
-    ) -> BOOL;
-    pub fn AddFormW(
-        hPrinter: HANDLE,
-        Level: DWORD,
-        pForm: LPBYTE,
-    ) -> BOOL;
-    pub fn DeleteFormA(
-        hPrinter: HANDLE,
-        pFormName: LPSTR,
-    ) -> BOOL;
-    pub fn DeleteFormW(
-        hPrinter: HANDLE,
-        pFormName: LPWSTR,
-    ) -> BOOL;
+    pub fn ClosePrinter(hPrinter: HANDLE) -> BOOL;
+    pub fn AddFormA(hPrinter: HANDLE, Level: DWORD, pForm: LPBYTE) -> BOOL;
+    pub fn AddFormW(hPrinter: HANDLE, Level: DWORD, pForm: LPBYTE) -> BOOL;
+    pub fn DeleteFormA(hPrinter: HANDLE, pFormName: LPSTR) -> BOOL;
+    pub fn DeleteFormW(hPrinter: HANDLE, pFormName: LPWSTR) -> BOOL;
     pub fn GetFormA(
         hPrinter: HANDLE,
         pFormName: LPSTR,
@@ -1798,18 +1673,8 @@ extern "system" {
         cbBuf: DWORD,
         pcbNeeded: LPDWORD,
     ) -> BOOL;
-    pub fn SetFormA(
-        hPrinter: HANDLE,
-        pFormName: LPSTR,
-        Level: DWORD,
-        pForm: LPBYTE,
-    ) -> BOOL;
-    pub fn SetFormW(
-        hPrinter: HANDLE,
-        pFormName: LPWSTR,
-        Level: DWORD,
-        pForm: LPBYTE,
-    ) -> BOOL;
+    pub fn SetFormA(hPrinter: HANDLE, pFormName: LPSTR, Level: DWORD, pForm: LPBYTE) -> BOOL;
+    pub fn SetFormW(hPrinter: HANDLE, pFormName: LPWSTR, Level: DWORD, pForm: LPBYTE) -> BOOL;
     pub fn EnumFormsA(
         hPrinter: HANDLE,
         Level: DWORD,
@@ -1842,26 +1707,10 @@ extern "system" {
         pcbNeeded: LPDWORD,
         pcReturned: LPDWORD,
     ) -> BOOL;
-    pub fn AddMonitorA(
-        pName: LPSTR,
-        Level: DWORD,
-        pMonitors: LPBYTE,
-    ) -> BOOL;
-    pub fn AddMonitorW(
-        pName: LPWSTR,
-        Level: DWORD,
-        pMonitors: LPBYTE,
-    ) -> BOOL;
-    pub fn DeleteMonitorA(
-        pName: LPSTR,
-        pEnvironment: LPSTR,
-        pMonitorName: LPSTR,
-    ) -> BOOL;
-    pub fn DeleteMonitorW(
-        pName: LPWSTR,
-        pEnvironment: LPWSTR,
-        pMonitorName: LPWSTR,
-    ) -> BOOL;
+    pub fn AddMonitorA(pName: LPSTR, Level: DWORD, pMonitors: LPBYTE) -> BOOL;
+    pub fn AddMonitorW(pName: LPWSTR, Level: DWORD, pMonitors: LPBYTE) -> BOOL;
+    pub fn DeleteMonitorA(pName: LPSTR, pEnvironment: LPSTR, pMonitorName: LPSTR) -> BOOL;
+    pub fn DeleteMonitorW(pName: LPWSTR, pEnvironment: LPWSTR, pMonitorName: LPWSTR) -> BOOL;
     pub fn EnumPortsA(
         pName: LPSTR,
         Level: DWORD,
@@ -1878,36 +1727,12 @@ extern "system" {
         pcbNeeded: LPDWORD,
         pcReturned: LPDWORD,
     ) -> BOOL;
-    pub fn AddPortA(
-        pName: LPSTR,
-        hWnd: HWND,
-        pMonitorName: LPSTR,
-    ) -> BOOL;
-    pub fn AddPortW(
-        pName: LPWSTR,
-        hWnd: HWND,
-        pMonitorName: LPWSTR,
-    ) -> BOOL;
-    pub fn ConfigurePortA(
-        pName: LPSTR,
-        hWnd: HWND,
-        pPortName: LPSTR,
-    ) -> BOOL;
-    pub fn ConfigurePortW(
-        pName: LPWSTR,
-        hWnd: HWND,
-        pPortName: LPWSTR,
-    ) -> BOOL;
-    pub fn DeletePortA(
-        pName: LPSTR,
-        hWnd: HWND,
-        pPortName: LPSTR,
-    ) -> BOOL;
-    pub fn DeletePortW(
-        pName: LPWSTR,
-        hWnd: HWND,
-        pPortName: LPWSTR,
-    ) -> BOOL;
+    pub fn AddPortA(pName: LPSTR, hWnd: HWND, pMonitorName: LPSTR) -> BOOL;
+    pub fn AddPortW(pName: LPWSTR, hWnd: HWND, pMonitorName: LPWSTR) -> BOOL;
+    pub fn ConfigurePortA(pName: LPSTR, hWnd: HWND, pPortName: LPSTR) -> BOOL;
+    pub fn ConfigurePortW(pName: LPWSTR, hWnd: HWND, pPortName: LPWSTR) -> BOOL;
+    pub fn DeletePortA(pName: LPSTR, hWnd: HWND, pPortName: LPSTR) -> BOOL;
+    pub fn DeletePortW(pName: LPWSTR, hWnd: HWND, pPortName: LPWSTR) -> BOOL;
     pub fn XcvDataW(
         hXcv: HANDLE,
         pszDataName: PCWSTR,
@@ -1918,83 +1743,45 @@ extern "system" {
         pcbOutputNeeded: PDWORD,
         pdwStatus: PDWORD,
     ) -> BOOL;
-    pub fn GetDefaultPrinterA(
-        pszBuffer: LPSTR,
-        pcchBuffer: LPDWORD,
-    ) -> BOOL;
-    pub fn GetDefaultPrinterW(
-        pszBuffer: LPWSTR,
-        pcchBuffer: LPDWORD,
-    ) -> BOOL;
-    pub fn SetDefaultPrinterA(
-        pszPrinter: LPCSTR,
-    ) -> BOOL;
-    pub fn SetDefaultPrinterW(
-        pszPrinter: LPCWSTR,
-    ) -> BOOL;
-    pub fn SetPortA(
-        pName: LPSTR,
-        pPortName: LPSTR,
-        dwLevel: DWORD,
-        pPortInfo: LPBYTE,
-    ) -> BOOL;
-    pub fn SetPortW(pName: LPWSTR,
-        pPortName: LPWSTR,
-        dwLevel: DWORD,
-        pPortInfo: LPBYTE,
-    ) -> BOOL;
-    pub fn AddPrinterConnectionA(
-        pName: LPSTR,
-    ) -> BOOL;
-    pub fn AddPrinterConnectionW(
-        pName: LPWSTR,
-    ) -> BOOL;
-    pub fn DeletePrinterConnectionA(
-        pName: LPSTR,
-    ) -> BOOL;
-    pub fn DeletePrinterConnectionW(
-        pName: LPWSTR,
-    ) -> BOOL;
-    pub fn ConnectToPrinterDlg(
-        hwnd: HWND,
-        Flags: DWORD,
-    ) -> HANDLE;
+    pub fn GetDefaultPrinterA(pszBuffer: LPSTR, pcchBuffer: LPDWORD) -> BOOL;
+    pub fn GetDefaultPrinterW(pszBuffer: LPWSTR, pcchBuffer: LPDWORD) -> BOOL;
+    pub fn SetDefaultPrinterA(pszPrinter: LPCSTR) -> BOOL;
+    pub fn SetDefaultPrinterW(pszPrinter: LPCWSTR) -> BOOL;
+    pub fn SetPortA(pName: LPSTR, pPortName: LPSTR, dwLevel: DWORD, pPortInfo: LPBYTE) -> BOOL;
+    pub fn SetPortW(pName: LPWSTR, pPortName: LPWSTR, dwLevel: DWORD, pPortInfo: LPBYTE) -> BOOL;
+    pub fn AddPrinterConnectionA(pName: LPSTR) -> BOOL;
+    pub fn AddPrinterConnectionW(pName: LPWSTR) -> BOOL;
+    pub fn DeletePrinterConnectionA(pName: LPSTR) -> BOOL;
+    pub fn DeletePrinterConnectionW(pName: LPWSTR) -> BOOL;
+    pub fn ConnectToPrinterDlg(hwnd: HWND, Flags: DWORD) -> HANDLE;
 }
-STRUCT!{struct PROVIDOR_INFO_1A {
+STRUCT! {struct PROVIDOR_INFO_1A {
     pName: LPSTR,
     pEnvironment: LPSTR,
     pDLLName: LPSTR,
 }}
 pub type PPROVIDOR_INFO_1A = *mut PROVIDOR_INFO_1A;
 pub type LPPROVIDOR_INFO_1A = *mut PROVIDOR_INFO_1A;
-STRUCT!{struct PROVIDOR_INFO_1W {
+STRUCT! {struct PROVIDOR_INFO_1W {
     pName: LPWSTR,
     pEnvironment: LPWSTR,
     pDLLName: LPWSTR,
 }}
 pub type PPROVIDOR_INFO_1W = *mut PROVIDOR_INFO_1W;
 pub type LPPROVIDOR_INFO_1W = *mut PROVIDOR_INFO_1W;
-STRUCT!{struct PROVIDOR_INFO_2A {
+STRUCT! {struct PROVIDOR_INFO_2A {
     pOrder: LPSTR,
 }}
 pub type PPROVIDOR_INFO_2A = *mut PROVIDOR_INFO_2A;
 pub type LPPROVIDOR_INFO_2A = *mut PROVIDOR_INFO_2A;
-STRUCT!{struct PROVIDOR_INFO_2W {
+STRUCT! {struct PROVIDOR_INFO_2W {
     pOrder: LPWSTR,
 }}
 pub type PPROVIDOR_INFO_2W = *mut PROVIDOR_INFO_2W;
 pub type LPPROVIDOR_INFO_2W = *mut PROVIDOR_INFO_2W;
 extern "system" {
-    pub fn AddPrintProvidorA(
-        pName: LPSTR,
-        Level: DWORD,
-        pProvidorInfo: LPBYTE,
-    ) -> BOOL;
-    pub fn AddPrintProvidorW(
-        pName: LPWSTR,
-        Level: DWORD,
-        pProvidorInfo: LPBYTE,
-    ) -> BOOL;
+    pub fn AddPrintProvidorA(pName: LPSTR, Level: DWORD, pProvidorInfo: LPBYTE) -> BOOL;
+    pub fn AddPrintProvidorW(pName: LPWSTR, Level: DWORD, pProvidorInfo: LPBYTE) -> BOOL;
     pub fn DeletePrintProvidorA(
         pName: LPSTR,
         pEnvironment: LPSTR,
@@ -2005,20 +1792,13 @@ extern "system" {
         pEnvironment: LPWSTR,
         pPrintProvidorName: LPWSTR,
     ) -> BOOL;
-    pub fn IsValidDevmodeA(
-        pDevmode: PDEVMODEA,
-        DevmodeSize: size_t,
-    ) -> BOOL;
-    pub fn IsValidDevmodeW(
-        pDevmode: PDEVMODEW,
-        DevmodeSize: size_t,
-    ) -> BOOL;
+    pub fn IsValidDevmodeA(pDevmode: PDEVMODEA, DevmodeSize: size_t) -> BOOL;
+    pub fn IsValidDevmodeW(pDevmode: PDEVMODEW, DevmodeSize: size_t) -> BOOL;
 }
 pub const SPLREG_DEFAULT_SPOOL_DIRECTORY: &'static str = "DefaultSpoolDirectory";
 pub const SPLREG_PORT_THREAD_PRIORITY_DEFAULT: &'static str = "PortThreadPriorityDefault";
 pub const SPLREG_PORT_THREAD_PRIORITY: &'static str = "PortThreadPriority";
-pub const SPLREG_SCHEDULER_THREAD_PRIORITY_DEFAULT: &'static str
-    = "SchedulerThreadPriorityDefault";
+pub const SPLREG_SCHEDULER_THREAD_PRIORITY_DEFAULT: &'static str = "SchedulerThreadPriorityDefault";
 pub const SPLREG_SCHEDULER_THREAD_PRIORITY: &'static str = "SchedulerThreadPriority";
 pub const SPLREG_BEEP_ENABLED: &'static str = "BeepEnabled";
 pub const SPLREG_NET_POPUP: &'static str = "NetPopup";
@@ -2040,16 +1820,16 @@ pub const SPLREG_ALLOW_USER_MANAGEFORMS: &'static str = "AllowUserManageForms";
 pub const SPLREG_WEBSHAREMGMT: &'static str = "WebShareMgmt";
 pub const SPLREG_PRINT_DRIVER_ISOLATION_GROUPS_SEPARATOR: &'static str = "\\";
 pub const SPLREG_PRINT_DRIVER_ISOLATION_GROUPS: &'static str = "PrintDriverIsolationGroups";
-pub const SPLREG_PRINT_DRIVER_ISOLATION_TIME_BEFORE_RECYCLE: &'static str
-    = "PrintDriverIsolationTimeBeforeRecycle";
-pub const SPLREG_PRINT_DRIVER_ISOLATION_MAX_OBJECTS_BEFORE_RECYCLE: &'static str
-    = "PrintDriverIsolationMaxobjsBeforeRecycle";
-pub const SPLREG_PRINT_DRIVER_ISOLATION_IDLE_TIMEOUT: &'static str
-    = "PrintDriverIsolationIdleTimeout";
-pub const SPLREG_PRINT_DRIVER_ISOLATION_EXECUTION_POLICY: &'static str
-    = "PrintDriverIsolationExecutionPolicy";
-pub const SPLREG_PRINT_DRIVER_ISOLATION_OVERRIDE_POLICY: &'static str
-    = "PrintDriverIsolationOverrideCompat";
+pub const SPLREG_PRINT_DRIVER_ISOLATION_TIME_BEFORE_RECYCLE: &'static str =
+    "PrintDriverIsolationTimeBeforeRecycle";
+pub const SPLREG_PRINT_DRIVER_ISOLATION_MAX_OBJECTS_BEFORE_RECYCLE: &'static str =
+    "PrintDriverIsolationMaxobjsBeforeRecycle";
+pub const SPLREG_PRINT_DRIVER_ISOLATION_IDLE_TIMEOUT: &'static str =
+    "PrintDriverIsolationIdleTimeout";
+pub const SPLREG_PRINT_DRIVER_ISOLATION_EXECUTION_POLICY: &'static str =
+    "PrintDriverIsolationExecutionPolicy";
+pub const SPLREG_PRINT_DRIVER_ISOLATION_OVERRIDE_POLICY: &'static str =
+    "PrintDriverIsolationOverrideCompat";
 pub const SPLREG_PRINT_QUEUE_V4_DRIVER_DIRECTORY: &'static str = "PrintQueueV4DriverDirectory";
 pub const SERVER_ACCESS_ADMINISTER: DWORD = 0x00000001;
 pub const SERVER_ACCESS_ENUMERATE: DWORD = 0x00000002;
@@ -2058,19 +1838,19 @@ pub const PRINTER_ACCESS_USE: DWORD = 0x00000008;
 pub const JOB_ACCESS_ADMINISTER: DWORD = 0x00000010;
 pub const JOB_ACCESS_READ: DWORD = 0x00000020;
 pub const PRINTER_ACCESS_MANAGE_LIMITED: DWORD = 0x00000040;
-pub const SERVER_ALL_ACCESS: DWORD = STANDARD_RIGHTS_REQUIRED | SERVER_ACCESS_ADMINISTER
-    | SERVER_ACCESS_ENUMERATE;
+pub const SERVER_ALL_ACCESS: DWORD =
+    STANDARD_RIGHTS_REQUIRED | SERVER_ACCESS_ADMINISTER | SERVER_ACCESS_ENUMERATE;
 pub const SERVER_READ: DWORD = STANDARD_RIGHTS_READ | SERVER_ACCESS_ENUMERATE;
-pub const SERVER_WRITE: DWORD = STANDARD_RIGHTS_WRITE | SERVER_ACCESS_ADMINISTER
-    | SERVER_ACCESS_ENUMERATE;
+pub const SERVER_WRITE: DWORD =
+    STANDARD_RIGHTS_WRITE | SERVER_ACCESS_ADMINISTER | SERVER_ACCESS_ENUMERATE;
 pub const SERVER_EXECUTE: DWORD = STANDARD_RIGHTS_EXECUTE | SERVER_ACCESS_ENUMERATE;
-pub const PRINTER_ALL_ACCESS: DWORD = STANDARD_RIGHTS_REQUIRED | PRINTER_ACCESS_ADMINISTER
-    | PRINTER_ACCESS_USE;
+pub const PRINTER_ALL_ACCESS: DWORD =
+    STANDARD_RIGHTS_REQUIRED | PRINTER_ACCESS_ADMINISTER | PRINTER_ACCESS_USE;
 pub const PRINTER_READ: DWORD = STANDARD_RIGHTS_READ | PRINTER_ACCESS_USE;
 pub const PRINTER_WRITE: DWORD = STANDARD_RIGHTS_WRITE | PRINTER_ACCESS_USE;
 pub const PRINTER_EXECUTE: DWORD = STANDARD_RIGHTS_EXECUTE | PRINTER_ACCESS_USE;
-pub const JOB_ALL_ACCESS: DWORD = STANDARD_RIGHTS_REQUIRED | JOB_ACCESS_ADMINISTER
-    | JOB_ACCESS_READ;
+pub const JOB_ALL_ACCESS: DWORD =
+    STANDARD_RIGHTS_REQUIRED | JOB_ACCESS_ADMINISTER | JOB_ACCESS_READ;
 pub const JOB_READ: DWORD = STANDARD_RIGHTS_READ | JOB_ACCESS_READ;
 pub const JOB_WRITE: DWORD = STANDARD_RIGHTS_WRITE | JOB_ACCESS_ADMINISTER;
 pub const JOB_EXECUTE: DWORD = STANDARD_RIGHTS_EXECUTE | JOB_ACCESS_ADMINISTER;
@@ -2127,19 +1907,19 @@ pub const SPLDS_VERSION_NUMBER: &'static str = "versionNumber";
 pub const SPLDS_PRINTER_NAME_ALIASES: &'static str = "printerNameAliases";
 pub const SPLDS_PRINTER_LOCATIONS: &'static str = "printerLocations";
 pub const SPLDS_PRINTER_MODEL: &'static str = "printerModel";
-ENUM!{enum PRINTER_OPTION_FLAGS {
+ENUM! {enum PRINTER_OPTION_FLAGS {
     PRINTER_OPTION_NO_CACHE = 1 << 0,
     PRINTER_OPTION_CACHE = 1 << 1,
     PRINTER_OPTION_CLIENT_CHANGE = 1 << 2,
     PRINTER_OPTION_NO_CLIENT_DATA = 1 << 3,
 }}
-STRUCT!{struct PRINTER_OPTIONSA {
+STRUCT! {struct PRINTER_OPTIONSA {
     cbSize: UINT,
     dwFlags: DWORD,
 }}
 pub type PPRINTER_OPTIONSA = *mut PRINTER_OPTIONSA;
 pub type LPPRINTER_OPTIONSA = *mut PRINTER_OPTIONSA;
-STRUCT!{struct PRINTER_OPTIONSW {
+STRUCT! {struct PRINTER_OPTIONSW {
     cbSize: UINT,
     dwFlags: DWORD,
 }}
@@ -2161,13 +1941,13 @@ extern "system" {
 }
 pub const PRINTER_CONNECTION_MISMATCH: DWORD = 0x00000020;
 pub const PRINTER_CONNECTION_NO_UI: DWORD = 0x00000040;
-STRUCT!{struct PRINTER_CONNECTION_INFO_1A {
+STRUCT! {struct PRINTER_CONNECTION_INFO_1A {
     dwFlags: DWORD,
     pszDriverName: LPSTR,
 }}
 pub type PPRINTER_CONNECTION_INFO_1A = *mut PRINTER_CONNECTION_INFO_1A;
 pub type LPPRINTER_CONNECTION_INFO_1A = *mut PRINTER_CONNECTION_INFO_1A;
-STRUCT!{struct PRINTER_CONNECTION_INFO_1W {
+STRUCT! {struct PRINTER_CONNECTION_INFO_1W {
     dwFlags: DWORD,
     pszDriverName: LPWSTR,
 }}
@@ -2227,14 +2007,14 @@ extern "system" {
         pcchDestInfPath: PULONG,
     ) -> HRESULT;
 }
-STRUCT!{struct CORE_PRINTER_DRIVERA {
+STRUCT! {struct CORE_PRINTER_DRIVERA {
     CoreDriverGUID: GUID,
     ftDriverDate: FILETIME,
     dwlDriverVersion: DWORDLONG,
     szPackageID: [CHAR; MAX_PATH],
 }}
 pub type PCORE_PRINTER_DRIVERA = *mut CORE_PRINTER_DRIVERA;
-STRUCT!{struct CORE_PRINTER_DRIVERW {
+STRUCT! {struct CORE_PRINTER_DRIVERW {
     CoreDriverGUID: GUID,
     ftDriverDate: FILETIME,
     dwlDriverVersion: DWORDLONG,
@@ -2301,7 +2081,7 @@ extern "system" {
         pszEnvironment: LPCWSTR,
     ) -> HRESULT;
 }
-ENUM!{enum EPrintPropertyType {
+ENUM! {enum EPrintPropertyType {
     kPropertyTypeString = 1,
     kPropertyTypeInt32,
     kPropertyTypeInt64,
@@ -2313,7 +2093,7 @@ ENUM!{enum EPrintPropertyType {
     kPropertyTypeNotificationOptions,
     kPropertyTypeBuffer,
 }}
-ENUM!{enum EPrintXPSJobProgress {
+ENUM! {enum EPrintXPSJobProgress {
     kAddingDocumentSequence = 0,
     kDocumentSequenceAdded = 1,
     kAddingFixedDocument = 2,
@@ -2325,15 +2105,15 @@ ENUM!{enum EPrintXPSJobProgress {
     kImageAdded = 8,
     kXpsDocumentCommitted = 9,
 }}
-ENUM!{enum EPrintXPSJobOperation {
+ENUM! {enum EPrintXPSJobOperation {
     kJobProduction = 1,
     kJobConsumption,
 }}
-STRUCT!{struct PrintPropertyValue_value_propertyBlob {
+STRUCT! {struct PrintPropertyValue_value_propertyBlob {
     cbBuf: DWORD,
     pBuf: LPVOID,
 }}
-UNION!{union PrintPropertyValue_value {
+UNION! {union PrintPropertyValue_value {
     [u64; 1] [u64; 2],
     propertyByte propertyByte_mut: BYTE,
     propertyString propertyString_mut: PWSTR,
@@ -2341,15 +2121,15 @@ UNION!{union PrintPropertyValue_value {
     propertyInt64 propertyInt64_mut: LONGLONG,
     propertyBlob propertyBlob_mut: PrintPropertyValue_value_propertyBlob,
 }}
-STRUCT!{struct PrintPropertyValue {
+STRUCT! {struct PrintPropertyValue {
     ePropertyType: EPrintPropertyType,
     value: PrintPropertyValue_value,
 }}
-STRUCT!{struct PrintNamedProperty {
+STRUCT! {struct PrintNamedProperty {
     propertyName: *mut WCHAR,
     propertyValue: PrintPropertyValue,
 }}
-STRUCT!{struct PrintPropertiesCollection {
+STRUCT! {struct PrintPropertiesCollection {
     numberOfProperties: ULONG,
     propertiesCollection: *mut PrintNamedProperty,
 }}
@@ -2379,30 +2159,26 @@ extern "system" {
         pcbNeeded: LPDWORD,
     ) -> BOOL;
 }
-ENUM!{enum PRINT_EXECUTION_CONTEXT {
+ENUM! {enum PRINT_EXECUTION_CONTEXT {
     PRINT_EXECUTION_CONTEXT_APPLICATION = 0,
     PRINT_EXECUTION_CONTEXT_SPOOLER_SERVICE = 1,
     PRINT_EXECUTION_CONTEXT_SPOOLER_ISOLATION_HOST = 2,
     PRINT_EXECUTION_CONTEXT_FILTER_PIPELINE = 3,
     PRINT_EXECUTION_CONTEXT_WOW64 = 4,
 }}
-STRUCT!{struct PRINT_EXECUTION_DATA {
+STRUCT! {struct PRINT_EXECUTION_DATA {
     context: PRINT_EXECUTION_CONTEXT,
     clientAppPID: DWORD,
 }}
 extern "system" {
-    pub fn GetPrintExecutionData(
-        pData: *mut PRINT_EXECUTION_DATA,
-    ) -> BOOL;
+    pub fn GetPrintExecutionData(pData: *mut PRINT_EXECUTION_DATA) -> BOOL;
     pub fn GetJobNamedPropertyValue(
         hPrinter: HANDLE,
         JobId: DWORD,
         pszName: PCWSTR,
         pValue: *mut PrintPropertyValue,
     ) -> DWORD;
-    pub fn FreePrintPropertyValue(
-        pValue: *mut PrintPropertyValue,
-    );
+    pub fn FreePrintPropertyValue(pValue: *mut PrintPropertyValue);
     pub fn FreePrintNamedPropertyArray(
         cProperties: DWORD,
         ppProperties: *mut *mut PrintNamedProperty,
@@ -2412,11 +2188,7 @@ extern "system" {
         JobId: DWORD,
         pProperty: *const PrintNamedProperty,
     ) -> DWORD;
-    pub fn DeleteJobNamedProperty(
-        hPrinter: HANDLE,
-        JobId: DWORD,
-        pszName: PCWSTR,
-    ) -> DWORD;
+    pub fn DeleteJobNamedProperty(hPrinter: HANDLE, JobId: DWORD, pszName: PCWSTR) -> DWORD;
     pub fn EnumJobNamedProperties(
         hPrinter: HANDLE,
         JobId: DWORD,

@@ -9,13 +9,13 @@ use um::accctrl::{
     ACCESS_MODE, MULTIPLE_TRUSTEE_OPERATION, PEXPLICIT_ACCESS_A, PEXPLICIT_ACCESS_W,
     PFN_OBJECT_MGR_FUNCTS, PINHERITED_FROMA, PINHERITED_FROMW, POBJECTS_AND_NAME_A,
     POBJECTS_AND_NAME_W, POBJECTS_AND_SID, PPROG_INVOKE_SETTING, PROG_INVOKE_SETTING, PTRUSTEE_A,
-    PTRUSTEE_W, SE_OBJECT_TYPE, TRUSTEE_FORM, TRUSTEE_TYPE
+    PTRUSTEE_W, SE_OBJECT_TYPE, TRUSTEE_FORM, TRUSTEE_TYPE,
 };
 use um::winnt::{
     HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PACCESS_MASK, PACL, PGENERIC_MAPPING,
-    PSECURITY_DESCRIPTOR, PSID, PVOID, SECURITY_INFORMATION
+    PSECURITY_DESCRIPTOR, PSID, PVOID, SECURITY_INFORMATION,
 };
-FN!{cdecl FN_PROGRESS(
+FN! {cdecl FN_PROGRESS(
     pObjectName: LPWSTR,
     Status: DWORD,
     pInvokeSetting: PPROG_INVOKE_SETTING,
@@ -275,30 +275,12 @@ extern "system" {
         AccessMode: ACCESS_MODE,
         Inheritance: DWORD,
     );
-    pub fn BuildTrusteeWithNameA(
-        pTrustee: PTRUSTEE_A,
-        pName: LPSTR,
-    );
-    pub fn BuildTrusteeWithNameW(
-        pTrustee: PTRUSTEE_W,
-        pName: LPWSTR,
-    );
-    pub fn BuildImpersonateTrusteeA(
-        pTrustee: PTRUSTEE_A,
-        pImpersonateTrustee: PTRUSTEE_A,
-    );
-    pub fn BuildImpersonateTrusteeW(
-        pTrustee: PTRUSTEE_W,
-        pImpersonateTrustee: PTRUSTEE_W,
-    );
-    pub fn BuildTrusteeWithSidA(
-        pTrustee: PTRUSTEE_A,
-        pSid: PSID,
-    );
-    pub fn BuildTrusteeWithSidW(
-        pTrustee: PTRUSTEE_W,
-        pSid: PSID,
-    );
+    pub fn BuildTrusteeWithNameA(pTrustee: PTRUSTEE_A, pName: LPSTR);
+    pub fn BuildTrusteeWithNameW(pTrustee: PTRUSTEE_W, pName: LPWSTR);
+    pub fn BuildImpersonateTrusteeA(pTrustee: PTRUSTEE_A, pImpersonateTrustee: PTRUSTEE_A);
+    pub fn BuildImpersonateTrusteeW(pTrustee: PTRUSTEE_W, pImpersonateTrustee: PTRUSTEE_W);
+    pub fn BuildTrusteeWithSidA(pTrustee: PTRUSTEE_A, pSid: PSID);
+    pub fn BuildTrusteeWithSidW(pTrustee: PTRUSTEE_W, pSid: PSID);
     pub fn BuildTrusteeWithObjectsAndSidA(
         pTrustee: PTRUSTEE_A,
         pObjSid: POBJECTS_AND_SID,
@@ -329,34 +311,14 @@ extern "system" {
         InheritedObjectTypeName: LPWSTR,
         Name: LPWSTR,
     );
-    pub fn GetTrusteeNameA(
-        pTrustee: PTRUSTEE_A,
-    ) -> LPSTR;
-    pub fn GetTrusteeNameW(
-        pTrustee: PTRUSTEE_W,
-    ) -> LPWSTR;
-    pub fn GetTrusteeTypeA(
-        pTrustee: PTRUSTEE_A,
-    ) -> TRUSTEE_TYPE;
-    pub fn GetTrusteeTypeW(
-        pTrustee: PTRUSTEE_W,
-    ) -> TRUSTEE_TYPE;
-    pub fn GetTrusteeFormA(
-        pTrustee: PTRUSTEE_A,
-    ) -> TRUSTEE_FORM;
-    pub fn GetTrusteeFormW(
-        pTrustee: PTRUSTEE_W,
-    ) -> TRUSTEE_FORM;
-    pub fn GetMultipleTrusteeOperationA(
-        pTrustee: PTRUSTEE_A,
-    ) -> MULTIPLE_TRUSTEE_OPERATION;
-    pub fn GetMultipleTrusteeOperationW(
-        pTrustee: PTRUSTEE_W,
-    ) -> MULTIPLE_TRUSTEE_OPERATION;
-    pub fn GetMultipleTrusteeA(
-        pTrustee: PTRUSTEE_A,
-    ) -> PTRUSTEE_A;
-    pub fn GetMultipleTrusteeW(
-        pTrustee: PTRUSTEE_W,
-    ) -> PTRUSTEE_W;
+    pub fn GetTrusteeNameA(pTrustee: PTRUSTEE_A) -> LPSTR;
+    pub fn GetTrusteeNameW(pTrustee: PTRUSTEE_W) -> LPWSTR;
+    pub fn GetTrusteeTypeA(pTrustee: PTRUSTEE_A) -> TRUSTEE_TYPE;
+    pub fn GetTrusteeTypeW(pTrustee: PTRUSTEE_W) -> TRUSTEE_TYPE;
+    pub fn GetTrusteeFormA(pTrustee: PTRUSTEE_A) -> TRUSTEE_FORM;
+    pub fn GetTrusteeFormW(pTrustee: PTRUSTEE_W) -> TRUSTEE_FORM;
+    pub fn GetMultipleTrusteeOperationA(pTrustee: PTRUSTEE_A) -> MULTIPLE_TRUSTEE_OPERATION;
+    pub fn GetMultipleTrusteeOperationW(pTrustee: PTRUSTEE_W) -> MULTIPLE_TRUSTEE_OPERATION;
+    pub fn GetMultipleTrusteeA(pTrustee: PTRUSTEE_A) -> PTRUSTEE_A;
+    pub fn GetMultipleTrusteeW(pTrustee: PTRUSTEE_W) -> PTRUSTEE_W;
 }

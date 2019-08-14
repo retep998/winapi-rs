@@ -12,9 +12,9 @@ use shared::windef::COLORREF;
 use shared::wtypes::VARTYPE;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LONG, LONGLONG, LPWSTR, WCHAR};
-DEFINE_GUID!{EVENTCONTEXT_VOLUMESLIDER,
-    0xe2c2e9de, 0x09b1, 0x4b04, 0x84, 0xe5, 0x07, 0x93, 0x12, 0x25, 0xee, 0x04}
-STRUCT!{struct KSDATAFORMAT {
+DEFINE_GUID! {EVENTCONTEXT_VOLUMESLIDER,
+0xe2c2e9de, 0x09b1, 0x4b04, 0x84, 0xe5, 0x07, 0x93, 0x12, 0x25, 0xee, 0x04}
+STRUCT! {struct KSDATAFORMAT {
     FormatSize: ULONG,
     Flags: ULONG,
     SampleSize: ULONG,
@@ -24,12 +24,12 @@ STRUCT!{struct KSDATAFORMAT {
     Specifier: GUID,
 }}
 pub type PKSDATAFORMAT = *mut KSDATAFORMAT;
-STRUCT!{struct KSIDENTIFIER_s {
+STRUCT! {struct KSIDENTIFIER_s {
     Set: GUID,
     Id: ULONG,
     Flags: ULONG,
 }}
-UNION!{union KSIDENTIFIER {
+UNION! {union KSIDENTIFIER {
     [u64; 3],
     s s_mut: KSIDENTIFIER_s,
     Alignment Alignment_mut: LONGLONG,
@@ -40,7 +40,7 @@ pub type KSMETHOD = KSIDENTIFIER;
 pub type PKSMETHOD = *mut KSIDENTIFIER;
 pub type KSEVENT = KSIDENTIFIER;
 pub type PKSEVENT = *mut KSIDENTIFIER;
-ENUM!{enum EPcxConnectionType {
+ENUM! {enum EPcxConnectionType {
     eConnTypeUnknown = 0,
     eConnType3Point5mm = 1,
     eConnTypeQuarter = 2,
@@ -54,7 +54,7 @@ ENUM!{enum EPcxConnectionType {
     eConnTypeRJ11Modem = 10,
     eConnTypeCombination = 11,
 }}
-ENUM!{enum EPcxGeoLocation {
+ENUM! {enum EPcxGeoLocation {
     eGeoLocRear = 1,
     eGeoLocFront = 2,
     eGeoLocLeft = 3,
@@ -71,19 +71,19 @@ ENUM!{enum EPcxGeoLocation {
     eGeoLocNotApplicable = 14,
     eGeoLocReserved6 = 15,
 }}
-ENUM!{enum EPcxGenLocation {
+ENUM! {enum EPcxGenLocation {
     eGenLocPrimaryBox = 0,
     eGenLocInternal = 1,
     eGenLocSeparate = 2,
     eGenLocOther = 3,
 }}
-ENUM!{enum EPxcPortConnection {
+ENUM! {enum EPxcPortConnection {
     ePortConnJack = 0,
     ePortConnIntegratedDevice = 1,
     ePortConnBothIntegratedAndJack = 2,
     ePortConnUnknown = 3,
 }}
-STRUCT!{struct KSJACK_DESCRIPTION {
+STRUCT! {struct KSJACK_DESCRIPTION {
     ChannelMapping: DWORD,
     Color: COLORREF,
     ConnectionType: EPcxConnectionType,
@@ -93,16 +93,16 @@ STRUCT!{struct KSJACK_DESCRIPTION {
     IsConnected: BOOL,
 }}
 pub type PKSJACK_DESCRIPTION = *mut KSJACK_DESCRIPTION;
-STRUCT!{struct LUID {
+STRUCT! {struct LUID {
     LowPart: DWORD,
     HighPart: LONG,
 }}
 pub type PLUID = *mut LUID;
-ENUM!{enum KSJACK_SINK_CONNECTIONTYPE {
+ENUM! {enum KSJACK_SINK_CONNECTIONTYPE {
     KSJACK_SINK_CONNECTIONTYPE_HDMI = 0,
     KSJACK_SINK_CONNECTIONTYPE_DISPLAYPORT = 1,
 }}
-STRUCT!{struct KSJACK_SINK_INFORMATION {
+STRUCT! {struct KSJACK_SINK_INFORMATION {
     ConnType: KSJACK_SINK_CONNECTIONTYPE,
     ManufacturerId: WORD,
     ProductId: WORD,
@@ -113,20 +113,20 @@ STRUCT!{struct KSJACK_SINK_INFORMATION {
     SinkDescription: [WCHAR; 32],
     PortId: LUID,
 }}
-STRUCT!{struct KSJACK_DESCRIPTION2 {
+STRUCT! {struct KSJACK_DESCRIPTION2 {
     DeviceStateInfo: DWORD,
     JackCapabilities: DWORD,
 }}
 pub type PKSJACK_DESCRIPTION2 = *mut KSJACK_DESCRIPTION2;
-ENUM!{enum DataFlow {
+ENUM! {enum DataFlow {
     In = 0,
     Out = 1,
 }}
-ENUM!{enum PartType {
+ENUM! {enum PartType {
     Connector = 0,
     Subunit = 1,
 }}
-ENUM!{enum ConnectorType {
+ENUM! {enum ConnectorType {
     Unknown_Connector = 0,
     Physical_Internal = 1,
     Physical_External = 2,
@@ -134,7 +134,7 @@ ENUM!{enum ConnectorType {
     Software_Fixed = 4,
     Network = 5,
 }}
-RIDL!{#[uuid(0x28f54685, 0x06fd, 0x11d2, 0xb2, 0x7a, 0x00, 0xa0, 0xc9, 0x22, 0x31, 0x96)]
+RIDL! {#[uuid(0x28f54685, 0x06fd, 0x11d2, 0xb2, 0x7a, 0x00, 0xa0, 0xc9, 0x22, 0x31, 0x96)]
 interface IKsControl(IKsControlVtbl): IUnknown(IUnknownVtbl) {
     fn KsProperty(
         Property: PKSPROPERTY,
@@ -158,7 +158,7 @@ interface IKsControl(IKsControlVtbl): IUnknown(IUnknownVtbl) {
         BytesReturned: *mut ULONG,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xc2f8e001, 0xf205, 0x4bc9, 0x99, 0xbc, 0xc1, 0x3b, 0x1e, 0x04, 0x8c, 0xcb)]
+RIDL! {#[uuid(0xc2f8e001, 0xf205, 0x4bc9, 0x99, 0xbc, 0xc1, 0x3b, 0x1e, 0x04, 0x8c, 0xcb)]
 interface IPerChannelDbLevel(IPerChannelDbLevelVtbl): IUnknown(IUnknownVtbl) {
     fn GetChannelCount(
         pcChannels: *mut UINT,
@@ -188,9 +188,9 @@ interface IPerChannelDbLevel(IPerChannelDbLevelVtbl): IUnknown(IUnknownVtbl) {
         pguidEventContext: LPCGUID,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x7fb7b48f, 0x531d, 0x44a2, 0xbc, 0xb3, 0x5a, 0xd5, 0xa1, 0x34, 0xb3, 0xdc)]
+RIDL! {#[uuid(0x7fb7b48f, 0x531d, 0x44a2, 0xbc, 0xb3, 0x5a, 0xd5, 0xa1, 0x34, 0xb3, 0xdc)]
 interface IAudioVolumeLevel(IAudioVolumeLevelVtbl): IPerChannelDbLevel(IPerChannelDbLevelVtbl) {}}
-RIDL!{#[uuid(0xbb11c46f, 0xec28, 0x493c, 0xb8, 0x8a, 0x5d, 0xb8, 0x80, 0x62, 0xce, 0x98)]
+RIDL! {#[uuid(0xbb11c46f, 0xec28, 0x493c, 0xb8, 0x8a, 0x5d, 0xb8, 0x80, 0x62, 0xce, 0x98)]
 interface IAudioChannelConfig(IAudioChannelConfigVtbl): IUnknown(IUnknownVtbl) {
     fn SetChannelConfig(
         dwConfig: DWORD,
@@ -200,7 +200,7 @@ interface IAudioChannelConfig(IAudioChannelConfigVtbl): IUnknown(IUnknownVtbl) {
         pdwConfig: *mut DWORD,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x7d8b1437, 0xdd53, 0x4350, 0x9c, 0x1b, 0x1e, 0xe2, 0x89, 0x0b, 0xd9, 0x38)]
+RIDL! {#[uuid(0x7d8b1437, 0xdd53, 0x4350, 0x9c, 0x1b, 0x1e, 0xe2, 0x89, 0x0b, 0xd9, 0x38)]
 interface IAudioLoudness(IAudioLoudnessVtbl): IUnknown(IUnknownVtbl) {
     fn GetEnabled(
         pbEnabled: *mut BOOL,
@@ -210,7 +210,7 @@ interface IAudioLoudness(IAudioLoudnessVtbl): IUnknown(IUnknownVtbl) {
         pguidEventContext: LPCGUID,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x4f03dc02, 0x5e6e, 0x4653, 0x8f, 0x72, 0xa0, 0x30, 0xc1, 0x23, 0xd5, 0x98)]
+RIDL! {#[uuid(0x4f03dc02, 0x5e6e, 0x4653, 0x8f, 0x72, 0xa0, 0x30, 0xc1, 0x23, 0xd5, 0x98)]
 interface IAudioInputSelector(IAudioInputSelectorVtbl): IUnknown(IUnknownVtbl) {
     fn GetSelection(
         pnIdSelected: *mut UINT,
@@ -220,7 +220,7 @@ interface IAudioInputSelector(IAudioInputSelectorVtbl): IUnknown(IUnknownVtbl) {
         pguidEventContext: LPCGUID,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xbb515f69, 0x94a7, 0x429e, 0x8b, 0x9c, 0x27, 0x1b, 0x3f, 0x11, 0xa3, 0xab)]
+RIDL! {#[uuid(0xbb515f69, 0x94a7, 0x429e, 0x8b, 0x9c, 0x27, 0x1b, 0x3f, 0x11, 0xa3, 0xab)]
 interface IAudioOutputSelector(IAudioOutputSelectorVtbl): IUnknown(IUnknownVtbl) {
     fn GetSelection(
         pnIdSelected: *mut UINT,
@@ -230,7 +230,7 @@ interface IAudioOutputSelector(IAudioOutputSelectorVtbl): IUnknown(IUnknownVtbl)
         pguidEventContext: LPCGUID,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xdf45aeea, 0xb74a, 0x4b6b, 0xaf, 0xad, 0x23, 0x66, 0xb6, 0xaa, 0x01, 0x2e)]
+RIDL! {#[uuid(0xdf45aeea, 0xb74a, 0x4b6b, 0xaf, 0xad, 0x23, 0x66, 0xb6, 0xaa, 0x01, 0x2e)]
 interface IAudioMute(IAudioMuteVtbl): IUnknown(IUnknownVtbl) {
     fn SetMute(
         bMuted: BOOL,
@@ -240,13 +240,13 @@ interface IAudioMute(IAudioMuteVtbl): IUnknown(IUnknownVtbl) {
         pbMuted: *mut BOOL,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xa2b1a1d9, 0x4db3, 0x425d, 0xa2, 0xb2, 0xbd, 0x33, 0x5c, 0xb3, 0xe2, 0xe5)]
+RIDL! {#[uuid(0xa2b1a1d9, 0x4db3, 0x425d, 0xa2, 0xb2, 0xbd, 0x33, 0x5c, 0xb3, 0xe2, 0xe5)]
 interface IAudioBass(IAudioBassVtbl): IPerChannelDbLevel(IPerChannelDbLevelVtbl) {}}
-RIDL!{#[uuid(0x5e54b6d7, 0xb44b, 0x40d9, 0x9a, 0x9e, 0xe6, 0x91, 0xd9, 0xce, 0x6e, 0xdf)]
+RIDL! {#[uuid(0x5e54b6d7, 0xb44b, 0x40d9, 0x9a, 0x9e, 0xe6, 0x91, 0xd9, 0xce, 0x6e, 0xdf)]
 interface IAudioMidrange(IAudioMidrangeVtbl): IPerChannelDbLevel(IPerChannelDbLevelVtbl) {}}
-RIDL!{#[uuid(0x0a717812, 0x694e, 0x4907, 0xb7, 0x4b, 0xba, 0xfa, 0x5c, 0xfd, 0xca, 0x7b)]
+RIDL! {#[uuid(0x0a717812, 0x694e, 0x4907, 0xb7, 0x4b, 0xba, 0xfa, 0x5c, 0xfd, 0xca, 0x7b)]
 interface IAudioTreble(IAudioTrebleVtbl): IPerChannelDbLevel(IPerChannelDbLevelVtbl) {}}
-RIDL!{#[uuid(0x85401fd4, 0x6de4, 0x4b9d, 0x98, 0x69, 0x2d, 0x67, 0x53, 0xa8, 0x2f, 0x3c)]
+RIDL! {#[uuid(0x85401fd4, 0x6de4, 0x4b9d, 0x98, 0x69, 0x2d, 0x67, 0x53, 0xa8, 0x2f, 0x3c)]
 interface IAudioAutoGainControl(IAudioAutoGainControlVtbl): IUnknown(IUnknownVtbl) {
     fn GetEnabled(
         pbEnabled: *mut BOOL,
@@ -256,7 +256,7 @@ interface IAudioAutoGainControl(IAudioAutoGainControlVtbl): IUnknown(IUnknownVtb
         pguidEventContext: LPCGUID,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xdd79923c, 0x0599, 0x45e0, 0xb8, 0xb6, 0xc8, 0xdf, 0x7d, 0xb6, 0xe7, 0x96)]
+RIDL! {#[uuid(0xdd79923c, 0x0599, 0x45e0, 0xb8, 0xb6, 0xc8, 0xdf, 0x7d, 0xb6, 0xe7, 0x96)]
 interface IAudioPeakMeter(IAudioPeakMeterVtbl): IUnknown(IUnknownVtbl) {
     fn GetChannelCount(
         pcChannels: *mut UINT,
@@ -266,7 +266,7 @@ interface IAudioPeakMeter(IAudioPeakMeterVtbl): IUnknown(IUnknownVtbl) {
         pfLevel: *mut c_float,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x3b22bcbf, 0x2586, 0x4af0, 0x85, 0x83, 0x20, 0x5d, 0x39, 0x1b, 0x80, 0x7c)]
+RIDL! {#[uuid(0x3b22bcbf, 0x2586, 0x4af0, 0x85, 0x83, 0x20, 0x5d, 0x39, 0x1b, 0x80, 0x7c)]
 interface IDeviceSpecificProperty(IDeviceSpecificPropertyVtbl): IUnknown(IUnknownVtbl) {
     fn GetType(
         pVType: *mut VARTYPE,
@@ -286,7 +286,7 @@ interface IDeviceSpecificProperty(IDeviceSpecificPropertyVtbl): IUnknown(IUnknow
         plStepping: *mut LONG,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x3cb4a69d, 0xbb6f, 0x4d2b, 0x95, 0xb7, 0x45, 0x2d, 0x2c, 0x15, 0x5d, 0xb5)]
+RIDL! {#[uuid(0x3cb4a69d, 0xbb6f, 0x4d2b, 0x95, 0xb7, 0x45, 0x2d, 0x2c, 0x15, 0x5d, 0xb5)]
 interface IKsFormatSupport(IKsFormatSupportVtbl): IUnknown(IUnknownVtbl) {
     fn IsFormatSupported(
         pKsFormat: PKSDATAFORMAT,
@@ -297,7 +297,7 @@ interface IKsFormatSupport(IKsFormatSupportVtbl): IUnknown(IUnknownVtbl) {
         ppKsFormat: *mut PKSDATAFORMAT,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x4509f757, 0x2d46, 0x4637, 0x8e, 0x62, 0xce, 0x7d, 0xb9, 0x44, 0xf5, 0x7b)]
+RIDL! {#[uuid(0x4509f757, 0x2d46, 0x4637, 0x8e, 0x62, 0xce, 0x7d, 0xb9, 0x44, 0xf5, 0x7b)]
 interface IKsJackDescription(IKsJackDescriptionVtbl): IUnknown(IUnknownVtbl) {
     fn GetJackCount(
         pcJacks: *mut UINT,
@@ -307,7 +307,7 @@ interface IKsJackDescription(IKsJackDescriptionVtbl): IUnknown(IUnknownVtbl) {
         pDescription: *mut KSJACK_DESCRIPTION,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x478f3a9b, 0xe0c9, 0x4827, 0x92, 0x28, 0x6f, 0x55, 0x05, 0xff, 0xe7, 0x6a)]
+RIDL! {#[uuid(0x478f3a9b, 0xe0c9, 0x4827, 0x92, 0x28, 0x6f, 0x55, 0x05, 0xff, 0xe7, 0x6a)]
 interface IKsJackDescription2(IKsJackDescription2Vtbl): IUnknown(IUnknownVtbl) {
     fn GetJackCount(
         pcJacks: *mut UINT,
@@ -317,19 +317,19 @@ interface IKsJackDescription2(IKsJackDescription2Vtbl): IUnknown(IUnknownVtbl) {
         pDescription2: *mut KSJACK_DESCRIPTION2,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xd9bd72ed, 0x290f, 0x4581, 0x9f, 0xf3, 0x61, 0x02, 0x7a, 0x8f, 0xe5, 0x32)]
+RIDL! {#[uuid(0xd9bd72ed, 0x290f, 0x4581, 0x9f, 0xf3, 0x61, 0x02, 0x7a, 0x8f, 0xe5, 0x32)]
 interface IKsJackSinkInformation(IKsJackSinkInformationVtbl): IUnknown(IUnknownVtbl) {
     fn GetJackSinkInformation(
         pJackSinkInformation: *mut KSJACK_SINK_INFORMATION,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xc99af463, 0xd629, 0x4ec4, 0x8c, 0x00, 0xe5, 0x4d, 0x68, 0x15, 0x42, 0x48)]
+RIDL! {#[uuid(0xc99af463, 0xd629, 0x4ec4, 0x8c, 0x00, 0xe5, 0x4d, 0x68, 0x15, 0x42, 0x48)]
 interface IKsJackContainerId(IKsJackContainerIdVtbl): IUnknown(IUnknownVtbl) {
     fn GetJackContainerId(
         pJackContainerId: *mut GUID,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x6daa848c, 0x5eb0, 0x45cc, 0xae, 0xa5, 0x99, 0x8a, 0x2c, 0xda, 0x1f, 0xfb)]
+RIDL! {#[uuid(0x6daa848c, 0x5eb0, 0x45cc, 0xae, 0xa5, 0x99, 0x8a, 0x2c, 0xda, 0x1f, 0xfb)]
 interface IPartsList(IPartsListVtbl): IUnknown(IUnknownVtbl) {
     fn GetCount(
         pCount: *mut UINT,
@@ -339,7 +339,7 @@ interface IPartsList(IPartsListVtbl): IUnknown(IUnknownVtbl) {
         ppPart: *mut *mut IPart,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xae2de0e4, 0x5bca, 0x4f2d, 0xaa, 0x46, 0x5d, 0x13, 0xf8, 0xfd, 0xb3, 0xa9)]
+RIDL! {#[uuid(0xae2de0e4, 0x5bca, 0x4f2d, 0xaa, 0x46, 0x5d, 0x13, 0xf8, 0xfd, 0xb3, 0xa9)]
 interface IPart(IPartVtbl): IUnknown(IUnknownVtbl) {
     fn GetName(
         ppwstrName: *mut LPWSTR,
@@ -385,7 +385,7 @@ interface IPart(IPartVtbl): IUnknown(IUnknownVtbl) {
         pNotify: *mut IControlChangeNotify,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x9c2c4058, 0x23f5, 0x41de, 0x87, 0x7a, 0xdf, 0x3a, 0xf2, 0x36, 0xa0, 0x9e)]
+RIDL! {#[uuid(0x9c2c4058, 0x23f5, 0x41de, 0x87, 0x7a, 0xdf, 0x3a, 0xf2, 0x36, 0xa0, 0x9e)]
 interface IConnector(IConnectorVtbl): IUnknown(IUnknownVtbl) {
     fn GetType(
         pType: *mut ConnectorType,
@@ -410,9 +410,9 @@ interface IConnector(IConnectorVtbl): IUnknown(IUnknownVtbl) {
         ppwstrDeviceId: *mut LPWSTR,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x82149a85, 0xdba6, 0x4487, 0x86, 0xbb, 0xea, 0x8f, 0x7f, 0xef, 0xcc, 0x71)]
+RIDL! {#[uuid(0x82149a85, 0xdba6, 0x4487, 0x86, 0xbb, 0xea, 0x8f, 0x7f, 0xef, 0xcc, 0x71)]
 interface ISubunit(ISubunitVtbl): IUnknown(IUnknownVtbl) {}}
-RIDL!{#[uuid(0x45d37c3f, 0x5140, 0x444a, 0xae, 0x24, 0x40, 0x07, 0x89, 0xf3, 0xcb, 0xf3)]
+RIDL! {#[uuid(0x45d37c3f, 0x5140, 0x444a, 0xae, 0x24, 0x40, 0x07, 0x89, 0xf3, 0xcb, 0xf3)]
 interface IControlInterface(IControlInterfaceVtbl): IUnknown(IUnknownVtbl) {
     fn GetName(
         ppwstrName: *mut LPWSTR,
@@ -421,14 +421,14 @@ interface IControlInterface(IControlInterfaceVtbl): IUnknown(IUnknownVtbl) {
         pIID: *mut GUID,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0xa09513ed, 0xc709, 0x4d21, 0xbd, 0x7b, 0x5f, 0x34, 0xc4, 0x7f, 0x39, 0x47)]
+RIDL! {#[uuid(0xa09513ed, 0xc709, 0x4d21, 0xbd, 0x7b, 0x5f, 0x34, 0xc4, 0x7f, 0x39, 0x47)]
 interface IControlChangeNotify(IControlChangeNotifyVtbl): IUnknown(IUnknownVtbl) {
     fn OnNotify(
         dwSenderProcessId: DWORD,
         pguidEventContext: LPCGUID,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x2a07407e, 0x6497, 0x4a18, 0x97, 0x87, 0x32, 0xf7, 0x9b, 0xd0, 0xd9, 0x8f)]
+RIDL! {#[uuid(0x2a07407e, 0x6497, 0x4a18, 0x97, 0x87, 0x32, 0xf7, 0x9b, 0xd0, 0xd9, 0x8f)]
 interface IDeviceTopology(IDeviceTopologyVtbl): IUnknown(IUnknownVtbl) {
     fn GetConnectorCount(
         pCount: *mut UINT,
@@ -458,5 +458,5 @@ interface IDeviceTopology(IDeviceTopologyVtbl): IUnknown(IUnknownVtbl) {
         ppParts: *mut *mut IPartsList,
     ) -> HRESULT,
 }}
-RIDL!{#[uuid(0x1df639d0, 0x5ec1, 0x47aa, 0x93, 0x79, 0x82, 0x8d, 0xc1, 0xaa, 0x8c, 0x59)]
+RIDL! {#[uuid(0x1df639d0, 0x5ec1, 0x47aa, 0x93, 0x79, 0x82, 0x8d, 0xc1, 0xaa, 0x8c, 0x59)]
 class DeviceTopology;}

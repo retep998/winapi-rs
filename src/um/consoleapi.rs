@@ -11,15 +11,9 @@ use um::winnt::{HANDLE, HRESULT, VOID};
 extern "system" {
     pub fn AllocConsole() -> BOOL;
     pub fn GetConsoleCP() -> UINT;
-    pub fn GetConsoleMode(
-        hConsoleHandle: HANDLE,
-        lpMode: LPDWORD,
-    ) -> BOOL;
+    pub fn GetConsoleMode(hConsoleHandle: HANDLE, lpMode: LPDWORD) -> BOOL;
     pub fn GetConsoleOutputCP() -> UINT;
-    pub fn GetNumberOfConsoleInputEvents(
-        hConsoleInput: HANDLE,
-        lpNumberOfEvents: LPDWORD,
-    ) -> BOOL;
+    pub fn GetNumberOfConsoleInputEvents(hConsoleInput: HANDLE, lpNumberOfEvents: LPDWORD) -> BOOL;
     pub fn PeekConsoleInputA(
         hConsoleInput: HANDLE,
         lpBuffer: PINPUT_RECORD,
@@ -52,14 +46,8 @@ extern "system" {
         nLength: DWORD,
         lpNumberOfEventsRead: LPDWORD,
     ) -> BOOL;
-    pub fn SetConsoleCtrlHandler(
-        HandlerRoutine: PHANDLER_ROUTINE,
-        Add: BOOL,
-    ) -> BOOL;
-    pub fn SetConsoleMode(
-        hConsoleHandle: HANDLE,
-        dwMode: DWORD,
-    ) -> BOOL;
+    pub fn SetConsoleCtrlHandler(HandlerRoutine: PHANDLER_ROUTINE, Add: BOOL) -> BOOL;
+    pub fn SetConsoleMode(hConsoleHandle: HANDLE, dwMode: DWORD) -> BOOL;
     pub fn WriteConsoleA(
         hConsoleOutput: HANDLE,
         lpBuffer: *const VOID,
@@ -81,11 +69,6 @@ extern "system" {
         dwFlags: DWORD,
         phPC: *mut HPCON,
     ) -> HRESULT;
-    pub fn ResizePseudoConsole(
-        hPC: HPCON,
-        size: COORD,
-    ) -> HRESULT;
-    pub fn ClosePseudoConsole(
-        hPC: HPCON,
-    );
+    pub fn ResizePseudoConsole(hPC: HPCON, size: COORD) -> HRESULT;
+    pub fn ClosePseudoConsole(hPC: HPCON);
 }

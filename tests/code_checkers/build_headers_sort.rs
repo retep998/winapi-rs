@@ -8,35 +8,34 @@ use std::io::{self, Write};
 use utils::{get_between_quotes, read_file};
 
 fn get_headers(entries: &str) -> Vec<String> {
-    entries.split(',')
+    entries
+        .split(',')
         .map(|x| get_between_quotes(x).to_owned())
         .filter(|x| !x.is_empty())
         .collect()
 }
 
-fn check_inner_imports(
-    line_pos: usize,
-    some_text: &str,
-    imports: &[String]
-) -> u32 {
+fn check_inner_imports(line_pos: usize, some_text: &str, imports: &[String]) -> u32 {
     let mut errors = 0;
     if imports.len() > 1 {
         for pos in 0..imports.len() - 1 {
             if imports[pos] > imports[pos + 1] {
-                writeln!(&mut io::stderr(),
-                         "[build.rs:{}] In {}: \"{}\" should be after \"{}\"",
-                         line_pos,
-                         some_text,
-                         imports[pos],
-                         imports[pos + 1]).unwrap();
+                writeln!(
+                    &mut io::stderr(),
+                    "[build.rs:{}] In {}: \"{}\" should be after \"{}\"",
+                    line_pos,
+                    some_text,
+                    imports[pos],
+                    imports[pos + 1]
+                )
+                .unwrap();
                 errors += 1;
             }
         }
         if errors > 0 {
             let mut sorted = imports.to_vec();
             sorted.sort();
-            writeln!(&mut io::stderr(), "==> Correct imports: \"&{:?}\"",
-                     sorted).unwrap();
+            writeln!(&mut io::stderr(), "==> Correct imports: \"&{:?}\"", sorted).unwrap();
         }
     }
     errors
@@ -79,11 +78,14 @@ fn check_build_headers_sorted() {
         if entry.len() > 1 {
             for pos in 0..entry.len() - 1 {
                 if entry[pos].0 > entry[pos + 1].0 {
-                    writeln!(&mut io::stderr(),
-                             "[build.rs:{}] \"{}\" should be after \"{}\"",
-                             entry[pos].1,
-                             entry[pos].2,
-                             entry[pos + 1].2).unwrap();
+                    writeln!(
+                        &mut io::stderr(),
+                        "[build.rs:{}] \"{}\" should be after \"{}\"",
+                        entry[pos].1,
+                        entry[pos].2,
+                        entry[pos + 1].2
+                    )
+                    .unwrap();
                     errors += 1;
                 }
             }

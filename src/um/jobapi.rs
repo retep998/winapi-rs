@@ -6,9 +6,5 @@
 use shared::minwindef::{BOOL, PBOOL};
 use um::winnt::HANDLE;
 extern "system" {
-    pub fn IsProcessInJob(
-        ProcessHandle: HANDLE,
-        JobHandle: HANDLE,
-        Result: PBOOL,
-    ) -> BOOL;
+    pub fn IsProcessInJob(ProcessHandle: HANDLE, JobHandle: HANDLE, Result: PBOOL) -> BOOL;
 }

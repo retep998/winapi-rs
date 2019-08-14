@@ -8,11 +8,7 @@ use shared::lmcons::{EVLEN, NET_API_STATUS, SNLEN};
 use shared::minwindef::{DWORD, LPVOID};
 use um::winnt::{LPCWSTR, WCHAR};
 extern "system" {
-    pub fn NetAlertRaise(
-        AlertType: LPCWSTR,
-        Buffer: LPVOID,
-        BufferSize: DWORD,
-    ) -> NET_API_STATUS;
+    pub fn NetAlertRaise(AlertType: LPCWSTR, Buffer: LPVOID, BufferSize: DWORD) -> NET_API_STATUS;
     pub fn NetAlertRaiseEx(
         AlertType: LPCWSTR,
         VariableInfo: LPVOID,
@@ -20,26 +16,26 @@ extern "system" {
         ServiceName: LPCWSTR,
     ) -> NET_API_STATUS;
 }
-STRUCT!{struct STD_ALERT {
+STRUCT! {struct STD_ALERT {
     alrt_timestamp: DWORD,
     alrt_eventname: [WCHAR; EVLEN + 1],
     alrt_servicename: [WCHAR; SNLEN + 1],
 }}
 pub type PSTD_ALERT = *mut STD_ALERT;
 pub type LPSTD_ALERT = *mut STD_ALERT;
-STRUCT!{struct ADMIN_OTHER_INFO {
+STRUCT! {struct ADMIN_OTHER_INFO {
     alrtad_errcode: DWORD,
     alrtad_numstrings: DWORD,
 }}
 pub type PADMIN_OTHER_INFO = *mut ADMIN_OTHER_INFO;
 pub type LPADMIN_OTHER_INFO = *mut ADMIN_OTHER_INFO;
-STRUCT!{struct ERRLOG_OTHER_INFO {
+STRUCT! {struct ERRLOG_OTHER_INFO {
     alrter_errcode: DWORD,
     alrter_offset: DWORD,
 }}
 pub type PERRLOG_OTHER_INFO = *mut ERRLOG_OTHER_INFO;
 pub type LPERRLOG_OTHER_INFO = *mut ERRLOG_OTHER_INFO;
-STRUCT!{struct PRINT_OTHER_INFO {
+STRUCT! {struct PRINT_OTHER_INFO {
     alrtpr_jobid: DWORD,
     alrtpr_status: DWORD,
     alrtpr_submitted: DWORD,
@@ -47,7 +43,7 @@ STRUCT!{struct PRINT_OTHER_INFO {
 }}
 pub type PPRINT_OTHER_INFO = *mut PRINT_OTHER_INFO;
 pub type LPPRINT_OTHER_INFO = *mut PRINT_OTHER_INFO;
-STRUCT!{struct USER_OTHER_INFO {
+STRUCT! {struct USER_OTHER_INFO {
     alrtus_errcode: DWORD,
     alrtus_numstrings: DWORD,
 }}

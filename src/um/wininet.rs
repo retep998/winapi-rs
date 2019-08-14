@@ -7,16 +7,14 @@
 use ctypes::c_int;
 use shared::basetsd::DWORD_PTR;
 use shared::minwindef::{
-    BOOL, DWORD, FALSE, FILETIME, INT, LPBYTE,
-    LPCVOID, LPDWORD, LPVOID, PBYTE, PDWORD, TRUE, WORD,
+    BOOL, DWORD, FALSE, FILETIME, INT, LPBYTE, LPCVOID, LPDWORD, LPVOID, PBYTE, PDWORD, TRUE, WORD,
 };
 use shared::ntdef::{LONG, LONGLONG, PLONG};
 use shared::windef::HWND;
 use um::minwinbase::{LPWIN32_FIND_DATAA, LPWIN32_FIND_DATAW, SYSTEMTIME};
 use um::winineti::INTERNET_FLAG_BGUPDATE;
 use um::winnt::{
-    CHAR, DWORDLONG, HANDLE, LPCSTR, LPCWSTR,
-    LPSTR, LPWSTR, PCWSTR, PSTR, PWSTR, WCHAR,
+    CHAR, DWORDLONG, HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PCWSTR, PSTR, PWSTR, WCHAR,
 };
 pub type HINTERNET = LPVOID;
 pub type LPHINTERNET = *mut HINTERNET;
@@ -35,8 +33,8 @@ pub const INTERNET_MAX_PORT_NUMBER_LENGTH: usize = 5;
 pub const INTERNET_MAX_PORT_NUMBER_VALUE: DWORD = 65535;
 pub const INTERNET_MAX_PATH_LENGTH: usize = 2048;
 pub const INTERNET_MAX_SCHEME_LENGTH: usize = 32;
-pub const INTERNET_MAX_URL_LENGTH: usize = INTERNET_MAX_SCHEME_LENGTH + 3
-    + INTERNET_MAX_PATH_LENGTH;
+pub const INTERNET_MAX_URL_LENGTH: usize =
+    INTERNET_MAX_SCHEME_LENGTH + 3 + INTERNET_MAX_PATH_LENGTH;
 pub const INTERNET_KEEP_ALIVE_UNKNOWN: DWORD = -1i32 as u32;
 pub const INTERNET_KEEP_ALIVE_ENABLED: DWORD = 1;
 pub const INTERNET_KEEP_ALIVE_DISABLED: DWORD = 0;
@@ -83,21 +81,41 @@ pub const INTERNET_FLAG_MUST_CACHE_REQUEST: DWORD = INTERNET_FLAG_NEED_FILE;
 pub const INTERNET_FLAG_TRANSFER_ASCII: DWORD = FTP_TRANSFER_TYPE_ASCII;
 pub const INTERNET_FLAG_TRANSFER_BINARY: DWORD = FTP_TRANSFER_TYPE_BINARY;
 pub const SECURITY_INTERNET_MASK: DWORD = INTERNET_FLAG_IGNORE_CERT_CN_INVALID
-    | INTERNET_FLAG_IGNORE_CERT_DATE_INVALID | INTERNET_FLAG_IGNORE_REDIRECT_TO_HTTPS
+    | INTERNET_FLAG_IGNORE_CERT_DATE_INVALID
+    | INTERNET_FLAG_IGNORE_REDIRECT_TO_HTTPS
     | INTERNET_FLAG_IGNORE_REDIRECT_TO_HTTP;
 pub const SECURITY_IGNORE_ERROR_MASK: DWORD = INTERNET_FLAG_IGNORE_CERT_CN_INVALID
-    | INTERNET_FLAG_IGNORE_CERT_DATE_INVALID | SECURITY_FLAG_IGNORE_UNKNOWN_CA
+    | INTERNET_FLAG_IGNORE_CERT_DATE_INVALID
+    | SECURITY_FLAG_IGNORE_UNKNOWN_CA
     | SECURITY_FLAG_IGNORE_REVOCATION;
-pub const INTERNET_FLAGS_MASK: DWORD = INTERNET_FLAG_RELOAD | INTERNET_FLAG_RAW_DATA
-    | INTERNET_FLAG_EXISTING_CONNECT | INTERNET_FLAG_ASYNC | INTERNET_FLAG_PASSIVE
-    | INTERNET_FLAG_NO_CACHE_WRITE | INTERNET_FLAG_MAKE_PERSISTENT | INTERNET_FLAG_FROM_CACHE
-    | INTERNET_FLAG_SECURE | INTERNET_FLAG_KEEP_CONNECTION | INTERNET_FLAG_NO_AUTO_REDIRECT
-    | INTERNET_FLAG_READ_PREFETCH | INTERNET_FLAG_NO_COOKIES | INTERNET_FLAG_NO_AUTH
-    | INTERNET_FLAG_CACHE_IF_NET_FAIL | SECURITY_INTERNET_MASK | INTERNET_FLAG_RESYNCHRONIZE
-    | INTERNET_FLAG_HYPERLINK | INTERNET_FLAG_NO_UI | INTERNET_FLAG_PRAGMA_NOCACHE
-    | INTERNET_FLAG_CACHE_ASYNC | INTERNET_FLAG_FORMS_SUBMIT | INTERNET_FLAG_NEED_FILE
-    | INTERNET_FLAG_RESTRICTED_ZONE | INTERNET_FLAG_TRANSFER_BINARY | INTERNET_FLAG_TRANSFER_ASCII
-    | INTERNET_FLAG_FWD_BACK | INTERNET_FLAG_BGUPDATE;
+pub const INTERNET_FLAGS_MASK: DWORD = INTERNET_FLAG_RELOAD
+    | INTERNET_FLAG_RAW_DATA
+    | INTERNET_FLAG_EXISTING_CONNECT
+    | INTERNET_FLAG_ASYNC
+    | INTERNET_FLAG_PASSIVE
+    | INTERNET_FLAG_NO_CACHE_WRITE
+    | INTERNET_FLAG_MAKE_PERSISTENT
+    | INTERNET_FLAG_FROM_CACHE
+    | INTERNET_FLAG_SECURE
+    | INTERNET_FLAG_KEEP_CONNECTION
+    | INTERNET_FLAG_NO_AUTO_REDIRECT
+    | INTERNET_FLAG_READ_PREFETCH
+    | INTERNET_FLAG_NO_COOKIES
+    | INTERNET_FLAG_NO_AUTH
+    | INTERNET_FLAG_CACHE_IF_NET_FAIL
+    | SECURITY_INTERNET_MASK
+    | INTERNET_FLAG_RESYNCHRONIZE
+    | INTERNET_FLAG_HYPERLINK
+    | INTERNET_FLAG_NO_UI
+    | INTERNET_FLAG_PRAGMA_NOCACHE
+    | INTERNET_FLAG_CACHE_ASYNC
+    | INTERNET_FLAG_FORMS_SUBMIT
+    | INTERNET_FLAG_NEED_FILE
+    | INTERNET_FLAG_RESTRICTED_ZONE
+    | INTERNET_FLAG_TRANSFER_BINARY
+    | INTERNET_FLAG_TRANSFER_ASCII
+    | INTERNET_FLAG_FWD_BACK
+    | INTERNET_FLAG_BGUPDATE;
 pub const INTERNET_ERROR_MASK_INSERT_CDROM: DWORD = 0x1;
 pub const INTERNET_ERROR_MASK_COMBINED_SEC_CERT: DWORD = 0x2;
 pub const INTERNET_ERROR_MASK_NEED_MSN_SSPI_PKG: DWORD = 0x4;
@@ -107,7 +125,7 @@ pub const WININET_API_FLAG_ASYNC: DWORD = 0x00000001;
 pub const WININET_API_FLAG_SYNC: DWORD = 0x00000004;
 pub const WININET_API_FLAG_USE_CONTEXT: DWORD = 0x00000008;
 pub const INTERNET_NO_CALLBACK: DWORD = 0;
-ENUM!{enum INTERNET_SCHEME {
+ENUM! {enum INTERNET_SCHEME {
     INTERNET_SCHEME_PARTIAL = -2i32 as u32,
     INTERNET_SCHEME_UNKNOWN = -1i32 as u32,
     INTERNET_SCHEME_DEFAULT = 0,
@@ -126,12 +144,12 @@ ENUM!{enum INTERNET_SCHEME {
     INTERNET_SCHEME_LAST = INTERNET_SCHEME_RES,
 }}
 pub type LPINTERNET_SCHEME = *mut INTERNET_SCHEME;
-STRUCT!{struct INTERNET_ASYNC_RESULT {
+STRUCT! {struct INTERNET_ASYNC_RESULT {
     dwResult: DWORD_PTR,
     dwError: DWORD,
 }}
 pub type LPINTERNET_ASYNC_RESULT = *mut INTERNET_ASYNC_RESULT;
-STRUCT!{struct INTERNET_DIAGNOSTIC_SOCKET_INFO {
+STRUCT! {struct INTERNET_DIAGNOSTIC_SOCKET_INFO {
     Socket: DWORD_PTR,
     SourcePort: DWORD,
     DestPort: DWORD,
@@ -142,35 +160,35 @@ pub const IDSI_FLAG_KEEP_ALIVE: DWORD = 0x00000001;
 pub const IDSI_FLAG_SECURE: DWORD = 0x00000002;
 pub const IDSI_FLAG_PROXY: DWORD = 0x00000004;
 pub const IDSI_FLAG_TUNNEL: DWORD = 0x00000008;
-STRUCT!{struct INTERNET_PROXY_INFO {
+STRUCT! {struct INTERNET_PROXY_INFO {
     dwAccessType: DWORD,
     lpszProxy: LPCWSTR,
     lpszProxyBypass: LPCWSTR,
 }}
 pub type LPINTERNET_PROXY_INFO = *mut INTERNET_PROXY_INFO;
-UNION!{union INTERNET_PER_CONN_OPTIONA_Value {
+UNION! {union INTERNET_PER_CONN_OPTIONA_Value {
     [u32; 2] [u64; 1],
     dwValue dwValue_mut: DWORD,
     pszValue pszValue_mut: LPSTR,
     ftValue ftValue_mut: FILETIME,
 }}
-STRUCT!{struct INTERNET_PER_CONN_OPTIONA {
+STRUCT! {struct INTERNET_PER_CONN_OPTIONA {
     dwOption: DWORD,
     Value: INTERNET_PER_CONN_OPTIONA_Value,
 }}
 pub type LPINTERNET_PER_CONN_OPTIONA = *mut INTERNET_PER_CONN_OPTIONA;
-UNION!{union INTERNET_PER_CONN_OPTIONW_Value {
+UNION! {union INTERNET_PER_CONN_OPTIONW_Value {
     [u32; 2] [u64; 1],
     dwValue dwValue_mut: DWORD,
     pszValue pszValue_mut: LPWSTR,
     ftValue ftValue_mut: FILETIME,
 }}
-STRUCT!{struct INTERNET_PER_CONN_OPTIONW {
+STRUCT! {struct INTERNET_PER_CONN_OPTIONW {
     dwOption: DWORD,
     Value: INTERNET_PER_CONN_OPTIONW_Value,
 }}
 pub type LPINTERNET_PER_CONN_OPTIONW = *mut INTERNET_PER_CONN_OPTIONW;
-STRUCT!{struct INTERNET_PER_CONN_OPTION_LISTA {
+STRUCT! {struct INTERNET_PER_CONN_OPTION_LISTA {
     dwSize: DWORD,
     pszConnection: LPSTR,
     dwOptionCount: DWORD,
@@ -178,7 +196,7 @@ STRUCT!{struct INTERNET_PER_CONN_OPTION_LISTA {
     pOptions: LPINTERNET_PER_CONN_OPTIONA,
 }}
 pub type LPINTERNET_PER_CONN_OPTION_LISTA = *mut INTERNET_PER_CONN_OPTION_LISTA;
-STRUCT!{struct INTERNET_PER_CONN_OPTION_LISTW {
+STRUCT! {struct INTERNET_PER_CONN_OPTION_LISTW {
     dwSize: DWORD,
     pszConnection: LPWSTR,
     dwOptionCount: DWORD,
@@ -207,23 +225,23 @@ pub const AUTO_PROXY_FLAG_MIGRATED: DWORD = 0x00000008;
 pub const AUTO_PROXY_FLAG_DONT_CACHE_PROXY_RESULT: DWORD = 0x00000010;
 pub const AUTO_PROXY_FLAG_CACHE_INIT_RUN: DWORD = 0x00000020;
 pub const AUTO_PROXY_FLAG_DETECTION_SUSPECT: DWORD = 0x00000040;
-STRUCT!{struct INTERNET_VERSION_INFO {
+STRUCT! {struct INTERNET_VERSION_INFO {
     dwMajorVersion: DWORD,
     dwMinorVersion: DWORD,
 }}
 pub type LPINTERNET_VERSION_INFO = *mut INTERNET_VERSION_INFO;
-STRUCT!{struct HTTP_VERSION_INFO {
+STRUCT! {struct HTTP_VERSION_INFO {
     dwMajorVersion: DWORD,
     dwMinorVersion: DWORD,
 }}
 pub type LPHTTP_VERSION_INFO = *mut HTTP_VERSION_INFO;
-STRUCT!{struct INTERNET_CONNECTED_INFO {
+STRUCT! {struct INTERNET_CONNECTED_INFO {
     dwConnectedState: DWORD,
     dwFlags: DWORD,
 }}
 pub type LPINTERNET_CONNECTED_INFO = *mut INTERNET_CONNECTED_INFO;
 pub const ISO_FORCE_DISCONNECTED: DWORD = 0x00000001;
-STRUCT!{struct URL_COMPONENTSA {
+STRUCT! {struct URL_COMPONENTSA {
     dwStructSize: DWORD,
     lpszScheme: LPSTR,
     dwSchemeLength: DWORD,
@@ -241,7 +259,7 @@ STRUCT!{struct URL_COMPONENTSA {
     dwExtraInfoLength: DWORD,
 }}
 pub type LPURL_COMPONENTSA = *mut URL_COMPONENTSA;
-STRUCT!{struct URL_COMPONENTSW {
+STRUCT! {struct URL_COMPONENTSW {
     dwStructSize: DWORD,
     lpszScheme: LPWSTR,
     dwSchemeLength: DWORD,
@@ -259,7 +277,7 @@ STRUCT!{struct URL_COMPONENTSW {
     dwExtraInfoLength: DWORD,
 }}
 pub type LPURL_COMPONENTSW = *mut URL_COMPONENTSW;
-STRUCT!{struct INTERNET_CERTIFICATE_INFO {
+STRUCT! {struct INTERNET_CERTIFICATE_INFO {
     ftExpiry: FILETIME,
     ftStart: FILETIME,
     lpszSubjectInfo: LPWSTR,
@@ -270,7 +288,7 @@ STRUCT!{struct INTERNET_CERTIFICATE_INFO {
     dwKeySize: DWORD,
 }}
 pub type LPINTERNET_CERTIFICATE_INFO = *mut INTERNET_CERTIFICATE_INFO;
-STRUCT!{struct INTERNET_BUFFERSA {
+STRUCT! {struct INTERNET_BUFFERSA {
     dwStructSize: DWORD,
     Next: *mut INTERNET_BUFFERSA,
     lpcszHeader: LPCSTR,
@@ -283,7 +301,7 @@ STRUCT!{struct INTERNET_BUFFERSA {
     dwOffsetHigh: DWORD,
 }}
 pub type LPINTERNET_BUFFERSA = *mut INTERNET_BUFFERSA;
-STRUCT!{struct INTERNET_BUFFERSW {
+STRUCT! {struct INTERNET_BUFFERSW {
     dwStructSize: DWORD,
     Next: *mut INTERNET_BUFFERSW,
     lpcszHeader: LPCWSTR,
@@ -462,12 +480,14 @@ pub const SECURITY_FLAG_IGNORE_CERT_DATE_INVALID: DWORD = INTERNET_FLAG_IGNORE_C
 pub const SECURITY_FLAG_IGNORE_REDIRECT_TO_HTTPS: DWORD = INTERNET_FLAG_IGNORE_REDIRECT_TO_HTTPS;
 pub const SECURITY_FLAG_IGNORE_REDIRECT_TO_HTTP: DWORD = INTERNET_FLAG_IGNORE_REDIRECT_TO_HTTP;
 pub const SECURITY_SET_MASK: DWORD = SECURITY_FLAG_IGNORE_REVOCATION
-    | SECURITY_FLAG_IGNORE_UNKNOWN_CA | SECURITY_FLAG_IGNORE_CERT_CN_INVALID
-    | SECURITY_FLAG_IGNORE_CERT_DATE_INVALID | SECURITY_FLAG_IGNORE_WRONG_USAGE;
+    | SECURITY_FLAG_IGNORE_UNKNOWN_CA
+    | SECURITY_FLAG_IGNORE_CERT_CN_INVALID
+    | SECURITY_FLAG_IGNORE_CERT_DATE_INVALID
+    | SECURITY_FLAG_IGNORE_WRONG_USAGE;
 pub const AUTODIAL_MODE_NEVER: DWORD = 1;
 pub const AUTODIAL_MODE_ALWAYS: DWORD = 2;
 pub const AUTODIAL_MODE_NO_NETWORK_PRESENT: DWORD = 4;
-FN!{stdcall INTERNET_STATUS_CALLBACK(
+FN! {stdcall INTERNET_STATUS_CALLBACK(
     HINTERNET,
     DWORD_PTR,
     DWORD,
@@ -506,7 +526,7 @@ pub const INTERNET_STATE_DISCONNECTED: DWORD = 0x00000002;
 pub const INTERNET_STATE_DISCONNECTED_BY_USER: DWORD = 0x00000010;
 pub const INTERNET_STATE_IDLE: DWORD = 0x00000100;
 pub const INTERNET_STATE_BUSY: DWORD = 0x00000200;
-ENUM!{enum InternetCookieState {
+ENUM! {enum InternetCookieState {
     COOKIE_STATE_UNKNOWN = 0x0,
     COOKIE_STATE_ACCEPT = 0x1,
     COOKIE_STATE_PROMPT = 0x2,
@@ -515,7 +535,7 @@ ENUM!{enum InternetCookieState {
     COOKIE_STATE_REJECT = 0x5,
     COOKIE_STATE_MAX = COOKIE_STATE_REJECT,
 }}
-STRUCT!{struct IncomingCookieState {
+STRUCT! {struct IncomingCookieState {
     cSession: c_int,
     cPersistent: c_int,
     cAccepted: c_int,
@@ -524,18 +544,18 @@ STRUCT!{struct IncomingCookieState {
     cBlocked: c_int,
     pszLocation: LPCSTR,
 }}
-STRUCT!{struct OutgoingCookieState {
+STRUCT! {struct OutgoingCookieState {
     cSent: c_int,
     cSuppressed: c_int,
     pszLocation: LPCSTR,
 }}
-STRUCT!{struct InternetCookieHistory {
+STRUCT! {struct InternetCookieHistory {
     fAccepted: BOOL,
     fLeashed: BOOL,
     fDowngraded: BOOL,
     fRejected: BOOL,
 }}
-STRUCT!{struct CookieDecision {
+STRUCT! {struct CookieDecision {
     dwCookieState: DWORD,
     fAllowSession: BOOL,
 }}
@@ -547,10 +567,18 @@ pub const FTP_TRANSFER_TYPE_MASK: DWORD = FTP_TRANSFER_TYPE_ASCII | FTP_TRANSFER
 pub const MAX_GOPHER_DISPLAY_TEXT: usize = 128;
 pub const MAX_GOPHER_SELECTOR_TEXT: usize = 256;
 pub const MAX_GOPHER_HOST_NAME: usize = INTERNET_MAX_HOST_NAME_LENGTH;
-pub const MAX_GOPHER_LOCATOR_LENGTH: usize = 1 + MAX_GOPHER_DISPLAY_TEXT + 1
-    + MAX_GOPHER_SELECTOR_TEXT + 1 + MAX_GOPHER_HOST_NAME + 1 + INTERNET_MAX_PORT_NUMBER_LENGTH
-    + 1 + 1 + 2;
-STRUCT!{struct GOPHER_FIND_DATAA {
+pub const MAX_GOPHER_LOCATOR_LENGTH: usize = 1
+    + MAX_GOPHER_DISPLAY_TEXT
+    + 1
+    + MAX_GOPHER_SELECTOR_TEXT
+    + 1
+    + MAX_GOPHER_HOST_NAME
+    + 1
+    + INTERNET_MAX_PORT_NUMBER_LENGTH
+    + 1
+    + 1
+    + 2;
+STRUCT! {struct GOPHER_FIND_DATAA {
     DisplayString: [CHAR; MAX_GOPHER_DISPLAY_TEXT+ 1],
     GopherType: DWORD,
     SizeLow: DWORD,
@@ -559,7 +587,7 @@ STRUCT!{struct GOPHER_FIND_DATAA {
     Locator: [CHAR; MAX_GOPHER_LOCATOR_LENGTH + 1],
 }}
 pub type LPGOPHER_FIND_DATAA = *mut GOPHER_FIND_DATAA;
-STRUCT!{struct GOPHER_FIND_DATAW {
+STRUCT! {struct GOPHER_FIND_DATAW {
     DisplayString: [WCHAR; MAX_GOPHER_DISPLAY_TEXT+ 1],
     GopherType: DWORD,
     SizeLow: DWORD,
@@ -594,87 +622,141 @@ pub const GOPHER_TYPE_ASK: DWORD = 0x40000000;
 pub const GOPHER_TYPE_GOPHER_PLUS: DWORD = 0x80000000;
 #[inline]
 pub fn IS_GOPHER_FILE(type_: DWORD) -> BOOL {
-    if (type_ & GOPHER_TYPE_FILE_MASK) != 0 { TRUE } else { FALSE }
+    if (type_ & GOPHER_TYPE_FILE_MASK) != 0 {
+        TRUE
+    } else {
+        FALSE
+    }
 }
 #[inline]
 pub fn IS_GOPHER_DIRECTORY(type_: DWORD) -> BOOL {
-    if (type_ & GOPHER_TYPE_DIRECTORY) != 0 { TRUE } else { FALSE }
+    if (type_ & GOPHER_TYPE_DIRECTORY) != 0 {
+        TRUE
+    } else {
+        FALSE
+    }
 }
 #[inline]
 pub fn IS_GOPHER_PHONE_SERVER(type_: DWORD) -> BOOL {
-    if (type_ & GOPHER_TYPE_CSO) != 0 { TRUE } else { FALSE }
+    if (type_ & GOPHER_TYPE_CSO) != 0 {
+        TRUE
+    } else {
+        FALSE
+    }
 }
 #[inline]
 pub fn IS_GOPHER_ERROR(type_: DWORD) -> BOOL {
-    if (type_ & GOPHER_TYPE_ERROR) != 0 { TRUE } else { FALSE }
+    if (type_ & GOPHER_TYPE_ERROR) != 0 {
+        TRUE
+    } else {
+        FALSE
+    }
 }
 #[inline]
 pub fn IS_GOPHER_INDEX_SERVER(type_: DWORD) -> BOOL {
-    if (type_ & GOPHER_TYPE_INDEX_SERVER) != 0 { TRUE } else { FALSE }
+    if (type_ & GOPHER_TYPE_INDEX_SERVER) != 0 {
+        TRUE
+    } else {
+        FALSE
+    }
 }
 #[inline]
 pub fn IS_GOPHER_TELNET_SESSION(type_: DWORD) -> BOOL {
-    if (type_ & GOPHER_TYPE_TELNET) != 0 { TRUE } else { FALSE }
+    if (type_ & GOPHER_TYPE_TELNET) != 0 {
+        TRUE
+    } else {
+        FALSE
+    }
 }
 #[inline]
 pub fn IS_GOPHER_BACKUP_SERVER(type_: DWORD) -> BOOL {
-    if (type_ & GOPHER_TYPE_REDUNDANT) != 0 { TRUE } else { FALSE }
+    if (type_ & GOPHER_TYPE_REDUNDANT) != 0 {
+        TRUE
+    } else {
+        FALSE
+    }
 }
 #[inline]
 pub fn IS_GOPHER_TN3270_SESSION(type_: DWORD) -> BOOL {
-    if (type_ & GOPHER_TYPE_TN3270) != 0 { TRUE } else { FALSE }
+    if (type_ & GOPHER_TYPE_TN3270) != 0 {
+        TRUE
+    } else {
+        FALSE
+    }
 }
 #[inline]
 pub fn IS_GOPHER_ASK(type_: DWORD) -> BOOL {
-    if (type_ & GOPHER_TYPE_ASK) != 0 { TRUE } else { FALSE }
+    if (type_ & GOPHER_TYPE_ASK) != 0 {
+        TRUE
+    } else {
+        FALSE
+    }
 }
 #[inline]
 pub fn IS_GOPHER_PLUS(type_: DWORD) -> BOOL {
-    if (type_ & GOPHER_TYPE_GOPHER_PLUS) != 0 { TRUE } else { FALSE }
+    if (type_ & GOPHER_TYPE_GOPHER_PLUS) != 0 {
+        TRUE
+    } else {
+        FALSE
+    }
 }
 #[inline]
 pub fn IS_GOPHER_TYPE_KNOWN(type_: DWORD) -> BOOL {
-    if (type_ & GOPHER_TYPE_UNKNOWN) != 0 { FALSE } else { TRUE }
+    if (type_ & GOPHER_TYPE_UNKNOWN) != 0 {
+        FALSE
+    } else {
+        TRUE
+    }
 }
-pub const GOPHER_TYPE_FILE_MASK: DWORD = GOPHER_TYPE_TEXT_FILE | GOPHER_TYPE_MAC_BINHEX
-    | GOPHER_TYPE_DOS_ARCHIVE | GOPHER_TYPE_UNIX_UUENCODED | GOPHER_TYPE_BINARY | GOPHER_TYPE_GIF
-    | GOPHER_TYPE_IMAGE | GOPHER_TYPE_BITMAP | GOPHER_TYPE_MOVIE | GOPHER_TYPE_SOUND
-    | GOPHER_TYPE_HTML | GOPHER_TYPE_PDF | GOPHER_TYPE_CALENDAR | GOPHER_TYPE_INLINE;
-STRUCT!{struct GOPHER_ADMIN_ATTRIBUTE_TYPE {
+pub const GOPHER_TYPE_FILE_MASK: DWORD = GOPHER_TYPE_TEXT_FILE
+    | GOPHER_TYPE_MAC_BINHEX
+    | GOPHER_TYPE_DOS_ARCHIVE
+    | GOPHER_TYPE_UNIX_UUENCODED
+    | GOPHER_TYPE_BINARY
+    | GOPHER_TYPE_GIF
+    | GOPHER_TYPE_IMAGE
+    | GOPHER_TYPE_BITMAP
+    | GOPHER_TYPE_MOVIE
+    | GOPHER_TYPE_SOUND
+    | GOPHER_TYPE_HTML
+    | GOPHER_TYPE_PDF
+    | GOPHER_TYPE_CALENDAR
+    | GOPHER_TYPE_INLINE;
+STRUCT! {struct GOPHER_ADMIN_ATTRIBUTE_TYPE {
     Comment: LPCWSTR,
     EmailAddress: LPCWSTR,
 }}
 pub type LPGOPHER_ADMIN_ATTRIBUTE_TYPE = *mut GOPHER_ADMIN_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_MOD_DATE_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_MOD_DATE_ATTRIBUTE_TYPE {
     DateAndTime: FILETIME,
 }}
 pub type LPGOPHER_MOD_DATE_ATTRIBUTE_TYPE = *mut GOPHER_MOD_DATE_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_TTL_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_TTL_ATTRIBUTE_TYPE {
     Ttl: DWORD,
 }}
 pub type LPGOPHER_TTL_ATTRIBUTE_TYPE = *mut GOPHER_TTL_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_SCORE_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_SCORE_ATTRIBUTE_TYPE {
     Score: INT,
 }}
 pub type LPGOPHER_SCORE_ATTRIBUTE_TYPE = *mut GOPHER_SCORE_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE {
     LowerBound: INT,
     UpperBound: INT,
 }}
 pub type LPGOPHER_SCORE_RANGE_ATTRIBUTE_TYPE = *mut GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_SITE_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_SITE_ATTRIBUTE_TYPE {
     Site: LPCWSTR,
 }}
 pub type LPGOPHER_SITE_ATTRIBUTE_TYPE = *mut GOPHER_SITE_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_ORGANIZATION_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_ORGANIZATION_ATTRIBUTE_TYPE {
     Organization: LPCWSTR,
 }}
 pub type LPGOPHER_ORGANIZATION_ATTRIBUTE_TYPE = *mut GOPHER_ORGANIZATION_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_LOCATION_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_LOCATION_ATTRIBUTE_TYPE {
     Location: LPCWSTR,
 }}
 pub type LPGOPHER_LOCATION_ATTRIBUTE_TYPE = *mut GOPHER_LOCATION_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE {
     DegreesNorth: INT,
     MinutesNorth: INT,
     SecondsNorth: INT,
@@ -684,43 +766,43 @@ STRUCT!{struct GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE {
 }}
 pub type LPGOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE =
     *mut GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_TIMEZONE_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_TIMEZONE_ATTRIBUTE_TYPE {
     Zone: INT,
 }}
 pub type LPGOPHER_TIMEZONE_ATTRIBUTE_TYPE = *mut GOPHER_TIMEZONE_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_PROVIDER_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_PROVIDER_ATTRIBUTE_TYPE {
     Provider: LPCWSTR,
 }}
 pub type LPGOPHER_PROVIDER_ATTRIBUTE_TYPE = *mut GOPHER_PROVIDER_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_VERSION_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_VERSION_ATTRIBUTE_TYPE {
     Version: LPCWSTR,
 }}
 pub type LPGOPHER_VERSION_ATTRIBUTE_TYPE = *mut GOPHER_VERSION_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_ABSTRACT_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_ABSTRACT_ATTRIBUTE_TYPE {
     ShortAbstract: LPCWSTR,
     AbstractFile: LPCWSTR,
 }}
 pub type LPGOPHER_ABSTRACT_ATTRIBUTE_TYPE = *mut GOPHER_ABSTRACT_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_VIEW_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_VIEW_ATTRIBUTE_TYPE {
     ContentType: LPCWSTR,
     Language: LPCWSTR,
     Size: DWORD,
 }}
 pub type LPGOPHER_VIEW_ATTRIBUTE_TYPE = *mut GOPHER_VIEW_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_VERONICA_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_VERONICA_ATTRIBUTE_TYPE {
     TreeWalk: BOOL,
 }}
 pub type LPGOPHER_VERONICA_ATTRIBUTE_TYPE = *mut GOPHER_VERONICA_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_ASK_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_ASK_ATTRIBUTE_TYPE {
     QuestionType: LPCWSTR,
     QuestionText: LPCWSTR,
 }}
 pub type LPGOPHER_ASK_ATTRIBUTE_TYPE = *mut GOPHER_ASK_ATTRIBUTE_TYPE;
-STRUCT!{struct GOPHER_UNKNOWN_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_UNKNOWN_ATTRIBUTE_TYPE {
     Text: LPCWSTR,
 }}
 pub type LPGOPHER_UNKNOWN_ATTRIBUTE_TYPE = *mut GOPHER_UNKNOWN_ATTRIBUTE_TYPE;
-UNION!{union GOPHER_ATTRIBUTE_TYPE_AttributeType {
+UNION! {union GOPHER_ATTRIBUTE_TYPE_AttributeType {
     [u32; 6] [u64; 3],
     Admin Admin_mut: GOPHER_ADMIN_ATTRIBUTE_TYPE,
     ModDate ModDate_mut: GOPHER_MOD_DATE_ATTRIBUTE_TYPE,
@@ -740,7 +822,7 @@ UNION!{union GOPHER_ATTRIBUTE_TYPE_AttributeType {
     Ask Ask_mut: GOPHER_ASK_ATTRIBUTE_TYPE,
     Unknown Unknown_mut: GOPHER_UNKNOWN_ATTRIBUTE_TYPE,
 }}
-STRUCT!{struct GOPHER_ATTRIBUTE_TYPE {
+STRUCT! {struct GOPHER_ATTRIBUTE_TYPE {
     CategoryId: DWORD,
     AttributeId: DWORD,
     AttributeType: GOPHER_ATTRIBUTE_TYPE_AttributeType,
@@ -795,7 +877,7 @@ pub const GOPHER_ATTRIBUTE_ID_ABSTRACT: DWORD = GOPHER_ATTRIBUTE_ID_BASE + 22;
 pub const GOPHER_ATTRIBUTE_ID_VIEW: DWORD = GOPHER_ATTRIBUTE_ID_BASE + 23;
 pub const GOPHER_ATTRIBUTE_ID_TREEWALK: DWORD = GOPHER_ATTRIBUTE_ID_BASE + 24;
 pub const GOPHER_ATTRIBUTE_ID_UNKNOWN: DWORD = GOPHER_ATTRIBUTE_ID_BASE + 25;
-FN!{stdcall GOPHER_ATTRIBUTE_ENUMERATOR(
+FN! {stdcall GOPHER_ATTRIBUTE_ENUMERATOR(
     LPGOPHER_ATTRIBUTE_TYPE,
     DWORD,
 ) -> BOOL}
@@ -900,7 +982,9 @@ pub const HTTP_QUERY_FLAG_NUMBER: DWORD = 0x20000000;
 pub const HTTP_QUERY_FLAG_COALESCE: DWORD = 0x10000000;
 pub const HTTP_QUERY_FLAG_NUMBER64: DWORD = 0x08000000;
 pub const HTTP_QUERY_MODIFIER_FLAGS_MASK: DWORD = HTTP_QUERY_FLAG_REQUEST_HEADERS
-    | HTTP_QUERY_FLAG_SYSTEMTIME | HTTP_QUERY_FLAG_NUMBER | HTTP_QUERY_FLAG_COALESCE
+    | HTTP_QUERY_FLAG_SYSTEMTIME
+    | HTTP_QUERY_FLAG_NUMBER
+    | HTTP_QUERY_FLAG_COALESCE
     | HTTP_QUERY_FLAG_NUMBER64;
 pub const HTTP_QUERY_HEADER_MASK: DWORD = !HTTP_QUERY_MODIFIER_FLAGS_MASK;
 pub const HTTP_STATUS_CONTINUE: DWORD = 100;
@@ -958,7 +1042,7 @@ pub const HSR_USE_CONTEXT: DWORD = WININET_API_FLAG_USE_CONTEXT;
 pub const HSR_INITIATE: DWORD = 0x00000008;
 pub const HSR_DOWNLOAD: DWORD = 0x00000010;
 pub const HSR_CHUNKED: DWORD = 0x00000020;
-STRUCT!{struct INTERNET_COOKIE2 {
+STRUCT! {struct INTERNET_COOKIE2 {
     pwszName: PWSTR,
     pwszValue: PWSTR,
     pwszDomain: PWSTR,
@@ -985,12 +1069,12 @@ pub const FLAGS_ERROR_UI_FLAGS_CHANGE_OPTIONS: DWORD = 0x02;
 pub const FLAGS_ERROR_UI_FLAGS_GENERATE_DATA: DWORD = 0x04;
 pub const FLAGS_ERROR_UI_FLAGS_NO_UI: DWORD = 0x08;
 pub const FLAGS_ERROR_UI_SERIALIZE_DIALOGS: DWORD = 0x10;
-FN!{stdcall PFN_AUTH_NOTIFY(
+FN! {stdcall PFN_AUTH_NOTIFY(
     DWORD_PTR,
     DWORD,
     LPVOID,
 ) -> DWORD}
-STRUCT!{struct INTERNET_AUTH_NOTIFY_DATA {
+STRUCT! {struct INTERNET_AUTH_NOTIFY_DATA {
     cbStruct: DWORD,
     dwOptions: DWORD,
     pfnNotify: PFN_AUTH_NOTIFY,
@@ -1099,15 +1183,18 @@ pub const TRACK_ONLINE_CACHE_ENTRY: DWORD = 0x00000020;
 pub const SPARSE_CACHE_ENTRY: DWORD = 0x00010000;
 pub const COOKIE_CACHE_ENTRY: DWORD = 0x00100000;
 pub const URLHISTORY_CACHE_ENTRY: DWORD = 0x00200000;
-pub const URLCACHE_FIND_DEFAULT_FILTER: DWORD = NORMAL_CACHE_ENTRY | COOKIE_CACHE_ENTRY
-    | URLHISTORY_CACHE_ENTRY | TRACK_OFFLINE_CACHE_ENTRY | TRACK_ONLINE_CACHE_ENTRY
+pub const URLCACHE_FIND_DEFAULT_FILTER: DWORD = NORMAL_CACHE_ENTRY
+    | COOKIE_CACHE_ENTRY
+    | URLHISTORY_CACHE_ENTRY
+    | TRACK_OFFLINE_CACHE_ENTRY
+    | TRACK_ONLINE_CACHE_ENTRY
     | STICKY_CACHE_ENTRY;
-UNION!{union INTERNET_CACHE_ENTRY_INFOA_u {
+UNION! {union INTERNET_CACHE_ENTRY_INFOA_u {
     [u32; 1],
     dwReserved dwReserved_mut: DWORD,
     dwExemptDelta dwExemptDelta_mut: DWORD,
 }}
-STRUCT!{struct INTERNET_CACHE_ENTRY_INFOA {
+STRUCT! {struct INTERNET_CACHE_ENTRY_INFOA {
     dwStructSize: DWORD,
     lpszSourceUrlName: LPSTR,
     lpszLocalFileName: LPSTR,
@@ -1126,12 +1213,12 @@ STRUCT!{struct INTERNET_CACHE_ENTRY_INFOA {
     u: INTERNET_CACHE_ENTRY_INFOA_u,
 }}
 pub type LPINTERNET_CACHE_ENTRY_INFOA = *mut INTERNET_CACHE_ENTRY_INFOA;
-UNION!{union INTERNET_CACHE_ENTRY_INFOW_u {
+UNION! {union INTERNET_CACHE_ENTRY_INFOW_u {
     [u32; 1],
     dwReserved dwReserved_mut: DWORD,
     dwExemptDelta dwExemptDelta_mut: DWORD,
 }}
-STRUCT!{struct INTERNET_CACHE_ENTRY_INFOW {
+STRUCT! {struct INTERNET_CACHE_ENTRY_INFOW {
     dwStructSize: DWORD,
     lpszSourceUrlName: LPWSTR,
     lpszLocalFileName: LPWSTR,
@@ -1150,7 +1237,7 @@ STRUCT!{struct INTERNET_CACHE_ENTRY_INFOW {
     u: INTERNET_CACHE_ENTRY_INFOW_u,
 }}
 pub type LPINTERNET_CACHE_ENTRY_INFOW = *mut INTERNET_CACHE_ENTRY_INFOW;
-STRUCT!{struct INTERNET_CACHE_TIMESTAMPS {
+STRUCT! {struct INTERNET_CACHE_TIMESTAMPS {
     ftExpires: FILETIME,
     ftLastModified: FILETIME,
 }}
@@ -1170,10 +1257,12 @@ pub const CACHEGROUP_SEARCH_ALL: DWORD = 0x00000000;
 pub const CACHEGROUP_SEARCH_BYURL: DWORD = 0x00000001;
 pub const CACHEGROUP_TYPE_INVALID: DWORD = 0x00000001;
 pub const CACHEGROUP_READWRITE_MASK: DWORD = CACHEGROUP_ATTRIBUTE_TYPE
-    | CACHEGROUP_ATTRIBUTE_QUOTA | CACHEGROUP_ATTRIBUTE_GROUPNAME | CACHEGROUP_ATTRIBUTE_STORAGE;
+    | CACHEGROUP_ATTRIBUTE_QUOTA
+    | CACHEGROUP_ATTRIBUTE_GROUPNAME
+    | CACHEGROUP_ATTRIBUTE_STORAGE;
 pub const GROUPNAME_MAX_LENGTH: usize = 120;
 pub const GROUP_OWNER_STORAGE_SIZE: usize = 4;
-STRUCT!{struct INTERNET_CACHE_GROUP_INFOA {
+STRUCT! {struct INTERNET_CACHE_GROUP_INFOA {
     dwGroupSize: DWORD,
     dwGroupFlags: DWORD,
     dwGroupType: DWORD,
@@ -1183,7 +1272,7 @@ STRUCT!{struct INTERNET_CACHE_GROUP_INFOA {
     szGroupName: [CHAR; GROUPNAME_MAX_LENGTH],
 }}
 pub type LPINTERNET_CACHE_GROUP_INFOA = *mut INTERNET_CACHE_GROUP_INFOA;
-STRUCT!{struct INTERNET_CACHE_GROUP_INFOW {
+STRUCT! {struct INTERNET_CACHE_GROUP_INFOW {
     dwGroupSize: DWORD,
     dwGroupFlags: DWORD,
     dwGroupType: DWORD,
@@ -1214,11 +1303,12 @@ pub const INTERNET_AUTODIAL_FORCE_UNATTENDED: DWORD = 2;
 pub const INTERNET_AUTODIAL_FAILIFSECURITYCHECK: DWORD = 4;
 pub const INTERNET_AUTODIAL_OVERRIDE_NET_PRESENT: DWORD = 8;
 pub const INTERNET_AUTODIAL_FLAGS_MASK: DWORD = INTERNET_AUTODIAL_FORCE_ONLINE
-    | INTERNET_AUTODIAL_FORCE_UNATTENDED | INTERNET_AUTODIAL_FAILIFSECURITYCHECK
+    | INTERNET_AUTODIAL_FORCE_UNATTENDED
+    | INTERNET_AUTODIAL_FAILIFSECURITYCHECK
     | INTERNET_AUTODIAL_OVERRIDE_NET_PRESENT;
 pub const PROXY_AUTO_DETECT_TYPE_DHCP: DWORD = 1;
 pub const PROXY_AUTO_DETECT_TYPE_DNS_A: DWORD = 2;
-STRUCT!{struct AutoProxyHelperVtbl {
+STRUCT! {struct AutoProxyHelperVtbl {
     IsResolvable: Option<unsafe extern "system" fn(
         lpszHost: LPSTR,
     ) -> BOOL>,
@@ -1258,27 +1348,27 @@ STRUCT!{struct AutoProxyHelperVtbl {
         lpdwIPSortedListSize: LPDWORD,
     ) -> DWORD>,
 }}
-STRUCT!{struct AUTO_PROXY_SCRIPT_BUFFER {
+STRUCT! {struct AUTO_PROXY_SCRIPT_BUFFER {
     dwStructSize: DWORD,
     lpszScriptBuffer: LPSTR,
     dwScriptBufferSize: DWORD,
 }}
 pub type LPAUTO_PROXY_SCRIPT_BUFFER = *mut AUTO_PROXY_SCRIPT_BUFFER;
-STRUCT!{struct AutoProxyHelperFunctions {
+STRUCT! {struct AutoProxyHelperFunctions {
     lpVtbl: *const AutoProxyHelperVtbl,
 }}
-FN!{stdcall pfnInternetInitializeAutoProxyDll(
+FN! {stdcall pfnInternetInitializeAutoProxyDll(
     DWORD,
     LPSTR,
     LPSTR,
     *mut AutoProxyHelperFunctions,
     LPAUTO_PROXY_SCRIPT_BUFFER,
 ) -> BOOL}
-FN!{stdcall pfnInternetDeInitializeAutoProxyDll(
+FN! {stdcall pfnInternetDeInitializeAutoProxyDll(
     LPSTR,
     DWORD,
 ) -> BOOL}
-FN!{stdcall pfnInternetGetProxyInfo(
+FN! {stdcall pfnInternetGetProxyInfo(
     LPCSTR,
     DWORD,
     LPSTR,
@@ -1286,7 +1376,7 @@ FN!{stdcall pfnInternetGetProxyInfo(
     *mut LPSTR,
     LPDWORD,
 ) -> BOOL}
-ENUM!{enum WPAD_CACHE_DELETE {
+ENUM! {enum WPAD_CACHE_DELETE {
     WPAD_CACHE_DELETE_CURRENT = 0x0,
     WPAD_CACHE_DELETE_ALL = 0x1,
 }}
@@ -1297,7 +1387,7 @@ pub const INTERNET_CONNECTION_MODEM_BUSY: DWORD = 0x08;
 pub const INTERNET_RAS_INSTALLED: DWORD = 0x10;
 pub const INTERNET_CONNECTION_OFFLINE: DWORD = 0x20;
 pub const INTERNET_CONNECTION_CONFIGURED: DWORD = 0x40;
-FN!{stdcall PFN_DIAL_HANDLER(
+FN! {stdcall PFN_DIAL_HANDLER(
     HWND,
     LPCSTR,
     DWORD,
@@ -1354,7 +1444,7 @@ extern "system" {
         lpszFileExtension: LPCWSTR,
         lpszOriginalUrl: LPCWSTR,
     ) -> BOOL;
-    pub fn CreateMD5SSOHash (
+    pub fn CreateMD5SSOHash(
         pszChallengeInfo: PWSTR,
         pwszRealm: PWSTR,
         pwszTarget: PWSTR,
@@ -1374,32 +1464,17 @@ extern "system" {
         lpszFileName: LPWSTR,
         dwReserved: DWORD,
     ) -> BOOL;
-    pub fn CreateUrlCacheGroup(
-        dwFlags: DWORD,
-        lpReserved: LPVOID,
-    ) -> GROUPID;
-    pub fn DeleteUrlCacheEntryA(
-        lpszUrlName: LPCSTR,
-    ) -> BOOL;
-    pub fn DeleteUrlCacheEntryW(
-        lpszUrlName: LPCWSTR,
-    ) -> BOOL;
-    pub fn DeleteUrlCacheGroup(
-        GroupId: GROUPID,
-        dwFlags: DWORD,
-        lpReserved: LPVOID,
-    ) -> BOOL;
-    pub fn DeleteWpadCacheForNetworks(
-        arg0: WPAD_CACHE_DELETE,
-    ) -> BOOL;
+    pub fn CreateUrlCacheGroup(dwFlags: DWORD, lpReserved: LPVOID) -> GROUPID;
+    pub fn DeleteUrlCacheEntryA(lpszUrlName: LPCSTR) -> BOOL;
+    pub fn DeleteUrlCacheEntryW(lpszUrlName: LPCWSTR) -> BOOL;
+    pub fn DeleteUrlCacheGroup(GroupId: GROUPID, dwFlags: DWORD, lpReserved: LPVOID) -> BOOL;
+    pub fn DeleteWpadCacheForNetworks(arg0: WPAD_CACHE_DELETE) -> BOOL;
     pub fn DetectAutoProxyUrl(
         pszAutoProxyUrl: PSTR,
         cchAutoProxyUrl: DWORD,
         dwDetectFlags: DWORD,
     ) -> BOOL;
-    pub fn FindCloseUrlCache(
-        hEnumHandle: HANDLE,
-    ) -> BOOL;
+    pub fn FindCloseUrlCache(hEnumHandle: HANDLE) -> BOOL;
     pub fn FindFirstUrlCacheEntryA(
         lpszUrlSearchPattern: LPCSTR,
         lpFirstCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
@@ -1487,22 +1562,10 @@ extern "system" {
         dwContext: DWORD_PTR,
         phFtpCommand: *mut HINTERNET,
     ) -> BOOL;
-    pub fn FtpCreateDirectoryA(
-        hConnect: HINTERNET,
-        lpszDirectory: LPCSTR,
-    ) -> BOOL;
-    pub fn FtpCreateDirectoryW(
-        hConnect: HINTERNET,
-        lpszDirectory: LPCWSTR,
-    ) -> BOOL;
-    pub fn FtpDeleteFileA(
-        hConnect: HINTERNET,
-        lpszFileName: LPCSTR,
-    ) -> BOOL;
-    pub fn FtpDeleteFileW(
-        hConnect: HINTERNET,
-        lpszFileName: LPCWSTR,
-    ) -> BOOL;
+    pub fn FtpCreateDirectoryA(hConnect: HINTERNET, lpszDirectory: LPCSTR) -> BOOL;
+    pub fn FtpCreateDirectoryW(hConnect: HINTERNET, lpszDirectory: LPCWSTR) -> BOOL;
+    pub fn FtpDeleteFileA(hConnect: HINTERNET, lpszFileName: LPCSTR) -> BOOL;
+    pub fn FtpDeleteFileW(hConnect: HINTERNET, lpszFileName: LPCWSTR) -> BOOL;
     pub fn FtpFindFirstFileA(
         hConnect: HINTERNET,
         lpszSearchFile: LPCSTR,
@@ -1545,10 +1608,7 @@ extern "system" {
         dwFlags: DWORD,
         dwContext: DWORD_PTR,
     ) -> BOOL;
-    pub fn FtpGetFileSize(
-        hFile: HINTERNET,
-        lpdwFileSizeHigh: LPDWORD,
-    ) -> DWORD;
+    pub fn FtpGetFileSize(hFile: HINTERNET, lpdwFileSizeHigh: LPDWORD) -> DWORD;
     pub fn FtpGetFileW(
         hConnect: HINTERNET,
         lpszRemoteFile: LPCWSTR,
@@ -1593,32 +1653,12 @@ extern "system" {
         dwFlags: DWORD,
         dwContext: DWORD_PTR,
     ) -> BOOL;
-    pub fn FtpRemoveDirectoryA(
-        hConnect: HINTERNET,
-        lpszDirectory: LPCSTR,
-    ) -> BOOL;
-    pub fn FtpRemoveDirectoryW(
-        hConnect: HINTERNET,
-        lpszDirectory: LPCWSTR,
-    ) -> BOOL;
-    pub fn FtpRenameFileA(
-        hConnect: HINTERNET,
-        lpszExisting: LPCSTR,
-        lpszNew: LPCSTR,
-    ) -> BOOL;
-    pub fn FtpRenameFileW(
-        hConnect: HINTERNET,
-        lpszExisting: LPCWSTR,
-        lpszNew: LPCWSTR,
-    ) -> BOOL;
-    pub fn FtpSetCurrentDirectoryA(
-        hConnect: HINTERNET,
-        lpszDirectory: LPCSTR,
-    ) -> BOOL;
-    pub fn FtpSetCurrentDirectoryW(
-        hConnect: HINTERNET,
-        lpszDirectory: LPCWSTR,
-    ) -> BOOL;
+    pub fn FtpRemoveDirectoryA(hConnect: HINTERNET, lpszDirectory: LPCSTR) -> BOOL;
+    pub fn FtpRemoveDirectoryW(hConnect: HINTERNET, lpszDirectory: LPCWSTR) -> BOOL;
+    pub fn FtpRenameFileA(hConnect: HINTERNET, lpszExisting: LPCSTR, lpszNew: LPCSTR) -> BOOL;
+    pub fn FtpRenameFileW(hConnect: HINTERNET, lpszExisting: LPCWSTR, lpszNew: LPCWSTR) -> BOOL;
+    pub fn FtpSetCurrentDirectoryA(hConnect: HINTERNET, lpszDirectory: LPCSTR) -> BOOL;
+    pub fn FtpSetCurrentDirectoryW(hConnect: HINTERNET, lpszDirectory: LPCWSTR) -> BOOL;
     pub fn GetUrlCacheEntryInfoA(
         lpszUrlName: LPCSTR,
         lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
@@ -1717,14 +1757,8 @@ extern "system" {
         lpfnEnumerator: GOPHER_ATTRIBUTE_ENUMERATOR,
         dwContext: DWORD_PTR,
     ) -> BOOL;
-    pub fn GopherGetLocatorTypeA(
-        lpszLocator: LPCSTR,
-        lpdwGopherType: LPDWORD,
-    ) -> BOOL;
-    pub fn GopherGetLocatorTypeW(
-        lpszLocator: LPCWSTR,
-        lpdwGopherType: LPDWORD,
-    ) -> BOOL;
+    pub fn GopherGetLocatorTypeA(lpszLocator: LPCSTR, lpdwGopherType: LPDWORD) -> BOOL;
+    pub fn GopherGetLocatorTypeW(lpszLocator: LPCWSTR, lpdwGopherType: LPDWORD) -> BOOL;
     pub fn GopherOpenFileA(
         hConnect: HINTERNET,
         lpszLocator: LPCSTR,
@@ -1825,16 +1859,9 @@ extern "system" {
         lpOptional: LPVOID,
         dwOptionalLength: DWORD,
     ) -> BOOL;
-    pub fn InternetAttemptConnect(
-        dwReserved: DWORD,
-    ) -> DWORD;
-    pub fn InternetAutodial(
-        dwFlags: DWORD,
-        hwndParent: HWND,
-    ) -> BOOL;
-    pub fn InternetAutodialHangup(
-        dwReserved: DWORD,
-    ) -> BOOL;
+    pub fn InternetAttemptConnect(dwReserved: DWORD) -> DWORD;
+    pub fn InternetAutodial(dwFlags: DWORD, hwndParent: HWND) -> BOOL;
+    pub fn InternetAutodialHangup(dwReserved: DWORD) -> BOOL;
     pub fn InternetCanonicalizeUrlA(
         lpszUrl: LPCSTR,
         lpszBuffer: LPSTR,
@@ -1847,20 +1874,10 @@ extern "system" {
         lpdwBufferLength: LPDWORD,
         dwFlags: DWORD,
     ) -> BOOL;
-    pub fn InternetCheckConnectionA(
-        lpszUrl: LPCSTR,
-        dwFlags: DWORD,
-        dwReserved: DWORD,
-    ) -> BOOL;
-    pub fn InternetCheckConnectionW(
-        lpszUrl: LPCWSTR,
-        dwFlags: DWORD,
-        dwReserved: DWORD,
-    ) -> BOOL;
+    pub fn InternetCheckConnectionA(lpszUrl: LPCSTR, dwFlags: DWORD, dwReserved: DWORD) -> BOOL;
+    pub fn InternetCheckConnectionW(lpszUrl: LPCWSTR, dwFlags: DWORD, dwReserved: DWORD) -> BOOL;
     pub fn InternetClearAllPerSiteCookieDecisions() -> BOOL;
-    pub fn InternetCloseHandle(
-        hInternet: HINTERNET,
-    ) -> BOOL;
+    pub fn InternetCloseHandle(hInternet: HINTERNET) -> BOOL;
     pub fn InternetCombineUrlA(
         lpszBaseUrl: LPCSTR,
         lpszRelativeUrl: LPCSTR,
@@ -1964,22 +1981,10 @@ extern "system" {
         dwFlags: DWORD,
         lppvData: *mut LPVOID,
     ) -> DWORD;
-    pub fn InternetFindNextFileA(
-        hFind: HINTERNET,
-        lpvFindData: LPVOID,
-    ) -> BOOL;
-    pub fn InternetFindNextFileW(
-        hFind: HINTERNET,
-        lpvFindData: LPVOID,
-    ) -> BOOL;
-    pub fn InternetFreeCookies(
-        pCookies: *mut INTERNET_COOKIE2,
-        dwCookieCount: DWORD,
-    ) -> ();
-    pub fn InternetGetConnectedState(
-        lpdwFlags: LPDWORD,
-        dwReserved: DWORD,
-    ) -> BOOL;
+    pub fn InternetFindNextFileA(hFind: HINTERNET, lpvFindData: LPVOID) -> BOOL;
+    pub fn InternetFindNextFileW(hFind: HINTERNET, lpvFindData: LPVOID) -> BOOL;
+    pub fn InternetFreeCookies(pCookies: *mut INTERNET_COOKIE2, dwCookieCount: DWORD) -> ();
+    pub fn InternetGetConnectedState(lpdwFlags: LPDWORD, dwReserved: DWORD) -> BOOL;
     pub fn InternetGetConnectedStateExA(
         lpdwFlags: LPDWORD,
         lpszConnectionName: LPSTR,
@@ -2037,35 +2042,13 @@ extern "system" {
         lpszBuffer: LPWSTR,
         lpdwBufferLength: LPDWORD,
     ) -> BOOL;
-    pub fn InternetGetPerSiteCookieDecisionA(
-        pchHostName: LPCSTR,
-        pResult: *mut u32,
-    ) -> BOOL;
-    pub fn InternetGetPerSiteCookieDecisionW(
-        pchHostName: LPCWSTR,
-        pResult: *mut u32,
-    ) -> BOOL;
-    pub fn InternetGoOnlineA(
-        lpszURL: LPCSTR,
-        hwndParent: HWND,
-        dwFlags: DWORD,
-    ) -> BOOL;
-    pub fn InternetGoOnlineW(
-        lpszURL: LPCWSTR,
-        hwndParent: HWND,
-        dwFlags: DWORD,
-    ) -> BOOL;
-    pub fn InternetHangUp(
-        dwConnection: DWORD_PTR,
-        dwReserved: DWORD,
-    ) -> DWORD;
-    pub fn InternetInitializeAutoProxyDll(
-        dwReserved: DWORD,
-    ) -> BOOL;
-    pub fn InternetLockRequestFile(
-        hInternet: HINTERNET,
-        lphLockRequestInfo: *mut HANDLE,
-    ) -> BOOL;
+    pub fn InternetGetPerSiteCookieDecisionA(pchHostName: LPCSTR, pResult: *mut u32) -> BOOL;
+    pub fn InternetGetPerSiteCookieDecisionW(pchHostName: LPCWSTR, pResult: *mut u32) -> BOOL;
+    pub fn InternetGoOnlineA(lpszURL: LPCSTR, hwndParent: HWND, dwFlags: DWORD) -> BOOL;
+    pub fn InternetGoOnlineW(lpszURL: LPCWSTR, hwndParent: HWND, dwFlags: DWORD) -> BOOL;
+    pub fn InternetHangUp(dwConnection: DWORD_PTR, dwReserved: DWORD) -> DWORD;
+    pub fn InternetInitializeAutoProxyDll(dwReserved: DWORD) -> BOOL;
+    pub fn InternetLockRequestFile(hInternet: HINTERNET, lphLockRequestInfo: *mut HANDLE) -> BOOL;
     pub fn InternetOpenA(
         lpszAgent: LPCSTR,
         dwAccessType: DWORD,
@@ -2163,11 +2146,8 @@ extern "system" {
         lpszCookieName: LPCWSTR,
         lpszCookieData: LPCWSTR,
     ) -> BOOL;
-    pub fn InternetSetDialStateA(
-        lpszConnectoid: LPCSTR,
-        dwState: DWORD,
-        dwReserved: DWORD,
-    ) -> BOOL;
+    pub fn InternetSetDialStateA(lpszConnectoid: LPCSTR, dwState: DWORD, dwReserved: DWORD)
+        -> BOOL;
     pub fn InternetSetDialStateW(
         lpszConnectoid: LPCWSTR,
         dwState: DWORD,
@@ -2206,14 +2186,8 @@ extern "system" {
         lpBuffer: LPVOID,
         dwBufferLength: DWORD,
     ) -> BOOL;
-    pub fn InternetSetPerSiteCookieDecisionA(
-        pchHostName: LPCSTR,
-        dwDecision: DWORD,
-    ) -> BOOL;
-    pub fn InternetSetPerSiteCookieDecisionW(
-        pchHostName: LPCWSTR,
-        dwDecision: DWORD,
-    ) -> BOOL;
+    pub fn InternetSetPerSiteCookieDecisionA(pchHostName: LPCSTR, dwDecision: DWORD) -> BOOL;
+    pub fn InternetSetPerSiteCookieDecisionW(pchHostName: LPCWSTR, dwDecision: DWORD) -> BOOL;
     pub fn InternetSetStatusCallbackA(
         hInternet: HINTERNET,
         lpfnInternetCallback: INTERNET_STATUS_CALLBACK,
@@ -2244,9 +2218,7 @@ extern "system" {
         pst: *mut SYSTEMTIME,
         dwReserved: DWORD,
     ) -> BOOL;
-    pub fn InternetUnlockRequestFile(
-        hLockRequestInfo: HANDLE,
-    ) -> BOOL;
+    pub fn InternetUnlockRequestFile(hLockRequestInfo: HANDLE) -> BOOL;
     pub fn InternetWriteFile(
         hFile: HINTERNET,
         lpBuffer: LPCVOID,
@@ -2279,10 +2251,7 @@ extern "system" {
         lpBuffer: LPVOID,
         lpdwLen: LPDWORD,
     ) -> BOOL;
-    pub fn ResumeSuspendedDownload(
-        hRequest: HINTERNET,
-        dwResultCode: DWORD,
-    ) -> BOOL;
+    pub fn ResumeSuspendedDownload(hRequest: HINTERNET, dwResultCode: DWORD) -> BOOL;
     pub fn RetrieveUrlCacheEntryFileA(
         lpszUrlName: LPCSTR,
         lpCacheEntryInfo: LPINTERNET_CACHE_ENTRY_INFOA,
@@ -2349,16 +2318,7 @@ extern "system" {
         lpGroupInfo: LPINTERNET_CACHE_GROUP_INFOW,
         lpReserved: LPVOID,
     ) -> BOOL;
-    pub fn UnlockUrlCacheEntryFileA(
-        lpszUrlName: LPCSTR,
-        dwReserved: DWORD,
-    ) -> BOOL;
-    pub fn UnlockUrlCacheEntryFileW(
-        lpszUrlName: LPCWSTR,
-        dwReserved: DWORD,
-    ) -> BOOL;
-    pub fn UnlockUrlCacheEntryStream(
-        hUrlCacheStream: HANDLE,
-        Reserved: DWORD,
-    ) -> BOOL;
+    pub fn UnlockUrlCacheEntryFileA(lpszUrlName: LPCSTR, dwReserved: DWORD) -> BOOL;
+    pub fn UnlockUrlCacheEntryFileW(lpszUrlName: LPCWSTR, dwReserved: DWORD) -> BOOL;
+    pub fn UnlockUrlCacheEntryStream(hUrlCacheStream: HANDLE, Reserved: DWORD) -> BOOL;
 }

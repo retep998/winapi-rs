@@ -8,14 +8,8 @@ use ctypes::c_void;
 use shared::minwindef::{BOOL, DWORD, LPCVOID, LPVOID, PUINT};
 use um::winnt::{LPCSTR, LPCWSTR, LPSTR, LPWSTR};
 extern "system" {
-    pub fn GetFileVersionInfoSizeA(
-        lptstrFilename: LPCSTR,
-        lpdwHandle: *mut DWORD,
-    ) -> DWORD;
-    pub fn GetFileVersionInfoSizeW(
-        lptstrFilename: LPCWSTR,
-        lpdwHandle: *mut DWORD,
-    ) -> DWORD;
+    pub fn GetFileVersionInfoSizeA(lptstrFilename: LPCSTR, lpdwHandle: *mut DWORD) -> DWORD;
+    pub fn GetFileVersionInfoSizeW(lptstrFilename: LPCWSTR, lpdwHandle: *mut DWORD) -> DWORD;
     pub fn GetFileVersionInfoA(
         lptstrFilename: LPCSTR,
         dwHandle: DWORD,
@@ -40,14 +34,6 @@ extern "system" {
         lplpBuffer: &mut LPVOID,
         puLen: PUINT,
     ) -> BOOL;
-    pub fn VerLanguageNameA(
-        wLang: DWORD,
-        szLang: LPSTR,
-        cchLang: DWORD,
-    ) -> DWORD;
-    pub fn VerLanguageNameW(
-        wLang: DWORD,
-        szLang: LPWSTR,
-        cchLang: DWORD,
-    ) -> DWORD;
+    pub fn VerLanguageNameA(wLang: DWORD, szLang: LPSTR, cchLang: DWORD) -> DWORD;
+    pub fn VerLanguageNameW(wLang: DWORD, szLang: LPWSTR, cchLang: DWORD) -> DWORD;
 }

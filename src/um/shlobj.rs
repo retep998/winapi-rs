@@ -16,14 +16,8 @@ pub const IDO_SHGIOI_LINK: c_int = 0x0FFFFFFE;
 pub const IDO_SHGIOI_SLOWFILE: c_int = 0x0FFFFFFFD;
 pub const IDO_SHGIOI_DEFAULT: c_int = 0x0FFFFFFFC;
 extern "system" {
-    pub fn SHGetIconOverlayIndexA(
-        pszIconPath: LPCSTR,
-        iIconIndex: c_int,
-    ) -> c_int;
-    pub fn SHGetIconOverlayIndexW(
-        pszIconPath: LPCWSTR,
-        iIconIndex: c_int,
-    ) -> c_int;
+    pub fn SHGetIconOverlayIndexA(pszIconPath: LPCSTR, iIconIndex: c_int) -> c_int;
+    pub fn SHGetIconOverlayIndexW(pszIconPath: LPCWSTR, iIconIndex: c_int) -> c_int;
 }
 pub const GPFIDL_DEFAULT: GPFIDL_FLAGS = 0x0000;
 pub const GPFIDL_ALTNAME: GPFIDL_FLAGS = 0x0001;
@@ -36,18 +30,9 @@ extern "system" {
         cchPath: DWORD,
         uOpts: GPFIDL_FLAGS,
     ) -> BOOL;
-    pub fn SHGetPathFromIDListA(
-        pidl: PCIDLIST_ABSOLUTE,
-        pszPath: LPSTR,
-    ) -> BOOL;
-    pub fn SHGetPathFromIDListW(
-        pidl: PCIDLIST_ABSOLUTE,
-        pszPath: LPWSTR,
-    ) -> BOOL;
-    pub fn SHCreateDirectory(
-        hwnd: HWND,
-        pszPath: PCWSTR,
-    ) -> c_int;
+    pub fn SHGetPathFromIDListA(pidl: PCIDLIST_ABSOLUTE, pszPath: LPSTR) -> BOOL;
+    pub fn SHGetPathFromIDListW(pidl: PCIDLIST_ABSOLUTE, pszPath: LPWSTR) -> BOOL;
+    pub fn SHCreateDirectory(hwnd: HWND, pszPath: PCWSTR) -> c_int;
     pub fn SHCreateDirectoryExA(
         hwnd: HWND,
         pszPath: LPCSTR,
@@ -68,12 +53,12 @@ extern "system" {
         apidl: PCUITEMID_CHILD_ARRAY,
         dwFlags: DWORD,
     ) -> HRESULT;
-    //pub fn SHCreateShellItem(
-    //    pidlParent: PCIDLIST_ABSOLUTE,
-    //    psfParent: *mut IShellFolder,
-    //    pidl: PCUITEMID_CHILD,
-    //    ppsi: *mut *mut IShellItem,
-    //) -> HRESULT;
+//pub fn SHCreateShellItem(
+//    pidlParent: PCIDLIST_ABSOLUTE,
+//    psfParent: *mut IShellFolder,
+//    pidl: PCUITEMID_CHILD,
+//    ppsi: *mut *mut IShellItem,
+//) -> HRESULT;
 }
 pub const CSIDL_DESKTOP: c_int = 0x0000;
 pub const CSIDL_INTERNET: c_int = 0x0001;
@@ -144,17 +129,9 @@ extern "system" {
         csidl: c_int,
         ppidl: *mut PIDLIST_ABSOLUTE,
     ) -> HRESULT;
-    pub fn SHCloneSpecialIDList(
-        hwnd: HWND,
-        csidl: c_int,
-        fCreate: BOOL,
-    ) -> PIDLIST_ABSOLUTE;
-    pub fn SHGetSpecialFolderPathA(
-        hwnd: HWND,
-        pszPath: LPSTR,
-        csidl: c_int,
-        fCreate: BOOL,
-    ) -> BOOL;
+    pub fn SHCloneSpecialIDList(hwnd: HWND, csidl: c_int, fCreate: BOOL) -> PIDLIST_ABSOLUTE;
+    pub fn SHGetSpecialFolderPathA(hwnd: HWND, pszPath: LPSTR, csidl: c_int, fCreate: BOOL)
+        -> BOOL;
     pub fn SHGetSpecialFolderPathW(
         hwnd: HWND,
         pszPath: LPWSTR,
@@ -163,7 +140,7 @@ extern "system" {
     ) -> BOOL;
     pub fn SHFlushSFCache();
 }
-ENUM!{enum SHGFP_TYPE {
+ENUM! {enum SHGFP_TYPE {
     SHGFP_TYPE_CURRENT = 0,
     SHGFP_TYPE_DEFAULT = 1,
 }}
@@ -218,7 +195,7 @@ extern "system" {
         pszPath: LPWSTR,
     ) -> HRESULT;
 }
-ENUM!{enum KNOWN_FOLDER_FLAG {
+ENUM! {enum KNOWN_FOLDER_FLAG {
     KF_FLAG_DEFAULT = 0x00000000,
     KF_FLAG_NO_APPCONTAINER_REDIRECTION = 0x00010000,
     KF_FLAG_CREATE = 0x00008000,

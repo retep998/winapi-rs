@@ -5,11 +5,11 @@
 // except according to those terms.
 //! USER procedure declarations, constant definitions and macros
 use ctypes::{c_int, c_long, c_short, c_uint};
+#[cfg(target_pointer_width = "64")]
+use shared::basetsd::LONG_PTR;
 use shared::basetsd::{
     DWORD_PTR, INT32, INT_PTR, PDWORD_PTR, UINT16, UINT32, UINT64, UINT_PTR, ULONG_PTR,
 };
-#[cfg(target_pointer_width = "64")]
-use shared::basetsd::LONG_PTR;
 use shared::guiddef::{GUID, LPCGUID};
 use shared::minwindef::{
     ATOM, BOOL, BYTE, DWORD, HINSTANCE, HIWORD, HKL, HMODULE, HRGN, HWINSTA, INT, LOWORD, LPARAM,
@@ -23,7 +23,7 @@ use shared::windef::{
 };
 use um::minwinbase::LPSECURITY_ATTRIBUTES;
 use um::wingdi::{
-    BLENDFUNCTION, DEVMODEA, DEVMODEW, LOGFONTA, LOGFONTW, PDISPLAY_DEVICEA, PDISPLAY_DEVICEW
+    BLENDFUNCTION, DEVMODEA, DEVMODEW, LOGFONTA, LOGFONTW, PDISPLAY_DEVICEA, PDISPLAY_DEVICEW,
 };
 use um::winnt::{
     ACCESS_MASK, BOOLEAN, CHAR, HANDLE, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR, LUID,
@@ -36,90 +36,90 @@ pub type MENUTEMPLATEA = VOID;
 pub type MENUTEMPLATEW = VOID;
 pub type LPMENUTEMPLATEA = PVOID;
 pub type LPMENUTEMPLATEW = PVOID;
-FN!{stdcall WNDPROC(
+FN! {stdcall WNDPROC(
     HWND,
     UINT,
     WPARAM,
     LPARAM,
 ) -> LRESULT}
-FN!{stdcall DLGPROC(
+FN! {stdcall DLGPROC(
     HWND,
     UINT,
     WPARAM,
     LPARAM,
 ) -> INT_PTR}
-FN!{stdcall TIMERPROC(
+FN! {stdcall TIMERPROC(
     HWND,
     UINT,
     UINT_PTR,
     DWORD,
 ) -> ()}
-FN!{stdcall GRAYSTRINGPROC(
+FN! {stdcall GRAYSTRINGPROC(
     HDC,
     LPARAM,
     c_int,
 ) -> BOOL}
-FN!{stdcall WNDENUMPROC(
+FN! {stdcall WNDENUMPROC(
     HWND,
     LPARAM,
 ) -> BOOL}
-FN!{stdcall HOOKPROC(
+FN! {stdcall HOOKPROC(
     code: c_int,
     wParam: WPARAM,
     lParam: LPARAM,
 ) -> LRESULT}
-FN!{stdcall SENDASYNCPROC(
+FN! {stdcall SENDASYNCPROC(
     HWND,
     UINT,
     ULONG_PTR,
     LRESULT,
 ) -> ()}
-FN!{stdcall PROPENUMPROCA(
+FN! {stdcall PROPENUMPROCA(
     HWND,
     LPCSTR,
     HANDLE,
 ) -> BOOL}
-FN!{stdcall PROPENUMPROCW(
+FN! {stdcall PROPENUMPROCW(
     HWND,
     LPCWSTR,
     HANDLE,
 ) -> BOOL}
-FN!{stdcall PROPENUMPROCEXA(
+FN! {stdcall PROPENUMPROCEXA(
     HWND,
     LPSTR,
     HANDLE,
     ULONG_PTR,
 ) -> BOOL}
-FN!{stdcall PROPENUMPROCEXW(
+FN! {stdcall PROPENUMPROCEXW(
     HWND,
     LPWSTR,
     HANDLE,
     ULONG_PTR,
 ) -> BOOL}
-FN!{stdcall EDITWORDBREAKPROCA(
+FN! {stdcall EDITWORDBREAKPROCA(
     lpch: LPSTR,
     ichCurrent: c_int,
     cch: c_int,
     code: c_int,
 ) -> c_int}
-FN!{stdcall EDITWORDBREAKPROCW(
+FN! {stdcall EDITWORDBREAKPROCW(
     lpch: LPWSTR,
     ichCurrent: c_int,
     cch: c_int,
     code: c_int,
 ) -> c_int}
-FN!{stdcall DRAWSTATEPROC(
+FN! {stdcall DRAWSTATEPROC(
     hdc: HDC,
     lData: LPARAM,
     wData: WPARAM,
     cx: c_int,
     cy: c_int,
 ) -> BOOL}
-FN!{stdcall NAMEENUMPROCA(
+FN! {stdcall NAMEENUMPROCA(
     LPSTR,
     LPARAM,
 ) -> BOOL}
-FN!{stdcall NAMEENUMPROCW(
+FN! {stdcall NAMEENUMPROCW(
     LPWSTR,
     LPARAM,
 ) -> BOOL}
@@ -163,33 +163,16 @@ pub const RT_HTML: LPWSTR = MAKEINTRESOURCE!(23);
 pub const RT_MANIFEST: LPWSTR = MAKEINTRESOURCE!(24);
 pub const CREATEPROCESS_MANIFEST_RESOURCE_ID: LPWSTR = MAKEINTRESOURCE!(1);
 pub const ISOLATIONAWARE_MANIFEST_RESOURCE_ID: LPWSTR = MAKEINTRESOURCE!(2);
-pub const ISOLATIONAWARE_NOSTATICIMPORT_MANIFEST_RESOURCE_ID: LPWSTR
-    = MAKEINTRESOURCE!(3);
+pub const ISOLATIONAWARE_NOSTATICIMPORT_MANIFEST_RESOURCE_ID: LPWSTR = MAKEINTRESOURCE!(3);
 pub const MINIMUM_RESERVED_MANIFEST_RESOURCE_ID: LPWSTR = MAKEINTRESOURCE!(1);
 pub const MAXIMUM_RESERVED_MANIFEST_RESOURCE_ID: LPWSTR = MAKEINTRESOURCE!(16);
 extern "system" {
-    pub fn wvsprintfA(
-        _: LPSTR,
-        _: LPCSTR,
-        arglist: va_list,
-    ) -> c_int;
-    pub fn wvsprintfW(
-        _: LPWSTR,
-        _: LPCWSTR,
-        arglist: va_list,
-    ) -> c_int;
+    pub fn wvsprintfA(_: LPSTR, _: LPCSTR, arglist: va_list) -> c_int;
+    pub fn wvsprintfW(_: LPWSTR, _: LPCWSTR, arglist: va_list) -> c_int;
 }
 extern "C" {
-    pub fn wsprintfA(
-        _: LPSTR,
-        _: LPCSTR,
-        ...
-    ) -> c_int;
-    pub fn wsprintfW(
-        _: LPWSTR,
-        _: LPCWSTR,
-        ...
-    ) -> c_int;
+    pub fn wsprintfA(_: LPSTR, _: LPCSTR, ...) -> c_int;
+    pub fn wsprintfW(_: LPWSTR, _: LPCWSTR, ...) -> c_int;
 }
 pub const SETWALLPAPER_DEFAULT: LPWSTR = -1isize as LPWSTR;
 pub const SB_HORZ: UINT = 0;
@@ -479,22 +462,22 @@ pub const HCBT_CLICKSKIPPED: c_int = 6;
 pub const HCBT_KEYSKIPPED: c_int = 7;
 pub const HCBT_SYSCOMMAND: c_int = 8;
 pub const HCBT_SETFOCUS: c_int = 9;
-STRUCT!{struct CBT_CREATEWNDA {
+STRUCT! {struct CBT_CREATEWNDA {
     lpcs: *mut CREATESTRUCTA,
     hwndInsertAfter: HWND,
 }}
 pub type LPCBT_CREATEWNDA = *mut CBT_CREATEWNDA;
-STRUCT!{struct CBT_CREATEWNDW {
+STRUCT! {struct CBT_CREATEWNDW {
     lpcs: *mut CREATESTRUCTW,
     hwndInsertAfter: HWND,
 }}
 pub type LPCBT_CREATEWNDW = *mut CBT_CREATEWNDW;
-STRUCT!{struct CBTACTIVATESTRUCT {
+STRUCT! {struct CBTACTIVATESTRUCT {
     fMouse: BOOL,
     hWndActive: HWND,
 }}
 pub type LPCBTACTIVATESTRUCT = *mut CBTACTIVATESTRUCT;
-STRUCT!{struct WTSSESSION_NOTIFICATION {
+STRUCT! {struct WTSSESSION_NOTIFICATION {
     cbSize: DWORD,
     dwSessionId: DWORD,
 }}
@@ -602,14 +585,14 @@ pub fn GET_DEVICE_LPARAM(lParam: LPARAM) -> WORD {
     HIWORD(lParam as DWORD) & FAPPCOMMAND_MASK
 }
 pub use self::GET_DEVICE_LPARAM as GET_MOUSEORKEY_LPARAM;
-pub use shared::minwindef::LOWORD as GET_FLAGS_LPARAM;
 pub use self::GET_FLAGS_LPARAM as GET_KEYSTATE_LPARAM;
-STRUCT!{struct SHELLHOOKINFO {
+pub use shared::minwindef::LOWORD as GET_FLAGS_LPARAM;
+STRUCT! {struct SHELLHOOKINFO {
     hwnd: HWND,
     rc: RECT,
 }}
 pub type LPSHELLHOOKINFO = *mut SHELLHOOKINFO;
-STRUCT!{struct EVENTMSG {
+STRUCT! {struct EVENTMSG {
     message: UINT,
     paramL: UINT,
     paramH: UINT,
@@ -622,7 +605,7 @@ pub type LPEVENTMSGMSG = *mut EVENTMSG;
 pub type PEVENTMSG = *mut EVENTMSG;
 pub type NPEVENTMSG = *mut EVENTMSG;
 pub type LPEVENTMSG = *mut EVENTMSG;
-STRUCT!{struct CWPSTRUCT {
+STRUCT! {struct CWPSTRUCT {
     lParam: LPARAM,
     wParam: WPARAM,
     message: UINT,
@@ -631,7 +614,7 @@ STRUCT!{struct CWPSTRUCT {
 pub type PCWPSTRUCT = *mut CWPSTRUCT;
 pub type NPCWPSTRUCT = *mut CWPSTRUCT;
 pub type LPCWPSTRUCT = *mut CWPSTRUCT;
-STRUCT!{struct CWPRETSTRUCT {
+STRUCT! {struct CWPRETSTRUCT {
     lResult: LRESULT,
     lParam: LPARAM,
     wParam: WPARAM,
@@ -648,7 +631,7 @@ pub const LLKHF_UP: DWORD = (KF_UP >> 8) as u32;
 pub const LLKHF_LOWER_IL_INJECTED: DWORD = 0x00000002;
 pub const LLMHF_INJECTED: DWORD = 0x00000001;
 pub const LLMHF_LOWER_IL_INJECTED: DWORD = 0x00000002;
-STRUCT!{struct KBDLLHOOKSTRUCT {
+STRUCT! {struct KBDLLHOOKSTRUCT {
     vkCode: DWORD,
     scanCode: DWORD,
     flags: DWORD,
@@ -657,7 +640,7 @@ STRUCT!{struct KBDLLHOOKSTRUCT {
 }}
 pub type LPKBDLLHOOKSTRUCT = *mut KBDLLHOOKSTRUCT;
 pub type PKBDLLHOOKSTRUCT = *mut KBDLLHOOKSTRUCT;
-STRUCT!{struct MSLLHOOKSTRUCT {
+STRUCT! {struct MSLLHOOKSTRUCT {
     pt: POINT,
     mouseData: DWORD,
     flags: DWORD,
@@ -666,7 +649,7 @@ STRUCT!{struct MSLLHOOKSTRUCT {
 }}
 pub type LPMSLLHOOKSTRUCT = *mut MSLLHOOKSTRUCT;
 pub type PMSLLHOOKSTRUCT = *mut MSLLHOOKSTRUCT;
-STRUCT!{struct DEBUGHOOKINFO {
+STRUCT! {struct DEBUGHOOKINFO {
     idThread: DWORD,
     idThreadInstaller: DWORD,
     lParam: LPARAM,
@@ -676,7 +659,7 @@ STRUCT!{struct DEBUGHOOKINFO {
 pub type PDEBUGHOOKINFO = *mut DEBUGHOOKINFO;
 pub type NPDEBUGHOOKINFO = *mut DEBUGHOOKINFO;
 pub type LPDEBUGHOOKINFO = *mut DEBUGHOOKINFO;
-STRUCT!{struct MOUSEHOOKSTRUCT {
+STRUCT! {struct MOUSEHOOKSTRUCT {
     pt: POINT,
     hwnd: HWND,
     wHitTestCode: UINT,
@@ -684,13 +667,13 @@ STRUCT!{struct MOUSEHOOKSTRUCT {
 }}
 pub type LPMOUSEHOOKSTRUCT = *mut MOUSEHOOKSTRUCT;
 pub type PMOUSEHOOKSTRUCT = *mut MOUSEHOOKSTRUCT;
-STRUCT!{struct MOUSEHOOKSTRUCTEX {
+STRUCT! {struct MOUSEHOOKSTRUCTEX {
     parent: MOUSEHOOKSTRUCT,
     mouseData: DWORD,
 }}
 pub type LPMOUSEHOOKSTRUCTEX = *mut MOUSEHOOKSTRUCTEX;
 pub type PMOUSEHOOKSTRUCTEX = *mut MOUSEHOOKSTRUCTEX;
-STRUCT!{struct HARDWAREHOOKSTRUCT {
+STRUCT! {struct HARDWAREHOOKSTRUCT {
     hwnd: HWND,
     message: UINT,
     wParam: WPARAM,
@@ -713,18 +696,9 @@ pub const INPUTLANGCHANGE_FORWARD: WPARAM = 0x0002;
 pub const INPUTLANGCHANGE_BACKWARD: WPARAM = 0x0004;
 pub const KL_NAMELENGTH: usize = 9;
 extern "system" {
-    pub fn LoadKeyboardLayoutA(
-        pwszKLID: LPCSTR,
-        Flags: DWORD,
-    ) -> HKL;
-    pub fn LoadKeyboardLayoutW(
-        pwszKLID: LPCWSTR,
-        Flags: DWORD,
-    ) -> HKL;
-    pub fn ActivateKeyboardLayout(
-        hkl: HKL,
-        Flags: UINT,
-    ) -> HKL;
+    pub fn LoadKeyboardLayoutA(pwszKLID: LPCSTR, Flags: DWORD) -> HKL;
+    pub fn LoadKeyboardLayoutW(pwszKLID: LPCWSTR, Flags: DWORD) -> HKL;
+    pub fn ActivateKeyboardLayout(hkl: HKL, Flags: UINT) -> HKL;
     pub fn ToUnicodeEx(
         wVirtKey: UINT,
         wScanCode: UINT,
@@ -734,24 +708,13 @@ extern "system" {
         wFlags: UINT,
         dwhkl: HKL,
     ) -> c_int;
-    pub fn UnloadKeyboardLayout(
-        hkl: HKL,
-    ) -> BOOL;
-    pub fn GetKeyboardLayoutNameA(
-        pwszKLID: LPSTR,
-    ) -> BOOL;
-    pub fn GetKeyboardLayoutNameW(
-        pwszKLID: LPWSTR,
-    ) -> BOOL;
-    pub fn GetKeyboardLayoutList(
-        nBuff: c_int,
-        lpList: *mut HKL,
-    ) -> c_int;
-    pub fn GetKeyboardLayout(
-        idThread: DWORD,
-    ) -> HKL;
+    pub fn UnloadKeyboardLayout(hkl: HKL) -> BOOL;
+    pub fn GetKeyboardLayoutNameA(pwszKLID: LPSTR) -> BOOL;
+    pub fn GetKeyboardLayoutNameW(pwszKLID: LPWSTR) -> BOOL;
+    pub fn GetKeyboardLayoutList(nBuff: c_int, lpList: *mut HKL) -> c_int;
+    pub fn GetKeyboardLayout(idThread: DWORD) -> HKL;
 }
-STRUCT!{struct MOUSEMOVEPOINT {
+STRUCT! {struct MOUSEMOVEPOINT {
     x: c_int,
     y: c_int,
     time: DWORD,
@@ -829,38 +792,14 @@ extern "system" {
         fInherit: BOOL,
         dwDesiredAccess: ACCESS_MASK,
     ) -> HDESK;
-    pub fn OpenInputDesktop(
-        dwFlags: DWORD,
-        fInherit: BOOL,
-        dwDesiredAccess: ACCESS_MASK,
-    ) -> HDESK;
-    pub fn EnumDesktopsA(
-        hwinsta: HWINSTA,
-        lpEnumFunc: DESKTOPENUMPROCA,
-        lParam: LPARAM,
-    ) -> BOOL;
-    pub fn EnumDesktopsW(
-        hwinsta: HWINSTA,
-        lpEnumFunc: DESKTOPENUMPROCW,
-        lParam: LPARAM,
-    ) -> BOOL;
-    pub fn EnumDesktopWindows(
-        hDesktop: HDESK,
-        lpfn: WNDENUMPROC,
-        lParam: LPARAM,
-    ) -> BOOL;
-    pub fn SwitchDesktop(
-        hDesktop: HDESK,
-    ) -> BOOL;
-    pub fn SetThreadDesktop(
-        hDesktop: HDESK,
-    ) -> BOOL;
-    pub fn CloseDesktop(
-        hDesktop: HDESK,
-    ) -> BOOL;
-    pub fn GetThreadDesktop(
-        dwThreadId: DWORD,
-    ) -> HDESK;
+    pub fn OpenInputDesktop(dwFlags: DWORD, fInherit: BOOL, dwDesiredAccess: ACCESS_MASK) -> HDESK;
+    pub fn EnumDesktopsA(hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCA, lParam: LPARAM) -> BOOL;
+    pub fn EnumDesktopsW(hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCW, lParam: LPARAM) -> BOOL;
+    pub fn EnumDesktopWindows(hDesktop: HDESK, lpfn: WNDENUMPROC, lParam: LPARAM) -> BOOL;
+    pub fn SwitchDesktop(hDesktop: HDESK) -> BOOL;
+    pub fn SetThreadDesktop(hDesktop: HDESK) -> BOOL;
+    pub fn CloseDesktop(hDesktop: HDESK) -> BOOL;
+    pub fn GetThreadDesktop(dwThreadId: DWORD) -> HDESK;
 }
 pub const WINSTA_ENUMDESKTOPS: DWORD = 0x0001;
 pub const WINSTA_READATTRIBUTES: DWORD = 0x0002;
@@ -871,9 +810,15 @@ pub const WINSTA_ACCESSGLOBALATOMS: DWORD = 0x0020;
 pub const WINSTA_EXITWINDOWS: DWORD = 0x0040;
 pub const WINSTA_ENUMERATE: DWORD = 0x0100;
 pub const WINSTA_READSCREEN: DWORD = 0x0200;
-pub const WINSTA_ALL_ACCESS: DWORD = WINSTA_ENUMDESKTOPS | WINSTA_READATTRIBUTES
-    | WINSTA_ACCESSCLIPBOARD | WINSTA_CREATEDESKTOP | WINSTA_WRITEATTRIBUTES
-    | WINSTA_ACCESSGLOBALATOMS | WINSTA_EXITWINDOWS | WINSTA_ENUMERATE | WINSTA_READSCREEN;
+pub const WINSTA_ALL_ACCESS: DWORD = WINSTA_ENUMDESKTOPS
+    | WINSTA_READATTRIBUTES
+    | WINSTA_ACCESSCLIPBOARD
+    | WINSTA_CREATEDESKTOP
+    | WINSTA_WRITEATTRIBUTES
+    | WINSTA_ACCESSGLOBALATOMS
+    | WINSTA_EXITWINDOWS
+    | WINSTA_ENUMERATE
+    | WINSTA_READSCREEN;
 pub const CWF_CREATE_ONLY: DWORD = 0x00000001;
 pub const WSF_VISIBLE: DWORD = 0x0001;
 extern "system" {
@@ -899,20 +844,10 @@ extern "system" {
         fInherit: BOOL,
         dwDesiredAccess: ACCESS_MASK,
     ) -> HWINSTA;
-    pub fn EnumWindowStationsA(
-        lpEnumFunc: WINSTAENUMPROCA,
-        lParam: LPARAM,
-    ) -> BOOL;
-    pub fn EnumWindowStationsW(
-        lpEnumFunc: WINSTAENUMPROCW,
-        lParam: LPARAM,
-    ) -> BOOL;
-    pub fn CloseWindowStation(
-        hWinSta: HWINSTA,
-    ) -> BOOL;
-    pub fn SetProcessWindowStation(
-        hWinSta: HWINSTA,
-    ) -> BOOL;
+    pub fn EnumWindowStationsA(lpEnumFunc: WINSTAENUMPROCA, lParam: LPARAM) -> BOOL;
+    pub fn EnumWindowStationsW(lpEnumFunc: WINSTAENUMPROCW, lParam: LPARAM) -> BOOL;
+    pub fn CloseWindowStation(hWinSta: HWINSTA) -> BOOL;
+    pub fn SetProcessWindowStation(hWinSta: HWINSTA) -> BOOL;
     pub fn GetProcessWindowStation() -> HWINSTA;
     pub fn SetUserObjectSecurity(
         hObj: HANDLE,
@@ -934,7 +869,7 @@ pub const UOI_USER_SID: DWORD = 4;
 pub const UOI_HEAPSIZE: DWORD = 5;
 pub const UOI_IO: DWORD = 6;
 pub const UOI_TIMERPROC_EXCEPTION_SUPPRESSION: DWORD = 7;
-STRUCT!{struct USEROBJECTFLAGS {
+STRUCT! {struct USEROBJECTFLAGS {
     fInherit: BOOL,
     fReserved: BOOL,
     dwFlags: DWORD,
@@ -968,7 +903,7 @@ extern "system" {
         nLength: DWORD,
     ) -> BOOL;
 }
-STRUCT!{struct WNDCLASSEXA {
+STRUCT! {struct WNDCLASSEXA {
     cbSize: UINT,
     style: UINT,
     lpfnWndProc: WNDPROC,
@@ -985,7 +920,7 @@ STRUCT!{struct WNDCLASSEXA {
 pub type PWNDCLASSEXA = *mut WNDCLASSEXA;
 pub type NPWNDCLASSEXA = *mut WNDCLASSEXA;
 pub type LPWNDCLASSEXA = *mut WNDCLASSEXA;
-STRUCT!{struct WNDCLASSEXW {
+STRUCT! {struct WNDCLASSEXW {
     cbSize: UINT,
     style: UINT,
     lpfnWndProc: WNDPROC,
@@ -1002,7 +937,7 @@ STRUCT!{struct WNDCLASSEXW {
 pub type PWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type NPWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type LPWNDCLASSEXW = *mut WNDCLASSEXW;
-STRUCT!{struct WNDCLASSA {
+STRUCT! {struct WNDCLASSA {
     style: UINT,
     lpfnWndProc: WNDPROC,
     cbClsExtra: c_int,
@@ -1017,7 +952,7 @@ STRUCT!{struct WNDCLASSA {
 pub type PWNDCLASSA = *mut WNDCLASSA;
 pub type NPWNDCLASSA = *mut WNDCLASSA;
 pub type LPWNDCLASSA = *mut WNDCLASSA;
-STRUCT!{struct WNDCLASSW {
+STRUCT! {struct WNDCLASSW {
     style: UINT,
     lpfnWndProc: WNDPROC,
     cbClsExtra: c_int,
@@ -1033,12 +968,10 @@ pub type PWNDCLASSW = *mut WNDCLASSW;
 pub type NPWNDCLASSW = *mut WNDCLASSW;
 pub type LPWNDCLASSW = *mut WNDCLASSW;
 extern "system" {
-    pub fn IsHungAppWindow(
-        hwnd: HWND,
-    ) -> BOOL;
+    pub fn IsHungAppWindow(hwnd: HWND) -> BOOL;
     pub fn DisableProcessWindowsGhosting();
 }
-STRUCT!{struct MSG {
+STRUCT! {struct MSG {
     hwnd: HWND,
     message: UINT,
     wParam: WPARAM,
@@ -1121,7 +1054,7 @@ pub const WM_MOUSEACTIVATE: UINT = 0x0021;
 pub const WM_CHILDACTIVATE: UINT = 0x0022;
 pub const WM_QUEUESYNC: UINT = 0x0023;
 pub const WM_GETMINMAXINFO: UINT = 0x0024;
-STRUCT!{struct MINMAXINFO {
+STRUCT! {struct MINMAXINFO {
     ptReserved: POINT,
     ptMaxSize: POINT,
     ptMaxPosition: POINT,
@@ -1158,13 +1091,13 @@ pub const PWR_SUSPENDRESUME: WPARAM = 2;
 pub const PWR_CRITICALRESUME: WPARAM = 3;
 pub const WM_COPYDATA: UINT = 0x004A;
 pub const WM_CANCELJOURNAL: UINT = 0x004B;
-STRUCT!{struct COPYDATASTRUCT {
+STRUCT! {struct COPYDATASTRUCT {
     dwData: ULONG_PTR,
     cbData: DWORD,
     lpData: PVOID,
 }}
 pub type PCOPYDATASTRUCT = *mut COPYDATASTRUCT;
-STRUCT!{struct MDINEXTMENU {
+STRUCT! {struct MDINEXTMENU {
     hmenuIn: HMENU,
     hmenuNext: HMENU,
     hwndNext: HWND,
@@ -1322,7 +1255,7 @@ pub const PBT_APMPOWERSTATUSCHANGE: WPARAM = 0x000A;
 pub const PBT_APMOEMEVENT: WPARAM = 0x000B;
 pub const PBT_APMRESUMEAUTOMATIC: WPARAM = 0x0012;
 pub const PBT_POWERSETTINGCHANGE: WPARAM = 0x8013;
-STRUCT!{struct POWERBROADCAST_SETTING {
+STRUCT! {struct POWERBROADCAST_SETTING {
     PowerSetting: GUID,
     DataLength: DWORD,
     Data: [UCHAR; 1],
@@ -1474,12 +1407,8 @@ pub const ICON_SMALL: UINT = 0;
 pub const ICON_BIG: UINT = 1;
 pub const ICON_SMALL2: UINT = 2;
 extern "system" {
-    pub fn RegisterWindowMessageA(
-        lpString: LPCSTR,
-    ) -> UINT;
-    pub fn RegisterWindowMessageW(
-        lpString: LPCWSTR,
-    ) -> UINT;
+    pub fn RegisterWindowMessageA(lpString: LPCSTR) -> UINT;
+    pub fn RegisterWindowMessageW(lpString: LPCWSTR) -> UINT;
 }
 pub const SIZE_RESTORED: WPARAM = 0;
 pub const SIZE_MINIMIZED: WPARAM = 1;
@@ -1491,7 +1420,7 @@ pub const SIZEICONIC: WPARAM = SIZE_MINIMIZED;
 pub const SIZEFULLSCREEN: WPARAM = SIZE_MAXIMIZED;
 pub const SIZEZOOMSHOW: WPARAM = SIZE_MAXSHOW;
 pub const SIZEZOOMHIDE: WPARAM = SIZE_MAXHIDE;
-STRUCT!{struct WINDOWPOS {
+STRUCT! {struct WINDOWPOS {
     hwnd: HWND,
     hwndInsertAfter: HWND,
     x: c_int,
@@ -1502,7 +1431,7 @@ STRUCT!{struct WINDOWPOS {
 }}
 pub type LPWINDOWPOS = *mut WINDOWPOS;
 pub type PWINDOWPOS = *mut WINDOWPOS;
-STRUCT!{struct NCCALCSIZE_PARAMS {
+STRUCT! {struct NCCALCSIZE_PARAMS {
     rgrc: [RECT; 3],
     lppos: PWINDOWPOS,
 }}
@@ -1528,7 +1457,7 @@ pub const TME_NONCLIENT: DWORD = 0x00000010;
 pub const TME_QUERY: DWORD = 0x40000000;
 pub const TME_CANCEL: DWORD = 0x80000000;
 pub const HOVER_DEFAULT: DWORD = 0xFFFFFFFF;
-STRUCT!{struct TRACKMOUSEEVENT {
+STRUCT! {struct TRACKMOUSEEVENT {
     cbSize: DWORD,
     dwFlags: DWORD,
     hwndTrack: HWND,
@@ -1536,9 +1465,7 @@ STRUCT!{struct TRACKMOUSEEVENT {
 }}
 pub type LPTRACKMOUSEEVENT = *mut TRACKMOUSEEVENT;
 extern "system" {
-    pub fn TrackMouseEvent(
-        lpEventTrack: LPTRACKMOUSEEVENT,
-    ) -> BOOL;
+    pub fn TrackMouseEvent(lpEventTrack: LPTRACKMOUSEEVENT) -> BOOL;
 }
 pub const WS_OVERLAPPED: DWORD = 0x00000000;
 pub const WS_POPUP: DWORD = 0x80000000;
@@ -1564,8 +1491,8 @@ pub const WS_TILED: DWORD = WS_OVERLAPPED;
 pub const WS_ICONIC: DWORD = WS_MINIMIZE;
 pub const WS_SIZEBOX: DWORD = WS_THICKFRAME;
 pub const WS_TILEDWINDOW: DWORD = WS_OVERLAPPEDWINDOW;
-pub const WS_OVERLAPPEDWINDOW: DWORD = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
-    | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+pub const WS_OVERLAPPEDWINDOW: DWORD =
+    WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
 pub const WS_POPUPWINDOW: DWORD = WS_POPUP | WS_BORDER | WS_SYSMENU;
 pub const WS_CHILDWINDOW: DWORD = WS_CHILD;
 pub const WS_EX_DLGMODALFRAME: DWORD = 0x00000001;
@@ -1646,12 +1573,7 @@ pub const BF_ADJUST: UINT = 0x2000;
 pub const BF_FLAT: UINT = 0x4000;
 pub const BF_MONO: UINT = 0x8000;
 extern "system" {
-    pub fn DrawEdge(
-        hdc: HDC,
-        qrc: LPRECT,
-        edge: UINT,
-        grfFlags: UINT,
-    ) -> BOOL;
+    pub fn DrawEdge(hdc: HDC, qrc: LPRECT, edge: UINT, grfFlags: UINT) -> BOOL;
 }
 pub const DFC_CAPTION: UINT = 1;
 pub const DFC_MENU: UINT = 2;
@@ -1689,12 +1611,7 @@ pub const DFCS_ADJUSTRECT: UINT = 0x2000;
 pub const DFCS_FLAT: UINT = 0x4000;
 pub const DFCS_MONO: UINT = 0x8000;
 extern "system" {
-    pub fn DrawFrameControl(
-        hdc: HDC,
-        lprc: LPRECT,
-        uType: UINT,
-        uState: UINT,
-    ) -> BOOL;
+    pub fn DrawFrameControl(hdc: HDC, lprc: LPRECT, uType: UINT, uState: UINT) -> BOOL;
 }
 pub const DC_ACTIVE: UINT = 0x0001;
 pub const DC_SMALLCAP: UINT = 0x0002;
@@ -1704,12 +1621,7 @@ pub const DC_INBUTTON: UINT = 0x0010;
 pub const DC_GRADIENT: UINT = 0x0020;
 pub const DC_BUTTONS: UINT = 0x1000;
 extern "system" {
-    pub fn DrawCaption(
-        hwnd: HWND,
-        hdc: HDC,
-        lprect: *const RECT,
-        flags: UINT,
-    ) -> BOOL;
+    pub fn DrawCaption(hwnd: HWND, hdc: HDC, lprect: *const RECT, flags: UINT) -> BOOL;
 }
 pub const IDANI_OPEN: c_int = 1;
 pub const IDANI_CAPTION: c_int = 3;
@@ -1753,13 +1665,13 @@ pub const FNOINVERT: BYTE = 0x02;
 pub const FSHIFT: BYTE = 0x04;
 pub const FCONTROL: BYTE = 0x08;
 pub const FALT: BYTE = 0x10;
-STRUCT!{struct ACCEL {
+STRUCT! {struct ACCEL {
     fVirt: BYTE,
     key: WORD,
     cmd: WORD,
 }}
 pub type LPACCEL = *mut ACCEL;
-STRUCT!{struct PAINTSTRUCT {
+STRUCT! {struct PAINTSTRUCT {
     hdc: HDC,
     fErase: BOOL,
     rcPaint: RECT,
@@ -1770,7 +1682,7 @@ STRUCT!{struct PAINTSTRUCT {
 pub type PPAINTSTRUCT = *mut PAINTSTRUCT;
 pub type NPPAINTSTRUCT = *mut PAINTSTRUCT;
 pub type LPPAINTSTRUCT = *mut PAINTSTRUCT;
-STRUCT!{struct CREATESTRUCTA {
+STRUCT! {struct CREATESTRUCTA {
     lpCreateParams: LPVOID,
     hInstance: HINSTANCE,
     hMenu: HMENU,
@@ -1785,7 +1697,7 @@ STRUCT!{struct CREATESTRUCTA {
     dwExStyle: DWORD,
 }}
 pub type LPCREATESTRUCTA = *mut CREATESTRUCTA;
-STRUCT!{struct CREATESTRUCTW {
+STRUCT! {struct CREATESTRUCTW {
     lpCreateParams: LPVOID,
     hInstance: HINSTANCE,
     hMenu: HMENU,
@@ -1800,7 +1712,7 @@ STRUCT!{struct CREATESTRUCTW {
     dwExStyle: DWORD,
 }}
 pub type LPCREATESTRUCTW = *mut CREATESTRUCTW;
-STRUCT!{struct WINDOWPLACEMENT {
+STRUCT! {struct WINDOWPLACEMENT {
     length: UINT,
     flags: UINT,
     showCmd: UINT,
@@ -1813,13 +1725,13 @@ pub type LPWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
 pub const WPF_SETMINPOSITION: UINT = 0x0001;
 pub const WPF_RESTORETOMAXIMIZED: UINT = 0x0002;
 pub const WPF_ASYNCWINDOWPLACEMENT: UINT = 0x0004;
-STRUCT!{struct NMHDR {
+STRUCT! {struct NMHDR {
     hwndFrom: HWND,
     idFrom: UINT_PTR,
     code: UINT,
 }}
 pub type LPNMHDR = *mut NMHDR;
-STRUCT!{struct STYLESTRUCT {
+STRUCT! {struct STYLESTRUCT {
     styleOld: DWORD,
     styleNew: DWORD,
 }}
@@ -1843,7 +1755,7 @@ pub const ODS_HOTLIGHT: UINT = 0x0040;
 pub const ODS_INACTIVE: UINT = 0x0080;
 pub const ODS_NOACCEL: UINT = 0x0100;
 pub const ODS_NOFOCUSRECT: UINT = 0x0200;
-STRUCT!{struct MEASUREITEMSTRUCT {
+STRUCT! {struct MEASUREITEMSTRUCT {
     CtlType: UINT,
     CtlID: UINT,
     itemID: UINT,
@@ -1853,7 +1765,7 @@ STRUCT!{struct MEASUREITEMSTRUCT {
 }}
 pub type PMEASUREITEMSTRUCT = *mut MEASUREITEMSTRUCT;
 pub type LPMEASUREITEMSTRUCT = *mut MEASUREITEMSTRUCT;
-STRUCT!{struct DRAWITEMSTRUCT {
+STRUCT! {struct DRAWITEMSTRUCT {
     CtlType: UINT,
     CtlID: UINT,
     itemID: UINT,
@@ -1866,7 +1778,7 @@ STRUCT!{struct DRAWITEMSTRUCT {
 }}
 pub type PDRAWITEMSTRUCT = *mut DRAWITEMSTRUCT;
 pub type LPDRAWITEMSTRUCT = *mut DRAWITEMSTRUCT;
-STRUCT!{struct DELETEITEMSTRUCT {
+STRUCT! {struct DELETEITEMSTRUCT {
     CtlType: UINT,
     CtlID: UINT,
     itemID: UINT,
@@ -1875,7 +1787,7 @@ STRUCT!{struct DELETEITEMSTRUCT {
 }}
 pub type PDELETEITEMSTRUCT = *mut DELETEITEMSTRUCT;
 pub type LPDELETEITEMSTRUCT = *mut DELETEITEMSTRUCT;
-STRUCT!{struct COMPAREITEMSTRUCT {
+STRUCT! {struct COMPAREITEMSTRUCT {
     CtlType: UINT,
     CtlID: UINT,
     hwndItem: HWND,
@@ -1888,30 +1800,12 @@ STRUCT!{struct COMPAREITEMSTRUCT {
 pub type PCOMPAREITEMSTRUCT = *mut COMPAREITEMSTRUCT;
 pub type LPCOMPAREITEMSTRUCT = *mut COMPAREITEMSTRUCT;
 extern "system" {
-    pub fn GetMessageA(
-        lpMsg: LPMSG,
-        hWnd: HWND,
-        wMsgFilterMin: UINT,
-        wMsgFilterMax: UINT,
-    ) -> BOOL;
-    pub fn GetMessageW(
-        lpMsg: LPMSG,
-        hWnd: HWND,
-        wMsgFilterMin: UINT,
-        wMsgFilterMax: UINT,
-    ) -> BOOL;
-    pub fn TranslateMessage(
-        lpmsg: *const MSG,
-    ) -> BOOL;
-    pub fn DispatchMessageA(
-        lpmsg: *const MSG,
-    ) -> LRESULT;
-    pub fn DispatchMessageW(
-        lpmsg: *const MSG,
-    ) -> LRESULT;
-    pub fn SetMessageQueue(
-        cMessagesMax: c_int,
-    ) -> BOOL;
+    pub fn GetMessageA(lpMsg: LPMSG, hWnd: HWND, wMsgFilterMin: UINT, wMsgFilterMax: UINT) -> BOOL;
+    pub fn GetMessageW(lpMsg: LPMSG, hWnd: HWND, wMsgFilterMin: UINT, wMsgFilterMax: UINT) -> BOOL;
+    pub fn TranslateMessage(lpmsg: *const MSG) -> BOOL;
+    pub fn DispatchMessageA(lpmsg: *const MSG) -> LRESULT;
+    pub fn DispatchMessageW(lpmsg: *const MSG) -> LRESULT;
+    pub fn SetMessageQueue(cMessagesMax: c_int) -> BOOL;
     pub fn PeekMessageA(
         lpMsg: LPMSG,
         hWnd: HWND,
@@ -1935,16 +1829,8 @@ pub const PM_QS_POSTMESSAGE: UINT = (QS_POSTMESSAGE | QS_HOTKEY | QS_TIMER) << 1
 pub const PM_QS_PAINT: UINT = QS_PAINT << 16;
 pub const PM_QS_SENDMESSAGE: UINT = QS_SENDMESSAGE << 16;
 extern "system" {
-    pub fn RegisterHotKey(
-        hwnd: HWND,
-        id: c_int,
-        fsModifiers: UINT,
-        vk: UINT,
-    ) -> BOOL;
-    pub fn UnregisterHotKey(
-        hWnd: HWND,
-        id: c_int,
-    ) -> BOOL;
+    pub fn RegisterHotKey(hwnd: HWND, id: c_int, fsModifiers: UINT, vk: UINT) -> BOOL;
+    pub fn UnregisterHotKey(hWnd: HWND, id: c_int) -> BOOL;
 }
 pub const MOD_ALT: LPARAM = 0x0001;
 pub const MOD_CONTROL: LPARAM = 0x0002;
@@ -1968,33 +1854,16 @@ pub const EWX_HYBRID_SHUTDOWN: UINT = 0x00400000;
 pub const EWX_BOOTOPTIONS: UINT = 0x01000000;
 // ExitWindows
 extern "system" {
-    pub fn ExitWindowsEx(
-        uFlags: UINT,
-        dwReason: DWORD,
-    ) -> BOOL;
-    pub fn SwapMouseButton(
-        fSwap: BOOL,
-    ) -> BOOL;
+    pub fn ExitWindowsEx(uFlags: UINT, dwReason: DWORD) -> BOOL;
+    pub fn SwapMouseButton(fSwap: BOOL) -> BOOL;
     pub fn GetMessagePos() -> DWORD;
     pub fn GetMessageTime() -> LONG;
     pub fn GetMessageExtraInfo() -> LPARAM;
     pub fn GetUnpredictedMessagePos() -> DWORD;
     pub fn IsWow64Message() -> BOOL;
-    pub fn SetMessageExtraInfo(
-        lParam: LPARAM,
-    ) -> LPARAM;
-    pub fn SendMessageA(
-        hWnd: HWND,
-        Msg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> LRESULT;
-    pub fn SendMessageW(
-        hWnd: HWND,
-        Msg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> LRESULT;
+    pub fn SetMessageExtraInfo(lParam: LPARAM) -> LPARAM;
+    pub fn SendMessageA(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
+    pub fn SendMessageW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
     pub fn SendMessageTimeoutA(
         hWnd: HWND,
         Msg: UINT,
@@ -2013,18 +1882,8 @@ extern "system" {
         uTimeout: UINT,
         lpdwResult: PDWORD_PTR,
     ) -> LRESULT;
-    pub fn SendNotifyMessageA(
-        hWnd: HWND,
-        msg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> BOOL;
-    pub fn SendNotifyMessageW(
-        hWnd: HWND,
-        msg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> BOOL;
+    pub fn SendNotifyMessageA(hWnd: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
+    pub fn SendNotifyMessageW(hWnd: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
     pub fn SendMessageCallbackA(
         hWnd: HWND,
         Msg: UINT,
@@ -2042,7 +1901,7 @@ extern "system" {
         dwData: ULONG_PTR,
     ) -> BOOL;
 }
-STRUCT!{struct BSMINFO {
+STRUCT! {struct BSMINFO {
     cbSize: UINT,
     hdesk: HDESK,
     hwnd: HWND,
@@ -2115,9 +1974,7 @@ extern "system" {
         notificationFilter: LPVOID,
         flags: DWORD,
     ) -> HDEVNOTIFY;
-    pub fn UnregisterDeviceNotification(
-        Handle: HDEVNOTIFY,
-    ) -> BOOL;
+    pub fn UnregisterDeviceNotification(Handle: HDEVNOTIFY) -> BOOL;
 }
 pub type HPOWERNOTIFY = PVOID;
 pub type PHPOWERNOTIFY = *mut HPOWERNOTIFY;
@@ -2127,74 +1984,26 @@ extern "system" {
         PowerSettingGuid: LPCGUID,
         Flags: DWORD,
     ) -> HPOWERNOTIFY;
-    pub fn UnregisterPowerSettingNotification(
-        Handle: HPOWERNOTIFY,
-    ) -> BOOL;
-    pub fn RegisterSuspendResumeNotification(
-        hRecipient: HANDLE,
-        Flags: DWORD,
-    ) -> HPOWERNOTIFY;
-    pub fn UnregisterSuspendResumeNotification(
-        Handle: HPOWERNOTIFY,
-    ) -> BOOL;
-    pub fn PostMessageA(
-        hWnd: HWND,
-        Msg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> BOOL;
-    pub fn PostMessageW(
-        hWnd: HWND,
-        Msg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> BOOL;
-    pub fn PostThreadMessageA(
-        idThread: DWORD,
-        msg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> BOOL;
-    pub fn PostThreadMessageW(
-        idThread: DWORD,
-        msg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> BOOL;
+    pub fn UnregisterPowerSettingNotification(Handle: HPOWERNOTIFY) -> BOOL;
+    pub fn RegisterSuspendResumeNotification(hRecipient: HANDLE, Flags: DWORD) -> HPOWERNOTIFY;
+    pub fn UnregisterSuspendResumeNotification(Handle: HPOWERNOTIFY) -> BOOL;
+    pub fn PostMessageA(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
+    pub fn PostMessageW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
+    pub fn PostThreadMessageA(idThread: DWORD, msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
+    pub fn PostThreadMessageW(idThread: DWORD, msg: UINT, wParam: WPARAM, lParam: LPARAM) -> BOOL;
 }
 // PostAppMessageA
 // PostAppMessageW
 pub const HWND_BROADCAST: HWND = 0xffff as HWND;
 pub const HWND_MESSAGE: HWND = -3isize as HWND;
 extern "system" {
-    pub fn AttachThreadInput(
-        idAttach: DWORD,
-        idAttachTo: DWORD,
-        fAttach: BOOL,
-    ) -> BOOL;
-    pub fn ReplyMessage(
-        lResult: LRESULT,
-    ) -> BOOL;
+    pub fn AttachThreadInput(idAttach: DWORD, idAttachTo: DWORD, fAttach: BOOL) -> BOOL;
+    pub fn ReplyMessage(lResult: LRESULT) -> BOOL;
     pub fn WaitMessage() -> BOOL;
-    pub fn WaitForInputIdle(
-        hProcess: HANDLE,
-        dwMilliseconds: DWORD,
-    ) -> DWORD;
-    pub fn DefWindowProcA(
-        hWnd: HWND,
-        Msg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> LRESULT;
-    pub fn DefWindowProcW(
-        hWnd: HWND,
-        Msg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> LRESULT;
-    pub fn PostQuitMessage(
-        nExitCode: c_int,
-    );
+    pub fn WaitForInputIdle(hProcess: HANDLE, dwMilliseconds: DWORD) -> DWORD;
+    pub fn DefWindowProcA(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
+    pub fn DefWindowProcW(hWnd: HWND, Msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
+    pub fn PostQuitMessage(nExitCode: c_int);
     pub fn CallWindowProcA(
         lpPrevWndFunc: WNDPROC,
         hWnd: HWND,
@@ -2210,9 +2019,7 @@ extern "system" {
         lParam: LPARAM,
     ) -> LRESULT;
     pub fn InSendMessage() -> BOOL;
-    pub fn InSendMessageEx(
-        lpReserved: LPVOID,
-    ) -> DWORD;
+    pub fn InSendMessageEx(lpReserved: LPVOID) -> DWORD;
 }
 pub const ISMEX_NOSEND: DWORD = 0x00000000;
 pub const ISMEX_SEND: DWORD = 0x00000001;
@@ -2221,23 +2028,11 @@ pub const ISMEX_CALLBACK: DWORD = 0x00000004;
 pub const ISMEX_REPLIED: DWORD = 0x00000008;
 extern "system" {
     pub fn GetDoubleClickTime() -> UINT;
-    pub fn SetDoubleClickTime(
-        uInterval: UINT,
-    ) -> BOOL;
-    pub fn RegisterClassA(
-        lpWndClass: *const WNDCLASSA,
-    ) -> ATOM;
-    pub fn RegisterClassW(
-        lpWndClass: *const WNDCLASSW,
-    ) -> ATOM;
-    pub fn UnregisterClassA(
-        lpClassName: LPCSTR,
-        hInstance: HINSTANCE,
-    ) -> BOOL;
-    pub fn UnregisterClassW(
-        lpClassName: LPCWSTR,
-        hInstance: HINSTANCE,
-    ) -> BOOL;
+    pub fn SetDoubleClickTime(uInterval: UINT) -> BOOL;
+    pub fn RegisterClassA(lpWndClass: *const WNDCLASSA) -> ATOM;
+    pub fn RegisterClassW(lpWndClass: *const WNDCLASSW) -> ATOM;
+    pub fn UnregisterClassA(lpClassName: LPCSTR, hInstance: HINSTANCE) -> BOOL;
+    pub fn UnregisterClassW(lpClassName: LPCWSTR, hInstance: HINSTANCE) -> BOOL;
     pub fn GetClassInfoA(
         hInstance: HINSTANCE,
         lpClassName: LPCSTR,
@@ -2248,26 +2043,14 @@ extern "system" {
         lpClassName: LPCWSTR,
         lpWndClass: LPWNDCLASSW,
     ) -> BOOL;
-    pub fn RegisterClassExA(
-        lpWndClass: *const WNDCLASSEXA,
-    ) -> ATOM;
-    pub fn RegisterClassExW(
-        lpWndClass: *const WNDCLASSEXW,
-    ) -> ATOM;
-    pub fn GetClassInfoExA(
-        hinst: HINSTANCE,
-        lpszClass: LPCSTR,
-        lpwcx: LPWNDCLASSEXA,
-    ) -> BOOL;
-    pub fn GetClassInfoExW(
-        hinst: HINSTANCE,
-        lpszClass: LPCWSTR,
-        lpwcx: LPWNDCLASSEXW,
-    ) -> BOOL;
+    pub fn RegisterClassExA(lpWndClass: *const WNDCLASSEXA) -> ATOM;
+    pub fn RegisterClassExW(lpWndClass: *const WNDCLASSEXW) -> ATOM;
+    pub fn GetClassInfoExA(hinst: HINSTANCE, lpszClass: LPCSTR, lpwcx: LPWNDCLASSEXA) -> BOOL;
+    pub fn GetClassInfoExW(hinst: HINSTANCE, lpszClass: LPCWSTR, lpwcx: LPWNDCLASSEXW) -> BOOL;
 }
 pub const CW_USEDEFAULT: c_int = 0x80000000;
 pub const HWND_DESKTOP: HWND = 0 as HWND;
-FN!{stdcall PREGISTERCLASSNAMEW(
+FN! {stdcall PREGISTERCLASSNAMEW(
     LPCWSTR,
 ) -> BOOLEAN}
 extern "system" {
@@ -2303,28 +2086,12 @@ extern "system" {
 // CreateWindowA
 // CreateWindowW
 extern "system" {
-    pub fn IsWindow(
-        hWnd: HWND,
-    ) -> BOOL;
-    pub fn IsMenu(
-        hMenu: HMENU,
-    ) -> BOOL;
-    pub fn IsChild(
-        hWndParent: HWND,
-        hWnd: HWND,
-    ) -> BOOL;
-    pub fn DestroyWindow(
-        hWnd: HWND,
-    ) -> BOOL;
-    pub fn ShowWindow(
-        hWnd: HWND,
-        nCmdShow: c_int,
-    ) -> BOOL;
-    pub fn AnimateWindow(
-        hWnd: HWND,
-        dwTime: DWORD,
-        dwFlags: DWORD,
-    ) -> BOOL;
+    pub fn IsWindow(hWnd: HWND) -> BOOL;
+    pub fn IsMenu(hMenu: HMENU) -> BOOL;
+    pub fn IsChild(hWndParent: HWND, hWnd: HWND) -> BOOL;
+    pub fn DestroyWindow(hWnd: HWND) -> BOOL;
+    pub fn ShowWindow(hWnd: HWND, nCmdShow: c_int) -> BOOL;
+    pub fn AnimateWindow(hWnd: HWND, dwTime: DWORD, dwFlags: DWORD) -> BOOL;
     pub fn UpdateLayeredWindow(
         hWnd: HWND,
         hdcDst: HDC,
@@ -2337,7 +2104,7 @@ extern "system" {
         dwFlags: DWORD,
     ) -> BOOL;
 }
-STRUCT!{struct UPDATELAYEREDWINDOWINFO {
+STRUCT! {struct UPDATELAYEREDWINDOWINFO {
     cbSize: DWORD,
     hdcDst: HDC,
     pptDst: *const POINT,
@@ -2351,10 +2118,7 @@ STRUCT!{struct UPDATELAYEREDWINDOWINFO {
 }}
 pub type PUPDATELAYEREDWINDOWINFO = *mut UPDATELAYEREDWINDOWINFO;
 extern "system" {
-    pub fn UpdateLayeredWindowIndirect(
-        hWnd: HWND,
-        pULWInfo: *mut UPDATELAYEREDWINDOWINFO,
-    ) -> BOOL;
+    pub fn UpdateLayeredWindowIndirect(hWnd: HWND, pULWInfo: *mut UPDATELAYEREDWINDOWINFO) -> BOOL;
     pub fn GetLayeredWindowAttributes(
         hwnd: HWND,
         pcrKey: *mut COLORREF,
@@ -2365,11 +2129,7 @@ extern "system" {
 pub const PW_CLIENTONLY: DWORD = 0x00000001;
 pub const PW_RENDERFULLCONTENT: DWORD = 0x00000002;
 extern "system" {
-    pub fn PrintWindow(
-        hwnd: HWND,
-        hdcBlt: HDC,
-        nFlags: UINT,
-    ) -> BOOL;
+    pub fn PrintWindow(hwnd: HWND, hdcBlt: HDC, nFlags: UINT) -> BOOL;
     pub fn SetLayeredWindowAttributes(
         hwnd: HWND,
         crKey: COLORREF,
@@ -2384,16 +2144,10 @@ pub const ULW_ALPHA: DWORD = 0x00000002;
 pub const ULW_OPAQUE: DWORD = 0x00000004;
 pub const ULW_EX_NORESIZE: DWORD = 0x00000008;
 extern "system" {
-    pub fn ShowWindowAsync(
-        hWnd: HWND,
-        nCmdShow: c_int,
-    ) -> BOOL;
-    pub fn FlashWindow(
-        hwnd: HWND,
-        bInvert: BOOL,
-    ) -> BOOL;
+    pub fn ShowWindowAsync(hWnd: HWND, nCmdShow: c_int) -> BOOL;
+    pub fn FlashWindow(hwnd: HWND, bInvert: BOOL) -> BOOL;
 }
-STRUCT!{struct FLASHWINFO {
+STRUCT! {struct FLASHWINFO {
     cbSize: UINT,
     hwnd: HWND,
     dwFlags: DWORD,
@@ -2402,9 +2156,7 @@ STRUCT!{struct FLASHWINFO {
 }}
 pub type PFLASHWINFO = *mut FLASHWINFO;
 extern "system" {
-    pub fn FlashWindowEx(
-        pfwi: PFLASHWINFO,
-    ) -> BOOL;
+    pub fn FlashWindowEx(pfwi: PFLASHWINFO) -> BOOL;
 }
 pub const FLASHW_STOP: DWORD = 0;
 pub const FLASHW_CAPTION: DWORD = 0x00000001;
@@ -2413,16 +2165,9 @@ pub const FLASHW_ALL: DWORD = FLASHW_CAPTION | FLASHW_TRAY;
 pub const FLASHW_TIMER: DWORD = 0x00000004;
 pub const FLASHW_TIMERNOFG: DWORD = 0x0000000C;
 extern "system" {
-    pub fn ShowOwnedPopups(
-        hWnd: HWND,
-        fShow: BOOL,
-    ) -> BOOL;
-    pub fn OpenIcon(
-        hWnd: HWND,
-    ) -> BOOL;
-    pub fn CloseWindow(
-        hWnd: HWND,
-    ) -> BOOL;
+    pub fn ShowOwnedPopups(hWnd: HWND, fShow: BOOL) -> BOOL;
+    pub fn OpenIcon(hWnd: HWND) -> BOOL;
+    pub fn CloseWindow(hWnd: HWND) -> BOOL;
     pub fn MoveWindow(
         hWnd: HWND,
         X: c_int,
@@ -2440,29 +2185,15 @@ extern "system" {
         cy: c_int,
         uFlags: UINT,
     ) -> BOOL;
-    pub fn GetWindowPlacement(
-        hWnd: HWND,
-        lpwndpl: *mut WINDOWPLACEMENT,
-    ) -> BOOL;
-    pub fn SetWindowPlacement(
-        hWnd: HWND,
-        lpwndpl: *const WINDOWPLACEMENT,
-    ) -> BOOL;
+    pub fn GetWindowPlacement(hWnd: HWND, lpwndpl: *mut WINDOWPLACEMENT) -> BOOL;
+    pub fn SetWindowPlacement(hWnd: HWND, lpwndpl: *const WINDOWPLACEMENT) -> BOOL;
 }
 pub const WDA_NONE: DWORD = 0x00000000;
 pub const WDA_MONITOR: DWORD = 0x00000001;
 extern "system" {
-    pub fn GetWindowDisplayAffinity(
-        hWnd: HWND,
-        pdwAffinity: *mut DWORD,
-    ) -> BOOL;
-    pub fn SetWindowDisplayAffinity(
-        hWnd: HWND,
-        dwAffinity: DWORD,
-    ) -> BOOL;
-    pub fn BeginDeferWindowPos(
-        nNumWindows: c_int,
-    ) -> HDWP;
+    pub fn GetWindowDisplayAffinity(hWnd: HWND, pdwAffinity: *mut DWORD) -> BOOL;
+    pub fn SetWindowDisplayAffinity(hWnd: HWND, dwAffinity: DWORD) -> BOOL;
+    pub fn BeginDeferWindowPos(nNumWindows: c_int) -> HDWP;
     pub fn DeferWindowPos(
         hWinPosInfo: HDWP,
         hWnd: HWND,
@@ -2473,22 +2204,12 @@ extern "system" {
         cy: c_int,
         uFlags: UINT,
     ) -> HDWP;
-    pub fn EndDeferWindowPos(
-        hWinPosInfo: HDWP,
-    ) -> BOOL;
-    pub fn IsWindowVisible(
-        hWnd: HWND,
-    ) -> BOOL;
-    pub fn IsIconic(
-        hWnd: HWND,
-    ) -> BOOL;
+    pub fn EndDeferWindowPos(hWinPosInfo: HDWP) -> BOOL;
+    pub fn IsWindowVisible(hWnd: HWND) -> BOOL;
+    pub fn IsIconic(hWnd: HWND) -> BOOL;
     pub fn AnyPopup() -> BOOL;
-    pub fn BringWindowToTop(
-        hWnd: HWND,
-    ) -> BOOL;
-    pub fn IsZoomed(
-        hwnd: HWND,
-    ) -> BOOL;
+    pub fn BringWindowToTop(hWnd: HWND) -> BOOL;
+    pub fn IsZoomed(hwnd: HWND) -> BOOL;
 }
 pub const SWP_NOSIZE: UINT = 0x0001;
 pub const SWP_NOMOVE: UINT = 0x0002;
@@ -2509,7 +2230,7 @@ pub const HWND_TOP: HWND = 0 as HWND;
 pub const HWND_BOTTOM: HWND = 1 as HWND;
 pub const HWND_TOPMOST: HWND = -1isize as HWND;
 pub const HWND_NOTOPMOST: HWND = -2isize as HWND;
-STRUCT!{struct DLGTEMPLATE {
+STRUCT! {struct DLGTEMPLATE {
     style: DWORD,
     dwExtendedStyle: DWORD,
     cdit: WORD,
@@ -2522,7 +2243,7 @@ pub type LPDLGTEMPLATEA = *mut DLGTEMPLATE;
 pub type LPDLGTEMPLATEW = *mut DLGTEMPLATE;
 pub type LPCDLGTEMPLATEA = *const DLGTEMPLATE;
 pub type LPCDLGTEMPLATEW = *const DLGTEMPLATE;
-STRUCT!{struct DLGITEMTEMPLATE {
+STRUCT! {struct DLGITEMTEMPLATE {
     style: DWORD,
     dwExtendedStyle: DWORD,
     x: c_short,
@@ -2604,36 +2325,17 @@ extern "system" {
 // DialogBoxIndirectA
 // DialogBoxIndirectW
 extern "system" {
-    pub fn EndDialog(
-        hDlg: HWND,
-        nResult: INT_PTR,
-    ) -> BOOL;
-    pub fn GetDlgItem(
-        hDlg: HWND,
-        nIDDlgItem: c_int,
-    ) -> HWND;
-    pub fn SetDlgItemInt(
-        hDlg: HWND,
-        nIDDlgItem: c_int,
-        uValue: UINT,
-        bSigned: BOOL,
-    ) -> BOOL;
+    pub fn EndDialog(hDlg: HWND, nResult: INT_PTR) -> BOOL;
+    pub fn GetDlgItem(hDlg: HWND, nIDDlgItem: c_int) -> HWND;
+    pub fn SetDlgItemInt(hDlg: HWND, nIDDlgItem: c_int, uValue: UINT, bSigned: BOOL) -> BOOL;
     pub fn GetDlgItemInt(
         hDlg: HWND,
         nIDDlgItem: c_int,
         lpTranslated: *mut BOOL,
         bSigned: BOOL,
     ) -> UINT;
-    pub fn SetDlgItemTextA(
-        hDlg: HWND,
-        nIDDlgItem: c_int,
-        lpString: LPCSTR,
-    ) -> BOOL;
-    pub fn SetDlgItemTextW(
-        hDlg: HWND,
-        nIDDlgItem: c_int,
-        lpString: LPCWSTR,
-    ) -> BOOL;
+    pub fn SetDlgItemTextA(hDlg: HWND, nIDDlgItem: c_int, lpString: LPCSTR) -> BOOL;
+    pub fn SetDlgItemTextW(hDlg: HWND, nIDDlgItem: c_int, lpString: LPCWSTR) -> BOOL;
     pub fn GetDlgItemTextA(
         hDlg: HWND,
         nIDDlgItem: c_int,
@@ -2646,21 +2348,14 @@ extern "system" {
         lpString: LPWSTR,
         nMaxCount: c_int,
     ) -> UINT;
-    pub fn CheckDlgButton(
-        hDlg: HWND,
-        nIDButton: c_int,
-        uCheck: UINT,
-    ) -> BOOL;
+    pub fn CheckDlgButton(hDlg: HWND, nIDButton: c_int, uCheck: UINT) -> BOOL;
     pub fn CheckRadioButton(
         hDlg: HWND,
         nIDFirstButton: c_int,
         nIDLasatButton: c_int,
         nIDCheckButton: c_int,
     ) -> BOOL;
-    pub fn IsDlgButtonChecked(
-        hDlg: HWND,
-        nIDButton: c_int,
-    ) -> UINT;
+    pub fn IsDlgButtonChecked(hDlg: HWND, nIDButton: c_int) -> UINT;
     pub fn SendDlgItemMessageA(
         hDlg: HWND,
         nIDDlgItem: c_int,
@@ -2675,34 +2370,14 @@ extern "system" {
         wParam: WPARAM,
         lParam: LPARAM,
     ) -> LRESULT;
-    pub fn GetNextDlgGroupItem(
-        hDlg: HWND,
-        hCtl: HWND,
-        bPrevious: BOOL,
-    ) -> HWND;
-    pub fn GetNextDlgTabItem(
-        hDlg: HWND,
-        hCtl: HWND,
-        bPrevious: BOOL,
-    ) -> HWND;
-    pub fn GetDlgCtrlID(
-        hwnd: HWND,
-    ) -> c_int;
+    pub fn GetNextDlgGroupItem(hDlg: HWND, hCtl: HWND, bPrevious: BOOL) -> HWND;
+    pub fn GetNextDlgTabItem(hDlg: HWND, hCtl: HWND, bPrevious: BOOL) -> HWND;
+    pub fn GetDlgCtrlID(hwnd: HWND) -> c_int;
     pub fn GetDialogBaseUnits() -> LONG;
-    pub fn DefDlgProcA(
-        hDlg: HWND,
-        msg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> LRESULT;
-    pub fn DefDlgProcW(
-        hDlg: HWND,
-        msg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> LRESULT;
+    pub fn DefDlgProcA(hDlg: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
+    pub fn DefDlgProcW(hDlg: HWND, msg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
 }
-ENUM!{enum DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
+ENUM! {enum DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
     DCDC_DEFAULT = 0x0000,
     DCDC_DISABLE_FONT_UPDATE = 0x0001,
     DCDC_DISABLE_RELAYOUT = 0x0002,
@@ -2713,11 +2388,9 @@ extern "system" {
         mask: DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS,
         values: DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS,
     ) -> BOOL;
-    pub fn GetDialogControlDpiChangeBehavior(
-        hwnd: HWND,
-    ) -> DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS;
+    pub fn GetDialogControlDpiChangeBehavior(hwnd: HWND) -> DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS;
 }
-ENUM!{enum DIALOG_DPI_CHANGE_BEHAVIORS {
+ENUM! {enum DIALOG_DPI_CHANGE_BEHAVIORS {
     DDC_DEFAULT = 0x0000,
     DDC_DISABLE_ALL = 0x0001,
     DDC_DISABLE_RESIZE = 0x0002,
@@ -2729,48 +2402,22 @@ extern "system" {
         mask: DIALOG_DPI_CHANGE_BEHAVIORS,
         values: DIALOG_DPI_CHANGE_BEHAVIORS,
     ) -> BOOL;
-    pub fn GetDialogDpiChangeBehavior(
-        hDlg: HWND,
-    ) -> DIALOG_DPI_CHANGE_BEHAVIORS;
-    pub fn CallMsgFilterA(
-        lpMsg: LPMSG,
-        nCode: c_int,
-    ) -> BOOL;
-    pub fn CallMsgFilterW(
-        lpMsg: LPMSG,
-        nCode: c_int,
-    ) -> BOOL;
-    pub fn OpenClipboard(
-        hWnd: HWND,
-    ) -> BOOL;
+    pub fn GetDialogDpiChangeBehavior(hDlg: HWND) -> DIALOG_DPI_CHANGE_BEHAVIORS;
+    pub fn CallMsgFilterA(lpMsg: LPMSG, nCode: c_int) -> BOOL;
+    pub fn CallMsgFilterW(lpMsg: LPMSG, nCode: c_int) -> BOOL;
+    pub fn OpenClipboard(hWnd: HWND) -> BOOL;
     pub fn CloseClipboard() -> BOOL;
     pub fn GetClipboardSequenceNumber() -> DWORD;
     pub fn GetClipboardOwner() -> HWND;
-    pub fn SetClipboardViewer(
-        hWndNewViewer: HWND,
-    ) -> HWND;
+    pub fn SetClipboardViewer(hWndNewViewer: HWND) -> HWND;
     pub fn GetClipboardViewer() -> HWND;
-    pub fn ChangeClipboardChain(
-        hwndRemove: HWND,
-        hwndNewNext: HWND,
-    ) -> BOOL;
-    pub fn SetClipboardData(
-        uFormat: UINT,
-        hMem: HANDLE,
-    ) -> HANDLE;
-    pub fn GetClipboardData(
-        uFormat: UINT,
-    ) -> HANDLE;
-    pub fn RegisterClipboardFormatA(
-        lpszFormat: LPCSTR,
-    ) -> UINT;
-    pub fn RegisterClipboardFormatW(
-        lpszFormat: LPCWSTR,
-    ) -> UINT;
+    pub fn ChangeClipboardChain(hwndRemove: HWND, hwndNewNext: HWND) -> BOOL;
+    pub fn SetClipboardData(uFormat: UINT, hMem: HANDLE) -> HANDLE;
+    pub fn GetClipboardData(uFormat: UINT) -> HANDLE;
+    pub fn RegisterClipboardFormatA(lpszFormat: LPCSTR) -> UINT;
+    pub fn RegisterClipboardFormatW(lpszFormat: LPCWSTR) -> UINT;
     pub fn CountClipboardFormats() -> c_int;
-    pub fn EnumClipboardFormats(
-        format: UINT,
-    ) -> UINT;
+    pub fn EnumClipboardFormats(format: UINT) -> UINT;
     pub fn GetClipboardFormatNameA(
         format: UINT,
         lpszFormatName: LPSTR,
@@ -2782,108 +2429,37 @@ extern "system" {
         cchMaxCount: c_int,
     ) -> c_int;
     pub fn EmptyClipboard() -> BOOL;
-    pub fn IsClipboardFormatAvailable(
-        format: UINT,
-    ) -> BOOL;
-    pub fn GetPriorityClipboardFormat(
-        paFormatPriorityList: *mut UINT,
-        cFormats: c_int,
-    ) -> c_int;
+    pub fn IsClipboardFormatAvailable(format: UINT) -> BOOL;
+    pub fn GetPriorityClipboardFormat(paFormatPriorityList: *mut UINT, cFormats: c_int) -> c_int;
     pub fn GetOpenClipboardWindow() -> HWND;
-    pub fn AddClipboardFormatListener(
-        hWnd: HWND,
-    ) -> BOOL;
-    pub fn RemoveClipboardFormatListener(
-        hWnd: HWND,
-    ) -> BOOL;
+    pub fn AddClipboardFormatListener(hWnd: HWND) -> BOOL;
+    pub fn RemoveClipboardFormatListener(hWnd: HWND) -> BOOL;
     pub fn GetUpdatedClipboardFormats(
         lpuiFormats: PUINT,
         cFormats: UINT,
         pcFormatsOUT: PUINT,
     ) -> BOOL;
-    pub fn CharToOemA(
-        pSrc: LPCSTR,
-        pDst: LPSTR,
-    ) -> BOOL;
-    pub fn CharToOemW(
-        pSrc: LPCWSTR,
-        pDst: LPSTR,
-    ) -> BOOL;
-    pub fn OemToCharA(
-        pSrc: LPCSTR,
-        pDst: LPSTR,
-    ) -> BOOL;
-    pub fn OemToCharW(
-        pSrc: LPCSTR,
-        pDst: LPWSTR,
-    ) -> BOOL;
-    pub fn CharToOemBuffA(
-        lpszSrc: LPCSTR,
-        lpszDst: LPSTR,
-        cchDstLength: DWORD,
-    ) -> BOOL;
-    pub fn CharToOemBuffW(
-        lpszSrc: LPCWSTR,
-        lpszDst: LPSTR,
-        cchDstLength: DWORD,
-    ) -> BOOL;
-    pub fn OemToCharBuffA(
-        lpszSrc: LPCSTR,
-        lpszDst: LPSTR,
-        cchDstLength: DWORD,
-    ) -> BOOL;
-    pub fn OemToCharBuffW(
-        lpszSrc: LPCSTR,
-        lpszDst: LPWSTR,
-        cchDstLength: DWORD,
-    ) -> BOOL;
-    pub fn CharUpperA(
-        lpsz: LPSTR,
-    ) -> LPSTR;
-    pub fn CharUpperW(
-        lpsz: LPWSTR,
-    ) -> LPWSTR;
-    pub fn CharUpperBuffA(
-        lpsz: LPSTR,
-        cchLength: DWORD,
-    ) -> DWORD;
-    pub fn CharUpperBuffW(
-        lpsz: LPWSTR,
-        cchLength: DWORD,
-    ) -> DWORD;
-    pub fn CharLowerA(
-        lpsz: LPSTR,
-    ) -> LPSTR;
-    pub fn CharLowerW(
-        lpsz: LPWSTR,
-    ) -> LPWSTR;
-    pub fn CharLowerBuffA(
-        lpsz: LPSTR,
-        cchLength: DWORD,
-    ) -> DWORD;
-    pub fn CharLowerBuffW(
-        lpsz: LPWSTR,
-        cchLength: DWORD,
-    ) -> DWORD;
-    pub fn CharNextA(
-        lpsz: LPCSTR,
-    ) -> LPSTR;
-    pub fn CharNextW(
-        lpsz: LPCWSTR,
-    ) -> LPWSTR;
-    pub fn CharPrevA(
-        lpszStart: LPCSTR,
-        lpszCurrent: LPCSTR,
-    ) -> LPSTR;
-    pub fn CharPrevW(
-        lpszStart: LPCWSTR,
-        lpszCurrent: LPCWSTR,
-    ) -> LPWSTR;
-    pub fn CharNextExA(
-        codePage: WORD,
-        lpCurrentChar: LPSTR,
-        dwFlags: DWORD,
-    ) -> LPSTR;
+    pub fn CharToOemA(pSrc: LPCSTR, pDst: LPSTR) -> BOOL;
+    pub fn CharToOemW(pSrc: LPCWSTR, pDst: LPSTR) -> BOOL;
+    pub fn OemToCharA(pSrc: LPCSTR, pDst: LPSTR) -> BOOL;
+    pub fn OemToCharW(pSrc: LPCSTR, pDst: LPWSTR) -> BOOL;
+    pub fn CharToOemBuffA(lpszSrc: LPCSTR, lpszDst: LPSTR, cchDstLength: DWORD) -> BOOL;
+    pub fn CharToOemBuffW(lpszSrc: LPCWSTR, lpszDst: LPSTR, cchDstLength: DWORD) -> BOOL;
+    pub fn OemToCharBuffA(lpszSrc: LPCSTR, lpszDst: LPSTR, cchDstLength: DWORD) -> BOOL;
+    pub fn OemToCharBuffW(lpszSrc: LPCSTR, lpszDst: LPWSTR, cchDstLength: DWORD) -> BOOL;
+    pub fn CharUpperA(lpsz: LPSTR) -> LPSTR;
+    pub fn CharUpperW(lpsz: LPWSTR) -> LPWSTR;
+    pub fn CharUpperBuffA(lpsz: LPSTR, cchLength: DWORD) -> DWORD;
+    pub fn CharUpperBuffW(lpsz: LPWSTR, cchLength: DWORD) -> DWORD;
+    pub fn CharLowerA(lpsz: LPSTR) -> LPSTR;
+    pub fn CharLowerW(lpsz: LPWSTR) -> LPWSTR;
+    pub fn CharLowerBuffA(lpsz: LPSTR, cchLength: DWORD) -> DWORD;
+    pub fn CharLowerBuffW(lpsz: LPWSTR, cchLength: DWORD) -> DWORD;
+    pub fn CharNextA(lpsz: LPCSTR) -> LPSTR;
+    pub fn CharNextW(lpsz: LPCWSTR) -> LPWSTR;
+    pub fn CharPrevA(lpszStart: LPCSTR, lpszCurrent: LPCSTR) -> LPSTR;
+    pub fn CharPrevW(lpszStart: LPCWSTR, lpszCurrent: LPCWSTR) -> LPWSTR;
+    pub fn CharNextExA(codePage: WORD, lpCurrentChar: LPSTR, dwFlags: DWORD) -> LPSTR;
     pub fn CharPrevExA(
         codePage: WORD,
         lpStart: LPCSTR,
@@ -2902,61 +2478,25 @@ extern "system" {
 // AnsiNext
 // AnsiPrev
 extern "system" {
-    pub fn IsCharAlphaA(
-        ch: CHAR,
-    ) -> BOOL;
-    pub fn IsCharAlphaW(
-        ch: WCHAR,
-    ) -> BOOL;
-    pub fn IsCharAlphaNumericA(
-        ch: CHAR,
-    ) -> BOOL;
-    pub fn IsCharAlphaNumericW(
-        ch: WCHAR,
-    ) -> BOOL;
-    pub fn IsCharUpperA(
-        ch: CHAR,
-    ) -> BOOL;
-    pub fn IsCharUpperW(
-        ch: WCHAR,
-    ) -> BOOL;
-    pub fn IsCharLowerA(
-        ch: CHAR,
-    ) -> BOOL;
-    pub fn IsCharLowerW(
-        ch: WCHAR,
-    ) -> BOOL;
-    pub fn SetFocus(
-        hWnd: HWND,
-    ) -> HWND;
+    pub fn IsCharAlphaA(ch: CHAR) -> BOOL;
+    pub fn IsCharAlphaW(ch: WCHAR) -> BOOL;
+    pub fn IsCharAlphaNumericA(ch: CHAR) -> BOOL;
+    pub fn IsCharAlphaNumericW(ch: WCHAR) -> BOOL;
+    pub fn IsCharUpperA(ch: CHAR) -> BOOL;
+    pub fn IsCharUpperW(ch: WCHAR) -> BOOL;
+    pub fn IsCharLowerA(ch: CHAR) -> BOOL;
+    pub fn IsCharLowerW(ch: WCHAR) -> BOOL;
+    pub fn SetFocus(hWnd: HWND) -> HWND;
     pub fn GetActiveWindow() -> HWND;
     pub fn GetFocus() -> HWND;
     pub fn GetKBCodePage() -> UINT;
-    pub fn GetKeyState(
-        nVirtKey: c_int,
-    ) -> SHORT;
-    pub fn GetAsyncKeyState(
-        vKey: c_int,
-    ) -> SHORT;
-    pub fn GetKeyboardState(
-        lpKeyState: PBYTE,
-    ) -> BOOL;
-    pub fn SetKeyboardState(
-        lpKeyState: LPBYTE,
-    ) -> BOOL;
-    pub fn GetKeyNameTextA(
-        lparam: LONG,
-        lpString: LPSTR,
-        cchSize: c_int,
-    ) -> c_int;
-    pub fn GetKeyNameTextW(
-        lParam: LONG,
-        lpString: LPWSTR,
-        cchSize: c_int,
-    ) -> c_int;
-    pub fn GetKeyboardType(
-        nTypeFlag: c_int,
-    ) -> c_int;
+    pub fn GetKeyState(nVirtKey: c_int) -> SHORT;
+    pub fn GetAsyncKeyState(vKey: c_int) -> SHORT;
+    pub fn GetKeyboardState(lpKeyState: PBYTE) -> BOOL;
+    pub fn SetKeyboardState(lpKeyState: LPBYTE) -> BOOL;
+    pub fn GetKeyNameTextA(lparam: LONG, lpString: LPSTR, cchSize: c_int) -> c_int;
+    pub fn GetKeyNameTextW(lParam: LONG, lpString: LPWSTR, cchSize: c_int) -> c_int;
+    pub fn GetKeyboardType(nTypeFlag: c_int) -> c_int;
     pub fn ToAscii(
         uVirtKey: UINT,
         uScanCode: UINT,
@@ -2980,35 +2520,18 @@ extern "system" {
         cchBuff: c_int,
         wFlags: UINT,
     ) -> c_int;
-    pub fn OemKeyScan(
-        wOemChar: WORD,
-    ) -> DWORD;
-    pub fn VkKeyScanA(
-        ch: CHAR,
-    ) -> SHORT;
-    pub fn VkKeyScanW(
-        ch: WCHAR,
-    ) -> SHORT;
-    pub fn VkKeyScanExA(
-        ch: CHAR,
-        dwhkl: HKL,
-    ) -> SHORT;
-    pub fn VkKeyScanExW(
-        ch: WCHAR,
-        dwhkl: HKL,
-    ) -> SHORT;
+    pub fn OemKeyScan(wOemChar: WORD) -> DWORD;
+    pub fn VkKeyScanA(ch: CHAR) -> SHORT;
+    pub fn VkKeyScanW(ch: WCHAR) -> SHORT;
+    pub fn VkKeyScanExA(ch: CHAR, dwhkl: HKL) -> SHORT;
+    pub fn VkKeyScanExW(ch: WCHAR, dwhkl: HKL) -> SHORT;
 }
 pub const KEYEVENTF_EXTENDEDKEY: DWORD = 0x0001;
 pub const KEYEVENTF_KEYUP: DWORD = 0x0002;
 pub const KEYEVENTF_UNICODE: DWORD = 0x0004;
 pub const KEYEVENTF_SCANCODE: DWORD = 0x0008;
 extern "system" {
-    pub fn keybd_event(
-        bVk: BYTE,
-        bScan: BYTE,
-        dwFlags: DWORD,
-        dwExtraInfo: ULONG_PTR,
-    );
+    pub fn keybd_event(bVk: BYTE, bScan: BYTE, dwFlags: DWORD, dwExtraInfo: ULONG_PTR);
 }
 pub const MOUSEEVENTF_MOVE: DWORD = 0x0001;
 pub const MOUSEEVENTF_LEFTDOWN: DWORD = 0x0002;
@@ -3025,15 +2548,9 @@ pub const MOUSEEVENTF_MOVE_NOCOALESCE: DWORD = 0x2000;
 pub const MOUSEEVENTF_VIRTUALDESK: DWORD = 0x4000;
 pub const MOUSEEVENTF_ABSOLUTE: DWORD = 0x8000;
 extern "system" {
-    pub fn mouse_event(
-        dwFlags: DWORD,
-        dx: DWORD,
-        dy: DWORD,
-        dwData: DWORD,
-        dwExtraInfo: ULONG_PTR,
-    );
+    pub fn mouse_event(dwFlags: DWORD, dx: DWORD, dy: DWORD, dwData: DWORD, dwExtraInfo: ULONG_PTR);
 }
-STRUCT!{struct MOUSEINPUT {
+STRUCT! {struct MOUSEINPUT {
     dx: LONG,
     dy: LONG,
     mouseData: DWORD,
@@ -3043,7 +2560,7 @@ STRUCT!{struct MOUSEINPUT {
 }}
 pub type PMOUSEINPUT = *mut MOUSEINPUT;
 pub type LPMOUSEINPUT = *mut MOUSEINPUT;
-STRUCT!{struct KEYBDINPUT {
+STRUCT! {struct KEYBDINPUT {
     wVk: WORD,
     wScan: WORD,
     dwFlags: DWORD,
@@ -3052,37 +2569,33 @@ STRUCT!{struct KEYBDINPUT {
 }}
 pub type PKEYBDINPUT = *mut KEYBDINPUT;
 pub type LPKEYBDINPUT = *mut KEYBDINPUT;
-STRUCT!{struct HARDWAREINPUT {
+STRUCT! {struct HARDWAREINPUT {
     uMsg: DWORD,
     wParamL: WORD,
     wParamH: WORD,
 }}
 pub type PHARDWAREINPUT = *mut HARDWAREINPUT;
-pub type LPHARDWAREINPUT= *mut HARDWAREINPUT;
+pub type LPHARDWAREINPUT = *mut HARDWAREINPUT;
 pub const INPUT_MOUSE: DWORD = 0;
 pub const INPUT_KEYBOARD: DWORD = 1;
 pub const INPUT_HARDWARE: DWORD = 2;
-UNION!{union INPUT_u {
+UNION! {union INPUT_u {
     [u32; 6] [u64; 4],
     mi mi_mut: MOUSEINPUT,
     ki ki_mut: KEYBDINPUT,
     hi hi_mut: HARDWAREINPUT,
 }}
-STRUCT!{struct INPUT {
+STRUCT! {struct INPUT {
     type_: DWORD,
     u: INPUT_u,
 }}
 pub type PINPUT = *mut INPUT;
 pub type LPINPUT = *mut INPUT;
 extern "system" {
-    pub fn SendInput(
-        cInputs: UINT,
-        pInputs: LPINPUT,
-        cbSize: c_int,
-    ) -> UINT;
+    pub fn SendInput(cInputs: UINT, pInputs: LPINPUT, cbSize: c_int) -> UINT;
 }
-DECLARE_HANDLE!{HTOUCHINPUT, HTOUCHINPUT__}
-STRUCT!{struct TOUCHINPUT {
+DECLARE_HANDLE! {HTOUCHINPUT, HTOUCHINPUT__}
+STRUCT! {struct TOUCHINPUT {
     x: LONG,
     y: LONG,
     hSource: HANDLE,
@@ -3115,33 +2628,23 @@ extern "system" {
         pInputs: PTOUCHINPUT,
         cbSize: c_int,
     ) -> BOOL;
-    pub fn CloseTouchInputHandle(
-        hTouchInput: HTOUCHINPUT,
-    ) -> BOOL;
+    pub fn CloseTouchInputHandle(hTouchInput: HTOUCHINPUT) -> BOOL;
 }
 pub const TWF_FINETOUCH: DWORD = 0x00000001;
 pub const TWF_WANTPALM: DWORD = 0x00000002;
 extern "system" {
-    pub fn RegisterTouchWindow(
-        hWnd: HWND,
-        flags: ULONG,
-    ) -> BOOL;
-    pub fn UnregisterTouchWindow(
-        hwnd: HWND,
-    ) -> BOOL;
-    pub fn IsTouchWindow(
-        hwnd: HWND,
-        pulFlags: PULONG,
-    ) -> BOOL;
+    pub fn RegisterTouchWindow(hWnd: HWND, flags: ULONG) -> BOOL;
+    pub fn UnregisterTouchWindow(hwnd: HWND) -> BOOL;
+    pub fn IsTouchWindow(hwnd: HWND, pulFlags: PULONG) -> BOOL;
 }
-ENUM!{enum POINTER_INPUT_TYPE {
+ENUM! {enum POINTER_INPUT_TYPE {
     PT_POINTER = 0x00000001,
     PT_TOUCH = 0x00000002,
     PT_PEN = 0x00000003,
     PT_MOUSE = 0x00000004,
     PT_TOUCHPAD = 0x00000005,
 }}
-ENUM!{enum POINTER_FLAGS {
+ENUM! {enum POINTER_FLAGS {
     POINTER_FLAG_NONE = 0x00000000,
     POINTER_FLAG_NEW = 0x00000001,
     POINTER_FLAG_INRANGE = 0x00000002,
@@ -3164,7 +2667,7 @@ ENUM!{enum POINTER_FLAGS {
 }}
 pub const POINTER_MOD_SHIFT: DWORD = 0x0004;
 pub const POINTER_MOD_CTRL: DWORD = 0x0008;
-ENUM!{enum POINTER_BUTTON_CHANGE_TYPE {
+ENUM! {enum POINTER_BUTTON_CHANGE_TYPE {
     POINTER_CHANGE_NONE,
     POINTER_CHANGE_FIRSTBUTTON_DOWN,
     POINTER_CHANGE_FIRSTBUTTON_UP,
@@ -3177,7 +2680,7 @@ ENUM!{enum POINTER_BUTTON_CHANGE_TYPE {
     POINTER_CHANGE_FIFTHBUTTON_DOWN,
     POINTER_CHANGE_FIFTHBUTTON_UP,
 }}
-STRUCT!{struct POINTER_INFO {
+STRUCT! {struct POINTER_INFO {
     pointerType: POINTER_INPUT_TYPE,
     pointerId: UINT32,
     frameId: UINT32,
@@ -3195,16 +2698,16 @@ STRUCT!{struct POINTER_INFO {
     PerformanceCount: UINT64,
     ButtonChangeType: POINTER_BUTTON_CHANGE_TYPE,
 }}
-ENUM!{enum TOUCH_FLAGS {
+ENUM! {enum TOUCH_FLAGS {
     TOUCH_FLAG_NONE = 0x00000000,
 }}
-ENUM!{enum TOUCH_MASK {
+ENUM! {enum TOUCH_MASK {
     TOUCH_MASK_NONE = 0x00000000,
     TOUCH_MASK_CONTACTAREA = 0x00000001,
     TOUCH_MASK_ORIENTATION = 0x00000002,
     TOUCH_MASK_PRESSURE = 0x00000004,
 }}
-STRUCT!{struct POINTER_TOUCH_INFO {
+STRUCT! {struct POINTER_TOUCH_INFO {
     pointerInfo: POINTER_INFO,
     touchFlags: TOUCH_FLAGS,
     touchMask: TOUCH_MASK,
@@ -3213,20 +2716,20 @@ STRUCT!{struct POINTER_TOUCH_INFO {
     orientation: UINT32,
     pressure: UINT32,
 }}
-ENUM!{enum PEN_FLAGS {
+ENUM! {enum PEN_FLAGS {
     PEN_FLAG_NONE = 0x00000000,
     PEN_FLAG_BARREL = 0x00000001,
     PEN_FLAG_INVERTED = 0x00000002,
     PEN_FLAG_ERASER = 0x00000004,
 }}
-ENUM!{enum PEN_MASK {
+ENUM! {enum PEN_MASK {
     PEN_MASK_NONE = 0x00000000,
     PEN_MASK_PRESSURE = 0x00000001,
     PEN_MASK_ROTATION = 0x00000002,
     PEN_MASK_TILT_X = 0x00000004,
     PEN_MASK_TILT_Y = 0x00000008,
 }}
-STRUCT!{struct POINTER_PEN_INFO {
+STRUCT! {struct POINTER_PEN_INFO {
     pointerInfo: POINTER_INFO,
     penFlags: PEN_FLAGS,
     penMask: PEN_MASK,
@@ -3253,16 +2756,10 @@ pub const TOUCH_FEEDBACK_DEFAULT: DWORD = 0x1;
 pub const TOUCH_FEEDBACK_INDIRECT: DWORD = 0x2;
 pub const TOUCH_FEEDBACK_NONE: DWORD = 0x3;
 extern "system" {
-    pub fn InitializeTouchInjection(
-        maxCount: UINT32,
-        dwMode: DWORD,
-    ) -> BOOL;
-    pub fn InjectTouchInput(
-        count: UINT32,
-        contacts: *const POINTER_TOUCH_INFO,
-    ) -> BOOL;
+    pub fn InitializeTouchInjection(maxCount: UINT32, dwMode: DWORD) -> BOOL;
+    pub fn InjectTouchInput(count: UINT32, contacts: *const POINTER_TOUCH_INFO) -> BOOL;
 }
-STRUCT!{struct USAGE_PROPERTIES {
+STRUCT! {struct USAGE_PROPERTIES {
     level: USHORT,
     page: USHORT,
     usage: USHORT,
@@ -3275,17 +2772,17 @@ STRUCT!{struct USAGE_PROPERTIES {
     physicalMaximum: INT32,
 }}
 pub type PUSAGE_PROPERTIES = *mut USAGE_PROPERTIES;
-UNION!{union POINTER_TYPE_INFO_u {
+UNION! {union POINTER_TYPE_INFO_u {
     [u64; 17] [u64; 18],
     touchInfo touchInfo_mut: POINTER_TOUCH_INFO,
     penInfo penInfo_mut: POINTER_PEN_INFO,
 }}
-STRUCT!{struct POINTER_TYPE_INFO {
+STRUCT! {struct POINTER_TYPE_INFO {
     type_: POINTER_INPUT_TYPE,
     u: POINTER_TYPE_INFO_u,
 }}
 pub type PPOINTER_TYPE_INFO = *mut POINTER_TYPE_INFO;
-STRUCT!{struct INPUT_INJECTION_VALUE {
+STRUCT! {struct INPUT_INJECTION_VALUE {
     page: USHORT,
     usage: USHORT,
     value: INT32,
@@ -3293,18 +2790,9 @@ STRUCT!{struct INPUT_INJECTION_VALUE {
 }}
 pub type PINPUT_INJECTION_VALUE = *mut INPUT_INJECTION_VALUE;
 extern "system" {
-    pub fn GetPointerType(
-        pointerId: UINT32,
-        pointerType: *mut POINTER_INPUT_TYPE,
-    ) -> BOOL;
-    pub fn GetPointerCursorId(
-        pointerId: UINT32,
-        cursorId: *mut UINT32,
-    ) -> BOOL;
-    pub fn GetPointerInfo(
-        pointerId: UINT32,
-        pointerInfo: *mut POINTER_INFO,
-    ) -> BOOL;
+    pub fn GetPointerType(pointerId: UINT32, pointerType: *mut POINTER_INPUT_TYPE) -> BOOL;
+    pub fn GetPointerCursorId(pointerId: UINT32, cursorId: *mut UINT32) -> BOOL;
+    pub fn GetPointerInfo(pointerId: UINT32, pointerInfo: *mut POINTER_INFO) -> BOOL;
     pub fn GetPointerInfoHistory(
         pointerId: UINT32,
         entriesCount: *mut UINT32,
@@ -3321,10 +2809,7 @@ extern "system" {
         pointerCount: *mut UINT32,
         pointerInfo: *mut POINTER_INFO,
     ) -> BOOL;
-    pub fn GetPointerTouchInfo(
-        pointerId: UINT32,
-        touchInfo: *mut POINTER_TOUCH_INFO,
-    ) -> BOOL;
+    pub fn GetPointerTouchInfo(pointerId: UINT32, touchInfo: *mut POINTER_TOUCH_INFO) -> BOOL;
     pub fn GetPointerTouchInfoHistory(
         pointerId: UINT32,
         entriesCount: *mut UINT32,
@@ -3341,10 +2826,7 @@ extern "system" {
         pointerCount: *mut UINT32,
         touchInfo: *mut POINTER_TOUCH_INFO,
     ) -> BOOL;
-    pub fn GetPointerPenInfo(
-        pointerId: UINT32,
-        penInfo: *mut POINTER_PEN_INFO,
-    ) -> BOOL;
+    pub fn GetPointerPenInfo(pointerId: UINT32, penInfo: *mut POINTER_PEN_INFO) -> BOOL;
     pub fn GetPointerPenInfoHistory(
         pointerId: UINT32,
         entriesCount: *mut UINT32,
@@ -3361,46 +2843,30 @@ extern "system" {
         pointerCount: *mut UINT32,
         penInfo: *mut POINTER_PEN_INFO,
     ) -> BOOL;
-    pub fn SkipPointerFrameMessages(
-        pointerId: UINT32,
-    ) -> BOOL;
-    pub fn RegisterPointerInputTarget(
-        hwnd: HWND,
-        pointerType: POINTER_INPUT_TYPE,
-    ) -> BOOL;
-    pub fn UnregisterPointerInputTarget(
-        hwnd: HWND,
-        pointerType: POINTER_INPUT_TYPE,
-    ) -> BOOL;
+    pub fn SkipPointerFrameMessages(pointerId: UINT32) -> BOOL;
+    pub fn RegisterPointerInputTarget(hwnd: HWND, pointerType: POINTER_INPUT_TYPE) -> BOOL;
+    pub fn UnregisterPointerInputTarget(hwnd: HWND, pointerType: POINTER_INPUT_TYPE) -> BOOL;
     pub fn RegisterPointerInputTargetEx(
         hwnd: HWND,
         pointerType: POINTER_INPUT_TYPE,
         fObserve: BOOL,
     ) -> BOOL;
-    pub fn UnregisterPointerInputTargetEx(
-        hwnd: HWND,
-        pointerType: POINTER_INPUT_TYPE,
-    ) -> BOOL;
-    pub fn EnableMouseInPointer(
-        fEnable: BOOL,
-    ) -> BOOL;
+    pub fn UnregisterPointerInputTargetEx(hwnd: HWND, pointerType: POINTER_INPUT_TYPE) -> BOOL;
+    pub fn EnableMouseInPointer(fEnable: BOOL) -> BOOL;
     pub fn IsMouseInPointerEnabled() -> BOOL;
 }
 pub const TOUCH_HIT_TESTING_DEFAULT: ULONG = 0x0;
 pub const TOUCH_HIT_TESTING_CLIENT: ULONG = 0x1;
 pub const TOUCH_HIT_TESTING_NONE: ULONG = 0x2;
 extern "system" {
-    pub fn RegisterTouchHitTestingWindow(
-        hwnd: HWND,
-        value: ULONG,
-    ) -> BOOL;
+    pub fn RegisterTouchHitTestingWindow(hwnd: HWND, value: ULONG) -> BOOL;
 }
-STRUCT!{struct TOUCH_HIT_TESTING_PROXIMITY_EVALUATION {
+STRUCT! {struct TOUCH_HIT_TESTING_PROXIMITY_EVALUATION {
     score: UINT16,
     adjustedPoint: POINT,
 }}
 pub type PTOUCH_HIT_TESTING_PROXIMITY_EVALUATION = *mut TOUCH_HIT_TESTING_PROXIMITY_EVALUATION;
-STRUCT!{struct TOUCH_HIT_TESTING_INPUT {
+STRUCT! {struct TOUCH_HIT_TESTING_INPUT {
     pointerId: UINT32,
     point: POINT,
     boundingBox: RECT,
@@ -3427,7 +2893,7 @@ extern "system" {
         pProximityEval: *const TOUCH_HIT_TESTING_PROXIMITY_EVALUATION,
     ) -> LRESULT;
 }
-ENUM!{enum FEEDBACK_TYPE {
+ENUM! {enum FEEDBACK_TYPE {
     FEEDBACK_TOUCH_CONTACTVISUALIZATION = 1,
     FEEDBACK_PEN_BARRELVISUALIZATION = 2,
     FEEDBACK_PEN_TAP = 3,
@@ -3458,7 +2924,7 @@ extern "system" {
         configuration: *const VOID,
     ) -> BOOL;
 }
-STRUCT!{struct INPUT_TRANSFORM {
+STRUCT! {struct INPUT_TRANSFORM {
     m: [[f32; 4]; 4],
 }}
 extern "system" {
@@ -3468,33 +2934,17 @@ extern "system" {
         inputTransform: *mut INPUT_TRANSFORM,
     ) -> BOOL;
 }
-STRUCT!{struct LASTINPUTINFO {
+STRUCT! {struct LASTINPUTINFO {
     cbSize: UINT,
     dwTime: DWORD,
 }}
 pub type PLASTINPUTINFO = *mut LASTINPUTINFO;
 extern "system" {
-    pub fn GetLastInputInfo(
-        plii: PLASTINPUTINFO,
-    ) -> BOOL;
-    pub fn MapVirtualKeyA(
-        nCode: UINT,
-        uMapType: UINT,
-    ) -> UINT;
-    pub fn MapVirtualKeyW(
-        nCode: UINT,
-        uMapType: UINT,
-    ) -> UINT;
-    pub fn MapVirtualKeyExA(
-        nCode: UINT,
-        uMapType: UINT,
-        dwhkl: HKL,
-    ) -> UINT;
-    pub fn MapVirtualKeyExW(
-        nCode: UINT,
-        uMapType: UINT,
-        dwhkl: HKL,
-    ) -> UINT;
+    pub fn GetLastInputInfo(plii: PLASTINPUTINFO) -> BOOL;
+    pub fn MapVirtualKeyA(nCode: UINT, uMapType: UINT) -> UINT;
+    pub fn MapVirtualKeyW(nCode: UINT, uMapType: UINT) -> UINT;
+    pub fn MapVirtualKeyExA(nCode: UINT, uMapType: UINT, dwhkl: HKL) -> UINT;
+    pub fn MapVirtualKeyExW(nCode: UINT, uMapType: UINT, dwhkl: HKL) -> UINT;
 }
 pub const MAPVK_VK_TO_VSC: UINT = 0;
 pub const MAPVK_VSC_TO_VK: UINT = 1;
@@ -3503,13 +2953,9 @@ pub const MAPVK_VSC_TO_VK_EX: UINT = 3;
 pub const MAPVK_VK_TO_VSC_EX: UINT = 4;
 extern "system" {
     pub fn GetInputState() -> BOOL;
-    pub fn GetQueueStatus(
-        flags: UINT,
-    ) -> DWORD;
+    pub fn GetQueueStatus(flags: UINT) -> DWORD;
     pub fn GetCapture() -> HWND;
-    pub fn SetCapture(
-        hWnd: HWND,
-    ) -> HWND;
+    pub fn SetCapture(hWnd: HWND) -> HWND;
     pub fn ReleaseCapture() -> BOOL;
     pub fn MsgWaitForMultipleObjects(
         nCount: DWORD,
@@ -3544,8 +2990,8 @@ pub const QS_POINTER: UINT = 0x1000;
 pub const QS_MOUSE: UINT = QS_MOUSEMOVE | QS_MOUSEBUTTON;
 pub const QS_INPUT: UINT = QS_MOUSE | QS_KEY | QS_RAWINPUT | QS_TOUCH | QS_POINTER;
 pub const QS_ALLEVENTS: UINT = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
-pub const QS_ALLINPUT: UINT = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY
-    | QS_SENDMESSAGE;
+pub const QS_ALLINPUT: UINT =
+    QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY | QS_SENDMESSAGE;
 pub const USER_TIMER_MAXIMUM: UINT = 0x7FFFFFFF;
 pub const USER_TIMER_MINIMUM: UINT = 0x0000000A;
 extern "system" {
@@ -3568,39 +3014,15 @@ extern "system" {
         lpTimerFunc: TIMERPROC,
         uToleranceDelay: ULONG,
     ) -> UINT_PTR;
-    pub fn KillTimer(
-        hWnd: HWND,
-        uIDEvent: UINT_PTR,
-    ) -> BOOL;
-    pub fn IsWindowUnicode(
-        hWnd: HWND,
-    ) -> BOOL;
-    pub fn EnableWindow(
-        hWnd: HWND,
-        bEnable: BOOL,
-    ) -> BOOL;
-    pub fn IsWindowEnabled(
-        hWnd: HWND,
-    ) -> BOOL;
-    pub fn LoadAcceleratorsA(
-        hInstance: HINSTANCE,
-        lpTableName: LPCSTR,
-    ) -> HACCEL;
-    pub fn LoadAcceleratorsW(
-        hInstance: HINSTANCE,
-        lpTableName: LPCWSTR,
-    ) -> HACCEL;
-    pub fn CreateAcceleratorTableA(
-        paccel: LPACCEL,
-        cAccel: c_int,
-    ) -> HACCEL;
-    pub fn CreateAcceleratorTableW(
-        paccel: LPACCEL,
-        cAccel: c_int,
-    ) -> HACCEL;
-    pub fn DestroyAcceleratorTable(
-        hAccel: HACCEL,
-    ) -> BOOL;
+    pub fn KillTimer(hWnd: HWND, uIDEvent: UINT_PTR) -> BOOL;
+    pub fn IsWindowUnicode(hWnd: HWND) -> BOOL;
+    pub fn EnableWindow(hWnd: HWND, bEnable: BOOL) -> BOOL;
+    pub fn IsWindowEnabled(hWnd: HWND) -> BOOL;
+    pub fn LoadAcceleratorsA(hInstance: HINSTANCE, lpTableName: LPCSTR) -> HACCEL;
+    pub fn LoadAcceleratorsW(hInstance: HINSTANCE, lpTableName: LPCWSTR) -> HACCEL;
+    pub fn CreateAcceleratorTableA(paccel: LPACCEL, cAccel: c_int) -> HACCEL;
+    pub fn CreateAcceleratorTableW(paccel: LPACCEL, cAccel: c_int) -> HACCEL;
+    pub fn DestroyAcceleratorTable(hAccel: HACCEL) -> BOOL;
     pub fn CopyAcceleratorTableA(
         hAccelSrc: HACCEL,
         lpAccelDst: LPACCEL,
@@ -3611,16 +3033,8 @@ extern "system" {
         lpAccelDst: LPACCEL,
         cAccelEntries: c_int,
     ) -> c_int;
-    pub fn TranslateAcceleratorA(
-        hWnd: HWND,
-        hAccTable: HACCEL,
-        lpMsg: LPMSG,
-    ) -> c_int;
-    pub fn TranslateAcceleratorW(
-        hWnd: HWND,
-        hAccTable: HACCEL,
-        lpMsg: LPMSG,
-    ) -> c_int;
+    pub fn TranslateAcceleratorA(hWnd: HWND, hAccTable: HACCEL, lpMsg: LPMSG) -> c_int;
+    pub fn TranslateAcceleratorW(hWnd: HWND, hAccTable: HACCEL, lpMsg: LPMSG) -> c_int;
 }
 pub const SM_CXSCREEN: c_int = 0;
 pub const SM_CYSCREEN: c_int = 1;
@@ -3724,34 +3138,14 @@ pub const SM_CARETBLINKINGENABLED: c_int = 0x2002;
 pub const SM_CONVERTIBLESLATEMODE: c_int = 0x2003;
 pub const SM_SYSTEMDOCKED: c_int = 0x2004;
 extern "system" {
-    pub fn GetSystemMetrics(
-        nIndex: c_int,
-    ) -> c_int;
-    pub fn GetSystemMetricsForDpi(
-        nIndex: c_int,
-        dpi: UINT,
-    ) -> c_int;
-    pub fn LoadMenuA(
-        hInstance: HINSTANCE,
-        lpMenuName: LPCSTR,
-    ) -> HMENU;
-    pub fn LoadMenuW(
-        hInstance: HINSTANCE,
-        lpMenuName: LPCWSTR,
-    ) -> HMENU;
-    pub fn LoadMenuIndirectA(
-        lpMenuTemplate: *const MENUTEMPLATEA,
-    ) -> HMENU;
-    pub fn LoadMenuIndirectW(
-        lpMenuTemplate: *const MENUTEMPLATEW,
-    ) -> HMENU;
-    pub fn GetMenu(
-        hWnd: HWND,
-    ) -> HMENU;
-    pub fn SetMenu(
-        hWnd: HWND,
-        hMenu: HMENU,
-    ) -> BOOL;
+    pub fn GetSystemMetrics(nIndex: c_int) -> c_int;
+    pub fn GetSystemMetricsForDpi(nIndex: c_int, dpi: UINT) -> c_int;
+    pub fn LoadMenuA(hInstance: HINSTANCE, lpMenuName: LPCSTR) -> HMENU;
+    pub fn LoadMenuW(hInstance: HINSTANCE, lpMenuName: LPCWSTR) -> HMENU;
+    pub fn LoadMenuIndirectA(lpMenuTemplate: *const MENUTEMPLATEA) -> HMENU;
+    pub fn LoadMenuIndirectW(lpMenuTemplate: *const MENUTEMPLATEW) -> HMENU;
+    pub fn GetMenu(hWnd: HWND) -> HMENU;
+    pub fn SetMenu(hWnd: HWND, hMenu: HMENU) -> BOOL;
     pub fn ChangeMenuA(
         hMenu: HMENU,
         cmd: UINT,
@@ -3766,12 +3160,7 @@ extern "system" {
         cmdInsert: UINT,
         flags: UINT,
     ) -> BOOL;
-    pub fn HiliteMenuItem(
-        hWnd: HWND,
-        hMenu: HMENU,
-        uIDHiliteItem: UINT,
-        uHilite: UINT,
-    ) -> BOOL;
+    pub fn HiliteMenuItem(hWnd: HWND, hMenu: HMENU, uIDHiliteItem: UINT, uHilite: UINT) -> BOOL;
     pub fn GetMenuStringA(
         hMenu: HMENU,
         uIDItem: UINT,
@@ -3786,47 +3175,20 @@ extern "system" {
         cchMax: c_int,
         flags: UINT,
     ) -> c_int;
-    pub fn GetMenuState(
-        hMenu: HMENU,
-        uId: UINT,
-        uFlags: UINT,
-    ) -> UINT;
-    pub fn DrawMenuBar(
-        hwnd: HWND,
-    ) -> BOOL;
+    pub fn GetMenuState(hMenu: HMENU, uId: UINT, uFlags: UINT) -> UINT;
+    pub fn DrawMenuBar(hwnd: HWND) -> BOOL;
 }
 pub const PMB_ACTIVE: DWORD = 0x00000001;
 extern "system" {
-    pub fn GetSystemMenu(
-        hWnd: HWND,
-        bRevert: BOOL,
-    ) -> HMENU;
+    pub fn GetSystemMenu(hWnd: HWND, bRevert: BOOL) -> HMENU;
     pub fn CreateMenu() -> HMENU;
-    pub fn CreatePopupMenu() ->HMENU;
-    pub fn DestroyMenu(
-        hMenu: HMENU,
-    ) -> BOOL;
-    pub fn CheckMenuItem(
-        hMenu: HMENU,
-        uIDCheckItem: UINT,
-        uCheck: UINT,
-    ) -> DWORD;
-    pub fn EnableMenuItem(
-        hMenu: HMENU,
-        uIDEnableItem: UINT,
-        uEnable: UINT,
-    ) -> BOOL;
-    pub fn GetSubMenu(
-        hMenu: HMENU,
-        nPos: c_int,
-    ) -> HMENU;
-    pub fn GetMenuItemID(
-        hMenu: HMENU,
-        nPos: c_int,
-    ) -> UINT;
-    pub fn GetMenuItemCount(
-        hMenu: HMENU,
-    ) -> c_int;
+    pub fn CreatePopupMenu() -> HMENU;
+    pub fn DestroyMenu(hMenu: HMENU) -> BOOL;
+    pub fn CheckMenuItem(hMenu: HMENU, uIDCheckItem: UINT, uCheck: UINT) -> DWORD;
+    pub fn EnableMenuItem(hMenu: HMENU, uIDEnableItem: UINT, uEnable: UINT) -> BOOL;
+    pub fn GetSubMenu(hMenu: HMENU, nPos: c_int) -> HMENU;
+    pub fn GetMenuItemID(hMenu: HMENU, nPos: c_int) -> UINT;
+    pub fn GetMenuItemCount(hMenu: HMENU) -> c_int;
     pub fn InsertMenuA(
         hMenu: HMENU,
         uPosition: UINT,
@@ -3841,12 +3203,8 @@ extern "system" {
         uIDNewItem: UINT_PTR,
         lpNewItem: LPCWSTR,
     ) -> BOOL;
-    pub fn AppendMenuA(
-        hMenu: HMENU,
-        uFlags: UINT,
-        uIDNewItem: UINT_PTR,
-        lpNewItem: LPCSTR,
-    ) -> BOOL;
+    pub fn AppendMenuA(hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR)
+        -> BOOL;
     pub fn AppendMenuW(
         hMenu: HMENU,
         uFlags: UINT,
@@ -3867,16 +3225,8 @@ extern "system" {
         uIDNewItem: UINT_PTR,
         lpNewItem: LPCWSTR,
     ) -> BOOL;
-    pub fn RemoveMenu(
-        hMenu: HMENU,
-        uPosition: UINT,
-        uFlags: UINT,
-    ) -> BOOL;
-    pub fn DeleteMenu(
-        hMenu: HMENU,
-        uPosition: UINT,
-        uFlags: UINT,
-    ) -> BOOL;
+    pub fn RemoveMenu(hMenu: HMENU, uPosition: UINT, uFlags: UINT) -> BOOL;
+    pub fn DeleteMenu(hMenu: HMENU, uPosition: UINT, uFlags: UINT) -> BOOL;
     pub fn SetMenuItemBitmaps(
         hMenu: HMENU,
         uPosition: UINT,
@@ -3899,7 +3249,7 @@ pub const MNC_IGNORE: DWORD = 0;
 pub const MNC_CLOSE: DWORD = 1;
 pub const MNC_EXECUTE: DWORD = 2;
 pub const MNC_SELECT: DWORD = 3;
-STRUCT!{struct TPMPARAMS {
+STRUCT! {struct TPMPARAMS {
     cbSize: UINT,
     rcExclude: RECT,
 }}
@@ -3933,7 +3283,7 @@ pub const MIM_HELPID: DWORD = 0x00000004;
 pub const MIM_MENUDATA: DWORD = 0x00000008;
 pub const MIM_STYLE: DWORD = 0x00000010;
 pub const MIM_APPLYTOSUBMENUS: DWORD = 0x80000000;
-STRUCT!{struct MENUINFO {
+STRUCT! {struct MENUINFO {
     cbSize: DWORD,
     fMask: DWORD,
     dwStyle: DWORD,
@@ -3945,24 +3295,13 @@ STRUCT!{struct MENUINFO {
 pub type LPMENUINFO = *mut MENUINFO;
 pub type LPCMENUINFO = *const MENUINFO;
 extern "system" {
-    pub fn GetMenuInfo(
-        hMenu: HMENU,
-        lpcmi: LPMENUINFO,
-    ) -> BOOL;
-    pub fn SetMenuInfo(
-        hMenu: HMENU,
-        lpcmi: LPCMENUINFO,
-    ) -> BOOL;
-    pub fn EndMenu(
-        hMenu: HMENU,
-        uFlags: UINT,
-        uIDNewItem: UINT_PTR,
-        lpNewItem: LPCSTR,
-    ) -> BOOL;
+    pub fn GetMenuInfo(hMenu: HMENU, lpcmi: LPMENUINFO) -> BOOL;
+    pub fn SetMenuInfo(hMenu: HMENU, lpcmi: LPCMENUINFO) -> BOOL;
+    pub fn EndMenu(hMenu: HMENU, uFlags: UINT, uIDNewItem: UINT_PTR, lpNewItem: LPCSTR) -> BOOL;
 }
 pub const MND_CONTINUE: DWORD = 0;
 pub const MND_ENDMENU: DWORD = 1;
-STRUCT!{struct MENUGETOBJECTINFO {
+STRUCT! {struct MENUGETOBJECTINFO {
     dwFlags: DWORD,
     uPos: UINT,
     hmenu: HMENU,
@@ -3994,7 +3333,7 @@ pub const HBMMENU_POPUP_CLOSE: HBITMAP = 8 as HBITMAP;
 pub const HBMMENU_POPUP_RESTORE: HBITMAP = 9 as HBITMAP;
 pub const HBMMENU_POPUP_MAXIMIZE: HBITMAP = 10 as HBITMAP;
 pub const HBMMENU_POPUP_MINIMIZE: HBITMAP = 11 as HBITMAP;
-STRUCT!{struct MENUITEMINFOA {
+STRUCT! {struct MENUITEMINFOA {
     cbSize: UINT,
     fMask: UINT,
     fType: UINT,
@@ -4010,7 +3349,7 @@ STRUCT!{struct MENUITEMINFOA {
 }}
 pub type LPMENUITEMINFOA = *mut MENUITEMINFOA;
 pub type LPCMENUITEMINFOA = *const MENUITEMINFOA;
-STRUCT!{struct MENUITEMINFOW {
+STRUCT! {struct MENUITEMINFOW {
     cbSize: UINT,
     fMask: UINT,
     fType: UINT,
@@ -4067,27 +3406,10 @@ extern "system" {
 pub const GMDI_USEDISABLED: DWORD = 0x0001;
 pub const GMDI_GOINTOPOPUPS: DWORD = 0x0002;
 extern "system" {
-    pub fn GetMenuDefaultItem(
-        hMenu: HMENU,
-        fByPos: UINT,
-        gmdiFlags: UINT,
-    ) -> UINT;
-    pub fn SetMenuDefaultItem(
-        hMenu: HMENU,
-        uItem: UINT,
-        fByPos: UINT,
-    ) -> BOOL;
-    pub fn GetMenuItemRect(
-        hWnd: HWND,
-        hMenu: HMENU,
-        uItem: UINT,
-        lprcItem: LPRECT,
-    ) -> BOOL;
-    pub fn MenuItemFromPoint(
-        hWnd: HWND,
-        hMenu: HMENU,
-        ptScreen: POINT,
-    ) -> c_int;
+    pub fn GetMenuDefaultItem(hMenu: HMENU, fByPos: UINT, gmdiFlags: UINT) -> UINT;
+    pub fn SetMenuDefaultItem(hMenu: HMENU, uItem: UINT, fByPos: UINT) -> BOOL;
+    pub fn GetMenuItemRect(hWnd: HWND, hMenu: HMENU, uItem: UINT, lprcItem: LPRECT) -> BOOL;
+    pub fn MenuItemFromPoint(hWnd: HWND, hMenu: HMENU, ptScreen: POINT) -> c_int;
 }
 pub const TPM_LEFTBUTTON: UINT = 0x0000;
 pub const TPM_RIGHTBUTTON: UINT = 0x0002;
@@ -4109,7 +3431,7 @@ pub const TPM_VERNEGANIMATION: UINT = 0x2000;
 pub const TPM_NOANIMATION: UINT = 0x4000;
 pub const TPM_LAYOUTRTL: UINT = 0x8000;
 pub const TPM_WORKAREA: UINT = 0x10000;
-STRUCT!{struct DROPSTRUCT {
+STRUCT! {struct DROPSTRUCT {
     hwndSource: HWND,
     hwndSink: HWND,
     wFmt: DWORD,
@@ -4135,16 +3457,8 @@ extern "system" {
         data: ULONG_PTR,
         hcur: HCURSOR,
     ) -> DWORD;
-    pub fn DragDetect(
-        hwnd: HWND,
-        pt: POINT,
-    ) -> BOOL;
-    pub fn DrawIcon(
-        hDC: HDC,
-        x: c_int,
-        y: c_int,
-        hIcon: HICON,
-    ) -> BOOL;
+    pub fn DragDetect(hwnd: HWND, pt: POINT) -> BOOL;
+    pub fn DrawIcon(hDC: HDC, x: c_int, y: c_int, hIcon: HICON) -> BOOL;
 }
 pub const DT_TOP: UINT = 0x00000000;
 pub const DT_LEFT: UINT = 0x00000000;
@@ -4170,7 +3484,7 @@ pub const DT_WORD_ELLIPSIS: UINT = 0x00040000;
 pub const DT_NOFULLWIDTHCHARBREAK: UINT = 0x00080000;
 pub const DT_HIDEPREFIX: UINT = 0x00100000;
 pub const DT_PREFIXONLY: UINT = 0x00200000;
-STRUCT!{struct DRAWTEXTPARAMS {
+STRUCT! {struct DRAWTEXTPARAMS {
     cbSize: UINT,
     iTabLength: c_int,
     iLeftMargin: c_int,
@@ -4303,47 +3617,24 @@ extern "system" {
         nTabPositions: c_int,
         lpnTabStopPositions: *const INT,
     ) -> DWORD;
-    pub fn UpdateWindow(
-        hWnd: HWND,
-    ) -> BOOL;
-    pub fn SetActiveWindow(
-        hWnd: HWND,
-    ) -> HWND;
+    pub fn UpdateWindow(hWnd: HWND) -> BOOL;
+    pub fn SetActiveWindow(hWnd: HWND) -> HWND;
     pub fn GetForegroundWindow() -> HWND;
-    pub fn PaintDesktop(
-        hdc: HDC,
-    ) -> BOOL;
-    pub fn SwitchToThisWindow(
-        hwnd: HWND,
-        fUnknown: BOOL,
-    );
-    pub fn SetForegroundWindow(
-        hWnd: HWND,
-    ) -> BOOL;
-    pub fn AllowSetForegroundWindow(
-        dwProcessId: DWORD,
-    ) -> BOOL;
+    pub fn PaintDesktop(hdc: HDC) -> BOOL;
+    pub fn SwitchToThisWindow(hwnd: HWND, fUnknown: BOOL);
+    pub fn SetForegroundWindow(hWnd: HWND) -> BOOL;
+    pub fn AllowSetForegroundWindow(dwProcessId: DWORD) -> BOOL;
 }
 pub const ASFW_ANY: DWORD = -1i32 as u32;
 extern "system" {
-    pub fn LockSetForegroundWindow(
-        uLockCode: UINT,
-    ) -> BOOL;
+    pub fn LockSetForegroundWindow(uLockCode: UINT) -> BOOL;
 }
 pub const LSFW_LOCK: UINT = 1;
 pub const LSFW_UNLOCK: UINT = 2;
 extern "system" {
-    pub fn WindowFromDC(
-        hDC: HDC,
-    ) -> HWND;
-    pub fn GetDC(
-        hWnd: HWND,
-    ) -> HDC;
-    pub fn GetDCEx(
-        hWnd: HWND,
-        hrgnClip: HRGN,
-        flags: DWORD,
-    ) -> HDC;
+    pub fn WindowFromDC(hDC: HDC) -> HWND;
+    pub fn GetDC(hWnd: HWND) -> HDC;
+    pub fn GetDCEx(hWnd: HWND, hrgnClip: HRGN, flags: DWORD) -> HDC;
 }
 pub const DCX_WINDOW: DWORD = 0x00000001;
 pub const DCX_CACHE: DWORD = 0x00000002;
@@ -4358,72 +3649,22 @@ pub const DCX_INTERSECTUPDATE: DWORD = 0x00000200;
 pub const DCX_LOCKWINDOWUPDATE: DWORD = 0x00000400;
 pub const DCX_VALIDATE: DWORD = 0x00200000;
 extern "system" {
-    pub fn GetWindowDC(
-        hWnd: HWND,
-    ) -> HDC;
-    pub fn ReleaseDC(
-        hWnd: HWND,
-        hDC: HDC,
-    ) -> c_int;
-    pub fn BeginPaint(
-        hwnd: HWND,
-        lpPaint: LPPAINTSTRUCT,
-    ) -> HDC;
-    pub fn EndPaint(
-        hWnd: HWND,
-        lpPaint: *const PAINTSTRUCT,
-    ) -> BOOL;
-    pub fn GetUpdateRect(
-        hWnd: HWND,
-        lpRect: LPRECT,
-        bErase: BOOL,
-    ) -> BOOL;
-    pub fn GetUpdateRgn(
-        hWnd: HWND,
-        hRgn: HRGN,
-        bErase: BOOL,
-    ) -> c_int;
-    pub fn SetWindowRgn(
-        hWnd: HWND,
-        hRgn: HRGN,
-        bRedraw: BOOL,
-    ) -> c_int;
-    pub fn GetWindowRgn(
-        hWnd: HWND,
-        hRgn: HRGN,
-    ) -> c_int;
-    pub fn GetWindowRgnBox(
-        hWnd: HWND,
-        lprc: LPRECT,
-    ) -> c_int;
-    pub fn ExcludeUpdateRgn(
-        hDC: HDC,
-        hWnd: HWND,
-    ) -> c_int;
-    pub fn InvalidateRect(
-        hWnd: HWND,
-        lpRect: *const RECT,
-        bErase: BOOL,
-    ) -> BOOL;
-    pub fn ValidateRect(
-        hWnd: HWND,
-        lpRect: *const RECT,
-    ) -> BOOL;
-    pub fn InvalidateRgn(
-        hWnd: HWND,
-        hRgn: HRGN,
-        bErase: BOOL,
-    ) -> BOOL;
-    pub fn ValidateRgn(
-        hWnd: HWND,
-        hRgn: HRGN,
-    ) -> BOOL;
-    pub fn RedrawWindow(
-        hwnd: HWND,
-        lprcUpdate: *const RECT,
-        hrgnUpdate: HRGN,
-        flags: UINT,
-    ) -> BOOL;
+    pub fn GetWindowDC(hWnd: HWND) -> HDC;
+    pub fn ReleaseDC(hWnd: HWND, hDC: HDC) -> c_int;
+    pub fn BeginPaint(hwnd: HWND, lpPaint: LPPAINTSTRUCT) -> HDC;
+    pub fn EndPaint(hWnd: HWND, lpPaint: *const PAINTSTRUCT) -> BOOL;
+    pub fn GetUpdateRect(hWnd: HWND, lpRect: LPRECT, bErase: BOOL) -> BOOL;
+    pub fn GetUpdateRgn(hWnd: HWND, hRgn: HRGN, bErase: BOOL) -> c_int;
+    pub fn SetWindowRgn(hWnd: HWND, hRgn: HRGN, bRedraw: BOOL) -> c_int;
+    pub fn GetWindowRgn(hWnd: HWND, hRgn: HRGN) -> c_int;
+    pub fn GetWindowRgnBox(hWnd: HWND, lprc: LPRECT) -> c_int;
+    pub fn ExcludeUpdateRgn(hDC: HDC, hWnd: HWND) -> c_int;
+    pub fn InvalidateRect(hWnd: HWND, lpRect: *const RECT, bErase: BOOL) -> BOOL;
+    pub fn ValidateRect(hWnd: HWND, lpRect: *const RECT) -> BOOL;
+    pub fn InvalidateRgn(hWnd: HWND, hRgn: HRGN, bErase: BOOL) -> BOOL;
+    pub fn ValidateRgn(hWnd: HWND, hRgn: HRGN) -> BOOL;
+    pub fn RedrawWindow(hwnd: HWND, lprcUpdate: *const RECT, hrgnUpdate: HRGN, flags: UINT)
+        -> BOOL;
 }
 pub const RDW_INVALIDATE: UINT = 0x0001;
 pub const RDW_INTERNALPAINT: UINT = 0x0002;
@@ -4438,9 +3679,7 @@ pub const RDW_ERASENOW: UINT = 0x0200;
 pub const RDW_FRAME: UINT = 0x0400;
 pub const RDW_NOFRAME: UINT = 0x0800;
 extern "system" {
-    pub fn LockWindowUpdate(
-        hWndLock: HWND,
-    ) -> BOOL;
+    pub fn LockWindowUpdate(hWndLock: HWND) -> BOOL;
     pub fn ScrollWindow(
         hWnd: HWND,
         xAmount: c_int,
@@ -4473,16 +3712,8 @@ pub const SW_INVALIDATE: UINT = 0x0002;
 pub const SW_ERASE: UINT = 0x0004;
 pub const SW_SMOOTHSCROLL: UINT = 0x0010;
 extern "system" {
-    pub fn SetScrollPos(
-        hWnd: HWND,
-        nBar: c_int,
-        nPos: c_int,
-        bRedraw: BOOL,
-    ) -> c_int;
-    pub fn GetScrollPos(
-        hWnd: HWND,
-        nBar: c_int,
-    ) -> c_int;
+    pub fn SetScrollPos(hWnd: HWND, nBar: c_int, nPos: c_int, bRedraw: BOOL) -> c_int;
+    pub fn GetScrollPos(hWnd: HWND, nBar: c_int) -> c_int;
     pub fn SetScrollRange(
         hWnd: HWND,
         nBar: c_int,
@@ -4490,22 +3721,9 @@ extern "system" {
         nMaxPos: c_int,
         bRedraw: BOOL,
     ) -> BOOL;
-    pub fn GetScrollRange(
-        hWnd: HWND,
-        nBar: c_int,
-        lpMinPos: LPINT,
-        lpMaxPos: LPINT,
-    ) -> BOOL;
-    pub fn ShowScrollBar(
-        hWnd: HWND,
-        wBar: c_int,
-        bShow: BOOL,
-    ) -> BOOL;
-    pub fn EnableScrollBar(
-        hWnd: HWND,
-        wSBflags: UINT,
-        wArrows: UINT,
-    ) -> BOOL;
+    pub fn GetScrollRange(hWnd: HWND, nBar: c_int, lpMinPos: LPINT, lpMaxPos: LPINT) -> BOOL;
+    pub fn ShowScrollBar(hWnd: HWND, wBar: c_int, bShow: BOOL) -> BOOL;
+    pub fn EnableScrollBar(hWnd: HWND, wSBflags: UINT, wArrows: UINT) -> BOOL;
 }
 pub const ESB_ENABLE_BOTH: UINT = 0x0000;
 pub const ESB_DISABLE_BOTH: UINT = 0x0003;
@@ -4516,87 +3734,25 @@ pub const ESB_DISABLE_DOWN: UINT = 0x0002;
 pub const ESB_DISABLE_LTUP: UINT = ESB_DISABLE_LEFT;
 pub const ESB_DISABLE_RTDN: UINT = ESB_DISABLE_RIGHT;
 extern "system" {
-    pub fn SetPropA(
-        hWnd: HWND,
-        lpString: LPCSTR,
-        hData: HANDLE,
-    ) -> BOOL;
-    pub fn SetPropW(
-        hWnd: HWND,
-        lpString: LPCWSTR,
-        hData: HANDLE,
-    ) -> BOOL;
-    pub fn GetPropA(
-        hwnd: HWND,
-        lpString: LPCSTR,
-    ) -> HANDLE;
-    pub fn GetPropW(
-        hwnd: HWND,
-        lpString: LPCWSTR,
-    ) -> HANDLE;
-    pub fn RemovePropA(
-        hWnd: HWND,
-        lpStr: LPCSTR,
-    ) -> HANDLE;
-    pub fn RemovePropW(
-        hWnd: HWND,
-        lpStr: LPCWSTR,
-    ) -> HANDLE;
-    pub fn EnumPropsExA(
-        hWnd: HWND,
-        lpEnumFunc: PROPENUMPROCA,
-        lParam: LPARAM,
-    ) -> c_int;
-    pub fn EnumPropsExW(
-        hWnd: HWND,
-        lpEnumFunc: PROPENUMPROCW,
-        lParam: LPARAM,
-    ) -> c_int;
-    pub fn EnumPropsA(
-        hWnd: HWND,
-        lpEnumFunc: PROPENUMPROCA,
-    ) -> c_int;
-    pub fn EnumPropsW(
-        hWnd: HWND,
-        lpEnumFunc: PROPENUMPROCW,
-    ) -> c_int;
-    pub fn SetWindowTextA(
-        hWnd: HWND,
-        lpString: LPCSTR,
-    ) -> BOOL;
-    pub fn SetWindowTextW(
-        hWnd: HWND,
-        lpString: LPCWSTR,
-    ) -> BOOL;
-    pub fn GetWindowTextA(
-        hWnd: HWND,
-        lpString: LPSTR,
-        nMaxCount: c_int,
-    ) -> c_int;
-    pub fn GetWindowTextW(
-        hWnd: HWND,
-        lpString: LPWSTR,
-        nMaxCount: c_int,
-    ) -> c_int;
-    pub fn GetWindowTextLengthA(
-        hWnd: HWND,
-    ) -> c_int;
-    pub fn GetWindowTextLengthW(
-        hWnd: HWND,
-    ) -> c_int;
-    pub fn GetClientRect(
-        hWnd: HWND,
-        lpRect: LPRECT,
-    ) -> BOOL;
-    pub fn GetWindowRect(
-        hWnd: HWND,
-        lpRect: LPRECT,
-    ) -> BOOL;
-    pub fn AdjustWindowRect(
-        lpRect: LPRECT,
-        dwStyle: DWORD,
-        bMenu: BOOL,
-    ) -> BOOL;
+    pub fn SetPropA(hWnd: HWND, lpString: LPCSTR, hData: HANDLE) -> BOOL;
+    pub fn SetPropW(hWnd: HWND, lpString: LPCWSTR, hData: HANDLE) -> BOOL;
+    pub fn GetPropA(hwnd: HWND, lpString: LPCSTR) -> HANDLE;
+    pub fn GetPropW(hwnd: HWND, lpString: LPCWSTR) -> HANDLE;
+    pub fn RemovePropA(hWnd: HWND, lpStr: LPCSTR) -> HANDLE;
+    pub fn RemovePropW(hWnd: HWND, lpStr: LPCWSTR) -> HANDLE;
+    pub fn EnumPropsExA(hWnd: HWND, lpEnumFunc: PROPENUMPROCA, lParam: LPARAM) -> c_int;
+    pub fn EnumPropsExW(hWnd: HWND, lpEnumFunc: PROPENUMPROCW, lParam: LPARAM) -> c_int;
+    pub fn EnumPropsA(hWnd: HWND, lpEnumFunc: PROPENUMPROCA) -> c_int;
+    pub fn EnumPropsW(hWnd: HWND, lpEnumFunc: PROPENUMPROCW) -> c_int;
+    pub fn SetWindowTextA(hWnd: HWND, lpString: LPCSTR) -> BOOL;
+    pub fn SetWindowTextW(hWnd: HWND, lpString: LPCWSTR) -> BOOL;
+    pub fn GetWindowTextA(hWnd: HWND, lpString: LPSTR, nMaxCount: c_int) -> c_int;
+    pub fn GetWindowTextW(hWnd: HWND, lpString: LPWSTR, nMaxCount: c_int) -> c_int;
+    pub fn GetWindowTextLengthA(hWnd: HWND) -> c_int;
+    pub fn GetWindowTextLengthW(hWnd: HWND) -> c_int;
+    pub fn GetClientRect(hWnd: HWND, lpRect: LPRECT) -> BOOL;
+    pub fn GetWindowRect(hWnd: HWND, lpRect: LPRECT) -> BOOL;
+    pub fn AdjustWindowRect(lpRect: LPRECT, dwStyle: DWORD, bMenu: BOOL) -> BOOL;
     pub fn AdjustWindowRectEx(
         lpRect: LPRECT,
         dwStyle: DWORD,
@@ -4613,7 +3769,7 @@ extern "system" {
 }
 pub const HELPINFO_WINDOW: UINT = 0x0001;
 pub const HELPINFO_MENUITEM: UINT = 0x0002;
-STRUCT!{struct HELPINFO {
+STRUCT! {struct HELPINFO {
     cbSize: UINT,
     iContextType: c_int,
     iCtrlId: c_int,
@@ -4623,20 +3779,10 @@ STRUCT!{struct HELPINFO {
 }}
 pub type LPHELPINFO = *mut HELPINFO;
 extern "system" {
-    pub fn SetWindowContextHelpId(
-        _: HWND,
-        _: DWORD,
-    ) -> BOOL;
-    pub fn GetWindowContextHelpId(
-        _: HWND,
-    ) -> DWORD;
-    pub fn SetMenuContextHelpId(
-        _: HMENU,
-        _: DWORD,
-    ) -> BOOL;
-    pub fn GetMenuContextHelpId(
-        _: HMENU,
-    ) -> DWORD;
+    pub fn SetWindowContextHelpId(_: HWND, _: DWORD) -> BOOL;
+    pub fn GetWindowContextHelpId(_: HWND) -> DWORD;
+    pub fn SetMenuContextHelpId(_: HMENU, _: DWORD) -> BOOL;
+    pub fn GetMenuContextHelpId(_: HMENU) -> DWORD;
 }
 pub const MB_OK: UINT = 0x00000000;
 pub const MB_OKCANCEL: UINT = 0x00000001;
@@ -4676,18 +3822,8 @@ pub const MB_DEFMASK: UINT = 0x00000F00;
 pub const MB_MODEMASK: UINT = 0x00003000;
 pub const MB_MISCMASK: UINT = 0x0000C000;
 extern "system" {
-    pub fn MessageBoxA(
-        hWnd: HWND,
-        lpText: LPCSTR,
-        lpCaption: LPCSTR,
-        uType: UINT,
-    ) -> c_int;
-    pub fn MessageBoxW(
-        hWnd: HWND,
-        lpText: LPCWSTR,
-        lpCaption: LPCWSTR,
-        uType: UINT,
-    ) -> c_int;
+    pub fn MessageBoxA(hWnd: HWND, lpText: LPCSTR, lpCaption: LPCSTR, uType: UINT) -> c_int;
+    pub fn MessageBoxW(hWnd: HWND, lpText: LPCWSTR, lpCaption: LPCWSTR, uType: UINT) -> c_int;
     pub fn MessageBoxExA(
         hWnd: HWND,
         lpText: LPCSTR,
@@ -4703,10 +3839,10 @@ extern "system" {
         wLanguageId: WORD,
     ) -> c_int;
 }
-FN!{stdcall MSGBOXCALLBACK(
+FN! {stdcall MSGBOXCALLBACK(
     LPHELPINFO,
 ) -> ()}
-STRUCT!{struct MSGBOXPARAMSA {
+STRUCT! {struct MSGBOXPARAMSA {
     cbSize: UINT,
     hwndOwner: HWND,
     hInstance: HINSTANCE,
@@ -4720,7 +3856,7 @@ STRUCT!{struct MSGBOXPARAMSA {
 }}
 pub type PMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
 pub type LPMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
-STRUCT!{struct MSGBOXPARAMSW {
+STRUCT! {struct MSGBOXPARAMSW {
     cbSize: UINT,
     hwndOwner: HWND,
     hInstance: HINSTANCE,
@@ -4735,117 +3871,44 @@ STRUCT!{struct MSGBOXPARAMSW {
 pub type PMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
 pub type LPMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
 extern "system" {
-    pub fn MessageBoxIndirectA(
-        lpmbp: *const MSGBOXPARAMSA,
-    ) -> c_int;
-    pub fn MessageBoxIndirectW(
-        lpmbp: *const MSGBOXPARAMSW,
-    ) -> c_int;
-    pub fn MessageBeep(
-        uType: UINT,
-    ) -> BOOL;
-    pub fn ShowCursor(
-        bShow: BOOL,
-    ) -> c_int;
-    pub fn SetCursorPos(
-        X: c_int,
-        Y: c_int,
-    ) -> BOOL;
-    pub fn SetPhysicalCursorPos(
-        X: c_int,
-        Y: c_int,
-    ) -> BOOL;
-    pub fn SetCursor(
-        hCursor: HCURSOR,
-    ) -> HCURSOR;
-    pub fn GetCursorPos(
-        lpPoint: LPPOINT,
-    ) -> BOOL;
-    pub fn GetPhysicalCursorPos(
-        lpPoint: LPPOINT,
-    ) -> BOOL;
-    pub fn GetClipCursor(
-        lpRect: LPRECT,
-    ) -> BOOL;
+    pub fn MessageBoxIndirectA(lpmbp: *const MSGBOXPARAMSA) -> c_int;
+    pub fn MessageBoxIndirectW(lpmbp: *const MSGBOXPARAMSW) -> c_int;
+    pub fn MessageBeep(uType: UINT) -> BOOL;
+    pub fn ShowCursor(bShow: BOOL) -> c_int;
+    pub fn SetCursorPos(X: c_int, Y: c_int) -> BOOL;
+    pub fn SetPhysicalCursorPos(X: c_int, Y: c_int) -> BOOL;
+    pub fn SetCursor(hCursor: HCURSOR) -> HCURSOR;
+    pub fn GetCursorPos(lpPoint: LPPOINT) -> BOOL;
+    pub fn GetPhysicalCursorPos(lpPoint: LPPOINT) -> BOOL;
+    pub fn GetClipCursor(lpRect: LPRECT) -> BOOL;
     pub fn GetCursor() -> HCURSOR;
-    pub fn CreateCaret(
-        hWnd: HWND,
-        hBitmap: HBITMAP,
-        nWidth: c_int,
-        nHeight: c_int,
-    ) -> BOOL;
+    pub fn CreateCaret(hWnd: HWND, hBitmap: HBITMAP, nWidth: c_int, nHeight: c_int) -> BOOL;
     pub fn GetCaretBlinkTime() -> UINT;
-    pub fn SetCaretBlinkTime(
-        uMSeconds: UINT,
-    ) -> BOOL;
+    pub fn SetCaretBlinkTime(uMSeconds: UINT) -> BOOL;
     pub fn DestroyCaret() -> BOOL;
-    pub fn HideCaret(
-        hWnd: HWND,
-    ) -> BOOL;
-    pub fn ShowCaret(
-        hWnd: HWND,
-    ) -> BOOL;
-    pub fn SetCaretPos(
-        X: c_int,
-        Y: c_int,
-    ) -> BOOL;
-    pub fn GetCaretPos(
-        lpPoint: LPPOINT,
-    ) -> BOOL;
-    pub fn ClientToScreen(
-        hWnd: HWND,
-        lpPoint: LPPOINT,
-    ) -> BOOL;
-    pub fn ScreenToClient(
-        hWnd: HWND,
-        lpPoint: LPPOINT,
-    ) -> BOOL;
-    pub fn LogicalToPhysicalPoint(
-        hWnd: HWND,
-        lpPoint: LPPOINT,
-    ) -> BOOL;
-    pub fn PhysicalToLogicalPoint(
-        hWnd: HWND,
-        lpPoint: LPPOINT,
-    ) -> BOOL;
-    pub fn LogicalToPhysicalPointForPerMonitorDPI(
-        hWnd: HWND,
-        lpPoint: LPPOINT,
-    ) -> BOOL;
-    pub fn PhysicalToLogicalPointForPerMonitorDPI(
-        hWnd: HWND,
-        lpPoint: LPPOINT,
-    ) -> BOOL;
-    pub fn MapWindowPoints(
-        hWndFrom: HWND,
-        hWndTo: HWND,
-        lpPoints: LPPOINT,
-        cPoints: UINT,
-    ) -> c_int;
-    pub fn WindowFromPoint(
-        Point: POINT,
-    ) -> HWND;
-    pub fn WindowFromPhysicalPoint(
-        Point: POINT,
-    ) -> HWND;
-    pub fn ChildWindowFromPoint(
-        hWndParent: HWND,
-        point: POINT,
-    ) -> HWND;
-    pub fn ClipCursor(
-        lpRect: *const RECT,
-    ) -> BOOL;
+    pub fn HideCaret(hWnd: HWND) -> BOOL;
+    pub fn ShowCaret(hWnd: HWND) -> BOOL;
+    pub fn SetCaretPos(X: c_int, Y: c_int) -> BOOL;
+    pub fn GetCaretPos(lpPoint: LPPOINT) -> BOOL;
+    pub fn ClientToScreen(hWnd: HWND, lpPoint: LPPOINT) -> BOOL;
+    pub fn ScreenToClient(hWnd: HWND, lpPoint: LPPOINT) -> BOOL;
+    pub fn LogicalToPhysicalPoint(hWnd: HWND, lpPoint: LPPOINT) -> BOOL;
+    pub fn PhysicalToLogicalPoint(hWnd: HWND, lpPoint: LPPOINT) -> BOOL;
+    pub fn LogicalToPhysicalPointForPerMonitorDPI(hWnd: HWND, lpPoint: LPPOINT) -> BOOL;
+    pub fn PhysicalToLogicalPointForPerMonitorDPI(hWnd: HWND, lpPoint: LPPOINT) -> BOOL;
+    pub fn MapWindowPoints(hWndFrom: HWND, hWndTo: HWND, lpPoints: LPPOINT, cPoints: UINT)
+        -> c_int;
+    pub fn WindowFromPoint(Point: POINT) -> HWND;
+    pub fn WindowFromPhysicalPoint(Point: POINT) -> HWND;
+    pub fn ChildWindowFromPoint(hWndParent: HWND, point: POINT) -> HWND;
+    pub fn ClipCursor(lpRect: *const RECT) -> BOOL;
 }
 pub const CWP_ALL: UINT = 0x0000;
 pub const CWP_SKIPINVISIBLE: UINT = 0x0001;
 pub const CWP_SKIPDISABLED: UINT = 0x0002;
 pub const CWP_SKIPTRANSPARENT: UINT = 0x0004;
 extern "system" {
-    pub fn ChildWindowFromPointEx(
-        hwnd: HWND,
-        pt: POINT,
-        flags: UINT,
-    ) -> HWND;
+    pub fn ChildWindowFromPointEx(hwnd: HWND, pt: POINT, flags: UINT) -> HWND;
 }
 pub const CTLCOLOR_MSGBOX: c_int = 0;
 pub const CTLCOLOR_EDIT: c_int = 1;
@@ -4892,134 +3955,42 @@ pub const COLOR_3DHIGHLIGHT: c_int = COLOR_BTNHIGHLIGHT;
 pub const COLOR_3DHILIGHT: c_int = COLOR_BTNHIGHLIGHT;
 pub const COLOR_BTNHILIGHT: c_int = COLOR_BTNHIGHLIGHT;
 extern "system" {
-    pub fn GetSysColor(
-        nIndex: c_int,
-    ) -> DWORD;
-    pub fn GetSysColorBrush(
-        nIndex: c_int,
-    ) -> HBRUSH;
+    pub fn GetSysColor(nIndex: c_int) -> DWORD;
+    pub fn GetSysColorBrush(nIndex: c_int) -> HBRUSH;
     pub fn SetSysColors(
         cElements: c_int,
         lpaElements: *const INT,
         lpaRgbValues: *const COLORREF,
     ) -> BOOL;
-    pub fn DrawFocusRect(
-        hDC: HDC,
-        lprc: *const RECT,
-    ) -> BOOL;
-    pub fn FillRect(
-        hDC: HDC,
-        lprc: *const RECT,
-        hbr: HBRUSH,
-    ) -> c_int;
-    pub fn FrameRect(
-        hDC: HDC,
-        lprc: *const RECT,
-        hbr: HBRUSH,
-    ) -> c_int;
-    pub fn InvertRect(
-        hDC: HDC,
-        lprc: *const RECT,
-    ) -> BOOL;
-    pub fn SetRect(
-        lprc: LPRECT,
-        xLeft: c_int,
-        yTop: c_int,
-        xRight: c_int,
-        yBottom: c_int,
-    ) -> BOOL;
-    pub fn SetRectEmpty(
-        lprc: LPRECT,
-    ) -> BOOL;
-    pub fn CopyRect(
-        lprcDst: LPRECT,
-        lprcSrc: *const RECT,
-    ) -> BOOL;
-    pub fn InflateRect(
-        lprc: LPRECT,
-        dx: c_int,
-        dy: c_int,
-    ) -> BOOL;
-    pub fn IntersectRect(
-        lprcDst: LPRECT,
-        lprcSrc1: *const RECT,
-        lprcSrc2: *const RECT,
-    ) -> BOOL;
-    pub fn UnionRect(
-        lprcDst: LPRECT,
-        lprcSrc1: *const RECT,
-        lprcSrc2: *const RECT,
-    ) -> BOOL;
-    pub fn SubtractRect(
-        lprcDst: LPRECT,
-        lprcSrc1: *const RECT,
-        lprcSrc2: *const RECT,
-    ) -> BOOL;
-    pub fn OffsetRect(
-        lprc: LPRECT,
-        dx: c_int,
-        dy: c_int,
-    ) -> BOOL;
-    pub fn IsRectEmpty(
-        lprc: *const RECT,
-    ) -> BOOL;
-    pub fn EqualRect(
-        lprc1: *const RECT,
-        lprc2: *const RECT,
-    ) -> BOOL;
-    pub fn PtInRect(
-        lprc: *const RECT,
-        pt: POINT,
-    ) -> BOOL;
-    pub fn GetWindowWord(
-        hWnd: HWND,
-        nIndex: c_int,
-    ) -> WORD;
-    pub fn SetWindowWord(
-        hwnd: HWND,
-        nIndex: c_int,
-        wNewWord: WORD,
-    ) -> WORD;
-    pub fn GetWindowLongA(
-        hWnd: HWND,
-        nIndex: c_int,
-    ) -> LONG;
-    pub fn GetWindowLongW(
-        hWnd: HWND,
-        nIndex: c_int,
-    ) -> LONG;
-    pub fn SetWindowLongA(
-        hWnd: HWND,
-        nIndex: c_int,
-        dwNewLong: LONG,
-    ) -> LONG;
-    pub fn SetWindowLongW(
-        hWnd: HWND,
-        nIndex: c_int,
-        dwNewLong: LONG,
-    ) -> LONG;
+    pub fn DrawFocusRect(hDC: HDC, lprc: *const RECT) -> BOOL;
+    pub fn FillRect(hDC: HDC, lprc: *const RECT, hbr: HBRUSH) -> c_int;
+    pub fn FrameRect(hDC: HDC, lprc: *const RECT, hbr: HBRUSH) -> c_int;
+    pub fn InvertRect(hDC: HDC, lprc: *const RECT) -> BOOL;
+    pub fn SetRect(lprc: LPRECT, xLeft: c_int, yTop: c_int, xRight: c_int, yBottom: c_int) -> BOOL;
+    pub fn SetRectEmpty(lprc: LPRECT) -> BOOL;
+    pub fn CopyRect(lprcDst: LPRECT, lprcSrc: *const RECT) -> BOOL;
+    pub fn InflateRect(lprc: LPRECT, dx: c_int, dy: c_int) -> BOOL;
+    pub fn IntersectRect(lprcDst: LPRECT, lprcSrc1: *const RECT, lprcSrc2: *const RECT) -> BOOL;
+    pub fn UnionRect(lprcDst: LPRECT, lprcSrc1: *const RECT, lprcSrc2: *const RECT) -> BOOL;
+    pub fn SubtractRect(lprcDst: LPRECT, lprcSrc1: *const RECT, lprcSrc2: *const RECT) -> BOOL;
+    pub fn OffsetRect(lprc: LPRECT, dx: c_int, dy: c_int) -> BOOL;
+    pub fn IsRectEmpty(lprc: *const RECT) -> BOOL;
+    pub fn EqualRect(lprc1: *const RECT, lprc2: *const RECT) -> BOOL;
+    pub fn PtInRect(lprc: *const RECT, pt: POINT) -> BOOL;
+    pub fn GetWindowWord(hWnd: HWND, nIndex: c_int) -> WORD;
+    pub fn SetWindowWord(hwnd: HWND, nIndex: c_int, wNewWord: WORD) -> WORD;
+    pub fn GetWindowLongA(hWnd: HWND, nIndex: c_int) -> LONG;
+    pub fn GetWindowLongW(hWnd: HWND, nIndex: c_int) -> LONG;
+    pub fn SetWindowLongA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> LONG;
+    pub fn SetWindowLongW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> LONG;
     #[cfg(target_pointer_width = "64")]
-    pub fn GetWindowLongPtrA(
-        hWnd: HWND,
-        nIndex: c_int,
-    ) -> LONG_PTR;
+    pub fn GetWindowLongPtrA(hWnd: HWND, nIndex: c_int) -> LONG_PTR;
     #[cfg(target_pointer_width = "64")]
-    pub fn GetWindowLongPtrW(
-        hWnd: HWND,
-        nIndex: c_int,
-    ) -> LONG_PTR;
+    pub fn GetWindowLongPtrW(hWnd: HWND, nIndex: c_int) -> LONG_PTR;
     #[cfg(target_pointer_width = "64")]
-    pub fn SetWindowLongPtrA(
-        hWnd: HWND,
-        nIndex: c_int,
-        dwNewLong: LONG_PTR,
-    ) -> LONG_PTR;
+    pub fn SetWindowLongPtrA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> LONG_PTR;
     #[cfg(target_pointer_width = "64")]
-    pub fn SetWindowLongPtrW(
-        hWnd: HWND,
-        nIndex: c_int,
-        dwNewLong: LONG_PTR,
-    ) -> LONG_PTR;
+    pub fn SetWindowLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> LONG_PTR;
 }
 #[cfg(target_pointer_width = "32")]
 pub use self::GetWindowLongA as GetWindowLongPtrA;
@@ -5030,55 +4001,20 @@ pub use self::SetWindowLongA as SetWindowLongPtrA;
 #[cfg(target_pointer_width = "32")]
 pub use self::SetWindowLongW as SetWindowLongPtrW;
 extern "system" {
-    pub fn GetClassWord(
-        hWnd: HWND,
-        nIndex: c_int,
-    ) -> WORD;
-    pub fn SetClassWord(
-        hWnd: HWND,
-        nIndex: c_int,
-        wNewWord: WORD,
-    ) -> WORD;
-    pub fn GetClassLongA(
-        hWnd: HWND,
-        nIndex: c_int,
-    ) -> DWORD;
-    pub fn GetClassLongW(
-        hWnd: HWND,
-        nIndex: c_int,
-    ) -> DWORD;
-    pub fn SetClassLongA(
-        hWnd: HWND,
-        nIndex: c_int,
-        dwNewLong: LONG,
-    ) -> DWORD;
-    pub fn SetClassLongW(
-        hWnd: HWND,
-        nIndex: c_int,
-        dwNewLong: LONG,
-    ) -> DWORD;
+    pub fn GetClassWord(hWnd: HWND, nIndex: c_int) -> WORD;
+    pub fn SetClassWord(hWnd: HWND, nIndex: c_int, wNewWord: WORD) -> WORD;
+    pub fn GetClassLongA(hWnd: HWND, nIndex: c_int) -> DWORD;
+    pub fn GetClassLongW(hWnd: HWND, nIndex: c_int) -> DWORD;
+    pub fn SetClassLongA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
+    pub fn SetClassLongW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG) -> DWORD;
     #[cfg(target_pointer_width = "64")]
-    pub fn GetClassLongPtrA(
-        hWnd: HWND,
-        nIndex: c_int,
-    ) -> ULONG_PTR;
+    pub fn GetClassLongPtrA(hWnd: HWND, nIndex: c_int) -> ULONG_PTR;
     #[cfg(target_pointer_width = "64")]
-    pub fn GetClassLongPtrW(
-        hWnd: HWND,
-        nIndex: c_int,
-    ) -> ULONG_PTR;
+    pub fn GetClassLongPtrW(hWnd: HWND, nIndex: c_int) -> ULONG_PTR;
     #[cfg(target_pointer_width = "64")]
-    pub fn SetClassLongPtrA(
-        hWnd: HWND,
-        nIndex: c_int,
-        dwNewLong: LONG_PTR,
-    ) -> ULONG_PTR;
+    pub fn SetClassLongPtrA(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> ULONG_PTR;
     #[cfg(target_pointer_width = "64")]
-    pub fn SetClassLongPtrW(
-        hWnd: HWND,
-        nIndex: c_int,
-        dwNewLong: LONG_PTR,
-    ) -> ULONG_PTR;
+    pub fn SetClassLongPtrW(hWnd: HWND, nIndex: c_int, dwNewLong: LONG_PTR) -> ULONG_PTR;
 }
 #[cfg(target_pointer_width = "32")]
 pub use self::GetClassLongA as GetClassLongPtrA;
@@ -5089,33 +4025,14 @@ pub use self::SetClassLongA as SetClassLongPtrA;
 #[cfg(target_pointer_width = "32")]
 pub use self::SetClassLongW as SetClassLongPtrW;
 extern "system" {
-    pub fn GetProcessDefaultLayout(
-        pdwDefaultLayout: *mut DWORD,
-    ) -> BOOL;
-    pub fn SetProcessDefaultLayout(
-        dwDefaultLayout: DWORD,
-    ) -> BOOL;
+    pub fn GetProcessDefaultLayout(pdwDefaultLayout: *mut DWORD) -> BOOL;
+    pub fn SetProcessDefaultLayout(dwDefaultLayout: DWORD) -> BOOL;
     pub fn GetDesktopWindow() -> HWND;
-    pub fn GetParent(
-        hWnd: HWND,
-    ) -> HWND;
-    pub fn SetParent(
-        hWndChild: HWND,
-        hWndNewParent: HWND,
-    ) -> HWND;
-    pub fn EnumChildWindows(
-        hWndParent: HWND,
-        lpEnumFunc: WNDENUMPROC,
-        lParam: LPARAM,
-    ) -> BOOL;
-    pub fn FindWindowA(
-        lpClassName: LPCSTR,
-        lpWindowName: LPCSTR,
-    ) -> HWND;
-    pub fn FindWindowW(
-        lpClassName: LPCWSTR,
-        lpWindowName: LPCWSTR,
-    ) -> HWND;
+    pub fn GetParent(hWnd: HWND) -> HWND;
+    pub fn SetParent(hWndChild: HWND, hWndNewParent: HWND) -> HWND;
+    pub fn EnumChildWindows(hWndParent: HWND, lpEnumFunc: WNDENUMPROC, lParam: LPARAM) -> BOOL;
+    pub fn FindWindowA(lpClassName: LPCSTR, lpWindowName: LPCSTR) -> HWND;
+    pub fn FindWindowW(lpClassName: LPCWSTR, lpWindowName: LPCWSTR) -> HWND;
     pub fn FindWindowExA(
         hWndParent: HWND,
         hWndChildAfter: HWND,
@@ -5129,52 +4046,24 @@ extern "system" {
         lpszWindow: LPCWSTR,
     ) -> HWND;
     pub fn GetShellWindow() -> HWND;
-    pub fn RegisterShellHookWindow(
-        hwnd: HWND,
-    ) -> BOOL;
-    pub fn DeregisterShellHookWindow(
-        hwnd: HWND,
-    ) -> BOOL;
-    pub fn EnumWindows(
-        lpEnumFunc: WNDENUMPROC,
-        lParam: LPARAM,
-    ) -> BOOL;
-    pub fn EnumThreadWindows(
-        dwThreadId: DWORD,
-        lpfn: WNDENUMPROC,
-        lParam: LPARAM,
-    ) -> BOOL;
+    pub fn RegisterShellHookWindow(hwnd: HWND) -> BOOL;
+    pub fn DeregisterShellHookWindow(hwnd: HWND) -> BOOL;
+    pub fn EnumWindows(lpEnumFunc: WNDENUMPROC, lParam: LPARAM) -> BOOL;
+    pub fn EnumThreadWindows(dwThreadId: DWORD, lpfn: WNDENUMPROC, lParam: LPARAM) -> BOOL;
 }
 // EnumTaskWindows
 extern "system" {
-    pub fn GetClassNameA(
-        hWnd: HWND,
-        lpClassName: LPCSTR,
-        nMaxCount: c_int,
-    ) -> c_int;
-    pub fn GetClassNameW(
-        hWnd: HWND,
-        lpClassName: LPCWSTR,
-        nMaxCount: c_int,
-    ) -> c_int;
-    pub fn GetTopWindow(
-        hWnd: HWND,
-    ) -> HWND;
+    pub fn GetClassNameA(hWnd: HWND, lpClassName: LPCSTR, nMaxCount: c_int) -> c_int;
+    pub fn GetClassNameW(hWnd: HWND, lpClassName: LPCWSTR, nMaxCount: c_int) -> c_int;
+    pub fn GetTopWindow(hWnd: HWND) -> HWND;
 }
 // GetNextWindow
 // GetSysModalWindow
 // SetSysModalWindow
 extern "system" {
-    pub fn GetWindowThreadProcessId(
-        hWnd: HWND,
-        lpdwProcessId: LPDWORD,
-    ) -> DWORD;
-    pub fn IsGUIThread(
-        bConvert: BOOL,
-    ) -> BOOL;
-    pub fn GetLastActivePopup(
-        hWnd: HWND,
-    ) -> HWND;
+    pub fn GetWindowThreadProcessId(hWnd: HWND, lpdwProcessId: LPDWORD) -> DWORD;
+    pub fn IsGUIThread(bConvert: BOOL) -> BOOL;
+    pub fn GetLastActivePopup(hWnd: HWND) -> HWND;
 }
 pub const GW_HWNDFIRST: UINT = 0;
 pub const GW_HWNDLAST: UINT = 1;
@@ -5185,22 +4074,10 @@ pub const GW_CHILD: UINT = 5;
 pub const GW_ENABLEDPOPUP: UINT = 6;
 pub const GW_MAX: UINT = 6;
 extern "system" {
-    pub fn GetWindow(
-        hWnd: HWND,
-        uCmd: UINT,
-    ) -> HWND;
-    pub fn SetWindowsHookA(
-        nFilterType: c_int,
-        pfnFilterProc: HOOKPROC,
-    ) -> HHOOK;
-    pub fn SetWindowsHookW(
-        nFilterType: c_int,
-        pfnFilterProc: HOOKPROC,
-    ) -> HHOOK;
-    pub fn UnhookWindowsHook(
-        nFilterType: c_int,
-        pfnFilterProc: HOOKPROC,
-    ) -> BOOL;
+    pub fn GetWindow(hWnd: HWND, uCmd: UINT) -> HWND;
+    pub fn SetWindowsHookA(nFilterType: c_int, pfnFilterProc: HOOKPROC) -> HHOOK;
+    pub fn SetWindowsHookW(nFilterType: c_int, pfnFilterProc: HOOKPROC) -> HHOOK;
+    pub fn UnhookWindowsHook(nFilterType: c_int, pfnFilterProc: HOOKPROC) -> BOOL;
     pub fn SetWindowsHookExA(
         idHook: c_int,
         lpfn: HOOKPROC,
@@ -5213,15 +4090,8 @@ extern "system" {
         hmod: HINSTANCE,
         dwThreadId: DWORD,
     ) -> HHOOK;
-    pub fn UnhookWindowsHookEx(
-        hhk: HHOOK,
-    ) -> BOOL;
-    pub fn CallNextHookEx(
-        hhk: HHOOK,
-        nCode: c_int,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> LRESULT;
+    pub fn UnhookWindowsHookEx(hhk: HHOOK) -> BOOL;
+    pub fn CallNextHookEx(hhk: HHOOK, nCode: c_int, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
 }
 // DefHookProc
 pub const MF_INSERT: UINT = 0x00000000;
@@ -5301,28 +4171,12 @@ pub const SC_CONTEXTHELP: WPARAM = 0xF180;
 pub const SC_SEPARATOR: WPARAM = 0xF00F;
 //10269
 extern "system" {
-    pub fn LoadBitmapA(
-        hInstance: HINSTANCE,
-        lpBitmapName: LPCSTR,
-    ) -> HBITMAP;
-    pub fn LoadBitmapW(
-        hInstance: HINSTANCE,
-        lpBitmapName: LPCWSTR,
-    ) -> HBITMAP;
-    pub fn LoadCursorA(
-        hInstance: HINSTANCE,
-        lpCursorName: LPCSTR,
-    ) -> HCURSOR;
-    pub fn LoadCursorW(
-        hInstance: HINSTANCE,
-        lpCursorName: LPCWSTR,
-    ) -> HCURSOR;
-    pub fn LoadCursorFromFileA(
-        lpFileName: LPCSTR,
-    ) -> HCURSOR;
-    pub fn LoadCursorFromFileW(
-        lpFileName: LPCWSTR,
-    ) -> HCURSOR;
+    pub fn LoadBitmapA(hInstance: HINSTANCE, lpBitmapName: LPCSTR) -> HBITMAP;
+    pub fn LoadBitmapW(hInstance: HINSTANCE, lpBitmapName: LPCWSTR) -> HBITMAP;
+    pub fn LoadCursorA(hInstance: HINSTANCE, lpCursorName: LPCSTR) -> HCURSOR;
+    pub fn LoadCursorW(hInstance: HINSTANCE, lpCursorName: LPCWSTR) -> HCURSOR;
+    pub fn LoadCursorFromFileA(lpFileName: LPCSTR) -> HCURSOR;
+    pub fn LoadCursorFromFileW(lpFileName: LPCWSTR) -> HCURSOR;
     pub fn CreateCursor(
         hInst: HINSTANCE,
         xHotSpot: c_int,
@@ -5332,9 +4186,7 @@ extern "system" {
         pvAndPlane: *const VOID,
         pvXORPlane: *const VOID,
     ) -> HCURSOR;
-    pub fn DestroyCursor(
-        hCursor: HCURSOR,
-    ) -> BOOL;
+    pub fn DestroyCursor(hCursor: HCURSOR) -> BOOL;
 }
 //10355
 pub const IDC_ARROW: LPCWSTR = 32512 as LPCWSTR;
@@ -5354,12 +4206,9 @@ pub const IDC_HAND: LPCWSTR = 32649 as LPCWSTR;
 pub const IDC_APPSTARTING: LPCWSTR = 32650 as LPCWSTR;
 pub const IDC_HELP: LPCWSTR = 32651 as LPCWSTR;
 extern "system" {
-    pub fn SetSystemCursor(
-        hcur: HCURSOR,
-        id: DWORD,
-    ) -> BOOL;
+    pub fn SetSystemCursor(hcur: HCURSOR, id: DWORD) -> BOOL;
 }
-STRUCT!{struct ICONINFO {
+STRUCT! {struct ICONINFO {
     fIcon: BOOL,
     xHotspot: DWORD,
     yHotspot: DWORD,
@@ -5368,14 +4217,8 @@ STRUCT!{struct ICONINFO {
 }}
 pub type PICONINFO = *mut ICONINFO;
 extern "system" {
-    pub fn LoadIconA(
-        hInstance: HINSTANCE,
-        lpIconName: LPCSTR,
-    ) -> HICON;
-    pub fn LoadIconW(
-        hInstance: HINSTANCE,
-        lpIconName: LPCWSTR,
-    ) -> HICON;
+    pub fn LoadIconA(hInstance: HINSTANCE, lpIconName: LPCSTR) -> HICON;
+    pub fn LoadIconW(hInstance: HINSTANCE, lpIconName: LPCWSTR) -> HICON;
 }
 //10449
 extern "system" {
@@ -5388,13 +4231,8 @@ extern "system" {
         lpbANDbits: *const BYTE,
         lpbXORbits: *const BYTE,
     ) -> HICON;
-    pub fn DestroyIcon(
-        hIcon: HICON,
-    ) -> BOOL;
-    pub fn LookupIconIdFromDirectory(
-        presbits: PBYTE,
-        fIcon: BOOL,
-    ) -> c_int;
+    pub fn DestroyIcon(hIcon: HICON) -> BOOL;
+    pub fn LookupIconIdFromDirectory(presbits: PBYTE, fIcon: BOOL) -> c_int;
     pub fn LookupIconIdFromDirectoryEx(
         presbits: PBYTE,
         fIcon: BOOL,
@@ -5453,13 +4291,7 @@ extern "system" {
         cy: c_int,
         fuLoad: UINT,
     ) -> HANDLE;
-    pub fn CopyImage(
-        h: HANDLE,
-        type_: UINT,
-        cx: c_int,
-        cy: c_int,
-        flags: UINT,
-    ) -> HANDLE;
+    pub fn CopyImage(h: HANDLE, type_: UINT, cx: c_int, cy: c_int, flags: UINT) -> HANDLE;
 }
 //10592
 extern "system" {
@@ -5474,16 +4306,9 @@ extern "system" {
         hbrFlickerFreeDraw: HBRUSH,
         diFlags: UINT,
     ) -> BOOL;
-    pub fn CreateIconIndirect(
-        piconinfo: PICONINFO,
-    ) -> HICON;
-    pub fn CopyIcon(
-        hIcon: HICON,
-    ) -> HICON;
-    pub fn GetIconInfo(
-        hIcon: HICON,
-        piconinfo: PICONINFO,
-    ) -> BOOL;
+    pub fn CreateIconIndirect(piconinfo: PICONINFO) -> HICON;
+    pub fn CopyIcon(hIcon: HICON) -> HICON;
+    pub fn GetIconInfo(hIcon: HICON, piconinfo: PICONINFO) -> BOOL;
 }
 //10781
 pub const IDI_APPLICATION: LPCWSTR = 32512 as LPCWSTR;
@@ -5678,18 +4503,9 @@ pub const STN_DISABLE: WORD = 3;
 pub const STM_MSGMAX: WORD = 0x0174;
 //11194
 extern "system" {
-    pub fn IsDialogMessageA(
-        hDlg: HWND,
-        lpMsg: LPMSG,
-    ) -> BOOL;
-    pub fn IsDialogMessageW(
-        hDlg: HWND,
-        lpMsg: LPMSG,
-    ) -> BOOL;
-    pub fn MapDialogRect(
-        hDlg: HWND,
-        lpRect: LPRECT,
-    ) -> BOOL;
+    pub fn IsDialogMessageA(hDlg: HWND, lpMsg: LPMSG) -> BOOL;
+    pub fn IsDialogMessageW(hDlg: HWND, lpMsg: LPMSG) -> BOOL;
+    pub fn MapDialogRect(hDlg: HWND, lpRect: LPRECT) -> BOOL;
     pub fn DlgDirListA(
         hDlg: HWND,
         lpPathSpec: LPSTR,
@@ -5936,7 +4752,7 @@ pub const SIF_POS: UINT = 0x0004;
 pub const SIF_DISABLENOSCROLL: UINT = 0x0008;
 pub const SIF_TRACKPOS: UINT = 0x0010;
 pub const SIF_ALL: UINT = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
-STRUCT!{struct SCROLLINFO {
+STRUCT! {struct SCROLLINFO {
     cbSize: UINT,
     fMask: UINT,
     nMin: c_int,
@@ -5948,17 +4764,8 @@ STRUCT!{struct SCROLLINFO {
 pub type LPSCROLLINFO = *mut SCROLLINFO;
 pub type LPCSCROLLINFO = *const SCROLLINFO;
 extern "system" {
-    pub fn SetScrollInfo(
-        hwnd: HWND,
-        nBar: c_int,
-        lpsi: *const SCROLLINFO,
-        redraw: BOOL,
-    ) -> c_int;
-    pub fn GetScrollInfo(
-        hwnd: HWND,
-        nBar: c_int,
-        lpsi: *mut SCROLLINFO,
-    ) -> BOOL;
+    pub fn SetScrollInfo(hwnd: HWND, nBar: c_int, lpsi: *const SCROLLINFO, redraw: BOOL) -> c_int;
+    pub fn GetScrollInfo(hwnd: HWND, nBar: c_int, lpsi: *mut SCROLLINFO) -> BOOL;
 }
 pub const MDITILE_VERTICAL: UINT = 0x0000;
 pub const MDITILE_HORIZONTAL: UINT = 0x0001;
@@ -5980,21 +4787,9 @@ extern "system" {
         wParam: WPARAM,
         lParam: LPARAM,
     ) -> LRESULT;
-    pub fn DefMDIChildProcA(
-        hwnd: HWND,
-        uMsg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> LRESULT;
-    pub fn DefMDIChildProcW(
-        hwnd: HWND,
-        uMsg: UINT,
-        wParam: WPARAM,
-        lParam: LPARAM,
-    ) -> LRESULT;
-    pub fn ArrangeIconicWindows(
-        hWnd: HWND,
-    ) -> UINT;
+    pub fn DefMDIChildProcA(hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
+    pub fn DefMDIChildProcW(hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
+    pub fn ArrangeIconicWindows(hWnd: HWND) -> UINT;
     pub fn CreateMDIWindowA(
         lpClassName: LPCSTR,
         lpWindowName: LPCSTR,
@@ -6029,18 +4824,8 @@ extern "system" {
 }
 //12016
 extern "system" {
-    pub fn WinHelpA(
-        hWndMain: HWND,
-        lpszHelp: LPCSTR,
-        uCommand: UINT,
-        dwData: ULONG_PTR,
-    ) -> BOOL;
-    pub fn WinHelpW(
-        hWndMain: HWND,
-        lpszHelp: LPCWSTR,
-        uCommand: UINT,
-        dwData: ULONG_PTR,
-    ) -> BOOL;
+    pub fn WinHelpA(hWndMain: HWND, lpszHelp: LPCSTR, uCommand: UINT, dwData: ULONG_PTR) -> BOOL;
+    pub fn WinHelpW(hWndMain: HWND, lpszHelp: LPCWSTR, uCommand: UINT, dwData: ULONG_PTR) -> BOOL;
 }
 //12083
 pub const SPI_GETBEEP: UINT = 0x0001;
@@ -6267,7 +5052,7 @@ pub const SPIF_UPDATEINIFILE: UINT = 0x0001;
 pub const SPIF_SENDWININICHANGE: UINT = 0x0002;
 pub const SPIF_SENDCHANGE: UINT = SPIF_SENDWININICHANGE;
 //12484
-STRUCT!{struct NONCLIENTMETRICSA {
+STRUCT! {struct NONCLIENTMETRICSA {
     cbSize: UINT,
     iBorderWidth: c_int,
     iScrollWidth: c_int,
@@ -6286,7 +5071,7 @@ STRUCT!{struct NONCLIENTMETRICSA {
     iPaddedBorderWidth: c_int,
 }}
 pub type LPNONCLIENTMETRICSA = *mut NONCLIENTMETRICSA;
-STRUCT!{struct NONCLIENTMETRICSW {
+STRUCT! {struct NONCLIENTMETRICSW {
     cbSize: UINT,
     iBorderWidth: c_int,
     iScrollWidth: c_int,
@@ -6306,7 +5091,7 @@ STRUCT!{struct NONCLIENTMETRICSW {
 }}
 pub type LPNONCLIENTMETRICSW = *mut NONCLIENTMETRICSW;
 //12598
-STRUCT!{struct ANIMATIONINFO {
+STRUCT! {struct ANIMATIONINFO {
     cbSize: UINT,
     iMinAnimate: c_int,
 }}
@@ -6332,14 +5117,8 @@ pub const DISP_CHANGE_BADFLAGS: LONG = -4;
 pub const DISP_CHANGE_BADPARAM: LONG = -5;
 pub const DISP_CHANGE_BADDUALVIEW: LONG = -6;
 extern "system" {
-    pub fn ChangeDisplaySettingsA(
-        lpDevMode: *mut DEVMODEA,
-        dwFlags: DWORD,
-    ) -> LONG;
-    pub fn ChangeDisplaySettingsW(
-        lpDevMode: *mut DEVMODEW,
-        dwFlags: DWORD,
-    ) -> LONG;
+    pub fn ChangeDisplaySettingsA(lpDevMode: *mut DEVMODEA, dwFlags: DWORD) -> LONG;
+    pub fn ChangeDisplaySettingsW(lpDevMode: *mut DEVMODEW, dwFlags: DWORD) -> LONG;
     pub fn ChangeDisplaySettingsExA(
         lpszDeviceName: LPCSTR,
         lpDevMode: *mut DEVMODEA,
@@ -6421,49 +5200,29 @@ extern "system" {
 }
 //13191
 extern "system" {
-    pub fn SetLastErrorEx(
-        dwErrCode: DWORD,
-        dwType: DWORD,
-    );
-    pub fn InternalGetWindowText(
-        hWnd: HWND,
-        pString: LPWSTR,
-        cchMaxCount: c_int,
-    ) -> c_int;
-    pub fn EndTask(
-        hWnd: HWND,
-        fShutDown: BOOL,
-        fForce: BOOL,
-    ) -> BOOL;
+    pub fn SetLastErrorEx(dwErrCode: DWORD, dwType: DWORD);
+    pub fn InternalGetWindowText(hWnd: HWND, pString: LPWSTR, cchMaxCount: c_int) -> c_int;
+    pub fn EndTask(hWnd: HWND, fShutDown: BOOL, fForce: BOOL) -> BOOL;
     pub fn CancelShutdown() -> BOOL;
 }
 pub const MONITOR_DEFAULTTONULL: DWORD = 0x00000000;
 pub const MONITOR_DEFAULTTOPRIMARY: DWORD = 0x00000001;
 pub const MONITOR_DEFAULTTONEAREST: DWORD = 0x00000002;
 extern "system" {
-    pub fn MonitorFromPoint(
-        pt: POINT,
-        dwFlags: DWORD,
-    ) -> HMONITOR;
-    pub fn MonitorFromRect(
-        lprc: LPCRECT,
-        dwFlags: DWORD,
-    ) -> HMONITOR;
-    pub fn MonitorFromWindow(
-        hwnd: HWND,
-        dwFlags: DWORD,
-    ) -> HMONITOR;
+    pub fn MonitorFromPoint(pt: POINT, dwFlags: DWORD) -> HMONITOR;
+    pub fn MonitorFromRect(lprc: LPCRECT, dwFlags: DWORD) -> HMONITOR;
+    pub fn MonitorFromWindow(hwnd: HWND, dwFlags: DWORD) -> HMONITOR;
 }
 pub const MONITORINFOF_PRIMARY: DWORD = 1;
 pub const CCHDEVICENAME: usize = 32;
-STRUCT!{struct MONITORINFO {
+STRUCT! {struct MONITORINFO {
     cbSize: DWORD,
     rcMonitor: RECT,
     rcWork: RECT,
     dwFlags: DWORD,
 }}
 pub type LPMONITORINFO = *mut MONITORINFO;
-STRUCT!{struct MONITORINFOEXA {
+STRUCT! {struct MONITORINFOEXA {
     cbSize: DWORD,
     rcMonitor: RECT,
     rcWork: RECT,
@@ -6471,7 +5230,7 @@ STRUCT!{struct MONITORINFOEXA {
     szDevice: [CHAR; CCHDEVICENAME],
 }}
 pub type LPMONITORINFOEXA = *mut MONITORINFOEXA;
-STRUCT!{struct MONITORINFOEXW {
+STRUCT! {struct MONITORINFOEXW {
     cbSize: DWORD,
     rcMonitor: RECT,
     rcWork: RECT,
@@ -6480,16 +5239,10 @@ STRUCT!{struct MONITORINFOEXW {
 }}
 pub type LPMONITORINFOEXW = *mut MONITORINFOEXW;
 extern "system" {
-    pub fn GetMonitorInfoA(
-        hMonitor: HMONITOR,
-        lpmi: LPMONITORINFO,
-    ) -> BOOL;
-    pub fn GetMonitorInfoW(
-        hMonitor: HMONITOR,
-        lpmi: LPMONITORINFO,
-    ) -> BOOL;
+    pub fn GetMonitorInfoA(hMonitor: HMONITOR, lpmi: LPMONITORINFO) -> BOOL;
+    pub fn GetMonitorInfoW(hMonitor: HMONITOR, lpmi: LPMONITORINFO) -> BOOL;
 }
-FN!{stdcall MONITORENUMPROC(
+FN! {stdcall MONITORENUMPROC(
     HMONITOR,
     HDC,
     LPRECT,
@@ -6502,14 +5255,9 @@ extern "system" {
         lpfnEnum: MONITORENUMPROC,
         dwData: LPARAM,
     ) -> BOOL;
-    pub fn NotifyWinEvent(
-        event: DWORD,
-        hwnd: HWND,
-        idObject: LONG,
-        idChild: LONG,
-    );
+    pub fn NotifyWinEvent(event: DWORD, hwnd: HWND, idObject: LONG, idChild: LONG);
 }
-FN!{stdcall WINEVENTPROC(
+FN! {stdcall WINEVENTPROC(
     HWINEVENTHOOK,
     DWORD,
     HWND,
@@ -6528,18 +5276,14 @@ extern "system" {
         idThread: DWORD,
         dwFlags: DWORD,
     ) -> HWINEVENTHOOK;
-    pub fn IsWinEventHookInstalled(
-        event: DWORD,
-    ) -> BOOL;
+    pub fn IsWinEventHookInstalled(event: DWORD) -> BOOL;
 }
 pub const WINEVENT_OUTOFCONTEXT: UINT = 0x0000;
 pub const WINEVENT_SKIPOWNTHREAD: UINT = 0x0001;
 pub const WINEVENT_SKIPOWNPROCESS: UINT = 0x0002;
 pub const WINEVENT_INCONTEXT: UINT = 0x0004;
 extern "system" {
-    pub fn UnhookWinEvent(
-        hWinEventHook: HWINEVENTHOOK,
-    ) -> BOOL;
+    pub fn UnhookWinEvent(hWinEventHook: HWINEVENTHOOK) -> BOOL;
 }
 pub const CHILDID_SELF: LONG = 0;
 pub const INDEXID_OBJECT: LONG = 0;
@@ -6656,7 +5400,7 @@ pub const ALERT_SYSTEM_ERROR: LONG = 3;
 pub const ALERT_SYSTEM_QUERY: LONG = 4;
 pub const ALERT_SYSTEM_CRITICAL: LONG = 5;
 pub const CALERT_SYSTEM: LONG = 6;
-STRUCT!{struct GUITHREADINFO {
+STRUCT! {struct GUITHREADINFO {
     cbSize: DWORD,
     flags: DWORD,
     hwndActive: HWND,
@@ -6679,68 +5423,36 @@ pub const GUI_16BITTASK: DWORD = 0x00000000;
 #[cfg(target_arch = "x86")]
 pub const GUI_16BITTASK: DWORD = 0x00000020;
 extern "system" {
-    pub fn GetGUIThreadInfo(
-        idThread: DWORD,
-        pgui: PGUITHREADINFO,
-    ) -> BOOL;
-    pub fn BlockInput(
-        fBlockIt: BOOL,
-    ) -> BOOL;
+    pub fn GetGUIThreadInfo(idThread: DWORD, pgui: PGUITHREADINFO) -> BOOL;
+    pub fn BlockInput(fBlockIt: BOOL) -> BOOL;
 }
 pub const USER_DEFAULT_SCREEN_DPI: LONG = 96;
 extern "system" {
     pub fn SetProcessDPIAware() -> BOOL;
     pub fn IsProcessDPIAware() -> BOOL;
-    pub fn SetThreadDpiAwarenessContext(
-        dpiContext: DPI_AWARENESS_CONTEXT,
-    ) -> DPI_AWARENESS_CONTEXT;
+    pub fn SetThreadDpiAwarenessContext(dpiContext: DPI_AWARENESS_CONTEXT)
+        -> DPI_AWARENESS_CONTEXT;
     pub fn GetThreadDpiAwarenessContext() -> DPI_AWARENESS_CONTEXT;
-    pub fn GetWindowDpiAwarenessContext(
-        hwnd: HWND,
-    ) -> DPI_AWARENESS_CONTEXT;
-    pub fn GetAwarenessFromDpiAwarenessContext(
-        value: DPI_AWARENESS_CONTEXT,
-    ) -> DPI_AWARENESS;
-    pub fn GetDpiFromDpiAwarenessContext(
-        value: DPI_AWARENESS_CONTEXT,
-    ) -> UINT;
+    pub fn GetWindowDpiAwarenessContext(hwnd: HWND) -> DPI_AWARENESS_CONTEXT;
+    pub fn GetAwarenessFromDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT) -> DPI_AWARENESS;
+    pub fn GetDpiFromDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT) -> UINT;
     pub fn AreDpiAwarenessContextsEqual(
         dpiContextA: DPI_AWARENESS_CONTEXT,
         dpiContextB: DPI_AWARENESS_CONTEXT,
     ) -> BOOL;
-    pub fn IsValidDpiAwarenessContext(
-        value: DPI_AWARENESS_CONTEXT,
-    ) -> BOOL;
-    pub fn GetDpiForWindow(
-        hwnd: HWND,
-    ) -> UINT;
+    pub fn IsValidDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT) -> BOOL;
+    pub fn GetDpiForWindow(hwnd: HWND) -> UINT;
     pub fn GetDpiForSystem() -> UINT;
-    pub fn GetSystemDpiForProcess(
-        hProcess: HANDLE,
-    ) -> UINT;
-    pub fn EnableNonClientDpiScaling(
-        hwnd: HWND,
-    ) -> BOOL;
-    pub fn SetProcessDpiAwarenessContext(
-        value: DPI_AWARENESS_CONTEXT,
-    ) -> BOOL;
-    pub fn SetThreadDpiHostingBehavior(
-        value: DPI_HOSTING_BEHAVIOR,
-    ) -> DPI_HOSTING_BEHAVIOR;
+    pub fn GetSystemDpiForProcess(hProcess: HANDLE) -> UINT;
+    pub fn EnableNonClientDpiScaling(hwnd: HWND) -> BOOL;
+    pub fn SetProcessDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT) -> BOOL;
+    pub fn SetThreadDpiHostingBehavior(value: DPI_HOSTING_BEHAVIOR) -> DPI_HOSTING_BEHAVIOR;
     pub fn GetThreadDpiHostingBehavior() -> DPI_HOSTING_BEHAVIOR;
-    pub fn GetWindowDpiHostingBehavior(
-        hwnd: HWND,
-    ) -> DPI_HOSTING_BEHAVIOR;
-    pub fn GetWindowModuleFileNameA(
-        hWnd: HWND,
-        lpszFileName: LPCSTR,
-        cchFileNameMax: UINT,
-    ) -> UINT;
-    pub fn GetWindowModuleFileNameW(
-        hWnd: HWND,
-        lpszFileName: LPWSTR,
-        cchFileNameMax: UINT,
-    ) -> UINT;
+    pub fn GetWindowDpiHostingBehavior(hwnd: HWND) -> DPI_HOSTING_BEHAVIOR;
+    pub fn GetWindowModuleFileNameA(hWnd: HWND, lpszFileName: LPCSTR, cchFileNameMax: UINT)
+        -> UINT;
+    pub fn GetWindowModuleFileNameW(hWnd: HWND, lpszFileName: LPWSTR, cchFileNameMax: UINT)
+        -> UINT;
 }
 pub const STATE_SYSTEM_UNAVAILABLE: DWORD = 0x00000001;
 pub const STATE_SYSTEM_SELECTED: DWORD = 0x00000002;
@@ -6776,7 +5488,7 @@ pub const STATE_SYSTEM_PROTECTED: DWORD = 0x20000000;
 pub const STATE_SYSTEM_VALID: DWORD = 0x3fffffff;
 pub const CCHILDREN_TITLEBAR: usize = 5;
 pub const CCHILDREN_SCROLLBAR: usize = 5;
-STRUCT!{struct CURSORINFO {
+STRUCT! {struct CURSORINFO {
     cbSize: DWORD,
     flags: DWORD,
     hCursor: HCURSOR,
@@ -6787,11 +5499,9 @@ pub type LPCURSORINFO = *mut CURSORINFO;
 pub const CURSOR_SHOWING: DWORD = 0x00000001;
 pub const CURSOR_SUPPRESSED: DWORD = 0x00000002;
 extern "system" {
-    pub fn GetCursorInfo(
-        pci: PCURSORINFO,
-    ) -> BOOL;
+    pub fn GetCursorInfo(pci: PCURSORINFO) -> BOOL;
 }
-STRUCT!{struct WINDOWINFO {
+STRUCT! {struct WINDOWINFO {
     cbSize: DWORD,
     rcWindow: RECT,
     rcClient: RECT,
@@ -6807,12 +5517,9 @@ pub type PWINDOWINFO = *mut WINDOWINFO;
 pub type LPWINDOWINFO = *mut WINDOWINFO;
 pub const WS_ACTIVECAPTION: DWORD = 0x0001;
 extern "system" {
-    pub fn GetWindowInfo(
-        hwnd: HWND,
-        pwi: PWINDOWINFO,
-    ) -> BOOL;
+    pub fn GetWindowInfo(hwnd: HWND, pwi: PWINDOWINFO) -> BOOL;
 }
-STRUCT!{struct TITLEBARINFO {
+STRUCT! {struct TITLEBARINFO {
     cbSize: DWORD,
     rcTitleBar: RECT,
     rgstate: [DWORD; CCHILDREN_TITLEBAR + 1],
@@ -6820,12 +5527,9 @@ STRUCT!{struct TITLEBARINFO {
 pub type PTITLEBARINFO = *mut TITLEBARINFO;
 pub type LPTITLEBARINFO = *mut TITLEBARINFO;
 extern "system" {
-    pub fn GetTitleBarInfo(
-        hwnd: HWND,
-        pti: PTITLEBARINFO,
-    ) -> BOOL;
+    pub fn GetTitleBarInfo(hwnd: HWND, pti: PTITLEBARINFO) -> BOOL;
 }
-STRUCT!{struct TITLEBARINFOEX {
+STRUCT! {struct TITLEBARINFOEX {
     cbSize: DWORD,
     rcTitleBar: RECT,
     rgstate: [DWORD; CCHILDREN_TITLEBAR + 1],
@@ -6833,28 +5537,23 @@ STRUCT!{struct TITLEBARINFOEX {
 }}
 pub type PTITLEBARINFOEX = *mut TITLEBARINFOEX;
 pub type LPTITLEBARINFOEX = *mut TITLEBARINFOEX;
-STRUCT!{struct MENUBARINFO {
+STRUCT! {struct MENUBARINFO {
     cbSize: DWORD,
     rcBar: RECT,
     hMenu: HMENU,
     hwndMenu: HWND,
     BitFields: BOOL,
 }}
-BITFIELD!{MENUBARINFO BitFields: BOOL [
+BITFIELD! {MENUBARINFO BitFields: BOOL [
     fBarFocused set_fBarFocused[0..1],
     fFocused set_fFocused[1..2],
 ]}
 pub type PMENUBARINFO = *mut MENUBARINFO;
 pub type LPMENUBARINFO = *mut MENUBARINFO;
 extern "system" {
-    pub fn GetMenuBarInfo(
-        hwnd: HWND,
-        idObject: LONG,
-        idItem: LONG,
-        pmbi: PMENUBARINFO,
-    ) -> BOOL;
+    pub fn GetMenuBarInfo(hwnd: HWND, idObject: LONG, idItem: LONG, pmbi: PMENUBARINFO) -> BOOL;
 }
-STRUCT!{struct SCROLLBARINFO {
+STRUCT! {struct SCROLLBARINFO {
     cbSize: DWORD,
     rcScrollBar: RECT,
     dxyLineButton: c_int,
@@ -6866,13 +5565,9 @@ STRUCT!{struct SCROLLBARINFO {
 pub type PSCROLLBARINFO = *mut SCROLLBARINFO;
 pub type LPSCROLLBARINFO = *mut SCROLLBARINFO;
 extern "system" {
-    pub fn GetScrollBarInfo(
-        hwnd: HWND,
-        idObject: LONG,
-        psbi: PSCROLLBARINFO,
-    ) -> BOOL;
+    pub fn GetScrollBarInfo(hwnd: HWND, idObject: LONG, psbi: PSCROLLBARINFO) -> BOOL;
 }
-STRUCT!{struct COMBOBOXINFO {
+STRUCT! {struct COMBOBOXINFO {
     cbSize: DWORD,
     rcItem: RECT,
     rcButton: RECT,
@@ -6884,35 +5579,18 @@ STRUCT!{struct COMBOBOXINFO {
 pub type PCOMBOBOXINFO = *mut COMBOBOXINFO;
 pub type LPCOMBOBOXINFO = *mut COMBOBOXINFO;
 extern "system" {
-    pub fn GetComboBoxInfo(
-        hwndCombo: HWND,
-        pcbi: PCOMBOBOXINFO,
-    ) -> BOOL;
+    pub fn GetComboBoxInfo(hwndCombo: HWND, pcbi: PCOMBOBOXINFO) -> BOOL;
 }
 pub const GA_PARENT: UINT = 1;
 pub const GA_ROOT: UINT = 2;
 pub const GA_ROOTOWNER: UINT = 3;
 extern "system" {
-    pub fn GetAncestor(
-        hWnd: HWND,
-        gaFlags: UINT,
-    ) -> HWND;
-    pub fn RealChildWindowFromPoint(
-        hwndParent: HWND,
-        ptParentClientCoords: POINT,
-    ) -> HWND;
-    pub fn RealGetWindowClassA(
-        hwnd: HWND,
-        ptszClassName: LPSTR,
-        cchClassNameMax: UINT,
-    ) -> UINT;
-    pub fn RealGetWindowClassW(
-        hwnd: HWND,
-        ptszClassName: LPWSTR,
-        cchClassNameMax: UINT,
-    ) -> UINT;
+    pub fn GetAncestor(hWnd: HWND, gaFlags: UINT) -> HWND;
+    pub fn RealChildWindowFromPoint(hwndParent: HWND, ptParentClientCoords: POINT) -> HWND;
+    pub fn RealGetWindowClassA(hwnd: HWND, ptszClassName: LPSTR, cchClassNameMax: UINT) -> UINT;
+    pub fn RealGetWindowClassW(hwnd: HWND, ptszClassName: LPWSTR, cchClassNameMax: UINT) -> UINT;
 }
-STRUCT!{struct ALTTABINFO {
+STRUCT! {struct ALTTABINFO {
     cbSize: DWORD,
     cItems: c_int,
     cColumns: c_int,
@@ -6940,22 +5618,18 @@ extern "system" {
         pszItemText: LPWSTR,
         cchItemText: UINT,
     ) -> BOOL;
-    pub fn GetListBoxInfo(
-        hwnd: HWND,
-    ) -> DWORD;
+    pub fn GetListBoxInfo(hwnd: HWND) -> DWORD;
     pub fn LockWorkStation() -> BOOL;
-    pub fn UserHandleGrantAccess(
-        hUserHandle: HANDLE,
-        hJob: HANDLE,
-        bGrant: BOOL,
-    ) -> BOOL;
+    pub fn UserHandleGrantAccess(hUserHandle: HANDLE, hJob: HANDLE, bGrant: BOOL) -> BOOL;
 }
-DECLARE_HANDLE!{HRAWINPUT, HRAWINPUT__}
+DECLARE_HANDLE! {HRAWINPUT, HRAWINPUT__}
 #[inline]
-pub fn GET_RAWINPUT_CODE_WPARAM(wParam: WPARAM) -> WPARAM { wParam & 0xff }
+pub fn GET_RAWINPUT_CODE_WPARAM(wParam: WPARAM) -> WPARAM {
+    wParam & 0xff
+}
 pub const RIM_INPUT: WPARAM = 0;
 pub const RIM_INPUTSINK: WPARAM = 1;
-STRUCT!{struct RAWINPUTHEADER {
+STRUCT! {struct RAWINPUTHEADER {
     dwType: DWORD,
     dwSize: DWORD,
     hDevice: HANDLE,
@@ -6966,7 +5640,7 @@ pub type LPRAWINPUTHEADER = *mut RAWINPUTHEADER;
 pub const RIM_TYPEMOUSE: DWORD = 0;
 pub const RIM_TYPEKEYBOARD: DWORD = 1;
 pub const RIM_TYPEHID: DWORD = 2;
-STRUCT!{struct RAWMOUSE {
+STRUCT! {struct RAWMOUSE {
     usFlags: USHORT,
     memory_padding: USHORT, // 16bit Padding for 32bit align in following union
     usButtonFlags: USHORT,
@@ -7000,7 +5674,7 @@ pub const MOUSE_MOVE_ABSOLUTE: USHORT = 1;
 pub const MOUSE_VIRTUAL_DESKTOP: USHORT = 0x02;
 pub const MOUSE_ATTRIBUTES_CHANGED: USHORT = 0x04;
 pub const MOUSE_MOVE_NOCOALESCE: USHORT = 0x08;
-STRUCT!{struct RAWKEYBOARD {
+STRUCT! {struct RAWKEYBOARD {
     MakeCode: USHORT,
     Flags: USHORT,
     Reserved: USHORT,
@@ -7017,20 +5691,20 @@ pub const RI_KEY_E0: DWORD = 2;
 pub const RI_KEY_E1: DWORD = 4;
 pub const RI_KEY_TERMSRV_SET_LED: DWORD = 8;
 pub const RI_KEY_TERMSRV_SHADOW: DWORD = 0x10;
-STRUCT!{struct RAWHID {
+STRUCT! {struct RAWHID {
     dwSizeHid: DWORD,
     dwCount: DWORD,
     bRawData: [BYTE; 1],
 }}
 pub type PRAWHID = *mut RAWHID;
 pub type LPRAWHID = *mut RAWHID;
-UNION!{union RAWINPUT_data {
+UNION! {union RAWINPUT_data {
     [u32; 6],
     mouse mouse_mut: RAWMOUSE,
     keyboard keyboard_mut: RAWKEYBOARD,
     hid hid_mut: RAWHID,
 }}
-STRUCT!{struct RAWINPUT {
+STRUCT! {struct RAWINPUT {
     header: RAWINPUTHEADER,
     data: RAWINPUT_data,
 }}
@@ -7050,14 +5724,14 @@ extern "system" {
 pub const RIDI_PREPARSEDDATA: DWORD = 0x20000005;
 pub const RIDI_DEVICENAME: DWORD = 0x20000007;
 pub const RIDI_DEVICEINFO: DWORD = 0x2000000b;
-STRUCT!{struct RID_DEVICE_INFO_MOUSE {
+STRUCT! {struct RID_DEVICE_INFO_MOUSE {
     dwId: DWORD,
     dwNumberOfButtons: DWORD,
     dwSampleRate: DWORD,
     fHasHorizontalWheel: BOOL,
 }}
 pub type PRID_DEVICE_INFO_MOUSE = *mut RID_DEVICE_INFO_MOUSE;
-STRUCT!{struct RID_DEVICE_INFO_KEYBOARD {
+STRUCT! {struct RID_DEVICE_INFO_KEYBOARD {
     dwType: DWORD,
     dwSubType: DWORD,
     dwKeyboardMode: DWORD,
@@ -7066,7 +5740,7 @@ STRUCT!{struct RID_DEVICE_INFO_KEYBOARD {
     dwNumberOfKeysTotal: DWORD,
 }}
 pub type PRID_DEVICE_INFO_KEYBOARD = *mut RID_DEVICE_INFO_KEYBOARD;
-STRUCT!{struct RID_DEVICE_INFO_HID {
+STRUCT! {struct RID_DEVICE_INFO_HID {
     dwVendorId: DWORD,
     dwProductId: DWORD,
     dwVersionNumber: DWORD,
@@ -7074,13 +5748,13 @@ STRUCT!{struct RID_DEVICE_INFO_HID {
     usUsage: USHORT,
 }}
 pub type PRID_DEVICE_INFO_HID = *mut RID_DEVICE_INFO_HID;
-UNION!{union RID_DEVICE_INFO_u {
+UNION! {union RID_DEVICE_INFO_u {
     [u32; 6],
     mouse mouse_mut: RID_DEVICE_INFO_MOUSE,
     keyboard keyboard_mut: RID_DEVICE_INFO_KEYBOARD,
     hid hid_mut: RID_DEVICE_INFO_HID,
 }}
-STRUCT!{struct RID_DEVICE_INFO {
+STRUCT! {struct RID_DEVICE_INFO {
     cbSize: DWORD,
     dwType: DWORD,
     u: RID_DEVICE_INFO_u,
@@ -7100,13 +5774,9 @@ extern "system" {
         pData: LPVOID,
         pcbSize: PUINT,
     ) -> UINT;
-    pub fn GetRawInputBuffer(
-        pData: PRAWINPUT,
-        pcbSize: PUINT,
-        cbSizeHeader: UINT,
-    ) -> UINT;
+    pub fn GetRawInputBuffer(pData: PRAWINPUT, pcbSize: PUINT, cbSizeHeader: UINT) -> UINT;
 }
-STRUCT!{struct RAWINPUTDEVICE {
+STRUCT! {struct RAWINPUTDEVICE {
     usUsagePage: USHORT,
     usUsage: USHORT,
     dwFlags: DWORD,
@@ -7140,7 +5810,7 @@ extern "system" {
         cbSize: UINT,
     ) -> UINT;
 }
-STRUCT!{struct RAWINPUTDEVICELIST {
+STRUCT! {struct RAWINPUTDEVICELIST {
     hDevice: HANDLE,
     dwType: DWORD,
 }}
@@ -7151,18 +5821,11 @@ extern "system" {
         puiNumDevices: PUINT,
         cbSize: UINT,
     ) -> UINT;
-    pub fn DefRawInputProc(
-        paRawInput: *mut PRAWINPUT,
-        nInput: INT,
-        cbSizeHeader: UINT,
-    ) -> LRESULT;
-    pub fn ChangeWindowMessageFilter(
-        message: UINT,
-        dwFlag: DWORD,
-    ) -> BOOL;
+    pub fn DefRawInputProc(paRawInput: *mut PRAWINPUT, nInput: INT, cbSizeHeader: UINT) -> LRESULT;
+    pub fn ChangeWindowMessageFilter(message: UINT, dwFlag: DWORD) -> BOOL;
 }
 //15165
-STRUCT!{struct CHANGEFILTERSTRUCT {
+STRUCT! {struct CHANGEFILTERSTRUCT {
     cbSize: DWORD,
     ExtStatus: DWORD,
 }}
@@ -7184,22 +5847,11 @@ pub const NID_MULTI_INPUT: UINT = 0x00000040;
 pub const NID_READY: UINT = 0x00000080;
 pub const MAX_STR_BLOCKREASON: usize = 256;
 extern "system" {
-    pub fn ShutdownBlockReasonCreate(
-        hWnd: HWND,
-        pwszReason: LPCWSTR,
-    ) -> BOOL;
-    pub fn ShutdownBlockReasonQuery(
-        hWnd: HWND,
-        pwszBuff: LPWSTR,
-        pcchBuff: *mut DWORD,
-    ) -> BOOL;
-    pub fn ShutdownBlockReasonDestroy(
-        hWnd: HWND,
-    ) -> BOOL;
+    pub fn ShutdownBlockReasonCreate(hWnd: HWND, pwszReason: LPCWSTR) -> BOOL;
+    pub fn ShutdownBlockReasonQuery(hWnd: HWND, pwszBuff: LPWSTR, pcchBuff: *mut DWORD) -> BOOL;
+    pub fn ShutdownBlockReasonDestroy(hWnd: HWND) -> BOOL;
 }
 //15615
 extern "system" {
-    pub fn IsImmersiveProcess(
-        hProcess: HANDLE,
-    ) -> BOOL;
+    pub fn IsImmersiveProcess(hProcess: HANDLE) -> BOOL;
 }

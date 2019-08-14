@@ -9,7 +9,7 @@ use um::restrictederrorinfo::IRestrictedErrorInfo;
 use um::unknwnbase::IUnknown;
 use um::winnt::{HRESULT, PCWSTR, PVOID, VOID};
 use winrt::hstring::HSTRING;
-ENUM!{enum RO_ERROR_REPORTING_FLAGS {
+ENUM! {enum RO_ERROR_REPORTING_FLAGS {
     RO_ERROR_REPORTING_NONE = 0x00000000,
     RO_ERROR_REPORTING_SUPPRESSEXCEPTIONS = 0x00000001,
     RO_ERROR_REPORTING_FORCEEXCEPTIONS = 0x00000002,
@@ -17,59 +17,35 @@ ENUM!{enum RO_ERROR_REPORTING_FLAGS {
     RO_ERROR_REPORTING_SUPPRESSSETERRORINFO = 0x00000008,
 }}
 extern "system" {
-    pub fn RoGetErrorReportingFlags(
-        pflags: *mut UINT32,
-    ) -> HRESULT;
-    pub fn RoSetErrorReportingFlags(
-        flags: UINT32,
-    ) -> HRESULT;
+    pub fn RoGetErrorReportingFlags(pflags: *mut UINT32) -> HRESULT;
+    pub fn RoSetErrorReportingFlags(flags: UINT32) -> HRESULT;
     pub fn RoResolveRestrictedErrorInfoReference(
         reference: PCWSTR,
-        ppRestrictedErrorInfo: *mut *mut IRestrictedErrorInfo ,
-    ) -> HRESULT;
-    pub fn SetRestrictedErrorInfo(
-        pRestrictedErrorInfo: *const IRestrictedErrorInfo,
-    ) -> HRESULT;
-    pub fn GetRestrictedErrorInfo(
         ppRestrictedErrorInfo: *mut *mut IRestrictedErrorInfo,
     ) -> HRESULT;
-    pub fn RoOriginateErrorW(
-        error: HRESULT,
-        cchMax: UINT,
-        message: PCWSTR,
-    ) -> BOOL;
-    pub fn RoOriginateError(
-        error: HRESULT,
-        message: HSTRING,
-    ) -> BOOL;
+    pub fn SetRestrictedErrorInfo(pRestrictedErrorInfo: *const IRestrictedErrorInfo) -> HRESULT;
+    pub fn GetRestrictedErrorInfo(ppRestrictedErrorInfo: *mut *mut IRestrictedErrorInfo)
+        -> HRESULT;
+    pub fn RoOriginateErrorW(error: HRESULT, cchMax: UINT, message: PCWSTR) -> BOOL;
+    pub fn RoOriginateError(error: HRESULT, message: HSTRING) -> BOOL;
     pub fn RoTransformErrorW(
         oldError: HRESULT,
         newError: HRESULT,
         cchMax: UINT,
         message: PCWSTR,
     ) -> BOOL;
-    pub fn RoTransformError(
-        oldError: HRESULT,
-        newError: HRESULT,
-        message: HSTRING,
-    ) -> BOOL;
-    pub fn RoCaptureErrorContext(
-        hr: HRESULT,
-    ) -> HRESULT;
-    pub fn RoFailFastWithErrorContext(
-        hrError: HRESULT,
-    );
+    pub fn RoTransformError(oldError: HRESULT, newError: HRESULT, message: HSTRING) -> BOOL;
+    pub fn RoCaptureErrorContext(hr: HRESULT) -> HRESULT;
+    pub fn RoFailFastWithErrorContext(hrError: HRESULT);
     pub fn RoOriginateLanguageException(
         error: HRESULT,
         message: HSTRING,
         languageException: *const IUnknown,
     ) -> BOOL;
     pub fn RoClearError();
-    pub fn RoReportUnhandledError(
-        pRestrictedErrorInfo: *const IRestrictedErrorInfo,
-    ) -> HRESULT;
+    pub fn RoReportUnhandledError(pRestrictedErrorInfo: *const IRestrictedErrorInfo) -> HRESULT;
 }
-FN!{stdcall PINSPECT_MEMORY_CALLBACK(
+FN! {stdcall PINSPECT_MEMORY_CALLBACK(
     *const VOID,
     UINT_PTR,
     UINT32,

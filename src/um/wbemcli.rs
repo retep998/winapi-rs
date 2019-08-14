@@ -13,11 +13,11 @@ use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{LCID, LONG, LPCWSTR, LPWSTR};
 // extern RPC_IF_HANDLE __MIDL_itf_wbemcli_0000_0000_v0_0_c_ifspec;
 // extern RPC_IF_HANDLE __MIDL_itf_wbemcli_0000_0000_v0_0_s_ifspec;
-ENUM!{enum WBEM_GENUS_TYPE {
+ENUM! {enum WBEM_GENUS_TYPE {
     WBEM_GENUS_CLASS = 1,
     WBEM_GENUS_INSTANCE = 2,
 }}
-ENUM!{enum WBEM_CHANGE_FLAG_TYPE {
+ENUM! {enum WBEM_CHANGE_FLAG_TYPE {
     WBEM_FLAG_CREATE_OR_UPDATE = 0,
     WBEM_FLAG_UPDATE_ONLY = 0x1,
     WBEM_FLAG_CREATE_ONLY = 0x2,
@@ -27,7 +27,7 @@ ENUM!{enum WBEM_CHANGE_FLAG_TYPE {
     WBEM_MASK_UPDATE_MODE = 0x60,
     WBEM_FLAG_ADVISORY = 0x10000,
 }}
-ENUM!{enum WBEM_GENERIC_FLAG_TYPE {
+ENUM! {enum WBEM_GENERIC_FLAG_TYPE {
     WBEM_FLAG_RETURN_IMMEDIATELY = 0x10,
     WBEM_FLAG_RETURN_WBEM_COMPLETE = 0,
     WBEM_FLAG_BIDIRECTIONAL = 0,
@@ -45,7 +45,7 @@ ENUM!{enum WBEM_GENERIC_FLAG_TYPE {
     WBEM_FLAG_USE_AMENDED_QUALIFIERS = 0x20000,
     WBEM_FLAG_STRONG_VALIDATION = 0x100000,
 }}
-ENUM!{enum WBEM_STATUS_TYPE {
+ENUM! {enum WBEM_STATUS_TYPE {
     WBEM_STATUS_COMPLETE = 0,
     WBEM_STATUS_REQUIREMENTS = 1,
     WBEM_STATUS_PROGRESS = 2,
@@ -55,11 +55,11 @@ ENUM!{enum WBEM_STATUS_TYPE {
     WBEM_STATUS_LOGGING_INFORMATION_REPOSITORY = 0x800,
     WBEM_STATUS_LOGGING_INFORMATION_ESS = 0x1000,
 }}
-ENUM!{enum WBEM_TIMEOUT_TYPE {
+ENUM! {enum WBEM_TIMEOUT_TYPE {
     WBEM_NO_WAIT = 0,
     WBEM_INFINITE = 0xffffffff,
 }}
-ENUM!{enum WBEM_CONDITION_FLAG_TYPE {
+ENUM! {enum WBEM_CONDITION_FLAG_TYPE {
     WBEM_FLAG_ALWAYS = 0,
     WBEM_FLAG_ONLY_IF_TRUE = 0x1,
     WBEM_FLAG_ONLY_IF_FALSE = 0x2,
@@ -76,7 +76,7 @@ ENUM!{enum WBEM_CONDITION_FLAG_TYPE {
     WBEM_FLAG_CLASS_LOCAL_AND_OVERRIDES = 0x200,
     WBEM_MASK_CLASS_CONDITION = 0x300,
 }}
-ENUM!{enum WBEM_FLAVOR_TYPE {
+ENUM! {enum WBEM_FLAVOR_TYPE {
     WBEM_FLAVOR_DONT_PROPAGATE = 0,
     WBEM_FLAVOR_FLAG_PROPAGATE_TO_INSTANCE = 0x1,
     WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS = 0x2,
@@ -92,12 +92,12 @@ ENUM!{enum WBEM_FLAVOR_TYPE {
     WBEM_FLAVOR_AMENDED = 0x80,
     WBEM_FLAVOR_MASK_AMENDED = 0x80,
 }}
-ENUM!{enum WBEM_QUERY_FLAG_TYPE {
+ENUM! {enum WBEM_QUERY_FLAG_TYPE {
     WBEM_FLAG_DEEP = 0,
     WBEM_FLAG_SHALLOW = 1,
     WBEM_FLAG_PROTOTYPE = 2,
 }}
-ENUM!{enum WBEM_SECURITY_FLAGS {
+ENUM! {enum WBEM_SECURITY_FLAGS {
     WBEM_ENABLE = 1,
     WBEM_METHOD_EXECUTE = 2,
     WBEM_FULL_WRITE_REP = 4,
@@ -107,14 +107,14 @@ ENUM!{enum WBEM_SECURITY_FLAGS {
     WBEM_RIGHT_SUBSCRIBE = 0x40,
     WBEM_RIGHT_PUBLISH = 0x80,
 }}
-ENUM!{enum WBEM_LIMITATION_FLAG_TYPE {
+ENUM! {enum WBEM_LIMITATION_FLAG_TYPE {
     WBEM_FLAG_EXCLUDE_OBJECT_QUALIFIERS = 0x10,
     WBEM_FLAG_EXCLUDE_PROPERTY_QUALIFIERS = 0x20,
 }}
-ENUM!{enum WBEM_TEXT_FLAG_TYPE {
+ENUM! {enum WBEM_TEXT_FLAG_TYPE {
     WBEM_FLAG_NO_FLAVORS = 0x1,
 }}
-ENUM!{enum WBEM_COMPARISON_FLAG {
+ENUM! {enum WBEM_COMPARISON_FLAG {
     WBEM_COMPARISON_INCLUDE_ALL = 0,
     WBEM_FLAG_IGNORE_QUALIFIERS = 0x1,
     WBEM_FLAG_IGNORE_OBJECT_SOURCE = 0x2,
@@ -123,10 +123,10 @@ ENUM!{enum WBEM_COMPARISON_FLAG {
     WBEM_FLAG_IGNORE_CASE = 0x10,
     WBEM_FLAG_IGNORE_FLAVOR = 0x20,
 }}
-ENUM!{enum WBEM_LOCKING_FLAG_TYPE {
+ENUM! {enum WBEM_LOCKING_FLAG_TYPE {
     WBEM_FLAG_ALLOW_READ = 0x1,
 }}
-ENUM!{enum CIMTYPE_ENUMERATION {
+ENUM! {enum CIMTYPE_ENUMERATION {
     CIM_ILLEGAL = 0xfff,
     CIM_EMPTY = 0,
     CIM_SINT8 = 16,
@@ -147,32 +147,32 @@ ENUM!{enum CIMTYPE_ENUMERATION {
     CIM_OBJECT = 13,
     CIM_FLAG_ARRAY = 0x2000,
 }}
-ENUM!{enum WBEM_BACKUP_RESTORE_FLAGS {
+ENUM! {enum WBEM_BACKUP_RESTORE_FLAGS {
     WBEM_FLAG_BACKUP_RESTORE_DEFAULT = 0,
     WBEM_FLAG_BACKUP_RESTORE_FORCE_SHUTDOWN = 1,
 }}
-ENUM!{enum WBEM_REFRESHER_FLAGS {
+ENUM! {enum WBEM_REFRESHER_FLAGS {
     WBEM_FLAG_REFRESH_AUTO_RECONNECT = 0,
     WBEM_FLAG_REFRESH_NO_AUTO_RECONNECT = 1,
 }}
-ENUM!{enum WBEM_SHUTDOWN_FLAGS {
+ENUM! {enum WBEM_SHUTDOWN_FLAGS {
     WBEM_SHUTDOWN_UNLOAD_COMPONENT = 1,
     WBEM_SHUTDOWN_WMI = 2,
     WBEM_SHUTDOWN_OS = 3,
 }}
 pub type CIMTYPE = c_long;
-ENUM!{enum WBEMSTATUS_FORMAT {
+ENUM! {enum WBEMSTATUS_FORMAT {
     WBEMSTATUS_FORMAT_NEWLINE = 0,
     WBEMSTATUS_FORMAT_NO_NEWLINE = 1,
 }}
-ENUM!{enum WBEM_LIMITS {
+ENUM! {enum WBEM_LIMITS {
     WBEM_MAX_IDENTIFIER = 0x1000,
     WBEM_MAX_QUERY = 0x4000,
     WBEM_MAX_PATH = 0x2000,
     WBEM_MAX_OBJECT_NESTING = 64,
     WBEM_MAX_USER_PROPERTIES = 1024,
 }}
-ENUM!{enum WBEMSTATUS {
+ENUM! {enum WBEMSTATUS {
     WBEM_NO_ERROR = 0,
     WBEM_S_NO_ERROR = 0,
     WBEM_S_SAME = 0,
@@ -369,9 +369,9 @@ ENUM!{enum WBEMSTATUS {
 }}
 // EXTERN_C const IID LIBID_WbemClient_v1;
 // EXTERN_C const IID IID_IWbemClassObject;
-DEFINE_GUID!{IID_IWbemClassObject,
-    0xdc12a681, 0x737f, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24}
-RIDL!{#[uuid(0xdc12a681, 0x737f, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24)]
+DEFINE_GUID! {IID_IWbemClassObject,
+0xdc12a681, 0x737f, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24}
+RIDL! {#[uuid(0xdc12a681, 0x737f, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24)]
 interface IWbemClassObject(IWbemClassObjectVtbl): IUnknown(IUnknownVtbl) {
     fn GetQualifierSet(
         ppQualSet: *mut *mut IWbemQualifierSet,
@@ -474,9 +474,9 @@ interface IWbemClassObject(IWbemClassObjectVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemObjectAccess;
-DEFINE_GUID!{IID_IWbemObjectAccess,
-    0x49353c9a, 0x516b, 0x11d1, 0xae, 0xa6, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
-RIDL!{#[uuid(0x49353c9a, 0x516b, 0x11d1, 0xae, 0xa6, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
+DEFINE_GUID! {IID_IWbemObjectAccess,
+0x49353c9a, 0x516b, 0x11d1, 0xae, 0xa6, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
+RIDL! {#[uuid(0x49353c9a, 0x516b, 0x11d1, 0xae, 0xa6, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
 interface IWbemObjectAccess(IWbemObjectAccessVtbl): IWbemClassObject(IWbemClassObjectVtbl) {
     fn GetPropertyHandle(
         wszPropertyName: LPCWSTR,
@@ -523,9 +523,9 @@ interface IWbemObjectAccess(IWbemObjectAccessVtbl): IWbemClassObject(IWbemClassO
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemQualifierSet;
-DEFINE_GUID!{IID_IWbemQualifierSet,
-    0xdc12a680, 0x737f, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24}
-RIDL!{#[uuid(0xdc12a680, 0x737f, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24)]
+DEFINE_GUID! {IID_IWbemQualifierSet,
+0xdc12a680, 0x737f, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24}
+RIDL! {#[uuid(0xdc12a680, 0x737f, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24)]
 interface IWbemQualifierSet(IWbemQualifierSetVtbl): IUnknown(IUnknownVtbl) {
     fn Get(
         wszName: LPCWSTR,
@@ -557,9 +557,9 @@ interface IWbemQualifierSet(IWbemQualifierSetVtbl): IUnknown(IUnknownVtbl) {
     fn EndEnumeration() -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemServices;
-DEFINE_GUID!{IID_IWbemServices,
-    0x9556dc99, 0x828c, 0x11cf, 0xa3, 0x7e, 0x00, 0xaa, 0x00, 0x32, 0x40, 0xc7}
-RIDL!{#[uuid(0x9556dc99, 0x828c, 0x11cf, 0xa3, 0x7e, 0x00, 0xaa, 0x00, 0x32, 0x40, 0xc7)]
+DEFINE_GUID! {IID_IWbemServices,
+0x9556dc99, 0x828c, 0x11cf, 0xa3, 0x7e, 0x00, 0xaa, 0x00, 0x32, 0x40, 0xc7}
+RIDL! {#[uuid(0x9556dc99, 0x828c, 0x11cf, 0xa3, 0x7e, 0x00, 0xaa, 0x00, 0x32, 0x40, 0xc7)]
 interface IWbemServices(IWbemServicesVtbl): IUnknown(IUnknownVtbl) {
     fn OpenNamespace(
         strNamespace: BSTR,
@@ -707,9 +707,9 @@ interface IWbemServices(IWbemServicesVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemLocator;
-DEFINE_GUID!{IID_IWbemLocator,
-    0xdc12a687, 0x737f, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24}
-RIDL!{#[uuid(0xdc12a687, 0x737f, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24)]
+DEFINE_GUID! {IID_IWbemLocator,
+0xdc12a687, 0x737f, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24}
+RIDL! {#[uuid(0xdc12a687, 0x737f, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24)]
 interface IWbemLocator(IWbemLocatorVtbl): IUnknown(IUnknownVtbl) {
     fn ConnectServer(
         strNetworkResource: BSTR,
@@ -723,9 +723,9 @@ interface IWbemLocator(IWbemLocatorVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemObjectSink;
-DEFINE_GUID!{IID_IWbemObjectSink,
-    0x7c857801, 0x7381, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24}
-RIDL!{#[uuid(0x7c857801, 0x7381, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24)]
+DEFINE_GUID! {IID_IWbemObjectSink,
+0x7c857801, 0x7381, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24}
+RIDL! {#[uuid(0x7c857801, 0x7381, 0x11cf, 0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24)]
 interface IWbemObjectSink(IWbemObjectSinkVtbl): IUnknown(IUnknownVtbl) {
     fn Indicate(
         lObjectCount: c_long,
@@ -739,9 +739,9 @@ interface IWbemObjectSink(IWbemObjectSinkVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IEnumWbemClassObject;
-DEFINE_GUID!{IID_IEnumWbemClassObject,
-    0x027947e1, 0xd731, 0x11ce, 0xa3, 0x57, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01}
-RIDL!{#[uuid(0x027947e1, 0xd731, 0x11ce, 0xa3, 0x57, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01)]
+DEFINE_GUID! {IID_IEnumWbemClassObject,
+0x027947e1, 0xd731, 0x11ce, 0xa3, 0x57, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01}
+RIDL! {#[uuid(0x027947e1, 0xd731, 0x11ce, 0xa3, 0x57, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01)]
 interface IEnumWbemClassObject(IEnumWbemClassObjectVtbl): IUnknown(IUnknownVtbl) {
     fn Reset() -> HRESULT,
     fn Next(
@@ -763,9 +763,9 @@ interface IEnumWbemClassObject(IEnumWbemClassObjectVtbl): IUnknown(IUnknownVtbl)
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemCallResult;
-DEFINE_GUID!{IID_IWbemCallResult,
-    0x44aca675, 0xe8fc, 0x11d0, 0xa0, 0x7c, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
-RIDL!{#[uuid(0x44aca675, 0xe8fc, 0x11d0, 0xa0, 0x7c, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
+DEFINE_GUID! {IID_IWbemCallResult,
+0x44aca675, 0xe8fc, 0x11d0, 0xa0, 0x7c, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
+RIDL! {#[uuid(0x44aca675, 0xe8fc, 0x11d0, 0xa0, 0x7c, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
 interface IWbemCallResult(IWbemCallResultVtbl): IUnknown(IUnknownVtbl) {
     fn GetResultObject(
         lTimeout: c_long,
@@ -785,9 +785,9 @@ interface IWbemCallResult(IWbemCallResultVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemContext;
-DEFINE_GUID!{IID_IWbemContext,
-    0x44aca674, 0xe8fc, 0x11d0, 0xa0, 0x7c, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
-RIDL!{#[uuid(0x44aca674, 0xe8fc, 0x11d0, 0xa0, 0x7c, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
+DEFINE_GUID! {IID_IWbemContext,
+0x44aca674, 0xe8fc, 0x11d0, 0xa0, 0x7c, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
+RIDL! {#[uuid(0x44aca674, 0xe8fc, 0x11d0, 0xa0, 0x7c, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
 interface IWbemContext(IWbemContextVtbl): IUnknown(IUnknownVtbl) {
     fn Clone(
         ppNewCopy: *mut *mut IWbemContext,
@@ -822,9 +822,9 @@ interface IWbemContext(IWbemContextVtbl): IUnknown(IUnknownVtbl) {
     fn DeleteAll() -> HRESULT,
 }}
 // EXTERN_C const IID IID_IUnsecuredApartment;
-DEFINE_GUID!{IID_IUnsecuredApartment,
-    0x1cfaba8c, 0x1523, 0x11d1, 0xad, 0x79, 0x00, 0xc0, 0x4f, 0xd8, 0xfd, 0xff}
-RIDL!{#[uuid(0x1cfaba8c, 0x1523, 0x11d1, 0xad, 0x79, 0x00, 0xc0, 0x4f, 0xd8, 0xfd, 0xff)]
+DEFINE_GUID! {IID_IUnsecuredApartment,
+0x1cfaba8c, 0x1523, 0x11d1, 0xad, 0x79, 0x00, 0xc0, 0x4f, 0xd8, 0xfd, 0xff}
+RIDL! {#[uuid(0x1cfaba8c, 0x1523, 0x11d1, 0xad, 0x79, 0x00, 0xc0, 0x4f, 0xd8, 0xfd, 0xff)]
 interface IUnsecuredApartment(IUnsecuredApartmentVtbl): IUnknown(IUnknownVtbl) {
     fn CreateObjectStub(
         pObject: *mut IUnknown,
@@ -832,9 +832,9 @@ interface IUnsecuredApartment(IUnsecuredApartmentVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemUnsecuredApartment;
-DEFINE_GUID!{IID_IWbemUnsecuredApartment,
-    0x31739d04, 0x3471, 0x4cf4, 0x9a, 0x7c, 0x57, 0xa4, 0x4a, 0xe7, 0x19, 0x56}
-RIDL!{#[uuid(0x31739d04, 0x3471, 0x4cf4, 0x9a, 0x7c, 0x57, 0xa4, 0x4a, 0xe7, 0x19, 0x56)]
+DEFINE_GUID! {IID_IWbemUnsecuredApartment,
+0x31739d04, 0x3471, 0x4cf4, 0x9a, 0x7c, 0x57, 0xa4, 0x4a, 0xe7, 0x19, 0x56}
+RIDL! {#[uuid(0x31739d04, 0x3471, 0x4cf4, 0x9a, 0x7c, 0x57, 0xa4, 0x4a, 0xe7, 0x19, 0x56)]
 interface IWbemUnsecuredApartment(IWbemUnsecuredApartmentVtbl):
 IUnsecuredApartment(IUnsecuredApartmentVtbl) {
     fn CreateSinkStub(
@@ -845,9 +845,9 @@ IUnsecuredApartment(IUnsecuredApartmentVtbl) {
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemStatusCodeText;
-DEFINE_GUID!{IID_IWbemStatusCodeText,
-    0xeb87e1bc, 0x3233, 0x11d2, 0xae, 0xc9, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
-RIDL!{#[uuid(0xeb87e1bc, 0x3233, 0x11d2, 0xae, 0xc9, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
+DEFINE_GUID! {IID_IWbemStatusCodeText,
+0xeb87e1bc, 0x3233, 0x11d2, 0xae, 0xc9, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
+RIDL! {#[uuid(0xeb87e1bc, 0x3233, 0x11d2, 0xae, 0xc9, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
 interface IWbemStatusCodeText(IWbemStatusCodeTextVtbl): IUnknown(IUnknownVtbl) {
     fn GetErrorCodeText(
         hRes: HRESULT,
@@ -863,9 +863,9 @@ interface IWbemStatusCodeText(IWbemStatusCodeTextVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemBackupRestore;
-DEFINE_GUID!{IID_IWbemBackupRestore,
-    0xc49e32c7, 0xbc8b, 0x11d2, 0x85, 0xd4, 0x00, 0x10, 0x5a, 0x1f, 0x83, 0x04}
-RIDL!{#[uuid(0xc49e32c7, 0xbc8b, 0x11d2, 0x85, 0xd4, 0x00, 0x10, 0x5a, 0x1f, 0x83, 0x04)]
+DEFINE_GUID! {IID_IWbemBackupRestore,
+0xc49e32c7, 0xbc8b, 0x11d2, 0x85, 0xd4, 0x00, 0x10, 0x5a, 0x1f, 0x83, 0x04}
+RIDL! {#[uuid(0xc49e32c7, 0xbc8b, 0x11d2, 0x85, 0xd4, 0x00, 0x10, 0x5a, 0x1f, 0x83, 0x04)]
 interface IWbemBackupRestore(IWbemBackupRestoreVtbl): IUnknown(IUnknownVtbl) {
     fn Backup(
         strBackupToFile: LPCWSTR,
@@ -877,27 +877,27 @@ interface IWbemBackupRestore(IWbemBackupRestoreVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemBackupRestoreEx;
-DEFINE_GUID!{IID_IWbemBackupRestoreEx,
-    0xa359dec5, 0xe813, 0x4834, 0x8a, 0x2a, 0xba, 0x7f, 0x1d, 0x77, 0x7d, 0x76}
-RIDL!{#[uuid(0xa359dec5, 0xe813, 0x4834, 0x8a, 0x2a, 0xba, 0x7f, 0x1d, 0x77, 0x7d, 0x76)]
+DEFINE_GUID! {IID_IWbemBackupRestoreEx,
+0xa359dec5, 0xe813, 0x4834, 0x8a, 0x2a, 0xba, 0x7f, 0x1d, 0x77, 0x7d, 0x76}
+RIDL! {#[uuid(0xa359dec5, 0xe813, 0x4834, 0x8a, 0x2a, 0xba, 0x7f, 0x1d, 0x77, 0x7d, 0x76)]
 interface IWbemBackupRestoreEx(IWbemBackupRestoreExVtbl):
 IWbemBackupRestore(IWbemBackupRestoreVtbl) {
     fn Pause() -> HRESULT,
     fn Resume() -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemRefresher;
-DEFINE_GUID!{IID_IWbemRefresher,
-    0x49353c99, 0x516b, 0x11d1, 0xae, 0xa6, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
-RIDL!{#[uuid(0x49353c99, 0x516b, 0x11d1, 0xae, 0xa6, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
+DEFINE_GUID! {IID_IWbemRefresher,
+0x49353c99, 0x516b, 0x11d1, 0xae, 0xa6, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
+RIDL! {#[uuid(0x49353c99, 0x516b, 0x11d1, 0xae, 0xa6, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
 interface IWbemRefresher(IWbemRefresherVtbl): IUnknown(IUnknownVtbl) {
     fn Refresh(
         lFlags: c_long,
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemHiPerfEnum;
-DEFINE_GUID!{IID_IWbemHiPerfEnum,
-    0x2705c288, 0x79ae, 0x11d2, 0xb3, 0x48, 0x00, 0x10, 0x5a, 0x1f, 0x81, 0x77}
-RIDL!{#[uuid(0x2705c288, 0x79ae, 0x11d2, 0xb3, 0x48, 0x00, 0x10, 0x5a, 0x1f, 0x81, 0x77)]
+DEFINE_GUID! {IID_IWbemHiPerfEnum,
+0x2705c288, 0x79ae, 0x11d2, 0xb3, 0x48, 0x00, 0x10, 0x5a, 0x1f, 0x81, 0x77}
+RIDL! {#[uuid(0x2705c288, 0x79ae, 0x11d2, 0xb3, 0x48, 0x00, 0x10, 0x5a, 0x1f, 0x81, 0x77)]
 interface IWbemHiPerfEnum(IWbemHiPerfEnumVtbl): IUnknown(IUnknownVtbl) {
     fn AddObjects(
         lFlags: c_long,
@@ -921,9 +921,9 @@ interface IWbemHiPerfEnum(IWbemHiPerfEnumVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemConfigureRefresher;
-DEFINE_GUID!{IID_IWbemConfigureRefresher,
-    0x49353c92, 0x516b, 0x11d1, 0xae, 0xa6, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
-RIDL!{#[uuid(0x49353c92, 0x516b, 0x11d1, 0xae, 0xa6, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
+DEFINE_GUID! {IID_IWbemConfigureRefresher,
+0x49353c92, 0x516b, 0x11d1, 0xae, 0xa6, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
+RIDL! {#[uuid(0x49353c92, 0x516b, 0x11d1, 0xae, 0xa6, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
 interface IWbemConfigureRefresher(IWbemConfigureRefresherVtbl): IUnknown(IUnknownVtbl) {
     fn AddObjectByPath(
         pNamespace: *mut IWbemServices,
@@ -959,40 +959,40 @@ interface IWbemConfigureRefresher(IWbemConfigureRefresherVtbl): IUnknown(IUnknow
         plId: *mut c_long,
     ) -> HRESULT,
 }}
-DEFINE_GUID!{CLSID_WbemLocator,
-    0x4590f811, 0x1d3a, 0x11d0, 0x89, 0x1f, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24}
-RIDL!{#[uuid(0x4590f811, 0x1d3a, 0x11d0, 0x89, 0x1f, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24)]
+DEFINE_GUID! {CLSID_WbemLocator,
+0x4590f811, 0x1d3a, 0x11d0, 0x89, 0x1f, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24}
+RIDL! {#[uuid(0x4590f811, 0x1d3a, 0x11d0, 0x89, 0x1f, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24)]
 class WbemLocator;}
-DEFINE_GUID!{CLSID_WbemContext,
-    0x674B6698, 0xEE92, 0x11d0, 0xAD, 0x71, 0x00, 0xC0, 0x4F, 0xD8, 0xFD, 0xFF}
+DEFINE_GUID! {CLSID_WbemContext,
+0x674B6698, 0xEE92, 0x11d0, 0xAD, 0x71, 0x00, 0xC0, 0x4F, 0xD8, 0xFD, 0xFF}
 // class DECLSPEC_UUID("674B6698-EE92-11d0-AD71-00C04FD8FDFF")
 // WbemContext;
-DEFINE_GUID!{CLSID_UnsecuredApartment,
-    0x49bd2028, 0x1523, 0x11d1, 0xad, 0x79, 0x00, 0xc0, 0x4f, 0xd8, 0xfd, 0xff}
+DEFINE_GUID! {CLSID_UnsecuredApartment,
+0x49bd2028, 0x1523, 0x11d1, 0xad, 0x79, 0x00, 0xc0, 0x4f, 0xd8, 0xfd, 0xff}
 // class DECLSPEC_UUID("49bd2028-1523-11d1-ad79-00c04fd8fdff")
 // UnsecuredApartment;
-DEFINE_GUID!{CLSID_WbemClassObject,
-    0x9A653086, 0x174F, 0x11d2, 0xB5, 0xF9, 0x00, 0x10, 0x4B, 0x70, 0x3E, 0xFD}
+DEFINE_GUID! {CLSID_WbemClassObject,
+0x9A653086, 0x174F, 0x11d2, 0xB5, 0xF9, 0x00, 0x10, 0x4B, 0x70, 0x3E, 0xFD}
 // class DECLSPEC_UUID("9A653086-174F-11d2-B5F9-00104B703EFD")
 // WbemClassObject;
-DEFINE_GUID!{CLSID_MofCompiler,
-    0x6daf9757, 0x2e37, 0x11d2, 0xae, 0xc9, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
+DEFINE_GUID! {CLSID_MofCompiler,
+0x6daf9757, 0x2e37, 0x11d2, 0xae, 0xc9, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
 // class DECLSPEC_UUID("6daf9757-2e37-11d2-aec9-00c04fb68820")
 // MofCompiler;
-DEFINE_GUID!{CLSID_WbemStatusCodeText,
-    0xeb87e1bd, 0x3233, 0x11d2, 0xae, 0xc9, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
+DEFINE_GUID! {CLSID_WbemStatusCodeText,
+0xeb87e1bd, 0x3233, 0x11d2, 0xae, 0xc9, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
 // class DECLSPEC_UUID("eb87e1bd-3233-11d2-aec9-00c04fb68820")
 // WbemStatusCodeText;
-DEFINE_GUID!{CLSID_WbemBackupRestore,
-    0xC49E32C6, 0xBC8B, 0x11d2, 0x85, 0xD4, 0x00, 0x10, 0x5A, 0x1F, 0x83, 0x04}
+DEFINE_GUID! {CLSID_WbemBackupRestore,
+0xC49E32C6, 0xBC8B, 0x11d2, 0x85, 0xD4, 0x00, 0x10, 0x5A, 0x1F, 0x83, 0x04}
 // class DECLSPEC_UUID("C49E32C6-BC8B-11d2-85D4-00105A1F8304")
 // WbemBackupRestore;
-DEFINE_GUID!{CLSID_WbemRefresher,
-    0xc71566f2, 0x561e, 0x11d1, 0xad, 0x87, 0x00, 0xc0, 0x4f, 0xd8, 0xfd, 0xff}
+DEFINE_GUID! {CLSID_WbemRefresher,
+0xc71566f2, 0x561e, 0x11d1, 0xad, 0x87, 0x00, 0xc0, 0x4f, 0xd8, 0xfd, 0xff}
 // class DECLSPEC_UUID("c71566f2-561e-11d1-ad87-00c04fd8fdff")
 // WbemRefresher;
-DEFINE_GUID!{CLSID_WbemObjectTextSrc,
-    0x8D1C559D, 0x84F0, 0x4bb3, 0xA7, 0xD5, 0x56, 0xA7, 0x43, 0x5A, 0x9B, 0xA6}
+DEFINE_GUID! {CLSID_WbemObjectTextSrc,
+0x8D1C559D, 0x84F0, 0x4bb3, 0xA7, 0xD5, 0x56, 0xA7, 0x43, 0x5A, 0x9B, 0xA6}
 // class DECLSPEC_UUID("8D1C559D-84F0-4bb3-A7D5-56A7435A9BA6")
 // WbemObjectTextSrc;
 // extern RPC_IF_HANDLE __MIDL_itf_wbemcli_0000_0001_v0_0_c_ifspec;
@@ -1000,9 +1000,9 @@ DEFINE_GUID!{CLSID_WbemObjectTextSrc,
 // extern RPC_IF_HANDLE __MIDL_itf_wbemcli_0000_0003_v0_0_c_ifspec;
 // extern RPC_IF_HANDLE __MIDL_itf_wbemcli_0000_0003_v0_0_s_ifspec;
 // EXTERN_C const IID IID_IWbemObjectSinkEx;
-DEFINE_GUID!{IID_IWbemObjectSinkEx,
-    0xe7d35cfa, 0x348b, 0x485e, 0xb5, 0x24, 0x25, 0x27, 0x25, 0xd6, 0x97, 0xca}
-RIDL!{#[uuid(0xe7d35cfa, 0x348b, 0x485e, 0xb5, 0x24, 0x25, 0x27, 0x25, 0xd6, 0x97, 0xca)]
+DEFINE_GUID! {IID_IWbemObjectSinkEx,
+0xe7d35cfa, 0x348b, 0x485e, 0xb5, 0x24, 0x25, 0x27, 0x25, 0xd6, 0x97, 0xca}
+RIDL! {#[uuid(0xe7d35cfa, 0x348b, 0x485e, 0xb5, 0x24, 0x25, 0x27, 0x25, 0xd6, 0x97, 0xca)]
 interface IWbemObjectSinkEx(IWbemObjectSinkExVtbl): IWbemObjectSink(IWbemObjectSinkVtbl) {
     fn WriteMessage(
         uChannel: ULONG,
@@ -1032,9 +1032,9 @@ interface IWbemObjectSinkEx(IWbemObjectSinkExVtbl): IWbemObjectSink(IWbemObjectS
     ) -> HRESULT,
 }}
 // EXTERN_C const IID IID_IWbemShutdown;
-DEFINE_GUID!{IID_IWbemShutdown,
-    0xb7b31df9, 0xd515, 0x11d3, 0xa1, 0x1c, 0x00, 0x10, 0x5a, 0x1f, 0x51, 0x5a}
-RIDL!{#[uuid(0xb7b31df9, 0xd515, 0x11d3, 0xa1, 0x1c, 0x00, 0x10, 0x5a, 0x1f, 0x51, 0x5a)]
+DEFINE_GUID! {IID_IWbemShutdown,
+0xb7b31df9, 0xd515, 0x11d3, 0xa1, 0x1c, 0x00, 0x10, 0x5a, 0x1f, 0x51, 0x5a}
+RIDL! {#[uuid(0xb7b31df9, 0xd515, 0x11d3, 0xa1, 0x1c, 0x00, 0x10, 0x5a, 0x1f, 0x51, 0x5a)]
 interface IWbemShutdown(IWbemShutdownVtbl): IUnknown(IUnknownVtbl) {
     fn Shutdown(
         uReason: LONG,
@@ -1042,7 +1042,7 @@ interface IWbemShutdown(IWbemShutdownVtbl): IUnknown(IUnknownVtbl) {
         pCtx: *mut IWbemContext,
     ) -> HRESULT,
 }}
-ENUM!{enum WMI_OBJ_TEXT {
+ENUM! {enum WMI_OBJ_TEXT {
     WMI_OBJ_TEXT_CIM_DTD_2_0 = 1,
     WMI_OBJ_TEXT_WMI_DTD_2_0 = 2,
     WMI_OBJ_TEXT_WMI_EXT1 = 3,
@@ -1060,9 +1060,9 @@ ENUM!{enum WMI_OBJ_TEXT {
 // extern RPC_IF_HANDLE __MIDL_itf_wbemcli_0000_0011_v0_0_c_ifspec;
 // extern RPC_IF_HANDLE __MIDL_itf_wbemcli_0000_0011_v0_0_s_ifspec;
 // EXTERN_C const IID IID_IWbemObjectTextSrc;
-DEFINE_GUID!{IID_IWbemObjectTextSrc,
-    0xbfbf883a, 0xcad7, 0x11d3, 0xa1, 0x1b, 0x00, 0x10, 0x5a, 0x1f, 0x51, 0x5a}
-RIDL!{#[uuid(0xbfbf883a, 0xcad7, 0x11d3, 0xa1, 0x1b, 0x00, 0x10, 0x5a, 0x1f, 0x51, 0x5a)]
+DEFINE_GUID! {IID_IWbemObjectTextSrc,
+0xbfbf883a, 0xcad7, 0x11d3, 0xa1, 0x1b, 0x00, 0x10, 0x5a, 0x1f, 0x51, 0x5a}
+RIDL! {#[uuid(0xbfbf883a, 0xcad7, 0x11d3, 0xa1, 0x1b, 0x00, 0x10, 0x5a, 0x1f, 0x51, 0x5a)]
 interface IWbemObjectTextSrc(IWbemObjectTextSrcVtbl): IUnknown(IUnknownVtbl) {
     fn GetText(
         lFlags: c_long,
@@ -1079,7 +1079,7 @@ interface IWbemObjectTextSrc(IWbemObjectTextSrcVtbl): IUnknown(IUnknownVtbl) {
         pNewObj: *mut *mut IWbemClassObject,
     ) -> HRESULT,
 }}
-STRUCT!{struct WBEM_COMPILE_STATUS_INFO {
+STRUCT! {struct WBEM_COMPILE_STATUS_INFO {
     lPhaseError: c_long,
     hRes: HRESULT,
     ObjectNum: c_long,
@@ -1087,7 +1087,7 @@ STRUCT!{struct WBEM_COMPILE_STATUS_INFO {
     LastLine: c_long,
     dwOutFlags: DWORD,
 }}
-ENUM!{enum WBEM_COMPILER_OPTIONS {
+ENUM! {enum WBEM_COMPILER_OPTIONS {
     WBEM_FLAG_CHECK_ONLY = 0x1,
     WBEM_FLAG_AUTORECOVER = 0x2,
     WBEM_FLAG_WMI_CHECK = 0x4,
@@ -1096,7 +1096,7 @@ ENUM!{enum WBEM_COMPILER_OPTIONS {
     WBEM_FLAG_SPLIT_FILES = 0x20,
     WBEM_FLAG_STORE_FILE = 0x100,
 }}
-ENUM!{enum WBEM_CONNECT_OPTIONS {
+ENUM! {enum WBEM_CONNECT_OPTIONS {
     WBEM_FLAG_CONNECT_REPOSITORY_ONLY = 0x40,
     WBEM_FLAG_CONNECT_USE_MAX_WAIT = 0x80,
     WBEM_FLAG_CONNECT_PROVIDERS = 0x100,
@@ -1104,9 +1104,9 @@ ENUM!{enum WBEM_CONNECT_OPTIONS {
 // extern RPC_IF_HANDLE __MIDL_itf_wbemcli_0000_0013_v0_0_c_ifspec;
 // extern RPC_IF_HANDLE __MIDL_itf_wbemcli_0000_0013_v0_0_s_ifspec;
 // EXTERN_C const IID IID_IMofCompiler;
-DEFINE_GUID!{IID_IMofCompiler,
-    0x6daf974e, 0x2e37, 0x11d2, 0xae, 0xc9, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
-RIDL!{#[uuid(0x6daf974e, 0x2e37, 0x11d2, 0xae, 0xc9, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
+DEFINE_GUID! {IID_IMofCompiler,
+0x6daf974e, 0x2e37, 0x11d2, 0xae, 0xc9, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20}
+RIDL! {#[uuid(0x6daf974e, 0x2e37, 0x11d2, 0xae, 0xc9, 0x00, 0xc0, 0x4f, 0xb6, 0x88, 0x20)]
 interface IMofCompiler(IMofCompilerVtbl): IUnknown(IUnknownVtbl) {
     fn CompileFile(
         FileName: LPWSTR,
@@ -1141,14 +1141,14 @@ interface IMofCompiler(IMofCompilerVtbl): IUnknown(IUnknownVtbl) {
         pInfo: *mut WBEM_COMPILE_STATUS_INFO,
     ) -> HRESULT,
 }}
-ENUM!{enum WBEM_UNSECAPP_FLAG_TYPE {
+ENUM! {enum WBEM_UNSECAPP_FLAG_TYPE {
     WBEM_FLAG_UNSECAPP_DEFAULT_CHECK_ACCESS = 0,
     WBEM_FLAG_UNSECAPP_CHECK_ACCESS = 1,
     WBEM_FLAG_UNSECAPP_DONT_CHECK_ACCESS = 2,
 }}
 // extern RPC_IF_HANDLE __MIDL_itf_wbemcli_0000_0015_v0_0_c_ifspec;
 // extern RPC_IF_HANDLE __MIDL_itf_wbemcli_0000_0015_v0_0_s_ifspec;
-ENUM!{enum WBEM_INFORMATION_FLAG_TYPE {
+ENUM! {enum WBEM_INFORMATION_FLAG_TYPE {
     WBEM_FLAG_SHORT_NAME = 0x1,
     WBEM_FLAG_LONG_NAME = 0x2,
 }}

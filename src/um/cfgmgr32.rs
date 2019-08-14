@@ -11,7 +11,7 @@ use shared::guiddef::{GUID, LPGUID};
 use shared::minwindef::{BOOL, BYTE, DWORD, MAX_PATH, PBOOL, PBYTE, PHKEY, PULONG, ULONG, WORD};
 use um::winnt::{
     ANYSIZE_ARRAY, CHAR, DWORDLONG, HANDLE, LARGE_INTEGER, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR,
-    PCHAR, PCSTR, PCWSTR, PDWORDLONG, PSTR, PVOID, PWCHAR, PWSTR, ULONGLONG, VOID, WCHAR
+    PCHAR, PCSTR, PCWSTR, PDWORDLONG, PSTR, PVOID, PWCHAR, PWSTR, ULONGLONG, VOID, WCHAR,
 };
 use um::winreg::REGSAM;
 pub type PCVOID = *const VOID;
@@ -55,7 +55,7 @@ pub type HMACHINE = HANDLE;
 pub type PHMACHINE = *mut HMACHINE;
 pub type CONFLICT_LIST = ULONG_PTR;
 pub type PCONFLICT_LIST = *mut CONFLICT_LIST;
-STRUCT!{struct CONFLICT_DETAILS_A {
+STRUCT! {struct CONFLICT_DETAILS_A {
     CD_ulSize: ULONG,
     CD_ulMask: ULONG,
     CD_dnDevInst: DEVINST,
@@ -64,7 +64,7 @@ STRUCT!{struct CONFLICT_DETAILS_A {
     CD_szDescription: [CHAR; MAX_PATH],
 }}
 pub type PCONFLICT_DETAILS_A = *mut CONFLICT_DETAILS_A;
-STRUCT!{struct CONFLICT_DETAILS_W {
+STRUCT! {struct CONFLICT_DETAILS_W {
     CD_ulSize: ULONG,
     CD_ulMask: ULONG,
     CD_dnDevInst: DEVINST,
@@ -108,7 +108,7 @@ pub const fMD_NonCacheable: DWORD = 0x0;
 pub const fMD_Cacheable: DWORD = 0x20;
 pub const fMD_WINDOW_DECODE: DWORD = 0x40;
 pub const fMD_MEMORY_BAR: DWORD = 0x80;
-STRUCT!{#[repr(packed)] struct MEM_RANGE {
+STRUCT! {#[repr(packed)] struct MEM_RANGE {
     MR_Align: DWORDLONG,
     MR_nBytes: ULONG,
     MR_Min: DWORDLONG,
@@ -117,7 +117,7 @@ STRUCT!{#[repr(packed)] struct MEM_RANGE {
     MR_Reserved: DWORD,
 }}
 pub type PMEM_RANGE = *mut MEM_RANGE;
-STRUCT!{#[repr(packed)] struct MEM_DES {
+STRUCT! {#[repr(packed)] struct MEM_DES {
     MD_Count: DWORD,
     MD_Type: DWORD,
     MD_Alloc_Base: DWORDLONG,
@@ -126,12 +126,12 @@ STRUCT!{#[repr(packed)] struct MEM_DES {
     MD_Reserved: DWORD,
 }}
 pub type PMEM_DES = *mut MEM_DES;
-STRUCT!{#[repr(packed)] struct MEM_RESOURCE {
+STRUCT! {#[repr(packed)] struct MEM_RESOURCE {
     MEM_Header: MEM_DES,
     MEM_Data: [MEM_RANGE; ANYSIZE_ARRAY],
 }}
 pub type PMEM_RESOURCE = *mut MEM_RESOURCE;
-STRUCT!{#[repr(packed)] struct MEM_LARGE_RANGE {
+STRUCT! {#[repr(packed)] struct MEM_LARGE_RANGE {
     MLR_Align: DWORDLONG,
     MLR_nBytes: ULONGLONG,
     MLR_Min: DWORDLONG,
@@ -140,7 +140,7 @@ STRUCT!{#[repr(packed)] struct MEM_LARGE_RANGE {
     MLR_Reserved: DWORD,
 }}
 pub type PMEM_LARGE_RANGE = *mut MEM_LARGE_RANGE;
-STRUCT!{#[repr(packed)] struct MEM_LARGE_DES {
+STRUCT! {#[repr(packed)] struct MEM_LARGE_DES {
     MLD_Count: DWORD,
     MLD_Type: DWORD,
     MLD_Alloc_Base: DWORDLONG,
@@ -149,7 +149,7 @@ STRUCT!{#[repr(packed)] struct MEM_LARGE_DES {
     MLD_Reserved: DWORD,
 }}
 pub type PMEM_LARGE_DES = *mut MEM_LARGE_DES;
-STRUCT!{#[repr(packed)] struct MEM_LARGE_RESOURCE {
+STRUCT! {#[repr(packed)] struct MEM_LARGE_RESOURCE {
     MEM_LARGE_Header: MEM_LARGE_DES,
     MEM_LARGE_Data: [MEM_LARGE_RANGE; ANYSIZE_ARRAY],
 }}
@@ -169,7 +169,7 @@ pub const IO_ALIAS_10_BIT_DECODE: DWORDLONG = 0x00000004;
 pub const IO_ALIAS_12_BIT_DECODE: DWORDLONG = 0x00000010;
 pub const IO_ALIAS_16_BIT_DECODE: DWORDLONG = 0x00000000;
 pub const IO_ALIAS_POSITIVE_DECODE: DWORDLONG = 0x000000FF;
-STRUCT!{#[repr(packed)] struct IO_RANGE {
+STRUCT! {#[repr(packed)] struct IO_RANGE {
     IOR_Align: DWORDLONG,
     IOR_nPorts: DWORD,
     IOR_Min: DWORDLONG,
@@ -178,7 +178,7 @@ STRUCT!{#[repr(packed)] struct IO_RANGE {
     IOR_Alias: DWORDLONG,
 }}
 pub type PIO_RANGE = *mut IO_RANGE;
-STRUCT!{#[repr(packed)] struct IO_DES {
+STRUCT! {#[repr(packed)] struct IO_DES {
     IOD_Count: DWORD,
     IOD_Type: DWORD,
     IOD_Alloc_Base: DWORDLONG,
@@ -186,7 +186,7 @@ STRUCT!{#[repr(packed)] struct IO_DES {
     IOD_DesFlags: DWORD,
 }}
 pub type PIO_DES = *mut IO_DES;
-STRUCT!{#[repr(packed)] struct IO_RESOURCE {
+STRUCT! {#[repr(packed)] struct IO_RESOURCE {
     IO_Header: IO_DES,
     IO_Data: [IO_RANGE; ANYSIZE_ARRAY],
 }}
@@ -204,20 +204,20 @@ pub const fDD_TypeStandard: ULONG = 0x00;
 pub const fDD_TypeA: ULONG = 0x08;
 pub const fDD_TypeB: ULONG = 0x10;
 pub const fDD_TypeF: ULONG = 0x18;
-STRUCT!{#[repr(packed)] struct DMA_RANGE {
+STRUCT! {#[repr(packed)] struct DMA_RANGE {
     DR_Min: ULONG,
     DR_Max: ULONG,
     DR_Flags: ULONG,
 }}
 pub type PDMA_RANGE = *mut DMA_RANGE;
-STRUCT!{#[repr(packed)] struct DMA_DES {
+STRUCT! {#[repr(packed)] struct DMA_DES {
     DD_Count: DWORD,
     DD_Type: DWORD,
     DD_Flags: DWORD,
     DD_Alloc_Chan: ULONG,
 }}
 pub type PDMA_DES = *mut DMA_DES;
-STRUCT!{#[repr(packed)] struct DMA_RESOURCE {
+STRUCT! {#[repr(packed)] struct DMA_RESOURCE {
     DMA_Header: DMA_DES,
     DMA_Data: [DMA_RANGE; ANYSIZE_ARRAY],
 }}
@@ -230,13 +230,13 @@ pub const fIRQD_Level_Bit: ULONG = 1;
 pub const mIRQD_Edge_Level: ULONG = 0x2;
 pub const fIRQD_Level: ULONG = 0x0;
 pub const fIRQD_Edge: ULONG = 0x2;
-STRUCT!{#[repr(packed)] struct IRQ_RANGE {
+STRUCT! {#[repr(packed)] struct IRQ_RANGE {
     IRQR_Min: ULONG,
     IRQR_Max: ULONG,
     IRQR_Flags: ULONG,
 }}
 pub type PIRQ_RANGE = *mut IRQ_RANGE;
-STRUCT!{#[repr(packed)] struct IRQ_DES_32 {
+STRUCT! {#[repr(packed)] struct IRQ_DES_32 {
     IRQD_Count: DWORD,
     IRQD_Type: DWORD,
     IRQD_Flags: DWORD,
@@ -244,7 +244,7 @@ STRUCT!{#[repr(packed)] struct IRQ_DES_32 {
     IRQD_Affinity: ULONG32,
 }}
 pub type PIRQ_DES_32 = *mut IRQ_DES_32;
-STRUCT!{#[repr(packed)] struct IRQ_DES_64 {
+STRUCT! {#[repr(packed)] struct IRQ_DES_64 {
     IRQD_Count: DWORD,
     IRQD_Type: DWORD,
     IRQD_Flags: DWORD,
@@ -252,23 +252,23 @@ STRUCT!{#[repr(packed)] struct IRQ_DES_64 {
     IRQD_Affinity: ULONG64,
 }}
 pub type PIRQ_DES_64 = *mut IRQ_DES_64;
-STRUCT!{#[repr(packed)] struct IRQ_RESOURCE_32 {
+STRUCT! {#[repr(packed)] struct IRQ_RESOURCE_32 {
     IRQ_Header: IRQ_DES_32,
     IRQ_Data: [IRQ_RANGE; ANYSIZE_ARRAY],
 }}
 pub type PIRQ_RESOURCE_32 = *mut IRQ_RESOURCE_32;
-STRUCT!{#[repr(packed)] struct IRQ_RESOURCE_64 {
+STRUCT! {#[repr(packed)] struct IRQ_RESOURCE_64 {
     IRQ_Header: IRQ_DES_64,
     IRQ_Data: [IRQ_RANGE; ANYSIZE_ARRAY],
 }}
 pub type PIRQ_RESOURCE_64 = *mut IRQ_RESOURCE_64;
-STRUCT!{#[repr(packed)] struct DEVPRIVATE_RANGE {
+STRUCT! {#[repr(packed)] struct DEVPRIVATE_RANGE {
     PR_Data1: DWORD,
     PR_Data2: DWORD,
     PR_Data3: DWORD,
 }}
 pub type PDEVPRIVATE_RANGE = *mut DEVPRIVATE_RANGE;
-STRUCT!{#[repr(packed)] struct DEVPRIVATE_DES {
+STRUCT! {#[repr(packed)] struct DEVPRIVATE_DES {
     PD_Count: DWORD,
     PD_Type: DWORD,
     PD_Data1: DWORD,
@@ -277,12 +277,12 @@ STRUCT!{#[repr(packed)] struct DEVPRIVATE_DES {
     PD_Flags: DWORD,
 }}
 pub type PDEVPRIVATE_DES = *mut DEVPRIVATE_DES;
-STRUCT!{#[repr(packed)] struct DEVPRIVATE_RESOURCE {
+STRUCT! {#[repr(packed)] struct DEVPRIVATE_RESOURCE {
     PRV_Header: DEVPRIVATE_DES,
     PRV_Data: [DEVPRIVATE_RANGE; ANYSIZE_ARRAY],
 }}
 pub type PDEVPRIVATE_RESOURCE = *mut DEVPRIVATE_RESOURCE;
-STRUCT!{#[repr(packed)] struct CS_DES {
+STRUCT! {#[repr(packed)] struct CS_DES {
     CSD_SignatureLength: DWORD,
     CSD_LegacyDataOffset: DWORD,
     CSD_LegacyDataSize: DWORD,
@@ -291,7 +291,7 @@ STRUCT!{#[repr(packed)] struct CS_DES {
     CSD_Signature: [BYTE; ANYSIZE_ARRAY],
 }}
 pub type PCS_DES = *mut CS_DES;
-STRUCT!{#[repr(packed)] struct CS_RESOURCE {
+STRUCT! {#[repr(packed)] struct CS_RESOURCE {
     CS_Header: CS_DES,
 }}
 pub type PCS_RESOURCE = *mut CS_RESOURCE;
@@ -332,7 +332,7 @@ pub const fPCD_MEM2_WS_THREE: DWORD = 0x30000000;
 pub const fPCD_MEM2_16: DWORD = 0x40000000;
 pub const PCD_MAX_MEMORY: usize = 2;
 pub const PCD_MAX_IO: usize = 2;
-STRUCT!{#[repr(packed)] struct PCCARD_DES {
+STRUCT! {#[repr(packed)] struct PCCARD_DES {
     PCD_Count: DWORD,
     PCD_Type: DWORD,
     PCD_Flags: DWORD,
@@ -345,13 +345,13 @@ STRUCT!{#[repr(packed)] struct PCCARD_DES {
     PCD_IoFlags: [BYTE; PCD_MAX_IO],
 }}
 pub type PPCCARD_DES = *mut PCCARD_DES;
-STRUCT!{#[repr(packed)] struct PCCARD_RESOURCE {
+STRUCT! {#[repr(packed)] struct PCCARD_RESOURCE {
     PcCard_Header: PCCARD_DES,
 }}
 pub type PPCCARD_RESOURCE = *mut PCCARD_RESOURCE;
 pub const mPMF_AUDIO_ENABLE: DWORD = 0x8;
 pub const fPMF_AUDIO_ENABLE: DWORD = 0x8;
-STRUCT!{#[repr(packed)] struct MFCARD_DES {
+STRUCT! {#[repr(packed)] struct MFCARD_DES {
     PMF_Count: DWORD,
     PMF_Type: DWORD,
     PMF_Flags: DWORD,
@@ -361,18 +361,18 @@ STRUCT!{#[repr(packed)] struct MFCARD_DES {
     PMF_ConfigRegisterBase: DWORD,
 }}
 pub type PMFCARD_DES = *mut MFCARD_DES;
-STRUCT!{#[repr(packed)] struct MFCARD_RESOURCE {
+STRUCT! {#[repr(packed)] struct MFCARD_RESOURCE {
     MfCard_Header: MFCARD_DES,
 }}
 pub type PMFCARD_RESOURCE = *mut MFCARD_RESOURCE;
-STRUCT!{#[repr(packed)] struct BUSNUMBER_RANGE {
+STRUCT! {#[repr(packed)] struct BUSNUMBER_RANGE {
     BUSR_Min: ULONG,
     BUSR_Max: ULONG,
     BUSR_nBusNumbers: ULONG,
     BUSR_Flags: ULONG,
 }}
 pub type PBUSNUMBER_RANGE = *mut BUSNUMBER_RANGE;
-STRUCT!{#[repr(packed)] struct BUSNUMBER_DES {
+STRUCT! {#[repr(packed)] struct BUSNUMBER_DES {
     BUSD_Count: DWORD,
     BUSD_Type: DWORD,
     BUSD_Flags: DWORD,
@@ -380,12 +380,12 @@ STRUCT!{#[repr(packed)] struct BUSNUMBER_DES {
     BUSD_Alloc_End: ULONG,
 }}
 pub type PBUSNUMBER_DES = *mut BUSNUMBER_DES;
-STRUCT!{#[repr(packed)] struct BUSNUMBER_RESOURCE {
+STRUCT! {#[repr(packed)] struct BUSNUMBER_RESOURCE {
     BusNumber_Header: BUSNUMBER_DES,
     BusNumber_Data: [BUSNUMBER_RANGE; ANYSIZE_ARRAY],
 }}
 pub type PBUSNUMBER_RESOURCE = *mut BUSNUMBER_RESOURCE;
-STRUCT!{#[repr(packed)] struct CONNECTION_DES {
+STRUCT! {#[repr(packed)] struct CONNECTION_DES {
     COND_Type: DWORD,
     COND_Flags: DWORD,
     COND_Class: BYTE,
@@ -395,20 +395,20 @@ STRUCT!{#[repr(packed)] struct CONNECTION_DES {
     COND_Id: LARGE_INTEGER,
 }}
 pub type PCONNECTION_DES = *mut CONNECTION_DES;
-STRUCT!{#[repr(packed)] struct CONNECTION_RESOURCE {
+STRUCT! {#[repr(packed)] struct CONNECTION_RESOURCE {
     Connection_Header: CONNECTION_DES,
 }}
 pub type PCONNECTION_RESOURCE = *mut CONNECTION_RESOURCE;
 pub const CM_HWPI_NOT_DOCKABLE: DWORD = 0x00000000;
 pub const CM_HWPI_UNDOCKED: DWORD = 0x00000001;
 pub const CM_HWPI_DOCKED: DWORD = 0x00000002;
-STRUCT!{#[repr(packed)] struct HWPROFILEINFO_A {
+STRUCT! {#[repr(packed)] struct HWPROFILEINFO_A {
     HWPI_ulHWProfile: ULONG,
     HWPI_szFriendlyName: [CHAR; MAX_PROFILE_LEN],
     HWPI_dwFlags: DWORD,
 }}
 pub type PHWPROFILEINFO_A = *mut HWPROFILEINFO_A;
-STRUCT!{#[repr(packed)] struct HWPROFILEINFO_W {
+STRUCT! {#[repr(packed)] struct HWPROFILEINFO_W {
     HWPI_ulHWProfile: ULONG,
     HWPI_szFriendlyName: [WCHAR; MAX_PROFILE_LEN],
     HWPI_dwFlags: DWORD,
@@ -626,35 +626,35 @@ pub const CM_NAME_ATTRIBUTE_USER_ASSIGNED_NAME: ULONG = 0x2;
 pub const CM_CLASS_PROPERTY_INSTALLER: ULONG = 0x00000000;
 pub const CM_CLASS_PROPERTY_INTERFACE: ULONG = 0x00000001;
 pub const CM_CLASS_PROPERTY_BITS: ULONG = 0x00000001;
-DECLARE_HANDLE!{HCMNOTIFICATION, HCMNOTIFICATION__}
+DECLARE_HANDLE! {HCMNOTIFICATION, HCMNOTIFICATION__}
 pub type PHCMNOTIFICATION = *mut HCMNOTIFICATION;
 pub const CM_NOTIFY_FILTER_FLAG_ALL_INTERFACE_CLASSES: ULONG = 0x00000001;
 pub const CM_NOTIFY_FILTER_FLAG_ALL_DEVICE_INSTANCES: ULONG = 0x00000002;
-pub const CM_NOTIFY_FILTER_VALID_FLAGS: ULONG = CM_NOTIFY_FILTER_FLAG_ALL_INTERFACE_CLASSES
-    | CM_NOTIFY_FILTER_FLAG_ALL_DEVICE_INSTANCES;
-ENUM!{enum CM_NOTIFY_FILTER_TYPE {
+pub const CM_NOTIFY_FILTER_VALID_FLAGS: ULONG =
+    CM_NOTIFY_FILTER_FLAG_ALL_INTERFACE_CLASSES | CM_NOTIFY_FILTER_FLAG_ALL_DEVICE_INSTANCES;
+ENUM! {enum CM_NOTIFY_FILTER_TYPE {
     CM_NOTIFY_FILTER_TYPE_DEVICEINTERFACE = 0,
     CM_NOTIFY_FILTER_TYPE_DEVICEHANDLE,
     CM_NOTIFY_FILTER_TYPE_DEVICEINSTANCE,
     CM_NOTIFY_FILTER_TYPE_MAX,
 }}
 pub type PCM_NOTIFY_FILTER_TYPE = *mut CM_NOTIFY_FILTER_TYPE;
-STRUCT!{struct CM_NOTIFY_FILTER_DeviceInterface {
+STRUCT! {struct CM_NOTIFY_FILTER_DeviceInterface {
     ClassGuid: GUID,
 }}
-STRUCT!{struct CM_NOTIFY_FILTER_DeviceHandle {
+STRUCT! {struct CM_NOTIFY_FILTER_DeviceHandle {
     hTarget: HANDLE,
 }}
-STRUCT!{struct CM_NOTIFY_FILTER_DeviceInstance {
+STRUCT! {struct CM_NOTIFY_FILTER_DeviceInstance {
     InstanceId: [WCHAR; MAX_DEVICE_ID_LEN],
 }}
-UNION!{union CM_NOTIFY_FILTER_u {
+UNION! {union CM_NOTIFY_FILTER_u {
     [u32; 100] [u64; 50],
     DeviceInterface DeviceInterface_mut: CM_NOTIFY_FILTER_DeviceInterface,
     DeviceHandle DeviceHandle_mut: CM_NOTIFY_FILTER_DeviceHandle,
     DeviceInstance DeviceInstance_mut: CM_NOTIFY_FILTER_DeviceInstance,
 }}
-STRUCT!{struct CM_NOTIFY_FILTER {
+STRUCT! {struct CM_NOTIFY_FILTER {
     cbSize: DWORD,
     Flags: DWORD,
     FilterType: CM_NOTIFY_FILTER_TYPE,
@@ -662,7 +662,7 @@ STRUCT!{struct CM_NOTIFY_FILTER {
     u: CM_NOTIFY_FILTER_u,
 }}
 pub type PCM_NOTIFY_FILTER = *mut CM_NOTIFY_FILTER;
-ENUM!{enum CM_NOTIFY_ACTION {
+ENUM! {enum CM_NOTIFY_ACTION {
     CM_NOTIFY_ACTION_DEVICEINTERFACEARRIVAL = 0,
     CM_NOTIFY_ACTION_DEVICEINTERFACEREMOVAL,
     CM_NOTIFY_ACTION_DEVICEQUERYREMOVE,
@@ -676,32 +676,32 @@ ENUM!{enum CM_NOTIFY_ACTION {
     CM_NOTIFY_ACTION_MAX,
 }}
 pub type PCM_NOTIFY_ACTION = *mut CM_NOTIFY_ACTION;
-STRUCT!{struct CM_NOTIFY_EVENT_DATA_DeviceInterface {
+STRUCT! {struct CM_NOTIFY_EVENT_DATA_DeviceInterface {
     ClassGuid: GUID,
     SymbolicLink: [WCHAR; ANYSIZE_ARRAY],
 }}
-STRUCT!{struct CM_NOTIFY_EVENT_DATA_DeviceHandle {
+STRUCT! {struct CM_NOTIFY_EVENT_DATA_DeviceHandle {
     EventGuid: GUID,
     NameOffset: LONG,
     DataSize: DWORD,
     Data: [BYTE; ANYSIZE_ARRAY],
 }}
-STRUCT!{struct CM_NOTIFY_EVENT_DATA_DeviceInstance {
+STRUCT! {struct CM_NOTIFY_EVENT_DATA_DeviceInstance {
     InstanceId: [WCHAR; ANYSIZE_ARRAY],
 }}
-UNION!{union CM_NOTIFY_EVENT_DATA_u {
+UNION! {union CM_NOTIFY_EVENT_DATA_u {
     [u32; 7],
     DeviceInterface DeviceInterface_mut: CM_NOTIFY_EVENT_DATA_DeviceInterface,
     DeviceHandle DeviceHandle_mut: CM_NOTIFY_EVENT_DATA_DeviceHandle,
     DeviceInstance DeviceInstance_mut: CM_NOTIFY_EVENT_DATA_DeviceInstance,
 }}
-STRUCT!{struct CM_NOTIFY_EVENT_DATA {
+STRUCT! {struct CM_NOTIFY_EVENT_DATA {
     FilterType: CM_NOTIFY_FILTER_TYPE,
     Reserved: DWORD,
     u: CM_NOTIFY_EVENT_DATA_u,
 }}
 pub type PCM_NOTIFY_EVENT_DATA = *mut CM_NOTIFY_EVENT_DATA;
-FN!{stdcall PCM_NOTIFY_CALLBACK(
+FN! {stdcall PCM_NOTIFY_CALLBACK(
     hNotify: HCMNOTIFICATION,
     Context: PVOID,
     Action: CM_NOTIFY_ACTION,
@@ -722,16 +722,8 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Add_IDA(
-        dnDevInst: DEVINST,
-        pszID: PSTR,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
-    pub fn CM_Add_IDW(
-        dnDevInst: DEVINST,
-        pszID: PWSTR,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Add_IDA(dnDevInst: DEVINST, pszID: PSTR, ulFlags: ULONG) -> CONFIGRET;
+    pub fn CM_Add_IDW(dnDevInst: DEVINST, pszID: PWSTR, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Add_ID_ExA(
         dnDevInst: DEVINST,
         pszID: PSTR,
@@ -767,14 +759,8 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Connect_MachineA(
-        UNCServerName: PCSTR,
-        phMachine: PHMACHINE,
-    ) -> CONFIGRET;
-    pub fn CM_Connect_MachineW(
-        UNCServerName: PCWSTR,
-        phMachine: PHMACHINE,
-    ) -> CONFIGRET;
+    pub fn CM_Connect_MachineA(UNCServerName: PCSTR, phMachine: PHMACHINE) -> CONFIGRET;
+    pub fn CM_Connect_MachineW(UNCServerName: PCWSTR, phMachine: PHMACHINE) -> CONFIGRET;
     pub fn CM_Create_DevNodeA(
         pdnDevInst: PDEVINST,
         pDeviceID: DEVINSTID_A,
@@ -801,14 +787,8 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Create_Range_List(
-        prlh: PRANGE_LIST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
-    pub fn CM_Delete_Class_Key(
-        ClassGuid: LPGUID,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Create_Range_List(prlh: PRANGE_LIST, ulFlags: ULONG) -> CONFIGRET;
+    pub fn CM_Delete_Class_Key(ClassGuid: LPGUID, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Delete_Class_Key_Ex(
         ClassGuid: LPGUID,
         ulFlags: ULONG,
@@ -848,27 +828,15 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Disable_DevNode(
-        dnDevInst: DEVINST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Disable_DevNode(dnDevInst: DEVINST, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Disable_DevNode_Ex(
         dnDevInst: DEVINST,
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Disconnect_Machine(
-        hMachine: HMACHINE,
-    ) -> CONFIGRET;
-    pub fn CM_Dup_Range_List(
-        rlhOld: RANGE_LIST,
-        rlhNew: RANGE_LIST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
-    pub fn CM_Enable_DevNode(
-        dnDevInst: DEVINST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Disconnect_Machine(hMachine: HMACHINE) -> CONFIGRET;
+    pub fn CM_Dup_Range_List(rlhOld: RANGE_LIST, rlhNew: RANGE_LIST, ulFlags: ULONG) -> CONFIGRET;
+    pub fn CM_Enable_DevNode(dnDevInst: DEVINST, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Enable_DevNode_Ex(
         dnDevInst: DEVINST,
         ulFlags: ULONG,
@@ -927,41 +895,23 @@ extern "system" {
         preElement: PRANGE_LIST,
         ulFlags: ULONG,
     ) -> CONFIGRET;
-    pub fn CM_Free_Log_Conf(
-        lcLogConfToBeFreed: LOG_CONF,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Free_Log_Conf(lcLogConfToBeFreed: LOG_CONF, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Free_Log_Conf_Ex(
         lcLogConfToBeFreed: LOG_CONF,
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Free_Log_Conf_Handle(
-        lcLogConf: LOG_CONF,
-    ) -> CONFIGRET;
-    pub fn CM_Free_Range_List(
-        rlh: RANGE_LIST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
-    pub fn CM_Free_Res_Des(
-        prdResDes: PRES_DES,
-        rdResDes: RES_DES,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Free_Log_Conf_Handle(lcLogConf: LOG_CONF) -> CONFIGRET;
+    pub fn CM_Free_Range_List(rlh: RANGE_LIST, ulFlags: ULONG) -> CONFIGRET;
+    pub fn CM_Free_Res_Des(prdResDes: PRES_DES, rdResDes: RES_DES, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Free_Res_Des_Ex(
         prdResDes: PRES_DES,
         rdResDes: RES_DES,
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Free_Res_Des_Handle(
-        rdResDes: RES_DES,
-    ) -> CONFIGRET;
-    pub fn CM_Get_Child(
-        pdnDevInst: PDEVINST,
-        dnDevInst: DEVINST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Free_Res_Des_Handle(rdResDes: RES_DES) -> CONFIGRET;
+    pub fn CM_Get_Child(pdnDevInst: PDEVINST, dnDevInst: DEVINST, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Get_Child_Ex(
         pdnDevInst: PDEVINST,
         dnDevInst: DEVINST,
@@ -1020,11 +970,7 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Get_Depth(
-        pulDepth: PULONG,
-        dnDevInst: DEVINST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Get_Depth(pulDepth: PULONG, dnDevInst: DEVINST, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Get_Depth_Ex(
         pulDepth: PULONG,
         dnDevInst: DEVINST,
@@ -1105,11 +1051,7 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Get_Device_ID_Size(
-        pulLen: PULONG,
-        dnDevInst: DEVINST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Get_Device_ID_Size(pulLen: PULONG, dnDevInst: DEVINST, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Get_Device_ID_Size_Ex(
         pulLen: PULONG,
         dnDevInst: DEVINST,
@@ -1225,10 +1167,7 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Get_Global_State(
-        pulState: PULONG,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Get_Global_State(pulState: PULONG, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Get_Global_State_Ex(
         pulState: PULONG,
         ulFlags: ULONG,
@@ -1407,11 +1346,7 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Get_Parent(
-        pdnDevInst: PDEVINST,
-        dnDevInst: DEVINST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Get_Parent(pdnDevInst: PDEVINST, dnDevInst: DEVINST, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Get_Parent_Ex(
         pdnDevInst: PDEVINST,
         dnDevInst: DEVINST,
@@ -1442,11 +1377,7 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Get_Sibling(
-        pdnDevInst: PDEVINST,
-        dnDevInst: DEVINST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Get_Sibling(pdnDevInst: PDEVINST, dnDevInst: DEVINST, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Get_Sibling_Ex(
         pdnDevInst: PDEVINST,
         dnDevInst: DEVINST,
@@ -1454,16 +1385,9 @@ extern "system" {
         hMachine: HMACHINE,
     ) -> CONFIGRET;
     pub fn CM_Get_Version() -> WORD;
-    pub fn CM_Get_Version_Ex(
-        hMachine: HMACHINE,
-    ) -> WORD;
-    pub fn CM_Is_Version_Available(
-        wVersion: WORD,
-    ) -> BOOL;
-    pub fn CM_Is_Version_Available_Ex(
-        wVersion: WORD,
-        hMachine: HMACHINE,
-    ) -> BOOL;
+    pub fn CM_Get_Version_Ex(hMachine: HMACHINE) -> WORD;
+    pub fn CM_Is_Version_Available(wVersion: WORD) -> BOOL;
+    pub fn CM_Is_Version_Available_Ex(wVersion: WORD, hMachine: HMACHINE) -> BOOL;
     pub fn CM_Intersect_Range_List(
         rlhOld1: RANGE_LIST,
         rlhOld2: RANGE_LIST,
@@ -1634,10 +1558,8 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Delete_Device_Interface_KeyA(
-        pszDeviceInterface: LPCSTR,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Delete_Device_Interface_KeyA(pszDeviceInterface: LPCSTR, ulFlags: ULONG)
+        -> CONFIGRET;
     pub fn CM_Delete_Device_Interface_KeyW(
         pszDeviceInterface: LPCWSTR,
         ulFlags: ULONG,
@@ -1680,10 +1602,7 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Query_Remove_SubTree(
-        dnAncestor: DEVINST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Query_Remove_SubTree(dnAncestor: DEVINST, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Query_Remove_SubTree_Ex(
         dnAncestor: DEVINST,
         ulFlags: ULONG,
@@ -1749,10 +1668,7 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Reenumerate_DevNode(
-        dnDevInst: DEVINST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Reenumerate_DevNode(dnDevInst: DEVINST, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Reenumerate_DevNode_Ex(
         dnDevInst: DEVINST,
         ulFlags: ULONG,
@@ -1803,10 +1719,8 @@ extern "system" {
         ulProblem: ULONG,
         ulFlags: ULONG,
     ) -> CONFIGRET;
-    pub fn CM_Unregister_Device_InterfaceA(
-        pszDeviceInterface: LPCSTR,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Unregister_Device_InterfaceA(pszDeviceInterface: LPCSTR, ulFlags: ULONG)
+        -> CONFIGRET;
     pub fn CM_Unregister_Device_InterfaceW(
         pszDeviceInterface: LPCWSTR,
         ulFlags: ULONG,
@@ -1821,19 +1735,13 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Register_Device_Driver(
-        dnDevInst: DEVINST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Register_Device_Driver(dnDevInst: DEVINST, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Register_Device_Driver_Ex(
         dnDevInst: DEVINST,
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Remove_SubTree(
-        dnAncestor: DEVINST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Remove_SubTree(dnAncestor: DEVINST, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Remove_SubTree_Ex(
         dnAncestor: DEVINST,
         ulFlags: ULONG,
@@ -1869,17 +1777,10 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Is_Dock_Station_Present(
-        pbPresent: PBOOL,
-    ) -> CONFIGRET;
-    pub fn CM_Is_Dock_Station_Present_Ex(
-        pbPresent: PBOOL,
-        hMachine: HMACHINE,
-    ) -> CONFIGRET;
+    pub fn CM_Is_Dock_Station_Present(pbPresent: PBOOL) -> CONFIGRET;
+    pub fn CM_Is_Dock_Station_Present_Ex(pbPresent: PBOOL, hMachine: HMACHINE) -> CONFIGRET;
     pub fn CM_Request_Eject_PC() -> CONFIGRET;
-    pub fn CM_Request_Eject_PC_Ex(
-        hMachine: HMACHINE,
-    ) -> CONFIGRET;
+    pub fn CM_Request_Eject_PC_Ex(hMachine: HMACHINE) -> CONFIGRET;
     pub fn CM_Set_HW_Prof_FlagsA(
         pDeviceID: DEVINSTID_A,
         ulConfig: ULONG,
@@ -1906,41 +1807,24 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Setup_DevNode(
-        dnDevInst: DEVINST,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
-    pub fn CM_Setup_DevNode_Ex(
-        dnDevInst: DEVINST,
-        ulFlags: ULONG,
-        hMachine: HMACHINE,
-    ) -> CONFIGRET;
+    pub fn CM_Setup_DevNode(dnDevInst: DEVINST, ulFlags: ULONG) -> CONFIGRET;
+    pub fn CM_Setup_DevNode_Ex(dnDevInst: DEVINST, ulFlags: ULONG, hMachine: HMACHINE)
+        -> CONFIGRET;
     pub fn CM_Test_Range_Available(
         ullStartValue: DWORDLONG,
         ullEndValue: DWORDLONG,
         rlh: RANGE_LIST,
         ulFlags: ULONG,
     ) -> CONFIGRET;
-    pub fn CM_Uninstall_DevNode(
-        dnDevInst: DEVNODE,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Uninstall_DevNode(dnDevInst: DEVNODE, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Uninstall_DevNode_Ex(
         dnDevInst: DEVNODE,
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Run_Detection(
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
-    pub fn CM_Run_Detection_Ex(
-        ulFlags: ULONG,
-        hMachine: HMACHINE,
-    ) -> CONFIGRET;
-    pub fn CM_Set_HW_Prof(
-        ulHardwareProfile: ULONG,
-        ulFlags: ULONG,
-    ) -> CONFIGRET;
+    pub fn CM_Run_Detection(ulFlags: ULONG) -> CONFIGRET;
+    pub fn CM_Run_Detection_Ex(ulFlags: ULONG, hMachine: HMACHINE) -> CONFIGRET;
+    pub fn CM_Set_HW_Prof(ulHardwareProfile: ULONG, ulFlags: ULONG) -> CONFIGRET;
     pub fn CM_Set_HW_Prof_Ex(
         ulHardwareProfile: ULONG,
         ulFlags: ULONG,
@@ -1955,9 +1839,7 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CM_Free_Resource_Conflict_Handle(
-        clConflictList: CONFLICT_LIST,
-    ) -> CONFIGRET;
+    pub fn CM_Free_Resource_Conflict_Handle(clConflictList: CONFLICT_LIST) -> CONFIGRET;
     pub fn CM_Get_Resource_Conflict_Count(
         clConflictList: CONFLICT_LIST,
         pulCount: PULONG,
@@ -2006,9 +1888,7 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
-    pub fn CMP_WaitNoPendingInstallEvents(
-        dwTimeout: DWORD,
-    ) -> DWORD;
+    pub fn CMP_WaitNoPendingInstallEvents(dwTimeout: DWORD) -> DWORD;
 }
 pub const CR_SUCCESS: CONFIGRET = 0x00000000;
 pub const CR_DEFAULT: CONFIGRET = 0x00000001;

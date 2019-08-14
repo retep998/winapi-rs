@@ -18,12 +18,12 @@ pub const PERF_COUNTERSET_FLAG_INSTANCE: ULONG = 16;
 pub const PERF_COUNTERSET_SINGLE_INSTANCE: ULONG = 0;
 pub const PERF_COUNTERSET_MULTI_INSTANCES: ULONG = PERF_COUNTERSET_FLAG_MULTIPLE;
 pub const PERF_COUNTERSET_SINGLE_AGGREGATE: ULONG = PERF_COUNTERSET_FLAG_AGGREGATE;
-pub const PERF_COUNTERSET_MULTI_AGGREGATE: ULONG = PERF_COUNTERSET_FLAG_AGGREGATE
-    | PERF_COUNTERSET_FLAG_MULTIPLE;
-pub const PERF_COUNTERSET_SINGLE_AGGREGATE_HISTORY: ULONG = PERF_COUNTERSET_FLAG_HISTORY
-    | PERF_COUNTERSET_SINGLE_AGGREGATE;
-pub const PERF_COUNTERSET_INSTANCE_AGGREGATE: ULONG = PERF_COUNTERSET_MULTI_AGGREGATE
-    | PERF_COUNTERSET_FLAG_INSTANCE;
+pub const PERF_COUNTERSET_MULTI_AGGREGATE: ULONG =
+    PERF_COUNTERSET_FLAG_AGGREGATE | PERF_COUNTERSET_FLAG_MULTIPLE;
+pub const PERF_COUNTERSET_SINGLE_AGGREGATE_HISTORY: ULONG =
+    PERF_COUNTERSET_FLAG_HISTORY | PERF_COUNTERSET_SINGLE_AGGREGATE;
+pub const PERF_COUNTERSET_INSTANCE_AGGREGATE: ULONG =
+    PERF_COUNTERSET_MULTI_AGGREGATE | PERF_COUNTERSET_FLAG_INSTANCE;
 pub const PERF_AGGREGATE_UNDEFINED: ULONG = 0;
 pub const PERF_AGGREGATE_TOTAL: ULONG = 1;
 pub const PERF_AGGREGATE_AVG: ULONG = 2;
@@ -34,14 +34,14 @@ pub const PERF_ATTRIB_NO_DISPLAYABLE: ULONGLONG = 0x0000000000000002;
 pub const PERF_ATTRIB_NO_GROUP_SEPARATOR: ULONGLONG = 0x0000000000000004;
 pub const PERF_ATTRIB_DISPLAY_AS_REAL: ULONGLONG = 0x0000000000000008;
 pub const PERF_ATTRIB_DISPLAY_AS_HEX: ULONGLONG = 0x0000000000000010;
-STRUCT!{struct PERF_COUNTERSET_INFO {
+STRUCT! {struct PERF_COUNTERSET_INFO {
     CounterSetGuid: GUID,
     ProviderGuid: GUID,
     NumCounters: ULONG,
     InstanceType: ULONG,
 }}
 pub type PPERF_COUNTERSET_INFO = *mut PERF_COUNTERSET_INFO;
-STRUCT!{struct PERF_COUNTER_INFO {
+STRUCT! {struct PERF_COUNTER_INFO {
     CounterId: ULONG,
     Type: ULONG,
     Attrib: ULONGLONG,
@@ -51,7 +51,7 @@ STRUCT!{struct PERF_COUNTER_INFO {
     Offset: LONG,
 }}
 pub type PPERF_COUNTER_INFO = *mut PERF_COUNTER_INFO;
-STRUCT!{struct PERF_COUNTERSET_INSTANCE {
+STRUCT! {struct PERF_COUNTERSET_INSTANCE {
     CounterSetGuid: GUID,
     dwSize: ULONG,
     InstanceId: ULONG,
@@ -59,7 +59,7 @@ STRUCT!{struct PERF_COUNTERSET_INSTANCE {
     InstanceNameSize: ULONG,
 }}
 pub type PPERF_COUNTERSET_INSTANCE = *mut PERF_COUNTERSET_INSTANCE;
-STRUCT!{struct PERF_COUNTER_IDENTITY {
+STRUCT! {struct PERF_COUNTER_IDENTITY {
     CounterSetGuid: GUID,
     BufferSize: ULONG,
     CounterId: ULONG,
@@ -79,20 +79,20 @@ pub const PERF_ENUM_INSTANCES: ULONG = 3;
 pub const PERF_COLLECT_START: ULONG = 5;
 pub const PERF_COLLECT_END: ULONG = 6;
 pub const PERF_FILTER: ULONG = 9;
-FN!{stdcall PERFLIBREQUEST(
+FN! {stdcall PERFLIBREQUEST(
     RequestCode: ULONG,
     Buffer: PVOID,
     BufferSize: ULONG,
 ) -> ULONG}
-FN!{stdcall PERF_MEM_ALLOC(
+FN! {stdcall PERF_MEM_ALLOC(
     AllocSize: SIZE_T,
     pContext: LPVOID,
 ) -> LPVOID}
-FN!{stdcall PERF_MEM_FREE(
+FN! {stdcall PERF_MEM_FREE(
     pBuffer: LPVOID,
     pContext: LPVOID,
 ) -> ()}
-STRUCT!{struct PERF_PROVIDER_CONTEXT {
+STRUCT! {struct PERF_PROVIDER_CONTEXT {
     ContextSize: DWORD,
     Reserved: DWORD,
     ControlCallback: PERFLIBREQUEST,
@@ -112,9 +112,7 @@ extern "system" {
         ControlCallback: PERFLIBREQUEST,
         Provider: PHANDLE,
     ) -> ULONG;
-    pub fn PerfStopProvider(
-        ProviderHandle: HANDLE,
-    ) -> ULONG;
+    pub fn PerfStopProvider(ProviderHandle: HANDLE) -> ULONG;
     pub fn PerfSetCounterSetInfo(
         ProviderHandle: HANDLE,
         Template: PPERF_COUNTERSET_INFO,
@@ -126,10 +124,7 @@ extern "system" {
         Name: PCWSTR,
         Id: ULONG,
     ) -> PPERF_COUNTERSET_INSTANCE;
-    pub fn PerfDeleteInstance(
-        Provider: HANDLE,
-        InstanceBlock: PPERF_COUNTERSET_INSTANCE,
-    ) -> ULONG;
+    pub fn PerfDeleteInstance(Provider: HANDLE, InstanceBlock: PPERF_COUNTERSET_INSTANCE) -> ULONG;
     pub fn PerfQueryInstance(
         ProviderHandle: HANDLE,
         CounterSetGuid: LPCGUID,
@@ -179,12 +174,12 @@ extern "system" {
         Value: ULONGLONG,
     ) -> ULONG;
 }
-STRUCT!{struct PERF_INSTANCE_HEADER {
+STRUCT! {struct PERF_INSTANCE_HEADER {
     Size: ULONG,
     InstanceId: ULONG,
 }}
 pub type PPERF_INSTANCE_HEADER = *mut PERF_INSTANCE_HEADER;
-ENUM!{enum PerfRegInfoType {
+ENUM! {enum PerfRegInfoType {
     PERF_REG_COUNTERSET_STRUCT = 1,
     PERF_REG_COUNTER_STRUCT,
     PERF_REG_COUNTERSET_NAME_STRING,
@@ -196,7 +191,7 @@ ENUM!{enum PerfRegInfoType {
     PERF_REG_COUNTERSET_ENGLISH_NAME,
     PERF_REG_COUNTER_ENGLISH_NAMES,
 }}
-STRUCT!{struct PERF_COUNTERSET_REG_INFO {
+STRUCT! {struct PERF_COUNTERSET_REG_INFO {
     CounterSetGuid: GUID,
     CounterSetType: ULONG,
     DetailLevel: ULONG,
@@ -204,7 +199,7 @@ STRUCT!{struct PERF_COUNTERSET_REG_INFO {
     InstanceType: ULONG,
 }}
 pub type PPERF_COUNTERSET_REG_INFO = *mut PERF_COUNTERSET_REG_INFO;
-STRUCT!{struct PERF_COUNTER_REG_INFO {
+STRUCT! {struct PERF_COUNTER_REG_INFO {
     CounterId: ULONG,
     Type: ULONG,
     Attrib: ULONGLONG,
@@ -218,17 +213,17 @@ STRUCT!{struct PERF_COUNTER_REG_INFO {
     Reserved: ULONG,
 }}
 pub type PPERF_COUNTER_REG_INFO = *mut PERF_COUNTER_REG_INFO;
-STRUCT!{struct PERF_STRING_BUFFER_HEADER {
+STRUCT! {struct PERF_STRING_BUFFER_HEADER {
     dwSize: DWORD,
     dwCounters: DWORD,
 }}
 pub type PPERF_STRING_BUFFER_HEADER = *mut PERF_STRING_BUFFER_HEADER;
-STRUCT!{struct PERF_STRING_COUNTER_HEADER {
+STRUCT! {struct PERF_STRING_COUNTER_HEADER {
     dwCounterId: DWORD,
     dwOffset: DWORD,
 }}
 pub type PPERF_STRING_COUNTER_HEADER = *mut PERF_STRING_COUNTER_HEADER;
-STRUCT!{struct PERF_COUNTER_IDENTIFIER {
+STRUCT! {struct PERF_COUNTER_IDENTIFIER {
     CounterSetGuid: GUID,
     Status: ULONG,
     Size: ULONG,
@@ -238,7 +233,7 @@ STRUCT!{struct PERF_COUNTER_IDENTIFIER {
     Reserved: ULONG,
 }}
 pub type PPERF_COUNTER_IDENTIFIER = *mut PERF_COUNTER_IDENTIFIER;
-STRUCT!{struct PERF_DATA_HEADER {
+STRUCT! {struct PERF_DATA_HEADER {
     dwTotalSize: ULONG,
     dwNumCounters: ULONG,
     PerfTimeStamp: LONGLONG,
@@ -247,31 +242,31 @@ STRUCT!{struct PERF_DATA_HEADER {
     SystemTime: SYSTEMTIME,
 }}
 pub type PPERF_DATA_HEADER = *mut PERF_DATA_HEADER;
-ENUM!{enum PerfCounterDataType {
+ENUM! {enum PerfCounterDataType {
     PERF_ERROR_RETURN = 0,
     PERF_SINGLE_COUNTER = 1,
     PERF_MULTIPLE_COUNTERS = 2,
     PERF_MULTIPLE_INSTANCES = 4,
     PERF_COUNTERSET = 6,
 }}
-STRUCT!{struct PERF_COUNTER_HEADER {
+STRUCT! {struct PERF_COUNTER_HEADER {
     dwStatus: ULONG,
     dwType: PerfCounterDataType,
     dwSize: ULONG,
     Reserved: ULONG,
 }}
 pub type PPERF_COUNTER_HEADER = *mut PERF_COUNTER_HEADER;
-STRUCT!{struct PERF_MULTI_INSTANCES {
+STRUCT! {struct PERF_MULTI_INSTANCES {
     dwTotalSize: ULONG,
     dwInstances: ULONG,
 }}
 pub type PPERF_MULTI_INSTANCES = *mut PERF_MULTI_INSTANCES;
-STRUCT!{struct PERF_MULTI_COUNTERS {
+STRUCT! {struct PERF_MULTI_COUNTERS {
     dwSize: ULONG,
     dwCounters: ULONG,
 }}
 pub type PPERF_MULTI_COUNTERS = *mut PERF_MULTI_COUNTERS;
-STRUCT!{struct PERF_COUNTER_DATA {
+STRUCT! {struct PERF_COUNTER_DATA {
     dwDataSize: ULONG,
     dwSize: ULONG,
 }}
@@ -299,13 +294,8 @@ extern "system" {
         cbRegInfo: DWORD,
         pcbRegInfoActual: LPDWORD,
     ) -> ULONG;
-    pub fn PerfOpenQueryHandle(
-        szMachine: LPCWSTR,
-        hQuery: *mut HANDLE,
-    ) -> ULONG;
-    pub fn PerfCloseQueryHandle(
-        hQuery: HANDLE,
-    ) -> ULONG;
+    pub fn PerfOpenQueryHandle(szMachine: LPCWSTR, hQuery: *mut HANDLE) -> ULONG;
+    pub fn PerfCloseQueryHandle(hQuery: HANDLE) -> ULONG;
     pub fn PerfQueryCounterInfo(
         hQuery: HANDLE,
         pCounters: PPERF_COUNTER_IDENTIFIER,
