@@ -16,11 +16,6 @@ extern "system" {
         hProcess: HANDLE,
         Wow64Process: PBOOL,
     ) -> BOOL;
-    pub fn IsWow64Process2(
-        hProcess: HANDLE,
-        pProcessMachine: PUSHORT,
-        pNativeMachine: PUSHORT,
-    ) -> BOOL;
     pub fn GetSystemWow64DirectoryA(
         lpBuffer: LPSTR,
         uSize: UINT,
@@ -29,4 +24,9 @@ extern "system" {
         lpBuffer: LPWSTR,
         uSize: UINT,
     ) -> UINT;
+    pub fn IsWow64Process2(
+        hProcess: HANDLE,
+        pProcessMachine: PUSHORT,
+        pNativeMachine: PUSHORT,
+    ) -> BOOL;
 }
