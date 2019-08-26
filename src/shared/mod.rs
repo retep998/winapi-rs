@@ -56,6 +56,7 @@ pub mod guiddef;
 #[cfg(feature = "mswsockdef")] pub mod mswsockdef;
 #[cfg(feature = "netioapi")] pub mod netioapi;
 #[cfg(feature = "nldef")] pub mod nldef;
+#[cfg(feature = "ntddndis")] pub mod ntddndis;
 #[cfg(feature = "ntddscsi")] pub mod ntddscsi;
 #[cfg(feature = "ntddser")] pub mod ntddser;
 #[cfg(feature = "ntdef")] pub mod ntdef;

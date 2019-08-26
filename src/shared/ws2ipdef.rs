@@ -51,6 +51,13 @@ STRUCT!{struct SOCKADDR_IN6_PAIR {
     DestinationAddress: PSOCKADDR_IN6,
 }}
 pub type PSOCKADDR_IN6_PAIR = *mut SOCKADDR_IN6_PAIR;
+UNION!{union SOCKADDR_INET {
+    [u32; 7],
+    Ipv4 Ipv4_mut: SOCKADDR_IN,
+    Ipv6 Ipv6_mut: SOCKADDR_IN6,
+    si_family si_family_mut: ADDRESS_FAMILY,
+}}
+pub type PSOCKADDR_INET = *mut SOCKADDR_INET;
 STRUCT!{struct IP_MREQ {
     imr_multiaddr: IN_ADDR,
     imr_interface: IN_ADDR,
