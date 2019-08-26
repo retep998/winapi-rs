@@ -36,14 +36,14 @@ UNION!{union SOCKADDR_IN6_LH_u {
     sin6_scope_id sin6_scope_id_mut: ULONG,
     sin6_scope_struct sin6_scope_struct_mut: SCOPE_ID,
 }}
-STRUCT!{struct SOCKADDR_IN6 {
+STRUCT!{struct SOCKADDR_IN6_LH {
     sin6_family: ADDRESS_FAMILY,
     sin6_port: USHORT,
     sin6_flowinfo: ULONG,
     sin6_addr: IN6_ADDR,
     u: SOCKADDR_IN6_LH_u,
 }}
-pub type SOCKADDR_IN6_LH = SOCKADDR_IN6;
+pub type SOCKADDR_IN6 = SOCKADDR_IN6_LH;
 pub type PSOCKADDR_IN6_LH = *mut SOCKADDR_IN6_LH;
 STRUCT!{struct IP_MREQ {
     imr_multiaddr: IN_ADDR,
