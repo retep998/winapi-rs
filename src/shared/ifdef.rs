@@ -3,8 +3,6 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-// #include <winapifamily.h>
-// #include <ipifcons.h>
 use shared::basetsd::{UINT16, UINT32, ULONG32, ULONG64};
 use shared::guiddef::GUID;
 use shared::ntdef::{BOOLEAN, ULONG, USHORT};
@@ -35,7 +33,8 @@ pub type PNET_IF_ADMIN_STATUS = *mut NET_IF_ADMIN_STATUS;
 pub type NET_IF_COMPARTMENT_SCOPE = UINT32;
 pub type PNET_IF_COMPARTMENT_SCOPE = *mut NET_IF_COMPARTMENT_SCOPE;
 pub const NET_IF_COMPARTMENT_SCOPE_UNSPECIFIED: NET_IF_COMPARTMENT_SCOPE = 0;
-// pub const NET_IF_COMPARTMENT_SCOPE_ALL: NET_IF_COMPARTMENT_SCOPE = -1;
+pub const NET_IF_COMPARTMENT_SCOPE_ALL: NET_IF_COMPARTMENT_SCOPE = -1i32 as
+    NET_IF_COMPARTMENT_SCOPE;
 ENUM!{enum NET_IF_RCV_ADDRESS_TYPE {
     NET_IF_RCV_ADDRESS_TYPE_OTHER = 1,
     NET_IF_RCV_ADDRESS_TYPE_VOLATILE = 2,
@@ -107,22 +106,22 @@ ENUM!{enum NET_IF_ACCESS_TYPE {
 }}
 pub type PNET_IF_ACCESS_TYPE = *mut NET_IF_ACCESS_TYPE;
 ENUM!{enum NET_IF_DIRECTION_TYPE {
-    NET_IF_DIRECTION_SENDRECEIVE,
-    NET_IF_DIRECTION_SENDONLY,
-    NET_IF_DIRECTION_RECEIVEONLY,
-    NET_IF_DIRECTION_MAXIMUM,
+    NET_IF_DIRECTION_SENDRECEIVE = 0,
+    NET_IF_DIRECTION_SENDONLY = 1,
+    NET_IF_DIRECTION_RECEIVEONLY = 2,
+    NET_IF_DIRECTION_MAXIMUM = 3,
 }}
 pub type PNET_IF_DIRECTION_TYPE = *mut NET_IF_DIRECTION_TYPE;
 ENUM!{enum NET_IF_MEDIA_CONNECT_STATE {
-    MediaConnectStateUnknown,
-    MediaConnectStateConnected,
-    MediaConnectStateDisconnected,
+    MediaConnectStateUnknown = 0,
+    MediaConnectStateConnected = 1,
+    MediaConnectStateDisconnected = 2,
 }}
 pub type PNET_IF_MEDIA_CONNECT_STATE = *mut NET_IF_MEDIA_CONNECT_STATE;
 ENUM!{enum NET_IF_MEDIA_DUPLEX_STATE {
-    MediaDuplexStateUnknown,
-    MediaDuplexStateHalf,
-    MediaDuplexStateFull,
+    MediaDuplexStateUnknown = 0,
+    MediaDuplexStateHalf = 1,
+    MediaDuplexStateFull = 2,
 }}
 pub type PNET_IF_MEDIA_DUPLEX_STATE = *mut NET_IF_MEDIA_DUPLEX_STATE;
 STRUCT!{struct NET_PHYSICAL_LOCATION_LH {
@@ -159,12 +158,12 @@ ENUM!{enum IF_ADMINISTRATIVE_STATE {
 pub type PIF_ADMINISTRATIVE_STATE = *mut IF_ADMINISTRATIVE_STATE;
 ENUM!{enum IF_OPER_STATUS {
     IfOperStatusUp = 1,
-    IfOperStatusDown,
-    IfOperStatusTesting,
-    IfOperStatusUnknown,
-    IfOperStatusDormant,
-    IfOperStatusNotPresent,
-    IfOperStatusLowerLayerDown,
+    IfOperStatusDown = 2,
+    IfOperStatusTesting = 3,
+    IfOperStatusUnknown = 4,
+    IfOperStatusDormant = 5,
+    IfOperStatusNotPresent = 6,
+    IfOperStatusLowerLayerDown = 7,
 }}
 STRUCT!{struct NDIS_INTERFACE_INFORMATION {
     ifOperStatus: NET_IF_OPER_STATUS,
