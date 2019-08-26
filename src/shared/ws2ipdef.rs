@@ -43,8 +43,14 @@ STRUCT!{struct SOCKADDR_IN6_LH {
     sin6_addr: IN6_ADDR,
     u: SOCKADDR_IN6_LH_u,
 }}
-pub type SOCKADDR_IN6 = SOCKADDR_IN6_LH;
 pub type PSOCKADDR_IN6_LH = *mut SOCKADDR_IN6_LH;
+pub type SOCKADDR_IN6 = SOCKADDR_IN6_LH;
+pub type PSOCKADDR_IN6 = *mut SOCKADDR_IN6;
+STRUCT!{struct SOCKADDR_IN6_PAIR {
+    SourceAddress: PSOCKADDR_IN6,
+    DestinationAddress: PSOCKADDR_IN6,
+}}
+pub type PSOCKADDR_IN6_PAIR = *mut SOCKADDR_IN6_PAIR;
 STRUCT!{struct IP_MREQ {
     imr_multiaddr: IN_ADDR,
     imr_interface: IN_ADDR,
