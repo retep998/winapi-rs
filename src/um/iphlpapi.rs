@@ -386,7 +386,6 @@ extern "system" {
         Token: PULONG64,
     ) -> ULONG;
     // #if defined (_WS2DEF_) && defined (_WS2IPDEF_) && defined(_WINDNS_INCLUDED_)
-    #[cfg(all(feature = "ws2def", feature = "ws2ipdef"))]
     pub fn ParseNetworkString(
         NetworkString: *const *mut WCHAR,
         Types: DWORD,
