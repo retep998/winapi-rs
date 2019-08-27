@@ -78,7 +78,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("sspi", &["basetsd", "guiddef", "minwindef", "subauth", "wincred", "winnt"], &["credui", "secur32"]),
     ("stralign", &["vcruntime", "winnt"], &["kernel32"]),
     ("tcpestats", &["basetsd", "ntdef"], &[]),
-    ("tcpmib", &["basetsd", "in6addr", "minwindef", "ntdef"], &[]),
+    ("tcpmib", &["basetsd", "in6addr", "minwindef", "ntdef", "rtinfo"], &[]),
     ("transportsettingcommon", &["guiddef"], &[]),
     ("tvout", &["guiddef", "minwindef"], &[]),
     ("udpmib", &["basetsd", "in6addr", "minwindef", "ntdef", "rtinfo"], &[]),
