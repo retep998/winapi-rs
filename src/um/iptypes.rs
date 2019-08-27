@@ -234,19 +234,19 @@ pub const IP_ADAPTER_NETBIOS_OVER_TCPIP_ENABLED: DWORD = 0x00000040;
 pub const IP_ADAPTER_IPV4_ENABLED: DWORD = 0x00000080;
 pub const IP_ADAPTER_IPV6_ENABLED: DWORD = 0x00000100;
 pub const IP_ADAPTER_IPV6_MANAGE_ADDRESS_CONFIG: DWORD = 0x00000200;
-STRUCT!{struct IP_ADAPTER_ADDRESSES_LH_u1_s {
+STRUCT!{struct IP_ADAPTER_ADDRESSES_LH_u_s {
     Length: ULONG,
     IfIndex: IF_INDEX,
 }}
-UNION!{union IP_ADAPTER_ADDRESSES_LH_u1 {
+UNION!{union IP_ADAPTER_ADDRESSES_LH_u {
     [u64; 1],
     Alignment Alignment_mut: ULONGLONG,
-    s s_mut: IP_ADAPTER_ADDRESSES_LH_u1_s,
+    s s_mut: IP_ADAPTER_ADDRESSES_LH_u_s,
 }}
-STRUCT!{struct IP_ADAPTER_ADDRESSES_LH_u2_s {
+STRUCT!{struct IP_ADAPTER_ADDRESSES_LH_s {
     bitfield: ULONG,
 }}
-BITFIELD!{IP_ADAPTER_ADDRESSES_LH_u2_s bitfield: ULONG [
+BITFIELD!{IP_ADAPTER_ADDRESSES_LH_s bitfield: ULONG [
     DdnsEnabled set_DdnsEnabled[0..1],
     RegisterAdapterSuffix set_RegisterAdapterSuffix[1..2],
     Dhcpv4Enabled set_Dhcpv4Enabled[2..3],
@@ -257,14 +257,10 @@ BITFIELD!{IP_ADAPTER_ADDRESSES_LH_u2_s bitfield: ULONG [
     Ipv4Enabled set_Ipv4Enabled[7..8],
     Ipv6Enabled set_Ipv6Enabled[8..9],
     Ipv6ManagedAddressConfigurationSupported set_Ipv6ManagedAddressConfigurationSupported[9..10],
+    Reserved set_Reserved[10..32],
 ]}
-UNION!{union IP_ADAPTER_ADDRESSES_LH_u2 {
-    [u64; 1],
-    Flags Flags_mut: ULONG,
-    s s_mut: IP_ADAPTER_ADDRESSES_LH_u2_s,
-}}
 STRUCT!{struct IP_ADAPTER_ADDRESSES_LH {
-    u1: IP_ADAPTER_ADDRESSES_LH_u1,
+    u: IP_ADAPTER_ADDRESSES_LH_u,
     Next: *mut IP_ADAPTER_ADDRESSES_LH,
     AdapterName: PCHAR,
     FirstUnicastAddress: PIP_ADAPTER_UNICAST_ADDRESS_LH,
@@ -276,7 +272,7 @@ STRUCT!{struct IP_ADAPTER_ADDRESSES_LH {
     FriendlyName: PWCHAR,
     PhysicalAddress: [BYTE; MAX_ADAPTER_ADDRESS_LENGTH],
     PhysicalAddressLength: ULONG,
-    u2: IP_ADAPTER_ADDRESSES_LH_u2,
+    s: IP_ADAPTER_ADDRESSES_LH_s,
     Mtu: ULONG,
     IfType: IFTYPE,
     OperStatus: IF_OPER_STATUS,
