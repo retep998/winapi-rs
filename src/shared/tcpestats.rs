@@ -7,21 +7,21 @@
 use shared::basetsd::{SIZE_T, ULONG64};
 use shared::ntdef::{BOOLEAN, UCHAR, ULONG};
 ENUM!{enum TCP_ESTATS_TYPE {
-    TcpConnectionEstatsSynOpts,
-    TcpConnectionEstatsData,
-    TcpConnectionEstatsSndCong,
-    TcpConnectionEstatsPath,
-    TcpConnectionEstatsSendBuff,
-    TcpConnectionEstatsRec,
-    TcpConnectionEstatsObsRec,
-    TcpConnectionEstatsBandwidth,
-    TcpConnectionEstatsFineRtt,
-    TcpConnectionEstatsMaximum,
+    TcpConnectionEstatsSynOpts = 0,
+    TcpConnectionEstatsData = 1,
+    TcpConnectionEstatsSndCong = 2,
+    TcpConnectionEstatsPath = 3,
+    TcpConnectionEstatsSendBuff = 4,
+    TcpConnectionEstatsRec = 5,
+    TcpConnectionEstatsObsRec = 6,
+    TcpConnectionEstatsBandwidth = 7,
+    TcpConnectionEstatsFineRtt = 8,
+    TcpConnectionEstatsMaximum = 9,
 }}
 pub type PTCP_ESTATS_TYPE = *mut TCP_ESTATS_TYPE;
 ENUM!{enum TCP_BOOLEAN_OPTIONAL {
     TcpBoolOptDisabled = 0,
-    TcpBoolOptEnabled,
+    TcpBoolOptEnabled = 1,
     TcpBoolOptUnchanged = -1i32 as u32,
 }}
 pub type PTCP_BOOLEAN_OPTIONAL = *mut TCP_BOOLEAN_OPTIONAL;
@@ -33,15 +33,15 @@ STRUCT!{struct TCP_ESTATS_SYN_OPTS_ROS_v0 {
 pub type PTCP_ESTATS_SYN_OPTS_ROS_v0 = *mut TCP_ESTATS_SYN_OPTS_ROS_v0;
 ENUM!{enum TCP_SOFT_ERROR {
     TcpErrorNone = 0,
-    TcpErrorBelowDataWindow,
-    TcpErrorAboveDataWindow,
-    TcpErrorBelowAckWindow,
-    TcpErrorAboveAckWindow,
-    TcpErrorBelowTsWindow,
-    TcpErrorAboveTsWindow,
-    TcpErrorDataChecksumError,
-    TcpErrorDataLengthError,
-    TcpErrorMaxSoftError,
+    TcpErrorBelowDataWindow = 1,
+    TcpErrorAboveDataWindow = 2,
+    TcpErrorBelowAckWindow = 3,
+    TcpErrorAboveAckWindow = 4,
+    TcpErrorBelowTsWindow = 5,
+    TcpErrorAboveTsWindow = 6,
+    TcpErrorDataChecksumError = 7,
+    TcpErrorDataLengthError = 8,
+    TcpErrorMaxSoftError = 9,
 }}
 pub type PTCP_SOFT_ERROR = *mut TCP_SOFT_ERROR;
 STRUCT!{struct TCP_ESTATS_DATA_ROD_v0 {
