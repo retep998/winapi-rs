@@ -14,10 +14,11 @@ use shared::ipmib::{
     PMIB_IPNETROW, PMIB_IPNETTABLE, PMIB_IPSTATS
 };
 use shared::iprtrmib::{TCPIP_OWNER_MODULE_INFO_CLASS, TCP_TABLE_CLASS, UDP_TABLE_CLASS};
-use shared::minwindef::{BOOL, BYTE, DWORD, LPDWORD, PDWORD, PULONG, UINT};
-use shared::ntdef::{HANDLE, LPWSTR, PHANDLE, PVOID, PWSTR, ULONG, USHORT, WCHAR};
+use shared::minwindef::{BOOL, BYTE, DWORD, LPDWORD, PDWORD, PUCHAR, PULONG, UINT};
+use shared::ntdef::{HANDLE, LPWSTR, PHANDLE, PVOID, PWSTR, ULONG, ULONGLONG, USHORT, WCHAR};
+use shared::tcpestats::TCP_ESTATS_TYPE;
 use shared::tcpmib::{
-    PMIB_TCP6ROW_OWNER_MODULE, PMIB_TCP6TABLE, PMIB_TCP6TABLE2, PMIB_TCPROW,
+    PMIB_TCP6ROW, PMIB_TCP6ROW_OWNER_MODULE, PMIB_TCP6TABLE, PMIB_TCP6TABLE2, PMIB_TCPROW,
     PMIB_TCPROW_OWNER_MODULE, PMIB_TCPSTATS, PMIB_TCPSTATS2, PMIB_TCPTABLE, PMIB_TCPTABLE2
 };
 use shared::udpmib::{
@@ -27,10 +28,13 @@ use shared::udpmib::{
 use shared::ws2def::{PSOCKADDR, SOCKADDR, SOCKADDR_IN};
 use shared::ws2ipdef::SOCKADDR_IN6;
 use um::ipexport::{
-    IPAddr, IPMask, IP_STATUS, PIP_ADAPTER_INDEX_MAP, PIP_INTERFACE_INFO,
-    PIP_UNIDIRECTIONAL_ADAPTER_ADDRESS
+    IPAddr, IPMask, IP_STATUS, PIP_ADAPTER_INDEX_MAP, PIP_ADAPTER_ORDER_MAP, PIP_INTERFACE_INFO,
+    PIP_UNIDIRECTIONAL_ADAPTER_ADDRESS,
 };
-use um::iptypes::{PFIXED_INFO, PIP_ADAPTER_ADDRESSES, PIP_ADAPTER_INFO, PIP_PER_ADAPTER_INFO};
+use um::iptypes::{
+    PFIXED_INFO, PIP_ADAPTER_ADDRESSES, PIP_ADAPTER_INFO, PIP_INTERFACE_NAME_INFO,
+    PIP_PER_ADAPTER_INFO,
+};
 use um::minwinbase::{LPOVERLAPPED,OVERLAPPED};
 ENUM!{enum NET_ADDRESS_FORMAT {
     NET_ADDRESS_FORMAT_UNSPECIFIED = 0,
@@ -126,6 +130,7 @@ extern "system" {
         SizePointer: PULONG,
         Order: BOOL,
     ) -> ULONG;
+    // Deprecated APIs, Added for documentation.
     // pub fn AllocateAndGetTcpExTableFromStack() -> DWORD;
     // pub fn AllocateAndGetUdpExTableFromStack() -> DWORD;
     pub fn GetTcp6Table(
@@ -138,9 +143,48 @@ extern "system" {
         SizePointer: PULONG,
         Order: BOOL,
     ) -> ULONG;
-    // pub fn GetPerTcpConnectionEStats() -> ULONG;
-    // pub fn GetPerTcp6ConnectionEStats() -> ULONG;
-    // pub fn SetPerTcp6ConnectionEStats() -> ULONG;
+    pub fn GetPerTcpConnectionEStats(
+        Row: PMIB_TCPROW,
+        EstatsType: TCP_ESTATS_TYPE,
+        Rw: PUCHAR,
+        RwVersion: ULONG,
+        RwSize: ULONG,
+        Ros: PUCHAR,
+        RosVersion: ULONG,
+        RosSize: ULONG,
+        Rod: PUCHAR,
+        RodVersion: ULONG,
+        RodSize: ULONG,
+    ) -> ULONG;
+    pub fn SetPerTcpConnectionEStats(
+        Row: PMIB_TCPROW,
+        EstatsType: TCP_ESTATS_TYPE,
+        Rw: PUCHAR,
+        RwVersion: ULONG,
+        RwSize: ULONG,
+        Offset: ULONG,
+    ) -> ULONG;
+    pub fn GetPerTcp6ConnectionEStats(
+        Row: PMIB_TCP6ROW,
+        EstatsType: TCP_ESTATS_TYPE,
+        Rw: PUCHAR,
+        RwVersion: ULONG,
+        RwSize: ULONG,
+        Ros: PUCHAR,
+        RosVersion: ULONG,
+        RosSize: ULONG,
+        Rod: PUCHAR,
+        RodVersion: ULONG,
+        RodSize: ULONG,
+    ) -> ULONG;
+    pub fn SetPerTcp6ConnectionEStats(
+        Row: PMIB_TCP6ROW,
+        EstatsType: TCP_ESTATS_TYPE,
+        Rw: PUCHAR,
+        RwVersion: ULONG,
+        RwSize: ULONG,
+        Offset: ULONG,
+    ) -> ULONG;
     pub fn GetOwnerModuleFromTcp6Entry(
         pTcpEntry: PMIB_TCP6ROW_OWNER_MODULE,
         Class: TCPIP_OWNER_MODULE_INFO_CLASS,
@@ -158,7 +202,13 @@ extern "system" {
         pBuffer: PVOID,
         pdwSize: PDWORD,
     ) -> DWORD;
-    // pub fn GetOwnerModuleFromPidAndInfo() -> DWORD;
+    pub fn GetOwnerModuleFromPidAndInfo(
+        ulPid: ULONG,
+        pInfo: *mut ULONGLONG,
+        Class: TCPIP_OWNER_MODULE_INFO_CLASS,
+        pBuffer: PVOID,
+        pdwSize: PDWORD,
+    ) -> DWORD;
     pub fn GetIpStatistics(
         Statistics: PMIB_IPSTATS,
     ) -> ULONG;
@@ -250,7 +300,13 @@ extern "system" {
         pIPIfInfo: PIP_UNIDIRECTIONAL_ADAPTER_ADDRESS,
         dwOutBufLen: PULONG,
     ) -> DWORD;
-    // pub fn NhpAllocateAndGetInterfaceInfoFromStack() -> DWORD;
+    pub fn NhpAllocateAndGetInterfaceInfoFromStack(
+        ppTable: *mut PIP_INTERFACE_NAME_INFO,
+        pdwCount: PDWORD,
+        bOrder: BOOL,
+        hHeap: HANDLE,
+        dwFlags: DWORD,
+    ) -> DWORD;
     pub fn GetBestInterface(
         dwDestAddr: IPAddr,
         pdwBestIfIndex: PDWORD,
@@ -297,7 +353,7 @@ extern "system" {
         AdapterInfo: PIP_ADAPTER_INFO,
         SizePointer: PULONG,
     ) -> ULONG;
-    // pub fn GetAdapterOrderMap(VOID) -> PIP_ADAPTER_ORDER_MAP;
+    pub fn GetAdapterOrderMap() -> PIP_ADAPTER_ORDER_MAP;
     pub fn GetAdaptersAddresses(
         Family: ULONG,
         Flags: ULONG,
