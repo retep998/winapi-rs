@@ -8,7 +8,7 @@ use ctypes::c_int;
 use shared::in6addr::IN6_ADDR;
 use shared::inaddr::IN_ADDR;
 use shared::minwindef::{ULONG, USHORT};
-use shared::ws2def::{ADDRESS_FAMILY, SCOPE_ID};
+use shared::ws2def::{ADDRESS_FAMILY, SCOPE_ID, SOCKADDR_IN};
 pub const IFF_UP: ULONG = 0x00000001;
 pub const IFF_BROADCAST: ULONG = 0x00000002;
 pub const IFF_LOOPBACK: ULONG = 0x00000004;

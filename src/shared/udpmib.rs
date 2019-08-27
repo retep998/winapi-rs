@@ -7,11 +7,11 @@
 // #include <winapifamily.h>
 use core::mem;
 use core::ptr;
-use shared::basetsd::{DWORD64, DWORD_PTR};
+use shared::basetsd::DWORD64;
 use shared::in6addr::IN6_ADDR;
 use shared::minwindef::DWORD;
 use shared::ntdef::{INT, LARGE_INTEGER, UCHAR, ULONGLONG};
-const ALIGN_SIZE: DWORD_PTR = 0x00000008; // from RTInfo.h
+use um::rtinfo::ALIGN_SIZE;
 const ANY_SIZE: usize = 1;
 pub const TCPIP_OWNING_MODULE_SIZE: usize = 16;
 macro_rules! offset_of_table {
