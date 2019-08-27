@@ -7,7 +7,8 @@
 // #include <ipexport.h>
 // #include <iptypes.h>
 // #include <tcpestats.h>
-use shared::basetsd::PULONG64;
+use shared::basetsd::{PULONG64, ULONG64};
+use shared::ifdef::NET_LUID;
 use shared::ifmib::{PMIB_IFROW, PMIB_IFTABLE};
 use shared::ipmib::{
     PMIB_ICMP, PMIB_ICMP_EX, PMIB_IPADDRTABLE, PMIB_IPFORWARDROW, PMIB_IPFORWARDTABLE,
@@ -15,7 +16,9 @@ use shared::ipmib::{
 };
 use shared::iprtrmib::{TCPIP_OWNER_MODULE_INFO_CLASS, TCP_TABLE_CLASS, UDP_TABLE_CLASS};
 use shared::minwindef::{BOOL, BYTE, DWORD, LPDWORD, PDWORD, PUCHAR, PULONG, UINT};
-use shared::ntdef::{HANDLE, LPWSTR, PHANDLE, PVOID, PWSTR, ULONG, ULONGLONG, USHORT, WCHAR};
+use shared::ntdef::{
+    BOOLEAN, HANDLE, LPWSTR, PHANDLE, PVOID, PWSTR, ULONG, ULONGLONG, USHORT, VOID, WCHAR,
+};
 use shared::tcpestats::TCP_ESTATS_TYPE;
 use shared::tcpmib::{
     PMIB_TCP6ROW, PMIB_TCP6ROW_OWNER_MODULE, PMIB_TCP6TABLE, PMIB_TCP6TABLE2, PMIB_TCPROW,
@@ -36,29 +39,6 @@ use um::iptypes::{
     PIP_PER_ADAPTER_INFO,
 };
 use um::minwinbase::{LPOVERLAPPED,OVERLAPPED};
-ENUM!{enum NET_ADDRESS_FORMAT {
-    NET_ADDRESS_FORMAT_UNSPECIFIED = 0,
-    NET_ADDRESS_DNS_NAME = 1,
-    NET_ADDRESS_IPV4 = 2,
-    NET_ADDRESS_IPV6 = 3,
-}}
-pub const DNS_MAX_NAME_BUFFER_LENGTH: usize = 256;
-STRUCT!{struct NET_NAMED_ADDRESS {
-    Address: [WCHAR; DNS_MAX_NAME_BUFFER_LENGTH],
-    Port: [WCHAR; 6],
-}}
-UNION!{union NET_ADDRESS {
-    [u8; 256],
-    NamedAddress NamedAddress_mut: NET_NAMED_ADDRESS, // [u16; 6] + [u16; ]
-    Ipv4Address Ipv4Address_mut: SOCKADDR_IN, // [u8; 4]
-    Ipv6Address Ipv6Address_mut: SOCKADDR_IN6, // [u8; 16]
-    IpAddress IpAddress_mut: SOCKADDR, // [u8; 16]
-}}
-STRUCT!{struct NET_ADDRESS_INFO {
-    Format: NET_ADDRESS_FORMAT,
-    Address: NET_ADDRESS,
-}}
-pub type PNET_ADDRESS_INFO = *mut NET_ADDRESS_INFO;
 extern "system" {
     pub fn GetNumberOfInterfaces(
         pdwNumIf: PDWORD
@@ -366,6 +346,73 @@ extern "system" {
         pPerAdapterInfo: PIP_PER_ADAPTER_INFO,
         pOutBufLen: PULONG,
     ) -> DWORD;
+}
+STRUCT!{struct INTERFACE_TIMESTAMP_CAPABILITY_FLAGS {
+    PtpV2OverUdpIPv4EventMsgReceiveHw: BOOLEAN,
+    PtpV2OverUdpIPv4AllMsgReceiveHw: BOOLEAN,
+    PtpV2OverUdpIPv4EventMsgTransmitHw: BOOLEAN,
+    PtpV2OverUdpIPv4AllMsgTransmitHw: BOOLEAN,
+    PtpV2OverUdpIPv6EventMsgReceiveHw: BOOLEAN,
+    PtpV2OverUdpIPv6AllMsgReceiveHw: BOOLEAN,
+    PtpV2OverUdpIPv6EventMsgTransmitHw: BOOLEAN,
+    PtpV2OverUdpIPv6AllMsgTransmitHw: BOOLEAN,
+    AllReceiveHw: BOOLEAN,
+    AllTransmitHw: BOOLEAN,
+    TaggedTransmitHw: BOOLEAN,
+    AllReceiveSw: BOOLEAN,
+    AllTransmitSw: BOOLEAN,
+    TaggedTransmitSw: BOOLEAN,
+}}
+pub type PINTERFACE_TIMESTAMP_CAPABILITY_FLAGS = *mut INTERFACE_TIMESTAMP_CAPABILITY_FLAGS;
+STRUCT!{struct INTERFACE_TIMESTAMP_CAPABILITIES {
+    Version: ULONG,
+    HardwareClockFrequencyHz: ULONG64,
+    CrossTimestamp: BOOLEAN,
+    Reserved1: ULONG64,
+    Reserved2: ULONG64,
+    TimestampFlags: INTERFACE_TIMESTAMP_CAPABILITY_FLAGS,
+}}
+pub type PINTERFACE_TIMESTAMP_CAPABILITIES = *mut INTERFACE_TIMESTAMP_CAPABILITIES;
+STRUCT!{struct INTERFACE_HARDWARE_CROSSTIMESTAMP {
+    Version: ULONG,
+    Flags: ULONG,
+    SystemTimestamp1: ULONG64,
+    HardwareClockTimestamp: ULONG64,
+    SystemTimestamp2: ULONG64,
+}}
+pub type PINTERFACE_HARDWARE_CROSSTIMESTAMP = *mut INTERFACE_HARDWARE_CROSSTIMESTAMP;
+STRUCT!{struct HIFTIMESTAMPCHANGE__ {
+    unused: i32,
+}}
+pub type HIFTIMESTAMPCHANGE = *mut HIFTIMESTAMPCHANGE__;
+extern "system" {
+    pub fn GetInterfaceCurrentTimestampCapabilities(
+        InterfaceLuid: *const NET_LUID,
+        TimestampCapabilite: PINTERFACE_TIMESTAMP_CAPABILITIES,
+    ) -> DWORD;
+    pub fn GetInterfaceHardwareTimestampCapabilities(
+        InterfaceLuid: *const NET_LUID,
+        TimestampCapabilite: PINTERFACE_TIMESTAMP_CAPABILITIES,
+    ) -> DWORD;
+    pub fn CaptureInterfaceHardwareCrossTimestamp(
+        InterfaceLuid: *const NET_LUID,
+        CrossTimestamp: PINTERFACE_HARDWARE_CROSSTIMESTAMP,
+    ) -> DWORD;
+}
+FN!{stdcall INTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK(
+    CallerContext: PVOID,
+) -> VOID}
+pub type PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK = *mut
+    INTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK;
+extern "system" {
+    pub fn NotifyIfTimestampConfigChange(
+        CallerContext: PVOID,
+        Callback: PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK,
+        NotificationHandle: *mut HIFTIMESTAMPCHANGE,
+    ) -> DWORD;
+    pub fn CancelIfTimestampConfigChange(
+        NotificationHandle: HIFTIMESTAMPCHANGE,
+    );
     pub fn IpReleaseAddress(
         AdapterInfo: PIP_ADAPTER_INDEX_MAP,
     ) -> DWORD;
@@ -441,6 +488,31 @@ extern "system" {
         NumberOfPorts: USHORT,
         Token: PULONG64,
     ) -> ULONG;
+}
+ENUM!{enum NET_ADDRESS_FORMAT {
+    NET_ADDRESS_FORMAT_UNSPECIFIED = 0,
+    NET_ADDRESS_DNS_NAME = 1,
+    NET_ADDRESS_IPV4 = 2,
+    NET_ADDRESS_IPV6 = 3,
+}}
+pub const DNS_MAX_NAME_BUFFER_LENGTH: usize = 256;
+STRUCT!{struct NET_ADDRESS_INFO_u_s {
+    Address: [WCHAR; DNS_MAX_NAME_BUFFER_LENGTH],
+    Port: [WCHAR; 6],
+}}
+UNION!{union NET_ADDRESS_INFO_u {
+    [u32; 131],
+    NamedAddress NamedAddress_mut: NET_ADDRESS_INFO_u_s,
+    Ipv4Address Ipv4Address_mut: SOCKADDR_IN,
+    Ipv6Address Ipv6Address_mut: SOCKADDR_IN6,
+    IpAddress IpAddress_mut: SOCKADDR,
+}}
+STRUCT!{struct NET_ADDRESS_INFO {
+    Format: NET_ADDRESS_FORMAT,
+    u: NET_ADDRESS_INFO_u,
+}}
+pub type PNET_ADDRESS_INFO = *mut NET_ADDRESS_INFO;
+extern "system" {
     // #if defined (_WS2DEF_) && defined (_WS2IPDEF_) && defined(_WINDNS_INCLUDED_)
     pub fn ParseNetworkString(
         NetworkString: *const *mut WCHAR,

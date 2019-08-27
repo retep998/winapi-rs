@@ -113,13 +113,13 @@ STRUCT!{struct MIB_ROUTESTATE {
     bRoutesSetToStack: BOOL,
 }}
 pub type PMIB_ROUTESTATE = *mut MIB_ROUTESTATE;
-UNION!{union MIB_OPAQUE_INFO_Value {
+UNION!{union MIB_OPAQUE_INFO_u {
     [u64; 1],
     ullAlign ullAlign_mut: ULONGLONG,
     rgbyData rgbyData_mut: [BYTE; 1],
 }}
 STRUCT!{struct MIB_OPAQUE_INFO {
     dwId: DWORD,
-    Value: MIB_OPAQUE_INFO_Value,
+    u: MIB_OPAQUE_INFO_u,
 }}
 pub type PMIB_OPAQUE_INFO = *mut MIB_OPAQUE_INFO;

@@ -29,7 +29,7 @@ STRUCT!{struct IP_OPTION_INFORMATION32 {
     Tos: UCHAR,
     Flags: UCHAR,
     OptionsSize: UCHAR,
-    OptionsData: *mut UCHAR,
+    OptionsData: u32, // UCHAR * POINTER_32
 }}
 #[cfg(target_arch = "x86_64")]
 pub type PIP_OPTION_INFORMATION32 = *mut IP_OPTION_INFORMATION32;
@@ -50,12 +50,12 @@ STRUCT!{struct ICMP_ECHO_REPLY32 {
     RoundTripTime: ULONG,
     DataSize: USHORT,
     Reserved: USHORT,
-    Data: PVOID,
+    Data: u32, // VOID * POINTER_32
     Options: IP_OPTION_INFORMATION32,
 }}
 #[cfg(target_arch = "x86_64")]
 pub type PICMP_ECHO_REPLY32 = *mut ICMP_ECHO_REPLY32;
-STRUCT!{struct IPV6_ADDRESS_EX {
+STRUCT!{#[repr(packed)] struct IPV6_ADDRESS_EX {
     sin6_port: USHORT,
     sin6_flowinfo: ULONG,
     sin6_addr: [USHORT; 8],
