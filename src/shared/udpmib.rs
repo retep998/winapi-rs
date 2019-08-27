@@ -15,8 +15,8 @@ use um::rtinfo::ALIGN_SIZE;
 const ANY_SIZE: usize = 1;
 pub const TCPIP_OWNING_MODULE_SIZE: usize = 16;
 macro_rules! offset_of_table {
-    ($type:ty) => (unsafe {
-        &(*(ptr::null() as *const $type)).table[0] as *const _ as usize
+    ($container:ty) => (unsafe {
+        &(*(ptr::null() as *const $container)).table[0] as *const _ as usize
     })
 }
 STRUCT!{struct MIB_UDPROW {
