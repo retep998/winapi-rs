@@ -26,11 +26,11 @@ ENUM!{enum MIB_TCP_STATE {
     MIB_TCP_STATE_RESERVED = 100,
 }}
 ENUM!{enum TCP_CONNECTION_OFFLOAD_STATE {
-    TcpConnectionOffloadStateInHost,
-    TcpConnectionOffloadStateOffloading,
-    TcpConnectionOffloadStateOffloaded,
-    TcpConnectionOffloadStateUploading,
-    TcpConnectionOffloadStateMax,
+    TcpConnectionOffloadStateInHost = 0,
+    TcpConnectionOffloadStateOffloading = 1,
+    TcpConnectionOffloadStateOffloaded = 2,
+    TcpConnectionOffloadStateUploading = 3,
+    TcpConnectionOffloadStateMax = 4,
 }}
 pub type PTCP_CONNECTION_OFFLOAD_STATE = *mut TCP_CONNECTION_OFFLOAD_STATE;
 STRUCT!{struct MIB_TCPROW_LH {
@@ -173,9 +173,9 @@ pub type PMIB_TCP6ROW_OWNER_MODULE = *mut MIB_TCP6ROW_OWNER_MODULE;
 // pub type PMIB_TCP6TABLE_OWNER_MODULE = *mut MIB_TCP6TABLE_OWNER_MODULE;
 ENUM!{enum TCP_RTO_ALGORITHM {
     TcpRtoAlgorithmOther = 1,
-    TcpRtoAlgorithmConstant,
-    TcpRtoAlgorithmRsre,
-    TcpRtoAlgorithmVanj,
+    TcpRtoAlgorithmConstant = 2,
+    TcpRtoAlgorithmRsre = 3,
+    TcpRtoAlgorithmVanj = 4,
     MIB_TCP_RTO_OTHER = 1,
     MIB_TCP_RTO_CONSTANT = 2,
     MIB_TCP_RTO_RSRE = 3,
