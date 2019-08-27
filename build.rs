@@ -52,7 +52,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("inaddr", &["minwindef"], &[]),
     ("intsafe", &[], &[]),
     ("ipifcons", &["minwindef"], &[]),
-    ("ipmib", &["ifdef", "ifmib", "minwindef", "nldef", "ntdef"], &[]),
+    ("ipmib", &["ifdef", "ifmib", "minwindef", "nldef", "ntdef", "rtinfo"], &[]),
     ("iprtrmib", &["ipmib", "minwindef", "ntdef"], &[]),
     ("ks", &[], &[]),
     ("ksmedia", &["minwindef"], &[]),

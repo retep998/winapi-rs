@@ -3,15 +3,20 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-// #include <winapifamily.h>
-// #include <ifmib.h>
-// #include <nldef.h>
+use core::mem;
+use core::ptr;
 use shared::ifdef::IF_INDEX;
 use shared::ifmib::MAXLEN_PHYSADDR;
 use shared::minwindef::DWORD;
 use shared::nldef::NL_ROUTE_PROTOCOL;
 use shared::ntdef::{PVOID, UCHAR, ULONG, USHORT};
+use um::rtinfo::ALIGN_SIZE;
 const ANY_SIZE: usize = 1;
+macro_rules! offset_of_table {
+    ($container:ty) => (unsafe {
+        &(*(ptr::null() as *const $container)).table[0] as *const _ as usize
+    })
+}
 STRUCT!{struct MIB_IPADDRROW_XP {
     dwAddr: DWORD,
     dwIndex: IF_INDEX,
@@ -32,15 +37,17 @@ STRUCT!{struct MIB_IPADDRROW_W2K {
     unused2: USHORT,
 }}
 pub type PMIB_IPADDRROW_W2K = *mut MIB_IPADDRROW_W2K;
-// Windows XP
-// pub type MIB_IPADDRROW = MIB_IPADDRROW_XP;
-pub type MIB_IPADDRROW = MIB_IPADDRROW_W2K;
+pub type MIB_IPADDRROW = MIB_IPADDRROW_XP;
 pub type PMIB_IPADDRROW = *mut MIB_IPADDRROW;
 STRUCT!{struct MIB_IPADDRTABLE {
     dwNumEntries: DWORD,
     table: [MIB_IPADDRROW; ANY_SIZE],
 }}
 pub type PMIB_IPADDRTABLE = *mut MIB_IPADDRTABLE;
+#[inline]
+pub fn SIZEOF_IPADDRTABLE(num: usize) -> usize {
+    offset_of_table!(MIB_IPADDRTABLE) + num * mem::size_of::<MIB_IPADDRROW>() + ALIGN_SIZE
+}
 STRUCT!{struct MIB_IPFORWARDNUMBER {
     dwValue: DWORD,
 }}
@@ -74,6 +81,10 @@ STRUCT!{struct MIB_IPFORWARDTABLE {
     table: [MIB_IPFORWARDROW; ANY_SIZE],
 }}
 pub type PMIB_IPFORWARDTABLE = *mut MIB_IPFORWARDTABLE;
+#[inline]
+pub fn SIZEOF_IPFORWARDTABLE(num: usize) -> usize {
+    offset_of_table!(MIB_IPFORWARDTABLE) + num * mem::size_of::<MIB_IPFORWARDROW>() + ALIGN_SIZE
+}
 ENUM!{enum MIB_IPNET_TYPE {
     MIB_IPNET_TYPE_OTHER = 1,
     MIB_IPNET_TYPE_INVALID = 2,
@@ -96,15 +107,17 @@ STRUCT!{struct MIB_IPNETROW_W2K {
     dwType: DWORD,
 }}
 pub type PMIB_IPNETROW_W2K = *mut MIB_IPNETROW_W2K;
-// Windows XP
-// pub type MIB_IPNETROW = MIB_IPNETROW_LH;
-pub type MIB_IPNETROW = MIB_IPNETROW_W2K;
+pub type MIB_IPNETROW = MIB_IPNETROW_LH;
 pub type PMIB_IPNETROW = *mut MIB_IPNETROW;
 STRUCT!{struct MIB_IPNETTABLE {
     dwNumEntries: DWORD,
     table: [MIB_IPNETROW; ANY_SIZE],
 }}
 pub type PMIB_IPNETTABLE = *mut MIB_IPNETTABLE;
+#[inline]
+pub fn SIZEOF_IPNETTABLE(num: usize) -> usize {
+    offset_of_table!(MIB_IPNETTABLE) + num * mem::size_of::<MIB_IPNETROW>() + ALIGN_SIZE
+}
 ENUM!{enum MIB_IPSTATS_FORWARDING {
     MIB_IP_FORWARDING = 1,
     MIB_IP_NOT_FORWARDING = 2,
@@ -162,9 +175,7 @@ STRUCT!{struct MIB_IPSTATS_W2K {
     dwNumRoutes: DWORD,
 }}
 pub type PMIB_IPSTATS_W2K = *mut MIB_IPSTATS_W2K;
-// Windows XP
-// pub type MIB_IPSTATS = MIB_IPSTATS_LH;
-pub type MIB_IPSTATS = MIB_IPSTATS_W2K;
+pub type MIB_IPSTATS = MIB_IPSTATS_LH;
 pub type PMIB_IPSTATS = *mut MIB_IPSTATS;
 STRUCT!{struct MIBICMPSTATS {
     dwMsgs: DWORD,
@@ -253,9 +264,7 @@ STRUCT!{struct MIB_IPMCAST_OIF_W2K {
     dwReserved: DWORD,
 }}
 pub type PMIB_IPMCAST_OIF_W2K = *mut MIB_IPMCAST_OIF_W2K;
-// Windows XP
-// pub type MIB_IPMCAST_OIF = MIB_IPMCAST_OIF_XP;
-pub type MIB_IPMCAST_OIF = MIB_IPMCAST_OIF_W2K;
+pub type MIB_IPMCAST_OIF = MIB_IPMCAST_OIF_XP;
 pub type PMIB_IPMCAST_OIF = *mut MIB_IPMCAST_OIF;
 STRUCT!{struct MIB_IPMCAST_MFE {
     dwGroup: DWORD,
@@ -301,9 +310,7 @@ STRUCT!{struct MIB_IPMCAST_OIF_STATS_W2K {
     ulOutDiscards: ULONG,
 }}
 pub type PMIB_IPMCAST_OIF_STATS_W2K = *mut MIB_IPMCAST_OIF_STATS_W2K;
-// Windows Vista
-// pub type MIB_IPMCAST_OIF_STATS = MIB_IPMCAST_OIF_STATS_LH;
-pub type MIB_IPMCAST_OIF_STATS = MIB_IPMCAST_OIF_STATS_W2K;
+pub type MIB_IPMCAST_OIF_STATS = MIB_IPMCAST_OIF_STATS_LH;
 pub type PMIB_IPMCAST_OIF_STATS = *mut MIB_IPMCAST_OIF_STATS;
 STRUCT!{struct MIB_IPMCAST_MFE_STATS {
     dwGroup: DWORD,
@@ -382,3 +389,8 @@ STRUCT!{struct MIB_IPMCAST_IF_TABLE {
     table: [MIB_IPMCAST_IF_ENTRY; ANY_SIZE],
 }}
 pub type PMIB_IPMCAST_IF_TABLE = *mut MIB_IPMCAST_IF_TABLE;
+#[inline]
+pub fn SIZEOF_MCAST_IF_TABLE(num: usize) -> usize {
+    offset_of_table!(MIB_IPMCAST_IF_TABLE) + num * mem::size_of::<MIB_IPMCAST_IF_ENTRY>()
+        + ALIGN_SIZE
+}
