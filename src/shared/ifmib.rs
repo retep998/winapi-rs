@@ -8,12 +8,11 @@
 // #include <ifdef.h>
 use core::mem;
 use core::ptr;
-use shared::basetsd::DWORD_PTR;
 use shared::ifdef::IF_INDEX;
 use shared::ipifcons::{IFTYPE, INTERNAL_IF_OPER_STATUS};
 use shared::minwindef::DWORD;
 use shared::ntdef::{UCHAR, WCHAR};
-const ALIGN_SIZE: DWORD_PTR = 0x00000008; // from RTInfo.h
+use um::rtinfo::ALIGN_SIZE;
 const ANY_SIZE: usize = 1;
 STRUCT!{struct MIB_IFNUMBER {
     dwValue: DWORD,

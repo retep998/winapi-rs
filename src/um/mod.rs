@@ -199,6 +199,7 @@ pub mod gl;
 #[cfg(feature = "restartmanager")] pub mod restartmanager;
 #[cfg(feature = "restrictederrorinfo")] pub mod restrictederrorinfo;
 #[cfg(feature = "rmxfguid")] pub mod rmxfguid;
+#[cfg(feature = "rtinfo")] pub mod rtinfo;
 #[cfg(feature = "sapi")] pub mod sapi;
 #[cfg(feature = "sapi51")] pub mod sapi51;
 #[cfg(feature = "sapi53")] pub mod sapi53;

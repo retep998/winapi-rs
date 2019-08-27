@@ -4,8 +4,8 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use shared::basetsd::ULONG64;
-use shared::minwindef::{BYTE, ULONG};
-use shared::ntdef::BOOLEAN
+use shared::minwindef::ULONG;
+use shared::ntdef::BOOLEAN;
 ENUM!{enum NL_PREFIX_ORIGIN {
     IpPrefixOriginOther = 0,
     IpPrefixOriginManual = 1,
@@ -31,7 +31,7 @@ ENUM!{enum NL_SUFFIX_ORIGIN {
 pub const NlsoOther: NL_SUFFIX_ORIGIN = IpSuffixOriginOther;
 pub const NlsoManual: NL_SUFFIX_ORIGIN = IpSuffixOriginManual;
 pub const NlsoWellKnown: NL_SUFFIX_ORIGIN = IpSuffixOriginWellKnown;
-pub const NlsoDhcp: NL_SUFFIX_ORIGIN = IpSuffixOriginDhcp,
+pub const NlsoDhcp: NL_SUFFIX_ORIGIN = IpSuffixOriginDhcp;
 pub const NlsoLinkLayerAddress: NL_SUFFIX_ORIGIN = IpSuffixOriginLinkLayerAddress;
 pub const NlsoRandom: NL_SUFFIX_ORIGIN = IpSuffixOriginRandom;
 ENUM!{enum NL_DAD_STATE {
@@ -46,31 +46,6 @@ pub const NldsTentative: NL_DAD_STATE = IpDadStateTentative;
 pub const NldsDuplicate: NL_DAD_STATE = IpDadStateDuplicate;
 pub const NldsDeprecated: NL_DAD_STATE = IpDadStateDeprecated;
 pub const NldsPreferred: NL_DAD_STATE = IpDadStatePreferred;
-ENUM!{enum NL_LINK_LOCAL_ADDRESS_BEHAVIOR {
-    LinkLocalAlwaysOff = 0,
-    LinkLocalDelayed = 1,
-    LinkLocalAlwaysOn = 2,
-    LinkLocalUnchanged = -1
-}}
-ENUM!{enum NL_ROUTER_DISCOVERY_BEHAVIOR {
-    RouterDiscoveryDisabled = 0,
-    RouterDiscoveryEnabled = 1,
-    RouterDiscoveryDhcp = 2,
-    RouterDiscoveryUnchanged = -1,
-}}
-STRUCT!{struct NL_INTERFACE_OFFLOAD_ROD {
-    bitfield: BYTE,
-}}
-BITFIELD!{NL_INTERFACE_OFFLOAD_ROD bitfield: BYTE [
-    NlChecksumSupported set_NlChecksumSupported[0..1],
-    NlOptionsSupported set_NlOptionsSupported [1..2],
-    TlDatagramChecksumSupported set_TlDatagramChecksumSupported: [2..3],
-    TlStreamChecksumSupported set_TlStreamChecksumSupported: [3..4],
-    TlStreamOptionsSupported set_TlStreamOptionsSupported: [4..5],
-    FastPathCompatible set_FastPathCompatible: [5..6],
-    TlLargeSendOffloadSupported set_TlLargeSendOffloadSupported: [6..7],
-    TlGiantSendOffloadSupported set_TlGiantSendOffloadSupported: [7..8]
-]}
 pub const NL_MAX_METRIC_COMPONENT: ULONG = (1u32 << 31) - 1;
 ENUM!{enum NL_ROUTE_PROTOCOL {
     RouteProtocolOther = 1,
@@ -170,12 +145,12 @@ ENUM!{enum NL_LINK_LOCAL_ADDRESS_BEHAVIOR {
     LinkLocalAlwaysOff = 0,
     LinkLocalDelayed = 1,
     LinkLocalAlwaysOn = 2,
-    LinkLocalUnchanged = -1,
+    LinkLocalUnchanged = -1i32 as u32,
 }}
 STRUCT!{struct NL_INTERFACE_OFFLOAD_ROD {
-    Bitfield: BOOLEAN,
+    bitfield: BOOLEAN,
 }}
-BITFIELD!{NL_INTERFACE_OFFLOAD_ROD Bitfield: BOOLEAN [
+BITFIELD!{NL_INTERFACE_OFFLOAD_ROD bitfield: BOOLEAN [
     NlChecksumSupported set_NlChecksumSupported[0..1],
     NlOptionsSupported set_NlOptionsSupported[1..2],
     TlDatagramChecksumSupported set_TlDatagramChecksumSupported[2..3],
@@ -190,12 +165,12 @@ ENUM!{enum NL_ROUTER_DISCOVERY_BEHAVIOR {
     RouterDiscoveryDisabled = 0,
     RouterDiscoveryEnabled = 1,
     RouterDiscoveryDhcp = 2,
-    RouterDiscoveryUnchanged = -1,
+    RouterDiscoveryUnchanged = -1i32 as u32,
 }}
 ENUM!{enum NL_BANDWIDTH_FLAG {
     NlbwDisabled = 0,
     NlbwEnabled = 1,
-    NlbwUnchanged = -1,
+    NlbwUnchanged = -1i32 as u32,
 }}
 pub type PNL_BANDWIDTH_FLAG = *mut NL_BANDWIDTH_FLAG;
 STRUCT!{struct NL_PATH_BANDWIDTH_ROD {
@@ -208,8 +183,8 @@ ENUM!{enum NL_NETWORK_CATEGORY {
     NetworkCategoryPublic = 0,
     NetworkCategoryPrivate = 1,
     NetworkCategoryDomainAuthenticated = 2,
-    NetworkCategoryUnchanged = -1,
-    NetworkCategoryUnknown = -1,
+    NetworkCategoryUnchanged = -1i32 as u32,
+    NetworkCategoryUnknown = -1i32 as u32,
 }}
 pub type PNL_NETWORK_CATEGORY = *mut NL_NETWORK_CATEGORY;
 ENUM!{enum NL_INTERFACE_NETWORK_CATEGORY_STATE {

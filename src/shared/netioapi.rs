@@ -3,27 +3,28 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::basetsd::{SIZE_T, PUINT8, UINT8, ULONG64};
+use shared::basetsd::{PUINT8, SIZE_T, UINT8, ULONG64};
 use shared::guiddef::GUID;
 use shared::ifdef::{
     IF_MAX_PHYS_ADDRESS_LENGTH, IF_MAX_STRING_SIZE, IF_OPER_STATUS, NET_IFINDEX,
     NET_IF_ACCESS_TYPE, NET_IF_ADMIN_STATUS, NET_IF_COMPARTMENT_ID, NET_IF_COMPARTMENT_SCOPE,
-    NET_IF_DIRECTION_TYPE, NET_IF_MEDIA_CONNECT_STATE, NET_IF_NETWORK_GUID, NET_LUID, PNET_IFINDEX,
-    PNET_IF_COMPARTMENT_ID, PNET_IF_COMPARTMENT_SCOPE, PNET_LUID, TUNNEL_TYPE,
+    NET_IF_CONNECTION_TYPE, NET_IF_DIRECTION_TYPE, NET_IF_MEDIA_CONNECT_STATE, NET_IF_NETWORK_GUID,
+    NET_LUID, PNET_IFINDEX, PNET_IF_COMPARTMENT_ID, PNET_IF_COMPARTMENT_SCOPE, PNET_LUID,
+    TUNNEL_TYPE,
 };
-use shared::minwindef::{BYTE, DWORD, PULONG, UCHAR, ULONG};
+use shared::minwindef::{BYTE, DWORD, PULONG, UCHAR, ULONG, USHORT};
 use shared::nldef::{
     NL_BANDWIDTH_INFORMATION, NL_DAD_STATE, NL_INTERFACE_OFFLOAD_ROD,
     NL_LINK_LOCAL_ADDRESS_BEHAVIOR, NL_NEIGHBOR_STATE, NL_PREFIX_ORIGIN,
     NL_ROUTER_DISCOVERY_BEHAVIOR, NL_ROUTE_ORIGIN, NL_ROUTE_PROTOCOL, NL_SUFFIX_ORIGIN,
 };
-use shared::ntddndis::{NDIS_IF_MAX_STRING_SIZE, NDIS_MEDIUM, NDIS_PHYSICAL_MEDIUM};
+use shared::ntddndis::{NDIS_MEDIUM, NDIS_PHYSICAL_MEDIUM};
 use shared::ntdef::{
     BOOLEAN, CHAR, HANDLE, LARGE_INTEGER, PCHAR, PCSTR, PSTR, PVOID, PWCHAR, PWSTR, VOID, WCHAR,
 };
-use shared::ws2def::{ADDRESS_FAMILY, SCOPE_ID};
-use shared::ws2ipdef::SOCKADDR_INET;
-pub use um::winnt::ANYSIZE_ARRAY as ANY_SIZE;
+use shared::ws2def::{ADDRESS_FAMILY, SCOPE_ID, ScopeLevelCount};
+use shared::ws2ipdef::{PSOCKADDR_IN6_PAIR, SOCKADDR_IN6, SOCKADDR_INET};
+const ANY_SIZE: usize = 1;
 pub type NETIO_STATUS = DWORD;
 pub type NETIOAPI_API = NETIO_STATUS;
 ENUM!{enum MIB_NOTIFICATION_TYPE {
@@ -38,13 +39,13 @@ STRUCT!{struct MIB_IF_ROW2_InterfaceAndOperStatusFlags {
 }}
 BITFIELD!{MIB_IF_ROW2_InterfaceAndOperStatusFlags bitfield: BYTE [
     HardwareInterface set_HardwareInterface[0..1],
-    FilterInterface set_FilterInterface: [1..2],
-    ConnectorPresent set_ConnectorPresent: [2..3],
-    NotAuthenticated set_NotAuthenticated: [3..4],
-    NotMediaConnected set_NotMediaConnected: [4..5],
-    Paused set_Paused: [5..6],
-    LowPower set_LowPower: [6..7],
-    EndPointInterface set_LowPower: [7..8],
+    FilterInterface set_FilterInterface[1..2],
+    ConnectorPresent set_ConnectorPresent[2..3],
+    NotAuthenticated set_NotAuthenticated[3..4],
+    NotMediaConnected set_NotMediaConnected[4..5],
+    Paused set_Paused[5..6],
+    LowPower set_LowPower[6..7],
+    EndPointInterface set_EndPointInterface[7..8],
 ]}
 STRUCT!{struct MIB_IF_ROW2 {
     InterfaceLuid: NET_LUID,
@@ -60,8 +61,8 @@ STRUCT!{struct MIB_IF_ROW2 {
     TunnelType: TUNNEL_TYPE, // Tunnel Type, if Type = IF_TUNNEL.
     MediaType: NDIS_MEDIUM,
     PhysicalMediumType: NDIS_PHYSICAL_MEDIUM,
-    AccessType NET_IF_ACCESS_TYPE,
-    DirectionType NET_IF_DIRECTION_TYPE,
+    AccessType: NET_IF_ACCESS_TYPE,
+    DirectionType: NET_IF_DIRECTION_TYPE,
     InterfaceAndOperStatusFlags: MIB_IF_ROW2_InterfaceAndOperStatusFlags,
     OperStatus: IF_OPER_STATUS,
     AdminStatus: NET_IF_ADMIN_STATUS,
@@ -95,9 +96,11 @@ STRUCT!{struct MIB_IF_TABLE2 {
     Table: [MIB_IF_ROW2; ANY_SIZE],
 }}
 pub type PMIB_IF_TABLE2 = *mut MIB_IF_TABLE2;
-extern "system" pub fn GetIfEntry2(
-    Row: PMIB_IF_ROW2,
-) -> NETIOAPI_API;
+extern "system" {
+    pub fn GetIfEntry2(
+        Row: PMIB_IF_ROW2,
+    ) -> NETIOAPI_API;
+}
 ENUM!{enum MIB_IF_ENTRY_LEVEL {
     MibIfEntryNormal = 0,
     MibIfEntryNormalWithoutStatistics = 2,
@@ -148,7 +151,7 @@ STRUCT!{struct MIB_IPINTERFACE_ROW {
     PathMtuDiscoveryTimeout: ULONG, // Path MTU discovery timeout (in ms).
     LinkLocalAddressBehavior: NL_LINK_LOCAL_ADDRESS_BEHAVIOR,
     LinkLocalAddressTimeout: ULONG, // In ms.
-    ZoneIndices: [ULONG; ScopeLevelCount], // Zone part of a SCOPE_ID.
+    ZoneIndices: [ULONG; ScopeLevelCount as usize], // Zone part of a SCOPE_ID.
     SitePrefixLength: ULONG,
     Metric: ULONG,
     NlMtu: ULONG,
@@ -370,7 +373,7 @@ STRUCT!{struct MIB_IPFORWARD_ROW2 {
 pub type PMIB_IPFORWARD_ROW2 = *mut MIB_IPFORWARD_ROW2;
 STRUCT!{struct MIB_IPFORWARD_TABLE2 {
     NumEntries: ULONG,
-    Table: [MIB_IPFORWARD_ROW2; ANY_SIZE]
+    Table: [MIB_IPFORWARD_ROW2; ANY_SIZE],
 }}
 pub type PMIB_IPFORWARD_TABLE2 = *mut MIB_IPFORWARD_TABLE2;
 FN!{stdcall PIPFORWARD_CHANGE_CALLBACK(
@@ -393,7 +396,7 @@ extern "system" {
         AddressSortOptions: ULONG,
         BestRoute: PMIB_IPFORWARD_ROW2,
         BestSourceAddress: *mut SOCKADDR_INET,
-    ) - > NETIOAPI_API;
+    ) -> NETIOAPI_API;
     pub fn GetIpForwardEntry2(
         Row: PMIB_IPFORWARD_ROW2,
     ) -> NETIOAPI_API;
@@ -417,8 +420,8 @@ extern "system" {
 }
 UNION!{union MIB_IPPATH_ROW_u {
     [u32; 1],
-    LastReachable: ULONG, // Milliseconds.
-    LastUnreachable: ULONG, // Milliseconds.
+    LastReachable LastReachable_mut: ULONG, // Milliseconds.
+    LastUnreachable LastUnreachable_mut: ULONG, // Milliseconds.
 }}
 STRUCT!{struct MIB_IPPATH_ROW {
     Source: SOCKADDR_INET,
@@ -467,10 +470,10 @@ UNION!{union MIB_IPNET_ROW2_ReachabilityTime {
 }}
 STRUCT!{struct MIB_IPNET_ROW2 {
     Address: SOCKADDR_INET,
-    InterfaceIndex NET_IFINDEX,
-    InterfaceLuid NET_LUID,
+    InterfaceIndex: NET_IFINDEX,
+    InterfaceLuid: NET_LUID,
     PhysicalAddress: [UCHAR; IF_MAX_PHYS_ADDRESS_LENGTH],
-    PhysicalAddressLength ULONG,
+    PhysicalAddressLength: ULONG,
     State: NL_NEIGHBOR_STATE,
     s: MIB_IPNET_ROW2_s,
     ReachabilityTime: MIB_IPNET_ROW2_ReachabilityTime,
@@ -507,7 +510,7 @@ extern "system" {
         Row: PMIB_IPNET_ROW2,
     ) -> NETIOAPI_API;
 }
-const MIB_INVALID_TEREDO_PORT_NUMBER: USHORT = 0;
+pub const MIB_INVALID_TEREDO_PORT_NUMBER: USHORT = 0;
 FN!{stdcall PTEREDO_PORT_CHANGE_CALLBACK(
     CallerContext: PVOID,
     Port: USHORT,
@@ -529,16 +532,15 @@ extern "system" {
     pub fn FreeMibTable(
         Memory: PVOID,
     );
-    // FIXME:
-    // pub fn CreateSortedAddressPairs(
-    //     const PSOCKADDR_IN6 SourceAddressList,
-    //     ULONG SourceAddressCount,
-    //     const PSOCKADDR_IN6 DestinationAddressList,
-    //     ULONG DestinationAddressCount,
-    //     ULONG AddressSortOptions,
-    //     PSOCKADDR_IN6_PAIR *SortedAddressPairList,
-    //     ULONG *SortedAddressPairCoun
-    // ) -> NETIOAPI_API;
+    pub fn CreateSortedAddressPairs(
+        SourceAddressList: *const SOCKADDR_IN6,
+        SourceAddressCount: ULONG,
+        DestinationAddressList: *const SOCKADDR_IN6,
+        DestinationAddressCount: ULONG,
+        AddressSortOptions: ULONG,
+        SortedAddressPairList: *mut PSOCKADDR_IN6_PAIR,
+        SortedAddressPairCount: *mut ULONG,
+    ) -> NETIOAPI_API;
     pub fn ConvertCompartmentGuidToId(
         CompartmentGuid: *const GUID,
         CompartmentId: PNET_IF_COMPARTMENT_ID,
@@ -650,7 +652,7 @@ pub const DNS_SETTING_IPV6: ULONG64 = 0x0001;
 pub const DNS_SETTING_NAMESERVER: ULONG64 = 0x0002;
 pub const DNS_SETTING_SEARCHLIST: ULONG64 = 0x0004;
 pub const DNS_SETTING_REGISTRATION_ENABLED: ULONG64 = 0x0008;
-pub const DNS_SETTING_REGISTER_ADAPTER_NAME: ULONG64 = 0x0010
+pub const DNS_SETTING_REGISTER_ADAPTER_NAME: ULONG64 = 0x0010;
 pub const DNS_SETTING_DOMAIN: ULONG64 = 0x0020;
 pub const DNS_SETTING_HOSTNAME: ULONG64 = 0x0040;
 pub const DNS_SETTINGS_ENABLE_LLMNR: ULONG64 = 0x0080;
