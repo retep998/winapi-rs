@@ -8,57 +8,53 @@
 // #include <inaddr.h>
 use shared::basetsd::ULONG64;
 use shared::in6addr::in6_addr;
-use shared::ntdef::{INT, UCHAR, ULONG, USHORT, WCHAR};
+use shared::ntdef::{INT, PUCHAR, PVOID, UCHAR, ULONG, USHORT, WCHAR};
 pub const MAX_ADAPTER_NAME: usize = 128;
 pub const MAX_OPT_SIZE: usize = 40;
 pub type IPAddr = ULONG;
 pub type IPMask = ULONG;
 pub type IP_STATUS = ULONG;
 pub type IPv6Addr = in6_addr;
-// STRUCT!{struct IP_OPTION_INFORMATION {
-//     Ttl: UCHAR,
-//     Tos: UCHAR,
-//     Flags: UCHAR,
-//     OptionsSize: UCHAR,
-//     // _Field_size_bytes_(OptionsSize)
-//     OptionsData: PUCHAR,
-// }}
-// pub type PIP_OPTION_INFORMATION = *mut IP_OPTION_INFORMATION;
-// #if defined(_WIN64)
-// STRUCT!{struct IP_OPTION_INFORMATION32 {
-//     Ttl: UCHAR,
-//     Tos: UCHAR,
-//     Flags: UCHAR,
-//     OptionsSize: UCHAR,
-//     // UCHAR * POINTER_32 OptionsData,
-// }}
-// pub type PIP_OPTION_INFORMATION32 = *mut IP_OPTION_INFORMATION32;
-// #endif // _WIN64
-// STRUCT!{struct ICMP_ECHO_REPLY {
-//     Address: IPAddr,
-//     Status: ULONG,
-//     RoundTripTime: ULONG,
-//     DataSize: USHORT,
-//     Reserved: USHORT,
-//     // _Field_size_bytes_(DataSize)
-//     Data: PVOID,
-//     Options: ip_option_information,
-// }}
-// pub type PICMP_ECHO_REPLY = *mut ICMP_ECHO_REPLY;
-// #if defined(_WIN64)
-// STRUCT!{struct ICMP_ECHO_REPLY32 {
-//     Address: IPAddr,
-//     Status: ULONG,
-//     RoundTripTime: ULONG,
-//     DataSize: USHORT,
-//     Reserved: USHORT,
-//     // VOID * POINTER_32 Data;
-//     Options: ip_option_information32,
-// }}
-// pub type PICMP_ECHO_REPLY32 = *mut ICMP_ECHO_REPLY32;
-// #endif // _WIN64
-// #if (NTDDI_VERSION >= NTDDI_WINXP)
-// #include <packon.h>
+STRUCT!{struct IP_OPTION_INFORMATION {
+    Ttl: UCHAR,
+    Tos: UCHAR,
+    Flags: UCHAR,
+    OptionsSize: UCHAR,
+    OptionsData: PUCHAR,
+}}
+pub type PIP_OPTION_INFORMATION = *mut IP_OPTION_INFORMATION;
+#[cfg(target_arch = "x86_64")]
+STRUCT!{struct IP_OPTION_INFORMATION32 {
+    Ttl: UCHAR,
+    Tos: UCHAR,
+    Flags: UCHAR,
+    OptionsSize: UCHAR,
+    OptionsData: *mut UCHAR,
+}}
+#[cfg(target_arch = "x86_64")]
+pub type PIP_OPTION_INFORMATION32 = *mut IP_OPTION_INFORMATION32;
+STRUCT!{struct ICMP_ECHO_REPLY {
+    Address: IPAddr,
+    Status: ULONG,
+    RoundTripTime: ULONG,
+    DataSize: USHORT,
+    Reserved: USHORT,
+    Data: PVOID,
+    Options: IP_OPTION_INFORMATION,
+}}
+pub type PICMP_ECHO_REPLY = *mut ICMP_ECHO_REPLY;
+#[cfg(target_arch = "x86_64")]
+STRUCT!{struct ICMP_ECHO_REPLY32 {
+    Address: IPAddr,
+    Status: ULONG,
+    RoundTripTime: ULONG,
+    DataSize: USHORT,
+    Reserved: USHORT,
+    Data: PVOID,
+    Options: IP_OPTION_INFORMATION32,
+}}
+#[cfg(target_arch = "x86_64")]
+pub type PICMP_ECHO_REPLY32 = *mut ICMP_ECHO_REPLY32;
 STRUCT!{struct IPV6_ADDRESS_EX {
     sin6_port: USHORT,
     sin6_flowinfo: ULONG,
