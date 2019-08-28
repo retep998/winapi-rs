@@ -104,7 +104,7 @@ pub const NWF_OPERATIONAL_OID: u32 = 0x01;
 pub const NWF_STATISTICS_OID: u32 = 0x02;
 #[inline]
 pub fn NWF_DEFINE_OID(Seq: u32, o: u32, m: u32) -> u32 {
-    0x0E000000 | o << 16 | m << 8 | Seq
+    0x0E000000 | (o << 16) | (m << 8) | Seq
 }
 macro_rules! NWF_DEFINE_OID {
     ($Seq:expr, $o:expr, $m:expr) => { 0x0E000000 | $o << 16 | $m << 8 | $Seq };
