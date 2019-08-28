@@ -3924,8 +3924,6 @@ fn um_iphlpapi() {
     assert_eq!(align_of::<INTERFACE_TIMESTAMP_CAPABILITIES>(), 8);
     assert_eq!(size_of::<INTERFACE_HARDWARE_CROSSTIMESTAMP>(), 32);
     assert_eq!(align_of::<INTERFACE_HARDWARE_CROSSTIMESTAMP>(), 8);
-    assert_eq!(size_of::<HIFTIMESTAMPCHANGE__>(), 4);
-    assert_eq!(align_of::<HIFTIMESTAMPCHANGE__>(), 4);
     assert_eq!(size_of::<NET_ADDRESS_INFO>(), 528);
     assert_eq!(align_of::<NET_ADDRESS_INFO>(), 4);
 }
