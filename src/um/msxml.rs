@@ -465,7 +465,8 @@ interface IXMLDOMComment(IXMLDOMCommentVtbl): IXMLDOMCharacterData(IXMLDOMCharac
 DEFINE_GUID!{IID_IXMLDOMProcessingInstruction,
     0x2933bf89, 0x7b36, 0x11d2, 0xb2, 0x0e, 0x00, 0xc0, 0x4f, 0x98, 0x3e, 0x60}
 RIDL!{#[uuid(0x2933bf89, 0x7b36, 0x11d2, 0xb2, 0x0e, 0x00, 0xc0, 0x4f, 0x98, 0x3e, 0x60)]
-interface IXMLDOMProcessingInstruction(IXMLDOMProcessingInstructionVtbl): IXMLDOMNode(IXMLDOMNodeVtbl) {
+interface IXMLDOMProcessingInstruction(IXMLDOMProcessingInstructionVtbl):
+IXMLDOMNode(IXMLDOMNodeVtbl) {
     fn target(
         name: *mut BSTR,
     ) -> HRESULT,
