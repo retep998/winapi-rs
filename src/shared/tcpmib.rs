@@ -4,20 +4,12 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 // #include <winapifamily.h>
-use core::mem;
-use core::ptr;
 use shared::basetsd::DWORD64;
 use shared::in6addr::IN6_ADDR;
 use shared::minwindef::DWORD;
 use shared::ntdef::{LARGE_INTEGER, UCHAR, ULONGLONG};
-use um::rtinfo::ALIGN_SIZE;
-pub const TCPIP_OWNING_MODULE_SIZE: usize = 16;
 const ANY_SIZE: usize = 1;
-macro_rules! offset_of_table {
-    ($container:ty) => (unsafe {
-        &(*(ptr::null() as *const $container)).table[0] as *const _ as usize
-    })
-}
+pub const TCPIP_OWNING_MODULE_SIZE: usize = 16;
 ENUM!{enum MIB_TCP_STATE {
     MIB_TCP_STATE_CLOSED = 1,
     MIB_TCP_STATE_LISTEN = 2,
@@ -64,10 +56,7 @@ STRUCT!{struct MIB_TCPTABLE {
     table: [MIB_TCPROW; ANY_SIZE],
 }}
 pub type PMIB_TCPTABLE = *mut MIB_TCPTABLE;
-#[inline]
-pub fn SIZEOF_TCPTABLE(num: usize) -> usize {
-    offset_of_table!(MIB_TCPTABLE) + num * mem::size_of::<MIB_TCPROW>() + ALIGN_SIZE
-}
+// FIXME: SIZEOF_TCPTABLE(x)
 STRUCT!{struct MIB_TCPROW2 {
     dwState: DWORD,
     dwLocalAddr: DWORD,
@@ -83,10 +72,7 @@ STRUCT!{struct MIB_TCPTABLE2 {
     table: [MIB_TCPROW2; ANY_SIZE],
 }}
 pub type PMIB_TCPTABLE2 = *mut MIB_TCPTABLE2;
-#[inline]
-pub fn SIZEOF_TCPTABLE2(num: usize) -> usize {
-    offset_of_table!(MIB_TCPTABLE2) + num * mem::size_of::<MIB_TCPROW2>() + ALIGN_SIZE
-}
+// FIXME: SIZEOF_TCPTABLE2(x)
 STRUCT!{struct MIB_TCPROW_OWNER_PID {
     dwState: DWORD,
     dwLocalAddr: DWORD,
@@ -101,11 +87,7 @@ STRUCT!{struct MIB_TCPTABLE_OWNER_PID {
     table: [MIB_TCPROW_OWNER_PID; ANY_SIZE],
 }}
 pub type PMIB_TCPTABLE_OWNER_PID = *mut MIB_TCPTABLE_OWNER_PID;
-#[inline]
-pub fn SIZEOF_TCPTABLE_OWNER_PID(num: usize) -> usize {
-    offset_of_table!(MIB_TCPTABLE_OWNER_PID) + num * mem::size_of::<MIB_TCPROW_OWNER_PID>()
-        + ALIGN_SIZE
-}
+// FIXME: SIZEOF_TCPTABLE_OWNER_PID(x)
 STRUCT!{struct MIB_TCPROW_OWNER_MODULE {
     dwState: DWORD,
     dwLocalAddr: DWORD,
@@ -122,11 +104,7 @@ STRUCT!{struct MIB_TCPTABLE_OWNER_MODULE {
     table: [MIB_TCPROW_OWNER_MODULE; ANY_SIZE],
 }}
 pub type PMIB_TCPTABLE_OWNER_MODULE = *mut MIB_TCPTABLE_OWNER_MODULE;
-#[inline]
-pub fn SIZEOF_TCPTABLE_OWNER_MODULE(num: usize) -> usize {
-    offset_of_table!(MIB_TCPTABLE_OWNER_MODULE) + num * mem::size_of::<MIB_TCPROW_OWNER_MODULE>()
-        + ALIGN_SIZE
-}
+// FIXME: SIZEOF_TCPTABLE_OWNER_MODULE(x)
 STRUCT!{struct MIB_TCP6ROW {
     State: MIB_TCP_STATE,
     LocalAddr: IN6_ADDR,
@@ -142,10 +120,7 @@ STRUCT!{struct MIB_TCP6TABLE {
     table: [MIB_TCP6ROW; ANY_SIZE],
 }}
 pub type PMIB_TCP6TABLE = *mut MIB_TCP6TABLE;
-#[inline]
-pub fn SIZEOF_TCP6TABLE(num: usize) -> usize {
-    offset_of_table!(MIB_TCP6TABLE) + num * mem::size_of::<MIB_TCP6ROW>() + ALIGN_SIZE
-}
+// FIXME: SIZEOF_TCP6TABLE(x)
 STRUCT!{struct MIB_TCP6ROW2 {
     LocalAddr: IN6_ADDR,
     dwLocalScopeId: DWORD,
@@ -163,10 +138,7 @@ STRUCT!{struct MIB_TCP6TABLE2 {
     table: [MIB_TCP6ROW2; ANY_SIZE],
 }}
 pub type PMIB_TCP6TABLE2 = *mut MIB_TCP6TABLE2;
-#[inline]
-pub fn SIZEOF_TCP6TABLE2(num: usize) -> usize {
-    offset_of_table!(MIB_TCP6TABLE2) + num * mem::size_of::<MIB_TCP6ROW2>() + ALIGN_SIZE
-}
+// FIXME: SIZEOF_TCP6TABLE2(x)
 STRUCT!{struct MIB_TCP6ROW_OWNER_PID {
     ucLocalAddr: [UCHAR; 16],
     dwLocalScopeId: DWORD,
@@ -183,11 +155,7 @@ STRUCT!{struct MIB_TCP6TABLE_OWNER_PID {
     table: [MIB_TCP6ROW_OWNER_PID; ANY_SIZE],
 }}
 pub type PMIB_TCP6TABLE_OWNER_PID = *mut MIB_TCP6TABLE_OWNER_PID;
-#[inline]
-pub fn SIZEOF_TCP6TABLE_OWNER_PID(num: usize) -> usize {
-    offset_of_table!(MIB_TCP6TABLE_OWNER_PID) + num * mem::size_of::<MIB_TCP6ROW_OWNER_PID>()
-        + ALIGN_SIZE
-}
+// FIXME: SIZEOF_TCP6TABLE_OWNER_PID(x)
 STRUCT!{struct MIB_TCP6ROW_OWNER_MODULE {
     ucLocalAddr: [UCHAR; 16],
     dwLocalScopeId: DWORD,
@@ -206,11 +174,7 @@ STRUCT!{struct MIB_TCP6TABLE_OWNER_MODULE {
     table: [MIB_TCP6ROW_OWNER_MODULE; ANY_SIZE],
 }}
 pub type PMIB_TCP6TABLE_OWNER_MODULE = *mut MIB_TCP6TABLE_OWNER_MODULE;
-#[inline]
-pub fn SIZEOF_TCP6TABLE_OWNER_MODULE(num: usize) -> usize {
-    offset_of_table!(MIB_TCP6TABLE_OWNER_MODULE) + num * mem::size_of::<MIB_TCP6ROW_OWNER_MODULE>()
-        + ALIGN_SIZE
-}
+// FIXME: SIZEOF_TCP6TABLE_OWNER_MODULE(x)
 ENUM!{enum TCP_RTO_ALGORITHM {
     TcpRtoAlgorithmOther = 1,
     TcpRtoAlgorithmConstant = 2,

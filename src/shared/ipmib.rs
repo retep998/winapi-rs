@@ -3,20 +3,12 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use core::mem;
-use core::ptr;
 use shared::ifdef::IF_INDEX;
 use shared::ifmib::MAXLEN_PHYSADDR;
 use shared::minwindef::DWORD;
 use shared::nldef::NL_ROUTE_PROTOCOL;
 use shared::ntdef::{PVOID, UCHAR, ULONG, USHORT};
-use um::rtinfo::ALIGN_SIZE;
 const ANY_SIZE: usize = 1;
-macro_rules! offset_of_table {
-    ($container:ty) => (unsafe {
-        &(*(ptr::null() as *const $container)).table[0] as *const _ as usize
-    })
-}
 STRUCT!{struct MIB_IPADDRROW_XP {
     dwAddr: DWORD,
     dwIndex: IF_INDEX,
@@ -44,10 +36,7 @@ STRUCT!{struct MIB_IPADDRTABLE {
     table: [MIB_IPADDRROW; ANY_SIZE],
 }}
 pub type PMIB_IPADDRTABLE = *mut MIB_IPADDRTABLE;
-#[inline]
-pub fn SIZEOF_IPADDRTABLE(num: usize) -> usize {
-    offset_of_table!(MIB_IPADDRTABLE) + num * mem::size_of::<MIB_IPADDRROW>() + ALIGN_SIZE
-}
+// FIXME: SIZEOF_IPADDRTABLE(x)
 STRUCT!{struct MIB_IPFORWARDNUMBER {
     dwValue: DWORD,
 }}
@@ -81,10 +70,7 @@ STRUCT!{struct MIB_IPFORWARDTABLE {
     table: [MIB_IPFORWARDROW; ANY_SIZE],
 }}
 pub type PMIB_IPFORWARDTABLE = *mut MIB_IPFORWARDTABLE;
-#[inline]
-pub fn SIZEOF_IPFORWARDTABLE(num: usize) -> usize {
-    offset_of_table!(MIB_IPFORWARDTABLE) + num * mem::size_of::<MIB_IPFORWARDROW>() + ALIGN_SIZE
-}
+// FIXME: SIZEOF_IPFORWARDTABLE(x)
 ENUM!{enum MIB_IPNET_TYPE {
     MIB_IPNET_TYPE_OTHER = 1,
     MIB_IPNET_TYPE_INVALID = 2,
@@ -114,10 +100,7 @@ STRUCT!{struct MIB_IPNETTABLE {
     table: [MIB_IPNETROW; ANY_SIZE],
 }}
 pub type PMIB_IPNETTABLE = *mut MIB_IPNETTABLE;
-#[inline]
-pub fn SIZEOF_IPNETTABLE(num: usize) -> usize {
-    offset_of_table!(MIB_IPNETTABLE) + num * mem::size_of::<MIB_IPNETROW>() + ALIGN_SIZE
-}
+// FIXME: SIZEOF_IPNETTABLE(x)
 ENUM!{enum MIB_IPSTATS_FORWARDING {
     MIB_IP_FORWARDING = 1,
     MIB_IP_NOT_FORWARDING = 2,
@@ -290,6 +273,8 @@ STRUCT!{struct MIB_MFE_TABLE {
     table: [MIB_IPMCAST_MFE; ANY_SIZE],
 }}
 pub type PMIB_MFE_TABLE = *mut MIB_MFE_TABLE;
+// FIXME: SIZEOF_BASIC_MIB_MFE
+// FIXME: SIZEOF_MIB_MFE(x)
 STRUCT!{struct MIB_IPMCAST_OIF_STATS_LH {
     dwOutIfIndex: DWORD,
     dwNextHopAddr: DWORD,
@@ -337,6 +322,8 @@ STRUCT!{struct MIB_MFE_STATS_TABLE {
     table: [MIB_IPMCAST_MFE_STATS; ANY_SIZE],
 }}
 pub type PMIB_MFE_STATS_TABLE = *mut MIB_MFE_STATS_TABLE;
+// FIXME: SIZEOF_BASIC_MIB_MFE_STATS
+// FIXME: SIZEOF_MIB_MFE_STATS(x)
 STRUCT!{struct MIB_IPMCAST_MFE_STATS_EX_XP {
     dwGroup: DWORD,
     dwSource: DWORD,
@@ -371,6 +358,8 @@ STRUCT!{struct MIB_MFE_STATS_TABLE_EX_XP {
 pub type PMIB_MFE_STATS_TABLE_EX_XP = *mut MIB_MFE_STATS_TABLE_EX_XP;
 pub type MIB_MFE_STATS_TABLE_EX = MIB_MFE_STATS_TABLE_EX_XP;
 pub type PMIB_MFE_STATS_TABLE_EX = *mut MIB_MFE_STATS_TABLE_EX;
+// FIXME: SIZEOF_BASIC_MIB_MFE_STATS_EX
+// FIXME: SIZEOF_MIB_MFE_STATS_EX(x)
 STRUCT!{struct MIB_IPMCAST_GLOBAL {
     dwEnable: DWORD,
 }}
@@ -389,8 +378,4 @@ STRUCT!{struct MIB_IPMCAST_IF_TABLE {
     table: [MIB_IPMCAST_IF_ENTRY; ANY_SIZE],
 }}
 pub type PMIB_IPMCAST_IF_TABLE = *mut MIB_IPMCAST_IF_TABLE;
-#[inline]
-pub fn SIZEOF_MCAST_IF_TABLE(num: usize) -> usize {
-    offset_of_table!(MIB_IPMCAST_IF_TABLE) + num * mem::size_of::<MIB_IPMCAST_IF_ENTRY>()
-        + ALIGN_SIZE
-}
+// FIXME: SIZEOF_MCAST_IF_TABLE(x)
