@@ -21,15 +21,11 @@ ENUM!{enum NDIS_MEDIUM {
     NdisMediumCoWan = 12,
     NdisMedium1394 = 13,
     NdisMediumInfiniBand = 14,
-// #if ((NTDDI_VERSION >= NTDDI_VISTA) || NDIS_SUPPORT_NDIS6)
     NdisMediumTunnel = 15,
     NdisMediumNative802_11 = 16,
     NdisMediumLoopback = 17,
-// #endif // (NTDDI_VERSION >= NTDDI_VISTA)
-// #if (NTDDI_VERSION >= NTDDI_WIN7)
     NdisMediumWiMAX = 18,
     NdisMediumIP = 19,
-// #endif
     NdisMediumMax = 20, // Not a real medium, defined as an upper-bound
 }}
 pub type PNDIS_MEDIUM = *mut NDIS_MEDIUM;

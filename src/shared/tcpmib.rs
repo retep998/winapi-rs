@@ -258,11 +258,8 @@ STRUCT!{struct MIB_TCPSTATS_W2K {
     dwNumConns: DWORD,
 }}
 pub type PMIB_TCPSTATS_W2K = *mut MIB_TCPSTATS_W2K;
-// Windows Vista
-// pub type MIB_TCPSTATS = MIB_TCPSTATS_LH;
-pub type MIB_TCPSTATS = MIB_TCPSTATS_W2K;
+pub type MIB_TCPSTATS = MIB_TCPSTATS_LH;
 pub type PMIB_TCPSTATS = *mut MIB_TCPSTATS;
-// if NTDDI_VERSION >= NTDDI_WIN10_RS3
 STRUCT!{struct MIB_TCPSTATS2 {
     RtoAlgorithm: TCP_RTO_ALGORITHM,
     dwRtoMin: DWORD,
