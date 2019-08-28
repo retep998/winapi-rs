@@ -8567,6 +8567,10 @@ fn um_winsvc() {
     assert_eq!(align_of::<QUERY_SERVICE_CONFIGA>(), 8);
     assert_eq!(size_of::<QUERY_SERVICE_CONFIGW>(), 64);
     assert_eq!(align_of::<QUERY_SERVICE_CONFIGW>(), 8);
+    assert_eq!(size_of::<SERVICE_DESCRIPTIONA>(), 8);
+    assert_eq!(align_of::<SERVICE_DESCRIPTIONA>(), 8);
+    assert_eq!(size_of::<SERVICE_DESCRIPTIONW>(), 8);
+    assert_eq!(align_of::<SERVICE_DESCRIPTIONW>(), 8);
     assert_eq!(size_of::<SERVICE_TABLE_ENTRYA>(), 16);
     assert_eq!(align_of::<SERVICE_TABLE_ENTRYA>(), 8);
     assert_eq!(size_of::<SERVICE_TABLE_ENTRYW>(), 16);
