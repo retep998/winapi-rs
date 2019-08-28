@@ -6,13 +6,10 @@
 //! Contains the public definitions and structures for the non-TCP/IP specific parts of MIB-II.
 // #include <winapifamily.h>
 // #include <ifdef.h>
-use core::mem;
-use core::ptr;
 use shared::ifdef::IF_INDEX;
 use shared::ipifcons::{IFTYPE, INTERNAL_IF_OPER_STATUS};
 use shared::minwindef::DWORD;
 use shared::ntdef::{UCHAR, WCHAR};
-use um::rtinfo::ALIGN_SIZE;
 const ANY_SIZE: usize = 1;
 STRUCT!{struct MIB_IFNUMBER {
     dwValue: DWORD,
@@ -53,10 +50,4 @@ STRUCT!{struct MIB_IFTABLE {
     table: [MIB_IFROW; ANY_SIZE],
 }}
 pub type PMIB_IFTABLE = *mut MIB_IFTABLE;
-#[inline]
-pub fn SIZEOF_IFTABLE(num: usize) -> usize {
-    let offset = unsafe {
-        &(*(ptr::null() as *const MIB_IFTABLE)).table[0] as *const _ as usize
-    };
-    offset + num * mem::size_of::<MIB_IFROW>() + ALIGN_SIZE
-}
+// FIXME: SIZEOF_IFTABLE(x)

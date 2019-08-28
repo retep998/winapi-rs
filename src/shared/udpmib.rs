@@ -5,20 +5,12 @@
 // except according to those terms.
 //! Contains the public definitions and structures for the UDP-specific parts of MIB-II
 // #include <winapifamily.h>
-use core::mem;
-use core::ptr;
 use shared::basetsd::DWORD64;
 use shared::in6addr::IN6_ADDR;
 use shared::minwindef::DWORD;
 use shared::ntdef::{INT, LARGE_INTEGER, UCHAR, ULONGLONG};
-use um::rtinfo::ALIGN_SIZE;
 const ANY_SIZE: usize = 1;
 pub const TCPIP_OWNING_MODULE_SIZE: usize = 16;
-macro_rules! offset_of_table {
-    ($container:ty) => (unsafe {
-        &(*(ptr::null() as *const $container)).table[0] as *const _ as usize
-    })
-}
 STRUCT!{struct MIB_UDPROW {
     dwLocalAddr: DWORD,
     dwLocalPort: DWORD,
@@ -29,10 +21,7 @@ STRUCT!{struct MIB_UDPTABLE {
     table: [MIB_UDPROW; ANY_SIZE],
 }}
 pub type PMIB_UDPTABLE = *mut MIB_UDPTABLE;
-#[inline]
-pub fn SIZEOF_UDPTABLE(num: usize) -> usize {
-    offset_of_table!(MIB_UDPTABLE) + num * mem::size_of::<MIB_UDPROW>() + ALIGN_SIZE
-}
+// FIXME: SIZEOF_UDPTABLE(x)
 STRUCT!{struct MIB_UDPROW_OWNER_PID {
     dwLocalAddr: DWORD,
     dwLocalPort: DWORD,
@@ -44,11 +33,7 @@ STRUCT!{struct MIB_UDPTABLE_OWNER_PID {
     table: [MIB_UDPROW_OWNER_PID; ANY_SIZE],
 }}
 pub type PMIB_UDPTABLE_OWNER_PID = *mut MIB_UDPTABLE_OWNER_PID;
-#[inline]
-pub fn SIZEOF_UDPTABLE_OWNER_PID(num: usize) -> usize {
-    offset_of_table!(MIB_UDPTABLE_OWNER_PID) + num * mem::size_of::<MIB_UDPROW_OWNER_PID>()
-        + ALIGN_SIZE
-}
+// FIXME: SIZEOF_UDPTABLE_OWNER_PID(x)
 STRUCT!{struct MIB_UDPROW_OWNER_MODULE_u_s {
     bitfield: INT,
 }}
@@ -74,11 +59,7 @@ STRUCT!{struct MIB_UDPTABLE_OWNER_MODULE {
     table: [MIB_UDPROW_OWNER_MODULE; ANY_SIZE],
 }}
 pub type PMIB_UDPTABLE_OWNER_MODULE = *mut MIB_UDPTABLE_OWNER_MODULE;
-#[inline]
-pub fn SIZEOF_UDPTABLE_OWNER_MODULE(num: usize) -> usize {
-    offset_of_table!(MIB_UDPTABLE_OWNER_MODULE) + num * mem::size_of::<MIB_UDPROW_OWNER_MODULE>()
-        + ALIGN_SIZE
-}
+// FIXME: SIZEOF_UDPTABLE_OWNER_MODULE(x)
 STRUCT!{struct MIB_UDP6ROW {
     dwLocalAddr: IN6_ADDR,
     dwLocalScopeId: DWORD,
@@ -90,10 +71,7 @@ STRUCT!{struct MIB_UDP6TABLE {
     table: [MIB_UDP6ROW; ANY_SIZE],
 }}
 pub type PMIB_UDP6TABLE = *mut MIB_UDP6TABLE;
-#[inline]
-pub fn SIZEOF_UDP6TABLE(num: usize) -> usize {
-    offset_of_table!(MIB_UDP6TABLE) + num * mem::size_of::<MIB_UDP6ROW>() + ALIGN_SIZE
-}
+// FIXME: SIZEOF_UDP6TABLE(x)
 STRUCT!{struct MIB_UDP6ROW_OWNER_PID {
     ucLocalAddr: [UCHAR; 16],
     dwLocalScopeId: DWORD,
@@ -106,11 +84,7 @@ STRUCT!{struct MIB_UDP6TABLE_OWNER_PID {
     table: [MIB_UDP6ROW_OWNER_PID; ANY_SIZE],
 }}
 pub type PMIB_UDP6TABLE_OWNER_PID = *mut MIB_UDP6TABLE_OWNER_PID;
-#[inline]
-pub fn SIZEOF_UDP6TABLE_OWNER_PID(num: usize) -> usize {
-    offset_of_table!(MIB_UDP6TABLE_OWNER_PID) + num * mem::size_of::<MIB_UDP6ROW_OWNER_PID>()
-        + ALIGN_SIZE
-}
+// FIXME: SIZEOF_UDP6TABLE_OWNER_PID(x)
 STRUCT!{struct MIB_UDP6ROW_OWNER_MODULE_u_s {
     bitfield: INT,
 }}
@@ -137,11 +111,7 @@ STRUCT!{struct MIB_UDP6TABLE_OWNER_MODULE {
     table: [MIB_UDP6ROW_OWNER_MODULE; ANY_SIZE],
 }}
 pub type PMIB_UDP6TABLE_OWNER_MODULE = *mut MIB_UDP6TABLE_OWNER_MODULE;
-#[inline]
-pub fn SIZEOF_UDP6TABLE_OWNER_MODULE(num: usize) -> usize {
-    offset_of_table!(MIB_UDP6TABLE_OWNER_MODULE) + num * mem::size_of::<MIB_UDP6ROW_OWNER_MODULE>()
-        + ALIGN_SIZE
-}
+// FIXME: SIZEOF_UDP6TABLE_OWNER_MODULE(x)
 STRUCT!{struct MIB_UDPSTATS {
     dwInDatagrams: DWORD,
     dwNoPorts: DWORD,
