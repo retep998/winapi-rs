@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/crates/l/winapi.svg)](https://github.com/retep998/winapi-rs)
 
 
-[Documentation](https://docs.rs/winapi/*/x86_64-pc-windows-msvc/winapi/)
+[Documentation](https://docs.rs/winapi/)
 
 Official IRC channel: #winapi on [Mozilla IRC](https://wiki.mozilla.org/IRC)
 
@@ -31,7 +31,7 @@ Each module is gated on a feature flag, so you must enable the appropriate featu
 
 ### How do I know which module an item is defined in?
 
-You can use the search functionality in the [documentation](https://docs.rs/winapi/*/x86_64-pc-windows-msvc/winapi/) to find where items are defined.
+You can use the search functionality in the [documentation](https://docs.rs/winapi/) to find where items are defined.
 
 ### Why is there no documentation on how to use anything?
 
