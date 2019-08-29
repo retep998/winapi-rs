@@ -1,4 +1,3 @@
-// Copyright © 2018 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -6,6 +5,7 @@
 // except according to those terms.
 //! Mappings for the contents of PortableDevice.h
 use shared::basetsd::ULONG_PTR;
+use shared::wtypes::PROPERTYKEY;
 DEFINE_GUID!{GUID_DEVINTERFACE_WPD,
     0x6AC27878, 0xA6FA, 0x4155, 0xBA, 0x85, 0xF9, 0x8F, 0x49, 0x1D, 0x4F, 0x33}
 DEFINE_GUID!{GUID_DEVINTERFACE_WPD_PRIVATE,

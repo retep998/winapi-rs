@@ -1,4 +1,3 @@
-// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -22,6 +21,9 @@ pub mod gl;
 #[cfg(feature = "bits5_0")] pub mod bits5_0;
 #[cfg(feature = "bitscfg")] pub mod bitscfg;
 #[cfg(feature = "bitsmsg")] pub mod bitsmsg;
+#[cfg(feature = "bluetoothapis")] pub mod bluetoothapis;
+#[cfg(feature = "bluetoothleapis")] pub mod bluetoothleapis;
+#[cfg(feature = "bthledef")] pub mod bthledef;
 #[cfg(feature = "cfgmgr32")] pub mod cfgmgr32;
 #[cfg(feature = "cguid")] pub mod cguid;
 #[cfg(feature = "combaseapi")] pub mod combaseapi;
@@ -110,6 +112,7 @@ pub mod gl;
 #[cfg(feature = "exdisp")] pub mod exdisp;
 #[cfg(feature = "fibersapi")] pub mod fibersapi;
 #[cfg(feature = "fileapi")] pub mod fileapi;
+#[cfg(feature = "functiondiscoverykeys_devpkey")] pub mod functiondiscoverykeys_devpkey;
 #[cfg(feature = "handleapi")] pub mod handleapi;
 #[cfg(feature = "heapapi")] pub mod heapapi;
 #[cfg(feature = "highlevelmonitorconfigurationapi")] pub mod highlevelmonitorconfigurationapi;
@@ -150,6 +153,7 @@ pub mod gl;
 #[cfg(feature = "mscat")] pub mod mscat;
 #[cfg(feature = "mschapp")] pub mod mschapp;
 #[cfg(feature = "mssip")] pub mod mssip;
+#[cfg(feature = "mswsock")] pub mod mswsock;
 #[cfg(feature = "namedpipeapi")] pub mod namedpipeapi;
 #[cfg(feature = "namespaceapi")] pub mod namespaceapi;
 #[cfg(feature = "nb30")] pub mod nb30;
@@ -182,6 +186,7 @@ pub mod gl;
 #[cfg(feature = "processtopologyapi")] pub mod processtopologyapi;
 #[cfg(feature = "profileapi")] pub mod profileapi;
 #[cfg(feature = "propidl")] pub mod propidl;
+#[cfg(feature = "propkey")] pub mod propkey;
 #[cfg(feature = "propkeydef")] pub mod propkeydef;
 #[cfg(feature = "propsys")] pub mod propsys;
 #[cfg(feature = "prsht")] pub mod prsht;
@@ -276,6 +281,7 @@ pub mod gl;
 #[cfg(feature = "winver")] pub mod winver;
 #[cfg(feature = "wow64apiset")] pub mod wow64apiset;
 #[cfg(feature = "wpdmtpextensions")] pub mod wpdmtpextensions;
+#[cfg(feature = "ws2bth")] pub mod ws2bth;
 #[cfg(feature = "ws2spi")] pub mod ws2spi;
 #[cfg(feature = "ws2tcpip")] pub mod ws2tcpip;
 #[cfg(feature = "xinput")] pub mod xinput;

@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -268,7 +267,7 @@ FN!{stdcall LPWSPSTRINGTOADDRESS(
     lpAddressLength: LPINT,
     lpErrno: LPINT,
 ) -> c_int}
-STRUCT!{struct WSPPROC_TABLE{
+STRUCT!{struct WSPPROC_TABLE {
     lpWSPAccept: LPWSPACCEPT,
     lpWSPAddressToString: LPWSPADDRESSTOSTRING,
     lpWSPAsyncSelect: LPWSPASYNCSELECT,
@@ -755,7 +754,7 @@ extern "system" {
         lpdwCatalogEntryId: LPDWORD,
         lpErrno: LPINT,
     ) -> c_int;
-    #[cfg(any(target_arch = "x86", target_arch = "arm"))]
+    #[cfg(target_pointer_width = "32")]
     pub fn WSCInstallProviderAndChains(
         lpProviderId: LPGUID,
         lpszProviderDllPath: LPWSTR,

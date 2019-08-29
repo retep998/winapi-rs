@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -337,7 +336,7 @@ UNION!{union uCLSSPEC_u {
     ByName ByName_mut: uCLSSPEC_ByName,
     ByObjectId ByObjectId_mut: uCLSSPEC_ByObjectId,
 }}
-STRUCT!{struct uCLSSPEC{
+STRUCT!{struct uCLSSPEC {
     tyspec: DWORD,
     u: uCLSSPEC_u,
 }}

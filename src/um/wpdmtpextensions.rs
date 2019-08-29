@@ -1,9 +1,9 @@
-// Copyright © 2018 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
+use shared::wtypes::PROPERTYKEY;
 DEFINE_GUID!{WPD_CATEGORY_MTP_EXT_VENDOR_OPERATIONS,
     0x4d545058, 0x1a2e, 0x4106, 0xa3, 0x57, 0x77, 0x1e, 0x08, 0x19, 0xfc, 0x56}
 DEFINE_PROPERTYKEY!{WPD_COMMAND_MTP_EXT_GET_SUPPORTED_VENDOR_OPCODES,

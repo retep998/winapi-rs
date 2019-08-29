@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -378,6 +377,7 @@ pub const ERROR_INVALID_KERNEL_INFO_VERSION: DWORD = 340;
 pub const ERROR_INVALID_PEP_INFO_VERSION: DWORD = 341;
 pub const ERROR_OBJECT_NOT_EXTERNALLY_BACKED: DWORD = 342;
 pub const ERROR_EXTERNAL_BACKING_PROVIDER_UNKNOWN: DWORD = 343;
+pub const ERROR_ENCLAVE_FAILURE: DWORD = 349;
 pub const ERROR_FAIL_NOACTION_REBOOT: DWORD = 350;
 pub const ERROR_FAIL_SHUTDOWN: DWORD = 351;
 pub const ERROR_FAIL_RESTART: DWORD = 352;

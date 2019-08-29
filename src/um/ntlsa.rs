@@ -1,4 +1,3 @@
-// Copyright © 2018 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -156,7 +155,7 @@ pub const SE_ADT_PARAMETERS_SEND_TO_LSA: ULONG = 0x00000002;
 pub const SE_ADT_PARAMETER_EXTENSIBLE_AUDIT: ULONG = 0x00000004;
 pub const SE_ADT_PARAMETER_GENERIC_AUDIT: ULONG = 0x00000008;
 pub const SE_ADT_PARAMETER_WRITE_SYNCHRONOUS: ULONG = 0x00000010;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 #[inline]
 pub fn LSAP_SE_ADT_PARAMETER_ARRAY_TRUE_SIZE(
     AuditParameters: SE_ADT_PARAMETER_ARRAY,
@@ -165,7 +164,7 @@ pub fn LSAP_SE_ADT_PARAMETER_ARRAY_TRUE_SIZE(
         - (20 // FIXME: sizeof::<SE_ADT_PARAMETER_ARRAY_ENTRY>()
         * (SE_MAX_AUDIT_PARAMETERS - AuditParameters.ParameterCount as SIZE_T))
 }
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 #[inline]
 pub fn LSAP_SE_ADT_PARAMETER_ARRAY_TRUE_SIZE(
     AuditParameters: SE_ADT_PARAMETER_ARRAY,
@@ -1008,7 +1007,7 @@ extern "system" {
     pub fn LsaSetSecurityObject(
         ObjectHandle: LSA_HANDLE,
         SecurityInformation: SECURITY_INFORMATION,
-        SecurityDescriptor: PSECURITY_DESCRIPTOR
+        SecurityDescriptor: PSECURITY_DESCRIPTOR,
     ) -> NTSTATUS;
     pub fn LsaChangePassword(
         ServerName: PLSA_UNICODE_STRING,
@@ -1252,7 +1251,7 @@ extern "system" {
     ) -> NTSTATUS;
     pub fn LsaSetQuotasForAccount(
         AccountHandle: LSA_HANDLE,
-        QuotaLimits: PQUOTA_LIMITS
+        QuotaLimits: PQUOTA_LIMITS,
     ) -> NTSTATUS;
     pub fn LsaGetSystemAccessAccount(
         AccountHandle: LSA_HANDLE,
@@ -1294,7 +1293,7 @@ extern "system" {
         CurrentValue: *mut PLSA_UNICODE_STRING,
         CurrentValueSetTime: PLARGE_INTEGER,
         OldValue: *mut PLSA_UNICODE_STRING,
-        OldValueSetTime: PLARGE_INTEGER
+        OldValueSetTime: PLARGE_INTEGER,
     ) -> NTSTATUS;
     pub fn LsaLookupPrivilegeValue(
         PolicyHandle: LSA_HANDLE,

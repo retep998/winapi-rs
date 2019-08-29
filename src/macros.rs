@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -45,6 +44,12 @@ macro_rules! DEFINE_GUID {
         };
     }
 }
+macro_rules! DEFINE_BLUETOOTH_UUID128 {
+    ($name:ident, $shortId:expr) => {
+        DEFINE_GUID!{$name,
+            $shortId as u32, 0x0000, 0x1000, 0x80, 0x00, 0x00, 0x80, 0x5F, 0x9B, 0x34, 0xFB}
+    }
+}
 #[macro_export]
 macro_rules! DEFINE_PROPERTYKEY {
     (
@@ -52,8 +57,8 @@ macro_rules! DEFINE_PROPERTYKEY {
         $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr, $b6:expr, $b7:expr, $b8:expr,
         $pid:expr
     ) => {
-        pub const $name: $crate::shared::wtypes::PROPERTYKEY
-            = $crate::shared::wtypes::PROPERTYKEY {
+        pub const $name: PROPERTYKEY
+            = PROPERTYKEY {
             fmtid: $crate::shared::guiddef::GUID {
                 Data1: $l,
                 Data2: $w1,
@@ -86,6 +91,16 @@ macro_rules! CTL_CODE {
     ($DeviceType:expr, $Function:expr, $Method:expr, $Access:expr) => {
         ($DeviceType << 16) | ($Access << 14) | ($Function << 2) | $Method
     }
+}
+macro_rules! BTH_CTL {
+    ($id:expr) => {
+        CTL_CODE!(FILE_DEVICE_BLUETOOTH, $id, METHOD_BUFFERED, FILE_ANY_ACCESS)
+    };
+}
+macro_rules! BTH_KERNEL_CTL {
+    ($id:expr) => {
+        CTL_CODE!(FILE_DEVICE_BLUETOOTH, $id, METHOD_NEITHER, FILE_ANY_ACCESS)
+    };
 }
 macro_rules! HID_CTL_CODE {
     ($id:expr) => {
@@ -294,7 +309,7 @@ macro_rules! UNION {
         [$stype32:ty; $ssize32:expr] [$stype64:ty; $ssize64:expr],
         $($variant:ident $variant_mut:ident: $ftype:ty,)+
     }) => (
-        #[repr(C)] $(#[$attrs])* #[cfg(target_arch = "x86")]
+        #[repr(C)] $(#[$attrs])* #[cfg(target_pointer_width = "32")]
         pub struct $name([$stype32; $ssize32]);
         #[repr(C)] $(#[$attrs])* #[cfg(target_pointer_width = "64")]
         pub struct $name([$stype64; $ssize64]);
@@ -402,4 +417,24 @@ macro_rules! FN {
     (cdecl $func:ident($($p:ident: $t:ty,)*) -> $ret:ty) => (
         pub type $func = Option<unsafe extern "C" fn($($p: $t,)*) -> $ret>;
     );
+}
+macro_rules! _WSAIO {
+    ($x:expr, $y:expr) => {
+        $crate::shared::ws2def::IOC_VOID | $x | $y
+    }
+}
+macro_rules! _WSAIOR {
+    ($x:expr, $y:expr) => {
+        $crate::shared::ws2def::IOC_OUT | $x | $y
+    }
+}
+macro_rules! _WSAIOW {
+    ($x:expr, $y:expr) => {
+        $crate::shared::ws2def::IOC_IN | $x | $y
+    }
+}
+macro_rules! _WSAIORW {
+    ($x:expr, $y:expr) => {
+        $crate::shared::ws2def::IOC_INOUT | $x | $y
+    }
 }

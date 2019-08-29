@@ -1,4 +1,3 @@
-// Copyright © 2015-2019 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -7,11 +6,15 @@
 use ctypes::{c_int, c_void};
 use shared::guiddef::{REFGUID, REFIID};
 use shared::minwindef::{BOOL, DWORD, UINT, ULONG, WORD};
-use shared::windef::{HICON, HWND, RECT};
+use shared::windef::{COLORREF, HICON, HWND, RECT};
 use um::commctrl::HIMAGELIST;
 use um::objidl::IBindCtx;
+use um::propkeydef::REFPROPERTYKEY;
+use um::propsys::GETPROPERTYSTOREFLAGS;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR, ULONGLONG, WCHAR};
+DEFINE_GUID!{CLSID_DesktopWallpaper,
+    0xc2cf3110, 0x460e, 0x4fc1, 0xb9, 0xd0, 0x8a, 0x1c, 0x0c, 0x9c, 0xc4, 0xbd}
 DEFINE_GUID!{CLSID_TaskbarList,
     0x56fdf344, 0xfd6d, 0x11d0, 0x95, 0x8a, 0x00, 0x60, 0x97, 0xc9, 0xa0, 0x90}
 DEFINE_GUID!{CLSID_FileOpenDialog,
@@ -78,6 +81,48 @@ interface IShellItem(IShellItemVtbl): IUnknown(IUnknownVtbl) {
         hint: SICHINTF,
         piOrder: *mut c_int,
     ) -> HRESULT,
+}}
+ENUM!{enum SIATTRIBFLAGS {
+    SIATTRIBFLAGS_AND = 0x1,
+    SIATTRIBFLAGS_OR = 0x2,
+    SIATTRIBFLAGS_APPCOMPAT = 0x3,
+    SIATTRIBFLAGS_MASK = 0x3,
+    SIATTRIBFLAGS_ALLITEMS = 0x4000,
+}}
+RIDL!{#[uuid(0xb63ea76d, 0x1f85, 0x456f, 0xa1, 0x9c, 0x48, 0x15, 0x9e, 0xfa, 0x85, 0x8b)]
+interface IShellItemArray(IShellItemArrayVtbl): IUnknown(IUnknownVtbl) {
+    fn BindToHandler(
+        pbc: *mut IBindCtx,
+        bhid: REFGUID,
+        riid: REFIID,
+        ppvOut: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetPropertyStore(
+        flags: GETPROPERTYSTOREFLAGS,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetPropertyDescriptionList(
+        keyType: REFPROPERTYKEY,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetAttributes(
+        AttribFlags: SIATTRIBFLAGS,
+        sfgaoMask: SFGAOF,
+        psfgaoAttribs: *mut SFGAOF,
+    ) -> HRESULT,
+    fn GetCount(
+        pdwNumItems: *mut DWORD,
+    ) -> HRESULT,
+    fn GetItemAt(
+        dwIndex: DWORD,
+        ppsi: *mut *mut IShellItem,
+    ) -> HRESULT,
+    // TODO: Add IEnumShellItems
+    //fn EnumItems(
+    //    ppenumShellItems: *mut *mut IEnumShellItems,
+    //) -> HRESULT,
 }}
 //20869
 RIDL!{#[uuid(0xb4db1657, 0x70d7, 0x485e, 0x8e, 0x3e, 0x6f, 0xcb, 0x5a, 0x5c, 0x18, 0x02)]
@@ -219,6 +264,84 @@ interface ITaskbarList4(ITaskbarList4Vtbl): ITaskbarList3(ITaskbarList3Vtbl) {
     fn SetTabProperties(
         hwndTab: HWND,
         stpFlags: STPFLAG,
+    ) -> HRESULT,
+}}
+ENUM!{enum DESKTOP_SLIDESHOW_OPTIONS {
+    DSO_SHUFFLEIMAGES = 0x1,
+}}
+ENUM!{enum DESKTOP_SLIDESHOW_STATE {
+    DSS_ENABLED = 0x1,
+    DSS_SLIDESHOW = 0x2,
+    DSS_DISABLED_BY_REMOTE_SESSION = 0x4,
+}}
+ENUM!{enum DESKTOP_SLIDESHOW_DIRECTION {
+    DSD_FORWARD = 0,
+    DSD_BACKWARD = 1,
+}}
+ENUM!{enum DESKTOP_WALLPAPER_POSITION {
+    DWPOS_CENTER = 0,
+    DWPOS_TILE = 1,
+    DWPOS_STRETCH = 2,
+    DWPOS_FIT = 3,
+    DWPOS_FILL = 4,
+    DWPOS_SPAN = 5,
+}}
+RIDL!{#[uuid(0xb92b56a9, 0x8b55, 0x4e14, 0x9a, 0x89, 0x01, 0x99, 0xbb, 0xb6, 0xf9, 0x3b)]
+interface IDesktopWallpaper(IDesktopWallpaperVtbl): IUnknown(IUnknownVtbl) {
+    fn SetWallpaper(
+        monitorID: LPCWSTR,
+        wallpaper: LPCWSTR,
+    ) -> HRESULT,
+    fn GetWallpaper(
+        monitorID: LPCWSTR,
+        wallpaper: *mut LPWSTR,
+    ) -> HRESULT,
+    fn GetMonitorDevicePathAt(
+        monitorIndex: UINT,
+        monitorID: *mut LPWSTR,
+    ) -> HRESULT,
+    fn GetMonitorDevicePathCount(
+        count: *mut UINT,
+    ) -> HRESULT,
+    fn GetMonitorRECT(
+        monitorID: LPCWSTR,
+        displayRect: *mut RECT,
+    ) -> HRESULT,
+    fn SetBackgroundColor(
+        color: COLORREF,
+    ) -> HRESULT,
+    fn GetBackgroundColor(
+        color: *mut COLORREF,
+    ) -> HRESULT,
+    fn SetPosition(
+        position: DESKTOP_WALLPAPER_POSITION,
+    ) -> HRESULT,
+    fn GetPosition(
+        position: *mut DESKTOP_WALLPAPER_POSITION,
+    ) -> HRESULT,
+    fn SetSlideshow(
+        items: *mut IShellItemArray,
+    ) -> HRESULT,
+    fn GetSlideshow(
+        items: *mut *mut IShellItemArray,
+    ) -> HRESULT,
+    fn SetSlideshowOptions(
+        options: DESKTOP_SLIDESHOW_OPTIONS,
+        slideshowTick: UINT,
+    ) -> HRESULT,
+    fn GetSlideshowOptions(
+        options: *mut DESKTOP_SLIDESHOW_OPTIONS,
+        slideshowTick: *mut UINT,
+    ) -> HRESULT,
+    fn AdvanceSlideshow(
+        monitorID: LPCWSTR,
+        direction: DESKTOP_SLIDESHOW_DIRECTION,
+    ) -> HRESULT,
+    fn GetStatus(
+        state: *mut DESKTOP_SLIDESHOW_STATE,
+    ) -> HRESULT,
+    fn Enable(
+        enable: BOOL,
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0xc2cf3110, 0x460e, 0x4fc1, 0xb9, 0xd0, 0x8a, 0x1c, 0x0c, 0x9c, 0xc4, 0xbd)]
