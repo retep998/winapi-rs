@@ -851,7 +851,7 @@ extern "system" {
         pReserved: PVOID,
     ) -> ULONG;
     pub fn HttpCreateHttpHandle(
-        pReqQueueHandle: HANDLE,
+        pReqQueueHandle: PHANDLE,
         Reserved: ULONG,
     ) -> ULONG;
     pub fn HttpCreateRequestQueue(
