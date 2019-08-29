@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -6,7 +5,7 @@
 // except according to those terms.
 //! This module defines the types used in ODBC
 use ctypes::*;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 use shared::basetsd::{INT64, UINT64};
 use shared::guiddef::GUID;
 use shared::windef::HWND;
@@ -18,17 +17,17 @@ pub type SQLDOUBLE = c_double;
 pub type SQLFLOAT = c_double;
 pub type SQLINTEGER = c_long;
 pub type SQLUINTEGER = c_ulong;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type SQLLEN = INT64;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type SQLULEN = UINT64;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type SQLSETPOSIROW = UINT64;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub type SQLLEN = SQLINTEGER;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub type SQLULEN = SQLUINTEGER;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub type SQLSETPOSIROW = SQLUSMALLINT;
 pub type SQLROWCOUNT = SQLULEN;
 pub type SQLROWSETSIZE = SQLULEN;
@@ -55,7 +54,7 @@ pub type SDWORD = c_long;
 pub type SWORD = c_short;
 pub type UDWORD = c_ulong;
 //pub type UWORD = c_ushort;
-//#[cfg(target_arch = "x86")]
+//#[cfg(target_pointer_width = "32")]
 //pub type SQLUINTEGER = UDWORD;
 pub type SLONG = c_long;
 pub type SSHORT = c_short;

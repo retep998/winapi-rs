@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/crates/l/winapi.svg)](https://github.com/retep998/winapi-rs)
 
 
-[Documentation](https://docs.rs/winapi/*/x86_64-pc-windows-msvc/winapi/)
+[Documentation](https://docs.rs/winapi/)
 
 Official IRC channel: #winapi on [Mozilla IRC](https://wiki.mozilla.org/IRC)
 
@@ -31,7 +31,7 @@ Each module is gated on a feature flag, so you must enable the appropriate featu
 
 ### How do I know which module an item is defined in?
 
-You can use the search functionality in the [documentation](https://docs.rs/winapi/*/x86_64-pc-windows-msvc/winapi/) to find where items are defined.
+You can use the search functionality in the [documentation](https://docs.rs/winapi/) to find where items are defined.
 
 ### Why is there no documentation on how to use anything?
 
@@ -44,6 +44,10 @@ Yes, absolutely! By default the `std` feature of `winapi` is disabled, allowing 
 ### Why is `winapi`'s `HANDLE` incompatible with `std`'s `HANDLE`?
 
 Because `winapi` does not depend on `std` by default, it has to define `c_void` itself instead of using `std::os::raw::c_void`. However, if you enable the `std` feature of `winapi` then it will re-export `c_void` from `std` and cause `winapi`'s `HANDLE` to be the same type as `std`'s `HANDLE`.
+
+### Should I still use those `-sys` crates such as `kernel32-sys`?
+
+No. Those crates are a legacy of how `winapi` 0.2 was organized. Starting with `winapi` 0.3 all definitions are directly in `winapi` itself, and so there is no longer any need to use those `-sys` crates.
 
 ## Example ##
 
@@ -80,3 +84,6 @@ fn main() {
     print_message("Hello, world!").unwrap();
 }
 ```
+
+## Financial Support
+Do you use `winapi` in your projects? If so, you may be interested in financially supporting me on [Patreon](https://www.patreon.com/retep998). Companies in particular are especially encouraged to donate (I'm looking at you [Microsoft](https://github.com/Azure/iotedge/tree/master/edgelet)).

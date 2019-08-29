@@ -264,6 +264,11 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
 * The uuid should always be lowercase hex.
 * Uuid numbers should be padded with zeros to ensure consistent width.
 
+```C
+class DECLSPEC_UUID("D9F6EE60-58C9-458B-88E1-2F908FD7F87C")
+SpDataKey;
+```
+
 ```Rust
 RIDL!{#[uuid(0xd9f6ee60, 0x58c9, 0x458b, 0x88, 0xe1, 0x2f, 0x90, 0x8f, 0xd7, 0xf8, 0x7c)]
 class SpDataKey;}

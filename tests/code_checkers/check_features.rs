@@ -1,4 +1,3 @@
-// Copyright © 2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -112,7 +111,7 @@ fn check_missing_features_in_cargo_file(build_features: &[String],
                                         cargo_features: &[String],
                                         errors: &mut u32) {
     const FEATURES_TO_IGNORE: &'static [&'static str] = &[
-        "debug", "everything", "impl-default", "std",
+        "debug", "everything", "impl-debug", "impl-default", "std",
     ];
     let mut it1 = 0;
     let mut it2 = 0;
