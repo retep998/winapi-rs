@@ -1,4 +1,3 @@
-// Copyright © 2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -367,7 +366,7 @@ pub const ETW_WMITIME_TYPE_VALUE: ULONG = 118;
 pub const ETW_DATETIME_TYPE_VALUE: ULONG = 119;
 pub const ETW_REFRENCE_TYPE_VALUE: ULONG = 120;
 // TODO: DEFINE_TRACE_MOF_FIELD
-STRUCT!{struct MOF_FIELD{
+STRUCT!{struct MOF_FIELD {
     DataPtr: ULONG64,
     Length: ULONG,
     DataType: ULONG,

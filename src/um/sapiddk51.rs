@@ -1,4 +1,3 @@
-// Copyright © 2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -640,6 +639,10 @@ interface _ISpPrivateEngineCall(_ISpPrivateEngineCallVtbl): IUnknown(IUnknownVtb
 extern {
     pub static LIBID_SpeechDDKLib: IID;
     pub static CLSID_SpDataKey: CLSID;
+}
+RIDL!{#[uuid(0xd9f6ee60, 0x58c9, 0x458b, 0x88, 0xe1, 0x2f, 0x90, 0x8f, 0xd7, 0xf8, 0x7c)]
+class SpDataKey;}
+extern {
     pub static CLSID_SpObjectTokenEnum: CLSID;
     pub static CLSID_SpPhraseBuilder: CLSID;
     pub static CLSID_SpITNProcessor: CLSID;

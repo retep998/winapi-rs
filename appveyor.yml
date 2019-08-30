@@ -1,22 +1,45 @@
+image: Visual Studio 2017
+
 environment:
   matrix:
-  - TARGET: nightly-x86_64-pc-windows-msvc
-  - TARGET: nightly-i686-pc-windows-msvc
-  - TARGET: nightly-x86_64-pc-windows-gnu
-  - TARGET: nightly-i686-pc-windows-gnu
-  - TARGET: 1.6.0-x86_64-pc-windows-gnu
+  - host: x86_64-pc-windows-msvc
+    targets: aarch64-pc-windows-msvc
+    channel: nightly
+  - host: i686-pc-windows-msvc
+    channel: nightly
+  - host: x86_64-pc-windows-gnu
+    channel: nightly
+  - host: i686-pc-windows-gnu
+    channel: nightly
+  - host: x86_64-pc-windows-gnu
+    channel: 1.6.0
+matrix:
+  allow_failures:
+    - target: aarch64-pc-windows-msvc
+
 install:
   - ps: if (ls -r . -fi "*.rs" | sls "`t") { throw "Found tab character" }
-  - ps: Start-FileDownload "https://static.rust-lang.org/dist/rust-${env:TARGET}.exe" -FileName "rust-install.exe"
-  - ps: .\rust-install.exe /VERYSILENT /NORESTART /DIR="C:\rust" | Out-Null
-  - ps: $env:PATH="$env:PATH;C:\rust\bin"
+  - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
+  - rustup-init.exe -y --default-toolchain %channel% --default-host %host%
+  - ps: $env:CARGO_INCREMENTAL = 0
+  - ps: $env:PATH = "$env:PATH;${env:USERPROFILE}\.cargo\bin"
+  - ps: >
+      if ($env:targets) { $env:targets -split " " | %{
+        cmd /c "rustup target add $_ 2>&1"
+      }}
   - rustc -vV
   - cargo -vV
+
 build_script:
   - cargo build
-  - cargo build --features "everything debug impl-default"
-test_script:
-  - cargo test --features "everything debug impl-default"
+  - cargo build --features "everything impl-debug impl-default"
+  - cargo build --release --features "everything impl-debug impl-default"
+  - cargo test --features "everything impl-debug impl-default"
+  - ps: >
+      if ($env:targets) { $env:targets -split " " | %{
+        cmd /c "cargo test --target=$_ --features `"everything impl-debug impl-default`" --no-run 2>&1"
+      }}
+
 notifications:
   - provider: Webhook
     url: https://webhooks.gitter.im/e/d3d6703d143c888f0a8a
