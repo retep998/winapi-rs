@@ -1069,4 +1069,19 @@ extern "system" {
         pReturnLength: PULONG,
         pOverlapped: LPOVERLAPPED,
     ) -> ULONG;
+    pub fn HttpDeclarePush(
+        RequestQueueHandle: HANDLE,
+        RequestId: HTTP_REQUEST_ID,
+        Verb: HTTP_VERB,
+        Path: PCWSTR,
+        Query: PCSTR,
+        Headers: PHTTP_REQUEST_HEADERS,
+    ) -> ULONG;
+    pub fn HttpUpdateServiceConfiguration(
+        Handle: HANDLE,
+        ConfigId: HTTP_SERVICE_CONFIG_ID,
+        ConfigInfo: PVOID,
+        ConfigInfoLength: ULONG,
+        Overlapped: LPOVERLAPPED,
+    ) -> ULONG;
 }
