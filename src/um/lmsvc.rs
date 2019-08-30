@@ -1,11 +1,10 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 //! This file contains structures, function prototypes, and definitions for the NetService API
-use ctypes::{c_long};
+use ctypes::c_long;
 use shared::lmcons::NET_API_STATUS;
 use shared::minwindef::{DWORD, LPBYTE, LPDWORD};
 use um::winnt::{LPCWSTR, LPWSTR};

@@ -1,4 +1,3 @@
-// Copyright © 2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -10,7 +9,7 @@ use shared::minwindef::{BOOL, BYTE, DWORD, FILETIME, LPBYTE, LPDWORD, LPVOID, PD
 use shared::windef::HWND;
 use um::wincrypt::ALG_ID;
 use um::winnt::{BOOLEAN, HANDLE, LARGE_INTEGER, LPCWSTR, PHANDLE, PVOID, PWCHAR, WCHAR};
-DECLARE_HANDLE!(SAFER_LEVEL_HANDLE, __SAFER_LEVEL_HANDLE);
+DECLARE_HANDLE!{SAFER_LEVEL_HANDLE, __SAFER_LEVEL_HANDLE}
 pub const SAFER_SCOPEID_MACHINE: DWORD = 1;
 pub const SAFER_SCOPEID_USER: DWORD = 2;
 pub const SAFER_LEVELID_DISALLOWED: DWORD = 0x00000;

@@ -85,6 +85,66 @@ fn shared_bcrypt() {
     assert_eq!(size_of::<CRYPT_PROVIDER_REFS>(), 8);
     assert_eq!(align_of::<CRYPT_PROVIDER_REFS>(), 4);
 }
+#[cfg(feature = "bthdef")] #[test]
+fn shared_bthdef() {
+    use winapi::shared::bthdef::*;
+    assert_eq!(size_of::<BTH_DEVICE_INFO>(), 272);
+    assert_eq!(align_of::<BTH_DEVICE_INFO>(), 8);
+    assert_eq!(size_of::<BTH_RADIO_IN_RANGE>(), 280);
+    assert_eq!(align_of::<BTH_RADIO_IN_RANGE>(), 8);
+    assert_eq!(size_of::<BTH_L2CAP_EVENT_INFO>(), 16);
+    assert_eq!(align_of::<BTH_L2CAP_EVENT_INFO>(), 8);
+    assert_eq!(size_of::<BTH_HCI_EVENT_INFO>(), 16);
+    assert_eq!(align_of::<BTH_HCI_EVENT_INFO>(), 8);
+}
+#[cfg(feature = "bthioctl")] #[test]
+fn shared_bthioctl() {
+    use winapi::shared::bthioctl::*;
+    assert_eq!(size_of::<BTH_DEVICE_INFO_LIST>(), 276);
+    assert_eq!(align_of::<BTH_DEVICE_INFO_LIST>(), 1);
+    assert_eq!(size_of::<BTH_RADIO_INFO>(), 13);
+    assert_eq!(align_of::<BTH_RADIO_INFO>(), 1);
+    assert_eq!(size_of::<BTH_LOCAL_RADIO_INFO>(), 292);
+    assert_eq!(align_of::<BTH_LOCAL_RADIO_INFO>(), 1);
+    assert_eq!(size_of::<BTH_SDP_CONNECT>(), 21);
+    assert_eq!(align_of::<BTH_SDP_CONNECT>(), 1);
+    assert_eq!(size_of::<BTH_SDP_DISCONNECT>(), 8);
+    assert_eq!(align_of::<BTH_SDP_DISCONNECT>(), 1);
+    assert_eq!(size_of::<BTH_SDP_RECORD>(), 17);
+    assert_eq!(align_of::<BTH_SDP_RECORD>(), 1);
+    assert_eq!(size_of::<BTH_SDP_SERVICE_SEARCH_REQUEST>(), 248);
+    assert_eq!(align_of::<BTH_SDP_SERVICE_SEARCH_REQUEST>(), 1);
+    assert_eq!(size_of::<BTH_SDP_ATTRIBUTE_SEARCH_REQUEST>(), 20);
+    assert_eq!(align_of::<BTH_SDP_ATTRIBUTE_SEARCH_REQUEST>(), 1);
+    assert_eq!(size_of::<BTH_SDP_SERVICE_ATTRIBUTE_SEARCH_REQUEST>(), 256);
+    assert_eq!(align_of::<BTH_SDP_SERVICE_ATTRIBUTE_SEARCH_REQUEST>(), 1);
+    assert_eq!(size_of::<BTH_SDP_STREAM_RESPONSE>(), 9);
+    assert_eq!(align_of::<BTH_SDP_STREAM_RESPONSE>(), 1);
+    assert_eq!(size_of::<BTH_COMMAND_HEADER>(), 3);
+    assert_eq!(align_of::<BTH_COMMAND_HEADER>(), 1);
+    assert_eq!(size_of::<BTH_VENDOR_SPECIFIC_COMMAND>(), 10);
+    assert_eq!(align_of::<BTH_VENDOR_SPECIFIC_COMMAND>(), 1);
+    assert_eq!(size_of::<BTH_VENDOR_PATTERN>(), 3);
+    assert_eq!(align_of::<BTH_VENDOR_PATTERN>(), 1);
+    assert_eq!(size_of::<BTH_VENDOR_EVENT_INFO>(), 13);
+    assert_eq!(align_of::<BTH_VENDOR_EVENT_INFO>(), 1);
+    assert_eq!(size_of::<BTH_HOST_FEATURE_MASK>(), 24);
+    assert_eq!(align_of::<BTH_HOST_FEATURE_MASK>(), 1);
+}
+#[cfg(feature = "bthsdpdef")] #[test]
+fn shared_bthsdpdef() {
+    use winapi::shared::bthsdpdef::*;
+    assert_eq!(size_of::<SDP_LARGE_INTEGER_16>(), 16);
+    assert_eq!(align_of::<SDP_LARGE_INTEGER_16>(), 8);
+    assert_eq!(size_of::<SDP_ULARGE_INTEGER_16>(), 16);
+    assert_eq!(align_of::<SDP_ULARGE_INTEGER_16>(), 8);
+    assert_eq!(size_of::<SdpAttributeRange>(), 4);
+    assert_eq!(align_of::<SdpAttributeRange>(), 2);
+    assert_eq!(size_of::<SdpQueryUuidUnion>(), 16);
+    assert_eq!(align_of::<SdpQueryUuidUnion>(), 4);
+    assert_eq!(size_of::<SdpQueryUuid>(), 20);
+    assert_eq!(align_of::<SdpQueryUuid>(), 4);
+}
 #[cfg(feature = "d3d9caps")] #[test]
 fn shared_d3d9caps() {
     use winapi::shared::d3d9caps::*;
@@ -548,6 +608,12 @@ fn shared_hidsdi() {
     assert_eq!(align_of::<HIDD_CONFIGURATION>(), 4);
     assert_eq!(size_of::<HIDD_ATTRIBUTES>(), 12);
     assert_eq!(align_of::<HIDD_ATTRIBUTES>(), 4);
+}
+#[cfg(feature = "ifdef")] #[test]
+fn shared_ifdef() {
+    use winapi::shared::ifdef::*;
+    assert_eq!(size_of::<NET_LUID_LH>(), 8);
+    assert_eq!(align_of::<NET_LUID_LH>(), 8);
 }
 #[cfg(feature = "in6addr")] #[test]
 fn shared_in6addr() {
@@ -1358,14 +1424,80 @@ fn shared_ws2ipdef() {
 #[cfg(feature = "wtypes")] #[test]
 fn shared_wtypes() {
     use winapi::shared::wtypes::*;
-    assert_eq!(size_of::<PROPERTYKEY>(), 20);
-    assert_eq!(align_of::<PROPERTYKEY>(), 4);
+    assert_eq!(size_of::<RemHGLOBAL>(), 12);
+    assert_eq!(align_of::<RemHGLOBAL>(), 4);
+    assert_eq!(size_of::<RemHMETAFILEPICT>(), 20);
+    assert_eq!(align_of::<RemHMETAFILEPICT>(), 4);
+    assert_eq!(size_of::<RemHENHMETAFILE>(), 8);
+    assert_eq!(align_of::<RemHENHMETAFILE>(), 4);
+    assert_eq!(size_of::<RemHBITMAP>(), 8);
+    assert_eq!(align_of::<RemHBITMAP>(), 4);
+    assert_eq!(size_of::<RemHPALETTE>(), 8);
+    assert_eq!(align_of::<RemHPALETTE>(), 4);
+    assert_eq!(size_of::<RemHBRUSH>(), 8);
+    assert_eq!(align_of::<RemHBRUSH>(), 4);
+    assert_eq!(size_of::<userCLIPFORMAT_u>(), 4);
+    assert_eq!(align_of::<userCLIPFORMAT_u>(), 4);
+    assert_eq!(size_of::<userCLIPFORMAT>(), 8);
+    assert_eq!(align_of::<userCLIPFORMAT>(), 4);
+    assert_eq!(size_of::<GDI_NONREMOTE_u>(), 4);
+    assert_eq!(align_of::<GDI_NONREMOTE_u>(), 4);
+    assert_eq!(size_of::<GDI_NONREMOTE>(), 8);
+    assert_eq!(align_of::<GDI_NONREMOTE>(), 4);
+    assert_eq!(size_of::<userHGLOBAL_u>(), 8);
+    assert_eq!(align_of::<userHGLOBAL_u>(), 8);
+    assert_eq!(size_of::<userHGLOBAL>(), 16);
+    assert_eq!(align_of::<userHGLOBAL>(), 8);
+    assert_eq!(size_of::<userHMETAFILE_u>(), 8);
+    assert_eq!(align_of::<userHMETAFILE_u>(), 8);
+    assert_eq!(size_of::<userHMETAFILE>(), 16);
+    assert_eq!(align_of::<userHMETAFILE>(), 8);
+    assert_eq!(size_of::<remoteMETAFILEPICT>(), 16);
+    assert_eq!(align_of::<remoteMETAFILEPICT>(), 4);
+    assert_eq!(size_of::<userHMETAFILEPICT_u>(), 8);
+    assert_eq!(align_of::<userHMETAFILEPICT_u>(), 8);
+    assert_eq!(size_of::<userHMETAFILEPICT>(), 16);
+    assert_eq!(align_of::<userHMETAFILEPICT>(), 8);
+    assert_eq!(size_of::<userHENHMETAFILE_u>(), 8);
+    assert_eq!(align_of::<userHENHMETAFILE_u>(), 8);
+    assert_eq!(size_of::<userHENHMETAFILE>(), 16);
+    assert_eq!(align_of::<userHENHMETAFILE>(), 8);
+    assert_eq!(size_of::<userBITMAP>(), 28);
+    assert_eq!(align_of::<userBITMAP>(), 4);
+    assert_eq!(size_of::<userHBITMAP_u>(), 8);
+    assert_eq!(align_of::<userHBITMAP_u>(), 8);
+    assert_eq!(size_of::<userHBITMAP>(), 16);
+    assert_eq!(align_of::<userHBITMAP>(), 8);
+    assert_eq!(size_of::<userHPALETTE_u>(), 8);
+    assert_eq!(align_of::<userHPALETTE_u>(), 8);
+    assert_eq!(size_of::<userHPALETTE>(), 16);
+    assert_eq!(align_of::<userHPALETTE>(), 8);
+    assert_eq!(size_of::<RemotableHandle_u>(), 4);
+    assert_eq!(align_of::<RemotableHandle_u>(), 4);
+    assert_eq!(size_of::<RemotableHandle>(), 8);
+    assert_eq!(align_of::<RemotableHandle>(), 4);
     assert_eq!(size_of::<CY>(), 8);
     assert_eq!(align_of::<CY>(), 8);
     assert_eq!(size_of::<DECIMAL>(), 16);
     assert_eq!(align_of::<DECIMAL>(), 8);
-    assert_eq!(size_of::<userCLIPFORMAT>(), 8);
-    assert_eq!(align_of::<userCLIPFORMAT>(), 4);
+    assert_eq!(size_of::<BSTRBLOB>(), 8);
+    assert_eq!(align_of::<BSTRBLOB>(), 4);
+    assert_eq!(size_of::<CLIPDATA>(), 12);
+    assert_eq!(align_of::<CLIPDATA>(), 4);
+    assert_eq!(size_of::<PROPERTYKEY>(), 20);
+    assert_eq!(align_of::<PROPERTYKEY>(), 4);
+    assert_eq!(size_of::<CSPLATFORM>(), 16);
+    assert_eq!(align_of::<CSPLATFORM>(), 4);
+    assert_eq!(size_of::<QUERYCONTEXT>(), 32);
+    assert_eq!(align_of::<QUERYCONTEXT>(), 4);
+    assert_eq!(size_of::<uCLSSPEC_ByName>(), 20);
+    assert_eq!(align_of::<uCLSSPEC_ByName>(), 4);
+    assert_eq!(size_of::<uCLSSPEC_ByObjectId>(), 32);
+    assert_eq!(align_of::<uCLSSPEC_ByObjectId>(), 4);
+    assert_eq!(size_of::<uCLSSPEC_u>(), 32);
+    assert_eq!(align_of::<uCLSSPEC_u>(), 4);
+    assert_eq!(size_of::<uCLSSPEC>(), 36);
+    assert_eq!(align_of::<uCLSSPEC>(), 4);
 }
 #[cfg(feature = "wtypesbase")] #[test]
 fn shared_wtypesbase() {
@@ -1508,6 +1640,78 @@ fn um_bits5_0() {
     assert_eq!(align_of::<BITS_JOB_PROPERTY_VALUE>(), 8);
     assert_eq!(size_of::<BITS_FILE_PROPERTY_VALUE>(), 4);
     assert_eq!(align_of::<BITS_FILE_PROPERTY_VALUE>(), 4);
+}
+#[cfg(feature = "bluetoothapis")] #[test]
+fn um_bluetoothapis() {
+    use winapi::um::bluetoothapis::*;
+    assert_eq!(size_of::<BLUETOOTH_LOCAL_SERVICE_INFO>(), 1040);
+    assert_eq!(align_of::<BLUETOOTH_LOCAL_SERVICE_INFO>(), 8);
+    assert_eq!(size_of::<BLUETOOTH_FIND_RADIO_PARAMS>(), 4);
+    assert_eq!(align_of::<BLUETOOTH_FIND_RADIO_PARAMS>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_RADIO_INFO>(), 520);
+    assert_eq!(align_of::<BLUETOOTH_RADIO_INFO>(), 8);
+    assert_eq!(size_of::<BLUETOOTH_DEVICE_INFO>(), 560);
+    assert_eq!(align_of::<BLUETOOTH_DEVICE_INFO>(), 8);
+    assert_eq!(size_of::<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS>(), 576);
+    assert_eq!(align_of::<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS>(), 8);
+    assert_eq!(size_of::<BLUETOOTH_DEVICE_SEARCH_PARAMS>(), 32);
+    assert_eq!(align_of::<BLUETOOTH_DEVICE_SEARCH_PARAMS>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_COD_PAIRS>(), 8);
+    assert_eq!(align_of::<BLUETOOTH_COD_PAIRS>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_SELECT_DEVICE_PARAMS>(), 60);
+    assert_eq!(align_of::<BLUETOOTH_SELECT_DEVICE_PARAMS>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_PIN_INFO>(), 17);
+    assert_eq!(align_of::<BLUETOOTH_PIN_INFO>(), 1);
+    assert_eq!(size_of::<BLUETOOTH_OOB_DATA_INFO>(), 32);
+    assert_eq!(align_of::<BLUETOOTH_OOB_DATA_INFO>(), 1);
+    assert_eq!(size_of::<BLUETOOTH_NUMERIC_COMPARISON_INFO>(), 4);
+    assert_eq!(align_of::<BLUETOOTH_NUMERIC_COMPARISON_INFO>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_PASSKEY_INFO>(), 4);
+    assert_eq!(align_of::<BLUETOOTH_PASSKEY_INFO>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_AUTHENTICATE_RESPONSE>(), 48);
+    assert_eq!(align_of::<BLUETOOTH_AUTHENTICATE_RESPONSE>(), 8);
+    assert_eq!(size_of::<SDP_ELEMENT_DATA_data_string>(), 8);
+    assert_eq!(align_of::<SDP_ELEMENT_DATA_data_string>(), 4);
+    assert_eq!(size_of::<SDP_ELEMENT_DATA_data_url>(), 8);
+    assert_eq!(align_of::<SDP_ELEMENT_DATA_data_url>(), 4);
+    assert_eq!(size_of::<SDP_ELEMENT_DATA_data_sequence>(), 8);
+    assert_eq!(align_of::<SDP_ELEMENT_DATA_data_sequence>(), 4);
+    assert_eq!(size_of::<SDP_ELEMENT_DATA_data_alternative>(), 8);
+    assert_eq!(align_of::<SDP_ELEMENT_DATA_data_alternative>(), 4);
+    assert_eq!(size_of::<SDP_ELEMENT_DATA_data>(), 16);
+    assert_eq!(align_of::<SDP_ELEMENT_DATA_data>(), 8);
+    assert_eq!(size_of::<SDP_ELEMENT_DATA>(), 24);
+    assert_eq!(align_of::<SDP_ELEMENT_DATA>(), 8);
+    assert_eq!(size_of::<SDP_STRING_TYPE_DATA>(), 6);
+    assert_eq!(align_of::<SDP_STRING_TYPE_DATA>(), 2);
+}
+#[cfg(feature = "bthledef")] #[test]
+fn um_bthledef() {
+    use winapi::um::bthledef::*;
+    assert_eq!(size_of::<BTH_LE_UUID>(), 20);
+    assert_eq!(align_of::<BTH_LE_UUID>(), 4);
+    assert_eq!(size_of::<BTH_LE_GATT_SERVICE>(), 24);
+    assert_eq!(align_of::<BTH_LE_GATT_SERVICE>(), 4);
+    assert_eq!(size_of::<BTH_LE_GATT_CHARACTERISTIC>(), 36);
+    assert_eq!(align_of::<BTH_LE_GATT_CHARACTERISTIC>(), 4);
+    assert_eq!(size_of::<BTH_LE_GATT_CHARACTERISTIC_VALUE>(), 8);
+    assert_eq!(align_of::<BTH_LE_GATT_CHARACTERISTIC_VALUE>(), 4);
+    assert_eq!(size_of::<BTH_LE_GATT_DESCRIPTOR>(), 32);
+    assert_eq!(align_of::<BTH_LE_GATT_DESCRIPTOR>(), 4);
+    assert_eq!(size_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicExtendedProperties>(), 2);
+    assert_eq!(align_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicExtendedProperties>(), 1);
+    assert_eq!(size_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_ClientCharacteristicConfiguration>(), 2);
+    assert_eq!(align_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_ClientCharacteristicConfiguration>(), 1);
+    assert_eq!(size_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_ServerCharacteristicConfiguration>(), 1);
+    assert_eq!(align_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_ServerCharacteristicConfiguration>(), 1);
+    assert_eq!(size_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicFormat>(), 48);
+    assert_eq!(align_of::<BTH_LE_GATT_DESCRIPTOR_VALUE_u_CharacteristicFormat>(), 4);
+    assert_eq!(size_of::<BTH_LE_GATT_DESCRIPTOR_VALUE>(), 80);
+    assert_eq!(align_of::<BTH_LE_GATT_DESCRIPTOR_VALUE>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION>(), 40);
+    assert_eq!(align_of::<BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION>(), 4);
+    assert_eq!(size_of::<BLUETOOTH_GATT_VALUE_CHANGED_EVENT>(), 12);
+    assert_eq!(align_of::<BLUETOOTH_GATT_VALUE_CHANGED_EVENT>(), 4);
 }
 #[cfg(feature = "cfgmgr32")] #[test]
 fn um_cfgmgr32() {
@@ -2831,6 +3035,56 @@ fn um_dbghelp() {
     assert_eq!(size_of::<IMAGEHLP_LINEW64>(), 24);
     assert_eq!(align_of::<IMAGEHLP_LINEW64>(), 8);
 }
+#[cfg(feature = "dbt")] #[test]
+fn um_dbt() {
+    use winapi::um::dbt::*;
+    assert_eq!(size_of::<DEV_BROADCAST_HDR>(), 12);
+    assert_eq!(align_of::<DEV_BROADCAST_HDR>(), 4);
+    assert_eq!(size_of::<VolLockBroadcast>(), 20);
+    assert_eq!(align_of::<VolLockBroadcast>(), 4);
+    assert_eq!(size_of::<_DEV_BROADCAST_HEADER>(), 12);
+    assert_eq!(align_of::<_DEV_BROADCAST_HEADER>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_OEM>(), 20);
+    assert_eq!(align_of::<DEV_BROADCAST_OEM>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_DEVNODE>(), 16);
+    assert_eq!(align_of::<DEV_BROADCAST_DEVNODE>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_VOLUME>(), 20);
+    assert_eq!(align_of::<DEV_BROADCAST_VOLUME>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_PORT_A>(), 16);
+    assert_eq!(align_of::<DEV_BROADCAST_PORT_A>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_PORT_W>(), 16);
+    assert_eq!(align_of::<DEV_BROADCAST_PORT_W>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_NET>(), 20);
+    assert_eq!(align_of::<DEV_BROADCAST_NET>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_DEVICEINTERFACE_A>(), 32);
+    assert_eq!(align_of::<DEV_BROADCAST_DEVICEINTERFACE_A>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_DEVICEINTERFACE_W>(), 32);
+    assert_eq!(align_of::<DEV_BROADCAST_DEVICEINTERFACE_W>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_HANDLE>(), 44);
+    assert_eq!(align_of::<DEV_BROADCAST_HANDLE>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_HANDLE32>(), 44);
+    assert_eq!(align_of::<DEV_BROADCAST_HANDLE32>(), 4);
+    assert_eq!(size_of::<DEV_BROADCAST_HANDLE64>(), 56);
+    assert_eq!(align_of::<DEV_BROADCAST_HANDLE64>(), 8);
+    assert_eq!(size_of::<_DEV_BROADCAST_USERDEFINED>(), 16);
+    assert_eq!(align_of::<_DEV_BROADCAST_USERDEFINED>(), 4);
+}
+#[cfg(feature = "devicetopology")] #[test]
+fn um_devicetopology() {
+    use winapi::um::devicetopology::*;
+    assert_eq!(size_of::<KSDATAFORMAT>(), 64);
+    assert_eq!(align_of::<KSDATAFORMAT>(), 4);
+    assert_eq!(size_of::<KSIDENTIFIER_s>(), 24);
+    assert_eq!(align_of::<KSIDENTIFIER_s>(), 4);
+    assert_eq!(size_of::<KSIDENTIFIER>(), 24);
+    assert_eq!(align_of::<KSIDENTIFIER>(), 8);
+    assert_eq!(size_of::<LUID>(), 8);
+    assert_eq!(align_of::<LUID>(), 4);
+    assert_eq!(size_of::<KSJACK_SINK_INFORMATION>(), 96);
+    assert_eq!(align_of::<KSJACK_SINK_INFORMATION>(), 4);
+    assert_eq!(size_of::<KSJACK_DESCRIPTION2>(), 8);
+    assert_eq!(align_of::<KSJACK_DESCRIPTION2>(), 4);
+}
 #[cfg(feature = "docobj")] #[test]
 fn um_docobj() {
     use winapi::um::docobj::*;
@@ -2888,10 +3142,14 @@ fn um_dwmapi() {
     use winapi::um::dwmapi::*;
     assert_eq!(size_of::<DWM_BLURBEHIND>(), 16);
     assert_eq!(align_of::<DWM_BLURBEHIND>(), 1);
+    assert_eq!(size_of::<DWM_THUMBNAIL_PROPERTIES>(), 45);
+    assert_eq!(align_of::<DWM_THUMBNAIL_PROPERTIES>(), 1);
     assert_eq!(size_of::<UNSIGNED_RATIO>(), 8);
     assert_eq!(align_of::<UNSIGNED_RATIO>(), 1);
     assert_eq!(size_of::<DWM_TIMING_INFO>(), 292);
     assert_eq!(align_of::<DWM_TIMING_INFO>(), 1);
+    assert_eq!(size_of::<DWM_PRESENT_PARAMETERS>(), 40);
+    assert_eq!(align_of::<DWM_PRESENT_PARAMETERS>(), 1);
 }
 #[cfg(feature = "dwrite")] #[test]
 fn um_dwrite() {
@@ -4692,6 +4950,8 @@ fn um_oaidl() {
     assert_eq!(align_of::<CUSTDATA>(), 4);
     assert_eq!(size_of::<TLIBATTR>(), 32);
     assert_eq!(align_of::<TLIBATTR>(), 4);
+    assert_eq!(size_of::<BINDPTR>(), 4);
+    assert_eq!(align_of::<BINDPTR>(), 4);
 }
 #[cfg(feature = "objidl")] #[test]
 fn um_objidl() {
@@ -5321,6 +5581,12 @@ fn um_shellapi() {
     assert_eq!(size_of::<OPEN_PRINTER_PROPS_INFOW>(), 20);
     assert_eq!(align_of::<OPEN_PRINTER_PROPS_INFOW>(), 1);
 }
+#[cfg(feature = "shobjidl_core")] #[test]
+fn um_shobjidl_core() {
+    use winapi::um::shobjidl_core::*;
+    assert_eq!(size_of::<THUMBBUTTON>(), 540);
+    assert_eq!(align_of::<THUMBBUTTON>(), 4);
+}
 #[cfg(feature = "shtypes")] #[test]
 fn um_shtypes() {
     use winapi::um::shtypes::*;
@@ -5466,6 +5732,36 @@ fn um_usp10() {
     assert_eq!(size_of::<SCRIPT_GLYPHPROP>(), 4);
     assert_eq!(align_of::<SCRIPT_GLYPHPROP>(), 2);
 }
+#[cfg(feature = "uxtheme")] #[test]
+fn um_uxtheme() {
+    use winapi::um::uxtheme::*;
+    assert_eq!(size_of::<TA_TRANSFORM>(), 20);
+    assert_eq!(align_of::<TA_TRANSFORM>(), 4);
+    assert_eq!(size_of::<TA_TRANSFORM_2D>(), 44);
+    assert_eq!(align_of::<TA_TRANSFORM_2D>(), 4);
+    assert_eq!(size_of::<TA_TRANSFORM_OPACITY>(), 28);
+    assert_eq!(align_of::<TA_TRANSFORM_OPACITY>(), 4);
+    assert_eq!(size_of::<TA_TRANSFORM_CLIP>(), 52);
+    assert_eq!(align_of::<TA_TRANSFORM_CLIP>(), 4);
+    assert_eq!(size_of::<TA_TIMINGFUNCTION>(), 4);
+    assert_eq!(align_of::<TA_TIMINGFUNCTION>(), 4);
+    assert_eq!(size_of::<TA_CUBIC_BEZIER>(), 20);
+    assert_eq!(align_of::<TA_CUBIC_BEZIER>(), 4);
+    assert_eq!(size_of::<DTBGOPTS>(), 24);
+    assert_eq!(align_of::<DTBGOPTS>(), 4);
+    assert_eq!(size_of::<MARGINS>(), 16);
+    assert_eq!(align_of::<MARGINS>(), 4);
+    assert_eq!(size_of::<INTLIST>(), 1612);
+    assert_eq!(align_of::<INTLIST>(), 4);
+    assert_eq!(size_of::<WTA_OPTIONS>(), 8);
+    assert_eq!(align_of::<WTA_OPTIONS>(), 4);
+    assert_eq!(size_of::<DTTOPTS>(), 64);
+    assert_eq!(align_of::<DTTOPTS>(), 4);
+    assert_eq!(size_of::<BP_ANIMATIONPARAMS>(), 16);
+    assert_eq!(align_of::<BP_ANIMATIONPARAMS>(), 4);
+    assert_eq!(size_of::<BP_PAINTPARAMS>(), 16);
+    assert_eq!(align_of::<BP_PAINTPARAMS>(), 4);
+}
 #[cfg(feature = "vsbackup")] #[test]
 fn um_vsbackup() {
     use winapi::um::vsbackup::*;
@@ -5483,6 +5779,12 @@ fn um_vss() {
     assert_eq!(align_of::<VSS_OBJECT_UNION>(), 8);
     assert_eq!(size_of::<VSS_OBJECT_PROP>(), 104);
     assert_eq!(align_of::<VSS_OBJECT_PROP>(), 8);
+}
+#[cfg(feature = "wbemcli")] #[test]
+fn um_wbemcli() {
+    use winapi::um::wbemcli::*;
+    assert_eq!(size_of::<WBEM_COMPILE_STATUS_INFO>(), 24);
+    assert_eq!(align_of::<WBEM_COMPILE_STATUS_INFO>(), 4);
 }
 #[cfg(feature = "wct")] #[test]
 fn um_wct() {
@@ -6909,6 +7211,8 @@ fn um_winioctl() {
     assert_eq!(align_of::<DISK_EXTENT>(), 8);
     assert_eq!(size_of::<VOLUME_DISK_EXTENTS>(), 32);
     assert_eq!(align_of::<VOLUME_DISK_EXTENTS>(), 8);
+    assert_eq!(size_of::<DISK_PERFORMANCE>(), 88);
+    assert_eq!(align_of::<DISK_PERFORMANCE>(), 8);
 }
 #[cfg(feature = "winnetwk")] #[test]
 fn um_winnetwk() {
@@ -7240,6 +7544,12 @@ fn um_winnt() {
     assert_eq!(align_of::<PROCESS_MITIGATION_FONT_DISABLE_POLICY>(), 4);
     assert_eq!(size_of::<PROCESS_MITIGATION_IMAGE_LOAD_POLICY>(), 4);
     assert_eq!(align_of::<PROCESS_MITIGATION_IMAGE_LOAD_POLICY>(), 4);
+    assert_eq!(size_of::<PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY>(), 4);
+    assert_eq!(align_of::<PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY>(), 4);
+    assert_eq!(size_of::<PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY>(), 4);
+    assert_eq!(align_of::<PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY>(), 4);
+    assert_eq!(size_of::<PROCESS_MITIGATION_CHILD_PROCESS_POLICY>(), 4);
+    assert_eq!(align_of::<PROCESS_MITIGATION_CHILD_PROCESS_POLICY>(), 4);
     assert_eq!(size_of::<JOBOBJECT_BASIC_ACCOUNTING_INFORMATION>(), 48);
     assert_eq!(align_of::<JOBOBJECT_BASIC_ACCOUNTING_INFORMATION>(), 8);
     assert_eq!(size_of::<JOBOBJECT_BASIC_LIMIT_INFORMATION>(), 48);
@@ -8371,10 +8681,6 @@ fn um_winuser() {
     assert_eq!(align_of::<MSGBOXPARAMSW>(), 4);
     assert_eq!(size_of::<SCROLLINFO>(), 28);
     assert_eq!(align_of::<SCROLLINFO>(), 4);
-    assert_eq!(size_of::<SCROLLBARINFO>(), 60);
-    assert_eq!(align_of::<SCROLLBARINFO>(), 4);
-    assert_eq!(size_of::<SIZE>(), 8);
-    assert_eq!(align_of::<SIZE>(), 4);
     assert_eq!(size_of::<ICONINFO>(), 20);
     assert_eq!(align_of::<ICONINFO>(), 4);
     assert_eq!(size_of::<NONCLIENTMETRICSA>(), 344);
@@ -8387,6 +8693,23 @@ fn um_winuser() {
     assert_eq!(align_of::<MONITORINFOEXA>(), 4);
     assert_eq!(size_of::<MONITORINFOEXW>(), 104);
     assert_eq!(align_of::<MONITORINFOEXW>(), 4);
+    assert_eq!(size_of::<GUITHREADINFO>(), 48);
+    assert_eq!(align_of::<GUITHREADINFO>(), 4);
+    assert_eq!(size_of::<CURSORINFO>(), 20);
+    assert_eq!(align_of::<CURSORINFO>(), 4);
+    assert_eq!(size_of::<WINDOWINFO>(), 60);
+    assert_eq!(align_of::<WINDOWINFO>(), 4);
+    assert_eq!(size_of::<TITLEBARINFO>(), 44);
+    assert_eq!(align_of::<TITLEBARINFO>(), 4);
+    assert_eq!(size_of::<TITLEBARINFOEX>(), 140);
+    assert_eq!(align_of::<TITLEBARINFOEX>(), 4);
+    assert_eq!(size_of::<MENUBARINFO>(), 32);
+    assert_eq!(align_of::<MENUBARINFO>(), 4);
+    assert_eq!(size_of::<SCROLLBARINFO>(), 60);
+    assert_eq!(align_of::<SCROLLBARINFO>(), 4);
+    assert_eq!(size_of::<COMBOBOXINFO>(), 52);
+    assert_eq!(align_of::<COMBOBOXINFO>(), 4);
+    assert_eq!(size_of::<ALTTABINFO>(), 40);
     assert_eq!(size_of::<RAWINPUTHEADER>(), 16);
     assert_eq!(align_of::<RAWINPUTHEADER>(), 4);
     assert_eq!(size_of::<RAWMOUSE>(), 24);
@@ -8417,6 +8740,35 @@ fn um_winuser() {
     assert_eq!(align_of::<CHANGEFILTERSTRUCT>(), 4);
     assert_eq!(size_of::<ANIMATIONINFO>(), 8);
     assert_eq!(align_of::<ANIMATIONINFO>(), 4);
+    assert_eq!(size_of::<WINDOWINFO>(), 60);
+}
+#[cfg(feature = "ws2bth")] #[test]
+fn um_ws2bth() {
+    use winapi::um::ws2bth::*;
+    assert_eq!(size_of::<SOCKADDR_BTH>(), 30);
+    assert_eq!(align_of::<SOCKADDR_BTH>(), 1);
+    assert_eq!(size_of::<BTH_SET_SERVICE>(), 37);
+    assert_eq!(align_of::<BTH_SET_SERVICE>(), 1);
+    assert_eq!(size_of::<BTH_QUERY_DEVICE>(), 5);
+    assert_eq!(align_of::<BTH_QUERY_DEVICE>(), 1);
+    assert_eq!(size_of::<BTH_QUERY_SERVICE>(), 256);
+    assert_eq!(align_of::<BTH_QUERY_SERVICE>(), 1);
+    assert_eq!(size_of::<RFCOMM_MSC_DATA>(), 2);
+    assert_eq!(align_of::<RFCOMM_MSC_DATA>(), 1);
+    assert_eq!(size_of::<RFCOMM_RLS_DATA>(), 1);
+    assert_eq!(align_of::<RFCOMM_RLS_DATA>(), 1);
+    assert_eq!(size_of::<RFCOMM_RPN_DATA>(), 7);
+    assert_eq!(align_of::<RFCOMM_RPN_DATA>(), 1);
+    assert_eq!(size_of::<RFCOMM_COMMAND>(), 11);
+    assert_eq!(align_of::<RFCOMM_COMMAND>(), 1);
+    assert_eq!(size_of::<BTH_PING_REQ>(), 53);
+    assert_eq!(align_of::<BTH_PING_REQ>(), 1);
+    assert_eq!(size_of::<BTH_PING_RSP>(), 45);
+    assert_eq!(align_of::<BTH_PING_RSP>(), 1);
+    assert_eq!(size_of::<BTH_INFO_REQ>(), 10);
+    assert_eq!(align_of::<BTH_INFO_REQ>(), 1);
+    assert_eq!(size_of::<BTH_INFO_RSP>(), 47);
+    assert_eq!(align_of::<BTH_INFO_RSP>(), 1);
 }
 #[cfg(feature = "ws2spi")] #[test]
 fn um_ws2spi() {

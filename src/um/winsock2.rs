@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -83,14 +82,14 @@ STRUCT!{struct netent {
     n_addrtype: c_short,
     n_net: u_long,
 }}
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 STRUCT!{struct servent {
     s_name: *mut c_char,
     s_aliases: *mut *mut c_char,
     s_port: c_short,
     s_proto: *mut c_char,
 }}
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 STRUCT!{struct servent {
     s_name: *mut c_char,
     s_aliases: *mut *mut c_char,
@@ -133,7 +132,7 @@ pub const IMPLINK_HIGHEXPER: c_short = 158;
 pub const ADDR_ANY: ULONG = INADDR_ANY;
 pub const WSADESCRIPTION_LEN: usize = 256;
 pub const WSASYS_STATUS_LEN: usize = 128;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 STRUCT!{struct WSADATA {
     wVersion: WORD,
     wHighVersion: WORD,
@@ -143,7 +142,7 @@ STRUCT!{struct WSADATA {
     iMaxUdpDg: c_ushort,
     lpVendorInfo: *mut c_char,
 }}
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 STRUCT!{struct WSADATA {
     wVersion: WORD,
     wHighVersion: WORD,

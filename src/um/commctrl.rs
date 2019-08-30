@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -6,7 +5,7 @@
 // except according to those terms.
 use ctypes::{c_char, c_int, c_long, c_short, c_void};
 use shared::basetsd::{DWORD_PTR, INT_PTR, LONG_PTR, UINT_PTR};
-#[cfg(target_arch = "x86_64")] use shared::basetsd::PINT_PTR;
+#[cfg(target_pointer_width = "64")] use shared::basetsd::PINT_PTR;
 use shared::guiddef::{IID, REFIID};
 use shared::minwindef::{
     BOOL, BYTE, DWORD, HINSTANCE, HKEY, INT, LPARAM, LPINT, LRESULT, PUINT, UINT, ULONG, WORD,
@@ -50,13 +49,11 @@ pub const ICC_PAGESCROLLER_CLASS: DWORD = 0x1000;
 pub const ICC_NATIVEFNTCTL_CLASS: DWORD = 0x2000;
 pub const ICC_STANDARD_CLASSES: DWORD = 0x4000;
 pub const ICC_LINK_CLASS: DWORD = 0x8000;
-
 extern "system" {
     pub fn InitCommonControlsEx(
         lpInitCtrls: *const INITCOMMONCONTROLSEX,
     ) -> BOOL;
 }
-
 pub const ODT_HEADER: UINT = 100;
 pub const ODT_TAB: UINT = 101;
 pub const ODT_LISTVIEW: UINT = 102;
@@ -293,7 +290,6 @@ pub const ILC_MIRROR: UINT = 0x00002000;
 pub const ILC_PERITEMMIRROR: UINT = 0x00008000;
 pub const ILC_ORIGINALSIZE: UINT = 0x00010000;
 pub const ILC_HIGHQUALITYSCALE: UINT = 0x00020000;
-
 extern "system" {
     pub fn ImageList_Create(
         cx: c_int,
@@ -366,7 +362,6 @@ pub const ILS_SATURATE: DWORD = 0x00000004;
 pub const ILS_ALPHA: DWORD = 0x00000008;
 pub const ILGT_NORMAL: DWORD = 0x00000000;
 pub const ILGT_ASYNC : DWORD = 0x00000001;
-
 extern "system" {
     pub fn ImageList_Draw(
         himl: HIMAGELIST,
@@ -378,7 +373,6 @@ extern "system" {
     ) -> BOOL;
 }
 pub const HBITMAP_CALLBACK: HBITMAP = -1isize as HBITMAP;
-
 extern "system" {
     pub fn ImageList_Replace(
         himl: HIMAGELIST,
@@ -436,7 +430,6 @@ extern "system" {
 }
 pub const ILCF_MOVE: UINT = 0x00000000;
 pub const ILCF_SWAP: UINT = 0x00000001;
-
 extern "system" {
     pub fn ImageList_Copy(
         himlDst: HIMAGELIST,
@@ -777,7 +770,7 @@ STRUCT!{struct NMHDFILTERBTNCLICK {
 }}
 pub type LPNMHDFILTERBTNCLICK = *mut NMHDFILTERBTNCLICK;
 pub const TOOLBARCLASSNAME: &'static str = "ToolbarWindow32";
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 STRUCT!{struct TBBUTTON {
     iBitmap: c_int,
     idCommand: c_int,
@@ -787,7 +780,7 @@ STRUCT!{struct TBBUTTON {
     dwData: DWORD_PTR,
     iString: INT_PTR,
 }}
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 STRUCT!{struct TBBUTTON {
     iBitmap: c_int,
     idCommand: c_int,
@@ -4039,7 +4032,7 @@ extern "system" {
         propIndex: c_int,
         pValue: LPINT,
     ) -> BOOL;
-    #[cfg(target_arch = "x86_64")]
+    #[cfg(target_pointer_width = "64")]
     pub fn FlatSB_GetScrollPropPtr(
         hWnd: HWND,
         propIndex: c_int,

@@ -1,4 +1,3 @@
-// Copyright © 2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -32,7 +31,7 @@ pub const GLOBAL_LOGGER_NAME: &'static str = "GlobalLogger";
 pub const EVENT_LOGGER_NAME: &'static str = "EventLog";
 pub const DIAG_LOGGER_NAME: &'static str = "DiagLog";
 pub const MAX_MOF_FIELDS: SIZE_T = 16;
-DECLARE_HANDLE!(TRACEHANDLE, __TRACEHANDLE);
+DECLARE_HANDLE!{TRACEHANDLE, __TRACEHANDLE}
 pub type PTRACEHANDLE = *mut TRACEHANDLE;
 pub const EVENT_TRACE_TYPE_INFO: DWORD = 0x00;
 pub const EVENT_TRACE_TYPE_START: DWORD = 0x01;
@@ -367,7 +366,7 @@ pub const ETW_WMITIME_TYPE_VALUE: ULONG = 118;
 pub const ETW_DATETIME_TYPE_VALUE: ULONG = 119;
 pub const ETW_REFRENCE_TYPE_VALUE: ULONG = 120;
 // TODO: DEFINE_TRACE_MOF_FIELD
-STRUCT!{struct MOF_FIELD{
+STRUCT!{struct MOF_FIELD {
     DataPtr: ULONG64,
     Length: ULONG,
     DataType: ULONG,
@@ -981,11 +980,11 @@ extern "C" {
         ...
     ) -> ULONG;
     pub fn TraceMessageVa(
-       SessionHandle: TRACEHANDLE,
-       MessageFlags: ULONG,
-       MessageGuid: LPGUID,
-       MessageNumber: USHORT,
-       MessageArgList: va_list,
+        SessionHandle: TRACEHANDLE,
+        MessageFlags: ULONG,
+        MessageGuid: LPGUID,
+        MessageNumber: USHORT,
+        MessageArgList: va_list,
     );
 }
 pub const INVALID_PROCESSTRACE_HANDLE: TRACEHANDLE = INVALID_HANDLE_VALUE as TRACEHANDLE;
