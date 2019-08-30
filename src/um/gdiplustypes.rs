@@ -402,7 +402,6 @@ impl RectF {
         let b = min(self.GetBottom(), other.GetBottom());
         let l = min(self.GetLeft(), other.GetLeft());
         let t = min(self.GetTop(), other.GetTop());
-
         self.X = l;
         self.Y = t;
         self.Width = r - l;
@@ -420,7 +419,6 @@ impl RectF {
         let b = max(self.GetBottom(), other.GetBottom());
         let l = min(self.GetLeft(), other.GetLeft());
         let t = min(self.GetTop(), other.GetTop());
-
         self.X = l;
         self.Y = t;
         self.Width = r - l;
@@ -492,7 +490,6 @@ impl Rect {
         let b = cmp::min(self.GetBottom(), other.GetBottom());
         let l = cmp::min(self.GetLeft(), other.GetLeft());
         let t = cmp::min(self.GetTop(), other.GetTop());
-
         self.X = l;
         self.Y = t;
         self.Width = r - l;
@@ -510,7 +507,6 @@ impl Rect {
         let b = cmp::max(self.GetBottom(), other.GetBottom());
         let l = cmp::min(self.GetLeft(), other.GetLeft());
         let t = cmp::min(self.GetTop(), other.GetTop());
-
         self.X = l;
         self.Y = t;
         self.Width = r - l;

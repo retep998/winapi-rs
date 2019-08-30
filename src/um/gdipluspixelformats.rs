@@ -22,20 +22,29 @@ pub const PixelFormatExtended: PixelFormat = 0x00100000;
 pub const PixelFormatCanonical: PixelFormat = 0x00200000;
 pub const PixelFormatUndefined: PixelFormat = 0;
 pub const PixelFormatDontCare: PixelFormat = 0;
-pub const PixelFormat1bppIndexed: PixelFormat = (1 | ( 1 << 8) | PixelFormatIndexed | PixelFormatGDI);
-pub const PixelFormat4bppIndexed: PixelFormat = (2 | ( 4 << 8) | PixelFormatIndexed | PixelFormatGDI);
-pub const PixelFormat8bppIndexed: PixelFormat = (3 | ( 8 << 8) | PixelFormatIndexed | PixelFormatGDI);
+pub const PixelFormat1bppIndexed: PixelFormat =
+    (1 | ( 1 << 8) | PixelFormatIndexed | PixelFormatGDI);
+pub const PixelFormat4bppIndexed: PixelFormat =
+    (2 | ( 4 << 8) | PixelFormatIndexed | PixelFormatGDI);
+pub const PixelFormat8bppIndexed: PixelFormat = (3 |
+    ( 8 << 8) | PixelFormatIndexed | PixelFormatGDI);
 pub const PixelFormat16bppGrayScale: PixelFormat = (4 | (16 << 8) | PixelFormatExtended);
 pub const PixelFormat16bppRGB555: PixelFormat = (5 | (16 << 8) | PixelFormatGDI);
 pub const PixelFormat16bppRGB565: PixelFormat = (6 | (16 << 8) | PixelFormatGDI);
-pub const PixelFormat16bppARGB1555: PixelFormat = (7 | (16 << 8) | PixelFormatAlpha | PixelFormatGDI);
+pub const PixelFormat16bppARGB1555: PixelFormat =
+    (7 | (16 << 8) | PixelFormatAlpha | PixelFormatGDI);
 pub const PixelFormat24bppRGB: PixelFormat = (8 | (24 << 8) | PixelFormatGDI);
 pub const PixelFormat32bppRGB: PixelFormat = (9 | (32 << 8) | PixelFormatGDI);
-pub const PixelFormat32bppARGB: PixelFormat = (10 | (32 << 8) | PixelFormatAlpha | PixelFormatGDI | PixelFormatCanonical);
-pub const PixelFormat32bppPARGB: PixelFormat = (11 | (32 << 8) | PixelFormatAlpha | PixelFormatPAlpha | PixelFormatGDI);
-pub const PixelFormat48bppRGB: PixelFormat = (12 | (48 << 8) | PixelFormatExtended);
-pub const PixelFormat64bppARGB: PixelFormat = (13 | (64 << 8) | PixelFormatAlpha  | PixelFormatCanonical | PixelFormatExtended);
-pub const PixelFormat64bppPARGB: PixelFormat = (14 | (64 << 8) | PixelFormatAlpha  | PixelFormatPAlpha | PixelFormatExtended);
+pub const PixelFormat32bppARGB: PixelFormat =
+    (10 | (32 << 8) | PixelFormatAlpha | PixelFormatGDI | PixelFormatCanonical);
+pub const PixelFormat32bppPARGB: PixelFormat =
+    (11 | (32 << 8) | PixelFormatAlpha | PixelFormatPAlpha | PixelFormatGDI);
+pub const PixelFormat48bppRGB: PixelFormat =
+    (12 | (48 << 8) | PixelFormatExtended);
+pub const PixelFormat64bppARGB: PixelFormat =
+    (13 | (64 << 8) | PixelFormatAlpha  | PixelFormatCanonical | PixelFormatExtended);
+pub const PixelFormat64bppPARGB: PixelFormat =
+    (14 | (64 << 8) | PixelFormatAlpha  | PixelFormatPAlpha | PixelFormatExtended);
 pub const PixelFormat32bppCMYK: PixelFormat = (15 | (32 << 8));
 pub const PixelFormatMax: PixelFormat = 16;
 #[inline]
