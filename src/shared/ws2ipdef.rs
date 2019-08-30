@@ -1,17 +1,19 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! TCP/IP specific information for use by WinSock2 compatible applications.
-
 use ctypes::c_int;
 use shared::in6addr::IN6_ADDR;
 use shared::inaddr::IN_ADDR;
 use shared::minwindef::{ULONG, USHORT};
 use shared::ws2def::{ADDRESS_FAMILY, SCOPE_ID};
-
+pub const IFF_UP: ULONG = 0x00000001;
+pub const IFF_BROADCAST: ULONG = 0x00000002;
+pub const IFF_LOOPBACK: ULONG = 0x00000004;
+pub const IFF_POINTTOPOINT: ULONG = 0x00000008;
+pub const IFF_MULTICAST: ULONG = 0x00000010;
 pub const IP_OPTIONS: c_int = 1;
 pub const IP_HDRINCL: c_int = 2;
 pub const IP_TOS: c_int = 3;
@@ -28,6 +30,20 @@ pub const IP_BLOCK_SOURCE: c_int = 17;
 pub const IP_UNBLOCK_SOURCE: c_int = 18;
 pub const IP_PKTINFO: c_int = 19;
 pub const IP_RECEIVE_BROADCAST: c_int = 22;
+pub const IP_RECVDSTADDR: c_int = 25;
+UNION!{union SOCKADDR_IN6_LH_u {
+    [u32; 1],
+    sin6_scope_id sin6_scope_id_mut: ULONG,
+    sin6_scope_struct sin6_scope_struct_mut: SCOPE_ID,
+}}
+STRUCT!{struct SOCKADDR_IN6_LH {
+    sin6_family: ADDRESS_FAMILY,
+    sin6_port: USHORT,
+    sin6_flowinfo: ULONG,
+    sin6_addr: IN6_ADDR,
+    u: SOCKADDR_IN6_LH_u,
+}}
+pub type PSOCKADDR_IN6_LH = *mut SOCKADDR_IN6_LH;
 STRUCT!{struct IP_MREQ {
     imr_multiaddr: IN_ADDR,
     imr_interface: IN_ADDR,
@@ -64,16 +80,13 @@ STRUCT!{struct IPV6_MREQ {
     ipv6mr_interface: ULONG,
 }}
 pub type PIPV6_MREQ = *mut IPV6_MREQ;
-UNION!{union SOCKADDR_IN6_LH_u {
-    [u32; 1],
-    sin6_scope_id sin6_scope_id_mut: ULONG,
-    sin6_scope_struct sin6_scope_struct_mut: SCOPE_ID,
+STRUCT!{struct IN_PKTINFO {
+    ipi_addr: IN_ADDR,
+    ipi_ifindex: ULONG,
 }}
-STRUCT!{struct SOCKADDR_IN6_LH {
-  sin6_family: ADDRESS_FAMILY,
-  sin6_port: USHORT,
-  sin6_flowinfo: ULONG,
-  sin6_addr: IN6_ADDR,
-  u: SOCKADDR_IN6_LH_u,
+pub type PIN_PKTINFO = *mut IN_PKTINFO;
+STRUCT!{struct IN6_PKTINFO {
+    ipi6_addr: IN6_ADDR,
+    ipi6_ifindex: ULONG,
 }}
-pub type PSOCKADDR_IN6_LH = *mut SOCKADDR_IN6_LH;
+pub type PIN6_PKTINFO = *mut IN6_PKTINFO;

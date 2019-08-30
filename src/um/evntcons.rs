@@ -1,4 +1,3 @@
-// Copyright © 2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -9,7 +8,9 @@ use shared::evntprov::EVENT_DESCRIPTOR;
 use shared::evntrace::ETW_BUFFER_CONTEXT;
 use shared::guiddef::{GUID, LPGUID};
 use shared::minwindef::{PUCHAR, PULONG, PUSHORT, UCHAR, ULONG, USHORT};
-use um::winnt::{ANYSIZE_ARRAY, BOOLEAN, LARGE_INTEGER, PCSTR, PSECURITY_DESCRIPTOR, PSID, PVOID, ULONGLONG};
+use um::winnt::{
+    ANYSIZE_ARRAY, BOOLEAN, LARGE_INTEGER, PCSTR, PSECURITY_DESCRIPTOR, PSID, PVOID, ULONGLONG,
+};
 pub const EVENT_HEADER_EXT_TYPE_RELATED_ACTIVITYID: USHORT = 0x0001;
 pub const EVENT_HEADER_EXT_TYPE_SID: USHORT = 0x0002;
 pub const EVENT_HEADER_EXT_TYPE_TS_ID: USHORT = 0x0003;
@@ -26,18 +27,18 @@ pub const EVENT_HEADER_EXT_TYPE_PROCESS_START_KEY: USHORT = 0x000D;
 pub const EVENT_HEADER_EXT_TYPE_CONTROL_GUID: USHORT = 0x000E;
 pub const EVENT_HEADER_EXT_TYPE_MAX: USHORT = 0x000F;
 STRUCT!{struct EVENT_HEADER_EXTENDED_DATA_ITEM_s {
-   bitfield: USHORT,
+    bitfield: USHORT,
 }}
 BITFIELD!{EVENT_HEADER_EXTENDED_DATA_ITEM_s bitfield: USHORT [
     Linkage set_Linkage[0..1],
     Reserved2 set_Reserved2[1..16],
 ]}
 STRUCT!{struct EVENT_HEADER_EXTENDED_DATA_ITEM {
-   Reserved1: USHORT,
-   ExtType: USHORT,
-   s: EVENT_HEADER_EXTENDED_DATA_ITEM_s,
-   DataSize: USHORT,
-   DataPtr: ULONGLONG,
+    Reserved1: USHORT,
+    ExtType: USHORT,
+    s: EVENT_HEADER_EXTENDED_DATA_ITEM_s,
+    DataSize: USHORT,
+    DataPtr: ULONGLONG,
 }}
 pub type PEVENT_HEADER_EXTENDED_DATA_ITEM = *mut EVENT_HEADER_EXTENDED_DATA_ITEM;
 STRUCT!{struct EVENT_EXTENDED_ITEM_INSTANCE {
@@ -165,44 +166,40 @@ unsafe fn strnlen(s: PCSTR, max_len: isize) -> isize {
 #[inline]
 unsafe fn read_unaligned<T>(src: *const T) -> T {
     use core::{mem, ptr};
-
     let mut tmp: T = mem::uninitialized();
-    ptr::copy_nonoverlapping(src as *const u8,
-                             &mut tmp as *mut T as *mut u8,
-                             mem::size_of::<T>());
+    ptr::copy_nonoverlapping(
+        src as *const u8,
+        &mut tmp as *mut T as *mut u8,
+        mem::size_of::<T>(),
+    );
     tmp
 }
 #[inline]
 pub unsafe fn EtwGetTraitFromProviderTraits(
-   ProviderTraits: PVOID, TraitType: UCHAR, Trait: *mut PVOID, Size: PUSHORT,
+    ProviderTraits: PVOID, TraitType: UCHAR, Trait: *mut PVOID, Size: PUSHORT,
 ) {
     use core::ptr::null_mut;
-    
     let ByteCount = read_unaligned(ProviderTraits as *mut USHORT) as isize;
     let mut Ptr = ProviderTraits as PUCHAR;
     let PtrEnd = Ptr.offset(ByteCount);
     *Trait = null_mut();
     *Size = 0;
     if ByteCount < 3 {
-        return; 
+        return;
     }
-
     Ptr = Ptr.offset(2);
     Ptr = Ptr.offset(strnlen(Ptr as PCSTR, (ByteCount - 3) as isize));
     Ptr = Ptr.offset(1);
-
     while Ptr < PtrEnd {
         let TraitByteCount = read_unaligned(Ptr as *const USHORT);
         if TraitByteCount < 3 {
             return;
         }
-
         if *Ptr.offset(2) == TraitType && Ptr.offset(TraitByteCount as isize) <= PtrEnd {
             *Trait = Ptr.offset(3) as PVOID;
             *Size = TraitByteCount - 3;
             return;
         }
-
         Ptr = Ptr.offset(TraitByteCount as isize);
     }
 }

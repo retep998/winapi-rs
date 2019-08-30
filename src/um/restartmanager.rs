@@ -1,4 +1,3 @@
-// Copyright © 2018 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -72,10 +71,10 @@ ENUM!{enum RM_FILTER_ACTION {
     RmNoShutdown = 2,
 }}
 UNION!{union RM_FILTER_INFO_u {
-  [u32; 3] [u64; 2],
-  strFilename strFilename_mut: LPWSTR,
-  Process Process_mut: RM_UNIQUE_PROCESS,
-  strServiceShortName strServiceShortName_mut: LPWSTR,
+    [u32; 3] [u64; 2],
+    strFilename strFilename_mut: LPWSTR,
+    Process Process_mut: RM_UNIQUE_PROCESS,
+    strServiceShortName strServiceShortName_mut: LPWSTR,
 }}
 STRUCT!{struct RM_FILTER_INFO {
     FilterAction: RM_FILTER_ACTION,

@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -35,9 +34,9 @@ pub type PHTTP_SERVER_PROPERTY = *mut HTTP_SERVER_PROPERTY;
 STRUCT!{struct HTTP_PROPERTY_FLAGS {
     BitFields: ULONG,
 }}
-BITFIELD!(HTTP_PROPERTY_FLAGS BitFields: ULONG [
+BITFIELD!{HTTP_PROPERTY_FLAGS BitFields: ULONG [
     Present set_Present[0..1],
-]);
+]}
 pub type PHTTP_PROPERTY_FLAGS = *mut HTTP_PROPERTY_FLAGS;
 ENUM!{enum HTTP_ENABLED_STATE {
     HttpEnabledStateActive,
@@ -705,7 +704,7 @@ pub fn HTTPAPI_LESS_VERSION(version: HTTPAPI_VERSION, major: USHORT, minor: USHO
 pub fn HTTPAPI_VERSION_GREATER_OR_EQUAL(
     version: HTTPAPI_VERSION,
     major: USHORT,
-    minor: USHORT
+    minor: USHORT,
 ) -> bool {
     !HTTPAPI_LESS_VERSION(version, major, minor)
 }
@@ -883,7 +882,7 @@ extern "system" {
         pReserved: PVOID,
     ) -> ULONG;
     pub fn HttpShutdownRequestQueue(
-        ReqQueueHandle: HANDLE
+        ReqQueueHandle: HANDLE,
     ) -> ULONG;
     pub fn HttpReceiveClientCertificate(
         ReqQueueHandle: HANDLE,

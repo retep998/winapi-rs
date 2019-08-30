@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -7,7 +6,7 @@
 use shared::basetsd::{PULONG_PTR, ULONG_PTR};
 use shared::minwindef::{BOOL, DWORD, LPDWORD, LPVOID, PULONG, ULONG};
 use um::minwinbase::{LPOVERLAPPED, LPOVERLAPPED_ENTRY};
-use um::winnt::{HANDLE};
+use um::winnt::HANDLE;
 extern "system" {
     pub fn CreateIoCompletionPort(
         FileHandle: HANDLE,

@@ -1,11 +1,9 @@
-// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! FFI bindings to psapi.
-
 use shared::guiddef::GUID;
 use shared::minwindef::{
     BOOL, BYTE, DWORD, LPBOOL, LPDWORD, LPVOID, PBOOL, PDWORD, PUCHAR, PULONG, UCHAR, ULONG
@@ -20,7 +18,6 @@ use um::winnt::{
     SECURITY_IMPERSONATION_LEVEL, SECURITY_INFORMATION, TOKEN_INFORMATION_CLASS, TOKEN_TYPE,
     WELL_KNOWN_SID_TYPE
 };
-
 extern "system" {
     pub fn AccessCheck(
         pSecurityDescriptor: PSECURITY_DESCRIPTOR,
@@ -387,7 +384,7 @@ extern "system" {
         pAce: *mut LPVOID,
     ) -> BOOL;
     pub fn FreeSid(
-        pSid: PSID
+        pSid: PSID,
     ) -> PVOID;
     pub fn GetAce(
         pAcl: PACL,
@@ -441,7 +438,7 @@ extern "system" {
         lpbGroupDefaulted: LPBOOL,
     ) -> BOOL;
     pub fn GetSecurityDescriptorLength(
-        pSecurityDescriptor: PSECURITY_DESCRIPTOR
+        pSecurityDescriptor: PSECURITY_DESCRIPTOR,
     ) -> DWORD;
     pub fn GetSecurityDescriptorOwner(
         pSecurityDescriptor: PSECURITY_DESCRIPTOR,

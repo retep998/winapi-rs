@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -7,8 +6,9 @@
 //! user APIs for the Configuration Manager
 use shared::basetsd::{DWORD_PTR, ULONG32, ULONG64, ULONG_PTR};
 use shared::cfg::PPNP_VETO_TYPE;
+use shared::devpropdef::{DEVPROPKEY, DEVPROPTYPE};
 use shared::guiddef::{GUID, LPGUID};
-use shared::minwindef::{BOOL, BYTE, DWORD, MAX_PATH, PBOOL, PHKEY, PULONG, ULONG, WORD};
+use shared::minwindef::{BOOL, BYTE, DWORD, MAX_PATH, PBOOL, PBYTE, PHKEY, PULONG, ULONG, WORD};
 use um::winnt::{
     ANYSIZE_ARRAY, CHAR, DWORDLONG, HANDLE, LARGE_INTEGER, LONG, LPCSTR, LPCWSTR, LPSTR, LPWSTR,
     PCHAR, PCSTR, PCWSTR, PDWORDLONG, PSTR, PVOID, PWCHAR, PWSTR, ULONGLONG, VOID, WCHAR
@@ -626,7 +626,7 @@ pub const CM_NAME_ATTRIBUTE_USER_ASSIGNED_NAME: ULONG = 0x2;
 pub const CM_CLASS_PROPERTY_INSTALLER: ULONG = 0x00000000;
 pub const CM_CLASS_PROPERTY_INTERFACE: ULONG = 0x00000001;
 pub const CM_CLASS_PROPERTY_BITS: ULONG = 0x00000001;
-DECLARE_HANDLE!(HCMNOTIFICATION, HCMNOTIFICATION__);
+DECLARE_HANDLE!{HCMNOTIFICATION, HCMNOTIFICATION__}
 pub type PHCMNOTIFICATION = *mut HCMNOTIFICATION;
 pub const CM_NOTIFY_FILTER_FLAG_ALL_INTERFACE_CLASSES: ULONG = 0x00000001;
 pub const CM_NOTIFY_FILTER_FLAG_ALL_DEVICE_INSTANCES: ULONG = 0x00000002;
@@ -1116,6 +1116,23 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
+    pub fn CM_Get_DevNode_PropertyW(
+        dnDevInst: DEVINST,
+        PropertyKey: *const DEVPROPKEY,
+        PropertyType: *mut DEVPROPTYPE,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: PULONG,
+        ulFlags: ULONG,
+    ) -> CONFIGRET;
+    pub fn CM_Get_DevNode_PropertyExW(
+        dnDevInst: DEVINST,
+        PropertyKey: *const DEVPROPKEY,
+        PropertyType: *mut DEVPROPTYPE,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: PULONG,
+        ulFlags: ULONG,
+        hMachine: HMACHINE,
+    ) -> CONFIGRET;
     pub fn CM_Get_DevNode_Registry_PropertyA(
         dnDevInst: DEVINST,
         ulProperty: ULONG,
@@ -1348,6 +1365,23 @@ extern "system" {
         pulLen: PULONG,
         InterfaceClassGuid: LPGUID,
         pDeviceID: DEVINSTID_W,
+        ulFlags: ULONG,
+        hMachine: HMACHINE,
+    ) -> CONFIGRET;
+    pub fn CM_Get_Device_Interface_PropertyW(
+        pszDeviceInterface: LPCWSTR,
+        PropertyKey: *const DEVPROPKEY,
+        PropertyType: *mut DEVPROPTYPE,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: PULONG,
+        ulFlags: ULONG,
+    ) -> CONFIGRET;
+    pub fn CM_Get_Device_Interface_PropertyExW(
+        pszDeviceInterface: LPCWSTR,
+        PropertyKey: *const DEVPROPKEY,
+        PropertyType: *mut DEVPROPTYPE,
+        PropertyBuffer: PBYTE,
+        PropertyBufferSize: PULONG,
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;

@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -497,7 +496,7 @@ extern "system" {
         pPD: LPPRINTDLGW,
     ) -> BOOL;
 }
-RIDL!(#[uuid(0x5852a2c3, 0x6530, 0x11d1, 0xb6, 0xa3, 0x0, 0x0, 0xf8, 0x75, 0x7b, 0xf9)]
+RIDL!{#[uuid(0x5852a2c3, 0x6530, 0x11d1, 0xb6, 0xa3, 0x0, 0x0, 0xf8, 0x75, 0x7b, 0xf9)]
 interface IPrintDialogCallback(IPrintDialogCallbackVtbl): IUnknown(IUnknownVtbl) {
     fn InitDone() -> HRESULT,
     fn SelectionChange() -> HRESULT,
@@ -508,9 +507,8 @@ interface IPrintDialogCallback(IPrintDialogCallbackVtbl): IUnknown(IUnknownVtbl)
         lParam: LPARAM,
         pResult: *mut LRESULT,
     ) -> HRESULT,
-}
-);
-RIDL!(#[uuid(0x509aaeda, 0x5639, 0x11d1, 0xb6, 0xa1, 0x0, 0x0, 0xf8, 0x75, 0x7b, 0xf9)]
+}}
+RIDL!{#[uuid(0x509aaeda, 0x5639, 0x11d1, 0xb6, 0xa1, 0x0, 0x0, 0xf8, 0x75, 0x7b, 0xf9)]
 interface IPrintDialogServices(IPrintDialogServicesVtbl): IUnknown(IUnknownVtbl) {
     fn GetCurrentDevMode(
         pDevMode: LPDEVMODEW,
@@ -524,8 +522,7 @@ interface IPrintDialogServices(IPrintDialogServicesVtbl): IUnknown(IUnknownVtbl)
         pPortName: LPWSTR,
         pcchSize: *mut UINT,
     ) -> HRESULT,
-}
-);
+}}
 STRUCT!{#[cfg_attr(target_arch = "x86", repr(packed))] struct PRINTPAGERANGE {
     nFromPage: DWORD,
     nToPage: DWORD,

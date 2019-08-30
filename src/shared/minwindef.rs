@@ -1,4 +1,3 @@
-// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -81,19 +80,19 @@ pub type NEARPROC = *mut __some_function;
 /// Pointer to a function with unknown type signature.
 pub type PROC = *mut __some_function;
 pub type ATOM = WORD;
-DECLARE_HANDLE!(HKEY, HKEY__);
+DECLARE_HANDLE!{HKEY, HKEY__}
 pub type PHKEY = *mut HKEY;
-DECLARE_HANDLE!(HMETAFILE, HMETAFILE__);
-DECLARE_HANDLE!(HINSTANCE, HINSTANCE__);
+DECLARE_HANDLE!{HMETAFILE, HMETAFILE__}
+DECLARE_HANDLE!{HINSTANCE, HINSTANCE__}
 pub type HMODULE = HINSTANCE;
-DECLARE_HANDLE!(HRGN, HRGN__);
-DECLARE_HANDLE!(HRSRC, HRSRC__);
-DECLARE_HANDLE!(HSPRITE, HSPRITE__);
-DECLARE_HANDLE!(HLSURF, HLSURF__);
-DECLARE_HANDLE!(HSTR, HSTR__);
-DECLARE_HANDLE!(HTASK, HTASK__);
-DECLARE_HANDLE!(HWINSTA, HWINSTA__);
-DECLARE_HANDLE!(HKL, HKL__);
+DECLARE_HANDLE!{HRGN, HRGN__}
+DECLARE_HANDLE!{HRSRC, HRSRC__}
+DECLARE_HANDLE!{HSPRITE, HSPRITE__}
+DECLARE_HANDLE!{HLSURF, HLSURF__}
+DECLARE_HANDLE!{HSTR, HSTR__}
+DECLARE_HANDLE!{HTASK, HTASK__}
+DECLARE_HANDLE!{HWINSTA, HWINSTA__}
+DECLARE_HANDLE!{HKL, HKL__}
 pub type HFILE = c_int;
 STRUCT!{#[debug] struct FILETIME {
     dwLowDateTime: DWORD,

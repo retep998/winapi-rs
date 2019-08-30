@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -8,8 +7,8 @@
 use shared::minwindef::{BYTE, DWORD, ULONG, WORD};
 use um::winioctl::{FILE_ANY_ACCESS, FILE_DEVICE_SMARTCARD, METHOD_BUFFERED};
 pub type UWORD = WORD;
-DEFINE_GUID!(GUID_DEVINTERFACE_SMARTCARD_READER, 0x50DD5230, 0xBA8A, 0x11D1,
-    0xBF, 0x5D, 0x00, 0x00, 0xF8, 0x05, 0xF5, 0x30);
+DEFINE_GUID!{GUID_DEVINTERFACE_SMARTCARD_READER,
+    0x50DD5230, 0xBA8A, 0x11D1, 0xBF, 0x5D, 0x00, 0x00, 0xF8, 0x05, 0xF5, 0x30}
 pub const SCARD_ATR_LENGTHL: DWORD = 33;
 pub const SCARD_PROTOCOL_UNDEFINED: DWORD = 0x00000000;
 pub const SCARD_PROTOCOL_T0: DWORD = 0x00000001;
