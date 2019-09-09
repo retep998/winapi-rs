@@ -17,7 +17,7 @@ use shared::ipmib::{
 use shared::iprtrmib::{TCPIP_OWNER_MODULE_INFO_CLASS, TCP_TABLE_CLASS, UDP_TABLE_CLASS};
 use shared::minwindef::{BOOL, BYTE, DWORD, LPDWORD, PDWORD, PUCHAR, PULONG, UINT};
 use shared::ntdef::{
-    BOOLEAN, HANDLE, LPWSTR, PHANDLE, PVOID, PWSTR, ULONG, ULONGLONG, USHORT, VOID, WCHAR,
+    BOOLEAN, HANDLE, LPWSTR, PHANDLE, PVOID, PWSTR, ULONG, ULONGLONG, USHORT, WCHAR,
 };
 use shared::tcpestats::TCP_ESTATS_TYPE;
 use shared::tcpmib::{
@@ -398,7 +398,7 @@ extern "system" {
 }
 FN!{stdcall INTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK(
     CallerContext: PVOID,
-) -> VOID}
+) -> ()}
 pub type PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK = *mut
     INTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK;
 extern "system" {

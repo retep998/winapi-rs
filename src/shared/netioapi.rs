@@ -20,7 +20,7 @@ use shared::nldef::{
 };
 use shared::ntddndis::{NDIS_MEDIUM, NDIS_PHYSICAL_MEDIUM};
 use shared::ntdef::{
-    BOOLEAN, CHAR, HANDLE, LARGE_INTEGER, PCHAR, PCSTR, PSTR, PVOID, PWCHAR, PWSTR, VOID, WCHAR,
+    BOOLEAN, CHAR, HANDLE, LARGE_INTEGER, PCHAR, PCSTR, PSTR, PVOID, PWCHAR, PWSTR, WCHAR,
 };
 use shared::ws2def::{ADDRESS_FAMILY, SCOPE_ID, ScopeLevelCount};
 use shared::ws2ipdef::{PSOCKADDR_IN6_PAIR, SOCKADDR_IN6, SOCKADDR_INET};
@@ -194,7 +194,7 @@ FN!{stdcall PIPINTERFACE_CHANGE_CALLBACK(
     CallerContext: PVOID,
     Row: PMIB_IPINTERFACE_ROW,
     NotificationType: MIB_NOTIFICATION_TYPE,
-) -> VOID}
+) -> ()}
 STRUCT!{struct MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES {
     InboundBandwidthInformation: NL_BANDWIDTH_INFORMATION,
     OutboundBandwidthInformation: NL_BANDWIDTH_INFORMATION,
@@ -258,7 +258,7 @@ FN!{stdcall PUNICAST_IPADDRESS_CHANGE_CALLBACK(
     CallerContext: PVOID,
     Row: PMIB_UNICASTIPADDRESS_ROW,
     NotificationType: MIB_NOTIFICATION_TYPE,
-) -> VOID}
+) -> ()}
 extern "system" {
     pub fn CreateUnicastIpAddressEntry(
         Row: *const MIB_UNICASTIPADDRESS_ROW,
@@ -287,7 +287,7 @@ extern "system" {
 FN!{stdcall PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK(
     CallerContext: PVOID,
     AddressTable: PMIB_UNICASTIPADDRESS_TABLE,
-) -> VOID}
+) -> ()}
 extern "system" {
     pub fn NotifyStableUnicastIpAddressTable(
         Family: ADDRESS_FAMILY,
@@ -380,7 +380,7 @@ FN!{stdcall PIPFORWARD_CHANGE_CALLBACK(
     CallerContext: PVOID,
     Row: PMIB_IPFORWARD_ROW2,
     NotificationType: MIB_NOTIFICATION_TYPE,
-) -> VOID}
+) -> ()}
 extern "system" {
     pub fn CreateIpForwardEntry2(
         Row: *const MIB_IPFORWARD_ROW2,
@@ -515,7 +515,7 @@ FN!{stdcall PTEREDO_PORT_CHANGE_CALLBACK(
     CallerContext: PVOID,
     Port: USHORT,
     NotificationType: MIB_NOTIFICATION_TYPE,
-) -> VOID}
+) -> ()}
 extern "system" {
     pub fn NotifyTeredoPortChange(
         Callback: PTEREDO_PORT_CHANGE_CALLBACK,
