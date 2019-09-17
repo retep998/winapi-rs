@@ -4669,6 +4669,22 @@ extern "system" {
         uType: UINT,
         wLanguageId: WORD,
     ) -> c_int;
+    pub fn MessageBoxTimeoutA(
+        hWnd: HWND,
+        lpText: LPCSTR,
+        lpCaption: LPCSTR,
+        uType: UINT,
+        wLanguageId: WORD,
+        dwMilliseconds: DWORD,
+    ) -> c_int;
+    pub fn MessageBoxTimeoutW(
+        hWnd: HWND,
+        lpText: LPCWSTR,
+        lpCaption: LPCWSTR,
+        uType: UINT,
+        wLanguageId: WORD,
+        dwMilliseconds: DWORD,
+    ) -> c_int;
 }
 STRUCT!{struct MSGBOXPARAMSA {
     cbSize: UINT,
