@@ -994,7 +994,7 @@ STRUCT!{struct D3D12_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT {
 }}
 
 ENUM!{enum D3D12_SHADER_CACHE_SUPPORT_FLAGS {
-    D3D12_SHADER_CACHE_SUPPORT_NONE = 0x0,
+    D3D12_SHADER_CACHE_SUPPORT_NONE = 0,
     D3D12_SHADER_CACHE_SUPPORT_SINGLE_PSO = 0x1,
     D3D12_SHADER_CACHE_SUPPORT_LIBRARY = 0x2,
     D3D12_SHADER_CACHE_SUPPORT_AUTOMATIC_INPROC_CACHE = 0x4,
@@ -1259,7 +1259,7 @@ STRUCT!{struct D3D12_PACKED_MIP_INFO {
 
 ENUM!{enum D3D12_TILE_MAPPING_FLAGS {
     D3D12_TILE_MAPPING_FLAG_NONE = 0,
-    D3D12_TILE_MAPPING_FLAG_NO_HAZARD = 1,
+    D3D12_TILE_MAPPING_FLAG_NO_HAZARD = 0x1,
 }}
 
 ENUM!{enum D3D12_TILE_COPY_FLAGS {
@@ -2014,8 +2014,7 @@ STRUCT!{struct D3D12_VERSIONED_ROOT_SIGNATURE_DESC {
 RIDL!{#[uuid(0x34ab647b, 0x3cc8, 0x46ac, 0x84, 0x1b, 0xc0, 0x96, 0x56, 0x45, 0xc0, 0x46)]
 interface ID3D12RootSignatureDeserializer(ID3D12RootSignatureDeserializerVtbl):
     IUnknown(IUnknownVtbl) {
-    fn GetRootSignatureDesc(
-    ) -> *const D3D12_ROOT_SIGNATURE_DESC,
+    fn GetRootSignatureDesc() -> *const D3D12_ROOT_SIGNATURE_DESC,
 }}
 
 RIDL!{#[uuid(0x7f91ce67, 0x090c, 0x4bb7, 0xb7, 0x8e, 0xed, 0x8f, 0xf2, 0xe3, 0x1d, 0xa0)]
@@ -2310,7 +2309,7 @@ interface ID3D12Resource(ID3D12ResourceVtbl): ID3D12Pageable(ID3D12PageableVtbl)
         pWrittenRange: *const D3D12_RANGE,
     ) -> (),
     #[fixme] fn GetDesc() -> D3D12_RESOURCE_DESC,
-    fn GetGPUVirtualAddress() -> u64,
+    fn GetGPUVirtualAddress() -> D3D12_GPU_VIRTUAL_ADDRESS,
     fn WriteToSubresource(
         DstSubresource: UINT,
         pDstBox: *const D3D12_BOX,
@@ -2342,7 +2341,7 @@ interface ID3D12Fence(ID3D12FenceVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
     ) -> u64,
     fn SetEventOnCompletion(
         Value: UINT64,
-        hEvent: *const c_void,
+        hEvent: HANDLE,
     ) -> HRESULT,
     fn Signal(
         Value: UINT64,
@@ -2358,9 +2357,9 @@ interface ID3D12PipelineState(ID3D12PipelineStateVtbl): ID3D12Pageable(ID3D12Pag
 
 RIDL!{#[uuid(0x8efb471d, 0x616c, 0x4f49, 0x90, 0xf7, 0x12, 0x7b, 0xb7, 0x63, 0xfa, 0x51)]
 interface ID3D12DescriptorHeap(ID3D12DescriptorHeapVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
-    fn GetDesc() -> D3D12_DESCRIPTOR_HEAP_DESC,
-    fn GetCPUDescriptorHandleForHeapStart() -> D3D12_CPU_DESCRIPTOR_HANDLE,
-    fn GetGPUDescriptorHandleForHeapStart() -> D3D12_GPU_DESCRIPTOR_HANDLE,
+    #[fixme] fn GetDesc() -> D3D12_DESCRIPTOR_HEAP_DESC,
+    #[fixme] fn GetCPUDescriptorHandleForHeapStart() -> D3D12_CPU_DESCRIPTOR_HANDLE,
+    #[fixme] fn GetGPUDescriptorHandleForHeapStart() -> D3D12_GPU_DESCRIPTOR_HANDLE,
 }}
 
 RIDL!{#[uuid(0x0d9658ae, 0xed45, 0x469e, 0xa6, 0x1d, 0x97, 0x0e, 0xc5, 0x83, 0xca, 0xb4)]
@@ -2736,7 +2735,7 @@ interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12Pagea
         pGpuTimestamp: *mut UINT64,
         pCpuTimestamp: *mut UINT64,
     ) -> HRESULT,
-    fn GetDesc() -> D3D12_COMMAND_QUEUE_DESC,
+    #[fixme] fn GetDesc() -> D3D12_COMMAND_QUEUE_DESC,
 }}
 
 RIDL!{#[uuid(0xc64226a8, 0x9201, 0x46af, 0xb4, 0xcc, 0x53, 0xfb, 0x9f, 0xf7, 0x41, 0x4f)]
@@ -2767,8 +2766,7 @@ interface ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl): ID3D12DeviceChild(ID
 
 RIDL!{#[uuid(0x189819f1, 0x1db6, 0x4b57, 0xbe, 0x54, 0x18, 0x21, 0x33, 0x9b, 0x85, 0xf7)]
 interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
-    fn GetNodeCount(
-    ) -> UINT,
+    fn GetNodeCount() -> UINT,
     fn CreateCommandQueue(
         pDesc: *const D3D12_COMMAND_QUEUE_DESC,
         riid: REFGUID,
@@ -2861,12 +2859,12 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         SrcDescriptorRangeStart: D3D12_CPU_DESCRIPTOR_HANDLE,
         DescriptorHeapsType: D3D12_DESCRIPTOR_HEAP_TYPE,
     ) -> (),
-    fn GetResourceAllocationInfo(
+    #[fixme] fn GetResourceAllocationInfo(
         visibleMask: UINT,
         numResourceDescs: UINT,
         pResourceDescs: *const D3D12_RESOURCE_DESC,
     ) -> D3D12_RESOURCE_ALLOCATION_INFO,
-    fn GetCustomHeapProperties(
+    #[fixme] fn GetCustomHeapProperties(
         NodeMask: UINT,
         heapType: D3D12_HEAP_TYPE,
     ) -> D3D12_HEAP_PROPERTIES,
@@ -2931,8 +2929,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         riid: REFGUID,
         ppFence: *mut *mut c_void,
     ) -> HRESULT,
-    fn GetDeviceRemovedReason(
-    ) -> HRESULT,
+    fn GetDeviceRemovedReason() -> HRESULT,
     fn GetCopyableFootprints(
         pResourceDesc: *const D3D12_RESOURCE_DESC,
         FirstSubresource: UINT,
@@ -2988,8 +2985,7 @@ interface ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl):
         riid: REFIID,
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
-    fn GetSerializedSize(
-    ) -> SIZE_T,
+    fn GetSerializedSize() -> SIZE_T,
     fn Serialize(
         pData: *mut c_void,
         DataSizeInBytes: SIZE_T,
@@ -3925,7 +3921,7 @@ extern "system" {
     pub fn D3D12CreateDevice(
         pAdapter: *mut IUnknown,
         MinimumFeatureLevel: D3D_FEATURE_LEVEL,
-        riid: REFIID,
+        riid: REFGUID,
         ppDevice: *mut *mut c_void,
     ) -> HRESULT;
 }
@@ -3937,7 +3933,7 @@ FN!{stdcall PFN_D3D12_GET_DEBUG_INTERFACE(
 
 extern "system" {
     pub fn D3D12GetDebugInterface(
-        riid: REFIID,
+        riid: REFGUID,
         ppvDebug: *mut *mut c_void,
     ) -> HRESULT;
     pub fn D3D12EnableExperimentalFeatures(
