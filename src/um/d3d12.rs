@@ -7,7 +7,7 @@ use ctypes::c_void;
 use shared::basetsd::{INT8, LONG_PTR, SIZE_T, UINT16, UINT64, UINT8};
 use shared::dxgiformat::DXGI_FORMAT;
 use shared::dxgitype::DXGI_SAMPLE_DESC;
-use shared::guiddef::{GUID, IID, REFGUID};
+use shared::guiddef::{IID, REFGUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, LPCVOID, UINT};
 use shared::windef::RECT;
 use um::d3dcommon::{D3D_FEATURE_LEVEL, D3D_PRIMITIVE, D3D_PRIMITIVE_TOPOLOGY, ID3DBlob};
@@ -423,8 +423,8 @@ ENUM!{enum D3D12_COMMAND_LIST_TYPE {
 }}
 
 ENUM!{enum D3D12_COMMAND_QUEUE_FLAGS {
-    D3D12_COMMAND_QUEUE_FLAG_NONE = 0,
-    D3D12_COMMAND_QUEUE_FLAG_DISABLE_GPU_TIMEOUT = 1,
+    D3D12_COMMAND_QUEUE_FLAG_NONE = 0x0,
+    D3D12_COMMAND_QUEUE_FLAG_DISABLE_GPU_TIMEOUT = 0x1,
 }}
 
 ENUM!{enum D3D12_COMMAND_QUEUE_PRIORITY {
@@ -658,8 +658,8 @@ STRUCT!{struct D3D12_RASTERIZER_DESC {
 }}
 
 RIDL!{#[uuid(0xc54a6b66, 0x72df, 0x4ee8, 0x8b, 0xe5, 0xa9, 0x46, 0xa1, 0x42, 0x92, 0x14)]
-interface ID3D12RootSignature(ID3D12RootSignatureVtbl): ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
-}}
+interface ID3D12RootSignature(ID3D12RootSignatureVtbl):
+    ID3D12DeviceChild(ID3D12DeviceChildVtbl) {}}
 
 STRUCT!{struct D3D12_SHADER_BYTECODE {
     pShaderBytecode: *const c_void,
@@ -692,7 +692,7 @@ STRUCT!{struct D3D12_CACHED_PIPELINE_STATE {
 
 ENUM!{enum D3D12_PIPELINE_STATE_FLAGS {
     D3D12_PIPELINE_STATE_FLAG_NONE = 0,
-    D3D12_PIPELINE_STATE_FLAG_TOOL_DEBUG = 1,
+    D3D12_PIPELINE_STATE_FLAG_TOOL_DEBUG = 0x1,
 }}
 
 STRUCT!{struct D3D12_GRAPHICS_PIPELINE_STATE_DESC {
@@ -790,8 +790,8 @@ ENUM!{enum D3D12_FEATURE {
 
 ENUM!{enum D3D12_SHADER_MIN_PRECISION_SUPPORT {
     D3D12_SHADER_MIN_PRECISION_SUPPORT_NONE = 0,
-    D3D12_SHADER_MIN_PRECISION_SUPPORT_10_BIT = 1,
-    D3D12_SHADER_MIN_PRECISION_SUPPORT_16_BIT = 2,
+    D3D12_SHADER_MIN_PRECISION_SUPPORT_10_BIT = 0x1,
+    D3D12_SHADER_MIN_PRECISION_SUPPORT_16_BIT = 0x2,
 }}
 
 ENUM!{enum D3D12_TILED_RESOURCES_TIER {
@@ -1117,19 +1117,19 @@ STRUCT!{struct D3D12_HEAP_PROPERTIES {
 
 ENUM!{enum D3D12_HEAP_FLAGS {
     D3D12_HEAP_FLAG_NONE = 0,
-    D3D12_HEAP_FLAG_SHARED = 1,
-    D3D12_HEAP_FLAG_DENY_BUFFERS = 4,
-    D3D12_HEAP_FLAG_ALLOW_DISPLAY = 8,
-    D3D12_HEAP_FLAG_SHARED_CROSS_ADAPTER = 32,
-    D3D12_HEAP_FLAG_DENY_RT_DS_TEXTURES = 64,
-    D3D12_HEAP_FLAG_DENY_NON_RT_DS_TEXTURES = 128,
-    D3D12_HEAP_FLAG_HARDWARE_PROTECTED = 256,
-    D3D12_HEAP_FLAG_ALLOW_WRITE_WATCH = 512,
-    D3D12_HEAP_FLAG_ALLOW_SHADER_ATOMICS = 1024,
+    D3D12_HEAP_FLAG_SHARED = 0x1,
+    D3D12_HEAP_FLAG_DENY_BUFFERS = 0x4,
+    D3D12_HEAP_FLAG_ALLOW_DISPLAY = 0x8,
+    D3D12_HEAP_FLAG_SHARED_CROSS_ADAPTER = 0x20,
+    D3D12_HEAP_FLAG_DENY_RT_DS_TEXTURES = 0x40,
+    D3D12_HEAP_FLAG_DENY_NON_RT_DS_TEXTURES = 0x80,
+    D3D12_HEAP_FLAG_HARDWARE_PROTECTED = 0x100,
+    D3D12_HEAP_FLAG_ALLOW_WRITE_WATCH = 0x200,
+    D3D12_HEAP_FLAG_ALLOW_SHADER_ATOMICS = 0x400,
     D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES = 0,
-    D3D12_HEAP_FLAG_ALLOW_ONLY_BUFFERS = 192,
-    D3D12_HEAP_FLAG_ALLOW_ONLY_NON_RT_DS_TEXTURES = 68,
-    D3D12_HEAP_FLAG_ALLOW_ONLY_RT_DS_TEXTURES = 132,
+    D3D12_HEAP_FLAG_ALLOW_ONLY_BUFFERS = 0xc0,
+    D3D12_HEAP_FLAG_ALLOW_ONLY_NON_RT_DS_TEXTURES = 0x44,
+    D3D12_HEAP_FLAG_ALLOW_ONLY_RT_DS_TEXTURES = 0x84,
 }}
 
 STRUCT!{struct D3D12_HEAP_DESC {
@@ -1156,13 +1156,13 @@ ENUM!{enum D3D12_TEXTURE_LAYOUT {
 
 ENUM!{enum D3D12_RESOURCE_FLAGS {
     D3D12_RESOURCE_FLAG_NONE = 0,
-    D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET = 1,
-    D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL = 2,
-    D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS = 4,
-    D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE = 8,
-    D3D12_RESOURCE_FLAG_ALLOW_CROSS_ADAPTER = 16,
-    D3D12_RESOURCE_FLAG_ALLOW_SIMULTANEOUS_ACCESS = 32,
-    D3D12_RESOURCE_FLAG_VIDEO_DECODE_REFERENCE_ONLY = 64,
+    D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET = 0x1,
+    D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL = 0x2,
+    D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS = 0x4,
+    D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE = 0x8,
+    D3D12_RESOURCE_FLAG_ALLOW_CROSS_ADAPTER = 0x10,
+    D3D12_RESOURCE_FLAG_ALLOW_SIMULTANEOUS_ACCESS = 0x20,
+    D3D12_RESOURCE_FLAG_VIDEO_DECODE_REFERENCE_ONLY = 0x40,
 }}
 
 STRUCT!{struct D3D12_RESOURCE_DESC {
@@ -1264,9 +1264,9 @@ ENUM!{enum D3D12_TILE_MAPPING_FLAGS {
 
 ENUM!{enum D3D12_TILE_COPY_FLAGS {
     D3D12_TILE_COPY_FLAG_NONE = 0,
-    D3D12_TILE_COPY_FLAG_NO_HAZARD = 1,
-    D3D12_TILE_COPY_FLAG_LINEAR_BUFFER_TO_SWIZZLED_TILED_RESOURCE = 2,
-    D3D12_TILE_COPY_FLAG_SWIZZLED_TILED_RESOURCE_TO_LINEAR_BUFFER = 4,
+    D3D12_TILE_COPY_FLAG_NO_HAZARD = 0x1,
+    D3D12_TILE_COPY_FLAG_LINEAR_BUFFER_TO_SWIZZLED_TILED_RESOURCE = 0x2,
+    D3D12_TILE_COPY_FLAG_SWIZZLED_TILED_RESOURCE_TO_LINEAR_BUFFER = 0x4,
 }}
 
 ENUM!{enum D3D12_RESOURCE_STATES {
@@ -1609,7 +1609,7 @@ STRUCT!{struct D3D12_SAMPLER_DESC {
 
 ENUM!{enum D3D12_BUFFER_UAV_FLAGS {
     D3D12_BUFFER_UAV_FLAG_NONE = 0,
-    D3D12_BUFFER_UAV_FLAG_RAW = 1,
+    D3D12_BUFFER_UAV_FLAG_RAW = 0x1,
 }}
 
 STRUCT!{struct D3D12_BUFFER_UAV {
@@ -1776,9 +1776,9 @@ STRUCT!{struct D3D12_TEX2DMS_ARRAY_DSV {
 }}
 
 ENUM!{enum D3D12_DSV_FLAGS {
-    D3D12_DSV_FLAG_NONE = 0,
-    D3D12_DSV_FLAG_READ_ONLY_DEPTH = 1,
-    D3D12_DSV_FLAG_READ_ONLY_STENCIL = 2,
+    D3D12_DSV_FLAG_NONE = 0x0,
+    D3D12_DSV_FLAG_READ_ONLY_DEPTH = 0x1,
+    D3D12_DSV_FLAG_READ_ONLY_STENCIL = 0x2,
 }}
 
 ENUM!{enum D3D12_DSV_DIMENSION {
@@ -1810,7 +1810,7 @@ STRUCT!{struct D3D12_DEPTH_STENCIL_VIEW_DESC {
 
 ENUM!{enum D3D12_CLEAR_FLAGS {
     D3D12_CLEAR_FLAG_DEPTH = 0x1,
-    D3D12_CLEAR_FLAG_STENCIL =0x2,
+    D3D12_CLEAR_FLAG_STENCIL = 0x2,
 }}
 
 ENUM!{enum D3D12_FENCE_FLAGS {
@@ -1944,7 +1944,7 @@ STRUCT!{struct D3D12_ROOT_SIGNATURE_DESC {
 }}
 
 ENUM!{enum D3D12_DESCRIPTOR_RANGE_FLAGS {
-    D3D12_DESCRIPTOR_RANGE_FLAG_NONE = 0x0,
+    D3D12_DESCRIPTOR_RANGE_FLAG_NONE = 0,
     D3D12_DESCRIPTOR_RANGE_FLAG_DESCRIPTORS_VOLATILE = 0x1,
     D3D12_DESCRIPTOR_RANGE_FLAG_DATA_VOLATILE = 0x2,
     D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC_WHILE_SET_AT_EXECUTE = 0x4,
@@ -1967,7 +1967,7 @@ STRUCT!{struct D3D12_ROOT_DESCRIPTOR_TABLE1 {
 }}
 
 ENUM!{enum D3D12_ROOT_DESCRIPTOR_FLAGS {
-    D3D12_ROOT_DESCRIPTOR_FLAG_NONE = 0x0,
+    D3D12_ROOT_DESCRIPTOR_FLAG_NONE = 0,
     D3D12_ROOT_DESCRIPTOR_FLAG_DATA_VOLATILE = 0x2,
     D3D12_ROOT_DESCRIPTOR_FLAG_DATA_STATIC_WHILE_SET_AT_EXECUTE = 0x4,
     D3D12_ROOT_DESCRIPTOR_FLAG_DATA_STATIC = 0x8,
@@ -2007,24 +2007,25 @@ UNION!{union D3D12_VERSIONED_ROOT_SIGNATURE_DESC_u {
 }}
 
 STRUCT!{struct D3D12_VERSIONED_ROOT_SIGNATURE_DESC {
-    Version: D3D_ROOT_SIGNATURE_VERSION,
+    Version: UINT,
     u: D3D12_VERSIONED_ROOT_SIGNATURE_DESC_u,
 }}
 
 RIDL!{#[uuid(0x34ab647b, 0x3cc8, 0x46ac, 0x84, 0x1b, 0xc0, 0x96, 0x56, 0x45, 0xc0, 0x46)]
-interface ID3D12RootSignatureDeserializer(ID3D12RootSignatureDeserializerVtbl): IUnknown(IUnknownVtbl) {
+interface ID3D12RootSignatureDeserializer(ID3D12RootSignatureDeserializerVtbl):
+    IUnknown(IUnknownVtbl) {
     fn GetRootSignatureDesc(
     ) -> *const D3D12_ROOT_SIGNATURE_DESC,
 }}
 
 RIDL!{#[uuid(0x7f91ce67, 0x090c, 0x4bb7, 0xb7, 0x8e, 0xed, 0x8f, 0xf2, 0xe3, 0x1d, 0xa0)]
-interface ID3D12VersionedRootSignatureDeserializer(ID3D12VersionedRootSignatureDeserializerVtbl): IUnknown(IUnknownVtbl) {
+interface ID3D12VersionedRootSignatureDeserializer(ID3D12VersionedRootSignatureDeserializerVtbl):
+    IUnknown(IUnknownVtbl) {
     fn GetRootSignatureDescAtVersion(
         convertToVersion: D3D_ROOT_SIGNATURE_VERSION,
         ppDesc: *mut *mut D3D12_VERSIONED_ROOT_SIGNATURE_DESC,
     ) -> HRESULT,
-    fn GetUnconvertedRootSignatureDesc(
-    ) -> *const D3D12_VERSIONED_ROOT_SIGNATURE_DESC,
+    fn GetUnconvertedRootSignatureDesc() -> *const D3D12_VERSIONED_ROOT_SIGNATURE_DESC,
 }}
 
 FN!{stdcall PFN_D3D12_SERIALIZE_ROOT_SIGNATURE(
@@ -2046,7 +2047,7 @@ extern "system" {
 FN!{stdcall PFN_D3D12_CREATE_ROOT_SIGNATURE_DESERIALIZER(
     pSrcData: LPCVOID,
     SrcDataSizeInBytes: SIZE_T,
-    pRootSignatureDeserializerInterface: REFGUID,
+    pRootSignatureDeserializerInterface: REFIID,
     ppRootSignatureDeserializer: *mut *mut c_void,
 ) -> HRESULT}
 
@@ -2076,7 +2077,7 @@ extern "system" {
 FN!{stdcall PFN_D3D12_CREATE_VERSIONED_ROOT_SIGNATURE_DESERIALIZER(
     pSrcData: LPCVOID,
     SrcDataSizeInBytes: SIZE_T,
-    pRootSignatureDeserializerInterface: REFGUID,
+    pRootSignatureDeserializerInterface: REFIID,
     ppRootSignatureDeserializer: *mut *mut c_void,
 ) -> HRESULT}
 
@@ -2084,7 +2085,7 @@ extern "system" {
     pub fn D3D12CreateVersionedRootSignatureDeserializer(
         pSrcData: LPCVOID,
         SrcDataSizeInBytes: SIZE_T,
-        pRootSignatureDeserializerInterface: REFGUID,
+        pRootSignatureDeserializerInterface: REFIID,
         ppRootSignatureDeserializer: *mut *mut c_void,
     ) -> HRESULT;
 }
@@ -2284,19 +2285,17 @@ interface ID3D12Object(ID3D12ObjectVtbl): IUnknown(IUnknownVtbl) {
 RIDL!{#[uuid(0x905db94b, 0xa00c, 0x4140, 0x9d, 0xf5, 0x2b, 0x64, 0xca, 0x9e, 0xa3, 0x57)]
 interface ID3D12DeviceChild(ID3D12DeviceChildVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     fn GetDevice(
-        riid: REFGUID,
+        riid: REFIID,
         ppvDevice: *mut *mut c_void,
     ) -> HRESULT,
 }}
 
 RIDL!{#[uuid(0x63ee58fb, 0x1268, 0x4835, 0x86, 0xda, 0xf0, 0x08, 0xce, 0x62, 0xf0, 0xd6)]
-interface ID3D12Pageable(ID3D12PageableVtbl): ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
-}}
+interface ID3D12Pageable(ID3D12PageableVtbl): ID3D12DeviceChild(ID3D12DeviceChildVtbl) {}}
 
 RIDL!{#[uuid(0x6b3b2502, 0x6e51, 0x45b3, 0x90, 0xee, 0x98, 0x84, 0x26, 0x5e, 0x8d, 0xf3)]
 interface ID3D12Heap(ID3D12HeapVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
-    fn GetDesc(
-    ) -> D3D12_HEAP_DESC,
+    #[fixme] fn GetDesc() -> D3D12_HEAP_DESC,
 }}
 
 RIDL!{#[uuid(0x696442be, 0xa72e, 0x4059, 0xbc, 0x79, 0x5b, 0x5c, 0x98, 0x04, 0x0f, 0xad)]
@@ -2310,10 +2309,8 @@ interface ID3D12Resource(ID3D12ResourceVtbl): ID3D12Pageable(ID3D12PageableVtbl)
         Subresource: UINT,
         pWrittenRange: *const D3D12_RANGE,
     ) -> (),
-    fn GetDesc(
-    ) -> D3D12_RESOURCE_DESC,
-    fn GetGPUVirtualAddress(
-    ) -> u64,
+    #[fixme] fn GetDesc() -> D3D12_RESOURCE_DESC,
+    fn GetGPUVirtualAddress() -> u64,
     fn WriteToSubresource(
         DstSubresource: UINT,
         pDstBox: *const D3D12_BOX,
@@ -2336,8 +2333,7 @@ interface ID3D12Resource(ID3D12ResourceVtbl): ID3D12Pageable(ID3D12PageableVtbl)
 
 RIDL!{#[uuid(0x6102dee4, 0xaf59, 0x4b09, 0xb9, 0x99, 0xb4, 0x4d, 0x73, 0xf0, 0x9b, 0x24)]
 interface ID3D12CommandAllocator(ID3D12CommandAllocatorVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
-    fn Reset(
-    ) -> HRESULT,
+    fn Reset() -> HRESULT,
 }}
 
 RIDL!{#[uuid(0x0a753dcf, 0xc4d8, 0x4b91, 0xad, 0xf6, 0xbe, 0x5a, 0x60, 0xd9, 0x5a, 0x76)]
@@ -2362,12 +2358,9 @@ interface ID3D12PipelineState(ID3D12PipelineStateVtbl): ID3D12Pageable(ID3D12Pag
 
 RIDL!{#[uuid(0x8efb471d, 0x616c, 0x4f49, 0x90, 0xf7, 0x12, 0x7b, 0xb7, 0x63, 0xfa, 0x51)]
 interface ID3D12DescriptorHeap(ID3D12DescriptorHeapVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
-    fn GetDesc(
-    ) -> D3D12_DESCRIPTOR_HEAP_DESC,
-    fn GetCPUDescriptorHandleForHeapStart(
-    ) -> D3D12_CPU_DESCRIPTOR_HANDLE,
-    fn GetGPUDescriptorHandleForHeapStart(
-    ) -> D3D12_GPU_DESCRIPTOR_HANDLE,
+    fn GetDesc() -> D3D12_DESCRIPTOR_HEAP_DESC,
+    fn GetCPUDescriptorHandleForHeapStart() -> D3D12_CPU_DESCRIPTOR_HANDLE,
+    fn GetGPUDescriptorHandleForHeapStart() -> D3D12_GPU_DESCRIPTOR_HANDLE,
 }}
 
 RIDL!{#[uuid(0x0d9658ae, 0xed45, 0x469e, 0xa6, 0x1d, 0x97, 0x0e, 0xc5, 0x83, 0xca, 0xb4)]
@@ -2385,9 +2378,9 @@ interface ID3D12CommandList(ID3D12CommandListVtbl): ID3D12DeviceChild(ID3D12Devi
 }}
 
 RIDL!{#[uuid(0x5b160d0f, 0xac1b, 0x4185, 0x8b, 0xa8, 0xb3, 0xae, 0x42, 0xa5, 0xa4, 0x55)]
-interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12CommandList(ID3D12CommandListVtbl) {
-    fn Close(
-    ) -> HRESULT,
+interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl):
+    ID3D12CommandList(ID3D12CommandListVtbl) {
+    fn Close() -> HRESULT,
     fn Reset(
         pAllocator: *mut ID3D12CommandAllocator,
         pInitialState: *mut ID3D12PipelineState,
@@ -2624,8 +2617,7 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
         pData: *const c_void,
         Size: UINT,
     ) -> (),
-    fn EndEvent(
-    ) -> (),
+    fn EndEvent() -> (),
     fn ExecuteIndirect(
         pCommandSignature: *mut ID3D12CommandSignature,
         MaxCommandCount: UINT,
@@ -2637,7 +2629,8 @@ interface ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl): ID3D12Comman
 }}
 
 RIDL!{#[uuid(0x553103fb, 0x1fe7, 0x4557, 0xbb, 0x38, 0x94, 0x6d, 0x7d, 0x0e, 0x7c, 0xa7)]
-interface ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl): ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl) {
+interface ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl):
+    ID3D12GraphicsCommandList(ID3D12GraphicsCommandListVtbl) {
     fn AtomicCopyBufferUINT(
         pDstBuffer: *mut ID3D12Resource,
         DstOffset: UINT64,
@@ -2682,7 +2675,8 @@ interface ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl): ID3D12Grap
 }}
 
 RIDL!{#[uuid(0x38c3e585, 0xff17, 0x412c, 0x91, 0x50, 0x4f, 0xc6, 0xf9, 0xd7, 0x2a, 0x28)]
-interface ID3D12GraphicsCommandList2(ID3D12GraphicsCommandList2Vtbl): ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl) {
+interface ID3D12GraphicsCommandList2(ID3D12GraphicsCommandList2Vtbl):
+    ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl) {
     fn WriteBufferImmediate(
         Count: UINT,
         pParams: *const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER,
@@ -2726,8 +2720,7 @@ interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12Pagea
         pData: *const c_void,
         Size: UINT,
     ) -> (),
-    fn EndEvent(
-    ) -> (),
+    fn EndEvent() -> (),
     fn Signal(
         pFence: *mut ID3D12Fence,
         Value: UINT64,
@@ -2743,8 +2736,33 @@ interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12Pagea
         pGpuTimestamp: *mut UINT64,
         pCpuTimestamp: *mut UINT64,
     ) -> HRESULT,
-    fn GetDesc(
-    ) -> D3D12_COMMAND_QUEUE_DESC,
+    fn GetDesc() -> D3D12_COMMAND_QUEUE_DESC,
+}}
+
+RIDL!{#[uuid(0xc64226a8, 0x9201, 0x46af, 0xb4, 0xcc, 0x53, 0xfb, 0x9f, 0xf7, 0x41, 0x4f)]
+interface ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl): ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
+    fn StorePipeline(
+        pName: LPCWSTR,
+        pPipeline: *mut ID3D12PipelineState,
+    ) -> HRESULT,
+    fn LoadGraphicsPipeline(
+        pName: LPCWSTR,
+        pDesc: *const D3D12_GRAPHICS_PIPELINE_STATE_DESC,
+        riid: REFGUID,
+        ppPipelineState: *mut *mut c_void,
+    ) -> HRESULT,
+    fn LoadComputePipeline(
+        pName: LPCWSTR,
+        pDesc: *const D3D12_COMPUTE_PIPELINE_STATE_DESC,
+        riid: REFGUID,
+        ppPipelineState: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetSerializedSize(
+    ) -> SIZE_T,
+    fn Serialize(
+        pData: *mut c_void,
+        DataSizeInBytes: SIZE_T,
+    ) -> HRESULT,
 }}
 
 RIDL!{#[uuid(0x189819f1, 0x1db6, 0x4b57, 0xbe, 0x54, 0x18, 0x21, 0x33, 0x9b, 0x85, 0xf7)]
@@ -2885,7 +2903,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     fn CreateSharedHandle(
         pObject: *mut ID3D12DeviceChild,
         pAttributes: *const SECURITY_ATTRIBUTES,
-        Access: UINT,
+        Access: DWORD,
         Name: LPCWSTR,
         pHandle: *mut HANDLE,
     ) -> HRESULT,
@@ -2896,7 +2914,7 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     ) -> HRESULT,
     fn OpenSharedHandleByName(
         Name: LPCWSTR,
-        Access: UINT,
+        Access: DWORD,
         pNTHandle: *mut HANDLE,
     ) -> HRESULT,
     fn MakeResident(
@@ -2922,8 +2940,8 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
         BaseOffset: UINT64,
         pLayouts: *mut D3D12_PLACED_SUBRESOURCE_FOOTPRINT,
         pNumRows: *mut UINT,
-        pRowSizeInBytes: *mut u64,
-        pTotalBytes: *mut u64,
+        pRowSizeInBytes: *mut UINT64,
+        pTotalBytes: *mut UINT64,
     ) -> (),
     fn CreateQueryHeap(
         pDesc: *const D3D12_QUERY_HEAP_DESC,
@@ -2952,7 +2970,8 @@ interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
 }}
 
 RIDL!{#[uuid(0xc64226a8, 0x9201, 0x46af, 0xb4, 0xcc, 0x53, 0xfb, 0x9f, 0xf7, 0x41, 0x4f)]
-interface ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl): ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
+interface ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl):
+    ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
     fn StorePipeline(
         pName: LPCWSTR,
         pPipeline: *mut ID3D12PipelineState,
@@ -2960,13 +2979,13 @@ interface ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl): ID3D12DeviceChild(ID
     fn LoadGraphicsPipeline(
         pName: LPCWSTR,
         pDesc: *const D3D12_GRAPHICS_PIPELINE_STATE_DESC,
-        riid: REFGUID,
+        riid: REFIID,
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
     fn LoadComputePipeline(
         pName: LPCWSTR,
         pDesc: *const D3D12_COMPUTE_PIPELINE_STATE_DESC,
-        riid: REFGUID,
+        riid: REFIID,
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
     fn GetSerializedSize(
@@ -2978,18 +2997,19 @@ interface ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl): ID3D12DeviceChild(ID
 }}
 
 RIDL!{#[uuid(0x80eabf42, 0x2568, 0x4e5e, 0xbd, 0x82, 0xc3, 0x7f, 0x86, 0x96, 0x1d, 0xc3)]
-interface ID3D12PipelineLibrary1(ID3D12PipelineLibrary1Vtbl): ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl) {
+interface ID3D12PipelineLibrary1(ID3D12PipelineLibrary1Vtbl):
+    ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl) {
     fn LoadPipeline(
         pName: LPCWSTR,
         pDesc: *const D3D12_PIPELINE_STATE_STREAM_DESC,
-        riid: REFGUID,
+        riid: REFIID,
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
 }}
 
 ENUM!{enum D3D12_MULTIPLE_FENCE_WAIT_FLAGS {
     D3D12_MULTIPLE_FENCE_WAIT_FLAG_NONE = 0,
-    D3D12_MULTIPLE_FENCE_WAIT_FLAG_ANY = 1,
+    D3D12_MULTIPLE_FENCE_WAIT_FLAG_ANY = 0x1,
     D3D12_MULTIPLE_FENCE_WAIT_FLAG_ALL = 0,
 }}
 
@@ -3006,12 +3026,12 @@ interface ID3D12Device1(ID3D12Device1Vtbl): ID3D12Device(ID3D12DeviceVtbl) {
     fn CreatePipelineLibrary(
         pLibraryBlob: *const c_void,
         BlobLength: SIZE_T,
-        riid: REFGUID,
+        riid: REFIID,
         ppPipelineLibrary: *mut *mut c_void,
     ) -> HRESULT,
     fn SetEventOnMultipleFenceCompletion(
         ppFences: *const *mut ID3D12Fence,
-        pFenceValues: *const u64,
+        pFenceValues: *const UINT64,
         NumFences: UINT,
         Flags: D3D12_MULTIPLE_FENCE_WAIT_FLAGS,
         hEvent: HANDLE,
@@ -3027,7 +3047,7 @@ RIDL!{#[uuid(0x30baa41e, 0xb15b, 0x475c, 0xa0, 0xbb, 0x1a, 0xf5, 0xc5, 0xb6, 0x4
 interface ID3D12Device2(ID3D12Device2Vtbl): ID3D12Device1(ID3D12Device1Vtbl) {
     fn CreatePipelineState(
         pDesc: *const D3D12_PIPELINE_STATE_STREAM_DESC,
-        riid: REFGUID,
+        riid: REFIID,
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
 }}
@@ -3041,12 +3061,12 @@ RIDL!{#[uuid(0x81dadc15, 0x2bad, 0x4392, 0x93, 0xc5, 0x10, 0x13, 0x45, 0xc4, 0xa
 interface ID3D12Device3(ID3D12Device3Vtbl): ID3D12Device2(ID3D12Device2Vtbl) {
     fn OpenExistingHeapFromAddress(
         pAddress: *const c_void,
-        riid: REFGUID,
+        riid: REFIID,
         ppvHeap: *const *const c_void,
     ) -> HRESULT,
     fn OpenExistingHeapFromFileMapping(
         hFileMapping: *const c_void,
-        riid: REFGUID,
+        riid: REFIID,
         ppvHeap: *const *const c_void,
     ) -> HRESULT,
     fn EnqueueMakeResident(
@@ -3057,14 +3077,6 @@ interface ID3D12Device3(ID3D12Device3Vtbl): ID3D12Device2(ID3D12Device2Vtbl) {
         FenceValueToSignal: UINT64,
     ) -> HRESULT,
 }}
-
-
-
-
-
-
-
-
 
 ENUM!{enum D3D12_COMMAND_LIST_FLAGS {
     D3D12_COMMAND_LIST_FLAG_NONE = 0,
@@ -3086,7 +3098,7 @@ ENUM!{enum D3D12_PROTECTED_SESSION_STATUS {
 RIDL!{#[uuid(0xa1533d18, 0x0ac1, 0x4084, 0x85, 0xb9, 0x89, 0xa9, 0x61, 0x16, 0x80, 0x6b)]
 interface ID3D12ProtectedSession(ID3D12ProtectedSessionVtbl): ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
     fn GetStatusFence(
-        riid: REFGUID,
+        riid: REFIID,
         ppFence: *const *const c_void,
     ) -> HRESULT,
     fn GetSessionStatus(
@@ -3124,12 +3136,12 @@ interface ID3D12Device4(ID3D12Device4Vtbl): ID3D12Device3(ID3D12Device3Vtbl) {
         NodeMask: UINT,
         Type: D3D12_COMMAND_LIST_TYPE,
         Flags: D3D12_COMMAND_LIST_FLAGS,
-        riid: REFGUID,
+        riid: REFIID,
         ppCommandList: *const *const c_void,
     ) -> HRESULT,
     fn CreateProtectedResourceSession(
         pDesc: *const D3D12_PROTECTED_RESOURCE_SESSION_DESC,
-        riid: REFGUID,
+        riid: REFIID,
         ppSession: *const *const c_void,
     ) -> HRESULT,
     fn CreateCommittedResource1(
@@ -3139,13 +3151,13 @@ interface ID3D12Device4(ID3D12Device4Vtbl): ID3D12Device3(ID3D12Device3Vtbl) {
         InitialResourceState: D3D12_RESOURCE_STATES,
         pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
         pProtectedSession: *const ID3D12ProtectedResourceSession,
-        riidResource: REFGUID,
+        riidResource: REFIID,
         ppvResource: *const *const c_void,
     ) -> HRESULT,
     fn CreateHeap1(
         pDesc: *const D3D12_HEAP_DESC,
         pProtectedSession: *const ID3D12ProtectedResourceSession,
-        riid: REFGUID,
+        riid: REFIID,
         ppvHeap: *const *const c_void,
     ) -> HRESULT,
     fn CreateReservedResource1(
@@ -3153,7 +3165,7 @@ interface ID3D12Device4(ID3D12Device4Vtbl): ID3D12Device3(ID3D12Device3Vtbl) {
         InitialState: D3D12_RESOURCE_STATES,
         pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
         pProtectedSession: *const ID3D12ProtectedResourceSession,
-        riid: REFGUID,
+        riid: REFIID,
         ppvResource: *const *const c_void,
     ) -> HRESULT,
     fn GetResourceAllocationInfo1(
@@ -3188,13 +3200,13 @@ interface ID3D12SwapChainAssistant(ID3D12SwapChainAssistantVtbl): IUnknown(IUnkn
     fn GetLUID(
     ) -> LUID,
     fn GetSwapChainObject(
-        riid: REFGUID,
+        riid: REFIID,
         ppv: *const *const c_void,
     ) -> HRESULT,
     fn GetCurrentResourceAndCommandQueue(
-        riidResource: REFGUID,
+        riidResource: REFIID,
         ppvResource: *const *const c_void,
-        riidQueue: REFGUID,
+        riidQueue: REFIID,
         ppvQueue: *const *const c_void,
     ) -> HRESULT,
     fn InsertImplicitSync(
@@ -3595,7 +3607,7 @@ RIDL!{#[uuid(0x8b4f173b, 0x2fea, 0x4b80, 0x8f, 0x58, 0x43, 0x07, 0x19, 0x1a, 0xb
 interface ID3D12Device5(ID3D12Device5Vtbl): ID3D12Device4(ID3D12Device4Vtbl) {
     fn CreateLifetimeTracker(
         pOwner: *const ID3D12LifetimeOwner,
-        riid: REFGUID,
+        riid: REFIID,
         ppvTracker: *const *const c_void,
     ) -> HRESULT,
     fn RemoveDevice(
@@ -3616,12 +3628,12 @@ interface ID3D12Device5(ID3D12Device5Vtbl): ID3D12Device4(ID3D12Device4Vtbl) {
         NodeMask: UINT,
         pCreationParametersData: *const c_void,
         CreationParametersDataSizeInBytes: SIZE_T,
-        riid: REFGUID,
+        riid: REFIID,
         ppMetaCommand: *const *const c_void,
     ) -> HRESULT,
     fn CreateStateObject(
         pDesc: *const D3D12_STATE_OBJECT_DESC,
-        riid: REFGUID,
+        riid: REFIID,
         ppStateObject: *const *const c_void,
     ) -> HRESULT,
     fn GetRaytracingAccelerationStructurePrebuildInfo(
@@ -3718,7 +3730,7 @@ UNION!{union D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA_u {
 RIDL!{#[uuid(0x9d5e227a, 0x4430, 0x4161, 0x88, 0xb3, 0x3e, 0xca, 0x6b, 0xb1, 0x6e, 0x19)]
 interface ID3D12Resource1(ID3D12Resource1Vtbl): ID3D12Resource(ID3D12ResourceVtbl) {
     fn GetProtectedResourceSession(
-        riid: REFGUID,
+        riid: REFIID,
         ppProtectedSession: *mut *mut c_void,
     ) -> HRESULT,
 }}
@@ -3732,7 +3744,7 @@ interface ID3D12Fence1(ID3D12Fence1Vtbl): ID3D12Fence(ID3D12FenceVtbl) {
 RIDL!{#[uuid(0x572f7389, 0x2168, 0x49e3, 0x96, 0x93, 0xd6, 0xdf, 0x58, 0x71, 0xbf, 0x6d)]
 interface ID3D12Heap1(ID3D12Heap1Vtbl): ID3D12Heap(ID3D12HeapVtbl) {
     fn GetProtectedResourceSession(
-        riid: REFGUID,
+        riid: REFIID,
         ppProtectedSession: *mut *mut c_void,
     ) -> HRESULT,
 }}
@@ -3887,8 +3899,7 @@ interface ID3D12Tools(ID3D12ToolsVtbl): IUnknown(IUnknownVtbl) {
     fn EnableShaderInstrumentation(
         bEnable: BOOL,
     ) -> (),
-    fn ShaderInstrumentationEnabled(
-    ) -> BOOL,
+    fn ShaderInstrumentationEnabled() -> BOOL,
 }}
 
 STRUCT!{struct D3D12_SUBRESOURCE_DATA {
@@ -3906,7 +3917,7 @@ STRUCT!{struct D3D12_MEMCPY_DEST {
 FN!{stdcall PFN_D3D12_CREATE_DEVICE(
     *mut IUnknown,
     D3D_FEATURE_LEVEL,
-    REFGUID,
+    REFIID,
     *mut *mut c_void,
 ) -> HRESULT}
 
@@ -3914,19 +3925,19 @@ extern "system" {
     pub fn D3D12CreateDevice(
         pAdapter: *mut IUnknown,
         MinimumFeatureLevel: D3D_FEATURE_LEVEL,
-        riid: REFGUID,
+        riid: REFIID,
         ppDevice: *mut *mut c_void,
     ) -> HRESULT;
 }
 
 FN!{stdcall PFN_D3D12_GET_DEBUG_INTERFACE(
-    REFGUID,
+    REFIID,
     *mut *mut c_void,
 ) -> HRESULT}
 
 extern "system" {
     pub fn D3D12GetDebugInterface(
-        riid: REFGUID,
+        riid: REFIID,
         ppvDebug: *mut *mut c_void,
     ) -> HRESULT;
     pub fn D3D12EnableExperimentalFeatures(
