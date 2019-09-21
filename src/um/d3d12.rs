@@ -2738,32 +2738,6 @@ interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12Pagea
     #[fixme] fn GetDesc() -> D3D12_COMMAND_QUEUE_DESC,
 }}
 
-RIDL!{#[uuid(0xc64226a8, 0x9201, 0x46af, 0xb4, 0xcc, 0x53, 0xfb, 0x9f, 0xf7, 0x41, 0x4f)]
-interface ID3D12PipelineLibrary(ID3D12PipelineLibraryVtbl): ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
-    fn StorePipeline(
-        pName: LPCWSTR,
-        pPipeline: *mut ID3D12PipelineState,
-    ) -> HRESULT,
-    fn LoadGraphicsPipeline(
-        pName: LPCWSTR,
-        pDesc: *const D3D12_GRAPHICS_PIPELINE_STATE_DESC,
-        riid: REFGUID,
-        ppPipelineState: *mut *mut c_void,
-    ) -> HRESULT,
-    fn LoadComputePipeline(
-        pName: LPCWSTR,
-        pDesc: *const D3D12_COMPUTE_PIPELINE_STATE_DESC,
-        riid: REFGUID,
-        ppPipelineState: *mut *mut c_void,
-    ) -> HRESULT,
-    fn GetSerializedSize(
-    ) -> SIZE_T,
-    fn Serialize(
-        pData: *mut c_void,
-        DataSizeInBytes: SIZE_T,
-    ) -> HRESULT,
-}}
-
 RIDL!{#[uuid(0x189819f1, 0x1db6, 0x4b57, 0xbe, 0x54, 0x18, 0x21, 0x33, 0x9b, 0x85, 0xf7)]
 interface ID3D12Device(ID3D12DeviceVtbl): ID3D12Object(ID3D12ObjectVtbl) {
     fn GetNodeCount() -> UINT,
@@ -3258,7 +3232,7 @@ ENUM!{enum D3D12_GRAPHICS_STATES {
 }}
 
 STRUCT!{struct D3D12_META_COMMAND_DESC {
-    Id: GUID,
+    Id: REFGUID,
     Name: LPCWSTR,
     InitializationDirtyState: D3D12_GRAPHICS_STATES,
     ExecutionDirtyState: D3D12_GRAPHICS_STATES,
@@ -3510,7 +3484,7 @@ STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZAT
 }}
 
 STRUCT!{struct D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER {
-    DriverOpaqueGUID: GUID,
+    DriverOpaqueGUID: REFGUID,
     DriverOpaqueVersioningData: [UINT8; 16],
 }}
 
