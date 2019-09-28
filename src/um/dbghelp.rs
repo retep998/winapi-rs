@@ -7,7 +7,7 @@
 use shared::basetsd::{DWORD64, PDWORD64, ULONG64};
 use shared::guiddef::GUID;
 use shared::minwindef::{
-    BOOL, DWORD, HMODULE, LPDWORD, PDWORD, PUCHAR, PULONG, UCHAR, ULONG, USHORT, WORD,
+    BOOL, DWORD, HMODULE, LPDWORD, MAX_PATH, PDWORD, PUCHAR, PULONG, UCHAR, ULONG, USHORT, WORD,
 };
 use um::winnt::{
     BOOLEAN, CHAR, HANDLE, LIST_ENTRY, PCSTR, PCWSTR, PIMAGE_NT_HEADERS, PIMAGE_SECTION_HEADER,
@@ -372,6 +372,18 @@ STRUCT!{struct SYMBOL_INFOW {
     Name: [WCHAR; 1],
 }}
 pub type PSYMBOL_INFOW = *mut SYMBOL_INFOW;
+ENUM!{enum SYM_TYPE {
+    SymNone = 0,
+    SymCoff,
+    SymCv,
+    SymPdb,
+    SymExport,
+    SymDeferred,
+    SymSym,
+    SymDia,
+    SymVirtual,
+    NumSymTypes,
+}}
 STRUCT!{struct IMAGEHLP_SYMBOL64 {
     SizeOfStruct: DWORD,
     Address: DWORD64,
@@ -381,6 +393,34 @@ STRUCT!{struct IMAGEHLP_SYMBOL64 {
     Name: [CHAR; 1],
 }}
 pub type PIMAGEHLP_SYMBOL64 = *mut IMAGEHLP_SYMBOL64;
+STRUCT!{struct IMAGEHLP_MODULEW64 {
+    SizeOfStruct: DWORD,
+    BaseOfImage: DWORD64,
+    ImageSize: DWORD,
+    TimeDateStamp: DWORD,
+    CheckSum: DWORD,
+    NumSyms: DWORD,
+    SymType: SYM_TYPE,
+    ModuleName: [WCHAR; 32],
+    ImageName: [WCHAR; 256],
+    LoadedImageName: [WCHAR; 256],
+    LoadedPdbName: [WCHAR; 256],
+    CVSig: DWORD,
+    CVData: [WCHAR; MAX_PATH * 3],
+    PdbSig: DWORD,
+    PdbSig70: GUID,
+    PdbAge: DWORD,
+    PdbUnmatched: BOOL,
+    DbgUnmatched: BOOL,
+    LineNumbers: BOOL,
+    GlobalSymbols: BOOL,
+    TypeInfo: BOOL,
+    SourceIndexed: BOOL,
+    Publics: BOOL,
+    MachineType: DWORD,
+    Reserved: DWORD,
+}}
+pub type PIMAGEHLP_MODULEW64 = *mut IMAGEHLP_MODULEW64;
 STRUCT!{struct IMAGEHLP_LINEW64 {
     SizeOfStruct: DWORD,
     Key: PVOID,
@@ -657,6 +697,11 @@ extern "system" {
         dwAddr: DWORD64,
         pdwDisplacement: PDWORD,
         Line: PIMAGEHLP_LINEW64,
+    ) -> BOOL;
+    pub fn SymGetModuleInfoW64(
+        hProcess: HANDLE,
+        qwAddr: DWORD64,
+        ModuleInfo: PIMAGEHLP_MODULEW64,
     ) -> BOOL;
     pub fn SymGetModuleBase64(
         hProcess: HANDLE,
