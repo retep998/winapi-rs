@@ -1,4 +1,3 @@
-// Copyright © 2016-2018 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -13,15 +12,17 @@ use shared::basetsd::{
 use shared::guiddef::{CLSID, GUID};
 use shared::ktmtypes::UOW;
 use shared::minwindef::{BYTE, DWORD, FALSE, PDWORD, TRUE, ULONG, USHORT, WORD};
+#[cfg(target_arch = "aarch64")]
+use shared::minwindef::PBYTE;
 use vc::excpt::EXCEPTION_DISPOSITION;
 use vc::vcruntime::size_t;
 pub const ANYSIZE_ARRAY: usize = 1;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 pub const MAX_NATURAL_ALIGNMENT: usize = 4;
 pub const MEMORY_ALLOCATION_ALIGNMENT: usize = 8;
 }
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 pub const MAX_NATURAL_ALIGNMENT: usize = 8;
 pub const MEMORY_ALLOCATION_ALIGNMENT: usize = 16;
@@ -111,9 +112,9 @@ STRUCT!{struct GROUP_AFFINITY {
     Reserved: [WORD; 3],
 }}
 pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub const MAXIMUM_PROC_PER_GROUP: BYTE = 32;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub const MAXIMUM_PROC_PER_GROUP: BYTE = 64;
 pub const MAXIMUM_PROCESSORS: BYTE = MAXIMUM_PROC_PER_GROUP;
 pub type HANDLE = *mut c_void;
@@ -171,10 +172,7 @@ pub type RTL_REFERENCE_COUNT = LONG_PTR;
 pub type PRTL_REFERENCE_COUNT = *mut LONG_PTR;
 pub type RTL_REFERENCE_COUNT32 = LONG;
 pub type PRTL_REFERENCE_COUNT32 = *mut LONG;
-STRUCT!{struct LUID {
-    LowPart: DWORD,
-    HighPart: LONG,
-}}
+pub use shared::ntdef::LUID;
 pub type PLUID = *mut LUID;
 pub type DWORDLONG = ULONGLONG;
 pub type PDWORDLONG = *mut DWORDLONG;
@@ -914,7 +912,7 @@ STRUCT!{struct M128A { // FIXME align 16
     High: LONGLONG,
 }}
 pub type PM128A = *mut M128A;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 STRUCT!{struct XSAVE_FORMAT { // FIXME align 16
     ControlWord: WORD,
     StatusWord: WORD,
@@ -933,7 +931,7 @@ STRUCT!{struct XSAVE_FORMAT { // FIXME align 16
     XmmRegisters: [M128A; 8],
     Reserved4: [BYTE; 224],
 }}
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 STRUCT!{struct XSAVE_FORMAT { // FIXME align 16
     ControlWord: WORD,
     StatusWord: WORD,
@@ -952,6 +950,24 @@ STRUCT!{struct XSAVE_FORMAT { // FIXME align 16
     XmmRegisters: [M128A; 16],
     Reserved4: [BYTE; 96],
 }}
+#[cfg(target_arch = "x86")]
+STRUCT!{struct XSTATE_CONTEXT {
+    Mask: DWORD64,
+    Length: DWORD,
+    Reserved1: DWORD,
+    Area: PXSAVE_AREA,
+    Reserved2: DWORD,
+    Buffer: PVOID,
+    Reserved3: DWORD,
+}}
+#[cfg(not(target_arch = "x86"))]
+STRUCT!{struct XSTATE_CONTEXT {
+    Mask: DWORD64,
+    Length: DWORD,
+    Reserved1: DWORD,
+    Area: PXSAVE_AREA,
+    Buffer: PVOID,
+}}
 pub type PXSAVE_FORMAT = *mut XSAVE_FORMAT;
 STRUCT!{struct XSAVE_AREA_HEADER { // FIXME align 8
     Mask: DWORD64,
@@ -964,24 +980,6 @@ STRUCT!{struct XSAVE_AREA { // FIXME align 16
     Header: XSAVE_AREA_HEADER,
 }}
 pub type PXSAVE_AREA = *mut XSAVE_AREA;
-#[cfg(target_arch = "x86")]
-STRUCT!{struct XSTATE_CONTEXT {
-    Mask: DWORD64,
-    Length: DWORD,
-    Reserved1: DWORD,
-    Area: PXSAVE_AREA,
-    Reserved2: DWORD,
-    Buffer: PVOID,
-    Reserved3: DWORD,
-}}
-#[cfg(target_arch = "x86_64")]
-STRUCT!{struct XSTATE_CONTEXT {
-    Mask: DWORD64,
-    Length: DWORD,
-    Reserved1: DWORD,
-    Area: PXSAVE_AREA,
-    Buffer: PVOID,
-}}
 pub type PXSTATE_CONTEXT = *mut XSTATE_CONTEXT;
 STRUCT!{struct SCOPE_TABLE_AMD64 {
     Count: DWORD,
@@ -994,6 +992,17 @@ STRUCT!{struct SCOPE_TABLE_AMD64_ScopeRecord {
     JumpTarget: DWORD,
 }}
 pub type PSCOPE_TABLE_AMD64 = *mut SCOPE_TABLE_AMD64;
+STRUCT!{struct SCOPE_TABLE_ARM64 {
+    Count: DWORD,
+    ScopeRecord: [SCOPE_TABLE_ARM64_ScopeRecord; 1],
+}}
+STRUCT!{struct SCOPE_TABLE_ARM64_ScopeRecord {
+    BeginAddress: DWORD,
+    EndAddress: DWORD,
+    HandlerAddress: DWORD,
+    JumpTarget: DWORD,
+}}
+pub type PSCOPE_TABLE_ARM64 = *mut SCOPE_TABLE_ARM64;
 // Skip interlocked and bit manipulation stuff because it is all intrinsics
 // Use the native Rust equivalents instead
 #[cfg(target_arch = "x86_64")]
@@ -1302,6 +1311,219 @@ STRUCT!{struct LDT_ENTRY {
     HighWord: LDT_ENTRY_HighWord,
 }}
 pub type PLDT_ENTRY = *mut LDT_ENTRY;
+#[cfg(target_arch = "aarch64")]
+IFDEF!{
+pub const ARM64_MAX_BREAKPOINTS: usize = 8;
+pub const ARM64_MAX_WATCHPOINTS: usize = 2;
+pub const EXCEPTION_READ_FAULT: DWORD = 0;
+pub const EXCEPTION_WRITE_FAULT: DWORD = 1;
+pub const EXCEPTION_EXECUTE_FAULT: DWORD = 8;
+pub const CONTEXT_ARM64: DWORD = 0x00400000;
+pub const CONTEXT_CONTROL: DWORD = CONTEXT_ARM64 | 0x00000001;
+pub const CONTEXT_INTEGER: DWORD = CONTEXT_ARM64 | 0x00000002;
+pub const CONTEXT_FLOATING_POINT: DWORD = CONTEXT_ARM64 | 0x00000004;
+pub const CONTEXT_DEBUG_REGISTERS: DWORD = CONTEXT_ARM64 | 0x00000008;
+pub const CONTEXT_X18: DWORD = CONTEXT_ARM64 | 0x00000010;
+pub const CONTEXT_FULL: DWORD = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_FLOATING_POINT;
+pub const CONTEXT_ALL: DWORD = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_FLOATING_POINT
+        | CONTEXT_DEBUG_REGISTERS | CONTEXT_X18;
+pub const CONTEXT_EXCEPTION_ACTIVE: DWORD = 0x08000000;
+pub const CONTEXT_SERVICE_ACTIVE: DWORD = 0x10000000;
+pub const CONTEXT_EXCEPTION_REQUEST: DWORD = 0x40000000;
+pub const CONTEXT_EXCEPTION_REPORTING: DWORD = 0x80000000;
+STRUCT!{struct CONTEXT_u_s {
+    X0: DWORD64,
+    X1: DWORD64,
+    X2: DWORD64,
+    X3: DWORD64,
+    X4: DWORD64,
+    X5: DWORD64,
+    X6: DWORD64,
+    X7: DWORD64,
+    X8: DWORD64,
+    X9: DWORD64,
+    X10: DWORD64,
+    X11: DWORD64,
+    X12: DWORD64,
+    X13: DWORD64,
+    X14: DWORD64,
+    X15: DWORD64,
+    X16: DWORD64,
+    X17: DWORD64,
+    X18: DWORD64,
+    X19: DWORD64,
+    X20: DWORD64,
+    X21: DWORD64,
+    X22: DWORD64,
+    X23: DWORD64,
+    X24: DWORD64,
+    X25: DWORD64,
+    X26: DWORD64,
+    X27: DWORD64,
+    X28: DWORD64,
+    Fp: DWORD64,
+    Lr: DWORD64,
+}}
+UNION!{union CONTEXT_u {
+    [u64; 31],
+    s s_mut: CONTEXT_u_s,
+}}
+STRUCT!{struct ARM64_NT_NEON128_s {
+    Low: ULONGLONG,
+    High: LONGLONG,
+}}
+UNION!{union ARM64_NT_NEON128 {
+    [u64; 2],
+    s s_mut: ARM64_NT_NEON128_s,
+    D D_mut: [f64; 2],
+    S S_mut: [f32; 4],
+    H H_mut: [WORD; 8],
+    B B_mut: [BYTE; 16],
+}}
+STRUCT!{struct CONTEXT { // FIXME align 16
+    ContextFlags: DWORD,
+    Cpsr: DWORD,
+    u: CONTEXT_u,
+    Sp: DWORD64,
+    Pc: DWORD64,
+    V: [ARM64_NT_NEON128; 32],
+    Fpcr: DWORD,
+    Fpsr: DWORD,
+    Bcr: [DWORD; ARM64_MAX_BREAKPOINTS],
+    Bvr: [DWORD64; ARM64_MAX_BREAKPOINTS],
+    Wcr: [DWORD; ARM64_MAX_WATCHPOINTS],
+    Wvr: [DWORD64; ARM64_MAX_WATCHPOINTS],
+}}
+pub type PCONTEXT = *mut CONTEXT;
+pub type RUNTIME_FUNCTION = IMAGE_RUNTIME_FUNCTION_ENTRY;
+pub type PRUNTIME_FUNCTION = *mut IMAGE_RUNTIME_FUNCTION_ENTRY;
+pub type SCOPE_TABLE = SCOPE_TABLE_ARM64;
+pub type PSCOPE_TABLE = *mut SCOPE_TABLE_ARM64;
+pub const RUNTIME_FUNCTION_INDIRECT: DWORD = 0x1;
+pub const UNW_FLAG_NHANDLER: DWORD = 0x0;
+pub const UNW_FLAG_EHANDLER: DWORD = 0x1;
+pub const UNW_FLAG_UHANDLER: DWORD = 0x2;
+pub const UNWIND_HISTORY_TABLE_SIZE: usize = 12;
+STRUCT!{struct UNWIND_HISTORY_TABLE_ENTRY {
+    ImageBase: DWORD64,
+    FunctionEntry: PRUNTIME_FUNCTION,
+}}
+pub type PUNWIND_HISTORY_TABLE_ENTRY = *mut UNWIND_HISTORY_TABLE_ENTRY;
+STRUCT!{struct UNWIND_HISTORY_TABLE {
+    Count: DWORD,
+    LocalHint: BYTE,
+    GlobalHint: BYTE,
+    Search: BYTE,
+    Once: BYTE,
+    LowAddress: DWORD64,
+    HighAddress: DWORD64,
+    Entry: [UNWIND_HISTORY_TABLE_ENTRY; UNWIND_HISTORY_TABLE_SIZE],
+}}
+pub type PUNWIND_HISTORY_TABLE = *mut UNWIND_HISTORY_TABLE;
+FN!{cdecl PGET_RUNTIME_FUNCTION_CALLBACK(
+    ControlPc: DWORD64,
+    Context: PVOID,
+) -> PRUNTIME_FUNCTION}
+FN!{cdecl POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK(
+    Process: HANDLE,
+    TableAddress: PVOID,
+    Entries: PDWORD,
+    Functions: *mut PRUNTIME_FUNCTION,
+) -> DWORD}
+pub const OUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK_EXPORT_NAME: &'static str
+    = "OutOfProcessFunctionTableCallback";
+STRUCT!{struct DISPATCHER_CONTEXT {
+    ControlPc: ULONG_PTR,
+    ImageBase: ULONG_PTR,
+    FunctionEntry: PRUNTIME_FUNCTION,
+    EstablisherFrame: ULONG_PTR,
+    TargetPc: ULONG_PTR,
+    ContextRecord: PCONTEXT,
+    LanguageHandler: PEXCEPTION_ROUTINE,
+    HandlerData: PVOID,
+    HistoryTable: PUNWIND_HISTORY_TABLE,
+    ScopeIndex: DWORD,
+    ControlPcIsUnwound: BOOLEAN,
+    NonVolatileRegisters: PBYTE,
+}}
+pub type PDISPATCHER_CONTEXT = *mut DISPATCHER_CONTEXT;
+FN!{cdecl PEXCEPTION_FILTER(
+    ExceptionPointers: *mut EXCEPTION_POINTERS,
+    EstablisherFrame: DWORD64,
+) -> LONG}
+FN!{cdecl PTERMINATION_HANDLER(
+    AbnormalTermination: BOOLEAN,
+    EstablisherFrame: DWORD64,
+) -> ()}
+STRUCT!{struct KNONVOLATILE_CONTEXT_POINTERS {
+    X19: PDWORD64,
+    X20: PDWORD64,
+    X21: PDWORD64,
+    X22: PDWORD64,
+    X23: PDWORD64,
+    X24: PDWORD64,
+    X25: PDWORD64,
+    X26: PDWORD64,
+    X27: PDWORD64,
+    X28: PDWORD64,
+    Fp: PDWORD64,
+    Lr: PDWORD64,
+    D8: PDWORD64,
+    D9: PDWORD64,
+    D10: PDWORD64,
+    D11: PDWORD64,
+    D12: PDWORD64,
+    D13: PDWORD64,
+    D14: PDWORD64,
+    D15: PDWORD64,
+}}
+pub type PKNONVOLATILE_CONTEXT_POINTERS = *mut KNONVOLATILE_CONTEXT_POINTERS;
+} // IFDEF(aarch64)
+#[cfg(target_arch = "arm")]
+IFDEF!{
+pub const ARM_MAX_BREAKPOINTS: usize = 8;
+pub const ARM_MAX_WATCHPOINTS: usize = 1;
+STRUCT!{struct NEON128 {
+    Low: ULONGLONG,
+    High: LONGLONG,
+}}
+pub type PNEON128 = *mut NEON128;
+UNION!{union CONTEXT_u {
+    [u64; 32],
+    Q Q_mut: [NEON128; 16],
+    D D_mut: [ULONGLONG; 32],
+    S S_mut: [DWORD; 32],
+}}
+STRUCT!{struct CONTEXT {
+    ContextFlags: DWORD,
+    R0: DWORD,
+    R1: DWORD,
+    R2: DWORD,
+    R3: DWORD,
+    R4: DWORD,
+    R5: DWORD,
+    R6: DWORD,
+    R7: DWORD,
+    R8: DWORD,
+    R9: DWORD,
+    R10: DWORD,
+    R11: DWORD,
+    R12: DWORD,
+    Sp: DWORD,
+    Lr: DWORD,
+    Pc: DWORD,
+    Cpsr: DWORD,
+    Fpsrc: DWORD,
+    Padding: DWORD,
+    u: CONTEXT_u,
+    Bvr: [DWORD; ARM_MAX_BREAKPOINTS],
+    Bcr: [DWORD; ARM_MAX_BREAKPOINTS],
+    Wvr: [DWORD; ARM_MAX_WATCHPOINTS],
+    Wcr: [DWORD; ARM_MAX_WATCHPOINTS],
+    Padding2: [DWORD; 2],
+}}
+pub type PCONTEXT = *mut CONTEXT;
+} // IFDEF(arm)
 pub const WOW64_CONTEXT_i386: DWORD = 0x00010000;
 pub const WOW64_CONTEXT_i486: DWORD = 0x00010000;
 pub const WOW64_CONTEXT_CONTROL: DWORD = WOW64_CONTEXT_i386 | 0x00000001;
@@ -2125,9 +2347,9 @@ STRUCT!{struct ACL_SIZE_INFORMATION {
 pub type PACL_SIZE_INFORMATION = *mut ACL_SIZE_INFORMATION;
 pub const SECURITY_DESCRIPTOR_REVISION: DWORD = 1;
 pub const SECURITY_DESCRIPTOR_REVISION1: DWORD = 1;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub const SECURITY_DESCRIPTOR_MIN_LENGTH: usize = 40;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub const SECURITY_DESCRIPTOR_MIN_LENGTH: usize = 20;
 pub type SECURITY_DESCRIPTOR_CONTROL = WORD;
 pub type PSECURITY_DESCRIPTOR_CONTROL = *mut WORD;
@@ -3798,10 +4020,12 @@ pub const PAGE_EXECUTE_WRITECOPY: DWORD = 0x80;
 pub const PAGE_GUARD: DWORD = 0x100;
 pub const PAGE_NOCACHE: DWORD = 0x200;
 pub const PAGE_WRITECOMBINE: DWORD = 0x400;
+pub const PAGE_ENCLAVE_THREAD_CONTROL: DWORD = 0x80000000;
 pub const PAGE_REVERT_TO_FILE_MAP: DWORD = 0x80000000;
 pub const PAGE_TARGETS_NO_UPDATE: DWORD = 0x40000000;
 pub const PAGE_TARGETS_INVALID: DWORD = 0x40000000;
 pub const PAGE_ENCLAVE_UNVALIDATED: DWORD = 0x20000000;
+pub const PAGE_ENCLAVE_DECOMMIT: DWORD = 0x10000000;
 pub const MEM_COMMIT: DWORD = 0x1000;
 pub const MEM_RESERVE: DWORD = 0x2000;
 pub const MEM_DECOMMIT: DWORD = 0x4000;
@@ -3833,6 +4057,7 @@ pub const MEM_IMAGE: DWORD = SEC_IMAGE;
 pub const WRITE_WATCH_FLAG_RESET: DWORD = 0x01;
 pub const MEM_UNMAP_WITH_TRANSIENT_BOOST: DWORD = 0x01;
 pub const ENCLAVE_TYPE_SGX: DWORD = 0x00000001;
+pub const ENCLAVE_TYPE_SGX2: DWORD = 0x00000002;
 STRUCT!{struct ENCLAVE_CREATE_INFO_SGX {
     Secs: [BYTE; 4096],
 }}
@@ -4576,7 +4801,7 @@ STRUCT!{struct CM_POWER_DATA {
     PD_DeepestSystemWake: SYSTEM_POWER_STATE,
 }}
 pub type PCM_POWER_DATA = *mut CM_POWER_DATA;
-ENUM!{enum POWER_INFORMATION_LEVEL{
+ENUM!{enum POWER_INFORMATION_LEVEL {
     SystemPowerPolicyAc,
     SystemPowerPolicyDc,
     VerifySystemPolicyAc,
@@ -5539,13 +5764,13 @@ pub type PIMAGE_OPTIONAL_HEADER64 = *mut IMAGE_OPTIONAL_HEADER64;
 pub const IMAGE_NT_OPTIONAL_HDR32_MAGIC: WORD = 0x10b;
 pub const IMAGE_NT_OPTIONAL_HDR64_MAGIC: WORD = 0x20b;
 pub const IMAGE_ROM_OPTIONAL_HDR_MAGIC: WORD = 0x107;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 pub type IMAGE_OPTIONAL_HEADER = IMAGE_OPTIONAL_HEADER64;
 pub type PIMAGE_OPTIONAL_HEADER = PIMAGE_OPTIONAL_HEADER64;
 pub const IMAGE_NT_OPTIONAL_HDR_MAGIC: WORD = IMAGE_NT_OPTIONAL_HDR64_MAGIC;
 }
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 pub type IMAGE_OPTIONAL_HEADER = IMAGE_OPTIONAL_HEADER32;
 pub type PIMAGE_OPTIONAL_HEADER = PIMAGE_OPTIONAL_HEADER32;
@@ -5568,12 +5793,12 @@ STRUCT!{struct IMAGE_ROM_HEADERS {
     OptionalHeader: IMAGE_ROM_OPTIONAL_HEADER,
 }}
 pub type PIMAGE_ROM_HEADERS = *mut IMAGE_ROM_HEADERS;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 pub type IMAGE_NT_HEADERS = IMAGE_NT_HEADERS64;
 pub type PIMAGE_NT_HEADERS = PIMAGE_NT_HEADERS64;
 }
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 pub type IMAGE_NT_HEADERS = IMAGE_NT_HEADERS32;
 pub type PIMAGE_NT_HEADERS = PIMAGE_NT_HEADERS32;
@@ -6334,7 +6559,7 @@ BITFIELD!{IMAGE_TLS_DIRECTORY32 Characteristics: DWORD [
     Reserved1 set_Reserved1[24..32],
 ]}
 pub type PIMAGE_TLS_DIRECTORY32 = *mut IMAGE_TLS_DIRECTORY32;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 pub const IMAGE_ORDINAL_FLAG: ULONGLONG = IMAGE_ORDINAL_FLAG64;
 #[inline]
@@ -6350,7 +6575,7 @@ pub fn IMAGE_SNAP_BY_ORDINAL(Ordinal: ULONGLONG) -> bool {
 pub type IMAGE_TLS_DIRECTORY = IMAGE_TLS_DIRECTORY64;
 pub type PIMAGE_TLS_DIRECTORY = PIMAGE_TLS_DIRECTORY64;
 }
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 pub const IMAGE_ORDINAL_FLAG: DWORD = IMAGE_ORDINAL_FLAG32;
 #[inline]
@@ -6498,14 +6723,14 @@ STRUCT!{#[repr(packed)] struct IMAGE_DYNAMIC_RELOCATION64_V2 {
     Flags: DWORD,
 }}
 pub type PIMAGE_DYNAMIC_RELOCATION64_V2 = *mut IMAGE_DYNAMIC_RELOCATION64_V2;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 pub type IMAGE_DYNAMIC_RELOCATION = IMAGE_DYNAMIC_RELOCATION64;
 pub type PIMAGE_DYNAMIC_RELOCATION = PIMAGE_DYNAMIC_RELOCATION64;
 pub type IMAGE_DYNAMIC_RELOCATION_V2 = IMAGE_DYNAMIC_RELOCATION64_V2;
 pub type PIMAGE_DYNAMIC_RELOCATION_V2 = PIMAGE_DYNAMIC_RELOCATION64_V2;
 }
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 pub type IMAGE_DYNAMIC_RELOCATION = IMAGE_DYNAMIC_RELOCATION32;
 pub type PIMAGE_DYNAMIC_RELOCATION = PIMAGE_DYNAMIC_RELOCATION32;
@@ -6613,12 +6838,12 @@ STRUCT!{struct IMAGE_LOAD_CONFIG_DIRECTORY64 {
     EnclaveConfigurationPointer: ULONGLONG,
 }}
 pub type PIMAGE_LOAD_CONFIG_DIRECTORY64 = *mut IMAGE_LOAD_CONFIG_DIRECTORY64;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 pub type IMAGE_LOAD_CONFIG_DIRECTORY = IMAGE_LOAD_CONFIG_DIRECTORY64;
 pub type PIMAGE_LOAD_CONFIG_DIRECTORY = PIMAGE_LOAD_CONFIG_DIRECTORY64;
 }
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 pub type IMAGE_LOAD_CONFIG_DIRECTORY = IMAGE_LOAD_CONFIG_DIRECTORY32;
 pub type PIMAGE_LOAD_CONFIG_DIRECTORY = PIMAGE_LOAD_CONFIG_DIRECTORY32;
@@ -6742,14 +6967,24 @@ UNION!{union IMAGE_RUNTIME_FUNCTION_ENTRY_u {
     UnwindInfoAddress UnwindInfoAddress_mut: DWORD,
     UnwindData UnwindData_mut: DWORD,
 }}
-STRUCT!{struct IMAGE_RUNTIME_FUNCTION_ENTRY {
+STRUCT!{struct _IMAGE_RUNTIME_FUNCTION_ENTRY {
     BeginAddress: DWORD,
     EndAddress: DWORD,
     u: IMAGE_RUNTIME_FUNCTION_ENTRY_u,
 }}
-pub type PIMAGE_RUNTIME_FUNCTION_ENTRY = *mut IMAGE_RUNTIME_FUNCTION_ENTRY;
-pub type IMAGE_IA64_RUNTIME_FUNCTION_ENTRY = IMAGE_RUNTIME_FUNCTION_ENTRY;
-pub type PIMAGE_IA64_RUNTIME_FUNCTION_ENTRY = PIMAGE_RUNTIME_FUNCTION_ENTRY;
+type _PIMAGE_RUNTIME_FUNCTION_ENTRY = *mut _IMAGE_RUNTIME_FUNCTION_ENTRY;
+pub type IMAGE_IA64_RUNTIME_FUNCTION_ENTRY = _IMAGE_RUNTIME_FUNCTION_ENTRY;
+pub type PIMAGE_IA64_RUNTIME_FUNCTION_ENTRY = _PIMAGE_RUNTIME_FUNCTION_ENTRY;
+#[cfg(target_arch = "aarch64")]
+IFDEF!{
+pub type IMAGE_RUNTIME_FUNCTION_ENTRY = IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY;
+pub type PIMAGE_RUNTIME_FUNCTION_ENTRY = PIMAGE_ARM64_RUNTIME_FUNCTION_ENTRY;
+}
+#[cfg(not(target_arch = "aarch64"))]
+IFDEF!{
+pub type IMAGE_RUNTIME_FUNCTION_ENTRY = _IMAGE_RUNTIME_FUNCTION_ENTRY;
+pub type PIMAGE_RUNTIME_FUNCTION_ENTRY = _PIMAGE_RUNTIME_FUNCTION_ENTRY;
+}
 STRUCT!{struct IMAGE_DEBUG_DIRECTORY {
     Characteristics: DWORD,
     TimeDateStamp: DWORD,
@@ -6981,7 +7216,7 @@ extern "system" {
         ReturnValue: PVOID,
     );
 }
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 extern "system" {
     pub fn RtlAddFunctionTable(
         FunctionTable: PRUNTIME_FUNCTION,
@@ -7064,7 +7299,7 @@ STRUCT!{struct SLIST_ENTRY {
     Next: *mut SLIST_ENTRY,
 }}
 pub type PSLIST_ENTRY = *mut SLIST_ENTRY;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 STRUCT!{struct SLIST_HEADER_s {
     Alignment: ULONGLONG,
@@ -7089,7 +7324,7 @@ UNION!{union SLIST_HEADER {
 }}
 pub type PSLIST_HEADER = *mut SLIST_HEADER;
 }
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 IFDEF!{
 STRUCT!{struct SLIST_HEADER_s {
     Next: SLIST_ENTRY,

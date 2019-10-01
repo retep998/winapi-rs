@@ -414,7 +414,7 @@ interface IWiaLog(IWiaLogVtbl): IUnknown(IUnknownVtbl) {
         lResID: LONG,
         lDetail: LONG,
         bstrText: BSTR,
-    ) -> HRESULT, 
+    ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IWiaLogEx,
     0xAF1F22AC, 0x7A40, 0x4787, 0xB4, 0x21, 0xAE, 0xb4, 0x7A, 0x1F, 0xBD, 0x0B}
@@ -431,7 +431,7 @@ interface IWiaLogEx(IWiaLogExVtbl): IUnknown(IUnknownVtbl) {
         lResID: LONG,
         lDetail: LONG,
         bstrText: BSTR,
-    ) -> HRESULT, 
+    ) -> HRESULT,
     fn hResultEx(
         lMethodId: LONG,
         hResult: HRESULT,
@@ -442,7 +442,7 @@ interface IWiaLogEx(IWiaLogExVtbl): IUnknown(IUnknownVtbl) {
         lResID: LONG,
         lDetail: LONG,
         bstrText: BSTR,
-    ) -> HRESULT, 
+    ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IWiaNotifyDevMgr,
     0x70681EA0, 0xE7BF, 0x4291, 0x9F, 0xB1, 0x4E, 0x88, 0x13, 0xA3, 0xF7, 0x8E}
@@ -536,7 +536,7 @@ interface IWiaTransferCallback(IWiaTransferCallbackVtbl): IUnknown(IUnknownVtbl)
         bstrItemName: BSTR,
         bstrFullItemName: BSTR,
         ppDestination: *mut *mut IStream,
-    ) -> HRESULT, 
+    ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IWiaSegmentationFilter,
     0xEC46A697, 0xAC04, 0x4447, 0x8F, 0x65, 0xFF, 0x63, 0xD5, 0x15, 0x4B, 0x21}

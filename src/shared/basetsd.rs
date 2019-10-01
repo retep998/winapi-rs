@@ -1,4 +1,3 @@
-// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -39,21 +38,21 @@ pub type ULONG_PTR = usize;
 pub type PULONG_PTR = *mut usize;
 pub type SHANDLE_PTR = isize;
 pub type HANDLE_PTR = usize;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub type UHALF_PTR = c_ushort;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type UHALF_PTR = c_uint;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub type PUHALF_PTR = *mut c_ushort;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type PUHALF_PTR = *mut c_uint;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub type HALF_PTR = c_short;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type HALF_PTR = c_int;
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 pub type PHALF_PTR = *mut c_short;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 pub type PHALF_PTR = *mut c_int;
 pub type SIZE_T = ULONG_PTR;
 pub type PSIZE_T = *mut ULONG_PTR;
