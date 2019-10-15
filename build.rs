@@ -451,7 +451,7 @@ impl Graph {
         libs.dedup();
         // FIXME Temporary hacks until build script is redesigned.
         libs.retain(|&&lib| match &*var("TARGET").unwrap() {
-            "aarch64-pc-windows-msvc" | "thumbv7a-pc-windows-msvc" => {
+            "aarch64-pc-windows-msvc" | "aarch64-uwp-windows-msvc" | "thumbv7a-pc-windows-msvc" => {
                 if lib == "opengl32" { false }
                 else { true }
             },
