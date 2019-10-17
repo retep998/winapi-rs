@@ -11,7 +11,7 @@ use shared::nldef::{
     NL_INTERFACE_OFFLOAD_ROD, NL_LINK_LOCAL_ADDRESS_BEHAVIOR,
     NL_ROUTER_DISCOVERY_BEHAVIOR
 };
-use shared::ntdef::{CHAR, PSTR, PWSTR, WCHAR};
+use shared::ntdef::{BOOLEAN, CHAR, PSTR, PWSTR, WCHAR};
 use shared::ws2def::{ADDRESS_FAMILY, ScopeLevelCount};
 pub type NETIO_STATUS = DWORD;
 pub type NETIOAPI_API = NETIO_STATUS;
