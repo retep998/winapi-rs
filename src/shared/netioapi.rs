@@ -39,7 +39,7 @@ STRUCT!{struct MIB_IPINTERFACE_ROW {
     PathMtuDiscoveryTimeout: ULONG,
     LinkLocalAddressBehavior: NL_LINK_LOCAL_ADDRESS_BEHAVIOR,
     LinkLocalAddressTimeout: ULONG,
-    ZoneIndices: [ULONG; ScopeLevelCount],
+    ZoneIndices: [ULONG; ScopeLevelCount as usize],
     SitePrefixLength: ULONG,
     Metric: ULONG,
     NlMtu: ULONG,

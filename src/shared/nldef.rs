@@ -9,7 +9,7 @@ ENUM!{enum NL_LINK_LOCAL_ADDRESS_BEHAVIOR {
     LinkLocalAlwaysOff = 0,
     LinkLocalDelayed,
     LinkLocalAlwaysOn,
-    LinkLocalUnchanged = -1i32 as u32
+    LinkLocalUnchanged = -1i32 as u32,
 }}
 STRUCT!{struct NL_INTERFACE_OFFLOAD_ROD {
     Value: BOOLEAN,
@@ -29,5 +29,5 @@ ENUM!{enum NL_ROUTER_DISCOVERY_BEHAVIOR {
     RouterDiscoveryDisabled = 0,
     RouterDiscoveryEnabled,
     RouterDiscoveryDhcp,
-    RouterDiscoveryUnchanged = -1i32 as u32
+    RouterDiscoveryUnchanged = -1i32 as u32,
 }}
