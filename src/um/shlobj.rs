@@ -8,6 +8,7 @@ use shared::guiddef::REFIID;
 use shared::minwindef::{BOOL, DWORD, UINT};
 use shared::windef::HWND;
 use um::minwinbase::SECURITY_ATTRIBUTES;
+use um::shobjidl_core::IShellFolder;
 use um::shtypes::{PCIDLIST_ABSOLUTE, PCUITEMID_CHILD_ARRAY, PIDLIST_ABSOLUTE, REFKNOWNFOLDERID};
 use um::winnt::{HANDLE, HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PCWSTR, PWSTR};
 pub const IDO_SHGIOI_SHARE: c_int = 0x0FFFFFFF;
@@ -256,5 +257,8 @@ extern "system" {
         hToken: HANDLE,
         riid: REFIID,
         ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHGetDesktopFolder(
+        ppshf: *mut *mut IShellFolder
     ) -> HRESULT;
 }
