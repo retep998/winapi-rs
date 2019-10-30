@@ -5879,6 +5879,14 @@ fn um_winbase() {
     assert_eq!(size_of::<FILE_ID_DESCRIPTOR>(), 24);
     assert_eq!(align_of::<FILE_ID_DESCRIPTOR>(), 8);
 }
+#[cfg(feature = "winber")] #[test]
+fn um_winber() {
+    use winapi::um::winber::*;
+    assert_eq!(size_of::<BerElement>(), 8);
+    assert_eq!(align_of::<BerElement>(), 8);
+    assert_eq!(size_of::<BerValue>(), 16);
+    assert_eq!(align_of::<BerValue>(), 8);
+}
 #[cfg(feature = "wincodec")] #[test]
 fn um_wincodec() {
     use winapi::um::wincodec::*;
@@ -7238,6 +7246,46 @@ fn um_winioctl() {
     assert_eq!(align_of::<VOLUME_DISK_EXTENTS>(), 8);
     assert_eq!(size_of::<DISK_PERFORMANCE>(), 88);
     assert_eq!(align_of::<DISK_PERFORMANCE>(), 8);
+}
+#[cfg(feature = "winldap")] #[test]
+fn um_winldap() {
+    use winapi::um::winldap::*;
+    assert_eq!(size_of::<LDAP_REFERRAL_CALLBACK>(), 32);
+    assert_eq!(align_of::<LDAP_REFERRAL_CALLBACK>(), 8);
+    assert_eq!(size_of::<LDAP>(), 184);
+    assert_eq!(align_of::<LDAP>(), 8);
+    assert_eq!(size_of::<LDAP_TIMEVAL>(), 8);
+    assert_eq!(align_of::<LDAP_TIMEVAL>(), 4);
+    assert_eq!(size_of::<LDAP_BERVAL>(), 16);
+    assert_eq!(align_of::<LDAP_BERVAL>(), 8);
+    assert_eq!(size_of::<LDAPMessage>(), 72);
+    assert_eq!(align_of::<LDAPMessage>(), 8);
+    assert_eq!(size_of::<LDAPControlA>(), 32);
+    assert_eq!(align_of::<LDAPControlA>(), 8);
+    assert_eq!(size_of::<LDAPControlW>(), 32);
+    assert_eq!(align_of::<LDAPControlW>(), 8);
+    assert_eq!(size_of::<LDAPModW>(), 24);
+    assert_eq!(align_of::<LDAPModW>(), 8);
+    assert_eq!(size_of::<LDAPModA>(), 24);
+    assert_eq!(align_of::<LDAPModA>(), 8);
+    assert_eq!(size_of::<BerElement>(), 8);
+    assert_eq!(align_of::<BerElement>(), 8);
+    assert_eq!(size_of::<LDAP_VERSION_INFO>(), 12);
+    assert_eq!(align_of::<LDAP_VERSION_INFO>(), 4);
+    assert_eq!(size_of::<LDAPAPIInfoA>(), 40);
+    assert_eq!(align_of::<LDAPAPIInfoA>(), 8);
+    assert_eq!(size_of::<LDAPAPIInfoW>(), 40);
+    assert_eq!(align_of::<LDAPAPIInfoW>(), 8);
+    assert_eq!(size_of::<LDAPAPIFeatureInfoA>(), 24);
+    assert_eq!(align_of::<LDAPAPIFeatureInfoA>(), 8);
+    assert_eq!(size_of::<LDAPAPIFeatureInfoW>(), 24);
+    assert_eq!(align_of::<LDAPAPIFeatureInfoW>(), 8);
+    assert_eq!(size_of::<LDAPSortKeyW>(), 24);
+    assert_eq!(align_of::<LDAPSortKeyW>(), 8);
+    assert_eq!(size_of::<LDAPSortKeyA>(), 24);
+    assert_eq!(align_of::<LDAPSortKeyA>(), 8);
+    assert_eq!(size_of::<LDAPVLVInfo>(), 48);
+    assert_eq!(align_of::<LDAPVLVInfo>(), 8);
 }
 #[cfg(feature = "winnetwk")] #[test]
 fn um_winnetwk() {
