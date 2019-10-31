@@ -1433,6 +1433,8 @@ fn shared_ws2ipdef() {
     use winapi::shared::ws2ipdef::*;
     assert_eq!(size_of::<IP_MREQ>(), 8);
     assert_eq!(align_of::<IP_MREQ>(), 4);
+    assert_eq!(size_of::<IP_MREQ_SOURCE>(), 12);
+    assert_eq!(align_of::<IP_MREQ_SOURCE>(), 4);
     assert_eq!(size_of::<IPV6_MREQ>(), 20);
     assert_eq!(align_of::<IPV6_MREQ>(), 4);
     assert_eq!(size_of::<SOCKADDR_IN6_LH>(), 28);

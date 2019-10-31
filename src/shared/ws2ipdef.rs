@@ -49,6 +49,12 @@ STRUCT!{struct IP_MREQ {
     imr_interface: IN_ADDR,
 }}
 pub type PIP_MREQ = *mut IP_MREQ;
+STRUCT!{struct IP_MREQ_SOURCE {
+    imr_multiaddr: IN_ADDR,
+    imr_sourceaddr: IN_ADDR,
+    imr_interface: IN_ADDR,
+}}
+pub type PIP_MREQ_SOURCE = *mut IP_MREQ_SOURCE;
 pub const IPV6_HOPOPTS: c_int = 1;
 pub const IPV6_HDRINCL: c_int = 2;
 pub const IPV6_UNICAST_HOPS: c_int = 4;
