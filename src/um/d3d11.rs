@@ -1852,6 +1852,7 @@ interface ID3D11DeviceContext(ID3D11DeviceContextVtbl): ID3D11DeviceChild(ID3D11
         ppRenderTargetViews: *mut *mut ID3D11RenderTargetView,
         ppDepthStencilView: *mut *mut ID3D11DepthStencilView,
         UAVStartSlot: UINT,
+        NumUAVs: UINT,
         ppUnorderedAccessViews: *mut *mut ID3D11UnorderedAccessView,
     ) -> (),
     fn OMGetBlendState(
