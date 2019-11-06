@@ -10,8 +10,8 @@ use shared::windef::{COLORREF, HICON, HWND, RECT};
 use um::commctrl::HIMAGELIST;
 use um::objidl::IBindCtx;
 use um::propkeydef::REFPROPERTYKEY;
-use um::propsys::GETPROPERTYSTOREFLAGS;
-use um::unknwnbase::{IUnknown, IUnknownVtbl};
+use um::propsys::{GETPROPERTYSTOREFLAGS, IPropertyChangeArray};
+use um::unknwnbase::{IUnknown, IUnknownVtbl, LPUNKNOWN};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR, ULONGLONG, WCHAR};
 DEFINE_GUID!{CLSID_DesktopWallpaper,
     0xc2cf3110, 0x460e, 0x4fc1, 0xb9, 0xd0, 0x8a, 0x1c, 0x0c, 0x9c, 0xc4, 0xbd}
@@ -123,6 +123,264 @@ interface IShellItemArray(IShellItemArrayVtbl): IUnknown(IUnknownVtbl) {
     //fn EnumItems(
     //    ppenumShellItems: *mut *mut IEnumShellItems,
     //) -> HRESULT,
+}}
+ENUM!{enum SPACTION {
+    SPACTION_NONE = 0,
+    SPACTION_MOVING = SPACTION_NONE + 1,
+    SPACTION_COPYING = SPACTION_MOVING + 1,
+    SPACTION_RECYCLING = SPACTION_COPYING + 1,
+    SPACTION_APPLYINGATTRIBS = SPACTION_RECYCLING + 1,
+    SPACTION_DOWNLOADING = SPACTION_APPLYINGATTRIBS + 1,
+    SPACTION_SEARCHING_INTERNET = SPACTION_DOWNLOADING + 1,
+    SPACTION_CALCULATING = SPACTION_SEARCHING_INTERNET + 1,
+    SPACTION_UPLOADING = SPACTION_CALCULATING + 1,
+    SPACTION_SEARCHING_FILES = SPACTION_UPLOADING + 1,
+    SPACTION_DELETING = SPACTION_SEARCHING_FILES + 1,
+    SPACTION_RENAMING = SPACTION_DELETING + 1,
+    SPACTION_FORMATTING = SPACTION_RENAMING + 1,
+    SPACTION_COPY_MOVING = SPACTION_FORMATTING + 1,
+}}
+ENUM!{enum OPPROGDLGF {
+    OPPROGDLG_DEFAULT = 0,
+    OPPROGDLG_ENABLEPAUSE = 0x80,
+    OPPROGDLG_ALLOWUNDO = 0x100,
+    OPPROGDLG_DONTDISPLAYSOURCEPATH = 0x200,
+    OPPROGDLG_DONTDISPLAYDESTPATH = 0x400,
+    OPPROGDLG_NOMULTIDAYESTIMATES = 0x800,
+    OPPROGDLG_DONTDISPLAYLOCATIONS = 0x1000,
+}}
+ENUM!{enum PDMODE {
+    PDM_DEFAULT = 0,
+    PDM_RUN = 0x1,
+    PDM_PREFLIGHT = 0x2,
+    PDM_UNDOING = 0x4,
+    PDM_ERRORSBLOCKING = 0x8,
+    PDM_INDETERMINATE = 0x10,
+}}
+ENUM!{enum PDOPSTATUS {
+    PDOPS_RUNNING = 1,
+    PDOPS_PAUSED = 2,
+    PDOPS_CANCELLED = 3,
+    PDOPS_STOPPED = 4,
+    PDOPS_ERRORS = 5,
+}}
+pub const FOFX_NOSKIPJUNCTIONS: DWORD = 0x00010000;
+pub const FOFX_PREFERHARDLINK: DWORD = 0x00020000;
+pub const FOFX_SHOWELEVATIONPROMPT: DWORD = 0x00040000;
+pub const FOFX_RECYCLEONDELETE: DWORD = 0x00080000;
+pub const FOFX_EARLYFAILURE: DWORD = 0x00100000;
+pub const FOFX_PRESERVEFILEEXTENSIONS: DWORD = 0x00200000;
+pub const FOFX_KEEPNEWERFILE: DWORD = 0x00400000;
+pub const FOFX_NOCOPYHOOKS: DWORD = 0x00800000;
+pub const FOFX_NOMINIMIZEBOX: DWORD = 0x01000000;
+pub const FOFX_MOVEACLSACROSSVOLUMES: DWORD = 0x02000000;
+pub const FOFX_DONTDISPLAYSOURCEPATH: DWORD = 0x04000000;
+pub const FOFX_DONTDISPLAYDESTPATH: DWORD = 0x08000000;
+pub const FOFX_REQUIREELEVATION: DWORD = 0x10000000;
+pub const FOFX_ADDUNDORECORD: DWORD = 0x20000000;
+pub const FOFX_COPYASDOWNLOAD: DWORD = 0x40000000;
+pub const FOFX_DONTDISPLAYLOCATIONS: DWORD = 0x80000000;
+RIDL!{#[uuid(0x947aab5f, 0x0a5c, 0x4c13, 0xb4, 0xd6, 0x4b, 0xf7, 0x83, 0x6f, 0xc9, 0xf8)]
+interface IFileOperation(IFileOperationVtbl): IUnknown(IUnknownVtbl) {
+    fn Advise(
+        pfops: *const IFileOperationProgressSink,
+        pdwCookie: *mut DWORD,
+    ) -> HRESULT,
+    fn Unadvise(
+        dwCookie: DWORD,
+    ) -> HRESULT,
+    fn SetOperationFlags(
+        dwOperationFlags: DWORD,
+    ) -> HRESULT,
+    fn SetProgressMessage(
+        pszMessage: LPCWSTR,
+    ) -> HRESULT,
+    fn SetProgressDialog(
+        popd: *const IOperationsProgressDialog,
+    ) -> HRESULT,
+    fn SetProperties(
+        pproparray: *const IPropertyChangeArray,
+    ) -> HRESULT,
+    fn SetOwnerWindow(
+        hwndOwner: HWND,
+    ) -> HRESULT,
+    fn ApplyPropertiesToItem(
+        psiItem: *const IShellItem,
+    ) -> HRESULT,
+    fn ApplyPropertiesToItems(
+        punkItems: LPUNKNOWN,
+    ) -> HRESULT,
+    fn RenameItem(
+        psiItem: *const IShellItem,
+        pszNewName: LPCWSTR,
+        pfopsItem: *const IFileOperationProgressSink,
+    ) -> HRESULT,
+    fn RenameItems(
+        punkItems: LPUNKNOWN,
+        pszNewName: LPCWSTR,
+    ) -> HRESULT,
+    fn MoveItem(
+        psiItem: *const IShellItem,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+        pfopsItem: *const IFileOperationProgressSink,
+    ) -> HRESULT,
+    fn MoveItems(
+        punkItems: LPUNKNOWN,
+        psiDestinationFolder: *const IShellItem,
+    ) -> HRESULT,
+    fn CopyItem(
+        psiItem: *const IShellItem,
+        psiDestinationFolder: *const IShellItem,
+        pszCopyName: LPCWSTR,
+        pfopsItem: *const IFileOperationProgressSink,
+    ) -> HRESULT,
+    fn CopyItems(
+        punkItems: LPUNKNOWN,
+        psiDestinationFolder: *const IShellItem,
+    ) -> HRESULT,
+    fn DeleteItem(
+        psiItem: *const IShellItem,
+        pfopsItem: *const IFileOperationProgressSink,
+    ) -> HRESULT,
+    fn DeleteItems(
+        punkItems: LPUNKNOWN,
+    ) -> HRESULT,
+    fn NewItem(
+        psiDestinationFolder: *const IShellItem,
+        dwFileAttributes: DWORD,
+        pszName: LPCWSTR,
+        pszTemplateName: LPCWSTR,
+        pfopsItem: *const IFileOperationProgressSink,
+    ) -> HRESULT,
+    fn PerformOperations(
+    ) -> HRESULT,
+    fn GetAnyOperationsAborted(
+        pfAnyOperationsAborted: *mut BOOL,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x04b0f1a7, 0x9490, 0x44bc, 0x96, 0xe1, 0x42, 0x96, 0xa3, 0x12, 0x52, 0xe2)]
+interface IFileOperationProgressSink(IFileOperationProgressSinkVtbl): IUnknown(IUnknownVtbl) {
+    fn StartOperations(
+    ) -> HRESULT,
+    fn FinishOperations(
+        hrResult: HRESULT,
+    ) -> HRESULT,
+    fn PreRenameItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        pszNewName: LPCWSTR,
+    ) -> HRESULT,
+    fn PostRenameItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        pszNewName: LPCWSTR,
+        hrRename: HRESULT,
+        psiNewlyCreated: *const IShellItem,
+    ) -> HRESULT,
+    fn PreMoveItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+    ) -> HRESULT,
+    fn PostMoveItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+        hrMove: HRESULT,
+        psiNewlyCreated: *const IShellItem,
+    ) -> HRESULT,
+    fn PreCopyItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+    ) -> HRESULT,
+    fn PostCopyItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+        hrCopy: HRESULT,
+        psiNewlyCreated: *const IShellItem,
+    ) -> HRESULT,
+    fn PreDeleteItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+    ) -> HRESULT,
+    fn PostDeleteItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        hrDelete: HRESULT,
+        psiNewlyCreated: *const IShellItem,
+    ) -> HRESULT,
+    fn PreNewItem(
+        dwFlags: DWORD,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+    ) -> HRESULT,
+    fn PostNewItem(
+        dwFlags: DWORD,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+        pszTemplateName: LPCWSTR,
+        dwFileAttributes: DWORD,
+        hrNew: HRESULT,
+        psiNewItem: *const IShellItem,
+    ) -> HRESULT,
+    fn UpdateProgress(
+        iWorkTotal: UINT,
+        iWorkSoFar: UINT,
+    ) -> HRESULT,
+    fn ResetTimer(
+    ) -> HRESULT,
+    fn PauseTimer(
+    ) -> HRESULT,
+    fn ResumeTimer(
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x0c9fb851, 0xe5c9, 0x43eb, 0xa3, 0x70, 0xf0, 0x67, 0x7b, 0x13, 0x87, 0x4c)]
+interface IOperationsProgressDialog(IOperationsProgressDialogVtbl): IUnknown(IUnknownVtbl) {
+    fn StartProgressDialog(
+        hwndOwner: HWND,
+        flags: OPPROGDLGF, 
+    ) -> HRESULT,
+    fn StopProgressDialog(
+    ) -> HRESULT,
+    fn SetOperation(
+        action: SPACTION,
+    ) -> HRESULT,
+    fn SetMode(
+        mode: PDMODE,
+    ) -> HRESULT,
+    fn UpdateProgress(
+        ullPointsCurrent: ULONGLONG,
+        ullPointsTotal: ULONGLONG,
+        ullSizeCurrent: ULONGLONG,
+        ullSizeTotal: ULONGLONG,
+        ullItemsCurrent: ULONGLONG,
+        ullItemsTotal: ULONGLONG,
+    ) -> HRESULT,
+    fn UpdateLocations(
+        psiSource: *const IShellItem,
+        psiTarget: *const IShellItem,
+        psiItem: *const IShellItem,
+    ) -> HRESULT,
+    fn ResetTimer(
+    ) -> HRESULT,
+    fn PauseTimer(
+    ) -> HRESULT,
+    fn ResumeTimer(
+    ) -> HRESULT,
+    fn GetMilliseconds(
+        pullElapsed: *mut ULONGLONG,
+        pullRemaining: *mut ULONGLONG,
+    ) -> HRESULT,
+    fn GetOperationStatus(
+        popstatus: *mut PDOPSTATUS,
+    ) -> HRESULT,
 }}
 //20869
 RIDL!{#[uuid(0xb4db1657, 0x70d7, 0x485e, 0x8e, 0x3e, 0x6f, 0xcb, 0x5a, 0x5c, 0x18, 0x02)]
