@@ -11,8 +11,9 @@ use um::commctrl::HIMAGELIST;
 use um::objidl::IBindCtx;
 use um::propkeydef::REFPROPERTYKEY;
 use um::propsys::{GETPROPERTYSTOREFLAGS, IPropertyChangeArray};
+use um::shtypes::{PCIDLIST_ABSOLUTE, PCUITEMID_CHILD, PIDLIST_ABSOLUTE, REFKNOWNFOLDERID};
 use um::unknwnbase::{IUnknown, IUnknownVtbl, LPUNKNOWN};
-use um::winnt::{HRESULT, LPCWSTR, LPWSTR, ULONGLONG, WCHAR};
+use um::winnt::{HRESULT, LPCWSTR, LPWSTR, PCWSTR, PWSTR, ULONGLONG, WCHAR};
 DEFINE_GUID!{CLSID_DesktopWallpaper,
     0xc2cf3110, 0x460e, 0x4fc1, 0xb9, 0xd0, 0x8a, 0x1c, 0x0c, 0x9c, 0xc4, 0xbd}
 DEFINE_GUID!{CLSID_TaskbarList,
@@ -82,6 +83,67 @@ interface IShellItem(IShellItemVtbl): IUnknown(IUnknownVtbl) {
         piOrder: *mut c_int,
     ) -> HRESULT,
 }}
+extern "system" {
+    pub fn SHCreateItemFromIDList(
+        pidl: PCIDLIST_ABSOLUTE,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHCreateItemFromParsingName(
+        pszPath: PCWSTR,
+        pbc: *mut IBindCtx,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHCreateItemWithParent(
+        pidlParent: PCIDLIST_ABSOLUTE,
+        psfParent: *mut IShellFolder,
+        pidl: PCUITEMID_CHILD,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHCreateItemFromRelativeName(
+        psiParent: *mut IShellItem,
+        pszName: PCWSTR,
+        pbc: *mut IBindCtx,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHCreateItemInKnownFolder(
+        kfid: REFKNOWNFOLDERID,
+        dwKFFlags: DWORD,
+        pszItem: PCWSTR,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHGetIDListFromObject(
+        punk: *mut IUnknown,
+        ppidl: *mut PIDLIST_ABSOLUTE,
+    ) -> HRESULT;
+    pub fn SHGetItemFromObject(
+        punk: *mut IUnknown,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHGetPropertyStoreFromIDList(
+        pidl: PCIDLIST_ABSOLUTE,
+        flags: GETPROPERTYSTOREFLAGS,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHGetPropertyStoreFromParsingName(
+        pszPath: PCWSTR,
+        pbc: *mut IBindCtx,
+        flags: GETPROPERTYSTOREFLAGS,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHGetNameFromIDList(
+        pidl: PCIDLIST_ABSOLUTE,
+        sigdnName: SIGDN,
+        ppszName: *mut PWSTR,
+    ) -> HRESULT;
+}
 ENUM!{enum SIATTRIBFLAGS {
     SIATTRIBFLAGS_AND = 0x1,
     SIATTRIBFLAGS_OR = 0x2,
