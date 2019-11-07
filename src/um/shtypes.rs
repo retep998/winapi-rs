@@ -4,9 +4,11 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
+use ctypes::{c_char, c_int};
 use shared::guiddef::GUID;
-use shared::minwindef::{BYTE, USHORT};
-use um::winnt::LPCWSTR;
+use shared::minwindef::{BYTE, DWORD, UINT, USHORT};
+use shared::wtypes::PROPERTYKEY;
+use um::winnt::{LPCWSTR, LPWSTR};
 STRUCT!{#[repr(packed)] struct SHITEMID {
     cb: USHORT,
     abID: [BYTE; 1],
@@ -36,9 +38,32 @@ pub type PCUITEMID_CHILD_ARRAY = *const PCUITEMID_CHILD;
 pub type PCUIDLIST_RELATIVE_ARRAY = *const PCUIDLIST_RELATIVE;
 pub type PCIDLIST_ABSOLUTE_ARRAY = *const PCIDLIST_ABSOLUTE;
 pub type PCUIDLIST_ABSOLUTE_ARRAY = *const PCUIDLIST_ABSOLUTE;
+ENUM!{enum STRRET_TYPE {
+    STRRET_WSTR = 0,
+    STRRET_OFFSET = 0x1,
+    STRRET_CSTR = 0x2,
+}}
+UNION!{union STRRET_u {
+    [u32; 65] [u64; 33],
+    pOleStr pOleStr_mut: LPWSTR,
+    uOffset uOffset_mut: UINT,
+    cStr cStr_mut: [c_char; 260],
+}}
+STRUCT!{#[repr(packed(8))] struct STRRET {
+    uType: UINT,
+    u: STRRET_u,
+}}
+STRUCT!{#[repr(packed(1))] struct SHELLDETAILS {
+    fmt: c_int,
+    cxChar: c_int,
+    str_: STRRET,
+}}
+pub type LPSHELLDETAILS = *mut SHELLDETAILS;
 STRUCT!{struct COMDLG_FILTERSPEC {
     pszName: LPCWSTR,
     pszSpec: LPCWSTR,
 }}
 pub type KNOWNFOLDERID = GUID;
 pub type REFKNOWNFOLDERID = *const KNOWNFOLDERID;
+pub type SHCOLSTATEF = DWORD;
+pub type SHCOLUMNID = PROPERTYKEY;

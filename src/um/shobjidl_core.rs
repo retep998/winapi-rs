@@ -4,14 +4,20 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use ctypes::{c_int, c_void};
-use shared::guiddef::{REFGUID, REFIID};
-use shared::minwindef::{BOOL, DWORD, UINT, ULONG, WORD};
+use shared::guiddef::{GUID, REFGUID, REFIID};
+use shared::minwindef::{BOOL, DWORD, LPARAM, UINT, ULONG, WORD};
 use shared::windef::{COLORREF, HICON, HWND, RECT};
 use um::commctrl::HIMAGELIST;
+use um::oaidl::VARIANT;
 use um::objidl::IBindCtx;
+use um::oleidl::{DROPEFFECT_COPY, DROPEFFECT_LINK, DROPEFFECT_MOVE};
 use um::propkeydef::REFPROPERTYKEY;
 use um::propsys::{GETPROPERTYSTOREFLAGS, IPropertyChangeArray};
-use um::shtypes::{PCIDLIST_ABSOLUTE, PCUITEMID_CHILD, PIDLIST_ABSOLUTE, REFKNOWNFOLDERID};
+use um::shtypes::{
+    PCIDLIST_ABSOLUTE, PCUIDLIST_RELATIVE, PCUITEMID_CHILD, PCUITEMID_CHILD_ARRAY,
+    PIDLIST_ABSOLUTE, PIDLIST_RELATIVE, PITEMID_CHILD, REFKNOWNFOLDERID, SHCOLSTATEF, SHCOLUMNID,
+    SHELLDETAILS, STRRET,
+};
 use um::unknwnbase::{IUnknown, IUnknownVtbl, LPUNKNOWN};
 use um::winnt::{HRESULT, LPCWSTR, LPWSTR, PCWSTR, PWSTR, ULONGLONG, WCHAR};
 DEFINE_GUID!{CLSID_DesktopWallpaper,
@@ -23,6 +29,13 @@ DEFINE_GUID!{CLSID_FileOpenDialog,
 DEFINE_GUID!{CLSID_FileSaveDialog,
     0xc0b4e2f3, 0xba21, 0x4773, 0x8d, 0xba, 0x33, 0x5e, 0xc9, 0x46, 0xeb, 0x8b}
 //4498
+ENUM!{enum SHGDNF {
+    SHGDN_NORMAL = 0,
+    SHGDN_INFOLDER = 0x1,
+    SHGDN_FOREDITING = 0x1000,
+    SHGDN_FORADDRESSBAR = 0x4000,
+    SHGDN_FORPARSING = 0x8000,
+}}
 ENUM!{enum SHCONTF {
     SHCONTF_CHECKING_FOR_CHILDREN = 0x10,
     SHCONTF_FOLDERS = 0x20,
@@ -38,7 +51,180 @@ ENUM!{enum SHCONTF {
     SHCONTF_ENABLE_ASYNC = 0x8000,
     SHCONTF_INCLUDESUPERHIDDEN = 0x10000,
 }}
+pub const SHCIDS_ALLFIELDS: LPARAM = 0x80000000;
+pub const SHCIDS_CANONICALONLY: LPARAM = 0x10000000;
+// --------------------------------------------------------------------------------------
+// The following are defined in the Windows API in shobjidl_core.h but accorgind to msdn
+// they are available once shobjidl.h is included.
+pub const SFGAO_CANCOPY: ULONG = DROPEFFECT_COPY;
+pub const SFGAO_CANMOVE: ULONG = DROPEFFECT_MOVE;
+pub const SFGAO_CANLINK: ULONG = DROPEFFECT_LINK;
+pub const SFGAO_STORAGE: ULONG = 0x00000008;
+pub const SFGAO_CANRENAME: ULONG = 0x00000010;
+pub const SFGAO_CANDELETE: ULONG = 0x00000020;
+pub const SFGAO_HASPROPSHEET: ULONG = 0x00000040;
+pub const SFGAO_DROPTARGET: ULONG = 0x00000100;
+pub const SFGAO_CAPABILITYMASK: ULONG = 0x00000177;
+pub const SFGAO_PLACEHOLDER: ULONG = 0x00000800;
+pub const SFGAO_SYSTEM: ULONG = 0x00001000;
+pub const SFGAO_ENCRYPTED: ULONG = 0x00002000;
+pub const SFGAO_ISSLOW: ULONG = 0x00004000;
+pub const SFGAO_GHOSTED: ULONG = 0x00008000;
+pub const SFGAO_LINK: ULONG = 0x00010000;
+pub const SFGAO_SHARE: ULONG = 0x00020000;
+pub const SFGAO_READONLY: ULONG = 0x00040000;
+pub const SFGAO_HIDDEN: ULONG = 0x00080000;
+pub const SFGAO_DISPLAYATTRMASK: ULONG = 0x000FC000;
+pub const SFGAO_FILESYSANCESTOR: ULONG = 0x10000000;
+pub const SFGAO_FOLDER: ULONG = 0x20000000;
+pub const SFGAO_FILESYSTEM: ULONG = 0x40000000;
+pub const SFGAO_HASSUBFOLDER: ULONG = 0x80000000;
+pub const SFGAO_CONTENTSMASK: ULONG = 0x80000000;
+pub const SFGAO_VALIDATE: ULONG = 0x01000000;
+pub const SFGAO_REMOVABLE: ULONG = 0x02000000;
+pub const SFGAO_COMPRESSED: ULONG = 0x04000000;
+pub const SFGAO_BROWSABLE: ULONG = 0x08000000;
+pub const SFGAO_NONENUMERATED: ULONG = 0x00100000;
+pub const SFGAO_NEWCONTENT: ULONG = 0x00200000;
+pub const SFGAO_CANMONIKER: ULONG = 0x00400000;
+pub const SFGAO_HASSTORAGE: ULONG = 0x00400000;
+pub const SFGAO_STREAM: ULONG = 0x00400000;
+pub const SFGAO_STORAGEANCESTOR: ULONG = 0x00800000;
+pub const SFGAO_STORAGECAPMASK: ULONG = 0x70C50008;
+pub const SFGAO_PKEYSFGAOMASK: ULONG = 0x81044000;
+// --------------------------------------------------------------------------------------
 pub type SFGAOF = ULONG;
+RIDL!{#[uuid(0x000214f2, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IEnumIDList(IEnumIDListVtbl): IUnknown(IUnknownVtbl) {
+    fn Next(
+        celt: ULONG,
+        rgelt: *mut PITEMID_CHILD,
+        pceltFetched: *mut ULONG,
+    ) -> HRESULT,
+    fn Skip(
+        celt: ULONG,
+    ) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(
+        ppenum: *mut *mut IEnumIDList,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x000214e6, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IShellFolder(IShellFolderVtbl): IUnknown(IUnknownVtbl) {
+    fn ParseDisplayName(
+        hwnd: HWND,
+        pbc: *mut IBindCtx,
+        pszDisplayName: LPWSTR,
+        pchEaten: *mut ULONG,
+        ppidl: *mut PIDLIST_RELATIVE,
+        pdwAttributes: *mut ULONG,
+    ) -> HRESULT,
+    fn EnumObjects(
+        hwnd: HWND,
+        grfFlags: SHCONTF,
+        ppenumIDList: *mut *mut IEnumIDList,
+    ) -> HRESULT,
+    fn BindToObject(
+        pidl: PCUIDLIST_RELATIVE,
+        pbc: *mut IBindCtx,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn BindToStorage(
+        pidl: PCUIDLIST_RELATIVE,
+        pbc: *mut IBindCtx,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn CompareIDs(
+        lParam: LPARAM,
+        pidl1: PCUIDLIST_RELATIVE,
+        pidl2: PCUIDLIST_RELATIVE,
+    ) -> HRESULT,
+    fn CreateViewObject(
+        hwndOwner: HWND,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetAttributesOf(
+        cidl: UINT,
+        apidl: PCUITEMID_CHILD_ARRAY,
+        rgfInOut: *mut SFGAOF,
+    ) -> HRESULT,
+    fn GetUIObjectOf(
+        hwndOwner: HWND,
+        cidl: UINT,
+        apidl: PCUITEMID_CHILD_ARRAY,
+        riid: REFIID,
+        rgfReserved: *mut UINT,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetDisplayNameOf(
+        pidl: PCUITEMID_CHILD,
+        uFlags: SHGDNF,
+        pName: *mut STRRET,
+    ) -> HRESULT,
+    fn SetNameOf(
+        hwnd: HWND,
+        pidl: PCUITEMID_CHILD,
+        pszName: LPCWSTR,
+        uFlags: SHGDNF,
+        ppidlOut: *mut PITEMID_CHILD,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x93f2f68c, 0x1d1b, 0x11d3, 0xa3, 0x0e, 0x00, 0xc0, 0x4f, 0x79, 0xab, 0xd1)]
+interface IShellFolder2(IShellFolder2Vtbl): IShellFolder(IShellFolderVtbl) {
+    fn GetDefaultSearchGUID(
+        pguid: *mut GUID,
+    ) -> HRESULT,
+    fn EnumSearches(
+        ppenum: *mut *mut IEnumExtraSearch,
+    ) -> HRESULT,
+    fn GetDefaultColumn(
+        dwRes: DWORD,
+        pSort: *mut ULONG,
+        pDisplay: *mut ULONG,
+    ) -> HRESULT,
+    fn GetDefaultColumnState(
+        iColumn: UINT,
+        pcsFlags: *mut SHCOLSTATEF,
+    ) -> HRESULT,
+    fn GetDetailsEx(
+        pidl: PCUITEMID_CHILD,
+        pscid: *const SHCOLUMNID,
+        pv: *mut VARIANT,
+    ) -> HRESULT,
+    fn GetDetailsOf(
+        pidl: PCUITEMID_CHILD,
+        iColumn: UINT,
+        psd: *mut SHELLDETAILS,
+    ) -> HRESULT,
+    fn MapColumnToSCID(
+        iColumn: UINT,
+        pscid: *mut SHCOLUMNID,
+    ) -> HRESULT,
+}}
+STRUCT!{struct EXTRASEARCH {
+    guidSearch: GUID,
+    wszFriendlyName: [WCHAR; 80],
+    wszUrl: [WCHAR; 2084],
+}}
+pub type LPEXTRASEARCH = *mut EXTRASEARCH;
+RIDL!{#[uuid(0x0e700be1, 0x9db6, 0x11d1, 0xa1, 0xce, 0x00, 0xc0, 0x4f, 0xd7, 0x5d, 0x13)]
+interface IEnumExtraSearch(IEnumExtraSearchVtbl): IUnknown(IUnknownVtbl) {
+    fn Next(
+        celt: ULONG,
+        rgelt: *mut EXTRASEARCH,
+        pceltFetched: *mut ULONG,
+    ) -> HRESULT,
+    fn Skip(
+        celt: ULONG,
+    ) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(
+        ppenum: *mut *mut IEnumExtraSearch,
+    ) -> HRESULT,
+}}
 //9466
 ENUM!{enum SIGDN {
     SIGDN_NORMALDISPLAY = 0,
