@@ -59,6 +59,7 @@ pub mod guiddef;
 #[cfg(feature = "rpcdce")] pub mod rpcdce;
 #[cfg(feature = "rpcndr")] pub mod rpcndr;
 #[cfg(feature = "sddl")] pub mod sddl;
+#[cfg(feature = "sdkddkver")] pub mod sdkddkver;
 #[cfg(feature = "sspi")] pub mod sspi;
 #[cfg(feature = "stralign")] pub mod stralign;
 #[cfg(feature = "transportsettingcommon")] pub mod transportsettingcommon;
