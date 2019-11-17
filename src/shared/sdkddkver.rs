@@ -106,22 +106,22 @@ pub const OSVERSION_MASK: DWORD = 0xFFFF0000;
 pub const SPVERSION_MASK: DWORD = 0x0000FF00;
 pub const SUBVERSION_MASK: DWORD = 0x000000FF;
 #[inline]
-pub const fn OSVER(Version: DWORD) -> DWORD {
+pub fn OSVER(Version: DWORD) -> DWORD {
     Version & OSVERSION_MASK
 }
 #[inline]
-pub const fn SPVER(Version: DWORD) -> DWORD {
+pub fn SPVER(Version: DWORD) -> DWORD {
     (Version & SPVERSION_MASK) >> 8
 }
 #[inline]
-pub const fn SUBVER(Version: DWORD) -> DWORD {
+pub fn SUBVER(Version: DWORD) -> DWORD {
     Version & SUBVERSION_MASK
 }
 #[inline]
-pub const fn NTDDI_VERSION_FROM_WIN32_WINNT2(ver: WORD) -> DWORD {
+pub fn NTDDI_VERSION_FROM_WIN32_WINNT2(ver: WORD) -> DWORD {
     (ver as DWORD) << 16
 }
 #[inline]
-pub const fn NTDDI_VERSION_FROM_WIN32_WINNT(ver: WORD) -> DWORD {
+pub fn NTDDI_VERSION_FROM_WIN32_WINNT(ver: WORD) -> DWORD {
     NTDDI_VERSION_FROM_WIN32_WINNT2(ver)
 }
