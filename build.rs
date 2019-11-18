@@ -210,6 +210,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("heapapi", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("highlevelmonitorconfigurationapi", &["minwindef", "physicalmonitorenumerationapi", "winnt"], &["dxva2"]),
     ("http", &["guiddef", "minwinbase", "minwindef", "sspi", "winnt", "ws2def"], &["winhttp"]),
+    ("icmpapi", &["ipexport", "minwindef", "ntdef", "ws2ipdef"], &["iphlpapi"]),
     ("imm", &["minwindef", "windef"], &["imm32"]),
     ("interlockedapi", &["minwindef", "winnt"], &["kernel32"]),
     ("ioapiset", &["basetsd", "minwinbase", "minwindef", "winnt"], &["kernel32"]),

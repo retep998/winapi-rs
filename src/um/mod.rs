@@ -117,6 +117,7 @@ pub mod gl;
 #[cfg(feature = "heapapi")] pub mod heapapi;
 #[cfg(feature = "highlevelmonitorconfigurationapi")] pub mod highlevelmonitorconfigurationapi;
 #[cfg(feature = "http")] pub mod http;
+#[cfg(feature = "icmpapi")] pub mod icmpapi;
 #[cfg(feature = "imm")] pub mod imm;
 #[cfg(feature = "interlockedapi")] pub mod interlockedapi;
 #[cfg(feature = "ioapiset")] pub mod ioapiset;

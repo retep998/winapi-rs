@@ -26,6 +26,7 @@ winapi-i686-pc-windows-gnu = { version = "0.4", path = "i686" }
 winapi-x86_64-pc-windows-gnu = { version = "0.4", path = "x86_64" }
 
 [features]
+default = ["icmpapi"]
 debug = ["impl-debug"]
 everything = []
 impl-debug = []
@@ -234,6 +235,7 @@ handleapi = []
 heapapi = []
 highlevelmonitorconfigurationapi = []
 http = []
+icmpapi = []
 imm = []
 interlockedapi = []
 ioapiset = []
