@@ -20,7 +20,7 @@ pub fn IsWnidowsVersionOrGreater(
     wServicePackVersion: WORD,
 ) -> bool {
     let mut osvi = OSVERSIONINFOEXW {
-        dwOSVersionInfoSize: core::mem::size_of::<OSVERSIONINFOEXW>(),
+        dwOSVersionInfoSize: _core::mem::size_of::<OSVERSIONINFOEXW>() as _,
         dwMajorVersion: wMajorVersion as _,
         dwMinorVersion: wMinorVersion as _,
         dwBuildNumber: 0,
@@ -158,7 +158,7 @@ pub fn IsWindows10OrGreater() -> bool {
 #[inline]
 pub fn IsWindowsServer() -> bool {
     let mut osvi = OSVERSIONINFOEXW {
-        dwOSVersionInfoSize: core::mem::size_of::<OSVERSIONINFOEXW>(),
+        dwOSVersionInfoSize: _core::mem::size_of::<OSVERSIONINFOEXW>() as _,
         dwMajorVersion: 0,
         dwMinorVersion: 0,
         dwBuildNumber: 0,
