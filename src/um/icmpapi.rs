@@ -6,8 +6,11 @@
 use shared::minwindef::{BOOL, DWORD, FARPROC, LPVOID, WORD};
 use shared::ntdef::{HANDLE, PVOID};
 use shared::ws2ipdef::PSOCKADDR_IN6_LH;
-use um::ipexport::{IPAddr, PIP_OPTION_INFORMATION};
-
+use um::ipexport::IPAddr;
+#[cfg(target_pointer_width = "32")]
+use um::ipexport::PIP_OPTION_INFORMATION;
+#[cfg(target_pointer_width = "64")]
+use um::ipexport::PIP_OPTION_INFORMATION32 as PIP_OPTION_INFORMATION;
 extern "system" {
     pub fn IcmpCreateFile() -> HANDLE;
     pub fn Icmp6CreateFile() -> HANDLE;
