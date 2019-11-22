@@ -172,6 +172,7 @@ pub mod gl;
 #[cfg(feature = "opmapi")] pub mod opmapi;
 #[cfg(feature = "pdh")] pub mod pdh;
 #[cfg(feature = "perflib")] pub mod perflib;
+#[cfg(feature = "pchannel")] pub mod pchannel;
 #[cfg(feature = "physicalmonitorenumerationapi")] pub mod physicalmonitorenumerationapi;
 #[cfg(feature = "playsoundapi")] pub mod playsoundapi;
 #[cfg(feature = "portabledevice")] pub mod portabledevice;

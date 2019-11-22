@@ -254,6 +254,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("opmapi", &["basetsd", "d3d9", "d3d9types", "dxva2api", "guiddef", "minwindef", "unknwnbase", "windef", "winnt"], &["dxva2"]),
     ("pdh", &["basetsd", "guiddef", "minwindef", "windef", "winnt"], &["pdh"]),
     ("perflib", &["basetsd", "guiddef", "minwinbase", "minwindef", "winnt"], &["advapi32"]),
+    ("pchannel", &["basetsd", "minwindef"], &[]),
     ("physicalmonitorenumerationapi", &["d3d9", "minwindef", "windef", "winnt"], &["dxva2"]),
     ("playsoundapi", &["minwindef", "winnt"], &["winmm"]),
     ("portabledevice", &["basetsd", "wtypes"], &[]),
