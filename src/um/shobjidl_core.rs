@@ -7,11 +7,13 @@
 
 use ctypes::{c_int, c_void};
 use shared::guiddef::{REFGUID, REFIID};
-use shared::minwindef::{BOOL, ULONG};
+use shared::minwindef::{BOOL, DWORD, ULONG, WORD};
 use shared::windef::{HWND};
+use um::shtypes::{PIDLIST_ABSOLUTE, PCIDLIST_ABSOLUTE};
 use um::objidl::IBindCtx;
+use um::minwinbase::{WIN32_FIND_DATAA};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HRESULT, LPWSTR};
+use um::winnt::{HRESULT, LPCSTR, LPSTR, LPWSTR};
 
 DEFINE_GUID!{CLSID_TaskbarList,
     0x56fdf344, 0xfd6d, 0x11d0, 0x95, 0x8a, 0x00, 0x60, 0x97, 0xc9, 0xa0, 0x90}
@@ -95,3 +97,82 @@ interface ITaskbarList2(ITaskbarList2Vtbl): ITaskbarList(ITaskbarListVtbl) {
         fFullscreen: BOOL,
     ) -> HRESULT,    
 }}
+
+DEFINE_GUID!{CLSID_ShellLink,
+    0x0002140, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
+RIDL!(#[uuid(0x000214EE, 0, 0, 0xC0,0,0,0,0,0,0,0x46)]
+interface IShellLinkA(IShellLinkAVtbl): IUnknown(IUnknownVtbl) {
+    fn GetPath(
+        pszFile: LPSTR,
+        cch: c_int,
+        pfd: *mut WIN32_FIND_DATAA,
+        fFlags: DWORD,
+    ) -> HRESULT,
+    fn GetIDList(
+        ppidl: *mut PIDLIST_ABSOLUTE,
+    ) -> HRESULT,
+    fn SetIDList(
+        pidl: PCIDLIST_ABSOLUTE,
+    ) -> HRESULT,
+    fn GetDescription(
+        pszName: LPSTR,
+        cch: c_int,
+    ) -> HRESULT,
+    fn SetDescription(
+        pszName: LPCSTR,
+    ) -> HRESULT,
+    fn GetWorkingDirectory(
+        pszDir: LPSTR,
+        cch: c_int,
+    ) -> HRESULT,
+    fn SetWorkingDirectory(
+        pszDir: LPCSTR,
+    ) -> HRESULT,
+    fn GetArguments(
+        pszArgs: LPSTR,
+        cch: c_int,
+    ) -> HRESULT,
+    fn SetArguments(
+        pszArgs: LPCSTR,
+    ) -> HRESULT,
+    fn GetHotkey(
+        pwHotkey: *mut WORD,
+    ) -> HRESULT,
+    fn SetHotkey(
+        wHotkey: WORD,
+    ) -> HRESULT,
+    fn GetShowCmd(
+        piShowCmd: *mut c_int,
+    ) -> HRESULT,
+    fn SetShowCmd(
+        iShowCmd: c_int,
+    ) -> HRESULT,
+    fn GetIconLocation(
+        pszIconPath: LPSTR,
+        cch: c_int,
+        piIcon: *mut c_int,
+    ) -> HRESULT,
+    fn SetIconLocation(
+        pszIconPath: LPCSTR,
+        iIcon: c_int,
+    ) -> HRESULT,
+    fn SetRelativePath(
+        pszPathRel: LPCSTR,
+        dwReserved: DWORD,
+    ) -> HRESULT,
+    fn Resolve(
+        hwnd: HWND,
+        fFlags: DWORD,
+    ) -> HRESULT,
+    fn SetPath(
+        pszFile: LPCSTR,
+    ) -> HRESULT,
+});
+/*
+RIDL!(#[uuid(0x000214F9, 0, 0, 0xC0,0,0,0,0,0,0,0x46)]
+interface IShellLinkW(IShellLinkWVtbl): IUnknown(IUnknownVtbl) {
+    fn Show(
+        hwndOwner: HWND,
+    ) -> HRESULT,
+});
+*/
