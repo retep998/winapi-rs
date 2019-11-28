@@ -13,7 +13,7 @@ use um::shtypes::{PIDLIST_ABSOLUTE, PCIDLIST_ABSOLUTE};
 use um::objidl::IBindCtx;
 use um::minwinbase::{WIN32_FIND_DATAA};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HRESULT, LPCSTR, LPSTR, LPWSTR};
+use um::winnt::{HRESULT, LPCSTR, LPSTR, LPCWSTR, LPWSTR};
 
 DEFINE_GUID!{CLSID_TaskbarList,
     0x56fdf344, 0xfd6d, 0x11d0, 0x95, 0x8a, 0x00, 0x60, 0x97, 0xc9, 0xa0, 0x90}
@@ -168,11 +168,73 @@ interface IShellLinkA(IShellLinkAVtbl): IUnknown(IUnknownVtbl) {
         pszFile: LPCSTR,
     ) -> HRESULT,
 });
-/*
+
 RIDL!(#[uuid(0x000214F9, 0, 0, 0xC0,0,0,0,0,0,0,0x46)]
 interface IShellLinkW(IShellLinkWVtbl): IUnknown(IUnknownVtbl) {
-    fn Show(
-        hwndOwner: HWND,
+    fn GetPath(
+        pszFile: LPWSTR,
+        cch: c_int,
+        pfd: *mut WIN32_FIND_DATAA,
+        fFlags: DWORD,
+    ) -> HRESULT,
+    fn GetIDList(
+        ppidl: *mut PIDLIST_ABSOLUTE,
+    ) -> HRESULT,
+    fn SetIDList(
+        pidl: PCIDLIST_ABSOLUTE,
+    ) -> HRESULT,
+    fn GetDescription(
+        pszName: LPWSTR,
+        cch: c_int,
+    ) -> HRESULT,
+    fn SetDescription(
+        pszName: LPCWSTR,
+    ) -> HRESULT,
+    fn GetWorkingDirectory(
+        pszDir: LPWSTR,
+        cch: c_int,
+    ) -> HRESULT,
+    fn SetWorkingDirectory(
+        pszDir: LPCWSTR,
+    ) -> HRESULT,
+    fn GetArguments(
+        pszArgs: LPWSTR,
+        cch: c_int,
+    ) -> HRESULT,
+    fn SetArguments(
+        pszArgs: LPCWSTR,
+    ) -> HRESULT,
+    fn GetHotkey(
+        pwHotkey: *mut WORD,
+    ) -> HRESULT,
+    fn SetHotkey(
+        wHotkey: WORD,
+    ) -> HRESULT,
+    fn GetShowCmd(
+        piShowCmd: *mut c_int,
+    ) -> HRESULT,
+    fn SetShowCmd(
+        iShowCmd: c_int,
+    ) -> HRESULT,
+    fn GetIconLocation(
+        pszIconPath: LPWSTR,
+        cch: c_int,
+        piIcon: *mut c_int,
+    ) -> HRESULT,
+    fn SetIconLocation(
+        pszIconPath: LPCWSTR,
+        iIcon: c_int,
+    ) -> HRESULT,
+    fn SetRelativePath(
+        pszPathRel: LPCWSTR,
+        dwReserved: DWORD,
+    ) -> HRESULT,
+    fn Resolve(
+        hwnd: HWND,
+        fFlags: DWORD,
+    ) -> HRESULT,
+    fn SetPath(
+        pszFile: LPCWSTR,
     ) -> HRESULT,
 });
-*/
+
