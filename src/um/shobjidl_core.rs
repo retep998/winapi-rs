@@ -7,9 +7,18 @@
 
 use ctypes::{c_int, c_void};
 use shared::guiddef::{REFGUID, REFIID};
-use shared::minwindef::{BOOL, DWORD, ULONG, WORD};
+use shared::minwindef::{BOOL, DWORD, LPARAM, UINT, ULONG, WORD};
 use shared::windef::{HWND};
-use um::shtypes::{PIDLIST_ABSOLUTE, PCIDLIST_ABSOLUTE};
+use um::shtypes::{
+    PIDLIST_ABSOLUTE, 
+    PCIDLIST_ABSOLUTE, 
+    PCUIDLIST_RELATIVE, 
+    PCUITEMID_CHILD,
+    PCUITEMID_CHILD_ARRAY,
+    PIDLIST_RELATIVE,
+    PITEMID_CHILD,
+    STRRET,
+};
 use um::objidl::IBindCtx;
 use um::minwinbase::{WIN32_FIND_DATAA};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
@@ -260,3 +269,105 @@ interface IShellLinkW(IShellLinkWVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 });
 
+ENUM!{enum _SHCONTF {
+    SHCONTF_CHECKING_FOR_CHILDREN	= 0x10,
+    SHCONTF_FOLDERS                 = 0x20,
+    SHCONTF_NONFOLDERS	            = 0x40,
+    SHCONTF_INCLUDEHIDDEN	        = 0x80,
+    SHCONTF_INIT_ON_FIRST_NEXT	    = 0x100,
+    SHCONTF_NETPRINTERSRCH	        = 0x200,
+    SHCONTF_SHAREABLE	            = 0x400,
+    SHCONTF_STORAGE	                = 0x800,
+    SHCONTF_NAVIGATION_ENUM	        = 0x1000,
+    SHCONTF_FASTITEMS	            = 0x2000,
+    SHCONTF_FLATLIST	            = 0x4000,
+    SHCONTF_ENABLE_ASYNC	        = 0x8000,
+    SHCONTF_INCLUDESUPERHIDDEN	    = 0x10000,
+}}
+pub type SHCONTF = DWORD;
+ENUM!{enum _SHGDNF {
+    SHGDN_NORMAL	    = 0,
+    SHGDN_INFOLDER	    = 0x1,
+    SHGDN_FOREDITING	= 0x1000,
+    SHGDN_FORADDRESSBAR	= 0x4000,
+    SHGDN_FORPARSING	= 0x8000,
+}}
+pub type SHGDNF = DWORD;
+RIDL!(#[uuid(0x000214F2, 0, 0, 0xC0,0,0,0,0,0,0,0x46)]
+interface IEnumIDList(IEnumIDListVtbl): IUnknown(IUnknownVtbl) {
+    fn Next(
+        celt: ULONG,
+        rgelt: *mut PITEMID_CHILD,
+        pceltFetched: *mut ULONG,
+    ) -> HRESULT,
+    fn Skip(
+        celt: ULONG,
+    ) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(
+        ppenum: *mut *mut IEnumIDList,
+    ) -> HRESULT,
+});
+RIDL!(#[uuid(0x000214E6, 0, 0, 0xC0,0,0,0,0,0,0,0x46)]
+interface IShellFolder(IShellFolderVtbl): IUnknown(IUnknownVtbl) {
+    fn ParseDisplayName(
+        hwnd: HWND,
+        pbc: *mut IBindCtx,
+        pszDisplayName: LPWSTR,
+        pchEaten: *mut ULONG,
+        ppidl: *mut PIDLIST_RELATIVE,
+        pdwAttributes: *mut ULONG,
+    ) -> HRESULT,
+    fn EnumObjects(
+        hwnd: HWND,
+        grfFlags: SHCONTF,
+        ppenumIDList: *mut *mut IEnumIDList,
+    ) -> HRESULT,
+    fn BindToObject(
+        pidl: PCUIDLIST_RELATIVE,
+        pbc: *mut IBindCtx,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn BindToStorage(
+        pidl: PCUIDLIST_RELATIVE,
+        pbc: *mut IBindCtx,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,    
+    fn CompareIDs(
+        lParam: LPARAM,
+        pidl1: PCUIDLIST_RELATIVE,
+        pidl2: PCUIDLIST_RELATIVE,
+    ) -> HRESULT,
+    fn CreateViewObject(
+        hwndOwner: HWND,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetAttributesOf(
+        cidl: UINT,
+        apidl: PCUITEMID_CHILD_ARRAY,
+        rgfInOut: *mut SFGAOF,
+    ) -> HRESULT,
+    fn GetUIObjectOf(
+        hwndOwner: HWND,
+        cidl: UINT,
+        apidl: PCUITEMID_CHILD_ARRAY,
+        riid: REFIID,
+        rgfReserved: *mut ULONG,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetDisplayNameOf(
+        pidl: PCUITEMID_CHILD,
+        uFlags: SHGDNF,
+        pName: *mut STRRET,
+    ) -> HRESULT,
+    fn SetNameOf(
+        hwnd: HWND,
+        pidl: PCUITEMID_CHILD,
+        pszName: LPCWSTR,
+        uFlags: SHGDNF,
+        ppidlOut: *mut PITEMID_CHILD,
+    ) -> HRESULT,
+});

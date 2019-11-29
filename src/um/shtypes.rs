@@ -6,9 +6,10 @@
 // except according to those terms.
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
 
+use ctypes::c_schar;
 use shared::guiddef::GUID;
-use shared::minwindef::{BYTE, USHORT};
-use um::winnt::LPCWSTR;
+use shared::minwindef::{BYTE, USHORT, UINT};
+use um::winnt::{LPCWSTR, LPWSTR};
 
 STRUCT!{struct SHITEMID {
     cb: USHORT,
@@ -45,3 +46,18 @@ STRUCT!{struct COMDLG_FILTERSPEC {
 }}
 pub type KNOWNFOLDERID = GUID;
 pub type REFKNOWNFOLDERID = *const KNOWNFOLDERID;
+ENUM!{enum STRRET_TYPE {
+    STRRET_WSTR	    = 0,
+    STRRET_OFFSET	= 0x1,
+    STRRET_CSTR	    = 0x2,
+}}
+UNION!{union STRRET_u {
+    [c_schar; 260],
+    pOleStr pOleStrMut: LPWSTR,
+    uOffset uOffsetMut: UINT,
+    cStr cStrMut: [c_schar; 260],
+}}
+STRUCT!{struct STRRET {
+    uType: UINT,
+    u: STRRET_u,
+}}
