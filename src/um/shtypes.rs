@@ -47,9 +47,9 @@ STRUCT!{struct COMDLG_FILTERSPEC {
 pub type KNOWNFOLDERID = GUID;
 pub type REFKNOWNFOLDERID = *const KNOWNFOLDERID;
 ENUM!{enum STRRET_TYPE {
-    STRRET_WSTR	    = 0,
-    STRRET_OFFSET	= 0x1,
-    STRRET_CSTR	    = 0x2,
+    STRRET_WSTR     = 0,
+    STRRET_OFFSET   = 0x1,
+    STRRET_CSTR     = 0x2,
 }}
 UNION!{union STRRET_u {
     [c_schar; 260],
