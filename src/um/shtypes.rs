@@ -8,7 +8,7 @@
 
 use ctypes::c_schar;
 use shared::guiddef::GUID;
-use shared::minwindef::{BYTE, USHORT, UINT};
+use shared::minwindef::{BYTE, UINT, USHORT};
 use um::winnt::{LPCWSTR, LPWSTR};
 
 STRUCT!{struct SHITEMID {

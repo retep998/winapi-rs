@@ -9,20 +9,20 @@ use ctypes::{c_int, c_void};
 use shared::guiddef::{REFGUID, REFIID};
 use shared::minwindef::{BOOL, DWORD, LPARAM, UINT, ULONG, WORD};
 use shared::windef::{HWND};
+use um::minwinbase::{WIN32_FIND_DATAA};
+use um::objidl::IBindCtx;
 use um::shtypes::{
-    PIDLIST_ABSOLUTE, 
     PCIDLIST_ABSOLUTE, 
-    PCUIDLIST_RELATIVE, 
+    PCUIDLIST_RELATIVE,
     PCUITEMID_CHILD,
     PCUITEMID_CHILD_ARRAY,
+    PIDLIST_ABSOLUTE,
     PIDLIST_RELATIVE,
     PITEMID_CHILD,
-    STRRET,
+    STRRET
 };
-use um::objidl::IBindCtx;
-use um::minwinbase::{WIN32_FIND_DATAA};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HRESULT, LPCSTR, LPSTR, LPCWSTR, LPWSTR};
+use um::winnt::{HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR};
 
 DEFINE_GUID!{CLSID_TaskbarList,
     0x56fdf344, 0xfd6d, 0x11d0, 0x95, 0x8a, 0x00, 0x60, 0x97, 0xc9, 0xa0, 0x90}
