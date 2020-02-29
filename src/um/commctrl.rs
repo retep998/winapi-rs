@@ -1490,7 +1490,7 @@ STRUCT!{struct TTTOOLINFOW {
     uId: UINT_PTR,
     rect: RECT,
     hinst: HINSTANCE,
-    lpszText: LPSTR,
+    lpszText: LPWSTR,
     lParam: LPARAM,
     lpReserved: *mut c_void,
 }}
