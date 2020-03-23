@@ -15,7 +15,7 @@ environment:
     channel: 1.6.0
 matrix:
   allow_failures:
-    - target: aarch64-pc-windows-msvc
+    - host: i686-pc-windows-gnu
 
 install:
   - ps: if (ls -r . -fi "*.rs" | sls "`t") { throw "Found tab character" }
