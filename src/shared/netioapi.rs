@@ -29,10 +29,10 @@ const ANY_SIZE: usize = 1;
 pub type NETIO_STATUS = DWORD;
 pub type NETIOAPI_API = NETIO_STATUS;
 ENUM!{enum MIB_NOTIFICATION_TYPE {
-    MibParameterNotification = 0,
-    MibAddInstance = 1,
-    MibDeleteInstance = 2,
-    MibInitialNotification = 3,
+    MibParameterNotification,
+    MibAddInstance,
+    MibDeleteInstance,
+    MibInitialNotification,
 }}
 pub type PMIB_NOTIFICATION_TYPE = *mut MIB_NOTIFICATION_TYPE;
 STRUCT!{struct MIB_IF_ROW2_InterfaceAndOperStatusFlags {

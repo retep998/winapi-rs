@@ -59,7 +59,7 @@ ENUM!{enum NDIS_PHYSICAL_MEDIUM {
     NdisPhysicalMediumWiredWAN = 17,
     NdisPhysicalMediumWiredCoWan = 18,
     NdisPhysicalMediumOther = 19,
-    NdisPhysicalMediumMax = 20, // Not a real physical type, defined as an upper-bound
+    NdisPhysicalMediumMax = 20,
 }}
 pub type PNDIS_PHYSICAL_MEDIUM = *mut NDIS_PHYSICAL_MEDIUM;
 //2691

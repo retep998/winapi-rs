@@ -8,10 +8,10 @@ use shared::minwindef::ULONG;
 use shared::ntdef::BOOLEAN;
 ENUM!{enum NL_PREFIX_ORIGIN {
     IpPrefixOriginOther = 0,
-    IpPrefixOriginManual = 1,
-    IpPrefixOriginWellKnown = 2,
-    IpPrefixOriginDhcp = 3,
-    IpPrefixOriginRouterAdvertisement = 4,
+    IpPrefixOriginManual,
+    IpPrefixOriginWellKnown,
+    IpPrefixOriginDhcp,
+    IpPrefixOriginRouterAdvertisement,
     IpPrefixOriginUnchanged = 1 << 4,
 }}
 pub const NlpoOther: NL_PREFIX_ORIGIN = IpPrefixOriginOther;
@@ -35,17 +35,17 @@ ENUM!{enum NL_SUFFIX_ORIGIN {
     IpSuffixOriginUnchanged = 1 << 4,
 }}
 ENUM!{enum NL_DAD_STATE {
+    NldsInvalid,
+    NldsTentative,
+    NldsDuplicate,
+    NldsDeprecated,
+    NldsPreferred,
     IpDadStateInvalid = 0,
-    IpDadStateTentative = 1,
-    IpDadStateDuplicate = 2,
-    IpDadStateDeprecated = 3,
-    IpDadStatePreferred = 4,
+    IpDadStateTentative,
+    IpDadStateDuplicate,
+    IpDadStateDeprecated,
+    IpDadStatePreferred,
 }}
-pub const NldsInvalid: NL_DAD_STATE = IpDadStateInvalid;
-pub const NldsTentative: NL_DAD_STATE = IpDadStateTentative;
-pub const NldsDuplicate: NL_DAD_STATE = IpDadStateDuplicate;
-pub const NldsDeprecated: NL_DAD_STATE = IpDadStateDeprecated;
-pub const NldsPreferred: NL_DAD_STATE = IpDadStatePreferred;
 pub const NL_MAX_METRIC_COMPONENT: ULONG = (1u32 << 31) - 1;
 ENUM!{enum NL_ROUTE_PROTOCOL {
     RouteProtocolOther = 1,

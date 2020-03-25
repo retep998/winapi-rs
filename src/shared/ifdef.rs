@@ -105,16 +105,16 @@ ENUM!{enum NET_IF_ACCESS_TYPE {
 }}
 pub type PNET_IF_ACCESS_TYPE = *mut NET_IF_ACCESS_TYPE;
 ENUM!{enum NET_IF_DIRECTION_TYPE {
-    NET_IF_DIRECTION_SENDRECEIVE = 0,
-    NET_IF_DIRECTION_SENDONLY = 1,
-    NET_IF_DIRECTION_RECEIVEONLY = 2,
-    NET_IF_DIRECTION_MAXIMUM = 3,
+    NET_IF_DIRECTION_SENDRECEIVE,
+    NET_IF_DIRECTION_SENDONLY,
+    NET_IF_DIRECTION_RECEIVEONLY,
+    NET_IF_DIRECTION_MAXIMUM,
 }}
 pub type PNET_IF_DIRECTION_TYPE = *mut NET_IF_DIRECTION_TYPE;
 ENUM!{enum NET_IF_MEDIA_CONNECT_STATE {
-    MediaConnectStateUnknown = 0,
-    MediaConnectStateConnected = 1,
-    MediaConnectStateDisconnected = 2,
+    MediaConnectStateUnknown,
+    MediaConnectStateConnected,
+    MediaConnectStateDisconnected,
 }}
 pub type PNET_IF_MEDIA_CONNECT_STATE = *mut NET_IF_MEDIA_CONNECT_STATE;
 ENUM!{enum NET_IF_MEDIA_DUPLEX_STATE {

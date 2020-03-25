@@ -3,9 +3,6 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-// #include <winapifamily.h>
-// #include <ifdef.h>
-// #include <nldef.h>
 use shared::basetsd::{UINT8, ULONG64};
 use shared::guiddef::GUID;
 use shared::ifdef::{
@@ -292,7 +289,6 @@ BITFIELD!{IP_ADAPTER_ADDRESSES_LH Flags: ULONG [
     Ipv4Enabled set_Ipv4Enabled[7..8],
     Ipv6Enabled set_Ipv6Enabled[8..9],
     Ipv6ManagedAddressConfigurationSupported set_Ipv6ManagedAddressConfigurationSupported[9..10],
-    Reserved set_Reserved[10..32],
 ]}
 pub type PIP_ADAPTER_ADDRESSES_LH = *mut IP_ADAPTER_ADDRESSES_LH;
 STRUCT!{struct IP_ADAPTER_ADDRESSES_XP_u_s {
