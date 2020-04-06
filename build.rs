@@ -63,7 +63,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("mprapidef", &[], &[]),
     ("mstcpip", &["basetsd", "guiddef", "in6addr", "inaddr", "minwindef", "winnt", "ws2def"], &["ntdll"]),
     ("mswsockdef", &["minwindef", "winnt", "ws2def"], &[]),
-    ("netioapi", &["basetsd", "guiddef", "ifdef", "minwindef", "nldef", "ntddndis", "ntdef", "ws2def", "ws2ipdef"], &["iphlpapi"]),
+    ("netioapi", &["basetsd", "guiddef", "ifdef", "ipifcons", "minwindef", "nldef", "ntddndis", "ntdef", "ws2def", "ws2ipdef"], &["iphlpapi"]),
     ("nldef", &["basetsd", "minwindef", "ntdef"], &[]),
     ("ntddndis", &["ifdef"], &[]),
     ("ntddscsi", &["basetsd", "minwindef", "ntdef", "winioctl", "winnt"], &[]),
