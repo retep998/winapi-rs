@@ -155,12 +155,12 @@ ENUM!{enum IF_ADMINISTRATIVE_STATE {
 pub type PIF_ADMINISTRATIVE_STATE = *mut IF_ADMINISTRATIVE_STATE;
 ENUM!{enum IF_OPER_STATUS {
     IfOperStatusUp = 1,
-    IfOperStatusDown = 2,
-    IfOperStatusTesting = 3,
-    IfOperStatusUnknown = 4,
-    IfOperStatusDormant = 5,
-    IfOperStatusNotPresent = 6,
-    IfOperStatusLowerLayerDown = 7,
+    IfOperStatusDown,
+    IfOperStatusTesting,
+    IfOperStatusUnknown,
+    IfOperStatusDormant,
+    IfOperStatusNotPresent,
+    IfOperStatusLowerLayerDown,
 }}
 STRUCT!{struct NDIS_INTERFACE_INFORMATION {
     ifOperStatus: NET_IF_OPER_STATUS,
