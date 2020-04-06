@@ -57,8 +57,8 @@ STRUCT!{struct MIB_IF_ROW2 {
     PhysicalAddress: [UCHAR; IF_MAX_PHYS_ADDRESS_LENGTH],
     PermanentPhysicalAddress: [UCHAR; IF_MAX_PHYS_ADDRESS_LENGTH],
     Mtu: ULONG,
-    Type: ULONG, // Interface Type.
-    TunnelType: TUNNEL_TYPE, // Tunnel Type, if Type = IF_TUNNEL.
+    Type: ULONG,
+    TunnelType: TUNNEL_TYPE,
     MediaType: NDIS_MEDIUM,
     PhysicalMediumType: NDIS_PHYSICAL_MEDIUM,
     AccessType: NET_IF_ACCESS_TYPE,
