@@ -37,7 +37,7 @@ pub type PMIB_NOTIFICATION_TYPE = *mut MIB_NOTIFICATION_TYPE;
 STRUCT!{struct MIB_IF_ROW2_InterfaceAndOperStatusFlags {
     bitfield: BYTE,
 }}
-BITFIELD!{MIB_IF_ROW2_InterfaceAndOperStatusFlags bitfield: BYTE [
+BITFIELD!{MIB_IF_ROW2_InterfaceAndOperStatusFlags bitfield: BOOLEAN [
     HardwareInterface set_HardwareInterface[0..1],
     FilterInterface set_FilterInterface[1..2],
     ConnectorPresent set_ConnectorPresent[2..3],
