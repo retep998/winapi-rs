@@ -3012,7 +3012,7 @@ STRUCT!{struct D3D12_DXIL_LIBRARY_DESC {
 STRUCT!{struct D3D12_EXISTING_COLLECTION_DESC {
     pExistingCollection: *mut ID3D12StateObject,
     NumExports: UINT,
-    pExports: *const D3D12_EXPORT_DESC,
+    pExports: *mut D3D12_EXPORT_DESC,
 }}
 STRUCT!{struct D3D12_SUBOBJECT_TO_EXPORTS_ASSOCIATION {
     pSubobjectToAssociate: *const D3D12_STATE_SUBOBJECT,
