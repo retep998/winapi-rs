@@ -12,6 +12,7 @@ use shared::ifdef::{
     NET_LUID, PNET_IFINDEX, PNET_IF_COMPARTMENT_ID, PNET_IF_COMPARTMENT_SCOPE, PNET_LUID,
     TUNNEL_TYPE,
 };
+use shared::ipifcons::IFTYPE;
 use shared::minwindef::{BYTE, DWORD, PULONG, UCHAR, ULONG, USHORT};
 use shared::nldef::{
     NL_BANDWIDTH_INFORMATION, NL_DAD_STATE, NL_INTERFACE_OFFLOAD_ROD,
@@ -22,7 +23,7 @@ use shared::ntddndis::{NDIS_MEDIUM, NDIS_PHYSICAL_MEDIUM};
 use shared::ntdef::{
     BOOLEAN, CHAR, HANDLE, LARGE_INTEGER, PCHAR, PCSTR, PSTR, PVOID, PWCHAR, PWSTR, WCHAR,
 };
-use shared::ws2def::{ADDRESS_FAMILY, SCOPE_ID, ScopeLevelCount};
+use shared::ws2def::{ScopeLevelCount, ADDRESS_FAMILY, SCOPE_ID};
 use shared::ws2ipdef::{PSOCKADDR_IN6_PAIR, SOCKADDR_IN6, SOCKADDR_INET};
 const ANY_SIZE: usize = 1;
 pub type NETIO_STATUS = DWORD;
@@ -57,7 +58,7 @@ STRUCT!{struct MIB_IF_ROW2 {
     PhysicalAddress: [UCHAR; IF_MAX_PHYS_ADDRESS_LENGTH],
     PermanentPhysicalAddress: [UCHAR; IF_MAX_PHYS_ADDRESS_LENGTH],
     Mtu: ULONG,
-    Type: ULONG,
+    Type: IFTYPE,
     TunnelType: TUNNEL_TYPE,
     MediaType: NDIS_MEDIUM,
     PhysicalMediumType: NDIS_PHYSICAL_MEDIUM,
