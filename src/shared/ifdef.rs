@@ -132,7 +132,7 @@ pub type PNET_PHYSICAL_LOCATION_LH = *mut NET_PHYSICAL_LOCATION_LH;
 pub const IF_MAX_STRING_SIZE: usize = 256;
 pub const IF_MAX_PHYS_ADDRESS_LENGTH: usize = 32;
 STRUCT!{struct IF_COUNTED_STRING_LH {
-    Length: USHORT, // in -Bytes-
+    Length: USHORT,
     String: [WCHAR; IF_MAX_STRING_SIZE + 1],
 }}
 pub type PIF_COUNTED_STRING_LH = *mut IF_COUNTED_STRING_LH;
