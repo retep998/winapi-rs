@@ -20,20 +20,20 @@ pub const NlpoWellKnown: NL_PREFIX_ORIGIN = IpPrefixOriginWellKnown;
 pub const NlpoDhcp: NL_PREFIX_ORIGIN = IpPrefixOriginDhcp;
 pub const NlpoRouterAdvertisement: NL_PREFIX_ORIGIN = IpPrefixOriginRouterAdvertisement;
 ENUM!{enum NL_SUFFIX_ORIGIN {
+    NlsoOther = 0,
+    NlsoManual,
+    NlsoWellKnown,
+    NlsoDhcp,
+    NlsoLinkLayerAddress,
+    NlsoRandom,
     IpSuffixOriginOther = 0,
-    IpSuffixOriginManual = 1,
-    IpSuffixOriginWellKnown = 2,
-    IpSuffixOriginDhcp = 3,
-    IpSuffixOriginLinkLayerAddress = 4,
-    IpSuffixOriginRandom = 5,
+    IpSuffixOriginManual,
+    IpSuffixOriginWellKnown,
+    IpSuffixOriginDhcp,
+    IpSuffixOriginLinkLayerAddress,
+    IpSuffixOriginRandom,
     IpSuffixOriginUnchanged = 1 << 4,
 }}
-pub const NlsoOther: NL_SUFFIX_ORIGIN = IpSuffixOriginOther;
-pub const NlsoManual: NL_SUFFIX_ORIGIN = IpSuffixOriginManual;
-pub const NlsoWellKnown: NL_SUFFIX_ORIGIN = IpSuffixOriginWellKnown;
-pub const NlsoDhcp: NL_SUFFIX_ORIGIN = IpSuffixOriginDhcp;
-pub const NlsoLinkLayerAddress: NL_SUFFIX_ORIGIN = IpSuffixOriginLinkLayerAddress;
-pub const NlsoRandom: NL_SUFFIX_ORIGIN = IpSuffixOriginRandom;
 ENUM!{enum NL_DAD_STATE {
     IpDadStateInvalid = 0,
     IpDadStateTentative = 1,
