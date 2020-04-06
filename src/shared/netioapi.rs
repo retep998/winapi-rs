@@ -23,7 +23,7 @@ use shared::ntddndis::{NDIS_MEDIUM, NDIS_PHYSICAL_MEDIUM};
 use shared::ntdef::{
     BOOLEAN, CHAR, HANDLE, LARGE_INTEGER, PCHAR, PCSTR, PSTR, PVOID, PWCHAR, PWSTR, WCHAR,
 };
-use shared::ws2def::{ScopeLevelCount, ADDRESS_FAMILY, SCOPE_ID};
+use shared::ws2def::{ADDRESS_FAMILY, SCOPE_ID, ScopeLevelCount};
 use shared::ws2ipdef::{PSOCKADDR_IN6_PAIR, SOCKADDR_IN6, SOCKADDR_INET};
 const ANY_SIZE: usize = 1;
 pub type NETIO_STATUS = DWORD;
