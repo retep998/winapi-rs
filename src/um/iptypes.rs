@@ -243,22 +243,6 @@ UNION!{union IP_ADAPTER_ADDRESSES_LH_u {
     Alignment Alignment_mut: ULONGLONG,
     s s_mut: IP_ADAPTER_ADDRESSES_LH_u_s,
 }}
-STRUCT!{struct IP_ADAPTER_ADDRESSES_LH_s {
-    bitfield: ULONG,
-}}
-BITFIELD!{IP_ADAPTER_ADDRESSES_LH_s bitfield: ULONG [
-    DdnsEnabled set_DdnsEnabled[0..1],
-    RegisterAdapterSuffix set_RegisterAdapterSuffix[1..2],
-    Dhcpv4Enabled set_Dhcpv4Enabled[2..3],
-    ReceiveOnly set_ReceiveOnly[3..4],
-    NoMulticast set_NoMulticast[4..5],
-    Ipv6OtherStatefulConfig set_Ipv6OtherStatefulConfig[5..6],
-    NetbiosOverTcpipEnabled set_NetbiosOverTcpipEnabled[6..7],
-    Ipv4Enabled set_Ipv4Enabled[7..8],
-    Ipv6Enabled set_Ipv6Enabled[8..9],
-    Ipv6ManagedAddressConfigurationSupported set_Ipv6ManagedAddressConfigurationSupported[9..10],
-    Reserved set_Reserved[10..32],
-]}
 STRUCT!{struct IP_ADAPTER_ADDRESSES_LH {
     u: IP_ADAPTER_ADDRESSES_LH_u,
     Next: *mut IP_ADAPTER_ADDRESSES_LH,
@@ -272,7 +256,7 @@ STRUCT!{struct IP_ADAPTER_ADDRESSES_LH {
     FriendlyName: PWCHAR,
     PhysicalAddress: [BYTE; MAX_ADAPTER_ADDRESS_LENGTH],
     PhysicalAddressLength: ULONG,
-    s: IP_ADAPTER_ADDRESSES_LH_s,
+    Flags: ULONG,
     Mtu: ULONG,
     IfType: IFTYPE,
     OperStatus: IF_OPER_STATUS,
@@ -297,6 +281,19 @@ STRUCT!{struct IP_ADAPTER_ADDRESSES_LH {
     Dhcpv6Iaid: ULONG,
     FirstDnsSuffix: PIP_ADAPTER_DNS_SUFFIX,
 }}
+BITFIELD!{IP_ADAPTER_ADDRESSES_LH Flags: ULONG [
+    DdnsEnabled set_DdnsEnabled[0..1],
+    RegisterAdapterSuffix set_RegisterAdapterSuffix[1..2],
+    Dhcpv4Enabled set_Dhcpv4Enabled[2..3],
+    ReceiveOnly set_ReceiveOnly[3..4],
+    NoMulticast set_NoMulticast[4..5],
+    Ipv6OtherStatefulConfig set_Ipv6OtherStatefulConfig[5..6],
+    NetbiosOverTcpipEnabled set_NetbiosOverTcpipEnabled[6..7],
+    Ipv4Enabled set_Ipv4Enabled[7..8],
+    Ipv6Enabled set_Ipv6Enabled[8..9],
+    Ipv6ManagedAddressConfigurationSupported set_Ipv6ManagedAddressConfigurationSupported[9..10],
+    Reserved set_Reserved[10..32],
+]}
 pub type PIP_ADAPTER_ADDRESSES_LH = *mut IP_ADAPTER_ADDRESSES_LH;
 STRUCT!{struct IP_ADAPTER_ADDRESSES_XP_u_s {
     Length: ULONG,
