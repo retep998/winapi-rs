@@ -1,0 +1,22 @@
+use crate::shared::basetsd::*;
+use super::fwptypes::FWP_ACTION_TYPE;
+pub const FWPS_RIGHT_ACTION_WRITE:u32 = 0x00000001;
+pub const FWPS_CLASSIFY_OUT_FLAG_ABSORB:u32= (0x00000001);
+
+ENUM!{enum FWPS_DISCARD_MODULE0 {
+        FWPS_DISCARD_MODULE_NETWORK	= 0,
+        FWPS_DISCARD_MODULE_TRANSPORT	= ( FWPS_DISCARD_MODULE_NETWORK + 1 ) ,
+        FWPS_DISCARD_MODULE_GENERAL	= ( FWPS_DISCARD_MODULE_TRANSPORT + 1 ) ,
+        FWPS_DISCARD_MODULE_MAX	= ( FWPS_DISCARD_MODULE_GENERAL + 1 ) ,
+    }
+}
+STRUCT!{struct FWPS_DISCARD_METADATA0 {
+    discardModule: FWPS_DISCARD_MODULE0,
+    discardReason: u32,
+    filterId: u64,
+}}
+
+STRUCT!{struct FWPS_ACTION0 {
+    r#type: FWP_ACTION_TYPE ,
+    calloutId: UINT32 ,
+}}

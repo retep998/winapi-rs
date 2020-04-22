@@ -10,6 +10,11 @@ use std::env::var;
 const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static str])] = &[
     // km
     ("d3dkmthk", &["basetsd", "d3dukmdt", "minwindef", "ntdef", "windef"], &[]),
+    ("fwp", &["winnt","ws2def","minwindef","netioapi","basetsd","ntdef","km_util"], &[]),
+    ("ndis", &["ntdef","minwindef","basetsd","km_util"], &[]),
+    ("wdm", &["ntdef","basetsd","ndis","minwindef","winnt",], &[]),
+    ("km_util", &["ntdef"], &[]),
+    ("fltkernel", &["km_util","wdm","basetsd","ntdef"], &[]),
     // mmos
     // shared
     ("basetsd", &[], &[]),
@@ -58,9 +63,10 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("mmreg", &["guiddef", "minwindef"], &[]),
     ("mstcpip", &["basetsd", "guiddef", "in6addr", "inaddr", "minwindef", "winnt", "ws2def"], &["ntdll"]),
     ("mswsockdef", &["minwindef", "winnt", "ws2def"], &[]),
-    ("netioapi", &["basetsd", "guiddef", "ifdef", "minwindef", "ntdef"], &["iphlpapi"]),
+    ("netioapi", &["basetsd", "guiddef", "ifdef", "minwindef", "ntdef", "ws2ipdef"], &["iphlpapi"]),
     ("ntddscsi", &["basetsd", "minwindef", "ntdef", "winioctl", "winnt"], &[]),
     ("ntddser", &["devpropdef"], &[]),
+    ("ntddstor", &["devpropdef"], &[]),
     ("ntdef", &["basetsd", "guiddef"], &[]),
     ("ntstatus", &["ntdef"], &[]),
     ("qos", &["minwindef"], &[]),
@@ -493,8 +499,7 @@ fn main() {
     println!("cargo:rerun-if-env-changed=WINAPI_NO_BUNDLED_LIBRARIES");
     println!("cargo:rerun-if-env-changed=WINAPI_STATIC_NOBUNDLE");
     let target = var("TARGET").unwrap();
-    let target: Vec<_> = target.split('-').collect();
-    if target.get(2) == Some(&"windows") {
+    if target.contains("windows") {
         try_everything();
     }
 }

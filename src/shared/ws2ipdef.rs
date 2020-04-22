@@ -8,7 +8,7 @@ use ctypes::c_int;
 use shared::in6addr::IN6_ADDR;
 use shared::inaddr::IN_ADDR;
 use shared::minwindef::{ULONG, USHORT};
-use shared::ws2def::{ADDRESS_FAMILY, SCOPE_ID};
+use shared::ws2def::{ADDRESS_FAMILY, SCOPE_ID, SOCKADDR_IN};
 pub const IFF_UP: ULONG = 0x00000001;
 pub const IFF_BROADCAST: ULONG = 0x00000002;
 pub const IFF_LOOPBACK: ULONG = 0x00000004;
@@ -47,6 +47,13 @@ pub type PSOCKADDR_IN6_LH = *mut SOCKADDR_IN6_LH;
 STRUCT!{struct IP_MREQ {
     imr_multiaddr: IN_ADDR,
     imr_interface: IN_ADDR,
+}}
+
+UNION! {union SOCKADDR_INET {
+    [u32;1],
+    Ipv4 Ipv4_mut: SOCKADDR_IN,
+    Ipv6 Ipv6_mut: SOCKADDR_IN6_LH ,
+    si_family si_family_mut:ADDRESS_FAMILY ,
 }}
 pub type PIP_MREQ = *mut IP_MREQ;
 pub const IPV6_HOPOPTS: c_int = 1;
