@@ -43,6 +43,7 @@ interface IAudioSessionEvents(IAudioSessionEventsVtbl): IUnknown(IUnknownVtbl) {
   fn OnSimpleVolumeChanged(
     NewVolume: c_float,
     NewMute: BOOL,
+    EventContext: LPCGUID,
   ) -> HRESULT,
   fn OnChannelVolumeChanged(
     ChannelCount: DWORD,
