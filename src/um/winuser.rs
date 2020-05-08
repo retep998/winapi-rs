@@ -2509,7 +2509,8 @@ pub const HWND_TOP: HWND = 0 as HWND;
 pub const HWND_BOTTOM: HWND = 1 as HWND;
 pub const HWND_TOPMOST: HWND = -1isize as HWND;
 pub const HWND_NOTOPMOST: HWND = -2isize as HWND;
-STRUCT!{struct DLGTEMPLATE {
+// FIXME packed(2)
+STRUCT!{#[repr(packed)] struct DLGTEMPLATE {
     style: DWORD,
     dwExtendedStyle: DWORD,
     cdit: WORD,
@@ -2522,7 +2523,8 @@ pub type LPDLGTEMPLATEA = *mut DLGTEMPLATE;
 pub type LPDLGTEMPLATEW = *mut DLGTEMPLATE;
 pub type LPCDLGTEMPLATEA = *const DLGTEMPLATE;
 pub type LPCDLGTEMPLATEW = *const DLGTEMPLATE;
-STRUCT!{struct DLGITEMTEMPLATE {
+// FIXME packed(2)
+STRUCT!{#[repr(packed)] struct DLGITEMTEMPLATE {
     style: DWORD,
     dwExtendedStyle: DWORD,
     x: c_short,
