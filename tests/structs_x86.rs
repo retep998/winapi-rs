@@ -2138,6 +2138,8 @@ fn shared_ws2ipdef() {
     assert_eq!(align_of::<SOCKADDR_INET>(), 4);
     assert_eq!(size_of::<IP_MREQ>(), 8);
     assert_eq!(align_of::<IP_MREQ>(), 4);
+    assert_eq!(size_of::<IP_MREQ_SOURCE>(), 12);
+    assert_eq!(align_of::<IP_MREQ_SOURCE>(), 4);
     assert_eq!(size_of::<IPV6_MREQ>(), 20);
     assert_eq!(align_of::<IPV6_MREQ>(), 4);
     assert_eq!(size_of::<IN_PKTINFO>(), 8);
