@@ -150,8 +150,8 @@ macro_rules! RIDL {
         pub enum $class {}
         impl $crate::Class for $class {
             #[inline]
-            fn uuidof() -> $crate::shared::guiddef::GUID {
-                $crate::shared::guiddef::GUID {
+            fn uuidof() -> &'static $crate::shared::guiddef::GUID {
+                &$crate::shared::guiddef::GUID {
                     Data1: $l,
                     Data2: $w1,
                     Data3: $w2,
@@ -265,8 +265,8 @@ macro_rules! RIDL {
     ) => (
         impl $crate::Interface for $interface {
             #[inline]
-            fn uuidof() -> $crate::shared::guiddef::GUID {
-                $crate::shared::guiddef::GUID {
+            fn uuidof() -> &'static $crate::shared::guiddef::GUID {
+                &$crate::shared::guiddef::GUID {
                     Data1: $l,
                     Data2: $w1,
                     Data3: $w2,
