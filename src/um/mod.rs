@@ -217,6 +217,7 @@ pub mod gl;
 #[cfg(feature = "shellapi")] pub mod shellapi;
 #[cfg(feature = "shellscalingapi")] pub mod shellscalingapi;
 #[cfg(feature = "shlobj")] pub mod shlobj;
+#[cfg(feature = "shlwapi")] pub mod shlwapi;
 #[cfg(feature = "shobjidl")] pub mod shobjidl;
 #[cfg(feature = "shobjidl_core")] pub mod shobjidl_core;
 #[cfg(feature = "shtypes")] pub mod shtypes;

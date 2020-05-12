@@ -4,15 +4,22 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use ctypes::{c_int, c_void};
-use shared::guiddef::{REFGUID, REFIID};
-use shared::minwindef::{BOOL, DWORD, UINT, ULONG, WORD};
+use shared::guiddef::{GUID, REFGUID, REFIID};
+use shared::minwindef::{BOOL, DWORD, LPARAM, UINT, ULONG, WORD};
 use shared::windef::{COLORREF, HICON, HWND, RECT};
 use um::commctrl::HIMAGELIST;
+use um::oaidl::VARIANT;
 use um::objidl::IBindCtx;
+use um::oleidl::{DROPEFFECT_COPY, DROPEFFECT_LINK, DROPEFFECT_MOVE};
 use um::propkeydef::REFPROPERTYKEY;
-use um::propsys::GETPROPERTYSTOREFLAGS;
-use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HRESULT, LPCWSTR, LPWSTR, ULONGLONG, WCHAR};
+use um::propsys::{GETPROPERTYSTOREFLAGS, IPropertyChangeArray};
+use um::shtypes::{
+    PCIDLIST_ABSOLUTE, PCUIDLIST_RELATIVE, PCUITEMID_CHILD, PCUITEMID_CHILD_ARRAY,
+    PIDLIST_ABSOLUTE, PIDLIST_RELATIVE, PITEMID_CHILD, REFKNOWNFOLDERID, SHCOLSTATEF, SHCOLUMNID,
+    SHELLDETAILS, STRRET,
+};
+use um::unknwnbase::{IUnknown, IUnknownVtbl, LPUNKNOWN};
+use um::winnt::{HRESULT, LPCWSTR, LPWSTR, PCWSTR, PWSTR, ULONGLONG, WCHAR};
 DEFINE_GUID!{CLSID_DesktopWallpaper,
     0xc2cf3110, 0x460e, 0x4fc1, 0xb9, 0xd0, 0x8a, 0x1c, 0x0c, 0x9c, 0xc4, 0xbd}
 DEFINE_GUID!{CLSID_TaskbarList,
@@ -22,6 +29,13 @@ DEFINE_GUID!{CLSID_FileOpenDialog,
 DEFINE_GUID!{CLSID_FileSaveDialog,
     0xc0b4e2f3, 0xba21, 0x4773, 0x8d, 0xba, 0x33, 0x5e, 0xc9, 0x46, 0xeb, 0x8b}
 //4498
+ENUM!{enum SHGDNF {
+    SHGDN_NORMAL = 0,
+    SHGDN_INFOLDER = 0x1,
+    SHGDN_FOREDITING = 0x1000,
+    SHGDN_FORADDRESSBAR = 0x4000,
+    SHGDN_FORPARSING = 0x8000,
+}}
 ENUM!{enum SHCONTF {
     SHCONTF_CHECKING_FOR_CHILDREN = 0x10,
     SHCONTF_FOLDERS = 0x20,
@@ -37,7 +51,180 @@ ENUM!{enum SHCONTF {
     SHCONTF_ENABLE_ASYNC = 0x8000,
     SHCONTF_INCLUDESUPERHIDDEN = 0x10000,
 }}
+pub const SHCIDS_ALLFIELDS: LPARAM = 0x80000000;
+pub const SHCIDS_CANONICALONLY: LPARAM = 0x10000000;
+// --------------------------------------------------------------------------------------
+// The following are defined in the Windows API in shobjidl_core.h but accorgind to msdn
+// they are available once shobjidl.h is included.
+pub const SFGAO_CANCOPY: ULONG = DROPEFFECT_COPY;
+pub const SFGAO_CANMOVE: ULONG = DROPEFFECT_MOVE;
+pub const SFGAO_CANLINK: ULONG = DROPEFFECT_LINK;
+pub const SFGAO_STORAGE: ULONG = 0x00000008;
+pub const SFGAO_CANRENAME: ULONG = 0x00000010;
+pub const SFGAO_CANDELETE: ULONG = 0x00000020;
+pub const SFGAO_HASPROPSHEET: ULONG = 0x00000040;
+pub const SFGAO_DROPTARGET: ULONG = 0x00000100;
+pub const SFGAO_CAPABILITYMASK: ULONG = 0x00000177;
+pub const SFGAO_PLACEHOLDER: ULONG = 0x00000800;
+pub const SFGAO_SYSTEM: ULONG = 0x00001000;
+pub const SFGAO_ENCRYPTED: ULONG = 0x00002000;
+pub const SFGAO_ISSLOW: ULONG = 0x00004000;
+pub const SFGAO_GHOSTED: ULONG = 0x00008000;
+pub const SFGAO_LINK: ULONG = 0x00010000;
+pub const SFGAO_SHARE: ULONG = 0x00020000;
+pub const SFGAO_READONLY: ULONG = 0x00040000;
+pub const SFGAO_HIDDEN: ULONG = 0x00080000;
+pub const SFGAO_DISPLAYATTRMASK: ULONG = 0x000FC000;
+pub const SFGAO_FILESYSANCESTOR: ULONG = 0x10000000;
+pub const SFGAO_FOLDER: ULONG = 0x20000000;
+pub const SFGAO_FILESYSTEM: ULONG = 0x40000000;
+pub const SFGAO_HASSUBFOLDER: ULONG = 0x80000000;
+pub const SFGAO_CONTENTSMASK: ULONG = 0x80000000;
+pub const SFGAO_VALIDATE: ULONG = 0x01000000;
+pub const SFGAO_REMOVABLE: ULONG = 0x02000000;
+pub const SFGAO_COMPRESSED: ULONG = 0x04000000;
+pub const SFGAO_BROWSABLE: ULONG = 0x08000000;
+pub const SFGAO_NONENUMERATED: ULONG = 0x00100000;
+pub const SFGAO_NEWCONTENT: ULONG = 0x00200000;
+pub const SFGAO_CANMONIKER: ULONG = 0x00400000;
+pub const SFGAO_HASSTORAGE: ULONG = 0x00400000;
+pub const SFGAO_STREAM: ULONG = 0x00400000;
+pub const SFGAO_STORAGEANCESTOR: ULONG = 0x00800000;
+pub const SFGAO_STORAGECAPMASK: ULONG = 0x70C50008;
+pub const SFGAO_PKEYSFGAOMASK: ULONG = 0x81044000;
+// --------------------------------------------------------------------------------------
 pub type SFGAOF = ULONG;
+RIDL!{#[uuid(0x000214f2, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IEnumIDList(IEnumIDListVtbl): IUnknown(IUnknownVtbl) {
+    fn Next(
+        celt: ULONG,
+        rgelt: *mut PITEMID_CHILD,
+        pceltFetched: *mut ULONG,
+    ) -> HRESULT,
+    fn Skip(
+        celt: ULONG,
+    ) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(
+        ppenum: *mut *mut IEnumIDList,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x000214e6, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IShellFolder(IShellFolderVtbl): IUnknown(IUnknownVtbl) {
+    fn ParseDisplayName(
+        hwnd: HWND,
+        pbc: *mut IBindCtx,
+        pszDisplayName: LPWSTR,
+        pchEaten: *mut ULONG,
+        ppidl: *mut PIDLIST_RELATIVE,
+        pdwAttributes: *mut ULONG,
+    ) -> HRESULT,
+    fn EnumObjects(
+        hwnd: HWND,
+        grfFlags: SHCONTF,
+        ppenumIDList: *mut *mut IEnumIDList,
+    ) -> HRESULT,
+    fn BindToObject(
+        pidl: PCUIDLIST_RELATIVE,
+        pbc: *mut IBindCtx,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn BindToStorage(
+        pidl: PCUIDLIST_RELATIVE,
+        pbc: *mut IBindCtx,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn CompareIDs(
+        lParam: LPARAM,
+        pidl1: PCUIDLIST_RELATIVE,
+        pidl2: PCUIDLIST_RELATIVE,
+    ) -> HRESULT,
+    fn CreateViewObject(
+        hwndOwner: HWND,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetAttributesOf(
+        cidl: UINT,
+        apidl: PCUITEMID_CHILD_ARRAY,
+        rgfInOut: *mut SFGAOF,
+    ) -> HRESULT,
+    fn GetUIObjectOf(
+        hwndOwner: HWND,
+        cidl: UINT,
+        apidl: PCUITEMID_CHILD_ARRAY,
+        riid: REFIID,
+        rgfReserved: *mut UINT,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetDisplayNameOf(
+        pidl: PCUITEMID_CHILD,
+        uFlags: SHGDNF,
+        pName: *mut STRRET,
+    ) -> HRESULT,
+    fn SetNameOf(
+        hwnd: HWND,
+        pidl: PCUITEMID_CHILD,
+        pszName: LPCWSTR,
+        uFlags: SHGDNF,
+        ppidlOut: *mut PITEMID_CHILD,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x93f2f68c, 0x1d1b, 0x11d3, 0xa3, 0x0e, 0x00, 0xc0, 0x4f, 0x79, 0xab, 0xd1)]
+interface IShellFolder2(IShellFolder2Vtbl): IShellFolder(IShellFolderVtbl) {
+    fn GetDefaultSearchGUID(
+        pguid: *mut GUID,
+    ) -> HRESULT,
+    fn EnumSearches(
+        ppenum: *mut *mut IEnumExtraSearch,
+    ) -> HRESULT,
+    fn GetDefaultColumn(
+        dwRes: DWORD,
+        pSort: *mut ULONG,
+        pDisplay: *mut ULONG,
+    ) -> HRESULT,
+    fn GetDefaultColumnState(
+        iColumn: UINT,
+        pcsFlags: *mut SHCOLSTATEF,
+    ) -> HRESULT,
+    fn GetDetailsEx(
+        pidl: PCUITEMID_CHILD,
+        pscid: *const SHCOLUMNID,
+        pv: *mut VARIANT,
+    ) -> HRESULT,
+    fn GetDetailsOf(
+        pidl: PCUITEMID_CHILD,
+        iColumn: UINT,
+        psd: *mut SHELLDETAILS,
+    ) -> HRESULT,
+    fn MapColumnToSCID(
+        iColumn: UINT,
+        pscid: *mut SHCOLUMNID,
+    ) -> HRESULT,
+}}
+STRUCT!{struct EXTRASEARCH {
+    guidSearch: GUID,
+    wszFriendlyName: [WCHAR; 80],
+    wszUrl: [WCHAR; 2084],
+}}
+pub type LPEXTRASEARCH = *mut EXTRASEARCH;
+RIDL!{#[uuid(0x0e700be1, 0x9db6, 0x11d1, 0xa1, 0xce, 0x00, 0xc0, 0x4f, 0xd7, 0x5d, 0x13)]
+interface IEnumExtraSearch(IEnumExtraSearchVtbl): IUnknown(IUnknownVtbl) {
+    fn Next(
+        celt: ULONG,
+        rgelt: *mut EXTRASEARCH,
+        pceltFetched: *mut ULONG,
+    ) -> HRESULT,
+    fn Skip(
+        celt: ULONG,
+    ) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(
+        ppenum: *mut *mut IEnumExtraSearch,
+    ) -> HRESULT,
+}}
 //9466
 ENUM!{enum SIGDN {
     SIGDN_NORMALDISPLAY = 0,
@@ -82,6 +269,67 @@ interface IShellItem(IShellItemVtbl): IUnknown(IUnknownVtbl) {
         piOrder: *mut c_int,
     ) -> HRESULT,
 }}
+extern "system" {
+    pub fn SHCreateItemFromIDList(
+        pidl: PCIDLIST_ABSOLUTE,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHCreateItemFromParsingName(
+        pszPath: PCWSTR,
+        pbc: *mut IBindCtx,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHCreateItemWithParent(
+        pidlParent: PCIDLIST_ABSOLUTE,
+        psfParent: *mut IShellFolder,
+        pidl: PCUITEMID_CHILD,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHCreateItemFromRelativeName(
+        psiParent: *mut IShellItem,
+        pszName: PCWSTR,
+        pbc: *mut IBindCtx,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHCreateItemInKnownFolder(
+        kfid: REFKNOWNFOLDERID,
+        dwKFFlags: DWORD,
+        pszItem: PCWSTR,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHGetIDListFromObject(
+        punk: *mut IUnknown,
+        ppidl: *mut PIDLIST_ABSOLUTE,
+    ) -> HRESULT;
+    pub fn SHGetItemFromObject(
+        punk: *mut IUnknown,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHGetPropertyStoreFromIDList(
+        pidl: PCIDLIST_ABSOLUTE,
+        flags: GETPROPERTYSTOREFLAGS,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHGetPropertyStoreFromParsingName(
+        pszPath: PCWSTR,
+        pbc: *mut IBindCtx,
+        flags: GETPROPERTYSTOREFLAGS,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT;
+    pub fn SHGetNameFromIDList(
+        pidl: PCIDLIST_ABSOLUTE,
+        sigdnName: SIGDN,
+        ppszName: *mut PWSTR,
+    ) -> HRESULT;
+}
 ENUM!{enum SIATTRIBFLAGS {
     SIATTRIBFLAGS_AND = 0x1,
     SIATTRIBFLAGS_OR = 0x2,
@@ -123,6 +371,264 @@ interface IShellItemArray(IShellItemArrayVtbl): IUnknown(IUnknownVtbl) {
     //fn EnumItems(
     //    ppenumShellItems: *mut *mut IEnumShellItems,
     //) -> HRESULT,
+}}
+ENUM!{enum SPACTION {
+    SPACTION_NONE = 0,
+    SPACTION_MOVING = SPACTION_NONE + 1,
+    SPACTION_COPYING = SPACTION_MOVING + 1,
+    SPACTION_RECYCLING = SPACTION_COPYING + 1,
+    SPACTION_APPLYINGATTRIBS = SPACTION_RECYCLING + 1,
+    SPACTION_DOWNLOADING = SPACTION_APPLYINGATTRIBS + 1,
+    SPACTION_SEARCHING_INTERNET = SPACTION_DOWNLOADING + 1,
+    SPACTION_CALCULATING = SPACTION_SEARCHING_INTERNET + 1,
+    SPACTION_UPLOADING = SPACTION_CALCULATING + 1,
+    SPACTION_SEARCHING_FILES = SPACTION_UPLOADING + 1,
+    SPACTION_DELETING = SPACTION_SEARCHING_FILES + 1,
+    SPACTION_RENAMING = SPACTION_DELETING + 1,
+    SPACTION_FORMATTING = SPACTION_RENAMING + 1,
+    SPACTION_COPY_MOVING = SPACTION_FORMATTING + 1,
+}}
+ENUM!{enum OPPROGDLGF {
+    OPPROGDLG_DEFAULT = 0,
+    OPPROGDLG_ENABLEPAUSE = 0x80,
+    OPPROGDLG_ALLOWUNDO = 0x100,
+    OPPROGDLG_DONTDISPLAYSOURCEPATH = 0x200,
+    OPPROGDLG_DONTDISPLAYDESTPATH = 0x400,
+    OPPROGDLG_NOMULTIDAYESTIMATES = 0x800,
+    OPPROGDLG_DONTDISPLAYLOCATIONS = 0x1000,
+}}
+ENUM!{enum PDMODE {
+    PDM_DEFAULT = 0,
+    PDM_RUN = 0x1,
+    PDM_PREFLIGHT = 0x2,
+    PDM_UNDOING = 0x4,
+    PDM_ERRORSBLOCKING = 0x8,
+    PDM_INDETERMINATE = 0x10,
+}}
+ENUM!{enum PDOPSTATUS {
+    PDOPS_RUNNING = 1,
+    PDOPS_PAUSED = 2,
+    PDOPS_CANCELLED = 3,
+    PDOPS_STOPPED = 4,
+    PDOPS_ERRORS = 5,
+}}
+pub const FOFX_NOSKIPJUNCTIONS: DWORD = 0x00010000;
+pub const FOFX_PREFERHARDLINK: DWORD = 0x00020000;
+pub const FOFX_SHOWELEVATIONPROMPT: DWORD = 0x00040000;
+pub const FOFX_RECYCLEONDELETE: DWORD = 0x00080000;
+pub const FOFX_EARLYFAILURE: DWORD = 0x00100000;
+pub const FOFX_PRESERVEFILEEXTENSIONS: DWORD = 0x00200000;
+pub const FOFX_KEEPNEWERFILE: DWORD = 0x00400000;
+pub const FOFX_NOCOPYHOOKS: DWORD = 0x00800000;
+pub const FOFX_NOMINIMIZEBOX: DWORD = 0x01000000;
+pub const FOFX_MOVEACLSACROSSVOLUMES: DWORD = 0x02000000;
+pub const FOFX_DONTDISPLAYSOURCEPATH: DWORD = 0x04000000;
+pub const FOFX_DONTDISPLAYDESTPATH: DWORD = 0x08000000;
+pub const FOFX_REQUIREELEVATION: DWORD = 0x10000000;
+pub const FOFX_ADDUNDORECORD: DWORD = 0x20000000;
+pub const FOFX_COPYASDOWNLOAD: DWORD = 0x40000000;
+pub const FOFX_DONTDISPLAYLOCATIONS: DWORD = 0x80000000;
+RIDL!{#[uuid(0x947aab5f, 0x0a5c, 0x4c13, 0xb4, 0xd6, 0x4b, 0xf7, 0x83, 0x6f, 0xc9, 0xf8)]
+interface IFileOperation(IFileOperationVtbl): IUnknown(IUnknownVtbl) {
+    fn Advise(
+        pfops: *const IFileOperationProgressSink,
+        pdwCookie: *mut DWORD,
+    ) -> HRESULT,
+    fn Unadvise(
+        dwCookie: DWORD,
+    ) -> HRESULT,
+    fn SetOperationFlags(
+        dwOperationFlags: DWORD,
+    ) -> HRESULT,
+    fn SetProgressMessage(
+        pszMessage: LPCWSTR,
+    ) -> HRESULT,
+    fn SetProgressDialog(
+        popd: *const IOperationsProgressDialog,
+    ) -> HRESULT,
+    fn SetProperties(
+        pproparray: *const IPropertyChangeArray,
+    ) -> HRESULT,
+    fn SetOwnerWindow(
+        hwndOwner: HWND,
+    ) -> HRESULT,
+    fn ApplyPropertiesToItem(
+        psiItem: *const IShellItem,
+    ) -> HRESULT,
+    fn ApplyPropertiesToItems(
+        punkItems: LPUNKNOWN,
+    ) -> HRESULT,
+    fn RenameItem(
+        psiItem: *const IShellItem,
+        pszNewName: LPCWSTR,
+        pfopsItem: *const IFileOperationProgressSink,
+    ) -> HRESULT,
+    fn RenameItems(
+        punkItems: LPUNKNOWN,
+        pszNewName: LPCWSTR,
+    ) -> HRESULT,
+    fn MoveItem(
+        psiItem: *const IShellItem,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+        pfopsItem: *const IFileOperationProgressSink,
+    ) -> HRESULT,
+    fn MoveItems(
+        punkItems: LPUNKNOWN,
+        psiDestinationFolder: *const IShellItem,
+    ) -> HRESULT,
+    fn CopyItem(
+        psiItem: *const IShellItem,
+        psiDestinationFolder: *const IShellItem,
+        pszCopyName: LPCWSTR,
+        pfopsItem: *const IFileOperationProgressSink,
+    ) -> HRESULT,
+    fn CopyItems(
+        punkItems: LPUNKNOWN,
+        psiDestinationFolder: *const IShellItem,
+    ) -> HRESULT,
+    fn DeleteItem(
+        psiItem: *const IShellItem,
+        pfopsItem: *const IFileOperationProgressSink,
+    ) -> HRESULT,
+    fn DeleteItems(
+        punkItems: LPUNKNOWN,
+    ) -> HRESULT,
+    fn NewItem(
+        psiDestinationFolder: *const IShellItem,
+        dwFileAttributes: DWORD,
+        pszName: LPCWSTR,
+        pszTemplateName: LPCWSTR,
+        pfopsItem: *const IFileOperationProgressSink,
+    ) -> HRESULT,
+    fn PerformOperations(
+    ) -> HRESULT,
+    fn GetAnyOperationsAborted(
+        pfAnyOperationsAborted: *mut BOOL,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x04b0f1a7, 0x9490, 0x44bc, 0x96, 0xe1, 0x42, 0x96, 0xa3, 0x12, 0x52, 0xe2)]
+interface IFileOperationProgressSink(IFileOperationProgressSinkVtbl): IUnknown(IUnknownVtbl) {
+    fn StartOperations(
+    ) -> HRESULT,
+    fn FinishOperations(
+        hrResult: HRESULT,
+    ) -> HRESULT,
+    fn PreRenameItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        pszNewName: LPCWSTR,
+    ) -> HRESULT,
+    fn PostRenameItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        pszNewName: LPCWSTR,
+        hrRename: HRESULT,
+        psiNewlyCreated: *const IShellItem,
+    ) -> HRESULT,
+    fn PreMoveItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+    ) -> HRESULT,
+    fn PostMoveItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+        hrMove: HRESULT,
+        psiNewlyCreated: *const IShellItem,
+    ) -> HRESULT,
+    fn PreCopyItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+    ) -> HRESULT,
+    fn PostCopyItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+        hrCopy: HRESULT,
+        psiNewlyCreated: *const IShellItem,
+    ) -> HRESULT,
+    fn PreDeleteItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+    ) -> HRESULT,
+    fn PostDeleteItem(
+        dwFlags: DWORD,
+        psiItem: *const IShellItem,
+        hrDelete: HRESULT,
+        psiNewlyCreated: *const IShellItem,
+    ) -> HRESULT,
+    fn PreNewItem(
+        dwFlags: DWORD,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+    ) -> HRESULT,
+    fn PostNewItem(
+        dwFlags: DWORD,
+        psiDestinationFolder: *const IShellItem,
+        pszNewName: LPCWSTR,
+        pszTemplateName: LPCWSTR,
+        dwFileAttributes: DWORD,
+        hrNew: HRESULT,
+        psiNewItem: *const IShellItem,
+    ) -> HRESULT,
+    fn UpdateProgress(
+        iWorkTotal: UINT,
+        iWorkSoFar: UINT,
+    ) -> HRESULT,
+    fn ResetTimer(
+    ) -> HRESULT,
+    fn PauseTimer(
+    ) -> HRESULT,
+    fn ResumeTimer(
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x0c9fb851, 0xe5c9, 0x43eb, 0xa3, 0x70, 0xf0, 0x67, 0x7b, 0x13, 0x87, 0x4c)]
+interface IOperationsProgressDialog(IOperationsProgressDialogVtbl): IUnknown(IUnknownVtbl) {
+    fn StartProgressDialog(
+        hwndOwner: HWND,
+        flags: OPPROGDLGF, 
+    ) -> HRESULT,
+    fn StopProgressDialog(
+    ) -> HRESULT,
+    fn SetOperation(
+        action: SPACTION,
+    ) -> HRESULT,
+    fn SetMode(
+        mode: PDMODE,
+    ) -> HRESULT,
+    fn UpdateProgress(
+        ullPointsCurrent: ULONGLONG,
+        ullPointsTotal: ULONGLONG,
+        ullSizeCurrent: ULONGLONG,
+        ullSizeTotal: ULONGLONG,
+        ullItemsCurrent: ULONGLONG,
+        ullItemsTotal: ULONGLONG,
+    ) -> HRESULT,
+    fn UpdateLocations(
+        psiSource: *const IShellItem,
+        psiTarget: *const IShellItem,
+        psiItem: *const IShellItem,
+    ) -> HRESULT,
+    fn ResetTimer(
+    ) -> HRESULT,
+    fn PauseTimer(
+    ) -> HRESULT,
+    fn ResumeTimer(
+    ) -> HRESULT,
+    fn GetMilliseconds(
+        pullElapsed: *mut ULONGLONG,
+        pullRemaining: *mut ULONGLONG,
+    ) -> HRESULT,
+    fn GetOperationStatus(
+        popstatus: *mut PDOPSTATUS,
+    ) -> HRESULT,
 }}
 //20869
 RIDL!{#[uuid(0xb4db1657, 0x70d7, 0x485e, 0x8e, 0x3e, 0x6f, 0xcb, 0x5a, 0x5c, 0x18, 0x02)]
