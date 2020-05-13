@@ -660,6 +660,8 @@ interface ILockBytes(ILockBytesVtbl): IUnknown(IUnknownVtbl) {
 //     DWORD *_pdwStubPhase);
 pub type LPENUMFORMATETC = *mut IEnumFORMATETC;
 STRUCT!{struct DVTARGETDEVICE {
+    tdSize: DWORD,
+    tdDriverNameOffset: WORD,
     tdDeviceNameOffset: WORD,
     tdPortNameOffset: WORD,
     tdExtDevmodeOffset: WORD,
