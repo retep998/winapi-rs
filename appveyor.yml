@@ -13,9 +13,6 @@ environment:
     channel: nightly
   - host: x86_64-pc-windows-gnu
     channel: 1.6.0
-matrix:
-  allow_failures:
-    - target: aarch64-pc-windows-msvc
 
 install:
   - ps: if (ls -r . -fi "*.rs" | sls "`t") { throw "Found tab character" }
@@ -25,7 +22,7 @@ install:
   - ps: $env:PATH = "$env:PATH;${env:USERPROFILE}\.cargo\bin"
   - ps: >
       if ($env:targets) { $env:targets -split " " | %{
-        rustup target add $_ 2>&1|%{"$_"}
+        cmd /c "rustup target add $_ 2>&1"
       }}
   - rustc -vV
   - cargo -vV
@@ -37,7 +34,7 @@ build_script:
   - cargo test --features "everything impl-debug impl-default"
   - ps: >
       if ($env:targets) { $env:targets -split " " | %{
-        cargo test --target=$_ --features "everything impl-debug impl-default" --no-run 2>&1|%{"$_"}
+        cmd /c "cargo test --target=$_ --features `"everything impl-debug impl-default`" --no-run 2>&1"
       }}
 
 notifications:

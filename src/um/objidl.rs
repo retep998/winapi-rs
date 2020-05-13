@@ -578,7 +578,6 @@ interface IPersistFile(IPersistFileVtbl): IPersist(IPersistVtbl) {
         ppszFileName: *mut LPOLESTR,
     ) -> HRESULT,
 }}
-pub type LPPERSISTSTORAGE = *mut IPersistStorage;
 DEFINE_GUID!{IID_IPersistStorage,
     0x0000010a, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
 RIDL!{#[uuid(0x0000010a, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
@@ -661,8 +660,6 @@ interface ILockBytes(ILockBytesVtbl): IUnknown(IUnknownVtbl) {
 //     DWORD *_pdwStubPhase);
 pub type LPENUMFORMATETC = *mut IEnumFORMATETC;
 STRUCT!{struct DVTARGETDEVICE {
-    tdSize: DWORD,
-    tdDriverNameOffset: WORD,
     tdDeviceNameOffset: WORD,
     tdPortNameOffset: WORD,
     tdExtDevmodeOffset: WORD,

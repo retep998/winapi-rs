@@ -65,7 +65,7 @@ ENUM!{enum SF_TYPE {
     SF_RECORD = VT_RECORD,
     SF_HAVEIID = VT_UNKNOWN | VT_RESERVED,
 }}
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 UNION!{union __MIDL_IOleAutomationTypes_0001 {
     [u32; 6],
     BstrStr BstrStr_mut: SAFEARR_BSTR,
@@ -626,7 +626,7 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
 // IEnumVARIANT_RemoteNext_Proxy
 // IEnumVARIANT_RemoteNext_Stub
 RIDL!{#[uuid(0x0000002F, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
-interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl){
+interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl) {
     fn RecordInit(
         pvNew: PVOID,
     ) -> HRESULT,

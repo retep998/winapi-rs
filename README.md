@@ -9,13 +9,13 @@
 [![License](https://img.shields.io/crates/l/winapi.svg)](https://github.com/retep998/winapi-rs)
 
 
-[Documentation](https://docs.rs/winapi/*/x86_64-pc-windows-msvc/winapi/)
+[Documentation](https://docs.rs/winapi/)
 
 Official IRC channel: #winapi on [Mozilla IRC](https://wiki.mozilla.org/IRC)
 
-This crate provides raw FFI bindings to all of Windows API. They are gathered by hand using the Windows 10 SDK from Microsoft. I aim to replace all existing Windows FFI in other crates with this crate through the "[Embrace, extend, and extinguish](http://en.wikipedia.org/wiki/Embrace,_extend_and_extinguish)" technique.
+This crate provides raw FFI bindings to all of Windows API. They are gathered by hand using the Windows 10 SDK from Microsoft. I aim to replace all existing Windows FFI in other crates with this crate through the "[Embrace, extend, and extinguish](https://en.wikipedia.org/wiki/Embrace,_extend,_and_extinguish)" technique.
 
-If this crate is missing something you need, feel free to create an issue, open a pull request, or contact me via [other means](http://www.rustaceans.org/retep998).
+If this crate is missing something you need, feel free to create an issue, open a pull request, or contact me via [other means](https://www.rustaceans.org/retep998).
 
 This crate depends on Rust 1.6 or newer on Windows. On other platforms this crate is a no-op and should compile with Rust 1.2 or newer.
 
@@ -31,7 +31,7 @@ Each module is gated on a feature flag, so you must enable the appropriate featu
 
 ### How do I know which module an item is defined in?
 
-You can use the search functionality in the [documentation](https://docs.rs/winapi/*/x86_64-pc-windows-msvc/winapi/) to find where items are defined.
+You can use the search functionality in the [documentation](https://docs.rs/winapi/) to find where items are defined.
 
 ### Why is there no documentation on how to use anything?
 
