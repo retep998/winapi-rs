@@ -74,6 +74,7 @@ pub mod guiddef;
 #[cfg(feature = "tvout")] pub mod tvout;
 #[cfg(feature = "udpmib")] pub mod udpmib;
 #[cfg(feature = "usb")] pub mod usb;
+#[cfg(feature = "usbioctl")] pub mod usbioctl;
 #[cfg(feature = "usbiodef")] pub mod usbiodef;
 #[cfg(feature = "usbspec")] pub mod usbspec;
 #[cfg(feature = "windef")] pub mod windef;
