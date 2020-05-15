@@ -1,0 +1,5 @@
+LIBRARY MPR.dll
+EXPORTS
+WNetAddConnection2A
+WNetCancelConnection2A
+WNetUseConnectionA

@@ -1,0 +1,15 @@
+LIBRARY SECUR32.dll
+EXPORTS
+CredMarshalTargetInfo@12
+CredUnmarshalTargetInfo@16
+GetComputerObjectNameA@12
+GetComputerObjectNameW@12
+GetSecurityUserInfo@12
+SeciAllocateAndSetCallFlags@8
+SeciAllocateAndSetIPAddress@12
+SeciFreeCallContext@0
+SecpFreeMemory@4
+SecpTranslateName@24
+SecpTranslateNameEx@24
+TranslateNameA@20
+TranslateNameW@20

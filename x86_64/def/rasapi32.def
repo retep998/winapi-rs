@@ -84,6 +84,7 @@ RasGetErrorStringW
 RasGetHport
 RasGetLinkStatistics
 RasGetNapStatus
+RasGetPCscf
 RasGetPbkPath
 RasGetProjectionInfoA
 RasGetProjectionInfoEx
@@ -105,6 +106,12 @@ RasQuerySharedConnection
 RasRegisterEntryChangeNotification
 RasRenameEntryA
 RasRenameEntryW
+RasScriptExecute
+RasScriptGetIpAddress
+RasScriptInit
+RasScriptReceive
+RasScriptSend
+RasScriptTerm
 RasSetAutoTriggerProfile
 RasSetAutoTriggerProfileEx
 RasSetAutodialAddressA

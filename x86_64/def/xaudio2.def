@@ -7,3 +7,6 @@ CreateFX @4
 X3DAudioCalculate @5
 X3DAudioInitialize @6
 XAudio2Create @1
+XAudio2CreateV2_9 @8
+XAudio2CreateWithSharedContexts @10
+XAudio2CreateWithVersionInfo @9

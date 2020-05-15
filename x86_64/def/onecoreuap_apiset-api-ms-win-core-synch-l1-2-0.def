@@ -1,0 +1,19 @@
+LIBRARY api-ms-win-core-synch-l1-2-0.dll
+EXPORTS
+DeleteSynchronizationBarrier
+EnterSynchronizationBarrier
+InitOnceBeginInitialize
+InitOnceComplete
+InitOnceExecuteOnce
+InitOnceInitialize
+InitializeConditionVariable
+InitializeSynchronizationBarrier
+SignalObjectAndWait
+Sleep
+SleepConditionVariableCS
+SleepConditionVariableSRW
+WaitOnAddress
+WakeAllConditionVariable
+WakeByAddressAll
+WakeByAddressSingle
+WakeConditionVariable

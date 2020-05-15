@@ -1,5 +1,16 @@
 LIBRARY USER32.dll
 EXPORTS
+CanBrokerForceForeground @2533
+DwmGetDxRgn @1553
+EnableShellWindowManagementBehavior @2567
+GetWindowTrackInfoAsync @2581
+InternalClipCursor @2534
+IsChildWindowDpiMessageEnabled @2705
+RegisterWindowArrangementCallout @2564
+SendEventMessage @2537
+SetActiveImmersiveWindow @2540
+SetWindowArrangement @2566
+UpdateWindowTrackingInfo @2585
 ActivateKeyboardLayout
 AddClipboardFormatListener
 AdjustWindowRect
@@ -19,7 +30,6 @@ CallMsgFilterW
 CallNextHookEx
 CallWindowProcA
 CallWindowProcW
-CanBrokerForceForeground
 ChangeClipboardChain
 ChangeDisplaySettingsA
 ChangeDisplaySettingsExW
@@ -118,14 +128,12 @@ DrawStateW
 DrawTextA
 DrawTextExW
 DrawTextW
-DwmGetDxRgn
 DwmGetRemoteSessionOcclusionEvent
 DwmGetRemoteSessionOcclusionState
 EmptyClipboard
 EnableMenuItem
 EnableMouseInPointer
 EnableScrollBar
-EnableShellWindowManagementBehavior
 EnableWindow
 EndDeferWindowPos
 EndDialog
@@ -311,7 +319,6 @@ GetWindowTextLengthA
 GetWindowTextLengthW
 GetWindowTextW
 GetWindowThreadProcessId
-GetWindowTrackInfoAsync
 GhostWindowFromHungWindow
 GrayStringA
 GrayStringW
@@ -336,7 +343,6 @@ InjectTouchInput
 InsertMenuA
 InsertMenuItemW
 InsertMenuW
-InternalClipCursor
 IntersectRect
 InvalidateRect
 InvalidateRgn
@@ -350,7 +356,6 @@ IsCharLowerW
 IsCharUpperA
 IsCharUpperW
 IsChild
-IsChildWindowDpiMessageEnabled
 IsClipboardFormatAvailable
 IsDialogMessageA
 IsDialogMessageW
@@ -473,7 +478,6 @@ RegisterPowerSettingNotification
 RegisterRawInputDevices
 RegisterTouchHitTestingWindow
 RegisterTouchWindow
-RegisterWindowArrangementCallout
 RegisterWindowMessageA
 RegisterWindowMessageW
 ReleaseCapture
@@ -485,7 +489,6 @@ RemoveMenu
 RemovePropA
 RemovePropW
 ReplyMessage
-ReportInertia
 ReuseDDElParam
 ScreenToClient
 ScrollDC
@@ -493,7 +496,6 @@ ScrollWindow
 ScrollWindowEx
 SendDlgItemMessageA
 SendDlgItemMessageW
-SendEventMessage
 SendInput
 SendMessageA
 SendMessageCallbackW
@@ -502,7 +504,6 @@ SendMessageTimeoutW
 SendMessageW
 SendNotifyMessageA
 SendNotifyMessageW
-SetActiveImmersiveWindow
 SetActiveWindow
 SetCapture
 SetCaretBlinkTime
@@ -555,7 +556,6 @@ SetThreadDesktop
 SetTimer
 SetUserObjectSecurity
 SetWinEventHook
-SetWindowArrangement
 SetWindowContextHelpId
 SetWindowDisplayAffinity
 SetWindowLongA
@@ -610,7 +610,6 @@ UpdateLayeredWindow
 UpdatePerUserSystemParameters
 UpdateWindow
 UpdateWindowInputSinkHints
-UpdateWindowTrackingInfo
 ValidateRect
 ValidateRgn
 VkKeyScanA
