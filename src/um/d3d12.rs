@@ -4,10 +4,10 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use ctypes::c_void;
-use shared::basetsd::{INT8, LONG_PTR, SIZE_T, UINT16, UINT64, UINT8};
+use shared::basetsd::{INT8, LONG_PTR, SIZE_T, UINT16, UINT32, UINT64, UINT8};
 use shared::dxgiformat::DXGI_FORMAT;
 use shared::dxgitype::DXGI_SAMPLE_DESC;
-use shared::guiddef::{IID, REFGUID, REFIID};
+use shared::guiddef::{GUID, IID, REFGUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, LPCVOID, UINT};
 use shared::windef::RECT;
 use um::d3dcommon::{D3D_FEATURE_LEVEL, D3D_PRIMITIVE, D3D_PRIMITIVE_TOPOLOGY, ID3DBlob};
@@ -311,6 +311,14 @@ pub const D3D12_PS_OUTPUT_REGISTER_COMPONENT_BIT_COUNT: UINT = 32;
 pub const D3D12_PS_OUTPUT_REGISTER_COUNT: UINT = 8;
 pub const D3D12_PS_PIXEL_CENTER_FRACTIONAL_COMPONENT: FLOAT = 0.5;
 pub const D3D12_RAW_UAV_SRV_BYTE_ALIGNMENT: UINT = 16;
+pub const D3D12_RAYTRACING_AABB_BYTE_ALIGNMENT: UINT = 8;
+pub const D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BYTE_ALIGNMENT: UINT = 256;
+pub const D3D12_RAYTRACING_INSTANCE_DESCS_BYTE_ALIGNMENT: UINT = 16;
+pub const D3D12_RAYTRACING_MAX_ATTRIBUTE_SIZE_IN_BYTES: UINT = 32;
+pub const D3D12_RAYTRACING_MAX_DECLARABLE_TRACE_RECURSION_DEPTH: UINT = 31;
+pub const D3D12_RAYTRACING_SHADER_RECORD_BYTE_ALIGNMENT: UINT = 32;
+pub const D3D12_RAYTRACING_SHADER_TABLE_BYTE_ALIGNMENT: UINT = 64;
+pub const D3D12_RAYTRACING_TRANSFORM3X4_BYTE_ALIGNMENT: UINT = 16;
 pub const D3D12_REQ_BLEND_OBJECT_COUNT_PER_DEVICE: UINT = 4096;
 pub const D3D12_REQ_BUFFER_RESOURCE_TEXEL_COUNT_2_TO_EXP: UINT = 27;
 pub const D3D12_REQ_CONSTANT_BUFFER_ELEMENT_COUNT: UINT = 4096;
@@ -415,6 +423,8 @@ ENUM!{enum D3D12_COMMAND_LIST_TYPE {
     D3D12_COMMAND_LIST_TYPE_BUNDLE = 1,
     D3D12_COMMAND_LIST_TYPE_COMPUTE = 2,
     D3D12_COMMAND_LIST_TYPE_COPY = 3,
+    D3D12_COMMAND_LIST_TYPE_VIDEO_DECODE    = 4,
+    D3D12_COMMAND_LIST_TYPE_VIDEO_PROCESS   = 5,
 }}
 ENUM!{enum D3D12_COMMAND_QUEUE_FLAGS {
     D3D12_COMMAND_QUEUE_FLAG_NONE = 0x0,
@@ -821,6 +831,12 @@ ENUM!{enum D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER {
     D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER_1 = 1,
     D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER_2 = 2,
 }}
+ENUM!{enum D3D12_VIEW_INSTANCING_TIER {
+    D3D12_VIEW_INSTANCING_TIER_NOT_SUPPORTED    = 0,
+    D3D12_VIEW_INSTANCING_TIER_1    = 1,
+    D3D12_VIEW_INSTANCING_TIER_2    = 2,
+    D3D12_VIEW_INSTANCING_TIER_3    = 3,
+}}
 STRUCT!{struct D3D12_FEATURE_DATA_D3D12_OPTIONS {
     DoublePrecisionFloatShaderOps: BOOL,
     OutputMergerLogicOp: BOOL,
@@ -917,9 +933,68 @@ STRUCT!{struct D3D12_FEATURE_DATA_COMMAND_QUEUE_PRIORITY {
     Priority: UINT,
     PriorityForTypeIsSupported: BOOL,
 }}
+ENUM!{enum D3D12_COMMAND_LIST_SUPPORT_FLAGS {
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_NONE    = 0,
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_DIRECT  = 1 << D3D12_COMMAND_LIST_TYPE_DIRECT,
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_BUNDLE  = 1 << D3D12_COMMAND_LIST_TYPE_BUNDLE,
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_COMPUTE = 1 << D3D12_COMMAND_LIST_TYPE_COMPUTE,
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_COPY    = 1 << D3D12_COMMAND_LIST_TYPE_COPY,
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_VIDEO_DECODE    = 1 << D3D12_COMMAND_LIST_TYPE_VIDEO_DECODE,
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_VIDEO_PROCESS   = 1 << D3D12_COMMAND_LIST_TYPE_VIDEO_PROCESS, 
+}}
+STRUCT!{struct D3D12_FEATURE_DATA_D3D12_OPTIONS3 {
+    CopyQueueTimestampQueriesSupported: BOOL,
+    CastingFullyTypedFormatSupported: BOOL,
+    WriteBufferImmediateSupportFlags: D3D12_COMMAND_LIST_SUPPORT_FLAGS,
+    ViewInstancingTier: D3D12_VIEW_INSTANCING_TIER,
+    BarycentricsSupported: BOOL,
+}}
+STRUCT!{struct D3D12_FEATURE_DATA_EXISTING_HEAPS {
+    Supported: BOOL,
+}}
+ENUM!{enum D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER {
+    D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER_0  = 0,
+    D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER_1  = 1,
+}}
+STRUCT!{struct D3D12_FEATURE_DATA_D3D12_OPTIONS4 {
+    MSAA64KBAlignedTextureSupported: BOOL,
+    SharedResourceCompatibilityTier: D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER,
+    Native16BitShaderOpsSupported: BOOL,
+}}
+ENUM!{enum D3D12_HEAP_SERIALIZATION_TIER {
+    D3D12_HEAP_SERIALIZATION_TIER_0 = 0,
+    D3D12_HEAP_SERIALIZATION_TIER_10 = 10,
+}}
+STRUCT!{struct D3D12_FEATURE_DATA_SERIALIZATION {
+    NodeIndex: UINT,
+    HeapSerializationTier: D3D12_HEAP_SERIALIZATION_TIER,
+}}
+STRUCT!{struct D3D12_FEATURE_DATA_CROSS_NODE {
+    SharingTier: D3D12_CROSS_NODE_SHARING_TIER,
+    AtomicShaderInstructions: BOOL,
+}}
+ENUM!{enum D3D12_RENDER_PASS_TIER {
+    D3D12_RENDER_PASS_TIER_0    = 0,
+    D3D12_RENDER_PASS_TIER_1    = 1,
+    D3D12_RENDER_PASS_TIER_2    = 2,
+}}
+ENUM!{enum D3D12_RAYTRACING_TIER {
+    D3D12_RAYTRACING_TIER_NOT_SUPPORTED = 0,
+    D3D12_RAYTRACING_TIER_1_0   = 10,
+}}
+STRUCT!{struct D3D12_FEATURE_DATA_D3D12_OPTIONS5 {
+    SRVOnlyTiledResourceTier3: BOOL,
+    RenderPassesTier: D3D12_RENDER_PASS_TIER,
+    RaytracingTier: D3D12_RAYTRACING_TIER,
+}}
 STRUCT!{struct D3D12_RESOURCE_ALLOCATION_INFO {
     SizeInBytes: UINT64,
     Alignment: UINT64,
+}}
+STRUCT!{struct D3D12_RESOURCE_ALLOCATION_INFO1 {
+    Offset: UINT64,
+    Alignment: UINT64,
+    SizeInBytes: UINT64,
 }}
 ENUM!{enum D3D12_HEAP_TYPE {
     D3D12_HEAP_TYPE_DEFAULT = 1,
@@ -1092,6 +1167,7 @@ ENUM!{enum D3D12_RESOURCE_STATES {
     D3D12_RESOURCE_STATE_COPY_SOURCE = 0x800,
     D3D12_RESOURCE_STATE_RESOLVE_DEST = 0x1000,
     D3D12_RESOURCE_STATE_RESOLVE_SOURCE = 0x2000,
+    D3D12_RESOURCE_STATE_RAYTRACING_ACCELERATION_STRUCTURE  = 0x400000,
     D3D12_RESOURCE_STATE_GENERIC_READ = 0x1 | 0x2 | 0x40 | 0x80 | 0x200 | 0x800,
     D3D12_RESOURCE_STATE_PRESENT = 0,
     D3D12_RESOURCE_STATE_PREDICATION = 0x200,
@@ -1240,6 +1316,9 @@ STRUCT!{struct D3D12_TEX2DMS_ARRAY_SRV {
     FirstArraySlice: UINT,
     ArraySize: UINT,
 }}
+STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV {
+    Location: D3D12_GPU_VIRTUAL_ADDRESS,
+}}
 ENUM!{enum D3D12_SRV_DIMENSION {
     D3D12_SRV_DIMENSION_UNKNOWN = 0,
     D3D12_SRV_DIMENSION_BUFFER = 1,
@@ -1252,6 +1331,7 @@ ENUM!{enum D3D12_SRV_DIMENSION {
     D3D12_SRV_DIMENSION_TEXTURE3D = 8,
     D3D12_SRV_DIMENSION_TEXTURECUBE = 9,
     D3D12_SRV_DIMENSION_TEXTURECUBEARRAY = 10,
+    D3D12_SRV_DIMENSION_RAYTRACING_ACCELERATION_STRUCTURE   = 11,
 }}
 UNION!{union D3D12_SHADER_RESOURCE_VIEW_DESC_u {
     [u64; 3],
@@ -1265,6 +1345,8 @@ UNION!{union D3D12_SHADER_RESOURCE_VIEW_DESC_u {
     Texture3D Texture3D_mut: D3D12_TEX3D_SRV,
     TextureCube TextureCube_mut: D3D12_TEXCUBE_SRV,
     TextureCubeArray TextureCubeArray_mut: D3D12_TEXCUBE_ARRAY_SRV,
+    RaytracingAccelerationStructure RaytracingAccelerationStructure_mut
+        : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV,
 }}
 STRUCT!{struct D3D12_SHADER_RESOURCE_VIEW_DESC {
     Format: DXGI_FORMAT,
@@ -1981,6 +2063,10 @@ interface ID3D12Fence(ID3D12FenceVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
         Value: UINT64,
     ) -> HRESULT,
 }}
+RIDL!{#[uuid(0x433685fe, 0xe22b, 0x4ca0, 0xa8, 0xdb, 0xb5, 0xb4, 0xf4, 0xdd, 0x0e, 0x4a)]
+interface ID3D12Fence1(ID3D12Fence1Vtbl): ID3D12Fence(ID3D12FenceVtbl) {
+    fn GetCreationFlags() -> D3D12_FENCE_FLAGS,
+}}
 RIDL!{#[uuid(0x765a30f3, 0xf624, 0x4c6f, 0xa8, 0x28, 0xac, 0xe9, 0x48, 0x62, 0x24, 0x45)]
 interface ID3D12PipelineState(ID3D12PipelineStateVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
     fn GetCachedBlob(
@@ -2292,6 +2378,24 @@ interface ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl):
         pSrcRect: *mut D3D12_RECT,
         Format: DXGI_FORMAT,
         ResolveMode: D3D12_RESOLVE_MODE,
+    ) -> (),
+}}
+STRUCT!{struct D3D12_WRITEBUFFERIMMEDIATE_PARAMETER {
+    Dest: D3D12_GPU_VIRTUAL_ADDRESS,
+    Value: UINT32,
+}}
+ENUM!{enum D3D12_WRITEBUFFERIMMEDIATE_MODE {
+    D3D12_WRITEBUFFERIMMEDIATE_MODE_DEFAULT = 0,
+    D3D12_WRITEBUFFERIMMEDIATE_MODE_MARKER_IN   = 0x1,
+    D3D12_WRITEBUFFERIMMEDIATE_MODE_MARKER_OUT  = 0x2,
+}}
+RIDL!{#[uuid(0x38C3E585, 0xFF17, 0x412C, 0x91, 0x50, 0x4F, 0xC6, 0xF9, 0xD7, 0x2A, 0x28)]
+interface ID3D12GraphicsCommandList2(ID3D12GraphicsCommandList2Vtbl)
+    : ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl) {
+    fn WriteBufferImmediate(
+        Count: UINT,
+        pParams: *const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER,
+        pModes: *const D3D12_WRITEBUFFERIMMEDIATE_MODE,
     ) -> (),
 }}
 RIDL!{#[uuid(0x0ec870a6, 0x5d7e, 0x4c22, 0x8c, 0xfc, 0x5b, 0xaa, 0xe0, 0x76, 0x16, 0xed)]
@@ -2625,6 +2729,558 @@ interface ID3D12Device2(ID3D12Device2Vtbl): ID3D12Device1(ID3D12Device1Vtbl) {
         ppPipelineState: *mut *mut c_void,
     ) -> HRESULT,
 }}
+// ID3D12Device3
+ENUM!{enum D3D12_RESIDENCY_FLAGS {
+    D3D12_RESIDENCY_FLAG_NONE   = 0,
+    D3D12_RESIDENCY_FLAG_DENY_OVERBUDGET    = 0x1,
+}}
+RIDL!{#[uuid(0x81dadc15, 0x2bad, 0x4392, 0x93, 0xc5, 0x10, 0x13, 0x45, 0xc4, 0xaa, 0x98)]
+interface ID3D12Device3(ID3D12Device3Vtbl): ID3D12Device2(ID3D12Device2Vtbl) {
+    fn OpenExistingHeapFromAddress(
+        pAddress: *const c_void,
+        riid: REFIID,
+        ppvHeap: *mut *mut c_void,
+    ) -> HRESULT,
+    fn OpenExistingHeapFromFileMapping(
+        hFileMapping: HANDLE,
+        riid: REFIID,
+        ppvHeap: *mut *mut c_void,
+    ) -> HRESULT,
+    fn EnqueueMakeResident(
+        Flags: D3D12_RESIDENCY_FLAGS,
+        NumObjects: UINT,
+        ppObjects: *const *mut ID3D12Pageable,
+        pFenceToSignal: *mut ID3D12Fence,
+        FenceValueToSignal: UINT64,
+    ) -> HRESULT,
+}}
+// ID3D12ProtectedSession
+ENUM!{enum D3D12_COMMAND_LIST_FLAGS {
+    D3D12_COMMAND_LIST_FLAG_NONE    = 0,
+}}
+ENUM!{enum D3D12_COMMAND_POOL_FLAGS {
+    D3D12_COMMAND_POOL_FLAG_NONE    = 0,
+}}
+ENUM!{enum D3D12_COMMAND_RECORDER_FLAGS {
+    D3D12_COMMAND_RECORDER_FLAG_NONE    = 0,
+}}
+ENUM!{enum D3D12_PROTECTED_SESSION_STATUS {
+    D3D12_PROTECTED_SESSION_STATUS_OK   = 0,
+    D3D12_PROTECTED_SESSION_STATUS_INVALID  = 1,
+}}
+RIDL!{#[uuid(0xA1533D18, 0x0AC1, 0x4084, 0x85, 0xB9, 0x89, 0xA9, 0x61, 0x16, 0x80, 0x6B)]
+interface ID3D12ProtectedSession(ID3D12ProtectedSessionVtbl)
+    : ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
+    fn GetStatusFence(
+        riid: REFIID,
+        ppFence: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetSessionStatus() -> D3D12_PROTECTED_SESSION_STATUS,
+}}
+// ID3D12ProtectedResourceSession
+ENUM!{enum D3D12_PROTECTED_RESOURCE_SESSION_SUPPORT_FLAGS {
+    D3D12_PROTECTED_RESOURCE_SESSION_SUPPORT_FLAG_NONE  = 0,
+    D3D12_PROTECTED_RESOURCE_SESSION_SUPPORT_FLAG_SUPPORTED = 0x1,
+}}
+STRUCT!{struct D3D12_FEATURE_DATA_PROTECTED_RESOURCE_SESSION_SUPPORT {
+    NodeIndex: UINT,
+    Support: D3D12_PROTECTED_RESOURCE_SESSION_SUPPORT_FLAGS,
+}}
+ENUM!{enum D3D12_PROTECTED_RESOURCE_SESSION_FLAGS {
+    D3D12_PROTECTED_RESOURCE_SESSION_FLAG_NONE  = 0,
+}}
+STRUCT!{struct D3D12_PROTECTED_RESOURCE_SESSION_DESC {
+    NodeMask: UINT,
+    Flags: D3D12_PROTECTED_RESOURCE_SESSION_FLAGS,
+}}
+RIDL!{#[uuid(0x6CD696F4, 0xF289, 0x40CC, 0x80, 0x91, 0x5A, 0x6C, 0xA0, 0x09, 0x9C, 0x3D)]
+interface ID3D12ProtectedResourceSession(ID3D12ProtectedResourceSessionVtbl)
+    : ID3D12ProtectedSession(ID3D12ProtectedSessionVtbl) {
+    fn GetDesc() -> D3D12_PROTECTED_RESOURCE_SESSION_DESC,
+}}
+// ID3D12Device4
+RIDL!{#[uuid(0xe865df17, 0xa9ee, 0x46f9, 0xa4, 0x63, 0x30, 0x98, 0x31, 0x5a, 0xa2, 0xe5)]
+interface ID3D12Device4(ID3D12Device4Vtbl): ID3D12Device3(ID3D12Device3Vtbl) {
+    fn CreateCommandList1(
+        nodeMask: UINT,
+        cmdlist_type: D3D12_COMMAND_LIST_TYPE,
+        flags: D3D12_COMMAND_LIST_FLAGS,
+        riid: REFIID,
+        ppCommandList: *mut *mut c_void,
+    ) -> HRESULT,
+    fn CreateProtectedResourceSession(
+        pDesc: *const D3D12_PROTECTED_RESOURCE_SESSION_DESC,
+        riid: REFIID,
+        ppSession: *mut *mut c_void,
+    ) -> HRESULT,
+    fn CreateCommittedResource1(
+        pHeapProperties: *const D3D12_HEAP_PROPERTIES,
+        HeapFlags: D3D12_HEAP_FLAGS,
+        pDesc: *const D3D12_RESOURCE_DESC,
+        InitialResourceState: D3D12_RESOURCE_STATES,
+        pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
+        pProtectedSession: *mut ID3D12ProtectedResourceSession,
+        riidResource: REFIID,
+        ppvResource: *mut *mut c_void,
+    ) -> HRESULT,
+    fn CreateHeap1(
+        pDesc: *const D3D12_HEAP_DESC,
+        pProtectedSession: *mut ID3D12ProtectedResourceSession,
+        riid: REFIID,
+        ppvHeap: *mut *mut c_void,
+    ) -> HRESULT,
+    fn CreateReservedResource1(
+        pDesc: *const D3D12_RESOURCE_DESC,
+        InitialState: D3D12_RESOURCE_STATES,
+        pOptimizedClearValue: *const D3D12_CLEAR_VALUE,
+        pProtectedSession: *mut ID3D12ProtectedResourceSession,
+        riid: REFIID,
+        ppvResource: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetResourceAllocationInfo1(
+        visibleMask: UINT,
+        numResourceDescs: UINT,
+        pResourceDescs: *const D3D12_RESOURCE_DESC,
+        pResourceAllocationInfo1: *mut D3D12_RESOURCE_ALLOCATION_INFO1,
+    ) -> D3D12_RESOURCE_ALLOCATION_INFO,
+}}
+// ID3D12LifetimeOwner
+ENUM!{enum D3D12_LIFETIME_STATE {
+    D3D12_LIFETIME_STATE_IN_USE = 0,
+    D3D12_LIFETIME_STATE_NOT_IN_USE = 1,
+}}
+RIDL!{#[uuid(0xe667af9f, 0xcd56, 0x4f46, 0x83, 0xce, 0x03, 0x2e, 0x59, 0x5d, 0x70, 0xa8)]
+interface ID3D12LifetimeOwner(ID3D12LifetimeOwnerVtlb): IUnknown(IUnknownVtbl) {
+    fn LifetimeStateUpdated(
+        NewState: D3D12_LIFETIME_STATE,
+    ) -> (),
+}}
+// ID3D12SwapChainAssistant
+RIDL!{#[uuid(0xf1df64b6, 0x57fd, 0x49cd, 0x88, 0x07, 0xc0, 0xeb, 0x88, 0xb4, 0x5c, 0x8f)]
+interface ID3D12SwapChainAssistant(ID3D12SwapChainAssistantVtlb): IUnknown(IUnknownVtbl) {
+    fn GetLUID() -> LUID,
+    fn GetSwapChainObject( 
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetCurrentResourceAndCommandQueue( 
+        riidResource: REFIID,
+        ppvResource: *mut *mut c_void,
+        riidQueue: REFIID,
+        ppvQueue: *mut *mut c_void,
+    ) -> HRESULT,
+    fn InsertImplicitSync() -> HRESULT,
+}}
+// ID3D12LifetimeTracker
+RIDL!{#[uuid(0x3fd03d36, 0x4eb1, 0x424a, 0xa5, 0x82, 0x49, 0x4e, 0xcb, 0x8b, 0xa8, 0x13)]
+interface ID3D12LifetimeTracker(ID3D12LifetimeTrackerVtbl)
+    : ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
+    fn DestroyOwnedObject( 
+        pObject: *mut ID3D12DeviceChild,
+    ) -> HRESULT,
+}}
+// meta command, state object
+ENUM!{enum D3D12_META_COMMAND_PARAMETER_TYPE {
+    D3D12_META_COMMAND_PARAMETER_TYPE_FLOAT = 0,
+    D3D12_META_COMMAND_PARAMETER_TYPE_UINT64    = 1,
+    D3D12_META_COMMAND_PARAMETER_TYPE_GPU_VIRTUAL_ADDRESS   = 2,
+    D3D12_META_COMMAND_PARAMETER_TYPE_CPU_DESCRIPTOR_HANDLE_HEAP_TYPE_CBV_SRV_UAV   = 3,
+    D3D12_META_COMMAND_PARAMETER_TYPE_GPU_DESCRIPTOR_HANDLE_HEAP_TYPE_CBV_SRV_UAV   = 4,
+}}
+ENUM!{enum D3D12_META_COMMAND_PARAMETER_FLAGS {
+    D3D12_META_COMMAND_PARAMETER_FLAG_INPUT = 0x1,
+    D3D12_META_COMMAND_PARAMETER_FLAG_OUTPUT    = 0x2,
+}}
+ENUM!{enum D3D12_META_COMMAND_PARAMETER_STAGE {
+    D3D12_META_COMMAND_PARAMETER_STAGE_CREATION = 0,
+    D3D12_META_COMMAND_PARAMETER_STAGE_INITIALIZATION   = 1,
+    D3D12_META_COMMAND_PARAMETER_STAGE_EXECUTION    = 2,
+}}
+STRUCT!{struct D3D12_META_COMMAND_PARAMETER_DESC {
+    Name: LPCWSTR,
+    Type: D3D12_META_COMMAND_PARAMETER_TYPE,
+    Flags: D3D12_META_COMMAND_PARAMETER_FLAGS,
+    RequiredResourceState: D3D12_RESOURCE_STATES,
+    StructureOffset: UINT,
+}}
+ENUM!{enum D3D12_GRAPHICS_STATES {
+    D3D12_GRAPHICS_STATE_NONE   = 0,
+    D3D12_GRAPHICS_STATE_IA_VERTEX_BUFFERS  = 1 << 0,
+    D3D12_GRAPHICS_STATE_IA_INDEX_BUFFER    = 1 << 1,
+    D3D12_GRAPHICS_STATE_IA_PRIMITIVE_TOPOLOGY  = 1 << 2,
+    D3D12_GRAPHICS_STATE_DESCRIPTOR_HEAP    = 1 << 3,
+    D3D12_GRAPHICS_STATE_GRAPHICS_ROOT_SIGNATURE    = 1 << 4,
+    D3D12_GRAPHICS_STATE_COMPUTE_ROOT_SIGNATURE = 1 << 5,
+    D3D12_GRAPHICS_STATE_RS_VIEWPORTS   = 1 << 6,
+    D3D12_GRAPHICS_STATE_RS_SCISSOR_RECTS   = 1 << 7,
+    D3D12_GRAPHICS_STATE_PREDICATION    = 1 << 8,
+    D3D12_GRAPHICS_STATE_OM_RENDER_TARGETS  = 1 << 9,
+    D3D12_GRAPHICS_STATE_OM_STENCIL_REF = 1 << 10,
+    D3D12_GRAPHICS_STATE_OM_BLEND_FACTOR    = 1 << 11,
+    D3D12_GRAPHICS_STATE_PIPELINE_STATE = 1 << 12,
+    D3D12_GRAPHICS_STATE_SO_TARGETS	   = 1 << 13,
+    D3D12_GRAPHICS_STATE_OM_DEPTH_BOUNDS    = 1 << 14,
+    D3D12_GRAPHICS_STATE_SAMPLE_POSITIONS   = 1 << 15,
+    D3D12_GRAPHICS_STATE_VIEW_INSTANCE_MASK = 1 << 16,
+}}
+STRUCT!{struct D3D12_META_COMMAND_DESC {
+    Id: GUID,
+    Name: LPCWSTR,
+    InitializationDirtyState: D3D12_GRAPHICS_STATES,
+    ExecutionDirtyState: D3D12_GRAPHICS_STATES,
+}}
+RIDL!{#[uuid(0x47016943, 0xfca8, 0x4594, 0x93, 0xea, 0xaf, 0x25, 0x8b, 0x55, 0x34, 0x6d)]
+interface ID3D12StateObject(ID3D12StateObjectVtbl): ID3D12Pageable(ID3D12PageableVtbl) {}}
+RIDL!{#[uuid(0xde5fa827, 0x9bf9, 0x4f26, 0x89, 0xff, 0xd7, 0xf5, 0x6f, 0xde, 0x38, 0x60)]
+interface ID3D12StateObjectProperties(ID3D12StateObjectPropertiesVtbl): IUnknown(IUnknownVtbl) {
+    fn GetShaderIdentifier(
+       pExportName: LPCWSTR,
+    ) -> *mut c_void,
+    fn GetShaderStackSize(
+        pExportName: LPCWSTR,
+    ) -> UINT64,
+    fn GetPipelineStackSize() -> UINT64,
+    fn SetPipelineStackSize(
+        PipelineStackSizeInBytes: UINT64,
+    ) -> (),
+}}
+// Device5
+ENUM!{enum D3D12_STATE_SUBOBJECT_TYPE {
+    D3D12_STATE_SUBOBJECT_TYPE_STATE_OBJECT_CONFIG  = 0,
+    D3D12_STATE_SUBOBJECT_TYPE_GLOBAL_ROOT_SIGNATURE    = 1,
+    D3D12_STATE_SUBOBJECT_TYPE_LOCAL_ROOT_SIGNATURE = 2,
+    D3D12_STATE_SUBOBJECT_TYPE_NODE_MASK    = 3,
+    D3D12_STATE_SUBOBJECT_TYPE_DXIL_LIBRARY = 5,
+    D3D12_STATE_SUBOBJECT_TYPE_EXISTING_COLLECTION  = 6,
+    D3D12_STATE_SUBOBJECT_TYPE_SUBOBJECT_TO_EXPORTS_ASSOCIATION = 7,
+    D3D12_STATE_SUBOBJECT_TYPE_DXIL_SUBOBJECT_TO_EXPORTS_ASSOCIATION    = 8,
+    D3D12_STATE_SUBOBJECT_TYPE_RAYTRACING_SHADER_CONFIG = 9,
+    D3D12_STATE_SUBOBJECT_TYPE_RAYTRACING_PIPELINE_CONFIG   = 10,
+    D3D12_STATE_SUBOBJECT_TYPE_HIT_GROUP    = 11,
+    D3D12_STATE_SUBOBJECT_TYPE_MAX_VALID    = 12, 
+}}
+STRUCT!{struct D3D12_STATE_SUBOBJECT {
+    Type: D3D12_STATE_SUBOBJECT_TYPE,
+    pDesc: *const c_void,
+}}
+ENUM!{enum D3D12_STATE_OBJECT_FLAGS {
+    D3D12_STATE_OBJECT_FLAG_NONE    = 0,
+    D3D12_STATE_OBJECT_FLAG_ALLOW_LOCAL_DEPENDENCIES_ON_EXTERNAL_DEFINITIONS    = 0x1,
+    D3D12_STATE_OBJECT_FLAG_ALLOW_EXTERNAL_DEPENDENCIES_ON_LOCAL_DEFINITIONS    = 0x2,
+}}
+STRUCT!{struct D3D12_STATE_OBJECT_CONFIG {
+    Flags: D3D12_STATE_OBJECT_FLAGS,
+}}
+STRUCT!{struct D3D12_GLOBAL_ROOT_SIGNATURE {
+    pGlobalRootSignature: *mut ID3D12RootSignature,
+}}
+STRUCT!{struct D3D12_LOCAL_ROOT_SIGNATURE {
+    pLocalRootSignature: *mut ID3D12RootSignature,
+}}
+STRUCT!{struct D3D12_NODE_MASK {
+    NodeMask: UINT,
+}}
+ENUM!{enum D3D12_EXPORT_FLAGS {
+    D3D12_EXPORT_FLAG_NONE  = 0,
+}}
+STRUCT!{struct D3D12_EXPORT_DESC {
+    Name: LPCWSTR,
+    ExportToRename: LPCWSTR,
+    Flags: D3D12_EXPORT_FLAGS,
+}}
+STRUCT!{struct D3D12_DXIL_LIBRARY_DESC {
+    DXILLibrary: D3D12_SHADER_BYTECODE,
+    NumExports: UINT,
+    pExports: *mut D3D12_EXPORT_DESC,
+}}
+STRUCT!{struct D3D12_EXISTING_COLLECTION_DESC {
+    pExistingCollection: * mut ID3D12StateObject,
+    NumExports: UINT,
+    pExports: *mut D3D12_EXPORT_DESC,
+}}
+STRUCT!{struct D3D12_SUBOBJECT_TO_EXPORTS_ASSOCIATION {
+    pSubobjectToAssociate: *const D3D12_STATE_SUBOBJECT,
+    NumExports: UINT,
+    pExports: *mut LPCWSTR,
+}}
+STRUCT!{struct D3D12_DXIL_SUBOBJECT_TO_EXPORTS_ASSOCIATION {
+    SubobjectToAssociate: LPCWSTR,
+    NumExports: UINT,
+    pExports: *mut LPCWSTR,
+}}
+ENUM!{enum D3D12_HIT_GROUP_TYPE {
+    D3D12_HIT_GROUP_TYPE_TRIANGLES  = 0,
+    D3D12_HIT_GROUP_TYPE_PROCEDURAL_PRIMITIVE   = 0x1,
+}}
+STRUCT!{struct D3D12_HIT_GROUP_DESC {
+    HitGroupExport: LPCWSTR,
+    Type: D3D12_HIT_GROUP_TYPE,
+    AnyHitShaderImport: LPCWSTR,
+    ClosestHitShaderImport: LPCWSTR,
+    IntersectionShaderImport: LPCWSTR,
+}}
+STRUCT!{struct D3D12_RAYTRACING_SHADER_CONFIG {
+    MaxPayloadSizeInBytes: UINT,
+    MaxAttributeSizeInBytes: UINT,
+}}
+STRUCT!{struct D3D12_RAYTRACING_PIPELINE_CONFIG {
+    MaxTraceRecursionDepth: UINT,
+}}
+ENUM!{enum D3D12_STATE_OBJECT_TYPE {
+    D3D12_STATE_OBJECT_TYPE_COLLECTION  = 0,
+    D3D12_STATE_OBJECT_TYPE_RAYTRACING_PIPELINE = 3,
+}}
+STRUCT!{struct D3D12_STATE_OBJECT_DESC {
+    Type: D3D12_STATE_OBJECT_TYPE,
+    NumSubobjects: UINT,
+    pSubobjects: *const D3D12_STATE_SUBOBJECT,
+}}
+ENUM!{enum D3D12_RAYTRACING_GEOMETRY_FLAGS {
+    D3D12_RAYTRACING_GEOMETRY_FLAG_NONE = 0,
+    D3D12_RAYTRACING_GEOMETRY_FLAG_OPAQUE   = 0x1,
+    D3D12_RAYTRACING_GEOMETRY_FLAG_NO_DUPLICATE_ANYHIT_INVOCATION   = 0x2,
+}}
+ENUM!{enum D3D12_RAYTRACING_GEOMETRY_TYPE {
+    D3D12_RAYTRACING_GEOMETRY_TYPE_TRIANGLES    = 0,
+    D3D12_RAYTRACING_GEOMETRY_TYPE_PROCEDURAL_PRIMITIVE_AABBS   = 1,
+}}
+ENUM!{enum D3D12_RAYTRACING_INSTANCE_FLAGS {
+    D3D12_RAYTRACING_INSTANCE_FLAG_NONE = 0,
+    D3D12_RAYTRACING_INSTANCE_FLAG_TRIANGLE_CULL_DISABLE    = 0x1,
+    D3D12_RAYTRACING_INSTANCE_FLAG_TRIANGLE_FRONT_COUNTERCLOCKWISE  = 0x2,
+    D3D12_RAYTRACING_INSTANCE_FLAG_FORCE_OPAQUE = 0x4,
+    D3D12_RAYTRACING_INSTANCE_FLAG_FORCE_NON_OPAQUE = 0x8,
+}}
+STRUCT!{struct D3D12_GPU_VIRTUAL_ADDRESS_AND_STRIDE {
+    StartAddress: D3D12_GPU_VIRTUAL_ADDRESS,
+    StrideInBytes: UINT64,
+}}
+STRUCT!{struct D3D12_GPU_VIRTUAL_ADDRESS_RANGE {
+    StartAddress: D3D12_GPU_VIRTUAL_ADDRESS,
+    SizeInBytes: UINT64,
+}}
+STRUCT!{struct D3D12_GPU_VIRTUAL_ADDRESS_RANGE_AND_STRIDE {
+    StartAddress: D3D12_GPU_VIRTUAL_ADDRESS,
+    SizeInBytes: UINT64,
+    StrideInBytes: UINT64,
+}}
+STRUCT!{struct D3D12_RAYTRACING_GEOMETRY_TRIANGLES_DESC {
+    Transform3x4: D3D12_GPU_VIRTUAL_ADDRESS,
+    IndexFormat: DXGI_FORMAT,
+    VertexFormat: DXGI_FORMAT,
+    IndexCount: UINT,
+    VertexCount: UINT,
+    IndexBuffer: D3D12_GPU_VIRTUAL_ADDRESS,
+    VertexBuffer: D3D12_GPU_VIRTUAL_ADDRESS_AND_STRIDE,
+}}
+STRUCT!{struct D3D12_RAYTRACING_AABB {
+    MinX: FLOAT,
+    MinY: FLOAT,
+    MinZ: FLOAT,
+    MaxX: FLOAT,
+    MaxY: FLOAT,
+    MaxZ: FLOAT,
+}}
+STRUCT!{struct D3D12_RAYTRACING_GEOMETRY_AABBS_DESC {
+    AABBCount: UINT64,
+    AABBs: D3D12_GPU_VIRTUAL_ADDRESS_AND_STRIDE,
+}}
+ENUM!{enum D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAGS {
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAG_NONE = 0,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAG_ALLOW_UPDATE = 0x1,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAG_ALLOW_COMPACTION = 0x2,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAG_PREFER_FAST_TRACE    = 0x4,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAG_PREFER_FAST_BUILD    = 0x8,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAG_MINIMIZE_MEMORY  = 0x10,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAG_PERFORM_UPDATE   = 0x20,
+}}
+ENUM!{enum D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE {
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE_CLONE = 0,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE_COMPACT   = 0x1,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE_VISUALIZATION_DECODE_FOR_TOOLS    = 0x2,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE_SERIALIZE = 0x3,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE_DESERIALIZE   = 0x4,
+}}
+ENUM!{enum D3D12_RAYTRACING_ACCELERATION_STRUCTURE_TYPE {
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL  = 0,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL   = 0x1,
+}}
+ENUM!{enum D3D12_ELEMENTS_LAYOUT {
+    D3D12_ELEMENTS_LAYOUT_ARRAY = 0,
+    D3D12_ELEMENTS_LAYOUT_ARRAY_OF_POINTERS = 0x1,
+}}
+ENUM!{enum D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_TYPE {
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_COMPACTED_SIZE   = 0,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_TOOLS_VISUALIZATION  = 0x1,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION    = 0x2,
+    D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_CURRENT_SIZE = 0x3,
+}}
+STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC {
+    DestBuffer: D3D12_GPU_VIRTUAL_ADDRESS,
+    InfoType: D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_TYPE,
+}}
+STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_COMPACTED_SIZE_DESC {
+    CompactedSizeInBytes: UINT64,
+}}
+STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_TOOLS_VISUALIZATION_DESC {
+    DecodedSizeInBytes: UINT64,
+}}
+STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_TOOLS_VISUALIZATION_HEADER {
+    Type: D3D12_RAYTRACING_ACCELERATION_STRUCTURE_TYPE,
+    NumDescs: UINT,
+}}
+STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION_DESC {
+    SerializedSizeInBytes: UINT64,
+    NumBottomLevelAccelerationStructurePointers: UINT64,
+}}
+STRUCT!{struct D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER {
+    DriverOpaqueGUID: GUID,
+    DriverOpaqueVersioningData: [BYTE; 16],
+}}
+ENUM!{enum D3D12_SERIALIZED_DATA_TYPE {
+    D3D12_SERIALIZED_DATA_RAYTRACING_ACCELERATION_STRUCTURE = 0,
+}}
+ENUM!{enum D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS {
+    D3D12_DRIVER_MATCHING_IDENTIFIER_COMPATIBLE_WITH_DEVICE = 0,
+    D3D12_DRIVER_MATCHING_IDENTIFIER_UNSUPPORTED_TYPE   = 0x1,
+    D3D12_DRIVER_MATCHING_IDENTIFIER_UNRECOGNIZED   = 0x2,
+    D3D12_DRIVER_MATCHING_IDENTIFIER_INCOMPATIBLE_VERSION   = 0x3,
+    D3D12_DRIVER_MATCHING_IDENTIFIER_INCOMPATIBLE_TYPE  = 0x4,
+}}
+STRUCT!{struct D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER {
+    DriverMatchingIdentifier: D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER,
+    SerializedSizeInBytesIncludingHeader: UINT64,
+    DeserializedSizeInBytes: UINT64,
+    NumBottomLevelAccelerationStructurePointersAfterHeader: UINT64,
+}}
+STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_CURRENT_SIZE_DESC {
+    CurrentSizeInBytes: UINT64,
+}}
+STRUCT!{struct D3D12_RAYTRACING_INSTANCE_DESC {
+    Transform: [[FLOAT; 4]; 3],
+    InstanceID_24_InstanceMask_8: UINT,
+    InstanceContributionToHitGroupIndex_24_Flags_8: UINT,
+    AccelerationStructure: D3D12_GPU_VIRTUAL_ADDRESS,
+}}
+UNION!{union D3D12_RAYTRACING_GEOMETRY_DESC_u {
+    [u32; 32], // WTF
+    Triangles Triangles_mut: D3D12_RAYTRACING_GEOMETRY_TRIANGLES_DESC,
+    AABBs AABBs_mut: D3D12_RAYTRACING_GEOMETRY_AABBS_DESC,
+}}
+STRUCT!{struct D3D12_RAYTRACING_GEOMETRY_DESC {
+    Type: D3D12_RAYTRACING_GEOMETRY_TYPE,
+    Flags: D3D12_RAYTRACING_GEOMETRY_FLAGS,
+    u: D3D12_RAYTRACING_GEOMETRY_DESC_u,
+}}
+UNION!{union D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS_u {
+    [u64; 2], // WTF
+    InstanceDescs InstanceDescs_mut: D3D12_GPU_VIRTUAL_ADDRESS,
+    pGeometryDescs pGeometryDescs_mut: *const D3D12_RAYTRACING_GEOMETRY_DESC,
+    ppGeometryDescs ppGeometryDescs_mut: *const *mut D3D12_RAYTRACING_GEOMETRY_DESC,
+}}
+STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS {
+    Type: D3D12_RAYTRACING_ACCELERATION_STRUCTURE_TYPE,
+    Flags: D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAGS,
+    NumDescs: UINT,
+    DescsLayout: D3D12_ELEMENTS_LAYOUT,
+    u: D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS_u,
+}}
+STRUCT!{struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC {
+    DestAccelerationStructureData: D3D12_GPU_VIRTUAL_ADDRESS,
+    Inputs: D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS,
+    SourceAccelerationStructureData: D3D12_GPU_VIRTUAL_ADDRESS,
+    ScratchAccelerationStructureData: D3D12_GPU_VIRTUAL_ADDRESS,
+}}
+STRUCT!{struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO {
+    ResultDataMaxSizeInBytes: UINT64,
+    ScratchDataSizeInBytes: UINT64,
+    UpdateScratchDataSizeInBytes: UINT64,
+}}
+ENUM!{enum D3D12_RAY_FLAGS {
+    D3D12_RAY_FLAG_NONE = 0,
+    D3D12_RAY_FLAG_FORCE_OPAQUE = 0x1,
+    D3D12_RAY_FLAG_FORCE_NON_OPAQUE = 0x2,
+    D3D12_RAY_FLAG_ACCEPT_FIRST_HIT_AND_END_SEARCH  = 0x4,
+    D3D12_RAY_FLAG_SKIP_CLOSEST_HIT_SHADER  = 0x8,
+    D3D12_RAY_FLAG_CULL_BACK_FACING_TRIANGLES   = 0x10,
+    D3D12_RAY_FLAG_CULL_FRONT_FACING_TRIANGLES  = 0x20,
+    D3D12_RAY_FLAG_CULL_OPAQUE  = 0x40,
+    D3D12_RAY_FLAG_CULL_NON_OPAQUE  = 0x80,
+}}
+ENUM!{enum D3D12_HIT_KIND {
+    D3D12_HIT_KIND_TRIANGLE_FRONT_FACE  = 0xfe,
+    D3D12_HIT_KIND_TRIANGLE_BACK_FACE   = 0xff,
+}}
+RIDL!{#[uuid(0x8b4f173b, 0x2fea, 0x4b80, 0x8f, 0x58, 0x43, 0x07, 0x19, 0x1a, 0xb9, 0x5d)]
+interface ID3D12Device5(ID3D12Device5Vtbl) : ID3D12Device4(ID3D12Device4Vtbl) {
+    fn CreateLifetimeTracker(
+        pOwner: *mut ID3D12LifetimeOwner,
+        riid: REFIID,
+        ppvTracker: *mut *mut c_void,
+    ) -> HRESULT,
+    fn RemoveDevice() -> (),
+    fn EnumerateMetaCommands(
+        pNumMetaCommands: *mut UINT,
+        pDescs: *mut D3D12_META_COMMAND_DESC,
+    ) -> HRESULT,
+    fn EnumerateMetaCommandParameters(
+        CommandId: REFGUID,
+        Stage: D3D12_META_COMMAND_PARAMETER_STAGE,
+        pTotalStructureSizeInBytes: *mut UINT,
+        pParameterCount: *mut UINT,
+        pParameterDescs: *mut D3D12_META_COMMAND_PARAMETER_DESC,
+    ) -> HRESULT,
+    fn CreateMetaCommand(
+        CommandId: REFGUID,
+        NodeMask: UINT,
+        pCreationParametersData: *const c_void,
+        CreationParametersDataSizeInBytes: SIZE_T,
+        riid: REFIID,
+        ppMetaCommand: *mut *mut c_void,
+    ) -> HRESULT,
+    fn CreateStateObject(
+        pDesc: *const D3D12_STATE_OBJECT_DESC,
+        riid: REFIID,
+        ppStateObject: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetRaytracingAccelerationStructurePrebuildInfo(
+        pDesc: *const D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS,
+        pInfo: *mut D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO,
+    ) -> (),
+    fn CheckDriverMatchingIdentifier(
+        SerializedDataType: D3D12_SERIALIZED_DATA_TYPE,
+        pIdentifierToCheck: *const D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER,
+    ) -> D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS,
+}}
+// other stuff
+RIDL!{#[uuid(0x9D5E227A, 0x4430, 0x4161, 0x88, 0xB3, 0x3E, 0xCA, 0x6B, 0xB1, 0x6E, 0x19)]
+interface ID3D12Resource1(ID3D12Resource1Vtbl): ID3D12Resource(ID3D12ResourceVtbl) {
+    fn GetProtectedResourceSession(
+        riid: REFIID,
+        ppProtectedSession: *mut *mut c_void,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x572F7389, 0x2168, 0x49E3, 0x96, 0x93, 0xD6, 0xDF, 0x58, 0x71, 0xBF, 0x6D)]
+interface ID3D12Heap1(ID3D12Heap1Vtbl): ID3D12Heap(ID3D12HeapVtbl) {
+    fn GetProtectedResourceSession(
+        riid: REFIID,
+        ppProtectedSession: *mut *mut c_void,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0xDBB84C27, 0x36CE, 0x4FC9, 0xB8, 0x01, 0xF0, 0x48, 0xC4, 0x6A, 0xC5, 0x70)]
+interface ID3D12MetaCommand(ID3D12MetaCommandVtbl) : ID3D12Pageable(ID3D12PageableVtbl) {
+    fn GetRequiredParameterResourceSize(
+        Stage: D3D12_META_COMMAND_PARAMETER_STAGE,
+        ParameterIndex: UINT,
+    ) -> UINT64,
+}}
+RIDL!{#[uuid(0x6FDA83A7, 0xB84C, 0x4E38, 0x9A, 0xC8, 0xC7, 0xBD, 0x22, 0x01, 0x6B, 0x3D)]
+interface ID3D12GraphicsCommandList3(ID3D12GraphicsCommandList3Vtbl)
+    : ID3D12GraphicsCommandList2(ID3D12GraphicsCommandList2Vtbl) {
+    fn SetProtectedResourceSession(
+        pProtectedResourceSession: *mut ID3D12ProtectedResourceSession,
+    ) -> (),
+}}
 RIDL!{#[uuid(0x7071e1f0, 0xe84b, 0x4b33, 0x97, 0x4f, 0x12, 0xfa, 0x49, 0xde, 0x65, 0xc5)]
 interface ID3D12Tools(ID3D12ToolsVtbl): IUnknown(IUnknownVtbl) {
     fn EnableShaderInstrumentation(
@@ -2692,6 +3348,8 @@ DEFINE_GUID!{IID_ID3D12CommandAllocator,
     0x6102dee4, 0xaf59, 0x4b09, 0xb9, 0x99, 0xb4, 0x4d, 0x73, 0xf0, 0x9b, 0x24}
 DEFINE_GUID!{IID_ID3D12Fence,
     0x0a753dcf, 0xc4d8, 0x4b91, 0xad, 0xf6, 0xbe, 0x5a, 0x60, 0xd9, 0x5a, 0x76}
+DEFINE_GUID!{IID_ID3D12Fence1,
+    0x433685fe, 0xe22b, 0x4ca0, 0xa8, 0xdb, 0xb5, 0xb4, 0xf4, 0xdd, 0x0e, 0x4a}
 DEFINE_GUID!{IID_ID3D12PipelineState,
     0x765a30f3, 0xf624, 0x4c6f, 0xa8, 0x28, 0xac, 0xe9, 0x48, 0x62, 0x24, 0x45}
 DEFINE_GUID!{IID_ID3D12DescriptorHeap,
@@ -2706,6 +3364,8 @@ DEFINE_GUID!{IID_ID3D12GraphicsCommandList,
     0x5b160d0f, 0xac1b, 0x4185, 0x8b, 0xa8, 0xb3, 0xae, 0x42, 0xa5, 0xa4, 0x55}
 DEFINE_GUID!{IID_ID3D12GraphicsCommandList1,
     0x553103fb, 0x1fe7, 0x4557, 0xbb, 0x38, 0x94, 0x6d, 0x7d, 0x0e, 0x7c, 0xa7}
+DEFINE_GUID!{IID_ID3D12GraphicsCommandList2,
+    0x38C3E585, 0xFF17, 0x412C, 0x91, 0x50, 0x4F, 0xC6, 0xF9, 0xD7, 0x2A, 0x28}
 DEFINE_GUID!{IID_ID3D12CommandQueue,
     0x0ec870a6, 0x5d7e, 0x4c22, 0x8c, 0xfc, 0x5b, 0xaa, 0xe0, 0x76, 0x16, 0xed}
 DEFINE_GUID!{IID_ID3D12Device,
@@ -2718,5 +3378,35 @@ DEFINE_GUID!{IID_ID3D12Device1,
     0x77acce80, 0x638e, 0x4e65, 0x88, 0x95, 0xc1, 0xf2, 0x33, 0x86, 0x86, 0x3e}
 DEFINE_GUID!{IID_ID3D12Device2,
     0x30baa41e, 0xb15b, 0x475c, 0xa0, 0xbb, 0x1a, 0xf5, 0xc5, 0xb6, 0x43, 0x28}
+DEFINE_GUID!{IID_ID3D12Device3,
+    0x81dadc15, 0x2bad, 0x4392, 0x93, 0xc5, 0x10, 0x13, 0x45, 0xc4, 0xaa, 0x98}
+DEFINE_GUID!{IID_ID3D12ProtectedSession,
+    0xA1533D18, 0x0AC1, 0x4084, 0x85, 0xB9, 0x89, 0xA9, 0x61, 0x16, 0x80, 0x6B}
+DEFINE_GUID!{IID_ID3D12ProtectedResourceSession,
+    0x6CD696F4, 0xF289, 0x40CC, 0x80, 0x91, 0x5A, 0x6C, 0x0A, 0x09, 0x9C, 0x3D}
+DEFINE_GUID!{IID_ID3D12Device4,
+    0xe865df17, 0xa9ee, 0x46f9, 0xa4, 0x63, 0x30, 0x98, 0x31, 0x5a, 0xa2, 0xe5}
+DEFINE_GUID!{IID_ID3D12LifetimeOwner,
+    0xe667af9f, 0xcd56, 0x4f46, 0x83, 0xce, 0x03, 0x2e, 0x59, 0x5d, 0x70, 0xa8}
+DEFINE_GUID!{IID_ID3D12SwapChainAssistant,
+    0xf1df64b6, 0x57fd, 0x49cd, 0x88, 0x07, 0xc0, 0xeb, 0x88, 0xb4, 0x5c, 0x8f}
+DEFINE_GUID!{IID_ID3D12LifetimeTracker,
+    0x3fd03d36, 0x4eb1, 0x424a, 0xa5, 0x82, 0x49, 0x4e, 0xcb, 0x8b, 0xa8, 0x13}
+DEFINE_GUID!{IID_ID3D12StateObject,
+    0x47016943, 0xfca8, 0x4594, 0x93, 0xea, 0xaf, 0x25, 0x8b, 0x55, 0x34, 0x6d}
+DEFINE_GUID!{IID_ID3D12StateObjectProperties,
+    0xde5fa827, 0x9bf9, 0x4f26, 0x89, 0xff, 0xd7, 0xf5, 0x6f, 0xde, 0x38, 0x60}
+DEFINE_GUID!{IID_ID3D12Device5,
+    0x8b4f173b, 0x2fea, 0x4b80, 0x8f, 0x58, 0x43, 0x07, 0x19, 0x1a, 0xb9, 0x5d}
+DEFINE_GUID!{IID_ID3D12Resource1,
+    0x9D5E227A, 0x4430, 0x4161, 0x88, 0xB3, 0x3E, 0xCA, 0x6B, 0xB1, 0x6E, 0x19}
+DEFINE_GUID!{IID_ID3D12Heap1,
+    0x572F7389, 0x2168, 0x49E3, 0x96, 0x93, 0xD6, 0xDF, 0x58, 0x71, 0xBF, 0x6D}
+DEFINE_GUID!{IID_ID3D12GraphicsCommandList3,
+    0x6FDA83A7, 0xB84C, 0x4E38, 0x9A, 0xC8, 0xC7, 0xBD, 0x22, 0x01, 0x6B, 0x3D}
+DEFINE_GUID!{IID_ID3D12MetaCommand,
+    0xDBB84C27, 0x36CE, 0x4FC9, 0xB8, 0x01, 0xF0, 0x48, 0xC4, 0x6A, 0xC5, 0x70}
+DEFINE_GUID!{IID_ID3D12GraphicsCommandList4,
+    0x8754318e, 0xd3a9, 0x4541, 0x98, 0xcf, 0x64, 0x5b, 0x50, 0xdc, 0x48, 0x74}
 DEFINE_GUID!{IID_ID3D12Tools,
     0x7071e1f0, 0xe84b, 0x4b33, 0x97, 0x4f, 0x12, 0xfa, 0x49, 0xde, 0x65, 0xc5}
