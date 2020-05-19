@@ -14,7 +14,7 @@ use um::winnt::{
     VER_NT_WORKSTATION, VER_PRODUCT_TYPE, VER_SERVICEPACKMAJOR, VerSetConditionMask
 };
 #[inline]
-pub fn IsWnidowsVersionOrGreater(
+pub fn IsWindowsVersionOrGreater(
     wMajorVersion: WORD,
     wMinorVersion: WORD,
     wServicePackVersion: WORD,
@@ -53,7 +53,7 @@ pub fn IsWnidowsVersionOrGreater(
 }
 #[inline]
 pub fn IsWindowsXPOrGreater() -> bool {
-    IsWnidowsVersionOrGreater(
+    IsWindowsVersionOrGreater(
         HIBYTE(_WIN32_WINNT_WINXP) as _,
         LOBYTE(_WIN32_WINNT_WINXP) as _,
         0,
@@ -61,7 +61,7 @@ pub fn IsWindowsXPOrGreater() -> bool {
 }
 #[inline]
 pub fn IsWindowsXPSP1OrGreater() -> bool {
-    IsWnidowsVersionOrGreater(
+    IsWindowsVersionOrGreater(
         HIBYTE(_WIN32_WINNT_WINXP) as _,
         LOBYTE(_WIN32_WINNT_WINXP) as _,
         1,
@@ -69,7 +69,7 @@ pub fn IsWindowsXPSP1OrGreater() -> bool {
 }
 #[inline]
 pub fn IsWindowsXPSP2OrGreater() -> bool {
-    IsWnidowsVersionOrGreater(
+    IsWindowsVersionOrGreater(
         HIBYTE(_WIN32_WINNT_WINXP) as _,
         LOBYTE(_WIN32_WINNT_WINXP) as _,
         2,
@@ -77,7 +77,7 @@ pub fn IsWindowsXPSP2OrGreater() -> bool {
 }
 #[inline]
 pub fn IsWindowsXPSP3OrGreater() -> bool {
-    IsWnidowsVersionOrGreater(
+    IsWindowsVersionOrGreater(
         HIBYTE(_WIN32_WINNT_WINXP) as _,
         LOBYTE(_WIN32_WINNT_WINXP) as _,
         3,
@@ -85,7 +85,7 @@ pub fn IsWindowsXPSP3OrGreater() -> bool {
 }
 #[inline]
 pub fn IsWindowsVistaOrGreater() -> bool {
-    IsWnidowsVersionOrGreater(
+    IsWindowsVersionOrGreater(
         HIBYTE(_WIN32_WINNT_VISTA) as _,
         LOBYTE(_WIN32_WINNT_VISTA) as _,
         0,
@@ -93,7 +93,7 @@ pub fn IsWindowsVistaOrGreater() -> bool {
 }
 #[inline]
 pub fn IsWindowsVistaSP1OrGreater() -> bool {
-    IsWnidowsVersionOrGreater(
+    IsWindowsVersionOrGreater(
         HIBYTE(_WIN32_WINNT_VISTA) as _,
         LOBYTE(_WIN32_WINNT_VISTA) as _,
         1,
@@ -101,7 +101,7 @@ pub fn IsWindowsVistaSP1OrGreater() -> bool {
 }
 #[inline]
 pub fn IsWindowsVistaSP2OrGreater() -> bool {
-    IsWnidowsVersionOrGreater(
+    IsWindowsVersionOrGreater(
         HIBYTE(_WIN32_WINNT_VISTA) as _,
         LOBYTE(_WIN32_WINNT_VISTA) as _,
         2,
@@ -109,7 +109,7 @@ pub fn IsWindowsVistaSP2OrGreater() -> bool {
 }
 #[inline]
 pub fn IsWindows7OrGreater() -> bool {
-    IsWnidowsVersionOrGreater(
+    IsWindowsVersionOrGreater(
         HIBYTE(_WIN32_WINNT_WIN7) as _,
         LOBYTE(_WIN32_WINNT_WIN7) as _,
         0,
@@ -117,7 +117,7 @@ pub fn IsWindows7OrGreater() -> bool {
 }
 #[inline]
 pub fn IsWindows7SP1OrGreater() -> bool {
-    IsWnidowsVersionOrGreater(
+    IsWindowsVersionOrGreater(
         HIBYTE(_WIN32_WINNT_WIN7) as _,
         LOBYTE(_WIN32_WINNT_WIN7) as _,
         1,
@@ -125,7 +125,7 @@ pub fn IsWindows7SP1OrGreater() -> bool {
 }
 #[inline]
 pub fn IsWindows8OrGreater() -> bool {
-    IsWnidowsVersionOrGreater(
+    IsWindowsVersionOrGreater(
         HIBYTE(_WIN32_WINNT_WIN8) as _,
         LOBYTE(_WIN32_WINNT_WIN8) as _,
         0,
@@ -133,7 +133,7 @@ pub fn IsWindows8OrGreater() -> bool {
 }
 #[inline]
 pub fn IsWindows8Point1OrGreater() -> bool {
-    IsWnidowsVersionOrGreater(
+    IsWindowsVersionOrGreater(
         HIBYTE(_WIN32_WINNT_WINBLUE) as _,
         LOBYTE(_WIN32_WINNT_WINBLUE) as _,
         0,
@@ -141,7 +141,7 @@ pub fn IsWindows8Point1OrGreater() -> bool {
 }
 #[inline]
 pub fn IsWindowsThresholdOrGreater() -> bool {
-    IsWnidowsVersionOrGreater(
+    IsWindowsVersionOrGreater(
         HIBYTE(_WIN32_WINNT_WINTHRESHOLD) as _,
         LOBYTE(_WIN32_WINNT_WINTHRESHOLD) as _,
         0,
@@ -149,7 +149,7 @@ pub fn IsWindowsThresholdOrGreater() -> bool {
 }
 #[inline]
 pub fn IsWindows10OrGreater() -> bool {
-    IsWnidowsVersionOrGreater(
+    IsWindowsVersionOrGreater(
         HIBYTE(_WIN32_WINNT_WINTHRESHOLD) as _,
         LOBYTE(_WIN32_WINNT_WINTHRESHOLD) as _,
         0,
