@@ -85,6 +85,7 @@ pub mod gl;
 #[cfg(feature = "debugapi")] pub mod debugapi;
 #[cfg(feature = "devicetopology")] pub mod devicetopology;
 #[cfg(feature = "dinput")] pub mod dinput;
+#[cfg(feature = "directmanipulation")] pub mod directmanipulation;
 #[cfg(feature = "dispex")] pub mod dispex;
 #[cfg(feature = "dmksctl")] pub mod dmksctl;
 #[cfg(feature = "dmusicc")] pub mod dmusicc;
