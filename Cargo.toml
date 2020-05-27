@@ -15,6 +15,7 @@ build = "build.rs"
 [package.metadata.docs.rs]
 features = ["everything", "impl-debug", "impl-default"]
 default-target = "x86_64-pc-windows-msvc"
+targets = ["x86_64-pc-windows-msvc", "i686-pc-windows-msvc"]
 
 [badges]
 travis-ci = { repository = "retep998/winapi-rs", branch = "0.3" }
