@@ -1,19 +1,18 @@
 use ctypes::{c_float, c_void};
 use shared::basetsd::UINT32;
-use shared::ntdef::{HANDLE, HRESULT};
 use shared::guiddef::GUID;
-use shared::windef::{HWND, RECT};
 use shared::minwindef::{BOOL, DWORD};
-use um::winuser::MSG;
+use shared::ntdef::{HANDLE, HRESULT};
+use shared::windef::{HWND, RECT};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-
+use um::winuser::MSG;
 // Implements IDirectManipulationViewport2
 // Implements IDirectManipulationViewport
 RIDL!{#[uuid(0x34e211b6, 0x3650, 0x4f75, 0x83, 0x34, 0xfa, 0x35, 0x95, 0x98, 0xe1, 0xc5)]
 class DirectManipulationViewport; }
-
 RIDL!{#[uuid(0x923ccaac, 0x61e1, 0x4385, 0xb7, 0x26, 0x01, 0x7a, 0xf1, 0x89, 0x88, 0x2a)]
-interface IDirectManipulationViewport2(IDirectManipulationViewport2Vtbl): IDirectManipulationViewport(IDirectManipulationViewportVtbl) {
+interface IDirectManipulationViewport2(IDirectManipulationViewport2Vtbl):
+    IDirectManipulationViewport(IDirectManipulationViewportVtbl) {
     fn AddBehavior(
         behavior: *mut IUnknown,
         cookie: *mut DWORD,
@@ -24,7 +23,6 @@ interface IDirectManipulationViewport2(IDirectManipulationViewport2Vtbl): IDirec
     fn RemoveAllBehaviors(
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0x28b85a3d, 0x60a0, 0x48bd, 0x9b, 0xa1, 0x5c, 0xe8, 0xd9, 0xea, 0x3a, 0x6d)]
 interface IDirectManipulationViewport(IDirectManipulationViewportVtbl): IUnknown(IUnknownVtbl) {
     fn Enable(
@@ -119,7 +117,6 @@ interface IDirectManipulationViewport(IDirectManipulationViewportVtbl): IUnknown
     fn Abandon(
     ) -> HRESULT,
 }}
-
 ENUM!{enum DIRECTMANIPULATION_STATUS {
     DIRECTMANIPULATION_BUILDING = 0,
     DIRECTMANIPULATION_ENABLED = 1,
@@ -129,7 +126,6 @@ ENUM!{enum DIRECTMANIPULATION_STATUS {
     DIRECTMANIPULATION_READY = 5,
     DIRECTMANIPULATION_SUSPENDED = 6,
 }}
-
 RIDL!{#[uuid(0xb89962cb, 0x3d89, 0x442b, 0xbb, 0x58, 0x50, 0x98, 0xfa, 0x0f, 0x9f, 0x16)]
 interface IDirectManipulationContent(IDirectManipulationContentVtbl): IUnknown(IUnknownVtbl) {
     fn GetContentRect(
@@ -164,7 +160,6 @@ interface IDirectManipulationContent(IDirectManipulationContentVtbl): IUnknown(I
         pointCount: DWORD,
     ) -> HRESULT,
 }}
-
 ENUM!{enum DIRECTMANIPULATION_VIEWPORT_OPTIONS {
     DIRECTMANIPULATION_VIEWPORT_OPTIONS_DEFAULT = 0,
     DIRECTMANIPULATION_VIEWPORT_OPTIONS_AUTODISABLE = 1,
@@ -173,7 +168,6 @@ ENUM!{enum DIRECTMANIPULATION_VIEWPORT_OPTIONS {
     DIRECTMANIPULATION_VIEWPORT_OPTIONS_EXPLICITHITTEST = 8,
     DIRECTMANIPULATION_VIEWPORT_OPTIONS_DISABLEPIXELSNAPPING = 16,
 }}
-
 ENUM!{enum DIRECTMANIPULATION_CONFIGURATION {
     DIRECTMANIPULATION_CONFIGURATION_NONE = 0,
     DIRECTMANIPULATION_CONFIGURATION_INTERACTION = 1,
@@ -185,7 +179,6 @@ ENUM!{enum DIRECTMANIPULATION_CONFIGURATION {
     DIRECTMANIPULATION_CONFIGURATION_RAILS_X = 256,
     DIRECTMANIPULATION_CONFIGURATION_RAILS_Y = 512,
 }}
-
 ENUM!{enum DIRECTMANIPULATION_GESTURE_CONFIGURATION {
     DIRECTMANIPULATION_GESTURE_NONE = 0,
     DIRECTMANIPULATION_GESTURE_DEFAULT = 0,
@@ -193,7 +186,6 @@ ENUM!{enum DIRECTMANIPULATION_GESTURE_CONFIGURATION {
     DIRECTMANIPULATION_GESTURE_CROSS_SLIDE_HORIZONTAL = 16,
     DIRECTMANIPULATION_GESTURE_PINCH_ZOOM = 32,
 }}
-
 ENUM!{enum DIRECTMANIPULATION_MOTION_TYPES {
     DIRECTMANIPULATION_MOTION_NONE = 0,
     DIRECTMANIPULATION_MOTION_TRANSLATEX = 1,
@@ -203,9 +195,9 @@ ENUM!{enum DIRECTMANIPULATION_MOTION_TYPES {
     DIRECTMANIPULATION_MOTION_CENTERY = 32,
     DIRECTMANIPULATION_MOTION_ALL = 55,
 }}
-
 RIDL!{#[uuid(0x952121da, 0xd69f, 0x45f9, 0xb0, 0xf9, 0xf2, 0x39, 0x44, 0x32, 0x1a, 0x6d)]
-interface IDirectManipulationViewportEventHandler(IDirectManipulationViewportEventHandlerVtbl): IUnknown(IUnknownVtbl) {
+interface IDirectManipulationViewportEventHandler(IDirectManipulationViewportEventHandlerVtbl):
+    IUnknown(IUnknownVtbl) {
     fn OnViewportStatusChanged(
         viewport: *const IDirectManipulationViewport,
         current: DIRECTMANIPULATION_STATUS,
@@ -219,18 +211,16 @@ interface IDirectManipulationViewportEventHandler(IDirectManipulationViewportEve
         content: *const IDirectManipulationContent,
     ) -> HRESULT,
 }}
-
 ENUM!{enum DIRECTMANIPULATION_INPUT_MODE {
     DIRECTMANIPULATION_INPUT_MODE_AUTOMATIC = 0,
     DIRECTMANIPULATION_INPUT_MODE_MANUAL = 1,
 }}
-
 // Implements IDirectManipulationUpdateManager
 RIDL!{#[uuid(0x9fc1bfd5, 0x1835, 0x441a, 0xb3, 0xb1, 0xb6, 0xcc, 0x74, 0xb7, 0x27, 0xd0)]
 class DirectManipulationUpdateManager; }
-
 RIDL!{#[uuid(0xb0ae62fd, 0xbe34, 0x46e7, 0x9c, 0xaa, 0xd3, 0x61, 0xfa, 0xcb, 0xb9, 0xcc)]
-interface IDirectManipulationUpdateManager(IDirectManipulationUpdateManagerVtbl): IUnknown(IUnknownVtbl) {
+interface IDirectManipulationUpdateManager(IDirectManipulationUpdateManagerVtbl):
+    IUnknown(IUnknownVtbl) {
     fn RegisterWaitHandleCallback(
         handle: HANDLE,
         eventHandler: *const IDirectManipulationUpdateHandler,
@@ -243,28 +233,27 @@ interface IDirectManipulationUpdateManager(IDirectManipulationUpdateManagerVtbl)
         frameInfo: *const IDirectManipulationFrameInfoProvider,
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0x790b6337, 0x64f8, 0x4ff5, 0xa2, 0x69, 0xb3, 0x2b, 0xc2, 0xaf, 0x27, 0xa7)]
-interface IDirectManipulationUpdateHandler(IDirectManipulationUpdateHandlerVtbl): IUnknown(IUnknownVtbl) {
+interface IDirectManipulationUpdateHandler(IDirectManipulationUpdateHandlerVtbl):
+    IUnknown(IUnknownVtbl) {
     fn Update(
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0xfb759dba, 0x6f4c, 0x4c01, 0x87, 0x4e, 0x19, 0xc8, 0xa0, 0x59, 0x07, 0xf9)]
-interface IDirectManipulationFrameInfoProvider(IDirectManipulationFrameInfoProviderVtbl): IUnknown(IUnknownVtbl) {
+interface IDirectManipulationFrameInfoProvider(IDirectManipulationFrameInfoProviderVtbl):
+    IUnknown(IUnknownVtbl) {
     fn GetNextFrameInfo(
         time: *mut u64,
         processTime: *mut u64,
         compositionTime: *mut u64,
     ) -> HRESULT,
 }}
-
 // Implements IDirectManipulationPrimaryContent
 RIDL!{#[uuid(0xcaa02661, 0xd59e, 0x41c7, 0x83, 0x93, 0x3b, 0xa3, 0xba, 0xcb, 0x6b, 0x57)]
 class DirectManipulationPrimaryContent; }
-
 RIDL!{#[uuid(0xc12851e4, 0x1698, 0x4625, 0xb9, 0xb1, 0x7c, 0xa3, 0xec, 0x18, 0x63, 0x0b)]
-interface IDirectManipulationPrimaryContent(IDirectManipulationPrimaryContentVtbl): IUnknown(IUnknownVtbl) {
+interface IDirectManipulationPrimaryContent(IDirectManipulationPrimaryContentVtbl):
+    IUnknown(IUnknownVtbl) {
     fn SetSnapInterval(
         motion: DIRECTMANIPULATION_MOTION_TYPES,
         interval: c_float,
@@ -303,20 +292,17 @@ interface IDirectManipulationPrimaryContent(IDirectManipulationPrimaryContentVtb
         centerY: *mut c_float,
     ) -> HRESULT,
 }}
-
 ENUM!{enum DIRECTMANIPULATION_SNAPPOINT_TYPE {
     DIRECTMANIPULATION_SNAPPOINT_MANDATORY = 0,
     DIRECTMANIPULATION_SNAPPOINT_OPTIONAL = 1,
     DIRECTMANIPULATION_SNAPPOINT_MANDATORY_SINGLE = 2,
     DIRECTMANIPULATION_SNAPPOINT_OPTIONAL_SINGLE = 3,
 }}
-
 ENUM!{enum DIRECTMANIPULATION_SNAPPOINT_COORDINATE {
     DIRECTMANIPULATION_COORDINATE_BOUNDARY = 0,
     DIRECTMANIPULATION_COORDINATE_ORIGIN = 1,
     DIRECTMANIPULATION_COORDINATE_MIRRORED = 16,
 }}
-
 ENUM!{enum DIRECTMANIPULATION_HORIZONTALALIGNMENT {
     DIRECTMANIPULATION_HORIZONTALALIGNMENT_NONE = 0,
     DIRECTMANIPULATION_HORIZONTALALIGNMENT_LEFT = 1,
@@ -324,7 +310,6 @@ ENUM!{enum DIRECTMANIPULATION_HORIZONTALALIGNMENT {
     DIRECTMANIPULATION_HORIZONTALALIGNMENT_RIGHT = 4,
     DIRECTMANIPULATION_HORIZONTALALIGNMENT_UNLOCKCENTER = 8,
 }}
-
 ENUM!{enum DIRECTMANIPULATION_VERTICALALIGNMENT {
     DIRECTMANIPULATION_VERTICALALIGNMENT_NONE = 0,
     DIRECTMANIPULATION_VERTICALALIGNMENT_TOP = 1,
@@ -332,21 +317,19 @@ ENUM!{enum DIRECTMANIPULATION_VERTICALALIGNMENT {
     DIRECTMANIPULATION_VERTICALALIGNMENT_BOTTOM = 4,
     DIRECTMANIPULATION_VERTICALALIGNMENT_UNLOCKCENTER = 8,
 }}
-
 // Implements IDirectManipulationManager2
 // Implements IDirectManipulationManager
 RIDL!{#[uuid(0x54e211b6, 0x3650, 0x4f75, 0x83, 0x34, 0xfa, 0x35, 0x95, 0x98, 0xe1, 0xc5)]
 class DirectManipulationManager; }
-
 RIDL!{#[uuid(0xfa1005e9, 0x3d16, 0x484c, 0xbf, 0xc9, 0x62, 0xb6, 0x1e, 0x56, 0xec, 0x4e)]
-interface IDirectManipulationManager2(IDirectManipulationManager2Vtbl): IDirectManipulationManager(IDirectManipulationManagerVtbl) {
+interface IDirectManipulationManager2(IDirectManipulationManager2Vtbl):
+    IDirectManipulationManager(IDirectManipulationManagerVtbl) {
     fn CreateBehavior(
         clsid: *const GUID,
         riid: *const GUID,
         object: *mut *mut c_void,
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0xfbf5d3b4, 0x70c7, 0x4163, 0x93, 0x22, 0x5a, 0x6f, 0x66, 0x0d, 0x6f, 0xbc)]
 interface IDirectManipulationManager(IDirectManipulationManagerVtbl): IUnknown(IUnknownVtbl) {
     fn Activate(
@@ -381,26 +364,23 @@ interface IDirectManipulationManager(IDirectManipulationManagerVtbl): IUnknown(I
         object: *mut *mut c_void,
     ) -> HRESULT,
 }}
-
 ENUM!{enum DIRECTMANIPULATION_HITTEST_TYPE {
     DIRECTMANIPULATION_HITTEST_TYPE_ASYNCHRONOUS = 0,
     DIRECTMANIPULATION_HITTEST_TYPE_SYNCHRONOUS = 1,
     DIRECTMANIPULATION_HITTEST_TYPE_AUTO_SYNCHRONOUS = 2,
 }}
-
 // Implements IDirectManipulationManager2
 // Implements IDirectManipulationManager
 RIDL!{#[uuid(0x99793286, 0x77cc, 0x4b57, 0x96, 0xdb, 0x3b, 0x35, 0x4f, 0x6f, 0x9f, 0xb5)]
 class DirectManipulationSharedManager; }
-
 // Implements IDirectManipulationCompositor
 // Implements IDirectManipulationCompositor2
 // Implements IDirectManipulationFrameInfoProvider
 RIDL!{#[uuid(0x79dea627, 0xa08a, 0x43ac, 0x8e, 0xf5, 0x69, 0x00, 0xb9, 0x29, 0x91, 0x26)]
 class DCompManipulationCompositor; }
-
 RIDL!{#[uuid(0x537a0825, 0x0387, 0x4efa, 0xb6, 0x2f, 0x71, 0xeb, 0x1f, 0x08, 0x5a, 0x7e)]
-interface IDirectManipulationCompositor(IDirectManipulationCompositorVtbl): IUnknown(IUnknownVtbl) {
+interface IDirectManipulationCompositor(IDirectManipulationCompositorVtbl):
+    IUnknown(IUnknownVtbl) {
     fn AddContent(
         content: *const IDirectManipulationContent,
         device: *mut IUnknown,
@@ -416,9 +396,9 @@ interface IDirectManipulationCompositor(IDirectManipulationCompositorVtbl): IUnk
     fn Flush(
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0xd38c7822, 0xf1cb, 0x43cb, 0xb4, 0xb9, 0xac, 0x0c, 0x76, 0x7a, 0x41, 0x2e)]
-interface IDirectManipulationCompositor2(IDirectManipulationCompositor2Vtbl): IDirectManipulationCompositor(IDirectManipulationCompositorVtbl) {
+interface IDirectManipulationCompositor2(IDirectManipulationCompositor2Vtbl):
+    IDirectManipulationCompositor(IDirectManipulationCompositorVtbl) {
     fn AddContentWithCrossProcessChaining(
         content: *const IDirectManipulationPrimaryContent,
         device: *mut IUnknown,
