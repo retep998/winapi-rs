@@ -15,6 +15,7 @@ build = "build.rs"
 [package.metadata.docs.rs]
 features = ["everything", "impl-debug", "impl-default"]
 default-target = "x86_64-pc-windows-msvc"
+targets = ["aarch64-pc-windows-msvc", "i686-pc-windows-msvc", "x86_64-pc-windows-msvc"]
 
 [target.i686-pc-windows-gnu.dependencies]
 winapi-i686-pc-windows-gnu = { version = "0.4", path = "i686" }
