@@ -306,6 +306,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("sapiddk", &["guiddef", "minwindef", "sapi", "sapiddk51", "unknwnbase", "winnt"], &[]),
     ("sapiddk51", &["guiddef", "minwindef", "mmreg", "oaidl", "objidlbase", "sapi", "unknwnbase", "windef", "winnt"], &[]),
     ("schannel", &["guiddef", "minwindef", "wincrypt", "windef", "winnt"], &[]),
+    ("secext", &["minwindef","winnt"], &["secur32"]),
     ("securityappcontainer", &["minwindef", "winnt"], &["kernel32"]),
     ("securitybaseapi", &["guiddef", "minwinbase", "minwindef", "winnt"], &["advapi32", "kernel32"]),
     ("servprov", &["guiddef", "unknwnbase", "winnt"], &[]),

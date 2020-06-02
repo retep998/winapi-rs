@@ -210,6 +210,7 @@ pub mod gl;
 #[cfg(feature = "sapiddk")] pub mod sapiddk;
 #[cfg(feature = "sapiddk51")] pub mod sapiddk51;
 #[cfg(feature = "schannel")] pub mod schannel;
+#[cfg(feature = "secext")] pub mod secext;
 #[cfg(feature = "securityappcontainer")] pub mod securityappcontainer;
 #[cfg(feature = "securitybaseapi")] pub mod securitybaseapi;
 #[cfg(feature = "servprov")] pub mod servprov;
