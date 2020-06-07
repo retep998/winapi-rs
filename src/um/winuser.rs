@@ -3254,6 +3254,11 @@ pub const MAX_TOUCH_COUNT: UINT32 = 256;
 pub const TOUCH_FEEDBACK_DEFAULT: DWORD = 0x1;
 pub const TOUCH_FEEDBACK_INDIRECT: DWORD = 0x2;
 pub const TOUCH_FEEDBACK_NONE: DWORD = 0x3;
+ENUM!{enum POINTER_FEEDBACK_MODE {
+    POINTER_FEEDBACK_DEFAULT = 1,
+    POINTER_FEEDBACK_INDIRECT = 2,
+    POINTER_FEEDBACK_NONE = 3,
+}}
 extern "system" {
     pub fn InitializeTouchInjection(
         maxCount: UINT32,
@@ -3383,6 +3388,24 @@ extern "system" {
         hwnd: HWND,
         pointerType: POINTER_INPUT_TYPE,
     ) -> BOOL;
+}
+DECLARE_HANDLE!{HSYNTHETICPOINTERDEVICE, HSYNTHETICPOINTERDEVICE__}
+extern "system" {
+    pub fn CreateSyntheticPointerDevice(
+        pointerType: POINTER_INPUT_TYPE,
+        maxCount: ULONG,
+        mode: POINTER_FEEDBACK_MODE,
+    ) -> HSYNTHETICPOINTERDEVICE;
+    pub fn InjectSyntheticPointerInput(
+        device: HSYNTHETICPOINTERDEVICE,
+        pointerInfo: *const POINTER_TYPE_INFO,
+        count: UINT32,
+    ) -> BOOL;
+    pub fn DestroySyntheticPointerDevice(
+        device: HSYNTHETICPOINTERDEVICE,
+    );
+}
+extern "system" {
     pub fn EnableMouseInPointer(
         fEnable: BOOL,
     ) -> BOOL;
