@@ -7,6 +7,7 @@ ServerGetInternetConnectorStatus@12
 ServerLicensingClose@4
 ServerLicensingDeactivateCurrentPolicy@4
 ServerLicensingFreePolicyInformation@4
+ServerLicensingGetAadInfo@16
 ServerLicensingGetAvailablePolicyIds@12
 ServerLicensingGetPolicy@8
 ServerLicensingGetPolicyInformationA@16
@@ -14,6 +15,7 @@ ServerLicensingGetPolicyInformationW@16
 ServerLicensingLoadPolicy@8
 ServerLicensingOpenA@4
 ServerLicensingOpenW@4
+ServerLicensingSetAadInfo@16
 ServerLicensingSetPolicy@12
 ServerLicensingUnloadPolicy@8
 ServerQueryInetConnectorInformationA@16
@@ -32,6 +34,7 @@ WinStationConnectAndLockDesktop@8
 WinStationConnectCallback@20
 WinStationConnectEx@8
 WinStationConnectW@20
+WinStationConsumeCacheSession@0
 WinStationCreateChildSessionTransport@8
 WinStationDisconnect@12
 WinStationEnableChildSessions@4
@@ -76,6 +79,7 @@ WinStationGetUserCertificates@4
 WinStationGetUserCredentials@4
 WinStationGetUserProfile@16
 WinStationInstallLicense@12
+WinStationIsBoundToCacheTerminal@4
 WinStationIsChildSessionsEnabled@4
 WinStationIsCurrentSessionRemoteable@4
 WinStationIsHelpAssistantSession@8

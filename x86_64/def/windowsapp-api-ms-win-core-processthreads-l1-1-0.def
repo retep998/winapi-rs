@@ -1,8 +1,10 @@
 LIBRARY api-ms-win-core-processthreads-l1-1-0.dll
 EXPORTS
 CreateProcessA
+CreateProcessAsUserW
 CreateProcessW
 CreateThread
+ExitProcess
 ExitThread
 FlushProcessWriteBuffers
 GetCurrentProcess
@@ -14,21 +16,25 @@ GetExitCodeThread
 GetPriorityClass
 GetProcessId
 GetProcessTimes
+GetStartupInfoW
 GetThreadId
 GetThreadPriority
 GetThreadPriorityBoost
 OpenProcessToken
 OpenThread
 OpenThreadToken
+ProcessIdToSessionId
 QueueUserAPC
 ResumeThread
 SetPriorityClass
 SetThreadPriority
 SetThreadPriorityBoost
+SetThreadStackGuarantee
 SetThreadToken
 SuspendThread
 SwitchToThread
 TerminateProcess
+TerminateThread
 TlsAlloc
 TlsFree
 TlsGetValue

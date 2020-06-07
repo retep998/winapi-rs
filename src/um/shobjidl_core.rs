@@ -14,7 +14,7 @@ use um::propkeydef::REFPROPERTYKEY;
 use um::propsys::GETPROPERTYSTOREFLAGS;
 use um::shtypes::{PCIDLIST_ABSOLUTE, PIDLIST_ABSOLUTE};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR, ULONGLONG, WCHAR};
+use um::winnt::{HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PCWSTR, ULONGLONG, WCHAR};
 DEFINE_GUID!{CLSID_DesktopWallpaper,
     0xc2cf3110, 0x460e, 0x4fc1, 0xb9, 0xd0, 0x8a, 0x1c, 0x0c, 0x9c, 0xc4, 0xbd}
 DEFINE_GUID!{CLSID_TaskbarList,
@@ -566,3 +566,11 @@ RIDL!{#[uuid(0x45ba127d, 0x10a8, 0x46ea, 0x8a, 0xb7, 0x56, 0xea, 0x90, 0x78, 0x9
 class ApplicationActivationManager;}
 RIDL!{#[uuid(0x958a6fb5, 0xdcb2, 0x4faf, 0xaa, 0xfd, 0x7f, 0xb0, 0x54, 0xad, 0x1a, 0x3b)]
 class ApplicationDesignModeSettings;}
+extern "system" {
+    pub fn SHCreateItemFromParsingName(
+        pszPath: PCWSTR,
+        pbc: *mut IBindCtx,
+        riid: REFIID,
+        ppv: *mut *mut c_void
+    ) -> HRESULT;
+}

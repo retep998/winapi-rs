@@ -5,12 +5,14 @@ ApplySnapshotVhdSet
 AttachVirtualDisk
 BreakMirrorVirtualDisk
 CompactVirtualDisk
+CompleteForkVirtualDisk
 CreateVirtualDisk
 DeleteSnapshotVhdSet
 DeleteVirtualDiskMetadata
 DetachVirtualDisk
 EnumerateVirtualDiskMetadata
 ExpandVirtualDisk
+ForkVirtualDisk
 GetAllAttachedVirtualDiskPhysicalPaths
 GetStorageDependencyInformation
 GetVirtualDiskInformation

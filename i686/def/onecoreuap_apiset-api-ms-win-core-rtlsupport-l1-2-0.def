@@ -1,0 +1,5 @@
+LIBRARY api-ms-win-core-rtlsupport-l1-2-0.dll
+EXPORTS
+RtlCompareMemory@12
+RtlPcToFileHeader@8
+RtlRaiseException@4

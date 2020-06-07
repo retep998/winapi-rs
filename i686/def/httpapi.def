@@ -14,10 +14,13 @@ HttpCreateServerSession@12
 HttpCreateUrlGroup@16
 HttpDeclarePush@28
 HttpDelegateRequest@24
+HttpDelegateRequestEx@32
 HttpDeleteServiceConfiguration@20
 HttpEvaluateRequest@16
+HttpFindUrlGroupId@12
 HttpFlushResponseCache@16
 HttpGetCounters@24
+HttpGetExtension@16
 HttpInitialize@12
 HttpPrepareUrl@16
 HttpQueryRequestProperty@40

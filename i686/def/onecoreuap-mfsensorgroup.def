@@ -2,4 +2,6 @@ LIBRARY MFSENSORGROUP.dll
 EXPORTS
 MFCreateSensorActivityMonitor@8
 MFCreateSensorGroup@8
+MFCreateSensorProfile@16
+MFCreateSensorProfileCollection@4
 MFCreateSensorStream@16

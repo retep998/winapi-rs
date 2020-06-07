@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-core-psm-appnotify-l1-1-0.dll
+EXPORTS
+RegisterAppStateChangeNotification@12
+UnregisterAppStateChangeNotification@4

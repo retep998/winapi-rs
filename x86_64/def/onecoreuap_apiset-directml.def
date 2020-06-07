@@ -1,0 +1,3 @@
+LIBRARY directml.dll
+EXPORTS
+DMLCreateDevice @1

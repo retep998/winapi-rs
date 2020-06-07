@@ -14,6 +14,7 @@ WOWCallback16@8
 WOWCallback16Ex@20
 WOWDirectedYield16@4
 WOWFreeMetafile@4
+WOWGetLastAppPointer@0
 WOWGetVDMPointer@12
 WOWGetVDMPointerFix@12
 WOWGetVDMPointerUnfix@4

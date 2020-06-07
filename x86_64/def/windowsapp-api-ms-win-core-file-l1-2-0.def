@@ -2,3 +2,4 @@ LIBRARY api-ms-win-core-file-l1-2-0.dll
 EXPORTS
 CreateFile2
 GetTempPathW
+GetVolumePathNamesForVolumeNameW

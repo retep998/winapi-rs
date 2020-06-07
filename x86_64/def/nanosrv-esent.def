@@ -10,6 +10,9 @@ JetAttachDatabase
 JetAttachDatabase2
 JetAttachDatabase2A
 JetAttachDatabase2W
+JetAttachDatabase3
+JetAttachDatabase3A
+JetAttachDatabase3W
 JetAttachDatabaseA
 JetAttachDatabaseW
 JetAttachDatabaseWithStreaming
@@ -52,6 +55,9 @@ JetCreateDatabase
 JetCreateDatabase2
 JetCreateDatabase2A
 JetCreateDatabase2W
+JetCreateDatabase3
+JetCreateDatabase3A
+JetCreateDatabase3W
 JetCreateDatabaseA
 JetCreateDatabaseW
 JetCreateDatabaseWithStreaming

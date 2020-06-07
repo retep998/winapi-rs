@@ -1,0 +1,3 @@
+LIBRARY PerceptionDevice.dll
+EXPORTS
+PerceptionDeviceCreateFactory@8

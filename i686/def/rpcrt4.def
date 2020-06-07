@@ -92,6 +92,8 @@ I_RpcServerRegisterForwardFunction@4
 I_RpcServerSetAddressChangeFn@4
 I_RpcServerStartService@12
 I_RpcServerSubscribeForDisconnectNotification@8
+I_RpcServerSubscribeForDisconnectNotification2@12
+I_RpcServerUnsubscribeForDisconnectNotification@20
 I_RpcServerUseProtseq2A@20
 I_RpcServerUseProtseq2W@20
 I_RpcServerUseProtseqEp2A@24

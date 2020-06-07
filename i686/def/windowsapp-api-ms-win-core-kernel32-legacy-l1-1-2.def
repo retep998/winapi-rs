@@ -1,0 +1,6 @@
+LIBRARY api-ms-win-core-kernel32-legacy-l1-1-2.dll
+EXPORTS
+OpenFileMappingA@12
+Process32First@8
+Process32Next@8
+VerifyVersionInfoA@16
