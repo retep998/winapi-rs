@@ -1,0 +1,24 @@
+LIBRARY ext-ms-win-networking-wlanapi-l1-1-0.dll
+EXPORTS
+WFDLowPrivIsWfdSupportedInt@4
+WlanCloseHandle@8
+WlanDeleteProfile@16
+WlanEnumInterfaces@12
+WlanFreeMemory@4
+WlanGetAvailableNetworkList@20
+WlanGetProfile@28
+WlanGetProfileIndex@12
+WlanGetProfileList@16
+WlanGetProfileMetadata@24
+WlanGetProfileSsidList@8
+WlanLowPrivCloseHandle@4
+WlanLowPrivOpenHandle@12
+WlanLowPrivSetInterface@20
+WlanOpenHandle@16
+WlanQueryInterface@28
+WlanReasonCodeToString@16
+WlanSetProfile@32
+WlanSetProfileMetadata@24
+WlanSignalValueToBar@4
+WlanSsidToDisplayName@16
+WlanUtf8SsidToDisplayName@16

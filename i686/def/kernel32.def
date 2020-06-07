@@ -72,6 +72,7 @@ ClearCommError@12
 CloseHandle@4
 ClosePackageInfo@4
 ClosePrivateNamespace@8
+ClosePseudoConsole@4
 CloseState@4
 CloseThreadpool@4
 CloseThreadpoolCleanupGroup@4
@@ -151,6 +152,7 @@ CreatePrivateNamespaceA@12
 CreatePrivateNamespaceW@12
 CreateProcessA@40
 CreateProcessW@40
+CreatePseudoConsole@20
 CreateRemoteThread@28
 CreateRemoteThreadEx@32
 CreateSemaphoreA@16
@@ -437,6 +439,8 @@ GetDiskFreeSpaceA@20
 GetDiskFreeSpaceExA@16
 GetDiskFreeSpaceExW@16
 GetDiskFreeSpaceW@20
+GetDiskSpaceInformationA@8
+GetDiskSpaceInformationW@8
 GetDllDirectoryA@8
 GetDllDirectoryW@8
 GetDriveTypeA@4
@@ -730,6 +734,7 @@ InitOnceExecuteOnce@16
 InitOnceInitialize@4
 InitializeConditionVariable@4
 InitializeContext@16
+InitializeContext2@24
 InitializeCriticalSection@4
 InitializeCriticalSectionAndSpinCount@8
 InitializeCriticalSectionEx@12
@@ -825,6 +830,7 @@ LoadStringBaseW@16
 LocalAlloc@8
 LocalCompact@4
 LocalFileTimeToFileTime@8
+LocalFileTimeToLocalSystemTime@12
 LocalFlags@4
 LocalFree@4
 LocalHandle@4
@@ -832,6 +838,7 @@ LocalLock@4
 LocalReAlloc@12
 LocalShrink@8
 LocalSize@4
+LocalSystemTimeToLocalFileTime@12
 LocalUnlock@4
 LocaleNameToLCID@8
 LocateXStateFeature@12
@@ -998,6 +1005,7 @@ RequestDeviceWakeup@4
 RequestWakeupLatency@4
 ResetEvent@4
 ResetWriteWatch@8
+ResizePseudoConsole@8
 ResolveDelayLoadedAPI@24
 ResolveDelayLoadsFromDll@12
 ResolveLocaleName@12

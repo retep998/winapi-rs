@@ -40,12 +40,16 @@ WlanHostedNetworkStartUsing@12
 WlanHostedNetworkStopUsing@12
 WlanIhvControl@32
 WlanOpenHandle@16
+WlanPrivateCanDeleteProfile@16
+WlanPrivateDeleteProfile@20
 WlanPrivateQuery11adPairedConfig@12
 WlanPrivateQueryInterface@20
 WlanPrivateSetInterface@20
+WlanPrivateSetProfile@36
 WlanQueryAutoConfigParameter@24
 WlanQueryInterface@28
 WlanReasonCodeToString@16
+WlanRegisterDeviceServiceNotification@8
 WlanRegisterNotification@28
 WlanRegisterVirtualStationNotification@12
 WlanRenameProfile@20

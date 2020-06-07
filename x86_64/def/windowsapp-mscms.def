@@ -1,0 +1,18 @@
+LIBRARY mscms.dll
+EXPORTS
+ColorAdapterGetCurrentProfileCalibration @217
+ColorAdapterGetDisplayCurrentStateID @211
+ColorAdapterGetDisplayProfile @216
+ColorAdapterGetDisplayTargetWhitePoint @215
+ColorAdapterGetDisplayTransformData @214
+ColorAdapterGetSystemModifyWhitePointCaps @210
+ColorAdapterRegisterOEMColorService @218
+ColorAdapterUnregisterOEMColorService @219
+ColorProfileAddDisplayAssociation @230
+ColorProfileGetDisplayDefault @234
+ColorProfileGetDisplayList @233
+ColorProfileGetDisplayUserScope @235
+ColorProfileRemoveDisplayAssociation @231
+ColorProfileSetDisplayDefaultAssociation @232
+InstallColorProfileA
+InstallColorProfileW

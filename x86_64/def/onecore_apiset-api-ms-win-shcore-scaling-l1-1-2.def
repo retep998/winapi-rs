@@ -1,0 +1,3 @@
+LIBRARY api-ms-win-shcore-scaling-l1-1-2.dll
+EXPORTS
+GetDpiForShellUIComponent

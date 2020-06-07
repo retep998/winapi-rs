@@ -1,6 +1,6 @@
 LIBRARY HrtfApo.dll
 EXPORTS
 CreateHrtfApo@8 @1
-CreateHrtfApoWithOptions@12 @2
+CreateHrtfApoWithDatasetType@12 @2
 CreateHrtfEngineFactory@4 @3
 IsHrtfApoAvailable@0 @4

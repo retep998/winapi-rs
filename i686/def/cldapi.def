@@ -1,16 +1,18 @@
 LIBRARY CLDAPI.dll
 EXPORTS
-CfAbortHydration@12
+CfAbortOperation@12
 CfCloseAppPolicy@8
 CfCloseHandle@4
 CfConnectSyncRoot@20
 CfConvertToPlaceholder@24
 CfCreatePlaceholders@20
 CfDehydratePlaceholder@28
+CfDehydratePlaceholderEx@32
 CfDisconnectSyncRoot@8
 CfEnumAppPolicy@32
 CfExecute@8
 CfGetCorrelationVector@8
+CfGetLastSyncStatus@16
 CfGetPlaceholderInfo@20
 CfGetPlaceholderRangeInfo@36
 CfGetPlaceholderStateFromAttributeTag@8
@@ -26,13 +28,15 @@ CfLockProperties@20
 CfOpenAppPolicy@8
 CfOpenFileWithOplock@12
 CfOpenProgressEvent@4
-CfQueryProgress@8
+CfQueryProgress@12
 CfQuerySyncProviderStatus@12
 CfReferenceProtectedHandle@4
 CfRegisterSyncRoot@16
 CfReleaseProtectedHandle@4
 CfReleaseTransferKey@8
 CfReportProviderProgress@32
+CfReportProviderProgress2@44
+CfReportSyncStatus@8
 CfRetrieveProperties@12
 CfRevertPlaceholder@12
 CfSetAppPolicy@16

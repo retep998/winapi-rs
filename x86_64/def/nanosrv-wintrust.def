@@ -3,6 +3,7 @@ EXPORTS
 AddPersonalTrustDBPages
 CatalogCompactHashDatabase
 ConfigCiFinalPolicy
+ConfigCiPackageFamilyNameCheck
 CryptCATAdminAcquireContext
 CryptCATAdminAcquireContext2
 CryptCATAdminAddCatalog
@@ -50,6 +51,7 @@ DriverCleanupPolicy
 DriverFinalPolicy
 DriverInitializePolicy
 FindCertsByIssuer
+GetAuthenticodeSha256Hash
 HTTPSFinalProv
 IsCatalogFile
 MsCatConstructHashTag

@@ -17,6 +17,7 @@ sqlite3_bind_null
 sqlite3_bind_parameter_count
 sqlite3_bind_parameter_index
 sqlite3_bind_parameter_name
+sqlite3_bind_pointer
 sqlite3_bind_text
 sqlite3_bind_text16
 sqlite3_bind_text64
@@ -74,6 +75,7 @@ sqlite3_create_function16
 sqlite3_create_function_v2
 sqlite3_create_module
 sqlite3_create_module_v2
+sqlite3_create_window_function
 sqlite3_data_count
 sqlite3_db_cacheflush
 sqlite3_db_config
@@ -105,6 +107,9 @@ sqlite3_get_table
 sqlite3_global_recover
 sqlite3_initialize
 sqlite3_interrupt
+sqlite3_keyword_check
+sqlite3_keyword_count
+sqlite3_keyword_name
 sqlite3_last_insert_rowid
 sqlite3_libversion
 sqlite3_libversion_number
@@ -133,7 +138,9 @@ sqlite3_overload_function
 sqlite3_prepare
 sqlite3_prepare16
 sqlite3_prepare16_v2
+sqlite3_prepare16_v3
 sqlite3_prepare_v2
+sqlite3_prepare_v3
 sqlite3_profile
 sqlite3_progress_handler
 sqlite3_randomness
@@ -153,6 +160,7 @@ sqlite3_result_error_toobig
 sqlite3_result_int
 sqlite3_result_int64
 sqlite3_result_null
+sqlite3_result_pointer
 sqlite3_result_subtype
 sqlite3_result_text
 sqlite3_result_text16
@@ -181,6 +189,17 @@ sqlite3_step
 sqlite3_stmt_busy
 sqlite3_stmt_readonly
 sqlite3_stmt_status
+sqlite3_str_append
+sqlite3_str_appendall
+sqlite3_str_appendchar
+sqlite3_str_appendf
+sqlite3_str_errcode
+sqlite3_str_finish
+sqlite3_str_length
+sqlite3_str_new
+sqlite3_str_reset
+sqlite3_str_value
+sqlite3_str_vappendf
 sqlite3_strglob
 sqlite3_stricmp
 sqlite3_strlike
@@ -207,7 +226,9 @@ sqlite3_value_dup
 sqlite3_value_free
 sqlite3_value_int
 sqlite3_value_int64
+sqlite3_value_nochange
 sqlite3_value_numeric_type
+sqlite3_value_pointer
 sqlite3_value_subtype
 sqlite3_value_text
 sqlite3_value_text16
@@ -219,7 +240,9 @@ sqlite3_vfs_register
 sqlite3_vfs_unregister
 sqlite3_vmprintf
 sqlite3_vsnprintf
+sqlite3_vtab_collation
 sqlite3_vtab_config
+sqlite3_vtab_nochange
 sqlite3_vtab_on_conflict
 sqlite3_wal_autocheckpoint
 sqlite3_wal_checkpoint
@@ -229,6 +252,8 @@ sqlite3_win32_is_nt
 sqlite3_win32_mbcs_to_utf8
 sqlite3_win32_mbcs_to_utf8_v2
 sqlite3_win32_set_directory
+sqlite3_win32_set_directory16
+sqlite3_win32_set_directory8
 sqlite3_win32_sleep
 sqlite3_win32_unicode_to_utf8
 sqlite3_win32_utf8_to_mbcs

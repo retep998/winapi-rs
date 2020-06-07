@@ -1,7 +1,7 @@
 # Guidelines
 
 * Never get definitions from MinGW headers or MSDN. Always stick to the Windows SDK headers, in
-  particular the latest Windows 10 SDK.
+  particular the latest Windows 10 SDK — you can find it [here](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk).  Look for a folder called "Include" inside the installed SDK to find the header (and other) files.
 * Definitions which depend on whether `UNICODE` is defined should not be included. It is the user's
   responsibility to explicitly choose between `W` and `A` functions (and they should always choose
   `W`).
@@ -98,9 +98,12 @@ FN!{stdcall NAMEENUMPROCA(
   cast must be performed, do the cast using the primitive integer types.
 * If the constant is a pointer that is initialized to a negative literal, do `-1isize as LPFOO`.
 
+The C version found in the SDK:
 ```C
 #define CLSCTX_INPROC           (CLSCTX_INPROC_SERVER|CLSCTX_INPROC_HANDLER)
 ```
+
+And what the Rust binding should look like:
 ```Rust
 pub const CLSCTX_INPROC: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER;
 ```
@@ -116,8 +119,9 @@ DEFINE_GUID!{GUID_DEVCLASS_SENSOR,
 
 ## Structs
 
-* One field per line.
+Each field must be on its own line.
 
+The C version found in the SDK:
 ```C
 typedef struct _GROUP_AFFINITY {
     KAFFINITY Mask;
@@ -125,6 +129,8 @@ typedef struct _GROUP_AFFINITY {
     WORD   Reserved[3];
 } GROUP_AFFINITY, *PGROUP_AFFINITY;
 ```
+
+And what the Rust binding should look like:
 ```Rust
 STRUCT!{struct GROUP_AFFINITY {
     Mask: KAFFINITY,
@@ -136,6 +142,7 @@ pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
 
 ## Unions
 
+The C version found in the SDK:
 ```C
 typedef union {
     USN_RECORD_COMMON_HEADER Header;
@@ -144,6 +151,8 @@ typedef union {
     USN_RECORD_V4 V4;
 } USN_RECORD_UNION, *PUSN_RECORD_UNION;
 ```
+
+And what the Rust binding should look like:
 ```Rust
 UNION!{union USN_RECORD_UNION {
     [u64; 10],
@@ -202,6 +211,7 @@ UNION!{union D3D12_RESOURCE_BARRIER_u {
 
 ## Union with a primitive field and an anonymous bitfield struct of the same type
 
+The C version found in the SDK:
 ```C
 typedef union _USB_HUB_STATUS {
     USHORT  AsUshort16;
@@ -213,6 +223,7 @@ typedef union _USB_HUB_STATUS {
 } USB_HUB_STATUS, *PUSB_HUB_STATUS;
 ```
 
+And what the Rust binding should look like:
 ```Rust
 STRUCT!{struct USB_HUB_STATUS {
     AsUshort16: USHORT,
@@ -264,11 +275,13 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
 * The uuid should always be lowercase hex.
 * Uuid numbers should be padded with zeros to ensure consistent width.
 
+The C version found in the SDK:
 ```C
 class DECLSPEC_UUID("D9F6EE60-58C9-458B-88E1-2F908FD7F87C")
 SpDataKey;
 ```
 
+And what the Rust binding should look like:
 ```Rust
 RIDL!{#[uuid(0xd9f6ee60, 0x58c9, 0x458b, 0x88, 0xe1, 0x2f, 0x90, 0x8f, 0xd7, 0xf8, 0x7c)]
 class SpDataKey;}

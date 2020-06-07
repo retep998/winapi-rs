@@ -1,0 +1,4 @@
+LIBRARY SHLWAPI.dll
+EXPORTS
+GetAcceptLanguagesA
+GetAcceptLanguagesW

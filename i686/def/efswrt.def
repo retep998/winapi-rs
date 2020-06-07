@@ -1,5 +1,13 @@
 LIBRARY efswrt.dll
 EXPORTS
+CdplGetFileProtectionLevel@8
+CdplIsAppAllowedToRun@8
+CdplIsAppDataProtectionSupported@16
+CdplIsSupported@4
+CdplProtectFileToLevel@8
+CdplProtectFileToLevelWithResult@12
+CdplProtectSecretToLevel@20
+CdplUnprotectSecret@16
 DpmBufferFree@4
 DpmProtectSecretToIdentity@32
 DpmStreamClose@4
@@ -16,5 +24,6 @@ GetEnterpriseActionForCopy@36
 GetEnterpriseIdForNetworkPath@12
 ProtectFileToEnterpriseIdentity@8
 ProtectFileToIdentity@12
+ProtectOrReprotectFileToIdentity@8
 QueryIdentityProtectors@8
 UnprotectFile@8

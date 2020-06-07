@@ -1,0 +1,75 @@
+LIBRARY COMCTL32.dll
+EXPORTS
+CreateMappedBitmap @8
+DefSubclassProc @413
+DPA_Clone @331
+DPA_Create @328
+DPA_CreateEx @340
+DPA_DeleteAllPtrs @337
+DPA_DeletePtr @336
+DPA_Destroy @329
+DPA_DestroyCallback @386
+DPA_EnumCallback @385
+DPA_GetPtr @332
+DPA_GetPtrIndex @333
+DPA_Grow @330
+DPA_InsertPtr @334
+DPA_Search @339
+DPA_SetPtr @335
+DPA_Sort @338
+DSA_Create @320
+DSA_DeleteAllItems @327
+DSA_DeleteItem @326
+DSA_Destroy @321
+DSA_DestroyCallback @388
+DSA_EnumCallback @387
+DSA_GetItem @322
+DSA_GetItemPtr @323
+DSA_InsertItem @324
+DSA_SetItem @325
+InitCommonControls @17
+SetWindowSubclass @410
+CreatePropertySheetPageA
+CreatePropertySheetPageW
+CreateToolbarEx
+DPA_Merge
+DSA_Clone
+DSA_GetSize
+DSA_Sort
+DestroyPropertySheetPage
+ImageList_Add
+ImageList_AddMasked
+ImageList_BeginDrag
+ImageList_Copy
+ImageList_Create
+ImageList_Destroy
+ImageList_DragEnter
+ImageList_DragLeave
+ImageList_DragMove
+ImageList_DragShowNolock
+ImageList_Draw
+ImageList_DrawIndirect
+ImageList_Duplicate
+ImageList_EndDrag
+ImageList_GetBkColor
+ImageList_GetDragImage
+ImageList_GetIcon
+ImageList_GetImageCount
+ImageList_GetImageInfo
+ImageList_LoadImageA
+ImageList_LoadImageW
+ImageList_Merge
+ImageList_Read
+ImageList_Remove
+ImageList_Replace
+ImageList_ReplaceIcon
+ImageList_SetBkColor
+ImageList_SetDragCursorImage
+ImageList_SetImageCount
+ImageList_SetOverlayImage
+ImageList_Write
+InitCommonControlsEx
+LBItemFromPt
+MakeDragList
+PropertySheetA
+PropertySheetW

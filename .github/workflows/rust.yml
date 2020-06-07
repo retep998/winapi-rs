@@ -1,0 +1,83 @@
+name: Rust
+on: [push, pull_request]
+env:
+  CARGO_INCREMENTAL: 0 
+jobs:
+  win:
+    name: Win
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        toolchain: [nightly-x86_64-msvc, nightly-i686-msvc, nightly-x86_64-gnu, nightly-i686-gnu, 1.6.0-x86_64-msvc]
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: ${{ matrix.toolchain }}
+        default: true
+        profile: minimal
+    - name: Build
+      run: |
+        cargo build
+        cargo build --features "everything impl-debug impl-default"
+        cargo build --release --features "everything impl-debug impl-default"
+    - name: Test
+      run: cargo test --features "everything impl-debug impl-default"
+  wincross:
+    name: WinX
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        target: [i686-pc-windows-msvc, i586-pc-windows-msvc, aarch64-pc-windows-msvc]
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly-x86_64-msvc
+        target: ${{ matrix.target }}
+        default: true
+        profile: minimal
+    - name: Build
+      run: |
+        cargo build --target=${{ matrix.target }}
+        cargo build --target=${{ matrix.target }} --all-features
+        cargo build --target=${{ matrix.target }} --release --all-features
+    - name: Test
+      run: cargo test --target=${{ matrix.target }} --all-features --no-run
+  lin:
+    name: Lin
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        toolchain: [nightly, 1.2.0]
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: ${{ matrix.toolchain }}
+        default: true
+        profile: minimal
+    - name: Build
+      run: |
+        cargo build
+        cargo build --features "everything impl-debug impl-default"
+        cargo build --release --features "everything impl-debug impl-default"
+  lincross:
+    name: LinX
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target: [x86_64-pc-windows-msvc, i686-pc-windows-msvc, i586-pc-windows-msvc, aarch64-pc-windows-msvc]
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        target: ${{ matrix.target }}
+        default: true
+        profile: minimal
+    - name: Build
+      run: |
+        cargo build --target=${{ matrix.target }}
+        cargo build --target=${{ matrix.target }} --all-features
+        cargo build --target=${{ matrix.target }} --release --all-features

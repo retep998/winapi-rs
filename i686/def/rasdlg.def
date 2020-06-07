@@ -1,5 +1,6 @@
 LIBRARY RASDLG.dll
 EXPORTS
+DwTerminalDlg@20
 GetRasDialOutProtocols@0
 RasAutodialQueryDlgA@20
 RasAutodialQueryDlgW@20

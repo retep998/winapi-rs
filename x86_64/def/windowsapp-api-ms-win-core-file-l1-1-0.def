@@ -3,6 +3,8 @@ EXPORTS
 CompareFileTime
 CreateDirectoryA
 CreateDirectoryW
+CreateFileA
+CreateFileW
 DeleteFileA
 DeleteFileW
 DeleteVolumeMountPointW
@@ -25,6 +27,8 @@ GetFileAttributesA
 GetFileAttributesExA
 GetFileAttributesExW
 GetFileAttributesW
+GetFileInformationByHandle
+GetFileSize
 GetFileSizeEx
 GetFileTime
 GetFileType
@@ -32,8 +36,10 @@ GetFinalPathNameByHandleA
 GetFinalPathNameByHandleW
 GetFullPathNameA
 GetFullPathNameW
+GetLogicalDriveStringsW
 GetLogicalDrives
 GetLongPathNameW
+GetShortPathNameW
 GetTempFileNameW
 GetVolumeInformationW
 LocalFileTimeToFileTime

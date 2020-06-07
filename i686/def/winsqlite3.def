@@ -17,6 +17,7 @@ sqlite3_bind_null@8
 sqlite3_bind_parameter_count@4
 sqlite3_bind_parameter_index@8
 sqlite3_bind_parameter_name@8
+sqlite3_bind_pointer@20
 sqlite3_bind_text@20
 sqlite3_bind_text16@20
 sqlite3_bind_text64@28
@@ -74,6 +75,7 @@ sqlite3_create_function16@32
 sqlite3_create_function_v2@36
 sqlite3_create_module@16
 sqlite3_create_module_v2@20
+sqlite3_create_window_function@40
 sqlite3_data_count@4
 sqlite3_data_directory
 sqlite3_db_cacheflush@4
@@ -106,6 +108,9 @@ sqlite3_get_table@24
 sqlite3_global_recover@0
 sqlite3_initialize@0
 sqlite3_interrupt@4
+sqlite3_keyword_check@8
+sqlite3_keyword_count@0
+sqlite3_keyword_name@12
 sqlite3_last_insert_rowid@4
 sqlite3_libversion@0
 sqlite3_libversion_number@0
@@ -134,7 +139,9 @@ sqlite3_overload_function@12
 sqlite3_prepare@20
 sqlite3_prepare16@20
 sqlite3_prepare16_v2@20
+sqlite3_prepare16_v3@24
 sqlite3_prepare_v2@20
+sqlite3_prepare_v3@24
 sqlite3_profile@12
 sqlite3_progress_handler@16
 sqlite3_randomness@8
@@ -154,6 +161,7 @@ sqlite3_result_error_toobig@4
 sqlite3_result_int@8
 sqlite3_result_int64@12
 sqlite3_result_null@4
+sqlite3_result_pointer@16
 sqlite3_result_subtype@8
 sqlite3_result_text@16
 sqlite3_result_text16@16
@@ -182,6 +190,17 @@ sqlite3_step@4
 sqlite3_stmt_busy@4
 sqlite3_stmt_readonly@4
 sqlite3_stmt_status@12
+sqlite3_str_append@12
+sqlite3_str_appendall@8
+sqlite3_str_appendchar@12
+sqlite3_str_appendf
+sqlite3_str_errcode@4
+sqlite3_str_finish@4
+sqlite3_str_length@4
+sqlite3_str_new@4
+sqlite3_str_reset@4
+sqlite3_str_value@4
+sqlite3_str_vappendf@12
 sqlite3_strglob@8
 sqlite3_stricmp@8
 sqlite3_strlike@12
@@ -209,7 +228,9 @@ sqlite3_value_dup@4
 sqlite3_value_free@4
 sqlite3_value_int@4
 sqlite3_value_int64@4
+sqlite3_value_nochange@4
 sqlite3_value_numeric_type@4
+sqlite3_value_pointer@8
 sqlite3_value_subtype@4
 sqlite3_value_text@4
 sqlite3_value_text16@4
@@ -222,7 +243,9 @@ sqlite3_vfs_register@8
 sqlite3_vfs_unregister@4
 sqlite3_vmprintf@8
 sqlite3_vsnprintf@16
+sqlite3_vtab_collation@8
 sqlite3_vtab_config
+sqlite3_vtab_nochange@4
 sqlite3_vtab_on_conflict@4
 sqlite3_wal_autocheckpoint@8
 sqlite3_wal_checkpoint@8
@@ -232,6 +255,8 @@ sqlite3_win32_is_nt@0
 sqlite3_win32_mbcs_to_utf8@4
 sqlite3_win32_mbcs_to_utf8_v2@8
 sqlite3_win32_set_directory@8
+sqlite3_win32_set_directory16@8
+sqlite3_win32_set_directory8@8
 sqlite3_win32_sleep@4
 sqlite3_win32_unicode_to_utf8@4
 sqlite3_win32_utf8_to_mbcs@4

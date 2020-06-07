@@ -1,4 +1,3 @@
 LIBRARY api-ms-win-core-libraryloader-l2-1-0.dll
 EXPORTS
-LoadPackagedLibrary
 QueryOptionalDelayLoadedAPI

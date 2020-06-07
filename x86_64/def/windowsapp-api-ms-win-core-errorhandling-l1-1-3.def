@@ -1,4 +1,6 @@
 LIBRARY api-ms-win-core-errorhandling-l1-1-3.dll
 EXPORTS
+FatalAppExitA
+FatalAppExitW
 GetThreadErrorMode
 SetThreadErrorMode
