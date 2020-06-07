@@ -1,5 +1,16 @@
 LIBRARY USER32.dll
 EXPORTS
+CanBrokerForceForeground@4 @2533
+DwmGetDxRgn@12 @1553
+EnableShellWindowManagementBehavior@8 @2567
+GetWindowTrackInfoAsync@4 @2581
+InternalClipCursor@8 @2534
+IsChildWindowDpiMessageEnabled@4 @2705
+RegisterWindowArrangementCallout@8 @2564
+SendEventMessage@16 @2537
+SetActiveImmersiveWindow@4 @2540
+SetWindowArrangement@16 @2566
+UpdateWindowTrackingInfo@12 @2585
 ActivateKeyboardLayout@8
 AddClipboardFormatListener@4
 AdjustWindowRect@12
@@ -19,7 +30,6 @@ CallMsgFilterW@8
 CallNextHookEx@16
 CallWindowProcA@20
 CallWindowProcW@20
-CanBrokerForceForeground@4
 ChangeClipboardChain@8
 ChangeDisplaySettingsA@8
 ChangeDisplaySettingsExW@20
@@ -118,14 +128,12 @@ DrawStateW@40
 DrawTextA@20
 DrawTextExW@24
 DrawTextW@20
-DwmGetDxRgn@12
 DwmGetRemoteSessionOcclusionEvent@0
 DwmGetRemoteSessionOcclusionState@0
 EmptyClipboard@0
 EnableMenuItem@12
 EnableMouseInPointer@4
 EnableScrollBar@12
-EnableShellWindowManagementBehavior@8
 EnableWindow@8
 EndDeferWindowPos@4
 EndDialog@8
@@ -307,7 +315,6 @@ GetWindowTextLengthA@4
 GetWindowTextLengthW@4
 GetWindowTextW@12
 GetWindowThreadProcessId@8
-GetWindowTrackInfoAsync@4
 GhostWindowFromHungWindow@4
 GrayStringA@36
 GrayStringW@36
@@ -332,7 +339,6 @@ InjectTouchInput@8
 InsertMenuA@20
 InsertMenuItemW@16
 InsertMenuW@20
-InternalClipCursor@8
 IntersectRect@12
 InvalidateRect@12
 InvalidateRgn@12
@@ -346,7 +352,6 @@ IsCharLowerW@4
 IsCharUpperA@4
 IsCharUpperW@4
 IsChild@8
-IsChildWindowDpiMessageEnabled@4
 IsClipboardFormatAvailable@4
 IsDialogMessageA@8
 IsDialogMessageW@8
@@ -469,7 +474,6 @@ RegisterPowerSettingNotification@12
 RegisterRawInputDevices@12
 RegisterTouchHitTestingWindow@8
 RegisterTouchWindow@8
-RegisterWindowArrangementCallout@8
 RegisterWindowMessageA@4
 RegisterWindowMessageW@4
 ReleaseCapture@0
@@ -481,7 +485,6 @@ RemoveMenu@12
 RemovePropA@8
 RemovePropW@8
 ReplyMessage@4
-ReportInertia@20
 ReuseDDElParam@20
 ScreenToClient@8
 ScrollDC@28
@@ -489,7 +492,6 @@ ScrollWindow@20
 ScrollWindowEx@32
 SendDlgItemMessageA@20
 SendDlgItemMessageW@20
-SendEventMessage@16
 SendInput@12
 SendMessageA@16
 SendMessageCallbackW@24
@@ -498,7 +500,6 @@ SendMessageTimeoutW@28
 SendMessageW@16
 SendNotifyMessageA@16
 SendNotifyMessageW@16
-SetActiveImmersiveWindow@4
 SetActiveWindow@4
 SetCapture@4
 SetCaretBlinkTime@4
@@ -549,7 +550,6 @@ SetThreadDesktop@4
 SetTimer@16
 SetUserObjectSecurity@12
 SetWinEventHook@28
-SetWindowArrangement@16
 SetWindowContextHelpId@8
 SetWindowDisplayAffinity@8
 SetWindowLongA@12
@@ -602,7 +602,6 @@ UpdateLayeredWindow@36
 UpdatePerUserSystemParameters@4
 UpdateWindow@4
 UpdateWindowInputSinkHints@8
-UpdateWindowTrackingInfo@12
 ValidateRect@8
 ValidateRgn@8
 VkKeyScanA@4

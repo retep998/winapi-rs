@@ -99,6 +99,7 @@ CreateMDIWindowA
 CreateMDIWindowW
 CreateMenu
 CreatePopupMenu
+CreateSyntheticPointerDevice
 CreateWindowExA
 CreateWindowExW
 CreateWindowStationA
@@ -152,6 +153,7 @@ DestroyCaret
 DestroyCursor
 DestroyIcon
 DestroyMenu
+DestroySyntheticPointerDevice
 DestroyWindow
 DialogBoxIndirectParamA
 DialogBoxIndirectParamW
@@ -284,8 +286,11 @@ GetDlgItemInt
 GetDlgItemTextA
 GetDlgItemTextW
 GetDoubleClickTime
+GetDpiAwarenessContextForProcess
 GetDpiForSystem
 GetDpiForWindow
+GetDpiFromDpiAwarenessContext
+GetExtendedPointerDeviceProperty
 GetFocus
 GetForegroundWindow
 GetGUIThreadInfo
@@ -381,6 +386,7 @@ GetShellWindow
 GetSubMenu
 GetSysColor
 GetSysColorBrush
+GetSystemDpiForProcess
 GetSystemMenu
 GetSystemMetrics
 GetSystemMetricsForDpi
@@ -388,6 +394,7 @@ GetTabbedTextExtentA
 GetTabbedTextExtentW
 GetThreadDesktop
 GetThreadDpiAwarenessContext
+GetThreadDpiHostingBehavior
 GetTitleBarInfo
 GetTopWindow
 GetTouchInputInfo
@@ -403,6 +410,7 @@ GetWindowContextHelpId
 GetWindowDC
 GetWindowDisplayAffinity
 GetWindowDpiAwarenessContext
+GetWindowDpiHostingBehavior
 GetWindowFeedbackSetting
 GetWindowInfo
 GetWindowLongA
@@ -438,6 +446,7 @@ InSendMessageEx
 InflateRect
 InheritWindowMonitor
 InitializeTouchInjection
+InjectSyntheticPointerInput
 InjectTouchInput
 InsertMenuA
 InsertMenuItemA
@@ -672,6 +681,7 @@ SetSysColors
 SetSystemCursor
 SetThreadDesktop
 SetThreadDpiAwarenessContext
+SetThreadDpiHostingBehavior
 SetTimer
 SetUserObjectInformationA
 SetUserObjectInformationW

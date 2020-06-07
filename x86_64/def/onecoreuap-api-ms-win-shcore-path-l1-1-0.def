@@ -1,6 +1,6 @@
 LIBRARY api-ms-win-shcore-path-l1-1-0.dll
 EXPORTS
-PathBuildRootA @173
-PathBuildRootW @172
-PathIsNetworkPathA @171
-PathIsNetworkPathW @170
+PathBuildRootA
+PathBuildRootW
+PathIsNetworkPathA
+PathIsNetworkPathW

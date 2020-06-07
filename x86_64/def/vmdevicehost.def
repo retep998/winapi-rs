@@ -1,0 +1,12 @@
+LIBRARY vmdevicehost.dll
+EXPORTS
+HdvCreateDeviceInstance
+HdvCreateGuestMemoryAperture
+HdvDeliverGuestInterrupt
+HdvDestroyGuestMemoryAperture
+HdvInitializeDeviceHost
+HdvReadGuestMemory
+HdvRegisterDoorbellPage
+HdvTeardownDeviceHost
+HdvUnregisterDoorbellPage
+HdvWriteGuestMemory

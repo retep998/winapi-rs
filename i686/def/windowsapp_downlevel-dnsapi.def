@@ -1,0 +1,4 @@
+LIBRARY DNSAPI.dll
+EXPORTS
+DnsQuery_W@24
+DnsRecordListFree@8

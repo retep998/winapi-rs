@@ -1,0 +1,10 @@
+LIBRARY USER32.dll
+EXPORTS
+CharLowerA
+CharLowerBuffW
+CharLowerW
+CharNextA
+CharNextExA
+CharNextW
+CharUpperW
+LoadStringW

@@ -1,6 +1,4 @@
 LIBRARY urlmon.dll
 EXPORTS
-CreateUri
-CreateUriWithFragment
 UrlMkGetSessionOption
 UrlMkSetSessionOption

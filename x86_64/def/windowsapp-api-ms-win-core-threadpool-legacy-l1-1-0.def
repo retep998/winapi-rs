@@ -1,0 +1,9 @@
+LIBRARY api-ms-win-core-threadpool-legacy-l1-1-0.dll
+EXPORTS
+ChangeTimerQueueTimer
+CreateTimerQueue
+CreateTimerQueueTimer
+DeleteTimerQueueEx
+DeleteTimerQueueTimer
+QueueUserWorkItem
+UnregisterWaitEx

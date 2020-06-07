@@ -1,0 +1,6 @@
+LIBRARY KeyCredMgr.dll
+EXPORTS
+KeyCredentialManagerFreeInformation@4
+KeyCredentialManagerGetInformation@4
+KeyCredentialManagerGetOperationErrorStates@12
+KeyCredentialManagerShowUIOperation@8

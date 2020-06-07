@@ -16,6 +16,7 @@ DceErrorInqTextW@8
 IUnknown_AddRef_Proxy@4
 IUnknown_QueryInterface_Proxy@12
 IUnknown_Release_Proxy@4
+I_RpcExceptionFilter@4
 NDRCContextBinding@4
 NDRCContextMarshall@8
 NDRCContextUnmarshall@16

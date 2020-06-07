@@ -1,9 +1,11 @@
 LIBRARY faultrep.dll
 EXPORTS
-ReportActivationHang@12 @1
+ReportActivationHang@16 @1
+ReportNavigationHang@16 @2
 AddERExcludedApplicationA@4
 AddERExcludedApplicationW@4
 CancelHangReporting@4
+ReportCoreHang@16
 ReportFault@8
 ReportHang@8
 WerReportHang@8

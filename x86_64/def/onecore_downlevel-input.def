@@ -1,13 +1,13 @@
 LIBRARY INPUT.dll
 EXPORTS
-EnumEnabledLayoutOrTip
-EnumEnabledLayoutOrTipPrivate
-EnumLayoutOrTipForSetup
-GetLayoutDescription
-InstallLayoutOrTip
-InstallLayoutOrTipUserReg
-QueryLayoutOrTipString
-QueryLayoutOrTipStringUserReg
-SaveDefaultUserInputSettings
-SaveSystemAcctInputSettings
-SetDefaultLayoutOrTip
+EnumEnabledLayoutOrTip @110
+EnumEnabledLayoutOrTipPrivate @118
+EnumLayoutOrTipForSetup @108
+GetLayoutDescription @114
+InstallLayoutOrTip @104
+InstallLayoutOrTipUserReg @109
+QueryLayoutOrTipString @111
+QueryLayoutOrTipStringUserReg @112
+SaveDefaultUserInputSettings @105
+SaveSystemAcctInputSettings @106
+SetDefaultLayoutOrTip @107
