@@ -10,4 +10,6 @@ GetThreadIdealProcessorEx@8
 GetThreadTimes@20
 IsProcessorFeaturePresent@4
 OpenProcess@12
+SetProcessMitigationPolicy@12
+SetThreadContext@8
 SetThreadIdealProcessorEx@12

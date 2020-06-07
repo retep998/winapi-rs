@@ -1,3 +1,4 @@
 LIBRARY api-ms-win-core-file-ansi-l1-1-0.dll
 EXPORTS
 DeleteVolumeMountPointA@4
+GetLogicalDriveStringsA@8

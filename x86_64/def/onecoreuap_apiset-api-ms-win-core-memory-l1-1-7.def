@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-core-memory-l1-1-7.dll
+EXPORTS
+CreateFileMapping2
+SetProcessValidCallTargetsForMappedView

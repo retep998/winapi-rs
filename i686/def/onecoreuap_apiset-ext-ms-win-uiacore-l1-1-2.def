@@ -1,0 +1,4 @@
+LIBRARY ext-ms-win-uiacore-l1-1-2.dll
+EXPORTS
+UiaDisconnectAllProviders@0
+UiaRaiseTextEditTextChangedEvent@12

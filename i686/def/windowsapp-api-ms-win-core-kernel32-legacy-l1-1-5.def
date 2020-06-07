@@ -1,0 +1,3 @@
+LIBRARY api-ms-win-core-kernel32-legacy-l1-1-5.dll
+EXPORTS
+SetThreadExecutionState@4

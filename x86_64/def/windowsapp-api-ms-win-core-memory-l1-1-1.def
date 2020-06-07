@@ -8,3 +8,5 @@ MapViewOfFileFromApp
 ResetWriteWatch
 SetProcessWorkingSetSizeEx
 UnmapViewOfFileEx
+VirtualLock
+VirtualUnlock

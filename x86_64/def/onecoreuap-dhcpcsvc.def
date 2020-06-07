@@ -10,6 +10,7 @@ DhcpDeRegisterOptions
 DhcpDeRegisterParamChange
 DhcpDelPersistentRequestParams
 DhcpEnableDhcp
+DhcpEnableDhcpAdvanced
 DhcpEnableTracing
 DhcpEnumClasses
 DhcpEnumInterfaces

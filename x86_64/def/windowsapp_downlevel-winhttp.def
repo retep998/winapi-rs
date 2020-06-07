@@ -1,0 +1,24 @@
+LIBRARY WINHTTP.dll
+EXPORTS
+WinHttpCloseHandle
+WinHttpConnect
+WinHttpCreateProxyResolver
+WinHttpGetIEProxyConfigForCurrentUser
+WinHttpGetProxyForUrl
+WinHttpGetProxyForUrlEx
+WinHttpGetProxyResult
+WinHttpQueryDataAvailable
+WinHttpQueryOption
+WinHttpReadData
+WinHttpReceiveResponse
+WinHttpSendRequest
+WinHttpSetCredentials
+WinHttpSetStatusCallback
+WinHttpSetTimeouts
+WinHttpWebSocketClose
+WinHttpWebSocketCompleteUpgrade
+WinHttpWebSocketQueryCloseStatus
+WinHttpWebSocketReceive
+WinHttpWebSocketSend
+WinHttpWebSocketShutdown
+WinHttpWriteData

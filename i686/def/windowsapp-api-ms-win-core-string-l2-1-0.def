@@ -1,0 +1,6 @@
+LIBRARY api-ms-win-core-string-l2-1-0.dll
+EXPORTS
+CharLowerBuffW@8
+CharLowerW@4
+CharNextW@4
+CharUpperW@4

@@ -138,6 +138,7 @@ HttpEndRequestA@16
 HttpEndRequestW@16
 HttpGetServerCredentials@12
 HttpGetTunnelSocket@16
+HttpIndicatePageLoadComplete@4
 HttpIsHostHstsEnabled@8
 HttpOpenDependencyHandle@12
 HttpOpenRequestA@32

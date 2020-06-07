@@ -1,0 +1,6 @@
+LIBRARY api-ms-win-power-setting-l1-1-0.dll
+EXPORTS
+PowerGetActiveScheme
+PowerReadACValue
+PowerSettingRegisterNotification
+PowerSettingUnregisterNotification

@@ -1,5 +1,10 @@
 LIBRARY UXTHEME.dll
 EXPORTS
+GetImmersiveColorNamedTypeByIndex@4 @100
+GetImmersiveColorTypeFromName@4 @96
+GetImmersiveColorXamlInfoByIndex@4 @124
+GetIsImmersiveColorUsingHighContrast@4 @106
+RefreshImmersiveColorPolicyState@0 @104
 BeginBufferedPaint@20
 BufferedPaintClear@8
 BufferedPaintInit@0
@@ -14,11 +19,7 @@ EndBufferedPaint@8
 GetBufferedPaintBits@12
 GetColorFromPreference@16
 GetImmersiveColorFromColorSetEx@16
-GetImmersiveColorNamedTypeByIndex@4
-GetImmersiveColorTypeFromName@4
-GetImmersiveColorXamlInfoByIndex@4
 GetImmersiveUserColorSetPreference@8
-GetIsImmersiveColorUsingHighContrast@4
 GetThemeAnimationProperty@28
 GetThemeAnimationTransform@28
 GetThemeAppProperties@0
@@ -42,6 +43,5 @@ IsThemeActive@0
 IsThemePartDefined@12
 OpenThemeData@8
 OpenThemeDataEx@12
-RefreshImmersiveColorPolicyState@0
 SetWindowTheme@12
 SetWindowThemeAttribute@16

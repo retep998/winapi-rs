@@ -2,14 +2,5 @@ LIBRARY query.dll
 EXPORTS
 BindIFilterFromStorage@12
 BindIFilterFromStream@12
-CIRevertToSelf@0
-CIShutdown@0
-InternalBindIFilterFromDocCLSID@20
-InternalBindIFilterFromFileName@16
-InternalBindIFilterFromStorage@16
-InternalBindIFilterFromStream@16
 LoadIFilter@12
 LoadIFilterEx@16
-LocateCatalogs@24
-LocateCatalogsA@24
-LocateCatalogsW@24

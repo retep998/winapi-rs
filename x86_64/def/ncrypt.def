@@ -107,10 +107,17 @@ SslDecrementProviderReferenceCount
 SslDecryptPacket
 SslEncryptPacket
 SslEnumCipherSuites
+SslEnumCipherSuitesEx
 SslEnumEccCurves
 SslEnumProtocolProviders
+SslExpandExporterMasterKey
+SslExpandTrafficKeys
+SslExpandWriteKey
 SslExportKey
 SslExportKeyingMaterial
+SslExtractEarlyKey
+SslExtractHandshakeKey
+SslExtractMasterKey
 SslFreeBuffer
 SslFreeObject
 SslGenerateMasterKey

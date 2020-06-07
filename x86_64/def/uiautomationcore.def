@@ -4,7 +4,7 @@ DockPattern_SetDockPosition
 ExpandCollapsePattern_Collapse
 ExpandCollapsePattern_Expand
 GridPattern_GetItem
-IgnoreLeaksInCurrentlyTrackedMemory
+InitializeChannelBasedConnectionForProviderProxy
 InvokePattern_Invoke
 ItemContainerPattern_FindItemByProperty
 LegacyIAccessiblePattern_DoDefaultAction
@@ -13,7 +13,6 @@ LegacyIAccessiblePattern_Select
 LegacyIAccessiblePattern_SetValue
 MultipleViewPattern_GetViewName
 MultipleViewPattern_SetCurrentView
-PostTestCheckForLeaks
 RangeValuePattern_SetValue
 ScrollItemPattern_ScrollIntoView
 ScrollPattern_Scroll
@@ -82,6 +81,7 @@ UiaNodeRelease
 UiaPatternRelease
 UiaProviderForNonClient
 UiaProviderFromIAccessible
+UiaRaiseActiveTextPositionChangedEvent
 UiaRaiseAsyncContentLoadedEvent
 UiaRaiseAutomationEvent
 UiaRaiseAutomationPropertyChangedEvent
@@ -94,7 +94,6 @@ UiaRemoveEvent
 UiaReturnRawElementProvider
 UiaSetFocus
 UiaTextRangeRelease
-UpdateErrorLoggingCallback
 ValuePattern_SetValue
 VirtualizedItemPattern_Realize
 WindowPattern_Close

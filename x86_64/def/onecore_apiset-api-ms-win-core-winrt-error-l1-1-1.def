@@ -1,0 +1,10 @@
+LIBRARY api-ms-win-core-winrt-error-l1-1-1.dll
+EXPORTS
+IsErrorPropagationEnabled
+RoClearError
+RoGetMatchingRestrictedErrorInfo
+RoInspectCapturedStackBackTrace
+RoInspectThreadErrorInfo
+RoOriginateLanguageException
+RoReportFailedDelegate
+RoReportUnhandledError
