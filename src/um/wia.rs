@@ -1,27 +1,27 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
+use ctypes::c_void;
 use shared::basetsd::ULONG64;
-use shared::guiddef::{GUID, LPGUID, REFCLSID, REFGUID, REFIID};
-use shared::minwindef::{BOOL, BYTE, DWORD, FILETIME, LPBYTE, LPDWORD, LPLONG, PULONG, ULONG};
+use shared::guiddef::{GUID, REFCLSID, REFIID};
+use shared::minwindef::{BOOL, BYTE, DWORD, FILETIME, ULONG};
 use shared::windef::{HWND, RECT};
-use shared::wtypes::{BSTR, LPBSTR, PROPID};
+use shared::wtypes::{BSTR, PROPID};
 use shared::wtypesbase::LPOLESTR;
 use um::objidl::STGMEDIUM;
 use um::objidlbase::IStream;
 use um::propidl::{IEnumSTATPROPSTG, PROPSPEC, PROPVARIANT, STATPROPSETSTG};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HRESULT, LONG, VOID};
+use um::winnt::{HRESULT, LONG};
 STRUCT!{struct WIA_DITHER_PATTERN_DATA {
     lSize: LONG,
     bstrPatternName: BSTR,
     lPatternWidth: LONG,
     lPatternLength: LONG,
     cbPattern: LONG,
-    pbPattern: *const BYTE,
+    pbPattern: *mut BYTE,
 }}
 pub type PWIA_DITHER_PATTERN_DATA = *mut WIA_DITHER_PATTERN_DATA;
 STRUCT!{struct WIA_PROPID_TO_NAME {
@@ -50,14 +50,14 @@ interface IWiaDevMgr(IWiaDevMgrVtbl): IUnknown(IUnknownVtbl) {
         hwndParent: HWND,
         lDeviceType: LONG,
         lFlags: LONG,
-        pbstrDeviceID: LPBSTR,
+        pbstrDeviceID: *mut BSTR,
         ppItemRoot: *mut *mut IWiaItem,
     ) -> HRESULT,
     fn SelectDeviceDlgID(
         hwndParent: HWND,
         lDeviceType: LONG,
         lFlags: LONG,
-        pbstrDeviceID: LPBSTR,
+        pbstrDeviceID: *mut BSTR,
     ) -> HRESULT,
     fn GetImageDlg(
         hwndParent: HWND,
@@ -66,12 +66,12 @@ interface IWiaDevMgr(IWiaDevMgrVtbl): IUnknown(IUnknownVtbl) {
         lIntent: LONG,
         pItemRoot: *mut IWiaItem,
         bstrFilename: BSTR,
-        pguidFormat: LPGUID,
+        pguidFormat: *mut GUID,
     ) -> HRESULT,
     fn RegisterEventCallbackProgram(
         lFlags: LONG,
         bstrDeviceID: BSTR,
-        pEventGUID: REFGUID,
+        pEventGUID: *const GUID,
         bstrCommandline: BSTR,
         bstrName: BSTR,
         bstrDescription: BSTR,
@@ -80,21 +80,22 @@ interface IWiaDevMgr(IWiaDevMgrVtbl): IUnknown(IUnknownVtbl) {
     fn RegisterEventCallbackInterface(
         lFlags: LONG,
         bstrDeviceID: BSTR,
-        pEventGUID: REFGUID,
-        pIWiaEventCallback: *const IWiaEventCallback,
+        pEventGUID: *const GUID,
+        pIWiaEventCallback: *mut IWiaEventCallback,
         pEventObject: *mut *mut IUnknown,
     ) -> HRESULT,
     fn RegisterEventCallbackCLSID(
         lFlags: LONG,
         bstrDeviceID: BSTR,
-        pEventGUID: REFGUID,
-        pClsID: REFGUID,
+        pEventGUID: *const GUID,
+        pClsID: *const GUID,
         bstrName: BSTR,
         bstrDescription: BSTR,
         bstrIcon: BSTR,
     ) -> HRESULT,
     fn AddDeviceDlg(
         hwndParent: HWND,
+        lFlags: LONG,
     ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IEnumWIA_DEV_INFO,
@@ -104,7 +105,7 @@ interface IEnumWIA_DEV_INFO(IEnumWIA_DEV_INFOVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
         rgelt: *mut *mut IWiaPropertyStorage,
-        pceltFetched: PULONG,
+        pceltFetched: *mut ULONG,
     ) -> HRESULT,
     fn Skip(
         celt: ULONG,
@@ -114,7 +115,7 @@ interface IEnumWIA_DEV_INFO(IEnumWIA_DEV_INFOVtbl): IUnknown(IUnknownVtbl) {
         ppIEnum: *mut *mut IEnumWIA_DEV_INFO,
     ) -> HRESULT,
     fn GetCount(
-        celt: PULONG,
+        celt: *mut ULONG,
     ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IWiaEventCallback,
@@ -122,13 +123,13 @@ DEFINE_GUID!{IID_IWiaEventCallback,
 RIDL!{#[uuid(0xae6287b0, 0x0084, 0x11d2, 0x97, 0x3b, 0x00, 0xa0, 0xc9, 0x06, 0x8f, 0x2e)]
 interface IWiaEventCallback(IWiaEventCallbackVtbl): IUnknown(IUnknownVtbl) {
     fn ImageEventCallback(
-        pEventGUID: REFGUID,
+        pEventGUID: *const GUID,
         bstrEventDescription: BSTR,
         bstrDeviceID: BSTR,
         bstrDeviceDescription: BSTR,
         dwDeviceType: DWORD,
         bstrFullItemName: BSTR,
-        pulEventType: PULONG,
+        pulEventType: *mut ULONG,
         ulReserved: ULONG,
     ) -> HRESULT,
 }}
@@ -151,7 +152,7 @@ interface IWiaDataCallback(IWiaDataCallbackVtbl): IUnknown(IUnknownVtbl) {
         lLength: LONG,
         lReserved: LONG,
         lResLength: LONG,
-        pbBuffer: LPBYTE,
+        pbBuffer: *mut BYTE,
     ) -> HRESULT,
 }}
 STRUCT!{struct WIA_DATA_TRANSFER_INFO {
@@ -177,12 +178,12 @@ DEFINE_GUID!{IID_IWiaDataTransfer,
 RIDL!{#[uuid(0xa6cef998, 0xa5b0, 0x11d2, 0xa0, 0x8f, 0x00, 0xc0, 0x4f, 0x72, 0xdc, 0x3c)]
 interface IWiaDataTransfer(IIWiaDataTransferkVtbl): IUnknown(IUnknownVtbl) {
     fn idtGetData(
-        pMedium: *const STGMEDIUM,
-        pIWiaDataCallback: *const IWiaDataCallback,
+        pMedium: *mut STGMEDIUM,
+        pIWiaDataCallback: *mut IWiaDataCallback,
     ) -> HRESULT,
     fn idtGetBandedData(
         pWiaDataTransInfo: PWIA_DATA_TRANSFER_INFO,
-        pIWiaDataCallback: *const IWiaDataCallback,
+        pIWiaDataCallback: *mut IWiaDataCallback,
     ) -> HRESULT,
     fn idtQueryGetData(
         pfe: *mut WIA_FORMAT_INFO,
@@ -199,7 +200,7 @@ DEFINE_GUID!{IID_IWiaItem,
 RIDL!{#[uuid(0x4db1ad10, 0x3391, 0x11d2, 0x9a, 0x33, 0x00, 0xc0, 0x4f, 0xa3, 0x61, 0x45)]
 interface IWiaItem(IWiaItemVtbl): IUnknown(IUnknownVtbl) {
     fn GetItemType(
-        pItemType: LPLONG,
+        pItemType: *mut LONG,
     ) -> HRESULT,
     fn AnalyzeItem(
         lFlags: LONG,
@@ -218,7 +219,7 @@ interface IWiaItem(IWiaItemVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
     fn EnumRegisterEventInfo(
         lFlags: LONG,
-        pEventGUID: REFGUID,
+        pEventGUID: *const GUID,
         ppIEnum: *mut *mut IEnumWIA_DEV_CAPS,
     ) -> HRESULT,
     fn FindItemByName(
@@ -230,12 +231,12 @@ interface IWiaItem(IWiaItemVtbl): IUnknown(IUnknownVtbl) {
         hwndParent: HWND,
         lFlags: LONG,
         lIntent: LONG,
-        plItemCount: LPLONG,
-        ppIWiaItem: *mut *mut IWiaItem,
+        plItemCount: *mut LONG,
+        ppIWiaItem: *mut *mut *mut IWiaItem,
     ) -> HRESULT,
     fn DeviceCommand(
         lFlags: LONG,
-        pCmdGUID: REFGUID,
+        pCmdGUID: *const GUID,
         ppIWiaItem: *mut *mut IWiaItem,
     ) -> HRESULT,
     fn GetRootItem(
@@ -246,17 +247,17 @@ interface IWiaItem(IWiaItemVtbl): IUnknown(IUnknownVtbl) {
         ppIEnumWIA_DEV_CAPS: *mut *mut IEnumWIA_DEV_CAPS,
     ) -> HRESULT,
     fn DumpItemData(
-        bstrData: LPBSTR,
+        bstrData: *mut BSTR,
     ) -> HRESULT,
     fn DumpDrvItemData(
-        bstrData: LPBSTR,
+        bstrData: *mut BSTR,
     ) -> HRESULT,
     fn DumpTreeItemData(
-        bstrData: LPBSTR,
+        bstrData: *mut BSTR,
     ) -> HRESULT,
     fn Diagnostic(
         ulSize: ULONG,
-        pBuffer: LPBYTE,
+        pBuffer: *mut BYTE,
     ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IWiaPropertyStorage,
@@ -271,7 +272,7 @@ interface IWiaPropertyStorage(IWiaPropertyStorageVtbl): IUnknown(IUnknownVtbl) {
     fn WriteMultiple(
         cpspec: ULONG,
         rgpspec: *const PROPSPEC,
-        rgpropvar: *mut PROPVARIANT,
+        rgpropvar: *const PROPVARIANT,
         propidNameFirst: PROPID,
     ) -> HRESULT,
     fn DeleteMultiple(
@@ -312,20 +313,20 @@ interface IWiaPropertyStorage(IWiaPropertyStorageVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
     fn GetPropertyAttributes(
         cpspec: ULONG,
-        rgpspec: *const PROPSPEC,
-        rgflags: PULONG,
+        rgpspec: *mut PROPSPEC,
+        rgflags: *mut ULONG,
         rgpropvar: *mut PROPVARIANT,
     ) -> HRESULT,
     fn GetCount(
-        pulNumProps: PULONG,
+        pulNumProps: *mut ULONG,
     ) -> HRESULT,
     fn GetPropertyStream(
-        pCompatibilityId: LPGUID,
+        pCompatibilityId: *mut GUID,
         ppIStream: *mut *mut IStream,
     ) -> HRESULT,
     fn SetPropertyStream(
-        pCompatibilityId: REFGUID,
-        pIStream: *const IStream,
+        pCompatibilityId: *const GUID,
+        pIStream: *mut IStream,
     ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IEnumWiaItem,
@@ -335,7 +336,7 @@ interface IEnumWiaItem(IEnumWiaItemVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
         ppIWiaItem: *mut *mut IWiaItem,
-        pceltFetched: PULONG,
+        pceltFetched: *mut ULONG,
     ) -> HRESULT,
     fn Skip(
         celt: ULONG,
@@ -345,7 +346,7 @@ interface IEnumWiaItem(IEnumWiaItemVtbl): IUnknown(IUnknownVtbl) {
         ppIEnum: *mut *mut IEnumWiaItem,
     ) -> HRESULT,
     fn GetCount(
-        celt: PULONG,
+        celt: *mut ULONG,
     ) -> HRESULT,
 }}
 STRUCT!{struct WIA_DEV_CAP {
@@ -366,7 +367,7 @@ interface IEnumWIA_DEV_CAPS(IEnumWIA_DEV_CAPSVtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
         rgelt: *mut WIA_DEV_CAP,
-        pceltFetched: PULONG,
+        pceltFetched: *mut ULONG,
     ) -> HRESULT,
     fn Skip(
         celt: ULONG,
@@ -376,7 +377,7 @@ interface IEnumWIA_DEV_CAPS(IEnumWIA_DEV_CAPSVtbl): IUnknown(IUnknownVtbl) {
         ppIEnum: *mut *mut IEnumWIA_DEV_CAPS,
     ) -> HRESULT,
     fn GetCount(
-        celt: PULONG,
+        celt: *mut ULONG,
     ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IEnumWIA_FORMAT_INFO,
@@ -386,7 +387,7 @@ interface IEnumWIA_FORMAT_INFO(IEnumWIA_FORMAT_INFOVtbl): IUnknown(IUnknownVtbl)
     fn Next(
         celt: ULONG,
         rgelt: *mut WIA_FORMAT_INFO,
-        pceltFetched: PULONG,
+        pceltFetched: *mut ULONG,
     ) -> HRESULT,
     fn Skip(
         celt: ULONG,
@@ -396,7 +397,7 @@ interface IEnumWIA_FORMAT_INFO(IEnumWIA_FORMAT_INFOVtbl): IUnknown(IUnknownVtbl)
         ppIEnum: *mut *mut IEnumWIA_FORMAT_INFO,
     ) -> HRESULT,
     fn GetCount(
-        celt: PULONG,
+        celt: *mut ULONG,
     ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IWiaLog,
@@ -414,14 +415,14 @@ interface IWiaLog(IWiaLogVtbl): IUnknown(IUnknownVtbl) {
         lResID: LONG,
         lDetail: LONG,
         bstrText: BSTR,
-    ) -> HRESULT,
+    ) -> HRESULT, 
 }}
 DEFINE_GUID!{IID_IWiaLogEx,
     0xAF1F22AC, 0x7A40, 0x4787, 0xB4, 0x21, 0xAE, 0xb4, 0x7A, 0x1F, 0xBD, 0x0B}
 RIDL!{#[uuid(0xaf1f22ac, 0x7a40, 0x4787, 0xb4, 0x21, 0xae, 0xb4, 0x7a, 0x1f, 0xbd, 0x0b)]
 interface IWiaLogEx(IWiaLogExVtbl): IUnknown(IUnknownVtbl) {
     fn InitializeLogEx(
-        hInstance: *const BYTE,
+        hInstance: *mut BYTE,
     ) -> HRESULT,
     fn hResult(
         hResult: HRESULT,
@@ -431,7 +432,7 @@ interface IWiaLogEx(IWiaLogExVtbl): IUnknown(IUnknownVtbl) {
         lResID: LONG,
         lDetail: LONG,
         bstrText: BSTR,
-    ) -> HRESULT,
+    ) -> HRESULT, 
     fn hResultEx(
         lMethodId: LONG,
         hResult: HRESULT,
@@ -442,7 +443,7 @@ interface IWiaLogEx(IWiaLogExVtbl): IUnknown(IUnknownVtbl) {
         lResID: LONG,
         lDetail: LONG,
         bstrText: BSTR,
-    ) -> HRESULT,
+    ) -> HRESULT, 
 }}
 DEFINE_GUID!{IID_IWiaNotifyDevMgr,
     0x70681EA0, 0xE7BF, 0x4291, 0x9F, 0xB1, 0x4E, 0x88, 0x13, 0xA3, 0xF7, 0x8E}
@@ -455,15 +456,15 @@ DEFINE_GUID!{IID_IWiaItemExtras,
 RIDL!{#[uuid(0x6291ef2c, 0x36ef, 0x4532, 0x87, 0x6a, 0x8e, 0x13, 0x25, 0x93, 0x77, 0x8d)]
 interface IWiaItemExtras(IWiaItemExtrasVtbl): IUnknown(IUnknownVtbl) {
     fn GetExtendedErrorInfo(
-        bstrErrorText: BSTR,
+        bstrErrorText: *mut BSTR,
     ) -> HRESULT,
     fn Escape(
         dwEscapeCode: DWORD,
         lpInData: *const BYTE,
         cbInDataSize: DWORD,
-        pOutData: LPBYTE,
+        pOutData: *mut BYTE,
         dwOutDataSize: DWORD,
-        pdwActualDataSize: LPDWORD,
+        pdwActualDataSize: *mut DWORD,
     ) -> HRESULT,
     fn CancelPendingIO() -> HRESULT,
 }}
@@ -476,7 +477,7 @@ interface IWiaAppErrorHandler(IWiaAppErrorHandlerVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
     fn ReportStatus(
         lFlags: LONG,
-        pWiaItem2: *const IWiaItem2,
+        pWiaItem2: *mut IWiaItem2,
         hrStatus: HRESULT,
         lPercentComplete: LONG,
     ) -> HRESULT,
@@ -488,15 +489,15 @@ interface IWiaErrorHandler(IWiaErrorHandlerVtbl): IUnknown(IUnknownVtbl) {
     fn ReportStatus(
         lFlags: LONG,
         hwndParent: HWND,
-        pWiaItem2: *const IWiaItem2,
+        pWiaItem2: *mut IWiaItem2,
         hrStatus: HRESULT,
         lPercentComplete: LONG,
     ) -> HRESULT,
     fn GetStatusDescription(
         lFlags: LONG,
-        pWiaItem2: *const IWiaItem2,
+        pWiaItem2: *mut IWiaItem2,
         hrStatus: HRESULT,
-        pbstrDescription: LPBSTR,
+        pbstrDescription: *mut BSTR,
     ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IWiaTransfer,
@@ -505,12 +506,12 @@ RIDL!{#[uuid(0xc39d6942, 0x2f4e, 0x4d04, 0x92, 0xfe, 0x4e, 0xf4, 0xd3, 0xa1, 0xd
 interface IWiaTransfer(IWiaTransferVtbl): IUnknown(IUnknownVtbl) {
     fn Download(
         lFlags: LONG,
-        pIWiaTransferCallback: *const IWiaTransferCallback,
+        pIWiaTransferCallback: *mut IWiaTransferCallback,
     ) -> HRESULT,
     fn Upload(
         lFlags: LONG,
-        pSource: *const IStream,
-        pIWiaTransferCallback: *const IWiaTransferCallback,
+        pSource: *mut IStream,
+        pIWiaTransferCallback: *mut IWiaTransferCallback,
     ) -> HRESULT,
     fn Cancel() -> HRESULT,
     fn EnumWIA_FORMAT_INFO(
@@ -529,14 +530,14 @@ RIDL!{#[uuid(0x27d4eaaf, 0x28a6, 0x4ca5, 0x9a, 0xab, 0xe6, 0x78, 0x16, 0x8b, 0x9
 interface IWiaTransferCallback(IWiaTransferCallbackVtbl): IUnknown(IUnknownVtbl) {
     fn TransferCallback(
         lFlags: LONG,
-        pWiaTransferParams: *const WiaTransferParams,
+        pWiaTransferParams: *mut WiaTransferParams,
     ) -> HRESULT,
     fn GetNextStream(
         lFlags: LONG,
         bstrItemName: BSTR,
         bstrFullItemName: BSTR,
         ppDestination: *mut *mut IStream,
-    ) -> HRESULT,
+    ) -> HRESULT, 
 }}
 DEFINE_GUID!{IID_IWiaSegmentationFilter,
     0xEC46A697, 0xAC04, 0x4447, 0x8F, 0x65, 0xFF, 0x63, 0xD5, 0x15, 0x4B, 0x21}
@@ -544,8 +545,8 @@ RIDL!{#[uuid(0xec46a697, 0xac04, 0x4447, 0x8f, 0x65, 0xff, 0x63, 0xd5, 0x15, 0x4
 interface IWiaSegmentationFilter(IWiaSegmentationFilterVtbl): IUnknown(IUnknownVtbl) {
     fn DetectRegions(
         lFlags: LONG,
-        pInputStream: *const IStream,
-        pWiaItem2: *const IWiaItem2,
+        pInputStream: *mut IStream,
+        pWiaItem2: *mut IWiaItem2,
     ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IWiaImageFilter,
@@ -553,20 +554,20 @@ DEFINE_GUID!{IID_IWiaImageFilter,
 RIDL!{#[uuid(0xa8a79ffa, 0x450b, 0x41f1, 0x8f, 0x87, 0x84, 0x9c, 0xcd, 0x94, 0xeb, 0xf)]
 interface IWiaImageFilter(IWiaImageFilterVtbl): IUnknown(IUnknownVtbl) {
     fn InitializeFilter(
-        pWiaItem2: *const IWiaItem2,
-        pWiaTransferCallback: *const IWiaTransferCallback,
+        pWiaItem2: *mut IWiaItem2,
+        pWiaTransferCallback: *mut IWiaTransferCallback,
     ) -> HRESULT,
     fn SetNewCallback(
-        pWiaTransferCallback: *const IWiaTransferCallback,
+        pWiaTransferCallback: *mut IWiaTransferCallback,
     ) -> HRESULT,
     fn FilterPreviewImage(
         lFlags: LONG,
-        pWiaChildItem2: *const IWiaItem2,
+        pWiaChildItem2: *mut IWiaItem2,
         InputImageExtents: RECT,
-        pInputStream: *const IStream,
+        pInputStream: *mut IStream,
     ) -> HRESULT,
     fn ApplyProperties(
-        pWiaPropertyStorage: *const IWiaPropertyStorage,
+        pWiaPropertyStorage: *mut IWiaPropertyStorage,
     ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IWiaPreview,
@@ -575,13 +576,13 @@ RIDL!{#[uuid(0x95c2b4fd, 0x33f2, 0x4d86, 0xad, 0x40, 0x94, 0x31, 0xf0, 0xdf, 0x0
 interface IWiaPreview(IWiaPreviewVtbl): IUnknown(IUnknownVtbl) {
     fn GetNewPreview(
         lFlags: LONG,
-        pWiaItem2: *const IWiaItem2,
-        pWiaTransferCallback: *const IWiaTransferCallback,
+        pWiaItem2: *mut IWiaItem2,
+        pWiaTransferCallback: *mut IWiaTransferCallback,
     ) -> HRESULT,
     fn UpdatePreview(
         lFlags: LONG,
-        pChildWiaItem2: *const IWiaItem2,
-        pWiaTransferCallback: *const IWiaTransferCallback,
+        pChildWiaItem2: *mut IWiaItem2,
+        pWiaTransferCallback: *mut IWiaTransferCallback,
     ) -> HRESULT,
     fn DetectRegions(
         lFlags: LONG,
@@ -595,7 +596,7 @@ interface IEnumWiaItem2(IEnumWiaItem2Vtbl): IUnknown(IUnknownVtbl) {
     fn Next(
         celt: ULONG,
         ppIWiaItem2: *mut *mut IWiaItem2,
-        pceltFetched: PULONG,
+        pceltFetched: *mut ULONG,
     ) -> HRESULT,
     fn Skip(
         celt: ULONG,
@@ -605,7 +606,7 @@ interface IEnumWiaItem2(IEnumWiaItem2Vtbl): IUnknown(IUnknownVtbl) {
         ppIEnum: *mut *mut IEnumWiaItem2,
     ) -> HRESULT,
     fn GetCount(
-        celt: PULONG,
+        celt: *mut ULONG,
     ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IWiaItem2,
@@ -622,7 +623,7 @@ interface IWiaItem2(IWiaItem2Vtbl): IUnknown(IUnknownVtbl) {
         lFlags: LONG,
     ) -> HRESULT,
     fn EnumChildItems(
-        pCategoryGUID: REFGUID,
+        pCategoryGUID: *const GUID,
         ppIEnumWiaItem2: *mut *mut IEnumWiaItem2,
     ) -> HRESULT,
     fn FindItemByName(
@@ -631,23 +632,23 @@ interface IWiaItem2(IWiaItem2Vtbl): IUnknown(IUnknownVtbl) {
         ppIWiaItem2: *mut *mut IWiaItem2,
     ) -> HRESULT,
     fn GetItemCategory(
-        pItemCategoryGUID: REFGUID,
+        pItemCategoryGUID: *const GUID,
     ) -> HRESULT,
     fn GetItemType(
-        pItemType: LPLONG,
+        pItemType: *mut LONG,
     ) -> HRESULT,
     fn DeviceDlg(
         lFlags: LONG,
         hwndParent: HWND,
         bstrFolderName: BSTR,
         bstrFilename: BSTR,
-        plNumFiles: LPLONG,
+        plNumFiles: *mut LONG,
         ppbstrFilePaths: *mut *mut BSTR,
         ppItem: *mut *mut IWiaItem2,
     ) -> HRESULT,
     fn DeviceCommand(
         lFlags: LONG,
-        pCmdGUID: REFGUID,
+        pCmdGUID: *const GUID,
     ) -> HRESULT,
     fn EnumDeviceCapabilities(
         lFlags: LONG,
@@ -663,7 +664,7 @@ interface IWiaItem2(IWiaItem2Vtbl): IUnknown(IUnknownVtbl) {
         lFlags: LONG,
         bstrName: BSTR,
         riidExtensionInterface: REFIID,
-        ppOut: *mut *mut VOID,
+        ppOut: *mut *mut c_void,
     ) -> HRESULT,
     fn GetParentItem(
         ppIWiaItem2: *mut *mut IWiaItem2,
@@ -677,12 +678,12 @@ interface IWiaItem2(IWiaItem2Vtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
     fn EnumRegisterEventInfo(
         lFlags: LONG,
-        pEventGUID: REFGUID,
+        pEventGUID: *const GUID,
         ppIEnum: *mut *mut IEnumWIA_DEV_CAPS,
     ) -> HRESULT,
     fn Diagnostic(
         ulSize: ULONG,
-        pBuffer: *const BYTE,
+        pBuffer: *mut BYTE,
     ) -> HRESULT,
 }}
 DEFINE_GUID!{IID_IWiaDevMgr2,
@@ -702,26 +703,26 @@ interface IWiaDevMgr2(IWiaDevMgr2Vtbl): IUnknown(IUnknownVtbl) {
         hwndParent: HWND,
         lDeviceType: LONG,
         lFlags: LONG,
-        pbstrDeviceID: LPBSTR,
+        pbstrDeviceID: *mut BSTR,
         ppItemRoot: *mut *mut IWiaItem2,
     ) -> HRESULT,
     fn SelectDeviceDlgID(
         hwndParent: HWND,
         lDeviceType: LONG,
         lFlags: LONG,
-        pbstrDeviceID: LPBSTR,
+        pbstrDeviceID: *mut BSTR,
     ) -> HRESULT,
     fn RegisterEventCallbackInterface(
         lFlags: LONG,
         bstrDeviceID: BSTR,
-        pEventGUID: REFGUID,
-        pIWiaEventCallback: *const IWiaEventCallback,
+        pEventGUID: *const GUID,
+        pIWiaEventCallback: *mut IWiaEventCallback,
         pEventObject: *mut *mut IUnknown,
     ) -> HRESULT,
     fn RegisterEventCallbackProgram(
         lFlags: LONG,
         bstrDeviceID: BSTR,
-        pEventGUID: REFGUID,
+        pEventGUID: *const GUID,
         bstrFullAppName: BSTR,
         bstrCommandline: BSTR,
         bstrName: BSTR,
@@ -731,8 +732,8 @@ interface IWiaDevMgr2(IWiaDevMgr2Vtbl): IUnknown(IUnknownVtbl) {
     fn RegisterEventCallbackCLSID(
         lFlags: LONG,
         bstrDeviceID: BSTR,
-        pEventGUID: REFGUID,
-        pClsID: REFGUID,
+        pEventGUID: *const GUID,
+        pClsID: *const GUID,
         bstrName: BSTR,
         bstrDescription: BSTR,
         bstrIcon: BSTR,
@@ -743,14 +744,20 @@ interface IWiaDevMgr2(IWiaDevMgr2Vtbl): IUnknown(IUnknownVtbl) {
         hwndParent: HWND,
         bstrFolderName: BSTR,
         bstrFilename: BSTR,
-        plNumFiles: LPLONG,
+        plNumFiles: *mut LONG,
         ppbstrFilePaths: *mut *mut BSTR,
         ppItem: *mut *mut IWiaItem2,
     ) -> HRESULT,
 }}
 DEFINE_GUID!{CLSID_WiaDevMgr,
     0xa1f4e726, 0x8cf1, 0x11d1, 0xbf, 0x92, 0x00, 0x60, 0x08, 0x1e, 0xd8, 0x11}
+RIDL!{#[uuid(0xa1f4e726, 0x8cf1, 0x11d1, 0xbf, 0x92, 0x00, 0x60, 0x08, 0x1e, 0xd8, 0x11)]
+        class WiaDevMgr;}
 DEFINE_GUID!{CLSID_WiaDevMgr2,
     0xB6C292BC, 0x7C88, 0x41ee, 0x8B, 0x54, 0x8E, 0xC9, 0x26, 0x17, 0xE5, 0x99}
+RIDL!{#[uuid(0xB6C292BC, 0x7C88, 0x41ee, 0x8B, 0x54, 0x8E, 0xC9, 0x26, 0x17, 0xE5, 0x99)]
+        class WiaDevMgr2;}
 DEFINE_GUID!{CLSID_WiaLog,
     0xA1E75357, 0x881A, 0x419e, 0x83, 0xE2, 0xBB, 0x16, 0xDB, 0x19, 0x7C, 0x68}
+RIDL!{#[uuid(0xA1E75357, 0x881A, 0x419e, 0x83, 0xE2, 0xBB, 0x16, 0xDB, 0x19, 0x7C, 0x68)]
+        class WiaLog;}
