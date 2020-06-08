@@ -1,0 +1,4 @@
+LIBRARY NORMALIZ.dll
+EXPORTS
+IdnToAscii@20
+IdnToUnicode@20

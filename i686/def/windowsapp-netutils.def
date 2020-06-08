@@ -1,0 +1,3 @@
+LIBRARY netutils.dll
+EXPORTS
+NetApiBufferFree@4

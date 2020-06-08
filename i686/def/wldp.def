@@ -1,0 +1,17 @@
+LIBRARY Wldp.dll
+EXPORTS
+WldpAddDeveloperCertificateForDynamicCodeTrust@4
+WldpCheckRetailConfiguration@16
+WldpCheckSecurityWatermarkState@4
+WldpDisableDeveloperMode@0
+WldpEnableDeveloperMode@4
+WldpGetLockdownPolicy@12
+WldpIsAllowedEntryPoint@16
+WldpIsClassInApprovedList@16
+WldpIsDebugAllowed@8
+WldpIsDynamicCodePolicyEnabled@4
+WldpQueryDynamicCodeTrust@12
+WldpQuerySecurityPolicy@24
+WldpResetSecurityWatermarkState@0
+WldpSetDynamicCodeTrust@4
+WldpSetDynamicCodeTrust2@8

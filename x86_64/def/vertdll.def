@@ -59,7 +59,9 @@ RtlGetLastNtStatus
 RtlLookupFunctionEntry
 RtlPcToFileHeader
 RtlRaiseStatus
+RtlTimeFieldsToTime
 RtlUnhandledExceptionFilter
+RtlUnwind
 RtlUnwindEx
 RtlVirtualUnwind
 SetCriticalSectionSpinCount

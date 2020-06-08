@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-gaming-tcui-l1-1-1.dll
+EXPORTS
+CheckGamingPrivilegeSilently
+CheckGamingPrivilegeWithUI

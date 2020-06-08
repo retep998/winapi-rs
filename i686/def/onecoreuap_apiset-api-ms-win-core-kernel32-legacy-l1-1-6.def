@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-core-kernel32-legacy-l1-1-6.dll
+EXPORTS
+GetDevicePowerState@8
+GetMaximumProcessorCount@4

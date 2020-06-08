@@ -1,0 +1,14 @@
+LIBRARY api-ms-win-ntuser-sysparams-l1-1-0.dll
+EXPORTS
+ChangeDisplaySettingsExW
+DisplayConfigGetDeviceInfo
+DisplayConfigSetDeviceInfo
+EnumDisplayDevicesW
+EnumDisplayMonitors
+EnumDisplaySettingsExW
+EnumDisplaySettingsW
+GetDisplayConfigBufferSizes
+GetMonitorInfoW
+GetSystemMetrics
+QueryDisplayConfig
+SystemParametersInfoW

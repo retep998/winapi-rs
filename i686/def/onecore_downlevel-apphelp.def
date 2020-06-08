@@ -1,5 +1,6 @@
 LIBRARY APPHELP.dll
 EXPORTS
+SdbGetKnownSafeLayers@12 @34
 ApphelpCheckShellObject@12
 SE_COM_AddHook@20
 SE_COM_AddServer@8

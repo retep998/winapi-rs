@@ -20,7 +20,9 @@ TdhGetWppMessage@16
 TdhGetWppProperty@20
 TdhLoadManifest@4
 TdhLoadManifestFromBinary@4
+TdhLoadManifestFromMemory@8
 TdhOpenDecodingHandle@4
 TdhQueryProviderFieldInformation@24
 TdhSetDecodingParameter@8
 TdhUnloadManifest@4
+TdhUnloadManifestFromMemory@8

@@ -148,25 +148,9 @@ pub const MAXLONGLONG: LONGLONG = 0x7fffffffffffffff;
 pub type PLONGLONG = *mut LONGLONG;
 pub type PULONGLONG = *mut ULONGLONG;
 pub type USN = LONGLONG;
-STRUCT!{struct LARGE_INTEGER_u {
-    LowPart: DWORD,
-    HighPart: LONG,
-}}
-UNION!{union LARGE_INTEGER {
-    [u64; 1],
-    QuadPart QuadPart_mut: LONGLONG,
-    u u_mut: LARGE_INTEGER_u,
-}}
+pub use shared::ntdef::LARGE_INTEGER;
 pub type PLARGE_INTEGER = *mut LARGE_INTEGER;
-STRUCT!{struct ULARGE_INTEGER_u {
-    LowPart: DWORD,
-    HighPart: LONG,
-}}
-UNION!{union ULARGE_INTEGER {
-    [u64; 1],
-    QuadPart QuadPart_mut: ULONGLONG,
-    u u_mut: ULARGE_INTEGER_u,
-}}
+pub use shared::ntdef::ULARGE_INTEGER;
 pub type PULARGE_INTEGER = *mut ULARGE_INTEGER;
 pub type RTL_REFERENCE_COUNT = LONG_PTR;
 pub type PRTL_REFERENCE_COUNT = *mut LONG_PTR;
@@ -6972,7 +6956,7 @@ STRUCT!{struct _IMAGE_RUNTIME_FUNCTION_ENTRY {
     EndAddress: DWORD,
     u: IMAGE_RUNTIME_FUNCTION_ENTRY_u,
 }}
-type _PIMAGE_RUNTIME_FUNCTION_ENTRY = *mut _IMAGE_RUNTIME_FUNCTION_ENTRY;
+pub type _PIMAGE_RUNTIME_FUNCTION_ENTRY = *mut _IMAGE_RUNTIME_FUNCTION_ENTRY;
 pub type IMAGE_IA64_RUNTIME_FUNCTION_ENTRY = _IMAGE_RUNTIME_FUNCTION_ENTRY;
 pub type PIMAGE_IA64_RUNTIME_FUNCTION_ENTRY = _PIMAGE_RUNTIME_FUNCTION_ENTRY;
 #[cfg(target_arch = "aarch64")]

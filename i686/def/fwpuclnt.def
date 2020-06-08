@@ -89,9 +89,13 @@ FwpmNetEventEnum0@20
 FwpmNetEventEnum1@20
 FwpmNetEventEnum2@20
 FwpmNetEventEnum3@20
+FwpmNetEventEnum4@20
+FwpmNetEventEnum5@20
 FwpmNetEventSubscribe0@20
 FwpmNetEventSubscribe1@20
 FwpmNetEventSubscribe2@20
+FwpmNetEventSubscribe3@20
+FwpmNetEventSubscribe4@20
 FwpmNetEventSubscriptionsGet0@12
 FwpmNetEventUnsubscribe0@8
 FwpmNetEventsGetSecurityInfo0@28
@@ -202,10 +206,10 @@ IPsecKeyModuleUpdateAcquire0@20
 IPsecKeyNotification0@12
 IPsecSaContextAddInbound0@16
 IPsecSaContextAddInbound1@16
-IPsecSaContextAddInboundAndTrackConnection@24
+IPsecSaContextAddInboundAndTrackConnection@28
 IPsecSaContextAddOutbound0@16
 IPsecSaContextAddOutbound1@16
-IPsecSaContextAddOutboundAndTrackConnection@24
+IPsecSaContextAddOutboundAndTrackConnection@28
 IPsecSaContextCreate0@16
 IPsecSaContextCreate1@20
 IPsecSaContextCreateEnumHandle0@12

@@ -1,0 +1,11 @@
+LIBRARY d3d11.dll
+EXPORTS
+CreateDirect3D11DeviceFromDXGIDevice@8
+CreateDirect3D11SurfaceFromDXGISurface@8
+D3D11CoreCreateDevice@40
+D3D11CoreCreateLayeredDevice@20
+D3D11CoreGetLayeredDeviceSize@8
+D3D11CoreRegisterLayers@8
+D3D11CreateDevice@40
+D3D11CreateDeviceAndSwapChain@48
+D3D11On12CreateDevice@40

@@ -1,0 +1,26 @@
+LIBRARY VmSavedStateDumpProvider.dll
+EXPORTS
+ApplyGuestMemoryFix
+ApplyPendingSavedStateFileReplayLog
+ForceArchitecture
+ForcePagingMode
+GetArchitecture
+GetGuestPhysicalMemoryChunks
+GetGuestRawSavedMemorySize
+GetPagingMode
+GetRegisterValue
+GetVpCount
+GetWindowsCrashDumpHeader
+GuestPhysicalAddressToRawSavedMemoryOffset
+GuestVirtualAddressToPhysicalAddress
+InKernelSpace
+LoadSavedStateFile
+LoadSavedStateFiles
+LocateSavedStateFiles
+ReadGuestPhysicalAddress
+ReadGuestRawSavedMemory
+ReleaseSavedStateFiles
+SetDebugVerboseHandler
+SetErrorVerboseHandler
+SetInfoVerboseHandler
+WriteWindowsCrashDumpFile

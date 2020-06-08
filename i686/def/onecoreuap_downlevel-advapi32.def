@@ -265,8 +265,6 @@ GetTraceLoggerHandle@4
 GetUserNameA@8
 GetUserNameW@8
 GetWindowsAccountDomainSid@12
-I_ScSetServiceBitsA@20
-I_ScSetServiceBitsW@20
 ImpersonateAnonymousToken@4
 ImpersonateLoggedOnUser@4
 ImpersonateNamedPipeClient@4
@@ -616,5 +614,4 @@ TreeResetNamedSecurityInfoW@44
 UnregisterTraceGuids@8
 UpdateTraceA@16
 UpdateTraceW@16
-WaitServiceState@16
 WriteEncryptedFileRaw@12

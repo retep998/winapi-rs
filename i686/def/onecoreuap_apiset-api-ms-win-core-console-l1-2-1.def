@@ -1,0 +1,5 @@
+LIBRARY api-ms-win-core-console-l1-2-1.dll
+EXPORTS
+ClosePseudoConsole@4
+CreatePseudoConsole@20
+ResizePseudoConsole@8

@@ -1,4 +1,9 @@
 LIBRARY api-ms-win-core-sysinfo-l1-2-0.dll
 EXPORTS
+EnumSystemFirmwareTables@12
 GetNativeSystemInfo@4
+GetProductInfo@20
+GetSystemFirmwareTable@16
 GetSystemTimePreciseAsFileTime@4
+SetSystemTime@4
+VerSetConditionMask@16

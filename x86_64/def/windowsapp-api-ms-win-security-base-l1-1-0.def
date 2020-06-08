@@ -15,9 +15,11 @@ DeleteAce
 DuplicateToken
 DuplicateTokenEx
 EqualDomainSid
+EqualSid
 FreeSid
 GetAce
 GetAclInformation
+GetFileSecurityW
 GetKernelObjectSecurity
 GetLengthSid
 GetSecurityDescriptorControl
@@ -44,6 +46,7 @@ IsWellKnownSid
 MakeAbsoluteSD
 MakeSelfRelativeSD
 RevertToSelf
+SetFileSecurityW
 SetKernelObjectSecurity
 SetSecurityDescriptorControl
 SetSecurityDescriptorDacl

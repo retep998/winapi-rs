@@ -5,12 +5,14 @@ ApplySnapshotVhdSet@12
 AttachVirtualDisk@24
 BreakMirrorVirtualDisk@4
 CompactVirtualDisk@16
+CompleteForkVirtualDisk@4
 CreateVirtualDisk@36
 DeleteSnapshotVhdSet@12
 DeleteVirtualDiskMetadata@8
 DetachVirtualDisk@12
 EnumerateVirtualDiskMetadata@12
 ExpandVirtualDisk@16
+ForkVirtualDisk@16
 GetAllAttachedVirtualDiskPhysicalPaths@8
 GetStorageDependencyInformation@20
 GetVirtualDiskInformation@16

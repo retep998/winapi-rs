@@ -1,0 +1,6 @@
+LIBRARY api-ms-win-service-winsvc-l1-1-0.dll
+EXPORTS
+OpenSCManagerA@12
+RegisterServiceCtrlHandlerA@8
+RegisterServiceCtrlHandlerExA@12
+RegisterServiceCtrlHandlerW@8

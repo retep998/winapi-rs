@@ -5,3 +5,4 @@ RaiseException@16
 SetErrorMode@4
 SetLastError@4
 SetUnhandledExceptionFilter@4
+UnhandledExceptionFilter@4

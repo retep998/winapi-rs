@@ -12,6 +12,7 @@ GetAppContainerRegistryHandleFromName@20 @114
 GetAppContainerRegistryPath@8 @112
 GetAppContainerSpecificSubPath@16 @113
 GetBasicProfileFolderPath@16 @104
+GetBasicProfileFolderPathAlloc@12 @117
 GetBasicProfileFolderPathEx@20 @116
 GetNextAppContainerSid@8 @109
 LoadProfileBasic@8 @105

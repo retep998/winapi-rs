@@ -27,7 +27,6 @@ PowerCloseLimitsMitigation@4
 PowerCloseLimitsPolicy@4
 PowerCreatePossibleSetting@16
 PowerCreateSetting@12
-PowerCustomizePlatformPowerSettings@0
 PowerDebugDifPowerPolicies@16
 PowerDebugDifSystemPowerPolicies@16
 PowerDebugDumpPowerPolicy@12
@@ -39,7 +38,6 @@ PowerDeterminePlatformRole@0
 PowerDeterminePlatformRoleEx@4
 PowerDuplicateScheme@12
 PowerEnumerate@28
-PowerGeneralizePlatformSettings@0
 PowerGetActiveScheme@8
 PowerImportPowerScheme@12
 PowerIsSettingRangeDefined@8
@@ -65,6 +63,7 @@ PowerReadValueMax@16
 PowerReadValueMin@16
 PowerReadValueUnitsSpecifier@20
 PowerRegisterEnvironmentalMonitor@8
+PowerRegisterForEffectivePowerModeNotifications@16
 PowerRegisterLimitsMitigation@8
 PowerRegisterLimitsPolicy@8
 PowerRegisterSuspendResumeNotification@12
@@ -80,6 +79,7 @@ PowerSettingAccessCheck@8
 PowerSettingAccessCheckEx@12
 PowerSettingRegisterNotification@16
 PowerSettingUnregisterNotification@4
+PowerUnregisterFromEffectivePowerModeNotifications@4
 PowerUnregisterSuspendResumeNotification@4
 PowerUpdateEnvironmentalMonitorState@12
 PowerUpdateEnvironmentalMonitorThresholds@12

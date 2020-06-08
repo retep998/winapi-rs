@@ -5,3 +5,4 @@ K32GetModuleBaseNameW@16
 K32GetModuleFileNameExW@16
 K32GetModuleInformation@16
 K32GetProcessMemoryInfo@12
+QueryFullProcessImageNameW@16
