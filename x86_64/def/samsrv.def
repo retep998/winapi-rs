@@ -133,6 +133,7 @@ SampCompareDisplayStrings
 SampComputePasswordExpired
 SampConnect
 SampConvertUiListToApiList
+SampCopyUserSupplementalCredentialsForDCPromo
 SampCreateAccountContext2
 SampCreateAliasInDomain
 SampCreateContextEx
@@ -242,6 +243,7 @@ SampPasswordChangeNotifyWorker
 SampPositionOfHighestBit
 SampQueryCapabilities
 SampQueryInformationUserInternal
+SampQueryUserSupplementalCredentialsRegistry
 SampReadExtendedAttributes
 SampRecordSystemSchemaVerisonInRegistry
 SampReferenceContext
@@ -305,6 +307,7 @@ SamrEnumerateUsersInDomain
 SamrEnumerateUsersInDomain2
 SamrGetAliasMembership
 SamrGetGroupsForUser
+SamrGetMembersInAlias
 SamrLookupIdsInDomain
 SamrLookupNamesInDomain
 SamrLookupNamesInDomain2

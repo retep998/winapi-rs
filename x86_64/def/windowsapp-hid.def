@@ -1,0 +1,8 @@
+LIBRARY HID.DLL
+EXPORTS
+HidP_GetScaledUsageValue
+HidP_GetSpecificValueCaps
+HidP_GetUsageValue
+HidP_GetUsageValueArray
+HidP_GetUsages
+HidP_MaxUsageListLength

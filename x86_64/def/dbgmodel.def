@@ -1,0 +1,3 @@
+LIBRARY dbgmodel.dll
+EXPORTS
+CreateDataModelManager

@@ -614,6 +614,28 @@ fn shared_ifdef() {
     use winapi::shared::ifdef::*;
     assert_eq!(size_of::<NET_LUID_LH>(), 8);
     assert_eq!(align_of::<NET_LUID_LH>(), 8);
+    assert_eq!(size_of::<NET_IF_RCV_ADDRESS_LH>(), 8);
+    assert_eq!(align_of::<NET_IF_RCV_ADDRESS_LH>(), 4);
+    assert_eq!(size_of::<NET_IF_ALIAS_LH>(), 4);
+    assert_eq!(align_of::<NET_IF_ALIAS_LH>(), 2);
+    assert_eq!(size_of::<NET_PHYSICAL_LOCATION_LH>(), 12);
+    assert_eq!(align_of::<NET_PHYSICAL_LOCATION_LH>(), 4);
+    assert_eq!(size_of::<IF_COUNTED_STRING_LH>(), 516);
+    assert_eq!(align_of::<IF_COUNTED_STRING_LH>(), 2);
+    assert_eq!(size_of::<IF_PHYSICAL_ADDRESS_LH>(), 34);
+    assert_eq!(align_of::<IF_PHYSICAL_ADDRESS_LH>(), 2);
+    assert_eq!(size_of::<NDIS_INTERFACE_INFORMATION>(), 216);
+    assert_eq!(align_of::<NDIS_INTERFACE_INFORMATION>(), 8);
+}
+#[cfg(feature = "ifmib")] #[test]
+fn shared_ifmib() {
+    use winapi::shared::ifmib::*;
+    assert_eq!(size_of::<MIB_IFNUMBER>(), 4);
+    assert_eq!(align_of::<MIB_IFNUMBER>(), 4);
+    assert_eq!(size_of::<MIB_IFROW>(), 860);
+    assert_eq!(align_of::<MIB_IFROW>(), 4);
+    assert_eq!(size_of::<MIB_IFTABLE>(), 864);
+    assert_eq!(align_of::<MIB_IFTABLE>(), 4);
 }
 #[cfg(feature = "in6addr")] #[test]
 fn shared_in6addr() {
@@ -634,6 +656,100 @@ fn shared_inaddr() {
     assert_eq!(align_of::<in_addr_S_un>(), 4);
     assert_eq!(size_of::<in_addr>(), 4);
     assert_eq!(align_of::<in_addr>(), 4);
+}
+#[cfg(feature = "ipmib")] #[test]
+fn shared_ipmib() {
+    use winapi::shared::ipmib::*;
+    assert_eq!(size_of::<MIB_IPADDRROW_XP>(), 24);
+    assert_eq!(align_of::<MIB_IPADDRROW_XP>(), 4);
+    assert_eq!(size_of::<MIB_IPADDRROW_W2K>(), 24);
+    assert_eq!(align_of::<MIB_IPADDRROW_W2K>(), 4);
+    assert_eq!(size_of::<MIB_IPADDRTABLE>(), 28);
+    assert_eq!(align_of::<MIB_IPADDRTABLE>(), 4);
+    assert_eq!(size_of::<MIB_IPFORWARDNUMBER>(), 4);
+    assert_eq!(align_of::<MIB_IPFORWARDNUMBER>(), 4);
+    assert_eq!(size_of::<MIB_IPFORWARDROW>(), 56);
+    assert_eq!(align_of::<MIB_IPFORWARDROW>(), 4);
+    assert_eq!(size_of::<MIB_IPFORWARDTABLE>(), 60);
+    assert_eq!(align_of::<MIB_IPFORWARDTABLE>(), 4);
+    assert_eq!(size_of::<MIB_IPNETROW_LH>(), 24);
+    assert_eq!(align_of::<MIB_IPNETROW_LH>(), 4);
+    assert_eq!(size_of::<MIB_IPNETROW_W2K>(), 24);
+    assert_eq!(align_of::<MIB_IPNETROW_W2K>(), 4);
+    assert_eq!(size_of::<MIB_IPNETTABLE>(), 28);
+    assert_eq!(align_of::<MIB_IPNETTABLE>(), 4);
+    assert_eq!(size_of::<MIB_IPSTATS_LH>(), 92);
+    assert_eq!(align_of::<MIB_IPSTATS_LH>(), 4);
+    assert_eq!(size_of::<MIB_IPSTATS_W2K>(), 92);
+    assert_eq!(align_of::<MIB_IPSTATS_W2K>(), 4);
+    assert_eq!(size_of::<MIBICMPSTATS>(), 52);
+    assert_eq!(align_of::<MIBICMPSTATS>(), 4);
+    assert_eq!(size_of::<MIBICMPINFO>(), 104);
+    assert_eq!(align_of::<MIBICMPINFO>(), 4);
+    assert_eq!(size_of::<MIB_ICMP>(), 104);
+    assert_eq!(align_of::<MIB_ICMP>(), 4);
+    assert_eq!(size_of::<MIBICMPSTATS_EX_XPSP1>(), 1032);
+    assert_eq!(align_of::<MIBICMPSTATS_EX_XPSP1>(), 4);
+    assert_eq!(size_of::<MIB_ICMP_EX_XPSP1>(), 2064);
+    assert_eq!(align_of::<MIB_ICMP_EX_XPSP1>(), 4);
+    assert_eq!(size_of::<MIB_IPMCAST_OIF_XP>(), 16);
+    assert_eq!(align_of::<MIB_IPMCAST_OIF_XP>(), 4);
+    assert_eq!(size_of::<MIB_IPMCAST_OIF_W2K>(), 16);
+    assert_eq!(align_of::<MIB_IPMCAST_OIF_W2K>(), 4);
+    assert_eq!(size_of::<MIB_IPMCAST_MFE>(), 76);
+    assert_eq!(align_of::<MIB_IPMCAST_MFE>(), 4);
+    assert_eq!(size_of::<MIB_MFE_TABLE>(), 80);
+    assert_eq!(align_of::<MIB_MFE_TABLE>(), 4);
+    assert_eq!(size_of::<MIB_IPMCAST_OIF_STATS_LH>(), 28);
+    assert_eq!(align_of::<MIB_IPMCAST_OIF_STATS_LH>(), 4);
+    assert_eq!(size_of::<MIB_IPMCAST_OIF_STATS_W2K>(), 28);
+    assert_eq!(align_of::<MIB_IPMCAST_OIF_STATS_W2K>(), 4);
+    assert_eq!(size_of::<MIB_IPMCAST_MFE_STATS>(), 92);
+    assert_eq!(align_of::<MIB_IPMCAST_MFE_STATS>(), 4);
+    assert_eq!(size_of::<MIB_MFE_STATS_TABLE>(), 96);
+    assert_eq!(align_of::<MIB_MFE_STATS_TABLE>(), 4);
+    assert_eq!(size_of::<MIB_IPMCAST_MFE_STATS_EX_XP>(), 112);
+    assert_eq!(align_of::<MIB_IPMCAST_MFE_STATS_EX_XP>(), 4);
+    assert_eq!(size_of::<MIB_MFE_STATS_TABLE_EX_XP>(), 8);
+    assert_eq!(align_of::<MIB_MFE_STATS_TABLE_EX_XP>(), 4);
+    assert_eq!(size_of::<MIB_IPMCAST_GLOBAL>(), 4);
+    assert_eq!(align_of::<MIB_IPMCAST_GLOBAL>(), 4);
+    assert_eq!(size_of::<MIB_IPMCAST_IF_ENTRY>(), 24);
+    assert_eq!(align_of::<MIB_IPMCAST_IF_ENTRY>(), 4);
+    assert_eq!(size_of::<MIB_IPMCAST_IF_TABLE>(), 28);
+    assert_eq!(align_of::<MIB_IPMCAST_IF_TABLE>(), 4);
+}
+#[cfg(feature = "iprtrmib")] #[test]
+fn shared_iprtrmib() {
+    use winapi::shared::iprtrmib::*;
+    assert_eq!(size_of::<MIB_OPAQUE_QUERY>(), 8);
+    assert_eq!(align_of::<MIB_OPAQUE_QUERY>(), 4);
+    assert_eq!(size_of::<TCPIP_OWNER_MODULE_BASIC_INFO>(), 8);
+    assert_eq!(align_of::<TCPIP_OWNER_MODULE_BASIC_INFO>(), 4);
+    assert_eq!(size_of::<MIB_IPMCAST_BOUNDARY>(), 16);
+    assert_eq!(align_of::<MIB_IPMCAST_BOUNDARY>(), 4);
+    assert_eq!(size_of::<MIB_IPMCAST_BOUNDARY_TABLE>(), 20);
+    assert_eq!(align_of::<MIB_IPMCAST_BOUNDARY_TABLE>(), 4);
+    assert_eq!(size_of::<MIB_BOUNDARYROW>(), 8);
+    assert_eq!(align_of::<MIB_BOUNDARYROW>(), 4);
+    assert_eq!(size_of::<MIB_MCAST_LIMIT_ROW>(), 8);
+    assert_eq!(align_of::<MIB_MCAST_LIMIT_ROW>(), 4);
+    assert_eq!(size_of::<MIB_IPMCAST_SCOPE>(), 524);
+    assert_eq!(align_of::<MIB_IPMCAST_SCOPE>(), 4);
+    assert_eq!(size_of::<MIB_IPDESTROW>(), 64);
+    assert_eq!(align_of::<MIB_IPDESTROW>(), 4);
+    assert_eq!(size_of::<MIB_IPDESTTABLE>(), 68);
+    assert_eq!(align_of::<MIB_IPDESTTABLE>(), 4);
+    assert_eq!(size_of::<MIB_BEST_IF>(), 8);
+    assert_eq!(align_of::<MIB_BEST_IF>(), 4);
+    assert_eq!(size_of::<MIB_PROXYARP>(), 12);
+    assert_eq!(align_of::<MIB_PROXYARP>(), 4);
+    assert_eq!(size_of::<MIB_IFSTATUS>(), 20);
+    assert_eq!(align_of::<MIB_IFSTATUS>(), 4);
+    assert_eq!(size_of::<MIB_ROUTESTATE>(), 4);
+    assert_eq!(align_of::<MIB_ROUTESTATE>(), 4);
+    assert_eq!(size_of::<MIB_OPAQUE_INFO>(), 16);
+    assert_eq!(align_of::<MIB_OPAQUE_INFO>(), 8);
 }
 #[cfg(feature = "ktmtypes")] #[test]
 fn shared_ktmtypes() {
@@ -720,6 +836,74 @@ fn shared_mstcpip() {
     assert_eq!(align_of::<SOCKET_SECURITY_QUERY_INFO_IPSEC2>(), 8);
     assert_eq!(size_of::<RSS_SCALABILITY_INFO>(), 1);
     assert_eq!(align_of::<RSS_SCALABILITY_INFO>(), 1);
+}
+#[cfg(feature = "netioapi")] #[test]
+fn shared_netioapi() {
+    use winapi::shared::netioapi::*;
+    assert_eq!(size_of::<MIB_IF_ROW2>(), 1352);
+    assert_eq!(align_of::<MIB_IF_ROW2>(), 8);
+    assert_eq!(size_of::<MIB_IF_TABLE2>(), 1360);
+    assert_eq!(align_of::<MIB_IF_TABLE2>(), 8);
+    assert_eq!(size_of::<MIB_IPINTERFACE_ROW>(), 168);
+    assert_eq!(align_of::<MIB_IPINTERFACE_ROW>(), 8);
+    assert_eq!(size_of::<MIB_IPINTERFACE_TABLE>(), 176);
+    assert_eq!(align_of::<MIB_IPINTERFACE_TABLE>(), 8);
+    assert_eq!(size_of::<MIB_IFSTACK_ROW>(), 8);
+    assert_eq!(align_of::<MIB_IFSTACK_ROW>(), 4);
+    assert_eq!(size_of::<MIB_INVERTEDIFSTACK_ROW>(), 8);
+    assert_eq!(align_of::<MIB_INVERTEDIFSTACK_ROW>(), 4);
+    assert_eq!(size_of::<MIB_IFSTACK_TABLE>(), 12);
+    assert_eq!(align_of::<MIB_IFSTACK_TABLE>(), 4);
+    assert_eq!(size_of::<MIB_INVERTEDIFSTACK_TABLE>(), 12);
+    assert_eq!(align_of::<MIB_INVERTEDIFSTACK_TABLE>(), 4);
+    assert_eq!(size_of::<MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES>(), 48);
+    assert_eq!(align_of::<MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES>(), 8);
+    assert_eq!(size_of::<MIB_UNICASTIPADDRESS_ROW>(), 80);
+    assert_eq!(align_of::<MIB_UNICASTIPADDRESS_ROW>(), 8);
+    assert_eq!(size_of::<MIB_UNICASTIPADDRESS_TABLE>(), 88);
+    assert_eq!(align_of::<MIB_UNICASTIPADDRESS_TABLE>(), 8);
+    assert_eq!(size_of::<MIB_ANYCASTIPADDRESS_ROW>(), 48);
+    assert_eq!(align_of::<MIB_ANYCASTIPADDRESS_ROW>(), 8);
+    assert_eq!(size_of::<MIB_ANYCASTIPADDRESS_TABLE>(), 56);
+    assert_eq!(align_of::<MIB_ANYCASTIPADDRESS_TABLE>(), 8);
+    assert_eq!(size_of::<MIB_MULTICASTIPADDRESS_ROW>(), 48);
+    assert_eq!(align_of::<MIB_MULTICASTIPADDRESS_ROW>(), 8);
+    assert_eq!(size_of::<MIB_MULTICASTIPADDRESS_TABLE>(), 56);
+    assert_eq!(align_of::<MIB_MULTICASTIPADDRESS_TABLE>(), 8);
+    assert_eq!(size_of::<IP_ADDRESS_PREFIX>(), 32);
+    assert_eq!(align_of::<IP_ADDRESS_PREFIX>(), 4);
+    assert_eq!(size_of::<MIB_IPFORWARD_ROW2>(), 104);
+    assert_eq!(align_of::<MIB_IPFORWARD_ROW2>(), 8);
+    assert_eq!(size_of::<MIB_IPFORWARD_TABLE2>(), 112);
+    assert_eq!(align_of::<MIB_IPFORWARD_TABLE2>(), 8);
+    assert_eq!(size_of::<MIB_IPPATH_ROW>(), 136);
+    assert_eq!(align_of::<MIB_IPPATH_ROW>(), 8);
+    assert_eq!(size_of::<MIB_IPPATH_TABLE>(), 144);
+    assert_eq!(align_of::<MIB_IPPATH_TABLE>(), 8);
+    assert_eq!(size_of::<MIB_IPNET_ROW2>(), 88);
+    assert_eq!(align_of::<MIB_IPNET_ROW2>(), 8);
+    assert_eq!(size_of::<MIB_IPNET_TABLE2>(), 96);
+    assert_eq!(align_of::<MIB_IPNET_TABLE2>(), 8);
+    assert_eq!(size_of::<DNS_SETTINGS>(), 32);
+    assert_eq!(align_of::<DNS_SETTINGS>(), 8);
+    assert_eq!(size_of::<DNS_INTERFACE_SETTINGS>(), 48);
+    assert_eq!(align_of::<DNS_INTERFACE_SETTINGS>(), 8);
+}
+#[cfg(feature = "nldef")] #[test]
+fn shared_nldef() {
+    use winapi::shared::nldef::*;
+    assert_eq!(size_of::<NL_INTERFACE_OFFLOAD_ROD>(), 1);
+    assert_eq!(align_of::<NL_INTERFACE_OFFLOAD_ROD>(), 1);
+    assert_eq!(size_of::<NL_PATH_BANDWIDTH_ROD>(), 24);
+    assert_eq!(align_of::<NL_PATH_BANDWIDTH_ROD>(), 8);
+    assert_eq!(size_of::<NL_BANDWIDTH_INFORMATION>(), 24);
+    assert_eq!(align_of::<NL_BANDWIDTH_INFORMATION>(), 8);
+}
+#[cfg(feature = "ntddndis")] #[test]
+fn shared_ntddndis() {
+    use winapi::shared::ntddndis::*;
+    assert_eq!(size_of::<NDIS_OBJECT_HEADER>(), 4);
+    assert_eq!(align_of::<NDIS_OBJECT_HEADER>(), 2);
 }
 #[cfg(feature = "ntddscsi")] #[test]
 fn shared_ntddscsi() {
@@ -832,10 +1016,14 @@ fn shared_ntdef() {
     assert_eq!(align_of::<LARGE_INTEGER>(), 8);
     assert_eq!(size_of::<LARGE_INTEGER_s>(), 8);
     assert_eq!(align_of::<LARGE_INTEGER_s>(), 4);
+    assert_eq!(size_of::<LARGE_INTEGER_u>(), 8);
+    assert_eq!(align_of::<LARGE_INTEGER_u>(), 4);
     assert_eq!(size_of::<ULARGE_INTEGER>(), 8);
     assert_eq!(align_of::<ULARGE_INTEGER>(), 8);
     assert_eq!(size_of::<ULARGE_INTEGER_s>(), 8);
     assert_eq!(align_of::<ULARGE_INTEGER_s>(), 4);
+    assert_eq!(size_of::<ULARGE_INTEGER_u>(), 8);
+    assert_eq!(align_of::<ULARGE_INTEGER_u>(), 4);
     assert_eq!(size_of::<LUID>(), 8);
     assert_eq!(align_of::<LUID>(), 4);
     assert_eq!(size_of::<STRING>(), 8);
@@ -1105,6 +1293,88 @@ fn shared_sspi() {
     assert_eq!(size_of::<SEC_WINNT_CREDUI_CONTEXT>(), 24);
     assert_eq!(align_of::<SEC_WINNT_CREDUI_CONTEXT>(), 4);
 }
+#[cfg(feature = "tcpestats")] #[test]
+fn shared_tcpestats() {
+    use winapi::shared::tcpestats::*;
+    assert_eq!(size_of::<TCP_ESTATS_SYN_OPTS_ROS_v0>(), 12);
+    assert_eq!(align_of::<TCP_ESTATS_SYN_OPTS_ROS_v0>(), 4);
+    assert_eq!(size_of::<TCP_ESTATS_DATA_ROD_v0>(), 96);
+    assert_eq!(align_of::<TCP_ESTATS_DATA_ROD_v0>(), 8);
+    assert_eq!(size_of::<TCP_ESTATS_DATA_RW_v0>(), 1);
+    assert_eq!(align_of::<TCP_ESTATS_DATA_RW_v0>(), 1);
+    assert_eq!(size_of::<TCP_ESTATS_SND_CONG_ROD_v0>(), 72);
+    assert_eq!(align_of::<TCP_ESTATS_SND_CONG_ROD_v0>(), 4);
+    assert_eq!(size_of::<TCP_ESTATS_SND_CONG_ROS_v0>(), 4);
+    assert_eq!(align_of::<TCP_ESTATS_SND_CONG_ROS_v0>(), 4);
+    assert_eq!(size_of::<TCP_ESTATS_SND_CONG_RW_v0>(), 1);
+    assert_eq!(align_of::<TCP_ESTATS_SND_CONG_RW_v0>(), 1);
+    assert_eq!(size_of::<TCP_ESTATS_PATH_ROD_v0>(), 160);
+    assert_eq!(align_of::<TCP_ESTATS_PATH_ROD_v0>(), 4);
+    assert_eq!(size_of::<TCP_ESTATS_PATH_RW_v0>(), 1);
+    assert_eq!(align_of::<TCP_ESTATS_PATH_RW_v0>(), 1);
+    assert_eq!(size_of::<TCP_ESTATS_SEND_BUFF_ROD_v0>(), 16);
+    assert_eq!(align_of::<TCP_ESTATS_SEND_BUFF_ROD_v0>(), 4);
+    assert_eq!(size_of::<TCP_ESTATS_SEND_BUFF_RW_v0>(), 1);
+    assert_eq!(align_of::<TCP_ESTATS_SEND_BUFF_RW_v0>(), 1);
+    assert_eq!(size_of::<TCP_ESTATS_REC_ROD_v0>(), 56);
+    assert_eq!(align_of::<TCP_ESTATS_REC_ROD_v0>(), 4);
+    assert_eq!(size_of::<TCP_ESTATS_REC_RW_v0>(), 1);
+    assert_eq!(align_of::<TCP_ESTATS_REC_RW_v0>(), 1);
+    assert_eq!(size_of::<TCP_ESTATS_OBS_REC_ROD_v0>(), 16);
+    assert_eq!(align_of::<TCP_ESTATS_OBS_REC_ROD_v0>(), 4);
+    assert_eq!(size_of::<TCP_ESTATS_BANDWIDTH_RW_v0>(), 8);
+    assert_eq!(align_of::<TCP_ESTATS_BANDWIDTH_RW_v0>(), 4);
+    assert_eq!(size_of::<TCP_ESTATS_BANDWIDTH_ROD_v0>(), 40);
+    assert_eq!(align_of::<TCP_ESTATS_BANDWIDTH_ROD_v0>(), 8);
+    assert_eq!(size_of::<TCP_ESTATS_FINE_RTT_RW_v0>(), 1);
+    assert_eq!(align_of::<TCP_ESTATS_FINE_RTT_RW_v0>(), 1);
+    assert_eq!(size_of::<TCP_ESTATS_FINE_RTT_ROD_v0>(), 16);
+    assert_eq!(align_of::<TCP_ESTATS_FINE_RTT_ROD_v0>(), 4);
+}
+#[cfg(feature = "tcpmib")] #[test]
+fn shared_tcpmib() {
+    use winapi::shared::tcpmib::*;
+    assert_eq!(size_of::<MIB_TCPROW_LH>(), 20);
+    assert_eq!(align_of::<MIB_TCPROW_LH>(), 4);
+    assert_eq!(size_of::<MIB_TCPROW_W2K>(), 20);
+    assert_eq!(align_of::<MIB_TCPROW_W2K>(), 4);
+    assert_eq!(size_of::<MIB_TCPTABLE>(), 24);
+    assert_eq!(align_of::<MIB_TCPTABLE>(), 4);
+    assert_eq!(size_of::<MIB_TCPROW2>(), 28);
+    assert_eq!(align_of::<MIB_TCPROW2>(), 4);
+    assert_eq!(size_of::<MIB_TCPTABLE2>(), 32);
+    assert_eq!(align_of::<MIB_TCPTABLE2>(), 4);
+    assert_eq!(size_of::<MIB_TCPROW_OWNER_PID>(), 24);
+    assert_eq!(align_of::<MIB_TCPROW_OWNER_PID>(), 4);
+    assert_eq!(size_of::<MIB_TCPTABLE_OWNER_PID>(), 28);
+    assert_eq!(align_of::<MIB_TCPTABLE_OWNER_PID>(), 4);
+    assert_eq!(size_of::<MIB_TCPROW_OWNER_MODULE>(), 160);
+    assert_eq!(align_of::<MIB_TCPROW_OWNER_MODULE>(), 8);
+    assert_eq!(size_of::<MIB_TCPTABLE_OWNER_MODULE>(), 168);
+    assert_eq!(align_of::<MIB_TCPTABLE_OWNER_MODULE>(), 8);
+    assert_eq!(size_of::<MIB_TCP6ROW>(), 52);
+    assert_eq!(align_of::<MIB_TCP6ROW>(), 4);
+    assert_eq!(size_of::<MIB_TCP6TABLE>(), 56);
+    assert_eq!(align_of::<MIB_TCP6TABLE>(), 4);
+    assert_eq!(size_of::<MIB_TCP6ROW2>(), 60);
+    assert_eq!(align_of::<MIB_TCP6ROW2>(), 4);
+    assert_eq!(size_of::<MIB_TCP6TABLE2>(), 64);
+    assert_eq!(align_of::<MIB_TCP6TABLE2>(), 4);
+    assert_eq!(size_of::<MIB_TCP6ROW_OWNER_PID>(), 56);
+    assert_eq!(align_of::<MIB_TCP6ROW_OWNER_PID>(), 4);
+    assert_eq!(size_of::<MIB_TCP6TABLE_OWNER_PID>(), 60);
+    assert_eq!(align_of::<MIB_TCP6TABLE_OWNER_PID>(), 4);
+    assert_eq!(size_of::<MIB_TCP6ROW_OWNER_MODULE>(), 192);
+    assert_eq!(align_of::<MIB_TCP6ROW_OWNER_MODULE>(), 8);
+    assert_eq!(size_of::<MIB_TCP6TABLE_OWNER_MODULE>(), 200);
+    assert_eq!(align_of::<MIB_TCP6TABLE_OWNER_MODULE>(), 8);
+    assert_eq!(size_of::<MIB_TCPSTATS_LH>(), 60);
+    assert_eq!(align_of::<MIB_TCPSTATS_LH>(), 4);
+    assert_eq!(size_of::<MIB_TCPSTATS_W2K>(), 60);
+    assert_eq!(align_of::<MIB_TCPSTATS_W2K>(), 4);
+    assert_eq!(size_of::<MIB_TCPSTATS2>(), 72);
+    assert_eq!(align_of::<MIB_TCPSTATS2>(), 8);
+}
 #[cfg(feature = "transportsettingcommon")] #[test]
 fn shared_transportsettingcommon() {
     use winapi::shared::transportsettingcommon::*;
@@ -1116,6 +1386,38 @@ fn shared_tvout() {
     use winapi::shared::tvout::*;
     assert_eq!(size_of::<VIDEOPARAMETERS>(), 356);
     assert_eq!(align_of::<VIDEOPARAMETERS>(), 4);
+}
+#[cfg(feature = "udpmib")] #[test]
+fn shared_udpmib() {
+    use winapi::shared::udpmib::*;
+    assert_eq!(size_of::<MIB_UDPROW>(), 8);
+    assert_eq!(align_of::<MIB_UDPROW>(), 4);
+    assert_eq!(size_of::<MIB_UDPTABLE>(), 12);
+    assert_eq!(align_of::<MIB_UDPTABLE>(), 4);
+    assert_eq!(size_of::<MIB_UDPROW_OWNER_PID>(), 12);
+    assert_eq!(align_of::<MIB_UDPROW_OWNER_PID>(), 4);
+    assert_eq!(size_of::<MIB_UDPTABLE_OWNER_PID>(), 16);
+    assert_eq!(align_of::<MIB_UDPTABLE_OWNER_PID>(), 4);
+    assert_eq!(size_of::<MIB_UDPROW_OWNER_MODULE>(), 160);
+    assert_eq!(align_of::<MIB_UDPROW_OWNER_MODULE>(), 8);
+    assert_eq!(size_of::<MIB_UDPTABLE_OWNER_MODULE>(), 168);
+    assert_eq!(align_of::<MIB_UDPTABLE_OWNER_MODULE>(), 8);
+    assert_eq!(size_of::<MIB_UDP6ROW>(), 24);
+    assert_eq!(align_of::<MIB_UDP6ROW>(), 4);
+    assert_eq!(size_of::<MIB_UDP6TABLE>(), 28);
+    assert_eq!(align_of::<MIB_UDP6TABLE>(), 4);
+    assert_eq!(size_of::<MIB_UDP6ROW_OWNER_PID>(), 28);
+    assert_eq!(align_of::<MIB_UDP6ROW_OWNER_PID>(), 4);
+    assert_eq!(size_of::<MIB_UDP6TABLE_OWNER_PID>(), 32);
+    assert_eq!(align_of::<MIB_UDP6TABLE_OWNER_PID>(), 4);
+    assert_eq!(size_of::<MIB_UDP6ROW_OWNER_MODULE>(), 176);
+    assert_eq!(align_of::<MIB_UDP6ROW_OWNER_MODULE>(), 8);
+    assert_eq!(size_of::<MIB_UDP6TABLE_OWNER_MODULE>(), 184);
+    assert_eq!(align_of::<MIB_UDP6TABLE_OWNER_MODULE>(), 8);
+    assert_eq!(size_of::<MIB_UDPSTATS>(), 20);
+    assert_eq!(align_of::<MIB_UDPSTATS>(), 4);
+    assert_eq!(size_of::<MIB_UDPSTATS2>(), 32);
+    assert_eq!(align_of::<MIB_UDPSTATS2>(), 8);
 }
 #[cfg(feature = "usb")] #[test]
 fn shared_usb() {
@@ -1321,6 +1623,410 @@ fn shared_windef() {
     assert_eq!(size_of::<POINTS>(), 4);
     assert_eq!(align_of::<POINTS>(), 2);
 }
+#[cfg(feature = "windot11")] #[test]
+fn shared_windot11() {
+    use winapi::shared::windot11::*;
+    assert_eq!(size_of::<DOT11_BSSID_LIST>(), 20);
+    assert_eq!(align_of::<DOT11_BSSID_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_RATE_SET>(), 132);
+    assert_eq!(align_of::<DOT11_RATE_SET>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_SESSION_INFO>(), 146);
+    assert_eq!(align_of::<DOT11_WFD_SESSION_INFO>(), 2);
+    assert_eq!(size_of::<DOT11_OFFLOAD_CAPABILITY>(), 28);
+    assert_eq!(align_of::<DOT11_OFFLOAD_CAPABILITY>(), 4);
+    assert_eq!(size_of::<DOT11_CURRENT_OFFLOAD_CAPABILITY>(), 8);
+    assert_eq!(align_of::<DOT11_CURRENT_OFFLOAD_CAPABILITY>(), 4);
+    assert_eq!(size_of::<DOT11_IV48_COUNTER>(), 8);
+    assert_eq!(align_of::<DOT11_IV48_COUNTER>(), 4);
+    assert_eq!(size_of::<DOT11_WEP_OFFLOAD>(), 208);
+    assert_eq!(align_of::<DOT11_WEP_OFFLOAD>(), 4);
+    assert_eq!(size_of::<DOT11_WEP_UPLOAD>(), 176);
+    assert_eq!(align_of::<DOT11_WEP_UPLOAD>(), 4);
+    assert_eq!(size_of::<DOT11_DEFAULT_WEP_OFFLOAD>(), 208);
+    assert_eq!(align_of::<DOT11_DEFAULT_WEP_OFFLOAD>(), 4);
+    assert_eq!(size_of::<DOT11_DEFAULT_WEP_UPLOAD>(), 176);
+    assert_eq!(align_of::<DOT11_DEFAULT_WEP_UPLOAD>(), 4);
+    assert_eq!(size_of::<DOT11_OPERATION_MODE_CAPABILITY>(), 24);
+    assert_eq!(align_of::<DOT11_OPERATION_MODE_CAPABILITY>(), 4);
+    assert_eq!(size_of::<DOT11_CURRENT_OPERATION_MODE>(), 8);
+    assert_eq!(align_of::<DOT11_CURRENT_OPERATION_MODE>(), 4);
+    assert_eq!(size_of::<DOT11_SCAN_REQUEST>(), 84);
+    assert_eq!(align_of::<DOT11_SCAN_REQUEST>(), 4);
+    assert_eq!(size_of::<DOT11_PHY_TYPE_INFO>(), 32);
+    assert_eq!(align_of::<DOT11_PHY_TYPE_INFO>(), 4);
+    assert_eq!(size_of::<DOT11_SCAN_REQUEST_V2>(), 60);
+    assert_eq!(align_of::<DOT11_SCAN_REQUEST_V2>(), 4);
+    assert_eq!(size_of::<DOT11_PHY_TYPE_LIST>(), 16);
+    assert_eq!(align_of::<DOT11_PHY_TYPE_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_BSS_DESCRIPTION>(), 48);
+    assert_eq!(align_of::<DOT11_BSS_DESCRIPTION>(), 8);
+    assert_eq!(size_of::<DOT11_JOIN_REQUEST>(), 192);
+    assert_eq!(align_of::<DOT11_JOIN_REQUEST>(), 8);
+    assert_eq!(size_of::<DOT11_START_REQUEST>(), 192);
+    assert_eq!(align_of::<DOT11_START_REQUEST>(), 8);
+    assert_eq!(size_of::<DOT11_UPDATE_IE>(), 12);
+    assert_eq!(align_of::<DOT11_UPDATE_IE>(), 4);
+    assert_eq!(size_of::<DOT11_RESET_REQUEST>(), 12);
+    assert_eq!(align_of::<DOT11_RESET_REQUEST>(), 4);
+    assert_eq!(size_of::<DOT11_OPTIONAL_CAPABILITY>(), 8);
+    assert_eq!(align_of::<DOT11_OPTIONAL_CAPABILITY>(), 4);
+    assert_eq!(size_of::<DOT11_CURRENT_OPTIONAL_CAPABILITY>(), 8);
+    assert_eq!(align_of::<DOT11_CURRENT_OPTIONAL_CAPABILITY>(), 4);
+    assert_eq!(size_of::<DOT11_POWER_MGMT_MODE>(), 16);
+    assert_eq!(align_of::<DOT11_POWER_MGMT_MODE>(), 4);
+    assert_eq!(size_of::<DOT11_COUNTERS_ENTRY>(), 52);
+    assert_eq!(align_of::<DOT11_COUNTERS_ENTRY>(), 4);
+    assert_eq!(size_of::<DOT11_SUPPORTED_PHY_TYPES>(), 12);
+    assert_eq!(align_of::<DOT11_SUPPORTED_PHY_TYPES>(), 4);
+    assert_eq!(size_of::<DOT11_SUPPORTED_POWER_LEVELS>(), 36);
+    assert_eq!(align_of::<DOT11_SUPPORTED_POWER_LEVELS>(), 4);
+    assert_eq!(size_of::<DOT11_REG_DOMAIN_VALUE>(), 8);
+    assert_eq!(align_of::<DOT11_REG_DOMAIN_VALUE>(), 4);
+    assert_eq!(size_of::<DOT11_REG_DOMAINS_SUPPORT_VALUE>(), 16);
+    assert_eq!(align_of::<DOT11_REG_DOMAINS_SUPPORT_VALUE>(), 4);
+    assert_eq!(size_of::<DOT11_SUPPORTED_ANTENNA>(), 8);
+    assert_eq!(align_of::<DOT11_SUPPORTED_ANTENNA>(), 4);
+    assert_eq!(size_of::<DOT11_SUPPORTED_ANTENNA_LIST>(), 16);
+    assert_eq!(align_of::<DOT11_SUPPORTED_ANTENNA_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_DIVERSITY_SELECTION_RX>(), 8);
+    assert_eq!(align_of::<DOT11_DIVERSITY_SELECTION_RX>(), 4);
+    assert_eq!(size_of::<DOT11_DIVERSITY_SELECTION_RX_LIST>(), 16);
+    assert_eq!(align_of::<DOT11_DIVERSITY_SELECTION_RX_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_SUPPORTED_DATA_RATES_VALUE>(), 16);
+    assert_eq!(align_of::<DOT11_SUPPORTED_DATA_RATES_VALUE>(), 1);
+    assert_eq!(size_of::<DOT11_SUPPORTED_DATA_RATES_VALUE_V2>(), 510);
+    assert_eq!(align_of::<DOT11_SUPPORTED_DATA_RATES_VALUE_V2>(), 1);
+    assert_eq!(size_of::<DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY>(), 16);
+    assert_eq!(align_of::<DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY>(), 4);
+    assert_eq!(size_of::<DOT11_MD_CAPABILITY_ENTRY_LIST>(), 24);
+    assert_eq!(align_of::<DOT11_MD_CAPABILITY_ENTRY_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_HOPPING_PATTERN_ENTRY>(), 8);
+    assert_eq!(align_of::<DOT11_HOPPING_PATTERN_ENTRY>(), 4);
+    assert_eq!(size_of::<DOT11_HOPPING_PATTERN_ENTRY_LIST>(), 16);
+    assert_eq!(align_of::<DOT11_HOPPING_PATTERN_ENTRY_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_WPA_TSC>(), 20);
+    assert_eq!(align_of::<DOT11_WPA_TSC>(), 4);
+    assert_eq!(size_of::<DOT11_RSSI_RANGE>(), 12);
+    assert_eq!(align_of::<DOT11_RSSI_RANGE>(), 4);
+    assert_eq!(size_of::<DOT11_NIC_SPECIFIC_EXTENSION>(), 12);
+    assert_eq!(align_of::<DOT11_NIC_SPECIFIC_EXTENSION>(), 4);
+    assert_eq!(size_of::<DOT11_AP_JOIN_REQUEST>(), 192);
+    assert_eq!(align_of::<DOT11_AP_JOIN_REQUEST>(), 8);
+    assert_eq!(size_of::<DOT11_RECV_SENSITIVITY>(), 12);
+    assert_eq!(align_of::<DOT11_RECV_SENSITIVITY>(), 4);
+    assert_eq!(size_of::<DOT11_RECV_SENSITIVITY_LIST>(), 24);
+    assert_eq!(align_of::<DOT11_RECV_SENSITIVITY_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_WME_AC_PARAMETERS>(), 6);
+    assert_eq!(align_of::<DOT11_WME_AC_PARAMETERS>(), 2);
+    assert_eq!(size_of::<DOT11_WME_AC_PARAMETERS_LIST>(), 16);
+    assert_eq!(align_of::<DOT11_WME_AC_PARAMETERS_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_WME_UPDATE_IE>(), 24);
+    assert_eq!(align_of::<DOT11_WME_UPDATE_IE>(), 4);
+    assert_eq!(size_of::<DOT11_QOS_TX_DURATION>(), 12);
+    assert_eq!(align_of::<DOT11_QOS_TX_DURATION>(), 4);
+    assert_eq!(size_of::<DOT11_QOS_TX_MEDIUM_TIME>(), 12);
+    assert_eq!(align_of::<DOT11_QOS_TX_MEDIUM_TIME>(), 4);
+    assert_eq!(size_of::<DOT11_SUPPORTED_OFDM_FREQUENCY>(), 4);
+    assert_eq!(align_of::<DOT11_SUPPORTED_OFDM_FREQUENCY>(), 4);
+    assert_eq!(size_of::<DOT11_SUPPORTED_OFDM_FREQUENCY_LIST>(), 12);
+    assert_eq!(align_of::<DOT11_SUPPORTED_OFDM_FREQUENCY_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_SUPPORTED_DSSS_CHANNEL>(), 4);
+    assert_eq!(align_of::<DOT11_SUPPORTED_DSSS_CHANNEL>(), 4);
+    assert_eq!(size_of::<DOT11_SUPPORTED_DSSS_CHANNEL_LIST>(), 12);
+    assert_eq!(align_of::<DOT11_SUPPORTED_DSSS_CHANNEL_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_BYTE_ARRAY>(), 16);
+    assert_eq!(align_of::<DOT11_BYTE_ARRAY>(), 4);
+    assert_eq!(size_of::<DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO>(), 12);
+    assert_eq!(align_of::<DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO>(), 4);
+    assert_eq!(size_of::<DOT11_BSS_ENTRY>(), 72);
+    assert_eq!(align_of::<DOT11_BSS_ENTRY>(), 8);
+    assert_eq!(size_of::<DOT11_SSID_LIST>(), 48);
+    assert_eq!(align_of::<DOT11_SSID_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_MAC_ADDRESS_LIST>(), 20);
+    assert_eq!(align_of::<DOT11_MAC_ADDRESS_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_PMKID_ENTRY>(), 28);
+    assert_eq!(align_of::<DOT11_PMKID_ENTRY>(), 4);
+    assert_eq!(size_of::<DOT11_PMKID_LIST>(), 40);
+    assert_eq!(align_of::<DOT11_PMKID_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_PHY_FRAME_STATISTICS>(), 144);
+    assert_eq!(align_of::<DOT11_PHY_FRAME_STATISTICS>(), 8);
+    assert_eq!(size_of::<DOT11_MAC_FRAME_STATISTICS>(), 112);
+    assert_eq!(align_of::<DOT11_MAC_FRAME_STATISTICS>(), 8);
+    assert_eq!(size_of::<DOT11_STATISTICS>(), 400);
+    assert_eq!(align_of::<DOT11_STATISTICS>(), 8);
+    assert_eq!(size_of::<DOT11_PRIVACY_EXEMPTION>(), 6);
+    assert_eq!(align_of::<DOT11_PRIVACY_EXEMPTION>(), 2);
+    assert_eq!(size_of::<DOT11_PRIVACY_EXEMPTION_LIST>(), 20);
+    assert_eq!(align_of::<DOT11_PRIVACY_EXEMPTION_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_AUTH_ALGORITHM_LIST>(), 16);
+    assert_eq!(align_of::<DOT11_AUTH_ALGORITHM_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_AUTH_CIPHER_PAIR_LIST>(), 20);
+    assert_eq!(align_of::<DOT11_AUTH_CIPHER_PAIR_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_CIPHER_ALGORITHM_LIST>(), 16);
+    assert_eq!(align_of::<DOT11_CIPHER_ALGORITHM_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_CIPHER_DEFAULT_KEY_VALUE>(), 24);
+    assert_eq!(align_of::<DOT11_CIPHER_DEFAULT_KEY_VALUE>(), 4);
+    assert_eq!(size_of::<DOT11_KEY_ALGO_TKIP_MIC>(), 20);
+    assert_eq!(align_of::<DOT11_KEY_ALGO_TKIP_MIC>(), 4);
+    assert_eq!(size_of::<DOT11_KEY_ALGO_CCMP>(), 16);
+    assert_eq!(align_of::<DOT11_KEY_ALGO_CCMP>(), 4);
+    assert_eq!(size_of::<DOT11_KEY_ALGO_GCMP>(), 16);
+    assert_eq!(align_of::<DOT11_KEY_ALGO_GCMP>(), 4);
+    assert_eq!(size_of::<DOT11_KEY_ALGO_BIP>(), 16);
+    assert_eq!(align_of::<DOT11_KEY_ALGO_BIP>(), 4);
+    assert_eq!(size_of::<DOT11_CIPHER_KEY_MAPPING_KEY_VALUE>(), 24);
+    assert_eq!(align_of::<DOT11_CIPHER_KEY_MAPPING_KEY_VALUE>(), 4);
+    assert_eq!(size_of::<DOT11_ASSOCIATION_INFO_EX>(), 328);
+    assert_eq!(align_of::<DOT11_ASSOCIATION_INFO_EX>(), 8);
+    assert_eq!(size_of::<DOT11_ASSOCIATION_INFO_LIST>(), 344);
+    assert_eq!(align_of::<DOT11_ASSOCIATION_INFO_LIST>(), 8);
+    assert_eq!(size_of::<DOT11_PHY_ID_LIST>(), 16);
+    assert_eq!(align_of::<DOT11_PHY_ID_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_EXTSTA_CAPABILITY>(), 44);
+    assert_eq!(align_of::<DOT11_EXTSTA_CAPABILITY>(), 4);
+    assert_eq!(size_of::<DOT11_DATA_RATE_MAPPING_ENTRY>(), 4);
+    assert_eq!(align_of::<DOT11_DATA_RATE_MAPPING_ENTRY>(), 2);
+    assert_eq!(size_of::<DOT11_DATA_RATE_MAPPING_TABLE>(), 512);
+    assert_eq!(align_of::<DOT11_DATA_RATE_MAPPING_TABLE>(), 4);
+    assert_eq!(size_of::<DOT11_COUNTRY_OR_REGION_STRING_LIST>(), 16);
+    assert_eq!(align_of::<DOT11_COUNTRY_OR_REGION_STRING_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_PORT_STATE_NOTIFICATION>(), 12);
+    assert_eq!(align_of::<DOT11_PORT_STATE_NOTIFICATION>(), 2);
+    assert_eq!(size_of::<DOT11_IBSS_PARAMS>(), 16);
+    assert_eq!(align_of::<DOT11_IBSS_PARAMS>(), 4);
+    assert_eq!(size_of::<DOT11_QOS_PARAMS>(), 6);
+    assert_eq!(align_of::<DOT11_QOS_PARAMS>(), 2);
+    assert_eq!(size_of::<DOT11_ASSOCIATION_PARAMS>(), 20);
+    assert_eq!(align_of::<DOT11_ASSOCIATION_PARAMS>(), 4);
+    assert_eq!(size_of::<DOT11_FRAGMENT_DESCRIPTOR>(), 8);
+    assert_eq!(align_of::<DOT11_FRAGMENT_DESCRIPTOR>(), 4);
+    assert_eq!(size_of::<DOT11_PER_MSDU_COUNTERS>(), 20);
+    assert_eq!(align_of::<DOT11_PER_MSDU_COUNTERS>(), 4);
+    assert_eq!(size_of::<DOT11_PHY_ATTRIBUTES>(), 1092);
+    assert_eq!(align_of::<DOT11_PHY_ATTRIBUTES>(), 4);
+    assert_eq!(size_of::<DOT11_HRDSSS_PHY_ATTRIBUTES>(), 8);
+    assert_eq!(align_of::<DOT11_HRDSSS_PHY_ATTRIBUTES>(), 4);
+    assert_eq!(size_of::<DOT11_OFDM_PHY_ATTRIBUTES>(), 4);
+    assert_eq!(align_of::<DOT11_OFDM_PHY_ATTRIBUTES>(), 4);
+    assert_eq!(size_of::<DOT11_ERP_PHY_ATTRIBUTES>(), 12);
+    assert_eq!(align_of::<DOT11_ERP_PHY_ATTRIBUTES>(), 4);
+    assert_eq!(size_of::<DOT11_EXTSTA_ATTRIBUTES>(), 116);
+    assert_eq!(align_of::<DOT11_EXTSTA_ATTRIBUTES>(), 4);
+    assert_eq!(size_of::<DOT11_RECV_EXTENSION_INFO>(), 88);
+    assert_eq!(align_of::<DOT11_RECV_EXTENSION_INFO>(), 4);
+    assert_eq!(size_of::<DOT11_RECV_EXTENSION_INFO_V2>(), 80);
+    assert_eq!(align_of::<DOT11_RECV_EXTENSION_INFO_V2>(), 4);
+    assert_eq!(size_of::<DOT11_STATUS_INDICATION>(), 8);
+    assert_eq!(align_of::<DOT11_STATUS_INDICATION>(), 4);
+    assert_eq!(size_of::<DOT11_MPDU_MAX_LENGTH_INDICATION>(), 12);
+    assert_eq!(align_of::<DOT11_MPDU_MAX_LENGTH_INDICATION>(), 4);
+    assert_eq!(size_of::<DOT11_ASSOCIATION_START_PARAMETERS>(), 56);
+    assert_eq!(align_of::<DOT11_ASSOCIATION_START_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_ENCAP_ENTRY>(), 4);
+    assert_eq!(align_of::<DOT11_ENCAP_ENTRY>(), 2);
+    assert_eq!(size_of::<DOT11_ASSOCIATION_COMPLETION_PARAMETERS>(), 96);
+    assert_eq!(align_of::<DOT11_ASSOCIATION_COMPLETION_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_CONNECTION_START_PARAMETERS>(), 52);
+    assert_eq!(align_of::<DOT11_CONNECTION_START_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_CONNECTION_COMPLETION_PARAMETERS>(), 8);
+    assert_eq!(align_of::<DOT11_CONNECTION_COMPLETION_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_ROAMING_START_PARAMETERS>(), 52);
+    assert_eq!(align_of::<DOT11_ROAMING_START_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_ROAMING_COMPLETION_PARAMETERS>(), 8);
+    assert_eq!(align_of::<DOT11_ROAMING_COMPLETION_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_DISASSOCIATION_PARAMETERS>(), 24);
+    assert_eq!(align_of::<DOT11_DISASSOCIATION_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_TKIPMIC_FAILURE_PARAMETERS>(), 20);
+    assert_eq!(align_of::<DOT11_TKIPMIC_FAILURE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_PMKID_CANDIDATE_LIST_PARAMETERS>(), 12);
+    assert_eq!(align_of::<DOT11_PMKID_CANDIDATE_LIST_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_BSSID_CANDIDATE>(), 12);
+    assert_eq!(align_of::<DOT11_BSSID_CANDIDATE>(), 4);
+    assert_eq!(size_of::<DOT11_PHY_STATE_PARAMETERS>(), 12);
+    assert_eq!(align_of::<DOT11_PHY_STATE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_LINK_QUALITY_ENTRY>(), 7);
+    assert_eq!(align_of::<DOT11_LINK_QUALITY_ENTRY>(), 1);
+    assert_eq!(size_of::<DOT11_LINK_QUALITY_PARAMETERS>(), 12);
+    assert_eq!(align_of::<DOT11_LINK_QUALITY_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_EXTSTA_SEND_CONTEXT>(), 24);
+    assert_eq!(align_of::<DOT11_EXTSTA_SEND_CONTEXT>(), 4);
+    assert_eq!(size_of::<DOT11_EXTSTA_RECV_CONTEXT>(), 48);
+    assert_eq!(align_of::<DOT11_EXTSTA_RECV_CONTEXT>(), 8);
+    assert_eq!(size_of::<DOT11_EXTAP_ATTRIBUTES>(), 56);
+    assert_eq!(align_of::<DOT11_EXTAP_ATTRIBUTES>(), 4);
+    assert_eq!(size_of::<DOT11_INCOMING_ASSOC_STARTED_PARAMETERS>(), 10);
+    assert_eq!(align_of::<DOT11_INCOMING_ASSOC_STARTED_PARAMETERS>(), 2);
+    assert_eq!(size_of::<DOT11_INCOMING_ASSOC_REQUEST_RECEIVED_PARAMETERS>(), 20);
+    assert_eq!(align_of::<DOT11_INCOMING_ASSOC_REQUEST_RECEIVED_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_INCOMING_ASSOC_COMPLETION_PARAMETERS>(), 64);
+    assert_eq!(align_of::<DOT11_INCOMING_ASSOC_COMPLETION_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_STOP_AP_PARAMETERS>(), 8);
+    assert_eq!(align_of::<DOT11_STOP_AP_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS>(), 12);
+    assert_eq!(align_of::<DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_CAN_SUSTAIN_AP_PARAMETERS>(), 8);
+    assert_eq!(align_of::<DOT11_CAN_SUSTAIN_AP_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_AVAILABLE_CHANNEL_LIST>(), 16);
+    assert_eq!(align_of::<DOT11_AVAILABLE_CHANNEL_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_AVAILABLE_FREQUENCY_LIST>(), 16);
+    assert_eq!(align_of::<DOT11_AVAILABLE_FREQUENCY_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_DISASSOCIATE_PEER_REQUEST>(), 12);
+    assert_eq!(align_of::<DOT11_DISASSOCIATE_PEER_REQUEST>(), 2);
+    assert_eq!(size_of::<DOT11_INCOMING_ASSOC_DECISION>(), 24);
+    assert_eq!(align_of::<DOT11_INCOMING_ASSOC_DECISION>(), 4);
+    assert_eq!(size_of::<DOT11_INCOMING_ASSOC_DECISION_V2>(), 28);
+    assert_eq!(align_of::<DOT11_INCOMING_ASSOC_DECISION_V2>(), 4);
+    assert_eq!(size_of::<DOT11_ADDITIONAL_IE>(), 20);
+    assert_eq!(align_of::<DOT11_ADDITIONAL_IE>(), 4);
+    assert_eq!(size_of::<DOT11_PEER_STATISTICS>(), 48);
+    assert_eq!(align_of::<DOT11_PEER_STATISTICS>(), 8);
+    assert_eq!(size_of::<DOT11_PEER_INFO>(), 352);
+    assert_eq!(align_of::<DOT11_PEER_INFO>(), 8);
+    assert_eq!(size_of::<DOT11_PEER_INFO_LIST>(), 368);
+    assert_eq!(align_of::<DOT11_PEER_INFO_LIST>(), 8);
+    assert_eq!(size_of::<DOT11_VWIFI_COMBINATION>(), 16);
+    assert_eq!(align_of::<DOT11_VWIFI_COMBINATION>(), 4);
+    assert_eq!(size_of::<DOT11_VWIFI_COMBINATION_V2>(), 20);
+    assert_eq!(align_of::<DOT11_VWIFI_COMBINATION_V2>(), 4);
+    assert_eq!(size_of::<DOT11_VWIFI_COMBINATION_V3>(), 24);
+    assert_eq!(align_of::<DOT11_VWIFI_COMBINATION_V3>(), 4);
+    assert_eq!(size_of::<DOT11_VWIFI_ATTRIBUTES>(), 24);
+    assert_eq!(align_of::<DOT11_VWIFI_ATTRIBUTES>(), 4);
+    assert_eq!(size_of::<DOT11_MAC_PARAMETERS>(), 8);
+    assert_eq!(align_of::<DOT11_MAC_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_MAC_INFO>(), 16);
+    assert_eq!(align_of::<DOT11_MAC_INFO>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_ATTRIBUTES>(), 56);
+    assert_eq!(align_of::<DOT11_WFD_ATTRIBUTES>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_DEVICE_TYPE>(), 8);
+    assert_eq!(align_of::<DOT11_WFD_DEVICE_TYPE>(), 2);
+    assert_eq!(size_of::<DOT11_WPS_DEVICE_NAME>(), 36);
+    assert_eq!(align_of::<DOT11_WPS_DEVICE_NAME>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_CONFIGURATION_TIMEOUT>(), 2);
+    assert_eq!(align_of::<DOT11_WFD_CONFIGURATION_TIMEOUT>(), 1);
+    assert_eq!(size_of::<DOT11_WFD_GROUP_ID>(), 44);
+    assert_eq!(align_of::<DOT11_WFD_GROUP_ID>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_GO_INTENT>(), 1);
+    assert_eq!(align_of::<DOT11_WFD_GO_INTENT>(), 1);
+    assert_eq!(size_of::<DOT11_WFD_CHANNEL>(), 5);
+    assert_eq!(align_of::<DOT11_WFD_CHANNEL>(), 1);
+    assert_eq!(size_of::<WFDSVC_CONNECTION_CAPABILITY>(), 3);
+    assert_eq!(align_of::<WFDSVC_CONNECTION_CAPABILITY>(), 1);
+    assert_eq!(size_of::<DOT11_WFD_SERVICE_HASH_LIST>(), 8);
+    assert_eq!(align_of::<DOT11_WFD_SERVICE_HASH_LIST>(), 2);
+    assert_eq!(size_of::<DOT11_WFD_ADVERTISEMENT_ID>(), 12);
+    assert_eq!(align_of::<DOT11_WFD_ADVERTISEMENT_ID>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_SESSION_ID>(), 12);
+    assert_eq!(align_of::<DOT11_WFD_SESSION_ID>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR>(), 264);
+    assert_eq!(align_of::<DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_ADVERTISED_SERVICE_LIST>(), 268);
+    assert_eq!(align_of::<DOT11_WFD_ADVERTISED_SERVICE_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_DISCOVER_COMPLETE_PARAMETERS>(), 24);
+    assert_eq!(align_of::<DOT11_WFD_DISCOVER_COMPLETE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_GO_NEGOTIATION_REQUEST_SEND_COMPLETE_PARAMETERS>(), 24);
+    assert_eq!(align_of::<DOT11_GO_NEGOTIATION_REQUEST_SEND_COMPLETE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_RECEIVED_GO_NEGOTIATION_REQUEST_PARAMETERS>(), 24);
+    assert_eq!(align_of::<DOT11_RECEIVED_GO_NEGOTIATION_REQUEST_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_GO_NEGOTIATION_RESPONSE_SEND_COMPLETE_PARAMETERS>(), 24);
+    assert_eq!(align_of::<DOT11_GO_NEGOTIATION_RESPONSE_SEND_COMPLETE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_RECEIVED_GO_NEGOTIATION_RESPONSE_PARAMETERS>(), 24);
+    assert_eq!(align_of::<DOT11_RECEIVED_GO_NEGOTIATION_RESPONSE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_GO_NEGOTIATION_CONFIRMATION_SEND_COMPLETE_PARAMETERS>(), 24);
+    assert_eq!(align_of::<DOT11_GO_NEGOTIATION_CONFIRMATION_SEND_COMPLETE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_RECEIVED_GO_NEGOTIATION_CONFIRMATION_PARAMETERS>(), 20);
+    assert_eq!(align_of::<DOT11_RECEIVED_GO_NEGOTIATION_CONFIRMATION_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_INVITATION_REQUEST_SEND_COMPLETE_PARAMETERS>(), 32);
+    assert_eq!(align_of::<DOT11_INVITATION_REQUEST_SEND_COMPLETE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_RECEIVED_INVITATION_REQUEST_PARAMETERS>(), 32);
+    assert_eq!(align_of::<DOT11_RECEIVED_INVITATION_REQUEST_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_INVITATION_RESPONSE_SEND_COMPLETE_PARAMETERS>(), 24);
+    assert_eq!(align_of::<DOT11_INVITATION_RESPONSE_SEND_COMPLETE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_RECEIVED_INVITATION_RESPONSE_PARAMETERS>(), 28);
+    assert_eq!(align_of::<DOT11_RECEIVED_INVITATION_RESPONSE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_PROVISION_DISCOVERY_REQUEST_SEND_COMPLETE_PARAMETERS>(), 32);
+    assert_eq!(align_of::<DOT11_PROVISION_DISCOVERY_REQUEST_SEND_COMPLETE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_RECEIVED_PROVISION_DISCOVERY_REQUEST_PARAMETERS>(), 32);
+    assert_eq!(align_of::<DOT11_RECEIVED_PROVISION_DISCOVERY_REQUEST_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_PROVISION_DISCOVERY_RESPONSE_SEND_COMPLETE_PARAMETERS>(), 24);
+    assert_eq!(align_of::<DOT11_PROVISION_DISCOVERY_RESPONSE_SEND_COMPLETE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_RECEIVED_PROVISION_DISCOVERY_RESPONSE_PARAMETERS>(), 28);
+    assert_eq!(align_of::<DOT11_RECEIVED_PROVISION_DISCOVERY_RESPONSE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_ANQP_QUERY_COMPLETE_PARAMETERS>(), 16);
+    assert_eq!(align_of::<DOT11_ANQP_QUERY_COMPLETE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_DEVICE_CAPABILITY_CONFIG>(), 16);
+    assert_eq!(align_of::<DOT11_WFD_DEVICE_CAPABILITY_CONFIG>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_GROUP_OWNER_CAPABILITY_CONFIG>(), 16);
+    assert_eq!(align_of::<DOT11_WFD_GROUP_OWNER_CAPABILITY_CONFIG>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_GROUP_OWNER_CAPABILITY_CONFIG_V2>(), 20);
+    assert_eq!(align_of::<DOT11_WFD_GROUP_OWNER_CAPABILITY_CONFIG_V2>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_DEVICE_INFO>(), 56);
+    assert_eq!(align_of::<DOT11_WFD_DEVICE_INFO>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_SECONDARY_DEVICE_TYPE_LIST>(), 20);
+    assert_eq!(align_of::<DOT11_WFD_SECONDARY_DEVICE_TYPE_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_DISCOVER_DEVICE_FILTER>(), 44);
+    assert_eq!(align_of::<DOT11_WFD_DISCOVER_DEVICE_FILTER>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_DISCOVER_REQUEST>(), 36);
+    assert_eq!(align_of::<DOT11_WFD_DISCOVER_REQUEST>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_DEVICE_ENTRY>(), 96);
+    assert_eq!(align_of::<DOT11_WFD_DEVICE_ENTRY>(), 8);
+    assert_eq!(size_of::<DOT11_WFD_ADDITIONAL_IE>(), 28);
+    assert_eq!(align_of::<DOT11_WFD_ADDITIONAL_IE>(), 4);
+    assert_eq!(size_of::<DOT11_SEND_GO_NEGOTIATION_REQUEST_PARAMETERS>(), 36);
+    assert_eq!(align_of::<DOT11_SEND_GO_NEGOTIATION_REQUEST_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_SEND_GO_NEGOTIATION_RESPONSE_PARAMETERS>(), 88);
+    assert_eq!(align_of::<DOT11_SEND_GO_NEGOTIATION_RESPONSE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_SEND_GO_NEGOTIATION_CONFIRMATION_PARAMETERS>(), 80);
+    assert_eq!(align_of::<DOT11_SEND_GO_NEGOTIATION_CONFIRMATION_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_INVITATION_FLAGS>(), 1);
+    assert_eq!(align_of::<DOT11_WFD_INVITATION_FLAGS>(), 1);
+    assert_eq!(size_of::<DOT11_SEND_INVITATION_REQUEST_PARAMETERS>(), 88);
+    assert_eq!(align_of::<DOT11_SEND_INVITATION_REQUEST_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_SEND_INVITATION_RESPONSE_PARAMETERS>(), 44);
+    assert_eq!(align_of::<DOT11_SEND_INVITATION_RESPONSE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_SEND_PROVISION_DISCOVERY_REQUEST_PARAMETERS>(), 76);
+    assert_eq!(align_of::<DOT11_SEND_PROVISION_DISCOVERY_REQUEST_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_SEND_PROVISION_DISCOVERY_RESPONSE_PARAMETERS>(), 28);
+    assert_eq!(align_of::<DOT11_SEND_PROVISION_DISCOVERY_RESPONSE_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_WFD_DEVICE_LISTEN_CHANNEL>(), 6);
+    assert_eq!(align_of::<DOT11_WFD_DEVICE_LISTEN_CHANNEL>(), 2);
+    assert_eq!(size_of::<DOT11_WFD_GROUP_START_PARAMETERS>(), 10);
+    assert_eq!(align_of::<DOT11_WFD_GROUP_START_PARAMETERS>(), 2);
+    assert_eq!(size_of::<DOT11_WFD_GROUP_JOIN_PARAMETERS>(), 20);
+    assert_eq!(align_of::<DOT11_WFD_GROUP_JOIN_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_POWER_MGMT_AUTO_MODE_ENABLED_INFO>(), 6);
+    assert_eq!(align_of::<DOT11_POWER_MGMT_AUTO_MODE_ENABLED_INFO>(), 2);
+    assert_eq!(size_of::<DOT11_POWER_MGMT_MODE_STATUS_INFO>(), 16);
+    assert_eq!(align_of::<DOT11_POWER_MGMT_MODE_STATUS_INFO>(), 4);
+    assert_eq!(size_of::<DOT11_CHANNEL_HINT>(), 8);
+    assert_eq!(align_of::<DOT11_CHANNEL_HINT>(), 4);
+    assert_eq!(size_of::<DOT11_OFFLOAD_NETWORK>(), 76);
+    assert_eq!(align_of::<DOT11_OFFLOAD_NETWORK>(), 4);
+    assert_eq!(size_of::<DOT11_OFFLOAD_NETWORK_LIST_INFO>(), 100);
+    assert_eq!(align_of::<DOT11_OFFLOAD_NETWORK_LIST_INFO>(), 4);
+    assert_eq!(size_of::<DOT11_OFFLOAD_NETWORK_STATUS_PARAMETERS>(), 8);
+    assert_eq!(align_of::<DOT11_OFFLOAD_NETWORK_STATUS_PARAMETERS>(), 4);
+    assert_eq!(size_of::<DOT11_MANUFACTURING_TEST>(), 12);
+    assert_eq!(align_of::<DOT11_MANUFACTURING_TEST>(), 4);
+    assert_eq!(size_of::<DOT11_MANUFACTURING_SELF_TEST_SET_PARAMS>(), 24);
+    assert_eq!(align_of::<DOT11_MANUFACTURING_SELF_TEST_SET_PARAMS>(), 4);
+    assert_eq!(size_of::<DOT11_MANUFACTURING_SELF_TEST_QUERY_RESULTS>(), 28);
+    assert_eq!(align_of::<DOT11_MANUFACTURING_SELF_TEST_QUERY_RESULTS>(), 4);
+    assert_eq!(size_of::<DOT11_MANUFACTURING_FUNCTIONAL_TEST_RX>(), 16);
+    assert_eq!(align_of::<DOT11_MANUFACTURING_FUNCTIONAL_TEST_RX>(), 4);
+    assert_eq!(size_of::<DOT11_MANUFACTURING_FUNCTIONAL_TEST_TX>(), 20);
+    assert_eq!(align_of::<DOT11_MANUFACTURING_FUNCTIONAL_TEST_TX>(), 4);
+    assert_eq!(size_of::<DOT11_MANUFACTURING_FUNCTIONAL_TEST_QUERY_ADC>(), 12);
+    assert_eq!(align_of::<DOT11_MANUFACTURING_FUNCTIONAL_TEST_QUERY_ADC>(), 4);
+    assert_eq!(size_of::<DOT11_MANUFACTURING_TEST_SET_DATA>(), 16);
+    assert_eq!(align_of::<DOT11_MANUFACTURING_TEST_SET_DATA>(), 4);
+    assert_eq!(size_of::<DOT11_MANUFACTURING_TEST_QUERY_DATA>(), 20);
+    assert_eq!(align_of::<DOT11_MANUFACTURING_TEST_QUERY_DATA>(), 4);
+    assert_eq!(size_of::<DOT11_MANUFACTURING_TEST_SLEEP>(), 8);
+    assert_eq!(align_of::<DOT11_MANUFACTURING_TEST_SLEEP>(), 4);
+    assert_eq!(size_of::<DOT11_MANUFACTURING_CALLBACK_PARAMETERS>(), 16);
+    assert_eq!(align_of::<DOT11_MANUFACTURING_CALLBACK_PARAMETERS>(), 4);
+}
 #[cfg(feature = "winusbio")] #[test]
 fn shared_winusbio() {
     use winapi::shared::winusbio::*;
@@ -1328,6 +2034,20 @@ fn shared_winusbio() {
     assert_eq!(align_of::<WINUSB_PIPE_INFORMATION>(), 4);
     assert_eq!(size_of::<WINUSB_PIPE_INFORMATION_EX>(), 16);
     assert_eq!(align_of::<WINUSB_PIPE_INFORMATION_EX>(), 4);
+}
+#[cfg(feature = "wlantypes")] #[test]
+fn shared_wlantypes() {
+    use winapi::shared::wlantypes::*;
+    assert_eq!(size_of::<DOT11_SSID>(), 36);
+    assert_eq!(align_of::<DOT11_SSID>(), 4);
+    assert_eq!(size_of::<DOT11_AUTH_CIPHER_PAIR>(), 8);
+    assert_eq!(align_of::<DOT11_AUTH_CIPHER_PAIR>(), 4);
+    assert_eq!(size_of::<DOT11_OI>(), 8);
+    assert_eq!(align_of::<DOT11_OI>(), 2);
+    assert_eq!(size_of::<DOT11_ACCESSNETWORKOPTIONS>(), 5);
+    assert_eq!(align_of::<DOT11_ACCESSNETWORKOPTIONS>(), 1);
+    assert_eq!(size_of::<DOT11_VENUEINFO>(), 2);
+    assert_eq!(align_of::<DOT11_VENUEINFO>(), 1);
 }
 #[cfg(feature = "wmistr")] #[test]
 fn shared_wmistr() {
@@ -1414,12 +2134,22 @@ fn shared_ws2def() {
 #[cfg(feature = "ws2ipdef")] #[test]
 fn shared_ws2ipdef() {
     use winapi::shared::ws2ipdef::*;
-    assert_eq!(size_of::<IP_MREQ>(), 8);
-    assert_eq!(align_of::<IP_MREQ>(), 4);
-    assert_eq!(size_of::<IPV6_MREQ>(), 20);
-    assert_eq!(align_of::<IPV6_MREQ>(), 4);
     assert_eq!(size_of::<SOCKADDR_IN6_LH>(), 28);
     assert_eq!(align_of::<SOCKADDR_IN6_LH>(), 4);
+    assert_eq!(size_of::<SOCKADDR_IN6_PAIR>(), 8);
+    assert_eq!(align_of::<SOCKADDR_IN6_PAIR>(), 4);
+    assert_eq!(size_of::<SOCKADDR_INET>(), 28);
+    assert_eq!(align_of::<SOCKADDR_INET>(), 4);
+    assert_eq!(size_of::<IP_MREQ>(), 8);
+    assert_eq!(align_of::<IP_MREQ>(), 4);
+    assert_eq!(size_of::<IP_MREQ_SOURCE>(), 12);
+    assert_eq!(align_of::<IP_MREQ_SOURCE>(), 4);
+    assert_eq!(size_of::<IPV6_MREQ>(), 20);
+    assert_eq!(align_of::<IPV6_MREQ>(), 4);
+    assert_eq!(size_of::<IN_PKTINFO>(), 8);
+    assert_eq!(align_of::<IN_PKTINFO>(), 4);
+    assert_eq!(size_of::<IN6_PKTINFO>(), 20);
+    assert_eq!(align_of::<IN6_PKTINFO>(), 4);
 }
 #[cfg(feature = "wtypes")] #[test]
 fn shared_wtypes() {
@@ -3093,6 +3823,22 @@ fn um_docobj() {
     assert_eq!(size_of::<OLECMDTEXT>(), 16);
     assert_eq!(align_of::<OLECMDTEXT>(), 4);
 }
+#[cfg(feature = "dot1x")] #[test]
+fn um_dot1x() {
+    use winapi::um::dot1x::*;
+    assert_eq!(size_of::<ONEX_VARIABLE_BLOB>(), 8);
+    assert_eq!(align_of::<ONEX_VARIABLE_BLOB>(), 4);
+    assert_eq!(size_of::<ONEX_AUTH_PARAMS>(), 64);
+    assert_eq!(align_of::<ONEX_AUTH_PARAMS>(), 4);
+    assert_eq!(size_of::<ONEX_EAP_ERROR>(), 92);
+    assert_eq!(align_of::<ONEX_EAP_ERROR>(), 4);
+    assert_eq!(size_of::<ONEX_STATUS>(), 12);
+    assert_eq!(align_of::<ONEX_STATUS>(), 4);
+    assert_eq!(size_of::<ONEX_RESULT_UPDATE_DATA>(), 40);
+    assert_eq!(align_of::<ONEX_RESULT_UPDATE_DATA>(), 4);
+    assert_eq!(size_of::<ONEX_USER_INFO>(), 24);
+    assert_eq!(align_of::<ONEX_USER_INFO>(), 4);
+}
 #[cfg(feature = "dpapi")] #[test]
 fn um_dpapi() {
     use winapi::um::dpapi::*;
@@ -3370,6 +4116,64 @@ fn um_dxvahd() {
     assert_eq!(align_of::<DXVAHDETW_VIDEOPROCESSBLTHD_STREAM>(), 8);
     assert_eq!(size_of::<DXVAHDETW_DESTROYVIDEOPROCESSOR>(), 8);
     assert_eq!(align_of::<DXVAHDETW_DESTROYVIDEOPROCESSOR>(), 8);
+}
+#[cfg(feature = "eaptypes")] #[test]
+fn um_eaptypes() {
+    use winapi::um::eaptypes::*;
+    assert_eq!(size_of::<EAP_TYPE>(), 12);
+    assert_eq!(align_of::<EAP_TYPE>(), 4);
+    assert_eq!(size_of::<EAP_METHOD_TYPE>(), 16);
+    assert_eq!(align_of::<EAP_METHOD_TYPE>(), 4);
+    assert_eq!(size_of::<EAP_METHOD_INFO>(), 32);
+    assert_eq!(align_of::<EAP_METHOD_INFO>(), 4);
+    assert_eq!(size_of::<EAP_METHOD_INFO_ARRAY_EX>(), 8);
+    assert_eq!(align_of::<EAP_METHOD_INFO_ARRAY_EX>(), 4);
+    assert_eq!(size_of::<EAP_METHOD_INFO_EX>(), 32);
+    assert_eq!(align_of::<EAP_METHOD_INFO_EX>(), 4);
+    assert_eq!(size_of::<EAP_METHOD_INFO_ARRAY>(), 8);
+    assert_eq!(align_of::<EAP_METHOD_INFO_ARRAY>(), 4);
+    assert_eq!(size_of::<EAP_ERROR>(), 80);
+    assert_eq!(align_of::<EAP_ERROR>(), 4);
+    assert_eq!(size_of::<EAP_ATTRIBUTE>(), 12);
+    assert_eq!(align_of::<EAP_ATTRIBUTE>(), 4);
+    assert_eq!(size_of::<EAP_ATTRIBUTES>(), 8);
+    assert_eq!(align_of::<EAP_ATTRIBUTES>(), 4);
+    assert_eq!(size_of::<EAP_CONFIG_INPUT_FIELD_DATA>(), 28);
+    assert_eq!(align_of::<EAP_CONFIG_INPUT_FIELD_DATA>(), 4);
+    assert_eq!(size_of::<EAP_CONFIG_INPUT_FIELD_ARRAY>(), 12);
+    assert_eq!(align_of::<EAP_CONFIG_INPUT_FIELD_ARRAY>(), 4);
+    assert_eq!(size_of::<EAP_CRED_EXPIRY_REQ>(), 24);
+    assert_eq!(align_of::<EAP_CRED_EXPIRY_REQ>(), 4);
+    assert_eq!(size_of::<EAP_UI_DATA_FORMAT>(), 4);
+    assert_eq!(align_of::<EAP_UI_DATA_FORMAT>(), 4);
+    assert_eq!(size_of::<EAP_INTERACTIVE_UI_DATA>(), 20);
+    assert_eq!(align_of::<EAP_INTERACTIVE_UI_DATA>(), 4);
+    assert_eq!(size_of::<EAP_METHOD_PROPERTY_VALUE_BOOL>(), 8);
+    assert_eq!(align_of::<EAP_METHOD_PROPERTY_VALUE_BOOL>(), 4);
+    assert_eq!(size_of::<EAP_METHOD_PROPERTY_VALUE_DWORD>(), 8);
+    assert_eq!(align_of::<EAP_METHOD_PROPERTY_VALUE_DWORD>(), 4);
+    assert_eq!(size_of::<EAP_METHOD_PROPERTY_VALUE_STRING>(), 8);
+    assert_eq!(align_of::<EAP_METHOD_PROPERTY_VALUE_STRING>(), 4);
+    assert_eq!(size_of::<EAP_METHOD_PROPERTY_VALUE>(), 8);
+    assert_eq!(align_of::<EAP_METHOD_PROPERTY_VALUE>(), 4);
+    assert_eq!(size_of::<EAP_METHOD_PROPERTY>(), 16);
+    assert_eq!(align_of::<EAP_METHOD_PROPERTY>(), 4);
+    assert_eq!(size_of::<EAP_METHOD_PROPERTY_ARRAY>(), 8);
+    assert_eq!(align_of::<EAP_METHOD_PROPERTY_ARRAY>(), 4);
+    assert_eq!(size_of::<EAPHOST_IDENTITY_UI_PARAMS>(), 56);
+    assert_eq!(align_of::<EAPHOST_IDENTITY_UI_PARAMS>(), 4);
+    assert_eq!(size_of::<EAPHOST_INTERACTIVE_UI_PARAMS>(), 24);
+    assert_eq!(align_of::<EAPHOST_INTERACTIVE_UI_PARAMS>(), 4);
+    assert_eq!(size_of::<EapUsernamePasswordCredential>(), 8);
+    assert_eq!(align_of::<EapUsernamePasswordCredential>(), 4);
+    assert_eq!(size_of::<EapCertificateCredential>(), 24);
+    assert_eq!(align_of::<EapCertificateCredential>(), 4);
+    assert_eq!(size_of::<EapSimCredential>(), 4);
+    assert_eq!(align_of::<EapSimCredential>(), 4);
+    assert_eq!(size_of::<EapCredentialTypeData>(), 24);
+    assert_eq!(align_of::<EapCredentialTypeData>(), 4);
+    assert_eq!(size_of::<EapCredential>(), 28);
+    assert_eq!(align_of::<EapCredential>(), 4);
 }
 #[cfg(feature = "endpointvolume")] #[test]
 fn um_endpointvolume() {
@@ -3684,6 +4488,82 @@ fn um_http() {
     assert_eq!(size_of::<HTTP_SERVICE_CONFIG_CACHE_SET>(), 8);
     assert_eq!(align_of::<HTTP_SERVICE_CONFIG_CACHE_SET>(), 4);
 }
+#[cfg(feature = "ipexport")] #[test]
+fn um_ipexport() {
+    use winapi::um::ipexport::*;
+    assert_eq!(size_of::<IP_OPTION_INFORMATION>(), 8);
+    assert_eq!(align_of::<IP_OPTION_INFORMATION>(), 4);
+    assert_eq!(size_of::<ICMP_ECHO_REPLY>(), 28);
+    assert_eq!(align_of::<ICMP_ECHO_REPLY>(), 4);
+    assert_eq!(size_of::<IPV6_ADDRESS_EX>(), 26);
+    assert_eq!(align_of::<IPV6_ADDRESS_EX>(), 1);
+    assert_eq!(size_of::<ICMPV6_ECHO_REPLY_LH>(), 36);
+    assert_eq!(align_of::<ICMPV6_ECHO_REPLY_LH>(), 4);
+    assert_eq!(size_of::<ARP_SEND_REPLY>(), 8);
+    assert_eq!(align_of::<ARP_SEND_REPLY>(), 4);
+    assert_eq!(size_of::<TCP_RESERVE_PORT_RANGE>(), 4);
+    assert_eq!(align_of::<TCP_RESERVE_PORT_RANGE>(), 2);
+    assert_eq!(size_of::<IP_ADAPTER_INDEX_MAP>(), 260);
+    assert_eq!(align_of::<IP_ADAPTER_INDEX_MAP>(), 4);
+    assert_eq!(size_of::<IP_INTERFACE_INFO>(), 264);
+    assert_eq!(align_of::<IP_INTERFACE_INFO>(), 4);
+    assert_eq!(size_of::<IP_UNIDIRECTIONAL_ADAPTER_ADDRESS>(), 8);
+    assert_eq!(align_of::<IP_UNIDIRECTIONAL_ADAPTER_ADDRESS>(), 4);
+    assert_eq!(size_of::<IP_ADAPTER_ORDER_MAP>(), 8);
+    assert_eq!(align_of::<IP_ADAPTER_ORDER_MAP>(), 4);
+    assert_eq!(size_of::<IP_MCAST_COUNTER_INFO>(), 32);
+    assert_eq!(align_of::<IP_MCAST_COUNTER_INFO>(), 8);
+}
+#[cfg(feature = "iphlpapi")] #[test]
+fn um_iphlpapi() {
+    use winapi::um::iphlpapi::*;
+    assert_eq!(size_of::<INTERFACE_TIMESTAMP_CAPABILITY_FLAGS>(), 14);
+    assert_eq!(align_of::<INTERFACE_TIMESTAMP_CAPABILITY_FLAGS>(), 1);
+    assert_eq!(size_of::<INTERFACE_TIMESTAMP_CAPABILITIES>(), 56);
+    assert_eq!(align_of::<INTERFACE_TIMESTAMP_CAPABILITIES>(), 8);
+    assert_eq!(size_of::<INTERFACE_HARDWARE_CROSSTIMESTAMP>(), 32);
+    assert_eq!(align_of::<INTERFACE_HARDWARE_CROSSTIMESTAMP>(), 8);
+    assert_eq!(size_of::<NET_ADDRESS_INFO>(), 528);
+    assert_eq!(align_of::<NET_ADDRESS_INFO>(), 4);
+}
+#[cfg(feature = "iptypes")] #[test]
+fn um_iptypes() {
+    use winapi::um::iptypes::*;
+    assert_eq!(size_of::<IP_ADDRESS_STRING>(), 16);
+    assert_eq!(align_of::<IP_ADDRESS_STRING>(), 1);
+    assert_eq!(size_of::<IP_ADDR_STRING>(), 40);
+    assert_eq!(align_of::<IP_ADDR_STRING>(), 4);
+    assert_eq!(size_of::<IP_ADAPTER_INFO>(), 648);
+    assert_eq!(align_of::<IP_ADAPTER_INFO>(), 8);
+    assert_eq!(size_of::<IP_ADAPTER_UNICAST_ADDRESS_LH>(), 48);
+    assert_eq!(align_of::<IP_ADAPTER_UNICAST_ADDRESS_LH>(), 8);
+    assert_eq!(size_of::<IP_ADAPTER_UNICAST_ADDRESS_XP>(), 48);
+    assert_eq!(align_of::<IP_ADAPTER_UNICAST_ADDRESS_XP>(), 8);
+    assert_eq!(size_of::<IP_ADAPTER_ANYCAST_ADDRESS_XP>(), 24);
+    assert_eq!(align_of::<IP_ADAPTER_ANYCAST_ADDRESS_XP>(), 8);
+    assert_eq!(size_of::<IP_ADAPTER_MULTICAST_ADDRESS_XP>(), 24);
+    assert_eq!(align_of::<IP_ADAPTER_MULTICAST_ADDRESS_XP>(), 8);
+    assert_eq!(size_of::<IP_ADAPTER_DNS_SERVER_ADDRESS_XP>(), 24);
+    assert_eq!(align_of::<IP_ADAPTER_DNS_SERVER_ADDRESS_XP>(), 8);
+    assert_eq!(size_of::<IP_ADAPTER_WINS_SERVER_ADDRESS_LH>(), 24);
+    assert_eq!(align_of::<IP_ADAPTER_WINS_SERVER_ADDRESS_LH>(), 8);
+    assert_eq!(size_of::<IP_ADAPTER_GATEWAY_ADDRESS_LH>(), 24);
+    assert_eq!(align_of::<IP_ADAPTER_GATEWAY_ADDRESS_LH>(), 8);
+    assert_eq!(size_of::<IP_ADAPTER_PREFIX_XP>(), 24);
+    assert_eq!(align_of::<IP_ADAPTER_PREFIX_XP>(), 8);
+    assert_eq!(size_of::<IP_ADAPTER_DNS_SUFFIX>(), 516);
+    assert_eq!(align_of::<IP_ADAPTER_DNS_SUFFIX>(), 4);
+    assert_eq!(size_of::<IP_ADAPTER_ADDRESSES_LH>(), 376);
+    assert_eq!(align_of::<IP_ADAPTER_ADDRESSES_LH>(), 8);
+    assert_eq!(size_of::<IP_ADAPTER_ADDRESSES_XP>(), 144);
+    assert_eq!(align_of::<IP_ADAPTER_ADDRESSES_XP>(), 8);
+    assert_eq!(size_of::<IP_PER_ADAPTER_INFO_W2KSP1>(), 52);
+    assert_eq!(align_of::<IP_PER_ADAPTER_INFO_W2KSP1>(), 4);
+    assert_eq!(size_of::<FIXED_INFO_W2KSP1>(), 584);
+    assert_eq!(align_of::<FIXED_INFO_W2KSP1>(), 4);
+    assert_eq!(size_of::<IP_INTERFACE_NAME_INFO_W2KSP1>(), 44);
+    assert_eq!(align_of::<IP_INTERFACE_NAME_INFO_W2KSP1>(), 4);
+}
 #[cfg(feature = "jobapi2")] #[test]
 fn um_jobapi2() {
     use winapi::um::jobapi2::*;
@@ -3695,6 +4575,12 @@ fn um_imm() {
     use winapi::um::imm::*;
     assert_eq!(size_of::<COMPOSITIONFORM>(), 28);
     assert_eq!(align_of::<COMPOSITIONFORM>(), 4);
+}
+#[cfg(feature = "l2cmn")] #[test]
+fn um_l2cmn() {
+    use winapi::um::l2cmn::*;
+    assert_eq!(size_of::<L2_NOTIFICATION_DATA>(), 32);
+    assert_eq!(align_of::<L2_NOTIFICATION_DATA>(), 4);
 }
 #[cfg(feature = "lmaccess")] #[test]
 fn um_lmaccess() {
@@ -7370,14 +8256,6 @@ fn um_winnt() {
     assert_eq!(align_of::<GROUP_AFFINITY>(), 4);
     assert_eq!(size_of::<FLOAT128>(), 16);
     assert_eq!(align_of::<FLOAT128>(), 8);
-    assert_eq!(size_of::<LARGE_INTEGER_u>(), 8);
-    assert_eq!(align_of::<LARGE_INTEGER_u>(), 4);
-    assert_eq!(size_of::<LARGE_INTEGER>(), 8);
-    assert_eq!(align_of::<LARGE_INTEGER>(), 8);
-    assert_eq!(size_of::<ULARGE_INTEGER_u>(), 8);
-    assert_eq!(align_of::<ULARGE_INTEGER_u>(), 4);
-    assert_eq!(size_of::<ULARGE_INTEGER>(), 8);
-    assert_eq!(align_of::<ULARGE_INTEGER>(), 8);
     assert_eq!(size_of::<LUID>(), 8);
     assert_eq!(align_of::<LUID>(), 4);
     assert_eq!(size_of::<LIST_ENTRY>(), 8);
@@ -8608,6 +9486,10 @@ fn um_winsvc() {
     assert_eq!(align_of::<QUERY_SERVICE_CONFIGA>(), 4);
     assert_eq!(size_of::<QUERY_SERVICE_CONFIGW>(), 36);
     assert_eq!(align_of::<QUERY_SERVICE_CONFIGW>(), 4);
+    assert_eq!(size_of::<SERVICE_DESCRIPTIONA>(), 4);
+    assert_eq!(align_of::<SERVICE_DESCRIPTIONA>(), 4);
+    assert_eq!(size_of::<SERVICE_DESCRIPTIONW>(), 4);
+    assert_eq!(align_of::<SERVICE_DESCRIPTIONW>(), 4);
     assert_eq!(size_of::<SERVICE_TABLE_ENTRYA>(), 8);
     assert_eq!(align_of::<SERVICE_TABLE_ENTRYA>(), 4);
     assert_eq!(size_of::<SERVICE_TABLE_ENTRYW>(), 8);
@@ -8864,6 +9746,144 @@ fn um_ws2bth() {
     assert_eq!(align_of::<BTH_INFO_REQ>(), 1);
     assert_eq!(size_of::<BTH_INFO_RSP>(), 47);
     assert_eq!(align_of::<BTH_INFO_RSP>(), 1);
+}
+#[cfg(feature = "wlanapi")] #[test]
+fn um_wlanapi() {
+    use winapi::um::wlanapi::*;
+    assert_eq!(size_of::<WLAN_PROFILE_INFO>(), 516);
+    assert_eq!(align_of::<WLAN_PROFILE_INFO>(), 4);
+    assert_eq!(size_of::<DOT11_NETWORK>(), 40);
+    assert_eq!(align_of::<DOT11_NETWORK>(), 4);
+    assert_eq!(size_of::<WLAN_RAW_DATA>(), 8);
+    assert_eq!(align_of::<WLAN_RAW_DATA>(), 4);
+    assert_eq!(size_of::<WLAN_RAW_DATA_LIST_DataList>(), 8);
+    assert_eq!(align_of::<WLAN_RAW_DATA_LIST_DataList>(), 4);
+    assert_eq!(size_of::<WLAN_RAW_DATA_LIST>(), 16);
+    assert_eq!(align_of::<WLAN_RAW_DATA_LIST>(), 4);
+    assert_eq!(size_of::<WLAN_RATE_SET>(), 256);
+    assert_eq!(align_of::<WLAN_RATE_SET>(), 4);
+    assert_eq!(size_of::<WLAN_AVAILABLE_NETWORK>(), 628);
+    assert_eq!(align_of::<WLAN_AVAILABLE_NETWORK>(), 4);
+    assert_eq!(size_of::<WLAN_AVAILABLE_NETWORK_V2>(), 644);
+    assert_eq!(align_of::<WLAN_AVAILABLE_NETWORK_V2>(), 4);
+    assert_eq!(size_of::<WLAN_BSS_ENTRY>(), 360);
+    assert_eq!(align_of::<WLAN_BSS_ENTRY>(), 8);
+    assert_eq!(size_of::<WLAN_BSS_LIST>(), 368);
+    assert_eq!(align_of::<WLAN_BSS_LIST>(), 8);
+    assert_eq!(size_of::<WLAN_INTERFACE_INFO>(), 532);
+    assert_eq!(align_of::<WLAN_INTERFACE_INFO>(), 4);
+    assert_eq!(size_of::<WLAN_ASSOCIATION_ATTRIBUTES>(), 68);
+    assert_eq!(align_of::<WLAN_ASSOCIATION_ATTRIBUTES>(), 4);
+    assert_eq!(size_of::<WLAN_SECURITY_ATTRIBUTES>(), 16);
+    assert_eq!(align_of::<WLAN_SECURITY_ATTRIBUTES>(), 4);
+    assert_eq!(size_of::<WLAN_CONNECTION_ATTRIBUTES>(), 604);
+    assert_eq!(align_of::<WLAN_CONNECTION_ATTRIBUTES>(), 4);
+    assert_eq!(size_of::<WLAN_PHY_RADIO_STATE>(), 12);
+    assert_eq!(align_of::<WLAN_PHY_RADIO_STATE>(), 4);
+    assert_eq!(size_of::<WLAN_RADIO_STATE>(), 772);
+    assert_eq!(align_of::<WLAN_RADIO_STATE>(), 4);
+    assert_eq!(size_of::<WLAN_INTERFACE_CAPABILITY>(), 276);
+    assert_eq!(align_of::<WLAN_INTERFACE_CAPABILITY>(), 4);
+    assert_eq!(size_of::<WLAN_AUTH_CIPHER_PAIR_LIST>(), 12);
+    assert_eq!(align_of::<WLAN_AUTH_CIPHER_PAIR_LIST>(), 4);
+    assert_eq!(size_of::<WLAN_COUNTRY_OR_REGION_STRING_LIST>(), 8);
+    assert_eq!(align_of::<WLAN_COUNTRY_OR_REGION_STRING_LIST>(), 4);
+    assert_eq!(size_of::<WLAN_PROFILE_INFO_LIST>(), 524);
+    assert_eq!(align_of::<WLAN_PROFILE_INFO_LIST>(), 4);
+    assert_eq!(size_of::<WLAN_AVAILABLE_NETWORK_LIST>(), 636);
+    assert_eq!(align_of::<WLAN_AVAILABLE_NETWORK_LIST>(), 4);
+    assert_eq!(size_of::<WLAN_AVAILABLE_NETWORK_LIST_V2>(), 652);
+    assert_eq!(align_of::<WLAN_AVAILABLE_NETWORK_LIST_V2>(), 4);
+    assert_eq!(size_of::<WLAN_INTERFACE_INFO_LIST>(), 540);
+    assert_eq!(align_of::<WLAN_INTERFACE_INFO_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_NETWORK_LIST>(), 48);
+    assert_eq!(align_of::<DOT11_NETWORK_LIST>(), 4);
+    assert_eq!(size_of::<WLAN_CONNECTION_PARAMETERS>(), 24);
+    assert_eq!(align_of::<WLAN_CONNECTION_PARAMETERS>(), 4);
+    assert_eq!(size_of::<WLAN_CONNECTION_PARAMETERS_V2>(), 32);
+    assert_eq!(align_of::<WLAN_CONNECTION_PARAMETERS_V2>(), 4);
+    assert_eq!(size_of::<WLAN_MSM_NOTIFICATION_DATA>(), 580);
+    assert_eq!(align_of::<WLAN_MSM_NOTIFICATION_DATA>(), 4);
+    assert_eq!(size_of::<WLAN_CONNECTION_NOTIFICATION_DATA>(), 572);
+    assert_eq!(align_of::<WLAN_CONNECTION_NOTIFICATION_DATA>(), 4);
+    assert_eq!(size_of::<WLAN_PHY_FRAME_STATISTICS>(), 144);
+    assert_eq!(align_of::<WLAN_PHY_FRAME_STATISTICS>(), 8);
+    assert_eq!(size_of::<WLAN_MAC_FRAME_STATISTICS>(), 96);
+    assert_eq!(align_of::<WLAN_MAC_FRAME_STATISTICS>(), 8);
+    assert_eq!(size_of::<WLAN_STATISTICS>(), 368);
+    assert_eq!(align_of::<WLAN_STATISTICS>(), 8);
+    assert_eq!(size_of::<WLAN_DEVICE_SERVICE_GUID_LIST>(), 24);
+    assert_eq!(align_of::<WLAN_DEVICE_SERVICE_GUID_LIST>(), 4);
+    assert_eq!(size_of::<WFD_GROUP_ID>(), 44);
+    assert_eq!(align_of::<WFD_GROUP_ID>(), 4);
+    assert_eq!(size_of::<WLAN_HOSTED_NETWORK_PEER_STATE>(), 12);
+    assert_eq!(align_of::<WLAN_HOSTED_NETWORK_PEER_STATE>(), 4);
+    assert_eq!(size_of::<WLAN_HOSTED_NETWORK_RADIO_STATE>(), 8);
+    assert_eq!(align_of::<WLAN_HOSTED_NETWORK_RADIO_STATE>(), 4);
+    assert_eq!(size_of::<WLAN_HOSTED_NETWORK_STATE_CHANGE>(), 12);
+    assert_eq!(align_of::<WLAN_HOSTED_NETWORK_STATE_CHANGE>(), 4);
+    assert_eq!(size_of::<WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE>(), 28);
+    assert_eq!(align_of::<WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE>(), 4);
+    assert_eq!(size_of::<WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS>(), 40);
+    assert_eq!(align_of::<WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS>(), 4);
+    assert_eq!(size_of::<WLAN_HOSTED_NETWORK_SECURITY_SETTINGS>(), 8);
+    assert_eq!(align_of::<WLAN_HOSTED_NETWORK_SECURITY_SETTINGS>(), 4);
+    assert_eq!(size_of::<WLAN_HOSTED_NETWORK_STATUS>(), 52);
+    assert_eq!(align_of::<WLAN_HOSTED_NETWORK_STATUS>(), 4);
+}
+#[cfg(feature = "wlanihv")] #[test]
+fn um_wlanihv() {
+    use winapi::um::wlanihv::*;
+    assert_eq!(size_of::<DOT11EXT_APIS>(), 88);
+    assert_eq!(align_of::<DOT11EXT_APIS>(), 4);
+    assert_eq!(size_of::<DOT11EXT_IHV_HANDLERS>(), 76);
+    assert_eq!(align_of::<DOT11EXT_IHV_HANDLERS>(), 4);
+    assert_eq!(size_of::<DOT11EXT_VIRTUAL_STATION_APIS>(), 16);
+    assert_eq!(align_of::<DOT11EXT_VIRTUAL_STATION_APIS>(), 4);
+    assert_eq!(size_of::<DOT11_IHV_VERSION_INFO>(), 8);
+    assert_eq!(align_of::<DOT11_IHV_VERSION_INFO>(), 4);
+    assert_eq!(size_of::<DOT11EXT_IHV_UI_REQUEST>(), 44);
+    assert_eq!(align_of::<DOT11EXT_IHV_UI_REQUEST>(), 4);
+    assert_eq!(size_of::<DOT11_EAP_RESULT>(), 8);
+    assert_eq!(align_of::<DOT11_EAP_RESULT>(), 4);
+    assert_eq!(size_of::<DOT11_MSONEX_RESULT_PARAMS>(), 28);
+    assert_eq!(align_of::<DOT11_MSONEX_RESULT_PARAMS>(), 4);
+    assert_eq!(size_of::<DOT11EXT_IHV_CONNECTIVITY_PROFILE>(), 4);
+    assert_eq!(align_of::<DOT11EXT_IHV_CONNECTIVITY_PROFILE>(), 4);
+    assert_eq!(size_of::<DOT11EXT_IHV_SECURITY_PROFILE>(), 8);
+    assert_eq!(align_of::<DOT11EXT_IHV_SECURITY_PROFILE>(), 4);
+    assert_eq!(size_of::<DOT11EXT_IHV_DISCOVERY_PROFILE>(), 12);
+    assert_eq!(align_of::<DOT11EXT_IHV_DISCOVERY_PROFILE>(), 4);
+    assert_eq!(size_of::<DOT11EXT_IHV_DISCOVERY_PROFILE_LIST>(), 8);
+    assert_eq!(align_of::<DOT11EXT_IHV_DISCOVERY_PROFILE_LIST>(), 4);
+    assert_eq!(size_of::<DOT11EXT_VIRTUAL_STATION_AP_PROPERTY>(), 116);
+    assert_eq!(align_of::<DOT11EXT_VIRTUAL_STATION_AP_PROPERTY>(), 4);
+    assert_eq!(size_of::<WDIAG_IHV_WLAN_ID>(), 560);
+    assert_eq!(align_of::<WDIAG_IHV_WLAN_ID>(), 4);
+}
+#[cfg(feature = "wlanihvtypes")] #[test]
+fn um_wlanihvtypes() {
+    use winapi::um::wlanihvtypes::*;
+    assert_eq!(size_of::<DOT11_MSSECURITY_SETTINGS>(), 36);
+    assert_eq!(align_of::<DOT11_MSSECURITY_SETTINGS>(), 4);
+    assert_eq!(size_of::<DOT11EXT_IHV_SSID_LIST>(), 40);
+    assert_eq!(align_of::<DOT11EXT_IHV_SSID_LIST>(), 4);
+    assert_eq!(size_of::<DOT11EXT_IHV_PROFILE_PARAMS>(), 12);
+    assert_eq!(align_of::<DOT11EXT_IHV_PROFILE_PARAMS>(), 4);
+    assert_eq!(size_of::<DOT11EXT_IHV_PARAMS>(), 544);
+    assert_eq!(align_of::<DOT11EXT_IHV_PARAMS>(), 4);
+}
+#[cfg(feature = "wlclient")] #[test]
+fn um_wlclient() {
+    use winapi::um::wlclient::*;
+    assert_eq!(size_of::<DOT11_ADAPTER>(), 28);
+    assert_eq!(align_of::<DOT11_ADAPTER>(), 4);
+    assert_eq!(size_of::<DOT11_BSS_LIST>(), 8);
+    assert_eq!(align_of::<DOT11_BSS_LIST>(), 4);
+    assert_eq!(size_of::<DOT11_PORT_STATE>(), 20);
+    assert_eq!(align_of::<DOT11_PORT_STATE>(), 4);
+    assert_eq!(size_of::<DOT11_SECURITY_PACKET_HEADER>(), 9);
+    assert_eq!(align_of::<DOT11_SECURITY_PACKET_HEADER>(), 1);
 }
 #[cfg(feature = "ws2spi")] #[test]
 fn um_ws2spi() {

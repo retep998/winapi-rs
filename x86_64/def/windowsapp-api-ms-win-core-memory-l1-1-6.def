@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-core-memory-l1-1-6.dll
+EXPORTS
+MapViewOfFile3FromApp
+VirtualAlloc2FromApp

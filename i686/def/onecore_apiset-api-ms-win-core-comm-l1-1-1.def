@@ -1,0 +1,3 @@
+LIBRARY api-ms-win-core-comm-l1-1-1.dll
+EXPORTS
+OpenCommPort@12

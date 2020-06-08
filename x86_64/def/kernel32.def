@@ -72,6 +72,7 @@ ClearCommError
 CloseHandle
 ClosePackageInfo
 ClosePrivateNamespace
+ClosePseudoConsole
 CloseState
 CloseThreadpool
 CloseThreadpoolCleanupGroup
@@ -151,6 +152,7 @@ CreatePrivateNamespaceA
 CreatePrivateNamespaceW
 CreateProcessA
 CreateProcessW
+CreatePseudoConsole
 CreateRemoteThread
 CreateRemoteThreadEx
 CreateSemaphoreA
@@ -445,6 +447,8 @@ GetDiskFreeSpaceA
 GetDiskFreeSpaceExA
 GetDiskFreeSpaceExW
 GetDiskFreeSpaceW
+GetDiskSpaceInformationA
+GetDiskSpaceInformationW
 GetDllDirectoryA
 GetDllDirectoryW
 GetDriveTypeA
@@ -741,6 +745,7 @@ InitOnceExecuteOnce
 InitOnceInitialize
 InitializeConditionVariable
 InitializeContext
+InitializeContext2
 InitializeCriticalSection
 InitializeCriticalSectionAndSpinCount
 InitializeCriticalSectionEx
@@ -830,6 +835,7 @@ LoadStringBaseW
 LocalAlloc
 LocalCompact
 LocalFileTimeToFileTime
+LocalFileTimeToLocalSystemTime
 LocalFlags
 LocalFree
 LocalHandle
@@ -837,6 +843,7 @@ LocalLock
 LocalReAlloc
 LocalShrink
 LocalSize
+LocalSystemTimeToLocalFileTime
 LocalUnlock
 LocaleNameToLCID
 LocateXStateFeature
@@ -1004,6 +1011,7 @@ RequestDeviceWakeup
 RequestWakeupLatency
 ResetEvent
 ResetWriteWatch
+ResizePseudoConsole
 ResolveDelayLoadedAPI
 ResolveDelayLoadsFromDll
 ResolveLocaleName

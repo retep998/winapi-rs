@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-core-slapi-l1-1-0.dll
+EXPORTS
+SLQueryLicenseValueFromApp@20
+SLQueryLicenseValueFromApp2@4

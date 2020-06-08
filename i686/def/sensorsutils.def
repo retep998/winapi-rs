@@ -32,11 +32,15 @@ EvaluateActivityThresholds@12
 GetFileTimeDifference@12
 GetFileTimeFromTimeStamp@8
 GetPerformanceTime@4
+GetSetting@8
 GetTimeStampFromFileTime@8
+InitPropVariantFromCLSIDArray@12
 InitPropVariantFromFloat@8
 IsCollectionListSame@8
+IsGUIDPresentInList@12
 IsKeyPresentInCollectionList@8
 IsKeyPresentInPropertyList@8
+IsSensorSubscribed@20
 MapActivityConfidenceToState@12
 PropKeyFindKeyGetBool@12
 PropKeyFindKeyGetDouble@12

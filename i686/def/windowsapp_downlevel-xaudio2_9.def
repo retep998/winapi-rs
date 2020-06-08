@@ -1,0 +1,8 @@
+LIBRARY XAudio2_9.dll
+EXPORTS
+CreateAudioReverb@4 @2
+CreateAudioVolumeMeter@4 @3
+CreateFX @4
+X3DAudioCalculate @5
+X3DAudioInitialize @6
+XAudio2Create@12 @1

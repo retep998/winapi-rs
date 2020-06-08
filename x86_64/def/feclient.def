@@ -1,5 +1,7 @@
 LIBRARY FeClient.dll
 EXPORTS
+DpQueryUserProtectorDescriptor
+DpQueryUserProtectorDescriptorInfo
 EdpAllowFileAccessForProcess
 EdpContainerizeFile
 EdpCredentialCreate
@@ -17,6 +19,8 @@ EdpDplUserUnlockStart
 EdpFree
 EdpGetContainerIdentity
 EdpGetCredServiceState
+EdpIsConsumerDataProtectionEnforced
+EdpIsConsumerDataProtectionSupported
 EdpPurgeAppLearningEvents
 EdpQueryCredServiceInfo
 EdpQueryDplEnforcedPolicyOwnerIds
@@ -40,7 +44,12 @@ EfsClientQueryProtectors
 EfsClientReadFileRaw
 EfsClientWriteFileRaw
 EfsClientWriteFileWithHeaderRaw
+EfsReprotectFile
 EfsUtilGetCurrentKey
+EfsValidateTokenForConsumer
+EfsValidateUserForConsumer
+FeClClearCaches
+FeClQueryInfo
 FeClientInitialize
 GetLockSessionUnwrappedKey
 GetLockSessionWrappedKey

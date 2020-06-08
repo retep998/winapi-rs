@@ -1,8 +1,21 @@
 LIBRARY SHLWAPI.dll
 EXPORTS
+AssocCopyVerbs@8 @381
+AssocMakeApplicationByKeyW@12 @409
+AssocMakeProgid@16 @407
+CalculateAspectRatio@12 @581
+CharUpperNoDBCSW@4 @452
+DoesStringRoundTripW@12 @365
+DupWideToAnsi@8 @617
+FDSA_DeleteItem@8 @211
+FDSA_Initialize@20 @208
+FDSA_InsertItem@12 @210
+FixSlashesAndColonW@4 @448
 GetAcceptLanguagesA@8 @14
 GetAcceptLanguagesW@8 @15
 IsCharSpaceW@4 @29
+IShellFolder_GetDisplayNameOf@20 @316
+IShellFolder_ParseDisplayName@28 @317
 IsInternetESCEnabled@0 @553
 IsOS@4 @437
 IStream_Copy@12 @568
@@ -15,33 +28,92 @@ IStream_Write@12 @212
 IStream_WritePidl@8 @513
 IStream_WriteStr@8 @597
 IUnknown_AtomicRelease@4 @169
+IUnknown_CPContainerInvokeIndirect@12 @288
+IUnknown_EnableModeless@8 @355
 IUnknown_GetSite@12 @256
 IUnknown_GetWindow@8 @172
+IUnknown_HasFocusIO@4 @481
+IUnknown_OnFocusChangeIS@12 @509
 IUnknown_QueryService@16 @176
+IUnknown_QueryServiceExec@28 @484
+IUnknown_QueryServiceForWebBrowserApp@12 @538
+IUnknown_QueryServicePropertyBag@16 @536
 IUnknown_Set@8 @199
+IUnknown_SetOwner@8 @173
 IUnknown_SetSite@8 @174
+IUnknown_TranslateAcceleratorIO@8 @478
+IUnknown_UIActivateIO@12 @479
+MayExecForward@28 @201
+MayQSForward@24 @200
 MIME_GetExtensionW@12 @331
 ParseURLA@8 @1
 ParseURLW@8 @2
+PathFileExistsAndAttributesA@8 @445
+PathFileExistsDefExtAndAttributesW@12 @511
+PathFileExistsDefExtW@8 @4
+PathFindOnPathExW@12 @6
+PathUnExpandEnvStringsForUserW@16 @466
 QISearch@16 @219
+QuerySourceCreateFromKey@20 @544
+SHAddDataBlock@8 @20
 SHAnsiToAnsi@12 @345
 SHAnsiToUnicode@12 @215
+SHClearViewStatePropertyBag@12 @616
 SHCreateMemStream@8 @12
+SHCreatePropertyBagOnProfileSection@20 @472
+SHCreatePropertyBagOnRegKey@20 @471
+SHCreatePropertyStoreOnXML@20 @621
 SHCreateThread@16 @16
 SHCreateThreadWithHandle@20 @615
+SHExpandEnvironmentStringsAlloc@8 @572
+SHExpandEnvironmentStringsForUserW@16 @464
 SHFillRectClr@12 @197
+SHFindDataBlock@8 @22
 SHFormatDateTimeW@16 @354
+SHForwardContextMenuMsg@24 @545
+SHFreeDataBlockList@4 @19
+SHGetCurColorRes@0 @193
+SHGetFileDescriptionW@20 @348
+SHGetIniStringW@20 @294
+SHGetMenuFromID@8 @192
 SHGetPerScreenResName@12 @533
+SHGetRestriction@12 @271
+SHGetShellKeyEx@16 @635
 SHGetViewStatePropertyBag@20 @515
+SHInvokeCommand@16 @363
+SHInvokeCommandOnContextMenu@20 @540
+SHInvokeCommandOnContextMenuEx@28 @639
+SHInvokeCommandWithFlagsAndSite@28 @571
+SHInvokeDefaultCommand@12 @279
 SHIsChildOrSelf@8 @204
+SHIsExpandableFolder@8 @195
+SHLoadFromPropertyBag@8 @187
 SHLoadIndirectString@16 @487
+SHLoadMenuPopup@8 @177
+SHMenuIndexFromID@8 @179
+SHMessageBoxCheckExW@28 @292
 SHQueueUserWorkItem@28 @260
+SHReadDataBlockList@8 @18
 SHRegGetIntW@12 @280
+SHRegisterClassW@4 @237
+SHRemoveDataBlock@8 @21
+SHRemoveDefaultDialogFont@4 @221
+SHRestrictionLookup@24 @266
 SHSendMessageBroadcastW@12 @433
+SHSetDefaultDialogFont@8 @220
+SHSetIniStringW@16 @295
+SHSetWindowBits@16 @165
+SHSimulateDrop@20 @186
 SHStringFromGUIDW@12 @24
 SHStripMneumonicW@4 @225
 SHUnicodeToAnsi@12 @217
 SHUnicodeToUnicode@12 @346
+SHWeakQueryInterface@16 @267
+SHWeakReleaseInterface@8 @268
+SHWriteDataBlockList@8 @17
+SKAllocValueW@24 @519
+SKGetValueW@24 @516
+SKSetValueW@24 @517
 StrCmpCA@8 @155
 StrCmpCW@8 @156
 StrCmpICA@8 @157
@@ -51,44 +123,20 @@ StrCmpNCW@12 @152
 StrCmpNICA@12 @153
 StrCmpNICW@12 @154
 UrlFixupW@12 @462
-AssocCopyVerbs@8
+ZoneCheckUrlExW@32 @231
 AssocCreate@24
 AssocGetPerceivedType@16
 AssocIsDangerous@4
-AssocMakeApplicationByKeyW@12
-AssocMakeProgid@16
 AssocQueryStringA@24
 AssocQueryStringByKeyW@24
 AssocQueryStringW@24
-CalculateAspectRatio@12
-CharUpperNoDBCSW@4
 ColorHLSToRGB@12
 ColorRGBToHLS@16
-DoesStringRoundTripW@12
-DupWideToAnsi@8
-FDSA_DeleteItem@8
-FDSA_Initialize@20
-FDSA_InsertItem@12
-FixSlashesAndColonW@4
 GetMenuPosFromID@8
 HashData@16
-IShellFolder_GetDisplayNameOf@20
-IShellFolder_ParseDisplayName@28
-IUnknown_CPContainerInvokeIndirect@12
-IUnknown_EnableModeless@8
 IUnknown_Exec@24
-IUnknown_HasFocusIO@4
-IUnknown_OnFocusChangeIS@12
-IUnknown_QueryServiceExec@28
-IUnknown_QueryServiceForWebBrowserApp@12
-IUnknown_QueryServicePropertyBag@16
-IUnknown_SetOwner@8
-IUnknown_TranslateAcceleratorIO@8
-IUnknown_UIActivateIO@12
 IntlStrEqWorkerW@16
 IsCharSpaceA@4
-MayExecForward@28
-MayQSForward@24
 PathAddBackslashA@4
 PathAddBackslashW@4
 PathAddExtensionA@8
@@ -109,9 +157,6 @@ PathCreateFromUrlA@16
 PathCreateFromUrlAlloc@12
 PathCreateFromUrlW@16
 PathFileExistsA@4
-PathFileExistsAndAttributesA@8
-PathFileExistsDefExtAndAttributesW@12
-PathFileExistsDefExtW@8
 PathFileExistsW@4
 PathFindExtensionA@4
 PathFindExtensionW@4
@@ -119,7 +164,6 @@ PathFindFileNameA@4
 PathFindFileNameW@4
 PathFindNextComponentA@4
 PathFindNextComponentW@4
-PathFindOnPathExW@12
 PathFindOnPathW@8
 PathFindSuffixArrayW@12
 PathGetArgsA@4
@@ -187,19 +231,12 @@ PathStripPathW@4
 PathStripToRootA@4
 PathStripToRootW@4
 PathUnExpandEnvStringsA@12
-PathUnExpandEnvStringsForUserW@16
 PathUnExpandEnvStringsW@12
 PathUndecorateW@4
 PathUnquoteSpacesA@4
 PathUnquoteSpacesW@4
-QuerySourceCreateFromKey@20
-SHAddDataBlock@8
-SHClearViewStatePropertyBag@12
 SHCopyKeyA@16
 SHCopyKeyW@16
-SHCreatePropertyBagOnProfileSection@20
-SHCreatePropertyBagOnRegKey@20
-SHCreatePropertyStoreOnXML@20
 SHCreateShellPalette@4
 SHCreateStreamOnFileA@12
 SHCreateStreamOnFileEx@24
@@ -216,31 +253,10 @@ SHEnumKeyExA@16
 SHEnumKeyExW@16
 SHEnumValueA@28
 SHEnumValueW@28
-SHExpandEnvironmentStringsAlloc@8
-SHExpandEnvironmentStringsForUserW@16
-SHFindDataBlock@8
-SHForwardContextMenuMsg@24
-SHFreeDataBlockList@4
-SHGetCurColorRes@0
-SHGetFileDescriptionW@20
-SHGetIniStringW@20
 SHGetInverseCMAP@8
-SHGetMenuFromID@8
-SHGetRestriction@12
-SHGetShellKeyEx@16
 SHGetThreadRef@4
 SHGetValueA@24
 SHGetValueW@24
-SHInvokeCommand@16
-SHInvokeCommandOnContextMenu@20
-SHInvokeCommandOnContextMenuEx@28
-SHInvokeCommandWithFlagsAndSite@28
-SHInvokeDefaultCommand@12
-SHIsExpandableFolder@8
-SHLoadFromPropertyBag@8
-SHLoadMenuPopup@8
-SHMenuIndexFromID@8
-SHMessageBoxCheckExW@28
 SHOpenRegStream2A@16
 SHOpenRegStream2W@16
 SHOpenRegStreamA@16
@@ -250,7 +266,6 @@ SHQueryInfoKeyA@20
 SHQueryInfoKeyW@20
 SHQueryValueExA@24
 SHQueryValueExW@24
-SHReadDataBlockList@8
 SHRegCloseUSKey@4
 SHRegCreateUSKeyA@20
 SHRegCreateUSKeyW@20
@@ -283,28 +298,14 @@ SHRegSetUSValueA@24
 SHRegSetUSValueW@24
 SHRegWriteUSValueA@24
 SHRegWriteUSValueW@24
-SHRegisterClassW@4
 SHReleaseThreadRef@0
-SHRemoveDataBlock@8
-SHRemoveDefaultDialogFont@4
-SHRestrictionLookup@24
-SHSetDefaultDialogFont@8
-SHSetIniStringW@16
 SHSetThreadRef@4
 SHSetValueA@24
 SHSetValueW@24
-SHSetWindowBits@16
-SHSimulateDrop@20
 SHSkipJunction@8
 SHStrDupA@8
 SHStrDupW@8
 SHUnicodeToAnsiCP@16
-SHWeakQueryInterface@16
-SHWeakReleaseInterface@8
-SHWriteDataBlockList@8
-SKAllocValueW@24
-SKGetValueW@24
-SKSetValueW@24
 ShellMessageBoxA
 ShellMessageBoxW
 StrCSpnA@8
@@ -387,4 +388,3 @@ UrlIsOpaqueW@4
 UrlIsW@8
 UrlUnescapeA@16
 UrlUnescapeW@16
-ZoneCheckUrlExW@32

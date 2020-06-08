@@ -1,0 +1,9 @@
+LIBRARY api-ms-win-devices-swdevice-l1-1-0.dll
+EXPORTS
+SwDeviceClose
+SwDeviceCreate
+SwDeviceInterfacePropertySet
+SwDeviceInterfaceRegister
+SwDeviceInterfaceSetState
+SwDevicePropertySet
+SwMemFree

@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-core-util-l1-1-1.dll
+EXPORTS
+DecodeRemotePointer@12
+EncodeRemotePointer@12

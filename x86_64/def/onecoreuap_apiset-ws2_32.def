@@ -1,0 +1,196 @@
+LIBRARY WS2_32.dll
+EXPORTS
+__WSAFDIsSet @151
+accept @1
+bind @2
+closesocket @3
+connect @4
+gethostbyaddr @51
+gethostbyname @52
+gethostname @57
+getpeername @5
+getprotobyname @53
+getprotobynumber @54
+getservbyname @55
+getservbyport @56
+getsockname @6
+getsockopt @7
+htonl @8
+htons @9
+inet_addr @11
+inet_ntoa @12
+ioctlsocket @10
+listen @13
+ntohl @14
+ntohs @15
+recv @16
+recvfrom @17
+select @18
+send @19
+sendto @20
+setsockopt @21
+shutdown @22
+socket @23
+WEP @500
+WSAAsyncGetHostByAddr @102
+WSAAsyncGetHostByName @103
+WSAAsyncGetProtoByName @105
+WSAAsyncGetProtoByNumber @104
+WSAAsyncGetServByName @107
+WSAAsyncGetServByPort @106
+WSAAsyncSelect @101
+WSACancelAsyncRequest @108
+WSACancelBlockingCall @113
+WSACleanup @116
+WSAGetLastError @111
+WSAIsBlocking @114
+WSASetBlockingHook @109
+WSASetLastError @112
+WSAStartup @115
+WSAUnhookBlockingHook @110
+FreeAddrInfoEx
+FreeAddrInfoExW
+FreeAddrInfoW
+GetAddrInfoExA
+GetAddrInfoExCancel
+GetAddrInfoExOverlappedResult
+GetAddrInfoExW
+GetAddrInfoW
+GetHostNameW
+GetNameInfoW
+InetNtopW
+InetPtonW
+SetAddrInfoExA
+SetAddrInfoExW
+WPUCompleteOverlappedRequest
+WPUGetProviderPathEx
+WSAAccept
+WSAAddressToStringA
+WSAAddressToStringW
+WSAAdvertiseProvider
+WSACloseEvent
+WSAConnect
+WSAConnectByList
+WSAConnectByNameA
+WSAConnectByNameW
+WSACreateEvent
+WSADuplicateSocketA
+WSADuplicateSocketW
+WSAEnumNameSpaceProvidersA
+WSAEnumNameSpaceProvidersExA
+WSAEnumNameSpaceProvidersExW
+WSAEnumNameSpaceProvidersW
+WSAEnumNetworkEvents
+WSAEnumProtocolsA
+WSAEnumProtocolsW
+WSAEventSelect
+WSAGetOverlappedResult
+WSAGetQOSByName
+WSAGetServiceClassInfoA
+WSAGetServiceClassInfoW
+WSAGetServiceClassNameByClassIdA
+WSAGetServiceClassNameByClassIdW
+WSAHtonl
+WSAHtons
+WSAInstallServiceClassA
+WSAInstallServiceClassW
+WSAIoctl
+WSAJoinLeaf
+WSALookupServiceBeginA
+WSALookupServiceBeginW
+WSALookupServiceEnd
+WSALookupServiceNextA
+WSALookupServiceNextW
+WSANSPIoctl
+WSANtohl
+WSANtohs
+WSAPoll
+WSAProviderCompleteAsyncCall
+WSAProviderConfigChange
+WSARecv
+WSARecvDisconnect
+WSARecvFrom
+WSARemoveServiceClass
+WSAResetEvent
+WSASend
+WSASendDisconnect
+WSASendMsg
+WSASendTo
+WSASetEvent
+WSASetServiceA
+WSASetServiceW
+WSASocketA
+WSASocketW
+WSAStringToAddressA
+WSAStringToAddressW
+WSAUnadvertiseProvider
+WSAWaitForMultipleEvents
+WSCDeinstallProvider
+WSCDeinstallProvider32
+WSCDeinstallProviderEx
+WSCEnableNSProvider
+WSCEnableNSProvider32
+WSCEnumNameSpaceProviders32
+WSCEnumNameSpaceProvidersEx32
+WSCEnumProtocols
+WSCEnumProtocols32
+WSCEnumProtocolsEx
+WSCGetApplicationCategory
+WSCGetApplicationCategoryEx
+WSCGetProviderInfo
+WSCGetProviderInfo32
+WSCGetProviderPath
+WSCGetProviderPath32
+WSCInstallNameSpace
+WSCInstallNameSpace32
+WSCInstallNameSpaceEx
+WSCInstallNameSpaceEx2
+WSCInstallNameSpaceEx32
+WSCInstallProvider
+WSCInstallProvider64_32
+WSCInstallProviderAndChains64_32
+WSCInstallProviderEx
+WSCSetApplicationCategory
+WSCSetApplicationCategoryEx
+WSCSetProviderInfo
+WSCSetProviderInfo32
+WSCUnInstallNameSpace
+WSCUnInstallNameSpace32
+WSCUnInstallNameSpaceEx2
+WSCUpdateProvider
+WSCUpdateProvider32
+WSCUpdateProviderEx
+WSCWriteNameSpaceOrder
+WSCWriteNameSpaceOrder32
+WSCWriteProviderOrder
+WSCWriteProviderOrder32
+WSCWriteProviderOrderEx
+WahCloseApcHelper
+WahCloseHandleHelper
+WahCloseNotificationHandleHelper
+WahCloseSocketHandle
+WahCloseThread
+WahCompleteRequest
+WahCreateHandleContextTable
+WahCreateNotificationHandle
+WahCreateSocketHandle
+WahDestroyHandleContextTable
+WahDisableNonIFSHandleSupport
+WahEnableNonIFSHandleSupport
+WahEnumerateHandleContexts
+WahInsertHandleContext
+WahNotifyAllProcesses
+WahOpenApcHelper
+WahOpenCurrentThread
+WahOpenHandleHelper
+WahOpenNotificationHandleHelper
+WahQueueUserApc
+WahReferenceContextByHandle
+WahRemoveHandleContext
+WahWaitForNotification
+WahWriteLSPEvent
+freeaddrinfo
+getaddrinfo
+getnameinfo
+inet_ntop
+inet_pton

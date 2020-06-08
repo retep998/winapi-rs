@@ -7,9 +7,13 @@ CryptDecrypt@24
 CryptDeriveKey@20
 CryptDestroyHash@4
 CryptDestroyKey@4
+CryptDuplicateKey@16
 CryptEncrypt@28
+CryptEnumProvidersA@24
+CryptEnumProvidersW@24
 CryptExportKey@24
 CryptGenKey@16
+CryptGenRandom@12
 CryptGetDefaultProviderA@20
 CryptGetDefaultProviderW@20
 CryptGetHashParam@20
@@ -22,6 +26,7 @@ CryptReleaseContext@8
 CryptSetHashParam@16
 CryptSetKeyParam@16
 CryptSetProvParam@16
+CryptSetProviderW@8
 CryptSignHashA@24
 CryptSignHashW@24
 CryptVerifySignatureA@24
