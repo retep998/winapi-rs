@@ -325,7 +325,7 @@ ENUM!{enum ObjectType {
 }}
 #[inline]
 pub fn ObjectTypeIsValid(ty: ObjectType) -> bool {
-  ((ty >= ObjectTypeMin) && (ty <= ObjectTypeMax))
+  (ty >= ObjectTypeMin) && (ty <= ObjectTypeMax)
 }
 pub const GDIP_EMFPLUS_RECORD_BASE: DWORD = 0x00004000;
 pub const GDIP_WMF_RECORD_BASE: DWORD = 0x00010000;

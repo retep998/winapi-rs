@@ -34,7 +34,7 @@ FN!{stdcall EnumerateMetafileProc(
 pub type REAL = c_float;
 pub const REAL_MAX: REAL = f32::MAX;
 pub const REAL_MIN: REAL = f32::MIN_POSITIVE;
-pub const REAL_TOLERANCE: REAL = (f32::MIN_POSITIVE * 100.0);
+pub const REAL_TOLERANCE: REAL = f32::MIN_POSITIVE * 100.0;
 pub const REAL_EPSILON: REAL = 1.192092896e-07f32;
 ENUM!{enum Status {
     Ok = 0,
