@@ -1,5 +1,8 @@
 LIBRARY api-ms-win-appmodel-runtime-l1-1-0.dll
 EXPORTS
+GetCurrentApplicationUserModelId
+GetCurrentPackageFamilyName
+GetCurrentPackageId
 PackageFamilyNameFromFullName
 PackageFamilyNameFromId
 PackageFullNameFromId

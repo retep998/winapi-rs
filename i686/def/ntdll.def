@@ -116,6 +116,7 @@ LdrGetProcedureAddressEx@20
 LdrGetProcedureAddressForCaller@24
 LdrInitShimEngineDynamic@8
 LdrInitializeEnclave@20
+LdrIsModuleSxsRedirected@4
 LdrLoadAlternateResourceModule@16
 LdrLoadAlternateResourceModuleEx@20
 LdrLoadDll@16
@@ -178,6 +179,7 @@ NtAllocateReserveObject@12
 NtAllocateUserPhysicalPages@12
 NtAllocateUuids@16
 NtAllocateVirtualMemory@24
+NtAllocateVirtualMemoryEx@28
 NtAlpcAcceptConnectPort@36
 NtAlpcCancelMessage@12
 NtAlpcConnectPort@44
@@ -229,6 +231,7 @@ NtCompressKey@4
 NtConnectPort@32
 NtContinue@8
 NtConvertBetweenAuxiliaryCounterAndPerformanceCounter@16
+NtCreateCrossVmEvent@24
 NtCreateDebugObject@16
 NtCreateDirectoryObject@12
 NtCreateDirectoryObjectEx@20
@@ -259,6 +262,7 @@ NtCreateProfileEx@40
 NtCreateRegistryTransaction@16
 NtCreateResourceManager@28
 NtCreateSection@28
+NtCreateSectionEx@36
 NtCreateSemaphore@20
 NtCreateSymbolicLinkObject@16
 NtCreateThread@32
@@ -345,7 +349,6 @@ NtIsUILanguageComitted@0
 NtListenPort@8
 NtLoadDriver@4
 NtLoadEnclaveData@36
-NtLoadHotPatch@8
 NtLoadKey@8
 NtLoadKey2@12
 NtLoadKeyEx@32
@@ -355,11 +358,13 @@ NtLockRegistryKey@4
 NtLockVirtualMemory@16
 NtMakePermanentObject@4
 NtMakeTemporaryObject@4
+NtManageHotPatch@16
 NtManagePartition@20
 NtMapCMFModule@24
 NtMapUserPhysicalPages@12
 NtMapUserPhysicalPagesScatter@12
 NtMapViewOfSection@40
+NtMapViewOfSectionEx@36
 NtModifyBootEntry@4
 NtModifyDriverEntry@4
 NtNotifyChangeDirectoryFile@36
@@ -730,6 +735,7 @@ RtlComputeImportTableHash@12
 RtlComputePrivatizedDllName_U@12
 RtlConnectToSm@16
 RtlConsoleMultiByteToUnicodeN@24
+RtlConstructCrossVmEventPath@12
 RtlContractHashTable@4
 RtlConvertDeviceFamilyInfoToString@16
 RtlConvertExclusiveToShared@4
@@ -768,6 +774,7 @@ RtlCreateMemoryBlockLookaside@20
 RtlCreateMemoryZone@12
 RtlCreateProcessParameters@40
 RtlCreateProcessParametersEx@44
+RtlCreateProcessParametersWithTemplate@12
 RtlCreateProcessReflection@24
 RtlCreateQueryDebugBuffer@8
 RtlCreateRegistryKey@8
@@ -834,6 +841,7 @@ RtlDisableThreadProfiling@4
 RtlDllShutdownInProgress@0
 RtlDnsHostNameToComputerName@12
 RtlDoesFileExists_U@4
+RtlDoesNameContainWildCards@4
 RtlDosApplyFileIsolationRedirection_Ustr@36
 RtlDosLongPathNameToNtPathName_U_WithStatus@16
 RtlDosLongPathNameToRelativeNtPathName_U_WithStatus@16
@@ -916,6 +924,8 @@ RtlFirstEntrySList@4
 RtlFirstFreeAce@8
 RtlFlsAlloc@8
 RtlFlsFree@4
+RtlFlsGetValue@8
+RtlFlsSetValue@8
 RtlFlushSecureMemoryCache@8
 RtlFormatCurrentUserKeyPath@4
 RtlFormatMessage@36
@@ -956,6 +966,7 @@ RtlGetElementGenericTableAvl@8
 RtlGetEnabledExtendedFeatures@8
 RtlGetExePath@8
 RtlGetExtendedContextLength@8
+RtlGetExtendedContextLength2@16
 RtlGetExtendedFeaturesMask@4
 RtlGetFileMUIPath@28
 RtlGetFrame@0
@@ -978,6 +989,7 @@ RtlGetNtProductType@4
 RtlGetNtSystemRoot@0
 RtlGetNtVersionNumbers@12
 RtlGetOwnerSecurityDescriptor@12
+RtlGetPersistedStateLocation@28
 RtlGetProcessHeaps@8
 RtlGetProductInfo@20
 RtlGetSaclSecurityDescriptor@16
@@ -1036,6 +1048,7 @@ RtlInitializeCriticalSectionAndSpinCount@8
 RtlInitializeCriticalSectionEx@12
 RtlInitializeExceptionChain@4
 RtlInitializeExtendedContext@12
+RtlInitializeExtendedContext2@20
 RtlInitializeGenericTable@20
 RtlInitializeGenericTableAvl@20
 RtlInitializeHandleTable@12
@@ -1093,6 +1106,7 @@ RtlIsGenericTableEmptyAvl@4
 RtlIsMultiSessionSku@0
 RtlIsMultiUsersInSessionSku@0
 RtlIsNameInExpression@16
+RtlIsNameInUnUpcasedExpression@16
 RtlIsNameLegalDOS8Dot3@12
 RtlIsNonEmptyDirectoryReparsePointAllowed@4
 RtlIsNormalizedString@16
@@ -1181,7 +1195,7 @@ RtlPinAtomInAtomTable@8
 RtlPopFrame@4
 RtlPrefixString@12
 RtlPrefixUnicodeString@12
-RtlProcessFlsData@4
+RtlProcessFlsData@8
 RtlPublishWnfStateData@24
 RtlPushFrame@4
 RtlQueryActivationContextApplicationSettings@28
@@ -1204,13 +1218,16 @@ RtlQueryPerformanceFrequency@4
 RtlQueryProcessBackTraceInformation@4
 RtlQueryProcessDebugInformation@12
 RtlQueryProcessLockInformation@4
+RtlQueryProcessPlaceholderCompatibilityMode@0
 RtlQueryProtectedPolicy@8
+RtlQueryRegistryValueWithFallback@28
 RtlQueryRegistryValues@20
 RtlQueryRegistryValuesEx@20
 RtlQuerySecurityObject@20
 RtlQueryThreadPlaceholderCompatibilityMode@0
 RtlQueryThreadProfiling@8
 RtlQueryTimeZoneInformation@4
+RtlQueryTokenHostIdAsUlong64@8
 RtlQueryUnbiasedInterruptTime@4
 RtlQueryValidationRunlevel@4
 RtlQueryWnfMetaNotification@20
@@ -1218,6 +1235,7 @@ RtlQueryWnfStateData@24
 RtlQueryWnfStateDataWithExplicitScope@28
 RtlQueueApcWow64Thread@20
 RtlQueueWorkItem@12
+RtlRaiseCustomSystemEventTrigger@4
 RtlRaiseException@4
 RtlRaiseStatus@4
 RtlRandom@4
@@ -1292,6 +1310,7 @@ RtlSetOwnerSecurityDescriptor@12
 RtlSetPortableOperatingSystem@4
 RtlSetProcessDebugInformation@12
 RtlSetProcessIsCritical
+RtlSetProcessPlaceholderCompatibilityMode@4
 RtlSetProtectedPolicy@12
 RtlSetProxiedProcessId@4
 RtlSetSaclSecurityDescriptor@16
@@ -1427,9 +1446,6 @@ RtlWow64GetEquivalentMachineCHPE@4
 RtlWow64GetProcessMachines@12
 RtlWow64GetSharedInfoProcess@12
 RtlWow64IsWowGuestMachineSupported@8
-RtlWow64PopAllCrossProcessWork@4
-RtlWow64PopCrossProcessWork@4
-RtlWow64PushCrossProcessWork@8
 RtlWriteRegistryValue@24
 RtlZeroMemory@8
 RtlZombifyActivationContext@4
@@ -1468,6 +1484,8 @@ RtlpRefreshCachedUILanguage@8
 RtlpSetInstallLanguage@8
 RtlpSetPreferredUILanguages@12
 RtlpSetUserPreferredUILanguages@12
+RtlpTimeFieldsToTime@12
+RtlpTimeToTimeFields@12
 RtlpUnWaitCriticalSection@4
 RtlpVerifyAndCommitUILanguageSettings@4
 RtlpWaitForCriticalSection@4
@@ -1584,6 +1602,7 @@ ZwAllocateReserveObject@12
 ZwAllocateUserPhysicalPages@12
 ZwAllocateUuids@16
 ZwAllocateVirtualMemory@24
+ZwAllocateVirtualMemoryEx@28
 ZwAlpcAcceptConnectPort@36
 ZwAlpcCancelMessage@12
 ZwAlpcConnectPort@44
@@ -1635,6 +1654,7 @@ ZwCompressKey@4
 ZwConnectPort@32
 ZwContinue@8
 ZwConvertBetweenAuxiliaryCounterAndPerformanceCounter@16
+ZwCreateCrossVmEvent@24
 ZwCreateDebugObject@16
 ZwCreateDirectoryObject@12
 ZwCreateDirectoryObjectEx@20
@@ -1665,6 +1685,7 @@ ZwCreateProfileEx@40
 ZwCreateRegistryTransaction@16
 ZwCreateResourceManager@28
 ZwCreateSection@28
+ZwCreateSectionEx@36
 ZwCreateSemaphore@20
 ZwCreateSymbolicLinkObject@16
 ZwCreateThread@32
@@ -1749,7 +1770,6 @@ ZwIsUILanguageComitted@0
 ZwListenPort@8
 ZwLoadDriver@4
 ZwLoadEnclaveData@36
-ZwLoadHotPatch@8
 ZwLoadKey@8
 ZwLoadKey2@12
 ZwLoadKeyEx@32
@@ -1759,11 +1779,13 @@ ZwLockRegistryKey@4
 ZwLockVirtualMemory@16
 ZwMakePermanentObject@4
 ZwMakeTemporaryObject@4
+ZwManageHotPatch@16
 ZwManagePartition@20
 ZwMapCMFModule@24
 ZwMapUserPhysicalPages@12
 ZwMapUserPhysicalPagesScatter@12
 ZwMapViewOfSection@40
+ZwMapViewOfSectionEx@36
 ZwModifyBootEntry@4
 ZwModifyDriverEntry@4
 ZwNotifyChangeDirectoryFile@36

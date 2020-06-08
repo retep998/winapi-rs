@@ -4,7 +4,12 @@ BSTR_UserFree @286
 BSTR_UserMarshal @284
 BSTR_UserSize @283
 BSTR_UserUnmarshal @285
+DispCallFunc @146
 DispInvoke @30
+GetErrorInfo @200
+LoadRegTypeLib @162
+LoadTypeLib @161
+LoadTypeLibEx @183
 LPSAFEARRAY_Marshal @296
 LPSAFEARRAY_Size @295
 LPSAFEARRAY_Unmarshal @297
@@ -41,6 +46,7 @@ SafeArraySetIID @57
 SafeArraySetRecordInfo @44
 SafeArrayUnaccessData @24
 SafeArrayUnlock @22
+SetErrorInfo @201
 SysAllocString @2
 SysAllocStringByteLen @150
 SysAllocStringLen @4

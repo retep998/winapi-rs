@@ -1,0 +1,3 @@
+LIBRARY api-ms-win-core-comm-l1-1-2.dll
+EXPORTS
+GetCommPorts@12

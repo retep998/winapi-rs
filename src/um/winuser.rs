@@ -1432,8 +1432,8 @@ pub const WMSZ_TOPRIGHT: UINT = 5;
 pub const WMSZ_BOTTOM: UINT = 6;
 pub const WMSZ_BOTTOMLEFT: UINT = 7;
 pub const WMSZ_BOTTOMRIGHT: UINT = 8;
-pub const HTERROR: LRESULT = (-2);
-pub const HTTRANSPARENT: LRESULT = (-1);
+pub const HTERROR: LRESULT = -2;
+pub const HTTRANSPARENT: LRESULT = -1;
 pub const HTNOWHERE: LRESULT = 0;
 pub const HTCLIENT: LRESULT = 1;
 pub const HTCAPTION: LRESULT = 2;
@@ -2509,7 +2509,8 @@ pub const HWND_TOP: HWND = 0 as HWND;
 pub const HWND_BOTTOM: HWND = 1 as HWND;
 pub const HWND_TOPMOST: HWND = -1isize as HWND;
 pub const HWND_NOTOPMOST: HWND = -2isize as HWND;
-STRUCT!{struct DLGTEMPLATE {
+// FIXME packed(2)
+STRUCT!{#[repr(packed)] struct DLGTEMPLATE {
     style: DWORD,
     dwExtendedStyle: DWORD,
     cdit: WORD,
@@ -2522,7 +2523,8 @@ pub type LPDLGTEMPLATEA = *mut DLGTEMPLATE;
 pub type LPDLGTEMPLATEW = *mut DLGTEMPLATE;
 pub type LPCDLGTEMPLATEA = *const DLGTEMPLATE;
 pub type LPCDLGTEMPLATEW = *const DLGTEMPLATE;
-STRUCT!{struct DLGITEMTEMPLATE {
+// FIXME packed(2)
+STRUCT!{#[repr(packed)] struct DLGITEMTEMPLATE {
     style: DWORD,
     dwExtendedStyle: DWORD,
     x: c_short,
@@ -3252,6 +3254,11 @@ pub const MAX_TOUCH_COUNT: UINT32 = 256;
 pub const TOUCH_FEEDBACK_DEFAULT: DWORD = 0x1;
 pub const TOUCH_FEEDBACK_INDIRECT: DWORD = 0x2;
 pub const TOUCH_FEEDBACK_NONE: DWORD = 0x3;
+ENUM!{enum POINTER_FEEDBACK_MODE {
+    POINTER_FEEDBACK_DEFAULT = 1,
+    POINTER_FEEDBACK_INDIRECT = 2,
+    POINTER_FEEDBACK_NONE = 3,
+}}
 extern "system" {
     pub fn InitializeTouchInjection(
         maxCount: UINT32,
@@ -3381,6 +3388,24 @@ extern "system" {
         hwnd: HWND,
         pointerType: POINTER_INPUT_TYPE,
     ) -> BOOL;
+}
+DECLARE_HANDLE!{HSYNTHETICPOINTERDEVICE, HSYNTHETICPOINTERDEVICE__}
+extern "system" {
+    pub fn CreateSyntheticPointerDevice(
+        pointerType: POINTER_INPUT_TYPE,
+        maxCount: ULONG,
+        mode: POINTER_FEEDBACK_MODE,
+    ) -> HSYNTHETICPOINTERDEVICE;
+    pub fn InjectSyntheticPointerInput(
+        device: HSYNTHETICPOINTERDEVICE,
+        pointerInfo: *const POINTER_TYPE_INFO,
+        count: UINT32,
+    ) -> BOOL;
+    pub fn DestroySyntheticPointerDevice(
+        device: HSYNTHETICPOINTERDEVICE,
+    );
+}
+extern "system" {
     pub fn EnableMouseInPointer(
         fEnable: BOOL,
     ) -> BOOL;
@@ -6311,7 +6336,28 @@ STRUCT!{struct ANIMATIONINFO {
     iMinAnimate: c_int,
 }}
 pub type LPANIMATIONINFO = *mut ANIMATIONINFO;
-//12672
+//12638
+STRUCT!{struct HIGHCONTRASTA {
+    cbSize: UINT,
+    dwFlags: DWORD,
+    lpszDefaultScheme: LPSTR,
+}}
+pub type LPHIGHCONTRASTA = *mut HIGHCONTRASTA;
+STRUCT!{struct HIGHCONTRASTW {
+    cbSize: UINT,
+    dwFlags: DWORD,
+    lpszDefaultScheme: LPWSTR,
+}}
+pub type LPHIGHCONTRASTW = *mut HIGHCONTRASTW;
+pub const HCF_HIGHCONTRASTON: DWORD = 0x00000001;
+pub const HCF_AVAILABLE: DWORD = 0x00000002;
+pub const HCF_HOTKEYACTIVE: DWORD = 0x00000004;
+pub const HCF_CONFIRMHOTKEY: DWORD = 0x00000008;
+pub const HCF_HOTKEYSOUND: DWORD = 0x00000010;
+pub const HCF_INDICATOR: DWORD = 0x00000020;
+pub const HCF_HOTKEYAVAILABLE: DWORD = 0x00000040;
+pub const HCF_LOGONDESKTOP: DWORD = 0x00000100;
+pub const HCF_DEFAULTDESKTOP: DWORD = 0x00000200;
 pub const CDS_UPDATEREGISTRY: DWORD = 0x00000001;
 pub const CDS_TEST: DWORD = 0x00000002;
 pub const CDS_FULLSCREEN: DWORD = 0x00000004;

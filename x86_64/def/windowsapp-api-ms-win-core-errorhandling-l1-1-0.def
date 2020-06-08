@@ -5,3 +5,4 @@ RaiseException
 SetErrorMode
 SetLastError
 SetUnhandledExceptionFilter
+UnhandledExceptionFilter

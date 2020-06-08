@@ -6,6 +6,9 @@ HeapCompact
 HeapCreate
 HeapDestroy
 HeapFree
+HeapQueryInformation
 HeapReAlloc
 HeapSetInformation
 HeapSize
+HeapValidate
+HeapWalk

@@ -6,6 +6,7 @@ WcmCancelOnDemandRequest@4
 WcmCheckCapabilityStatus@0
 WcmCloseHandle@8
 WcmCloseOnDemandRequestHandle@4
+WcmDeleteProxyInformation@12
 WcmDeprovisionCapability@8
 WcmEndIgnoreProfileList@4
 WcmEnterConnectedStandby@0
@@ -35,5 +36,6 @@ WcmSetOperatorDataplanStatus@12
 WcmSetParameter@28
 WcmSetProfileList@16
 WcmSetProperty@24
+WcmSetProxyInformation@16
 WcmStartOnDemandRequest@4
 WcmUpdateCapabilityAccess@12
