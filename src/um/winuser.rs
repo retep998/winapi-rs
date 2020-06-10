@@ -6465,6 +6465,10 @@ extern "system" {
         dpi: UINT,
     ) -> BOOL;
 }
+STRUCT!{struct STICKYKEYS {
+    cbSize: UINT,
+    dwFlags: DWORD,
+}}
 //13191
 extern "system" {
     pub fn SetLastErrorEx(
