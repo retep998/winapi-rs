@@ -6469,6 +6469,7 @@ STRUCT!{struct STICKYKEYS {
     cbSize: UINT,
     dwFlags: DWORD,
 }}
+pub type LPSTICKYKEYS = *mut STICKYKEYS;
 //13191
 extern "system" {
     pub fn SetLastErrorEx(
