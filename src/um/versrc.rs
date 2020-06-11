@@ -1,0 +1,105 @@
+// Licensed under the Apache License, Version 2.0
+// <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
+// All files in the project carrying such notice may not be copied, modified, or distributed
+// except according to those terms
+//! Version Resource definitions
+use shared::minwindef::DWORD;
+use um::winnt::LPWSTR;
+use um::winuser::RT_VERSION;
+pub const VS_FILE_INFO: LPWSTR = RT_VERSION;
+pub const VS_VERSION_INFO: DWORD = 1;
+pub const VS_USER_DEFINED: DWORD = 100;
+pub const VS_FFI_SIGNATURE: DWORD = 0xBD04EFFE;
+pub const VS_FFI_STRUCVERSION: DWORD = 0x00010000;
+pub const VS_FFI_FILEFLAGSMASK: DWORD = 0x0000003F;
+pub const VS_FF_DEBUG: DWORD = 0x00000001;
+pub const VS_FF_PRERELEASE: DWORD = 0x00000002;
+pub const VS_FF_PATCHED: DWORD = 0x00000004;
+pub const VS_FF_PRIVATEBUILD: DWORD = 0x00000008;
+pub const VS_FF_INFOINFERRED: DWORD = 0x00000010;
+pub const VS_FF_SPECIALBUILD: DWORD = 0x00000020;
+pub const VOS_UNKNOWN: DWORD = 0x00000000;
+pub const VOS_DOS: DWORD = 0x00010000;
+pub const VOS_OS216: DWORD = 0x00020000;
+pub const VOS_OS232: DWORD = 0x00030000;
+pub const VOS_NT: DWORD = 0x00040000;
+pub const VOS_WINCE: DWORD = 0x00050000;
+pub const VOS__BASE: DWORD = 0x00000000;
+pub const VOS__WINDOWS16: DWORD = 0x00000001;
+pub const VOS__PM16: DWORD = 0x00000002;
+pub const VOS__PM32: DWORD = 0x00000003;
+pub const VOS__WINDOWS32: DWORD = 0x00000004;
+pub const VOS_DOS_WINDOWS16: DWORD = 0x00010001;
+pub const VOS_DOS_WINDOWS32: DWORD = 0x00010004;
+pub const VOS_OS216_PM16: DWORD = 0x00020002;
+pub const VOS_OS232_PM32: DWORD = 0x00030003;
+pub const VOS_NT_WINDOWS32: DWORD = 0x00040004;
+pub const VFT_UNKNOWN: DWORD = 0x00000000;
+pub const VFT_APP: DWORD = 0x00000001;
+pub const VFT_DLL: DWORD = 0x00000002;
+pub const VFT_DRV: DWORD = 0x00000003;
+pub const VFT_FONT: DWORD = 0x00000004;
+pub const VFT_VXD: DWORD = 0x00000005;
+pub const VFT_STATIC_LIB: DWORD = 0x00000007;
+pub const VFT2_UNKNOWN: DWORD = 0x00000000;
+pub const VFT2_DRV_PRINTER: DWORD = 0x00000001;
+pub const VFT2_DRV_KEYBOARD: DWORD = 0x00000002;
+pub const VFT2_DRV_LANGUAGE: DWORD = 0x00000003;
+pub const VFT2_DRV_DISPLAY: DWORD = 0x00000004;
+pub const VFT2_DRV_MOUSE: DWORD = 0x00000005;
+pub const VFT2_DRV_NETWORK: DWORD = 0x00000006;
+pub const VFT2_DRV_SYSTEM: DWORD = 0x00000007;
+pub const VFT2_DRV_INSTALLABLE: DWORD = 0x00000008;
+pub const VFT2_DRV_SOUND: DWORD = 0x00000009;
+pub const VFT2_DRV_COMM: DWORD = 0x0000000A;
+pub const VFT2_DRV_INPUTMETHOD: DWORD = 0x0000000B;
+pub const VFT2_DRV_VERSIONED_PRINTER: DWORD = 0x0000000C;
+pub const VFT2_FONT_RASTER: DWORD = 0x00000001;
+pub const VFT2_FONT_VECTOR: DWORD = 0x00000002;
+pub const VFT2_FONT_TRUETYPE: DWORD = 0x00000003;
+pub const VFFF_ISSHAREDFILE: DWORD = 0x0001;
+pub const VFF_CURNEDEST: DWORD = 0x0001;
+pub const VFF_FILEINUSE: DWORD = 0x0002;
+pub const VFF_BUFFTOOSMALL: DWORD = 0x0004;
+pub const VIFF_FORCEINSTALL: DWORD = 0x0001;
+pub const VIFF_DONTDELETEOLD: DWORD = 0x0002;
+pub const VIF_TEMPFILE: DWORD = 0x00000001;
+pub const VIF_MISMATCH: DWORD = 0x00000002;
+pub const VIF_SRCOLD: DWORD = 0x00000004;
+pub const VIF_DIFFLANG: DWORD = 0x00000008;
+pub const VIF_DIFFCODEPG: DWORD = 0x00000010;
+pub const VIF_DIFFTYPE: DWORD = 0x00000020;
+pub const VIF_WRITEPROT: DWORD = 0x00000040;
+pub const VIF_FILEINUSE: DWORD = 0x00000080;
+pub const VIF_OUTOFSPACE: DWORD = 0x00000100;
+pub const VIF_ACCESSVIOLATION: DWORD = 0x00000200;
+pub const VIF_SHARINGVIOLATION: DWORD = 0x00000400;
+pub const VIF_CANNOTCREATE: DWORD = 0x00000800;
+pub const VIF_CANNOTDELETE: DWORD = 0x00001000;
+pub const VIF_CANNOTRENAME: DWORD = 0x00002000;
+pub const VIF_CANNOTDELETECUR: DWORD = 0x00004000;
+pub const VIF_OUTOFMEMORY: DWORD = 0x00008000;
+pub const VIF_CANNOTREADSRC: DWORD = 0x00010000;
+pub const VIF_CANNOTREADDST: DWORD = 0x00020000;
+pub const VIF_BUFFTOOSMALL: DWORD = 0x00040000;
+pub const VIF_CANNOTLOADLZ32: DWORD = 0x00080000;
+pub const VIF_CANNOTLOADCABINET: DWORD = 0x00100000;
+pub const FILE_VER_GET_LOCALISED: DWORD = 0x01;
+pub const FILE_VER_GET_NEUTRAL: DWORD = 0x02;
+pub const FILE_VER_GET_PREFETCHED: DWORD = 0x04;
+STRUCT!{struct VS_FIXEDFILEINFO{
+    dwSignature: DWORD,
+    dwStrucVersion: DWORD,
+    dwFileVersionMS: DWORD,
+    dwFileVersionLS: DWORD,
+    dwProductVersionMS: DWORD,
+    dwProductVersionLS: DWORD,
+    dwFileFlagsMask: DWORD,
+    dwFileFlags: DWORD,
+    dwFileOS: DWORD,
+    dwFileType: DWORD,
+    dwFileSubtype: DWORD,
+    dwFileDateMS: DWORD,
+    dwFileDateLS: DWORD,
+}}
