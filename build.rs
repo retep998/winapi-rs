@@ -288,7 +288,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("processthreadsapi", &["basetsd", "guiddef", "minwinbase", "minwindef", "winnt"], &["advapi32", "kernel32"]),
     ("processtopologyapi", &["minwindef", "winnt"], &["kernel32"]),
     ("profileapi", &["minwindef", "winnt"], &["kernel32"]),
-    ("projectedfslib", &["basetsd", "guiddef", "minwindef", "winnt", "vcruntime"], &["projectedfslib"]),
+    ("projectedfslib", &["basetsd", "guiddef", "minwindef", "vcruntime", "winnt"], &["projectedfslib"]),
     ("propidl", &["guiddef", "minwindef", "ntdef", "oaidl", "objidlbase", "unknwnbase", "wtypes", "wtypesbase"], &["ole32"]),
     ("propkey", &["minwindef", "ntdef", "wtypes"], &[]),
     ("propkeydef", &["guiddef", "wtypes"], &[]),
