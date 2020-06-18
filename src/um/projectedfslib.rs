@@ -95,11 +95,11 @@ STRUCT!{struct PRJ_FILE_BASIC_INFO {
     ChangeTime: LARGE_INTEGER,
     FileAttributes: UINT32,
 }}
-STRUCT!{struct PRJ_PLACEHOLDER_INFO_EaInfomation {
+STRUCT!{struct PRJ_PLACEHOLDER_INFO_EaInformation {
     EaBufferSize: UINT32,
     OffsetToFirstEa: UINT32,
 }}
-STRUCT!{struct PRJ_PLACEHOLDER_INFO_SecurityInfomation {
+STRUCT!{struct PRJ_PLACEHOLDER_INFO_SecurityInformation {
     SecurityBufferSize: UINT32,
     OffsetToSecurityDescriptor: UINT32,
 }}
@@ -109,8 +109,8 @@ STRUCT!{struct PRJ_PLACEHOLDER_INFO_StreamsInformation {
 }}
 STRUCT!{struct PRJ_PLACEHOLDER_INFO {
     FileBasicInfo: PRJ_FILE_BASIC_INFO,
-    EaInformation: PRJ_PLACEHOLDER_INFO_EaInfomation,
-    SecurityInfomation: PRJ_PLACEHOLDER_INFO_SecurityInfomation,
+    EaInformation: PRJ_PLACEHOLDER_INFO_EaInformation,
+    SecurityInformation: PRJ_PLACEHOLDER_INFO_SecurityInformation,
     StreamsInformation: PRJ_PLACEHOLDER_INFO_StreamsInformation,
     VersionInfo: PRJ_PLACEHOLDER_VERSION_INFO,
     VariableData: [UINT8; 1],
