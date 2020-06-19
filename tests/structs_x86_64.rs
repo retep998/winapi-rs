@@ -6073,10 +6073,10 @@ fn um_projectedfslib() {
     assert_eq!(align_of::<PRJ_EXT_INFO_TYPE>(), 4);
     assert_eq!(size_of::<PRJ_EXTENDED_INFO_u_Symlink>(), 8);
     assert_eq!(align_of::<PRJ_EXTENDED_INFO_u_Symlink>(), 8);
-    // assert_eq!(size_of::<PRJ_EXTENDED_INFO_u>(), 8);
-    // assert_eq!(align_of::<PRJ_EXTENDED_INFO_u>(), 8);
-    // assert_eq!(size_of::<PRJ_EXTENDED_INFO>(), 16);
-    // assert_eq!(align_of::<PRJ_EXTENDED_INFO>(), 8);
+    assert_eq!(size_of::<PRJ_EXTENDED_INFO_u>(), 8);
+    assert_eq!(align_of::<PRJ_EXTENDED_INFO_u>(), 8);
+    assert_eq!(size_of::<PRJ_EXTENDED_INFO>(), 16);
+    assert_eq!(align_of::<PRJ_EXTENDED_INFO>(), 8);
     assert_eq!(size_of::<PRJ_NOTIFICATION_MAPPING>(), 16);
     assert_eq!(align_of::<PRJ_NOTIFICATION_MAPPING>(), 8);
     assert_eq!(size_of::<PRJ_STARTVIRTUALIZING_FLAGS>(), 4);
@@ -6125,10 +6125,10 @@ fn um_projectedfslib() {
     assert_eq!(align_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u_Notification>(), 4);
     assert_eq!(size_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u_Enumeration>(), 8);
     assert_eq!(align_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u_Enumeration>(), 8);
-    // assert_eq!(size_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u>(), 8);
-    // assert_eq!(align_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u>(), 8);
-    // assert_eq!(size_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS>(), 16);
-    // assert_eq!(align_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS>(), 8);
+    assert_eq!(size_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u>(), 8);
+    assert_eq!(align_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u>(), 8);
+    assert_eq!(size_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS>(), 16);
+    assert_eq!(align_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS>(), 8);
 }
 #[cfg(feature = "propidl")] #[test]
 fn um_propidl() {

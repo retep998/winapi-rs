@@ -52,7 +52,7 @@ STRUCT!{struct PRJ_EXTENDED_INFO_u_Symlink {
     TargetName: PCWSTR,
 }}
 UNION!{union PRJ_EXTENDED_INFO_u {
-    [u32; 1],
+    [u32; 1] [u64; 1],
     Symlink Symlink_mut: PRJ_EXTENDED_INFO_u_Symlink,
 }}
 STRUCT!{struct PRJ_EXTENDED_INFO {
@@ -228,7 +228,7 @@ STRUCT!{struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u_Enumeration {
     DirEntryBufferHandle: PRJ_DIR_ENTRY_BUFFER_HANDLE,
 }}
 UNION!{union PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u {
-    [u32; 1],
+    [u32; 1] [u64; 1],
     Notification Notification_mut: PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u_Notification,
     Enumeration Enumeration_mut: PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u_Enumeration,
 }}
