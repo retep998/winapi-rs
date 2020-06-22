@@ -76,6 +76,7 @@ pub mod guiddef;
 #[cfg(feature = "usb")] pub mod usb;
 #[cfg(feature = "usbioctl")] pub mod usbioctl;
 #[cfg(feature = "usbiodef")] pub mod usbiodef;
+#[cfg(feature = "usbscan")] pub mod usbscan;
 #[cfg(feature = "usbspec")] pub mod usbspec;
 #[cfg(feature = "windef")] pub mod windef;
 #[cfg(feature = "windot11")] pub mod windot11;

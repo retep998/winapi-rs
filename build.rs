@@ -85,6 +85,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("usb", &["minwindef", "usbspec", "winnt"], &[]),
     ("usbioctl", &["basetsd", "guiddef", "minwindef", "ntdef", "usb", "usbiodef", "usbspec", "winioctl"], &[]),
     ("usbiodef", &["guiddef", "minwindef", "winioctl", "winnt"], &[]),
+    ("usbscan", &["ntdef", "winioctl"], &[]),
     ("usbspec", &["basetsd", "guiddef", "minwindef", "winnt"], &[]),
     ("windef", &["minwindef", "winnt"], &[]),
     ("windot11", &["basetsd", "minwindef", "ntddndis", "winnt", "wlantypes"], &[]),
