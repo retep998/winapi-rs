@@ -51,19 +51,28 @@ STRUCT!{struct NET_IF_ALIAS_LH {
     ifAliasOffset: USHORT,
 }}
 pub type PNET_IF_ALIAS_LH = *mut NET_IF_ALIAS_LH;
-STRUCT!{struct NET_LUID_LH_Info {
-    bitfield: ULONG64,
+// FIXME: Switch to union version in 0.4
+// STRUCT!{struct NET_LUID_LH_Info {
+//     bitfield: ULONG64,
+// }}
+// BITFIELD!{NET_LUID_LH_Info bitfield: ULONG64 [
+//     Reserved set_Reserved[0..24],
+//     NetLuidIndex set_NetLuidIndex[24..48],
+//     IfType set_IfType[48..64],
+// ]}
+// UNION!{struct NET_LUID_LH {
+//     [u64; 1],
+//     Value Value_mut: ULONG64,
+//     Info Info_mut: NET_LUID_LH_Info,
+// }}
+STRUCT!{struct NET_LUID_LH {
+    Value: ULONG64,
 }}
-BITFIELD!{NET_LUID_LH_Info bitfield: ULONG64 [
+BITFIELD!{NET_LUID_LH Value: ULONG64 [
     Reserved set_Reserved[0..24],
     NetLuidIndex set_NetLuidIndex[24..48],
     IfType set_IfType[48..64],
 ]}
-UNION!{union NET_LUID_LH {
-    [u64; 1],
-    Value Value_mut: ULONG64,
-    Info Info_mut: NET_LUID_LH_Info,
-}}
 pub type PNET_LUID_LH = *mut NET_LUID_LH;
 pub type NET_IF_RCV_ADDRESS = NET_IF_RCV_ADDRESS_LH;
 pub type PNET_IF_RCV_ADDRESS = *mut NET_IF_RCV_ADDRESS;
