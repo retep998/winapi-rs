@@ -36,7 +36,7 @@ You can use the search functionality in the [documentation](https://docs.rs/wina
 
 ### Why is there no documentation on how to use anything?
 
-This crate is nothing more than raw bindings to Windows API. If you wish to know how to use the various functionality in Windows API, you can look up the various items on [MSDN](https://msdn.microsoft.com/en-us/library/windows/desktop/aa906039) which is full of detailed documentation.
+This crate is nothing more than raw bindings to Windows API. If you wish to know how to use the various functionality in Windows API, you can look up the various items on [MSDN](https://docs.microsoft.com/en-us/windows/win32/desktop-app-technologies) which is full of detailed documentation.
 
 ### Can I use this library in `no_std` projects?
 
