@@ -60,7 +60,7 @@ fn check_module<P: AsRef<Path>>(path: P, err_list: &mut String) {
             }
             let len = line.split_terminator("//")
                           .next()
-                          .map(|actual| actual.trim_right().chars().count())
+                          .map(|actual| actual.trim_end().chars().count())
                           .unwrap_or(0);
             if line.is_empty() || len > MAX_LEN {
                 if !marked {

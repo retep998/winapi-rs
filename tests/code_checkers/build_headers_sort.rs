@@ -51,11 +51,11 @@ fn check_build_headers_sorted() {
     let mut new_group = false;
 
     for (pos, line) in content.lines().enumerate() {
-        let line = line.trim_left();
+        let line = line.trim_start();
         if !inside && line.starts_with("const DATA: ") {
             inside = true;
         } else if inside == true {
-            let line = line.trim_left();
+            let line = line.trim_start();
             if line.starts_with("//") {
                 new_group = true;
                 continue;
