@@ -2071,8 +2071,8 @@ extern "system" {
         dwRecordOffset: DWORD,
         lpBuffer: LPVOID,
         nNumberOfBytesToRead: DWORD,
-        pnBytesRead: *mut DWORD,
-        pnMinNumberOfBytesNeeded: *mut DWORD,
+        pnBytesRead: LPDWORD,
+        pnMinNumberOfBytesNeeded: LPDWORD,
     ) -> BOOL;
     pub fn ReadEventLogW(
         hEventLog: HANDLE,
@@ -2080,8 +2080,8 @@ extern "system" {
         dwRecordOffset: DWORD,
         lpBuffer: LPVOID,
         nNumberOfBytesToRead: DWORD,
-        pnBytesRead: *mut DWORD,
-        pnMinNumberOfBytesNeeded: *mut DWORD,
+        pnBytesRead: LPDWORD,
+        pnMinNumberOfBytesNeeded: LPDWORD,
     ) -> BOOL;
     pub fn ReportEventA(
         hEventLog: HANDLE,
