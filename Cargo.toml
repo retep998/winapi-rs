@@ -15,10 +15,7 @@ build = "build.rs"
 [package.metadata.docs.rs]
 features = ["everything", "impl-debug", "impl-default"]
 default-target = "x86_64-pc-windows-msvc"
-
-[badges]
-travis-ci = { repository = "retep998/winapi-rs", branch = "0.3" }
-appveyor = { repository = "retep998/winapi-rs", branch = "0.3", service = "github" }
+targets = ["aarch64-pc-windows-msvc", "i686-pc-windows-msvc", "x86_64-pc-windows-msvc"]
 
 [target.i686-pc-windows-gnu.dependencies]
 winapi-i686-pc-windows-gnu = { version = "0.4", path = "i686" }
@@ -108,7 +105,9 @@ transportsettingcommon = []
 tvout = []
 udpmib = []
 usb = []
+usbioctl = []
 usbiodef = []
+usbscan = []
 usbspec = []
 windef = []
 windot11 = []

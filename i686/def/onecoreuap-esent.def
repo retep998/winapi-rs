@@ -10,6 +10,9 @@ JetAttachDatabase@12
 JetAttachDatabase2@16
 JetAttachDatabase2A@16
 JetAttachDatabase2W@16
+JetAttachDatabase3@20
+JetAttachDatabase3A@20
+JetAttachDatabase3W@20
 JetAttachDatabaseA@12
 JetAttachDatabaseW@12
 JetAttachDatabaseWithStreaming@24
@@ -52,6 +55,9 @@ JetCreateDatabase@20
 JetCreateDatabase2@20
 JetCreateDatabase2A@20
 JetCreateDatabase2W@20
+JetCreateDatabase3@24
+JetCreateDatabase3A@24
+JetCreateDatabase3W@24
 JetCreateDatabaseA@20
 JetCreateDatabaseW@20
 JetCreateDatabaseWithStreaming@28
@@ -257,9 +263,9 @@ JetOpenFileA@16
 JetOpenFileInstance@20
 JetOpenFileInstanceA@20
 JetOpenFileInstanceW@20
-JetOpenFileSectionInstance@28
-JetOpenFileSectionInstanceA@28
-JetOpenFileSectionInstanceW@28
+JetOpenFileSectionInstance@36
+JetOpenFileSectionInstanceA@36
+JetOpenFileSectionInstanceW@36
 JetOpenFileW@16
 JetOpenTable@28
 JetOpenTableA@28

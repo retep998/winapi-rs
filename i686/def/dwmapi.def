@@ -13,6 +13,7 @@ DwmGetCompositionTimingInfo@8
 DwmGetGraphicsStreamClient@8
 DwmGetGraphicsStreamTransformHint@8
 DwmGetTransportAttributes@12
+DwmGetUnmetTabRequirements@8
 DwmGetWindowAttribute@16
 DwmInvalidateIconicBitmaps@4
 DwmIsCompositionEnabled@4

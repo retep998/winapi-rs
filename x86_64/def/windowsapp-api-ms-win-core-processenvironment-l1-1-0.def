@@ -6,12 +6,15 @@ FreeEnvironmentStringsA
 FreeEnvironmentStringsW
 GetCommandLineA
 GetCommandLineW
+GetCurrentDirectoryA
 GetCurrentDirectoryW
 GetEnvironmentStrings
 GetEnvironmentStringsW
 GetEnvironmentVariableA
 GetEnvironmentVariableW
 GetStdHandle
+SearchPathW
+SetCurrentDirectoryA
 SetCurrentDirectoryW
 SetEnvironmentVariableA
 SetEnvironmentVariableW

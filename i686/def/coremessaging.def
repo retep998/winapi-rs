@@ -3,8 +3,10 @@ EXPORTS
 CoreUICallComputeMaximumMessageSize
 CoreUICallCreateConversationHost
 CoreUICallCreateEndpointHost
+CoreUICallCreateEndpointHostWithSendPriority
 CoreUICallReceive
 CoreUICallSend
+CoreUICallSendVaList
 CoreUIConfigureTestHost@0
 CoreUIConfigureUserIntegration@4
 CoreUICreate@4
@@ -12,13 +14,13 @@ CoreUICreateAnonymousStream@4
 CoreUICreateClientWindowIDManager@4
 CoreUICreateEx@8
 CoreUICreateSystemWindowIDManager@4
-CoreUICreateWindowValidator@4
-CoreUIFailFastOOM@0
+CoreUIInitializeTestService@20
 CoreUIOpenExisting@4
 CoreUIRouteToTestRegistrar@16
+CoreUIUninitializeTestService@0
 CreateDispatcherQueueController@16
 CreateDispatcherQueueForCurrentThread@4
-InitializeServices@20
+GetDispatcherQueueForCurrentThread@4
 MsgBlobCreateShared@12
 MsgBlobCreateStack@16
 MsgBufferShare@8
@@ -27,4 +29,3 @@ MsgStringCreateShared@12
 MsgStringCreateStack@16
 ServiceMain@8
 SvchostPushServiceGlobals@4
-UninitializeServices@4

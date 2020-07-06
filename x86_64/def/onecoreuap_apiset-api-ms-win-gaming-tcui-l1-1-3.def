@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-gaming-tcui-l1-1-3.dll
+EXPORTS
+ShowGameInviteUIWithContext
+ShowGameInviteUIWithContextForUser

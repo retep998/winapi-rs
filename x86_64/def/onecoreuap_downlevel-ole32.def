@@ -1,5 +1,11 @@
 LIBRARY OLE32.dll
 EXPORTS
+OleCreateDragOperationInternal @822
+OleInitClipboardBroker @803
+OleRegisterDropTargetInternal @820
+OleRevokeDropTargetInternal @821
+OleRundownClipboardBroker @801
+OleStartDragOperationInternal @823
 BindMoniker
 CLIPFORMAT_UserFree
 CLIPFORMAT_UserFree64
@@ -307,7 +313,6 @@ ObjectStublessClient8
 ObjectStublessClient9
 Ole32DllGetClassObject
 OleCreate
-OleCreateDragOperationInternal
 OleCreateEmbeddingHelper
 OleCreateFromData
 OleCreateFromFile
@@ -323,7 +328,6 @@ OleGetAutoConvert
 OleGetClipboard
 OleGetIconOfClass
 OleGetPackageClipboardOwner
-OleInitClipboardBroker
 OleInitialize
 OleIsCurrentClipboard
 OleIsRunning
@@ -335,17 +339,13 @@ OleQueryLinkFromData
 OleRegEnumVerbs
 OleRegGetMiscStatus
 OleRegGetUserType
-OleRegisterDropTargetInternal
 OleReleaseEnumVerbCache
-OleRevokeDropTargetInternal
 OleRun
-OleRundownClipboardBroker
 OleSave
 OleSaveToStream
 OleSetClipboard
 OleSetContainedObject
 OleSetMenuDescriptor
-OleStartDragOperationInternal
 OleTranslateAccelerator
 OleUninitialize
 ProgIDFromCLSID

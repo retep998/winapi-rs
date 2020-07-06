@@ -1,0 +1,18 @@
+LIBRARY WTSAPI32.dll
+EXPORTS
+WTSDisconnectSession@12
+WTSEnumerateProcessesExW@20
+WTSEnumerateProcessesW@20
+WTSEnumerateSessionsExW@20
+WTSEnumerateSessionsW@20
+WTSFreeMemory@4
+WTSFreeMemoryExW@12
+WTSLogoffSession@12
+WTSQuerySessionInformationW@20
+WTSQueryUserToken@8
+WTSRegisterSessionNotification@8
+WTSUnRegisterSessionNotification@4
+WTSVirtualChannelClose@4
+WTSVirtualChannelOpen@12
+WTSVirtualChannelOpenEx@12
+WTSVirtualChannelQuery@16

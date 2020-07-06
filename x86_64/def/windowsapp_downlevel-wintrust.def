@@ -1,0 +1,3 @@
+LIBRARY WINTRUST.dll
+EXPORTS
+WinVerifyTrust

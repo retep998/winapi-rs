@@ -1,5 +1,6 @@
 LIBRARY api-ms-win-shcore-scaling-l1-1-1.dll
 EXPORTS
+GetScaleFactorForWindow@8 @244
 GetDpiForMonitor@16
 GetProcessDpiAwareness@8
 GetScaleFactorForMonitor@8

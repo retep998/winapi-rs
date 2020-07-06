@@ -1,4 +1,5 @@
 # winapi-rs
+[![Build status](https://github.com/retep998/winapi-rs/workflows/Rust/badge.svg)](https://github.com/retep998/winapi-rs/actions)
 [![Build status](https://ci.appveyor.com/api/projects/status/i47oonf5e7qm5utq/branch/0.3?svg=true)](https://ci.appveyor.com/project/retep998/winapi-rs/branch/0.3)
 [![Build Status](https://travis-ci.org/retep998/winapi-rs.svg?branch=0.3)](https://travis-ci.org/retep998/winapi-rs)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/retep998/winapi-rs)
@@ -11,7 +12,7 @@
 
 [Documentation](https://docs.rs/winapi/)
 
-Official IRC channel: #winapi on [Mozilla IRC](https://wiki.mozilla.org/IRC)
+Official communication channel: #windows-dev on the [Rust Community Discord](https://discord.gg/aVESxV8)
 
 This crate provides raw FFI bindings to all of Windows API. They are gathered by hand using the Windows 10 SDK from Microsoft. I aim to replace all existing Windows FFI in other crates with this crate through the "[Embrace, extend, and extinguish](https://en.wikipedia.org/wiki/Embrace,_extend,_and_extinguish)" technique.
 

@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-core-psm-appnotify-l1-1-1.dll
+EXPORTS
+RegisterAppConstrainedChangeNotification
+UnregisterAppConstrainedChangeNotification

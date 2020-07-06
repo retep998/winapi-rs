@@ -557,4 +557,4 @@ SetupVerifyInfFileW@12
 SetupWriteTextLog
 SetupWriteTextLogError
 SetupWriteTextLogInfLine@20
-pSetupDiCrimsonLogDeviceInstall@24
+pSetupDiCrimsonLogDeviceInstall@28

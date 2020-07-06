@@ -1,5 +1,6 @@
 LIBRARY api-ms-win-core-processthreads-l1-1-3.dll
 EXPORTS
+CreateProcessAsUserA@44
 GetProcessDefaultCpuSets@16
 GetProcessInformation@16
 GetSystemCpuSetInformation@20

@@ -1,0 +1,3 @@
+LIBRARY api-ms-win-core-privateprofile-l1-1-1.dll
+EXPORTS
+GetPrivateProfileSectionA

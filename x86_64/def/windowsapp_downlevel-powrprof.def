@@ -1,0 +1,4 @@
+LIBRARY POWRPROF.dll
+EXPORTS
+PowerEnumerate
+PowerReadFriendlyName

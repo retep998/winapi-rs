@@ -1016,10 +1016,14 @@ fn shared_ntdef() {
     assert_eq!(align_of::<LARGE_INTEGER>(), 8);
     assert_eq!(size_of::<LARGE_INTEGER_s>(), 8);
     assert_eq!(align_of::<LARGE_INTEGER_s>(), 4);
+    assert_eq!(size_of::<LARGE_INTEGER_u>(), 8);
+    assert_eq!(align_of::<LARGE_INTEGER_u>(), 4);
     assert_eq!(size_of::<ULARGE_INTEGER>(), 8);
     assert_eq!(align_of::<ULARGE_INTEGER>(), 8);
     assert_eq!(size_of::<ULARGE_INTEGER_s>(), 8);
     assert_eq!(align_of::<ULARGE_INTEGER_s>(), 4);
+    assert_eq!(size_of::<ULARGE_INTEGER_u>(), 8);
+    assert_eq!(align_of::<ULARGE_INTEGER_u>(), 4);
     assert_eq!(size_of::<LUID>(), 8);
     assert_eq!(align_of::<LUID>(), 4);
     assert_eq!(size_of::<STRING>(), 8);
@@ -2138,6 +2142,8 @@ fn shared_ws2ipdef() {
     assert_eq!(align_of::<SOCKADDR_INET>(), 4);
     assert_eq!(size_of::<IP_MREQ>(), 8);
     assert_eq!(align_of::<IP_MREQ>(), 4);
+    assert_eq!(size_of::<IP_MREQ_SOURCE>(), 12);
+    assert_eq!(align_of::<IP_MREQ_SOURCE>(), 4);
     assert_eq!(size_of::<IPV6_MREQ>(), 20);
     assert_eq!(align_of::<IPV6_MREQ>(), 4);
     assert_eq!(size_of::<IN_PKTINFO>(), 8);
@@ -8155,14 +8161,6 @@ fn um_winnt() {
     assert_eq!(align_of::<GROUP_AFFINITY>(), 4);
     assert_eq!(size_of::<FLOAT128>(), 16);
     assert_eq!(align_of::<FLOAT128>(), 8);
-    assert_eq!(size_of::<LARGE_INTEGER_u>(), 8);
-    assert_eq!(align_of::<LARGE_INTEGER_u>(), 4);
-    assert_eq!(size_of::<LARGE_INTEGER>(), 8);
-    assert_eq!(align_of::<LARGE_INTEGER>(), 8);
-    assert_eq!(size_of::<ULARGE_INTEGER_u>(), 8);
-    assert_eq!(align_of::<ULARGE_INTEGER_u>(), 4);
-    assert_eq!(size_of::<ULARGE_INTEGER>(), 8);
-    assert_eq!(align_of::<ULARGE_INTEGER>(), 8);
     assert_eq!(size_of::<LUID>(), 8);
     assert_eq!(align_of::<LUID>(), 4);
     assert_eq!(size_of::<LIST_ENTRY>(), 8);

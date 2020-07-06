@@ -55,10 +55,17 @@ SslDecrementProviderReferenceCount@4
 SslDecryptPacket@40
 SslEncryptPacket@44
 SslEnumCipherSuites@20
+SslEnumCipherSuitesEx@20
 SslEnumEccCurves@16
 SslEnumProtocolProviders@12
+SslExpandExporterMasterKey@24
+SslExpandTrafficKeys@28
+SslExpandWriteKey@20
 SslExportKey@28
 SslExportKeyingMaterial@40
+SslExtractEarlyKey@28
+SslExtractHandshakeKey@28
+SslExtractMasterKey@20
 SslFreeBuffer@4
 SslFreeObject@8
 SslGenerateMasterKey@44
