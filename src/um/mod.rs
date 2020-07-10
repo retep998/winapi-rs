@@ -167,6 +167,7 @@ pub mod gl;
 #[cfg(feature = "ncrypt")] pub mod ncrypt;
 #[cfg(feature = "ntlsa")] pub mod ntlsa;
 #[cfg(feature = "ntsecapi")] pub mod ntsecapi;
+#[cfg(feature = "nttimer")] pub mod nttimer;
 #[cfg(feature = "oaidl")] pub mod oaidl;
 #[cfg(feature = "objbase")] pub mod objbase;
 #[cfg(feature = "objidl")] pub mod objidl;
