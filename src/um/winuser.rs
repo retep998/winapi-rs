@@ -6067,6 +6067,17 @@ extern "system" {
         dwData: ULONG_PTR,
     ) -> BOOL;
 }
+pub const GR_GDIOBJECTS: DWORD = 0;
+pub const GR_USEROBJECTS: DWORD = 1;
+pub const GR_GDIOBJECTS_PEAK: DWORD = 2;
+pub const GR_USEROBJECTS_PEAK: DWORD = 4;
+pub const GR_GLOBAL: HANDLE = -2isize as HANDLE;
+extern "system" {
+    pub fn GetGuiResources(
+        hProcess: HANDLE,
+        uiFlags: DWORD,
+    ) -> DWORD;
+}
 //12083
 pub const SPI_GETBEEP: UINT = 0x0001;
 pub const SPI_SETBEEP: UINT = 0x0002;
