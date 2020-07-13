@@ -3,30 +3,24 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::minwindef::{DWORD, WORD, LPDWORD, LPCVOID, LPVOID, LPHANDLE, ULONG, USHORT};
-use shared::ntdef::NTSTATUS
-use um::minwinbase::{LPSECURITY_ATTRIBUTES, LPOVERLAPPED};
-use um::winnt::{HANDLE, PHANDLE, HRESULT, LPCWSTR, LPWSTR, ULONGLONG};
-
+use shared::minwindef::{DWORD, LPCVOID, LPDWORD, LPHANDLE, LPVOID, ULONG, USHORT, WORD};
+use shared::ntdef::NTSTATUS;
+use um::minwinbase::{LPOVERLAPPED, LPSECURITY_ATTRIBUTES};
+use um::winnt::{HANDLE, HRESULT, LPCWSTR, LPWSTR, PHANDLE, ULONGLONG, WCHAR};
 pub type HFILTER = HANDLE;
 pub type PHFILTER = *mut HFILTER;
 pub type HFILTER_INSTANCE = HANDLE;
 pub type PHFILTER_INSTANCE = *mut HFILTER_INSTANCE;
 pub type HFILTER_VOLUME = HANDLE;
-
 pub const FLTFL_VSI_DETACHED_VOLUME: ULONG = 0x00000001;
-
 pub const FLTFL_AGGREGATE_INFO_IS_MINIFILTER: ULONG = 0x00000001;
 pub const FLTFL_AGGREGATE_INFO_IS_LEGACYFILTER: ULONG = 0x00000002;
 pub const FLTFL_ASI_IS_MINIFILTER: ULONG = 0x00000001;
 pub const FLTFL_ASI_IS_LEGACYFILTER: ULONG = 0x00000002;
 pub const FLTFL_IASI_IS_MINIFILTER: ULONG = 0x00000001;
 pub const FLTFL_IASI_IS_LEGACYFILTER: ULONG = 0x00000002;
-
 pub const FLTFL_IASIM_DETACHED_VOLUME: ULONG = 0x00000001;
 pub const FLTFL_IASIL_DETACHED_VOLUME: ULONG = 0x00000001;
-
- 
 ENUM!{enum FLT_FILESYSTEM_TYPE {
     FLT_FSTYPE_UNKNOWN,         //an UNKNOWN file system type
     FLT_FSTYPE_RAW,             //Microsoft's RAW file system       (\FileSystem\RAW)
@@ -58,62 +52,52 @@ ENUM!{enum FLT_FILESYSTEM_TYPE {
     FLT_FSTYPE_CSVFS,           //Microsoft's Cluster Shared Volume file system  (\FileSystem\csvfs)
     FLT_FSTYPE_REFS,            //Microsoft's ReFS file system      (\FileSystem\Refs or \FileSystem\Refsv1)
     FLT_FSTYPE_OPENAFS,         //OpenAFS file system               (\Device\AFSRedirector)
-    FLT_FSTYPE_CIMFS            //Composite Image file system       (\FileSystem\cimfs)
+    FLT_FSTYPE_CIMFS,            //Composite Image file system       (\FileSystem\cimfs)
 }}
-
 ENUM!{enum FILTER_INFORMATION_CLASS {
     FilterFullInformation = 0,
     FilterAggregateBasicInformation,
-    FilterAggregateStandardInformation
+    FilterAggregateStandardInformation,
 }}
-
 ENUM!{enum FILTER_VOLUME_INFORMATION_CLASS {
     FilterVolumeBasicInformation = 0,
-    FilterVolumeStandardInformation
+    FilterVolumeStandardInformation,
 }}
-
 ENUM!{enum INSTANCE_INFORMATION_CLASS {
     InstanceBasicInformation = 0,
     InstancePartialInformation,
     InstanceFullInformation,
-    InstanceAggregateStandardInformation
+    InstanceAggregateStandardInformation,
 }}
-
 STRUCT!{struct FILTER_FULL_INFORMATION {
     NextEntryOffset: ULONG,
     FrameID: ULONG,
     NumberOfInstances: ULONG,
     FilterNameLength: USHORT,
-    FilterNameBuffer: [WCHAR, 1]
+    FilterNameBuffer: [WCHAR; 1],
 }}
-
 STRUCT!{struct FILTER_AGGREGATE_BASIC_INFORMATION_u_s_MiniFilter {
     FrameID: ULONG,
     NumberOfInstances: ULONG,
     FilterNameLength: USHORT,
     FilterNameBufferOffset: USHORT,
     FilterAltitudeLength: USHORT,
-    FilterAltitudeBufferOffset: USHORT
+    FilterAltitudeBufferOffset: USHORT,
 }}
-
 STRUCT!{struct FILTER_AGGREGATE_BASIC_INFORMATION_u_s_LegacyFilter {
     FilterNameLength: USHORT,
-    FilterNameBufferOffset: USHORT
+    FilterNameBufferOffset: USHORT,
 }}
-
 UNION!{union FILTER_AGGREGATE_BASIC_INFORMATION_Type_u {
     [u32; 4],
     MiniFilter mut_MiniFilter: FILTER_AGGREGATE_BASIC_INFORMATION_u_s_MiniFilter,
-    LegacyFilter mut_LegacyFilter: FILTER_AGGREGATE_BASIC_INFORMATION_u_s_LegacyFilter
+    LegacyFilter mut_LegacyFilter: FILTER_AGGREGATE_BASIC_INFORMATION_u_s_LegacyFilter,
 }}
-
-
 STRUCT!{struct FILTER_AGGREGATE_BASIC_INFORMATION {
     NextEntryOffset: ULONG,
     Flags: ULONG,
-    Type: FILTER_AGGREGATE_BASIC_INFORMATION_Type_u
+    Type: FILTER_AGGREGATE_BASIC_INFORMATION_Type_u,
 }}
-
 STRUCT!{struct FILTER_AGGREGATE_STANDARD_INFORMATION_u_s_MiniFilter {
     Flags: ULONG,
     FrameID: ULONG,
@@ -121,57 +105,49 @@ STRUCT!{struct FILTER_AGGREGATE_STANDARD_INFORMATION_u_s_MiniFilter {
     FilterNameLength: USHORT,
     FilterNameBufferOffset: USHORT,
     FilterAltitudeLength: USHORT,
-    FilterAltitudeBufferOffset: USHORT
+    FilterAltitudeBufferOffset: USHORT,
 }}
-
 STRUCT!{struct FILTER_AGGREGATE_STANDARD_INFORMATION_u_s_LegacyFilter {
     Flags: ULONG,
     FilterNameLength: USHORT,
     FilterNameBufferOffset: USHORT,
     FilterAltitudeLength: USHORT,
-    FilterAltitudeBufferOffset: USHORT
+    FilterAltitudeBufferOffset: USHORT,
 }}
-
 UNION!{union FILTER_AGGREGATE_STANDARD_INFORMATION_Type_u {
     [u32; 5],
     MiniFilter mut_MiniFilter: FILTER_AGGREGATE_STANDARD_INFORMATION_u_s_MiniFilter,
     LegacyFilter mut_LegacyFilter: FILTER_AGGREGATE_STANDARD_INFORMATION_u_s_LegacyFilter,
 }}
-
 STRUCT!{struct FILTER_AGGREGATE_STANDARD_INFORMATION {
     NextEntryOffset: ULONG,
     Flags: ULONG,
-    Type: FILTER_AGGREGATE_STANDARD_INFORMATION_Type_u
+    Type: FILTER_AGGREGATE_STANDARD_INFORMATION_Type_u,
 }}
-
 STRUCT!{struct FILTER_VOLUME_BASIC_INFORMATION {
     FilterVolumeNameLength: USHORT,
-    FilterVolumeName: [WCHAR, 1]
+    FilterVolumeName: [WCHAR; 1],
  }}
-
  STRUCT!{struct FILTER_VOLUME_STANDARD_INFORMATION {
     NextEntryOffset: ULONG,
     Flags: ULONG,
     FrameID: ULONG,
     FileSystemType: FLT_FILESYSTEM_TYPE,
     FilterVolumeNameLength: USHORT,
-    FilterVolumeName: [WCHAR, 1]
+    FilterVolumeName: [WCHAR; 1],
  }}
-
 STRUCT!{struct INSTANCE_BASIC_INFORMATION {
     NextEntryOffset: ULONG,
     InstanceNameLength: USHORT,
-    InstanceNameBufferOffset: USHORT
+    InstanceNameBufferOffset: USHORT,
 }}
-
 STRUCT!{struct INSTANCE_PARTIAL_INFORMATION {
     NextEntryOffset: ULONG,
     InstanceNameLength: USHORT,
     InstanceNameBufferOffset: USHORT,
     AltitudeLength: USHORT,
-    AltitudeBufferOffset: USHORT
+    AltitudeBufferOffset: USHORT,
 }}
-
 STRUCT!{struct INSTANCE_FULL_INFORMATION {
     NextEntryOffset: ULONG,
     InstanceNameLength: USHORT,
@@ -181,9 +157,8 @@ STRUCT!{struct INSTANCE_FULL_INFORMATION {
     VolumeNameLength: USHORT,
     VolumeNameBufferOffset: USHORT,
     FilterNameLength: USHORT,
-    FilterNameBufferOffset: USHORT
+    FilterNameBufferOffset: USHORT,
 }}
-
 STRUCT!{struct INSTANCE_AGGREGATE_STANDARD_INFORMATION_u_s_MiniFilter {
     Flags: ULONG,
     FrameID: ULONG,
@@ -196,9 +171,8 @@ STRUCT!{struct INSTANCE_AGGREGATE_STANDARD_INFORMATION_u_s_MiniFilter {
     VolumeNameBufferOffset: USHORT,
     FilterNameLength: USHORT,
     FilterNameBufferOffset: USHORT,
-    SupportedFeatures: ULONG
+    SupportedFeatures: ULONG,
 }}
-
 STRUCT!{struct INSTANCE_AGGREGATE_STANDARD_INFORMATION_u_s_LegacyFilter {
     Flags: ULONG,
     AltitudeLength: USHORT,
@@ -207,46 +181,37 @@ STRUCT!{struct INSTANCE_AGGREGATE_STANDARD_INFORMATION_u_s_LegacyFilter {
     VolumeNameBufferOffset: USHORT,
     FilterNameLength: USHORT,
     FilterNameBufferOffset: USHORT,
-    SupportedFeatures: ULONG
+    SupportedFeatures: ULONG,
 }}
-
 UNION!{union INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_u {
     [u32; 8],
     MiniFilter mut_MiniFilter: INSTANCE_AGGREGATE_STANDARD_INFORMATION_u_s_MiniFilter,
     LegacyFilter mut_LegacyFilter: INSTANCE_AGGREGATE_STANDARD_INFORMATION_u_s_LegacyFilter,
 }}
-
 STRUCT!{struct INSTANCE_AGGREGATE_STANDARD_INFORMATION {
     NextEntryOffset: ULONG,
     Flags: ULONG,
-    Type: INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_u
+    Type: INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_u,
 }}
-
 STRUCT!{struct FILTER_MESSAGE_HEADER {
     ReplyLength: ULONG,
-    MessageId: ULONGLONG
+    MessageId: ULONGLONG,
 }}
-
 STRUCT!{struct FILTER_REPLY_HEADER {
-    NTSTATUS Status,
-    ULONGLONG MessageId
+    Status: NTSTATUS,
+    MessageId: ULONGLONG,
 }}
-
 pub type PFILTER_MESSAGE_HEADER = *mut FILTER_MESSAGE_HEADER;
 pub type PFILTER_REPLY_HEADER = *mut FILTER_REPLY_HEADER;
-
 pub type PFILTER_FULL_INFORMATION = *mut FILTER_FULL_INFORMATION;
 pub type PFILTER_AGGREGATE_BASIC_INFORMATION = *mut FILTER_AGGREGATE_BASIC_INFORMATION;
 pub type PFILTER_AGGREGATE_STANDARD_INFORMATION = *mut FILTER_AGGREGATE_STANDARD_INFORMATION;
-
 pub type PFILTER_VOLUME_BASIC_INFORMATION = *mut FILTER_VOLUME_BASIC_INFORMATION;
 pub type PFILTER_VOLUME_STANDARD_INFORMATION = *mut FILTER_VOLUME_STANDARD_INFORMATION;
-
 pub type PINSTANCE_BASIC_INFORMATION = *mut INSTANCE_BASIC_INFORMATION;
 pub type PINSTANCE_PARTIAL_INFORMATION = *mut INSTANCE_PARTIAL_INFORMATION;
 pub type PINSTANCE_FULL_INFORMATION = *mut INSTANCE_FULL_INFORMATION;
-pub type PINSTANCE_FULL_INFORMATION = *mut INSTANCE_AGGREGATE_STANDARD_INFORMATION;
-
+pub type PINSTANCE_AGGREGATE_STANDARD_INFORMATION = *mut INSTANCE_AGGREGATE_STANDARD_INFORMATION;
 extern "system" {
     pub fn FilterAttach(
         lpFilterName: LPCWSTR,
