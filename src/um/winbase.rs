@@ -2684,8 +2684,13 @@ extern "system" {
 FN!{stdcall APPLICATION_RECOVERY_CALLBACK(
     pvParameter: PVOID,
 ) -> DWORD}
-// RESTART_*
-// RECOVERY_*
+pub const RESTART_MAX_CMD_LINE: usize = 1024;
+pub const RESTART_NO_CRASH: DWORD = 1;
+pub const RESTART_NO_HANG: DWORD = 2;
+pub const RESTART_NO_PATCH: DWORD = 4;
+pub const RESTART_NO_REBOOT: DWORD = 8;
+pub const RECOVERY_DEFAULT_PING_INTERVAL: DWORD = 5000;
+pub const RECOVERY_MAX_PING_INTERVAL: DWORD = 5 * 60 * 1000;
 extern "system" {
     pub fn RegisterApplicationRecoveryCallback(
         pRecoveyCallback: APPLICATION_RECOVERY_CALLBACK,
