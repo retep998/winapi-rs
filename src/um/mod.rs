@@ -243,6 +243,7 @@ pub mod gl;
 #[cfg(feature = "timeapi")] pub mod timeapi;
 #[cfg(feature = "timezoneapi")] pub mod timezoneapi;
 #[cfg(feature = "tlhelp32")] pub mod tlhelp32;
+#[cfg(feature = "uiautomationclient")] pub mod uiautomationclient;
 #[cfg(feature = "uiautomationcore")] pub mod uiautomationcore;
 #[cfg(feature = "uiautomationcoreapi")] pub mod uiautomationcoreapi;
 #[cfg(feature = "unknwnbase")] pub mod unknwnbase;
