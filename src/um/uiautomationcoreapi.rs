@@ -12,6 +12,8 @@ use shared::winerror::HRESULT;
 use shared::wtypes::BSTR;
 use um::oaidl::{SAFEARRAY, VARIANT};
 use um::oleacc::IAccessible;
+#[cfg(feature = "uiautomationclient")]
+use um::uiautomationclient::{AutomationElementMode, PropertyConditionFlags};
 use um::uiautomationcore::{
     DockPosition, EVENTID, IRawElementProviderSimple, ITextRangeProvider, NavigateDirection,
     NotificationKind, NotificationProcessing, PATTERNID, PROPERTYID, ScrollAmount,
