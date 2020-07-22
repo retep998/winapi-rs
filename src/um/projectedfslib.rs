@@ -7,7 +7,7 @@ use ctypes::{c_int, c_void};
 use shared::basetsd::{INT32, INT64, UINT32, UINT64, UINT8};
 use shared::guiddef::GUID;
 use shared::minwindef::ULONG;
-use um::winnt::{BOOLEAN, HRESULT, LARGE_INTEGER, LPCWSTR, PCWSTR, VOID};
+use um::winnt::{BOOLEAN, HRESULT, LARGE_INTEGER, LPCWSTR, PCWSTR};
 use vc::vcruntime::size_t;
 ENUM!{enum PRJ_NOTIFY_TYPES {
     PRJ_NOTIFY_NONE = 0x00000000,
@@ -206,16 +206,16 @@ FN!{stdcall PRJ_NOTIFICATION_CB(
 ) -> HRESULT}
 FN!{stdcall PRJ_CANCEL_COMMAND_CB(
     callbackData: *const PRJ_CALLBACK_DATA,
-) -> VOID}
+) -> ()}
 STRUCT!{struct PRJ_CALLBACKS {
-    StartDirectoryEnumerationCallback: *mut PRJ_START_DIRECTORY_ENUMERATION_CB,
-    EndDirectoryEnumerationCallback: *mut PRJ_END_DIRECTORY_ENUMERATION_CB,
-    GetDirectoryEnumerationCallback: *mut PRJ_GET_DIRECTORY_ENUMERATION_CB,
-    GetPlaceholderInfoCallback: *mut PRJ_GET_PLACEHOLDER_INFO_CB,
-    GetFileDataCallback: *mut PRJ_GET_FILE_DATA_CB,
-    QueryFileNameCallback: *mut PRJ_QUERY_FILE_NAME_CB,
-    NotificationCallback: *mut PRJ_NOTIFICATION_CB,
-    CancelCommandCallback: *mut PRJ_CANCEL_COMMAND_CB,
+    StartDirectoryEnumerationCallback: PRJ_START_DIRECTORY_ENUMERATION_CB,
+    EndDirectoryEnumerationCallback: PRJ_END_DIRECTORY_ENUMERATION_CB,
+    GetDirectoryEnumerationCallback: PRJ_GET_DIRECTORY_ENUMERATION_CB,
+    GetPlaceholderInfoCallback: PRJ_GET_PLACEHOLDER_INFO_CB,
+    GetFileDataCallback: PRJ_GET_FILE_DATA_CB,
+    QueryFileNameCallback: PRJ_QUERY_FILE_NAME_CB,
+    NotificationCallback: PRJ_NOTIFICATION_CB,
+    CancelCommandCallback: PRJ_CANCEL_COMMAND_CB,
 }}
 ENUM!{enum PRJ_COMPLETE_COMMAND_TYPE {
     PRJ_COMPLETE_COMMAND_TYPE_NOTIFICATION = 1,
