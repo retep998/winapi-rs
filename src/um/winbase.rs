@@ -361,6 +361,31 @@ pub const MS_CTS_ON: DWORD = 0x0010;
 pub const MS_DSR_ON: DWORD = 0x0020;
 pub const MS_RING_ON: DWORD = 0x0040;
 pub const MS_RLSD_ON: DWORD = 0x0080;
+pub const ProcThreadAttributeParentProcess: DWORD = 0;
+pub const ProcThreadAttributeHandleList: DWORD                   = 2;
+pub const  ProcThreadAttributeGroupAffinity            : DWORD     = 3;
+pub const    ProcThreadAttributePreferredNode             : DWORD    = 4;
+pub const   ProcThreadAttributeIdealProcessor             : DWORD   = 5;
+  pub const    ProcThreadAttributeUmsThread                 : DWORD    = 6;
+  pub const   ProcThreadAttributeMitigationPolicy          : DWORD    = 7;
+
+
+  pub const   ProcThreadAttributeSecurityCapabilities     : DWORD     = 9;
+
+  pub const   ProcThreadAttributeProtectionLevel          : DWORD     = 11;
+
+  pub const   ProcThreadAttributeJobList                   : DWORD    = 13;
+  pub const   ProcThreadAttributeChildProcessPolicy       : DWORD     = 14;
+  pub const  ProcThreadAttributeAllApplicationPackagesPolicy : DWORD = 15;
+  pub const  ProcThreadAttributeWin32kFilter                : DWORD  = 16;
+
+  pub const   ProcThreadAttributeSafeOpenPromptOriginClaim   : DWORD  = 17;
+
+  pub const ProcThreadAttributeDesktopAppPolicy : DWORD = 18;
+
+macro_rules! PROC_THREAD_ATTRIBUTE {
+    ($name: ident, $value)
+}
 // S_*
 // NMPWAIT_*
 // FS_*
