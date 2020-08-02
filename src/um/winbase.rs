@@ -361,31 +361,125 @@ pub const MS_CTS_ON: DWORD = 0x0010;
 pub const MS_DSR_ON: DWORD = 0x0020;
 pub const MS_RING_ON: DWORD = 0x0040;
 pub const MS_RLSD_ON: DWORD = 0x0080;
+/*
+#define PROC_THREAD_ATTRIBUTE_NUMBER    0x0000FFFF
+#define PROC_THREAD_ATTRIBUTE_THREAD    0x00010000  // Attribute may be used with thread creation
+#define PROC_THREAD_ATTRIBUTE_INPUT     0x00020000  // Attribute is input only
+#define PROC_THREAD_ATTRIBUTE_ADDITIVE  0x00040000  // Attribute may be "accumulated," e.g. bitmasks, counters, etc.
+
+
+#ifndef _USE_FULL_PROC_THREAD_ATTRIBUTE
+typedef enum _PROC_THREAD_ATTRIBUTE_NUM {
+    ProcThreadAttributeParentProcess                = 0,
+    ProcThreadAttributeHandleList                   = 2,
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
+    ProcThreadAttributeGroupAffinity                = 3,
+    ProcThreadAttributePreferredNode                = 4,
+    ProcThreadAttributeIdealProcessor               = 5,
+    ProcThreadAttributeUmsThread                    = 6,
+    ProcThreadAttributeMitigationPolicy             = 7,
+#endif
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
+    ProcThreadAttributeSecurityCapabilities         = 9,
+#endif
+    ProcThreadAttributeProtectionLevel              = 11,
+#if (_WIN32_WINNT >= _WIN32_WINNT_WINBLUE)
+#endif
+#if (_WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD)
+    ProcThreadAttributeJobList                      = 13,
+    ProcThreadAttributeChildProcessPolicy           = 14,
+    ProcThreadAttributeAllApplicationPackagesPolicy = 15,
+    ProcThreadAttributeWin32kFilter                 = 16,
+#endif
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS1)
+    ProcThreadAttributeSafeOpenPromptOriginClaim    = 17,
+#endif
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
+    ProcThreadAttributeDesktopAppPolicy = 18,
+#endif
+} PROC_THREAD_ATTRIBUTE_NUM;
+#endif
+
+#define ProcThreadAttributeValue(Number, Thread, Input, Additive) \
+    (((Number) & PROC_THREAD_ATTRIBUTE_NUMBER) | \
+     ((Thread != FALSE) ? PROC_THREAD_ATTRIBUTE_THREAD : 0) | \
+     ((Input != FALSE) ? PROC_THREAD_ATTRIBUTE_INPUT : 0) | \
+     ((Additive != FALSE) ? PROC_THREAD_ATTRIBUTE_ADDITIVE : 0))
+
+#define PROC_THREAD_ATTRIBUTE_PARENT_PROCESS \
+    ProcThreadAttributeValue (ProcThreadAttributeParentProcess, FALSE, TRUE, FALSE)
+#define PROC_THREAD_ATTRIBUTE_HANDLE_LIST \
+    ProcThreadAttributeValue (ProcThreadAttributeHandleList, FALSE, TRUE, FALSE)
+
+#endif // (_WIN32_WINNT >= 0x0600)
+
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
+#define PROC_THREAD_ATTRIBUTE_GROUP_AFFINITY \
+    ProcThreadAttributeValue (ProcThreadAttributeGroupAffinity, TRUE, TRUE, FALSE)
+#define PROC_THREAD_ATTRIBUTE_PREFERRED_NODE \
+    ProcThreadAttributeValue (ProcThreadAttributePreferredNode, FALSE, TRUE, FALSE)
+#define PROC_THREAD_ATTRIBUTE_IDEAL_PROCESSOR \
+    ProcThreadAttributeValue (ProcThreadAttributeIdealProcessor, TRUE, TRUE, FALSE)
+#define PROC_THREAD_ATTRIBUTE_UMS_THREAD \
+    ProcThreadAttributeValue (ProcThreadAttributeUmsThread, TRUE, TRUE, FALSE)
+#define PROC_THREAD_ATTRIBUTE_MITIGATION_POLICY \
+    ProcThreadAttributeValue (ProcThreadAttributeMitigationPolicy, FALSE, TRUE, FALSE)
+#endif
+
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
+#define PROC_THREAD_ATTRIBUTE_SECURITY_CAPABILITIES \
+    ProcThreadAttributeValue (ProcThreadAttributeSecurityCapabilities, FALSE, TRUE, FALSE)
+#endif
+
+#define PROC_THREAD_ATTRIBUTE_PROTECTION_LEVEL \
+    ProcThreadAttributeValue (ProcThreadAttributeProtectionLevel, FALSE, TRUE, FALSE)
+
+#if (_WIN32_WINNT >= _WIN32_WINNT_WINBLUE)
+#endif
+*/
+pub const PROC_THREAD_ATTRIBUTE_NUMBER: DWORD = 0x0000FFFF;
+pub const PROC_THREAD_ATTRIBUTE_THREAD: DWORD = 0x00010000;
+pub const PROC_THREAD_ATTRIBUTE_INPUT: DWORD = 0x00020000;
+pub const PROC_THREAD_ATTRIBUTE_ADDITIVE: DWORD = 0x00040000;
 pub const ProcThreadAttributeParentProcess: DWORD = 0;
-pub const ProcThreadAttributeHandleList: DWORD                   = 2;
-pub const  ProcThreadAttributeGroupAffinity            : DWORD     = 3;
-pub const    ProcThreadAttributePreferredNode             : DWORD    = 4;
-pub const   ProcThreadAttributeIdealProcessor             : DWORD   = 5;
-  pub const    ProcThreadAttributeUmsThread                 : DWORD    = 6;
-  pub const   ProcThreadAttributeMitigationPolicy          : DWORD    = 7;
-
-
-  pub const   ProcThreadAttributeSecurityCapabilities     : DWORD     = 9;
-
-  pub const   ProcThreadAttributeProtectionLevel          : DWORD     = 11;
-
-  pub const   ProcThreadAttributeJobList                   : DWORD    = 13;
-  pub const   ProcThreadAttributeChildProcessPolicy       : DWORD     = 14;
-  pub const  ProcThreadAttributeAllApplicationPackagesPolicy : DWORD = 15;
-  pub const  ProcThreadAttributeWin32kFilter                : DWORD  = 16;
-
-  pub const   ProcThreadAttributeSafeOpenPromptOriginClaim   : DWORD  = 17;
-
-  pub const ProcThreadAttributeDesktopAppPolicy : DWORD = 18;
-
-macro_rules! PROC_THREAD_ATTRIBUTE {
-    ($name: ident, $value)
+pub const ProcThreadAttributeHandleList: DWORD = 2;
+pub const ProcThreadAttributeGroupAffinity: DWORD = 3;
+pub const ProcThreadAttributePreferredNode: DWORD = 4;
+pub const ProcThreadAttributeIdealProcessor: DWORD = 5;
+pub const ProcThreadAttributeUmsThread: DWORD = 6;
+pub const ProcThreadAttributeMitigationPolicy: DWORD = 7;
+pub const ProcThreadAttributeSecurityCapabilities: DWORD = 9;
+pub const ProcThreadAttributeProtectionLevel: DWORD = 11;
+pub const ProcThreadAttributeJobList: DWORD = 13;
+pub const ProcThreadAttributeChildProcessPolicy: DWORD = 14;
+pub const ProcThreadAttributeAllApplicationPackagesPolicy: DWORD = 15;
+pub const ProcThreadAttributeWin32kFilter: DWORD = 16;
+pub const ProcThreadAttributeSafeOpenPromptOriginClaim: DWORD = 17;
+pub const ProcThreadAttributeDesktopAppPolicy: DWORD = 18;
+// TODO: constants for mitigation policy
+macro_rules! DEFINE_PROC_THREAD_ATTRIBUTE {
+    () => {}
+    ($name:ident = $value:lit : $thread:lit, $input:lit, $additive:lit; $($rest: tt)*) => {
+        pub const $name: DWORD = ($value & PROC_THREAD_ATTRIBUTE_NUMBER) | 
+          ($thread * PROC_THREAD_ATTRIBUTE_THREAD) |
+          ($input * PROC_THREAD_ATTRIBUTE_INPUT) |
+          ($additive * PROC_THREAD_ATTRIBUTE_ADDITIVE);
+        DEFINE_PROC_THREAD_ATTRIBUTE!($($rest)*)
+    }
 }
+DEFINE_PROC_THREAD_ATTRIBUTE! {
+    PROC_THREAD_ATTRIBUTE_PARENT_PROCESS = ProcThreadAttributeParentProcess: 0,1,0;
+    PROC_THREAD_ATTRIBUTE_GROUP_AFFINITY = ProcThreadAttributeGroupAffinity: 1,1,0;
+    PROC_THREAD_ATTRIBUTE_HANDLE_LIST = ProcThreadAttributeHandleList: 0,1,0;
+    PROC_THREAD_ATTRIBUTE_GROUP_AFFINITY = ProcThreadAttributeGroupAffinity: 1,1,0;
+    PROC_THREAD_ATTRIBUTE_PREFERRED_NODE = ProcThreadAttributePreferredNode: 0,1,0;
+    PROC_THREAD_ATTRIBUTE_IDEAL_PROCESSOR = ProcThreadAttributeIdealProcessor: 1,1,0;
+    PROC_THREAD_ATTRIBUTE_UMS_THREAD = ProcThreadAttributeUmsThread: 1,1,0;
+    PROC_THREAD_ATTRIBUTE_MITIGATION_POLICY = ProcThreadAttributeMitigationPolicy: 0,1,0;
+    PROC_THREAD_ATTRIBUTE_SECURITY_CAPABILITIES = ProcThreadAttributeSecurityCapabilities: 0,1,0;
+    PROC_THREAD_ATTRIBUTE_PROTECTION_LEVEL = ProcThreadAttributeProtectionLevel: 0,1,0;
+}
+
 // S_*
 // NMPWAIT_*
 // FS_*
