@@ -458,18 +458,17 @@ pub const ProcThreadAttributeSafeOpenPromptOriginClaim: DWORD = 17;
 pub const ProcThreadAttributeDesktopAppPolicy: DWORD = 18;
 // TODO: constants for mitigation policy
 macro_rules! DEFINE_PROC_THREAD_ATTRIBUTE {
-    () => {}
-    ($name:ident = $value:lit : $thread:lit, $input:lit, $additive:lit; $($rest: tt)*) => {
+    () => {};
+    ($name:ident = $value:ident: $thread:expr, $input:expr, $additive:expr; $($rest: tt)*) => {
         pub const $name: DWORD = ($value & PROC_THREAD_ATTRIBUTE_NUMBER) | 
           ($thread * PROC_THREAD_ATTRIBUTE_THREAD) |
           ($input * PROC_THREAD_ATTRIBUTE_INPUT) |
           ($additive * PROC_THREAD_ATTRIBUTE_ADDITIVE);
-        DEFINE_PROC_THREAD_ATTRIBUTE!($($rest)*)
-    }
+        DEFINE_PROC_THREAD_ATTRIBUTE!($($rest)*);
+    };
 }
 DEFINE_PROC_THREAD_ATTRIBUTE! {
     PROC_THREAD_ATTRIBUTE_PARENT_PROCESS = ProcThreadAttributeParentProcess: 0,1,0;
-    PROC_THREAD_ATTRIBUTE_GROUP_AFFINITY = ProcThreadAttributeGroupAffinity: 1,1,0;
     PROC_THREAD_ATTRIBUTE_HANDLE_LIST = ProcThreadAttributeHandleList: 0,1,0;
     PROC_THREAD_ATTRIBUTE_GROUP_AFFINITY = ProcThreadAttributeGroupAffinity: 1,1,0;
     PROC_THREAD_ATTRIBUTE_PREFERRED_NODE = ProcThreadAttributePreferredNode: 0,1,0;
@@ -479,6 +478,7 @@ DEFINE_PROC_THREAD_ATTRIBUTE! {
     PROC_THREAD_ATTRIBUTE_SECURITY_CAPABILITIES = ProcThreadAttributeSecurityCapabilities: 0,1,0;
     PROC_THREAD_ATTRIBUTE_PROTECTION_LEVEL = ProcThreadAttributeProtectionLevel: 0,1,0;
 }
+// TODO: more attributes
 
 // S_*
 // NMPWAIT_*
