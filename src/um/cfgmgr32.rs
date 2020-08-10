@@ -1821,6 +1821,9 @@ extern "system" {
         ulFlags: ULONG,
         hMachine: HMACHINE,
     ) -> CONFIGRET;
+    pub fn CM_Unregister_Notification(
+        NotifyContext: HCMNOTIFICATION,
+    ) -> CONFIGRET;
     pub fn CM_Register_Device_Driver(
         dnDevInst: DEVINST,
         ulFlags: ULONG,
@@ -1829,6 +1832,12 @@ extern "system" {
         dnDevInst: DEVINST,
         ulFlags: ULONG,
         hMachine: HMACHINE,
+    ) -> CONFIGRET;
+    pub fn CM_Register_Notification(
+        pFilter: PCM_NOTIFY_FILTER,
+        pContext: PVOID,
+        pCallback: PCM_NOTIFY_CALLBACK,
+        pNotifyContext: PHCMNOTIFICATION,
     ) -> CONFIGRET;
     pub fn CM_Remove_SubTree(
         dnAncestor: DEVINST,
