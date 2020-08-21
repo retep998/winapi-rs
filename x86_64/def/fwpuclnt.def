@@ -89,9 +89,13 @@ FwpmNetEventEnum0
 FwpmNetEventEnum1
 FwpmNetEventEnum2
 FwpmNetEventEnum3
+FwpmNetEventEnum4
+FwpmNetEventEnum5
 FwpmNetEventSubscribe0
 FwpmNetEventSubscribe1
 FwpmNetEventSubscribe2
+FwpmNetEventSubscribe3
+FwpmNetEventSubscribe4
 FwpmNetEventSubscriptionsGet0
 FwpmNetEventUnsubscribe0
 FwpmNetEventsGetSecurityInfo0

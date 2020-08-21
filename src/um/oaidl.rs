@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -66,7 +65,7 @@ ENUM!{enum SF_TYPE {
     SF_RECORD = VT_RECORD,
     SF_HAVEIID = VT_UNKNOWN | VT_RESERVED,
 }}
-#[cfg(target_arch = "x86")]
+#[cfg(target_pointer_width = "32")]
 UNION!{union __MIDL_IOleAutomationTypes_0001 {
     [u32; 6],
     BstrStr BstrStr_mut: SAFEARR_BSTR,
@@ -80,7 +79,7 @@ UNION!{union __MIDL_IOleAutomationTypes_0001 {
     LongStr LongStr_mut: DWORD_SIZEDARR,
     HyperStr HyperStr_mut: HYPER_SIZEDARR,
 }}
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 UNION!{union __MIDL_IOleAutomationTypes_0001 {
     [u64; 4],
     BstrStr BstrStr_mut: SAFEARR_BSTR,
@@ -626,8 +625,102 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
 // IEnumVARIANT
 // IEnumVARIANT_RemoteNext_Proxy
 // IEnumVARIANT_RemoteNext_Stub
-pub enum IRecordInfo {} // FIXME
-pub enum ITypeComp {} // FIXME
+RIDL!{#[uuid(0x0000002F, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl) {
+    fn RecordInit(
+        pvNew: PVOID,
+    ) -> HRESULT,
+    fn RecordClear(
+        pvExisting: PVOID,
+    ) -> HRESULT,
+    fn RecordCopy(
+        pvExisting: PVOID,
+        pvNew: PVOID,
+    ) -> HRESULT,
+    fn GetGuid(
+        pguid: *mut GUID,
+    ) -> HRESULT,
+    fn GetName(
+        pbstrName: *mut BSTR,
+    ) -> HRESULT,
+    fn GetSize(
+        pcbSize: *mut ULONG,
+    ) -> HRESULT,
+    fn GetTypeInfo(
+        ppTypeInfo: *mut *mut ITypeInfo,
+    ) -> HRESULT,
+    fn GetField(
+        pvData: PVOID,
+        szFieldName: LPCOLESTR,
+        pvarField: *mut VARIANT,
+    ) -> HRESULT,
+    fn GetFieldNoCopy(
+        pvData: PVOID,
+        szFieldName: LPCOLESTR,
+        pvarField: *mut VARIANT,
+        ppvDataCArray: *mut PVOID,
+    ) -> HRESULT,
+    fn PutField(
+        wFlags: ULONG,
+        pvData: PVOID,
+        szFieldName: LPCOLESTR,
+        pvarField: *mut VARIANT,
+    ) -> HRESULT,
+    fn PutFieldNoCopy(
+        wFlags: ULONG,
+        pvData: PVOID,
+        szFieldName: LPCOLESTR,
+        pvarField: *mut VARIANT,
+    ) -> HRESULT,
+    fn GetFieldNames(
+        pcNames: *mut ULONG,
+        rgBstrNames: *mut BSTR,
+    ) -> HRESULT,
+    fn IsMatchingType(
+        pRecordInfo: *mut IRecordInfo,
+    ) -> BOOL,
+    fn RecordCreate() -> PVOID,
+    fn RecordCreateCopy(
+        pvSource: PVOID,
+        ppvDest: *mut PVOID,
+    ) -> HRESULT,
+    fn RecordDestroy(
+        pvRecord: PVOID,
+    ) -> HRESULT,
+}}
+pub type LPTYPECOMP = *mut ITypeComp;
+ENUM!{enum DESCKIND {
+    DESCKIND_NONE = 0,
+    DESCKIND_FUNCDESC = DESCKIND_NONE + 1,
+    DESCKIND_VARDESC = DESCKIND_FUNCDESC + 1,
+    DESCKIND_TYPECOMP = DESCKIND_VARDESC + 1,
+    DESCKIND_IMPLICITAPPOBJ = DESCKIND_TYPECOMP + 1,
+    DESCKIND_MAX = DESCKIND_IMPLICITAPPOBJ + 1,
+}}
+UNION!{union BINDPTR {
+    [usize; 1],
+    lpfuncdesc lpfuncdesc_mut: *mut FUNCDESC,
+    lpvardesc lpvardesc_mut: *mut VARDESC,
+    lptcomp lptcomp_mut: *mut ITypeComp,
+}}
+pub type LPBINDPTR = *mut BINDPTR;
+RIDL!{#[uuid(0x00020403, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface ITypeComp(ITypeCompVtbl): IUnknown(IUnknownVtbl) {
+    fn Bind(
+        szName: LPOLESTR,
+        lHashVal: ULONG,
+        wFlags: WORD,
+        ppTInfo: *mut *mut ITypeInfo,
+        pDescKind: *mut DESCKIND,
+        pBindPtr: *mut BINDPTR,
+    ) -> HRESULT,
+    fn BindType(
+        szName: LPOLESTR,
+        lHashVal: ULONG,
+        ppTInfo: *mut *mut ITypeInfo,
+        ppTComp: *mut *mut ITypeComp,
+    ) -> HRESULT,
+}}
 ENUM!{enum SYSKIND {
     SYS_WIN16 = 0,
     SYS_WIN32,
@@ -686,7 +779,7 @@ interface ITypeLib(ITypeLibVtbl): IUnknown(IUnknownVtbl) {
         pTLibAttr: *const TLIBATTR,
     ) -> HRESULT,
 }}
-RIDL!(#[uuid(0x00020401, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+RIDL!{#[uuid(0x00020401, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeAttr(
         ppTypeAttr: *mut *mut TYPEATTR,
@@ -775,13 +868,48 @@ interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn ReleaseVarDesc(
         pVarDesc: *mut VARDESC,
     ) -> (),
-}
-);
-RIDL!(#[uuid(0x3127ca40, 0x446e, 0x11ce, 0x81, 0x35, 0x00, 0xaa, 0x00, 0x4b, 0xb8, 0x51)]
+}}
+RIDL!{#[uuid(0x1cf2b120, 0x547d, 0x101b, 0x8e, 0x65, 0x08, 0x00, 0x2b, 0x2b, 0xd1, 0x19)]
+interface IErrorInfo(IErrorInfoVtbl): IUnknown(IUnknownVtbl) {
+    fn GetGUID(
+        pGUID: *mut GUID,
+    ) -> HRESULT,
+    fn GetSource(
+        pBstrSource: *mut BSTR,
+    ) -> HRESULT,
+    fn GetDescription(
+        pBstrDescription: *mut BSTR,
+    ) -> HRESULT,
+    fn GetHelpFile(
+        pBstrHelpFile: *mut BSTR,
+    ) -> HRESULT,
+    fn GetHelpContext(
+        pdwHelpContext: *mut DWORD,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x22f03340, 0x547d, 0x101b, 0x8e, 0x65, 0x08, 0x00, 0x2b, 0x2b, 0xd1, 0x19)]
+interface ICreateErrorInfo(ICreateErrorInfoVtbl): IUnknown(IUnknownVtbl) {
+    fn SetGUID(
+        rguid: REFGUID,
+    ) -> HRESULT,
+    fn SetSource(
+        szSource: LPOLESTR,
+    ) -> HRESULT,
+    fn SetDescription(
+        szDescription: LPOLESTR,
+    ) -> HRESULT,
+    fn SetHelpFile(
+        szHelpFile: LPOLESTR,
+    ) -> HRESULT,
+    fn SetHelpContext(
+        dwHelpContext: DWORD,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x3127ca40, 0x446e, 0x11ce, 0x81, 0x35, 0x00, 0xaa, 0x00, 0x4b, 0xb8, 0x51)]
 interface IErrorLog(IErrorLogVtbl): IUnknown(IUnknownVtbl) {
     fn AddError(
         pszPropName: LPCOLESTR,
         pExcepInfo: *const EXCEPINFO,
     ) -> HRESULT,
-});
+}}
 pub type LPERRORLOG = *mut IErrorLog;

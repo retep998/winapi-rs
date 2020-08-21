@@ -4,7 +4,9 @@ AddIPAddress@20
 AllocateAndGetInterfaceInfoFromStack@20
 AllocateAndGetIpAddrTableFromStack@16
 CancelIPChangeNotify@4
+CancelIfTimestampConfigChange@4
 CancelMibChangeNotify2@4
+CaptureInterfaceHardwareCrossTimestamp@8
 CloseCompartment@4
 CloseGetIPPhysicalInterfaceForDestination@4
 ConvertCompartmentGuidToId@8
@@ -60,6 +62,8 @@ EnableRouter@8
 FlushIpNetTable@4
 FlushIpNetTable2@8
 FlushIpPathTable@4
+FreeDnsSettings@4
+FreeInterfaceDnsSettings@4
 FreeMibTable@4
 GetAdapterIndex@8
 GetAdapterOrderMap@0
@@ -74,6 +78,7 @@ GetBestRoute2@28
 GetCurrentThreadCompartmentId@0
 GetCurrentThreadCompartmentScope@8
 GetDefaultCompartmentId@0
+GetDnsSettings@4
 GetExtendedTcpTable@24
 GetExtendedUdpTable@24
 GetFriendlyIfIndex@4
@@ -87,6 +92,9 @@ GetIfTable@12
 GetIfTable2@4
 GetIfTable2Ex@8
 GetInterfaceCompartmentId@4
+GetInterfaceCurrentTimestampCapabilities@8
+GetInterfaceDnsSettings@20
+GetInterfaceHardwareTimestampCapabilities@8
 GetInterfaceInfo@8
 GetInvertedIfStackTable@4
 GetIpAddrTable@12
@@ -227,6 +235,7 @@ NhGetInterfaceNameFromGuid@20
 NhpAllocateAndGetInterfaceInfoFromStack@20
 NotifyAddrChange@8
 NotifyCompartmentChange@16
+NotifyIfTimestampConfigChange@12
 NotifyIpInterfaceChange@20
 NotifyRouteChange@8
 NotifyRouteChange2@20
@@ -242,7 +251,9 @@ SendARP@16
 SetAdapterIpAddress@20
 SetCurrentThreadCompartmentId@4
 SetCurrentThreadCompartmentScope@4
+SetDnsSettings@4
 SetIfEntry@4
+SetInterfaceDnsSettings@20
 SetIpForwardEntry@4
 SetIpForwardEntry2@4
 SetIpInterfaceEntry@4

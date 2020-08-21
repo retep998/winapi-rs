@@ -211,6 +211,7 @@ SHELL32_CMountPoint_IsAutoRunDriveAndEnabledByPolicy@4
 SHELL32_CMountPoint_ProcessAutoRunFile@4
 SHELL32_CMountPoint_WantAutorunUI@4
 SHELL32_CMountPoint_WantAutorunUIGetReady@4
+SHELL32_CNetFolderUI_CreateInstance@12
 SHELL32_CPL_CategoryIdArrayFromVariant@8
 SHELL32_CPL_IsLegacyCanonicalNameListedUnderKey@8
 SHELL32_CPL_ModifyWowDisplayName@8
@@ -221,10 +222,8 @@ SHELL32_CallFileCopyHooks@28
 SHELL32_CanDisplayWin8CopyDialog@0
 SHELL32_CloseAutoplayPrompt@4
 SHELL32_CommandLineFromMsiDescriptor@12
-SHELL32_CopyExtrinsicPropertyStore@8
 SHELL32_CopyFilePlaceholderToNewFile@28
 SHELL32_CopySecondaryTiles@4
-SHELL32_CreateAlternateStreamFileName@12
 SHELL32_CreateConfirmationInterrupt@12
 SHELL32_CreateConflictInterrupt@20
 SHELL32_CreateDefaultOperationDataProvider@8
@@ -397,5 +396,6 @@ Shell_NotifyIcon@8
 Shell_NotifyIconA@8
 Shell_NotifyIconGetRect@8
 Shell_NotifyIconW@8
+StateRepoNewMenuCache_RebuildCacheAsync@0
 UsersLibrariesFolderUI_CreateInstance@16
 WOWShellExecute@28

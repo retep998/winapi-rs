@@ -1,6 +1,8 @@
 LIBRARY api-ms-win-core-localization-l1-2-0.dll
 EXPORTS
 EnumSystemGeoID@12
+EnumSystemLocalesA@8
+EnumSystemLocalesW@8
 FindNLSStringEx@40
 FormatMessageA@28
 FormatMessageW@28
@@ -13,6 +15,11 @@ GetLocaleInfoA@16
 GetLocaleInfoEx@16
 GetLocaleInfoW@16
 GetNLSVersionEx@12
+GetOEMCP@0
+GetSystemDefaultLCID@0
+GetSystemDefaultLangID@0
+GetThreadLocale@0
+GetUserDefaultLCID@0
 GetUserDefaultLangID@0
 GetUserDefaultLocaleName@8
 GetUserGeoID@4
@@ -22,9 +29,12 @@ IsDBCSLeadByte@4
 IsDBCSLeadByteEx@8
 IsNLSDefinedString@20
 IsValidCodePage@4
+IsValidLocale@8
 IsValidLocaleName@4
 IsValidNLSVersion@12
+LCMapStringA@24
 LCMapStringEx@36
+LCMapStringW@24
 LocaleNameToLCID@8
 ResolveLocaleName@12
 VerLanguageNameA@12

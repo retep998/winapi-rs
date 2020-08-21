@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -814,5 +813,5 @@ extern "system" {
         cchLocaleScripts: c_int,
         lpTestScripts: LPCWSTR,
         cchTestScripts: c_int,
-    ) -> BOOL;   
+    ) -> BOOL;
 }

@@ -1,3 +1,0 @@
-LIBRARY api-ms-win-core-console-ansi-l2-1-0.dll
-EXPORTS
-GetConsoleTitleA@8

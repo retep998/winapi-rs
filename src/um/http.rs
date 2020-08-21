@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -35,9 +34,9 @@ pub type PHTTP_SERVER_PROPERTY = *mut HTTP_SERVER_PROPERTY;
 STRUCT!{struct HTTP_PROPERTY_FLAGS {
     BitFields: ULONG,
 }}
-BITFIELD!(HTTP_PROPERTY_FLAGS BitFields: ULONG [
+BITFIELD!{HTTP_PROPERTY_FLAGS BitFields: ULONG [
     Present set_Present[0..1],
-]);
+]}
 pub type PHTTP_PROPERTY_FLAGS = *mut HTTP_PROPERTY_FLAGS;
 ENUM!{enum HTTP_ENABLED_STATE {
     HttpEnabledStateActive,
@@ -705,7 +704,7 @@ pub fn HTTPAPI_LESS_VERSION(version: HTTPAPI_VERSION, major: USHORT, minor: USHO
 pub fn HTTPAPI_VERSION_GREATER_OR_EQUAL(
     version: HTTPAPI_VERSION,
     major: USHORT,
-    minor: USHORT
+    minor: USHORT,
 ) -> bool {
     !HTTPAPI_LESS_VERSION(version, major, minor)
 }
@@ -841,6 +840,15 @@ STRUCT!{struct HTTP_SERVICE_CONFIG_CACHE_SET {
     ParamDesc: HTTP_SERVICE_CONFIG_CACHE_PARAM,
 }}
 pub type PHTTP_SERVICE_CONFIG_CACHE_SET = *mut HTTP_SERVICE_CONFIG_CACHE_SET;
+pub const HTTP_NULL_ID: ULONGLONG = 0;
+#[inline]
+pub unsafe fn HTTP_IS_NULL_ID(pid: PHTTP_OPAQUE_ID) -> bool {
+    HTTP_NULL_ID == *pid
+}
+#[inline]
+pub unsafe fn HTTP_SET_NULL_ID(pid: PHTTP_OPAQUE_ID) {
+    *pid = HTTP_NULL_ID
+}
 extern "system" {
     pub fn HttpInitialize(
         Version: HTTPAPI_VERSION,
@@ -852,7 +860,7 @@ extern "system" {
         pReserved: PVOID,
     ) -> ULONG;
     pub fn HttpCreateHttpHandle(
-        pReqQueueHandle: HANDLE,
+        pReqQueueHandle: PHANDLE,
         Reserved: ULONG,
     ) -> ULONG;
     pub fn HttpCreateRequestQueue(
@@ -883,7 +891,7 @@ extern "system" {
         pReserved: PVOID,
     ) -> ULONG;
     pub fn HttpShutdownRequestQueue(
-        ReqQueueHandle: HANDLE
+        ReqQueueHandle: HANDLE,
     ) -> ULONG;
     pub fn HttpReceiveClientCertificate(
         ReqQueueHandle: HANDLE,
@@ -1069,5 +1077,20 @@ extern "system" {
         OutputLength: ULONG,
         pReturnLength: PULONG,
         pOverlapped: LPOVERLAPPED,
+    ) -> ULONG;
+    pub fn HttpDeclarePush(
+        RequestQueueHandle: HANDLE,
+        RequestId: HTTP_REQUEST_ID,
+        Verb: HTTP_VERB,
+        Path: PCWSTR,
+        Query: PCSTR,
+        Headers: PHTTP_REQUEST_HEADERS,
+    ) -> ULONG;
+    pub fn HttpUpdateServiceConfiguration(
+        Handle: HANDLE,
+        ConfigId: HTTP_SERVICE_CONFIG_ID,
+        ConfigInfo: PVOID,
+        ConfigInfoLength: ULONG,
+        Overlapped: LPOVERLAPPED,
     ) -> ULONG;
 }

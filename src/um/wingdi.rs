@@ -1,4 +1,3 @@
-// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -85,7 +84,7 @@ pub const POLYFILL_LAST: c_int = 2;
 pub const LAYOUT_RTL: DWORD = 0x00000001;
 pub const LAYOUT_BTT: DWORD = 0x00000002;
 pub const LAYOUT_VBH: DWORD = 0x00000004;
-pub const LAYOUT_ORIENTATIONMASK: DWORD = (LAYOUT_RTL | LAYOUT_BTT | LAYOUT_VBH);
+pub const LAYOUT_ORIENTATIONMASK: DWORD = LAYOUT_RTL | LAYOUT_BTT | LAYOUT_VBH;
 pub const LAYOUT_BITMAPORIENTATIONPRESERVED: DWORD = 0x00000008;
 pub const TA_NOUPDATECP: UINT = 0;
 pub const TA_UPDATECP: UINT = 1;
@@ -116,7 +115,7 @@ pub const ASPECT_FILTERING: UINT = 0x0001;
 pub const DCB_RESET: UINT = 0x0001;
 pub const DCB_ACCUMULATE: UINT = 0x0002;
 pub const DCB_DIRTY: UINT = DCB_ACCUMULATE;
-pub const DCB_SET: UINT = (DCB_RESET | DCB_ACCUMULATE);
+pub const DCB_SET: UINT = DCB_RESET | DCB_ACCUMULATE;
 pub const DCB_ENABLE: UINT = 0x0004;
 pub const DCB_DISABLE: UINT = 0x0008;
 pub const META_SETBKCOLOR: WORD = 0x0201;
@@ -586,17 +585,17 @@ pub const BI_JPEG: DWORD = 4;
 pub const BI_PNG: DWORD = 5;
 STRUCT!{#[debug] struct BITMAPINFO {
     bmiHeader: BITMAPINFOHEADER,
-    bmiColors: [RGBQUAD; 0],
+    bmiColors: [RGBQUAD; 1],
 }}
 pub type LPBITMAPINFO = *mut BITMAPINFO;
 pub type PBITMAPINFO = *mut BITMAPINFO;
 STRUCT!{#[debug] struct BITMAPCOREINFO {
     bmciHeader: BITMAPCOREHEADER,
-    bmciColors: [RGBTRIPLE; 0],
+    bmciColors: [RGBTRIPLE; 1],
 }}
 pub type LPBITMAPCOREINFO = *mut BITMAPCOREINFO;
 pub type PBITMAPCOREINFO = *mut BITMAPCOREINFO;
-STRUCT!{ #[debug] #[repr(packed)] struct BITMAPFILEHEADER {
+STRUCT!{#[debug] #[repr(packed)] struct BITMAPFILEHEADER {
     bfType: WORD,
     bfSize: DWORD,
     bfReserved1: WORD,
@@ -881,7 +880,7 @@ STRUCT!{struct EXTLOGPEN32 {
     elpColor: COLORREF,
     elpHatch: ULONG,
     elpNumEntries: DWORD,
-    elpStyleEntry: [DWORD; 0],
+    elpStyleEntry: [DWORD; 1],
 }}
 pub type PEXTLOGPEN32 = *mut EXTLOGPEN32;
 pub type NPEXTLOGPEN32 = *mut EXTLOGPEN32;
@@ -1834,7 +1833,8 @@ ENUM!{enum DISPLAYCONFIG_SCANLINE_ORDERING {
     DISPLAYCONFIG_SCANLINE_ORDERING_UNSPECIFIED = 0,
     DISPLAYCONFIG_SCANLINE_ORDERING_PROGRESSIVE = 1,
     DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED = 2,
-    DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_UPPERFIELDFIRST = DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED,
+    DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_UPPERFIELDFIRST =
+        DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED,
     DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_LOWERFIELDFIRST = 3,
     DISPLAYCONFIG_SCANLINE_ORDERING_FORCE_UINT32 = 0xFFFFFFFF,
 }}
@@ -1903,16 +1903,22 @@ STRUCT!{struct DISPLAYCONFIG_SOURCE_MODE {
 STRUCT!{struct DISPLAYCONFIG_TARGET_MODE {
     targetVideoSignalInfo: DISPLAYCONFIG_VIDEO_SIGNAL_INFO,
 }}
+STRUCT!{struct DISPLAYCONFIG_DESKTOP_IMAGE_INFO {
+    PathSourceSize: POINTL,
+    DesktopImageRegion: RECTL,
+    DesktopImageClip: RECTL,
+}}
 UNION!{union DISPLAYCONFIG_MODE_INFO_u {
     [u64; 6],
     targetMode targetMode_mut: DISPLAYCONFIG_TARGET_MODE,
     sourceMode sourceMode_mut: DISPLAYCONFIG_SOURCE_MODE,
     desktopImageInfo desktopImageInfo_mut: DISPLAYCONFIG_DESKTOP_IMAGE_INFO,
 }}
-STRUCT!{struct DISPLAYCONFIG_DESKTOP_IMAGE_INFO {
+STRUCT!{struct DISPLAYCONFIG_MODE_INFO {
     infoType: DISPLAYCONFIG_MODE_INFO_TYPE,
     id: UINT32,
     adapterId: LUID,
+    u: DISPLAYCONFIG_MODE_INFO_u,
 }}
 pub const DISPLAYCONFIG_PATH_MODE_IDX_INVALID: DWORD = 0xffffffff;
 pub const DISPLAYCONFIG_PATH_TARGET_MODE_IDX_INVALID: DWORD = 0xffff;
@@ -2097,7 +2103,7 @@ STRUCT!{struct RGNDATAHEADER {
 pub type PRGNDATAHEADER = *mut RGNDATAHEADER;
 STRUCT!{struct RGNDATA {
     rdh: RGNDATAHEADER,
-    Buffer: [c_char; 0],
+    Buffer: [c_char; 1],
 }}
 pub type PRGNDATA = *mut RGNDATA;
 pub type NPRGNDATA = *mut RGNDATA;
@@ -2257,7 +2263,7 @@ pub type LPPOINTFX = *mut POINTFX;
 STRUCT!{struct TTPOLYCURVE {
     wType: WORD,
     cpfx: WORD,
-    apfx: [POINTFX; 0],
+    apfx: [POINTFX; 1],
 }}
 pub type LPTTPOLYCURVE = *mut TTPOLYCURVE;
 STRUCT!{struct TTPOLYGONHEADER {
@@ -2780,44 +2786,44 @@ extern "system" {
         lpLogfont: LPLOGFONTA,
         lpProc: FONTENUMPROCA,
         lParam: LPARAM,
-        dwFlags: DWORD
+        dwFlags: DWORD,
     ) -> c_int;
     pub fn EnumFontFamiliesExW(
         hdc: HDC,
         lpLogfont: LPLOGFONTW,
         lpProc: FONTENUMPROCW,
         lParam: LPARAM,
-        dwFlags: DWORD
+        dwFlags: DWORD,
     ) -> c_int;
     pub fn EnumFontFamiliesA(
         hdc: HDC,
         lpLogfont: LPCSTR,
         lpProc: FONTENUMPROCA,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> c_int;
     pub fn EnumFontFamiliesW(
         hdc: HDC,
         lpLogfont: LPCWSTR,
         lpProc: FONTENUMPROCW,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> c_int;
     pub fn EnumFontsA(
         hdc: HDC,
         lpLogfont: LPCSTR,
         lpProc: FONTENUMPROCA,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> c_int;
     pub fn EnumFontsW(
         hdc: HDC,
         lpLogfont: LPCWSTR,
         lpProc: FONTENUMPROCW,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> c_int;
     pub fn EnumObjects(
         hdc: HDC,
         nType: c_int,
         lpFunc: GOBJENUMPROC,
-        lParam: LPARAM
+        lParam: LPARAM,
     ) -> c_int;
     pub fn EqualRgn(
         hrgn1: HRGN,
@@ -2836,7 +2842,7 @@ extern "system" {
         cjInput: c_int,
         lpInData: LPCSTR,
         cjOutput: c_int,
-        lpOutData: LPSTR
+        lpOutData: LPSTR,
     ) -> c_int;
     pub fn ExcludeClipRect(
         hdc: HDC,
@@ -2949,7 +2955,7 @@ extern "system" {
         lpBuffer: PFLOAT,
     ) -> BOOL;
     pub fn GetCharABCWidthsA(
-         hdc: HDC,
+        hdc: HDC,
         wFirst: UINT,
         wLast: UINT,
         lpABC: LPABC,
@@ -2964,13 +2970,13 @@ extern "system" {
         hdc: HDC,
         iFirst: UINT,
         iLast: UINT,
-        lpABC: LPABCFLOAT
+        lpABC: LPABCFLOAT,
     ) -> BOOL;
     pub fn GetCharABCWidthsFloatW(
         hdc: HDC,
         iFirst: UINT,
         iLast: UINT,
-        lpABC: LPABCFLOAT
+        lpABC: LPABCFLOAT,
     ) -> BOOL;
     pub fn GetClipBox(
         hdc: HDC,
@@ -3003,14 +3009,14 @@ extern "system" {
         cLines: UINT,
         lpvBits: LPVOID,
         lpbmi: LPBITMAPINFO,
-        usage: UINT
+        usage: UINT,
     ) -> c_int;
     pub fn GetFontData(
         hdc: HDC,
         dwTable: DWORD,
         dwOffset: DWORD,
         pvBuffer: PVOID,
-        cjBuffer: DWORD
+        cjBuffer: DWORD,
     ) -> DWORD;
     pub fn GetGlyphOutlineA(
         hdc: HDC,
@@ -3019,7 +3025,7 @@ extern "system" {
         lpgm: LPGLYPHMETRICS,
         cjBuffer: DWORD,
         pvBuffer: LPVOID,
-        lpmat2: *const MAT2
+        lpmat2: *const MAT2,
     ) -> DWORD;
     pub fn GetGlyphOutlineW(
         hdc: HDC,
@@ -3028,7 +3034,7 @@ extern "system" {
         lpgm: LPGLYPHMETRICS,
         cjBuffer: DWORD,
         pvBuffer: LPVOID,
-        lpmat2: *const MAT2
+        lpmat2: *const MAT2,
     ) -> DWORD;
     pub fn GetGraphicsMode(
         hdc: HDC,
@@ -3072,7 +3078,7 @@ extern "system" {
         hpal: HPALETTE,
         iStart: UINT,
         cEntries: UINT,
-        pPalEntries: LPPALETTEENTRY
+        pPalEntries: LPPALETTEENTRY,
     ) -> UINT;
     pub fn GetPixel(
         hdc: HDC,
@@ -3158,7 +3164,7 @@ extern "system" {
         nMaxExtent: c_int,
         lpnFit: LPINT,
         lpnDx: LPINT,
-        lpSize: LPSIZE
+        lpSize: LPSIZE,
     ) -> BOOL;
     pub fn GetTextExtentExPointW(
         hdc: HDC,
@@ -3167,7 +3173,7 @@ extern "system" {
         nMaxExtent: c_int,
         lpnFit: LPINT,
         lpnDx: LPINT,
-        lpSize: LPSIZE
+        lpSize: LPSIZE,
     ) -> BOOL;
     pub fn GetTextCharset(
         hdc: HDC,
@@ -3180,7 +3186,7 @@ extern "system" {
     pub fn TranslateCharsetInfo(
         lpSrc: *const DWORD,
         lpCs: LPCHARSETINFO,
-        dwFlags: DWORD
+        dwFlags: DWORD,
     ) -> BOOL;
     pub fn GetFontLanguageInfo(
         hdc: HDC,
@@ -3191,7 +3197,7 @@ extern "system" {
         nCount: c_int,
         nMexExtent: c_int,
         lpResults: LPGCP_RESULTSA,
-        dwFlags: DWORD
+        dwFlags: DWORD,
     ) -> DWORD;
     pub fn GetCharacterPlacementW(
         hdc: HDC,
@@ -3199,7 +3205,7 @@ extern "system" {
         nCount: c_int,
         nMexExtent: c_int,
         lpResults: LPGCP_RESULTSW,
-        dwFlags: DWORD
+        dwFlags: DWORD,
     ) -> DWORD;
 }
 STRUCT!{struct WCRANGE {
@@ -4941,7 +4947,7 @@ STRUCT!{struct EMRPOLYLINE16 {
     emr: EMR,
     rclBounds: RECTL,
     cpts: DWORD,
-    apts: [POINTL; 1],
+    apts: [POINTS; 1],
 }}
 pub type PEMRPOLYLINE16 = *mut EMRPOLYLINE16;
 pub type EMRPOLYBEZIER16 = EMRPOLYLINE16;
@@ -4964,7 +4970,7 @@ STRUCT!{struct EMRPOLYDRAW16 {
     emr: EMR,
     rclBounds: RECTL,
     cpts: DWORD,
-    apts: [POINTL; 1],
+    apts: [POINTS; 1],
     abTypes: [BYTE; 1],
 }}
 pub type PEMRPOLYDRAW16 = *mut EMRPOLYDRAW16;
@@ -4985,7 +4991,7 @@ STRUCT!{struct EMRPOLYPOLYLINE16 {
     nPolys: DWORD,
     cpts: DWORD,
     aPolyCounts: [DWORD; 1],
-    apts: [POINTL; 1],
+    apts: [POINTS; 1],
 }}
 pub type PEMRPOLYPOLYLINE16 = *mut EMRPOLYPOLYLINE16;
 pub type EMRPOLYPOLYGON16 = EMRPOLYPOLYLINE16;

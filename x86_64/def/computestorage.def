@@ -1,0 +1,13 @@
+LIBRARY computestorage.dll
+EXPORTS
+HcsAttachLayerStorageFilter
+HcsDestroyLayer
+HcsDetachLayerStorageFilter
+HcsExportLayer
+HcsExportLegacyWritableLayer
+HcsFormatWritableLayerVhd
+HcsGetLayerVhdMountPath
+HcsImportLayer
+HcsInitializeLegacyWritableLayer
+HcsInitializeWritableLayer
+HcsSetupBaseOSLayer

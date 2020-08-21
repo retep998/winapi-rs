@@ -27,6 +27,7 @@ JsCreateReferenceError@8
 JsCreateRuntime@12
 JsCreateSymbol@8
 JsCreateSyntaxError@8
+JsCreateThreadService@8
 JsCreateTypeError@8
 JsCreateTypedArray@20
 JsCreateURIError@8

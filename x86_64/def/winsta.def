@@ -7,6 +7,7 @@ ServerGetInternetConnectorStatus
 ServerLicensingClose
 ServerLicensingDeactivateCurrentPolicy
 ServerLicensingFreePolicyInformation
+ServerLicensingGetAadInfo
 ServerLicensingGetAvailablePolicyIds
 ServerLicensingGetPolicy
 ServerLicensingGetPolicyInformationA
@@ -14,6 +15,7 @@ ServerLicensingGetPolicyInformationW
 ServerLicensingLoadPolicy
 ServerLicensingOpenA
 ServerLicensingOpenW
+ServerLicensingSetAadInfo
 ServerLicensingSetPolicy
 ServerLicensingUnloadPolicy
 ServerQueryInetConnectorInformationA
@@ -32,6 +34,7 @@ WinStationConnectAndLockDesktop
 WinStationConnectCallback
 WinStationConnectEx
 WinStationConnectW
+WinStationConsumeCacheSession
 WinStationCreateChildSessionTransport
 WinStationDisconnect
 WinStationEnableChildSessions
@@ -76,6 +79,7 @@ WinStationGetUserCertificates
 WinStationGetUserCredentials
 WinStationGetUserProfile
 WinStationInstallLicense
+WinStationIsBoundToCacheTerminal
 WinStationIsChildSessionsEnabled
 WinStationIsCurrentSessionRemoteable
 WinStationIsHelpAssistantSession

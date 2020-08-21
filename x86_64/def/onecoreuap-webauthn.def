@@ -1,0 +1,12 @@
+LIBRARY webauthn.dll
+EXPORTS
+WebAuthNAuthenticatorGetAssertion
+WebAuthNAuthenticatorMakeCredential
+WebAuthNCancelCurrentOperation
+WebAuthNFreeAssertion
+WebAuthNFreeCredentialAttestation
+WebAuthNGetApiVersionNumber
+WebAuthNGetCancellationId
+WebAuthNGetErrorName
+WebAuthNGetW3CExceptionDOMError
+WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable

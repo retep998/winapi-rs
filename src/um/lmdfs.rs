@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -45,7 +44,7 @@ STRUCT!{struct DFS_INFO_1 {
 }}
 pub type PDFS_INFO_1 = *mut DFS_INFO_1;
 pub type LPDFS_INFO_1 = *mut DFS_INFO_1;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 STRUCT!{struct DFS_INFO_1_32 {
     EntryPath: ULONG,
@@ -61,7 +60,7 @@ STRUCT!{struct DFS_INFO_2 {
 }}
 pub type PDFS_INFO_2 = *mut DFS_INFO_2;
 pub type LPDFS_INFO_2 = *mut DFS_INFO_2;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 STRUCT!{struct DFS_INFO_2_32 {
     EntryPath: ULONG,
@@ -79,7 +78,7 @@ STRUCT!{struct DFS_STORAGE_INFO {
 }}
 pub type PDFS_STORAGE_INFO = *mut DFS_STORAGE_INFO;
 pub type LPDFS_STORAGE_INFO = *mut DFS_STORAGE_INFO;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 STRUCT!{struct DFS_STORAGE_INFO_0_32 {
     State: ULONG,
@@ -106,7 +105,7 @@ STRUCT!{struct DFS_INFO_3 {
 }}
 pub type PDFS_INFO_3 = *mut DFS_INFO_3;
 pub type LPDFS_INFO_3 = *mut DFS_INFO_3;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 STRUCT!{struct DFS_INFO_3_32 {
     EntryPath: ULONG,
@@ -129,7 +128,7 @@ STRUCT!{struct DFS_INFO_4 {
 }}
 pub type PDFS_INFO_4 = *mut DFS_INFO_4;
 pub type LPDFS_INFO_4 = *mut DFS_INFO_4;
-#[cfg(target_arch = "x86_64")]
+#[cfg(target_pointer_width = "64")]
 IFDEF!{
 STRUCT!{struct DFS_INFO_4_32 {
     EntryPath: ULONG,

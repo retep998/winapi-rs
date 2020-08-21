@@ -1,4 +1,3 @@
-// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -106,7 +105,7 @@ STRUCT!{struct PDH_BROWSE_DLG_CONFIG_A {
     dwDefaultDetailLevel: DWORD,
     szDialogBoxCaption: LPSTR,
 }}
-BITFIELD!(PDH_BROWSE_DLG_CONFIG_A flags: DWORD [
+BITFIELD!{PDH_BROWSE_DLG_CONFIG_A flags: DWORD [
     IncludeInstanceIndex set_IncludeInstanceIndex[0..1],
     SingleCounterPerAdd set_SingleCounterPerAdd[1..2],
     SingleCounterPerDialog set_SingleCounterPerDialog[2..3],
@@ -117,7 +116,7 @@ BITFIELD!(PDH_BROWSE_DLG_CONFIG_A flags: DWORD [
     DisableMachineSelection set_DisableMachineSelection[7..8],
     IncludeCostlyObjects set_IncludeCostlyObjects[8..9],
     ShowObjectBrowser set_ShowObjectBrowser[9..10],
-]);
+]}
 STRUCT!{struct PDH_BROWSE_DLG_CONFIG_W {
     flags: DWORD,
     hWndOwner: HWND,
@@ -130,7 +129,7 @@ STRUCT!{struct PDH_BROWSE_DLG_CONFIG_W {
     dwDefaultDetailLevel: DWORD,
     szDialogBoxCaption: LPWSTR,
 }}
-BITFIELD!(PDH_BROWSE_DLG_CONFIG_W flags: DWORD [
+BITFIELD!{PDH_BROWSE_DLG_CONFIG_W flags: DWORD [
     IncludeInstanceIndex set_IncludeInstanceIndex[0..1],
     SingleCounterPerAdd set_SingleCounterPerAdd[1..2],
     SingleCounterPerDialog set_SingleCounterPerDialog[2..3],
@@ -141,7 +140,7 @@ BITFIELD!(PDH_BROWSE_DLG_CONFIG_W flags: DWORD [
     DisableMachineSelection set_DisableMachineSelection[7..8],
     IncludeCostlyObjects set_IncludeCostlyObjects[8..9],
     ShowObjectBrowser set_ShowObjectBrowser[9..10],
-]);
+]}
 STRUCT!{struct PDH_COUNTER_PATH_ELEMENTS_A {
     szMachineName: LPSTR,
     szObjectName: LPSTR,
@@ -238,7 +237,7 @@ STRUCT!{struct PDH_BROWSE_DLG_CONFIG_HA {
     dwDefaultDetailLevel: DWORD,
     szDialogBoxCaption: LPSTR,
 }}
-BITFIELD!(PDH_BROWSE_DLG_CONFIG_HA flags: DWORD [
+BITFIELD!{PDH_BROWSE_DLG_CONFIG_HA flags: DWORD [
     IncludeInstanceIndex set_IncludeInstanceIndex[0..1],
     SingleCounterPerAdd set_SingleCounterPerAdd[1..2],
     SingleCounterPerDialog set_SingleCounterPerDialog[2..3],
@@ -249,7 +248,7 @@ BITFIELD!(PDH_BROWSE_DLG_CONFIG_HA flags: DWORD [
     DisableMachineSelection set_DisableMachineSelection[7..8],
     IncludeCostlyObjects set_IncludeCostlyObjects[8..9],
     ShowObjectBrowser set_ShowObjectBrowser[9..10],
-]);
+]}
 STRUCT!{struct PDH_BROWSE_DLG_CONFIG_HW {
     flags: DWORD,
     hWndOwner: HWND,
@@ -262,7 +261,7 @@ STRUCT!{struct PDH_BROWSE_DLG_CONFIG_HW {
     dwDefaultDetailLevel: DWORD,
     szDialogBoxCaption: LPWSTR,
 }}
-BITFIELD!(PDH_BROWSE_DLG_CONFIG_HW flags: DWORD [
+BITFIELD!{PDH_BROWSE_DLG_CONFIG_HW flags: DWORD [
     IncludeInstanceIndex set_IncludeInstanceIndex[0..1],
     SingleCounterPerAdd set_SingleCounterPerAdd[1..2],
     SingleCounterPerDialog set_SingleCounterPerDialog[2..3],
@@ -273,7 +272,7 @@ BITFIELD!(PDH_BROWSE_DLG_CONFIG_HW flags: DWORD [
     DisableMachineSelection set_DisableMachineSelection[7..8],
     IncludeCostlyObjects set_IncludeCostlyObjects[8..9],
     ShowObjectBrowser set_ShowObjectBrowser[9..10],
-]);
+]}
 extern "system" {
     pub fn PdhGetDllVersion(
         lpdwVersion: LPDWORD,

@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -10,13 +9,21 @@ use shared::minwindef::{BOOL, BYTE, DWORD, UINT, WORD};
 use um::winnt::{LPWSTR, SHORT, WCHAR};
 pub const XINPUT_DEVTYPE_GAMEPAD: BYTE = 0x01;
 pub const XINPUT_DEVSUBTYPE_GAMEPAD: BYTE = 0x01;
+pub const XINPUT_DEVSUBTYPE_UNKNOWN: BYTE = 0x00;
 pub const XINPUT_DEVSUBTYPE_WHEEL: BYTE = 0x02;
 pub const XINPUT_DEVSUBTYPE_ARCADE_STICK: BYTE = 0x03;
 pub const XINPUT_DEVSUBTYPE_FLIGHT_SICK: BYTE = 0x04;
 pub const XINPUT_DEVSUBTYPE_DANCE_PAD: BYTE = 0x05;
 pub const XINPUT_DEVSUBTYPE_GUITAR: BYTE = 0x06;
+pub const XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE: BYTE = 0x07;
 pub const XINPUT_DEVSUBTYPE_DRUM_KIT: BYTE = 0x08;
+pub const XINPUT_DEVSUBTYPE_GUITAR_BASS: BYTE = 0x0B;
+pub const XINPUT_DEVSUBTYPE_ARCADE_PAD: BYTE = 0x13;
 pub const XINPUT_CAPS_VOICE_SUPPORTED: WORD = 0x0004;
+pub const XINPUT_CAPS_FFB_SUPPORTED: WORD = 0x0001;
+pub const XINPUT_CAPS_WIRELESS: WORD = 0x0002;
+pub const XINPUT_CAPS_PMD_SUPPORTED: WORD = 0x0008;
+pub const XINPUT_CAPS_NO_NAVIGATION: WORD = 0x0010;
 pub const XINPUT_GAMEPAD_DPAD_UP: WORD = 0x0001;
 pub const XINPUT_GAMEPAD_DPAD_DOWN: WORD = 0x0002;
 pub const XINPUT_GAMEPAD_DPAD_LEFT: WORD = 0x0004;

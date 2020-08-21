@@ -9,7 +9,7 @@ AddClusterResourceNode@8
 AddClusterStorageNode@24
 AddCrossClusterGroupSetDependency@12
 AddResourceToClusterSharedVolumes@4
-AddResourceToClusterSharedVolumesEx@8
+AddResourceToClusterSharedVolumesEx@12
 BackupClusterDatabase@8
 CanResourceBeDependent@8
 CancelClusterGroupOperation@8
@@ -30,7 +30,9 @@ CluGetFaultDomainObject@16
 CluGetFaultDomainObjects@12
 CluRemoveFaultDomainObject@12
 ClusterAddGroupToGroupSet@8
+ClusterAddGroupToGroupSetWithDomains@16
 ClusterCaptureLiveDump@100
+ClusterChangeVMSettings@12
 ClusterCloseEnum@4
 ClusterCloseEnumEx@4
 ClusterControl@32
@@ -38,6 +40,7 @@ ClusterCreateClusterStorageEnclosure@52
 ClusterCreateFaultDomain@28
 ClusterCreateFaultDomainFromXML@12
 ClusterCreateVMReservation@24
+ClusterCreateVMReservationWithDomains@32
 ClusterEnum@20
 ClusterEnumEx@16
 ClusterFreeMemory@4
@@ -212,6 +215,7 @@ GetClusterResourceNetworkName@12
 GetClusterResourceState@20
 GetClusterResourceTypeKey@12
 GetClusterSharedVolumeNameForFile@24
+GetNodeCloudTypeDW@8
 GetNodeClusterState@8
 GetNotifyEventHandle@8
 InitializeClusFaultDomainInfo@4

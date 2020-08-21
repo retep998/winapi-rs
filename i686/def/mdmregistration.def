@@ -6,7 +6,9 @@ GetDeviceRegistrationInfo@8
 GetManagementAppHyperlink@8
 IsDeviceRegisteredWithManagement@12
 IsManagementRegistrationAllowed@4
+IsMdmUxWithoutAadAllowed@4
 RegisterDeviceWithManagement@12
 RegisterDeviceWithManagementUsingAADCredentials@4
+RegisterDeviceWithManagementUsingAADDeviceCredentials@0
 SetManagedExternally@4
 UnregisterDeviceWithManagement@4

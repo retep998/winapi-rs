@@ -1,7 +1,7 @@
 # Guidelines
 
 * Never get definitions from MinGW headers or MSDN. Always stick to the Windows SDK headers, in
-  particular the latest Windows 10 SDK.
+  particular the latest Windows 10 SDK — you can find it [here](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk).  Look for a folder called "Include" inside the installed SDK to find the header (and other) files.
 * Definitions which depend on whether `UNICODE` is defined should not be included. It is the user's
   responsibility to explicitly choose between `W` and `A` functions (and they should always choose
   `W`).
@@ -98,14 +98,19 @@ FN!{stdcall NAMEENUMPROCA(
   cast must be performed, do the cast using the primitive integer types.
 * If the constant is a pointer that is initialized to a negative literal, do `-1isize as LPFOO`.
 
+The C version found in the SDK:
 ```C
 #define CLSCTX_INPROC           (CLSCTX_INPROC_SERVER|CLSCTX_INPROC_HANDLER)
 ```
+
+And what the Rust binding should look like:
 ```Rust
 pub const CLSCTX_INPROC: CLSCTX = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER;
 ```
 
 ## GUIDs
+
+* Numbers should be padded with zeros to ensure consistent width.
 
 ```Rust
 DEFINE_GUID!{GUID_DEVCLASS_SENSOR,
@@ -114,8 +119,9 @@ DEFINE_GUID!{GUID_DEVCLASS_SENSOR,
 
 ## Structs
 
-* One field per line.
+Each field must be on its own line.
 
+The C version found in the SDK:
 ```C
 typedef struct _GROUP_AFFINITY {
     KAFFINITY Mask;
@@ -123,6 +129,8 @@ typedef struct _GROUP_AFFINITY {
     WORD   Reserved[3];
 } GROUP_AFFINITY, *PGROUP_AFFINITY;
 ```
+
+And what the Rust binding should look like:
 ```Rust
 STRUCT!{struct GROUP_AFFINITY {
     Mask: KAFFINITY,
@@ -134,6 +142,7 @@ pub type PGROUP_AFFINITY = *mut GROUP_AFFINITY;
 
 ## Unions
 
+The C version found in the SDK:
 ```C
 typedef union {
     USN_RECORD_COMMON_HEADER Header;
@@ -142,6 +151,8 @@ typedef union {
     USN_RECORD_V4 V4;
 } USN_RECORD_UNION, *PUSN_RECORD_UNION;
 ```
+
+And what the Rust binding should look like:
 ```Rust
 UNION!{union USN_RECORD_UNION {
     [u64; 10],
@@ -200,6 +211,7 @@ UNION!{union D3D12_RESOURCE_BARRIER_u {
 
 ## Union with a primitive field and an anonymous bitfield struct of the same type
 
+The C version found in the SDK:
 ```C
 typedef union _USB_HUB_STATUS {
     USHORT  AsUshort16;
@@ -211,6 +223,7 @@ typedef union _USB_HUB_STATUS {
 } USB_HUB_STATUS, *PUSB_HUB_STATUS;
 ```
 
+And what the Rust binding should look like:
 ```Rust
 STRUCT!{struct USB_HUB_STATUS {
     AsUshort16: USHORT,
@@ -230,7 +243,11 @@ BITFIELD!{USB_HUB_STATUS AsUshort16: USHORT [
 
 * The uuid should always be lowercase hex.
 * If the COM interface does not have a uuid then use a uuid of all zeroes.
-* Uuid numbers should be padded with zeros when needed.
+* Uuid numbers should be padded with zeros to ensure consistent width.
+* Sometimes a COM interface will have two methods with identical names (an overloaded method). If
+  the two methods are both named `Foo`, then name them `Foo_1` and `Foo_2`. In addition,
+  overloaded methods must appear in *reverse* order to comply with the COM binary interface. See
+  #523 for more details.
 
 ```Rust
 RIDL!{#[uuid(0x6d4865fe, 0x0ab8, 0x4d91, 0x8f, 0x62, 0x5d, 0xd6, 0xbe, 0x34, 0xa3, 0xe0)]
@@ -253,6 +270,23 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
 }}
 ```
 
+## COM classes
+
+* The uuid should always be lowercase hex.
+* Uuid numbers should be padded with zeros to ensure consistent width.
+
+The C version found in the SDK:
+```C
+class DECLSPEC_UUID("D9F6EE60-58C9-458B-88E1-2F908FD7F87C")
+SpDataKey;
+```
+
+And what the Rust binding should look like:
+```Rust
+RIDL!{#[uuid(0xd9f6ee60, 0x58c9, 0x458b, 0x88, 0xe1, 0x2f, 0x90, 0x8f, 0xd7, 0xf8, 0x7c)]
+class SpDataKey;}
+```
+
 ## Organization of code
 
 * All definitions go into the source file that directly maps to the header the definition is from.
@@ -262,12 +296,8 @@ interface IDWriteFontFileStream(IDWriteFontFileStreamVtbl): IUnknown(IUnknownVtb
 ## Dealing with duplicates
 
 * Sometimes two headers will define the same thing.
-    * If the duplicated thing is a simple typedef or function definition or constant, then
+    * If the duplicated thing is a simple typedef or extern function or constant, then
       duplicate the definition.
-    * If the duplicated thing is a struct or COM interface or union, then choose one header to be
-      the canonical source of truth for that definition and publicly re-export the thing from the
-      other header.
-* Sometimes a COM interface will have two methods with identical names (an overloaded method). If
-  the two methods are both named `Foo`, then name them `Foo_1` and `Foo_2`. In addition,
-  overloaded methods must appear in *reverse* order to comply with the COM binary interface. See
-  #523 for more details.
+    * If the duplicated thing is a struct or union or COM interface or COM class, then choose one
+      header to be the canonical source of truth for that definition and publicly re-export the
+      thing from the other header.

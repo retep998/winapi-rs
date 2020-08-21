@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -7,12 +6,14 @@
 use ctypes::{c_float, c_int, c_long, c_void};
 use shared::basetsd::{SIZE_T, UINT64, UINT8};
 use shared::dxgi::{DXGI_SWAP_CHAIN_DESC, IDXGIAdapter, IDXGISwapChain};
-use shared::dxgiformat::{DXGI_FORMAT};
+use shared::dxgiformat::DXGI_FORMAT;
 use shared::dxgitype::{DXGI_RATIONAL, DXGI_SAMPLE_DESC};
 use shared::guiddef::{GUID, REFGUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, HMODULE, INT, UINT, USHORT};
 use shared::windef::{RECT, SIZE};
-use um::d3dcommon::{D3D_DRIVER_TYPE, D3D_FEATURE_LEVEL, D3D_PRIMITIVE, D3D_PRIMITIVE_TOPOLOGY, D3D_SRV_DIMENSION};
+use um::d3dcommon::{
+    D3D_DRIVER_TYPE, D3D_FEATURE_LEVEL, D3D_PRIMITIVE, D3D_PRIMITIVE_TOPOLOGY, D3D_SRV_DIMENSION,
+};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HANDLE, HRESULT, LPCSTR, LPSTR, ULONGLONG};
 pub const D3D11_16BIT_INDEX_STRIP_CUT_VALUE: DWORD = 0xffff;
@@ -1851,6 +1852,7 @@ interface ID3D11DeviceContext(ID3D11DeviceContextVtbl): ID3D11DeviceChild(ID3D11
         ppRenderTargetViews: *mut *mut ID3D11RenderTargetView,
         ppDepthStencilView: *mut *mut ID3D11DepthStencilView,
         UAVStartSlot: UINT,
+        NumUAVs: UINT,
         ppUnorderedAccessViews: *mut *mut ID3D11UnorderedAccessView,
     ) -> (),
     fn OMGetBlendState(
@@ -2480,9 +2482,9 @@ STRUCT!{struct D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_INPU
     ProcessIndex: UINT,
 }}
 ENUM!{enum D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE {
-    DD3D11_PROCESSIDTYPE_UNKNOWN = 0,
-    DD3D11_PROCESSIDTYPE_DWM = 1,
-    DD3D11_PROCESSIDTYPE_HANDLE = 2,
+    D3D11_PROCESSIDTYPE_UNKNOWN = 0,
+    D3D11_PROCESSIDTYPE_DWM = 1,
+    D3D11_PROCESSIDTYPE_HANDLE = 2,
 }}
 STRUCT!{struct D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_OUTPUT {
     Output: D3D11_AUTHENTICATED_QUERY_OUTPUT,

@@ -1,4 +1,3 @@
-// Copyright © 2016-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -199,9 +198,14 @@ pub type USN = LONGLONG;
 UNION!{union LARGE_INTEGER {
     [i64; 1],
     s s_mut: LARGE_INTEGER_s,
+    u u_mut: LARGE_INTEGER_u,
     QuadPart QuadPart_mut: LONGLONG,
 }}
 STRUCT!{struct LARGE_INTEGER_s {
+    LowPart: ULONG,
+    HighPart: LONG,
+}}
+STRUCT!{struct LARGE_INTEGER_u {
     LowPart: ULONG,
     HighPart: LONG,
 }}
@@ -209,9 +213,14 @@ pub type PLARGE_INTEGER = *mut LARGE_INTEGER;
 UNION!{union ULARGE_INTEGER {
     [u64; 1],
     s s_mut: ULARGE_INTEGER_s,
+    u u_mut: ULARGE_INTEGER_s,
     QuadPart QuadPart_mut: ULONGLONG,
 }}
 STRUCT!{struct ULARGE_INTEGER_s {
+    LowPart: ULONG,
+    HighPart: ULONG,
+}}
+STRUCT!{struct ULARGE_INTEGER_u {
     LowPart: ULONG,
     HighPart: ULONG,
 }}

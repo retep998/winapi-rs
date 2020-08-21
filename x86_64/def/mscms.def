@@ -1,11 +1,29 @@
 LIBRARY mscms.dll
 EXPORTS
 AssociateColorProfileWithDeviceA @1
+ColorAdapterGetCurrentProfileCalibration @217
+ColorAdapterGetDisplayCurrentStateID @211
+ColorAdapterGetDisplayProfile @216
+ColorAdapterGetDisplayTargetWhitePoint @215
+ColorAdapterGetDisplayTransformData @214
+ColorAdapterGetSystemModifyWhitePointCaps @210
+ColorAdapterRegisterOEMColorService @218
+ColorAdapterUnregisterOEMColorService @219
+ColorAdapterUpdateDeviceProfile @213
+ColorAdapterUpdateDisplayGamma @212
+ColorProfileAddDisplayAssociation @230
+ColorProfileGetDisplayDefault @234
+ColorProfileGetDisplayList @233
+ColorProfileGetDisplayUserScope @235
+ColorProfileRemoveDisplayAssociation @231
+ColorProfileSetDisplayDefaultAssociation @232
+InternalGetAppliedGDIGammaRamp @207
 InternalGetAppliedGammaRamp @205
 InternalGetDeviceGammaCapability @206
 InternalGetPS2ColorRenderingDictionary2 @200
 InternalGetPS2ColorSpaceArray2 @202
 InternalGetPS2PreviewCRD2 @201
+InternalSetDeviceGDIGammaRamp @208
 InternalSetDeviceGammaRamp @203
 InternalSetDeviceTemperature @204
 AssociateColorProfileWithDeviceW

@@ -1,9 +1,12 @@
 LIBRARY ntdll.dll
 EXPORTS
+RtlAnsiStringToUnicodeString@12
 RtlEthernetAddressToStringA@8
 RtlEthernetAddressToStringW@8
 RtlEthernetStringToAddressA@12
 RtlEthernetStringToAddressW@12
+RtlFreeUnicodeString@4
+RtlInitAnsiString@8
 RtlIpv4AddressToStringA@8
 RtlIpv4AddressToStringExA@16
 RtlIpv4AddressToStringExW@16

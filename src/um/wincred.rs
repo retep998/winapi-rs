@@ -1,18 +1,15 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Authentication API Prototypes and Definitions
-
 use shared::minwindef::{
     BOOL, DWORD, FILETIME, LPBYTE, LPCVOID, LPDWORD, LPVOID, PBOOL, PBYTE, UCHAR, ULONG
 };
 use shared::windef::{HBITMAP, HWND};
 use um::sspi::PCtxtHandle;
 use um::winnt::{CHAR, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PCSTR, PCWSTR, PSTR, PVOID, PWSTR, WCHAR};
-
 // STATUS_*
 pub const NERR_BASE: DWORD = 2100;
 pub const NERR_PasswordExpired: DWORD = NERR_BASE + 142;

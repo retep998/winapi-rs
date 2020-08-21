@@ -1,4 +1,3 @@
-// Copyright © 2015-2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -265,9 +264,9 @@ pub unsafe fn DPA_SortedInsertPtr(
     DPA_InsertPtr(
         hdpa,
         DPA_Search(
-            hdpa, pFind, iStart, pfnCompare, lParam, DPAS_SORTED | options
+            hdpa, pFind, iStart, pfnCompare, lParam, DPAS_SORTED | options,
         ),
-        pitem
+        pitem,
     )
 }
 pub const DPA_APPEND: c_int = DA_LAST;

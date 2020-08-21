@@ -11,6 +11,8 @@ MFCreateAudioRenderer
 MFCreateAudioRendererActivate
 MFCreateDeviceSource
 MFCreateDeviceSourceActivate
+MFCreateExtendedCameraIntrinsicModel
+MFCreateExtendedCameraIntrinsics
 MFCreateMediaProcessor
 MFCreateMediaSession
 MFCreatePMPHost

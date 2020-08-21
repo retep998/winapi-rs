@@ -1,4 +1,3 @@
-// Copyright © 2017 winapi-rs developers
 // Licensed under the Apache License, Version 2.0
 // <LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
@@ -10,7 +9,6 @@ use shared::guiddef::{GUID, REFIID};
 use shared::minwindef::{BOOL, DWORD, UINT};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
-
 pub const DXGI_DEBUG_BINARY_VERSION: DWORD = 1;
 ENUM!{enum DXGI_DEBUG_RLO_FLAGS {
     DXGI_DEBUG_RLO_SUMMARY = 0x1,

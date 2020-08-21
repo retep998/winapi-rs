@@ -1,7 +1,13 @@
 LIBRARY dpx.dll
 EXPORTS
+DpxCheckJobExists
+DpxCheckJobExistsEx
+DpxDeleteJob
+DpxDeleteJobEx
 DpxFreeMemory
 DpxNewJob
 DpxNewJobEx
 DpxRestoreJob
 DpxRestoreJobEx
+DpxRestoreOrNewJob
+DpxRestoreOrNewJobEx

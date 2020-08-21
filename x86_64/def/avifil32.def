@@ -70,7 +70,3 @@ EditStreamSetInfoW
 EditStreamSetName
 EditStreamSetNameA
 EditStreamSetNameW
-IID_IAVIEditStream
-IID_IAVIFile
-IID_IAVIStream
-IID_IGetFrame

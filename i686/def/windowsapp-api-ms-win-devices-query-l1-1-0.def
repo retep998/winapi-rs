@@ -1,0 +1,4 @@
+LIBRARY api-ms-win-devices-query-l1-1-0.dll
+EXPORTS
+DevCloseObjectQuery@4
+DevCreateObjectQuery@36
