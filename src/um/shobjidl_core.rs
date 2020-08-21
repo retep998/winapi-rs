@@ -108,7 +108,7 @@ interface ITaskbarList2(ITaskbarList2Vtbl): ITaskbarList(ITaskbarListVtbl) {
 }}
 
 ENUM!{enum SLR_FLAGS {
-    SLR_NONE                        = 0,
+    SLR_NONE = 0,
     SLR_NO_UI                       = 0x1,
     SLR_ANY_MATCH                   = 0x2,
     SLR_UPDATE                      = 0x4,
