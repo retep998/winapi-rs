@@ -10,6 +10,8 @@ use shared::windef::{COLORREF, HICON, HWND, RECT};
 use um::commctrl::HIMAGELIST;
 use um::minwinbase::{WIN32_FIND_DATAA, WIN32_FIND_DATAW};
 use um::objidl::IBindCtx;
+use um::propkeydef::REFPROPERTYKEY;
+use um::propsys::GETPROPERTYSTOREFLAGS;
 use um::shtypes::{
     PCIDLIST_ABSOLUTE, 
     PCUIDLIST_RELATIVE,
@@ -21,7 +23,7 @@ use um::shtypes::{
     STRRET
 };
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::winnt::{HRESULT, LPWSTR};
+use um::winnt::{HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PCWSTR, ULONGLONG, WCHAR};
 DEFINE_GUID!{CLSID_DesktopWallpaper,
     0xc2cf3110, 0x460e, 0x4fc1, 0xb9, 0xd0, 0x8a, 0x1c, 0x0c, 0x9c, 0xc4, 0xbd}
 DEFINE_GUID!{CLSID_TaskbarList,
@@ -175,7 +177,6 @@ interface ITaskbarList2(ITaskbarList2Vtbl): ITaskbarList(ITaskbarListVtbl) {
         fFullscreen: BOOL,
     ) -> HRESULT,    
 }}
-
 ENUM!{enum SLR_FLAGS {
     SLR_NONE = 0,
     SLR_NO_UI                       = 0x1,
@@ -201,8 +202,6 @@ ENUM!{enum SLGP_FLAGS {
 }}
 DEFINE_GUID!{CLSID_ShellLink,
     0x00021401, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
-RIDL!(#[uuid(0x000214EE, 0, 0, 0xC0,0,0,0,0,0,0,0x46)]
-
 ENUM!{enum THUMBBUTTONFLAGS {
     THBF_ENABLED = 0,
     THBF_DISABLED = 0x1,
@@ -516,24 +515,7 @@ interface IShellLinkW(IShellLinkWVtbl): IUnknown(IUnknownVtbl) {
     fn SetPath(
         pszFile: LPCWSTR,
     ) -> HRESULT,
-});
-
-ENUM!{enum _SHCONTF {
-    SHCONTF_CHECKING_FOR_CHILDREN   = 0x10,
-    SHCONTF_FOLDERS                 = 0x20,
-    SHCONTF_NONFOLDERS              = 0x40,
-    SHCONTF_INCLUDEHIDDEN           = 0x80,
-    SHCONTF_INIT_ON_FIRST_NEXT      = 0x100,
-    SHCONTF_NETPRINTERSRCH          = 0x200,
-    SHCONTF_SHAREABLE               = 0x400,
-    SHCONTF_STORAGE                 = 0x800,
-    SHCONTF_NAVIGATION_ENUM         = 0x1000,
-    SHCONTF_FASTITEMS               = 0x2000,
-    SHCONTF_FLATLIST                = 0x4000,
-    SHCONTF_ENABLE_ASYNC            = 0x8000,
-    SHCONTF_INCLUDESUPERHIDDEN      = 0x10000,
 }}
-pub type SHCONTF = DWORD;
 ENUM!{enum _SHGDNF {
     SHGDN_NORMAL        = 0,
     SHGDN_INFOLDER      = 0x1,
@@ -557,7 +539,7 @@ interface IEnumIDList(IEnumIDListVtbl): IUnknown(IUnknownVtbl) {
         ppenum: *mut *mut IEnumIDList,
     ) -> HRESULT,
 });
-RIDL!(#[uuid(0x000214E6, 0, 0, 0xC0,0,0,0,0,0,0,0x46)]
+RIDL!{#[uuid(0x000214E6, 0, 0, 0xC0,0,0,0,0,0,0,0x46)]
 interface IShellFolder(IShellFolderVtbl): IUnknown(IUnknownVtbl) {
     fn ParseDisplayName(
         hwnd: HWND,
@@ -620,7 +602,6 @@ interface IShellFolder(IShellFolderVtbl): IUnknown(IUnknownVtbl) {
         ppidlOut: *mut PITEMID_CHILD,
     ) -> HRESULT,
 }}
-
 RIDL!{#[uuid(0xc2cf3110, 0x460e, 0x4fc1, 0xb9, 0xd0, 0x8a, 0x1c, 0x0c, 0x9c, 0xc4, 0xbd)]
 class DesktopWallpaper;}
 RIDL!{#[uuid(0x00021400, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]

@@ -126,27 +126,6 @@ interface IPersistStream(IPersistStreamVtbl): IPersist(IPersistVtbl) {
         pcbSize: *mut ULARGE_INTEGER,
     ) -> HRESULT,
 }}
-
-RIDL!{#[uuid(0x0000010b, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
-interface IPersistFile(IPersistFileVtbl): IPersist(IPersistVtbl) {
-    fn IsDirty() -> HRESULT,
-    fn Load(
-        pszFileName: LPCOLESTR,
-        dwMode: DWORD,
-    ) -> HRESULT,
-    fn Save(
-        pszFileName: LPCOLESTR,
-        fRemember: BOOL,
-    ) -> HRESULT,
-    fn SaveCompleted(
-        pszFileName: LPCOLESTR,
-    ) -> HRESULT,
-    fn GetCurFile(
-        pszFileName: LPOLESTR,
-    ) -> HRESULT,
-}
-);
-
 //9350
 RIDL!{#[uuid(0x0000000f, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IMoniker(IMonikerVtbl): IPersistStream(IPersistStreamVtbl) {
