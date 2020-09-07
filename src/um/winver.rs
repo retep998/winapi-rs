@@ -16,6 +16,16 @@ extern "system" {
         lptstrFilename: LPCWSTR,
         lpdwHandle: *mut DWORD,
     ) -> DWORD;
+    pub fn GetFileVersionInfoSizeExA(
+        dwFlags: DWORD,
+        lptstrFilename: LPCSTR,
+        lpdwHandle: *mut DWORD,
+    ) -> DWORD;
+    pub fn GetFileVersionInfoSizeExW(
+        dwFlags: DWORD,
+        lptstrFilename: LPCWSTR,
+        lpdwHandle: *mut DWORD,
+    ) -> DWORD;
     pub fn GetFileVersionInfoA(
         lptstrFilename: LPCSTR,
         dwHandle: DWORD,
@@ -23,6 +33,20 @@ extern "system" {
         lpData: *mut c_void,
     ) -> BOOL;
     pub fn GetFileVersionInfoW(
+        lptstrFilename: LPCWSTR,
+        dwHandle: DWORD,
+        dwLen: DWORD,
+        lpData: *mut c_void,
+    ) -> BOOL;
+    pub fn GetFileVersionInfoExA(
+        dwFlags: DWORD,
+        lptstrFilename: LPCSTR,
+        dwHandle: DWORD,
+        dwLen: DWORD,
+        lpData: *mut c_void,
+    ) -> BOOL;
+    pub fn GetFileVersionInfoExW(
+        dwFlags: DWORD,
         lptstrFilename: LPCWSTR,
         dwHandle: DWORD,
         dwLen: DWORD,
@@ -51,3 +75,7 @@ extern "system" {
         cchLang: DWORD,
     ) -> DWORD;
 }
+
+pub const FILE_VER_GET_LOCALISED: DWORD = 0x01;
+pub const FILE_VER_GET_NEUTRAL: DWORD = 0x02;
+pub const FILE_VER_GET_PREFETCHED: DWORD = 0x04;
