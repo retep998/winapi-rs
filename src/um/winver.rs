@@ -75,11 +75,9 @@ extern "system" {
         cchLang: DWORD,
     ) -> DWORD;
 }
-
 pub const FILE_VER_GET_LOCALISED: DWORD = 0x01;
 pub const FILE_VER_GET_NEUTRAL: DWORD = 0x02;
 pub const FILE_VER_GET_PREFETCHED: DWORD = 0x04;
-
 STRUCT!{struct VS_FIXEDFILEINFO {
     dwSignature: DWORD,
     dwStrucVersion: DWORD,
