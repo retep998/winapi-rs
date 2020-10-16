@@ -82,7 +82,7 @@ extern "system" {
     pub fn GetCurrentProcessId() -> DWORD;
     pub fn ExitProcess(
         uExitCode: UINT,
-    );
+    ) -> !;
     pub fn TerminateProcess(
         hProcess: HANDLE,
         uExitCode: UINT,
