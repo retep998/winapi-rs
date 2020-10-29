@@ -6,6 +6,7 @@
 use std::cell::Cell;
 use std::collections::HashMap;
 use std::env::var;
+use std::io::{self, Write};
 use std::process::exit;
 // (header name, &[header dependencies], &[library dependencies])
 const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static str])] = &[
@@ -525,10 +526,13 @@ fn main() {
     if target.get(2) == Some(&"windows") {
         try_everything();
     } else {
-        eprintln!("error: winapi is only supported on Windows platforms");
-        eprintln!("help: if your application is multi-platform, use \
-            `[target.'cfg(windows)'.dependencies] winapi = \"...\"`");
-        eprintln!("help: if your application is only supported on Windows, use `--target x86_64-pc-windows-gnu` or some other windows platform");
+        // eprintln is not available in 1.6.0
+        io::stderr().write_all(
+            b"error: winapi is only supported on Windows platforms\n\
+              help: if your application is multi-platform, use \
+              `[target.'cfg(windows)'.dependencies] winapi = \"...\"`\n\
+              help: if your application is only supported on Windows, use `--target x86_64-pc-windows-gnu` or some other windows platform\n"
+        ).unwrap();
         exit(1);
     }
 }
