@@ -44,24 +44,6 @@ jobs:
         cargo build --target=${{ matrix.target }} --release --all-features
     - name: Test
       run: cargo test --target=${{ matrix.target }} --all-features --no-run
-  lin:
-    name: Lin
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        toolchain: [nightly, 1.2.0]
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions-rs/toolchain@v1
-      with:
-        toolchain: ${{ matrix.toolchain }}
-        default: true
-        profile: minimal
-    - name: Build
-      run: |
-        cargo build
-        cargo build --features "everything impl-debug impl-default"
-        cargo build --release --features "everything impl-debug impl-default"
   lincross:
     name: LinX
     runs-on: ubuntu-latest
