@@ -4,9 +4,9 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use ctypes::c_int;
-use shared::minwindef::{BOOL, UINT};
+use shared::minwindef::{BOOL, LPDWORD, UINT};
 use um::msi::{INSTALLMESSAGE, MSIHANDLE};
-use um::winnt::{LPCSTR, LPCWSTR};
+use um::winnt::{LPCSTR, LPCWSTR, LPSTR, LPWSTR};
 extern "system" {
     pub fn MsiCreateRecord(cParams: UINT) -> MSIHANDLE;
     pub fn MsiRecordIsNull(hRecord: MSIHANDLE, iField: UINT) -> BOOL;
@@ -19,4 +19,16 @@ extern "system" {
         eMessageType: INSTALLMESSAGE,
         hRecord: MSIHANDLE,
     ) -> c_int;
+    pub fn MsiGetTargetPathA(
+        hInstall: MSIHANDLE,
+        szFolder: LPCSTR,
+        szPathBuf: LPSTR,
+        pcchPathBuf: LPDWORD
+    ) -> UINT;
+    pub fn MsiGetTargetPathW(
+        hInstall: MSIHANDLE,
+        szFolder: LPCWSTR,
+        szPathBuf: LPWSTR,
+        pcchPathBuf: LPDWORD
+    ) -> UINT;
 }
