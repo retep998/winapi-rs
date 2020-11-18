@@ -41,3 +41,12 @@ interface IClassFactory(IClassFactoryVtbl): IUnknown(IUnknownVtbl) {
         fLock: BOOL,
     ) -> HRESULT,
 }}
+pub trait AsIUnknown {
+    fn as_iunknown(&self) -> &IUnknown;
+}
+impl AsIUnknown for IUnknown {
+    fn as_iunknown(&self) -> &IUnknown { self }
+}
+impl<I> AsIUnknown for I where I : ::core::ops::Deref, I::Target : AsIUnknown {
+    fn as_iunknown(&self) -> &IUnknown { AsIUnknown::as_iunknown(&**self) }
+}
