@@ -1324,11 +1324,11 @@ pub fn D3D12_DECODE_SHADER_4_COMPONENT_MAPPING(
     ComponentToExtract: UINT,
     Mapping: UINT,
 ) -> D3D12_SHADER_COMPONENT_MAPPING {
-    (Mapping >> (D3D12_SHADER_COMPONENT_MAPPING_SHIFT * ComponentToExtract) 
+    (Mapping >> (D3D12_SHADER_COMPONENT_MAPPING_SHIFT * ComponentToExtract)
         & D3D12_SHADER_COMPONENT_MAPPING_MASK) as u32
 }
 pub fn D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING() -> UINT {
-    D3D12_ENCODE_SHADER_4_COMPONENT_MAPPING(0,1,2,3) 
+    D3D12_ENCODE_SHADER_4_COMPONENT_MAPPING(0,1,2,3)
 }
 ENUM!{enum D3D12_BUFFER_SRV_FLAGS {
     D3D12_BUFFER_SRV_FLAG_NONE = 0x0,
@@ -2505,6 +2505,9 @@ interface ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl):
         Format: DXGI_FORMAT,
         ResolveMode: D3D12_RESOLVE_MODE,
     ) -> (),
+    fn SetViewInstanceMask(
+        Mask: UINT,
+    ) -> (),
 }}
 STRUCT!{struct D3D12_WRITEBUFFERIMMEDIATE_PARAMETER {
     Dest: D3D12_GPU_VIRTUAL_ADDRESS,
@@ -2979,11 +2982,11 @@ interface ID3D12LifetimeOwner(ID3D12LifetimeOwnerVtlb): IUnknown(IUnknownVtbl) {
 RIDL!{#[uuid(0xf1df64b6, 0x57fd, 0x49cd, 0x88, 0x07, 0xc0, 0xeb, 0x88, 0xb4, 0x5c, 0x8f)]
 interface ID3D12SwapChainAssistant(ID3D12SwapChainAssistantVtlb): IUnknown(IUnknownVtbl) {
     fn GetLUID() -> LUID,
-    fn GetSwapChainObject( 
+    fn GetSwapChainObject(
         riid: REFIID,
         ppv: *mut *mut c_void,
     ) -> HRESULT,
-    fn GetCurrentResourceAndCommandQueue( 
+    fn GetCurrentResourceAndCommandQueue(
         riidResource: REFIID,
         ppvResource: *mut *mut c_void,
         riidQueue: REFIID,
@@ -2994,7 +2997,7 @@ interface ID3D12SwapChainAssistant(ID3D12SwapChainAssistantVtlb): IUnknown(IUnkn
 RIDL!{#[uuid(0x3fd03d36, 0x4eb1, 0x424a, 0xa5, 0x82, 0x49, 0x4e, 0xcb, 0x8b, 0xa8, 0x13)]
 interface ID3D12LifetimeTracker(ID3D12LifetimeTrackerVtbl)
     : ID3D12DeviceChild(ID3D12DeviceChildVtbl) {
-    fn DestroyOwnedObject( 
+    fn DestroyOwnedObject(
         pObject: *mut ID3D12DeviceChild,
     ) -> HRESULT,
 }}
@@ -3074,7 +3077,7 @@ ENUM!{enum D3D12_STATE_SUBOBJECT_TYPE {
     D3D12_STATE_SUBOBJECT_TYPE_RAYTRACING_SHADER_CONFIG = 9,
     D3D12_STATE_SUBOBJECT_TYPE_RAYTRACING_PIPELINE_CONFIG   = 10,
     D3D12_STATE_SUBOBJECT_TYPE_HIT_GROUP    = 11,
-    D3D12_STATE_SUBOBJECT_TYPE_MAX_VALID    = 12, 
+    D3D12_STATE_SUBOBJECT_TYPE_MAX_VALID    = 12,
 }}
 STRUCT!{struct D3D12_STATE_SUBOBJECT {
     Type: D3D12_STATE_SUBOBJECT_TYPE,
@@ -3506,20 +3509,20 @@ interface ID3D12DeviceRemovedExtendedDataSettings(ID3D12DeviceRemovedExtendedDat
     fn SetAutoBreadcrumbsEnablement(
         __MIDL__ID3D12DeviceRemovedExtendedDataSettings0000: D3D12_DRED_ENABLEMENT,
     ) -> (),
-    fn SetPageFaultEnablement( 
+    fn SetPageFaultEnablement(
         __MIDL__ID3D12DeviceRemovedExtendedDataSettings0001: D3D12_DRED_ENABLEMENT,
     ) -> (),
-    fn SetWatsonDumpEnablement( 
+    fn SetWatsonDumpEnablement(
         __MIDL__ID3D12DeviceRemovedExtendedDataSettings0002: D3D12_DRED_ENABLEMENT,
     ) -> (),
 }}
 RIDL!{#[uuid(0x98931D33, 0x5AE8, 0x4791, 0xAA, 0x3C, 0x1A, 0x73, 0xA2, 0x93, 0x4E, 0x71)]
     interface ID3D12DeviceRemovedExtendedData(ID3D12DeviceRemovedExtendedDataVtbl)
     : IUnknown(IUnknownVtbl) {
-    fn GetAutoBreadcrumbsOutput( 
+    fn GetAutoBreadcrumbsOutput(
         pOutput: *mut D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT,
     ) -> HRESULT,
-    fn GetPageFaultAllocationOutput( 
+    fn GetPageFaultAllocationOutput(
         pOutput: *mut D3D12_DRED_PAGE_FAULT_OUTPUT,
     ) -> HRESULT,
 }}
@@ -3537,7 +3540,7 @@ ENUM!{enum D3D12_MEASUREMENTS_ACTION {
 }}
 RIDL!{#[uuid(0xc70b221b, 0x40e4, 0x4a17, 0x89, 0xaf, 0x02, 0x5a, 0x07, 0x27, 0xa6, 0xdc)]
 interface ID3D12Device6(ID3D12Device6Vtbl): ID3D12Device5(ID3D12Device5Vtbl) {
-    fn SetBackgroundProcessingMode( 
+    fn SetBackgroundProcessingMode(
         Mode: D3D12_BACKGROUND_PROCESSING_MODE,
         MeasurementsAction: D3D12_MEASUREMENTS_ACTION,
         hEventToSignalUponCompletion: HANDLE,
@@ -3647,7 +3650,7 @@ STRUCT!{struct D3D12_DISPATCH_RAYS_DESC {
     Depth: UINT,
 }}
 RIDL!{#[uuid(0x8754318e, 0xd3a9, 0x4541, 0x98, 0xcf, 0x64, 0x5b, 0x50, 0xdc, 0x48, 0x74)]
-interface ID3D12GraphicsCommandList4(ID3D12GraphicsCommandList4Vtbl) 
+interface ID3D12GraphicsCommandList4(ID3D12GraphicsCommandList4Vtbl)
     : ID3D12GraphicsCommandList3(ID3D12GraphicsCommandList3Vtbl) {
     fn BeginRenderPass(
         NumRenderTargets: UINT,
