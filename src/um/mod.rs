@@ -192,6 +192,7 @@ pub mod gl;
 #[cfg(feature = "processthreadsapi")] pub mod processthreadsapi;
 #[cfg(feature = "processtopologyapi")] pub mod processtopologyapi;
 #[cfg(feature = "profileapi")] pub mod profileapi;
+#[cfg(feature = "projectedfslib")] pub mod projectedfslib;
 #[cfg(feature = "propidl")] pub mod propidl;
 #[cfg(feature = "propkey")] pub mod propkey;
 #[cfg(feature = "propkeydef")] pub mod propkeydef;
