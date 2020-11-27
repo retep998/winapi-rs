@@ -59,6 +59,7 @@ pub mod guiddef;
 #[cfg(feature = "ntddndis")] pub mod ntddndis;
 #[cfg(feature = "ntddscsi")] pub mod ntddscsi;
 #[cfg(feature = "ntddser")] pub mod ntddser;
+#[cfg(feature = "ntddstor")] pub mod ntddstor;
 #[cfg(feature = "ntdef")] pub mod ntdef;
 #[cfg(feature = "ntstatus")] pub mod ntstatus;
 #[cfg(feature = "qos")] pub mod qos;
