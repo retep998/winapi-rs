@@ -8099,6 +8099,8 @@ fn um_winioctl() {
     assert_eq!(align_of::<VOLUME_DISK_EXTENTS>(), 8);
     assert_eq!(size_of::<DISK_PERFORMANCE>(), 88);
     assert_eq!(align_of::<DISK_PERFORMANCE>(), 8);
+    assert_eq!(size_of::<FILE_ZERO_DATA_INFORMATION>(), 16);
+    assert_eq!(align_of::<FILE_ZERO_DATA_INFORMATION>(), 8);
 }
 #[cfg(feature = "winnetwk")] #[test]
 fn um_winnetwk() {
