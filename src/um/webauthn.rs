@@ -208,8 +208,8 @@ extern "system" {
         pUserInformation: PCWEBAUTHN_USER_ENTITY_INFORMATION,
         pPubKeyCredParams: PCWEBAUTHN_COSE_CREDENTIAL_PARAMETERS,
         pWebAuthNClientData: PCWEBAUTHN_CLIENT_DATA,
-        pWebAuthNMakeCredentialOPtions: PCWEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS,
-        ppWebAuthNCredentialAttestattion: *mut PWEBAUTHN_CREDENTIAL_ATTESTATION,
+        pWebAuthNMakeCredentialOptions: PCWEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS,
+        ppWebAuthNCredentialAttestation: *mut PWEBAUTHN_CREDENTIAL_ATTESTATION,
     ) -> HRESULT;
     pub fn WebAuthNAuthenticatorGetAssertion(
         hWnd: HWND,
