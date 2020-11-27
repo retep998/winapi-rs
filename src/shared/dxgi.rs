@@ -280,6 +280,10 @@ interface IDXGISwapChain(IDXGISwapChainVtbl): IDXGIDeviceSubObject(IDXGIDeviceSu
         pLastPresentCount: *mut UINT,
     ) -> HRESULT,
 }}
+pub const DXGI_MWA_NO_WINDOW_CHANGES: UINT = 1 << 0;
+pub const DXGI_MWA_NO_ALT_ENTER: UINT = 1 << 1;
+pub const DXGI_MWA_NO_PRINT_SCREEN: UINT = 1 << 2;
+pub const DXGI_MWA_VALID: UINT = 0x7;
 RIDL!{#[uuid(0x7b7166ec, 0x21c7, 0x44ae, 0xb2, 0x1a, 0xc9, 0xae, 0x32, 0x1a, 0xe3, 0x69)]
 interface IDXGIFactory(IDXGIFactoryVtbl): IDXGIObject(IDXGIObjectVtbl) {
     fn EnumAdapters(
