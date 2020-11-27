@@ -165,6 +165,7 @@ pub mod gl;
 #[cfg(feature = "namespaceapi")] pub mod namespaceapi;
 #[cfg(feature = "nb30")] pub mod nb30;
 #[cfg(feature = "ncrypt")] pub mod ncrypt;
+#[cfg(feature = "newdev")] pub mod newdev;
 #[cfg(feature = "ntlsa")] pub mod ntlsa;
 #[cfg(feature = "ntsecapi")] pub mod ntsecapi;
 #[cfg(feature = "oaidl")] pub mod oaidl;
