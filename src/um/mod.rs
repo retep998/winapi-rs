@@ -259,6 +259,7 @@ pub mod gl;
 #[cfg(feature = "wbemprov")] pub mod wbemprov;
 #[cfg(feature = "wbemtran")] pub mod wbemtran;
 #[cfg(feature = "wct")] pub mod wct;
+#[cfg(feature = "webauthn")] pub mod webauthn;
 #[cfg(feature = "werapi")] pub mod werapi;
 #[cfg(feature = "winbase")] pub mod winbase;
 #[cfg(feature = "wincodec")] pub mod wincodec;

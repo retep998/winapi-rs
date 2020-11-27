@@ -355,6 +355,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("wbemprov", &["minwindef", "oaidl", "unknwnbase", "wbemcli", "winerror", "winnt", "wtypes"], &[]),
     ("wbemtran", &["guiddef", "minwindef", "unknwnbase", "wbemcli", "winerror", "winnt", "wtypes"], &[]),
     ("wct", &["basetsd", "guiddef", "minwindef", "winnt"], &["advapi32"]),
+    ("webauthn", &["guiddef", "minwindef", "windef", "winnt"], &["webauthn"]),
     ("werapi", &["minwindef", "winnt"], &["kernel32", "wer"]),
     ("winbase", &["basetsd", "cfgmgr32", "fileapi", "guiddef", "libloaderapi", "minwinbase", "minwindef", "processthreadsapi", "vadefs", "windef", "winnt"], &["kernel32"]),
     ("wincodec", &["basetsd", "d2d1", "d2d1_1", "dcommon", "dxgiformat", "dxgitype", "guiddef", "minwindef", "ntdef", "objidlbase", "ocidl", "propidl", "unknwnbase", "windef", "winerror", "winnt"], &["windowscodecs"]),
