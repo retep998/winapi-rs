@@ -61,6 +61,7 @@ pub mod guiddef;
 #[cfg(feature = "ntddser")] pub mod ntddser;
 #[cfg(feature = "ntdef")] pub mod ntdef;
 #[cfg(feature = "ntstatus")] pub mod ntstatus;
+#[cfg(feature = "pciprop")] pub mod pciprop;
 #[cfg(feature = "qos")] pub mod qos;
 #[cfg(feature = "rpc")] pub mod rpc;
 #[cfg(feature = "rpcdce")] pub mod rpcdce;
