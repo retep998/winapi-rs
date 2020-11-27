@@ -5,7 +5,7 @@
 // except according to those terms
 //! Version management functions, types, and definitions
 use ctypes::c_void;
-use shared::minwindef::{BOOL, DWORD, LPCVOID, LPVOID, PUINT};
+use shared::minwindef::{BOOL, DWORD, LPCVOID, LPDWORD, LPVOID, PUINT};
 use um::winnt::{LPCSTR, LPCWSTR, LPSTR, LPWSTR};
 extern "system" {
     pub fn GetFileVersionInfoSizeA(
@@ -13,16 +13,6 @@ extern "system" {
         lpdwHandle: *mut DWORD,
     ) -> DWORD;
     pub fn GetFileVersionInfoSizeW(
-        lptstrFilename: LPCWSTR,
-        lpdwHandle: *mut DWORD,
-    ) -> DWORD;
-    pub fn GetFileVersionInfoSizeExA(
-        dwFlags: DWORD,
-        lptstrFilename: LPCSTR,
-        lpdwHandle: *mut DWORD,
-    ) -> DWORD;
-    pub fn GetFileVersionInfoSizeExW(
-        dwFlags: DWORD,
         lptstrFilename: LPCWSTR,
         lpdwHandle: *mut DWORD,
     ) -> DWORD;
@@ -38,19 +28,29 @@ extern "system" {
         dwLen: DWORD,
         lpData: *mut c_void,
     ) -> BOOL;
+    pub fn GetFileVersionInfoSizeExA(
+        dwFlags: DWORD,
+        lpwstrFilename: LPCSTR,
+        lpdwHandle: LPDWORD,
+    ) -> DWORD;
+    pub fn GetFileVersionInfoSizeExW(
+        dwFlags: DWORD,
+        lpwstrFilename: LPCWSTR,
+        lpdwHandle: LPDWORD,
+    ) -> DWORD;
     pub fn GetFileVersionInfoExA(
         dwFlags: DWORD,
-        lptstrFilename: LPCSTR,
+        lpwstrFilename: LPCSTR,
         dwHandle: DWORD,
         dwLen: DWORD,
-        lpData: *mut c_void,
+        lpData: LPVOID,
     ) -> BOOL;
     pub fn GetFileVersionInfoExW(
         dwFlags: DWORD,
-        lptstrFilename: LPCWSTR,
+        lpwstrFilename: LPCWSTR,
         dwHandle: DWORD,
         dwLen: DWORD,
-        lpData: *mut c_void,
+        lpData: LPVOID,
     ) -> BOOL;
     pub fn VerQueryValueA(
         pBlock: LPCVOID,
@@ -75,21 +75,3 @@ extern "system" {
         cchLang: DWORD,
     ) -> DWORD;
 }
-pub const FILE_VER_GET_LOCALISED: DWORD = 0x01;
-pub const FILE_VER_GET_NEUTRAL: DWORD = 0x02;
-pub const FILE_VER_GET_PREFETCHED: DWORD = 0x04;
-STRUCT!{struct VS_FIXEDFILEINFO {
-    dwSignature: DWORD,
-    dwStrucVersion: DWORD,
-    dwFileVersionMS: DWORD,
-    dwFileVersionLS: DWORD,
-    dwProductVersionMS: DWORD,
-    dwProductVersionLS: DWORD,
-    dwFileFlagsMask: DWORD,
-    dwFileFlags: DWORD,
-    dwFileOS: DWORD,
-    dwFileType: DWORD,
-    dwFileSubtype: DWORD,
-    dwFileDateMS: DWORD,
-    dwFileDateLS: DWORD,
-}}
