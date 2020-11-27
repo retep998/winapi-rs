@@ -204,6 +204,9 @@ STRUCT!{struct SERVICE_FAILURE_ACTIONSW {
     lpsaActions: LPSC_ACTION,
 }}
 pub type LPSERVICE_FAILURE_ACTIONSW = *mut SERVICE_FAILURE_ACTIONSW;
+STRUCT!{struct SERVICE_DELAYED_AUTO_START_INFO {
+    fDelayedAutostart: BOOL,
+}}
 STRUCT!{struct SERVICE_FAILURE_ACTIONS_FLAG {
     fFailureActionsOnNonCrashFailures: BOOL,
 }}
