@@ -54,7 +54,7 @@ STRUCT!{struct DXGI_INFO_QUEUE_MESSAGE {
     pDescription: *const c_char,
     DescriptionByteLength: SIZE_T,
 }}
-STRUCT!{struct DXGI_INFO_QUEUE_FILTER_DESC {
+STRUCT!{#[debug] struct DXGI_INFO_QUEUE_FILTER_DESC {
     NumCategories: UINT,
     pCategoryList: *mut DXGI_INFO_QUEUE_MESSAGE_CATEGORY,
     NumSeverities: UINT,

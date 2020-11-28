@@ -39,7 +39,7 @@ STRUCT!{struct DXGI_GAMMA_CONTROL_CAPABILITIES {
     NumGammaControlPoints: UINT,
     ControlPointPositions: [f32; 1025],
 }}
-STRUCT!{struct DXGI_RATIONAL {
+STRUCT!{#[debug] struct DXGI_RATIONAL {
     Numerator: UINT,
     Denominator: UINT,
 }}
@@ -61,7 +61,7 @@ ENUM!{enum DXGI_MODE_ROTATION {
     DXGI_MODE_ROTATION_ROTATE180,
     DXGI_MODE_ROTATION_ROTATE270,
 }}
-STRUCT!{struct DXGI_MODE_DESC {
+STRUCT!{#[debug] struct DXGI_MODE_DESC {
     Width: UINT,
     Height: UINT,
     RefreshRate: DXGI_RATIONAL,
@@ -69,7 +69,7 @@ STRUCT!{struct DXGI_MODE_DESC {
     ScanlineOrdering: DXGI_MODE_SCANLINE_ORDER,
     Scaling: DXGI_MODE_SCALING,
 }}
-STRUCT!{struct DXGI_SAMPLE_DESC {
+STRUCT!{#[debug] struct DXGI_SAMPLE_DESC {
     Count: UINT,
     Quality: UINT,
 }}

@@ -62,7 +62,7 @@ ENUM!{enum D3D11_LOGIC_OP {
     D3D11_LOGIC_OP_OR_REVERSE = 14,
     D3D11_LOGIC_OP_OR_INVERTED = 15,
 }}
-STRUCT!{struct D3D11_RENDER_TARGET_BLEND_DESC1 {
+STRUCT!{#[debug] struct D3D11_RENDER_TARGET_BLEND_DESC1 {
     BlendEnable: BOOL,
     LogicOpEnable: BOOL,
     SrcBlend: D3D11_BLEND,
@@ -74,7 +74,7 @@ STRUCT!{struct D3D11_RENDER_TARGET_BLEND_DESC1 {
     LogicOp: D3D11_LOGIC_OP,
     RenderTargetWriteMask: UINT8,
 }}
-STRUCT!{struct D3D11_BLEND_DESC1 {
+STRUCT!{#[debug] struct D3D11_BLEND_DESC1 {
     AlphaToCoverageEnable: BOOL,
     IndependentBlendEnable: BOOL,
     RenderTarget: [D3D11_RENDER_TARGET_BLEND_DESC1; 8],
@@ -85,7 +85,7 @@ interface ID3D11BlendState1(ID3D11BlendState1Vtbl): ID3D11BlendState(ID3D11Blend
         pDesc: *mut D3D11_BLEND_DESC1,
     ) -> (),
 }}
-STRUCT!{struct D3D11_RASTERIZER_DESC1 {
+STRUCT!{#[debug] struct D3D11_RASTERIZER_DESC1 {
     FillMode: D3D11_FILL_MODE,
     CullMode: D3D11_CULL_MODE,
     FrontCounterClockwise: BOOL,
@@ -244,7 +244,7 @@ STRUCT!{struct D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK {
     ClearSize: UINT,
     EncryptedSize: UINT,
 }}
-STRUCT!{struct D3D11_VIDEO_DECODER_BUFFER_DESC1 {
+STRUCT!{#[debug] struct D3D11_VIDEO_DECODER_BUFFER_DESC1 {
     BufferType: D3D11_VIDEO_DECODER_BUFFER_TYPE,
     DataOffset: UINT,
     DataSize: UINT,
@@ -304,7 +304,7 @@ STRUCT!{struct D3D11_KEY_EXCHANGE_HW_PROTECTION_DATA {
     pOutputData: *mut D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA,
     Status: HRESULT,
 }}
-STRUCT!{struct D3D11_VIDEO_SAMPLE_DESC {
+STRUCT!{#[debug] struct D3D11_VIDEO_SAMPLE_DESC {
     Width: UINT,
     Height: UINT,
     Format: DXGI_FORMAT,

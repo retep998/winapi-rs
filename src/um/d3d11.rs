@@ -392,7 +392,7 @@ ENUM!{enum D3D11_INPUT_CLASSIFICATION {
     D3D11_INPUT_PER_INSTANCE_DATA = 1,
 }}
 pub const D3D11_APPEND_ALIGNED_ELEMENT: DWORD = 0xffffffff;
-STRUCT!{struct D3D11_INPUT_ELEMENT_DESC {
+STRUCT!{#[debug] struct D3D11_INPUT_ELEMENT_DESC {
     SemanticName: LPCSTR,
     SemanticIndex: UINT,
     Format: DXGI_FORMAT,
@@ -589,13 +589,13 @@ ENUM!{enum D3D11_STENCIL_OP {
     D3D11_STENCIL_OP_INCR = 7,
     D3D11_STENCIL_OP_DECR = 8,
 }}
-STRUCT!{struct D3D11_DEPTH_STENCILOP_DESC {
+STRUCT!{#[debug] struct D3D11_DEPTH_STENCILOP_DESC {
     StencilFailOp: D3D11_STENCIL_OP,
     StencilDepthFailOp: D3D11_STENCIL_OP,
     StencilPassOp: D3D11_STENCIL_OP,
     StencilFunc: D3D11_COMPARISON_FUNC,
 }}
-STRUCT!{struct D3D11_DEPTH_STENCIL_DESC {
+STRUCT!{#[debug] struct D3D11_DEPTH_STENCIL_DESC {
     DepthEnable: BOOL,
     DepthWriteMask: D3D11_DEPTH_WRITE_MASK,
     DepthFunc: D3D11_COMPARISON_FUNC,
@@ -646,7 +646,7 @@ ENUM!{enum D3D11_COLOR_WRITE_ENABLE {
     D3D11_COLOR_WRITE_ENABLE_ALL = D3D11_COLOR_WRITE_ENABLE_RED | D3D11_COLOR_WRITE_ENABLE_GREEN
         | D3D11_COLOR_WRITE_ENABLE_BLUE | D3D11_COLOR_WRITE_ENABLE_ALPHA,
 }}
-STRUCT!{struct D3D11_RENDER_TARGET_BLEND_DESC {
+STRUCT!{#[debug] struct D3D11_RENDER_TARGET_BLEND_DESC {
     BlendEnable: BOOL,
     SrcBlend: D3D11_BLEND,
     DestBlend: D3D11_BLEND,
@@ -656,7 +656,7 @@ STRUCT!{struct D3D11_RENDER_TARGET_BLEND_DESC {
     BlendOpAlpha: D3D11_BLEND_OP,
     RenderTargetWriteMask: UINT8,
 }}
-STRUCT!{struct D3D11_BLEND_DESC {
+STRUCT!{#[debug] struct D3D11_BLEND_DESC {
     AlphaToCoverageEnable: BOOL,
     IndependentBlendEnable: BOOL,
     RenderTarget: [D3D11_RENDER_TARGET_BLEND_DESC; 8],
@@ -667,7 +667,7 @@ interface ID3D11BlendState(ID3D11BlendStateVtbl): ID3D11DeviceChild(ID3D11Device
         pDesc: *mut D3D11_BLEND_DESC,
     ) -> (),
 }}
-STRUCT!{struct D3D11_RASTERIZER_DESC {
+STRUCT!{#[debug] struct D3D11_RASTERIZER_DESC {
     FillMode: D3D11_FILL_MODE,
     CullMode: D3D11_CULL_MODE,
     FrontCounterClockwise: BOOL,
@@ -706,7 +706,7 @@ interface ID3D11Resource(ID3D11ResourceVtbl): ID3D11DeviceChild(ID3D11DeviceChil
     ) -> (),
     fn GetEvictionPriority() -> UINT,
 }}
-STRUCT!{struct D3D11_BUFFER_DESC {
+STRUCT!{#[debug] struct D3D11_BUFFER_DESC {
     ByteWidth: UINT,
     Usage: D3D11_USAGE,
     BindFlags: UINT,
@@ -720,7 +720,7 @@ interface ID3D11Buffer(ID3D11BufferVtbl): ID3D11Resource(ID3D11ResourceVtbl) {
         pDesc: *mut D3D11_BUFFER_DESC,
     ) -> (),
 }}
-STRUCT!{struct D3D11_TEXTURE1D_DESC {
+STRUCT!{#[debug] struct D3D11_TEXTURE1D_DESC {
     Width: UINT,
     MipLevels: UINT,
     ArraySize: UINT,
@@ -736,7 +736,7 @@ interface ID3D11Texture1D(ID3D11Texture1DVtbl): ID3D11Resource(ID3D11ResourceVtb
         pDesc: *mut D3D11_TEXTURE1D_DESC,
     ) -> (),
 }}
-STRUCT!{struct D3D11_TEXTURE2D_DESC {
+STRUCT!{#[debug] struct D3D11_TEXTURE2D_DESC {
     Width: UINT,
     Height: UINT,
     MipLevels: UINT,
@@ -754,7 +754,7 @@ interface ID3D11Texture2D(ID3D11Texture2DVtbl): ID3D11Resource(ID3D11ResourceVtb
         pDesc: *mut D3D11_TEXTURE2D_DESC,
     ) -> (),
 }}
-STRUCT!{struct D3D11_TEXTURE3D_DESC {
+STRUCT!{#[debug] struct D3D11_TEXTURE3D_DESC {
     Width: UINT,
     Height: UINT,
     Depth: UINT,
@@ -785,70 +785,70 @@ interface ID3D11View(ID3D11ViewVtbl): ID3D11DeviceChild(ID3D11DeviceChildVtbl) {
         ppResource: *mut *mut ID3D11Resource,
     ) -> (),
 }}
-UNION!{union D3D11_BUFFER_SRV_u1 {
+UNION!{#[debug] union D3D11_BUFFER_SRV_u1 {
     [u32; 1],
     FirstElement FirstElement_mut: UINT,
     ElementOffset ElementOffset_mut: UINT,
 }}
-UNION!{union D3D11_BUFFER_SRV_u2 {
+UNION!{#[debug] union D3D11_BUFFER_SRV_u2 {
     [u32; 1],
     NumElements NumElements_mut: UINT,
     ElementWidth ElementWidth_mut: UINT,
 }}
-STRUCT!{struct D3D11_BUFFER_SRV {
+STRUCT!{#[debug] struct D3D11_BUFFER_SRV {
     u1: D3D11_BUFFER_SRV_u1,
     u2: D3D11_BUFFER_SRV_u2,
 }}
 ENUM!{enum D3D11_BUFFEREX_SRV_FLAG {
     D3D11_BUFFEREX_SRV_FLAG_RAW = 0x1,
 }}
-STRUCT!{struct D3D11_BUFFEREX_SRV {
+STRUCT!{#[debug] struct D3D11_BUFFEREX_SRV {
     FirstElement: UINT,
     NumElements: UINT,
     Flags: UINT,
 }}
-STRUCT!{struct D3D11_TEX1D_SRV {
+STRUCT!{#[debug] struct D3D11_TEX1D_SRV {
     MostDetailedMip: UINT,
     MipLevels: UINT,
 }}
-STRUCT!{struct D3D11_TEX1D_ARRAY_SRV {
-    MostDetailedMip: UINT,
-    MipLevels: UINT,
-    FirstArraySlice: UINT,
-    ArraySize: UINT,
-}}
-STRUCT!{struct D3D11_TEX2D_SRV {
-    MostDetailedMip: UINT,
-    MipLevels: UINT,
-}}
-STRUCT!{struct D3D11_TEX2D_ARRAY_SRV {
+STRUCT!{#[debug] struct D3D11_TEX1D_ARRAY_SRV {
     MostDetailedMip: UINT,
     MipLevels: UINT,
     FirstArraySlice: UINT,
     ArraySize: UINT,
 }}
-STRUCT!{struct D3D11_TEX3D_SRV {
+STRUCT!{#[debug] struct D3D11_TEX2D_SRV {
     MostDetailedMip: UINT,
     MipLevels: UINT,
 }}
-STRUCT!{struct D3D11_TEXCUBE_SRV {
+STRUCT!{#[debug] struct D3D11_TEX2D_ARRAY_SRV {
+    MostDetailedMip: UINT,
+    MipLevels: UINT,
+    FirstArraySlice: UINT,
+    ArraySize: UINT,
+}}
+STRUCT!{#[debug] struct D3D11_TEX3D_SRV {
     MostDetailedMip: UINT,
     MipLevels: UINT,
 }}
-STRUCT!{struct D3D11_TEXCUBE_ARRAY_SRV {
+STRUCT!{#[debug] struct D3D11_TEXCUBE_SRV {
+    MostDetailedMip: UINT,
+    MipLevels: UINT,
+}}
+STRUCT!{#[debug] struct D3D11_TEXCUBE_ARRAY_SRV {
     MostDetailedMip: UINT,
     MipLevels: UINT,
     First2DArrayFace: UINT,
     NumCubes: UINT,
 }}
-STRUCT!{struct D3D11_TEX2DMS_SRV {
+STRUCT!{#[debug] struct D3D11_TEX2DMS_SRV {
     UnusedField_NothingToDefine: UINT,
 }}
-STRUCT!{struct D3D11_TEX2DMS_ARRAY_SRV {
+STRUCT!{#[debug] struct D3D11_TEX2DMS_ARRAY_SRV {
     FirstArraySlice: UINT,
     ArraySize: UINT,
 }}
-UNION!{union D3D11_SHADER_RESOURCE_VIEW_DESC_u {
+UNION!{#[debug] union D3D11_SHADER_RESOURCE_VIEW_DESC_u {
     [u32; 4],
     Buffer Buffer_mut: D3D11_BUFFER_SRV,
     Texture1D Texture1D_mut: D3D11_TEX1D_SRV,
@@ -862,7 +862,7 @@ UNION!{union D3D11_SHADER_RESOURCE_VIEW_DESC_u {
     TextureCubeArray TextureCubeArray_mut: D3D11_TEXCUBE_ARRAY_SRV,
     BufferEx BufferEx_mut: D3D11_BUFFEREX_SRV,
 }}
-STRUCT!{struct D3D11_SHADER_RESOURCE_VIEW_DESC {
+STRUCT!{#[debug] struct D3D11_SHADER_RESOURCE_VIEW_DESC {
     Format: DXGI_FORMAT,
     ViewDimension: D3D11_SRV_DIMENSION,
     u: D3D11_SHADER_RESOURCE_VIEW_DESC_u,
@@ -873,49 +873,49 @@ interface ID3D11ShaderResourceView(ID3D11ShaderResourceViewVtbl): ID3D11View(ID3
         pDesc: *mut D3D11_SHADER_RESOURCE_VIEW_DESC,
     ) -> (),
 }}
-UNION!{union D3D11_BUFFER_RTV_u1 {
+UNION!{#[debug] union D3D11_BUFFER_RTV_u1 {
     [u32; 1],
     FirstElement FirstElement_mut: UINT,
     ElementOffset ElementOffset_mut: UINT,
 }}
-UNION!{union D3D11_BUFFER_RTV_u2 {
+UNION!{#[debug] union D3D11_BUFFER_RTV_u2 {
     [u32; 1],
     NumElements NumElements_mut: UINT,
     ElementWidth ElementWidth_mut: UINT,
 }}
-STRUCT!{struct D3D11_BUFFER_RTV {
+STRUCT!{#[debug] struct D3D11_BUFFER_RTV {
     u1: D3D11_BUFFER_RTV_u1,
     u2: D3D11_BUFFER_RTV_u2,
 }}
-STRUCT!{struct D3D11_TEX1D_RTV {
+STRUCT!{#[debug] struct D3D11_TEX1D_RTV {
     MipSlice: UINT,
 }}
-STRUCT!{struct D3D11_TEX1D_ARRAY_RTV {
+STRUCT!{#[debug] struct D3D11_TEX1D_ARRAY_RTV {
     MipSlice: UINT,
     FirstArraySlice: UINT,
     ArraySize: UINT,
 }}
-STRUCT!{struct D3D11_TEX2D_RTV {
+STRUCT!{#[debug] struct D3D11_TEX2D_RTV {
     MipSlice: UINT,
 }}
-STRUCT!{struct D3D11_TEX2DMS_RTV {
+STRUCT!{#[debug] struct D3D11_TEX2DMS_RTV {
     UnusedField_NothingToDefine: UINT,
 }}
-STRUCT!{struct D3D11_TEX2D_ARRAY_RTV {
+STRUCT!{#[debug] struct D3D11_TEX2D_ARRAY_RTV {
     MipSlice: UINT,
     FirstArraySlice: UINT,
     ArraySize: UINT,
 }}
-STRUCT!{struct D3D11_TEX2DMS_ARRAY_RTV {
+STRUCT!{#[debug] struct D3D11_TEX2DMS_ARRAY_RTV {
     FirstArraySlice: UINT,
     ArraySize: UINT,
 }}
-STRUCT!{struct D3D11_TEX3D_RTV {
+STRUCT!{#[debug] struct D3D11_TEX3D_RTV {
     MipSlice: UINT,
     FirstWSlice: UINT,
     WSize: UINT,
 }}
-UNION!{union D3D11_RENDER_TARGET_VIEW_DESC_u {
+UNION!{#[debug] union D3D11_RENDER_TARGET_VIEW_DESC_u {
     [u32; 3],
     Buffer Buffer_mut: D3D11_BUFFER_RTV,
     Texture1D Texture1D_mut: D3D11_TEX1D_RTV,
@@ -926,7 +926,7 @@ UNION!{union D3D11_RENDER_TARGET_VIEW_DESC_u {
     Texture2DMSArray Texture2DMSArray_mut: D3D11_TEX2DMS_ARRAY_RTV,
     Texture3D Texture3D_mut: D3D11_TEX3D_RTV,
 }}
-STRUCT!{struct D3D11_RENDER_TARGET_VIEW_DESC {
+STRUCT!{#[debug] struct D3D11_RENDER_TARGET_VIEW_DESC {
     Format: DXGI_FORMAT,
     ViewDimension: D3D11_RTV_DIMENSION,
     u: D3D11_RENDER_TARGET_VIEW_DESC_u,
@@ -937,26 +937,26 @@ interface ID3D11RenderTargetView(ID3D11RenderTargetViewVtbl): ID3D11View(ID3D11V
         pDesc: *mut D3D11_RENDER_TARGET_VIEW_DESC,
     ) -> (),
 }}
-STRUCT!{struct D3D11_TEX1D_DSV {
+STRUCT!{#[debug] struct D3D11_TEX1D_DSV {
     MipSlice: UINT,
 }}
-STRUCT!{struct D3D11_TEX1D_ARRAY_DSV {
-    MipSlice: UINT,
-    FirstArraySlice: UINT,
-    ArraySize: UINT,
-}}
-STRUCT!{struct D3D11_TEX2D_DSV {
-    MipSlice: UINT,
-}}
-STRUCT!{struct D3D11_TEX2D_ARRAY_DSV {
+STRUCT!{#[debug] struct D3D11_TEX1D_ARRAY_DSV {
     MipSlice: UINT,
     FirstArraySlice: UINT,
     ArraySize: UINT,
 }}
-STRUCT!{struct D3D11_TEX2DMS_DSV {
+STRUCT!{#[debug] struct D3D11_TEX2D_DSV {
+    MipSlice: UINT,
+}}
+STRUCT!{#[debug] struct D3D11_TEX2D_ARRAY_DSV {
+    MipSlice: UINT,
+    FirstArraySlice: UINT,
+    ArraySize: UINT,
+}}
+STRUCT!{#[debug] struct D3D11_TEX2DMS_DSV {
     UnusedField_NothingToDefine: UINT,
 }}
-STRUCT!{struct D3D11_TEX2DMS_ARRAY_DSV {
+STRUCT!{#[debug] struct D3D11_TEX2DMS_ARRAY_DSV {
     FirstArraySlice: UINT,
     ArraySize: UINT,
 }}
@@ -964,7 +964,7 @@ ENUM!{enum D3D11_DSV_FLAG {
     D3D11_DSV_READ_ONLY_DEPTH = 0x1,
     D3D11_DSV_READ_ONLY_STENCIL = 0x2,
 }}
-UNION!{union D3D11_DEPTH_STENCIL_VIEW_DESC_u {
+UNION!{#[debug] union D3D11_DEPTH_STENCIL_VIEW_DESC_u {
     [u32; 3],
     Texture1D Texture1D_mut: D3D11_TEX1D_DSV,
     Texture1DArray Texture1DArray_mut: D3D11_TEX1D_ARRAY_DSV,
@@ -973,7 +973,7 @@ UNION!{union D3D11_DEPTH_STENCIL_VIEW_DESC_u {
     Texture2DMS Texture2DMS_mut: D3D11_TEX2DMS_DSV,
     Texture2DMSArray Texture2DMSArray_mut: D3D11_TEX2DMS_ARRAY_DSV,
 }}
-STRUCT!{struct D3D11_DEPTH_STENCIL_VIEW_DESC {
+STRUCT!{#[debug] struct D3D11_DEPTH_STENCIL_VIEW_DESC {
     Format: DXGI_FORMAT,
     ViewDimension: D3D11_DSV_DIMENSION,
     Flags: UINT,
@@ -995,28 +995,28 @@ STRUCT!{struct D3D11_BUFFER_UAV {
     NumElements: UINT,
     Flags: UINT,
 }}
-STRUCT!{struct D3D11_TEX1D_UAV {
+STRUCT!{#[debug] struct D3D11_TEX1D_UAV {
     MipSlice: UINT,
 }}
-STRUCT!{struct D3D11_TEX1D_ARRAY_UAV {
-    MipSlice: UINT,
-    FirstArraySlice: UINT,
-    ArraySize: UINT,
-}}
-STRUCT!{struct D3D11_TEX2D_UAV {
-    MipSlice: UINT,
-}}
-STRUCT!{struct D3D11_TEX2D_ARRAY_UAV {
+STRUCT!{#[debug] struct D3D11_TEX1D_ARRAY_UAV {
     MipSlice: UINT,
     FirstArraySlice: UINT,
     ArraySize: UINT,
 }}
-STRUCT!{struct D3D11_TEX3D_UAV {
+STRUCT!{#[debug] struct D3D11_TEX2D_UAV {
+    MipSlice: UINT,
+}}
+STRUCT!{#[debug] struct D3D11_TEX2D_ARRAY_UAV {
+    MipSlice: UINT,
+    FirstArraySlice: UINT,
+    ArraySize: UINT,
+}}
+STRUCT!{#[debug] struct D3D11_TEX3D_UAV {
     MipSlice: UINT,
     FirstWSlice: UINT,
     WSize: UINT,
 }}
-UNION!{union D3D11_UNORDERED_ACCESS_VIEW_DESC_u {
+UNION!{#[debug] union D3D11_UNORDERED_ACCESS_VIEW_DESC_u {
     [u32; 3],
     Buffer Buffer_mut: D3D11_BUFFER_UAV,
     Texture1D Texture1D_mut: D3D11_TEX1D_UAV,
@@ -1025,7 +1025,7 @@ UNION!{union D3D11_UNORDERED_ACCESS_VIEW_DESC_u {
     Texture2DArray Texture2DArray_mut: D3D11_TEX2D_ARRAY_UAV,
     Texture3D Texture3D_mut: D3D11_TEX3D_UAV,
 }}
-STRUCT!{struct D3D11_UNORDERED_ACCESS_VIEW_DESC {
+STRUCT!{#[debug] struct D3D11_UNORDERED_ACCESS_VIEW_DESC {
     Format: DXGI_FORMAT,
     ViewDimension: D3D11_UAV_DIMENSION,
     u: D3D11_UNORDERED_ACCESS_VIEW_DESC_u,
@@ -1120,7 +1120,7 @@ ENUM!{enum D3D11_TEXTURE_ADDRESS_MODE {
     D3D11_TEXTURE_ADDRESS_BORDER = 4,
     D3D11_TEXTURE_ADDRESS_MIRROR_ONCE = 5,
 }}
-STRUCT!{struct D3D11_SAMPLER_DESC {
+STRUCT!{#[debug] struct D3D11_SAMPLER_DESC {
     Filter: D3D11_FILTER,
     AddressU: D3D11_TEXTURE_ADDRESS_MODE,
     AddressV: D3D11_TEXTURE_ADDRESS_MODE,
@@ -1213,7 +1213,7 @@ ENUM!{enum D3D11_QUERY {
 ENUM!{enum D3D11_QUERY_MISC_FLAG {
     D3D11_QUERY_MISC_PREDICATEHINT = 0x1,
 }}
-STRUCT!{struct D3D11_QUERY_DESC {
+STRUCT!{#[debug] struct D3D11_QUERY_DESC {
     Query: D3D11_QUERY,
     MiscFlags: UINT,
 }}
@@ -1255,7 +1255,7 @@ ENUM!{enum D3D11_COUNTER_TYPE {
     D3D11_COUNTER_TYPE_UINT32 = D3D11_COUNTER_TYPE_UINT16 + 1u32,
     D3D11_COUNTER_TYPE_UINT64 = D3D11_COUNTER_TYPE_UINT32 + 1u32,
 }}
-STRUCT!{struct D3D11_COUNTER_DESC {
+STRUCT!{#[debug] struct D3D11_COUNTER_DESC {
     Counter: D3D11_COUNTER,
     MiscFlags: UINT,
 }}
@@ -1278,7 +1278,7 @@ ENUM!{enum D3D11_DEVICE_CONTEXT_TYPE {
     D3D11_DEVICE_CONTEXT_IMMEDIATE = 0,
     D3D11_DEVICE_CONTEXT_DEFERRED = D3D11_DEVICE_CONTEXT_IMMEDIATE + 1u32,
 }}
-STRUCT!{struct D3D11_CLASS_INSTANCE_DESC {
+STRUCT!{#[debug] struct D3D11_CLASS_INSTANCE_DESC {
     InstanceId: UINT,
     InstanceIndex: UINT,
     TypeId: UINT,
@@ -2017,7 +2017,7 @@ DEFINE_GUID!{D3D11_DECODER_PROFILE_VP9_VLD_PROFILE0,
     0x463707f8, 0xa1d0, 0x4585, 0x87, 0x6d, 0x83, 0xaa, 0x6d, 0x60, 0xb8, 0x9e}
 DEFINE_GUID!{D3D11_DECODER_PROFILE_VP8_VLD,
     0x90b899ea, 0x3a62, 0x4705, 0x88, 0xb3, 0x8d, 0xf0, 0x4b, 0x27, 0x44, 0xe7}
-STRUCT!{struct D3D11_VIDEO_DECODER_DESC {
+STRUCT!{#[debug] struct D3D11_VIDEO_DECODER_DESC {
     Guid: GUID,
     SampleWidth: UINT,
     SampleHeight: UINT,
@@ -2057,12 +2057,12 @@ STRUCT!{struct D3D11_AES_CTR_IV {
     IV: UINT64,
     Count: UINT64,
 }}
-STRUCT!{struct D3D11_ENCRYPTED_BLOCK_INFO {
+STRUCT!{#[debug] struct D3D11_ENCRYPTED_BLOCK_INFO {
     NumEncryptedBytesAtBeginning: UINT,
     NumBytesInSkipPattern: UINT,
     NumBytesInEncryptPattern: UINT,
 }}
-STRUCT!{struct D3D11_VIDEO_DECODER_BUFFER_DESC {
+STRUCT!{#[debug] struct D3D11_VIDEO_DECODER_BUFFER_DESC {
     BufferType: D3D11_VIDEO_DECODER_BUFFER_TYPE,
     BufferIndex: UINT,
     DataOffset: UINT,
@@ -2253,7 +2253,7 @@ ENUM!{enum D3D11_VIDEO_USAGE {
     D3D11_VIDEO_USAGE_OPTIMAL_SPEED = 1,
     D3D11_VIDEO_USAGE_OPTIMAL_QUALITY = 2,
 }}
-STRUCT!{struct D3D11_VIDEO_PROCESSOR_CONTENT_DESC {
+STRUCT!{#[debug] struct D3D11_VIDEO_PROCESSOR_CONTENT_DESC {
     InputFrameFormat: D3D11_VIDEO_FRAME_FORMAT,
     InputFrameRate: DXGI_RATIONAL,
     InputWidth: UINT,
@@ -2619,10 +2619,10 @@ ENUM!{enum D3D11_VDOV_DIMENSION {
     D3D11_VDOV_DIMENSION_UNKNOWN = 0,
     D3D11_VDOV_DIMENSION_TEXTURE2D = 1,
 }}
-STRUCT!{struct D3D11_TEX2D_VDOV {
+STRUCT!{#[debug] struct D3D11_TEX2D_VDOV {
     ArraySlice: UINT,
 }}
-STRUCT!{struct D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC {
+STRUCT!{#[debug] struct D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC {
     DecodeProfile: GUID,
     ViewDimension: D3D11_VDOV_DIMENSION,
     Texture2D: D3D11_TEX2D_VDOV,
@@ -2638,11 +2638,11 @@ ENUM!{enum D3D11_VPIV_DIMENSION {
     D3D11_VPIV_DIMENSION_UNKNOWN = 0,
     D3D11_VPIV_DIMENSION_TEXTURE2D = 1,
 }}
-STRUCT!{struct D3D11_TEX2D_VPIV {
+STRUCT!{#[debug] struct D3D11_TEX2D_VPIV {
     MipSlice: UINT,
     ArraySlice: UINT,
 }}
-STRUCT!{struct D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC {
+STRUCT!{#[debug] struct D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC {
     FourCC: UINT,
     ViewDimension: D3D11_VPIV_DIMENSION,
     Texture2D: D3D11_TEX2D_VPIV,
@@ -2659,20 +2659,20 @@ ENUM!{enum D3D11_VPOV_DIMENSION {
     D3D11_VPOV_DIMENSION_TEXTURE2D = 1,
     D3D11_VPOV_DIMENSION_TEXTURE2DARRAY = 2,
 }}
-STRUCT!{struct D3D11_TEX2D_VPOV {
+STRUCT!{#[debug] struct D3D11_TEX2D_VPOV {
     MipSlice: UINT,
 }}
-STRUCT!{struct D3D11_TEX2D_ARRAY_VPOV {
+STRUCT!{#[debug] struct D3D11_TEX2D_ARRAY_VPOV {
     MipSlice: UINT,
     FirstArraySlice: UINT,
     ArraySize: UINT,
 }}
-UNION!{union D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_u {
+UNION!{#[debug] union D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_u {
     [u32; 3],
     Texture2D Texture2D_mut: D3D11_TEX2D_VPOV,
     Texture2DArray Texture2DArray_mut: D3D11_TEX2D_ARRAY_VPOV,
 }}
-STRUCT!{struct D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC {
+STRUCT!{#[debug] struct D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC {
     ViewDimension: D3D11_VPOV_DIMENSION,
     u: D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_u,
 }}

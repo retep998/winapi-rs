@@ -26,7 +26,7 @@ ENUM!{enum DXGI_ADAPTER_FLAG3 {
     DXGI_ADAPTER_FLAG3_KEYED_MUTEX_CONFORMANCE = 0x20,
     DXGI_ADAPTER_FLAG3_FORCE_DWORD = 0xFFFFFFFF,
 }}
-STRUCT!{struct DXGI_ADAPTER_DESC3 {
+STRUCT!{#[debug] struct DXGI_ADAPTER_DESC3 {
     Description: [WCHAR; 128],
     VendorID: UINT,
     DeviceID: UINT,
@@ -46,7 +46,7 @@ interface IDXGIAdapter4(IDXGIAdapter4Vtbl): IDXGIAdapter3(IDXGIAdapter3Vtbl) {
         pDesc: *mut DXGI_ADAPTER_DESC3,
     ) -> HRESULT,
 }}
-STRUCT!{struct DXGI_OUTPUT_DESC1 {
+STRUCT!{#[debug] struct DXGI_OUTPUT_DESC1 {
     DeviceName: [WCHAR; 32],
     DesktopCoordinates: RECT,
     AttachedToDesktop: BOOL,

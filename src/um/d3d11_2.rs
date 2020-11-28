@@ -48,7 +48,7 @@ STRUCT!{struct D3D11_TILE_SHAPE {
     HeightInTexels: UINT,
     DepthInTexels: UINT,
 }}
-STRUCT!{struct D3D11_PACKED_MIP_DESC {
+STRUCT!{#[debug] struct D3D11_PACKED_MIP_DESC {
     NumStandardMips: UINT8,
     NumPackedMips: UINT8,
     NumTilesForPackedMips: UINT,

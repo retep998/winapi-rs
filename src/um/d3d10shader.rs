@@ -61,7 +61,7 @@ pub type D3D10_INCLUDE_TYPE = D3D_INCLUDE_TYPE;
 pub type ID3D10Include = ID3DInclude;
 pub type LPD3D10INCLUDE = *mut ID3DInclude;
 // const IID_ID3D10Include: IID = IID_ID3DInclude;
-STRUCT!{struct D3D10_SHADER_DESC {
+STRUCT!{#[debug] struct D3D10_SHADER_DESC {
     Version: UINT,
     Creator: LPCSTR,
     Flags: UINT,
@@ -91,21 +91,21 @@ STRUCT!{struct D3D10_SHADER_DESC {
     GSOutputTopology: D3D10_PRIMITIVE_TOPOLOGY,
     GSMaxOutputVertexCount: UINT,
 }}
-STRUCT!{struct D3D10_SHADER_BUFFER_DESC {
+STRUCT!{#[debug] struct D3D10_SHADER_BUFFER_DESC {
     Name: LPCSTR,
     Type: D3D10_CBUFFER_TYPE,
     Variables: UINT,
     Size: UINT,
     uFlags: UINT,
 }}
-STRUCT!{struct D3D10_SHADER_VARIABLE_DESC {
+STRUCT!{#[debug] struct D3D10_SHADER_VARIABLE_DESC {
     Name: LPCSTR,
     StartOffset: UINT,
     Size: UINT,
     uFlags: UINT,
     DefaultValue: LPVOID,
 }}
-STRUCT!{struct D3D10_SHADER_TYPE_DESC {
+STRUCT!{#[debug] struct D3D10_SHADER_TYPE_DESC {
     Class: D3D10_SHADER_VARIABLE_CLASS,
     Type: D3D10_SHADER_VARIABLE_TYPE,
     Rows: UINT,
@@ -114,7 +114,7 @@ STRUCT!{struct D3D10_SHADER_TYPE_DESC {
     Members: UINT,
     Offset: UINT,
 }}
-STRUCT!{struct D3D10_SHADER_INPUT_BIND_DESC {
+STRUCT!{#[debug] struct D3D10_SHADER_INPUT_BIND_DESC {
     Name: LPCSTR,
     Type: D3D10_SHADER_INPUT_TYPE,
     BindPoint: UINT,
@@ -124,7 +124,7 @@ STRUCT!{struct D3D10_SHADER_INPUT_BIND_DESC {
     Dimension: D3D10_SRV_DIMENSION,
     NumSamples: UINT,
 }}
-STRUCT!{struct D3D10_SIGNATURE_PARAMETER_DESC {
+STRUCT!{#[debug] struct D3D10_SIGNATURE_PARAMETER_DESC {
     SemanticName: LPCSTR,
     SemanticIndex: UINT,
     Register: UINT,

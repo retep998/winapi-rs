@@ -2569,7 +2569,7 @@ STRUCT!{struct D3D11_MESSAGE {
     pDescription: *const c_char,
     DescriptionByteLength: SIZE_T,
 }}
-STRUCT!{struct D3D11_INFO_QUEUE_FILTER_DESC {
+STRUCT!{#[debug] struct D3D11_INFO_QUEUE_FILTER_DESC {
     NumCategories: UINT,
     pCategoryList: *const D3D11_MESSAGE_CATEGORY,
     NumSeverities: UINT,
