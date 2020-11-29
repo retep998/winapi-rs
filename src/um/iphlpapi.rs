@@ -71,7 +71,7 @@ extern "system" {
         SizePointer: PULONG,
         Order: BOOL,
     ) -> ULONG;
-    // https://msdn.microsoft.com/en-us/library/windows/desktop/aa365928(v=vs.85).aspx
+    // https://docs.microsoft.com/en-us/windows/win32/api/iphlpapi/nf-iphlpapi-getextendedtcptable
     pub fn GetExtendedTcpTable(
         pTcpTable: PVOID,
         pdwSize: PDWORD,
