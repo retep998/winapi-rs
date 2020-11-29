@@ -523,7 +523,6 @@ DEFINE_PROC_THREAD_ATTRIBUTE! {
     PROC_THREAD_ATTRIBUTE_DESKTOP_APP_POLICY = ProcThreadAttributeDesktopAppPolicy: 0,1,0;
 }
 
-// TODO: more attributes
 // S_*
 // NMPWAIT_*
 // FS_*
