@@ -361,7 +361,6 @@ pub const MS_CTS_ON: DWORD = 0x0010;
 pub const MS_DSR_ON: DWORD = 0x0020;
 pub const MS_RING_ON: DWORD = 0x0040;
 pub const MS_RLSD_ON: DWORD = 0x0080;
-
 // S_*
 // NMPWAIT_*
 // FS_*
