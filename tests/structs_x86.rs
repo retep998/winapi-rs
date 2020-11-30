@@ -4256,7 +4256,7 @@ fn um_fileapi() {
     assert_eq!(align_of::<FILE_ID_INFO>(), 8);
 }
 #[cfg(feature = "fltuser")] #[test]
-fn um_fltuser() {
+fn shared_fltuserstructures() {
     use winapi::shared::fltuserstructures::*;
     assert_eq!(size_of::<FILTER_FULL_INFORMATION>(), 16);
     assert_eq!(align_of::<FILTER_FULL_INFORMATION>(), 4);

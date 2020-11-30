@@ -7,10 +7,7 @@ use shared::fltuserstructures::{FILTER_INFORMATION_CLASS, FILTER_VOLUME_INFORMAT
 use shared::minwindef::{DWORD, LPCVOID, LPDWORD, LPHANDLE, LPVOID, WORD};
 use um::minwinbase::{LPOVERLAPPED, LPSECURITY_ATTRIBUTES};
 use um::winnt::{HANDLE, HRESULT, LPCWSTR, LPWSTR, PHANDLE};
-
-
 pub const FLT_PORT_FLAG_SYNC_HANDLE: DWORD = 0x00000001;
-
 extern "system" {
     pub fn FilterAttach(
         lpFilterName: LPCWSTR,
