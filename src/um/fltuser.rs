@@ -15,7 +15,6 @@ use shared::fltuserstructures::{
 use shared::minwindef::{DWORD, LPCVOID, LPDWORD, LPHANDLE, LPVOID, WORD};
 use um::minwinbase::{LPOVERLAPPED, LPSECURITY_ATTRIBUTES};
 use um::winnt::{HANDLE, HRESULT, LPCWSTR, LPWSTR, PHANDLE};
-pub const FLT_PORT_FLAG_SYNC_HANDLE: DWORD = 0x00000001;
 extern "system" {
     pub fn FilterLoad(
         lpFilterName: LPCWSTR
@@ -151,6 +150,9 @@ extern "system" {
         lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
         hPort: *mut HANDLE
     ) -> HRESULT;
+}
+pub const FLT_PORT_FLAG_SYNC_HANDLE: DWORD = 0x00000001;
+extern "system" {
     pub fn FilterSendMessage(
         hPort: HANDLE,
         lpInBuffer: LPVOID,
