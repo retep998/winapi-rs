@@ -17,6 +17,28 @@ use um::minwinbase::{LPOVERLAPPED, LPSECURITY_ATTRIBUTES};
 use um::winnt::{HANDLE, HRESULT, LPCWSTR, LPWSTR, PHANDLE};
 pub const FLT_PORT_FLAG_SYNC_HANDLE: DWORD = 0x00000001;
 extern "system" {
+    pub fn FilterLoad(
+        lpFilterName: LPCWSTR
+    ) -> HRESULT;
+    pub fn FilterUnload(
+        lpFilterName: LPCWSTR
+    ) -> HRESULT;
+    pub fn FilterCreate(
+        lpFilterName: LPCWSTR,
+        hFilter: *mut HFILTER
+    ) -> HRESULT;
+    pub fn FilterClose(
+        hFilter: HFILTER
+    ) -> HRESULT;
+    pub fn FilterInstanceCreate(
+        lpFilterName: LPCWSTR,
+        lpVolumeName: LPCWSTR,
+        lpInstanceName: LPCWSTR,
+        hInstance: *mut HFILTER_INSTANCE
+    ) -> HRESULT;
+    pub fn FilterInstanceClose(
+        hInstance: HFILTER_INSTANCE
+    ) -> HRESULT;
     pub fn FilterAttach(
         lpFilterName: LPCWSTR,
         lpVolumeName: LPCWSTR,
@@ -32,28 +54,10 @@ extern "system" {
         dwCreatedInstanceNameLength: DWORD,
         lpCreatedInstanceName: LPWSTR
     ) -> HRESULT;
-    pub fn FilterClose(
-        hFilter: HFILTER
-    ) -> HRESULT;
-    pub fn FilterConnectCommunicationPort(
-        lpPortName: LPCWSTR,
-        dwOptions: DWORD,
-        lpContext: LPCVOID,
-        wSizeOfContext: WORD,
-        lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
-        hPort: *mut HANDLE
-    ) -> HRESULT;
-    pub fn FilterCreate(
-        lpFilterName: LPCWSTR,
-        hFilter: *mut HFILTER
-    ) -> HRESULT;
     pub fn FilterDetach(
         lpFilterName: LPCWSTR,
         lpVolumeName: LPCWSTR,
         lpInstanceName: LPCWSTR
-    ) -> HRESULT;
-    pub fn FilterFindClose(
-        hFilterFind: HANDLE
     ) -> HRESULT;
     pub fn FilterFindFirst(
         dwInformationClass: FILTER_INFORMATION_CLASS,
@@ -69,35 +73,25 @@ extern "system" {
         dwBufferSize: DWORD,
         lpBytesReturned: LPDWORD
     ) -> HRESULT;
-    pub fn FilterGetDosName(
-        lpVolumeName: LPCWSTR,
-        lpDosName: LPWSTR,
-        dwDosNameBufferSize: DWORD
+    pub fn FilterFindClose(
+        hFilterFind: HANDLE
     ) -> HRESULT;
-    pub fn FilterGetInformation(
-        hFilter: HFILTER,
-        dwInformationClass: FILTER_INFORMATION_CLASS,
+    pub fn FilterVolumeFindFirst(
+        dwInformationClass: FILTER_VOLUME_INFORMATION_CLASS,
+        lpBuffer: LPVOID,
+        dwBufferSize: DWORD,
+        lpBytesReturned: LPDWORD,
+        lpVolumeFind: PHANDLE
+    ) -> HRESULT;
+    pub fn FilterVolumeFindNext(
+        hVolumeFind: HANDLE,
+        dwInformationClass: FILTER_VOLUME_INFORMATION_CLASS,
         lpBuffer: LPVOID,
         dwBufferSize: DWORD,
         lpBytesReturned: LPDWORD
     ) -> HRESULT;
-    pub fn FilterGetMessage(
-        hPort: HANDLE,
-        lpMessageBuffer: PFILTER_MESSAGE_HEADER,
-        dwMessageBufferSize: DWORD,
-        lpOverlapped: LPOVERLAPPED
-    ) -> HRESULT;
-    pub fn FilterInstanceClose(
-        hInstance: HFILTER_INSTANCE
-    ) -> HRESULT;
-    pub fn FilterInstanceCreate(
-        lpFilterName: LPCWSTR,
-        lpVolumeName: LPCWSTR,
-        lpInstanceName: LPCWSTR,
-        hInstance: *mut HFILTER_INSTANCE
-    ) -> HRESULT;
-    pub fn FilterInstanceFindClose(
-        hFilterInstanceFind: HANDLE
+    pub fn FilterVolumeFindClose(
+        hVolumeFind: HANDLE
     ) -> HRESULT;
     pub fn FilterInstanceFindFirst(
         lpFilterName: LPCWSTR,
@@ -114,51 +108,8 @@ extern "system" {
         dwBufferSize: DWORD,
         lpBytesReturned: LPDWORD
     ) -> HRESULT;
-    pub fn FilterInstanceGetInformation(
-        hInstance: HFILTER_INSTANCE,
-        dwInformationClass: INSTANCE_INFORMATION_CLASS,
-        lpBuffer: LPVOID,
-        dwBufferSize: DWORD,
-        lpBytesReturned: LPDWORD
-    ) -> HRESULT;
-    pub fn FilterLoad(
-        lpFilterName: LPCWSTR
-    ) -> HRESULT;
-    pub fn FilterReplyMessage(
-        hPort: HANDLE,
-        lpReplyBuffer: PFILTER_REPLY_HEADER,
-        dwReplyBufferSize: DWORD
-    ) -> HRESULT;
-    pub fn FilterSendMessage(
-        hPort: HANDLE,
-        lpInBuffer: LPVOID,
-        dwInBufferSize: DWORD,
-        lpOutBuffer: LPVOID,
-        dwOutBufferSize: DWORD,
-        lpBytesReturned: LPDWORD
-    ) -> HRESULT;
-    pub fn FilterUnload(
-        lpFilterName: LPCWSTR
-    ) -> HRESULT;
-    pub fn FilterVolumeFindClose(
-        hVolumeFind: HANDLE
-    ) -> HRESULT;
-    pub fn FilterVolumeFindFirst(
-        dwInformationClass: FILTER_VOLUME_INFORMATION_CLASS,
-        lpBuffer: LPVOID,
-        dwBufferSize: DWORD,
-        lpBytesReturned: LPDWORD,
-        lpVolumeFind: PHANDLE
-    ) -> HRESULT;
-    pub fn FilterVolumeFindNext(
-        hVolumeFind: HANDLE,
-        dwInformationClass: FILTER_VOLUME_INFORMATION_CLASS,
-        lpBuffer: LPVOID,
-        dwBufferSize: DWORD,
-        lpBytesReturned: LPDWORD
-    ) -> HRESULT;
-    pub fn FilterVolumeInstanceFindClose(
-        hVolumeInstanceFind: HANDLE
+    pub fn FilterInstanceFindClose(
+        hFilterInstanceFind: HANDLE
     ) -> HRESULT;
     pub fn FilterVolumeInstanceFindFirst(
         lpVolumeName: LPCWSTR,
@@ -174,5 +125,54 @@ extern "system" {
         lpBuffer: LPVOID,
         dwBufferSize: DWORD,
         lpBytesReturned: LPDWORD
+    ) -> HRESULT;
+    pub fn FilterVolumeInstanceFindClose(
+        hVolumeInstanceFind: HANDLE
+    ) -> HRESULT;
+    pub fn FilterGetInformation(
+        hFilter: HFILTER,
+        dwInformationClass: FILTER_INFORMATION_CLASS,
+        lpBuffer: LPVOID,
+        dwBufferSize: DWORD,
+        lpBytesReturned: LPDWORD
+    ) -> HRESULT;
+    pub fn FilterInstanceGetInformation(
+        hInstance: HFILTER_INSTANCE,
+        dwInformationClass: INSTANCE_INFORMATION_CLASS,
+        lpBuffer: LPVOID,
+        dwBufferSize: DWORD,
+        lpBytesReturned: LPDWORD
+    ) -> HRESULT;
+    pub fn FilterConnectCommunicationPort(
+        lpPortName: LPCWSTR,
+        dwOptions: DWORD,
+        lpContext: LPCVOID,
+        wSizeOfContext: WORD,
+        lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
+        hPort: *mut HANDLE
+    ) -> HRESULT;
+    pub fn FilterSendMessage(
+        hPort: HANDLE,
+        lpInBuffer: LPVOID,
+        dwInBufferSize: DWORD,
+        lpOutBuffer: LPVOID,
+        dwOutBufferSize: DWORD,
+        lpBytesReturned: LPDWORD
+    ) -> HRESULT;
+    pub fn FilterGetMessage(
+        hPort: HANDLE,
+        lpMessageBuffer: PFILTER_MESSAGE_HEADER,
+        dwMessageBufferSize: DWORD,
+        lpOverlapped: LPOVERLAPPED
+    ) -> HRESULT;
+    pub fn FilterReplyMessage(
+        hPort: HANDLE,
+        lpReplyBuffer: PFILTER_REPLY_HEADER,
+        dwReplyBufferSize: DWORD
+    ) -> HRESULT;
+    pub fn FilterGetDosName(
+        lpVolumeName: LPCWSTR,
+        lpDosName: LPWSTR,
+        dwDosNameBufferSize: DWORD
     ) -> HRESULT;
 }
