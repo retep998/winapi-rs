@@ -3,7 +3,15 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::fltuserstructures::{FILTER_INFORMATION_CLASS, FILTER_VOLUME_INFORMATION_CLASS, HFILTER, HFILTER_INSTANCE, INSTANCE_INFORMATION_CLASS, PFILTER_MESSAGE_HEADER, PFILTER_REPLY_HEADER};
+use shared::fltuserstructures::{
+    FILTER_INFORMATION_CLASS,
+    FILTER_VOLUME_INFORMATION_CLASS,
+    HFILTER,
+    HFILTER_INSTANCE,
+    INSTANCE_INFORMATION_CLASS,
+    PFILTER_MESSAGE_HEADER,
+    PFILTER_REPLY_HEADER
+};
 use shared::minwindef::{DWORD, LPCVOID, LPDWORD, LPHANDLE, LPVOID, WORD};
 use um::minwinbase::{LPOVERLAPPED, LPSECURITY_ATTRIBUTES};
 use um::winnt::{HANDLE, HRESULT, LPCWSTR, LPWSTR, PHANDLE};
