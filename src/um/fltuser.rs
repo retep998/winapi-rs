@@ -41,7 +41,7 @@ extern "system" {
         lpContext: LPCVOID,
         wSizeOfContext: WORD,
         lpSecurityAttributes: LPSECURITY_ATTRIBUTES,
-        hPort: PHANDLE
+        hPort: *mut HANDLE
     ) -> HRESULT;
     pub fn FilterCreate(
         lpFilterName: LPCWSTR,
