@@ -249,7 +249,7 @@ pub mod gl;
 #[cfg(feature = "usp10")] pub mod usp10;
 #[cfg(feature = "utilapiset")] pub mod utilapiset;
 #[cfg(feature = "uxtheme")] pub mod uxtheme;
-#[cfg(feature = "versrc")] pub mod versrc;
+#[cfg(feature = "verrsrc")] pub mod verrsrc;
 #[cfg(feature = "vsbackup")] pub mod vsbackup;
 #[cfg(feature = "vss")] pub mod vss;
 #[cfg(feature = "vsserror")] pub mod vsserror;
