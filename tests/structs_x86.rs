@@ -5784,12 +5784,20 @@ fn um_oaidl() {
     assert_eq!(align_of::<SAFEARR_BRECORD>(), 4);
     assert_eq!(size_of::<SAFEARR_HAVEIID>(), 24);
     assert_eq!(align_of::<SAFEARR_HAVEIID>(), 4);
+    assert_eq!(size_of::<SAFEARRAYUNION_u>(), 24);
+    assert_eq!(align_of::<SAFEARRAYUNION_u>(), 4);
     assert_eq!(size_of::<SAFEARRAYUNION>(), 28);
     assert_eq!(align_of::<SAFEARRAYUNION>(), 4);
     assert_eq!(size_of::<_wireSAFEARRAY>(), 48);
     assert_eq!(align_of::<_wireSAFEARRAY>(), 4);
     assert_eq!(size_of::<SAFEARRAY>(), 24);
     assert_eq!(align_of::<SAFEARRAY>(), 4);
+    assert_eq!(size_of::<__tagBRECORD>(), 8);
+    assert_eq!(align_of::<__tagBRECORD>(), 4);
+    assert_eq!(size_of::<VARIANT_n3>(), 8);
+    assert_eq!(align_of::<VARIANT_n3>(), 8);
+    assert_eq!(size_of::<__tagVARIANT>(), 16);
+    assert_eq!(align_of::<__tagVARIANT>(), 8);
     assert_eq!(size_of::<VARIANT_n1>(), 16);
     assert_eq!(align_of::<VARIANT_n1>(), 8);
     assert_eq!(size_of::<VARIANT>(), 16);
@@ -5834,10 +5842,10 @@ fn um_oaidl() {
     assert_eq!(align_of::<CUSTDATAITEM>(), 8);
     assert_eq!(size_of::<CUSTDATA>(), 8);
     assert_eq!(align_of::<CUSTDATA>(), 4);
-    assert_eq!(size_of::<TLIBATTR>(), 32);
-    assert_eq!(align_of::<TLIBATTR>(), 4);
     assert_eq!(size_of::<BINDPTR>(), 4);
     assert_eq!(align_of::<BINDPTR>(), 4);
+    assert_eq!(size_of::<TLIBATTR>(), 32);
+    assert_eq!(align_of::<TLIBATTR>(), 4);
 }
 #[cfg(feature = "objidl")] #[test]
 fn um_objidl() {

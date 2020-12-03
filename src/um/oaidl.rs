@@ -9,16 +9,18 @@ use shared::guiddef::{GUID, IID, REFGUID, REFIID};
 use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, INT, UINT, ULONG, USHORT, WORD};
 use shared::rpcndr::byte;
 use shared::wtypes::{
-    BSTR, CY, DATE, DECIMAL, VARIANT_BOOL, VARTYPE, VT_BSTR, VT_DISPATCH, VT_ERROR,
-    VT_I1, VT_I2, VT_I4, VT_I8, VT_RECORD, VT_RESERVED, VT_UNKNOWN, VT_VARIANT,
-    wireBSTR
+    BSTR, CY, DATE, DECIMAL, VARIANT_BOOL, VARTYPE, VT_BSTR, VT_DISPATCH, VT_ERROR, VT_I1, VT_I2,
+    VT_I4, VT_I8, VT_RECORD, VT_RESERVED, VT_UNKNOWN, VT_VARIANT, wireBSTR
 };
 use shared::wtypesbase::{
     BYTE_SIZEDARR, DOUBLE, DWORD_SIZEDARR, HYPER_SIZEDARR, LPCOLESTR, LPOLESTR, SCODE,
     WORD_SIZEDARR
 };
+use um::objidlbase::IEnumUnknown;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{CHAR, HRESULT, LCID, LONG, LONGLONG, PVOID, SHORT, ULONGLONG};
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0000_v0_0_c_ifspec;
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0000_v0_0_s_ifspec;
 pub type CURRENCY = CY;
 STRUCT!{struct SAFEARRAYBOUND {
     cElements: ULONG,
@@ -65,23 +67,8 @@ ENUM!{enum SF_TYPE {
     SF_RECORD = VT_RECORD,
     SF_HAVEIID = VT_UNKNOWN | VT_RESERVED,
 }}
-#[cfg(target_pointer_width = "32")]
-UNION!{union __MIDL_IOleAutomationTypes_0001 {
-    [u32; 6],
-    BstrStr BstrStr_mut: SAFEARR_BSTR,
-    UnknownStr UnknownStr_mut: SAFEARR_UNKNOWN,
-    DispatchStr DispatchStr_mut: SAFEARR_DISPATCH,
-    VariantStr VariantStr_mut: SAFEARR_VARIANT,
-    RecordStr RecordStr_mut: SAFEARR_BRECORD,
-    HaveIidStr HaveIidStr_mut: SAFEARR_HAVEIID,
-    ByteStr ByteStr_mut: BYTE_SIZEDARR,
-    WordStr WordStr_mut: WORD_SIZEDARR,
-    LongStr LongStr_mut: DWORD_SIZEDARR,
-    HyperStr HyperStr_mut: HYPER_SIZEDARR,
-}}
-#[cfg(target_pointer_width = "64")]
-UNION!{union __MIDL_IOleAutomationTypes_0001 {
-    [u64; 4],
+UNION!{union SAFEARRAYUNION_u {
+    [u32; 6] [u64; 4],
     BstrStr BstrStr_mut: SAFEARR_BSTR,
     UnknownStr UnknownStr_mut: SAFEARR_UNKNOWN,
     DispatchStr DispatchStr_mut: SAFEARR_DISPATCH,
@@ -95,7 +82,7 @@ UNION!{union __MIDL_IOleAutomationTypes_0001 {
 }}
 STRUCT!{struct SAFEARRAYUNION {
     sfType: ULONG,
-    u: __MIDL_IOleAutomationTypes_0001,
+    u: SAFEARRAYUNION_u,
 }}
 STRUCT!{struct _wireSAFEARRAY {
     cDims: USHORT,
@@ -494,7 +481,13 @@ STRUCT!{struct CUSTDATA {
     prgCustData: LPCUSTDATAITEM,
 }}
 pub type LPCUSTDATA = *mut CUSTDATA;
+// extern RPC_IF_HANDLE IOleAutomationTypes_v1_0_c_ifspec;
+// extern RPC_IF_HANDLE IOleAutomationTypes_v1_0_s_ifspec;
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0001_v0_0_c_ifspec;
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0001_v0_0_s_ifspec;
 pub type LPCREATETYPEINFO = *mut ICreateTypeInfo;
+DEFINE_GUID!{IID_ICreateTypeInfo,
+    0x00020405, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
 RIDL!{#[uuid(0x00020405, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ICreateTypeInfo(ICreateTypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn SetGuid(
@@ -576,21 +569,137 @@ interface ICreateTypeInfo(ICreateTypeInfoVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
     fn LayOut() -> HRESULT,
 }}
-// LPCREATETYPEINFO2
-// ICreateTypeInfo2
-// LPCREATETYPELIB
-// ICreateTypeLib
-// LPCREATETYPELIB2
-// ICreateTypeLib2
+pub type LPCREATETYPEINFO2 = *mut ICreateTypeInfo2;
+DEFINE_GUID!{IID_ICreateTypeInfo2,
+    0x0002040e, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
+RIDL!{#[uuid(0x0002040e, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface ICreateTypeInfo2(ICreateTypeInfo2Vtbl): ICreateTypeInfo(ICreateTypeInfoVtbl) {
+    fn DeleteFuncDesc(
+        index: UINT,
+    ) -> HRESULT,
+    fn DeleteFuncDescByMemId(
+        memid: MEMBERID,
+        invKind: INVOKEKIND,
+    ) -> HRESULT,
+    fn DeleteVarDesc(
+        index: UINT,
+    ) -> HRESULT,
+    fn DeleteVarDescByMemId(
+        memid: MEMBERID,
+    ) -> HRESULT,
+    fn DeleteImplType(
+        index: UINT,
+    ) -> HRESULT,
+    fn SetCustData(
+        guid: REFGUID,
+        pVarVal: *mut VARIANT,
+    ) -> HRESULT,
+    fn SetFuncCustData(
+        index: UINT,
+        guid: REFGUID,
+        pVarVal: *mut VARIANT,
+    ) -> HRESULT,
+    fn SetParamCustData(
+        indexFunc: UINT,
+        indexParam: UINT,
+        guid: REFGUID,
+        pVarVal: *mut VARIANT,
+    ) -> HRESULT,
+    fn SetVarCustData(
+        index: UINT,
+        guid: REFGUID,
+        pVarVal: *mut VARIANT,
+    ) -> HRESULT,
+    fn SetImplTypeCustData(
+        index: UINT,
+        guid: REFGUID,
+        pVarVal: *mut VARIANT,
+    ) -> HRESULT,
+    fn SetHelpStringContext(
+        dwHelpStringContext: ULONG,
+    ) -> HRESULT,
+    fn SetFuncHelpStringContext(
+        index: UINT,
+        dwHelpStringContext: ULONG,
+    ) -> HRESULT,
+    fn SetVarHelpStringContext(
+        index: UINT,
+        dwHelpStringContext: ULONG,
+    ) -> HRESULT,
+    fn Invalidate() -> HRESULT,
+    fn SetName(
+        szName: LPOLESTR,
+    ) -> HRESULT,
+}}
+pub type LPCREATETYPELIB = *mut ICreateTypeLib;
+DEFINE_GUID!{IID_ICreateTypeLib,
+    0x00020406, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
+RIDL!{#[uuid(0x00020406, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface ICreateTypeLib(ICreateTypeLibVtbl): IUnknown(IUnknownVtbl) {
+    fn CreateTypeInfo(
+        szName: LPOLESTR,
+        tkind: TYPEKIND,
+        ppCTInfo: *mut *mut ICreateTypeInfo,
+    ) -> HRESULT,
+    fn SetName(
+        szName: LPOLESTR,
+    ) -> HRESULT,
+    fn SetVersion(
+        wMajorVerNum: WORD,
+        wMinorVerNum: WORD,
+    ) -> HRESULT,
+    fn SetGuid(
+        guid: REFGUID,
+    ) -> HRESULT,
+    fn SetDocString(
+        szDoc: LPOLESTR,
+    ) -> HRESULT,
+    fn SetHelpFileName(
+        szHelpFileName: LPOLESTR,
+    ) -> HRESULT,
+    fn SetHelpContext(
+        dwHelpContext: DWORD,
+    ) -> HRESULT,
+    fn SetLcid(
+        lcid: LCID,
+    ) -> HRESULT,
+    fn SetLibFlags(
+        uLibFlags: UINT,
+    ) -> HRESULT,
+    fn SaveAllChanges() -> HRESULT,
+}}
+pub type LPCREATETYPELIB2 = *mut ICreateTypeLib2;
+DEFINE_GUID!{IID_ICreateTypeLib2,
+    0x0002040f, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
+RIDL!{#[uuid(0x0002040f, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface ICreateTypeLib2(ICreateTypeLib2Vtbl): ICreateTypeLib(ICreateTypeLibVtbl) {
+    fn DeleteTypeInfo(
+        szName: LPOLESTR,
+    ) -> HRESULT,
+    fn SetCustData(
+        guid: REFGUID,
+        pVarVal: *mut VARIANT,
+    ) -> HRESULT,
+    fn SetHelpStringContext(
+        dwHelpStringContext: ULONG,
+    ) -> HRESULT,
+    fn SetHelpStringDll(
+        szFileName: LPOLESTR,
+    ) -> HRESULT,
+}}
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0005_v0_0_c_ifspec;
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0005_v0_0_s_ifspec;
 pub type LPDISPATCH = *mut IDispatch;
-pub const DISPID_UNKNOWN: INT = -1;
-pub const DISPID_VALUE: INT = 0;
-pub const DISPID_PROPERTYPUT: INT = -3;
-pub const DISPID_NEWENUM: INT = -4;
-pub const DISPID_EVALUATE: INT = -5;
-pub const DISPID_CONSTRUCTOR: INT = -6;
-pub const DISPID_DESTRUCTOR: INT = -7;
-pub const DISPID_COLLECT: INT = -8;
+pub const DISPID_UNKNOWN: DISPID = -1;
+pub const DISPID_VALUE: DISPID = 0;
+pub const DISPID_PROPERTYPUT: DISPID = -3;
+pub const DISPID_NEWENUM: DISPID = -4;
+pub const DISPID_EVALUATE: DISPID = -5;
+pub const DISPID_CONSTRUCTOR: DISPID = -6;
+pub const DISPID_DESTRUCTOR: DISPID = -7;
+pub const DISPID_COLLECT: DISPID = -8;
+DEFINE_GUID!{IID_IDispatch,
+    0x00020400, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
 RIDL!{#[uuid(0x00020400, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeInfoCount(
@@ -619,92 +728,71 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
         puArgErr: *mut UINT,
     ) -> HRESULT,
 }}
-// IDispatch_RemoteInvoke_Proxy
-// IDispatch_RemoteInvoke_Stub
-// LPENUMVARIANT
-// IEnumVARIANT
-// IEnumVARIANT_RemoteNext_Proxy
-// IEnumVARIANT_RemoteNext_Stub
-RIDL!{#[uuid(0x0000002F, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
-interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl) {
-    fn RecordInit(
-        pvNew: PVOID,
+// HRESULT STDMETHODCALLTYPE IDispatch_RemoteInvoke_Proxy(
+//     IDispatch * This,
+//     DISPID dispIdMember,
+//     REFIID riid,
+//     LCID lcid,
+//     DWORD dwFlags,
+//     DISPPARAMS *pDispParams,
+//     VARIANT *pVarResult,
+//     EXCEPINFO *pExcepInfo,
+//     UINT *pArgErr,
+//     UINT cVarRef,
+//     UINT *rgVarRefIdx,
+//     VARIANTARG *rgVarRef);
+// void __RPC_STUB IDispatch_RemoteInvoke_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+pub type LPENUMVARIANT = *mut IEnumVARIANT;
+DEFINE_GUID!{IID_IEnumVARIANT,
+    0x00020404, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
+RIDL!{#[uuid(0x00020404, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IEnumVARIANT(IEnumVARIANTVtbl): IUnknown(IUnknownVtbl) {
+    fn Next(
+        celt: ULONG,
+        rgVar: *mut VARIANT,
+        pCeltFetched: *mut ULONG,
     ) -> HRESULT,
-    fn RecordClear(
-        pvExisting: PVOID,
+    fn Skip(
+        celt: ULONG,
     ) -> HRESULT,
-    fn RecordCopy(
-        pvExisting: PVOID,
-        pvNew: PVOID,
-    ) -> HRESULT,
-    fn GetGuid(
-        pguid: *mut GUID,
-    ) -> HRESULT,
-    fn GetName(
-        pbstrName: *mut BSTR,
-    ) -> HRESULT,
-    fn GetSize(
-        pcbSize: *mut ULONG,
-    ) -> HRESULT,
-    fn GetTypeInfo(
-        ppTypeInfo: *mut *mut ITypeInfo,
-    ) -> HRESULT,
-    fn GetField(
-        pvData: PVOID,
-        szFieldName: LPCOLESTR,
-        pvarField: *mut VARIANT,
-    ) -> HRESULT,
-    fn GetFieldNoCopy(
-        pvData: PVOID,
-        szFieldName: LPCOLESTR,
-        pvarField: *mut VARIANT,
-        ppvDataCArray: *mut PVOID,
-    ) -> HRESULT,
-    fn PutField(
-        wFlags: ULONG,
-        pvData: PVOID,
-        szFieldName: LPCOLESTR,
-        pvarField: *mut VARIANT,
-    ) -> HRESULT,
-    fn PutFieldNoCopy(
-        wFlags: ULONG,
-        pvData: PVOID,
-        szFieldName: LPCOLESTR,
-        pvarField: *mut VARIANT,
-    ) -> HRESULT,
-    fn GetFieldNames(
-        pcNames: *mut ULONG,
-        rgBstrNames: *mut BSTR,
-    ) -> HRESULT,
-    fn IsMatchingType(
-        pRecordInfo: *mut IRecordInfo,
-    ) -> BOOL,
-    fn RecordCreate() -> PVOID,
-    fn RecordCreateCopy(
-        pvSource: PVOID,
-        ppvDest: *mut PVOID,
-    ) -> HRESULT,
-    fn RecordDestroy(
-        pvRecord: PVOID,
+    fn Reset() -> HRESULT,
+    fn Clone(
+        ppEnum: *mut *mut IEnumVARIANT,
     ) -> HRESULT,
 }}
+// HRESULT STDMETHODCALLTYPE IEnumVARIANT_RemoteNext_Proxy(
+//     IEnumVARIANT * This,
+//     ULONG celt,
+//     VARIANT *rgVar,
+//     ULONG *pCeltFetched);
+// void __RPC_STUB IEnumVARIANT_RemoteNext_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
 pub type LPTYPECOMP = *mut ITypeComp;
 ENUM!{enum DESCKIND {
     DESCKIND_NONE = 0,
-    DESCKIND_FUNCDESC = DESCKIND_NONE + 1,
-    DESCKIND_VARDESC = DESCKIND_FUNCDESC + 1,
-    DESCKIND_TYPECOMP = DESCKIND_VARDESC + 1,
-    DESCKIND_IMPLICITAPPOBJ = DESCKIND_TYPECOMP + 1,
-    DESCKIND_MAX = DESCKIND_IMPLICITAPPOBJ + 1,
+    DESCKIND_FUNCDESC,
+    DESCKIND_VARDESC,
+    DESCKIND_TYPECOMP,
+    DESCKIND_IMPLICITAPPOBJ,
+    DESCKIND_MAX,
 }}
-UNION!{union BINDPTR {
+UNION!{union BINDPTR{
     [usize; 1],
     lpfuncdesc lpfuncdesc_mut: *mut FUNCDESC,
     lpvardesc lpvardesc_mut: *mut VARDESC,
     lptcomp lptcomp_mut: *mut ITypeComp,
 }}
 pub type LPBINDPTR = *mut BINDPTR;
-RIDL!{#[uuid(0x00020403, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+DEFINE_GUID!{IID_ITypeComp,
+    0x00020403, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
+RIDL!{#[uuid(0x00020403, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ITypeComp(ITypeCompVtbl): IUnknown(IUnknownVtbl) {
     fn Bind(
         szName: LPOLESTR,
@@ -721,64 +809,37 @@ interface ITypeComp(ITypeCompVtbl): IUnknown(IUnknownVtbl) {
         ppTComp: *mut *mut ITypeComp,
     ) -> HRESULT,
 }}
-ENUM!{enum SYSKIND {
-    SYS_WIN16 = 0,
-    SYS_WIN32,
-    SYS_MAC,
-    SYS_WIN64,
-}}
-STRUCT!{struct TLIBATTR {
-    guid: GUID,
-    lcid: LCID,
-    syskind: SYSKIND,
-    wMajorVerNum: WORD,
-    wMinorVerNum: WORD,
-    wLibFlags: WORD,
-}}
-RIDL!{#[uuid(0x00020402, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
-interface ITypeLib(ITypeLibVtbl): IUnknown(IUnknownVtbl) {
-    fn GetTypeInfoCount() -> UINT,
-    fn GetTypeInfo(
-        index: UINT,
-        ppTInfo: *mut *mut ITypeInfo,
-    ) -> HRESULT,
-    fn GetTypeInfoType(
-        index: UINT,
-        pTKind: *mut TYPEKIND,
-    ) -> HRESULT,
-    fn GetTypeInfoOfGuid(
-        guid: REFGUID,
-        ppTInfo: *mut *mut ITypeInfo,
-    ) -> HRESULT,
-    fn GetLibAttr(
-        ppTLibAttr: *mut *mut TLIBATTR,
-    ) -> HRESULT,
-    fn GetTypeComp(
-        ppTComp: *mut *mut ITypeComp,
-    ) -> HRESULT,
-    fn GetDocumentation(
-        index: INT,
-        pbstrName: *mut BSTR,
-        pBstrDocString: *mut BSTR,
-        pdwHelpContext: *mut DWORD,
-        pBstrHelpFile: *mut BSTR,
-    ) -> HRESULT,
-    fn IsName(
-        szNameBuf: LPOLESTR,
-        lHashVal: ULONG,
-        pfName: *mut BOOL,
-    ) -> HRESULT,
-    fn FindName(
-        szNameBuf: LPOLESTR,
-        lHashVal: ULONG,
-        ppTInfo: *mut *mut ITypeInfo,
-        rgMemId: *mut MEMBERID,
-        pcFound: *mut USHORT,
-    ) -> HRESULT,
-    fn ReleaseTLibAttr(
-        pTLibAttr: *const TLIBATTR,
-    ) -> HRESULT,
-}}
+// HRESULT STDMETHODCALLTYPE ITypeComp_RemoteBind_Proxy(
+//     ITypeComp * This,
+//     LPOLESTR szName,
+//     ULONG lHashVal,
+//     WORD wFlags,
+//     ITypeInfo **ppTInfo,
+//     DESCKIND *pDescKind,
+//     LPFUNCDESC *ppFuncDesc,
+//     LPVARDESC *ppVarDesc,
+//     ITypeComp **ppTypeComp,
+//     CLEANLOCALSTORAGE *pDummy);
+// void __RPC_STUB ITypeComp_RemoteBind_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeComp_RemoteBindType_Proxy(
+//     ITypeComp * This,
+//     LPOLESTR szName,
+//     ULONG lHashVal,
+//     ITypeInfo **ppTInfo);
+// void __RPC_STUB ITypeComp_RemoteBindType_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0008_v0_0_c_ifspec;
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0008_v0_0_s_ifspec;
+pub type LPTYPEINFO = *mut ITypeInfo;
+DEFINE_GUID!{IID_ITypeInfo,
+    0x00020401, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
 RIDL!{#[uuid(0x00020401, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
 interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetTypeAttr(
@@ -789,11 +850,11 @@ interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
     fn GetFuncDesc(
         index: UINT,
-        ppFunDesc: *mut *mut FUNCDESC,
+        ppFuncDesc: *mut *mut FUNCDESC,
     ) -> HRESULT,
     fn GetVarDesc(
         index: UINT,
-        pPVarDesc: *mut *mut VARDESC,
+        ppVarDesc: *mut *mut VARDESC,
     ) -> HRESULT,
     fn GetNames(
         memid: MEMBERID,
@@ -869,6 +930,427 @@ interface ITypeInfo(ITypeInfoVtbl): IUnknown(IUnknownVtbl) {
         pVarDesc: *mut VARDESC,
     ) -> (),
 }}
+// HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetTypeAttr_Proxy(
+//     ITypeInfo * This,
+//     LPTYPEATTR *ppTypeAttr,
+//     CLEANLOCALSTORAGE *pDummy);
+// void __RPC_STUB ITypeInfo_RemoteGetTypeAttr_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetFuncDesc_Proxy(
+//     ITypeInfo * This,
+//     UINT index,
+//     LPFUNCDESC *ppFuncDesc,
+//     CLEANLOCALSTORAGE *pDummy);
+// void __RPC_STUB ITypeInfo_RemoteGetFuncDesc_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetVarDesc_Proxy(
+//     ITypeInfo * This,
+//     UINT index,
+//     LPVARDESC *ppVarDesc,
+//     CLEANLOCALSTORAGE *pDummy);
+// void __RPC_STUB ITypeInfo_RemoteGetVarDesc_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetNames_Proxy(
+//     ITypeInfo * This,
+//     MEMBERID memid,
+//     BSTR *rgBstrNames,
+//     UINT cMaxNames,
+//     UINT *pcNames);
+// void __RPC_STUB ITypeInfo_RemoteGetNames_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_LocalGetIDsOfNames_Proxy(
+//     ITypeInfo * This);
+// void __RPC_STUB ITypeInfo_LocalGetIDsOfNames_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_LocalInvoke_Proxy(
+//     ITypeInfo * This);
+// void __RPC_STUB ITypeInfo_LocalInvoke_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetDocumentation_Proxy(
+//     ITypeInfo * This,
+//     MEMBERID memid,
+//     DWORD refPtrFlags,
+//     BSTR *pBstrName,
+//     BSTR *pBstrDocString,
+//     DWORD *pdwHelpContext,
+//     BSTR *pBstrHelpFile);
+// void __RPC_STUB ITypeInfo_RemoteGetDocumentation_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetDllEntry_Proxy(
+//     ITypeInfo * This,
+//     MEMBERID memid,
+//     INVOKEKIND invKind,
+//     DWORD refPtrFlags,
+//     BSTR *pBstrDllName,
+//     BSTR *pBstrName,
+//     WORD *pwOrdinal);
+// void __RPC_STUB ITypeInfo_RemoteGetDllEntry_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_LocalAddressOfMember_Proxy(
+//     ITypeInfo * This);
+// void __RPC_STUB ITypeInfo_LocalAddressOfMember_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteCreateInstance_Proxy(
+//     ITypeInfo * This,
+//     REFIID riid,
+//     IUnknown **ppvObj);
+// void __RPC_STUB ITypeInfo_RemoteCreateInstance_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetContainingTypeLib_Proxy(
+//     ITypeInfo * This,
+//     ITypeLib **ppTLib,
+//     UINT *pIndex);
+// void __RPC_STUB ITypeInfo_RemoteGetContainingTypeLib_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_LocalReleaseTypeAttr_Proxy(
+//     ITypeInfo * This);
+// void __RPC_STUB ITypeInfo_LocalReleaseTypeAttr_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_LocalReleaseFuncDesc_Proxy(
+//     ITypeInfo * This);
+// void __RPC_STUB ITypeInfo_LocalReleaseFuncDesc_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_LocalReleaseVarDesc_Proxy(
+//     ITypeInfo * This);
+// void __RPC_STUB ITypeInfo_LocalReleaseVarDesc_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+pub type LPTYPEINFO2 = *mut ITypeInfo2;
+DEFINE_GUID!{IID_ITypeInfo2,
+    0x00020412, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
+RIDL!{#[uuid(0x00020412, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface ITypeInfo2(ITypeInfo2Vtbl): ITypeInfo(ITypeInfoVtbl) {
+    fn GetTypeKind(
+        pTypeKind: *mut TYPEKIND,
+    ) -> HRESULT,
+    fn GetTypeFlags(
+        pTypeFlags: *mut ULONG,
+    ) -> HRESULT,
+    fn GetFuncIndexOfMemId(
+        memid: MEMBERID,
+        invKind: INVOKEKIND,
+        pFuncIndex: *mut UINT,
+    ) -> HRESULT,
+    fn GetVarIndexOfMemId(
+        memid: MEMBERID,
+        pVarIndex: *mut UINT,
+    ) -> HRESULT,
+    fn GetCustData(
+        guid: REFGUID,
+        pVarVal: *mut VARIANT,
+    ) -> HRESULT,
+    fn GetFuncCustData(
+        index: UINT,
+        guid: REFGUID,
+        pVarVal: *mut VARIANT,
+    ) -> HRESULT,
+    fn GetParamCustData(
+        indexFunc: UINT,
+        indexParam: UINT,
+        guid: REFGUID,
+        pVarVal: *mut VARIANT,
+    ) -> HRESULT,
+    fn GetVarCustData(
+        index: UINT,
+        guid: REFGUID,
+        pVarVal: *mut VARIANT,
+    ) -> HRESULT,
+    fn GetImplTypeCustData(
+        index: UINT,
+        guid: REFGUID,
+        pVarVal: *mut VARIANT,
+    ) -> HRESULT,
+    fn GetDocumentation2(
+        memid: MEMBERID,
+        lcid: LCID,
+        pbstrHelpString: *mut BSTR,
+        pdwHelpStringContext: *mut DWORD,
+        pbstrHelpStringDll: *mut BSTR,
+    ) -> HRESULT,
+    fn GetAllCustData(
+        pCustData: *mut CUSTDATA,
+    ) -> HRESULT,
+    fn GetAllFuncCustData(
+        index: UINT,
+        pCustData: *mut CUSTDATA,
+    ) -> HRESULT,
+    fn GetAllParamCustData(
+        indexFunc: UINT,
+        indexParam: UINT,
+        pCustData: *mut CUSTDATA,
+    ) -> HRESULT,
+    fn GetAllVarCustData(
+        index: UINT,
+        pCustData: *mut CUSTDATA,
+    ) -> HRESULT,
+    fn GetAllImplTypeCustData(
+        index: UINT,
+        pCustData: *mut CUSTDATA,
+    ) -> HRESULT,
+}}
+// HRESULT STDMETHODCALLTYPE ITypeInfo2_RemoteGetDocumentation2_Proxy(
+//     ITypeInfo2 * This,
+//     MEMBERID memid,
+//     LCID lcid,
+//     DWORD refPtrFlags,
+//     BSTR *pbstrHelpString,
+//     DWORD *pdwHelpStringContext,
+//     BSTR *pbstrHelpStringDll);
+// void __RPC_STUB ITypeInfo2_RemoteGetDocumentation2_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0010_v0_0_c_ifspec;
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0010_v0_0_s_ifspec;
+ENUM!{enum SYSKIND {
+    SYS_WIN16 = 0,
+    SYS_WIN32,
+    SYS_MAC,
+    SYS_WIN64,
+}}
+ENUM!{enum LIBFLAGS {
+    LIBFLAG_FRESTRICTED = 0x01,
+    LIBFLAG_FCONTROL = 0x02,
+    LIBFLAG_FHIDDEN = 0x04,
+    LIBFLAG_FHASDISKIMAGE = 0x08,
+}}
+pub type LPTYPELIB = *mut ITypeLib;
+STRUCT!{struct TLIBATTR {
+    guid: GUID,
+    lcid: LCID,
+    syskind: SYSKIND,
+    wMajorVerNum: WORD,
+    wMinorVerNum: WORD,
+    wLibFlags: WORD,
+}}
+pub type LPTLIBATTR = *mut TLIBATTR;
+DEFINE_GUID!{IID_ITypeLib,
+    0x00020402, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
+RIDL!{#[uuid(0x00020402, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface ITypeLib(ITypeLibVtbl): IUnknown(IUnknownVtbl) {
+    fn GetTypeInfoCount() -> UINT,
+    fn GetTypeInfo(
+        index: UINT,
+        ppTInfo: *mut *mut ITypeInfo,
+    ) -> HRESULT,
+    fn GetTypeInfoType(
+        index: UINT,
+        pTKind: *mut TYPEKIND,
+    ) -> HRESULT,
+    fn GetTypeInfoOfGuid(
+        guid: REFGUID,
+        ppTInfo: *mut *mut ITypeInfo,
+    ) -> HRESULT,
+    fn GetLibAttr(
+        ppTLibAttr: *mut *mut TLIBATTR,
+    ) -> HRESULT,
+    fn GetTypeComp(
+        ppTComp: *mut *mut ITypeComp,
+    ) -> HRESULT,
+    fn GetDocumentation(
+        index: INT,
+        pbstrName: *mut BSTR,
+        pBstrDocString: *mut BSTR,
+        pdwHelpContext: *mut DWORD,
+        pBstrHelpFile: *mut BSTR,
+    ) -> HRESULT,
+    fn IsName(
+        szNameBuf: LPOLESTR,
+        lHashVal: ULONG,
+        pfName: *mut BOOL,
+    ) -> HRESULT,
+    fn FindName(
+        szNameBuf: LPOLESTR,
+        lHashVal: ULONG,
+        ppTInfo: *mut *mut ITypeInfo,
+        rgMemId: *mut MEMBERID,
+        pcFound: *mut USHORT,
+    ) -> HRESULT,
+    fn ReleaseTLibAttr(
+        pTLibAttr: *const TLIBATTR,
+    ) -> HRESULT,
+}}
+// HRESULT STDMETHODCALLTYPE ITypeLib_RemoteGetTypeInfoCount_Proxy(
+//     ITypeLib * This,
+//     UINT *pcTInfo);
+// void __RPC_STUB ITypeLib_RemoteGetTypeInfoCount_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeLib_RemoteGetLibAttr_Proxy(
+//     ITypeLib * This,
+//     LPTLIBATTR *ppTLibAttr,
+//     CLEANLOCALSTORAGE *pDummy);
+// void __RPC_STUB ITypeLib_RemoteGetLibAttr_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeLib_RemoteGetDocumentation_Proxy(
+//     ITypeLib * This,
+//     INT index,
+//     DWORD refPtrFlags,
+//     BSTR *pBstrName,
+//     BSTR *pBstrDocString,
+//     DWORD *pdwHelpContext,
+//     BSTR *pBstrHelpFile);
+// void __RPC_STUB ITypeLib_RemoteGetDocumentation_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeLib_RemoteIsName_Proxy(
+//     ITypeLib * This,
+//     LPOLESTR szNameBuf,
+//     ULONG lHashVal,
+//     BOOL *pfName,
+//     BSTR *pBstrLibName);
+// void __RPC_STUB ITypeLib_RemoteIsName_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeLib_RemoteFindName_Proxy(
+//     ITypeLib * This,
+//     LPOLESTR szNameBuf,
+//     ULONG lHashVal,
+//     ITypeInfo **ppTInfo,
+//     MEMBERID *rgMemId,
+//     USHORT *pcFound,
+//     BSTR *pBstrLibName);
+// void __RPC_STUB ITypeLib_RemoteFindName_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeLib_LocalReleaseTLibAttr_Proxy(
+//     ITypeLib * This);
+// void __RPC_STUB ITypeLib_LocalReleaseTLibAttr_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0011_v0_0_c_ifspec;
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0011_v0_0_s_ifspec;
+pub type LPTYPELIB2 = *mut ITypeLib2;
+DEFINE_GUID!{IID_ITypeLib2,
+    0x00020411, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
+RIDL!{#[uuid(0x00020411, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface ITypeLib2(ITypeLib2Vtbl): ITypeLib(ITypeLibVtbl) {
+    fn GetCustData(
+        guid: REFGUID,
+        pVarVal: *mut VARIANT,
+    ) -> HRESULT,
+    fn GetLibStatistics(
+        pcUniqueNames: *mut ULONG,
+        pcchUniqueNames: *mut ULONG,
+    ) -> HRESULT,
+    fn GetDocumentation2(
+        index: INT,
+        lcid: LCID,
+        pbstrHelpString: *mut BSTR,
+        pdwHelpStringContext: *mut DWORD,
+        pbstrHelpStringDll: *mut BSTR,
+    ) -> HRESULT,
+    fn GetAllCustData(
+        pCustData: *mut CUSTDATA,
+    ) -> HRESULT,
+}}
+// HRESULT STDMETHODCALLTYPE ITypeLib2_RemoteGetLibStatistics_Proxy(
+//     ITypeLib2 * This,
+//     ULONG *pcUniqueNames,
+//     ULONG *pcchUniqueNames);
+// void __RPC_STUB ITypeLib2_RemoteGetLibStatistics_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+// HRESULT STDMETHODCALLTYPE ITypeLib2_RemoteGetDocumentation2_Proxy(
+//     ITypeLib2 * This,
+//     INT index,
+//     LCID lcid,
+//     DWORD refPtrFlags,
+//     BSTR *pbstrHelpString,
+//     DWORD *pdwHelpStringContext,
+//     BSTR *pbstrHelpStringDll);
+// void __RPC_STUB ITypeLib2_RemoteGetDocumentation2_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+pub type LPTYPECHANGEEVENTS = *mut ITypeChangeEvents;
+ENUM!{enum CHANGEKIND {
+    CHANGEKIND_ADDMEMBER,
+    CHANGEKIND_DELETEMEMBER,
+    CHANGEKIND_SETNAMES,
+    CHANGEKIND_SETDOCUMENTATION,
+    CHANGEKIND_GENERAL,
+    CHANGEKIND_INVALIDATE,
+    CHANGEKIND_CHANGEFAILED,
+    CHANGEKIND_MAX,
+}}
+DEFINE_GUID!{IID_ITypeChangeEvents,
+    0x00020410, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
+RIDL!{#[uuid(0x00020410, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface ITypeChangeEvents(ITypeChangeEventsVtbl): IUnknown(IUnknownVtbl) {
+    fn RequestTypeChange(
+        changeKind: CHANGEKIND,
+        pTInfoBefore: *mut ITypeInfo,
+        pStrName: LPOLESTR,
+        pfCancel: *mut INT,
+    ) -> HRESULT,
+    fn AfterTypeChange(
+        changeKind: CHANGEKIND,
+        pTInfoAfter: *mut ITypeInfo,
+        pStrName: LPOLESTR,
+    ) -> HRESULT,
+}}
+pub type LPERRORINFO = *mut IErrorInfo;
+DEFINE_GUID!{IID_IErrorInfo,
+    0x1cf2b120, 0x547d, 0x101b, 0x8e, 0x65, 0x08, 0x00, 0x2b, 0x2b, 0xd1, 0x19}
 RIDL!{#[uuid(0x1cf2b120, 0x547d, 0x101b, 0x8e, 0x65, 0x08, 0x00, 0x2b, 0x2b, 0xd1, 0x19)]
 interface IErrorInfo(IErrorInfoVtbl): IUnknown(IUnknownVtbl) {
     fn GetGUID(
@@ -887,6 +1369,9 @@ interface IErrorInfo(IErrorInfoVtbl): IUnknown(IUnknownVtbl) {
         pdwHelpContext: *mut DWORD,
     ) -> HRESULT,
 }}
+pub type LPCREATEERRORINFO = *mut ICreateErrorInfo;
+DEFINE_GUID!{IID_ICreateErrorInfo,
+    0x22f03340, 0x547d, 0x101b, 0x8e, 0x65, 0x08, 0x00, 0x2b, 0x2b, 0xd1, 0x19}
 RIDL!{#[uuid(0x22f03340, 0x547d, 0x101b, 0x8e, 0x65, 0x08, 0x00, 0x2b, 0x2b, 0xd1, 0x19)]
 interface ICreateErrorInfo(ICreateErrorInfoVtbl): IUnknown(IUnknownVtbl) {
     fn SetGUID(
@@ -905,11 +1390,513 @@ interface ICreateErrorInfo(ICreateErrorInfoVtbl): IUnknown(IUnknownVtbl) {
         dwHelpContext: DWORD,
     ) -> HRESULT,
 }}
+pub type LPSUPPORTERRORINFO = *mut ISupportErrorInfo;
+DEFINE_GUID!{IID_ISupportErrorInfo,
+    0xdf0b3d60, 0x548f, 0x101b, 0x8e, 0x65, 0x08, 0x00, 0x2b, 0x2b, 0xd1, 0x19}
+RIDL!{#[uuid(0xdf0b3d60, 0x548f, 0x101b, 0x8e, 0x65, 0x08, 0x00, 0x2b, 0x2b, 0xd1, 0x19)]
+interface ISupportErrorInfo(ISupportErrorInfoVtbl): IUnknown(IUnknownVtbl) {
+    fn InterfaceSupportsErrorInfo(
+        riid: REFIID,
+    ) -> HRESULT,
+}}
+DEFINE_GUID!{IID_ITypeFactory,
+    0x0000002e, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
+RIDL!{#[uuid(0x0000002e, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface ITypeFactory(ITypeFactoryVtbl): IUnknown(IUnknownVtbl) {
+    fn CreateFromTypeInfo(
+        pTypeInfo: *mut ITypeInfo,
+        riid: REFIID,
+        ppv: *mut *mut IUnknown,
+    ) -> HRESULT,
+}}
+DEFINE_GUID!{IID_ITypeMarshal,
+    0x0000002d, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
+RIDL!{#[uuid(0x0000002d, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface ITypeMarshal(ITypeMarshalVtbl): IUnknown(IUnknownVtbl) {
+    fn Size(
+        pvType: PVOID,
+        dwDestContext: DWORD,
+        pvDestContext: PVOID,
+        pSize: *mut ULONG,
+    ) -> HRESULT,
+    fn Marshal(
+        pvType: PVOID,
+        dwDestContext: DWORD,
+        pvDestContext: PVOID,
+        cbBufferLength: ULONG,
+        pBuffer: *mut BYTE,
+        pcbWritten: *mut ULONG,
+    ) -> HRESULT,
+    fn Unmarshal(
+        pvType: PVOID,
+        dwFlags: DWORD,
+        cbBufferLength: ULONG,
+        pBuffer: *mut BYTE,
+        pcbRead: *mut ULONG,
+    ) -> HRESULT,
+    fn Free(
+        pvType: PVOID,
+    ) -> HRESULT,
+}}
+pub type LPRECORDINFO = *mut IRecordInfo;
+DEFINE_GUID!{IID_IRecordInfo,
+    0x0000002f, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
+RIDL!{#[uuid(0x0000002f, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IRecordInfo(IRecordInfoVtbl): IUnknown(IUnknownVtbl) {
+    fn RecordInit(
+        pvNew: PVOID,
+    ) -> HRESULT,
+    fn RecordClear(
+        pvExisting: PVOID,
+    ) -> HRESULT,
+    fn RecordCopy(
+        pvExisting: PVOID,
+        pvNew: PVOID,
+    ) -> HRESULT,
+    fn GetGuid(
+        pguid: *mut GUID,
+    ) -> HRESULT,
+    fn GetName(
+        pbstrName: *mut BSTR,
+    ) -> HRESULT,
+    fn GetSize(
+        pcbSize: *mut ULONG,
+    ) -> HRESULT,
+    fn GetTypeInfo(
+        ppTypeInfo: *mut *mut ITypeInfo,
+    ) -> HRESULT,
+    fn GetField(
+        pvData: PVOID,
+        szFieldName: LPCOLESTR,
+        pvarField: *mut VARIANT,
+    ) -> HRESULT,
+    fn GetFieldNoCopy(
+        pvData: PVOID,
+        szFieldName: LPCOLESTR,
+        pvarField: *mut VARIANT,
+        ppvDataCArray: *mut PVOID,
+    ) -> HRESULT,
+    fn PutField(
+        wFlags: ULONG,
+        pvData: PVOID,
+        szFieldName: LPCOLESTR,
+        pvarField: *mut VARIANT,
+    ) -> HRESULT,
+    fn PutFieldNoCopy(
+        wFlags: ULONG,
+        pvData: PVOID,
+        szFieldName: LPCOLESTR,
+        pvarField: *mut VARIANT,
+    ) -> HRESULT,
+    fn GetFieldNames(
+        pcNames: *mut ULONG,
+        rgBstrNames: *mut BSTR,
+    ) -> HRESULT,
+    fn IsMatchingType(
+        pRecordInfo: *mut IRecordInfo,
+    ) -> BOOL,
+    fn RecordCreate() -> PVOID,
+    fn RecordCreateCopy(
+        pvSource: PVOID,
+        ppvDest: *mut PVOID,
+    ) -> HRESULT,
+    fn RecordDestroy(
+        pvRecord: PVOID,
+    ) -> HRESULT,
+}}
+pub type LPERRORLOG = *mut IErrorLog;
+DEFINE_GUID!{IID_IErrorLog,
+    0x3127ca40, 0x446e, 0x11ce, 0x81, 0x35, 0x00, 0xaa, 0x00, 0x4b, 0xb8, 0x51}
 RIDL!{#[uuid(0x3127ca40, 0x446e, 0x11ce, 0x81, 0x35, 0x00, 0xaa, 0x00, 0x4b, 0xb8, 0x51)]
 interface IErrorLog(IErrorLogVtbl): IUnknown(IUnknownVtbl) {
     fn AddError(
         pszPropName: LPCOLESTR,
-        pExcepInfo: *const EXCEPINFO,
+        pExcepInfo: *mut EXCEPINFO,
     ) -> HRESULT,
 }}
-pub type LPERRORLOG = *mut IErrorLog;
+pub type LPPROPERTYBAG = *mut IPropertyBag;
+DEFINE_GUID!{IID_IPropertyBag,
+    0x55272a00, 0x42cb, 0x11ce, 0x81, 0x35, 0x00, 0xaa, 0x00, 0x4b, 0xb8, 0x51}
+RIDL!{#[uuid(0x55272a00, 0x42cb, 0x11ce, 0x81, 0x35, 0x00, 0xaa, 0x00, 0x4b, 0xb8, 0x51)]
+interface IPropertyBag(IPropertyBagVtbl): IUnknown(IUnknownVtbl) {
+    fn Read(
+        pszPropName: LPCOLESTR,
+        pVar: *mut VARIANT,
+        pErrorLog: *mut IErrorLog,
+    ) -> HRESULT,
+    fn Write(
+        pszPropName: LPCOLESTR,
+        pVar: *mut VARIANT,
+    ) -> HRESULT,
+}}
+// HRESULT STDMETHODCALLTYPE IPropertyBag_RemoteRead_Proxy(
+//     IPropertyBag * This,
+//     LPCOLESTR pszPropName,
+//     VARIANT *pVar,
+//     IErrorLog *pErrorLog,
+//     DWORD varType,
+//     IUnknown *pUnkObj);
+// void __RPC_STUB IPropertyBag_RemoteRead_Stub(
+//     IRpcStubBuffer *This,
+//     IRpcChannelBuffer *_pRpcChannelBuffer,
+//     PRPC_MESSAGE _pRpcMessage,
+//     DWORD *_pdwStubPhase);
+DEFINE_GUID!{IID_ITypeLibRegistrationReader,
+    0xed6a8a2a, 0xb160, 0x4e77, 0x8f, 0x73, 0xaa, 0x74, 0x35, 0xcd, 0x5c, 0x27}
+RIDL!{#[uuid(0xed6a8a2a, 0xb160, 0x4e77, 0x8f, 0x73, 0xaa, 0x74, 0x35, 0xcd, 0x5c, 0x27)]
+interface ITypeLibRegistrationReader(ITypeLibRegistrationReaderVtbl): IUnknown(IUnknownVtbl) {
+    fn EnumTypeLibRegistrations(
+        ppEnumUnknown: *mut *mut IEnumUnknown,
+    ) -> HRESULT,
+}}
+DEFINE_GUID!{IID_ITypeLibRegistration,
+    0x76a3e735, 0x02df, 0x4a12, 0x98, 0xeb, 0x04, 0x3a, 0xd3, 0x60, 0x0a, 0xf3}
+RIDL!{#[uuid(0x76a3e735, 0x02df, 0x4a12, 0x98, 0xeb, 0x04, 0x3a, 0xd3, 0x60, 0x0a, 0xf3)]
+interface ITypeLibRegistration(ITypeLibRegistrationVtbl): IUnknown(IUnknownVtbl) {
+    fn GetGuid(
+        pGuid: *mut GUID,
+    ) -> HRESULT,
+    fn GetVersion(
+        pVersion: *mut BSTR,
+    ) -> HRESULT,
+    fn GetLcid(
+        pLcid: *mut LCID,
+    ) -> HRESULT,
+    fn GetWin32Path(
+        pWin32Path: *mut BSTR,
+    ) -> HRESULT,
+    fn GetWin64Path(
+        pWin64Path: *mut BSTR,
+    ) -> HRESULT,
+    fn GetDisplayName(
+        pDisplayName: *mut BSTR,
+    ) -> HRESULT,
+    fn GetFlags(
+        pFlags: *mut DWORD,
+    ) -> HRESULT,
+    fn GetHelpDir(
+        pHelpDir: *mut BSTR,
+    ) -> HRESULT,
+}}
+// EXTERN_C const CLSID CLSID_TypeLibRegistrationReader;
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0023_v0_0_c_ifspec;
+// extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0023_v0_0_s_ifspec;
+// unsigned long __RPC_USER BSTR_UserSize( __RPC__in unsigned long *, unsigned long , __RPC__in BSTR * );
+// unsigned char * __RPC_USER BSTR_UserMarshal( __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * );
+// unsigned char * __RPC_USER BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * );
+// void __RPC_USER BSTR_UserFree( __RPC__in unsigned long *, __RPC__in BSTR * );
+// unsigned long __RPC_USER CLEANLOCALSTORAGE_UserSize( __RPC__in unsigned long *, unsigned long , __RPC__in CLEANLOCALSTORAGE * );
+// unsigned char * __RPC_USER CLEANLOCALSTORAGE_UserMarshal( __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in CLEANLOCALSTORAGE * );
+// unsigned char * __RPC_USER CLEANLOCALSTORAGE_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out CLEANLOCALSTORAGE * );
+// void __RPC_USER CLEANLOCALSTORAGE_UserFree( __RPC__in unsigned long *, __RPC__in CLEANLOCALSTORAGE * );
+// unsigned long __RPC_USER VARIANT_UserSize( __RPC__in unsigned long *, unsigned long , __RPC__in VARIANT * );
+// unsigned char * __RPC_USER VARIANT_UserMarshal( __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * );
+// unsigned char * __RPC_USER VARIANT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * );
+// void __RPC_USER VARIANT_UserFree( __RPC__in unsigned long *, __RPC__in VARIANT * );
+// unsigned long __RPC_USER BSTR_UserSize64( __RPC__in unsigned long *, unsigned long , __RPC__in BSTR * );
+// unsigned char * __RPC_USER BSTR_UserMarshal64( __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * );
+// unsigned char * __RPC_USER BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * );
+// void __RPC_USER BSTR_UserFree64( __RPC__in unsigned long *, __RPC__in BSTR * );
+// unsigned long __RPC_USER CLEANLOCALSTORAGE_UserSize64( __RPC__in unsigned long *, unsigned long , __RPC__in CLEANLOCALSTORAGE * );
+// unsigned char * __RPC_USER CLEANLOCALSTORAGE_UserMarshal64( __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in CLEANLOCALSTORAGE * );
+// unsigned char * __RPC_USER CLEANLOCALSTORAGE_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out CLEANLOCALSTORAGE * );
+// void __RPC_USER CLEANLOCALSTORAGE_UserFree64( __RPC__in unsigned long *, __RPC__in CLEANLOCALSTORAGE * );
+// unsigned long __RPC_USER VARIANT_UserSize64( __RPC__in unsigned long *, unsigned long , __RPC__in VARIANT * );
+// unsigned char * __RPC_USER VARIANT_UserMarshal64( __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * );
+// unsigned char * __RPC_USER VARIANT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * );
+// void __RPC_USER VARIANT_UserFree64( __RPC__in unsigned long *, __RPC__in VARIANT * );
+// HRESULT STDMETHODCALLTYPE IDispatch_Invoke_Proxy(
+//     IDispatch * This,
+//     DISPID dispIdMember,
+//     REFIID riid,
+//     LCID lcid,
+//     WORD wFlags,
+//     DISPPARAMS *pDispParams,
+//     VARIANT *pVarResult,
+//     EXCEPINFO *pExcepInfo,
+//     UINT *puArgErr);
+// HRESULT STDMETHODCALLTYPE IDispatch_Invoke_Stub(
+//     IDispatch * This,
+//     DISPID dispIdMember,
+//     REFIID riid,
+//     LCID lcid,
+//     DWORD dwFlags,
+//     DISPPARAMS *pDispParams,
+//     VARIANT *pVarResult,
+//     EXCEPINFO *pExcepInfo,
+//     UINT *pArgErr,
+//     UINT cVarRef,
+//     UINT *rgVarRefIdx,
+//     VARIANTARG *rgVarRef);
+// HRESULT STDMETHODCALLTYPE IEnumVARIANT_Next_Proxy(
+//     IEnumVARIANT * This,
+//     ULONG celt,
+//     VARIANT *rgVar,
+//     ULONG *pCeltFetched);
+// HRESULT STDMETHODCALLTYPE IEnumVARIANT_Next_Stub(
+//     IEnumVARIANT * This,
+//     ULONG celt,
+//     VARIANT *rgVar,
+//     ULONG *pCeltFetched);
+// HRESULT STDMETHODCALLTYPE ITypeComp_Bind_Proxy(
+//     ITypeComp * This,
+//     LPOLESTR szName,
+//     ULONG lHashVal,
+//     WORD wFlags,
+//     ITypeInfo **ppTInfo,
+//     DESCKIND *pDescKind,
+//     BINDPTR *pBindPtr);
+// HRESULT STDMETHODCALLTYPE ITypeComp_Bind_Stub(
+//     ITypeComp * This,
+//     LPOLESTR szName,
+//     ULONG lHashVal,
+//     WORD wFlags,
+//     ITypeInfo **ppTInfo,
+//     DESCKIND *pDescKind,
+//     LPFUNCDESC *ppFuncDesc,
+//     LPVARDESC *ppVarDesc,
+//     ITypeComp **ppTypeComp,
+//     CLEANLOCALSTORAGE *pDummy);
+// HRESULT STDMETHODCALLTYPE ITypeComp_BindType_Proxy(
+//     ITypeComp * This,
+//     LPOLESTR szName,
+//     ULONG lHashVal,
+//     ITypeInfo **ppTInfo,
+//     ITypeComp **ppTComp);
+// HRESULT STDMETHODCALLTYPE ITypeComp_BindType_Stub(
+//     ITypeComp * This,
+//     LPOLESTR szName,
+//     ULONG lHashVal,
+//     ITypeInfo **ppTInfo);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetTypeAttr_Proxy(
+//     ITypeInfo * This,
+//     TYPEATTR **ppTypeAttr);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetTypeAttr_Stub(
+//     ITypeInfo * This,
+//     LPTYPEATTR *ppTypeAttr,
+//     CLEANLOCALSTORAGE *pDummy);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetFuncDesc_Proxy(
+//     ITypeInfo * This,
+//     UINT index,
+//     FUNCDESC **ppFuncDesc);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetFuncDesc_Stub(
+//     ITypeInfo * This,
+//     UINT index,
+//     LPFUNCDESC *ppFuncDesc,
+//     CLEANLOCALSTORAGE *pDummy);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetVarDesc_Proxy(
+//     ITypeInfo * This,
+//     UINT index,
+//     VARDESC **ppVarDesc);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetVarDesc_Stub(
+//     ITypeInfo * This,
+//     UINT index,
+//     LPVARDESC *ppVarDesc,
+//     CLEANLOCALSTORAGE *pDummy);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetNames_Proxy(
+//     ITypeInfo * This,
+//     MEMBERID memid,
+//     BSTR *rgBstrNames,
+//     UINT cMaxNames,
+//     UINT *pcNames);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetNames_Stub(
+//     ITypeInfo * This,
+//     MEMBERID memid,
+//     BSTR *rgBstrNames,
+//     UINT cMaxNames,
+//     UINT *pcNames);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetIDsOfNames_Proxy(
+//     ITypeInfo * This,
+//     LPOLESTR *rgszNames,
+//     UINT cNames,
+//     MEMBERID *pMemId);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetIDsOfNames_Stub(
+//     ITypeInfo * This);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_Invoke_Proxy(
+//     ITypeInfo * This,
+//     PVOID pvInstance,
+//     MEMBERID memid,
+//     WORD wFlags,
+//     DISPPARAMS *pDispParams,
+//     VARIANT *pVarResult,
+//     EXCEPINFO *pExcepInfo,
+//     UINT *puArgErr);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_Invoke_Stub(
+//     ITypeInfo * This);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetDocumentation_Proxy(
+//     ITypeInfo * This,
+//     MEMBERID memid,
+//     BSTR *pBstrName,
+//     BSTR *pBstrDocString,
+//     DWORD *pdwHelpContext,
+//     BSTR *pBstrHelpFile);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetDocumentation_Stub(
+//     ITypeInfo * This,
+//     MEMBERID memid,
+//     DWORD refPtrFlags,
+//     BSTR *pBstrName,
+//     BSTR *pBstrDocString,
+//     DWORD *pdwHelpContext,
+//     BSTR *pBstrHelpFile);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetDllEntry_Proxy(
+//     ITypeInfo * This,
+//     MEMBERID memid,
+//     INVOKEKIND invKind,
+//     BSTR *pBstrDllName,
+//     BSTR *pBstrName,
+//     WORD *pwOrdinal);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetDllEntry_Stub(
+//     ITypeInfo * This,
+//     MEMBERID memid,
+//     INVOKEKIND invKind,
+//     DWORD refPtrFlags,
+//     BSTR *pBstrDllName,
+//     BSTR *pBstrName,
+//     WORD *pwOrdinal);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_AddressOfMember_Proxy(
+//     ITypeInfo * This,
+//     MEMBERID memid,
+//     INVOKEKIND invKind,
+//     PVOID *ppv);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_AddressOfMember_Stub(
+//     ITypeInfo * This);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_CreateInstance_Proxy(
+//     ITypeInfo * This,
+//     IUnknown *pUnkOuter,
+//     REFIID riid,
+//     PVOID *ppvObj);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_CreateInstance_Stub(
+//     ITypeInfo * This,
+//     REFIID riid,
+//     IUnknown **ppvObj);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetContainingTypeLib_Proxy(
+//     ITypeInfo * This,
+//     ITypeLib **ppTLib,
+//     UINT *pIndex);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_GetContainingTypeLib_Stub(
+//     ITypeInfo * This,
+//     ITypeLib **ppTLib,
+//     UINT *pIndex);
+// void STDMETHODCALLTYPE ITypeInfo_ReleaseTypeAttr_Proxy(
+//     ITypeInfo * This,
+//     TYPEATTR *pTypeAttr);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_ReleaseTypeAttr_Stub(
+//     ITypeInfo * This);
+// void STDMETHODCALLTYPE ITypeInfo_ReleaseFuncDesc_Proxy(
+//     ITypeInfo * This,
+//     FUNCDESC *pFuncDesc);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_ReleaseFuncDesc_Stub(
+//     ITypeInfo * This);
+// void STDMETHODCALLTYPE ITypeInfo_ReleaseVarDesc_Proxy(
+//     ITypeInfo * This,
+//     VARDESC *pVarDesc);
+// HRESULT STDMETHODCALLTYPE ITypeInfo_ReleaseVarDesc_Stub(
+//     ITypeInfo * This);
+// HRESULT STDMETHODCALLTYPE ITypeInfo2_GetDocumentation2_Proxy(
+//     ITypeInfo2 * This,
+//     MEMBERID memid,
+//     LCID lcid,
+//     BSTR *pbstrHelpString,
+//     DWORD *pdwHelpStringContext,
+//     BSTR *pbstrHelpStringDll);
+// HRESULT STDMETHODCALLTYPE ITypeInfo2_GetDocumentation2_Stub(
+//     ITypeInfo2 * This,
+//     MEMBERID memid,
+//     LCID lcid,
+//     DWORD refPtrFlags,
+//     BSTR *pbstrHelpString,
+//     DWORD *pdwHelpStringContext,
+//     BSTR *pbstrHelpStringDll);
+// UINT STDMETHODCALLTYPE ITypeLib_GetTypeInfoCount_Proxy(
+//     ITypeLib * This);
+// HRESULT STDMETHODCALLTYPE ITypeLib_GetTypeInfoCount_Stub(
+//     ITypeLib * This,
+//     UINT *pcTInfo);
+// HRESULT STDMETHODCALLTYPE ITypeLib_GetLibAttr_Proxy(
+//     ITypeLib * This,
+//     TLIBATTR **ppTLibAttr);
+// HRESULT STDMETHODCALLTYPE ITypeLib_GetLibAttr_Stub(
+//     ITypeLib * This,
+//     LPTLIBATTR *ppTLibAttr,
+//     CLEANLOCALSTORAGE *pDummy);
+// HRESULT STDMETHODCALLTYPE ITypeLib_GetDocumentation_Proxy(
+//     ITypeLib * This,
+//     INT index,
+//     BSTR *pBstrName,
+//     BSTR *pBstrDocString,
+//     DWORD *pdwHelpContext,
+//     BSTR *pBstrHelpFile);
+// HRESULT STDMETHODCALLTYPE ITypeLib_GetDocumentation_Stub(
+//     ITypeLib * This,
+//     INT index,
+//     DWORD refPtrFlags,
+//     BSTR *pBstrName,
+//     BSTR *pBstrDocString,
+//     DWORD *pdwHelpContext,
+//     BSTR *pBstrHelpFile);
+// HRESULT STDMETHODCALLTYPE ITypeLib_IsName_Proxy(
+//     ITypeLib * This,
+//     LPOLESTR szNameBuf,
+//     ULONG lHashVal,
+//     BOOL *pfName);
+// HRESULT STDMETHODCALLTYPE ITypeLib_IsName_Stub(
+//     ITypeLib * This,
+//     LPOLESTR szNameBuf,
+//     ULONG lHashVal,
+//     BOOL *pfName,
+//     BSTR *pBstrLibName);
+// HRESULT STDMETHODCALLTYPE ITypeLib_FindName_Proxy(
+//     ITypeLib * This,
+//     LPOLESTR szNameBuf,
+//     ULONG lHashVal,
+//     ITypeInfo **ppTInfo,
+//     MEMBERID *rgMemId,
+//     USHORT *pcFound);
+// HRESULT STDMETHODCALLTYPE ITypeLib_FindName_Stub(
+//     ITypeLib * This,
+//     LPOLESTR szNameBuf,
+//     ULONG lHashVal,
+//     ITypeInfo **ppTInfo,
+//     MEMBERID *rgMemId,
+//     USHORT *pcFound,
+//     BSTR *pBstrLibName);
+// void STDMETHODCALLTYPE ITypeLib_ReleaseTLibAttr_Proxy(
+//     ITypeLib * This,
+//     TLIBATTR *pTLibAttr);
+// HRESULT STDMETHODCALLTYPE ITypeLib_ReleaseTLibAttr_Stub(
+//     ITypeLib * This);
+// HRESULT STDMETHODCALLTYPE ITypeLib2_GetLibStatistics_Proxy(
+//     ITypeLib2 * This,
+//     ULONG *pcUniqueNames,
+//     ULONG *pcchUniqueNames);
+// HRESULT STDMETHODCALLTYPE ITypeLib2_GetLibStatistics_Stub(
+//     ITypeLib2 * This,
+//     ULONG *pcUniqueNames,
+//     ULONG *pcchUniqueNames);
+// HRESULT STDMETHODCALLTYPE ITypeLib2_GetDocumentation2_Proxy(
+//     ITypeLib2 * This,
+//     INT index,
+//     LCID lcid,
+//     BSTR *pbstrHelpString,
+//     DWORD *pdwHelpStringContext,
+//     BSTR *pbstrHelpStringDll);
+// HRESULT STDMETHODCALLTYPE ITypeLib2_GetDocumentation2_Stub(
+//     ITypeLib2 * This,
+//     INT index,
+//     LCID lcid,
+//     DWORD refPtrFlags,
+//     BSTR *pbstrHelpString,
+//     DWORD *pdwHelpStringContext,
+//     BSTR *pbstrHelpStringDll);
+// HRESULT STDMETHODCALLTYPE IPropertyBag_Read_Proxy(
+//     IPropertyBag * This,
+//     LPCOLESTR pszPropName,
+//     VARIANT *pVar,
+//     IErrorLog *pErrorLog);
+// HRESULT STDMETHODCALLTYPE IPropertyBag_Read_Stub(
+//     IPropertyBag * This,
+//     LPCOLESTR pszPropName,
+//     VARIANT *pVar,
+//     IErrorLog *pErrorLog,
+//     DWORD varType,
+//     IUnknown *pUnkObj);
