@@ -7,11 +7,11 @@
 use ctypes::c_float;
 use shared::basetsd::{UINT32, UINT64};
 use shared::guiddef::{LPCGUID, REFIID};
-use shared::minwindef::{BYTE, DWORD, LPVOID};
+use shared::minwindef::{BOOL, BYTE, DWORD, LPVOID};
 use shared::mmreg::WAVEFORMATEX;
 use shared::winerror::{FACILITY_AUDCLNT, SEVERITY_ERROR, SEVERITY_SUCCESS};
 use shared::wtypesbase::SCODE;
-use um::audiosessiontypes::AUDCLNT_SHAREMODE;
+use um::audiosessiontypes::{AUDCLNT_SHAREMODE, AUDIO_STREAM_CATEGORY};
 use um::strmif::REFERENCE_TIME;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HANDLE, HRESULT};
@@ -56,8 +56,25 @@ ENUM!{enum AUDCLNT_BUFFERFLAGS {
     AUDCLNT_BUFFERFLAGS_SILENT = 0x2,
     AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR = 0x4,
 }}
+ENUM!{enum AUDCLNT_STREAMOPTIONS {
+    AUDCLNT_STREAMOPTIONS_NONE = 0x0,
+    AUDCLNT_STREAMOPTIONS_RAW = 0x1,
+    AUDCLNT_STREAMOPTIONS_MATCH_FORMAT = 0x2,
+    AUDCLNT_STREAMOPTIONS_AMBISONICS = 0x4,
+}}
+//DEFINE_ENUM_FLAG_OPERATORS(AUDCLNT_STREAMOPTIONS);
+STRUCT!{struct AudioClientProperties {
+    cbSize: UINT32,
+    bIsOffload: BOOL,
+    eCategory: AUDIO_STREAM_CATEGORY,
+    Options: AUDCLNT_STREAMOPTIONS,
+}}
 DEFINE_GUID!{IID_IAudioClient,
     0x1CB9AD4C, 0xDBFA, 0x4c32, 0xB1, 0x78, 0xC2, 0xF5, 0x68, 0xA7, 0x03, 0xB2}
+DEFINE_GUID!{IID_IAudioClient2,
+    0x726778CD, 0xF60A, 0x4EDA, 0x82, 0xDE, 0xE4, 0x76, 0x10, 0xCD, 0x78, 0xAA}
+DEFINE_GUID!{IID_IAudioClient3,
+    0x7ED4EE07, 0x8E67, 0x4CD4, 0x8C, 0x1A, 0x2B, 0x7A, 0x59, 0x87, 0xAD, 0x42}
 DEFINE_GUID!{IID_IAudioRenderClient,
     0xF294ACFC, 0x3146, 0x4483, 0xA7, 0xBF, 0xAD, 0xDC, 0xA7, 0xC2, 0x60, 0xE2}
 DEFINE_GUID!{IID_IAudioCaptureClient,
@@ -106,6 +123,42 @@ interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
     fn GetService(
         riid: REFIID,
         ppv: *mut LPVOID,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x726778cd, 0xf60a, 0x4eda, 0x82, 0xde, 0xe4, 0x76, 0x10, 0xcd, 0x78, 0xaa)]
+interface IAudioClient2(IAudioClient2Vtbl): IAudioClient(IAudioClientVtbl) {
+    fn IsOffloadCapable(
+        Category: AUDIO_STREAM_CATEGORY,
+        pbOffloadCapable: *mut BOOL,
+    ) -> HRESULT,
+    fn SetClientProperties(
+        pProperties: *const AudioClientProperties,
+    ) -> HRESULT,
+    fn GetBufferSizeLimits(
+        pFormat: *const WAVEFORMATEX,
+        bEventDriven: BOOL,
+        phnsMinBufferDuration: *mut REFERENCE_TIME,
+        phnsMaxBufferDuration: *mut REFERENCE_TIME,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x7ed4ee07, 0x8e67, 0x4cd4, 0x8c, 0x1a, 0x2b, 0x7a, 0x59, 0x87, 0xad, 0x42)]
+interface IAudioClient3(IAudioClient3Vtbl): IAudioClient2(IAudioClient2Vtbl) {
+    fn GetSharedModeEnginePeriod(
+        pFormat: *const WAVEFORMATEX,
+        pDefaultPeriodInFrames: *mut UINT32,
+        pFundamentalPeriodInFrames: *mut UINT32,
+        pMinPeriodInFrames: *mut UINT32,
+        pMaxPeriodInFrames: *mut UINT32,
+    ) -> HRESULT,
+    fn GetCurrentSharedModeEnginePeriod(
+        ppFormat: *mut *mut WAVEFORMATEX,
+        pCurrentPeriodInFrames: *mut UINT32,
+    ) -> HRESULT,
+    fn InitializeSharedAudioStream(
+        StreamFlags: DWORD,
+        PeriodInFrames: UINT32,
+        pFormat: *const WAVEFORMATEX,
+        AudioSessionGuid: LPCGUID,
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0xf294acfc, 0x3146, 0x4483, 0xa7, 0xbf, 0xad, 0xdc, 0xa7, 0xc2, 0x60, 0xe2)]
