@@ -3748,7 +3748,6 @@ RIDL! {#[uuid(0xD6F12DD6, 0x76FB, 0x406E, 0x89, 0x61, 0x42, 0x96, 0xEE, 0xFC, 0x
     : ID3D12ProtectedResourceSession(ID3D12ProtectedResourceSessionVtbl) {
         fn GetDesc1() -> D3D12_PROTECTED_RESOURCE_SESSION_DESC1,
 }}
-
 RIDL! {#[uuid(0x5c014b53, 0x68a1, 0x4b9b, 0x8b, 0xd1, 0xdd, 0x60, 0x46, 0xb9, 0x35, 0x8b)]
     interface ID3D12Device7(ID3D12Device7Vtbl)
     : ID3D12Device6(ID3D12Device6Vtbl) {
@@ -3764,7 +3763,6 @@ RIDL! {#[uuid(0x5c014b53, 0x68a1, 0x4b9b, 0x8b, 0xd1, 0xdd, 0x60, 0x46, 0xb9, 0x
             ppSession: *mut *mut c_void,
         ) -> HRESULT,
 }}
-
 RIDL! {#[uuid(0x9218E6BB, 0xF944, 0x4F7E, 0xA7, 0x5C, 0xB1, 0xB2, 0xC7, 0xB7, 0x01, 0xF3)]
     interface ID3D12Device8(ID3D12Device8Vtbl)
     : ID3D12Device7(ID3D12Device7Vtbl) {
@@ -3970,12 +3968,9 @@ STRUCT! {struct D3D12_SHADER_CACHE_SESSION_DESC {
     Identifier: GUID,
     Mode: D3D12_SHADER_CACHE_MODE,
     Flags: D3D12_SHADER_CACHE_FLAGS,
-
     MaximumInMemoryCacheSizeBytes: UINT,
     MaximumInMemoryCacheEntries: UINT,
-
     MaximumValueFileSizeBytes: UINT,
-
     Version: UINT64,
 }}
 RIDL! {#[uuid(0x28e2495d, 0x0f64, 0x4ae4, 0xa6, 0xec, 0x12, 0x92, 0x55, 0xdc, 0x49, 0xa8)]
