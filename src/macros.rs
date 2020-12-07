@@ -277,6 +277,7 @@ macro_rules! RIDL {
     );
     (@item $thing:item) => ($thing);
 }
+#[macro_export]
 macro_rules! UNION {
     ($(#[$attrs:meta])* union $name:ident {
         [$stype:ty; $ssize:expr],
