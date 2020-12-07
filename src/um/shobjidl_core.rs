@@ -5,14 +5,23 @@
 // except according to those terms.
 use ctypes::{c_int, c_void};
 use shared::guiddef::{REFGUID, REFIID};
-use shared::minwindef::{BOOL, DWORD, UINT, ULONG, WORD};
+use shared::minwindef::{BOOL, DWORD, LPARAM, UINT, ULONG, WORD};
 use shared::windef::{COLORREF, HICON, HWND, RECT};
 use um::commctrl::HIMAGELIST;
 use um::minwinbase::{WIN32_FIND_DATAA, WIN32_FIND_DATAW};
 use um::objidl::IBindCtx;
 use um::propkeydef::REFPROPERTYKEY;
 use um::propsys::GETPROPERTYSTOREFLAGS;
-use um::shtypes::{PCIDLIST_ABSOLUTE, PIDLIST_ABSOLUTE};
+use um::shtypes::{
+    PCIDLIST_ABSOLUTE, 
+    PCUIDLIST_RELATIVE,
+    PCUITEMID_CHILD,
+    PCUITEMID_CHILD_ARRAY,
+    PIDLIST_ABSOLUTE,
+    PIDLIST_RELATIVE,
+    PITEMID_CHILD,
+    STRRET
+};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PCWSTR, ULONGLONG, WCHAR};
 DEFINE_GUID!{CLSID_DesktopWallpaper,
@@ -166,8 +175,33 @@ interface ITaskbarList2(ITaskbarList2Vtbl): ITaskbarList(ITaskbarListVtbl) {
     fn MarkFullscreenWindow(
         hwnd: HWND,
         fFullscreen: BOOL,
-    ) -> HRESULT,
+    ) -> HRESULT,    
 }}
+ENUM!{enum SLR_FLAGS {
+    SLR_NONE = 0,
+    SLR_NO_UI                       = 0x1,
+    SLR_ANY_MATCH                   = 0x2,
+    SLR_UPDATE                      = 0x4,
+    SLR_NOUPDATE                    = 0x8,
+    SLR_NOSEARCH                    = 0x10,
+    SLR_NOTRACK                     = 0x20,
+    SLR_NOLINKINFO                  = 0x40,
+    SLR_INVOKE_MSI                  = 0x80,
+    SLR_NO_UI_WITH_MSG_PUMP         = 0x101,
+    SLR_OFFER_DELETE_WITHOUT_FILE   = 0x200,
+    SLR_KNOWNFOLDER                 = 0x400,
+    SLR_MACHINE_IN_LOCAL_TARGET     = 0x800,
+    SLR_UPDATE_MACHINE_AND_SID      = 0x1000,
+    SLR_NO_OBJECT_ID                = 0x2000,
+}}
+ENUM!{enum SLGP_FLAGS {
+    SLGP_SHORTPATH                  = 0x1,
+    SLGP_UNCPRIORITY                = 0x2,
+    SLGP_RAWPATH                    = 0x4,
+    SLGP_RELATIVEPRIORITY           = 0x8,
+}}
+DEFINE_GUID!{CLSID_ShellLink,
+    0x00021401, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}
 ENUM!{enum THUMBBUTTONFLAGS {
     THBF_ENABLED = 0,
     THBF_DISABLED = 0x1,
@@ -480,6 +514,92 @@ interface IShellLinkW(IShellLinkWVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
     fn SetPath(
         pszFile: LPCWSTR,
+    ) -> HRESULT,
+}}
+ENUM!{enum _SHGDNF {
+    SHGDN_NORMAL        = 0,
+    SHGDN_INFOLDER      = 0x1,
+    SHGDN_FOREDITING    = 0x1000,
+    SHGDN_FORADDRESSBAR = 0x4000,
+    SHGDN_FORPARSING    = 0x8000,
+}}
+pub type SHGDNF = DWORD;
+RIDL!(#[uuid(0x000214F2, 0, 0, 0xC0,0,0,0,0,0,0,0x46)]
+interface IEnumIDList(IEnumIDListVtbl): IUnknown(IUnknownVtbl) {
+    fn Next(
+        celt: ULONG,
+        rgelt: *mut PITEMID_CHILD,
+        pceltFetched: *mut ULONG,
+    ) -> HRESULT,
+    fn Skip(
+        celt: ULONG,
+    ) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(
+        ppenum: *mut *mut IEnumIDList,
+    ) -> HRESULT,
+});
+RIDL!{#[uuid(0x000214E6, 0, 0, 0xC0,0,0,0,0,0,0,0x46)]
+interface IShellFolder(IShellFolderVtbl): IUnknown(IUnknownVtbl) {
+    fn ParseDisplayName(
+        hwnd: HWND,
+        pbc: *mut IBindCtx,
+        pszDisplayName: LPWSTR,
+        pchEaten: *mut ULONG,
+        ppidl: *mut PIDLIST_RELATIVE,
+        pdwAttributes: *mut ULONG,
+    ) -> HRESULT,
+    fn EnumObjects(
+        hwnd: HWND,
+        grfFlags: SHCONTF,
+        ppenumIDList: *mut *mut IEnumIDList,
+    ) -> HRESULT,
+    fn BindToObject(
+        pidl: PCUIDLIST_RELATIVE,
+        pbc: *mut IBindCtx,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn BindToStorage(
+        pidl: PCUIDLIST_RELATIVE,
+        pbc: *mut IBindCtx,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,    
+    fn CompareIDs(
+        lParam: LPARAM,
+        pidl1: PCUIDLIST_RELATIVE,
+        pidl2: PCUIDLIST_RELATIVE,
+    ) -> HRESULT,
+    fn CreateViewObject(
+        hwndOwner: HWND,
+        riid: REFIID,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetAttributesOf(
+        cidl: UINT,
+        apidl: PCUITEMID_CHILD_ARRAY,
+        rgfInOut: *mut SFGAOF,
+    ) -> HRESULT,
+    fn GetUIObjectOf(
+        hwndOwner: HWND,
+        cidl: UINT,
+        apidl: PCUITEMID_CHILD_ARRAY,
+        riid: REFIID,
+        rgfReserved: *mut ULONG,
+        ppv: *mut *mut c_void,
+    ) -> HRESULT,
+    fn GetDisplayNameOf(
+        pidl: PCUITEMID_CHILD,
+        uFlags: SHGDNF,
+        pName: *mut STRRET,
+    ) -> HRESULT,
+    fn SetNameOf(
+        hwnd: HWND,
+        pidl: PCUITEMID_CHILD,
+        pszName: LPCWSTR,
+        uFlags: SHGDNF,
+        ppidlOut: *mut PITEMID_CHILD,
     ) -> HRESULT,
 }}
 RIDL!{#[uuid(0xc2cf3110, 0x460e, 0x4fc1, 0xb9, 0xd0, 0x8a, 0x1c, 0x0c, 0x9c, 0xc4, 0xbd)]
