@@ -4480,6 +4480,26 @@ fn um_imm() {
     use winapi::um::imm::*;
     assert_eq!(size_of::<COMPOSITIONFORM>(), 28);
     assert_eq!(align_of::<COMPOSITIONFORM>(), 4);
+    assert_eq!(size_of::<CANDIDATEFORM>(), 32);
+    assert_eq!(align_of::<CANDIDATEFORM>(), 4);
+    assert_eq!(size_of::<CANDIDATELIST>(), 28);
+    assert_eq!(align_of::<CANDIDATELIST>(), 4);
+    assert_eq!(size_of::<REGISTERWORDA>(), 8);
+    assert_eq!(align_of::<REGISTERWORDA>(), 4);
+    assert_eq!(size_of::<REGISTERWORDW>(), 8);
+    assert_eq!(align_of::<REGISTERWORDW>(), 4);
+    assert_eq!(size_of::<RECONVERTSTRING>(), 32);
+    assert_eq!(align_of::<RECONVERTSTRING>(), 4);
+    assert_eq!(size_of::<STYLEBUFA>(), 36);
+    assert_eq!(align_of::<STYLEBUFA>(), 4);
+    assert_eq!(size_of::<STYLEBUFW>(), 68);
+    assert_eq!(align_of::<STYLEBUFW>(), 4);
+    assert_eq!(size_of::<IMEMENUITEMINFOA>(), 112);
+    assert_eq!(align_of::<IMEMENUITEMINFOA>(), 4);
+    assert_eq!(size_of::<IMEMENUITEMINFOW>(), 192);
+    assert_eq!(align_of::<IMEMENUITEMINFOW>(), 4);
+    assert_eq!(size_of::<IMECHARPOSITION>(), 36);
+    assert_eq!(align_of::<IMECHARPOSITION>(), 4);
 }
 #[cfg(feature = "l2cmn")] #[test]
 fn um_l2cmn() {
