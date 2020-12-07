@@ -5386,6 +5386,12 @@ fn um_mssip() {
     assert_eq!(size_of::<SIP_ADD_NEWPROVIDER>(), 96);
     assert_eq!(align_of::<SIP_ADD_NEWPROVIDER>(), 8);
 }
+#[cfg(feature = "msxml")] #[test]
+fn um_msxml() {
+    use winapi::um::msxml::*;
+    assert_eq!(size_of::<XML_ERROR>(), 48);
+    assert_eq!(align_of::<XML_ERROR>(), 8);
+}
 #[cfg(feature = "nb30")] #[test]
 fn um_nb30() {
     use winapi::um::nb30::*;
