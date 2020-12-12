@@ -1284,8 +1284,8 @@ STRUCT!{struct DEBUG_VALUE_u_s3 {
     LowPart: ULONG64,
     HighPart: LONG64,
 }}
-UNION!{union DEBUG_VALUE_u {
-    [u64; 4],
+UNION!{union DEBUG_VALUE_u { // FIXME align 16
+    [u8; 24],
     I8 I8_mut: UCHAR,
     I16 I16_mut: USHORT,
     I32 I32_mut: ULONG,
