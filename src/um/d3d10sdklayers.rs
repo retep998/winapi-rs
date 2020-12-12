@@ -3,12 +3,11 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::minwindef::{DWORD, UINT, BOOL};
-use um::winnt::{HRESULT, LPCSTR};
-use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use shared::dxgi::IDXGISwapChain;
 use shared::basetsd::{SIZE_T, UINT64};
-
+use shared::dxgi::IDXGISwapChain;
+use shared::minwindef::{BOOL, DWORD, UINT};
+use um::unknwnbase::{IUnknown, IUnknownVtbl};
+use um::winnt::{HRESULT, LPCSTR};
 pub const D3D10_SDK_LAYERS_VERSION: DWORD = 11;
 pub const D3D10_DEBUG_FEATURE_FLUSH_PER_RENDER_OP: DWORD = 0x1;
 pub const D3D10_DEBUG_FEATURE_FINISH_PER_RENDER_OP: DWORD = 0x2;
@@ -31,7 +30,6 @@ interface ID3D10Debug(ID3D10DebugVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
     fn Validate() -> HRESULT,
 }}
-
 RIDL!{#[uuid(0x9b7e4e02, 0x342c, 0x4106, 0xa1, 0x9f, 0x4f, 0x27, 0x04, 0xf6, 0x89, 0xf0)]
 interface ID3D10SwitchToRef(ID3D10SwitchToRefVtbl): IUnknown(IUnknownVtbl) {
     fn SetUseRef(
@@ -588,7 +586,6 @@ STRUCT!{struct D3D10_INFO_QUEUE_FILTER {
     DenyList: D3D10_INFO_QUEUE_FILTER_DESC,
 }}
 pub const D3D10_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT: DWORD = 1024;
-
 RIDL!{#[uuid(0x1b940b17, 0x2642, 0x4d1f, 0xab, 0x1f, 0xb9, 0x9b, 0xad, 0x0c, 0x39, 0x5f)]
 interface ID3D10InfoQueue(ID3D10InfoQueueVtbl): IUnknown(IUnknownVtbl) {
     fn SetMessageCountLimit(

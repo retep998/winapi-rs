@@ -3,10 +3,15 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use um::d3d10shader::{D3D10_SHADER_VARIABLE_TYPE, D3D10_SHADER_VARIABLE_CLASS, ID3D10ShaderReflection, ID3D10ShaderReflectionVtbl, D3D10_SHADER_DESC, ID3D10ShaderReflectionConstantBuffer, D3D10_SIGNATURE_PARAMETER_DESC, D3D10_SHADER_INPUT_BIND_DESC, ID3D10ShaderReflectionVariable};
-use shared::minwindef::{UINT, FLOAT, BOOL};
-use um::winnt::{INT, LPCSTR};
+use shared::minwindef::{BOOL, FLOAT, UINT};
 use um::d3d10::D3D10_PRIMITIVE;
+use um::d3d10shader::{
+    D3D10_SHADER_DESC, D3D10_SHADER_INPUT_BIND_DESC, D3D10_SHADER_VARIABLE_CLASS,
+    D3D10_SHADER_VARIABLE_TYPE, D3D10_SIGNATURE_PARAMETER_DESC, ID3D10ShaderReflection,
+    ID3D10ShaderReflectionConstantBuffer, ID3D10ShaderReflectionVariable,
+    ID3D10ShaderReflectionVtbl
+};
+use um::winnt::{INT, LPCSTR};
 ENUM!{enum D3D10_SHADER_DEBUG_REGTYPE {
     D3D10_SHADER_DEBUG_REG_INPUT,
     D3D10_SHADER_DEBUG_REG_OUTPUT,
@@ -144,7 +149,8 @@ STRUCT!{struct D3D10_SHADER_DEBUG_INFO {
     StringOffset: UINT,
 }}
 RIDL!{#[uuid(0xc3457783, 0xa846, 0x47ce, 0x95, 0x20, 0xce, 0xa6, 0xf6, 0x6e, 0x74, 0x47)]
-interface ID3D10ShaderReflection1(ID3D10ShaderReflection1Vtbl): ID3D10ShaderReflection(ID3D10ShaderReflectionVtbl) {
+interface ID3D10ShaderReflection1(ID3D10ShaderReflection1Vtbl):
+    ID3D10ShaderReflection(ID3D10ShaderReflectionVtbl) {
     fn GetDesc(
         pDesc: *mut D3D10_SHADER_DESC,
     ) -> (),

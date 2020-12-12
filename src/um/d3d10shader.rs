@@ -3,14 +3,18 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
-use shared::minwindef::{BYTE, LPVOID, UINT, BOOL};
+use ctypes::c_void;
+use shared::basetsd::SIZE_T;
+use shared::minwindef::{BOOL, BYTE, LPVOID, UINT};
 use um::d3d10::{D3D10_PRIMITIVE_TOPOLOGY, D3D10_SRV_DIMENSION, ID3D10Device};
-use um::d3dcommon::{D3D_CBUFFER_TYPE, D3D_INCLUDE_TYPE, D3D_NAME, D3D_REGISTER_COMPONENT_TYPE, D3D_RESOURCE_RETURN_TYPE, D3D_SHADER_CBUFFER_FLAGS, D3D_SHADER_INPUT_FLAGS, D3D_SHADER_INPUT_TYPE, D3D_SHADER_MACRO, D3D_SHADER_VARIABLE_CLASS, D3D_SHADER_VARIABLE_FLAGS, D3D_SHADER_VARIABLE_TYPE, ID3DInclude, ID3D10Blob};
+use um::d3dcommon::{
+    D3D_CBUFFER_TYPE, D3D_INCLUDE_TYPE, D3D_NAME, D3D_REGISTER_COMPONENT_TYPE,
+    D3D_RESOURCE_RETURN_TYPE, D3D_SHADER_CBUFFER_FLAGS, D3D_SHADER_INPUT_FLAGS,
+    D3D_SHADER_INPUT_TYPE, D3D_SHADER_MACRO, D3D_SHADER_VARIABLE_CLASS,
+    D3D_SHADER_VARIABLE_FLAGS, D3D_SHADER_VARIABLE_TYPE, ID3D10Blob, ID3DInclude
+};
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HRESULT, LPCSTR};
-use shared::basetsd::SIZE_T;
-use ctypes::c_void;
-
 pub const D3D10_SHADER_DEBUG: UINT = 1 << 0;
 pub const D3D10_SHADER_SKIP_VALIDATION: UINT = 1 << 1;
 pub const D3D10_SHADER_SKIP_OPTIMIZATION: UINT = 1 << 2;
@@ -201,7 +205,6 @@ interface ID3D10ShaderReflection(ID3D10ShaderReflectionVtbl): IUnknown(IUnknownV
         pDesc: *mut D3D10_SIGNATURE_PARAMETER_DESC,
     ) -> HRESULT,
 }}
-
 extern "system" {
     pub fn D3D10CompileShader(
         pSrcData: LPCSTR,
@@ -215,7 +218,6 @@ extern "system" {
         ppShader: *mut *mut ID3D10Blob,
         ppErrorMsgs: *mut *mut ID3D10Blob,
     ) -> HRESULT;
-
     pub fn D3D10DisassembleShader(
         pShader: *const c_void,
         BytecodeLength: SIZE_T,
@@ -223,25 +225,20 @@ extern "system" {
         pComments: LPCSTR,
         ppDisassembly: *mut *mut ID3D10Blob,
     ) -> HRESULT;
-
     pub fn D3D10GetPixelShaderProfile(
         pDevice: *mut ID3D10Device,
     ) -> LPCSTR;
-
     pub fn D3D10GetVertexShaderProfile(
         pDevice: *mut ID3D10Device,
     ) -> LPCSTR;
-
     pub fn D3D10GetGeometryShaderProfile(
         pDevice: *mut ID3D10Device,
     ) -> LPCSTR;
-
     pub fn D3D10ReflectShader(
         pShaderBytecode: *const c_void,
         BytecodeLength: SIZE_T,
         ppDisassembly: *mut *mut ID3D10ShaderReflection,
     ) -> HRESULT;
-
     pub fn D3D10PreprocessShader(
         pSrcData: LPCSTR,
         SrcDataSize: SIZE_T,
@@ -251,25 +248,21 @@ extern "system" {
         ppShaderText: *mut *mut ID3D10Blob,
         ppErrorMsgs: *mut *mut ID3D10Blob,
     ) -> HRESULT;
-
     pub fn D3D10GetInputSignatureBlob(
         pShaderBytecode: *const c_void,
         BytecodeLength: SIZE_T,
         ppSignatureBlob: *mut *mut ID3D10Blob,
     ) -> HRESULT;
-
     pub fn D3D10GetOutputSignatureBlob(
         pShaderBytecode: *const c_void,
         BytecodeLength: SIZE_T,
         ppSignatureBlob: *mut *mut ID3D10Blob,
     ) -> HRESULT;
-
     pub fn D3D10GetInputAndOutputSignatureBlob(
         pShaderBytecode: *const c_void,
         BytecodeLength: SIZE_T,
         ppSignatureBlob: *mut *mut ID3D10Blob,
     ) -> HRESULT;
-
     pub fn D3D10GetShaderDebugInfo (
         pShaderBytecode: *const c_void,
         BytecodeLength: SIZE_T,

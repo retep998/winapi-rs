@@ -3,14 +3,25 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::minwindef::{BYTE, UINT, DWORD, FLOAT, BOOL};
-use um::d3d10::{D3D10_COMMONSHADER_SAMPLER_SLOT_COUNT, D3D10_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT, D3D10_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT, D3D10_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT, ID3D10Device, ID3D10ShaderResourceView, ID3D10DepthStencilView, ID3D10Buffer, ID3D10VertexShader, ID3D10GeometryShader, ID3D10PixelShader, ID3D10BlendState, D3D10_BLEND_DESC, D3D10_DEPTH_STENCIL_DESC, ID3D10DepthStencilState, ID3D10RasterizerState, D3D10_RASTERIZER_DESC, D3D10_SAMPLER_DESC, ID3D10SamplerState, ID3D10RenderTargetView};
-use um::winnt::{HRESULT, LPCSTR, INT};
-use um::unknwnbase::{IUnknown, IUnknownVtbl};
-use um::d3d10shader::{D3D10_SHADER_VARIABLE_CLASS, D3D10_SHADER_VARIABLE_TYPE, D3D10_SIGNATURE_PARAMETER_DESC, ID3D10Include, D3D10_SHADER_MACRO};
-use shared::basetsd::SIZE_T;
 use ctypes::c_void;
+use shared::basetsd::SIZE_T;
+use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, UINT};
+use um::d3d10::{
+    D3D10_BLEND_DESC, D3D10_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT,
+    D3D10_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT, D3D10_COMMONSHADER_SAMPLER_SLOT_COUNT,
+    D3D10_DEPTH_STENCIL_DESC, D3D10_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT, D3D10_RASTERIZER_DESC,
+    D3D10_SAMPLER_DESC, ID3D10BlendState, ID3D10Buffer, ID3D10DepthStencilState,
+    ID3D10DepthStencilView, ID3D10Device, ID3D10GeometryShader, ID3D10PixelShader,
+    ID3D10RasterizerState, ID3D10RenderTargetView, ID3D10SamplerState, ID3D10ShaderResourceView,
+    ID3D10VertexShader
+};
+use um::d3d10shader::{
+    D3D10_SHADER_MACRO, D3D10_SHADER_VARIABLE_CLASS, D3D10_SHADER_VARIABLE_TYPE,
+    D3D10_SIGNATURE_PARAMETER_DESC, ID3D10Include
+};
 use um::d3dcommon::ID3D10Blob;
+use um::unknwnbase::{IUnknown, IUnknownVtbl};
+use um::winnt::{HRESULT, INT, LPCSTR};
 ENUM!{enum D3D10_DEVICE_STATE_TYPES {
     D3D10_DST_SO_BUFFERS=1,
     D3D10_DST_OM_RENDER_TARGETS,
@@ -37,23 +48,21 @@ ENUM!{enum D3D10_DEVICE_STATE_TYPES {
     D3D10_DST_RS_RASTERIZER_STATE,
     D3D10_DST_PREDICATION,
 }}
-const fn D3D10_BYTES_FROM_BITS(x: u32) -> usize {
-    (x as usize + 7) / 8
-}
+const fn to_bytes(x: u32) -> usize { (x as usize + 7) / 8 }
 STRUCT!{struct D3D10_STATE_BLOCK_MASK {
     VS: BYTE,
-    VSSamplers: [BYTE; D3D10_BYTES_FROM_BITS(D3D10_COMMONSHADER_SAMPLER_SLOT_COUNT)],
-    VSShaderResources: [BYTE; D3D10_BYTES_FROM_BITS(D3D10_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)],
-    VSConstantBuffers: [BYTE; D3D10_BYTES_FROM_BITS(D3D10_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT)],
+    VSSamplers: [BYTE; to_bytes(D3D10_COMMONSHADER_SAMPLER_SLOT_COUNT)],
+    VSShaderResources: [BYTE; to_bytes(D3D10_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)],
+    VSConstantBuffers: [BYTE; to_bytes(D3D10_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT)],
     GS: BYTE,
-    GSSamplers: [BYTE; D3D10_BYTES_FROM_BITS(D3D10_COMMONSHADER_SAMPLER_SLOT_COUNT)],
-    GSShaderResources: [BYTE; D3D10_BYTES_FROM_BITS(D3D10_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)],
-    GSConstantBuffers: [BYTE; D3D10_BYTES_FROM_BITS(D3D10_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT)],
+    GSSamplers: [BYTE; to_bytes(D3D10_COMMONSHADER_SAMPLER_SLOT_COUNT)],
+    GSShaderResources: [BYTE; to_bytes(D3D10_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)],
+    GSConstantBuffers: [BYTE; to_bytes(D3D10_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT)],
     PS: BYTE,
-    PSSamplers: [BYTE; D3D10_BYTES_FROM_BITS(D3D10_COMMONSHADER_SAMPLER_SLOT_COUNT)],
-    PSShaderResources: [BYTE; D3D10_BYTES_FROM_BITS(D3D10_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)],
-    PSConstantBuffers: [BYTE; D3D10_BYTES_FROM_BITS(D3D10_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT)],
-    IAVertexBuffers: [BYTE; D3D10_BYTES_FROM_BITS(D3D10_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT)],
+    PSSamplers: [BYTE; to_bytes(D3D10_COMMONSHADER_SAMPLER_SLOT_COUNT)],
+    PSShaderResources: [BYTE; to_bytes(D3D10_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)],
+    PSConstantBuffers: [BYTE; to_bytes(D3D10_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT)],
+    IAVertexBuffers: [BYTE; to_bytes(D3D10_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT)],
     IAIndexBuffer: BYTE,
     IAInputLayout: BYTE,
     IAPrimitiveTopology: BYTE,
@@ -81,47 +90,39 @@ extern "system" {
         pB: *mut D3D10_STATE_BLOCK_MASK,
         pResult: *mut D3D10_STATE_BLOCK_MASK,
     ) -> HRESULT;
-
     pub fn D3D10StateBlockMaskIntersect(
         pA: *mut D3D10_STATE_BLOCK_MASK,
         pB: *mut D3D10_STATE_BLOCK_MASK,
         pResult: *mut D3D10_STATE_BLOCK_MASK,
     ) -> HRESULT;
-
     pub fn D3D10StateBlockMaskDifference(
         pA: *mut D3D10_STATE_BLOCK_MASK,
         pB: *mut D3D10_STATE_BLOCK_MASK,
         pResult: *mut D3D10_STATE_BLOCK_MASK,
     ) -> HRESULT;
-
     pub fn D3D10StateBlockMaskEnableCapture(
         pMask: *mut D3D10_STATE_BLOCK_MASK,
         StateType: D3D10_DEVICE_STATE_TYPES,
         RangeStart: UINT,
         RangeLength: UINT,
     ) -> HRESULT;
-
     pub fn D3D10StateBlockMaskDisableCapture(
         pMask: *mut D3D10_STATE_BLOCK_MASK,
         StateType: D3D10_DEVICE_STATE_TYPES,
         RangeStart: UINT,
         RangeLength: UINT,
     ) -> HRESULT;
-
     pub fn D3D10StateBlockMaskEnableAll(
         pMask: *mut D3D10_STATE_BLOCK_MASK,
     ) -> HRESULT;
-
     pub fn D3D10StateBlockMaskDisableAll(
         pMask: *mut D3D10_STATE_BLOCK_MASK,
     ) -> HRESULT;
-
     pub fn D3D10StateBlockMaskGetSetting(
         pMask: *mut D3D10_STATE_BLOCK_MASK,
         StateType: D3D10_DEVICE_STATE_TYPES,
         Entry: UINT,
     ) -> HRESULT;
-
     pub fn D3D10CreateStateBlock(
         pDevice: *mut ID3D10Device,
         pStateBlockMask: *mut D3D10_STATE_BLOCK_MASK,
@@ -227,7 +228,8 @@ interface ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     ) -> (),
 }}
 RIDL!{#[uuid(0x00e48f7b, 0xd2c8, 0x49e8, 0xa8, 0x6c, 0x02, 0x2d, 0xee, 0x53, 0x43, 0x1f)]
-interface ID3D10EffectScalarVariable(ID3D10EffectScalarVariableVtbl): ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
+interface ID3D10EffectScalarVariable(ID3D10EffectScalarVariableVtbl):
+    ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     fn IsValid() -> BOOL,
     fn GetType() -> *mut ID3D10EffectType,
     fn GetDesc(
@@ -325,7 +327,8 @@ interface ID3D10EffectScalarVariable(ID3D10EffectScalarVariableVtbl): ID3D10Effe
     ) -> (),
 }}
 RIDL!{#[uuid(0x00e48f7b, 0xd2c8, 0x49e8, 0xa8, 0x6c, 0x02, 0x2d, 0xee, 0x53, 0x43, 0x1f)]
-interface ID3D10EffectVectorVariable(ID3D10EffectVectorVariableVtbl): ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
+interface ID3D10EffectVectorVariable(ID3D10EffectVectorVariableVtbl):
+    ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     fn IsValid() -> BOOL,
     fn GetType() -> *mut ID3D10EffectType,
     fn GetDesc(
@@ -423,7 +426,8 @@ interface ID3D10EffectVectorVariable(ID3D10EffectVectorVariableVtbl): ID3D10Effe
     ) -> (),
 }}
 RIDL!{#[uuid(0x50666c24, 0xb82f, 0x4eed, 0xa1, 0x72, 0x5b, 0x6e, 0x7e, 0x85, 0x22, 0xe0)]
-interface ID3D10EffectMatrixVariable(ID3D10EffectMatrixVariableVtbl): ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
+interface ID3D10EffectMatrixVariable(ID3D10EffectMatrixVariableVtbl):
+    ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     fn IsValid() -> BOOL,
     fn GetType() -> *mut ID3D10EffectType,
     fn GetDesc(
@@ -505,7 +509,8 @@ interface ID3D10EffectMatrixVariable(ID3D10EffectMatrixVariableVtbl): ID3D10Effe
     ) -> (),
 }}
 RIDL!{#[uuid(0x71417501, 0x8df9, 0x4e0a, 0xa7, 0x8a, 0x25, 0x5f, 0x97, 0x56, 0xba, 0xff)]
-interface ID3D10EffectStringVariable(ID3D10EffectStringVariableVtbl): ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
+interface ID3D10EffectStringVariable(ID3D10EffectStringVariableVtbl):
+    ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     fn IsValid() -> BOOL,
     fn GetType() -> *mut ID3D10EffectType,
     fn GetDesc(
@@ -553,7 +558,8 @@ interface ID3D10EffectStringVariable(ID3D10EffectStringVariableVtbl): ID3D10Effe
     ) -> (),
 }}
 RIDL!{#[uuid(0xc0a7157b, 0xd872, 0x4b1d, 0x80, 0x73, 0xef, 0xc2, 0xac, 0xd4, 0xb1, 0xfc)]
-interface ID3D10EffectShaderResourceVariable(ID3D10EffectShaderResourceVariableVtbl): ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
+interface ID3D10EffectShaderResourceVariable(ID3D10EffectShaderResourceVariableVtbl):
+    ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     fn IsValid() -> BOOL,
     fn GetType() -> *mut ID3D10EffectType,
     fn GetDesc(
@@ -609,7 +615,8 @@ interface ID3D10EffectShaderResourceVariable(ID3D10EffectShaderResourceVariableV
     ) -> (),
 }}
 RIDL!{#[uuid(0x28ca0cc3, 0xc2c9, 0x40bb, 0xb5, 0x7f, 0x67, 0xb7, 0x37, 0x12, 0x2b, 0x17)]
-interface ID3D10EffectRenderTargetViewVariable(ID3D10EffectRenderTargetViewVariableVtbl): ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
+interface ID3D10EffectRenderTargetViewVariable(ID3D10EffectRenderTargetViewVariableVtbl):
+    ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     fn IsValid() -> BOOL,
     fn GetType() -> *mut ID3D10EffectType,
     fn GetDesc(
@@ -665,7 +672,8 @@ interface ID3D10EffectRenderTargetViewVariable(ID3D10EffectRenderTargetViewVaria
     ) -> (),
 }}
 RIDL!{#[uuid(0x3e02c918, 0xcc79, 0x4985, 0xb6, 0x22, 0x2d, 0x92, 0xad, 0x70, 0x16, 0x23)]
-interface ID3D10EffectDepthStencilViewVariable(ID3D10EffectDepthStencilViewVariableVtbl): ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
+interface ID3D10EffectDepthStencilViewVariable(ID3D10EffectDepthStencilViewVariableVtbl):
+    ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     fn IsValid() -> BOOL,
     fn GetType() -> *mut ID3D10EffectType,
     fn GetDesc(
@@ -721,7 +729,8 @@ interface ID3D10EffectDepthStencilViewVariable(ID3D10EffectDepthStencilViewVaria
     ) -> (),
 }}
 RIDL!{#[uuid(0x56648f4d, 0xcc8b, 0x4444, 0xa5, 0xad, 0xb5, 0xa3, 0xd7, 0x6e, 0x91, 0xb3)]
-interface ID3D10EffectConstantBuffer(ID3D10EffectConstantBufferVtbl): ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
+interface ID3D10EffectConstantBuffer(ID3D10EffectConstantBufferVtbl):
+    ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     fn IsValid() -> BOOL,
     fn GetType() -> *mut ID3D10EffectType,
     fn GetDesc(
@@ -782,7 +791,8 @@ STRUCT!{struct D3D10_EFFECT_SHADER_DESC {
     NumOutputSignatureEntries: UINT,
 }}
 RIDL!{#[uuid(0x80849279, 0xc799, 0x4797, 0x8c, 0x33, 0x04, 0x07, 0xa0, 0x7d, 0x9e, 0x06)]
-interface ID3D10EffectShaderVariable(ID3D10EffectShaderVariableVtbl): ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
+interface ID3D10EffectShaderVariable(ID3D10EffectShaderVariableVtbl):
+    ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     fn IsValid() -> BOOL,
     fn GetType() -> *mut ID3D10EffectType,
     fn GetDesc(
@@ -848,7 +858,8 @@ interface ID3D10EffectShaderVariable(ID3D10EffectShaderVariableVtbl): ID3D10Effe
     ) -> (),
 }}
 RIDL!{#[uuid(0x1fcd2294, 0xdf6d, 0x4eae, 0x86, 0xb3, 0x0e, 0x91, 0x60, 0xcf, 0xb0, 0x7b)]
-interface ID3D10EffectBlendVariable(ID3D10EffectBlendVariableVtbl): ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
+interface ID3D10EffectBlendVariable(ID3D10EffectBlendVariableVtbl):
+    ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     fn IsValid() -> BOOL,
     fn GetType() -> *mut ID3D10EffectType,
     fn GetDesc(
@@ -896,7 +907,8 @@ interface ID3D10EffectBlendVariable(ID3D10EffectBlendVariableVtbl): ID3D10Effect
     ) -> (),
 }}
 RIDL!{#[uuid(0xaf482368, 0x330a, 0x46a5, 0x9a, 0x5c, 0x01, 0xc7, 0x1a, 0xf2, 0x4c, 0x8d)]
-interface ID3D10EffectDepthStencilVariable(ID3D10EffectDepthStencilVariableVtbl): ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
+interface ID3D10EffectDepthStencilVariable(ID3D10EffectDepthStencilVariableVtbl):
+    ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     fn IsValid() -> BOOL,
     fn GetType() -> *mut ID3D10EffectType,
     fn GetDesc(
@@ -944,7 +956,8 @@ interface ID3D10EffectDepthStencilVariable(ID3D10EffectDepthStencilVariableVtbl)
     ) -> (),
 }}
 RIDL!{#[uuid(0x21af9f0e, 0x4d94, 0x4ea9, 0x97, 0x85, 0x2c, 0xb7, 0x6b, 0x8c, 0x0b, 0x34)]
-interface ID3D10EffectRasterizerVariable(ID3D10EffectRasterizerVariableVtbl): ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
+interface ID3D10EffectRasterizerVariable(ID3D10EffectRasterizerVariableVtbl):
+    ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     fn IsValid() -> BOOL,
     fn GetType() -> *mut ID3D10EffectType,
     fn GetDesc(
@@ -992,7 +1005,8 @@ interface ID3D10EffectRasterizerVariable(ID3D10EffectRasterizerVariableVtbl): ID
     ) -> (),
 }}
 RIDL!{#[uuid(0x6530d5c7, 0x07e9, 0x4271, 0xa4, 0x18, 0xe7, 0xce, 0x4b, 0xd1, 0xe4, 0x80)]
-interface ID3D10EffectSamplerVariable(ID3D10EffectSamplerVariableVtbl): ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
+interface ID3D10EffectSamplerVariable(ID3D10EffectSamplerVariableVtbl):
+    ID3D10EffectVariable(ID3D10EffectVariableVtbl) {
     fn IsValid() -> BOOL,
     fn GetType() -> *mut ID3D10EffectType,
     fn GetDesc(
@@ -1115,7 +1129,6 @@ STRUCT!{struct D3D10_EFFECT_DESC {
     SharedGlobalVariables: UINT,
     Techniques: UINT,
 }}
-
 RIDL!{#[uuid(0x51b0ca8b, 0xec0b, 0x4519, 0x87, 0x0d, 0x8e, 0xe1, 0xcb, 0x50, 0x17, 0xc7)]
 interface ID3D10Effect(ID3D10EffectVtbl): IUnknown(IUnknownVtbl) {
     fn IsValid() -> BOOL,
@@ -1166,7 +1179,6 @@ extern "system" {
         ppCompiledEffect: *mut *mut ID3D10Blob,
         ppErrors: *mut *mut ID3D10Blob,
     ) -> HRESULT;
-
     pub fn D3D10CreateEffectFromMemory(
         pData: *mut c_void,
         DataLength: SIZE_T,
@@ -1175,7 +1187,6 @@ extern "system" {
         pEffectPool: *mut ID3D10EffectPool,
         ppEffect: *mut *mut ID3D10Effect,
     ) -> HRESULT;
-
     pub fn D3D10CreateEffectPoolFromMemory(
         pData: *mut c_void,
         DataLength: SIZE_T,
@@ -1183,7 +1194,6 @@ extern "system" {
         pDevice: *mut ID3D10Device,
         pEffectPool: *mut *mut ID3D10EffectPool,
     ) -> HRESULT;
-
     pub fn D3D10DisassembleEffect(
         pEffect: *mut ID3D10Effect ,
         EnableColorCode: BOOL,

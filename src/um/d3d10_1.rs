@@ -3,15 +3,19 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
-use shared::minwindef::{DWORD, HMODULE, UINT, FLOAT, BOOL};
-use um::d3d10::{ID3D10BlendState, ID3D10BlendStateVtbl, D3D10_BUFFER_SRV, D3D10_TEX1D_SRV, D3D10_TEX1D_ARRAY_SRV, D3D10_TEX2D_SRV, D3D10_TEX2D_ARRAY_SRV, D3D10_TEX2DMS_SRV, D3D10_TEX2DMS_ARRAY_SRV, D3D10_TEX3D_SRV, D3D10_TEXCUBE_SRV, ID3D10Device, ID3D10DeviceVtbl, ID3D10ShaderResourceView, ID3D10ShaderResourceViewVtbl, ID3D10Resource, D3D10_BLEND, D3D10_BLEND_OP};
+use shared::basetsd::UINT8;
+use shared::dxgi::{DXGI_SWAP_CHAIN_DESC, IDXGIAdapter, IDXGISwapChain};
+use shared::dxgiformat::DXGI_FORMAT;
+use shared::minwindef::{BOOL, DWORD, FLOAT, HMODULE, UINT};
+use um::d3d10::{
+    D3D10_BLEND, D3D10_BLEND_OP, D3D10_BUFFER_SRV, D3D10_TEX1D_ARRAY_SRV, D3D10_TEX1D_SRV,
+    D3D10_TEX2DMS_ARRAY_SRV, D3D10_TEX2DMS_SRV, D3D10_TEX2D_ARRAY_SRV, D3D10_TEX2D_SRV,
+    D3D10_TEX3D_SRV, D3D10_TEXCUBE_SRV, ID3D10BlendState, ID3D10BlendStateVtbl, ID3D10Device,
+    ID3D10DeviceVtbl, ID3D10Resource, ID3D10ShaderResourceView, ID3D10ShaderResourceViewVtbl
+};
+use um::d3d10misc::D3D10_DRIVER_TYPE;
 use um::d3dcommon::D3D_SRV_DIMENSION;
 use um::winnt::HRESULT;
-use shared::dxgi::{IDXGIAdapter, DXGI_SWAP_CHAIN_DESC, IDXGISwapChain};
-use um::d3d10misc::D3D10_DRIVER_TYPE;
-use shared::basetsd::UINT8;
-use shared::dxgiformat::DXGI_FORMAT;
-
 pub const D3D10_1_DEFAULT_SAMPLE_MASK: DWORD = 0xffffffff;
 pub const D3D10_1_FLOAT16_FUSED_TOLERANCE_IN_ULP: FLOAT = 0.6;
 pub const D3D10_1_FLOAT32_TO_INTEGER_TOLERANCE_IN_ULP: FLOAT = 0.6;
@@ -87,7 +91,8 @@ STRUCT!{struct D3D10_SHADER_RESOURCE_VIEW_DESC1 {
     u: D3D10_SHADER_RESOURCE_VIEW_DESC1_u ,
 }}
 RIDL!{#[uuid(0x9b7e4c87, 0x342c, 0x4106, 0xa1, 0x9f, 0x4f, 0x27, 0x04, 0xf6, 0x89, 0xf0)]
-interface ID3D10ShaderResourceView1(ID3D10ShaderResourceView1Vtbl): ID3D10ShaderResourceView(ID3D10ShaderResourceViewVtbl) {
+interface ID3D10ShaderResourceView1(ID3D10ShaderResourceView1Vtbl):
+    ID3D10ShaderResourceView(ID3D10ShaderResourceViewVtbl) {
     fn GetDesc1(
         pDesc: *mut D3D10_SHADER_RESOURCE_VIEW_DESC1,
     ) -> (),
