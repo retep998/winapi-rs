@@ -14,7 +14,8 @@ use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::wdbgexts::{PWINDBG_EXTENSION_APIS32, PWINDBG_EXTENSION_APIS64};
 use um::winbase::{CREATE_UNICODE_ENVIRONMENT, STACK_SIZE_PARAM_IS_A_RESERVATION};
 use um::winnt::{
-    CHAR, EXCEPTION_RECORD64, PEXCEPTION_RECORD64, PIMAGE_NT_HEADERS64, PMEMORY_BASIC_INFORMATION64,
+    CHAR, EXCEPTION_RECORD64, PEXCEPTION_RECORD64, PIMAGE_NT_HEADERS64,
+    PMEMORY_BASIC_INFORMATION64,
 };
 use vc::vadefs::va_list;
 pub const ERROR_DBG_CANCELLED: DWORD = 0xC00004C7;
@@ -1063,7 +1064,7 @@ pub const DEBUG_ENGOPT_IGNORE_DBGHELP_VERSION: ULONG = 0x00000001;
 pub const DEBUG_ENGOPT_IGNORE_EXTENSION_VERSIONS: ULONG = 0x00000002;
 pub const DEBUG_ENGOPT_ALLOW_NETWORK_PATHS: ULONG = 0x00000004;
 pub const DEBUG_ENGOPT_DISALLOW_NETWORK_PATHS: ULONG = 0x00000008;
-pub const DEBUG_ENGOPT_NETWORK_PATHS: ULONG = (0x00000004 | 0x00000008);
+pub const DEBUG_ENGOPT_NETWORK_PATHS: ULONG = 0x00000004 | 0x00000008;
 pub const DEBUG_ENGOPT_IGNORE_LOADER_EXCEPTIONS: ULONG = 0x00000010;
 pub const DEBUG_ENGOPT_INITIAL_BREAK: ULONG = 0x00000020;
 pub const DEBUG_ENGOPT_INITIAL_MODULE_BREAK: ULONG = 0x00000040;
@@ -2890,7 +2891,8 @@ pub const DEBUG_OUTCBF_COMBINED_EXPLICIT_FLUSH: ULONG = 0x00000001;
 pub const DEBUG_OUTCBF_DML_HAS_TAGS: ULONG = 0x00000002;
 pub const DEBUG_OUTCBF_DML_HAS_SPECIAL_CHARACTERS: ULONG = 0x00000004;
 RIDL!(#[uuid(0x67721fe9, 0x56d2, 0x4a44, 0xa3, 0x25, 0x2b, 0x65, 0x51, 0x3c, 0xe6, 0xeb)]
-interface IDebugOutputCallbacks2(IDebugOutputCallbacks2Vtbl): IDebugOutputCallbacks(IDebugOutputCallbacksVtbl) {
+interface IDebugOutputCallbacks2(IDebugOutputCallbacks2Vtbl):
+    IDebugOutputCallbacks(IDebugOutputCallbacksVtbl) {
     fn GetInterestMask(Mask: PULONG,) -> HRESULT,
     fn Output2(
         Which: ULONG,
@@ -3227,7 +3229,7 @@ pub const DEBUG_SCOPE_GROUP_LOCALS: ULONG = 0x00000002;
 pub const DEBUG_SCOPE_GROUP_ALL: ULONG = 0x00000003;
 pub const DEBUG_SCOPE_GROUP_BY_DATAMODEL: ULONG = 0x00000004;
 pub const DEBUG_SCOPE_GROUP_VALID_FLAGS: ULONG =
-    (DEBUG_SCOPE_GROUP_ALL | DEBUG_SCOPE_GROUP_BY_DATAMODEL);
+    DEBUG_SCOPE_GROUP_ALL | DEBUG_SCOPE_GROUP_BY_DATAMODEL;
 pub const DEBUG_OUTTYPE_DEFAULT: ULONG = 0x00000000;
 pub const DEBUG_OUTTYPE_NO_INDENT: ULONG = 0x00000001;
 pub const DEBUG_OUTTYPE_NO_OFFSET: ULONG = 0x00000002;
@@ -3235,7 +3237,7 @@ pub const DEBUG_OUTTYPE_VERBOSE: ULONG = 0x00000004;
 pub const DEBUG_OUTTYPE_COMPACT_OUTPUT: ULONG = 0x00000008;
 #[inline]
 pub fn DEBUG_OUTTYPE_RECURSION_LEVEL(Max: ULONG) -> ULONG {
-    (((Max) & 0xf) << 4)
+    (Max & 0xf) << 4
 }
 pub const DEBUG_OUTTYPE_ADDRESS_OF_FIELD: ULONG = 0x00010000;
 pub const DEBUG_OUTTYPE_ADDRESS_AT_END: ULONG = 0x00020000;
@@ -4071,7 +4073,8 @@ interface IDebugSystemObjects(IDebugSystemObjectsVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
 });
 RIDL!(#[uuid(0x0ae9f5ff, 0x1852, 0x4679, 0xb0, 0x55, 0x49, 0x4b, 0xee, 0x64, 0x07, 0xee)]
-interface IDebugSystemObjects2(IDebugSystemObjects2Vtbl): IDebugSystemObjects(IDebugSystemObjectsVtbl) {
+interface IDebugSystemObjects2(IDebugSystemObjects2Vtbl):
+    IDebugSystemObjects(IDebugSystemObjectsVtbl) {
     fn GetCurrentProcessUpTime(UpTime: PULONG,) -> HRESULT,
     fn GetImplicitThreadDataOffset(Offset: PULONG64,) -> HRESULT,
     fn SetImplicitThreadDataOffset(Offset: ULONG64,) -> HRESULT,
@@ -4079,7 +4082,8 @@ interface IDebugSystemObjects2(IDebugSystemObjects2Vtbl): IDebugSystemObjects(ID
     fn SetImplicitProcessDataOffset(Offset: ULONG64,) -> HRESULT,
 });
 RIDL!(#[uuid(0xe9676e2f, 0xe286, 0x4ea3, 0xb0, 0xf9, 0xdf, 0xe5, 0xd9, 0xfc, 0x33, 0x0e)]
-interface IDebugSystemObjects3(IDebugSystemObjects3Vtbl): IDebugSystemObjects2(IDebugSystemObjects2Vtbl) {
+interface IDebugSystemObjects3(IDebugSystemObjects3Vtbl):
+    IDebugSystemObjects2(IDebugSystemObjects2Vtbl) {
     fn GetEventSystem(Id: PULONG,) -> HRESULT,
     fn GetCurrentSystemId(Id: PULONG,) -> HRESULT,
     fn SetCurrentSystemId(Id: ULONG,) -> HRESULT,
@@ -4108,7 +4112,8 @@ interface IDebugSystemObjects3(IDebugSystemObjects3Vtbl): IDebugSystemObjects2(I
     ) -> HRESULT,
 });
 RIDL!(#[uuid(0x489468e6, 0x7d0f, 0x4af5, 0x87, 0xab, 0x25, 0x20, 0x74, 0x54, 0xd5, 0x53)]
-interface IDebugSystemObjects4(IDebugSystemObjects4Vtbl): IDebugSystemObjects3(IDebugSystemObjects3Vtbl) {
+interface IDebugSystemObjects4(IDebugSystemObjects4Vtbl):
+    IDebugSystemObjects3(IDebugSystemObjects3Vtbl) {
     fn GetCurrentProcessExecutableNameWide(
         Buffer: PWSTR,
         BufferSize: ULONG,
@@ -4124,4 +4129,3 @@ pub const DEBUG_COMMAND_EXCEPTION_ID: ULONG = 0xdbe00dbe;
 pub const DEBUG_CMDEX_INVALID: ULONG = 0x00000000;
 pub const DEBUG_CMDEX_ADD_EVENT_STRING: ULONG = 0x00000001;
 pub const DEBUG_CMDEX_RESET_EVENT_STRINGS: ULONG = 0x00000002;
-
