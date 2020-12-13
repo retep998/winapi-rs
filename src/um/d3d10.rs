@@ -262,85 +262,85 @@ STRUCT!{struct D3D10_SO_DECLARATION_ENTRY {
     OutputSlot: BYTE,
 }}
 STRUCT!{struct D3D10_VIEWPORT {
-	TopLeftX: INT,
-	TopLeftY: INT,
-	Width: UINT,
-	Height: UINT,
-	MinDepth: FLOAT,
-	MaxDepth: FLOAT,
+    TopLeftX: INT,
+    TopLeftY: INT,
+    Width: UINT,
+    Height: UINT,
+    MinDepth: FLOAT,
+    MaxDepth: FLOAT,
 }}
 ENUM!{enum D3D10_RESOURCE_DIMENSION {
     D3D10_RESOURCE_DIMENSION_UNKNOWN = 0,
-	D3D10_RESOURCE_DIMENSION_BUFFER	= 1,
-	D3D10_RESOURCE_DIMENSION_TEXTURE1D = 2,
-	D3D10_RESOURCE_DIMENSION_TEXTURE2D = 3,
-	D3D10_RESOURCE_DIMENSION_TEXTURE3D = 4,
+    D3D10_RESOURCE_DIMENSION_BUFFER	= 1,
+    D3D10_RESOURCE_DIMENSION_TEXTURE1D = 2,
+    D3D10_RESOURCE_DIMENSION_TEXTURE2D = 3,
+    D3D10_RESOURCE_DIMENSION_TEXTURE3D = 4,
 }}
 pub type D3D10_SRV_DIMENSION = D3D_SRV_DIMENSION;
 ENUM!{enum D3D10_DSV_DIMENSION {
-	D3D10_DSV_DIMENSION_UNKNOWN	= 0,
-	D3D10_DSV_DIMENSION_TEXTURE1D = 1,
-	D3D10_DSV_DIMENSION_TEXTURE1DARRAY = 2,
-	D3D10_DSV_DIMENSION_TEXTURE2D = 3,
-	D3D10_DSV_DIMENSION_TEXTURE2DARRAY = 4,
-	D3D10_DSV_DIMENSION_TEXTURE2DMS	= 5,
-	D3D10_DSV_DIMENSION_TEXTURE2DMSARRAY = 6,
+    D3D10_DSV_DIMENSION_UNKNOWN	= 0,
+    D3D10_DSV_DIMENSION_TEXTURE1D = 1,
+    D3D10_DSV_DIMENSION_TEXTURE1DARRAY = 2,
+    D3D10_DSV_DIMENSION_TEXTURE2D = 3,
+    D3D10_DSV_DIMENSION_TEXTURE2DARRAY = 4,
+    D3D10_DSV_DIMENSION_TEXTURE2DMS	= 5,
+    D3D10_DSV_DIMENSION_TEXTURE2DMSARRAY = 6,
 }}
 ENUM!{enum D3D10_RTV_DIMENSION {
-	D3D10_RTV_DIMENSION_UNKNOWN = 0,
-	D3D10_RTV_DIMENSION_BUFFER = 1,
-	D3D10_RTV_DIMENSION_TEXTURE1D = 2,
-	D3D10_RTV_DIMENSION_TEXTURE1DARRAY = 3,
-	D3D10_RTV_DIMENSION_TEXTURE2D = 4,
-	D3D10_RTV_DIMENSION_TEXTURE2DARRAY = 5,
-	D3D10_RTV_DIMENSION_TEXTURE2DMS = 6,
-	D3D10_RTV_DIMENSION_TEXTURE2DMSARRAY = 7,
-	D3D10_RTV_DIMENSION_TEXTURE3D = 8,
+    D3D10_RTV_DIMENSION_UNKNOWN = 0,
+    D3D10_RTV_DIMENSION_BUFFER = 1,
+    D3D10_RTV_DIMENSION_TEXTURE1D = 2,
+    D3D10_RTV_DIMENSION_TEXTURE1DARRAY = 3,
+    D3D10_RTV_DIMENSION_TEXTURE2D = 4,
+    D3D10_RTV_DIMENSION_TEXTURE2DARRAY = 5,
+    D3D10_RTV_DIMENSION_TEXTURE2DMS = 6,
+    D3D10_RTV_DIMENSION_TEXTURE2DMSARRAY = 7,
+    D3D10_RTV_DIMENSION_TEXTURE3D = 8,
 }}
 ENUM!{enum D3D10_USAGE {
-	D3D10_USAGE_DEFAULT = 0,
-	D3D10_USAGE_IMMUTABLE = 1,
-	D3D10_USAGE_DYNAMIC = 2,
-	D3D10_USAGE_STAGING = 3,
+    D3D10_USAGE_DEFAULT = 0,
+    D3D10_USAGE_IMMUTABLE = 1,
+    D3D10_USAGE_DYNAMIC = 2,
+    D3D10_USAGE_STAGING = 3,
 }}
 ENUM!{enum D3D10_BIND_FLAG {
-	D3D10_BIND_VERTEX_BUFFER = 0x1,
-	D3D10_BIND_INDEX_BUFFER = 0x2,
-	D3D10_BIND_CONSTANT_BUFFER = 0x4,
-	D3D10_BIND_SHADER_RESOURCE = 0x8,
-	D3D10_BIND_STREAM_OUTPUT = 0x10,
-	D3D10_BIND_RENDER_TARGET = 0x20,
-	D3D10_BIND_DEPTH_STENCIL = 0x40,
+    D3D10_BIND_VERTEX_BUFFER = 0x1,
+    D3D10_BIND_INDEX_BUFFER = 0x2,
+    D3D10_BIND_CONSTANT_BUFFER = 0x4,
+    D3D10_BIND_SHADER_RESOURCE = 0x8,
+    D3D10_BIND_STREAM_OUTPUT = 0x10,
+    D3D10_BIND_RENDER_TARGET = 0x20,
+    D3D10_BIND_DEPTH_STENCIL = 0x40,
 }}
 ENUM!{enum D3D10_CPU_ACCESS_FLAG {
-	D3D10_CPU_ACCESS_WRITE = 0x10000,
-	D3D10_CPU_ACCESS_READ = 0x20000,
+    D3D10_CPU_ACCESS_WRITE = 0x10000,
+    D3D10_CPU_ACCESS_READ = 0x20000,
 }}
 ENUM!{enum D3D10_MAP {
-	D3D10_MAP_READ = 1,
-	D3D10_MAP_WRITE = 2,
-	D3D10_MAP_READ_WRITE = 3,
-	D3D10_MAP_WRITE_DISCARD = 4,
-	D3D10_MAP_WRITE_NO_OVERWRITE = 5,
+    D3D10_MAP_READ = 1,
+    D3D10_MAP_WRITE = 2,
+    D3D10_MAP_READ_WRITE = 3,
+    D3D10_MAP_WRITE_DISCARD = 4,
+    D3D10_MAP_WRITE_NO_OVERWRITE = 5,
 }}
 ENUM!{enum D3D10_MAP_FLAG {
-	D3D10_MAP_FLAG_DO_NOT_WAIT = 0x100000,
+    D3D10_MAP_FLAG_DO_NOT_WAIT = 0x100000,
 }}
 ENUM!{enum D3D10_RAISE_FLAG {
-	D3D10_RAISE_FLAG_DRIVER_INTERNAL_ERROR = 0x1,
+    D3D10_RAISE_FLAG_DRIVER_INTERNAL_ERROR = 0x1,
 }}
 ENUM!{enum D3D10_CLEAR_FLAG {
-	D3D10_CLEAR_DEPTH = 0x1,
-	D3D10_CLEAR_STENCIL = 0x2,
+    D3D10_CLEAR_DEPTH = 0x1,
+    D3D10_CLEAR_STENCIL = 0x2,
 }}
 pub type D3D10_RECT = RECT;
 STRUCT!{struct D3D10_BOX {
-	left: UINT,
-	top: UINT,
-	front: UINT,
-	right: UINT,
-	bottom: UINT,
-	back: UINT,
+    left: UINT,
+    top: UINT,
+    front: UINT,
+    right: UINT,
+    bottom: UINT,
+    back: UINT,
 }}
 RIDL!{#[uuid(0x9b7e4c00, 0x342c, 0x4106, 0xa1, 0x9f, 0x4f, 0x27, 0x04, 0xf6, 0x89, 0xf0)]
 interface ID3D10DeviceChild(ID3D10DeviceChildVtbl): IUnknown(IUnknownVtbl) {
@@ -462,16 +462,16 @@ interface ID3D10BlendState(ID3D10BlendStateVtbl): ID3D10DeviceChild(ID3D10Device
     ) -> (),
 }}
 STRUCT!{struct D3D10_RASTERIZER_DESC {
-	FillMode: D3D10_FILL_MODE,
-	CullMode: D3D10_CULL_MODE,
-	FrontCounterClockwise: BOOL,
-	DepthBias: INT,
-	DepthBiasClamp: FLOAT,
-	SlopeScaledDepthBias: FLOAT,
-	DepthClipEnable: BOOL,
-	ScissorEnable: BOOL,
-	MultisampleEnable: BOOL,
-	AntialiasedLineEnable: BOOL,
+    FillMode: D3D10_FILL_MODE,
+    CullMode: D3D10_CULL_MODE,
+    FrontCounterClockwise: BOOL,
+    DepthBias: INT,
+    DepthBiasClamp: FLOAT,
+    SlopeScaledDepthBias: FLOAT,
+    DepthClipEnable: BOOL,
+    ScissorEnable: BOOL,
+    MultisampleEnable: BOOL,
+    AntialiasedLineEnable: BOOL,
 }}
 RIDL!{#[uuid(0xa2a07292, 0x89af, 0x4345, 0xbe, 0x2e, 0xc5, 0x3d, 0x9f, 0xbb, 0x6e, 0x9f)]
 interface ID3D10RasterizerState(ID3D10RasterizerStateVtbl):
@@ -481,9 +481,9 @@ interface ID3D10RasterizerState(ID3D10RasterizerStateVtbl):
     ) -> (),
 }}
 STRUCT!{struct D3D10_SUBRESOURCE_DATA {
-	pSysMem: *mut c_void,
-	SysMemPitch: UINT,
-	SysMemSlicePitch: UINT,
+    pSysMem: *mut c_void,
+    SysMemPitch: UINT,
+    SysMemSlicePitch: UINT,
 }}
 RIDL!{#[uuid(0x9b7e4c01, 0x342c, 0x4106, 0xa1, 0x9f, 0x4f, 0x27, 0x04, 0xf6, 0x89, 0xf0)]
 interface ID3D10Resource(ID3D10ResourceVtbl): ID3D10DeviceChild(ID3D10DeviceChildVtbl) {
@@ -496,11 +496,11 @@ interface ID3D10Resource(ID3D10ResourceVtbl): ID3D10DeviceChild(ID3D10DeviceChil
     fn GetEvictionPriority() -> UINT,
 }}
 STRUCT!{struct D3D10_BUFFER_DESC {
-	ByteWidth: UINT,
-	Usage: D3D10_USAGE,
-	BindFlags: UINT,
-	CPUAccessFlags: UINT,
-	MiscFlags: UINT,
+    ByteWidth: UINT,
+    Usage: D3D10_USAGE,
+    BindFlags: UINT,
+    CPUAccessFlags: UINT,
+    MiscFlags: UINT,
 }}
 RIDL!{#[uuid(0x9b7e4c02, 0x342c, 0x4106, 0xa1, 0x9f, 0x4f, 0x27, 0x04, 0xf6, 0x89, 0xf0)]
 interface ID3D10Buffer(ID3D10BufferVtbl): ID3D10Resource(ID3D10ResourceVtbl) {
@@ -515,14 +515,14 @@ interface ID3D10Buffer(ID3D10BufferVtbl): ID3D10Resource(ID3D10ResourceVtbl) {
     ) -> (),
 }}
 STRUCT!{struct D3D10_TEXTURE1D_DESC {
-	Width: UINT,
-	MipLevels: UINT,
-	ArraySize: UINT,
-	Format: DXGI_FORMAT,
-	Usage: D3D10_USAGE,
-	BindFlags: UINT,
-	CPUAccessFlags: UINT,
-	MiscFlags: UINT,
+    Width: UINT,
+    MipLevels: UINT,
+    ArraySize: UINT,
+    Format: DXGI_FORMAT,
+    Usage: D3D10_USAGE,
+    BindFlags: UINT,
+    CPUAccessFlags: UINT,
+    MiscFlags: UINT,
 }}
 RIDL!{#[uuid(0x9b7e4c03, 0x342c, 0x4106, 0xa1, 0x9f, 0x4f, 0x27, 0x04, 0xf6, 0x89, 0xf0)]
 interface ID3D10Texture1D(ID3D10Texture1DVtbl): ID3D10Resource(ID3D10ResourceVtbl) {
@@ -549,8 +549,8 @@ STRUCT!{struct D3D10_TEXTURE2D_DESC  {
     MiscFlags: UINT,
 }}
 STRUCT!{struct D3D10_MAPPED_TEXTURE2D {
-	pData: *mut c_void,
-	RowPitch: UINT,
+    pData: *mut c_void,
+    RowPitch: UINT,
 }}
 RIDL!{#[uuid(0x9b7e4c04, 0x342c, 0x4106, 0xa1, 0x9f, 0x4f, 0x27, 0x04, 0xf6, 0x89, 0xf0)]
 interface ID3D10Texture2D(ID3D10Texture2DVtbl): ID3D10Resource(ID3D10ResourceVtbl) {
@@ -566,20 +566,20 @@ interface ID3D10Texture2D(ID3D10Texture2DVtbl): ID3D10Resource(ID3D10ResourceVtb
     ) -> (),
 }}
 STRUCT!{struct D3D10_TEXTURE3D_DESC {
-	Width: UINT,
-	Height: UINT,
-	Depth: UINT,
-	MipLevels: UINT,
-	Format: DXGI_FORMAT,
-	Usage: D3D10_USAGE,
-	BindFlags: UINT,
-	CPUAccessFlags: UINT,
-	MiscFlags: UINT,
+    Width: UINT,
+    Height: UINT,
+    Depth: UINT,
+    MipLevels: UINT,
+    Format: DXGI_FORMAT,
+    Usage: D3D10_USAGE,
+    BindFlags: UINT,
+    CPUAccessFlags: UINT,
+    MiscFlags: UINT,
 }}
 STRUCT!{struct D3D10_MAPPED_TEXTURE3D {
-	pData: *mut c_void,
-	RowPitch: UINT,
-	DepthPitch: UINT,
+    pData: *mut c_void,
+    RowPitch: UINT,
+    DepthPitch: UINT,
 }}
 RIDL!{#[uuid(0x9b7e4c05, 0x342c, 0x4106, 0xa1, 0x9f, 0x4f, 0x27, 0x04, 0xf6, 0x89, 0xf0)]
 interface ID3D10Texture3D(ID3D10Texture3DVtbl): ID3D10Resource(ID3D10ResourceVtbl) {
@@ -595,12 +595,12 @@ interface ID3D10Texture3D(ID3D10Texture3DVtbl): ID3D10Resource(ID3D10ResourceVtb
     ) -> (),
 }}
 ENUM!{enum D3D10_TEXTURECUBE_FACE {
-	D3D10_TEXTURECUBE_FACE_POSITIVE_X = 0,
-	D3D10_TEXTURECUBE_FACE_NEGATIVE_X = 1,
-	D3D10_TEXTURECUBE_FACE_POSITIVE_Y = 2,
-	D3D10_TEXTURECUBE_FACE_NEGATIVE_Y = 3,
-	D3D10_TEXTURECUBE_FACE_POSITIVE_Z = 4,
-	D3D10_TEXTURECUBE_FACE_NEGATIVE_Z = 5,
+    D3D10_TEXTURECUBE_FACE_POSITIVE_X = 0,
+    D3D10_TEXTURECUBE_FACE_NEGATIVE_X = 1,
+    D3D10_TEXTURECUBE_FACE_POSITIVE_Y = 2,
+    D3D10_TEXTURECUBE_FACE_NEGATIVE_Y = 3,
+    D3D10_TEXTURECUBE_FACE_POSITIVE_Z = 4,
+    D3D10_TEXTURECUBE_FACE_NEGATIVE_Z = 5,
 }}
 RIDL!{#[uuid(0xc902b03f, 0x60a7, 0x49ba, 0x99, 0x36, 0x2a, 0x3a, 0xb3, 0x7a, 0x7e, 0x33)]
 interface ID3D10View(ID3D10ViewVtbl): ID3D10DeviceChild(ID3D10DeviceChildVtbl) {
