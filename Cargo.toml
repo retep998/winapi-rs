@@ -32,6 +32,7 @@ std = []
 d3dkmthk = []
 #mmos
 #shared
+afunix = []
 basetsd = []
 bcrypt = []
 bthdef = []

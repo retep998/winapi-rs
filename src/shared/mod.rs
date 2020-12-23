@@ -4,6 +4,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! Headers shared between user mode and kernel mode
+#[cfg(feature = "afunix")] pub mod afunix;
 #[cfg(feature = "basetsd")] pub mod basetsd;
 #[cfg(feature = "bcrypt")] pub mod bcrypt;
 #[cfg(feature = "bthdef")] pub mod bthdef;
