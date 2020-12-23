@@ -295,7 +295,10 @@ extern "system" {
         byteOffset: UINT64,
         length: UINT32,
     ) -> HRESULT;
-    pub fn PrjGetOnDiskFileState(destinationFileName: PCWSTR, fileState: *mut PRJ_FILE_STATE);
+    pub fn PrjGetOnDiskFileState(
+        destinationFileName: PCWSTR,
+        fileState: *mut PRJ_FILE_STATE
+    ) -> HRESULT;
     pub fn PrjAllocateAlignedBuffer(
         namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT,
         size: size_t,
