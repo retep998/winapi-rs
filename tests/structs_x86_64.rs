@@ -1,6 +1,12 @@
 #![cfg(all(windows, target_arch = "x86_64"))]
 extern crate winapi;
 use std::mem::{size_of, align_of};
+#[cfg(feature = "afunix")] #[test]
+fn shared_afunix() {
+    use winapi::shared::afunix::*;
+    assert_eq!(size_of::<SOCKADDR_UN>(), 110);
+    assert_eq!(align_of::<SOCKADDR_UN>(), 2);
+}
 #[cfg(feature = "bcrypt")] #[test]
 fn shared_bcrypt() {
     use winapi::shared::bcrypt::*;

@@ -12,6 +12,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("d3dkmthk", &["basetsd", "d3dukmdt", "minwindef", "ntdef", "windef"], &[]),
     // mmos
     // shared
+    ("afunix", &["minwindef", "winnt", "ws2def"], &[]),
     ("basetsd", &[], &[]),
     ("bcrypt", &["minwindef", "winnt"], &["bcrypt"]),
     ("bthdef", &["bthsdpdef", "guiddef", "minwindef", "ntdef"], &[]),
