@@ -23,9 +23,9 @@ winapi-i686-pc-windows-gnu = { version = "0.4", path = "i686" }
 winapi-x86_64-pc-windows-gnu = { version = "0.4", path = "x86_64" }
 
 [features]
-external-lib = []
 debug = ["impl-debug"]
 everything = []
+external-lib = []
 impl-debug = []
 impl-default = []
 std = []
