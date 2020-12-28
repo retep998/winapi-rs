@@ -515,7 +515,7 @@ fn try_everything() {
     graph.check_everything();
     graph.resolve_dependencies();
     graph.emit_features();
-    //graph.emit_libraries();
+    graph.emit_libraries();
 }
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
