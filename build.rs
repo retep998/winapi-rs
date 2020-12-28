@@ -469,25 +469,27 @@ impl Graph {
         }
     }
     fn emit_libraries(&self) {
-        let mut libs = self.0.iter().filter(|&(_, header)| {
-            header.included.get()
-        }).flat_map(|(_, header)| {
-            header.libraries.iter()
-        }).collect::<Vec<_>>();
-        libs.sort();
-        libs.dedup();
-        // FIXME Temporary hacks until build script is redesigned.
-        libs.retain(|&&lib| match &*var("TARGET").unwrap() {
-            "aarch64-pc-windows-msvc" | "aarch64-uwp-windows-msvc" | "thumbv7a-pc-windows-msvc" => {
-                if lib == "opengl32" { false }
-                else { true }
-            },
-            _ => true,
-        });
-        let prefix = library_prefix();
-        let kind = library_kind();
-        for lib in libs {
-            println!("cargo:rustc-link-lib={}={}{}", kind, prefix, lib);
+        if var("CARGO_FEATURE_EXTERNAL_LIB").is_err() {
+            let mut libs = self.0.iter().filter(|&(_, header)| {
+                header.included.get()
+            }).flat_map(|(_, header)| {
+                header.libraries.iter()
+            }).collect::<Vec<_>>();
+            libs.sort();
+            libs.dedup();
+            // FIXME Temporary hacks until build script is redesigned.
+            libs.retain(|&&lib| match &*var("TARGET").unwrap() {
+                "aarch64-pc-windows-msvc" | "aarch64-uwp-windows-msvc" | "thumbv7a-pc-windows-msvc" => {
+                    if lib == "opengl32" { false }
+                    else { true }
+                },
+                _ => true,
+            });
+            let prefix = library_prefix();
+            let kind = library_kind();
+            for lib in libs {
+                println!("cargo:rustc-link-lib={}={}{}", kind, prefix, lib);
+            }
         }
     }
 }
