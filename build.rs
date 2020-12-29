@@ -341,7 +341,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("tlhelp32", &["basetsd", "minwindef", "winnt"], &["kernel32"]),
     ("uiautomationclient", &["guiddef", "minwindef", "oaidl", "oleacc", "uiautomationcore", "unknwnbase", "windef", "winerror", "winnt", "wtypes"], &[]),
     ("uiautomationcore", &["guiddef", "minwindef", "oaidl", "oleacc", "unknwnbase", "windef", "winerror", "winnt", "wtypes"], &[]),
-    ("uiautomationcoreapi", &["guiddef", "minwindef", "oaidl", "oleacc", "uiautomationclient", "uiautomationcore", "unknwnbase", "windef", "winerror", "winnt", "wtypes"], &[]),
+    ("uiautomationcoreapi", &["guiddef", "minwindef", "oaidl", "oleacc", "uiautomationclient", "uiautomationcore", "unknwnbase", "windef", "winerror", "winnt", "wtypes"], &["uiautomationcore"]),
     ("unknwnbase", &["guiddef", "minwindef", "winnt"], &[]),
     ("urlhist", &["docobj", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
     ("urlmon", &["minwindef", "unknwnbase", "winnt"], &[]),
