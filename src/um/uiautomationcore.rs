@@ -381,7 +381,7 @@ interface IRawElementProviderSimple(IRawElementProviderSimpleVtbl): IUnknown(IUn
     ) -> HRESULT,
     fn GetPropertyValue(
         propertyId: PROPERTYID,
-        pRetVal: *mut *mut VARIANT,
+        pRetVal: *mut VARIANT,
     ) -> HRESULT,
     fn get_HostRawElementProvider(
         pRetVal: *mut *mut IRawElementProviderSimple,
