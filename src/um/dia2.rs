@@ -2,7 +2,7 @@ use shared::guiddef::GUID;
 use shared::ntdef::{HRESULT, LPCWSTR};
 use shared::wtypes::BSTR;
 use um::oaidl::VARIANT;
-use um::unknwnbase::{LPUNKNOWN, IUnknown, IUnknownVtbl};
+use um::unknwnbase::{IUnknown, IUnknownVtbl, LPUNKNOWN};
 // Implements IDiaDataSource
 RIDL!{#[uuid(0xe6756135, 0x1e65, 0x4d17, 0x85, 0x76, 0x61, 0x07, 0x61, 0x39, 0x8c, 0x3c)]
 class DiaSource; }
