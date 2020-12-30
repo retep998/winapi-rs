@@ -29,6 +29,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("devguid", &[], &[]),
     ("devpkey", &["devpropdef"], &[]),
     ("devpropdef", &["guiddef", "minwindef", "winnt"], &[]),
+    ("dia2", &["guiddef", "oaidl", "ntdef", "unknwnbase", "wtypes"], &[]),
     ("dinputd", &[], &[]),
     ("dxgi", &["basetsd", "dxgiformat", "dxgitype", "guiddef", "minwindef", "unknwnbase", "windef", "winnt"], &["dxgi"]),
     ("dxgi1_2", &["basetsd", "dxgi", "dxgiformat", "dxgitype", "guiddef", "minwinbase", "minwindef", "unknwnbase", "windef", "winnt"], &[]),
