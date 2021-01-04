@@ -563,6 +563,58 @@ fn shared_evntrace() {
     assert_eq!(size_of::<ETW_TRACE_PARTITION_INFORMATION>(), 48);
     assert_eq!(align_of::<ETW_TRACE_PARTITION_INFORMATION>(), 8);
 }
+#[cfg(feature = "fltuserstructures")] #[test]
+fn shared_fltuserstructures() {
+    use winapi::shared::fltuserstructures::*;
+    assert_eq!(size_of::<FLT_FILESYSTEM_TYPE>(), 4);
+    assert_eq!(align_of::<FLT_FILESYSTEM_TYPE>(), 4);
+    assert_eq!(size_of::<FILTER_INFORMATION_CLASS>(), 4);
+    assert_eq!(align_of::<FILTER_INFORMATION_CLASS>(), 4);
+    assert_eq!(size_of::<FILTER_FULL_INFORMATION>(), 16);
+    assert_eq!(align_of::<FILTER_FULL_INFORMATION>(), 4);
+    assert_eq!(size_of::<FILTER_AGGREGATE_BASIC_INFORMATION_Type_MiniFilter>(), 16);
+    assert_eq!(align_of::<FILTER_AGGREGATE_BASIC_INFORMATION_Type_MiniFilter>(), 4);
+    assert_eq!(size_of::<FILTER_AGGREGATE_BASIC_INFORMATION_Type_LegacyFilter>(), 4);
+    assert_eq!(align_of::<FILTER_AGGREGATE_BASIC_INFORMATION_Type_LegacyFilter>(), 2);
+    assert_eq!(size_of::<FILTER_AGGREGATE_BASIC_INFORMATION_Type>(), 16);
+    assert_eq!(align_of::<FILTER_AGGREGATE_BASIC_INFORMATION_Type>(), 4);
+    assert_eq!(size_of::<FILTER_AGGREGATE_BASIC_INFORMATION>(), 24);
+    assert_eq!(align_of::<FILTER_AGGREGATE_BASIC_INFORMATION>(), 4);
+    assert_eq!(size_of::<FILTER_AGGREGATE_STANDARD_INFORMATION_Type_MiniFilter>(), 20);
+    assert_eq!(align_of::<FILTER_AGGREGATE_STANDARD_INFORMATION_Type_MiniFilter>(), 4);
+    assert_eq!(size_of::<FILTER_AGGREGATE_STANDARD_INFORMATION_Type_LegacyFilter>(), 12);
+    assert_eq!(align_of::<FILTER_AGGREGATE_STANDARD_INFORMATION_Type_LegacyFilter>(), 4);
+    assert_eq!(size_of::<FILTER_AGGREGATE_STANDARD_INFORMATION_Type>(), 20);
+    assert_eq!(align_of::<FILTER_AGGREGATE_STANDARD_INFORMATION_Type>(), 4);
+    assert_eq!(size_of::<FILTER_AGGREGATE_STANDARD_INFORMATION>(), 28);
+    assert_eq!(align_of::<FILTER_AGGREGATE_STANDARD_INFORMATION>(), 4);
+    assert_eq!(size_of::<FILTER_VOLUME_INFORMATION_CLASS>(), 4);
+    assert_eq!(align_of::<FILTER_VOLUME_INFORMATION_CLASS>(), 4);
+    assert_eq!(size_of::<FILTER_VOLUME_BASIC_INFORMATION>(), 4);
+    assert_eq!(align_of::<FILTER_VOLUME_BASIC_INFORMATION>(), 2);
+    assert_eq!(size_of::<FILTER_VOLUME_STANDARD_INFORMATION>(), 20);
+    assert_eq!(align_of::<FILTER_VOLUME_STANDARD_INFORMATION>(), 4);
+    assert_eq!(size_of::<INSTANCE_INFORMATION_CLASS>(), 4);
+    assert_eq!(align_of::<INSTANCE_INFORMATION_CLASS>(), 4);
+    assert_eq!(size_of::<INSTANCE_BASIC_INFORMATION>(), 8);
+    assert_eq!(align_of::<INSTANCE_BASIC_INFORMATION>(), 4);
+    assert_eq!(size_of::<INSTANCE_PARTIAL_INFORMATION>(), 12);
+    assert_eq!(align_of::<INSTANCE_PARTIAL_INFORMATION>(), 4);
+    assert_eq!(size_of::<INSTANCE_FULL_INFORMATION>(), 20);
+    assert_eq!(align_of::<INSTANCE_FULL_INFORMATION>(), 4);
+    assert_eq!(size_of::<INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_MiniFilter>(), 32);
+    assert_eq!(align_of::<INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_MiniFilter>(), 4);
+    assert_eq!(size_of::<INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_LegacyFilter>(), 20);
+    assert_eq!(align_of::<INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_LegacyFilter>(), 4);
+    assert_eq!(size_of::<INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type>(), 32);
+    assert_eq!(align_of::<INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type>(), 4);
+    assert_eq!(size_of::<INSTANCE_AGGREGATE_STANDARD_INFORMATION>(), 40);
+    assert_eq!(align_of::<INSTANCE_AGGREGATE_STANDARD_INFORMATION>(), 4);
+    assert_eq!(size_of::<FILTER_MESSAGE_HEADER>(), 16);
+    assert_eq!(align_of::<FILTER_MESSAGE_HEADER>(), 8);
+    assert_eq!(size_of::<FILTER_REPLY_HEADER>(), 16);
+    assert_eq!(align_of::<FILTER_REPLY_HEADER>(), 8);
+}
 #[cfg(feature = "guiddef")] #[test]
 fn shared_guiddef() {
     use winapi::shared::guiddef::*;
