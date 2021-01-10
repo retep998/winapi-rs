@@ -5213,6 +5213,58 @@ fn um_memoryapi() {
     assert_eq!(size_of::<WIN32_MEMORY_REGION_INFORMATION_u_s>(), 4);
     assert_eq!(align_of::<WIN32_MEMORY_REGION_INFORMATION_u_s>(), 4);
 }
+#[cfg(feature = "minidumpapiset")] #[test]
+fn um_minidumpapiset() {
+    use winapi::um::minidumpapiset::*;
+    assert_eq!(size_of::<MINIDUMP_EXCEPTION_INFORMATION>(), 12);
+    assert_eq!(align_of::<MINIDUMP_EXCEPTION_INFORMATION>(), 4);
+    assert_eq!(size_of::<MINIDUMP_MEMORY_INFO>(), 48);
+    assert_eq!(align_of::<MINIDUMP_MEMORY_INFO>(), 4);
+    assert_eq!(size_of::<MINIDUMP_USER_STREAM>(), 12);
+    assert_eq!(align_of::<MINIDUMP_USER_STREAM>(), 4);
+    assert_eq!(size_of::<MINIDUMP_USER_STREAM_INFORMATION>(), 8);
+    assert_eq!(align_of::<MINIDUMP_USER_STREAM_INFORMATION>(), 4);
+    assert_eq!(size_of::<MINIDUMP_THREAD_CALLBACK>(), 744);
+    assert_eq!(align_of::<MINIDUMP_THREAD_CALLBACK>(), 4);
+    assert_eq!(size_of::<MINIDUMP_THREAD_EX_CALLBACK>(), 760);
+    assert_eq!(align_of::<MINIDUMP_THREAD_EX_CALLBACK>(), 4);
+    assert_eq!(size_of::<MINIDUMP_INCLUDE_THREAD_CALLBACK>(), 4);
+    assert_eq!(align_of::<MINIDUMP_INCLUDE_THREAD_CALLBACK>(), 4);
+    assert_eq!(size_of::<MINIDUMP_MODULE_CALLBACK>(), 92);
+    assert_eq!(align_of::<MINIDUMP_MODULE_CALLBACK>(), 4);
+    assert_eq!(size_of::<MINIDUMP_INCLUDE_MODULE_CALLBACK>(), 8);
+    assert_eq!(align_of::<MINIDUMP_INCLUDE_MODULE_CALLBACK>(), 4);
+    assert_eq!(size_of::<MINIDUMP_IO_CALLBACK>(), 20);
+    assert_eq!(align_of::<MINIDUMP_IO_CALLBACK>(), 4);
+    assert_eq!(size_of::<MINIDUMP_READ_MEMORY_FAILURE_CALLBACK>(), 16);
+    assert_eq!(align_of::<MINIDUMP_READ_MEMORY_FAILURE_CALLBACK>(), 4);
+    assert_eq!(size_of::<MINIDUMP_VM_QUERY_CALLBACK>(), 8);
+    assert_eq!(align_of::<MINIDUMP_VM_QUERY_CALLBACK>(), 4);
+    assert_eq!(size_of::<MINIDUMP_VM_PRE_READ_CALLBACK>(), 16);
+    assert_eq!(align_of::<MINIDUMP_VM_PRE_READ_CALLBACK>(), 4);
+    assert_eq!(size_of::<MINIDUMP_VM_POST_READ_CALLBACK>(), 24);
+    assert_eq!(align_of::<MINIDUMP_VM_POST_READ_CALLBACK>(), 4);
+    assert_eq!(size_of::<MINIDUMP_CALLBACK_INPUT_u>(), 760);
+    assert_eq!(align_of::<MINIDUMP_CALLBACK_INPUT_u>(), 4);
+    assert_eq!(size_of::<MINIDUMP_CALLBACK_INPUT>(), 772);
+    assert_eq!(align_of::<MINIDUMP_CALLBACK_INPUT>(), 4);
+    assert_eq!(size_of::<MINIDUMP_CALLBACK_OUTPUT_u_s1>(), 12);
+    assert_eq!(align_of::<MINIDUMP_CALLBACK_OUTPUT_u_s1>(), 4);
+    assert_eq!(size_of::<MINIDUMP_CALLBACK_OUTPUT_u_s2>(), 8);
+    assert_eq!(align_of::<MINIDUMP_CALLBACK_OUTPUT_u_s2>(), 4);
+    assert_eq!(size_of::<MINIDUMP_CALLBACK_OUTPUT_u_s3>(), 52);
+    assert_eq!(align_of::<MINIDUMP_CALLBACK_OUTPUT_u_s3>(), 4);
+    assert_eq!(size_of::<MINIDUMP_CALLBACK_OUTPUT_u_s4>(), 52);
+    assert_eq!(align_of::<MINIDUMP_CALLBACK_OUTPUT_u_s4>(), 4);
+    assert_eq!(size_of::<MINIDUMP_CALLBACK_OUTPUT_u_s5>(), 8);
+    assert_eq!(align_of::<MINIDUMP_CALLBACK_OUTPUT_u_s5>(), 4);
+    assert_eq!(size_of::<MINIDUMP_CALLBACK_OUTPUT_u>(), 52);
+    assert_eq!(align_of::<MINIDUMP_CALLBACK_OUTPUT_u>(), 4);
+    assert_eq!(size_of::<MINIDUMP_CALLBACK_OUTPUT>(), 52);
+    assert_eq!(align_of::<MINIDUMP_CALLBACK_OUTPUT>(), 4);
+    assert_eq!(size_of::<MINIDUMP_CALLBACK_INFORMATION>(), 8);
+    assert_eq!(align_of::<MINIDUMP_CALLBACK_INFORMATION>(), 4);
+}
 #[cfg(feature = "minschannel")] #[test]
 fn um_minschannel() {
     use winapi::um::minschannel::*;
@@ -6647,6 +6699,12 @@ fn um_uxtheme() {
     assert_eq!(align_of::<BP_ANIMATIONPARAMS>(), 4);
     assert_eq!(size_of::<BP_PAINTPARAMS>(), 16);
     assert_eq!(align_of::<BP_PAINTPARAMS>(), 4);
+}
+#[cfg(feature = "verrsrc")] #[test]
+fn um_verrsrc() {
+    use winapi::um::verrsrc::*;
+    assert_eq!(size_of::<VS_FIXEDFILEINFO>(), 52);
+    assert_eq!(align_of::<VS_FIXEDFILEINFO>(), 4);
 }
 #[cfg(feature = "vsbackup")] #[test]
 fn um_vsbackup() {
