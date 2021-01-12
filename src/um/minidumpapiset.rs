@@ -44,7 +44,7 @@ STRUCT!{#[repr(packed)] struct MINIDUMP_USER_STREAM_INFORMATION {
 }}
 pub type PMINIDUMP_USER_STREAM_INFORMATION = *mut MINIDUMP_USER_STREAM_INFORMATION;
 #[cfg(target_pointer_width = "64")]
-STRUCT!{#[repr(align(16))] struct MINIDUMP_THREAD_CALLBACK {
+STRUCT!{struct MINIDUMP_THREAD_CALLBACK { // FIXME align(16)
     ThreadId: ULONG,
     ThreadHandle: HANDLE,
     Pad: ULONG,
@@ -65,7 +65,7 @@ STRUCT!{#[repr(packed)] struct MINIDUMP_THREAD_CALLBACK {
 }}
 pub type PMINIDUMP_THREAD_CALLBACK = *mut MINIDUMP_THREAD_CALLBACK;
 #[cfg(target_pointer_width = "64")]
-STRUCT!{#[repr(align(16))] struct MINIDUMP_THREAD_EX_CALLBACK {
+STRUCT!{struct MINIDUMP_THREAD_EX_CALLBACK { // FIXME align(16)
     ThreadId: ULONG,
     ThreadHandle: HANDLE,
     Pad: ULONG,

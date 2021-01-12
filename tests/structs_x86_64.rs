@@ -5254,9 +5254,9 @@ fn um_minidumpapiset() {
     assert_eq!(size_of::<MINIDUMP_USER_STREAM_INFORMATION>(), 12);
     //assert_eq!(align_of::<MINIDUMP_USER_STREAM_INFORMATION>(), 4);
     assert_eq!(size_of::<MINIDUMP_THREAD_CALLBACK>(), 1280);
-    assert_eq!(align_of::<MINIDUMP_THREAD_CALLBACK>(), 16);
+    //assert_eq!(align_of::<MINIDUMP_THREAD_CALLBACK>(), 16);
     assert_eq!(size_of::<MINIDUMP_THREAD_EX_CALLBACK>(), 1296);
-    assert_eq!(align_of::<MINIDUMP_THREAD_EX_CALLBACK>(), 16);
+    //assert_eq!(align_of::<MINIDUMP_THREAD_EX_CALLBACK>(), 16);
     assert_eq!(size_of::<MINIDUMP_INCLUDE_THREAD_CALLBACK>(), 4);
     //assert_eq!(align_of::<MINIDUMP_INCLUDE_THREAD_CALLBACK>(), 4);
     assert_eq!(size_of::<MINIDUMP_MODULE_CALLBACK>(), 104);
