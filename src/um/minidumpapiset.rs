@@ -10,13 +10,15 @@ use um::verrsrc::VS_FIXEDFILEINFO;
 use um::winnt::{CONTEXT, HANDLE, HRESULT, PEXCEPTION_POINTERS, PVOID};
 #[cfg(target_pointer_width = "64")]
 use um::winnt::M128A;
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_EXCEPTION_INFORMATION {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_EXCEPTION_INFORMATION {
     ThreadId: DWORD,
     ExceptionPointers: PEXCEPTION_POINTERS,
     ClientPointers: BOOL,
 }}
 pub type PMINIDUMP_EXCEPTION_INFORMATION = *mut MINIDUMP_EXCEPTION_INFORMATION;
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_MEMORY_INFO {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_MEMORY_INFO {
     BaseAddress: ULONG64,
     AllocationBase: ULONG64,
     AllocationProtect: ULONG32,
@@ -28,13 +30,15 @@ STRUCT!{#[repr(packed(4))] struct MINIDUMP_MEMORY_INFO {
     __alignment2: ULONG32,
 }}
 pub type PMINIDUMP_MEMORY_INFO = *mut MINIDUMP_MEMORY_INFO;
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_USER_STREAM {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_USER_STREAM {
     Type: ULONG32,
     BufferSize: ULONG,
     Buffer: PVOID,
 }}
 pub type PMINIDUMP_USER_STREAM = *mut MINIDUMP_USER_STREAM;
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_USER_STREAM_INFORMATION {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_USER_STREAM_INFORMATION {
     UserStreamCount: ULONG,
     UserStreamArray: PMINIDUMP_USER_STREAM,
 }}
@@ -50,7 +54,8 @@ STRUCT!{#[repr(align(16))] struct MINIDUMP_THREAD_CALLBACK {
     StackEnd: ULONG64,
 }}
 #[cfg(target_pointer_width = "32")]
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_THREAD_CALLBACK {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_THREAD_CALLBACK {
     ThreadId: ULONG,
     ThreadHandle: HANDLE,
     Context: CONTEXT,
@@ -72,7 +77,8 @@ STRUCT!{#[repr(align(16))] struct MINIDUMP_THREAD_EX_CALLBACK {
     BackingStoreEnd: ULONG64,
 }}
 #[cfg(target_pointer_width = "32")]
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_THREAD_EX_CALLBACK {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_THREAD_EX_CALLBACK {
     ThreadId: ULONG,
     ThreadHandle: HANDLE,
     Context: CONTEXT,
@@ -83,11 +89,13 @@ STRUCT!{#[repr(packed(4))] struct MINIDUMP_THREAD_EX_CALLBACK {
     BackingStoreEnd: ULONG64,
 }}
 pub type PMINIDUMP_THREAD_EX_CALLBACK = *mut MINIDUMP_THREAD_EX_CALLBACK;
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_INCLUDE_THREAD_CALLBACK {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_INCLUDE_THREAD_CALLBACK {
     ThreadId: ULONG,
 }}
 pub type PMINIDUMP_INCLUDE_THREAD_CALLBACK = *mut MINIDUMP_INCLUDE_THREAD_CALLBACK;
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_MODULE_CALLBACK {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_MODULE_CALLBACK {
     FullPath: PWCHAR,
     BaseOfImage: ULONG64,
     SizeOfImage: ULONG,
@@ -100,34 +108,40 @@ STRUCT!{#[repr(packed(4))] struct MINIDUMP_MODULE_CALLBACK {
     SizeOfMiscRecord: ULONG,
 }}
 pub type PMINIDUMP_MODULE_CALLBACK = *mut MINIDUMP_MODULE_CALLBACK;
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_INCLUDE_MODULE_CALLBACK {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_INCLUDE_MODULE_CALLBACK {
     BaseOfImage: ULONG64,
 }}
 pub type PMINIDUMP_INCLUDE_MODULE_CALLBACK = *mut MINIDUMP_INCLUDE_MODULE_CALLBACK;
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_IO_CALLBACK {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_IO_CALLBACK {
     Handle: HANDLE,
     Offset: ULONG64,
     Buffer: PVOID,
     BufferBytes: ULONG,
 }}
 pub type PMINIDUMP_IO_CALLBACK = *mut MINIDUMP_IO_CALLBACK;
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_READ_MEMORY_FAILURE_CALLBACK {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_READ_MEMORY_FAILURE_CALLBACK {
     Offset: ULONG64,
     Bytes: ULONG,
     FailureStatus: HRESULT,
 }}
 pub type PMINIDUMP_READ_MEMORY_FAILURE_CALLBACK = *mut MINIDUMP_READ_MEMORY_FAILURE_CALLBACK;
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_VM_QUERY_CALLBACK {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_VM_QUERY_CALLBACK {
     Offset: ULONG64,
 }}
 pub type PMINIDUMP_VM_QUERY_CALLBACK = *mut MINIDUMP_VM_QUERY_CALLBACK;
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_VM_PRE_READ_CALLBACK {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_VM_PRE_READ_CALLBACK {
     Offset: ULONG64,
     Buffer: PVOID,
     Size: ULONG,
 }}
 pub type PMINIDUMP_VM_PRE_READ_CALLBACK = *mut MINIDUMP_VM_PRE_READ_CALLBACK;
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_VM_POST_READ_CALLBACK {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_VM_POST_READ_CALLBACK {
     Offset: ULONG64,
     Buffer: PVOID,
     Size: ULONG,
@@ -150,30 +164,36 @@ UNION!{union MINIDUMP_CALLBACK_INPUT_u {
     VmPreRead VmPreRead_mut: MINIDUMP_VM_PRE_READ_CALLBACK,
     VmPostRead VmPostRead_mut: MINIDUMP_VM_POST_READ_CALLBACK,
 }}
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_CALLBACK_INPUT {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_CALLBACK_INPUT {
     ProcessId: ULONG,
     ProcessHandle: HANDLE,
     CallbackType: ULONG,
     u: MINIDUMP_CALLBACK_INPUT_u,
 }}
 pub type PMINIDUMP_CALLBACK_INPUT = *mut MINIDUMP_CALLBACK_INPUT;
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_CALLBACK_OUTPUT_u_s1 {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_CALLBACK_OUTPUT_u_s1 {
     MemoryBase: ULONG64,
     MemorySize: ULONG,
 }}
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_CALLBACK_OUTPUT_u_s2 {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_CALLBACK_OUTPUT_u_s2 {
     CheckCancel: BOOL,
     Cancel: BOOL,
 }}
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_CALLBACK_OUTPUT_u_s3 {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_CALLBACK_OUTPUT_u_s3 {
     VmRegion: MINIDUMP_MEMORY_INFO,
     Continue: BOOL,
 }}
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_CALLBACK_OUTPUT_u_s4 {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_CALLBACK_OUTPUT_u_s4 {
     VmQueryStatus: HRESULT,
     VmQueryResult: MINIDUMP_MEMORY_INFO,
 }}
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_CALLBACK_OUTPUT_u_s5 {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_CALLBACK_OUTPUT_u_s5 {
     VmReadStatus: HRESULT,
     VmReadBytesCompleted: ULONG,
 }}
@@ -227,7 +247,8 @@ FN!{stdcall MINIDUMP_CALLBACK_ROUTINE(
     CallbackInput: PMINIDUMP_CALLBACK_INPUT,
     CallbackOutput: PMINIDUMP_CALLBACK_OUTPUT,
 ) -> BOOL}
-STRUCT!{#[repr(packed(4))] struct MINIDUMP_CALLBACK_INFORMATION {
+// FIXME packed(4)
+STRUCT!{#[repr(packed)] struct MINIDUMP_CALLBACK_INFORMATION {
     CallbackRoutine: MINIDUMP_CALLBACK_ROUTINE,
     CallbackParam: PVOID,
 }}
