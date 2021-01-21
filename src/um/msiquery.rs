@@ -14,6 +14,16 @@ extern "system" {
     pub fn MsiRecordSetInteger(hRecord: MSIHANDLE, iField: UINT, iValue: c_int) -> UINT;
     pub fn MsiRecordSetStringA(hRecord: MSIHANDLE, iField: UINT, szValue: LPCSTR) -> UINT;
     pub fn MsiRecordSetStringW(hRecord: MSIHANDLE, iField: UINT, szValue: LPCWSTR) -> UINT;
+    pub fn MsiSetPropertyA(
+        hInstall: MSIHANDLE,
+        szName: LPCSTR,
+        szValue: LPCSTR
+    ) -> UINT;
+    pub fn MsiSetPropertyW(
+        hInstall: MSIHANDLE,
+        szName: LPCWSTR,
+        szValue: LPCWSTR
+    ) -> UINT;
     pub fn MsiGetPropertyA(
         hInstall: MSIHANDLE,
         szName: LPCSTR,
