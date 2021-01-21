@@ -36,6 +36,14 @@ extern "system" {
         szValueBuf: LPWSTR,
         pcchValueBuf: LPDWORD
     ) -> UINT;
+    pub fn MsiDoActionA(
+        hInstall: MSIHANDLE,
+        zzAction: LPCSTR
+    ) -> UINT;
+    pub fn MsiDoActionW(
+        hInstall: MSIHANDLE,
+        zzAction: LPCWSTR
+    ) -> UINT;
     pub fn MsiProcessMessage(
         hInstall: MSIHANDLE,
         eMessageType: INSTALLMESSAGE,
