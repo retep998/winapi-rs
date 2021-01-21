@@ -159,6 +159,8 @@ pub mod gl;
 #[cfg(feature = "msaatext")] pub mod msaatext;
 #[cfg(feature = "mscat")] pub mod mscat;
 #[cfg(feature = "mschapp")] pub mod mschapp;
+#[cfg(feature = "msi")] pub mod msi;
+#[cfg(feature = "msiquery")] pub mod msiquery;
 #[cfg(feature = "mssip")] pub mod mssip;
 #[cfg(feature = "mswsock")] pub mod mswsock;
 #[cfg(feature = "namedpipeapi")] pub mod namedpipeapi;
