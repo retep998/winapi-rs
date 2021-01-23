@@ -12,7 +12,7 @@ environment:
   - host: i686-pc-windows-gnu
     channel: nightly
   - host: x86_64-pc-windows-gnu
-    channel: 1.6.0
+    channel: 1.25.0
 
 install:
   - ps: if (ls -r . -fi "*.rs" | sls "`t") { throw "Found tab character" }
