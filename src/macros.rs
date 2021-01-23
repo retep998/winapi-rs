@@ -214,13 +214,15 @@ macro_rules! RIDL {
     );
     (@method fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty) => (
         #[inline] pub unsafe fn $method(&self, $($p: $t,)*) -> $rtr {
-            ((*self.lpVtbl).$method)(self as *const _ as *mut _, $($p,)*)
+            ((*self.lpVtbl).$method)($crate::_core::ptr::NonNull::new_unchecked(
+                self as *const _ as *mut _), $($p,)*)
         }
     );
     (@method #[fixme] fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty) => (
         #[inline] pub unsafe fn $method(&self, $($p: $t,)*) -> $rtr {
             let mut ret = $crate::_core::mem::uninitialized();
-            ((*self.lpVtbl).$method)(self as *const _ as *mut _, &mut ret, $($p,)*);
+            ((*self.lpVtbl).$method)($crate::_core::ptr::NonNull::new_unchecked(
+                self as *const _ as *mut _), &mut ret, $($p,)*);
             ret
         }
     );
@@ -231,7 +233,7 @@ macro_rules! RIDL {
         pub struct $vtbl {
             $($fields)*
             $(pub $method: unsafe extern "system" fn(
-                This: *mut $interface,
+                This: $crate::_core::ptr::NonNull<$crate::_core::ptr::NonNull<$vtbl>>,
                 $($p: $t,)*
             ) -> $rtr,)*
         }}
@@ -242,7 +244,7 @@ macro_rules! RIDL {
         RIDL!{@vtbl $interface $vtbl (
             $($fields)*
             pub $method: unsafe extern "system" fn(
-                This: *mut $interface,
+                This: $crate::_core::ptr::NonNull<$crate::_core::ptr::NonNull<$vtbl>>,
                 $($p: $t,)*
             ) -> $rtr,
         ) $($tail)*}
@@ -253,7 +255,7 @@ macro_rules! RIDL {
         RIDL!{@vtbl $interface $vtbl (
             $($fields)*
             pub $method: unsafe extern "system" fn(
-                This: *mut $interface,
+                This: $crate::_core::ptr::NonNull<$crate::_core::ptr::NonNull<$vtbl>>,
                 ret: *mut $rtr,
                 $($p: $t,)*
             ) -> *mut $rtr,
