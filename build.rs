@@ -419,7 +419,7 @@ struct Header {
     dependencies: &'static [&'static str],
     libraries: &'static [&'static str],
 }
-struct Graph(HashMap<&'static str, Header>);
+struct Graph(HashMap<&'static str, Header>, bool);
 impl Graph {
     fn generate() -> Graph {
         Graph(DATA.iter().map(|&(name, dependencies, libraries)| {
@@ -430,7 +430,7 @@ impl Graph {
                 libraries: libraries,
             };
             (name, header)
-        }).collect())
+        }).collect(), probe_align16())
     }
     fn identify_required(&mut self) {
         for (name, header) in &mut self.0 {
@@ -442,7 +442,12 @@ impl Graph {
     }
     fn check_everything(&self) {
         if let Ok(_) = var("CARGO_FEATURE_EVERYTHING") {
-            for (_, header) in &self.0 {
+            for (name, header) in &self.0 {
+                if name == &"winhvplatform" || name == &"winhvplatformdefs" || name == &"winhvemulation"{
+                    if !self.1{
+                        continue;
+                    }
+                }
                 header.included.set(true);
             }
         }
@@ -467,6 +472,11 @@ impl Graph {
     fn emit_features(&self) {
         for (name, header) in &self.0 {
             if header.included.get() && !header.required {
+                if name == &"winhvplatform" || name == &"winhvplatformdefs" || name == &"winhvemulation"{
+                    if !self.1{
+                        panic!("WinHV requires #[repr(C, align(16))] which is incompatible with this rustc version.");
+                    }
+                }
                 println!("cargo:rustc-cfg=feature=\"{}\"", name);
             }
         }
@@ -519,11 +529,37 @@ fn library_kind() -> &'static str {
 }
 fn try_everything() {
     let mut graph = Graph::generate();
+
     graph.identify_required();
     graph.check_everything();
     graph.resolve_dependencies();
     graph.emit_features();
     graph.emit_libraries();
+}
+fn probe<T: AsRef<[u8]>>(code: T)->bool{
+    use std::process::{Command, Stdio};
+    use std::io::Write;
+    let mut command = Command::new(&var("RUSTC").unwrap_or_else(|_| "rustc".into()));
+    let mut child=command.arg("--crate-name")
+            .arg("rustc_probe")
+            .arg("--crate-type=lib")
+            .arg("--out-dir")
+            .arg(&var("OUT_DIR").unwrap())
+            .arg("--emit=llvm-ir")
+            .arg("-").stdin(Stdio::piped()).spawn().unwrap();
+    let mut stdin = child.stdin.take().unwrap();
+    stdin.write_all(code.as_ref()).unwrap();
+    drop(stdin);
+    let status=child.wait().unwrap();
+    return status.success();
+}
+fn probe_align16()->bool{
+    let code = "
+    #[repr(C, align(16))]
+    struct Aligned(u64,u64);
+    ";
+    let ret=probe(&code);
+    ret
 }
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
