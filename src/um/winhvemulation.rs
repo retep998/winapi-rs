@@ -1,22 +1,25 @@
-use shared::basetsd::{UINT8, UINT16, UINT32};
+use shared::basetsd::{UINT16, UINT32, UINT8};
 use shared::minwindef::LPVOID;
 use shared::ntdef::{BOOLEAN, HRESULT};
 use um::winhvplatformdefs::*;
 STRUCT!{struct WHV_EMULATOR_STATUS {
     AsUINT32: UINT32,
 }}
-
 BITFIELD!{WHV_EMULATOR_STATUS AsUINT32: UINT32 [
     EmulationSuccessful set_EmulationSuccessful [0..1],
     InternalEmulationFailure set_InternalEmulationFailure [1..2],
     IoPortCallbackFailed set_IoPortCallbackFailed [2..3],
     MemoryCallbackFailed set_MemoryCallbackFailed [3..4],
     TranslateGvaPageCallbackFailed set_TranslateGvaPageCallbackFailed [4..5],
-    TranslateGvaPageCallbackGpaIsNotAligned set_TranslateGvaPageCallbackGpaIsNotAligned [5..6],
-    GetVirtualProcessorRegistersCallbackFailed set_GetVirtualProcessorRegistersCallbackFailed [6..7],
-    SetVirtualProcessorRegistersCallbackFailed set_SetVirtualProcessorRegistersCallbackFailed [7..8],
+    TranslateGvaPageCallbackGpaIsNotAligned 
+    set_TranslateGvaPageCallbackGpaIsNotAligned [5..6],
+    GetVirtualProcessorRegistersCallbackFailed 
+    set_GetVirtualProcessorRegistersCallbackFailed [6..7],
+    SetVirtualProcessorRegistersCallbackFailed 
+    set_SetVirtualProcessorRegistersCallbackFailed [7..8],
     InterruptCausedIntercept set_InterruptCausedIntercept [8..9],
-    GuestCannotBeFaultedGuestCannotBeFaulted set_GuestCannotBeFaultedGuestCannotBeFaulted [9..10],
+    GuestCannotBeFaultedGuestCannotBeFaulted 
+    set_GuestCannotBeFaultedGuestCannotBeFaulted [9..10],
     Reserved set_Reserved [10..32],
 ]}
 STRUCT!{struct WHV_EMULATOR_MEMORY_ACCESS_INFO{

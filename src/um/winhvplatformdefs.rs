@@ -1,4 +1,4 @@
-use shared::basetsd::{UINT8, UINT16, UINT32, UINT64};
+use shared::basetsd::{UINT16, UINT32, UINT64, UINT8};
 use shared::minwindef::{
     BOOL, LPVOID
 };
@@ -146,14 +146,12 @@ ENUM!{enum WHV_PARTITION_PROPERTY_CODE
     WHvPartitionPropertyCodeExtendedVmExits         = 0x00000001,
     WHvPartitionPropertyCodeExceptionExitBitmap     = 0x00000002,
     WHvPartitionPropertyCodeSeparateSecurityDomain  = 0x00000003,
-
     WHvPartitionPropertyCodeProcessorFeatures       = 0x00001001,
     WHvPartitionPropertyCodeProcessorClFlushSize    = 0x00001002,
     WHvPartitionPropertyCodeCpuidExitList           = 0x00001003,
     WHvPartitionPropertyCodeCpuidResultList         = 0x00001004,
     WHvPartitionPropertyCodeLocalApicEmulationMode  = 0x00001005,
     WHvPartitionPropertyCodeProcessorXsaveFeatures  = 0x00001006,
-
     WHvPartitionPropertyCodeProcessorCount          = 0x00001fff,
 }}
 STRUCT!{struct WHV_X64_CPUID_RESULT
@@ -384,7 +382,6 @@ impl UINT128{
         unsafe{core::mem::transmute(self.0)}
     }
 }
-
 STRUCT!{struct WHV_UINT128_s{
     Low64: UINT64,
     High64: UINT64,
@@ -454,7 +451,6 @@ impl core::ops::BitOr<u128> for WHV_UINT128{
         Self([self.0[0] | rhs])
     }
 }
-
 impl core::ops::BitOrAssign<WHV_UINT128> for WHV_UINT128{
     fn bitor_assign(&mut self, rhs: WHV_UINT128) {
         self.0[0] = self.0[0] | rhs.0[0];
@@ -605,7 +601,8 @@ UNION!{union WHV_REGISTER_VALUE {
     Segment Segment_mut: WHV_X64_SEGMENT_REGISTER,
     Table Table_mut: WHV_X64_TABLE_REGISTER,
     InterruptState InterruptState_mut: WHV_X64_INTERRUPT_STATE_REGISTER,
-    DeliverabilityNotifications DeliverabilityNotifications_mut: WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER,
+    DeliverabilityNotifications DeliverabilityNotifications_mut: 
+    WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER,
     ExceptionEvent ExceptionEvent_mut: WHV_X64_PENDING_EXCEPTION_EVENT,
     ExtIntEvent ExtIntEvent_mut: WHV_X64_PENDING_EXT_INT_EVENT,    
 }}
