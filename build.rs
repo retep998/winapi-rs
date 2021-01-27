@@ -487,6 +487,13 @@ impl Graph {
             },
             _ => true,
         });
+        libs.retain(|&&lib| match &*var("TARGET").unwrap() {
+            "i586-pc-windows-msvc" | "i686-pc-windows-msvc" | "aarch64-pc-windows-msvc" => {
+                if lib == "winhvemulation" || lib == "winhvplatform" { false }
+                else { true }
+            },
+            _ => true,
+        });
         let prefix = library_prefix();
         let kind = library_kind();
         for lib in libs {
