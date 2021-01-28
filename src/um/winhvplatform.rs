@@ -1,6 +1,6 @@
 use shared::basetsd::{UINT32, UINT64};
 use shared::minwindef::{LPCVOID, LPVOID};
-use shared::ntdef::{BOOLEAN, HRESULT};
+use shared::ntdef::{BOOLEAN, HANDLE, HRESULT};
 use um::winhvplatformdefs::*;
 extern "system"{
     pub fn WHvGetCapability(
@@ -84,13 +84,15 @@ extern "system"{
         RegisterCount: UINT32,
         RegisterValues: *const WHV_REGISTER_VALUE,
     ) -> HRESULT;
+    #[deprecated(note="WHvGetVirtualProcessorInterruptControllerState is deprecated; use WHvGetVirtualProcessorInterruptControllerState2")]
     pub fn WHvGetVirtualProcessorInterruptControllerState(
         Partition: WHV_PARTITION_HANDLE,
         VpIndex: UINT32,
         State: LPVOID,
         StateSize: UINT32,
-        WrittenSIze: *mut UINT32,
+        WrittenSize: *mut UINT32,
     ) -> HRESULT;
+    #[deprecated(note="WHvSetVirtualProcessorInterruptControllerState is deprecated; use WHvSetVirtualProcessorInterruptControllerState2")]
     pub fn WHvSetVirtualProcessorInterruptControllerState(
         Partition: WHV_PARTITION_HANDLE,
         VpIndex: UINT32,
@@ -136,6 +138,28 @@ extern "system"{
         BufferSizeInBytes: UINT32,
         BytesWritten: *mut UINT32,
     ) -> HRESULT;
+    pub fn WHvGetVirtualProcessorInterruptControllerState2(
+        Partition: WHV_PARTITION_HANDLE,
+        VpIndex: UINT32,
+        State: LPVOID,
+        StateSize: UINT32,
+        WrittenSize: *mut UINT32,
+    ) -> HRESULT;
+    pub fn WHvSetVirtualProcessorInterruptControllerState2(
+        Partition: WHV_PARTITION_HANDLE,
+        VpIndex: UINT32,
+        State: LPCVOID,
+        StateSize: UINT32,
+    ) -> HRESULT;
+    pub fn WHvRegisterPartitionDoorbellEvent(
+        Partition: WHV_PARTITION_HANDLE,
+        MatchData: *const WHV_DOORBELL_MATCH_DATA,
+        EventHandle: HANDLE,
+    ) -> HRESULT;
+    pub fn WHvUnregisterPartitionDoorbellEvent(
+        Partition: WHV_PARTITION_HANDLE,
+        MatchData: *const WHV_DOORBELL_MATCH_DATA,
+    ) -> HRESULT;
     pub fn IsWHvGetCapabilityPresent()->BOOLEAN;
     pub fn IsWHvCreatePartitionPresent()->BOOLEAN;
     pub fn IsWHvSetupPartitionPresent()->BOOLEAN;
@@ -161,4 +185,8 @@ extern "system"{
     pub fn IsWHvQueryGpaRangeDirtyBitmapPresent()->BOOLEAN;
     pub fn IsWHvGetPartitionCountersPresent()->BOOLEAN;
     pub fn IsWHvGetVirtualProcessorCountersPresent()->BOOLEAN;
+    pub fn IsWHvGetVirtualProcessorInterruptControllerState2Present()->BOOLEAN;
+    pub fn IsWHvSetVirtualProcessorInterruptControllerState2Present()->BOOLEAN;
+    pub fn IsWHvRegisterPartitionDoorbellEventPresent()->BOOLEAN;
+    pub fn IsWHvUnregisterPartitionDoorbellEventPresent()->BOOLEAN;
 }

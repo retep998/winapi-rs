@@ -3,14 +3,18 @@ use shared::minwindef::{
     BOOL, LPVOID
 };
 ENUM!{enum WHV_CAPABILITY_CODE {
-    WHvCapabilityCodeHypervisorPresent = 0x00000000,
-    WHvCapabilityCodeFeatures = 0x00000001,
-    WHvCapabilityCodeExtendedVmExits = 0x00000002,
-    WHvCapabilityCodeExceptionExitBitmap = 0x00000003,
-    WHvCapabilityCodeProcessorVendor = 0x00001000,
-    WHvCapabilityCodeProcessorFeatures = 0x00001001,
-    WHvCapabilityCodeProcessorClFlushSize = 0x00001002,
-    WHvCapabilityCodeProcessorXsaveFeatures = 0x00001003,
+    WHvCapabilityCodeHypervisorPresent      = 0x00000000,
+    WHvCapabilityCodeFeatures               = 0x00000001,
+    WHvCapabilityCodeExtendedVmExits        = 0x00000002,
+    WHvCapabilityCodeExceptionExitBitmap    = 0x00000003,
+    WHvCapabilityCodeX64MsrExitBitmap       = 0x00000004,
+    WHvCapabilityCodeProcessorVendor         = 0x00001000,
+    WHvCapabilityCodeProcessorFeatures       = 0x00001001,
+    WHvCapabilityCodeProcessorClFlushSize    = 0x00001002,
+    WHvCapabilityCodeProcessorXsaveFeatures  = 0x00001003,
+    WHvCapabilityCodeProcessorClockFrequency = 0x00001004,
+    WHvCapabilityCodeInterruptClockFrequency = 0x00001005,
+    WHvCapabilityCodeProcessorFeaturesBanks  = 0x00001006,
 }}
 STRUCT!{struct WHV_CAPABILITY_FEATURES {
     AsUINT64: UINT64,
@@ -21,7 +25,9 @@ BITFIELD!{WHV_CAPABILITY_FEATURES AsUINT64: UINT64 [
     Xsave set_Xsave [2..3],
     DirtyPageTracking set_DirtyPageTracking [3..4],
     SpeculationControl set_SpeculationControl [4..5],
-    Reserved set_Reserved [5..64],
+    ApicRemoteRead set_ApicRemoteRead [5..6],
+    IdleSuspend set_IdleSuspend [6..7],
+    Reserved set_Reserved [7..64],
 ]}
 STRUCT!{struct WHV_EXTENDED_VM_EXITS {
     AsUINT64: UINT64,
@@ -30,7 +36,14 @@ BITFIELD!{WHV_EXTENDED_VM_EXITS AsUINT64: UINT64 [
     X64CpuidExit set_X64CpuidExit [0..1],
     X64MsrExit set_X64MsrExit [1..2],
     ExceptionExit set_ExceptionExit [2..3],
-    Reserved set_Reserved [3..64],
+    X64RdtscExit set_X64RdtscExit [3..4],
+    X64ApicSmiExitTrap set_X64ApicSmiExitTrap [4..5],
+    HypercallExit set_HypercallExit [5..6],
+    X64ApicInitSipiExitTrap set_X64ApicInitSipiExitTrap [6..7],
+    X64ApicWriteLint0ExitTrap set_X64ApicWriteLint0ExitTrap [7..8],
+    X64ApicWriteLint1ExitTrap set_X64ApicWriteLint1ExitTrap [8..9],
+    X64ApicWriteSvrExitTrap set_X64ApicWriteSvrExitTrap [9..10],
+    Reserved set_Reserved [10..64],    
 ]}
 ENUM!{enum WHV_PROCESSOR_VENDOR {
     WHvProcessorVendorAmd = 0x0000,
@@ -68,7 +81,7 @@ BITFIELD!{WHV_PROCESSOR_FEATURES AsUINT64: UINT64 [
     EnhancedFastStringSupport set_EnhancedFastStringSupport [24..25],
     Bmi1Support set_Bmi1Support [25..26],
     Bmi2Support set_Bmi2Support [26..27],
-    Reserved1 set_Reserved1 [27..29], //
+    Reserved1 set_Reserved1 [27..29],
     MovbeSupport set_MovbeSupport [29..30],
     Npiep1Support set_Npiep1Support [30..31],
     DepX87FPUSaveSupport set_DepX87FPUSaveSupport [31..32],
@@ -96,10 +109,38 @@ BITFIELD!{WHV_PROCESSOR_FEATURES AsUINT64: UINT64 [
     Reserved4 set_Reserved4 [53..54],
     SsbNo set_SsbNo [54..55],
     RsbANo set_RsbANo [55..56],
-    Reserved5 set_Reserved5 [56..64],
+    Reserved5 set_Reserved5 [56..57],
+    RdPidSupport set_RdPidSupport [57..58],
+    UmipSupport set_UmipSupport [58..59],
+    MdsNoSupport set_MdsNoSupport [59..60],
+    MdClearSupport set_MdClearSupport [60..61],
+    Reserved6 set_Reserved6 [61..64],    
+]}
+STRUCT!{struct WHV_PROCESSOR_FEATURES1 {
+    AsUINT64: UINT64,
+}}
+BITFIELD!{WHV_PROCESSOR_FEATURES1 AsUINT64: UINT64 [
+    Reserved1 set_Reserved1 [0..2],
+    ClZeroSupport set_ClZeroSupport [2..3],
+    Reserved2 set_Reserved2 [3..64],
 ]}
 STRUCT!{struct WHV_PROCESSOR_XSAVE_FEATURES {
     AsUINT64: UINT64,
+}}
+pub const WHV_PROCESSOR_FEATURES_BANKS_COUNT: usize = 2;
+STRUCT!{struct WHV_PROCESSOR_FEATURES_BANKS_u_s{
+    Bank0: WHV_PROCESSOR_FEATURES,
+    Bank1: WHV_PROCESSOR_FEATURES1,
+}}
+UNION!{union WHV_PROCESSOR_FEATURES_BANKS_u{
+    [u64; 2],
+    s s_mut: WHV_PROCESSOR_FEATURES_BANKS_u_s,
+    AsUINT64 AsUINT64_mut: [UINT64; 2],
+}}
+STRUCT!{struct WHV_PROCESSOR_FEATURES_BANKS{
+    BanksCount: UINT32,
+    Reserved0: UINT32,
+    u: WHV_PROCESSOR_FEATURES_BANKS_u,
 }}
 BITFIELD!{WHV_PROCESSOR_FEATURES AsUINT64: UINT64 [
     XsaveSupport set_XsaveSupport [0..1],
@@ -125,12 +166,26 @@ BITFIELD!{WHV_PROCESSOR_FEATURES AsUINT64: UINT64 [
     VaesSupport set_VaesSupport [20..21],
     Avx512VPopcntdqSupport set_Avx512VPopcntdqSupport [21..22],
     VpclmulqdqSupport set_VpclmulqdqSupport [22..23],
-    Reserved set_Reserved [23..64],
+    Avx512Bf16Support set_Avx512Bf16Support [23..24],
+    Avx512Vp2IntersectSupport set_Avx512Vp2IntersectSupport [24..25],
+    Reserved set_Reserved [25..64],
 ]}
 pub type PWHV_PROCESSOR_XSAVE_FEATURES = *mut WHV_PROCESSOR_XSAVE_FEATURES;
+STRUCT!{struct WHV_X64_MSR_EXIT_BITMAP {
+    AsUINT64: UINT64,
+}}
+BITFIELD!{WHV_X64_MSR_EXIT_BITMAP AsUINT64: UINT64 [
+    UnhandledMsrs set_UnhandledMsrs [0..1],
+    TscMsrWrite set_TscMsrWrite [1..2],
+    TscMsrRead set_TscMsrRead [2..3],
+    ApicBaseMsrWrite set_ApicBaseMsrWrite [3..4],
+    MiscEnableMsrRead set_MiscEnableMsrRead [4..5],
+    McUpdatePatchLevelMsrRead set_McUpdatePatchLevelMsrRead [5..6],
+    Reserved set_Reserved [6..64],    
+]}
 UNION!{union WHV_CAPABILITY
 {
-    [u64; 1],
+    [u64; 3],
     HypervisorPresent HypervisorPresent_mut: BOOL,
     Features Features_mut: WHV_CAPABILITY_FEATURES,
     ExtendedVmExits ExtendedVmExits_mut: WHV_EXTENDED_VM_EXITS,
@@ -139,6 +194,10 @@ UNION!{union WHV_CAPABILITY
     ProcessorXsaveFeatures ProcessorXsaveFeatures_mut: WHV_PROCESSOR_XSAVE_FEATURES,
     ProcessorClFlushSize ProcessorClFlushSize_mut: UINT8,
     ExceptionExitBitmap ExceptionExitBitmap_mut: UINT64,
+    X64MsrExitBitmap X64MsrExitBitmap_mut: WHV_X64_MSR_EXIT_BITMAP,
+    ProcessorClockFrequency ProcessorClockFrequency_mut: UINT64,
+    InterruptClockFrequency InterruptClockFrequency_mut: UINT64,
+    ProcessorFeaturesBanks ProcessorFeaturesBanks_mut: WHV_PROCESSOR_FEATURES_BANKS,
 }}
 pub type WHV_PARTITION_HANDLE = LPVOID;
 ENUM!{enum WHV_PARTITION_PROPERTY_CODE
@@ -146,12 +205,19 @@ ENUM!{enum WHV_PARTITION_PROPERTY_CODE
     WHvPartitionPropertyCodeExtendedVmExits         = 0x00000001,
     WHvPartitionPropertyCodeExceptionExitBitmap     = 0x00000002,
     WHvPartitionPropertyCodeSeparateSecurityDomain  = 0x00000003,
+    WHvPartitionPropertyCodeNestedVirtualization    = 0x00000004,
+    WHvPartitionPropertyCodeX64MsrExitBitmap        = 0x00000005,
     WHvPartitionPropertyCodeProcessorFeatures       = 0x00001001,
     WHvPartitionPropertyCodeProcessorClFlushSize    = 0x00001002,
     WHvPartitionPropertyCodeCpuidExitList           = 0x00001003,
     WHvPartitionPropertyCodeCpuidResultList         = 0x00001004,
     WHvPartitionPropertyCodeLocalApicEmulationMode  = 0x00001005,
     WHvPartitionPropertyCodeProcessorXsaveFeatures  = 0x00001006,
+    WHvPartitionPropertyCodeProcessorClockFrequency = 0x00001007,
+    WHvPartitionPropertyCodeInterruptClockFrequency = 0x00001008,
+    WHvPartitionPropertyCodeApicRemoteReadSupport   = 0x00001009,
+    WHvPartitionPropertyCodeProcessorFeaturesBanks  = 0x0000100A,
+    WHvPartitionPropertyCodeReferenceTime           = 0x0000100B,
     WHvPartitionPropertyCodeProcessorCount          = 0x00001fff,
 }}
 STRUCT!{struct WHV_X64_CPUID_RESULT
@@ -187,6 +253,7 @@ ENUM!{enum WHV_X64_LOCAL_APIC_EMULATION_MODE
 {
     WHvX64LocalApicEmulationModeNone,
     WHvX64LocalApicEmulationModeXApic,
+    WHvX64LocalApicEmulationModeX2Apic,
 }}
 UNION!{union WHV_PARTITION_PROPERTY
 {
@@ -200,6 +267,13 @@ UNION!{union WHV_PARTITION_PROPERTY
     CpuidResultList CpuidResultList_mut: [WHV_X64_CPUID_RESULT; 1],
     LocalApicEmulationMode LocalApicEmulationMode_mut: WHV_X64_LOCAL_APIC_EMULATION_MODE,
     SeparateSecurityDomain SeparateSecurityDomain_mut: BOOL,
+    NestedVirtualization NestedVirtualization_mut: BOOL,
+    X64MsrExitBitmap X64MsrExitBitmap_mut: WHV_X64_MSR_EXIT_BITMAP,
+    ProcessorClockFrequency ProcessorClockFrequency_mut: UINT64,
+    InterruptClockFrequency InterruptClockFrequency_mut: UINT64,
+    ApicRemoteRead ApicRemoteRead_mut: BOOL,
+    ProcessorFeaturesBanks ProcessorFeaturesBanks_mut: WHV_PROCESSOR_FEATURES_BANKS,
+    ReferenceTime ReferenceTime_mut: UINT64,
 }}
 pub type WHV_GUEST_PHYSICAL_ADDRESS = UINT64;
 pub type WHV_GUEST_VIRTUAL_ADDRESS = UINT64;
@@ -313,6 +387,7 @@ ENUM!{enum WHV_REGISTER_NAME {
     WHvX64RegisterLstar = 0x00002009,
     WHvX64RegisterCstar = 0x0000200A,
     WHvX64RegisterSfmask = 0x0000200B,
+    WHvX64RegisterInitialApicId = 0x0000200C,
     WHvX64RegisterMsrMtrrCap = 0x0000200D,
     WHvX64RegisterMsrMtrrDefType = 0x0000200E,
     WHvX64RegisterMsrMtrrPhysBase0 = 0x00002010,
@@ -359,8 +434,10 @@ ENUM!{enum WHV_REGISTER_NAME {
     WHvX64RegisterMsrMtrrFix4kF0000 = 0x00002079,
     WHvX64RegisterMsrMtrrFix4kF8000 = 0x0000207A,
     WHvX64RegisterTscAux = 0x0000207B,
+    WHvX64RegisterBndcfgs = 0x0000207C,
     WHvX64RegisterSpecCtrl = 0x00002084,
     WHvX64RegisterPredCmd = 0x00002085,
+    WHvX64RegisterTscVirtualOffset = 0x00002087,
     WHvX64RegisterApicId = 0x00003002,
     WHvX64RegisterApicVersion = 0x00003003,
     WHvRegisterPendingInterruption = 0x80000000,
@@ -368,6 +445,7 @@ ENUM!{enum WHV_REGISTER_NAME {
     WHvRegisterPendingEvent = 0x80000002,
     WHvX64RegisterDeliverabilityNotifications = 0x80000004,
     WHvRegisterInternalActivityState = 0x80000005,
+    WHvX64RegisterPendingDebugException = 0x80000006,
 }}
 #[cfg(feature = "winhvplatformdefs")]
 macro_rules! UINT128_DEF {
@@ -603,6 +681,26 @@ BITFIELD!{WHV_X64_PENDING_EXT_INT_EVENT AsUINT128: WHV_UINT128[
     Reserved1 set_Reserved1 [16..64],
     Reserved2 set_Reserved2 [64..128],     
 ]}
+STRUCT!{struct WHV_INTERNAL_ACTIVITY_REGISTER{
+    AsUINT64: UINT64,
+}}
+BITFIELD!{WHV_INTERNAL_ACTIVITY_REGISTER AsUINT64: UINT64[
+    StartupSuspend set_StartupSuspend [0..1],
+    HaltSuspend set_HaltSuspend [1..2],
+    IdleSuspend set_IdleSuspend [2..3],
+    Reserved set_Reserved [3..64],       
+]}
+STRUCT!{struct WHV_X64_PENDING_DEBUG_EXCEPTION{
+    AsUINT64: UINT64,
+}}
+BITFIELD!{WHV_X64_PENDING_DEBUG_EXCEPTION AsUINT64: UINT64[
+    Breakpoint0 set_Breakpoint0 [0..1],
+    Breakpoint1 set_Breakpoint1 [1..2],
+    Breakpoint2 set_Breakpoint2 [2..3],
+    Breakpoint3 set_Breakpoint3 [3..4],
+    SingleStep set_SingleStep [4..5],
+    Reserved0 set_Reserved0 [5..64],    
+]}
 UNION!{union WHV_REGISTER_VALUE {
     [UINT128; 1],
     Reg128 Reg128_mut: WHV_UINT128,
@@ -620,6 +718,8 @@ UNION!{union WHV_REGISTER_VALUE {
     WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER,
     ExceptionEvent ExceptionEvent_mut: WHV_X64_PENDING_EXCEPTION_EVENT,
     ExtIntEvent ExtIntEvent_mut: WHV_X64_PENDING_EXT_INT_EVENT,    
+    InternalActivity InternalActivity_mut: WHV_INTERNAL_ACTIVITY_REGISTER,
+    PendingDebugException PendingDebugException_mut: WHV_X64_PENDING_DEBUG_EXCEPTION,
 }}
 ENUM!{enum WHV_RUN_VP_EXIT_REASON {
     WHvRunVpExitReasonNone = 0x00000000,
@@ -634,6 +734,11 @@ ENUM!{enum WHV_RUN_VP_EXIT_REASON {
     WHvRunVpExitReasonX64MsrAccess = 0x00001000,
     WHvRunVpExitReasonX64Cpuid = 0x00001001,
     WHvRunVpExitReasonException = 0x00001002,
+    WHvRunVpExitReasonX64Rdtsc = 0x00001003,
+    WHvRunVpExitReasonX64ApicSmiTrap = 0x00001004,
+    WHvRunVpExitReasonHypercall = 0x00001005,
+    WHvRunVpExitReasonX64ApicInitSipiTrap = 0x00001006,
+    WHvRunVpExitReasonX64ApicWriteTrap = 0x00001007,
     WHvRunVpExitReasonCanceled = 0x00002001,
 }}
 STRUCT!{struct WHV_X64_VP_EXECUTION_STATE{
@@ -760,8 +865,9 @@ STRUCT!{struct WHV_X64_UNSUPPORTED_FEATURE_CONTEXT {
     FeatureParameter: UINT64,
 }}
 ENUM!{enum WHV_RUN_VP_CANCEL_REASON {
-    WhvRunVpCancelReasonUser = 0,
+    WHvRunVpCancelReasonUser = 0,
 }}
+pub const WhvRunVpCancelReasonUser: WHV_RUN_VP_CANCEL_REASON = WHvRunVpCancelReasonUser;
 STRUCT!{struct WHV_RUN_VP_CANCELED_CONTEXT {
     CancelReason: WHV_RUN_VP_CANCEL_REASON,
 }}
@@ -778,8 +884,52 @@ pub type PWHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT = *mut WHV_X64_INTERRUPTION_D
 STRUCT!{struct WHV_X64_APIC_EOI_CONTEXT {
     InterruptVector: UINT32,
 }}
+STRUCT!{struct WHV_X64_RDTSC_INFO{
+    AsUINT64: UINT64,
+}}
+BITFIELD!{WHV_X64_RDTSC_INFO AsUINT64: UINT64[
+    IsRdtscp set_IsRdtscp [0..1],
+    Reserved set_Reserved [1..64],     
+]}
+STRUCT!{struct WHV_X64_RDTSC_CONTEXT{
+    TscAux: UINT64,
+    VirtualOffset: UINT64,
+    Tsc: UINT64,
+    ReferenceTime: UINT64,
+    RdtscInfo: WHV_X64_RDTSC_INFO,
+}}
+STRUCT!{struct WHV_X64_APIC_SMI_CONTEXT{
+    ApicIcr: UINT64,
+}}
+pub const WHV_HYPERCALL_CONTEXT_MAX_XMM_REGISTERS: usize = 6;
+STRUCT!{struct WHV_HYPERCALL_CONTEXT{
+    Rax: UINT64,
+    Rbx: UINT64,
+    Rcx: UINT64,
+    Rdx: UINT64,
+    R8: UINT64,
+    Rsi: UINT64,
+    Rdi: UINT64,
+    Reserved0: UINT64,
+    XmmRegisters: [WHV_UINT128; WHV_HYPERCALL_CONTEXT_MAX_XMM_REGISTERS],
+    Reserved1: [UINT64; 2],    
+}}
+pub type PWHV_HYPERCALL_CONTEXT = *mut WHV_HYPERCALL_CONTEXT;
+STRUCT!{struct WHV_X64_APIC_INIT_SIPI_CONTEXT{
+    ApicIcr: UINT64,
+}}
+ENUM!{enum WHV_X64_APIC_WRITE_TYPE{
+    WHvX64ApicWriteTypeSvr   = 0xF0,
+    WHvX64ApicWriteTypeLint0 = 0x350,
+    WHvX64ApicWriteTypeLint1 = 0x360,
+}}
+STRUCT!{struct WHV_X64_APIC_WRITE_CONTEXT{
+    Type: WHV_X64_APIC_WRITE_TYPE,
+    Reserved: UINT32,
+    WriteValue: UINT64,      
+}}
 UNION!{union WHV_RUN_VP_EXIT_CONTEXT_u{
-    [u64; 12],
+    [WHV_UINT128; 11],
     MemoryAccess MemoryAccess_mut: WHV_MEMORY_ACCESS_CONTEXT,
     IoPortAccess IoPortAccess_mut: WHV_X64_IO_PORT_ACCESS_CONTEXT,
     MsrAccess MsrAccess_mut: WHV_X64_MSR_ACCESS_CONTEXT,
@@ -789,6 +939,11 @@ UNION!{union WHV_RUN_VP_EXIT_CONTEXT_u{
     UnsupportedFeature UnsupportedFeature_mut: WHV_X64_UNSUPPORTED_FEATURE_CONTEXT,
     CancelReason CancelReason_mut: WHV_RUN_VP_CANCELED_CONTEXT,
     ApicEoi ApicEoi_mut: WHV_X64_APIC_EOI_CONTEXT,    
+    ReadTsc ReadTsc_mut: WHV_X64_RDTSC_CONTEXT,
+    ApicSmi ApicSmi_mut: WHV_X64_APIC_SMI_CONTEXT,
+    Hypercall Hypercall_mut: WHV_HYPERCALL_CONTEXT,
+    ApicInitSipi ApicInitSipi_mut: WHV_X64_APIC_INIT_SIPI_CONTEXT,
+    ApicWrite ApicWrite_mut: WHV_X64_APIC_WRITE_CONTEXT,      
 }}
 STRUCT!{struct WHV_RUN_VP_EXIT_CONTEXT{
     ExitReason: WHV_RUN_VP_EXIT_REASON,
@@ -822,6 +977,17 @@ BITFIELD!{WHV_INTERRUPT_CONTROL TypeAndDestinationModeAndTriggerModeAndReserved:
     DestinationMode set_DestinationMode [8..12],
     TriggerMode set_TriggerMode [12..16],
     Reserved set_Reserved [16..64],    
+]}
+STRUCT!{struct WHV_DOORBELL_MATCH_DATA{
+    GuestAddress: WHV_GUEST_PHYSICAL_ADDRESS,
+    Value: UINT32,
+    Length: UINT32,
+    MatchOnValueAndMatchOnLengthAndReserved: UINT32,
+}}
+BITFIELD!{WHV_DOORBELL_MATCH_DATA MatchOnValueAndMatchOnLengthAndReserved: UINT32[
+    MatchOnValue set_MatchOnValue [0..1],
+    MatchOnLength set_MatchOnLength [1..2],
+    Reserved set_Reserved [2..32],
 ]}
 ENUM!{enum WHV_PARTITION_COUNTER_SET {
     WHvPartitionCounterSetMemory,
