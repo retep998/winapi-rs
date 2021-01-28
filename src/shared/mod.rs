@@ -66,6 +66,7 @@ pub mod guiddef;
 #[cfg(feature = "rpcdce")] pub mod rpcdce;
 #[cfg(feature = "rpcndr")] pub mod rpcndr;
 #[cfg(feature = "sddl")] pub mod sddl;
+#[cfg(feature = "secext")] pub mod secext;
 #[cfg(feature = "sspi")] pub mod sspi;
 #[cfg(feature = "stralign")] pub mod stralign;
 #[cfg(feature = "tcpestats")] pub mod tcpestats;
