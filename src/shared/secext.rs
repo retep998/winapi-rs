@@ -4,23 +4,21 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use shared::minwindef::PULONG;
-use um::winnt::{BOOLEAN, LPSTR, LPWSTR};
-ENUM!(
-    enum EXTENDED_NAME_FORMAT {
-        NameUnknown = 0,
-        NameFullyQualifiedDN = 1,
-        NameSamCompatible = 2,
-        NameDisplay = 3,
-        NameUniqueId = 6,
-        NameCanonical = 7,
-        NameUserPrincipal = 8,
-        NameCanonicalEx = 9,
-        NameServicePrincipal = 10,
-        NameDnsDomain = 12,
-        NameGivenName = 13,
-        NameSurname = 14,
-    }
-);
+use um::winnt::{BOOLEAN, LPCSTR, LPSTR, LPWSTR};
+ENUM! {enum EXTENDED_NAME_FORMAT {
+    NameUnknown = 0,
+    NameFullyQualifiedDN = 1,
+    NameSamCompatible = 2,
+    NameDisplay = 3,
+    NameUniqueId = 6,
+    NameCanonical = 7,
+    NameUserPrincipal = 8,
+    NameCanonicalEx = 9,
+    NameServicePrincipal = 10,
+    NameDnsDomain = 12,
+    NameGivenName = 13,
+    NameSurname = 14,
+}}
 extern "system" {
     pub fn GetUserNameExA(
         NameFormat: EXTENDED_NAME_FORMAT,
@@ -43,14 +41,14 @@ extern "system" {
         nSize: PULONG,
     ) -> BOOLEAN;
     pub fn TranslateNameA(
-        lpAccountName: LPSTR,
+        lpAccountName: LPCSTR,
         AccountNameFormat: EXTENDED_NAME_FORMAT,
         DesiredNameFormat: EXTENDED_NAME_FORMAT,
         lpTranslatedName: LPSTR,
         nSize: PULONG,
     ) -> BOOLEAN;
     pub fn TranslateNameW(
-        lpAccountName: LPSTR,
+        lpAccountName: LPWSTR,
         AccountNameFormat: EXTENDED_NAME_FORMAT,
         DesiredNameFormat: EXTENDED_NAME_FORMAT,
         lpTranslatedName: LPWSTR,
