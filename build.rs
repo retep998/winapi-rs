@@ -500,7 +500,7 @@ impl Graph {
             _ => true,
         });
         libs.retain(|&&lib| match &*var("TARGET").unwrap() {
-            "i586-pc-windows-msvc" | "i686-pc-windows-msvc" | "aarch64-pc-windows-msvc" => {
+            "i586-pc-windows-msvc" | "i686-pc-windows-msvc" | "aarch64-pc-windows-msvc" | "i586-pc-windows-gnu" | "i686-pc-windows-gnu" | "aarch64-pc-windows-gnu" => {
                 if lib == "winhvemulation" || lib == "winhvplatform" { false }
                 else { true }
             },
