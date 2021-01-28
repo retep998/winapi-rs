@@ -369,9 +369,24 @@ ENUM!{enum WHV_REGISTER_NAME {
     WHvX64RegisterDeliverabilityNotifications = 0x80000004,
     WHvRegisterInternalActivityState = 0x80000005,
 }}
-#[repr(C, align(16))]
-#[derive(Copy, Clone, Debug)]
-pub struct UINT128(pub [u64; 2]);
+#[cfg(feature = "winhvplatformdefs")]
+macro_rules! UINT128_DEF {
+    () => {
+        #[repr(C, align(16))]
+        #[derive(Copy, Clone, Debug)]
+        pub struct UINT128(pub [u64; 2]);
+    };
+}
+#[cfg(not(feature = "winhvplatformdefs"))]
+macro_rules! UINT128_DEF {
+    () => {
+        #[repr(C, align(BAD_ALIGN))]
+        #[derive(Copy, Clone, Debug)]
+        #[deprecated(note = "Struct just required to trick the compiler.")]
+        pub struct UINT128(pub [u64; 2]);
+    };
+}
+UINT128_DEF!{}
 impl UINT128{
     #[inline]
     pub fn from_u128(x: u128)->Self{
@@ -425,19 +440,19 @@ impl core::ops::BitOr<UINT128> for UINT128{
 impl core::ops::Shl<usize> for WHV_UINT128{
     type Output = Self;
     fn shl(self, rhs: usize) -> Self::Output {
-        Self([self.0[0]<<rhs])
+        WHV_UINT128([self.0[0]<<rhs])
     }
 }
 impl core::ops::Shr<usize> for WHV_UINT128{
     type Output = Self;
     fn shr(self, rhs: usize) -> Self::Output {
-        Self([self.0[0]>>rhs])
+        WHV_UINT128([self.0[0]>>rhs])
     }
 }
 impl core::ops::BitAnd<u128> for WHV_UINT128{
     type Output = Self;
     fn bitand(self, rhs: u128) -> Self::Output {
-        Self([self.0[0] & rhs])
+        WHV_UINT128([self.0[0] & rhs])
     }
 }
 impl core::ops::BitAndAssign<u128> for WHV_UINT128{
@@ -448,7 +463,7 @@ impl core::ops::BitAndAssign<u128> for WHV_UINT128{
 impl core::ops::BitOr<u128> for WHV_UINT128{
     type Output = Self;
     fn bitor(self, rhs: u128) -> Self::Output {
-        Self([self.0[0] | rhs])
+        WHV_UINT128([self.0[0] | rhs])
     }
 }
 impl core::ops::BitOrAssign<WHV_UINT128> for WHV_UINT128{

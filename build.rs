@@ -471,12 +471,14 @@ impl Graph {
     }
     fn emit_features(&self) {
         for (name, header) in &self.0 {
-            if header.included.get() && !header.required {
+            if header.included.get(){
                 if name == &"winhvplatform" || name == &"winhvplatformdefs" || name == &"winhvemulation"{
                     if !self.1{
                         panic!("WinHV requires #[repr(C, align(16))] which is incompatible with this rustc version.");
                     }
                 }
+            }
+            if header.included.get() && !header.required {
                 println!("cargo:rustc-cfg=feature=\"{}\"", name);
             }
         }
