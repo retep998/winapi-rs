@@ -4,10 +4,11 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 //! MM procedure declarations, constant definitions and macros
-use shared::basetsd::DWORD_PTR;
-use shared::minwindef::{BYTE, DWORD, UINT, WORD};
+use shared::basetsd::{DWORD_PTR, UINT_PTR};
+use shared::minwindef::{BOOL, BYTE, DWORD, HMODULE, LPBYTE, LPDWORD, LPWORD, PDWORD, UINT, WORD};
 use shared::mmreg::WAVEFORMATEX;
-use um::winnt::{LPSTR, WCHAR};
+use um::imm::LPUINT;
+use um::winnt::{HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PVOID, WCHAR};
 //109 (Win 7 SDK)
 pub type MMVERSION = UINT;
 pub type MMRESULT = UINT;
@@ -264,3 +265,491 @@ DECLARE_HANDLE!{HMIDISTRM, HMIDISTRM__}
 DECLARE_HANDLE!{HMIDI, HMIDI__}
 pub type LPHMIDISTRM = *mut HMIDISTRM;
 pub type LPHMIDI = *mut HMIDI;
+
+pub type MCIDEVICEID = UINT;
+pub type MCIERROR = DWORD;
+pub type YIELDPROC = DWORD;
+
+pub const MCIERR_NO_ERROR: DWORD = 0;
+pub const MCIERR_UNRECOGNIZED_KEYWORD: DWORD = 259;
+pub const MCIERR_UNRECOGNIZED_COMMAND: DWORD = 261;
+pub const MCIERR_HARDWARE: DWORD = 262;
+pub const MCIERR_INVALID_DEVICE_NAME: DWORD = 263;
+pub const MCIERR_OUT_OF_MEMORY: DWORD = 264;
+pub const MCIERR_DEVICE_OPEN: DWORD = 265;
+pub const MCIERR_CANNOT_LOAD_DRIVER: DWORD = 266;
+pub const MCIERR_MISSING_COMMAND_STRING: DWORD = 267;
+pub const MCIERR_PARAM_OVERFLOW: DWORD = 268;
+pub const MCIERR_MISSING_STRING_ARGUMENT: DWORD = 269;
+pub const MCIERR_BAD_INTEGER: DWORD = 270;
+pub const MCIERR_PARSER_INTERNAL: DWORD = 271;
+pub const MCIERR_DRIVER_INTERNAL: DWORD = 272;
+pub const MCIERR_MISSING_PARAMETER: DWORD = 273;
+pub const MCIERR_UNSUPPORTED_FUNCTION: DWORD = 274;
+pub const MCIERR_FILE_NOT_FOUND: DWORD = 275;
+pub const MCIERR_DEVICE_NOT_READY: DWORD = 276;
+pub const MCIERR_INTERNAL: DWORD = 277;
+pub const MCIERR_DRIVER: DWORD = 278;
+pub const MCIERR_CANNOT_USE_ALL: DWORD = 279;
+pub const MCIERR_MULTIPLE: DWORD = 280;
+pub const MCIERR_EXTENSION_NOT_FOUND: DWORD = 281;
+pub const MCIERR_OUTOFRANGE: DWORD = 282;
+pub const MCIERR_FLAGS_NOT_COMPATIBLE: DWORD = 284;
+pub const MCIERR_FILE_NOT_SAVED: DWORD = 286;
+pub const MCIERR_DEVICE_TYPE_REQUIRED: DWORD = 287;
+pub const MCIERR_DEVICE_LOCKED: DWORD = 288;
+pub const MCIERR_DUPLICATE_ALIAS: DWORD = 289;
+pub const MCIERR_BAD_CONSTANT: DWORD = 290;
+pub const MCIERR_MUST_USE_SHAREABLE: DWORD = 291;
+pub const MCIERR_MISSING_DEVICE_NAME: DWORD = 292;
+pub const MCIERR_BAD_TIME_FORMAT: DWORD = 293;
+pub const MCIERR_NO_CLOSING_QUOTE: DWORD = 294;
+pub const MCIERR_DUPLICATE_FLAGS: DWORD = 295;
+pub const MCIERR_INVALID_FILE: DWORD = 296;
+pub const MCIERR_NULL_PARAMETER_BLOCK: DWORD = 297;
+pub const MCIERR_UNNAMED_RESOURCE: DWORD = 298;
+pub const MCIERR_NEW_REQUIRES_ALIAS: DWORD = 299;
+pub const MCIERR_NOTIFY_ON_AUTO_OPEN: DWORD = 300;
+pub const MCIERR_NO_ELEMENT_ALLOWED: DWORD = 301;
+pub const MCIERR_NONAPPLICABLE_FUNCTION: DWORD = 302;
+pub const MCIERR_ILLEGAL_FOR_AUTO_OPEN: DWORD = 303;
+pub const MCIERR_FILENAME_REQUIRED: DWORD = 304;
+pub const MCIERR_EXTRA_CHARACTERS: DWORD = 305;
+pub const MCIERR_DEVICE_NOT_INSTALLED: DWORD = 306;
+pub const MCIERR_GET_CD: DWORD = 307;
+pub const MCIERR_SET_CD: DWORD = 308;
+pub const MCIERR_SET_DRIVE: DWORD = 309;
+pub const MCIERR_DEVICE_LENGTH: DWORD = 310;
+pub const MCIERR_DEVICE_ORD_LENGTH: DWORD = 311;
+pub const MCIERR_NO_INTEGER: DWORD = 312;
+pub const MCIERR_WAVE_OUTPUTSINUSE: DWORD = 320;
+pub const MCIERR_WAVE_SETOUTPUTINUSE: DWORD = 321;
+pub const MCIERR_WAVE_INPUTSINUSE: DWORD = 322;
+pub const MCIERR_WAVE_SETINPUTINUSE: DWORD = 323;
+pub const MCIERR_WAVE_OUTPUTUNSPECIFIED: DWORD = 324;
+pub const MCIERR_WAVE_INPUTUNSPECIFIED: DWORD = 325;
+pub const MCIERR_WAVE_OUTPUTSUNSUITABLE: DWORD = 326;
+pub const MCIERR_WAVE_SETOUTPUTUNSUITABLE: DWORD = 327;
+pub const MCIERR_WAVE_INPUTSUNSUITABLE: DWORD = 328;
+pub const MCIERR_WAVE_SETINPUTUNSUITABLE: DWORD = 329;
+pub const MCIERR_SEQ_DIV_INCOMPATIBLE: DWORD = 336;
+pub const MCIERR_SEQ_PORT_INUSE: DWORD = 337;
+pub const MCIERR_SEQ_PORT_NONEXISTENT: DWORD = 338;
+pub const MCIERR_SEQ_PORT_MAPNODEVICE: DWORD = 339;
+pub const MCIERR_SEQ_PORT_MISCERROR: DWORD = 340;
+pub const MCIERR_SEQ_TIMER: DWORD = 341;
+pub const MCIERR_SEQ_PORTUNSPECIFIED: DWORD = 342;
+pub const MCIERR_SEQ_NOMIDIPRESENT: DWORD = 343;
+pub const MCIERR_NO_WINDOW: DWORD = 346;
+pub const MCIERR_CREATEWINDOW: DWORD = 347;
+pub const MCIERR_FILE_READ: DWORD = 348;
+pub const MCIERR_FILE_WRITE: DWORD = 349;
+pub const MCIERR_NO_IDENTITY: DWORD = 350;
+pub const MCIERR_CUSTOM_DRIVER_BASE: DWORD = 512;
+
+extern "system" {
+    pub fn PlaySoundA(
+        pszSound: LPCSTR,
+        hmod: HMODULE,
+        fdwSound: DWORD
+    ) -> BOOL;
+    pub fn PlaySoundW(
+        pszSound: LPCWSTR,
+        hmod: HMODULE,
+        fdwSound: DWORD
+    ) -> BOOL;
+    pub fn sndPlaySoundA(
+        pszSound: LPCSTR,
+        fuSound: UINT
+    ) -> BOOL;
+    pub fn sndPlaySoundW(
+        pszSound: LPCWSTR,
+        fuSound: UINT
+    ) -> BOOL;
+    pub fn timeBeginPeriod(
+        uPeriod: UINT
+    ) -> MMRESULT;
+    pub fn timeEndPeriod(
+        uPeriod: UINT
+    ) -> MMRESULT;
+    pub fn timeGetDevCaps(
+        ptc: LPTIMECAPS,
+        cbtc: UINT
+    ) -> MMRESULT;
+    pub fn timeGetTime(
+    ) -> DWORD;
+    pub fn waveInAddBuffer(
+        hwi: HWAVEIN,
+        pwh: LPWAVEHDR,
+        cbwh: UINT
+    ) -> MMRESULT;
+    pub fn waveInClose(
+        hwi: HWAVEIN
+    ) -> MMRESULT;
+    // pub fn waveInGetDevCapsA();
+    pub fn waveInGetDevCapsW(
+        uDeviceID: UINT_PTR,
+        pwic: LPWAVEINCAPSW,
+        cbwic: UINT
+    ) -> MMRESULT;
+    // pub fn waveInGetErrorTextA();
+    pub fn waveInGetErrorTextW(
+        mmrError: MMRESULT,
+        pszText: LPWSTR,
+        cchText: UINT
+    ) -> MMRESULT;
+    // pub fn waveInGetID();
+    pub fn waveInGetNumDevs(
+    ) -> UINT;
+    pub fn waveInGetPosition(
+        hwi: HWAVEIN,
+        pmmt: LPMMTIME,
+        cbmmt: UINT
+    ) -> MMRESULT;
+    pub fn waveInMessage(
+        hwi: HWAVEIN,
+        uMsg: UINT,
+        dw1: DWORD_PTR,
+        dw2: DWORD_PTR
+    ) -> MMRESULT;
+    pub fn waveInOpen(
+        phwi: LPHWAVEIN,
+        uDeviceID: UINT,
+        pwfx: LPCWAVEFORMATEX,
+        dwCallback: DWORD_PTR,
+        dwInstance: DWORD_PTR,
+        fdwOpen: DWORD,
+    ) -> MMRESULT;
+    pub fn waveInPrepareHeader(
+        hwi: HWAVEIN,
+        pwh: LPWAVEHDR,
+        cbwh: UINT
+    ) -> MMRESULT;
+    pub fn waveInReset(
+        hwi: HWAVEIN
+    ) -> MMRESULT;
+    pub fn waveInStart(
+        hwi: HWAVEIN
+    ) -> MMRESULT;
+    pub fn waveInStop(
+        hwi: HWAVEIN
+    ) -> MMRESULT;
+    pub fn waveInUnprepareHeader(
+        hwi: HWAVEIN,
+        pwh: LPWAVEHDR,
+        cbwh: UINT
+    ) -> MMRESULT;
+    pub fn waveOutBreakLoop(
+        hwo: HWAVEOUT
+    ) -> MMRESULT;
+    pub fn waveOutClose(
+        hwo: HWAVEOUT
+    ) -> MMRESULT;
+    // pub fn waveOutGetDevCapsA();
+    pub fn waveOutGetDevCapsW(
+        uDeviceID: UINT_PTR,
+        pwoc: LPWAVEOUTCAPSW,
+        cbwoc: UINT
+    ) -> MMRESULT;
+    // pub fn waveOutGetErrorTextA();
+    pub fn waveOutGetErrorTextW(
+        mmrError: MMRESULT,
+        pszText: LPWSTR,
+        cchText: UINT
+    ) -> MMRESULT;
+    // pub fn waveOutGetID();
+    pub fn waveOutGetNumDevs(
+    ) -> UINT;
+    pub fn waveOutGetPitch(
+        hwo: HWAVEOUT,
+        pdwPitch: LPDWORD
+    ) -> MMRESULT;
+    pub fn waveOutGetPlaybackRate(
+        hwo: HWAVEOUT,
+        pdwRate: LPDWORD
+    ) -> MMRESULT;
+    pub fn waveOutGetPosition(
+        hwo: HWAVEOUT,
+        pmmt: LPMMTIME,
+        cbmmt: UINT
+    ) -> MMRESULT;
+    pub fn waveOutGetVolume(
+        hwo: HWAVEOUT,
+        pdwVolume: LPDWORD
+    ) -> MMRESULT;
+    pub fn waveOutMessage(
+        hwo: HWAVEOUT,
+        uMsg: UINT,
+        dw1: DWORD_PTR,
+        dw2: DWORD_PTR
+    ) -> MMRESULT;
+    pub fn waveOutOpen(
+        phwo: LPHWAVEOUT,
+        uDeviceID: UINT,
+        pwfx: LPCWAVEFORMATEX,
+        dwCallback: DWORD_PTR,
+        dwInstance: DWORD_PTR,
+        fdwOpen: DWORD,
+    ) -> MMRESULT;
+    pub fn waveOutPause(
+        hwo: HWAVEOUT
+    ) -> MMRESULT;
+    pub fn waveOutPrepareHeader(
+        hwo: HWAVEOUT,
+        pwh: LPWAVEHDR,
+        cbwh: UINT
+    ) -> MMRESULT;
+    pub fn waveOutReset(
+        hwo: HWAVEOUT
+    ) -> MMRESULT;
+    pub fn waveOutRestart(
+        hwo: HWAVEOUT
+    ) -> MMRESULT;
+    pub fn waveOutSetPitch(
+        hwo: HWAVEOUT,
+        dwPitch: DWORD
+    ) -> MMRESULT;
+    pub fn waveOutSetPlaybackRate(
+        hwo: HWAVEOUT,
+        dwRate: DWORD
+    ) -> MMRESULT;
+    pub fn waveOutSetVolume(
+        hwo: HWAVEOUT,
+        dwVolume: DWORD
+    ) -> MMRESULT;
+    pub fn waveOutUnprepareHeader(
+        hwo: HWAVEOUT,
+        pwh: LPWAVEHDR,
+        cbwh: UINT
+    ) -> MMRESULT;
+    pub fn waveOutWrite(
+        hwo: HWAVEOUT,
+        pwh: LPWAVEHDR,
+        cbwh: UINT
+    ) -> MMRESULT;
+    pub fn midiStreamOpen(
+        lphStream: LPHMIDISTRM,
+        puDeviceID: LPUINT,
+        cMidi: DWORD,
+        dwCallback: DWORD_PTR,
+        dwInstance: DWORD_PTR,
+        fdwOpen: DWORD
+    ) -> MMRESULT;
+    pub fn midiStreamClose(
+        hStream: HMIDISTRM
+    ) -> MMRESULT;
+    pub fn midiStreamProperty(
+        hm: HMIDISTRM,
+        lppropdata: LPBYTE,
+        dwProperty: DWORD
+    ) -> MMRESULT;
+    pub fn midiStreamPosition(
+        hms: HMIDISTRM,
+        pmmt: LPMMTIME,
+        cbmmt: UINT
+    ) -> MMRESULT;
+    pub fn midiStreamOut(
+        hMidiStream: HMIDISTRM,
+        lpMidiHdr: LPMIDIHDR,
+        cbMidiHdr: UINT
+    ) -> MMRESULT;
+    pub fn midiStreamPause(
+        hms: HMIDISTRM
+    ) -> MMRESULT;
+    pub fn midiStreamRestart(
+        hms: HMIDISTRM
+    ) -> MMRESULT;
+    pub fn midiStreamStop(
+        hms: HMIDISTRM
+    ) -> MMRESULT;
+    pub fn midiConnect(
+        hMidi: HMIDI,
+        hmo: HMIDIOUT,
+        pReserved: PVOID
+    ) -> MMRESULT;
+    pub fn midiDisconnect(
+        hMidi: HMIDI,
+        hmo: HMIDIOUT,
+        pReserved: PVOID
+    ) -> MMRESULT;
+    pub fn midiOutGetNumDevs(
+    ) -> UINT;
+    pub fn midiOutGetDevCapsW(
+        uDeviceID: UINT_PTR,
+        lpMidiOutCaps: LPMIDIOUTCAPSW,
+        cbMidiOutCaps: UINT
+    ) -> MMRESULT;
+    pub fn midiOutGetVolume(
+        hmo: HMIDIOUT,
+        lpdwVolume: PDWORD
+    ) -> MMRESULT;
+    pub fn midiOutSetVolume(
+        hmo: HMIDIOUT,
+        dwVolume: DWORD
+    ) -> MMRESULT;
+    pub fn midiOutGetErrorTextW(
+        mmrError: MMRESULT,
+        lpText: LPWSTR,
+        cchText: UINT
+    ) -> MMRESULT;
+    pub fn midiOutOpen(
+        lphmo: LPHMIDIOUT,
+        uDeviceID: UINT,
+        dwCallback: DWORD_PTR,
+        dwCallbackInstance: DWORD_PTR,
+        dwFlags: DWORD
+    ) -> MMRESULT;
+    pub fn midiOutClose(
+        hmo: HMIDIOUT
+    ) -> MMRESULT;
+    pub fn midiOutPrepareHeader(
+        hmo: HMIDIOUT,
+        lpMidiOutHdr: LPMIDIHDR,
+        cbMidiOutHdr: UINT
+    ) -> MMRESULT;
+    pub fn midiOutUnprepareHeader(
+        hmo: HMIDIOUT,
+        lpMidiOutHdr: LPMIDIHDR,
+        cbMidiOutHdr: UINT
+    ) -> MMRESULT;
+    pub fn midiOutShortMsg(
+        hmo: HMIDIOUT,
+        dwMsg: DWORD
+    ) -> MMRESULT;
+    pub fn midiOutLongMsg(
+        hmo: HMIDIOUT,
+        lpMidiOutHdr: LPMIDIHDR,
+        cbMidiOutHdr: UINT
+    ) -> MMRESULT;
+    pub fn midiOutReset(
+        hmo: HMIDIOUT
+    ) -> MMRESULT;
+    pub fn midiOutCachePatches(
+        hmo: HMIDIOUT,
+        wBank: UINT,
+        lpPatchArray: LPWORD,
+        wFlags: UINT
+    ) -> MMRESULT;
+    pub fn midiOutCacheDrumPatches(
+        hmo: HMIDIOUT,
+        wPatch: UINT,
+        lpKeyArray: LPWORD,
+        wFlags: UINT
+    ) -> MMRESULT;
+    pub fn midiOutGetID(
+        hmo: HMIDIOUT,
+        puDeviceID: LPUINT
+    ) -> MMRESULT;
+    pub fn midiOutMessage(
+        deviceID: HMIDIOUT,
+        msg: UINT,
+        dw1: DWORD_PTR,
+        dw2: DWORD_PTR
+    ) -> MMRESULT;
+    pub fn midiInGetNumDevs(
+    ) -> UINT;
+    pub fn midiInGetDevCapsW(
+        uDeviceID: UINT_PTR,
+        lpMidiInCaps: LPMIDIINCAPSW,
+        cbMidiInCaps: UINT
+    ) -> MMRESULT;
+    pub fn midiInGetErrorTextW(
+        wError: MMRESULT,
+        lpText: LPWSTR,
+        cchText: UINT
+    ) -> MMRESULT;
+    pub fn midiInOpen(
+        lphMidiIn: LPHMIDIIN,
+        uDeviceID: UINT,
+        dwCallback: DWORD_PTR,
+        dwCallbackInstance: DWORD_PTR,
+        dwFlags: DWORD
+    ) -> MMRESULT;
+    pub fn midiInClose(
+        hMidiIn: HMIDIIN
+    ) -> MMRESULT;
+    pub fn midiInPrepareHeader(
+        hMidiIn: HMIDIIN,
+        lpMidiInHdr: LPMIDIHDR,
+        cbMidiInHdr: UINT
+    ) -> MMRESULT;
+    pub fn midiInUnprepareHeader(
+        hMidiIn: HMIDIIN,
+        lpMidiInHdr: LPMIDIHDR,
+        cbMidiInHdr: UINT
+    ) -> MMRESULT;
+    pub fn midiInAddBuffer(
+        hMidiIn: HMIDIIN,
+        lpMidiInHdr: LPMIDIHDR,
+        cbMidiInHdr: UINT
+    ) -> MMRESULT;
+    pub fn midiInStart(
+        hMidiIn: HMIDIIN
+    ) -> MMRESULT;
+    pub fn midiInStop(
+        hMidiIn: HMIDIIN
+    ) -> MMRESULT;
+    pub fn midiInReset(
+        hMidiIn: HMIDIIN
+    ) -> MMRESULT;
+    pub fn midiInGetID(
+        hmi: HMIDIIN,
+        puDeviceID: LPUINT
+    ) -> MMRESULT;
+    pub fn midiInMessage(
+        deviceID: HMIDIIN,
+        msg: UINT,
+        dw1: DWORD_PTR,
+        dw2: DWORD_PTR
+    ) -> MMRESULT;
+    pub fn mciExecute(
+        pszCommand: LPCSTR
+    ) -> BOOL;
+    pub fn mciGetCreatorTask(
+        IDDevice: MCIDEVICEID
+    ) -> MMRESULT;
+    pub fn mciGetDeviceID(
+        lpszDevice: LPCWSTR
+    ) -> MCIDEVICEID;
+    pub fn mciGetDeviceIDFromElementID(
+        dwElementID: DWORD,
+        lpstrType: LPCWSTR
+    ) -> MCIDEVICEID;
+    pub fn mciGetErrorStringA(
+        fdwError: DWORD,
+        lpszErrorText: LPSTR,
+        cchErrorText: UINT
+    ) -> BOOL;
+    pub fn mciGetErrorStringW(
+        fdwError: DWORD,
+        lpszErrorText: LPWSTR,
+        cchErrorText: UINT
+    ) -> BOOL;
+    pub fn mciGetYieldProc(
+        IDDevice: MCIDEVICEID,
+        lpdwYieldData: LPDWORD
+    ) -> YIELDPROC;
+    pub fn mciSendCommand(
+        IDDevice: MCIDEVICEID,
+        uMsg: UINT,
+        fdwCommand: DWORD_PTR,
+        dwParam: DWORD_PTR
+    ) -> MCIERROR;
+    pub fn mciSendStringA(
+        lpszCommand: LPCSTR,
+        lpszReturnString: LPSTR,
+        cchReturn: UINT,
+        hwndCallback: HANDLE
+    ) -> MCIERROR;
+    pub fn mciSendStringW(
+        lpszCommand: LPCWSTR,
+        lpszReturnString: LPWSTR,
+        cchReturn: UINT,
+        hwndCallback: HANDLE
+    ) -> MCIERROR;
+    pub fn mciSetYieldProc(
+        IDDevice: MCIDEVICEID,
+        yp: YIELDPROC,
+        dwYieldData: DWORD
+    ) -> UINT;
+}
