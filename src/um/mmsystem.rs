@@ -7,7 +7,6 @@
 use shared::basetsd::{DWORD_PTR, UINT_PTR};
 use shared::minwindef::{BOOL, BYTE, DWORD, HMODULE, LPBYTE, LPDWORD, LPWORD, PDWORD, UINT, WORD};
 use shared::mmreg::WAVEFORMATEX;
-use shared::ntdef::LPCTSTR;
 use um::imm::LPUINT;
 use um::winnt::{HANDLE, LPCSTR, LPCWSTR, LPSTR, LPWSTR, PVOID, WCHAR};
 //109 (Win 7 SDK)
@@ -710,11 +709,11 @@ extern "system" {
         IDDevice: MCIDEVICEID
     ) -> MMRESULT;
     pub fn mciGetDeviceID(
-        lpszDevice: LPCTSTR
+        lpszDevice: LPCWSTR
     ) -> MCIDEVICEID;
     pub fn mciGetDeviceIDFromElementID(
         dwElementID: DWORD,
-        lpstrType: LPCTSTR
+        lpstrType: LPCWSTR
     ) -> MCIDEVICEID;
     pub fn mciGetErrorStringA(
         fdwError: DWORD,
