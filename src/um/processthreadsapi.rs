@@ -209,9 +209,9 @@ extern "system" {
         lpStartupInfo: LPSTARTUPINFOW,
         lpProcessInformation: LPPROCESS_INFORMATION,
     ) -> BOOL;
-    // pub fn GetCurrentProcessToken();
-    // pub fn GetCurrentThreadToken();
-    // pub fn GetCurrentThreadEffectiveToken();
+    pub fn GetCurrentProcessToken() -> HANDLE;
+    pub fn GetCurrentThreadToken() -> HANDLE;
+    pub fn GetCurrentThreadEffectiveToken() -> HANDLE;
     pub fn SetThreadToken(
         Thread: PHANDLE,
         Token: HANDLE,
