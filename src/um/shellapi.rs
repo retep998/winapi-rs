@@ -5,7 +5,7 @@
 // except according to those terms
 //! SHELL.DLL functions, types, and definitions
 use ctypes::{__int64, c_int, c_void};
-use shared::basetsd::{DWORD_PTR, UINT_PTR, SIZE_T};
+use shared::basetsd::{DWORD_PTR, SIZE_T, UINT_PTR};
 use shared::guiddef::{GUID, REFIID};
 use shared::minwindef::{
     BOOL, DWORD, FILETIME, HINSTANCE, HKEY, INT, LPARAM, LPVOID, MAX_PATH, UINT, ULONG, WORD,
