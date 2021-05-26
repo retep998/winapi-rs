@@ -5,7 +5,7 @@
 // except according to those terms
 //! SHELL.DLL functions, types, and definitions
 use ctypes::{__int64, c_int, c_void};
-use shared::basetsd::{DWORD_PTR, UINT_PTR};
+use shared::basetsd::{DWORD_PTR, SIZE_T, UINT_PTR};
 use shared::guiddef::{GUID, REFIID};
 use shared::minwindef::{
     BOOL, DWORD, FILETIME, HINSTANCE, HKEY, INT, LPARAM, LPVOID, MAX_PATH, UINT, ULONG, WORD,
@@ -919,5 +919,24 @@ extern "system" {
     pub fn SHGetDriveMedia(
         pszDrive: PCWSTR,
         pdwMediaContent: *mut DWORD,
+    ) -> HRESULT;
+    pub fn PathCchCanonicalizeEx(
+        pszPathOut: PWSTR,
+        cchPathOut: SIZE_T,
+        pszPathIn: PCWSTR,
+        dwFlags: ULONG,
+    ) -> HRESULT;
+    pub fn PathCchCombineEx(
+        pszPathOut: PWSTR,
+        cchPathOut: SIZE_T,
+        pszPathIn: PCWSTR,
+        pszMore: PCWSTR,
+        dwFlags: ULONG,
+    ) -> HRESULT;
+    pub fn PathCchAppendEx(
+        pszPath: PWSTR,
+        cchPath: SIZE_T,
+        pszMore: PCWSTR,
+        dwFlags: ULONG,
     ) -> HRESULT;
 }
