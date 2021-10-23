@@ -31,6 +31,20 @@ pub const IP_UNBLOCK_SOURCE: c_int = 18;
 pub const IP_PKTINFO: c_int = 19;
 pub const IP_RECEIVE_BROADCAST: c_int = 22;
 pub const IP_RECVDSTADDR: c_int = 25;
+pub const IP_IFLIST: c_int = 28;
+pub const IP_ADD_IFLIST: c_int = 29;
+pub const IP_DEL_IFLIST: c_int = 30;
+pub const IP_UNICAST_IF: c_int = 31;
+pub const IP_RTHDR: c_int = 32;
+pub const IP_GET_IFLIST: c_int = 33;
+pub const IP_RECVRTHDR: c_int = 38;
+pub const IP_TCLASS: c_int = 39;
+pub const IP_RECVTCLASS: c_int = 40;
+pub const IP_ORIGINAL_ARRIVAL_IF: c_int = 47;
+pub const IP_ECN: c_int = 50;
+pub const IP_PKTINFO_EX: c_int = 51;
+pub const IP_WFP_REDIRECT_RECORDS: c_int = 60;
+pub const IP_WFP_REDIRECT_CONTEXT: c_int = 70;
 UNION!{union SOCKADDR_IN6_LH_u {
     [u32; 1],
     sin6_scope_id sin6_scope_id_mut: ULONG,
