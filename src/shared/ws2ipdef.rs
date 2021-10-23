@@ -110,3 +110,17 @@ STRUCT!{struct IN6_PKTINFO {
     ipi6_ifindex: ULONG,
 }}
 pub type PIN6_PKTINFO = *mut IN6_PKTINFO;
+pub const TCP_EXPEDITED_1122: c_int = 0x0002;
+pub const TCP_KEEPALIVE: c_int = 3;
+pub const TCP_MAXSEG: c_int = 4;
+pub const TCP_MAXRT: c_int = 5;
+pub const TCP_STDURG: c_int = 6;
+pub const TCP_NOURG: c_int = 7;
+pub const TCP_ATMARK: c_int = 8;
+pub const TCP_NOSYNRETRIES: c_int = 9;
+pub const TCP_TIMESTAMPS: c_int = 10;
+pub const TCP_OFFLOAD_PREFERENCE: c_int = 11;
+pub const TCP_CONGESTION_ALGORITHM: c_int = 12;
+pub const TCP_DELAY_FIN_ACK: c_int = 13;
+pub const TCP_MAXRTMS: c_int = 14;
+pub const TCP_FASTOPEN: c_int = 15;
