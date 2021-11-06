@@ -27,7 +27,6 @@ debug = ["impl-debug"]
 everything = []
 impl-debug = []
 impl-default = []
-std = []
 #km
 d3dkmthk = []
 #mmos
