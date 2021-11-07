@@ -5873,8 +5873,40 @@ fn um_objidl() {
     use winapi::um::objidl::*;
     assert_eq!(size_of::<BIND_OPTS>(), 16);
     assert_eq!(align_of::<BIND_OPTS>(), 4);
-    assert_eq!(size_of::<SOLE_AUTHENTICATION_SERVICE>(), 24);
-    assert_eq!(align_of::<SOLE_AUTHENTICATION_SERVICE>(), 8);
+    assert_eq!(size_of::<BIND_OPTS2>(), 40);
+    assert_eq!(align_of::<BIND_OPTS2>(), 8);
+    assert_eq!(size_of::<BIND_OPTS3>(), 48);
+    assert_eq!(align_of::<BIND_OPTS3>(), 8);
+    assert_eq!(size_of::<RemSNB>(), 12);
+    assert_eq!(align_of::<RemSNB>(), 4);
+    assert_eq!(size_of::<DVTARGETDEVICE>(), 16);
+    assert_eq!(align_of::<DVTARGETDEVICE>(), 4);
+    assert_eq!(size_of::<FORMATETC>(), 32);
+    assert_eq!(align_of::<FORMATETC>(), 8);
+    assert_eq!(size_of::<STATDATA>(), 56);
+    assert_eq!(align_of::<STATDATA>(), 8);
+    assert_eq!(size_of::<RemSTGMEDIUM>(), 24);
+    assert_eq!(align_of::<RemSTGMEDIUM>(), 4);
+    assert_eq!(size_of::<uSTGMEDIUM_u>(), 8);
+    assert_eq!(align_of::<uSTGMEDIUM_u>(), 8);
+    assert_eq!(size_of::<uSTGMEDIUM>(), 24);
+    assert_eq!(align_of::<uSTGMEDIUM>(), 8);
+    assert_eq!(size_of::<GDI_OBJECT_u>(), 8);
+    assert_eq!(align_of::<GDI_OBJECT_u>(), 8);
+    assert_eq!(size_of::<GDI_OBJECT>(), 16);
+    assert_eq!(align_of::<GDI_OBJECT>(), 8);
+    assert_eq!(size_of::<userSTGMEDIUM_u>(), 16);
+    assert_eq!(align_of::<userSTGMEDIUM_u>(), 8);
+    assert_eq!(size_of::<userSTGMEDIUM>(), 24);
+    assert_eq!(align_of::<userSTGMEDIUM>(), 8);
+    assert_eq!(size_of::<userFLAG_STGMEDIUM>(), 32);
+    assert_eq!(align_of::<userFLAG_STGMEDIUM>(), 8);
+    assert_eq!(size_of::<FLAG_STGMEDIUM>(), 32);
+    assert_eq!(align_of::<FLAG_STGMEDIUM>(), 8);
+    assert_eq!(size_of::<INTERFACEINFO>(), 32);
+    assert_eq!(align_of::<INTERFACEINFO>(), 8);
+    assert_eq!(size_of::<StorageLayout>(), 32);
+    assert_eq!(align_of::<StorageLayout>(), 8);
 }
 #[cfg(feature = "objidlbase")] #[test]
 fn um_objidlbase() {
