@@ -182,6 +182,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("debugapi", &["minwinbase", "minwindef", "winnt"], &["kernel32"]),
     ("devicetopology", &["guiddef", "minwindef", "unknwnbase", "windef", "winnt", "wtypes"], &[]),
     ("dinput", &[], &[]),
+    ("directmanipulation", &["basetsd", "guiddef", "minwindef", "ntdef", "unknwnbase", "windef", "winuser"], &[]),
     ("dispex", &["basetsd", "guiddef", "minwindef", "oaidl", "servprov", "unknwnbase", "winerror", "winnt", "wtypes"], &[]),
     ("dmksctl", &[], &[]),
     ("dmusicc", &[], &[]),
