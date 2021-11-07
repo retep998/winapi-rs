@@ -46,6 +46,10 @@ Yes, absolutely! By default the `std` feature of `winapi` is disabled, allowing 
 
 Because `winapi` does not depend on `std` by default, it has to define `c_void` itself instead of using `std::os::raw::c_void`. However, if you enable the `std` feature of `winapi` then it will re-export `c_void` from `std` and cause `winapi`'s `HANDLE` to be the same type as `std`'s `HANDLE`.
 
+### How do I turn `FARPROC` pointers (e.g. from `GetProcAddress`) into callable functions?
+
+Using `let func: Option<extern "stdcall" fn()> = unsafe { std::memory::transmute_copy(&ptr) };`.  According to [The Rustnomicon](https://doc.rust-lang.org/nomicon/ffi.html#the-nullable-pointer-optimization), `Option<fn()>` is the correct way to represent a nullable function pointer, corresponding to `void (*)()` in C.
+
 ### Should I still use those `-sys` crates such as `kernel32-sys`?
 
 No. Those crates are a legacy of how `winapi` 0.2 was organized. Starting with `winapi` 0.3 all definitions are directly in `winapi` itself, and so there is no longer any need to use those `-sys` crates.
