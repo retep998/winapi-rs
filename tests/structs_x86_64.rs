@@ -6062,6 +6062,74 @@ fn um_processthreadsapi() {
     assert_eq!(size_of::<STARTUPINFOW>(), 104);
     assert_eq!(align_of::<STARTUPINFOW>(), 8);
 }
+#[cfg(feature = "projectedfslib")] #[test]
+fn um_projectedfslib() {
+    use winapi::um::projectedfslib::*;
+    assert_eq!(size_of::<PRJ_NOTIFY_TYPES>(), 4);
+    assert_eq!(align_of::<PRJ_NOTIFY_TYPES>(), 4);
+    assert_eq!(size_of::<PRJ_NOTIFICATION>(), 4);
+    assert_eq!(align_of::<PRJ_NOTIFICATION>(), 4);
+    assert_eq!(size_of::<PRJ_EXT_INFO_TYPE>(), 4);
+    assert_eq!(align_of::<PRJ_EXT_INFO_TYPE>(), 4);
+    assert_eq!(size_of::<PRJ_EXTENDED_INFO_u_Symlink>(), 8);
+    assert_eq!(align_of::<PRJ_EXTENDED_INFO_u_Symlink>(), 8);
+    assert_eq!(size_of::<PRJ_EXTENDED_INFO_u>(), 8);
+    assert_eq!(align_of::<PRJ_EXTENDED_INFO_u>(), 8);
+    assert_eq!(size_of::<PRJ_EXTENDED_INFO>(), 16);
+    assert_eq!(align_of::<PRJ_EXTENDED_INFO>(), 8);
+    assert_eq!(size_of::<PRJ_NOTIFICATION_MAPPING>(), 16);
+    assert_eq!(align_of::<PRJ_NOTIFICATION_MAPPING>(), 8);
+    assert_eq!(size_of::<PRJ_STARTVIRTUALIZING_FLAGS>(), 4);
+    assert_eq!(align_of::<PRJ_STARTVIRTUALIZING_FLAGS>(), 4);
+    assert_eq!(size_of::<PRJ_STARTVIRTUALIZING_OPTIONS>(), 32);
+    assert_eq!(align_of::<PRJ_STARTVIRTUALIZING_OPTIONS>(), 8);
+    assert_eq!(size_of::<PRJ_VIRTUALIZATION_INSTANCE_INFO>(), 20);
+    assert_eq!(align_of::<PRJ_VIRTUALIZATION_INSTANCE_INFO>(), 4);
+    assert_eq!(size_of::<PRJ_PLACEHOLDER_ID>(), 4);
+    assert_eq!(align_of::<PRJ_PLACEHOLDER_ID>(), 4);
+    assert_eq!(size_of::<PRJ_PLACEHOLDER_VERSION_INFO>(), 256);
+    assert_eq!(align_of::<PRJ_PLACEHOLDER_VERSION_INFO>(), 1);
+    assert_eq!(size_of::<PRJ_FILE_BASIC_INFO>(), 56);
+    assert_eq!(align_of::<PRJ_FILE_BASIC_INFO>(), 8);
+    assert_eq!(size_of::<PRJ_PLACEHOLDER_INFO_EaInformation>(), 8);
+    assert_eq!(align_of::<PRJ_PLACEHOLDER_INFO_EaInformation>(), 4);
+    assert_eq!(size_of::<PRJ_PLACEHOLDER_INFO_SecurityInformation>(), 8);
+    assert_eq!(align_of::<PRJ_PLACEHOLDER_INFO_SecurityInformation>(), 4);
+    assert_eq!(size_of::<PRJ_PLACEHOLDER_INFO_StreamsInformation>(), 8);
+    assert_eq!(align_of::<PRJ_PLACEHOLDER_INFO_StreamsInformation>(), 4);
+    assert_eq!(size_of::<PRJ_PLACEHOLDER_INFO>(), 344);
+    assert_eq!(align_of::<PRJ_PLACEHOLDER_INFO>(), 8);
+    assert_eq!(size_of::<PRJ_UPDATE_TYPES>(), 4);
+    assert_eq!(align_of::<PRJ_UPDATE_TYPES>(), 4);
+    assert_eq!(size_of::<PRJ_UPDATE_FAILURE_CAUSES>(), 4);
+    assert_eq!(align_of::<PRJ_UPDATE_FAILURE_CAUSES>(), 4);
+    assert_eq!(size_of::<PRJ_FILE_STATE>(), 4);
+    assert_eq!(align_of::<PRJ_FILE_STATE>(), 4);
+    assert_eq!(size_of::<PRJ_CALLBACK_DATA_FLAGS>(), 4);
+    assert_eq!(align_of::<PRJ_CALLBACK_DATA_FLAGS>(), 4);
+    assert_eq!(size_of::<PRJ_CALLBACK_DATA>(), 96);
+    assert_eq!(align_of::<PRJ_CALLBACK_DATA>(), 8);
+    assert_eq!(size_of::<PRJ_NOTIFICATION_PARAMETERS_PostCreate>(), 4);
+    assert_eq!(align_of::<PRJ_NOTIFICATION_PARAMETERS_PostCreate>(), 4);
+    assert_eq!(size_of::<PRJ_NOTIFICATION_PARAMETERS_FileRenamed>(), 4);
+    assert_eq!(align_of::<PRJ_NOTIFICATION_PARAMETERS_FileRenamed>(), 4);
+    assert_eq!(size_of::<PRJ_NOTIFICATION_PARAMETERS_FileDeletedOnHandleClose>(), 1);
+    assert_eq!(align_of::<PRJ_NOTIFICATION_PARAMETERS_FileDeletedOnHandleClose>(), 1);
+    assert_eq!(size_of::<PRJ_NOTIFICATION_PARAMETERS>(), 4);
+    assert_eq!(align_of::<PRJ_NOTIFICATION_PARAMETERS>(), 4);
+    assert_eq!(size_of::<PRJ_CALLBACKS>(), 64);
+    assert_eq!(align_of::<PRJ_CALLBACKS>(), 8);
+    assert_eq!(size_of::<PRJ_COMPLETE_COMMAND_TYPE>(), 4);
+    assert_eq!(align_of::<PRJ_COMPLETE_COMMAND_TYPE>(), 4);
+    assert_eq!(size_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u_Notification>(), 4);
+    assert_eq!(align_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u_Notification>(), 4);
+    assert_eq!(size_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u_Enumeration>(), 8);
+    assert_eq!(align_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u_Enumeration>(), 8);
+    assert_eq!(size_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u>(), 8);
+    assert_eq!(align_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_u>(), 8);
+    assert_eq!(size_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS>(), 16);
+    assert_eq!(align_of::<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS>(), 8);
+}
 #[cfg(feature = "propidl")] #[test]
 fn um_propidl() {
     // FIXME
