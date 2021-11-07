@@ -174,7 +174,7 @@ macro_rules! RIDL {
         impl $interface {
             $(RIDL!{@method $(#[$($attrs)*])* fn $method($($p: $t,)*) -> $rtr})+
         }
-        RIDL!{@uuid $interface $($uuid),+}
+        RIDL!{@interface_trait $interface $vtbl $interface $($uuid),+}
     );
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {}) => (
@@ -184,7 +184,7 @@ macro_rules! RIDL {
             pub lpVtbl: *const $vtbl,
         }
         RIDL!{@deref $interface $pinterface}
-        RIDL!{@uuid $interface $($uuid),+}
+        RIDL!{@interface_trait $interface $vtbl $pinterface $($uuid),+}
     );
     (#[uuid($($uuid:expr),+)]
     interface $interface:ident ($vtbl:ident) : $pinterface:ident ($pvtbl:ident) {$(
@@ -201,7 +201,7 @@ macro_rules! RIDL {
             $(RIDL!{@method $(#[$($attrs)*])* fn $method($($p: $t,)*) -> $rtr})+
         }
         RIDL!{@deref $interface $pinterface}
-        RIDL!{@uuid $interface $($uuid),+}
+        RIDL!{@interface_trait $interface $vtbl $pinterface $($uuid),+}
     );
     (@deref $interface:ident $pinterface:ident) => (
         impl $crate::_core::ops::Deref for $interface {
@@ -214,13 +214,15 @@ macro_rules! RIDL {
     );
     (@method fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty) => (
         #[inline] pub unsafe fn $method(&self, $($p: $t,)*) -> $rtr {
-            ((*self.lpVtbl).$method)(self as *const _ as *mut _, $($p,)*)
+            ((*self.lpVtbl).$method)($crate::_core::ptr::NonNull::new_unchecked(
+                self as *const _ as *mut _), $($p,)*)
         }
     );
     (@method #[fixme] fn $method:ident($($p:ident : $t:ty,)*) -> $rtr:ty) => (
         #[inline] pub unsafe fn $method(&self, $($p: $t,)*) -> $rtr {
             let mut ret = $crate::_core::mem::uninitialized();
-            ((*self.lpVtbl).$method)(self as *const _ as *mut _, &mut ret, $($p,)*);
+            ((*self.lpVtbl).$method)($crate::_core::ptr::NonNull::new_unchecked(
+                self as *const _ as *mut _), &mut ret, $($p,)*);
             ret
         }
     );
@@ -231,7 +233,7 @@ macro_rules! RIDL {
         pub struct $vtbl {
             $($fields)*
             $(pub $method: unsafe extern "system" fn(
-                This: *mut $interface,
+                This: $crate::_core::ptr::NonNull<$crate::_core::ptr::NonNull<$vtbl>>,
                 $($p: $t,)*
             ) -> $rtr,)*
         }}
@@ -242,7 +244,7 @@ macro_rules! RIDL {
         RIDL!{@vtbl $interface $vtbl (
             $($fields)*
             pub $method: unsafe extern "system" fn(
-                This: *mut $interface,
+                This: $crate::_core::ptr::NonNull<$crate::_core::ptr::NonNull<$vtbl>>,
                 $($p: $t,)*
             ) -> $rtr,
         ) $($tail)*}
@@ -253,26 +255,25 @@ macro_rules! RIDL {
         RIDL!{@vtbl $interface $vtbl (
             $($fields)*
             pub $method: unsafe extern "system" fn(
-                This: *mut $interface,
+                This: $crate::_core::ptr::NonNull<$crate::_core::ptr::NonNull<$vtbl>>,
                 ret: *mut $rtr,
                 $($p: $t,)*
             ) -> *mut $rtr,
         ) $($tail)*}
     );
-    (@uuid $interface:ident
+    (@interface_trait $interface:ident $vtbl:ident $pinterface:ident
         $l:expr, $w1:expr, $w2:expr,
         $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr, $b6:expr, $b7:expr, $b8:expr
     ) => (
-        impl $crate::Interface for $interface {
-            #[inline]
-            fn uuidof() -> $crate::shared::guiddef::GUID {
-                $crate::shared::guiddef::GUID {
-                    Data1: $l,
-                    Data2: $w1,
-                    Data3: $w2,
-                    Data4: [$b1, $b2, $b3, $b4, $b5, $b6, $b7, $b8],
-                }
-            }
+        unsafe impl $crate::Interface for $interface {
+            type VTable = $vtbl;
+            type Super = $pinterface;
+            const IID: $crate::shared::guiddef::GUID = $crate::shared::guiddef::GUID {
+                Data1: $l,
+                Data2: $w1,
+                Data3: $w2,
+                Data4: [$b1, $b2, $b3, $b4, $b5, $b6, $b7, $b8],
+            };
         }
     );
     (@item $thing:item) => ($thing);

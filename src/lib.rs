@@ -60,9 +60,17 @@ pub mod ctypes {
     pub type wchar_t = u16;
 }
 // This trait should be implemented for all COM interfaces
-pub trait Interface {
+pub unsafe trait Interface : Sized + 'static {
+    /// A COM compatible V-Table
+    type VTable;
+    /// The interface that this interface inherits from
+    type Super: Interface;
+    /// The associated id for this interface
+    const IID: shared::guiddef::GUID;
     // Returns the IID of the Interface
-    fn uuidof() -> shared::guiddef::GUID;
+    fn uuidof() -> shared::guiddef::GUID {
+        <Self as Interface>::IID
+    }
 }
 // This trait should be implemented for all COM classes
 pub trait Class {

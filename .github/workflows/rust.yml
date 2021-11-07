@@ -8,7 +8,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        toolchain: [nightly-x86_64-msvc, nightly-i686-msvc, nightly-x86_64-gnu, nightly-i686-gnu, 1.6.0-x86_64-msvc]
+        toolchain: [nightly-x86_64-msvc, nightly-i686-msvc, nightly-x86_64-gnu, nightly-i686-gnu, 1.25.0-x86_64-msvc]
     steps:
     - uses: actions/checkout@v2
     - uses: actions-rs/toolchain@v1
