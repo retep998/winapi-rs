@@ -270,6 +270,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("objidlbase", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt", "wtypesbase"], &[]),
     ("ocidl", &["guiddef", "minwindef", "ntdef", "oaidl", "unknwnbase", "wtypes", "wtypesbase"], &[]),
     ("ole2", &["minwindef", "oleidl", "windef", "winnt"], &["ole32"]),
+    ("oleacc", &["guiddef", "minwindef", "oaidl", "unknwnbase", "windef", "winerror", "winnt", "wtypes"], &[]),
     ("oleauto", &["basetsd", "minwinbase", "minwindef", "oaidl", "winnt", "wtypes", "wtypesbase"], &["oleaut32"]),
     ("olectl", &["winerror", "winnt"], &[]),
     ("oleidl", &["minwindef", "ntdef", "objidl", "unknwnbase", "windef"], &[]),
