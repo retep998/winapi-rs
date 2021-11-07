@@ -4270,6 +4270,101 @@ fn um_fileapi() {
     assert_eq!(size_of::<FILE_ID_INFO>(), 24);
     assert_eq!(align_of::<FILE_ID_INFO>(), 8);
 }
+#[cfg(feature = "gdipluscolormatrix")] #[test]
+fn um_gdipluscolormatrix() {
+    use winapi::um::gdipluscolormatrix::*;
+    assert_eq!(size_of::<ColorMatrix>(), 100);
+    assert_eq!(align_of::<ColorMatrix>(), 4);
+    assert_eq!(size_of::<ColorMap>(), 8);
+    assert_eq!(align_of::<ColorMap>(), 4);
+}
+#[cfg(feature = "gdipluseffects")] #[test]
+fn um_gdipluseffects() {
+    use winapi::um::gdipluseffects::*;
+    assert_eq!(size_of::<SharpenParams>(), 8);
+    assert_eq!(align_of::<SharpenParams>(), 4);
+    assert_eq!(size_of::<BlurParams>(), 8);
+    assert_eq!(align_of::<BlurParams>(), 4);
+    assert_eq!(size_of::<BrightnessContrastParams>(), 8);
+    assert_eq!(align_of::<BrightnessContrastParams>(), 4);
+    assert_eq!(size_of::<RedEyeCorrectionParams>(), 16);
+    assert_eq!(align_of::<RedEyeCorrectionParams>(), 8);
+    assert_eq!(size_of::<HueSaturationLightnessParams>(), 12);
+    assert_eq!(align_of::<HueSaturationLightnessParams>(), 4);
+    assert_eq!(size_of::<TintParams>(), 8);
+    assert_eq!(align_of::<TintParams>(), 4);
+    assert_eq!(size_of::<LevelsParams>(), 12);
+    assert_eq!(align_of::<LevelsParams>(), 4);
+    assert_eq!(size_of::<ColorBalanceParams>(), 12);
+    assert_eq!(align_of::<ColorBalanceParams>(), 4);
+    assert_eq!(size_of::<ColorLUTParams>(), 1024);
+    assert_eq!(align_of::<ColorLUTParams>(), 1);
+    assert_eq!(size_of::<ColorCurveParams>(), 12);
+    assert_eq!(align_of::<ColorCurveParams>(), 4);
+}
+#[cfg(feature = "gdiplusimaging")] #[test]
+fn um_gdiplusimaging() {
+    use winapi::um::gdiplusimaging::*;
+    assert_eq!(size_of::<ImageCodecInfo>(), 104);
+    assert_eq!(align_of::<ImageCodecInfo>(), 8);
+    assert_eq!(size_of::<BitmapData>(), 32);
+    assert_eq!(align_of::<BitmapData>(), 8);
+    assert_eq!(size_of::<EncoderParameter>(), 32);
+    assert_eq!(align_of::<EncoderParameter>(), 8);
+    assert_eq!(size_of::<EncoderParameters>(), 40);
+    assert_eq!(align_of::<EncoderParameters>(), 8);
+    assert_eq!(size_of::<ImageItemData>(), 40);
+    assert_eq!(align_of::<ImageItemData>(), 8);
+    assert_eq!(size_of::<PropertyItem>(), 24);
+    assert_eq!(align_of::<PropertyItem>(), 8);
+}
+#[cfg(feature = "gdiplusinit")] #[test]
+fn um_gdiplusinit() {
+    use winapi::um::gdiplusinit::*;
+    assert_eq!(size_of::<GdiplusStartupInput>(), 24);
+    assert_eq!(align_of::<GdiplusStartupInput>(), 8);
+    assert_eq!(size_of::<GdiplusStartupInputEx>(), 32);
+    assert_eq!(align_of::<GdiplusStartupInputEx>(), 8);
+    assert_eq!(size_of::<GdiplusStartupOutput>(), 16);
+    assert_eq!(align_of::<GdiplusStartupOutput>(), 8);
+}
+#[cfg(feature = "gdiplusmetaheader")] #[test]
+fn um_gdiplusmetaheader() {
+    use winapi::um::gdiplusmetaheader::*;
+    assert_eq!(size_of::<ENHMETAHEADER3>(), 88);
+    assert_eq!(align_of::<ENHMETAHEADER3>(), 4);
+    assert_eq!(size_of::<PWMFRect16>(), 8);
+    assert_eq!(align_of::<PWMFRect16>(), 2);
+    // packed = 2
+    // assert_eq!(size_of::<WmfPlaceableFileHeader>(), 22);
+    // assert_eq!(align_of::<WmfPlaceableFileHeader>(), 2);
+    assert_eq!(size_of::<MetafileHeader>(), 140);
+    assert_eq!(align_of::<MetafileHeader>(), 4);
+}
+#[cfg(feature = "gdipluspixelformats")] #[test]
+fn um_gdipluspixelformats() {
+    use winapi::um::gdipluspixelformats::*;
+    assert_eq!(size_of::<ColorPalette>(), 12);
+    assert_eq!(align_of::<ColorPalette>(), 4);
+}
+#[cfg(feature = "gdiplustypes")] #[test]
+fn um_gdiplustypes() {
+    use winapi::um::gdiplustypes::*;
+    assert_eq!(size_of::<SizeF>(), 8);
+    assert_eq!(align_of::<SizeF>(), 4);
+    assert_eq!(size_of::<Size>(), 8);
+    assert_eq!(align_of::<Size>(), 4);
+    assert_eq!(size_of::<PointF>(), 8);
+    assert_eq!(align_of::<PointF>(), 4);
+    assert_eq!(size_of::<Point>(), 8);
+    assert_eq!(align_of::<Point>(), 4);
+    assert_eq!(size_of::<RectF>(), 16);
+    assert_eq!(align_of::<RectF>(), 4);
+    assert_eq!(size_of::<Rect>(), 16);
+    assert_eq!(align_of::<Rect>(), 4);
+    assert_eq!(size_of::<CharacterRange>(), 8);
+    assert_eq!(align_of::<CharacterRange>(), 4);
+}
 #[cfg(feature = "heapapi")] #[test]
 fn um_heapapi() {
     use winapi::um::heapapi::*;

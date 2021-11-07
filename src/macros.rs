@@ -20,6 +20,11 @@ macro_rules! MAKE_SCODE {
         ($sev << 31) | ($fac << 16) | $code
     }
 }
+macro_rules! MAKE_DDHRESULT {
+    ($code:expr) => {
+        MAKE_HRESULT!(1, $crate::um::ddraw::_FACDD, $code)
+    };
+}
 macro_rules! HIDP_ERROR_CODES {
     ($sev:expr, $code:expr) => {
         ($sev << 28) | (FACILITY_HID_ERROR_CODE << 16) | $code
