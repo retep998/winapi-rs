@@ -107,6 +107,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("adhoc", &["guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("appmgmt", &["guiddef", "minwindef", "winnt"], &["advapi32"]),
     ("audioclient", &["audiosessiontypes", "basetsd", "guiddef", "minwindef", "mmreg", "strmif", "unknwnbase", "winerror", "winnt", "wtypesbase"], &[]),
+    ("audiopolicy", &["audioclient", "audiosessiontypes", "basetsd", "guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
     ("audiosessiontypes", &["minwindef"], &[]),
     ("avrt", &["guiddef", "minwindef", "winnt"], &["avrt"]),
     ("bits", &["basetsd", "guiddef", "minwindef", "unknwnbase", "winnt"], &[]),
