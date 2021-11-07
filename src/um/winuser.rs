@@ -6465,6 +6465,22 @@ extern "system" {
         dpi: UINT,
     ) -> BOOL;
 }
+STRUCT!{struct FILTERKEYS {
+    cbSize: UINT,
+    dwFlags: DWORD,
+    iWaitMSec: DWORD,
+    iDelayMSec: DWORD,
+    iRepeatMSec: DWORD,
+    iBounceMSec: DWORD,
+}}
+pub type LPFILTERKEYS = *mut FILTERKEYS;
+pub const FKF_FILTERKEYSON: DWORD = 0x00000001;
+pub const FKF_AVAILABLE: DWORD = 0x00000002;
+pub const FKF_HOTKEYACTIVE: DWORD = 0x00000004;
+pub const FKF_CONFIRMHOTKEY: DWORD = 0x00000008;
+pub const FKF_HOTKEYSOUND: DWORD = 0x00000010;
+pub const FKF_INDICATOR: DWORD = 0x00000020;
+pub const FKF_CLICKON: DWORD = 0x00000040;
 //13191
 extern "system" {
     pub fn SetLastErrorEx(
