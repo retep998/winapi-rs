@@ -3,6 +3,16 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
+//! Raw FFI bindings to all of Windows API.
+//! # Features
+//! Every submodule of this crate's modules lies behind a compiler feature of the same name.
+//! The only exceptions are [`winapi::shared::guiddef`](shared/guiddef/) which requires no feature,
+//! and [`winapi::um::gl`](um/gl/) which instead requires the feature `gl_gl` for
+//! [`winapi::um::gl::gl`](um/gl/gl/).  Enabling a feature enables all its dependencies.
+//! Additionally, the `everything` feature enables all features, and the `std` feature redefines
+//! [`winapi::ctypes::c_void`](ctypes/enum.c_void.html) to be `std::os::raw::c_void`, making
+//! derivative types like [`winapi::shared::ntdef::HANDLE`](shared/ntdef/type.HANDLE.html)
+//! compatible with their `std` equivalents (like `std::os::windows::raw::HANDLE`).
 #![cfg(windows)]
 #![deny(unused, unused_qualifications)]
 #![warn(unused_attributes)]
