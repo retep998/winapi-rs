@@ -2451,6 +2451,7 @@ extern "system" {
 }
 pub const WDA_NONE: DWORD = 0x00000000;
 pub const WDA_MONITOR: DWORD = 0x00000001;
+pub const WDA_EXCLUDEFROMCAPTURE: DWORD = 0x00000011;
 extern "system" {
     pub fn GetWindowDisplayAffinity(
         hWnd: HWND,
