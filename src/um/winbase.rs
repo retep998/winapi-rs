@@ -457,7 +457,13 @@ extern "system" {
         uMinFree: UINT,
     ) -> SIZE_T;
 }
-// SCS_*
+pub const SCS_32BIT_BINARY: DWORD = 0;
+pub const SCS_DOS_BINARY: DWORD = 1;
+pub const SCS_WOW_BINARY: DWORD = 2;
+pub const SCS_PIF_BINARY: DWORD = 3;
+pub const SCS_POSIX_BINARY: DWORD = 4;
+pub const SCS_OS216_BINARY: DWORD = 5;
+pub const SCS_64BIT_BINARY: DWORD = 6;
 extern "system" {
     pub fn GetBinaryTypeA(
         lpApplicationName: LPCSTR,
