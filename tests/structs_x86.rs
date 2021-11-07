@@ -2333,6 +2333,14 @@ fn um_appmgmt() {
     assert_eq!(size_of::<APPCATEGORYINFOLIST>(), 8);
     assert_eq!(align_of::<APPCATEGORYINFOLIST>(), 4);
 }
+#[cfg(feature = "audioclient")] #[test]
+fn um_audioclient() {
+    use winapi::um::audioclient::*;
+    assert_eq!(size_of::<AudioClientProperties>(), 16);
+    assert_eq!(align_of::<AudioClientProperties>(), 4);
+    assert_eq!(size_of::<AMBISONICS_PARAMS>(), 32);
+    assert_eq!(align_of::<AMBISONICS_PARAMS>(), 4);
+}
 #[cfg(feature = "bits")] #[test]
 fn um_bits() {
     use winapi::um::bits::*;

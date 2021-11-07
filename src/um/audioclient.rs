@@ -4,14 +4,13 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms
 //! this ALWAYS GENERATED file contains the definitions for the interfaces
-use ctypes::c_float;
 use shared::basetsd::{UINT32, UINT64};
 use shared::guiddef::{LPCGUID, REFIID};
-use shared::minwindef::{BYTE, DWORD, LPVOID};
+use shared::minwindef::{BOOL, BYTE, DWORD, FLOAT, LPVOID};
 use shared::mmreg::WAVEFORMATEX;
 use shared::winerror::{FACILITY_AUDCLNT, SEVERITY_ERROR, SEVERITY_SUCCESS};
 use shared::wtypesbase::SCODE;
-use um::audiosessiontypes::AUDCLNT_SHAREMODE;
+use um::audiosessiontypes::{AUDCLNT_SHAREMODE, AUDIO_STREAM_CATEGORY};
 use um::strmif::REFERENCE_TIME;
 use um::unknwnbase::{IUnknown, IUnknownVtbl};
 use um::winnt::{HANDLE, HRESULT};
@@ -56,16 +55,42 @@ ENUM!{enum AUDCLNT_BUFFERFLAGS {
     AUDCLNT_BUFFERFLAGS_SILENT = 0x2,
     AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR = 0x4,
 }}
+ENUM!{enum AUDCLNT_STREAMOPTIONS {
+    AUDCLNT_STREAMOPTIONS_NONE = 0,
+    AUDCLNT_STREAMOPTIONS_RAW = 0x1,
+    AUDCLNT_STREAMOPTIONS_MATCH_FORMAT = 0x2,
+    AUDCLNT_STREAMOPTIONS_AMBISONICS = 0x4,
+}}
+STRUCT!{struct AudioClientProperties {
+    cbSize: UINT32,
+    bIsOffload: BOOL,
+    eCategory: AUDIO_STREAM_CATEGORY,
+    Options: AUDCLNT_STREAMOPTIONS,
+}}
 DEFINE_GUID!{IID_IAudioClient,
     0x1CB9AD4C, 0xDBFA, 0x4c32, 0xB1, 0x78, 0xC2, 0xF5, 0x68, 0xA7, 0x03, 0xB2}
+DEFINE_GUID!{IID_IAudioClient2,
+    0x726778cd, 0xf60a, 0x4eda, 0x82, 0xde, 0xe4, 0x76, 0x10, 0xcd, 0x78, 0xaa}
+DEFINE_GUID!{IID_IAudioClient3,
+    0x7ed4ee07, 0x8e67, 0x4cd4, 0x8c, 0x1a, 0x2b, 0x7a, 0x59, 0x87, 0xad, 0x42}
 DEFINE_GUID!{IID_IAudioRenderClient,
     0xF294ACFC, 0x3146, 0x4483, 0xA7, 0xBF, 0xAD, 0xDC, 0xA7, 0xC2, 0x60, 0xE2}
 DEFINE_GUID!{IID_IAudioCaptureClient,
     0xc8adbd64, 0xe71e, 0x48a0, 0xa4, 0xde, 0x18, 0x5c, 0x39, 0x5c, 0xd3, 0x17}
 DEFINE_GUID!{IID_IAudioClock,
     0xcd63314f, 0x3fba, 0x4a1b, 0x81, 0x2c, 0xef, 0x96, 0x35, 0x87, 0x28, 0xe7}
+DEFINE_GUID!{IID_IAudioClock2,
+    0x6f49ff73, 0x6727, 0x49ac, 0xa0, 0x08, 0xd9, 0x8c, 0xf5, 0xe7, 0x00, 0x48}
+DEFINE_GUID!{IID_IAudioClockAdjustment,
+    0xf6e4c0a0, 0x46d9, 0x4fb8, 0xbe, 0x21, 0x57, 0xa3, 0xef, 0x2b, 0x62, 0x6c}
+DEFINE_GUID!{IID_ISimpleAudioVolume,
+    0x87ce5498, 0x68d6, 0x44e5, 0x92, 0x15, 0x6d, 0xa4, 0x7e, 0xf8, 0x83, 0xd8}
 DEFINE_GUID!{IID_IAudioStreamVolume,
     0x93014887, 0x242d, 0x4068, 0x8a, 0x15, 0xcf, 0x5e, 0x93, 0xb9, 0x0f, 0xe3}
+DEFINE_GUID!{IID_IAudioAmbisonicsControl,
+    0x28724c91, 0xdf35, 0x4856, 0x9f, 0x76, 0xd6, 0xa2, 0x64, 0x13, 0xf3, 0xdf}
+DEFINE_GUID!{IID_IChannelAudioVolume,
+    0x1c158861, 0xb533, 0x4b30, 0xb1, 0xcf, 0xe8, 0x53, 0xe5, 0x1c, 0x59, 0xb8}
 RIDL!{#[uuid(0x1cb9ad4c, 0xdbfa, 0x4c32, 0xb1, 0x78, 0xc2, 0xf5, 0x68, 0xa7, 0x03, 0xb2)]
 interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
     fn Initialize(
@@ -108,6 +133,42 @@ interface IAudioClient(IAudioClientVtbl): IUnknown(IUnknownVtbl) {
         ppv: *mut LPVOID,
     ) -> HRESULT,
 }}
+RIDL!{#[uuid(0x726778cd, 0xf60a, 0x4eda, 0x82, 0xde, 0xe4, 0x76, 0x10, 0xcd, 0x78, 0xaa)]
+interface IAudioClient2(IAudioClient2Vtbl): IAudioClient(IAudioClientVtbl) {
+    fn IsOffloadCapable( 
+        Category: AUDIO_STREAM_CATEGORY,
+        pbOffloadCapable: *mut BOOL,
+    ) -> HRESULT,
+    fn SetClientProperties( 
+        pProperties: *const AudioClientProperties,
+    ) -> HRESULT,
+    fn GetBufferSizeLimits( 
+        pFormat: *const WAVEFORMATEX,
+        bEventDriven: BOOL,
+        phnsMinBufferDuration: *mut REFERENCE_TIME,
+        phnsMaxBufferDuration: *mut REFERENCE_TIME,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x7ed4ee07, 0x8e67, 0x4cd4, 0x8c, 0x1a, 0x2b, 0x7a, 0x59, 0x87, 0xad, 0x42)]
+interface IAudioClient3(IAudioClient3Vtbl): IAudioClient2(IAudioClient2Vtbl) {
+    fn GetSharedModeEnginePeriod( 
+        pFormat: *const WAVEFORMATEX,
+        pDefaultPeriodInFrames: *mut UINT32,
+        pFundamentalPeriodInFrames: *mut UINT32,
+        pMinPeriodInFrames: *mut UINT32,
+        pMaxPeriodInFrames: *mut UINT32,
+    ) -> HRESULT,
+    fn GetCurrentSharedModeEnginePeriod( 
+        ppFormat: *mut *mut WAVEFORMATEX,
+        pCurrentPeriodInFrames: *mut UINT32,
+    ) -> HRESULT,
+    fn InitializeSharedAudioStream( 
+        StreamFlags: DWORD,
+        PeriodInFrames: UINT32,
+        pFormat: *const WAVEFORMATEX,
+        AudioSessionGuid: LPCGUID,
+    ) -> HRESULT,
+}}
 RIDL!{#[uuid(0xf294acfc, 0x3146, 0x4483, 0xa7, 0xbf, 0xad, 0xdc, 0xa7, 0xc2, 0x60, 0xe2)]
 interface IAudioRenderClient(IAudioRenderClientVtbl): IUnknown(IUnknownVtbl) {
     fn GetBuffer(
@@ -148,6 +209,35 @@ interface IAudioClock(IAudioClockVtbl): IUnknown(IUnknownVtbl) {
         pdwCharacteristics: *mut DWORD,
     ) -> HRESULT,
 }}
+RIDL!{#[uuid(0x6f49ff73, 0x6727, 0x49ac, 0xa0, 0x08, 0xd9, 0x8c, 0xf5, 0xe7, 0x00, 0x48)]
+interface IAudioClock2(IAudioClock2Vtbl): IUnknown(IUnknownVtbl) {
+    fn GetDevicePosition(
+        DevicePosition: *mut UINT64,
+        QPCPosition: *mut UINT64,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0xf6e4c0a0, 0x46d9, 0x4fb8, 0xbe, 0x21, 0x57, 0xa3, 0xef, 0x2b, 0x62, 0x6c)]
+interface IAudioClockAdjustment(IAudioClockAdjustmentVtbl): IUnknown(IUnknownVtbl) {
+    fn SetSampleRate(
+        flSampleRate: FLOAT,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x87ce5498, 0x68d6, 0x44e5, 0x92, 0x15, 0x6d, 0xa4, 0x7e, 0xf8, 0x83, 0xd8)]
+interface ISimpleAudioVolume(ISimpleAudioVolumeVtbl): IUnknown(IUnknownVtbl) {
+    fn SetMasterVolume( 
+        fLevel: FLOAT,
+        EventContext: LPCGUID,
+    ) -> HRESULT,
+    fn GetMasterVolume( 
+        pfLevel: *mut FLOAT,
+    ) -> HRESULT,
+    fn SetMute( 
+        bMute: BOOL,
+    ) -> HRESULT,
+    fn GetMute( 
+        pbMute: *mut BOOL,
+    ) -> HRESULT,
+}}
 RIDL!{#[uuid(0x93014887, 0x242d, 0x4068, 0x8a, 0x15, 0xcf, 0x5e, 0x93, 0xb9, 0x0f, 0xe3)]
 interface IAudioStreamVolume(IAudioStreamVolumeVtbl): IUnknown(IUnknownVtbl) {
     fn GetChannelCount(
@@ -155,18 +245,81 @@ interface IAudioStreamVolume(IAudioStreamVolumeVtbl): IUnknown(IUnknownVtbl) {
     ) -> HRESULT,
     fn SetChannelVolume(
         dwIndex: UINT32,
-        fLevel: c_float,
+        fLevel: FLOAT,
     ) -> HRESULT,
     fn GetChannelVolume(
         dwIndex: UINT32,
-        pfLevel: *mut c_float,
+        pfLevel: *mut FLOAT,
     ) -> HRESULT,
     fn SetAllVolumes(
         dwCount: UINT32,
-        pfVolumes: *const c_float,
+        pfVolumes: *const FLOAT,
     ) -> HRESULT,
     fn GetAllVolumes(
         dwCount: UINT32,
-        pfVolumes: *mut c_float,
+        pfVolumes: *mut FLOAT,
+    ) -> HRESULT,
+}}
+ENUM!{enum AMBISONICS_TYPE {
+    AMBISONICS_TYPE_FULL3D,
+}}
+ENUM!{enum AMBISONICS_CHANNEL_ORDERING {
+    AMBISONICS_CHANNEL_ORDERING_ACN,
+}}
+ENUM!{enum AMBISONICS_NORMALIZATION {
+    AMBISONICS_NORMALIZATION_SN3D,
+    AMBISONICS_NORMALIZATION_N3D,
+}}
+STRUCT!{struct AMBISONICS_PARAMS {
+    u32Size: UINT32,
+    u32Version: UINT32,
+    u32Type: AMBISONICS_TYPE,
+    u32ChannelOrdering: AMBISONICS_CHANNEL_ORDERING,
+    u32Normalization: AMBISONICS_NORMALIZATION,
+    u32Order: UINT32,
+    u32NumChannels: UINT32,
+    pu32ChannelMap: *mut UINT32,
+}}
+RIDL!{#[uuid(0x28724c91, 0xdf35, 0x4856, 0x9f, 0x76, 0xd6, 0xa2, 0x64, 0x13, 0xf3, 0xdf)]
+interface IAudioAmbisonicsControl(IAudioAmbisonicsControlVtbl): IUnknown(IUnknownVtbl) {
+    fn SetData( 
+        pAmbisonicsParams: *const AMBISONICS_PARAMS,
+        cbAmbisonicsParams: UINT32,
+    ) -> HRESULT,
+    fn SetHeadTracking( 
+        bEnableHeadTracking: BOOL,
+    ) -> HRESULT,
+    fn GetHeadTracking( 
+        pbEnableHeadTracking: *mut BOOL,
+    ) -> HRESULT,
+    fn SetRotation( 
+        X: FLOAT,
+        Y: FLOAT,
+        Z: FLOAT,
+        W: FLOAT,
+    ) -> HRESULT,
+}}
+RIDL!{#[uuid(0x1c158861, 0xb533, 0x4b30, 0xb1, 0xcf, 0xe8, 0x53, 0xe5, 0x1c, 0x59, 0xb8)]
+interface IAudioChannelVolume(IAudioChannelVolumeVtbl): IUnknown(IUnknownVtbl) {
+    fn GetChannelCount( 
+        pdwCount: *mut UINT32,
+    ) -> HRESULT,
+    fn SetChannelVolume( 
+        dwIndex: UINT32,
+        fLevel: FLOAT,
+        EventContext: LPCGUID,
+    ) -> HRESULT,
+    fn GetChannelVolume( 
+        dwIndex: UINT32,
+        pfLevel: *mut FLOAT,
+    ) -> HRESULT,
+    fn SetAllVolumes( 
+        dwCount: UINT32,
+        pfVolumes: *const FLOAT,
+        EventContext: LPCGUID,
+    ) -> HRESULT,
+    fn GetAllVolumes( 
+        dwCount: UINT32,
+        pfVolumes: *mut FLOAT,
     ) -> HRESULT,
 }}
