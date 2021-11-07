@@ -75,6 +75,7 @@ const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static
     ("rpcdce", &["guiddef", "minwindef", "rpc"], &[]),
     ("rpcndr", &[], &[]),
     ("sddl", &["basetsd", "minwindef", "winnt"], &["advapi32"]),
+    ("secext", &["minwindef","winnt"], &["secur32"]),
     ("sspi", &["basetsd", "guiddef", "minwindef", "subauth", "wincred", "winnt"], &["credui", "secur32"]),
     ("stralign", &["vcruntime", "winnt"], &["kernel32"]),
     ("tcpestats", &["basetsd", "ntdef"], &[]),
