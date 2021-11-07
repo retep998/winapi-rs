@@ -33,6 +33,7 @@
 #[cfg(feature = "evntprov")] pub mod evntprov;
 #[cfg(feature = "evntrace")] pub mod evntrace;
 pub mod guiddef;
+#[cfg(feature = "fltuserstructures")] pub mod fltuserstructures;
 #[cfg(feature = "hidclass")] pub mod hidclass;
 #[cfg(feature = "hidpi")] pub mod hidpi;
 #[cfg(feature = "hidsdi")] pub mod hidsdi;
