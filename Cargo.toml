@@ -25,6 +25,7 @@ winapi-x86_64-pc-windows-gnu = { version = "0.4", path = "x86_64" }
 [features]
 debug = ["impl-debug"]
 everything = []
+external-lib = []
 impl-debug = []
 impl-default = []
 std = []
