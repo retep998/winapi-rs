@@ -354,31 +354,40 @@ macro_rules! BITFIELD {
         )+}
     }
 }
+
 #[macro_export]
+#[allow(non_snake_case)]
 macro_rules! ENUM {
     {enum $name:ident { $($variant:ident = $value:expr,)+ }} => {
+        #[allow(non_camel_case_types)]
         pub type $name = u32;
-        $(pub const $variant: $name = $value;)+
+        $(#[allow(non_upper_case_globals)] pub const $variant: $name = $value;)+
     };
     {enum $name:ident { $variant:ident = $value:expr, $($rest:tt)* }} => {
+        #[allow(non_camel_case_types)]
         pub type $name = u32;
+        #[allow(non_upper_case_globals)]
         pub const $variant: $name = $value;
         ENUM!{@gen $name $variant, $($rest)*}
     };
     {enum $name:ident { $variant:ident, $($rest:tt)* }} => {
-        ENUM!{enum $name { $variant = 0, $($rest)* }}
+        ENUM!{#[allow(non_camel_case_types)] enum $name { $variant = 0, $($rest)* }}
     };
     {@gen $name:ident $base:ident,} => {};
     {@gen $name:ident $base:ident, $variant:ident = $value:expr, $($rest:tt)*} => {
+        #[allow(non_upper_case_globals)]
         pub const $variant: $name = $value;
         ENUM!{@gen $name $variant, $($rest)*}
     };
     {@gen $name:ident $base:ident, $variant:ident, $($rest:tt)*} => {
+        #[allow(non_upper_case_globals)]
         pub const $variant: $name = $base + 1u32;
         ENUM!{@gen $name $variant, $($rest)*}
     };
 }
+
 #[macro_export]
+#[allow(non_snake_case)]
 macro_rules! STRUCT {
     (#[debug] $($rest:tt)*) => (
         STRUCT!{#[cfg_attr(feature = "impl-debug", derive(Debug))] $($rest)*}
@@ -386,7 +395,7 @@ macro_rules! STRUCT {
     ($(#[$attrs:meta])* struct $name:ident {
         $($field:ident: $ftype:ty,)+
     }) => (
-        #[repr(C)] #[derive(Copy)] $(#[$attrs])*
+        #[repr(C)] #[derive(Copy)] #[allow(non_snake_case)] $(#[$attrs])*
         pub struct $name {
             $(pub $field: $ftype,)+
         }
