@@ -2294,6 +2294,24 @@ interface ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl):
         ResolveMode: D3D12_RESOLVE_MODE,
     ) -> (),
 }}
+STRUCT!{struct D3D12_WRITEBUFFERIMMEDIATE_PARAMETER {
+    Dest: D3D12_GPU_VIRTUAL_ADDRESS,
+    Value: u32,
+}}
+ENUM!{enum D3D12_WRITEBUFFERIMMEDIATE_MODE {
+    D3D12_WRITEBUFFERIMMEDIATE_MODE_DEFAULT = 0,
+    D3D12_WRITEBUFFERIMMEDIATE_MODE_MARKER_IN = 0x1,
+    D3D12_WRITEBUFFERIMMEDIATE_MODE_MARKER_OUT = 0x2,
+}}
+RIDL!{#[uuid(0x38c3e585, 0xff17, 0x412c, 0x91, 0x50, 0x4f, 0xc6, 0xf9, 0xd7, 0x2a, 0x28)]
+interface ID3D12GraphicsCommandList2(ID3D12GraphicsCommandList2Vtbl):
+    ID3D12GraphicsCommandList1(ID3D12GraphicsCommandList1Vtbl) {
+    fn WriteBufferImmediate(
+        Count: UINT,
+        pParams: *const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER,
+        pModes: *const D3D12_WRITEBUFFERIMMEDIATE_MODE,
+    ) -> (),
+}}
 RIDL!{#[uuid(0x0ec870a6, 0x5d7e, 0x4c22, 0x8c, 0xfc, 0x5b, 0xaa, 0xe0, 0x76, 0x16, 0xed)]
 interface ID3D12CommandQueue(ID3D12CommandQueueVtbl): ID3D12Pageable(ID3D12PageableVtbl) {
     fn UpdateTileMappings(
