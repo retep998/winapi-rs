@@ -3,6 +3,7 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
+use shared::minwindef::{DWORD};
 DEFINE_GUID!{CLSID_DirectDraw,
     0xd7b70ee0, 0x4340, 0x11cf, 0xb0, 0x63, 0x00, 0x20, 0xaf, 0xc2, 0xcd, 0x35}
 DEFINE_GUID!{CLSID_DirectDraw7,
@@ -35,3 +36,11 @@ DEFINE_GUID!{IID_IDirectDrawColorControl,
     0x4b9f0ee0, 0x0d7e, 0x11d0, 0x9b, 0x06, 0x00, 0xa0, 0xc9, 0x03, 0xa3, 0xb8}
 DEFINE_GUID!{IID_IDirectDrawGammaControl,
     0x69c11c3e, 0xb46b, 0x11d1, 0xad, 0x7a, 0x00, 0xc0, 0x4f, 0xc2, 0x9b, 0x4e}
+pub type LPDIRECTDRAW7 = *mut DWORD;
+pub type LPDIRECTDRAWSURFACE7 = *mut DWORD;
+pub type LPDDPIXELFORMAT = *mut DWORD;
+STRUCT!{struct DDCOLORKEY {
+    dw1: DWORD,
+    dw2: DWORD,
+}}
+pub type LPDDCOLORKEY = *mut DDCOLORKEY;
