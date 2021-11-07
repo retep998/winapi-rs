@@ -4,14 +4,14 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use shared::basetsd::{DWORD_PTR, UINT_PTR};
-use shared::minwindef::{DWORD, LPBYTE, LPDWORD, LPWORD, PDWORD, UINT};
+use shared::minwindef::{BOOL, DWORD, LPBYTE, LPDWORD, LPWORD, PDWORD, UINT};
 use um::imm::LPUINT;
 use um::mmsystem::{
     HMIDI, HMIDIIN, HMIDIOUT, HMIDISTRM, HWAVEIN, HWAVEOUT, LPCWAVEFORMATEX, LPHMIDIIN, LPHMIDIOUT,
     LPHMIDISTRM, LPHWAVEIN, LPHWAVEOUT, LPMIDIHDR, LPMIDIINCAPSW, LPMIDIOUTCAPSW, LPMMTIME,
-    LPWAVEHDR, LPWAVEINCAPSW, LPWAVEOUTCAPSW, MMRESULT
+    LPWAVEHDR, LPWAVEINCAPSW, LPWAVEOUTCAPSW, MCIDEVICEID, MCIERROR, MMRESULT, YIELDPROC,
 };
-use um::winnt::{LPWSTR, PVOID};
+use um::winnt::{HANDLE, LPCSTR, LPCWSTR, LPWSTR, PVOID};
 extern "system" {
     pub fn waveOutGetNumDevs() -> UINT;
     // pub fn waveOutGetDevCapsA();
@@ -333,4 +333,43 @@ extern "system" {
         dw1: DWORD_PTR,
         dw2: DWORD_PTR,
     ) -> MMRESULT;
+    pub fn mciExecute(
+        pszCommand: LPCSTR
+    ) -> BOOL;
+    pub fn mciGetCreatorTask(
+        IDDevice: MCIDEVICEID
+    ) -> MMRESULT;
+    pub fn mciGetDeviceID(
+        lpszDevice: LPCWSTR
+    ) -> MCIDEVICEID;
+    pub fn mciGetDeviceIDFromElementID(
+        dwElementID: DWORD,
+        lpstrType: LPCWSTR
+    ) -> MCIDEVICEID;
+    pub fn mciGetErrorString(
+        fdwError: DWORD,
+        lpszErrorText: LPWSTR,
+        cchErrorText: UINT
+    ) -> BOOL;
+    pub fn mciGetYieldProc(
+        IDDevice: MCIDEVICEID,
+        lpdwYieldData: LPDWORD
+    ) -> YIELDPROC;
+    pub fn mciSendCommand(
+        IDDevice: MCIDEVICEID,
+        uMsg: UINT,
+        fdwCommand: DWORD_PTR,
+        dwParam: DWORD_PTR
+    ) -> MCIERROR;
+    pub fn mciSendString(
+        lpszCommand: LPCWSTR,
+        lpszReturnString: LPWSTR,
+        cchReturn: UINT,
+        hwndCallback: HANDLE
+    ) -> MCIERROR;
+    pub fn mciSetYieldProc(
+        IDDevice: MCIDEVICEID,
+        yp: YIELDPROC,
+        dwYieldData: DWORD
+    ) -> UINT;
 }
