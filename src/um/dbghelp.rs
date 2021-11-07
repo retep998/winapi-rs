@@ -429,6 +429,33 @@ STRUCT!{struct IMAGEHLP_LINEW64 {
     Address: DWORD64,
 }}
 pub type PIMAGEHLP_LINEW64 = *mut IMAGEHLP_LINEW64;
+ENUM!{enum SYM_TYPE {
+    SYM_NONE = 0,
+    SYM_COFF = 1,
+    SYM_CV = 2,
+    SYM_PDB = 3,
+    SYM_EXPORT = 4,
+    SYM_DEFERRED = 5,
+    SYM_SYM = 6,
+    SYM_DIA = 7,
+    SYM_VIRTUAL = 8,
+    NUM_SYMT_YPES = 9,
+}}
+STRUCT!{struct IMAGEHLP_MODULE {
+    SizeOfStruct: DWORD,
+    BaseOfImage: DWORD,
+    ImageSize: DWORD,
+    TimeDateStamp: DWORD,
+    CheckSum: DWORD,
+    NumSyms: DWORD,
+    SymType: SYM_TYPE,
+    ModuleName: [CHAR; 32],
+    ImageName: [CHAR; 256],
+    LoadedImageName: [CHAR; 256],
+}}
+pub type PIMAGEHLP_MODULE = *mut IMAGEHLP_MODULE;
+pub type IMAGEHLP_MODULE64 = IMAGEHLP_MODULE;
+pub type PIMAGEHLP_MODULE64 = *mut IMAGEHLP_MODULE64;
 extern "system" {
     pub fn EnumDirTree(
         hProcess: HANDLE,
@@ -746,5 +773,10 @@ extern "system" {
     #[cfg(target_pointer_width = "32")]
     pub fn UnmapDebugInformation(
         DebugInfo: PIMAGE_DEBUG_INFORMATION,
+    ) -> BOOL;
+    pub fn SymGetModuleInfo(
+        hProcess: HANDLE,
+        dwAddr: DWORD,
+        ModuleInfo: PIMAGEHLP_MODULE,
     ) -> BOOL;
 }
