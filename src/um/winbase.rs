@@ -2007,19 +2007,48 @@ extern "system" {
         lpTransferSize: LPDWORD,
         lpNumOutstandingRequests: LPDWORD,
     ) -> BOOL;
-    // pub fn ClearEventLogA();
-    // pub fn ClearEventLogW();
-    // pub fn BackupEventLogA();
-    // pub fn BackupEventLogW();
-    // pub fn CloseEventLog();
+    pub fn ClearEventLogA(
+        hEventLog: HANDLE,
+        lpBackupFileName: LPCSTR,
+    ) -> BOOL;
+    pub fn ClearEventLogW(
+        hEventLog: HANDLE,
+        lpBackupFileName: LPCWSTR,
+    ) -> BOOL;
+    pub fn BackupEventLogA(
+        hEventLog: HANDLE,
+        lpBackupFileName: LPCSTR,
+    ) -> BOOL;
+    pub fn BackupEventLogW(
+        hEventLog: HANDLE,
+        lpBackupFileName: LPCWSTR,
+    ) -> BOOL;
+    pub fn CloseEventLog(
+        hEventLog: HANDLE,
+    ) -> BOOL;
     pub fn DeregisterEventSource(
         hEventLog: HANDLE,
     ) -> BOOL;
-    // pub fn NotifyChangeEventLog();
-    // pub fn GetNumberOfEventLogRecords();
-    // pub fn GetOldestEventLogRecord();
-    // pub fn OpenEventLogA();
-    // pub fn OpenEventLogW();
+    pub fn NotifyChangeEventLog(
+        hEventLog: HANDLE,
+        hEvent: HANDLE,
+    ) -> BOOL;
+    pub fn GetNumberOfEventLogRecords(
+        hEventLog: HANDLE,
+        NumberOfRecords: PDWORD,
+    ) -> BOOL;
+    pub fn GetOldestEventLogRecord(
+        hEventLog: HANDLE,
+        OldestRecord: HANDLE,
+      ) -> BOOL;
+    pub fn OpenEventLogA(
+        lpUNCServerName: LPCSTR,
+        lpSourceName: LPCSTR,
+    ) -> HANDLE;
+    pub fn OpenEventLogW(
+        lpUNCServerName: LPCWSTR,
+        lpSourceName: LPCWSTR,
+    ) -> HANDLE;
     pub fn RegisterEventSourceA(
         lpUNCServerName: LPCSTR,
         lpSourceName: LPCSTR,
@@ -2028,10 +2057,32 @@ extern "system" {
         lpUNCServerName: LPCWSTR,
         lpSourceName: LPCWSTR,
     ) -> HANDLE;
-    // pub fn OpenBackupEventLogA();
-    // pub fn OpenBackupEventLogW();
-    // pub fn ReadEventLogA();
-    // pub fn ReadEventLogW();
+    pub fn OpenBackupEventLogA(
+        lpUNCServerName: LPCSTR,
+        lpFileName: LPCSTR,
+    ) -> HANDLE;
+    pub fn OpenBackupEventLogW(
+        lpUNCServerName: LPCWSTR,
+        lpFileName: LPCWSTR,
+    ) -> HANDLE;
+    pub fn ReadEventLogA(
+        hEventLog: HANDLE,
+        dwReadFlags: DWORD,
+        dwRecordOffset: DWORD,
+        lpBuffer: LPVOID,
+        nNumberOfBytesToRead: DWORD,
+        pnBytesRead: LPDWORD,
+        pnMinNumberOfBytesNeeded: LPDWORD,
+    ) -> BOOL;
+    pub fn ReadEventLogW(
+        hEventLog: HANDLE,
+        dwReadFlags: DWORD,
+        dwRecordOffset: DWORD,
+        lpBuffer: LPVOID,
+        nNumberOfBytesToRead: DWORD,
+        pnBytesRead: LPDWORD,
+        pnMinNumberOfBytesNeeded: LPDWORD,
+    ) -> BOOL;
     pub fn ReportEventA(
         hEventLog: HANDLE,
         wType: WORD,
@@ -2054,7 +2105,13 @@ extern "system" {
         lpStrings: *mut LPCWSTR,
         lpRawData: LPVOID,
     ) -> BOOL;
-    // pub fn GetEventLogInformation();
+    pub fn GetEventLogInformation(
+        hEventLog: HANDLE,
+        dwInfoLevel: DWORD,
+        lpBuffer: LPVOID,
+        cbBufSize: DWORD,
+        pcbBytesNeeded: LPDWORD,
+    ) -> BOOL;
     // pub fn OperationStart();
     // pub fn OperationEnd();
     // pub fn AccessCheckAndAuditAlarmA();
