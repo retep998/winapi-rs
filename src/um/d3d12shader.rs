@@ -23,7 +23,7 @@ ENUM!{enum D3D12_SHADER_VERSION_TYPE {
     D3D12_SHVER_COMPUTE_SHADER = 0x5,
     D3D12_SHVER_RESERVED0 = 0xFFF0,
 }}
-STRUCT!{struct D3D12_FUNCTION_DESC {
+STRUCT!{#[debug] struct D3D12_FUNCTION_DESC {
     Version: UINT,
     Creator: LPCSTR,
     Flags: UINT,
@@ -58,12 +58,12 @@ STRUCT!{struct D3D12_FUNCTION_DESC {
     Has10Level9VertexShader: BOOL,
     Has10Level9PixelShader: BOOL,
 }}
-STRUCT!{struct D3D12_LIBRARY_DESC {
+STRUCT!{#[debug] struct D3D12_LIBRARY_DESC {
     Creator: LPCSTR,
     Flags: UINT,
     FunctionCount: UINT,
 }}
-STRUCT!{struct D3D12_PARAMETER_DESC {
+STRUCT!{#[debug] struct D3D12_PARAMETER_DESC {
     Name: LPCSTR,
     SemanticName: LPCSTR,
     Type: D3D_SHADER_VARIABLE_TYPE,
@@ -77,14 +77,14 @@ STRUCT!{struct D3D12_PARAMETER_DESC {
     FirstOutRegister: UINT,
     FirstOutComponent: UINT,
 }}
-STRUCT!{struct D3D12_SHADER_BUFFER_DESC {
+STRUCT!{#[debug] struct D3D12_SHADER_BUFFER_DESC {
     Name: LPCSTR,
     Type: D3D_CBUFFER_TYPE,
     Variables: UINT,
     Size: UINT,
     uFlags: UINT,
 }}
-STRUCT!{struct D3D12_SHADER_DESC {
+STRUCT!{#[debug] struct D3D12_SHADER_DESC {
     Version: UINT,
     Creator: LPCSTR,
     Flags: UINT,
@@ -124,7 +124,7 @@ STRUCT!{struct D3D12_SHADER_DESC {
     cInterlockedInstructions: UINT,
     cTextureStoreInstructions: UINT,
 }}
-STRUCT!{struct D3D12_SHADER_INPUT_BIND_DESC {
+STRUCT!{#[debug] struct D3D12_SHADER_INPUT_BIND_DESC {
     Name: LPCSTR,
     Type: D3D_SHADER_INPUT_TYPE,
     BindPoint: UINT,
@@ -136,7 +136,7 @@ STRUCT!{struct D3D12_SHADER_INPUT_BIND_DESC {
     Space: UINT,
     uID: UINT,
 }}
-STRUCT!{struct D3D12_SHADER_TYPE_DESC {
+STRUCT!{#[debug] struct D3D12_SHADER_TYPE_DESC {
     Class: D3D_SHADER_VARIABLE_CLASS,
     Type: D3D_SHADER_VARIABLE_TYPE,
     Rows: UINT,
@@ -146,7 +146,7 @@ STRUCT!{struct D3D12_SHADER_TYPE_DESC {
     Offset: UINT,
     Name: LPCSTR,
 }}
-STRUCT!{struct D3D12_SHADER_VARIABLE_DESC {
+STRUCT!{#[debug] struct D3D12_SHADER_VARIABLE_DESC {
     Name: LPCSTR,
     StartOffset: UINT,
     Size: UINT,
@@ -157,7 +157,7 @@ STRUCT!{struct D3D12_SHADER_VARIABLE_DESC {
     StartSampler: UINT,
     SamplerSize: UINT,
 }}
-STRUCT!{struct D3D12_SIGNATURE_PARAMETER_DESC {
+STRUCT!{#[debug] struct D3D12_SIGNATURE_PARAMETER_DESC {
     SemanticName: LPCSTR,
     SemanticIndex: UINT,
     Register: UINT,
