@@ -1,8 +1,8 @@
 # Guidelines
 
 * Never get definitions from MinGW headers or Microsoft Docs. Always stick to the Windows SDK
-  headers, in particular the latest Windows 10 SDK — you can find it 
-  [here](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk). Look for a folder
+  headers, in particular the latest Windows SDK — you can find it 
+  [here](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/). Look for a folder
   called "Include" inside the installed SDK to find the header (and other) files.
 * Definitions which depend on whether `UNICODE` is defined should not be included. It is the user's
   responsibility to explicitly choose between `W` and `A` functions (and they should always choose
