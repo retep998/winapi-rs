@@ -1,7 +1,9 @@
 # Guidelines
 
-* Never get definitions from MinGW headers or MSDN. Always stick to the Windows SDK headers, in
-  particular the latest Windows 10 SDK — you can find it [here](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk).  Look for a folder called "Include" inside the installed SDK to find the header (and other) files.
+* Never get definitions from MinGW headers or Microsoft Docs. Always stick to the Windows SDK
+  headers, in particular the latest Windows SDK — you can find it 
+  [here](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/). Look for a folder
+  called "Include" inside the installed SDK to find the header (and other) files.
 * Definitions which depend on whether `UNICODE` is defined should not be included. It is the user's
   responsibility to explicitly choose between `W` and `A` functions (and they should always choose
   `W`).
@@ -91,7 +93,8 @@ FN!{stdcall NAMEENUMPROCA(
 ## Constants
 
 * Convert macro constants to Rust constants.
-* The type of the constant should depend on where the constant is used. MSDN may help for this.
+* The type of the constant should depend on where the constant is used. Microsoft Docs may help for
+  this.
 * If the constant has an unsigned type, but the literal needs to be negative, perform a cast such
   as `-1i16 as u16`. Use the primitive integer types that correspond to the type of the constant.
 * If the constant is initialized to an expression involving a constant of a different type and a
