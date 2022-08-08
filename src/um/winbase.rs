@@ -491,7 +491,7 @@ extern "system" {
     ) -> BOOL;
     pub fn SetProcessAffinityMask(
         hProcess: HANDLE,
-        dwProcessAffinityMask: DWORD,
+        dwProcessAffinityMask: DWORD_PTR,
     ) -> BOOL;
     pub fn GetProcessIoCounters(
         hProcess: HANDLE,
