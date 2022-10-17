@@ -7,9 +7,10 @@
 use shared::basetsd::DWORD64;
 use shared::devpropdef::DEVPROPKEY;
 use shared::guiddef::GUID;
-use shared::minwindef::{BYTE, DWORD, WORD};
+use shared::minwindef::{BYTE, DWORD, UCHAR, WORD};
 use um::winnt::{
-    ANYSIZE_ARRAY, BOOLEAN, FILE_READ_DATA, FILE_WRITE_DATA, HANDLE, LARGE_INTEGER, WCHAR,
+    ANYSIZE_ARRAY, BOOLEAN, DWORDLONG, FILE_READ_DATA, FILE_WRITE_DATA, HANDLE, LARGE_INTEGER,
+    SHORT, WCHAR,
 };
 DEFINE_GUID!{GUID_DEVINTERFACE_DISK,
     0x53f56307, 0xb6bf, 0x11d0, 0x94, 0xf2, 0x00, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b}
@@ -1089,3 +1090,417 @@ STRUCT!{struct DISK_PERFORMANCE {
     StorageManagerName: [WCHAR; 8],
 }}
 pub type PDISK_PERFORMANCE = *mut DISK_PERFORMANCE;
+STRUCT!{struct DEVICE_SEEK_PENALTY_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    IncursSeekPenalty: BOOLEAN,
+}}
+pub type PDEVICE_SEEK_PENALTY_DESCRIPTOR = *mut DEVICE_SEEK_PENALTY_DESCRIPTOR;
+STRUCT!{struct DEVICE_POWER_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    DeviceAttentionSupported: BOOLEAN,
+    AsynchronousNotificationSupported: BOOLEAN,
+    IdlePowerManagementEnabled: BOOLEAN,
+    D3ColdEnabled: BOOLEAN,
+    D3ColdSupported: BOOLEAN,
+    NoVerifyDuringIdlePower: BOOLEAN,
+    Reserved: [BYTE; 2],
+    IdleTimeoutInMS: DWORD,
+}}
+pub type PDEVICE_POWER_DESCRIPTOR = *mut DEVICE_POWER_DESCRIPTOR;
+STRUCT!{struct DEVICE_WRITE_AGGREGATION_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    BenefitsFromWriteAggregation: BOOLEAN,
+}}
+pub type PDEVICE_WRITE_AGGREGATION_DESCRIPTOR = *mut DEVICE_WRITE_AGGREGATION_DESCRIPTOR;
+STRUCT!{struct STORAGE_ACCESS_ALIGNMENT_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    BytesPerCacheLine: DWORD,
+    BytesOffsetForCacheAlignment: DWORD,
+    BytesPerLogicalSector: DWORD,
+    BytesPerPhysicalSector: DWORD,
+    BytesOffsetForSectorAlignment: DWORD,
+}}
+pub type PSTORAGE_ACCESS_ALIGNMENT_DESCRIPTOR = *mut STORAGE_ACCESS_ALIGNMENT_DESCRIPTOR;
+STRUCT!{struct DEVICE_COPY_OFFLOAD_DESCRIPTOR {
+  Version: DWORD,
+  Size: DWORD,
+  MaximumTokenLifetime: DWORD,
+  DefaultTokenLifetime: DWORD,
+  MaximumTransferSize: DWORDLONG,
+  OptimalTransferCount: DWORDLONG,
+  MaximumDataDescriptors: DWORD,
+  MaximumTransferLengthPerDescriptor: DWORD,
+  OptimalTransferLengthPerDescriptor: DWORD,
+  OptimalTransferLengthGranularity: WORD,
+  Reserved: [BYTE; 2],
+}}
+pub type PDEVICE_COPY_OFFLOAD_DESCRIPTOR = *mut DEVICE_COPY_OFFLOAD_DESCRIPTOR;
+STRUCT!{struct STORAGE_DESCRIPTOR_HEADER {
+    Version: DWORD,
+    Size: DWORD,
+}}
+pub type PSTORAGE_DESCRIPTOR_HEADER = *mut STORAGE_DESCRIPTOR_HEADER;
+STRUCT!{struct STORAGE_DEVICE_ATTRIBUTES_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    Attributes: DWORD64,
+}}
+pub type PSTORAGE_DEVICE_ATTRIBUTES_DESCRIPTOR = *mut STORAGE_DEVICE_ATTRIBUTES_DESCRIPTOR;
+ENUM!{enum STORAGE_BUS_TYPE {
+    BusTypeUnknown = 0x00,
+    BusTypeScsi,
+    BusTypeAtapi,
+    BusTypeAta,
+    BusType1394,
+    BusTypeSsa,
+    BusTypeFibre,
+    BusTypeUsb,
+    BusTypeRAID,
+    BusTypeiScsi,
+    BusTypeSas,
+    BusTypeSata,
+    BusTypeSd,
+    BusTypeMmc,
+    BusTypeVirtual,
+    BusTypeFileBackedVirtual,
+    BusTypeSpaces,
+    BusTypeNvme,
+    BusTypeSCM,
+    BusTypeUfs,
+    BusTypeMax,
+    BusTypeMaxReserved = 0x7F,
+}}
+pub type PSTORAGE_BUS_TYPE = *mut STORAGE_BUS_TYPE;
+ENUM!{enum STORAGE_PROTOCOL_TYPE {
+    ProtocolTypeUnknown = 0x00,
+    ProtocolTypeScsi,
+    ProtocolTypeAta,
+    ProtocolTypeNvme,
+    ProtocolTypeSd,
+    ProtocolTypeUfs,
+    ProtocolTypeProprietary = 0x7E,
+    ProtocolTypeMaxReserved = 0x7F,
+}}
+pub type PSTORAGE_PROTOCOL_TYPE = *mut STORAGE_PROTOCOL_TYPE;
+STRUCT!{struct STORAGE_DEVICE_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    DeviceType: BYTE,
+    DeviceTypeModifier: BYTE,
+    RemovableMedia: BOOLEAN,
+    CommandQueueing: BOOLEAN,
+    VendorIdOffset: DWORD,
+    ProductIdOffset: DWORD,
+    ProductRevisionOffset: DWORD,
+    SerialNumberOffset: DWORD,
+    BusType: STORAGE_BUS_TYPE,
+    RawPropertiesLength: DWORD,
+    RawDeviceProperties: [BYTE; 1],
+}}
+pub type PSTORAGE_DEVICE_DESCRIPTOR = *mut STORAGE_DEVICE_DESCRIPTOR;
+STRUCT!{struct STORAGE_DEVICE_ID_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    NumberOfIdentifiers: DWORD,
+    Identifiers: [BYTE; 1],
+}}
+pub type PSTORAGE_DEVICE_ID_DESCRIPTOR = *mut STORAGE_DEVICE_ID_DESCRIPTOR;
+STRUCT!{struct STORAGE_DEVICE_IO_CAPABILITY_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    LunMaxIoCount: DWORD,
+    AdapterMaxIoCount: DWORD,
+}}
+pub type PSTORAGE_DEVICE_IO_CAPABILITY_DESCRIPTOR = *mut STORAGE_DEVICE_IO_CAPABILITY_DESCRIPTOR;
+STRUCT!{struct STORAGE_DEVICE_RESILIENCY_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    NameOffset: DWORD,
+    NumberOfLogicalCopies: DWORD,
+    NumberOfPhysicalCopies: DWORD,
+    PhysicalDiskRedundancy: DWORD,
+    NumberOfColumns: DWORD,
+    Interleave: DWORD,
+}}
+pub type PSTORAGE_DEVICE_RESILIENCY_DESCRIPTOR = *mut STORAGE_DEVICE_RESILIENCY_DESCRIPTOR;
+STRUCT!{struct STORAGE_MEDIUM_PRODUCT_TYPE_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    MediumProductType: DWORD,
+}}
+pub type PSTORAGE_MEDIUM_PRODUCT_TYPE_DESCRIPTOR = *mut STORAGE_MEDIUM_PRODUCT_TYPE_DESCRIPTOR;
+STRUCT!{struct STORAGE_TEMPERATURE_DATA_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    CriticalTemperature: SHORT,
+    WarningTemperature: SHORT,
+    InfoCount: WORD,
+    Reserved0: [BYTE; 2],
+    Reserved1: [DWORD; 2],
+    TemperatureInfo: [STORAGE_TEMPERATURE_INFO; ANYSIZE_ARRAY],
+}}
+pub type PSTORAGE_TEMPERATURE_DATA_DESCRIPTOR = *mut STORAGE_TEMPERATURE_DATA_DESCRIPTOR;
+STRUCT!{struct STORAGE_PHYSICAL_NODE_DATA {
+    NodeId: DWORD,
+    AdapterCount: DWORD,
+    AdapterDataLength: DWORD,
+    AdapterDataOffset: DWORD,
+    DeviceCount: DWORD,
+    DeviceDataLength: DWORD,
+    DeviceDataOffset: DWORD,
+    Reserved: [DWORD; 3],
+}}
+pub type PSTORAGE_PHYSICAL_NODE_DATA = *mut STORAGE_PHYSICAL_NODE_DATA;
+STRUCT!{struct STORAGE_TEMPERATURE_INFO {
+    Index: WORD,
+    Temperature: SHORT,
+    OverThreshold: SHORT,
+    UnderThreshold: SHORT,
+    OverThresholdChangable: BOOLEAN,
+    UnderThresholdChangable: BOOLEAN,
+    EventGenerated: BOOLEAN,
+    Reserved0: BYTE,
+    Reserved1: DWORD,
+}}
+pub type PSTORAGE_TEMPERATURE_INFO = *mut STORAGE_TEMPERATURE_INFO;
+STRUCT!{struct STORAGE_PHYSICAL_TOPOLOGY_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    NodeCount: DWORD,
+    Reserved: DWORD,
+    Node: [STORAGE_PHYSICAL_NODE_DATA; ANYSIZE_ARRAY],
+}}
+pub type PSTORAGE_PHYSICAL_TOPOLOGY_DESCRIPTOR = *mut STORAGE_PHYSICAL_TOPOLOGY_DESCRIPTOR;
+STRUCT!{struct STORAGE_PROTOCOL_SPECIFIC_DATA {
+    ProtocolType: STORAGE_PROTOCOL_TYPE,
+    DataType: DWORD,
+    ProtocolDataRequestValue: DWORD,
+    ProtocolDataRequestSubValue: DWORD,
+    ProtocolDataOffset: DWORD,
+    ProtocolDataLength: DWORD,
+    FixedProtocolReturnData: DWORD,
+    ProtocolDataRequestSubValue2: DWORD,
+    ProtocolDataRequestSubValue3: DWORD,
+    ProtocolDataRequestSubValue4: DWORD,
+}}
+pub type PSTORAGE_PROTOCOL_SPECIFIC_DATA = *mut STORAGE_PROTOCOL_SPECIFIC_DATA;
+STRUCT!{struct STORAGE_PROTOCOL_DATA_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    ProtocolSpecificData: STORAGE_PROTOCOL_SPECIFIC_DATA,
+}}
+pub type PSTORAGE_PROTOCOL_DATA_DESCRIPTOR = *mut STORAGE_PROTOCOL_DATA_DESCRIPTOR;
+STRUCT!{struct STORAGE_RPMB_DATA_FRAME {
+    Stuff: [UCHAR; 196],
+    KeyOrMAC: [UCHAR; 32],
+    Data: [UCHAR; 256],
+    Nonce: [UCHAR; 16],
+    WriteCounter: [UCHAR; 4],
+    Address: [UCHAR; 2],
+    BlockCount: [UCHAR; 2],
+    OperationResult: [UCHAR; 2],
+    RequestOrResponseType: [UCHAR; 2],
+}}
+pub type PSTORAGE_RPMB_DATA_FRAME = *mut STORAGE_RPMB_DATA_FRAME;
+ENUM!{enum STORAGE_RPMB_FRAME_TYPE {
+    StorageRpmbFrameTypeUnknown = 0,
+    StorageRpmbFrameTypeStandard,
+    StorageRpmbFrameTypeMax,
+}}
+pub type PSTORAGE_RPMB_FRAME_TYPE = *mut STORAGE_RPMB_FRAME_TYPE;
+STRUCT!{struct STORAGE_RPMB_DESCRIPTOR {
+    Version: DWORD,
+    Size: DWORD,
+    SizeInBytes: DWORD,
+    MaxReliableWriteSizeInBytes: DWORD,
+    FrameFormat: STORAGE_RPMB_FRAME_TYPE,
+}}
+pub type PSTORAGE_RPMB_DESCRIPTOR = *mut STORAGE_RPMB_DESCRIPTOR;
+STRUCT!{struct STORAGE_TEMPERATURE_THRESHOLD {
+    Version: DWORD,
+    Size: DWORD,
+    Flags: WORD,
+    Index: WORD,
+    Threshold: SHORT,
+    OverThreshold: BOOLEAN,
+    Reserved: BYTE,
+}}
+pub type PSTORAGE_TEMPERATURE_THRESHOLD = *mut STORAGE_TEMPERATURE_THRESHOLD;
+ENUM!{enum WRITE_CACHE_TYPE {
+    WriteCacheTypeUnknown,
+    WriteCacheTypeNone,
+    WriteCacheTypeWriteBack,
+    WriteCacheTypeWriteThrough,
+}}
+pub type PWRITE_CACHE_TYPE = *mut WRITE_CACHE_TYPE;
+ENUM!{enum WRITE_CACHE_ENABLE {
+    WriteCacheEnableUnknown,
+    WriteCacheDisabled,
+    WriteCacheEnabled,
+}}
+pub type PWRITE_CACHE_ENABLE = *mut WRITE_CACHE_ENABLE;
+ENUM!{enum WRITE_CACHE_CHANGE {
+    WriteCacheChangeUnknown,
+    WriteCacheNotChangeable,
+    WriteCacheChangeable,
+}}
+pub type PWRITE_CACHE_CHANGE = *mut WRITE_CACHE_CHANGE;
+ENUM!{enum WRITE_THROUGH {
+    WriteThroughUnknown,
+    WriteThroughNotSupported,
+    WriteThroughSupported,
+}}
+pub type PWRITE_THROUGH = *mut WRITE_THROUGH;
+STRUCT!{struct STORAGE_WRITE_CACHE_PROPERTY {
+    Version: DWORD,
+    Size: DWORD,
+    WriteCacheType: WRITE_CACHE_TYPE,
+    WriteCacheEnabled: WRITE_CACHE_ENABLE,
+    WriteCacheChangeable: WRITE_CACHE_CHANGE,
+    WriteThroughSupported: WRITE_THROUGH,
+    FlushCacheSupported: BOOLEAN,
+    UserDefinedPowerProtection: BOOLEAN,
+    NVCacheEnabled: BOOLEAN,
+}}
+pub type PSTORAGE_WRITE_CACHE_PROPERTY = *mut STORAGE_WRITE_CACHE_PROPERTY;
+ENUM!{enum STORAGE_PROTOCOL_ATA_DATA_TYPE {
+    AtaDataTypeUnknown = 0,
+    AtaDataTypeIdentify,
+    AtaDataTypeLogPage,
+}}
+pub type PSTORAGE_PROTOCOL_ATA_DATA_TYPE = *mut STORAGE_PROTOCOL_ATA_DATA_TYPE;
+ENUM!{enum STORAGE_PROTOCOL_NVME_DATA_TYPE {
+    NVMeDataTypeUnknown = 0,
+    NVMeDataTypeIdentify,
+    NVMeDataTypeLogPage,
+    NVMeDataTypeFeature,
+}}
+pub type PSTORAGE_PROTOCOL_NVME_DATA_TYPE = *mut STORAGE_PROTOCOL_NVME_DATA_TYPE;
+ENUM!{enum STORAGE_MEDIA_TYPE {
+    DDS_4mm = 0x20,
+    MiniQic,
+    Travan,
+    QIC,
+    MP_8mm,
+    AME_8mm,
+    AIT1_8mm,
+    DLT,
+    NCTP,
+    IBM_3480,
+    IBM_3490E,
+    IBM_Magstar_3590,
+    IBM_Magstar_MP,
+    STK_DATA_D3,
+    SONY_DTF,
+    DV_6mm,
+    DMI,
+    SONY_D2,
+    CLEANER_CARTRIDGE,
+    CD_ROM,
+    CD_R,
+    CD_RW,
+    DVD_ROM,
+    DVD_R,
+    DVD_RW,
+    MO_3_RW,
+    MO_5_WO,
+    MO_5_RW,
+    MO_5_LIMDOW,
+    PC_5_WO,
+    PC_5_RW,
+    PD_5_RW,
+    ABL_5_WO,
+    PINNACLE_APEX_5_RW,
+    SONY_12_WO,
+    PHILIPS_12_WO,
+    HITACHI_12_WO,
+    CYGNET_12_WO,
+    KODAK_14_WO,
+    MO_NFR_525,
+    NIKON_12_RW,
+    IOMEGA_ZIP,
+    IOMEGA_JAZ,
+    SYQUEST_EZ135,
+    SYQUEST_EZFLYER,
+    SYQUEST_SYJET,
+    AVATAR_F2,
+    MP2_8mm,
+    DST_S,
+    DST_M,
+    DST_L,
+    VXATape_1,
+    VXATape_2,
+    STK_EAGLE,
+    LTO_Ultrium,
+    LTO_Accelis,
+    DVD_RAM,
+    AIT_8mm,
+    ADR_1,
+    ADR_2,
+    STK_9940,
+    SAIT,
+    VXATape,
+}}
+pub type PSTORAGE_MEDIA_TYPE = *mut STORAGE_MEDIA_TYPE;
+ENUM!{enum STORAGE_PORT_CODE_SET {
+    StoragePortCodeSetReserved = 0,
+    StoragePortCodeSetStorport = 1,
+    StoragePortCodeSetSCSIport = 2,
+    StoragePortCodeSetSpaceport = 3,
+    StoragePortCodeSetATAport = 4,
+    StoragePortCodeSetUSBport = 5,
+    StoragePortCodeSetSBP2port = 6,
+    StoragePortCodeSetSDport = 7,
+}}
+pub type PSTORAGE_PORT_CODE_SET = *mut STORAGE_PORT_CODE_SET;
+ENUM!{enum STORAGE_DEVICE_POWER_CAP_UNITS {
+  StorageDevicePowerCapUnitsPercent = 0,
+  StorageDevicePowerCapUnitsMilliwatts,
+}}
+pub type PSTORAGE_DEVICE_POWER_CAP_UNITS = *mut STORAGE_DEVICE_POWER_CAP_UNITS;
+ENUM!{enum STORAGE_DEVICE_FORM_FACTOR {
+    FormFactorUnknown = 0,
+    FormFactor3_5,
+    FormFactor2_5,
+    FormFactor1_8,
+    FormFactor1_8Less,
+    FormFactorEmbedded,
+    FormFactorMemoryCard,
+    FormFactormSata,
+    FormFactorM_2,
+    FormFactorPCIeBoard,
+    FormFactorDimm,
+}}
+pub type PSTORAGE_DEVICE_FORM_FACTOR = *mut STORAGE_DEVICE_FORM_FACTOR;
+ENUM!{enum STORAGE_COMPONENT_HEALTH_STATUS {
+    HealthStatusUnknown = 0,
+    HealthStatusNormal,
+    HealthStatusThrottled,
+    HealthStatusWarning,
+    HealthStatusDisabled,
+    HealthStatusFailed,
+}}
+pub type PSTORAGE_COMPONENT_HEALTH_STATUS = *mut STORAGE_COMPONENT_HEALTH_STATUS;
+ENUM!{enum FILE_STORAGE_TIER_MEDIA_TYPE {
+    FileStorageTierMediaTypeUnspecified = 0,
+    FileStorageTierMediaTypeDisk = 1,
+    FileStorageTierMediaTypeSsd = 2,
+    FileStorageTierMediaTypeScm = 4,
+    FileStorageTierMediaTypeMax,
+}}
+pub type PFILE_STORAGE_TIER_MEDIA_TYPE = *mut FILE_STORAGE_TIER_MEDIA_TYPE;
+ENUM!{enum ELEMENT_TYPE {
+    AllElements = 0,
+    ChangerTransport,
+    ChangerSlot,
+    ChangerIEPort,
+    ChangerDrive,
+    ChangerDoor,
+    ChangerKeypad,
+    ChangerMaxElement,
+}}
+pub type PELEMENT_TYPE = *mut ELEMENT_TYPE;
