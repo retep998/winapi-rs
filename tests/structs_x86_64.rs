@@ -8458,6 +8458,8 @@ fn um_winnt() {
     assert_eq!(align_of::<PROCESS_MITIGATION_DEP_POLICY>(), 4);
     assert_eq!(size_of::<PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY>(), 4);
     assert_eq!(align_of::<PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY>(), 4);
+    assert_eq!(size_of::<PROCESS_MITIGATION_SEHOP_POLICY>(), 4);
+    assert_eq!(align_of::<PROCESS_MITIGATION_SEHOP_POLICY>(), 4);
     assert_eq!(size_of::<PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY>(), 4);
     assert_eq!(align_of::<PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY>(), 4);
     assert_eq!(size_of::<PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY>(), 4);
@@ -8478,6 +8480,14 @@ fn um_winnt() {
     assert_eq!(align_of::<PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY>(), 4);
     assert_eq!(size_of::<PROCESS_MITIGATION_CHILD_PROCESS_POLICY>(), 4);
     assert_eq!(align_of::<PROCESS_MITIGATION_CHILD_PROCESS_POLICY>(), 4);
+    assert_eq!(size_of::<PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY>(), 4);
+    assert_eq!(align_of::<PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY>(), 4);
+    assert_eq!(size_of::<PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY>(), 4);
+    assert_eq!(align_of::<PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY>(), 4);
+    assert_eq!(size_of::<PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY>(), 4);
+    assert_eq!(align_of::<PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY>(), 4);
+    assert_eq!(size_of::<PPROCESS_MITIGATION_REDIRECTION_TRUST_POLICY>(), 4);
+    assert_eq!(align_of::<PPROCESS_MITIGATION_REDIRECTION_TRUST_POLICY>(), 4);
     assert_eq!(size_of::<JOBOBJECT_BASIC_ACCOUNTING_INFORMATION>(), 48);
     assert_eq!(align_of::<JOBOBJECT_BASIC_ACCOUNTING_INFORMATION>(), 8);
     assert_eq!(size_of::<JOBOBJECT_BASIC_LIMIT_INFORMATION>(), 64);
