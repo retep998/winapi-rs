@@ -3111,7 +3111,7 @@ ENUM!{enum PROCESS_MITIGATION_POLICY {
     ProcessUserShadowStackPolicy,
     ProcessRedirectionTrustPolicy,
     ProcessUserPointerAuthPolicy,
-	ProcessSEHOPPolicy,
+    ProcessSEHOPPolicy,
     MaxProcessMitigationPolicy
 }}
 pub type PPROCESS_MITIGATION_POLICY = *mut PROCESS_MITIGATION_POLICY;
