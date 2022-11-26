@@ -3112,7 +3112,7 @@ ENUM!{enum PROCESS_MITIGATION_POLICY {
     ProcessRedirectionTrustPolicy,
     ProcessUserPointerAuthPolicy,
     ProcessSEHOPPolicy,
-    MaxProcessMitigationPolicy
+    MaxProcessMitigationPolicy,
 }}
 pub type PPROCESS_MITIGATION_POLICY = *mut PROCESS_MITIGATION_POLICY;
 STRUCT!{struct PROCESS_MITIGATION_ASLR_POLICY {
