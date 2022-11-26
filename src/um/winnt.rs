@@ -3104,6 +3104,14 @@ ENUM!{enum PROCESS_MITIGATION_POLICY {
     ProcessSignaturePolicy,
     ProcessFontDisablePolicy,
     ProcessImageLoadPolicy,
+    ProcessSystemCallFilterPolicy,
+    ProcessPayloadRestrictionPolicy,
+    ProcessChildProcessPolicy,
+    ProcessSideChannelIsolationPolicy,
+    ProcessUserShadowStackPolicy,
+    ProcessRedirectionTrustPolicy,
+    ProcessUserPointerAuthPolicy,
+    ProcessSEHOPPolicy,
     MaxProcessMitigationPolicy,
 }}
 pub type PPROCESS_MITIGATION_POLICY = *mut PROCESS_MITIGATION_POLICY;
@@ -3138,12 +3146,21 @@ BITFIELD!{PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY Flags: DWORD [
 ]}
 pub type PPROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY
     = *mut PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY;
+STRUCT!{struct PROCESS_MITIGATION_SEHOP_POLICY {
+    Flags: DWORD,
+}}
+BITFIELD!{PROCESS_MITIGATION_SEHOP_POLICY Flags: DWORD[
+    EnableSehop set_EnableSehop[0..1],
+    ReservedFlags set_ReservedFlags[1..32],
+]}
+pub type PPROCESS_MITIGATION_SEHOP_POLICY = *mut PROCESS_MITIGATION_SEHOP_POLICY;
 STRUCT!{struct PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY {
     Flags: DWORD,
 }}
 BITFIELD!{PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY Flags: DWORD [
     DisallowWin32kSystemCalls set_DisallowWin32kSystemCalls[0..1],
-    ReservedFlags set_ReservedFlags[1..32],
+    AuditDisallowWin32kSystemCalls set_AuditDisallowWin32kSystemCalls[1..2],
+    ReservedFlags set_ReservedFlags[2..32],
 ]}
 pub type PPROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY
     = *mut PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY;
@@ -3163,7 +3180,8 @@ BITFIELD!{PROCESS_MITIGATION_DYNAMIC_CODE_POLICY Flags: DWORD [
     ProhibitDynamicCode set_ProhibitDynamicCode[0..1],
     AllowThreadOptOut set_AllowThreadOptOut[1..2],
     AllowRemoteDowngrade set_AllowRemoteDowngrade[2..3],
-    ReservedFlags set_ReservedFlags[3..32],
+    AuditProhibitDynamicCode set_AuditProhibitDynamicCode[3..4],
+    ReservedFlags set_ReservedFlags[4..32],
 ]}
 pub type PPROCESS_MITIGATION_DYNAMIC_CODE_POLICY = *mut PROCESS_MITIGATION_DYNAMIC_CODE_POLICY;
 STRUCT!{struct PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY {
@@ -3173,7 +3191,9 @@ BITFIELD!{PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY Flags: DWORD [
     EnableControlFlowGuard set_EnableControlFlowGuard[0..1],
     EnableExportSuppression set_EnableExportSuppression[1..2],
     StrictMode set_StrictMode[2..3],
-    ReservedFlags set_ReservedFlags[3..32],
+    EnableXfg set_EnableXfg[3..4],
+    EnableXfgAuditMode set_EnableXfgAuditMode[4..5],
+    ReservedFlags set_ReservedFlags[5..32],
 ]}
 pub type PPROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY
     = *mut PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY;
@@ -3184,7 +3204,9 @@ BITFIELD!{PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY Flags: DWORD [
     MicrosoftSignedOnly set_MicrosoftSignedOnly[0..1],
     StoreSignedOnly set_StoreSignedOnly[1..2],
     MitigationOptIn set_MitigationOptIn[2..3],
-    ReservedFlags set_ReservedFlags[3..32],
+    AuditMicrosoftSignedOnly set_AuditMicrosoftSignedOnly[3..4],
+    AuditStoreSignedOnly set_AuditStoreSignedOnly[4..5],
+    ReservedFlags set_ReservedFlags[5..32],
 ]}
 pub type PPROCESS_MITIGATION_BINARY_SIGNATURE_POLICY
     = *mut PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY;
@@ -3204,7 +3226,9 @@ BITFIELD!{PROCESS_MITIGATION_IMAGE_LOAD_POLICY Flags: DWORD [
     NoRemoteImages set_NoRemoteImages[0..1],
     NoLowMandatoryLabelImages set_NoLowMandatoryLabelImages[1..2],
     PreferSystem32Images set_PreferSystem32Images[2..3],
-    ReservedFlags set_ReservedFlags[3..32],
+    AuditNoRemoteImages set_AuditNoRemoteImages[3..4],
+    AuditNoLowMandatoryLabelImages set_AuditNoLowMandatoryLabelImages[4..5],
+    ReservedFlags set_ReservedFlags[5..32],
 ]}
 pub type PPROCESS_MITIGATION_IMAGE_LOAD_POLICY = *mut PROCESS_MITIGATION_IMAGE_LOAD_POLICY;
 STRUCT!{struct PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY {
@@ -3245,6 +3269,56 @@ BITFIELD!{PROCESS_MITIGATION_CHILD_PROCESS_POLICY Flags: DWORD [
     AuditNoChildProcessCreation set_AuditNoChildProcessCreation[1..2],
     AllowSecureProcessCreation set_AllowSecureProcessCreation[2..3],
     ReservedFlags set_ReservedFlags[3..32],
+]}
+STRUCT!{struct PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY {
+    Flags: DWORD,
+}}
+pub type PPROCESS_MITIGATION_USER_SHADOW_STACK_POLICY =
+    *mut PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY;
+BITFIELD!{PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY Flags: DWORD [
+    EnableUserShadowStack set_EnableUserShadowStack[0..1],
+    AuditUserShadowStack set_AuditUserShadowStack[1..2],
+    SetContextIpValidation set_SetContextIpValidation[2..3],
+    AuditSetContextIpValidation set_AuditSetContextIpValidation[3..4],
+    EnableUserShadowStackStrictMode set_EnableUserShadowStackStrictMode[4..5],
+    BlockNonCetBinaries set_BlockNonCetBinaries[5..6],
+    BlockNonCetBinariesNonEhcont set_BlockNonCetBinariesNonEhcont[6..7],
+    AuditBlockNonCetBinaries set_AuditBlockNonCetBinaries[7..8],
+    CetDynamicApisOutOfProcOnly set_CetDynamicApisOutOfProcOnly[8..9],
+    SetContextIpValidationRelaxedMode set_SetContextIpValidationRelaxedMode[9..10],
+    ReservedFlags set_ReservedFlags[10..32],
+]}
+STRUCT!{struct PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY{
+    Flags: DWORD,
+}}
+pub type PPROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY =
+    *mut PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY;
+BITFIELD!{PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY Flags: DWORD [
+    SmtBranchTargetIsolation set_SmtBranchTargetIsolation[0..1],
+    IsolateSecurityDomain set_IsolateSecurityDomain[1..2],
+    DisablePageCombine set_DisablePageCombine[2..3],
+    SpeculativeStoreBypassDisable set_SpeculativeStoreBypassDisable[3..4],
+    RestrictCoreSharing set_RestrictCoreSharing[4..5],
+    ReservedFlags set_ReservedFlags[5..32],
+]}
+STRUCT!{struct PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY{
+    Flags: DWORD,
+}}
+pub type PPROCESS_MITIGATION_USER_POINTER_AUTH_POLICY =
+    *mut PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY;
+BITFIELD!{PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY Flags: DWORD[
+    EnablePointerAuthUserIp set_EnablePointerAuthUserIp[0..1],
+    ReservedFlags set_ReservedFlags[1..32],
+]}
+STRUCT!{struct PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY{
+    Flags: DWORD,
+}}
+pub type PPROCESS_MITIGATION_REDIRECTION_TRUST_POLICY =
+    *mut PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY;
+BITFIELD!{PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY Flags: DWORD[
+    EnforceRedirectionTrust set_EnforceRedirectionTrust[0..1],
+    AuditRedirectionTrust set_AuditRedirectionTrust[1..2],
+    ReservedFlags set_ReservedFlags[2..32],
 ]}
 STRUCT!{struct JOBOBJECT_BASIC_ACCOUNTING_INFORMATION {
     TotalUserTime: LARGE_INTEGER,
