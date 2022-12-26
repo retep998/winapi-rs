@@ -2177,8 +2177,20 @@ extern "system" {
         lpName: LPWSTR,
         cchName: LPDWORD,
     ) -> BOOL;
-    // pub fn LookupPrivilegeDisplayNameA();
-    // pub fn LookupPrivilegeDisplayNameW();
+    pub fn LookupPrivilegeDisplayNameA(
+        lpSystemName: LPCSTR,
+        lpName: LPCSTR,
+        lpDisplayName: LPSTR,
+        cchDisplayName: LPDWORD,
+        lpLanguageId: LPDWORD,
+    ) -> BOOL;
+    pub fn LookupPrivilegeDisplayNameW(
+        lpSystemName: LPCWSTR,
+        lpName: LPCWSTR,
+        lpDisplayName: LPWSTR,
+        cchDisplayName: LPDWORD,
+        lpLanguageId: LPDWORD,
+    ) -> BOOL;
     pub fn BuildCommDCBA(
         lpDef: LPCSTR,
         lpDCB: LPDCB,
