@@ -442,11 +442,11 @@ interface ID3D11Device1(ID3D11Device1Vtbl): ID3D11Device(ID3D11DeviceVtbl) {
         ContextFlags: UINT,
         ppDeferredContext: *mut *mut ID3D11DeviceContext1,
     ) -> HRESULT,
-    fn CreateBlendState(
+    fn CreateBlendState1(
         pBlendStateDesc: *const D3D11_BLEND_DESC1,
         ppBlendState: *mut *mut ID3D11BlendState1,
     ) -> HRESULT,
-    fn CreateRasterizerState(
+    fn CreateRasterizerState1(
         pRasterizerDesc: *const D3D11_RASTERIZER_DESC1,
         ppRasterizerState: *mut *mut ID3D11RasterizerState1,
     ) -> HRESULT,
